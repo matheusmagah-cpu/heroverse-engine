@@ -1,0 +1,9 @@
+{
+  "module": "hero_engine/procedural_infographics_phase5.py",
+  "original_sha256": "9ad619a09268bc06744b6438667afb6394264713b793b085ae273aac704e163d",
+  "shadow_sha256": "a521ff62e1f606072ec7d8aec1e50064f80f60f81b923f57a1faf7489762a46f",
+  "original_source_preserved": true,
+  "change": "Explicit platform font domain, with Linux family declaration required",
+  "gate_relaxed": false,
+  "production_ready": false
+}
