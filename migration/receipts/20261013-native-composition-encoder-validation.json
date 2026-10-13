@@ -1,0 +1,30 @@
+{
+  "status": "PASS_2_SECOND_NATIVE_ENCODER_AND_FULL_DIAGNOSTIC_DECODE",
+  "media_sha256": "644dcffc5bd137bbd8f0026558d6f97f71bf67955841d7d4659801d8ed4dd107",
+  "streams": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "pix_fmt": "yuv420p",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt709"
+      },
+      {
+        "codec_name": "aac"
+      }
+    ],
+    "format": {
+      "duration": "2.000000"
+    }
+  },
+  "renderer": "phase6-standard-palette-qp1-v1",
+  "audio_reused": true,
+  "tts_performed": false,
+  "duration_seconds": 2,
+  "publication_performed": false,
+  "full_production_validated": false
+}
