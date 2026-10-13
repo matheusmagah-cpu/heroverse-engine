@@ -25,10 +25,132 @@
     ]
   },
   "diagnostic": {
-    "commit": "74f3bf3cd2a31af947e0a9488b0384d34cebcf13",
-    "run": 38447760022,
-    "job": 115470498885,
-    "status": "RUNNING_NOT_APPROVED",
+    "status": "ORIGINAL_PHASE5_CLOUD_VOICE_RENDER_PASS",
+    "commit": "f926740edf437fa19a2f7e17708ab28baac4a069",
+    "run": 38448890531,
+    "job": 115474374094,
+    "proof": {
+      "status": "ORIGINAL_PHASE5_CLOUD_VOICE_RENDER_PASS",
+      "assets": [
+        {
+          "name": "kokoro-v1.0.fp16.onnx",
+          "bytes": 163527961,
+          "sha256": "f3a290d384fbb27966d462905c71a46cef9e5fd00516b40df32a0b4afe77ac96"
+        },
+        {
+          "name": "voices-v1.0.bin",
+          "bytes": 28214398,
+          "sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+        }
+      ],
+      "preflight": [
+        {
+          "available_memory": 7256072192,
+          "disk_free": 25404530688
+        },
+        {
+          "available_memory": 7254728704,
+          "disk_free": 25404678144
+        },
+        {
+          "available_memory": 7308509184,
+          "disk_free": 25404678144
+        }
+      ],
+      "voice": {
+        "status": "ORIGINAL_PHASE5_VOICE_INFERENCE_PASS",
+        "duration": 4.928,
+        "sample_rate": 24000,
+        "rms": 0.047334060072898865,
+        "samples": 118272,
+        "wav_sha256": "7635f462e923ff7f13734a199d6d0dcfe8aef828131868648c07b4b66f6f1ed2",
+        "source_adapter": "hero_engine.voice_phase5.KokoroFloatSpeed",
+        "source_module_sha256": "e6cc4c32633907166eb900a75c27aace72b7ffa3506cfc6928f0bf96c5d2a2a3",
+        "native_receipt": {
+          "text": "This is an isolated technical test of the HeroVerse cloud voice.",
+          "voice_id": "am_michael",
+          "speed": 1,
+          "sample_rate": 24000,
+          "samples": 118272,
+          "duration_ms": 4928,
+          "render_seconds": 1.803092,
+          "real_time_factor": 0.365887,
+          "peak_linear": 0.297119,
+          "clipping": false,
+          "path": "/tmp/heroverse-cloud-diagnostic-hm87wqm0/diagnostic.wav",
+          "content_hash": "sha256:7635f462e923ff7f13734a199d6d0dcfe8aef828131868648c07b4b66f6f1ed2"
+        },
+        "espeak_binding": {
+          "candidate_id": "ESPEAKNG_LOADER_PACKAGE",
+          "library_path": "/tmp/heroverse-voice-diagnostic/lib/python3.12/site-packages/espeakng_loader/libespeak-ng.so",
+          "data_path": "/tmp/heroverse-voice-diagnostic/lib/python3.12/site-packages/espeakng_loader/espeak-ng-data",
+          "library_hash": "sha256:b15ce0803b26254e8a0d088c6b9281a2637b2b02613147cc320cfdefaf2c3ccf",
+          "data_hash": "sha256:1f73e820db5524fd30286e4c501550b3510f09df7b44b563eb66bf11de13f984",
+          "version": "1.52.0",
+          "loader_package_version": "0.2.4",
+          "fallback_used": true,
+          "directory_dlls": [
+            {
+              "name": "libespeak-ng.so",
+              "path": "/tmp/heroverse-voice-diagnostic/lib/python3.12/site-packages/espeakng_loader/libespeak-ng.so",
+              "content_hash": "sha256:b15ce0803b26254e8a0d088c6b9281a2637b2b02613147cc320cfdefaf2c3ccf",
+              "size_bytes": 661568
+            },
+            {
+              "name": "libespeak-ng.so.1",
+              "path": "/tmp/heroverse-voice-diagnostic/lib/python3.12/site-packages/espeakng_loader/libespeak-ng.so.1",
+              "content_hash": "sha256:b15ce0803b26254e8a0d088c6b9281a2637b2b02613147cc320cfdefaf2c3ccf",
+              "size_bytes": 661568
+            },
+            {
+              "name": "libespeak-ng.so.1.52.0",
+              "path": "/tmp/heroverse-voice-diagnostic/lib/python3.12/site-packages/espeakng_loader/libespeak-ng.so.1.52.0",
+              "content_hash": "sha256:b15ce0803b26254e8a0d088c6b9281a2637b2b02613147cc320cfdefaf2c3ccf",
+              "size_bytes": 661568
+            }
+          ]
+        },
+        "versions": {
+          "kokoro-onnx": "0.4.9",
+          "onnxruntime": "1.20.1",
+          "numpy": "2.2.6",
+          "espeakng-loader": "0.2.4",
+          "phonemizer-fork": "3.3.2",
+          "soundfile": "0.13.1"
+        }
+      },
+      "render_sha256": "6dbfa60dd8a8496e0df55419d667e2ebc7570072fb052ba71727dbf34c28abbc",
+      "render": {
+        "status": "SUCCEEDED",
+        "returncode": 0,
+        "unit": "heroverse-worker-1db6dcee89544dbaac6f9c12ce7955a5",
+        "stdout": "",
+        "log_bytes": 0,
+        "elapsed_seconds": 0.37848394399999563,
+        "memory_limit_kind": "LINUX_CGROUP_RESIDENT_ACCOUNTING",
+        "memory_limit_bytes": 536870912,
+        "release_authority": false,
+        "production_ready": false
+      },
+      "decode": {
+        "status": "SUCCEEDED",
+        "returncode": 0,
+        "unit": "heroverse-worker-5214ce038e564383a2277ed635bcf03f",
+        "stdout": "",
+        "log_bytes": 0,
+        "elapsed_seconds": 0.11015038200000049,
+        "memory_limit_kind": "LINUX_CGROUP_RESIDENT_ACCOUNTING",
+        "memory_limit_bytes": 536870912,
+        "release_authority": false,
+        "production_ready": false
+      },
+      "windows_contact": false,
+      "full_phase_pipeline_validated": false,
+      "perceptual_quality_approved": false,
+      "production_ready": false,
+      "publication_performed": false,
+      "release_authority": false
+    },
     "prior_failures": [
       {
         "run": 38447480742,
@@ -53,11 +175,13 @@
   "publication_performed": false,
   "release_authority": false,
   "youtube_access": {
-    "authorized_channels": [],
+    "authorized_channels": [
+      "UCuMF6pJQkyMzaVoAxFL86yA"
+    ],
     "authenticated_as": "willmarquesfotografia@gmail.com",
-    "connection_status": "AUTHORIZATION_WIDGET_REQUESTED_AWAITING_USER_COMPLETION",
-    "reason": "Explicit approval to link specific YouTube channel/account required.",
-    "user_explicit_authorization_received": true
+    "vidiq_status": "AUTHORIZED_EXACT_CHANNEL_ID",
+    "studio_status": "SEPARATE_BROWSER_AUTH_PENDING",
+    "credentials_in_repository": false
   },
   "vidiq_credits": {
     "remaining": 26,
