@@ -4,6 +4,7 @@ No publisher, queue activation, console change or new consent is invoked.
 import hashlib,json,os,shutil,sys,tempfile,zipfile,subprocess
 from pathlib import Path
 from datetime import datetime,timezone
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from jsonschema import Draft202012Validator,FormatChecker
 
 def stamp():return datetime.now(timezone.utc).isoformat()
