@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "zero-cost-operation-v1",
+  "technical_cost_brl": 0,
+  "cost_status": "PASS",
+  "operation": "phase6_video2_publication_pipeline",
+  "quota_status": "BLOCKED_UNKNOWN_CONSUMPTION",
+  "execution_permitted": false,
+  "resources": [
+    {
+      "resource_id": "local-production-stack",
+      "cost_brl": 0,
+      "billing_required": false,
+      "quota_limit": null,
+      "quota_consumed": null,
+      "quota_reserved": 0,
+      "preventive_floor": 0,
+      "renewal": "NOT_APPLICABLE_LOCAL",
+      "fallback": "Block the affected FormatPack if FFmpeg/Kokoro/local storage cannot meet its measured quality gate; never purchase a substitute.",
+      "quality_status": "PASS",
+      "evidence": [
+        "config/tool_adapters/adapter-ffmpeg-local-v1.json",
+        "config/tool_adapters/adapter-local-voice-v1.json"
+      ]
+    },
+    {
+      "resource_id": "youtube-videos-insert-daily",
+      "cost_brl": 0,
+      "billing_required": false,
+      "quota_limit": 100,
+      "quota_consumed": null,
+      "quota_reserved": 1,
+      "preventive_floor": 1,
+      "renewal": "MIDNIGHT_PACIFIC_TIME",
+      "fallback": "Queue the already approved private upload for the next free reset; no third-party uploader.",
+      "quality_status": "NOT_APPLICABLE",
+      "evidence": [
+        "https://developers.google.com/youtube/v3/getting-started",
+        "https://developers.google.com/youtube/v3/determine_quota_cost"
+      ]
+    },
+    {
+      "resource_id": "youtube-general-units-daily",
+      "cost_brl": 0,
+      "billing_required": false,
+      "quota_limit": 10000,
+      "quota_consumed": null,
+      "quota_reserved": 513,
+      "preventive_floor": 513,
+      "renewal": "MIDNIGHT_PACIFIC_TIME",
+      "fallback": "Defer writes; use local cache and direct public-page evidence for read-only analysis until the free reset.",
+      "quality_status": "NOT_APPLICABLE",
+      "evidence": [
+        "https://developers.google.com/youtube/v3/determine_quota_cost",
+        "https://developers.google.com/youtube/v3/docs/captions/insert",
+        "https://developers.google.com/youtube/v3/docs/thumbnails/set"
+      ]
+    },
+    {
+      "resource_id": "optional-session-image-generation",
+      "cost_brl": 0,
+      "billing_required": false,
+      "quota_limit": null,
+      "quota_consumed": null,
+      "quota_reserved": 0,
+      "preventive_floor": 0,
+      "renewal": "UNAVAILABLE",
+      "fallback": "Wikimedia/CC0 clips, local procedural graphics and FFmpeg composition; this adapter is not a required unattended dependency.",
+      "quality_status": "LIMITED",
+      "evidence": [
+        "config/tool_adapters/adapter-openai-imagegen-builtin-v1.json",
+        "config/tool_adapters/adapter-wikimedia-commons-v1.json"
+      ]
+    },
+    {
+      "resource_id": "vidiq-renewable-free-credits",
+      "cost_brl": 0,
+      "billing_required": false,
+      "quota_limit": 150,
+      "quota_consumed": null,
+      "quota_reserved": 0,
+      "preventive_floor": 0,
+      "renewal": "2026-10-03T16:42:50.024390Z",
+      "fallback": "At or below the preventive floor, stop credit-consuming calls and use official YouTube APIs, cached public evidence and local analysis until renewal.",
+      "quality_status": "LIMITED",
+      "evidence": [
+        "output/market/vidiq/heroverse/2026-09-03/plugin-observation.json",
+        "config/tool_adapters/adapter-vidiq-plugin-v1.json"
+      ]
+    }
+  ],
+  "blockers": [
+    "QUOTA_USAGE_UNAVAILABLE:youtube-general-units-daily",
+    "QUOTA_USAGE_UNAVAILABLE:youtube-videos-insert-daily"
+  ],
+  "fallback_decision": "DEFER_OR_USE_DECLARED_ZERO_COST_FALLBACK; NEVER_ENABLE_BILLING",
+  "claim_boundary": "This guard proves configured financial cost zero and checks supplied quota observations. It does not infer console usage, electrical cost, labor value or publication quality.",
+  "created_at": "2026-10-13T23:59:05.416623Z"
+}

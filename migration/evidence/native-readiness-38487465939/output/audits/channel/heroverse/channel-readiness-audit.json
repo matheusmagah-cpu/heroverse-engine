@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0.0",
+  "audit_id": "channel-cloud-partial-66870a5054ab1898",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "handle": "@heroverse74",
+  "created_at": "2026-10-13T23:59:05.414670+00:00",
+  "snapshot_ref": "migration/evidence/20261013-official-observations.json",
+  "policy_version": "channel-readiness-policy@1.1.0-cloud-partial-evidence",
+  "market_basis": {
+    "channel_dna_ref": "output/modeling/phase4/channel-model-v1/channel_model.json",
+    "market_review_ref": "migration/MONETIZATION_DECISION.md",
+    "official_sources": [
+      "https://support.google.com/youtube/answer/72851",
+      "https://support.google.com/youtube/answer/16559650",
+      "https://support.google.com/youtube/answer/1311392"
+    ],
+    "causal_claims_permitted": false
+  },
+  "measurements": {
+    "subscriber_count": 263,
+    "public_video_count": 23,
+    "total_public_views": 2677,
+    "description": "Practical faith for the moment between prayer and action.\n\nHeroVerse turns Christian wisdom into clear next steps through original English narration, commentary, and cinematic storytelling. We explore faith under pressure, spiritual growth, discipline, leadership, purpose, prayer, and hope\u2014always with one honest tension and one useful takeaway.\n\nOur standard is simple: every new video must add meaningful perspective, substantive editing, and real value. No empty inspiration. No recycled promise.\n\nSubscribe for Christian motivation designed to move beyond emotion and into action.\n",
+    "captured_at": "2026-10-13T22:18:13.514310+00:00",
+    "qualified_ypp_watch_hours": 0,
+    "returning_viewers": null,
+    "brand_keyword_observation": [
+      "Christian motivation",
+      "practical faith",
+      "spiritual growth",
+      "biblical wisdom",
+      "faith in action",
+      "prayer and purpose",
+      "Christian encouragement",
+      "Christian storytelling",
+      "cinematic Christian stories",
+      "Bible based motivation",
+      "discipline and faith",
+      "leadership and faith",
+      "God's timing",
+      "hope and purpose",
+      "Christian life"
+    ],
+    "qualified_ypp_data_as_of": "2026-10-08",
+    "qualified_shorts_views_90days": 822
+  },
+  "gates": [
+    {
+      "gate": "CHANNEL_IDENTITY",
+      "critical": true,
+      "status": "PASS",
+      "evidence": [
+        "oauth-refresh-9a81ecb278eddd701f14"
+      ],
+      "required_action": null
+    },
+    {
+      "gate": "POSITIONING_COHERENCE",
+      "critical": true,
+      "status": "BLOCKED",
+      "evidence": [
+        "migration/evidence/20261013-studio-configuration-observation.json",
+        "migration/evidence/20261013-own-opening-coherence.json"
+      ],
+      "required_action": "Approve a complete coherent production; preserve existing published history."
+    },
+    {
+      "gate": "PROMISE_INTEGRITY",
+      "critical": true,
+      "status": "BLOCKED",
+      "evidence": [
+        "migration/evidence/20261013-studio-configuration-observation.json",
+        "migration/evidence/20261013-own-opening-coherence.json"
+      ],
+      "required_action": "Approve a complete coherent production; preserve existing published history."
+    },
+    {
+      "gate": "HOME_CONVERSION_ARCHITECTURE",
+      "critical": false,
+      "status": "NEEDS_REVIEW",
+      "evidence": [
+        "migration/evidence/20261013-studio-configuration-observation.json"
+      ],
+      "required_action": "Review playlist content and coherent series before optimizing the home layout."
+    },
+    {
+      "gate": "BRAND_MESSAGE_ALIGNMENT",
+      "critical": true,
+      "status": "PASS",
+      "evidence": [
+        "migration/evidence/20261013-studio-configuration-observation.json"
+      ],
+      "required_action": null
+    },
+    {
+      "gate": "PROFILE_CONVERSION_ASSETS",
+      "critical": true,
+      "status": "PASS",
+      "evidence": [
+        "migration/evidence/20261013-studio-configuration-observation.json"
+      ],
+      "required_action": null
+    },
+    {
+      "gate": "CATALOG_LANGUAGE_AND_DUPLICATION",
+      "critical": false,
+      "status": "NEEDS_REVIEW",
+      "evidence": [
+        "Current complete profile/Studio/editorial evidence has not been restored; no default PASS."
+      ],
+      "required_action": "Complete current native channel observation and coherent editorial validation."
+    },
+    {
+      "gate": "PACKAGING_DISCIPLINE",
+      "critical": false,
+      "status": "NEEDS_REVIEW",
+      "evidence": [
+        "Current complete profile/Studio/editorial evidence has not been restored; no default PASS."
+      ],
+      "required_action": "Complete current native channel observation and coherent editorial validation."
+    },
+    {
+      "gate": "YPP_ELIGIBILITY_PROGRESS",
+      "critical": false,
+      "status": "NEEDS_REVIEW",
+      "evidence": [
+        "migration/evidence/20261013-studio-configuration-observation.json"
+      ],
+      "required_action": "Continue qualified audience growth; observed counters are dated and insufficient."
+    },
+    {
+      "gate": "MONETIZATION_POLICY_FIT",
+      "critical": false,
+      "status": "NEEDS_REVIEW",
+      "evidence": [
+        "Current complete profile/Studio/editorial evidence has not been restored; no default PASS."
+      ],
+      "required_action": "Complete current native channel observation and coherent editorial validation."
+    }
+  ],
+  "overall_status": "BLOCKED_BEFORE_NEXT_PUBLICATION",
+  "publication_gate": {
+    "status": "BLOCKED",
+    "critical_open_gates": [
+      "POSITIONING_COHERENCE",
+      "PROMISE_INTEGRITY"
+    ],
+    "auto_publish_permitted": false,
+    "reason": "Current profile observed; confirmed editorial coherence remains blocked."
+  },
+  "ypp_application_gate": {
+    "status": "BLOCKED",
+    "eligible_tier": "NONE",
+    "critical_open_gates": [
+      "QUALIFIED_YPP_THRESHOLDS_NOT_MET_AS_OF_2026_10_08"
+    ],
+    "auto_apply_permitted": false,
+    "reason": "Studio counters observed with processing delay; eligibility thresholds not met in that snapshot."
+  },
+  "priority_actions": [
+    {
+      "priority": 1,
+      "action": "Resolve observed content coherence",
+      "protected_external_change": false
+    },
+    {
+      "priority": 2,
+      "action": "Complete audiovisual market review",
+      "protected_external_change": false
+    },
+    {
+      "priority": 3,
+      "action": "Qualify full production and replay",
+      "protected_external_change": false
+    },
+    {
+      "priority": 4,
+      "action": "Observe Google Auth production settings and actual quota usage",
+      "protected_external_change": false
+    },
+    {
+      "priority": 5,
+      "action": "Review home playlists and current catalog language",
+      "protected_external_change": false
+    }
+  ],
+  "learning_protocol": {
+    "owned_first": true,
+    "matched_market_fallback": true,
+    "returning_audience_requires_observation": true,
+    "causal_claims_permitted": false,
+    "global_learning_without_transfer_test": false
+  },
+  "limitations": [
+    "Partial snapshot is not complete channel audit.",
+    "Identity does not imply publication readiness.",
+    "Analytics watch time is not qualified YPP watch time.",
+    "The historical30day goal is not reset.",
+    "Studio qualified counters are as of 2026-10-08, not current Analytics watch time. Upload UI defaults do not configure the API publisher."
+  ]
+}
