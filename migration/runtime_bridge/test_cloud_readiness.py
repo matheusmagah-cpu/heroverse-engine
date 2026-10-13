@@ -25,4 +25,27 @@ class CloudContracts(unittest.TestCase):
   try:
    with self.assertRaises(PermissionError):adapt(self.root)
   finally:p.write_bytes(original)
+
+class StudioReconciliation(unittest.TestCase):
+ def observed(self):
+  return json.loads(Path('migration/evidence/20261013-studio-configuration-observation.json').read_text())
+ def baseline(self):
+  return partial_channel_audit({'id':'UCuMF6pJQkyMzaVoAxFL86yA','statistics':{'subscriberCount':'263','videoCount':'23','viewCount':'2677'},'snippet':{'description':'Christian reflection'}},'2026-10-13T22:18:00Z',{'identity_verified_after_refresh':True,'receipt_id':'qualified'})
+ def test_current_profile_does_not_approve_incoherent_publication(self):
+  from channel_observation import reconcile
+  from jsonschema import Draft202012Validator
+  r=reconcile(self.baseline(),self.observed())
+  Draft202012Validator(json.loads((SOURCE/'schemas/channel_readiness_audit.schema.json').read_text())).validate(r)
+  self.assertFalse(r['publication_gate']['auto_publish_permitted'])
+  self.assertEqual(set(r['publication_gate']['critical_open_gates']),{'POSITIONING_COHERENCE','PROMISE_INTEGRITY'})
+  self.assertEqual(r['measurements']['qualified_ypp_data_as_of'],'2026-10-08')
+ def test_foreign_unsaved_and_unapproved_editorial_are_rejected(self):
+  from channel_observation import reconcile
+  for field in ('foreign','unsaved','editorial'):
+   o=self.observed()
+   if field=='foreign':o['channel_id']='foreign'
+   elif field=='unsaved':o['upload_defaults']['persistence_verified_by_reopened_dialog']=False
+   else:o['content_coherence']['status']='PASS'
+   with self.assertRaises(PermissionError):reconcile(self.baseline(),o)
+
 if __name__=='__main__':unittest.main()
