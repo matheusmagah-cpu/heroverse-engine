@@ -41,3 +41,11 @@ Remaining: full phase-specific pipeline/resources/fonts/media/perceptualQA, dura
 ## Current private reach evidence and next editorial investigation
 
 Studio exact HeroVerse videoFifnlNUQKNk: since-publication660thumbnailimpressions/0.5%CTR,8views/6.1totalwatchhours. Funnel explicitly10–12Oct/3days:619impressions,72.7%recommended,3engagedviewsfromimpressions,average1:12,0.06watchhoursfromimpressions. Uniqueviewers5 with2dayprocessinglag; detailedretentionINSUFFICIENT_DATA. Do not combine funnel subset with all-traffic watchhours or treat tiny sample as causal diagnosis. First experimental question is packaging/promise/audience coherence; no metadata/publication change authorized by this observation alone. Preserve video/historical receipts. MineraçãoAV/cadencewinner remains unvalidated. Remaining publisher OAuth deployment is separate from browser/nativevidIQ access.
+
+## Owner-authorized integration and Linux production shadow
+
+Owner authorized necessary actions on2026-10-13. PR#1 merged into main atd5281abdc0b38e957e82edf6cdca9244e9cab442. Market-first policy and punctual-only vidIQ reserve integrated; no executor hook or automatic paid calls claimed. Last observed21credits stays blocked by existing25reserve; no further credit calls.
+
+migration/apply_linux_production_overlay.py creates a new hash-bound shadow from the immutable source: adds installed Linux DejaVuSans-Bold font fallback and normalizes .exe suffix in the original scope test assertion. Source archive/origin preserved; original failure remains recorded. Linux shadow:1scope test+7asset residency tests PASS. Actual original drawtext helper rendered2seconds with installed DejaVu font and full decode PASS. Font license recorded from OS package; no binary/font redistribution. Receipt migration/receipts/20261013-linux-font-and-scope-pass.json. Tests and synthetic glyph render are not editorial production, live OAuth, durable real media residency or resident24h proof.
+
+Still blocked: worker OAuth identity/refresh, durable private assets and restoration, real audiovisual mining, full eight-phase controlled long/Short production, quality review and idempotent publication/replay. Production supervisor stays disabled until acceptance; routine implementation and validation no longer wait on PR#1 approval.
