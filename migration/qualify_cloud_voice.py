@@ -25,57 +25,56 @@ def digest(path):
 def synth(root):
     import numpy as np
     import onnxruntime as ort
-    from kokoro_onnx import Kokoro
+    import soundfile as sf
+    sys.path.insert(0,str(root/'source'/'project'))
+    from hero_engine.voice_phase5 import build_local_voice, synthesize_voice_sample, KokoroFloatSpeed
     options=ort.SessionOptions()
     options.intra_op_num_threads=2
     options.inter_op_num_threads=1
-    session=ort.InferenceSession(str(root/'kokoro-v1.0.fp16.onnx'),
-                sess_options=options,providers=['CPUExecutionProvider'])
-    # Kokoro 0.4.9 accepts an existing session through from_session.
-    class TypedSession:
-        # Adapter scoped to the exact pinned model input contract; upstream
-        # Kokoro 0.4.9 incorrectly emits int32 speed for this input_ids graph.
-        _model_path=session._model_path
-        corrections=0
-        def run(self, outputs, feed):
-            metadata={item.name:item.type for item in session.get_inputs()}
-            if metadata.get('speed')!='tensor(float)':
-                raise RuntimeError('unexpected speed contract')
-            fixed=dict(feed)
-            speed=np.asarray(fixed['speed'])
-            if speed.dtype==np.int32:
-                fixed['speed']=speed.astype(np.float32)
-                self.corrections+=1
-            elif speed.dtype!=np.float32:
-                raise RuntimeError('unexpected speed input type')
-            return session.run(outputs,fixed)
-        def __getattr__(self, name):
-            return getattr(session,name)
-    typed=TypedSession()
-    kokoro=Kokoro.from_session(typed,str(root/'voices-v1.0.bin'))
-    samples, rate=kokoro.create('This is an isolated technical test of the HeroVerse cloud voice.',
-                voice='af_sarah',speed=1.0,lang='en-us')
-    samples=np.asarray(samples,dtype=np.float32)
+    def factory(model, voices, *, espeak_config):
+        session=ort.InferenceSession(model,sess_options=options,providers=['CPUExecutionProvider'])
+        return KokoroFloatSpeed.from_session(session,voices,espeak_config=espeak_config)
+    engine=build_local_voice(root,engine_factory=factory)
+    native=synthesize_voice_sample(engine,text='This is an isolated technical test of the HeroVerse cloud voice.',
+                output_path=root/'diagnostic.wav',voice_id='am_michael',speed=1.0)
+    samples,rate=sf.read(root/'diagnostic.wav',dtype='float32')
     if samples.ndim!=1 or not np.isfinite(samples).all():raise RuntimeError('invalid samples')
-    duration=len(samples)/rate
-    rms=float(np.sqrt(np.mean(samples*samples)))
+    duration=len(samples)/rate; rms=float(np.sqrt(np.mean(samples*samples)))
     if rate!=24000 or not 1<duration<30 or rms<0.001:raise RuntimeError('invalid audio properties')
-    pcm=(np.clip(samples,-1,1)*32767).astype('<i2')
-    with wave.open(str(root/'diagnostic.wav'),'wb') as w:
-        w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate);w.writeframes(pcm.tobytes())
-    print(json.dumps({'status':'VOICE_INFERENCE_PASS','duration':duration,'sample_rate':rate,
-        'rms':rms,'samples':len(samples),'speed_dtype_corrections':typed.corrections,'wav_sha256':digest(root/'diagnostic.wav'),
+    if native['clipping']:raise RuntimeError('voice clipping')
+    print(json.dumps({'status':'ORIGINAL_PHASE5_VOICE_INFERENCE_PASS','duration':duration,
+        'sample_rate':rate,'rms':rms,'samples':len(samples),'wav_sha256':digest(root/'diagnostic.wav'),
+        'source_adapter':'hero_engine.voice_phase5.KokoroFloatSpeed',
+        'source_module_sha256':digest(root/'source'/'project'/'hero_engine'/'voice_phase5.py'),
+        'native_receipt':native,'espeak_binding':engine._heroverse_espeak_binding.identity(),
         'versions':{n:importlib.metadata.version(n) for n in
-                    ['kokoro-onnx','onnxruntime','numpy','espeakng-loader','phonemizer-fork']}}),flush=True)
+                    ['kokoro-onnx','onnxruntime','numpy','espeakng-loader','phonemizer-fork','soundfile']}}),flush=True)
 
 def main():
     pre=preflight()
     results=[]
     with tempfile.TemporaryDirectory(prefix='heroverse-cloud-diagnostic-') as tmp:
         root=Path(tmp)
+        from pathlib import PurePosixPath
+        import zipfile
+        archive=Path('HeroVerse_Linux_Source_Ready_20261013_v2.zip')
+        if digest(archive)!='fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10':
+            raise RuntimeError('source archive identity mismatch')
+        with zipfile.ZipFile(archive) as z:
+            for item in z.infolist():
+                path=PurePosixPath(item.filename)
+                if path.is_absolute() or '..' in path.parts or ((item.external_attr>>16)&0o170000)==0o120000:
+                    raise RuntimeError('unsafe source member')
+            z.extractall(root/'source')
+        report=json.loads((root/'source'/'SOURCE_TRANSFER_REPORT.json').read_text())
+        for item in report['files']:
+            path=root/'source'/'project'/item['path']
+            if path.stat().st_size!=item['bytes'] or digest(path)!=item['sha256']:
+                raise RuntimeError('source manifest mismatch')
+        model_dir=root/'models'/'kokoro';model_dir.mkdir(parents=True)
         for a in ASSETS:
             size=0;h=hashlib.sha256()
-            with urllib.request.urlopen(a['url'],timeout=30) as response,(root/a['name']).open('xb') as out:
+            with urllib.request.urlopen(a['url'],timeout=30) as response,(model_dir/a['name']).open('xb') as out:
                 while block:=response.read(1024**2):
                     size+=len(block)
                     if size>a['size']:raise RuntimeError('asset exceeds pinned size')
@@ -88,7 +87,7 @@ def main():
                     cwd=Path.cwd(),timeout_seconds=120,memory_bytes=3*1024**3,max_log_bytes=1024**2)
         print(json.dumps({'voice_worker':voice}),flush=True)
         if voice['status']!='SUCCEEDED':raise RuntimeError('voice worker failed')
-        voice_receipt=json.loads(next(line for line in reversed(voice['stdout'].splitlines()) if line.startswith('{') and 'VOICE_INFERENCE_PASS' in line))
+        voice_receipt=json.loads(next(line for line in reversed(voice['stdout'].splitlines()) if line.startswith('{') and 'ORIGINAL_PHASE5_VOICE_INFERENCE_PASS' in line))
         ffmpeg=shutil.which('ffmpeg'); ffprobe=shutil.which('ffprobe')
         if not ffmpeg or not ffprobe:raise RuntimeError('video tools missing')
         render=run_bounded([ffmpeg,'-hide_banner','-loglevel','error','-nostdin',
@@ -109,7 +108,7 @@ def main():
         kinds={s['codec_type'] for s in props['streams']}
         if kinds!={'audio','video'} or abs(float(props['format']['duration'])-voice_receipt['duration'])>0.5:
             raise RuntimeError('render stream/duration mismatch')
-        receipt={'status':'CLOUD_VOICE_RENDER_DIAGNOSTIC_PASS','assets':results,'preflight':pre,
+        receipt={'status':'ORIGINAL_PHASE5_CLOUD_VOICE_RENDER_PASS','assets':results,'preflight':pre,
           'voice':voice_receipt,'render_sha256':digest(root/'diagnostic.mp4'),
           'render':render,'decode':decode,'windows_contact':False,
           'full_phase_pipeline_validated':False,'perceptual_quality_approved':False,

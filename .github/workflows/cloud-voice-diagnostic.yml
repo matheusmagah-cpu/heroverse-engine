@@ -47,6 +47,6 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends ffmpeg espeak-ng
           python3 -m venv /tmp/heroverse-voice-diagnostic
-          /tmp/heroverse-voice-diagnostic/bin/pip install --disable-pip-version-check 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4'
+          /tmp/heroverse-voice-diagnostic/bin/pip install --disable-pip-version-check 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1' 'jsonschema==4.26.0'
       - name: Qualify real voice and diagnostic render under kernel limits
         run: /tmp/heroverse-voice-diagnostic/bin/python migration/qualify_cloud_voice.py
