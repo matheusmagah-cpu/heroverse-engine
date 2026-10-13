@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
       - name: Recover disposable runner toolchain space before model work
         run: |
-          sudo python3 - <<'PY'
+          sudo --preserve-env=GITHUB_WORKSPACE,GITHUB_ACTIONS,RUNNER_ENVIRONMENT python3 - <<'PY'
           import json, os, shutil, subprocess
           from pathlib import Path
           workspace=Path(os.environ['GITHUB_WORKSPACE']).resolve()
