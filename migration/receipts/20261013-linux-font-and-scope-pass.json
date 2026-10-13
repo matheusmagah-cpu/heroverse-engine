@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-13",
+  "pr1": {
+    "merged": true,
+    "commit": "d5281abdc0b38e957e82edf6cdca9244e9cab442",
+    "owner_authorized": true
+  },
+  "environment": "ChatGPT Linux qualification shadow; not resident cloud worker",
+  "original_scope_failure_preserved": "migration/receipts/20261013-production-readiness-inspection.json",
+  "scope_test": {
+    "passed": true,
+    "tests": 1,
+    "change": "Normalize executable suffix only; scope and subprocess guards retained"
+  },
+  "asset_residency_test": {
+    "passed": true,
+    "tests": 7,
+    "real_assets_verified": false
+  },
+  "font": {
+    "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895",
+    "license_source": "/usr/share/doc/fonts-dejavu-core/copyright",
+    "upstream": "https://dejavu-fonts.github.io/",
+    "distribution": "No font binary added to repository; installed OS package license preserved",
+    "technical_render_decode": "PASS",
+    "duration": 2,
+    "editorial_approval": false
+  },
+  "changes": [
+    {
+      "path": "hero_engine/render_creative_v2_phase5.py",
+      "original_sha256": "b94eb3a928ade12658b2a07686e508338653f9fedc5a6f30bb72132fee2c9cc4",
+      "shadow_sha256": "63e065d5a69defadb43898a3c39b06445c5f983fd223604c8bfd2a94fd03a916"
+    },
+    {
+      "path": "tests/test_oauth_scope_requirements.py",
+      "original_sha256": "5267dc87659923bff523e2c0edc8f99880d9ae58f6e5bde5cc770053a7aa8a64",
+      "shadow_sha256": "ec5c0f4557bb924a8f0265a9a10e0f2986e96989c4c3f4491397ace67260dbeb"
+    }
+  ],
+  "production_enabled": false,
+  "worker_oauth_provisioned": false,
+  "storage_ready": false,
+  "vidiq_credit_calls": 0
+}
