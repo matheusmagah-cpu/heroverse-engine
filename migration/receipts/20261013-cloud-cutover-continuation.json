@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-13",
+  "status": "PARTIAL_CLOUD_CUTOVER",
+  "verified_now": {
+    "source": "Current private repository tree",
+    "linux_containment": {
+      "run": 38441814261,
+      "job": 115450030279,
+      "tests_pass": 4,
+      "log_verified": true
+    }
+  },
+  "owned_master_transfer": {
+    "expected_first_blob_sha": "e1cf99bf30e50e5ddf2a933e57795d1b336a65f2",
+    "github_read_result": "404 NOT_FOUND",
+    "full_master_available_to_github_worker": false,
+    "reupload_performed": false
+  },
+  "local_execution": {
+    "status": "UNAVAILABLE",
+    "observations": [
+      "exec-server rejected process creation: No such file or directory",
+      "Same failure with explicit /bin/bash and current workspace"
+    ],
+    "scope": "Cannot currently materialize or stream local media bytes; not proof that durable archived files are lost"
+  },
+  "qualification": {
+    "commit": "d60cdb6107394dbbc7529b287fa9e5ba399af3fd",
+    "run": 38468799942,
+    "status": "IN_PROGRESS",
+    "real_assets_verified": false,
+    "live_oauth_verified": false
+  },
+  "preserved": {
+    "windows_contact": false,
+    "original_source_changed": false,
+    "ledger_changed": false,
+    "queue_activated": false,
+    "publication_performed": false,
+    "vidiq_credit_calls": 0,
+    "billing_changed": false
+  },
+  "next": [
+    "Read new cloud job logs and preserve exact result",
+    "Restore private media through a functioning authorized transport, verify whole hashes at worker",
+    "Securely provision existing OAuth authorization; prove refresh and exact channel in worker",
+    "Complete original controlled cycle, audiovisual QA and no-duplicate replay"
+  ]
+}
