@@ -6,6 +6,10 @@ on:
         description: Validate durable checkpoint without new Google calls
         type: boolean
         default: true
+      restore_assets:
+        description: Qualify exact private media restoration without production
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -14,7 +18,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-24.04
-    timeout-minutes: 7
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -36,6 +40,17 @@ jobs:
           restore_ledger(SQL,out/"quota-ledger.sqlite3")
           print("Original ledger restored; no Google calls or publications")
           PY
+      - name: Prepare bounded fresh-runner media restoration
+        if: inputs.restore_assets && inputs.checkpoint_only
+        run: |
+          if [ -d /usr/local/lib/android ]; then sudo rm -rf /usr/local/lib/android; fi
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Restore exact own assets from private repository
+        if: inputs.restore_assets && inputs.checkpoint_only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/restore_private_media.py
       - name: Check authorized token before dependencies
         if: ${{ !inputs.checkpoint_only }}
         env:
