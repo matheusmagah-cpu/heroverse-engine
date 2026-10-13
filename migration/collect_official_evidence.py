@@ -70,6 +70,11 @@ def report_rows(response):
     names=[h['name'] for h in response.get('columnHeaders',[])]
     return [dict(zip(names,row,strict=True)) for row in response.get('rows',[])]
 
+def public_projection(video):
+    public=video.get('status',{}).get('privacyStatus')=='public'
+    return {'availability':'public' if public else 'unavailable','public_fields_only':public,
+            'webpage_url':'https://www.youtube.com/watch?v='+video['id']}
+
 def snapshot(operation,captured,channel,entity,identity,payload):
     body=json.dumps([operation,channel,entity,identity,captured],separators=(',',':'))
     return {'schema_version':'1.0.0','snapshot_id':'snap-'+sha(body.encode())[:24],
@@ -170,6 +175,7 @@ def collect(root,export):
             'timestamp':published.timestamp(),'upload_date':published.strftime('%Y%m%d'),'duration_seconds':seconds,
             'view_count':int(v['statistics']['viewCount']) if 'viewCount' in v.get('statistics',{}) else None,
             'catalog_role':'FORMAT_REFERENCE','content_format':'LONG','format_basis':'DURATION_OVER_180_SECONDS_INFERENCE_PENDING_AV',
+            **public_projection(v),
             'duration_stratum':bucket,'default_audio_language':v['snippet'].get('defaultAudioLanguage'),
             'thumbnail':v['snippet'].get('thumbnails',{}).get('high',{}).get('url'),'license':v.get('status',{}).get('license')})
         if row['payload']['view_count'] is None:row['collection_status']='PARTIAL'
