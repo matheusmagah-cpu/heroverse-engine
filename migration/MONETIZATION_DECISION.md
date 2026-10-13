@@ -25,3 +25,20 @@ Fontes: https://support.google.com/youtube/answer/72851 ; https://support.google
 
 ## Estado de execução
 Documento de decisão para integrar ao gestor original; não é um segundo gestor nem ativação do supervisor. Não reinicia o prazo histórico de30dias. Pendem mineração audiovisual, CTR/reach atualizado, residência durável acessível pelo worker, integração dos dados no gestor e ciclo controlado produção/restauração/idempotência. Fase6 permanece em andamento.
+
+## Diretriz adicional expressa — 13out2026,19:50BRT
+
+Mineração e modelação são o eixo da operação. O ciclo pretendido é pesquisa de mercado → análise audiovisual → produção original → embalagem/publicação → observação própria → melhoria contínua pelo gestor existente. O proprietário não deve ficar enviando instruções rotineiras para manter esse ciclo.
+
+- Selecionar referências recentes do mesmo público, canal, formato, duração e idade; confrontar vencedores, medianos e fracos. Validar início0–1s,1–3s,3–8s,8–30s, narrativa, takes, voz, música, ritmo e payoff. Metadados ou transcrições isoladas não encerram mineração audiovisual.
+- Modelar mecanismos e necessidades do público, sem copiar texto, áudio, sequência, identidade ou conteúdo de concorrentes. Views, comentários e inscritos públicos não provam CTR alto, receita nem conversão atribuída.
+- Auditar erros concretos dos vídeos próprios antes de produzir o próximo. A divergência confirmada no master FifnlNUQKNk está em migration/evidence/20261013-own-opening-coherence.json; preservar vídeo e histórico até remediação versionada.
+- Avaliar audiência contínua: inscritos ganhos/perdidos, conversão por views com denominador e janela, retenção, horas e sinais de retorno/repetição quando efetivamente disponíveis. Retorno não observado permanece UNKNOWN; não inventar taxa de fidelidade.
+- Comparar com os próprios vídeos quando houver coorte equivalente suficiente. Se não houver, recorrer à coorte de mercado equivalente, mantendo incerteza e validade da amostra.
+- Preparar título, miniatura, descrição, tags, idioma, legendas, configuração do canal, playlists e conexões entre vídeos como um conjunto coerente. Promessa da embalagem deve aparecer na abertura e ser cumprida. Tags têm papel limitado de descoberta segundo fonte oficial; não concentrar esforço nelas nem empilhar palavras na descrição.
+- Determinar cadência de longos e Shorts com capacidade real, qualidade e resultados. Não prometer melhor horário, frequência ideal, virais ou monetização a partir de uma captura.
+- Automatizar ações somente por módulos existentes com autoridade válida, checkpoints, singleton, cotas, gates e idempotência. Continuidade técnica não é certificação de qualidade nem ativação da publicação.
+- Etapa1: fechar a operação automática completa. Etapa2: inteligência independente deste chat, mantendo coleta, comparação e melhorias. Nenhuma das duas está certificada completa.
+
+Pedido de continuidade do chat a cada15min não executável no agendador disponível, que permite no máximo uma execução por hora. Nenhuma tarefa15min foi criada. Coleta oficial diária no GitHub está configurada, com a primeira execução agendada ainda por acontecer. A opção de continuidade horária aguarda escolha do proprietário.
+Fontes de embalagem: https://support.google.com/youtube/answer/16559650 ; https://support.google.com/youtube/answer/146402 ; https://support.google.com/youtube/answer/12948449
