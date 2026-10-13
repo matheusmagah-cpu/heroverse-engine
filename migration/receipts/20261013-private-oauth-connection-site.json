@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-13",
+  "project_id": "appgprj_6ace9f71f59081919d3b0b074fb8dbd3",
+  "url": "https://heroverse-oauth-connection.matheusmagah.chatgpt.site",
+  "callback_uri": "https://heroverse-oauth-connection.matheusmagah.chatgpt.site/oauth/google/callback",
+  "deployment_id": "appgdep_6acea0b335c8819184cf095080da934a",
+  "version_id": "appgprj_6ace9f71f59081919d3b0b074fb8dbd3~appgver_afce469553ac819195d6a60109dafa61",
+  "site_source_commit": "7b5bad00a0859ec8ebca388b7dd78fae82458d3e",
+  "audience": "owner-private",
+  "deployment": "succeeded",
+  "local_boundary_tests": {
+    "passed": 8,
+    "total": 8
+  },
+  "browser_observation": "Published callback requires ChatGPT sign-in; no authenticated live Google exchange exercised",
+  "runtime_environment_keys": [
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET"
+  ],
+  "runtime_client_configured": false,
+  "google_client_creation": "pending owner form",
+  "google_token_acquired": false,
+  "github_token_provisioned": false,
+  "production_enabled": false,
+  "security": [
+    "Private Site platform boundary",
+    "Server-side owner/session binding",
+    "PKCE S256",
+    "10-minute state expiry",
+    "Exact channel identity and four-scope checks",
+    "No credential logs or server persistence; authenticated credential file download only"
+  ],
+  "integration_remaining": [
+    "Configure new web client ID and client secret through native Sites environment tools using a safe credential handoff",
+    "Authorize existing HeroVerse app scopes on Google",
+    "Install authorized-user token into GitHub HERO_YT_AUTHORIZED_USER_JSON securely",
+    "Update worker expected client ID explicitly for new web client without relaxing channel/scopes gates",
+    "Run original refresh proof on cloud worker"
+  ]
+}
