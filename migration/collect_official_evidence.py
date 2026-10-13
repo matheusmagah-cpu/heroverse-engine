@@ -11,6 +11,7 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import shutil
+import sqlite3
 import sys
 import tempfile
 from datetime import datetime, timedelta, timezone
@@ -225,7 +226,11 @@ def main():
         snapshot_manifest=json.loads((base/'snapshot/OPERATIONAL_SNAPSHOT_MANIFEST.json').read_text())
         entry=next(x for x in snapshot_manifest['databases'] if x['snapshot_path'].endswith('phase6-quota-ledger.sqlite3'))
         if sha(ledger.read_bytes())!=entry['sha256']:raise PermissionError('LEDGER_SOURCE_MISMATCH')
-        destination=root/'output/operations/zero-cost/phase6-quota-ledger.sqlite3';destination.parent.mkdir(parents=True);shutil.copy2(ledger,destination)
+        destination=root/'output/operations/zero-cost/phase6-quota-ledger.sqlite3';destination.parent.mkdir(parents=True)
+        from durable_evidence_checkpoint import restore_ledger,SQL,CLAIM
+        if not CLAIM.exists() or json.loads(CLAIM.read_text()).get('run_id')!=os.environ.get('GITHUB_RUN_ID'):
+            raise PermissionError('DURABLE_OBSERVER_CLAIM_REQUIRED')
+        restore_ledger(SQL,destination)
         sys.path.insert(0,str(root))
         try:summary=collect(root,export)
         finally:
