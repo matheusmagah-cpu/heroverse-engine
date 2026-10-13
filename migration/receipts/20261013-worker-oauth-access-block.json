@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-13",
+  "url": "https://console.cloud.google.com/apis/credentials",
+  "observations": [
+    "Site Unavailable",
+    "Unable to access this site."
+  ],
+  "recovery": "One reload; same result",
+  "classification": "Browser/site access failure, cause unknown; not proven bot detection",
+  "youtube_studio_session": "Previously verified HeroVerse; not worker credentials",
+  "worker_credentials_provisioned": false,
+  "authentication_secrets_extracted": false,
+  "production_enabled": false,
+  "required_next": "Secure provision of existing app OAuth client and authorized runtime refresh token; exact channel probe and refresh proof before publication."
+}
