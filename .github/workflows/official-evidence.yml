@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       checkpoint_only:
-        description: Validate durable checkpoint without new Google calls
+        description: Skip new owned and market collection; readiness may refresh identity
         type: boolean
         default: true
       native_readiness:
