@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-13",
+  "scope": "private source and bounded Linux infrastructure only",
+  "repository": "matheusmagah-cpu/heroverse-engine",
+  "archive_commit": "9deb668a05d57b1e03024984fcf16f2d93141468",
+  "archive_sha256": "fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10",
+  "source_count": 830,
+  "asts": 470,
+  "installation_authorized": true,
+  "local_validation": "PASS",
+  "initial_cloud_run": {
+    "id": 38430802194,
+    "job": 115412156771,
+    "status": "FAIL",
+    "reason": "ffmpeg unavailable after archive/hash/AST/lock verification"
+  },
+  "correction_commit": "ece767b3615e6a268b7fbd09d22e849d1ee371bd",
+  "second_cloud_run": 38430954515,
+  "production_ready": false,
+  "publication": false,
+  "windows_contact": false,
+  "transfer_stall": "Large model-visible base64 orchestration interrupted before blob creation; direct browser ZIP upload committed successfully. No duplicate archive commit."
+}
