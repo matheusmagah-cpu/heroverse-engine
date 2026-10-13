@@ -1,5 +1,5 @@
 """Claim and checkpoint bounded observations; never modifies production queues."""
-import json,os,sqlite3,subprocess,sys
+import json,os,sqlite3,subprocess,sys,shutil
 from pathlib import Path
 STATE=Path('migration/evidence/observer-state.json')
 CLAIM=Path('migration/evidence/observer-claim.json')
@@ -45,6 +45,13 @@ def main(mode):
             immutable=Path('migration/evidence')/('observer-'+run+'.json')
             if immutable.exists():raise PermissionError('OBSERVATION_ALREADY_PERSISTED')
             immutable.write_text(observed.read_text())
+        native=Path('cloud-evidence/native-readiness')
+        if native.is_dir():
+            frozen=Path('migration/evidence')/('native-readiness-'+run)
+            if frozen.exists():raise PermissionError('NATIVE_READINESS_ALREADY_PERSISTED')
+            shutil.copytree(native,frozen)
+            summary=Path('cloud-evidence/native-cloud-readiness-summary.json')
+            if summary.exists():shutil.copy2(summary,frozen/'summary.json')
         STATE.write_text(json.dumps({'last_checkpointed_run':run,'collection_complete':Path('cloud-evidence/summary.json').exists(),'publication_performed':False}))
         CLAIM.unlink();commit('Checkpoint original observer ledger after bounded run')
     else:raise ValueError('UNKNOWN_CHECKPOINT_MODE')
