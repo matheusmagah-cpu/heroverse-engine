@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "run_id": 38475735622,
+  "job_id": 115565840349,
+  "run_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38475735622",
+  "head_sha": "be6add12008bf3202d9d40ce51f6455a18921818",
+  "receipt_id": "oauth-refresh-2a13c7e09d776a10ce61",
+  "tested_at": "2026-10-13T22:08:59.936621Z",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "observed_channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "required_scope_count": 4,
+  "refresh_success": true,
+  "noninteractive": true,
+  "identity_verified_after_refresh": true,
+  "secret_logged": false,
+  "technical_cost_brl": 0,
+  "worker_secret_installed": true,
+  "token_persistence_scope": "atomic temporary runner token; GitHub encrypted authorized-user secret remains durable input",
+  "production_ready": false,
+  "publication_performed": false,
+  "qualification": "ORIGINAL_REFRESH_AND_CHANNEL_IDENTITY_ONLY"
+}
