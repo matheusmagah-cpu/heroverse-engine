@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/linux-validation.yml'
       - 'migration/verify_cloud_source.py'
+      - 'migration/linux_bounded_worker.py'
+      - 'migration/test_linux_bounded_worker.py'
       - 'HeroVerse_Linux_Source_Ready_20261013_v2.zip'
 permissions:
   contents: read
