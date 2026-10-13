@@ -25,3 +25,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends ffmpeg
       - name: Verify private source and bounded infrastructure
         run: python3 migration/verify_cloud_source.py
+      - name: Validate immutable Linux evidence commit
+        run: python3 -m unittest discover -s migration -p test_linux_atomic_commit.py -v
+      - name: Probe kernel containment capability without production workers
+        run: python3 migration/probe_linux_containment.py
