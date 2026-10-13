@@ -1,5 +1,5 @@
 # HeroVerse — política de operação e créditos
-Atualizada em 13/10/2026 por instrução do proprietário. Candidata à integração; produção autônoma ainda não liberada.
+Atualizada em 13/10/2026 por instrução do proprietário. Integrada à branch principal no PR #1; produção autônoma ainda não liberada.
 
 ## Contas e continuidade
 GitHub: Matheus Magh, matheusmagah@gmail.com, matheusmagah-cpu/heroverse-engine.
@@ -37,4 +37,4 @@ Manter o supervisor existente desativado até comprovar o ciclo completo:
 6. Validar ciclo supervisionado e funcionamento prolongado antes da ativação.
 Não declarar esses requisitos concluídos com base apenas no diagnóstico isolado de voz/render que passou.
 Preservar PAUSE, evidências e bloqueios anteriores; não reiniciar a janela histórica de 30 dias por conta própria.
-O PR #1 permanece em rascunho; a integração na branch principal requer a autorização já solicitada.
+O proprietário autorizou as ações necessárias em 13/10/2026. PR #1 integrado (d5281abdc0b38e957e82edf6cdca9244e9cab442). Nenhuma nova autorização rotineira é necessária; consentimento seguro de credenciais e ampliações de acesso seguem as exigências específicas da plataforma.
