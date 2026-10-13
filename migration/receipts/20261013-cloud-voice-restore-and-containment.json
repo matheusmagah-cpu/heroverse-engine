@@ -220,12 +220,41 @@
       "displayed_duration": "3:00:01",
       "views": 8,
       "watch_hours": 6.1,
-      "audience_retention": "INSUFFICIENT_DATA"
+      "audience_retention": "INSUFFICIENT_DATA",
+      "reach": {
+        "since_publication_thumbnail_impressions": 660,
+        "since_publication_thumbnail_ctr_percent": 0.5,
+        "unique_viewers_estimate": 5,
+        "unique_viewers_processing_lag_days": 2,
+        "funnel": {
+          "date_start": "2026-10-10",
+          "date_end": "2026-10-12",
+          "days": 3,
+          "thumbnail_impressions": 619,
+          "youtube_recommended_percent": 72.7,
+          "engaged_views_from_impressions": 3,
+          "average_view_duration_seconds": 72,
+          "watch_hours_from_impressions": 0.06
+        }
+      }
     },
     "qualifiers": [
       "YPP as-of date predates recent long video confirmation; zero is not rejection of that video's hours.",
       "Studio since-publication date differs from prior confirmation receipt; retain both.",
       "Analytics hours are not YPP qualified hours."
+    ]
+  },
+  "interpretation": {
+    "first_editorial_investigation": "Packaging/promise and intended audience for the three-hour reflection/piano video",
+    "confidence": "Hypothesis from small sample; no causal conclusion or universal CTR threshold",
+    "separation": "Total 6.1 watch hours include views outside the displayed 619-impression funnel; do not assign total hours to impression-derived engagement.",
+    "next_measurement": "Comparable packaging experiment after rights/content/QA gates; preserve video history and avoid duplicate publication.",
+    "not_validated": [
+      "Full eight-phase productive cycle",
+      "Recent homogeneous audiovisual winning model",
+      "Full cloud worker YouTube publisher credentials and private asset durability",
+      "Cadence optimized from own audience data",
+      "Detailed retention with sufficient sample"
     ]
   }
 }
