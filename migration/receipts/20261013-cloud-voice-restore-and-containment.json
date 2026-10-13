@@ -25,14 +25,52 @@
     ]
   },
   "diagnostic": {
-    "commit": "c878deac777fe46df537af4fa4da7e364d254699",
-    "run": 38447480742,
-    "job": 115469517320,
-    "status": "RUNNING_NOT_APPROVED"
+    "commit": "74f3bf3cd2a31af947e0a9488b0384d34cebcf13",
+    "run": 38447760022,
+    "job": 115470498885,
+    "status": "RUNNING_NOT_APPROVED",
+    "prior_failures": [
+      {
+        "run": 38447480742,
+        "job": 115469517320,
+        "reason": "Preflight disk floor: 13574139904 bytes free; synthesis not started."
+      },
+      {
+        "run": 38447729440,
+        "job": 115470385082,
+        "reason": "sudo environment omitted GITHUB_WORKSPACE; guarded recovery stopped before deletion; fixed by preserving only three runner identity variables."
+      },
+      {
+        "run": 38447760022,
+        "job": 115470498885,
+        "reason": "Kokoro 0.4.9 emits int32 speed for input_ids graph; exact pinned model declares float32. Isolated adapter added without changing model bytes."
+      }
+    ]
   },
   "windows_contact": false,
   "production_ready": false,
   "full_pipeline_validated": false,
   "publication_performed": false,
-  "release_authority": false
+  "release_authority": false,
+  "youtube_access": {
+    "authorized_channels": [],
+    "authenticated_as": "willmarquesfotografia@gmail.com",
+    "connection_status": "AUTHORIZATION_WIDGET_REQUESTED_AWAITING_USER_COMPLETION",
+    "reason": "Explicit approval to link specific YouTube channel/account required.",
+    "user_explicit_authorization_received": true
+  },
+  "vidiq_credits": {
+    "remaining": 26,
+    "reserve": 25,
+    "paid_research_performed": false
+  },
+  "account_mapping": {
+    "github_account_label": "Matheus Magh",
+    "github_owner": "matheusmagah-cpu",
+    "youtube_google_account_label": "Will Matos Magalhães",
+    "youtube_channel_handle": "@heroverse74",
+    "youtube_channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+    "distinct_google_accounts": true,
+    "exact_gmail_addresses_not_inferred": true
+  }
 }
