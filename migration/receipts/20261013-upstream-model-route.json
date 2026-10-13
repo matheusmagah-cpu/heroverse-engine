@@ -1,0 +1,38 @@
+{
+  "private_release": {
+    "id": 411926125,
+    "draft": true,
+    "asset": 637720288,
+    "uploaded": true
+  },
+  "readonly_private_access": {
+    "run": 38438891373,
+    "job": 115439994540,
+    "status": "FAIL_HTTP403"
+  },
+  "write_permission_change": "AUTO_REVIEW_REJECTED_NOT_APPLIED",
+  "safe_alternative": "Public official model-files-v1.1 assets with identical pinned sizes and SHA256; credentials not used",
+  "upstream_assets": [
+    {
+      "name": "kokoro-v1.0.fp16.onnx",
+      "size": 163527961,
+      "digest": "sha256:f3a290d384fbb27966d462905c71a46cef9e5fd00516b40df32a0b4afe77ac96",
+      "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/kokoro-v1.0.fp16.onnx"
+    },
+    {
+      "name": "voices-v1.0.bin",
+      "size": 28214398,
+      "digest": "sha256:bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+      "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/voices-v1.0.bin"
+    }
+  ],
+  "workflow_error": {
+    "run": 38439559026,
+    "reason": "workflow truncated by incorrect JS slice argument",
+    "worker_started": false,
+    "corrective_commit": "b8df20ca042950caccef02656d27c0cb37c721a1"
+  },
+  "browser_status": "upload/observation/reset timed out; no additional browser attempts",
+  "production_ready": false,
+  "publication_performed": false
+}
