@@ -1,8 +1,7 @@
 {
   "schema_version": "1.0.0",
   "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
-  "observed_at": "2026-10-14T00:00:00Z",
-  "observation_time_precision": "session_interval_2026-10-13T23:40Z_to_2026-10-14T00:00Z",
+  "observation_time_precision": "Current browser session; exact individual capture timestamps were not retained.",
   "source": "Authenticated YouTube Studio, browser tab5",
   "profile": {
     "name": "HeroVerse",
@@ -92,5 +91,6 @@
     "ordinary_reload_attempted_once": true
   },
   "publication_performed": false,
-  "vidiq_credits_consumed": 0
+  "vidiq_credits_consumed": 0,
+  "recorded_at": "2026-10-13T23:46:21.361Z"
 }
