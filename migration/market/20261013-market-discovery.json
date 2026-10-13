@@ -2085,5 +2085,49 @@
     "window_policy": "Preserve actual running window; never reset it implicitly.",
     "historical_window": "2026-09-04T18:45:51Z through 2026-10-04T18:45:51Z",
     "new_running_window_start": "NOT_VERIFIED"
-  }
+  },
+  "capture_time_note": "Query requested after 2026-10-13T19:48:22Z; evidence processed at recorded processed_at. No exact provider measurement timestamp supplied.",
+  "processed_at": "2026-10-13T19:55:41.888Z",
+  "av_attempts": [
+    {
+      "video_id": "IPMKBDrVwZA",
+      "method": "Native YouTube public transcript export",
+      "result": "NO_TRANSCRIPT_AVAILABLE"
+    },
+    {
+      "video_id": "IPMKBDrVwZA",
+      "method": "Rendered player plus one reload",
+      "result": "NO_VALID_SCENE_OR_AUDIO_OBSERVED_BUFFERING_AT_START",
+      "bot_detection_observed": false
+    }
+  ],
+  "counterexample_leads": [
+    {
+      "id": "htx4YZVYBVs",
+      "channel": "Morning Grace Prayers",
+      "title": "Powerful Morning Prayer To Start Your Day With God | Lord, Forgive Me, Guide Me & Bless Me",
+      "displayed_views": "44 mil",
+      "displayed_age": "3 semanas",
+      "displayed_duration": "22 minutos",
+      "status": "PUBLIC_RECOMMENDATION_LEAD_NOT_MATCHED_BASELINE"
+    },
+    {
+      "id": "tyLYqBFfw0k",
+      "channel": "Morning Grace Prayers",
+      "title": "Start Your Day With God | Morning Prayer For God To Protect My Peace & Guide Me",
+      "displayed_views": "8,5 mil",
+      "displayed_age": "2 semanas",
+      "displayed_duration": "29 minutos",
+      "status": "PUBLIC_RECOMMENDATION_LEAD_NOT_MATCHED_BASELINE"
+    },
+    {
+      "id": "f1gjfSK69u4",
+      "channel": "DailyGracePrayers",
+      "title": "Help Me Lord to Let Go, Protect My Peace | Morning Prayer to Thank God for Another Day",
+      "displayed_views": "300",
+      "displayed_age": "6 dias",
+      "displayed_duration": "31 minutos",
+      "status": "PUBLIC_RECOMMENDATION_LEAD_DIFFERENT_AGE_AND_CHANNEL"
+    }
+  ]
 }
