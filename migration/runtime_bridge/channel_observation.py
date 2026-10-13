@@ -31,6 +31,6 @@ def reconcile(audit, observation):
     result['publication_gate']['critical_open_gates'] = [g['gate'] for g in result['gates'] if g['critical'] and g['status'] != 'PASS']
     result['publication_gate']['reason'] = 'Current profile observed; confirmed editorial coherence remains blocked.'
     result['ypp_application_gate'].update(critical_open_gates=['QUALIFIED_YPP_THRESHOLDS_NOT_MET_AS_OF_2026_10_08'], reason='Studio counters observed with processing delay; eligibility thresholds not met in that snapshot.')
-    result['priority_actions'] = [{'priority':i+1,'action':a,'protected_external_change':False} for i,a in enumerate(['Resolve observed content coherence','Complete audiovisual market review','Qualify full production and replay','Observe Google Auth production settings and actual quota usage'])]
+    result['priority_actions'] = [{'priority':i+1,'action':a,'protected_external_change':False} for i,a in enumerate(['Resolve observed content coherence','Complete audiovisual market review','Qualify full production and replay','Observe Google Auth production settings and actual quota usage','Review home playlists and current catalog language'])]
     result['limitations'].append('Studio qualified counters are as of 2026-10-08, not current Analytics watch time. Upload UI defaults do not configure the API publisher.')
     return result
