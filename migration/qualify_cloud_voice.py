@@ -32,7 +32,27 @@ def synth(root):
     session=ort.InferenceSession(str(root/'kokoro-v1.0.fp16.onnx'),
                 sess_options=options,providers=['CPUExecutionProvider'])
     # Kokoro 0.4.9 accepts an existing session through from_session.
-    kokoro=Kokoro.from_session(session,str(root/'voices-v1.0.bin'))
+    class TypedSession:
+        # Adapter scoped to the exact pinned model input contract; upstream
+        # Kokoro 0.4.9 incorrectly emits int32 speed for this input_ids graph.
+        _model_path=session._model_path
+        corrections=0
+        def run(self, outputs, feed):
+            metadata={item.name:item.type for item in session.get_inputs()}
+            if metadata.get('speed')!='tensor(float)':
+                raise RuntimeError('unexpected speed contract')
+            fixed=dict(feed)
+            speed=np.asarray(fixed['speed'])
+            if speed.dtype==np.int32:
+                fixed['speed']=speed.astype(np.float32)
+                self.corrections+=1
+            elif speed.dtype!=np.float32:
+                raise RuntimeError('unexpected speed input type')
+            return session.run(outputs,fixed)
+        def __getattr__(self, name):
+            return getattr(session,name)
+    typed=TypedSession()
+    kokoro=Kokoro.from_session(typed,str(root/'voices-v1.0.bin'))
     samples, rate=kokoro.create('This is an isolated technical test of the HeroVerse cloud voice.',
                 voice='af_sarah',speed=1.0,lang='en-us')
     samples=np.asarray(samples,dtype=np.float32)
@@ -44,7 +64,7 @@ def synth(root):
     with wave.open(str(root/'diagnostic.wav'),'wb') as w:
         w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate);w.writeframes(pcm.tobytes())
     print(json.dumps({'status':'VOICE_INFERENCE_PASS','duration':duration,'sample_rate':rate,
-        'rms':rms,'samples':len(samples),'wav_sha256':digest(root/'diagnostic.wav'),
+        'rms':rms,'samples':len(samples),'speed_dtype_corrections':typed.corrections,'wav_sha256':digest(root/'diagnostic.wav'),
         'versions':{n:importlib.metadata.version(n) for n in
                     ['kokoro-onnx','onnxruntime','numpy','espeakng-loader','phonemizer-fork']}}),flush=True)
 
