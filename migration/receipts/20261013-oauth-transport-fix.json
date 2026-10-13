@@ -1,0 +1,25 @@
+{
+  "status": "TRANSPORT_FIXED_FRESH_CONSENT_PENDING",
+  "cause": "Hosted runtime rejected redirect:error before outbound requests",
+  "fix": "Use redirect:manual and reject 3xx without following; classify callback failures by stage",
+  "site_commit": "271eb47a5ab0ed2c20efe1ab9f3bf5c5311a47c0",
+  "deployment_id": "appgdep_6acea5faab78819182c5b78704ce7b5f",
+  "deployment_status": "succeeded",
+  "tests_passed": 11,
+  "live_credentialless_probe": {
+    "oauth": {
+      "status": "REACHABLE",
+      "http_status": 404
+    },
+    "youtube": {
+      "status": "REACHABLE",
+      "http_status": 403
+    },
+    "credentials_sent": false
+  },
+  "note": "Unauthenticated HTTP responses demonstrate endpoint reachability only, not OAuth success.",
+  "live_refresh_verified": false,
+  "worker_token_installed": false,
+  "production_ready": false,
+  "publication_performed": false
+}
