@@ -1,0 +1,29 @@
+name: HeroVerse market evidence policy
+on:
+  push:
+    paths:
+      - 'migration/market_evidence_policy.py'
+      - 'migration/test_market_evidence_policy.py'
+      - 'migration/vidiq_credit_policy.py'
+      - 'migration/test_vidiq_credit_policy.py'
+      - 'migration/market/20261013-market-discovery.json'
+      - '.github/workflows/market-evidence-policy.yml'
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-market-evidence-policy
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Validate market fallback and public evidence boundaries
+        run: python3 -m unittest discover -s migration -p test_market_evidence_policy.py -v
+      - name: Validate punctual-only vidIQ credit reserve
+        run: python3 -m unittest discover -s migration -p test_vidiq_credit_policy.py -v
+      - name: Route actual discovery snapshot independently of missing own retention
+        run: python3 migration/market_evidence_policy.py migration/market/20261013-market-discovery.json --now 2026-10-13T19:48:22Z
