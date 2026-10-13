@@ -31,3 +31,7 @@ jobs:
         run: python3 migration/probe_linux_containment.py
       - name: Validate private SQLite snapshots without activating queues
         run: python3 migration/verify_operational_snapshot.py
+      - name: Verify job-scoped private voice model storage
+        env:
+          HEROVERSE_JOB_TOKEN: ${{ github.token }}
+        run: python3 migration/verify_private_voice_asset.py
