@@ -29,3 +29,5 @@ jobs:
         run: python3 -m unittest discover -s migration -p test_linux_atomic_commit.py -v
       - name: Probe kernel containment capability without production workers
         run: python3 migration/probe_linux_containment.py
+      - name: Validate private SQLite snapshots without activating queues
+        run: python3 migration/verify_operational_snapshot.py
