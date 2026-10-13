@@ -180,8 +180,9 @@
     ],
     "authenticated_as": "willmarquesfotografia@gmail.com",
     "vidiq_status": "AUTHORIZED_EXACT_CHANNEL_ID",
-    "studio_status": "SEPARATE_BROWSER_AUTH_PENDING",
-    "credentials_in_repository": false
+    "studio_status": "AUTHENTICATED_EXACT_CHANNEL_ID",
+    "credentials_in_repository": false,
+    "login_credentials_exposed_or_saved": false
   },
   "vidiq_credits": {
     "remaining": 26,
@@ -196,5 +197,35 @@
     "youtube_channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
     "distinct_google_accounts": true,
     "exact_gmail_addresses_not_inferred": true
+  },
+  "youtube_observations": {
+    "source": "Private YouTube Studio rendered UI, exact HeroVerse channel",
+    "dashboard": {
+      "subscribers": 263,
+      "last28days_views": 13,
+      "last28days_watch_hours": 6.1
+    },
+    "ypp": {
+      "displayed_data_as_of": "2026-10-08",
+      "subscribers": 263,
+      "uploads_last90days": 3,
+      "qualified_watch_hours_last365days": 0,
+      "qualified_shorts_views_last90days": 822
+    },
+    "recent_video": {
+      "id": "FifnlNUQKNk",
+      "title": "Rest Is Not Giving Up | A Christian Reflection + Quiet Piano for Prayer",
+      "displayed_since_publication_start": "2026-10-10",
+      "receipt_public_confirmation_at": "2026-10-12T18:58:36Z",
+      "displayed_duration": "3:00:01",
+      "views": 8,
+      "watch_hours": 6.1,
+      "audience_retention": "INSUFFICIENT_DATA"
+    },
+    "qualifiers": [
+      "YPP as-of date predates recent long video confirmation; zero is not rejection of that video's hours.",
+      "Studio since-publication date differs from prior confirmation receipt; retain both.",
+      "Analytics hours are not YPP qualified hours."
+    ]
   }
 }
