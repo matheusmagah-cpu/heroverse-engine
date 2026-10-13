@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-13",
+  "scope": "Accessible HeroVerse cloud resources only; no Windows access",
+  "identity": {
+    "repo": "matheusmagah-cpu/heroverse-engine",
+    "client_id": "663335615694-gs2ivqgl5iaaed44cv3fpvpcfcamnnch.apps.googleusercontent.com",
+    "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA"
+  },
+  "inventory": [
+    {
+      "resource": "GitHub Actions repository/environment secrets",
+      "observation": "This repository has no secrets; This environment has no secrets",
+      "method": "authenticated UI"
+    },
+    {
+      "resource": "GitHub Agents repository secrets",
+      "observation": "This repository has no secrets",
+      "method": "authenticated UI"
+    },
+    {
+      "resource": "GitHub Codespaces repository secrets",
+      "observation": "This repository has no secrets",
+      "method": "authenticated UI"
+    },
+    {
+      "resource": "Library title search token/credentials/client_secret",
+      "matches": 0,
+      "limitations": "No matching filenames; not proof of absence from unindexed or other external storage"
+    },
+    {
+      "resource": "HeroVerse_Linux_Source_Ready_20261013_v2.zip",
+      "credential_named_files_found": false,
+      "limitations": "Source inventory; original secrets deliberately outside repo"
+    },
+    {
+      "resource": "HeroVerse_operational_snapshot.zip",
+      "sha256": "bbd5b7b9daa76b5ac1754eba6dc135e75f15bbeb4e72a79a0a8891c9fd64d790",
+      "members": 28,
+      "databases": 3,
+      "credential_named_members": 0,
+      "credential_column_names": 0,
+      "credential_key_markers_in_text": 0,
+      "database_mode": "read-only immutable",
+      "writes": 0
+    },
+    {
+      "resource": "GitHub private cloud assets release 411926125",
+      "assets": [
+        "HeroVerse_modelos_voz_transferidos.zip"
+      ],
+      "declaration": "No YouTube credentials included"
+    }
+  ],
+  "result": "NO_USABLE_CREDENTIAL_FOUND_IN_CHECKED_RESOURCES",
+  "original_authorization_preserved": true,
+  "cloud_token_provisioned": false,
+  "preparation": {
+    "workflow": ".github/workflows/worker-oauth-qualification.yml",
+    "secret_name": "HERO_YT_AUTHORIZED_USER_JSON",
+    "offline_boundary_tests": 9,
+    "passed": 9,
+    "cloud_workflow_run": false,
+    "implementation": "Restore hash-verified original source and use original oauth_refresh_proof; no publication"
+  },
+  "blockers": [
+    "No authorized runtime token available to current cloud worker",
+    "Google Cloud UI inaccessible in this cloud browser; owner mobile screenshot shows access in own session"
+  ],
+  "credential_values_read_or_printed": false,
+  "vidiq_credits_used": 0,
+  "windows_contact": false,
+  "publication_performed": false,
+  "production_enabled": false
+}
