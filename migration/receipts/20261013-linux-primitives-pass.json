@@ -1,0 +1,18 @@
+{
+  "scope": "Linux primitives only, not full worker qualification",
+  "run": 38432176544,
+  "job": 115416916264,
+  "status": "SUCCESS",
+  "atomic_commit_tests": 3,
+  "memory_max": 67108864,
+  "memory_swap_max": 0,
+  "memory_oom_group": 1,
+  "pids_max": 16,
+  "unprivileged_uid": 1001,
+  "kill_on_parent_close_qualified": false,
+  "worker_started": false,
+  "production_ready": false,
+  "release_authority": false,
+  "operational_snapshot_commit": "64996fdc4640763e1a5f7dac831ab3e65bd0cdbd",
+  "operational_archive_sha256": "bbd5b7b9daa76b5ac1754eba6dc135e75f15bbeb4e72a79a0a8891c9fd64d790"
+}
