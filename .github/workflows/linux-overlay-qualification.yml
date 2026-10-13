@@ -21,7 +21,7 @@ jobs:
       - name: Install isolated fixture runtime and OS font
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends fonts-dejavu-core
+          sudo apt-get install -y --no-install-recommends fonts-dejavu-core ffmpeg
           python3 -m venv "$RUNNER_TEMP/overlay-venv"
           "$RUNNER_TEMP/overlay-venv/bin/python" -m pip install --disable-pip-version-check jsonschema==4.26.0 numpy==2.2.6 Pillow==11.3.0 soundfile==0.13.1
       - name: Verify immutable preimages and original scope/residency fixtures
