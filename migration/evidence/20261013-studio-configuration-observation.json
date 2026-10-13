@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0.0",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "observed_at": "2026-10-14T00:00:00Z",
+  "observation_time_precision": "session_interval_2026-10-13T23:40Z_to_2026-10-14T00:00Z",
+  "source": "Authenticated YouTube Studio, browser tab5",
+  "profile": {
+    "name": "HeroVerse",
+    "handle": "@heroverse74",
+    "description_positioning": "Practical faith for the moment between prayer and action.",
+    "description_full_observed": true,
+    "daily_cadence_promise": false,
+    "banner_present": true,
+    "banner_message": "FROM PRAYER TO ACTION",
+    "avatar_present": true,
+    "watermark_entire_video": true,
+    "external_links_count": 0,
+    "public_business_email": false
+  },
+  "home": {
+    "enabled": true,
+    "sections": [
+      "For you",
+      "Videos (4)",
+      "Shorts (20)",
+      "Past live streams (0)",
+      "Created playlists (2)",
+      "Posts (0)",
+      "Collabs (0)"
+    ],
+    "counts_are_ui_not_reconciled_public_catalog": true,
+    "trailer_observed": false
+  },
+  "channel_settings": {
+    "country_declared": "United States",
+    "country_residence_verified": false,
+    "keywords": [
+      "Christian motivation",
+      "practical faith",
+      "spiritual growth",
+      "biblical wisdom",
+      "faith in action",
+      "prayer and purpose",
+      "Christian encouragement",
+      "Christian storytelling",
+      "cinematic Christian stories",
+      "Bible based motivation",
+      "discipline and faith",
+      "leadership and faith",
+      "God's timing",
+      "hope and purpose",
+      "Christian life"
+    ],
+    "made_for_kids": false,
+    "standard_features_enabled": true,
+    "intermediate_features_enabled": true,
+    "advanced_features_enabled": true
+  },
+  "upload_defaults": {
+    "old_description": "Emotional viral shorts with powerful stories, superheroes, transformations and cinematic moments.\n\nSubscribe for more daily viral content.\n\n#shorts #viral #storytelling",
+    "new_description": "HeroVerse — practical faith for the moment between prayer and action.\n\nExplore Christian reflections, prayer, and encouragement with one clear next step.\n\nSubscribe to HeroVerse for more: https://www.youtube.com/@heroverse74",
+    "saved": true,
+    "persistence_verified_by_reopened_dialog": true,
+    "title_blank": true,
+    "tags_blank": true,
+    "visibility_unset": true,
+    "video_language": "en-US",
+    "title_description_language": "en-US",
+    "license": "Standard YouTube",
+    "category": "Entertainment",
+    "comments_enabled": true,
+    "automatic_chapters": true,
+    "api_publisher_must_set_own_metadata": true
+  },
+  "ypp": {
+    "data_as_of": "2026-10-08",
+    "subscribers": 263,
+    "uploads_last90days": 3,
+    "qualified_watch_hours_365days": 0,
+    "qualified_shorts_views_90days": 822,
+    "eligible_tier": "NONE",
+    "pending_data_must_not_be_treated_as_rejected_hours": true
+  },
+  "content_coherence": {
+    "status": "BLOCKED",
+    "evidence_ref": "migration/evidence/20261013-own-opening-coherence.json",
+    "reason": "Published rest title/audio and visual One Faithful Step Under Pressure diverge; diagnostic derivative is not a full approved production."
+  },
+  "google_auth_configuration": {
+    "status": "UNOBSERVED",
+    "browser_result": "Site Unavailable / Unable to access this site.",
+    "ordinary_reload_attempted_once": true
+  },
+  "publication_performed": false,
+  "vidiq_credits_consumed": 0
+}
