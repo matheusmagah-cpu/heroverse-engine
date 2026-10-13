@@ -37,6 +37,14 @@ def main(mode):
         c=sqlite3.connect(f'file:{db}?mode=ro',uri=True)
         if c.execute('pragma integrity_check').fetchone()[0]!='ok':raise PermissionError('LEDGER_EXPORT_INVALID_KEEP_CLAIM')
         SQL.write_text('\n'.join(c.iterdump())+'\n');c.close()
+        observed=Path('cloud-evidence/evidence.json')
+        if observed.exists():
+            evidence=json.loads(observed.read_text())
+            if evidence.get('publication_performed') is not False:
+                raise PermissionError('OBSERVATION_EFFECT_BOUNDARY_INVALID')
+            immutable=Path('migration/evidence')/('observer-'+run+'.json')
+            if immutable.exists():raise PermissionError('OBSERVATION_ALREADY_PERSISTED')
+            immutable.write_text(observed.read_text())
         STATE.write_text(json.dumps({'last_checkpointed_run':run,'collection_complete':Path('cloud-evidence/summary.json').exists(),'publication_performed':False}))
         CLAIM.unlink();commit('Checkpoint original observer ledger after bounded run')
     else:raise ValueError('UNKNOWN_CHECKPOINT_MODE')
