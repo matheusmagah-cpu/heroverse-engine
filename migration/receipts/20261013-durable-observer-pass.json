@@ -1,0 +1,25 @@
+{
+  "status": "PASS_DURABLE_CHECKPOINT_ONLY",
+  "run_id": 38479003411,
+  "job_id": 115576694819,
+  "head_sha": "f965076c6749898557ebbd536b8a89722ca3064e",
+  "owner_authorization": "User confirmed permission for this workflow repository checkpoints",
+  "remote_state_verified": true,
+  "cloud_tests": {
+    "run": 19,
+    "passed": 18,
+    "skipped": 1,
+    "failed": 0
+  },
+  "local_tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "google_calls": 0,
+  "vidiq_credits": 0,
+  "production_ready": false,
+  "publication_performed": false,
+  "claim_persisted_before_effects": true,
+  "ledger_checkpoint_persisted_afterward": true,
+  "full_automation_enabled": false
+}
