@@ -1,0 +1,32 @@
+{
+  "status": "PASS_NATIVE_SOURCE_COMPOSITION_AND_PROVENANCE_ONLY",
+  "undeclared_font_rejected": "VisualRecipeContractError",
+  "font_sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895",
+  "source_evidence": {
+    "schema_version": "1.0.0",
+    "asset_id": "audio-still-b50dbb8f2151dec546b291d3604724f39e0320b14ddab8d3ec9c03cef8a7a4ee",
+    "asset_type": "PROJECT_OWNED_PROCEDURAL_STATIC",
+    "source_svg": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/diagnostics/linux-coherent-rest-title-v1/composition.svg",
+    "source_svg_hash": "sha256:59dca4a8250b17bb2d07675ecd7a251d1bee22e00e45ccb45c67f12f33138902",
+    "raster": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/diagnostics/linux-coherent-rest-title-v1/composition.png",
+    "raster_hash": "sha256:bbd6aaf2c37caf9f47dc7b41880e4bce244afe7dc8e3b831a7829e3565c83a95",
+    "provider": "HeroVerseOwnedAudioStill@1.0.0",
+    "ownership_basis": "Locally generated geometric design and original supplied title; no third-party image, audio or photographed person.",
+    "platform_disclosure": {
+      "required": false,
+      "reason": "Designed typography, not a realistic depiction of an event or person."
+    },
+    "decision": "AUTO_VERIFIED_PROCEDURAL_SOURCE",
+    "limitations": [
+      "Source provenance only; no editorial, audio, quality or publication approval."
+    ],
+    "verified_at": "2026-10-13T23:05:00Z",
+    "composition_manifest": {
+      "path": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/diagnostics/linux-coherent-rest-title-v1/source-manifest.json",
+      "sha256": "sha256:bce2e75366cc14122944af178a30523a80cb4a454c98b2305bb796e93daf2c4f"
+    }
+  },
+  "title": "Rest Is Not Giving Up",
+  "publication_authorized": false,
+  "full_production_validated": false
+}
