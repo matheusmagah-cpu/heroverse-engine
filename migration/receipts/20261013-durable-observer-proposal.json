@@ -1,0 +1,30 @@
+{
+  "status": "IMPLEMENTED_NOT_ACTIVATED_PENDING_PERMISSION",
+  "local_tests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "proposal": "migration/proposals/official-evidence-durable.yml",
+  "proposed_permission": "contents: write for this workflow only",
+  "proposed_credential_setting": "persist-credentials: true only for ephemeral GitHub checkout",
+  "purpose": "Commit observer claim before API reads and preserve original quota ledger afterward",
+  "auto_review_rejected": true,
+  "reason": "Persistent repository write permission was judged insufficiently explicitly authorized",
+  "active_workflow_changed": false,
+  "collector_guard": "Fails closed without durable run claim; no new read run dispatched",
+  "production_enabled": false,
+  "publication_performed": false,
+  "additional_blocks": [
+    "Durable worker media residency",
+    "Audiovisual market observation: player buffering after one reload; transcript only available",
+    "Controlled original production/quality/restore/idempotence cycle"
+  ],
+  "unaffected_work": {
+    "own_draft_frames_inspected": [
+      0,
+      8
+    ],
+    "candidate_video_downloaded": false,
+    "original_assets_preserved": true
+  }
+}
