@@ -1,0 +1,60 @@
+{
+  "status": "LEGACY_LOCATIONS_RESOLVED_BY_PINNED_ROOT_AND_EXACT_HASH",
+  "bindings": [
+    {
+      "artifact": "video",
+      "status": "PASS",
+      "canonical_path": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/production/audio-christian-rest-editorial-v4/renders/christian-rest.phase5-draft.mp4",
+      "sha256": "3ff0806ab4d7d18548a072b35eb66491ba4a82bb7f59617d9a953d88a411bda6"
+    },
+    {
+      "artifact": "thumbnail",
+      "status": "PASS",
+      "canonical_path": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/production/audio-christian-rest-editorial-v4/thumbnail/owned-static.png",
+      "sha256": "fe518448be7d56e9d553065477beea1cde80e519eedd12102530f4547f5cdbdb"
+    },
+    {
+      "artifact": "captions",
+      "status": "PASS",
+      "canonical_path": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/production/audio-christian-rest-editorial-v4/qa/opening-captions.srt",
+      "sha256": "170659d79cd707a3aa57b4befb9c02190c03ad52de704d720a18dd2f7a729857"
+    },
+    {
+      "artifact": "publication_package",
+      "status": "PASS",
+      "canonical_path": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/production/audio-christian-rest-editorial-v4/publication_package.json",
+      "sha256": "3af8381fa5f7d32ac204fe652d42d51a0ca12df199173780c45a18d68e9687ae"
+    },
+    {
+      "artifact": "autonomous_review",
+      "status": "PASS",
+      "canonical_path": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/production/audio-christian-rest-editorial-v4/qa/instrumental_quality_receipt.json",
+      "sha256": "2195e13e2e7373ca8ef95d01f54953421c90b0816e7877fbf76b4b3705a85615"
+    },
+    {
+      "artifact": "format_transition",
+      "status": "PASS",
+      "canonical_path": "/workspace/scratch/19a457603cc9/validation-20261013/project/output/production/audio-christian-rest-editorial-v4/autonomous-review/format_pack_transition_receipt.json",
+      "sha256": "fc03048d39a372c503fb223a0b65ab2b15b287e3bb6e0d7296078671fc085c1f"
+    },
+    {
+      "artifact": "oauth_readiness",
+      "status": "MISSING_CURRENT_READINESS_INPUT"
+    },
+    {
+      "artifact": "scope_requirement",
+      "status": "MISSING_CURRENT_READINESS_INPUT"
+    },
+    {
+      "artifact": "channel_audit",
+      "status": "MISSING_CURRENT_READINESS_INPUT"
+    },
+    {
+      "artifact": "zero_cost",
+      "status": "MISSING_CURRENT_READINESS_INPUT"
+    }
+  ],
+  "historical_receipt_unchanged": true,
+  "publication_performed": false,
+  "source_archive_preserved": true
+}
