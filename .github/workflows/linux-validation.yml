@@ -1,0 +1,23 @@
+name: HeroVerse Linux validation
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/linux-validation.yml'
+      - 'migration/verify_cloud_source.py'
+      - 'HeroVerse_Linux_Source_Ready_20261013_v2.zip'
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-linux-validation
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Verify private source and bounded infrastructure
+        run: python3 migration/verify_cloud_source.py
