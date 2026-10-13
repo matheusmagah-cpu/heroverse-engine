@@ -1,0 +1,24 @@
+{
+  "status": "OBSERVED_CONTENT_COHERENCE_ISSUE_NOT_CAUSAL_PERFORMANCE_PROOF",
+  "video_id": "FifnlNUQKNk",
+  "master_sha256": "3ff0806ab4d7d18548a072b35eb66491ba4a82bb7f59617d9a953d88a411bda6",
+  "publication_receipt_sha256": "745fcf7811497f408d61a4a74310c83d152d0c65c49b26d1f219fe6b0ba0d6a4",
+  "historical_receipt_preserved": true,
+  "observed_visual_text": "One Faithful Step Under Pressure",
+  "visual_samples_seconds": [
+    0,
+    65
+  ],
+  "published_title": "Rest Is Not Giving Up | A Christian Reflection + Quiet Piano for Prayer",
+  "audio_subject": "Rest, responsibility and quiet prayer",
+  "diagnostic_asr_speech_ends_seconds": 65.5,
+  "hypothesis": "Opening promise and image should align with rest/prayer audience; current static message describes another angle",
+  "limitations": [
+    "Tiny owned sample does not prove cause of CTR",
+    "Speech end based on ASR diagnostic, requires audio QA",
+    "Not a complete video quality assessment",
+    "Draft canary file is not assumed identical to published canary"
+  ],
+  "next_action": "Versioned semantic and packaging review in original manager before new release; preserve existing publication and do not reupload unchanged master",
+  "publication_performed": false
+}
