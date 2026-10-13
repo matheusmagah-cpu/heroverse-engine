@@ -33,3 +33,5 @@ jobs:
         run: python3 migration/verify_operational_snapshot.py
       - name: Restore exact public model bytes without private token authority
         run: python3 migration/verify_public_voice_asset.py
+      - name: Qualify parent lifetime, detached children, memory and output bounds
+        run: python3 -m unittest discover -s migration -p test_linux_bounded_worker.py -v
