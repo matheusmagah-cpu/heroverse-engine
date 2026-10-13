@@ -7,7 +7,7 @@ Source SHA256: fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10.
 
 GitHub App installation explicitly authorized by owner; private read/write verified by README and validation commits. Account GitHub Free observed: 0/2000 minutes and 0/0.5GB storage before this run; extra spend Actions budget USD0, Usage blocked. Do not change budgets or billing.
 
-Local bounded archive validation PASS: 830 SHA256,470 AST, non-blocking POSIX second-owner rejection, 2s synthetic H264/AAC render and full decode. GitHub run 38430802194 queued when recorded; must inspect actual final result. A queued workflow is not a passed test.
+Local bounded archive validation PASS: 830 SHA256,470 AST, non-blocking POSIX second-owner rejection, 2s synthetic H264/AAC render and full decode. GitHub run38430802194 failed at absent FFmpeg after hash/AST/lock checks. Failure retained. Corrective commit ece767b3615e6a268b7fbd09d22e849d1ee371bd installs FFmpeg and pins checkout. Run38430954515 / job115412685844 SUCCESS on Ubuntu24.04: archive SHA256,830 hashes,470 ASTs, POSIX lock,2s H264/AAC render+full decode PASS. No Windows contact. Receipt migration/receipts/20261013-cloud-validation-pass.json. Full productive pipeline remains NOT_VALIDATED.
 
 ## Remaining acceptance
 
