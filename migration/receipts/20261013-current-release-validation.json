@@ -1,0 +1,71 @@
+{
+  "status": "CONTROLLED_RELEASE_REVALIDATION_BLOCKED",
+  "native_release_validator": {
+    "status": "BLOCKED",
+    "exception_type": "PermissionError",
+    "reason": "Release artifact changed or disappeared: video"
+  },
+  "historical_receipt_unchanged": true,
+  "historical_bindings": [
+    {
+      "artifact": "video",
+      "original_relative_path": "output/production/audio-christian-rest-editorial-v4/renders/christian-rest.phase5-draft.mp4",
+      "available": true,
+      "hash_matches_historical_binding": true
+    },
+    {
+      "artifact": "thumbnail",
+      "original_relative_path": "output/production/audio-christian-rest-editorial-v4/thumbnail/owned-static.png",
+      "available": true,
+      "hash_matches_historical_binding": true
+    },
+    {
+      "artifact": "captions",
+      "original_relative_path": "output/production/audio-christian-rest-editorial-v4/qa/opening-captions.srt",
+      "available": true,
+      "hash_matches_historical_binding": true
+    },
+    {
+      "artifact": "publication_package",
+      "original_relative_path": "output/production/audio-christian-rest-editorial-v4/publication_package.json",
+      "available": true,
+      "hash_matches_historical_binding": true
+    },
+    {
+      "artifact": "autonomous_review",
+      "original_relative_path": "output/production/audio-christian-rest-editorial-v4/qa/instrumental_quality_receipt.json",
+      "available": true,
+      "hash_matches_historical_binding": true
+    },
+    {
+      "artifact": "format_transition",
+      "original_relative_path": "output/production/audio-christian-rest-editorial-v4/autonomous-review/format_pack_transition_receipt.json",
+      "available": true,
+      "hash_matches_historical_binding": true
+    },
+    {
+      "artifact": "oauth_readiness",
+      "original_relative_path": "output/integrations/youtube/heroverse/operational-readiness.json",
+      "available": false
+    },
+    {
+      "artifact": "scope_requirement",
+      "original_relative_path": "output/integrations/youtube/heroverse/oauth-runtime-scope-requirement.json",
+      "available": false
+    },
+    {
+      "artifact": "channel_audit",
+      "original_relative_path": "output/audits/channel/heroverse/channel-readiness-audit.json",
+      "available": false
+    },
+    {
+      "artifact": "zero_cost",
+      "original_relative_path": "output/operations/zero-cost/phase5-publication-pipeline-preflight.json",
+      "available": false
+    }
+  ],
+  "current_semantic_coherence": "BLOCKED_OBSERVED_TITLE_MISMATCH",
+  "oauth_worker": "PREVIOUS_LIVE_REFRESH_PASS_NOT_REPEATED",
+  "publication_performed": false,
+  "windows_contacted": false
+}
