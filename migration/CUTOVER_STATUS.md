@@ -59,3 +59,17 @@ Added migration/qualify_linux_overlay_cloud.py and a contents-read-only, four-mi
 Local exec process creation currently fails with exec-server "No such file or directory", including explicit /bin/bash/current workspace. This prevents materialization/streaming of archived media in this session, not proof of lost durable archives. Read-only Git blob probe for previously attempted master part001/e1cf99bf30e50e5ddf2a933e57795d1b336a65f2 returned404; no full master residency in the worker is claimed and no stalled upload was repeated.
 
 Next actual acceptance remains private worker-reachable media/model restoration with full hashes, existing OAuth secret secure provisioning plus exact-channel refresh proof, phase-specific controlled original production, audiovisual QA and replay without duplicate effects. No Windows contact, ledger/queue/gate mutation, credit call, purchase or publication in this continuation.
+
+## Authoritative current continuation — 2026-10-13 22:30 UTC
+
+Supersedes earlier unresolved transport/OAuth statements without rewriting historical evidence. Fresh Linux overlay run38468949446 PASS. Worker OAuth run38475735622/job115565840349 PASS: noninteractive refresh and exact HeroVerse channel verified, four requested scopes, no publication. Credentials reside only in encrypted GitHub secret HERO_YT_AUTHORIZED_USER_JSON; no repeated consent needed.
+
+Official read-only collection run38476824992/job115569451214 PASS. Restored original quota accounting,15Data APIunits,zero vidIQ credits;239marketvideo observations >180s,sixchannels,eightown Analytics basicreports. Reporting jobs already existed and were read, not recreated. Immutable observations are migration/evidence/20261013-official-observations.json. Cohort projection corrected by offline replay, not API recollection.
+
+Five original media/model assets reconstructed from transferred chunks with exact manifest byte counts and SHA256. Receipt migration/receipts/20261013-original-assets-restored.json includes MP4/FLAC stream probes; it does not assert full decoding, perceptual approval or worker-reachable durable residency. Windows untouched; no synthesis or render repeated. Earlier local process-creation failure is resolved for this session.
+
+Original quota continuation durably preserved as migration/evidence/quota-continuation-38476824992.sql, SHA256 d0c9a0fb16a387130afc49e2a4b05cc620827bec321d7d09b471b429549bbefc, SQLite integrity PASS. Existing collector still starts from historical snapshot: DO NOT run again until current continuation is restored/reconciled and subsequent debits preserved. No schedule enabled.
+
+Owner now prioritizes rapid monetization over visual complexity or personal format preferences. Decision and verified current/upcoming YPP thresholds recorded in migration/MONETIZATION_DECISION.md. Market CTR/revenue remain unknown; recent prayer candidates require audiovisual observation. Existing own 3h video remains under observation, not regenerated.
+
+Remaining acceptance: current reach/CTR, true audiovisual mining, restored historical narrative_script input if available, durable worker media access, existing manager ingestion and controlled production/perceptual QA/restore/no-duplicate proof. Phase6 in progress; phases7/8 not certified. Supervisor disabled, no new publication or monetization success claimed.
