@@ -2,7 +2,7 @@ name: HeroVerse bounded official evidence
 on:
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: heroverse-official-evidence
   cancel-in-progress: false
@@ -13,7 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          persist-credentials: false
+          persist-credentials: true
+      - name: Claim durable observer and restore current quota source
+        id: durable_claim
+        run: python3 migration/durable_evidence_checkpoint.py claim
       - name: Test observation boundaries
         run: python3 -m unittest discover -s migration -p test_collect_official_evidence.py -v
       - name: Check authorized token before dependencies
@@ -37,6 +40,9 @@ jobs:
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
+      - name: Commit durable quota continuation
+        if: always() && steps.durable_claim.outcome == 'success'
+        run: python3 migration/durable_evidence_checkpoint.py checkpoint
       - name: Preserve evidence and quota continuation
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
