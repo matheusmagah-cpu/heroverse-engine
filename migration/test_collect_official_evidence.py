@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 import zipfile
-from collect_official_evidence import CHANNEL,duration,stratum,exact_owned,exportable,restore,sha,report_rows
+from collect_official_evidence import CHANNEL,duration,stratum,exact_owned,exportable,restore,sha,report_rows,public_projection
 
 class EvidenceBoundaryTests(unittest.TestCase):
     def test_wrong_owned_channel_cannot_admit_collection(self):
@@ -29,5 +29,11 @@ class EvidenceBoundaryTests(unittest.TestCase):
         with self.assertRaises(ValueError):report_rows({'columnHeaders':[{'name':'views'}],'rows':[[1,2]]})
     def test_missing_analytics_rows_remain_empty_not_zero(self):
         self.assertEqual(report_rows({'columnHeaders':[{'name':'views'}]}),[])
+    def test_public_cohort_fields_require_observed_public_privacy(self):
+        for status in ['private','unlisted',None]:
+            row=public_projection({'id':'example','status':{'privacyStatus':status}})
+            self.assertFalse(row['public_fields_only']);self.assertNotEqual(row['availability'],'public')
+        row=public_projection({'id':'example','status':{'privacyStatus':'public'}})
+        self.assertTrue(row['public_fields_only']);self.assertEqual(row['webpage_url'],'https://www.youtube.com/watch?v=example')
 
 if __name__=='__main__':unittest.main()
