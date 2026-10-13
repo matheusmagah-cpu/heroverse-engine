@@ -39,11 +39,12 @@ def keeper(unit, memory, argv):
     def owner_lifetime():
         # EOF cannot be forged by a worker: child stdin is DEVNULL and this fd
         # is never inherited by measurement children.
-        while sys.stdin.buffer.read(1): pass
+        while os.read(0,1): pass
         os._exit(75)
     threading.Thread(target=owner_lifetime,daemon=True).start()
     child=subprocess.Popen(argv,stdin=subprocess.DEVNULL,close_fds=True)
-    return child.wait()
+    # No buffered-I/O finalization while the lifeline reader is blocked.
+    os._exit(child.wait())
 
 def run_bounded(argv,*,cwd,timeout_seconds=30,memory_bytes=256*1024**2,max_log_bytes=1024**2):
     limits(timeout_seconds,memory_bytes,max_log_bytes)
@@ -85,6 +86,7 @@ def run_bounded(argv,*,cwd,timeout_seconds=30,memory_bytes=256*1024**2,max_log_b
     finally:
         if not process.stdin.closed:process.stdin.close()
         selector.close()
+        process.stdout.close()
         try:process.wait(timeout=12)
         except subprocess.TimeoutExpired:
             # Never promote incomplete cleanup; no unbounded fallback/host kill.
