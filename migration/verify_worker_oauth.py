@@ -7,7 +7,7 @@ import sys
 import tempfile
 import zipfile
 
-CLIENT_ID='663335615694-gs2ivqgl5iaaed44cv3fpvpcfcamnnch.apps.googleusercontent.com'
+CLIENT_ID='663335615694-nptfs2spuuq32nv4688emjl6rophe974.apps.googleusercontent.com'
 SCOPES={'https://www.googleapis.com/auth/'+s for s in
         ('youtube.readonly','yt-analytics.readonly','youtube.upload','youtube.force-ssl')}
 DIGEST='fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10'
