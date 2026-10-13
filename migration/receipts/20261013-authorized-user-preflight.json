@@ -1,0 +1,14 @@
+{
+  "status": "AUTHORIZED_USER_PREFLIGHT_PASS",
+  "client_id": "663335615694-nptfs2spuuq32nv4688emjl6rophe974.apps.googleusercontent.com",
+  "required_scope_count": 4,
+  "refresh_token_present": true,
+  "secret_values_logged": false,
+  "expiry": "2026-10-13T22:49:56.115Z",
+  "worker_secret_name": "HERO_YT_AUTHORIZED_USER_JSON",
+  "worker_secret_installed": false,
+  "live_noninteractive_refresh_verified": false,
+  "publication_performed": false,
+  "production_ready": false,
+  "next_step": "Owner installs uploaded authorized-user JSON through GitHub encrypted secret form; then dispatch original proof workflow."
+}
