@@ -14,9 +14,11 @@ def alive(pid):
 
 class KernelTests(unittest.TestCase):
     def test_kernel_memory_ceiling_refuses_excess_allocation(self):
-        result=run_bounded([sys.executable,'-c','import time;value=bytearray(200*1024**2);time.sleep(10)'],
+        result=run_bounded([sys.executable,'-c','import time;print("memory-probe-started",flush=True);value=bytearray(200*1024**2);print("memory-probe-completed",flush=True);time.sleep(10)'],
             cwd=Path.cwd(),memory_bytes=64*1024**2,timeout_seconds=4)
         self.assertEqual(result['status'],'FAILED',result)
+        self.assertIn('memory-probe-started',result['stdout'],result)
+        self.assertNotIn('memory-probe-completed',result['stdout'],result)
 
     def test_success_and_log_limit(self):
         good=run_bounded([sys.executable,'-c','print("worker-ok")'],cwd=Path.cwd())
