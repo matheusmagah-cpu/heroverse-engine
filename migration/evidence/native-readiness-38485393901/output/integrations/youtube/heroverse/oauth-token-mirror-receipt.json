@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "receipt_id": "oauth-token-mirror-7ba017c6a8556b896e4a",
+  "integration_id": "youtube-heroverse-v1",
+  "status": "MIRRORED",
+  "source_class": "OAUTH_LOCAL_SECRET_OUTSIDE_WORKSPACE",
+  "destination_class": "LINUX_TASK_SECRET_OUTSIDE_WORKSPACE",
+  "source_outside_workspace": true,
+  "destination_outside_workspace": true,
+  "source_sha256": "7ba017c6a8556b896e4a9d5b1b92d59e95da286d5ece539850c267e2452274b6",
+  "destination_sha256": "7ba017c6a8556b896e4a9d5b1b92d59e95da286d5ece539850c267e2452274b6",
+  "size_bytes": 858,
+  "required_scopes": [
+    "https://www.googleapis.com/auth/youtube.force-ssl",
+    "https://www.googleapis.com/auth/youtube.readonly",
+    "https://www.googleapis.com/auth/youtube.upload",
+    "https://www.googleapis.com/auth/yt-analytics.readonly"
+  ],
+  "granted_scopes": [
+    "https://www.googleapis.com/auth/youtube.force-ssl",
+    "https://www.googleapis.com/auth/youtube.readonly",
+    "https://www.googleapis.com/auth/youtube.upload",
+    "https://www.googleapis.com/auth/yt-analytics.readonly"
+  ],
+  "refresh_token_present": true,
+  "atomic_replace": true,
+  "secret_logged": false,
+  "technical_cost_brl": 0,
+  "mirrored_at": "2026-10-13T23:37:58.884762Z"
+}

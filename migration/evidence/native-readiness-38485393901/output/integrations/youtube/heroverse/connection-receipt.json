@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "receipt_id": "cloud-connection-oauth-refresh-c2d41d484bdce3412eab",
+  "integration_id": "youtube-heroverse-v1",
+  "status": "CONNECTED",
+  "expected_channel": {
+    "handle": "@heroverse74",
+    "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA"
+  },
+  "observed_channel": {
+    "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+    "title": "HeroVerse",
+    "custom_url": "@heroverse74",
+    "subscriber_count": 263,
+    "video_count": 23,
+    "view_count": 2677
+  },
+  "identity_verified": true,
+  "capabilities": [
+    {
+      "capability": "CHANNEL_READ",
+      "status": "CONNECTED",
+      "reason": "Existing official read observation plus current exact-channel refresh proof."
+    },
+    {
+      "capability": "ANALYTICS_READ",
+      "status": "CONNECTED",
+      "reason": "Existing official read observation plus current exact-channel refresh proof."
+    },
+    {
+      "capability": "UPLOAD",
+      "status": "CONFIGURED_BLOCKED",
+      "reason": "Scope granted; production gates still apply."
+    },
+    {
+      "capability": "CUSTOM_THUMBNAIL",
+      "status": "CONFIGURED_BLOCKED",
+      "reason": "Scope granted; production gates still apply."
+    },
+    {
+      "capability": "CAPTION_UPLOAD",
+      "status": "CONFIGURED_BLOCKED",
+      "reason": "Scope granted; production gates still apply."
+    }
+  ],
+  "authorization": {
+    "oauth_flow": "WEB_SERVER_AUTHORIZATION_CODE",
+    "requested_scopes": [
+      "https://www.googleapis.com/auth/youtube.readonly",
+      "https://www.googleapis.com/auth/yt-analytics.readonly",
+      "https://www.googleapis.com/auth/youtube.upload",
+      "https://www.googleapis.com/auth/youtube.force-ssl"
+    ],
+    "granted_scopes": [
+      "https://www.googleapis.com/auth/youtube.force-ssl",
+      "https://www.googleapis.com/auth/youtube.readonly",
+      "https://www.googleapis.com/auth/youtube.upload",
+      "https://www.googleapis.com/auth/yt-analytics.readonly"
+    ],
+    "token_storage": "LOCAL_OUTSIDE_WORKSPACE",
+    "secret_logged": false
+  },
+  "analytics_probe": {
+    "status": "PASS",
+    "start_date": "2026-10-10",
+    "end_date": "2026-10-13",
+    "metrics": [
+      "views",
+      "estimatedMinutesWatched"
+    ],
+    "row_count": 1,
+    "private_values_persisted": false
+  },
+  "publication_guard": {
+    "publish_mode": "dry-run",
+    "human_review": "PENDING",
+    "format_pack_status": "PROTOTYPED",
+    "upload_permitted": false
+  },
+  "external_cost_usd": 0,
+  "created_at": "2026-10-13T22:18:13.514310+00:00"
+}
