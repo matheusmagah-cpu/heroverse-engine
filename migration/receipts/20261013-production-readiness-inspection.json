@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-10-13",
+  "environment": "ChatGPT scratch Linux; not GitHub production worker",
+  "source_archive_sha256": "fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10",
+  "dependencies": {
+    "jsonschema": "4.26.0",
+    "numpy": "2.2.6",
+    "Pillow": "11.3.0",
+    "soundfile": "0.13.1"
+  },
+  "checks": [
+    {
+      "suite": "test_phase6_asset_residency.py",
+      "status": "PASS",
+      "tests": 7,
+      "limitations": "Fixture tests; do not prove real durable media residency."
+    },
+    {
+      "suite": "test_oauth_scope_requirements.py",
+      "status": "FAIL",
+      "tests": 1,
+      "reason": "Final assertion expects ffmpeg.exe/ffprobe.exe; observed Linux ffmpeg/ffprobe.",
+      "limitations": "Not a live OAuth or cloud credential verification. Original file preserved; platform assertion correction pending."
+    }
+  ],
+  "findings": [
+    {
+      "file": "hero_engine/render_creative_v2_phase5.py",
+      "lines": [
+        24,
+        92
+      ],
+      "status": "NEEDS_LINUX_FONT_QUALIFICATION",
+      "reason": "FONT_CANDIDATES contains only two Windows font paths; font asset availability and rights need validation."
+    }
+  ],
+  "blockers": [
+    "PR #1 main integration approval pending",
+    "worker-owned YouTube OAuth with exact channel probe/refresh proof",
+    "durable private media/model/database access and restore proof",
+    "original full pipeline, real audiovisual QA, no-duplicate replay",
+    "market audiovisual comparison and long/Short cadence not validated"
+  ],
+  "production_enabled": false,
+  "publication_performed": false,
+  "vidiq_credit_calls": 0
+}
