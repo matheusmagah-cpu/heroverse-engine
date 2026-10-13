@@ -37,3 +37,10 @@ Reutilizar provas válidas e recursos existentes; resolver somente o delta da mi
 Distinguir histórico comprovado, estado observado agora e hipótese ainda não verificada.
 Não repetir testes equivalentes sem alteração/falha nova. Não confundir testes de fixtures com operação real.
 O proprietário requer precisão, aceleração e ausência de retrabalho.
+
+## Escopo confirmado pelo proprietário — operação somente na nuvem
+Em13/10/2026 o proprietário esclareceu: não há mais Windows como ambiente de trabalho. Usar o projeto atual e seus recursos cloud; referências Windows acima são histórico, não dependência nem requisito para continuar. Não pedir que o proprietário ligue/recupere Windows como primeira solução.
+
+Inspeção direta atual da página GitHub Actions secrets em matheusmagah-cpu/heroverse-engine: mensagens This repository has no secrets e This environment has no secrets. Nenhum valor foi lido; nenhuma configuração alterada. A árvore de main confirma fonteZIP e operational_snapshotZIP. FonteZIP local contém módulos/schemas/testes OAuth, sem arquivo de token/client credentials. Snapshot operacional é documentado pelo verificador como3bancos; inventário de outros armazenamentos ainda não completo. Não concluir ausência universal de credencial a partir dessas observações limitadas.
+
+Próximo passo: localizar a credencial em recursos já existentes do projeto/cloud. Se não encontrada após inventário completo, autorizar o cliente existente e provisionar secret por fluxo seguro, sem recriar cliente, branding ou voltar ao Windows. Autorização antiga documentada continua preservada; readiness cloud não pode ser declarada sem refresh e identidade reais.
