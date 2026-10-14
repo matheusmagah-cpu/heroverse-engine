@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "original_preserved": true,
+  "candidate_v1": {
+    "sha256": "f701bc9c3c4b93780ace7208314ca7060a568dd60d9b9ecf4931a253de28e1a3",
+    "size_bytes": 392102153,
+    "all_original_aac_packets_identical": true,
+    "minimum_text_local_ssim": 0.9951269651434405,
+    "maximum_colour_delta_e": 35.72235107421875
+  },
+  "not_qualified_reason": "Explicit BT709 conversion in the native source filter was omitted; no current native codec calibration/release acceptance. Replaced by separately generated v2, not overwritten.",
+  "partial_full_decode_stopped": true,
+  "quality_authorized": false,
+  "publication_authorized": false,
+  "limitation": "Maximum pixel colour error includes chroma subsampling at accent boundaries; this value alone is not a failed native calibrated threshold."
+}
