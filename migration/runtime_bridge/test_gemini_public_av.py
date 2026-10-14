@@ -1,6 +1,6 @@
 import copy, hashlib, json, unittest
 from datetime import datetime, timezone, timedelta
-from gemini_public_av import analyze, build_request,validate_report
+from gemini_public_av import analyze, build_request,validate_report,normalize_report
 
 NOW = datetime(2026,10,14,10,45,tzinfo=timezone.utc)
 SOURCE = {'video_id':'7GvhWbXDWHQ','duration_seconds':1178,'visibility':'PUBLIC'}
@@ -74,6 +74,19 @@ class Tests(unittest.TestCase):
         self.assertEqual(r['failure_code'],'PROVIDER_BLOCKED_OR_TRUNCATED')
     def test_private_media_rejected(self):
         with self.assertRaises(PermissionError): build_request({**SOURCE,'visibility':'PRIVATE'})
+    def test_lossless_normalization_preserves_words_and_timestamps(self):
+        original={**REPORT,'segments':[{**REPORT['segments'][0],
+            'audio_speech':'exact original words','limitations':'exact caveat'}]}
+        del original['segments'][0]['audio_summary']
+        converted=normalize_report(original)
+        self.assertEqual(converted['segments'][0]['audio_summary'],'exact original words')
+        self.assertEqual(converted['segments'][0]['limitations'],['exact caveat'])
+        self.assertEqual(converted['segments'][0]['start_seconds'],0)
+        self.assertNotIn('audio_summary',original['segments'][0])
+        validate_report(converted,SOURCE)
+    def test_normalization_never_fills_missing_visual_modality(self):
+        original={**REPORT,'visual_received':False}
+        with self.assertRaises(PermissionError):validate_report(normalize_report(original),SOURCE)
     def test_window_receipt_does_not_claim_whole_video(self):
         report={**REPORT,'coverage':'FULL_WINDOW','window_start_seconds':240,
             'window_end_seconds':480,'segments':[{**REPORT['segments'][0],
