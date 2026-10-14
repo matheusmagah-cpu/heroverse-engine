@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": 38488744912,
+  "job_id": 115608644224,
+  "head_sha": "e8b655343b41069dcfb8634f7edc7fde63ec5da5",
+  "status": "SUCCESS",
+  "tests": {
+    "original_scope": 1,
+    "original_residency": 7,
+    "editorial_alignment": 3,
+    "historical_database_recovery": 2,
+    "total": 13,
+    "passed": 13
+  },
+  "new_effects": {
+    "google_calls": 0,
+    "vidiq_calls": 0,
+    "render_calls": 0,
+    "publish_calls": 0
+  },
+  "historical_recovery": {
+    "snapshots": 130,
+    "coverage_records": 143,
+    "cohorts": 5,
+    "cohort_members": 35,
+    "ledger_events": 130,
+    "payload_hashes_verified": 260,
+    "database_mutated": false,
+    "canonical_channel_model_recovered": false
+  },
+  "semantic_fix": {
+    "shared_native_reader": "hero_engine/render_phase5.py::_rest_render_inputs",
+    "historical_mismatch_rejected": true,
+    "corrected_diagnostic_composition_aligned": true,
+    "source_archive_preserved": true,
+    "shadow_reader_sha256": "6b8f2a1e996e7fea62665a7fb798ce223c0a79a9387eb9a9e47431c535203eac",
+    "helper_dependency_pinned": true,
+    "full_pipeline_qualified": false
+  },
+  "production_ready": false,
+  "production_supervisor_enabled": false
+}
