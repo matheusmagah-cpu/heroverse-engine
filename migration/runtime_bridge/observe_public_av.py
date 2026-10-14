@@ -5,12 +5,14 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from gemini_public_av import analyze,digest
 
+RECOVERY=Path('migration/evidence/av-recovery-pending.json')
 SOURCE={'video_id':'7GvhWbXDWHQ','duration_seconds':1178,'visibility':'PUBLIC'}
 POLICY=Path('migration/evidence/gemini-free-runtime-policy.json')
 
 class ExistingObserverLedger:
     def __init__(self,db,run):
         self.db,self.run=Path(db),run
+        self.recovery_path=None
         from durable_evidence_checkpoint import CLAIM
         if (not CLAIM.is_file() or json.loads(CLAIM.read_text()).get('run_id')!=run
                 or not self.db.is_file()):
@@ -46,6 +48,12 @@ class ExistingObserverLedger:
             if unresolved or used+seconds>cap: return {**base,'status':'BLOCKED'}
             c.execute('INSERT INTO public_av_reservations VALUES(?,?,?,?,?,?,?)',
                 (key,request_hash,day,seconds,'CLAIMED',None,None))
+        if self.recovery_path is not None:
+            recovery=json.loads(self.recovery_path.read_text())
+            if recovery.get('status')!='PENDING' or recovery.get('attempts')!=0:
+                raise PermissionError('BOUNDED_AV_RECOVERY_ALREADY_CONSUMED')
+            recovery.update(status='ATTEMPT_CLAIMED',attempts=1,run_id=self.run)
+            self.recovery_path.write_text(json.dumps(recovery,sort_keys=True)+'\n')
         # Successful push is required BEFORE provider receives the request.
         self.checkpoint('Reserve bounded AV effect in existing observer ledger')
         return {**base,'status':'NEW','durable':True}
@@ -63,12 +71,21 @@ class ExistingObserverLedger:
 def main():
     if os.environ.get('GITHUB_REPOSITORY')!='matheusmagah-cpu/heroverse-engine':
         raise PermissionError('REPOSITORY_MISMATCH')
+    scheduled=os.environ.get('GITHUB_EVENT_NAME')=='schedule'
+    if scheduled:
+        if not RECOVERY.is_file():return 0
+        recovery=json.loads(RECOVERY.read_text())
+        if (recovery.get('status')!='PENDING' or recovery.get('attempts')!=0
+                or recovery.get('utc_date')!=datetime.now(timezone.utc).date().isoformat()):
+            print(json.dumps({'status':'NO_AV_RECOVERY_DUE','provider_called':False}))
+            return 0
     key=os.environ.get('HERO_GEMINI_API_KEY','')
     if not key or not POLICY.is_file():
         print(json.dumps({'status':'AV_SECURE_PROVISIONING_REQUIRED','provider_called':False,
                           'publication_authorized':False}))
         return 2
     ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',os.environ['GITHUB_RUN_ID'])
+    if scheduled:ledger.recovery_path=RECOVERY
     receipt=analyze(SOURCE,api_key=key,policy=json.loads(POLICY.read_text()),
         reserve=ledger.reserve,persist=ledger.persist)
     print(json.dumps({'status':receipt['status'],'review_status':receipt['review_status'],
