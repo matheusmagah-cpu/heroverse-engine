@@ -1,0 +1,111 @@
+{
+  "version": "heroverse-holy-moments-original-application-v1",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "status": "ORIGINAL_CREATIVE_RESEARCH_BRIEF_PENDING_NATIVE_HANDOFF",
+  "source_binding": {
+    "path": "migration/evidence/observer-38604686944.json",
+    "sha256": "32abece1ab8cab4f3f3ab3e5746f07910bdb73bff817b7aa4bd513fb44fc9c70"
+  },
+  "sample_receipts": [
+    {
+      "path": "migration/evidence/public-av-857b5bd547940f74d36b7051f4f8871ea805c0cf1d9eb4d1cc3485295df5d8d0.json",
+      "sha256": "4f4f9510fe86e4d262617452ac19029432df91043a5d6b73894455df2b20812c",
+      "video_id": "yY9dDJCLfHU",
+      "window": [
+        0,
+        40
+      ],
+      "sample_fps": 2,
+      "segment_count": 2
+    },
+    {
+      "path": "migration/evidence/public-av-b9e6e907a17db25f41031eafcd79e558f6d2f21fcff3c4d32dbcd504a689aa06.json",
+      "sha256": "9e9cfe6a10ff825131d7119e5225e56b5e5c84b5a2d618e92e6b868a44401cac",
+      "video_id": "yY9dDJCLfHU",
+      "window": [
+        5560,
+        5570
+      ],
+      "sample_fps": 2,
+      "segment_count": 1
+    },
+    {
+      "path": "migration/evidence/public-av-c2937b9e78a546b48bd50dc488c99dae2e0dd669650f5a732810fa763da68169.json",
+      "sha256": "9769a97b579db3b2090bba95c433c96600ec71a5a27d969ae71afa38621224b1",
+      "video_id": "yY9dDJCLfHU",
+      "window": [
+        11110,
+        11120
+      ],
+      "sample_fps": 2,
+      "segment_count": 1
+    }
+  ],
+  "scope": {
+    "sampled_seconds": 60,
+    "windows": 3,
+    "full_video_structure_known": false,
+    "native_frames_reviewed": false,
+    "source_audio_language_declared": null,
+    "qualified_winner": false
+  },
+  "findings": [
+    {
+      "observation": "The model reports the same cozy autumn deck setting in opening, middle and ending samples.",
+      "evidence_class": "MODEL_REPORTED_AV",
+      "application": "Explore a stable, original setting with a clear listening purpose. Frequent cuts are not established as necessary.",
+      "causal_effect_on_views_or_CTR": "UNKNOWN"
+    },
+    {
+      "observation": "The opening samples report gentle instrumental audio, brief welcome/subscribe overlays and scripture later.",
+      "evidence_class": "MODEL_REPORTED_AV",
+      "application": "Keep music present from the opening; separate original HeroVerse reflection from competitor scripture/branding. Test CTA timing rather than copying it.",
+      "causal_effect_on_retention": "UNKNOWN"
+    },
+    {
+      "observation": "No speech or singing is reported in the three sampled windows.",
+      "evidence_class": "MODEL_REPORTED_AV",
+      "application": "Do not infer that spoken reflection wins or loses. Preserve the existing once-at-start voice format until a qualified variant is evaluated."
+    }
+  ],
+  "original_treatment": {
+    "working_title": "Waiting Without Losing Heart | A Brief Christian Reflection & Quiet Piano for Prayer",
+    "visual_premise": "An original quiet indoor reading corner at night, a single warm lamp, rain on the window and a handwritten note about the next responsible step.",
+    "composition": "Offset the lamp and chair, leave deliberate negative space for concise original text; use a different setting and object arrangement from the reference's autumn deck.",
+    "text_policy": "Use HeroVerse's original reflective wording; no source verse quotation, copied branding or competitor footage.",
+    "sound_policy": "Reuse approved own musical and voice identities. No competitor recording or unapproved paid generation.",
+    "speech_placement": "ONCE_AT_START",
+    "creative_options": [
+      {
+        "id": "A",
+        "direction": "Restrained original interior still with subtle optional motion",
+        "purpose": "Maintain a quiet listening context",
+        "rendered": false
+      },
+      {
+        "id": "B",
+        "direction": "Original window-and-dawn scene with the same script and music",
+        "purpose": "Compare contextual imagery while keeping other creative variables stable",
+        "rendered": false
+      }
+    ],
+    "evaluation": "Critical native QA and supported title/thumbnail alternatives before any release. Audience/CTR effects remain unmeasured."
+  },
+  "excluded_claims": [
+    "Cozy visuals cause viral growth",
+    "Three samples describe the full three-hour structure",
+    "The English title proves English audio",
+    "Exact scripture wording independently verified",
+    "A calibrated audience forecast or 40–50% CTR"
+  ],
+  "existing_master_policy": "Preserve the recovered exact master; no blind regeneration or replacement.",
+  "authority": {
+    "quality": false,
+    "render": false,
+    "publication": false
+  },
+  "provider_calls_in_new_stage": 3,
+  "requested_provider_seconds": 60,
+  "vidiq_credits_used": 0,
+  "paid_fallback": false
+}
