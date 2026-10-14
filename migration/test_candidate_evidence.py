@@ -9,7 +9,7 @@ from collect_official_evidence import collect, CHANNEL, DISCOVERY_IDS
 
 
 class CandidateStageTests(unittest.TestCase):
-    def run_stage(self, privacy='public', owned=CHANNEL):
+    def run_stage(self, privacy='public', owned=CHANNEL,catalog=False):
         calls=[]; reserved=[]; consumed=[]
         video={'id':DISCOVERY_IDS[0], 'snippet':{'channelId':'reference',
             'title':'Observed title','publishedAt':'2026-10-01T00:00:00Z'},
@@ -20,8 +20,11 @@ class CandidateStageTests(unittest.TestCase):
             def list(self,**kw):
                 calls.append((self.kind,kw))
                 if self.kind=='videos':return {'items':[video]}
-                return {'items':[{'id':owned}]} if kw.get('mine') else {'items':[{'id':'reference'}]}
-        youtube=types.SimpleNamespace(channels=lambda:Resource('channels'),videos=lambda:Resource('videos'))
+                if self.kind=='playlist':return {'items':[{'contentDetails':{'videoId':video['id']}}]}
+                return {'items':[{'id':owned}]} if kw.get('mine') else {'items':[{'id':'reference',
+                    'snippet':{'title':'Observed channel'},'contentDetails':{'relatedPlaylists':{'uploads':'UUreference'}}}]}
+        youtube=types.SimpleNamespace(channels=lambda:Resource('channels'),videos=lambda:Resource('videos'),
+            playlistItems=lambda:Resource('playlist'))
         def module(**kw):return types.SimpleNamespace(**kw)
         stubs={
             'oauth_health':module(observe_refresh=lambda raw,renew:(object(),{'status':'PASS'}),
@@ -39,7 +42,7 @@ class CandidateStageTests(unittest.TestCase):
                 with self.assertRaises(PermissionError):collect(root,export,candidate_only=True)
                 self.assertEqual(len(calls),1)
                 return
-            result=collect(root,export,candidate_only=True)
+            result=collect(root,export,candidate_only=True,catalog_only=catalog)
             evidence=json.loads((export/'evidence.json').read_text())
         return result,evidence,calls,reserved,consumed
 
@@ -63,5 +66,14 @@ class CandidateStageTests(unittest.TestCase):
 
     def test_wrong_owned_identity_stops_before_discovery(self):
         self.run_stage(owned='foreign')
+
+    def test_catalogue_is_bounded_and_adds_existing_matched_channels(self):
+        _,evidence,calls,reserved,_=self.run_stage(catalog=True)
+        self.assertEqual(len(calls),5);self.assertEqual(len(reserved),5)
+        self.assertEqual(calls[3][1]['maxResults'],50)
+        self.assertIn('UCTdc_zl40D9wa0_LH9yaGZA',calls[2][1]['id'])
+        self.assertEqual(evidence['status'],'BOUNDED_CANDIDATE_CATALOG_OBSERVED')
+        self.assertEqual(evidence['market_snapshots'][0]['entity_type'],'CHANNEL')
+        self.assertFalse(evidence['production_ready'])
 
 if __name__=='__main__':unittest.main()
