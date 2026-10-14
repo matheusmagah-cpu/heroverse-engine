@@ -21,12 +21,18 @@ def validate_plan(plan,raw,*,now=None):
         raise PermissionError('MARKET_SAMPLE_AUTHORITY_BOUNDARY_REQUIRED')
     rows={r['entity_id']:r for r in evidence['market_snapshots'] if r['entity_type']=='VIDEO'}
     selected=plan['videos'];seen=set();seconds=0
+    discovery=plan.get('purpose')=='UNQUALIFIED_DISCOVERY_AV_NO_LANGUAGE_OR_COHORT_UPGRADE'
+    if discovery and (len(selected)!=1 or selected[0].get('video_id')!='yY9dDJCLfHU'
+            or selected[0].get('channel_id')!='UCAOiKo0Ad8F_eRdxgpQSW_A'
+            or selected[0].get('role')!='EXPLORATORY_UNQUALIFIED_LANGUAGE_UNKNOWN'
+            or plan.get('qualified_winner') is not False):
+        raise PermissionError('EXACT_UNQUALIFIED_DISCOVERY_REQUIRED')
     if not 1<=len(selected)<=5:raise PermissionError('BOUNDED_MARKET_SAMPLE_COUNT_REQUIRED')
     for item in selected:
         vid=item['video_id']
         if vid in seen or vid not in rows:raise PermissionError('EXACT_MARKET_VIDEO_REQUIRED')
         seen.add(vid);row=rows[vid];p=row['payload'];duration=p.get('duration_seconds')
-        if (p.get('availability')!='public' or p.get('default_audio_language') not in ('en','en-US')
+        if (p.get('availability')!='public' or (not discovery and p.get('default_audio_language') not in ('en','en-US'))
                 or type(duration) not in (int,float) or not 10800<=duration<=14400
                 or duration!=int(duration) or item['duration_seconds']!=duration
                 or item['channel_id']!=row['channel_id']):
@@ -53,13 +59,20 @@ def execute(plan,ledger,key,policy,*,analyzer=analyze):
 def main():
     if os.environ.get('GITHUB_REPOSITORY')!='matheusmagah-cpu/heroverse-engine':
         raise PermissionError('REPOSITORY_MISMATCH')
-    plan_path=Path('migration/evidence/market-av-plan-20261014.json');plan_raw=plan_path.read_bytes()
-    plan=json.loads(plan_raw)
     request=json.loads(Path('migration/evidence/focused-refinement-request.json').read_bytes())
+    discovery=request.get('mode')=='MARKET_AV_DISCOVERY_ONLY'
+    if discovery and request.get('request_id')!='20261014-holy-moments-av-discovery-v1':
+        raise PermissionError('EXACT_DISCOVERY_OWNER_REQUEST_REQUIRED')
+    plan_path=Path('migration/evidence/market-av-discovery-plan-20261014.json' if discovery
+        else 'migration/evidence/market-av-plan-20261014.json');plan_raw=plan_path.read_bytes()
+    plan=json.loads(plan_raw)
+    if discovery != (plan.get('purpose')=='UNQUALIFIED_DISCOVERY_AV_NO_LANGUAGE_OR_COHORT_UPGRADE'):
+        raise PermissionError('DISCOVERY_SCOPE_CHANGED')
     if request.get('plan_sha256')!=hashlib.sha256(plan_raw).hexdigest():
         raise PermissionError('OWNER_PLAN_BINDING_CHANGED')
     source_path=Path(plan['source_binding']['path'])
-    if source_path.as_posix()!='migration/evidence/observer-38591891691.json':
+    expected_catalogue='migration/evidence/observer-38604686944.json' if discovery else 'migration/evidence/observer-38591891691.json'
+    if source_path.as_posix()!=expected_catalogue:
         raise PermissionError('EXACT_OFFICIAL_CATALOGUE_REQUIRED')
     seconds=validate_plan(plan,source_path.read_bytes())
     ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',os.environ['GITHUB_RUN_ID'])
@@ -75,6 +88,9 @@ def main():
         'evidence_class':'MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED',
         'review_status':'NOT_REVIEWED','quality_authorized':False,'production_authorized':False,
         'publication_authorized':False,'vidiq_credits_used':0}
+    if discovery:
+        summary.update(purpose=plan['purpose'],qualified_winner=False,
+            declared_audio_language=None,language_evidence_status='UNDECLARED_NOT_UPGRADED_FROM_TITLE')
     out.write_text(json.dumps(summary,sort_keys=True)+'\n')
     ledger.checkpoint('Persist sampled market audiovisual stage without granting production authority')
     print(json.dumps({'status':summary['status'],'samples':len(results),'publication_authorized':False}))
