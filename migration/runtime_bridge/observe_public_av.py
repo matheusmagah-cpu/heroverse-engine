@@ -319,7 +319,7 @@ def refine_reference():
         validate_report(receipt['report'],SOURCE,window=window,refinement=True)
         path=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
         reopened=json.loads(path.read_text())
-        if reopened!=receipt:raise PermissionError('REFINEMENT_CHECKPOINT_CHANGED')
+        if digest(reopened)!=digest(receipt):raise PermissionError('REFINEMENT_CHECKPOINT_CHANGED')
         bindings.append({'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
             'window':window})
         print(json.dumps({'status':'REFINEMENT_WINDOW_SAVED','window':window,
