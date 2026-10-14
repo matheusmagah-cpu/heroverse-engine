@@ -1,0 +1,59 @@
+{
+  "status": "CANDIDATE_NOT_CONNECTED_OR_QUALIFIED",
+  "requested_change": "Replace owner-managed Google Cloud Console dependency for publishing with managed YouTube connection",
+  "candidate": "Metricool",
+  "plugin_id": "plugin_asdk_app_69d73fc8aa5c8191bec1583760b130c7",
+  "plugin_available": true,
+  "plugin_installed": false,
+  "official_capabilities": [
+    "YouTube standard video automatic scheduling and publishing",
+    "YouTube Shorts automatic scheduling and publishing",
+    "MCP scheduling available on Free"
+  ],
+  "documented_limits": {
+    "free_posts_per_month": 20,
+    "youtube_free_posts_per_24_hours": 10,
+    "max_video_upload_bytes": 500000000,
+    "programmatic_HTTP_API": "Advanced or Custom paid plans only",
+    "mcp": "Any plan including Free"
+  },
+  "media_compatibility": {
+    "existing_master_bytes": 543053316,
+    "existing_master_within_documented_upload_limit": false,
+    "existing_master_reencoded": false,
+    "existing_pilot_bytes": 125335796,
+    "pilot_transport_size_compatible": true,
+    "pilot_quality_or_release_approval": false
+  },
+  "required_acceptance": [
+    "User completes initial Metricool and YouTube authorization through secure native flow",
+    "Inspect actual account plan, connected brand and exact HeroVerse channel ID",
+    "Verify connector-supported metadata, media delivery and account limits",
+    "Original rights, semantics, perceptual QA and release approval remain mandatory",
+    "Controlled private-first upload or equivalent safe qualification and provider receipt",
+    "Restore and replay without duplicate publication before switching existing manager"
+  ],
+  "not_transferred": [
+    "Google OAuth refresh token",
+    "Google client secret",
+    "Private repository credentials",
+    "Unapproved media"
+  ],
+  "production_ready": false,
+  "publication_authorized": false,
+  "purchases_performed": false,
+  "console_gates_bypassed": false,
+  "existing_oauth_or_provider_disabled": false,
+  "worker_credential_bridge_verified": false,
+  "full_unattended_worker_integration_verified": false,
+  "sources": [
+    "https://help.metricool.com/schedule-and-publish-on-youtube-gof0k",
+    "https://help.metricool.com/mcp-limits-and-plan-requirements-h72jg",
+    "https://help.metricool.com/mcp-vs-api-access-what-is-the-difference-5y3ib",
+    "https://metricool.com/pricing/"
+  ],
+  "rejected_secondary": {
+    "name": "Buffer",
+    "reason": "No available plugin found; official help describes Shorts support and no long-form YouTube support."
+  }
+}
