@@ -1,6 +1,6 @@
 import copy, hashlib, json, unittest
 from datetime import datetime, timezone, timedelta
-from gemini_public_av import analyze, build_request
+from gemini_public_av import analyze, build_request,validate_report
 
 NOW = datetime(2026,10,14,10,45,tzinfo=timezone.utc)
 SOURCE = {'video_id':'7GvhWbXDWHQ','duration_seconds':1178,'visibility':'PUBLIC'}
@@ -74,6 +74,22 @@ class Tests(unittest.TestCase):
         self.assertEqual(r['failure_code'],'PROVIDER_BLOCKED_OR_TRUNCATED')
     def test_private_media_rejected(self):
         with self.assertRaises(PermissionError): build_request({**SOURCE,'visibility':'PRIVATE'})
+    def test_window_receipt_does_not_claim_whole_video(self):
+        report={**REPORT,'coverage':'FULL_WINDOW','window_start_seconds':240,
+            'window_end_seconds':480,'segments':[{**REPORT['segments'][0],
+                'start_seconds':240,'end_seconds':480}]}
+        self.assertEqual(validate_report(report,SOURCE,window=(240,480)),report)
+        with self.assertRaises(PermissionError):validate_report(report,SOURCE)
+    def test_missing_window_interval_is_rejected(self):
+        report={**REPORT,'coverage':'FULL_WINDOW','window_start_seconds':240,
+            'window_end_seconds':480,'segments':[{**REPORT['segments'][0],
+                'start_seconds':241,'end_seconds':480}]}
+        with self.assertRaises(PermissionError):validate_report(report,SOURCE,window=(240,480))
+    def test_video_clipping_preserves_source_identity_and_global_clock(self):
+        p=build_request(SOURCE,today='2026-10-14',window=(240,480))
+        m=p['contents'][0]['parts'][0]['videoMetadata']
+        self.assertEqual(m['startOffset'],'240s');self.assertEqual(m['endOffset'],'480s')
+        self.assertIn('1178',p['contents'][0]['parts'][1]['text'])
     def test_request_has_video_fps_and_no_search_or_fallback(self):
         payload=build_request(SOURCE,today='2026-10-14')
         self.assertEqual(payload['contents'][0]['parts'][0]['videoMetadata']['fps'],1)
