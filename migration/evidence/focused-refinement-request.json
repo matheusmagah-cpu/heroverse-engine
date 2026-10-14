@@ -1,12 +1,13 @@
 {
-  "request_id": "20261014-fine-scene-recovery-v1",
-  "source_video_id": "7GvhWbXDWHQ",
-  "mode": "REFINE_ONLY_REUSE_COMPLETED",
-  "owner_instruction": "Então resolva",
-  "existing_workflow": ".github/workflows/official-evidence.yml",
-  "sequential": true,
-  "extra_paid_budget": 0,
+  "request_id": "20261014-three-hour-reference-discovery-v1",
+  "mode": "CANDIDATE_METADATA_ONLY",
+  "source_video_ids": [
+    "TYCZe65GxdQ",
+    "ZGiGg9O09yU",
+    "beIMxaH7YuI"
+  ],
   "publication_authorized": false,
-  "reason": "Resume existing saved detailed windows and complete only remaining90seconds; local requested-interval accounting corrected, historical debits unchanged; no paid fallback.",
-  "attempt_revision": "20261014-clipped-local-budget-final90"
+  "requested_by": "EXPLICIT_OWNER_EXECUTE_NEXT_PENDING_STAGE",
+  "reuse_previous_teacher_av": true,
+  "vidiq_credits_used": 0
 }
