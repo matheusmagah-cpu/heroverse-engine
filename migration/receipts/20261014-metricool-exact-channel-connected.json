@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-14T07:42:30.474Z",
+  "provider": "Metricool",
+  "brand_id": 7413178,
+  "user_id": 5760224,
+  "owner_username": "willmarquesfotografia@gmail.com",
+  "youtube_channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "timezone": "America/Sao_Paulo",
+  "evidence_source": "Metricool getbrandsettings fresh read after Google authorization",
+  "status": "EXACT_CHANNEL_CONNECTED",
+  "recovery": {
+    "previous_callback": "Metricool error page",
+    "fresh_connection_from_brand_panel": true
+  },
+  "secrets_included": false,
+  "publication_performed": false,
+  "production_automation_enabled": false,
+  "remaining": [
+    "Full transport derivative not generated or accepted by provider",
+    "Coherent long/Short production package and native QA pending",
+    "Private-first controlled provider acceptance and deduplication validation pending",
+    "Continuous independent worker bridge not qualified"
+  ]
+}
