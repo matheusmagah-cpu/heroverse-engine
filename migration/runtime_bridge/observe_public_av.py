@@ -307,7 +307,7 @@ def refine_reference():
     from gemini_public_av import validate_report
     policy=json.loads(POLICY.read_text())
     ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',os.environ['GITHUB_RUN_ID'])
-    windows=[(130,270),(690,840),(840,900),(900,960),(960,1020),(1020,1040),(1040,1050)]
+    windows=[(130,270),(690,840),(840,900),(900,960),(960,980),(980,1000),(1000,1020),(1020,1040),(1040,1050)]
     bindings=[]
     for window in windows:
         receipt=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
