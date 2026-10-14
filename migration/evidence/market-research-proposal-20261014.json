@@ -1,12 +1,12 @@
 {
-  "version": "heroverse-sampled-market-research-proposal-v1",
+  "version": "heroverse-sampled-market-research-proposal-v2",
   "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
   "status": "RESEARCH_PROPOSAL_WITH_EXPLICIT_GAPS_NOT_NATIVE_PRODUCTION_HANDOFF",
   "reference_catalogue_binding": {
     "path": "migration/evidence/observer-38591891691.json",
     "sha256": "415f7efe3e3394ebee0b337163016745a258960b33842adb89bb2dda39265d8e"
   },
-  "sample_verification_path": "migration/evidence/market-sample-verification-20261014.json",
+  "sample_verification_path": "migration/evidence/market-sample-verification-20261014-v2.json",
   "sample_receipt_paths": [
     "migration/evidence/public-av-f44a1d038a87abbbf9da44c3685fd6febcb7b98c86423284bd9f2d7b9ee8a759.json",
     "migration/evidence/public-av-07110619955de485185b71fca38466d2ab272e7b32857aa5ff1de119cf55901e.json",
@@ -18,7 +18,11 @@
     "migration/evidence/public-av-6715d3359b845054a09aa8d90c30649226bbf7ff1bd42cde9f24c879437322e8.json",
     "migration/evidence/public-av-09164068baee01b60236944674744a6f529dcd9d8a787aabce72ba73c90f9674.json",
     "migration/evidence/public-av-d7a24eb48c4faf56e2fd052b6d1a2cd36f80798536e6f62a1802c62f33041082.json",
-    "migration/evidence/public-av-ea0b056f9987a8a75a5bc17d41bafc7be53772d1031396a33a6b0c288df07704.json"
+    "migration/evidence/public-av-ea0b056f9987a8a75a5bc17d41bafc7be53772d1031396a33a6b0c288df07704.json",
+    "migration/evidence/public-av-adc841bb34aad39784c0332a78fadcc869c4a937289fbb91ccf16b6a939177a1.json",
+    "migration/evidence/public-av-ddde5db49ff49a0dde81311fb79ffeba4a5f1a3d5a7997c4711cd996fa8af7d6.json",
+    "migration/evidence/public-av-3a7af7e3b1bc14db51e41bf7ccc13f98bd13984e852d7bd64866ec034affdd08.json",
+    "migration/evidence/public-av-9b13f47e270212818bba23fecb26025a4373b8843936b0dbad1a1537874e0ebe.json"
   ],
   "observed_interval_growth": {
     "earlier_source_path": "migration/evidence/20261013-official-observations.json",
@@ -104,6 +108,28 @@
         "EkT0XMVln3s",
         "ksMAEHpzkZo"
       ]
+    },
+    {
+      "finding": "The exploratory Selah sample reports male sung Psalms at the beginning and middle, unlike the instrumental samples.",
+      "class": "MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED",
+      "application": "Classify sung Psalms separately; do not pool this exploratory source as a qualified instrumental winner.",
+      "sources": [
+        "AgkqbwJ_P1Y"
+      ],
+      "evidence_paths": [
+        "migration/evidence/public-av-ddde5db49ff49a0dde81311fb79ffeba4a5f1a3d5a7997c4711cd996fa8af7d6.json",
+        "migration/evidence/public-av-3a7af7e3b1bc14db51e41bf7ccc13f98bd13984e852d7bd64866ec034affdd08.json",
+        "migration/evidence/public-av-9b13f47e270212818bba23fecb26025a4373b8843936b0dbad1a1537874e0ebe.json"
+      ]
+    },
+    {
+      "finding": "Public player UI displayed Enjoy Worship Moment and Stillness Time together for the leading reference.",
+      "class": "OBSERVED_PUBLIC_UI_WITHOUT_CAUSAL_ATTRIBUTION",
+      "application": "Retain collaboration as a possible confound; do not attribute the outlier solely to title, thumbnail or seasonality.",
+      "sources": [
+        "j2rk8ycXe3c"
+      ],
+      "source_uri": "https://www.youtube.com/watch?v=j2rk8ycXe3c"
     }
   ],
   "editorial_proposal": {
@@ -133,25 +159,16 @@
     "Predicted audience or 40–50 percent CTR presented as measured expectation"
   ],
   "production_gaps": {
-    "failed_window": {
-      "video_id": "ksMAEHpzkZo",
-      "window": [
-        12968,
-        12978
-      ],
-      "failure_code": "HTTP_503_UNAVAILABLE",
-      "receipt_key": "public-av:31a76077e12ef7fc9e60308344cdfbfbf53907ead97216ea9de7abd569f8ff24"
-    },
-    "exploratory_video_not_started": "AgkqbwJ_P1Y",
+    "failed_window": null,
+    "exploratory_video_not_started": null,
     "full_native_av_review_available": false,
     "third_qualified_winner_channel_available": false,
     "final_quality_approval_available": false,
-    "direct_native_acquisition": {
-      "status": "BLOCKED_NATIVE_ACQUISITION",
-      "failure_code": "PUBLIC_MEDIA_TRANSFER_UNAVAILABLE",
-      "metadata_available": true,
-      "receipt_path": "migration/receipts/20261014-direct-market-media-acquisition.json"
-    }
+    "native_acquisition_status": "PUBLIC_SOURCE_SIGN_IN_WALL",
+    "browser_player_status": "ZERO_DECODED_FRAMES_AFTER_ONE_RELOAD",
+    "storyboard_transfer_status": "HTML_SITE_UNAVAILABLE_NOT_AN_IMAGE",
+    "holy_moments_status": "OFFICIALLY_VERIFIED_DISCOVERY_REFERENCE_NOT_COMPARABLE_WINNER",
+    "holy_moments_language": "UNKNOWN_FOR_MULTIPLE_CURRENT_VIDEOS"
   },
   "authority": {
     "quality": false,
@@ -160,7 +177,38 @@
   },
   "vidiq_credits_used": 0,
   "local_budget": {
-    "used": 28612,
-    "remaining": 188
+    "used": 28682,
+    "remaining": 118,
+    "daily_limit": 28800,
+    "basis": "LOCAL_REQUESTED_INTERVAL_WORKLOAD_NOT_GOOGLE_INTERNAL_QUOTA",
+    "unresolved_reservations": 0
+  },
+  "completed_sample_scope": {
+    "video_count": 5,
+    "window_count": 15,
+    "requested_seconds": 300,
+    "coverage": "SAMPLED_NOT_FULL_VIDEO",
+    "native_independent_review": false
+  },
+  "latest_discovery_catalogue_binding": {
+    "path": "migration/evidence/observer-38604686944.json",
+    "sha256": "32abece1ab8cab4f3f3ab3e5746f07910bdb73bff817b7aa4bd513fb44fc9c70"
+  },
+  "resolved_failures": [
+    {
+      "failure_code": "HTTP_503_UNAVAILABLE",
+      "original_receipt": "migration/evidence/public-av-31a76077e12ef7fc9e60308344cdfbfbf53907ead97216ea9de7abd569f8ff24.json",
+      "recovery_receipt": "migration/evidence/public-av-adc841bb34aad39784c0332a78fadcc869c4a937289fbb91ccf16b6a939177a1.json",
+      "recovery_run": 38600754626,
+      "historical_failed_debit_preserved": true,
+      "saved_successes_reused": 11
+    }
+  ],
+  "executor_application": {
+    "existing_observer_registry": "migration/evidence/current-market-discovery-references.json",
+    "registry_validated": true,
+    "reference_channels": 4,
+    "producer_status": "BLOCKED_BY_REVIEWED_NATIVE_SEMANTIC_HANDOFF",
+    "automatic_publication": false
   }
 }
