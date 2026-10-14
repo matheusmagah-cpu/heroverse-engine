@@ -5,7 +5,7 @@ from gemini_public_av import digest
 import observe_public_av as observer
 
 class RefinementWorkflowTests(unittest.TestCase):
-    def run_stage(self,fail=False,gap=False):
+    def run_stage(self,fail=False,gap=False,coarse=False):
         calls=[];checkpoints=[]
         def analyze(source,**kw):
             window=kw['window'];calls.append(window)
@@ -24,6 +24,9 @@ class RefinementWorkflowTests(unittest.TestCase):
                 receipt.update(status='FAILED_NO_AUTOMATIC_RETRY',failure_code='REPORT_VALIDATION_FAILED',finish_reasons=['STOP'])
                 receipt['report']['segments']=receipt['report']['segments'][:6]
                 receipt['report']['segments'][-1]['end_seconds']=810.0
+            if coarse and window==(690,840):
+                receipt.update(status='FAILED_NO_AUTOMATIC_RETRY',failure_code='REPORT_VALIDATION_FAILED',finish_reasons=['STOP'])
+                receipt['report']['segments']=receipt['report']['segments'][:6]+[{**receipt['report']['segments'][6],'end_seconds':840}]
             path=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
             path.write_text(json.dumps(receipt))
             return receipt
@@ -56,5 +59,12 @@ class RefinementWorkflowTests(unittest.TestCase):
         self.assertEqual(result,0)
         self.assertEqual(calls,[(130,270),(690,840),(810,830),(830,840),(840,900),(900,960),(960,1020),(1020,1040),(1040,1050)])
         self.assertEqual(len(checkpoints),2);self.assertEqual(count,1)
+
+    def test_coarse_suffix_reuses_only_valid_detailed_prefix(self):
+        result,calls,checkpoints,count=self.run_stage(coarse=True)
+        self.assertEqual(result,0)
+        self.assertIn((810,830),calls);self.assertIn((830,840),calls)
+        self.assertEqual(calls.count((690,840)),1)
+        self.assertEqual(count,1)
 
 if __name__=='__main__':unittest.main()
