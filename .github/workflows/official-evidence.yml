@@ -95,6 +95,10 @@ jobs:
               assert r['request_id']=='20261014-market-music-sample-v1'
               assert r['plan_sha256']=='6da4eb09834dacdf7bb6941fabca9a9c2c75b2f6687c7304b12c6f745183a6b6'
               stage='market_av'
+          elif r['mode']=='THIRD_METADATA_REFERENCE_AV_ONLY':
+              assert r['request_id']=='20261014-third-metadata-reference-av-v1'
+              assert r['plan_sha256']=='c1006c98e8224e51b1fbfb829d09ade0360832686c0b58249be36a77f5d8e6e8'
+              stage='market_av'
           elif r['mode']=='MARKET_AV_DISCOVERY_ONLY':
               assert r['request_id']=='20261014-holy-moments-av-discovery-v1'
               assert r['plan_sha256']=='42c3ee1a477f802cd0fbe4f14cff897ccf350153a7dba87157b647c00eac131e'
