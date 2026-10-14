@@ -1,5 +1,8 @@
 name: HeroVerse bounded official evidence
 on:
+  push:
+    paths:
+      - 'migration/evidence/focused-refinement-request.json'
   schedule:
     - cron: '17 9 * * *'
   workflow_dispatch:
@@ -77,7 +80,7 @@ jobs:
       - name: Test observation boundaries
         run: python3 -m unittest discover -s migration -p 'test_*evidence*.py' -v
       - name: Restore checkpoint without API collection
-        if: inputs.checkpoint_only
+        if: inputs.checkpoint_only || github.event_name == 'push'
         run: |
           python3 - <<'PY'
           import sys
@@ -100,7 +103,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 migration/restore_private_media.py
       - name: Install pinned read-only API dependencies
-        if: ${{ !inputs.checkpoint_only || inputs.native_readiness }}
+        if: ${{ github.event_name != 'push' && (!inputs.checkpoint_only || inputs.native_readiness) }}
         run: |
           python3 -m venv "$RUNNER_TEMP/evidence-venv"
           "$RUNNER_TEMP/evidence-venv/bin/python" -m pip install jsonschema==4.26.0 google-api-python-client==2.170.0 google-auth==2.40.3 google-auth-oauthlib==1.2.2 requests==2.32.4
@@ -110,13 +113,26 @@ jobs:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/runtime_bridge/rebuild_cloud_readiness.py'
       - name: Collect observed owned and market data through original quota ledger
-        if: ${{ !inputs.checkpoint_only }}
+        if: ${{ github.event_name != 'push' && !inputs.checkpoint_only }}
         env:
           HERO_AUTH_HEALTH_ONLY: ${{ inputs.auth_health_only }}
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
+      - name: Validate exact owner-requested refinement-only push
+        if: github.event_name == 'push'
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('migration/evidence/focused-refinement-request.json').read_text())
+          assert r['request_id']=='20261014-fine-scene-recovery-v1'
+          assert r['source_video_id']=='7GvhWbXDWHQ'
+          assert r['mode']=='REFINE_ONLY_REUSE_COMPLETED'
+          assert r['publication_authorized'] is False
+          print('Exact refinement-only request verified; no publication authority')
+          PY
       - name: Test and refine unresolved audiovisual scenes
-        if: inputs.av_refine_reference && inputs.checkpoint_only
+        if: github.event_name == 'push' || (inputs.av_refine_reference && inputs.checkpoint_only)
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
