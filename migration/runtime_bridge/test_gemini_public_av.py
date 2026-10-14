@@ -108,4 +108,31 @@ class Tests(unittest.TestCase):
         self.assertEqual(payload['contents'][0]['parts'][0]['videoMetadata']['fps'],1)
         self.assertNotIn('tools',payload)
 
+    def test_refinement_rejects_coarse_scene_summary(self):
+        r={**REPORT,'coverage':'FULL_WINDOW','window_start_seconds':130,
+            'window_end_seconds':270,'segments':[{**REPORT['segments'][0],
+            'start_seconds':130,'end_seconds':270}]}
+        with self.assertRaises(PermissionError):validate_report(r,SOURCE,window=(130,270),refinement=True)
+    def test_refinement_replays_without_repeating_effect(self):
+        r={**REPORT,'coverage':'FULL_WINDOW','window_start_seconds':130,
+            'window_end_seconds':150,'segments':[{**REPORT['segments'][0],
+            'start_seconds':130,'end_seconds':150}]}
+        calls=[]
+        def send(payload,key):
+            calls.append(payload)
+            return {'candidates':[{'finishReason':'STOP','content':{'parts':[{'text':json.dumps(r)}]}}]}
+        args=dict(api_key=KEY,policy=POLICY,reserve=self.m.reserve,persist=self.m.persist,
+            send=send,now=NOW,window=(130,150),refinement=True)
+        first=analyze(SOURCE,**args);second=analyze(SOURCE,**args)
+        self.assertEqual(first,second);self.assertEqual(len(calls),1)
+        self.assertEqual(first['sample_fps'],2)
+        self.assertFalse(first['publication_authorized'])
+    def test_refinement_preserves_existing_baseline_request(self):
+        p=build_request(SOURCE,today='2026-10-14',window=(130,270))
+        q=build_request(SOURCE,today='2026-10-14',window=(130,270),refinement=True)
+        self.assertEqual(p['contents'][0]['parts'][0]['videoMetadata']['fps'],1)
+        self.assertEqual(q['contents'][0]['parts'][0]['videoMetadata']['fps'],2)
+        self.assertNotEqual(p,q)
+        with self.assertRaises(PermissionError):build_request(SOURCE,refinement=True)
+
 if __name__=='__main__': unittest.main()
