@@ -103,6 +103,10 @@ jobs:
               assert r['request_id']=='20261014-native-linux-acquisition-v1'
               assert r['source_video_id']=='j2rk8ycXe3c'
               stage='native_market'
+          elif r['mode']=='CANDIDATE_CATALOG_EXTENSION_ONLY':
+              assert r['request_id']=='20261014-holy-moments-reference-v1'
+              assert r['source_video_id']=='yY9dDJCLfHU'
+              stage='catalog_extension'
           else:
               raise PermissionError('UNKNOWN_OWNER_REQUEST_STAGE')
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('stage='+stage+'\n')
@@ -114,7 +118,7 @@ jobs:
       - name: Test observation boundaries
         run: python3 -m unittest discover -s migration -p 'test_*evidence*.py' -v
       - name: Restore checkpoint without API collection
-        if: inputs.checkpoint_only || (github.event_name == 'push' && steps.push_stage.outputs.stage != 'candidate' && steps.push_stage.outputs.stage != 'catalog')
+        if: inputs.checkpoint_only || (github.event_name == 'push' && steps.push_stage.outputs.stage != 'candidate' && steps.push_stage.outputs.stage != 'catalog' && steps.push_stage.outputs.stage != 'catalog_extension')
         run: |
           python3 - <<'PY'
           import sys
@@ -137,7 +141,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 migration/restore_private_media.py
       - name: Install pinned read-only API dependencies
-        if: ${{ (github.event_name != 'push' && (!inputs.checkpoint_only || inputs.native_readiness)) || (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog') }}
+        if: ${{ (github.event_name != 'push' && (!inputs.checkpoint_only || inputs.native_readiness)) || (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog' || steps.push_stage.outputs.stage == 'catalog_extension') }}
         run: |
           python3 -m venv "$RUNNER_TEMP/evidence-venv"
           "$RUNNER_TEMP/evidence-venv/bin/python" -m pip install jsonschema==4.26.0 google-api-python-client==2.170.0 google-auth==2.40.3 google-auth-oauthlib==1.2.2 requests==2.32.4
@@ -147,10 +151,11 @@ jobs:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/runtime_bridge/rebuild_cloud_readiness.py'
       - name: Collect observed owned and market data through original quota ledger
-        if: ${{ (github.event_name != 'push' && !inputs.checkpoint_only) || (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog') }}
+        if: ${{ (github.event_name != 'push' && !inputs.checkpoint_only) || (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog' || steps.push_stage.outputs.stage == 'catalog_extension') }}
         env:
-          HERO_CANDIDATE_PROBE_ONLY: ${{ (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog') }}
-          HERO_CANDIDATE_CATALOG_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog' }}
+          HERO_CANDIDATE_PROBE_ONLY: ${{ (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog' || steps.push_stage.outputs.stage == 'catalog_extension') }}
+          HERO_CANDIDATE_CATALOG_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog' || steps.push_stage.outputs.stage == 'catalog_extension' }}
+          HERO_REFERENCE_EXTENSION_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog_extension' }}
           HERO_AUTH_HEALTH_ONLY: ${{ inputs.auth_health_only }}
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
@@ -218,5 +223,5 @@ jobs:
         with:
           name: heroverse-official-evidence-${{ github.run_id }}
           path: cloud-evidence/
-          retention-days: 1
+          retention-days: ${{ steps.push_stage.outputs.stage == 'native_market' && 1 || 30 }}
           if-no-files-found: ignore
