@@ -1,13 +1,13 @@
 {
-  "request_id": "20261014-three-hour-reference-discovery-v1",
-  "mode": "CANDIDATE_METADATA_ONLY",
+  "request_id": "20261014-three-hour-reference-catalog-v1",
+  "mode": "CANDIDATE_CATALOG_ONLY",
   "source_video_ids": [
     "TYCZe65GxdQ",
     "ZGiGg9O09yU",
     "beIMxaH7YuI"
   ],
   "publication_authorized": false,
-  "requested_by": "EXPLICIT_OWNER_EXECUTE_NEXT_PENDING_STAGE",
-  "reuse_previous_teacher_av": true,
+  "requested_by": "EXPLICIT_OWNER_RESOLVE_NEXT_PENDING_STAGE",
+  "reuses_verified_video_identities_from_run": 38591418668,
   "vidiq_credits_used": 0
 }
