@@ -1,0 +1,41 @@
+{
+  "scope": "60_SECOND_TRANSPORT_DIAGNOSTIC_NOT_FINAL_RELEASE",
+  "video_decoded_frames": 1800,
+  "decoded_video_pixels_identical": true,
+  "audio_packets_source": 2813,
+  "audio_packets_target": 2813,
+  "all_common_audio_packet_payloads_identical": true,
+  "audio_stream_copied_not_reencoded": true,
+  "diagnostic_bytes": 2158098,
+  "estimated_full_size_bytes_not_measured": 388457640,
+  "original_master_preserved": true,
+  "metricool_provider_acceptance_tested": false,
+  "full_file_created": false,
+  "full_package_quality_approved": false,
+  "publication_authorized": false,
+  "original_master_bytes": 543053316,
+  "original_video_bitrate_bps": 146220,
+  "original_audio_bitrate_bps": 247235,
+  "encoder_candidate": {
+    "codec": "libx264",
+    "constant_qp": 0,
+    "preset": "medium",
+    "gop_frames": 300,
+    "pix_fmt": "yuv420p",
+    "profile_observed": "High 4:4:4 Predictive",
+    "provider_profile_acceptance_verified": false
+  },
+  "target_policy": {
+    "max_delivery_bytes": 450000000,
+    "documented_metricool_limit_bytes": 500000000,
+    "original_master_overwrite": false,
+    "audio_reencode": false,
+    "full_duration_preservation_required": true,
+    "all_frame_equivalence_verification_required": true
+  },
+  "rejected_shortcut": {
+    "exact_encoded_packet_loop_replay": false,
+    "reason": "Full original packet hashes did not repeat at proposed 20-second period; first mismatch frame1200. No loop-assembled full file created."
+  },
+  "metricool_network_state": "Plugin connected; tool reports brand has no connected social network"
+}
