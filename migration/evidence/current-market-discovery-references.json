@@ -1,12 +1,13 @@
 {
   "source_binding": {
-    "path": "migration/evidence/observer-38591891691.json",
-    "sha256": "415f7efe3e3394ebee0b337163016745a258960b33842adb89bb2dda39265d8e"
+    "path": "migration/evidence/observer-38604686944.json",
+    "sha256": "32abece1ab8cab4f3f3ab3e5746f07910bdb73bff817b7aa4bd513fb44fc9c70"
   },
   "channel_ids": [
     "UCRxoBHBVyu22ZIL249AZW2Q",
     "UCyECOVwwWcyDcQvsVhxPkaQ",
-    "UCsVw79EkqVFyIkKuUOEnyrA"
+    "UCsVw79EkqVFyIkKuUOEnyrA",
+    "UCAOiKo0Ad8F_eRdxgpQSW_A"
   ],
   "role": "DISCOVERY_REFERENCE_PENDING_AV",
   "production_authorized": false,
@@ -16,5 +17,7 @@
     "additional_channels_max": 5,
     "uploads_per_channel_max": 50
   },
-  "purpose": "Include verified new channels in the existing daily public observation without counting them as qualified winner corroborators"
+  "purpose": "Include verified new channels in the existing daily public observation without counting them as qualified winner corroborators",
+  "language_unknown_does_not_imply_english": true,
+  "last_update_basis": "OFFICIAL_PUBLIC_CHANNEL_IDENTITY_VERIFIED_2026-10-14T17:13:03Z"
 }
