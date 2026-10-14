@@ -139,6 +139,7 @@ INSERT INTO "public_av_reservations" VALUES('public-av:3ebebc5f693e5a3557a093984
 INSERT INTO "public_av_reservations" VALUES('public-av:f44a1d038a87abbbf9da44c3685fd6febcb7b98c86423284bd9f2d7b9ee8a759','546962e2a91ef9f694c8bd65ea7fc790eac0c363ae0d273cd3bbfdfce24d6414','2026-10-14',40,'COMPLETED','migration/evidence/public-av-f44a1d038a87abbbf9da44c3685fd6febcb7b98c86423284bd9f2d7b9ee8a759.json','60b603efff31beb64f48ab15143422659805b6a28cdc14f6c5e4ab79dfc02ef7');
 INSERT INTO "public_av_reservations" VALUES('public-av:07110619955de485185b71fca38466d2ab272e7b32857aa5ff1de119cf55901e','b4c0bed26738bf382a99e2d813143560694734d112c6b68f1a10456e1cae91b6','2026-10-14',10,'COMPLETED','migration/evidence/public-av-07110619955de485185b71fca38466d2ab272e7b32857aa5ff1de119cf55901e.json','8f99eccba4edff052b777bc512439efa1bd28290e2518953d6d001add5a71b6c');
 INSERT INTO "public_av_reservations" VALUES('public-av:91d8cca6fc516cccee82dabfe3e7e533b06d19741f915a7c36518eb8eb7bbacb','e322eb3c3e1b21fbabc1b4b7e8222a88bb516b0443f8ef42c7b027b54646924f','2026-10-14',10,'COMPLETED','migration/evidence/public-av-91d8cca6fc516cccee82dabfe3e7e533b06d19741f915a7c36518eb8eb7bbacb.json','63d2412ca14ee8ddcb082d36fd829d43420ef25cc5dcce7c690896ec17924193');
+INSERT INTO "public_av_reservations" VALUES('public-av:82de8fe5c0390358c50b88b41fd993c87628456c0672c83e8c11c30d662ec3e1','bc188088e81c89c0147dbfcbd58a1286316d189adfcdd80b72ce2b26baf6416e','2026-10-14',40,'CLAIMED',NULL,NULL);
 CREATE TABLE upload_quota_debits (
     debit_id TEXT PRIMARY KEY,
     idempotency_key TEXT NOT NULL UNIQUE,
