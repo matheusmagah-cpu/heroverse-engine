@@ -1,0 +1,160 @@
+{
+  "version": "heroverse-sampled-market-research-proposal-v1",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "status": "RESEARCH_PROPOSAL_WITH_EXPLICIT_GAPS_NOT_NATIVE_PRODUCTION_HANDOFF",
+  "reference_catalogue_binding": {
+    "path": "migration/evidence/observer-38591891691.json",
+    "sha256": "415f7efe3e3394ebee0b337163016745a258960b33842adb89bb2dda39265d8e"
+  },
+  "sample_verification_path": "migration/evidence/market-sample-verification-20261014.json",
+  "sample_receipt_paths": [
+    "migration/evidence/public-av-f44a1d038a87abbbf9da44c3685fd6febcb7b98c86423284bd9f2d7b9ee8a759.json",
+    "migration/evidence/public-av-07110619955de485185b71fca38466d2ab272e7b32857aa5ff1de119cf55901e.json",
+    "migration/evidence/public-av-91d8cca6fc516cccee82dabfe3e7e533b06d19741f915a7c36518eb8eb7bbacb.json",
+    "migration/evidence/public-av-82de8fe5c0390358c50b88b41fd993c87628456c0672c83e8c11c30d662ec3e1.json",
+    "migration/evidence/public-av-ac8f98a0956b09a9c743d293cbe02262c6831de1ad84b2b0d4a8539a0cc2db25.json",
+    "migration/evidence/public-av-4ac2df905e5d06de323532be8d4c3b7bf05690d9cacdff235a9d3fd464589641.json",
+    "migration/evidence/public-av-a3fb180b1dc89d73bb1630a6ade21179c6771c3b3a85d361b3f46872a288f0a1.json",
+    "migration/evidence/public-av-6715d3359b845054a09aa8d90c30649226bbf7ff1bd42cde9f24c879437322e8.json",
+    "migration/evidence/public-av-09164068baee01b60236944674744a6f529dcd9d8a787aabce72ba73c90f9674.json",
+    "migration/evidence/public-av-d7a24eb48c4faf56e2fd052b6d1a2cd36f80798536e6f62a1802c62f33041082.json",
+    "migration/evidence/public-av-ea0b056f9987a8a75a5bc17d41bafc7be53772d1031396a33a6b0c288df07704.json"
+  ],
+  "observed_interval_growth": {
+    "earlier_source_path": "migration/evidence/20261013-official-observations.json",
+    "earlier_captured_at": "2026-10-13T22:18:13.514310+00:00",
+    "later_captured_at": "2026-10-14T15:44:13.408109+00:00",
+    "records": [
+      {
+        "video_id": "j2rk8ycXe3c",
+        "channel_id": "UCTdc_zl40D9wa0_LH9yaGZA",
+        "earlier_views": 26607,
+        "later_views": 27425,
+        "elapsed_hours": 17.43330388888889,
+        "observed_delta_views": 818,
+        "observed_views_per_hour_in_interval": 46.92168536804731,
+        "acceleration": null,
+        "forecast": null
+      },
+      {
+        "video_id": "BeFOHnncaeQ",
+        "channel_id": "UCsDKqJJISkMyvjFowNT_Sdg",
+        "earlier_views": 2147,
+        "later_views": 2164,
+        "elapsed_hours": 17.43330388888889,
+        "observed_delta_views": 17,
+        "observed_views_per_hour_in_interval": 0.9751450504361909,
+        "acceleration": null,
+        "forecast": null
+      },
+      {
+        "video_id": "EkT0XMVln3s",
+        "channel_id": "UCTdc_zl40D9wa0_LH9yaGZA",
+        "earlier_views": 1676,
+        "later_views": 1703,
+        "elapsed_hours": 17.43330388888889,
+        "observed_delta_views": 27,
+        "observed_views_per_hour_in_interval": 1.5487597859868916,
+        "acceleration": null,
+        "forecast": null
+      },
+      {
+        "video_id": "ksMAEHpzkZo",
+        "channel_id": "UCTdc_zl40D9wa0_LH9yaGZA",
+        "earlier_views": 40,
+        "later_views": 40,
+        "elapsed_hours": 17.43330388888889,
+        "observed_delta_views": 0,
+        "observed_views_per_hour_in_interval": 0,
+        "acceleration": null,
+        "forecast": null
+      }
+    ],
+    "class": "CALCULATED_FROM_TWO_OFFICIAL_PUBLIC_OBSERVATIONS",
+    "forecast_available": false,
+    "acceleration_available": false
+  },
+  "findings": [
+    {
+      "finding": "Instrumental music, nature imagery and scripture appear in both winner and intermediate samples.",
+      "class": "INFERRED_FROM_MODEL_REPORTED_AV",
+      "application": "Treat these as format ingredients; do not claim they cause higher CTR or views.",
+      "sources": [
+        "j2rk8ycXe3c",
+        "BeFOHnncaeQ",
+        "EkT0XMVln3s"
+      ]
+    },
+    {
+      "finding": "Autumn-themed leading reference gained 818 public views in 17.4333 hours; Christmas weak reference gained zero.",
+      "class": "CALCULATED_PUBLIC_INTERVAL_COMPARISON",
+      "application": "Prioritize a timely emotional premise as an experiment. Seasonality is a hypothesis, not established cause.",
+      "sources": [
+        "j2rk8ycXe3c",
+        "ksMAEHpzkZo"
+      ]
+    },
+    {
+      "finding": "Four analyzed opening windows contained instrumental audio without reported speech.",
+      "class": "MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED",
+      "application": "Keep the promised music experience immediate; test a concise original reflection instead of assuming longer narration improves retention.",
+      "sources": [
+        "j2rk8ycXe3c",
+        "BeFOHnncaeQ",
+        "EkT0XMVln3s",
+        "ksMAEHpzkZo"
+      ]
+    }
+  ],
+  "editorial_proposal": {
+    "authorship": "ORIGINAL_HEROVERSE",
+    "language": "en-US",
+    "topic": "Waiting with courage when outcomes remain uncertain",
+    "subtopics": [
+      "Faith without pretending uncertainty is easy",
+      "Responsibility versus control",
+      "A concrete next step and a stopping point",
+      "Quiet courage and restorative listening"
+    ],
+    "title": "Waiting Without Losing Heart | A Brief Christian Reflection & Quiet Worship Piano",
+    "thumbnail_text": "WAIT WITH COURAGE",
+    "full_text": "Waiting is not proof that you have been forgotten. But I don’t think faith asks us to pretend that uncertainty is easy. There is a difference between taking the next responsible step and trying to control every outcome. Tonight, name one thing you can do tomorrow. Write it down. Then give yourself permission to stop rehearsing everything you cannot solve right now. Courage can be quiet. Rest can be part of faithfulness. As this piano continues, you can pray in your own words or simply listen. You do not have to manufacture a feeling to be welcome here.",
+    "speech_placement": "ONCE_AT_START",
+    "voice_duration_seconds": null,
+    "quality_review_status": "NOT_REVIEWED",
+    "rationale_class": "EDITORIAL_HYPOTHESIS_NOT_AUDIENCE_FORECAST"
+  },
+  "excluded_claims": [
+    "Competitor CTR, RPM, revenue, monetization dates and viewer retention",
+    "Complete-video structure inferred from samples",
+    "Exact verse text or translations treated as independently verified",
+    "ASR transcripts or native frame artifacts fabricated from audio summaries",
+    "Three independent qualified winner channels: only two currently pass",
+    "Predicted audience or 40–50 percent CTR presented as measured expectation"
+  ],
+  "production_gaps": {
+    "failed_window": {
+      "video_id": "ksMAEHpzkZo",
+      "window": [
+        12968,
+        12978
+      ],
+      "failure_code": "HTTP_503_UNAVAILABLE",
+      "receipt_key": "public-av:31a76077e12ef7fc9e60308344cdfbfbf53907ead97216ea9de7abd569f8ff24"
+    },
+    "exploratory_video_not_started": "AgkqbwJ_P1Y",
+    "full_native_av_review_available": false,
+    "third_qualified_winner_channel_available": false,
+    "final_quality_approval_available": false
+  },
+  "authority": {
+    "quality": false,
+    "render": false,
+    "publication": false
+  },
+  "vidiq_credits_used": 0,
+  "local_budget": {
+    "used": 28612,
+    "remaining": 188
+  }
+}
