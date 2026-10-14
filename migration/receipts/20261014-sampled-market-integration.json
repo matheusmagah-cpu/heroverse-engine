@@ -1,0 +1,52 @@
+{
+  "status": "MARKET_SELECTION_AND_SAMPLED_AV_INTEGRATED_WITH_BLOCKING_GAPS",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "official_candidate_run": 38591418668,
+  "official_catalogue_run": 38591891691,
+  "catalogue_video_count": 177,
+  "declared_current_duration_eligible_videos": 90,
+  "sufficient_matched_channels": 2,
+  "third_channel_not_fabricated": true,
+  "adapter_tests_passed": 36,
+  "collector_tests_passed": 13,
+  "comparability_tests_passed": 5,
+  "initial_status_integration_error": {
+    "run": 38593483364,
+    "actual_first_window_status": "WINDOW_AWAITING_AV_REVIEW",
+    "fixed": true,
+    "first_window_reused_without_another_provider_call": true
+  },
+  "sampled_av_run": 38593822345,
+  "verified_sample_count": 11,
+  "verified_sample_seconds": 230,
+  "failure": {
+    "code": "HTTP_503_UNAVAILABLE",
+    "video_id": "ksMAEHpzkZo",
+    "window": [
+      12968,
+      12978
+    ],
+    "following_stages_not_started": true
+  },
+  "original_provider_responses_preserved": true,
+  "zero_call_receipt_verification_passed": true,
+  "local_budget_seconds": {
+    "used": 28612,
+    "remaining": 188
+  },
+  "new_discovery_channels_added_to_existing_daily_observer": 3,
+  "new_schedulers_created": 0,
+  "full_native_market_media_acquired": false,
+  "complete_audiovisual_mining_passed": false,
+  "production_handoff_passed": false,
+  "final_quality_approval_passed": false,
+  "supervisor_enabled": false,
+  "publication_performed": false,
+  "vidiq_credits_used": 0,
+  "remaining": [
+    "Finish legitimate full audiovisual evidence and obtain third qualified comparable reference.",
+    "Supply actual native mining/schema evidence rather than treating summaries as transcripts or frames.",
+    "Validate original producer handoff and final critical quality before controlled publication."
+  ],
+  "no_new_authorization_required_for_completed_work": true
+}
