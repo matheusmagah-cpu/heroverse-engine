@@ -1,0 +1,15 @@
+{
+  "video_id": "j2rk8ycXe3c",
+  "method": "PUBLIC_YT_DLP_METADATA_CAPABILITY_CHECK",
+  "package_version": "2026.08.19",
+  "attempts": 1,
+  "native_media_acquired": false,
+  "signed_urls_persisted": false,
+  "credentials_used": false,
+  "publication_authorized": false,
+  "status": "PUBLIC_METADATA_AVAILABLE",
+  "duration_seconds": 12707,
+  "native_audio_video_formats_available": false,
+  "format_count": 31,
+  "format_availability_semantics": "The recorded boolean checks combined muxed A/V formats only, not separate video and audio streams."
+}
