@@ -1,0 +1,131 @@
+{
+  "version": "heroverse-rest-opening-v1",
+  "recipe_binding": {
+    "path": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\Modelagem Youtube\\output\\production\\audio-christian-rest-editorial-v4\\music_recipe.json",
+    "sha256": "sha256:375f79c404c29dd3e8653af5f38efcb6c7cad801f0bd4b14953d3e76cefcd965"
+  },
+  "editorial": {
+    "version": "heroverse-rest-is-not-giving-up-v1",
+    "language": "en-US",
+    "title": "Rest Is Not Giving Up | A Christian Reflection + Quiet Piano for Prayer",
+    "angle": "Rest can be an act of trust without becoming an excuse for avoidance",
+    "evidence_class": "ORIGINAL_EVERGREEN_INTERPRETATION_NOT_NEW_MARKET_RESEARCH",
+    "sections": [
+      {
+        "role": "TITLE_ALIGNED_STAKE",
+        "text": "Rest is not the opposite of faithfulness. Sometimes it is what allows us to return to it. But there is a difference between setting down a burden for a while and pretending it no longer belongs to us."
+      },
+      {
+        "role": "PERSONAL_STAKES",
+        "text": "Tonight, we do not need to solve everything. We can name one thing that is ours to do, one limit that deserves respect, and one outcome we cannot control. Our worth is not a score measured by how many tasks we finish before we sleep."
+      },
+      {
+        "role": "MECHANISM_AND_PROOF",
+        "text": "Consider a conversation you have been avoiding. Rest may help you return to it with more patience; it does not make the other person or the issue disappear. Now consider a problem you cannot fix tonight. Continuing to rehearse it is not the same as taking responsibility. These are examples to reflect on, not diagnoses of your life."
+      },
+      {
+        "role": "REVERSAL_AND_ACTION",
+        "text": "Some people need to stop for longer. Their next honest step may be asking for help or respecting a limit, not doing more. From this Christian perspective, rest and responsibility need not compete. Choose a small response for later, without making this moment another demand."
+      },
+      {
+        "role": "PROMISE_RESOLUTION",
+        "text": "This is the perspective we offer: rest can make room for a faithful response without becoming an excuse for avoidance. After these opening words, the speech will stop. The original music will leave space for your own prayer, reflection, or quiet. You do not need to earn that space by staying here for the whole session."
+      }
+    ],
+    "full_text": "Rest is not the opposite of faithfulness. Sometimes it is what allows us to return to it. But there is a difference between setting down a burden for a while and pretending it no longer belongs to us. Tonight, we do not need to solve everything. We can name one thing that is ours to do, one limit that deserves respect, and one outcome we cannot control. Our worth is not a score measured by how many tasks we finish before we sleep. Consider a conversation you have been avoiding. Rest may help you return to it with more patience; it does not make the other person or the issue disappear. Now consider a problem you cannot fix tonight. Continuing to rehearse it is not the same as taking responsibility. These are examples to reflect on, not diagnoses of your life. Some people need to stop for longer. Their next honest step may be asking for help or respecting a limit, not doing more. From this Christian perspective, rest and responsibility need not compete. Choose a small response for later, without making this moment another demand. This is the perspective we offer: rest can make room for a faithful response without becoming an excuse for avoidance. After these opening words, the speech will stop. The original music will leave space for your own prayer, reflection, or quiet. You do not need to earn that space by staying here for the whole session.",
+    "voice_id": "am_onyx",
+    "speed": 1.0,
+    "speech_placement": "ONCE_AT_START",
+    "rejected_choices": [
+      "Guaranteed divine peace",
+      "Copied competitor recording",
+      "Repeated narration throughout the music"
+    ],
+    "authority": {
+      "quality": false,
+      "render": false,
+      "publication": false
+    }
+  },
+  "voice": {
+    "text": "Rest is not the opposite of faithfulness. Sometimes it is what allows us to return to it. But there is a difference between setting down a burden for a while and pretending it no longer belongs to us. Tonight, we do not need to solve everything. We can name one thing that is ours to do, one limit that deserves respect, and one outcome we cannot control. Our worth is not a score measured by how many tasks we finish before we sleep. Consider a conversation you have been avoiding. Rest may help you return to it with more patience; it does not make the other person or the issue disappear. Now consider a problem you cannot fix tonight. Continuing to rehearse it is not the same as taking responsibility. These are examples to reflect on, not diagnoses of your life. Some people need to stop for longer. Their next honest step may be asking for help or respecting a limit, not doing more. From this Christian perspective, rest and responsibility need not compete. Choose a small response for later, without making this moment another demand. This is the perspective we offer: rest can make room for a faithful response without becoming an excuse for avoidance. After these opening words, the speech will stop. The original music will leave space for your own prayer, reflection, or quiet. You do not need to earn that space by staying here for the whole session.",
+    "voice_id": "am_onyx",
+    "speed": 1.0,
+    "sample_rate": 24000,
+    "samples": 1574912,
+    "duration_ms": 65621,
+    "render_seconds": 49.684682,
+    "real_time_factor": 0.757142,
+    "peak_linear": 0.896484,
+    "clipping": false,
+    "path": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\Modelagem Youtube\\output\\production\\audio-christian-rest-editorial-v4\\audio\\opening\\voice.wav",
+    "content_hash": "sha256:9eebe0329a6069f7491e1310a085605da8dcf0f94c4d67d66c76b7bb1eecd0da"
+  },
+  "origins": [
+    {
+      "path": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\Modelagem Youtube\\models\\kokoro\\kokoro-v1.0.fp16.onnx",
+      "sha256": "sha256:f3a290d384fbb27966d462905c71a46cef9e5fd00516b40df32a0b4afe77ac96"
+    },
+    {
+      "path": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\Modelagem Youtube\\models\\kokoro\\voices-v1.0.bin",
+      "sha256": "sha256:bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+    },
+    {
+      "path": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\Modelagem Youtube\\hero_engine\\voice_phase5.py",
+      "sha256": "sha256:5ee686188835294cd04b6eee637db79a441ae4915267af84eb1777fa178cd96a"
+    }
+  ],
+  "espeak": {
+    "candidate_id": "USER_HOME_HEROVERSE",
+    "library_path": "C:\\Users\\mathe\\.heroverse\\espeakng\\espeak-ng.dll",
+    "data_path": "C:\\Users\\mathe\\.heroverse\\espeakng\\espeak-ng-data",
+    "library_hash": "sha256:646d387acbc7ac2aa45e3625aa00a6835ae5d446ff8b0748298c3900b4dde258",
+    "data_hash": "sha256:1f73e820db5524fd30286e4c501550b3510f09df7b44b563eb66bf11de13f984",
+    "version": "1.52.0",
+    "loader_package_version": null,
+    "fallback_used": false,
+    "directory_dlls": [
+      {
+        "name": "espeak-ng.dll",
+        "path": "C:\\Users\\mathe\\.heroverse\\espeakng\\espeak-ng.dll",
+        "content_hash": "sha256:646d387acbc7ac2aa45e3625aa00a6835ae5d446ff8b0748298c3900b4dde258",
+        "size_bytes": 419328
+      },
+      {
+        "name": "MSVCP140.dll",
+        "path": "C:\\Users\\mathe\\.heroverse\\espeakng\\MSVCP140.dll",
+        "content_hash": "sha256:def46aa6a8f72f27bafac0c43334419486a4d1dcdb6c479a8ef7034b3e1fa4cb",
+        "size_bytes": 553552
+      },
+      {
+        "name": "VCRUNTIME140.dll",
+        "path": "C:\\Users\\mathe\\.heroverse\\espeakng\\VCRUNTIME140.dll",
+        "content_hash": "sha256:184146852727a9db4eea06178716bec3cdbb1015c911f6b0f915b184ad7775b2",
+        "size_bytes": 123472
+      },
+      {
+        "name": "VCRUNTIME140_1.dll",
+        "path": "C:\\Users\\mathe\\.heroverse\\espeakng\\VCRUNTIME140_1.dll",
+        "content_hash": "sha256:e6bfb3662ab4b1969a73441dbe35c96d51441b6bff8cf1fe7430bd5b246ca605",
+        "size_bytes": 47264
+      }
+    ]
+  },
+  "authority": {
+    "quality": false,
+    "render": false,
+    "publication": false
+  },
+  "reused_from": {
+    "package_relative": "output/production/audio-christian-rest-editorial-v3",
+    "recipe_binding": {
+      "path": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\Modelagem Youtube\\output\\production\\audio-christian-rest-editorial-v3\\music_recipe.json",
+      "sha256": "sha256:197003e848da3dd43968daf2b913bbfb29182f2f81b3e6b75ffbcd91ad5ef5ca"
+    },
+    "opening_binding": {
+      "path": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\Modelagem Youtube\\output\\production\\audio-christian-rest-editorial-v3\\audio\\opening\\receipt.json",
+      "sha256": "sha256:d379385cb08a04d682860ea9664afef1c7b0607f747f1d7a4e51b8de8d4e66d5"
+    }
+  },
+  "reused_at": "2026-10-09T21:37:24.561281+00:00"
+}
