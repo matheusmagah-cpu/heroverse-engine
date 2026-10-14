@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "master": {
+    "library_file_id": "libfile_e90bfed87b7481918be374846a1ba97b",
+    "file_name": "HeroVerse_Rest_Corrected_3h_Metricool.mp4",
+    "bytes": 391733890,
+    "sha256": "55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46"
+  },
+  "proof_bundle": {
+    "library_file_id": "libfile_db8c71be298881918cc1c19b17269bb8",
+    "file_name": "HeroVerse_Master_Corrigido_Provas_20261014.zip",
+    "bytes": 69025
+  },
+  "library_transfer": {
+    "first_media_transfer": "FAILED_TRANSFER_FAILED_NO_LIBRARY_ID",
+    "recovery": "Staged exact completed file inside active conversation workspace; prepared upload succeeded",
+    "proof_transfer": "SUCCEEDED"
+  },
+  "original_preserved": true,
+  "video_full_decode": {
+    "exit_code": 0,
+    "frames": 324000,
+    "duplicate_frames": 0,
+    "dropped_frames": 0
+  },
+  "audio_all_506251_packet_payloads_identical": true,
+  "publication_authorized": false,
+  "production_automation_enabled": false,
+  "current_status": "FULL_CORRECTED_TRANSPORT_ARTIFACT_SAVED_NOT_RELEASE_APPROVED"
+}
