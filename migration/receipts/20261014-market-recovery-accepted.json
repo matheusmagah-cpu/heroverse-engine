@@ -1,0 +1,50 @@
+{
+  "version": "heroverse-market-recovery-acceptance-v1",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "recovery_run": 38600754626,
+  "official_extension_run": 38604686944,
+  "status": "PLANNED_AV_SAMPLES_COMPLETED_PROVENANCE_VERIFIED_NATIVE_RELEASE_BLOCKED",
+  "completed_windows": 15,
+  "completed_sample_seconds": 300,
+  "whole_video_mining_completed": false,
+  "saved_successes_reused": 11,
+  "owner_recovery_attempts": 1,
+  "local_budget": {
+    "used": 28682,
+    "remaining": 118,
+    "daily_limit": 28800,
+    "basis": "LOCAL_REQUESTED_INTERVAL_WORKLOAD_NOT_GOOGLE_INTERNAL_QUOTA",
+    "unresolved_reservations": 0
+  },
+  "verification_path": "migration/evidence/market-sample-verification-20261014-v2.json",
+  "meaningful_saved_receipt_tests_passed": 6,
+  "existing_daily_observer_registry_validated": true,
+  "new_verified_discovery_channel": "UCAOiKo0Ad8F_eRdxgpQSW_A",
+  "sufficient_metadata_comparable_channels": 2,
+  "native_acquisition_attempt": {
+    "run": 38601561472,
+    "receipt": "migration/evidence/native-market-probe-38601561472.json",
+    "status": "PUBLIC_SOURCE_SIGN_IN_WALL",
+    "cookies_used": false,
+    "proxy_used": false
+  },
+  "native_browser_attempt": {
+    "source_video": "j2rk8ycXe3c",
+    "player_frames": 0,
+    "reloads": 1,
+    "coverage_claimed": false
+  },
+  "production_handoff": false,
+  "critical_final_quality_approved": false,
+  "supervisor_enabled": false,
+  "publication_performed": false,
+  "vidiq_credits_used": 0,
+  "paid_fallback": false,
+  "additional_cost_brl": 0,
+  "next_required_evidence": [
+    "Accessible native reference audiovisual bytes and independently reviewed timestamped frames/transcripts",
+    "Third sufficient comparable winner channel supported by actual format/language evidence",
+    "Accepted native semantic handoff and critical final production quality",
+    "Controlled private-first no-duplicate publication acceptance"
+  ]
+}
