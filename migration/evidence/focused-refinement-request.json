@@ -1,13 +1,10 @@
 {
-  "request_id": "public-reference-discovery-20261014-adjacent-v1",
-  "mode": "PUBLIC_CATALOG_SEEDS_ONLY",
-  "source_video_ids": [
-    "_Hv1XK1fmtU",
-    "Rvgv9kiLVZQ",
-    "2Ub9KdtnXhU"
-  ],
-  "discovery_basis": "RELATED_PUBLIC_REFERENCES_OBSERVED_DURING_AUTHORIZED_PLAYER_INSPECTION",
+  "request_id": "20261014-third-metadata-reference-av-v1",
+  "mode": "THIRD_METADATA_REFERENCE_AV_ONLY",
+  "plan_sha256": "c1006c98e8224e51b1fbfb829d09ade0360832686c0b58249be36a77f5d8e6e8",
   "owner_request": "2026-10-14T16:22:12-03:00:continue",
+  "requested_sample_seconds": 58,
+  "qualified_winner": false,
   "publication_authorized": false,
   "vidiq_credits_used": 0
 }
