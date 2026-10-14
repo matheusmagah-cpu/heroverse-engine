@@ -19,7 +19,14 @@ def restore_ledger(sql,destination):
         if not {'general_quota_debits','upload_quota_debits','composed_quota_reservations'}<=tables:raise PermissionError('LEDGER_SCHEMA_MISSING')
     finally:c.close()
 def commit(message):
-    git('add','migration/evidence');git('commit','-m',message);git('push','origin','HEAD:main')
+    git('add','migration/evidence');git('commit','-m',message)
+    git('fetch','origin','main')
+    base=git('merge-base','HEAD','origin/main')
+    ours=set(git('diff','--name-only',base,'HEAD').splitlines())
+    theirs=set(git('diff','--name-only',base,'origin/main').splitlines())
+    if ours & theirs:raise PermissionError('DURABLE_CONCURRENT_EVIDENCE_CONFLICT')
+    git('rebase','origin/main')
+    git('push','origin','HEAD:main')
 def main(mode):
     if os.environ.get('GITHUB_REPOSITORY')!='matheusmagah-cpu/heroverse-engine':raise PermissionError('REPOSITORY_MISMATCH')
     run=os.environ['GITHUB_RUN_ID']
