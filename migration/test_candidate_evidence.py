@@ -5,7 +5,7 @@ import types
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-from collect_official_evidence import collect, CHANNEL, DISCOVERY_IDS
+from collect_official_evidence import collect, CHANNEL, DISCOVERY_IDS,discovered_references,sha
 
 
 class CandidateStageTests(unittest.TestCase):
@@ -75,5 +75,20 @@ class CandidateStageTests(unittest.TestCase):
         self.assertEqual(evidence['status'],'BOUNDED_CANDIDATE_CATALOG_OBSERVED')
         self.assertEqual(evidence['market_snapshots'][0]['entity_type'],'CHANNEL')
         self.assertFalse(evidence['production_ready'])
+
+    def test_daily_discovery_registry_requires_original_public_evidence(self):
+        import os
+        with tempfile.TemporaryDirectory() as tmp:
+            previous=os.getcwd()
+            try:
+                os.chdir(tmp);folder=Path('migration/evidence');folder.mkdir(parents=True)
+                source=folder/'observer-123.json';source.write_text(json.dumps({'candidate_channels':[{'id':'reference'}]}))
+                registry=folder/'current-market-discovery-references.json'
+                data={'source_binding':{'path':source.as_posix(),'sha256':sha(source.read_bytes())},
+                    'channel_ids':['reference'],'role':'DISCOVERY_REFERENCE_PENDING_AV','production_authorized':False}
+                registry.write_text(json.dumps(data));self.assertEqual(discovered_references(),['reference'])
+                data['channel_ids']=['unobserved'];registry.write_text(json.dumps(data))
+                with self.assertRaises(PermissionError):discovered_references()
+            finally:os.chdir(previous)
 
 if __name__=='__main__':unittest.main()
