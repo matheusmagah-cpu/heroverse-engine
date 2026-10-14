@@ -1,12 +1,9 @@
 {
-  "request_id": "20261014-owner-market-503-recovery-1",
-  "mode": "MARKET_TRANSIENT_RECOVERY_ONLY",
-  "owner_request": "2026-10-14T13:38:01-03:00:resolve-problems",
-  "plan_sha256": "6da4eb09834dacdf7bb6941fabca9a9c2c75b2f6687c7304b12c6f745183a6b6",
-  "prior_receipt_sha256": "66f24a44393635d974adaea9d43ce3ad10be26fbb2ef3c1bb05b1def5d00c6ff",
+  "request_id": "20261014-native-linux-acquisition-v1",
+  "mode": "NATIVE_MARKET_PROBE_ONLY",
+  "source_video_id": "j2rk8ycXe3c",
   "publication_authorized": false,
-  "maximum_new_requested_seconds": 70,
-  "maximum_recovery_attempts": 1,
-  "previous_successes_reused": 11,
+  "maximum_transfer_seconds": 180,
+  "attempts": 1,
   "vidiq_credits_used": 0
 }
