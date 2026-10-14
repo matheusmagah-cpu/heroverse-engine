@@ -25,6 +25,11 @@ PRIVATE_UNKNOWN=['IMPRESSIONS','CTR','INTRO_RETENTION','AVERAGE_VIEW_DURATION','
 MAX_DATA_CALLS=40
 DISCOVERY_IDS=('TYCZe65GxdQ','ZGiGg9O09yU','beIMxaH7YuI')
 
+def candidate_source_ids(*,reference_extension=False,peace_extension=False):
+    if peace_extension and not reference_extension:
+        raise PermissionError('PEACE_EXTENSION_REQUIRES_EXISTING_REFERENCE_STAGE')
+    return DISCOVERY_IDS+(('yY9dDJCLfHU',) if reference_extension else ())+(('qD7efeJhPIM',) if peace_extension else ())
+
 def discovered_references(registry_path=Path('migration/evidence/current-market-discovery-references.json')):
     if not registry_path.is_file():return []
     registry=json.loads(registry_path.read_bytes())
@@ -102,7 +107,10 @@ def snapshot(operation,captured,channel,entity,identity,payload):
         'collector':{'name':'YouTube Data API','version':'v3-bounded-migration-1','mode':'PUBLIC_METADATA_NO_MEDIA'},
         'evidence_class':'OBSERVED','payload':payload,'unavailable_metrics':PRIVATE_UNKNOWN,'error':None}
 
-def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=False,reference_extension=False):
+def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=False,reference_extension=False,peace_extension=False):
+    source_ids=candidate_source_ids(reference_extension=reference_extension,peace_extension=peace_extension)
+    if peace_extension and not (candidate_only and catalog_only):
+        raise PermissionError('PEACE_EXTENSION_IS_READ_ONLY_CATALOGUE_STAGE')
     from oauth_health import observe_refresh,identity_health
     raw=os.environ.get('HERO_YT_AUTHORIZED_USER_JSON','')
     from google.oauth2.credentials import Credentials
@@ -143,7 +151,6 @@ def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=Fa
             'market_collection_performed':False,'production_ready':False,'publication_performed':False}
 
     if candidate_only:
-        source_ids=DISCOVERY_IDS+(('yY9dDJCLfHU',) if reference_extension else ())
         # Discovery leads are not evidence until this official response is saved.
         result=read(youtube.videos().list(part='id,snippet,statistics,contentDetails,status',
             id=','.join(source_ids)),'candidate-video-identities')
@@ -322,7 +329,8 @@ def main():
         try:summary=collect(root,export,health_only=os.environ.get('HERO_AUTH_HEALTH_ONLY')=='true',
             candidate_only=os.environ.get('HERO_CANDIDATE_PROBE_ONLY')=='true',
             catalog_only=os.environ.get('HERO_CANDIDATE_CATALOG_ONLY')=='true',
-            reference_extension=os.environ.get('HERO_REFERENCE_EXTENSION_ONLY')=='true')
+            reference_extension=os.environ.get('HERO_REFERENCE_EXTENSION_ONLY')=='true',
+            peace_extension=os.environ.get('HERO_REFERENCE_PEACE_EXTENSION_ONLY')=='true')
         finally:
             if destination.exists():shutil.copy2(destination,export/'quota-ledger.sqlite3')
         print(json.dumps(summary))
