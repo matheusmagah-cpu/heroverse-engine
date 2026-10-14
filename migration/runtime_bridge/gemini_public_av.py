@@ -52,7 +52,7 @@ def build_request(source, *, today=None):
     return {'contents': [{'role': 'user', 'parts': [
         {'fileData': {'fileUri': 'https://www.youtube.com/watch?v=' + source['video_id'], 'mimeType': 'video/*'},
          'videoMetadata': {'fps': 1}}, {'text': prompt}]}],
-        'generationConfig': {'maxOutputTokens': 12000,
+        'generationConfig': {'maxOutputTokens': 32768,
                              'responseMimeType': 'application/json'}}
 
 def validate_report(report, source):
@@ -170,7 +170,9 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         response = (transport(payload, api_key, model=model) if send is transport
                     else send(payload, api_key))
         receipt['response_sha256'] = digest(response)
+        receipt['provider_response'] = response
         candidates = response.get('candidates', [])
+        receipt['finish_reasons'] = [item.get('finishReason') for item in candidates]
         if len(candidates) != 1 or candidates[0].get('finishReason') != 'STOP':
             raise ProviderFailure('PROVIDER_BLOCKED_OR_TRUNCATED')
         parts = candidates[0]['content']['parts']
