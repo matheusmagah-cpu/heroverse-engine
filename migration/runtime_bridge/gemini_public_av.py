@@ -52,7 +52,7 @@ def build_request(source, *, today=None):
     return {'contents': [{'role': 'user', 'parts': [
         {'fileData': {'fileUri': 'https://www.youtube.com/watch?v=' + source['video_id'], 'mimeType': 'video/*'},
          'videoMetadata': {'fps': 1}}, {'text': prompt}]}],
-        'generationConfig': {'temperature': 0.1, 'maxOutputTokens': 12000,
+        'generationConfig': {'maxOutputTokens': 12000,
                              'responseMimeType': 'application/json'}}
 
 def validate_report(report, source):
@@ -116,7 +116,13 @@ def transport(payload, api_key, *, model=MODEL):
                 status += '_' + provider_status
         except Exception:
             pass
-        raise ProviderFailure(status) from None
+        reason_tags = []
+        message = str(data.get('error', {}).get('message', '')).lower() if 'data' in locals() else ''
+        for tag, needle in [('MODEL_OVERLOADED','overload'),('HIGH_DEMAND','high demand'),
+                ('VIDEO_FETCH','fetch'),('TIMEOUT','timeout'),('VIDEO_INPUT','video'),
+                ('KEY_LEAKED','leaked'),('QUOTA','quota'),('INVALID_KEY','api key not valid')]:
+            if needle in message:reason_tags.append(tag)
+        raise ProviderFailure(status + (':' + ','.join(reason_tags) if reason_tags else '')) from None
     except Exception:
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None
