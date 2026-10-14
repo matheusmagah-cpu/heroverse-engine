@@ -1,0 +1,92 @@
+{
+  "version": "heroverse-focused-av-content-review-v1",
+  "date": "2026-10-14",
+  "status": "PARTIAL_REFINEMENT_REVIEWED_NOT_PRODUCTION_APPROVED",
+  "latest_run": {
+    "id": 38573287207,
+    "job": 115883754276,
+    "conclusion": "FAILURE_AT_PREVENTIVE_QUOTA_BOUNDARY",
+    "tests_passed": 29,
+    "provider_calls_sequential": true
+  },
+  "source": {
+    "video_id": "7GvhWbXDWHQ",
+    "duration_seconds": 1178,
+    "role": "PORTUGUESE_TEACHING_REFERENCE_NOT_HEROVERSE_UPLOAD"
+  },
+  "refined_windows": [
+    {
+      "window": [
+        130,
+        270
+      ],
+      "path": "migration/evidence/public-av-e21f872b09917369ea9d8b4965e57f2e7195a85549fea6af91c7fccbc39962fa.json"
+    },
+    {
+      "window": [
+        690,
+        840
+      ],
+      "path": "migration/evidence/focused-av-window-e794a6f57877060a8a630317e50f59e10638e312d7eae99f89ec62369fff6ddf.json"
+    },
+    {
+      "window": [
+        840,
+        900
+      ],
+      "path": "migration/evidence/focused-av-window-16d3a11dc0f0b57f8c445a7d51ef1304fd7d1125636ae3efefba085654c78183.json"
+    },
+    {
+      "window": [
+        900,
+        960
+      ],
+      "path": "migration/evidence/focused-av-window-20822d90c270eaeab930b149af6801ded929b331aa8b950d8b2e78cc38360200.json"
+    }
+  ],
+  "fine_scene_count": 26,
+  "refined_seconds": 410,
+  "maximum_segment_seconds": 20,
+  "sample_fps": 2,
+  "remaining_window": [
+    960,
+    1050
+  ],
+  "remaining_seconds": 90,
+  "quota": {
+    "ledger_reserved_seconds": 28282,
+    "preventive_daily_cap_seconds": 28800,
+    "next_conservative_debit": 1178,
+    "provider_quota_exhaustion_confirmed": false,
+    "accounting": "Whole source duration conservatively reserved per call; prior failed calls preserved.",
+    "clipped_duration_quota_rule": "Not explicitly established by retrieved official documentation; no retroactive debit reduction or cap increase performed."
+  },
+  "review": {
+    "retained_as_model_reported": [
+      "Dashboard narration paired with displayed timeline; exact dates/numbers excluded",
+      "Video playback and topical car imagery paired with production-cost commentary",
+      "Whiteboard and transition to discovery interface",
+      "Discovery interface followed by software-pricing promotion"
+    ],
+    "rejected_or_unresolved": [
+      "Exact years/earnings/prices on blurry text",
+      "Original precise sample-video and script-paste timestamps conflict across outputs",
+      "Assertion that video-within-video format guarantees monetization",
+      "Statement that platform rules require editing speed or causal algorithm success",
+      "A specific mid-roll settings screen at16:58–17:08",
+      "Competitor private CTR, retention, net profit and future audience"
+    ],
+    "rule": "Extract mechanisms as testable hypotheses; neither model agreement nor completed JSON is independent scene verification.",
+    "practical_requirements": [
+      "Each script block must declare a visual purpose tied to its narration",
+      "Existing manager uses actual completion receipts rather than equating queued with produced",
+      "Market comparators require same language/format/age; adjacent niche teacher is not demand cohort",
+      "Separate observed public signals from creator promotional claims and unobservable private metrics"
+    ]
+  },
+  "no_vidiq_calls": true,
+  "additional_paid_budget": 0,
+  "publication_authorized": false,
+  "production_authorized": false,
+  "continuation": "Existing workflow and ledger preserved; exact pending scene is960–1050. No automatic completion or publication claimed."
+}
