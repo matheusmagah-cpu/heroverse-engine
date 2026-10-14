@@ -4,7 +4,7 @@
   "candidate": "Metricool",
   "plugin_id": "plugin_asdk_app_69d73fc8aa5c8191bec1583760b130c7",
   "plugin_available": true,
-  "plugin_installed": false,
+  "plugin_installed": true,
   "official_capabilities": [
     "YouTube standard video automatic scheduling and publishing",
     "YouTube Shorts automatic scheduling and publishing",
@@ -55,5 +55,27 @@
   "rejected_secondary": {
     "name": "Buffer",
     "reason": "No available plugin found; official help describes Shorts support and no long-form YouTube support."
+  },
+  "plugin_connected": true,
+  "youtube_brand_connected": false,
+  "brand_connection_observation": {
+    "status": "NO_SOCIAL_NETWORK_CONNECTED",
+    "brand_id": 7413178,
+    "tool": "getbrandsettings",
+    "observed_at_utc": "2026-10-14T01:46:59.764Z"
+  },
+  "transport_solution_candidate": {
+    "method": "H264 lossless derivative, unchanged AAC bitstream, longer keyframe interval",
+    "sample_seconds": 60,
+    "sample_bytes": 2158098,
+    "sample_decoded_frames": 1800,
+    "sample_pixel_identity_pass": true,
+    "sample_audio_packets": 2813,
+    "sample_audio_payload_identity_pass": true,
+    "estimated_full_bytes_not_actual": 388457640,
+    "full_delivery_created": false,
+    "delivery_target_bytes": 450000000,
+    "provider_codec_profile_acceptance_verified": false,
+    "receipt": "migration/receipts/20261014-lossless-video-transport-diagnostic.json"
   }
 }
