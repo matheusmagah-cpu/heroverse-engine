@@ -1,0 +1,34 @@
+{
+  "version": "metricool-static-transport-recipe-v2",
+  "recorded_at": "2026-10-14T08:00:04.877719+00:00",
+  "record_scope": "Commands executed in this authorized session; execution timestamps not separately captured",
+  "original_media_sha256": "3ff0806ab4d7d18548a072b35eb66491ba4a82bb7f59617d9a953d88a411bda6",
+  "ffmpeg_sha256": "ed16af623947494a72e284b6eb8ff225f2da22b38b5d5069c2fd4b4ba3384e41",
+  "source_image_sha256": "bbd6aaf2c37caf9f47dc7b41880e4bce244afe7dc8e3b831a7829e3565c83a95",
+  "video_profile": {
+    "codec": "libx264",
+    "profile": "high",
+    "level": "4.0",
+    "qp": 1,
+    "gop_frames": 300,
+    "keyint_min": 300,
+    "sc_threshold": 0,
+    "threads": 1,
+    "native_filter": "scale=1920:1080:force_original_aspect_ratio=decrease:out_color_matrix=bt709:out_range=tv,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1,format=yuv420p,setparams=range=tv:color_primaries=bt709:color_trc=bt709:colorspace=bt709"
+  },
+  "mux": {
+    "generated_cycle_seconds": 10,
+    "repetitions": 1080,
+    "duration_seconds": 10800,
+    "audio_codec": "copy",
+    "video_codec": "copy",
+    "faststart": true
+  },
+  "quality_authorized": false,
+  "publication_authorized": false,
+  "native_production_profile_unchanged": true,
+  "limitations": [
+    "Explicit transport derivative, not original native 60-frame GOP profile",
+    "Native calibration/release acceptance cannot be inherited merely from a smaller file"
+  ]
+}
