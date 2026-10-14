@@ -107,6 +107,13 @@ jobs:
               assert r['request_id']=='20261014-native-linux-acquisition-v1'
               assert r['source_video_id']=='j2rk8ycXe3c'
               stage='native_market'
+          elif r['mode']=='PUBLIC_CATALOG_SEEDS_ONLY':
+              import re
+              assert r['request_id'].startswith('public-reference-discovery-')
+              seeds=r['source_video_ids']
+              assert isinstance(seeds,list) and 1<=len(seeds)<=3 and len(set(seeds))==len(seeds)
+              assert all(isinstance(v,str) and re.fullmatch(r'[A-Za-z0-9_-]{11}',v) for v in seeds)
+              stage='catalog_extension'
           elif r['mode']=='PEACE_CATALOG_EXTENSION_ONLY':
               assert r['request_id']=='20261014-peace-inside-reference-v1'
               assert r['source_video_id']=='qD7efeJhPIM'
@@ -118,8 +125,10 @@ jobs:
           else:
               raise PermissionError('UNKNOWN_OWNER_REQUEST_STAGE')
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('stage='+stage+'\n')
-          if r['mode']=='PEACE_CATALOG_EXTENSION_ONLY':
+          if r['mode'] in ('PEACE_CATALOG_EXTENSION_ONLY','PUBLIC_CATALOG_SEEDS_ONLY'):
               with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('extra_reference=qD7efeJhPIM\n')
+          if r['mode']=='PUBLIC_CATALOG_SEEDS_ONLY':
+              with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('public_seeds='+json.dumps(seeds,separators=(',',':'))+'\n')
           print('Exact bounded '+stage+' request verified; no publication authority')
           PY
       - name: Claim durable observer and restore current quota source
@@ -167,6 +176,7 @@ jobs:
           HERO_CANDIDATE_CATALOG_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog' || steps.push_stage.outputs.stage == 'catalog_extension' }}
           HERO_REFERENCE_EXTENSION_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog_extension' }}
           HERO_REFERENCE_PEACE_EXTENSION_ONLY: ${{ steps.push_stage.outputs.extra_reference == 'qD7efeJhPIM' }}
+          HERO_ADDITIONAL_PUBLIC_SEEDS: ${{ steps.push_stage.outputs.public_seeds || '[]' }}
           HERO_AUTH_HEALTH_ONLY: ${{ inputs.auth_health_only }}
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
