@@ -7,8 +7,17 @@ from gemini_public_av import canonical,digest,validate_report,build_request
 def require(condition,code):
     if not condition:raise PermissionError(code)
 
+def modality_concerns(report):
+    """Missing supplied audio is not evidence of intentional source silence."""
+    limitations=list(report.get('limitations',[]))
+    for segment in report.get('segments',[]):limitations.extend(segment.get('limitations',[]))
+    missing=('no audio track provided','audio not provided','audio was not received')
+    if report.get('audio_received') is True and any(any(term in str(value).lower() for term in missing) for value in limitations):
+        return ['AUDIO_INPUT_CLAIM_CONTRADICTION_NOT_SOURCE_SILENCE_EVIDENCE']
+    return []
+
 def verify(summary,plan,read,*,request_day='2026-10-14'):
-    accepted=[]; gaps=[]
+    accepted=[]; gaps=[]; concerns=[]
     identities={v['video_id']:v for v in plan['videos']}
     expected_windows={(v['video_id'],tuple(w)) for v in plan['videos'] for w in v['windows']}
     observed_windows=[(s['video_id'],tuple(s['window'])) for s in summary['samples']]
@@ -46,14 +55,19 @@ def verify(summary,plan,read,*,request_day='2026-10-14'):
             require(receipt[flag] is False,'SAMPLE_CANNOT_GRANT_AUTHORITY')
         require(receipt['review_status']=='NOT_REVIEWED','FALSE_REVIEW_UPGRADE')
         validate_report(receipt['report'],source,tuple(sample['window']),refinement=True)
+        concerns.extend({'path':path,'video_id':source['video_id'],'window':sample['window'],'code':code}
+            for code in modality_concerns(receipt['report']))
         accepted.append({'path':path,'sha256':hashlib.sha256(raw).hexdigest(),'video_id':source['video_id'],
             'window':sample['window'],'sample_fps':2,'segment_count':len(receipt['report']['segments'])})
     attempted=set(observed_windows)
     for item in plan['videos']:
         gaps.extend({'video_id':item['video_id'],'window':w,'status':'NOT_STARTED_AFTER_PROVIDER_FAILURE'}
             for w in item['windows'] if (item['video_id'],tuple(w)) not in attempted)
-    return {'status':'SAVED_SAMPLE_PROVENANCE_VERIFIED_WITH_GAPS' if gaps else 'COMPLETE_PLANNED_SAMPLES_PROVENANCE_VERIFIED',
+    return {'status':'SAVED_SAMPLE_PROVENANCE_VERIFIED_WITH_GAPS' if gaps else
+            'COMPLETE_SAMPLE_PROVENANCE_WITH_UNRESOLVED_CONTENT_CONCERNS' if concerns else
+            'COMPLETE_PLANNED_SAMPLES_PROVENANCE_VERIFIED',
         'verified_samples':accepted,'gaps':gaps,
+        'content_concerns':concerns,'content_review_required':bool(concerns),
         'verified_sample_seconds':sum(w['window'][1]-w['window'][0] for w in accepted),
         'coverage':'SAMPLED_NOT_FULL_VIDEO','provider_calls':0,'native_frames_independently_reviewed':False,
         'verbatim_transcript_available':False,'quality_authorized':False,'publication_authorized':False}
