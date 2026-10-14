@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "kind": "STATIC_TRANSPORT_CANDIDATE_ACCEPTANCE",
+  "publication_authorized": false,
+  "quality_authorized": false,
+  "criteria": {
+    "EXACT_CHANNEL_CONNECTED": "PASS",
+    "SIZE_BELOW_500_MB": "PASS",
+    "ORIGINAL_AAC_ALL_PACKET_IDENTITY": "PASS",
+    "DISPLAYED_NARRATIVE_TITLE_ALIGNED": "PASS",
+    "H264_HIGH_420_BT709_1080P": "PASS",
+    "VIDEO_FULL_DECODE": "PASS_324000_FRAMES_ZERO_ERRORS_ZERO_DUP_ZERO_DROP",
+    "NATIVE_CALIBRATED_STATIC_CODEC_CONTROLS": "BLOCKED_MISSING_CURRENT_DOMAIN_BINDING",
+    "NATIVE_REFERENCE_MUSICAL_BODY": "BLOCKED_ORIGINAL_REFERENCE_NOT_RESTORED",
+    "CURRENT_MATCHED_AUDIOVISUAL_MINING": "BLOCKED_ONLINE_PLAYERS_UNAVAILABLE_AND_FREE_VIDEO_WATCH_CREDIT_INSUFFICIENT",
+    "SUBSTANTIVE_NEW_RELEASE": "NOT_APPLICABLE_COSMETIC_MASTER_REPAIR",
+    "FULL_NATIVE_RELEASE_ACCEPTANCE": "BLOCKED_NOT_SATISFIED",
+    "CONTROLLED_PRIVATE_FIRST_PROVIDER_REPLAY": "NOT_EXECUTED",
+    "CONTINUOUS_WORKER_METRICOOL_BRIDGE": "NOT_QUALIFIED"
+  },
+  "existing_publication_untouched": true,
+  "supervisor_activated": false,
+  "no_paid_service_used": true,
+  "original_master_preserved": true,
+  "verified_at": "2026-10-14T08:02:21.790500+00:00",
+  "full_decode": {
+    "exit_code": 0,
+    "frames": 324000,
+    "duplicate_frames": 0,
+    "dropped_frames": 0
+  }
+}
