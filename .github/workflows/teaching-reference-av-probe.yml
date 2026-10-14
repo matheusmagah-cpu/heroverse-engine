@@ -1,0 +1,47 @@
+name: HeroVerse exact teaching reference AV probe
+on:
+  push:
+    paths:
+      - '.github/workflows/teaching-reference-av-probe.yml'
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-exact-teaching-reference-av-probe
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Prepare bounded zero-paid-cost public analysis runtime
+        run: |
+          python3 - <<'PY'
+          import shutil,subprocess
+          from pathlib import Path
+          if shutil.disk_usage('.').free < 15*1024**3:
+              optional=Path('/usr/local/lib/android')
+              if optional.is_dir():
+                  subprocess.run(['sudo','rm','-rf',str(optional)],check=True)
+          PY
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          python3 -m venv "$RUNNER_TEMP/av-reference-venv"
+          "$RUNNER_TEMP/av-reference-venv/bin/python" -m pip install --disable-pip-version-check yt-dlp==2026.8.19
+      - name: Acquire and validate exact public audiovisual reference once
+        run: '"$RUNNER_TEMP/av-reference-venv/bin/python" migration/runtime_bridge/cloud_reference_probe.py'
+      - name: Preserve diagnostic and dense AV samples without source library
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: teaching-reference-av-${{ github.run_id }}
+          retention-days: 1
+          if-no-files-found: warn
+          path: |
+            output/research/dotti-7GvhWbXDWHQ/receipt.json
+            output/research/dotti-7GvhWbXDWHQ/process.log
+            output/research/dotti-7GvhWbXDWHQ/probe.json
+            output/research/dotti-7GvhWbXDWHQ/full-audio.mp3
+            output/research/dotti-7GvhWbXDWHQ/frames/*.jpg
