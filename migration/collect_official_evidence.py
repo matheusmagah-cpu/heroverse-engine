@@ -25,10 +25,16 @@ PRIVATE_UNKNOWN=['IMPRESSIONS','CTR','INTRO_RETENTION','AVERAGE_VIEW_DURATION','
 MAX_DATA_CALLS=40
 DISCOVERY_IDS=('TYCZe65GxdQ','ZGiGg9O09yU','beIMxaH7YuI')
 
-def candidate_source_ids(*,reference_extension=False,peace_extension=False):
+def candidate_source_ids(*,reference_extension=False,peace_extension=False,additional_public_video_ids=()):
     if peace_extension and not reference_extension:
         raise PermissionError('PEACE_EXTENSION_REQUIRES_EXISTING_REFERENCE_STAGE')
-    return DISCOVERY_IDS+(('yY9dDJCLfHU',) if reference_extension else ())+(('qD7efeJhPIM',) if peace_extension else ())
+    extra=tuple(additional_public_video_ids)
+    if extra and (not reference_extension or not peace_extension or len(extra)>3
+            or len(set(extra))!=len(extra) or any(not isinstance(v,str) or not re.fullmatch(r'[A-Za-z0-9_-]{11}',v) for v in extra)):
+        raise PermissionError('BOUNDED_PUBLIC_DISCOVERY_IDS_REQUIRED')
+    ids=DISCOVERY_IDS+(('yY9dDJCLfHU',) if reference_extension else ())+(('qD7efeJhPIM',) if peace_extension else ())+extra
+    if len(ids)!=len(set(ids)):raise PermissionError('DUPLICATE_PUBLIC_DISCOVERY_ID')
+    return ids
 
 def discovered_references(registry_path=Path('migration/evidence/current-market-discovery-references.json')):
     if not registry_path.is_file():return []
@@ -107,9 +113,10 @@ def snapshot(operation,captured,channel,entity,identity,payload):
         'collector':{'name':'YouTube Data API','version':'v3-bounded-migration-1','mode':'PUBLIC_METADATA_NO_MEDIA'},
         'evidence_class':'OBSERVED','payload':payload,'unavailable_metrics':PRIVATE_UNKNOWN,'error':None}
 
-def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=False,reference_extension=False,peace_extension=False):
-    source_ids=candidate_source_ids(reference_extension=reference_extension,peace_extension=peace_extension)
-    if peace_extension and not (candidate_only and catalog_only):
+def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=False,reference_extension=False,peace_extension=False,additional_public_video_ids=()):
+    source_ids=candidate_source_ids(reference_extension=reference_extension,peace_extension=peace_extension,
+        additional_public_video_ids=additional_public_video_ids)
+    if (peace_extension or additional_public_video_ids) and not (candidate_only and catalog_only):
         raise PermissionError('PEACE_EXTENSION_IS_READ_ONLY_CATALOGUE_STAGE')
     from oauth_health import observe_refresh,identity_health
     raw=os.environ.get('HERO_YT_AUTHORIZED_USER_JSON','')
@@ -330,7 +337,8 @@ def main():
             candidate_only=os.environ.get('HERO_CANDIDATE_PROBE_ONLY')=='true',
             catalog_only=os.environ.get('HERO_CANDIDATE_CATALOG_ONLY')=='true',
             reference_extension=os.environ.get('HERO_REFERENCE_EXTENSION_ONLY')=='true',
-            peace_extension=os.environ.get('HERO_REFERENCE_PEACE_EXTENSION_ONLY')=='true')
+            peace_extension=os.environ.get('HERO_REFERENCE_PEACE_EXTENSION_ONLY')=='true',
+            additional_public_video_ids=json.loads(os.environ.get('HERO_ADDITIONAL_PUBLIC_SEEDS','[]')))
         finally:
             if destination.exists():shutil.copy2(destination,export/'quota-ledger.sqlite3')
         print(json.dumps(summary))
