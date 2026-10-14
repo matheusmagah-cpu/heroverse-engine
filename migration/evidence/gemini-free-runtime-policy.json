@@ -1,6 +1,6 @@
 {
   "project_id": "gen-lang-client-0909161074",
-  "model": "gemini-3.8-flash",
+  "model": "gemini-3.6-flash",
   "tier": "FREE",
   "billing_enabled": false,
   "input_price_usd": 0,
@@ -14,5 +14,6 @@
     "https://ai.google.dev/gemini-api/docs/generate-content/video-understanding"
   ],
   "expires_after_hours": 24,
-  "automatic_paid_fallback": false
+  "automatic_paid_fallback": false,
+  "selection_reason": "Operator-selected free alternative after recorded HTTP503 from3.8; not a paid or automatic fallback"
 }
