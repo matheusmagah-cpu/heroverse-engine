@@ -30,6 +30,16 @@ class MarketAVBoundaryTests(unittest.TestCase):
             calls.append(kw['window']);return {'key':'key','status':'FAILED','evidence_class':'MODEL_REPORTED'}
         results,complete=execute(plan,Ledger(),'unused',{},analyzer=analyzer)
         self.assertFalse(complete);self.assertEqual(calls,[(0,40)]);self.assertEqual(len(results),1)
+    def test_actual_window_success_enum_advances_sequentially(self):
+        plan,_,_=self.fixture();calls=[]
+        class Ledger:
+            reserve=None;persist=None
+        def analyzer(*a,**kw):
+            calls.append(kw['window']);return {'key':'key','status':'WINDOW_AWAITING_AV_REVIEW',
+                'evidence_class':'MODEL_REPORTED'}
+        results,complete=execute(plan,Ledger(),'unused',{},analyzer=analyzer)
+        self.assertTrue(complete);self.assertEqual(calls,[(0,40),(5400,5410),(10790,10800)])
+        self.assertEqual(len(results),3)
     def test_music_context_does_not_replay_teacher_request(self):
         source={'video_id':'abcdefghijk','duration_seconds':10800,'visibility':'PUBLIC'}
         music=build_request(source,window=(0,40),refinement=True,research_context='CHRISTIAN_REST_MUSIC')
