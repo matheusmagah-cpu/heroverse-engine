@@ -6,6 +6,30 @@ from observe_market_av import validate_plan,execute
 from gemini_public_av import build_request
 
 class MarketAVBoundaryTests(unittest.TestCase):
+    def discovery_fixture(self):
+        plan,raw,now=self.fixture();data=json.loads(raw)
+        row=data['market_snapshots'][0];row['entity_id']='yY9dDJCLfHU'
+        row['channel_id']='UCAOiKo0Ad8F_eRdxgpQSW_A';row['payload']['default_audio_language']=None
+        raw=json.dumps(data).encode();plan['source_binding']['sha256']=hashlib.sha256(raw).hexdigest()
+        item=plan['videos'][0];item['video_id']=row['entity_id'];item['channel_id']=row['channel_id']
+        item['role']='EXPLORATORY_UNQUALIFIED_LANGUAGE_UNKNOWN'
+        plan.update(purpose='UNQUALIFIED_DISCOVERY_AV_NO_LANGUAGE_OR_COHORT_UPGRADE',qualified_winner=False)
+        return plan,raw,now
+    def test_discovery_does_not_require_inventing_declared_language(self):
+        plan,raw,now=self.discovery_fixture()
+        self.assertEqual(validate_plan(plan,raw,now=now),60)
+        self.assertIsNone(json.loads(raw)['market_snapshots'][0]['payload']['default_audio_language'])
+    def test_unknown_language_does_not_enter_matched_branch(self):
+        plan,raw,now=self.discovery_fixture();del plan['purpose']
+        with self.assertRaisesRegex(PermissionError,'MATCHED_PUBLIC_SOURCE_REQUIRED'):
+            validate_plan(plan,raw,now=now)
+    def test_discovery_cannot_upgrade_winner_or_change_source(self):
+        plan,raw,now=self.discovery_fixture();plan['qualified_winner']=True
+        with self.assertRaisesRegex(PermissionError,'EXACT_UNQUALIFIED_DISCOVERY_REQUIRED'):
+            validate_plan(plan,raw,now=now)
+        plan['qualified_winner']=False;plan['videos'][0]['video_id']='other-source'
+        with self.assertRaisesRegex(PermissionError,'EXACT_UNQUALIFIED_DISCOVERY_REQUIRED'):
+            validate_plan(plan,raw,now=now)
     def fixture(self):
         now=datetime(2026,10,14,16,tzinfo=timezone.utc)
         raw=json.dumps({'captured_at':now.isoformat(),'market_snapshots':[{'entity_type':'VIDEO',
