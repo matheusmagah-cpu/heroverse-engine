@@ -1,6 +1,6 @@
 {
   "version": "heroverse-av-recovery-v1",
-  "status": "PENDING",
+  "status": "CANCELLED_BY_OWNER_EXECUTE_NOW",
   "attempts": 0,
   "max_attempts": 1,
   "utc_date": "2026-10-15",
@@ -10,7 +10,7 @@
     "duration_seconds": 1178,
     "visibility": "PUBLIC"
   },
-  "reason": "Both verified free models returnedHTTP503; use one next existing daily observer attempt only under current free policy",
+  "reason": "Owner explicitly requested immediate diagnosis rather than tomorrow recovery",
   "supervisor_enabled": false,
   "publication_authorized": false
 }
