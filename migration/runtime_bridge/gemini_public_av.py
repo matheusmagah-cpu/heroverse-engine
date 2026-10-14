@@ -195,7 +195,7 @@ def transport(payload, api_key, *, model=MODEL):
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None
 
-def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None, refinement=False,research_context=None):
+def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None, refinement=False,research_context=None,recovery=None):
     """Manager adapter. reserve() must durably claim before the network effect.
 
     reserve(key, request_hash, seconds, daily_cap_seconds) returns NEW, REPLAY or
@@ -218,6 +218,23 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
     model = policy['model']
     request_hash = digest({'model': model, 'payload': payload})
     key = 'public-av:' + digest({'source': source, 'request_hash': request_hash})
+    recovery_binding=None
+    if recovery is not None:
+        # One separately owner-authorized recovery, not an automatic transport retry.
+        # Preserve the original failed receipt/key/debit; repeated recovery replays.
+        prior=recovery.get('prior_receipt',{})
+        if (recovery.get('attempt_id')!='20261014-owner-market-503-recovery-1'
+                or recovery.get('owner_request')!='2026-10-14T13:38:01-03:00:resolve-problems'
+                or prior.get('key')!=key or prior.get('request_hash')!=request_hash
+                or prior.get('source')!=source or tuple(prior.get('window') or ())!=tuple(window or ())
+                or prior.get('status')!='FAILED_NO_AUTOMATIC_RETRY'
+                or prior.get('failure_code')!='HTTP_503_UNAVAILABLE'
+                or prior.get('recovery') is not None
+                or not re.fullmatch(r'[a-f0-9]{64}',recovery.get('prior_receipt_sha256',''))):
+            raise PermissionError('EXACT_OWNER_AUTHORIZED_TRANSIENT_RECOVERY_REQUIRED')
+        recovery_binding={k:recovery[k] for k in ('attempt_id','owner_request','prior_receipt_sha256')}
+        recovery_binding['prior_key']=key
+        key='public-av:'+digest({'source':source,'request_hash':request_hash,'recovery':recovery_binding})
     # Local workload budget measures the bounded interval actually requested.
     # This is not a claim about Google's internal quota accounting; provider refusals stop.
     requested_seconds = window[1]-window[0] if window is not None else source['duration_seconds']
@@ -240,6 +257,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         'quality_authorized': False, 'production_authorized': False,
         'publication_authorized': False}
     if research_context is not None:receipt['research_context']=research_context
+    if recovery_binding is not None:receipt['recovery']=recovery_binding
     try:
         response = (transport(payload, api_key, model=model) if send is transport
                     else send(payload, api_key))
