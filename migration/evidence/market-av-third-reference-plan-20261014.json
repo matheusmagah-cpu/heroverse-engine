@@ -1,0 +1,45 @@
+{
+  "request_id": "20261014-third-metadata-reference-av-v1",
+  "purpose": "THIRD_METADATA_WINNER_SAMPLED_NOT_NATIVE_APPROVED",
+  "qualified_winner": false,
+  "opening_seconds": 38,
+  "coverage": "SAMPLED_NOT_FULL_VIDEO",
+  "publication_authorized": false,
+  "requested_seconds": 58,
+  "source_binding": {
+    "path": "migration/evidence/observer-38624074018.json",
+    "sha256": "a875d92e727819cc557f73fb5258a250abc41d5a798ea0a040c3349d8e206168"
+  },
+  "metadata_selection": {
+    "age_band": "8_30D",
+    "group_sample_count": 30,
+    "rank_position": 1,
+    "kind": "WINNER",
+    "ranking_metric": "PUBLIC_VIEWS_PER_COMPLETE_DAY",
+    "snapshot_id": "snap-cb76e7a259f9b1270cd6f7f1",
+    "snapshot_sha256": "8c30353599c6ddc6c6db8dc229e99df3f6b9111bc7458d741010acaba2ffe69d",
+    "causal_claim": false
+  },
+  "videos": [
+    {
+      "video_id": "VA3qvxoZr4Q",
+      "channel_id": "UCemzpRC1q9xqvYKnTvWeQ3A",
+      "duration_seconds": 14030,
+      "role": "METADATA_WINNER_AWAITING_NATIVE_AV",
+      "windows": [
+        [
+          0,
+          38
+        ],
+        [
+          7015,
+          7025
+        ],
+        [
+          14020,
+          14030
+        ]
+      ]
+    }
+  ]
+}
