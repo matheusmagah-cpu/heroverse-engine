@@ -1,0 +1,49 @@
+{
+  "status": "COMPLETE_PLANNED_SAMPLES_PROVENANCE_VERIFIED",
+  "verified_samples": [
+    {
+      "path": "migration/evidence/public-av-857b5bd547940f74d36b7051f4f8871ea805c0cf1d9eb4d1cc3485295df5d8d0.json",
+      "sha256": "4f4f9510fe86e4d262617452ac19029432df91043a5d6b73894455df2b20812c",
+      "video_id": "yY9dDJCLfHU",
+      "window": [
+        0,
+        40
+      ],
+      "sample_fps": 2,
+      "segment_count": 2
+    },
+    {
+      "path": "migration/evidence/public-av-b9e6e907a17db25f41031eafcd79e558f6d2f21fcff3c4d32dbcd504a689aa06.json",
+      "sha256": "9e9cfe6a10ff825131d7119e5225e56b5e5c84b5a2d618e92e6b868a44401cac",
+      "video_id": "yY9dDJCLfHU",
+      "window": [
+        5560,
+        5570
+      ],
+      "sample_fps": 2,
+      "segment_count": 1
+    },
+    {
+      "path": "migration/evidence/public-av-c2937b9e78a546b48bd50dc488c99dae2e0dd669650f5a732810fa763da68169.json",
+      "sha256": "9769a97b579db3b2090bba95c433c96600ec71a5a27d969ae71afa38621224b1",
+      "video_id": "yY9dDJCLfHU",
+      "window": [
+        11110,
+        11120
+      ],
+      "sample_fps": 2,
+      "segment_count": 1
+    }
+  ],
+  "gaps": [],
+  "verified_sample_seconds": 60,
+  "coverage": "SAMPLED_NOT_FULL_VIDEO",
+  "provider_calls": 0,
+  "native_frames_independently_reviewed": false,
+  "verbatim_transcript_available": false,
+  "quality_authorized": false,
+  "publication_authorized": false,
+  "purpose": "UNQUALIFIED_DISCOVERY_AV_NO_LANGUAGE_OR_COHORT_UPGRADE",
+  "qualified_winner": false,
+  "declared_audio_language": null
+}
