@@ -318,7 +318,12 @@ def refine_reference():
                 and receipt.get('report',{}).get('segments')):
             # Admit only the actual contiguous prefix. Preserve the original failed claim.
             prefix=json.loads(json.dumps(receipt['report']))
-            end=prefix['segments'][-1].get('end_seconds')
+            detailed=[]
+            for segment in prefix['segments']:
+                if segment['end_seconds']-segment['start_seconds']>20:break
+                detailed.append(segment)
+            prefix['segments']=detailed
+            end=prefix['segments'][-1].get('end_seconds') if detailed else window[0]
             if type(end) in (int,float) and end==int(end) and window[0]<end<window[1]:
                 end=int(end)
                 prefix['window_end_seconds']=end
