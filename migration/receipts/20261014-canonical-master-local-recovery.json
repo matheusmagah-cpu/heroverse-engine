@@ -1,0 +1,78 @@
+{
+  "version": "heroverse-master-local-recovery-v1",
+  "status": "CANONICAL_MASTER_RESTORED_EXACT_BYTES",
+  "canonical_master": {
+    "path": "output/HeroVerse_Rest_Corrected_3h_Metricool.mp4",
+    "bytes": 391733890,
+    "sha256": "55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46",
+    "duration_seconds": 10800,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "audio_codec": "aac",
+    "video_codec": "h264"
+  },
+  "preserved_source": {
+    "library_file_id": "libfile_e90bfed87b7481918be374846a1ba97b",
+    "file_id": "file_00000000ac0c823081a1300b904a6141"
+  },
+  "isolated_incomplete_copy": {
+    "bytes": 45463552,
+    "sha256": "5d8b649e29394158478969bcf176a02ba74156dcb00b51c60f9294bf3f09776c",
+    "tail_decode_frames": 0
+  },
+  "tail_decode": {
+    "start_seconds": 10795,
+    "duration_seconds": 1,
+    "video_frames": 30,
+    "audio_decoded": true,
+    "errors": 0
+  },
+  "native_frame_samples": [
+    {
+      "timestamp_seconds": 5,
+      "path": "master-recovered/review/frame-00005.png",
+      "sha256": "4d1f7ac038239e6d1bf487919724a733dee0c506c4c1925cde175c9908bb51ee",
+      "bytes": 16413
+    },
+    {
+      "timestamp_seconds": 35,
+      "path": "master-recovered/review/frame-00035.png",
+      "sha256": "4d1f7ac038239e6d1bf487919724a733dee0c506c4c1925cde175c9908bb51ee",
+      "bytes": 16413
+    },
+    {
+      "timestamp_seconds": 66,
+      "path": "master-recovered/review/frame-00066.png",
+      "sha256": "4d1f7ac038239e6d1bf487919724a733dee0c506c4c1925cde175c9908bb51ee",
+      "bytes": 16413
+    },
+    {
+      "timestamp_seconds": 5400,
+      "path": "master-recovered/review/frame-05400.png",
+      "sha256": "4d1f7ac038239e6d1bf487919724a733dee0c506c4c1925cde175c9908bb51ee",
+      "bytes": 16413
+    },
+    {
+      "timestamp_seconds": 10795,
+      "path": "master-recovered/review/frame-10795.png",
+      "sha256": "4d1f7ac038239e6d1bf487919724a733dee0c506c4c1925cde175c9908bb51ee",
+      "bytes": 16413
+    }
+  ],
+  "visual_review": {
+    "reviewed_timestamps_seconds": [
+      5,
+      5400,
+      10795
+    ],
+    "observations": "Legible centered Rest Is Not Giving Up title, dark static background and gold rule; title agrees with native original editorial. Samples do not establish all frames, overall artistic approval, thumbnail effectiveness or a market-derived production handoff.",
+    "scope": "TIMESTAMPED_NATIVE_SAMPLES_NOT_FULL_CRITICAL_QA"
+  },
+  "render_repeated": false,
+  "additional_provider_calls": 0,
+  "paid_calls": 0,
+  "publication_performed": false,
+  "final_quality_approved": false,
+  "market_mining_complete": false
+}
