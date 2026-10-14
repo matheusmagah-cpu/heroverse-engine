@@ -1,0 +1,28 @@
+{
+  "status": "ORIGINAL_AUDIO_MEASUREMENTS_PASS_WITHIN_SCOPED_THRESHOLDS",
+  "full_music_windows": 1074,
+  "music_full_duration_observed": true,
+  "observed_music_frames": 515250176,
+  "music_evidence_sha256": "3ae00830fa072d30cfffa26ab5254bf83c724786e9cd7396e760f874039de5d3",
+  "current_axes": {
+    "CE": 6.424833403225749,
+    "CU": 7.764154773606453,
+    "PC": 2.306287407399043,
+    "PQ": 7.639843739263371
+  },
+  "historical_reference_minima": {
+    "CE": 5.388515023542345,
+    "PQ": 7.4419801340579985
+  },
+  "reference_comparison_scope": "Recorded historical minima only; original selected-reference document has not been restored and is not forged",
+  "opening_asr": "faster-whisper-base.en-cpu-int8-original-revision",
+  "opening_reference_words": 242,
+  "opening_word_errors": 1,
+  "opening_word_error_rate": 0.004132231404958678,
+  "opening_native_threshold": 0.08,
+  "render_repeated": false,
+  "voice_synthesis_repeated": false,
+  "full_visual_semantic_quality_approved": false,
+  "current_package_approved": false,
+  "publication_authorized": false
+}
