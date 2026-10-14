@@ -183,8 +183,43 @@ def diagnose_inputs():
         print(json.dumps({k:v for k,v in receipt.items() if k not in ('output_text',)}))
     return 0
 
+
+def analyze_windows():
+    policy=json.loads(POLICY.read_text())
+    key=os.environ.get('HERO_GEMINI_API_KEY','')
+    run=os.environ['GITHUB_RUN_ID']
+    ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',run)
+    reports=[];bindings=[]
+    for start in range(0,SOURCE['duration_seconds'],240):
+        end=min(start+240,SOURCE['duration_seconds'])
+        receipt=analyze(SOURCE,api_key=key,policy=policy,reserve=ledger.reserve,
+            persist=ledger.persist,window=(start,end))
+        if receipt['status']!='WINDOW_AWAITING_AV_REVIEW':
+            print(json.dumps({'status':'WINDOW_INCOMPLETE','window':[start,end],
+                'failure_code':receipt.get('failure_code'),'publication_authorized':False}))
+            return 2
+        reports.append(receipt['report'])
+        path=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
+        bindings.append({'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+    from gemini_public_av import validate_report
+    combined={'video_id':SOURCE['video_id'],'duration_seconds':SOURCE['duration_seconds'],
+        'audio_received':True,'visual_received':True,'coverage':'FULL',
+        'segments':[segment for report in reports for segment in report['segments']],
+        'limitations':[limitation for report in reports for limitation in report['limitations']]}
+    validate_report(combined,SOURCE)
+    result={'version':'heroverse-complete-windowed-av-v1',
+        'status':'FULL_MODEL_REPORTED_COVERAGE_AWAITING_REVIEW','source':SOURCE,
+        'model':policy['model'],'sample_fps':1,'window_count':len(reports),
+        'bindings':bindings,'report':combined,'independent_native_frame_verification':False,
+        'quality_authorized':False,'production_authorized':False,'publication_authorized':False}
+    out=Path('migration/evidence')/('windowed-av-'+run+'.json')
+    with out.open('x') as f:json.dump(result,f,ensure_ascii=False,sort_keys=True,allow_nan=False)
+    ledger.checkpoint('Checkpoint complete unreviewed windowed AV coverage')
+    print(json.dumps({k:result[k] for k in ('status','window_count','publication_authorized')}))
+    return 0
+
 if __name__=='__main__':
-    try:sys.exit(diagnose_inputs() if len(sys.argv)>1 and sys.argv[1]=='diagnose_inputs' else diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
+    try:sys.exit(analyze_windows() if len(sys.argv)>1 and sys.argv[1]=='windows' else diagnose_inputs() if len(sys.argv)>1 and sys.argv[1]=='diagnose_inputs' else diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
     except Exception:
         print(json.dumps({'status':'AV_BLOCKED','details_redacted':True,'publication_authorized':False}))
         sys.exit(2)
