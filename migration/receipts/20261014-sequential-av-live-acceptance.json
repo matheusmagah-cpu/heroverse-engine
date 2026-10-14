@@ -1,0 +1,90 @@
+{
+  "version": "heroverse-sequential-av-acceptance-20261014-v1",
+  "owner_directive": "Resolve, validate and durably checkpoint one pending stage before advancing. No overlapping provider calls; stop on failed or incomplete results.",
+  "execution": {
+    "run_id": 38562126529,
+    "job_id": 115845543511,
+    "tests": {
+      "adapter": 22,
+      "adapter_result": "PASS",
+      "observation": 27,
+      "observation_skipped": 1
+    },
+    "overall_conclusion": "FAILURE_FINALIZATION_UNCLASSIFIED",
+    "provider_windows_completed": 4,
+    "prior_completed_window_adopted_without_provider_call": true,
+    "aggregate_durably_saved": true,
+    "finalization_root_cause": "UNKNOWN_NOT_ATTRIBUTED_TO_PROVIDER_OR_CONCURRENCY"
+  },
+  "recovery": {
+    "run_id": 38562815321,
+    "job_id": 115847895189,
+    "conclusion": "SUCCESS",
+    "provider_calls": 0,
+    "verification": {
+      "aggregate_binding": {
+        "path": "migration/evidence/windowed-av-38562126529.json",
+        "sha256": "70033029ae40773ad3f255c11dc793d5f9ec4dade0752650188275e876436d72"
+      },
+      "covered_seconds": 1178,
+      "production_authorized": false,
+      "provider_calls": 0,
+      "publication_authorized": false,
+      "quality_authorized": false,
+      "status": "DURABLE_AV_COVERAGE_VERIFIED_AWAITING_CONTENT_REVIEW",
+      "window_count": 5
+    }
+  },
+  "review": {
+    "status": "REFINEMENT_REQUIRED_NOT_PRODUCTION_READY",
+    "coverage": "FULL_MODEL_REPORTED_1178_SECONDS",
+    "sample_fps": 1,
+    "independent_frame_verification": false,
+    "findings": [
+      {
+        "scope": "All five windows",
+        "result": "Source identity, hashes, contiguous timeline and STOP finish validated; this establishes receipt integrity, not factual precision."
+      },
+      {
+        "scope": "0–240 seconds",
+        "result": "Coarse three-block analysis omits previously reported sample-video scene around 3:21–4:15; May 2025/2026 clock is ambiguous. Date and scene details excluded from verified claims."
+      },
+      {
+        "scope": "480–720 seconds",
+        "result": "A single 240-second summary cannot resolve individual scenes, transitions or exact script-to-visual mapping."
+      },
+      {
+        "scope": "720–960 seconds",
+        "result": "Summary does not identify the script-paste/queue sequence separately. Its whiteboard interpretation is not independently corroborated."
+      },
+      {
+        "scope": "960–1030 seconds",
+        "result": "Ad placement statement conflicts with prior pilot chronology; exclude until focused audiovisual confirmation."
+      }
+    ],
+    "admissible_mechanisms_as_hypotheses": [
+      "Early clear promise with visible supporting material",
+      "Specific narration paired with relevant visual evidence",
+      "Single production job queued, completed and verified before next job",
+      "Discovery signals recorded separately from private metrics"
+    ],
+    "excluded_claims": [
+      "Audited creator profit",
+      "Private competitor CTR or retention",
+      "Guaranteed monetization or viral forecasts",
+      "A new queued job completed or uploaded without observed final state"
+    ],
+    "next_pending_stage": "Focused audiovisual refinement of conflicting/omitted scenes, then content review; no producer/publication advancement."
+  },
+  "workflow_guard": {
+    "commit": "7a5d010a5bbf8400b6584ba719d0dc47c54d5b0e",
+    "rejects_multiple_selected_stages_before_effects": true,
+    "existing_concurrency_group_preserved": "heroverse-official-evidence",
+    "failed_stage_stops_advancement": true,
+    "successful_effects_replayed_from_receipts": true
+  },
+  "production_authorized": false,
+  "publication_authorized": false,
+  "additional_paid_budget": 0,
+  "vidiq_calls": 0
+}
