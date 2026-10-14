@@ -158,7 +158,7 @@ def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=Fa
                 'timestamp':published.timestamp(),'duration_seconds':seconds,
                 'view_count':int(v['statistics']['viewCount']) if 'viewCount' in v.get('statistics',{}) else None,
                 'default_audio_language':v['snippet'].get('defaultAudioLanguage'),
-                'availability':'public','catalog_role':'DISCOVERY_LEAD_NOT_QUALIFIED_REFERENCE',
+                **public_projection(v),'catalog_role':'DISCOVERY_LEAD_NOT_QUALIFIED_REFERENCE',
                 'format_basis':'PUBLIC_METADATA_REQUIRES_AV_CONFIRMATION',
                 'license':v.get('status',{}).get('license')}))
         if catalog_only:
