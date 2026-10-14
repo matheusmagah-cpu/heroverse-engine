@@ -1,0 +1,1328 @@
+{
+  "schema_version": "1.0.0",
+  "model_id": "heroverse-channel-model-v1",
+  "created_at": "2026-09-02T18:06:24+00:00",
+  "channel_scope": {
+    "primary_channel_ids": [
+      "chn-9ae537e45f34f7462eb5e6bf"
+    ],
+    "comparison_channel_ids": [
+      "chn-d7ce8f8a59b7e27cceb5dcd7",
+      "chn-20032d846807f46aa60dd39f",
+      "chn-7a8e6c782b1084625af08d26",
+      "chn-30ca4e1a2ddd0540acc78a1e",
+      "chn-3ef25ec49f09a245a05307ea",
+      "chn-2d5a7813b09ae47e9670e269"
+    ],
+    "video_analysis_ids": [
+      "gold:hkf6nDyUfAM",
+      "gold:_sOy7htXJi8",
+      "gold:Pkede5acSFw",
+      "gold:huvUy3pJSp8",
+      "opening:DoCCRjPTE6s",
+      "opening:FpyZdMzFyqs",
+      "opening:MxiY_wHlFIc",
+      "opening:N2mdHZDRYB0",
+      "opening:QVQAmMLfBCU",
+      "opening:VCrKdBmD4eg",
+      "opening:_QMOhw7yE6I",
+      "opening:_sOy7htXJi8",
+      "opening:h6EbB3MVZR0",
+      "opening:hkf6nDyUfAM",
+      "opening:huvUy3pJSp8",
+      "opening:iRG5R2wh1qs",
+      "opening:j2JqyYZzWwI",
+      "opening:sTtGaSwD-QE",
+      "opening:y4JyAJVhE1A",
+      "opening:zXe-P6L0BJs"
+    ]
+  },
+  "cohorts": [
+    {
+      "cohort_id": "grace-winner-q1",
+      "kind": "WINNER",
+      "selection_rule": "Top ceil(N*0.25) by public views per complete day; N=24, q=6; deterministic video_id tie-break.",
+      "video_analysis_ids": [
+        "hkf6nDyUfAM",
+        "FpyZdMzFyqs",
+        "_sOy7htXJi8",
+        "zXe-P6L0BJs",
+        "sTtGaSwD-QE",
+        "QVQAmMLfBCU"
+      ],
+      "limitations": [
+        "Public views are a point-in-time count and do not expose impressions or retention."
+      ]
+    },
+    {
+      "cohort_id": "grace-median-q2-q3",
+      "kind": "MEDIAN",
+      "selection_rule": "Middle N-2*ceil(N*0.25) by public views per complete day; N=24, q=6.",
+      "video_analysis_ids": [
+        "Sp-D8acsjnc",
+        "MxiY_wHlFIc",
+        "-0WxGs3skfM",
+        "VCrKdBmD4eg",
+        "JheHVJjIcd8",
+        "y4JyAJVhE1A",
+        "Pkede5acSFw",
+        "Y4QTl1S1ULY",
+        "5xPV1gcRfp0",
+        "iY1jh7Q1y9I",
+        "_QMOhw7yE6I",
+        "BGGxQfW6Sfw"
+      ],
+      "limitations": [
+        "The middle band is descriptive; it is not a causal control group."
+      ]
+    },
+    {
+      "cohort_id": "grace-weak-q4",
+      "kind": "WEAK",
+      "selection_rule": "Bottom ceil(N*0.25) by public views per complete day; N=24, q=6; deterministic video_id tie-break.",
+      "video_analysis_ids": [
+        "h6EbB3MVZR0",
+        "DoCCRjPTE6s",
+        "N2mdHZDRYB0",
+        "iRG5R2wh1qs",
+        "j2JqyYZzWwI",
+        "huvUy3pJSp8"
+      ],
+      "limitations": [
+        "Low public velocity does not identify the cause of underperformance."
+      ]
+    },
+    {
+      "cohort_id": "grace-latest-period",
+      "kind": "PERIOD",
+      "selection_rule": "Latest 6 rankable format-reference videos by public publication timestamp.",
+      "video_analysis_ids": [
+        "_sOy7htXJi8",
+        "_QMOhw7yE6I",
+        "JheHVJjIcd8",
+        "hkf6nDyUfAM",
+        "sTtGaSwD-QE",
+        "zXe-P6L0BJs"
+      ],
+      "limitations": [
+        "Period cohort may mix platform, seasonality, and editorial changes."
+      ]
+    },
+    {
+      "cohort_id": "cross-channel-public-velocity",
+      "kind": "CROSS_CHANNEL",
+      "selection_rule": "Highest public views per complete day among the collected sample of each format/market/speed reference channel.",
+      "video_analysis_ids": [
+        "OZrlpQIQr3E",
+        "eNEf4VyS8rE",
+        "VXDIekDKaKU",
+        "C0eblbCJ4Iw",
+        "hkf6nDyUfAM"
+      ],
+      "limitations": [
+        "Different channel sizes, catalog ages, audiences, and collection limits make this a descriptive comparison only.",
+        "No monetization approval, RPM, retention, or traffic-source equivalence is observable publicly."
+      ]
+    }
+  ],
+  "channel_dna": {
+    "audience": "English-speaking, belief-aligned Christian viewers facing uncertainty, delay, spiritual pressure, identity questions, or fear and seeking meaning plus a concrete faithful response.",
+    "job_to_be_done": "Convert an emotionally charged struggle into a biblically framed mechanism, discernment, and one actionable identity/faith response without pretending certainty the evidence cannot support.",
+    "core_desires": [
+      "discernment",
+      "courage",
+      "divine meaning",
+      "identity and calling",
+      "hope under pressure",
+      "a concrete next action"
+    ],
+    "editorial_promise": "HeroVerse explains the spiritual tension behind a recognizable struggle and earns an original action/identity payoff in concise cinematic English storytelling.",
+    "point_of_view": "Pressure is not automatically proof of rejection or chosen superiority; meaning must be argued with context, evidence, humility, and a faithful response.",
+    "differentiation": [
+      "Direct second-person tension from the existing HeroVerse packaging, but without generic chosen-one flattery.",
+      "Mechanism and contextual proof before emotional crescendo.",
+      "Clip-based cinematic language whose sources are rights-audited and semantically assigned, not copied from a reference identity.",
+      "Explicit separation of observed evidence, hypothesis, and unavailable divine/platform/economic certainty."
+    ],
+    "pillars": [
+      "spiritual pressure and warfare",
+      "divine timing and silence",
+      "identity/calling with responsibility",
+      "faithful action and obedience",
+      "restoration and hope"
+    ],
+    "topic_map": [
+      "fear→faith",
+      "delay→preparation",
+      "silence→discernment",
+      "attack→response",
+      "brokenness→restoration",
+      "calling→responsibility"
+    ],
+    "identity": {
+      "verbal": [
+        "English",
+        "direct second person",
+        "concrete spiritual tension",
+        "humble certainty boundaries",
+        "original concise payoff"
+      ],
+      "visual": [
+        "CANDIDATE: HeroVerse-owned visual system must be created; reference medieval/battle identity is not inherited.",
+        "Each visual is tagged by narrative job and rights status."
+      ],
+      "audio": [
+        "CANDIDATE: authorized English narrator with controlled escalation.",
+        "No cloned reference voice; licensed music and intelligible speech are mandatory."
+      ]
+    },
+    "packaging_grammar": [
+      "one tension + one consequence + one answerable promise",
+      "second-person relevance when body evidence supports it",
+      "thumbnail adds contradiction/consequence rather than copying title"
+    ],
+    "retention_mechanisms": [
+      "promise confirmation by 0–8s",
+      "personal stakes",
+      "mechanism/proof payoff",
+      "one open loop at a time",
+      "reversal into action",
+      "title-aligned identity resolution"
+    ],
+    "payoff_patterns": [
+      "misinterpretation corrected",
+      "spiritual mechanism clarified",
+      "concrete response",
+      "identity reframed without superiority claim",
+      "brief action after earned resolution"
+    ],
+    "risks": [
+      "reused-content/YPP risk",
+      "unresolved clip rights",
+      "generic mass-produced repetition",
+      "fearbait/prophecy overclaim",
+      "chosen-one superiority",
+      "copied reference identity",
+      "RPM optimization without actual data"
+    ],
+    "evidence_refs": [
+      "claim:C-OWNED-IDENTITY",
+      "claim:C-NARRATIVE-PROGRESSION",
+      "claim:C-RPM-UNAVAILABLE",
+      "artifact:p3-snapshots",
+      "artifact:p3-cohorts",
+      "artifact:p3-coverage"
+    ],
+    "confidence": 0.408248
+  },
+  "format_archetypes": [
+    {
+      "archetype_id": "A-LONG-DIRECT-SPIRITUAL-STAKES-V1",
+      "name": "Direct Spiritual Stakes to Identity/Action Payoff",
+      "function": "Turn an English Christian-motivation tension into a concrete spiritual mechanism, evidence, and an original action/identity resolution.",
+      "audience_intent": "Belief-aligned viewers seeking meaning, courage, discernment, and a next faithful action during pressure or uncertainty.",
+      "compatible_topics": [
+        "spiritual warfare",
+        "divine timing",
+        "faith under pressure",
+        "identity and calling",
+        "God's silence",
+        "obedience",
+        "restoration"
+      ],
+      "incompatible_topics": [
+        "unsupported date prophecy",
+        "fearbait without resolution",
+        "generic chosen-one superiority",
+        "political claim without evidence",
+        "unlicensed sermon compilation"
+      ],
+      "packaging_rules": [
+        {
+          "rule_id": "P1",
+          "description": "Define one tension + one spiritual consequence; title and thumbnail must form one promise, not two competing ideas.",
+          "evidence_refs": [
+            "claim:C-PACKAGING-REPEAT",
+            "claim:C-OWNED-IDENTITY"
+          ],
+          "confidence": 0.6
+        },
+        {
+          "rule_id": "P2",
+          "description": "Use HeroVerse-specific second-person identity/timing language only when the body can prove and resolve it; do not copy the reference suffix or typography.",
+          "evidence_refs": [
+            "claim:C-OWNED-IDENTITY"
+          ],
+          "confidence": 0.6
+        },
+        {
+          "rule_id": "P3",
+          "description": "Thumbnail adds a consequence or contradiction in 1–4 original words and never repeats the exact title.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8",
+            "gold:huvUy3pJSp8"
+          ],
+          "confidence": 0.408248
+        }
+      ],
+      "hook_rules": [
+        {
+          "rule_id": "H1",
+          "description": "0–1s: state a concrete tension or contradiction; no greeting, logo-only bumper, or contextless dialogue.",
+          "evidence_refs": [
+            "claim:C-HOOK-WEAK-START",
+            "gold:huvUy3pJSp8"
+          ],
+          "confidence": 0.53033
+        },
+        {
+          "rule_id": "H2",
+          "description": "1–3s: name the spiritual anchor and the personal consequence promised by the packaging.",
+          "evidence_refs": [
+            "claim:C-HOOK-SEMANTIC"
+          ],
+          "confidence": 0.53033
+        },
+        {
+          "rule_id": "H3",
+          "description": "3–8s: reveal the mechanism or proof direction and open one answerable loop.",
+          "evidence_refs": [
+            "artifact:p3-openings",
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8"
+          ],
+          "confidence": 0.53033
+        },
+        {
+          "rule_id": "H4",
+          "description": "8–30s: pay off the first claim with context and stakes; do not delay the advertised topic behind cinematic dialogue.",
+          "evidence_refs": [
+            "gold:huvUy3pJSp8",
+            "gold:Pkede5acSFw"
+          ],
+          "confidence": 0.408248
+        },
+        {
+          "rule_id": "H5",
+          "description": "Treat cut density and speech-start time as production variables, not success invariants.",
+          "evidence_refs": [
+            "claim:C-TIMING-NOT-SEPARATOR",
+            "claim:C-CUTS-NOT-SEPARATOR"
+          ],
+          "confidence": 0.53033
+        }
+      ],
+      "beat_sheet": [
+        {
+          "beat_id": "B1",
+          "role": "title_aligned_spiritual_stake",
+          "start_ratio_range": [
+            0.0,
+            0.0
+          ],
+          "end_ratio_range": [
+            0.04,
+            0.08
+          ],
+          "objective": "State a concrete spiritual conflict, consequence, or promise in the viewer's terms.",
+          "retention_function": "Resolve packaging ambiguity and create one precise open loop.",
+          "allowed_variations": [
+            "warning",
+            "contradiction",
+            "identity pressure",
+            "urgent declaration"
+          ]
+        },
+        {
+          "beat_id": "B2",
+          "role": "personal_stakes",
+          "start_ratio_range": [
+            0.04,
+            0.08
+          ],
+          "end_ratio_range": [
+            0.18,
+            0.3
+          ],
+          "objective": "Translate the spiritual thesis into a recognizable decision, fear, delay, or cost.",
+          "retention_function": "Make the question personally consequential without adding a second thesis.",
+          "allowed_variations": [
+            "micro-story",
+            "symptom sequence",
+            "contrast",
+            "specific scenario"
+          ]
+        },
+        {
+          "beat_id": "B3",
+          "role": "mechanism_and_proof",
+          "start_ratio_range": [
+            0.18,
+            0.3
+          ],
+          "end_ratio_range": [
+            0.48,
+            0.62
+          ],
+          "objective": "Explain how the pressure works and provide context-preserving authority or evidence.",
+          "retention_function": "Pay off the first loop and open a practical one.",
+          "allowed_variations": [
+            "scripture explained",
+            "licensed expert excerpt",
+            "historical context",
+            "analogy"
+          ]
+        },
+        {
+          "beat_id": "B4",
+          "role": "reversal_and_action",
+          "start_ratio_range": [
+            0.48,
+            0.62
+          ],
+          "end_ratio_range": [
+            0.76,
+            0.88
+          ],
+          "objective": "Replace the false response with a concrete faithful response.",
+          "retention_function": "Convert interpretation into escalating action and micro-payoffs.",
+          "allowed_variations": [
+            "three-step response",
+            "belief reversal",
+            "decision ladder",
+            "identity reframe"
+          ]
+        },
+        {
+          "beat_id": "B5",
+          "role": "promise_resolution",
+          "start_ratio_range": [
+            0.76,
+            0.88
+          ],
+          "end_ratio_range": [
+            0.96,
+            1.0
+          ],
+          "objective": "Resolve the exact title promise in a memorable original line and one next action.",
+          "retention_function": "Deliver satisfaction; do not introduce an unrelated topic.",
+          "allowed_variations": [
+            "identity resolution",
+            "prayer/action",
+            "single reflective question",
+            "brief CTA after payoff"
+          ]
+        }
+      ],
+      "invariants": [
+        {
+          "rule_id": "I1",
+          "description": "One packaging promise remains the controlling thesis from hook through payoff.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8",
+            "gold:huvUy3pJSp8"
+          ],
+          "confidence": 0.408248
+        },
+        {
+          "rule_id": "I2",
+          "description": "The first audible unit is self-contained and reaches a concrete spiritual anchor without borrowed context.",
+          "evidence_refs": [
+            "claim:C-HOOK-SEMANTIC",
+            "claim:C-HOOK-WEAK-START"
+          ],
+          "confidence": 0.53033
+        },
+        {
+          "rule_id": "I3",
+          "description": "Progression includes stake, mechanism/proof, reversal/action, and title-aligned resolution.",
+          "evidence_refs": [
+            "claim:C-NARRATIVE-PROGRESSION"
+          ],
+          "confidence": 0.408248
+        },
+        {
+          "rule_id": "I4",
+          "description": "Every third-party clip has a rights status, truthful context, provenance, and named narrative job.",
+          "evidence_refs": [
+            "artifact:p3-coverage"
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "variables": [
+        {
+          "rule_id": "V1",
+          "description": "Topic, angle, scripture, example, emotion, visual world, CTA, and proof source are replaceable slots.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8",
+            "gold:Pkede5acSFw",
+            "gold:huvUy3pJSp8"
+          ],
+          "confidence": 0.408248
+        },
+        {
+          "rule_id": "V2",
+          "description": "Beat duration may move inside observed ratio ranges; five to seven complete segments were observed.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8",
+            "gold:Pkede5acSFw",
+            "gold:huvUy3pJSp8"
+          ],
+          "confidence": 0.408248
+        },
+        {
+          "rule_id": "V3",
+          "description": "Original narration, licensed excerpt, public-domain image, motion graphic, self-shot footage, or typography may perform a beat when rights and context pass.",
+          "evidence_refs": [
+            "artifact:p3-coverage"
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "prohibited": [
+        {
+          "rule_id": "X1",
+          "description": "Do not reuse the reference channel's exact title suffix, logo, thumbnail composition, cinematic sequence, wording, voice, or music identity.",
+          "evidence_refs": [
+            "claim:C-PACKAGING-REPEAT",
+            "artifact:p3-coverage"
+          ],
+          "confidence": 1.0
+        },
+        {
+          "rule_id": "X2",
+          "description": "Do not reorder a source speech to reverse meaning, hide provenance, evade Content ID, or treat public availability as permission.",
+          "evidence_refs": [
+            "artifact:p3-coverage"
+          ],
+          "confidence": 1.0
+        },
+        {
+          "rule_id": "X3",
+          "description": "Do not use a percentage-of-change rule as proof of originality or rights.",
+          "evidence_refs": [
+            "artifact:master-spec"
+          ],
+          "confidence": 1.0
+        },
+        {
+          "rule_id": "X4",
+          "description": "Do not make prophecy dates, guaranteed divine claims, or monetization/RPM claims without evidence.",
+          "evidence_refs": [
+            "claim:C-RPM-UNAVAILABLE",
+            "artifact:p3-snapshots"
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "visual_grammar": [
+        {
+          "rule_id": "VG1",
+          "description": "Assign each visual a semantic job (stake, evidence, contrast, mechanism, action, payoff) before sourcing it.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8",
+            "gold:Pkede5acSFw",
+            "gold:huvUy3pJSp8"
+          ],
+          "confidence": 0.408248
+        },
+        {
+          "rule_id": "VG2",
+          "description": "Build a HeroVerse-owned palette and composition system; similarity to medieval/battle imagery is optional, never an identity requirement.",
+          "evidence_refs": [
+            "claim:C-OWNED-IDENTITY",
+            "artifact:p3-coverage"
+          ],
+          "confidence": 0.6
+        },
+        {
+          "rule_id": "VG3",
+          "description": "Use on-screen text only at structural turns and keep it original, legible, and non-duplicative of the complete title.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8"
+          ],
+          "confidence": 0.408248
+        }
+      ],
+      "audio_grammar": [
+        {
+          "rule_id": "AG1",
+          "description": "Use an authorized English narrator with clear, controlled escalation; voice cloning requires explicit rights and is otherwise prohibited.",
+          "evidence_refs": [
+            "artifact:p3-coverage"
+          ],
+          "confidence": 1.0
+        },
+        {
+          "rule_id": "AG2",
+          "description": "Music supports beat transitions and payoff but must not mask speech; every track requires a reusable-rights record.",
+          "evidence_refs": [
+            "artifact:p3-coverage"
+          ],
+          "confidence": 1.0
+        },
+        {
+          "rule_id": "AG3",
+          "description": "Third-party speech is evidence or contrast, not the entire narrative spine; preserve its context and identify its job.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "gold:_sOy7htXJi8",
+            "gold:Pkede5acSFw",
+            "gold:huvUy3pJSp8"
+          ],
+          "confidence": 0.408248
+        }
+      ],
+      "examples": [
+        {
+          "video_id": "hkf6nDyUfAM",
+          "reason": "Winner: concrete warfare packaging, armor-of-God anchor, escalating mechanism, daily resistance, and Christ-centered resolution.",
+          "evidence_refs": [
+            "gold:hkf6nDyUfAM",
+            "cohort:grace-winner-q1"
+          ]
+        },
+        {
+          "video_id": "_sOy7htXJi8",
+          "reason": "Winner/recent: confrontation becomes urgency, prophecy, practical orders, and personal responsibility.",
+          "evidence_refs": [
+            "gold:_sOy7htXJi8",
+            "cohort:grace-winner-q1"
+          ]
+        }
+      ],
+      "counterexamples": [
+        {
+          "video_id": "huvUy3pJSp8",
+          "reason": "Weak: title promises purpose, but contextless cinematic dialogue delays the religious premise to about 41 seconds.",
+          "evidence_refs": [
+            "gold:huvUy3pJSp8",
+            "cohort:grace-weak-q4"
+          ]
+        },
+        {
+          "video_id": "Pkede5acSFw",
+          "reason": "Median: thesis starts clearly, but thumbnail/action-film world and final visual silence weaken proof/payoff alignment.",
+          "evidence_refs": [
+            "gold:Pkede5acSFw",
+            "cohort:grace-median-q2-q3"
+          ]
+        }
+      ],
+      "duration_range_ms": [
+        207750,
+        286250
+      ],
+      "production_complexity": "HIGH; clip-based rights review, semantic continuity, narration, sound design, and visual QA required.",
+      "estimated_cost_range": null,
+      "evidence_refs": [
+        "gold:hkf6nDyUfAM",
+        "gold:_sOy7htXJi8",
+        "gold:Pkede5acSFw",
+        "gold:huvUy3pJSp8",
+        "artifact:p3-openings",
+        "cohort:grace-winner-q1",
+        "cohort:grace-weak-q4",
+        "claim:C-NARRATIVE-PROGRESSION",
+        "claim:C-HOOK-SEMANTIC"
+      ],
+      "confidence": 0.408248
+    }
+  ],
+  "scores": {
+    "format_repeatability_score": {
+      "value": 0.785417,
+      "scale": "0-1 higher is more repeatable",
+      "formula": "0.35*title_suffix_rate + 0.25*mean(max(0,winner_anchor-weak_anchor),max(0,weak_weak_start-winner_weak_start)) + 0.25*full_case_progression_rate + 0.15*share_duration_210_300s",
+      "inputs": [
+        "claim:C-PACKAGING-REPEAT",
+        "claim:C-HOOK-SEMANTIC",
+        "claim:C-NARRATIVE-PROGRESSION",
+        "artifact:p3-snapshots"
+      ],
+      "confidence": 0.408248,
+      "limitations": [
+        "Only four complete narratives; score is a deterministic coverage/recurrence index, not a performance probability."
+      ]
+    },
+    "evidence_confidence_score": {
+      "value": 0.5375,
+      "scale": "0-1 higher is deeper reference-video coverage",
+      "formula": "(4 FULL*1.00 + 13 OPENING_ONLY*0.55 + 7 METADATA_ONLY*0.25) / 24 reference videos",
+      "inputs": [
+        "artifact:p3-coverage",
+        "artifact:p3-openings",
+        "artifact:p3-snapshots",
+        "claim:C-RPM-UNAVAILABLE"
+      ],
+      "confidence": 1.0,
+      "limitations": [
+        "Weights are frozen evidence-depth weights; score describes coverage, not statistical confidence or performance probability."
+      ]
+    },
+    "originality_control_coverage_score": {
+      "value": 1.0,
+      "scale": "0-1 share of six required originality-control slots specified",
+      "formula": "specified original slots / 6: title, thumbnail, voice, rhetorical sequence, visual system, payoff",
+      "inputs": [
+        "claim:C-OWNED-IDENTITY",
+        "artifact:p3-coverage"
+      ],
+      "confidence": 1.0,
+      "limitations": [
+        "Control coverage does not prove that a future blueprint or render is original; both require independent audit."
+      ]
+    },
+    "policy_exposure_screen_score": {
+      "value": 0.8,
+      "scale": "0-1 share of five predefined policy exposure flags present",
+      "formula": "4 present flags / 5 screened: clip-based reuse, unresolved reference rights, automation/repetition, prophecy-overclaim; voice-clone request absent",
+      "inputs": [
+        "artifact:p3-coverage",
+        "artifact:acquisition-contract"
+      ],
+      "confidence": 1.0,
+      "limitations": [
+        "This is a binary exposure screen, not a probability of policy action or legal conclusion."
+      ]
+    },
+    "cross_channel_validation_score": {
+      "value": 0.0,
+      "scale": "0-1 share of required independent channels with full mined confirmation",
+      "formula": "0 independent channels with FULL_VALIDATED narrative confirmation / minimum target 3",
+      "inputs": [
+        "cohort:cross-channel-public-velocity",
+        "artifact:p3-coverage"
+      ],
+      "confidence": 1.0,
+      "limitations": [
+        "Cross-channel metadata exists but does not count as narrative-mechanism validation."
+      ]
+    },
+    "rpm_evidence_score": {
+      "value": 0.0,
+      "scale": "0-1 higher means actual owned RPM evidence",
+      "formula": "1 if authenticated owned RPM series exists and is sufficient; otherwise 0",
+      "inputs": [
+        "claim:C-RPM-UNAVAILABLE"
+      ],
+      "confidence": 1.0,
+      "limitations": [
+        "No economic ranking is permitted before owned post-YPP data."
+      ]
+    }
+  },
+  "hypotheses": [
+    {
+      "hypothesis_id": "H-HOOK-DIRECT-ANCHOR",
+      "status": "CANDIDATE",
+      "statement": "For HeroVerse long-form, a title-aligned spiritual anchor and personal consequence in the first eight seconds will outperform delayed/context-dependent dialogue on 30-second retention.",
+      "falsification_condition": "Reject if, across at least six comparable owned long-form releases with age-matched measurement, direct-anchor openings do not improve 30-second retention versus the preregistered baseline beyond uncertainty.",
+      "supporting_evidence": [
+        "claim:C-HOOK-SEMANTIC",
+        "claim:C-HOOK-WEAK-START",
+        "gold:huvUy3pJSp8"
+      ],
+      "contradicting_evidence": [
+        "opening:DoCCRjPTE6s",
+        "opening:N2mdHZDRYB0",
+        "opening:_sOy7htXJi8"
+      ],
+      "confidence": 0.53033,
+      "test_design": "Preregister six long-form pilots; hold topic/length/age window as comparable as possible; vary only opener class; evaluate owned 30s retention with interval and baseline."
+    },
+    {
+      "hypothesis_id": "H-LONG-WATCH-HOUR-PATH",
+      "status": "CANDIDATE",
+      "statement": "Given HeroVerse's current 20-Short/1-long catalog and the evidence-sufficient long archetype, long-form is the primary test path for qualified watch hours; Shorts remain supporting discovery tests.",
+      "falsification_condition": "Suspend if comparable owned long-form pilots fail watch-hours-per-production-hour and subscriber conversion stop rules while Shorts show materially stronger qualified organic progress.",
+      "supporting_evidence": [
+        "artifact:p3-snapshots",
+        "artifact:acquisition-contract",
+        "claim:C-NARRATIVE-PROGRESSION"
+      ],
+      "contradicting_evidence": [
+        "claim:C-RPM-UNAVAILABLE"
+      ],
+      "confidence": 0.408248,
+      "test_design": "Measure owned long vs Short organic outcomes at fixed ages; exclude paid views/hours/subscribers; compare qualified watch hours, subscriber conversion, and production time with uncertainty."
+    },
+    {
+      "hypothesis_id": "H-SEMANTIC-VISUAL-JOB",
+      "status": "CANDIDATE",
+      "statement": "Assigning every clip a narrative job and semantic relation to the spoken beat will reduce promise/body mismatch versus generic cinematic montage.",
+      "falsification_condition": "Reject if blind editorial review and owned retention diagnostics show no improvement in alignment or segment drop-off against the preregistered baseline.",
+      "supporting_evidence": [
+        "gold:hkf6nDyUfAM",
+        "gold:Pkede5acSFw",
+        "artifact:p3-coverage"
+      ],
+      "contradicting_evidence": [
+        "claim:C-CUTS-NOT-SEPARATOR"
+      ],
+      "confidence": 0.408248,
+      "test_design": "Blind-score blueprint/render semantic alignment before publication; compare segment retention and reviewer agreement after publication."
+    },
+    {
+      "hypothesis_id": "H-RPM-LONG-VS-SHORT",
+      "status": "CANDIDATE",
+      "statement": "Long-form may produce higher owned RPM/value per qualified view than Shorts, but the direction and magnitude are unknown for HeroVerse.",
+      "falsification_condition": "Replace with observed rule only after YPP and a sufficient owned series; reject the direction if age/topic-adjusted actual net value does not exceed Shorts.",
+      "supporting_evidence": [
+        "artifact:acquisition-contract"
+      ],
+      "contradicting_evidence": [
+        "claim:C-RPM-UNAVAILABLE"
+      ],
+      "confidence": 0.0,
+      "test_design": "After YPP, compare authenticated RPM, net contribution, watch hours and production cost by format; do not optimize on CPM proxies."
+    }
+  ],
+  "evidence_matrix": [
+    {
+      "claim_id": "C-PACKAGING-REPEAT",
+      "statement": "The reference population repeatedly uses compact all-caps spiritual declarations plus a niche label (observed suffix rate 100.0%).",
+      "evidence_class": "CALCULATED",
+      "knowledge_status": "CALCULATED",
+      "supporting_evidence": [
+        "artifact:p3-snapshots",
+        "cohort:grace-winner-q1",
+        "cohort:grace-weak-q4"
+      ],
+      "contradicting_evidence": [],
+      "sample_size": 24,
+      "confidence": 1.0,
+      "limitations": [
+        "A repeatable reference convention is not permission to copy its exact suffix, typography, or identity."
+      ]
+    },
+    {
+      "claim_id": "C-HOOK-SEMANTIC",
+      "statement": "Winner openings more often place a spiritual anchor inside the first 20 spoken words (66.7%) than weak openings (50.0%).",
+      "evidence_class": "CALCULATED",
+      "knowledge_status": "CANDIDATE",
+      "supporting_evidence": [
+        "artifact:p3-openings",
+        "cohort:grace-winner-q1",
+        "cohort:grace-weak-q4"
+      ],
+      "contradicting_evidence": [
+        "opening:DoCCRjPTE6s",
+        "opening:N2mdHZDRYB0"
+      ],
+      "sample_size": 12,
+      "confidence": 0.53033,
+      "limitations": [
+        "Opening labels are retrospective public cohorts; retention and causality are unavailable."
+      ]
+    },
+    {
+      "claim_id": "C-HOOK-WEAK-START",
+      "statement": "Context-dependent/dialogue starts appear in 66.7% of weak openings versus 0.0% of winner openings under the frozen lexical rule.",
+      "evidence_class": "CALCULATED",
+      "knowledge_status": "CANDIDATE",
+      "supporting_evidence": [
+        "opening:huvUy3pJSp8",
+        "opening:j2JqyYZzWwI",
+        "cohort:grace-weak-q4"
+      ],
+      "contradicting_evidence": [
+        "opening:_sOy7htXJi8"
+      ],
+      "sample_size": 12,
+      "confidence": 0.53033,
+      "limitations": [
+        "The lexical rule is small-sample and cannot measure whether a viewer understood the opener."
+      ]
+    },
+    {
+      "claim_id": "C-TIMING-NOT-SEPARATOR",
+      "statement": "First-speech timing is similar across winner and weak openings (median 6.65s vs 6.69s).",
+      "evidence_class": "CALCULATED",
+      "knowledge_status": "CALCULATED",
+      "supporting_evidence": [
+        "artifact:p3-openings",
+        "cohort:grace-winner-q1",
+        "cohort:grace-weak-q4"
+      ],
+      "contradicting_evidence": [],
+      "sample_size": 12,
+      "confidence": 0.53033,
+      "limitations": [
+        "This does not imply a silent bumper is optimal for HeroVerse; it only failed to separate these public cohorts."
+      ]
+    },
+    {
+      "claim_id": "C-CUTS-NOT-SEPARATOR",
+      "statement": "Cut count through 30s does not cleanly separate winner and weak cohorts (median 7.5 vs 5.5).",
+      "evidence_class": "CALCULATED",
+      "knowledge_status": "CALCULATED",
+      "supporting_evidence": [
+        "artifact:p3-openings",
+        "cohort:grace-winner-q1",
+        "cohort:grace-weak-q4"
+      ],
+      "contradicting_evidence": [],
+      "sample_size": 12,
+      "confidence": 0.53033,
+      "limitations": [
+        "Cut detection uses one threshold and does not capture shot meaning or audio transitions."
+      ]
+    },
+    {
+      "claim_id": "C-NARRATIVE-PROGRESSION",
+      "statement": "Across the four complete cases, the repeatable mechanism is progression from a spiritual stake to explanation/proof, then an action or identity payoff; exact beat counts vary from five to seven.",
+      "evidence_class": "INFERRED",
+      "knowledge_status": "CANDIDATE",
+      "supporting_evidence": [
+        "gold:hkf6nDyUfAM",
+        "gold:_sOy7htXJi8",
+        "gold:Pkede5acSFw",
+        "gold:huvUy3pJSp8"
+      ],
+      "contradicting_evidence": [
+        "gold:huvUy3pJSp8"
+      ],
+      "sample_size": 4,
+      "confidence": 0.408248,
+      "limitations": [
+        "Only four complete narratives exist; the beat sheet is a pilot hypothesis, not a general rule."
+      ]
+    },
+    {
+      "claim_id": "C-OWNED-IDENTITY",
+      "statement": "HeroVerse public packaging currently emphasizes second-person identity, divine timing, warning, hidden preparation, spiritual warfare, and chosen-purpose language.",
+      "evidence_class": "INFERRED",
+      "knowledge_status": "CANDIDATE",
+      "supporting_evidence": [
+        "artifact:p3-snapshots"
+      ],
+      "contradicting_evidence": [],
+      "sample_size": 21,
+      "confidence": 0.6,
+      "limitations": [
+        "Only titles and public metadata were analyzed for the 20 Shorts and one long-form; visual/audio identity is unverified."
+      ]
+    },
+    {
+      "claim_id": "C-RPM-UNAVAILABLE",
+      "statement": "Actual RPM, revenue, qualified watch hours, CTR, and retention are unavailable and cannot rank formats economically.",
+      "evidence_class": "UNAVAILABLE",
+      "knowledge_status": "UNAVAILABLE",
+      "supporting_evidence": [
+        "artifact:acquisition-baseline"
+      ],
+      "contradicting_evidence": [],
+      "sample_size": 0,
+      "confidence": 1.0,
+      "limitations": [
+        "Any high-RPM statement before authenticated post-YPP data is a hypothesis, not a measurement."
+      ]
+    }
+  ],
+  "generation_specs": [
+    {
+      "generation_spec_id": "GS-LONG-DIRECT-SPIRITUAL-STAKES-V1",
+      "archetype_id": "A-LONG-DIRECT-SPIRITUAL-STAKES-V1",
+      "readiness": "CANDIDATE_FOR_PILOT_REVIEW",
+      "input_requirements": [
+        "One English audience tension and one answerable spiritual/editorial question.",
+        "One original thesis and title-payoff statement written for HeroVerse.",
+        "A source manifest containing only owned, public-domain, licensed, or review-approved assets.",
+        "At least one context-preserving proof source; scripture must be cited and interpreted in context.",
+        "A rights status, provenance URI, intended narrative job, and timecode for every clip candidate."
+      ],
+      "editorial_question": "What precise spiritual tension is the viewer facing, what mechanism explains it, and what truthful action/identity resolution can this video earn?",
+      "packaging": {
+        "sequence": [
+          "audience tension",
+          "single promise",
+          "title variants",
+          "thumbnail concepts",
+          "combined-promise check"
+        ],
+        "title_templates": [
+          "Why [SPIRITUAL TENSION] Is Not [FEARED MEANING]",
+          "The Battle Behind [RECOGNIZABLE STRUGGLE]",
+          "Before You [REACTION], Understand [SPIRITUAL MECHANISM]"
+        ],
+        "thumbnail_rule": "1–4 original words that add consequence or contradiction; never copy the reference layout or repeat the whole title.",
+        "reject_if": "The hook cannot name and start resolving the same promise in eight seconds."
+      },
+      "hook": {
+        "0_1_seconds": "Concrete tension/contradiction in the viewer's terms.",
+        "1_3_seconds": "Spiritual anchor + personal consequence.",
+        "3_8_seconds": "Mechanism/proof direction + one answerable open loop.",
+        "8_30_seconds": "First payoff, context, stakes, and transition to the body.",
+        "forbidden": [
+          "greeting",
+          "logo-only bumper",
+          "contextless borrowed dialogue",
+          "generic affirmation",
+          "unearned prophecy",
+          "more than one controlling promise"
+        ]
+      },
+      "narrative": [
+        {
+          "beat_id": "B1",
+          "role": "title_aligned_spiritual_stake",
+          "start_ratio_range": [
+            0.0,
+            0.0
+          ],
+          "end_ratio_range": [
+            0.04,
+            0.08
+          ],
+          "objective": "State a concrete spiritual conflict, consequence, or promise in the viewer's terms.",
+          "retention_function": "Resolve packaging ambiguity and create one precise open loop.",
+          "allowed_variations": [
+            "warning",
+            "contradiction",
+            "identity pressure",
+            "urgent declaration"
+          ]
+        },
+        {
+          "beat_id": "B2",
+          "role": "personal_stakes",
+          "start_ratio_range": [
+            0.04,
+            0.08
+          ],
+          "end_ratio_range": [
+            0.18,
+            0.3
+          ],
+          "objective": "Translate the spiritual thesis into a recognizable decision, fear, delay, or cost.",
+          "retention_function": "Make the question personally consequential without adding a second thesis.",
+          "allowed_variations": [
+            "micro-story",
+            "symptom sequence",
+            "contrast",
+            "specific scenario"
+          ]
+        },
+        {
+          "beat_id": "B3",
+          "role": "mechanism_and_proof",
+          "start_ratio_range": [
+            0.18,
+            0.3
+          ],
+          "end_ratio_range": [
+            0.48,
+            0.62
+          ],
+          "objective": "Explain how the pressure works and provide context-preserving authority or evidence.",
+          "retention_function": "Pay off the first loop and open a practical one.",
+          "allowed_variations": [
+            "scripture explained",
+            "licensed expert excerpt",
+            "historical context",
+            "analogy"
+          ]
+        },
+        {
+          "beat_id": "B4",
+          "role": "reversal_and_action",
+          "start_ratio_range": [
+            0.48,
+            0.62
+          ],
+          "end_ratio_range": [
+            0.76,
+            0.88
+          ],
+          "objective": "Replace the false response with a concrete faithful response.",
+          "retention_function": "Convert interpretation into escalating action and micro-payoffs.",
+          "allowed_variations": [
+            "three-step response",
+            "belief reversal",
+            "decision ladder",
+            "identity reframe"
+          ]
+        },
+        {
+          "beat_id": "B5",
+          "role": "promise_resolution",
+          "start_ratio_range": [
+            0.76,
+            0.88
+          ],
+          "end_ratio_range": [
+            0.96,
+            1.0
+          ],
+          "objective": "Resolve the exact title promise in a memorable original line and one next action.",
+          "retention_function": "Deliver satisfaction; do not introduce an unrelated topic.",
+          "allowed_variations": [
+            "identity resolution",
+            "prayer/action",
+            "single reflective question",
+            "brief CTA after payoff"
+          ]
+        }
+      ],
+      "clip_policy": {
+        "primary_mode": "CLIP_BASED_WITH_ORIGINAL_NARRATIVE",
+        "eligible_rights_status": [
+          "OWNED",
+          "PUBLIC_DOMAIN_VERIFIED",
+          "LICENSE_VERIFIED",
+          "EDITORIAL_LEGAL_REVIEW_APPROVED"
+        ],
+        "requirements": [
+          "truthful context",
+          "provenance",
+          "timecode",
+          "named narrative job",
+          "no watermark removal",
+          "no Content-ID evasion"
+        ],
+        "percentage_rule": "NONE; no modification percentage guarantees originality or rights."
+      },
+      "originality_controls": [
+        "Write thesis, sequence, transitions, payoff, title, thumbnail, narration, and visual concept for HeroVerse from a blank document.",
+        "Use references only for mechanism evidence; never use one source video's order as the new timeline.",
+        "Compare semantic sequence, wording, visual identity, audio identity, and source concentration against every reference before release.",
+        "Require substantive new purpose/context for each excerpt and reject cosmetic transformations."
+      ],
+      "quality_gates": [
+        "Packaging contains one precise promise and hook matches it by 0–8s.",
+        "All five functional beats exist, each with a micro-payoff and evidence refs.",
+        "No segment exists solely as decorative footage or borrowed rhetoric.",
+        "Final payoff answers the title without unsupported certainty.",
+        "Rights manifest has no UNKNOWN or analysis-only asset in a production slot.",
+        "Narration is intelligible; audio peaks, captions, black frames, and render settings pass technical QA.",
+        "Model confidence and untested hypotheses remain visible in the production review."
+      ],
+      "rejection_rules": [
+        "Reject if the opening depends on missing source context or delays the advertised subject past eight seconds.",
+        "Reject if title/thumbnail resembles a reference identity more than the HeroVerse concept.",
+        "Reject if proof is absent, decontextualized, or replaced by fearbait/chosen-one superiority.",
+        "Reject if any clip's rights or provenance is unresolved.",
+        "Reject if the timeline reproduces a reference's distinctive take or rhetorical sequence."
+      ],
+      "excluded_actions": [
+        "render",
+        "upload",
+        "publish",
+        "spend",
+        "Ads",
+        "rights exception",
+        "voice cloning"
+      ],
+      "evidence_refs": [
+        "gold:hkf6nDyUfAM",
+        "gold:_sOy7htXJi8",
+        "gold:Pkede5acSFw",
+        "gold:huvUy3pJSp8",
+        "artifact:p3-openings",
+        "cohort:grace-winner-q1",
+        "cohort:grace-weak-q4",
+        "claim:C-NARRATIVE-PROGRESSION",
+        "claim:C-HOOK-SEMANTIC",
+        "artifact:acquisition-contract"
+      ]
+    }
+  ],
+  "retrospective_validation": {
+    "method": "Frozen public quartiles by views per complete day; four full cases explain narrative differences; 13 Phase-2 holdout opening files measure only 0–30s mechanics.",
+    "development_sample_ids": [
+      "gold:hkf6nDyUfAM",
+      "gold:_sOy7htXJi8",
+      "gold:Pkede5acSFw",
+      "gold:huvUy3pJSp8"
+    ],
+    "holdout_opening_ids": [
+      "opening:DoCCRjPTE6s",
+      "opening:FpyZdMzFyqs",
+      "opening:MxiY_wHlFIc",
+      "opening:N2mdHZDRYB0",
+      "opening:QVQAmMLfBCU",
+      "opening:VCrKdBmD4eg",
+      "opening:_QMOhw7yE6I",
+      "opening:h6EbB3MVZR0",
+      "opening:iRG5R2wh1qs",
+      "opening:j2JqyYZzWwI",
+      "opening:sTtGaSwD-QE",
+      "opening:y4JyAJVhE1A",
+      "opening:zXe-P6L0BJs"
+    ],
+    "case_explanations": [
+      {
+        "video_id": "hkf6nDyUfAM",
+        "cohort_kind": "WINNER",
+        "explanation": "Strong promise-to-body fit: warfare immediately becomes armor, threat, authority, daily resistance, and Christ-centered resolution.",
+        "supporting_factors": [
+          "concrete spiritual subject",
+          "high opening alignment",
+          "six-stage escalation",
+          "title-aligned payoff"
+        ],
+        "contrary_factors": [
+          "silent/brand delay",
+          "public cohort cannot reveal retention"
+        ],
+        "evidence_refs": [
+          "gold:hkf6nDyUfAM",
+          "snapshot:hkf6nDyUfAM"
+        ]
+      },
+      {
+        "video_id": "_sOy7htXJi8",
+        "cohort_kind": "WINNER",
+        "explanation": "Confrontational opening, urgency, eschatological mechanism, ordered actions, and personal-responsibility close explain archetype fit.",
+        "supporting_factors": [
+          "action-oriented stakes",
+          "progression to practical orders",
+          "strong payoff"
+        ],
+        "contrary_factors": [
+          "title subject becomes explicit after the initial confrontation"
+        ],
+        "evidence_refs": [
+          "gold:_sOy7htXJi8",
+          "snapshot:_sOy7htXJi8"
+        ]
+      },
+      {
+        "video_id": "Pkede5acSFw",
+        "cohort_kind": "MEDIAN",
+        "explanation": "The thesis starts clearly and progresses through protection/adversary logic, but visual fantasy/action mismatch and a long silent end weaken earned proof/payoff.",
+        "supporting_factors": [
+          "clear thesis",
+          "mechanism and protection payoff"
+        ],
+        "contrary_factors": [
+          "thumbnail/body visual mismatch",
+          "action montage does not prove theological claims",
+          "long visual silence"
+        ],
+        "evidence_refs": [
+          "gold:Pkede5acSFw",
+          "snapshot:Pkede5acSFw"
+        ]
+      },
+      {
+        "video_id": "huvUy3pJSp8",
+        "cohort_kind": "WEAK",
+        "explanation": "The eventual restoration thesis is coherent, but the opening spends about 41 seconds in abstract cinematic dialogue before defining the spiritual promise.",
+        "supporting_factors": [
+          "coherent late mechanism",
+          "strong eventual resolution"
+        ],
+        "contrary_factors": [
+          "context-dependent dialogue",
+          "low first-30s topic alignment",
+          "late religious premise"
+        ],
+        "evidence_refs": [
+          "gold:huvUy3pJSp8",
+          "snapshot:huvUy3pJSp8"
+        ]
+      }
+    ],
+    "metrics": {
+      "full_case_count": 4,
+      "opening_case_count": 16,
+      "opening_holdout_count": 13,
+      "winner_spiritual_anchor_first_20_rate": 0.6666666666666666,
+      "weak_spiritual_anchor_first_20_rate": 0.5,
+      "winner_weak_start_rate": 0.0,
+      "weak_weak_start_rate": 0.6666666666666666,
+      "winner_first_speech_median_seconds": 6.654999999999999,
+      "weak_first_speech_median_seconds": 6.6899999999999995,
+      "winner_cuts_0_30_median": 7.5,
+      "weak_cuts_0_30_median": 5.5
+    },
+    "causal_claims_permitted": false,
+    "limitations": [
+      "No retention/CTR/impressions.",
+      "Only four full narratives.",
+      "Holdout is relative to Phase 2 fixtures, not necessarily to all earlier heuristic development.",
+      "Public views/day is age-normalized but not audience- or traffic-source-normalized."
+    ]
+  },
+  "knowledge_state": [
+    {
+      "knowledge_id": "K1",
+      "status": "OBSERVED",
+      "scope": "CHANNEL",
+      "statement": "HeroVerse has 1 public long-form and 20 public Shorts in the frozen capture.",
+      "evidence_refs": [
+        "artifact:p3-snapshots"
+      ]
+    },
+    {
+      "knowledge_id": "K2",
+      "status": "CALCULATED",
+      "scope": "ARCHETYPE",
+      "statement": "Grace quartiles contain 6 winner, 12 median, and 6 weak videos by public views per complete day.",
+      "evidence_refs": [
+        "artifact:p3-cohorts"
+      ]
+    },
+    {
+      "knowledge_id": "K3",
+      "status": "CANDIDATE",
+      "scope": "ARCHETYPE",
+      "statement": "The long-form archetype is fit for a controlled pilot review, not for scale.",
+      "evidence_refs": [
+        "claim:C-NARRATIVE-PROGRESSION",
+        "claim:C-HOOK-SEMANTIC"
+      ]
+    },
+    {
+      "knowledge_id": "K4",
+      "status": "INCONCLUSIVE",
+      "scope": "TRANSFER",
+      "statement": "Cross-channel metadata does not prove the archetype transfers across independent channels.",
+      "evidence_refs": [
+        "cohort:cross-channel-public-velocity"
+      ]
+    },
+    {
+      "knowledge_id": "K5",
+      "status": "UNAVAILABLE",
+      "scope": "ECONOMICS",
+      "statement": "Actual RPM, revenue, margin, and YPP probability are unavailable.",
+      "evidence_refs": [
+        "claim:C-RPM-UNAVAILABLE"
+      ]
+    }
+  ],
+  "economics": {
+    "actual_rpm": null,
+    "actual_revenue": null,
+    "observed_cost_usd": 0.0,
+    "value_hypotheses": [
+      "Long-form may create more qualified watch-hour value than the existing Short catalog.",
+      "Actual format RPM ranking must wait for owned post-YPP data."
+    ],
+    "decision_use_permitted": false,
+    "evidence_refs": [
+      "claim:C-RPM-UNAVAILABLE",
+      "artifact:acquisition-baseline",
+      "artifact:acquisition-contract"
+    ]
+  },
+  "limitations": [
+    "The model explains correlations and editorial differences; it does not predict views or guarantee YPP.",
+    "Only four videos have full validated narrative/take coverage.",
+    "The 13 additional opening holdouts cannot support body/payoff rules.",
+    "HeroVerse Shorts have metadata but no audiovisual mining; no Shorts archetype is claimed.",
+    "No actual RPM, revenue, CTR, retention, watch hours, or subscriber conversion exists in the approved dataset.",
+    "Reference assets, wording, voice, layout, sequence, and identity are analysis-only and not production inputs."
+  ],
+  "review_status": "NOT_REVIEWED"
+}
