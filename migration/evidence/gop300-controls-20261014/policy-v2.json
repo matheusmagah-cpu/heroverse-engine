@@ -1,0 +1,244 @@
+{
+  "version": "heroverse-gop300-calibration-policy-v2",
+  "registered_at": "2026-10-14T23:20:10.677074+00:00",
+  "candidate_master_sha256": "55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46",
+  "candidate_reference_sha256": "bbd6aaf2c37caf9f47dc7b41880e4bce244afe7dc8e3b831a7829e3565c83a95",
+  "source_manifest_sha256": "dee8a969ae1be4e77d8eb983936083653938e902b919b98074159e685e567ac7",
+  "recipe_sha256": "320178e2364078f7364e6d9ea57a828f0d8a85ad9500cc4559ed458b7feab0c3",
+  "encoder_sha256": "ed16af623947494a72e284b6eb8ff225f2da22b38b5d5069c2fd4b4ba3384e41",
+  "producer_sha256": "0ae71a26087ae2f631073a85dde0d61323dbc695e37156d5f42e8356dc02294a",
+  "controls": [
+    {
+      "group": "positive",
+      "title": "A Quiet Place For Hope"
+    },
+    {
+      "group": "positive",
+      "title": "Grace For The Long Night"
+    },
+    {
+      "group": "positive",
+      "title": "Be Still And Take Heart"
+    },
+    {
+      "group": "negative",
+      "title": "A Gentle Light Ahead"
+    },
+    {
+      "group": "negative",
+      "title": "Peace For A Weary Heart"
+    },
+    {
+      "group": "holdout_positive",
+      "title": "Hope Beyond This Moment"
+    },
+    {
+      "group": "holdout_negative",
+      "title": "Mercy For Another Day"
+    },
+    {
+      "group": "holdout_negative",
+      "title": "A Calm And Steady Heart"
+    }
+  ],
+  "frames_per_control": 300,
+  "negative_corruption": "Erase ONLY left half title region 180,390,960,630; preserve independent right title glyphs; add 70 clipped red code values to entire image",
+  "calibration_method": "Original calibrate_error_limit: maximum positive; strict independent holdout separation; no target fitting or retrospective threshold tuning",
+  "metric_domain": "Native full-resolution RGB; text-local minimum SSIM loss and maximum full-frame CIE76 delta-E",
+  "resource_floors": {
+    "free_disk_bytes": 16106127360,
+    "available_memory_bytes": 2147483648
+  },
+  "production_approved": false,
+  "publication_authorized": false,
+  "prior_policy_sha256": "d6fd48da6775e95927332160b5ad17e57024415bab7c13eb0bbb31300e289b3e",
+  "prior_failure_sha256": "150f91f9f68d98f5ee3e3780f677bfcd3f4103545f3d16d4dee41b3d58d4b3bd",
+  "reused_positive_artifacts": [
+    {
+      "path": "control-0/command.json",
+      "sha256": "8921c2ecd7eb47e5cba173259b974f9dcf3418f299809cd25c80a95fbfc40c53",
+      "bytes": 18892
+    },
+    {
+      "path": "control-0/control.mp4",
+      "sha256": "87128bc8997d4f174972beb2d5dde27c8723638e54a9723d141928ddd5b944fd",
+      "bytes": 48655
+    },
+    {
+      "path": "control-0/decode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-0/decoded-0.png",
+      "sha256": "b0e0b7761cd4cb9e29ef460cb783de0b1610ce185eb4f2bbc2cc616558f705f8",
+      "bytes": 31220
+    },
+    {
+      "path": "control-0/encode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-0/input.png",
+      "sha256": "4f00ee4eb5dd48787dcc823b7b8a39e68e074c8b1d5a3e65ae6ea3c9a80113de",
+      "bytes": 22234
+    },
+    {
+      "path": "control-0/measurement.json",
+      "sha256": "d115f5fca17642d968af228ea29b2749cd75682f5b58893ce7d5f2911307ce8a",
+      "bytes": 877
+    },
+    {
+      "path": "control-0/process-result.json",
+      "sha256": "a6dadf0eac68e278cddbcb7e8d7a88481bb90602189c7a198880366c3c69ed7b",
+      "bytes": 61
+    },
+    {
+      "path": "control-0/reference.png",
+      "sha256": "4f00ee4eb5dd48787dcc823b7b8a39e68e074c8b1d5a3e65ae6ea3c9a80113de",
+      "bytes": 22234
+    },
+    {
+      "path": "control-1/command.json",
+      "sha256": "5de6aa7b0fddbecf24135fe856f88a50eb8c5008205a9ed5125f9281a88917c7",
+      "bytes": 18898
+    },
+    {
+      "path": "control-1/control.mp4",
+      "sha256": "e87e065b6b901e625e084d119f38edac30958710266281ebb39d026035218ed0",
+      "bytes": 49599
+    },
+    {
+      "path": "control-1/decode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-1/decoded-0.png",
+      "sha256": "a058b149b431d10a5f1889bb3be8c488119f3db94f7e8e6ac196cefbe3bab77d",
+      "bytes": 32230
+    },
+    {
+      "path": "control-1/encode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-1/input.png",
+      "sha256": "2e121498ac580da6f0c5852e0cdc6c495f8d95d8a2e07a090cdefcd46f8570f7",
+      "bytes": 21213
+    },
+    {
+      "path": "control-1/measurement.json",
+      "sha256": "8ba25dc0dcd75acdfe3d76e3967e4af630be023317b5b3732f89ef242854e389",
+      "bytes": 877
+    },
+    {
+      "path": "control-1/process-result.json",
+      "sha256": "2cf31d54ab3c814978382a5ab16938837642e41fb3e98c81a5aceb23cffafcfe",
+      "bytes": 62
+    },
+    {
+      "path": "control-1/reference.png",
+      "sha256": "2e121498ac580da6f0c5852e0cdc6c495f8d95d8a2e07a090cdefcd46f8570f7",
+      "bytes": 21213
+    },
+    {
+      "path": "control-2/command.json",
+      "sha256": "3671d58faf660d3d3bd1b474c1bd5686aff7307177dcae2fca02da24ce6728d5",
+      "bytes": 18895
+    },
+    {
+      "path": "control-2/control.mp4",
+      "sha256": "1f74eab47dd1f2a6dfc8b0012fd65f93eda978f6a6893d3dfed52a16924b4a3f",
+      "bytes": 47255
+    },
+    {
+      "path": "control-2/decode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-2/decoded-0.png",
+      "sha256": "66f4f9ca3f8cac6d7ccfdc164480e750c816556f233d32ca4ca92186509934d9",
+      "bytes": 29222
+    },
+    {
+      "path": "control-2/encode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-2/input.png",
+      "sha256": "036ef5307df743da0cffc3712a1dc8afd342b76a7ff735480a114a4814cb1049",
+      "bytes": 20561
+    },
+    {
+      "path": "control-2/measurement.json",
+      "sha256": "8f8dbaa6bd272f96265fc93be949341065d06d0b60efc875d1bb3e14e31630a8",
+      "bytes": 878
+    },
+    {
+      "path": "control-2/process-result.json",
+      "sha256": "7ce41d9903b2936db2d7ed043a75e7f60eaa57dd4320d774169f3785e3edc49f",
+      "bytes": 61
+    },
+    {
+      "path": "control-2/reference.png",
+      "sha256": "036ef5307df743da0cffc3712a1dc8afd342b76a7ff735480a114a4814cb1049",
+      "bytes": 20561
+    },
+    {
+      "path": "control-5/command.json",
+      "sha256": "7ab17d701e7f0944720aa22a23ac40e0241a5b9bef3dbc0ed63803af49be6deb",
+      "bytes": 18895
+    },
+    {
+      "path": "control-5/control.mp4",
+      "sha256": "600004e2cef84cda3a07d5ce26d0a348a8709db89971d012a3f45ee0187e1b2b",
+      "bytes": 52077
+    },
+    {
+      "path": "control-5/decode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-5/decoded-0.png",
+      "sha256": "4d7daae45c073c007fa2591d306b7c31616c9c78ebcac5d768ad9b9853384c04",
+      "bytes": 32307
+    },
+    {
+      "path": "control-5/decoded-1.png",
+      "sha256": "0d361ae3e71679e7b8610ce471553661eea3b0de2cdfdb437f88f749d165ceb8",
+      "bytes": 32308
+    },
+    {
+      "path": "control-5/encode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-5/input.png",
+      "sha256": "bf6c5ab446ce731ab471c59ecd277bbdf788dbd2d6f25702d2496a7821f206f6",
+      "bytes": 22674
+    },
+    {
+      "path": "control-5/measurement.json",
+      "sha256": "0452d89756c415eff8c149a38bec4680bf1c9855d57af2bb9419075752631c16",
+      "bytes": 1165
+    },
+    {
+      "path": "control-5/process-result.json",
+      "sha256": "d2b002ec2f4b81dfef506024332f5db5d8bbc99a2d02da661bebab5506340c6a",
+      "bytes": 62
+    },
+    {
+      "path": "control-5/reference.png",
+      "sha256": "bf6c5ab446ce731ab471c59ecd277bbdf788dbd2d6f25702d2496a7821f206f6",
+      "bytes": 22674
+    }
+  ],
+  "correction_scope": "Four negative inputs only; preserve positive/holdout-positive bytes and measurements. Same native metrics, original worst-positive limit and strict disjoint holdout method; no threshold change."
+}
