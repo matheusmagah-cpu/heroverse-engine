@@ -1,0 +1,99 @@
+name: HeroVerse bounded official evidence
+on:
+  schedule:
+    - cron: '17 9 * * *'
+  workflow_dispatch:
+    inputs:
+      checkpoint_only:
+        description: Skip new owned and market collection; readiness may refresh identity
+        type: boolean
+        default: true
+      native_readiness:
+        description: Rebuild native cloud readiness documents without publishing
+        type: boolean
+        default: false
+      restore_assets:
+        description: Qualify exact private media restoration without production
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-official-evidence
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: true
+      - name: Claim durable observer and restore current quota source
+        id: durable_claim
+        run: python3 migration/durable_evidence_checkpoint.py claim
+      - name: Test observation boundaries
+        run: python3 -m unittest discover -s migration -p 'test_*evidence*.py' -v
+      - name: Restore checkpoint without API collection
+        if: inputs.checkpoint_only
+        run: |
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,"migration")
+          from durable_evidence_checkpoint import restore_ledger,SQL
+          out=Path("cloud-evidence");out.mkdir()
+          restore_ledger(SQL,out/"quota-ledger.sqlite3")
+          print("Original ledger restored; no Google calls or publications")
+          PY
+      - name: Prepare bounded fresh-runner media restoration
+        if: inputs.restore_assets && inputs.checkpoint_only
+        run: |
+          if [ -d /usr/local/lib/android ]; then sudo rm -rf /usr/local/lib/android; fi
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Restore exact own assets from private repository
+        if: inputs.restore_assets && inputs.checkpoint_only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/restore_private_media.py
+      - name: Check authorized token before dependencies
+        if: ${{ !inputs.checkpoint_only }}
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          python3 - <<'PY'
+          import os,sys
+          sys.path.insert(0,'migration')
+          from verify_worker_oauth import check_token
+          reason=check_token(os.environ.get('HERO_YT_AUTHORIZED_USER_JSON',''))
+          if reason:
+              print(reason)
+              sys.exit(2)
+          PY
+      - name: Install pinned read-only API dependencies
+        if: ${{ !inputs.checkpoint_only || inputs.native_readiness }}
+        run: |
+          python3 -m venv "$RUNNER_TEMP/evidence-venv"
+          "$RUNNER_TEMP/evidence-venv/bin/python" -m pip install jsonschema==4.26.0 google-api-python-client==2.170.0 google-auth==2.40.3 google-auth-oauthlib==1.2.2 requests==2.32.4
+      - name: Rebuild native cloud runtime documents
+        if: inputs.native_readiness && inputs.checkpoint_only
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/runtime_bridge/rebuild_cloud_readiness.py'
+      - name: Collect observed owned and market data through original quota ledger
+        if: ${{ !inputs.checkpoint_only }}
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
+      - name: Commit durable quota continuation
+        if: always() && steps.durable_claim.outcome == 'success'
+        run: python3 migration/durable_evidence_checkpoint.py checkpoint
+      - name: Preserve evidence and quota continuation
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: heroverse-official-evidence-${{ github.run_id }}
+          path: cloud-evidence/
+          retention-days: 30
+          if-no-files-found: ignore
