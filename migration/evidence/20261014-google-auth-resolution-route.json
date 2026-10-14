@@ -1,5 +1,5 @@
 {
-  "status": "RESOLUTION_ROUTE_IDENTIFIED_CONFIGURATION_UNOBSERVED",
+  "status": "BLOCKED_THIS_SESSION_CONSOLE_ACCESS",
   "project_id": "graphic-tide-490010-u9",
   "google_account": "willmarquesfotografia@gmail.com",
   "github_account": "matheusmagah@gmail.com",
@@ -22,5 +22,18 @@
   "admin_connector_available": false,
   "console_configuration_changed": false,
   "verification_approved": false,
-  "publication_authorized": false
+  "publication_authorized": false,
+  "last_access_attempt": {
+    "observed_at_utc": "2026-10-14T01:17:18.745Z",
+    "entrypoints": [
+      "https://console.cloud.google.com/",
+      "https://console.developers.google.com/auth/branding?project=graphic-tide-490010-u9"
+    ],
+    "final_url": "https://console.cloud.google.com/auth/branding?project=graphic-tide-490010-u9",
+    "visible_title": "Site Unavailable",
+    "visible_message": "Unable to access this site.",
+    "admin_api_calls": 0,
+    "console_changes": 0,
+    "available_admin_connector_found": false
+  }
 }
