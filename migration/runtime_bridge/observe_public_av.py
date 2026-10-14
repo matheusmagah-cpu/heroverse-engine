@@ -86,11 +86,14 @@ def diagnose():
     policy=json.loads(POLICY.read_text())
     if hashlib.sha256(key.encode()).hexdigest()!=policy['key_sha256']:
         raise PermissionError('KEY_BINDING_MISMATCH')
-    receipt={'status':'UNAVAILABLE','model':'gemini-3.8-flash',
+    model=policy['model']
+    from gemini_public_av import FREE_MODELS
+    if model not in FREE_MODELS:raise PermissionError('VERIFIED_FREE_MODEL_REQUIRED')
+    receipt={'status':'UNAVAILABLE','model':model,
         'method':'GET_MODEL_METADATA','video_processed':False,
         'publication_authorized':False,'details_redacted':True}
     request=urllib.request.Request(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash',
+        'https://generativelanguage.googleapis.com/v1beta/models/'+model,
         headers={'x-goog-api-key':key})
     try:
         with urllib.request.urlopen(request,timeout=20) as response:
@@ -116,7 +119,7 @@ def diagnose():
     path=Path('migration/evidence')/('gemini-model-diagnostic-'+run+'.json')
     path.write_text(json.dumps(receipt,sort_keys=True)+'\n')
     print(json.dumps(receipt))
-    return 0
+    return 0 if receipt['status']=='MODEL_METADATA_AVAILABLE' else 2
 
 if __name__=='__main__':
     try:sys.exit(diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
