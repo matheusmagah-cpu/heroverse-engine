@@ -5,7 +5,7 @@ from gemini_public_av import digest
 import observe_public_av as observer
 
 class RefinementWorkflowTests(unittest.TestCase):
-    def run_stage(self,fail=False):
+    def run_stage(self,fail=False,gap=False):
         calls=[];checkpoints=[]
         def analyze(source,**kw):
             window=kw['window'];calls.append(window)
@@ -20,6 +20,9 @@ class RefinementWorkflowTests(unittest.TestCase):
                 'duration_seconds':1178,'coverage':'FULL_WINDOW','audio_received':True,
                 'visual_received':True,'window_start_seconds':start,'window_end_seconds':end,
                 'segments':segments,'limitations':[]}}
+            if gap and window==(690,840):
+                receipt.update(status='FAILED_NO_AUTOMATIC_RETRY',failure_code='REPORT_VALIDATION_FAILED',finish_reasons=['STOP'])
+                receipt['report']['segments']=receipt['report']['segments'][:6]
             path=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
             path.write_text(json.dumps(receipt))
             return receipt
@@ -46,5 +49,11 @@ class RefinementWorkflowTests(unittest.TestCase):
         result,calls,checkpoints,count=self.run_stage(fail=True)
         self.assertEqual(result,2);self.assertEqual(calls,[(130,270)])
         self.assertFalse(checkpoints);self.assertEqual(count,0)
+
+    def test_incomplete_prefix_recovers_only_missing_seconds(self):
+        result,calls,checkpoints,count=self.run_stage(gap=True)
+        self.assertEqual(result,0)
+        self.assertEqual(calls,[(130,270),(690,840),(810,840),(840,1050)])
+        self.assertEqual(len(checkpoints),2);self.assertEqual(count,1)
 
 if __name__=='__main__':unittest.main()
