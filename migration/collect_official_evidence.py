@@ -102,7 +102,7 @@ def snapshot(operation,captured,channel,entity,identity,payload):
         'collector':{'name':'YouTube Data API','version':'v3-bounded-migration-1','mode':'PUBLIC_METADATA_NO_MEDIA'},
         'evidence_class':'OBSERVED','payload':payload,'unavailable_metrics':PRIVATE_UNKNOWN,'error':None}
 
-def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=False):
+def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=False,reference_extension=False):
     from oauth_health import observe_refresh,identity_health
     raw=os.environ.get('HERO_YT_AUTHORIZED_USER_JSON','')
     from google.oauth2.credentials import Credentials
@@ -143,9 +143,10 @@ def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=Fa
             'market_collection_performed':False,'production_ready':False,'publication_performed':False}
 
     if candidate_only:
+        source_ids=DISCOVERY_IDS+(('yY9dDJCLfHU',) if reference_extension else ())
         # Discovery leads are not evidence until this official response is saved.
         result=read(youtube.videos().list(part='id,snippet,statistics,contentDetails,status',
-            id=','.join(DISCOVERY_IDS)),'candidate-video-identities')
+            id=','.join(source_ids)),'candidate-video-identities')
         videos=[v for v in result.get('items',[]) if v.get('status',{}).get('privacyStatus')=='public']
         ids=sorted({v['snippet']['channelId'] for v in videos})
         if catalog_only:
@@ -185,8 +186,8 @@ def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=Fa
                 'channel_id_public':c['id'],'channel_name_public':c['snippet']['title'],
                 'catalog_role':'FORMAT_REFERENCE','media_downloaded':False}) for c in channels.get('items',[])]+observations
         summary={'status':'CANDIDATE_IDENTITIES_OBSERVED','operation_id':operation,'captured_at':captured,
-            'channel_id':CHANNEL,'requested_video_ids':list(DISCOVERY_IDS),
-            'unavailable_video_ids':sorted(set(DISCOVERY_IDS)-{v['id'] for v in result.get('items',[])
+            'channel_id':CHANNEL,'requested_video_ids':list(source_ids),
+            'unavailable_video_ids':sorted(set(source_ids)-{v['id'] for v in result.get('items',[])
                 if v.get('status',{}).get('privacyStatus')=='public'}),
             'market_snapshots':observations,'candidate_channels':exportable(channels.get('items',[])),
             'quota':{'calls':calls,'data_api_units_reserved':sum(c['data_api_units'] for c in calls)},
@@ -320,7 +321,8 @@ def main():
         sys.path.insert(0,str(root))
         try:summary=collect(root,export,health_only=os.environ.get('HERO_AUTH_HEALTH_ONLY')=='true',
             candidate_only=os.environ.get('HERO_CANDIDATE_PROBE_ONLY')=='true',
-            catalog_only=os.environ.get('HERO_CANDIDATE_CATALOG_ONLY')=='true')
+            catalog_only=os.environ.get('HERO_CANDIDATE_CATALOG_ONLY')=='true',
+            reference_extension=os.environ.get('HERO_REFERENCE_EXTENSION_ONLY')=='true')
         finally:
             if destination.exists():shutil.copy2(destination,export/'quota-ledger.sqlite3')
         print(json.dumps(summary))
