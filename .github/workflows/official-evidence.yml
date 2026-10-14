@@ -87,10 +87,10 @@ jobs:
               assert r['request_id']=='20261014-fine-scene-recovery-v1'
               assert r['source_video_id']=='7GvhWbXDWHQ'
               stage='refine'
-          elif r['mode']=='CANDIDATE_METADATA_ONLY':
-              assert r['request_id']=='20261014-three-hour-reference-discovery-v1'
+          elif r['mode'] in ('CANDIDATE_METADATA_ONLY','CANDIDATE_CATALOG_ONLY'):
+              assert r['request_id'] in ('20261014-three-hour-reference-discovery-v1','20261014-three-hour-reference-catalog-v1')
               assert r['source_video_ids']==['TYCZe65GxdQ','ZGiGg9O09yU','beIMxaH7YuI']
-              stage='candidate'
+              stage='catalog' if r['mode']=='CANDIDATE_CATALOG_ONLY' else 'candidate'
           else:
               raise PermissionError('UNKNOWN_OWNER_REQUEST_STAGE')
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('stage='+stage+'\n')
@@ -102,7 +102,7 @@ jobs:
       - name: Test observation boundaries
         run: python3 -m unittest discover -s migration -p 'test_*evidence*.py' -v
       - name: Restore checkpoint without API collection
-        if: inputs.checkpoint_only || (github.event_name == 'push' && steps.push_stage.outputs.stage != 'candidate')
+        if: inputs.checkpoint_only || (github.event_name == 'push' && steps.push_stage.outputs.stage != 'candidate' && steps.push_stage.outputs.stage != 'catalog')
         run: |
           python3 - <<'PY'
           import sys
@@ -125,7 +125,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python3 migration/restore_private_media.py
       - name: Install pinned read-only API dependencies
-        if: ${{ (github.event_name != 'push' && (!inputs.checkpoint_only || inputs.native_readiness)) || steps.push_stage.outputs.stage == 'candidate' }}
+        if: ${{ (github.event_name != 'push' && (!inputs.checkpoint_only || inputs.native_readiness)) || (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog') }}
         run: |
           python3 -m venv "$RUNNER_TEMP/evidence-venv"
           "$RUNNER_TEMP/evidence-venv/bin/python" -m pip install jsonschema==4.26.0 google-api-python-client==2.170.0 google-auth==2.40.3 google-auth-oauthlib==1.2.2 requests==2.32.4
@@ -135,9 +135,10 @@ jobs:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/runtime_bridge/rebuild_cloud_readiness.py'
       - name: Collect observed owned and market data through original quota ledger
-        if: ${{ (github.event_name != 'push' && !inputs.checkpoint_only) || steps.push_stage.outputs.stage == 'candidate' }}
+        if: ${{ (github.event_name != 'push' && !inputs.checkpoint_only) || (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog') }}
         env:
-          HERO_CANDIDATE_PROBE_ONLY: ${{ steps.push_stage.outputs.stage == 'candidate' }}
+          HERO_CANDIDATE_PROBE_ONLY: ${{ (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog') }}
+          HERO_CANDIDATE_CATALOG_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog' }}
           HERO_AUTH_HEALTH_ONLY: ${{ inputs.auth_health_only }}
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
