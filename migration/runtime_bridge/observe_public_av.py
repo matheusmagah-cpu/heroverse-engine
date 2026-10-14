@@ -181,6 +181,7 @@ def diagnose_inputs():
             receipt.update(status='PROVIDER_FAILED',failure_code=error.code)
         ledger.persist(receipt)
         print(json.dumps({k:v for k,v in receipt.items() if k not in ('output_text',)}))
+        if receipt['status']!='PROVIDER_RESPONSE_RECEIVED':return 2
     return 0
 
 
