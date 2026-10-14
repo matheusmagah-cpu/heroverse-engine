@@ -145,7 +145,13 @@
     "exploratory_video_not_started": "AgkqbwJ_P1Y",
     "full_native_av_review_available": false,
     "third_qualified_winner_channel_available": false,
-    "final_quality_approval_available": false
+    "final_quality_approval_available": false,
+    "direct_native_acquisition": {
+      "status": "BLOCKED_NATIVE_ACQUISITION",
+      "failure_code": "PUBLIC_MEDIA_TRANSFER_UNAVAILABLE",
+      "metadata_available": true,
+      "receipt_path": "migration/receipts/20261014-direct-market-media-acquisition.json"
+    }
   },
   "authority": {
     "quality": false,
