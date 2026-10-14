@@ -23,6 +23,7 @@ CHANNEL='UCuMF6pJQkyMzaVoAxFL86yA'
 PRAYER_REFERENCES=['UC_h1E8wccvaX1gTtx4VsYXw','UC2d7chxFUVEurYmI4yfmTlQ','UC5spXp9tnfnAuRQKgZgw2tg']
 PRIVATE_UNKNOWN=['IMPRESSIONS','CTR','INTRO_RETENTION','AVERAGE_VIEW_DURATION','WATCH_HOURS','SUBSCRIBERS_GAINED','REVENUE','RPM']
 MAX_DATA_CALLS=40
+DISCOVERY_IDS=('TYCZe65GxdQ','ZGiGg9O09yU','beIMxaH7YuI')
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def write(path,value):
@@ -85,7 +86,7 @@ def snapshot(operation,captured,channel,entity,identity,payload):
         'collector':{'name':'YouTube Data API','version':'v3-bounded-migration-1','mode':'PUBLIC_METADATA_NO_MEDIA'},
         'evidence_class':'OBSERVED','payload':payload,'unavailable_metrics':PRIVATE_UNKNOWN,'error':None}
 
-def collect(root,export,*,health_only=False):
+def collect(root,export,*,health_only=False,candidate_only=False):
     from oauth_health import observe_refresh,identity_health
     raw=os.environ.get('HERO_YT_AUTHORIZED_USER_JSON','')
     from google.oauth2.credentials import Credentials
@@ -124,6 +125,39 @@ def collect(root,export,*,health_only=False):
     if health_only:
         return {'status':'AUTH_HEALTH_OBSERVED','channel_id':CHANNEL,'data_api_units_reserved':1,
             'market_collection_performed':False,'production_ready':False,'publication_performed':False}
+
+    if candidate_only:
+        # Discovery leads are not evidence until this official response is saved.
+        result=read(youtube.videos().list(part='id,snippet,statistics,contentDetails,status',
+            id=','.join(DISCOVERY_IDS)),'candidate-video-identities')
+        videos=[v for v in result.get('items',[]) if v.get('status',{}).get('privacyStatus')=='public']
+        ids=sorted({v['snippet']['channelId'] for v in videos})
+        channels=read(youtube.channels().list(part='id,snippet,statistics,contentDetails',
+            id=','.join(ids)),'candidate-channel-identities') if ids else {'items':[]}
+        observations=[]
+        for v in videos:
+            published=datetime.fromisoformat(v['snippet']['publishedAt'].replace('Z','+00:00'))
+            seconds=duration(v.get('contentDetails',{}).get('duration'))
+            observations.append(snapshot(operation,captured,v['snippet']['channelId'],'VIDEO',v['id'],{
+                'video_id':v['id'],'title':v['snippet']['title'],'channel_id_public':v['snippet']['channelId'],
+                'timestamp':published.timestamp(),'duration_seconds':seconds,
+                'view_count':int(v['statistics']['viewCount']) if 'viewCount' in v.get('statistics',{}) else None,
+                'default_audio_language':v['snippet'].get('defaultAudioLanguage'),
+                'availability':'public','catalog_role':'DISCOVERY_LEAD_NOT_QUALIFIED_REFERENCE',
+                'format_basis':'PUBLIC_METADATA_REQUIRES_AV_CONFIRMATION',
+                'license':v.get('status',{}).get('license')}))
+        summary={'status':'CANDIDATE_IDENTITIES_OBSERVED','operation_id':operation,'captured_at':captured,
+            'channel_id':CHANNEL,'requested_video_ids':list(DISCOVERY_IDS),
+            'unavailable_video_ids':sorted(set(DISCOVERY_IDS)-{v['id'] for v in videos}),
+            'market_snapshots':observations,'candidate_channels':exportable(channels.get('items',[])),
+            'quota':{'calls':calls,'data_api_units_reserved':sum(c['data_api_units'] for c in calls)},
+            'production_ready':False,'publication_performed':False,'vidiq_credits_used':0,
+            'candidate_media_downloaded':False,
+            'limitations':['Discovery metadata is not audiovisual mining, a winner cohort, CTR or monetization evidence.']}
+        write(export/'evidence.json',summary)
+        write(export/'summary.json',{'status':summary['status'],'public_candidates':len(videos),
+            'publication_performed':False,'data_api_units_reserved':summary['quota']['data_api_units_reserved']})
+        return {'status':summary['status'],'public_candidates':len(videos),'publication_performed':False}
 
     config=json.loads((root/'config/current_audio_research.json').read_text())
     refs=[r['channel_id'] for r in config['references']]+PRAYER_REFERENCES
@@ -240,7 +274,8 @@ def main():
             raise PermissionError('DURABLE_OBSERVER_CLAIM_REQUIRED')
         restore_ledger(SQL,destination)
         sys.path.insert(0,str(root))
-        try:summary=collect(root,export,health_only=os.environ.get('HERO_AUTH_HEALTH_ONLY')=='true')
+        try:summary=collect(root,export,health_only=os.environ.get('HERO_AUTH_HEALTH_ONLY')=='true',
+            candidate_only=os.environ.get('HERO_CANDIDATE_PROBE_ONLY')=='true')
         finally:
             if destination.exists():shutil.copy2(destination,export/'quota-ledger.sqlite3')
         print(json.dumps(summary))
