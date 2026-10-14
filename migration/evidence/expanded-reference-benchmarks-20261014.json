@@ -1,0 +1,40 @@
+{
+  "basis": "PUBLIC_COHORT_HISTORICAL_DESCRIPTIVE_ONLY",
+  "age_band": "8_30D",
+  "rows": [
+    {
+      "channel_id": "UCTdc_zl40D9wa0_LH9yaGZA",
+      "n": 33,
+      "minimum": 2.857143,
+      "median": 66.125,
+      "maximum": 3101.222222,
+      "unit": "OBSERVED_VIEWS_PER_COMPLETE_DAY_NOT_OWNED_CHANNEL_FORECAST"
+    },
+    {
+      "channel_id": "UCemzpRC1q9xqvYKnTvWeQ3A",
+      "n": 30,
+      "minimum": 21.954545,
+      "median": 112.394445,
+      "maximum": 378.944444,
+      "unit": "OBSERVED_VIEWS_PER_COMPLETE_DAY_NOT_OWNED_CHANNEL_FORECAST"
+    },
+    {
+      "channel_id": "UCn6TgD3wxy-4asracObIOeQ",
+      "n": 8,
+      "minimum": 67.375,
+      "median": 337.514286,
+      "maximum": 657.6,
+      "unit": "OBSERVED_VIEWS_PER_COMPLETE_DAY_NOT_OWNED_CHANNEL_FORECAST"
+    },
+    {
+      "channel_id": "UCsDKqJJISkMyvjFowNT_Sdg",
+      "n": 28,
+      "minimum": 2.904762,
+      "median": 22.816667,
+      "maximum": 240.666667,
+      "unit": "OBSERVED_VIEWS_PER_COMPLETE_DAY_NOT_OWNED_CHANNEL_FORECAST"
+    }
+  ],
+  "competitor_CTR_available": false,
+  "audience_forecast_calibrated": false
+}
