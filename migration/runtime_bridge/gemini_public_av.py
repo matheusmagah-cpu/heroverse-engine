@@ -50,7 +50,9 @@ def report_schema(window):
         properties.update(window_start_seconds=number,window_end_seconds=number)
     return {'type':'OBJECT','properties':properties,'required':list(properties)}
 
-def build_request(source, *, today=None, window=None, refinement=False):
+def build_request(source, *, today=None, window=None, refinement=False,research_context=None):
+    if research_context not in (None,'CHRISTIAN_REST_MUSIC'):
+        raise PermissionError('KNOWN_RESEARCH_CONTEXT_REQUIRED')
     if (set(source) != {'video_id', 'duration_seconds', 'visibility'}
             or not re.fullmatch(r'[A-Za-z0-9_-]{11}', source['video_id'])
             or type(source['duration_seconds']) is not int
@@ -90,7 +92,17 @@ def build_request(source, *, today=None, window=None, refinement=False):
         if window is None or window[1]-window[0]>240:
             raise PermissionError('REFINEMENT_WINDOW_REQUIRED')
         metadata['fps']=2
-        prompt += (' FOCUSED PRECISION REVIEW: partition at scene/action changes into intervals of at most 20 seconds. '
+        if research_context=='CHRISTIAN_REST_MUSIC':
+            prompt += (' MUSIC RESEARCH SAMPLE: partition into contiguous intervals of at most 20 seconds. '
+                'The SOURCE is the attached English worship/rest music video; HeroVerse is the TARGET, not the source. '
+                'Describe audible instruments, voice or singing if actually present, entry/exit, dynamics and textures. '
+                'Describe the visible scene, motion, framing, contrast, overlays and legible scripture or lyrics. '
+                'Identify how sound and image reinforce or contradict each other, transitions, promises and invitations. '
+                'Separate exact legible wording from paraphrase. Audio summaries are not verbatim transcripts. '
+                'State UNKNOWN where details cannot be heard or read. Do not infer repeated loops from a brief clip. '
+                'Treat this as a sample; never infer complete-video structure or measured retention from it.')
+        else:
+            prompt += (' FOCUSED PRECISION REVIEW: partition at scene/action changes into intervals of at most 20 seconds. '
             'Do not produce broad summaries spanning different actions. For each interval describe concrete visible UI actions, '
             'shot content, text/labels actually legible, spoken meaning, and their relationship. '
             'Distinguish dates actually legible from uncertain dates; UNKNOWN beats guessing a year. '
@@ -183,7 +195,7 @@ def transport(payload, api_key, *, model=MODEL):
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None
 
-def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None, refinement=False):
+def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None, refinement=False,research_context=None):
     """Manager adapter. reserve() must durably claim before the network effect.
 
     reserve(key, request_hash, seconds, daily_cap_seconds) returns NEW, REPLAY or
@@ -202,7 +214,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         raise PermissionError('CURRENT_FREE_PROJECT_KEY_BINDING_REQUIRED')
     if not callable(reserve) or not callable(persist):
         raise PermissionError('EXISTING_DURABLE_MANAGER_REQUIRED')
-    payload = build_request(source, today=now.date().isoformat(),window=window,refinement=refinement)
+    payload = build_request(source, today=now.date().isoformat(),window=window,refinement=refinement,research_context=research_context)
     model = policy['model']
     request_hash = digest({'model': model, 'payload': payload})
     key = 'public-av:' + digest({'source': source, 'request_hash': request_hash})
@@ -227,6 +239,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         'evidence_class': 'MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED',
         'quality_authorized': False, 'production_authorized': False,
         'publication_authorized': False}
+    if research_context is not None:receipt['research_context']=research_context
     try:
         response = (transport(payload, api_key, model=model) if send is transport
                     else send(payload, api_key))
