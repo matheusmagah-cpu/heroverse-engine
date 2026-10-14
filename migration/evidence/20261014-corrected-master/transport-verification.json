@@ -1,0 +1,53 @@
+{
+  "version": "heroverse-static-cycle-transport-candidate-v1",
+  "created_at": "2026-10-14T07:58:12.968947+00:00",
+  "candidate": {
+    "sha256": "55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46",
+    "size_bytes": 391733890
+  },
+  "audio": {
+    "original_packets": 506251,
+    "candidate_packets": 506251,
+    "all_payloads_identical": true,
+    "original_packet_sequence_sha256": "f844feac87662d8865048e82936cf5f4cdb6fc87850055ff5eaf4526dc512a01",
+    "candidate_packet_sequence_sha256": "f844feac87662d8865048e82936cf5f4cdb6fc87850055ff5eaf4526dc512a01"
+  },
+  "video": {
+    "cycle_packets": 300,
+    "all_output_packet_payloads_match_generated_cycle": true,
+    "output_packets": 324000,
+    "cycle_count": 1080,
+    "original_video_repeated": false,
+    "profile": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "profile": "High",
+          "width": 1920,
+          "height": 1080,
+          "pix_fmt": "yuv420p",
+          "color_space": "bt709",
+          "color_transfer": "bt709",
+          "color_primaries": "bt709",
+          "duration": "10800.000000",
+          "nb_frames": "324000"
+        },
+        {
+          "codec_name": "aac",
+          "profile": "LC",
+          "duration": "10800.000000",
+          "nb_frames": "506251"
+        }
+      ],
+      "format": {
+        "duration": "10800.000000",
+        "size": "391733890"
+      }
+    }
+  },
+  "wall_seconds": 13.936167478561401,
+  "quality_authorized": false,
+  "publication_authorized": false,
+  "scope": "Transport and corrected static composition only; not a new substantive editorial release"
+}
