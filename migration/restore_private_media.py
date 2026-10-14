@@ -23,7 +23,7 @@ def main():
         results.append(r)
     out=Path('cloud-evidence');out.mkdir(exist_ok=True)
     (out/'private-media-restoration.json').write_text(json.dumps({'status':'EXACT_PRIVATE_MEDIA_RESTORED_IN_FRESH_RUNNER','assets':results,'publication_performed':False,'production_ready':False,'windows_contacted':False,'google_calls':0},indent=2))
-    print('PASS: five original assets restored and hashes verified; no production or publication')
+    print(f'PASS: {len(results)} private assets restored and hashes verified; no production or publication')
 if __name__=='__main__':
     try:main()
     except Exception as e:
