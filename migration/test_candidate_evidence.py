@@ -5,10 +5,21 @@ import types
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-from collect_official_evidence import collect, CHANNEL, DISCOVERY_IDS,discovered_references,sha
+from collect_official_evidence import collect, CHANNEL, DISCOVERY_IDS,discovered_references,sha,candidate_source_ids
 
 
 class CandidateStageTests(unittest.TestCase):
+    def test_default_and_existing_reference_ids_remain_unchanged(self):
+        self.assertEqual(candidate_source_ids(),DISCOVERY_IDS)
+        self.assertEqual(candidate_source_ids(reference_extension=True),DISCOVERY_IDS+('yY9dDJCLfHU',))
+    def test_peace_extension_is_fixed_and_bounded(self):
+        ids=candidate_source_ids(reference_extension=True,peace_extension=True)
+        self.assertEqual(ids,DISCOVERY_IDS+('yY9dDJCLfHU','qD7efeJhPIM'))
+        self.assertEqual(len(ids),5)
+    def test_peace_extension_cannot_run_outside_read_only_catalogue(self):
+        with self.assertRaises(PermissionError):candidate_source_ids(peace_extension=True)
+        with self.assertRaisesRegex(PermissionError,'READ_ONLY_CATALOGUE_STAGE'):
+            collect(Path('.'),Path('.'),reference_extension=True,peace_extension=True)
     def run_stage(self, privacy='public', owned=CHANNEL,catalog=False):
         calls=[]; reserved=[]; consumed=[]
         video={'id':DISCOVERY_IDS[0], 'snippet':{'channelId':'reference',
