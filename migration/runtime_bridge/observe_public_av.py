@@ -193,14 +193,39 @@ def analyze_windows():
     reports=[];bindings=[]
     for start in range(0,SOURCE['duration_seconds'],240):
         end=min(start+240,SOURCE['duration_seconds'])
-        receipt=analyze(SOURCE,api_key=key,policy=policy,reserve=ledger.reserve,
-            persist=ledger.persist,window=(start,end))
+        adopted=None
+        from gemini_public_av import normalize_report,validate_report
+        for prior in sorted(Path('migration/evidence').glob('public-av-*.json')):
+            previous=json.loads(prior.read_text())
+            if (previous.get('source')!=SOURCE or previous.get('model')!=policy['model']
+                    or previous.get('window')!=[start,end]
+                    or previous.get('failure_code')!='REPORT_VALIDATION_FAILED'
+                    or previous.get('finish_reasons')!=['STOP'] or not previous.get('report')):
+                continue
+            normalized=normalize_report(previous['report'])
+            try:validate_report(normalized,SOURCE,window=(start,end))
+            except Exception:continue
+            adopted=dict(previous,status='WINDOW_AWAITING_AV_REVIEW',report=normalized,
+                version='heroverse-lossless-av-encoding-adoption-v1',
+                original_receipt_binding={'path':str(prior),
+                    'sha256':hashlib.sha256(prior.read_bytes()).hexdigest()},
+                normalization_only=True,provider_called_again=False)
+            adopted_path=Path('migration/evidence')/('normalized-'+prior.name)
+            raw=json.dumps(adopted,ensure_ascii=False,sort_keys=True,allow_nan=False).encode()
+            if adopted_path.exists():
+                if adopted_path.read_bytes()!=raw:raise PermissionError('AV_ADOPTION_CHANGED')
+            else:
+                with adopted_path.open('xb') as f:f.write(raw)
+                ledger.checkpoint('Adopt complete window encoding without repeating provider effect')
+            break
+        receipt=adopted if adopted is not None else analyze(SOURCE,api_key=key,policy=policy,
+            reserve=ledger.reserve,persist=ledger.persist,window=(start,end))
         if receipt['status']!='WINDOW_AWAITING_AV_REVIEW':
             print(json.dumps({'status':'WINDOW_INCOMPLETE','window':[start,end],
                 'failure_code':receipt.get('failure_code'),'publication_authorized':False}))
             return 2
         reports.append(receipt['report'])
-        path=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
+        path=adopted_path if adopted is not None else Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
         bindings.append({'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
     from gemini_public_av import validate_report
     combined={'video_id':SOURCE['video_id'],'duration_seconds':SOURCE['duration_seconds'],
