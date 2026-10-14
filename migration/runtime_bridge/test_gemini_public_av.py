@@ -135,4 +135,24 @@ class Tests(unittest.TestCase):
         self.assertNotEqual(p,q)
         with self.assertRaises(PermissionError):build_request(SOURCE,refinement=True)
 
+    def test_clipped_local_budget_preserves_full_source_identity_and_failed_debit(self):
+        reservations=[]
+        def reserve(key,h,seconds,cap):
+            reservations.append((seconds,cap))
+            return self.m.reserve(key,h,seconds,cap)
+        receipt=self.run_adapter(reserve=reserve,window=(960,980),refinement=True)
+        self.assertEqual(reservations,[(20,28800)])
+        self.assertEqual(receipt['source']['duration_seconds'],1178)
+        self.assertEqual(receipt['local_budget_seconds'],20)
+        self.assertEqual(receipt['status'],'FAILED_NO_AUTOMATIC_RETRY')
+        self.assertEqual(len(self.m.saved),1)
+    def test_whole_video_local_budget_still_debits_whole_duration(self):
+        reservations=[]
+        def reserve(key,h,seconds,cap):
+            reservations.append((seconds,cap))
+            return self.m.reserve(key,h,seconds,cap)
+        receipt=self.run_adapter(reserve=reserve)
+        self.assertEqual(reservations,[(1178,28800)])
+        self.assertFalse(receipt['publication_authorized'])
+
 if __name__=='__main__': unittest.main()
