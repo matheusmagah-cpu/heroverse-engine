@@ -25,6 +25,22 @@ PRIVATE_UNKNOWN=['IMPRESSIONS','CTR','INTRO_RETENTION','AVERAGE_VIEW_DURATION','
 MAX_DATA_CALLS=40
 DISCOVERY_IDS=('TYCZe65GxdQ','ZGiGg9O09yU','beIMxaH7YuI')
 
+def discovered_references(registry_path=Path('migration/evidence/current-market-discovery-references.json')):
+    if not registry_path.is_file():return []
+    registry=json.loads(registry_path.read_bytes())
+    binding=registry['source_binding'];source=Path(binding['path'])
+    if source.parent.as_posix()!='migration/evidence' or not re.fullmatch(r'observer-\d+\.json',source.name):
+        raise PermissionError('DISCOVERY_SOURCE_PATH_REQUIRED')
+    raw=source.read_bytes()
+    if sha(raw)!=binding['sha256']:raise PermissionError('DISCOVERY_SOURCE_HASH_CHANGED')
+    observed={c['id'] for c in json.loads(raw)['candidate_channels']}
+    ids=registry['channel_ids']
+    if (not 1<=len(ids)<=5 or len(set(ids))!=len(ids) or not set(ids)<=observed
+            or registry.get('role')!='DISCOVERY_REFERENCE_PENDING_AV'
+            or registry.get('production_authorized') is not False):
+        raise PermissionError('BOUNDED_OBSERVED_DISCOVERY_REFERENCES_REQUIRED')
+    return ids
+
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def write(path,value):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -188,7 +204,7 @@ def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=Fa
         return {'status':summary['status'],'public_candidates':len(videos),'publication_performed':False}
 
     config=json.loads((root/'config/current_audio_research.json').read_text())
-    refs=[r['channel_id'] for r in config['references']]+PRAYER_REFERENCES
+    refs=list(dict.fromkeys([r['channel_id'] for r in config['references']]+PRAYER_REFERENCES+discovered_references()))
     market=read(youtube.channels().list(part='id,snippet,statistics,contentDetails',id=','.join(refs)),'reference-channels')
     channels=[owned]+market.get('items',[])
     returned={c['id'] for c in channels}
@@ -270,7 +286,7 @@ def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=Fa
         'quota':{'calls':calls,'data_api_units_reserved':sum(c['data_api_units'] for c in calls),'untracked_general_reserve':2000,'preventive_floor':12},
         'limitations':['Duration-based LONG classification requires audiovisual confirmation; no Shorts performance inferred.',
             'First page of each uploads playlist is a bounded sample, not complete catalogue.',
-            'Two dated snapshots are required for acceleration; views/day is descriptive.',
+            'Two dated snapshots support observed interval growth; acceleration needs three or more snapshots. Views/day is descriptive.',
             'Analytics watch time is not qualified YPP watch time.','No causal CTR, cadence, viral or monetization claim.'],
         'production_ready':False,'publication_performed':False,'vidiq_credits_used':0,'candidate_media_downloaded':False}
     write(export/'evidence.json',exportable(safe))
