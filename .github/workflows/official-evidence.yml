@@ -107,6 +107,10 @@ jobs:
               assert r['request_id']=='20261014-native-linux-acquisition-v1'
               assert r['source_video_id']=='j2rk8ycXe3c'
               stage='native_market'
+          elif r['mode']=='PEACE_CATALOG_EXTENSION_ONLY':
+              assert r['request_id']=='20261014-peace-inside-reference-v1'
+              assert r['source_video_id']=='qD7efeJhPIM'
+              stage='catalog_extension'
           elif r['mode']=='CANDIDATE_CATALOG_EXTENSION_ONLY':
               assert r['request_id']=='20261014-holy-moments-reference-v1'
               assert r['source_video_id']=='yY9dDJCLfHU'
@@ -114,6 +118,8 @@ jobs:
           else:
               raise PermissionError('UNKNOWN_OWNER_REQUEST_STAGE')
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('stage='+stage+'\n')
+          if r['mode']=='PEACE_CATALOG_EXTENSION_ONLY':
+              with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('extra_reference=qD7efeJhPIM\n')
           print('Exact bounded '+stage+' request verified; no publication authority')
           PY
       - name: Claim durable observer and restore current quota source
@@ -160,6 +166,7 @@ jobs:
           HERO_CANDIDATE_PROBE_ONLY: ${{ (steps.push_stage.outputs.stage == 'candidate' || steps.push_stage.outputs.stage == 'catalog' || steps.push_stage.outputs.stage == 'catalog_extension') }}
           HERO_CANDIDATE_CATALOG_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog' || steps.push_stage.outputs.stage == 'catalog_extension' }}
           HERO_REFERENCE_EXTENSION_ONLY: ${{ steps.push_stage.outputs.stage == 'catalog_extension' }}
+          HERO_REFERENCE_PEACE_EXTENSION_ONLY: ${{ steps.push_stage.outputs.extra_reference == 'qD7efeJhPIM' }}
           HERO_AUTH_HEALTH_ONLY: ${{ inputs.auth_health_only }}
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
