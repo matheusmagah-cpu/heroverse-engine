@@ -1,0 +1,93 @@
+{
+  "version": "heroverse-focused-av-refinement-acceptance-v2",
+  "date": "2026-10-14",
+  "status": "TARGETED_REFINEMENT_COMPLETED_REVIEWED_WITH_EXCLUSIONS",
+  "supersedes_status": "migration/receipts/20261014-focused-av-refinement-review.json",
+  "run": {
+    "id": 38585974821,
+    "job_id": 115927963254,
+    "conclusion": "SUCCESS",
+    "adapter_tests_passed": 31,
+    "observation_tests": 27,
+    "observation_tests_skipped": 1
+  },
+  "source": {
+    "video_id": "7GvhWbXDWHQ",
+    "duration_seconds": 1178,
+    "role": "TEACHING_MECHANISM_REFERENCE_NOT_TARGET_MARKET_COHORT"
+  },
+  "artifact": {
+    "path": "migration/evidence/focused-av-refinement-38585974821.json",
+    "blob_sha": "f1285a9ea40763afc516a6adcdee9bad3e905e9f"
+  },
+  "validation": {
+    "independently_reopened_window_hashes": 9,
+    "source_and_timeline": "PASS",
+    "fine_scene_count": 33,
+    "targeted_seconds": 500,
+    "remaining_targeted_seconds": 0,
+    "maximum_scene_interval_seconds": 20,
+    "sample_fps": 2,
+    "scope": [
+      [
+        130,
+        270
+      ],
+      [
+        690,
+        1050
+      ]
+    ],
+    "whole_video_frame_by_frame_audit": false,
+    "provider_calls_during_local_verification": 0
+  },
+  "recovery": {
+    "new_provider_calls": 5,
+    "new_requested_seconds": 90,
+    "previous_results_reused": true,
+    "quota_cap_changed": false,
+    "historical_debits_reduced": false,
+    "local_budget_total_seconds": 28372,
+    "local_budget_daily_cap": 28800,
+    "unresolved_reservations": 0,
+    "accounting_basis": "LOCAL_REQUESTED_INTERVAL_BUDGET; actual Google quota accounting not asserted",
+    "provider_limit_enforcement": "Any provider quota/auth/network denial stops; no automatic retries or paid fallback.",
+    "credentials_recreated": false,
+    "additional_paid_budget": 0,
+    "vidiq_calls": 0
+  },
+  "content_review": {
+    "status": "REVIEWED_WITH_EXCLUSIONS",
+    "evidence_class": "MODEL_REPORTED_AUDIOVISUAL_NOT_INDEPENDENT_NATIVE_FRAMES",
+    "accepted_as_mechanism_hypotheses": [
+      {
+        "mechanism": "Narration paired with topic-specific visuals",
+        "application": "Every authored script section binds a visual purpose, source and take; generic unrelated stock imagery is rejected."
+      },
+      {
+        "mechanism": "Separate queued jobs from actual completed history",
+        "application": "Original manager advances only on reopened stage receipts; cost and latency are measured from own runs."
+      },
+      {
+        "mechanism": "Discovery and language/filter context",
+        "application": "Classify dated public signals independently from target audience demand; compare same language/format/age."
+      },
+      {
+        "mechanism": "Feature/pricing promotion late in teaching video",
+        "application": "Promotional claims are not algorithm rules, audited profit or a forecast for HeroVerse."
+      }
+    ],
+    "excluded": [
+      "Exact blurry dates, prices, financial values and language/tool UI labels",
+      "Conflicting exact sample-video or script-paste timestamps",
+      "Guarantee that video-within-video or editing velocity assures monetization or algorithm reach",
+      "Private competitor CTR/retention and reliable own audience forecasts",
+      "Authoritative mid-roll configuration inferred only from model-described scenes"
+    ],
+    "late_window_review": "The90-second completion reports pricing/language overlays, channel-management/monetization/navigation screens and late menu actions. Retain as attributed model observation; exact interface labels and numeric details remain excluded without native frame confirmation."
+  },
+  "production_quality_authorized": false,
+  "publication_authorized": false,
+  "supervisor_enabled": false,
+  "next_project_gate": "Current comparable market AV handoff and authentic native final-production quality verification; targeted teaching-reference quota blocker is resolved."
+}
