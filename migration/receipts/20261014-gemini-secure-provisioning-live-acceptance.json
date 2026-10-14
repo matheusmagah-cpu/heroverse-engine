@@ -1,0 +1,67 @@
+{
+  "version": "heroverse-gemini-secure-provisioning-and-live-acceptance-v1",
+  "date": "2026-10-14",
+  "status": "SECURE_CREDENTIAL_AND_MODEL_ACCESS_PASSED_VIDEO_PROCESSING_PROVIDER_503",
+  "authorization": "Owner explicitly authorized Will Gemini API key transfer to encrypted GitHub Actions secret",
+  "credential": {
+    "secret_name": "HERO_GEMINI_API_KEY",
+    "stored": true,
+    "value_logged": false,
+    "key_recreated": false,
+    "google_account": "willmarquesfotografia@gmail.com",
+    "github_repository": "matheusmagah-cpu/heroverse-engine",
+    "project_id": "gen-lang-client-0909161074",
+    "observed_tier": "FREE",
+    "billing_enabled_by_this_work": false
+  },
+  "live_runs": [
+    {
+      "run_id": 38552137984,
+      "conclusion": "failure",
+      "reason": "Initial redacted provider failure; preserved original record"
+    },
+    {
+      "run_id": 38552424067,
+      "conclusion": "success",
+      "observed": "GET model gemini-3.8-flash authenticated and available; no video processing"
+    },
+    {
+      "run_id": 38552649487,
+      "conclusion": "failure",
+      "model": "gemini-3.8-flash",
+      "failure": "HTTP_503_UNAVAILABLE",
+      "durable_checkpoint": "PASS"
+    },
+    {
+      "run_id": 38553067742,
+      "conclusion": "failure",
+      "model": "gemini-3.6-flash",
+      "metadata": "AVAILABLE",
+      "failure": "HTTP_503_UNAVAILABLE",
+      "durable_checkpoint": "PASS"
+    }
+  ],
+  "cost_boundary": {
+    "vidiq_credits_used": 0,
+    "paid_fallback": false,
+    "plan_upgraded": false,
+    "three_video_attempts_reserved_seconds": 3534,
+    "actual_successful_video_analysis": 0
+  },
+  "recovery": {
+    "existing_daily_observer": true,
+    "new_schedule": false,
+    "date": "2026-10-15",
+    "expected_Sao_Paulo_time": "06:17",
+    "max_attempts": 1,
+    "free_policy_freshness_required": true,
+    "durable_pre_effect_consumption": true,
+    "publication_authorized": false
+  },
+  "remaining": [
+    "Successful real worker audiovisual report and content review",
+    "Current homogeneous recent AV handoff and authentic script/take plan",
+    "Critical final long/Short QA and private-first/no-duplicate release"
+  ],
+  "production_supervisor_enabled": false
+}
