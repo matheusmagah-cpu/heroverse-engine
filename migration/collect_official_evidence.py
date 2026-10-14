@@ -85,19 +85,22 @@ def snapshot(operation,captured,channel,entity,identity,payload):
         'collector':{'name':'YouTube Data API','version':'v3-bounded-migration-1','mode':'PUBLIC_METADATA_NO_MEDIA'},
         'evidence_class':'OBSERVED','payload':payload,'unavailable_metrics':PRIVATE_UNKNOWN,'error':None}
 
-def collect(root,export):
-    from verify_worker_oauth import check_token
+def collect(root,export,*,health_only=False):
+    from oauth_health import observe_refresh,identity_health
     raw=os.environ.get('HERO_YT_AUTHORIZED_USER_JSON','')
-    problem=check_token(raw)
-    if problem:raise PermissionError(problem)
     from google.oauth2.credentials import Credentials
     from google.auth.transport.requests import Request
     from hero_engine.google_api_runtime import build_authorized_service,execute_google_request,GoogleOperationDeadline
     from hero_engine.phase6_quota import reserve_general_quota,consume_general_quota
     class BoundedRequest(Request):
         def __call__(self,*a,**kw):kw['timeout']=20;return super().__call__(*a,**kw)
-    credentials=Credentials.from_authorized_user_info(json.loads(raw));raw=None
-    credentials.refresh(BoundedRequest())
+    def renew(value):
+        credentials=Credentials.from_authorized_user_info(json.loads(value))
+        credentials.refresh(BoundedRequest())
+        return credentials
+    credentials,health=observe_refresh(raw,renew);raw=None
+    write(export/'oauth-health.json',health)
+    if credentials is None:raise PermissionError(health['failure_code'])
     youtube=build_authorized_service('youtube','v3',credentials=credentials,request_timeout_seconds=20)
     analytics=build_authorized_service('youtubeAnalytics','v2',credentials=credentials,request_timeout_seconds=20)
     deadline=GoogleOperationDeadline(seconds=300)
@@ -117,6 +120,11 @@ def collect(root,export):
         return value
     captured=datetime.now(timezone.utc).isoformat()
     owned=exact_owned(read(youtube.channels().list(part='id,snippet,statistics,contentDetails',mine=True),'owned-channel'))
+    write(export/'oauth-channel-health.json',identity_health(health,owned['id'],CHANNEL))
+    if health_only:
+        return {'status':'AUTH_HEALTH_OBSERVED','channel_id':CHANNEL,'data_api_units_reserved':1,
+            'market_collection_performed':False,'production_ready':False,'publication_performed':False}
+
     config=json.loads((root/'config/current_audio_research.json').read_text())
     refs=[r['channel_id'] for r in config['references']]+PRAYER_REFERENCES
     market=read(youtube.channels().list(part='id,snippet,statistics,contentDetails',id=','.join(refs)),'reference-channels')
@@ -232,7 +240,7 @@ def main():
             raise PermissionError('DURABLE_OBSERVER_CLAIM_REQUIRED')
         restore_ledger(SQL,destination)
         sys.path.insert(0,str(root))
-        try:summary=collect(root,export)
+        try:summary=collect(root,export,health_only=os.environ.get('HERO_AUTH_HEALTH_ONLY')=='true')
         finally:
             if destination.exists():shutil.copy2(destination,export/'quota-ledger.sqlite3')
         print(json.dumps(summary))
