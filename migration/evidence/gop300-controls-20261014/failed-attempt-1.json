@@ -1,0 +1,65 @@
+{
+  "status": "FAILED_MISSING_OPENCV_BEFORE_FIRST_MEASUREMENT",
+  "observed_at": "2026-10-14T23:18:56.511723+00:00",
+  "exception": "ModuleNotFoundError: No module named cv2",
+  "completed_encodes": 1,
+  "approved_measurements": 0,
+  "encoder_will_not_be_repeated": true,
+  "files": [
+    {
+      "path": "control-0/command.json",
+      "sha256": "8921c2ecd7eb47e5cba173259b974f9dcf3418f299809cd25c80a95fbfc40c53",
+      "bytes": 18892
+    },
+    {
+      "path": "control-0/control.mp4",
+      "sha256": "87128bc8997d4f174972beb2d5dde27c8723638e54a9723d141928ddd5b944fd",
+      "bytes": 48655
+    },
+    {
+      "path": "control-0/decode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-0/decoded-0.png",
+      "sha256": "b0e0b7761cd4cb9e29ef460cb783de0b1610ce185eb4f2bbc2cc616558f705f8",
+      "bytes": 31220
+    },
+    {
+      "path": "control-0/encode.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "control-0/input.png",
+      "sha256": "4f00ee4eb5dd48787dcc823b7b8a39e68e074c8b1d5a3e65ae6ea3c9a80113de",
+      "bytes": 22234
+    },
+    {
+      "path": "control-0/process-result.json",
+      "sha256": "a6dadf0eac68e278cddbcb7e8d7a88481bb90602189c7a198880366c3c69ed7b",
+      "bytes": 61
+    },
+    {
+      "path": "control-0/reference.png",
+      "sha256": "4f00ee4eb5dd48787dcc823b7b8a39e68e074c8b1d5a3e65ae6ea3c9a80113de",
+      "bytes": 22234
+    },
+    {
+      "path": "policy.json",
+      "sha256": "d6fd48da6775e95927332160b5ad17e57024415bab7c13eb0bbb31300e289b3e",
+      "bytes": 1977
+    },
+    {
+      "path": "target-source-manifest.json",
+      "sha256": "dee8a969ae1be4e77d8eb983936083653938e902b919b98074159e685e567ac7",
+      "bytes": 18967
+    },
+    {
+      "path": "transport-recipe.json",
+      "sha256": "320178e2364078f7364e6d9ea57a828f0d8a85ad9500cc4559ed458b7feab0c3",
+      "bytes": 1423
+    }
+  ]
+}

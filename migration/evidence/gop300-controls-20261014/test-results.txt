@@ -1,0 +1,12 @@
+test_control_binary_tamper_rejected (__main__.TransportEvidenceTests.test_control_binary_tamper_rejected) ... ok
+test_real_eight_control_reopen_has_no_effects_and_no_release_authority (__main__.TransportEvidenceTests.test_real_eight_control_reopen_has_no_effects_and_no_release_authority) ... ok
+test_resealed_changed_encoder_rejected (__main__.TransportEvidenceTests.test_resealed_changed_encoder_rejected) ... ok
+test_resealed_changed_font_geometry_rejected (__main__.TransportEvidenceTests.test_resealed_changed_font_geometry_rejected) ... ok
+test_resealed_forged_limit_rejected_by_native_numeric_recomputation (__main__.TransportEvidenceTests.test_resealed_forged_limit_rejected_by_native_numeric_recomputation) ... ok
+test_resealed_incomplete_population_rejected (__main__.TransportEvidenceTests.test_resealed_incomplete_population_rejected) ... ok
+test_resealed_training_holdout_overlap_rejected (__main__.TransportEvidenceTests.test_resealed_training_holdout_overlap_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.025s
+
+OK

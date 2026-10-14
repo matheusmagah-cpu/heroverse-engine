@@ -1,0 +1,109 @@
+{
+  "version": "heroverse-gop300-calibration-progress-v1",
+  "created_at": "2026-10-14T23:22:13.462375+00:00",
+  "status": "GOP300_CALIBRATION_PASS_NATIVE_INTEGRATION_PENDING",
+  "preceding_receipt": "migration/receipts/20261014-final-production-review.json",
+  "preregistered_policy_commits": [
+    "602edb9cfbc7fac7d0ad2b2656791d3927793559",
+    "9cd1737faaa207f5cfeb22448d30e59017ce56b4"
+  ],
+  "policy_sha256": "ddbf013c9bc5a9cc11797793a90add7e7a738bdbff1f3964fdfd02964422d377",
+  "controls_binding_sha256": "8ea5bf876957b112e1575118be68f610329052f45c5a60a9a0a3ac104993d13e",
+  "evidence_archive": {
+    "path": "migration/evidence/gop300-controls-20261014/controls-evidence.zip",
+    "sha256": "0c55e1762f92e68b4b1784e40698a42fc5953dc215bef2fe0052aee1d139f984",
+    "bytes": 1192504
+  },
+  "controls": {
+    "total": 8,
+    "positive": 3,
+    "negative": 2,
+    "holdout_positive": 1,
+    "holdout_negative": 2,
+    "decoded_frames_per_control": 300,
+    "unique_encoded_sources": 8,
+    "final_population_frames": 2400,
+    "original_calibration_function_unchanged": true,
+    "positive_controls_reused_without_reencoding_or_redecoding": 4,
+    "total_encode_executions_including_failed_attempts": 12,
+    "retrospective_threshold_tuning": false
+  },
+  "calibration": {
+    "text_error": {
+      "method": "worst-positive-bound-with-disjoint-holdout",
+      "status": "CALIBRATED_NUMERIC_SCOPE",
+      "maximum_error": 0.001375963269988123,
+      "positive_count": 3,
+      "negative_count": 2,
+      "holdout_positive_count": 1,
+      "holdout_negative_count": 2,
+      "negative_minimum": 0.997323824393468,
+      "holdout_positive_maximum": 0.0013281390465311738,
+      "holdout_negative_minimum": 0.997323824393468,
+      "candidate_used_for_fitting": false,
+      "semantic_or_publication_authority": false
+    },
+    "colour_error": {
+      "method": "worst-positive-bound-with-disjoint-holdout",
+      "status": "CALIBRATED_NUMERIC_SCOPE",
+      "maximum_error": 35.72235107421875,
+      "positive_count": 3,
+      "negative_count": 2,
+      "holdout_positive_count": 1,
+      "holdout_negative_count": 2,
+      "negative_minimum": 81.14214324951172,
+      "holdout_positive_maximum": 35.72235107421875,
+      "holdout_negative_minimum": 81.14214324951172,
+      "candidate_used_for_fitting": false,
+      "semantic_or_publication_authority": false
+    }
+  },
+  "current_static_assessment": {
+    "version": "heroverse-current-gop300-scoped-assessment-v1",
+    "status": "CURRENT_STATIC_MEASUREMENTS_WITHIN_INDEPENDENT_LIMITS",
+    "native_master_frame_review_sha256": "425f06f5e157a08a32e330c9498acf3d46f44e12817e4bbe2dd4b4a19d047289",
+    "preserved_cycle_metrics_sha256": "de600d5c7eeb6c3eed3722229b31b6cf17e6e730bb5d63b211209029a9adbcec",
+    "basis": "Reuse exact decoded RGB identity established by prior full-frame inventory; no master decode or metric rerun. Same native metric implementation remains pinned in controls.",
+    "current_measurements": {
+      "text_error": 0.0013281390465311738,
+      "colour_error": 35.72235107421875
+    },
+    "independent_limits": {
+      "text_error": 0.001375963269988123,
+      "colour_error": 35.72235107421875
+    },
+    "checks": {
+      "text_error": true,
+      "colour_error": true
+    },
+    "native_validator_integration": "NOT_INSTALLED",
+    "production_approved": false,
+    "publication_authorized": false
+  },
+  "tests": {
+    "passed": 7,
+    "failed": 0,
+    "seconds": 3.025,
+    "log": "migration/evidence/gop300-controls-20261014/test-results.txt"
+  },
+  "failures_preserved": [
+    "Missing cv2 before first measurement; first encoded control reused",
+    "Initial four negative controls became identical after full title erasure; native reader rejected overlap. Corrected only negative inputs under a new preregistered policy."
+  ],
+  "master_modified": false,
+  "master_rerendered": false,
+  "master_decode_repeated": false,
+  "voice_or_asr_repeated": false,
+  "provider_av_calls": 0,
+  "paid_calls": 0,
+  "vidiq_credits_used": 0,
+  "native_validator_approval_emitted": false,
+  "production_approved": false,
+  "publication_authorized": false,
+  "supervisor_enabled": false,
+  "next_exact_action": "Integrate the authenticated GOP300 control binding into a versioned native reader/execution bridge, preserving the old GOP60 domain and all other gates; qualify with target package before closing CURRENT_TRANSPORT_STATIC_CODEC_CONTROLS.",
+  "other_gates_unchanged": [
+    "ORIGINAL_SELECTED_MUSIC_REFERENCE_ANCHOR",
+    "ACCEPTED_CURRENT_MARKET_NATIVE_AV_SEMANTIC_HANDOFF"
+  ]
+}
