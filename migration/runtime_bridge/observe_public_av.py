@@ -307,7 +307,7 @@ def refine_reference():
     from gemini_public_av import validate_report
     policy=json.loads(POLICY.read_text())
     ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',os.environ['GITHUB_RUN_ID'])
-    windows=[(130,270),(690,840),(840,1050)]
+    windows=[(130,270),(690,840),(840,900),(900,960),(960,1020),(1020,1040),(1040,1050)]
     bindings=[]
     for window in windows:
         receipt=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
@@ -323,26 +323,31 @@ def refine_reference():
                 end=int(end)
                 prefix['window_end_seconds']=end
                 validate_report(prefix,SOURCE,window=(window[0],end),refinement=True)
-                tail=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
-                    reserve=ledger.reserve,persist=ledger.persist,window=(end,window[1]),refinement=True)
-                if tail['status']!='WINDOW_AWAITING_AV_REVIEW':
-                    print(json.dumps({'status':'REFINEMENT_GAP_INCOMPLETE','window':[end,window[1]],
-                        'failure_code':tail.get('failure_code'),'publication_authorized':False}))
-                    return 2
+                tails=[];suffixes=[]
+                for gap_start in range(end,window[1],20):
+                    gap=(gap_start,min(gap_start+20,window[1]))
+                    tail=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
+                        reserve=ledger.reserve,persist=ledger.persist,window=gap,refinement=True)
+                    if tail['status']!='WINDOW_AWAITING_AV_REVIEW':
+                        print(json.dumps({'status':'REFINEMENT_GAP_INCOMPLETE','window':gap,
+                            'failure_code':tail.get('failure_code'),'publication_authorized':False}))
+                        return 2
+                    validate_report(tail['report'],SOURCE,window=gap,refinement=True)
+                    tails.append(tail['report'])
+                    suffixes.append(Path('migration/evidence')/('public-av-'+tail['key'].split(':')[1]+'.json'))
                 merged=json.loads(json.dumps(prefix))
                 merged['window_end_seconds']=window[1]
-                merged['segments']+=tail['report']['segments']
-                merged['limitations']+=tail['report']['limitations']
+                merged['segments']+=[s for t in tails for s in t['segments']]
+                merged['limitations']+=[s for t in tails for s in t['limitations']]
                 validate_report(merged,SOURCE,window=window,refinement=True)
                 original=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
-                suffix=Path('migration/evidence')/('public-av-'+tail['key'].split(':')[1]+'.json')
                 bundle=Path('migration/evidence')/('focused-av-window-'+receipt['key'].split(':')[1]+'.json')
                 recovered={'status':'WINDOW_AWAITING_AV_REVIEW','source':SOURCE,
                     'model':policy['model'],'window':list(window),'sample_fps':2,
                     'report':merged,'derivation':'VALIDATED_OBSERVED_PREFIX_PLUS_NEW_GAP_ONLY',
                     'original_failure_preserved':True,'bindings':[
                         {'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
-                        for p in (original,suffix)],
+                        for p in [original]+suffixes],
                     'quality_authorized':False,'production_authorized':False,'publication_authorized':False}
                 body=json.dumps(recovered,sort_keys=True).encode()
                 if bundle.exists():
