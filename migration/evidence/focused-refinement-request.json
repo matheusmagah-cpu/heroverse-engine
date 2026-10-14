@@ -2,10 +2,11 @@
   "request_id": "20261014-fine-scene-recovery-v1",
   "source_video_id": "7GvhWbXDWHQ",
   "mode": "REFINE_ONLY_REUSE_COMPLETED",
-  "owner_instruction": "então refine!!",
+  "owner_instruction": "Então resolva",
   "existing_workflow": ".github/workflows/official-evidence.yml",
   "sequential": true,
   "extra_paid_budget": 0,
   "publication_authorized": false,
-  "reason": "Browser executor environment offline; resume only fine scene refinement through same observer and preserved receipts."
+  "reason": "Resume existing saved detailed windows and complete only remaining90seconds; local requested-interval accounting corrected, historical debits unchanged; no paid fallback.",
+  "attempt_revision": "20261014-clipped-local-budget-final90"
 }
