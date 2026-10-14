@@ -1,7 +1,12 @@
 {
-  "request_id": "20261014-peace-inside-reference-v1",
-  "mode": "PEACE_CATALOG_EXTENSION_ONLY",
-  "source_video_id": "qD7efeJhPIM",
+  "request_id": "public-reference-discovery-20261014-adjacent-v1",
+  "mode": "PUBLIC_CATALOG_SEEDS_ONLY",
+  "source_video_ids": [
+    "_Hv1XK1fmtU",
+    "Rvgv9kiLVZQ",
+    "2Ub9KdtnXhU"
+  ],
+  "discovery_basis": "RELATED_PUBLIC_REFERENCES_OBSERVED_DURING_AUTHORIZED_PLAYER_INSPECTION",
   "owner_request": "2026-10-14T16:22:12-03:00:continue",
   "publication_authorized": false,
   "vidiq_credits_used": 0
