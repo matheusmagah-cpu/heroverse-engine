@@ -23,6 +23,7 @@ class RefinementWorkflowTests(unittest.TestCase):
             if gap and window==(690,840):
                 receipt.update(status='FAILED_NO_AUTOMATIC_RETRY',failure_code='REPORT_VALIDATION_FAILED',finish_reasons=['STOP'])
                 receipt['report']['segments']=receipt['report']['segments'][:6]
+                receipt['report']['segments'][-1]['end_seconds']=810.0
             path=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
             path.write_text(json.dumps(receipt))
             return receipt
