@@ -1,0 +1,37 @@
+{
+  "status": "INTEGRATED_SHADOW_NOT_LIVE",
+  "original_hashes": {
+    "hero_engine/phase6_audio_production.py": "2617ff0bfccdf56c2b8ece577515fa859666aa8adbd09bccc0f0141fb6490afe",
+    "hero_engine/creative_direction.py": "127cce3fd58a0739790312957387b6dcd975b6a1407b0a84e22766e099465f43"
+  },
+  "helper_sha256": "b0ac152296fd0ef4acb4025b16024aa85541974555382fe4536cf1861fa3badd",
+  "successor_hashes": {
+    "hero_engine/phase6_audio_production.py": "6aaa3310aeb3457f3373bd2edd2a19af1b939fdb76189faab76dec1f919606c0",
+    "hero_engine/creative_direction.py": "97d25c92d0dd5b8ff6fd63ef7e40a5141fa3b59dc94ae88b9abaeebf2e001fd9"
+  },
+  "old_source_preserved": true,
+  "new_jobs_require_semantic_handoff": true,
+  "publication_authorized": false,
+  "tests_passed": 12,
+  "tests_scope": "Pure contracts and native recipe/input readers with synthetic snapshots, mining and scripts. No voice, media, queue execution or live provider.",
+  "completed": "Dynamic semantic model and original draft consumed by native recipe v6; manager default pointer admission; legacy v1 readers retained.",
+  "remaining": [
+    "Current reviewed AV handoff for 3 independent winners plus comparable median/weak examples",
+    "Original production draft with creative routes and final native quality/rights qualification",
+    "Live supervisor deployment and replay",
+    "Continuous provider scheduling bridge at zero cost"
+  ],
+  "vidIQ_credits_spent": 0,
+  "external_cost_usd": 0,
+  "audience_forecast_available": false,
+  "ctr_target": {
+    "requested_range_percent": [
+      40,
+      50
+    ],
+    "status": "ASPIRATIONAL_NOT_VALIDATED",
+    "observed_ctr": null,
+    "measurement": "Owned registered impression CTR; aggregate weighted by impressions, partition by format, traffic origin and age window; never infer competitor CTR or divide all views by impressions.",
+    "source": "https://support.google.com/youtube/answer/7628154?hl=pt-BR"
+  }
+}
