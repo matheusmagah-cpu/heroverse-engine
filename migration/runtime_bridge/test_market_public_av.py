@@ -6,6 +6,24 @@ from observe_market_av import validate_plan,execute
 from gemini_public_av import build_request
 
 class MarketAVBoundaryTests(unittest.TestCase):
+    def test_third_reference_retains_language_gate_and_declared_sample_scope(self):
+        plan,raw,now=self.fixture();data=json.loads(raw);row=data['market_snapshots'][0]
+        row['entity_id']='VA3qvxoZr4Q';row['channel_id']='UCemzpRC1q9xqvYKnTvWeQ3A'
+        raw=json.dumps(data).encode();plan['source_binding']['sha256']=hashlib.sha256(raw).hexdigest()
+        plan.update(purpose='THIRD_METADATA_WINNER_SAMPLED_NOT_NATIVE_APPROVED',opening_seconds=38,
+            requested_seconds=58,qualified_winner=False)
+        plan['videos'][0].update(video_id=row['entity_id'],channel_id=row['channel_id'],
+            role='METADATA_WINNER_AWAITING_NATIVE_AV',windows=[[0,38],[5400,5410],[10790,10800]])
+        self.assertEqual(validate_plan(plan,raw,now=now),58)
+        row['payload']['default_audio_language']=None;raw=json.dumps(data).encode()
+        plan['source_binding']['sha256']=hashlib.sha256(raw).hexdigest()
+        with self.assertRaisesRegex(PermissionError,'MATCHED_PUBLIC_SOURCE_REQUIRED'):
+            validate_plan(plan,raw,now=now)
+    def test_third_reference_cannot_use_changed_identity_or_shorter_unplanned_opening(self):
+        plan,raw,now=self.fixture();plan.update(purpose='THIRD_METADATA_WINNER_SAMPLED_NOT_NATIVE_APPROVED',
+            opening_seconds=37,qualified_winner=False)
+        with self.assertRaisesRegex(PermissionError,'EXACT_THIRD_METADATA_REFERENCE_REQUIRED'):
+            validate_plan(plan,raw,now=now)
     def discovery_fixture(self):
         plan,raw,now=self.fixture();data=json.loads(raw)
         row=data['market_snapshots'][0];row['entity_id']='yY9dDJCLfHU'
