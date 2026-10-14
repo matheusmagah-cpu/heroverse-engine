@@ -138,8 +138,53 @@ def diagnose():
     print(json.dumps(receipt))
     return 0 if receipt['status']=='MODEL_METADATA_AVAILABLE' else 2
 
+
+def diagnose_inputs():
+    from gemini_public_av import transport,ProviderFailure,FREE_MODELS
+    run=os.environ['GITHUB_RUN_ID']
+    policy=json.loads(POLICY.read_text())
+    key=os.environ.get('HERO_GEMINI_API_KEY','')
+    observed=datetime.fromisoformat(policy['verified_at'].replace('Z','+00:00'))
+    if (policy.get('tier')!='FREE' or policy.get('billing_enabled') is not False
+            or policy.get('input_price_usd')!=0 or policy.get('output_price_usd')!=0
+            or not 0<=(datetime.now(timezone.utc)-observed).total_seconds()<=86400
+            or hashlib.sha256(key.encode()).hexdigest()!=policy['key_sha256']
+            or policy['model'] not in FREE_MODELS):
+        raise PermissionError('CURRENT_FREE_BOUND_POLICY_REQUIRED')
+    ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',run)
+    tests=[
+      ('TEXT_ONLY',0,{'contents':[{'parts':[{'text':'Reply with OK only.'}]}],
+          'generationConfig':{'maxOutputTokens':128}}),
+      ('VIDEO_FIRST_TEN_SECONDS',10,{'contents':[{'parts':[
+          {'fileData':{'fileUri':'https://www.youtube.com/watch?v=7GvhWbXDWHQ','mimeType':'video/*'},
+           'videoMetadata':{'startOffset':'0s','endOffset':'10s','fps':1}},
+          {'text':'Describe only the sounds and images actually received in these first ten seconds. State if unavailable.'}]}],
+          'generationConfig':{'maxOutputTokens':512}})
+    ]
+    for label,seconds,payload in tests:
+        h=digest({'model':policy['model'],'payload':payload})
+        claim_key='public-av:'+digest({'diagnostic':label,'run':run,'request_hash':h})
+        claim=ledger.reserve(claim_key,h,seconds,28800)
+        if claim['status']!='NEW':raise PermissionError('DIAGNOSTIC_ALREADY_CLAIMED')
+        receipt={'version':'heroverse-av-input-diagnostic-v1','key':claim_key,
+            'request_hash':h,'model':policy['model'],'diagnostic':label,
+            'source_video_id':'7GvhWbXDWHQ' if seconds else None,
+            'clip_seconds':seconds,'publication_authorized':False,'quality_authorized':False}
+        try:
+            response=transport(payload,key,model=policy['model'])
+            receipt.update(status='PROVIDER_RESPONSE_RECEIVED',response_sha256=digest(response))
+            candidates=response.get('candidates',[])
+            receipt['finish_reasons']=[c.get('finishReason') for c in candidates]
+            receipt['output_text']=''.join(p.get('text','') for c in candidates
+                for p in c.get('content',{}).get('parts',[]) if not p.get('thought',False))[:4000]
+        except ProviderFailure as error:
+            receipt.update(status='PROVIDER_FAILED',failure_code=error.code)
+        ledger.persist(receipt)
+        print(json.dumps({k:v for k,v in receipt.items() if k not in ('output_text',)}))
+    return 0
+
 if __name__=='__main__':
-    try:sys.exit(diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
+    try:sys.exit(diagnose_inputs() if len(sys.argv)>1 and sys.argv[1]=='diagnose_inputs' else diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
     except Exception:
         print(json.dumps({'status':'AV_BLOCKED','details_redacted':True,'publication_authorized':False}))
         sys.exit(2)
