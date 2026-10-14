@@ -23,6 +23,33 @@ def canonical(value):
 def digest(value):
     return hashlib.sha256(canonical(value)).hexdigest()
 
+
+def normalize_report(report):
+    """Lossless encoding compatibility only; never invent scene content or clocks."""
+    result=json.loads(json.dumps(report))
+    for segment in result.get('segments',[]):
+        if 'audio_summary' not in segment and isinstance(segment.get('audio_speech'),str):
+            segment['audio_summary']=segment.pop('audio_speech')
+        if isinstance(segment.get('limitations'),str):
+            segment['limitations']=[segment['limitations']]
+    return result
+
+def report_schema(window):
+    string={'type':'STRING'};number={'type':'NUMBER'}
+    properties={'video_id':string,'duration_seconds':{'type':'INTEGER'},
+        'audio_received':{'type':'BOOLEAN'},'visual_received':{'type':'BOOLEAN'},
+        'coverage':{'type':'STRING','enum':['FULL_WINDOW' if window else 'FULL']},
+        'limitations':{'type':'ARRAY','items':string},
+        'segments':{'type':'ARRAY','items':{'type':'OBJECT',
+            'properties':{'start_seconds':number,'end_seconds':number,
+                'audio_summary':string,'visual_observation':string,'relationship':string,
+                'mechanism':string,'limitations':{'type':'ARRAY','items':string}},
+            'required':['start_seconds','end_seconds','audio_summary','visual_observation',
+                'relationship','mechanism','limitations']}}}
+    if window is not None:
+        properties.update(window_start_seconds=number,window_end_seconds=number)
+    return {'type':'OBJECT','properties':properties,'required':list(properties)}
+
 def build_request(source, *, today=None, window=None):
     if (set(source) != {'video_id', 'duration_seconds', 'visibility'}
             or not re.fullmatch(r'[A-Za-z0-9_-]{11}', source['video_id'])
@@ -63,7 +90,7 @@ def build_request(source, *, today=None, window=None):
         {'fileData': {'fileUri': 'https://www.youtube.com/watch?v=' + source['video_id'], 'mimeType': 'video/*'},
          'videoMetadata': metadata}, {'text': prompt}]}],
         'generationConfig': {'maxOutputTokens': (8192 if window is not None else 32768),
-                             'responseMimeType': 'application/json'}}
+                             'responseMimeType': 'application/json', 'responseSchema': report_schema(window)}}
 
 def validate_report(report, source, window=None):
     if (report.get('video_id') != source['video_id']
@@ -190,7 +217,10 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
             raise ProviderFailure('PROVIDER_BLOCKED_OR_TRUNCATED')
         parts = candidates[0]['content']['parts']
         text = ''.join(p.get('text', '') for p in parts if not p.get('thought', False))
-        report = json.loads(text)
+        original_report = json.loads(text)
+        report = normalize_report(original_report)
+        receipt['encoding_normalized'] = report != original_report
+        receipt['original_report_sha256'] = digest(original_report)
         receipt['report'] = report
         validate_report(report, source,window=window)
         receipt['status'] = ('WINDOW_AWAITING_AV_REVIEW' if window is not None else 'AWAITING_AV_REVIEW')
