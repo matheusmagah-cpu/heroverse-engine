@@ -23,11 +23,11 @@ def canonical(value):
 def digest(value):
     return hashlib.sha256(canonical(value)).hexdigest()
 
-def build_request(source, *, today=None):
+def build_request(source, *, today=None, window=None):
     if (set(source) != {'video_id', 'duration_seconds', 'visibility'}
             or not re.fullmatch(r'[A-Za-z0-9_-]{11}', source['video_id'])
             or type(source['duration_seconds']) is not int
-            or not 1 <= source['duration_seconds'] <= 3600
+            or not 1 <= source['duration_seconds'] <= (14400 if window is not None else 3600)
             or source['visibility'] != 'PUBLIC'):
         raise PermissionError('PUBLIC_SOURCE_IDENTITY_REQUIRED')
     prompt = (
@@ -49,27 +49,40 @@ def build_request(source, *, today=None):
         f'expected duration_seconds={source["duration_seconds"]}. '
         'If access is incomplete, return INCOMPLETE and explicitly state the gap.'
     )
+    metadata = {'fps': 1}
+    if window is not None:
+        start,end = window
+        if type(start) is not int or type(end) is not int or not 0<=start<end<=source['duration_seconds'] or end-start>600:
+            raise PermissionError('BOUNDED_WINDOW_REQUIRED')
+        metadata.update(startOffset=str(start)+'s',endOffset=str(end)+'s')
+        prompt += (f' IMPORTANT: only analyze the attached window [{start},{end}] seconds. '
+            f'Use absolute original-video timestamps, start at {start} and end at {end}. '
+            'Report coverage FULL_WINDOW, window_start_seconds and window_end_seconds. '
+            'FULL_WINDOW means this window only, never the whole video. Keep source duration unchanged.')
     return {'contents': [{'role': 'user', 'parts': [
         {'fileData': {'fileUri': 'https://www.youtube.com/watch?v=' + source['video_id'], 'mimeType': 'video/*'},
-         'videoMetadata': {'fps': 1}}, {'text': prompt}]}],
-        'generationConfig': {'maxOutputTokens': 32768,
+         'videoMetadata': metadata}, {'text': prompt}]}],
+        'generationConfig': {'maxOutputTokens': (8192 if window is not None else 32768),
                              'responseMimeType': 'application/json'}}
 
-def validate_report(report, source):
+def validate_report(report, source, window=None):
     if (report.get('video_id') != source['video_id']
             or report.get('duration_seconds') != source['duration_seconds']
             or report.get('audio_received') is not True
             or report.get('visual_received') is not True
-            or report.get('coverage') != 'FULL'):
+            or report.get('coverage') != ('FULL_WINDOW' if window is not None else 'FULL')):
         raise PermissionError('INCOMPLETE_OR_FOREIGN_AV_REPORT')
-    cursor = 0
+    start_limit,end_limit = window if window is not None else (0,source['duration_seconds'])
+    if window is not None and (report.get('window_start_seconds')!=start_limit or report.get('window_end_seconds')!=end_limit):
+        raise PermissionError('AV_WINDOW_IDENTITY_REQUIRED')
+    cursor = start_limit
     segments = report.get('segments')
     if not isinstance(segments, list) or not segments or len(segments) > 200:
         raise PermissionError('AV_SEGMENTS_REQUIRED')
     for segment in segments:
         start, end = segment.get('start_seconds'), segment.get('end_seconds')
         if (type(start) not in (int, float) or type(end) not in (int, float)
-                or start != cursor or not start < end <= source['duration_seconds']):
+                or start != cursor or not start < end <= end_limit):
             raise PermissionError('AV_TIMELINE_GAP_OR_INVALID_CLOCK')
         for field in ('audio_summary', 'visual_observation', 'relationship', 'mechanism'):
             value = segment.get(field)
@@ -78,7 +91,7 @@ def validate_report(report, source):
         if not isinstance(segment.get('limitations'), list):
             raise PermissionError('AV_LIMITATIONS_REQUIRED')
         cursor = end
-    if cursor != source['duration_seconds'] or not isinstance(report.get('limitations'), list):
+    if cursor != end_limit or not isinstance(report.get('limitations'), list):
         raise PermissionError('AV_FULL_COVERAGE_REQUIRED')
     # Successful parsing and model-reported coverage never constitute review.
     return report
@@ -99,7 +112,7 @@ def transport(payload, api_key, *, model=MODEL):
     request = urllib.request.Request(endpoint, data=canonical(payload), method='POST',
         headers={'Content-Type': 'application/json', 'x-goog-api-key': api_key})
     try:
-        with urllib.request.build_opener(NoRedirect).open(request, timeout=180) as response:
+        with urllib.request.build_opener(NoRedirect).open(request, timeout=(90 if 'startOffset' in payload.get('contents',[{}])[0].get('parts',[{}])[0].get('videoMetadata',{}) else 180)) as response:
             raw = response.read(MAX_BYTES + 1)
         if len(raw) > MAX_BYTES:
             raise ProviderFailure('PROVIDER_RESPONSE_TOO_LARGE')
@@ -127,7 +140,7 @@ def transport(payload, api_key, *, model=MODEL):
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None
 
-def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None):
+def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None):
     """Manager adapter. reserve() must durably claim before the network effect.
 
     reserve(key, request_hash, seconds, daily_cap_seconds) returns NEW, REPLAY or
@@ -146,7 +159,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         raise PermissionError('CURRENT_FREE_PROJECT_KEY_BINDING_REQUIRED')
     if not callable(reserve) or not callable(persist):
         raise PermissionError('EXISTING_DURABLE_MANAGER_REQUIRED')
-    payload = build_request(source, today=now.date().isoformat())
+    payload = build_request(source, today=now.date().isoformat(),window=window)
     model = policy['model']
     request_hash = digest({'model': model, 'payload': payload})
     key = 'public-av:' + digest({'source': source, 'request_hash': request_hash})
@@ -162,7 +175,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         raise PermissionError('AV_QUOTA_OR_UNRESOLVED_CLAIM_BLOCKED')
     receipt = {'version': 'heroverse-public-av-provider-v1', 'key': key,
         'request_hash': request_hash, 'source': source, 'model': model,
-        'sample_fps': 1, 'review_status': 'NOT_REVIEWED',
+        'sample_fps': 1, 'window': window, 'review_status': 'NOT_REVIEWED',
         'evidence_class': 'MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED',
         'quality_authorized': False, 'production_authorized': False,
         'publication_authorized': False}
@@ -179,8 +192,8 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         text = ''.join(p.get('text', '') for p in parts if not p.get('thought', False))
         report = json.loads(text)
         receipt['report'] = report
-        validate_report(report, source)
-        receipt['status'] = 'AWAITING_AV_REVIEW'
+        validate_report(report, source,window=window)
+        receipt['status'] = ('WINDOW_AWAITING_AV_REVIEW' if window is not None else 'AWAITING_AV_REVIEW')
     except Exception as error:
         receipt['status'] = 'FAILED_NO_AUTOMATIC_RETRY'
         receipt['failure_code'] = (error.code if isinstance(error, ProviderFailure)
