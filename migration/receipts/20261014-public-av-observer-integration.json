@@ -1,0 +1,51 @@
+{
+  "version": "heroverse-public-av-observer-integration-v1",
+  "status": "WORKFLOW_WIRED_LIVE_PROVIDER_PROVISIONING_PENDING",
+  "date": "2026-10-14",
+  "repository": "matheusmagah-cpu/heroverse-engine",
+  "integration": {
+    "workflow": ".github/workflows/official-evidence.yml",
+    "input": "av_reference",
+    "default": false,
+    "required_checkpoint_only": true,
+    "existing_ledger": "migration/evidence/observer-ledger.sql",
+    "existing_claim": "migration/evidence/observer-claim.json",
+    "extra_table": "public_av_reservations",
+    "second_scheduler": false,
+    "provider_secret": "HERO_GEMINI_API_KEY",
+    "policy": "migration/evidence/gemini-free-runtime-policy.json",
+    "policy_provisioned": false,
+    "credentials_transferred": false
+  },
+  "qualification": {
+    "run_id": 38551428383,
+    "job_id": 115810048650,
+    "head": "ce952ed62cab03380e4510a8e3c950ef7ffba9cd",
+    "conclusion": "success",
+    "tests_passed": 15,
+    "elapsed_test_seconds": 0.043,
+    "provider_calls": 0,
+    "vidiq_credits": 0,
+    "synthetic_reports": true,
+    "actual_sqlite_reservations_and_recovery": true,
+    "real_provider_or_production_approval": false
+  },
+  "boundaries": {
+    "max_daily_reserved_seconds": 28800,
+    "max_video_seconds": 3600,
+    "model": "gemini-3.8-flash",
+    "project": "gen-lang-client-0909161074",
+    "current_free_price_key_project_evidence_required": true,
+    "automatic_retries": false,
+    "paid_fallback": false,
+    "model_reports_unreviewed": true,
+    "supervisor_enabled": false,
+    "publication_authorized": false
+  },
+  "remaining": [
+    "Secure specific Gemini key transfer to encrypted GitHub Actions secret and current price/project/key binding",
+    "Live one-reference worker call and checkpoint verification",
+    "Current matching winner/median/weak audiovisual cohort and original semantic handoff",
+    "Critical complete production QA and private-first provider/no-duplicate acceptance"
+  ]
+}
