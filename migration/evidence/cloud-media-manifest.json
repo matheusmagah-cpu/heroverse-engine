@@ -45,6 +45,46 @@
       "status": "EXACT_BYTES_RESTORED",
       "decoder_verified": false,
       "github_asset_id": 638454393
+    },
+    {
+      "name": "HeroVerse_AudioBox_preservado.zip",
+      "bytes": 415480140,
+      "sha256": "f2c759e5be6878d7c4859d4ec8fee771fbcebe5c1f89b74439a3d926add19445",
+      "github_asset_id": 638696431,
+      "origin": "PRESERVED_TRANSFERRED_AUDIOBOX_EXACT_MODEL_CONFIG_README",
+      "status": "PRIVATE_RELEASE_DIGEST_VERIFIED",
+      "decoder_verified": false,
+      "worker_download_verified": false
+    },
+    {
+      "name": "HeroVerse_ASR_base_en_preservado.zip",
+      "bytes": 147769996,
+      "sha256": "78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb",
+      "github_asset_id": 638696861,
+      "origin": "FREE_OFFICIAL_UPSTREAM_ORIGINAL_BASE_EN_REVISION",
+      "status": "PRIVATE_RELEASE_DIGEST_VERIFIED",
+      "decoder_verified": false,
+      "worker_download_verified": false
+    },
+    {
+      "name": "grace-corpus.zip",
+      "bytes": 126665966,
+      "sha256": "83c3d3befc5b145f20380dfa60519b84cba09579299076a6887f26ab37a2cc24",
+      "github_asset_id": 638697008,
+      "origin": "PRESERVED_HISTORICAL_CORPUS_NOT_CURRENT_MARKET_WINNERS",
+      "status": "PRIVATE_RELEASE_DIGEST_VERIFIED",
+      "decoder_verified": false,
+      "worker_download_verified": false
+    },
+    {
+      "name": "HeroVerse_opening_voice.wav",
+      "bytes": 3149868,
+      "sha256": "9eebe0329a6069f7491e1310a085605da8dcf0f94c4d67d66c76b7bb1eecd0da",
+      "github_asset_id": 638697130,
+      "origin": "ORIGINAL_RECEIVED_OPENING_NO_RESYNTHESIS",
+      "status": "PRIVATE_RELEASE_DIGEST_VERIFIED",
+      "decoder_verified": false,
+      "worker_download_verified": false
     }
   ],
   "windows_contacted": false,
