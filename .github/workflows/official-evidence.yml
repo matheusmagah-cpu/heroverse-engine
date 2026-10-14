@@ -91,6 +91,10 @@ jobs:
               assert r['request_id'] in ('20261014-three-hour-reference-discovery-v1','20261014-three-hour-reference-catalog-v1')
               assert r['source_video_ids']==['TYCZe65GxdQ','ZGiGg9O09yU','beIMxaH7YuI']
               stage='catalog' if r['mode']=='CANDIDATE_CATALOG_ONLY' else 'candidate'
+          elif r['mode']=='MARKET_AV_SAMPLE_ONLY':
+              assert r['request_id']=='20261014-market-music-sample-v1'
+              assert r['plan_sha256']=='6da4eb09834dacdf7bb6941fabca9a9c2c75b2f6687c7304b12c6f745183a6b6'
+              stage='market_av'
           else:
               raise PermissionError('UNKNOWN_OWNER_REQUEST_STAGE')
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('stage='+stage+'\n')
@@ -149,6 +153,13 @@ jobs:
         run: |
           python3 -m unittest discover -s migration/runtime_bridge -p 'test_*public_av.py' -v
           python3 migration/runtime_bridge/observe_public_av.py refine
+      - name: Analyze only owner-requested market audiovisual samples sequentially
+        if: steps.push_stage.outputs.stage == 'market_av'
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: |
+          python3 -m unittest discover -s migration/runtime_bridge -p 'test_*public_av.py' -v
+          python3 migration/runtime_bridge/observe_market_av.py
       - name: Verify saved audiovisual checkpoint without provider calls
         if: inputs.av_verify_checkpoint && inputs.checkpoint_only
         run: python3 migration/runtime_bridge/observe_public_av.py verify_checkpoint
