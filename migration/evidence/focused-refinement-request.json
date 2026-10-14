@@ -1,8 +1,10 @@
 {
-  "request_id": "20261014-holy-moments-reference-v1",
-  "mode": "CANDIDATE_CATALOG_EXTENSION_ONLY",
-  "source_video_id": "yY9dDJCLfHU",
+  "request_id": "20261014-holy-moments-av-discovery-v1",
+  "mode": "MARKET_AV_DISCOVERY_ONLY",
+  "plan_sha256": "42c3ee1a477f802cd0fbe4f14cff897ccf350153a7dba87157b647c00eac131e",
+  "owner_request": "2026-10-14T15:39:19-03:00:continue",
+  "requested_sample_seconds": 60,
+  "qualified_winner": false,
   "publication_authorized": false,
-  "discovery_basis": "INCIDENTAL_RELATED_REFERENCE_OBSERVED_DURING_AUTHORIZED_PUBLIC_PLAYER_INSPECTION",
   "vidiq_credits_used": 0
 }
