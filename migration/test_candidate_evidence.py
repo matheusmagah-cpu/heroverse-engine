@@ -16,6 +16,13 @@ class CandidateStageTests(unittest.TestCase):
         ids=candidate_source_ids(reference_extension=True,peace_extension=True)
         self.assertEqual(ids,DISCOVERY_IDS+('yY9dDJCLfHU','qD7efeJhPIM'))
         self.assertEqual(len(ids),5)
+    def test_additional_public_ids_are_bounded_before_remote_effects(self):
+        ids=['_Hv1XK1fmtU','Rvgv9kiLVZQ','2Ub9KdtnXhU']
+        self.assertEqual(len(candidate_source_ids(reference_extension=True,peace_extension=True,additional_public_video_ids=ids)),8)
+        for extra in [ids+['abcdefghijk'],['invalid'],[ids[0],ids[0]],['qD7efeJhPIM']]:
+            with self.assertRaises(PermissionError):
+                candidate_source_ids(reference_extension=True,peace_extension=True,additional_public_video_ids=extra)
+        with self.assertRaises(PermissionError):candidate_source_ids(additional_public_video_ids=ids)
     def test_peace_extension_cannot_run_outside_read_only_catalogue(self):
         with self.assertRaises(PermissionError):candidate_source_ids(peace_extension=True)
         with self.assertRaisesRegex(PermissionError,'READ_ONLY_CATALOGUE_STAGE'):
