@@ -1,0 +1,41 @@
+{
+  "status": "ORIGINAL_PHASE3_ROWS_RECOVERED_READ_ONLY",
+  "operation_id": "phase3-2026-09-02-catalog-v2",
+  "archive_sha256": "bbd5b7b9daa76b5ac1754eba6dc135e75f15bbeb4e72a79a0a8891c9fd64d790",
+  "database_sha256": "6d333d6f0c3dc4ac4bea650eaba050d19a2c39fed571fb4519a7a28fb628459d",
+  "integrity_check": "ok",
+  "outputs": {
+    "observatory_public_snapshots": {
+      "row_count": 130,
+      "sha256": "8a8e73556060e2427008aa37c8b9bef26a72d91edf2f001e2c55ca3a5ad41143",
+      "filename": "observatory_public_snapshots.json"
+    },
+    "observatory_coverage": {
+      "row_count": 143,
+      "sha256": "64379ea4bca1fbbe437e83c920add44c0a8e6ddf96749a36bdc2675d2cfc064c",
+      "filename": "observatory_coverage.json"
+    },
+    "observatory_cohorts": {
+      "row_count": 5,
+      "sha256": "3046eeb63bc6877e1be16e848678cff5b6407fcf26d1533c648d4a89ea0600f7",
+      "filename": "observatory_cohorts.json"
+    },
+    "observatory_cohort_members": {
+      "row_count": 35,
+      "sha256": "88f7f34eca713d2d2a53da2fb5687086c7a81f2029c6e8e535e28b1e8d172bc9",
+      "filename": "observatory_cohort_members.json"
+    },
+    "observatory_ledger_events": {
+      "row_count": 130,
+      "sha256": "07946c25a36956ab1f7cbdd35b5d543c443fa76ea660252cf77ac1987603b4b8",
+      "filename": "observatory_ledger_events.json"
+    }
+  },
+  "payload_hashes_verified": 260,
+  "new_market_collection": false,
+  "new_av_analysis": false,
+  "canonical_channel_model_recovered": false,
+  "original_export_byte_identity_claimed": false,
+  "publication_performed": false,
+  "original_archive_unchanged": true
+}
