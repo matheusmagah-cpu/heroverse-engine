@@ -1,0 +1,8 @@
+test_absent_music_inputs_cannot_borrow_transport_approval (__main__.NativeTransportBridgeTests.test_absent_music_inputs_cannot_borrow_transport_approval) ... ok
+test_actual_native_reader_and_transport_lineage_adoption_without_effects (__main__.NativeTransportBridgeTests.test_actual_native_reader_and_transport_lineage_adoption_without_effects) ... ok
+test_original_legacy_reader_ast_is_preserved_after_new_dispatch (__main__.NativeTransportBridgeTests.test_original_legacy_reader_ast_is_preserved_after_new_dispatch) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.715s
+
+OK

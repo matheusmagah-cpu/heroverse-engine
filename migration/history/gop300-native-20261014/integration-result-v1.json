@@ -1,0 +1,241 @@
+{
+  "status": "NATIVE_GOP300_CONTROL_READER_AND_EXISTING_TRANSPORT_ADOPTION_PASS",
+  "overlay": {
+    "version": "native-gop300-reader-overlay-v1",
+    "original_sha256": "ffd78d7097dcad8432f0a3b9ce6c9ae864246439fe09d96926f70132b2875911",
+    "original_preserved": true,
+    "new_standard_sha256": "c28b6dad8436964432dca56149739bbd9e768326e2543ae0992c89f201d6d346",
+    "bridge_sha256": "e293cfe48dd8cf0f7bebcbe99ea65239a1e37b369d9221a94f68344f5acd783b",
+    "legacy_reader_body_byte_identical_after_removing_new_dispatch": true,
+    "native_quality_and_music_gates_unchanged": true,
+    "production_approved": false,
+    "publication_authorized": false
+  },
+  "binding": {
+    "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/native-binding.json",
+    "sha256": "sha256:5d771824ef0eb9069d7fe13c613b8796213e34592bc4438fffaeb14970bb9d67"
+  },
+  "controls": {
+    "status": "AUTHENTICATED_STATIC_CODEC_LIMITS",
+    "binding": {
+      "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/native-binding.json",
+      "sha256": "sha256:5d771824ef0eb9069d7fe13c613b8796213e34592bc4438fffaeb14970bb9d67"
+    },
+    "limits": {
+      "text_error": 0.001375963269988123,
+      "colour_error": 35.72235107421875
+    },
+    "domain": {
+      "font": {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "sha256": "sha256:5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+      },
+      "palette": {
+        "accent": "#E4C77A",
+        "dominant": "#101820",
+        "text": "#F3EDE0"
+      },
+      "canvas": {
+        "height": 1080,
+        "width": 1920
+      },
+      "font_size": 80,
+      "text_color": "#F3EDE0"
+    },
+    "authenticated_inputs": [
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/native-binding.json",
+        "sha256": "sha256:5d771824ef0eb9069d7fe13c613b8796213e34592bc4438fffaeb14970bb9d67"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/controls-v3/bindings.json",
+        "sha256": "sha256:8ea5bf876957b112e1575118be68f610329052f45c5a60a9a0a3ac104993d13e"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/controls-v3/policy.json",
+        "sha256": "sha256:ddbf013c9bc5a9cc11797793a90add7e7a738bdbff1f3964fdfd02964422d377"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/calibrate_transport_gop300_recovery_v3.py",
+        "sha256": "sha256:0ae71a26087ae2f631073a85dde0d61323dbc695e37156d5f42e8356dc02294a"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/reused-native-master-review.json",
+        "sha256": "sha256:425f06f5e157a08a32e330c9498acf3d46f44e12817e4bbe2dd4b4a19d047289"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/reused-cycle-metrics.json",
+        "sha256": "sha256:de600d5c7eeb6c3eed3722229b31b6cf17e6e730bb5d63b211209029a9adbcec"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/transport-recipe.json",
+        "sha256": "sha256:320178e2364078f7364e6d9ea57a828f0d8a85ad9500cc4559ed458b7feab0c3"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/transport-verification.json",
+        "sha256": "sha256:6719c68a80b019d6fece9a48ec9335c59ea4841fec430339420589def3c1d7c1"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/source-manifest.json",
+        "sha256": "sha256:dee8a969ae1be4e77d8eb983936083653938e902b919b98074159e685e567ac7"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/calibrate_transport_gop300.py",
+        "sha256": "sha256:b1bd4fed0038b7fa7d704cdd29d6672a851e382799fe6fe2bd60ac4b93dd159a"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/verify_transport_gop300.py",
+        "sha256": "sha256:722daaaa98a57d5aa2f7f28fa44cc85dd6fdade8c72be9b45d93f1cb84785daf"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/take_plan.json",
+        "sha256": "sha256:e0d546e60459eaafd0d0584156e6f7d203abfecf0a4ee3fdbe2fa9f5c556e2e8"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/asset_manifest.json",
+        "sha256": "sha256:ad14e156e6adc39db65b4f70775e9c6ed4f0aec03912b12fbfb004a72bc89296"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/channel_style_bible.json",
+        "sha256": "sha256:cb237679639300a23b23c988dfb92b05361cc6310d515126c63d064d44a8a593"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/composition.png",
+        "sha256": "sha256:bbd6aaf2c37caf9f47dc7b41880e4bce244afe7dc8e3b831a7829e3565c83a95"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/rights-evidence.json",
+        "sha256": "sha256:b6e2b3e0fe0c12a51e3832bb695df1f4b9c7a3901a67f09a15108f8966e6d5a2"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/source-manifest.json",
+        "sha256": "sha256:d32501b3d38acf756c04a422ff73c9b2e085e56aa16a040c508a35f3d8508214"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/composition.svg",
+        "sha256": "sha256:ac2d1e0653fd2a76b851931eae72f4d60cc0c746f979ce0d90ca388287b20c4b"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/hero_engine/procedural_infographics_phase5.py",
+        "sha256": "sha256:a521ff62e1f606072ec7d8aec1e50064f80f60f81b923f57a1faf7489762a46f"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "sha256": "sha256:5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/HeroVerse_Rest_Corrected_3h_Metricool.mp4",
+        "sha256": "sha256:55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46"
+      }
+    ],
+    "transport_profile": "phase6-static-gop300-qp1-transport-v1",
+    "quality_authorized": false,
+    "publication_authorized": false
+  },
+  "execution": {
+    "status": "AUTHENTICATED_EXISTING_GOP300_TRANSPORT_LINEAGE_NOT_NEW_EXECUTION",
+    "binding": {
+      "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/native-binding.json",
+      "sha256": "sha256:5d771824ef0eb9069d7fe13c613b8796213e34592bc4438fffaeb14970bb9d67"
+    },
+    "media_sha256": "sha256:55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46",
+    "observed_segments": 1,
+    "prior_full_native_frames": 324000,
+    "prior_packet_lineage_verified": true,
+    "new_render_executed": false,
+    "historical_command_timestamps_unavailable": true,
+    "quality_authorized": false,
+    "publication_authorized": false,
+    "authenticated_inputs": [
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/native-binding.json",
+        "sha256": "sha256:5d771824ef0eb9069d7fe13c613b8796213e34592bc4438fffaeb14970bb9d67"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/controls-v3/bindings.json",
+        "sha256": "sha256:8ea5bf876957b112e1575118be68f610329052f45c5a60a9a0a3ac104993d13e"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/controls-v3/policy.json",
+        "sha256": "sha256:ddbf013c9bc5a9cc11797793a90add7e7a738bdbff1f3964fdfd02964422d377"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/calibrate_transport_gop300_recovery_v3.py",
+        "sha256": "sha256:0ae71a26087ae2f631073a85dde0d61323dbc695e37156d5f42e8356dc02294a"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/reused-native-master-review.json",
+        "sha256": "sha256:425f06f5e157a08a32e330c9498acf3d46f44e12817e4bbe2dd4b4a19d047289"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/reused-cycle-metrics.json",
+        "sha256": "sha256:de600d5c7eeb6c3eed3722229b31b6cf17e6e730bb5d63b211209029a9adbcec"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/transport-recipe.json",
+        "sha256": "sha256:320178e2364078f7364e6d9ea57a828f0d8a85ad9500cc4559ed458b7feab0c3"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/transport-verification.json",
+        "sha256": "sha256:6719c68a80b019d6fece9a48ec9335c59ea4841fec430339420589def3c1d7c1"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/source-manifest.json",
+        "sha256": "sha256:dee8a969ae1be4e77d8eb983936083653938e902b919b98074159e685e567ac7"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/calibrate_transport_gop300.py",
+        "sha256": "sha256:b1bd4fed0038b7fa7d704cdd29d6672a851e382799fe6fe2bd60ac4b93dd159a"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/runtime/gestor-central/maintenance-runs/gop300-native-v1/evidence/verify_transport_gop300.py",
+        "sha256": "sha256:722daaaa98a57d5aa2f7f28fa44cc85dd6fdade8c72be9b45d93f1cb84785daf"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/take_plan.json",
+        "sha256": "sha256:e0d546e60459eaafd0d0584156e6f7d203abfecf0a4ee3fdbe2fa9f5c556e2e8"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/asset_manifest.json",
+        "sha256": "sha256:ad14e156e6adc39db65b4f70775e9c6ed4f0aec03912b12fbfb004a72bc89296"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/channel_style_bible.json",
+        "sha256": "sha256:cb237679639300a23b23c988dfb92b05361cc6310d515126c63d064d44a8a593"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/composition.png",
+        "sha256": "sha256:bbd6aaf2c37caf9f47dc7b41880e4bce244afe7dc8e3b831a7829e3565c83a95"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/rights-evidence.json",
+        "sha256": "sha256:b6e2b3e0fe0c12a51e3832bb695df1f4b9c7a3901a67f09a15108f8966e6d5a2"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/source-manifest.json",
+        "sha256": "sha256:d32501b3d38acf756c04a422ff73c9b2e085e56aa16a040c508a35f3d8508214"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/source/composition.svg",
+        "sha256": "sha256:ac2d1e0653fd2a76b851931eae72f4d60cc0c746f979ce0d90ca388287b20c4b"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/hero_engine/procedural_infographics_phase5.py",
+        "sha256": "sha256:a521ff62e1f606072ec7d8aec1e50064f80f60f81b923f57a1faf7489762a46f"
+      },
+      {
+        "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "sha256": "sha256:5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+      },
+      {
+        "path": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/output/production/current-gop300-transport-v1/HeroVerse_Rest_Corrected_3h_Metricool.mp4",
+        "sha256": "sha256:55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46"
+      }
+    ]
+  },
+  "master_decode_repeated": false,
+  "master_audio_measurement_repeated": false,
+  "full_native_release_package_complete": false,
+  "production_approved": false,
+  "publication_authorized": false
+}
