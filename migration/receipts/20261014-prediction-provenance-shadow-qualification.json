@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-14T08:21:20.888Z",
+  "status": "PASS_ISOLATED_NATIVE_SOURCE_ADMISSION_GUARD_NOT_DEPLOYED",
+  "source_archive_sha256": "fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10",
+  "original_module_sha256": "83782468c936676211fc77dcc09bcc15c9949e7a09c753de1c501a4ccc106a3e",
+  "shadow_module_sha256": "d9b1c5133c92c1ae65a97b0668417867342686d4a81c5c4e85549404b8b9e434",
+  "guard_sha256": "30e25dd24ab886d0ce77972b316b3a88a1dc02eedbe6c09fecae6e5f0631cf9f",
+  "tests": {
+    "count": 6,
+    "passed": 6,
+    "failed": 0,
+    "duration_seconds": 0.063,
+    "scope": "Synthetic negative controls plus actual frozen native module restored from exact archive, no real forecast outcome claim"
+  },
+  "audience_forecast": {
+    "status": "UNAVAILABLE_INSUFFICIENT_VALIDATED_COMPARABLE_BASIS",
+    "point": null,
+    "interval": null,
+    "precision_measured": false,
+    "not_zero_views_prediction": true
+  },
+  "existing_official_data": {
+    "captured_at": "2026-10-13T22:18:13.514310+00:00",
+    "owned_report_count": 8,
+    "comparable_complete_window_proof": false,
+    "limitation": "Mixed formats and lifetime/date windows cannot be pooled as same-age/horizon own outcomes"
+  },
+  "no_real_external_calls_or_paid_credits": true,
+  "no_new_publication": true,
+  "original_history_preserved": true,
+  "production_automation_enabled": false,
+  "next_acceptance": [
+    "Evidence-linked novel topics/subtopics and observed AV structures",
+    "Hash-bound comparable owned-window records and traffic scope",
+    "Preregistered predictive method evaluated out of sample against baseline",
+    "Existing producer/reader/schema/manager integration under current quality and rights gates"
+  ]
+}
