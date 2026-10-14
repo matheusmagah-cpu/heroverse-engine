@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-14T08:11:20.321Z",
+  "owner_priority": "Evidence-linked open topic/subtopic/structure mining, authentic production, measured improvements and calibrated predictability",
+  "inspected_source": "HeroVerse_Linux_Source_Ready_20261013_v2.zip",
+  "observations": [
+    {
+      "module": "hero_engine/phase6_audio_production.py",
+      "functions": [
+        "build_current_audio_research",
+        "build_researched_rest_editorial"
+      ],
+      "fact": "Two fixed topic families selected from title word matches, then two predefined editorial treatments",
+      "classification": "OBSERVED_CODE_LIMITATION",
+      "not_full_semantic_av_mining": true
+    },
+    {
+      "module": "schemas/video_mining.schema.json",
+      "fact": "Topic, angle, thesis and evidence already represented; subtopics are optional unbound strings",
+      "classification": "OBSERVED_SCHEMA_GAP"
+    },
+    {
+      "module": "hero_engine/phase6_prediction_runtime.py",
+      "fact": "Existing preregistered prediction/outcome runtime available; not proof of calibrated predictive performance",
+      "classification": "OBSERVED_CODE_CAPABILITY_NOT_PERFORMANCE_PROOF"
+    }
+  ],
+  "required_integration": [
+    "Evidence per novel topic and each subtopic",
+    "Observed timed hook/narrative/take/audio structure",
+    "Comparable winner/median/weak references and contradictory evidence",
+    "Substantive original brief/script/production handoff",
+    "Registered predictive ranges and out-of-sample outcome assessment",
+    "Existing-manager change execution plus comparable subsequent measurement"
+  ],
+  "requirements_recorded": true,
+  "semantic_mining_implementation_complete": false,
+  "predictive_calibration_complete": false,
+  "production_automation_enabled": false,
+  "publication_performed": false
+}
