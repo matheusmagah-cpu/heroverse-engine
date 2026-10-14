@@ -1,0 +1,120 @@
+{
+  "version": "heroverse-final-production-review-v1",
+  "created_at": "2026-10-14T22:53:54.635732+00:00",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "status": "FINAL_PRODUCTION_APPROVAL_BLOCKED",
+  "master": {
+    "file_name": "HeroVerse_Rest_Corrected_3h_Metricool.mp4",
+    "bytes": 391733890,
+    "sha256": "55c2a047e107ce42469261978ab34353e58622ec436e40876f6a8fc71c882c46",
+    "duration_seconds": 10800
+  },
+  "master_native_frame_review_completed": true,
+  "competing_reference_native_frame_review_completed": false,
+  "checks": [
+    {
+      "id": "CANONICAL_MASTER_IDENTITY",
+      "status": "PASS",
+      "evidence": "native-master-frame-review-20261014.json"
+    },
+    {
+      "id": "FULL_NATIVE_MASTER_FRAME_POPULATION",
+      "status": "PASS",
+      "expected": 324000,
+      "observed": 324000,
+      "decode_errors": 0
+    },
+    {
+      "id": "ALL_DISTINCT_RENDERED_IMAGES_VISUALLY_REVIEWED",
+      "status": "PASS_STATIC_CONTENT_SCOPE",
+      "distinct_images": 1,
+      "title": "Rest Is Not Giving Up",
+      "scope": "Every native decoded YUV frame is exactly byte-equal to the single visually inspected image. Not reference-video frame inspection or calibrated source fidelity."
+    },
+    {
+      "id": "FINAL_LOUDNESS",
+      "status": "PASS",
+      "observed_lufs": -15.9,
+      "native_target_lufs": [
+        -17,
+        -15
+      ]
+    },
+    {
+      "id": "FINAL_TRUE_PEAK",
+      "status": "PASS",
+      "observed_dbtp": -1.47,
+      "native_maximum_dbtp": -1
+    },
+    {
+      "id": "ORIGINAL_OPENING_INTELLIGIBILITY",
+      "status": "PASS_REUSED_MEASUREMENT_WITH_EXACT_AAC_PACKET_LINEAGE",
+      "reference_words": 242,
+      "word_errors": 1,
+      "word_error_rate": 0.004132231404958678,
+      "maximum_word_error_rate": 0.08,
+      "source": "migration/evidence/20261014-original-opening-native-asr.json"
+    },
+    {
+      "id": "FULL_SOURCE_MUSIC_CLOCK_AND_RECORDED_FLOORS",
+      "status": "PASS_SCOPED_NOT_ORIGINAL_REFERENCE_AUTHENTICATION",
+      "windows": 1074,
+      "below_recorded_floor_windows": 0,
+      "source": "migration/evidence/final-review-preserved-music-check-20261014.json"
+    },
+    {
+      "id": "CURRENT_TRANSPORT_STATIC_CODEC_CONTROLS",
+      "status": "BLOCKED_MISSING_AUTHENTICATED_CURRENT_DOMAIN_BINDING",
+      "basis": "Canonical transport uses GOP300; the original native calibrated control reader does not accept an unqualified profile substitution. Direct native-frame review is preserved independently."
+    },
+    {
+      "id": "ORIGINAL_SELECTED_MUSIC_REFERENCE_ANCHOR",
+      "status": "BLOCKED_NOT_RESTORED",
+      "required_sha256": "5fe54921933654a9dc264846a949868516438a66c278e77f0abd56ef5859d133",
+      "basis": "Recorded historical floors are insufficient to reconstruct or authenticate the original reference document."
+    },
+    {
+      "id": "ACCEPTED_CURRENT_MARKET_NATIVE_AV_SEMANTIC_HANDOFF",
+      "status": "BLOCKED",
+      "basis": "Four metadata-sufficient reference channels and sampled model reports do not constitute reviewed native reference frames/transcripts; one GraceKeys audio-input contradiction remains excluded."
+    }
+  ],
+  "blocked_gate_ids": [
+    "CURRENT_TRANSPORT_STATIC_CODEC_CONTROLS",
+    "ORIGINAL_SELECTED_MUSIC_REFERENCE_ANCHOR",
+    "ACCEPTED_CURRENT_MARKET_NATIVE_AV_SEMANTIC_HANDOFF"
+  ],
+  "native_validator_approval_emitted": false,
+  "production_approved": false,
+  "publication_authorized": false,
+  "supervisor_enabled": false,
+  "existing_master_modified": false,
+  "provider_calls": 0,
+  "paid_calls": 0,
+  "vidiq_credits_used": 0,
+  "completed_work_must_be_reused": [
+    "Exact canonical master identity",
+    "Full 324000 native frame inventory and unique-image review",
+    "Complete final audio loudness/true-peak measurement",
+    "Pinned original opening ASR and full music observations"
+  ],
+  "native_validator_bindings": [
+    {
+      "path": "source-recovered/native/project/hero_engine/qa_phase5.py",
+      "sha256": "1b3dfca6e86e7153c98a6779687bd9048a22e78dcac2dbd76f59191f6ba489dc"
+    },
+    {
+      "path": "source-recovered/native/project/hero_engine/standard_qualification_phase5.py",
+      "sha256": "ffd78d7097dcad8432f0a3b9ce6c9ae864246439fe09d96926f70132b2875911"
+    },
+    {
+      "path": "source-recovered/native/project/config/production_quality_profiles/standard-v1.json",
+      "sha256": "a802f8cd31470e98680f89f6f13bfe37603baf97bccfd5587fc2f095a37e221a"
+    }
+  ],
+  "evidence_paths": [
+    "migration/evidence/native-master-frame-review-20261014.json",
+    "migration/evidence/final-master-audio-measurement-20261014.json",
+    "migration/evidence/final-review-preserved-music-check-20261014.json"
+  ]
+}
