@@ -244,8 +244,66 @@ def analyze_windows():
     print(json.dumps({k:result[k] for k in ('status','window_count','publication_authorized')}))
     return 0
 
+
+def verify_saved_windows(path,root=Path('.')):
+    from gemini_public_av import validate_report
+    import re
+    path=Path(path)
+    if not re.fullmatch(r'migration/evidence/windowed-av-[0-9]+\.json',path.as_posix()):
+        raise PermissionError('AV_AGGREGATE_PATH_REQUIRED')
+    raw=(root/path).read_bytes()
+    result=json.loads(raw)
+    if (result.get('source')!=SOURCE or result.get('window_count')!=5
+            or result.get('status')!='FULL_MODEL_REPORTED_COVERAGE_AWAITING_REVIEW'
+            or any(result.get(k) is not False for k in
+                ('quality_authorized','production_authorized','publication_authorized',
+                 'independent_native_frame_verification'))):
+        raise PermissionError('AV_AGGREGATE_BOUNDARY_INVALID')
+    bindings=result.get('bindings',[])
+    if len(bindings)!=5:raise PermissionError('AV_FIVE_WINDOWS_REQUIRED')
+    reports=[]
+    for i,binding in enumerate(bindings):
+        child=Path(binding['path'])
+        if (child.parent!=Path('migration/evidence') or
+                not re.fullmatch(r'(normalized-)?public-av-[a-f0-9]{64}\.json',child.name)):
+            raise PermissionError('AV_RECEIPT_PATH_REQUIRED')
+        body=(root/child).read_bytes()
+        if hashlib.sha256(body).hexdigest()!=binding['sha256']:
+            raise PermissionError('AV_RECEIPT_HASH_CHANGED')
+        receipt=json.loads(body)
+        if (receipt.get('source')!=SOURCE or receipt.get('model')!=result['model']
+                or receipt.get('finish_reasons')!=['STOP']
+                or receipt.get('status')!='WINDOW_AWAITING_AV_REVIEW'
+                or receipt.get('publication_authorized') is not False):
+            raise PermissionError('AV_WINDOW_BOUNDARY_INVALID')
+        validate_report(receipt['report'],SOURCE,window=(i*240,min(i*240+240,1178)))
+        reports.append(receipt['report'])
+    validate_report(result['report'],SOURCE)
+    if result['report']['segments']!=[s for r in reports for s in r['segments']]:
+        raise PermissionError('AV_AGGREGATE_CONTENT_CHANGED')
+    return {'status':'DURABLE_AV_COVERAGE_VERIFIED_AWAITING_CONTENT_REVIEW',
+        'aggregate_binding':{'path':str(path),'sha256':hashlib.sha256(raw).hexdigest()},
+        'window_count':5,'covered_seconds':1178,'provider_calls':0,
+        'quality_authorized':False,'production_authorized':False,'publication_authorized':False}
+
+def verify_checkpoint():
+    import re
+    paths=[p for p in Path('migration/evidence').glob('windowed-av-*.json')
+        if re.fullmatch(r'windowed-av-[0-9]+\.json',p.name)]
+    if not paths:raise PermissionError('AV_AGGREGATE_MISSING')
+    path=max(paths,key=lambda p:int(p.stem.split('-')[-1]))
+    result=verify_saved_windows(path)
+    run=os.environ['GITHUB_RUN_ID']
+    ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',run)
+    out=Path('migration/evidence')/('windowed-av-verification-'+run+'.json')
+    with out.open('x') as f:json.dump(result,f,sort_keys=True,allow_nan=False)
+    ledger.checkpoint('Verify saved audiovisual coverage without repeating provider calls')
+    print(json.dumps(result))
+    return 0
+
+
 if __name__=='__main__':
-    try:sys.exit(analyze_windows() if len(sys.argv)>1 and sys.argv[1]=='windows' else diagnose_inputs() if len(sys.argv)>1 and sys.argv[1]=='diagnose_inputs' else diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
-    except Exception:
-        print(json.dumps({'status':'AV_BLOCKED','details_redacted':True,'publication_authorized':False}))
+    try:sys.exit(verify_checkpoint() if len(sys.argv)>1 and sys.argv[1]=='verify_checkpoint' else analyze_windows() if len(sys.argv)>1 and sys.argv[1]=='windows' else diagnose_inputs() if len(sys.argv)>1 and sys.argv[1]=='diagnose_inputs' else diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
+    except Exception as error:
+        print(json.dumps({'status':'AV_BLOCKED','exception_type':type(error).__name__,'details_redacted':True,'publication_authorized':False}))
         sys.exit(2)
