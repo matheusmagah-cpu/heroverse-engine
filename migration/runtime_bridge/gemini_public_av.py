@@ -206,7 +206,10 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
     model = policy['model']
     request_hash = digest({'model': model, 'payload': payload})
     key = 'public-av:' + digest({'source': source, 'request_hash': request_hash})
-    claim = reserve(key, request_hash, source['duration_seconds'], 28800)
+    # Local workload budget measures the bounded interval actually requested.
+    # This is not a claim about Google's internal quota accounting; provider refusals stop.
+    requested_seconds = window[1]-window[0] if window is not None else source['duration_seconds']
+    claim = reserve(key, request_hash, requested_seconds, 28800)
     if claim.get('key') != key or claim.get('request_hash') != request_hash:
         raise PermissionError('MANAGER_CLAIM_BINDING_REQUIRED')
     if claim.get('status') == 'REPLAY':
@@ -218,6 +221,8 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         raise PermissionError('AV_QUOTA_OR_UNRESOLVED_CLAIM_BLOCKED')
     receipt = {'version': 'heroverse-public-av-provider-v1', 'key': key,
         'request_hash': request_hash, 'source': source, 'model': model,
+        'local_budget_seconds': requested_seconds,
+        'local_budget_basis': 'REQUESTED_INTERVAL_NOT_PROVIDER_QUOTA_ASSERTION',
         'sample_fps': payload['contents'][0]['parts'][0]['videoMetadata']['fps'], 'refinement': refinement, 'window': window, 'review_status': 'NOT_REVIEWED',
         'evidence_class': 'MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED',
         'quality_authorized': False, 'production_authorized': False,
