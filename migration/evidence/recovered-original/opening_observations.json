@@ -1,0 +1,1171 @@
+{
+  "schema_version": "1.0.0",
+  "window_contract": [
+    {
+      "window": "0_1S",
+      "start_ms": 0,
+      "end_ms": 1000
+    },
+    {
+      "window": "1_3S",
+      "start_ms": 1000,
+      "end_ms": 3000
+    },
+    {
+      "window": "3_8S",
+      "start_ms": 3000,
+      "end_ms": 8000
+    },
+    {
+      "window": "8_30S",
+      "start_ms": 8000,
+      "end_ms": 30000
+    }
+  ],
+  "records": [
+    {
+      "video_id": "DoCCRjPTE6s",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 8.53,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          0.1,
+          1.335,
+          5.572,
+          37.704
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 74,
+          "transcript_text": "the enemy that he does against you to destroy you when you're trying to do something great for God. The first thing he does he wants to divide you. There is a demonic spirit that wants to send a spirit of division into your house. The enemy loves to send division in your house whether it's between you and your spouse or you or your child because the enemy knows the power of unity.",
+          "median_word_probability": 0.987,
+          "scene_cut_count": 0
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/DoCCRjPTE6s.mp4",
+        "video_sha256": "a06c3e17765bb3fab43533462c175166d9dc4260b4fd99bfd8567c622c4aaab8",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "b9237bdc2569b769438c0eee91ad758fb22daa8a4cead5e3b42d0b424fe3a417",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "FpyZdMzFyqs",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 6.51,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          0.083,
+          1.333,
+          5.542,
+          8.708,
+          21.458,
+          27.125,
+          27.792,
+          27.917
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 7,
+          "transcript_text": "put on the whole armor of God",
+          "median_word_probability": 0.9838,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 75,
+          "transcript_text": "God that you may be able to stand against the wiles of the devil. For we do not wrestle against flesh and blood, but against principalities and powers, against the rulers of the darkness of this age, against spiritual host of wickedness in the heavenly places. Therefore, take up the whole armor of God that you may be able to withstand in the evil day, and having done all to stand, Paul says, take a",
+          "median_word_probability": 0.9934,
+          "scene_cut_count": 5
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/FpyZdMzFyqs.mp4",
+        "video_sha256": "1fe4ffc8b93d51321a5a8029dc36d7644255f71b24789985637e3e4020d956b0",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "bd596ffd134f2df7b81223e324d4bb012af7e820c2d2b6dc18ff79d1b893a717",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "MxiY_wHlFIc",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 6.13,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          10.8,
+          12.533,
+          14.6,
+          17.1,
+          19.067,
+          22.2,
+          29.567,
+          31.433,
+          34.733,
+          38.0,
+          39.133
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 7,
+          "transcript_text": "easy with all the distractions we have",
+          "median_word_probability": 0.986,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 34,
+          "transcript_text": "have to get your focus off what's really important but the Lord is my life my salvation and because he's my life and my salvation I ain't scared of you shall I feed there's",
+          "median_word_probability": 0.9276,
+          "scene_cut_count": 7
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/MxiY_wHlFIc.mp4",
+        "video_sha256": "b08d014dd1da1be284a61fbbdcc69fdba953b370b23bcea916d286fe3f96ab65",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "36f7d60ea1bc68c90216bfde11ff339171794488550eef64a1c64f8c2007f9c0",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "N2mdHZDRYB0",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 5.65,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.267,
+          2.267,
+          5.867,
+          12.667,
+          15.667,
+          22.067,
+          23.3,
+          28.367,
+          29.833,
+          35.333,
+          37.533
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 14,
+          "transcript_text": "And there may be a voice that says you're not quite ready for that.",
+          "median_word_probability": 0.9586,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 50,
+          "transcript_text": "that. Whenever God prompts you, you just say, yes, you'll be obedient and let him bring the outcome. And we're gonna feel free, and then we can obey God. No, you get up, and then chains fall off. We must obey God rather than men. You can't stop us. Obedience",
+          "median_word_probability": 0.9928,
+          "scene_cut_count": 6
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/N2mdHZDRYB0.mp4",
+        "video_sha256": "76b57be1b9a20dc687c9f9eb1b1170730878da6bb103243b2c24b36ced2a5a12",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "096d11e7fbed4684f24d37a04c023f476d11fffa437454d130dc78b2be7a84b7",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "QVQAmMLfBCU",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 8.53,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.267,
+          2.267,
+          14.7,
+          20.6,
+          23.5,
+          27.4,
+          31.2,
+          32.333,
+          36.533
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 29,
+          "transcript_text": "When you pray, ask big, say that with me, ask big. Ask according to his infinite power. God's not sitting there wondering what you want. He wants you to",
+          "median_word_probability": 0.9805,
+          "scene_cut_count": 4
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/QVQAmMLfBCU.mp4",
+        "video_sha256": "852a90052ea4334d409556870bda8c6844455c1d6f0b9e69960132eba169863d",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "9e9283967da824c43e4b0fd7aefb32025d503f362f8c0906c7c2870f3f3bbf3a",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "VCrKdBmD4eg",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 5.55,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          0.083,
+          1.333,
+          5.542,
+          28.667,
+          28.792,
+          29.0,
+          29.458,
+          29.5,
+          29.708,
+          29.833,
+          30.0,
+          30.583,
+          31.042,
+          31.167,
+          31.25,
+          33.458,
+          33.542,
+          33.917,
+          34.0,
+          34.542,
+          34.625
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 6,
+          "transcript_text": "When everything else is crumbling around",
+          "median_word_probability": 0.9918,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 38,
+          "transcript_text": "around us in the darkest hour of your life God will never fail you God uses storms to teach us that we need him every day in every hour of our lives God teaches us with those storms",
+          "median_word_probability": 0.99,
+          "scene_cut_count": 7
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/VCrKdBmD4eg.mp4",
+        "video_sha256": "6d5b7619e63d276508c933c9aaf90046f411084e97638fe6dfa466b10558bd11",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "0fccaa82cbd767de9a444f3531baa5ec9ddafc8622ce4c958e3547ee5516e622",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "_QMOhw7yE6I",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 6.26,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          15.1,
+          18.2,
+          23.967,
+          28.467,
+          29.933,
+          32.767,
+          34.767,
+          38.0,
+          39.9
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 3,
+          "transcript_text": "Concentrate for today",
+          "median_word_probability": 0.9583,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 32,
+          "transcript_text": "on the word faith that wins. The word faith is the celebration of victory. The word faith produces joy unspeakable. It brings confidence. It gives hope. It produces the blessed life. Faith",
+          "median_word_probability": 0.9909,
+          "scene_cut_count": 5
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/_QMOhw7yE6I.mp4",
+        "video_sha256": "8ef08623aca176f4d70e14cbbe28cd8a37d5b3bfed25f591a545e493bedb7c9a",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "8518583840c56a4280ce7718f49378ba1b5f5d4a50a7bed040fd97c88b9387a1",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "_sOy7htXJi8",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": false,
+      "first_speech_seconds": 6.51,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          18.933
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 8,
+          "transcript_text": "The man you said you followed, he wasn't",
+          "median_word_probability": 0.8916,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 68,
+          "transcript_text": "wasn't a coward. I took a stand against those Pharisees, those Sadducees, those rulers of the day. They tried to throw him off a cliff, he walked right through them, couldn't shut him up. What good is it gonna profit us if we keep dancing in rooms like this? And all of the territory outside this door is being hijacked. You a fighter, if you got the Holy",
+          "median_word_probability": 0.9752,
+          "scene_cut_count": 1
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/_sOy7htXJi8.mp4",
+        "video_sha256": "593e3ec7a1a1222527313f10add33c6d6966bc022ddc3abae548e9981d1744cf",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "825fed7678463d13e5edaa478e3648d61268214467a83a26aef3a673ffff88e4",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "h6EbB3MVZR0",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 6.03,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.267,
+          2.267,
+          10.7,
+          13.067,
+          15.533,
+          17.867,
+          19.033,
+          20.333,
+          22.767,
+          25.133,
+          30.067,
+          32.9,
+          37.033,
+          39.3
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 6,
+          "transcript_text": "There is no worse feeling than",
+          "median_word_probability": 0.9637,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 52,
+          "transcript_text": "than that of invisibility. You know, when you are doing your very best, and it goes unrecognized, it makes it kind of harder to want to keep doing it. The Father saw. He saw the tears he cried while you were waiting, because you wouldn't compromise just to fit in. The Father",
+          "median_word_probability": 0.9913,
+          "scene_cut_count": 8
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/h6EbB3MVZR0.mp4",
+        "video_sha256": "5094afe85f04ee53d1d51c69f6e7831ada90a57aad81e25ed9dbc87568772118",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "5bcd3c87a42126e30e23dd30ffc28e1ca8d90a6f1a67db39bee401dc6b25545f",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "hkf6nDyUfAM",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": false,
+      "first_speech_seconds": 6.8,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          8.867,
+          21.5,
+          27.167,
+          27.833,
+          27.967
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 6,
+          "transcript_text": "put on the whole armor of",
+          "median_word_probability": 0.9312,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 74,
+          "transcript_text": "of God that you may be able to stand against the wiles of the devil. For we do not wrestle against flesh and blood, but against principalities and powers, against the rulers of the darkness of this age, against spiritual host of wickedness in the heavenly places. Therefore, take up the whole armor of God that you may be able to withstand in the evil day and, having done all to stand, Paul says,",
+          "median_word_probability": 0.9934,
+          "scene_cut_count": 5
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/hkf6nDyUfAM.mp4",
+        "video_sha256": "29fc79bbfa4e620873e9b974fdaf2a8c6a6c992508d6894f4749853ea597cf41",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "bbc99444fd44630b6906cb2799e789c4aac91a5f0e2ba6a20c21b8cde0d16afd",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "huvUy3pJSp8",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": false,
+      "first_speech_seconds": 6.61,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.1,
+          2.1
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 4,
+          "transcript_text": "The thing is, if",
+          "median_word_probability": 0.9512,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 40,
+          "transcript_text": "if you just do stuff and nothing happens, what should all mean? What's the point? All right, this whole thing is about self -acceptance. Kicking the hell out of yourself doesn't give meaning to anything. So I should stop judging",
+          "median_word_probability": 0.9886,
+          "scene_cut_count": 0
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/huvUy3pJSp8.mp4",
+        "video_sha256": "4a08a63da0468879c89add4d90382f5a111a624cd0d03381fc28a6058e6d5515",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "e00fa68081fabbbcde7395523c815faead07c1e14bee2852a18f95cbb46a195b",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "iRG5R2wh1qs",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 11.09,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          31.633,
+          33.333,
+          35.1,
+          37.967,
+          39.833
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 31,
+          "transcript_text": "that God leaves it opaque, if you will, so that we can fill in whatever you need to fill in, so that you can recognize that all of us have something",
+          "median_word_probability": 0.9964,
+          "scene_cut_count": 0
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/iRG5R2wh1qs.mp4",
+        "video_sha256": "98fb98b53d8834c27ba4f545837ebf020fdee61630abda75ef999c5e6fa351d7",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "df8205f201d58b09f3488ee227bd44e807d61e1490b696cd0ed844276e074475",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "j2JqyYZzWwI",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 6.77,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          6.5,
+          8.633,
+          13.833,
+          18.433,
+          22.7,
+          29.333,
+          32.5,
+          38.967
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 3,
+          "transcript_text": "Happy or sad?",
+          "median_word_probability": 0.7504,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 33,
+          "transcript_text": "Sad. Okay. But I warn you, I'll break your heart. Already broken. See, we've been looking for peace in all the wrong places. The peace of God is never found in human strength,",
+          "median_word_probability": 0.9836,
+          "scene_cut_count": 5
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/j2JqyYZzWwI.mp4",
+        "video_sha256": "f50a1c613fd2686bf09feec80a39aab2fc22da5b45afeb9e9cbedd4a72e9c917",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "bc003c11bfbf43fa74324d37d112ecebc43a1e33ee9107753e614fa845cf9f41",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "sTtGaSwD-QE",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 7.02,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          10.633,
+          12.133,
+          13.933,
+          15.167,
+          16.9,
+          19.2,
+          23.333,
+          24.867,
+          26.967,
+          29.5,
+          31.5,
+          32.967,
+          34.8,
+          35.7,
+          36.6,
+          37.467,
+          38.333,
+          39.467
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 5,
+          "transcript_text": "The power of the Holy",
+          "median_word_probability": 0.9847,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 46,
+          "transcript_text": "Spirit that's released can quickly, in the twinkling of an eye, change your life. The power of the gospel released under the anointing of the Holy Spirit can change the world, can change America, and can change your destiny. He gives strength and power unto his",
+          "median_word_probability": 0.9892,
+          "scene_cut_count": 10
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/sTtGaSwD-QE.mp4",
+        "video_sha256": "55587598ef687af8bd133670f416fd720609ac4650cd9964ca40559cdfe23688",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "c8db5dba53b001bcd5c6ef1004dc2ccd59e8a23c7bbbba419e51bf8dd60871a1",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "y4JyAJVhE1A",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 10.0,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          28.433,
+          37.533,
+          38.6,
+          39.9
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 28,
+          "transcript_text": "Jesus said, devil, it is written, it is written. That's what he said, it's written. In other words, Jesus went to the Book of Deuteronomy and came out",
+          "median_word_probability": 0.9856,
+          "scene_cut_count": 1
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/y4JyAJVhE1A.mp4",
+        "video_sha256": "f0438da84ebbc95743d1974dbe9ebd86df7fc36b605de6070fbaa0ab50c1dd10",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "734c205c0edbe648764fc6320fdadccb115023c6ea277d790bc47df46df46500",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    },
+    {
+      "video_id": "zXe-P6L0BJs",
+      "coverage_level": "OPENING_ONLY",
+      "holdout_from_phase2": true,
+      "first_speech_seconds": 5.9,
+      "scene_detection": {
+        "status": "COMPLETE",
+        "threshold": 0.25,
+        "cut_times_seconds": [
+          1.233,
+          2.233,
+          5.967,
+          10.333,
+          16.833,
+          19.067,
+          20.6,
+          21.9,
+          23.433,
+          27.8,
+          33.833,
+          35.933,
+          37.567,
+          39.733
+        ]
+      },
+      "windows": [
+        {
+          "window": "0_1S",
+          "start_ms": 0,
+          "end_ms": 1000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 0
+        },
+        {
+          "window": "1_3S",
+          "start_ms": 1000,
+          "end_ms": 3000,
+          "spoken_word_count": 0,
+          "transcript_text": "",
+          "median_word_probability": null,
+          "scene_cut_count": 2
+        },
+        {
+          "window": "3_8S",
+          "start_ms": 3000,
+          "end_ms": 8000,
+          "spoken_word_count": 3,
+          "transcript_text": "Absolute power will",
+          "median_word_probability": 0.6966,
+          "scene_cut_count": 1
+        },
+        {
+          "window": "8_30S",
+          "start_ms": 8000,
+          "end_ms": 30000,
+          "spoken_word_count": 43,
+          "transcript_text": "will birth a new dawn of hope in your life, help you realize the goals and dreams with a birth of confidence, personal potential, and communication. Absolute power will make the impossible possible. Absolute power will take sorrow and transform into joy. Defeat",
+          "median_word_probability": 0.9873,
+          "scene_cut_count": 7
+        }
+      ],
+      "evidence": {
+        "video_artifact": "data/modeling/grace-grit-love/intros/zXe-P6L0BJs.mp4",
+        "video_sha256": "6d628d5bc1a452eb9142d6f4e0b0982d5bf9b1413ac94fd2e53d854abd2a0596",
+        "transcript_artifact": "data/modeling/grace-grit-love/intro-transcripts.json",
+        "transcript_record_sha256": "4b6e86712a49dd8a169b9f360faf7e75589499b4fec5ccc42395c2f0bc3759c8",
+        "evidence_class": "OBSERVED_AND_CALCULATED"
+      },
+      "limitations": [
+        "Only the first 40 seconds are available; no complete-narrative conclusion is permitted.",
+        "ASR is machine-generated and has not been promoted to a verbatim human-reviewed transcript."
+      ]
+    }
+  ],
+  "counts": {
+    "opening_records": 16,
+    "phase2_intersection": 3,
+    "holdout_from_phase2": 13
+  },
+  "generalization_claim": "NOT_PERMITTED",
+  "operation_id": "phase3-2026-09-02-catalog-v2",
+  "generated_at": "2026-09-02T18:06:24+00:00"
+}
