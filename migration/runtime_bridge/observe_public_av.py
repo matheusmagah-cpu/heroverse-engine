@@ -75,8 +75,51 @@ def main():
                       'publication_authorized':False}))
     return 0 if receipt['status']=='AWAITING_AV_REVIEW' else 2
 
+
+def diagnose():
+    import urllib.request,urllib.error
+    from durable_evidence_checkpoint import CLAIM
+    run=os.environ['GITHUB_RUN_ID']
+    if not CLAIM.exists() or json.loads(CLAIM.read_text()).get('run_id')!=run:
+        raise PermissionError('EXISTING_OBSERVER_CLAIM_REQUIRED')
+    key=os.environ.get('HERO_GEMINI_API_KEY','')
+    policy=json.loads(POLICY.read_text())
+    if hashlib.sha256(key.encode()).hexdigest()!=policy['key_sha256']:
+        raise PermissionError('KEY_BINDING_MISMATCH')
+    receipt={'status':'UNAVAILABLE','model':'gemini-3.8-flash',
+        'method':'GET_MODEL_METADATA','video_processed':False,
+        'publication_authorized':False,'details_redacted':True}
+    request=urllib.request.Request(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash',
+        headers={'x-goog-api-key':key})
+    try:
+        with urllib.request.urlopen(request,timeout=20) as response:
+            data=json.loads(response.read(100000))
+        receipt.update(status='MODEL_METADATA_AVAILABLE',
+            model_name=data.get('name'),methods=data.get('supportedGenerationMethods',[]))
+    except urllib.error.HTTPError as error:
+        receipt['http_status']=error.code
+        try:
+            data=json.loads(error.read(10000))
+            status=data.get('error',{}).get('status')
+            if status in ('INVALID_ARGUMENT','UNAUTHENTICATED','PERMISSION_DENIED',
+                    'NOT_FOUND','RESOURCE_EXHAUSTED','UNAVAILABLE'):
+                receipt['provider_status']=status
+            reasons=[detail.get('reason') for detail in data.get('error',{}).get('details',[])
+                if detail.get('reason') in ('API_KEY_INVALID','API_KEY_EXPIRED',
+                'SERVICE_DISABLED','API_KEY_SERVICE_BLOCKED','API_KEY_HTTP_REFERRER_BLOCKED',
+                'API_KEY_IP_ADDRESS_BLOCKED','CONSUMER_INVALID','BILLING_DISABLED')]
+            receipt['provider_reasons']=reasons
+        except Exception:pass
+    except Exception:
+        receipt['status']='NETWORK_OR_PROVIDER_UNAVAILABLE'
+    path=Path('migration/evidence')/('gemini-model-diagnostic-'+run+'.json')
+    path.write_text(json.dumps(receipt,sort_keys=True)+'\n')
+    print(json.dumps(receipt))
+    return 0
+
 if __name__=='__main__':
-    try:sys.exit(main())
+    try:sys.exit(diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
     except Exception:
         print(json.dumps({'status':'AV_BLOCKED','details_redacted':True,'publication_authorized':False}))
         sys.exit(2)
