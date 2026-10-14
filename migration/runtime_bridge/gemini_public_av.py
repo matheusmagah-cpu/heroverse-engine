@@ -50,7 +50,7 @@ def report_schema(window):
         properties.update(window_start_seconds=number,window_end_seconds=number)
     return {'type':'OBJECT','properties':properties,'required':list(properties)}
 
-def build_request(source, *, today=None, window=None):
+def build_request(source, *, today=None, window=None, refinement=False):
     if (set(source) != {'video_id', 'duration_seconds', 'visibility'}
             or not re.fullmatch(r'[A-Za-z0-9_-]{11}', source['video_id'])
             or type(source['duration_seconds']) is not int
@@ -86,13 +86,27 @@ def build_request(source, *, today=None, window=None):
             f'Use absolute original-video timestamps, start at {start} and end at {end}. '
             'Report coverage FULL_WINDOW, window_start_seconds and window_end_seconds. '
             'FULL_WINDOW means this window only, never the whole video. Keep source duration unchanged.')
+    if refinement:
+        if window is None or window[1]-window[0]>240:
+            raise PermissionError('REFINEMENT_WINDOW_REQUIRED')
+        metadata['fps']=2
+        prompt += (' FOCUSED PRECISION REVIEW: partition at scene/action changes into intervals of at most 20 seconds. '
+            'Do not produce broad summaries spanning different actions. For each interval describe concrete visible UI actions, '
+            'shot content, text/labels actually legible, spoken meaning, and their relationship. '
+            'Distinguish dates actually legible from uncertain dates; UNKNOWN beats guessing a year. '
+            'Identify what is pasted, clicked, queued, shown as previously completed, actually completed or uploaded. '
+            'Describe any sample-video overlays/B-roll and how they match the narration. '
+            'For discovery screens distinguish search/feed filters and public signals from private Studio metrics. '
+            'Do not invent a whiteboard, advertising setup, channel identity or narrative from expected software functions. '
+            'Record contradictions and unreadable text in limitations. Mark interpretations as inference. '
+            'This focused clip is refinement of unresolved details only, not a fresh complete-video review.')
     return {'contents': [{'role': 'user', 'parts': [
         {'fileData': {'fileUri': 'https://www.youtube.com/watch?v=' + source['video_id'], 'mimeType': 'video/*'},
          'videoMetadata': metadata}, {'text': prompt}]}],
         'generationConfig': {'maxOutputTokens': (8192 if window is not None else 32768),
                              'responseMimeType': 'application/json', 'responseSchema': report_schema(window)}}
 
-def validate_report(report, source, window=None):
+def validate_report(report, source, window=None, refinement=False):
     if (report.get('video_id') != source['video_id']
             or report.get('duration_seconds') != source['duration_seconds']
             or report.get('audio_received') is not True
@@ -111,6 +125,8 @@ def validate_report(report, source, window=None):
         if (type(start) not in (int, float) or type(end) not in (int, float)
                 or start != cursor or not start < end <= end_limit):
             raise PermissionError('AV_TIMELINE_GAP_OR_INVALID_CLOCK')
+        if refinement and end-start>20:
+            raise PermissionError('AV_REFINEMENT_TOO_COARSE')
         for field in ('audio_summary', 'visual_observation', 'relationship', 'mechanism'):
             value = segment.get(field)
             if not isinstance(value, str) or not value.strip():
@@ -167,7 +183,7 @@ def transport(payload, api_key, *, model=MODEL):
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None
 
-def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None):
+def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None, refinement=False):
     """Manager adapter. reserve() must durably claim before the network effect.
 
     reserve(key, request_hash, seconds, daily_cap_seconds) returns NEW, REPLAY or
@@ -186,7 +202,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         raise PermissionError('CURRENT_FREE_PROJECT_KEY_BINDING_REQUIRED')
     if not callable(reserve) or not callable(persist):
         raise PermissionError('EXISTING_DURABLE_MANAGER_REQUIRED')
-    payload = build_request(source, today=now.date().isoformat(),window=window)
+    payload = build_request(source, today=now.date().isoformat(),window=window,refinement=refinement)
     model = policy['model']
     request_hash = digest({'model': model, 'payload': payload})
     key = 'public-av:' + digest({'source': source, 'request_hash': request_hash})
@@ -202,7 +218,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         raise PermissionError('AV_QUOTA_OR_UNRESOLVED_CLAIM_BLOCKED')
     receipt = {'version': 'heroverse-public-av-provider-v1', 'key': key,
         'request_hash': request_hash, 'source': source, 'model': model,
-        'sample_fps': 1, 'window': window, 'review_status': 'NOT_REVIEWED',
+        'sample_fps': payload['contents'][0]['parts'][0]['videoMetadata']['fps'], 'refinement': refinement, 'window': window, 'review_status': 'NOT_REVIEWED',
         'evidence_class': 'MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED',
         'quality_authorized': False, 'production_authorized': False,
         'publication_authorized': False}
@@ -222,7 +238,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
         receipt['encoding_normalized'] = report != original_report
         receipt['original_report_sha256'] = digest(original_report)
         receipt['report'] = report
-        validate_report(report, source,window=window)
+        validate_report(report, source,window=window,refinement=refinement)
         receipt['status'] = ('WINDOW_AWAITING_AV_REVIEW' if window is not None else 'AWAITING_AV_REVIEW')
     except Exception as error:
         receipt['status'] = 'FAILED_NO_AUTOMATIC_RETRY'
