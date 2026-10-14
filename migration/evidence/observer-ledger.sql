@@ -75,7 +75,7 @@ CREATE TABLE public_av_reservations(
                 key TEXT PRIMARY KEY, request_hash TEXT NOT NULL,
                 day TEXT NOT NULL, seconds INTEGER NOT NULL,
                 state TEXT NOT NULL, receipt_path TEXT, receipt_hash TEXT);
-INSERT INTO "public_av_reservations" VALUES('public-av:e97971dbdd5a525bd43c96be2b0dc0ac522a1262a79a5f0547f545fdc9111700','48b027a3c3aadca70ef81066e83c6ab206c1c23aed6b8cc75f795f96657808b8','2026-10-14',1178,'CLAIMED',NULL,NULL);
+INSERT INTO "public_av_reservations" VALUES('public-av:e97971dbdd5a525bd43c96be2b0dc0ac522a1262a79a5f0547f545fdc9111700','48b027a3c3aadca70ef81066e83c6ab206c1c23aed6b8cc75f795f96657808b8','2026-10-14',1178,'COMPLETED','migration/evidence/public-av-e97971dbdd5a525bd43c96be2b0dc0ac522a1262a79a5f0547f545fdc9111700.json','971e2d80bf5621963fb907c9bbb1e86bb58f89f3c33eae299b1596b3040d8844');
 CREATE TABLE upload_quota_debits (
     debit_id TEXT PRIMARY KEY,
     idempotency_key TEXT NOT NULL UNIQUE,
