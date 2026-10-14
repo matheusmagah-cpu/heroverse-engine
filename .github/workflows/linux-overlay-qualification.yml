@@ -5,6 +5,11 @@ on:
       - 'migration/qualify_linux_overlay_cloud.py'
       - 'migration/apply_linux_production_overlay.py'
       - '.github/workflows/linux-overlay-qualification.yml'
+      - 'migration/runtime_bridge/editorial_visual_alignment.py'
+      - 'migration/runtime_bridge/apply_editorial_alignment_overlay.py'
+      - 'migration/runtime_bridge/test_editorial_visual_alignment.py'
+      - 'migration/runtime_bridge/recover_phase3_database_evidence.py'
+      - 'migration/runtime_bridge/test_phase3_database_recovery.py'
 permissions:
   contents: read
 concurrency:
@@ -26,3 +31,7 @@ jobs:
           "$RUNNER_TEMP/overlay-venv/bin/python" -m pip install --disable-pip-version-check jsonschema==4.26.0 numpy==2.2.6 Pillow==11.3.0 soundfile==0.13.1
       - name: Verify immutable preimages and original scope/residency fixtures
         run: '"$RUNNER_TEMP/overlay-venv/bin/python" migration/qualify_linux_overlay_cloud.py'
+      - name: Guard editorial promise and recover frozen Phase 3 evidence
+        run: |
+          "$RUNNER_TEMP/overlay-venv/bin/python" -m unittest discover -s migration/runtime_bridge -p 'test_editorial_visual_alignment.py' -v
+          "$RUNNER_TEMP/overlay-venv/bin/python" -m unittest discover -s migration/runtime_bridge -p 'test_phase3_database_recovery.py' -v
