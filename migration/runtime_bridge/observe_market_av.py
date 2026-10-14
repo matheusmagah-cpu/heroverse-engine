@@ -22,6 +22,12 @@ def validate_plan(plan,raw,*,now=None):
     rows={r['entity_id']:r for r in evidence['market_snapshots'] if r['entity_type']=='VIDEO'}
     selected=plan['videos'];seen=set();seconds=0
     discovery=plan.get('purpose')=='UNQUALIFIED_DISCOVERY_AV_NO_LANGUAGE_OR_COHORT_UPGRADE'
+    third=plan.get('purpose')=='THIRD_METADATA_WINNER_SAMPLED_NOT_NATIVE_APPROVED'
+    if third and (len(selected)!=1 or selected[0].get('video_id')!='VA3qvxoZr4Q'
+            or selected[0].get('channel_id')!='UCemzpRC1q9xqvYKnTvWeQ3A'
+            or selected[0].get('role')!='METADATA_WINNER_AWAITING_NATIVE_AV'
+            or plan.get('opening_seconds')!=38 or plan.get('qualified_winner') is not False):
+        raise PermissionError('EXACT_THIRD_METADATA_REFERENCE_REQUIRED')
     if discovery and (len(selected)!=1 or selected[0].get('video_id')!='yY9dDJCLfHU'
             or selected[0].get('channel_id')!='UCAOiKo0Ad8F_eRdxgpQSW_A'
             or selected[0].get('role')!='EXPLORATORY_UNQUALIFIED_LANGUAGE_UNKNOWN'
@@ -37,9 +43,9 @@ def validate_plan(plan,raw,*,now=None):
                 or duration!=int(duration) or item['duration_seconds']!=duration
                 or item['channel_id']!=row['channel_id']):
             raise PermissionError('MATCHED_PUBLIC_SOURCE_REQUIRED')
-        expected=[[0,40],[int(duration)//2,int(duration)//2+10],[int(duration)-10,int(duration)]]
+        expected=[[0,38 if third else 40],[int(duration)//2,int(duration)//2+10],[int(duration)-10,int(duration)]]
         if item['windows']!=expected:raise PermissionError('EXACT_SAMPLE_WINDOWS_REQUIRED')
-        seconds+=60
+        seconds+=58 if third else 60
     if seconds>300 or plan.get('requested_seconds')!=seconds:
         raise PermissionError('MARKET_STAGE_BUDGET_CHANGED')
     return seconds
@@ -61,17 +67,23 @@ def main():
         raise PermissionError('REPOSITORY_MISMATCH')
     request=json.loads(Path('migration/evidence/focused-refinement-request.json').read_bytes())
     discovery=request.get('mode')=='MARKET_AV_DISCOVERY_ONLY'
+    third=request.get('mode')=='THIRD_METADATA_REFERENCE_AV_ONLY'
+    if third and request.get('request_id')!='20261014-third-metadata-reference-av-v1':
+        raise PermissionError('EXACT_THIRD_REFERENCE_OWNER_REQUEST_REQUIRED')
     if discovery and request.get('request_id')!='20261014-holy-moments-av-discovery-v1':
         raise PermissionError('EXACT_DISCOVERY_OWNER_REQUEST_REQUIRED')
-    plan_path=Path('migration/evidence/market-av-discovery-plan-20261014.json' if discovery
+    plan_path=Path('migration/evidence/market-av-third-reference-plan-20261014.json' if third else
+        'migration/evidence/market-av-discovery-plan-20261014.json' if discovery
         else 'migration/evidence/market-av-plan-20261014.json');plan_raw=plan_path.read_bytes()
     plan=json.loads(plan_raw)
     if discovery != (plan.get('purpose')=='UNQUALIFIED_DISCOVERY_AV_NO_LANGUAGE_OR_COHORT_UPGRADE'):
         raise PermissionError('DISCOVERY_SCOPE_CHANGED')
+    if third != (plan.get('purpose')=='THIRD_METADATA_WINNER_SAMPLED_NOT_NATIVE_APPROVED'):
+        raise PermissionError('THIRD_REFERENCE_SCOPE_CHANGED')
     if request.get('plan_sha256')!=hashlib.sha256(plan_raw).hexdigest():
         raise PermissionError('OWNER_PLAN_BINDING_CHANGED')
     source_path=Path(plan['source_binding']['path'])
-    expected_catalogue='migration/evidence/observer-38604686944.json' if discovery else 'migration/evidence/observer-38591891691.json'
+    expected_catalogue='migration/evidence/observer-38624074018.json' if third else 'migration/evidence/observer-38604686944.json' if discovery else 'migration/evidence/observer-38591891691.json'
     if source_path.as_posix()!=expected_catalogue:
         raise PermissionError('EXACT_OFFICIAL_CATALOGUE_REQUIRED')
     seconds=validate_plan(plan,source_path.read_bytes())
@@ -91,6 +103,9 @@ def main():
     if discovery:
         summary.update(purpose=plan['purpose'],qualified_winner=False,
             declared_audio_language=None,language_evidence_status='UNDECLARED_NOT_UPGRADED_FROM_TITLE')
+    if third:
+        summary.update(purpose=plan['purpose'],qualified_winner=False,
+            metadata_cohort_winner=True,native_av_review_qualified=False)
     out.write_text(json.dumps(summary,sort_keys=True)+'\n')
     ledger.checkpoint('Persist sampled market audiovisual stage without granting production authority')
     print(json.dumps({'status':summary['status'],'samples':len(results),'publication_authorized':False}))
