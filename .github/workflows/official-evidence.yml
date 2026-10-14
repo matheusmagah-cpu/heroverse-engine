@@ -99,6 +99,10 @@ jobs:
               assert r['request_id']=='20261014-owner-market-503-recovery-1'
               assert r['prior_receipt_sha256']=='66f24a44393635d974adaea9d43ce3ad10be26fbb2ef3c1bb05b1def5d00c6ff'
               stage='market_recovery'
+          elif r['mode']=='NATIVE_MARKET_PROBE_ONLY':
+              assert r['request_id']=='20261014-native-linux-acquisition-v1'
+              assert r['source_video_id']=='j2rk8ycXe3c'
+              stage='native_market'
           else:
               raise PermissionError('UNKNOWN_OWNER_REQUEST_STAGE')
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('stage='+stage+'\n')
@@ -171,6 +175,12 @@ jobs:
         run: |
           python3 -m unittest discover -s migration/runtime_bridge -p 'test_*public_av.py' -v
           python3 migration/runtime_bridge/recover_market_av.py
+      - name: Acquire one public native reference on Linux without Gemini or OAuth calls
+        if: steps.push_stage.outputs.stage == 'native_market'
+        run: |
+          python3 -m venv "$RUNNER_TEMP/native-media-venv"
+          "$RUNNER_TEMP/native-media-venv/bin/python" -m pip install 'yt-dlp[default]==2026.8.19'
+          "$RUNNER_TEMP/native-media-venv/bin/python" migration/runtime_bridge/probe_native_market_worker.py
       - name: Verify saved audiovisual checkpoint without provider calls
         if: inputs.av_verify_checkpoint && inputs.checkpoint_only
         run: python3 migration/runtime_bridge/observe_public_av.py verify_checkpoint
@@ -208,5 +218,5 @@ jobs:
         with:
           name: heroverse-official-evidence-${{ github.run_id }}
           path: cloud-evidence/
-          retention-days: 30
+          retention-days: 1
           if-no-files-found: ignore
