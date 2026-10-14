@@ -71,6 +71,11 @@ INSERT INTO "general_quota_debits" VALUES('quota-debit-a7ccb72476e10401bee3f4cc'
 INSERT INTO "general_quota_debits" VALUES('quota-debit-34febc788cdef06da4dc84bf','native-cloud-readiness:38485393901','native-cloud-readiness:38485393901','native-cloud-readiness:38485393901',1,'UCuMF6pJQkyMzaVoAxFL86yA',1,'CONSUMED','2026-10-13T07:00:00Z','2026-10-14T07:00:00Z',2016,2017,'2026-10-13T23:37:58.885424Z','2026-10-13T23:37:58.888775Z',2016,12);
 INSERT INTO "general_quota_debits" VALUES('quota-debit-f4e98b4034eccb729f65dc96','native-cloud-readiness:38487465939','native-cloud-readiness:38487465939','native-cloud-readiness:38487465939',1,'UCuMF6pJQkyMzaVoAxFL86yA',1,'CONSUMED','2026-10-13T07:00:00Z','2026-10-14T07:00:00Z',2017,2018,'2026-10-13T23:59:05.117872Z','2026-10-13T23:59:05.121099Z',2016,12);
 INSERT INTO "general_quota_debits" VALUES('quota-debit-63069a7868d359cb36c8d1ea','cloud-evidence-38495958336:owned-channel','cloud-evidence-38495958336','cloud-evidence-38495958336',1,'UCuMF6pJQkyMzaVoAxFL86yA',1,'CONSUMED','2026-10-13T07:00:00Z','2026-10-14T07:00:00Z',2018,2019,'2026-10-14T01:29:15.265317Z','2026-10-14T01:29:15.268868Z',2001,12);
+CREATE TABLE public_av_reservations(
+                key TEXT PRIMARY KEY, request_hash TEXT NOT NULL,
+                day TEXT NOT NULL, seconds INTEGER NOT NULL,
+                state TEXT NOT NULL, receipt_path TEXT, receipt_hash TEXT);
+INSERT INTO "public_av_reservations" VALUES('public-av:e97971dbdd5a525bd43c96be2b0dc0ac522a1262a79a5f0547f545fdc9111700','48b027a3c3aadca70ef81066e83c6ab206c1c23aed6b8cc75f795f96657808b8','2026-10-14',1178,'CLAIMED',NULL,NULL);
 CREATE TABLE upload_quota_debits (
     debit_id TEXT PRIMARY KEY,
     idempotency_key TEXT NOT NULL UNIQUE,
