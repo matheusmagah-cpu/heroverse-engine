@@ -12,6 +12,7 @@ import urllib.error
 from datetime import datetime, timezone
 
 MODEL = 'gemini-3.8-flash'
+FREE_MODELS = ('gemini-3.8-flash', 'gemini-3.6-flash')
 PROJECT = 'gen-lang-client-0909161074'
 ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/' + MODEL + ':generateContent'
 MAX_BYTES = 2_000_000
@@ -87,12 +88,15 @@ class ProviderFailure(Exception):
         self.code = code
         super().__init__(code)
 
-def transport(payload, api_key):
+def transport(payload, api_key, *, model=MODEL):
     """One bounded call. No retry, redirect, paid fallback or secret in URL/logs."""
     class NoRedirect(urllib.request.HTTPRedirectHandler):
         def redirect_request(self, *args, **kwargs):
             return None
-    request = urllib.request.Request(ENDPOINT, data=canonical(payload), method='POST',
+    if model not in FREE_MODELS:
+        raise PermissionError('VERIFIED_FREE_MODEL_REQUIRED')
+    endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent'
+    request = urllib.request.Request(endpoint, data=canonical(payload), method='POST',
         headers={'Content-Type': 'application/json', 'x-goog-api-key': api_key})
     try:
         with urllib.request.build_opener(NoRedirect).open(request, timeout=180) as response:
@@ -127,7 +131,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
     """
     now = now or datetime.now(timezone.utc)
     verified = datetime.fromisoformat(policy['verified_at'].replace('Z', '+00:00'))
-    if (policy.get('project_id') != PROJECT or policy.get('model') != MODEL
+    if (policy.get('project_id') != PROJECT or policy.get('model') not in FREE_MODELS
             or policy.get('tier') != 'FREE' or policy.get('billing_enabled') is not False
             or policy.get('input_price_usd') != 0 or policy.get('output_price_usd') != 0
             or verified.tzinfo is None or not 0 <= (now - verified).total_seconds() <= 86400
@@ -137,7 +141,8 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
     if not callable(reserve) or not callable(persist):
         raise PermissionError('EXISTING_DURABLE_MANAGER_REQUIRED')
     payload = build_request(source, today=now.date().isoformat())
-    request_hash = digest(payload)
+    model = policy['model']
+    request_hash = digest({'model': model, 'payload': payload})
     key = 'public-av:' + digest({'source': source, 'request_hash': request_hash})
     claim = reserve(key, request_hash, source['duration_seconds'], 28800)
     if claim.get('key') != key or claim.get('request_hash') != request_hash:
@@ -150,13 +155,14 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
     if claim.get('status') != 'NEW' or claim.get('durable') is not True:
         raise PermissionError('AV_QUOTA_OR_UNRESOLVED_CLAIM_BLOCKED')
     receipt = {'version': 'heroverse-public-av-provider-v1', 'key': key,
-        'request_hash': request_hash, 'source': source, 'model': MODEL,
+        'request_hash': request_hash, 'source': source, 'model': model,
         'sample_fps': 1, 'review_status': 'NOT_REVIEWED',
         'evidence_class': 'MODEL_REPORTED_AV_NOT_INDEPENDENTLY_VERIFIED',
         'quality_authorized': False, 'production_authorized': False,
         'publication_authorized': False}
     try:
-        response = send(payload, api_key)
+        response = (transport(payload, api_key, model=model) if send is transport
+                    else send(payload, api_key))
         receipt['response_sha256'] = digest(response)
         candidates = response.get('candidates', [])
         if len(candidates) != 1 or candidates[0].get('finishReason') != 'STOP':
