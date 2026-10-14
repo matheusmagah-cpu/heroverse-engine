@@ -50,6 +50,20 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
+      - name: Enforce one selected pending stage before effects
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          HERO_STAGE_SELECTION: ${{ toJSON(inputs) }}
+        run: |
+          python3 - <<'PY'
+          import json,os
+          stages=json.loads(os.environ['HERO_STAGE_SELECTION'])
+          chosen=[name for name,value in stages.items() if name!='checkpoint_only' and value is True]
+          if len(chosen)>1:
+              print(json.dumps({'status':'ONE_STAGE_AT_A_TIME_REQUIRED','selected_stages':chosen,'remote_effects':0}))
+              raise SystemExit(2)
+          print(json.dumps({'status':'SINGLE_STAGE_SELECTED','stage':chosen[0] if chosen else 'checkpoint','remote_effects':0}))
+          PY
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: true
