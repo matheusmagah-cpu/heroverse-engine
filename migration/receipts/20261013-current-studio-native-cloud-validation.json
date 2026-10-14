@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": 38487465939,
+  "job_id": 115604469206,
+  "head_sha": "c2727396fdd330f1d2d02bdc796aa8eb728c5cff",
+  "status": "SUCCESS",
+  "duration_seconds": 25,
+  "native_contract_and_path_tests": "PASS_BEFORE_OAUTH_EFFECT",
+  "observer_boundary_tests": {
+    "ran": 19,
+    "passed": 18,
+    "skipped": 1,
+    "skip_reason": "exact-row source artifact fixture absent from hosted runner; previous local test passed"
+  },
+  "worker_identity": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "current_token_verified": true,
+  "refresh_and_atomic_mirror_verified": true,
+  "studio_observation_consumed": true,
+  "channel_critical_open_gates": [
+    "POSITIONING_COHERENCE",
+    "PROMISE_INTEGRITY"
+  ],
+  "oauth_open_gate": "GOOGLE_AUTH_PLATFORM_UNOBSERVED",
+  "scope_status": "BLOCKED_CONSOLE_MISMATCH",
+  "quota_status": "BLOCKED_UNKNOWN_CONSUMPTION",
+  "one_identity_data_api_call_debited": true,
+  "vidiq_calls": 0,
+  "publish_effects": 0,
+  "production_supervisor_enabled": false,
+  "source_archive_preserved": true,
+  "quota_continuation_committed": true,
+  "phase6_status": "IN_PROGRESS",
+  "phase7_and8_approved": false
+}
