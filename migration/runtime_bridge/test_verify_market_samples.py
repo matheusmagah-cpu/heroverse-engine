@@ -3,11 +3,26 @@ import copy
 import json
 from pathlib import Path
 import unittest
-from verify_market_samples import verify
+from verify_market_samples import verify,modality_concerns
 
 ROOT = Path(__file__).resolve().parent
 
 class SavedMarketVerificationTests(unittest.TestCase):
+    def test_real_third_reference_contradiction_cannot_pass_content_review(self):
+        evidence=ROOT if (ROOT/'third-summary.json').exists() else ROOT.parent/'evidence'
+        summary_file=evidence/('third-summary.json' if evidence==ROOT else 'market-av-38624826176.json')
+        summary=json.loads(summary_file.read_bytes())
+        plan=json.loads((evidence/'market-av-third-reference-plan-20261014.json').read_bytes())
+        receipts=ROOT/'receipts' if evidence==ROOT else evidence
+        result=verify(summary,plan,lambda p:(receipts/Path(p).name).read_bytes())
+        self.assertEqual(result['verified_sample_seconds'],58)
+        self.assertEqual(result['status'],'COMPLETE_SAMPLE_PROVENANCE_WITH_UNRESOLVED_CONTENT_CONCERNS')
+        self.assertTrue(result['content_review_required'])
+        self.assertEqual(result['content_concerns'][0]['window'],[7015,7025])
+        self.assertFalse(result['publication_authorized'])
+    def test_reported_silence_alone_does_not_imply_missing_input(self):
+        self.assertEqual(modality_concerns({'audio_received':True,
+            'limitations':['Audio is silent in this clip window'],'segments':[]}),[])
     def setUp(self):
         evidence = ROOT if (ROOT/'market-summary.json').exists() else ROOT.parent/'evidence'
         summary_name = 'market-summary.json' if evidence == ROOT else 'market-av-38600754626.json'
