@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 
 MODEL = 'gemini-3.8-flash'
@@ -48,7 +49,7 @@ def build_request(source, *, today=None):
         'If access is incomplete, return INCOMPLETE and explicitly state the gap.'
     )
     return {'contents': [{'role': 'user', 'parts': [
-        {'fileData': {'fileUri': 'https://www.youtube.com/watch?v=' + source['video_id']},
+        {'fileData': {'fileUri': 'https://www.youtube.com/watch?v=' + source['video_id'], 'mimeType': 'video/*'},
          'videoMetadata': {'fps': 1}}, {'text': prompt}]}],
         'generationConfig': {'temperature': 0.1, 'maxOutputTokens': 12000,
                              'responseMimeType': 'application/json'}}
@@ -101,6 +102,17 @@ def transport(payload, api_key):
         return json.loads(raw)
     except ProviderFailure:
         raise
+    except urllib.error.HTTPError as error:
+        status = 'HTTP_' + str(error.code)
+        try:
+            data = json.loads(error.read(10000))
+            provider_status = data.get('error', {}).get('status')
+            if provider_status in ('INVALID_ARGUMENT','UNAUTHENTICATED','PERMISSION_DENIED',
+                    'NOT_FOUND','RESOURCE_EXHAUSTED','UNAVAILABLE'):
+                status += '_' + provider_status
+        except Exception:
+            pass
+        raise ProviderFailure(status) from None
     except Exception:
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None
