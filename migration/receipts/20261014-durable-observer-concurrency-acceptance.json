@@ -1,0 +1,14 @@
+{
+  "status": "FRESH_CLOUD_CHECKPOINT_PASS",
+  "run_id": 38493252142,
+  "job_id": 115623151452,
+  "head_sha": "46e34f2d17e1484f526fd60ecca52bd062fb8348",
+  "tests_run": 21,
+  "tests_passed": 20,
+  "tests_skipped": 1,
+  "tests_scope": "Original observation boundaries plus real concurrent Git source-preservation and ledger-conflict rejection",
+  "zero_google_calls": true,
+  "zero_publications": true,
+  "restoration_not_repeated": true,
+  "production_ready": false
+}
