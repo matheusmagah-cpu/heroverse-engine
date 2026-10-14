@@ -319,7 +319,8 @@ def refine_reference():
             # Admit only the actual contiguous prefix. Preserve the original failed claim.
             prefix=json.loads(json.dumps(receipt['report']))
             end=prefix['segments'][-1].get('end_seconds')
-            if type(end) is int and window[0]<end<window[1]:
+            if type(end) in (int,float) and end==int(end) and window[0]<end<window[1]:
+                end=int(end)
                 prefix['window_end_seconds']=end
                 validate_report(prefix,SOURCE,window=(window[0],end),refinement=True)
                 tail=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
