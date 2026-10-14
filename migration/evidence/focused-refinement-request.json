@@ -1,9 +1,12 @@
 {
-  "request_id": "20261014-market-music-sample-v1",
-  "mode": "MARKET_AV_SAMPLE_ONLY",
+  "request_id": "20261014-owner-market-503-recovery-1",
+  "mode": "MARKET_TRANSIENT_RECOVERY_ONLY",
+  "owner_request": "2026-10-14T13:38:01-03:00:resolve-problems",
   "plan_sha256": "6da4eb09834dacdf7bb6941fabca9a9c2c75b2f6687c7304b12c6f745183a6b6",
+  "prior_receipt_sha256": "66f24a44393635d974adaea9d43ce3ad10be26fbb2ef3c1bb05b1def5d00c6ff",
   "publication_authorized": false,
-  "requested_by": "EXPLICIT_OWNER_EXECUTE_NEXT_STAGE_SEQUENTIALLY",
-  "vidiq_credits_used": 0,
-  "resume_saved_receipt_without_new_provider_call": "public-av:f44a1d038a87abbbf9da44c3685fd6febcb7b98c86423284bd9f2d7b9ee8a759"
+  "maximum_new_requested_seconds": 70,
+  "maximum_recovery_attempts": 1,
+  "previous_successes_reused": 11,
+  "vidiq_credits_used": 0
 }
