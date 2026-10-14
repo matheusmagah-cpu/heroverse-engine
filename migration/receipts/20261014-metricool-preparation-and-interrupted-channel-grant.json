@@ -1,0 +1,30 @@
+{
+  "status": "METRICOOL_LOGIN_PROVEN_CHANNEL_GRANT_NOT_COMPLETED",
+  "metricool_plugin_connected": true,
+  "browser_sign_in_account": "willmarquesfotografia@gmail.com",
+  "metricool_brand_id": 7413178,
+  "metricool_user_id": 5760224,
+  "preferences": {
+    "role": "Creator",
+    "users": "Only owner",
+    "purposes": [
+      "Planning and publication",
+      "Analytics"
+    ]
+  },
+  "brand_matches_plugin_connection": true,
+  "youtube_oauth_started": true,
+  "youtube_oauth_confirmation_interrupted": true,
+  "youtube_connection_verified": false,
+  "final_plugin_brand_check": "No social network connected",
+  "secret_values_extracted": false,
+  "raw_oauth_urls_or_codes_archived": false,
+  "new_youtube_permission_grant_claimed": false,
+  "posts_created": 0,
+  "publication_performed": false,
+  "transport_receipt": "migration/receipts/20261014-lossless-video-transport-diagnostic.json",
+  "full_transport_file_created": false,
+  "full_file_size_claimed": false,
+  "original_master_preserved_in_private_release": true,
+  "retry_auth_without_new_request": false
+}
