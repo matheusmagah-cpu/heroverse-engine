@@ -1,5 +1,5 @@
 {
-  "version": "heroverse-sampled-market-research-proposal-v2",
+  "version": "heroverse-sampled-market-research-proposal-v3",
   "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
   "status": "RESEARCH_PROPOSAL_WITH_EXPLICIT_GAPS_NOT_NATIVE_PRODUCTION_HANDOFF",
   "reference_catalogue_binding": {
@@ -130,6 +130,33 @@
         "j2rk8ycXe3c"
       ],
       "source_uri": "https://www.youtube.com/watch?v=j2rk8ycXe3c"
+    },
+    {
+      "finding": "The model reports the same cozy autumn deck setting in opening, middle and ending samples.",
+      "class": "MODEL_REPORTED_AV",
+      "application": "Explore a stable, original setting with a clear listening purpose. Frequent cuts are not established as necessary.",
+      "sources": [
+        "yY9dDJCLfHU"
+      ],
+      "causal_effect": "UNKNOWN"
+    },
+    {
+      "finding": "The opening samples report gentle instrumental audio, brief welcome/subscribe overlays and scripture later.",
+      "class": "MODEL_REPORTED_AV",
+      "application": "Keep music present from the opening; separate original HeroVerse reflection from competitor scripture/branding. Test CTA timing rather than copying it.",
+      "sources": [
+        "yY9dDJCLfHU"
+      ],
+      "causal_effect": "UNKNOWN"
+    },
+    {
+      "finding": "No speech or singing is reported in the three sampled windows.",
+      "class": "MODEL_REPORTED_AV",
+      "application": "Do not infer that spoken reflection wins or loses. Preserve the existing once-at-start voice format until a qualified variant is evaluated.",
+      "sources": [
+        "yY9dDJCLfHU"
+      ],
+      "causal_effect": "UNKNOWN"
     }
   ],
   "editorial_proposal": {
@@ -177,8 +204,8 @@
   },
   "vidiq_credits_used": 0,
   "local_budget": {
-    "used": 28682,
-    "remaining": 118,
+    "used": 28742,
+    "remaining": 58,
     "daily_limit": 28800,
     "basis": "LOCAL_REQUESTED_INTERVAL_WORKLOAD_NOT_GOOGLE_INTERNAL_QUOTA",
     "unresolved_reservations": 0
@@ -209,6 +236,25 @@
     "registry_validated": true,
     "reference_channels": 4,
     "producer_status": "BLOCKED_BY_REVIEWED_NATIVE_SEMANTIC_HANDOFF",
-    "automatic_publication": false
+    "automatic_publication": false,
+    "exploratory_av_brief": "migration/evidence/holy-moments-original-creative-brief-20261014.json"
+  },
+  "additional_exploratory_evidence": {
+    "run_id": 38617638626,
+    "source_video_id": "yY9dDJCLfHU",
+    "sample_seconds": 60,
+    "window_count": 3,
+    "verification_path": "migration/evidence/holy-moments-av-verification-20261014.json",
+    "creative_brief_path": "migration/evidence/holy-moments-original-creative-brief-20261014.json",
+    "native_review": false,
+    "qualified_winner": false,
+    "declared_audio_language": null
+  },
+  "all_saved_sample_scope": {
+    "video_count": 6,
+    "window_count": 18,
+    "verified_sample_seconds": 360,
+    "coverage": "SAMPLED_NOT_FULL_VIDEO",
+    "native_independent_market_review": false
   }
 }
