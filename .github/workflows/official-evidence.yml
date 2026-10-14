@@ -16,6 +16,10 @@ on:
         description: Verify existing refresh and exact channel without market collection
         type: boolean
         default: false
+      av_input_diagnostic:
+        description: Diagnose text generation and ten-second AV input now
+        type: boolean
+        default: false
       av_diagnostic:
         description: Diagnose Gemini credential and model metadata without processing video
         type: boolean
@@ -85,6 +89,11 @@ jobs:
           HERO_AUTH_HEALTH_ONLY: ${{ inputs.auth_health_only }}
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: '"$RUNNER_TEMP/evidence-venv/bin/python" migration/collect_official_evidence.py'
+      - name: Diagnose text and ten-second audiovisual input
+        if: inputs.av_input_diagnostic && inputs.checkpoint_only
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: python3 migration/runtime_bridge/observe_public_av.py diagnose_inputs
       - name: Diagnose Gemini model metadata without video processing
         if: inputs.av_diagnostic && inputs.checkpoint_only
         env:
