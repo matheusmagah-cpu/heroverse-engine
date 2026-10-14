@@ -12,7 +12,7 @@ import urllib.error
 from datetime import datetime, timezone
 
 MODEL = 'gemini-3.8-flash'
-FREE_MODELS = ('gemini-3.8-flash', 'gemini-3.6-flash')
+FREE_MODELS = ('gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash-lite')
 PROJECT = 'gen-lang-client-0909161074'
 ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/' + MODEL + ':generateContent'
 MAX_BYTES = 2_000_000
