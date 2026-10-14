@@ -47,7 +47,7 @@ def execute(plan,ledger,key,policy,*,analyzer=analyze):
                 window=(start,end),refinement=True,research_context='CHRISTIAN_REST_MUSIC')
             results.append({'video_id':item['video_id'],'window':[start,end],'key':receipt['key'],
                 'status':receipt['status'],'evidence_class':receipt['evidence_class']})
-            if receipt['status']!='AWAITING_AV_REVIEW':return results,False
+            if receipt['status']!='WINDOW_AWAITING_AV_REVIEW':return results,False
     return results,True
 
 def main():
