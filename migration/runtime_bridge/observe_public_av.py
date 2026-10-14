@@ -312,6 +312,47 @@ def refine_reference():
     for window in windows:
         receipt=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
             reserve=ledger.reserve,persist=ledger.persist,window=window,refinement=True)
+        if (receipt['status']!='WINDOW_AWAITING_AV_REVIEW'
+                and receipt.get('failure_code')=='REPORT_VALIDATION_FAILED'
+                and receipt.get('finish_reasons')==['STOP']
+                and receipt.get('report',{}).get('segments')):
+            # Admit only the actual contiguous prefix. Preserve the original failed claim.
+            prefix=json.loads(json.dumps(receipt['report']))
+            end=prefix['segments'][-1].get('end_seconds')
+            if type(end) is int and window[0]<end<window[1]:
+                prefix['window_end_seconds']=end
+                validate_report(prefix,SOURCE,window=(window[0],end),refinement=True)
+                tail=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
+                    reserve=ledger.reserve,persist=ledger.persist,window=(end,window[1]),refinement=True)
+                if tail['status']!='WINDOW_AWAITING_AV_REVIEW':
+                    print(json.dumps({'status':'REFINEMENT_GAP_INCOMPLETE','window':[end,window[1]],
+                        'failure_code':tail.get('failure_code'),'publication_authorized':False}))
+                    return 2
+                merged=json.loads(json.dumps(prefix))
+                merged['window_end_seconds']=window[1]
+                merged['segments']+=tail['report']['segments']
+                merged['limitations']+=tail['report']['limitations']
+                validate_report(merged,SOURCE,window=window,refinement=True)
+                original=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
+                suffix=Path('migration/evidence')/('public-av-'+tail['key'].split(':')[1]+'.json')
+                bundle=Path('migration/evidence')/('focused-av-window-'+receipt['key'].split(':')[1]+'.json')
+                recovered={'status':'WINDOW_AWAITING_AV_REVIEW','source':SOURCE,
+                    'model':policy['model'],'window':list(window),'sample_fps':2,
+                    'report':merged,'derivation':'VALIDATED_OBSERVED_PREFIX_PLUS_NEW_GAP_ONLY',
+                    'original_failure_preserved':True,'bindings':[
+                        {'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+                        for p in (original,suffix)],
+                    'quality_authorized':False,'production_authorized':False,'publication_authorized':False}
+                body=json.dumps(recovered,sort_keys=True).encode()
+                if bundle.exists():
+                    if bundle.read_bytes()!=body:raise PermissionError('REFINEMENT_BUNDLE_CHANGED')
+                else:
+                    with bundle.open('xb') as f:f.write(body)
+                    ledger.checkpoint('Complete only missing AV seconds and preserve original failed coverage claim')
+                bindings.append({'path':str(bundle),'sha256':hashlib.sha256(body).hexdigest(),'window':window})
+                print(json.dumps({'status':'REFINEMENT_GAP_COMPLETED','window':window,
+                    'new_gap_only':[end,window[1]],'publication_authorized':False}),flush=True)
+                continue
         if receipt['status']!='WINDOW_AWAITING_AV_REVIEW':
             print(json.dumps({'status':'REFINEMENT_INCOMPLETE','window':window,
                 'failure_code':receipt.get('failure_code'),'publication_authorized':False}))
