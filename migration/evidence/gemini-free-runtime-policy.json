@@ -1,0 +1,18 @@
+{
+  "project_id": "gen-lang-client-0909161074",
+  "model": "gemini-3.8-flash",
+  "tier": "FREE",
+  "billing_enabled": false,
+  "input_price_usd": 0,
+  "output_price_usd": 0,
+  "verified_at": "2026-10-14T10:47:25Z",
+  "key_sha256": "dce7edfa7f6515d6da7a53331ea7cfc31b5ad94cc2bfb3cafce3f0f1e08bc811",
+  "observed_account": "willmarquesfotografia@gmail.com",
+  "credential_storage": "GitHub Actions encrypted secret HERO_GEMINI_API_KEY",
+  "source_docs": [
+    "https://ai.google.dev/gemini-api/docs/pricing",
+    "https://ai.google.dev/gemini-api/docs/generate-content/video-understanding"
+  ],
+  "expires_after_hours": 24,
+  "automatic_paid_fallback": false
+}
