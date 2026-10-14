@@ -59,6 +59,17 @@ def main(mode):
             shutil.copytree(native,frozen)
             summary=Path('cloud-evidence/native-cloud-readiness-summary.json')
             if summary.exists():shutil.copy2(summary,frozen/'summary.json')
+        for name in ('oauth-channel-health.json','oauth-health.json'):
+            path=Path('cloud-evidence')/name
+            if path.exists():
+                from oauth_health import validate_health
+                health=validate_health(json.loads(path.read_text()))
+                frozen=Path('migration/evidence')/('observer-auth-health-'+run+'.json')
+                if frozen.exists():raise PermissionError('AUTH_HEALTH_ALREADY_PERSISTED')
+                body=json.dumps(health,sort_keys=True)+'\n'
+                frozen.write_text(body)
+                (Path('migration/evidence')/'observer-auth-health.json').write_text(body)
+                break
         STATE.write_text(json.dumps({'last_checkpointed_run':run,'collection_complete':Path('cloud-evidence/summary.json').exists(),'publication_performed':False}))
         CLAIM.unlink();commit('Checkpoint original observer ledger after bounded run')
     else:raise ValueError('UNKNOWN_CHECKPOINT_MODE')
