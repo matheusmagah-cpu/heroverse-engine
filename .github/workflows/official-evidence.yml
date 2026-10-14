@@ -94,7 +94,7 @@ jobs:
         if: inputs.av_reference && inputs.checkpoint_only
         run: python3 -m unittest discover -s migration/runtime_bridge -p 'test_*public_av.py' -v
       - name: Analyze public reference through existing observer ledger
-        if: inputs.av_reference && inputs.checkpoint_only
+        if: github.event_name == 'schedule' || (inputs.av_reference && inputs.checkpoint_only)
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: python3 migration/runtime_bridge/observe_public_av.py
