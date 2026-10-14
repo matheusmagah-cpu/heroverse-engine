@@ -44,7 +44,7 @@ class RefinementWorkflowTests(unittest.TestCase):
             finally:os.chdir(cwd)
     def test_saved_json_tuple_array_roundtrip_is_valid_and_advances_sequentially(self):
         result,calls,checkpoints,count=self.run_stage()
-        self.assertEqual(result,0);self.assertEqual(calls,[(130,270),(690,840),(840,1050)])
+        self.assertEqual(result,0);self.assertEqual(calls,[(130,270),(690,840),(840,900),(900,960),(960,1020),(1020,1040),(1040,1050)])
         self.assertEqual(len(checkpoints),1);self.assertEqual(count,1)
     def test_first_failure_blocks_later_windows_and_completion_receipt(self):
         result,calls,checkpoints,count=self.run_stage(fail=True)
@@ -54,7 +54,7 @@ class RefinementWorkflowTests(unittest.TestCase):
     def test_incomplete_prefix_recovers_only_missing_seconds(self):
         result,calls,checkpoints,count=self.run_stage(gap=True)
         self.assertEqual(result,0)
-        self.assertEqual(calls,[(130,270),(690,840),(810,840),(840,1050)])
+        self.assertEqual(calls,[(130,270),(690,840),(810,830),(830,840),(840,900),(900,960),(960,1020),(1020,1040),(1040,1050)])
         self.assertEqual(len(checkpoints),2);self.assertEqual(count,1)
 
 if __name__=='__main__':unittest.main()
