@@ -1,7 +1,7 @@
 import json,os,sqlite3,sys,tempfile,types,unittest
 from pathlib import Path
 from unittest.mock import patch
-from observe_public_av import ExistingObserverLedger
+from observe_public_av import ExistingObserverLedger,main
 
 class LedgerTests(unittest.TestCase):
     def setUp(self):
@@ -40,6 +40,24 @@ class LedgerTests(unittest.TestCase):
         self.mod.commit=broken
         with self.assertRaises(OSError):self.l.reserve('public-av:a','h',1178,28800)
         self.assertEqual(self.l.reserve('public-av:a','h',1178,28800)['status'],'BLOCKED')
+    def test_recovery_consumed_durably_before_effect(self):
+        recovery=Path('migration/evidence/av-recovery-pending.json')
+        recovery.write_text(json.dumps({'status':'PENDING','attempts':0}))
+        self.l.recovery_path=recovery
+        claim=self.l.reserve('public-av:recovery','hash',1178,28800)
+        self.assertTrue(claim['durable'])
+        saved=json.loads(recovery.read_text())
+        self.assertEqual(saved['status'],'ATTEMPT_CLAIMED')
+        self.assertEqual(saved['attempts'],1)
+        self.assertEqual(saved['run_id'],'fixture')
+        self.assertEqual(len(self.messages),1)
+    def test_expired_scheduled_recovery_makes_no_provider_call(self):
+        recovery=Path('migration/evidence/av-recovery-pending.json')
+        recovery.write_text(json.dumps({'status':'PENDING','attempts':0,'utc_date':'1999-01-01'}))
+        with patch.dict(os.environ,{'GITHUB_REPOSITORY':'matheusmagah-cpu/heroverse-engine',
+                                   'GITHUB_EVENT_NAME':'schedule'},clear=False):
+            self.assertEqual(main(),0)
+        self.assertEqual(json.loads(recovery.read_text())['attempts'],0)
     def test_daily_limit_counts_completed_attempts(self):
         self.l.reserve('public-av:a','h',1178,28800)
         self.l.persist({'key':'public-av:a','request_hash':'h'})
