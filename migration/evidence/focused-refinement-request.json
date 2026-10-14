@@ -1,9 +1,8 @@
 {
-  "request_id": "20261014-native-linux-acquisition-v1",
-  "mode": "NATIVE_MARKET_PROBE_ONLY",
-  "source_video_id": "j2rk8ycXe3c",
+  "request_id": "20261014-holy-moments-reference-v1",
+  "mode": "CANDIDATE_CATALOG_EXTENSION_ONLY",
+  "source_video_id": "yY9dDJCLfHU",
   "publication_authorized": false,
-  "maximum_transfer_seconds": 180,
-  "attempts": 1,
+  "discovery_basis": "INCIDENTAL_RELATED_REFERENCE_OBSERVED_DURING_AUTHORIZED_PUBLIC_PLAYER_INSPECTION",
   "vidiq_credits_used": 0
 }
