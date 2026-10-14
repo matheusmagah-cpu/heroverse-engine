@@ -302,8 +302,41 @@ def verify_checkpoint():
     return 0
 
 
+
+def refine_reference():
+    from gemini_public_av import validate_report
+    policy=json.loads(POLICY.read_text())
+    ledger=ExistingObserverLedger('cloud-evidence/quota-ledger.sqlite3',os.environ['GITHUB_RUN_ID'])
+    windows=[(130,270),(690,840),(840,1050)]
+    bindings=[]
+    for window in windows:
+        receipt=analyze(SOURCE,api_key=os.environ.get('HERO_GEMINI_API_KEY',''),policy=policy,
+            reserve=ledger.reserve,persist=ledger.persist,window=window,refinement=True)
+        if receipt['status']!='WINDOW_AWAITING_AV_REVIEW':
+            print(json.dumps({'status':'REFINEMENT_INCOMPLETE','window':window,
+                'failure_code':receipt.get('failure_code'),'publication_authorized':False}))
+            return 2
+        validate_report(receipt['report'],SOURCE,window=window,refinement=True)
+        path=Path('migration/evidence')/('public-av-'+receipt['key'].split(':')[1]+'.json')
+        reopened=json.loads(path.read_text())
+        if reopened!=receipt:raise PermissionError('REFINEMENT_CHECKPOINT_CHANGED')
+        bindings.append({'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+            'window':window})
+        print(json.dumps({'status':'REFINEMENT_WINDOW_SAVED','window':window,
+            'segment_count':len(receipt['report']['segments']),'publication_authorized':False}),flush=True)
+    result={'status':'FOCUSED_REFINEMENT_AWAITING_CONTENT_REVIEW','source':SOURCE,
+        'model':policy['model'],'sample_fps':2,'bindings':bindings,
+        'coverage':'THREE_TARGETED_WINDOWS_ONLY','quality_authorized':False,
+        'production_authorized':False,'publication_authorized':False}
+    out=Path('migration/evidence')/('focused-av-refinement-'+os.environ['GITHUB_RUN_ID']+'.json')
+    with out.open('x') as f:json.dump(result,f,sort_keys=True)
+    ledger.checkpoint('Preserve focused AV refinement before content review')
+    print(json.dumps({'status':result['status'],'publication_authorized':False}))
+    return 0
+
+
 if __name__=='__main__':
-    try:sys.exit(verify_checkpoint() if len(sys.argv)>1 and sys.argv[1]=='verify_checkpoint' else analyze_windows() if len(sys.argv)>1 and sys.argv[1]=='windows' else diagnose_inputs() if len(sys.argv)>1 and sys.argv[1]=='diagnose_inputs' else diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
+    try:sys.exit(refine_reference() if len(sys.argv)>1 and sys.argv[1]=='refine' else verify_checkpoint() if len(sys.argv)>1 and sys.argv[1]=='verify_checkpoint' else analyze_windows() if len(sys.argv)>1 and sys.argv[1]=='windows' else diagnose_inputs() if len(sys.argv)>1 and sys.argv[1]=='diagnose_inputs' else diagnose() if len(sys.argv)>1 and sys.argv[1]=='diagnose' else main())
     except Exception as error:
         print(json.dumps({'status':'AV_BLOCKED','exception_type':type(error).__name__,'details_redacted':True,'publication_authorized':False}))
         sys.exit(2)
