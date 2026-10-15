@@ -94,7 +94,11 @@ def inspect(out, evidence):
 
 def run(out, e, key):
     require(os.environ.get('GITHUB_REPOSITORY') == REPO, 'REPOSITORY_MISMATCH')
-    require(os.environ.get('GITHUB_RUN_NUMBER') == '1' and os.environ.get('GITHUB_RUN_ATTEMPT') == '1', 'DUPLICATE_RUN_REFUSED')
+    require(os.environ.get('GITHUB_RUN_NUMBER') == '2' and os.environ.get('GITHUB_RUN_ATTEMPT') == '1', 'DUPLICATE_RUN_REFUSED')
+    no_effect = json.loads((EVIDENCE / 'rapidapi-midpoint-no-effect-38761164057.json').read_text())['result']
+    require(no_effect['effect_status'] == 'NOT_SENT' and no_effect['download_tools_call_requests'] == 0
+        and no_effect['failure_code'] == 'REQUEST_COUNTER_CHANGED_RECONCILIATION_REQUIRED',
+        'PRIOR_ZERO_EFFECT_REQUIRED')
     budget_preflight(json.loads((EVIDENCE / 'native-av-reservations.json').read_text()))
     prior = json.loads((EVIDENCE / 'rapidapi-native-first-result.json').read_text())
     require(prior['complete_clip_decode_passed'] and prior['download_tools_call_requests'] == 1,
@@ -107,9 +111,21 @@ def run(out, e, key):
     previous = n.progress(prior['provider_job_id'], key, q_e, out, 99)
     require(previous.get('success') == 1 and previous.get('progress') == 1000, 'EXISTING_JOB_NOT_FINISHED')
     q = q_e['last_quota_headers']
-    require(q.get('x-ratelimit-units-limit') == '500' and q.get('x-ratelimit-units-remaining') == '486', 'QUOTA_CHANGED_RECONCILIATION_REQUIRED')
-    require(q.get('x-ratelimit-requests-limit') == '500000' and q.get('x-ratelimit-requests-remaining') == '499994', 'REQUEST_COUNTER_CHANGED_RECONCILIATION_REQUIRED')
     e['fresh_preflight_quota_headers'] = q
+    e['existing_job_preflight_polls'] = 1
+    e['preflight_control_response_bytes'] = q_e['control_response_bytes']
+    n.private_json(out / 'receipt.json', e, key)
+    require(q.get('x-ratelimit-units-limit') == '500' and q.get('x-ratelimit-units-remaining') == '486', 'QUOTA_CHANGED_RECONCILIATION_REQUIRED')
+    require(q.get('x-ratelimit-requests-limit') == '500000'
+        and 499900 <= int(q.get('x-ratelimit-requests-remaining', '0')) <= 499995
+        and q.get('x-ratelimit-rapid-free-plans-hard-limit-limit') == '500000'
+        and 499900 <= int(q.get('x-ratelimit-rapid-free-plans-hard-limit-remaining', '0')) <= 499995,
+        'MONTHLY_INCLUDED_HEADROOM_REQUIRED')
+    e['request_counter_reconciliation'] = {'prior_observed_remaining': 499995,
+        'fresh_remaining': int(q['x-ratelimit-requests-remaining']),
+        'difference_includes_preflight_and_any_intervening_usage_not_attributed_to_media':
+            499995 - int(q['x-ratelimit-requests-remaining']),
+        'no_exact_counter_assumption': True, 'native_quality_gates_unchanged': True}
     e['baseline_quota_headers'] = q
     e['existing_job_preflight_polls'] = 1
     e['control_response_bytes'] = q_e['control_response_bytes']

@@ -1,0 +1,52 @@
+{
+  "version": "midpoint-no-effect-v1",
+  "run_id": 38761164057,
+  "job_id": 116512499645,
+  "result": {
+    "version": "preclaimed-native-midpoint-v1",
+    "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-6354-6364-v1",
+    "source_video_id": "j2rk8ycXe3c",
+    "source_requested_seconds": [
+      6354,
+      6364
+    ],
+    "started_at": "2026-10-15T15:32:35.113245+00:00",
+    "status": "BLOCKED",
+    "effect_status": "NOT_SENT",
+    "download_tools_call_requests": 0,
+    "progress_polls": 0,
+    "production": false,
+    "publication": false,
+    "supervisor": false,
+    "perceptual_audio_review_completed": false,
+    "recurring_capacity_qualified": false,
+    "storage_preflight": {
+      "unexpired_repository_artifact_bytes": 70115364,
+      "unexpired_artifacts": 42,
+      "reserved_output_bytes": 100663296,
+      "account_wide_storage_not_proven_by_repo_inventory": true
+    },
+    "failure_code": "REQUEST_COUNTER_CHANGED_RECONCILIATION_REQUIRED",
+    "elapsed_seconds": 1.223,
+    "completed_at": "2026-10-15T15:32:36.336507+00:00"
+  },
+  "artifact": {
+    "id": 11985617537,
+    "name": "rapidapi-native-j2rk8ycXe3c-midpoint-v1",
+    "size_in_bytes": 1158,
+    "url": "https://api.github.com/repos/matheusmagah-cpu/heroverse-engine/actions/artifacts/11985617537",
+    "archive_download_url": "https://api.github.com/repos/matheusmagah-cpu/heroverse-engine/actions/artifacts/11985617537/zip",
+    "expired": false,
+    "created_at": "2026-10-15T15:32:37Z",
+    "expires_at": "2026-10-16T15:32:36Z",
+    "updated_at": "2026-10-15T15:32:37Z",
+    "digest": "sha256:47ad346570b80d8c91b9093e3bce66829485fc3b687372cea55e2fb408b312fd",
+    "workflow_run": {
+      "id": 38761164057,
+      "repository_id": 1417242110,
+      "head_repository_id": 1417242110,
+      "head_branch": "main",
+      "head_sha": "285c42a5f2586a821b39e08978e5a340660921b2"
+    }
+  }
+}

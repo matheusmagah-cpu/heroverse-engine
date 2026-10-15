@@ -24,12 +24,20 @@
     {
       "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-6354-6364-v1",
       "status": "RESERVED_BEFORE_EFFECT",
-      "reserved_at": "2026-10-15T15:28:08.832Z",
+      "reserved_at": "2026-10-15T15:35:39.017Z",
       "day_utc": "2026-10-15",
       "reserved_transfer_bytes": 83886080,
       "reserved_runner_minutes": 10,
       "reserved_units": 14,
-      "reserved_requests": 40
+      "reserved_requests": 40,
+      "prior_attempts": [
+        {
+          "run_id": 38761164057,
+          "effect_status": "NOT_SENT",
+          "download_tools_call_requests": 0,
+          "receipt": "rapidapi-midpoint-no-effect-38761164057.json"
+        }
+      ]
     }
   ],
   "production": false,
