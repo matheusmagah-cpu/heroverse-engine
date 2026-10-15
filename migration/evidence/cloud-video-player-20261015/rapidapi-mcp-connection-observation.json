@@ -1,7 +1,7 @@
 {
   "version": "heroverse-rapidapi-mcp-connection-observation-v1",
   "recorded_at": "2026-10-15T09:20:28.383Z",
-  "status": "CONFIGURATION_NOT_CONNECTED_AUTHENTICATION_COMPATIBILITY_UNRESOLVED",
+  "status": "CONFIGURATION_NOT_CONNECTED_CLOUD_AUTH_AND_TARGET_VERIFICATION_TIMED_OUT",
   "user_request": "Configure MCP so execution does not depend on a transient website session.",
   "scope": "Only the existing native market audiovisual blocker; no media request, new infrastructure, paid plan or permanent provider adoption.",
   "provider_primary_documentation": {
@@ -70,5 +70,15 @@
     "production": false,
     "publication": false,
     "supervisor": false
+  },
+  "latest_recovery": {
+    "recorded_at": "2026-10-15T10:50:49.270Z",
+    "receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-auth-recovery-timeout-observation.json",
+    "current_authentication": "UNKNOWN_AFTER_TIMEOUT",
+    "google_method_submitted": true,
+    "saved_account_choice_result_unknown": true,
+    "fresh_target_verification_timed_out": true,
+    "agent_media_api_calls": 0,
+    "new_subscribe_clicks": 0
   }
 }

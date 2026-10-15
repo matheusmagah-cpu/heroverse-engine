@@ -1,8 +1,8 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v3",
-  "recorded_at": "2026-10-15T09:15:06.996Z",
-  "repository_head_verified": "3c1fd32e63e780eb851a861840ae597f27bac156",
-  "status": "FREE_ACTIVATION_SUBMITTED_SESSION_LOST_BEFORE_ENTITLEMENT_OR_AV_TEST",
+  "version": "heroverse-recurring-native-av-candidate-v4",
+  "recorded_at": "2026-10-15T10:50:49.270Z",
+  "repository_head_verified": "e1611efff9aee6a857adf6507a4a115d8eeedf84",
+  "status": "MCP_AND_MEDIA_TEST_PENDING_CLOUD_AUTH_VERIFICATION_TIMEOUT",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
   "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
@@ -58,7 +58,7 @@
   },
   "proposed_first_test": {
     "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
-    "effect_status": "NOT_STARTED_BLOCKED_BEFORE_ENTITLEMENT_CHECK",
+    "effect_status": "NOT_SENT_BY_AGENT_REMOTE_AUTH_RESULT_UNKNOWN",
     "provider_job_id": null,
     "calls_started": 0,
     "endpoint": "GET /ajax/download.php",
@@ -81,7 +81,8 @@
     "maximum_planned_units_with_one_optional_info_lookup": 14,
     "source_range_input_does_not_prove_partial_ingestion": true,
     "retries": 0,
-    "public_form_staged_and_verified": true
+    "public_form_staged_and_verified": true,
+    "call_count_scope": "Agent submissions only; remote activity during unresolved authentication is not inferred."
   },
   "prerequisites": [
     "Recover the owner's legitimate cloud login once, inspect the existing Basic activation, and obtain non-secret generated MCP connection fields. Verify a supported secure credential path; no secret in repo, chat, screenshots, command arguments or public URL.",
@@ -97,7 +98,8 @@
     "never_repeat_apify_request": true,
     "stop_on_source_safeguard_or_failure_without_concrete_correction": true,
     "no_cookies_proxy_network_change_or_access_control_bypass": true,
-    "inspect_existing_subscription_before_any_resubscribe": true
+    "inspect_existing_subscription_before_any_resubscribe": true,
+    "no_new_authentication_or_media_effect_until_current_state_inspected": true
   },
   "authentication": {
     "login_required_observed": true,
@@ -108,15 +110,16 @@
     "api_key_must_not_be_written_to_repository": true,
     "secure_login_url_observed": "https://rapidapi.com/auth/login?referral=%2Fvalsuttlej53%2Fapi%2Fyoutube-info-download-api%2Fpricing",
     "owner_reported_connected": true,
-    "cloud_verification": "Fresh page showed Matheus/Personal Account, zero-cost Basic checkout was submitted once and redirected to signed-in playground. Download endpoint and Console then required login again. Cause unknown; no AV job started.",
+    "cloud_verification": "Google sign-in method submitted securely; saved-account chooser request timed out. Immediate fresh target-page verification also timed out. Current authentication result is unknown, not a confirmed failure or success.",
     "login_form_verified": true,
     "account_access_verified_earlier_in_this_attempt": true,
     "subscription_started_means": "One free Basic Subscribe submission, not confirmed durable active entitlement",
     "subscribe_clicks": 1,
     "active_subscription_verified": false,
     "remaining_units_verified": false,
-    "current_session": "LOGIN_REQUIRED",
-    "session_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-free-activation-session-observation.json"
+    "current_session": "UNKNOWN_AFTER_SECURE_REQUEST_TIMEOUT",
+    "session_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-free-activation-session-observation.json",
+    "latest_recovery_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-auth-recovery-timeout-observation.json"
   },
   "adoption": {
     "actual_video_verified": false,
@@ -170,7 +173,7 @@
     "final_review_v3_unchanged": true
   },
   "mcp_connection": {
-    "status": "NOT_CONNECTED_PROVIDER_CONFIGURATION_AND_COMPATIBLE_AUTH_PENDING",
+    "status": "NOT_CONNECTED_CLOUD_AUTH_VERIFICATION_TIMEOUT",
     "native_tools_available_in_this_chat": false,
     "existing_personal_rapidapi_plugin_observed": false,
     "provider_documented_auth_header": "x-rapidapi-key",
