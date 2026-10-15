@@ -1,8 +1,8 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v7",
-  "recorded_at": "2026-10-15T12:52:06.130Z",
-  "repository_head_verified": "db470a898ca42957f614b9bb6c81666f29026cff",
-  "status": "CLOUD_MCP_TRANSPORT_AND_TOOL_CATALOGUE_VERIFIED_NATIVE_AV_PENDING",
+  "version": "heroverse-recurring-native-av-candidate-v8",
+  "recorded_at": "2026-10-15T13:13:57.054Z",
+  "repository_head_verified": "cc35d4e2d1c39118d47d5f5189eadc84f8bf18d1",
+  "status": "ACTUAL_INCLUDED_QUOTA_AND_DOWNLOAD_CONTRACT_VERIFIED_SINGLE_NATIVE_REQUEST_READY",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
   "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
@@ -58,7 +58,7 @@
   },
   "proposed_first_test": {
     "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
-    "effect_status": "NOT_SENT_BY_AGENT",
+    "effect_status": "PREPARED_ONCE_NOT_SENT",
     "provider_job_id": null,
     "calls_started": 0,
     "endpoint": "GET /ajax/download.php",
@@ -86,7 +86,12 @@
     "window_assessment": "migration/evidence/cloud-video-player-20261015/rapidapi-first-native-window-assessment.json",
     "window_assessment_status": "REVIEWED_KEEP_REGISTERED_OPENING_AS_FIRST_ACCESS_TEST_NOT_COMPLETE_QUALIFICATION",
     "window_scope": "Reusable registered opening plus first native-delivery test; not full AV handoff or recurring-capacity approval.",
-    "globally_optimal_duration_proven": false
+    "globally_optimal_duration_proven": false,
+    "bounded_cloud_workflow": ".github/workflows/rapidapi-native-av-once.yml",
+    "mcp_download_schema_verified": true,
+    "maximum_media_bytes": 67108864,
+    "maximum_progress_polls": 24,
+    "workflow_rerun_and_subsequent_run_start_refused": true
   },
   "prerequisites": [
     "Connection transport/catalogue stage is complete in the existing cloud executor; do not repeat it unchanged. The diagnostic deliberately refuses tools/call, so native media execution remains a separate bounded stage.",
@@ -119,14 +124,17 @@
     "subscription_started_means": "One Basic subscription submission earlier; owner Basic Active subsequently verified in cloud-mcp-preparation receipt.",
     "subscribe_clicks": 1,
     "active_subscription_verified": true,
-    "remaining_units_verified": false,
+    "remaining_units_verified": true,
     "current_session": "SIGNED_IN_VERIFIED",
     "session_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-free-activation-session-observation.json",
     "latest_recovery_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-auth-recovery-timeout-observation.json",
     "latest_preparation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-preparation.json",
     "new_provider_api_key_created": false,
     "existing_key_copied_to_encrypted_actions_secret": true,
-    "latest_connection_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-live-result.json"
+    "latest_connection_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-live-result.json",
+    "remaining_daily_units_observed": 498,
+    "remaining_monthly_requests_observed": 499999,
+    "quota_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-quota-preflight.json"
   },
   "adoption": {
     "actual_video_verified": false,
@@ -218,6 +226,6 @@
     "standard_notification_acknowledgement": false,
     "notification_compatibility": "HTTP_200_METHOD_NOT_FOUND_COMPATIBILITY",
     "owner_key_execution_entitlement_verified": false,
-    "tools_call_implemented": false
+    "tools_call_implemented": "Only the new one-start native diagnostic; the approved connection probe still refuses tools/call."
   }
 }

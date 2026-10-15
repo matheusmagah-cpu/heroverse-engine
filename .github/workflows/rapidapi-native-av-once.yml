@@ -1,0 +1,30 @@
+name: HeroVerse one native AV opening
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-native-av-j2rk8ycXe3c-first-window
+  cancel-in-progress: false
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Verify one-start, byte and destination guards offline
+        run: python3 -m unittest discover -s migration/diagnostics/rapidapi-native-av -p test_native_probe.py -v
+      - name: Acquire the registered opening once and decode native streams
+        env:
+          HERO_RAPIDAPI_KEY: ${{ secrets.HERO_RAPIDAPI_KEY }}
+        run: python3 migration/diagnostics/rapidapi-native-av/native_probe.py
+      - name: Preserve this exact attempt and any received native media
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rapidapi-native-j2rk8ycXe3c-0-40-v1
+          retention-days: 1
+          if-no-files-found: error
+          path: output/qualification/rapidapi-native-j2rk8ycXe3c-0-40-v1/
