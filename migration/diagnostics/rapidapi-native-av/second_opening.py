@@ -20,7 +20,7 @@ RESERVATION = dict(reserved_transfer_bytes=80 * 1024**2,
     reserved_runner_minutes=10, reserved_units=14, reserved_requests=40)
 
 
-def admit(plan, ledger, billing, now):
+def admit(plan, ledger, billing, now, qualification_exception=None):
     require(plan['request_id'] == REQUEST_ID and plan['status'] == 'PLANNED_NOT_ADMITTED', 'EXACT_PLAN_REQUIRED')
     require(plan['parameters'] == PARAMS and plan['reservation'] == RESERVATION, 'PLAN_OR_RESERVATION_CHANGED')
     require(ledger['version'] == 'native-av-reservations-v1', 'LEDGER_VERSION_CHANGED')
@@ -30,7 +30,15 @@ def admit(plan, ledger, billing, now):
     require(all(all(x[k] >= v for k, v in RESERVATION.items()) for x in claims), 'PRIOR_RESERVATION_REDUCED')
     today = now.date().isoformat()
     today_claims = [x for x in claims if x['day_utc'] == today]
-    require(len(today_claims) + 1 <= 3, 'DAILY_JOB_CAP')
+    if qualification_exception is None:
+        require(len(today_claims) + 1 <= 3, 'DAILY_JOB_CAP')
+    else:
+        expected = {'20261015-rapidapi-native-' + video + '-0-40-v1'
+                    for video in ('VA3qvxoZr4Q', 'EkT0XMVln3s', 'ksMAEHpzkZo')}
+        require(qualification_exception == {'day_utc': '2026-10-15', 'request_ids': sorted(expected)}
+                and today == '2026-10-15' and REQUEST_ID in expected, 'EXACT_QUALIFICATION_EXCEPTION_REQUIRED')
+        require(len([x for x in today_claims if x['request_id'] not in expected]) <= 3
+                and len(today_claims) + 1 <= 6, 'QUALIFICATION_EXCEPTION_CAP')
     require(sum(x['reserved_units'] for x in today_claims) + 14 <= 450, 'DAILY_UNIT_CAP')
     require(sum(x['reserved_transfer_bytes'] for x in claims) + RESERVATION['reserved_transfer_bytes'] <= 8_000_000_000, 'MONTHLY_TRANSFER_CAP')
     require(sum(x['reserved_runner_minutes'] for x in claims) + ledger.get('qualification_recovery_extra_runner_minutes_reserved', 0) + 10 <= 1100, 'MONTHLY_RUNNER_CAP')
@@ -77,17 +85,18 @@ def fresh_quota(q):
         require(40 <= int(q.get(prefix + '-remaining', '-1')) <= 500000, 'INCLUDED_REQUEST_HEADROOM_REQUIRED')
 
 
-def run(out, e, key):
+def run(out, e, key, config=None):
     require(os.environ.get('GITHUB_REPOSITORY') == REPO, 'REPOSITORY_MISMATCH')
     require(os.environ.get('GITHUB_RUN_NUMBER') == '1' and os.environ.get('GITHUB_RUN_ATTEMPT') == '1', 'REPEAT_RUN_REFUSED')
     require(os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch' and os.environ.get('GITHUB_REF') == 'refs/heads/main', 'MANUAL_MAIN_ONLY')
     require(bool(key), 'KEY_MISSING')
-    plan = json.loads((EVIDENCE / 'second-opening-plan.json').read_text())
-    ledger = json.loads((EVIDENCE / 'native-av-reservations.json').read_text())
+    plan = config['plan'] if config is not None else json.loads((EVIDENCE / 'second-opening-plan.json').read_text())
+    ledger = config['ledger'] if config is not None else json.loads((EVIDENCE / 'native-av-reservations.json').read_text())
     # Parent-verified browser billing observation must remain fresh before
     # dispatch. It contains no credential material.
-    billing = json.loads((EVIDENCE / 'second-opening-billing-admission.json').read_text())
-    reservation = admit(plan, ledger, billing, dt.datetime.now(dt.timezone.utc))
+    billing = config['billing'] if config is not None else json.loads((EVIDENCE / 'second-opening-billing-admission.json').read_text())
+    exception = config.get('qualification_exception') if config is not None else None
+    reservation = admit(plan, ledger, billing, dt.datetime.now(dt.timezone.utc), exception)
     n.command(['ffmpeg', '-v', 'error', '-version'])
     e['storage_preflight'] = artifact_preflight(key, out)
     # Enforce private repository: artifacts must never become public media.

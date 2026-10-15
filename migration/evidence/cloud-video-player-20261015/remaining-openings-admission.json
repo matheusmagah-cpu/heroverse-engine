@@ -1,0 +1,44 @@
+{
+  "version": "remaining-openings-admission-v1",
+  "batch_id": "20261015-three-remaining-openings-v1",
+  "status": "APPROVED_ONE_TIME_EXCEPTION",
+  "approved_by_owner": true,
+  "approval_message_id": "Sentinel_470e76f549ac8191ae275ba9514f293a",
+  "sources": [
+    "VA3qvxoZr4Q",
+    "EkT0XMVln3s",
+    "ksMAEHpzkZo"
+  ],
+  "qualification_exception": {
+    "day_utc": "2026-10-15",
+    "request_ids": [
+      "20261015-rapidapi-native-EkT0XMVln3s-0-40-v1",
+      "20261015-rapidapi-native-VA3qvxoZr4Q-0-40-v1",
+      "20261015-rapidapi-native-ksMAEHpzkZo-0-40-v1"
+    ]
+  },
+  "billing": {
+    "observed_at": "2026-10-15T22:15:23+00:00",
+    "github_included_runner_minutes_remaining": 1850,
+    "rapidapi_subscription_active_basic_zero_usd": true,
+    "rapidapi_bandwidth_display": "0.00%",
+    "rapidapi_quota_display": "7.6%",
+    "bandwidth_headroom_basis": "PRACTICAL_DISPLAY_INFERENCE_NOT_HARD_STOP_PROOF",
+    "github_zero_additional_spend_confirmed": true,
+    "github_actions_budget_usd": 0,
+    "github_actions_budget_status": "Usage blocked",
+    "github_storage_display": "0 GB / 0.5 GB",
+    "new_payment_or_plan_change": false,
+    "rounded_displays_not_exact_byte_balances": true,
+    "github_billable_usd": 0,
+    "sources": [
+      "https://rapidapi.com/console/12387463/billing/subscriptions-and-usage",
+      "https://github.com/settings/billing",
+      "https://github.com/settings/billing/budgets"
+    ],
+    "observation_provenance": "Root verified actual cloud browser: original provider Basic at22:15:23UTC; GitHub Actions150/2000 minutes and rounded0/0.5GB storage at22:15:30UTC; Actions$0/$0 budget Usage blocked at22:15:49UTC. Earliest timestamp used conservatively. No settings changed."
+  },
+  "production": false,
+  "publication": false,
+  "recurring_cadence_authorized": false
+}
