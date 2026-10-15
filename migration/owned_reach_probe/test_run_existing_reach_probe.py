@@ -67,7 +67,7 @@ class Tests(unittest.TestCase):
         with self.assertRaisesRegex(c.ProbeBlocked,'^HTTP_STATUS_401$'):t.json(w.META_BASE+c.REPORT_IDS[0],'report_metadata',bearer='fake')
         self.assertEqual(len(op.calls),1);self.assertEqual(t.events[0]['http_status'],401)
     def test_preflight_attempt_guards(self):
-        env={'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_REPOSITORY':w.REPOSITORY,'GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'2','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'123'}
+        env={'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_REPOSITORY':w.REPOSITORY,'GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'3','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'123'}
         with self.assertRaisesRegex(c.ProbeBlocked,'ONE_EXECUTION'):w.preflight(Path('.'),env)
     def test_response_origin_and_large_json_block(self):
         class Wrong(Opener):
@@ -104,7 +104,7 @@ class Tests(unittest.TestCase):
         local=Path(__file__).parent/'owned-reach-existing-once.yml'
         path=local if local.exists() else Path('.github/workflows/owned-reach-existing-once.yml')
         script=textwrap.dedent(path.read_text().split('        run: |\n',1)[1].split('      - uses:',1)[0])
-        base={'REPOSITORY':w.REPOSITORY,'REPOSITORY_PRIVATE':'true','REF':'refs/heads/main','EVENT':'workflow_dispatch','RUN_NUMBER':'1','RUN_ATTEMPT':'1'}
+        base={'REPOSITORY':w.REPOSITORY,'REPOSITORY_PRIVATE':'true','REF':'refs/heads/main','EVENT':'workflow_dispatch','RUN_NUMBER':'2','RUN_ATTEMPT':'1'}
         cases=[None,('REPOSITORY','other/fork'),('REPOSITORY_PRIVATE','false'),('REPOSITORY_PRIVATE',''),('REF','refs/heads/feature'),('REF','refs/tags/main')]
         for case in cases:
             with tempfile.TemporaryDirectory() as temp:

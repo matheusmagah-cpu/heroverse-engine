@@ -16,6 +16,12 @@ from types import SimpleNamespace
 import existing_reach_probe as core
 
 REPOSITORY = 'matheusmagah-cpu/heroverse-engine'
+EXPECTED_RUN_NUMBER = '2'
+PREVIOUS_FAILURE_PATH = Path('migration/evidence/owned-reach-preflight-failure-38822029275.json')
+PREVIOUS_FAILURE_SHA256 = 'f5c8c636e0f7dca289f8982ed901924a85b9832d3b30d40e2b934a6ac0facaa2'
+REQUIRED_DISK_BYTES = 256 * 1024**2
+REQUIRED_MEMORY_BYTES = 512 * 1024**2
+RESOURCE_POLICY = 'BOUNDED_REPORTING_STDLIB_ONLY_V1'
 TOKEN_URL = 'https://oauth2.googleapis.com/token'
 META_BASE = f'https://youtubereporting.googleapis.com/v1/jobs/{core.JOB}/reports/'
 READ_SCOPE = 'https://www.googleapis.com/auth/yt-analytics.readonly'
@@ -142,18 +148,53 @@ def validate_execution_boundary(env):
     return {'repository':REPOSITORY,'repository_private':True,'ref':'refs/heads/main'}
 
 
+class ResourceMarginBlocked(core.ProbeBlocked):
+    def __init__(self, measurements):
+        super().__init__('RESOURCE_MARGIN_REQUIRED')
+        self.measurements = measurements
+
+
+def validate_previous_failure(root):
+    raw=(root/PREVIOUS_FAILURE_PATH).read_bytes()
+    core.require(core.digest(raw)==PREVIOUS_FAILURE_SHA256,'PREVIOUS_FAILURE_HASH_MISMATCH')
+    value=json.loads(raw)
+    core.require(value.get('run_id')=='38822029275'
+                 and value.get('commit')=='26d3103aaef8064d7e2e0f74e180d5bfbf4b2dec'
+                 and value.get('status')=='BLOCKED'
+                 and value.get('error_code')=='RESOURCE_MARGIN_REQUIRED'
+                 and value.get('network_operations_attempted')==0
+                 and value.get('requests')=={} and value.get('request_events')==[]
+                 and value.get('youtube_data_api_calls')==0
+                 and value.get('youtube_data_api_units')==0
+                 and value.get('data_api_ledger_modified') is False,
+                 'PREVIOUS_FAILURE_NOT_ZERO_NETWORK')
+    return {'previous_run_id':'38822029275','previous_receipt_sha256':PREVIOUS_FAILURE_SHA256,
+            'previous_network_operations':0,'admitted_run_number':EXPECTED_RUN_NUMBER,
+            'admitted_run_attempt':'1','previous_receipt_preserved':True}
+
+
 def preflight(root,env):
     boundary=validate_execution_boundary(env)
     core.require(env.get('GITHUB_EVENT_NAME')=='workflow_dispatch','MANUAL_EVENT_REQUIRED')
-    core.require(env.get('GITHUB_RUN_NUMBER')=='1' and env.get('GITHUB_RUN_ATTEMPT')=='1','ONE_EXECUTION_ATTEMPT_ONLY')
+    core.require(env.get('GITHUB_RUN_NUMBER')==EXPECTED_RUN_NUMBER and env.get('GITHUB_RUN_ATTEMPT')=='1','ONE_EXECUTION_ATTEMPT_ONLY')
     core.require(env.get('GITHUB_RUN_ID','').isdigit(),'RUN_ID_REQUIRED')
     core.require(not (root/'migration/evidence/observer-claim.json').exists(),'OBSERVER_CLAIM_UNRESOLVED')
+    recovery=validate_previous_failure(root)
     free=shutil.disk_usage(root).free
-    available=next(int(l.split()[1])*1024 for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith('MemAvailable:'))
-    core.require(free>=15*1024**3 and available>=2*1024**3,'RESOURCE_MARGIN_REQUIRED')
-    return {'execution_boundary':boundary,'disk_free_bytes':free,'memory_available_bytes':available,'data_api_requests':0,
-            'data_api_units_required':0,'reason':'EXISTING_REPORTING_REPORTS_ONLY_NO_DATA_API',
+    samples=[]
+    for index in range(2):
+        if index:time.sleep(0.1)
+        samples.append(next(int(l.split()[1])*1024 for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith('MemAvailable:')))
+    available=min(samples)
+    measurements = {'execution_boundary':boundary,'recovery':recovery,'resource_policy':RESOURCE_POLICY,'memory_samples_bytes':samples,'disk_free_bytes':free,'memory_available_bytes':available,
+            'required_disk_free_bytes':REQUIRED_DISK_BYTES,'required_memory_available_bytes':REQUIRED_MEMORY_BYTES,
+            'disk_margin_passed':free>=REQUIRED_DISK_BYTES,'memory_margin_passed':available>=REQUIRED_MEMORY_BYTES,
+            'data_api_requests':0,'data_api_units_required':0,
+            'reason':'EXISTING_REPORTING_REPORTS_ONLY_NO_DATA_API',
             'observer_ledger_modified':False,'new_jobs_created':0}
+    if not measurements['disk_margin_passed'] or not measurements['memory_margin_passed']:
+        raise ResourceMarginBlocked(measurements)
+    return measurements
 
 
 def main():
@@ -183,6 +224,8 @@ def main():
         envelope['owner_binding']='PINNED_OWNED_JOB_AND_EXACT_CSV_CHANNEL_WHEN_ROWS_EXIST_NOT_NEW_CHANNEL_API_PROOF'
         envelope['receipt_sha256']=core.digest((output/'receipt.json').read_bytes())
     except Exception as e:
+        if isinstance(e,ResourceMarginBlocked):
+            envelope['preflight']=e.measurements
         envelope['error_code']=str(e) if isinstance(e,core.ProbeBlocked) else type(e).__name__
     finally:
         signal.alarm(0)

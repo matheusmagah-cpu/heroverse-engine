@@ -26,7 +26,7 @@ jobs:
           test "$REPOSITORY_PRIVATE" = true
           test "$REF" = refs/heads/main
           test "$EVENT" = workflow_dispatch
-          test "$RUN_NUMBER" = 1
+          test "$RUN_NUMBER" = 2
           test "$RUN_ATTEMPT" = 1
           echo "accepted=true" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -39,6 +39,16 @@ jobs:
             migration/verify_worker_oauth.py
             migration/evidence
           sparse-checkout-cone-mode: false
+      - name: Verify preserved zero-network failure before credentials
+        run: |
+          python3 - <<'PYCODE'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'migration/owned_reach_probe')
+          from run_existing_reach_probe import validate_previous_failure
+          validate_previous_failure(Path.cwd())
+          print('Exact prior preflight failure preserved; zero network verified')
+          PYCODE
       - name: Test exact local probe boundaries
         env:
           HERO_PROBE_SNAPSHOT: migration/evidence/observer-38749052276.json
