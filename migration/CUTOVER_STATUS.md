@@ -758,3 +758,12 @@ Manual preservation run `38818595957` (job `116709358247`, code `deec941e405477b
 
 Evidence: `migration/evidence/cloud-video-player-20261015/remaining-openings-private-release-result.json`. Zero provider calls and no media redecoding occurred during preservation. This preservation record grants no manual or semantic acceptance; production, publication and supervisor remain disabled.
 
+
+
+## 2026-10-15 23:14 UTC — Forecast truthfulness qualified in isolated shadow
+
+Manual run [38822248433](https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38822248433), attempt 1, commit 26d3103aaef8064d7e2e0f74e180d5bfbf4b2dec succeeded: 12 focused offline tests, four actual native forecast regressions, dependency-complete native CLI import/help, and actual forecast report/temporary SQLite execution. A fresh process network namespace plus Python network/process denial guard preceded native imports. Source archive identities were preserved. No model download, provider call, production or publication occurred.
+
+Receipt and run provenance: migration/receipts/20261015-forecast-truthfulness/receipt-from-job-log.json and RESULT.md. The receipt preserves all 42 resolved distributions and loaded code hashes. It was extracted from the complete JSON emitted in job logs; the artifact ZIP was not independently downloaded. Status remains NOT_DEPLOYED. Counts of observations and missing-metric defaults no longer establish validated predictive calibration in the qualified shadow; calibrated probabilities remain withheld.
+
+No persistent operational forecast launcher or its current data binding has been identified. Existing collectors/readiness jobs do not consume CLI forecasts; applying this overlay there would not prove operational adoption. The separate shadow qualification does not activate a runtime, validate earnings, complete the full regression suite, or approve production/publication. Next integration requires an identified consumer, verified input/config provenance and loaded-code identity; historical receipts and gates remain unchanged.

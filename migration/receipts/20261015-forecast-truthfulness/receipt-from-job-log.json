@@ -1,0 +1,110 @@
+{
+  "active_runtime_installed": false,
+  "actual_cli_help_passed": true,
+  "actual_cli_report_and_temporary_database_passed": true,
+  "archive_sha256": "fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10",
+  "direct_dependency_versions": {
+    "Pillow": "11.3.0",
+    "faster-whisper": "1.2.1",
+    "jsonschema": "4.26.0",
+    "numpy": "2.2.6",
+    "onnxruntime": "1.29.0",
+    "opencv-python": "5.0.0.93",
+    "rapidocr": "3.9.2",
+    "yt-dlp": "2026.8.19"
+  },
+  "full_regression_suite_run": false,
+  "guard": {
+    "denial_self_tests_passed": 2,
+    "fresh_network_namespace": true,
+    "interfaces": [
+      "lo"
+    ],
+    "python_network_and_process_audit_guard": true
+  },
+  "loaded_code_sha256": {
+    "hero_engine/cli.py": "0a0b982da5756b3f98fb7e58a08ba6a8e5b89ba261b684a3319abf2ca33fb8d6",
+    "hero_engine/forecast.py": "b0a577d465b8b38547f66cfeeb3d3234876227a1429092c69440b1051b419e48"
+  },
+  "models_downloaded": false,
+  "native_config_sha256": "ef3ed4f1dd778160f5193649d992adc6627388b0b1db3ee9b04e73151deb3f41",
+  "native_forecast_tests": [
+    "test_deterministic_math",
+    "test_operational_config_does_not_impute_ypp_progress_or_cadence",
+    "test_forecast_is_reproducible",
+    "test_channel_samples_do_not_prove_predictive_calibration"
+  ],
+  "native_forecast_tests_passed": 4,
+  "offline_guard_tests_passed": 12,
+  "original_preserved": true,
+  "overlay_changes": [
+    {
+      "original_sha256": "35de28f1b7f09842dee9fa5a4a628a62615d2333ffe9548f457bfae59e48307e",
+      "path": "hero_engine/cli.py",
+      "shadow_sha256": "0a0b982da5756b3f98fb7e58a08ba6a8e5b89ba261b684a3319abf2ca33fb8d6"
+    },
+    {
+      "original_sha256": "5f5628fe8e567f7ae98a20d94666ab3db49b87138e648ca232f233cc464f7bf6",
+      "path": "hero_engine/forecast.py",
+      "shadow_sha256": "b0a577d465b8b38547f66cfeeb3d3234876227a1429092c69440b1051b419e48"
+    },
+    {
+      "original_sha256": "4485d357516d65ee89e4a1dbcb6331f727e403b9d91e37b38cae207633c831db",
+      "path": "tests/test_engine.py",
+      "shadow_sha256": "e49095312af5609d39c2ec87553a856be1fe14ff6ed8da515eddca135dbbb5e1"
+    }
+  ],
+  "predictive_calibration_available": false,
+  "production_ready": false,
+  "provider_calls_performed": false,
+  "publication_performed": false,
+  "resolved_environment_versions": {
+    "PyYAML": "6.0.3",
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "av": "19.0.1",
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.2",
+    "click": "8.5.0",
+    "colorlog": "6.12.0",
+    "ctranslate2": "4.8.3",
+    "faster-whisper": "1.2.1",
+    "filelock": "4.2.0",
+    "flatbuffers": "25.12.19",
+    "fsspec": "2026.9.0",
+    "h11": "0.16.0",
+    "hf-xet": "1.7.0",
+    "httpcore2": "2.13.1",
+    "httpx2": "2.13.1",
+    "huggingface_hub": "2.2.0",
+    "idna": "3.20",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "numpy": "2.2.6",
+    "omegaconf": "2.4.0",
+    "onnxruntime": "1.29.0",
+    "opencv-python": "5.0.0.93",
+    "packaging": "26.3",
+    "pillow": "11.3.0",
+    "pip": "24.0",
+    "protobuf": "7.36.2",
+    "pyclipper": "1.4.0",
+    "rapidocr": "3.9.2",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rpds-py": "2026.9.1",
+    "shapely": "2.2.0",
+    "six": "1.17.0",
+    "tokenizers": "0.23.3",
+    "tqdm": "4.70.1",
+    "truststore": "0.10.5",
+    "typing_extensions": "4.16.0",
+    "urllib3": "2.8.0",
+    "yt-dlp": "2026.8.19"
+  },
+  "selected_archive_entries": 188,
+  "status": "OFFLINE_SHADOW_NATIVE_CLI_QUALIFIED_NOT_DEPLOYED",
+  "temporary_output_root_preserves_native_config": true,
+  "version": "forecast-truthfulness-cloud-qualification-v1"
+}
+
