@@ -1,7 +1,7 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v6",
-  "recorded_at": "2026-10-15T12:49:16.535Z",
-  "repository_head_verified": "cea11b766494ae1a015d7589f545e8c7e166fdca",
+  "version": "heroverse-recurring-native-av-candidate-v7",
+  "recorded_at": "2026-10-15T12:52:06.130Z",
+  "repository_head_verified": "db470a898ca42957f614b9bb6c81666f29026cff",
   "status": "CLOUD_MCP_TRANSPORT_AND_TOOL_CATALOGUE_VERIFIED_NATIVE_AV_PENDING",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
@@ -82,7 +82,11 @@
     "source_range_input_does_not_prove_partial_ingestion": true,
     "retries": 0,
     "public_form_staged_and_verified": true,
-    "call_count_scope": "Agent submissions only; remote activity during unresolved authentication is not inferred."
+    "call_count_scope": "Agent submissions only; remote activity during unresolved authentication is not inferred.",
+    "window_assessment": "migration/evidence/cloud-video-player-20261015/rapidapi-first-native-window-assessment.json",
+    "window_assessment_status": "REVIEWED_KEEP_REGISTERED_OPENING_AS_FIRST_ACCESS_TEST_NOT_COMPLETE_QUALIFICATION",
+    "window_scope": "Reusable registered opening plus first native-delivery test; not full AV handoff or recurring-capacity approval.",
+    "globally_optimal_duration_proven": false
   },
   "prerequisites": [
     "Connection transport/catalogue stage is complete in the existing cloud executor; do not repeat it unchanged. The diagnostic deliberately refuses tools/call, so native media execution remains a separate bounded stage.",

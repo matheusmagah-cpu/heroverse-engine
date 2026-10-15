@@ -154,7 +154,8 @@
       0,
       40
     ],
-    "action": "Prepare and execute the existing one bounded native AV test after zero-spend and fresh quota/bandwidth checks. Preserve job identity before any recovery; inspect actual bytes, frames and audio. Do not repeat a completed connection probe or approved master QA."
+    "action": "Prepare and execute the existing one bounded native AV test after zero-spend and fresh quota/bandwidth checks. Preserve job identity before any recovery; inspect actual bytes, frames and audio. Do not repeat a completed connection probe or approved master QA.",
+    "window_assessment": "migration/evidence/cloud-video-player-20261015/rapidapi-first-native-window-assessment.json"
   },
   "preserved": {
     "media_jobs_submitted": 0,
