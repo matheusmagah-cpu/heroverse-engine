@@ -1,0 +1,39 @@
+{
+  "version": "native-av-reservations-v1",
+  "recorded_at": "2026-10-15T15:28:08.832Z",
+  "cycle_policy": "Never reset automatically; reconcile the provider reset and all unresolved effects before opening a new period.",
+  "limits": {
+    "daily_jobs": 3,
+    "daily_units": 450,
+    "monthly_transfer_bytes": 8000000000,
+    "monthly_runner_minutes": 1100,
+    "monthly_requests": 100000
+  },
+  "claims": [
+    {
+      "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
+      "status": "COMPLETED_RESERVATION_RETAINED",
+      "reserved_at": "2026-10-15T13:19:29.192076+00:00",
+      "day_utc": "2026-10-15",
+      "reserved_transfer_bytes": 83886080,
+      "reserved_runner_minutes": 10,
+      "reserved_units": 14,
+      "reserved_requests": 40,
+      "result_receipt": "rapidapi-native-first-result.json"
+    },
+    {
+      "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-6354-6364-v1",
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-15T15:28:08.832Z",
+      "day_utc": "2026-10-15",
+      "reserved_transfer_bytes": 83886080,
+      "reserved_runner_minutes": 10,
+      "reserved_units": 14,
+      "reserved_requests": 40
+    }
+  ],
+  "production": false,
+  "publication": false,
+  "supervisor": false,
+  "recurring_capacity_qualified": false
+}

@@ -1,0 +1,36 @@
+name: HeroVerse one preclaimed native midpoint
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: heroverse-native-midpoint-j2rk8ycXe3c-v1
+  cancel-in-progress: false
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Test only the new admission guards
+        run: python3 -m unittest discover -s migration/diagnostics/rapidapi-native-av -p test_next_window.py -v
+      - name: Install native decoder
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+      - name: Acquire the existing planned midpoint once
+        env:
+          HERO_RAPIDAPI_KEY: ${{ secrets.HERO_RAPIDAPI_KEY }}
+          GH_ARTIFACT_TOKEN: ${{ github.token }}
+        run: python3 migration/diagnostics/rapidapi-native-av/next_window.py
+      - name: Preserve this attempt without retrying acquisition
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rapidapi-native-j2rk8ycXe3c-midpoint-v1
+          path: output/qualification/rapidapi-native-j2rk8ycXe3c-midpoint-v1/
+          retention-days: 1
+          if-no-files-found: error
