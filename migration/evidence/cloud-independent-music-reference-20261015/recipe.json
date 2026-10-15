@@ -1,0 +1,80 @@
+{
+  "recipe_id": "rest-music-2f8abd9c1e8666ac7f38",
+  "recipe_version": "heroverse-christian-rest-instrumental-v2",
+  "channel_handle": "@heroverse74",
+  "language": "en",
+  "target_country": "US",
+  "purpose": "Original instrumental accompaniment for Christian prayer and quiet reflection",
+  "duration_ms": 192000,
+  "channel_model_hash": "sha256:ec3a6ee301d33f44b2c7c967f238dee37600a1fddbd121c33e6f44bf933b15f7",
+  "style_bible_hash": "sha256:8a17766b2f8ed4f3f1be0f45a82cac8a6b4b741c046a3e4c32a540cedfd33930",
+  "sound_design": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "subtype": "PCM_16",
+    "key_center": "D minor",
+    "progression": [
+      "Dm",
+      "Bb",
+      "F",
+      "C"
+    ],
+    "chord_seconds": 12.0,
+    "crossfade_seconds": 1.92,
+    "attack_seconds": 1.44,
+    "release_seconds": 1.92,
+    "transition": "equal-power overlap between original procedural chords",
+    "melodic_voice": {
+      "instrument": "owned additive soft piano",
+      "note_seconds": 6.0,
+      "tail_seconds": 12.0,
+      "attack_seconds": 0.024,
+      "frequencies_hz": [
+        293.66,
+        349.23,
+        440.0,
+        349.23,
+        233.08,
+        293.66,
+        349.23,
+        440.0,
+        261.63,
+        329.63,
+        392.0,
+        329.63,
+        293.66,
+        440.0,
+        523.25,
+        440.0
+      ],
+      "partials": [
+        1.0,
+        0.45,
+        0.2,
+        0.08,
+        0.04
+      ],
+      "inharmonicity": 0.0002,
+      "fundamental_decay_seconds": 4.5,
+      "amplitude": 0.12,
+      "pad_gain": 0.45,
+      "echo_taps": [
+        {
+          "seconds": 0.19,
+          "gain": 0.16
+        },
+        {
+          "seconds": 0.37,
+          "gain": 0.1
+        }
+      ],
+      "score_scope": "original D-minor phrase; not a mined/copyrighted melody"
+    }
+  },
+  "reference_scope": "OWNED_SOUND_DESIGN_NOT_CALIBRATED_MUSIC_QUALITY",
+  "narration_looped": false,
+  "external_cost_usd": 0,
+  "quality_authorized": false,
+  "render_authorized": false,
+  "publication_authorized": false
+}

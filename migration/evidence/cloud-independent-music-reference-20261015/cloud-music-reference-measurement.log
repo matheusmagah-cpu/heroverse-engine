@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/f2180567de8e/heroverse-stage/recover_cloud_music_reference.py", line 117, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/scratch/f2180567de8e/heroverse-stage/recover_cloud_music_reference.py", line 112, in main
+    observed=quality.measure_music_aesthetics(ROOT,media,expected_media_hash='sha256:'+sha(media),expected_duration_ms=192000)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/19a457603cc9/source-recovered/native/project/hero_engine/phase5_autonomous_quality.py", line 464, in measure_music_aesthetics
+    samples=[measure_local_resources(root),measure_local_resources(root)]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/19a457603cc9/source-recovered/native/project/hero_engine/production_capacity.py", line 126, in measure_local_resources
+    import psutil
+ModuleNotFoundError: No module named 'psutil'

@@ -1,0 +1,13 @@
+test_historical_anchor_constant_unchanged (__main__.CloudMusicReferenceTests.test_historical_anchor_constant_unchanged) ... ok
+test_missing_reference_audio_rejected (__main__.CloudMusicReferenceTests.test_missing_reference_audio_rejected) ... ok
+test_modified_observation_rejected (__main__.CloudMusicReferenceTests.test_modified_observation_rejected) ... ok
+test_modified_policy_rejected (__main__.CloudMusicReferenceTests.test_modified_policy_rejected) ... ok
+test_native_minima_preserved_and_historical_floor_never_reduced (__main__.CloudMusicReferenceTests.test_native_minima_preserved_and_historical_floor_never_reduced) ... ok
+test_native_reader_authenticates_actual_source_without_inference (__main__.CloudMusicReferenceTests.test_native_reader_authenticates_actual_source_without_inference) ... ok
+test_saved_target_complete_population_against_native_successor_floors (__main__.CloudMusicReferenceTests.test_saved_target_complete_population_against_native_successor_floors) ... ok
+test_unknown_rehashed_observation_cannot_select_successor (__main__.CloudMusicReferenceTests.test_unknown_rehashed_observation_cannot_select_successor) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.594s
+
+OK

@@ -1,0 +1,29 @@
+test_rest_music_final_qualification (unittest.loader._FailedTest.test_rest_music_final_qualification) ... ERROR
+
+======================================================================
+ERROR: test_rest_music_final_qualification (unittest.loader._FailedTest.test_rest_music_final_qualification)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_rest_music_final_qualification
+Traceback (most recent call last):
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f2180567de8e/heroverse-native-gop300/tests/test_rest_music_final_qualification.py", line 14, in <module>
+    from tests import test_rest_music_render as rendering
+  File "/workspace/scratch/f2180567de8e/heroverse-native-gop300/tests/test_rest_music_render.py", line 19, in <module>
+    from hero_engine.render_creative_v3_phase5 import prepare_christian_rest_music
+  File "/workspace/scratch/f2180567de8e/heroverse-native-gop300/hero_engine/render_creative_v3_phase5.py", line 18, in <module>
+    from .creative_v3_phase5 import PACKAGE_DIR, V3_DIR
+  File "/workspace/scratch/f2180567de8e/heroverse-native-gop300/hero_engine/creative_v3_phase5.py", line 14, in <module>
+    from .creative_v2_phase5 import (
+  File "/workspace/scratch/f2180567de8e/heroverse-native-gop300/hero_engine/creative_v2_phase5.py", line 18, in <module>
+    from .voice_phase5 import SAMPLE_RATE, build_local_voice, synthesize_voice_sample
+  File "/workspace/scratch/f2180567de8e/heroverse-native-gop300/hero_engine/voice_phase5.py", line 20, in <module>
+    import onnxruntime as ort
+ModuleNotFoundError: No module named 'onnxruntime'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

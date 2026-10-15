@@ -1,0 +1,91 @@
+{
+  "version": "heroverse-cloud-independent-music-reference-v1",
+  "status": "PASS_VERSIONED_NATIVE_REFERENCE_READER_SCOPE",
+  "owner_directive": "Resolve without the original computer",
+  "legacy_document_restored": false,
+  "legacy_reader_constant_changed": false,
+  "independent_media": {
+    "sha256": "518c3f9533105a7308e169e4d3616ba245c7554fb7bd805e3e4522cc281da4de",
+    "bytes": 36864044,
+    "duration_ms": 192000,
+    "library_file_id": "libfile_9a1fb57f7d948191a352ebd03a150850",
+    "file_id": "file_000000005e54820ea6548a766a073a05",
+    "library_version": 0,
+    "target_audio_samples_used": 0
+  },
+  "source": "unchanged native owned instrumental-v2 recipe and generator AST bodies",
+  "measurement": {
+    "windows": 20,
+    "observed_frames": 9216000,
+    "full_duration_observed": true,
+    "native_model": {
+      "revision": "9b1dd8e5df9af7216e836a98974fe3b82c56ded6",
+      "weights": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/models/audiobox-aesthetics/9b1dd8e5df9af7216e836a98974fe3b82c56ded6/model.safetensors",
+      "weights_sha256": "sha256:a5a3c2412649cc2384ec525ffd5180ce6c4778f43bed6108e0a1303de04d014e",
+      "config": "/workspace/scratch/f2180567de8e/heroverse-native-gop300/models/audiobox-aesthetics/9b1dd8e5df9af7216e836a98974fe3b82c56ded6/config.json",
+      "config_sha256": "sha256:0b8eabc5ced92cefed116a3aca8f1e59d2a33dc4d376b9e86dfb9c072e1d280d",
+      "versions": {
+        "audiobox-aesthetics": "0.0.4",
+        "torch": "2.8.0+cpu",
+        "torchaudio": "2.8.0+cpu",
+        "safetensors": "0.8.0"
+      },
+      "reference": "https://arxiv.org/abs/2502.05139",
+      "license": "CC-BY-4.0"
+    },
+    "axis_mean": {
+      "CE": 5.734871020082247,
+      "CU": 7.7309001218641304,
+      "PC": 2.1589921627629947,
+      "PQ": 7.690813734167448
+    },
+    "axis_minimum": {
+      "CE": 4.901271349765509,
+      "PQ": 7.238235166594386
+    },
+    "wall_seconds": 38.84606443699886
+  },
+  "method_correction": {
+    "v1_mean_floor_rejected": true,
+    "v1_failing_target_windows": 735,
+    "policy_v1_commit": "ceffe67af8106ed2524d25e17869fb84dab1a37c",
+    "native_minima_method_correction_commit": "085c199c490f55ba585155788878a881279fa94e",
+    "post_observation_method_correction": true,
+    "blind_preregistered_result_claimed": false,
+    "candidate_reselection_or_retuning": false,
+    "measurement_repeated": false,
+    "native_and_historical_floors_preserved": true
+  },
+  "effective_floors": {
+    "CE": 5.388515023542345,
+    "PQ": 7.4419801340579985
+  },
+  "preserved_target_comparison": {
+    "windows": 1074,
+    "below_floor_windows": 0,
+    "source_hash": "sha256:1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+    "inference_repeated": false
+  },
+  "native_qa_sha256": "f6b9bc150bb63953efec2fc52466fcfe2e7f9bc36d66ec8a48056b59dafa9ef4",
+  "bridge_sha256": "9f8cbfb85eea5ade01191bd4657fcac00270e7711120c1ceb6c2505ed7ecca8b",
+  "tests": {
+    "actual_source_and_tamper_cases_passed": 8,
+    "full_original_native_suite": "BLOCKED_BEFORE_EXECUTION_BY_EXISTING_OPTIONAL_ONNXRUNTIME_IMPORT",
+    "full_suite_pass_claimed": false
+  },
+  "historical_failures_retained": [
+    "cloud-music-reference-measurement.log",
+    "v1-method-assessment.json",
+    "cloud-music-native-regression.log"
+  ],
+  "native_full_release_package_complete": false,
+  "market_av_handoff_accepted": false,
+  "publication_authorized": false,
+  "production_approved": false,
+  "supervisor_enabled": false,
+  "master_modified": false,
+  "windows_contact": false,
+  "paid_calls": 0,
+  "provider_av_calls": 0,
+  "next_stage": "Native audiovisual source access and acceptance, then current complete native release-package qualification."
+}
