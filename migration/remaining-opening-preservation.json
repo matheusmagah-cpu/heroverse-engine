@@ -1,0 +1,45 @@
+{
+  "version": "remaining-opening-preservation-v1",
+  "status": "VERIFIED_IDENTITIES_READY",
+  "sources": [
+    {
+      "video_id": "VA3qvxoZr4Q",
+      "window_seconds": [
+        0,
+        40
+      ],
+      "artifact_id": 12011150524,
+      "source_run_id": 38816286874,
+      "archive_bytes": 12557983,
+      "archive_sha256": "9fda7089ea5e1aa8ce7687d50dcd9813332815df0e13f889880da793cce6de47",
+      "native_bytes": 5630628,
+      "native_sha256": "7074b84560d71ee755dd228412983c093c4c4a5e54c1f5989d610b915a350bfc"
+    },
+    {
+      "video_id": "EkT0XMVln3s",
+      "window_seconds": [
+        0,
+        40
+      ],
+      "artifact_id": 12011515166,
+      "source_run_id": 38816286874,
+      "archive_bytes": 43774123,
+      "archive_sha256": "06f67ed0681364a4a680c9ddd3bd82fc9ba72dab0350f0490f6bc1525b500e78",
+      "native_bytes": 34805140,
+      "native_sha256": "b058ab20f8b668e4616ba6ded2bb7da745ee5c8a988e24d7038cdc9a56a537da"
+    },
+    {
+      "video_id": "ksMAEHpzkZo",
+      "window_seconds": [
+        0,
+        40
+      ],
+      "artifact_id": 12010773421,
+      "source_run_id": 38816286874,
+      "archive_bytes": 33551290,
+      "archive_sha256": "432fe04c16721c6c715d72fe16e606f06bc7367bb313b378a1742e03e2c91dd4",
+      "native_bytes": 25634098,
+      "native_sha256": "be321231f87b97e7883c8c6eb93c3fba136568ccbf54a4f64b46d09fe5e9bab4"
+    }
+  ]
+}

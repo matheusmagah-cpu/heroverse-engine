@@ -1,0 +1,130 @@
+name: HeroVerse preserve three acquired native openings
+on:
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: heroverse-preserve-three-openings-38816286874
+  cancel-in-progress: false
+jobs:
+  preserve:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Permit only first manual main run and first attempt
+        env:
+          EVENT: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          NUMBER: ${{ github.run_number }}
+          ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          test "$EVENT" = workflow_dispatch
+          test "$REF" = refs/heads/main
+          test "$NUMBER" = 1
+          test "$ATTEMPT" = 1
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            migration/preserve_second_opening_release.py
+            migration/preserve_remaining_openings.py
+            migration/test_preserve_remaining_openings.py
+            migration/remaining-opening-preservation.json
+            .github/workflows/preserve-remaining-openings-release.yml
+          sparse-checkout-cone-mode: false
+      - name: Offline wrapper qualification
+        run: python3 -m unittest discover -s migration -p test_preserve_remaining_openings.py -v
+      - name: Reconcile VA3qvxoZr4Q destination and source
+        id: source_0
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_remaining_openings.py preflight VA3qvxoZr4Q
+      - name: Define bounded restore root for VA3qvxoZr4Q
+        if: steps.source_0.outputs.needs_transfer == 'true'
+        run: printf 'OPENING_RESTORE_ROOT=%s/native-opening-12011150524\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+      - name: Bound extracted VA3qvxoZr4Q output
+        if: steps.source_0.outputs.needs_transfer == 'true'
+        run: |
+          mkdir -m 700 "$OPENING_RESTORE_ROOT"
+          sudo mount -t tmpfs -o "size=95m,nosuid,nodev,noexec,mode=0700,uid=$(id -u),gid=$(id -g)" tmpfs "$OPENING_RESTORE_ROOT"
+      - name: Restore existing VA3qvxoZr4Q artifact
+        if: steps.source_0.outputs.needs_transfer == 'true'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          repository: matheusmagah-cpu/heroverse-engine
+          artifact-ids: '12011150524'
+          run-id: '38816286874'
+          github-token: ${{ github.token }}
+          path: ${{ env.OPENING_RESTORE_ROOT }}
+          merge-multiple: true
+      - name: Preserve VA3qvxoZr4Q once and verify independent full readback
+        if: steps.source_0.outputs.needs_transfer == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_remaining_openings.py transfer VA3qvxoZr4Q
+      - name: Reconcile EkT0XMVln3s destination and source
+        id: source_1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_remaining_openings.py preflight EkT0XMVln3s
+      - name: Define bounded restore root for EkT0XMVln3s
+        if: steps.source_1.outputs.needs_transfer == 'true'
+        run: printf 'OPENING_RESTORE_ROOT=%s/native-opening-12011515166\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+      - name: Bound extracted EkT0XMVln3s output
+        if: steps.source_1.outputs.needs_transfer == 'true'
+        run: |
+          mkdir -m 700 "$OPENING_RESTORE_ROOT"
+          sudo mount -t tmpfs -o "size=95m,nosuid,nodev,noexec,mode=0700,uid=$(id -u),gid=$(id -g)" tmpfs "$OPENING_RESTORE_ROOT"
+      - name: Restore existing EkT0XMVln3s artifact
+        if: steps.source_1.outputs.needs_transfer == 'true'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          repository: matheusmagah-cpu/heroverse-engine
+          artifact-ids: '12011515166'
+          run-id: '38816286874'
+          github-token: ${{ github.token }}
+          path: ${{ env.OPENING_RESTORE_ROOT }}
+          merge-multiple: true
+      - name: Preserve EkT0XMVln3s once and verify independent full readback
+        if: steps.source_1.outputs.needs_transfer == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_remaining_openings.py transfer EkT0XMVln3s
+      - name: Reconcile ksMAEHpzkZo destination and source
+        id: source_2
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_remaining_openings.py preflight ksMAEHpzkZo
+      - name: Define bounded restore root for ksMAEHpzkZo
+        if: steps.source_2.outputs.needs_transfer == 'true'
+        run: printf 'OPENING_RESTORE_ROOT=%s/native-opening-12010773421\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+      - name: Bound extracted ksMAEHpzkZo output
+        if: steps.source_2.outputs.needs_transfer == 'true'
+        run: |
+          mkdir -m 700 "$OPENING_RESTORE_ROOT"
+          sudo mount -t tmpfs -o "size=95m,nosuid,nodev,noexec,mode=0700,uid=$(id -u),gid=$(id -g)" tmpfs "$OPENING_RESTORE_ROOT"
+      - name: Restore existing ksMAEHpzkZo artifact
+        if: steps.source_2.outputs.needs_transfer == 'true'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          repository: matheusmagah-cpu/heroverse-engine
+          artifact-ids: '12010773421'
+          run-id: '38816286874'
+          github-token: ${{ github.token }}
+          path: ${{ env.OPENING_RESTORE_ROOT }}
+          merge-multiple: true
+      - name: Preserve ksMAEHpzkZo once and verify independent full readback
+        if: steps.source_2.outputs.needs_transfer == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_remaining_openings.py transfer ksMAEHpzkZo
+      - name: Preserve text-only per-source receipts even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: remaining-opening-release-receipts-${{ github.run_id }}
+          path: remaining-opening-receipts/*.json
+          if-no-files-found: ignore
+          retention-days: 30
