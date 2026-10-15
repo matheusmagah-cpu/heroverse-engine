@@ -1,0 +1,66 @@
+{
+  "version": "heroverse-single-native-av-request-v1",
+  "request_id": "20261015-apify-native-j2rk8ycXe3c-00000-00040-v1",
+  "created_at": "2026-10-15T02:25:19.886Z",
+  "status": "PRE_EFFECT_INPUT_AND_COST_LIMIT_SAVED_AWAITING_SINGLE_START",
+  "actor_id": "HZEmjF3Q3VsSGMLfw",
+  "actor_name": "nodexagent/youtube-video-cut-and-download",
+  "owner_completed_signup_evidence": "Owner supplied image of authenticated Apify Store; existing cloud tab then positively opened the Actor input under the selected Matheus account.",
+  "authenticated_billing": {
+    "plan": "Free plan",
+    "monthly": true,
+    "billing_period_start_utc": "2026-10-15",
+    "billing_period_end_utc": "2026-11-14",
+    "consumed_usd": 0,
+    "remaining_free_usd": 5,
+    "free_limit_usd": 5,
+    "payment_methods": "No payment method found",
+    "billing_details": "Not set",
+    "subscription_url": "https://console.apify.com/billing/subscription",
+    "usage_url": "https://console.apify.com/billing/current-period"
+  },
+  "permissions": "Limited permissions observed",
+  "input": {
+    "url": "https://www.youtube.com/watch?v=j2rk8ycXe3c",
+    "trim": true,
+    "startTime": "00:00:00",
+    "endTime": "00:00:40",
+    "quality": "1080p",
+    "format": "mp4",
+    "audioOnly": false,
+    "convertToVertical": false
+  },
+  "console_input_saved": true,
+  "run_limits": {
+    "maximum_cost_per_run_usd": 0.02,
+    "timeout_seconds": 300,
+    "memory_mbytes": 1024,
+    "build_tag": "latest",
+    "max_items_option_not_configured_in_console": true,
+    "single_source_single_window_only": true
+  },
+  "cost_scope": "USD cap is usage from the verified monthly free allowance, not an authorized payment. No billing or payment method added.",
+  "pre_effect_actor_runs_observed": 0,
+  "pre_effect_input_url": "https://console.apify.com/actors/HZEmjF3Q3VsSGMLfw/input",
+  "provider_run_id": null,
+  "provider_job_started": false,
+  "media_received": false,
+  "recovery": "Before any retry inspect Actor runs and match this exact input/window. Adopt existing run/result; never start again merely because browser response or checkpoint failed.",
+  "authority": {
+    "native_market_handoff_accepted": false,
+    "production_approved": false,
+    "publication_authorized": false,
+    "supervisor_enabled": false
+  },
+  "unchanged": {
+    "master_checks_repeated": false,
+    "gemini_cap_raised": false,
+    "gemini_calls": 0,
+    "vidiq_credits": 0,
+    "paid_plan": false,
+    "card_added": false,
+    "cookies_supplied": false,
+    "proxy_supplied": false,
+    "schedule_changed": false
+  }
+}
