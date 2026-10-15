@@ -170,6 +170,32 @@ def progress(job_id,key,evidence,out,index):
         return value
 
 
+def ready_delivery_url(value):
+    """Classify recorded progress without treating a URL as media completion.
+
+    success=0 can mean pending before progress=1000. Only an explicit
+    terminal failure or contradictory terminal state stops that pending flow.
+    """
+    if not isinstance(value, dict):
+        raise ProbeError("INVALID_PROGRESS_BODY")
+    if value.get("status") in ("error", "failed", "FAILED") or value.get("error"):
+        raise ProbeError("PROVIDER_JOB_FAILED_STOP_NO_RESTART")
+    success = value.get("success")
+    progress_value = value.get("progress")
+    if ((success is not None and (type(success) is not int or success not in (0, 1)))
+            or (progress_value is not None and
+                (type(progress_value) is not int or not 0 <= progress_value <= 1000))):
+        raise ProbeError("INVALID_PROVIDER_PROGRESS_STATE_NO_MEDIA_REQUEST")
+    if progress_value == 1000 and success == 0:
+        raise ProbeError("PROVIDER_TERMINAL_FAILURE_NO_MEDIA_REQUEST")
+    if success != 1 or progress_value != 1000:
+        return None
+    url = value.get("download_url") or value.get("downloadUrl") or value.get("file_url")
+    if not isinstance(url, str) or not url.strip():
+        raise ProbeError("PROVIDER_FINISHED_WITHOUT_DELIVERY_URL_NO_RESTART")
+    return url
+
+
 def bounded_file(response,path,cap=MAX_MEDIA_BYTES):
     size=response.headers.get("Content-Length")
     if size and (not size.isdigit() or int(size)>cap):
@@ -280,14 +306,12 @@ def run(out,evidence,key,baseline):
             raise ProbeError("JOB_STILL_PENDING_RESUME_EXISTING_ID_ONLY")
         if index: time.sleep(10)
         value=progress(job_id,key,evidence,out,index)
-        url=value.get("download_url") or value.get("downloadUrl") or value.get("file_url")
+        url=ready_delivery_url(value)
         if url:
             evidence["delivery_url_sha256"]=hashlib.sha256(url.encode()).hexdigest()
             fetch_media(url,out,evidence)
             inspect_media(out,evidence)
             return
-        if value.get("status") in ("error","failed","FAILED") or value.get("error"):
-            raise ProbeError("PROVIDER_JOB_FAILED_STOP_NO_RESTART")
     raise ProbeError("JOB_STILL_PENDING_RESUME_EXISTING_ID_ONLY")
 
 
@@ -324,3 +348,4 @@ def main():
 
 
 if __name__=="__main__": raise SystemExit(main())
+

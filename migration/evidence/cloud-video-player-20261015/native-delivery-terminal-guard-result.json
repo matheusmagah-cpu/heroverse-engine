@@ -1,0 +1,54 @@
+{
+  "version": "native-delivery-terminal-guard-v1",
+  "recorded_at": "2026-10-15T16:23:40Z",
+  "base_commit": "b34c26597397736db393c8e98a3000f7d48aa00c",
+  "status": "OFFLINE_GUARD_TESTS_PASS_PROVIDER_DELIVERY_STILL_BLOCKED",
+  "tests": {
+    "command": "python3 -m unittest discover -s migration/diagnostics/rapidapi-native-av -p test_delivery_guard.py -v",
+    "passed": 13,
+    "elapsed_seconds": 0.054,
+    "scope": "Offline progress classification, real polling loops extracted by AST excluding startup/preflight, mocked delivery and HTTP failure. Not end-to-end or live provider validation."
+  },
+  "changes": [
+    "Reject terminal failure before media GET, even with stale URL.",
+    "Only success=1/progress=1000 with nonempty URL permits existing bounded media retrieval; URL alone is not delivery or approval.",
+    "Preserve pending success=0 before completion; reject invalid state types/ranges.",
+    "Preserve numeric HTTP error status without sensitive URL/body/reason."
+  ],
+  "provider_research": {
+    "sources": [
+      "https://video-download-api.com/api/openapi.json",
+      "https://video-download-api.com/youtube-download-api",
+      "https://video-download-api.com/pricing",
+      "https://docs.rapidapi.com/v2/docs/api-pricing"
+    ],
+    "findings": [
+      "No documented correction found for distant-window terminal timeout; internal cause unknown.",
+      "no_merge changes output packaging, not demonstrated fix or bounded source processing.",
+      "No confirmed global bandwidth zero-overage hard stop. Direct-vendor billing terms do not prove RapidAPI-specific billing or refund."
+    ]
+  },
+  "preserved": {
+    "provider_job_id": "v2_stream_065e6ed9572627501de7",
+    "restart_allowed": false,
+    "artifact_id": 11983614696,
+    "artifact_not_expired_verified": true,
+    "artifact_expires_at": "2026-10-22T15:13:38Z",
+    "all_completed_master_checks_reused": true,
+    "ledger_unchanged": true,
+    "workflow_unchanged": true
+  },
+  "effects": {
+    "new_provider_jobs": 0,
+    "provider_api_calls": 0,
+    "media_requests": 0,
+    "workflow_dispatches": 0,
+    "new_credentials": 0
+  },
+  "next_step": "Technical support contact proposed to owner, approval pending. No message sent externally. Do not retry terminal job or substitute unproven settings.",
+  "production": false,
+  "publication": false,
+  "supervisor": false,
+  "recurring_capacity_qualified": false,
+  "native_audio_approval": false
+}

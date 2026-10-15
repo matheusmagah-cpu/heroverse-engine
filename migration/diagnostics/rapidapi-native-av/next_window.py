@@ -150,13 +150,12 @@ def run(out, e, key):
         if index:
             time.sleep(10)
         value = n.progress(job, key, e, out, index)
-        url = value.get('download_url') or value.get('downloadUrl') or value.get('file_url')
+        url = n.ready_delivery_url(value)
         if url:
             n.fetch_media(url, out, e)
             inspect(out, e)
             e['status'] = 'NATIVE_MIDPOINT_DECODED_AWAITING_REVIEW'
             return
-        require(value.get('status') not in ('error', 'failed', 'FAILED') and not value.get('error'), 'SOURCE_JOB_FAILED_NO_RESTART')
     raise n.ProbeError('RESUME_EXISTING_JOB_ONLY')
 
 
@@ -185,3 +184,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+

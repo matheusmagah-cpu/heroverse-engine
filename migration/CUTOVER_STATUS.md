@@ -628,3 +628,14 @@ O áudio nativo da abertura inteira0–40s foi entregue a Qwen2.5-Omni7B/Q4 em C
 Carga contínua não qualificada: RAM medida próxima do teto8GiB, download de modelos deixou temporários órfãos15,009GB que foram removidos apenas após pesos íntegros comprovados; não adotar downloader sem limite de pico. Envelope aritmético de3janelas/dia não é cadência editorial aprovada e ainda precisa incluir recuperação, armazenamento global e proteção de banda sem excedente. Foram reservados mais6min totais para as duas recuperações de qualificação; nenhum reset/refund automático. Último saldo observado não garante gratuidade futura.
 
 Próxima etapa exige correção demonstrável da entrega terminal do fornecedor **ou uma rota diferente com mídia real e franquia recorrente comprovadas**, e um revisor de áudio que passe controles. Não repetir conexão, jobs, modelos reprovados, master, GOP300 ou provas já aprovadas. Revisão final v3, produção, publicação e supervisor permanecem inalterados/desativados. Nenhuma aprovação inventada.
+
+
+## 2026-10-15 — execução devolvida ao dot; guarda terminal corrigida sem novo efeito
+
+HEAD b34c26597397736db393c8e98a3000f7d48aa00c conferido, sem alteração posterior. Os seis documentos indicados pelo titular foram recuperados; artefato11983614696 confirmado disponível até2026-10-22T15:13:38Z. Nenhuma aquisição da abertura ou prova aprovada foi repetida.
+
+Lacuna concreta corrigida nos loops de native_probe.py e next_window.py: URL agora só permite buscar mídia após success=1/progress=1000 válido. Falha terminal success=0/progress=1000 encerra antes de qualquer GET, mesmo com URL antiga; pendência não é confundida com falha. recover_midpoint_delivery.py passa a preservar o código HTTP numérico, sem URL/corpo/mensagem sensíveis. **13 testes offline PASS em0,054s**. Os testes dos loops usam AST e mocks, excluem startup/preflight; não são E2E nem prova de entrega do fornecedor.
+
+Documentação oficial consultada não apresentou correção demonstrável para o timeout do recorte distante nem proteção global de banda contra excedentes. no_merge muda o empacotamento; não é correção comprovada. Causa interna do timeout permanece desconhecida. Foi solicitada ao titular autorização para contato técnico com o suporte, ainda não enviado. Não reiniciar o job existente nem tentar variações sem fundamento.
+
+Recibo native-delivery-terminal-guard-result.json. Zero novos jobs, consultas ao fornecedor, pedidos de mídia ou dispatches. Ledger, workflows, finalv3 e revisões aprovadas preservados. Entrega recorrente continua BLOCKED; análise de áudio/capacidade e pacote completo não avançados. Produção, publicação e supervisor OFF.

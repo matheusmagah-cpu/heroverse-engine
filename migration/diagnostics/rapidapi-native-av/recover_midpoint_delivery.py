@@ -38,6 +38,11 @@ try:
     n.fetch_media(url,out,receipt,timeout=90)
     inspect(out,receipt)
     receipt['status']='EXISTING_MIDPOINT_DELIVERED_AND_DECODED'
+except n.HTTPError as error:
+    receipt['status']='DELIVERY_RECOVERY_FAILED_NO_AUTOMATIC_RETRY'
+    receipt['failure_type']='HTTPError'
+    receipt['failure_code']='HTTP_'+str(error.code)
+    receipt['delivery_http_status']=error.code
 except Exception as error:
     receipt['status']='DELIVERY_RECOVERY_FAILED_NO_AUTOMATIC_RETRY'
     receipt['failure_type']=type(error).__name__
@@ -48,3 +53,4 @@ finally:
     (out/'recovery-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt))
 raise SystemExit(0 if receipt['status']=='EXISTING_MIDPOINT_DELIVERED_AND_DECODED' else 2)
+
