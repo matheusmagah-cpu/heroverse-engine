@@ -47,3 +47,4 @@ finally:
     receipt['elapsed_seconds']=time.monotonic()-started
     (out/'recovery-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt))
+raise SystemExit(0 if receipt['status']=='EXISTING_MIDPOINT_DELIVERED_AND_DECODED' else 2)

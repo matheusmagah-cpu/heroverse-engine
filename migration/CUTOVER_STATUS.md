@@ -610,3 +610,10 @@ Correção precisa: exigir intervalo válido499900..500000 para saldo mensal e h
 Run38763038099/job116519031527: exatamente1start MCP, job **v2_stream_065e6ed9572627501de7**,4polls; quota486→474unidades, requests499994→499989. Progresso1000/Finished com URL de entrega, título e formato1080 corretos. O cliente atingiu timeout30s antes dos cabeçalhos HTTP; nenhum arquivo ou byte de mídia recebido. Artefato11986986812/5308B, SHA256 c0fc4826e3a668cd731871fdbad6894504ef3570e52c33edbe5416c4aa7fc710. Recibo rapidapi-native-midpoint-attempt.json. **Nunca reenviar esse job.**
 
 Recuperação no ambiente deste chat parou imediatamente em DNS/gaierror para logan14.savenow.to;0bytes,0APIcalls. Não inferir bloqueio por bot nem alterar rede/proxy. Preparado retorno ao mesmo executor GitHub: restaura o artefato existente, usa os mesmos guardas HTTPS públicos/sem credencial e timeout90s em vez30s, uma única execução/3min e nenhum secret/API do fornecedor. Mais3min reservados para esta recuperação de qualificação, sem inferir capacidade recorrente. Nenhuma aprovação editorial ou de publicação.
+
+
+## 2026-10-15 — entrega HTTP não recuperada; não confundir workflow verde com mídia entregue
+
+Recuperação38764385974/job116523674495, artefato11987471376: recibo **DELIVERY_RECOVERY_FAILED_NO_AUTOMATIC_RETRY**, HTTPError após61,16s,0novosjobs/0APIcalls/0bytes. Código HTTP não foi capturado pelo primeiro adaptador; não inventá-lo. Esse adaptador retornou exit0 após gravar falha, por isso o workflow apareceverde: **não é PASS audiovisual**. Corrigido para exit2 e captura explícita de código HTTP na etapa seguinte.
+
+Última recuperação possível preparada: uma única consulta progress do mesmo job. Só haverá tentativa de mídia se o próprio fornecedor devolver outro hostname HTTPS público; se continuarlogan14.savenow.to, parar sem repetir o GET que falhou. Sem novos downloads/tools-call, proxy, cookie, mudança de rede ou substituição de fonte. Capacidade recorrente permanece BLOCKED até entrega confiável demonstrada.
