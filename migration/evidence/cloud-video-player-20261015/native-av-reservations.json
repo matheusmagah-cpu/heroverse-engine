@@ -1,6 +1,6 @@
 {
   "version": "native-av-reservations-v1",
-  "recorded_at": "2026-10-15T16:07:39.536Z",
+  "recorded_at": "2026-10-15T21:14:37Z",
   "cycle_policy": "Never reset automatically; reconcile the provider reset and all unresolved effects before opening a new period.",
   "limits": {
     "daily_jobs": 3,
@@ -53,6 +53,23 @@
         38764385974,
         38766227526
       ]
+    },
+    {
+      "reserved_transfer_bytes": 83886080,
+      "reserved_runner_minutes": 10,
+      "reserved_units": 14,
+      "reserved_requests": 40,
+      "request_id": "20261015-rapidapi-native-BeFOHnncaeQ-0-40-v1",
+      "status": "COMPLETED_RESERVATION_RETAINED",
+      "reserved_at": "2026-10-15T21:10:53.738216+00:00",
+      "day_utc": "2026-10-15",
+      "provider_job_id": "v2_stream_349047dfec6bdd607074",
+      "download_tools_call_requests": 1,
+      "actual_included_units": 12,
+      "result_receipt": "second-opening-verified-result.json",
+      "workflow_run_id": 38807777341,
+      "artifact_id": 12005979620,
+      "restart_allowed": false
     }
   ],
   "production": false,

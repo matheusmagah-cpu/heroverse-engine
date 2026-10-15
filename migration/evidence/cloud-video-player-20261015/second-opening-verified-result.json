@@ -1,0 +1,108 @@
+{
+  "run_id": 38807777341,
+  "workflow_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38807777341",
+  "artifact_id": 12005979620,
+  "artifact_sha256": "c96a5f3e080f3c3ff61b631b995bfba54ee1ec942693e7601f74b21de95d9f71",
+  "artifact_expires_at": "2026-10-16T21:12:17Z",
+  "provider_job_id": "v2_stream_349047dfec6bdd607074",
+  "source_video_id": "BeFOHnncaeQ",
+  "requested_window_seconds": [
+    0,
+    40
+  ],
+  "media": {
+    "bytes": 33379395,
+    "sha256": "66d410ff0fbe8f750bb95663d6563857a2736e4da4a716818d44b4b1ee6d99bc"
+  },
+  "native_probe": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "duration": "40.000000"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "44100",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "duration": "40.066667"
+      }
+    ],
+    "format": {
+      "duration": "40.066667",
+      "size": "33379395"
+    }
+  },
+  "complete_clip_decode_passed": true,
+  "units_before": 474,
+  "units_after": 462,
+  "included_units_consumed": 12,
+  "gateway_request_attempts": 7,
+  "single_start": true,
+  "native_audio_listened_to": false,
+  "semantic_audio_approved": false,
+  "perceptual_review_scope": "Five extracted source-clock-bound images only, individually viewed; not continuous video or audio review",
+  "frame_hashes_reverified": true,
+  "observations": [
+    {
+      "source_seconds": 0,
+      "observation": "Rocky green river/pool and white welcome-to-channel title."
+    },
+    {
+      "source_seconds": 10,
+      "observation": "River and rocks, welcome title plus Stillwaters Piano branding; white cross/dove mark upper left."
+    },
+    {
+      "source_seconds": 20,
+      "observation": "Orange sun over layered hills and valley; upper-left cross/dove mark."
+    },
+    {
+      "source_seconds": 30,
+      "observation": "White lighthouse on green rocky coast beside blue ocean; upper-left cross/dove mark."
+    },
+    {
+      "source_seconds": 39,
+      "observation": "Dandelion/grass closeup with Psalm42:1 heading and two-line English verse; upper-left cross/dove mark."
+    }
+  ],
+  "production": false,
+  "publication": false,
+  "recurring_capacity_qualified": false,
+  "reacquire": false,
+  "version": "second-native-opening-verified-v1",
+  "verified_at": "2026-10-15T21:14:37Z",
+  "head_sha": "81a9406e9845df5ecef3a67c9c102a4980e20e9f",
+  "status": "NATIVE_OPENING_DELIVERED_DECODED_FIVE_FRAMES_REVIEWED_AUDIO_APPROVAL_PENDING",
+  "audio_files": {
+    "audio.mka": {
+      "bytes": 666062,
+      "sha256": "01579ea828eb0b8a625866e4c42d3f2ab7a6bd6c7b1c59eddf5d5573137a98d8"
+    },
+    "audio-review.wav": {
+      "bytes": 7061722,
+      "sha256": "0018d5659d7a239b7efd1c4841007edc79ad4ad3953fc19c99c4378591f181f1",
+      "decoded_pcm": {
+        "channels": 2,
+        "sample_rate": 44100,
+        "sample_width_bytes": 2,
+        "frames": 1765376,
+        "duration_seconds": 40.03120181405896
+      }
+    }
+  },
+  "last_request_counter": 499993,
+  "request_counter_caveat": "Historical request counters are not monotonic. No reset/refund or spend inference from earlier 499988 to current499993.",
+  "elapsed_seconds": 83.082,
+  "preservation_status": "ONE_DAY_PRIVATE_ACTIONS_ARTIFACT_VERIFIED_DURABLE_PRESERVATION_PENDING",
+  "audio_perceptual_approval": false,
+  "native_semantic_handoff_accepted": false,
+  "supervisor": false
+}
