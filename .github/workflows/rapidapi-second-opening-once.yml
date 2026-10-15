@@ -1,0 +1,37 @@
+name: HeroVerse one missing native opening
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: heroverse-native-BeFOHnncaeQ-opening-v1
+  cancel-in-progress: false
+jobs:
+  acquire:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.run_number == 1 && github.run_attempt == 1 && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Verify only new guards offline
+        run: python3 -m unittest discover -s migration/diagnostics/rapidapi-native-av -p test_second_opening.py -v
+      - name: Install decoder from official Ubuntu packages
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
+      - name: Acquire one new opening without retries
+        env:
+          HERO_RAPIDAPI_KEY: ${{ secrets.HERO_RAPIDAPI_KEY }}
+          GH_ARTIFACT_TOKEN: ${{ github.token }}
+        run: python3 migration/diagnostics/rapidapi-native-av/second_opening.py
+      - name: Preserve exact attempt privately for one day
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rapidapi-native-BeFOHnncaeQ-0-40-v1
+          path: output/qualification/rapidapi-native-BeFOHnncaeQ-0-40-v1/
+          retention-days: 1
+          if-no-files-found: warn

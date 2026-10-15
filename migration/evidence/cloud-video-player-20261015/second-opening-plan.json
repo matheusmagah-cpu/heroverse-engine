@@ -1,0 +1,30 @@
+{
+  "version": "second-native-opening-plan-v1",
+  "request_id": "20261015-rapidapi-native-BeFOHnncaeQ-0-40-v1",
+  "status": "PLANNED_NOT_ADMITTED",
+  "parameters": {
+    "_endpoint": "/ajax/download.php",
+    "_method": "GET",
+    "url": "https://www.youtube.com/watch?v=BeFOHnncaeQ",
+    "format": "1080",
+    "start_time": 0,
+    "end_time": 40,
+    "add_info": "1",
+    "allow_extended_duration": "1",
+    "max_duration": 240
+  },
+  "reservation": {
+    "reserved_transfer_bytes": 83886080,
+    "reserved_runner_minutes": 10,
+    "reserved_units": 14,
+    "reserved_requests": 40
+  },
+  "requires_fresh_billing_admission": true,
+  "new_provider_jobs": 0,
+  "workflow_dispatches": 0,
+  "restart_allowed": false,
+  "production": false,
+  "publication": false,
+  "supervisor": false,
+  "practical_headroom_rationale": "0.00% current UI implies substantial headroom under ordinary two-decimal rounding or truncation, but freshness and rounding are not documented. Gateway control traffic is separate from direct Savenow media. This is practical inference, not proof of a recurring hard stop. Reverify RapidAPI and GitHub included compute/account-wide storage and zero spend budget before dispatch."
+}
