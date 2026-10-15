@@ -409,3 +409,8 @@ Candidate and bounded acceptance at migration/evidence/cloud-video-player-202610
 
 
 Automatic-review continuation note: requestManualHandoff for the existing Apify onboarding tab was denied by browser security review. Stated reason: after requesting signup handoff the agent must wait for owner completion; reopening beforehand would proceed without that prerequisite. The actual handoff call returned rejection and no link, not a user refusal. No browser retry, navigation, alternate surface or indirect workaround followed. New account remains incomplete; no Actor run, tested clip, actual Free balance or permanent adoption. Owner input/authorization is now required to resolve this blocked account-creation step.
+
+
+## 2026-10-15 02:08 UTC — explicit signup authorization received; browser prerequisite still blocks
+
+Owner explicitly authorized free Apify account completion. Do not request the same permission again. One getAXState on the retained onboarding tab was rejected by automatic browser review: despite authorization it requires the owner to finish signup personally before browser access can resume. This was not a user rejection and not an Actor/YouTube media failure. No further browser action, alternate surface, cookie/token extraction or indirect workaround followed. Account onboarding, actual Free balance and native clip test remain unverified; zero Actor jobs and no cost/adoption/production authority. Current blocker is personal account completion under the browser security prerequisite, not missing owner permission.
