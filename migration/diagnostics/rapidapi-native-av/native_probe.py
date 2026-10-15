@@ -189,7 +189,7 @@ def bounded_file(response,path,cap=MAX_MEDIA_BYTES):
     return {"bytes":total,"sha256":digest.hexdigest()}
 
 
-def fetch_media(url,out,evidence):
+def fetch_media(url,out,evidence,*,timeout=30):
     host=media_url(url)
     class DeliveryRedirect(HTTPRedirectHandler):
         def redirect_request(self, req, fp, code, msg, headers, newurl):
@@ -199,7 +199,7 @@ def fetch_media(url,out,evidence):
             chain.append(media_url(newurl))
             return Request(newurl,headers={"Accept":"video/mp4, application/octet-stream"})
     # Separate opener and request: provider API key/session is never sent to CDN.
-    with build_opener(DeliveryRedirect()).open(Request(url,headers={"Accept":"video/mp4, application/octet-stream"}),timeout=30) as response:
+    with build_opener(DeliveryRedirect()).open(Request(url,headers={"Accept":"video/mp4, application/octet-stream"}),timeout=timeout) as response:
         evidence["delivery_http_status"]=response.status
         evidence["delivery_host"]=urlsplit(response.geturl()).hostname
         evidence["media_file"]=bounded_file(response,out/"native.mp4")

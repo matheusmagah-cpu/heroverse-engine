@@ -1,0 +1,123 @@
+{
+  "version": "native-midpoint-attempt-v1",
+  "run_id": 38763038099,
+  "job_id": 116519031527,
+  "result": {
+    "version": "preclaimed-native-midpoint-v1",
+    "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-6354-6364-v1",
+    "source_video_id": "j2rk8ycXe3c",
+    "source_requested_seconds": [
+      6354,
+      6364
+    ],
+    "started_at": "2026-10-15T15:45:20.085308+00:00",
+    "status": "BLOCKED",
+    "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+    "download_tools_call_requests": 1,
+    "progress_polls": 4,
+    "production": false,
+    "publication": false,
+    "supervisor": false,
+    "perceptual_audio_review_completed": false,
+    "recurring_capacity_qualified": false,
+    "storage_preflight": {
+      "unexpired_repository_artifact_bytes": 70117823,
+      "unexpired_artifacts": 44,
+      "reserved_output_bytes": 100663296,
+      "account_wide_storage_not_proven_by_repo_inventory": true
+    },
+    "fresh_preflight_quota_headers": {
+      "x-ratelimit-units-limit": "500",
+      "x-ratelimit-units-remaining": "486",
+      "x-ratelimit-units-reset": "62397",
+      "x-ratelimit-requests-limit": "500000",
+      "x-ratelimit-requests-remaining": "499994",
+      "x-ratelimit-requests-reset": "2654397",
+      "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+      "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499994",
+      "x-ratelimit-rapid-free-plans-hard-limit-reset": "2654397"
+    },
+    "existing_job_preflight_polls": 1,
+    "preflight_control_response_bytes": 632,
+    "request_counter_reconciliation": {
+      "prior_observed_remaining": 499995,
+      "fresh_remaining": 499994,
+      "signed_remaining_change_from_prior": -1,
+      "counter_increase_is_not_a_budget_refund": true,
+      "provider_counter_is_not_an_authoritative_monotonic_spend_ledger": true,
+      "no_exact_counter_assumption": true,
+      "native_quality_gates_unchanged": true
+    },
+    "baseline_quota_headers": {
+      "x-ratelimit-units-limit": "500",
+      "x-ratelimit-units-remaining": "486",
+      "x-ratelimit-units-reset": "62397",
+      "x-ratelimit-requests-limit": "500000",
+      "x-ratelimit-requests-remaining": "499994",
+      "x-ratelimit-requests-reset": "2654397",
+      "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+      "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499994",
+      "x-ratelimit-rapid-free-plans-hard-limit-reset": "2654397"
+    },
+    "control_response_bytes": 2394,
+    "start_reply_received_bytes": 1195,
+    "provider_job_id": "v2_stream_065e6ed9572627501de7",
+    "last_quota_headers": {
+      "x-ratelimit-requests-limit": "500000",
+      "x-ratelimit-requests-remaining": "499989",
+      "x-ratelimit-requests-reset": "2654365",
+      "x-ratelimit-units-limit": "500",
+      "x-ratelimit-units-remaining": "474",
+      "x-ratelimit-units-reset": "62365",
+      "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+      "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499989",
+      "x-ratelimit-rapid-free-plans-hard-limit-reset": "2654365"
+    },
+    "quota_observations": [
+      {
+        "poll_index": 0,
+        "units_remaining": "474",
+        "requests_remaining": "499992"
+      },
+      {
+        "poll_index": 1,
+        "units_remaining": "474",
+        "requests_remaining": "499991"
+      },
+      {
+        "poll_index": 2,
+        "units_remaining": "474",
+        "requests_remaining": "499990"
+      },
+      {
+        "poll_index": 3,
+        "units_remaining": "474",
+        "requests_remaining": "499989"
+      }
+    ],
+    "observed_units_change_since_info": 12,
+    "failure_code": "TimeoutError",
+    "elapsed_seconds": 63.492,
+    "completed_at": "2026-10-15T15:46:23.577513+00:00"
+  },
+  "artifact": {
+    "id": 11986986812,
+    "name": "rapidapi-native-j2rk8ycXe3c-midpoint-v1",
+    "size_in_bytes": 5308,
+    "url": "https://api.github.com/repos/matheusmagah-cpu/heroverse-engine/actions/artifacts/11986986812",
+    "archive_download_url": "https://api.github.com/repos/matheusmagah-cpu/heroverse-engine/actions/artifacts/11986986812/zip",
+    "expired": false,
+    "created_at": "2026-10-15T15:46:24Z",
+    "expires_at": "2026-10-16T15:46:23Z",
+    "updated_at": "2026-10-15T15:46:24Z",
+    "digest": "sha256:c0fc4826e3a668cd731871fdbad6894504ef3570e52c33edbe5416c4aa7fc710",
+    "workflow_run": {
+      "id": 38763038099,
+      "repository_id": 1417242110,
+      "head_repository_id": 1417242110,
+      "head_branch": "main",
+      "head_sha": "406ce3289644277f09983484f7d0766a7cc566e3"
+    }
+  },
+  "delivery_recovery_reserved_runner_minutes": 3
+}

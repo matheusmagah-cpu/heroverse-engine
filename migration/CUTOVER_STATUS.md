@@ -603,3 +603,10 @@ Correção: salvar cabeçalhos numéricos antes de avaliar, conservar486unidades
 Run38762055346/job116515603881: NOT_SENT/0downloads. Cabeçalhos reais finalmente preservados:486/500unidades,499997/500000requests e hardlimit499997/500000. Esse saldo de requests é maior que499995 observado no primeiro download; causa não comprovada. A guarda assumia monotonicidade e bloqueou indevidamente apesar da ampla franquia. Não atribuir consumo negativo ou reset comprovado ao fornecedor.
 
 Correção precisa: exigir intervalo válido499900..500000 para saldo mensal e hardlimit, manter486unidades exatas, e conservar integralmente as reservas locais independentemente de qualquer aumento do contador remoto. Próxima execução única run_number3/attempt1 exige recibo anteriorNOT_SENT/0downloads. Nenhum start foi enviado nas duas execuções; apenas consultas ao job anterior. Recibo rapidapi-midpoint-no-effect-38762055346.json. Não há nova aprovação de banda, recorrência ou qualidade.
+
+
+## 2026-10-15 — job real do meio preservado; entrega interrompida antes de bytes
+
+Run38763038099/job116519031527: exatamente1start MCP, job **v2_stream_065e6ed9572627501de7**,4polls; quota486→474unidades, requests499994→499989. Progresso1000/Finished com URL de entrega, título e formato1080 corretos. O cliente atingiu timeout30s antes dos cabeçalhos HTTP; nenhum arquivo ou byte de mídia recebido. Artefato11986986812/5308B, SHA256 c0fc4826e3a668cd731871fdbad6894504ef3570e52c33edbe5416c4aa7fc710. Recibo rapidapi-native-midpoint-attempt.json. **Nunca reenviar esse job.**
+
+Recuperação no ambiente deste chat parou imediatamente em DNS/gaierror para logan14.savenow.to;0bytes,0APIcalls. Não inferir bloqueio por bot nem alterar rede/proxy. Preparado retorno ao mesmo executor GitHub: restaura o artefato existente, usa os mesmos guardas HTTPS públicos/sem credencial e timeout90s em vez30s, uma única execução/3min e nenhum secret/API do fornecedor. Mais3min reservados para esta recuperação de qualificação, sem inferir capacidade recorrente. Nenhuma aprovação editorial ou de publicação.
