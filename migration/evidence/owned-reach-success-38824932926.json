@@ -1,0 +1,96 @@
+{
+  "status": "INGESTED_BOUNDED_REPORTS",
+  "manual_approval": false,
+  "production_approved": false,
+  "publication_authorized": false,
+  "preflight": {
+    "execution_boundary": {
+      "repository": "matheusmagah-cpu/heroverse-engine",
+      "repository_private": true,
+      "ref": "refs/heads/main"
+    },
+    "recovery": {
+      "previous_run_ids": [
+        "38822029275",
+        "38822885890",
+        "38823982698"
+      ],
+      "previous_receipt_sha256": [
+        "f5c8c636e0f7dca289f8982ed901924a85b9832d3b30d40e2b934a6ac0facaa2",
+        "8f24e0f89d44c28a0e3e1446af3a8f6c5722d4535c9d882a5280ba3ba6451533",
+        "2a7637037e12e27301d511fad41d5d2b829586463c9ad09ee3a9b7ed3ab62837"
+      ],
+      "previous_network_operations_by_run": [
+        0,
+        0,
+        3
+      ],
+      "admitted_run_number": "4",
+      "admitted_run_attempt": "1",
+      "previous_receipt_preserved": true,
+      "already_received_report_excluded": "17695215035",
+      "pending_report_only": "20613781334"
+    },
+    "resource_policy": "BOUNDED_REPORTING_STDLIB_ONLY_V1",
+    "memory_samples_bytes": [
+      7410040832,
+      7410040832
+    ],
+    "disk_free_bytes": 14092222464,
+    "memory_available_bytes": 7410040832,
+    "required_disk_free_bytes": 268435456,
+    "required_memory_available_bytes": 536870912,
+    "disk_margin_passed": true,
+    "memory_margin_passed": true,
+    "data_api_requests": 0,
+    "data_api_units_required": 0,
+    "reason": "EXISTING_REPORTING_REPORTS_ONLY_NO_DATA_API",
+    "observer_ledger_modified": false,
+    "new_jobs_created": 0
+  },
+  "oauth_health": {
+    "version": "heroverse-existing-grant-health-v1",
+    "observed_at": "2026-10-15T23:40:09.133132+00:00",
+    "status": "REFRESH_PASSED_IDENTITY_NOT_YET_OBSERVED",
+    "failure_code": null,
+    "console_publishing_status": "UNOBSERVED",
+    "configuration_verified": false,
+    "production_ready": false,
+    "publication_authorized": false,
+    "secret_values_logged": false,
+    "new_consent_performed": false,
+    "automatic_retry_performed": false
+  },
+  "owner_binding": "PINNED_OWNED_JOB_AND_EXACT_CSV_CHANNEL_WHEN_ROWS_EXIST_NOT_NEW_CHANNEL_API_PROOF",
+  "receipt_sha256": "927e0f7dc997ac9da878b1ee2b73a51e3f535fcc740b18d4456c2ae761808b14",
+  "requests": {
+    "token_refresh": 1,
+    "report_metadata": 1,
+    "report_csv": 1
+  },
+  "request_events": [
+    {
+      "stage": "token_refresh",
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "stage": "report_metadata",
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "stage": "report_csv",
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
+  "network_operations_attempted": 3,
+  "network_operations_maximum": 3,
+  "youtube_data_api_calls": 0,
+  "youtube_data_api_units": 0,
+  "data_api_ledger_modified": false,
+  "run_id": "38824932926",
+  "commit": "71b14247d4f1ab5b9401a33adfc97098c5e07308",
+  "code_sha256": "982775b8b1e466370cbfaf5cc6b69f7386e4cba0bbc4c93dbf671eb3241441dd"
+}

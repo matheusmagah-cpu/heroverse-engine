@@ -1,0 +1,206 @@
+{
+  "schema_version": "owned-reach-offline-two-report-v1",
+  "status": "TWO_REPORT_BYTES_VERIFIED_AND_PARSED",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "job_id": "ce0b4a6d-b8db-4550-a856-5ff8e8a83ba2",
+  "report_type": "channel_reach_basic_a1",
+  "source_snapshot_sha256": "49032963a3e1bd0421c487ea6e4aa6d8f5e96b0f2d6153506f9e62d2f25a1a3c",
+  "coverage": {
+    "timezone": "America/Los_Angeles",
+    "dates": [
+      "2026-10-12",
+      "2026-10-13"
+    ],
+    "start_utc": "2026-10-12T07:00:00Z",
+    "end_utc_exclusive": "2026-10-14T07:00:00Z",
+    "not_lifetime_or_28_day": true
+  },
+  "reports": [
+    {
+      "report_id": "17695215035",
+      "run_id": "38823982698",
+      "artifact_id": 12014520417,
+      "artifact_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38823982698/artifacts/12014520417",
+      "start_utc": "2026-10-13T07:00:00Z",
+      "end_utc_exclusive": "2026-10-14T07:00:00Z",
+      "created_utc": "2026-10-15T10:25:30.526080Z",
+      "raw_bytes": 236,
+      "raw_sha256": "dd4e9a012addc6d815a0e460b9a3c5fad9830c9a78cd88573cf242e08a9a5b5c",
+      "row_count": 3,
+      "headers": [
+        "date",
+        "channel_id",
+        "video_id",
+        "video_thumbnail_impressions",
+        "video_thumbnail_impressions_ctr"
+      ],
+      "original_execution_status": "BLOCKED",
+      "offline_parse_status": "VALIDATED",
+      "execution_sha256": "2a7637037e12e27301d511fad41d5d2b829586463c9ad09ee3a9b7ed3ab62837",
+      "collection_receipt_sha256": "c346a40ed965c4bca62472e83a1101ff09e0e762714f3e8eb8782dd50df38230"
+    },
+    {
+      "report_id": "20613781334",
+      "run_id": "38824932926",
+      "artifact_id": 12014362328,
+      "artifact_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38824932926/artifacts/12014362328",
+      "start_utc": "2026-10-12T07:00:00Z",
+      "end_utc_exclusive": "2026-10-13T07:00:00Z",
+      "created_utc": "2026-10-14T05:30:29.360021Z",
+      "raw_bytes": 157,
+      "raw_sha256": "62d275a399d7b12a5fd5c372b9d43fa7c48656cbd8d0ca3c4215d49f18f5c252",
+      "row_count": 1,
+      "headers": [
+        "date",
+        "channel_id",
+        "video_id",
+        "video_thumbnail_impressions",
+        "video_thumbnail_impressions_ctr"
+      ],
+      "original_execution_status": "INGESTED_BOUNDED_REPORTS",
+      "offline_parse_status": "VALIDATED",
+      "execution_sha256": "2cd980515b241a4339a95081a051864b0ff9c6d75ca02243451d0f9588a11dae",
+      "collection_receipt_sha256": "927e0f7dc997ac9da878b1ee2b73a51e3f535fcc740b18d4456c2ae761808b14"
+    }
+  ],
+  "csv_total_bytes": 393,
+  "rows_total": 4,
+  "unique_video_ids": 3,
+  "duplicate_composite_keys": 0,
+  "impressions_by_pacific_date": {
+    "2026-10-12": 175,
+    "2026-10-13": 101
+  },
+  "impressions_sum_all_reported_rows": 276,
+  "ctr_representation": "provider_raw_representation_unverified",
+  "aggregate_ctr": null,
+  "target_observations": [
+    {
+      "video_id": "FifnlNUQKNk",
+      "status": "OBSERVED_ROWS",
+      "covered_dates": [
+        "2026-10-12",
+        "2026-10-13"
+      ],
+      "rows": [
+        {
+          "date": "20261012",
+          "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+          "video_id": "FifnlNUQKNk",
+          "video_thumbnail_impressions": "175",
+          "video_thumbnail_impressions_ctr": "0.0057142857142857143",
+          "report_id": "20613781334",
+          "date_normalized": "2026-10-12",
+          "in_original_eight_targets": true
+        },
+        {
+          "date": "20261013",
+          "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+          "video_id": "FifnlNUQKNk",
+          "video_thumbnail_impressions": "99",
+          "video_thumbnail_impressions_ctr": "0",
+          "report_id": "17695215035",
+          "date_normalized": "2026-10-13",
+          "in_original_eight_targets": true
+        }
+      ],
+      "impressions_sum_observed_rows": 274,
+      "aggregate_ctr": null
+    },
+    {
+      "video_id": "iK_5edYQtx8",
+      "status": "NO_MATCHING_ROW_NOT_ZERO",
+      "covered_dates": [],
+      "rows": [],
+      "impressions_sum_observed_rows": null,
+      "aggregate_ctr": null
+    },
+    {
+      "video_id": "Hy54XVINoiQ",
+      "status": "NO_MATCHING_ROW_NOT_ZERO",
+      "covered_dates": [],
+      "rows": [],
+      "impressions_sum_observed_rows": null,
+      "aggregate_ctr": null
+    },
+    {
+      "video_id": "imfvOr3Q0aI",
+      "status": "NO_MATCHING_ROW_NOT_ZERO",
+      "covered_dates": [],
+      "rows": [],
+      "impressions_sum_observed_rows": null,
+      "aggregate_ctr": null
+    },
+    {
+      "video_id": "bAsb6Ov0A-A",
+      "status": "NO_MATCHING_ROW_NOT_ZERO",
+      "covered_dates": [],
+      "rows": [],
+      "impressions_sum_observed_rows": null,
+      "aggregate_ctr": null
+    },
+    {
+      "video_id": "o1hHZgYzUZA",
+      "status": "NO_MATCHING_ROW_NOT_ZERO",
+      "covered_dates": [],
+      "rows": [],
+      "impressions_sum_observed_rows": null,
+      "aggregate_ctr": null
+    },
+    {
+      "video_id": "hhJGujSiScM",
+      "status": "NO_MATCHING_ROW_NOT_ZERO",
+      "covered_dates": [],
+      "rows": [],
+      "impressions_sum_observed_rows": null,
+      "aggregate_ctr": null
+    },
+    {
+      "video_id": "ucf6p67sijw",
+      "status": "NO_MATCHING_ROW_NOT_ZERO",
+      "covered_dates": [],
+      "rows": [],
+      "impressions_sum_observed_rows": null,
+      "aggregate_ctr": null
+    }
+  ],
+  "other_video_rows": [
+    {
+      "date": "20261013",
+      "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+      "video_id": "Z1ohsB0VGIM",
+      "video_thumbnail_impressions": "1",
+      "video_thumbnail_impressions_ctr": "0",
+      "report_id": "17695215035",
+      "date_normalized": "2026-10-13",
+      "in_original_eight_targets": false
+    },
+    {
+      "date": "20261013",
+      "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+      "video_id": "nkAjzvd9rR4",
+      "video_thumbnail_impressions": "1",
+      "video_thumbnail_impressions_ctr": "1",
+      "report_id": "17695215035",
+      "date_normalized": "2026-10-13",
+      "in_original_eight_targets": false
+    }
+  ],
+  "network_operations_by_run": {
+    "38822029275": 0,
+    "38822885890": 0,
+    "38823982698": 3,
+    "38824932926": 3
+  },
+  "total_probe_network_operations": 6,
+  "successful_csv_downloads": 2,
+  "repeat_csv_downloads": 0,
+  "youtube_data_api_calls": 0,
+  "youtube_data_api_units": 0,
+  "data_api_ledger_modified": false,
+  "new_jobs_created": 0,
+  "new_scopes": false,
+  "manual_approval": false,
+  "production_approved": false,
+  "publication_authorized": false
+}
