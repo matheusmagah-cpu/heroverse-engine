@@ -2,7 +2,7 @@
   "version": "daily-observation-guard-v1",
   "recorded_at": "2026-10-15T17:11:37Z",
   "base_commit": "3b22a3494de038fbe5fbaddc749e95ef1b27507a",
-  "status": "INTEGRATED_OFFLINE_TESTED_FRESH_RUN_PENDING",
+  "status": "INTEGRATED_FRESH_CLOUD_REUSE_VERIFIED",
   "owner_direction": "One concentrated daily analysis with legitimate reuse; no frequent repeated normal collection.",
   "existing_schedule": {
     "cron": "17 9 * * *",
@@ -40,11 +40,37 @@
   "activation": {
     "new_workflow": false,
     "new_schedule": false,
-    "workflow_dispatches": 0,
+    "workflow_dispatches": 1,
     "production": false,
     "publication": false,
     "supervisor": false,
     "audiovisual_delivery_resolved": false,
     "full_release_qualified": false
+  },
+  "live_verification": {
+    "run_id": 38775905321,
+    "job_id": 116563359663,
+    "workflow_conclusion": "success",
+    "duration_seconds": 25,
+    "tests_passed": 47,
+    "tests_skipped": 1,
+    "result": "DAILY_OBSERVATION_REUSED",
+    "provider_calls": 0,
+    "original_receipt_byte_identical": true,
+    "quota_ledger_byte_identical": true,
+    "capture_time_preserved": "2026-10-15T14:10:55.900281+00:00",
+    "marker": "COMPLETED",
+    "claim_removed": true,
+    "fabricated_observer_receipt": false,
+    "checkpoint_commit": "d246b580f0c05ea140ea731d34fea546f595cbb3",
+    "run_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38775905321",
+    "billing_preflight": {
+      "included_minutes_used": 141,
+      "included_minutes_limit": 2000,
+      "billable_usd": 0,
+      "actions_budget_usd": 0,
+      "usage_blocked": true
+    },
+    "scope": "Daily normal observation reuse only; not AV delivery, production or full release qualification."
   }
 }
