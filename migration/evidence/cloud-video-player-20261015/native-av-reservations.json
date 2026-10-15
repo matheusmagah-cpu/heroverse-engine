@@ -1,6 +1,6 @@
 {
   "version": "native-av-reservations-v1",
-  "recorded_at": "2026-10-15T15:28:08.832Z",
+  "recorded_at": "2026-10-15T16:07:39.536Z",
   "cycle_policy": "Never reset automatically; reconcile the provider reset and all unresolved effects before opening a new period.",
   "limits": {
     "daily_jobs": 3,
@@ -23,8 +23,8 @@
     },
     {
       "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-6354-6364-v1",
-      "status": "RESERVED_BEFORE_EFFECT",
-      "reserved_at": "2026-10-15T15:42:19.142Z",
+      "status": "JOB_CREATED_DELIVERY_FAILED_RESERVATION_RETAINED",
+      "reserved_at": "2026-10-15T15:35:39.017Z",
       "day_utc": "2026-10-15",
       "reserved_transfer_bytes": 83886080,
       "reserved_runner_minutes": 10,
@@ -43,11 +43,22 @@
           "download_tools_call_requests": 0,
           "receipt": "rapidapi-midpoint-no-effect-38762055346.json"
         }
+      ],
+      "provider_job_id": "v2_stream_065e6ed9572627501de7",
+      "download_tools_call_requests": 1,
+      "actual_included_units": 12,
+      "result_receipt": "rapidapi-native-midpoint-attempt.json",
+      "restart_allowed": false,
+      "delivery_recovery_runs": [
+        38764385974,
+        38766227526
       ]
     }
   ],
   "production": false,
   "publication": false,
   "supervisor": false,
-  "recurring_capacity_qualified": false
+  "recurring_capacity_qualified": false,
+  "qualification_recovery_extra_runner_minutes_reserved": 6,
+  "recurring_budget_does_not_yet_include_general_retry_policy": true
 }

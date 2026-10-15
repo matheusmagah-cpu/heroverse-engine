@@ -1,13 +1,13 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v9",
-  "recorded_at": "2026-10-15T13:13:57.054Z",
-  "repository_head_verified": "cc35d4e2d1c39118d47d5f5189eadc84f8bf18d1",
-  "status": "FIRST_NATIVE_CLIP_DECODED_RECURRING_AND_SEMANTIC_QUALIFICATION_PENDING",
+  "version": "heroverse-recurring-native-av-candidate-v10",
+  "recorded_at": "2026-10-15T16:09:10.027Z",
+  "repository_head_verified": "3a72a6ac80c8b375897795ff4caad9240ff0ec34",
+  "status": "RECURRING_ADOPTION_BLOCKED_SECOND_WINDOW_PROVIDER_TERMINAL_FAILURE",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
   "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
   "direct_vendor_trial_not_selected": true,
-  "observation_kind": "One real 1080p H264/AAC opening delivered and fully decoded. Five frames inspected; decoded audio signal measured, direct listening unavailable. Permanent recurring capacity remains unqualified.",
+  "observation_kind": "Opening native AV decoded and visually inspected; actual audio analyzed by CPU models, but both audio candidates fail controls for standalone approval. Registered midpoint job created once; initial finished result later became provider terminal failure without output.",
   "published_free_limits": {
     "price_usd_per_month": 0,
     "units_per_day": 500,
@@ -133,9 +133,9 @@
     "new_provider_api_key_created": false,
     "existing_key_copied_to_encrypted_actions_secret": true,
     "latest_connection_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-live-result.json",
-    "remaining_daily_units_observed": 486,
-    "remaining_monthly_requests_observed": 499995,
-    "quota_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-first-result.json"
+    "remaining_daily_units_observed": 474,
+    "remaining_monthly_requests_observed": 499988,
+    "quota_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-midpoint-location-refresh-result.json"
   },
   "adoption": {
     "actual_video_verified": true,
@@ -182,9 +182,9 @@
     "approved_checks_reused": true,
     "gemini_calls": 0,
     "vidiq_credits_used": 0,
-    "new_av_jobs": 1,
+    "new_av_jobs": 2,
     "paid_effects": 0,
-    "queue_or_ledger_or_schedule_changed": false,
+    "queue_or_ledger_or_schedule_changed": "Qualification reservation ledger added; production queue and schedules unchanged.",
     "master_or_validator_changed": false,
     "oracle_or_infrastructure_work": false,
     "final_review_v3_unchanged": true
@@ -251,5 +251,24 @@
     }
   },
   "recovery_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-preservation-result.json",
-  "native_audio_asr_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-audio-asr.json"
+  "native_audio_asr_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-audio-asr.json",
+  "native_audio_understanding_receipt": "migration/evidence/cloud-video-player-20261015/native-audio-understanding-result.json",
+  "current_blockers": [
+    "Second registered midpoint download consumed 12 included units but produced no retrievable media; latest provider progress success=0/no output before timeout. Never restart the existing job unchanged.",
+    "Qwen describes actual native opening music but hallucinates a tone on verified digital silence; Gemma fails known-speech control. Neither qualifies as standalone perceptual approver.",
+    "Global bandwidth zero-overage protection, account-wide storage and actual recurring workload incl recovery/runtime/model RAM/download disk remain unqualified."
+  ],
+  "proposed_midpoint": {
+    "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-6354-6364-v1",
+    "provider_job_id": "v2_stream_065e6ed9572627501de7",
+    "window": [
+      6354,
+      6364
+    ],
+    "start_calls": 1,
+    "units_consumed": 12,
+    "status": "PROVIDER_TERMINAL_FAILURE_NO_NATIVE_BYTES",
+    "restart_allowed": false,
+    "result_receipt": "rapidapi-midpoint-location-refresh-result.json"
+  }
 }

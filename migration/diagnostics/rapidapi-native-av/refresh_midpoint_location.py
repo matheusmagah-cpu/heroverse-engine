@@ -20,7 +20,9 @@ try:
     assert prior['download_tools_call_requests']==1 and prior['effect_status']=='JOB_ID_RECEIVED_NO_RESTART_ALLOWED'
     assert key
     value=n.progress(prior['provider_job_id'],key,e,out,0)
-    assert value.get('success')==1 and value.get('progress')==1000
+    e['provider_progress_summary'] = {k:value.get(k) for k in ['success','progress','message','text']}
+    if value.get('success') != 1 or value.get('progress') != 1000:
+        raise n.ProbeError('EXISTING_JOB_NOT_SUCCESSFUL_NO_MEDIA_REQUEST')
     new=value['download_url']
     e['previous_delivery_host']=urlsplit(old).hostname
     e['current_delivery_host']=urlsplit(new).hostname
