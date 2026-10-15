@@ -1,0 +1,34 @@
+{
+  "version": "native-source-access-cloud-stillwaters-v1",
+  "video_id": "BeFOHnncaeQ",
+  "url": "https://www.youtube.com/watch?v=BeFOHnncaeQ",
+  "status": "SOURCE_NATIVE_AV_NOT_AVAILABLE",
+  "first_observation": {
+    "ready_state": 0,
+    "width": 0,
+    "height": 0,
+    "current_time": 0,
+    "preroll_duration": 15,
+    "paused": false,
+    "error": null
+  },
+  "one_reload_recovery_observation": {
+    "ready_state": 0,
+    "width": 0,
+    "height": 0,
+    "current_time": 0,
+    "preroll_duration": 15,
+    "paused": false,
+    "error": null
+  },
+  "source_native_frames_observed": 0,
+  "source_native_audio_observed": false,
+  "claim_of_bot_detection": false,
+  "new_provider_av_calls": 0,
+  "quota_cap_changed": false,
+  "windows_contact": false,
+  "paid_calls": 0,
+  "publication_authorized": false,
+  "native_market_handoff_accepted": false,
+  "source_page_metadata_is_not_source_AV": true
+}
