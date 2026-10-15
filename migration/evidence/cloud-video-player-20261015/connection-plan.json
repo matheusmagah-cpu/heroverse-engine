@@ -1,0 +1,69 @@
+{
+  "version": "heroverse-cloud-video-player-connection-v1",
+  "status": "DOCUMENTED_CANDIDATE_SIGN_IN_REQUIRED_NOT_LIVE_VALIDATED",
+  "owner_scope": "Resolve only native cloud video playback/access; no computer; one stage and source at a time.",
+  "provider": "VideoDB",
+  "selection_basis": "Official documentation explicitly supports YouTube URL ingest, HLS playback, timestamp-based stream generation, API and hosted MCP.",
+  "connection": {
+    "mcp_url": "https://mcp.videodb.io/mcp",
+    "console_url": "https://console.videodb.io",
+    "native_catalog_plugin_found": false,
+    "api_supported": true,
+    "authenticated": false,
+    "credentials_in_repository": false
+  },
+  "public_console_observation": {
+    "state": "SIGN_IN_REQUIRED",
+    "free_offer_displayed": "$20 free credits, no credit card needed",
+    "account_free_balance_verified": false,
+    "paid_billing_enabled": false,
+    "live_video_ingest_attempted": false
+  },
+  "first_source": {
+    "video_id": "j2rk8ycXe3c",
+    "url": "https://www.youtube.com/watch?v=j2rk8ycXe3c",
+    "role": "EXISTING_MATCHED_TARGET_REFERENCE",
+    "expected_duration_seconds": 12708
+  },
+  "first_playback_window": {
+    "start_seconds": 0,
+    "end_seconds": 40,
+    "selection": "Reuse already registered source and opening window; no new market discovery."
+  },
+  "execution_order": [
+    "User completes secure existing-account sign-in or manual signup if needed; no passwords or API keys in chat.",
+    "Read account usage and billing; confirm usable free allowance and no paid billing or automatic overage.",
+    "Inspect collection for existing exact source mapping; never repeat an already completed ingestion.",
+    "Upload exactly one existing source URL only after free cost/limits are verified. Persist source URL/provider video ID and request result before next action.",
+    "Generate only the existing [0,40] playback window; do not index, transcribe or invoke a video AI model.",
+    "Open the returned actual player URL and verify moving source time, nonzero native decoded dimensions, delivered audio stream and source-window provenance.",
+    "Stop and record failure if unavailable. No proxy, cookie export, site-control bypass, repeated ingest, duplicate playback request or paid fallback."
+  ],
+  "acceptance": {
+    "actual_reference_playback_required": true,
+    "documentation_or_hls_url_alone_is_not_pass": true,
+    "metadata_not_native_av": true,
+    "thumbnail_not_native_frame_population": true,
+    "unresolved_audio_input_concern_still_requires_actual_review": true
+  },
+  "source_documents": [
+    "https://docs.videodb.io/pages/getting-started/quickstart",
+    "https://docs.videodb.io/pages/mcp/connect",
+    "https://docs.videodb.io/pages/mcp/tools",
+    "https://docs.videodb.io/pages/act/output-and-delivery/streams-and-exports",
+    "https://docs.videodb.io/api-reference/authentication/get_user"
+  ],
+  "no_changes": {
+    "paid_calls": true,
+    "vidiq_credits": true,
+    "gemini_interval_cap": true,
+    "master_media": true,
+    "prior_approved_checks": true,
+    "production_queue": true,
+    "supervisor": true,
+    "publication": true
+  },
+  "publication_authorized": false,
+  "native_market_handoff_accepted": false,
+  "first_stage_resolved": false
+}
