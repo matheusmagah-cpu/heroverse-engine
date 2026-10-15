@@ -702,3 +702,12 @@ Recibo `migration/evidence/cloud-video-player-20261015/vidiq-native-trim-result.
 Resposta do fornecedor observada19:20:24UTC: atribui RegionRestricted à restrição regional da fonte, informa geração de links por IPs dos EUA e acesso desses links restritos aos EUA; afirma suporte a Range e que nem ele nem RapidAPI rastreiam tráfego direto com googlevideo.com. São declarações do fornecedor, não testes independentes nem confirmação de vínculo ao IP exato. Não autorizam contornar restrições geográficas.
 
 Fornecedor afirma Basic sem excedente, mas apenas diz ser improvável gastar10GB; não demonstra mecanismo de bloqueio de banda e contradiz preço exibido deUS$0,001/MB adicional. Esclarecimento enviado19:21:45UTC e confirmado19:22:05UTC solicita regra documentada de bloqueio/ausência de cobrança e escopo regional/IP para vídeos sem restrição. Resposta pendente; nenhuma rota gratuita ou solução aprovada. Video Download API original continuava sem resposta19:20:39UTC. Recibo `migration/evidence/cloud-video-player-20261015/datafanatic-support-result.json`; nenhum teste/API/mídia/job/pagamento/plano alterado. Pipeline permanece BLOCKED; produção/publicação/supervisor OFF.
+
+
+## 2026-10-15 — Deterministic PCM silence guard (focused offline qualification)
+
+The existing Qwen/Gemma `run_audio_reviewer.py` now checks complete integer PCM before model receipt access or inference. Exact digital zero reports **digital silence** and skips inference; invalid, empty, truncated or unsupported WAV blocks inference with CLI exit 2. Quiet nonzero PCM is not relabeled silence. Prior stdout/stderr files are preserved but explicitly excluded from guarded results. The guard is embedded in the runner to retain single-file staging compatibility.
+
+11 offline unit/integration tests passed, including mono/stereo 8/16/24/32-bit PCM, one-LSB signals, malformed/truncated inputs, historical Qwen failure regression, and standalone copied-runner CLI tests without model files. Compile check passed. See `migration/receipts/20261015-pcm-silence-guard-qualification.json`. Repository-wide tests and master QA were not rerun. No model/media/provider call or download occurred.
+
+This prevents the documented hallucination on exact silence only. Both models remain rejected as standalone perceptual approvers; semantic handoff, perceptual quality, recurring capacity, production and publication remain unapproved. Existing evidence and approved artifacts are unchanged.

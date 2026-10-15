@@ -1,0 +1,48 @@
+{
+  "version": "heroverse-pcm-silence-guard-qualification-v1",
+  "recorded_at": "2026-10-15T20:51:00Z",
+  "base_commit": "24279bc42623094c054dd18695bee359021c6987",
+  "status": "FOCUSED_OFFLINE_REGRESSION_PASSED_NOT_PERCEPTUAL_APPROVAL",
+  "integration": "migration/diagnostics/rapidapi-native-av/run_audio_reviewer.py",
+  "behavior": {
+    "exact_zero": "digital silence; model inference skipped",
+    "invalid_or_unsupported": "fail closed; CLI exit 2",
+    "nonzero": "existing candidate-only inference path",
+    "supported": "RIFF/WAVE integer PCM 8/16/24/32-bit; unsigned 8-bit digital zero is 128",
+    "model_stdout_used_as_evidence_on_guarded_path": false,
+    "prior_logs": "preserved, explicitly ignored; no output-file references"
+  },
+  "tests": {
+    "command": "cd migration/diagnostics/rapidapi-native-av && python -m unittest -v test_pcm_silence_guard",
+    "passed": 11,
+    "compileall": "passed",
+    "repository_wide_suite": "not run",
+    "staging": "Runner alone copied into a temporary directory: isolated import and real CLI checks with cached silence/invalid PCM, no helper/model receipt/weights/binary."
+  },
+  "staging_inspection": {
+    "non_history_scripts_and_workflows_inspected": 84,
+    "versioned_runner_staging_or_invocation_found": false,
+    "resolution": "Guard embedded in runner to preserve existing single-file staging compatibility"
+  },
+  "regression_evidence": "migration/evidence/cloud-video-player-20261015/native-audio-understanding-result.json",
+  "historical_evidence_modified": false,
+  "models_rerun": false,
+  "model_or_media_downloads": 0,
+  "provider_calls": 0,
+  "paid_calls": 0,
+  "master_qa_rerun": false,
+  "limits": [
+    "Exact digital zero detection only; nonzero audio model reliability not established.",
+    "Float/extensible/RF64/compressed audio is unsupported and blocked.",
+    "Qwen and Gemma remain rejected as standalone perceptual approvers.",
+    "No native semantic handoff requirement relaxed."
+  ],
+  "approvals": {
+    "perceptual_quality": false,
+    "native_market_semantic_handoff": false,
+    "recurring_capacity": false,
+    "production": false,
+    "publication": false,
+    "supervisor": false
+  }
+}
