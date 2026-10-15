@@ -27,6 +27,7 @@ PARAMS = {"_endpoint":"/ajax/download.php","_method":"GET",
 MAX_MEDIA_BYTES = 64 * 1024 * 1024
 MAX_CONTROL_BYTES = 262144
 MAX_POLLS = 24
+EXPECTED_RUN_NUMBER = "2"  # Run 1 stopped before any effect: NATIVE_DECODER_UNAVAILABLE.
 
 
 def utc_now():
@@ -247,8 +248,12 @@ def inspect_media(out,evidence):
 
 def run(out,evidence,key,baseline):
     evidence["baseline_quota_headers"]=validate_preflight(baseline,dt.datetime.now(dt.timezone.utc))
-    if os.environ.get("GITHUB_RUN_NUMBER")!="1" or os.environ.get("GITHUB_RUN_ATTEMPT")!="1":
+    if os.environ.get("GITHUB_RUN_NUMBER")!=EXPECTED_RUN_NUMBER or os.environ.get("GITHUB_RUN_ATTEMPT")!="1":
         raise ProbeError("REPEAT_OR_RERUN_OF_FIXED_REQUEST_REFUSED")
+    previous=json.loads((Path(__file__).resolve().parents[2]/"evidence/cloud-video-player-20261015/rapidapi-native-no-effect-38741186634.json").read_text())["result"]
+    if (previous.get("download_tools_call_requests")!=0 or previous.get("effect_status")!="NOT_SENT"
+            or previous.get("failure_code")!="NATIVE_DECODER_UNAVAILABLE"):
+        raise ProbeError("PRIOR_ZERO_EFFECT_NOT_PROVEN")
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
         raise ProbeError("NATIVE_DECODER_UNAVAILABLE")
     client=Client(key)

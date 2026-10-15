@@ -1,0 +1,38 @@
+{
+  "version": "heroverse-native-av-no-effect-v1",
+  "recorded_at": "2026-10-15T13:18:00.463Z",
+  "workflow_run_id": 38741186634,
+  "job_id": 116443001168,
+  "head_sha": "80ab2a7d4eb25ac912a03e9a2375e361b6a92dce",
+  "artifact_id": 11975038088,
+  "artifact_digest_sha256": "b2ee0e2e08ad91f9c5cd9680a148b0e26e38b04565de440bbb37fa1de286379a",
+  "result": {
+    "version": "heroverse-native-av-one-start-v1",
+    "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
+    "started_at": "2026-10-15T13:15:48.126182+00:00",
+    "status": "BLOCKED",
+    "effect_status": "NOT_SENT",
+    "download_tools_call_requests": 0,
+    "progress_polls": 0,
+    "production": false,
+    "publication": false,
+    "supervisor": false,
+    "recurring_capacity_qualified": false,
+    "baseline_quota_headers": {
+      "x-ratelimit-units-limit": "500",
+      "x-ratelimit-units-remaining": "498",
+      "x-ratelimit-units-reset": "72029",
+      "x-ratelimit-requests-limit": "500000",
+      "x-ratelimit-requests-remaining": "499999",
+      "x-ratelimit-requests-reset": "2664029",
+      "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+      "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499999",
+      "x-ratelimit-rapid-free-plans-hard-limit-reset": "2664029"
+    },
+    "failure_code": "NATIVE_DECODER_UNAVAILABLE",
+    "elapsed_seconds": 0,
+    "completed_at": "2026-10-15T13:15:48.126453+00:00"
+  },
+  "concrete_correction": "Install official Ubuntu ffmpeg package before the native step; only workflow run_number 2 with attempt 1 may start, and only while this prior no-effect receipt remains valid.",
+  "same_provider_request_not_previously_sent": true
+}
