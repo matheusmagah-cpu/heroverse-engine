@@ -1,0 +1,152 @@
+{
+  "version": "heroverse-recurring-free-native-av-candidate-v1",
+  "created_at": "2026-10-15T02:04:54.558Z",
+  "status": "CANDIDATE_ONLY_ACCOUNT_ONBOARDING_PENDING_NO_MEDIA_TEST",
+  "owner_requirement": "Cloud-only image and audio access at zero additional cost, with recurring capacity for continuous mining. Promotional-only credit is insufficient.",
+  "repository_base_verified": "7aa4547e61186a416f1f61efa3681cc15c13de31",
+  "provider": "Apify",
+  "actor": {
+    "id": "HZEmjF3Q3VsSGMLfw",
+    "name": "nodexagent/youtube-video-cut-and-download",
+    "is_deprecated_observed": false,
+    "public_api": "https://api.apify.com/v2/acts/nodexagent~youtube-video-cut-and-download",
+    "current_price_started_at": "2026-09-30T11:49:36.262Z",
+    "pricing_model": "PAY_PER_EVENT",
+    "latest_public_api_observed_events": {
+      "apify-default-dataset-item": {
+        "title": "Video clip",
+        "usd": 0.003
+      },
+      "video-processed": {
+        "title": "Video processed",
+        "usd": 0.003
+      },
+      "apify-actor-start": {
+        "title": "Actor Start",
+        "usd": 0.00005,
+        "unit": "one event per GB memory, minimum one"
+      }
+    },
+    "current_store_price_page_verified_in_browser": true,
+    "current_store_platform_costs_copy": "Included",
+    "old_price_conflict": "An older cached pricing page showed USD0.55 per event. Current public API pricing history and live store both show USD0.003 from 2026-09-30; no run charged or real cost inferred.",
+    "default_run_options_observed": {
+      "memory_mbytes": 1024,
+      "timeout_seconds": 300
+    }
+  },
+  "published_free_plan": {
+    "monthly_usage_usd": 5,
+    "renewing_monthly": true,
+    "no_card_required": true,
+    "free_plan_blocks_after_limit": true,
+    "source_urls": [
+      "https://apify.com/pricing",
+      "https://help.apify.com/en/articles/11079614-reaching-platform-limits"
+    ],
+    "scope": "Published current terms, not authenticated account entitlement or perpetual vendor guarantee.",
+    "authenticated_plan_verified": false,
+    "authenticated_balance_verified": false
+  },
+  "pricing_scenario": {
+    "classification": "ARITHMETIC_SCENARIO_NOT_MEASURED_CAPACITY_OR_APPROVED_CADENCE",
+    "origin": "Reuse existing seven-source, twenty-one-window, 418-second sample plan; no full-video coverage claim.",
+    "two_processing_events_per_window_assumed": 2,
+    "start_events_per_run_assumed": 1,
+    "memory_gb_assumed": 1,
+    "expected_event_cost_per_window_usd": 0.00605,
+    "scenario_windows_per_day": 21,
+    "scenario_days": 31,
+    "scenario_windows": 651,
+    "scenario_event_cost_usd": 3.93855,
+    "nominal_remaining_monthly_allowance_usd": 1.06145,
+    "actual_event_multiplicity_not_measured": true,
+    "later_storage_transfer_retention_costs_not_measured": true,
+    "full_project_workload_not_yet_qualified": true,
+    "source_duration_and_timing_compatibility_not_yet_proven": true
+  },
+  "first_test": {
+    "effect_status": "NOT_STARTED",
+    "input": {
+      "url": "https://www.youtube.com/watch?v=j2rk8ycXe3c",
+      "trim": true,
+      "startTime": "00:00:00",
+      "endTime": "00:00:40",
+      "quality": "1080p",
+      "format": "mp4",
+      "audioOnly": false,
+      "convertToVertical": false
+    },
+    "requested_input_coverage": "Only registered [0,40] on j2rk8ycXe3c; not a full source observation.",
+    "intended_call_limits": {
+      "memory_mbytes": 1024,
+      "timeout_seconds": 300,
+      "max_total_charge_usd": 0.02,
+      "max_items": 1
+    },
+    "prerequisites": [
+      "Owner completes the new-account profile/terms in the secure cloud browser; browserAuth cannot create accounts.",
+      "Verify actual Free plan, fresh available balance, no card/paid billing and no competing usage before effect.",
+      "Reopen actual current Actor price and limited permissions; reject any material change or rental/full-permission requirement.",
+      "Persist one exact pending request before starting the effect; retain run ID, failure and all usage afterward."
+    ],
+    "required_proof": [
+      "Actual nonempty media bytes with source ID, registered window and original source-clock mapping.",
+      "Probe actual video/audio streams, duration and decode errors; inspect native frames and decoded audio.",
+      "Review legibility and audio content; never call thumbnail, URL, ready event or provider summary a native AV pass.",
+      "Read actual run charge and fresh balance. Measure storage/transfer effects before claiming recurring sufficiency."
+    ],
+    "stop_conditions": [
+      "No proxy settings, exported cookies, changed network, credential sharing or access-control bypass.",
+      "If public source fails, preserve result and stop; no unchanged retry.",
+      "No paid upgrade, payment method, recharge, trial subscription, additional Gemini or vidIQ call.",
+      "No production, channel publication, supervisor, active queue, schedule or existing quota-ledger modification."
+    ]
+  },
+  "authentication": {
+    "google_method_selected_securely": true,
+    "google_account_selected_securely": "OWNER_MATHEUS",
+    "routine_basic_profile_oauth_completed": true,
+    "provider_state_observed": "Welcome to Apify; initial full-name/username profile; Continue button; newsletter unchecked.",
+    "account_onboarding_complete": false,
+    "account_creation_final_step_performed_by_agent": false,
+    "mcp_created_or_connected": false,
+    "api_token_created_or_read": false,
+    "credentials_recorded": false
+  },
+  "future_integration_boundary": {
+    "official_mcp_url": "https://mcp.apify.com",
+    "authentication": "Official hosted OAuth; token need not be copied into configuration.",
+    "permitted_candidate_tools": "Scope to this Actor plus necessary run/results inspection; no schedule creation or arbitrary paid tools.",
+    "native_clip_acquisition_in_existing_manager": "ONLY_AFTER_ACTUAL_MEDIA_COST_AND_CAPACITY_ACCEPTANCE",
+    "permanent_module_integrated": false,
+    "vendor_free_forever_guarantee": false
+  },
+  "acceptance": {
+    "actual_video_verified": false,
+    "actual_audio_verified": false,
+    "native_quality_verified": false,
+    "recurring_runtime_capacity_verified": false,
+    "adopted_as_permanent_dependency": false,
+    "current_pending_stage_resolved": false,
+    "production_approved": false,
+    "publication_authorized": false,
+    "supervisor_enabled": false,
+    "final_review_v3_unchanged": true
+  },
+  "scope_preserved": {
+    "videodb_imports_retried": 0,
+    "direct_player_retries": 0,
+    "master_checks_repeated": 0,
+    "provider_av_jobs_started": 0,
+    "gemini_calls": 0,
+    "vidiq_credits_used": 0,
+    "oracle_work": false
+  },
+  "documentation_urls": [
+    "https://apify.com/nodexagent/youtube-video-cut-and-download",
+    "https://apify.com/nodexagent/youtube-video-cut-and-download/input-schema",
+    "https://apify.com/nodexagent/youtube-video-cut-and-download/pricing",
+    "https://docs.apify.com/mcp"
+  ]
+}
