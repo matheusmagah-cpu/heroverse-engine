@@ -2,7 +2,7 @@
   "version": "datafanatic-json-candidate-v1",
   "recorded_at": "2026-10-15T17:25:12Z",
   "base_commit": "8cbf55298566c10dd6260d90e02be948267d6b2d",
-  "status": "ONE_JSON_QUERY_PREPARED_ACTIVATION_VERIFICATION_PENDING",
+  "status": "ONE_JSON_QUERY_COMPLETED_REGION_RESTRICTION_UNRESOLVED",
   "provider": "DataFanatic YouTube Media Downloader via RapidAPI",
   "pricing_url": "https://rapidapi.com/DataFanatic/api/youtube-media-downloader/pricing",
   "official_endpoint": "https://youtube-media-downloader.p.rapidapi.com/v2/video/details",
@@ -43,17 +43,19 @@
   "tests": {
     "offline_passed": 19,
     "elapsed_seconds": 0.03,
-    "live_calls": 0
+    "live_calls": 1
   },
   "remaining": [
-    "Verify actual Basic activation before dispatch.",
-    "One JSON query and schema/source/format/quota inspection.",
-    "Actual native delivery and source-clock mapping remain unproven.",
+    "Interpret documented region restriction before any media request; no region/network change, proxy or cookie workaround.",
+    "Actual native delivery/source-clock mapping not tested or approved.",
     "Global bandwidth zero-overage and complete recurring workload remain unqualified."
   ],
   "new_media_jobs": 0,
   "production": false,
   "publication": false,
   "supervisor": false,
-  "permanent_adoption": false
+  "permanent_adoption": false,
+  "result_receipt": "migration/evidence/cloud-video-player-20261015/datafanatic-json-result.json",
+  "subscription_activation_verified": true,
+  "support_contact": "Specific owner permission requested; not yet received or sent as of 2026-10-15T17:44Z."
 }
