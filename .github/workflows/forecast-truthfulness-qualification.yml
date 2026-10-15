@@ -1,0 +1,64 @@
+name: HeroVerse offline forecast truthfulness qualification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-forecast-truthfulness-qualification
+  cancel-in-progress: false
+jobs:
+  qualify-shadow:
+    if: >-
+      github.repository == 'matheusmagah-cpu/heroverse-engine' &&
+      github.event.repository.private == true &&
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'workflow_dispatch' &&
+      github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Require exact private repository and first manual main attempt
+        env:
+          REPOSITORY: ${{ github.repository }}
+          PRIVATE_REPOSITORY: ${{ github.event.repository.private }}
+          REF: ${{ github.ref }}
+          EVENT: ${{ github.event_name }}
+          ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          set -eu
+          test "$REPOSITORY" = matheusmagah-cpu/heroverse-engine
+          test "$PRIVATE_REPOSITORY" = true
+          test "$REF" = refs/heads/main
+          test "$EVENT" = workflow_dispatch
+          test "$ATTEMPT" = 1
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Install import-only dependencies from official PyPI
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv "$RUNNER_TEMP/forecast-qualification-venv"
+          "$RUNNER_TEMP/forecast-qualification-venv/bin/python" -m pip --isolated install \
+            --index-url https://pypi.org/simple --only-binary=:all: --disable-pip-version-check \
+            --requirement migration/runtime_bridge/forecast-qualification-requirements.txt
+      - name: Qualify exact native shadow with networking denied
+        timeout-minutes: 4
+        shell: bash
+        run: |
+          set -euo pipefail
+          HOST_NETNS="$(readlink /proc/self/ns/net)"
+          sudo unshare --net -- \
+            "$RUNNER_TEMP/forecast-qualification-venv/bin/python" \
+            migration/runtime_bridge/qualify_forecast_truthfulness_cloud.py \
+            --archive "$GITHUB_WORKSPACE/HeroVerse_Linux_Source_Ready_20261013_v2.zip" \
+            --host-netns "$HOST_NETNS" \
+            --receipt "$GITHUB_WORKSPACE/forecast-truthfulness-qualification.json"
+      - name: Preserve small qualification receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: forecast-truthfulness-shadow-qualification
+          path: forecast-truthfulness-qualification.json
+          if-no-files-found: error
+          retention-days: 14

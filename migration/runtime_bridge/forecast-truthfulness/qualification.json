@@ -1,0 +1,33 @@
+{
+  "version": "forecast-truthfulness-shadow-v1",
+  "changes": [
+    {
+      "path": "hero_engine/cli.py",
+      "original_sha256": "35de28f1b7f09842dee9fa5a4a628a62615d2333ffe9548f457bfae59e48307e",
+      "shadow_sha256": "0a0b982da5756b3f98fb7e58a08ba6a8e5b89ba261b684a3319abf2ca33fb8d6"
+    },
+    {
+      "path": "hero_engine/forecast.py",
+      "original_sha256": "5f5628fe8e567f7ae98a20d94666ab3db49b87138e648ca232f233cc464f7bf6",
+      "shadow_sha256": "b0a577d465b8b38547f66cfeeb3d3234876227a1429092c69440b1051b419e48"
+    },
+    {
+      "path": "tests/test_engine.py",
+      "original_sha256": "4485d357516d65ee89e4a1dbcb6331f727e403b9d91e37b38cae207633c831db",
+      "shadow_sha256": "e49095312af5609d39c2ec87553a856be1fe14ff6ed8da515eddca135dbbb5e1"
+    }
+  ],
+  "status": "SHADOW_PATCH_NOT_DEPLOYED",
+  "original_preserved": true,
+  "predictive_calibration_available": false,
+  "production_ready": false,
+  "offline_verification": {
+    "tests_passed": 12,
+    "test_log": "test-results.txt",
+    "method": "Exact patched CLI AST functions, actual forecast module, temporary SQLite and generated report files",
+    "full_cli_import": "NOT_RUN_MISSING_CV2",
+    "full_legacy_test_suite": "NOT_RUN"
+  },
+  "repository_base": "fa03f7ae6fd0b9759bf68ad3c1ed29dcd532574f",
+  "archive_sha256": "fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10"
+}

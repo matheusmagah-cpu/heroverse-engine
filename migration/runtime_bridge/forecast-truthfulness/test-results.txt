@@ -1,0 +1,17 @@
+test_changed_source_is_rejected_before_shadow_creation (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_changed_source_is_rejected_before_shadow_creation) ... ok
+test_claimed_calibrated_label_does_not_unlock_output (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_claimed_calibrated_label_does_not_unlock_output) ... ok
+test_conditional_simulation_is_explicit_not_predictive_validation (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_conditional_simulation_is_explicit_not_predictive_validation) ... ok
+test_counts_never_unlock_calibration (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_counts_never_unlock_calibration) ... ok
+test_existing_destination_is_rejected (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_existing_destination_is_rejected) ... ok
+test_missing_metrics_do_not_become_observed_defaults (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_missing_metrics_do_not_become_observed_defaults) ... ok
+test_missing_operational_inputs_keep_specific_blocker (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_missing_operational_inputs_keep_specific_blocker) ... ok
+test_no_sample_remains_prior_only (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_no_sample_remains_prior_only) ... ok
+test_real_command_path_writes_withheld_files_and_database_payload (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_real_command_path_writes_withheld_files_and_database_payload) ... ok
+test_report_removes_count_based_calibration_claim (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_report_removes_count_based_calibration_claim) ... ok
+test_revenue_scenarios_preserve_conditional_arithmetic (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_revenue_scenarios_preserve_conditional_arithmetic) ... ok
+test_sources_unchanged_and_shadow_explicit (test_forecast_truthfulness_overlay.ForecastTruthfulnessTests.test_sources_unchanged_and_shadow_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.130s
+
+OK
