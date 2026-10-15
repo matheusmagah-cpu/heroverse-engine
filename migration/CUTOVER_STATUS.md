@@ -695,3 +695,10 @@ Suporte: uma mensagem privada DataFanatic enviada e confirmada às18:01UTC, pedi
 Teste único trim_media de BeFOHnncaeQ,0–40s,MP4,reencode=false, enviado aproximadamente19:02UTC: job `job_c092d377-8aa2-4812-a81d-d9d94f77de6d` observado terminal às19:19:20UTC, status failed, result:null. Mensagem: “Media processing failed (). Your credits were refunded.” refunded:true e saldo21créditos restaurado; consumo líquido0. Nenhuma URL de mídia ou byte recebido, nenhuma tentativa repetida, nenhuma causa técnica inferida. Titular informado às19:19:36UTC.
 
 Recibo `migration/evidence/cloud-video-player-20261015/vidiq-native-trim-result.json`, sem URLs assinadas ou secrets. Nenhuma chamada adicional de teste, workflow ou fallback automático nesta gravação. Abertura preservada e provas aprovadas permanecem reutilizadas; pipeline/handoffAV e pacote completo continuam BLOCKED, produção/publicação/supervisor OFF.
+
+
+## 2026-10-15 — resposta DataFanatic recebida; gratuidade e escopo dos links não resolvidos
+
+Resposta do fornecedor observada19:20:24UTC: atribui RegionRestricted à restrição regional da fonte, informa geração de links por IPs dos EUA e acesso desses links restritos aos EUA; afirma suporte a Range e que nem ele nem RapidAPI rastreiam tráfego direto com googlevideo.com. São declarações do fornecedor, não testes independentes nem confirmação de vínculo ao IP exato. Não autorizam contornar restrições geográficas.
+
+Fornecedor afirma Basic sem excedente, mas apenas diz ser improvável gastar10GB; não demonstra mecanismo de bloqueio de banda e contradiz preço exibido deUS$0,001/MB adicional. Esclarecimento enviado19:21:45UTC e confirmado19:22:05UTC solicita regra documentada de bloqueio/ausência de cobrança e escopo regional/IP para vídeos sem restrição. Resposta pendente; nenhuma rota gratuita ou solução aprovada. Video Download API original continuava sem resposta19:20:39UTC. Recibo `migration/evidence/cloud-video-player-20261015/datafanatic-support-result.json`; nenhum teste/API/mídia/job/pagamento/plano alterado. Pipeline permanece BLOCKED; produção/publicação/supervisor OFF.
