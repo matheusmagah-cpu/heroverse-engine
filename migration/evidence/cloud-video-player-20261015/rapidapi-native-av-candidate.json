@@ -1,13 +1,13 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v2",
-  "recorded_at": "2026-10-15T08:57:38.839Z",
-  "repository_head_verified": "fdb0bd2c7a709a0eabfe71d7bbc9d7494e61352e",
-  "status": "PUBLISHED_LIMITS_SCREENED_AUTHENTICATION_AND_ACTUAL_MEDIA_TEST_PENDING",
+  "version": "heroverse-recurring-native-av-candidate-v3",
+  "recorded_at": "2026-10-15T09:15:06.996Z",
+  "repository_head_verified": "3c1fd32e63e780eb851a861840ae597f27bac156",
+  "status": "FREE_ACTIVATION_SUBMITTED_SESSION_LOST_BEFORE_ENTITLEMENT_OR_AV_TEST",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
   "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
   "direct_vendor_trial_not_selected": true,
-  "observation_kind": "Authenticated owner plan is NOT verified. Public live RapidAPI UI and provider documentation only; no playback proof.",
+  "observation_kind": "Owner account was visibly authenticated and zero-cost Basic checkout submitted once; current session is signed out. Active Basic allowance, real media and recurring capacity remain unverified.",
   "published_free_limits": {
     "price_usd_per_month": 0,
     "units_per_day": 500,
@@ -18,7 +18,8 @@
     "platform_bandwidth_mb_per_month": 10240,
     "platform_bandwidth_overage_usd_per_mb": 0.001,
     "platform_bandwidth_hard_limit_not_verified": true,
-    "possible_card_requirement_not_resolved": true
+    "possible_card_requirement_not_resolved": false,
+    "no_payment_method_required_observed_at_basic_checkout": true
   },
   "live_provider_download_pricing": {
     "units_per_1080p_job": 4,
@@ -57,7 +58,7 @@
   },
   "proposed_first_test": {
     "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
-    "effect_status": "NOT_STARTED",
+    "effect_status": "NOT_STARTED_BLOCKED_BEFORE_ENTITLEMENT_CHECK",
     "provider_job_id": null,
     "calls_started": 0,
     "endpoint": "GET /ajax/download.php",
@@ -79,10 +80,11 @@
     "conservative_expected_download_units": 12,
     "maximum_planned_units_with_one_optional_info_lookup": 14,
     "source_range_input_does_not_prove_partial_ingestion": true,
-    "retries": 0
+    "retries": 0,
+    "public_form_staged_and_verified": true
   },
   "prerequisites": [
-    "Owner access through secure RapidAPI login; account creation, if required, must follow the advertised owner handoff.",
+    "Recover the owner's legitimate cloud login once, inspect the existing Basic activation, and obtain non-secret generated MCP connection fields. Verify a supported secure credential path; no secret in repo, chat, screenshots, command arguments or public URL.",
     "Verify actual Basic entitlement and fresh remaining units, request and bandwidth balances. No paid plan, card, trial auto-renewal or recharge to be added by the agent.",
     "Resolve platform bandwidth exposure and enforce a stop within the included allowance before adoption.",
     "Save exact request as pending only after entitlement check; start once, immediately persist actual job id, response, charged units and delivery origin.",
@@ -94,19 +96,27 @@
     "inspect_existing_result_before_start_if_prior_checkpoint_uncertain": true,
     "never_repeat_apify_request": true,
     "stop_on_source_safeguard_or_failure_without_concrete_correction": true,
-    "no_cookies_proxy_network_change_or_access_control_bypass": true
+    "no_cookies_proxy_network_change_or_access_control_bypass": true,
+    "inspect_existing_subscription_before_any_resubscribe": true
   },
   "authentication": {
     "login_required_observed": true,
     "account_access_verified": false,
     "account_created": false,
-    "subscription_started": false,
+    "subscription_started": true,
     "api_key_created_or_copied": false,
     "api_key_must_not_be_written_to_repository": true,
     "secure_login_url_observed": "https://rapidapi.com/auth/login?referral=%2Fvalsuttlej53%2Fapi%2Fyoutube-info-download-api%2Fpricing",
     "owner_reported_connected": true,
-    "cloud_verification": "Fresh target page continued to request sign-in; no active Basic entitlement, key or balance verified.",
-    "login_form_verified": true
+    "cloud_verification": "Fresh page showed Matheus/Personal Account, zero-cost Basic checkout was submitted once and redirected to signed-in playground. Download endpoint and Console then required login again. Cause unknown; no AV job started.",
+    "login_form_verified": true,
+    "account_access_verified_earlier_in_this_attempt": true,
+    "subscription_started_means": "One free Basic Subscribe submission, not confirmed durable active entitlement",
+    "subscribe_clicks": 1,
+    "active_subscription_verified": false,
+    "remaining_units_verified": false,
+    "current_session": "LOGIN_REQUIRED",
+    "session_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-free-activation-session-observation.json"
   },
   "adoption": {
     "actual_video_verified": false,
@@ -158,5 +168,20 @@
     "master_or_validator_changed": false,
     "oracle_or_infrastructure_work": false,
     "final_review_v3_unchanged": true
+  },
+  "mcp_connection": {
+    "status": "NOT_CONNECTED_PROVIDER_CONFIGURATION_AND_COMPATIBLE_AUTH_PENDING",
+    "native_tools_available_in_this_chat": false,
+    "existing_personal_rapidapi_plugin_observed": false,
+    "provider_documented_auth_header": "x-rapidapi-key",
+    "chatgpt_custom_mcp_form_auth_options_observed": [
+      "OAuth",
+      "Sem autenticação",
+      "OAuth ou sem autenticação"
+    ],
+    "compatible_oauth_flow_for_this_provider_not_verified": true,
+    "provider_generated_mcp_url_not_yet_obtained": true,
+    "private_key_omitted_from_all_artifacts": true,
+    "detailed_observation": "migration/evidence/cloud-video-player-20261015/rapidapi-mcp-connection-observation.json"
   }
 }

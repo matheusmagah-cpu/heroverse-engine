@@ -1,0 +1,74 @@
+{
+  "version": "heroverse-rapidapi-mcp-connection-observation-v1",
+  "recorded_at": "2026-10-15T09:20:28.383Z",
+  "status": "CONFIGURATION_NOT_CONNECTED_AUTHENTICATION_COMPATIBILITY_UNRESOLVED",
+  "user_request": "Configure MCP so execution does not depend on a transient website session.",
+  "scope": "Only the existing native market audiovisual blocker; no media request, new infrastructure, paid plan or permanent provider adoption.",
+  "provider_primary_documentation": {
+    "url": "https://docs.rapidapi.com/docs/consume-apis-using-ai",
+    "observed": "RapidAPI documents generated MCP tools hosted on mcp.rapidapi.com, using the selected application's x-rapidapi-key and existing API subscription. Generated configuration is shown inside the authenticated playground.",
+    "not_proven": "Exact MCP URL/transport/routing for this API, current active owner subscription, compatible OAuth support and actual media access."
+  },
+  "official_openai_documentation": [
+    {
+      "url": "https://developers.openai.com/api/docs/guides/custom-mcp-server",
+      "observed": "Custom MCP connection supports OAuth, no authentication or mixed OAuth/no authentication."
+    },
+    {
+      "url": "https://developers.openai.com/plugins/build/plugins",
+      "observed": "Portable manifest may declare API-key custom-header auth, but docs distinguish that declaration from portal connection-form support; a manifest file alone does not install/authenticate a ChatGPT connector."
+    }
+  ],
+  "actual_chatgpt_ui_observation": {
+    "url": "https://chatgpt.com/plugins?directoryTab=personal",
+    "existing_created_personal_plugins_visible": [
+      "VideoDB"
+    ],
+    "rapidapi_plugin_visible": false,
+    "add_custom_mcp_form_opened": true,
+    "draft_name": "HeroVerse — teste audiovisual RapidAPI",
+    "auth_options": [
+      "OAuth",
+      "Sem autenticação",
+      "OAuth ou sem autenticação"
+    ],
+    "api_key_or_custom_header_option_present": false,
+    "server_url_blank_because_exact_provider_configuration_not_verified": true,
+    "consent_checkbox_checked": false,
+    "create_as_plugin_clicked": false,
+    "new_plugin_created": false,
+    "screenshot": {
+      "path": "migration/evidence/cloud-video-player-20261015/screenshots/rapidapi-mcp-auth-options.jpg",
+      "sha256": "01317b02c216f425ad05c61cd1a647a5e3783a2b8604d2ab2c31ad749f500aa1",
+      "bytes": 92789
+    }
+  },
+  "tool_inventory_observation": {
+    "rapidapi_native_tool_available": false,
+    "exact_rapidapi_directory_search_returned_no_plugin": true,
+    "directory_search_not_exhaustive": true
+  },
+  "boundaries": {
+    "no_unauthenticated_registration_for_key_protected_api": true,
+    "no_secret_in_mcp_url_or_repo": true,
+    "no_paid_bridge_or_new_infrastructure": true,
+    "no_claim_that_mcp_fixes_provider_media_failures_or_proves_free_capacity": true
+  },
+  "pending_steps": [
+    "Restore the existing owner's login once in the same cloud tab, without creating an account or repeating Basic Subscribe.",
+    "Inspect current Basic entitlement and remaining unit/request/bandwidth balances; obtain only non-secret MCP URL/transport/routing fields from the provider's generated panel.",
+    "Use a supported secure credential path for that exact MCP; do not declare API-key protection absent. Stop and report any compatibility gap rather than inventing an endpoint or exposing the key.",
+    "Verify an authenticated non-media connection check before the existing single bounded 0–40 second test; preserve any started job before resumption.",
+    "Only actual received native video/audio plus measured quality, cost and recurring load can qualify the AV stage."
+  ],
+  "effects": {
+    "media_api_calls": 0,
+    "provider_jobs": 0,
+    "private_keys_created_or_copied": 0,
+    "paid_effects": 0,
+    "gemini_calls": 0,
+    "production": false,
+    "publication": false,
+    "supervisor": false
+  }
+}
