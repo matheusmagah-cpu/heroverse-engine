@@ -1,13 +1,13 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v5",
-  "recorded_at": "2026-10-15T12:25:34.722Z",
-  "repository_head_verified": "8425427d619cb209275a486532fac3b5a18e68ce",
-  "status": "OWNED_BASIC_ACTIVE_CLOUD_MCP_CLIENT_READY_SECRET_NOT_PROVISIONED",
+  "version": "heroverse-recurring-native-av-candidate-v6",
+  "recorded_at": "2026-10-15T12:49:16.535Z",
+  "repository_head_verified": "cea11b766494ae1a015d7589f545e8c7e166fdca",
+  "status": "CLOUD_MCP_TRANSPORT_AND_TOOL_CATALOGUE_VERIFIED_NATIVE_AV_PENDING",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
   "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
   "direct_vendor_trial_not_selected": true,
-  "observation_kind": "Actual owner Basic Active and zero-dollar monthly price verified in billing. Generated MCP endpoint/header contract verified. Cloud client prepared and tested offline; key binding, live connection and actual media still pending.",
+  "observation_kind": "Existing application key saved as encrypted repository secret with explicit owner confirmation. Actual cloud MCP initialize and nine-tool catalogue verified; provider notification compatibility disclosed. No media requested or delivered, no permanent free capacity acceptance.",
   "published_free_limits": {
     "price_usd_per_month": 0,
     "units_per_day": 500,
@@ -85,12 +85,11 @@
     "call_count_scope": "Agent submissions only; remote activity during unresolved authentication is not inferred."
   },
   "prerequisites": [
-    "Recover the owner's legitimate cloud login once, inspect the existing Basic activation, and obtain non-secret generated MCP connection fields. Verify a supported secure credential path; no secret in repo, chat, screenshots, command arguments or public URL.",
-    "Verify actual Basic entitlement and fresh remaining units, request and bandwidth balances. No paid plan, card, trial auto-renewal or recharge to be added by the agent.",
-    "Resolve platform bandwidth exposure and enforce a stop within the included allowance before adoption.",
-    "Save exact request as pending only after entitlement check; start once, immediately persist actual job id, response, charged units and delivery origin.",
-    "Fetch actual MP4 before expiry, hash bytes, probe and decode video/audio, inspect registered native frames and decoded audio with exact source-clock mapping.",
-    "Measure actual units, transfer, time, storage and recurring limits before considering permanent manager integration or workload acceptance."
+    "Connection transport/catalogue stage is complete in the existing cloud executor; do not repeat it unchanged. The diagnostic deliberately refuses tools/call, so native media execution remains a separate bounded stage.",
+    "Before the existing one clip effect, verify fresh included quota/request/bandwidth state and enforce a zero-spend stop. Rounded 0% and N/A bandwidth are not exact balances or an unlimited free entitlement.",
+    "Use the actual download tool schema to implement the one pre-recorded 0–40 second request; preserve its effect record and actual job id before recovery. Do not create a duplicate job.",
+    "Receive and hash actual native MP4, probe/decode both streams, inspect source-clock-mapped frames and decoded audio, and record actual units/transfer/runtime/storage.",
+    "Measure recurring workload capacity and resolve bandwidth overage exposure before permanent adoption. No paid plan, card, recharge, proxy/cookie bypass or arbitrary source substitution."
   ],
   "resume_boundary": {
     "no_job_currently_exists_from_this_candidate": true,
@@ -106,21 +105,24 @@
     "account_access_verified": true,
     "account_created": false,
     "subscription_started": true,
-    "api_key_created_or_copied": false,
+    "api_key_created_or_copied": true,
     "api_key_must_not_be_written_to_repository": true,
     "secure_login_url_observed": "https://rapidapi.com/auth/login?referral=%2Fvalsuttlej53%2Fapi%2Fyoutube-info-download-api%2Fpricing",
     "owner_reported_connected": true,
     "cloud_verification": "Owner remains signed in across playground and Console; Basic Active USD0/month, quota usage display0%, bandwidthN/A.",
     "login_form_verified": true,
     "account_access_verified_earlier_in_this_attempt": true,
-    "subscription_started_means": "One free Basic Subscribe submission, not confirmed durable active entitlement",
+    "subscription_started_means": "One Basic subscription submission earlier; owner Basic Active subsequently verified in cloud-mcp-preparation receipt.",
     "subscribe_clicks": 1,
     "active_subscription_verified": true,
     "remaining_units_verified": false,
     "current_session": "SIGNED_IN_VERIFIED",
     "session_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-free-activation-session-observation.json",
     "latest_recovery_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-auth-recovery-timeout-observation.json",
-    "latest_preparation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-preparation.json"
+    "latest_preparation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-preparation.json",
+    "new_provider_api_key_created": false,
+    "existing_key_copied_to_encrypted_actions_secret": true,
+    "latest_connection_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-live-result.json"
   },
   "adoption": {
     "actual_video_verified": false,
@@ -174,10 +176,10 @@
     "final_review_v3_unchanged": true
   },
   "mcp_connection": {
-    "status": "CLOUD_CLIENT_READY_SECRET_BINDING_AND_LIVE_PROBE_PENDING",
+    "status": "CLOUD_TRANSPORT_AND_TOOL_CATALOGUE_VERIFIED_NATIVE_AV_PENDING",
     "native_tools_available_in_this_chat": false,
-    "existing_personal_rapidapi_plugin_observed": false,
-    "provider_documented_auth_header": "x-rapidapi-key",
+    "existing_personal_rapidapi_plugin_observed": true,
+    "provider_documented_auth_header": "x-rapidapi-key (generic REST documentation); actual generated MCP uses x-api-key",
     "chatgpt_custom_mcp_form_auth_options_observed": [
       "OAuth",
       "Sem autenticação",
@@ -186,7 +188,7 @@
     "compatible_oauth_flow_for_this_provider_not_verified": true,
     "provider_generated_mcp_url_not_yet_obtained": false,
     "private_key_omitted_from_all_artifacts": true,
-    "detailed_observation": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-preparation.json",
+    "detailed_observation": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-live-result.json",
     "endpoint": "https://mcp.rapidapi.com",
     "headers": {
       "routing": "x-api-host",
@@ -194,6 +196,24 @@
       "credential": "x-api-key"
     },
     "personal_package_created_but_not_web_installed": true,
-    "live_connection_verified": false
+    "live_connection_verified": true,
+    "cloud_executor": "GitHub Actions",
+    "secret_provisioned": true,
+    "tool_names": [
+      "progress",
+      "playlistSize",
+      "channel",
+      "playlist",
+      "info",
+      "download",
+      "search",
+      "charts",
+      "subtitles"
+    ],
+    "protocol_version": "2024-11-05",
+    "standard_notification_acknowledgement": false,
+    "notification_compatibility": "HTTP_200_METHOD_NOT_FOUND_COMPATIBILITY",
+    "owner_key_execution_entitlement_verified": false,
+    "tools_call_implemented": false
   }
 }

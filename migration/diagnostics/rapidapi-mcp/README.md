@@ -1,49 +1,45 @@
-# RapidAPI MCP: qualificação da conexão
+# RapidAPI MCP: conexão do executor verificada
 
-Cliente de diagnóstico para o executor GitHub Actions já usado pelo HeroVerse.
-O endpoint `https://mcp.rapidapi.com` e os cabeçalhos `x-api-host` e `x-api-key`
-foram observados na configuração real do fornecedor, com a conta autenticada.
-O cabeçalho de roteamento fica fixo em `youtube-info-download-api.p.rapidapi.com`.
+O executor GitHub Actions do HeroVerse usa o endpoint `https://mcp.rapidapi.com`,
+roteamento fixo `x-api-host: youtube-info-download-api.p.rapidapi.com` e o secret
+cifrado `HERO_RAPIDAPI_KEY` em `x-api-key`. A chave existente foi vinculada após
+confirmação explícita do titular; não é necessário repetir login ou autorização.
 
-O workflow `HeroVerse RapidAPI MCP connection probe` tem apenas execução manual,
-permissão de leitura do repositório e limite de dois minutos. Não executa em push,
-cron ou pull request. Usa Python padrão, sem instalar SDK ou servidor intermediário.
-Lê somente o segredo `HERO_RAPIDAPI_KEY` do repositório e nunca grava seu valor.
+## Resultado vigente
 
-Esta etapa envia apenas `initialize`, `notifications/initialized` e `tools/list`.
-O cliente recusa `tools/call`, redirects e respostas acima de 1 MiB; interrompe
-erros sem repetir chamadas. O recibo sanitizado sai no log com o prefixo
-`HEROVERSE_MCP_RECEIPT=`; não há upload de artefatos.
+Execução [38737240760](https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38737240760),
+commit `cea11b766494ae1a015d7589f545e8c7e166fdca`: **Success**, 13s no total,
+6s no job. Os 14 testes offline e a prova real passaram. Revisão negociada:
+**2024-11-05**. Catálogo real com nove ferramentas: progress, playlistSize,
+channel, playlist, info, download, search, charts e subtitles. Sem próxima página.
 
-## Ponto atual
+O servidor responde à notificação sem id `notifications/initialized` com HTTP200
+e erro RPC **-32601**. O cliente registra esse método indisponível e continua
+somente ao catálogo em modo de compatibilidade declarado. Não afirma confirmação
+padrão da notificação ou conformidade estrita do servidor. Outros erros continuam
+fatais. Histórico das três falhas anteriores preservado; não repetir seus clientes.
 
-- A tela da conta RapidAPI mostra Basic Active, US$0/mês, uso agregado 0%.
-  O percentual não comprova um contador exato, banda ilimitada ou reprodução.
-- O GitHub mostra Free, 124 de 2000 minutos incluídos usados no mês e
-  US$0 faturável de Actions. Isso cobre o teto de dois minutos desta prova;
-  não qualifica toda a mineração futura.
-- `HERO_RAPIDAPI_KEY` foi salvo como secret cifrado após confirmação explícita
-  do titular. O valor não entra em código, logs, screenshots ou recibos.
-- O pacote MCP importado no ChatGPT foi aceito como plugin pessoal, mas a
-  interface oferece abertura no desktop e não expõe suas ferramentas a este chat.
-  Não usar esse cadastro como prova de conexão em nuvem.
+## Limites desta prova
 
-A primeira execução `38735882205` recebeu uma resposta de inicialização e parou
-com `UNSUPPORTED_NEGOTIATED_PROTOCOL`; a versão exata não foi retida nesse recibo.
-A correção aceita explicitamente as revisões de handshake 2025-11-25, 2025-06-18,
-2025-03-26 e 2024-11-05 para os três métodos comuns. Versões desconhecidas e o
-protocolo sem handshake 2026-07-28 continuam recusados. O transporte HTTP existente
-é mantido; não há fallback, repetição automática ou chamada de mídia. Oito testes
-locais passaram após essa mudança; falta a validação real da correção.
+Workflow apenas manual, contents:read, teto de dois minutos, Python padrão,
+sem SDK/servidor novo. Apenas initialize, notifications/initialized e tools/list;
+**tools/call é recusado antes da rede**. Não há retry, redirect, cron ou upload
+de artefatos. Respostas limitadas a 1MiB; recibos omitem chave, headers privados,
+sessões e mensagens arbitrárias do fornecedor.
 
-Não criar nova assinatura, ampliar plano, adicionar pagamento ou ativar publicação.
+A conexão pertence ao executor do repositório. O plugin pessoal do ChatGPT
+continua sem ferramentas disponíveis neste chat. Esta prova verifica transporte
+e catálogo, não a autorização para executar download, vídeo, áudio, qualidade
+ou capacidade gratuita recorrente.
 
-Um handshake bem-sucedido prova transporte e catálogo, não garante que a chave
-execute chamadas da API nem que haja vídeo/áudio. Essa aceitação continua a exigir
-o teste já registrado `20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1`, preservando
-o ID e o resultado antes de qualquer retomada. Não reiniciar testes anteriores.
+Recibo: `migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-live-result.json`.
+Próxima etapa única: teste nativo já registrado
+`20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1`, ainda não enviado. Conferir franquia
+e banda com limite de gasto zero, preservar job antes de retomadas e medir bytes,
+imagem e áudio recebidos. Não repetir conexão aprovada, QA do master ou assinatura.
+Produção, publicação e supervisor permanecem OFF.
 
-Teste local, sem rede:
+Teste offline:
 
 ```sh
 python3 -m unittest discover -s migration/diagnostics/rapidapi-mcp -p test_connection_probe.py -v
