@@ -21,6 +21,41 @@ class FakeOpener:
 
 
 class ProbeTests(unittest.TestCase):
+    def test_empty_success_notification_compatibility_is_explicit(self):
+        for status in (200, 204):
+            with self.subTest(status=status):
+                client = Client("fake-key", FakeOpener([Response(b"", status=status)]))
+                client._protocol = "2024-11-05"
+                client.send("notifications/initialized")
+                self.assertEqual(client.notification_acknowledgement, "HTTP_" + str(status) + "_EMPTY_COMPATIBILITY")
+
+    def test_null_result_notification_compatibility_is_explicit(self):
+        client = Client("fake-key", FakeOpener([Response(b'{"jsonrpc":"2.0","id":null,"result":null}')]))
+        client._protocol = "2024-11-05"
+        client.send("notifications/initialized")
+        self.assertEqual(client.notification_acknowledgement, "HTTP_200_NULL_RESULT_COMPATIBILITY")
+
+    def test_notification_failure_is_not_accepted_or_disclosed(self):
+        for response in [Response(b'{"jsonrpc":"2.0","error":{"message":"private-value"}}'), Response(b'{"message":"private-value"}'), Response(b"", status=201)]:
+            client = Client("fake-key", FakeOpener([response]))
+            client._protocol = "2024-11-05"
+            with self.assertRaises(ProbeError) as raised:
+                client.send("notifications/initialized")
+            self.assertNotIn("private-value", str(raised.exception))
+            self.assertIsNone(client.notification_acknowledgement)
+
+    def test_failure_retains_only_safe_protocol_and_http_trace(self):
+        first = Response(b'{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"tools":{}}}}')
+        opener = FakeOpener([first, Response(b'{"error":{"message":"private-value"}}')])
+        evidence = {}
+        with self.assertRaisesRegex(ProbeError, "NOTIFICATION_RPC_ERROR"):
+            probe("fake-local-test-key", opener, evidence)
+        self.assertEqual(evidence["protocol_version"], "2024-11-05")
+        self.assertEqual(evidence["http_responses"], [{"method":"initialize","status":200},{"method":"notifications/initialized","status":200}])
+        self.assertNotIn("private-value", json.dumps(evidence))
+        self.assertNotIn("fake-local-test-key", json.dumps(evidence))
+        self.assertEqual(len(opener.requests), 2)
+
     def test_each_supported_handshake_revision_reaches_the_catalogue(self):
         for protocol in PROTOCOLS:
             with self.subTest(protocol=protocol):

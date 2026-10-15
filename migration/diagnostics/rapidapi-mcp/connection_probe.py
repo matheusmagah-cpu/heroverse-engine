@@ -92,6 +92,41 @@ class Client:
         self._protocol = None
         self._next_id = 1
         self.methods_sent = []
+        self.http_responses = []
+        self.notification_acknowledgement = None
+
+    def public_trace(self):
+        return {
+            "request_methods": self.methods_sent,
+            "http_responses": self.http_responses,
+            "protocol_version": self._protocol,
+            "notification_acknowledgement": self.notification_acknowledgement,
+        }
+
+    def accept_notification(self, response):
+        if response.status == 202:
+            self.notification_acknowledgement = "HTTP_202_STANDARD"
+            return
+        if response.status not in (200, 204):
+            raise ProbeError("NOTIFICATION_NOT_ACCEPTED")
+        # Some hosted bridges acknowledge notifications with 200/204. Treat
+        # this only as an explicit compatibility mode, never strict conformance.
+        raw = response.read(MAX_RESPONSE_BYTES + 1)
+        if len(raw) > MAX_RESPONSE_BYTES:
+            raise ProbeError("RESPONSE_TOO_LARGE")
+        if not raw.strip():
+            self.notification_acknowledgement = "HTTP_" + str(response.status) + "_EMPTY_COMPATIBILITY"
+            return
+        if response.status == 200:
+            value = json.loads(raw)
+            if isinstance(value, dict) and "error" in value:
+                raise ProbeError("NOTIFICATION_RPC_ERROR")
+            if (isinstance(value, dict) and value.get("jsonrpc") == "2.0"
+                    and value.get("id") is None and "result" in value
+                    and value["result"] in (None, {})):
+                self.notification_acknowledgement = "HTTP_200_NULL_RESULT_COMPATIBILITY"
+                return
+        raise ProbeError("INVALID_NOTIFICATION_ACKNOWLEDGEMENT")
 
     def send(self, method, params=None):
         if method not in ALLOWED_METHODS:
@@ -119,9 +154,9 @@ class Client:
         req = Request(ENDPOINT, data=json.dumps(payload).encode(), headers=headers, method="POST")
         self.methods_sent.append(method)
         with self._opener.open(req, timeout=12) as response:
+            self.http_responses.append({"method": method, "status": response.status})
             if notification:
-                if response.status != 202:
-                    raise ProbeError("NOTIFICATION_NOT_ACCEPTED")
+                self.accept_notification(response)
                 return None
             result = read_reply(response, request_id, time.monotonic() + 15)
             if method == "initialize":
@@ -136,16 +171,20 @@ class Client:
             return result
 
 
-def probe(key, opener=None):
+def probe(key, opener=None, evidence=None):
     client = Client(key, opener)
-    initialized = client.send("initialize", {
-        "protocolVersion": PROTOCOLS[0], "capabilities": {},
-        "clientInfo": {"name": "heroverse-reference-connection-probe", "version": "0.1.1"},
-    })
-    if "tools" not in initialized.get("capabilities", {}):
-        raise ProbeError("TOOLS_CAPABILITY_NOT_ADVERTISED")
-    client.send("notifications/initialized")
-    result = client.send("tools/list", {})
+    try:
+        initialized = client.send("initialize", {
+            "protocolVersion": PROTOCOLS[0], "capabilities": {},
+            "clientInfo": {"name": "heroverse-reference-connection-probe", "version": "0.1.2"},
+        })
+        if "tools" not in initialized.get("capabilities", {}):
+            raise ProbeError("TOOLS_CAPABILITY_NOT_ADVERTISED")
+        client.send("notifications/initialized")
+        result = client.send("tools/list", {})
+    finally:
+        if evidence is not None:
+            evidence.update(client.public_trace())
     tools = result.get("tools")
     if not isinstance(tools, list) or not tools:
         raise ProbeError("NO_TOOL_SCHEMAS_RECEIVED")
@@ -161,6 +200,8 @@ def probe(key, opener=None):
         "endpoint": ENDPOINT, "api_host": API_HOST,
         "protocol_version": client._protocol,
         "request_methods": client.methods_sent,
+        "http_responses": client.http_responses,
+        "notification_acknowledgement": client.notification_acknowledgement,
         "tools_in_first_page": len(names), "tool_names": names,
         "additional_tool_pages_advertised": bool(result.get("nextCursor")),
         "credential_supplied": True,
@@ -178,7 +219,7 @@ def main():
     args = parser.parse_args()
     receipt = {"status": "BLOCKED", "media_jobs_submitted": 0, "tools_call_requests": 0}
     try:
-        receipt = probe(os.environ.get("HERO_RAPIDAPI_KEY", ""))
+        receipt = probe(os.environ.get("HERO_RAPIDAPI_KEY", ""), evidence=receipt)
         code = 0
     except HTTPError as error:
         receipt["failure_code"] = "HTTP_" + str(error.code)
