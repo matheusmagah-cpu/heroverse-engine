@@ -1,7 +1,7 @@
 {
   "version": "heroverse-recurring-free-native-av-candidate-v1",
   "created_at": "2026-10-15T02:04:54.558Z",
-  "status": "CANDIDATE_ONLY_ACCOUNT_ONBOARDING_PENDING_NO_MEDIA_TEST",
+  "status": "ACCOUNT_ONBOARDING_PENDING_MANUAL_HANDOFF_BLOCKED_BY_AUTOMATIC_REVIEW",
   "owner_requirement": "Cloud-only image and audio access at zero additional cost, with recurring capacity for continuous mining. Promotional-only credit is insufficient.",
   "repository_base_verified": "7aa4547e61186a416f1f61efa3681cc15c13de31",
   "provider": "Apify",
@@ -112,7 +112,12 @@
     "account_creation_final_step_performed_by_agent": false,
     "mcp_created_or_connected": false,
     "api_token_created_or_read": false,
-    "credentials_recorded": false
+    "credentials_recorded": false,
+    "manual_handoff_delivered": false,
+    "automatic_review_blocked_manual_handoff": true,
+    "automatic_review_reason": "Reviewer said to stop and await user completion after a manual signup handoff, and treated reopening Apify beforehand as proceeding without the prerequisite. The requestManualHandoff call itself was rejected; no handoff link was delivered.",
+    "user_declined_handoff": false,
+    "no_browser_retry_after_rejection": true
   },
   "future_integration_boundary": {
     "official_mcp_url": "https://mcp.apify.com",
