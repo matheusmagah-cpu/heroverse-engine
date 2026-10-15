@@ -12,13 +12,25 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ENDPOINT = "https://mcp.rapidapi.com"
 API_HOST = "youtube-info-download-api.p.rapidapi.com"
-PROTOCOLS = ("2025-06-18", "2025-03-26")
+# The three allowed methods share their wire shape across these handshake
+# revisions. Do not infer support for a new revision from its date alone.
+PROTOCOLS = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 MAX_RESPONSE_BYTES = 1024 * 1024
 ALLOWED_METHODS = frozenset(("initialize", "notifications/initialized", "tools/list"))
 
 
 class ProbeError(Exception):
     pass
+
+
+class ProtocolNegotiationError(ProbeError):
+    def __init__(self, version):
+        super().__init__("UNSUPPORTED_NEGOTIATED_PROTOCOL")
+        # Only a known public identifier can enter a receipt. Arbitrary server
+        # strings might contain credentials or other private response content.
+        self.server_protocol_version = (
+            version if version == "2026-07-28" else "UNRECOGNIZED_OR_MISSING"
+        )
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -115,7 +127,7 @@ class Client:
             if method == "initialize":
                 protocol = result.get("protocolVersion")
                 if protocol not in PROTOCOLS:
-                    raise ProbeError("UNSUPPORTED_NEGOTIATED_PROTOCOL")
+                    raise ProtocolNegotiationError(protocol)
                 self._protocol = protocol
                 session = response.headers.get("Mcp-Session-Id")
                 if session and (len(session) > 4096 or not all(0x21 <= ord(c) <= 0x7E for c in session)):
@@ -128,7 +140,7 @@ def probe(key, opener=None):
     client = Client(key, opener)
     initialized = client.send("initialize", {
         "protocolVersion": PROTOCOLS[0], "capabilities": {},
-        "clientInfo": {"name": "heroverse-reference-connection-probe", "version": "0.1.0"},
+        "clientInfo": {"name": "heroverse-reference-connection-probe", "version": "0.1.1"},
     })
     if "tools" not in initialized.get("capabilities", {}):
         raise ProbeError("TOOLS_CAPABILITY_NOT_ADVERTISED")
@@ -173,6 +185,10 @@ def main():
         code = 2
     except (URLError, socket.timeout, TimeoutError):
         receipt["failure_code"] = "TRANSPORT_UNAVAILABLE_OR_TIMEOUT"
+        code = 2
+    except ProtocolNegotiationError as error:
+        receipt["failure_code"] = str(error)
+        receipt["server_protocol_version"] = error.server_protocol_version
         code = 2
     except ProbeError as error:
         receipt["failure_code"] = str(error)

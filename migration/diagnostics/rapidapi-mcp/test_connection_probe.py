@@ -1,7 +1,7 @@
 import io
 import json
 import unittest
-from connection_probe import Client, NoRedirect, ProbeError, probe, read_reply
+from connection_probe import Client, NoRedirect, ProbeError, ProtocolNegotiationError, PROTOCOLS, probe, read_reply
 
 
 class Response(io.BytesIO):
@@ -21,6 +21,29 @@ class FakeOpener:
 
 
 class ProbeTests(unittest.TestCase):
+    def test_each_supported_handshake_revision_reaches_the_catalogue(self):
+        for protocol in PROTOCOLS:
+            with self.subTest(protocol=protocol):
+                first = Response(json.dumps({"jsonrpc":"2.0","id":1,"result":{"protocolVersion":protocol,"capabilities":{"tools":{}}}}).encode())
+                listing = Response(b'{"jsonrpc":"2.0","id":2,"result":{"tools":[{"name":"download"}]}}')
+                opener = FakeOpener([first, Response(b"", status=202), listing])
+                result = probe("fake-local-test-key", opener)
+                self.assertEqual(result["protocol_version"], protocol)
+                self.assertEqual(json.loads(opener.requests[0].data)["params"]["protocolVersion"], "2025-11-25")
+                self.assertEqual(opener.requests[2].get_header("Mcp-protocol-version"), protocol)
+                self.assertEqual(len(opener.requests), 3)
+
+    def test_unknown_protocol_stops_before_notification_and_redacts_peer_text(self):
+        for protocol, expected in [("2026-07-28", "2026-07-28"), ("private-secret-value", "UNRECOGNIZED_OR_MISSING"), (None, "UNRECOGNIZED_OR_MISSING")]:
+            with self.subTest(protocol=protocol):
+                first = Response(json.dumps({"jsonrpc":"2.0","id":1,"result":{"protocolVersion":protocol,"capabilities":{"tools":{}}}}).encode())
+                opener = FakeOpener([first])
+                with self.assertRaises(ProtocolNegotiationError) as raised:
+                    probe("fake-local-test-key", opener)
+                self.assertEqual(str(raised.exception), "UNSUPPORTED_NEGOTIATED_PROTOCOL")
+                self.assertEqual(raised.exception.server_protocol_version, expected)
+                self.assertEqual(len(opener.requests), 1)
+
     def test_negotiated_session_headers_and_zero_media_calls(self):
         first = Response(json.dumps({"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-03-26","capabilities":{"tools":{}}}}).encode(), headers={"Content-Type":"application/json","Mcp-Session-Id":"private-session"})
         listing = Response(b'{"jsonrpc":"2.0","id":2,"result":{"tools":[{"name":"download"}]}}')

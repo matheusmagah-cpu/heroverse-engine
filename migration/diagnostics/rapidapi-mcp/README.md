@@ -22,14 +22,20 @@ erros sem repetir chamadas. O recibo sanitizado sai no log com o prefixo
 - O GitHub mostra Free, 124 de 2000 minutos incluídos usados no mês e
   US$0 faturável de Actions. Isso cobre o teto de dois minutos desta prova;
   não qualifica toda a mineração futura.
-- `HERO_RAPIDAPI_KEY` não existe na lista de secrets do repositório observada.
-  O valor da aplicação RapidAPI não foi copiado, salvo ou enviado ao GitHub.
+- `HERO_RAPIDAPI_KEY` foi salvo como secret cifrado após confirmação explícita
+  do titular. O valor não entra em código, logs, screenshots ou recibos.
 - O pacote MCP importado no ChatGPT foi aceito como plugin pessoal, mas a
   interface oferece abertura no desktop e não expõe suas ferramentas a este chat.
   Não usar esse cadastro como prova de conexão em nuvem.
 
-Antes do primeiro dispatch, vincular a chave existente como secret cifrado,
-com confirmação específica do titular para permitir seu uso pelo GitHub Actions.
+A primeira execução `38735882205` recebeu uma resposta de inicialização e parou
+com `UNSUPPORTED_NEGOTIATED_PROTOCOL`; a versão exata não foi retida nesse recibo.
+A correção aceita explicitamente as revisões de handshake 2025-11-25, 2025-06-18,
+2025-03-26 e 2024-11-05 para os três métodos comuns. Versões desconhecidas e o
+protocolo sem handshake 2026-07-28 continuam recusados. O transporte HTTP existente
+é mantido; não há fallback, repetição automática ou chamada de mídia. Oito testes
+locais passaram após essa mudança; falta a validação real da correção.
+
 Não criar nova assinatura, ampliar plano, adicionar pagamento ou ativar publicação.
 
 Um handshake bem-sucedido prova transporte e catálogo, não garante que a chave
