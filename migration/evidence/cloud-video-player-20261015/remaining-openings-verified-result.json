@@ -1,0 +1,496 @@
+{
+  "version": "remaining-openings-verified-result-v1",
+  "recorded_at": "2026-10-15T22:26:37Z",
+  "status": "THREE_NATIVE_OPENINGS_ACQUIRED_HASH_VERIFIED_DECODED_WITH_FIFTEEN_STILL_OBSERVATIONS",
+  "workflow_run_id": 38816286874,
+  "head_sha": "20d01f3ec00ffe116dd733ac8571f8e42da8fe8e",
+  "workflow_all_three_jobs_conclusion": "success",
+  "batch_id": "20261015-three-remaining-openings-v1",
+  "sources": [
+    {
+      "request_id": "20261015-rapidapi-native-VA3qvxoZr4Q-0-40-v1",
+      "source_video_id": "VA3qvxoZr4Q",
+      "source_requested_seconds": [
+        0,
+        40
+      ],
+      "started_at": "2026-10-15T22:20:00.719792+00:00",
+      "completed_at": "2026-10-15T22:21:40.073363+00:00",
+      "status": "NATIVE_OPENING_DECODED_AWAITING_REVIEW",
+      "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+      "provider_job_id": "v2_stream_6509e7696aa19cf735ff",
+      "download_tools_call_requests": 1,
+      "gateway_request_attempts": 7,
+      "progress_polls": 4,
+      "control_response_bytes": 2090,
+      "elapsed_seconds": 99.354,
+      "baseline_quota_headers": {
+        "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+        "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499986",
+        "x-ratelimit-rapid-free-plans-hard-limit-reset": "2630716",
+        "x-ratelimit-units-limit": "500",
+        "x-ratelimit-units-remaining": "462",
+        "x-ratelimit-units-reset": "38716",
+        "x-ratelimit-requests-limit": "500000",
+        "x-ratelimit-requests-remaining": "499986",
+        "x-ratelimit-requests-reset": "2630716"
+      },
+      "last_quota_headers": {
+        "x-ratelimit-requests-limit": "500000",
+        "x-ratelimit-requests-remaining": "499982",
+        "x-ratelimit-requests-reset": "2630693",
+        "x-ratelimit-units-limit": "500",
+        "x-ratelimit-units-remaining": "450",
+        "x-ratelimit-units-reset": "38693",
+        "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+        "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499982",
+        "x-ratelimit-rapid-free-plans-hard-limit-reset": "2630693"
+      },
+      "observed_units_change_since_info": 12,
+      "reservation": {
+        "reserved_transfer_bytes": 83886080,
+        "reserved_runner_minutes": 10,
+        "reserved_units": 14,
+        "reserved_requests": 40,
+        "request_id": "20261015-rapidapi-native-VA3qvxoZr4Q-0-40-v1",
+        "status": "RESERVED_BEFORE_EFFECT",
+        "reserved_at": "2026-10-15T22:20:01.117941+00:00",
+        "day_utc": "2026-10-15"
+      },
+      "media_file": {
+        "bytes": 5630628,
+        "sha256": "7074b84560d71ee755dd228412983c093c4c4a5e54c1f5989d610b915a350bfc"
+      },
+      "native_probe": {
+        "programs": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1",
+            "duration": "40.000000"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "44100",
+            "channels": 2,
+            "r_frame_rate": "0/0",
+            "duration": "40.066667"
+          }
+        ],
+        "format": {
+          "duration": "40.066667",
+          "size": "5630628"
+        }
+      },
+      "decoded_video_frames": 1200,
+      "metadata_binding": {
+        "snapshot_id": "snap-b1336ccf40a19e08a99db50e",
+        "captured_at": "2026-10-15T14:10:55.900281+00:00",
+        "observer_sha256": "49032963a3e1bd0421c487ea6e4aa6d8f5e96b0f2d6153506f9e62d2f25a1a3c",
+        "metadata_eligibility": "PASS_EXACT_DECLARED_SELECT_RULES"
+      },
+      "artifact": {
+        "id": 12011150524,
+        "name": "remaining-opening-media-VA3qvxoZr4Q",
+        "size_in_bytes": 12557983,
+        "digest": "sha256:9fda7089ea5e1aa8ce7687d50dcd9813332815df0e13f889880da793cce6de47",
+        "expires_at": "2026-10-16T22:21:40Z"
+      },
+      "actual_zip_sha256_verified": true,
+      "actual_media_sha256_verified": true,
+      "independent_full_av_decode_passed": true,
+      "receipt_sha256": "29057dfb3fe686e6b8afb03c524a934d2cf5aae66b4a346d8224a68a0caed9eb",
+      "native_frame_stills": [
+        {
+          "local_seconds": 0,
+          "source_seconds": 0,
+          "file": "frame-00.jpg",
+          "sha256": "26973ee1bd7ab6f8af78ba511008b4dc0793c727ebb051c596595fbc8bc3e49a",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Sunrise over river and mist; centered welcome text; white upper-left religious emblem."
+        },
+        {
+          "local_seconds": 10,
+          "source_seconds": 10,
+          "file": "frame-10.jpg",
+          "sha256": "7f52dad153be611c00bd7058e87875c16ad7a66b7fdd7a92695ba256d6196b22",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Same river/mist view with GraceKeys Piano and welcome titles."
+        },
+        {
+          "local_seconds": 20,
+          "source_seconds": 20,
+          "file": "frame-20.jpg",
+          "sha256": "ac796e7867cf2a5a725bc2c1b21b6d2cce4746d89606e9234c58a8e0bd382d29",
+          "actual_sha256_verified": true,
+          "observed_pixels": "River/mist landscape without centered title."
+        },
+        {
+          "local_seconds": 30,
+          "source_seconds": 30,
+          "file": "frame-30.jpg",
+          "sha256": "c4c85becf4883726c746078d6a8227fcda69189e489d948c0049d33ac4bc6376",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Orange sun above distant hills."
+        },
+        {
+          "local_seconds": 39,
+          "source_seconds": 39,
+          "file": "frame-39.jpg",
+          "sha256": "568f53d039d258e8bed5239628b5013cecda2c4129fd2efc3539f481e4c454f3",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Psalm 42:1 English verse over mountain and mist."
+        }
+      ],
+      "audio_files": [
+        {
+          "file": "audio.mka",
+          "bytes": 659832,
+          "sha256": "80a0ee11b70b4bb495dd3f048a1593051f7ad863c9fb84a537acb6d4645ad0bf"
+        },
+        {
+          "file": "audio-review.wav",
+          "bytes": 7061718,
+          "sha256": "7c53845da1e5a406e1d4b1eed2b51a8c1d2bce401d4d2972a66102059d5791df"
+        }
+      ]
+    },
+    {
+      "request_id": "20261015-rapidapi-native-EkT0XMVln3s-0-40-v1",
+      "source_video_id": "EkT0XMVln3s",
+      "source_requested_seconds": [
+        0,
+        40
+      ],
+      "started_at": "2026-10-15T22:22:06.451915+00:00",
+      "completed_at": "2026-10-15T22:23:16.176487+00:00",
+      "status": "NATIVE_OPENING_DECODED_AWAITING_REVIEW",
+      "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+      "provider_job_id": "v2_stream_c42744d98328e400da9c",
+      "download_tools_call_requests": 1,
+      "gateway_request_attempts": 7,
+      "progress_polls": 4,
+      "control_response_bytes": 2026,
+      "elapsed_seconds": 69.725,
+      "baseline_quota_headers": {
+        "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+        "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499981",
+        "x-ratelimit-rapid-free-plans-hard-limit-reset": "2630591",
+        "x-ratelimit-units-limit": "500",
+        "x-ratelimit-units-remaining": "450",
+        "x-ratelimit-units-reset": "38591",
+        "x-ratelimit-requests-limit": "500000",
+        "x-ratelimit-requests-remaining": "499981",
+        "x-ratelimit-requests-reset": "2630591"
+      },
+      "last_quota_headers": {
+        "x-ratelimit-units-limit": "500",
+        "x-ratelimit-units-remaining": "438",
+        "x-ratelimit-units-reset": "38569",
+        "x-ratelimit-requests-limit": "500000",
+        "x-ratelimit-requests-remaining": "499977",
+        "x-ratelimit-requests-reset": "2630569",
+        "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+        "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499977",
+        "x-ratelimit-rapid-free-plans-hard-limit-reset": "2630569"
+      },
+      "observed_units_change_since_info": 12,
+      "reservation": {
+        "reserved_transfer_bytes": 83886080,
+        "reserved_runner_minutes": 10,
+        "reserved_units": 14,
+        "reserved_requests": 40,
+        "request_id": "20261015-rapidapi-native-EkT0XMVln3s-0-40-v1",
+        "status": "RESERVED_BEFORE_EFFECT",
+        "reserved_at": "2026-10-15T22:22:06.675573+00:00",
+        "day_utc": "2026-10-15"
+      },
+      "media_file": {
+        "bytes": 34805140,
+        "sha256": "b058ab20f8b668e4616ba6ded2bb7da745ee5c8a988e24d7038cdc9a56a537da"
+      },
+      "native_probe": {
+        "programs": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1",
+            "duration": "40.000000"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "44100",
+            "channels": 2,
+            "r_frame_rate": "0/0",
+            "duration": "40.066667"
+          },
+          {
+            "index": 2,
+            "codec_name": "bin_data",
+            "codec_type": "data",
+            "r_frame_rate": "0/0",
+            "duration": "40.067000"
+          }
+        ],
+        "format": {
+          "duration": "40.066667",
+          "size": "34805140"
+        }
+      },
+      "decoded_video_frames": 1200,
+      "metadata_binding": {
+        "snapshot_id": "snap-bd76273547064bea793c72cf",
+        "captured_at": "2026-10-15T14:10:55.900281+00:00",
+        "observer_sha256": "49032963a3e1bd0421c487ea6e4aa6d8f5e96b0f2d6153506f9e62d2f25a1a3c",
+        "metadata_eligibility": "PASS_EXACT_DECLARED_SELECT_RULES"
+      },
+      "artifact": {
+        "id": 12011515166,
+        "name": "remaining-opening-media-EkT0XMVln3s",
+        "size_in_bytes": 43774123,
+        "digest": "sha256:06f67ed0681364a4a680c9ddd3bd82fc9ba72dab0350f0490f6bc1525b500e78",
+        "expires_at": "2026-10-16T22:23:16Z"
+      },
+      "actual_zip_sha256_verified": true,
+      "actual_media_sha256_verified": true,
+      "independent_full_av_decode_passed": true,
+      "receipt_sha256": "8a80cdbdfc2727e19223139bcaf4a7e97c4e5b7303d3ad320b2fcd7cf7a2070c",
+      "native_frame_stills": [
+        {
+          "local_seconds": 0,
+          "source_seconds": 0,
+          "file": "frame-00.jpg",
+          "sha256": "77258d6cd96256ded5ab25618a219aaa871a1d7907f6c9721ac67956ddb3cf93",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Black frame."
+        },
+        {
+          "local_seconds": 10,
+          "source_seconds": 10,
+          "file": "frame-10.jpg",
+          "sha256": "1f9ef0ea753c36a77aee1314dd3368dd32b8e4a10247ea39182f69fabf01816d",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Autumn canal and bridge with Psalm 27:14 text."
+        },
+        {
+          "local_seconds": 20,
+          "source_seconds": 20,
+          "file": "frame-20.jpg",
+          "sha256": "c5978aa82613c5a4b6651740f1b93c41ec204c37b6d3eaef6b86823d14e58fb7",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Sunlit tree-lined park path with Psalm 27:14."
+        },
+        {
+          "local_seconds": 30,
+          "source_seconds": 30,
+          "file": "frame-30.jpg",
+          "sha256": "cf29a532efbacaace034fc638121335a69d21d3efb66d3dad3d4e854261f0301",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Autumn forest path with Psalm 27:14."
+        },
+        {
+          "local_seconds": 39,
+          "source_seconds": 39,
+          "file": "frame-39.jpg",
+          "sha256": "7a7858a25746b1019e497a181f0858e4314286490cf8068ee3eb43251a10ae6b",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Similar forest path and verse, changed viewpoint."
+        }
+      ],
+      "audio_files": [
+        {
+          "file": "audio.mka",
+          "bytes": 668542,
+          "sha256": "86afe2d7527b3e84e877244e08b8aa903db8cee7cff49059457f2504a76158a2"
+        },
+        {
+          "file": "audio-review.wav",
+          "bytes": 7061690,
+          "sha256": "98a17b9989d3c934fa62d068c4520978b515831689b9a0b2afcd44b94a95c2d4"
+        }
+      ]
+    },
+    {
+      "request_id": "20261015-rapidapi-native-ksMAEHpzkZo-0-40-v1",
+      "source_video_id": "ksMAEHpzkZo",
+      "source_requested_seconds": [
+        0,
+        40
+      ],
+      "started_at": "2026-10-15T22:23:46.807233+00:00",
+      "completed_at": "2026-10-15T22:25:25.548746+00:00",
+      "status": "NATIVE_OPENING_DECODED_AWAITING_REVIEW",
+      "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+      "provider_job_id": "v2_stream_5e8a3f27373eff7d20c8",
+      "download_tools_call_requests": 1,
+      "gateway_request_attempts": 7,
+      "progress_polls": 4,
+      "control_response_bytes": 2046,
+      "elapsed_seconds": 98.741,
+      "baseline_quota_headers": {
+        "x-ratelimit-units-limit": "500",
+        "x-ratelimit-units-remaining": "438",
+        "x-ratelimit-units-reset": "38490",
+        "x-ratelimit-requests-limit": "500000",
+        "x-ratelimit-requests-remaining": "499976",
+        "x-ratelimit-requests-reset": "2630490",
+        "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+        "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499976",
+        "x-ratelimit-rapid-free-plans-hard-limit-reset": "2630490"
+      },
+      "last_quota_headers": {
+        "x-ratelimit-units-limit": "500",
+        "x-ratelimit-units-remaining": "426",
+        "x-ratelimit-units-reset": "38467",
+        "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+        "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499972",
+        "x-ratelimit-rapid-free-plans-hard-limit-reset": "2630467",
+        "x-ratelimit-requests-limit": "500000",
+        "x-ratelimit-requests-remaining": "499972",
+        "x-ratelimit-requests-reset": "2630467"
+      },
+      "observed_units_change_since_info": 12,
+      "reservation": {
+        "reserved_transfer_bytes": 83886080,
+        "reserved_runner_minutes": 10,
+        "reserved_units": 14,
+        "reserved_requests": 40,
+        "request_id": "20261015-rapidapi-native-ksMAEHpzkZo-0-40-v1",
+        "status": "RESERVED_BEFORE_EFFECT",
+        "reserved_at": "2026-10-15T22:23:47.204422+00:00",
+        "day_utc": "2026-10-15"
+      },
+      "media_file": {
+        "bytes": 25634098,
+        "sha256": "be321231f87b97e7883c8c6eb93c3fba136568ccbf54a4f64b46d09fe5e9bab4"
+      },
+      "native_probe": {
+        "programs": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1",
+            "duration": "40.000000"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "44100",
+            "channels": 2,
+            "r_frame_rate": "0/0",
+            "duration": "40.066667"
+          }
+        ],
+        "format": {
+          "duration": "40.066667",
+          "size": "25634098"
+        }
+      },
+      "decoded_video_frames": 1200,
+      "metadata_binding": {
+        "snapshot_id": "snap-9cd897561aa2195f39de1e1a",
+        "captured_at": "2026-10-15T14:10:55.900281+00:00",
+        "observer_sha256": "49032963a3e1bd0421c487ea6e4aa6d8f5e96b0f2d6153506f9e62d2f25a1a3c",
+        "metadata_eligibility": "PASS_EXACT_DECLARED_SELECT_RULES"
+      },
+      "artifact": {
+        "id": 12010773421,
+        "name": "remaining-opening-media-ksMAEHpzkZo",
+        "size_in_bytes": 33551290,
+        "digest": "sha256:432fe04c16721c6c715d72fe16e606f06bc7367bb313b378a1742e03e2c91dd4",
+        "expires_at": "2026-10-16T22:25:25Z"
+      },
+      "actual_zip_sha256_verified": true,
+      "actual_media_sha256_verified": true,
+      "independent_full_av_decode_passed": true,
+      "receipt_sha256": "9aed7efccafdea417ffe6c4ea78f51a8cd7ee170875b6caf82f4c0dbef737222",
+      "native_frame_stills": [
+        {
+          "local_seconds": 0,
+          "source_seconds": 0,
+          "file": "frame-00.jpg",
+          "sha256": "926d2947db28adc2fa781a2497d263c35a3f1d87b26bb9d84d6d70d7b5a8f3e0",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Black frame."
+        },
+        {
+          "local_seconds": 10,
+          "source_seconds": 10,
+          "file": "frame-10.jpg",
+          "sha256": "439bdd29abd86a5d96f4d75fff2d8891ed91dbaf7e8408f7e7a67ddedfbddfa5",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Christmas ornaments, toy train and snow globe; Isaiah 9:6 text emerging."
+        },
+        {
+          "local_seconds": 20,
+          "source_seconds": 20,
+          "file": "frame-20.jpg",
+          "sha256": "dd7d25c6dde8dbeefd00939e5b921ab0a95635df2eb7da067731062c8bc1757b",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Snow globe and holiday ornaments beneath Isaiah 9:6."
+        },
+        {
+          "local_seconds": 30,
+          "source_seconds": 30,
+          "file": "frame-30.jpg",
+          "sha256": "a61936efb2a133726c10988103f5cee7340e7d8fd5d5dfe61a426cf09cbbc2a4",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Snowy Santa/reindeer display beneath Isaiah 9:6."
+        },
+        {
+          "local_seconds": 39,
+          "source_seconds": 39,
+          "file": "frame-39.jpg",
+          "sha256": "2c12e70a4b6fc6607c77695ad98e9a083cee2e0718ed13230d0f5984cc4e80f0",
+          "actual_sha256_verified": true,
+          "observed_pixels": "Miniature carousel display beneath Isaiah 9:6."
+        }
+      ],
+      "audio_files": [
+        {
+          "file": "audio.mka",
+          "bytes": 669171,
+          "sha256": "bd8e2da9b804249cd633bd2bdd76494bfb431ed8bceb608f9c55e16b37ffbf7a"
+        },
+        {
+          "file": "audio-review.wav",
+          "bytes": 7061700,
+          "sha256": "960ff0af6c0987ad578bfb7bbe155d96a7da357e786624c5087d508a4fc7af54"
+        }
+      ]
+    }
+  ],
+  "actual_included_units": 36,
+  "reserved_included_units_retained": 42,
+  "observed_units_remaining_before": 462,
+  "observed_units_remaining_after": 426,
+  "quota_note": "Request counters are observations only. Earlier receipts were nonmonotonic; no refund/reset or exact billed request total is inferred. Final request counter499972.",
+  "native_av_openings_available_across_project": 5,
+  "scope": "Only each claimed source opening0-40s. Fifteen actual still frames inspected at0,10,20,30,39 seconds across these three clips. No continuous perceptual video, direct hearing, semantic audio, synchronization, full-source or complete-project approval.",
+  "perceptual_audio_review_completed": false,
+  "continuous_perceptual_video_review_completed": false,
+  "synchronization_approved": false,
+  "production": false,
+  "publication": false,
+  "supervisor": false,
+  "recurring_capacity_qualified": false,
+  "private_durable_preservation": "PENDING_SEPARATE_VERIFIED_PRESERVATION_RECORD",
+  "billing_note": "Admission used22:15:23Z Basic$0 and rounded0.00%bandwidth display plus GitHub included headroom and$0 usage-blocked Actions budget. Display is not exact bandwidth/storage bytes or an independently proven RapidAPI overage hard stop."
+}
