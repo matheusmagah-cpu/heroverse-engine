@@ -332,6 +332,19 @@ def main():
         if not CLAIM.exists() or json.loads(CLAIM.read_text()).get('run_id')!=os.environ.get('GITHUB_RUN_ID'):
             raise PermissionError('DURABLE_OBSERVER_CLAIM_REQUIRED')
         restore_ledger(SQL,destination)
+        # Export the unchanged ledger even on reuse or a blocked daily attempt.
+        shutil.copy2(destination,export/'quota-ledger.sqlite3')
+        from daily_evidence import normal_collection,reserve_or_reuse
+        if normal_collection(os.environ):
+            from durable_evidence_checkpoint import commit
+            reused=reserve_or_reuse(os.environ['GITHUB_RUN_ID'],commit)
+            if reused is not None:
+                shutil.copy2(reused,export/'reused-evidence.json')
+                write(export/'reuse-source.json',{'source_path':str(reused)})
+                print(json.dumps({'status':'DAILY_OBSERVATION_REUSED',
+                    'source_path':str(reused),'provider_calls':0,
+                    'publication_performed':False,'production_ready':False}))
+                return
         sys.path.insert(0,str(root))
         try:summary=collect(root,export,health_only=os.environ.get('HERO_AUTH_HEALTH_ONLY')=='true',
             candidate_only=os.environ.get('HERO_CANDIDATE_PROBE_ONLY')=='true',
@@ -349,3 +362,4 @@ if __name__=='__main__':
     except Exception as error:
         print(json.dumps({'status':'BLOCKED','error':safe_error(error),'secret_values_logged':False,'publication_performed':False}))
         raise SystemExit(2)
+

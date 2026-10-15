@@ -648,3 +648,12 @@ Titular autorizou o contato e pediu continuidade paralela. Mensagem privada envi
 Auditoria estática do reader semantic-audio-v3: validade24h se aplica ao snapshot de mercado real; não estabelece novo download AV diário de referências idênticas. Evidências hash-bound só podem ser reutilizadas enquanto identidade, coorte atual e suporte editorial forem válidos. Os planos21janelas/418s são amostras datadas, não obrigação diária;3janelas/dia também não é cadência aprovada. Não mudar datas para simular coleta/revisão. Reader permanece shadow, não produção; dependências internas do ZIP não reinspecionadas nesta auditoria. Carga efetiva de novas aquisições ainda indeterminada.
 
 Pesquisa paralela descartou ofertas pagas/iniciais/inconsistentes e não demonstrou outra rota recorrente gratuita. Recibo lista fontes e limites, sem novos cadastros ou testes de mídia. Entrega ainda BLOCKED; abertura preservada reutilizável, nenhuma aprovação de áudio/capacidade/pacote. Produção/publicação/supervisor OFF.
+
+
+## 2026-10-15 — uma rodada diária com trava durável de duplicação
+
+Titular definiu análise pontual diária e reuso, sem chamadas constantes. O cron existente09:17UTC/06:17Brasília já é único e permanece igual; início real depende do GitHub. Run agendado38749052276 iniciou14:10UTC e coletou dados às14:10:55.900281UTC,23unidades Data API, sem mídia/publicação; etapaAV foi NO_AV_RECOVERY_DUE/provider_called:false.
+
+Corrigida lacuna por runID: o coletor normal passa por daily_evidence antes de collect/OAuth. Reserva diária é persistida antes dos efeitos; conclusão é registrada no checkpoint existente junto do recibo+ledger. Mesmo dia reusa evidência byte-identical; recibo de hoje é adotável sem nova coleta. Falha/desconhecido impede repetição. observer-state conserva origem, hash e captured_at, sem fingir atualização; health/candidate explícitos continuam com suas regras próprias.
+
+25 testes offline:24PASS/1SKIP (SQLite histórico ausente neste checkout focal), compilaçãoPASS. Recibo daily-observation-guard-qualification-20261015.json. Isso integra a proteção ao caminho diário existente, mas ainda requer comprovar a nova guarda em runner real. Nenhum dispatch nesta alteração. Não é ativação da produção nem solução da entregaAV: essa pendência e pacote completo continuam BLOCKED, publicação/supervisor OFF.

@@ -70,10 +70,22 @@ def main(mode):
                 frozen.write_text(body)
                 (Path('migration/evidence')/'observer-auth-health.json').write_text(body)
                 break
-        STATE.write_text(json.dumps({'last_checkpointed_run':run,'collection_complete':Path('cloud-evidence/summary.json').exists(),'publication_performed':False}))
+        reused=Path('cloud-evidence/reused-evidence.json')
+        if reused.exists():
+            if observed.exists():raise PermissionError('FRESH_AND_REUSED_EVIDENCE_CONFLICT')
+            from daily_evidence import reuse_state
+            source=Path(json.loads(Path('cloud-evidence/reuse-source.json').read_text())['source_path'])
+            state=reuse_state(run,source,reused)
+        else:
+            state={'last_checkpointed_run':run,'collection_complete':Path('cloud-evidence/summary.json').exists(),'publication_performed':False}
+        STATE.write_text(json.dumps(state))
+        if observed.exists():
+            from daily_evidence import complete
+            complete(run,immutable)
         CLAIM.unlink();commit('Checkpoint original observer ledger after bounded run')
     else:raise ValueError('UNKNOWN_CHECKPOINT_MODE')
 if __name__=='__main__':
     try:main(sys.argv[1])
     except Exception as e:
         print(json.dumps({'status':'BLOCKED','exception_type':type(e).__name__,'remote_details_redacted':True}));sys.exit(2)
+
