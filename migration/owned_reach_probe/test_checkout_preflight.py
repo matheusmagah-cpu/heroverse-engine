@@ -17,7 +17,7 @@ from oauth_health import observe_refresh
 
 ROOT=Path.cwd()
 FIXTURE={'type':'authorized_user','client_id':CLIENT_ID,'client_secret':'synthetic-secret','refresh_token':'synthetic-refresh','scopes':sorted(SCOPES),'token_uri':w.TOKEN_URL}
-ENV={'GITHUB_REPOSITORY':w.REPOSITORY,'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'3','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'999000','GITHUB_SHA':'synthetic-candidate','HERO_YT_AUTHORIZED_USER_JSON':json.dumps(FIXTURE)}
+ENV={'GITHUB_REPOSITORY':w.REPOSITORY,'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'4','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'999000','GITHUB_SHA':'synthetic-candidate','HERO_YT_AUTHORIZED_USER_JSON':json.dumps(FIXTURE)}
 
 class RawResponse(io.BytesIO):
     status=200
@@ -51,11 +51,11 @@ class Tests(unittest.TestCase):
         w.validate_previous_failure(ROOT)
         for name,expected in w.HELPER_HASHES.items():self.assertEqual(core.digest((ROOT/'migration'/name).read_bytes()),expected)
         transport=FakeTransport(plan)
-        for rid in core.REPORT_IDS:core.verify_resource(transport.json(w.META_BASE+rid,'report_metadata'),plan['reports'][rid])
+        for rid in core.FETCH_REPORT_IDS:core.verify_resource(transport.json(w.META_BASE+rid,'report_metadata'),plan['reports'][rid])
     def test_full_main_checkout_fixture_no_network(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)
-            needed=[Path('migration/evidence/observer-38749052276.json'),w.PREVIOUS_FAILURE_PATH,w.SECOND_FAILURE_PATH]+[Path('migration')/n for n in w.HELPER_HASHES]
+            needed=[Path('migration/evidence/observer-38749052276.json'),w.PREVIOUS_FAILURE_PATH,w.SECOND_FAILURE_PATH,w.THIRD_FAILURE_PATH,w.THIRD_COLLECTION_PATH]+[Path('migration')/n for n in w.HELPER_HASHES]
             for path in needed:
                 dest=root/path;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes((ROOT/path).read_bytes())
             plan=core.plan_from_snapshot((root/'migration/evidence/observer-38749052276.json').read_bytes());t=FakeTransport(plan)
@@ -67,10 +67,10 @@ class Tests(unittest.TestCase):
             finally:os.chdir(old)
             execution=json.loads((root/'owned-reach-probe-output/execution.json').read_text())
             receipt=json.loads((root/'owned-reach-probe-output/receipt.json').read_text())
-            self.assertEqual(execution['network_operations_attempted'],5)
-            self.assertEqual(receipt['csv_rows_ingested'],2)
-            self.assertEqual(execution['preflight']['recovery']['previous_run_ids'],['38822029275','38822885890'])
-            self.assertFalse(execution['manual_approval']);self.assertEqual(len(list((root/'owned-reach-probe-output').glob('*.csv'))),2)
+            self.assertEqual(execution['network_operations_attempted'],3)
+            self.assertEqual(receipt['csv_rows_ingested'],1)
+            self.assertEqual(execution['preflight']['recovery']['previous_run_ids'],['38822029275','38822885890','38823982698'])
+            self.assertFalse(execution['manual_approval']);self.assertEqual(len(list((root/'owned-reach-probe-output').glob('*.csv'))),1)
     def test_second_receipt_tamper_blocks(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);a=root/w.PREVIOUS_FAILURE_PATH;a.parent.mkdir(parents=True);a.write_bytes((ROOT/w.PREVIOUS_FAILURE_PATH).read_bytes())

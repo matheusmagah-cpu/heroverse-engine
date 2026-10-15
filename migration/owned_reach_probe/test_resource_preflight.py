@@ -8,12 +8,13 @@ import run_existing_reach_probe as w
 
 HERE=Path(__file__).parent
 PRIOR=(HERE/'owned-reach-preflight-failure-38822029275.json' if (HERE/'owned-reach-preflight-failure-38822029275.json').exists() else w.PREVIOUS_FAILURE_PATH)
-ENV={'GITHUB_REPOSITORY':w.REPOSITORY,'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'3','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'123'}
+ENV={'GITHUB_REPOSITORY':w.REPOSITORY,'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'4','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'123'}
 
 def put_prior(root, raw=None):
     path=root/w.PREVIOUS_FAILURE_PATH;path.parent.mkdir(parents=True);path.write_bytes(raw or PRIOR.read_bytes())
     second=root/w.SECOND_FAILURE_PATH
     second.write_bytes(w.SECOND_FAILURE_PATH.read_bytes())
+    for extra in [w.THIRD_FAILURE_PATH,w.THIRD_COLLECTION_PATH]:(root/extra).write_bytes(extra.read_bytes())
 
 class Tests(unittest.TestCase):
     def test_resource_thresholds_preserved_and_failures_measured(self):
@@ -38,12 +39,12 @@ class Tests(unittest.TestCase):
     def test_recovery_exact_prior_and_no_mutation(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);put_prior(root);path=root/w.PREVIOUS_FAILURE_PATH;before=path.read_bytes()
-            self.assertEqual(w.validate_previous_failure(root)['previous_network_operations'],0)
+            self.assertEqual(w.validate_previous_failure(root)['previous_network_operations_by_run'],[0,0,3])
             self.assertEqual(path.read_bytes(),before)
             path.write_bytes(before+b' ')
             with self.assertRaisesRegex(w.core.ProbeBlocked,'HASH_MISMATCH'):w.validate_previous_failure(root)
     def test_first_third_and_second_attempt_rejected(self):
-        for number,attempt in [('1','1'),('2','1'),('4','1'),('3','2')]:
+        for number,attempt in [('1','1'),('2','1'),('3','1'),('5','1'),('4','2')]:
             env=dict(ENV,GITHUB_RUN_NUMBER=number,GITHUB_RUN_ATTEMPT=attempt)
             with self.assertRaisesRegex(w.core.ProbeBlocked,'ONE_EXECUTION'):w.preflight(Path('.'),env)
     def test_missing_prior_blocks_before_resource_read(self):

@@ -18,14 +18,15 @@ from zoneinfo import ZoneInfo
 CHANNEL = 'UCuMF6pJQkyMzaVoAxFL86yA'
 JOB = 'ce0b4a6d-b8db-4550-a856-5ff8e8a83ba2'
 REPORT_IDS = ('17695215035', '20613781334')
+FETCH_REPORT_IDS = ('20613781334',)
 REPORT_TYPE = 'channel_reach_basic_a1'
 MAX_REPORT_BYTES = 4 * 1024 * 1024
-MAX_TOTAL_BYTES = 8 * 1024 * 1024
+MAX_TOTAL_BYTES = 4 * 1024 * 1024
 MAX_ROWS = 20000
 MAX_SECONDS = 90
 COLUMNS = {'date', 'channel_id', 'video_id', 'video_thumbnail_impressions', 'video_thumbnail_impressions_ctr'}
 PACIFIC = ZoneInfo('America/Los_Angeles')
-CTR_UNIT = 'provider_reported_percentage_value_unscaled'
+CTR_UNIT = 'provider_raw_representation_unverified'
 SOURCE_SHA = '49032963a3e1bd0421c487ea6e4aa6d8f5e96b0f2d6153506f9e62d2f25a1a3c'
 
 
@@ -60,6 +61,7 @@ def plan_from_snapshot(raw):
 
 
 def verify_resource(resource, expected):
+    require(resource.get('id') in FETCH_REPORT_IDS, 'REPORT_NOT_PENDING')
     require(resource.get('jobId') == JOB and resource.get('id') == expected['id'], 'REPORT_IDENTITY_MISMATCH')
     for a, b in [('startTime', 'start_time'), ('endTime', 'end_time'), ('createTime', 'create_time')]:
         require(resource.get(a) == expected[b], 'REPORT_TIME_MISMATCH')
@@ -68,6 +70,7 @@ def verify_resource(resource, expected):
 
 
 def validate_download_url(url, report_id):
+    require(report_id in FETCH_REPORT_IDS, 'REPORT_NOT_PENDING')
     require(isinstance(url, str) and 0 < len(url) <= 1000, 'DOWNLOAD_URL_INVALID')
     u = urlsplit(url)
     require(u.scheme == 'https' and u.netloc == 'youtubereporting.googleapis.com' and not u.fragment, 'DOWNLOAD_ORIGIN_BLOCKED')
@@ -108,6 +111,20 @@ def bounded_download(session, resource, remaining, deadline):
         response.close()
 
 
+def parse_reporting_day(raw):
+    # Preserve provider text; accept observed compact dates and documented ISO dates.
+    fmt = '%Y%m%d' if re.fullmatch(r'[0-9]{8}', raw) else '%Y-%m-%d' if re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', raw) else None
+    require(fmt is not None, 'CSV_DATE_INVALID')
+    try:
+        return datetime.strptime(raw, fmt).replace(tzinfo=PACIFIC)
+    except ValueError:
+        raise ProbeBlocked('CSV_DATE_INVALID') from None
+
+
+def dimension_key(row):
+    return (parse_reporting_day(row['date']).date().isoformat(), row['channel_id'], row['video_id'])
+
+
 def parse_csv(raw, resource):
     require(len(raw) <= MAX_REPORT_BYTES, 'CSV_BYTE_LIMIT')
     reader = csv.DictReader(io.StringIO(raw.decode('utf-8-sig')), strict=True)
@@ -121,11 +138,10 @@ def parse_csv(raw, resource):
         require(set(row) == COLUMNS and all(x is not None for x in row.values()), 'CSV_ROW_SHAPE')
         require(row['channel_id'] == CHANNEL, 'CSV_CHANNEL_MISMATCH')
         require(re.fullmatch(r'[A-Za-z0-9_-]{11}', row['video_id']) is not None, 'CSV_VIDEO_ID_INVALID')
-        require(re.fullmatch(r'\d{4}-\d{2}-\d{2}', row['date']) is not None, 'CSV_DATE_INVALID')
-        day = datetime.strptime(row['date'], '%Y-%m-%d').replace(tzinfo=PACIFIC)
+        day = parse_reporting_day(row['date'])
         # Reporting date dimension is Pacific time, not UTC calendar slicing.
         require(start <= day and day + timedelta(days=1) <= end, 'CSV_DATE_OUTSIDE_REPORT')
-        key = (row['date'], row['channel_id'], row['video_id'])
+        key = dimension_key(row)
         require(key not in seen, 'CSV_DUPLICATE_DIMENSION_KEY')
         seen.add(key)
         require(re.fullmatch(r'\d+', row['video_thumbnail_impressions']) is not None, 'CSV_IMPRESSIONS_INVALID')
@@ -153,7 +169,7 @@ def collect_existing_reports(snapshot_raw, service, execute, session, output_dir
     observed = {v: [] for v in plan['target_video_ids']}
     all_keys = set()
     failed = None
-    for report_id in REPORT_IDS:
+    for report_id in FETCH_REPORT_IDS:
         record = {'report_id': report_id, 'job_id': JOB, 'status': 'NOT_READ'}
         try:
             require(time.monotonic() < deadline, 'DEADLINE_EXCEEDED')
@@ -169,7 +185,7 @@ def collect_existing_reports(snapshot_raw, service, execute, session, output_dir
             record.update(raw_file=name, raw_sha256=digest(raw), raw_bytes=len(raw))
             parsed = parse_csv(raw, resource)
             record.update(headers=parsed['headers'], row_count=parsed['row_count'], duplicate_dimension_keys=0)
-            keys = {(row['date'], row['channel_id'], row['video_id']) for row in parsed['rows']}
+            keys = {dimension_key(row) for row in parsed['rows']}
             require(not keys.intersection(all_keys), 'CROSS_REPORT_DUPLICATE_KEY')
             all_keys.update(keys)
             for row in parsed['rows']:
@@ -185,9 +201,9 @@ def collect_existing_reports(snapshot_raw, service, execute, session, output_dir
     result = {'schema_version': 'existing-reach-probe-v1', 'status': 'BLOCKED' if failed else 'INGESTED_BOUNDED_REPORTS',
               'channel_id': CHANNEL, 'job_id': JOB, 'report_type': REPORT_TYPE,
               'source_snapshot_sha256': digest(snapshot_raw), 'source_captured_at': plan['source_captured_at'],
-              'reports_requested': list(REPORT_IDS), 'reports': records, 'csv_bytes_preserved': total,
+              'reports_requested': list(FETCH_REPORT_IDS), 'reports': records, 'csv_bytes_preserved': total,
               'csv_rows_ingested': len(all_keys), 'ctr_unit': CTR_UNIT,
-              'coverage_scope': 'ONLY_EXACT_TWO_REPORT_PERIODS_NOT_LIFETIME_OR_28_DAYS',
+              'coverage_scope': 'ONLY_SECOND_PENDING_REPORT_PERIOD_NOT_COMBINED_OR_LIFETIME',
               'video_observations': [{'video_id': v, 'status': ('PARTIAL_ROWS_PROBE_BLOCKED' if r else 'UNKNOWN_PROBE_BLOCKED') if failed else ('OBSERVED_ROWS' if r else 'NO_MATCHING_ROW_IN_INGESTED_REPORTS'),
                                       'covered_dates': sorted({x['date'] for x in r}), 'rows': r,
                                       'aggregate_ctr': None} for v,r in observed.items()],

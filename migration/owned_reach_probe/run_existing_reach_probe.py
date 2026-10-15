@@ -16,11 +16,15 @@ from types import SimpleNamespace
 import existing_reach_probe as core
 
 REPOSITORY = 'matheusmagah-cpu/heroverse-engine'
-EXPECTED_RUN_NUMBER = '3'
+EXPECTED_RUN_NUMBER = '4'
 PREVIOUS_FAILURE_PATH = Path('migration/evidence/owned-reach-preflight-failure-38822029275.json')
 PREVIOUS_FAILURE_SHA256 = 'f5c8c636e0f7dca289f8982ed901924a85b9832d3b30d40e2b934a6ac0facaa2'
 SECOND_FAILURE_PATH = Path('migration/evidence/owned-reach-helper-failure-38822885890.json')
 SECOND_FAILURE_SHA256 = '8f24e0f89d44c28a0e3e1446af3a8f6c5722d4535c9d882a5280ba3ba6451533'
+THIRD_FAILURE_PATH = Path('migration/evidence/owned-reach-date-failure-38823982698.json')
+THIRD_FAILURE_SHA256 = '2a7637037e12e27301d511fad41d5d2b829586463c9ad09ee3a9b7ed3ab62837'
+THIRD_COLLECTION_PATH = Path('migration/evidence/owned-reach-date-collection-38823982698.json')
+THIRD_COLLECTION_SHA256 = 'c346a40ed965c4bca62472e83a1101ff09e0e762714f3e8eb8782dd50df38230'
 REQUIRED_DISK_BYTES = 256 * 1024**2
 REQUIRED_MEMORY_BYTES = 512 * 1024**2
 RESOURCE_POLICY = 'BOUNDED_REPORTING_STDLIB_ONLY_V1'
@@ -50,14 +54,14 @@ class Transport:
             core.require(url == TOKEN_URL and data is not None and bearer is None, 'REFRESH_TARGET_BLOCKED')
             core.require(self.counts[stage] < 1, 'REFRESH_ONCE_ONLY')
         elif stage == 'report_metadata':
-            core.require(url in {META_BASE+r for r in core.REPORT_IDS} and data is None and bearer, 'METADATA_TARGET_BLOCKED')
-            core.require(self.counts[stage] < 2, 'METADATA_COUNT_LIMIT')
+            core.require(url in {META_BASE+r for r in core.FETCH_REPORT_IDS} and data is None and bearer, 'METADATA_TARGET_BLOCKED')
+            core.require(self.counts[stage] < 1, 'METADATA_COUNT_LIMIT')
         elif stage == 'report_csv':
             core.require(data is None and bearer, 'CSV_REQUEST_BLOCKED')
-            ids=[r for r in core.REPORT_IDS if '/reports/'+r+'?' in url]
+            ids=[r for r in core.FETCH_REPORT_IDS if '/reports/'+r+'?' in url]
             core.require(len(ids)==1, 'CSV_TARGET_BLOCKED')
             core.validate_download_url(url, ids[0])
-            core.require(self.counts[stage] < 2, 'CSV_COUNT_LIMIT')
+            core.require(self.counts[stage] < 1, 'CSV_COUNT_LIMIT')
         else:
             raise core.ProbeBlocked('UNKNOWN_REQUEST_STAGE')
         core.require((stage,url) not in self.seen_targets,'EXACT_REQUEST_ALREADY_ATTEMPTED')
@@ -120,7 +124,7 @@ class ReportService:
     def jobs(self):return self
     def reports(self):return self
     def get(self,*,jobId,reportId):
-        core.require(jobId==core.JOB and reportId in core.REPORT_IDS,'EXACT_REPORT_REQUIRED')
+        core.require(jobId==core.JOB and reportId in core.FETCH_REPORT_IDS,'EXACT_REPORT_REQUIRED')
         return META_BASE+reportId
 
 
@@ -183,10 +187,29 @@ def validate_previous_failure(root):
                  and second.get('youtube_data_api_units')==0
                  and second.get('data_api_ledger_modified') is False,
                  'SECOND_FAILURE_NOT_ZERO_NETWORK')
-    return {'previous_run_ids':['38822029275','38822885890'],
-            'previous_receipt_sha256':[PREVIOUS_FAILURE_SHA256,SECOND_FAILURE_SHA256],
-            'previous_network_operations':0,'admitted_run_number':EXPECTED_RUN_NUMBER,
-            'admitted_run_attempt':'1','previous_receipt_preserved':True}
+    third_raw=(root/THIRD_FAILURE_PATH).read_bytes()
+    core.require(core.digest(third_raw)==THIRD_FAILURE_SHA256,'THIRD_FAILURE_HASH_MISMATCH')
+    third=json.loads(third_raw)
+    counts={'token_refresh':1,'report_metadata':1,'report_csv':1}
+    core.require(third.get('run_id')=='38823982698' and third.get('commit')=='cfe8a2d6c617b4cbe3544127945b0523d05a5601'
+                 and third.get('status')=='BLOCKED' and third.get('network_operations_attempted')==3
+                 and third.get('requests')==counts and third.get('request_events')==[{'stage':stage,'attempt':1,'http_status':200} for stage in counts]
+                 and third.get('youtube_data_api_calls')==0 and third.get('youtube_data_api_units')==0
+                 and third.get('data_api_ledger_modified') is False,'THIRD_FAILURE_IDENTITY_MISMATCH')
+    collection_raw=(root/THIRD_COLLECTION_PATH).read_bytes()
+    core.require(core.digest(collection_raw)==THIRD_COLLECTION_SHA256 and third.get('receipt_sha256')==THIRD_COLLECTION_SHA256,'THIRD_COLLECTION_HASH_MISMATCH')
+    collection=json.loads(collection_raw)
+    core.require(collection.get('status')=='BLOCKED' and len(collection.get('reports',[]))==1,'THIRD_COLLECTION_SHAPE')
+    received=collection['reports'][0]
+    core.require(received.get('report_id')=='17695215035' and received.get('error_code')=='CSV_DATE_INVALID'
+                 and received.get('raw_sha256')=='dd4e9a012addc6d815a0e460b9a3c5fad9830c9a78cd88573cf242e08a9a5b5c'
+                 and received.get('raw_bytes')==236,'FIRST_REPORT_PRESERVATION_REQUIRED')
+    return {'previous_run_ids':['38822029275','38822885890','38823982698'],
+            'previous_receipt_sha256':[PREVIOUS_FAILURE_SHA256,SECOND_FAILURE_SHA256,THIRD_FAILURE_SHA256],
+            'previous_network_operations_by_run':[0,0,3],'admitted_run_number':EXPECTED_RUN_NUMBER,
+            'admitted_run_attempt':'1','previous_receipt_preserved':True,
+            'already_received_report_excluded':'17695215035','pending_report_only':'20613781334'}
+
 
 
 def preflight(root,env):
@@ -248,7 +271,7 @@ def main():
         envelope['requests']=transport.counts if transport else {}
         envelope['request_events']=transport.events if transport else []
         envelope['network_operations_attempted']=sum(envelope['requests'].values())
-        envelope['network_operations_maximum']=5
+        envelope['network_operations_maximum']=3
         envelope['youtube_data_api_calls']=0
         envelope['youtube_data_api_units']=0
         envelope['data_api_ledger_modified']=False

@@ -1,0 +1,88 @@
+{
+  "status": "BLOCKED",
+  "manual_approval": false,
+  "production_approved": false,
+  "publication_authorized": false,
+  "preflight": {
+    "execution_boundary": {
+      "repository": "matheusmagah-cpu/heroverse-engine",
+      "repository_private": true,
+      "ref": "refs/heads/main"
+    },
+    "recovery": {
+      "previous_run_ids": [
+        "38822029275",
+        "38822885890"
+      ],
+      "previous_receipt_sha256": [
+        "f5c8c636e0f7dca289f8982ed901924a85b9832d3b30d40e2b934a6ac0facaa2",
+        "8f24e0f89d44c28a0e3e1446af3a8f6c5722d4535c9d882a5280ba3ba6451533"
+      ],
+      "previous_network_operations": 0,
+      "admitted_run_number": "3",
+      "admitted_run_attempt": "1",
+      "previous_receipt_preserved": true
+    },
+    "resource_policy": "BOUNDED_REPORTING_STDLIB_ONLY_V1",
+    "memory_samples_bytes": [
+      7248220160,
+      7248224256
+    ],
+    "disk_free_bytes": 14093606912,
+    "memory_available_bytes": 7248220160,
+    "required_disk_free_bytes": 268435456,
+    "required_memory_available_bytes": 536870912,
+    "disk_margin_passed": true,
+    "memory_margin_passed": true,
+    "data_api_requests": 0,
+    "data_api_units_required": 0,
+    "reason": "EXISTING_REPORTING_REPORTS_ONLY_NO_DATA_API",
+    "observer_ledger_modified": false,
+    "new_jobs_created": 0
+  },
+  "oauth_health": {
+    "version": "heroverse-existing-grant-health-v1",
+    "observed_at": "2026-10-15T23:30:37.580039+00:00",
+    "status": "REFRESH_PASSED_IDENTITY_NOT_YET_OBSERVED",
+    "failure_code": null,
+    "console_publishing_status": "UNOBSERVED",
+    "configuration_verified": false,
+    "production_ready": false,
+    "publication_authorized": false,
+    "secret_values_logged": false,
+    "new_consent_performed": false,
+    "automatic_retry_performed": false
+  },
+  "owner_binding": "PINNED_OWNED_JOB_AND_EXACT_CSV_CHANNEL_WHEN_ROWS_EXIST_NOT_NEW_CHANNEL_API_PROOF",
+  "receipt_sha256": "c346a40ed965c4bca62472e83a1101ff09e0e762714f3e8eb8782dd50df38230",
+  "requests": {
+    "token_refresh": 1,
+    "report_metadata": 1,
+    "report_csv": 1
+  },
+  "request_events": [
+    {
+      "stage": "token_refresh",
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "stage": "report_metadata",
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "stage": "report_csv",
+      "attempt": 1,
+      "http_status": 200
+    }
+  ],
+  "network_operations_attempted": 3,
+  "network_operations_maximum": 5,
+  "youtube_data_api_calls": 0,
+  "youtube_data_api_units": 0,
+  "data_api_ledger_modified": false,
+  "run_id": "38823982698",
+  "commit": "cfe8a2d6c617b4cbe3544127945b0523d05a5601",
+  "code_sha256": "c287f81e980ffd055387d7857b4f326f6455912568efe82f41832f5954fd3920"
+}

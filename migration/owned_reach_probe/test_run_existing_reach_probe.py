@@ -45,7 +45,7 @@ class Tests(unittest.TestCase):
             op=Opener({'access_token':token,'token_type':'Bearer','expires_in':seconds})
             with self.assertRaises(c.ProbeBlocked):w.refresh_once(info(),w.Transport(op),observe,lambda _:None)
     def test_only_exact_metadata_get_no_retries(self):
-        op=Opener();t=w.Transport(op);url=w.META_BASE+c.REPORT_IDS[0]
+        op=Opener();t=w.Transport(op);url=w.META_BASE+c.FETCH_REPORT_IDS[0]
         t.json(url,'report_metadata',bearer='synthetic-access')
         self.assertEqual(op.calls[0][0].get_method(),'GET')
         self.assertEqual(op.calls[0][0].get_header('Authorization'),'Bearer synthetic-access')
@@ -64,16 +64,16 @@ class Tests(unittest.TestCase):
             def open(self,req,timeout):
                 self.calls.append(req);raise urllib.error.HTTPError(req.full_url,401,'secret detail',{},io.BytesIO(b'secret'))
         op=Unauthorized();t=w.Transport(op)
-        with self.assertRaisesRegex(c.ProbeBlocked,'^HTTP_STATUS_401$'):t.json(w.META_BASE+c.REPORT_IDS[0],'report_metadata',bearer='fake')
+        with self.assertRaisesRegex(c.ProbeBlocked,'^HTTP_STATUS_401$'):t.json(w.META_BASE+c.FETCH_REPORT_IDS[0],'report_metadata',bearer='fake')
         self.assertEqual(len(op.calls),1);self.assertEqual(t.events[0]['http_status'],401)
     def test_preflight_attempt_guards(self):
-        env={'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_REPOSITORY':w.REPOSITORY,'GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'4','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'123'}
+        env={'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main','GITHUB_REPOSITORY':w.REPOSITORY,'GITHUB_EVENT_NAME':'workflow_dispatch','GITHUB_RUN_NUMBER':'5','GITHUB_RUN_ATTEMPT':'1','GITHUB_RUN_ID':'123'}
         with self.assertRaisesRegex(c.ProbeBlocked,'ONE_EXECUTION'):w.preflight(Path('.'),env)
     def test_response_origin_and_large_json_block(self):
         class Wrong(Opener):
             def open(self,req,timeout):return Response('https://evil.invalid',{})
-        with self.assertRaises(c.ProbeBlocked):w.Transport(Wrong()).json(w.META_BASE+c.REPORT_IDS[0],'report_metadata',bearer='fake')
-        with self.assertRaises(c.ProbeBlocked):w.Transport(Opener({'large':'x'*65536})).json(w.META_BASE+c.REPORT_IDS[0],'report_metadata',bearer='fake')
+        with self.assertRaises(c.ProbeBlocked):w.Transport(Wrong()).json(w.META_BASE+c.FETCH_REPORT_IDS[0],'report_metadata',bearer='fake')
+        with self.assertRaises(c.ProbeBlocked):w.Transport(Opener({'large':'x'*65536})).json(w.META_BASE+c.FETCH_REPORT_IDS[0],'report_metadata',bearer='fake')
 
     def test_boundary_accepts_only_exact_private_main(self):
         env={'GITHUB_REPOSITORY':w.REPOSITORY,'HERO_REPOSITORY_PRIVATE':'true','GITHUB_REF':'refs/heads/main'}
@@ -104,7 +104,7 @@ class Tests(unittest.TestCase):
         local=Path(__file__).parent/'owned-reach-existing-once.yml'
         path=local if local.exists() else Path('.github/workflows/owned-reach-existing-once.yml')
         script=textwrap.dedent(path.read_text().split('        run: |\n',1)[1].split('      - uses:',1)[0])
-        base={'REPOSITORY':w.REPOSITORY,'REPOSITORY_PRIVATE':'true','REF':'refs/heads/main','EVENT':'workflow_dispatch','RUN_NUMBER':'3','RUN_ATTEMPT':'1'}
+        base={'REPOSITORY':w.REPOSITORY,'REPOSITORY_PRIVATE':'true','REF':'refs/heads/main','EVENT':'workflow_dispatch','RUN_NUMBER':'4','RUN_ATTEMPT':'1'}
         cases=[None,('REPOSITORY','other/fork'),('REPOSITORY_PRIVATE','false'),('REPOSITORY_PRIVATE',''),('REF','refs/heads/feature'),('REF','refs/tags/main')]
         for case in cases:
             with tempfile.TemporaryDirectory() as temp:
