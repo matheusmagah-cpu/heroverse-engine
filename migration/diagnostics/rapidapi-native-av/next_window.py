@@ -94,10 +94,10 @@ def inspect(out, evidence):
 
 def run(out, e, key):
     require(os.environ.get('GITHUB_REPOSITORY') == REPO, 'REPOSITORY_MISMATCH')
-    require(os.environ.get('GITHUB_RUN_NUMBER') == '2' and os.environ.get('GITHUB_RUN_ATTEMPT') == '1', 'DUPLICATE_RUN_REFUSED')
-    no_effect = json.loads((EVIDENCE / 'rapidapi-midpoint-no-effect-38761164057.json').read_text())['result']
+    require(os.environ.get('GITHUB_RUN_NUMBER') == '3' and os.environ.get('GITHUB_RUN_ATTEMPT') == '1', 'DUPLICATE_RUN_REFUSED')
+    no_effect = json.loads((EVIDENCE / 'rapidapi-midpoint-no-effect-38762055346.json').read_text())['result']
     require(no_effect['effect_status'] == 'NOT_SENT' and no_effect['download_tools_call_requests'] == 0
-        and no_effect['failure_code'] == 'REQUEST_COUNTER_CHANGED_RECONCILIATION_REQUIRED',
+        and no_effect['failure_code'] == 'MONTHLY_INCLUDED_HEADROOM_REQUIRED',
         'PRIOR_ZERO_EFFECT_REQUIRED')
     budget_preflight(json.loads((EVIDENCE / 'native-av-reservations.json').read_text()))
     prior = json.loads((EVIDENCE / 'rapidapi-native-first-result.json').read_text())
@@ -117,14 +117,15 @@ def run(out, e, key):
     n.private_json(out / 'receipt.json', e, key)
     require(q.get('x-ratelimit-units-limit') == '500' and q.get('x-ratelimit-units-remaining') == '486', 'QUOTA_CHANGED_RECONCILIATION_REQUIRED')
     require(q.get('x-ratelimit-requests-limit') == '500000'
-        and 499900 <= int(q.get('x-ratelimit-requests-remaining', '0')) <= 499995
+        and 499900 <= int(q.get('x-ratelimit-requests-remaining', '0')) <= 500000
         and q.get('x-ratelimit-rapid-free-plans-hard-limit-limit') == '500000'
-        and 499900 <= int(q.get('x-ratelimit-rapid-free-plans-hard-limit-remaining', '0')) <= 499995,
+        and 499900 <= int(q.get('x-ratelimit-rapid-free-plans-hard-limit-remaining', '0')) <= 500000,
         'MONTHLY_INCLUDED_HEADROOM_REQUIRED')
     e['request_counter_reconciliation'] = {'prior_observed_remaining': 499995,
         'fresh_remaining': int(q['x-ratelimit-requests-remaining']),
-        'difference_includes_preflight_and_any_intervening_usage_not_attributed_to_media':
-            499995 - int(q['x-ratelimit-requests-remaining']),
+        'signed_remaining_change_from_prior': int(q['x-ratelimit-requests-remaining']) - 499995,
+        'counter_increase_is_not_a_budget_refund': True,
+        'provider_counter_is_not_an_authoritative_monotonic_spend_ledger': True,
         'no_exact_counter_assumption': True, 'native_quality_gates_unchanged': True}
     e['baseline_quota_headers'] = q
     e['existing_job_preflight_polls'] = 1

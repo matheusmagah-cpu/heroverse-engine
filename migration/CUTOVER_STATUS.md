@@ -596,3 +596,10 @@ Próximo efeito único preparado: mesma fontej2rk8ycXe3c, janela já registrada[
 Run38761164057/job116512499645, commit285c42a5f2586a821b39e08978e5a340660921b2: REQUEST_COUNTER_CHANGED_RECONCILIATION_REQUIRED, NOT_SENT,0downloads,0polls do novo job. Inventário real:42artefatos não expirados/70115364B, com margem para96MiB desta tentativa. A consulta única ao progresso anterior ocorreu, mas seu contador não foi salvo antes da validação; essa lacuna é corrigida agora, sem inventar o valor. Recibo rapidapi-midpoint-no-effect-38761164057.json.
 
 Correção: salvar cabeçalhos numéricos antes de avaliar, conservar486unidades como condição exata e exigir franquia mensal/hard limit500000 com ao menos499900requests restantes; registrar a diferença real desde499995, sem atribuir uso intermediário à mídia. Trata-se de saldo disponível observado, não aprovação de banda global. Somente run_number2/attempt1 pode prosseguir, exigindo o recibo anterior sem efeito. Nenhum pedido de mídia foi repetido. Gates nativos e custo adicional zero preservados.
+
+
+## 2026-10-15 — contador real não monotônico preservado; reserva local não é devolvida
+
+Run38762055346/job116515603881: NOT_SENT/0downloads. Cabeçalhos reais finalmente preservados:486/500unidades,499997/500000requests e hardlimit499997/500000. Esse saldo de requests é maior que499995 observado no primeiro download; causa não comprovada. A guarda assumia monotonicidade e bloqueou indevidamente apesar da ampla franquia. Não atribuir consumo negativo ou reset comprovado ao fornecedor.
+
+Correção precisa: exigir intervalo válido499900..500000 para saldo mensal e hardlimit, manter486unidades exatas, e conservar integralmente as reservas locais independentemente de qualquer aumento do contador remoto. Próxima execução única run_number3/attempt1 exige recibo anteriorNOT_SENT/0downloads. Nenhum start foi enviado nas duas execuções; apenas consultas ao job anterior. Recibo rapidapi-midpoint-no-effect-38762055346.json. Não há nova aprovação de banda, recorrência ou qualidade.

@@ -1,0 +1,46 @@
+{
+  "version": "midpoint-no-effect-v2",
+  "run_id": 38762055346,
+  "job_id": 116515603881,
+  "result": {
+    "version": "preclaimed-native-midpoint-v1",
+    "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-6354-6364-v1",
+    "source_video_id": "j2rk8ycXe3c",
+    "source_requested_seconds": [
+      6354,
+      6364
+    ],
+    "started_at": "2026-10-15T15:38:45.001580+00:00",
+    "status": "BLOCKED",
+    "effect_status": "NOT_SENT",
+    "download_tools_call_requests": 0,
+    "progress_polls": 0,
+    "production": false,
+    "publication": false,
+    "supervisor": false,
+    "perceptual_audio_review_completed": false,
+    "recurring_capacity_qualified": false,
+    "storage_preflight": {
+      "unexpired_repository_artifact_bytes": 70116522,
+      "unexpired_artifacts": 43,
+      "reserved_output_bytes": 100663296,
+      "account_wide_storage_not_proven_by_repo_inventory": true
+    },
+    "fresh_preflight_quota_headers": {
+      "x-ratelimit-units-limit": "500",
+      "x-ratelimit-units-remaining": "486",
+      "x-ratelimit-units-reset": "62792",
+      "x-ratelimit-requests-limit": "500000",
+      "x-ratelimit-requests-remaining": "499997",
+      "x-ratelimit-requests-reset": "2654792",
+      "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+      "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499997",
+      "x-ratelimit-rapid-free-plans-hard-limit-reset": "2654792"
+    },
+    "existing_job_preflight_polls": 1,
+    "preflight_control_response_bytes": 632,
+    "failure_code": "MONTHLY_INCLUDED_HEADROOM_REQUIRED",
+    "elapsed_seconds": 1.372,
+    "completed_at": "2026-10-15T15:38:46.373612+00:00"
+  }
+}
