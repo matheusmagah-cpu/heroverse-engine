@@ -1,0 +1,63 @@
+name: HeroVerse existing reach reports once
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-official-evidence
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Enforce private main boundary before credentials
+        id: boundary
+        env:
+          REPOSITORY: ${{ github.repository }}
+          REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          REF: ${{ github.ref }}
+          EVENT: ${{ github.event_name }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          test "$REPOSITORY" = matheusmagah-cpu/heroverse-engine
+          test "$REPOSITORY_PRIVATE" = true
+          test "$REF" = refs/heads/main
+          test "$EVENT" = workflow_dispatch
+          test "$RUN_NUMBER" = 1
+          test "$RUN_ATTEMPT" = 1
+          echo "accepted=true" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows/owned-reach-existing-once.yml
+            migration/owned_reach_probe
+            migration/oauth_health.py
+            migration/verify_worker_oauth.py
+            migration/evidence
+          sparse-checkout-cone-mode: false
+      - name: Test exact local probe boundaries
+        env:
+          HERO_PROBE_SNAPSHOT: migration/evidence/observer-38749052276.json
+        run: python3 -m unittest discover -s migration/owned_reach_probe -p 'test_*.py' -v
+      - name: Read only the two existing Reporting reports
+        if: success() && steps.boundary.outputs.accepted == 'true' && github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+        env:
+          HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: timeout --signal=TERM 100s python3 migration/owned_reach_probe/run_existing_reach_probe.py
+      - name: Preserve private text-only reproducibility evidence
+        if: always() && steps.boundary.outputs.accepted == 'true' && github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: heroverse-existing-reach-${{ github.run_id }}
+          path: |
+            owned-reach-probe-output/execution.json
+            owned-reach-probe-output/receipt.json
+            owned-reach-probe-output/report-17695215035.csv
+            owned-reach-probe-output/report-20613781334.csv
+          retention-days: 7
+          if-no-files-found: ignore
