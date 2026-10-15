@@ -1,0 +1,160 @@
+{
+  "version": "heroverse-native-av-one-start-v1",
+  "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
+  "started_at": "2026-10-15T13:19:29.192076+00:00",
+  "status": "NATIVE_CLIP_RECEIVED_AND_DECODED_AWAITING_PERCEPTUAL_REVIEW",
+  "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+  "download_tools_call_requests": 1,
+  "progress_polls": 3,
+  "production": false,
+  "publication": false,
+  "supervisor": false,
+  "recurring_capacity_qualified": false,
+  "baseline_quota_headers": {
+    "x-ratelimit-units-limit": "500",
+    "x-ratelimit-units-remaining": "498",
+    "x-ratelimit-units-reset": "72029",
+    "x-ratelimit-requests-limit": "500000",
+    "x-ratelimit-requests-remaining": "499999",
+    "x-ratelimit-requests-reset": "2664029",
+    "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+    "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499999",
+    "x-ratelimit-rapid-free-plans-hard-limit-reset": "2664029"
+  },
+  "source_requested_seconds": [
+    0,
+    40
+  ],
+  "control_response_bytes": 1386,
+  "start_reply_received_bytes": 1195,
+  "start_body_keys": [
+    "additional_info",
+    "cachehash",
+    "extended_duration",
+    "format",
+    "full_format",
+    "id",
+    "info",
+    "progress_url",
+    "repeat_download",
+    "success",
+    "text",
+    "thumbnail_url",
+    "title",
+    "url"
+  ],
+  "provider_job_id": "v2_stream_0e74246e67a0b45ff39c",
+  "provider_job_id_sha256": "99c158dd112d4c32e74013331d424517b652f9e4b43c8cf899abba51433bcba0",
+  "last_quota_headers": {
+    "x-ratelimit-units-limit": "500",
+    "x-ratelimit-units-remaining": "486",
+    "x-ratelimit-units-reset": "71125",
+    "x-ratelimit-rapid-free-plans-hard-limit-limit": "500000",
+    "x-ratelimit-rapid-free-plans-hard-limit-remaining": "499995",
+    "x-ratelimit-rapid-free-plans-hard-limit-reset": "2663125",
+    "x-ratelimit-requests-limit": "500000",
+    "x-ratelimit-requests-remaining": "499995",
+    "x-ratelimit-requests-reset": "2663125"
+  },
+  "quota_observations": [
+    {
+      "poll_index": 0,
+      "units_remaining": "486",
+      "requests_remaining": "499997"
+    },
+    {
+      "poll_index": 1,
+      "units_remaining": "486",
+      "requests_remaining": "499996"
+    },
+    {
+      "poll_index": 2,
+      "units_remaining": "486",
+      "requests_remaining": "499995"
+    }
+  ],
+  "observed_units_change_since_info": 12,
+  "delivery_url_sha256": "548de345e10ca9f05781b56017a8fc3f2431b10491207bdea771385c48853210",
+  "delivery_http_status": 200,
+  "delivery_host": "pamela88.savenow.to",
+  "media_file": {
+    "bytes": 26121679,
+    "sha256": "5dca962757c952c8048c746f23f96a325cf15258f429e1e79e7b5ddf72fb0fb5"
+  },
+  "native_probe": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "duration": "40.000000"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "44100",
+        "channels": 2,
+        "r_frame_rate": "0/0",
+        "duration": "40.066667"
+      }
+    ],
+    "format": {
+      "duration": "40.066667",
+      "size": "26121679"
+    }
+  },
+  "requested_duration_seconds": 40,
+  "technical_trim_tolerance_seconds": 0.1,
+  "decoded_video_frames": 1200,
+  "complete_clip_decode_passed": true,
+  "perceptual_video_review_completed": false,
+  "perceptual_audio_review_completed": false,
+  "elapsed_seconds": 72.666,
+  "completed_at": "2026-10-15T13:20:41.858033+00:00",
+  "workflow": {
+    "run_id": 38741653547,
+    "job_id": 116444624640,
+    "commit": "3fcc6f1aacf11cb966d1050340819051f0d701c1",
+    "conclusion": "success",
+    "url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38741653547"
+  },
+  "artifact": {
+    "id": 11975773787,
+    "name": "rapidapi-native-j2rk8ycXe3c-0-40-v1",
+    "bytes": 33908922,
+    "sha256": "6c1751393184cb17e1c4c84350c99c542fd53f6d7e146cab3a9400c0667309e6",
+    "expires_at": "2026-10-16T13:20:43Z"
+  },
+  "sampled_visual_review": {
+    "source_seconds": [
+      0,
+      10,
+      20,
+      30,
+      39
+    ],
+    "observed": "Initial black fade; later changing autumn foliage, small cross/floral emblem and PSALM 55:16–17 text.",
+    "all_frames_semantically_reviewed": false
+  },
+  "audio_review": {
+    "direct_listening_supported_in_chat": false,
+    "direct_listening_completed": false,
+    "decoded_pcm_seconds": 40.03120181405896,
+    "rms_dbfs": -27.390378000808767,
+    "peak_dbfs": -7.6798334970638535,
+    "nonzero_fraction": 0.9976523414841937,
+    "semantic_quality_approved": false
+  },
+  "recovery": {
+    "do_not_repeat_provider_download": true,
+    "binary_transfer_through_chat_or_git_blob_prohibited": true,
+    "reason": "Prior 26MB base64 transfer through parallel tool calls stalled and was cancelled. Provider job had already succeeded. No confirmed media Git commit.",
+    "resume_from_artifact_id": 11975773787,
+    "full_release_approved": false
+  }
+}

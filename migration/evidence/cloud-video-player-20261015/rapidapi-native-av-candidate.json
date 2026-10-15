@@ -1,13 +1,13 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v8",
+  "version": "heroverse-recurring-native-av-candidate-v9",
   "recorded_at": "2026-10-15T13:13:57.054Z",
   "repository_head_verified": "cc35d4e2d1c39118d47d5f5189eadc84f8bf18d1",
-  "status": "ACTUAL_INCLUDED_QUOTA_AND_DOWNLOAD_CONTRACT_VERIFIED_SINGLE_NATIVE_REQUEST_READY",
+  "status": "FIRST_NATIVE_CLIP_DECODED_RECURRING_AND_SEMANTIC_QUALIFICATION_PENDING",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
   "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
   "direct_vendor_trial_not_selected": true,
-  "observation_kind": "Existing application key saved as encrypted repository secret with explicit owner confirmation. Actual cloud MCP initialize and nine-tool catalogue verified; provider notification compatibility disclosed. No media requested or delivered, no permanent free capacity acceptance.",
+  "observation_kind": "One real 1080p H264/AAC opening delivered and fully decoded. Five frames inspected; decoded audio signal measured, direct listening unavailable. Permanent recurring capacity remains unqualified.",
   "published_free_limits": {
     "price_usd_per_month": 0,
     "units_per_day": 500,
@@ -58,9 +58,9 @@
   },
   "proposed_first_test": {
     "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
-    "effect_status": "PREPARED_ONCE_NOT_SENT",
-    "provider_job_id": null,
-    "calls_started": 0,
+    "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+    "provider_job_id": "v2_stream_0e74246e67a0b45ff39c",
+    "calls_started": 1,
     "endpoint": "GET /ajax/download.php",
     "public_parameters": {
       "url": "https://www.youtube.com/watch?v=j2rk8ycXe3c",
@@ -101,13 +101,14 @@
     "Measure recurring workload capacity and resolve bandwidth overage exposure before permanent adoption. No paid plan, card, recharge, proxy/cookie bypass or arbitrary source substitution."
   ],
   "resume_boundary": {
-    "no_job_currently_exists_from_this_candidate": true,
+    "no_job_currently_exists_from_this_candidate": false,
     "inspect_existing_result_before_start_if_prior_checkpoint_uncertain": true,
     "never_repeat_apify_request": true,
     "stop_on_source_safeguard_or_failure_without_concrete_correction": true,
     "no_cookies_proxy_network_change_or_access_control_bypass": true,
     "inspect_existing_subscription_before_any_resubscribe": true,
-    "no_new_authentication_or_media_effect_until_current_state_inspected": true
+    "no_new_authentication_or_media_effect_until_current_state_inspected": true,
+    "existing_successful_job_must_not_be_restarted": true
   },
   "authentication": {
     "login_required_observed": true,
@@ -132,20 +133,21 @@
     "new_provider_api_key_created": false,
     "existing_key_copied_to_encrypted_actions_secret": true,
     "latest_connection_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-live-result.json",
-    "remaining_daily_units_observed": 498,
-    "remaining_monthly_requests_observed": 499999,
-    "quota_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-quota-preflight.json"
+    "remaining_daily_units_observed": 486,
+    "remaining_monthly_requests_observed": 499995,
+    "quota_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-first-result.json"
   },
   "adoption": {
-    "actual_video_verified": false,
-    "actual_audio_verified": false,
+    "actual_video_verified": true,
+    "actual_audio_verified": true,
     "native_quality_verified": false,
     "recurring_capacity_qualified": false,
     "permanent_dependency_integrated": false,
     "current_pending_stage_resolved": false,
     "production_approved": false,
     "publication_authorized": false,
-    "supervisor_enabled": false
+    "supervisor_enabled": false,
+    "actual_audio_verified_scope": "Native AAC received, fully decoded to nonzero PCM; no perceptual audio approval."
   },
   "exclusions_checked_this_turn": [
     {
@@ -180,7 +182,7 @@
     "approved_checks_reused": true,
     "gemini_calls": 0,
     "vidiq_credits_used": 0,
-    "new_av_jobs": 0,
+    "new_av_jobs": 1,
     "paid_effects": 0,
     "queue_or_ledger_or_schedule_changed": false,
     "master_or_validator_changed": false,
@@ -188,7 +190,7 @@
     "final_review_v3_unchanged": true
   },
   "mcp_connection": {
-    "status": "CLOUD_TRANSPORT_AND_TOOL_CATALOGUE_VERIFIED_NATIVE_AV_PENDING",
+    "status": "CLOUD_MCP_DOWNLOAD_EXECUTED_NATIVE_AV_RECEIVED",
     "native_tools_available_in_this_chat": false,
     "existing_personal_rapidapi_plugin_observed": true,
     "provider_documented_auth_header": "x-rapidapi-key (generic REST documentation); actual generated MCP uses x-api-key",
@@ -225,7 +227,8 @@
     "protocol_version": "2024-11-05",
     "standard_notification_acknowledgement": false,
     "notification_compatibility": "HTTP_200_METHOD_NOT_FOUND_COMPATIBILITY",
-    "owner_key_execution_entitlement_verified": false,
+    "owner_key_execution_entitlement_verified": true,
     "tools_call_implemented": "Only the new one-start native diagnostic; the approved connection probe still refuses tools/call."
-  }
+  },
+  "result_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-native-first-result.json"
 }
