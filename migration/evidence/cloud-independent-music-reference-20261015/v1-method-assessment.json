@@ -1,0 +1,12 @@
+{
+  "version": "cloud-music-reference-v1-method-assessment",
+  "status": "REJECTED_NON_NATIVE_MEAN_FLOOR_METHOD",
+  "policy_commit": "ceffe67af8106ed2524d25e17869fb84dab1a37c",
+  "floors": {
+    "CE": 5.734871020082247,
+    "PQ": 7.690813734167448
+  },
+  "failing_target_windows": 735,
+  "reason": "Preregistered mean-based floor diverged from unchanged native qa_phase5.py line630 min-per-window rule. The new sample and all measurements are retained. This is an explicit implementation correction after observation, not a blind preregistered result. No sample retuning or score inference repeat permitted.",
+  "publication_authorized": false
+}
