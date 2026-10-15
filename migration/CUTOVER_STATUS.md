@@ -639,3 +639,12 @@ Lacuna concreta corrigida nos loops de native_probe.py e next_window.py: URL ago
 Documentação oficial consultada não apresentou correção demonstrável para o timeout do recorte distante nem proteção global de banda contra excedentes. no_merge muda o empacotamento; não é correção comprovada. Causa interna do timeout permanece desconhecida. Foi solicitada ao titular autorização para contato técnico com o suporte, ainda não enviado. Não reiniciar o job existente nem tentar variações sem fundamento.
 
 Recibo native-delivery-terminal-guard-result.json. Zero novos jobs, consultas ao fornecedor, pedidos de mídia ou dispatches. Ledger, workflows, finalv3 e revisões aprovadas preservados. Entrega recorrente continua BLOCKED; análise de áudio/capacidade e pacote completo não avançados. Produção, publicação e supervisor OFF.
+
+
+## 2026-10-15 — suporte privado enviado e reuso de referências esclarecido
+
+Titular autorizou o contato e pediu continuidade paralela. Mensagem privada enviada e confirmada no Inbox RapidAPI ao fornecedor Video Download API, aproximadamente16:35UTC; pede correção documentada do job terminal e hard stop de banda. Sem resposta observada, sem secrets/arquivos enviados, sem autorização para repetir job ou cobrar. URL e evidência em native-av-continuation-review.json.
+
+Auditoria estática do reader semantic-audio-v3: validade24h se aplica ao snapshot de mercado real; não estabelece novo download AV diário de referências idênticas. Evidências hash-bound só podem ser reutilizadas enquanto identidade, coorte atual e suporte editorial forem válidos. Os planos21janelas/418s são amostras datadas, não obrigação diária;3janelas/dia também não é cadência aprovada. Não mudar datas para simular coleta/revisão. Reader permanece shadow, não produção; dependências internas do ZIP não reinspecionadas nesta auditoria. Carga efetiva de novas aquisições ainda indeterminada.
+
+Pesquisa paralela descartou ofertas pagas/iniciais/inconsistentes e não demonstrou outra rota recorrente gratuita. Recibo lista fontes e limites, sem novos cadastros ou testes de mídia. Entrega ainda BLOCKED; abertura preservada reutilizável, nenhuma aprovação de áudio/capacidade/pacote. Produção/publicação/supervisor OFF.
