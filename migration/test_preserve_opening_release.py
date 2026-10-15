@@ -4,11 +4,35 @@ import hashlib
 import io
 import json
 import os
+import re
 from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
 import preserve_opening_release as p
+
+
+def validate_workflow_contexts(source):
+    """Focused expression-context lint for this workflow, beyond YAML syntax.
+
+    GitHub context availability table, reviewed 2026-10-15:
+    https://docs.github.com/en/actions/reference/workflows-and-actions/contexts
+    This is not a general GitHub Actions or actionlint implementation.
+    """
+    prefix, steps = source.split('    steps:\n', 1)
+    # Conservative subset supported at ALL job-level keys present here.
+    # In particular runner and env are unavailable at jobs.<id>.env.
+    job_allowed = {'github', 'needs', 'vars', 'inputs'}
+    step_allowed = {'github', 'needs', 'strategy', 'matrix', 'job', 'runner',
+                    'env', 'vars', 'secrets', 'steps', 'inputs'}
+    for section, allowed in [(prefix, job_allowed), (steps, step_allowed)]:
+        for expression in re.findall(r'\$\{\{(.*?)\}\}', section, flags=re.S):
+            for context in re.findall(r'\b([A-Za-z_][A-Za-z_0-9]*)\.', expression):
+                if context not in allowed:
+                    raise ValueError('DISALLOWED_CONTEXT:' + context)
+    if 'runner.temp' in prefix:
+        raise ValueError('RUNNER_CONTEXT_AT_JOB_LEVEL')
+    return True
 
 
 class PreservationTests(unittest.TestCase):
@@ -23,7 +47,7 @@ class PreservationTests(unittest.TestCase):
                        'size_in_bytes': p.ARCHIVE_BYTES,
                        'digest': 'sha256:' + p.ARCHIVE_SHA}
         self.env = {'GITHUB_REPOSITORY': p.REPO, 'GITHUB_EVENT_NAME': 'workflow_dispatch',
-                    'GITHUB_RUN_NUMBER': '1', 'GITHUB_RUN_ATTEMPT': '1',
+                    'GITHUB_RUN_NUMBER': '2', 'GITHUB_RUN_ATTEMPT': '1',
                     'GITHUB_REF': 'refs/heads/main', 'GH_TOKEN': 'synthetic-test-token',
                     'GITHUB_OUTPUT': str(self.root / 'output')}
 
@@ -31,7 +55,7 @@ class PreservationTests(unittest.TestCase):
         with patch.dict(os.environ, self.env, clear=True):
             p.environment()
             for key, bad in [('GITHUB_REPOSITORY', 'someone/fork'),
-                             ('GITHUB_EVENT_NAME', 'push'), ('GITHUB_RUN_NUMBER', '2'),
+                             ('GITHUB_EVENT_NAME', 'push'), ('GITHUB_RUN_NUMBER', '1'),
                              ('GITHUB_RUN_ATTEMPT', '2'), ('GITHUB_REF', 'refs/heads/other'),
                              ('GH_TOKEN', '')]:
                 with self.subTest(key=key), patch.dict(os.environ, {key: bad}):
@@ -190,6 +214,82 @@ class PreservationTests(unittest.TestCase):
             self.assertIs(value[field], False)
         self.assertEqual(value['provider_calls'], 0)
         self.assertIn('github_asset_id', json.loads(write.call_args.args[0]))
+
+    def live_failed_run(self):
+        return {'id': p.FAILED_RUN, 'head_sha': p.FAILED_SHA, 'run_number': 1,
+                'run_attempt': 1, 'event': 'push', 'head_branch': 'main',
+                'status': 'completed', 'conclusion': 'failure'}
+
+    def test_prior_receipt_and_live_zero_job_failure_are_required(self):
+        with patch.object(p, 'api', side_effect=[self.live_failed_run(), {'total_count': 0, 'jobs': []}]) as api:
+            saved = p.verify_prior_validation_failure()
+        self.assertEqual(saved['run_id'], 38777882037)
+        self.assertEqual(api.call_count, 2)
+        self.assertIn('filter=all', api.call_args.args[0])
+
+    def test_prior_receipt_missing_or_tampered_stops_before_api(self):
+        with patch.object(p, 'api') as api:
+            with self.assertRaises(FileNotFoundError):
+                p.verify_prior_validation_failure(self.root / 'absent.json')
+            saved = json.loads(p.FAILURE_RECEIPT.read_text())
+            for key, bad in [('head_sha', 'different'), ('jobs_count', 1),
+                             ('replacement_run_number', 3), ('rerun_of_upload_job_allowed', True)]:
+                receipt = self.root / 'failure.json'
+                receipt.write_text(json.dumps(dict(saved, **{key: bad})))
+                with self.subTest(key=key), self.assertRaises(ValueError):
+                    p.verify_prior_validation_failure(receipt)
+        api.assert_not_called()
+
+    def test_prior_live_run_cannot_have_jobs_or_different_identity(self):
+        for jobs in [{'total_count': 1, 'jobs': [{}]}, {'total_count': 0, 'jobs': [{}]}, {}]:
+            with self.subTest(jobs=jobs), patch.object(p, 'api', side_effect=[self.live_failed_run(), jobs]):
+                with self.assertRaises(ValueError):
+                    p.verify_prior_validation_failure()
+        for key, bad in [('id', 2), ('head_sha', 'other'), ('run_attempt', 2),
+                         ('event', 'workflow_dispatch'), ('conclusion', 'success')]:
+            with self.subTest(key=key), patch.object(p, 'api', return_value=dict(self.live_failed_run(), **{key: bad})):
+                with self.assertRaises(ValueError):
+                    p.verify_prior_validation_failure()
+
+    def test_main_blocks_preflight_and_upload_when_prior_receipt_fails(self):
+        for mode in ['preflight', 'transfer']:
+            with patch.object(p, 'environment'), patch.object(p, 'verify_prior_validation_failure', side_effect=ValueError), patch.object(p, 'preflight') as preflight, patch.object(p, 'transfer') as transfer, patch.object(p.sys, 'argv', ['script', mode]):
+                with self.assertRaises(ValueError):
+                    p.main()
+                preflight.assert_not_called()
+                transfer.assert_not_called()
+
+    def test_only_run_two_attempt_one_is_permitted(self):
+        with patch.dict(os.environ, self.env, clear=True):
+            for number in ['1', '3', '4', '', '02']:
+                with self.subTest(number=number), patch.dict(os.environ, {'GITHUB_RUN_NUMBER': number}):
+                    with self.assertRaises(ValueError):
+                        p.environment()
+            with patch.dict(os.environ, {'GITHUB_RUN_ATTEMPT': '2'}), self.assertRaises(ValueError):
+                p.environment()
+
+    def workflow_source(self):
+        return (Path(__file__).resolve().parents[1] / '.github/workflows/preserve-opening-release.yml').read_text()
+
+    def test_actual_workflow_expression_contexts(self):
+        self.assertTrue(validate_workflow_contexts(self.workflow_source()))
+
+    def test_context_lint_rejects_original_runner_job_env_bug(self):
+        broken = self.workflow_source().replace('    steps:\n',
+                  '    env:\n      OPENING_RESTORE_ROOT: ${{ runner.temp }}/native-opening-11983614696\n    steps:\n')
+        with self.assertRaisesRegex(ValueError, 'DISALLOWED_CONTEXT:runner'):
+            validate_workflow_contexts(broken)
+
+    def test_runner_temp_export_precedes_use_and_follows_preflight(self):
+        source = self.workflow_source()
+        export = source.index("run: printf 'OPENING_RESTORE_ROOT=%s/native-opening-11983614696")
+        self.assertIn('"$RUNNER_TEMP" >> "$GITHUB_ENV"', source)
+        self.assertLess(source.index('preserve_opening_release.py preflight'), export)
+        self.assertLess(export, source.index('mkdir -m 700 "$OPENING_RESTORE_ROOT"'))
+        self.assertLess(export, source.index('path: ${{ env.OPENING_RESTORE_ROOT }}'))
+        self.assertIn('migration/opening-validation-failure.json', source)
+        self.assertIn('test "$NUMBER" = 2', source)
+        self.assertIn('test "$ATTEMPT" = 1', source)
 
 
 if __name__ == '__main__':

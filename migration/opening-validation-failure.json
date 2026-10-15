@@ -1,0 +1,26 @@
+{
+  "schema": "opening-validation-failure-v1",
+  "repository": "matheusmagah-cpu/heroverse-engine",
+  "run_id": 38777882037,
+  "run_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38777882037",
+  "head_sha": "b4d845aaf0e12ec74cc021836e87f14144285939",
+  "run_number": 1,
+  "event": "push",
+  "conclusion": "failure",
+  "jobs_count": 0,
+  "jobs": [],
+  "annotation": {
+    "path": ".github/workflows/preserve-opening-release.yml",
+    "line": 16,
+    "column": 29,
+    "message_excerpt": "Unrecognized named-value: 'runner'",
+    "context": "jobs.preserve.env",
+    "full_annotation_available": false,
+    "source": "executor visual excerpt confirmed by parent"
+  },
+  "evidence_source": "parent verified GitHub run and jobs APIs",
+  "upload_job_executed": false,
+  "replacement_run_number": 2,
+  "replacement_run_attempt": 1,
+  "rerun_of_upload_job_allowed": false
+}

@@ -23,6 +23,9 @@ NAME = f'native-j2rk8ycXe3c-0-40s-sha256-{NATIVE_SHA}.mp4'
 LIMIT = 96 * 1024 * 1024
 BASE = f'repos/{REPO}'
 UPLOAD = f'https://uploads.github.com/{BASE}/releases/{RELEASE_ID}/assets'
+FAILED_RUN = 38777882037
+FAILED_SHA = 'b4d845aaf0e12ec74cc021836e87f14144285939'
+FAILURE_RECEIPT = Path(__file__).with_name('opening-validation-failure.json')
 
 
 def require(condition, reason):
@@ -48,10 +51,38 @@ def api(endpoint, upload=None):
 def environment():
     require(os.environ.get('GITHUB_REPOSITORY') == REPO, 'REPOSITORY_MISMATCH')
     require(os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch', 'MANUAL_ONLY')
-    require(os.environ.get('GITHUB_RUN_NUMBER') == '1', 'ONE_RUN_ONLY')
+    require(os.environ.get('GITHUB_RUN_NUMBER') == '2', 'ONE_RUN_ONLY')
     require(os.environ.get('GITHUB_RUN_ATTEMPT') == '1', 'ONE_ATTEMPT_ONLY')
     require(os.environ.get('GITHUB_REF') == 'refs/heads/main', 'MAIN_ONLY')
     require(os.environ.get('GH_TOKEN'), 'EPHEMERAL_TOKEN_REQUIRED')
+
+
+def verify_prior_validation_failure(path=FAILURE_RECEIPT):
+    """The one exception is pinned to a proven validation failure with zero jobs."""
+    saved = json.loads(path.read_text())
+    required = {
+        'schema': 'opening-validation-failure-v1', 'repository': REPO,
+        'run_id': FAILED_RUN, 'head_sha': FAILED_SHA, 'run_number': 1,
+        'event': 'push', 'conclusion': 'failure', 'jobs_count': 0, 'jobs': [],
+        'upload_job_executed': False, 'replacement_run_number': 2,
+        'replacement_run_attempt': 1, 'rerun_of_upload_job_allowed': False,
+    }
+    require(all(saved.get(k) == v for k, v in required.items()), 'PRIOR_FAILURE_RECEIPT_MISMATCH')
+    annotation = saved.get('annotation', {})
+    require(annotation.get('path') == '.github/workflows/preserve-opening-release.yml' and
+            annotation.get('line') == 16 and annotation.get('column') == 29 and
+            annotation.get('message_excerpt') == "Unrecognized named-value: 'runner'" and
+            annotation.get('context') == 'jobs.preserve.env', 'PRIOR_FAILURE_ANNOTATION_MISMATCH')
+    run = api(f'{BASE}/actions/runs/{FAILED_RUN}')
+    require(run.get('id') == FAILED_RUN and run.get('head_sha') == FAILED_SHA and
+            run.get('run_number') == 1 and run.get('run_attempt') == 1 and
+            run.get('event') == 'push' and run.get('head_branch') == 'main' and
+            run.get('status') == 'completed' and run.get('conclusion') == 'failure',
+            'PRIOR_FAILURE_LIVE_RUN_MISMATCH')
+    jobs = api(f'{BASE}/actions/runs/{FAILED_RUN}/jobs?filter=all&per_page=100')
+    require(jobs.get('total_count') == 0 and jobs.get('jobs') == [],
+            'PRIOR_RUN_HAD_JOBS_NO_RETRY_ALLOWED')
+    return saved
 
 
 def destination():
@@ -136,6 +167,9 @@ def receipt(status, asset=None, audit=None):
              'preservation_run_id': os.environ.get('GITHUB_RUN_ID'),
              'preservation_run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
              'commit_sha': os.environ.get('GITHUB_SHA'), 'provider_calls': 0,
+             'prior_validation_failure_run_id': FAILED_RUN,
+             'prior_validation_failure_head_sha': FAILED_SHA,
+             'prior_validation_failure_jobs_count': 0,
              'production': False, 'publication': False, 'supervisor': False,
              'full_av_qa_repeated': False, 'binary_through_chat': False,
              'git_media_blob_created': False, 'upload_retry_allowed': False}
@@ -191,6 +225,7 @@ def transfer(root):
 
 def main():
     environment()
+    verify_prior_validation_failure()
     if sys.argv[1:] == ['preflight']:
         preflight()
     elif sys.argv[1:] == ['transfer']:

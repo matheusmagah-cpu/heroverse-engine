@@ -12,10 +12,8 @@ jobs:
     if: github.repository == 'matheusmagah-cpu/heroverse-engine'
     runs-on: ubuntu-24.04
     timeout-minutes: 3
-    env:
-      OPENING_RESTORE_ROOT: ${{ runner.temp }}/native-opening-11983614696
     steps:
-      - name: Permit one manual main-branch execution and first attempt only
+      - name: Permit only corrected manual run 2 and first attempt
         env:
           EVENT: ${{ github.event_name }}
           REF: ${{ github.ref }}
@@ -24,7 +22,7 @@ jobs:
         run: |
           test "$EVENT" = workflow_dispatch
           test "$REF" = refs/heads/main
-          test "$NUMBER" = 1
+          test "$NUMBER" = 2
           test "$ATTEMPT" = 1
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -32,6 +30,8 @@ jobs:
           sparse-checkout: |
             migration/preserve_opening_release.py
             migration/test_preserve_opening_release.py
+            migration/opening-validation-failure.json
+            .github/workflows/preserve-opening-release.yml
           sparse-checkout-cone-mode: false
       - name: Run offline transfer safety tests
         run: python3 -m unittest discover -s migration -p test_preserve_opening_release.py -v
@@ -40,6 +40,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 migration/preserve_opening_release.py preflight
+      - name: Define runner-local output only after prior-failure and destination gates
+        if: steps.preflight.outputs.needs_transfer == 'true'
+        run: printf 'OPENING_RESTORE_ROOT=%s/native-opening-11983614696\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
       - name: Bound extracted output below 96 MiB on this disposable runner
         if: steps.preflight.outputs.needs_transfer == 'true'
         run: |
