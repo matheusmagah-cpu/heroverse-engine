@@ -94,6 +94,7 @@ class Client:
         self.methods_sent = []
         self.http_responses = []
         self.notification_acknowledgement = None
+        self.notification_rpc_error_code = None
 
     def public_trace(self):
         return {
@@ -101,6 +102,7 @@ class Client:
             "http_responses": self.http_responses,
             "protocol_version": self._protocol,
             "notification_acknowledgement": self.notification_acknowledgement,
+            "notification_rpc_error_code": self.notification_rpc_error_code,
         }
 
     def accept_notification(self, response):
@@ -120,6 +122,17 @@ class Client:
         if response.status == 200:
             value = json.loads(raw)
             if isinstance(value, dict) and "error" in value:
+                error = value["error"]
+                code = error.get("code") if isinstance(error, dict) else None
+                if type(code) is int and -32768 <= code <= -32000:
+                    self.notification_rpc_error_code = code
+                # A response to an id-less notification is unsolicited. Only
+                # the exact method-not-found case can continue to catalogue
+                # discovery; this is not a successful/standard initialized ack.
+                if (value.get("jsonrpc") == "2.0" and value.get("id") is None
+                        and "result" not in value and code == -32601):
+                    self.notification_acknowledgement = "HTTP_200_METHOD_NOT_FOUND_COMPATIBILITY"
+                    return
                 raise ProbeError("NOTIFICATION_RPC_ERROR")
             if (isinstance(value, dict) and value.get("jsonrpc") == "2.0"
                     and value.get("id") is None and "result" in value
@@ -176,7 +189,7 @@ def probe(key, opener=None, evidence=None):
     try:
         initialized = client.send("initialize", {
             "protocolVersion": PROTOCOLS[0], "capabilities": {},
-            "clientInfo": {"name": "heroverse-reference-connection-probe", "version": "0.1.2"},
+            "clientInfo": {"name": "heroverse-reference-connection-probe", "version": "0.1.3"},
         })
         if "tools" not in initialized.get("capabilities", {}):
             raise ProbeError("TOOLS_CAPABILITY_NOT_ADVERTISED")
@@ -202,6 +215,8 @@ def probe(key, opener=None, evidence=None):
         "request_methods": client.methods_sent,
         "http_responses": client.http_responses,
         "notification_acknowledgement": client.notification_acknowledgement,
+        "notification_rpc_error_code": client.notification_rpc_error_code,
+        "standard_notification_acknowledgement": client.notification_acknowledgement == "HTTP_202_STANDARD",
         "tools_in_first_page": len(names), "tool_names": names,
         "additional_tool_pages_advertised": bool(result.get("nextCursor")),
         "credential_supplied": True,

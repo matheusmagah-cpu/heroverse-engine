@@ -21,6 +21,29 @@ class FakeOpener:
 
 
 class ProbeTests(unittest.TestCase):
+    def test_only_uncorrelated_method_not_found_can_continue_to_catalogue(self):
+        first = Response(b'{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"tools":{}}}}')
+        notification = Response(b'{"jsonrpc":"2.0","id":null,"error":{"code":-32601,"message":"private-value"}}')
+        listing = Response(b'{"jsonrpc":"2.0","id":2,"result":{"tools":[{"name":"download"}]}}')
+        result = probe("fake-key", FakeOpener([first, notification, listing]))
+        self.assertEqual(result["status"], "MCP_TRANSPORT_AND_TOOL_LIST_VERIFIED")
+        self.assertEqual(result["notification_rpc_error_code"], -32601)
+        self.assertEqual(result["notification_acknowledgement"], "HTTP_200_METHOD_NOT_FOUND_COMPATIBILITY")
+        self.assertFalse(result["standard_notification_acknowledgement"])
+        self.assertNotIn("private-value", json.dumps(result))
+        self.assertFalse(result["owner_entitlement_verified_by_this_probe"])
+
+    def test_other_notification_errors_remain_fatal(self):
+        for code, response_id in [(-32600, None), (-32001, None), (-32601, 1)]:
+            with self.subTest(code=code, response_id=response_id):
+                notification = Response(json.dumps({"jsonrpc":"2.0","id":response_id,"error":{"code":code,"message":"private-value"}}).encode())
+                client = Client("fake-key", FakeOpener([notification]))
+                client._protocol = "2024-11-05"
+                with self.assertRaisesRegex(ProbeError, "NOTIFICATION_RPC_ERROR"):
+                    client.send("notifications/initialized")
+                self.assertIsNone(client.notification_acknowledgement)
+                self.assertNotIn("private-value", json.dumps(client.public_trace()))
+
     def test_empty_success_notification_compatibility_is_explicit(self):
         for status in (200, 204):
             with self.subTest(status=status):

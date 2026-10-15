@@ -1,0 +1,63 @@
+{
+  "version": "heroverse-rapidapi-cloud-mcp-third-run-v1",
+  "recorded_at": "2026-10-15T12:45:10.803Z",
+  "repository_head": "439a2df85610879f8e1ea8523b2e943e17a13304",
+  "status": "MCP_2024_INITIALIZES_NOTIFICATION_RETURNS_RPC_ERROR",
+  "workflow": {
+    "id": 38736776840,
+    "job_id": 116427973180,
+    "url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38736776840",
+    "conclusion": "failure",
+    "job_duration_seconds": 9,
+    "offline_tests_passed": 12
+  },
+  "live_probe": {
+    "status": "BLOCKED",
+    "media_jobs_submitted": 0,
+    "tools_call_requests": 0,
+    "request_methods": [
+      "initialize",
+      "notifications/initialized"
+    ],
+    "http_responses": [
+      {
+        "method": "initialize",
+        "status": 200
+      },
+      {
+        "method": "notifications/initialized",
+        "status": 200
+      }
+    ],
+    "protocol_version": "2024-11-05",
+    "notification_acknowledgement": null,
+    "failure_code": "NOTIFICATION_RPC_ERROR"
+  },
+  "interpretation": {
+    "protocol_version_observed": "2024-11-05",
+    "initialize_http_status": 200,
+    "notification_http_status": 200,
+    "notification_error_code_not_retained_by_this_probe": true,
+    "tool_catalogue_not_received": true,
+    "native_media_not_requested": true
+  },
+  "correction": {
+    "reason": "A JSON-RPC error response was returned to an id-less notification. Capture only its reserved numeric error code; continue to catalogue discovery only for exact uncorrelated -32601 method-not-found, explicitly labelled nonstandard provider compatibility.",
+    "other_errors_remain_fatal": true,
+    "media_calls_still_impossible": true,
+    "strict_standard_handshake_not_claimed": true,
+    "offline_tests_passed": 14,
+    "primary_source": "https://www.jsonrpc.org/specification#notification",
+    "next_live_validation_not_yet_started": true
+  },
+  "preserved": {
+    "media_jobs": 0,
+    "tools_call_requests": 0,
+    "gemini_calls": 0,
+    "vidiq_calls": 0,
+    "production": false,
+    "publication": false,
+    "supervisor": false,
+    "recurring_capacity_qualified": false
+  }
+}
