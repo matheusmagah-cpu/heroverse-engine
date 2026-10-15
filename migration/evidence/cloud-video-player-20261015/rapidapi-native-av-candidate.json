@@ -1,0 +1,162 @@
+{
+  "version": "heroverse-recurring-native-av-candidate-v2",
+  "recorded_at": "2026-10-15T08:57:38.839Z",
+  "repository_head_verified": "fdb0bd2c7a709a0eabfe71d7bbc9d7494e61352e",
+  "status": "PUBLISHED_LIMITS_SCREENED_AUTHENTICATION_AND_ACTUAL_MEDIA_TEST_PENDING",
+  "provider": "YouTube Info & Download API via RapidAPI",
+  "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
+  "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
+  "direct_vendor_trial_not_selected": true,
+  "observation_kind": "Authenticated owner plan is NOT verified. Public live RapidAPI UI and provider documentation only; no playback proof.",
+  "published_free_limits": {
+    "price_usd_per_month": 0,
+    "units_per_day": 500,
+    "units_hard_limit": true,
+    "requests_per_month": 500000,
+    "requests_hard_limit": true,
+    "requests_per_hour": 1000,
+    "platform_bandwidth_mb_per_month": 10240,
+    "platform_bandwidth_overage_usd_per_mb": 0.001,
+    "platform_bandwidth_hard_limit_not_verified": true,
+    "possible_card_requirement_not_resolved": true
+  },
+  "live_provider_download_pricing": {
+    "units_per_1080p_job": 4,
+    "unit_usd": 0.00005,
+    "standard_duration_minutes": 180,
+    "up_to_90_additional_minutes_multiplier": 3,
+    "source_duration_ceiling_minutes_for_proposed_test": 240,
+    "conservative_units_per_long_source_clip": 12,
+    "progress_polling_included_free": true
+  },
+  "cached_secondary_conflict": {
+    "secondary_1080p_price_usd": 0.0003,
+    "secondary_1080p_standard_duration_minutes": 90,
+    "live_provider_1080p_price_usd": 0.0002,
+    "live_provider_standard_duration_minutes": 180,
+    "decision": "Use current provider UI; recheck price/entitlement before any effect. No actual charge inferred."
+  },
+  "conditional_workload": {
+    "classification": "ARITHMETIC_ONLY_NOT_MEASURED_THROUGHPUT_OR_APPROVED_CADENCE",
+    "reuse_existing_sample": {
+      "sources": 7,
+      "windows": 21,
+      "requested_seconds": 418
+    },
+    "assumption": "Each source at most four hours; each clip charged the whole source-duration multiplier.",
+    "download_units_per_day": 252,
+    "optional_single_info_lookup_per_source_units": 14,
+    "total_conservative_units_per_day": 266,
+    "published_daily_allowance": 500,
+    "remaining_nominal_units": 234,
+    "for_31_days": {
+      "windows": 651,
+      "requested_seconds": 12958
+    },
+    "monthly_bandwidth_and_runtime_not_measured": true
+  },
+  "proposed_first_test": {
+    "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
+    "effect_status": "NOT_STARTED",
+    "provider_job_id": null,
+    "calls_started": 0,
+    "endpoint": "GET /ajax/download.php",
+    "public_parameters": {
+      "url": "https://www.youtube.com/watch?v=j2rk8ycXe3c",
+      "format": "1080",
+      "start_time": 0,
+      "end_time": 40,
+      "add_info": 1,
+      "allow_extended_duration": 1,
+      "max_duration": 240
+    },
+    "no_merge_omitted_to_request_default_merged_audio_video": true,
+    "original_registered_duration_seconds": 12708,
+    "target_seconds": [
+      0,
+      40
+    ],
+    "conservative_expected_download_units": 12,
+    "maximum_planned_units_with_one_optional_info_lookup": 14,
+    "source_range_input_does_not_prove_partial_ingestion": true,
+    "retries": 0
+  },
+  "prerequisites": [
+    "Owner access through secure RapidAPI login; account creation, if required, must follow the advertised owner handoff.",
+    "Verify actual Basic entitlement and fresh remaining units, request and bandwidth balances. No paid plan, card, trial auto-renewal or recharge to be added by the agent.",
+    "Resolve platform bandwidth exposure and enforce a stop within the included allowance before adoption.",
+    "Save exact request as pending only after entitlement check; start once, immediately persist actual job id, response, charged units and delivery origin.",
+    "Fetch actual MP4 before expiry, hash bytes, probe and decode video/audio, inspect registered native frames and decoded audio with exact source-clock mapping.",
+    "Measure actual units, transfer, time, storage and recurring limits before considering permanent manager integration or workload acceptance."
+  ],
+  "resume_boundary": {
+    "no_job_currently_exists_from_this_candidate": true,
+    "inspect_existing_result_before_start_if_prior_checkpoint_uncertain": true,
+    "never_repeat_apify_request": true,
+    "stop_on_source_safeguard_or_failure_without_concrete_correction": true,
+    "no_cookies_proxy_network_change_or_access_control_bypass": true
+  },
+  "authentication": {
+    "login_required_observed": true,
+    "account_access_verified": false,
+    "account_created": false,
+    "subscription_started": false,
+    "api_key_created_or_copied": false,
+    "api_key_must_not_be_written_to_repository": true,
+    "secure_login_url_observed": "https://rapidapi.com/auth/login?referral=%2Fvalsuttlej53%2Fapi%2Fyoutube-info-download-api%2Fpricing",
+    "owner_reported_connected": true,
+    "cloud_verification": "Fresh target page continued to request sign-in; no active Basic entitlement, key or balance verified.",
+    "login_form_verified": true
+  },
+  "adoption": {
+    "actual_video_verified": false,
+    "actual_audio_verified": false,
+    "native_quality_verified": false,
+    "recurring_capacity_qualified": false,
+    "permanent_dependency_integrated": false,
+    "current_pending_stage_resolved": false,
+    "production_approved": false,
+    "publication_authorized": false,
+    "supervisor_enabled": false
+  },
+  "exclusions_checked_this_turn": [
+    {
+      "provider": "Kapwing",
+      "disposition": "REJECTED_FOR_CURRENT_FULL_REFERENCE_LINKS",
+      "basis": "Official upload guidance limits link imports to 120 minutes; current sources are three to four hours.",
+      "url": "https://www.kapwing.com/help/upload/"
+    },
+    {
+      "provider": "Flixier",
+      "disposition": "NOT_SELECTED_FOR_RECURRING_EXPORT_WORKLOAD",
+      "basis": "Free published export allowance is 10 minutes/month; existing 418-second sample repeated daily would exceed it. Preview access not tested or inferred.",
+      "url": "https://flixier.com/help/pricing-plans-explained"
+    },
+    {
+      "provider": "StreamLadder",
+      "disposition": "NOT_SELECTED_NOW_FREE_DOWNLOADER_LIMITS_AND_AUTOMATION_UNRESOLVED",
+      "basis": "Live app Free table $0/month; tool entry requires login. Current downloader page distinguishes paid unlimited access from free; older blog says unlimited. No source-length, numeric recurring downloader limit or programmatic path verified. Editor export/upload limits are not treated as raw downloader limits.",
+      "url": "https://www.streamladder.com/tools/clip-downloader",
+      "account_created": false,
+      "source_submitted": false
+    },
+    {
+      "provider": "Klipz.app",
+      "disposition": "NOT_QUALIFIED_FOR_CONTINUOUS_AUTOMATION",
+      "basis": "FAQ advertises free/no account/one concurrent job; terms prohibit automated access without authorization. Such vendor authorization is not established.",
+      "url": "https://klipz.app/terms",
+      "source_submitted": false
+    }
+  ],
+  "preserved": {
+    "approved_checks_reused": true,
+    "gemini_calls": 0,
+    "vidiq_credits_used": 0,
+    "new_av_jobs": 0,
+    "paid_effects": 0,
+    "queue_or_ledger_or_schedule_changed": false,
+    "master_or_validator_changed": false,
+    "oracle_or_infrastructure_work": false,
+    "final_review_v3_unchanged": true
+  }
+}
