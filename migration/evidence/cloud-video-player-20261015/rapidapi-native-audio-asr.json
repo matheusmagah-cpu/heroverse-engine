@@ -1,0 +1,28 @@
+{
+  "version": "native-reference-audio-asr-v1",
+  "created_at": "2026-10-15T15:14:00.855158+00:00",
+  "input_pcm_sha256": "420e1a1bec95c5582e817093aee326fc4cf0c98bfca0ea078dfb7baf090043dc",
+  "source_video_sha256": "5dca962757c952c8048c746f23f96a325cf15258f429e1e79e7b5ddf72fb0fb5",
+  "model": "faster-whisper 1.2.1 / base / cpu int8",
+  "model_weights_sha256": "d01c3014881c9c6f3133c182f3d2887eb6ca1c789a7538c5c007196857a0a6a9",
+  "model_cache_snapshot": "/workspace/scratch/f2180567de8e/rapidapi-native-av/model-cache/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+  "duration": 40.0311875,
+  "duration_after_vad": 0,
+  "detected_language": "en",
+  "language_probability": 0.5679072141647339,
+  "segments": [],
+  "elapsed_seconds": 9.502466716000527,
+  "human_or_direct_model_listening_completed": false,
+  "no_external_audio_upload": true,
+  "gemini_calls": 0,
+  "qualification_scope": "Native PCM machine transcription only; no perceptual-quality or whole-reference approval.",
+  "asr_derivative": {
+    "sample_rate": 16000,
+    "channels": 1,
+    "format": "float32 little-endian",
+    "samples": 640499,
+    "sha256": "5e55dc9d1dff3e946cef1b2fd85eec85b455640fa2fca374e53de4c53a2d3784",
+    "native_pcm_unchanged": true,
+    "reason": "Documented ndarray input avoids installed PyAV metadata_errors incompatibility; FFmpeg explicitly creates only an ASR derivative."
+  }
+}
