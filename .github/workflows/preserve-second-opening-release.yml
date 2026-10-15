@@ -1,0 +1,72 @@
+name: HeroVerse preserve second approved native opening in existing private release
+on:
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: heroverse-preserve-second-opening-release-12005979620
+  cancel-in-progress: false
+jobs:
+  preserve:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Permit only first manual run and first attempt
+        env:
+          EVENT: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          NUMBER: ${{ github.run_number }}
+          ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          test "$EVENT" = workflow_dispatch
+          test "$REF" = refs/heads/main
+          test "$NUMBER" = 1
+          test "$ATTEMPT" = 1
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            migration/preserve_second_opening_release.py
+            migration/test_preserve_second_opening_release.py
+            .github/workflows/preserve-second-opening-release.yml
+          sparse-checkout-cone-mode: false
+      - name: Run offline transfer safety tests
+        run: python3 -m unittest discover -s migration -p test_preserve_second_opening_release.py -v
+      - name: Verify exact private destination and bounded source or reuse identical asset
+        id: preflight
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_second_opening_release.py preflight
+      - name: Define runner-local output only after destination gates
+        if: steps.preflight.outputs.needs_transfer == 'true'
+        run: printf 'OPENING_RESTORE_ROOT=%s/native-opening-12005979620\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+      - name: Bound extracted output below 96 MiB on this disposable runner
+        if: steps.preflight.outputs.needs_transfer == 'true'
+        run: |
+          mkdir -m 700 "$OPENING_RESTORE_ROOT"
+          sudo mount -t tmpfs -o "size=95m,nosuid,nodev,noexec,mode=0700,uid=$(id -u),gid=$(id -g)" tmpfs "$OPENING_RESTORE_ROOT"
+      - name: Restore exact existing artifact inside GitHub
+        if: steps.preflight.outputs.needs_transfer == 'true'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          repository: matheusmagah-cpu/heroverse-engine
+          artifact-ids: '12005979620'
+          run-id: '38807777341'
+          github-token: ${{ github.token }}
+          path: ${{ env.OPENING_RESTORE_ROOT }}
+          merge-multiple: true
+      - name: Hash only for transfer integrity and upload exactly one native MP4
+        if: steps.preflight.outputs.needs_transfer == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 migration/preserve_second_opening_release.py transfer
+      - name: Preserve text-only receipt for run audit
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-opening-release-receipt-${{ github.run_id }}
+          path: second-opening-preservation-receipt.json
+          if-no-files-found: ignore
+          retention-days: 30
