@@ -1,7 +1,7 @@
 {
   "version": "heroverse-rapidapi-mcp-connection-observation-v1",
   "recorded_at": "2026-10-15T09:20:28.383Z",
-  "status": "CONFIGURATION_NOT_CONNECTED_CLOUD_AUTH_AND_TARGET_VERIFICATION_TIMED_OUT",
+  "status": "CLOUD_CLIENT_READY_WAITING_SECRET_AND_LIVE_HANDSHAKE",
   "user_request": "Configure MCP so execution does not depend on a transient website session.",
   "scope": "Only the existing native market audiovisual blocker; no media request, new infrastructure, paid plan or permanent provider adoption.",
   "provider_primary_documentation": {
@@ -80,5 +80,17 @@
     "fresh_target_verification_timed_out": true,
     "agent_media_api_calls": 0,
     "new_subscribe_clicks": 0
+  },
+  "latest_preparation": {
+    "recorded_at": "2026-10-15T12:25:34.722Z",
+    "receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-preparation.json",
+    "owned_basic_active_verified": true,
+    "generated_mcp_endpoint_and_headers_verified": true,
+    "private_package_created": true,
+    "web_tools_connected": false,
+    "cloud_workflow_prepared": true,
+    "local_tests_passed": 6,
+    "secret_provisioned": false,
+    "live_workflow_dispatched": false
   }
 }

@@ -1,13 +1,13 @@
 {
-  "version": "heroverse-recurring-native-av-candidate-v4",
-  "recorded_at": "2026-10-15T10:50:49.270Z",
-  "repository_head_verified": "e1611efff9aee6a857adf6507a4a115d8eeedf84",
-  "status": "MCP_AND_MEDIA_TEST_PENDING_CLOUD_AUTH_VERIFICATION_TIMEOUT",
+  "version": "heroverse-recurring-native-av-candidate-v5",
+  "recorded_at": "2026-10-15T12:25:34.722Z",
+  "repository_head_verified": "8425427d619cb209275a486532fac3b5a18e68ce",
+  "status": "OWNED_BASIC_ACTIVE_CLOUD_MCP_CLIENT_READY_SECRET_NOT_PROVISIONED",
   "provider": "YouTube Info & Download API via RapidAPI",
   "provider_profile": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api",
   "pricing_url": "https://rapidapi.com/valsuttlej53/api/youtube-info-download-api/pricing",
   "direct_vendor_trial_not_selected": true,
-  "observation_kind": "Owner account was visibly authenticated and zero-cost Basic checkout submitted once; current session is signed out. Active Basic allowance, real media and recurring capacity remain unverified.",
+  "observation_kind": "Actual owner Basic Active and zero-dollar monthly price verified in billing. Generated MCP endpoint/header contract verified. Cloud client prepared and tested offline; key binding, live connection and actual media still pending.",
   "published_free_limits": {
     "price_usd_per_month": 0,
     "units_per_day": 500,
@@ -58,7 +58,7 @@
   },
   "proposed_first_test": {
     "request_id": "20261015-rapidapi-native-j2rk8ycXe3c-0-40-v1",
-    "effect_status": "NOT_SENT_BY_AGENT_REMOTE_AUTH_RESULT_UNKNOWN",
+    "effect_status": "NOT_SENT_BY_AGENT",
     "provider_job_id": null,
     "calls_started": 0,
     "endpoint": "GET /ajax/download.php",
@@ -103,23 +103,24 @@
   },
   "authentication": {
     "login_required_observed": true,
-    "account_access_verified": false,
+    "account_access_verified": true,
     "account_created": false,
     "subscription_started": true,
     "api_key_created_or_copied": false,
     "api_key_must_not_be_written_to_repository": true,
     "secure_login_url_observed": "https://rapidapi.com/auth/login?referral=%2Fvalsuttlej53%2Fapi%2Fyoutube-info-download-api%2Fpricing",
     "owner_reported_connected": true,
-    "cloud_verification": "Google sign-in method submitted securely; saved-account chooser request timed out. Immediate fresh target-page verification also timed out. Current authentication result is unknown, not a confirmed failure or success.",
+    "cloud_verification": "Owner remains signed in across playground and Console; Basic Active USD0/month, quota usage display0%, bandwidthN/A.",
     "login_form_verified": true,
     "account_access_verified_earlier_in_this_attempt": true,
     "subscription_started_means": "One free Basic Subscribe submission, not confirmed durable active entitlement",
     "subscribe_clicks": 1,
-    "active_subscription_verified": false,
+    "active_subscription_verified": true,
     "remaining_units_verified": false,
-    "current_session": "UNKNOWN_AFTER_SECURE_REQUEST_TIMEOUT",
+    "current_session": "SIGNED_IN_VERIFIED",
     "session_observation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-free-activation-session-observation.json",
-    "latest_recovery_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-auth-recovery-timeout-observation.json"
+    "latest_recovery_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-auth-recovery-timeout-observation.json",
+    "latest_preparation_receipt": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-preparation.json"
   },
   "adoption": {
     "actual_video_verified": false,
@@ -173,7 +174,7 @@
     "final_review_v3_unchanged": true
   },
   "mcp_connection": {
-    "status": "NOT_CONNECTED_CLOUD_AUTH_VERIFICATION_TIMEOUT",
+    "status": "CLOUD_CLIENT_READY_SECRET_BINDING_AND_LIVE_PROBE_PENDING",
     "native_tools_available_in_this_chat": false,
     "existing_personal_rapidapi_plugin_observed": false,
     "provider_documented_auth_header": "x-rapidapi-key",
@@ -183,8 +184,16 @@
       "OAuth ou sem autenticação"
     ],
     "compatible_oauth_flow_for_this_provider_not_verified": true,
-    "provider_generated_mcp_url_not_yet_obtained": true,
+    "provider_generated_mcp_url_not_yet_obtained": false,
     "private_key_omitted_from_all_artifacts": true,
-    "detailed_observation": "migration/evidence/cloud-video-player-20261015/rapidapi-mcp-connection-observation.json"
+    "detailed_observation": "migration/evidence/cloud-video-player-20261015/rapidapi-cloud-mcp-preparation.json",
+    "endpoint": "https://mcp.rapidapi.com",
+    "headers": {
+      "routing": "x-api-host",
+      "routing_value": "youtube-info-download-api.p.rapidapi.com",
+      "credential": "x-api-key"
+    },
+    "personal_package_created_but_not_web_installed": true,
+    "live_connection_verified": false
   }
 }
