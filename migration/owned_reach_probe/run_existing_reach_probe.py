@@ -16,16 +16,18 @@ from types import SimpleNamespace
 import existing_reach_probe as core
 
 REPOSITORY = 'matheusmagah-cpu/heroverse-engine'
-EXPECTED_RUN_NUMBER = '2'
+EXPECTED_RUN_NUMBER = '3'
 PREVIOUS_FAILURE_PATH = Path('migration/evidence/owned-reach-preflight-failure-38822029275.json')
 PREVIOUS_FAILURE_SHA256 = 'f5c8c636e0f7dca289f8982ed901924a85b9832d3b30d40e2b934a6ac0facaa2'
+SECOND_FAILURE_PATH = Path('migration/evidence/owned-reach-helper-failure-38822885890.json')
+SECOND_FAILURE_SHA256 = '8f24e0f89d44c28a0e3e1446af3a8f6c5722d4535c9d882a5280ba3ba6451533'
 REQUIRED_DISK_BYTES = 256 * 1024**2
 REQUIRED_MEMORY_BYTES = 512 * 1024**2
 RESOURCE_POLICY = 'BOUNDED_REPORTING_STDLIB_ONLY_V1'
 TOKEN_URL = 'https://oauth2.googleapis.com/token'
 META_BASE = f'https://youtubereporting.googleapis.com/v1/jobs/{core.JOB}/reports/'
 READ_SCOPE = 'https://www.googleapis.com/auth/yt-analytics.readonly'
-HELPER_HASHES = {'oauth_health.py': 'cf392eafd0cc64606d21624e49b9a1b7aa463400ca67827c7d55c74f6be90278', 'verify_worker_oauth.py': '2862a72bfc4ba50cec3d504807fa337d7cc437b441b97a9c7cc5a26863b2f0e6'}
+HELPER_HASHES = {'oauth_health.py': 'b2f667c880d6e5cf5b7e60889acaf7b9eddd28db8720cf8b9e8702feeb8f412c', 'verify_worker_oauth.py': 'aebf4236d9afddd702a79bbfc720e8cfa1560c2132dd1a50bfaa48956e015e46'}
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -168,7 +170,21 @@ def validate_previous_failure(root):
                  and value.get('youtube_data_api_units')==0
                  and value.get('data_api_ledger_modified') is False,
                  'PREVIOUS_FAILURE_NOT_ZERO_NETWORK')
-    return {'previous_run_id':'38822029275','previous_receipt_sha256':PREVIOUS_FAILURE_SHA256,
+    second_raw=(root/SECOND_FAILURE_PATH).read_bytes()
+    core.require(core.digest(second_raw)==SECOND_FAILURE_SHA256,'SECOND_FAILURE_HASH_MISMATCH')
+    second=json.loads(second_raw)
+    core.require(second.get('run_id')=='38822885890'
+                 and second.get('commit')=='e635c8ba094c3e2a96414b27b5da7d546de68c6f'
+                 and second.get('status')=='BLOCKED'
+                 and second.get('error_code')=='AUTH_HELPER_IDENTITY_MISMATCH'
+                 and second.get('network_operations_attempted')==0
+                 and second.get('requests')=={} and second.get('request_events')==[]
+                 and second.get('youtube_data_api_calls')==0
+                 and second.get('youtube_data_api_units')==0
+                 and second.get('data_api_ledger_modified') is False,
+                 'SECOND_FAILURE_NOT_ZERO_NETWORK')
+    return {'previous_run_ids':['38822029275','38822885890'],
+            'previous_receipt_sha256':[PREVIOUS_FAILURE_SHA256,SECOND_FAILURE_SHA256],
             'previous_network_operations':0,'admitted_run_number':EXPECTED_RUN_NUMBER,
             'admitted_run_attempt':'1','previous_receipt_preserved':True}
 
