@@ -50,7 +50,7 @@ RESPONSE_SCHEMA = {
             'description': 'Informação não determinável, inclusive finais desconhecidos; null quando não houver ressalva.'}},
     'required': ['status', 'count', 'events', 'uncertainty']}
 GENERATION_CONFIG = {'candidateCount': 1, 'maxOutputTokens': 4096,
-    'responseFormat': {'text': {'mimeType': 'application/json', 'schema': RESPONSE_SCHEMA}}}
+    'responseFormat': {'text': {'mimeType': 'APPLICATION_JSON', 'schema': RESPONSE_SCHEMA}}}
 SOURCE = {'kind':'SYNTHETIC_AUDIO_CONTROL','mode':MODE,'parent_mp4_sha256':av.CONTENT_SHA256,
     'content_sha256':WAV_SHA256,'pcm16_sha256':PCM16_SHA256,'duration_seconds':6,
     'mime_type':'audio/wav','size_bytes':576044,'sample_rate_hz':48000,'channels':1,'pcm_bits':16}
@@ -60,7 +60,9 @@ PRIOR = (
     ('synthetic-av:7e431b2811680333a574d970c68b74d073421105b805234d7721be3af9fe04ba',
      '4f93d6556c3aeb90c3fdd38e8e7aae3b85919ad059a8c0d1bd3e1b32ef7f9edb'),
     ('synthetic-audio:7fe5d21cea9ccc07ac4d064ef371351b428b9d0ee4fc9ff617985d6de09f5a7a',
-     'b6cb78f9767b38754888a4ad8e8d748e839065f37c5d84a1397ae6ed5598c7e5'))
+     'b6cb78f9767b38754888a4ad8e8d748e839065f37c5d84a1397ae6ed5598c7e5'),
+    ('synthetic-audio:bf7925b517b92159cf196ad25f71e98bec81f8e695c47bf9b9098b02ed80b41a',
+     '7e5d387bbcfee12d1d7c2b0b904496698f7cae40435587844281efde065ae1a0'))
 
 
 def validate_media(wav, prompt):
@@ -77,7 +79,7 @@ def validate_media(wav, prompt):
 
 
 def validate_prior_results():
-    # Preserve all three earlier receipts and their eighteen seconds of debits.
+    # Preserve all four earlier receipts and their twenty-four seconds of debits.
     with sqlite3.connect(':memory:') as c:
         c.executescript(av.SQL.read_text())
         for key, expected_sha in PRIOR:
@@ -247,6 +249,8 @@ def analyze_audio(wav,prompt,*,api_key,policy,reserve,persist,proof_sha256,send=
             response_contract_status=contract_status,structured_response=report)
     except Exception as error:
         receipt.update(status='FAILED_NO_AUTOMATIC_RETRY',failure_code=av.safe_failure_code(error))
+        if isinstance(error,ProviderFailure) and error.diagnostic is not None:
+            receipt['provider_error']=error.diagnostic
     receipt['finished_at']=clock().isoformat();persist(receipt)
     return receipt
 

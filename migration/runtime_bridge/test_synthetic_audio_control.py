@@ -24,15 +24,17 @@ ROOT=Path(__file__).resolve().parents[2]
 NOW=datetime(2026,10,16,2,40,tzinfo=timezone.utc)
 KEY='offline-key-not-a-secret';KEY_HASH=hashlib.sha256(KEY.encode()).hexdigest()
 POLICY=dict(json.loads((ROOT/av.POLICY).read_bytes()),key_sha256=KEY_HASH)
-# Historical pre-structured counterfactual, reconstructed IN MEMORY only.
+# Historical pre-enum-fix counterfactual, reconstructed IN MEMORY only.
 # Later diagnostic receipts must not turn NEW-call tests into provider replays.
-# Preserve the three original receipts; whole-file hash pins all remaining rows.
+# Preserve the four original receipts; whole-file hash pins all remaining rows.
 CURRENT_SQL_RAW=(ROOT/d.SQL).read_text()
 ORIGINAL_AUDIO_KEY='synthetic-audio:7fe5d21cea9ccc07ac4d064ef371351b428b9d0ee4fc9ff617985d6de09f5a7a'
+REJECTED_AUDIO_KEY='synthetic-audio:bf7925b517b92159cf196ad25f71e98bec81f8e695c47bf9b9098b02ed80b41a'
 SQL_RAW=''.join(line for line in CURRENT_SQL_RAW.splitlines(keepends=True)
     if not line.startswith('INSERT INTO "public_av_reservations" VALUES(\'synthetic-audio:')
-    or line.startswith('INSERT INTO "public_av_reservations" VALUES(\''+ORIGINAL_AUDIO_KEY+"',"))
-assert hashlib.sha256(SQL_RAW.encode()).hexdigest()=='544a31e502482749f92008c35b2bf6380efa5b438b7c57753dfd426faf93ee6d', 'HISTORICAL_PRE_STRUCTURED_FIXTURE_CHANGED'
+    or any(line.startswith('INSERT INTO "public_av_reservations" VALUES(\''+key+"',")
+        for key in (ORIGINAL_AUDIO_KEY,REJECTED_AUDIO_KEY)))
+assert hashlib.sha256(SQL_RAW.encode()).hexdigest()=='18b10b0b021a56572b951a20da16d7fff88c5d5c50613278e0c92c4c12dd1e76', 'HISTORICAL_PRE_ENUM_FIXTURE_CHANGED'
 WAV=(ROOT/a.WAV).read_bytes();PROMPT=(ROOT/a.PROMPT).read_bytes();PROOF=(ROOT/a.PROOF).read_bytes()
 REPORT={'status':'complete','count':1,'events':[{'label':'tone','start_seconds':2.0,'end_seconds':2.1}], 'uncertainty':None}
 RESPONSE={'candidates':[{'finishReason':'STOP','content':{'parts':[{'text':json.dumps(REPORT)}]}}],
@@ -193,7 +195,7 @@ class Tests(unittest.TestCase):
         payload=a.build_request(WAV,PROMPT)
         self.assertNotEqual(a.request_identity(PROMPT)[0],old_key)
         self.assertEqual(set(payload['generationConfig']),{'candidateCount','maxOutputTokens','responseFormat'})
-        self.assertEqual(payload['generationConfig']['responseFormat']['text']['mimeType'],'application/json')
+        self.assertEqual(payload['generationConfig']['responseFormat']['text']['mimeType'],'APPLICATION_JSON')
         self.assertEqual(payload['generationConfig']['responseFormat']['text']['schema'],a.RESPONSE_SCHEMA)
         del payload['generationConfig']['responseFormat']
         self.assertEqual(a.digest(payload),original['wire_payload_sha256'])
@@ -209,21 +211,21 @@ class Tests(unittest.TestCase):
         identity=a.request_identity(PROMPT)[2]
         identity['generation_config']['responseFormat']['text']['schema']['required'].clear()
         self.assertEqual(a.GENERATION_CONFIG,before)
-    def test_real_current_fixture_preserves_three_receipts_and_eighteen_seconds(self):
+    def test_real_current_fixture_preserves_four_receipts_and_twenty_four_seconds(self):
         a.validate_prior_results()
         rows=[r for r in self.initial if r[2]=='2026-10-16']
-        self.assertEqual(len(rows),3);self.assertEqual(sum(r[3] for r in rows),18)
-        self.assertEqual(len(a.PRIOR),3)
+        self.assertEqual(len(rows),4);self.assertEqual(sum(r[3] for r in rows),24)
+        self.assertEqual(len(a.PRIOR),4)
         self.run_one()
         self.assertEqual([r for r in self.rows() if r[0] in dict(a.PRIOR)],rows)
         a.validate_prior_results()
-    def test_current_repository_ledger_retains_all_three_real_debits(self):
+    def test_current_repository_ledger_retains_all_four_real_debits(self):
         with sqlite3.connect(':memory:') as connection:
             connection.executescript(CURRENT_SQL_RAW)
             current=connection.execute('SELECT * FROM public_av_reservations ORDER BY key').fetchall()
         self.assertEqual([row for row in current if row[0] in dict(a.PRIOR)],
             [row for row in self.initial if row[0] in dict(a.PRIOR)])
-        self.assertGreaterEqual(sum(row[3] for row in current if row[2]=='2026-10-16'),18)
+        self.assertGreaterEqual(sum(row[3] for row in current if row[2]=='2026-10-16'),24)
         before=(ROOT/d.SQL).read_bytes();self.run_one()
         self.assertEqual((ROOT/d.SQL).read_bytes(),before)
     def test_complete_shape_is_not_perceptual_success(self):
@@ -296,5 +298,34 @@ class Tests(unittest.TestCase):
         self.send.return_value={**RESPONSE,'candidates':[{'finishReason':'STOP','content':{'parts':[{'text':json.dumps(report)}]}}]}
         receipt=self.run_one();self.assertEqual(receipt['precision_verdict'],'NOT_ADJUDICATED')
         self.assertFalse(receipt['quality_authorized'])
+
+    def test_output_enum_matches_discovery_and_is_only_change_from_rejected_payload(self):
+        source=ROOT/'migration/diagnostics/synthetic-audio-c01/gemini-v1beta-text-response-format-20261016.json'
+        evidence=json.loads(source.read_text())
+        # Exact discovery excerpt is verified independently; no tutorial MIME literal.
+        fragment=evidence['relevant_fragment']
+        self.assertEqual(a.digest(fragment),evidence['fragment_canonical_sha256'])
+        enum=fragment['TextResponseFormat.properties.mimeType']['enum']
+        self.assertIn('APPLICATION_JSON',enum);self.assertNotIn('application/json',enum)
+        payload=a.build_request(WAV,PROMPT)
+        self.assertEqual(payload['generationConfig']['responseFormat']['text']['mimeType'],'APPLICATION_JSON')
+        self.assertEqual(payload['contents'][0]['parts'][0]['inlineData']['mimeType'],'audio/wav')
+        rejected=json.loads((ROOT/'migration/evidence/public-av-bf7925b517b92159cf196ad25f71e98bec81f8e695c47bf9b9098b02ed80b41a.json').read_text())
+        self.assertNotEqual(a.request_identity(PROMPT)[0],rejected['key'])
+        payload['generationConfig']['responseFormat']['text']['mimeType']='application/json'
+        self.assertEqual(a.digest(payload),rejected['wire_payload_sha256'])
+        identity=a.request_identity(PROMPT)[2]
+        identity['generation_config']['responseFormat']['text']['mimeType']='application/json'
+        self.assertEqual(identity,rejected['request_identity'])
+    def test_error_diagnostic_persists_and_replays_without_new_call(self):
+        from gemini_public_av import sanitized_provider_error
+        raw=json.dumps({'error':{'status':'INVALID_ARGUMENT','message':'Invalid value at generation_config.response_format.text.mime_type; '+KEY}}).encode()
+        diagnostic=sanitized_provider_error(raw,400,KEY)
+        self.send.side_effect=a.ProviderFailure('HTTP_400_INVALID_ARGUMENT',diagnostic)
+        first=self.run_one();self.assertEqual(first['provider_error'],diagnostic)
+        self.assertNotIn(KEY,json.dumps(first));self.assertEqual(first['response_contract_status'],'NOT_EVALUATED')
+        self.assertEqual(first['precision_verdict'],'NOT_ADJUDICATED')
+        self.assertEqual(self.run_one(),first);self.assertEqual(self.send.call_count,1)
+        a.validate_prior_results()
 
 if __name__=='__main__':unittest.main()

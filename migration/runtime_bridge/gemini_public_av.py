@@ -4,11 +4,13 @@ The caller must persist reservations and receipts in its existing ledger.
 Reports remain unreviewed; this module never grants production authority.
 """
 from __future__ import annotations
+import base64
 import hashlib
 import json
 import re
 import urllib.request
 import urllib.error
+import urllib.parse
 from datetime import datetime, timezone
 
 MODEL = 'gemini-3.8-flash'
@@ -151,9 +153,86 @@ def validate_report(report, source, window=None, refinement=False):
     # Successful parsing and model-reported coverage never constitute review.
     return report
 
+ERROR_BODY_LIMIT = 8192
+ERROR_DIAGNOSTIC_LIMIT = 4096
+PROVIDER_STATUSES = ('INVALID_ARGUMENT','UNAUTHENTICATED','PERMISSION_DENIED',
+                    'NOT_FOUND','RESOURCE_EXHAUSTED','UNAVAILABLE')
+
+
+def sanitized_provider_error(raw, http_status, api_key):
+    """Bounded allowlisted error representation. Never retain raw body/headers.
+
+    Arbitrary details/metadata are dropped. Only scrubbed message and up to four
+    BadRequest field violations survive. Oversized or malformed bodies keep
+    transport metadata only; redaction is deliberately conservative.
+    """
+    result={'http_status':http_status,'body_bytes_read':len(raw),
+        'body_truncated':len(raw)>ERROR_BODY_LIMIT,'body_parse_status':'NOT_PARSED',
+        'raw_body_retained':False,'sanitized':True}
+    if len(raw)>ERROR_BODY_LIMIT:return result
+    try:
+        body=json.loads(raw)
+        error=body.get('error') if type(body) is dict else None
+        if type(error) is not dict:raise ValueError()
+    except (ValueError,TypeError,UnicodeError,RecursionError):
+        result['body_parse_status']='INVALID_JSON_OR_SHAPE';return result
+    result['body_parse_status']='JSON_ERROR_OBJECT'
+    status=error.get('status')
+    if type(status) is str and status in PROVIDER_STATUSES:result['provider_status']=status
+    def redact(value, limit):
+        if type(value) is not str:return None
+        value=value.replace('\\/','/')
+        for _ in range(2):value=urllib.parse.unquote(value)
+        # Replace known credential encodings before any truncation.
+        if type(api_key) is str and api_key:
+            forms={api_key,urllib.parse.quote(api_key,safe=''),
+                base64.b64encode(api_key.encode()).decode(),
+                base64.urlsafe_b64encode(api_key.encode()).decode()}
+            for secret in sorted(forms,key=len,reverse=True):
+                if secret:value=value.replace(secret,'[REDACTED]')
+        value=re.sub(r'data:[^\s<>]+','[REDACTED_DATA]',value,flags=re.I)
+        value=re.sub(r'\b[a-z][a-z0-9+.-]{1,20}://[^\s<>\"\']+',
+            '[REDACTED_URL]',value,flags=re.I)
+        value=re.sub(r'\b(?:[a-z0-9-]+\.)+(?:com|net|org|io|dev|ai|cloud|internal)(?:/[^\s<>\"\']*)?',
+            '[REDACTED_URL]',value,flags=re.I)
+        value=re.sub(r"(?i)\b(?:authorization|x-goog-api-key|api[_ -]?key|access[_ -]?token|refresh[_ -]?token|password|secret|token|data)\s*[:=]\s*(?:\"[^\"]*\"|'[^']*'|[^\s,;]+)",
+            '[REDACTED_FIELD]',value)
+        public_values={'APPLICATION_JSON','TEXT_PLAIN','MIME_TYPE_UNSPECIFIED',
+            'application/json','text/plain','audio/wav'}
+        value=re.sub(r"(['\"])([A-Za-z0-9+/=_-]{12,})\1",
+            lambda match:match.group(0) if match.group(2) in public_values else '[REDACTED_VALUE]',value)
+        value=re.sub(r'[A-Za-z0-9+/=_-]{24,}','[REDACTED_TOKEN]',value)
+        value=''.join(c if c.isprintable() or c in '\n\t' else ' ' for c in value)
+        return value.encode('utf-8')[:limit].decode('utf-8','ignore')
+    message=redact(error.get('message'),768)
+    if message is not None:result['message']=message
+    violations=[]
+    details=error.get('details',[])
+    if type(details) is list:
+        for detail in details[:8]:
+            if type(detail) is not dict or detail.get('@type')!='type.googleapis.com/google.rpc.BadRequest':continue
+            items=detail.get('fieldViolations',[])
+            if type(items) is not list:continue
+            for item in items[:4]:
+                if type(item) is not dict:continue
+                field=redact(item.get('field'),128);description=redact(item.get('description'),384)
+                violation={}
+                if field is not None:violation['field']=field
+                if description is not None:violation['description']=description
+                if violation:violations.append(violation)
+                if len(violations)==4:break
+            if len(violations)==4:break
+    if violations:result['field_violations']=violations
+    if len(canonical(result))>ERROR_DIAGNOSTIC_LIMIT:
+        result.pop('field_violations',None);result.pop('message',None)
+        result['diagnostic_size_limited']=True
+    return result
+
+
 class ProviderFailure(Exception):
-    def __init__(self, code):
+    def __init__(self, code, diagnostic=None):
         self.code = code
+        self.diagnostic = diagnostic
         super().__init__(code)
 
 def transport(payload, api_key, *, model=MODEL):
@@ -176,21 +255,19 @@ def transport(payload, api_key, *, model=MODEL):
         raise
     except urllib.error.HTTPError as error:
         status = 'HTTP_' + str(error.code)
-        try:
-            data = json.loads(error.read(10000))
-            provider_status = data.get('error', {}).get('status')
-            if provider_status in ('INVALID_ARGUMENT','UNAUTHENTICATED','PERMISSION_DENIED',
-                    'NOT_FOUND','RESOURCE_EXHAUSTED','UNAVAILABLE'):
-                status += '_' + provider_status
-        except Exception:
-            pass
+        raw=b''
+        try:raw=error.read(ERROR_BODY_LIMIT+1)
+        except Exception:pass
+        diagnostic=sanitized_provider_error(raw,error.code,api_key)
+        provider_status=diagnostic.get('provider_status')
+        if provider_status in PROVIDER_STATUSES:status+='_'+provider_status
         reason_tags = []
-        message = str(data.get('error', {}).get('message', '')).lower() if 'data' in locals() else ''
+        message = diagnostic.get('message','').lower()
         for tag, needle in [('MODEL_OVERLOADED','overload'),('HIGH_DEMAND','high demand'),
                 ('VIDEO_FETCH','fetch'),('TIMEOUT','timeout'),('VIDEO_INPUT','video'),
                 ('KEY_LEAKED','leaked'),('QUOTA','quota'),('INVALID_KEY','api key not valid')]:
             if needle in message:reason_tags.append(tag)
-        raise ProviderFailure(status + (':' + ','.join(reason_tags) if reason_tags else '')) from None
+        raise ProviderFailure(status + (':' + ','.join(reason_tags) if reason_tags else ''), diagnostic) from None
     except Exception:
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None

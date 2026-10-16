@@ -1,6 +1,6 @@
 # One c01 direct-audio diagnostic
 
-Structured-output proposal prepared against `5b215a03d037df06c53963143d6b7f7874b51af4`. This directory's
+Wire-enum and safe-error proposal prepared against `02e728191f34e4b5e058a07ff36a87c7d59128aa`. This directory's
 code, documentation and derivation proof are operator-only. Only the exact WAV
 and `evaluator-prompt.txt` enter the model request. No expected answer, timing
 measurement, script, proof, video, or earlier model response is sent.
@@ -24,7 +24,7 @@ No actual credential is read during offline preparation or tests.
 One `gemini-3.5-flash-lite:generateContent` attempt uses only a user content with
 `inlineData` (`audio/wav`, executor-memory base64) and the frozen neutral text.
 Generation configuration retains candidateCount 1 / maxOutputTokens 4096 and
-adds only `responseFormat.text` with `mimeType: application/json` and the JSON
+adds only `responseFormat.text` with `mimeType: APPLICATION_JSON` and the JSON
 schema embedded in `synthetic_audio_control.py`. Do not combine this current
 REST format with legacy responseMimeType, responseSchema or responseJsonSchema.
 The exact 227-byte prompt, WAV, model, endpoint and transport remain unchanged.
@@ -75,9 +75,43 @@ qualification. End values are checked for technical coherence only, not scored
 for perceptual accuracy. No post-result adjustment of rubric is permitted.
 
 The stable request identity includes the entire output contract, creating one
-new identity while preserving all three earlier receipts and their 18 seconds.
+new identity while preserving all four earlier receipts and their 24 seconds.
 Replay of this new identity must reuse its terminal receipt without a new call.
 This proposal does not itself dispatch a workflow or authorize production.
+
+## Wire enum correction after run44 and bounded error evidence
+
+Run 38853125519 (#44) made one call and received HTTP_400_INVALID_ARGUMENT.
+No evaluator response, modelVersion or usage was returned to the receipt, so
+contract and precision stayed NOT_EVALUATED / NOT_ADJUDICATED. Its receipt and
+six-second debit are immutable and mandatory prior history:
+`migration/evidence/public-av-bf7925b517b92159cf196ad25f71e98bec81f8e695c47bf9b9098b02ed80b41a.json`.
+The existing transport discarded the error body; its lost details cannot be
+reconstructed. This was request rejection, not a perceptual score.
+
+The official tutorial used `application/json`, but Discovery v1beta revision
+20261015 and the detailed TextResponseFormat API reference define the output
+field as enum `APPLICATION_JSON`. The small public capture is
+`gemini-v1beta-text-response-format-20261016.json`. Only that output literal
+changes on the wire. Input inlineData.mimeType stays `audio/wav`; schema, prompt,
+WAV, model, candidate count, output limit, endpoint and transport destination stay
+unchanged. The mismatch proves a published-wire-contract defect, not that it was
+the unique cause of HTTP 400 or that the corrected request will be accepted.
+
+Error observability is a separate local change, not an excuse to replay the
+rejected payload. The shared transport reads at most 8193 bytes to detect an
+8192-byte bound. Malformed/oversized error bodies retain metadata only. Parsed
+errors retain only a known status, scrubbed message (768 UTF-8 bytes maximum),
+and up to four BadRequest field violations (field 128 bytes, description 384
+bytes), with a 4096-byte total diagnostic cap. Unknown detail types/metadata,
+headers, raw body and error/request URLs are never retained. Known credential
+encodings, token/base64-like strings and URLs are conservatively redacted before
+truncation. Empty/non-string fake keys do not disable other redaction.
+
+The HTTP error code remains compatible. ProviderFailure carries the sanitized
+representation; this patch adds its persistence only to the direct-audio receipt.
+Other adapters retain their previous receipt behavior. Diagnostics do not alter
+request identity, model verdicts, retry behavior, quotas or authorization.
 
 ## Exact media derivation
 
@@ -157,8 +191,8 @@ From a clean checkout with FFmpeg/ffprobe available:
 
 Tests use a fake key, mock HTTP and checkpoint commits, and temporary databases.
 Files counterfactual tests reconstruct the verified pre-run42 snapshot in memory.
-Audio counterfactuals reconstruct the verified pre-structured snapshot with all
-three real receipts and 18 seconds. Later synthetic-audio rows are excluded only
+Audio counterfactuals reconstruct the verified pre-enum-fix snapshot with all
+four real receipts and 24 seconds. Later synthetic-audio rows are excluded only
 from those temporary historical test fixtures, with exact whole-file SHA256
 assertions. Current production SQL and receipt files are never rewritten or
 pruned. The runtime continues using the full current ledger and all prior debits.
