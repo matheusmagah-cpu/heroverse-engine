@@ -213,9 +213,12 @@ class SecurityTests(unittest.TestCase):
     def test_boundary_private_main_attempt_and_workflow(self):
         env = {'GITHUB_REPOSITORY': 'matheusmagah-cpu/heroverse-engine', 'HERO_REPOSITORY_PRIVATE': 'true',
                'GITHUB_REF': 'refs/heads/main', 'GITHUB_EVENT_NAME': 'workflow_dispatch',
-               'GITHUB_RUN_ATTEMPT': '1', 'GITHUB_RUN_NUMBER': '1', 'GITHUB_SHA': 'a' * 40,
+               'GITHUB_RUN_ATTEMPT': '1', 'GITHUB_RUN_NUMBER': '2', 'GITHUB_SHA': 'a' * 40,
                'GITHUB_WORKFLOW_REF': 'matheusmagah-cpu/heroverse-engine/.github/workflows/gemini-files-delivery-once.yml@refs/heads/main'}
         probe.check_boundary(env)
+        for number, attempt in [('1', '1'), ('2', '2'), ('3', '1')]:
+            with self.subTest(number=number, attempt=attempt), self.assertRaises(probe.ProviderFailure):
+                probe.check_boundary({**env, 'GITHUB_RUN_NUMBER': number, 'GITHUB_RUN_ATTEMPT': attempt})
         for key in env:
             with self.subTest(key=key), self.assertRaises(probe.ProviderFailure):
                 probe.check_boundary({**env, key: 'invalid'})

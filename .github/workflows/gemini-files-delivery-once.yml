@@ -8,11 +8,11 @@ concurrency:
   cancel-in-progress: false
 jobs:
   delivery:
-    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.run_attempt == 1 && github.run_number == 1
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.run_attempt == 1 && github.run_number == 2
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
-      - name: Enforce private first manual main run before credentials
+      - name: Enforce private recovery run 2 attempt 1 before credentials
         id: boundary
         env:
           REPOSITORY: ${{ github.repository }}
@@ -26,7 +26,7 @@ jobs:
           test "$REPOSITORY_PRIVATE" = true
           test "$REF" = refs/heads/main
           test "$EVENT" = workflow_dispatch
-          test "$RUN_NUMBER" = 1
+          test "$RUN_NUMBER" = 2
           test "$RUN_ATTEMPT" = 1
           echo "accepted=true" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -36,18 +36,55 @@ jobs:
             .github/workflows/gemini-files-delivery-once.yml
             migration/diagnostics/gemini-files-delivery
             migration/runtime_bridge/gemini_public_av.py
+            migration/evidence/gemini-files-delivery-38834118569
             migration/evidence/av-evaluator-controls-20261016/scripts/build_and_verify.py
           sparse-checkout-cone-mode: false
+      - name: Verify preserved failure before recovery
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib, json
+          from pathlib import Path
+          p = Path('migration/evidence/gemini-files-delivery-38834118569')
+          d = json.loads((p / 'verification.json').read_text())
+          assert d['run']['id'] == 38834118569 and d['run']['run_attempt'] == 1
+          assert d['run']['head_sha'] == 'bce5b0755a3288ff3a31e5efef89c3524eb88ea5'
+          assert d['run']['conclusion'] == 'failure' and d['provider_step'] == 'skipped'
+          assert d['provider_receipt_created'] is False
+          assert hashlib.sha256((p / 'job.log').read_bytes()).hexdigest() == d['log_sha256'] == 'f7b9abe9635f0c974e1917bfd24e20ac4ec0848da0dde60b344ab5b9e5aed26e'
+          print('Prior run failed before provider step; no provider receipt or measured call counters.')
+          PYCODE
+      - name: Install required video dependency from configured Ubuntu repositories
+        timeout-minutes: 3
+        run: |
+          timeout --signal=TERM --kill-after=10s 165s bash -euo pipefail -c '
+            sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update -qq
+            sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 install -y --no-install-recommends ffmpeg
+          '
       - name: Check existing tools and run offline safety tests without credentials
         run: |
           command -v python3
           command -v ffmpeg
           command -v ffprobe
+          command -v timeout
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -f migration/diagnostics/gemini-files-delivery/build_c01.py
+          test -f migration/diagnostics/gemini-files-delivery/probe.py
+          test -f migration/diagnostics/gemini-files-delivery/test_probe.py
+          echo '7c53ab3e57559d8d79f490a2dac04beb17a1ee93429da80a82a1bd0059f9f006  migration/runtime_bridge/gemini_public_av.py' | sha256sum -c -
+          echo '8b4b9ea021836045c74ec14bd3b881b4f69f9391720534607717de9c4a8fb95d  migration/evidence/av-evaluator-controls-20261016/scripts/build_and_verify.py' | sha256sum -c -
+          python3 - <<'PYCODE'
+          import subprocess, sys
+          assert sys.version_info >= (3, 10)
+          encoders = subprocess.run(['ffmpeg', '-hide_banner', '-encoders'], check=True, capture_output=True, text=True).stdout
+          assert 'libx264' in encoders and ' aac ' in encoders
+          for tool in ('ffmpeg', 'ffprobe'):
+              print(subprocess.run([tool, '-version'], check=True, capture_output=True, text=True).stdout.splitlines()[0])
+          PYCODE
           python3 -m unittest discover -s migration/diagnostics/gemini-files-delivery -p 'test_*.py' -v
       - name: Generate one control and verify decoded pixels and PCM without credentials
         run: timeout --signal=TERM --kill-after=5s 60s python3 migration/diagnostics/gemini-files-delivery/build_c01.py gemini-files-delivery-output
       - name: Upload exactly one verified synthetic file and verify ACTIVE metadata
-        if: success() && steps.boundary.outputs.accepted == 'true' && github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.run_number == 1
+        if: success() && steps.boundary.outputs.accepted == 'true' && github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.run_number == 2
         env:
           HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}

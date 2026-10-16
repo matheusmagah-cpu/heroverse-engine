@@ -44,7 +44,7 @@ def check_boundary(env):
         'GITHUB_REPOSITORY': 'matheusmagah-cpu/heroverse-engine',
         'HERO_REPOSITORY_PRIVATE': 'true', 'GITHUB_REF': 'refs/heads/main',
         'GITHUB_EVENT_NAME': 'workflow_dispatch', 'GITHUB_RUN_ATTEMPT': '1',
-        'GITHUB_RUN_NUMBER': '1',
+        'GITHUB_RUN_NUMBER': '2',
         'GITHUB_WORKFLOW_REF': 'matheusmagah-cpu/heroverse-engine/.github/workflows/gemini-files-delivery-once.yml@refs/heads/main',
     }
     require(all(env.get(k) == v for k, v in checks.items()), 'PRIVATE_MAIN_FIRST_MANUAL_RUN_REQUIRED')
