@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "case_id": "c02",
+  "asset_filename": "c02.mp4",
+  "asset_sha256": "38c84083fb6ae476d3a5a56bc97edb85546c4d3f9dfd654f26604730a085f171",
+  "source_interval_seconds": [
+    0,
+    6
+  ],
+  "source_kind": "synthetic_control",
+  "inference_count_recorded_for_case": 1,
+  "author_type": "ai_assistant",
+  "author_name": "dot",
+  "human_review_performed": false,
+  "certified_human_review": false,
+  "ground_truth_basis": "Objective deterministic measurements of locally generated synthetic controls, preserved in the frozen manifest.",
+  "adjudication_method": "AI-assisted interpretation by dot (an AI assistant) of explicit claims in saved responses; deterministic comparison with the frozen measured control manifest. Not human review, not certified human judgment, and no additional external provider inference.",
+  "visual": {
+    "expected": {
+      "event_kind": "constant",
+      "event_count": 0,
+      "flash_start_seconds": []
+    },
+    "reported": {
+      "event_count": 0,
+      "event_kind": "constant",
+      "quoted_evidence": [
+        "A imagem permanece totalmente estática do início ao fim",
+        "Frequência: 0 vezes."
+      ]
+    },
+    "change_presence_comparison": "MATCH",
+    "event_kind_comparison": "MATCH",
+    "event_count_comparison": "MATCH",
+    "target_events_comparison": "MATCH",
+    "scope_note": "Match is only for absence of temporal visual changes; it is not validation of every detail of the scene description."
+  },
+  "audio": {
+    "expected": {
+      "event_kind": "tone",
+      "event_count": 3,
+      "observed_tone_intervals_seconds": [
+        {
+          "start_seconds": 1.001,
+          "end_seconds_exclusive": 1.099
+        },
+        {
+          "start_seconds": 3.0,
+          "end_seconds_exclusive": 3.099
+        },
+        {
+          "start_seconds": 5.0,
+          "end_seconds_exclusive": 5.099
+        }
+      ],
+      "decoded_all_samples_exactly_zero": false
+    },
+    "reported": {
+      "event_count": 0,
+      "event_kind": "silence",
+      "quoted_evidence": [
+        "Nenhum som é audível",
+        "ausência observada de som / silêncio total"
+      ]
+    },
+    "sound_presence_comparison": "CONTRADICTION",
+    "event_kind_comparison": "CONTRADICTION",
+    "event_count_comparison": "CONTRADICTION",
+    "target_events_comparison": "CONTRADICTION"
+  },
+  "synchrony": {
+    "expected_relation": "not_applicable",
+    "reported": {
+      "label": "not_applicable",
+      "quoted_evidence": [
+        "não existem pontos de referência para comparar"
+      ]
+    },
+    "literal_relation_label_comparison": "MATCH",
+    "reference_audio_minus_flash_seconds": [],
+    "capability_result": "NOT_APPLICABLE",
+    "scope_note": "No positive synchrony credit is possible: this control lacks paired transient audio/visual events. Its stated absence of sound is contradicted by the source."
+  },
+  "access": {
+    "reported": {
+      "video": true,
+      "audio": true,
+      "independent_access_evidence": false
+    },
+    "backend_ingestion": "NOT_VERIFIED",
+    "local_player": {
+      "duration": 6,
+      "readyState": 4,
+      "error": null
+    },
+    "local_player_scope": "Browser playback/load evidence only; not proof of model receipt.",
+    "upload_warning": "Token count failed",
+    "warning_causal_explanation": "UNKNOWN"
+  },
+  "extra_contradictions": [],
+  "review_note": "Acerta ausência de mudança visual, mas declara silêncio no controle com três tons. O acerto visual não confirma acesso sonoro.",
+  "route_configuration_result": "NOT_QUALIFIED",
+  "causal_attribution": "UNDETERMINED",
+  "generalization_to_model_family": "NOT_SUPPORTED",
+  "sources": {
+    "response": {
+      "file": "responses/c02-response.json",
+      "sha256": "aebcd0ac9c3922b2c1e1027b3576522cc18d143d3d938e237060dfd7b08600cf"
+    },
+    "ui_evidence": {
+      "file": "observations/c02-ui-evidence.json",
+      "sha256": "3261a77640135ed7df2b4dd750b3f8adc3204a14fe1b13216b3527a26fab54c3",
+      "stages": [
+        "c02_upload",
+        "c02_before_run",
+        "c02_result_final"
+      ],
+      "warning_literal_present_in_saved_ui_excerpt": true,
+      "response_ready_literal_present_in_saved_ui_excerpt": true
+    },
+    "manifest": {
+      "file": "operator-only/manifest.json",
+      "sha256": "4da1ae544ccfc1abd4c8046456a4983fedda8f4796e1a181b762910a79d716de"
+    },
+    "run_observations": {
+      "file": "observations/ai-studio-observations.json",
+      "sha256": "24a88b46f9d156dd9d4d8bd748ee0c30e10c56de9e7fb49a2353660d0f277dff"
+    }
+  }
+}

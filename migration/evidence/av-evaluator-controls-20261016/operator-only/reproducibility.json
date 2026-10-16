@@ -1,0 +1,11 @@
+{
+  "same_toolchain_second_build_byte_identical": true,
+  "sha256": {
+    "c01.mp4": "5562d675416107eb9ec70643edd43e5375b85aa74051730f1d357a88d34e79df",
+    "c02.mp4": "38c84083fb6ae476d3a5a56bc97edb85546c4d3f9dfd654f26604730a085f171",
+    "c03.mp4": "28b92664cdc8f8cb150fd7f41dd23031bb10d1d45a7914c05a73d8f0222806c2",
+    "c04.mp4": "76e77bd374aa2bb95dbb95d3e49645405d4722a670fdd40d631c6ee1fda9f812",
+    "c05.mp4": "9da18589b317f1330d09254c210c17c7c73277d1ed02de0c1451653f32e4237c"
+  },
+  "scope": "Two independent builds with this installed toolchain. Cross-version byte identity is not promised."
+}

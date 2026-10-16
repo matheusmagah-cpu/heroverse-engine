@@ -1,0 +1,20 @@
+{
+  "all_negative_tests_passed": true,
+  "tests": [
+    {
+      "case": "silence_replaced_by_tone",
+      "rejected": true,
+      "reason": "c03.mp4: pulse count [{'start_seconds': 1.001, 'end_seconds_exclusive': 1.099}, {'start_seconds': 3.0, 'end_seconds_exclusive': 3.099}, {'start_seconds': 5.0, 'end_seconds_exclusive': 5.099}]"
+    },
+    {
+      "case": "lag_replaced_by_alignment",
+      "rejected": true,
+      "reason": "c01.mp4: onset"
+    },
+    {
+      "case": "constant_replaced_by_flashes",
+      "rejected": true,
+      "reason": "c02.mp4: supposedly constant image changed"
+    }
+  ]
+}

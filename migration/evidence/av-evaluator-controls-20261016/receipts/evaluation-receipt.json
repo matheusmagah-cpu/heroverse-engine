@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "route_configuration_result": "NOT_QUALIFIED",
+  "display_verdict": "ROTA/CONFIGURAÇÃO NÃO QUALIFICADA",
+  "scope": "These five submitted synthetic controls in this UI route and recorded configuration only.",
+  "model_label_observed": "gemini-3.8-flash",
+  "interface": "Google AI Studio Playground in dot cloud Chromium",
+  "configuration": {
+    "thinking_level": "Medium",
+    "media_resolution": "Default",
+    "maximum_output_tokens": 65536,
+    "structured_outputs": false,
+    "code_execution": false,
+    "function_calling": false,
+    "grounding_google_search": false,
+    "grounding_google_maps": false,
+    "url_context": false,
+    "system_instructions": "empty",
+    "stop_sequences": "empty",
+    "safety_settings": "unchanged default",
+    "agentic_video_understanding": false
+  },
+  "backend_ingestion": "NOT_VERIFIED",
+  "causal_attribution": "UNDETERMINED",
+  "generalization_to_model_family": "NOT_SUPPORTED",
+  "inference_count_recorded": 5,
+  "completed_response_count_recorded": 5,
+  "repeat_inference_count_recorded": 0,
+  "adjudication_author_type": "ai_assistant",
+  "adjudication_author_name": "dot",
+  "human_review_performed": false,
+  "certified_human_review": false,
+  "semantic_adjudication": "AI-assisted interpretation of saved model outputs by dot; not human review.",
+  "ground_truth_basis": "Objective deterministic AV measurements in the frozen synthetic-control manifest.",
+  "additional_external_provider_inferences_used_for_adjudication": 0,
+  "token_count_diagnostic": {
+    "file": "observations/token-count-diagnostic.json",
+    "sha256": "2458c9f3d97c88c7b56d31428c19fcfc51474c550dcf8a00a5884a1cb2e7fa49",
+    "cause_exposed": false,
+    "drive_access_granted": false,
+    "interpretation": "The separate history/Drive access blocker does not establish the cause of token count failure."
+  },
+  "all_trials_warning": "Token count failed",
+  "local_player_scope": "duration=6, readyState=4 and error=null establish only local player loading.",
+  "pre_evaluation_freeze": {
+    "file": "operator-only/pre-evaluation-freeze.json",
+    "sha256": "5a076563417061ecadeddf11f7f6c835ce3712ea335e49701e93e213d5f00e80",
+    "recorded_at": "2026-10-16T00:14:07.110145+00:00",
+    "all_frozen_hashes_match": true,
+    "checks": [
+      {
+        "file": "evaluator-prompt.txt",
+        "sha256": "44c9397dc7abb05e2b614b3ec9b2e56ca374e3df704a7426a14ef5cd07ace486",
+        "matches_frozen_hash": true
+      },
+      {
+        "file": "operator-only/protocol.md",
+        "sha256": "f48c182646fee747f6fbeca0ab99a45ac3b197d40e059150b8e8d2846e1043fe",
+        "matches_frozen_hash": true
+      },
+      {
+        "file": "operator-only/manifest.json",
+        "sha256": "4da1ae544ccfc1abd4c8046456a4983fedda8f4796e1a181b762910a79d716de",
+        "matches_frozen_hash": true
+      },
+      {
+        "file": "operator-only/reproducibility.json",
+        "sha256": "cc6adc9271203072a2ade2dd6ad43be0ce6ad0f80d39342b01b6e23d5efb94e7",
+        "matches_frozen_hash": true
+      },
+      {
+        "file": "operator-only/negative-tests.json",
+        "sha256": "1219106c55e8dc0def4b38088813fc36abf9d167ed91d466af32ca3f557bba9a",
+        "matches_frozen_hash": true
+      }
+    ],
+    "timestamp_assurance": "Preserved local timestamped record; not an independently notarized timestamp."
+  },
+  "capabilities": {
+    "temporal_visual_target_events": {
+      "qualification": "NOT_QUALIFIED",
+      "per_case": {
+        "c01": "CONTRADICTION",
+        "c02": "MATCH",
+        "c03": "CONTRADICTION",
+        "c04": "CONTRADICTION",
+        "c05": "CONTRADICTION"
+      }
+    },
+    "audio_target_events": {
+      "qualification": "NOT_QUALIFIED",
+      "per_case": {
+        "c01": "CONTRADICTION",
+        "c02": "CONTRADICTION",
+        "c03": "MATCH",
+        "c04": "CONTRADICTION",
+        "c05": "CONTRADICTION"
+      }
+    },
+    "coarse_audiovisual_relation": {
+      "qualification": "NOT_QUALIFIED",
+      "per_case": {
+        "c01": "CONTRADICTED",
+        "c02": "NOT_APPLICABLE",
+        "c03": "NOT_APPLICABLE",
+        "c04": "NOT_ESTABLISHED",
+        "c05": "CONTRADICTED"
+      }
+    },
+    "backend_channel_delivery": {
+      "qualification": "NOT_VERIFIED",
+      "per_case": {
+        "c01": "NOT_VERIFIED",
+        "c02": "NOT_VERIFIED",
+        "c03": "NOT_VERIFIED",
+        "c04": "NOT_VERIFIED",
+        "c05": "NOT_VERIFIED"
+      }
+    }
+  },
+  "aggregation_policy": "No average, overall accuracy, or compensating score. Every capability and every file remains separate.",
+  "interpretation_limits": [
+    "Factual comparisons are against the local submitted file, not proof of which media the backend received.",
+    "Correct silence or constant-image answers alone do not prove access to their channels.",
+    "A matching synchrony word attached to nonexistent events does not validate audiovisual synchronization.",
+    "The warning may be relevant but its exact cause and causal role are unverified.",
+    "Do not conclude that every Gemini model, API, configuration, or later run shares this result."
+  ],
+  "execution_notes": [
+    "Exactly five independent chats, one recorded submission and one completed response per file; no inference retries.",
+    "The recorded order was c01 through c05; per-run renaming/randomization was recommended in the protocol but is not evidenced in this run.",
+    "The c03 typing recovery occurred before submission; it is not recorded as an additional inference.",
+    "No durable share URL or backend file-ingestion receipt was verified.",
+    "Receipt generation was local only and did not contact the evaluator or reveal the answer key."
+  ],
+  "case_receipts": [
+    "receipts/c01-receipt.json",
+    "receipts/c02-receipt.json",
+    "receipts/c03-receipt.json",
+    "receipts/c04-receipt.json",
+    "receipts/c05-receipt.json"
+  ],
+  "run_completed_at_utc": "2026-10-16T00:51:56Z"
+}

@@ -1,0 +1,497 @@
+{
+  "schema_version": 1,
+  "purpose": "Channel access and coarse audiovisual offset triage only; not model approval or fine synchrony accuracy.",
+  "do_not_give_to_evaluator": true,
+  "contains_user_data": false,
+  "tools": {
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers",
+    "python": "3.12.14"
+  },
+  "recipe": {
+    "duration_seconds": 6,
+    "fps": 30,
+    "resolution": [
+      320,
+      240
+    ],
+    "flash_duration_frames": 3,
+    "tone_hz": 1000,
+    "tone_duration_seconds": 0.1,
+    "linear_ramp_seconds": 0.005,
+    "peak_source_amplitude_full_scale": 0.25,
+    "source_audio": "PCM signed 16-bit mono 48000 Hz"
+  },
+  "measurement_method": {
+    "flash": "Decoded Y plane center 40x40 average > 200; source levels 80/235.",
+    "tone": "Decoded PCM float32; RMS of nonoverlapping 48-sample (1 ms) windows >= 0.02 full scale. Report first and end-exclusive active window.",
+    "onset_tolerance_seconds": 0.015,
+    "frequency": "Positive zero crossings on central 50 ms plateau; 20 Hz bin resolution.",
+    "silence": "Every decoded float sample must equal zero, including AAC padding.",
+    "timing_sign": "Positive audio onset minus flash means sound lags; negative means sound leads.",
+    "limitations": "AAC preecho, ramps and RMS threshold make these operational onsets, not perceptual or sample-accurate onset estimates."
+  },
+  "files": [
+    {
+      "filename": "c01.mp4",
+      "condition": "audio_late_500ms",
+      "size_bytes": 19083,
+      "sha256": "5562d675416107eb9ec70643edd43e5375b85aa74051730f1d357a88d34e79df",
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "width": 320,
+        "height": 240,
+        "pix_fmt": "yuv420p",
+        "fps": 30,
+        "frames": 180,
+        "unique_decoded_frames": 2,
+        "duration_seconds": 6.0,
+        "time_base": "1/15360",
+        "first_pts_seconds": 0.0,
+        "last_pts_seconds": 5.966667,
+        "decoded_yuv420p_sha256": "48a4f2c174ba8fdc3041470a76e1b03c6902fbbf41451f49d3a389e46753e283",
+        "flash_start_seconds": [
+          1.0,
+          3.0,
+          5.0
+        ],
+        "flash_frame_indices": [
+          30,
+          31,
+          32,
+          90,
+          91,
+          92,
+          150,
+          151,
+          152
+        ]
+      },
+      "audio": {
+        "codec": "aac",
+        "profile": "LC",
+        "sample_rate": 48000,
+        "channels": 1,
+        "duration_seconds": 6.0,
+        "time_base": "1/48000",
+        "source_pcm": {
+          "sha256_pcm_s16le": "2eb7552449b3a4a84d8160b68c376bfe803353a20d900e92bb87a0e2d230a085",
+          "sample_count": 288000,
+          "all_samples_zero": false
+        },
+        "decoded_f32le_sha256": "5efda979496abfda7a03ae21f255319f24524f58b4726f21666fa905bf5beae0",
+        "decoded_sample_count": 288768,
+        "decoded_nonzero_samples": 15359,
+        "decoded_all_samples_exactly_zero": false,
+        "decoded_peak_absolute": 0.25116774439811707,
+        "decoded_tail_samples_outside_track": 768,
+        "tail_outside_track_exactly_zero": true,
+        "expected_tone_start_seconds": [
+          1.5,
+          3.5,
+          5.5
+        ],
+        "observed_tone_intervals_seconds": [
+          {
+            "start_seconds": 1.5,
+            "end_seconds_exclusive": 1.599
+          },
+          {
+            "start_seconds": 3.501,
+            "end_seconds_exclusive": 3.599
+          },
+          {
+            "start_seconds": 5.501,
+            "end_seconds_exclusive": 5.599
+          }
+        ],
+        "observed_frequency_zero_crossing_hz": [
+          1000.0,
+          980.0,
+          1000.0
+        ],
+        "tone_onset_minus_flash_seconds": [
+          0.5,
+          0.501,
+          0.501
+        ],
+        "first_packet_pts_seconds": -0.021333,
+        "first_packet_skip_samples": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ],
+        "decoded_first_frame_pts_seconds": 0.0,
+        "decoded_last_frame_pts_seconds": 5.994667,
+        "nominal_audio_shift_seconds": 0.5
+      },
+      "verification": "PASS"
+    },
+    {
+      "filename": "c02.mp4",
+      "condition": "constant_image_with_tones",
+      "size_bytes": 18888,
+      "sha256": "38c84083fb6ae476d3a5a56bc97edb85546c4d3f9dfd654f26604730a085f171",
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "width": 320,
+        "height": 240,
+        "pix_fmt": "yuv420p",
+        "fps": 30,
+        "frames": 180,
+        "unique_decoded_frames": 1,
+        "duration_seconds": 6.0,
+        "time_base": "1/15360",
+        "first_pts_seconds": 0.0,
+        "last_pts_seconds": 5.966667,
+        "decoded_yuv420p_sha256": "f578238419883439d593df08e011e00f6fac53e9cbb5b5232747124e52c155be",
+        "flash_start_seconds": [],
+        "flash_frame_indices": []
+      },
+      "audio": {
+        "codec": "aac",
+        "profile": "LC",
+        "sample_rate": 48000,
+        "channels": 1,
+        "duration_seconds": 6.0,
+        "time_base": "1/48000",
+        "source_pcm": {
+          "sha256_pcm_s16le": "bd0c996b2e97a3f595ea4deb1408d9d6ad7f8e85131e4b4c9aaaa7dfb41d98e5",
+          "sample_count": 288000,
+          "all_samples_zero": false
+        },
+        "decoded_f32le_sha256": "2ad61ca49c29b0a2e073fee61a80b6f6c7da93bacbdee52b183e0031a36e5948",
+        "decoded_sample_count": 288768,
+        "decoded_nonzero_samples": 15360,
+        "decoded_all_samples_exactly_zero": false,
+        "decoded_peak_absolute": 0.25363609194755554,
+        "decoded_tail_samples_outside_track": 768,
+        "tail_outside_track_exactly_zero": true,
+        "expected_tone_start_seconds": [
+          1.0,
+          3.0,
+          5.0
+        ],
+        "observed_tone_intervals_seconds": [
+          {
+            "start_seconds": 1.001,
+            "end_seconds_exclusive": 1.099
+          },
+          {
+            "start_seconds": 3.0,
+            "end_seconds_exclusive": 3.099
+          },
+          {
+            "start_seconds": 5.0,
+            "end_seconds_exclusive": 5.099
+          }
+        ],
+        "observed_frequency_zero_crossing_hz": [
+          980.0,
+          1000.0,
+          980.0
+        ],
+        "tone_onset_minus_flash_seconds": [],
+        "first_packet_pts_seconds": -0.021333,
+        "first_packet_skip_samples": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ],
+        "decoded_first_frame_pts_seconds": 0.0,
+        "decoded_last_frame_pts_seconds": 5.994667,
+        "nominal_audio_shift_seconds": 0
+      },
+      "verification": "PASS"
+    },
+    {
+      "filename": "c03.mp4",
+      "condition": "digital_silence",
+      "size_bytes": 11504,
+      "sha256": "28b92664cdc8f8cb150fd7f41dd23031bb10d1d45a7914c05a73d8f0222806c2",
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "width": 320,
+        "height": 240,
+        "pix_fmt": "yuv420p",
+        "fps": 30,
+        "frames": 180,
+        "unique_decoded_frames": 2,
+        "duration_seconds": 6.0,
+        "time_base": "1/15360",
+        "first_pts_seconds": 0.0,
+        "last_pts_seconds": 5.966667,
+        "decoded_yuv420p_sha256": "48a4f2c174ba8fdc3041470a76e1b03c6902fbbf41451f49d3a389e46753e283",
+        "flash_start_seconds": [
+          1.0,
+          3.0,
+          5.0
+        ],
+        "flash_frame_indices": [
+          30,
+          31,
+          32,
+          90,
+          91,
+          92,
+          150,
+          151,
+          152
+        ]
+      },
+      "audio": {
+        "codec": "aac",
+        "profile": "LC",
+        "sample_rate": 48000,
+        "channels": 1,
+        "duration_seconds": 6.0,
+        "time_base": "1/48000",
+        "source_pcm": {
+          "sha256_pcm_s16le": "30fafbdc0facf210a26498db982f7ff8ad1e0b9a805816731c72e356a768c162",
+          "sample_count": 288000,
+          "all_samples_zero": true
+        },
+        "decoded_f32le_sha256": "b1407a10b6eb268a871cd104a767f27d3895e5f06208b6c2a8aadef58932c8ec",
+        "decoded_sample_count": 288768,
+        "decoded_nonzero_samples": 0,
+        "decoded_all_samples_exactly_zero": true,
+        "decoded_peak_absolute": 0.0,
+        "decoded_tail_samples_outside_track": 768,
+        "tail_outside_track_exactly_zero": true,
+        "expected_tone_start_seconds": [],
+        "observed_tone_intervals_seconds": [],
+        "observed_frequency_zero_crossing_hz": [],
+        "tone_onset_minus_flash_seconds": [],
+        "first_packet_pts_seconds": -0.021333,
+        "first_packet_skip_samples": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ],
+        "decoded_first_frame_pts_seconds": 0.0,
+        "decoded_last_frame_pts_seconds": 5.994667,
+        "nominal_audio_shift_seconds": null
+      },
+      "verification": "PASS"
+    },
+    {
+      "filename": "c04.mp4",
+      "condition": "audio_aligned",
+      "size_bytes": 19068,
+      "sha256": "76e77bd374aa2bb95dbb95d3e49645405d4722a670fdd40d631c6ee1fda9f812",
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "width": 320,
+        "height": 240,
+        "pix_fmt": "yuv420p",
+        "fps": 30,
+        "frames": 180,
+        "unique_decoded_frames": 2,
+        "duration_seconds": 6.0,
+        "time_base": "1/15360",
+        "first_pts_seconds": 0.0,
+        "last_pts_seconds": 5.966667,
+        "decoded_yuv420p_sha256": "48a4f2c174ba8fdc3041470a76e1b03c6902fbbf41451f49d3a389e46753e283",
+        "flash_start_seconds": [
+          1.0,
+          3.0,
+          5.0
+        ],
+        "flash_frame_indices": [
+          30,
+          31,
+          32,
+          90,
+          91,
+          92,
+          150,
+          151,
+          152
+        ]
+      },
+      "audio": {
+        "codec": "aac",
+        "profile": "LC",
+        "sample_rate": 48000,
+        "channels": 1,
+        "duration_seconds": 6.0,
+        "time_base": "1/48000",
+        "source_pcm": {
+          "sha256_pcm_s16le": "bd0c996b2e97a3f595ea4deb1408d9d6ad7f8e85131e4b4c9aaaa7dfb41d98e5",
+          "sample_count": 288000,
+          "all_samples_zero": false
+        },
+        "decoded_f32le_sha256": "2ad61ca49c29b0a2e073fee61a80b6f6c7da93bacbdee52b183e0031a36e5948",
+        "decoded_sample_count": 288768,
+        "decoded_nonzero_samples": 15360,
+        "decoded_all_samples_exactly_zero": false,
+        "decoded_peak_absolute": 0.25363609194755554,
+        "decoded_tail_samples_outside_track": 768,
+        "tail_outside_track_exactly_zero": true,
+        "expected_tone_start_seconds": [
+          1.0,
+          3.0,
+          5.0
+        ],
+        "observed_tone_intervals_seconds": [
+          {
+            "start_seconds": 1.001,
+            "end_seconds_exclusive": 1.099
+          },
+          {
+            "start_seconds": 3.0,
+            "end_seconds_exclusive": 3.099
+          },
+          {
+            "start_seconds": 5.0,
+            "end_seconds_exclusive": 5.099
+          }
+        ],
+        "observed_frequency_zero_crossing_hz": [
+          980.0,
+          1000.0,
+          980.0
+        ],
+        "tone_onset_minus_flash_seconds": [
+          0.001,
+          0.0,
+          0.0
+        ],
+        "first_packet_pts_seconds": -0.021333,
+        "first_packet_skip_samples": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ],
+        "decoded_first_frame_pts_seconds": 0.0,
+        "decoded_last_frame_pts_seconds": 5.994667,
+        "nominal_audio_shift_seconds": 0
+      },
+      "verification": "PASS"
+    },
+    {
+      "filename": "c05.mp4",
+      "condition": "audio_early_500ms",
+      "size_bytes": 19029,
+      "sha256": "9da18589b317f1330d09254c210c17c7c73277d1ed02de0c1451653f32e4237c",
+      "video": {
+        "codec": "h264",
+        "profile": "High",
+        "width": 320,
+        "height": 240,
+        "pix_fmt": "yuv420p",
+        "fps": 30,
+        "frames": 180,
+        "unique_decoded_frames": 2,
+        "duration_seconds": 6.0,
+        "time_base": "1/15360",
+        "first_pts_seconds": 0.0,
+        "last_pts_seconds": 5.966667,
+        "decoded_yuv420p_sha256": "48a4f2c174ba8fdc3041470a76e1b03c6902fbbf41451f49d3a389e46753e283",
+        "flash_start_seconds": [
+          1.0,
+          3.0,
+          5.0
+        ],
+        "flash_frame_indices": [
+          30,
+          31,
+          32,
+          90,
+          91,
+          92,
+          150,
+          151,
+          152
+        ]
+      },
+      "audio": {
+        "codec": "aac",
+        "profile": "LC",
+        "sample_rate": 48000,
+        "channels": 1,
+        "duration_seconds": 6.0,
+        "time_base": "1/48000",
+        "source_pcm": {
+          "sha256_pcm_s16le": "75cb85ccc0af4d2a61c0e5f7dc0841c3b3a9ec140258ac968a8e9742d0fca0e7",
+          "sample_count": 288000,
+          "all_samples_zero": false
+        },
+        "decoded_f32le_sha256": "36518fff9107e2bb86e7ed2e72e3aaa69a321841e7758248e0d5ceac159ec7aa",
+        "decoded_sample_count": 288768,
+        "decoded_nonzero_samples": 15360,
+        "decoded_all_samples_exactly_zero": false,
+        "decoded_peak_absolute": 0.25133785605430603,
+        "decoded_tail_samples_outside_track": 768,
+        "tail_outside_track_exactly_zero": true,
+        "expected_tone_start_seconds": [
+          0.5,
+          2.5,
+          4.5
+        ],
+        "observed_tone_intervals_seconds": [
+          {
+            "start_seconds": 0.501,
+            "end_seconds_exclusive": 0.599
+          },
+          {
+            "start_seconds": 2.5,
+            "end_seconds_exclusive": 2.599
+          },
+          {
+            "start_seconds": 4.501,
+            "end_seconds_exclusive": 4.599
+          }
+        ],
+        "observed_frequency_zero_crossing_hz": [
+          980.0,
+          980.0,
+          980.0
+        ],
+        "tone_onset_minus_flash_seconds": [
+          -0.499,
+          -0.5,
+          -0.499
+        ],
+        "first_packet_pts_seconds": -0.021333,
+        "first_packet_skip_samples": [
+          {
+            "side_data_type": "Skip Samples",
+            "skip_samples": 1024,
+            "discard_padding": 0,
+            "skip_reason": 0,
+            "discard_reason": 0
+          }
+        ],
+        "decoded_first_frame_pts_seconds": 0.0,
+        "decoded_last_frame_pts_seconds": 5.994667,
+        "nominal_audio_shift_seconds": -0.5
+      },
+      "verification": "PASS"
+    }
+  ],
+  "cross_file_checks": {
+    "identical_decoded_video_for_four_flashing_cases": true
+  },
+  "all_checks_passed": true
+}

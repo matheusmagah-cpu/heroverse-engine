@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-10-16T00:14:07.110145+00:00",
+  "scope": "Five synthetic controls; per-capability triage only, not general audiovisual approval",
+  "files": {
+    "evaluator-prompt.txt": "44c9397dc7abb05e2b614b3ec9b2e56ca374e3df704a7426a14ef5cd07ace486",
+    "operator-only/protocol.md": "f48c182646fee747f6fbeca0ab99a45ac3b197d40e059150b8e8d2846e1043fe",
+    "operator-only/manifest.json": "4da1ae544ccfc1abd4c8046456a4983fedda8f4796e1a181b762910a79d716de",
+    "operator-only/reproducibility.json": "cc6adc9271203072a2ade2dd6ad43be0ce6ad0f80d39342b01b6e23d5efb94e7",
+    "operator-only/negative-tests.json": "1219106c55e8dc0def4b38088813fc36abf9d167ed91d466af32ca3f557bba9a"
+  },
+  "model_responses_received_at_recording": false
+}

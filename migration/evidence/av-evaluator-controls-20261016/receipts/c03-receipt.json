@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "case_id": "c03",
+  "asset_filename": "c03.mp4",
+  "asset_sha256": "28b92664cdc8f8cb150fd7f41dd23031bb10d1d45a7914c05a73d8f0222806c2",
+  "source_interval_seconds": [
+    0,
+    6
+  ],
+  "source_kind": "synthetic_control",
+  "inference_count_recorded_for_case": 1,
+  "author_type": "ai_assistant",
+  "author_name": "dot",
+  "human_review_performed": false,
+  "certified_human_review": false,
+  "ground_truth_basis": "Objective deterministic measurements of locally generated synthetic controls, preserved in the frozen manifest.",
+  "adjudication_method": "AI-assisted interpretation by dot (an AI assistant) of explicit claims in saved responses; deterministic comparison with the frozen measured control manifest. Not human review, not certified human judgment, and no additional external provider inference.",
+  "visual": {
+    "expected": {
+      "event_kind": "flash",
+      "event_count": 3,
+      "flash_start_seconds": [
+        1.0,
+        3.0,
+        5.0
+      ]
+    },
+    "reported": {
+      "event_count": 1,
+      "event_kind": "icon_transition",
+      "quoted_evidence": [
+        "Ocorre 1 mudança visual.",
+        "O vídeo começa exibindo um fundo rosa com um círculo branco central"
+      ]
+    },
+    "change_presence_comparison": "MATCH",
+    "event_kind_comparison": "CONTRADICTION",
+    "event_count_comparison": "CONTRADICTION",
+    "target_events_comparison": "CONTRADICTION"
+  },
+  "audio": {
+    "expected": {
+      "event_kind": "silence",
+      "event_count": 0,
+      "observed_tone_intervals_seconds": [],
+      "decoded_all_samples_exactly_zero": true
+    },
+    "reported": {
+      "event_count": 0,
+      "event_kind": "silence",
+      "quoted_evidence": [
+        "não há som audível (trilha de áudio completamente silenciosa",
+        "eventos sonoros audíveis ocorrem 0 vezes."
+      ]
+    },
+    "sound_presence_comparison": "MATCH",
+    "event_kind_comparison": "MATCH",
+    "event_count_comparison": "MATCH",
+    "target_events_comparison": "MATCH"
+  },
+  "synchrony": {
+    "expected_relation": "not_applicable",
+    "reported": {
+      "label": "not_applicable",
+      "quoted_evidence": [
+        "Não é aplicável/indeterminada para sincronia"
+      ]
+    },
+    "literal_relation_label_comparison": "MATCH",
+    "reference_audio_minus_flash_seconds": [],
+    "capability_result": "NOT_APPLICABLE",
+    "scope_note": "No positive synchrony credit is possible: this control lacks paired transient audio/visual events."
+  },
+  "access": {
+    "reported": {
+      "video": true,
+      "audio": true,
+      "independent_access_evidence": false
+    },
+    "backend_ingestion": "NOT_VERIFIED",
+    "local_player": {
+      "duration": 6,
+      "readyState": 4,
+      "error": null
+    },
+    "local_player_scope": "Browser playback/load evidence only; not proof of model receipt.",
+    "upload_warning": "Token count failed",
+    "warning_causal_explanation": "UNKNOWN"
+  },
+  "extra_contradictions": [],
+  "review_note": "O silêncio é compatível com o PCM zero; a cena de ícones não existe no arquivo. Acertar silêncio isoladamente não comprova acesso ao canal.",
+  "route_configuration_result": "NOT_QUALIFIED",
+  "causal_attribution": "UNDETERMINED",
+  "generalization_to_model_family": "NOT_SUPPORTED",
+  "sources": {
+    "response": {
+      "file": "responses/c03-response.json",
+      "sha256": "80b23bd2bca97d0a914de7600bef23c44ebcb63587228b398f9aa07f864a22c6"
+    },
+    "ui_evidence": {
+      "file": "observations/c03-ui-evidence.json",
+      "sha256": "b54865f65b51407119069f9e62e77e1c0a55f97ea3496eff928a5688b3bbc09d",
+      "stages": [
+        "c03_upload",
+        "c03_before_run",
+        "c03_result_state"
+      ],
+      "warning_literal_present_in_saved_ui_excerpt": true,
+      "response_ready_literal_present_in_saved_ui_excerpt": true
+    },
+    "manifest": {
+      "file": "operator-only/manifest.json",
+      "sha256": "4da1ae544ccfc1abd4c8046456a4983fedda8f4796e1a181b762910a79d716de"
+    },
+    "run_observations": {
+      "file": "observations/ai-studio-observations.json",
+      "sha256": "24a88b46f9d156dd9d4d8bd748ee0c30e10c56de9e7fb49a2353660d0f277dff"
+    }
+  }
+}
