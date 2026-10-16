@@ -785,3 +785,53 @@ Five independent AI Studio UI trials (observed model label `gemini-3.8-flash`, f
 Evidence: `migration/evidence/av-evaluator-controls-20261016/` contains the frozen pre-evaluation hashes, synthetic-control recipe and objective measurements, five original responses, configuration/UI/diagnostic records, and per-file/per-capability receipts without an averaging score. Semantic extraction/adjudication was authored by **dot, an AI assistant**, not a human reviewer; no certified human review is claimed. Ground truth is deterministic measurement of the synthetic controls, while output interpretation is AI-assisted. Eleven local receipt regression tests pass, including AI-authorship and human-review-claim guards.
 
 Only text/code evidence and this appendix are recorded; MP4/PCM and other binaries remain outside Git. No additional evaluator call or workflow was requested for this registration. Existing manual-review, production and publication gates remain unchanged.
+
+
+## 2026-10-16 03:01 UTC — API c01 audio diagnosis closed with limited evidence
+
+The existing private project remained FREE/no billing under the 01:35:25 UTC
+observation and zero-price policy, with a fresh secret-fingerprint MATCH before
+each inference. One 3.8 Files attempt (run 38838440874) ended HTTP503 HIGH_DEMAND,
+without retry; that is an availability outcome, not a capability score. The
+explicit 3.5 Flash-Lite Files attempt (run 38839955057) returned four flashes, four
+beeps and simultaneity, contrary to the frozen three/three/delayed-audio control.
+Its separate AI adjudication is preserved at
+`evidence/av-evaluator-controls-20261016/operator-only/api-c01-lite-adjudication-38839955057.json`.
+VIDEO-without-AUDIO usage in that run did not prove that embedded audio was absent.
+
+The single direct-audio diagnostic [run 38842979507](https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38842979507),
+attempt 1, started at `500283f04a44592c4fabcbc08687251a268bca1a` and closed at
+`34234106c73f8ba6428c6c6c02218c8573450fa5`. The runner prepared the byte-bound
+six-second 48 kHz mono WAV from the real original MP4 AAC decode: only 768 exact-zero
+tail samples were cut, with no resampling; bounded PCM16 quantization was recorded.
+WAV/PCM hashes matched the existing proof. No repeated decode or media reproduction
+was performed for this result review. Only inline WAV plus the frozen neutral
+prompt/config reached Gemini; no expected answer, scripts, prior response or video
+was sent. One generateContent call, zero GET/upload/token-count calls, no retry.
+
+Literal answer: “O som de bipe de chamada de telefone está presente.” (followed
+by a newline in the preserved receipt). Usage: AUDIO 150 + TEXT 48 input tokens,
+13 output, 211 total; finishReason STOP. Direct-audio modality accounting and
+generic beep detection are supported. The response gave no count and no onset
+times: count is NOT_DEMONSTRATED_NOT_REPORTED and timing is NOT_SCORED_NOT_REPORTED,
+not zero or an explicitly wrong count. Telephone-call origin is an unsupported
+attribution. The separate exploratory timing tolerance of 0.25 s was not scored;
+the physical 0.015 s tolerance and earlier AV criteria remain unchanged.
+
+Receipt: `evidence/public-av-7fe5d21cea9ccc07ac4d064ef371351b428b9d0ee4fc9ff617985d6de09f5a7a.json`,
+SHA256 `b6cb78f9767b38754888a4ad8e8d748e839065f37c5d84a1397ae6ed5598c7e5`.
+AI-only adjudication, not human review:
+`evidence/av-evaluator-controls-20261016/operator-only/api-c01-audio-adjudication-38842979507.json`.
+Artifact 12022505568 contains only SQLite and textual derivation proof, no media;
+ZIP SHA256 `f98837277ca13d72c49616d647abf4a4eb71ec5628c00dffa00510d25fbc93ad`.
+The artifact ledger equals committed SQL. All prior records/receipts remain,
+including 53 October 14 rows / 28800 s and the two prior 6 s debits; October 16 total is
+three reservations / 18 s, zero CLAIMED and no open observer claim.
+
+Decision: stop this synthetic Gemini evaluation round without retrying, teaching
+the answer, adding model trials or qualifying this route as a standalone perceptual
+approver. The beep description does not establish counting, timing, audiovisual
+synchronization or general semantic accuracy. Workflow success and COMPLETED are
+execution/accounting facts, not approval. This is a documentary stop decision;
+no scheduler or runtime gate changed. Production, publication and supervisor
+remain OFF. Existing review and semantic qualification gates remain unmet.
