@@ -195,6 +195,18 @@ def transport(payload, api_key, *, model=MODEL):
         # Provider text/URL/headers are deliberately not emitted; they may contain secrets.
         raise ProviderFailure('PROVIDER_CALL_FAILED_NO_AUTOMATIC_RETRY') from None
 
+def validate_free_policy(api_key, policy, now):
+    """Shared fail-closed project, FREE price, freshness and secret-binding gate."""
+    verified = datetime.fromisoformat(policy['verified_at'].replace('Z', '+00:00'))
+    if (policy.get('project_id') != PROJECT or policy.get('model') not in FREE_MODELS
+            or policy.get('tier') != 'FREE' or policy.get('billing_enabled') is not False
+            or policy.get('input_price_usd') != 0 or policy.get('output_price_usd') != 0
+            or verified.tzinfo is None or not 0 <= (now - verified).total_seconds() <= 86400
+            or not re.fullmatch(r'[a-f0-9]{64}', policy.get('key_sha256', ''))
+            or hashlib.sha256(api_key.encode()).hexdigest() != policy['key_sha256']):
+        raise PermissionError('CURRENT_FREE_PROJECT_KEY_BINDING_REQUIRED')
+    return policy['model']
+
 def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=None, window=None, refinement=False,research_context=None,recovery=None):
     """Manager adapter. reserve() must durably claim before the network effect.
 
@@ -204,14 +216,7 @@ def analyze(source, *, api_key, policy, reserve, persist, send=transport, now=No
     A missing post-call checkpoint leaves the claim unresolved, never retried.
     """
     now = now or datetime.now(timezone.utc)
-    verified = datetime.fromisoformat(policy['verified_at'].replace('Z', '+00:00'))
-    if (policy.get('project_id') != PROJECT or policy.get('model') not in FREE_MODELS
-            or policy.get('tier') != 'FREE' or policy.get('billing_enabled') is not False
-            or policy.get('input_price_usd') != 0 or policy.get('output_price_usd') != 0
-            or verified.tzinfo is None or not 0 <= (now - verified).total_seconds() <= 86400
-            or not re.fullmatch(r'[a-f0-9]{64}', policy.get('key_sha256', ''))
-            or hashlib.sha256(api_key.encode()).hexdigest() != policy['key_sha256']):
-        raise PermissionError('CURRENT_FREE_PROJECT_KEY_BINDING_REQUIRED')
+    validate_free_policy(api_key, policy, now)
     if not callable(reserve) or not callable(persist):
         raise PermissionError('EXISTING_DURABLE_MANAGER_REQUIRED')
     payload = build_request(source, today=now.date().isoformat(),window=window,refinement=refinement,research_context=research_context)

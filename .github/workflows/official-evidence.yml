@@ -7,6 +7,10 @@ on:
     - cron: '17 9 * * *'
   workflow_dispatch:
     inputs:
+      av_synthetic_c01:
+        description: Infer once on the already-uploaded six-second synthetic c01; original ledger, no collector
+        type: boolean
+        default: false
       checkpoint_only:
         description: Skip new owned and market collection; readiness may refresh identity
         type: boolean
@@ -135,10 +139,21 @@ jobs:
               with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('public_seeds='+json.dumps(seeds,separators=(',',':'))+'\n')
           print('Exact bounded '+stage+' request verified; no publication authority')
           PY
+      - name: Test isolated synthetic control without credentials
+        if: inputs.av_synthetic_c01
+        run: python3 -m unittest discover -s migration/runtime_bridge -p 'test_synthetic_files_av.py' -v
+      - name: Validate synthetic control and match existing free-project secret before claims
+        if: inputs.av_synthetic_c01
+        env:
+          HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          HERO_STAGE_SELECTION: ${{ toJSON(inputs) }}
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: python3 migration/runtime_bridge/synthetic_files_av.py preflight
       - name: Claim durable observer and restore current quota source
         id: durable_claim
         run: python3 migration/durable_evidence_checkpoint.py claim
       - name: Test observation boundaries
+        if: ${{ !inputs.av_synthetic_c01 }}
         run: python3 -m unittest discover -s migration -p 'test_*evidence*.py' -v
       - name: Restore checkpoint without API collection
         if: inputs.checkpoint_only || (github.event_name == 'push' && steps.push_stage.outputs.stage != 'candidate' && steps.push_stage.outputs.stage != 'catalog' && steps.push_stage.outputs.stage != 'catalog_extension')
@@ -152,6 +167,14 @@ jobs:
           restore_ledger(SQL,out/"quota-ledger.sqlite3")
           print("Original ledger restored; no Google calls or publications")
           PY
+      - name: Analyze exactly one existing synthetic File through the original observer ledger
+        if: inputs.av_synthetic_c01 && inputs.checkpoint_only
+        timeout-minutes: 4
+        env:
+          HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          HERO_STAGE_SELECTION: ${{ toJSON(inputs) }}
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: timeout --signal=TERM --kill-after=10s 210s python3 migration/runtime_bridge/synthetic_files_av.py run
       - name: Prepare bounded fresh-runner media restoration
         if: inputs.restore_assets && inputs.checkpoint_only
         run: |
@@ -240,8 +263,14 @@ jobs:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: python3 migration/runtime_bridge/observe_public_av.py
       - name: Commit durable quota continuation
-        if: always() && steps.durable_claim.outcome == 'success'
+        if: always() && steps.durable_claim.outcome == 'success' && !inputs.av_synthetic_c01
         run: python3 migration/durable_evidence_checkpoint.py checkpoint
+      - name: Finalize only the reconciled synthetic control in the same ledger
+        if: always() && steps.durable_claim.outcome == 'success' && inputs.av_synthetic_c01
+        env:
+          HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          HERO_STAGE_SELECTION: ${{ toJSON(inputs) }}
+        run: python3 migration/runtime_bridge/synthetic_files_av.py finalize
       - name: Preserve evidence and quota continuation
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
