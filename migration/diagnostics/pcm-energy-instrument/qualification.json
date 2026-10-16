@@ -1,0 +1,30 @@
+{
+  "version": "pcm-energy-instrument-qualification-v1",
+  "status": "PASS_12_SYNTHETIC_OFFLINE_TESTS",
+  "scope": "RAW_PCM16_ENERGY_KERNEL_ONLY_NOT_RUNTIME_OR_PERCEPTUAL_QUALIFICATION",
+  "test_methods_passed": 12,
+  "test_inputs": "SYNTHETIC_PCM_GENERATED_IN_MEMORY_ONLY",
+  "isolated_temp_copy_tested": true,
+  "python_version_tested": "3.12.14",
+  "test_command": "python3 -I -S -B -m unittest discover -s . -p test_audio_activity.py -v",
+  "third_party_dependencies": [],
+  "network_calls": 0,
+  "model_inferences": 0,
+  "media_decodes": 0,
+  "production_authorized": false,
+  "publication_authorized": false,
+  "runtime_integrated": false,
+  "core_byte_identical_to_reviewed_version": true,
+  "artifact_sha256": {
+    "audio_activity.py": "bed17d753998f337c4631d76bdc8f0d876d091fb29aebf5db1e7346028ba3002",
+    "test_audio_activity.py": "177e010e312c981a2ed17b7bffc3cd401018f61479c3fb2505b3a978e4e54403",
+    "README.md": "d0c4250b0905f212d53e4504da14ed4822cb9ddbc82fb2d4600d6facbee696bd"
+  },
+  "limitations": [
+    "No existing media, local historical fixture, aggregate module, model or external service is required by these tests.",
+    "Raw bytes are interpreted as signed little-endian PCM16; caller must establish format and source identity.",
+    "Active intervals are thresholded RMS windows, not perceptual sound-event counts or semantic findings.",
+    "No activity above threshold does not establish digital or acoustic silence.",
+    "This finite unit qualification does not validate production input coverage, audiovisual sync or perceptual quality."
+  ]
+}
