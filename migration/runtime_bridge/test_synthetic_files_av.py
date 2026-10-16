@@ -36,7 +36,8 @@ POLICY = dict(BASE_POLICY,key_sha256=KEY_HASH)
 CURRENT_SQL_RAW = (ROOT/d.SQL).read_text()
 LITE_KEY = 'synthetic-av:7e431b2811680333a574d970c68b74d073421105b805234d7721be3af9fe04ba'
 SQL_RAW = ''.join(line for line in CURRENT_SQL_RAW.splitlines(keepends=True)
-    if not line.startswith('INSERT INTO "public_av_reservations" VALUES(\''+LITE_KEY+"',"))
+    if not line.startswith('INSERT INTO "public_av_reservations" VALUES(\''+LITE_KEY+"',")
+    and not line.startswith('INSERT INTO "public_av_reservations" VALUES(\'synthetic-audio:'))
 assert hashlib.sha256(SQL_RAW.encode()).hexdigest() == 'ea495b34686a2e2ba22789d7c6aa6efc927d718203bb8518c2502ab11e5bc7f4', 'HISTORICAL_PRE_RUN42_FIXTURE_CHANGED'
 PRIOR_KEY = 'synthetic-av:27ef45f42c98789a4a30b043669c2973bf3c1c8b7e45484f3e15ca99bafe9d27'
 PRIOR_PATH = Path('migration/evidence/public-av-'+PRIOR_KEY.split(':')[1]+'.json')

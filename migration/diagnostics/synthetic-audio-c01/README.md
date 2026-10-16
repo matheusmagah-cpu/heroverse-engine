@@ -1,6 +1,6 @@
 # One c01 direct-audio diagnostic
 
-Prepared against `daa087c85019518b7cc2fa1ada0310dd916e6843`. This directory's
+Structured-output proposal prepared against `5b215a03d037df06c53963143d6b7f7874b51af4`. This directory's
 code, documentation and derivation proof are operator-only. Only the exact WAV
 and `evaluator-prompt.txt` enter the model request. No expected answer, timing
 measurement, script, proof, video, or earlier model response is sent.
@@ -23,7 +23,11 @@ No actual credential is read during offline preparation or tests.
 
 One `gemini-3.5-flash-lite:generateContent` attempt uses only a user content with
 `inlineData` (`audio/wav`, executor-memory base64) and the frozen neutral text.
-Generation configuration remains candidateCount 1 / maxOutputTokens 4096.
+Generation configuration retains candidateCount 1 / maxOutputTokens 4096 and
+adds only `responseFormat.text` with `mimeType: application/json` and the JSON
+schema embedded in `synthetic_audio_control.py`. Do not combine this current
+REST format with legacy responseMimeType, responseSchema or responseJsonSchema.
+The exact 227-byte prompt, WAV, model, endpoint and transport remain unchanged.
 There are no tools, grounding, FileData, video fields, audio-output request, or
 system instructions. The wall deadline is 110 seconds. HTTP 429/503, a timeout,
 and provider rejection are terminal; there is no automatic retry or fallback.
@@ -35,6 +39,45 @@ hash and configuration; it contains no run date or ephemeral asset identifier.
 The model receipt is checkpointed using the original manager. Terminal replay
 does not call the provider or debit again. COMPLETED is accounting status only.
 All quality/production/publication permissions stay false.
+
+## Structured-output hypothesis and acceptance boundary
+
+This experiment changes one factor: the output-format contract. It asks whether
+requiring explicit fields resolves the earlier omission of count/onsets; it does
+not presume that formatting improves perception. No expected count, timestamps,
+duration, prior response, or operator rubric is in the schema or request text.
+Removing `responseFormat` reconstructs the previous request's exact wire hash:
+`102ee2f052d18440d29e00b2b7e4a9f35714a40593a4809ade5013b6024cbcf5`.
+
+Required fields are status, count, events and uncertainty. Each event requires
+label, start_seconds and end_seconds. Null is explicit abstention for that datum,
+never zero or an omitted field. No coercion, rounding, sorting or repair occurs.
+The parser rejects malformed/trailing JSON, duplicate keys, unexpected/missing
+fields, wrong types including booleans as numbers, nonfinite values, timestamps
+outside the known local duration, reversed times and reversed event ordering.
+
+- `complete` requires count equal to event-array length, known nonempty labels
+  and known onsets. A null end is allowed only with an uncertainty explanation;
+  end precision was not part of the frozen scoring criterion.
+- `partial` or `unknown` requires an uncertainty explanation and is ABSTAINED.
+- Valid complete output is COMPLETE_UNREVIEWED, not a quality verdict. A wrong
+  count or duplicated onsets can satisfy the shape while still failing accuracy.
+- Invalid output is a terminal contract failure. Preserve its literal response,
+  provider JSON and available usage before recording that failure. Do not retry.
+- A green workflow with ABSTAINED means technically valid execution and preserved
+  evidence only. It does not mean that the requested ability was demonstrated.
+- `precision_verdict` remains NOT_ADJUDICATED; review remains NOT_REVIEWED and all
+  quality, production and publication permissions remain false in every case.
+
+Adjudication remains separate and uses the unchanged operator-only rubric below.
+Count/onset results must not be presented as audiovisual-sync or general semantic
+qualification. End values are checked for technical coherence only, not scored
+for perceptual accuracy. No post-result adjustment of rubric is permitted.
+
+The stable request identity includes the entire output contract, creating one
+new identity while preserving all three earlier receipts and their 18 seconds.
+Replay of this new identity must reuse its terminal receipt without a new call.
+This proposal does not itself dispatch a workflow or authorize production.
 
 ## Exact media derivation
 
@@ -100,6 +143,11 @@ Its separate AI adjudication is in
 The video response's VIDEO-without-AUDIO usage detail does not establish that
 audio was discarded; this diagnostic tests direct audio as a separate input.
 
+Run 38842979507 (#43) returned only a short sound caption, without count/onsets.
+Its literal reply, provider JSON, receipt and six-second debit remain unchanged:
+`migration/evidence/public-av-7fe5d21cea9ccc07ac4d064ef371351b428b9d0ee4fc9ff617985d6de09f5a7a.json`.
+The existing response is not retroactively given a structured-contract verdict.
+
 ## Offline checks
 
 From a clean checkout with FFmpeg/ffprobe available:
@@ -108,11 +156,11 @@ From a clean checkout with FFmpeg/ffprobe available:
     python3 -m unittest discover -s migration/runtime_bridge -p 'test_*.py'
 
 Tests use a fake key, mock HTTP and checkpoint commits, and temporary databases.
-Files counterfactual tests reconstruct only the verified pre-run42 snapshot in
-memory (whole-file SHA256 asserted), while audio tests retain both real AV
-receipts and debits. Neither test fixture alters the repository ledger.
-
-The NEW-call counterfactual suite is bound to this pre-diagnostic snapshot, not
-a continuous-CI fixture: after a new AUDIO_ONLY ledger row is checkpointed, its
-historical whole-file assertion must be adapted to an independent historical
-fixture before reuse. Do not remove production ledger entries to make tests pass.
+Files counterfactual tests reconstruct the verified pre-run42 snapshot in memory.
+Audio counterfactuals reconstruct the verified pre-structured snapshot with all
+three real receipts and 18 seconds. Later synthetic-audio rows are excluded only
+from those temporary historical test fixtures, with exact whole-file SHA256
+assertions. Current production SQL and receipt files are never rewritten or
+pruned. The runtime continues using the full current ledger and all prior debits.
+Separate tests verify preservation, new identity, terminal replay, invalid-output
+receipts, abstention, nullable end handling and shape-versus-accuracy separation.
