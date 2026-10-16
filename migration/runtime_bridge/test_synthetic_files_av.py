@@ -31,6 +31,10 @@ META = dict(BASE_META,uri=s.FILE_URL)
 BASE_POLICY = json.loads((ROOT/s.POLICY).read_bytes())
 POLICY = dict(BASE_POLICY,key_sha256=KEY_HASH)
 SQL_RAW = (ROOT/d.SQL).read_text()
+PRIOR_KEY = 'synthetic-av:27ef45f42c98789a4a30b043669c2973bf3c1c8b7e45484f3e15ca99bafe9d27'
+PRIOR_PATH = Path('migration/evidence/public-av-'+PRIOR_KEY.split(':')[1]+'.json')
+PRIOR_RAW = (ROOT/PRIOR_PATH).read_bytes()
+PRIOR_SHA256 = '8b8bf5e574a2ea0ef2a5532c9887d0a6239670c5a18a638b01a4f6c83571aac3'
 RESPONSE = {'candidates':[{'finishReason':'STOP','content':{'parts':[{'text':'Observed result, unreviewed.'}]}}],
             'usageMetadata':{'promptTokenCount':100,'candidatesTokenCount':12}}
 ENV = {'GITHUB_REPOSITORY':'matheusmagah-cpu/heroverse-engine','HERO_REPOSITORY_PRIVATE':'true',
@@ -46,6 +50,7 @@ class Tests(unittest.TestCase):
         os.chdir(self.temp.name)
         Path('migration/evidence').mkdir(parents=True);Path('cloud-evidence').mkdir()
         d.SQL.write_text(SQL_RAW)
+        PRIOR_PATH.write_bytes(PRIOR_RAW)
         d.CLAIM.write_text(json.dumps({'run_id':'12345'}))
         self.db = s.DB
         with sqlite3.connect(self.db) as c:c.executescript(SQL_RAW)
@@ -95,7 +100,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(BASE_POLICY['key_binding_status'],'EXPECTED_HISTORICAL_FINGERPRINT_PENDING_RUNTIME_MATCH')
         with self.assertRaises(PermissionError):g.validate_free_policy(KEY,BASE_POLICY,NOW)
     def test_policy_counterfactuals_before_reserve(self):
-        for k,v in [('project_id','other'),('model','gemini-3.6-flash'),('tier','PAID'),('billing_enabled',True),
+        for k,v in [('project_id','other'),('model','gemini-3.6-flash'),('model','gemini-3.8-flash'),('tier','PAID'),('billing_enabled',True),
             ('input_price_usd',.01),('output_price_usd',.01),('verified_at','2026-10-14T01:35:25Z'),
             ('verified_at','2026-10-17T01:35:25Z'),('key_sha256','a'*64),('automatic_paid_fallback',True),
             ('runtime_key_match_required_before_remote_effect',False),('expires_after_hours',48)]:
@@ -131,10 +136,53 @@ class Tests(unittest.TestCase):
             return RESPONSE
         self.send.side_effect=effect;r=self.run_one();self.assertEqual(self.send.call_count,1)
         self.assertEqual(r['status'],'SYNTHETIC_RESPONSE_AWAITING_REVIEW');self.assertEqual(r['review_status'],'NOT_REVIEWED')
-        self.assertEqual(len(self.rows()),54);self.assertEqual([r for r in self.rows() if r[2]=='2026-10-14'],self.initial)
+        self.assertEqual(len(self.rows()),len(self.initial)+1);self.assertEqual([r for r in self.rows() if r[0]!=s.request_identity(PROMPT)[0]],self.initial)
         self.assertEqual(len(self.checkpoints),2)
         for k in s.FALSE_AUTHORITY:self.assertIs(r[k],False)
         self.assertNotIn(KEY,json.dumps(r));self.assertEqual(r['generate_content_calls'],1)
+    def test_real_lite_price_proof_binds_unchanged_ui_and_exact_prior_receipt(self):
+        evidence=BASE_POLICY['verification_evidence'];raw=(ROOT/evidence['path']).read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(),evidence['sha256']);proof=json.loads(raw)
+        self.assertEqual(proof['selected_model'],s.MODEL)
+        pricing=proof['official_documentation']['pricing']
+        self.assertEqual(pricing['model'],s.MODEL);self.assertEqual(pricing['input_price_usd'],0);self.assertEqual(pricing['output_price_usd'],0)
+        ui=proof['project_observation_reused']
+        self.assertEqual(hashlib.sha256((ROOT/ui['path']).read_bytes()).hexdigest(),ui['sha256'])
+        self.assertEqual(BASE_POLICY['verified_at'],ui['observed_at_utc']);self.assertFalse(ui['freshness_rebased'])
+        prior=proof['prior_attempt'];self.assertEqual(prior['path'],str(PRIOR_PATH));self.assertEqual(prior['sha256'],PRIOR_SHA256)
+        config=proof['next_candidate_requirements']
+        self.assertEqual(config['video_metadata'],s.VIDEO_METADATA);self.assertEqual(config['generation_config'],s.GENERATION_CONFIG)
+        self.assertEqual(config['prompt_sha256'],s.PROMPT_SHA256);self.assertEqual(config['content_sha256'],s.CONTENT_SHA256)
+    def test_model_selection_changes_only_model_identity_not_media_or_prompt(self):
+        key,h,identity=s.request_identity(PROMPT)
+        old_key,old_hash,old_identity=s.request_identity(PROMPT,model='gemini-3.8-flash')
+        self.assertEqual(old_key,PRIOR_KEY);self.assertNotEqual(key,old_key)
+        self.assertEqual(s.MODEL,'gemini-3.5-flash-lite')
+        self.assertEqual(identity,{**old_identity,'model':s.MODEL})
+        prior=json.loads(PRIOR_RAW)
+        self.assertEqual(g.digest(s.build_request(META,PROMPT,NOW)),prior['wire_payload_sha256'])
+    def test_real_503_prior_receipt_and_six_second_debit_are_preserved(self):
+        self.assertEqual(hashlib.sha256(PRIOR_RAW).hexdigest(),PRIOR_SHA256)
+        prior=json.loads(PRIOR_RAW)
+        self.assertEqual(prior['failure_code'],'HTTP_503_UNAVAILABLE:HIGH_DEMAND')
+        self.assertEqual(prior['generate_content_calls'],1)
+        row=[r for r in self.initial if r[0]==PRIOR_KEY]
+        self.assertEqual(len(row),1);self.assertEqual(row[0][2:5],('2026-10-16',6,'COMPLETED'))
+        self.run_one()
+        self.assertEqual([r for r in self.rows() if r[0]==PRIOR_KEY],row)
+        self.assertEqual(PRIOR_PATH.read_bytes(),PRIOR_RAW)
+        self.send.reset_mock();checkpoints=list(self.checkpoints);rows=self.rows()
+        replay=self.ledger.reserve(PRIOR_KEY,prior['request_hash'],6,28800)
+        self.assertEqual(replay['status'],'REPLAY');self.assertEqual(replay['receipt'],prior)
+        self.send.assert_not_called();self.assertEqual(self.checkpoints,checkpoints);self.assertEqual(self.rows(),rows)
+    def test_lite_503_is_terminal_without_fallback_or_prior_debit_replacement(self):
+        self.send.side_effect=g.ProviderFailure('HTTP_503_UNAVAILABLE:HIGH_DEMAND')
+        receipt=self.run_one();self.assertEqual(receipt['status'],'FAILED_NO_AUTOMATIC_RETRY')
+        self.assertEqual(self.send.call_count,1);self.assertEqual(self.send.call_args.kwargs,{'model':'gemini-3.5-flash-lite'})
+        self.assertEqual(receipt['failure_code'],'HTTP_503_UNAVAILABLE:HIGH_DEMAND')
+        self.assertEqual(PRIOR_PATH.read_bytes(),PRIOR_RAW)
+        self.assertEqual([r for r in self.rows() if r[0]!=receipt['key']],self.initial)
+        self.send.reset_mock();self.assertEqual(self.run_one(),receipt);self.send.assert_not_called()
     def test_terminal_replay_has_no_new_call_or_debit(self):
         r=self.run_one();before=self.rows();self.send.reset_mock();count=len(self.checkpoints)
         self.assertEqual(self.run_one(),r);self.send.assert_not_called();self.assertEqual(self.rows(),before);self.assertEqual(len(self.checkpoints),count)
@@ -146,7 +194,7 @@ class Tests(unittest.TestCase):
     def test_quota_429_terminal_no_retry_fallback(self):
         self.send.side_effect=g.ProviderFailure('HTTP_429_RESOURCE_EXHAUSTED:QUOTA')
         r=self.run_one();self.assertEqual(r['status'],'FAILED_NO_AUTOMATIC_RETRY');self.assertEqual(self.send.call_count,1)
-        self.send.reset_mock();self.assertEqual(self.run_one(),r);self.send.assert_not_called();self.assertEqual(len(self.rows()),54)
+        self.send.reset_mock();self.assertEqual(self.run_one(),r);self.send.assert_not_called();self.assertEqual(len(self.rows()),len(self.initial)+1)
     def test_transport_exception_is_redacted_terminal(self):
         self.send.side_effect=RuntimeError(KEY);r=self.run_one();self.assertEqual(self.send.call_count,1)
         self.assertEqual(r['failure_code'],'SYNTHETIC_RESPONSE_OR_LOCAL_FAILURE');self.assertNotIn(KEY,json.dumps(r))
@@ -173,7 +221,7 @@ class Tests(unittest.TestCase):
     def test_failed_reservation_checkpoint_prevents_call_and_stays_unresolved(self):
         with patch.object(d,'commit',side_effect=RuntimeError('checkpoint failure')):
             with self.assertRaises(RuntimeError):self.run_one()
-        self.send.assert_not_called();self.assertEqual(len(self.rows()),54)
+        self.send.assert_not_called();self.assertEqual(len(self.rows()),len(self.initial)+1)
         with self.assertRaises(PermissionError):self.run_one()
         self.send.assert_not_called()
     def test_failed_persistence_never_reissues_effect(self):
@@ -236,7 +284,7 @@ class Tests(unittest.TestCase):
             self.assertEqual(s.preflight(),0)
             self.assertEqual(s.run_control(metadata_get=get,send=self.send),0)
             self.assertEqual(s.run_control(metadata_get=get,send=self.send),0)
-        self.assertEqual(get.call_count,1);self.assertEqual(self.send.call_count,1);self.assertEqual(len(self.rows()),54)
+        self.assertEqual(get.call_count,1);self.assertEqual(self.send.call_count,1);self.assertEqual(len(self.rows()),len(self.initial)+1)
         self.assertNotIn(KEY,logs.getvalue())
         saved=json.loads(Path('migration/evidence/synthetic-c01-preflight-12345.json').read_text())
         self.assertEqual(saved['provider_returned_uri'],s.FILE_URL);self.assertEqual(saved['key_binding']['status'],'MATCH')
@@ -248,6 +296,15 @@ class Tests(unittest.TestCase):
         self.install_inputs();s.CAPTURE.write_bytes(CAPTURE_RAW+b' ');get=Mock()
         with patch.dict(os.environ,{**ENV,'HERO_GEMINI_API_KEY':KEY},clear=True),patch.object(s,'utcnow',return_value=NOW),contextlib.redirect_stdout(io.StringIO()):self.assertEqual(s.run_control(metadata_get=get,send=self.send),2)
         get.assert_not_called();self.assert_no_effect()
+    def test_previous_model_price_receipt_cannot_stand_in_for_lite_proof(self):
+        self.install_inputs();policy=json.loads(s.POLICY.read_text())
+        old=Path('migration/evidence/gemini-project-policy-observation-20261016.json')
+        policy['verification_evidence']={'path':str(old),'sha256':hashlib.sha256((ROOT/old).read_bytes()).hexdigest()}
+        s.POLICY.write_text(json.dumps(policy));get=Mock()
+        with patch.dict(os.environ,{**ENV,'HERO_GEMINI_API_KEY':KEY},clear=True),patch.object(s,'utcnow',return_value=NOW),contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(s.run_control(metadata_get=get,send=self.send),2)
+        get.assert_not_called();self.assert_no_effect()
+        self.assertEqual(json.loads(Path('cloud-evidence/synthetic-c01-preflight-failure.json').read_text())['failure_code'],'POLICY_EVIDENCE_PATH_REQUIRED')
     def test_documentary_policy_evidence_corruption_blocks_runtime(self):
         self.install_inputs();Path(BASE_POLICY['verification_evidence']['path']).write_text('{}');get=Mock()
         with patch.dict(os.environ,{**ENV,'HERO_GEMINI_API_KEY':KEY},clear=True),patch.object(s,'utcnow',return_value=NOW),contextlib.redirect_stdout(io.StringIO()):self.assertEqual(s.run_control(metadata_get=get,send=self.send),2)

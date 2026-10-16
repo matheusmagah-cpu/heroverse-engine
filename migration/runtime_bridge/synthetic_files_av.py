@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'migration/diagnostics/gemini-files-delivery'))
 from probe import decode_remote_sha256
 
-MODEL = 'gemini-3.8-flash'
+MODEL = 'gemini-3.5-flash-lite'
 FILE_NAME = 'files/qe6pn3aifbkw'
 FILE_URL = 'https://generativelanguage.googleapis.com/v1beta/' + FILE_NAME
 CONTENT_SHA256 = '5562d675416107eb9ec70643edd43e5375b85aa74051730f1d357a88d34e79df'
@@ -128,7 +128,7 @@ def verify_inputs(policy, prompt, capture_raw, now):
             and capture['generate_content_calls'] == 0, 'SAVED_DELIVERY_CAPTURE_REQUIRED')
     validate_metadata(capture['raw_file_metadata'], now, require_uri=False)
     evidence = policy.get('verification_evidence', {})
-    require(evidence.get('path') == 'migration/evidence/gemini-project-policy-observation-20261016.json',
+    require(evidence.get('path') == 'migration/evidence/gemini-flash-lite-selection-20261016.json',
             'POLICY_EVIDENCE_PATH_REQUIRED')
     body = Path(evidence['path']).read_bytes()
     require(hashlib.sha256(body).hexdigest() == evidence.get('sha256'), 'POLICY_EVIDENCE_BINDING_FAILED')

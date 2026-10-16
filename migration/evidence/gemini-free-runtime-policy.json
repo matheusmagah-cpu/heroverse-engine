@@ -1,6 +1,6 @@
 {
   "project_id": "gen-lang-client-0909161074",
-  "model": "gemini-3.8-flash",
+  "model": "gemini-3.5-flash-lite",
   "tier": "FREE",
   "billing_enabled": false,
   "input_price_usd": 0,
@@ -15,13 +15,13 @@
   ],
   "expires_after_hours": 24,
   "automatic_paid_fallback": false,
-  "selection_reason": "Proposed bounded synthetic Files AV calibration using the UI model family; documented Standard Free input/output. No inference or historical rerun authorized by this policy refresh.",
-  "model_docs": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+  "selection_reason": "Explicit proposed synthetic Files candidate after 3.8 Flash HTTP_503_UNAVAILABLE:HIGH_DEMAND; documented Standard Free input/output. Preserve control, prompt, STATIC 10 fps, criteria and existing ledger. No automatic retry, paid fallback or inference authorized by this selection receipt.",
+  "model_docs": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
   "verified_at_scope": "PROJECT_TIER_BILLING_AND_DOCUMENTED_MODEL_PRICE_NOT_SECRET_MATCH",
   "key_binding_status": "EXPECTED_HISTORICAL_FINGERPRINT_PENDING_RUNTIME_MATCH",
   "runtime_key_match_required_before_remote_effect": true,
   "verification_evidence": {
-    "path": "migration/evidence/gemini-project-policy-observation-20261016.json",
-    "sha256": "ade1d6e27c2e3d898837082199fbcff190324a88e52d9634c1a4a5d271754408"
+    "path": "migration/evidence/gemini-flash-lite-selection-20261016.json",
+    "sha256": "e41043880496982610b35ec226ce14d00a55cb233c3311801f6f720b01a41b2f"
   }
 }

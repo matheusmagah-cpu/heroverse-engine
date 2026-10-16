@@ -2,6 +2,12 @@
 
 Prepared for owner request `Sentinel_0212eae8ba548191890633bc89023ab1` (2026-10-16 01:42:19 UTC), following the verified upload and explicit request to continue. This code preparation is not a completed inference or a quality result.
 
+## Explicit candidate change after the first terminal failure
+
+Run [38838440874](https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38838440874) made one metadata GET and one `gemini-3.8-flash` generation attempt. The result was `HTTP_503_UNAVAILABLE:HIGH_DEMAND`, with no evaluator text or usage available. Its immutable receipt and six-second debit remain in the same ledger; neither is reclassified as success. The shared transport retained only the redacted error status/reason tags, not the raw error body.
+
+The next proposed candidate is explicitly selected `gemini-3.5-flash-lite`, conditional on its verified Standard Free policy. It is a separate model-bound identity, never an automatic fallback or a replay of 3.8. The file, exact neutral prompt, full six seconds, STATIC 10 FPS, generation configuration and precision criteria are unchanged. One fresh metadata GET and one additional six-second reservation precede at most one generation attempt. The original 3.8 terminal identity still replays without a new call or debit. Parent review is required before dispatch.
+
 ## Narrow manual entry
 
 Use the existing `official-evidence.yml` workflow on private `main` with `av_synthetic_c01=true`, `checkpoint_only=true`, every other optional stage false, and run attempt 1. No new workflow, manager, ledger or scheduler is introduced. The original 09:17 UTC cron and all normal branches remain unchanged. The new stage does not run the public collector, YouTube acquisition, master, asset restoration or cancelled AV recovery. The parent must review the final patch and current gates before dispatch.
@@ -13,7 +19,7 @@ The existing `durable_evidence_checkpoint.py claim` owns the run and restores th
 1. Offline tests, exact neutral prompt/captured metadata/provenance checks, current FREE project/no-billing/zero-price policy and internal secret fingerprint match.
 2. Existing observer run claim and durable checkpoint of the metadata attempt. One GET of exactly `files/qe6pn3aifbkw`, returning its actual URI. Recheck ACTIVE, exact hash, 19,083 bytes, MP4, six seconds and expiry. No reupload or listing. The saved capture did not contain a URI and is never represented as having done so.
 3. Persist preflight in the existing evidence checkpoint. Reserve six seconds using `ExistingObserverLedger.reserve`, which pushes the reservation before authorizing a call. Recheck freshness and expiration after the checkpoint.
-4. Exactly one existing transport call to `gemini-3.8-flash`: explicit STATIC, 10 FPS across [0,6], one candidate, maximum 4,096 output tokens, 110-second whole-call deadline (the reused transport's clipped-input socket timeout is 90 seconds). No tools, search, grounding, token-count call, upload, retry or fallback.
+4. Exactly one existing transport call to `gemini-3.5-flash-lite`: explicit STATIC, 10 FPS across [0,6], one candidate, maximum 4,096 output tokens, 110-second whole-call deadline (the reused transport's clipped-input socket timeout is 90 seconds). No tools, search, grounding, token-count call, upload, retry or fallback.
 5. Preserve failures before reservation too: preparation failures have a redacted local artifact; metadata GET/validation failures are checkpointed in the original evidence directory with one attempted GET and zero generations. No automatic GET retry occurs. Persist the response or terminal failure using the same ledger. Completed means terminal accounting only. Output remains NOT_REVIEWED and NOT_ADJUDICATED with all quality/production/publication authority false. A 429 stops; it never triggers retry/fallback. Uncertain persistence leaves a CLAIMED reservation and blocks another call.
 6. Finalize only when no unresolved AV claim exists; preserve observer-state and all original quota/history rows. Terminal reruns replay without another GET or generation.
 
