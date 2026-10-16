@@ -1,11 +1,11 @@
 {
   "project_id": "gen-lang-client-0909161074",
-  "model": "gemini-3.5-flash-lite",
+  "model": "gemini-3.8-flash",
   "tier": "FREE",
   "billing_enabled": false,
   "input_price_usd": 0,
   "output_price_usd": 0,
-  "verified_at": "2026-10-14T10:47:25Z",
+  "verified_at": "2026-10-16T01:35:25Z",
   "key_sha256": "dce7edfa7f6515d6da7a53331ea7cfc31b5ad94cc2bfb3cafce3f0f1e08bc811",
   "observed_account": "willmarquesfotografia@gmail.com",
   "credential_storage": "GitHub Actions encrypted secret HERO_GEMINI_API_KEY",
@@ -15,6 +15,13 @@
   ],
   "expires_after_hours": 24,
   "automatic_paid_fallback": false,
-  "selection_reason": "Sequential extraction using documented free multimodal high-throughput model after heavier models reportHIGH_DEMAND; content review remains required",
-  "model_docs": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
+  "selection_reason": "Proposed bounded synthetic Files AV calibration using the UI model family; documented Standard Free input/output. No inference or historical rerun authorized by this policy refresh.",
+  "model_docs": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+  "verified_at_scope": "PROJECT_TIER_BILLING_AND_DOCUMENTED_MODEL_PRICE_NOT_SECRET_MATCH",
+  "key_binding_status": "EXPECTED_HISTORICAL_FINGERPRINT_PENDING_RUNTIME_MATCH",
+  "runtime_key_match_required_before_remote_effect": true,
+  "verification_evidence": {
+    "path": "migration/evidence/gemini-project-policy-observation-20261016.json",
+    "sha256": "ade1d6e27c2e3d898837082199fbcff190324a88e52d9634c1a4a5d271754408"
+  }
 }

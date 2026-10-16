@@ -1,0 +1,127 @@
+{
+  "version": "heroverse-gemini-project-policy-observation-v1",
+  "status": "PROJECT_FREE_AND_PRICE_OBSERVED_RUNTIME_KEY_MATCH_PENDING",
+  "observed_at_utc": "2026-10-16T01:35:25Z",
+  "project_id": "gen-lang-client-0909161074",
+  "observed_account": "willmarquesfotografia@gmail.com",
+  "project_ui_evidence": {
+    "observed_at_utc": "2026-10-16T01:35:25Z",
+    "browser": "dot cloud Chromium",
+    "account": "willmarquesfotografia@gmail.com",
+    "account_name_ui": "Wellisson Marques Magalhães",
+    "authentication": "Account was already offered in the existing Google account chooser; selection reached authenticated AI Studio with no credentials, login challenge, consent, or new permissions",
+    "project_id": "gen-lang-client-0909161074",
+    "project_name": "Default Gemini Project",
+    "projects_source": "https://aistudio.google.com/u/1/projects?pli=1",
+    "project_tier_ui": "Nível gratuito",
+    "billing_source": "https://aistudio.google.com/u/1/billing",
+    "billing_ui": "Nenhuma conta de faturamento",
+    "billing_action_not_clicked": "Configurar faturamento",
+    "rate_limits_source": "https://aistudio.google.com/u/1/rate-limit?timeRange=last-28-days&project=gen-lang-client-0909161074",
+    "rate_limits": [
+      {
+        "model_ui": "Gemini 3.5 Flash Lite",
+        "rpm_limit": 15,
+        "tpm_limit": 250000,
+        "rpd_limit": 500,
+        "last_28_days_peak_ui": {
+          "rpm": "5",
+          "tpm": "66.45K",
+          "rpd": "45"
+        }
+      },
+      {
+        "model_ui": "Gemini 3.8 Flash",
+        "rpm_limit": 5,
+        "tpm_limit": 250000,
+        "rpd_limit": 20,
+        "last_28_days_peak_ui": {
+          "rpm": "1",
+          "tpm": "272",
+          "rpd": "2"
+        }
+      },
+      {
+        "model_ui": "Gemini 3.6 Flash",
+        "rpm_limit": 5,
+        "tpm_limit": 250000,
+        "rpd_limit": 20,
+        "last_28_days_peak_ui": {
+          "rpm": "2",
+          "tpm": "107.17K",
+          "rpd": "6"
+        }
+      }
+    ],
+    "limits_warning_ui": "Usage data may take up to 15 minutes to update.",
+    "usage_scope_ui": "Máximo de uso por modelo em comparação com o limite nos últimos 28 dias",
+    "remaining_quota_not_verified": true,
+    "secret_values_read": false,
+    "api_key_project_binding_not_independently_verified": true,
+    "project_import_create_or_billing_change": false,
+    "inference_run": false,
+    "note": "Supersedes the earlier negative search only for access in the Matheus session. Current evidence is from already-authenticated Will. Model IDs are not inferred from UI display names."
+  },
+  "source_ui_evidence_sha256": "89471a83c42a2145815bec9fccf019cfbdc32d08a1d7296982cf2909dac3830b",
+  "official_documentation": {
+    "checked_at_utc": "2026-10-16T01:38:08Z",
+    "model": "gemini-3.8-flash",
+    "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.8-flash",
+    "pricing_section": "Gemini 3.8 Flash / Standard / Free Tier",
+    "input_price_usd": 0,
+    "output_price_usd": 0,
+    "pricing_unit": "USD per 1M tokens",
+    "pricing_scope": "Standard generateContent input/output; no added services, tools or paid consumption mode",
+    "model_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+    "documented_model_code": "gemini-3.8-flash",
+    "documented_inputs_include": [
+      "Video",
+      "Audio"
+    ],
+    "documented_output": "Text",
+    "rate_limits_url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+    "provider_quota_scope": "PROJECT_NOT_KEY",
+    "provider_rpd_reset": "MIDNIGHT_PACIFIC_TIME",
+    "provider_remaining_quota_verified": false
+  },
+  "key_binding": {
+    "secret_name": "HERO_GEMINI_API_KEY",
+    "repository": "matheusmagah-cpu/heroverse-engine",
+    "expected_sha256": "dce7edfa7f6515d6da7a53331ea7cfc31b5ad94cc2bfb3cafce3f0f1e08bc811",
+    "expected_fingerprint_source": "migration/evidence/gemini-free-runtime-policy.json at db35f1b9ccdaf516367d466a1d28774d07a0c8be",
+    "historical_provisioning_receipt": "migration/receipts/20261014-gemini-secure-provisioning-live-acceptance.json",
+    "current_secret_fingerprint_status": "PENDING_RUNTIME_MATCH",
+    "current_secret_fingerprint_checked": false,
+    "ui_verifies_current_secret_binding": false,
+    "required_check": "SHA256 of existing Actions secret must equal expected_sha256 inside the authorized runner before reservation and generation; emit only match/mismatch and never the key.",
+    "new_credentials_required": false
+  },
+  "unchanged_boundaries": {
+    "local_av_cap_seconds_per_utc_day": 28800,
+    "local_budget_timezone": "UTC",
+    "local_budget_is_provider_quota": false,
+    "ledger_path": "migration/evidence/observer-ledger.sql",
+    "ledger_rows_deleted_or_repriced": false,
+    "concurrency_group": "heroverse-official-evidence",
+    "schedule_cron": "17 9 * * *",
+    "automatic_paid_fallback": false,
+    "automatic_retry": false,
+    "new_schedule": false
+  },
+  "preparation_effects": {
+    "provider_calls": 0,
+    "secret_values_read": false,
+    "secret_fingerprint_computed": false,
+    "billing_changes": 0,
+    "ledger_changes": 0,
+    "workflow_dispatches": 0,
+    "generation_authorized_by_this_receipt": false
+  },
+  "limitations": [
+    "UI model labels alone do not establish the API model ID; the official model page establishes it.",
+    "UI peaks over 28 days are not remaining quota and may lag up to 15 minutes.",
+    "Project observation is fresh; current runtime key match is still pending.",
+    "Free pricing is conditional on the observed Free project and exact model/consumption mode.",
+    "Policy provenance fields are descriptive; existing code enforces freshness and key hash, not these added labels."
+  ]
+}
