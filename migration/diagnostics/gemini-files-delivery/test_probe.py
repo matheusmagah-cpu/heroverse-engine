@@ -148,9 +148,56 @@ class MetadataTests(unittest.TestCase):
                 with self.assertRaisesRegex(probe.ProviderFailure, code):
                     probe.verify_remote(m, PREFLIGHT, NAME)
     def test_missing_hash_or_invalid_base64_not_accepted(self):
-        for value in ('', '%%%%', base64.b64encode(PREFLIGHT['sha256'].encode()).decode()):
+        for value in ('', '%%%%', None, base64.b64encode(b'g' * 64).decode()):
             m = metadata(); m['sha256Hash'] = value
             with self.assertRaises(probe.ProviderFailure): probe.verify_remote(m, PREFLIGHT, NAME)
+    def test_ascii_hex64_representation_requires_exact_digest(self):
+        m = metadata(); m['sha256Hash'] = base64.b64encode(PREFLIGHT['sha256'].encode()).decode()
+        self.assertEqual(probe.verify_remote(m, PREFLIGHT, NAME)['sha256_representation'],
+                         'BASE64_ASCII_LOWERCASE_HEX_64_BYTES')
+        m['sha256Hash'] = base64.b64encode(b'0' * 64).decode()
+        with self.assertRaisesRegex(probe.ProviderFailure, 'REMOTE_HASH_MISMATCH'):
+            probe.verify_remote(m, PREFLIGHT, NAME)
+    def test_hash_decoder_rejects_nearby_ambiguous_shapes(self):
+        canonical = base64.b64encode(bytes(32)).decode()
+        # Last base64 digit has nonzero pad bits, while decode() yields same bytes.
+        noncanonical = canonical[:-2] + 'B='
+        for value in (noncanonical, canonical + '=', canonical + '\n',
+                      base64.b64encode(b'a'*31).decode(), base64.b64encode(b'a'*33).decode(),
+                      base64.b64encode(b'a'*63).decode(), base64.b64encode(b'a'*65).decode(),
+                      base64.b64encode(b'A'*64).decode(), base64.b64encode(b'z'*64).decode(),
+                      base64.b64encode(b' '+b'a'*63).decode(), canonical.encode(), None):
+            with self.subTest(value=value), self.assertRaisesRegex(probe.ProviderFailure,'REMOTE_HASH_INVALID'):
+                probe.decode_remote_sha256(value)
+    def test_real_capture_and_counterfactual_without_network(self):
+        path = Path(__file__).resolve().parent / 'fixtures/metadata-capture-38836054574.json'
+        raw = path.read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), 'c6e9e810f0d1f82d8517678d45ef2e0ac2c4c589ae709836fee340b64b34a986')
+        captured = json.loads(raw); m = captured['raw_file_metadata']; local = captured['local_input']
+        self.assertEqual(captured['status'], 'METADATA_CAPTURED_NOT_RECONCILED')
+        self.assertEqual(m['name'], 'files/qe6pn3aifbkw')
+        self.assertEqual(m['state'], 'ACTIVE'); self.assertEqual(m['mimeType'], local['mime_type'])
+        self.assertEqual(int(m['sizeBytes']), local['size_bytes'])
+        self.assertEqual(m['videoMetadata']['videoDuration'], '6s')
+        self.assertEqual(m['expirationTime'], '2026-10-18T01:24:40.549171836Z')
+        decoded = base64.b64decode(m['sha256Hash'], validate=True)
+        self.assertEqual(len(decoded), 64)
+        self.assertNotEqual(decoded.hex(), local['sha256'])  # Original parser's real failure.
+        digest, representation = probe.decode_remote_sha256(m['sha256Hash'])
+        self.assertEqual(digest, local['sha256'])
+        self.assertEqual(representation, 'BASE64_ASCII_LOWERCASE_HEX_64_BYTES')
+        # Flip exactly one valid hex digit in the captured hash: equality must fail.
+        changed = ('0' if digest[0] != '0' else '1') + digest[1:]
+        counterfeit = copy.deepcopy(m)
+        counterfeit['sha256Hash'] = base64.b64encode(changed.encode()).decode()
+        with patch.object(probe.urllib.request, 'build_opener') as network:
+            with self.assertRaisesRegex(probe.ProviderFailure, 'REMOTE_HASH_MISMATCH'):
+                probe.verify_remote(counterfeit, local, m['name'])
+            # Captured URI was intentionally not saved; never fabricate a URI pass.
+            with self.assertRaisesRegex(probe.ProviderFailure, 'REMOTE_URI_REJECTED'):
+                probe.verify_remote(m, local, m['name'])
+            network.assert_not_called()
+
     def test_duration_precision_bound(self):
         for value in ('NaNs', '6e0s', '-6s', '6.0000000000s', '6.035s', None):
             m = metadata(); m['videoMetadata']['videoDuration'] = value

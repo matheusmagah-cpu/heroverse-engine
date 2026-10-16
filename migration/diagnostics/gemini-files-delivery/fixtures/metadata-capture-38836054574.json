@@ -1,0 +1,40 @@
+{
+  "automatic_retry": false,
+  "billing_changes": 0,
+  "billing_tier": "NOT_IDENTIFIED",
+  "bytes_upload_calls": 0,
+  "count_tokens_calls": 0,
+  "delete_calls": 0,
+  "delivery_verdict": "BLOCKED_PENDING_HASH_RECONCILIATION",
+  "file_resource_name": "files/qe6pn3aifbkw",
+  "finished_at": "2026-10-16T01:36:52.269897+00:00",
+  "generate_content_calls": 0,
+  "local_input": {
+    "duration_seconds": 6,
+    "manifest_sha256": "96248694cc894f1a02d4eafac2449008aa3e5960925b0bc40a680218bb1f784e",
+    "mime_type": "video/mp4",
+    "sha256": "5562d675416107eb9ec70643edd43e5375b85aa74051730f1d357a88d34e79df",
+    "size_bytes": 19083
+  },
+  "metadata_get_calls": 1,
+  "model_understanding": "NOT_TESTED",
+  "prior_receipt_sha256": "ef6c73a3c91884e3d28dd37135b7f160c7937fa069ca4e9e0f02ddbd935974b4",
+  "project_identity": "NOT_IDENTIFIED",
+  "raw_file_metadata": {
+    "createTime": "2026-10-16T01:24:40.731013Z",
+    "expirationTime": "2026-10-18T01:24:40.549171836Z",
+    "mimeType": "video/mp4",
+    "name": "files/qe6pn3aifbkw",
+    "sha256Hash": "NTU2MmQ2NzU0MTYxMDdlYjllYzcwNjQzZWRkNDNlNTM3NWI4NWFhNzQwNTE3MzBmMWQzNTdhODhkMzRlNzlkZg==",
+    "sizeBytes": "19083",
+    "state": "ACTIVE",
+    "videoMetadata": {
+      "videoDuration": "6s"
+    }
+  },
+  "schema": "heroverse-files-metadata-capture-v1",
+  "source_commit": "03467368d2983d01302d485b452db9ef82a5e1d2",
+  "started_at": "2026-10-16T01:36:52.139221+00:00",
+  "status": "METADATA_CAPTURED_NOT_RECONCILED",
+  "upload_start_calls": 0
+}

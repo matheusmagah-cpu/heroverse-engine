@@ -157,15 +157,29 @@ def file_identity(meta):
     return name
 
 
+def decode_remote_sha256(value):
+    """Canonical base64 of digest32 or the observed lowercase ASCII hex64."""
+    try:
+        require(type(value) is str and len(value) in (44, 88), 'REMOTE_HASH_INVALID')
+        raw = base64.b64decode(value, validate=True)
+        require(base64.b64encode(raw).decode('ascii') == value, 'REMOTE_HASH_INVALID')
+    except ProviderFailure:
+        raise
+    except Exception:
+        raise ProviderFailure('REMOTE_HASH_INVALID') from None
+    if len(raw) == 32:
+        return raw.hex(), 'BASE64_RAW_SHA256_32_BYTES'
+    if len(raw) == 64 and re.fullmatch(rb'[0-9a-f]{64}', raw):
+        return raw.decode('ascii'), 'BASE64_ASCII_LOWERCASE_HEX_64_BYTES'
+    raise ProviderFailure('REMOTE_HASH_INVALID')
+
+
 def verify_remote(meta, preflight, name):
     require(meta.get('name') == name, 'REMOTE_IDENTITY_CHANGED')
     require(meta.get('state') == 'ACTIVE', 'REMOTE_NOT_ACTIVE')
     require(meta.get('mimeType') == 'video/mp4', 'REMOTE_MIME_MISMATCH')
     require(str(meta.get('sizeBytes')) == str(preflight['size_bytes']), 'REMOTE_SIZE_MISMATCH')
-    try:
-        actual_hash = base64.b64decode(meta['sha256Hash'], validate=True).hex()
-    except Exception:
-        raise ProviderFailure('REMOTE_HASH_INVALID') from None
+    actual_hash, hash_representation = decode_remote_sha256(meta.get('sha256Hash'))
     require(actual_hash == preflight['sha256'], 'REMOTE_HASH_MISMATCH')
     duration = meta.get('videoMetadata', {}).get('videoDuration')
     require(type(duration) is str and re.fullmatch(r'\d+(?:\.\d{1,9})?s', duration) is not None,
@@ -173,7 +187,7 @@ def verify_remote(meta, preflight, name):
     require(abs(Decimal(duration[:-1]) - Decimal('6')) <= Decimal('0.034'), 'REMOTE_DURATION_MISMATCH')
     require(meta.get('uri') == ORIGIN + '/v1beta/' + name, 'REMOTE_URI_REJECTED')
     return {'state': 'ACTIVE', 'mime_type': 'video/mp4', 'size_bytes': int(meta['sizeBytes']),
-            'sha256': actual_hash, 'video_duration_seconds': float(Decimal(duration[:-1])),
+            'sha256': actual_hash, 'sha256_representation': hash_representation, 'video_duration_seconds': float(Decimal(duration[:-1])),
             'duration_tolerance_seconds': .034, 'all_four_metadata_checks_passed': True}
 
 
