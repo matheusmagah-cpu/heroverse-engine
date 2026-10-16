@@ -30,7 +30,14 @@ BASE_META = json.loads(CAPTURE_RAW)['raw_file_metadata']
 META = dict(BASE_META,uri=s.FILE_URL)
 BASE_POLICY = json.loads((ROOT/s.POLICY).read_bytes())
 POLICY = dict(BASE_POLICY,key_sha256=KEY_HASH)
-SQL_RAW = (ROOT/d.SQL).read_text()
+# These counterfactual NEW-call tests retain the byte-exact pre-run42 snapshot.
+# Construct it only in memory; require the recorded historical whole-file hash.
+# Never rewrite the real ledger or infer a fresh budget from COMPLETED rows.
+CURRENT_SQL_RAW = (ROOT/d.SQL).read_text()
+LITE_KEY = 'synthetic-av:7e431b2811680333a574d970c68b74d073421105b805234d7721be3af9fe04ba'
+SQL_RAW = ''.join(line for line in CURRENT_SQL_RAW.splitlines(keepends=True)
+    if not line.startswith('INSERT INTO "public_av_reservations" VALUES(\''+LITE_KEY+"',"))
+assert hashlib.sha256(SQL_RAW.encode()).hexdigest() == 'ea495b34686a2e2ba22789d7c6aa6efc927d718203bb8518c2502ab11e5bc7f4', 'HISTORICAL_PRE_RUN42_FIXTURE_CHANGED'
 PRIOR_KEY = 'synthetic-av:27ef45f42c98789a4a30b043669c2973bf3c1c8b7e45484f3e15ca99bafe9d27'
 PRIOR_PATH = Path('migration/evidence/public-av-'+PRIOR_KEY.split(':')[1]+'.json')
 PRIOR_RAW = (ROOT/PRIOR_PATH).read_bytes()
@@ -357,7 +364,7 @@ class Tests(unittest.TestCase):
         self.assertIn("- cron: '17 9 * * *'",text);self.assertIn('group: heroverse-official-evidence',text)
         self.assertIn("if: always() && steps.durable_claim.outcome == 'success' && !inputs.av_synthetic_c01",text)
         self.assertIn('if: inputs.av_synthetic_c01 && inputs.checkpoint_only',text)
-        self.assertLess(text.index('synthetic_files_av.py preflight'),text.index('durable_evidence_checkpoint.py claim'))
+        self.assertLess(text.index('synthetic_audio_control.py preflight'),text.index('durable_evidence_checkpoint.py claim'))
         self.assertNotIn('av_synthetic_c01\n        type: boolean\n        default: true',text)
 
 if __name__=='__main__':unittest.main()

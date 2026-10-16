@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       av_synthetic_c01:
-        description: Infer once on the already-uploaded six-second synthetic c01; original ledger, no collector
+        description: AUDIO_ONLY c01 diagnostic once; inline WAV, original ledger, no collector
         type: boolean
         default: false
       checkpoint_only:
@@ -139,16 +139,27 @@ jobs:
               with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('public_seeds='+json.dumps(seeds,separators=(',',':'))+'\n')
           print('Exact bounded '+stage+' request verified; no publication authority')
           PY
-      - name: Test isolated synthetic control without credentials
+      - name: Prepare exact six-second WAV locally without credentials
         if: inputs.av_synthetic_c01
-        run: python3 -m unittest discover -s migration/runtime_bridge -p 'test_synthetic_files_av.py' -v
-      - name: Validate synthetic control and match existing free-project secret before claims
+        timeout-minutes: 4
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            timeout --signal=TERM --kill-after=10s 165s bash -euo pipefail -c '
+              sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update -qq
+              sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 install -y --no-install-recommends ffmpeg
+            '
+          fi
+          timeout --signal=TERM --kill-after=5s 60s python3 migration/diagnostics/synthetic-audio-c01/build_audio.py synthetic-audio-control-output
+      - name: Test isolated direct-audio control without credentials
+        if: inputs.av_synthetic_c01
+        run: python3 -m unittest discover -s migration/runtime_bridge -p 'test_synthetic_audio_control.py' -v
+      - name: Validate AUDIO_ONLY control and match existing free-project secret before claims
         if: inputs.av_synthetic_c01
         env:
           HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
           HERO_STAGE_SELECTION: ${{ toJSON(inputs) }}
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
-        run: python3 migration/runtime_bridge/synthetic_files_av.py preflight
+        run: python3 migration/runtime_bridge/synthetic_audio_control.py preflight
       - name: Claim durable observer and restore current quota source
         id: durable_claim
         run: python3 migration/durable_evidence_checkpoint.py claim
@@ -167,14 +178,14 @@ jobs:
           restore_ledger(SQL,out/"quota-ledger.sqlite3")
           print("Original ledger restored; no Google calls or publications")
           PY
-      - name: Analyze exactly one existing synthetic File through the original observer ledger
+      - name: Analyze one explicit AUDIO_ONLY c01 through the original observer ledger
         if: inputs.av_synthetic_c01 && inputs.checkpoint_only
         timeout-minutes: 4
         env:
           HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
           HERO_STAGE_SELECTION: ${{ toJSON(inputs) }}
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
-        run: timeout --signal=TERM --kill-after=10s 210s python3 migration/runtime_bridge/synthetic_files_av.py run
+        run: timeout --signal=TERM --kill-after=10s 210s python3 migration/runtime_bridge/synthetic_audio_control.py run
       - name: Prepare bounded fresh-runner media restoration
         if: inputs.restore_assets && inputs.checkpoint_only
         run: |
@@ -270,12 +281,14 @@ jobs:
         env:
           HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
           HERO_STAGE_SELECTION: ${{ toJSON(inputs) }}
-        run: python3 migration/runtime_bridge/synthetic_files_av.py finalize
+        run: python3 migration/runtime_bridge/synthetic_audio_control.py finalize
       - name: Preserve evidence and quota continuation
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: heroverse-official-evidence-${{ github.run_id }}
-          path: cloud-evidence/
+          path: |
+            cloud-evidence/
+            synthetic-audio-control-output/proof.json
           retention-days: ${{ steps.push_stage.outputs.stage == 'native_market' && 1 || 30 }}
           if-no-files-found: ignore

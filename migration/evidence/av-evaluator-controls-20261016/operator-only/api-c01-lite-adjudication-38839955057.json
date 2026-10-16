@@ -1,0 +1,96 @@
+{
+  "version": "heroverse-single-control-ai-adjudication-v1",
+  "reviewer_type": "AI_ASSISTANT_OFFLINE_REVIEW_NOT_HUMAN",
+  "contains_expected_answer_do_not_send_to_provider": true,
+  "run_id": "38839955057",
+  "run_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/38839955057",
+  "source_commit": "b57fe1caac78bc2f6a52a59a02eb1c689e958e9b",
+  "post_checkpoint_head": "daa087c85019518b7cc2fa1ada0310dd916e6843",
+  "receipt": {
+    "path": "migration/evidence/public-av-7e431b2811680333a574d970c68b74d073421105b805234d7721be3af9fe04ba.json",
+    "sha256": "4f93d6556c3aeb90c3fdd38e8e7aae3b85919ad059a8c0d1bd3e1b32ef7f9edb",
+    "unchanged_runtime_status": "SYNTHETIC_RESPONSE_AWAITING_REVIEW",
+    "unchanged_runtime_review_status": "NOT_REVIEWED"
+  },
+  "model": "gemini-3.5-flash-lite",
+  "request_hash": "7e431b2811680333a574d970c68b74d073421105b805234d7721be3af9fe04ba",
+  "control_sha256": "5562d675416107eb9ec70643edd43e5375b85aa74051730f1d357a88d34e79df",
+  "model_response_literal": "1. O quadrado no centro da tela muda de cor de cinza escuro para branco 4 vezes.\n2. Um bipe é audível 4 vezes.\n3. O som e a mudança visual ocorrem simultaneamente.\n4. Consegui acessar o vídeo ao longo do tempo e o áudio.",
+  "usage_metadata": {
+    "candidatesTokenCount": 67,
+    "promptTokenCount": 4132,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 202
+      },
+      {
+        "modality": "VIDEO",
+        "tokenCount": 3930
+      }
+    ],
+    "serviceTier": "standard",
+    "totalTokenCount": 4199
+  },
+  "expected": {
+    "visual_flash_count": 3,
+    "audio_tone_count": 3,
+    "flash_onsets_seconds": [
+      1.0,
+      3.0,
+      5.0
+    ],
+    "tone_onsets_seconds": [
+      1.5,
+      3.501,
+      5.501
+    ],
+    "audio_onset_minus_flash_seconds": [
+      0.5,
+      0.501,
+      0.501
+    ],
+    "relationship": "AUDIO_AFTER_VISUAL_APPROX_500MS"
+  },
+  "observed_model_claims": {
+    "visual_flash_count": 4,
+    "audio_tone_count": 4,
+    "relationship": "SIMULTANEOUS",
+    "claims_visual_and_audio_access": true
+  },
+  "verdict": "FAIL_C01_COUNTS_AND_TEMPORAL_RELATION",
+  "criteria": {
+    "visual_event_count": "FAIL",
+    "audio_event_count": "FAIL",
+    "temporal_relation": "FAIL",
+    "both_channel_access_validated": false
+  },
+  "evidence": {
+    "decoded_video_sha256": "48a4f2c174ba8fdc3041470a76e1b03c6902fbbf41451f49d3a389e46753e283",
+    "decoded_audio_sha256": "5efda979496abfda7a03ae21f255319f24524f58b4726f21666fa905bf5beae0",
+    "frozen_manifest_sha256": "4da1ae544ccfc1abd4c8046456a4983fedda8f4796e1a181b762910a79d716de",
+    "frozen_protocol_sha256": "f48c182646fee747f6fbeca0ab99a45ac3b197d40e059150b8e8d2846e1043fe",
+    "method": "Offline after preserving literal response. Exact MP4 SHA256 checked; decoded pixels and PCM independently remeasured; original frozen criteria unchanged."
+  },
+  "limitations": [
+    "The usage breakdown lists TEXT and VIDEO, not a separate AUDIO entry. This alone does not prove that audio was absent.",
+    "A model claim of access is not independent evidence of channel access.",
+    "API success and ledger COMPLETED are not accuracy approval.",
+    "Other four controls were not tested by this API run."
+  ],
+  "ledger": {
+    "path": "migration/evidence/observer-ledger.sql",
+    "oct14_rows_preserved": 53,
+    "oct14_seconds_preserved": 28800,
+    "oct16_rows": 2,
+    "oct16_seconds": 12,
+    "claim_present": false,
+    "av_claimed_rows": 0,
+    "completed_means_accounting_not_accuracy": true
+  },
+  "model_feedback_sent": false,
+  "retry_performed": false,
+  "production_authorized": false,
+  "quality_authorized": false,
+  "publication_authorized": false
+}

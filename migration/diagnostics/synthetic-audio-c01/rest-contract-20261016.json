@@ -1,0 +1,51 @@
+{
+  "status": "PUBLIC_PRIMARY_DOCUMENTATION_ONLY_NO_PROVIDER_EFFECTS",
+  "documentation_reported_at_utc": "2026-10-16T02:26:55Z",
+  "sources": [
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/generate-content/audio",
+      "supports": [
+        "Inline complete audio/wav content",
+        "Complete inline request less than 20 MB",
+        "Documented 32 audio tokens/second estimate, not observed use"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/api/generate-content",
+      "supports": [
+        "contents.parts.inlineData.mimeType and data",
+        "Base64 encoded bytes in data",
+        "generationConfig.candidateCount and maxOutputTokens",
+        "Tools, response schema and system instructions optional"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/api/generate-content#UsageMetadata",
+      "supports": [
+        "promptTokensDetails with modality and tokenCount",
+        "AUDIO modality available"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+      "supports": [
+        "Exact model code",
+        "Audio input and text output"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "supports": [
+        "Gemini 3.5 Flash-Lite Standard Free input and output free of charge, confirmed in current policy provenance"
+      ]
+    }
+  ],
+  "caveats": [
+    "AUDIO_ONLY is an operator case label, not a REST field.",
+    "responseModalities AUDIO requests audio output and must not be added here.",
+    "No fileData, Files resource, mediaProcessing or videoMetadata belongs in this audio-only request.",
+    "The docs accept WAV but do not prescribe this proposal's exact PCM sample rate/bit depth; 48 kHz mono PCM16 is an engineering choice to avoid resampling the source track.",
+    "Positive AUDIO token details show provider modality accounting, not perception or correctness. Absence is inconclusive because unconditional details and embedded-video audio reporting are not guaranteed.",
+    "No raw documentation body hash is asserted; these are source-linked review findings."
+  ]
+}
