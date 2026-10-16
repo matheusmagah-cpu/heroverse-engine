@@ -1,0 +1,64 @@
+name: HeroVerse existing Gemini File metadata once
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-official-evidence
+  cancel-in-progress: false
+jobs:
+  metadata:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.run_attempt == 1 && github.run_number == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Enforce first private manual main capture before credentials
+        id: boundary
+        env:
+          REPOSITORY: ${{ github.repository }}
+          REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          REF: ${{ github.ref }}
+          EVENT: ${{ github.event_name }}
+          RUN_NUMBER: ${{ github.run_number }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          test "$REPOSITORY" = matheusmagah-cpu/heroverse-engine
+          test "$REPOSITORY_PRIVATE" = true
+          test "$REF" = refs/heads/main
+          test "$EVENT" = workflow_dispatch
+          test "$RUN_NUMBER" = 1
+          test "$RUN_ATTEMPT" = 1
+          echo "accepted=true" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows/gemini-files-metadata-once.yml
+            migration/diagnostics/gemini-files-metadata
+            migration/runtime_bridge/gemini_public_av.py
+            migration/evidence/gemini-files-delivery-38834915350/receipt.json
+          sparse-checkout-cone-mode: false
+      - name: Verify exact prior receipt and run offline tests without credentials
+        run: |
+          command -v python3
+          command -v timeout
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          echo '7c53ab3e57559d8d79f490a2dac04beb17a1ee93429da80a82a1bd0059f9f006  migration/runtime_bridge/gemini_public_av.py' | sha256sum -c -
+          echo 'ef6c73a3c91884e3d28dd37135b7f160c7937fa069ca4e9e0f02ddbd935974b4  migration/evidence/gemini-files-delivery-38834915350/receipt.json' | sha256sum -c -
+          python3 -m unittest discover -s migration/diagnostics/gemini-files-metadata -p 'test_*.py' -v
+      - name: Capture one GET of existing file without reconciliation
+        if: success() && steps.boundary.outputs.accepted == 'true' && github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.run_number == 1
+        env:
+          HERO_REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: timeout --signal=TERM --kill-after=5s 40s python3 migration/diagnostics/gemini-files-metadata/capture.py
+      - name: Preserve private metadata-only receipt
+        if: always() && steps.boundary.outputs.accepted == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: heroverse-gemini-file-metadata-${{ github.run_id }}
+          path: |
+            gemini-files-metadata-output/receipt.json
+            gemini-files-metadata-output/attempt-claim.json
+          retention-days: 7
+          if-no-files-found: ignore
