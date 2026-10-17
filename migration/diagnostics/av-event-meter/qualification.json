@@ -2,7 +2,7 @@
   "version": "av-event-meter-control-qualification-v1",
   "status": "PASS_5_OF_5_BLIND_CONTROLS",
   "criteria_sha256": "ecefd0d8bc68f731d84dc1cab3c45ea7803716334bd20dea0ae749c3d03bd099",
-  "meter_sha256": "97fbc6688b1a93600a4e53ab13829cbd2c43e38c45976e148e5064eb621111a5",
+  "meter_sha256": "3d2ed01fdbede19d6a67bade08a5825a87a46ca15faf1f7ace046013d43f36dc",
   "recipe_sha256": "8b4b9ea021836045c74ec14bd3b881b4f69f9391720534607717de9c4a8fb95d",
   "stimuli_byte_identical_to_frozen": true,
   "blind_isolated_subprocess": true,
@@ -95,9 +95,9 @@
   "runtime_integrated": false,
   "scope": "Discrete flash/tone onsets and AV offset on five 6 s synthetic controls. Not semantic understanding, real-content accuracy or perceptual approval.",
   "generalization_tests": {
-    "status": "PASS_8_OFFLINE_SYNTHETIC_TESTS",
+    "status": "PASS_11_OFFLINE_SYNTHETIC_TESTS",
     "command": "python3 -I -B -m unittest discover -s . -p test_av_event_meter.py -v",
-    "test_sha256": "125b442c78fd7f8205c6cece57c309386a8fb1d03c60ea577d21f81b00de93e5",
+    "test_sha256": "a2d462436b83e55e5395be68acaf470b25e88e76c70dac2c49fb35663c344e06",
     "coverage": [
       "0/1/4/7 events at irregular times",
       "25 and 30 fps; 24 fps video-only",
@@ -109,7 +109,9 @@
       "bright and dark localized flashes of varied size/position",
       "documented limit: event under 12 dB above the trailing local level not counted",
       "percussive hits over a continuous music-like bed after a silent intro (v1 found 1/5; v2 finds 5/5)",
-      "onset straddling the 10 s streaming chunk boundary located within 1 ms"
+      "onset straddling the 10 s streaming chunk boundary located within 1 ms",
+      "offset by consensus with 8 non-phase-locked distractor onsets around 4 flashes",
+      "phase-locked distractors and a single flash among many onsets are reported AMBIGUOUS"
     ]
   },
   "mutation_check": {
@@ -126,7 +128,8 @@
     "local-novelty audio onsets (trailing 20-210 ms median) replace the whole-file floor rule",
     "sample-level onset refinement and per-event resolution fields",
     "bounded-memory streaming with numpy; audio and video measured in parallel",
-    "first-block baseline padding so a background present from t=0 is not an onset"
+    "first-block baseline padding so a background present from t=0 is not an onset",
+    "consensus offset pairing with AMBIGUOUS verdict (first real-opening injection run 38992560157 detected 30/30 audio and 30/30 video events with zero spurious events but failed on nearest-neighbour pairing against natural music onsets)"
   ],
   "speed": {
     "40s_1080p30_stereo_seconds": 2.2,

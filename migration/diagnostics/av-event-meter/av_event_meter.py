@@ -43,6 +43,7 @@ VIDEO_MERGE_GAP_SECONDS = 0.2
 VIDEO_CHUNK_FRAMES = 300
 
 PAIR_MAX_SECONDS = 1.0
+MIN_CONSENSUS = 3
 # ITU-R BT.1359 detectability: sound leading > 45 ms or lagging > 125 ms.
 SYNC_LEAD_LIMIT, SYNC_LAG_LIMIT = -0.045, 0.125
 
@@ -228,22 +229,60 @@ def measure_video(path):
 
 
 def pair(audio_events, video_events):
-    pairs = []
-    for event in audio_events:
-        nearest = min(video_events, default=None,
-                      key=lambda v: abs(event["onset_seconds"] - v["onset_seconds"]))
-        if nearest and abs(event["onset_seconds"] - nearest["onset_seconds"]) <= PAIR_MAX_SECONDS:
-            pairs.append({"audio_onset_seconds": event["onset_seconds"],
-                          "video_onset_seconds": nearest["onset_seconds"],
-                          "audio_minus_video_seconds":
-                              round(event["onset_seconds"] - nearest["onset_seconds"], 6),
-                          "resolution_seconds": round(event["resolution_seconds"] +
-                                                      nearest["resolution_seconds"], 6)})
-    if not pairs:
+    """Consensus offset: among all audio-minus-video differences within +/-1 s,
+    choose the one that the most visual events support one-to-one (an audio
+    onset within that event's frame resolution of video + offset). Nearest
+    neighbour pairing is not used: in real content many audio onsets (music
+    notes) lie near each picture change. With fewer than MIN_CONSENSUS pairs the
+    verdict is given only if every supported visual event has exactly one audio
+    onset within +/-1 s. If a clearly different offset (more than two pairing
+    tolerances away) has equal support, the verdict is AMBIGUOUS as well."""
+    audio = np.array(sorted(e["onset_seconds"] for e in audio_events))
+    audio_resolution = max((e["resolution_seconds"] for e in audio_events), default=0.0)
+    if not len(audio) or not video_events:
         return {"pairs": [], "median_offset_seconds": None, "verdict": "NOT_MEASURABLE"}
-    offset = float(np.median([p["audio_minus_video_seconds"] for p in pairs]))
+
+    def support(offset):
+        used, pairs = set(), []
+        for event in video_events:
+            target = event["onset_seconds"] + offset
+            tolerance = event["resolution_seconds"] + audio_resolution
+            lo, hi = np.searchsorted(audio, [target - tolerance, target + tolerance], side="left")
+            choices = [i for i in range(lo, min(hi + 1, len(audio)))
+                       if i not in used and abs(audio[i] - target) <= tolerance]
+            if choices:
+                best = min(choices, key=lambda i: abs(audio[i] - target))
+                used.add(best)
+                pairs.append((event, float(audio[best])))
+        return pairs
+
+    candidates = sorted({round(float(a - v["onset_seconds"]), 6) for v in video_events
+                         for a in audio[np.abs(audio - v["onset_seconds"]) <= PAIR_MAX_SECONDS]})
+    if not candidates:
+        return {"pairs": [], "median_offset_seconds": None, "verdict": "NOT_MEASURABLE"}
+    scored = []
+    for candidate in candidates:
+        pairs = support(candidate)
+        residual = sum(abs(a - v["onset_seconds"] - candidate) for v, a in pairs)
+        scored.append((-len(pairs), residual, abs(candidate), candidate, pairs))
+    best = min(scored, key=lambda item: item[:3])
+    pairs = best[4]
+    separation = 2 * (max(v["resolution_seconds"] for v in video_events) + audio_resolution)
+    rival = any(item[0] == best[0] and abs(item[3] - best[3]) > separation for item in scored)
+    offsets = [a - v["onset_seconds"] for v, a in pairs]
+    offset = float(np.median(offsets))
+    nearby = [int(np.sum(np.abs(audio - v["onset_seconds"]) <= PAIR_MAX_SECONDS)) for v, _ in pairs]
+    ambiguous = rival or (len(pairs) < MIN_CONSENSUS and any(n > 1 for n in nearby))
+    rows = [{"audio_onset_seconds": a, "video_onset_seconds": v["onset_seconds"],
+             "audio_minus_video_seconds": round(a - v["onset_seconds"], 6),
+             "resolution_seconds": round(v["resolution_seconds"] + audio_resolution, 6)}
+            for v, a in pairs]
+    if ambiguous:
+        return {"pairs": rows, "median_offset_seconds": None, "verdict": "AMBIGUOUS",
+                "consensus_pairs": len(pairs), "visual_events": len(video_events)}
     verdict = "IN_SYNC" if SYNC_LEAD_LIMIT <= offset <= SYNC_LAG_LIMIT else "OUT_OF_SYNC"
-    return {"pairs": pairs, "median_offset_seconds": round(offset, 6), "verdict": verdict,
+    return {"pairs": rows, "median_offset_seconds": round(offset, 6), "verdict": verdict,
+            "consensus_pairs": len(pairs), "visual_events": len(video_events),
             "sign": "positive means sound lags picture",
             "window_seconds": [SYNC_LEAD_LIMIT, SYNC_LAG_LIMIT]}
 

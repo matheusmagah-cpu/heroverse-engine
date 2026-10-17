@@ -194,6 +194,35 @@ class GeneralizationTests(unittest.TestCase):
         result = self.build("chunk", rate=48000, seconds=14, tones=[(t, .1, 1000, -10, "mono") for t in onsets])
         self.assert_onsets(result["audio"]["events"], onsets, .001)
 
+    def test_offset_by_consensus_with_distracting_audio_onsets(self):
+        # Real content has many audio onsets near each picture change; the true
+        # offset is the one consistently explained by every flash.
+        flashes_at = [1.0, 2.6, 4.2, 5.8]
+        offset = 0.06
+        tones = [(t + offset, .05, 1500, -10, "mono") for t in flashes_at]
+        # Distractors are not phase-locked to the flashes (like music notes).
+        distract = ((-.45, .37), (-.62, .29), (-.33, .51), (-.71, .44))
+        tones += [(t + d, .05, 700, -10, "mono") for t, pair in zip(flashes_at, distract) for d in pair]
+        flashes = [(t, 2, (100, 80, 80, 80), 235) for t in flashes_at]
+        result = self.build("consensus", fps=30, rate=48000, seconds=7, flashes=flashes, tones=tones)
+        self.assertEqual(result["audio"]["onset_count"], 12)
+        self.assertEqual(result["sync"]["consensus_pairs"], 4)
+        self.assertLessEqual(abs(result["sync"]["median_offset_seconds"] - offset), OFFSET_TOL)
+        self.assertEqual(result["sync"]["verdict"], "IN_SYNC")
+
+    def test_phase_locked_distractors_are_ambiguous(self):
+        flashes_at = [1.0, 2.6, 4.2]
+        tones = [(t + d, .05, 900, -10, "mono") for t in flashes_at for d in (.05, .4)]
+        result = self.build("locked", fps=30, rate=48000, seconds=5,
+                            flashes=[(t, 2, (100, 80, 80, 80), 235) for t in flashes_at], tones=tones)
+        self.assertEqual(result["sync"]["verdict"], "AMBIGUOUS")
+
+    def test_single_flash_among_many_onsets_is_ambiguous(self):
+        tones = [(t, .05, 900, -10, "mono") for t in (.6, 1.1, 1.7, 2.3)]
+        result = self.build("ambiguous", fps=30, rate=48000, seconds=3,
+                            flashes=[(1.5, 2, (100, 80, 80, 80), 235)], tones=tones)
+        self.assertEqual(result["sync"]["verdict"], "AMBIGUOUS")
+
     def test_video_only_file(self):
         flashes = [(0.5, 3, (0, 0, 320, 240), 200)]
         result = self.build("videoonly", fps=24, seconds=2, flashes=flashes)
