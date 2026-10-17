@@ -25,17 +25,18 @@ def kaggle(*args, check=True):
 
 
 def username():
-    from kaggle.api.kaggle_api_extended import KaggleApi
-    api = KaggleApi()
-    api.authenticate()
-    name = api.get_config_value("username") or getattr(api, "config_values", {}).get("username")
-    if not name:
-        listed = kaggle("kernels", "list", "--mine", "--page-size", "1", "--csv")
-        rows = [r for r in listed.splitlines()[1:] if r]
-        name = rows[0].split(",")[0].split("/")[0] if rows else None
-    if not name:
-        raise RuntimeError("KAGGLE_USERNAME_UNRESOLVED")
-    return name
+    """Resolve the Kaggle user through the CLI (token from KAGGLE_API_TOKEN)."""
+    out = kaggle("config", "view", check=False)
+    for line in out.splitlines():
+        if "username" in line.lower() and ":" in line:
+            name = line.split(":", 1)[1].strip()
+            if name and name.lower() not in ("none", "null"):
+                return name
+    listed = kaggle("kernels", "list", "--mine", "--page-size", "1", "--csv", check=False)
+    rows = [r for r in listed.splitlines()[1:] if "/" in r]
+    if rows:
+        return rows[0].split(",")[0].split("/")[0]
+    raise RuntimeError("KAGGLE_USERNAME_UNRESOLVED: " + (out + listed)[-400:].replace("KGAT_", "KGAT_***"))
 
 
 def run(job_script, payload_path, slug, out_dir, timeout_min=110):
