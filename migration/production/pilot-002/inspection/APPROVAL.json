@@ -1,8 +1,8 @@
 {
  "approved": true,
- "output_sha256": "52766f47e8871b37734bb06a45cdbf098fefcfbabe39f5f70bb216a15c1cfba6",
- "reviewer": "Claude Code (AI assistant), frame-by-frame contact sheet + opening sheet + thumbnail",
- "date": "2026-10-17",
+ "output_sha256": "d0c35d58ebd63824bc90bda17383c2a2e197a00ab0541356c4a89c77d44ef321",
+ "reviewer": "Matheus (owner), after Claude's frame-by-frame sheet review",
+ "reviewed_at": "2026-10-17T22:40:00Z",
  "qa_status": "PASS",
- "notes": "Static-background version. Figure consistent, 110 backgrounds holds <=18 s, captions <=40 chars and legible, scripture references visible, brand/badge/AMEN present, thumbnail matches title promise. Human listening of the voice still recommended (D-076)."
+ "notes": "Cinematic render, runner 39062600672. QA 24/24, sheets clean. Shorts not included (watched review FAIL)."
 }
