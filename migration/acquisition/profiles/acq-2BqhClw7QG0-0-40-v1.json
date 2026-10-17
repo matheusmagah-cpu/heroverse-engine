@@ -1,0 +1,133 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 22,
+    "picture_changes_per_minute": 32.95,
+    "median_shot_seconds": 1.767,
+    "longest_shot_seconds": 4.533,
+    "motion_median_top_decile_diff": 12.192
+   },
+   "rhythm": {
+    "audio_onsets": 75,
+    "audio_onsets_per_minute": 112.31,
+    "tempo": {
+     "bpm": 168.07,
+     "confidence": 0.04
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.273,
+     "chance_fraction": 0.117,
+     "lift": 2.32
+    },
+    "sync": {
+     "median_offset_seconds": 0.033095,
+     "verdict": "IN_SYNC",
+     "consensus_pairs": 6,
+     "visual_events": 22,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -17.0,
+    "loudness_range_lu": 3.4,
+    "true_peak_dbtp": -3.4
+   },
+   "colour": {
+    "mean_brightness": 0.3202,
+    "brightness_std_over_time": 0.0576,
+    "mean_saturation": 0.3659,
+    "saturation_std_over_time": 0.1293
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.554,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 78,
+     "singing": 0,
+     "music": 5,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 101,
+    "words_per_minute": 151.2,
+    "transcript": "Heavenly Father, as this new morning begins, I come before you with a heart full of gratitude, surrender, and expectation. Thank you for giving me another day. Thank you for the breath in my lungs, for the strength in my body, and for the gift of life. I may not know everything this day will bring, but I know the one who holds this day in his hands. Lord, before I step into this day, I place my life, my family, my plans, my responsibilities, my fears, and my future, completely into your care. Your word says in Psalm 118 -24."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 25.455,
+     "frames": 52
+    },
+    {
+     "label": "music",
+     "start_seconds": 24.96,
+     "end_seconds": 25.935,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 25.44,
+     "end_seconds": 26.895,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 26.4,
+     "end_seconds": 27.375,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 26.88,
+     "end_seconds": 34.095,
+     "frames": 14
+    },
+    {
+     "label": "music",
+     "start_seconds": 33.6,
+     "end_seconds": 34.575,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 34.08,
+     "end_seconds": 35.055,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 34.56,
+     "end_seconds": 36.015,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 35.52,
+     "end_seconds": 40.031,
+     "frames": 9
+    }
+   ]
+  }
+ ]
+}
