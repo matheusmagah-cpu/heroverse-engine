@@ -23,233 +23,217 @@
   "CqvB4OVD5Nw",
   "SRaWn0WoP88",
   "AxInqNJzmyU",
+  "6Q98ZRdnzw8",
+  "FEyv4xRoPzs",
   "8YXRtsNnGX0",
+  "j6eXNa7NqwU",
+  "q3wraYaNR-A",
   "6iERK-74EWg",
+  "noiMjV6UxSk",
   "wpUFB3UMNgw",
   "STcBN9l5rfU",
+  "_WD8NVhD5Ps",
   "MAZXkEhdKU8"
  ],
- "data_api_units": 28,
+ "data_api_units": 21,
  "gemini": {
-  "calls": 74,
+  "calls": 18,
   "failed_windows": [
    {
     "video_id": "8dLrnuwAABE",
-    "start": 0,
+    "start": 2100,
+    "attempt": 0,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
     "video_id": "8dLrnuwAABE",
     "start": 2100,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "6Q98ZRdnzw8",
-    "start": 600,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "6Q98ZRdnzw8",
-    "start": 1200,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "6Q98ZRdnzw8",
-    "start": 1500,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "FEyv4xRoPzs",
-    "start": 900,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "j6eXNa7NqwU",
-    "start": 900,
+    "attempt": 1,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
     "video_id": "j6eXNa7NqwU",
     "start": 1500,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "VGv3fbxG7OI",
-    "start": 300,
+    "attempt": 0,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
     "video_id": "VGv3fbxG7OI",
     "start": 600,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "VGv3fbxG7OI",
+    "start": 600,
+    "attempt": 1,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
     "video_id": "q3wraYaNR-A",
     "start": 300,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "noiMjV6UxSk",
-    "start": 0,
-    "code": "INVALID_WINDOW_REPORT"
-   },
-   {
-    "video_id": "_WD8NVhD5Ps",
-    "start": 0,
+    "attempt": 0,
     "code": "INVALID_WINDOW_REPORT"
    }
   ],
   "models": {
-   "gemini-3.8-flash": 8,
-   "gemini-3.6-flash": 4,
-   "gemini-3.5-flash-lite": 62
+   "gemini-3.6-flash": 1,
+   "gemini-3.5-flash-lite": 17
   }
  },
  "blueprint": {
   "shared_by_winners": [
    {
-    "pattern": "Bold multi-topic or visceral hook imagery",
+    "pattern": "Linguistic and semantic etymology hooks",
     "evidence": [
-     "CqvB4OVD5Nw@0",
-     "wpUFB3UMNgw@0"
+     "6Q98ZRdnzw8@60",
+     "FEyv4xRoPzs@18",
+     "j6eXNa7NqwU@17"
     ]
    },
    {
-    "pattern": "High visual density with AI-generated watercolor/vector illustrations and dynamic kinetic captions",
+    "pattern": "High-density scriptural integration without breaking monetization policy",
     "evidence": [
-     "8YXRtsNnGX0@0",
-     "wpUFB3UMNgw@0"
-    ]
-   },
-   {
-    "pattern": "Clear thematic structure dividing abstract scriptural questions into distinct historical or spiritual takeaways",
-    "evidence": [
-     "SRaWn0WoP88@0",
-     "STcBN9l5rfU@0"
+     "CqvB4OVD5Nw@124",
+     "6Q98ZRdnzw8@10",
+     "q3wraYaNR-A@96"
     ]
    }
   ],
   "differences": [
    {
-    "dimension": "Content scope and narrative breadth",
-    "observation": "Winners like 'UNSOLVED Bible Mysteries Explained' explore broad, multi-subject compilations (6+ distinct topics), whereas weak contrasts focus on single-character biographical narratives.",
+    "dimension": "Video Format & Pacing",
+    "observation": "Prayer channels rely on rapid, high-intensity vocal cadences and dynamic kinetic typography, whereas deep-dive essay channels use a slow, meditative British voiceover over watercolor artwork.",
     "evidence": [
-     "wpUFB3UMNgw@0",
-     "MAZXkEhdKU8@0"
-    ]
-   },
-   {
-    "dimension": "Audience engagement metrics and view velocity",
-    "observation": "Multi-topic compilation winners achieve hundreds of thousands of views within weeks, while single-figure narrative videos from the same channel stall under 4,000 views.",
-    "evidence": [
-     "wpUFB3UMNgw@0",
-     "MAZXkEhdKU8@0"
+     "CqvB4OVD5Nw@0",
+     "6Q98ZRdnzw8@0"
     ]
    }
   ],
   "script_structure": [
    {
     "order": 1,
-    "beat": "The Hook",
-    "typical_seconds": "0-15s",
-    "purpose": "State an undeniable historical or spiritual anomaly and present a high-stakes curiosity gap.",
+    "beat": "The Curiosty Hook",
+    "typical_seconds": "0-30",
+    "purpose": "Establish a jarring paradox or counter-intuitive biblical fact to trap viewer attention.",
     "evidence": [
-     "CqvB4OVD5Nw@0",
+     "6Q98ZRdnzw8@0",
+     "FEyv4xRoPzs@18",
      "wpUFB3UMNgw@0"
     ]
    },
    {
     "order": 2,
-    "beat": "The Roadmap / Promise",
-    "typical_seconds": "15-30s",
-    "purpose": "Outline the specific mysteries, topics, or spiritual keys to be unlocked in the video.",
+    "beat": "Context & Narrative Setup",
+    "typical_seconds": "30-120",
+    "purpose": "Immerse the audience into the historical setting using sensory language.",
     "evidence": [
-     "wpUFB3UMNgw@0",
-     "8YXRtsNnGX0@0"
+     "6Q98ZRdnzw8@213",
+     "FEyv4xRoPzs@0",
+     "q3wraYaNR-A@20"
     ]
    },
    {
     "order": 3,
-    "beat": "Body Points (Episodic Breakdown)",
-    "typical_seconds": "30s-10m",
-    "purpose": "Deliver rapid, text-supported historical context, scriptural analysis, and expert data without fluff.",
+    "beat": "Linguistic or Theological Core",
+    "typical_seconds": "120-600",
+    "purpose": "Break down original Hebrew or Greek words and cross-reference multiple biblical passages.",
     "evidence": [
-     "wpUFB3UMNgw@0",
-     "STcBN9l5rfU@0"
+     "6Q98ZRdnzw8@104",
+     "FEyv4xRoPzs@31",
+     "q3wraYaNR-A@411"
     ]
    },
    {
     "order": 4,
-    "beat": "Call to Action and Summary",
-    "typical_seconds": "Final 60s",
-    "purpose": "Deliver a concise theological takeaway paired with a direct request to subscribe, share, and comment.",
+    "beat": "Application & Payoff",
+    "typical_seconds": "600-900",
+    "purpose": "Connect ancient truths directly to the viewer's modern spiritual life.",
     "evidence": [
-     "CqvB4OVD5Nw@2336",
-     "8YXRtsNnGX0@1218"
+     "6Q98ZRdnzw8@808",
+     "FEyv4xRoPzs@1640",
+     "wpUFB3UMNgw@821"
+    ]
+   },
+   {
+    "order": 5,
+    "beat": "Engagement & CTA",
+    "typical_seconds": "900-1000",
+    "purpose": "Drive subscriptions and community comments by asking a thought-provoking question.",
+    "evidence": [
+     "6Q98ZRdnzw8@1200",
+     "q3wraYaNR-A@994"
     ]
    }
   ],
   "hook_patterns": [
    {
-    "pattern": "The Unsolved Mystery Frame: 'The Bible has been studied for thousands of years, but even after all this time, there are still things...'",
+    "pattern": "The Hidden Translation Reveal",
     "evidence": [
-     "wpUFB3UMNgw@0"
+     "6Q98ZRdnzw8@60",
+     "FEyv4xRoPzs@18",
+     "j6eXNa7NqwU@17"
     ]
    },
    {
-    "pattern": "The Provocative Theological Question: 'Did God really abandon his own son on that cross? Most Christians miss this...'",
+    "pattern": "The Sensory Narrative Opening",
     "evidence": [
-     "8YXRtsNnGX0@23"
+     "6Q98ZRdnzw8@0",
+     "FEyv4xRoPzs@0",
+     "q3wraYaNR-A@0"
     ]
    }
   ],
-  "picture_format": "High-density AI-generated watercolor or vector illustrations paired with rapid hard cuts (10-15 shots per minute), dynamic kinetic yellow/white word-by-word synchronized subtitles, and subtle ambient pan/zoom motions.",
-  "sound_and_music": "Warm, deep human narration or authoritative West African voiceover underscored by continuous ambient cinematic synth pads and gentle orchestral piano beds without abrupt volume spikes.",
-  "pacing": "Fast-moving narrative pacing (130-150 words per minute) with frequent visual transitions and episodic topic changes every 90 to 120 seconds to prevent viewer drop-off.",
-  "packaging_titles_thumbnails": "High-contrast grid layouts or visceral close-up thumbnails (e.g., bloody imagery or multi-panel topic grids) paired with clean, uppercase search-optimized titles featuring curiosity gaps and established speaker authority.",
+  "picture_format": "Cinematic AI-generated watercolor illustrations with slow pans, gentle crossfades, subtle particle drifts, and synchronized bold yellow/white kinetic caption subtitles.",
+  "sound_and_music": "Continuous ambient cinematic orchestral background pads with low warm drones, soft strings, and a deep, solemn, resonant male narrator voice with a calm British or American accent.",
+  "pacing": "Deliberate and reflective storytelling cadence averaging 1.0 to 1.7 beats per minute, paired with an average speech rate of 80-140 words per minute.",
+  "packaging_titles_thumbnails": "High-contrast split or centered compositions utilizing biblical imagery paired with capitalized, curiosity-driven titles featuring phrases like 'Most Christians Miss This' or posing direct questions.",
   "audience_signals_from_comments": [
    {
-    "signal": "Viewers express deep personal gratitude and apply spiritual declarations directly to their families and daily routines.",
+    "signal": "Deep appreciation for linguistic word studies and etymology breaking down original Hebrew terms.",
     "evidence": [
-     "CqvB4OVD5Nw:comments",
-     "SRaWn0WoP88:comments"
+     "6Q98ZRdnzw8:comments",
+     "FEyv4xRoPzs:comments"
     ]
    },
    {
-    "signal": "Audiences actively engage with specific historical puzzles (e.g., Cain's wife, Ark locations, funeral customs) and request follow-up parts.",
+    "signal": "Strong personal connection and theological reflection on God's omnipresence and protective watch.",
     "evidence": [
-     "wpUFB3UMNgw:comments",
-     "STcBN9l5rfU:comments"
+     "q3wraYaNR-A:comments",
+     "CqvB4OVD5Nw:comments"
     ]
    }
   ],
   "winners_vs_weak": [
    {
-    "difference": "Winners aggregate multiple high-interest theological questions into a single structured compilation video, whereas weak performers dedicate an entire video to a single obscure historical figure (e.g., Queen Athaliah).",
+    "difference": "Winners focus on counter-intuitive linguistic mysteries with broad appeal, whereas weak-contrast videos dive into niche historical sub-topics with less universal emotional resonance.",
     "evidence": [
-     "wpUFB3UMNgw@0",
-     "MAZXkEhdKU8@0"
+     "6Q98ZRdnzw8",
+     "j6eXNa7NqwU",
+     "wpUFB3UMNgw",
+     "MAZXkEhdKU8"
     ]
    }
   ],
   "beat_them": [
    {
-    "where_winners_are_weak": "Winners often rely on static visual loops or standard AI illustrations without interactive graphic callouts or modern visual formatting.",
-    "heroverse_move": "Incorporate crisp cinematic chapter markers, animated infographic maps, and interactive on-screen pop-ups that visually break down ancient Hebrew/Greek word studies.",
+    "where_winners_are_weak": "Winners often rely solely on static watercolor illustrations or talking-head cutouts with simple text overlays, risking visual fatigue over longer runtimes.",
+    "heroverse_move": "Integrate dynamic map animations, 3D textual overlays of ancient Hebrew lexicons, and seamless cross-channel visual motifs that visually illustrate the etymological definitions in real-time.",
     "evidence": [
-     "8YXRtsNnGX0@0",
-     "wpUFB3UMNgw@0"
+     "6Q98ZRdnzw8",
+     "wpUFB3UMNgw"
     ]
    }
   ],
   "policy_risks_to_avoid": [
-   "Do not fabricate prophetic news, unverified supernatural occurrences, or fear-baiting end-times predictions.",
-   "Do not impersonate real living preachers or use unauthorized likenesses that violate impersonation policies.",
-   "Do not reuse unedited third-party video clips; ensure all visuals are original AI-generated art, historical manuscripts, or transformative educational edits."
+   "No impersonation of real-world living or deceased pastors/preachers.",
+   "No fabricated or sensationalized prophecy, false date-setting, or modern political fortune-telling.",
+   "No fear-baiting users with threats of damnation or manipulative emotional coercion.",
+   "No re-uploading unedited third-party sermon audio or video clips (reused content)."
   ],
   "limitations": [
-   "Public YouTube data provides view counts, transcripts, and comments, but lacks exact audience retention second-by-second drop-off graphs.",
-   "Correlation between multi-topic compilation formats and high views cannot guarantee absolute causal success without accounting for channel subscriber base size and algorithm shifts."
+   "Public YouTube data provides aggregate views and public comment sentiment, but does not expose exact viewer retention graphs per second.",
+   "Algorithmic ranking factors fluctuate over time, meaning stylistic combinations must be continuously tested against current platform distribution."
   ]
  },
  "blueprint_model": "gemini-3.5-flash-lite"

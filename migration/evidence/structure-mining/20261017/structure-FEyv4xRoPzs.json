@@ -22,8 +22,8 @@
   "description": "God never said \"rainbow.\" In Genesis 9:13 He says, \"I do set my bow in the cloud,\" and the Hebrew word, qeshet, is the word for a hunter's bow and a warrior's bow everywhere else in the Old Testament.\n\nIn this Bible study we read the sign of the covenant with Noah through the Hebrew text and the King James Version. We trace qeshet through Genesis, from Hagar's \"bowshot\" to Esau's hunting bow and Jacob's bow of war, and see how Israel described God in the storm as an archer whose arrows are lightning (Psalm 18, Habakkuk 3, Lamentations 2). We look at who the sign is really for, \"I will look upon it, that I may remember\" (Genesis 9:16), at why God made the promise while naming the evil of the human heart (Genesis 8:21), and at how Babylon's bow in the sky compares with Genesis. Then we follow the bow to Ezekiel's vision of the throne, to Isaiah 54, and to the rainbow around the throne in Revelation 4.\n\nAll Scripture quotations are from the King James Version.\n\nIs there a dark cloud over your life right now? Share your thoughts in the comments, and subscribe for more studies beneath the verse.\n\n#Rainbow #BibleStudy #Genesis9\n\n00:00 God never said rainbow\n01:19 \"I do set my bow in the cloud\" (Genesis 9:13)\n02:11 Qeshet everywhere else in Genesis\n04:26 When did God ever use His bow?\n06:05 God the archer in the storm\n07:44 A weapon hung in the cloud\n09:04 Who is the sign really for? (Genesis 9:16)\n11:43 Ot: the sign no one else makes\n12:40 Why promise at all? (Genesis 8:21)\n14:37 Is the bow pointed at heaven?\n15:33 Babylon's bow in the sky\n17:44 How Jewish tradition read the bow\n19:44 The bow around the throne (Ezekiel 1)\n21:23 The rainbow in Revelation 4\n23:04 The Lamb at the center\n24:02 Stronger than the mountains (Isaiah 54)\n25:23 What the bow does not promise\n26:25 Pulling it together\n27:33 What this means for you",
   "tags": [],
   "seconds": 1790,
-  "views": 72087,
-  "likes": 1189,
+  "views": 72090,
+  "likes": 1190,
   "comments": 157,
   "thumbnail": "https://i.ytimg.com/vi/FEyv4xRoPzs/maxresdefault.jpg",
   "role": "winner"
@@ -918,6 +918,99 @@
   },
   {
    "video_id": "FEyv4xRoPzs",
+   "window_start_seconds": 900,
+   "window_end_seconds": 1200,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 900,
+     "text": "because the bow is about to show up somewhere you may not expect."
+    },
+    {
+     "start_seconds": 904.5,
+     "text": "Ezekiel chapter one."
+    },
+    {
+     "start_seconds": 946,
+     "text": "The prophet is among the exiles by the River Chebar,"
+    },
+    {
+     "start_seconds": 950,
+     "text": "far from Jerusalem,"
+    },
+    {
+     "start_seconds": 952.5,
+     "text": "far from the temple."
+    },
+    {
+     "start_seconds": 954.5,
+     "text": "And the heavens open."
+    },
+    {
+     "start_seconds": 955.5,
+     "text": "He sees a storm wind coming out of the north,"
+    },
+    {
+     "start_seconds": 958,
+     "text": "a great cloud, fire,"
+    },
+    {
+     "start_seconds": 990,
+     "text": "living..."
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 900,
+     "end_seconds": 946,
+     "beat": "transition",
+     "opening_words_verbatim": "because the bow is about to",
+     "content": "Transitioning the audience to a new passage in Ezekiel chapter one.",
+     "device": "suspense",
+     "emotion": "anticipation"
+    },
+    {
+     "start_seconds": 946,
+     "end_seconds": 1200,
+     "beat": "teaching",
+     "opening_words_verbatim": "The prophet is among the exiles",
+     "content": "Explaining Ezekiel's vision of the divine bow by the River Chebar.",
+     "device": "scriptural analysis",
+     "emotion": "reverence"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration",
+    "shot_sizes": [
+     "wide shot",
+     "close up",
+     "medium shot"
+    ],
+    "shots_counted": 12,
+    "motion": "slow pan and zoom",
+    "on_screen_text": "EZEKIEL 1.",
+    "figure_or_presenter": "Ezekiel the prophet",
+    "colour_and_light": "dramatic lighting, fiery storm clouds, earth tones",
+    "transitions": "fade or dissolve"
+   },
+   "sound": {
+    "voice": "male, narrative, calm and engaging",
+    "pace": "moderate",
+    "music": "ambient background score",
+    "music_changes": "builds up during storm descriptions",
+    "sound_effects": "none"
+   },
+   "scripture_references": [
+    "Ezekiel 1"
+   ],
+   "limitations": [
+    "Window ends mid-sentence at 1200 seconds as transcript data cuts off."
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "FEyv4xRoPzs",
    "window_start_seconds": 1200,
    "window_end_seconds": 1500,
    "audio_received": true,
@@ -1369,11 +1462,11 @@
   "chapters": 19,
   "likes_per_1k_views": 16.5,
   "comments_per_1k_views": 2.18,
-  "coverage_fraction": 0.832,
-  "beats": 30,
-  "beat_seconds_median": 39.5,
-  "beats_per_minute": 1.21,
-  "shots_per_minute_model_counted": 5.56,
+  "coverage_fraction": 1.0,
+  "beats": 32,
+  "beat_seconds_median": 42.5,
+  "beats_per_minute": 1.07,
+  "shots_per_minute_model_counted": 5.03,
   "first_spoken_beat": {
    "at": 0,
    "beat": "context"
@@ -1382,11 +1475,12 @@
    "hook": 1,
    "context": 2,
    "scripture": 6,
-   "teaching": 10,
+   "teaching": 11,
    "evidence": 2,
    "argument": 5,
    "objection": 1,
-   "application": 3
+   "application": 3,
+   "transition": 1
   },
   "scripture_references": [
    "Exodus 31:13",
@@ -1415,13 +1509,13 @@
    "Revelation 4:3",
    "Revelation 5"
   ],
-  "scripture_per_10_min": 10.07,
+  "scripture_per_10_min": 8.38,
   "speech": {
-   "words": 2111,
-   "words_per_minute": 85.0,
-   "sentence_words_median": 11,
+   "words": 2163,
+   "words_per_minute": 72.5,
+   "sentence_words_median": 11.0,
    "you_per_100_words": 0.9,
-   "questions_per_minute": 0.2,
+   "questions_per_minute": 0.17,
    "first_15s_words": "Noah steps out onto ground that is still soft from the water. Behind him stands the ark, empty now. He builds an altar. The smoke of the offering rises, and the text says the Lord smells it. Then God speaks, and he points to the cloud."
   }
  }
