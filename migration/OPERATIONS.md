@@ -25,6 +25,16 @@ Read this file first; do not re-read history, logs or whole evidence files.
 | 01:00 | render long + 5 Shorts + QA + watched review | runner render.yml / pilot-render-stills.yml |
 | 10:00 / 14:00 / 20:00 / 23:00 | long video, then 3 Shorts go public (publishAt) | publish.yml / publish-shorts.yml |
 
+## How publication starts (no Claude tools needed)
+Each pilot has `schedule.json` (`publish_at` plus `shorts_slots`, in UTC).
+
+1. A session reviews the render's inspection sheets.
+2. If they are clean, it writes `inspection/APPROVAL.json`: `approved`, the `output_sha256` from `out/qa.json`, `reviewed_at` and notes.
+3. It merges that file to main.
+4. The push triggers `publish.yml`. It checks the gates, uploads the video scheduled at `publish_at`, publishes the reviewed Shorts at their slots, and deletes the finished files.
+
+`git` push through the session proxy is enough to start this.
+
 ## Pipeline gates (never edited after results)
 1. **QA (frozen):** frozen criteria.
 2. **Long video:** perceptual approval (`inspection/APPROVAL.json` bound to the file hash).

@@ -1,5 +1,9 @@
 name: HeroVerse publish (validated video to the exact channel)
 on:
+  # recording a perceptual approval on main publishes that pilot at its scheduled time (no Claude tools needed)
+  push:
+    branches: [main]
+    paths: ['migration/production/*/inspection/APPROVAL.json']
   workflow_dispatch:
     inputs:
       pilot:
@@ -22,10 +26,27 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
-      PILOT: ${{ inputs.pilot }}
-      PUBLISH_AT: ${{ inputs.publish_at }}
+      INPUT_PILOT: ${{ inputs.pilot }}
+      INPUT_PUBLISH_AT: ${{ inputs.publish_at }}
+      EVENT: ${{ github.event_name }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 2
+      - name: Which pilot and when (push = the approval just recorded; schedule from schedule.json)
+        run: |
+          PILOT="$INPUT_PILOT"; PUBLISH_AT="$INPUT_PUBLISH_AT"
+          if [ "$EVENT" = push ]; then
+            PILOT=$(git diff --name-only HEAD~1 HEAD | sed -n 's#^migration/production/\(pilot-[0-9][0-9][0-9]\)/inspection/APPROVAL.json$#\1#p' | head -1)
+            test -n "$PILOT" || { echo "NO_APPROVAL_IN_PUSH"; exit 1; }
+          fi
+          echo "PILOT=$PILOT" >> "$GITHUB_ENV"
+          sched="migration/production/${PILOT}/schedule.json"
+          if [ -z "$PUBLISH_AT" ] && [ -f "$sched" ]; then
+            at=$(python3 -I -c "import json,sys,datetime as d;s=json.load(open(sys.argv[1]));t=s.get('publish_at');print(t if t and d.datetime.fromisoformat(t.replace('Z','+00:00'))>d.datetime.now(d.timezone.utc)+d.timedelta(minutes=20) else '')" "$sched")
+            PUBLISH_AT="$at"
+          fi
+          echo "PUBLISH_AT=$PUBLISH_AT" >> "$GITHUB_ENV"
       - name: Gates (QA PASS and recorded perceptual approval of this exact file)
         run: |
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
@@ -59,6 +80,31 @@ jobs:
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_video.py "$d/out/package.json" "$d/out/manifest.json" \
             "$RUNNER_TEMP/video.mp4" "$RUNNER_TEMP/thumbnail.jpg" migration/publish/ledger.json \
             "migration/publish/receipts/$PILOT-$GITHUB_RUN_ID.json" $PUBLISH_AT
+      - name: Shorts of this pilot (approved by the watched review), each at its slot
+        if: hashFiles(format('migration/production/{0}/shorts/shorts.json', env.PILOT)) != ''
+        continue-on-error: true
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          d="migration/production/$PILOT"
+          slots=$(python3 -I -c "import json,sys;print(','.join(json.load(open(sys.argv[1])).get('shorts_slots',[])))" "$d/schedule.json" 2>/dev/null || true)
+          test -n "$slots" || { echo "NO_SHORTS_SLOTS"; exit 0; }
+          sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          mkdir -p "$RUNNER_TEMP/shorts"
+          python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts'] if s.get('publish')]" "$d/shorts/shorts.json" |
+          while read -r f sha; do
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-${f%.mp4}-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
+            echo "$sha  $RUNNER_TEMP/shorts/$f" | sha256sum -c -
+          done
+          key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/manifest.json")"
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_shorts.py "$d/shorts/shorts.json" "$RUNNER_TEMP/shorts" "$key" \
+            migration/publish/ledger.json "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" "$slots"
+          python3 -I -c "import json,sys;[print(x['file'],x['upload_status']) for x in json.load(open(sys.argv[1]))['shorts']]" "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" |
+          while read -r f st; do
+            case "$st" in uploaded|processed) ;; *) continue;; esac
+            sha=$(python3 -I -c "import json,sys;print(next(s['sha256'] for s in json.load(open(sys.argv[1]))['shorts'] if s['file']==sys.argv[2]))" "$d/shorts/shorts.json" "$f")
+            gh release delete-asset "$TAG" "$PILOT-${f%.mp4}-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" -y || true
+          done
       - name: Delete the finished video from the private release (owner rule; YouTube now holds it)
         run: |
           r="migration/publish/receipts/$PILOT-$GITHUB_RUN_ID.json"
