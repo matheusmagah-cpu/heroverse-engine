@@ -18,6 +18,7 @@ def chapters_from_script(script, timeline):
     """Chapters at every scripture anchor plus the opening, prayer and blessing turns."""
     named = {"hook": "Good morning", "transition": "Let us pray", "declaration": "Declaration for today",
              "payoff": "One thing to do today", "blessing": "Blessing"}
+    named.update({s["id"]: s["chapter"] for s in script["segments"] if s.get("chapter")})  # the script's own chapter names win
     refs = {s["id"]: s["reference"].replace(" (KJV)", "") for s in script["segments"] if s.get("reference")}
     rows = []
     for seg in timeline:
@@ -50,8 +51,8 @@ def main(work, script_path, out_dir):
     title = script["working_title"]
     v2 = manifest.get("version") == "pilot-manifest-v2"
     credits = "\n".join("• " + c["attribution"] for c in manifest["clips"])
-    visuals = (["Illustrations: original HeroVerse images made with an open-weight AI image model "
-                "(Stable Diffusion XL, CreativeML Open RAIL++-M)."] if v2 else
+    visuals = ([script.get("visual_credit") or "Illustrations: original HeroVerse images made with open-licence AI image "
+                "models (FLUX.1 schnell, Apache-2.0; Stable Diffusion XL, CreativeML Open RAIL++-M)."] if v2 else
                ["Footage credits (Creative Commons Attribution, picture only):", credits])
     description = "\n".join([
         script.get("description_intro") or (
@@ -63,18 +64,24 @@ def main(work, script_path, out_dir):
         *(chapters_from_script(script, manifest["timeline"]) if any(s.get("reference") for s in script["segments"])
           else chapters(manifest["timeline"])),
         "",
+        *(["Scripture in this prayer: " + "; ".join(dict.fromkeys(
+            s["reference"].replace(" (KJV)", "") for s in script["segments"] if s.get("reference"))), ""]
+          if script.get("description_intro") else []),
         "Scripture quotations: King James Version (public domain).",
         "Narration and music: original HeroVerse productions.",
         "",
         *visuals,
+        *(["", " ".join(script["hashtags"])] if script.get("hashtags") else []),
     ])
     tags = script.get("tags") or ["morning prayer", "prayer for peace", "prayer for courage", "christian morning prayer",
             "start your day with God", "God goes before you", "Deuteronomy 31:8", "HeroVerse"]
     thumb = out / "thumbnail.jpg"
     if v2:  # figure over its first background, text stacked on the free right side
         source = ["-i", str(work / "frames" / "001.png")]
-        lines = [("GOD WENT", 100, "white", "h*0.22"), ("FIRST", 100, "white", "h*0.22+115"),
-                 ("Morning Prayer", 58, "0xFFE7A3", "h*0.22+245")]
+        th = script.get("thumbnail") or {"lines": ["GOD WENT", "FIRST"], "sub": "Morning Prayer"}
+        fit = lambda t, top: min(top, int(560 / (0.72 * max(len(t), 1))))  # keep every line inside the 620 px text column
+        lines = [(t, fit(t, 100), "white", f"h*0.22+{115 * i}") for i, t in enumerate(th["lines"])]
+        lines.append((th["sub"], fit(th["sub"], 58), "0xFFE7A3", f"h*0.22+{115 * len(th['lines']) + 15}"))
         x_text = "640+(620-text_w)/2"
     else:
         first_shot = manifest["shots"][0]
@@ -94,7 +101,7 @@ def main(work, script_path, out_dir):
                "ai_generated_visuals": v2,
                "altered_or_synthetic_disclosure": ("Stylized devotional illustrations, not realistic footage; review YouTube's "
                                                    "altered-content setting at upload") if v2 else None,
-               "promise_matches_opening": "Title promise 'God has already gone ahead of you' is spoken at 0-8 s.",
+               "promise_matches_opening": script.get("promise") or "Title promise 'God has already gone ahead of you' is spoken at 0-8 s.",
                "upload_performed": False, "publication_performed": False}
     (out / "package.json").write_text(json.dumps(package, indent=1, ensure_ascii=False) + "\n")
     print(json.dumps({"title": title, "chars": len(title), "clips_credited": len(manifest["clips"])}))

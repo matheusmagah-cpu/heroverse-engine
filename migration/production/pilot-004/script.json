@@ -1,0 +1,396 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-004",
+ "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+ "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "working_title": "Night Prayer Before Sleep | Give God Your Worries, Rest in His Peace",
+ "promise": "Title promise 'give God your worries and rest in his peace' is spoken at 0-8 s.",
+ "angle": "For the listener whose body is tired but whose mind will not stop: cast every care on the God who never sleeps, receive forgiveness, and lie down in peace.",
+ "authorship": "Original text written for HeroVerse by Claude Code (AI assistant) on 2026-10-18. Scripture quotations are from the King James Version (public domain).",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "beat": "0-8 s: direct address, concrete moment, promise",
+   "pause_after": 0.8,
+   "text": "Good evening. If your body is tired but your mind will not stop, stay with me for the next few minutes. Before you sleep tonight, you can hand every worry to God and rest in his peace. Take one slow breath with me."
+  },
+  {
+   "id": "invitation",
+   "beat": "8-30 s: settle the body, name the need",
+   "pause_after": 1.2,
+   "text": "Let your head sink into the pillow. Let your jaw relax, and your shoulders, and your hands. The day is finished. Whatever was left undone can wait until morning. Right now you are invited to do only one thing: to rest in the presence of the God who never sleeps, so that you can."
+  },
+  {
+   "id": "scripture-1",
+   "beat": "anchor: Psalm 4:8",
+   "pause_after": 1.5,
+   "text": "King David wrote this at the end of a hard day. I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.",
+   "reference": "Psalm 4:8 (KJV)",
+   "chapter": "Lay me down in peace (Psalm 4:8)"
+  },
+  {
+   "id": "reflection-1",
+   "beat": "reflection: safety is his job tonight",
+   "pause_after": 1.2,
+   "text": "Notice who keeps David safe. Not the locks on the door. Not his own planning. Thou, Lord, only. Your safety tonight is not something you have to guard by staying awake. It is something God does for you while you sleep."
+  },
+  {
+   "id": "prayer-1",
+   "beat": "first guided prayer: arriving",
+   "pause_after": 1.2,
+   "text": "So let us pray. Lord, I come to you at the end of this day. You saw all of it, the good moments and the hard ones, the things I did well and the things I wish I could do again. I bring it all to you now. Quiet my heart, and let me lie down in your peace."
+  },
+  {
+   "id": "scripture-2",
+   "beat": "anchor: 1 Peter 5:7",
+   "pause_after": 1.5,
+   "text": "Casting all your care upon him; for he careth for you.",
+   "reference": "1 Peter 5:7 (KJV)",
+   "chapter": "Cast your cares (1 Peter 5:7)"
+  },
+  {
+   "id": "reflection-2",
+   "beat": "reflection: casting, not carrying",
+   "pause_after": 1.2,
+   "text": "To cast something is to throw it, to let it leave your hands. Not to set it down beside the bed so you can pick it up again at three in the morning. And the reason is the most tender line in the verse: for he careth for you. God is not tired of your worries. He wants them."
+  },
+  {
+   "id": "prayer-worries",
+   "beat": "guided prayer: naming the worries",
+   "pause_after": 1.2,
+   "text": "Father, I name my worries before you now. The one about money. The one about my health. The one about someone I love. The conversation that went badly. The thing I am afraid will happen tomorrow. One by one, I open my hands and give them to you. I cannot solve them tonight. You can hold them while I sleep."
+  },
+  {
+   "id": "scripture-3",
+   "beat": "anchor: Matthew 11:28-30",
+   "pause_after": 1.5,
+   "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls. For my yoke is easy, and my burden is light.",
+   "reference": "Matthew 11:28-30 (KJV)",
+   "chapter": "Rest for your soul (Matthew 11:28-30)"
+  },
+  {
+   "id": "reflection-3",
+   "beat": "reflection: rest for the soul, not only the body",
+   "pause_after": 1.2,
+   "text": "Jesus promises rest for your souls. Sleep can rest your body, but only he can rest the part of you that keeps running even when your eyes are closed. He is gentle and humble in heart. You do not have to perform for him tonight. You only have to come."
+  },
+  {
+   "id": "stillness",
+   "beat": "guided stillness: 2 breaths, music forward",
+   "pause_after": 6.0,
+   "text": "Let us be still. Breathe in slowly. And breathe out. Once more, breathe in, and let the whole day go."
+  },
+  {
+   "id": "transition",
+   "beat": "turn: examining the day with grace",
+   "pause_after": 1.5,
+   "text": "Now let us look back over this day with God, gently, and without fear.",
+   "chapter": "Looking back with God"
+  },
+  {
+   "id": "prayer-thanks",
+   "beat": "guided prayer: thanksgiving for the day",
+   "pause_after": 1.2,
+   "text": "Thank you, Lord, for the gifts of today. For food on the table, for the people who spoke kindly to me, for the work I could do, for every small mercy I did not even notice at the time. Thank you that I made it through. Even on the hardest days, you were with me in every hour."
+  },
+  {
+   "id": "prayer-confession",
+   "beat": "guided prayer: confession",
+   "pause_after": 1.2,
+   "text": "Father, I also bring you what I regret. The impatient word. The thing I should have done and did not. The moment I chose myself over someone else. I do not want to carry guilt into my sleep. I confess it to you honestly, and I receive your forgiveness."
+  },
+  {
+   "id": "scripture-4",
+   "beat": "anchor: 1 John 1:9",
+   "pause_after": 1.5,
+   "text": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.",
+   "reference": "1 John 1:9 (KJV)",
+   "chapter": "Forgiven tonight (1 John 1:9)"
+  },
+  {
+   "id": "reflection-4",
+   "beat": "reflection: a clean slate before sleep",
+   "pause_after": 1.2,
+   "text": "Faithful and just. God does not forgive you reluctantly. He forgives you because he promised he would, and he always keeps his promises. So tonight you can lay your head down clean. Tomorrow does not have to begin with yesterday's weight."
+  },
+  {
+   "id": "prayer-relationships",
+   "beat": "guided prayer: relationships and anger",
+   "pause_after": 1.2,
+   "text": "Lord, if there is anyone I am angry with tonight, help me to release it before I sleep. If I have hurt someone, show me how to make it right tomorrow. Soften my heart toward the people in my home. Let love, not resentment, be the last thing in my mind tonight."
+  },
+  {
+   "id": "scripture-5",
+   "beat": "anchor: Ephesians 4:26",
+   "pause_after": 1.5,
+   "text": "Be ye angry, and sin not: let not the sun go down upon your wrath.",
+   "reference": "Ephesians 4:26 (KJV)"
+  },
+  {
+   "id": "scripture-6",
+   "beat": "anchor: Psalm 121:3-4",
+   "pause_after": 1.5,
+   "text": "He will not suffer thy foot to be moved: he that keepeth thee will not slumber. Behold, he that keepeth Israel shall neither slumber nor sleep.",
+   "reference": "Psalm 121:3-4 (KJV)",
+   "chapter": "He never sleeps (Psalm 121:3-4)"
+  },
+  {
+   "id": "reflection-5",
+   "beat": "reflection: someone stays awake for you",
+   "pause_after": 1.2,
+   "text": "There is a quiet comfort in this. When you close your eyes, God does not close his. He keeps watch over you all night long. You can let go of control, because the One who holds the world is wide awake."
+  },
+  {
+   "id": "prayer-protection",
+   "beat": "guided prayer: protection through the night",
+   "pause_after": 1.2,
+   "text": "Lord, watch over me and my home tonight. Guard the doors and the windows. Protect every person sleeping under this roof, and those I love who are far away. Keep away every danger, every fear, and every harmful thing. Let your angels stand watch until morning."
+  },
+  {
+   "id": "scripture-7",
+   "beat": "anchor: Psalm 91:4-5",
+   "pause_after": 1.5,
+   "text": "He shall cover thee with his feathers, and under his wings shalt thou trust: his truth shall be thy shield and buckler. Thou shalt not be afraid for the terror by night; nor for the arrow that flieth by day.",
+   "reference": "Psalm 91:4-5 (KJV)",
+   "chapter": "Under his wings (Psalm 91:4-5)"
+  },
+  {
+   "id": "prayer-fear",
+   "beat": "guided prayer: fear in the dark",
+   "pause_after": 1.2,
+   "text": "Father, for anyone who feels afraid when the lights go out, I ask for your nearness. Calm the racing heart. Quiet the thoughts that grow louder in the dark. Let them feel covered, like a child under a warm blanket, safe under your wings."
+  },
+  {
+   "id": "scripture-8",
+   "beat": "anchor: Psalm 139:11-12",
+   "pause_after": 1.5,
+   "text": "If I say, Surely the darkness shall cover me; even the night shall be light about me. Yea, the darkness hideth not from thee; but the night shineth as the day: the darkness and the light are both alike to thee.",
+   "reference": "Psalm 139:11-12 (KJV)"
+  },
+  {
+   "id": "reflection-6",
+   "beat": "reflection: night is not dark to God",
+   "pause_after": 1.2,
+   "text": "To you the night may feel long and heavy. To God, it shines like the day. He sees you as clearly at midnight as he did at noon. Nothing that happens in the dark is hidden from him, and nothing in the dark can separate you from his love."
+  },
+  {
+   "id": "prayer-mind",
+   "beat": "guided prayer: the racing mind",
+   "pause_after": 1.2,
+   "text": "Lord, I give you my thoughts. When my mind starts replaying the day or rehearsing tomorrow, bring it back to you. Replace every anxious thought with a promise from your word. Let my last thoughts tonight be thoughts of your goodness."
+  },
+  {
+   "id": "scripture-9",
+   "beat": "anchor: John 14:27",
+   "pause_after": 1.5,
+   "text": "Jesus said, Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid.",
+   "reference": "John 14:27 (KJV)",
+   "chapter": "My peace I give you (John 14:27)"
+  },
+  {
+   "id": "prayer-body",
+   "beat": "guided prayer: the body and sleep",
+   "pause_after": 1.2,
+   "text": "Father, I give you my body. Heal what hurts. Ease the tension in my muscles. Slow my breathing and my heartbeat. Give me deep, restful sleep, the kind that truly restores. And if I wake in the night, let my first thought be of you, and help me to fall asleep again."
+  },
+  {
+   "id": "scripture-10",
+   "beat": "anchor: Proverbs 3:24",
+   "pause_after": 1.5,
+   "text": "When thou liest down, thou shalt not be afraid: yea, thou shalt lie down, and thy sleep shall be sweet.",
+   "reference": "Proverbs 3:24 (KJV)",
+   "chapter": "Sweet sleep (Proverbs 3:24)"
+  },
+  {
+   "id": "prayer-weary",
+   "beat": "guided prayer: the ones awake tonight",
+   "pause_after": 1.2,
+   "text": "And Lord, I pray for everyone who cannot sleep tonight. Those in hospital beds. Those working the night shift. Those sitting beside someone who is sick. Those grieving in a quiet house. Be close to each of them. Give them strength for the night and hope for the morning."
+  },
+  {
+   "id": "scripture-11",
+   "beat": "anchor: Psalm 30:5",
+   "pause_after": 1.5,
+   "text": "For his anger endureth but a moment; in his favour is life: weeping may endure for a night, but joy cometh in the morning.",
+   "reference": "Psalm 30:5 (KJV)"
+  },
+  {
+   "id": "reflection-7",
+   "beat": "reflection: the night is not the end",
+   "pause_after": 1.2,
+   "text": "Weeping may endure for a night. But the night is not the end. Joy comes in the morning. Whatever is heavy tonight, you do not have to resolve it before you sleep. God will meet you again when the sun rises."
+  },
+  {
+   "id": "prayer-family",
+   "beat": "guided prayer: the people I love",
+   "pause_after": 1.2,
+   "text": "Lord, I lift up the people I love before I sleep. My family, my friends, the ones who make my life richer and the ones I worry about most. Wherever they are tonight, cover them with your peace. Heal what is broken between us. Let each of them feel, even in their sleep, that they are deeply loved by you."
+  },
+  {
+   "id": "prayer-children",
+   "beat": "guided prayer: children",
+   "pause_after": 1.2,
+   "text": "Father, I pray for the children, ours and every child who will sleep tonight. Give them sweet dreams and safe rooms. Keep fear and nightmares far from them. Let them grow up knowing that you watch over them, every night of their lives."
+  },
+  {
+   "id": "prayer-provision",
+   "beat": "guided prayer: provision",
+   "pause_after": 1.2,
+   "text": "Lord, I give you the needs I lay awake thinking about. The bills, the rent, the job, the plans that depend on things I cannot control. You feed the birds of the air and clothe the lilies of the field. I trust you to provide for me tomorrow, as you have provided for me today."
+  },
+  {
+   "id": "prayer-grief",
+   "beat": "guided prayer: grief and loneliness",
+   "pause_after": 1.2,
+   "text": "And Father, for anyone who feels lonely in the quiet of the night, or who misses someone who is no longer beside them, draw near. Hold the empty space with them. Let them sense your presence in the room, closer than their own breath."
+  },
+  {
+   "id": "prayer-tomorrow",
+   "beat": "guided prayer: tomorrow in his hands",
+   "pause_after": 1.2,
+   "text": "Father, I place tomorrow in your hands. I do not know everything it will bring, but I know you will already be there. I will not worry about it tonight. When I wake, I will meet you there."
+  },
+  {
+   "id": "prayer-world",
+   "beat": "guided prayer: the world tonight",
+   "pause_after": 1.2,
+   "text": "Lord, as I rest in safety, I remember those who do not. People in places of war, families without a home tonight, refugees far from everything familiar. Protect them. Provide for them. Bring peace to the nations, and use me tomorrow to be part of your answer."
+  },
+  {
+   "id": "prayer-surrender",
+   "beat": "guided prayer: surrender before sleep",
+   "pause_after": 1.2,
+   "text": "And now, Father, I surrender this night to you. My plans, my fears, my hopes, my unfinished business. All of it is yours. I stop holding on. I let you hold me instead. Into your hands I commit my spirit, as I fall asleep."
+  },
+  {
+   "id": "scripture-12",
+   "beat": "anchor: Psalm 127:2",
+   "pause_after": 1.5,
+   "text": "It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep.",
+   "reference": "Psalm 127:2 (KJV)"
+  },
+  {
+   "id": "psalm-23",
+   "beat": "anchor: Psalm 23, read slowly",
+   "pause_after": 2.0,
+   "text": "Now let me read a psalm over you, slowly, as you rest. The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake. Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me. Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over. Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.",
+   "reference": "Psalm 23 (KJV)",
+   "chapter": "The Lord is my shepherd (Psalm 23)"
+  },
+  {
+   "id": "reflection-8",
+   "beat": "reflection: he makes me lie down",
+   "pause_after": 1.2,
+   "text": "He maketh me to lie down. The shepherd knows when the sheep need rest, even when they keep wandering. Tonight he is leading you beside still waters. Let him restore your soul while you sleep."
+  },
+  {
+   "id": "stillness-2",
+   "beat": "guided stillness: second breath",
+   "pause_after": 6.0,
+   "text": "Breathe in again, slowly. And let it out. Let your body grow heavy and still."
+  },
+  {
+   "id": "declaration",
+   "beat": "declaration: short lines to repeat",
+   "pause_after": 1.5,
+   "text": "Say these words with me quietly, as you rest. I am safe in God's hands. I am forgiven. I am loved. My worries belong to him tonight. He gives his beloved sleep, and I am his beloved.",
+   "chapter": "Declaration for tonight"
+  },
+  {
+   "id": "scripture-13",
+   "beat": "anchor: Psalm 63:6",
+   "pause_after": 1.5,
+   "text": "When I remember thee upon my bed, and meditate on thee in the night watches.",
+   "reference": "Psalm 63:6 (KJV)"
+  },
+  {
+   "id": "payoff",
+   "beat": "payoff: one concrete commitment for tonight",
+   "pause_after": 1.2,
+   "text": "Here is one thing to do tonight. If you wake up in the dark and a worry comes back, do not argue with it. Simply say, Lord, this is yours, and turn over and rest. He is awake. You can sleep.",
+   "chapter": "One thing to do tonight"
+  },
+  {
+   "id": "blessing",
+   "beat": "closing blessing",
+   "pause_after": 1.5,
+   "text": "And now receive this blessing as you sleep. Now the Lord of peace himself give you peace always by all means. The Lord be with you all. Sleep well, in the shelter of his love. In Jesus' name, amen.",
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "chapter": "Blessing"
+  },
+  {
+   "id": "cta",
+   "beat": "soft call to action after payoff",
+   "pause_after": 2.0,
+   "text": "If this prayer brought you peace, type amen in the comments, so others can pray with you. And join us again tomorrow night, to end the day with God."
+  }
+ ],
+ "figure": "figure-a",
+ "backgrounds": [
+  "bg-night-sky",
+  "bg-moon-lake",
+  "bg-candle",
+  "bg-starry-hills",
+  "bg-lamp-window",
+  "bg-night-garden",
+  "bg-window",
+  "bg-moonlit-sea",
+  "bg-quiet-chapel",
+  "bg-starry-forest",
+  "bg-dusk-field",
+  "bg-night-village",
+  "bg-lake",
+  "bg-first-light"
+ ],
+ "overlay": {
+  "title": "Rest in His Peace Tonight",
+  "subtitle": "NIGHT PRAYER",
+  "title_image": "bg-moon-lake",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "Tired body, racing mind? Give God every worry tonight and sleep in his peace. A calm night prayer with Scripture before sleep.",
+ "hashtags": [
+  "#prayer",
+  "#nightprayer",
+  "#jesus"
+ ],
+ "thumbnail": {
+  "lines": [
+   "SLEEP IN",
+   "HIS PEACE"
+  ],
+  "sub": "Night Prayer"
+ },
+ "tags": [
+  "night prayer",
+  "prayer before sleep",
+  "bedtime prayer",
+  "night prayer before sleep",
+  "prayer for peace",
+  "Psalm 4:8",
+  "prayer for anxiety",
+  "christian sleep prayer"
+ ],
+ "figure_choice": "figure-a: the channel's praying figure (frontal, hands folded), kept for brand continuity.",
+ "playlist": {
+  "title": "Night Prayer",
+  "description": "Calm night prayers with Scripture to end the day with God: peace, forgiveness, protection and restful sleep."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-night-sky",
+   "bg-moon-lake",
+   "bg-starry-hills",
+   "bg-starry-forest",
+   "bg-moonlit-sea"
+  ]
+ }
+}
