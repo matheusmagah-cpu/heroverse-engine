@@ -1,0 +1,122 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 16,
+    "picture_changes_per_minute": 23.96,
+    "median_shot_seconds": 2.033,
+    "longest_shot_seconds": 9.767,
+    "motion_median_top_decile_diff": 2.622
+   },
+   "rhythm": {
+    "audio_onsets": 70,
+    "audio_onsets_per_minute": 104.83,
+    "tempo": {
+     "bpm": 157.21,
+     "confidence": 0.071
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.375,
+     "chance_fraction": 0.11,
+     "lift": 3.41
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 6,
+     "visual_events": 16
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -15.6,
+    "loudness_range_lu": 4.3,
+    "true_peak_dbtp": -0.4
+   },
+   "colour": {
+    "mean_brightness": 0.3547,
+    "brightness_std_over_time": 0.0644,
+    "mean_saturation": 0.3326,
+    "saturation_std_over_time": 0.0939
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.916,
+     "singing": 0.0,
+     "music": 0.337,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 72,
+     "singing": 0,
+     "music": 11,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 100,
+    "words_per_minute": 149.8,
+    "transcript": "This morning, there is no need to pretend that we have everything figured out. We can simply come before God with an honest heart, and recognize one thing that remains true. We are still here, and that is already something worth thanking for. There were moments we could not see beyond. Situations that left us wondering what would happen next, and days when our strength seemed smaller than the responsibilities in front of us. Yet somehow we arrived at another morning. God, thank you for bringing us here. Thank you for the nights you carried us through, for the moment"
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 3.855,
+     "frames": 7
+    },
+    {
+     "label": "speech",
+     "start_seconds": 3.36,
+     "end_seconds": 22.575,
+     "frames": 39
+    },
+    {
+     "label": "music",
+     "start_seconds": 22.08,
+     "end_seconds": 23.055,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 22.56,
+     "end_seconds": 33.615,
+     "frames": 22
+    },
+    {
+     "label": "music",
+     "start_seconds": 33.12,
+     "end_seconds": 34.095,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 33.6,
+     "end_seconds": 38.895,
+     "frames": 10
+    },
+    {
+     "label": "music",
+     "start_seconds": 38.4,
+     "end_seconds": 39.855,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 39.36,
+     "end_seconds": 40.031,
+     "frames": 1
+    }
+   ]
+  }
+ ]
+}
