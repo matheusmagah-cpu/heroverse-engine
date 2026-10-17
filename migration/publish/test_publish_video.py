@@ -33,6 +33,7 @@ class FakeSession:
     def post(self, url, params=None, **kw):
         self.calls.append(("POST", url.split("/")[-1]))
         if params and params.get("uploadType") == "resumable":
+            self.upload_body = kw.get("json")
             return R(200, {}, {"Location": "https://upload/session"})
         if url.endswith("playlists"):
             return R(200, {"id": "PL1"})
@@ -63,6 +64,8 @@ class Publish(unittest.TestCase):
             first = FakeSession()
             receipt = self.run_once(d, first)
             self.assertEqual(receipt["video_id"], "VID123")
+            self.assertEqual(first.upload_body["status"]["privacyStatus"], "public")  # validated before upload
+            self.assertNotIn("publishAt", first.upload_body["status"])
             self.assertEqual(set(receipt["steps"]), {"thumbnail", "captions", "playlist"})
             second = FakeSession()
             self.run_once(d, second)

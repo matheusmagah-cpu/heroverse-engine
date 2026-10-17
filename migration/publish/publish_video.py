@@ -2,7 +2,9 @@
 """Publish one rendered HeroVerse video to the exact channel.
 
 Owner authorization 2026-10-17: automatic publication on HeroVerse
-(@heroverse74) once the pipeline is validated. Idempotent: ledger.json maps
+(@heroverse74) once the pipeline is validated. Owner rule: every validation
+runs BEFORE upload; a video goes up PUBLIC, or private with publishAt only
+when it is scheduled to open at a chosen hour. Idempotent: ledger.json maps
 publish_key -> video_id; an existing key is never uploaded again, the run only
 finishes missing steps. Steps: resumable videos.insert (private, or scheduled
 with publishAt) -> thumbnails.set -> captions.insert (SRT from the narration
@@ -82,10 +84,10 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
     if [c["id"] for c in check(s.get(API + "channels", params={"part": "id", "mine": "true"}), "CHANNEL")["items"]] != [CHANNEL]:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
     entry = ledger["entries"].get(key, {"steps": {}})
-    status = {"privacyStatus": "private", "selfDeclaredMadeForKids": False, "embeddable": True,
-              "license": "youtube", "publicStatsViewable": True, "containsSyntheticMedia": True}
+    status = {"privacyStatus": "private" if publish_at else "public", "selfDeclaredMadeForKids": False,
+              "embeddable": True, "license": "youtube", "publicStatsViewable": True, "containsSyntheticMedia": True}
     if publish_at:
-        status["publishAt"] = publish_at
+        status["publishAt"] = publish_at  # opens automatically at this time
     if "video_id" not in entry:
         body = {"snippet": {"title": package["title"], "description": package["description"], "tags": package["tags"],
                             "categoryId": package.get("category_id", "22"), "defaultLanguage": "en",
