@@ -88,7 +88,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
                           "qa": report})
             ledger["entries"][key] = entry
             ledger_path.write_text(json.dumps(ledger, indent=1) + "\n")  # durable before any further step
-        out.append({"key": key, "video_id": entry["video_id"], "url": f"https://youtube.com/shorts/{entry['video_id']}",
+        st = pv.check(s.get(pv.API + "videos", params={"part": "status", "id": entry["video_id"]}), "VERIFY")["items"][0]["status"]
+        out.append({"key": key, "file": short["file"], "upload_status": st.get("uploadStatus"), "video_id": entry["video_id"], "url": f"https://youtube.com/shorts/{entry['video_id']}",
                     "slot": entry["slot"], "title": title_for(short)})
     Path(receipt_path).write_text(json.dumps({"version": "shorts-receipt-v1", "long_video_id": long_id, "shorts": out,
                                               "verified_at": datetime.now(timezone.utc).isoformat()}, indent=1) + "\n")

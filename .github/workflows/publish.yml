@@ -59,6 +59,13 @@ jobs:
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_video.py "$d/out/package.json" "$d/out/manifest.json" \
             "$RUNNER_TEMP/video.mp4" "$RUNNER_TEMP/thumbnail.jpg" migration/publish/ledger.json \
             "migration/publish/receipts/$PILOT-$GITHUB_RUN_ID.json" $PUBLISH_AT
+      - name: Delete the finished video from the private release (owner rule; YouTube now holds it)
+        run: |
+          r="migration/publish/receipts/$PILOT-$GITHUB_RUN_ID.json"
+          st=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1])).get('upload_status'))" "$r")
+          case "$st" in uploaded|processed) ;; *) echo "UPLOAD_NOT_CONFIRMED ($st): file kept"; exit 0;; esac
+          sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "migration/production/$PILOT/out/qa.json")
+          gh release delete-asset "$TAG" "$PILOT-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" -y
       - name: Record ledger and receipt
         if: always()
         run: |
