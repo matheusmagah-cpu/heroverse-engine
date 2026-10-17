@@ -1,0 +1,133 @@
+{
+ "segments": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 15.655
+  },
+  {
+   "id": "invitation",
+   "start": 16.455,
+   "end": 42.431
+  },
+  {
+   "id": "scripture-1",
+   "start": 43.631,
+   "end": 60.095
+  },
+  {
+   "id": "reflection-1",
+   "start": 61.595,
+   "end": 84.081
+  },
+  {
+   "id": "scripture-2",
+   "start": 85.281,
+   "end": 99.335
+  },
+  {
+   "id": "reflection-2",
+   "start": 100.835,
+   "end": 122.331
+  },
+  {
+   "id": "scripture-3",
+   "start": 123.531,
+   "end": 140.836
+  },
+  {
+   "id": "reflection-3",
+   "start": 142.336,
+   "end": 170.263
+  },
+  {
+   "id": "stillness",
+   "start": 171.463,
+   "end": 181.645
+  },
+  {
+   "id": "transition",
+   "start": 187.645,
+   "end": 197.849
+  },
+  {
+   "id": "prayer-1",
+   "start": 199.349,
+   "end": 219.471
+  },
+  {
+   "id": "prayer-2",
+   "start": 220.671,
+   "end": 242.06
+  },
+  {
+   "id": "prayer-mind",
+   "start": 243.26,
+   "end": 266.987
+  },
+  {
+   "id": "prayer-decisions",
+   "start": 268.187,
+   "end": 292.361
+  },
+  {
+   "id": "prayer-3",
+   "start": 293.561,
+   "end": 313.692
+  },
+  {
+   "id": "prayer-4",
+   "start": 314.892,
+   "end": 336.507
+  },
+  {
+   "id": "prayer-provision",
+   "start": 337.707,
+   "end": 360.815
+  },
+  {
+   "id": "scripture-4",
+   "start": 362.015,
+   "end": 381.887
+  },
+  {
+   "id": "prayer-5",
+   "start": 383.387,
+   "end": 401.045
+  },
+  {
+   "id": "prayer-weary",
+   "start": 402.245,
+   "end": 429.909
+  },
+  {
+   "id": "declaration",
+   "start": 431.109,
+   "end": 451.6
+  },
+  {
+   "id": "scripture-5",
+   "start": 453.1,
+   "end": 467.473
+  },
+  {
+   "id": "payoff",
+   "start": 468.973,
+   "end": 488.284
+  },
+  {
+   "id": "blessing",
+   "start": 489.484,
+   "end": 506.993
+  },
+  {
+   "id": "cta",
+   "start": 508.493,
+   "end": 521.577
+  }
+ ],
+ "voice_seconds": 523.577,
+ "sample_rate": 24000,
+ "voice_id": "am_michael",
+ "speed": 0.95
+}
