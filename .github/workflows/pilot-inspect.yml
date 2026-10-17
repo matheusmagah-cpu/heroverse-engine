@@ -27,10 +27,7 @@ jobs:
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-sha256-$sha.mp4" -O pilot.mp4
           echo "$sha  pilot.mp4" | sha256sum -c -
           cd "$GITHUB_WORKSPACE"
-          python3 -I -c "
-          import json
-          m=json.load(open('migration/production/$PILOT/out/manifest.json'))
-          print('\n'.join(c['video_id'] for c in m['clips']))" > "$RUNNER_TEMP/clip_ids.txt"
+          python3 -I -c "import json,sys; [print(c['video_id']) for c in json.load(open(sys.argv[1]))['clips']]" "migration/production/$PILOT/out/manifest.json" > "$RUNNER_TEMP/clip_ids.txt"
           while read -r id; do gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "native-$id-60-100s-sha256-*.mp4" --dir "$RUNNER_TEMP/clips"; done < "$RUNNER_TEMP/clip_ids.txt"
           for id in htx4YZVYBVs 8EwPnMN22aQ 17uv62CEsBQ; do gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "native-$id-0-40s-sha256-*.mp4" --dir "$RUNNER_TEMP/refs"; done
       - name: Contact sheets, OCR and sharpness
