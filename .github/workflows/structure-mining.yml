@@ -18,7 +18,7 @@ jobs:
   mine:
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 170
+    timeout-minutes: 330
     env:
       CHANNELS: ${{ inputs.channels }}
       PER_CHANNEL: ${{ inputs.per_channel }}
