@@ -11,6 +11,12 @@ case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) echo "INVALID_PILOT"; exit 1;; esa
 T="${T:-${RUNNER_TEMP:-/tmp}}"; ROOT="$(pwd)"; QA_FAILED=""
 stage() { echo "::group::$1"; date -u +%H:%M:%S; }
 end() { echo "::endgroup::"; }
+# On the public runner (PUBLIC_LOGS=1) command output (titles, script text, hooks) goes to a private log
+# that is uploaded to the private release; the public log shows only stage names, times and pass/fail.
+LOG="$T/render-private.log"; : > "$LOG"
+q() { if [ "${PUBLIC_LOGS:-0}" = 1 ]; then "$@" >>"$LOG" 2>&1 || { for a in "$@"; do case "$a" in *.py) echo "FAILED: $(basename "$a")";; esac; done; return 1; }; else "$@"; fi; }
+upload_log() { [ "${PUBLIC_LOGS:-0}" = 1 ] && gh release upload "$TAG" "$LOG#$PILOT-render-log-${RUN_LABEL// /-}.txt" --repo "$ENGINE_REPO" --clobber >/dev/null 2>&1 || true; }
+trap upload_log EXIT
 
 stage "Free runner disk (unused preinstalled SDKs) and record space"
 sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL 2>/dev/null || true
@@ -31,8 +37,8 @@ export HERO_DEPTH_MODEL="$T/models/depth-anything-v2-small.onnx"
 end
 
 stage "Verified source, pinned voice model, narration"
-python3 -I -B migration/production/pilot_render.py prepare "$T/work" HeroVerse_Linux_Source_Ready_20261013_v2.zip
-"$T/voice/bin/python" -I -B migration/production/pilot_render.py voice "$T/work" "migration/production/$PILOT/script.json"
+q python3 -I -B migration/production/pilot_render.py prepare "$T/work" HeroVerse_Linux_Source_Ready_20261013_v2.zip
+q "$T/voice/bin/python" -I -B migration/production/pilot_render.py voice "$T/work" "migration/production/$PILOT/script.json"
 end
 
 stage "Owned music and generated images from the private release"
@@ -47,19 +53,19 @@ for meta in migration/production/$PILOT/images/*.json; do
   cp "$meta" "$T/in/img/$id.json"
 done
 fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "migration/production/$PILOT/script.json")
-"$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"
+q "$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"
 end
 
 stage "Assemble"
-"$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/work" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac"
+q "$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/work" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac"
 end
 
 df -h "$T" | tail -1
 stage "Shorts: analysis of the whole video, own edit per Short, watched review"
 mkdir -p "$T/work/shorts"
-( "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 5 &&
-  "$T/cine/bin/python" -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/work/shorts" "$HERO_DEPTH_MODEL" &&
-  "$T/cine/bin/python" -I -B migration/production/shorts_review.py "$T/work/shorts" 3 ) || echo "SHORTS_FAILED (the long video continues)"
+( q "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 5 &&
+  q "$T/cine/bin/python" -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/work/shorts" "$HERO_DEPTH_MODEL" &&
+  q "$T/cine/bin/python" -I -B migration/production/shorts_review.py "$T/work/shorts" 3 ) || echo "SHORTS_FAILED (the long video continues)"
 end
 
 stage "QA against frozen criteria"
@@ -69,13 +75,13 @@ stage "QA against frozen criteria"
   gh release download "$TAG" --repo "$ENGINE_REPO" --pattern HeroVerse_ASR_base_en_preservado.zip --clobber
   echo "78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb  HeroVerse_ASR_base_en_preservado.zip" | sha256sum -c -
   "$T/qa/bin/python" -I -c "import sys; from pathlib import Path; sys.path.insert(0, '$ROOT/migration'); import second_opening_asr as a; a.extract_model(Path('HeroVerse_ASR_base_en_preservado.zip'), Path('whisper'))" )
-"$T/qa/bin/python" -I -B migration/production/qa_pilot.py "$T/work/pilot.mp4" "$T/work/manifest.json" \
+q "$T/qa/bin/python" -I -B migration/production/qa_pilot.py "$T/work/pilot.mp4" "$T/work/manifest.json" \
   "migration/production/$PILOT/script.json" "migration/production/$PILOT/qa_criteria.json" \
   "$T/models/yamnet.tflite" "$T/models/whisper" "$T/work/qa.json" || QA_FAILED=1
 end
 
 stage "Package (no upload to YouTube) and inspection sheets"
-python3 -I -B migration/production/package_pilot.py "$T/work" "migration/production/$PILOT/script.json" "$T/work/package"
+q python3 -I -B migration/production/package_pilot.py "$T/work" "migration/production/$PILOT/script.json" "$T/work/package"
 mkdir -p "migration/production/$PILOT/inspection"
 d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$T/work/pilot.mp4")
 n=$(python3 -c "import math;print(math.ceil($d/20))")
