@@ -8,6 +8,7 @@ KAGGLE_API_TOKEN environment variable (GitHub secret); it is never written to
 disk inside the repository or printed.
 usage: kaggle_run.py whoami
        kaggle_run.py run JOB_SCRIPT PAYLOAD_JSON SLUG OUT_DIR [TIMEOUT_MIN] [DATASETS_CSV] [gpu|cpu]
+       kaggle_run.py collect SLUG OUT_DIR   (single status check; TIMEOUT_MIN 0 in run = launch only)
        kaggle_run.py dataset DIR SLUG TITLE   (private dataset in the owner's account: create or new version, wait until ready)
 
 Owner authorization 2026-10-17: production code and files may be sent to the
@@ -56,6 +57,8 @@ def run(job_script, payload_path, slug, out_dir, timeout_min=110, datasets="", a
             "dataset_sources": [f"{user}/{d}" if "/" not in d else d for d in datasets.split(",") if d],
             "competition_sources": [], "kernel_sources": []}))
         print(kaggle("kernels", "push", "-p", str(d)).strip()[-300:])
+    if timeout_min in (0, "0"):
+        return  # launch only; collect later with `collect`
     deadline = time.time() + float(timeout_min) * 60
     status = ""
     while time.time() < deadline:
@@ -75,6 +78,24 @@ def run(job_script, payload_path, slug, out_dir, timeout_min=110, datasets="", a
         print("KERNEL_LOG_TAIL\n" + text[-3000:].replace("KGAT_", "KGAT_***"))
     if "complete" not in status:
         raise SystemExit("KAGGLE_KERNEL_NOT_COMPLETE")
+
+
+def collect(slug, out_dir):
+    """One status check (no waiting). Prints RUNNING, COMPLETE or ERROR; downloads output when finished."""
+    user = username()
+    status = kaggle("kernels", "status", f"{user}/{slug}", check=False).lower()
+    state = "COMPLETE" if "complete" in status else "ERROR" if ("error" in status or "cancel" in status) else "RUNNING"
+    if state != "RUNNING":
+        Path(out_dir).mkdir(parents=True, exist_ok=True)
+        kaggle("kernels", "output", f"{user}/{slug}", "-p", str(out_dir), check=False)
+        for log in Path(out_dir).glob("*.log"):
+            try:
+                text = "".join(e.get("data", "") for e in json.loads(log.read_text()))
+            except ValueError:
+                text = log.read_text()
+            print("KERNEL_LOG_TAIL\n" + text[-3000:].replace("KGAT_", "KGAT_***"))
+    print(state)
+    return state
 
 
 def dataset(directory, slug, title):
@@ -100,6 +121,8 @@ def dataset(directory, slug, title):
 if __name__ == "__main__":
     if sys.argv[1] == "whoami":
         print(json.dumps({"kaggle_user": username()}))
+    elif sys.argv[1] == "collect":
+        collect(*sys.argv[2:4])
     elif sys.argv[1] == "dataset":
         dataset(*sys.argv[2:5])
     elif sys.argv[1] == "run":

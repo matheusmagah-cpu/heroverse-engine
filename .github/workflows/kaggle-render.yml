@@ -1,4 +1,4 @@
-name: HeroVerse production on Kaggle (voice, render, QA, Shorts) and evidence
+name: HeroVerse production on Kaggle - launch (voice, render, QA, Shorts)
 on:
   workflow_dispatch:
     inputs:
@@ -18,7 +18,7 @@ jobs:
   render:
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 240
+    timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
@@ -59,32 +59,22 @@ jobs:
           sudo apt-get install -y -qq fonts-dejavu-core >/dev/null && for f in /usr/share/fonts/truetype/dejavu/*.ttf; do cp "$f" "$d/font__$(basename "$f")"; done
           du -sh "$d"
           python3 -I -B migration/kaggle/kaggle_run.py dataset "$d" heroverse-assets "HeroVerse production assets"
-      - name: Produce on Kaggle
+      - name: Launch on Kaggle (no waiting; kaggle-collect.yml records the result)
         run: |
           printf '{"pilot": "%s", "shorts": %s}' "$PILOT" "$SHORTS" > "$RUNNER_TEMP/payload.json"
           python3 -I -B migration/kaggle/kaggle_run.py run migration/kaggle/job_render.py "$RUNNER_TEMP/payload.json" \
-            "heroverse-render-$PILOT" "$RUNNER_TEMP/kout" 220 heroverse-assets cpu
-          ls -la "$RUNNER_TEMP/kout/out" | head -30
-      - name: Preserve render privately and record evidence
-        run: |
-          o="$RUNNER_TEMP/kout/out"; dest="migration/production/$PILOT"
-          sha=$(sha256sum "$o/pilot.mp4" | cut -d' ' -f1)
-          cp "$o/pilot.mp4" "$RUNNER_TEMP/$PILOT-sha256-$sha.mp4"
-          gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
-          cp "$o/package/thumbnail.jpg" "$RUNNER_TEMP/$PILOT-thumbnail.jpg"
-          gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-thumbnail.jpg" --repo "$GITHUB_REPOSITORY" --clobber
-          for s in "$o"/shorts/short-*.mp4; do
-            ssha=$(sha256sum "$s" | cut -d' ' -f1); n=$(basename "$s" .mp4)
-            cp "$s" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4"
-            gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
-          done
-          mkdir -p "$dest/out" "$dest/inspection" "$dest/shorts"
-          cp "$o/manifest.json" "$o/timeline.json" "$o/captions.ass" "$o/qa.json" "$o/package/package.json" "$dest/out/"
-          cp "$o"/inspection/*.jpg "$dest/inspection/" && cp "$o/package/thumbnail.jpg" "$dest/inspection/thumbnail.jpg"
-          cp "$o/shorts/shorts.json" "$dest/shorts/" && cp "$o"/shorts/*.ass "$dest/shorts/" 2>/dev/null || true
+            "heroverse-render-$PILOT" "$RUNNER_TEMP/kout" 0 heroverse-assets cpu
+          python3 -I - <<'PY'
+          import json, os, pathlib, datetime
+          p = pathlib.Path("migration/kaggle/pending.json")
+          d = json.loads(p.read_text()) if p.exists() else {"version": "kaggle-pending-v1", "jobs": []}
+          d["jobs"] = [j for j in d["jobs"] if j["slug"] != f"heroverse-render-{os.environ['PILOT']}"]
+          d["jobs"].append({"slug": f"heroverse-render-{os.environ['PILOT']}", "pilot": os.environ["PILOT"], "kind": "render",
+                            "launched_at": datetime.datetime.now(datetime.timezone.utc).isoformat(), "run": os.environ["GITHUB_RUN_ID"]})
+          p.write_text(json.dumps(d, indent=1) + "\n")
+          PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$dest"
-          git commit -q -m "Record $PILOT Kaggle production: render, QA, package, Shorts, inspection (run $GITHUB_RUN_ID; not published)"
+          git add migration/kaggle/pending.json
+          git commit -q -m "Kaggle production launched for $PILOT (run $GITHUB_RUN_ID)"
           git pull --rebase -q origin main && git push -q origin HEAD:main
-          python3 -I -c "import json,sys;q=json.load(open(sys.argv[1]));print(q['status']);sys.exit(0 if q['status']=='PASS' else 1)" "$dest/out/qa.json"
