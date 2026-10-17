@@ -1,0 +1,105 @@
+name: "HeroVerse Shorts (private): Gemini selection, own edit per Short, watched review"
+# The public runner renders the long video without the Gemini key and hands off the narration and the figure
+# (shorts/inputs.json). This private job makes the Shorts from them: whole-video selection with per-Short hook and
+# title, vertical edit with depth parallax, shorts_qa and the watched review. Every Gemini step stays here.
+on:
+  push:
+    branches: [main]
+    paths: ['migration/production/*/shorts/inputs.json']
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory (e.g. pilot-002)
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-shorts
+  cancel-in-progress: false
+jobs:
+  shorts:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      INPUT_PILOT: ${{ inputs.pilot }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 2
+      - name: Pilot
+        run: |
+          PILOT="$INPUT_PILOT"
+          if [ -z "$PILOT" ]; then
+            PILOT=$(git diff --name-only HEAD~1 HEAD | sed -n 's#^migration/production/\(pilot-[0-9][0-9][0-9]\)/shorts/inputs.json$#\1#p' | head -1)
+          fi
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) echo "NO_PILOT"; exit 1;; esac
+          echo "PILOT=$PILOT" >> "$GITHUB_ENV"
+      - name: Tools, depth model, verified inputs (narration, figure, music, images)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core >/dev/null
+          python3 -m venv "$RUNNER_TEMP/cine"
+          "$RUNNER_TEMP/cine/bin/pip" install --disable-pip-version-check -q 'numpy==2.2.6' 'opencv-python-headless==4.10.0.84' 'onnxruntime==1.20.1'
+          T="$RUNNER_TEMP"; d="migration/production/$PILOT"; mkdir -p "$T/models" "$T/work/shorts" "$T/in/img"
+          curl -fsSL --retry 3 -o "$T/models/depth.onnx" https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx
+          if [ -f "$d/shorts/inputs.json" ]; then
+            read -r va vs fa fs < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['voice_asset'],m['voice_sha256'],m['figure_asset'],m['figure_sha256'])" "$d/shorts/inputs.json")
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$va" -O "$T/voice.flac"
+            echo "$vs  $T/voice.flac" | sha256sum -c -
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$fa" -O "$T/in/figure.png"
+            echo "$fs  $T/in/figure.png" | sha256sum -c -
+            ffmpeg -v error -y -i "$T/voice.flac" "$T/work/voice.wav"
+            cp "$d/out/timeline.json" "$T/work/timeline.json"
+          fi
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern original-rest-music.lossless.flac -O "$T/in/music.flac"
+          echo "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c  $T/in/music.flac" | sha256sum -c -
+          for meta in "$d"/images/*.json; do
+            id=$(basename "$meta" .json)
+            read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$T/in/img/$id.png"
+            echo "$sha  $T/in/img/$id.png" | sha256sum -c -
+            cp "$meta" "$T/in/img/$id.json"
+          done
+      - name: Narration and figure regenerated as in the render (only when the render handed off nothing)
+        if: hashFiles(format('migration/production/{0}/shorts/inputs.json', env.PILOT)) == ''
+        run: |
+          T="$RUNNER_TEMP"; d="migration/production/$PILOT"
+          sudo apt-get install -y -qq --no-install-recommends espeak-ng >/dev/null
+          python3 -m venv "$T/voice"; "$T/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
+          python3 -m venv "$T/cut"; "$T/cut/bin/pip" install --disable-pip-version-check -q 'rembg==2.0.59' 'onnxruntime==1.20.1' 'pillow==11.0.0'
+          python3 -I -B migration/production/pilot_render.py prepare "$T/work" HeroVerse_Linux_Source_Ready_20261013_v2.zip
+          "$T/voice/bin/python" -I -B migration/production/pilot_render.py voice "$T/work" "$d/script.json"
+          fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "$d/script.json")
+          "$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"
+      - name: Select (whole video, Gemini), produce (own edit, depth parallax), watched review
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: |
+          T="$RUNNER_TEMP"; d="migration/production/$PILOT"; py="$T/cine/bin/python"
+          $py -I -B migration/production/shorts_select.py "$T/work/timeline.json" "$d/script.json" "$T/work/shorts/selection.json" 5
+          $py -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "$d/script.json" "$T/in/img" \
+            "$T/in/figure.png" "$T/in/music.flac" "$T/work/shorts" "$T/models/depth.onnx"
+          $py -I -B migration/production/shorts_review.py "$T/work/shorts" 3
+      - name: Preserve privately and record
+        run: |
+          T="$RUNNER_TEMP"; d="migration/production/$PILOT/shorts"
+          rm -f "$d"/*-frame.jpg
+          for s in "$T"/work/shorts/short-*.mp4; do
+            ssha=$(sha256sum "$s" | cut -d' ' -f1); b=$(basename "$s" .mp4)
+            cp "$s" "$T/$PILOT-$b-sha256-$ssha.mp4"
+            gh release upload "$TAG" "$T/$PILOT-$b-sha256-$ssha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
+            ffmpeg -v error -y -ss 3 -i "$s" -frames:v 1 -vf scale=360:-1 "$d/$b-frame.jpg"
+          done
+          cp "$T/work/shorts/shorts.json" "$T/work/shorts/selection.json" "$d/"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A "$d"
+          git commit -q -m "Record $PILOT Shorts (private run $GITHUB_RUN_ID: selection, edit, watched review)" || exit 0
+          for i in 1 2 3 4; do
+            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true; sleep $((i * 5))
+          done
+          exit 1
