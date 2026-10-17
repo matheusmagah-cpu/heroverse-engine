@@ -1,0 +1,41 @@
+name: HeroVerse channel cleanup (hide Portuguese uploads, reversible)
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: plan (read-only list) or apply (set the reviewed plan's videos to private)
+        required: true
+        default: plan
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-official-evidence
+  cancel-in-progress: false
+jobs:
+  privacy:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      MODE: ${{ inputs.mode }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Plan or apply
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          case "$MODE" in
+            plan) "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/channel_privacy.py plan migration/channel/privacy-plan.json ;;
+            apply) test -f migration/channel/privacy-plan.json
+                   "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/channel_privacy.py apply migration/channel/privacy-plan.json "migration/channel/privacy-receipt-$GITHUB_RUN_ID.json" ;;
+            *) exit 1 ;;
+          esac
+      - name: Commit plan or receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/channel
+          git commit -q -m "Channel privacy $MODE (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
