@@ -57,14 +57,22 @@ Read this file first; do not re-read history, logs or whole evidence files.
 - **Gemini free tier (no billing):** mining, Shorts selection/review, watched reviews.
 - **YouTube Data API (10k units/day, resets 07:00 UTC):** panel 2,400 (half of the queries each day, alternating); packaging mining 500 (Sundays); long video ~2,100 (upload 1,600 + captions 400 + thumbnail/playlist); each Short ~1,650. A normal day: panel + 1 long + 3 Shorts = 9,450. Uploads go after the 07:00 UTC reset when the day's units are spent. A second Google Cloud project's API key for the public reads (panel, packaging) would free the whole 10k for uploads.
 
-## Daily schedule (UTC; BRT = UTC-3)
+## Daily schedule (UTC; BRT = UTC-3) — the nightly chain runs without Claude
 | UTC | What | Where |
 |---|---|---|
-| 07:17 | market panel + model + forecast scoring + daily intel | market-panel.yml |
-| 08:05 | hide remaining Portuguese uploads (no-op when done) | channel-privacy.yml (cron) |
-| 00:30 | images for next day's scripts | cf-images.yml (to automate) |
-| 01:00 | render long + 5 Shorts + QA + watched review | runner render.yml / pilot-render-stills.yml |
-| 10:00 / 14:00 / 20:00 / 23:00 | long video, then 3 Shorts go public (publishAt) | publish.yml / publish-shorts.yml |
+| 00:20 Mon | 12 native windows of the latest structure mining, then accuracy.json | mining-accuracy.yml → acquire-reference-window.yml |
+| 00:30 | missing images of pilots publishing in the next 72 h (FLUX + 2x upscale) | nightly-images.yml → cf-images.yml |
+| 01:00, 03:30 | next pilot of the queue (publishes ≤ 48 h, images complete, no render of this script): long video, QA; Shorts handed off | heroverse-runner render.yml (render_queue.py) |
+| after each render | Shorts: Gemini selection, own edit, watched review | shorts.yml (on shorts/inputs.json) |
+| after each render | approval gates: QA, preflight, same-instrument scorecard, watched review → APPROVAL.json → publish at schedule.json | approve.yml → publish.yml |
+| 07:17 | market panel (2,400 units, alternating queries) + model + forecast + daily intel | market-panel.yml |
+| 07:35 | approved Shorts not yet on YouTube, at their slots | publish-shorts.yml (pending_shorts.py) |
+| 07:50 Sun | packaging mining (titles, tags, thumbnails, channel setup; 3 adjacent niches) | packaging-mining.yml |
+| 08:05 | hide remaining Portuguese uploads | channel-privacy.yml |
+| 08:30 Sun | structure mining of migration/mining/structure_channels.txt | structure-mining.yml |
+| schedule.json | long video at publish_at; Shorts at shorts_slots (BRT 07:00 morning, 21:00 night) | YouTube publishAt |
+
+Claude's part: write the next scripts (2 per day: morning + night prayer) with schedule.json and images.json, at least 2 days ahead, and read the daily report. Scheduled workflows of the public runner stop after 60 days without a commit there.
 
 ## How publication starts (no Claude tools needed)
 Each pilot has `schedule.json` (`publish_at` plus `shorts_slots`, in UTC).
@@ -88,15 +96,8 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 4. **After publication:** the finished files are deleted from the release once YouTube confirms the upload.
 
 ## Status
-- **pilot-002:** cinematic render running on heroverse-runner (run 39062600672, from 19:28 UTC 2026-10-17; private run 39058782907 cancelled). The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT (decide by 08:30 UTC). If the Shorts come back `NOT_REVIEWED_NO_KEY`, run the review privately.
-- **Mining (`evidence/structure-mining/20261017`, measured in `measured.json`):**
-  - Teaching: 4 channels, done.
-  - Prayer (run 39060108443): United Prayer is off-format now (non-English livestreams, no narration), excluded by the < 40 wpm rule. Prayer of Hope's ~1 h videos mostly fall under 90% coverage. Usable prayer winners: 2 (Morning Grace).
-  - Grace & Glory is excluded (borrowed identity/recordings).
-  - Accuracy check: the 12 windows were refused by the RapidAPI daily cap (30 jobs, spent on 2026-10-17); re-request after 00:00 UTC.
-- **Secrets:** `HERO_GEMINI_API_KEY` in heroverse-engine; `HERO_ENGINE_PAT` in heroverse-runner (checkout works); the runner's Gemini key is unknown. Keep every Gemini step in the private repo.
-- **Render path:** the runner is the heavy-render extra; private `pilot-render-stills.yml` is the fallback. Goal: long video plus Shorts in ~40 private runner-minutes (depth parallax on the opening and Shorts only, reuse voice/images when the script hash is unchanged, single-pass assembly), from run 39058782907/39062600672 stage timings.
-- **Next:**
-  1. Modeling spec (`strategy/MODELING_SPEC.md`).
-  2. Scripts.
-  3. Automate the daily chain.
+- **Published:** pilot-002 (v4zN53ZiUIs) opens 2026-10-18 10:00 UTC; its Shorts were re-made privately with the review fixes and publish at 07:35 UTC if they pass.
+- **Next videos:** pilot-003 (morning prayer, strength) 2026-10-19 10:00 UTC; pilot-004 (night prayer, sleep) 2026-10-20 00:00 UTC. Scripts, images.json, schedule.json in place; images generated 2026-10-18 ~00:00 UTC; renders by the nightly chain.
+- **Spec:** strategy/MODELING_SPEC.md (measured targets, scorecard, policy). Teaching format needs its own frozen QA criteria before its first render.
+- **Mining:** structure 20261017 (+ prayer); accuracy check automated weekly (first windows requested 2026-10-18); packaging mining weekly.
+- **Quota:** YouTube may count uploads and searches separately since 2026-06 (secondary sources; official page unreachable from the session). Until confirmed, the panel stays at 2,400 units. Never split the project to get more quota (sharding is prohibited by the YouTube Developer Policies); more quota only through the API Compliance Audit.

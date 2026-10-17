@@ -1,0 +1,28 @@
+name: HeroVerse nightly images (pilots publishing in the next 72 h)
+# 00:30 UTC, after the Cloudflare Workers AI allocation resets (00:00 UTC): every due pilot whose script uses an
+# image without a record gets its images (FLUX + 2x upscale, cf-images.yml). The runner renders from 01:00 UTC.
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  images:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch image generation for each due pilot
+        run: |
+          python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json images 72 > "$RUNNER_TEMP/due"
+          [ -s "$RUNNER_TEMP/due" ] || { echo "NO_IMAGES_NEEDED"; exit 0; }
+          while read -r p ids; do
+            echo "IMAGES $p $ids"
+            gh workflow run cf-images.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$p" -f engine=flux -f only="$ids"
+            sleep 20
+          done < "$RUNNER_TEMP/due"

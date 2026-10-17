@@ -7,6 +7,7 @@ on:
         required: true
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: heroverse-pilot-render
   cancel-in-progress: false
@@ -28,3 +29,6 @@ jobs:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
           RUN_LABEL: run ${{ github.run_id }}
         run: bash migration/ci/render_pilot.sh
+      - name: Approval gates (a push made with this job's token does not start workflows)
+        if: success()
+        run: gh workflow run approve.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$PILOT"

@@ -7,6 +7,7 @@ on:
         required: true
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: heroverse-official-evidence
   cancel-in-progress: false
@@ -42,3 +43,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           bash migration/acquisition/run_batch.sh "$WINDOWS"
+      - name: Compare with the mining (a push made with this job's token does not start workflows)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run mining-accuracy.yml --repo "$GITHUB_REPOSITORY" --ref main -f mode=compare

@@ -84,14 +84,31 @@ This format needs its own frozen QA criteria before its first render (the prayer
 
 ## 3. Same-instrument scorecard (gate before approval)
 
-Our render is mined with the **same miner and the same model** as the references (`structure_mining.py`, Gemini Files API, free tier), and `blueprint_stats.py` computes the same measured fields. Approval needs all of the following:
+Our render is mined with the **same miner and the same model** as the references, and measured with the same code:
 
-- Every row of the format's table inside its target band.
-- Hook promise spoken by 8 s; first word ≤ 0.5 s.
-- Beat order matching the phase map above (the miner's beat labels by phase).
-- Scripture density ≥ target, and every reference present in the script.
-- Watched review of the long video (Gemini, rubric as for the Shorts: every item ≥ 7, overall ≥ 8).
+- **Miner:** `structure_mining.py` prompt, schema and free models.
+- **Video source:** the Gemini Files API instead of a YouTube URL.
+- **Measurement:** `structure_mining.measured`, then `long_review.py` and `approve.yml`.
+
+**Hard rows (block approval):**
 - Frozen QA PASS (never edited after results).
+- Preflight PASS (YouTube limits, thumbnail, schedule, captions, units).
+- Length 10:01–25:00.
+- Words per minute 115–165.
+- First spoken beat ≤ 1.5 s.
+- Scripture ≥ 4 per 10 min.
+- Mining coverage ≥ 90%.
+- **Watched review of the long video** (free Gemini, the whole video with audio): every item ≥ 7 and overall ≥ 8. Items:
+  - opening and promise;
+  - picture quality;
+  - figure and background integrity;
+  - captions;
+  - audio mix;
+  - pacing and visual variety;
+  - scripture on screen;
+  - policy.
+
+**Reported rows** (against the winners' bands in section 1, written to `out/review.json`): words per minute 140–160, beats per minute 2.0–2.6, shots per minute ≥ 6, "you" ≥ 6 per 100 words, length 15–20 min. They turn into hard rows once the accuracy check shows the miner's beat and shot counts agree with native audio and pictures.
 
 ## 4. Policy exclusions (never modelled or copied)
 
