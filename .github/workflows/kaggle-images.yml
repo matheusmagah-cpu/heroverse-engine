@@ -1,0 +1,61 @@
+name: HeroVerse images on Kaggle GPU (private kernel)
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory with images.json (e.g. pilot-002)
+        required: true
+      only:
+        description: Optional comma-separated image ids; empty = all
+        required: false
+        default: ''
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-kaggle
+  cancel-in-progress: false
+jobs:
+  images:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+      ONLY: ${{ inputs.only }}
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Kaggle client and identity
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          test -n "$KAGGLE_API_TOKEN" || { echo "KAGGLE_SECRET_MISSING"; exit 1; }
+          python3 -m venv "$RUNNER_TEMP/k" && "$RUNNER_TEMP/k/bin/pip" install -q --disable-pip-version-check 'kaggle>=1.7'
+          "$RUNNER_TEMP/k/bin/pip" show kaggle | head -2
+          PATH="$RUNNER_TEMP/k/bin:$PATH" "$RUNNER_TEMP/k/bin/python" -I -B migration/kaggle/kaggle_run.py whoami
+      - name: Generate on Kaggle GPU
+        run: |
+          python3 -I -c "import json,os,sys;s=json.load(open(sys.argv[1]));s['only']=[x for x in os.environ.get('ONLY','').split(',') if x];json.dump(s,open(sys.argv[2],'w'))" \
+            "migration/production/$PILOT/images.json" "$RUNNER_TEMP/payload.json"
+          PATH="$RUNNER_TEMP/k/bin:$PATH" "$RUNNER_TEMP/k/bin/python" -I -B migration/kaggle/kaggle_run.py run \
+            migration/kaggle/job_imagegen.py "$RUNNER_TEMP/payload.json" heroverse-imagegen "$RUNNER_TEMP/kout" 100
+          ls -la "$RUNNER_TEMP/kout" "$RUNNER_TEMP/kout/img" | head -40
+      - name: Release assets, metadata and review sheet
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg
+          dest="migration/production/$PILOT/images"; mkdir -p "$dest"
+          cd "$RUNNER_TEMP/kout/img"
+          for png in *.png; do
+            id="${png%.png}"; sha=$(sha256sum "$png" | cut -d' ' -f1)
+            asset="$PILOT-img-$id-sha256-$sha.png"; cp "$png" "$asset"
+            gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" --clobber
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json"
+          done
+          ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/kout/img/*.png" -vf "scale=448:256,tile=4x$(( ( $(ls $RUNNER_TEMP/kout/img/*.png | wc -l) + 3 ) / 4 ))" -frames:v 1 -q:v 4 "$GITHUB_WORKSPACE/$dest/review-sheet.jpg"
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dest"
+          git commit -q -m "Record $PILOT generated images on Kaggle GPU (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
