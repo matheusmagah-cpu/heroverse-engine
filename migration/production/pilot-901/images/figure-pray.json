@@ -1,0 +1,22 @@
+{
+ "id": "figure-pray",
+ "prompt": "Jesus Christ praying with hands folded at his chest, eyes closed, gentle peaceful expression, long brown hair and beard, cream robe with a brown sash, upper body portrait facing right, soft rim light, isolated on a plain light grey studio background, cinematic film still, anamorphic 35mm photography, shallow depth of field, volumetric golden-hour light, atmospheric haze, rich natural colour grading, highly detailed, photorealistic, award-winning cinematography",
+ "negative": null,
+ "seed": null,
+ "size": [
+  1024,
+  1024
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.6,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-901-img-figure-pray-sha256-98c30ada26fc2a4efe8971de08e0108faea8d71da4da624d42f49d428b6e07d2.png",
+ "sha256": "98c30ada26fc2a4efe8971de08e0108faea8d71da4da624d42f49d428b6e07d2"
+}

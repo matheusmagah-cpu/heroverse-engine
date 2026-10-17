@@ -1,0 +1,22 @@
+{
+ "id": "wide-valley",
+ "prompt": "extreme wide shot of a quiet green valley at sunrise, a winding river catching the first light, low mist between the hills, a lone tree in the foreground, no people, cinematic film still, anamorphic 35mm photography, shallow depth of field, volumetric golden-hour light, atmospheric haze, rich natural colour grading, highly detailed, photorealistic, award-winning cinematography",
+ "negative": null,
+ "seed": null,
+ "size": [
+  1024,
+  1024
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.6,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-901-img-wide-valley-sha256-0bb217fd088705a41aa31478be55d23bd0cca5563045db36bbe2a33c2e1e7917.png",
+ "sha256": "0bb217fd088705a41aa31478be55d23bd0cca5563045db36bbe2a33c2e1e7917"
+}
