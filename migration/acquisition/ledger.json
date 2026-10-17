@@ -4,5 +4,17 @@
   "daily_job_cap": 6,
   "unit_floor": 100,
   "zero_cost_basis": "Provider quota headers must show the 500 unit/day free plan and the free-plans hard-limit header; GitHub Actions budget observed at US$0 with usage blocked.",
-  "claims": []
+  "claims": [
+    {
+      "request_id": "acq-BeFOHnncaeQ-120-160-v1",
+      "video_id": "BeFOHnncaeQ",
+      "start_seconds": 120,
+      "end_seconds": 160,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-17T02:40:46.645897+00:00",
+      "day_utc": "2026-10-17",
+      "units_remaining_at_reservation": 500,
+      "reserved_units": 14
+    }
+  ]
 }
