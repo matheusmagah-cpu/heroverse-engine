@@ -1,5 +1,7 @@
 name: HeroVerse channel cleanup (hide Portuguese uploads, reversible)
 on:
+  schedule:
+    - cron: '5 8 * * *'   # daily after the Data API quota reset: hides what is left of the reviewed plan, then no-op
   workflow_dispatch:
     inputs:
       mode:
@@ -21,8 +23,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
-      MODE: ${{ inputs.mode }}
-      MAX_CHANGES: ${{ inputs.max_changes }}
+      MODE: ${{ inputs.mode || 'apply' }}
+      MAX_CHANGES: ${{ inputs.max_changes || '60' }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Plan or apply
@@ -42,5 +44,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add migration/channel
-          git commit -q -m "Channel privacy $MODE (run $GITHUB_RUN_ID)"
+          git commit -q -m "Channel privacy $MODE (run $GITHUB_RUN_ID)" || exit 0
           git pull --rebase -q origin main && git push -q origin HEAD:main
