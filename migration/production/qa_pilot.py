@@ -76,6 +76,7 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
         c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
     checks["music_owned"] = manifest["music"]["sha256"] == OWNED_MUSIC_SHA256
     checks["voice_model_pinned"] = manifest["voice"]["voice_id"] == "am_michael"
+    checks = {k: bool(v) for k, v in checks.items()}  # numpy bools are not JSON serializable
     result = {"version": "pilot-qa-v1", "pilot_id": manifest["pilot_id"], "output_sha256": manifest["output_sha256"],
               "status": "PASS" if all(checks.values()) else "FAIL", "checks": checks,
               "measurements": {"duration_seconds": round(duration, 2), "loudness": loud,

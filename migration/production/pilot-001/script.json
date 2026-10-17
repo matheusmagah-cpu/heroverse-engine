@@ -8,7 +8,7 @@
   "voice": {
     "engine": "Kokoro v1.0 (preserved, hash-pinned)",
     "voice_id": "am_michael",
-    "speed": 0.95
+    "speed": 0.85
   },
   "segments": [
     {
@@ -142,6 +142,12 @@
       "beat": "anchor: Proverbs 3:5-6",
       "pause_after": 1.5,
       "text": "Carry one more promise with you into the next hour. Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."
+    },
+    {
+      "id": "reflection-4",
+      "beat": "reflection: acknowledge him in the small ways",
+      "pause_after": 1.2,
+      "text": "In all thy ways acknowledge him. Not only in the big decisions, but in the small ones that fill an ordinary day. When you sit down to work, acknowledge him. When you answer a difficult message, acknowledge him. When you feel the old worry return in the middle of the afternoon, acknowledge him. You do not need a long prayer for that. A quiet word is enough. Lord, you are here. Lord, lead me. And the promise is that he will direct your paths, one turn at a time, all the way to evening."
     },
     {
       "id": "payoff",
