@@ -1,8 +1,6 @@
 name: HeroVerse Kaggle collect (record finished productions)
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '23 */2 * * *'
 permissions:
   contents: write
 concurrency:
