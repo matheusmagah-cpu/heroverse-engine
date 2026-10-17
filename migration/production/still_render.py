@@ -285,7 +285,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
         # 2) segment i = tail of the previous move cross-faded into the start of this one
         def segment(i):
             out = clips / f"{i:03d}.mp4"
-            common = ["-c:v", "libx264", "-preset", "ultrafast", "-crf", "12", "-r", "30", "-pix_fmt", "yuv420p",
+            common = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-r", "30", "-pix_fmt", "yuv420p",
                       "-video_track_timescale", "15360", "-threads", "2"]
             if i == 0:
                 run(["ffmpeg", "-v", "error", "-y", "-i", str(clips / "raw-000.mp4"), "-vf",
@@ -297,6 +297,8 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
             return f"file '{out}'"
         with ThreadPoolExecutor(max_workers=4) as pool:
             listing = list(pool.map(segment, range(len(plan))))
+        for raw_clip in clips.glob("raw-*.mp4"):  # every segment is built: free the disk before the final pass
+            raw_clip.unlink()
     else:
         def encode(i):
             out = clips / f"{i:03d}.mp4"

@@ -1,0 +1,39 @@
+# Copy of the ONLY file of the public repository matheusmagah-cpu/heroverse-runner
+# (path there: .github/workflows/render.yml). It holds no code: it checks out the
+# private engine with a fine-grained token and runs migration/ci/render_pilot.sh.
+# Public repositories get standard runners with more CPU and no monthly minute cap.
+name: HeroVerse render (execution runner)
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory in the private engine (e.g. pilot-002)
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-render
+  cancel-in-progress: false
+jobs:
+  render:
+    # only the owner can start it; forks and pull requests never receive the secrets
+    if: github.actor == 'matheusmagah-cpu' && github.repository == 'matheusmagah-cpu/heroverse-runner'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      GH_TOKEN: ${{ secrets.HERO_ENGINE_PAT }}
+      ENGINE_REPO: matheusmagah-cpu/heroverse-engine
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+      RUN_LABEL: runner ${{ github.run_id }}
+      OMP_NUM_THREADS: '4'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: matheusmagah-cpu/heroverse-engine
+          ref: main
+          token: ${{ secrets.HERO_ENGINE_PAT }}
+      - name: Render, Shorts, QA, package, record (writes back to the private engine)
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: bash migration/ci/render_pilot.sh

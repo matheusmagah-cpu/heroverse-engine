@@ -166,7 +166,7 @@ def frames(img, d, move, n, dust=None, fps=30, size=(W, H)):
 def parallax(image, depth_png, out, length, move, fps=30, dust=False, intermediate=True, size=(W, H)):
     img, d = load(image, depth_png, size)
     n = int(round(length * fps))
-    preset, crf = ("ultrafast", "12") if intermediate else ("veryfast", "18")
+    preset, crf = ("veryfast", "16") if intermediate else ("veryfast", "18")  # intermediates: near-transparent, ~15x smaller than ultrafast crf12
     p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{size[0]}x{size[1]}",
                           "-r", str(fps), "-i", "-", "-c:v", "libx264", "-preset", preset, "-crf", crf,
                           "-pix_fmt", "yuv420p", "-threads", "2", str(out)], stdin=subprocess.PIPE)

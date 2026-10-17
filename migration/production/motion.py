@@ -44,7 +44,7 @@ def render(image, out, length, motion, fps=30, extra_vf="", intermediate=False):
         vf = zoompan(motion, frames, fps)
     vf += (("," + extra_vf) if extra_vf else "") + f",trim=end_frame={frames},format=yuv420p"
     # intermediate clips are re-encoded later: fastest preset at near-lossless quality
-    preset, crf = ("ultrafast", "12") if intermediate else ("veryfast", "18")
+    preset, crf = ("veryfast", "16") if intermediate else ("veryfast", "18")  # intermediates: near-transparent, ~15x smaller than ultrafast crf12
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(image), "-vf", vf, "-c:v", "libx264", "-preset", preset,
                     "-crf", crf, "-r", str(fps), "-pix_fmt", "yuv420p", "-threads", "2", str(out)], check=True)
 
