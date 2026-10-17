@@ -54,3 +54,35 @@ Fast channels using these mechanisms are excluded as models:
 - mass loops.
 
 The retained mechanism is authored prayer and scripture content with varied visuals and an honest title/thumbnail.
+
+## Revision 2026-10-17 14:40 UTC: owner sets the target at 14 days (30 days is only the error margin)
+**Reason for the revision:** owner directive. The benchmark becomes the channels that crossed the proxy fastest, not the 30-day base rate. Source: the same panel `panel-20261017.json`.
+
+**Measured within ≤ 14 days of activity:**
+- 1 of 108 channels is over the proxy. It is a Shorts channel with 11.2M Shorts views in 10 days.
+- Long-form daily channels: 0 of 12 (Wilson 90% upper bound 18%).
+
+**Fastest compliant long-form benchmark: Grace & Glory Prayers.**
+- Day 19 of activity: 31 long videos (1.6 per day, median 36 min), 2,660 subscribers, 362,634 long views, at least 44,000 public hours in the low-retention scenario.
+- Its average pace is 140 subscribers/day and 19,000 long views/day.
+- At that pace, HeroVerse's gap (737 subscribers; hours are not binding) closes in about 5–6 days.
+
+**Other channels at 18–21 days (excluded as models):**
+- Bible Prophecy: sensational prophecy claims (misinformation risk).
+- The Billy Graham Legacy: impersonation of a real preacher.
+- Two Shorts channels (devotional edits) with 13–16M Shorts views, whose content has not yet been checked for reused material.
+
+**14-day pace targets for HeroVerse:**
+- **Rates (from day 1):** 53 net subscribers/day and about 6,000 long-form views/day (at 8.8 subscribers per 1,000 views).
+- **Day-by-day checkpoints:**
+  - Day 3: at least 18,000 long views and 160 net subscribers.
+  - Day 7: at least 42,000 long views and 370 net subscribers.
+  - Day 10: at least 60,000 long views and 530 net subscribers.
+
+  Falling behind on two consecutive days triggers an immediate change of topic or packaging, chosen from that day's intelligence.
+- **Production implication:** match the benchmark cadence of 1.5–2 long videos/day of 25–40 min, using Kaggle GPU rendering. A cadence of 1 per day is below the benchmark.
+
+**Probability, stated honestly:**
+- Reaching the thresholds within 14 days: no compliant long-form channel in today's panel did it. The only proven 14-day route was viral Shorts, at a measured rate of about 1%.
+- **Approval** within 14 days also needs the YouTube review to finish. That review is not under our control and takes up to about one month.
+- This is the measured base rate. The daily panel from tomorrow measures real trajectories and will update it.
