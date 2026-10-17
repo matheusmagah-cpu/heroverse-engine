@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Unit tests
         run: /usr/bin/python3 -I -B migration/mining/test_market_panel.py
-      - name: Collect panel (about 6,500 Data API units, no media)
+      - name: Collect panel (about 2,400 Data API units, no media; uploads need the rest of the 10k day)
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: |
@@ -28,7 +28,7 @@ jobs:
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
           day=$(date -u +%Y%m%d)
           echo "DAY=$day" >> "$GITHUB_ENV"
-          "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/market_panel.py "$RUNNER_TEMP/market-panel-$day.json" 6500 "migration/evidence/market-panel/panel-$day.json"
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/market_panel.py "$RUNNER_TEMP/market-panel-$day.json" 2400 "migration/evidence/market-panel/panel-$day.json"
       - name: Market model and scoring of registered forecasts
         run: |
           python3 -I -B migration/mining/ypp_market_model.py "migration/evidence/ypp-market-model-$DAY.json" "migration/evidence/market-panel/panel-$DAY.json"

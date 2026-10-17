@@ -1,0 +1,51 @@
+name: HeroVerse packaging mining (titles, descriptions, tags, thumbnails, channel setup)
+on:
+  schedule:
+    - cron: '50 7 * * 0'
+  workflow_dispatch:
+    inputs:
+      queries:
+        description: 'Other-niche queries, ";" separated (default: 3 of the rotation, by ISO week)'
+        required: false
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-packaging-mining
+  cancel-in-progress: false
+jobs:
+  mine:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Unit tests
+        run: python3 -I -B migration/mining/test_packaging_mining.py
+      - name: Mine (about 500 Data API units; free Gemini for thumbnails)
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+          QUERIES: ${{ inputs.queries }}
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          if [ -z "$QUERIES" ]; then
+            # adjacent faceless niches with fast subscriber conversion; 3 per week in rotation
+            all=("stoic philosophy" "sleep stories for adults" "ancient history documentary" "psychology facts" \
+                 "motivational speech" "bedtime stories" "history explained" "calm meditation" "life lessons")
+            w=$(( $(date -u +%V) % 3 * 3 )); QUERIES="${all[$w]};${all[$((w+1))]};${all[$((w+2))]}"
+          fi
+          model=$(ls migration/evidence/ypp-market-model-*.json | sort | tail -1)
+          day=$(date -u +%Y%m%d)
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/packaging_mining.py "$model" "migration/evidence/packaging/$day" "$QUERIES" 2
+      - name: Record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/packaging
+          git commit -q -m "Record packaging mining $(date -u +%Y%m%d) (run $GITHUB_RUN_ID; public fields measured, thumbnails model-reported)" || exit 0
+          for i in 1 2 3 4; do
+            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true; sleep $((i * 5))
+          done
+          exit 1
