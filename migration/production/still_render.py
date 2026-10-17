@@ -19,6 +19,9 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pilot_render import REFERENCES, RATE_OUT, TAIL, MUSIC_OFFSET, probe_duration, run, sha256  # noqa: E402
+import motion as camera  # noqa: E402
+
+MOTIONS = ("push_in", "drift", "pull_out", "pan_right", "push_in", "pan_left")
 
 FADE = 0.6
 BACKGROUND_TARGET = 9.0
@@ -234,6 +237,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
          "-map", "[out]", "-ar", str(RATE_OUT), str(mix)])
     mark("mix")
     plan = holds(script, timeline, total)
+    moving = script.get("motion", True)  # camera motion on backgrounds; the figure stays still on top (2.5D depth)
     frames, clips = work / "frames", work / "holds"
     frames.mkdir(exist_ok=True)
     clips.mkdir(exist_ok=True)
@@ -243,43 +247,73 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
         meta = json.loads((images / f"{h['image']}.json").read_text())
         used[h["image"]] = {"sha256": sha256(src), "release_asset": meta.get("release_asset"), "models": meta["models"],
                             "seed": meta["seed"], "prompt": meta["prompt"]}
-        compose(src, figure_path, frames / f"{i:03d}.png", h["figure"])
+        compose(src, figure_path, frames / f"{i:03d}.png", h["figure"] and not moving)
     mark("frames")
-
-    def encode(i):
-        h = plan[i]
-        out = clips / f"{i:03d}.mp4"
-        length = h["end"] - h["start"]
-        common = ["-c:v", "libx264", "-preset", "veryfast", "-tune", "stillimage", "-crf", "17", "-r", "30",
-                  "-pix_fmt", "yuv420p", "-video_track_timescale", "15360", "-threads", "2"]
-        # Stills are read at 1 fps and repeated to 30 fps by the fps filter: same frames,
-        # without decoding the PNG 30 times per second.
-        if i == 0:
-            run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", f"{length + 1:.3f}",
-                 "-i", str(frames / "000.png"), "-vf", f"fps=30,trim=duration={length:.3f}", *common, str(out)])
-        else:
-            run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", "2",
-                 "-i", str(frames / f"{i - 1:03d}.png"), "-loop", "1", "-framerate", "1", "-t", f"{length + 1:.3f}",
-                 "-i", str(frames / f"{i:03d}.png"), "-filter_complex",
-                 f"[0:v]fps=30,trim=duration={FADE},setpts=PTS-STARTPTS[a];[1:v]fps=30,setpts=PTS-STARTPTS[b];"
-                 f"[a][b]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length:.3f}",
-                 *common, str(out)])
-        return f"file '{out}'"
     from concurrent.futures import ThreadPoolExecutor
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        listing = list(pool.map(encode, range(len(plan))))
+
+    def length(i):
+        return plan[i]["end"] - plan[i]["start"]
+
+    if moving:
+        # 1) each background moves (smooth camera) for its hold plus the cross-fade tail
+        def raw(i):
+            plan[i]["motion"] = "push_in" if i == 0 else MOTIONS[i % len(MOTIONS)]
+            camera.render(frames / f"{i:03d}.png", clips / f"raw-{i:03d}.mp4", length(i) + FADE, plan[i]["motion"],
+                          intermediate=True)
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            list(pool.map(raw, range(len(plan))))
+
+        # 2) segment i = tail of the previous move cross-faded into the start of this one
+        def segment(i):
+            out = clips / f"{i:03d}.mp4"
+            common = ["-c:v", "libx264", "-preset", "ultrafast", "-crf", "12", "-r", "30", "-pix_fmt", "yuv420p",
+                      "-video_track_timescale", "15360", "-threads", "2"]
+            if i == 0:
+                run(["ffmpeg", "-v", "error", "-y", "-i", str(clips / "raw-000.mp4"), "-vf",
+                     f"trim=duration={length(0):.3f},setpts=PTS-STARTPTS", *common, str(out)])
+            else:
+                run(["ffmpeg", "-v", "error", "-y", "-i", str(clips / f"raw-{i - 1:03d}.mp4"), "-i", str(clips / f"raw-{i:03d}.mp4"),
+                     "-filter_complex", f"[0:v]trim=start={length(i - 1):.3f},setpts=PTS-STARTPTS[a];[1:v]setpts=PTS-STARTPTS[b];"
+                     f"[a][b]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length(i):.3f}", *common, str(out)])
+            return f"file '{out}'"
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            listing = list(pool.map(segment, range(len(plan))))
+    else:
+        def encode(i):
+            out = clips / f"{i:03d}.mp4"
+            common = ["-c:v", "libx264", "-preset", "veryfast", "-tune", "stillimage", "-crf", "17", "-r", "30",
+                      "-pix_fmt", "yuv420p", "-video_track_timescale", "15360", "-threads", "2"]
+            # Stills are read at 1 fps and repeated to 30 fps by the fps filter: same frames,
+            # without decoding the PNG 30 times per second.
+            if i == 0:
+                run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", f"{length(i) + 1:.3f}",
+                     "-i", str(frames / "000.png"), "-vf", f"fps=30,trim=duration={length(i):.3f}", *common, str(out)])
+            else:
+                run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", "2",
+                     "-i", str(frames / f"{i - 1:03d}.png"), "-loop", "1", "-framerate", "1", "-t", f"{length(i) + 1:.3f}",
+                     "-i", str(frames / f"{i:03d}.png"), "-filter_complex",
+                     f"[0:v]fps=30,trim=duration={FADE},setpts=PTS-STARTPTS[a];[1:v]fps=30,setpts=PTS-STARTPTS[b];"
+                     f"[a][b]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length(i):.3f}",
+                     *common, str(out)])
+            return f"file '{out}'"
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            listing = list(pool.map(encode, range(len(plan))))
     mark("hold_clips")
     (work / "holds.txt").write_text("\n".join(listing) + "\n")
     (work / "captions.ass").write_text(build_ass(script, timeline, total))
     final = work / "pilot.mp4"
+    title_end = script["overlay"]["title_card_seconds"]
+    graph = (f"[2:v]scale=-1:{FIGURE_HEIGHT}[fg];[0:v][fg]overlay=x={FIGURE_X}:y=H-h:enable='gte(t,{title_end})',"
+             if moving else "[0:v]") + f"ass={work / 'captions.ass'},format=yuv420p[vout]"
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "holds.txt"), "-i", str(mix),
-         "-map", "0:v:0", "-map", "1:a:0", "-vf", f"ass={work / 'captions.ass'},format=yuv420p",
-         "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-tune", "stillimage", "-r", "30", "-g", "60",
+         "-loop", "1", "-framerate", "30", "-i", str(figure_path),
+         "-filter_complex", graph, "-map", "[vout]", "-map", "1:a:0", "-shortest",
+         "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-r", "30", "-g", "60",
          "-c:a", "aac", "-b:a", "192k", "-ar", str(RATE_OUT), "-t", f"{total:.3f}", "-movflags", "+faststart",
          str(final)])
     mark("final_encode")
     figure_meta = json.loads(Path(figure_path).with_suffix(".json").read_text())
-    manifest = {"version": "pilot-manifest-v2", "pilot_id": script["pilot_id"], "grammar": "figure+backgrounds+captions",
+    manifest = {"version": "pilot-manifest-v2", "pilot_id": script["pilot_id"], "grammar": "figure+moving-backgrounds+captions" if moving else "figure+backgrounds+captions",
                 "output_sha256": sha256(final), "output_seconds": probe_duration(final),
                 "script_sha256": sha256(script_path),
                 "voice": {"engine": script["voice"]["engine"], "voice_id": timeline["voice_id"],
