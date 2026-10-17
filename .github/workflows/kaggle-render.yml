@@ -1,0 +1,90 @@
+name: HeroVerse production on Kaggle (voice, render, QA, Shorts) and evidence
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory under migration/production (e.g. pilot-002)
+        required: true
+      shorts:
+        description: Number of Shorts to cut
+        required: false
+        default: '3'
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-kaggle-render-${{ inputs.pilot }}
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+      SHORTS: ${{ inputs.shorts }}
+      KAGGLE_RAW: ${{ secrets.KAGGLE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Kaggle client
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          token=$(printf '%s' "$KAGGLE_RAW" | grep -o 'KGAT_[A-Za-z0-9]*' | head -1)
+          test -n "$token" || { echo KAGGLE_SECRET_MISSING; exit 1; }
+          echo "::add-mask::$token"
+          echo "KAGGLE_API_TOKEN=$token" >> "$GITHUB_ENV"
+          python3 -m venv "$RUNNER_TEMP/k" && "$RUNNER_TEMP/k/bin/pip" install -q --disable-pip-version-check 'kaggle>=1.7'
+          echo "$RUNNER_TEMP/k/bin" >> "$GITHUB_PATH"
+      - name: Private Kaggle dataset with code and production files (owner authorization 2026-10-17)
+        run: |
+          d="$RUNNER_TEMP/assets"; mkdir -p "$d/img" "$d/fonts"
+          mkdir -p "$RUNNER_TEMP/repo" && git archive HEAD | tar -x -C "$RUNNER_TEMP/repo"
+          tar -cf "$d/engine.tar" -C "$RUNNER_TEMP" repo
+          cd "$d"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern original-rest-music.lossless.flac
+          echo "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c  original-rest-music.lossless.flac" | sha256sum -c -
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern 'yamnet-classification-tflite-v1-sha256-*.tflite' -O yamnet.tflite
+          echo "10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de  yamnet.tflite" | sha256sum -c -
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern HeroVerse_ASR_base_en_preservado.zip
+          echo "78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb  HeroVerse_ASR_base_en_preservado.zip" | sha256sum -c -
+          cd "$GITHUB_WORKSPACE"
+          for meta in migration/production/$PILOT/images/*.json; do
+            id=$(basename "$meta" .json)
+            read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$d/img/$id.png"
+            echo "$sha  $d/img/$id.png" | sha256sum -c -
+            cp "$meta" "$d/img/$id.json"
+          done
+          sudo apt-get install -y -qq fonts-dejavu-core >/dev/null && cp /usr/share/fonts/truetype/dejavu/*.ttf "$d/fonts/"
+          du -sh "$d"
+          python3 -I -B migration/kaggle/kaggle_run.py dataset "$d" heroverse-assets "HeroVerse production assets"
+      - name: Produce on Kaggle
+        run: |
+          printf '{"pilot": "%s", "shorts": %s}' "$PILOT" "$SHORTS" > "$RUNNER_TEMP/payload.json"
+          python3 -I -B migration/kaggle/kaggle_run.py run migration/kaggle/job_render.py "$RUNNER_TEMP/payload.json" \
+            "heroverse-render-$PILOT" "$RUNNER_TEMP/kout" 220 heroverse-assets
+          ls -la "$RUNNER_TEMP/kout/out" | head -30
+      - name: Preserve render privately and record evidence
+        run: |
+          o="$RUNNER_TEMP/kout/out"; dest="migration/production/$PILOT"
+          sha=$(sha256sum "$o/pilot.mp4" | cut -d' ' -f1)
+          cp "$o/pilot.mp4" "$RUNNER_TEMP/$PILOT-sha256-$sha.mp4"
+          gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
+          cp "$o/package/thumbnail.jpg" "$RUNNER_TEMP/$PILOT-thumbnail.jpg"
+          gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-thumbnail.jpg" --repo "$GITHUB_REPOSITORY" --clobber
+          for s in "$o"/shorts/short-*.mp4; do
+            ssha=$(sha256sum "$s" | cut -d' ' -f1); n=$(basename "$s" .mp4)
+            cp "$s" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4"
+            gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
+          done
+          mkdir -p "$dest/out" "$dest/inspection" "$dest/shorts"
+          cp "$o/manifest.json" "$o/timeline.json" "$o/captions.ass" "$o/qa.json" "$o/package/package.json" "$dest/out/"
+          cp "$o"/inspection/*.jpg "$dest/inspection/" && cp "$o/package/thumbnail.jpg" "$dest/inspection/thumbnail.jpg"
+          cp "$o/shorts/shorts.json" "$dest/shorts/" && cp "$o"/shorts/*.ass "$dest/shorts/" 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dest"
+          git commit -q -m "Record $PILOT Kaggle production: render, QA, package, Shorts, inspection (run $GITHUB_RUN_ID; not published)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
+          python3 -I -c "import json,sys;q=json.load(open(sys.argv[1]));print(q['status']);sys.exit(0 if q['status']=='PASS' else 1)" "$dest/out/qa.json"
