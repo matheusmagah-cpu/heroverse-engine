@@ -5,6 +5,10 @@ on:
       day:
         description: Panel day YYYYMMDD already in the private release
         required: true
+      cohort_channels:
+        description: Optional space-separated channel ids to plan winner/median/weak AV windows for
+        required: false
+        default: ''
 permissions:
   contents: write
 jobs:
@@ -16,6 +20,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
       DAY: ${{ inputs.day }}
+      COHORT_CHANNELS: ${{ inputs.cohort_channels }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Intelligence
@@ -25,6 +30,9 @@ jobs:
           gunzip "$RUNNER_TEMP/market-panel-$DAY.json.gz"
           mkdir -p migration/evidence/daily-intel
           python3 -I -B migration/mining/daily_intel.py "$RUNNER_TEMP/market-panel-$DAY.json" "migration/evidence/daily-intel/intel-$DAY.json"
+          if [ -n "$COHORT_CHANNELS" ]; then
+            python3 -I -B migration/mining/select_cohort_windows.py "$RUNNER_TEMP/market-panel-$DAY.json" "migration/evidence/daily-intel/cohort-windows-$DAY.json" $COHORT_CHANNELS
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add migration/evidence/daily-intel
