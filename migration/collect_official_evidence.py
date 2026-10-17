@@ -20,6 +20,7 @@ import zipfile
 SOURCE_SHA='fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10'
 SNAPSHOT_SHA='bbd5b7b9daa76b5ac1754eba6dc135e75f15bbeb4e72a79a0a8891c9fd64d790'
 CHANNEL='UCuMF6pJQkyMzaVoAxFL86yA'
+MAX_UPLOAD_PAGES=4
 PRAYER_REFERENCES=['UC_h1E8wccvaX1gTtx4VsYXw','UC2d7chxFUVEurYmI4yfmTlQ','UC5spXp9tnfnAuRQKgZgw2tg']
 PRIVATE_UNKNOWN=['IMPRESSIONS','CTR','INTRO_RETENTION','AVERAGE_VIEW_DURATION','WATCH_HOURS','SUBSCRIBERS_GAINED','REVENUE','RPM']
 MAX_DATA_CALLS=40
@@ -229,9 +230,16 @@ def collect(root,export,*,health_only=False,candidate_only=False,catalog_only=Fa
         cid=c['id'];playlist=c.get('contentDetails',{}).get('relatedPlaylists',{}).get('uploads')
         if not playlist:errors.append({'channel_id':cid,'code':'UPLOADS_PLAYLIST_ABSENT'});continue
         try:
-            entries=read(youtube.playlistItems().list(part='contentDetails',playlistId=playlist,maxResults=50),'uploads-'+cid)
-            ids=[x['contentDetails']['videoId'] for x in entries.get('items',[])]
-            by_channel[cid]=ids;listings[cid]={'returned_count':len(ids),'has_more':bool(entries.get('nextPageToken'))}
+            # Bounded pagination: up to MAX_UPLOAD_PAGES pages (1 Data API unit each).
+            ids=[];token=None
+            for page in range(MAX_UPLOAD_PAGES):
+                args=dict(part='contentDetails',playlistId=playlist,maxResults=50)
+                if token:args['pageToken']=token
+                entries=read(youtube.playlistItems().list(**args),'uploads-'+cid+('' if not page else '-p'+str(page+1)))
+                ids.extend(x['contentDetails']['videoId'] for x in entries.get('items',[]))
+                token=entries.get('nextPageToken')
+                if not token:break
+            by_channel[cid]=ids;listings[cid]={'returned_count':len(ids),'has_more':bool(token),'pages_read':page+1}
             video_ids.extend(ids)
         except Exception as error:errors.append({'channel_id':cid,**safe_error(error)})
     videos=[]

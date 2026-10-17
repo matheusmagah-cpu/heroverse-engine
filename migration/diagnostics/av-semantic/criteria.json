@@ -1,0 +1,28 @@
+{
+  "version": "av-semantic-criteria-v1",
+  "frozen_before_semantic_code_existed": true,
+  "frozen_at_utc": "2026-10-17T02:40:00Z",
+  "purpose": "Pass/fail rules for the free offline semantic audio layer: coarse sound class timeline (speech, singing, music, other sound, silence) with abstention, and word-timed speech transcription. Timing, count and sync stay with the deterministic av-event-meter.",
+  "models": {
+    "sound_classes": "Google YAMNet classification TFLite v1, SHA-256 10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de (same file used on 2026-10-15)",
+    "speech": "faster-whisper 1.2.1 with preserved base.en model from release asset 638696861 (SHA-256 78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb), CPU int8"
+  },
+  "ground_truth_by_construction": [
+    "Digital silence: control c03 audio (all-zero PCM).",
+    "Pure tones: control c04 audio (three 1 kHz 100 ms tones).",
+    "Noise: 8 s pink noise at -30 dBFS.",
+    "Known speech: espeak-ng renders fixed English sentences; text is known exactly.",
+    "Speech over real music: the same known speech mixed at a fixed level over each of the five preserved real openings (music measured as present by YAMNet on 2026-10-15 for j2rk8ycXe3c)."
+  ],
+  "rules": {
+    "silence": "c03: no speech, singing or music segment; zero transcribed words.",
+    "non_speech_hallucination": "c04 tones and pink noise: zero transcribed words with probability >= 0.5 and no speech segment.",
+    "known_speech_detection": "Clean espeak speech: speech class on >= 70% of frames that overlap the rendered speech span.",
+    "known_speech_transcription": "Clean espeak speech: word error rate <= 0.15 against the known text (case and punctuation ignored).",
+    "speech_over_music": "Each of the five real openings with known speech mixed in: word error rate <= 0.30, and speech class present on >= 50% of speech-span frames.",
+    "music_presence": "Each real opening without added speech: music class on >= 80% of frames (descriptive check against the 2026-10-15 YAMNet observation; reported, not used to claim human-verified music).",
+    "abstention": "A frame whose best coarse score is below 0.30 is labelled UNCERTAIN, never forced into a class."
+  },
+  "failure_policy": "Any failed rule is FAIL; criteria are not edited after results to pass.",
+  "out_of_scope": ["Instrument identification accuracy", "Lyrics transcription accuracy", "Languages other than English", "Perceptual quality or production approval"]
+}
