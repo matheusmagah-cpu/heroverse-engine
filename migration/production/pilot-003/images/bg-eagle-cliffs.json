@@ -1,0 +1,28 @@
+{
+ "id": "bg-eagle-cliffs",
+ "prompt": "majestic eagle soaring above sunlit mountain cliffs at dawn, wings fully spread, warm golden sky, vast open space, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.9,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-003-img-bg-eagle-cliffs-sha256-704e37b23d0e14510fbee959e4d06218c4798f51781923dd48fe8d37c546b8e2.png",
+ "sha256": "704e37b23d0e14510fbee959e4d06218c4798f51781923dd48fe8d37c546b8e2"
+}
