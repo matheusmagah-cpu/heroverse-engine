@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "av-semantic"))
 import av_profile  # noqa: E402
 import av_semantic  # noqa: E402
