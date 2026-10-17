@@ -33,6 +33,15 @@ jobs:
           "$RUNNER_TEMP/qa/bin/pip" install --disable-pip-version-check -q ai-edge-litert==2.3.0 faster-whisper==1.2.1
           python3 -m venv "$RUNNER_TEMP/cut"
           "$RUNNER_TEMP/cut/bin/pip" install --disable-pip-version-check -q 'rembg==2.0.59' 'onnxruntime==1.20.1' 'pillow==11.0.0'
+          python3 -m venv "$RUNNER_TEMP/cine"
+          "$RUNNER_TEMP/cine/bin/pip" install --disable-pip-version-check -q 'numpy==2.2.6' 'opencv-python-headless==4.10.0.84' 'onnxruntime==1.20.1'
+      - name: Depth model for the cinematic layer (Depth Anything V2 Small, Apache-2.0)
+        run: |
+          mkdir -p "$RUNNER_TEMP/models"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/models/depth-anything-v2-small.onnx" \
+            https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx
+          sha256sum "$RUNNER_TEMP/models/depth-anything-v2-small.onnx"
+          echo "HERO_DEPTH_MODEL=$RUNNER_TEMP/models/depth-anything-v2-small.onnx" >> "$GITHUB_ENV"
       - name: Verified source and pinned voice model
         run: python3 -I -B migration/production/pilot_render.py prepare "$RUNNER_TEMP/work" HeroVerse_Linux_Source_Ready_20261013_v2.zip
       - name: Narration with the original voice adapter
@@ -55,7 +64,7 @@ jobs:
           fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "migration/production/$PILOT/script.json")
           "$RUNNER_TEMP/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$RUNNER_TEMP/in/img/$fig.png" "$RUNNER_TEMP/in/img/$fig.json" "$RUNNER_TEMP/in/figure.png"
       - name: Assemble
-        run: python3 -I -B migration/production/still_render.py assemble "$RUNNER_TEMP/work" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac"
+        run: '"$RUNNER_TEMP/cine/bin/python" -I -B migration/production/still_render.py assemble "$RUNNER_TEMP/work" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac"'
       - name: Shorts (vertical, sentence-exact, from the same sources)
         run: python3 -I -B migration/production/shorts_cut.py "$RUNNER_TEMP/work" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac" "$RUNNER_TEMP/work/shorts" 3
       - name: QA against frozen criteria

@@ -370,5 +370,14 @@
   "title": "Morning Prayer",
   "description": "Guided morning prayers with Scripture for peace, protection and courage. New prayers to start your day with God."
  },
- "motion": true
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-sky",
+   "bg-wheat",
+   "bg-forest",
+   "bg-meadow",
+   "bg-garden"
+  ]
+ }
 }
