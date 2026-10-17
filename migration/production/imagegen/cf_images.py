@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""Image generation on Cloudflare Workers AI (free daily allocation; the free
+Workers plan fails instead of billing when the allocation is used up).
+
+Engines (commercial use allowed by the model licence):
+  flux  -> @cf/black-forest-labs/flux-1-schnell   (Apache-2.0; square output, steps <= 8)
+  sdxl  -> @cf/bytedance/stable-diffusion-xl-lightning (Open RAIL++-M base; width/height)
+Credentials only from CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID (GitHub secrets).
+Writes <id>.png + <id>.json (prompt, seed, engine, model, licence) like gen_images.py.
+usage: cf_images.py PROMPTS_JSON OUT_DIR [ENGINE]
+"""
+import base64
+import io
+import json
+import os
+from pathlib import Path
+import sys
+import time
+import urllib.error
+import urllib.request
+
+ENGINES = {
+    "flux": {"model": "@cf/black-forest-labs/flux-1-schnell", "license": "apache-2.0",
+             "licence_source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"},
+    "sdxl": {"model": "@cf/bytedance/stable-diffusion-xl-lightning", "license": "openrail++",
+             "licence_source": "https://huggingface.co/ByteDance/SDXL-Lightning"},
+}
+
+
+def run(model, payload):
+    url = (f"https://api.cloudflare.com/client/v4/accounts/{os.environ['CLOUDFLARE_ACCOUNT_ID']}/ai/run/{model}")
+    req = urllib.request.Request(url, data=json.dumps(payload).encode(), method="POST",
+                                 headers={"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"],
+                                          "Content-Type": "application/json"})
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                body, ctype = r.read(), r.headers.get("Content-Type", "")
+            if ctype.startswith("image/"):
+                return body
+            data = json.loads(body)
+            image = (data.get("result") or {}).get("image")
+            if not image:
+                raise RuntimeError("CF_NO_IMAGE " + json.dumps(data)[:300])
+            return base64.b64decode(image)
+        except urllib.error.HTTPError as e:
+            msg = e.read()[:300].decode(errors="replace")
+            if e.code == 429 or "limit" in msg.lower():
+                raise SystemExit("CF_DAILY_ALLOCATION_EXHAUSTED " + msg)
+            if attempt == 3:
+                raise RuntimeError(f"CF_HTTP_{e.code} {msg}")
+            time.sleep(2 ** attempt)
+
+
+def main(prompts_path, out_dir, engine="flux"):
+    from PIL import Image
+    spec = json.loads(Path(prompts_path).read_text())
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    eng = ENGINES[engine]
+    only = {x for x in os.environ.get("ONLY", "").split(",") if x}
+    for item in spec["images"]:
+        if only and item["id"] not in only:
+            continue
+        prompt = item["prompt"] + ", " + spec["style"]
+        payload = {"prompt": prompt[:2000], "seed": item["seed"]}
+        if engine == "flux":
+            payload["steps"] = 8
+        else:
+            payload.update({"width": spec["width"], "height": spec["height"], "negative_prompt": spec["negative"],
+                            "num_steps": 8})
+        t0 = time.time()
+        raw = run(eng["model"], payload)
+        image = Image.open(io.BytesIO(raw)).convert("RGB")
+        image.save(out / f"{item['id']}.png")
+        (out / f"{item['id']}.json").write_text(json.dumps({
+            "id": item["id"], "prompt": prompt, "negative": spec.get("negative"), "seed": item["seed"],
+            "size": list(image.size), "engine": f"cloudflare-workers-ai:{eng['model']}",
+            "models": {eng["model"]: {"license": eng["license"], "revision": "workers-ai-managed", "source": eng["licence_source"]}},
+            "seconds": round(time.time() - t0, 1), "generated_by": "HeroVerse pipeline (AI-generated image)"}, indent=1) + "\n")
+        print(item["id"], image.size, round(time.time() - t0, 1), flush=True)
+
+
+if __name__ == "__main__":
+    main(*sys.argv[1:4])
