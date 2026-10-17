@@ -61,6 +61,13 @@ def run(job_script, payload_path, slug, out_dir, timeout_min=110):
     print("STATUS", status.strip()[-200:])
     Path(out_dir).mkdir(parents=True, exist_ok=True)
     kaggle("kernels", "output", f"{user}/{slug}", "-p", str(out_dir), check=False)
+    for log in Path(out_dir).glob("*.log"):
+        try:
+            events = json.loads(log.read_text())
+            text = "".join(e.get("data", "") for e in events)
+        except ValueError:
+            text = log.read_text()
+        print("KERNEL_LOG_TAIL\n" + text[-3000:].replace("KGAT_", "KGAT_***"))
     if "complete" not in status:
         raise SystemExit("KAGGLE_KERNEL_NOT_COMPLETE")
 
