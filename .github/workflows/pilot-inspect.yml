@@ -1,0 +1,41 @@
+name: HeroVerse pilot perceptual inspection
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory (e.g. pilot-001)
+        required: true
+permissions:
+  contents: write
+jobs:
+  inspect:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Tools and inputs from the private release
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg tesseract-ocr python3-numpy
+          sha=$(python3 -I -c "import json;print(json.load(open('migration/production/$PILOT/out/qa.json'))['output_sha256'])")
+          mkdir -p "$RUNNER_TEMP/clips" "$RUNNER_TEMP/refs" && cd "$RUNNER_TEMP"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-sha256-$sha.mp4" -O pilot.mp4
+          echo "$sha  pilot.mp4" | sha256sum -c -
+          cd "$GITHUB_WORKSPACE"
+          python3 -I -c "import json,sys; [print(c['video_id']) for c in json.load(open(sys.argv[1]))['clips']]" "migration/production/$PILOT/out/manifest.json" > "$RUNNER_TEMP/clip_ids.txt"
+          while read -r id; do gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "native-$id-60-100s-sha256-*.mp4" --dir "$RUNNER_TEMP/clips"; done < "$RUNNER_TEMP/clip_ids.txt"
+          for id in htx4YZVYBVs 8EwPnMN22aQ 17uv62CEsBQ; do gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "native-$id-0-40s-sha256-*.mp4" --dir "$RUNNER_TEMP/refs"; done
+      - name: Contact sheets, OCR and sharpness
+        run: /usr/bin/python3 -I -B migration/production/inspect_quality.py "$RUNNER_TEMP/pilot.mp4" "$RUNNER_TEMP/clips" "$RUNNER_TEMP/refs" "migration/production/$PILOT/inspection"
+      - name: Commit inspection outputs (small images and JSON)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "migration/production/$PILOT/inspection"
+          git commit -q -m "Record $PILOT perceptual inspection sheets (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
