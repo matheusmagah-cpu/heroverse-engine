@@ -55,7 +55,7 @@ Read this file first; do not re-read history, logs or whole evidence files.
   - The private repo handles the panel, publication and light jobs.
 - **Cloudflare Workers AI (10k neurons/day, resets 00:00 UTC):** images only (FLUX + 2x upscale on GitHub).
 - **Gemini free tier (no billing):** mining, Shorts selection/review, watched reviews.
-- **YouTube Data API (10k units/day, resets 07:00 UTC):** panel 6,500; privacy 50/update; publish ~1,700/video.
+- **YouTube Data API (10k units/day, resets 07:00 UTC):** panel 2,400 (half of the queries each day, alternating); packaging mining 500 (Sundays); long video ~2,100 (upload 1,600 + captions 400 + thumbnail/playlist); each Short ~1,650. A normal day: panel + 1 long + 3 Shorts = 9,450. Uploads go after the 07:00 UTC reset when the day's units are spent. A second Google Cloud project's API key for the public reads (panel, packaging) would free the whole 10k for uploads.
 
 ## Daily schedule (UTC; BRT = UTC-3)
 | UTC | What | Where |

@@ -90,13 +90,15 @@ class Client:
 
 
 def discover(client, now):
-    """Christian queries by date (all 30), cross-niche queries by views over the
+    """Christian queries by date (half of the 30 each day, alternating), cross-niche queries by views over the
     last 14 days, then Christian queries by views while the budget lasts."""
     after = (now - timedelta(days=DISCOVERY_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
     after_cross = (now - timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
-    plan = ([("christian", "date", q, after) for q in QUERIES]
+    # half of the queries each day (all of them every 2 days): the 10k unit day must also carry the uploads
+    today = QUERIES[now.toordinal() % 2::2]
+    plan = ([("christian", "date", q, after) for q in today]
             + [("cross", "viewCount", q, after_cross) for q in CROSS_NICHE_QUERIES]
-            + [("christian", "viewCount", q, after) for q in QUERIES[:VIEWCOUNT_CHRISTIAN]])
+            + [("christian", "viewCount", q, after) for q in today[:VIEWCOUNT_CHRISTIAN // 2]])
     found = {}
     for niche, order, query, since in plan:
         if not client.can(100 + DISCOVERY_RESERVE_UNITS):

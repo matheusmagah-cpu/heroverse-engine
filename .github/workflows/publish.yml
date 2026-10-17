@@ -62,6 +62,15 @@ jobs:
           assert ap["output_sha256"] == qa["output_sha256"] == man["output_sha256"], "APPROVAL_NOT_FOR_THIS_FILE"
           print("GATES_PASS", qa["output_sha256"])
           PY
+      - name: Preflight (everything YouTube would reject; skipped when resuming an upload already made)
+        run: |
+          d="migration/production/$PILOT"
+          key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/qa.json")"
+          if python3 -I -c "import json,sys;sys.exit(0 if sys.argv[2] in json.load(open(sys.argv[1]))['entries'] else 1)" migration/publish/ledger.json "$key" 2>/dev/null; then
+            echo "RESUME: already uploaded, preflight not repeated"
+          else
+            python3 -I -B migration/publish/preflight.py "$d" "$d/inspection/thumbnail.jpg" "$PUBLISH_AT"
+          fi
       - name: Video and thumbnail from the private release (hash-verified)
         run: |
           d="migration/production/$PILOT"
