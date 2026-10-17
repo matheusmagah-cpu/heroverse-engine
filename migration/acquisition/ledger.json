@@ -349,6 +349,17 @@
       "completed_at": "2026-10-17T03:23:25.108834+00:00",
       "run_id": "38998293513",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-kkX33CbG0GM-60-100-v1",
+      "video_id": "kkX33CbG0GM",
+      "start_seconds": 60,
+      "end_seconds": 100,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-17T03:23:36.944556+00:00",
+      "day_utc": "2026-10-17",
+      "units_remaining_at_reservation": 416,
+      "reserved_units": 14
     }
   ]
 }
