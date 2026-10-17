@@ -15,11 +15,11 @@ jobs:
   generate:
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 150
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     env:
       PILOT: ${{ inputs.pilot }}
       ONLY: ${{ inputs.only }}
@@ -36,8 +36,9 @@ jobs:
           "$RUNNER_TEMP/gen/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu 'torch==2.5.1'
           "$RUNNER_TEMP/gen/bin/pip" install -q --disable-pip-version-check 'diffusers==0.31.0' 'transformers==4.46.3' 'peft==0.13.2' 'accelerate==1.1.1' 'huggingface_hub==0.26.2' 'safetensors==0.4.5'
       - name: Generate shard
-        run: '"$RUNNER_TEMP/gen/bin/python" -I -B migration/production/imagegen/gen_images.py "migration/production/$PILOT/images.json" "$RUNNER_TEMP/img" ${{ matrix.shard }} 4'
+        run: '"$RUNNER_TEMP/gen/bin/python" -I -B migration/production/imagegen/gen_images.py "migration/production/$PILOT/images.json" "$RUNNER_TEMP/img" ${{ matrix.shard }} 11'
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
         with:
           name: images-${{ matrix.shard }}
           path: ${{ runner.temp }}/img
