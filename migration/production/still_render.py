@@ -142,9 +142,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             a = max(e["start"], title_end)
             lines.append(f"Dialogue: 3,{ts(a)},{ts(e['end'])},Box,,0,0,0,,{{\\pos(0,0)\\p1}}{shape}{{\\p0}}")
             lines.append(f"Dialogue: 4,{ts(a)},{ts(e['end'])},Caption,,0,0,0,,{{\\pos({(x0 + x1) // 2},{(y0 + y1) // 2})}}{ass_text(e['text'])}")
+    refs = {seg["id"]: seg["reference"] for seg in script["segments"] if seg.get("reference")} or REFERENCES
     for seg in timeline["segments"]:
-        if seg["id"] in REFERENCES:
-            add("Ref", seg["start"], seg["end"], REFERENCES[seg["id"]], 4)
+        if seg["id"] in refs:
+            add("Ref", seg["start"], seg["end"], refs[seg["id"]], 4)
     return head + "\n".join(lines) + "\n"
 
 

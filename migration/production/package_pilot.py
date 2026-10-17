@@ -14,6 +14,20 @@ def escape(text):
     return text.replace("\\", "\\\\").replace(":", "\\:").replace("'", "’")
 
 
+def chapters_from_script(script, timeline):
+    """Chapters at every scripture anchor plus the opening, prayer and blessing turns."""
+    named = {"hook": "Good morning", "transition": "Let us pray", "declaration": "Declaration for today",
+             "payoff": "One thing to do today", "blessing": "Blessing"}
+    refs = {s["id"]: s["reference"].replace(" (KJV)", "") for s in script["segments"] if s.get("reference")}
+    rows = []
+    for seg in timeline:
+        label = named.get(seg["id"]) or refs.get(seg["id"])
+        if label:
+            start = 0 if seg["id"] == "hook" else int(seg["start"])
+            rows.append(f"{start // 60}:{start % 60:02d} {label}")
+    return rows
+
+
 def chapters(timeline):
     names = {"hook": "Good morning", "scripture-1": "He goes before you (Deuteronomy 31:8)",
              "scripture-2": "New mercy every morning (Lamentations 3:22-23)",
@@ -40,19 +54,21 @@ def main(work, script_path, out_dir):
                 "(Stable Diffusion XL, CreativeML Open RAIL++-M)."] if v2 else
                ["Footage credits (Creative Commons Attribution, picture only):", credits])
     description = "\n".join([
-        "Before you walk into today, God has already been there. Pray this morning prayer with us for peace, "
-        "courage and a clean start, anchored in Deuteronomy 31:8, Lamentations 3:22-23, Psalm 143:8, "
-        "Isaiah 41:10 and Proverbs 3:5-6.",
+        script.get("description_intro") or (
+            "Before you walk into today, God has already been there. Pray this morning prayer with us for peace, "
+            "courage and a clean start, anchored in Deuteronomy 31:8, Lamentations 3:22-23, Psalm 143:8, "
+            "Isaiah 41:10 and Proverbs 3:5-6."),
         "",
         "Chapters",
-        *chapters(manifest["timeline"]),
+        *(chapters_from_script(script, manifest["timeline"]) if any(s.get("reference") for s in script["segments"])
+          else chapters(manifest["timeline"])),
         "",
         "Scripture quotations: King James Version (public domain).",
         "Narration and music: original HeroVerse productions.",
         "",
         *visuals,
     ])
-    tags = ["morning prayer", "prayer for peace", "prayer for courage", "christian morning prayer",
+    tags = script.get("tags") or ["morning prayer", "prayer for peace", "prayer for courage", "christian morning prayer",
             "start your day with God", "God goes before you", "Deuteronomy 31:8", "HeroVerse"]
     thumb = out / "thumbnail.jpg"
     if v2:  # figure over its first background, text stacked on the free right side

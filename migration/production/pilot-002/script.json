@@ -1,10 +1,10 @@
 {
- "version": "pilot-script-v2",
+ "version": "pilot-script-v3",
  "pilot_id": "pilot-002",
  "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
- "working_title": "God Has Already Gone Ahead of You Today | Morning Prayer for Peace and Courage",
+ "working_title": "Morning Prayer | God Has Already Gone Ahead of You Today",
  "angle": "Before the day's first worry, the listener learns that God is already in the places they are about to walk into; the prayer moves from fear of the unknown to trust in the One who went first.",
- "authorship": "Original text written for HeroVerse by Claude Code (AI assistant) on 2026-10-17. Scripture quotations are from the King James Version (public domain). No reference video wording, sequence or voice is reused. pilot-002 reuses the unpublished pilot-001 text unchanged so that only the visual grammar changes between the two pilots.",
+ "authorship": "Original text written for HeroVerse by Claude Code (AI assistant) on 2026-10-17. Scripture quotations are from the King James Version (public domain). No reference video wording, sequence or voice is reused. v3 extends the pilot-001 text with new original sections to the ~25-30 min length used by the fast long-form channels in the 2026-10-17 market panel (strategy/MARKET_FORECAST_TIME_TO_YPP_20261017.md).",
  "voice": {
   "engine": "Kokoro v1.0 (preserved, hash-pinned)",
   "voice_id": "am_michael",
@@ -27,7 +27,8 @@
    "id": "scripture-1",
    "beat": "anchor: Deuteronomy 31:8",
    "pause_after": 1.5,
-   "text": "Listen to this promise, spoken to people who were about to step into a land they had never seen. And the Lord, he it is that doth go before thee; he will be with thee, he will not fail thee, neither forsake thee: fear not, neither be dismayed."
+   "text": "Listen to this promise, spoken to people who were about to step into a land they had never seen. And the Lord, he it is that doth go before thee; he will be with thee, he will not fail thee, neither forsake thee: fear not, neither be dismayed.",
+   "reference": "Deuteronomy 31:8 (KJV)"
   },
   {
    "id": "reflection-1",
@@ -36,10 +37,24 @@
    "text": "Notice the order. He goes before you. Then he is with you. Your morning does not begin with you walking into the unknown alone and hoping God catches up. It begins with God already standing in the places you are afraid of. The road you cannot see is not empty. Someone faithful has walked it first."
   },
   {
+   "id": "scripture-6",
+   "beat": "anchor: Exodus 13:21",
+   "pause_after": 1.5,
+   "text": "When Israel left Egypt, they did not walk out guessing. Listen to how the Bible describes it. And the Lord went before them by day in a pillar of a cloud, to lead them the way; and by night in a pillar of fire, to give them light; to go by day and night.",
+   "reference": "Exodus 13:21 (KJV)"
+  },
+  {
+   "id": "reflection-6",
+   "beat": "reflection: day and night guidance",
+   "pause_after": 1.2,
+   "text": "By day and by night. God did not lead his people only when the sun was out and the road was easy. He led them in the heat of the afternoon and in the dark when they could not see their own feet. Whatever part of the day you are dreading, the long meeting, the drive home, the quiet hour tonight when your thoughts get loud, he has already promised to be there. You are not walking toward a place he has never been. You are following him into it."
+  },
+  {
    "id": "scripture-2",
    "beat": "anchor: Lamentations 3:22-23",
    "pause_after": 1.5,
-   "text": "There is a second promise for this exact hour. It is of the Lord's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness."
+   "text": "There is a second promise for this exact hour. It is of the Lord's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.",
+   "reference": "Lamentations 3:22-23 (KJV)"
   },
   {
    "id": "reflection-2",
@@ -51,13 +66,33 @@
    "id": "scripture-3",
    "beat": "anchor: Psalm 143:8",
    "pause_after": 1.5,
-   "text": "So we can pray the way David prayed when he did not know which way to turn. Cause me to hear thy lovingkindness in the morning; for in thee do I trust: cause me to know the way wherein I should walk; for I lift up my soul unto thee."
+   "text": "So we can pray the way David prayed when he did not know which way to turn. Cause me to hear thy lovingkindness in the morning; for in thee do I trust: cause me to know the way wherein I should walk; for I lift up my soul unto thee.",
+   "reference": "Psalm 143:8 (KJV)"
   },
   {
    "id": "reflection-3",
    "beat": "reflection: the way is shown one step at a time",
    "pause_after": 1.2,
    "text": "Notice that David did not ask to see the whole year. He asked to know the way wherein he should walk. One step. One morning. God rarely hands us the full map, because he wants to walk with us instead of sending us off alone with directions. If you cannot see past today, that is not a sign that he has forgotten you. It is an invitation to hold his hand for the next step, and then the next."
+  },
+  {
+   "id": "scripture-7",
+   "beat": "anchor: Matthew 6:34",
+   "pause_after": 1.5,
+   "text": "Jesus said something about tomorrow that we need to hear this morning. Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.",
+   "reference": "Matthew 6:34 (KJV)"
+  },
+  {
+   "id": "reflection-7",
+   "beat": "reflection: only today",
+   "pause_after": 1.2,
+   "text": "Jesus is not telling you to stop planning. He is telling you to stop carrying tomorrow before it arrives. You were given strength for today, not for every day at once. So much of our anxiety comes from trying to live next week with the grace God gave us for this morning. Put tomorrow down. It will still be there, and so will he. Today has enough in it, and today is where his help is waiting for you."
+  },
+  {
+   "id": "reflection-lookback",
+   "beat": "reflection: remember how far he has carried you",
+   "pause_after": 1.2,
+   "text": "Before we go further, take a moment to look back. Think about a morning a year ago, or five years ago, when you were sure you would not make it through what was in front of you. And yet here you are. Maybe not everything turned out the way you wanted, but you were carried. The same God who went before you then is the God who goes before you now. Your past is not only a list of hard days. It is a record of his faithfulness, and it is evidence for today."
   },
   {
    "id": "stillness",
@@ -90,10 +125,29 @@
    "text": "Lord, you know how quickly my thoughts run ahead of me. Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come. Bring my thoughts back to this day and to you. Replace the noise in my head with your peace. When I start to imagine the worst, remind me of everything you have already carried me through."
   },
   {
+   "id": "scripture-8",
+   "beat": "anchor: Philippians 4:6-7",
+   "pause_after": 1.5,
+   "text": "Before we keep praying, let these words settle over your heart. Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+   "reference": "Philippians 4:6-7 (KJV)"
+  },
+  {
+   "id": "prayer-peace",
+   "beat": "guided prayer: peace that guards",
+   "pause_after": 1.2,
+   "text": "So Lord, here are my requests, and here is my thanks. Thank you for the breath in my lungs this morning. Thank you for the people who love me, and for the ways you have kept me that I did not even notice. And here is what I need. I need peace that does not depend on how this day goes. Guard my heart when someone is harsh with me. Guard my mind when bad news comes. Let your peace stand at the door of my thoughts like a guard who does not fall asleep."
+  },
+  {
    "id": "prayer-decisions",
    "beat": "guided prayer: decisions",
    "pause_after": 1.2,
    "text": "There are decisions in front of me that I do not know how to make. Some are small, and some feel like they will change everything. Give me wisdom that is bigger than my understanding. Close the doors I should not walk through, and give me courage to walk through the ones you open. Let me hear your direction clearly, and let me follow it even when it asks for patience."
+  },
+  {
+   "id": "prayer-work",
+   "beat": "guided prayer: work and responsibilities",
+   "pause_after": 1.2,
+   "text": "Lord, I bring you my work today. The tasks I enjoy and the ones I have been avoiding. Help me to work with honesty and with a steady heart, as if I am doing it for you and not only for the people who will see it. Where I am overwhelmed, show me the next small thing to do. Where I am tempted to cut corners, give me integrity. And where my work feels unseen, remind me that you see it, and that faithfulness in small things matters to you."
   },
   {
    "id": "prayer-3",
@@ -108,16 +162,48 @@
    "text": "I lift up the people I will meet today. My family, the people at my work, the stranger I will pass without knowing their story. Go before them too. Let my words be kind and my patience be real. If someone near me is carrying something heavy, help me notice, and help me carry it with them."
   },
   {
+   "id": "prayer-forgiveness",
+   "beat": "guided prayer: relationships and forgiveness",
+   "pause_after": 1.2,
+   "text": "Lord, there are people I find hard to love right now. Someone who hurt me, someone I hurt, a conversation that ended badly and still sits in my chest. I do not want to carry bitterness into this day. Help me to forgive the way you have forgiven me. Where I need to apologize, give me humility. Where I need to set a healthy boundary, give me wisdom. And where a relationship needs healing that only you can bring, I place it in your hands."
+  },
+  {
+   "id": "prayer-children",
+   "beat": "guided prayer: children and the next generation",
+   "pause_after": 1.2,
+   "text": "I pray for the children in my life, my own and the ones I care about. Go before them into their classrooms, their friendships and their screens. Protect their minds and their hearts. Let them know that they are loved by you before they ever achieve anything. Give the parents and grandparents listening patience and joy today, and let our homes be places where faith is seen, not only spoken."
+  },
+  {
    "id": "prayer-provision",
    "beat": "guided prayer: provision",
    "pause_after": 1.2,
    "text": "I also bring you my needs, the practical ones. You know what is in my account and what is on my table. You know the job I hope for and the work I already have. Provide what I need for today, and teach me to be content and grateful while I wait for what I still hope for. You have never been late, even when I thought you were."
   },
   {
+   "id": "prayer-health",
+   "beat": "guided prayer: body and strength",
+   "pause_after": 1.2,
+   "text": "I also lift up my body to you. You know where I am tired, where I hurt, and the results I am waiting for. I ask you for strength and for healing, and I thank you for every doctor, nurse and caregiver you use to help us. Give me wisdom to rest when I need rest and to take care of the body you have given me. And for anyone listening who is sick or waiting on news this morning, hold them close and give them courage for today."
+  },
+  {
+   "id": "scripture-9",
+   "beat": "anchor: Psalm 121:7-8",
+   "pause_after": 1.5,
+   "text": "Here is a promise for your going out and your coming in. The Lord shall preserve thee from all evil: he shall preserve thy soul. The Lord shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "reference": "Psalm 121:7-8 (KJV)"
+  },
+  {
+   "id": "prayer-home",
+   "beat": "guided prayer: protection over the home",
+   "pause_after": 1.2,
+   "text": "Lord, as I go out this morning, watch over my going out. Watch over the roads I travel and the places I enter. Watch over my home while I am away from it, and over everyone who lives there. Keep my family safe in body and in spirit. When we come back together tonight, let us come back to a home filled with your peace and not with tension. Be the strength of our walls and the warmth of our table."
+  },
+  {
    "id": "scripture-4",
    "beat": "anchor: Isaiah 41:10",
    "pause_after": 1.5,
-   "text": "And when fear tries to speak louder than you, remind me of your voice. Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."
+   "text": "And when fear tries to speak louder than you, remind me of your voice. Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.",
+   "reference": "Isaiah 41:10 (KJV)"
   },
   {
    "id": "prayer-5",
@@ -126,10 +212,42 @@
    "text": "Strengthen me for the hardest part of this day, whatever it turns out to be. When I feel weak, hold me up. When I do not know what to say, give me words. When I am tempted to quit, remind me that you have not let go of me and you will not start now."
   },
   {
+   "id": "scripture-10",
+   "beat": "anchor: Isaiah 43:2",
+   "pause_after": 1.5,
+   "text": "Some of you are walking into something heavy today. This promise is for you. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:2 (KJV)"
+  },
+  {
+   "id": "prayer-waters",
+   "beat": "guided prayer: through, not around",
+   "pause_after": 1.2,
+   "text": "Notice that God did not say if you pass through the waters. He said when. Lord, I will not pretend there are no deep waters in my life. But I thank you that you do not watch me from the shore. You walk through them with me. When the pressure rises today, let me feel your hand. When I think I am going under, remind me that the river has a limit, and that you set it."
+  },
+  {
+   "id": "scripture-13",
+   "beat": "anchor: Psalm 46:1-2",
+   "pause_after": 1.5,
+   "text": "Hold on to this when the day feels unstable. God is our refuge and strength, a very present help in trouble. Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea.",
+   "reference": "Psalm 46:1-2 (KJV)"
+  },
+  {
+   "id": "reflection-present-help",
+   "beat": "reflection: a very present help",
+   "pause_after": 1.2,
+   "text": "A very present help. Not a distant help, not a help that arrives after everything falls apart, but present. In the moment the phone rings with news you did not want, he is present. In the moment you feel the old panic rising, he is present. You do not have to find the right words to reach him. He is already there. Sometimes the most powerful prayer of the day is simply, Lord, you are here, and I am not alone."
+  },
+  {
    "id": "prayer-weary",
    "beat": "guided prayer: the tired and the grieving",
    "pause_after": 1.2,
    "text": "And Lord, for the one listening who woke up already tired, the one who is grieving, the one who has prayed about the same thing for a long time and is starting to lose heart, meet them right now. Sit with them in the quiet. Remind them that a slow morning is not a failed morning, and that tears are not a lack of faith. Give them enough strength for this hour, and then the next, until they can see your goodness again."
+  },
+  {
+   "id": "stillness-2",
+   "beat": "guided stillness: second breath",
+   "pause_after": 6.0,
+   "text": "Let us pause again for a moment. Breathe in slowly, and remember that he is near. Breathe out, and hand him the heaviest thing on your mind."
   },
   {
    "id": "declaration",
@@ -141,13 +259,58 @@
    "id": "scripture-5",
    "beat": "anchor: Proverbs 3:5-6",
    "pause_after": 1.5,
-   "text": "Carry one more promise with you into the next hour. Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."
+   "text": "Carry one more promise with you into the next hour. Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+   "reference": "Proverbs 3:5-6 (KJV)"
   },
   {
    "id": "reflection-4",
    "beat": "reflection: acknowledge him in the small ways",
    "pause_after": 1.2,
    "text": "In all thy ways acknowledge him. Not only in the big decisions, but in the small ones that fill an ordinary day. When you sit down to work, acknowledge him. When you answer a difficult message, acknowledge him. When you feel the old worry return in the middle of the afternoon, acknowledge him. You do not need a long prayer for that. A quiet word is enough. Lord, you are here. Lord, lead me. And the promise is that he will direct your paths, one turn at a time, all the way to evening."
+  },
+  {
+   "id": "scripture-11",
+   "beat": "anchor: Joshua 1:9",
+   "pause_after": 1.5,
+   "text": "As we come toward the end of our time together, hear what God said to Joshua on the edge of a new beginning. Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest.",
+   "reference": "Joshua 1:9 (KJV)"
+  },
+  {
+   "id": "reflection-courage",
+   "beat": "reflection: courage is a command with a reason",
+   "pause_after": 1.2,
+   "text": "God did not tell Joshua to be brave because the task was small. He told him to be strong because the One going with him was greater than the task. Your courage today does not have to come from feeling ready. It can come from knowing who is with you. Whithersoever thou goest. That means the kitchen, the office, the hospital room, the classroom, the empty apartment. There is no place on your schedule today where he will not be."
+  },
+  {
+   "id": "scripture-12",
+   "beat": "anchor: Hebrews 13:5",
+   "pause_after": 1.5,
+   "text": "And one more promise, short enough to remember all day. For he hath said, I will never leave thee, nor forsake thee.",
+   "reference": "Hebrews 13:5 (KJV)"
+  },
+  {
+   "id": "prayer-thanks",
+   "beat": "guided prayer: thanksgiving",
+   "pause_after": 1.2,
+   "text": "Father, thank you. Thank you that you went before me today, that your mercy is new, and that you will never leave me. Thank you for what you have already done in my life, even the things I only understood later. I choose to start this day grateful, not because everything is easy, but because you are faithful. Let my gratitude be louder than my worry today."
+  },
+  {
+   "id": "prayer-purpose",
+   "beat": "guided prayer: purpose and service",
+   "pause_after": 1.2,
+   "text": "Lord, use me today. Not only to get through my list, but to be part of what you are doing. Show me one person I can encourage. Give me eyes to see the need in front of me and the courage to respond. If there is a gift you have put in me that I have been hiding out of fear, help me to use it. Let my life today point someone, even one person, toward your kindness."
+  },
+  {
+   "id": "prayer-world",
+   "beat": "guided prayer: for those who serve and for peace",
+   "pause_after": 1.2,
+   "text": "I also pray beyond my own walls. For the people working early this morning to keep others safe and well. For leaders who will make decisions that affect many lives, give them wisdom and humility. For places where there is war, fear or hunger, bring your comfort and your peace. And for the church around the world, make us faithful, kind and brave."
+  },
+  {
+   "id": "prayer-evening",
+   "beat": "guided prayer: ending the day well",
+   "pause_after": 1.2,
+   "text": "And Lord, I ask you now for the end of this day, before it even begins. When evening comes, let me look back and see where you were. Let me lie down without regret for words I did not need to say. Let me rest knowing that I did what I could and left the rest to you. Go before me all the way to tonight."
   },
   {
    "id": "payoff",
@@ -192,5 +355,14 @@
   "title_card_seconds": 2.0,
   "brand": "HeroVerse Prayer",
   "amen": "Type AMEN"
- }
+ },
+ "description_intro": "Before you walk into today, God has already been there. Pray this morning prayer with us for peace, protection and courage: Scripture readings, short reflections and a guided prayer for your mind, your work, your family, your health and your home.",
+ "tags": [
+  "morning prayer",
+  "prayer for peace",
+  "prayer for protection",
+  "christian morning prayer",
+  "start your day with God",
+  "God goes before you"
+ ]
 }
