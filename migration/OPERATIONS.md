@@ -54,11 +54,14 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 - **pilot-002:** cinematic render running (private). The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT.
 - **Mining:**
   - Structure v2 on 4 teaching channels is done (`evidence/structure-mining/20261017`).
-  - Clean prayer channels (United Prayer, Morning Grace Prayers, Prayer of Hope, Mercy Harbor Gospel) are being mined.
+  - Clean prayer channels (United Prayer, Morning Grace Prayers, Prayer of Hope, Mercy Harbor Gospel): first run (39056485165) lost its push on a `blueprint.json` rebase conflict; Record now retries (PR #62) and a re-mining request is queued.
+  - Accuracy check: 12 native windows requested (`requests/accuracy-windows-20261017.json`).
   - Grace & Glory is excluded (borrowed identity/recordings).
 - **Next:**
   1. Accuracy check of the mining (native windows vs verbatim openings).
   2. Measured modeling spec (`blueprint_stats.py`).
   3. Scripts.
   4. Automate the daily chain.
-- **Waiting on the owner:** the `HERO_ENGINE_PAT` and `HERO_GEMINI_API_KEY` secrets in `heroverse-runner`. Until then renders use the private fallback.
+- **Secrets (as they stand):** `HERO_GEMINI_API_KEY` exists in heroverse-engine only; heroverse-runner has none; `HERO_ENGINE_PAT` exists nowhere.
+- **Render path:** private-only is primary. Optimise one long video plus its Shorts to ~40 runner-minutes on the private 2-core workflow (depth parallax on the opening and Shorts only, reuse voice/images when the script hash is unchanged, single-pass assembly), measured from run 39058782907's stage timings.
+- **Runner:** dormant, optional. If ever needed it requires only `HERO_ENGINE_PAT`; every Gemini step (Shorts select/review, mining, watched reviews) stays in the private repo so the runner never needs the Gemini key. No new keys are requested unless truly needed.
