@@ -1,0 +1,97 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 16,
+    "picture_changes_per_minute": 23.96,
+    "median_shot_seconds": 1.767,
+    "longest_shot_seconds": 6.6,
+    "motion_median_top_decile_diff": 7.635
+   },
+   "rhythm": {
+    "audio_onsets": 96,
+    "audio_onsets_per_minute": 143.76,
+    "tempo": {
+     "bpm": 122.45,
+     "confidence": 0.05
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.312,
+     "chance_fraction": 0.148,
+     "lift": 2.12
+    },
+    "sync": {
+     "median_offset_seconds": 0.347437,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 7,
+     "visual_events": 16,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -16.4,
+    "loudness_range_lu": 2.6,
+    "true_peak_dbtp": -0.4
+   },
+   "colour": {
+    "mean_brightness": 0.304,
+    "brightness_std_over_time": 0.0763,
+    "mean_saturation": 0.4125,
+    "saturation_std_over_time": 0.0675
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.988,
+     "singing": 0.0,
+     "music": 0.048,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 82,
+     "singing": 0,
+     "music": 1,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 86,
+    "words_per_minute": 128.8,
+    "transcript": "Brethren, before the responsibilities of this day begin to demand your attention, before unexpected news reaches your ears, and before your mind starts calculating everything that must be done. You do not know everything this day will bring, but you can choose who you will trust as you walk through it. may have plans that need to succeed, decisions that require wisdom, family members whose well -being concerns you, or burdens that have followed you from yesterday, into this new morning. Whatever is waiting for you..."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 3.375,
+     "frames": 6
+    },
+    {
+     "label": "music",
+     "start_seconds": 2.88,
+     "end_seconds": 3.855,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 3.36,
+     "end_seconds": 40.031,
+     "frames": 76
+    }
+   ]
+  }
+ ]
+}
