@@ -5,7 +5,9 @@
       "Bash(git push origin claude/*)",
       "Bash(python3 *)",
       "Bash(ffmpeg *)",
-      "Bash(ffprobe *)"
+      "Bash(ffprobe *)",
+      "mcp__github__create_or_update_file",
+      "mcp__github__actions_run_trigger"
     ]
   }
 }
