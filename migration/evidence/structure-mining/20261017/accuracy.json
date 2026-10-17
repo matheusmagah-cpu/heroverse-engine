@@ -1,0 +1,11 @@
+{
+ "version": "mining-accuracy-v1",
+ "structure_dir": "migration/evidence/structure-mining/20261017",
+ "windows_compared": 0,
+ "transcript_agreement_median": null,
+ "transcript_agreement_min": null,
+ "opening_words_agreement": null,
+ "openings_checked": 0,
+ "windows": [],
+ "reading": "agreement >= 0.85 and openings >= 0.8: mined structure usable as measured; below: model-reported only"
+}
