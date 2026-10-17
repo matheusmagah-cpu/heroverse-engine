@@ -57,7 +57,8 @@ jobs:
             gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" --clobber
             python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json"
           done
-          ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/kout/img/*.png" -vf "scale=448:256,tile=4x$(( ( $(ls $RUNNER_TEMP/kout/img/*.png | wc -l) + 3 ) / 4 ))" -frames:v 1 -q:v 4 "$GITHUB_WORKSPACE/$dest/review-sheet.jpg"
+          mkdir -p "$RUNNER_TEMP/sheet" && for f in "$RUNNER_TEMP"/kout/img/*.png; do case "$f" in *-sha256-*) ;; *) cp "$f" "$RUNNER_TEMP/sheet/";; esac; done
+          ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/sheet/*.png" -vf "scale=448:256,tile=4x$(( ( $(ls $RUNNER_TEMP/sheet/*.png | wc -l) + 3 ) / 4 ))" -frames:v 1 -q:v 4 "$GITHUB_WORKSPACE/$dest/review-sheet.jpg"
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
