@@ -602,6 +602,17 @@
       "completed_at": "2026-10-17T04:27:48.227753+00:00",
       "run_id": "39002469910",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-mEKdag_zn44-60-100-v1",
+      "video_id": "mEKdag_zn44",
+      "start_seconds": 60,
+      "end_seconds": 100,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-17T04:28:00.847419+00:00",
+      "day_utc": "2026-10-17",
+      "units_remaining_at_reservation": 372,
+      "reserved_units": 14
     }
   ]
 }
