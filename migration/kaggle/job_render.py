@@ -37,11 +37,11 @@ if not ok:
        "&& cp /tmp/ffmpeg-*-amd64-static/ffmpeg /tmp/ffmpeg-*-amd64-static/ffprobe /usr/local/bin/")
 fonts = Path.home() / ".fonts"
 fonts.mkdir(exist_ok=True)
-for f in glob.glob(str(src / "fonts" / "*.ttf")):
-    shutil.copy(f, fonts)
 Path("/usr/share/fonts/truetype/dejavu").mkdir(parents=True, exist_ok=True)
-for f in glob.glob(str(src / "fonts" / "*.ttf")):
-    shutil.copy(f, "/usr/share/fonts/truetype/dejavu/")
+for f in glob.glob(str(src / "font__*.ttf")):  # dataset files are flat: font__<name>, img__<id>.png/json
+    name = Path(f).name[len("font__"):]
+    shutil.copy(f, fonts / name)
+    shutil.copy(f, Path("/usr/share/fonts/truetype/dejavu") / name)
 subprocess.run(["fc-cache", "-f"], check=False)
 
 # Python 3.12 virtual environments, pinned exactly as on GitHub
@@ -59,8 +59,8 @@ env = dict(os.environ, OMP_NUM_THREADS="4")
 prod = repo / "migration/production"
 work, inp = W / "work", W / "in"
 (inp / "img").mkdir(parents=True, exist_ok=True)
-for f in glob.glob(str(src / "img" / "*")):
-    shutil.copy(f, inp / "img")
+for f in glob.glob(str(src / "img__*")):
+    shutil.copy(f, inp / "img" / Path(f).name[len("img__"):])
 script = prod / PILOT / "script.json"
 os.chdir(repo)
 sh([py["voice"], "-I", "-B", str(prod / "pilot_render.py"), "prepare", str(work), str(repo / "HeroVerse_Linux_Source_Ready_20261013_v2.zip")], env=env)

@@ -38,7 +38,7 @@ jobs:
           echo "$RUNNER_TEMP/k/bin" >> "$GITHUB_PATH"
       - name: Private Kaggle dataset with code and production files (owner authorization 2026-10-17)
         run: |
-          d="$RUNNER_TEMP/assets"; mkdir -p "$d/img" "$d/fonts"
+          d="$RUNNER_TEMP/assets"; mkdir -p "$d"
           mkdir -p "$RUNNER_TEMP/repo" && git archive HEAD | tar -x -C "$RUNNER_TEMP/repo"
           tar -cf "$d/engine.tar" -C "$RUNNER_TEMP" repo
           cd "$d"
@@ -52,11 +52,11 @@ jobs:
           for meta in migration/production/$PILOT/images/*.json; do
             id=$(basename "$meta" .json)
             read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
-            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$d/img/$id.png"
-            echo "$sha  $d/img/$id.png" | sha256sum -c -
-            cp "$meta" "$d/img/$id.json"
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$d/img__$id.png"
+            echo "$sha  $d/img__$id.png" | sha256sum -c -
+            cp "$meta" "$d/img__$id.json"
           done
-          sudo apt-get install -y -qq fonts-dejavu-core >/dev/null && cp /usr/share/fonts/truetype/dejavu/*.ttf "$d/fonts/"
+          sudo apt-get install -y -qq fonts-dejavu-core >/dev/null && for f in /usr/share/fonts/truetype/dejavu/*.ttf; do cp "$f" "$d/font__$(basename "$f")"; done
           du -sh "$d"
           python3 -I -B migration/kaggle/kaggle_run.py dataset "$d" heroverse-assets "HeroVerse production assets"
       - name: Produce on Kaggle
