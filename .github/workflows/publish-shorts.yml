@@ -1,0 +1,58 @@
+name: HeroVerse publish Shorts (cut from a published long video, scheduled slots)
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory whose long video is already published (e.g. pilot-002)
+        required: true
+      slots:
+        description: Comma-separated RFC3339 UTC go-public times, one per Short (e.g. 2026-10-18T14:00:00Z,...)
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-publish
+  cancel-in-progress: false
+jobs:
+  shorts:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+      SLOTS: ${{ inputs.slots }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Shorts from the private release (hash-verified)
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          echo "$SLOTS" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z(,[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)*$' || { echo INVALID_SLOTS; exit 1; }
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          d="migration/production/$PILOT"; mkdir -p "$RUNNER_TEMP/shorts"
+          python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts']]" "$d/shorts/shorts.json" |
+          while read -r f sha; do
+            n="${f%.mp4}"
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-$n-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
+            echo "$sha  $RUNNER_TEMP/shorts/$f" | sha256sum -c -
+          done
+      - name: QA gate and publish (each Short private until its slot, then public automatically)
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          d="migration/production/$PILOT"
+          key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/manifest.json")"
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          mkdir -p migration/publish/receipts
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_shorts.py "$d/shorts/shorts.json" "$RUNNER_TEMP/shorts" "$key" \
+            migration/publish/ledger.json "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" "$SLOTS"
+      - name: Record ledger and receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/publish/ledger.json migration/publish/receipts 2>/dev/null || true
+          git commit -q -m "Publish $PILOT Shorts (run $GITHUB_RUN_ID)" || exit 0
+          git pull --rebase -q origin main && git push -q origin HEAD:main

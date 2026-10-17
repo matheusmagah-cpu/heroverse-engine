@@ -77,18 +77,18 @@ def main(prompts_path, out_dir, engine="flux"):
         if only and item["id"] not in only:
             continue
         prompt = item["prompt"] + ", " + spec["style"]
-        payload = {"prompt": prompt[:2000], "seed": item["seed"]}
-        if engine == "flux":
-            payload["steps"] = 8
+        if engine == "flux":  # Workers AI flux-1-schnell accepts only prompt and steps (no seed: the saved PNG is the record)
+            payload = {"prompt": prompt[:2048], "steps": 8}
         else:
-            payload.update({"width": spec["width"], "height": spec["height"], "negative_prompt": spec["negative"],
-                            "num_steps": 8})
+            payload = {"prompt": prompt[:2000], "seed": item["seed"], "width": spec["width"], "height": spec["height"],
+                       "negative_prompt": spec["negative"], "num_steps": 8}
         t0 = time.time()
         raw = run(eng["model"], payload)
         image = Image.open(io.BytesIO(raw)).convert("RGB")
         image.save(out / f"{item['id']}.png")
         (out / f"{item['id']}.json").write_text(json.dumps({
-            "id": item["id"], "prompt": prompt, "negative": spec.get("negative"), "seed": item["seed"],
+            "id": item["id"], "prompt": prompt, "negative": spec.get("negative") if engine != "flux" else None,
+            "seed": item["seed"] if engine != "flux" else None,
             "size": list(image.size), "engine": f"cloudflare-workers-ai:{eng['model']}",
             "models": {eng["model"]: {"license": eng["license"], "revision": "workers-ai-managed", "source": eng["licence_source"]}},
             "seconds": round(time.time() - t0, 1), "generated_by": "HeroVerse pipeline (AI-generated image)"}, indent=1) + "\n")
