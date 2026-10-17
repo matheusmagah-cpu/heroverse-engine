@@ -1,0 +1,48 @@
+name: HeroVerse full-structure mining (whole videos of winning channels)
+on:
+  workflow_dispatch:
+    inputs:
+      channels:
+        description: Comma-separated channel ids
+        required: true
+      per_channel:
+        description: Best videos by views per channel (the latest upload is always added)
+        required: true
+        default: '2'
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-structure-mining
+  cancel-in-progress: false
+jobs:
+  mine:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 170
+    env:
+      CHANNELS: ${{ inputs.channels }}
+      PER_CHANNEL: ${{ inputs.per_channel }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Unit tests
+        run: python3 -I -B migration/mining/test_structure_mining.py
+      - name: Mine (Data API metadata and comments; Gemini free tier on the whole public video)
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: |
+          echo "$CHANNELS" | grep -Eq '^UC[A-Za-z0-9_-]{22}(,UC[A-Za-z0-9_-]{22})*$' || { echo INVALID_CHANNELS; exit 1; }
+          case "$PER_CHANNEL" in [1-5]) ;; *) echo INVALID_PER_CHANNEL; exit 1;; esac
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          day=$(date -u +%Y%m%d); echo "DAY=$day" >> "$GITHUB_ENV"
+          out="migration/evidence/structure-mining/$day"; mkdir -p "$out"
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/structure_mining.py "$out" "$CHANNELS" "$PER_CHANNEL"
+      - name: Record
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/structure-mining || true
+          git commit -q -m "Record full-structure mining $DAY (run $GITHUB_RUN_ID; model-reported, not verified)" || exit 0
+          git pull --rebase -q origin main && git push -q origin HEAD:main
