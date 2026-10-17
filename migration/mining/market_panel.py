@@ -30,6 +30,10 @@ QUERIES = (
     "prayer for financial breakthrough", "worship songs", "christian music", "faith encouragement",
     "holy spirit", "end times prophecy", "jesus christ", "prayer for my family",
     "god is telling you", "christian shorts", "bible facts", "gospel",
+    # opinion / commentary / critique structures (owner directive 2026-10-17)
+    "what the bible really says about", "christian perspective on", "is it biblical",
+    "should christians", "bible explained", "christian apologetics", "christian commentary",
+    "the truth about christianity",
 )
 # Other faceless niches, only to find structures that grow very fast (mechanism
 # references, kept apart from Christian demand comparators by the "niche" field).
@@ -38,7 +42,7 @@ CROSS_NICHE_QUERIES = (
     "true story", "sleep stories", "life lessons", "meditation", "psychology facts", "audiobook",
     "manifestation", "affirmations",
 )
-VIEWCOUNT_CHRISTIAN = 20
+VIEWCOUNT_CHRISTIAN = 12
 DISCOVERY_RESERVE_UNITS = 900  # keep for channel statistics and upload histories
 YOUNG_DAYS = 365
 MAX_HISTORY_VIDEOS = 200
