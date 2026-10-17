@@ -1,0 +1,81 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.04,
+   "editing": {
+    "picture_changes": 7,
+    "picture_changes_per_minute": 10.49,
+    "median_shot_seconds": 1.301,
+    "longest_shot_seconds": 29.196,
+    "motion_median_top_decile_diff": 3.616
+   },
+   "rhythm": {
+    "audio_onsets": 2,
+    "audio_onsets_per_minute": 3.0,
+    "tempo": {
+     "bpm": null,
+     "confidence": 0.0,
+     "reason": "fewer than 4 onsets"
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.003,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 1,
+     "visual_events": 7
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -8.6,
+    "loudness_range_lu": 2.4,
+    "true_peak_dbtp": 3.4
+   },
+   "colour": {
+    "mean_brightness": 0.3933,
+    "brightness_std_over_time": 0.0284,
+    "mean_saturation": 0.3253,
+    "saturation_std_over_time": 0.0402
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.0,
+     "singing": 0.0,
+     "music": 1.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 0,
+     "singing": 0,
+     "music": 83,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 0,
+    "words_per_minute": 0.0,
+    "transcript": ""
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 40.031,
+     "frames": 83
+    }
+   ]
+  }
+ ]
+}
