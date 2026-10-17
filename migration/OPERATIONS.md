@@ -35,6 +35,11 @@ Each pilot has `schedule.json` (`publish_at` plus `shorts_slots`, in UTC).
 
 `git` push through the session proxy is enough to start this.
 
+## Starting any workflow without GitHub API tools
+Commit `migration/requests/<name>.json` with `{"workflow": "file.yml", "inputs": {...}}` to main, through a branch and merge. `requests.yml` dispatches it once and moves the file to `done/`.
+
+Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003"}}`.
+
 ## Pipeline gates (never edited after results)
 1. **QA (frozen):** frozen criteria.
 2. **Long video:** perceptual approval (`inspection/APPROVAL.json` bound to the file hash).
