@@ -32,6 +32,8 @@ QUERIES = (
     "god is telling you", "christian shorts", "bible facts", "gospel",
 )
 YOUNG_DAYS = 365
+MAX_HISTORY_VIDEOS = 200
+MAX_PAGES = 4
 DISCOVERY_DAYS = 30
 ISO = re.compile(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?")
 
@@ -144,16 +146,20 @@ def build(client, now):
         row["discovery_orders"] = sorted(found[cid]["orders"])
         age = (now - datetime.fromisoformat(row["published_at"].replace("Z", "+00:00"))).days if row["published_at"] else None
         row["age_days"] = age
-    young = sorted((r for r in info.values() if r["age_days"] is not None and r["age_days"] <= YOUNG_DAYS
-                    and r["uploads_playlist"]), key=lambda r: r["age_days"])
-    for row in young:
-        pages = 4 if row["videos"] > 50 else 1
+    # Upload histories: channels created within YOUNG_DAYS first, then any channel
+    # with a short public history (old accounts that started recently), so the
+    # activity age can be measured from the first upload.
+    wanted = [r for r in info.values() if r["uploads_playlist"] and r["videos"] > 0 and
+              ((r["age_days"] is not None and r["age_days"] <= YOUNG_DAYS) or r["videos"] <= MAX_HISTORY_VIDEOS)]
+    wanted.sort(key=lambda r: (not (r["age_days"] is not None and r["age_days"] <= YOUNG_DAYS), r["videos"]))
+    for row in wanted:
+        pages = min(MAX_PAGES, -(-row["videos"] // 50))
         if not client.can(pages * 2):
             row["uploads_status"] = "NOT_FETCHED_BUDGET"
             continue
         row["uploads"], row["uploads_truncated"] = uploads(client, row["uploads_playlist"], pages)
         row["uploads_status"] = "FETCHED"
-    return {"version": "market-panel-v1", "captured_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+    return {"version": "market-panel-v2", "captured_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "queries": list(QUERIES), "discovery_window_days": DISCOVERY_DAYS, "young_days": YOUNG_DAYS,
             "region_code": "US", "relevance_language": "en",
             "channels": sorted(info.values(), key=lambda r: r["channel_id"]),
