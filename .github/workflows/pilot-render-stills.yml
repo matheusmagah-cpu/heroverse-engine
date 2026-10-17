@@ -65,8 +65,15 @@ jobs:
           "$RUNNER_TEMP/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$RUNNER_TEMP/in/img/$fig.png" "$RUNNER_TEMP/in/img/$fig.json" "$RUNNER_TEMP/in/figure.png"
       - name: Assemble
         run: '"$RUNNER_TEMP/cine/bin/python" -I -B migration/production/still_render.py assemble "$RUNNER_TEMP/work" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac"'
-      - name: Shorts (vertical, sentence-exact, from the same sources)
-        run: python3 -I -B migration/production/shorts_cut.py "$RUNNER_TEMP/work" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac" "$RUNNER_TEMP/work/shorts" 3
+      - name: Shorts (analysis of the whole video, own edit per Short, watched review)
+        continue-on-error: true  # a Shorts failure never blocks the long video's QA and record
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/work/shorts"
+          "$RUNNER_TEMP/cine/bin/python" -I -B migration/production/shorts_select.py "$RUNNER_TEMP/work/timeline.json" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/work/shorts/selection.json" 5
+          "$RUNNER_TEMP/cine/bin/python" -I -B migration/production/shorts_produce.py "$RUNNER_TEMP/work" "$RUNNER_TEMP/work/shorts/selection.json" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac" "$RUNNER_TEMP/work/shorts" "$HERO_DEPTH_MODEL"
+          "$RUNNER_TEMP/cine/bin/python" -I -B migration/production/shorts_review.py "$RUNNER_TEMP/work/shorts" 3
       - name: QA against frozen criteria
         run: |
           mkdir -p "$RUNNER_TEMP/models" && cd "$RUNNER_TEMP/models"
@@ -103,7 +110,7 @@ jobs:
           cp "$RUNNER_TEMP/work/package/package.json" "migration/production/$PILOT/out/package.json" || true
           cp "$RUNNER_TEMP/work/package/thumbnail.jpg" "migration/production/$PILOT/inspection/thumbnail.jpg" || true
           mkdir -p "migration/production/$PILOT/shorts"
-          cp "$RUNNER_TEMP/work/shorts/shorts.json" "migration/production/$PILOT/shorts/" || true
+          cp "$RUNNER_TEMP/work/shorts/shorts.json" "$RUNNER_TEMP/work/shorts/selection.json" "migration/production/$PILOT/shorts/" || true
           for s in "$RUNNER_TEMP"/work/shorts/short-*.mp4; do
             [ -f "$s" ] || continue
             ssha=$(sha256sum "$s" | cut -d' ' -f1); n=$(basename "$s" .mp4)

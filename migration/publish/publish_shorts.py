@@ -29,6 +29,9 @@ def sha256_file(path):
 
 
 def title_for(short):
+    if short.get("title") and short["title"] != short.get("hook"):
+        t = short["title"].strip()
+        return t if "#shorts" in t.lower() or len(t) > 90 else t + " #shorts"
     hook = short["hook"].rstrip(".!?")
     title = f"{hook} 🙏 #shorts"
     return title if len(title) <= 100 else hook[:88] + "… #shorts"
@@ -50,8 +53,13 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     slots = [s for s in slots.split(",") if s]
     if len(slots) < len(spec["shorts"]):
         raise SystemExit("NOT_ENOUGH_SLOTS")
+    spec["shorts"] = [r for r in spec["shorts"] if r.get("publish")]
+    if not spec["shorts"]:
+        raise SystemExit("NO_SHORT_APPROVED_BY_REVIEW")
     reports = []
     for short in spec["shorts"]:
+        if (short.get("review") or {}).get("status") != "PASS":
+            raise SystemExit("SHORT_NOT_REVIEWED_PASS " + short["file"])
         path = Path(shorts_dir) / short["file"]
         if sha256_file(path) != short["sha256"]:
             raise SystemExit("SHORT_HASH_MISMATCH " + short["file"])
