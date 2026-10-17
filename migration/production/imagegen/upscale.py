@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""2x super-resolution of generated images on CPU (Real-ESRGAN x2plus, BSD-3-Clause,
-loaded through spandrel, MIT). A 1024x1024 FLUX image becomes 2048x2048, which
+"""2x super-resolution of generated images on CPU (Real-ESRGAN general x4v3, the
+compact SRVGG model, BSD-3-Clause, loaded through spandrel, MIT; its 4x output is
+downsampled to 2x with Lanczos, which also supersamples away upscaling grain). A 1024x1024 FLUX image becomes 2048x2048, which
 crops to a full 2048x1152 frame for 16:9 and 1152x2048 for vertical Shorts.
 Processed in overlapping tiles so memory stays small. The metadata JSON of each
 image records the upscaler and its weight hash; the PNG is replaced in place.
@@ -11,7 +12,8 @@ import json
 from pathlib import Path
 import sys
 
-TILE, PAD = 384, 16
+TILE, PAD = 256, 12
+TARGET = 2
 
 
 def sha256(path):
@@ -41,15 +43,19 @@ def main(weights, images):
                     oy, ox = (y - y0) * scale, (x - x0) * scale
                     th, tw = min(TILE, h - y) * scale, min(TILE, w - x) * scale
                     out[y * scale:y * scale + th, x * scale:x * scale + tw] = r[oy:oy + th, ox:ox + tw]
-        Image.fromarray((out * 255 + 0.5).astype(np.uint8)).save(path)
+        result = Image.fromarray((out * 255 + 0.5).astype(np.uint8))
+        if scale != TARGET:
+            result = result.resize((w * TARGET, h * TARGET), Image.LANCZOS)
+        result.save(path)
         meta = Path(path).with_suffix(".json")
         if meta.exists():
             m = json.loads(meta.read_text())
-            m["size"] = [w * scale, h * scale]
-            m["upscaler"] = {"model": "Real-ESRGAN x2plus", "licence": "bsd-3-clause", "weights_sha256": wsha,
-                             "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth"}
+            m["size"] = [w * TARGET, h * TARGET]
+            m["upscaler"] = {"model": "Real-ESRGAN general x4v3 (downsampled to 2x)", "licence": "bsd-3-clause",
+                             "weights_sha256": wsha,
+                             "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"}
             meta.write_text(json.dumps(m, indent=1) + "\n")
-        print(Path(path).name, (w, h), "->", (w * scale, h * scale), flush=True)
+        print(Path(path).name, (w, h), "->", (w * TARGET, h * TARGET), flush=True)
 
 
 if __name__ == "__main__":

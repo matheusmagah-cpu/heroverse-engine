@@ -37,15 +37,15 @@ jobs:
           test -n "$CLOUDFLARE_API_TOKEN" || { echo CLOUDFLARE_API_TOKEN_MISSING; exit 1; }  # account id: secret, else resolved from the token
           python3 -m venv "$RUNNER_TEMP/v" && "$RUNNER_TEMP/v/bin/pip" install -q --disable-pip-version-check pillow==11.0.0
           "$RUNNER_TEMP/v/bin/python" -I -B migration/production/imagegen/cf_images.py "migration/production/$PILOT/images.json" "$RUNNER_TEMP/img" "$ENGINE"
-      - name: 2x super-resolution on CPU (Real-ESRGAN x2plus, BSD-3; FLUX outputs are 1024 square)
+      - name: 2x super-resolution on CPU (Real-ESRGAN general x4v3 compact, BSD-3; FLUX outputs are 1024 square)
         if: inputs.engine == 'flux'
         run: |
           python3 -m venv "$RUNNER_TEMP/up"
           "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1
           "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check spandrel==0.4.1 pillow==11.0.0 numpy==2.2.6
-          curl -fsSL --retry 3 -o "$RUNNER_TEMP/RealESRGAN_x2plus.pth" https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth
-          echo "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb  $RUNNER_TEMP/RealESRGAN_x2plus.pth" | sha256sum -c -
-          "$RUNNER_TEMP/up/bin/python" -I -B migration/production/imagegen/upscale.py "$RUNNER_TEMP/RealESRGAN_x2plus.pth" "$RUNNER_TEMP"/img/*.png
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/realesr-general-x4v3.pth" https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth
+          echo "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292  $RUNNER_TEMP/realesr-general-x4v3.pth" | sha256sum -c -
+          "$RUNNER_TEMP/up/bin/python" -I -B migration/production/imagegen/upscale.py "$RUNNER_TEMP/realesr-general-x4v3.pth" "$RUNNER_TEMP"/img/*.png
       - name: Release assets, metadata and review sheet
         run: |
           sudo apt-get install -y -qq ffmpeg >/dev/null
@@ -59,6 +59,9 @@ jobs:
           done
           n=$(ls "$RUNNER_TEMP"/sheet/*.png | wc -l)
           ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/sheet/*.png" -vf "scale=448:256:force_original_aspect_ratio=decrease,pad=448:256:(ow-iw)/2:(oh-ih)/2,tile=4x$(( (n + 3) / 4 ))" -frames:v 1 -q:v 4 "$GITHUB_WORKSPACE/$dest/review-sheet-cf.jpg"
+          for png in "$RUNNER_TEMP"/sheet/*.png; do  # 100% detail crops (centre 640x360) to judge sharpness
+            ffmpeg -v error -y -i "$png" -vf "crop=640:360" "$RUNNER_TEMP/sheet/$(basename "$png" .png).detail.jpg"; done
+          ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/sheet/*.detail.jpg" -vf "tile=2x$(( (n + 1) / 2 ))" -frames:v 1 -q:v 3 "$GITHUB_WORKSPACE/$dest/detail-sheet-cf.jpg"
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
