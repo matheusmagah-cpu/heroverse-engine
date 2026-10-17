@@ -13,6 +13,7 @@ persistent "Type AMEN" prompt. Audio: identical to pilot_render (voice forward, 
 music ducked, -15 LUFS). Writes pilot.mp4 and manifest.json; no upload.
 """
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -254,14 +255,32 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
     def length(i):
         return plan[i]["end"] - plan[i]["start"]
 
+    cine = script.get("cinematic")  # {"depth_model": path or env, "atmosphere": [image ids with dust in the light]}
+    if cine:
+        import cinematic
+        model = Path(os.environ.get("HERO_DEPTH_MODEL", cine.get("depth_model", "")))
+        for i in range(len(plan)):
+            cinematic.grade(frames / f"{i:03d}.png")
+        graded_figure = work / "figure-graded.png"
+        cinematic.grade(figure_path, graded_figure)
+        cinematic.depth(model, [frames / f"{i:03d}.png" for i in range(len(plan))])
+        mark("depth")
     if moving:
-        # 1) each background moves (smooth camera) for its hold plus the cross-fade tail
+        # 1) each background moves for its hold plus the cross-fade tail: true depth parallax when
+        #    cinematic, otherwise a smooth single-plane camera
         def raw(i):
-            plan[i]["motion"] = "push_in" if i == 0 else MOTIONS[i % len(MOTIONS)]
-            camera.render(frames / f"{i:03d}.png", clips / f"raw-{i:03d}.mp4", length(i) + FADE, plan[i]["motion"],
-                          intermediate=True)
-        with ThreadPoolExecutor(max_workers=4) as pool:
+            out, seconds = clips / f"raw-{i:03d}.mp4", length(i) + FADE
+            if cine:
+                plan[i]["motion"] = "dolly_in" if i == 0 else cinematic.MOVES[i % len(cinematic.MOVES)]
+                plan[i]["atmosphere"] = plan[i]["image"] in cine.get("atmosphere", [])
+                cinematic.parallax(frames / f"{i:03d}.png", frames / f"{i:03d}.depth.png", out, seconds,
+                                   plan[i]["motion"], dust=plan[i]["atmosphere"], intermediate=True)
+            else:
+                plan[i]["motion"] = "push_in" if i == 0 else MOTIONS[i % len(MOTIONS)]
+                camera.render(frames / f"{i:03d}.png", out, seconds, plan[i]["motion"], intermediate=True)
+        with ThreadPoolExecutor(max_workers=2 if cine else 4) as pool:
             list(pool.map(raw, range(len(plan))))
+        mark("moves")
 
         # 2) segment i = tail of the previous move cross-faded into the start of this one
         def segment(i):
@@ -303,17 +322,22 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
     (work / "captions.ass").write_text(build_ass(script, timeline, total))
     final = work / "pilot.mp4"
     title_end = script["overlay"]["title_card_seconds"]
-    graph = (f"[2:v]scale=-1:{FIGURE_HEIGHT}[fg];[0:v][fg]overlay=x={FIGURE_X}:y=H-h:enable='gte(t,{title_end})',"
-             if moving else "[0:v]") + f"ass={work / 'captions.ass'},format=yuv420p[vout]"
+    graph = (f"[2:v]scale=-1:{FIGURE_HEIGHT}[fg];[0:v][fg]overlay=x={FIGURE_X}:y=H-h:enable='gte(t,{title_end})'"
+             if moving else "[0:v]null")
+    if cine:  # film finish on picture and figure together, under the captions (text stays clean)
+        graph += f"[pic];[pic]{cinematic.LOOK}"
+    graph += f",ass={work / 'captions.ass'},format=yuv420p[vout]"
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "holds.txt"), "-i", str(mix),
-         "-loop", "1", "-framerate", "30", "-i", str(figure_path),
+         "-loop", "1", "-framerate", "30", "-i", str(graded_figure if cine else figure_path),
          "-filter_complex", graph, "-map", "[vout]", "-map", "1:a:0", "-shortest",
          "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-r", "30", "-g", "60",
          "-c:a", "aac", "-b:a", "192k", "-ar", str(RATE_OUT), "-t", f"{total:.3f}", "-movflags", "+faststart",
          str(final)])
     mark("final_encode")
     figure_meta = json.loads(Path(figure_path).with_suffix(".json").read_text())
-    manifest = {"version": "pilot-manifest-v2", "pilot_id": script["pilot_id"], "grammar": "figure+moving-backgrounds+captions" if moving else "figure+backgrounds+captions",
+    grammar = ("figure+depth-parallax-backgrounds+film-look+captions" if cine else
+               "figure+moving-backgrounds+captions" if moving else "figure+backgrounds+captions")
+    manifest = {"version": "pilot-manifest-v2", "pilot_id": script["pilot_id"], "grammar": grammar,
                 "output_sha256": sha256(final), "output_seconds": probe_duration(final),
                 "script_sha256": sha256(script_path),
                 "voice": {"engine": script["voice"]["engine"], "voice_id": timeline["voice_id"],
@@ -326,6 +350,9 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
                 "sentences": timeline["sentences"],
                 "overlay": {k: script["overlay"][k] for k in ("brand", "amen", "title", "title_card_seconds")},
                 "badges": list(BADGES),
+                "cinematic": ({"depth_model": {"name": "Depth Anything V2 Small (ONNX)", "licence": "apache-2.0",
+                                               "sha256": sha256(model)}, "grade": cinematic.GRADE, "look": cinematic.LOOK,
+                               "atmosphere": cine.get("atmosphere", [])} if cine else None),
                 "clips": [], "shots": [], "timeline": timeline["segments"],
                 "upload_performed": False, "publication_performed": False}
     (work / "manifest.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
