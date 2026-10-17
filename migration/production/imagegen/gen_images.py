@@ -39,7 +39,7 @@ def main(prompts_path, out_dir, shard, shards):
     record = rights()
     torch.set_num_threads(4)
     pipe = DiffusionPipeline.from_pretrained(BASE, revision=record[BASE]["revision"], torch_dtype=torch.float32,
-                                             use_safetensors=True)
+                                             use_safetensors=True, variant="fp16")
     pipe.scheduler = LCMScheduler.from_config(pipe.scheduler.config)
     pipe.load_lora_weights(LORA, revision=record[LORA]["revision"])
     pipe.set_progress_bar_config(disable=True)

@@ -119,6 +119,7 @@ def voice(work, script_path):
     cfg = script["voice"]
     pieces, timeline, cursor, rate = [], [], LEAD_IN, None
     pieces.append(None)  # placeholder for lead-in silence
+    spoken = []
     for segment in script["segments"]:
         start = cursor
         for index, sentence in enumerate(sentences(segment["text"])):
@@ -129,6 +130,8 @@ def voice(work, script_path):
                 raise RuntimeError("VOICE_CLIPPING " + segment["id"])
             samples, rate = sf.read(path, dtype="float32")
             pieces.append(samples)
+            spoken.append({"segment": segment["id"], "text": sentence, "start": round(cursor, 3),
+                           "end": round(cursor + len(samples) / rate, 3)})
             pieces.append(np.zeros(int(SENTENCE_GAP * rate), dtype=np.float32))
             cursor += len(samples) / rate + SENTENCE_GAP
         timeline.append({"id": segment["id"], "start": round(start, 3), "end": round(cursor, 3)})
@@ -138,7 +141,7 @@ def voice(work, script_path):
     narration = np.concatenate(pieces)
     sf.write(work / "voice.wav", narration, rate, subtype="PCM_16")
     total = len(narration) / rate
-    (work / "timeline.json").write_text(json.dumps({"segments": timeline, "voice_seconds": round(total, 3),
+    (work / "timeline.json").write_text(json.dumps({"segments": timeline, "sentences": spoken, "voice_seconds": round(total, 3),
                                                    "sample_rate": rate, "voice_id": cfg["voice_id"],
                                                    "speed": cfg["speed"]}, indent=1))
     print(json.dumps({"voice_seconds": round(total, 2), "segments": len(timeline)}))

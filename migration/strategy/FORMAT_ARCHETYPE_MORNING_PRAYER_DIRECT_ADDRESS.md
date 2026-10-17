@@ -35,3 +35,12 @@ audience: English-speaking Christians starting the day → desire: peace, guidan
 1. Approve this archetype for a pilot (contract F4 gate: "usuário aprova um arquétipo para piloto").
 2. Choose a visual source with documented rights at zero cost.
 3. Original script and TakePlan → render → existing QA gates (loudness target −15 ± 1 LUFS, speech intelligibility via ASR WER, meter and semantic checks against the archetype) → approval → publication within the D-047 envelope.
+
+## Amendment 2026-10-17: visual grammar (after the pilot-001 review)
+The "28–36 picture changes/min" above counted **caption changes**, not scene cuts (see `production/pilot-001/inspection/REVIEW.md` and `diagnostics/av-picture-change/references/SPOT_CHECK.md`). Corrected visual grammar for this archetype:
+- a title card in the first 1–2 s, matching the thumbnail promise;
+- one persistent central figure (Jesus in prayer) at the left ~40% of the frame, the same across the video;
+- backgrounds behind it changing about every 6–13 s;
+- a large caption box at right-centre showing the spoken line, changing every ~3–4 s and synchronized to the voice;
+- persistent channel mark, a rotating subscribe/like badge and a "Type AMEN" prompt.
+The "Visuals are the open blocker" item is resolved for pilot-002 by open-weight generated stills (SDXL base 1.0, CreativeML Open RAIL++-M). Its licence and revision are recorded per image.
