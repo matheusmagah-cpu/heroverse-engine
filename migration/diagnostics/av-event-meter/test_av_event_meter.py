@@ -49,11 +49,22 @@ def write_video(path, fps, seconds, flashes=(), fade=False):
         raise RuntimeError(stderr.decode())
 
 
-def write_audio(path, rate, channels, seconds, tones=(), noise_dbfs=None, seed=7):
-    """tones: (onset, duration, hz, rms_dbfs, mode); mode in mono/right/antiphase."""
+def write_audio(path, rate, channels, seconds, tones=(), noise_dbfs=None, seed=7, bed_dbfs=None,
+                bed_start=0.0):
+    """tones: (onset, duration, hz, rms_dbfs, mode); mode in mono/right/antiphase.
+    bed_dbfs adds a continuous slowly modulated 110/165/220 Hz chord (music-like
+    bed) from bed_start seconds on."""
     rng = random.Random(seed)
     frames = round(rate * seconds)
     data = [[0.0] * frames for _ in range(channels)]
+    if bed_dbfs is not None:
+        level = 10 ** (bed_dbfs / 20) * math.sqrt(2) / math.sqrt(3)
+        for i in range(round(bed_start * rate), frames):
+            t = i / rate
+            value = level * (1 + .3 * math.sin(2 * math.pi * .7 * t)) / 1.3 * sum(
+                math.sin(2 * math.pi * hz * t) for hz in (110, 165, 220))
+            for channel in data:
+                channel[i] += value
     if noise_dbfs is not None:
         sigma = 10 ** (noise_dbfs / 20)
         for channel in data:
@@ -102,14 +113,14 @@ class GeneralizationTests(unittest.TestCase):
         self.addCleanup(shutil.rmtree, self.tmp)
 
     def build(self, name, fps=None, rate=None, channels=1, seconds=6, flashes=(),
-              tones=(), noise_dbfs=None, fade=False):
+              tones=(), noise_dbfs=None, fade=False, bed_dbfs=None, bed_start=0.0):
         video = audio = None
         if fps:
             video = self.tmp / f"{name}.v.mp4"
             write_video(video, fps, seconds, flashes, fade)
         if rate:
             audio = self.tmp / f"{name}.wav"
-            write_audio(audio, rate, channels, seconds, tones, noise_dbfs)
+            write_audio(audio, rate, channels, seconds, tones, noise_dbfs, bed_dbfs=bed_dbfs, bed_start=bed_start)
         out = self.tmp / f"{name}.mp4"
         mux(out, video, audio)
         return meter.measure(out)
@@ -163,10 +174,25 @@ class GeneralizationTests(unittest.TestCase):
         self.assertEqual(result["audio"]["onset_count"], 0)
         self.assertFalse(result["audio"]["exact_digital_silence"])
 
-    def test_documented_limit_event_below_20db_snr_is_not_counted(self):
+    def test_documented_limit_event_below_12db_local_novelty_is_not_counted(self):
         tones = [(1.0, .1, 1000, -40, "mono"), (2.0, .1, 1000, -10, "mono")]
         result = self.build("snr", rate=48000, seconds=3, tones=tones, noise_dbfs=-50)
         self.assert_onsets(result["audio"]["events"], [2.0], AUDIO_TOL)
+
+    def test_hits_over_continuous_music_bed_after_silent_intro(self):
+        # A global floor taken from the silent intro would mark the whole bed as
+        # one active span and swallow the hits; local novelty must not.
+        hits = [2.2, 3.0, 3.65, 4.4]
+        tones = [(t, .04, 2000, -8, "mono") for t in hits]
+        result = self.build("bed", rate=44100, seconds=5.5, tones=tones, bed_dbfs=-24, bed_start=1.5)
+        self.assert_onsets(result["audio"]["events"], [1.5] + hits, AUDIO_TOL)
+        bed_only = self.build("bedonly", rate=44100, seconds=5, bed_dbfs=-24)
+        self.assertEqual(bed_only["audio"]["onset_count"], 0)
+
+    def test_onset_across_streaming_chunk_boundary(self):
+        onsets = [meter.CHUNK_SECONDS - .0004, meter.CHUNK_SECONDS + 3.2]
+        result = self.build("chunk", rate=48000, seconds=14, tones=[(t, .1, 1000, -10, "mono") for t in onsets])
+        self.assert_onsets(result["audio"]["events"], onsets, .001)
 
     def test_video_only_file(self):
         flashes = [(0.5, 3, (0, 0, 320, 240), 200)]

@@ -2,7 +2,7 @@
   "version": "av-event-meter-control-qualification-v1",
   "status": "PASS_5_OF_5_BLIND_CONTROLS",
   "criteria_sha256": "ecefd0d8bc68f731d84dc1cab3c45ea7803716334bd20dea0ae749c3d03bd099",
-  "meter_sha256": "bb07a5c0700b41525212dbdb1b9173b889c3f80d7168c05afd4c0a80ddcd07bf",
+  "meter_sha256": "97fbc6688b1a93600a4e53ab13829cbd2c43e38c45976e148e5064eb621111a5",
   "recipe_sha256": "8b4b9ea021836045c74ec14bd3b881b4f69f9391720534607717de9c4a8fb95d",
   "stimuli_byte_identical_to_frozen": true,
   "blind_isolated_subprocess": true,
@@ -14,16 +14,16 @@
       "status": "PASS",
       "failures": [],
       "observed_audio_onsets": [
-        1.5,
-        3.5,
-        5.5
+        1.500125,
+        3.500125,
+        5.500125
       ],
       "observed_video_onsets": [
         1.0,
         3.0,
         5.0
       ],
-      "observed_offset_seconds": 0.5,
+      "observed_offset_seconds": 0.500125,
       "observed_verdict": "OUT_OF_SYNC"
     },
     {
@@ -31,9 +31,9 @@
       "status": "PASS",
       "failures": [],
       "observed_audio_onsets": [
-        1.0,
-        3.0,
-        5.0
+        1.000125,
+        3.000104,
+        5.000146
       ],
       "observed_video_onsets": [],
       "observed_offset_seconds": null,
@@ -57,16 +57,16 @@
       "status": "PASS",
       "failures": [],
       "observed_audio_onsets": [
-        1.0,
-        3.0,
-        5.0
+        1.000125,
+        3.000104,
+        5.000146
       ],
       "observed_video_onsets": [
         1.0,
         3.0,
         5.0
       ],
-      "observed_offset_seconds": 0.0,
+      "observed_offset_seconds": 0.000125,
       "observed_verdict": "IN_SYNC"
     },
     {
@@ -74,16 +74,16 @@
       "status": "PASS",
       "failures": [],
       "observed_audio_onsets": [
-        0.5,
-        2.5,
-        4.5
+        0.500125,
+        2.500125,
+        4.500125
       ],
       "observed_video_onsets": [
         1.0,
         3.0,
         5.0
       ],
-      "observed_offset_seconds": -0.5,
+      "observed_offset_seconds": -0.499875,
       "observed_verdict": "OUT_OF_SYNC"
     }
   ],
@@ -95,9 +95,9 @@
   "runtime_integrated": false,
   "scope": "Discrete flash/tone onsets and AV offset on five 6 s synthetic controls. Not semantic understanding, real-content accuracy or perceptual approval.",
   "generalization_tests": {
-    "status": "PASS_6_OFFLINE_SYNTHETIC_TESTS",
+    "status": "PASS_8_OFFLINE_SYNTHETIC_TESTS",
     "command": "python3 -I -B -m unittest discover -s . -p test_av_event_meter.py -v",
-    "test_sha256": "095e9946291dd41b4ab611737d60673189985c161eac6e73eb8bc5a0cc65089f",
+    "test_sha256": "125b442c78fd7f8205c6cece57c309386a8fb1d03c60ea577d21f81b00de93e5",
     "coverage": [
       "0/1/4/7 events at irregular times",
       "25 and 30 fps; 24 fps video-only",
@@ -106,8 +106,10 @@
       "right-only and antiphase stereo",
       "events 60 ms (audio) and 0.4 s (video) apart",
       "gradual fade and steady noise produce zero events",
-      "documented limit: event under 20 dB above floor not counted",
-      "bright and dark localized flashes of varied size/position"
+      "bright and dark localized flashes of varied size/position",
+      "documented limit: event under 12 dB above the trailing local level not counted",
+      "percussive hits over a continuous music-like bed after a silent intro (v1 found 1/5; v2 finds 5/5)",
+      "onset straddling the 10 s streaming chunk boundary located within 1 ms"
     ]
   },
   "mutation_check": {
@@ -119,6 +121,18 @@
       "video top-decile metric replaced by whole-frame mean"
     ],
     "removed_after_check": "An onset-refinement stage changed no result (1 ms windows are not affected by AAC pre-echo in these cases) and was removed rather than kept untested."
+  },
+  "changes_v2": [
+    "local-novelty audio onsets (trailing 20-210 ms median) replace the whole-file floor rule",
+    "sample-level onset refinement and per-event resolution fields",
+    "bounded-memory streaming with numpy; audio and video measured in parallel",
+    "first-block baseline padding so a background present from t=0 is not an onset"
+  ],
+  "speed": {
+    "40s_1080p30_stereo_seconds": 2.2,
+    "ffmpeg_decode_only_seconds": 1.74,
+    "cpu": "4 vCPU cloud container",
+    "note": "Decode-bound; about 18x real time on this host."
   },
   "executed_at_utc": "2026-10-17",
   "executor": "Claude Code cloud session (AI assistant); not human review"
