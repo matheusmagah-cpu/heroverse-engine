@@ -2,6 +2,43 @@
 
 Read this file first; do not re-read history, logs or whole evidence files.
 
+## Owner rules (the owner, Matheus, is Brazilian: talk to him in Portuguese; the channel is English-only)
+
+**Goal and pace**
+- **Goal:** all YPP requirements in 14 days. 30 days is only the error margin.
+- **Benchmarks:** the fastest *policy-clean* channels.
+- **Decisions:** daily, from market data, not on 7/14-day cycles.
+
+**Policy and channel**
+- **Policy first:** nothing that risks demonetisation. Never use borrowed identities or recordings, fear-bait, fabricated prophecy or reused content.
+- **Channel:** English only. Portuguese uploads are hidden; that is reversible.
+- **Format:** long videos plus Shorts, and every format model the system can produce.
+
+**Mining**
+- **Scope:** whole-video structure mining — script, structure, hook, theme, picture/video format, pacing, music, packaging, comments. Never opening-only.
+- **Accuracy:** must be measured.
+
+**Modelling**
+- **Bar:** the model must BEAT the mined reference. It needs measured targets and the same-instrument scorecard.
+- **After that:** an authenticity layer of own reasoning, opinion and critique.
+
+**Production**
+- **Look:** truly cinematic at zero cost: FLUX images, upscale, depth parallax, film finish.
+- **Paid video engines:** only after revenue.
+- **Shorts:** never a blind cut. Analyse the whole video for the best moments, give each Short its own edit, and run a watched review before publishing.
+
+**Publication**
+- **Order:** validate BEFORE upload. Upload public, or private + publishAt when scheduled.
+- **Authority:** automatic publication is authorised once everything passes the gates.
+- **After upload:** once YouTube confirms it, delete the finished video files. Keep only production files.
+- **Compression:** yes, but never at a loss of quality.
+
+**Cost and workflow**
+- **Spending:** zero money.
+- **Claude usage:** everything must fit the owner's Claude Code plan. Claude supervises in short sessions; GitHub, Cloudflare and Gemini do the recurring work. Open new lean sessions yourself when useful.
+- **No rework:** if something fails, find another way, unless an equally good alternative exists.
+- **The owner decides:** for example, the public runner is kept by his decision. He communicates directly; "Dot" is his assistant that does GitHub UI steps.
+
 ## Budgets (owner rules)
 - **Money:** zero. No paid API, plan or card. Paid video engines (Veo, Runway…) only after the
   channel earns.
@@ -51,17 +88,15 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 4. **After publication:** the finished files are deleted from the release once YouTube confirms the upload.
 
 ## Status
-- **pilot-002:** cinematic render running on the public runner (heroverse-runner run 39062600672, from 19:28 UTC; private run 39058782907 cancelled). If its `shorts.json` says `NOT_REVIEWED_NO_KEY`, re-run the Shorts review privately. The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT.
-- **Mining:**
-  - Structure v2 on 4 teaching channels is done (`evidence/structure-mining/20261017`).
-  - Clean prayer channels (United Prayer, Morning Grace Prayers, Prayer of Hope, Mercy Harbor Gospel): mined (run 39060108443). United Prayer is off-format now (non-English livestreams, no narration) and is excluded by the < 40 wpm rule; Prayer of Hope's ~1 h videos mostly fall under 90% coverage. Usable prayer winners: 2 (Morning Grace). Measured blueprint: `evidence/structure-mining/20261017/measured.json`.
-  - Accuracy check: the 12 windows were refused by the RapidAPI daily cap (30 jobs, spent on 2026-10-17); re-request after 00:00 UTC.
+- **pilot-002:** cinematic render running on heroverse-runner (run 39062600672, from 19:28 UTC 2026-10-17; private run 39058782907 cancelled). The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT (decide by 08:30 UTC). If the Shorts come back `NOT_REVIEWED_NO_KEY`, run the review privately.
+- **Mining (`evidence/structure-mining/20261017`, measured in `measured.json`):**
+  - Teaching: 4 channels, done.
+  - Prayer (run 39060108443): United Prayer is off-format now (non-English livestreams, no narration), excluded by the < 40 wpm rule. Prayer of Hope's ~1 h videos mostly fall under 90% coverage. Usable prayer winners: 2 (Morning Grace).
   - Grace & Glory is excluded (borrowed identity/recordings).
+  - Accuracy check: the 12 windows were refused by the RapidAPI daily cap (30 jobs, spent on 2026-10-17); re-request after 00:00 UTC.
+- **Secrets:** `HERO_GEMINI_API_KEY` in heroverse-engine; `HERO_ENGINE_PAT` in heroverse-runner (checkout works); the runner's Gemini key is unknown. Keep every Gemini step in the private repo.
+- **Render path:** the runner is the heavy-render extra; private `pilot-render-stills.yml` is the fallback. Goal: long video plus Shorts in ~40 private runner-minutes (depth parallax on the opening and Shorts only, reuse voice/images when the script hash is unchanged, single-pass assembly), from run 39058782907/39062600672 stage timings.
 - **Next:**
-  1. Accuracy check of the mining (native windows vs verbatim openings).
-  2. Measured modeling spec (`blueprint_stats.py`).
-  3. Scripts.
-  4. Automate the daily chain.
-- **Secrets (as they stand):** `HERO_GEMINI_API_KEY` exists in heroverse-engine only; `HERO_ENGINE_PAT` exists in heroverse-runner (its checkout of the engine works); whether the runner has the Gemini key is unknown.
-- **Render path:** private-only is primary. Optimise one long video plus its Shorts to ~40 runner-minutes on the private 2-core workflow (depth parallax on the opening and Shorts only, reuse voice/images when the script hash is unchanged, single-pass assembly), measured from run 39058782907's stage timings.
-- **Runner:** optional extra, now active for pilot-002; every Gemini step (Shorts select/review, mining, watched reviews) stays in the private repo so the runner never needs the Gemini key. No new keys are requested unless truly needed.
+  1. Modeling spec (`strategy/MODELING_SPEC.md`).
+  2. Scripts.
+  3. Automate the daily chain.
