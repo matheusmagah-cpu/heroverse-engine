@@ -1,0 +1,256 @@
+{
+ "version": "structure-blueprint-v2",
+ "status": "MODEL_REPORTED_NOT_VERIFIED",
+ "videos": [
+  "CqvB4OVD5Nw",
+  "SRaWn0WoP88",
+  "AxInqNJzmyU",
+  "8dLrnuwAABE",
+  "6Q98ZRdnzw8",
+  "FEyv4xRoPzs",
+  "8YXRtsNnGX0",
+  "j6eXNa7NqwU",
+  "VGv3fbxG7OI",
+  "q3wraYaNR-A",
+  "6iERK-74EWg",
+  "noiMjV6UxSk",
+  "wpUFB3UMNgw",
+  "STcBN9l5rfU",
+  "_WD8NVhD5Ps",
+  "MAZXkEhdKU8"
+ ],
+ "complete_videos": [
+  "CqvB4OVD5Nw",
+  "SRaWn0WoP88",
+  "AxInqNJzmyU",
+  "8YXRtsNnGX0",
+  "6iERK-74EWg",
+  "wpUFB3UMNgw",
+  "STcBN9l5rfU",
+  "MAZXkEhdKU8"
+ ],
+ "data_api_units": 28,
+ "gemini": {
+  "calls": 74,
+  "failed_windows": [
+   {
+    "video_id": "8dLrnuwAABE",
+    "start": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "8dLrnuwAABE",
+    "start": 2100,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "6Q98ZRdnzw8",
+    "start": 600,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "6Q98ZRdnzw8",
+    "start": 1200,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "6Q98ZRdnzw8",
+    "start": 1500,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "FEyv4xRoPzs",
+    "start": 900,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "j6eXNa7NqwU",
+    "start": 900,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "j6eXNa7NqwU",
+    "start": 1500,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "VGv3fbxG7OI",
+    "start": 300,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "VGv3fbxG7OI",
+    "start": 600,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "q3wraYaNR-A",
+    "start": 300,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "noiMjV6UxSk",
+    "start": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "_WD8NVhD5Ps",
+    "start": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   }
+  ],
+  "models": {
+   "gemini-3.8-flash": 8,
+   "gemini-3.6-flash": 4,
+   "gemini-3.5-flash-lite": 62
+  }
+ },
+ "blueprint": {
+  "shared_by_winners": [
+   {
+    "pattern": "Bold multi-topic or visceral hook imagery",
+    "evidence": [
+     "CqvB4OVD5Nw@0",
+     "wpUFB3UMNgw@0"
+    ]
+   },
+   {
+    "pattern": "High visual density with AI-generated watercolor/vector illustrations and dynamic kinetic captions",
+    "evidence": [
+     "8YXRtsNnGX0@0",
+     "wpUFB3UMNgw@0"
+    ]
+   },
+   {
+    "pattern": "Clear thematic structure dividing abstract scriptural questions into distinct historical or spiritual takeaways",
+    "evidence": [
+     "SRaWn0WoP88@0",
+     "STcBN9l5rfU@0"
+    ]
+   }
+  ],
+  "differences": [
+   {
+    "dimension": "Content scope and narrative breadth",
+    "observation": "Winners like 'UNSOLVED Bible Mysteries Explained' explore broad, multi-subject compilations (6+ distinct topics), whereas weak contrasts focus on single-character biographical narratives.",
+    "evidence": [
+     "wpUFB3UMNgw@0",
+     "MAZXkEhdKU8@0"
+    ]
+   },
+   {
+    "dimension": "Audience engagement metrics and view velocity",
+    "observation": "Multi-topic compilation winners achieve hundreds of thousands of views within weeks, while single-figure narrative videos from the same channel stall under 4,000 views.",
+    "evidence": [
+     "wpUFB3UMNgw@0",
+     "MAZXkEhdKU8@0"
+    ]
+   }
+  ],
+  "script_structure": [
+   {
+    "order": 1,
+    "beat": "The Hook",
+    "typical_seconds": "0-15s",
+    "purpose": "State an undeniable historical or spiritual anomaly and present a high-stakes curiosity gap.",
+    "evidence": [
+     "CqvB4OVD5Nw@0",
+     "wpUFB3UMNgw@0"
+    ]
+   },
+   {
+    "order": 2,
+    "beat": "The Roadmap / Promise",
+    "typical_seconds": "15-30s",
+    "purpose": "Outline the specific mysteries, topics, or spiritual keys to be unlocked in the video.",
+    "evidence": [
+     "wpUFB3UMNgw@0",
+     "8YXRtsNnGX0@0"
+    ]
+   },
+   {
+    "order": 3,
+    "beat": "Body Points (Episodic Breakdown)",
+    "typical_seconds": "30s-10m",
+    "purpose": "Deliver rapid, text-supported historical context, scriptural analysis, and expert data without fluff.",
+    "evidence": [
+     "wpUFB3UMNgw@0",
+     "STcBN9l5rfU@0"
+    ]
+   },
+   {
+    "order": 4,
+    "beat": "Call to Action and Summary",
+    "typical_seconds": "Final 60s",
+    "purpose": "Deliver a concise theological takeaway paired with a direct request to subscribe, share, and comment.",
+    "evidence": [
+     "CqvB4OVD5Nw@2336",
+     "8YXRtsNnGX0@1218"
+    ]
+   }
+  ],
+  "hook_patterns": [
+   {
+    "pattern": "The Unsolved Mystery Frame: 'The Bible has been studied for thousands of years, but even after all this time, there are still things...'",
+    "evidence": [
+     "wpUFB3UMNgw@0"
+    ]
+   },
+   {
+    "pattern": "The Provocative Theological Question: 'Did God really abandon his own son on that cross? Most Christians miss this...'",
+    "evidence": [
+     "8YXRtsNnGX0@23"
+    ]
+   }
+  ],
+  "picture_format": "High-density AI-generated watercolor or vector illustrations paired with rapid hard cuts (10-15 shots per minute), dynamic kinetic yellow/white word-by-word synchronized subtitles, and subtle ambient pan/zoom motions.",
+  "sound_and_music": "Warm, deep human narration or authoritative West African voiceover underscored by continuous ambient cinematic synth pads and gentle orchestral piano beds without abrupt volume spikes.",
+  "pacing": "Fast-moving narrative pacing (130-150 words per minute) with frequent visual transitions and episodic topic changes every 90 to 120 seconds to prevent viewer drop-off.",
+  "packaging_titles_thumbnails": "High-contrast grid layouts or visceral close-up thumbnails (e.g., bloody imagery or multi-panel topic grids) paired with clean, uppercase search-optimized titles featuring curiosity gaps and established speaker authority.",
+  "audience_signals_from_comments": [
+   {
+    "signal": "Viewers express deep personal gratitude and apply spiritual declarations directly to their families and daily routines.",
+    "evidence": [
+     "CqvB4OVD5Nw:comments",
+     "SRaWn0WoP88:comments"
+    ]
+   },
+   {
+    "signal": "Audiences actively engage with specific historical puzzles (e.g., Cain's wife, Ark locations, funeral customs) and request follow-up parts.",
+    "evidence": [
+     "wpUFB3UMNgw:comments",
+     "STcBN9l5rfU:comments"
+    ]
+   }
+  ],
+  "winners_vs_weak": [
+   {
+    "difference": "Winners aggregate multiple high-interest theological questions into a single structured compilation video, whereas weak performers dedicate an entire video to a single obscure historical figure (e.g., Queen Athaliah).",
+    "evidence": [
+     "wpUFB3UMNgw@0",
+     "MAZXkEhdKU8@0"
+    ]
+   }
+  ],
+  "beat_them": [
+   {
+    "where_winners_are_weak": "Winners often rely on static visual loops or standard AI illustrations without interactive graphic callouts or modern visual formatting.",
+    "heroverse_move": "Incorporate crisp cinematic chapter markers, animated infographic maps, and interactive on-screen pop-ups that visually break down ancient Hebrew/Greek word studies.",
+    "evidence": [
+     "8YXRtsNnGX0@0",
+     "wpUFB3UMNgw@0"
+    ]
+   }
+  ],
+  "policy_risks_to_avoid": [
+   "Do not fabricate prophetic news, unverified supernatural occurrences, or fear-baiting end-times predictions.",
+   "Do not impersonate real living preachers or use unauthorized likenesses that violate impersonation policies.",
+   "Do not reuse unedited third-party video clips; ensure all visuals are original AI-generated art, historical manuscripts, or transformative educational edits."
+  ],
+  "limitations": [
+   "Public YouTube data provides view counts, transcripts, and comments, but lacks exact audience retention second-by-second drop-off graphs.",
+   "Correlation between multi-topic compilation formats and high views cannot guarantee absolute causal success without accounting for channel subscriber base size and algorithm shifts."
+  ]
+ },
+ "blueprint_model": "gemini-3.5-flash-lite"
+}
