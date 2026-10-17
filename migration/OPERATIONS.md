@@ -2,6 +2,43 @@
 
 Read this file first; do not re-read history, logs or whole evidence files.
 
+## Owner rules (the owner, Matheus, is Brazilian: talk to him in Portuguese; the channel is English-only)
+
+**Goal and pace**
+- **Goal:** all YPP requirements in 14 days. 30 days is only the error margin.
+- **Benchmarks:** the fastest *policy-clean* channels.
+- **Decisions:** daily, from market data, not on 7/14-day cycles.
+
+**Policy and channel**
+- **Policy first:** nothing that risks demonetisation. Never use borrowed identities or recordings, fear-bait, fabricated prophecy or reused content.
+- **Channel:** English only. Portuguese uploads are hidden; that is reversible.
+- **Format:** long videos plus Shorts, and every format model the system can produce.
+
+**Mining**
+- **Scope:** whole-video structure mining — script, structure, hook, theme, picture/video format, pacing, music, packaging, comments. Never opening-only.
+- **Accuracy:** must be measured.
+
+**Modelling**
+- **Bar:** the model must BEAT the mined reference. It needs measured targets and the same-instrument scorecard.
+- **After that:** an authenticity layer of own reasoning, opinion and critique.
+
+**Production**
+- **Look:** truly cinematic at zero cost: FLUX images, upscale, depth parallax, film finish.
+- **Paid video engines:** only after revenue.
+- **Shorts:** never a blind cut. Analyse the whole video for the best moments, give each Short its own edit, and run a watched review before publishing.
+
+**Publication**
+- **Order:** validate BEFORE upload. Upload public, or private + publishAt when scheduled.
+- **Authority:** automatic publication is authorised once everything passes the gates.
+- **After upload:** once YouTube confirms it, delete the finished video files. Keep only production files.
+- **Compression:** yes, but never at a loss of quality.
+
+**Cost and workflow**
+- **Spending:** zero money.
+- **Claude usage:** everything must fit the owner's Claude Code plan. Claude supervises in short sessions; GitHub, Cloudflare and Gemini do the recurring work. Open new lean sessions yourself when useful.
+- **No rework:** if something fails, find another way, unless an equally good alternative exists.
+- **The owner decides:** for example, the public runner is kept by his decision. He communicates directly; "Dot" is his assistant that does GitHub UI steps.
+
 ## Budgets (owner rules)
 - **Money:** zero. No paid API, plan or card. Paid video engines (Veo, Runway…) only after the
   channel earns.
@@ -61,4 +98,7 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
   2. Measured modeling spec (`blueprint_stats.py`).
   3. Scripts.
   4. Automate the daily chain.
-- **Waiting on the owner:** the `HERO_ENGINE_PAT` and `HERO_GEMINI_API_KEY` secrets in `heroverse-runner`. Until then renders use the private fallback.
+- **Runner:**
+  - `HERO_ENGINE_PAT` is set and the checkout works.
+  - The pilot-002 cinematic render is running on heroverse-runner (run 39062600672, from 19:28 UTC 2026-10-17). The private run was cancelled.
+  - Whether `HERO_GEMINI_API_KEY` exists in the runner is unknown. If the Shorts come back NOT_REVIEWED, run the review privately.
