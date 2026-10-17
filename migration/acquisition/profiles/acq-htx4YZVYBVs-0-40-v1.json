@@ -1,0 +1,86 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 19,
+    "picture_changes_per_minute": 28.45,
+    "median_shot_seconds": 1.883,
+    "longest_shot_seconds": 4.7,
+    "motion_median_top_decile_diff": 8.459
+   },
+   "rhythm": {
+    "audio_onsets": 55,
+    "audio_onsets_per_minute": 82.36,
+    "tempo": {
+     "bpm": 65.57,
+     "confidence": 0.046
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.053,
+     "chance_fraction": 0.087,
+     "lift": 0.6
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 6,
+     "visual_events": 19
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -14.9,
+    "loudness_range_lu": 3.3,
+    "true_peak_dbtp": -0.3
+   },
+   "colour": {
+    "mean_brightness": 0.526,
+    "brightness_std_over_time": 0.08,
+    "mean_saturation": 0.2905,
+    "saturation_std_over_time": 0.0274
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.928,
+     "singing": 0.0,
+     "music": 0.482,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 77,
+     "singing": 0,
+     "music": 6,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 102,
+    "words_per_minute": 152.7,
+    "transcript": "Good morning, beloved. Before you get out of bed, before you check your phone, before you begin thinking about everything you need to do today, pause, take a deep breath. You made it to another morning, and I want you to hear this clearly. God has not forgotten you. Whatever happened yesterday, God's mercy is meeting you this morning. Whatever you're worried about today, you don't have to face it alone, and whatever you've been carrying silently in your heart, you can place it in God's hands right now. So stay with me through this prayer. Because today, we're going to ask..."
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 3.375,
+     "frames": 6
+    },
+    {
+     "label": "speech",
+     "start_seconds": 2.88,
+     "end_seconds": 40.031,
+     "frames": 77
+    }
+   ]
+  }
+ ]
+}
