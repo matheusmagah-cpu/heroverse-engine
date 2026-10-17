@@ -234,6 +234,17 @@
       "completed_at": "2026-10-17T03:02:35.566891+00:00",
       "run_id": "38996328863",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-ksMAEHpzkZo-600-640-v1",
+      "video_id": "ksMAEHpzkZo",
+      "start_seconds": 600,
+      "end_seconds": 640,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-17T03:02:53.722333+00:00",
+      "day_utc": "2026-10-17",
+      "units_remaining_at_reservation": 452,
+      "reserved_units": 14
     }
   ]
 }
