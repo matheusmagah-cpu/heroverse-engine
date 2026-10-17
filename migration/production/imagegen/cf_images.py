@@ -27,8 +27,22 @@ ENGINES = {
 }
 
 
+def account_id():
+    """CLOUDFLARE_ACCOUNT_ID, or the token's only account when that secret is not set."""
+    if os.environ.get("CLOUDFLARE_ACCOUNT_ID"):
+        return os.environ["CLOUDFLARE_ACCOUNT_ID"]
+    req = urllib.request.Request("https://api.cloudflare.com/client/v4/accounts",
+                                 headers={"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"]})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        accounts = json.loads(r.read()).get("result") or []
+    if len(accounts) != 1:
+        raise SystemExit(f"CF_ACCOUNT_ID_UNRESOLVED ({len(accounts)} accounts visible to the token; set CLOUDFLARE_ACCOUNT_ID)")
+    os.environ["CLOUDFLARE_ACCOUNT_ID"] = accounts[0]["id"]
+    return accounts[0]["id"]
+
+
 def run(model, payload):
-    url = (f"https://api.cloudflare.com/client/v4/accounts/{os.environ['CLOUDFLARE_ACCOUNT_ID']}/ai/run/{model}")
+    url = f"https://api.cloudflare.com/client/v4/accounts/{account_id()}/ai/run/{model}"
     req = urllib.request.Request(url, data=json.dumps(payload).encode(), method="POST",
                                  headers={"Authorization": "Bearer " + os.environ["CLOUDFLARE_API_TOKEN"],
                                           "Content-Type": "application/json"})
