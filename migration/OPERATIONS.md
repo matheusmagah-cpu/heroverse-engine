@@ -10,8 +10,11 @@ Read this file first; do not re-read history, logs or whole evidence files.
   - Everything recurring runs in GitHub Actions and the free APIs.
   - One short Claude check-in per day, in a fresh session reading this file and `migration/evidence/daily-report/latest.md`.
   - No polling loops, no full log dumps, no re-reading of large JSON (use `jq`/`python -c` to extract only the needed fields).
-- **GitHub private repo (2,000 min/month):** panel ~10 min/day, publish, light jobs. Heavy renders go to the
-  public `heroverse-runner` (no minute cap) once the `HERO_ENGINE_PAT` secret exists there.
+- **GitHub private repo (2,000 min/month): every job runs here, renders included.**
+  - The public `heroverse-runner` is DISABLED and must not be used. GitHub's Actions terms forbid activity unrelated to that repository's own project.
+  - So each render must fit the budget: target **≤ 45 runner-minutes per video including its Shorts**.
+  - Decide how much depth parallax to use from measured stage timings, e.g. parallax on the opening and on the Shorts, lighter camera motion elsewhere.
+  - Never speed up by lowering quality below the gates.
 - **Cloudflare Workers AI (10k neurons/day, resets 00:00 UTC):** images only (FLUX + 2x upscale on GitHub).
 - **Gemini free tier (no billing):** mining, Shorts selection/review, watched reviews.
 - **YouTube Data API (10k units/day, resets 07:00 UTC):** panel 6,500; privacy 50/update; publish ~1,700/video.
@@ -57,4 +60,4 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
   2. Measured modeling spec (`blueprint_stats.py`).
   3. Scripts.
   4. Automate the daily chain.
-- **Waiting on the owner:** `HERO_ENGINE_PAT` and `HERO_GEMINI_API_KEY` secrets in `heroverse-runner`.
+- **Waiting on the owner:** nothing. The runner secrets are not needed, because the runner is disabled.
