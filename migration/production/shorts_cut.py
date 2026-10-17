@@ -126,7 +126,7 @@ def main(work, script_path, images_dir, figure, music, out_dir, n="3"):
              f"[2:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,afade=t=out:st={dur - 0.5:.3f}:d=0.5,asplit=2[vo][key];"
              f"[3:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,volume=0.05,afade=t=in:d=0.5,"
              f"afade=t=out:st={dur - 0.8:.3f}:d=0.8[m];[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck];"
-             "[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-1.5:LRA=9[aout]",
+             "[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-2:LRA=9,alimiter=limit=0.75:attack=5:release=50:level=false[aout]",
              "-map", "[vout]", "-map", "[aout]", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-r", "30",
              "-c:a", "aac", "-b:a", "160k", "-ar", str(RATE_OUT), "-t", f"{dur:.3f}", "-movflags", "+faststart", str(mp4)])
         records.append({"file": mp4.name, "sha256": sha256(mp4), "seconds": round(probe_duration(mp4), 2),

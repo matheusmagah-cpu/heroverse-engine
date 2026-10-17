@@ -212,6 +212,11 @@ def compose(background, figure, out, with_figure):
 
 
 def assemble(work, script_path, images_dir, figure_path, music_path):
+    import time
+    t0 = time.time()
+
+    def mark(stage):
+        print(json.dumps({"stage": stage, "elapsed_s": round(time.time() - t0, 1)}), flush=True)
     work, images = Path(work), Path(images_dir)
     script = json.loads(Path(script_path).read_text())
     timeline = json.loads((work / "timeline.json").read_text())
@@ -225,8 +230,9 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
          f"afade=t=in:d=2,afade=t=out:st={total - 4}:d=4[m];"
          "[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck];"
          "[v][duck]amix=inputs=2:normalize=0:duration=first,"
-         "loudnorm=I=-15:TP=-1.5:LRA=11:linear=true[out]",
+         "loudnorm=I=-15:TP=-2:LRA=11:linear=true,alimiter=limit=0.75:attack=5:release=50:level=false[out]",
          "-map", "[out]", "-ar", str(RATE_OUT), str(mix)])
+    mark("mix")
     plan = holds(script, timeline, total)
     frames, clips = work / "frames", work / "holds"
     frames.mkdir(exist_ok=True)
@@ -238,30 +244,40 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
         used[h["image"]] = {"sha256": sha256(src), "release_asset": meta.get("release_asset"), "models": meta["models"],
                             "seed": meta["seed"], "prompt": meta["prompt"]}
         compose(src, figure_path, frames / f"{i:03d}.png", h["figure"])
-    listing = []
-    for i, h in enumerate(plan):
+    mark("frames")
+
+    def encode(i):
+        h = plan[i]
         out = clips / f"{i:03d}.mp4"
         length = h["end"] - h["start"]
-        common = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-r", "30", "-pix_fmt", "yuv420p",
-                  "-video_track_timescale", "15360"]
+        common = ["-c:v", "libx264", "-preset", "veryfast", "-tune", "stillimage", "-crf", "17", "-r", "30",
+                  "-pix_fmt", "yuv420p", "-video_track_timescale", "15360", "-threads", "2"]
+        # Stills are read at 1 fps and repeated to 30 fps by the fps filter: same frames,
+        # without decoding the PNG 30 times per second.
         if i == 0:
-            run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "30", "-t", f"{length:.3f}",
-                 "-i", str(frames / "000.png"), *common, str(out)])
+            run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", f"{length + 1:.3f}",
+                 "-i", str(frames / "000.png"), "-vf", f"fps=30,trim=duration={length:.3f}", *common, str(out)])
         else:
-            run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "30", "-t", f"{FADE}",
-                 "-i", str(frames / f"{i - 1:03d}.png"), "-loop", "1", "-framerate", "30", "-t", f"{length:.3f}",
+            run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", "2",
+                 "-i", str(frames / f"{i - 1:03d}.png"), "-loop", "1", "-framerate", "1", "-t", f"{length + 1:.3f}",
                  "-i", str(frames / f"{i:03d}.png"), "-filter_complex",
-                 f"[0:v][1:v]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length:.3f}",
+                 f"[0:v]fps=30,trim=duration={FADE},setpts=PTS-STARTPTS[a];[1:v]fps=30,setpts=PTS-STARTPTS[b];"
+                 f"[a][b]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length:.3f}",
                  *common, str(out)])
-        listing.append(f"file '{out}'")
+        return f"file '{out}'"
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        listing = list(pool.map(encode, range(len(plan))))
+    mark("hold_clips")
     (work / "holds.txt").write_text("\n".join(listing) + "\n")
     (work / "captions.ass").write_text(build_ass(script, timeline, total))
     final = work / "pilot.mp4"
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "holds.txt"), "-i", str(mix),
          "-map", "0:v:0", "-map", "1:a:0", "-vf", f"ass={work / 'captions.ass'},format=yuv420p",
-         "-c:v", "libx264", "-preset", "faster", "-crf", "19", "-tune", "stillimage", "-r", "30", "-g", "60",
+         "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-tune", "stillimage", "-r", "30", "-g", "60",
          "-c:a", "aac", "-b:a", "192k", "-ar", str(RATE_OUT), "-t", f"{total:.3f}", "-movflags", "+faststart",
          str(final)])
+    mark("final_encode")
     figure_meta = json.loads(Path(figure_path).with_suffix(".json").read_text())
     manifest = {"version": "pilot-manifest-v2", "pilot_id": script["pilot_id"], "grammar": "figure+backgrounds+captions",
                 "output_sha256": sha256(final), "output_seconds": probe_duration(final),
