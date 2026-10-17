@@ -1,0 +1,248 @@
+{
+ "version": "channel-privacy-receipt-v1",
+ "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+ "plan": "privacy-plan.json",
+ "undo": "set each video back to its 'before' privacy",
+ "changes": [
+  {
+   "video_id": "tBEvsFwK8S0",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "va3xfGCwIX8",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "v9lGlFmBHNs",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "NnCixw61xzA",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "gRpg9YOUp0M",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "1PBzy2mq0gE",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "9weESfLQWzQ",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "l1MnAjlO55Y",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "dW6dfCEGeKM",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "le9Il94s-mY",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "-LaDjuPUER8",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "W3NBRjTOitI",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "TS9e9e5CpMk",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "EvRaVAkYHMw",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "xOCNezmMbOM",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "wHQ81IfBsF0",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "xvCy9HfYhNE",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "7bj3F4KLClM",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "k_x6UagYdQ0",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "PkG-MIo5Hh4",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "I7dCCMILl6w",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "cWn8j_eo1QU",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "3px82ScNj5w",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "s6zpsF3HUj4",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "3kqSOD2vKh0",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "jp2GOsLN0J4",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "Oa3Unyg3jCU",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "RXMoDBTy6-k",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "ZYYxyFqzmUM",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "XC8KtfE5PIc",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "lkuFDIOausw",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "6N5D_l7F5MA",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "JBLHw1ST7zo",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "YEzPbOrF9Vg",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "qeovLqujR60",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "82fA5j2f7Sg",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "_z2kvnufvHk",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "HhdbkhCmDxQ",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "NrcIhXBb0ko",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  },
+  {
+   "video_id": "1BYHtZ8yftE",
+   "before": "unlisted",
+   "after": "private",
+   "result": "HIDDEN"
+  }
+ ]
+}
