@@ -9,6 +9,7 @@ rights record is evidence, not memory. Seeds are fixed per prompt.
 usage: gen_images.py PROMPTS_JSON OUT_DIR SHARD SHARDS
 """
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -31,12 +32,18 @@ def rights():
 
 
 def main(prompts_path, out_dir, shard, shards):
+    Path(out_dir).mkdir(parents=True, exist_ok=True)
     import torch
     from diffusers import DiffusionPipeline, LCMScheduler
     spec = json.loads(Path(prompts_path).read_text())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     record = rights()
+    only = {x for x in os.environ.get("ONLY", "").split(",") if x}
+    chosen = [p for p in spec["images"] if not only or p["id"] in only]
+    items = [p for i, p in enumerate(chosen) if i % int(shards) == int(shard)]
+    if not items:
+        return
     torch.set_num_threads(4)
     pipe = DiffusionPipeline.from_pretrained(BASE, revision=record[BASE]["revision"], torch_dtype=torch.float32,
                                              use_safetensors=True, variant="fp16")
@@ -44,7 +51,6 @@ def main(prompts_path, out_dir, shard, shards):
     pipe.load_lora_weights(LORA, revision=record[LORA]["revision"])
     pipe.set_progress_bar_config(disable=True)
     style, negative = spec["style"], spec["negative"]
-    items = [p for i, p in enumerate(spec["images"]) if i % int(shards) == int(shard)]
     for item in items:
         t0 = time.time()
         image = pipe(prompt=item["prompt"] + ", " + style, negative_prompt=negative,
