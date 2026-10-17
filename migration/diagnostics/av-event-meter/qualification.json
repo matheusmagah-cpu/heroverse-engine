@@ -1,0 +1,125 @@
+{
+  "version": "av-event-meter-control-qualification-v1",
+  "status": "PASS_5_OF_5_BLIND_CONTROLS",
+  "criteria_sha256": "ecefd0d8bc68f731d84dc1cab3c45ea7803716334bd20dea0ae749c3d03bd099",
+  "meter_sha256": "bb07a5c0700b41525212dbdb1b9173b889c3f80d7168c05afd4c0a80ddcd07bf",
+  "recipe_sha256": "8b4b9ea021836045c74ec14bd3b881b4f69f9391720534607717de9c4a8fb95d",
+  "stimuli_byte_identical_to_frozen": true,
+  "blind_isolated_subprocess": true,
+  "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "python": "3.13.16",
+  "results": [
+    {
+      "control": "c01.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        1.5,
+        3.5,
+        5.5
+      ],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": 0.5,
+      "observed_verdict": "OUT_OF_SYNC"
+    },
+    {
+      "control": "c02.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_video_onsets": [],
+      "observed_offset_seconds": null,
+      "observed_verdict": "NOT_MEASURABLE"
+    },
+    {
+      "control": "c03.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": null,
+      "observed_verdict": "NOT_MEASURABLE"
+    },
+    {
+      "control": "c04.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": 0.0,
+      "observed_verdict": "IN_SYNC"
+    },
+    {
+      "control": "c05.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        0.5,
+        2.5,
+        4.5
+      ],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": -0.5,
+      "observed_verdict": "OUT_OF_SYNC"
+    }
+  ],
+  "model_inferences": 0,
+  "network_calls": 0,
+  "provider_calls": 0,
+  "production_authorized": false,
+  "publication_authorized": false,
+  "runtime_integrated": false,
+  "scope": "Discrete flash/tone onsets and AV offset on five 6 s synthetic controls. Not semantic understanding, real-content accuracy or perceptual approval.",
+  "generalization_tests": {
+    "status": "PASS_6_OFFLINE_SYNTHETIC_TESTS",
+    "command": "python3 -I -B -m unittest discover -s . -p test_av_event_meter.py -v",
+    "test_sha256": "095e9946291dd41b4ab611737d60673189985c161eac6e73eb8bc5a0cc65089f",
+    "coverage": [
+      "0/1/4/7 events at irregular times",
+      "25 and 30 fps; 24 fps video-only",
+      "44.1 and 48 kHz; mono and stereo",
+      "tones -6 to -24 dBFS RMS over -50 dBFS noise",
+      "right-only and antiphase stereo",
+      "events 60 ms (audio) and 0.4 s (video) apart",
+      "gradual fade and steady noise produce zero events",
+      "documented limit: event under 20 dB above floor not counted",
+      "bright and dark localized flashes of varied size/position"
+    ]
+  },
+  "mutation_check": {
+    "method": "Constants changed on a temporary copy; qualification and/or tests must fail.",
+    "caught": [
+      "video merge gap 0.2->0.01 s",
+      "audio merge gap 0.03->3 s",
+      "sync lag limit 0.125->0.9 s",
+      "video top-decile metric replaced by whole-frame mean"
+    ],
+    "removed_after_check": "An onset-refinement stage changed no result (1 ms windows are not affected by AAC pre-echo in these cases) and was removed rather than kept untested."
+  },
+  "executed_at_utc": "2026-10-17",
+  "executor": "Claude Code cloud session (AI assistant); not human review"
+}
