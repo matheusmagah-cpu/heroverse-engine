@@ -5,8 +5,8 @@ Groups videos by format (prayer / teaching) and role (winner / latest /
 weak_contrast) and reports, per group, the medians of every measured field plus
 the beat map: which beat types happen in each part of the video (first 15 s,
 15-60 s, 1-3 min, middle, last 10%), how long they last, and the opening words
-of the first beats (verbatim, as heard). Only records with >= 90% coverage and
-policy-clean sources count toward targets; the others are listed with the reason.
+of the first beats (verbatim, as heard). Only records with >= 90% coverage, narration
+(>= 40 wpm) and policy-clean sources count toward targets; the others are listed with the reason.
 usage: blueprint_stats.py STRUCTURE_DIR OUT_JSON
 """
 import glob
@@ -20,6 +20,8 @@ PRAYER = re.compile(r"(?i)\b(prayer|pray|praying|blessing|declaration|psalm 91)\
 # sources whose growth rests on someone else's identity or recordings: never targets (impersonation / reused content)
 BORROWED = re.compile(r"(?i)\b(apostle|pastor|bishop|prophet|evangelist|billy graham|fulton sheen|joshua selman|"
                       r"t\.?d\.? jakes|joel osteen|charles stanley|myles munroe)\b")
+# narrated formats only: a channel whose uploads carry almost no speech (livestreams, ASMR) is off-format
+MIN_WPM = 40
 PHASES = (("first_15s", 0, 15), ("15_60s", 15, 60), ("1_3min", 60, 180))
 
 
@@ -83,10 +85,16 @@ def summarize(rows):
 
 def main(structure_dir, out_path):
     rows = [video_row(json.load(open(f))) for f in sorted(glob.glob(str(Path(structure_dir) / "structure-*.json")))]
-    usable = [r for r in rows if (r["coverage"] or 0) >= 0.9 and r["policy_clean"]]
-    excluded = [{"video_id": r["video_id"], "channel": r["channel"], "reason":
-                 "borrowed identity or recordings (policy)" if not r["policy_clean"] else f"coverage {r['coverage']}"}
-                for r in rows if r not in usable]
+    def reason(r):
+        if not r["policy_clean"]:
+            return "borrowed identity or recordings (policy)"
+        if (r["coverage"] or 0) < 0.9:
+            return f"coverage {r['coverage']}"
+        if (r["wpm"] or 0) < MIN_WPM:
+            return f"no narration ({r['wpm']} wpm): off-format"
+        return None
+    usable = [r for r in rows if reason(r) is None]
+    excluded = [{"video_id": r["video_id"], "channel": r["channel"], "reason": reason(r)} for r in rows if reason(r)]
     groups = {}
     for r in usable:
         groups.setdefault(r["format"], {}).setdefault(r["role"], []).append(r)

@@ -54,8 +54,8 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 - **pilot-002:** cinematic render running on the public runner (heroverse-runner run 39062600672, from 19:28 UTC; private run 39058782907 cancelled). If its `shorts.json` says `NOT_REVIEWED_NO_KEY`, re-run the Shorts review privately. The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT.
 - **Mining:**
   - Structure v2 on 4 teaching channels is done (`evidence/structure-mining/20261017`).
-  - Clean prayer channels (United Prayer, Morning Grace Prayers, Prayer of Hope, Mercy Harbor Gospel): first run (39056485165) lost its push on a `blueprint.json` rebase conflict; Record now retries (PR #62) and a re-mining request is queued.
-  - Accuracy check: 12 native windows requested (`requests/accuracy-windows-20261017.json`).
+  - Clean prayer channels (United Prayer, Morning Grace Prayers, Prayer of Hope, Mercy Harbor Gospel): mined (run 39060108443). United Prayer is off-format now (non-English livestreams, no narration) and is excluded by the < 40 wpm rule; Prayer of Hope's ~1 h videos mostly fall under 90% coverage. Usable prayer winners: 2 (Morning Grace). Measured blueprint: `evidence/structure-mining/20261017/measured.json`.
+  - Accuracy check: the 12 windows were refused by the RapidAPI daily cap (30 jobs, spent on 2026-10-17); re-request after 00:00 UTC.
   - Grace & Glory is excluded (borrowed identity/recordings).
 - **Next:**
   1. Accuracy check of the mining (native windows vs verbatim openings).

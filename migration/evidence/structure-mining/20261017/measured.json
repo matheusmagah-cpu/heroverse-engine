@@ -1,0 +1,4174 @@
+{
+ "version": "blueprint-stats-v1",
+ "source": "migration/evidence/structure-mining/20261017",
+ "usable": 15,
+ "excluded": [
+  {
+   "video_id": "-BraNWUfS8k",
+   "channel": "Morning Grace Prayers",
+   "reason": "coverage None"
+  },
+  {
+   "video_id": "8G2j9_RjKOY",
+   "channel": "United Prayer",
+   "reason": "no narration (6.7 wpm): off-format"
+  },
+  {
+   "video_id": "8dLrnuwAABE",
+   "channel": "Grace & Glory Prayers",
+   "reason": "borrowed identity or recordings (policy)"
+  },
+  {
+   "video_id": "98D3dkzIw8g",
+   "channel": "United Prayer",
+   "reason": "no narration (2.9 wpm): off-format"
+  },
+  {
+   "video_id": "9iVoAk5NZAM",
+   "channel": "Prayer of Hope",
+   "reason": "coverage 0.637"
+  },
+  {
+   "video_id": "AxInqNJzmyU",
+   "channel": "Grace & Glory Prayers",
+   "reason": "borrowed identity or recordings (policy)"
+  },
+  {
+   "video_id": "CqvB4OVD5Nw",
+   "channel": "Grace & Glory Prayers",
+   "reason": "borrowed identity or recordings (policy)"
+  },
+  {
+   "video_id": "SRaWn0WoP88",
+   "channel": "Grace & Glory Prayers",
+   "reason": "borrowed identity or recordings (policy)"
+  },
+  {
+   "video_id": "TGdYF8jDdXk",
+   "channel": "Prayer of Hope",
+   "reason": "coverage 0.692"
+  },
+  {
+   "video_id": "VGv3fbxG7OI",
+   "channel": "The Ancient Bible",
+   "reason": "coverage 0.688"
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "channel": "United Prayer",
+   "reason": "no narration (0.0 wpm): off-format"
+  },
+  {
+   "video_id": "sZUFqcbXii0",
+   "channel": "United Prayer",
+   "reason": "no narration (2.6 wpm): off-format"
+  },
+  {
+   "video_id": "uDI9z63AbJg",
+   "channel": "Prayer of Hope",
+   "reason": "coverage 0.83"
+  }
+ ],
+ "by_format": {
+  "prayer": {
+   "weak_contrast": {
+    "minutes": 10.5,
+    "wpm": 137.6,
+    "sentence_words": 1440,
+    "you_per_100": 5.4,
+    "questions_per_min": 0.0,
+    "shots_per_min": 6.11,
+    "beats_per_min": 1.72,
+    "beat_seconds": 36.0,
+    "scripture_per_10min": 1.91,
+    "title_words": 13,
+    "title_upper_ratio": 0.18,
+    "chapters": 0,
+    "likes_per_1k": 263.2,
+    "comments_per_1k": 105.26,
+    "thumb_words": 7,
+    "thumb_faces": 0,
+    "n": 1,
+    "videos": [
+     "0UTESr_lC2A"
+    ],
+    "beat_mix_by_phase": {
+     "first_15s": {
+      "prayer": 1.0
+     },
+     "15_60s": {
+      "prayer": 1.0
+     },
+     "1_3min": {
+      "prayer": 1.0
+     },
+     "middle": {
+      "prayer": 1.0
+     },
+     "last_10pct": {
+      "cta": 0.67,
+      "prayer": 0.33
+     }
+    }
+   },
+   "winner": {
+    "minutes": 14.65,
+    "wpm": 153.65,
+    "sentence_words": 12.5,
+    "you_per_100": 6.0,
+    "questions_per_min": 0.03,
+    "shots_per_min": 5.23,
+    "beats_per_min": 2.14,
+    "beat_seconds": 25.5,
+    "scripture_per_10min": 0.81,
+    "title_words": 16.5,
+    "title_upper_ratio": 0.18,
+    "chapters": 0.0,
+    "likes_per_1k": 71.35,
+    "comments_per_1k": 28.27,
+    "thumb_words": 7.5,
+    "thumb_faces": 0.0,
+    "n": 2,
+    "videos": [
+     "NUXLAy7A8TM",
+     "cX_DvmKryDU"
+    ],
+    "beat_mix_by_phase": {
+     "first_15s": {
+      "prayer": 1.0
+     },
+     "15_60s": {
+      "prayer": 1.0
+     },
+     "1_3min": {
+      "prayer": 1.0
+     },
+     "middle": {
+      "prayer": 0.9,
+      "declaration": 0.1
+     },
+     "last_10pct": {
+      "prayer": 0.5,
+      "cta": 0.33,
+      "application": 0.17
+     }
+    }
+   },
+   "latest": {
+    "minutes": 56.5,
+    "wpm": 95.6,
+    "sentence_words": 19.0,
+    "you_per_100": 3.6,
+    "questions_per_min": 0.0,
+    "shots_per_min": 2.1,
+    "beats_per_min": 1.07,
+    "beat_seconds": 50,
+    "scripture_per_10min": 3.49,
+    "title_words": 15,
+    "title_upper_ratio": 0.16,
+    "chapters": 0,
+    "likes_per_1k": 93.3,
+    "comments_per_1k": 69.33,
+    "thumb_words": null,
+    "thumb_faces": null,
+    "n": 1,
+    "videos": [
+     "dQQxzik8C4o"
+    ],
+    "beat_mix_by_phase": {
+     "first_15s": {
+      "hook": 1.0
+     },
+     "15_60s": {
+      "promise": 0.33,
+      "context": 0.33,
+      "teaching": 0.33
+     },
+     "1_3min": {
+      "promise": 0.5,
+      "scripture": 0.5
+     },
+     "middle": {
+      "prayer": 0.62,
+      "scripture": 0.28,
+      "application": 0.04,
+      "teaching": 0.04,
+      "context": 0.02
+     },
+     "last_10pct": {
+      "prayer": 0.5,
+      "music_only": 0.5
+     }
+    }
+   }
+  },
+  "teaching": {
+   "winner": {
+    "minutes": 16.8,
+    "wpm": 138.6,
+    "sentence_words": 13,
+    "you_per_100": 0.5,
+    "questions_per_min": 0.24,
+    "shots_per_min": 9.5,
+    "beats_per_min": 1.26,
+    "beat_seconds": 33.8,
+    "scripture_per_10min": 7.74,
+    "title_words": 11,
+    "title_upper_ratio": 0.33,
+    "chapters": 0,
+    "likes_per_1k": 10.0,
+    "comments_per_1k": 0.7,
+    "thumb_words": 9,
+    "thumb_faces": 6,
+    "n": 5,
+    "videos": [
+     "6Q98ZRdnzw8",
+     "FEyv4xRoPzs",
+     "STcBN9l5rfU",
+     "q3wraYaNR-A",
+     "wpUFB3UMNgw"
+    ],
+    "beat_mix_by_phase": {
+     "first_15s": {
+      "hook": 0.5,
+      "context": 0.17,
+      "teaching": 0.17,
+      "promise": 0.17
+     },
+     "15_60s": {
+      "context": 0.3,
+      "teaching": 0.2,
+      "hook": 0.1,
+      "argument": 0.1,
+      "promise": 0.1,
+      "story": 0.1
+     },
+     "1_3min": {
+      "teaching": 0.42,
+      "evidence": 0.17,
+      "scripture": 0.17,
+      "open_loop": 0.08,
+      "answer": 0.08,
+      "story": 0.08
+     },
+     "middle": {
+      "teaching": 0.44,
+      "scripture": 0.12,
+      "argument": 0.11,
+      "evidence": 0.09,
+      "application": 0.07,
+      "context": 0.05
+     },
+     "last_10pct": {
+      "application": 0.31,
+      "cta": 0.23,
+      "teaching": 0.15,
+      "scripture": 0.15,
+      "argument": 0.08,
+      "answer": 0.08
+     }
+    }
+   },
+   "latest": {
+    "minutes": 15.1,
+    "wpm": 123.8,
+    "sentence_words": 12.0,
+    "you_per_100": 0.3,
+    "questions_per_min": 0.53,
+    "shots_per_min": 10.36,
+    "beats_per_min": 1.45,
+    "beat_seconds": 38.0,
+    "scripture_per_10min": 8.59,
+    "title_words": 7,
+    "title_upper_ratio": 0.21,
+    "chapters": 0,
+    "likes_per_1k": 34.7,
+    "comments_per_1k": 3.02,
+    "thumb_words": 5,
+    "thumb_faces": 1,
+    "n": 3,
+    "videos": [
+     "6iERK-74EWg",
+     "8YXRtsNnGX0",
+     "_WD8NVhD5Ps"
+    ],
+    "beat_mix_by_phase": {
+     "first_15s": {
+      "hook": 0.75,
+      "promise": 0.25
+     },
+     "15_60s": {
+      "promise": 0.17,
+      "objection": 0.17,
+      "teaching": 0.17,
+      "cta": 0.17,
+      "story": 0.17,
+      "evidence": 0.17
+     },
+     "1_3min": {
+      "teaching": 0.5,
+      "context": 0.25,
+      "argument": 0.25
+     },
+     "middle": {
+      "teaching": 0.2,
+      "scripture": 0.18,
+      "argument": 0.14,
+      "evidence": 0.11,
+      "cta": 0.09,
+      "application": 0.07
+     },
+     "last_10pct": {
+      "recap": 0.33,
+      "cta": 0.33,
+      "evidence": 0.33
+     }
+    }
+   },
+   "weak_contrast": {
+    "minutes": 13.6,
+    "wpm": 130.2,
+    "sentence_words": 10.0,
+    "you_per_100": 0.5,
+    "questions_per_min": 0.12,
+    "shots_per_min": 11.0,
+    "beats_per_min": 1.33,
+    "beat_seconds": 43.5,
+    "scripture_per_10min": 12.78,
+    "title_words": 10,
+    "title_upper_ratio": 0.22,
+    "chapters": 0,
+    "likes_per_1k": 21.2,
+    "comments_per_1k": 1.29,
+    "thumb_words": 4,
+    "thumb_faces": 1,
+    "n": 3,
+    "videos": [
+     "MAZXkEhdKU8",
+     "j6eXNa7NqwU",
+     "noiMjV6UxSk"
+    ],
+    "beat_mix_by_phase": {
+     "first_15s": {
+      "hook": 0.75,
+      "promise": 0.25
+     },
+     "15_60s": {
+      "promise": 0.33,
+      "cta": 0.17,
+      "context": 0.17,
+      "teaching": 0.17,
+      "story": 0.17
+     },
+     "1_3min": {
+      "teaching": 0.5,
+      "story": 0.25,
+      "context": 0.25
+     },
+     "middle": {
+      "teaching": 0.46,
+      "story": 0.17,
+      "evidence": 0.1,
+      "context": 0.07,
+      "scripture": 0.05,
+      "argument": 0.05
+     },
+     "last_10pct": {
+      "application": 0.43,
+      "story": 0.29,
+      "cta": 0.29
+     }
+    }
+   }
+  }
+ },
+ "videos": [
+  {
+   "video_id": "-BraNWUfS8k",
+   "channel": "Morning Grace Prayers",
+   "role": "latest",
+   "title": "Peaceful Morning Prayer 🙏 Start Your Day with God’s Peace, Protection & Blessings",
+   "format": "prayer",
+   "views": 101,
+   "coverage": null,
+   "policy_clean": true,
+   "minutes": null,
+   "title_words": null,
+   "title_upper_ratio": 0.15,
+   "chapters": null,
+   "likes_per_1k": null,
+   "comments_per_1k": null,
+   "wpm": null,
+   "sentence_words": null,
+   "you_per_100": null,
+   "questions_per_min": null,
+   "shots_per_min": null,
+   "beats_per_min": null,
+   "beat_seconds": null,
+   "scripture_per_10min": null,
+   "thumb_words": 20,
+   "thumb_faces": 1,
+   "thumb_text": "A PEACEFUL MORNING PRAYER Gratitude • Surrender • Trust • God’s Protection Rest in His Presence With God Each Day Is a Gift",
+   "first_15s": null,
+   "opening_beats": [],
+   "beat_phases": {
+    "first_15s": [],
+    "15_60s": [],
+    "1_3min": [],
+    "middle": [],
+    "last_10pct": []
+   },
+   "picture": [],
+   "sound": []
+  },
+  {
+   "video_id": "0UTESr_lC2A",
+   "channel": "Morning Grace Prayers",
+   "role": "weak_contrast",
+   "title": "Morning Prayer for Peace & Protection | Start Your Day With God 🙏🏽",
+   "format": "prayer",
+   "views": 38,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 10.5,
+   "title_words": 13,
+   "title_upper_ratio": 0.18,
+   "chapters": 0,
+   "likes_per_1k": 263.2,
+   "comments_per_1k": 105.26,
+   "wpm": 137.6,
+   "sentence_words": 1440,
+   "you_per_100": 5.4,
+   "questions_per_min": 0.0,
+   "shots_per_min": 6.11,
+   "beats_per_min": 1.72,
+   "beat_seconds": 36.0,
+   "scripture_per_10min": 1.91,
+   "thumb_words": 7,
+   "thumb_faces": 0,
+   "thumb_text": "A Short Prayer For Peace & Protection",
+   "first_15s": "Heavenly Father as this new morning begins I come into your presence with a grateful heart thank you for the gift of life for the breath in my lungs and for the opportunity to see another day thank you for keeping me through the night",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "prayer",
+     "words": "Heavenly Father as this new morning",
+     "device": "gratitude list"
+    },
+    {
+     "t": 20.0,
+     "beat": "prayer",
+     "words": "Heavenly Father you are the eternal",
+     "device": "attribute repetition"
+    },
+    {
+     "t": 38.0,
+     "beat": "prayer",
+     "words": "I surrender this day completely into",
+     "device": "list of surrenders"
+    },
+    {
+     "t": 64.0,
+     "beat": "prayer",
+     "words": "when I am tempted to worry about",
+     "device": "contrast"
+    },
+    {
+     "t": 108.0,
+     "beat": "prayer",
+     "words": "heavenly father let me rest in the",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 142.0,
+     "beat": "prayer",
+     "words": "father when the day becomes busy",
+     "device": "conditional framing"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "prayer"
+    ],
+    "15_60s": [
+     "prayer",
+     "prayer"
+    ],
+    "1_3min": [
+     "prayer",
+     "prayer",
+     "prayer"
+    ],
+    "middle": [
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer"
+    ],
+    "last_10pct": [
+     "cta",
+     "cta",
+     "prayer"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration and stock footage",
+     "shot_sizes": [
+      "medium shot",
+      "close-up",
+      "wide shot"
+     ],
+     "shots_counted": 45,
+     "motion": "slow pan and zoom",
+     "on_screen_text": "white text with dark shadow box",
+     "figure_or_presenter": "depiction of Jesus praying on the left side of every frame",
+     "colour_and_light": "vibrant natural lighting, shifting from morning sun to nature scenes",
+     "transitions": "smooth cross dissolve"
+    },
+    {
+     "image_kind": "AI illustration and stock footage",
+     "shot_sizes": [
+      "medium shot",
+      "close up",
+      "wide shot"
+     ],
+     "shots_counted": 14,
+     "motion": "slow zoom and pan across nature scenes and waterfalls",
+     "on_screen_text": "white subtitle text with dark outline matching spoken words",
+     "figure_or_presenter": "depiction of Jesus praying on the left side throughout",
+     "colour_and_light": "vibrant natural tones, bright daylight, serene lighting",
+     "transitions": "smooth cross dissolve cuts"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, warm, soothing, American accent, human voice",
+     "pace": "slow and deliberate",
+     "music": "gentle ambient instrumental piano and strings",
+     "music_changes": "continuous soft background pad throughout",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "6Q98ZRdnzw8",
+   "channel": "Beneath The Verse ",
+   "role": "winner",
+   "title": "Why Did Aaron's Rod Grow ALMONDS? The Hebrew Word Behind Numbers 17",
+   "format": "teaching",
+   "views": 164140,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 34.1,
+   "title_words": 12,
+   "title_upper_ratio": 0.33,
+   "chapters": 9,
+   "likes_per_1k": 21.5,
+   "comments_per_1k": 1.72,
+   "wpm": 90.3,
+   "sentence_words": 10.0,
+   "you_per_100": 1.0,
+   "questions_per_min": 0.29,
+   "shots_per_min": 5.55,
+   "beats_per_min": 1.26,
+   "beat_seconds": 33,
+   "scripture_per_10min": 6.75,
+   "thumb_words": 7,
+   "thumb_faces": 2,
+   "thumb_text": "WHY ALMONDS? MOST CHRISTIANS MISS THIS",
+   "first_15s": "It is night inside the tent of meeting. No one is allowed in. The curtain hangs still. In the dark, in front of the ark, 12 sticks lie on the ground side by side. They are old wood, cut, dried and carried for years across the desert.",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "hook",
+     "words": "It is night inside the tent",
+     "device": "story"
+    },
+    {
+     "t": 44,
+     "beat": "context",
+     "words": "You know this story. Aaron's",
+     "device": "callback"
+    },
+    {
+     "t": 60,
+     "beat": "open_loop",
+     "words": "Why almonds? God could have",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 104,
+     "beat": "teaching",
+     "words": "Here is the first layer of",
+     "device": "scripture"
+    },
+    {
+     "t": 156,
+     "beat": "evidence",
+     "words": "Because centuries later, a young",
+     "device": "contrast"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "context"
+    ],
+    "1_3min": [
+     "open_loop",
+     "teaching",
+     "evidence"
+    ],
+    "middle": [
+     "promise",
+     "context",
+     "teaching",
+     "teaching",
+     "teaching",
+     "application",
+     "teaching",
+     "teaching",
+     "promise",
+     "teaching",
+     "scripture",
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching",
+     "evidence",
+     "teaching",
+     "application",
+     "teaching",
+     "payoff",
+     "cta",
+     "scripture",
+     "teaching",
+     "scripture",
+     "teaching",
+     "application",
+     "teaching",
+     "application",
+     "evidence",
+     "objection",
+     "teaching",
+     "teaching"
+    ],
+    "last_10pct": [
+     "application",
+     "teaching",
+     "scripture",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI watercolor illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 35,
+     "motion": "subtle zoom and pan across illustrations with occasional digital crossfade dissolves",
+     "on_screen_text": "handwritten style headings and Hebrew script like SHAQED and WHY ALMONDS?",
+     "figure_or_presenter": "illustrated biblical figures including Moses, Aaron, Korah, and ancient Israelites",
+     "colour_and_light": "warm earthy watercolor palette transitioning from dark night scenes to golden desert tones",
+     "transitions": "soft cross dissolve"
+    },
+    {
+     "image_kind": "AI watercolor illustration",
+     "shot_sizes": [
+      "medium shot",
+      "close up"
+     ],
+     "shots_counted": 24,
+     "motion": "subtle pans and zooms on still illustrations",
+     "on_screen_text": "Hebrew words, English scripture verses, and thematic bullet points",
+     "figure_or_presenter": "depictions of biblical figures like Moses and Aaron in watercolor style",
+     "colour_and_light": "warm earth tones, parchment backgrounds, watercolor wash aesthetics",
+     "transitions": "fades and gentle cross-dissolves between illustrations"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, warm, clear English accent, human narration",
+     "pace": "moderate, deliberate and dramatic storytelling cadence",
+     "music": "ambient cinematic orchestral background music with soft strings",
+     "music_changes": "builds tension during the rebellion and dark chapter segments",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "6iERK-74EWg",
+   "channel": "The Ancient Bible",
+   "role": "latest",
+   "title": "Why Did Fallen Angels Marry Human Women?",
+   "format": "teaching",
+   "views": 663,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 15.1,
+   "title_words": 7,
+   "title_upper_ratio": 0.21,
+   "chapters": 0,
+   "likes_per_1k": 34.7,
+   "comments_per_1k": 3.02,
+   "wpm": 123.8,
+   "sentence_words": 12.0,
+   "you_per_100": 0.3,
+   "questions_per_min": 0.53,
+   "shots_per_min": 10.57,
+   "beats_per_min": 1.45,
+   "beat_seconds": 38.0,
+   "scripture_per_10min": 8.59,
+   "thumb_words": 0,
+   "thumb_faces": 2,
+   "thumb_text": "UNKNOWN",
+   "first_15s": "For five chapters, Genesis has been counting Adam, Seth, Enosh, Kenan. Each life is summed up in nearly the same words: He lived, he had sons and daughters, and he died. It is a slow drum beat, and every beat ends in the grave.",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "hook",
+     "words": "For five chapters, Genesis has been counting",
+     "device": "contrast"
+    },
+    {
+     "t": 18,
+     "beat": "promise",
+     "words": "Then, in the sixth chapter, the drum beat breaks",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 60,
+     "beat": "context",
+     "words": "Three answers have survived from the ancient world.",
+     "device": "contrast"
+    },
+    {
+     "t": 110,
+     "beat": "teaching",
+     "words": "Genesis 6 opens. Humanity is multiplying",
+     "device": "rhetorical repetition"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "promise"
+    ],
+    "1_3min": [
+     "context",
+     "teaching"
+    ],
+    "middle": [
+     "argument",
+     "scripture",
+     "evidence",
+     "objection",
+     "evidence",
+     "cta",
+     "story",
+     "story",
+     "teaching",
+     "teaching",
+     "teaching",
+     "recap",
+     "teaching",
+     "cta",
+     "application",
+     "cta"
+    ],
+    "last_10pct": [
+     "recap",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 75,
+     "motion": "slow panning and zooming",
+     "on_screen_text": "subtitles matching spoken transcript",
+     "figure_or_presenter": "depictions of ancient patriarchs, angels, and historical figures",
+     "colour_and_light": "dark, moody lighting with warm torch or divine golden glow",
+     "transitions": "fade or dissolve"
+    },
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "medium shot",
+      "wide shot",
+      "close-up"
+     ],
+     "shots_counted": 56,
+     "motion": "slow zoom and pan on static images",
+     "on_screen_text": "subtitles and call to action box",
+     "figure_or_presenter": "angels, Job, ancient scribes, Jesus, giants",
+     "colour_and_light": "warm golden light, moody blues, fiery oranges and dark tones",
+     "transitions": "hard cuts between generated illustrations"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, solemn, narrator voice, human",
+     "pace": "measured and deliberate",
+     "music": "ambient cinematic orchestral score with low drums",
+     "music_changes": "subtle swells matching narrative shifts",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "8G2j9_RjKOY",
+   "channel": "United Prayer",
+   "role": "latest",
+   "title": "Aao Maje Karte Hai #live",
+   "format": "teaching",
+   "views": 64,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 27.0,
+   "title_words": 5,
+   "title_upper_ratio": 0.21,
+   "chapters": 0,
+   "likes_per_1k": 0.0,
+   "comments_per_1k": 0.0,
+   "wpm": 6.7,
+   "sentence_words": 16.0,
+   "you_per_100": 0.0,
+   "questions_per_min": 0.04,
+   "shots_per_min": 3.52,
+   "beats_per_min": 0.22,
+   "beat_seconds": 300.0,
+   "scripture_per_10min": 0.0,
+   "thumb_words": 5,
+   "thumb_faces": 0,
+   "thumb_text": "BUSINESS IDEA START | GROW | SUCCEED",
+   "first_15s": "chhod do usko apane hath se ghumane do chod dena usko kyu hath pakdi jaha ghumna hoga ghumehi",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "context",
+     "words": "chhod do usko apane hath se ghumane do",
+     "device": "home video storytelling"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "context"
+    ],
+    "15_60s": [],
+    "1_3min": [],
+    "middle": [
+     "context",
+     "music_only",
+     "context",
+     "teaching"
+    ],
+    "last_10pct": [
+     "teaching"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "live video",
+     "shot_sizes": [
+      "medium shot",
+      "close up",
+      "full shot"
+     ],
+     "shots_counted": 1,
+     "motion": "handheld camera movement",
+     "on_screen_text": "none",
+     "figure_or_presenter": "children and family members",
+     "colour_and_light": "natural outdoor daylight",
+     "transitions": "cuts"
+    },
+    {
+     "image_kind": "live footage",
+     "shot_sizes": [
+      "medium shot",
+      "wide shot",
+      "close up"
+     ],
+     "shots_counted": 35,
+     "motion": "static and handheld camera movement",
+     "on_screen_text": "none",
+     "figure_or_presenter": "adult male and two young children",
+     "colour_and_light": "natural golden hour sunset lighting",
+     "transitions": "cuts"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "human voice conversing naturally",
+     "pace": "casual",
+     "music": "none",
+     "music_changes": "none",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "8YXRtsNnGX0",
+   "channel": "Beneath The Verse ",
+   "role": "latest",
+   "title": "Did God Really FORSAKE Jesus on the Cross? What \"Eli, Eli, Lama Sabachthani\" Points To",
+   "format": "teaching",
+   "views": 791,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 24.7,
+   "title_words": 15,
+   "title_upper_ratio": 0.28,
+   "chapters": 12,
+   "likes_per_1k": 39.2,
+   "comments_per_1k": 7.59,
+   "wpm": 79.9,
+   "sentence_words": 9.0,
+   "you_per_100": 1.2,
+   "questions_per_min": 0.57,
+   "shots_per_min": 6.56,
+   "beats_per_min": 0.93,
+   "beat_seconds": 38.0,
+   "scripture_per_10min": 10.53,
+   "thumb_words": 8,
+   "thumb_faces": 1,
+   "thumb_text": "DID GOD LEAVE HIM? MOST CHRISTIANS MISS THIS",
+   "first_15s": "It is the ninth hour. For 3 hours, darkness has lain over all the land. A man hangs on a Roman cross. A centurion stands facing him, watching. Then the man cries out with a loud voice.",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "hook",
+     "words": "It is the ninth hour.",
+     "device": "story"
+    },
+    {
+     "t": 23,
+     "beat": "objection",
+     "words": "You know this moment.",
+     "device": "direct question"
+    },
+    {
+     "t": 51,
+     "beat": "teaching",
+     "words": "But there is something in this moment",
+     "device": "scripture reference"
+    },
+    {
+     "t": 109,
+     "beat": "argument",
+     "words": "If Jesus is quoting a psalm",
+     "device": "contrast"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "objection",
+     "teaching"
+    ],
+    "1_3min": [
+     "argument"
+    ],
+    "middle": [
+     "context",
+     "argument",
+     "teaching",
+     "argument",
+     "scripture",
+     "teaching",
+     "scripture",
+     "argument",
+     "scripture",
+     "teaching",
+     "scripture",
+     "teaching",
+     "scripture",
+     "evidence",
+     "argument",
+     "application",
+     "application",
+     "cta",
+     "music_only"
+    ],
+    "last_10pct": []
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 45,
+     "motion": "subtle pan and zoom",
+     "on_screen_text": "verse references and key Aramaic/Hebrew words in elegant script",
+     "figure_or_presenter": "historical biblical figures in watercolor style",
+     "colour_and_light": "watercolor style with dramatic dark skies shifting to warm parchment tones",
+     "transitions": "fade or slide"
+    },
+    {
+     "image_kind": "AI watercolor illustration",
+     "shot_sizes": [
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 28,
+     "motion": "static illustrations with subtle transitions",
+     "on_screen_text": "verse references and key theological terms in serif font",
+     "figure_or_presenter": "depictions of biblical figures like Jesus, Moses, and David",
+     "colour_and_light": "muted earth tones, watercolor washes, dramatic dark skies at the cross",
+     "transitions": "fade and slide"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male voice, warm narrative tone, clear American accent, human",
+     "pace": "moderate and deliberate",
+     "music": "ambient orchestral underscore",
+     "music_changes": "gradual build during key narrative turns",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "8dLrnuwAABE",
+   "channel": "Grace & Glory Prayers",
+   "role": "weak_contrast",
+   "title": "🔥 OH GOD OF JABEZ, HEAR MY CRY TODAY AND HELP ME | APOSTLE JOSHUA SELMAN 🙏🔥✨",
+   "format": "teaching",
+   "views": 613,
+   "coverage": 0.882,
+   "policy_clean": false,
+   "minutes": 42.4,
+   "title_words": 17,
+   "title_upper_ratio": 1.0,
+   "chapters": 13,
+   "likes_per_1k": 14.7,
+   "comments_per_1k": 0.0,
+   "wpm": 110.6,
+   "sentence_words": 20.0,
+   "you_per_100": 1.9,
+   "questions_per_min": 0.03,
+   "shots_per_min": 0.21,
+   "beats_per_min": 1.23,
+   "beat_seconds": 40.5,
+   "scripture_per_10min": 6.96,
+   "thumb_words": 9,
+   "thumb_faces": 1,
+   "thumb_text": "OH! GOD OF JABEZ HEAR MY CRY APOSTLE JOSHUA SELMAN",
+   "first_15s": "I want to speak directly to whatever name has been spoken over your life before we go one sentence, father. Because I believe some of you have been living inside a name you never chose. Carrying its weight into every room you enter, letting it quietly determine what you believe you are actually allowed to become.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "I want to speak directly",
+     "device": "direct address and emotional resonance"
+    },
+    {
+     "t": 26.0,
+     "beat": "scripture",
+     "words": "First Chronicles chapter 4 verse",
+     "device": "scripture reference and etymological breakdown"
+    },
+    {
+     "t": 110.0,
+     "beat": "teaching",
+     "words": "And yet the very same",
+     "device": "contrast and paradigm shift"
+    },
+    {
+     "t": 146.0,
+     "beat": "declaration",
+     "words": "I decree over you this",
+     "device": "prophetic decree and repetition"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "scripture"
+    ],
+    "1_3min": [
+     "teaching",
+     "declaration"
+    ],
+    "middle": [
+     "teaching",
+     "teaching",
+     "declaration",
+     "teaching",
+     "teaching",
+     "application",
+     "declaration",
+     "teaching",
+     "prayer",
+     "prayer",
+     "declaration",
+     "prayer",
+     "teaching",
+     "scripture",
+     "prayer",
+     "teaching",
+     "scripture",
+     "prayer",
+     "declaration",
+     "teaching",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "teaching",
+     "prayer",
+     "declaration",
+     "declaration",
+     "declaration",
+     "teaching",
+     "scripture",
+     "teaching",
+     "declaration",
+     "declaration",
+     "prayer",
+     "declaration",
+     "declaration",
+     "application",
+     "declaration"
+    ],
+    "last_10pct": [
+     "recap",
+     "cta",
+     "prayer"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "live presenter with stock and motion graphics",
+     "shot_sizes": [
+      "medium close-up",
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "static presenter with animated falling golden light particles and moving audio waveform graphic",
+     "on_screen_text": "dynamic kinetic typography highlighting spoken words in yellow and white, plus presenter name banner at bottom",
+     "figure_or_presenter": "Apostle Joshua Selman holding a microphone, dressed in a blue shirt",
+     "colour_and_light": "dark background with golden glowing floating particles and warm key light on presenter",
+     "transitions": "none within the static frame, persistent motion graphics overlay"
+    },
+    {
+     "image_kind": "live presenter with text overlays",
+     "shot_sizes": [
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "static presenter with floating glowing particle effects",
+     "on_screen_text": "yellow karaoke style kinetic typography matching transcript words",
+     "figure_or_presenter": "Apostle Joshua Selman holding a microphone on stage",
+     "colour_and_light": "dark stage background with warm yellow glowing particles and bright studio lighting on presenter",
+     "transitions": "none"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep resonant baritone, Nigerian accent, human",
+     "pace": "moderate with dramatic pauses and emphatic stressing of key words",
+     "music": "ambient cinematic background pad with subtle uplifting undertones",
+     "music_changes": "constant steady background atmosphere throughout the clip",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "98D3dkzIw8g",
+   "channel": "United Prayer",
+   "role": "weak_contrast",
+   "title": "#oddlysatisfying #satisfying #asmr #hair #live #livestream #1million #subscribe #usa #uk#pubgmobile",
+   "format": "teaching",
+   "views": 28,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 12.3,
+   "title_words": 10,
+   "title_upper_ratio": 0.0,
+   "chapters": 0,
+   "likes_per_1k": 35.7,
+   "comments_per_1k": 0.0,
+   "wpm": 2.9,
+   "sentence_words": 36,
+   "you_per_100": 0.0,
+   "questions_per_min": 0.0,
+   "shots_per_min": 0.65,
+   "beats_per_min": 0.24,
+   "beat_seconds": 300,
+   "scripture_per_10min": 0.0,
+   "thumb_words": 6,
+   "thumb_faces": 0,
+   "thumb_text": "BUSINESS IDEA START GROW SUCCEED",
+   "first_15s": "",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "music_only",
+     "words": "UNKNOWN",
+     "device": "none"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "music_only"
+    ],
+    "15_60s": [],
+    "1_3min": [],
+    "middle": [
+     "teaching",
+     "music_only"
+    ],
+    "last_10pct": []
+   },
+   "picture": [
+    {
+     "image_kind": "live video",
+     "shot_sizes": [
+      "close-up",
+      "medium shot"
+     ],
+     "shots_counted": 6,
+     "motion": "hand-held camera movement, panning, mirroring effect",
+     "on_screen_text": "none",
+     "figure_or_presenter": "presenter's hands, legs, and feet",
+     "colour_and_light": "dim indoor lighting with warm tones",
+     "transitions": "cuts and mirror effects"
+    },
+    {
+     "image_kind": "live video with mirror effect",
+     "shot_sizes": [
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "static mirror split-screen",
+     "on_screen_text": "UNKNOWN",
+     "figure_or_presenter": "presenter legs and room background with mirror effect",
+     "colour_and_light": "warm indoor lighting",
+     "transitions": "none"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "UNKNOWN",
+     "pace": "UNKNOWN",
+     "music": "ambient sound effects and light background music",
+     "music_changes": "constant ambient sound throughout",
+     "sound_effects": "scraping and touching sounds"
+    }
+   ]
+  },
+  {
+   "video_id": "9iVoAk5NZAM",
+   "channel": "Prayer of Hope",
+   "role": "winner",
+   "title": "Monday, September 21 | Start Your Morning With This Powerful Prayer | Give God Your Whole Day",
+   "format": "prayer",
+   "views": 51260,
+   "coverage": 0.637,
+   "policy_clean": true,
+   "minutes": 55.2,
+   "title_words": 17,
+   "title_upper_ratio": 0.19,
+   "chapters": 0,
+   "likes_per_1k": 24.7,
+   "comments_per_1k": 9.09,
+   "wpm": 116.7,
+   "sentence_words": 10.0,
+   "you_per_100": 8.2,
+   "questions_per_min": 0.0,
+   "shots_per_min": 2.36,
+   "beats_per_min": 1.42,
+   "beat_seconds": 32.0,
+   "scripture_per_10min": 4.83,
+   "thumb_words": null,
+   "thumb_faces": null,
+   "thumb_text": null,
+   "first_15s": "Imagine waking up this Monday morning with the weight of yesterday still sitting on your heart. Maybe you smiled for everyone yesterday, but deep inside you were exhausted. Maybe you went to sleep carrying worries about your family, your finances, your future, your health, or a situation you cannot seem to change.",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "hook",
+     "words": "Imagine waking up this Monday morning",
+     "device": "direct address"
+    },
+    {
+     "t": 24,
+     "beat": "promise",
+     "words": "But this morning, before you answer",
+     "device": "call to action"
+    },
+    {
+     "t": 45,
+     "beat": "teaching",
+     "words": "The sunrise is a reminder that",
+     "device": "metaphor"
+    },
+    {
+     "t": 60,
+     "beat": "scripture",
+     "words": "Scripture says, His mercies are",
+     "device": "scripture reference"
+    },
+    {
+     "t": 77,
+     "beat": "objection",
+     "words": "Maybe your heart feels tired.",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 130,
+     "beat": "answer",
+     "words": "But hear this today: silence",
+     "device": "contrast"
+    },
+    {
+     "t": 158,
+     "beat": "application",
+     "words": "Bring the fear, bring the tears,",
+     "device": "listing"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "promise",
+     "teaching"
+    ],
+    "1_3min": [
+     "scripture",
+     "objection",
+     "answer",
+     "application"
+    ],
+    "middle": [
+     "prayer",
+     "promise",
+     "scripture",
+     "teaching",
+     "context",
+     "scripture",
+     "prayer",
+     "promise",
+     "teaching",
+     "teaching",
+     "prayer",
+     "prayer",
+     "teaching",
+     "scripture",
+     "prayer",
+     "application",
+     "scripture",
+     "teaching",
+     "prayer",
+     "scripture",
+     "application",
+     "teaching",
+     "declaration",
+     "teaching",
+     "application",
+     "prayer",
+     "scripture",
+     "cta",
+     "context",
+     "prayer",
+     "teaching",
+     "prayer",
+     "application"
+    ],
+    "last_10pct": [
+     "prayer",
+     "scripture",
+     "teaching",
+     "prayer",
+     "scripture",
+     "teaching",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "stock footage",
+     "shot_sizes": [
+      "wide shot",
+      "medium close-up"
+     ],
+     "shots_counted": 12,
+     "motion": "slow zoom and gentle panning",
+     "on_screen_text": "white sans-serif caption subtitles word-by-word highlight",
+     "figure_or_presenter": "none",
+     "colour_and_light": "natural lighting transitioning from soft morning hues to bright daylight and cinematic golden hour",
+     "transitions": "smooth fades and cross dissolves"
+    },
+    {
+     "image_kind": "stock footage",
+     "shot_sizes": [
+      "establishing shot",
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 12,
+     "motion": "slow panning and zooming with floating particle overlays",
+     "on_screen_text": "large bold white centered subtitle text matching the spoken audio word by word",
+     "figure_or_presenter": "none",
+     "colour_and_light": "cinematic and moody colour grading, shifting from dark natural landscapes to golden hour and soft mist",
+     "transitions": "smooth cross dissolves between nature scenes"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, warm, soothing, American accent, human",
+     "pace": "slow, deliberate, and meditative",
+     "music": "ambient cinematic orchestral pad with soft piano chords",
+     "music_changes": "gradual swell during scriptural and emotional peaks",
+     "sound_effects": "subtle sparkle wind chimes"
+    }
+   ]
+  },
+  {
+   "video_id": "AxInqNJzmyU",
+   "channel": "Grace & Glory Prayers",
+   "role": "latest",
+   "title": "🙏🔥 GOD OF JABEZ, CHANGE MY STORY! | POWERFUL 20 MINUTES PRAYER | APOSTLE JOSHUA SELMAN 🌅✨",
+   "format": "prayer",
+   "views": 212,
+   "coverage": 1.0,
+   "policy_clean": false,
+   "minutes": 24.8,
+   "title_words": 17,
+   "title_upper_ratio": 1.0,
+   "chapters": 13,
+   "likes_per_1k": 61.3,
+   "comments_per_1k": 84.91,
+   "wpm": 115.0,
+   "sentence_words": 9,
+   "you_per_100": 5.5,
+   "questions_per_min": 0.08,
+   "shots_per_min": 1.33,
+   "beats_per_min": 1.7,
+   "beat_seconds": 32.0,
+   "scripture_per_10min": 8.08,
+   "thumb_words": 9,
+   "thumb_faces": 1,
+   "thumb_text": "GOD OF JABEZ CHANGE MY STORY APOSTLE JOSHUA SELMAN",
+   "first_15s": "The God of heaven has brought you into this atmosphere for a divine encounter. Tonight is not an ordinary gathering, it is a prophetic appointment with destiny. Hear the word of the Lord in 1 Chronicles 4:9-10:",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "hook",
+     "words": "The God of heaven has brought",
+     "device": "promise"
+    },
+    {
+     "t": 11,
+     "beat": "scripture",
+     "words": "Hear the word of the Lord",
+     "device": "scripture reference"
+    },
+    {
+     "t": 42,
+     "beat": "teaching",
+     "words": "Child of God, listen carefully",
+     "device": "story"
+    },
+    {
+     "t": 65,
+     "beat": "promise",
+     "words": "Hear me, in the same way",
+     "device": "direct address"
+    },
+    {
+     "t": 122,
+     "beat": "declaration",
+     "words": "I prophesy over you, every",
+     "device": "prophetic decree"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook",
+     "scripture"
+    ],
+    "15_60s": [
+     "teaching"
+    ],
+    "1_3min": [
+     "promise",
+     "declaration"
+    ],
+    "middle": [
+     "prayer",
+     "prayer",
+     "declaration",
+     "scripture",
+     "promise",
+     "prayer",
+     "declaration",
+     "declaration",
+     "scripture",
+     "prayer",
+     "declaration",
+     "scripture",
+     "prayer",
+     "declaration",
+     "declaration",
+     "promise",
+     "prayer",
+     "declaration",
+     "promise",
+     "declaration",
+     "declaration",
+     "declaration",
+     "scripture",
+     "declaration",
+     "scripture",
+     "prayer",
+     "scripture",
+     "declaration",
+     "scripture",
+     "declaration",
+     "prayer",
+     "prayer",
+     "teaching",
+     "scripture",
+     "prayer"
+    ],
+    "last_10pct": [
+     "scripture",
+     "declaration"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "composite stock footage and live presenter",
+     "shot_sizes": [
+      "medium shot",
+      "wide shot"
+     ],
+     "shots_counted": 6,
+     "motion": "slow zoom and panning water scenes",
+     "on_screen_text": "yellow bold kinetic subtitles matching speech",
+     "figure_or_presenter": "Apostle Joshua Selman holding a microphone on the left side of the frame",
+     "colour_and_light": "vibrant blue ocean, autumn foliage, and bright daylight",
+     "transitions": "dissolve and fade cuts between background nature scenes"
+    },
+    {
+     "image_kind": "Static cut-out photo overlay over dynamic nature stock video background",
+     "shot_sizes": [
+      "Medium shot"
+     ],
+     "shots_counted": 8,
+     "motion": "Static presenter portrait cutout over looping video scenes of oceans, rivers, and waterfalls.",
+     "on_screen_text": "Bold yellow captions with black outline centered upper middle; permanent channel credit 'APOSTLE JOSHUA SELMAN' at bottom right.",
+     "figure_or_presenter": "Cutout photo of Apostle Joshua Selman holding a microphone in a blue shirt.",
+     "colour_and_light": "Vibrant nature colors with high contrast bright yellow subtitle text.",
+     "transitions": "Dissolves and direct cuts between nature stock videos."
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, resonant, warm, authoritative, human",
+     "pace": "moderate to fast crescendo during prophetic declarations",
+     "music": "ambient cinematic worship pad",
+     "music_changes": "gradual swell during the prayer and declaration segments",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "CqvB4OVD5Nw",
+   "channel": "Grace & Glory Prayers",
+   "role": "winner",
+   "title": "5 MINUTES POWERFUL MORNING PRAYER TO COVER YOUR DAY WITH THE BLOOD OF JESUS | APOSTLE JOSHUA SELMAN",
+   "format": "prayer",
+   "views": 198448,
+   "coverage": 1.0,
+   "policy_clean": false,
+   "minutes": 39.3,
+   "title_words": 18,
+   "title_upper_ratio": 1.0,
+   "chapters": 13,
+   "likes_per_1k": 22.5,
+   "comments_per_1k": 6.6,
+   "wpm": 160.0,
+   "sentence_words": 10,
+   "you_per_100": 4.7,
+   "questions_per_min": 0.13,
+   "shots_per_min": 0.2,
+   "beats_per_min": 2.37,
+   "beat_seconds": 23,
+   "scripture_per_10min": 6.36,
+   "thumb_words": 9,
+   "thumb_faces": 1,
+   "thumb_text": "COVER YOUR DAY WITH THE BLOOD. APOSTLE JOSHUA SELMAN",
+   "first_15s": "Lift your hands wherever you are, just lift your hands. Father, we thank you. We thank you for this moment. We thank you for the gift of breath. We thank you that we are alive to see this day. Lord, we do not take it for granted.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "prayer",
+     "words": "Lift your hands wherever you are just lift your hands",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 32.0,
+     "beat": "cta",
+     "words": "Before we go any further I want to ask you",
+     "device": "direct question"
+    },
+    {
+     "t": 60.0,
+     "beat": "context",
+     "words": "Now let us minister There is a truth that most believers",
+     "device": "contrast"
+    },
+    {
+     "t": 101.0,
+     "beat": "hook",
+     "words": "But there is a mystery that the Spirit of God",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 124.0,
+     "beat": "scripture",
+     "words": "The Bible says in Hebrews chapter 12 verse 24",
+     "device": "contrast"
+    },
+    {
+     "t": 160.0,
+     "beat": "teaching",
+     "words": "Are you hearing me Listen carefully There are dimensions",
+     "device": "number list"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "prayer"
+    ],
+    "15_60s": [
+     "cta"
+    ],
+    "1_3min": [
+     "context",
+     "hook",
+     "scripture",
+     "teaching"
+    ],
+    "middle": [
+     "scripture",
+     "application",
+     "scripture",
+     "declaration",
+     "context",
+     "teaching",
+     "application",
+     "scripture",
+     "transition",
+     "argument",
+     "scripture",
+     "teaching",
+     "declaration",
+     "declaration",
+     "cta",
+     "prayer",
+     "prayer",
+     "declaration",
+     "prayer",
+     "declaration",
+     "cta",
+     "prayer",
+     "scripture",
+     "teaching",
+     "scripture",
+     "application",
+     "prayer",
+     "declaration",
+     "declaration",
+     "teaching",
+     "scripture",
+     "declaration",
+     "prayer",
+     "declaration",
+     "promise",
+     "declaration",
+     "teaching",
+     "scripture",
+     "argument",
+     "context",
+     "prayer",
+     "declaration",
+     "declaration",
+     "prayer",
+     "context",
+     "scripture",
+     "teaching",
+     "prayer",
+     "declaration",
+     "declaration",
+     "declaration",
+     "context",
+     "declaration",
+     "declaration",
+     "teaching",
+     "declaration",
+     "declaration",
+     "promise",
+     "declaration",
+     "teaching",
+     "prayer",
+     "declaration",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "transition",
+     "application",
+     "application",
+     "application",
+     "application",
+     "application",
+     "teaching",
+     "scripture"
+    ],
+    "last_10pct": [
+     "application",
+     "prayer",
+     "declaration",
+     "declaration",
+     "teaching",
+     "scripture",
+     "declaration",
+     "application",
+     "prayer",
+     "cta",
+     "declaration"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "photo and graphic overlay",
+     "shot_sizes": [
+      "MCU"
+     ],
+     "shots_counted": 1,
+     "motion": "Static portrait cutout with subtle floating background particle drift and pulsing audio spectrum bar",
+     "on_screen_text": "Centered bold yellow/white word-by-word synchronized subtitles; fixed green bottom text 'APOSTLE JOSHUA SELMAN'",
+     "figure_or_presenter": "Apostle Joshua Selman shown as a cutout photograph in a blue shirt holding a microphone and gesturing",
+     "colour_and_light": "Dark emerald green palette with glowing green particles, digital grid lines, and glowing wave effects",
+     "transitions": "None; continuous static composition throughout the segment"
+    },
+    {
+     "image_kind": "static graphic background with audio visualizer and cutout photograph",
+     "shot_sizes": [
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "subtle floating glowing particle effects and active digital equalizer waveform bars bouncing at bottom center",
+     "on_screen_text": "kinetic yellow italic sans-serif caption subtitles in center right; static green sans-serif text 'APOSTLE JOSHUA SELMAN' in bottom right",
+     "figure_or_presenter": "cutout still photograph of Apostle Joshua Selman on the left holding a microphone, wearing a grey collared shirt",
+     "colour_and_light": "deep emerald green and black gradient background with bright turquoise/green particles and white audio waves",
+     "transitions": "none; continuous single layout graphic loop"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "Male, African (Nigerian) accent, deep, resonant, authoritative preaching tone, human speaker",
+     "pace": "Deliberate and rhythmic with emphatic pauses between theological points",
+     "music": "Soft, continuous ambient synthesizer pads and gentle piano chords mixed underneath the vocal",
+     "music_changes": "Steady ambient atmospheric pad sustained evenly without distinct changes or drops",
+     "sound_effects": "None detectable"
+    }
+   ]
+  },
+  {
+   "video_id": "FEyv4xRoPzs",
+   "channel": "Beneath The Verse ",
+   "role": "winner",
+   "title": "God Never Said RAINBOW. What \"My Bow\" Really Means in Genesis 9:13",
+   "format": "teaching",
+   "views": 72090,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 29.8,
+   "title_words": 12,
+   "title_upper_ratio": 0.33,
+   "chapters": 19,
+   "likes_per_1k": 16.5,
+   "comments_per_1k": 2.18,
+   "wpm": 72.5,
+   "sentence_words": 11.0,
+   "you_per_100": 0.9,
+   "questions_per_min": 0.17,
+   "shots_per_min": 5.03,
+   "beats_per_min": 1.07,
+   "beat_seconds": 42.5,
+   "scripture_per_10min": 8.38,
+   "thumb_words": 9,
+   "thumb_faces": 6,
+   "thumb_text": "GOD NEVER SAID RAINBOW HE SAID SOMETHING ELSE",
+   "first_15s": "Noah steps out onto ground that is still soft from the water. Behind him stands the ark, empty now. He builds an altar. The smoke of the offering rises, and the text says the Lord smells it. Then God speaks, and he points to the cloud.",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "context",
+     "words": "Noah steps out onto ground that is still soft",
+     "device": "descriptive narrative"
+    },
+    {
+     "t": 18,
+     "beat": "hook",
+     "words": "Here's the question almost nobody asks: why a bow?",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 31,
+     "beat": "teaching",
+     "words": "Because that is what the text says.",
+     "device": "linguistic analysis"
+    },
+    {
+     "t": 59,
+     "beat": "argument",
+     "words": "So, here is the first layer of the answer:",
+     "device": "contrast"
+    },
+    {
+     "t": 117,
+     "beat": "scripture",
+     "words": "Let us start where the text starts, Genesis chapter",
+     "device": "scripture reference"
+    },
+    {
+     "t": 143,
+     "beat": "teaching",
+     "words": "Now, if you read this in the King James Version",
+     "device": "translation comparison"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "context"
+    ],
+    "15_60s": [
+     "hook",
+     "teaching",
+     "argument"
+    ],
+    "1_3min": [
+     "scripture",
+     "teaching"
+    ],
+    "middle": [
+     "evidence",
+     "context",
+     "teaching",
+     "scripture",
+     "argument",
+     "teaching",
+     "scripture",
+     "teaching",
+     "argument",
+     "objection",
+     "transition",
+     "teaching",
+     "scripture",
+     "teaching",
+     "argument",
+     "teaching",
+     "evidence",
+     "scripture",
+     "application",
+     "argument",
+     "teaching",
+     "scripture",
+     "teaching"
+    ],
+    "last_10pct": [
+     "application",
+     "teaching",
+     "application"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI watercolor illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 31,
+     "motion": "static images with occasional slow zoom or pan",
+     "on_screen_text": "Hebrew text transliterations and Bible verse callouts",
+     "figure_or_presenter": "Biblical characters including Noah, Hagar, Isaac, Jacob, and Joseph",
+     "colour_and_light": "earthy watercolor tones with warm highlights and dramatic storm skies",
+     "transitions": "direct cuts between static watercolor illustrations"
+    },
+    {
+     "image_kind": "AI illustration / watercolor style",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close up"
+     ],
+     "shots_counted": 14,
+     "motion": "static images with slide transitions",
+     "on_screen_text": "Hebrew text translations, verse references, and thematic labels",
+     "figure_or_presenter": "Noah's ark, storms, Hebrew text, and biblical scenes",
+     "colour_and_light": "watercolor palette with stormy greys, deep blues, and warm golden highlights",
+     "transitions": "cut and simple crossfade"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, clear narrative tone with British accent, human voice",
+     "pace": "measured and deliberate",
+     "music": "ambient subtle cinematic instrumental music",
+     "music_changes": "gradual swells matching narrative transitions",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "MAZXkEhdKU8",
+   "channel": "Owens Bible",
+   "role": "weak_contrast",
+   "title": "The Ruthless Daughter Of Jezebel: She Killed Her Own Family",
+   "format": "teaching",
+   "views": 3863,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 8.1,
+   "title_words": 10,
+   "title_upper_ratio": 0.2,
+   "chapters": 0,
+   "likes_per_1k": 21.2,
+   "comments_per_1k": 1.29,
+   "wpm": 169.2,
+   "sentence_words": 11.0,
+   "you_per_100": 0.5,
+   "questions_per_min": 0.12,
+   "shots_per_min": 14.91,
+   "beats_per_min": 1.49,
+   "beat_seconds": 43.5,
+   "scripture_per_10min": 3.73,
+   "thumb_words": 4,
+   "thumb_faces": 1,
+   "thumb_text": "THE STORY OF ATHALIAH",
+   "first_15s": "There was a woman in the Bible whose name has been remembered for generations as one of the most evil queens in the Bible. She was ruthless, obsessed with power, and she wanted the throne so badly that she was willing to kill her own family just to take it. She became known as the mistress of evil. For generations, her name has been remembered as one of the darkest names in the history of Judah.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "There was a woman in the Bible",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 12.0,
+     "beat": "promise",
+     "words": "She became known as the mistress of evil",
+     "device": "direct question"
+    },
+    {
+     "t": 30.2,
+     "beat": "cta",
+     "words": "Before we get into the story,",
+     "device": "call to action"
+    },
+    {
+     "t": 35.74,
+     "beat": "context",
+     "words": "Athaliah was born into a royal family",
+     "device": "background story"
+    },
+    {
+     "t": 60.54,
+     "beat": "story",
+     "words": "Eventually, Athaliah married Jehoram.",
+     "device": "historical context"
+    },
+    {
+     "t": 113.62,
+     "beat": "teaching",
+     "words": "Things started going badly for him.",
+     "device": "consequence"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook",
+     "promise"
+    ],
+    "15_60s": [
+     "cta",
+     "context"
+    ],
+    "1_3min": [
+     "story",
+     "teaching"
+    ],
+    "middle": [
+     "story",
+     "story",
+     "story",
+     "story",
+     "story"
+    ],
+    "last_10pct": [
+     "application"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration and text overlays",
+     "shot_sizes": [
+      "medium shot",
+      "close-up",
+      "wide shot"
+     ],
+     "shots_counted": 45,
+     "motion": "zoom and pan on static images",
+     "on_screen_text": "large bold title cards and highlighted bible verses",
+     "figure_or_presenter": "animated cartoon presenter in a red sweater with a cross necklace",
+     "colour_and_light": "high contrast with vibrant purples and reds for royalty and dark moody lighting for battles",
+     "transitions": "cuts and simple fades"
+    },
+    {
+     "image_kind": "AI illustration and character graphics",
+     "shot_sizes": [
+      "medium shot",
+      "close up",
+      "wide shot"
+     ],
+     "shots_counted": 75,
+     "motion": "pan and zoom on static illustrations",
+     "on_screen_text": "PROTECT THE BOY, LONG LIVE THE KING, HER GRANDSON, TREASON, OVER, PRIDE, GREED, JEALOUSY",
+     "figure_or_presenter": "Joash, Jehoiada, Athaliah, guards, crowd, animated presenter host",
+     "colour_and_light": "vibrant biblical colour palette transitioning to dark and dramatic tones for execution scenes",
+     "transitions": "cuts and simple fades"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, clear American accent, warm narrative tone, human voice",
+     "pace": "moderate and dramatic",
+     "music": "ambient cinematic background track",
+     "music_changes": "shifts to more tense orchestration during battle and murder sequences",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "NUXLAy7A8TM",
+   "channel": "Morning Grace Prayers",
+   "role": "winner",
+   "title": "October Morning Prayer 🙏 | Start This New Month With God | Prayer for Peace, Protection & Blessings",
+   "format": "prayer",
+   "views": 249,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 17.1,
+   "title_words": 18,
+   "title_upper_ratio": 0.17,
+   "chapters": 0,
+   "likes_per_1k": 76.3,
+   "comments_per_1k": 28.11,
+   "wpm": 148.8,
+   "sentence_words": 14.0,
+   "you_per_100": 6.3,
+   "questions_per_min": 0.06,
+   "shots_per_min": 6.13,
+   "beats_per_min": 1.75,
+   "beat_seconds": 30.0,
+   "scripture_per_10min": 0.0,
+   "thumb_words": 8,
+   "thumb_faces": 0,
+   "thumb_text": "Powerful Prayer Thank God First For New Month",
+   "first_15s": "Heavenly Father as this new morning begins and as we step into the beautiful month of October we come quietly into your presence thank you for the gift of another day thank you for the breath in our lungs the strength to rise",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "prayer",
+     "words": "Heavenly Father as this new morning begins",
+     "device": "callback"
+    },
+    {
+     "t": 18,
+     "beat": "prayer",
+     "words": "we do not take this new month",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 41,
+     "beat": "prayer",
+     "words": "Lord we surrender October to you",
+     "device": "number list"
+    },
+    {
+     "t": 71,
+     "beat": "prayer",
+     "words": "you are the god who never sleeps",
+     "device": "promise"
+    },
+    {
+     "t": 99,
+     "beat": "prayer",
+     "words": "thank you for being our constant",
+     "device": "contrast"
+    },
+    {
+     "t": 124,
+     "beat": "prayer",
+     "words": "we may not know what October will bring",
+     "device": "promise"
+    },
+    {
+     "t": 161,
+     "beat": "prayer",
+     "words": "for anyone waking up with a heavy heart",
+     "device": "rhetorical repetition"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "prayer"
+    ],
+    "15_60s": [
+     "prayer",
+     "prayer"
+    ],
+    "1_3min": [
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer"
+    ],
+    "middle": [
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer"
+    ],
+    "last_10pct": [
+     "prayer",
+     "application",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration / stock footage combination",
+     "shot_sizes": [
+      "Medium shot",
+      "Wide shot",
+      "Close-up"
+     ],
+     "shots_counted": 34,
+     "motion": "Slow zoom, gentle panning, moving water/nature backgrounds",
+     "on_screen_text": "Subtitles with black outline and white fill sentence-by-sentence, top right 'SUBSCRIBE' button, bottom right watermark 'Morning Grace Prayers'",
+     "figure_or_presenter": "Consistent depiction of Jesus praying on the left side of the screen throughout",
+     "colour_and_light": "Vibrant natural scenes, golden hour sunsets, snowy landscapes, floral close-ups, warm glowing light",
+     "transitions": "Crossfade transitions between backgrounds"
+    },
+    {
+     "image_kind": "AI illustration and stock footage background",
+     "shot_sizes": [
+      "medium close-up",
+      "wide shot"
+     ],
+     "shots_counted": 12,
+     "motion": "slow panning and zooming on static images and nature clips",
+     "on_screen_text": "large bold white text with black outline displaying spoken words word-by-word, plus persistent subscribe button and channel logo",
+     "figure_or_presenter": "depiction of Jesus kneeling in prayer in a white robe and red cloak",
+     "colour_and_light": "vibrant natural colors, cinematic lighting, sun rays over open bibles, lush green fields, and cascading waterfalls",
+     "transitions": "smooth crossfade dissolves"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "Warm, deep male voice, American accent, human narration with professional delivery",
+     "pace": "Slow, meditative, deliberate pace",
+     "music": "Soft ambient cinematic worship pad with gentle piano chords",
+     "music_changes": "Continuous gentle background pad throughout with subtle dynamic lifts",
+     "sound_effects": "Occasional subtle whoosh or natural ambient swells"
+    }
+   ]
+  },
+  {
+   "video_id": "SRaWn0WoP88",
+   "channel": "Grace & Glory Prayers",
+   "role": "winner",
+   "title": "🙏 10 MINUTES POWERFUL MORNING PRAYER BEFORE YOU START YOUR DAY | APOSTLE JOSHUA SELMAN 🌅🔥",
+   "format": "prayer",
+   "views": 42526,
+   "coverage": 1.0,
+   "policy_clean": false,
+   "minutes": 12.1,
+   "title_words": 16,
+   "title_upper_ratio": 1.0,
+   "chapters": 11,
+   "likes_per_1k": 16.8,
+   "comments_per_1k": 2.05,
+   "wpm": 119.9,
+   "sentence_words": 15.0,
+   "you_per_100": 7.1,
+   "questions_per_min": 0.08,
+   "shots_per_min": 0.25,
+   "beats_per_min": 1.73,
+   "beat_seconds": 31,
+   "scripture_per_10min": 12.36,
+   "thumb_words": 10,
+   "thumb_faces": 1,
+   "thumb_text": "COMMAND YOUR DAY 10 MINUTES WITH GOD APOSTLE JOSHUA SELMAN",
+   "first_15s": "Beloved, hear me this morning. Every day begins with an instruction from the spirit realm. Every morning carries a verdict, a prophecy, a decree.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "Beloved, hear me this morning.",
+     "device": "direct address"
+    },
+    {
+     "t": 15.0,
+     "beat": "scripture",
+     "words": "If you do not rise early",
+     "device": "scripture reference"
+    },
+    {
+     "t": 61.0,
+     "beat": "teaching",
+     "words": "This is why Psalm 5:3 says",
+     "device": "list of keys"
+    },
+    {
+     "t": 99.0,
+     "beat": "prayer",
+     "words": "Therefore, as you rise this",
+     "device": "imperative declaration"
+    },
+    {
+     "t": 171.0,
+     "beat": "declaration",
+     "words": "I decree and declare according",
+     "device": "prophetic decree"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "scripture"
+    ],
+    "1_3min": [
+     "teaching",
+     "prayer",
+     "declaration"
+    ],
+    "middle": [
+     "prayer",
+     "declaration",
+     "teaching",
+     "scripture",
+     "declaration",
+     "declaration",
+     "declaration",
+     "declaration",
+     "scripture",
+     "declaration",
+     "promise",
+     "declaration",
+     "prayer"
+    ],
+    "last_10pct": [
+     "scripture",
+     "prayer",
+     "declaration"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "live presenter with AI generated background",
+     "shot_sizes": [
+      "medium close up"
+     ],
+     "shots_counted": 1,
+     "motion": "static presenter with subtle floating particle background animation",
+     "on_screen_text": "dynamic kinetic typography highlighting key spoken words in yellow and green",
+     "figure_or_presenter": "Apostle Joshua Selman holding a microphone",
+     "colour_and_light": "teal and blue ambient lighting with sparkling bokeh particles",
+     "transitions": "static continuous shot with animated text overlays"
+    },
+    {
+     "image_kind": "live presenter with graphic overlay",
+     "shot_sizes": [
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "static presenter with animated dynamic subtitles and background particle effects",
+     "on_screen_text": "yellow animated captions tracking speech verbatim",
+     "figure_or_presenter": "Apostle Joshua Selman holding a microphone",
+     "colour_and_light": "deep teal/blue background with subtle glowing particle lights",
+     "transitions": "cut"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, resonant, authoritative, Nigerian accent, human",
+     "pace": "moderate to fast and energetic during declarations",
+     "music": "ambient cinematic motivational pad",
+     "music_changes": "constant underlay throughout the speech",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "STcBN9l5rfU",
+   "channel": "Owens Bible",
+   "role": "winner",
+   "title": "Funeral In Every Religion Explained in 10 Minutes",
+   "format": "teaching",
+   "views": 466100,
+   "coverage": 0.998,
+   "policy_clean": true,
+   "minutes": 10.0,
+   "title_words": 8,
+   "title_upper_ratio": 0.15,
+   "chapters": 0,
+   "likes_per_1k": 6.2,
+   "comments_per_1k": 0.56,
+   "wpm": 144.7,
+   "sentence_words": 13,
+   "you_per_100": 0.0,
+   "questions_per_min": 0.1,
+   "shots_per_min": 9.5,
+   "beats_per_min": 0.7,
+   "beat_seconds": 82.0,
+   "scripture_per_10min": 0.0,
+   "thumb_words": 14,
+   "thumb_faces": 21,
+   "thumb_text": "Hinduism Islam Tibetan Buddhism Judiasm Zoroastriasm Toraja Ancient Egypt Christianity",
+   "first_15s": "Hinduism. In Hinduism, funerals are usually very different from what we see in many Western religions. In many Hindu traditions, the body is cremated, meaning it is placed on a funeral pyre and burned. Before the cremation, the family washes and prepares the body. In some traditions, a few drops of water from the Ganges are placed in the person's mouth.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "teaching",
+     "words": "In Hinduism, funerals are usually very different",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 60.0,
+     "beat": "teaching",
+     "words": "One of the most unusual funeral traditions",
+     "device": "contrast"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "teaching"
+    ],
+    "15_60s": [],
+    "1_3min": [
+     "teaching"
+    ],
+    "middle": [
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching"
+    ],
+    "last_10pct": []
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "medium shot",
+      "close up"
+     ],
+     "shots_counted": 50,
+     "motion": "static illustrations with digital cutouts and animated text overlays",
+     "on_screen_text": "Hinduism, Tibetan Buddhism, CHRISTIANITY, JUDIAISM, ZOROASTRIANISM, Islam, TORAJA, Ancient Egypt, GANGES, UNUSUAL, JHATOR, GIVING ALMS TO THE BIRDS, SKY BURIAL, Bardo, 49 DAYS, ROGYAPA, OUT OF RESPECT, Catholic, Orthodox, Protestant, 1963, RESPECTFULLY, STRICTER, SACRED, 8 DAYS LATER, 40 DAYS LATER, FLEXIBLE, 24 HOURS, 2 OR 3 DAYS, CHEVRA KADISHA, holy society, TAHARA, TACHRICHIM, EVERYONE IS EQUAL IN DEATH, SHOMER, DISRESPECTFUL, KRIAH, SHIVA, ANNIVERSARY, KADDISH",
+     "figure_or_presenter": "animated chibi Christian presenter with a red sweater and cross necklace",
+     "colour_and_light": "bright white backgrounds with vibrant colored illustrations and warm lighting for ritual scenes",
+     "transitions": "sudden cuts and slide transitions"
+    },
+    {
+     "image_kind": "AI illustration and stock footage",
+     "shot_sizes": [
+      "medium shot",
+      "close up",
+      "wide shot"
+     ],
+     "shots_counted": 45,
+     "motion": "pan and zoom",
+     "on_screen_text": "red capital titles and labels",
+     "figure_or_presenter": "animated cartoon presenter in red sweater",
+     "colour_and_light": "bright vector illustrations with clean white backgrounds",
+     "transitions": "cut and fade"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male voice, clear American accent, human narrator",
+     "pace": "moderate to fast, engaging pace",
+     "music": "ambient background music",
+     "music_changes": "subtle shifts matching topic transitions between religions",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "TGdYF8jDdXk",
+   "channel": "Prayer of Hope",
+   "role": "weak_contrast",
+   "title": "Friday, October 9 | God Has Something New for You | Morning Prayer for New Opportunities, Favor",
+   "format": "prayer",
+   "views": 436,
+   "coverage": 0.692,
+   "policy_clean": true,
+   "minutes": 64.9,
+   "title_words": 17,
+   "title_upper_ratio": 0.16,
+   "chapters": 0,
+   "likes_per_1k": 87.2,
+   "comments_per_1k": 84.86,
+   "wpm": 99.7,
+   "sentence_words": 12.0,
+   "you_per_100": 6.3,
+   "questions_per_min": 0.02,
+   "shots_per_min": 1.78,
+   "beats_per_min": 1.2,
+   "beat_seconds": 36.9,
+   "scripture_per_10min": 4.23,
+   "thumb_words": null,
+   "thumb_faces": null,
+   "thumb_text": null,
+   "first_15s": "As the first light of Friday, the 9th of October begins to rise, take a deep breath and remind your soul of this truth. God is not finished with you. What you have been crying about in the darkness, God is already preparing to transform in the light.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "As the first light of Friday",
+     "device": "promise"
+    },
+    {
+     "t": 36.32,
+     "beat": "context",
+     "words": "But today, God is reminding you",
+     "device": "empathy"
+    },
+    {
+     "t": 71.02,
+     "beat": "scripture",
+     "words": "God has something new for you",
+     "device": "scripture"
+    },
+    {
+     "t": 107.82,
+     "beat": "teaching",
+     "words": "As the golden sunrise breaks across",
+     "device": "imagery"
+    },
+    {
+     "t": 157.6,
+     "beat": "prayer",
+     "words": "You have survived the night",
+     "device": "intercession"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "context"
+    ],
+    "1_3min": [
+     "scripture",
+     "teaching",
+     "prayer"
+    ],
+    "middle": [
+     "prayer",
+     "application",
+     "promise",
+     "teaching",
+     "teaching",
+     "scripture",
+     "teaching",
+     "promise",
+     "scripture",
+     "prayer",
+     "context",
+     "teaching",
+     "objection",
+     "answer",
+     "scripture",
+     "teaching",
+     "prayer",
+     "scripture",
+     "prayer",
+     "teaching",
+     "scripture",
+     "prayer",
+     "scripture",
+     "prayer",
+     "teaching",
+     "prayer",
+     "teaching",
+     "prayer",
+     "declaration",
+     "teaching",
+     "scripture",
+     "application",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "declaration"
+    ],
+    "last_10pct": [
+     "prayer",
+     "prayer",
+     "prayer",
+     "teaching",
+     "declaration",
+     "scripture",
+     "prayer",
+     "teaching",
+     "scripture",
+     "prayer",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "stock footage",
+     "shot_sizes": [
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 7,
+     "motion": "slow zoom and particle overlay effect",
+     "on_screen_text": "yellow word-by-word karaoke style captions with white outline and 'Type Ameen' footer",
+     "figure_or_presenter": "none",
+     "colour_and_light": "natural vibrant outdoor lighting with flowers and nature scenery",
+     "transitions": "crossfade"
+    },
+    {
+     "image_kind": "stock footage and AI illustration",
+     "shot_sizes": [
+      "medium shot",
+      "close up"
+     ],
+     "shots_counted": 8,
+     "motion": "slow pan and zoom",
+     "on_screen_text": "bold yellow and white kinetic caption text highlighting key words",
+     "figure_or_presenter": "none",
+     "colour_and_light": "vibrant natural floral colors, bright and warm daylight",
+     "transitions": "smooth cross dissolves"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, warm, American accent, AI generated",
+     "pace": "slow, deliberate, and calm",
+     "music": "soft ambient cinematic instrumental",
+     "music_changes": "consistent background score throughout the window",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "VGv3fbxG7OI",
+   "channel": "The Ancient Bible",
+   "role": "winner",
+   "title": "Why Did God Bury Moses Himself?",
+   "format": "teaching",
+   "views": 540931,
+   "coverage": 0.688,
+   "policy_clean": true,
+   "minutes": 16.0,
+   "title_words": 6,
+   "title_upper_ratio": 0.24,
+   "chapters": 0,
+   "likes_per_1k": 5.8,
+   "comments_per_1k": 0.45,
+   "wpm": 127.0,
+   "sentence_words": 11,
+   "you_per_100": 0.9,
+   "questions_per_min": 0.36,
+   "shots_per_min": 13.05,
+   "beats_per_min": 1.54,
+   "beat_seconds": 38,
+   "scripture_per_10min": 11.78,
+   "thumb_words": 0,
+   "thumb_faces": 2,
+   "thumb_text": "UNKNOWN",
+   "first_15s": "The mountain is called Nebo, and the man climbing it is 120 years old. Nobody goes with him. For 40 years he has walked at the front of a nation. Today he walks alone, and the camp below watches him shrink into the rock until he disappears. As In He Was Buried So The Claim Deserves A Careful Statement The Natural Reading Of The Text Is That God Did It The Text Does Not Tell Us How It Does Not Desc",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "The mountain is called Nebo",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 20.0,
+     "beat": "promise",
+     "words": "What happens on that mountain takes",
+     "device": "promise"
+    },
+    {
+     "t": 56.0,
+     "beat": "open_loop",
+     "words": "The answer is tucked into",
+     "device": "number list"
+    },
+    {
+     "t": 109.0,
+     "beat": "context",
+     "words": "Start with the last climb",
+     "device": "contrast"
+    },
+    {
+     "t": 155.0,
+     "beat": "teaching",
+     "words": "Scripture tells us why",
+     "device": "scripture reference"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "promise",
+     "open_loop"
+    ],
+    "1_3min": [
+     "context",
+     "teaching"
+    ],
+    "middle": [
+     "story",
+     "context",
+     "teaching",
+     "scripture",
+     "objection",
+     "scripture",
+     "teaching",
+     "argument",
+     "application"
+    ],
+    "last_10pct": [
+     "hook",
+     "teaching",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 45,
+     "motion": "pan and zoom",
+     "on_screen_text": "subtitles matching spoken words",
+     "figure_or_presenter": "depictions of Moses",
+     "colour_and_light": "dramatic golden hour and dark atmospheric lighting",
+     "transitions": "fade or dissolve"
+    },
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "medium shot",
+      "wide shot",
+      "close-up"
+     ],
+     "shots_counted": 75,
+     "motion": "pan and zoom",
+     "on_screen_text": "captions of verbatim transcript",
+     "figure_or_presenter": "depictions of biblical figures like Moses, angels, and demons",
+     "colour_and_light": "dramatic golden lighting against dark backgrounds",
+     "transitions": "fade and dissolve"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, solemn, narrative, human",
+     "pace": "measured and deliberate",
+     "music": "cinematic orchestral background with ambient pads",
+     "music_changes": "gradual swell during dramatic turning points",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "_WD8NVhD5Ps",
+   "channel": "Owens Bible",
+   "role": "latest",
+   "title": "Unexpected Discoveries That Confirm The Bible",
+   "format": "teaching",
+   "views": 72733,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 8.7,
+   "title_words": 6,
+   "title_upper_ratio": 0.15,
+   "chapters": 0,
+   "likes_per_1k": 7.7,
+   "comments_per_1k": 0.3,
+   "wpm": 133.2,
+   "sentence_words": 12,
+   "you_per_100": 0.1,
+   "questions_per_min": 0.46,
+   "shots_per_min": 10.36,
+   "beats_per_min": 1.84,
+   "beat_seconds": 21.8,
+   "scripture_per_10min": 4.61,
+   "thumb_words": 5,
+   "thumb_faces": 0,
+   "thumb_text": "Noah's Ark Giant Footprints",
+   "first_15s": "For thousands of years, many people have asked one question, did the events in the Bible really happen? Over the years, archaeologists have found ancient cities, objects, and writings that line up with what the Bible says. And what they found gives us powerful reasons to believe these events were real.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "For thousands of years, many people have",
+     "device": "direct question"
+    },
+    {
+     "t": 5.92,
+     "beat": "promise",
+     "words": "Over the years, archaeologists have found ancient",
+     "device": "promise"
+    },
+    {
+     "t": 16.58,
+     "beat": "cta",
+     "words": "So today, we are taking a closer",
+     "device": "social call"
+    },
+    {
+     "t": 23.94,
+     "beat": "story",
+     "words": "Noah's Ark. We all know the story",
+     "device": "callback"
+    },
+    {
+     "t": 44.48,
+     "beat": "evidence",
+     "words": "When the water went down, the Bible",
+     "device": "evidence"
+    },
+    {
+     "t": 109.82,
+     "beat": "teaching",
+     "words": "The shape is about 157 meters long",
+     "device": "number list"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook",
+     "promise"
+    ],
+    "15_60s": [
+     "cta",
+     "story",
+     "evidence"
+    ],
+    "1_3min": [
+     "teaching"
+    ],
+    "middle": [
+     "scripture",
+     "evidence",
+     "context",
+     "scripture",
+     "teaching",
+     "hook",
+     "context",
+     "evidence",
+     "argument"
+    ],
+    "last_10pct": [
+     "evidence"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration and stock footage",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 45,
+     "motion": "zoom and pan",
+     "on_screen_text": "subtitles and headings in red and white",
+     "figure_or_presenter": "animated preacher avatar and historical figures",
+     "colour_and_light": "vibrant, high contrast",
+     "transitions": "cuts and fades"
+    },
+    {
+     "image_kind": "mixed media (AI illustration, text overlays, biblical manuscripts, maps, photos)",
+     "shot_sizes": [
+      "medium shot",
+      "close up",
+      "wide shot"
+     ],
+     "shots_counted": 45,
+     "motion": "pan and zoom on illustrations, slide transitions",
+     "on_screen_text": "red headings, scripture references, bullet points with red/white styling",
+     "figure_or_presenter": "animated cartoon presenter in red sweater, historical figures (archaeologists, kings, soldiers)",
+     "colour_and_light": "bright, vibrant educational colour palette with warm sepia tones for ancient maps and texts",
+     "transitions": "quick slide cuts and wipes"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male voice, clear, engaging, human",
+     "pace": "moderate and steady",
+     "music": "ambient background instrumental",
+     "music_changes": "subtle shifts between sections",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "cX_DvmKryDU",
+   "channel": "Morning Grace Prayers",
+   "role": "winner",
+   "title": "Powerful Morning Prayer for Today | Start Your Day With God & Receive His Peace",
+   "format": "prayer",
+   "views": 211,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 12.2,
+   "title_words": 15,
+   "title_upper_ratio": 0.19,
+   "chapters": 0,
+   "likes_per_1k": 66.4,
+   "comments_per_1k": 28.44,
+   "wpm": 158.5,
+   "sentence_words": 11.0,
+   "you_per_100": 5.7,
+   "questions_per_min": 0.0,
+   "shots_per_min": 4.33,
+   "beats_per_min": 2.53,
+   "beat_seconds": 21,
+   "scripture_per_10min": 1.63,
+   "thumb_words": 7,
+   "thumb_faces": 0,
+   "thumb_text": "A Short Prayer Before You Start Everything",
+   "first_15s": "Heavenly Father, as this new morning begins, I come quietly into your presence. Before the day becomes busy, before the responsibilities begin, I pause to remember that you are here. Thank you for the gift of another morning. Thank you for the breath in my lungs, for the life you have given me, and for the grace that carried me through the night.",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "prayer",
+     "words": "Heavenly Father, as this new morning",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 26,
+     "beat": "prayer",
+     "words": "Heavenly Father, you are the eternal",
+     "device": "contrast"
+    },
+    {
+     "t": 47,
+     "beat": "prayer",
+     "words": "Today, I choose to surrender everything",
+     "device": "list"
+    },
+    {
+     "t": 68,
+     "beat": "prayer",
+     "words": "Father, calm my heart this morning",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 96,
+     "beat": "prayer",
+     "words": "Heavenly Father, let your presence be",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 124,
+     "beat": "prayer",
+     "words": "I trust you with this day",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 151,
+     "beat": "prayer",
+     "words": "Heavenly Father, as I step into",
+     "device": "list"
+    },
+    {
+     "t": 171,
+     "beat": "prayer",
+     "words": "Lord, I place my loved ones",
+     "device": "list"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "prayer"
+    ],
+    "15_60s": [
+     "prayer",
+     "prayer"
+    ],
+    "1_3min": [
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer"
+    ],
+    "middle": [
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "declaration",
+     "prayer",
+     "declaration",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "declaration",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "declaration"
+    ],
+    "last_10pct": [
+     "prayer",
+     "prayer",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration and stock footage",
+     "shot_sizes": [
+      "medium shot",
+      "close-up",
+      "wide shot",
+      "overhead shot"
+     ],
+     "shots_counted": 31,
+     "motion": "slow pan and fade transitions between serene nature scenes and a praying figure of Jesus",
+     "on_screen_text": "subtitles displaying the spoken prayer line by line with a persistent permanent 'Type Amen' watermark at the bottom right and channel logo at top left",
+     "figure_or_presenter": "depiction of Jesus praying in a white robe and red sash",
+     "colour_and_light": "bright, natural daylight, vibrant greens, whites, blues, and warm sunset tones",
+     "transitions": "dissolve and fade"
+    },
+    {
+     "image_kind": "AI illustration and stock footage",
+     "shot_sizes": [
+      "medium shot",
+      "wide shot",
+      "close-up"
+     ],
+     "shots_counted": 12,
+     "motion": "slow pan and fade transitions",
+     "on_screen_text": "white bold text with black outline centered on screen",
+     "figure_or_presenter": "depiction of Jesus praying on the left side of the screen",
+     "colour_and_light": "warm and cool celestial lighting transitioning across nature backgrounds",
+     "transitions": "smooth cross dissolve"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "calm male human voice with warm tone and clear American accent",
+     "pace": "slow, deliberate, and meditative",
+     "music": "soft, ambient, cinematic instrumental background music with piano and strings",
+     "music_changes": "consistent gentle background flow matching the meditative tone",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "dQQxzik8C4o",
+   "channel": "Prayer of Hope",
+   "role": "latest",
+   "title": "Saturday, October 17 | God, Provide What My Family Needs Powerful Morning Prayer for Provision",
+   "format": "prayer",
+   "views": 375,
+   "coverage": 0.912,
+   "policy_clean": true,
+   "minutes": 56.5,
+   "title_words": 15,
+   "title_upper_ratio": 0.16,
+   "chapters": 0,
+   "likes_per_1k": 93.3,
+   "comments_per_1k": 69.33,
+   "wpm": 95.6,
+   "sentence_words": 19.0,
+   "you_per_100": 3.6,
+   "questions_per_min": 0.0,
+   "shots_per_min": 2.1,
+   "beats_per_min": 1.07,
+   "beat_seconds": 50,
+   "scripture_per_10min": 3.49,
+   "thumb_words": null,
+   "thumb_faces": null,
+   "thumb_text": null,
+   "first_15s": "Before the sun rises fully over the horizon, before the world awakens and the demands of another day begin to weigh upon your shoulders, take a deep breath and remember this precious truth. Heavenly Father, I pray for every person listening to this prayer who feels exhausted from trying to keep their family strong. You know the parents who worry about their children's future, the husbands and wive",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "hook",
+     "words": "Before the sun rises fully",
+     "device": "atmospheric scene setting"
+    },
+    {
+     "t": 15,
+     "beat": "promise",
+     "words": "God knows what your family",
+     "device": "direct reassurance"
+    },
+    {
+     "t": 23,
+     "beat": "context",
+     "words": "Perhaps you woke up this",
+     "device": "empathy mapping"
+    },
+    {
+     "t": 49,
+     "beat": "teaching",
+     "words": "Maybe you have prayed silently",
+     "device": "metaphor"
+    },
+    {
+     "t": 108,
+     "beat": "promise",
+     "words": "Let the light of God's",
+     "device": "creation comparison"
+    },
+    {
+     "t": 139,
+     "beat": "scripture",
+     "words": "Jesus reminds us in Matthew",
+     "device": "scripture citation"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "promise",
+     "context",
+     "teaching"
+    ],
+    "1_3min": [
+     "promise",
+     "scripture"
+    ],
+    "middle": [
+     "context",
+     "application",
+     "teaching",
+     "teaching",
+     "application",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "scripture",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer",
+     "prayer",
+     "prayer",
+     "scripture",
+     "prayer",
+     "prayer",
+     "prayer",
+     "scripture"
+    ],
+    "last_10pct": [
+     "prayer",
+     "music_only"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "stock footage",
+     "shot_sizes": [
+      "wide shot",
+      "aerial shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 7,
+     "motion": "slow panning and subtle zoom",
+     "on_screen_text": "large bold white centered captions with kinetic word highlighting",
+     "figure_or_presenter": "none",
+     "colour_and_light": "warm golden hour sunrise lighting with natural tones",
+     "transitions": "smooth cross dissolve"
+    },
+    {
+     "image_kind": "stock footage",
+     "shot_sizes": [
+      "establishing shot",
+      "wide shot",
+      "medium shot",
+      "drone shot"
+     ],
+     "shots_counted": 12,
+     "motion": "pan and slow zoom",
+     "on_screen_text": "subtitles in white sans-serif font with black outline",
+     "figure_or_presenter": "none",
+     "colour_and_light": "natural daylight, vibrant blue water, sandy beach, warm sunset hues",
+     "transitions": "cross dissolve"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, calm, soothing, human",
+     "pace": "slow and deliberate",
+     "music": "ambient cinematic worship instrumental",
+     "music_changes": "gradual swell during transitions",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "channel": "United Prayer",
+   "role": "winner",
+   "title": "Aaa Jao Jaldi Jaldi 😱😱",
+   "format": "teaching",
+   "views": 132,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 31.4,
+   "title_words": 5,
+   "title_upper_ratio": 0.25,
+   "chapters": 0,
+   "likes_per_1k": 22.7,
+   "comments_per_1k": 7.58,
+   "wpm": 0.0,
+   "sentence_words": null,
+   "you_per_100": 0.0,
+   "questions_per_min": 0.0,
+   "shots_per_min": 0.22,
+   "beats_per_min": 0.22,
+   "beat_seconds": 300,
+   "scripture_per_10min": 0.0,
+   "thumb_words": 0,
+   "thumb_faces": 1,
+   "thumb_text": "UNKNOWN",
+   "first_15s": "",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "music_only",
+     "words": "UNKNOWN",
+     "device": "none"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "music_only"
+    ],
+    "15_60s": [],
+    "1_3min": [],
+    "middle": [
+     "music_only",
+     "music_only",
+     "music_only",
+     "music_only",
+     "music_only"
+    ],
+    "last_10pct": [
+     "music_only"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "live presenter",
+     "shot_sizes": [
+      "medium shot",
+      "close up"
+     ],
+     "shots_counted": 1,
+     "motion": "static camera with minor handheld movement",
+     "on_screen_text": "UNKNOWN",
+     "figure_or_presenter": "a person lying in bed",
+     "colour_and_light": "natural indoor lighting",
+     "transitions": "none"
+    },
+    {
+     "image_kind": "live presenter",
+     "shot_sizes": [
+      "medium close up",
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "static camera with video filters applied",
+     "on_screen_text": "none",
+     "figure_or_presenter": "young woman resting on a bed",
+     "colour_and_light": "natural lighting with various color and filter effects",
+     "transitions": "none"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "UNKNOWN",
+     "pace": "UNKNOWN",
+     "music": "ambient background noise",
+     "music_changes": "none",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "j6eXNa7NqwU",
+   "channel": "Beneath The Verse ",
+   "role": "weak_contrast",
+   "title": "Why Was God Not in the FIRE? The Hebrew Words Behind 1 Kings 19",
+   "format": "teaching",
+   "views": 2761,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 30.5,
+   "title_words": 14,
+   "title_upper_ratio": 0.28,
+   "chapters": 27,
+   "likes_per_1k": 17.0,
+   "comments_per_1k": 1.81,
+   "wpm": 98.8,
+   "sentence_words": 10,
+   "you_per_100": 0.7,
+   "questions_per_min": 0.26,
+   "shots_per_min": 5.6,
+   "beats_per_min": 1.05,
+   "beat_seconds": 45.0,
+   "scripture_per_10min": 12.78,
+   "thumb_words": 7,
+   "thumb_faces": 1,
+   "thumb_text": "WHY NOT FIRE? WHAT IT MEANS IN HEBREW",
+   "first_15s": "A man sits deep inside a cave on the mountain of God. He's walked 40 days and 40 nights to get here. Outside, a wind tears the mountain apart and breaks the rocks in pieces. Then the ground shakes, then fire. The fire and the wind are exactly what Elijah had just seen on Carmel. They are the language of power. They are the language Elijah himself had used to prove that the Lord is God. And three t",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "A man sits deep inside a cave",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 17.0,
+     "beat": "promise",
+     "words": "Here's the question almost nobody asks",
+     "device": "direct question"
+    },
+    {
+     "t": 44.0,
+     "beat": "teaching",
+     "words": "But the Hebrew text does not say",
+     "device": "number list"
+    },
+    {
+     "t": 134.0,
+     "beat": "context",
+     "words": "Let us start where the text starts",
+     "device": "story"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "promise",
+     "teaching"
+    ],
+    "1_3min": [
+     "context"
+    ],
+    "middle": [
+     "story",
+     "context",
+     "evidence",
+     "teaching",
+     "scripture",
+     "teaching",
+     "teaching",
+     "context",
+     "teaching",
+     "teaching",
+     "evidence",
+     "teaching",
+     "argument",
+     "scripture",
+     "teaching",
+     "objection",
+     "context",
+     "payoff",
+     "teaching",
+     "evidence",
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching"
+    ],
+    "last_10pct": [
+     "application",
+     "application",
+     "story",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "close up",
+      "medium shot",
+      "wide shot"
+     ],
+     "shots_counted": 22,
+     "motion": "slow zoom and pan across watercolor illustrations",
+     "on_screen_text": "Hebrew transliteration, book chapters, and verse references",
+     "figure_or_presenter": "Elijah, Jezebel, angels, and crowds portrayed in watercolor style",
+     "colour_and_light": "earthy tones with dramatic lighting for fire, storm, and desert scenes",
+     "transitions": "fade and dissolve transitions"
+    },
+    {
+     "image_kind": "AI illustration / watercolor paintings",
+     "shot_sizes": [
+      "medium shot",
+      "close-up",
+      "wide shot"
+     ],
+     "shots_counted": 28,
+     "motion": "static images with occasional digital slide and zoom effects",
+     "on_screen_text": "Hebrew transliterations, English translations, Bible verse references, and comparison labels",
+     "figure_or_presenter": "illustrated biblical figures including Moses and Elijah",
+     "colour_and_light": "warm watercolor tones with parchment background and sepia highlights",
+     "transitions": "cuts and subtle crossfades"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, solemn, narrative tone, human voice",
+     "pace": "measured and deliberate",
+     "music": "ambient cinematic orchestral background music",
+     "music_changes": "subtle swells matching the narrative tension points",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "noiMjV6UxSk",
+   "channel": "The Ancient Bible",
+   "role": "weak_contrast",
+   "title": "How Did Giants Survive The Flood If Everyone Died?",
+   "format": "teaching",
+   "views": 737,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 13.6,
+   "title_words": 9,
+   "title_upper_ratio": 0.22,
+   "chapters": 0,
+   "likes_per_1k": 24.4,
+   "comments_per_1k": 0.0,
+   "wpm": 130.2,
+   "sentence_words": 10.0,
+   "you_per_100": 0.4,
+   "questions_per_min": 0.07,
+   "shots_per_min": 11.0,
+   "beats_per_min": 1.33,
+   "beat_seconds": 34.5,
+   "scripture_per_10min": 22.14,
+   "thumb_words": 0,
+   "thumb_faces": 2,
+   "thumb_text": "UNKNOWN",
+   "first_15s": "Two men carried it on a pole between them. One cluster of grapes, too heavy for a single man to lift. Twelve spies had gone into Canaan. Twelve came back. And ten of them stood before the whole nation of Israel and said something that should have been impossible.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "Two men carried it on a pole",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 20.0,
+     "beat": "promise",
+     "words": "The Nephilim belong to Genesis 6",
+     "device": "number list"
+    },
+    {
+     "t": 58.0,
+     "beat": "story",
+     "words": "Numbers 13. Israel has crossed a",
+     "device": "contrast"
+    },
+    {
+     "t": 162.0,
+     "beat": "teaching",
+     "words": "The spies did not say big",
+     "device": "scripture"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "promise",
+     "story"
+    ],
+    "1_3min": [
+     "teaching"
+    ],
+    "middle": [
+     "teaching",
+     "argument",
+     "evidence",
+     "teaching",
+     "story",
+     "application",
+     "hook",
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching",
+     "teaching"
+    ],
+    "last_10pct": [
+     "story",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 52,
+     "motion": "slow pan and zoom",
+     "on_screen_text": "subtitles matching spoken words word-by-word",
+     "figure_or_presenter": "biblical figures and ancient Israelites",
+     "colour_and_light": "cinematic, moody lighting with warm sunrise and dark stormy tones",
+     "transitions": "fade or quick cut"
+    },
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "medium shot",
+      "wide shot",
+      "close-up"
+     ],
+     "shots_counted": 55,
+     "motion": "slow zoom in and pan",
+     "on_screen_text": "verbatim subtitle captions at the bottom of the screen",
+     "figure_or_presenter": "historical and biblical figures like scribes, ancient kings, Caleb, and Goliath",
+     "colour_and_light": "dramatic cinematic lighting with warm golden hour sunbeams and dark moody storm tones",
+     "transitions": "fade and dissolve transitions"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, narrative, clear, human",
+     "pace": "measured and dramatic",
+     "music": "epic cinematic orchestral background",
+     "music_changes": "builds tension during key revelation moments",
+     "sound_effects": "subtle atmospheric rumbles"
+    }
+   ]
+  },
+  {
+   "video_id": "q3wraYaNR-A",
+   "channel": "The Ancient Bible",
+   "role": "winner",
+   "title": "Why Are There Eyes All Over The Wheels In Ezekiel's Vision?",
+   "format": "teaching",
+   "views": 141919,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 16.8,
+   "title_words": 11,
+   "title_upper_ratio": 0.23,
+   "chapters": 0,
+   "likes_per_1k": 10.0,
+   "comments_per_1k": 0.7,
+   "wpm": 143.0,
+   "sentence_words": 15,
+   "you_per_100": 0.5,
+   "questions_per_min": 0.24,
+   "shots_per_min": 14.23,
+   "beats_per_min": 1.73,
+   "beat_seconds": 32.0,
+   "scripture_per_10min": 7.74,
+   "thumb_words": 0,
+   "thumb_faces": 1,
+   "thumb_text": "UNKNOWN",
+   "first_15s": "The wheel is standing on the ground, and Ezekiel is close enough to see the rim. The rim is looking back at him. Eyes set into the curve of the wheel, one after another all the way around. A handful would have been strange enough, but scripture says the rims were full of them.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "The wheel is standing on the ground",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 20.0,
+     "beat": "context",
+     "words": "The year is 593 BC",
+     "device": "story"
+    },
+    {
+     "t": 37.0,
+     "beat": "promise",
+     "words": "Readers have argued about that question",
+     "device": "direct question"
+    },
+    {
+     "t": 56.0,
+     "beat": "story",
+     "words": "Ezekiel opens his book with a date",
+     "device": "contrast"
+    },
+    {
+     "t": 96.0,
+     "beat": "scripture",
+     "words": "Then the storm arrives",
+     "device": "rhetorical repetition"
+    },
+    {
+     "t": 166.0,
+     "beat": "teaching",
+     "words": "The prophet closes the scene with a sentence",
+     "device": "callback"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook"
+    ],
+    "15_60s": [
+     "context",
+     "promise",
+     "story"
+    ],
+    "1_3min": [
+     "scripture",
+     "teaching"
+    ],
+    "middle": [
+     "argument",
+     "declaration",
+     "teaching",
+     "context",
+     "evidence",
+     "argument",
+     "teaching",
+     "teaching",
+     "scripture",
+     "argument",
+     "teaching",
+     "application",
+     "teaching",
+     "teaching",
+     "evidence",
+     "scripture",
+     "application",
+     "teaching"
+    ],
+    "last_10pct": [
+     "scripture",
+     "argument",
+     "answer",
+     "application",
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 65,
+     "motion": "slow zoom and pan across still AI-generated fantasy and historical artwork",
+     "on_screen_text": "subtitles matching spoken transcript verbatim at the bottom of the screen",
+     "figure_or_presenter": "depictions of biblical figures such as Ezekiel, ancient priests, and exiles",
+     "colour_and_light": "dramatic lighting, fiery oranges, glowing gold, deep blues, and dark stormy skies",
+     "transitions": "smooth crossfades and gentle dissolves between generated images"
+    },
+    {
+     "image_kind": "AI illustration",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 62,
+     "motion": "slow panning and zooming on AI-generated artwork",
+     "on_screen_text": "verbatim captions of the spoken transcript",
+     "figure_or_presenter": "depictions of Ezekiel, elders, divine beings, scrolls, and ancient temples",
+     "colour_and_light": "dark, dramatic lighting with glowing golden divine elements and fiery highlights",
+     "transitions": "smooth fades and cuts between generated images"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male, deep, resonant, cinematic storytelling voice, human",
+     "pace": "measured and deliberate, with dramatic pauses",
+     "music": "ambient cinematic orchestral score with low drones and ethereal choir pads",
+     "music_changes": "swells during dramatic descriptions of the storm and throne",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "sZUFqcbXii0",
+   "channel": "United Prayer",
+   "role": "winner",
+   "title": "Aao Fatafat ",
+   "format": "teaching",
+   "views": 135,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 23.6,
+   "title_words": 2,
+   "title_upper_ratio": 0.2,
+   "chapters": 0,
+   "likes_per_1k": 0.0,
+   "comments_per_1k": 0.0,
+   "wpm": 2.6,
+   "sentence_words": 14,
+   "you_per_100": 0.0,
+   "questions_per_min": 0.04,
+   "shots_per_min": 0.3,
+   "beats_per_min": 0.25,
+   "beat_seconds": 300.0,
+   "scripture_per_10min": 0.0,
+   "thumb_words": 0,
+   "thumb_faces": 1,
+   "thumb_text": "UNKNOWN",
+   "first_15s": "",
+   "opening_beats": [
+    {
+     "t": 0,
+     "beat": "music_only",
+     "words": "UNKNOWN",
+     "device": "none"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "music_only"
+    ],
+    "15_60s": [],
+    "1_3min": [],
+    "middle": [
+     "music_only",
+     "music_only",
+     "music_only",
+     "music_only",
+     "evidence"
+    ],
+    "last_10pct": []
+   },
+   "picture": [
+    {
+     "image_kind": "photo",
+     "shot_sizes": [
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "static",
+     "on_screen_text": "Who Is Drinking What? COCA COLA COFFEE MANGO JUICE LEMON",
+     "figure_or_presenter": "none",
+     "colour_and_light": "dim room lighting displaying a brightly lit phone screen",
+     "transitions": "none"
+    },
+    {
+     "image_kind": "AI illustration / photo of a smartphone screen",
+     "shot_sizes": [
+      "medium shot"
+     ],
+     "shots_counted": 1,
+     "motion": "static",
+     "on_screen_text": "Who Is Drinking What?",
+     "figure_or_presenter": "Illustrations of public figures and people with drinks",
+     "colour_and_light": "natural lighting",
+     "transitions": "none"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "UNKNOWN",
+     "pace": "UNKNOWN",
+     "music": "ambient background noise",
+     "music_changes": "none",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "uDI9z63AbJg",
+   "channel": "Prayer of Hope",
+   "role": "winner",
+   "title": "Saturday, September 26 | Lord, Bless Me With a Fresh Start | Morning Prayer for Renewal, Healing",
+   "format": "prayer",
+   "views": 49407,
+   "coverage": 0.83,
+   "policy_clean": true,
+   "minutes": 58.9,
+   "title_words": 17,
+   "title_upper_ratio": 0.16,
+   "chapters": 0,
+   "likes_per_1k": 21.2,
+   "comments_per_1k": 6.8,
+   "wpm": 90.0,
+   "sentence_words": 13.0,
+   "you_per_100": 7.8,
+   "questions_per_min": 0.0,
+   "shots_per_min": 2.23,
+   "beats_per_min": 1.37,
+   "beat_seconds": 33.0,
+   "scripture_per_10min": 4.09,
+   "thumb_words": null,
+   "thumb_faces": null,
+   "thumb_text": null,
+   "first_15s": "Imagine waking up this morning with a heart that is tired from yesterday, a mind carrying battles nobody else can see, and a soul quietly whispering, Lord, I need a fresh start. As the first light of sunrise breaks across the sky, let this moment remind you that God has not finished your story.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "Imagine waking up this morning with",
+     "device": "imagination prompt"
+    },
+    {
+     "t": 13.9,
+     "beat": "promise",
+     "words": "As the first light of sunrise",
+     "device": "metaphor"
+    },
+    {
+     "t": 23.5,
+     "beat": "context",
+     "words": "Yesterday may have brought disappointment, mistakes,",
+     "device": "contrasting lists"
+    },
+    {
+     "t": 36.8,
+     "beat": "scripture",
+     "words": "The Bible says in Lamentations 3:22-23,",
+     "device": "scripture reference"
+    },
+    {
+     "t": 66.8,
+     "beat": "objection",
+     "words": "Maybe you went to sleep last",
+     "device": "repetitive 'maybe' structure"
+    },
+    {
+     "t": 100.0,
+     "beat": "teaching",
+     "words": "The same God who brought you",
+     "device": "parallelism"
+    },
+    {
+     "t": 117.0,
+     "beat": "prayer",
+     "words": "So this morning, don't simply ask",
+     "device": "imperative prayer prompts"
+    },
+    {
+     "t": 150.0,
+     "beat": "evidence",
+     "words": "Look at the sunrise, darkness does",
+     "device": "nature analogy"
+    },
+    {
+     "t": 173.0,
+     "beat": "scripture",
+     "words": "Isaiah 43:19 declares, Behold, I",
+     "device": "scripture reference"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook",
+     "promise"
+    ],
+    "15_60s": [
+     "context",
+     "scripture"
+    ],
+    "1_3min": [
+     "objection",
+     "teaching",
+     "prayer",
+     "evidence",
+     "scripture"
+    ],
+    "middle": [
+     "application",
+     "scripture",
+     "prayer",
+     "cta",
+     "promise",
+     "context",
+     "teaching",
+     "scripture",
+     "declaration",
+     "scripture",
+     "application",
+     "teaching",
+     "scripture",
+     "prayer",
+     "declaration",
+     "context",
+     "hook",
+     "context",
+     "scripture",
+     "prayer",
+     "teaching",
+     "application",
+     "prayer",
+     "teaching",
+     "scripture",
+     "application",
+     "transition",
+     "context",
+     "scripture",
+     "teaching",
+     "argument",
+     "scripture",
+     "prayer",
+     "teaching",
+     "scripture",
+     "prayer",
+     "prayer",
+     "scripture",
+     "teaching",
+     "application",
+     "promise",
+     "context",
+     "scripture",
+     "prayer",
+     "teaching",
+     "scripture",
+     "application",
+     "application",
+     "story",
+     "teaching",
+     "scripture",
+     "prayer",
+     "teaching",
+     "application"
+    ],
+    "last_10pct": [
+     "teaching",
+     "scripture",
+     "prayer",
+     "declaration"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "stock footage",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close up"
+     ],
+     "shots_counted": 14,
+     "motion": "slow zoom and pan",
+     "on_screen_text": "bold white sans-serif kinetic captions highlighting keywords in yellow",
+     "figure_or_presenter": "none",
+     "colour_and_light": "warm golden hour sunrise lighting transitioning into soft natural tones",
+     "transitions": "smooth cross dissolves"
+    },
+    {
+     "image_kind": "stock footage",
+     "shot_sizes": [
+      "wide shot",
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 12,
+     "motion": "slow panning and drone movement",
+     "on_screen_text": "white sans-serif kinetic captions sentence by sentence",
+     "figure_or_presenter": "none",
+     "colour_and_light": "warm morning golden hour sunlight and natural outdoor tones",
+     "transitions": "smooth cross dissolve"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "warm, resonant male human voice with gentle American accent",
+     "pace": "slow, deliberate, and meditative",
+     "music": "ambient cinematic piano and soft orchestral pads",
+     "music_changes": "subtle swell matching emotional peaks of the prayer",
+     "sound_effects": "none"
+    }
+   ]
+  },
+  {
+   "video_id": "wpUFB3UMNgw",
+   "channel": "Owens Bible",
+   "role": "winner",
+   "title": "UNSOLVED Bible Mysteries Explained",
+   "format": "teaching",
+   "views": 594094,
+   "coverage": 1.0,
+   "policy_clean": true,
+   "minutes": 14.3,
+   "title_words": 4,
+   "title_upper_ratio": 0.35,
+   "chapters": 0,
+   "likes_per_1k": 9.6,
+   "comments_per_1k": 0.27,
+   "wpm": 138.6,
+   "sentence_words": 13,
+   "you_per_100": 0.4,
+   "questions_per_min": 1.12,
+   "shots_per_min": 14.79,
+   "beats_per_min": 1.75,
+   "beat_seconds": 33.8,
+   "scripture_per_10min": 9.11,
+   "thumb_words": 14,
+   "thumb_faces": 7,
+   "thumb_text": "JESUS' LOOKS WHY BANNED? LEVIATHAN MEANING CAIN'S WIFE NOAH'S ARK LOCATION BOUND ANGELS",
+   "first_15s": "The Bible has been studied for thousands of years, but even after all this time, there are still things in the Bible that we simply don't have clear answers to. So today we're looking at some of the biggest unsolved mysteries in the Bible. Make sure you like, subscribe, comment and share this video so it can reach more people.",
+   "opening_beats": [
+    {
+     "t": 0.0,
+     "beat": "hook",
+     "words": "The Bible has been studied for thousands",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 7.37,
+     "beat": "promise",
+     "words": "So today we're looking at some",
+     "device": "number list"
+    },
+    {
+     "t": 15.53,
+     "beat": "teaching",
+     "words": "Let's start with Jesus's appearance",
+     "device": "direct question"
+    },
+    {
+     "t": 25.83,
+     "beat": "evidence",
+     "words": "You see, the Bible never describes",
+     "device": "scripture citation"
+    },
+    {
+     "t": 49.33,
+     "beat": "context",
+     "words": "Throughout history, Jesus has been shown",
+     "device": "historical overview"
+    },
+    {
+     "t": 65.65,
+     "beat": "answer",
+     "words": "In 2001, forensic artist Richard Neve",
+     "device": "expert testimony"
+    },
+    {
+     "t": 100.19,
+     "beat": "teaching",
+     "words": "Why was the Book of Enoch banned",
+     "device": "curiosity gap"
+    },
+    {
+     "t": 124.03,
+     "beat": "evidence",
+     "words": "For centuries, the book was believed",
+     "device": "historical artifact"
+    },
+    {
+     "t": 164.21,
+     "beat": "story",
+     "words": "One of the most disturbing stories in",
+     "device": "narrative storytelling"
+    }
+   ],
+   "beat_phases": {
+    "first_15s": [
+     "hook",
+     "promise"
+    ],
+    "15_60s": [
+     "teaching",
+     "evidence",
+     "context"
+    ],
+    "1_3min": [
+     "answer",
+     "teaching",
+     "evidence",
+     "story"
+    ],
+    "middle": [
+     "argument",
+     "teaching",
+     "argument",
+     "evidence",
+     "teaching",
+     "teaching",
+     "scripture",
+     "evidence",
+     "transition",
+     "hook",
+     "context",
+     "evidence",
+     "context",
+     "story",
+     "argument"
+    ],
+    "last_10pct": [
+     "cta"
+    ]
+   },
+   "picture": [
+    {
+     "image_kind": "AI illustration and stock photos",
+     "shot_sizes": [
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 94,
+     "motion": "subtle pan and zoom on still illustrations, animated icons",
+     "on_screen_text": "red headings, yellow callout boxes, verbatim subtitles",
+     "figure_or_presenter": "animated 2D presenter in red sweater with clerical collar at a pulpit",
+     "colour_and_light": "bright colourful illustrations on white background, high contrast text",
+     "transitions": "hard cuts and slide transitions"
+    },
+    {
+     "image_kind": "AI illustration and 2D animated whiteboard graphics",
+     "shot_sizes": [
+      "medium shot",
+      "close-up"
+     ],
+     "shots_counted": 42,
+     "motion": "pan and zoom on static images, animated overlays",
+     "on_screen_text": "red capital titles and verse references",
+     "figure_or_presenter": "animated presenter in red sweater",
+     "colour_and_light": "bright vector colors with white backgrounds",
+     "transitions": "quick cuts and fades"
+    }
+   ],
+   "sound": [
+    {
+     "voice": "male voice, clear American accent, neutral engaging storytelling tone, human narrator",
+     "pace": "moderate, steady with deliberate pauses",
+     "music": "light ambient background music with mild upbeat rhythm",
+     "music_changes": "subtle shifts matching topic changes between segments",
+     "sound_effects": "none noticeable"
+    }
+   ]
+  }
+ ]
+}
