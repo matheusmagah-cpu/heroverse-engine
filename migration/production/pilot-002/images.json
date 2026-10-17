@@ -1,0 +1,92 @@
+{
+ "version": "pilot-images-v1",
+ "pilot_id": "pilot-002",
+ "style": "soft cinematic devotional painting, warm golden morning light, hopeful and calm mood, rich detail, gentle colours, 16:9 composition",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "images": [
+  {
+   "id": "title",
+   "prompt": "Jesus Christ kneeling in prayer on a grassy hilltop at sunrise, seen from the side at a distance, white and cream robe, golden light rising over distant hills, peaceful",
+   "seed": 1000
+  },
+  {
+   "id": "fig-hill",
+   "prompt": "Jesus Christ praying with folded hands on a hillside at dawn, seen from behind, soft rays of sunlight breaking through clouds over a wide valley",
+   "seed": 1001
+  },
+  {
+   "id": "fig-garden",
+   "prompt": "Jesus Christ kneeling in prayer beside an old olive tree in a quiet garden at first light, side view, gentle mist, warm sunlight",
+   "seed": 1002
+  },
+  {
+   "id": "fig-path",
+   "prompt": "Jesus Christ walking ahead on a winding dirt path through golden fields at sunrise, seen from behind, long soft shadows, light on the horizon",
+   "seed": 1003
+  },
+  {
+   "id": "fig-rock",
+   "prompt": "Jesus Christ praying alone on a large rock overlooking a calm lake at dawn, seen from behind, pastel sky, reflection on the water",
+   "seed": 1004
+  },
+  {
+   "id": "fig-light",
+   "prompt": "Jesus Christ standing in a beam of warm morning light with open arms, seen from a distance, soft clouds, heavenly glow, hopeful",
+   "seed": 1005
+  },
+  {
+   "id": "bg-valley",
+   "prompt": "misty green valley at sunrise, golden light over rolling hills, no people",
+   "seed": 1006
+  },
+  {
+   "id": "bg-road",
+   "prompt": "an empty country road leading into a bright sunrise between wheat fields, no people",
+   "seed": 1007
+  },
+  {
+   "id": "bg-window",
+   "prompt": "morning sunlight streaming through a window onto a wooden table with an open Bible and a cup of coffee, cozy, no people",
+   "seed": 1008
+  },
+  {
+   "id": "bg-lake",
+   "prompt": "calm lake at dawn with light mist over the water and pine trees, soft pink and gold sky, no people",
+   "seed": 1009
+  },
+  {
+   "id": "bg-meadow",
+   "prompt": "wildflower meadow glowing in early morning light, dew on the grass, soft focus background, no people",
+   "seed": 1010
+  },
+  {
+   "id": "bg-mountain",
+   "prompt": "mountain trail at sunrise above the clouds, warm light on the peaks, no people",
+   "seed": 1011
+  },
+  {
+   "id": "bg-sea",
+   "prompt": "gentle ocean waves at sunrise, golden path of light on the water, peaceful beach, no people",
+   "seed": 1012
+  },
+  {
+   "id": "bg-candle",
+   "prompt": "a single lit candle beside an open Bible on a table at dawn, warm glow, shallow depth of field, no people",
+   "seed": 1013
+  },
+  {
+   "id": "bg-hands",
+   "prompt": "close-up of folded hands in prayer resting on an open Bible, warm window light, no face visible",
+   "seed": 1014
+  },
+  {
+   "id": "bg-door",
+   "prompt": "an open wooden door leading out to a sunlit garden in the morning, light pouring in, no people",
+   "seed": 1015
+  }
+ ]
+}
