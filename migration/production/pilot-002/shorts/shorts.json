@@ -1,332 +1,32 @@
 {
  "version": "shorts-produce-v1",
  "source_pilot": "pilot-002",
- "selection_rubric_model": null,
+ "selection_rubric_model": "gemini-3.5-flash-lite",
  "shorts": [
   {
    "file": "short-00.mp4",
-   "sha256": "84a0bb750bb541a444966a64e9deadeddeadfe4504bdd6d974eea98e43f74995",
-   "seconds": 42.4,
-   "source_start": 1090.491,
-   "source_end": 1132.263,
+   "sha256": "533e982d07845a3257587d4db848970de8b6250febff3833f165c96c4694404e",
+   "seconds": 35.07,
+   "source_start": 821.059,
+   "source_end": 855.508,
    "segments": [
-    "reflection-courage",
-    "scripture-12",
-    "prayer-thanks"
+    "scripture-10",
+    "prayer-waters"
    ],
-   "hook": "Read this before your day starts",
-   "title": "Read this before your day starts",
-   "reference": "Hebrews 13:5 (KJV)",
+   "hook": "Some of you are walking into heaviness.",
+   "title": "When You Are Walking Through Deep Waters",
+   "reference": "Isaiah 43:2 (KJV)",
    "scenes": [
     "bg-wheat",
     "bg-forest",
     "bg-sunset-sea",
     "bg-garden",
-    "bg-hills",
     "bg-wheat"
    ],
    "parallax": true,
    "selection": {
-    "final_score": 0.9092,
-    "measured_score": 0.9092,
-    "features": {
-     "opening_short": 0.6,
-     "opening_direct": 1.0,
-     "second_person": 0.8421052631578947,
-     "scripture": 1.0,
-     "promise": 1.0,
-     "resolution": 1.0,
-     "length_fit": 0.9291200000000026
-    },
-    "rubric": null
-   },
-   "text": "Your courage today does not have to come from feeling ready. It can come from knowing who is with you. Whithersoever thou goest. That means the kitchen, the office, the hospital room, the classroom, the empty apartment. There is no place on your schedule today where he will not be. And one more promise, short enough to remember all day. For he hath said, I will never leave thee, nor forsake thee. Father, thank you. Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
-   "qa": {
-    "file": "migration/production/pilot-002/shorts/short-00.mp4",
-    "seconds": 42.4,
-    "lufs": -14.8,
-    "true_peak_dbtp": -2.4,
-    "checks": {
-     "decode_clean": true,
-     "one_h264_1080x1920": true,
-     "fps_30": true,
-     "one_aac_stereo_48k": true,
-     "duration": true,
-     "loudness": true,
-     "true_peak": true
-    },
-    "status": "PASS"
-   },
-   "review": {
-    "hook_in_first_2s": 7.5,
-    "captions_readable_and_synced": 8.5,
-    "text_clear_of_shorts_ui": 9.0,
-    "picture_quality": 7.0,
-    "edit_rhythm": 7.5,
-    "audio_clarity": 9.0,
-    "stands_alone": 9.0,
-    "ending_and_loop": 6.5,
-    "policy_safe": 10.0,
-    "overall": 7.8,
-    "issues": [
-     "00:27 - 00:32: A bright green unmasked line artifact appears at the bottom edge under the praying hands cutout.",
-     "00:00 - 00:41: The Jesus figure is a static cutout layered over shifting AI backgrounds, making the composite feel repetitive and slightly unnatural.",
-     "00:39 - 00:41: The video fades down on a resolved prayer cadence rather than creating a seamless audio/visual loop back into the opening hook."
-    ],
-    "strongest_moment": "00:10 - 00:20 where the script grounds spiritual courage in everyday relatable locations ('the kitchen, the office, the hospital room').",
-    "model": "gemini-3.8-flash",
-    "status": "FAIL"
-   },
-   "publish": false
-  },
-  {
-   "file": "short-01.mp4",
-   "sha256": "a08ab2c64254d8143067763f56781625cf5e1f3ec66a7a2e9fed578cc0b8caf3",
-   "seconds": 41.3,
-   "source_start": 382.324,
-   "source_end": 423.001,
-   "segments": [
-    "prayer-2",
-    "prayer-mind"
-   ],
-   "hook": "Pray this with me right now",
-   "title": "Pray this with me right now",
-   "reference": null,
-   "scenes": [
-    "bg-mountain",
-    "bg-road",
-    "bg-sea",
-    "bg-sky",
-    "bg-valley",
-    "bg-mountain"
-   ],
-   "parallax": true,
-   "selection": {
-    "final_score": 0.8668,
-    "measured_score": 0.8668,
-    "features": {
-     "opening_short": 1.0,
-     "opening_direct": 1.0,
-     "second_person": 0.761904761904762,
-     "scripture": 0.4,
-     "promise": 0.9523809523809523,
-     "resolution": 1.0,
-     "length_fit": 0.9729200000000015
-    },
-    "rubric": null
-   },
-   "text": "You know its name. I will not pretend it is small, and I will not pretend you are smaller. Where I see a closed door, you see the way through. Where I see a delay, you see the right time. Teach my heart to rest in what you know, even when I do not know it yet. Lord, you know how quickly my thoughts run ahead of me. Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come. Bring my thoughts back to this day and to you. Replace the noise in my head with your peace.",
-   "qa": {
-    "file": "migration/production/pilot-002/shorts/short-01.mp4",
-    "seconds": 41.3,
-    "lufs": -14.8,
-    "true_peak_dbtp": -2.3,
-    "checks": {
-     "decode_clean": true,
-     "one_h264_1080x1920": true,
-     "fps_30": true,
-     "one_aac_stereo_48k": true,
-     "duration": true,
-     "loudness": true,
-     "true_peak": true
-    },
-    "status": "PASS"
-   },
-   "review": {
-    "hook_in_first_2s": 6.5,
-    "captions_readable_and_synced": 8.5,
-    "text_clear_of_shorts_ui": 7.5,
-    "picture_quality": 7.0,
-    "edit_rhythm": 6.0,
-    "audio_clarity": 8.5,
-    "stands_alone": 8.0,
-    "ending_and_loop": 6.5,
-    "policy_safe": 10.0,
-    "overall": 7.0,
-    "issues": [
-     "Foreground figure remains completely static throughout the entire video, causing visual monotony.",
-     "00:37 - Call-to-action banner 'Full prayer on the channel' directly covers the face and eyes of the figure.",
-     "00:00-00:02 - Top hook banner is positioned very close to the top edge header zone."
-    ],
-    "strongest_moment": "00:07-00:14 where the transition to the sunlit wheat field matches the uplifting cadence of the prayer.",
-    "model": "gemini-3.8-flash",
-    "status": "FAIL"
-   },
-   "publish": false
-  },
-  {
-   "file": "short-02.mp4",
-   "sha256": "abe66e8745e434461c59be1ec4805658dae909da129d6742969b1e04980046a6",
-   "seconds": 32.83,
-   "source_start": 1241.588,
-   "source_end": 1273.82,
-   "segments": [
-    "payoff",
-    "blessing"
-   ],
-   "hook": "Pray this with me right now",
-   "title": "Pray this with me right now",
-   "reference": null,
-   "scenes": [
-    "bg-snow",
-    "bg-river",
-    "bg-wheat",
-    "bg-forest",
-    "bg-snow"
-   ],
-   "parallax": true,
-   "selection": {
-    "final_score": 0.8602,
-    "measured_score": 0.8602,
-    "features": {
-     "opening_short": 1.0,
-     "opening_direct": 1.0,
-     "second_person": 0.8749999999999999,
-     "scripture": 0.4,
-     "promise": 1.0,
-     "resolution": 1.0,
-     "length_fit": 0.6892799999999988
-    },
-    "rubric": null
-   },
-   "text": "You were here first. That is all. Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it. May the Lord go before you into every hour of this day. May his mercy meet you at every turn. May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side. In the name of Jesus, amen.",
-   "qa": {
-    "file": "migration/production/pilot-002/shorts/short-02.mp4",
-    "seconds": 32.83,
-    "lufs": -14.8,
-    "true_peak_dbtp": -2.4,
-    "checks": {
-     "decode_clean": true,
-     "one_h264_1080x1920": true,
-     "fps_30": true,
-     "one_aac_stereo_48k": true,
-     "duration": true,
-     "loudness": true,
-     "true_peak": true
-    },
-    "status": "PASS"
-   },
-   "review": {
-    "hook_in_first_2s": 6.5,
-    "captions_readable_and_synced": 8.5,
-    "text_clear_of_shorts_ui": 7.5,
-    "picture_quality": 7.5,
-    "edit_rhythm": 6.5,
-    "audio_clarity": 8.5,
-    "stands_alone": 8.5,
-    "ending_and_loop": 6.0,
-    "policy_safe": 10.0,
-    "overall": 7.3,
-    "issues": [
-     "00:00 - The static text box 'Pray this with me right now' sits in the top 15%, which may collide with UI overlays on some mobile devices.",
-     "00:00-00:32 - The visuals rely on repetitive AI portraits with nearly identical poses and composition, leading to visual monotony.",
-     "00:29-00:32 - The 'Full prayer on the channel' button overlays the lower chest area close to the bottom interface safe zone."
-    ],
-    "strongest_moment": "00:13 - The visual shift to the golden wheat field paired with the spoken blessing creates a warm, peaceful moment of reflection.",
-    "model": "gemini-3.8-flash",
-    "status": "FAIL"
-   },
-   "publish": false
-  },
-  {
-   "file": "short-03.mp4",
-   "sha256": "2162900675ea4eec7672589129de25d1b6c5a738a8f459ee97706be6767d9545",
-   "seconds": 38.1,
-   "source_start": 144.859,
-   "source_end": 182.343,
-   "segments": [
-    "reflection-6",
-    "scripture-2",
-    "reflection-2"
-   ],
-   "hook": "Read this before your day starts",
-   "title": "Read this before your day starts",
-   "reference": "Lamentations 3:22-23 (KJV)",
-   "scenes": [
-    "bg-lake",
-    "bg-meadow",
-    "bg-mountain",
-    "bg-road",
-    "bg-lake"
-   ],
-   "parallax": true,
-   "selection": {
-    "final_score": 0.831,
-    "measured_score": 0.831,
-    "features": {
-     "opening_short": 1.0,
-     "opening_direct": 1.0,
-     "second_person": 0.5405405405405406,
-     "scripture": 1.0,
-     "promise": 1.0,
-     "resolution": 0.4,
-     "length_fit": 0.8993599999999993
-    },
-    "rubric": null
-   },
-   "text": "You are following him into it. There is a second promise for this exact hour. It is of the Lord's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness. New every morning. Not leftover mercy from yesterday. Not the small amount that remains after your mistakes. Fresh mercy, measured for today, for the person you are this morning, with everything you are carrying.",
-   "qa": {
-    "file": "migration/production/pilot-002/shorts/short-03.mp4",
-    "seconds": 38.1,
-    "lufs": -14.8,
-    "true_peak_dbtp": -2.4,
-    "checks": {
-     "decode_clean": true,
-     "one_h264_1080x1920": true,
-     "fps_30": true,
-     "one_aac_stereo_48k": true,
-     "duration": true,
-     "loudness": true,
-     "true_peak": true
-    },
-    "status": "PASS"
-   },
-   "review": {
-    "hook_in_first_2s": 6.5,
-    "captions_readable_and_synced": 9.0,
-    "text_clear_of_shorts_ui": 8.5,
-    "picture_quality": 8.0,
-    "edit_rhythm": 6.5,
-    "audio_clarity": 9.0,
-    "stands_alone": 4.5,
-    "ending_and_loop": 3.0,
-    "policy_safe": 10.0,
-    "overall": 6.0,
-    "issues": [
-     "Audio abruptly cuts off mid-word ('What...') at 00:37 without concluding the thought.",
-     "Static cutout figure of Jesus overlaid onto slowly changing AI background slides feels stiff and repetitive.",
-     "The opening spoken sentence ('You are following him into it') sounds like the middle of an existing conversation rather than an immediate auditory hook."
-    ],
-    "strongest_moment": "00:23 - 00:33 where the script eloquently contextualizes Lamentations into relatable encouragement ('Fresh mercy, measured for the person you are this morning').",
-    "model": "gemini-3.8-flash",
-    "status": "FAIL"
-   },
-   "publish": false
-  },
-  {
-   "file": "short-04.mp4",
-   "sha256": "72e0c394b7a1189f0c711861aa5e4a63007d46c9a11ce42e49d6e895a9f657aa",
-   "seconds": 35.03,
-   "source_start": 820.973,
-   "source_end": 855.38,
-   "segments": [
-    "scripture-10",
-    "prayer-waters"
-   ],
-   "hook": "Read this before your day starts",
-   "title": "Read this before your day starts",
-   "reference": "Isaiah 43:2 (KJV)",
-   "scenes": [
-    "bg-garden",
-    "bg-hills",
-    "bg-snow",
-    "bg-river",
-    "bg-garden"
-   ],
-   "parallax": true,
-   "selection": {
-    "final_score": 0.8151,
-    "measured_score": 0.8151,
+    "final_score": 0.8561,
+    "measured_score": 0.8153,
     "features": {
      "opening_short": 1.0,
      "opening_direct": 1.0,
@@ -334,14 +34,25 @@
      "scripture": 1.0,
      "promise": 0.3125,
      "resolution": 1.0,
-     "length_fit": 0.7762800000000015
+     "length_fit": 0.7779600000000028
     },
-    "rubric": null
+    "rubric": {
+     "index": 8,
+     "hook_first_2s": 9,
+     "stands_alone": 9,
+     "emotional_payoff": 9,
+     "shareability": 9,
+     "loop_potential": 7,
+     "policy_safe": 10,
+     "reasons": "Extremely strong hook addressing heavy seasons directly with the powerful Isaiah 43 promise.",
+     "hook_line": "Some of you are walking into heaviness.",
+     "title": "When You Are Walking Through Deep Waters"
+    }
    },
    "text": "Some of you are walking into something heavy today. This promise is for you. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee. Notice that God did not say if you pass through the waters. He said when. Lord, I will not pretend there are no deep waters in my life.",
    "qa": {
-    "file": "migration/production/pilot-002/shorts/short-04.mp4",
-    "seconds": 35.03,
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 35.07,
     "lufs": -14.9,
     "true_peak_dbtp": -2.3,
     "checks": {
@@ -356,25 +67,363 @@
     "status": "PASS"
    },
    "review": {
-    "hook_in_first_2s": 6,
-    "captions_readable_and_synced": 7,
-    "text_clear_of_shorts_ui": 5,
-    "picture_quality": 6,
-    "edit_rhythm": 6,
-    "audio_clarity": 7,
-    "stands_alone": 6,
-    "ending_and_loop": 5,
-    "policy_safe": 7,
-    "overall": 6,
+    "hook_in_first_2s": 9,
+    "captions_readable_and_synced": 9,
+    "text_clear_of_shorts_ui": 8,
+    "picture_quality": 8,
+    "edit_rhythm": 8,
+    "audio_clarity": 9,
+    "stands_alone": 9,
+    "ending_and_loop": 7,
+    "policy_safe": 9,
+    "overall": 8,
     "issues": [
-     "00:31 - Channel CTA graphic enters the lower UI obstruction zone.",
-     "00:33 - Narrative ends abruptly mid-prayer rather than creating a smooth loop."
+     "00:02 - The Bible verse text 'Isaiah 43:2 (KJV)' is positioned fairly high up and might get close to or behind creator handles depending on device UI."
     ],
-    "strongest_moment": "00:06 - Scriptural reading of Isaiah 43:2 paired with soft visual background shift.",
+    "strongest_moment": "00:00",
+    "model": "gemini-3.5-flash-lite",
+    "status": "PASS"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "3b9ccb538680e8c7de291371fd129378eec8a002597bb58ac936daa5b9614945",
+   "seconds": 32.9,
+   "source_start": 1241.823,
+   "source_end": 1274.097,
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "hook": "You were here first.",
+   "title": "Six Words to Turn Your Anxiety Into Peace",
+   "reference": null,
+   "scenes": [
+    "bg-mountain",
+    "bg-road",
+    "bg-sea",
+    "bg-sky",
+    "bg-mountain"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8341,
+    "measured_score": 0.8603,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.8749999999999999,
+     "scripture": 0.4,
+     "promise": 1.0,
+     "resolution": 1.0,
+     "length_fit": 0.6909599999999955
+    },
+    "rubric": {
+     "index": 2,
+     "hook_first_2s": 7,
+     "stands_alone": 9,
+     "emotional_payoff": 8,
+     "shareability": 8,
+     "loop_potential": 7,
+     "policy_safe": 10,
+     "reasons": "Very concise, powerful opening sentence, great loop potential back to 'You were here first.'",
+     "hook_line": "You were here first.",
+     "title": "Six Words to Turn Your Anxiety Into Peace"
+    }
+   },
+   "text": "You were here first. That is all. Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it. May the Lord go before you into every hour of this day. May his mercy meet you at every turn. May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side. In the name of Jesus, amen.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 32.9,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 5.2,
+    "captions_readable_and_synced": 6.8,
+    "text_clear_of_shorts_ui": 6.5,
+    "picture_quality": 6.2,
+    "edit_rhythm": 5.5,
+    "audio_clarity": 6.6,
+    "stands_alone": 6.8,
+    "ending_and_loop": 5.8,
+    "policy_safe": 7.0,
+    "overall": 6.3,
+    "issues": [
+     "Static AI illustrations limit visual dynamism."
+    ],
+    "strongest_moment": "00:00 - Clear reflective opening message.",
     "model": "gemini-3.6-flash",
     "status": "FAIL"
    },
    "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "6361e55f6c56c19c86c41665ea02d95c3321100c6e6be15db5011b03c73b65db",
+   "seconds": 53.07,
+   "source_start": 370.493,
+   "source_end": 422.959,
+   "segments": [
+    "prayer-1",
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "hook": "Go ahead of me into every room.",
+   "title": "The Ultimate Morning Prayer for Peace",
+   "reference": null,
+   "scenes": [
+    "bg-snow",
+    "bg-river",
+    "bg-wheat",
+    "bg-forest",
+    "bg-sunset-sea",
+    "bg-garden",
+    "bg-hills",
+    "bg-snow"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8281,
+    "measured_score": 0.7953,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.7407407407407407,
+     "scripture": 0.4,
+     "promise": 0.7407407407407407,
+     "resolution": 1.0,
+     "length_fit": 0.5013599999999997
+    },
+    "rubric": {
+     "index": 13,
+     "hook_first_2s": 8,
+     "stands_alone": 9,
+     "emotional_payoff": 9,
+     "shareability": 8,
+     "loop_potential": 7,
+     "policy_safe": 10,
+     "reasons": "Comprehensive morning prayer that captures both the inward worry and the outward trust beautifully.",
+     "hook_line": "Go ahead of me into every room.",
+     "title": "The Ultimate Morning Prayer for Peace"
+    }
+   },
+   "text": "I choose to trust that you are there before me. Go ahead of me into every room I will enter today. I bring you the worry that woke me up. You know its name. I will not pretend it is small, and I will not pretend you are smaller. Where I see a closed door, you see the way through. Where I see a delay, you see the right time. Teach my heart to rest in what you know, even when I do not know it yet. Lord, you know how quickly my thoughts run ahead of me. Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come. Bring my thoughts back to this day and to you. Replace the noise in my head with your peace.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 53.07,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 9,
+    "captions_readable_and_synced": 10,
+    "text_clear_of_shorts_ui": 10,
+    "picture_quality": 8,
+    "edit_rhythm": 9,
+    "audio_clarity": 10,
+    "stands_alone": 10,
+    "ending_and_loop": 9,
+    "policy_safe": 10,
+    "overall": 9,
+    "issues": [
+     "AI generated visuals have minor flickering at 0:13 and 0:33."
+    ],
+    "strongest_moment": "0:46 to 0:52",
+    "model": "gemini-3.5-flash-lite",
+    "status": "PASS"
+   },
+   "publish": true
+  },
+  {
+   "file": "short-03.mp4",
+   "sha256": "b7215bd07022234ad47e737f54a9f6703091fe525178bdf3e8e37dc802480b48",
+   "seconds": 40.53,
+   "source_start": 999.012,
+   "source_end": 1038.944,
+   "segments": [
+    "scripture-5",
+    "reflection-4"
+   ],
+   "hook": "Carry this promise into the next hour.",
+   "title": "Trust in the Lord in Every Ordinary Detail",
+   "reference": "Proverbs 3:5-6 (KJV)",
+   "scenes": [
+    "bg-lake",
+    "bg-meadow",
+    "bg-mountain",
+    "bg-road",
+    "bg-sea",
+    "bg-lake"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8239,
+    "measured_score": 0.8097,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.4444444444444444,
+     "scripture": 1.0,
+     "promise": 0.8333333333333334,
+     "resolution": 0.4,
+     "length_fit": 0.9972800000000006
+    },
+    "rubric": {
+     "index": 9,
+     "hook_first_2s": 8,
+     "stands_alone": 9,
+     "emotional_payoff": 8,
+     "shareability": 8,
+     "loop_potential": 7,
+     "policy_safe": 10,
+     "reasons": "Direct and actionable advice combined with Proverbs 3, highly shareable for daily life.",
+     "hook_line": "Carry this promise into the next hour.",
+     "title": "Trust in the Lord in Every Ordinary Detail"
+    }
+   },
+   "text": "Carry one more promise with you into the next hour. Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths. In all thy ways acknowledge him. Not only in the big decisions, but in the small ones that fill an ordinary day. When you sit down to work, acknowledge him. When you answer a difficult message, acknowledge him. When you feel the old worry return in the middle of the afternoon, acknowledge him.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-03.mp4",
+    "seconds": 40.53,
+    "lufs": -14.5,
+    "true_peak_dbtp": -2.2,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 9,
+    "captions_readable_and_synced": 9,
+    "text_clear_of_shorts_ui": 7,
+    "picture_quality": 9,
+    "edit_rhythm": 9,
+    "audio_clarity": 10,
+    "stands_alone": 9,
+    "ending_and_loop": 8,
+    "policy_safe": 10,
+    "overall": 9,
+    "issues": [
+     "00:02 - 00:03: The Scripture reference banner 'Proverbs 3:5-6 (KJV)' sits rather high and slightly crowds the caption area."
+    ],
+    "strongest_moment": "00:00 - 00:02: The calm, meditative opening visual paired with an encouraging on-screen hook immediately sets a peaceful tone and grabs attention.",
+    "model": "gemini-3.5-flash-lite",
+    "status": "PASS"
+   },
+   "publish": true
+  },
+  {
+   "file": "short-04.mp4",
+   "sha256": "02f4351939ad58b84c59591b97bf5ba3c5bd11616541d811674a7a61c3e41040",
+   "seconds": 42.43,
+   "source_start": 1090.64,
+   "source_end": 1132.455,
+   "segments": [
+    "reflection-courage",
+    "scripture-12",
+    "prayer-thanks"
+   ],
+   "hook": "Your courage does not need feeling ready.",
+   "title": "A Prayer for Courage Wherever You Go Today",
+   "reference": "Hebrews 13:5 (KJV)",
+   "scenes": [
+    "bg-garden",
+    "bg-hills",
+    "bg-snow",
+    "bg-river",
+    "bg-wheat",
+    "bg-garden"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8236,
+    "measured_score": 0.9091,
+    "features": {
+     "opening_short": 0.6,
+     "opening_direct": 1.0,
+     "second_person": 0.8421052631578947,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 1.0,
+     "length_fit": 0.9274000000000069
+    },
+    "rubric": {
+     "index": 0,
+     "hook_first_2s": 7,
+     "stands_alone": 8,
+     "emotional_payoff": 8,
+     "shareability": 7,
+     "loop_potential": 6,
+     "policy_safe": 10,
+     "reasons": "Strong opening on courage, excellent standalone flow and comforting Hebrews 13:5 verse.",
+     "hook_line": "Your courage does not need feeling ready.",
+     "title": "A Prayer for Courage Wherever You Go Today"
+    }
+   },
+   "text": "Your courage today does not have to come from feeling ready. It can come from knowing who is with you. Whithersoever thou goest. That means the kitchen, the office, the hospital room, the classroom, the empty apartment. There is no place on your schedule today where he will not be. And one more promise, short enough to remember all day. For he hath said, I will never leave thee, nor forsake thee. Father, thank you. Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-04.mp4",
+    "seconds": 42.43,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 9,
+    "captions_readable_and_synced": 9,
+    "text_clear_of_shorts_ui": 10,
+    "picture_quality": 8,
+    "edit_rhythm": 8,
+    "audio_clarity": 9,
+    "stands_alone": 9,
+    "ending_and_loop": 8,
+    "policy_safe": 9,
+    "overall": 8.7,
+    "issues": [
+     "00:03 - 00:04: Caption placement momentarily overlaps slightly with the Bible reference overlay."
+    ],
+    "strongest_moment": "00:27 - 00:32: The seamless transition to the wheat field visual matching the Scripture quote creates a deeply reflective and atmospheric scene.",
+    "model": "gemini-3.5-flash-lite",
+    "status": "PASS"
+   },
+   "publish": true
   }
  ],
  "review_rubric": {
