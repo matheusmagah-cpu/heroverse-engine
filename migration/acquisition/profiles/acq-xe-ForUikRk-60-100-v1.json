@@ -1,0 +1,122 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 3,
+    "picture_changes_per_minute": 4.49,
+    "median_shot_seconds": 9.133,
+    "longest_shot_seconds": 21.5,
+    "motion_median_top_decile_diff": 1.208
+   },
+   "rhythm": {
+    "audio_onsets": 1,
+    "audio_onsets_per_minute": 1.5,
+    "tempo": {
+     "bpm": null,
+     "confidence": 0.0,
+     "reason": "fewer than 4 onsets"
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.002,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": -0.275397,
+     "verdict": "LOW_SUPPORT",
+     "consensus_pairs": 1,
+     "visual_events": 3,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -42.5,
+    "loudness_range_lu": 2.7,
+    "true_peak_dbtp": -30.7
+   },
+   "colour": {
+    "mean_brightness": 0.3241,
+    "brightness_std_over_time": 0.0125,
+    "mean_saturation": 0.1486,
+    "saturation_std_over_time": 0.0345
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.048,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 0,
+     "singing": 0,
+     "music": 0,
+     "other": 4,
+     "silence": 0,
+     "UNCERTAIN": 79
+    },
+    "words": 0,
+    "words_per_minute": 0.0,
+    "transcript": ""
+   },
+   "sound_segments": [
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 0.0,
+     "end_seconds": 21.615,
+     "frames": 44
+    },
+    {
+     "label": "other",
+     "start_seconds": 21.12,
+     "end_seconds": 22.095,
+     "frames": 1
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 21.6,
+     "end_seconds": 25.935,
+     "frames": 8
+    },
+    {
+     "label": "other",
+     "start_seconds": 25.44,
+     "end_seconds": 26.895,
+     "frames": 2
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 26.4,
+     "end_seconds": 28.815,
+     "frames": 4
+    },
+    {
+     "label": "other",
+     "start_seconds": 28.32,
+     "end_seconds": 29.295,
+     "frames": 1
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 28.8,
+     "end_seconds": 40.031,
+     "frames": 23
+    }
+   ]
+  }
+ ]
+}
