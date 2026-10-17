@@ -1,0 +1,48 @@
+name: HeroVerse requests (start a workflow by committing a request file)
+# Sessions without GitHub API tools start work by committing
+# migration/requests/<name>.json = {"workflow": "file.yml", "inputs": {...}}.
+# GITHUB_TOKEN may dispatch workflow_dispatch runs. Each file runs once (it is moved to done/).
+on:
+  push:
+    branches: [main]
+    paths: ['migration/requests/*.json']
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: heroverse-requests
+  cancel-in-progress: false
+jobs:
+  dispatch:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch each pending request
+        run: |
+          shopt -s nullglob
+          mkdir -p migration/requests/done
+          for f in migration/requests/*.json; do
+            args=$(python3 -I - "$f" <<'PY'
+          import json, re, shlex, sys
+          r = json.load(open(sys.argv[1]))
+          wf = r["workflow"]
+          assert re.fullmatch(r"[a-z0-9-]+\.yml", wf), "BAD_WORKFLOW"
+          assert wf not in ("requests.yml",), "NO_RECURSION"
+          out = [wf]
+          for k, v in (r.get("inputs") or {}).items():
+              assert re.fullmatch(r"[a-z_]+", k), "BAD_INPUT"
+              out += ["-f", f"{k}={v}"]
+          print(" ".join(shlex.quote(x) for x in out))
+          PY
+            )
+            eval gh workflow run $args --ref main && echo "DISPATCHED $f: $args"
+            git mv "$f" "migration/requests/done/$(date -u +%Y%m%dT%H%M%S)-$(basename "$f")"
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "Requests dispatched (run $GITHUB_RUN_ID)" || exit 0
+          git pull --rebase -q origin main && git push -q origin HEAD:main
