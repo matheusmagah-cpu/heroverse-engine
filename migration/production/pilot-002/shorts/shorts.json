@@ -1,0 +1,311 @@
+{
+ "version": "shorts-produce-v1",
+ "source_pilot": "pilot-002",
+ "selection_rubric_model": null,
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "84a0bb750bb541a444966a64e9deadeddeadfe4504bdd6d974eea98e43f74995",
+   "seconds": 42.4,
+   "source_start": 1090.491,
+   "source_end": 1132.263,
+   "segments": [
+    "reflection-courage",
+    "scripture-12",
+    "prayer-thanks"
+   ],
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts",
+   "reference": "Hebrews 13:5 (KJV)",
+   "scenes": [
+    "bg-wheat",
+    "bg-forest",
+    "bg-sunset-sea",
+    "bg-garden",
+    "bg-hills",
+    "bg-wheat"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.9092,
+    "measured_score": 0.9092,
+    "features": {
+     "opening_short": 0.6,
+     "opening_direct": 1.0,
+     "second_person": 0.8421052631578947,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 1.0,
+     "length_fit": 0.9291200000000026
+    },
+    "rubric": null
+   },
+   "text": "Your courage today does not have to come from feeling ready. It can come from knowing who is with you. Whithersoever thou goest. That means the kitchen, the office, the hospital room, the classroom, the empty apartment. There is no place on your schedule today where he will not be. And one more promise, short enough to remember all day. For he hath said, I will never leave thee, nor forsake thee. Father, thank you. Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 42.4,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_NO_KEY"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "a08ab2c64254d8143067763f56781625cf5e1f3ec66a7a2e9fed578cc0b8caf3",
+   "seconds": 41.3,
+   "source_start": 382.324,
+   "source_end": 423.001,
+   "segments": [
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "hook": "Pray this with me right now",
+   "title": "Pray this with me right now",
+   "reference": null,
+   "scenes": [
+    "bg-mountain",
+    "bg-road",
+    "bg-sea",
+    "bg-sky",
+    "bg-valley",
+    "bg-mountain"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8668,
+    "measured_score": 0.8668,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.761904761904762,
+     "scripture": 0.4,
+     "promise": 0.9523809523809523,
+     "resolution": 1.0,
+     "length_fit": 0.9729200000000015
+    },
+    "rubric": null
+   },
+   "text": "You know its name. I will not pretend it is small, and I will not pretend you are smaller. Where I see a closed door, you see the way through. Where I see a delay, you see the right time. Teach my heart to rest in what you know, even when I do not know it yet. Lord, you know how quickly my thoughts run ahead of me. Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come. Bring my thoughts back to this day and to you. Replace the noise in my head with your peace.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 41.3,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_NO_KEY"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "abe66e8745e434461c59be1ec4805658dae909da129d6742969b1e04980046a6",
+   "seconds": 32.83,
+   "source_start": 1241.588,
+   "source_end": 1273.82,
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "hook": "Pray this with me right now",
+   "title": "Pray this with me right now",
+   "reference": null,
+   "scenes": [
+    "bg-snow",
+    "bg-river",
+    "bg-wheat",
+    "bg-forest",
+    "bg-snow"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8602,
+    "measured_score": 0.8602,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.8749999999999999,
+     "scripture": 0.4,
+     "promise": 1.0,
+     "resolution": 1.0,
+     "length_fit": 0.6892799999999988
+    },
+    "rubric": null
+   },
+   "text": "You were here first. That is all. Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it. May the Lord go before you into every hour of this day. May his mercy meet you at every turn. May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side. In the name of Jesus, amen.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 32.83,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_NO_KEY"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-03.mp4",
+   "sha256": "2162900675ea4eec7672589129de25d1b6c5a738a8f459ee97706be6767d9545",
+   "seconds": 38.1,
+   "source_start": 144.859,
+   "source_end": 182.343,
+   "segments": [
+    "reflection-6",
+    "scripture-2",
+    "reflection-2"
+   ],
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts",
+   "reference": "Lamentations 3:22-23 (KJV)",
+   "scenes": [
+    "bg-lake",
+    "bg-meadow",
+    "bg-mountain",
+    "bg-road",
+    "bg-lake"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.831,
+    "measured_score": 0.831,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.5405405405405406,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.8993599999999993
+    },
+    "rubric": null
+   },
+   "text": "You are following him into it. There is a second promise for this exact hour. It is of the Lord's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness. New every morning. Not leftover mercy from yesterday. Not the small amount that remains after your mistakes. Fresh mercy, measured for today, for the person you are this morning, with everything you are carrying.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-03.mp4",
+    "seconds": 38.1,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_NO_KEY"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-04.mp4",
+   "sha256": "72e0c394b7a1189f0c711861aa5e4a63007d46c9a11ce42e49d6e895a9f657aa",
+   "seconds": 35.03,
+   "source_start": 820.973,
+   "source_end": 855.38,
+   "segments": [
+    "scripture-10",
+    "prayer-waters"
+   ],
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts",
+   "reference": "Isaiah 43:2 (KJV)",
+   "scenes": [
+    "bg-garden",
+    "bg-hills",
+    "bg-snow",
+    "bg-river",
+    "bg-garden"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8151,
+    "measured_score": 0.8151,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.37499999999999994,
+     "scripture": 1.0,
+     "promise": 0.3125,
+     "resolution": 1.0,
+     "length_fit": 0.7762800000000015
+    },
+    "rubric": null
+   },
+   "text": "Some of you are walking into something heavy today. This promise is for you. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee. Notice that God did not say if you pass through the waters. He said when. Lord, I will not pretend there are no deep waters in my life.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-04.mp4",
+    "seconds": 35.03,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_NO_KEY"
+   },
+   "publish": false
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}

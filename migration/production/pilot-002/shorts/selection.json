@@ -1,0 +1,1478 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-002",
+ "rubric_model": null,
+ "candidates_considered": 904,
+ "shortlist": [
+  {
+   "start": 1090.491,
+   "end": 1132.263,
+   "sentences": [
+    {
+     "segment": "reflection-courage",
+     "text": "Your courage today does not have to come from feeling ready.",
+     "start": 1090.491,
+     "end": 1095.035
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "It can come from knowing who is with you.",
+     "start": 1095.215,
+     "end": 1098.009
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "Whithersoever thou goest.",
+     "start": 1098.189,
+     "end": 1100.493
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "That means the kitchen, the office, the hospital room, the classroom, the empty apartment.",
+     "start": 1100.673,
+     "end": 1107.031
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "There is no place on your schedule today where he will not be.",
+     "start": 1107.211,
+     "end": 1111.691
+    },
+    {
+     "segment": "scripture-12",
+     "text": "And one more promise, short enough to remember all day.",
+     "start": 1113.071,
+     "end": 1117.465
+    },
+    {
+     "segment": "scripture-12",
+     "text": "For he hath said, I will never leave thee, nor forsake thee.",
+     "start": 1117.645,
+     "end": 1121.869
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Father, thank you.",
+     "start": 1123.549,
+     "end": 1125.192
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
+     "start": 1125.372,
+     "end": 1132.263
+    }
+   ],
+   "segments": [
+    "reflection-courage",
+    "scripture-12",
+    "prayer-thanks"
+   ],
+   "reference": "Hebrews 13:5 (KJV)",
+   "measured_score": 0.9092,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.8421052631578947,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.9291200000000026
+   },
+   "final_score": 0.9092,
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts"
+  },
+  {
+   "start": 382.324,
+   "end": 423.001,
+   "sentences": [
+    {
+     "segment": "prayer-2",
+     "text": "You know its name.",
+     "start": 382.324,
+     "end": 383.945
+    },
+    {
+     "segment": "prayer-2",
+     "text": "I will not pretend it is small, and I will not pretend you are smaller.",
+     "start": 384.125,
+     "end": 389.544
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a closed door, you see the way through.",
+     "start": 389.724,
+     "end": 393.436
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a delay, you see the right time.",
+     "start": 393.616,
+     "end": 397.029
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
+     "start": 397.209,
+     "end": 402.628
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, you know how quickly my thoughts run ahead of me.",
+     "start": 404.008,
+     "end": 407.699
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
+     "start": 407.879,
+     "end": 416.049
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Bring my thoughts back to this day and to you.",
+     "start": 416.229,
+     "end": 419.472
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    }
+   ],
+   "segments": [
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "reference": null,
+   "measured_score": 0.8668,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.761904761904762,
+    "scripture": 0.4,
+    "promise": 0.9523809523809523,
+    "resolution": 1.0,
+    "length_fit": 0.9729200000000015
+   },
+   "final_score": 0.8668,
+   "hook": "Pray this with me right now",
+   "title": "Pray this with me right now"
+  },
+  {
+   "start": 1241.588,
+   "end": 1273.82,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "You were here first.",
+     "start": 1241.588,
+     "end": 1243.231
+    },
+    {
+     "segment": "payoff",
+     "text": "That is all.",
+     "start": 1243.411,
+     "end": 1244.819
+    },
+    {
+     "segment": "payoff",
+     "text": "Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it.",
+     "start": 1244.999,
+     "end": 1253.511
+    },
+    {
+     "segment": "blessing",
+     "text": "May the Lord go before you into every hour of this day.",
+     "start": 1254.891,
+     "end": 1259.157
+    },
+    {
+     "segment": "blessing",
+     "text": "May his mercy meet you at every turn.",
+     "start": 1259.337,
+     "end": 1262.537
+    },
+    {
+     "segment": "blessing",
+     "text": "May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side.",
+     "start": 1262.717,
+     "end": 1270.888
+    },
+    {
+     "segment": "blessing",
+     "text": "In the name of Jesus, amen.",
+     "start": 1271.068,
+     "end": 1273.82
+    }
+   ],
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "reference": null,
+   "measured_score": 0.8602,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8749999999999999,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.6892799999999988
+   },
+   "final_score": 0.8602,
+   "hook": "Pray this with me right now",
+   "title": "Pray this with me right now"
+  },
+  {
+   "start": 379.413,
+   "end": 423.001,
+   "sentences": [
+    {
+     "segment": "prayer-2",
+     "text": "I bring you the worry that woke me up.",
+     "start": 379.413,
+     "end": 382.144
+    },
+    {
+     "segment": "prayer-2",
+     "text": "You know its name.",
+     "start": 382.324,
+     "end": 383.945
+    },
+    {
+     "segment": "prayer-2",
+     "text": "I will not pretend it is small, and I will not pretend you are smaller.",
+     "start": 384.125,
+     "end": 389.544
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a closed door, you see the way through.",
+     "start": 389.724,
+     "end": 393.436
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a delay, you see the right time.",
+     "start": 393.616,
+     "end": 397.029
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
+     "start": 397.209,
+     "end": 402.628
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, you know how quickly my thoughts run ahead of me.",
+     "start": 404.008,
+     "end": 407.699
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
+     "start": 407.879,
+     "end": 416.049
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Bring my thoughts back to this day and to you.",
+     "start": 416.229,
+     "end": 419.472
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    }
+   ],
+   "segments": [
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "reference": null,
+   "measured_score": 0.8518,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7894736842105262,
+    "scripture": 0.4,
+    "promise": 0.8771929824561403,
+    "resolution": 1.0,
+    "length_fit": 0.8564800000000014
+   },
+   "final_score": 0.8518
+  },
+  {
+   "start": 416.229,
+   "end": 453.624,
+   "sentences": [
+    {
+     "segment": "prayer-mind",
+     "text": "Bring my thoughts back to this day and to you.",
+     "start": 416.229,
+     "end": 419.472
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "When I start to imagine the worst, remind me of everything you have already carried me through.",
+     "start": 423.181,
+     "end": 429.837
+    },
+    {
+     "segment": "scripture-8",
+     "text": "Before we keep praying, let these words settle over your heart.",
+     "start": 431.217,
+     "end": 435.676
+    },
+    {
+     "segment": "scripture-8",
+     "text": "Be careful for nothing;",
+     "start": 435.856,
+     "end": 437.819
+    },
+    {
+     "segment": "scripture-8",
+     "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+     "start": 437.999,
+     "end": 445.444
+    },
+    {
+     "segment": "scripture-8",
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+     "start": 445.624,
+     "end": 453.624
+    }
+   ],
+   "segments": [
+    "prayer-mind",
+    "scripture-8"
+   ],
+   "reference": "Philippians 4:6-7 (KJV)",
+   "measured_score": 0.8392,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.689655172413793,
+    "scripture": 1.0,
+    "promise": 0.8620689655172413,
+    "resolution": 0.4,
+    "length_fit": 0.8958000000000015
+   },
+   "final_score": 0.8392
+  },
+  {
+   "start": 144.859,
+   "end": 182.343,
+   "sentences": [
+    {
+     "segment": "reflection-6",
+     "text": "You are following him into it.",
+     "start": 144.859,
+     "end": 147.291
+    },
+    {
+     "segment": "scripture-2",
+     "text": "There is a second promise for this exact hour.",
+     "start": 148.671,
+     "end": 152.063
+    },
+    {
+     "segment": "scripture-2",
+     "text": "It is of the Lord's mercies that we are not consumed, because his compassions fail not.",
+     "start": 152.243,
+     "end": 158.92
+    },
+    {
+     "segment": "scripture-2",
+     "text": "They are new every morning:",
+     "start": 159.1,
+     "end": 161.361
+    },
+    {
+     "segment": "scripture-2",
+     "text": "great is thy faithfulness.",
+     "start": 161.541,
+     "end": 163.781
+    },
+    {
+     "segment": "reflection-2",
+     "text": "New every morning.",
+     "start": 165.461,
+     "end": 167.339
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not leftover mercy from yesterday.",
+     "start": 167.519,
+     "end": 170.527
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not the small amount that remains after your mistakes.",
+     "start": 170.707,
+     "end": 174.824
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Fresh mercy, measured for today, for the person you are this morning, with everything you are carrying.",
+     "start": 175.004,
+     "end": 182.343
+    }
+   ],
+   "segments": [
+    "reflection-6",
+    "scripture-2",
+    "reflection-2"
+   ],
+   "reference": "Lamentations 3:22-23 (KJV)",
+   "measured_score": 0.831,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5405405405405406,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.8993599999999993
+   },
+   "final_score": 0.831,
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts"
+  },
+  {
+   "start": 419.652,
+   "end": 453.624,
+   "sentences": [
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "When I start to imagine the worst, remind me of everything you have already carried me through.",
+     "start": 423.181,
+     "end": 429.837
+    },
+    {
+     "segment": "scripture-8",
+     "text": "Before we keep praying, let these words settle over your heart.",
+     "start": 431.217,
+     "end": 435.676
+    },
+    {
+     "segment": "scripture-8",
+     "text": "Be careful for nothing;",
+     "start": 435.856,
+     "end": 437.819
+    },
+    {
+     "segment": "scripture-8",
+     "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+     "start": 437.999,
+     "end": 445.444
+    },
+    {
+     "segment": "scripture-8",
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+     "start": 445.624,
+     "end": 453.624
+    }
+   ],
+   "segments": [
+    "prayer-mind",
+    "scripture-8"
+   ],
+   "reference": "Philippians 4:6-7 (KJV)",
+   "measured_score": 0.8307,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6493506493506492,
+    "scripture": 1.0,
+    "promise": 0.974025974025974,
+    "resolution": 0.4,
+    "length_fit": 0.7588800000000014
+   },
+   "final_score": 0.8307
+  },
+  {
+   "start": 393.616,
+   "end": 423.001,
+   "sentences": [
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a delay, you see the right time.",
+     "start": 393.616,
+     "end": 397.029
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
+     "start": 397.209,
+     "end": 402.628
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, you know how quickly my thoughts run ahead of me.",
+     "start": 404.008,
+     "end": 407.699
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
+     "start": 407.879,
+     "end": 416.049
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Bring my thoughts back to this day and to you.",
+     "start": 416.229,
+     "end": 419.472
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    }
+   ],
+   "segments": [
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "reference": null,
+   "measured_score": 0.8175,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6666666666666666,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.5753999999999997
+   },
+   "final_score": 0.8175
+  },
+  {
+   "start": 820.973,
+   "end": 855.38,
+   "sentences": [
+    {
+     "segment": "scripture-10",
+     "text": "Some of you are walking into something heavy today.",
+     "start": 820.973,
+     "end": 824.493
+    },
+    {
+     "segment": "scripture-10",
+     "text": "This promise is for you.",
+     "start": 824.673,
+     "end": 826.785
+    },
+    {
+     "segment": "scripture-10",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 826.965,
+     "end": 831.083
+    },
+    {
+     "segment": "scripture-10",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 831.263,
+     "end": 834.932
+    },
+    {
+     "segment": "scripture-10",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 835.112,
+     "end": 839.571
+    },
+    {
+     "segment": "scripture-10",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 839.751,
+     "end": 842.972
+    },
+    {
+     "segment": "prayer-waters",
+     "text": "Notice that God did not say if you pass through the waters.",
+     "start": 844.652,
+     "end": 848.833
+    },
+    {
+     "segment": "prayer-waters",
+     "text": "He said when.",
+     "start": 849.013,
+     "end": 850.421
+    },
+    {
+     "segment": "prayer-waters",
+     "text": "Lord, I will not pretend there are no deep waters in my life.",
+     "start": 850.601,
+     "end": 855.38
+    }
+   ],
+   "segments": [
+    "scripture-10",
+    "prayer-waters"
+   ],
+   "reference": "Isaiah 43:2 (KJV)",
+   "measured_score": 0.8151,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.37499999999999994,
+    "scripture": 1.0,
+    "promise": 0.3125,
+    "resolution": 1.0,
+    "length_fit": 0.7762800000000015
+   },
+   "final_score": 0.8151,
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts"
+  },
+  {
+   "start": 998.841,
+   "end": 1038.773,
+   "sentences": [
+    {
+     "segment": "scripture-5",
+     "text": "Carry one more promise with you into the next hour.",
+     "start": 998.841,
+     "end": 1002.852
+    },
+    {
+     "segment": "scripture-5",
+     "text": "Trust in the Lord with all thine heart;",
+     "start": 1003.032,
+     "end": 1005.763
+    },
+    {
+     "segment": "scripture-5",
+     "text": "and lean not unto thine own understanding.",
+     "start": 1005.943,
+     "end": 1009.569
+    },
+    {
+     "segment": "scripture-5",
+     "text": "In all thy ways acknowledge him, and he shall direct thy paths.",
+     "start": 1009.749,
+     "end": 1014.443
+    },
+    {
+     "segment": "reflection-4",
+     "text": "In all thy ways acknowledge him.",
+     "start": 1016.123,
+     "end": 1018.683
+    },
+    {
+     "segment": "reflection-4",
+     "text": "Not only in the big decisions, but in the small ones that fill an ordinary day.",
+     "start": 1018.863,
+     "end": 1025.028
+    },
+    {
+     "segment": "reflection-4",
+     "text": "When you sit down to work, acknowledge him.",
+     "start": 1025.208,
+     "end": 1028.472
+    },
+    {
+     "segment": "reflection-4",
+     "text": "When you answer a difficult message, acknowledge him.",
+     "start": 1028.652,
+     "end": 1032.641
+    },
+    {
+     "segment": "reflection-4",
+     "text": "When you feel the old worry return in the middle of the afternoon, acknowledge him.",
+     "start": 1032.821,
+     "end": 1038.773
+    }
+   ],
+   "segments": [
+    "scripture-5",
+    "reflection-4"
+   ],
+   "reference": "Proverbs 3:5-6 (KJV)",
+   "measured_score": 0.8097,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.4444444444444444,
+    "scripture": 1.0,
+    "promise": 0.8333333333333334,
+    "resolution": 0.4,
+    "length_fit": 0.9972799999999961
+   },
+   "final_score": 0.8097
+  },
+  {
+   "start": 1123.549,
+   "end": 1162.105,
+   "sentences": [
+    {
+     "segment": "prayer-thanks",
+     "text": "Father, thank you.",
+     "start": 1123.549,
+     "end": 1125.192
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
+     "start": 1125.372,
+     "end": 1132.263
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you for what you have already done in my life, even the things I only understood later.",
+     "start": 1132.443,
+     "end": 1139.099
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "I choose to start this day grateful, not because everything is easy, but because you are faithful.",
+     "start": 1139.279,
+     "end": 1146.532
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Let my gratitude be louder than my worry today.",
+     "start": 1146.712,
+     "end": 1150.275
+    },
+    {
+     "segment": "prayer-purpose",
+     "text": "Lord, use me today.",
+     "start": 1151.655,
+     "end": 1153.639
+    },
+    {
+     "segment": "prayer-purpose",
+     "text": "Not only to get through my list, but to be part of what you are doing.",
+     "start": 1153.819,
+     "end": 1158.832
+    },
+    {
+     "segment": "prayer-purpose",
+     "text": "Show me one person I can encourage.",
+     "start": 1159.012,
+     "end": 1162.105
+    }
+   ],
+   "segments": [
+    "prayer-thanks",
+    "prayer-purpose"
+   ],
+   "reference": null,
+   "measured_score": 0.8078,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.9574468085106382,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9422400000000016
+   },
+   "final_score": 0.8078
+  },
+  {
+   "start": 1098.189,
+   "end": 1132.263,
+   "sentences": [
+    {
+     "segment": "reflection-courage",
+     "text": "Whithersoever thou goest.",
+     "start": 1098.189,
+     "end": 1100.493
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "That means the kitchen, the office, the hospital room, the classroom, the empty apartment.",
+     "start": 1100.673,
+     "end": 1107.031
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "There is no place on your schedule today where he will not be.",
+     "start": 1107.211,
+     "end": 1111.691
+    },
+    {
+     "segment": "scripture-12",
+     "text": "And one more promise, short enough to remember all day.",
+     "start": 1113.071,
+     "end": 1117.465
+    },
+    {
+     "segment": "scripture-12",
+     "text": "For he hath said, I will never leave thee, nor forsake thee.",
+     "start": 1117.645,
+     "end": 1121.869
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Father, thank you.",
+     "start": 1123.549,
+     "end": 1125.192
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
+     "start": 1125.372,
+     "end": 1132.263
+    }
+   ],
+   "segments": [
+    "reflection-courage",
+    "scripture-12",
+    "prayer-thanks"
+   ],
+   "reference": "Hebrews 13:5 (KJV)",
+   "measured_score": 0.8063,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.7999999999999999,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.7629599999999936
+   },
+   "final_score": 0.8063
+  },
+  {
+   "start": 384.125,
+   "end": 423.001,
+   "sentences": [
+    {
+     "segment": "prayer-2",
+     "text": "I will not pretend it is small, and I will not pretend you are smaller.",
+     "start": 384.125,
+     "end": 389.544
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a closed door, you see the way through.",
+     "start": 389.724,
+     "end": 393.436
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a delay, you see the right time.",
+     "start": 393.616,
+     "end": 397.029
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
+     "start": 397.209,
+     "end": 402.628
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, you know how quickly my thoughts run ahead of me.",
+     "start": 404.008,
+     "end": 407.699
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
+     "start": 407.879,
+     "end": 416.049
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Bring my thoughts back to this day and to you.",
+     "start": 416.229,
+     "end": 419.472
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    }
+   ],
+   "segments": [
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "reference": null,
+   "measured_score": 0.7985,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.6930693069306931,
+    "scripture": 0.4,
+    "promise": 0.9900990099009901,
+    "resolution": 1.0,
+    "length_fit": 0.955039999999999
+   },
+   "final_score": 0.7985
+  },
+  {
+   "start": 370.515,
+   "end": 423.001,
+   "sentences": [
+    {
+     "segment": "prayer-1",
+     "text": "I choose to trust that you are there before me.",
+     "start": 370.515,
+     "end": 373.843
+    },
+    {
+     "segment": "prayer-1",
+     "text": "Go ahead of me into every room I will enter today.",
+     "start": 374.023,
+     "end": 378.033
+    },
+    {
+     "segment": "prayer-2",
+     "text": "I bring you the worry that woke me up.",
+     "start": 379.413,
+     "end": 382.144
+    },
+    {
+     "segment": "prayer-2",
+     "text": "You know its name.",
+     "start": 382.324,
+     "end": 383.945
+    },
+    {
+     "segment": "prayer-2",
+     "text": "I will not pretend it is small, and I will not pretend you are smaller.",
+     "start": 384.125,
+     "end": 389.544
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a closed door, you see the way through.",
+     "start": 389.724,
+     "end": 393.436
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a delay, you see the right time.",
+     "start": 393.616,
+     "end": 397.029
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
+     "start": 397.209,
+     "end": 402.628
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, you know how quickly my thoughts run ahead of me.",
+     "start": 404.008,
+     "end": 407.699
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
+     "start": 407.879,
+     "end": 416.049
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Bring my thoughts back to this day and to you.",
+     "start": 416.229,
+     "end": 419.472
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    }
+   ],
+   "segments": [
+    "prayer-1",
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "reference": null,
+   "measured_score": 0.7952,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7407407407407407,
+    "scripture": 0.4,
+    "promise": 0.7407407407407407,
+    "resolution": 1.0,
+    "length_fit": 0.5005600000000003
+   },
+   "final_score": 0.7952
+  },
+  {
+   "start": 666.592,
+   "end": 709.863,
+   "sentences": [
+    {
+     "segment": "prayer-provision",
+     "text": "I also bring you my needs, the practical ones.",
+     "start": 666.592,
+     "end": 670.389
+    },
+    {
+     "segment": "prayer-provision",
+     "text": "You know what is in my account and what is on my table.",
+     "start": 670.569,
+     "end": 674.793
+    },
+    {
+     "segment": "prayer-provision",
+     "text": "You know the job I hope for and the work I already have.",
+     "start": 674.973,
+     "end": 679.411
+    },
+    {
+     "segment": "prayer-provision",
+     "text": "Provide what I need for today, and teach me to be content and grateful while I wait for what I still hope for.",
+     "start": 679.591,
+     "end": 687.612
+    },
+    {
+     "segment": "prayer-provision",
+     "text": "You have never been late, even when I thought you were.",
+     "start": 687.792,
+     "end": 691.568
+    },
+    {
+     "segment": "prayer-health",
+     "text": "I also lift up my body to you.",
+     "start": 692.948,
+     "end": 695.7
+    },
+    {
+     "segment": "prayer-health",
+     "text": "You know where I am tired, where I hurt, and the results I am waiting for.",
+     "start": 695.88,
+     "end": 701.32
+    },
+    {
+     "segment": "prayer-health",
+     "text": "I ask you for strength and for healing, and I thank you for every doctor, nurse and caregiver you use to help us.",
+     "start": 701.5,
+     "end": 709.863
+    }
+   ],
+   "segments": [
+    "prayer-provision",
+    "prayer-health"
+   ],
+   "reference": null,
+   "measured_score": 0.7862,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8620689655172414,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.8691599999999972
+   },
+   "final_score": 0.7862
+  }
+ ],
+ "chosen": [
+  {
+   "start": 1090.491,
+   "end": 1132.263,
+   "sentences": [
+    {
+     "segment": "reflection-courage",
+     "text": "Your courage today does not have to come from feeling ready.",
+     "start": 1090.491,
+     "end": 1095.035
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "It can come from knowing who is with you.",
+     "start": 1095.215,
+     "end": 1098.009
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "Whithersoever thou goest.",
+     "start": 1098.189,
+     "end": 1100.493
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "That means the kitchen, the office, the hospital room, the classroom, the empty apartment.",
+     "start": 1100.673,
+     "end": 1107.031
+    },
+    {
+     "segment": "reflection-courage",
+     "text": "There is no place on your schedule today where he will not be.",
+     "start": 1107.211,
+     "end": 1111.691
+    },
+    {
+     "segment": "scripture-12",
+     "text": "And one more promise, short enough to remember all day.",
+     "start": 1113.071,
+     "end": 1117.465
+    },
+    {
+     "segment": "scripture-12",
+     "text": "For he hath said, I will never leave thee, nor forsake thee.",
+     "start": 1117.645,
+     "end": 1121.869
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Father, thank you.",
+     "start": 1123.549,
+     "end": 1125.192
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
+     "start": 1125.372,
+     "end": 1132.263
+    }
+   ],
+   "segments": [
+    "reflection-courage",
+    "scripture-12",
+    "prayer-thanks"
+   ],
+   "reference": "Hebrews 13:5 (KJV)",
+   "measured_score": 0.9092,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.8421052631578947,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.9291200000000026
+   },
+   "final_score": 0.9092,
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts"
+  },
+  {
+   "start": 382.324,
+   "end": 423.001,
+   "sentences": [
+    {
+     "segment": "prayer-2",
+     "text": "You know its name.",
+     "start": 382.324,
+     "end": 383.945
+    },
+    {
+     "segment": "prayer-2",
+     "text": "I will not pretend it is small, and I will not pretend you are smaller.",
+     "start": 384.125,
+     "end": 389.544
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a closed door, you see the way through.",
+     "start": 389.724,
+     "end": 393.436
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Where I see a delay, you see the right time.",
+     "start": 393.616,
+     "end": 397.029
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
+     "start": 397.209,
+     "end": 402.628
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, you know how quickly my thoughts run ahead of me.",
+     "start": 404.008,
+     "end": 407.699
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
+     "start": 407.879,
+     "end": 416.049
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Bring my thoughts back to this day and to you.",
+     "start": 416.229,
+     "end": 419.472
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace the noise in my head with your peace.",
+     "start": 419.652,
+     "end": 423.001
+    }
+   ],
+   "segments": [
+    "prayer-2",
+    "prayer-mind"
+   ],
+   "reference": null,
+   "measured_score": 0.8668,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.761904761904762,
+    "scripture": 0.4,
+    "promise": 0.9523809523809523,
+    "resolution": 1.0,
+    "length_fit": 0.9729200000000015
+   },
+   "final_score": 0.8668,
+   "hook": "Pray this with me right now",
+   "title": "Pray this with me right now"
+  },
+  {
+   "start": 1241.588,
+   "end": 1273.82,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "You were here first.",
+     "start": 1241.588,
+     "end": 1243.231
+    },
+    {
+     "segment": "payoff",
+     "text": "That is all.",
+     "start": 1243.411,
+     "end": 1244.819
+    },
+    {
+     "segment": "payoff",
+     "text": "Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it.",
+     "start": 1244.999,
+     "end": 1253.511
+    },
+    {
+     "segment": "blessing",
+     "text": "May the Lord go before you into every hour of this day.",
+     "start": 1254.891,
+     "end": 1259.157
+    },
+    {
+     "segment": "blessing",
+     "text": "May his mercy meet you at every turn.",
+     "start": 1259.337,
+     "end": 1262.537
+    },
+    {
+     "segment": "blessing",
+     "text": "May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side.",
+     "start": 1262.717,
+     "end": 1270.888
+    },
+    {
+     "segment": "blessing",
+     "text": "In the name of Jesus, amen.",
+     "start": 1271.068,
+     "end": 1273.82
+    }
+   ],
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "reference": null,
+   "measured_score": 0.8602,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8749999999999999,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.6892799999999988
+   },
+   "final_score": 0.8602,
+   "hook": "Pray this with me right now",
+   "title": "Pray this with me right now"
+  },
+  {
+   "start": 144.859,
+   "end": 182.343,
+   "sentences": [
+    {
+     "segment": "reflection-6",
+     "text": "You are following him into it.",
+     "start": 144.859,
+     "end": 147.291
+    },
+    {
+     "segment": "scripture-2",
+     "text": "There is a second promise for this exact hour.",
+     "start": 148.671,
+     "end": 152.063
+    },
+    {
+     "segment": "scripture-2",
+     "text": "It is of the Lord's mercies that we are not consumed, because his compassions fail not.",
+     "start": 152.243,
+     "end": 158.92
+    },
+    {
+     "segment": "scripture-2",
+     "text": "They are new every morning:",
+     "start": 159.1,
+     "end": 161.361
+    },
+    {
+     "segment": "scripture-2",
+     "text": "great is thy faithfulness.",
+     "start": 161.541,
+     "end": 163.781
+    },
+    {
+     "segment": "reflection-2",
+     "text": "New every morning.",
+     "start": 165.461,
+     "end": 167.339
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not leftover mercy from yesterday.",
+     "start": 167.519,
+     "end": 170.527
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not the small amount that remains after your mistakes.",
+     "start": 170.707,
+     "end": 174.824
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Fresh mercy, measured for today, for the person you are this morning, with everything you are carrying.",
+     "start": 175.004,
+     "end": 182.343
+    }
+   ],
+   "segments": [
+    "reflection-6",
+    "scripture-2",
+    "reflection-2"
+   ],
+   "reference": "Lamentations 3:22-23 (KJV)",
+   "measured_score": 0.831,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5405405405405406,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.8993599999999993
+   },
+   "final_score": 0.831,
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts"
+  },
+  {
+   "start": 820.973,
+   "end": 855.38,
+   "sentences": [
+    {
+     "segment": "scripture-10",
+     "text": "Some of you are walking into something heavy today.",
+     "start": 820.973,
+     "end": 824.493
+    },
+    {
+     "segment": "scripture-10",
+     "text": "This promise is for you.",
+     "start": 824.673,
+     "end": 826.785
+    },
+    {
+     "segment": "scripture-10",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 826.965,
+     "end": 831.083
+    },
+    {
+     "segment": "scripture-10",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 831.263,
+     "end": 834.932
+    },
+    {
+     "segment": "scripture-10",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 835.112,
+     "end": 839.571
+    },
+    {
+     "segment": "scripture-10",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 839.751,
+     "end": 842.972
+    },
+    {
+     "segment": "prayer-waters",
+     "text": "Notice that God did not say if you pass through the waters.",
+     "start": 844.652,
+     "end": 848.833
+    },
+    {
+     "segment": "prayer-waters",
+     "text": "He said when.",
+     "start": 849.013,
+     "end": 850.421
+    },
+    {
+     "segment": "prayer-waters",
+     "text": "Lord, I will not pretend there are no deep waters in my life.",
+     "start": 850.601,
+     "end": 855.38
+    }
+   ],
+   "segments": [
+    "scripture-10",
+    "prayer-waters"
+   ],
+   "reference": "Isaiah 43:2 (KJV)",
+   "measured_score": 0.8151,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.37499999999999994,
+    "scripture": 1.0,
+    "promise": 0.3125,
+    "resolution": 1.0,
+    "length_fit": 0.7762800000000015
+   },
+   "final_score": 0.8151,
+   "hook": "Read this before your day starts",
+   "title": "Read this before your day starts"
+  }
+ ]
+}

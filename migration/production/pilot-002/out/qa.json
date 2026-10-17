@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-002",
- "output_sha256": "52766f47e8871b37734bb06a45cdbf098fefcfbabe39f5f70bb216a15c1cfba6",
+ "output_sha256": "d0c35d58ebd63824bc90bda17383c2a2e197a00ab0541356c4a89c77d44ef321",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -31,38 +31,38 @@
  },
  "criteria_version": "pilot-qa-criteria-v2",
  "measurements": {
-  "duration_seconds": 1295.2,
+  "duration_seconds": 1294.88,
   "loudness": {
    "integrated_lufs": -15.5,
    "loudness_range_lu": 3.0,
-   "true_peak_dbtp": -2.1
+   "true_peak_dbtp": -2.2
   },
-  "speech_presence": 0.891,
-  "music_presence": 0.399,
-  "wer_vs_script": 0.0283,
-  "accepted_words_per_minute": 141.1,
+  "speech_presence": 0.884,
+  "music_presence": 0.393,
+  "wer_vs_script": 0.0305,
+  "accepted_words_per_minute": 141.0,
   "caption_lines": 593,
   "holds": 110,
   "first_word_seconds": 0.14,
   "editing": {
-   "picture_changes": 562,
-   "picture_changes_per_minute": 26.03,
-   "median_shot_seconds": 2.2,
-   "longest_shot_seconds": 9.867,
-   "motion_median_top_decile_diff": 0.0
+   "picture_changes": 644,
+   "picture_changes_per_minute": 29.84,
+   "median_shot_seconds": 2.0,
+   "longest_shot_seconds": 10.967,
+   "motion_median_top_decile_diff": 1.0
   },
   "colour": {
-   "mean_brightness": 0.4565,
-   "brightness_std_over_time": 0.0452,
-   "mean_saturation": 0.3982,
-   "saturation_std_over_time": 0.0862
+   "mean_brightness": 0.3939,
+   "brightness_std_over_time": 0.0383,
+   "mean_saturation": 0.4619,
+   "saturation_std_over_time": 0.097
   },
   "rhythm": {
-   "audio_onsets": 1991,
-   "audio_onsets_per_minute": 92.23,
+   "audio_onsets": 2006,
+   "audio_onsets_per_minute": 92.95,
    "tempo": {
-    "bpm": 77.09,
-    "confidence": 0.01
+    "bpm": 78.72,
+    "confidence": 0.011
    }
   }
  },
