@@ -65,6 +65,15 @@ def upload(s, path, body):
     raise RuntimeError("UPLOAD_NOT_COMPLETED")
 
 
+def retry(call, what, tries=4):
+    """YouTube answers 409 ABORTED / 5xx when a backend is briefly unavailable; retry those, never other errors."""
+    for i in range(tries):
+        r = call()
+        if r.status_code < 300 or (r.status_code not in (409, 500, 502, 503, 504)) or i == tries - 1:
+            return check(r, what)
+        time.sleep(5 * 2 ** i)
+
+
 def ensure_playlist(s, title, description):
     for p in check(s.get(API + "playlists", params={"part": "snippet", "mine": "true", "maxResults": 50}), "PLAYLISTS")["items"]:
         if p["snippet"]["title"] == title:
@@ -96,10 +105,20 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
         ledger["entries"][key] = entry
         ledger_path.write_text(json.dumps(ledger, indent=1) + "\n")  # durable before any further step
     vid = entry["video_id"]
+
+    def save():  # every finished step is durable, so a re-run repeats nothing
+        ledger["entries"][key] = entry
+        ledger_path.write_text(json.dumps(ledger, indent=1) + "\n")
     if not entry["steps"].get("thumbnail"):
         check(s.post(UPLOAD + "thumbnails/set", params={"videoId": vid}, data=Path(thumbnail).read_bytes(),
                      headers={"Content-Type": "image/jpeg"}), "THUMBNAIL")
         entry["steps"]["thumbnail"] = True
+        save()
+    if not entry["steps"].get("captions") and manifest.get("sentences") and any(
+            c["snippet"].get("language") == "en" for c in
+            check(s.get(API + "captions", params={"part": "snippet", "videoId": vid}), "CAPTIONS_LIST")["items"]):
+        entry["steps"]["captions"] = True  # inserted by an earlier run that stopped before recording it
+        save()
     if not entry["steps"].get("captions") and manifest.get("sentences"):
         boundary = "heroverse-caption-boundary"
         meta = json.dumps({"snippet": {"videoId": vid, "language": "en", "name": "English", "isDraft": False}})
@@ -108,13 +127,20 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
         check(s.post(UPLOAD + "captions", params={"uploadType": "multipart", "part": "snippet"}, data=body.encode(),
                      headers={"Content-Type": f"multipart/related; boundary={boundary}"}), "CAPTIONS")
         entry["steps"]["captions"] = True
+        save()
     if not entry["steps"].get("playlist") and package.get("playlist"):
-        pid = ensure_playlist(s, package["playlist"]["title"], package["playlist"]["description"])
-        check(s.post(API + "playlistItems", params={"part": "snippet"},
-                     json={"snippet": {"playlistId": pid, "resourceId": {"kind": "youtube#video", "videoId": vid}}}), "PLAYLIST_ADD")
-        entry["steps"]["playlist"] = pid
-    ledger["entries"][key] = entry
-    ledger_path.write_text(json.dumps(ledger, indent=1) + "\n")
+        # the playlist is a convenience: a failure is recorded in the receipt and never blocks verification
+        try:
+            pid = ensure_playlist(s, package["playlist"]["title"], package["playlist"]["description"])
+            present = check(s.get(API + "playlistItems", params={"part": "id", "playlistId": pid, "videoId": vid}),
+                            "PLAYLIST_ITEMS")["items"]
+            if not present:
+                retry(lambda: s.post(API + "playlistItems", params={"part": "snippet"}, json={"snippet": {
+                    "playlistId": pid, "resourceId": {"kind": "youtube#video", "videoId": vid}}}), "PLAYLIST_ADD")
+            entry["steps"]["playlist"] = pid
+        except RuntimeError as e:
+            entry["steps"]["playlist_error"] = str(e)[:200]
+    save()
     final = check(s.get(API + "videos", params={"part": "status,snippet", "id": vid}), "VERIFY")["items"][0]
     receipt = {"version": "publish-receipt-v1", "key": key, "video_id": vid, "url": f"https://youtu.be/{vid}",
                "channel_id": final["snippet"]["channelId"], "title": final["snippet"]["title"],
