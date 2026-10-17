@@ -65,8 +65,13 @@ class SoundClasses:
         # AudioSet orders the whole music subtree contiguously from "Music" up to
         # the first non-music class, "Wind".
         self.music_subtree = set(range(index["Music"], index["Wind"]))
-        self.speech = [index[x] for x in SPEECH]
-        self.singing = [index[x] for x in SINGING]
+        # YAMNet's 521 classes are a subset of AudioSet; use the members present.
+        self.speech = sorted(index[x] for x in SPEECH if x in index)
+        self.singing = sorted(index[x] for x in SINGING if x in index)
+        if "Speech" not in index or "Singing" not in index:
+            raise ValueError("YAMNET_CORE_LABELS_MISSING")
+        self.label_sets = {"speech": [self.labels[i] for i in self.speech],
+                           "singing": [self.labels[i] for i in self.singing]}
         self.music = index["Music"]
         self.silence = index["Silence"]
         excluded = set(self.speech) | set(self.singing) | self.music_subtree | {self.silence}
@@ -132,9 +137,11 @@ def transcribe(model_dir, samples, frames):
 
 def analyze(path, yamnet_path, whisper_dir=None):
     samples = decode_mono16k(path)
-    frames = SoundClasses(yamnet_path).frames(samples)
+    classes = SoundClasses(yamnet_path)
+    frames = classes.frames(samples)
     counts = {label: sum(f["label"] == label for f in frames) for label in CLASSES + ("UNCERTAIN",)}
     result = {"version": VERSION, "media_file": Path(path).name,
+              "label_sets": classes.label_sets,
               "duration_seconds": round(len(samples) / RATE, 3),
               "frame_seconds": FRAME / RATE, "hop_seconds": HOP / RATE,
               "abstain_below": ABSTAIN_BELOW, "label_counts": counts,
