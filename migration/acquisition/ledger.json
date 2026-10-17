@@ -1,7 +1,7 @@
 {
   "version": "acquisition-ledger-v1",
   "policy": "Append-only. A claim is committed before any provider effect. A request id is never sent twice; failures are terminal for that window. Historical native requests (native-av-reservations.json) are never repeated.",
-  "daily_job_cap": 12,
+  "daily_job_cap": 30,
   "unit_floor": 100,
   "zero_cost_basis": "Provider quota headers must show the 500 unit/day free plan and the free-plans hard-limit header; GitHub Actions budget observed at US$0 with usage blocked.",
   "claims": [
