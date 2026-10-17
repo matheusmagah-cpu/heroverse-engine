@@ -1,0 +1,32 @@
+{
+  "version": "acquire-window-v1",
+  "request_id": "acq-mEKdag_zn44-60-100-v1",
+  "video_id": "mEKdag_zn44",
+  "window": [
+    60,
+    100
+  ],
+  "run_id": "39002469910",
+  "status": "WINDOW_RECEIVED_AND_DECODED",
+  "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+  "download_tools_call_requests": 1,
+  "progress_polls": 3,
+  "control_response_bytes": 1320,
+  "production": false,
+  "publication": false,
+  "start_reply_received_bytes": 1109,
+  "provider_job_id": "v2_stream_9b1feda7ab55d8bc0c62",
+  "observed_units_change_since_info": 4,
+  "delivery_http_status": 200,
+  "delivery_host": "emma18.savenow.to",
+  "media_file": {
+    "bytes": 8783402,
+    "sha256": "ae0bad8ee264bf8337b223c5dbf5f5aadee5de5a3c2ae3088639a5f8afbc62d6"
+  },
+  "returned_duration_seconds": 40.067,
+  "video_height": 1080,
+  "complete_clip_decode_passed": true,
+  "units_used_observed": 4,
+  "completed_at": "2026-10-17T04:28:56.725817+00:00",
+  "release_asset": "native-mEKdag_zn44-60-100s-sha256-ae0bad8ee264bf8337b223c5dbf5f5aadee5de5a3c2ae3088639a5f8afbc62d6.mp4"
+}

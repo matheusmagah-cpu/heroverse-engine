@@ -608,11 +608,23 @@
       "video_id": "mEKdag_zn44",
       "start_seconds": 60,
       "end_seconds": 100,
-      "status": "RESERVED_BEFORE_EFFECT",
+      "status": "COMPLETED",
       "reserved_at": "2026-10-17T04:28:00.847419+00:00",
       "day_utc": "2026-10-17",
       "units_remaining_at_reservation": 372,
-      "reserved_units": 14
+      "reserved_units": 14,
+      "provider_job_id": "v2_stream_9b1feda7ab55d8bc0c62",
+      "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+      "media_file": {
+        "bytes": 8783402,
+        "sha256": "ae0bad8ee264bf8337b223c5dbf5f5aadee5de5a3c2ae3088639a5f8afbc62d6"
+      },
+      "returned_duration_seconds": 40.067,
+      "video_height": 1080,
+      "units_used_observed": 4,
+      "completed_at": "2026-10-17T04:28:56.725817+00:00",
+      "run_id": "39002469910",
+      "restart_allowed": false
     }
   ]
 }
