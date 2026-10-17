@@ -31,6 +31,15 @@ QUERIES = (
     "holy spirit", "end times prophecy", "jesus christ", "prayer for my family",
     "god is telling you", "christian shorts", "bible facts", "gospel",
 )
+# Other faceless niches, only to find structures that grow very fast (mechanism
+# references, kept apart from Christian demand comparators by the "niche" field).
+CROSS_NICHE_QUERIES = (
+    "bedtime stories for adults", "history documentary", "motivational speech", "stoic wisdom",
+    "true story", "sleep stories", "life lessons", "meditation", "psychology facts", "audiobook",
+    "manifestation", "affirmations",
+)
+VIEWCOUNT_CHRISTIAN = 20
+DISCOVERY_RESERVE_UNITS = 900  # keep for channel statistics and upload histories
 YOUNG_DAYS = 365
 MAX_HISTORY_VIDEOS = 200
 MAX_PAGES = 4
@@ -77,20 +86,25 @@ class Client:
 
 
 def discover(client, now):
+    """Christian queries by date (all 30), cross-niche queries by views over the
+    last 14 days, then Christian queries by views while the budget lasts."""
     after = (now - timedelta(days=DISCOVERY_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    after_cross = (now - timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    plan = ([("christian", "date", q, after) for q in QUERIES]
+            + [("cross", "viewCount", q, after_cross) for q in CROSS_NICHE_QUERIES]
+            + [("christian", "viewCount", q, after) for q in QUERIES[:VIEWCOUNT_CHRISTIAN]])
     found = {}
-    for order in ("date", "viewCount"):
-        for query in QUERIES:
-            if not client.can(100):
-                return found
-            result = client.get("search", {"part": "snippet", "type": "video", "q": query, "maxResults": 50,
-                                           "order": order, "publishedAfter": after, "relevanceLanguage": "en",
-                                           "regionCode": "US", "safeSearch": "none"}, 100)
-            for item in result.get("items", []):
-                cid = item["snippet"]["channelId"]
-                entry = found.setdefault(cid, {"queries": set(), "orders": set()})
-                entry["queries"].add(query)
-                entry["orders"].add(order)
+    for niche, order, query, since in plan:
+        if not client.can(100 + DISCOVERY_RESERVE_UNITS):
+            break
+        result = client.get("search", {"part": "snippet", "type": "video", "q": query, "maxResults": 50,
+                                       "order": order, "publishedAfter": since, "relevanceLanguage": "en",
+                                       "regionCode": "US", "safeSearch": "none"}, 100)
+        for item in result.get("items", []):
+            entry = found.setdefault(item["snippet"]["channelId"], {"queries": set(), "orders": set(), "niches": set()})
+            entry["queries"].add(query)
+            entry["orders"].add(order)
+            entry["niches"].add(niche)
     return found
 
 
@@ -152,11 +166,12 @@ def tracked_ids(prior_dir):
 def build(client, now, prior_dir=None):
     found = discover(client, now)
     for cid in tracked_ids(prior_dir):
-        found.setdefault(cid, {"queries": {"TRACKED"}, "orders": {"tracked"}})
+        found.setdefault(cid, {"queries": {"TRACKED"}, "orders": {"tracked"}, "niches": {"tracked"}})
     info = channels(client, found)
     for cid, row in info.items():
         row["discovery_queries"] = sorted(found[cid]["queries"])
         row["discovery_orders"] = sorted(found[cid]["orders"])
+        row["niche"] = "christian" if "christian" in found[cid]["niches"] else sorted(found[cid]["niches"])[0]
         age = (now - datetime.fromisoformat(row["published_at"].replace("Z", "+00:00"))).days if row["published_at"] else None
         row["age_days"] = age
     # Upload histories: channels created within YOUNG_DAYS first, then any channel
@@ -172,8 +187,8 @@ def build(client, now, prior_dir=None):
             continue
         row["uploads"], row["uploads_truncated"] = uploads(client, row["uploads_playlist"], pages)
         row["uploads_status"] = "FETCHED"
-    return {"version": "market-panel-v2", "captured_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "queries": list(QUERIES), "discovery_window_days": DISCOVERY_DAYS, "young_days": YOUNG_DAYS,
+    return {"version": "market-panel-v3", "captured_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "queries": list(QUERIES), "cross_niche_queries": list(CROSS_NICHE_QUERIES), "discovery_window_days": DISCOVERY_DAYS, "young_days": YOUNG_DAYS,
             "region_code": "US", "relevance_language": "en",
             "channels": sorted(info.values(), key=lambda r: r["channel_id"]),
             "data_api_units": client.units, "calls": client.calls, "paid_calls": 0,
@@ -189,7 +204,7 @@ def compact(record):
     rows = []
     for c in record["channels"]:
         row = {k: c.get(k) for k in ("channel_id", "title", "custom_url", "published_at", "age_days", "country",
-                                     "default_language", "subscribers", "views", "videos", "discovery_orders",
+                                     "default_language", "subscribers", "views", "videos", "discovery_orders", "niche",
                                      "discovery_queries", "uploads_status")}
         ups = c.get("uploads") or []
         if ups:

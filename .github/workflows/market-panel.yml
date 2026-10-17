@@ -36,12 +36,16 @@ jobs:
             python3 -I -B migration/mining/market_forecast.py evaluate "$reg" "migration/evidence/market-panel/panel-$DAY.json" \
               "migration/evidence/market-forecast-eval-$(basename "$reg" .json | sed 's/market-forecast-registered-//')-at-$DAY.json"
           done
+      - name: Daily intelligence (production directives of the day)
+        run: |
+          mkdir -p migration/evidence/daily-intel
+          python3 -I -B migration/mining/daily_intel.py "$RUNNER_TEMP/market-panel-$DAY.json" "migration/evidence/daily-intel/intel-$DAY.json"
       - name: Raw panel to the private release, compact panel to Git
         run: |
           gzip -9 "$RUNNER_TEMP/market-panel-$DAY.json"
           gh release upload "$TAG" "$RUNNER_TEMP/market-panel-$DAY.json.gz" --repo "$GITHUB_REPOSITORY" --clobber
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add migration/evidence/market-panel migration/evidence/ypp-market-model-*.json migration/evidence/market-forecast-eval-*.json
+          git add migration/evidence/market-panel migration/evidence/ypp-market-model-*.json migration/evidence/market-forecast-eval-*.json migration/evidence/daily-intel
           git commit -q -m "Record market panel $DAY (run $GITHUB_RUN_ID)"
           git pull --rebase -q origin main && git push -q origin HEAD:main
