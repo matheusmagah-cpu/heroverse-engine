@@ -150,7 +150,8 @@ class GeneralizationTests(unittest.TestCase):
                 if count:
                     self.assertLessEqual(abs(result["sync"]["median_offset_seconds"] - offset), OFFSET_TOL)
                     in_sync = -0.045 <= offset <= 0.125  # frozen ITU-R BT.1359 window
-                    self.assertEqual(result["sync"]["verdict"], "IN_SYNC" if in_sync else "OUT_OF_SYNC")
+                    verdict = "IN_SYNC" if in_sync else "OUT_OF_SYNC"
+                    self.assertEqual(result["sync"]["verdict"], verdict if count >= 3 else "LOW_SUPPORT")
                 else:
                     self.assertEqual(result["sync"]["verdict"], "NOT_MEASURABLE")
 

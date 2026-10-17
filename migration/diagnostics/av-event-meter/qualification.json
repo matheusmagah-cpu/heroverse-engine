@@ -2,7 +2,7 @@
   "version": "av-event-meter-control-qualification-v1",
   "status": "PASS_5_OF_5_BLIND_CONTROLS",
   "criteria_sha256": "ecefd0d8bc68f731d84dc1cab3c45ea7803716334bd20dea0ae749c3d03bd099",
-  "meter_sha256": "3d2ed01fdbede19d6a67bade08a5825a87a46ca15faf1f7ace046013d43f36dc",
+  "meter_sha256": "3e7899077f94e0ebaf89bc83989af691c549ab9a877727b8564905c5f2a19c3b",
   "recipe_sha256": "8b4b9ea021836045c74ec14bd3b881b4f69f9391720534607717de9c4a8fb95d",
   "stimuli_byte_identical_to_frozen": true,
   "blind_isolated_subprocess": true,
@@ -97,7 +97,7 @@
   "generalization_tests": {
     "status": "PASS_11_OFFLINE_SYNTHETIC_TESTS",
     "command": "python3 -I -B -m unittest discover -s . -p test_av_event_meter.py -v",
-    "test_sha256": "a2d462436b83e55e5395be68acaf470b25e88e76c70dac2c49fb35663c344e06",
+    "test_sha256": "608506051c10c7ff7f6ad3fcd8cde2a05d5065e433cdd8a278d77d716de0137a",
     "coverage": [
       "0/1/4/7 events at irregular times",
       "25 and 30 fps; 24 fps video-only",
@@ -129,7 +129,8 @@
     "sample-level onset refinement and per-event resolution fields",
     "bounded-memory streaming with numpy; audio and video measured in parallel",
     "first-block baseline padding so a background present from t=0 is not an onset",
-    "consensus offset pairing with AMBIGUOUS verdict (first real-opening injection run 38992560157 detected 30/30 audio and 30/30 video events with zero spurious events but failed on nearest-neighbour pairing against natural music onsets)"
+    "consensus offset pairing with AMBIGUOUS verdict (first real-opening injection run 38992560157 detected 30/30 audio and 30/30 video events with zero spurious events but failed on nearest-neighbour pairing against natural music onsets)",
+    "fewer than 3 consensus pairs gives verdict LOW_SUPPORT (offset still reported): one or two coincidences can occur by chance in real content"
   ],
   "speed": {
     "40s_1080p30_stereo_seconds": 2.2,

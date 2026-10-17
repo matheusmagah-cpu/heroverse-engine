@@ -234,9 +234,10 @@ def pair(audio_events, video_events):
     onset within that event's frame resolution of video + offset). Nearest
     neighbour pairing is not used: in real content many audio onsets (music
     notes) lie near each picture change. With fewer than MIN_CONSENSUS pairs the
-    verdict is given only if every supported visual event has exactly one audio
-    onset within +/-1 s. If a clearly different offset (more than two pairing
-    tolerances away) has equal support, the verdict is AMBIGUOUS as well."""
+    offset is AMBIGUOUS if any paired visual event has another audio onset
+    within +/-1 s, or if a clearly different offset (more than two pairing
+    tolerances away) has equal support; otherwise it is reported with verdict
+    LOW_SUPPORT, because one or two coincidences can occur by chance."""
     audio = np.array(sorted(e["onset_seconds"] for e in audio_events))
     audio_resolution = max((e["resolution_seconds"] for e in audio_events), default=0.0)
     if not len(audio) or not video_events:
@@ -281,6 +282,8 @@ def pair(audio_events, video_events):
         return {"pairs": rows, "median_offset_seconds": None, "verdict": "AMBIGUOUS",
                 "consensus_pairs": len(pairs), "visual_events": len(video_events)}
     verdict = "IN_SYNC" if SYNC_LEAD_LIMIT <= offset <= SYNC_LAG_LIMIT else "OUT_OF_SYNC"
+    if len(pairs) < MIN_CONSENSUS:
+        verdict = "LOW_SUPPORT"
     return {"pairs": rows, "median_offset_seconds": round(offset, 6), "verdict": verdict,
             "consensus_pairs": len(pairs), "visual_events": len(video_events),
             "sign": "positive means sound lags picture",
