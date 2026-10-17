@@ -12,6 +12,11 @@ T="${T:-${RUNNER_TEMP:-/tmp}}"; ROOT="$(pwd)"; QA_FAILED=""
 stage() { echo "::group::$1"; date -u +%H:%M:%S; }
 end() { echo "::endgroup::"; }
 
+stage "Free runner disk (unused preinstalled SDKs) and record space"
+sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL 2>/dev/null || true
+df -h / "$T" | tail -n +1
+end
+
 stage "Tools and pinned runtimes"
 sudo apt-get update -qq
 sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core >/dev/null
@@ -49,6 +54,7 @@ stage "Assemble"
 "$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/work" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac"
 end
 
+df -h "$T" | tail -1
 stage "Shorts: analysis of the whole video, own edit per Short, watched review"
 mkdir -p "$T/work/shorts"
 ( "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 5 &&

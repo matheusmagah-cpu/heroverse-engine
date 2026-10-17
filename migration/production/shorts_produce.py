@@ -139,7 +139,7 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
         else:
             run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "30", "-t", f"{length + fade:.3f}", "-i", str(p),
                  "-vf", f"scale={int(VW * 1.1)}:{int(VH * 1.1)},zoompan=z='1+0.0008*on':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s={VW}x{VH}:fps=30",
-                 "-c:v", "libx264", "-preset", "ultrafast", "-crf", "12", "-pix_fmt", "yuv420p", str(c)])
+                 "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p", str(c)])
         clips.append(c)
     # cross-fade the scenes into one background track
     inputs = sum((["-i", str(c)] for c in clips), [])
@@ -150,7 +150,7 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
         last = label
     bg = tmp / "bg.mp4"
     run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(graph) if graph else "[0:v]null", "-map",
-         last if graph else "0:v", "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "12", "-pix_fmt", "yuv420p", str(bg)])
+         last if graph else "0:v", "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p", str(bg)])
     hook, reference = moment["hook"], moment.get("reference")
     (tmp / "s.ass").write_text(ass(moment, hook, reference, dur))
     graded_fig = tmp / "figure.png"
