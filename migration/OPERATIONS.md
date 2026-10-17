@@ -88,17 +88,15 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 4. **After publication:** the finished files are deleted from the release once YouTube confirms the upload.
 
 ## Status
-- **pilot-002:** cinematic render running (private). The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT.
-- **Mining:**
-  - Structure v2 on 4 teaching channels is done (`evidence/structure-mining/20261017`).
-  - Clean prayer channels (United Prayer, Morning Grace Prayers, Prayer of Hope, Mercy Harbor Gospel) are being mined.
+- **pilot-002:** cinematic render running on heroverse-runner (run 39062600672, from 19:28 UTC 2026-10-17; private run 39058782907 cancelled). The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT (decide by 08:30 UTC). If the Shorts come back `NOT_REVIEWED_NO_KEY`, run the review privately.
+- **Mining (`evidence/structure-mining/20261017`, measured in `measured.json`):**
+  - Teaching: 4 channels, done.
+  - Prayer (run 39060108443): United Prayer is off-format now (non-English livestreams, no narration), excluded by the < 40 wpm rule. Prayer of Hope's ~1 h videos mostly fall under 90% coverage. Usable prayer winners: 2 (Morning Grace).
   - Grace & Glory is excluded (borrowed identity/recordings).
+  - Accuracy check: the 12 windows were refused by the RapidAPI daily cap (30 jobs, spent on 2026-10-17); re-request after 00:00 UTC.
+- **Secrets:** `HERO_GEMINI_API_KEY` in heroverse-engine; `HERO_ENGINE_PAT` in heroverse-runner (checkout works); the runner's Gemini key is unknown. Keep every Gemini step in the private repo.
+- **Render path:** the runner is the heavy-render extra; private `pilot-render-stills.yml` is the fallback. Goal: long video plus Shorts in ~40 private runner-minutes (depth parallax on the opening and Shorts only, reuse voice/images when the script hash is unchanged, single-pass assembly), from run 39058782907/39062600672 stage timings.
 - **Next:**
-  1. Accuracy check of the mining (native windows vs verbatim openings).
-  2. Measured modeling spec (`blueprint_stats.py`).
-  3. Scripts.
-  4. Automate the daily chain.
-- **Runner:**
-  - `HERO_ENGINE_PAT` is set and the checkout works.
-  - The pilot-002 cinematic render is running on heroverse-runner (run 39062600672, from 19:28 UTC 2026-10-17). The private run was cancelled.
-  - Whether `HERO_GEMINI_API_KEY` exists in the runner is unknown. If the Shorts come back NOT_REVIEWED, run the review privately.
+  1. Modeling spec (`strategy/MODELING_SPEC.md`).
+  2. Scripts.
+  3. Automate the daily chain.
