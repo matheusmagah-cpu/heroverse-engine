@@ -13,7 +13,9 @@ NOW = dt.datetime(2026, 10, 17, 12, tzinfo=dt.timezone.utc)
 
 
 def ledger():
-    return copy.deepcopy(json.loads(a.LEDGER.read_text()))
+    """The real ledger's policy with no claims, so tests never depend on history."""
+    base = json.loads(a.LEDGER.read_text())
+    return dict(copy.deepcopy(base), claims=[])
 
 
 class Guards(unittest.TestCase):
