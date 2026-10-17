@@ -13,6 +13,8 @@ for window in "${WINDOWS[@]}"; do
   IFS=':' read -r VIDEO START END <<< "$window"
   rid="acq-$VIDEO-$START-$END-v1"; out="$RUNNER_TEMP/$rid"; asset=""
   echo "=== $rid"
+  # Sync the ledger first: another run may have recorded claims since checkout.
+  git pull --rebase -q origin main || { echo "LEDGER_SYNC_FAILED_STOP"; exit 1; }
   if ! python3 -I -B migration/acquisition/acquire_window.py reserve "$VIDEO" "$START" "$END"; then
     echo "RESERVE_REFUSED $rid (no effect)"; continue
   fi
