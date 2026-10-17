@@ -29,12 +29,19 @@ jobs:
           day=$(date -u +%Y%m%d)
           echo "DAY=$day" >> "$GITHUB_ENV"
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/market_panel.py "$RUNNER_TEMP/market-panel-$day.json" 7500 "migration/evidence/market-panel/panel-$day.json"
+      - name: Market model and scoring of registered forecasts
+        run: |
+          python3 -I -B migration/mining/ypp_market_model.py "migration/evidence/ypp-market-model-$DAY.json" "migration/evidence/market-panel/panel-$DAY.json"
+          for reg in migration/evidence/market-forecast-registered-*.json; do
+            python3 -I -B migration/mining/market_forecast.py evaluate "$reg" "migration/evidence/market-panel/panel-$DAY.json" \
+              "migration/evidence/market-forecast-eval-$(basename "$reg" .json | sed 's/market-forecast-registered-//')-at-$DAY.json"
+          done
       - name: Raw panel to the private release, compact panel to Git
         run: |
           gzip -9 "$RUNNER_TEMP/market-panel-$DAY.json"
           gh release upload "$TAG" "$RUNNER_TEMP/market-panel-$DAY.json.gz" --repo "$GITHUB_REPOSITORY" --clobber
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add migration/evidence/market-panel
+          git add migration/evidence/market-panel migration/evidence/ypp-market-model-*.json migration/evidence/market-forecast-eval-*.json
           git commit -q -m "Record market panel $DAY (run $GITHUB_RUN_ID)"
           git pull --rebase -q origin main && git push -q origin HEAD:main

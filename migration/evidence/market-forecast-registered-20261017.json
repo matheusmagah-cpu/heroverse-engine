@@ -1,0 +1,3903 @@
+{
+"version": "market-forecast-v1",
+"registered_from_panel": "2026-10-17T10:28:07Z",
+"method": "lifetime average daily subscriber gain carried forward; crossing probability from same-strategy channels 13-43 days older in the same panel (cross-sectional)",
+"baseline": "subscribers unchanged; constant crossing probability equal to the panel-wide share",
+"pass_criteria_preregistered": {
+"subscribers_mae_beats_baseline": true,
+"brier_beats_constant": true,
+"min_scored_channels": 30
+},
+"predictions": [
+{
+"channel_id": "UC-Db3mjLVRdNUlIKUjE98Pw",
+"strategy": "shorts_heavy",
+"activity_days": 92,
+"subscribers_now": 38300,
+"eligible_now": false,
+"subscribers_d7": 41214,
+"subscribers_d28": 49957,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UC-EDiibHqD07HjFQnQNHurg",
+"strategy": "shorts_heavy",
+"activity_days": 27,
+"subscribers_now": 246,
+"eligible_now": false,
+"subscribers_d7": 310,
+"subscribers_d28": 501,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UC-HfKjQacUXnQltt8A6xtqA",
+"strategy": "shorts_heavy",
+"activity_days": 30,
+"subscribers_now": 744,
+"eligible_now": false,
+"subscribers_d7": 918,
+"subscribers_d28": 1438,
+"p_eligible_d28": 0.051
+},
+{
+"channel_id": "UC-KEIXJBkL05aVJSVPe0pjA",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 1,
+"eligible_now": false,
+"subscribers_d7": 8,
+"subscribers_d28": 29,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UC-KH1RlUrzU6TMjiMIMNolg",
+"strategy": "shorts_heavy",
+"activity_days": 66,
+"subscribers_now": 2030,
+"eligible_now": false,
+"subscribers_d7": 2245,
+"subscribers_d28": 2891,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UC-My9rdf-NmJluG9jvGW3qA",
+"strategy": "shorts_heavy",
+"activity_days": 5,
+"subscribers_now": 23,
+"eligible_now": false,
+"subscribers_d7": 55,
+"subscribers_d28": 152,
+"p_eligible_d28": 0.04
+},
+{
+"channel_id": "UC-ZPFff9ad2dHDEsSY2S_Ug",
+"strategy": "shorts_heavy",
+"activity_days": 60,
+"subscribers_now": 1780,
+"eligible_now": false,
+"subscribers_d7": 1988,
+"subscribers_d28": 2611,
+"p_eligible_d28": 0.091
+},
+{
+"channel_id": "UC-qA3eXHA7DeZGz0uZVNQZg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 3,
+"subscribers_now": 14,
+"eligible_now": false,
+"subscribers_d7": 47,
+"subscribers_d28": 145,
+"p_eligible_d28": 0.25
+},
+{
+"channel_id": "UC-rTiKMoDWKqW7qJD_jHHUQ",
+"strategy": "shorts_heavy",
+"activity_days": 94,
+"subscribers_now": 20500,
+"eligible_now": false,
+"subscribers_d7": 22027,
+"subscribers_d28": 26606,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UC0HAPNnzfEbg8mWj6Vxv5HA",
+"strategy": "shorts_heavy",
+"activity_days": 3,
+"subscribers_now": 9,
+"eligible_now": false,
+"subscribers_d7": 30,
+"subscribers_d28": 93,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UC0VpXoY1ftMGLQCCtoL98kA",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 8,
+"eligible_now": false,
+"subscribers_d7": 64,
+"subscribers_d28": 232,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UC0dewAd-d7XkJ2gC90EA0kg",
+"strategy": "shorts_heavy",
+"activity_days": 29,
+"subscribers_now": 296,
+"eligible_now": false,
+"subscribers_d7": 367,
+"subscribers_d28": 582,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UC0f8O3UWTBbmoFR2ifQrhOA",
+"strategy": "shorts_heavy",
+"activity_days": 70,
+"subscribers_now": 342,
+"eligible_now": false,
+"subscribers_d7": 376,
+"subscribers_d28": 479,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UC0jHzU_3qnqCd4HdGMsF_YA",
+"strategy": "shorts_heavy",
+"activity_days": 33,
+"subscribers_now": 51100,
+"eligible_now": false,
+"subscribers_d7": 61939,
+"subscribers_d28": 94458,
+"p_eligible_d28": 0.067
+},
+{
+"channel_id": "UC1E9iL9vqGNJ_kWeJT9gTjA",
+"strategy": "shorts_heavy",
+"activity_days": 23,
+"subscribers_now": 87,
+"eligible_now": false,
+"subscribers_d7": 113,
+"subscribers_d28": 193,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UC1JLJBl8VzGbpDuwGoD3tNg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 11,
+"subscribers_now": 24,
+"eligible_now": false,
+"subscribers_d7": 39,
+"subscribers_d28": 85,
+"p_eligible_d28": 0.273
+},
+{
+"channel_id": "UC1ZhzyspJ2fTZ6p6EYAyPRw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 125,
+"subscribers_now": 920,
+"eligible_now": false,
+"subscribers_d7": 972,
+"subscribers_d28": 1126,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC1_FY6hpU3GICKTMl0x4PNw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 17,
+"subscribers_now": 464,
+"eligible_now": false,
+"subscribers_d7": 655,
+"subscribers_d28": 1228,
+"p_eligible_d28": 0.385
+},
+{
+"channel_id": "UC1sWFriEbx8ajWAHPjrzf-g",
+"strategy": "shorts_heavy",
+"activity_days": 12,
+"subscribers_now": 48,
+"eligible_now": false,
+"subscribers_d7": 76,
+"subscribers_d28": 160,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UC20k5r0R_ZepjfsDjVIzO6A",
+"strategy": "shorts_heavy",
+"activity_days": 11,
+"subscribers_now": 115,
+"eligible_now": false,
+"subscribers_d7": 188,
+"subscribers_d28": 408,
+"p_eligible_d28": 0.028
+},
+{
+"channel_id": "UC2BY52TEPAjflGen0Ib0whg",
+"strategy": "shorts_heavy",
+"activity_days": 11,
+"subscribers_now": 183,
+"eligible_now": false,
+"subscribers_d7": 299,
+"subscribers_d28": 649,
+"p_eligible_d28": 0.028
+},
+{
+"channel_id": "UC2QXZRxi6V5PYT4xyBQ6x8w",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 9,
+"subscribers_now": 77,
+"eligible_now": false,
+"subscribers_d7": 137,
+"subscribers_d28": 317,
+"p_eligible_d28": 0.333
+},
+{
+"channel_id": "UC2U18ZjPjQsWoXf7urf4OOQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 2,
+"subscribers_now": 29,
+"eligible_now": false,
+"subscribers_d7": 130,
+"subscribers_d28": 435,
+"p_eligible_d28": 0.231
+},
+{
+"channel_id": "UC2WKFGnZcieCfVbqJYw1cXw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 37,
+"subscribers_now": 1580,
+"eligible_now": true,
+"subscribers_d7": 1879,
+"subscribers_d28": 2776,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC34PU9A8xR1K8hXdIU1Gamw",
+"strategy": "shorts_heavy",
+"activity_days": 31,
+"subscribers_now": 10600,
+"eligible_now": false,
+"subscribers_d7": 12994,
+"subscribers_d28": 20174,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UC3a25sC9juSJy-3VHeYJwjA",
+"strategy": "shorts_heavy",
+"activity_days": 118,
+"subscribers_now": 15500,
+"eligible_now": false,
+"subscribers_d7": 16419,
+"subscribers_d28": 19178,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC3gzcdVCC7UVmgH63NJbgBg",
+"strategy": "shorts_heavy",
+"activity_days": 88,
+"subscribers_now": 352,
+"eligible_now": false,
+"subscribers_d7": 380,
+"subscribers_d28": 464,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UC3pVjjOn_qNs7KgrfFewh-Q",
+"strategy": "shorts_heavy",
+"activity_days": 17,
+"subscribers_now": 1210,
+"eligible_now": false,
+"subscribers_d7": 1708,
+"subscribers_d28": 3203,
+"p_eligible_d28": 0.031
+},
+{
+"channel_id": "UC42B8iTFi5m6V1r6jis7cnw",
+"strategy": "shorts_heavy",
+"activity_days": 3,
+"subscribers_now": 164,
+"eligible_now": false,
+"subscribers_d7": 547,
+"subscribers_d28": 1695,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UC4MPA25oGzaYT-pe5LnzPTg",
+"strategy": "shorts_heavy",
+"activity_days": 3,
+"subscribers_now": 202,
+"eligible_now": false,
+"subscribers_d7": 673,
+"subscribers_d28": 2087,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UC4sd0qJfLKhyhfvonVyOe4A",
+"strategy": "shorts_heavy",
+"activity_days": 60,
+"subscribers_now": 1320,
+"eligible_now": false,
+"subscribers_d7": 1474,
+"subscribers_d28": 1936,
+"p_eligible_d28": 0.091
+},
+{
+"channel_id": "UC4yGb07f6pK5e4G5AQu09vg",
+"strategy": "shorts_heavy",
+"activity_days": 13,
+"subscribers_now": 22000,
+"eligible_now": false,
+"subscribers_d7": 33846,
+"subscribers_d28": 69385,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UC4zRzx_hh5DB9vL8exnCpbA",
+"strategy": "long_20min_plus_daily",
+"activity_days": 53,
+"subscribers_now": 53,
+"eligible_now": false,
+"subscribers_d7": 60,
+"subscribers_d28": 81,
+"p_eligible_d28": 0.667
+},
+{
+"channel_id": "UC55pvJ0CJF-5r7pVkFatuOQ",
+"strategy": "shorts_heavy",
+"activity_days": 41,
+"subscribers_now": 7,
+"eligible_now": false,
+"subscribers_d7": 8,
+"subscribers_d28": 12,
+"p_eligible_d28": 0.091
+},
+{
+"channel_id": "UC59dm_A7uRyj-32HOYLMPyg",
+"strategy": "shorts_heavy",
+"activity_days": 10,
+"subscribers_now": 2940,
+"eligible_now": true,
+"subscribers_d7": 4998,
+"subscribers_d28": 11172,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC5BBRMSULgRleqylFUaFXDw",
+"strategy": "shorts_heavy",
+"activity_days": 11,
+"subscribers_now": 32,
+"eligible_now": false,
+"subscribers_d7": 52,
+"subscribers_d28": 113,
+"p_eligible_d28": 0.028
+},
+{
+"channel_id": "UC5Jyqgf3kHIVep7qcyESKQQ",
+"strategy": "shorts_heavy",
+"activity_days": 44,
+"subscribers_now": 907,
+"eligible_now": false,
+"subscribers_d7": 1051,
+"subscribers_d28": 1484,
+"p_eligible_d28": 0.094
+},
+{
+"channel_id": "UC5KU3BZVuBk4xDXEzfglz6g",
+"strategy": "shorts_heavy",
+"activity_days": 50,
+"subscribers_now": 1200,
+"eligible_now": false,
+"subscribers_d7": 1368,
+"subscribers_d28": 1872,
+"p_eligible_d28": 0.1
+},
+{
+"channel_id": "UC5PjzM0_oTzVSMGt0n1CbSA",
+"strategy": "long_3_to_20min",
+"activity_days": 1,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.286
+},
+{
+"channel_id": "UC5d0kNPNAQ5aNQKH8lU33WQ",
+"strategy": "long_20min_plus_daily",
+"activity_days": 72,
+"subscribers_now": 4050,
+"eligible_now": true,
+"subscribers_d7": 4444,
+"subscribers_d28": 5625,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC5qoe3Ma6SNcmtKWwEshAEQ",
+"strategy": "shorts_heavy",
+"activity_days": 17,
+"subscribers_now": 12,
+"eligible_now": false,
+"subscribers_d7": 17,
+"subscribers_d28": 32,
+"p_eligible_d28": 0.031
+},
+{
+"channel_id": "UC635M1W6qeybarshE3-4V6g",
+"strategy": "long_20min_plus_slower",
+"activity_days": 36,
+"subscribers_now": 4,
+"eligible_now": false,
+"subscribers_d7": 5,
+"subscribers_d28": 7,
+"p_eligible_d28": 0.667
+},
+{
+"channel_id": "UC64yR5LzeXUOMCdESVmwEWA",
+"strategy": "shorts_heavy",
+"activity_days": 114,
+"subscribers_now": 82900,
+"eligible_now": false,
+"subscribers_d7": 87990,
+"subscribers_d28": 103261,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC6FFM3HMHz7CGXPv9V21SQA",
+"strategy": "shorts_heavy",
+"activity_days": 4,
+"subscribers_now": 162,
+"eligible_now": false,
+"subscribers_d7": 446,
+"subscribers_d28": 1296,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UC6S9aIJJmb4P14dRJc8VsJQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 38,
+"subscribers_now": 100,
+"eligible_now": false,
+"subscribers_d7": 118,
+"subscribers_d28": 174,
+"p_eligible_d28": 0.143
+},
+{
+"channel_id": "UC6qDqMOUwXJSCWScHSfhDmg",
+"strategy": "shorts_heavy",
+"activity_days": 20,
+"subscribers_now": 537,
+"eligible_now": false,
+"subscribers_d7": 725,
+"subscribers_d28": 1289,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UC6xEUewtCvNea1Fz6xbPeTA",
+"strategy": "shorts_heavy",
+"activity_days": 69,
+"subscribers_now": 3370,
+"eligible_now": false,
+"subscribers_d7": 3712,
+"subscribers_d28": 4738,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UC7-_S5NnrMKBvKjw18y3vVg",
+"strategy": "shorts_heavy",
+"activity_days": 4,
+"subscribers_now": 628,
+"eligible_now": false,
+"subscribers_d7": 1727,
+"subscribers_d28": 5024,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UC74hHtaak7dSNydGlF6VDkQ",
+"strategy": "shorts_heavy",
+"activity_days": 47,
+"subscribers_now": 452,
+"eligible_now": false,
+"subscribers_d7": 519,
+"subscribers_d28": 721,
+"p_eligible_d28": 0.1
+},
+{
+"channel_id": "UC78yBNo0docvA6_NMx2xgMg",
+"strategy": "shorts_heavy",
+"activity_days": 24,
+"subscribers_now": 1130,
+"eligible_now": false,
+"subscribers_d7": 1460,
+"subscribers_d28": 2448,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UC7FmlY35yJ9RyMeMpZmPe-Q",
+"strategy": "shorts_heavy",
+"activity_days": 33,
+"subscribers_now": 718,
+"eligible_now": false,
+"subscribers_d7": 870,
+"subscribers_d28": 1327,
+"p_eligible_d28": 0.067
+},
+{
+"channel_id": "UC7I-R5I2cvYb0e5EY_QL30Q",
+"strategy": "long_3_to_20min",
+"activity_days": 127,
+"subscribers_now": 757,
+"eligible_now": false,
+"subscribers_d7": 799,
+"subscribers_d28": 924,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC7fVuhOXl_z0fcjbwltWNHw",
+"strategy": "shorts_heavy",
+"activity_days": 54,
+"subscribers_now": 901,
+"eligible_now": false,
+"subscribers_d7": 1018,
+"subscribers_d28": 1368,
+"p_eligible_d28": 0.109
+},
+{
+"channel_id": "UC7s0RuyvGE-BsimIlAd60dQ",
+"strategy": "shorts_heavy",
+"activity_days": 2,
+"subscribers_now": 16,
+"eligible_now": false,
+"subscribers_d7": 72,
+"subscribers_d28": 240,
+"p_eligible_d28": 0.037
+},
+{
+"channel_id": "UC7wXf-kqrD4x7o6pPpzIEDw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 106,
+"subscribers_now": 2830,
+"eligible_now": false,
+"subscribers_d7": 3017,
+"subscribers_d28": 3578,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC7z5WOXg00TFbIgr03BdwDQ",
+"strategy": "long_3_to_20min",
+"activity_days": 2,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.286
+},
+{
+"channel_id": "UC8L3CDfwJ_lFxsHoWIqclDg",
+"strategy": "shorts_heavy",
+"activity_days": 23,
+"subscribers_now": 393,
+"eligible_now": false,
+"subscribers_d7": 513,
+"subscribers_d28": 871,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UC8T4yly6kM1e8k8XK89IY1g",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 5,
+"eligible_now": false,
+"subscribers_d7": 40,
+"subscribers_d28": 145,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UC8p7Uzlzr7FQgbrSILS2kZA",
+"strategy": "long_20min_plus_daily",
+"activity_days": 58,
+"subscribers_now": 49,
+"eligible_now": false,
+"subscribers_d7": 55,
+"subscribers_d28": 73,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UC8sMDV0U8uOz4iYKZdKMofg",
+"strategy": "shorts_heavy",
+"activity_days": 6,
+"subscribers_now": 431,
+"eligible_now": false,
+"subscribers_d7": 934,
+"subscribers_d28": 2442,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UC97GeMFTZ8RsEpE0zXLwQsw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 7,
+"subscribers_now": 17,
+"eligible_now": false,
+"subscribers_d7": 34,
+"subscribers_d28": 85,
+"p_eligible_d28": 0.333
+},
+{
+"channel_id": "UC9E0zdBBL_9ZpwtoXJFYM5A",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 3,
+"subscribers_now": 32,
+"eligible_now": false,
+"subscribers_d7": 107,
+"subscribers_d28": 331,
+"p_eligible_d28": 0.25
+},
+{
+"channel_id": "UC9PAc0HGh7eYOGNJxhUHg_Q",
+"strategy": "shorts_heavy",
+"activity_days": 2,
+"subscribers_now": 19,
+"eligible_now": false,
+"subscribers_d7": 86,
+"subscribers_d28": 285,
+"p_eligible_d28": 0.037
+},
+{
+"channel_id": "UC9Q4wNOqygDufgRl_b2ylBg",
+"strategy": "shorts_heavy",
+"activity_days": 78,
+"subscribers_now": 4,
+"eligible_now": false,
+"subscribers_d7": 4,
+"subscribers_d28": 5,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UC9h120bnehUOekoQ3EoiF8w",
+"strategy": "shorts_heavy",
+"activity_days": 33,
+"subscribers_now": 12300,
+"eligible_now": false,
+"subscribers_d7": 14909,
+"subscribers_d28": 22736,
+"p_eligible_d28": 0.067
+},
+{
+"channel_id": "UC9ivc6ZCodWJ0xsF-thwUeA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 3,
+"subscribers_now": 1,
+"eligible_now": false,
+"subscribers_d7": 3,
+"subscribers_d28": 10,
+"p_eligible_d28": 0.25
+},
+{
+"channel_id": "UC9nhA_T-yIi4brlG9kj7m3Q",
+"strategy": "shorts_heavy",
+"activity_days": 11,
+"subscribers_now": 9,
+"eligible_now": false,
+"subscribers_d7": 15,
+"subscribers_d28": 32,
+"p_eligible_d28": 0.028
+},
+{
+"channel_id": "UC9tNtckvhG5hqV_9qpYrDWA",
+"strategy": "shorts_heavy",
+"activity_days": 26,
+"subscribers_now": 6760,
+"eligible_now": false,
+"subscribers_d7": 8580,
+"subscribers_d28": 14040,
+"p_eligible_d28": 0.018
+},
+{
+"channel_id": "UCAAgcESQylQV7H8sKwNuKDg",
+"strategy": "shorts_heavy",
+"activity_days": 117,
+"subscribers_now": 3560,
+"eligible_now": false,
+"subscribers_d7": 3773,
+"subscribers_d28": 4412,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCAF-czK1C49KN1PJC6F3fbA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 89,
+"subscribers_now": 983,
+"eligible_now": false,
+"subscribers_d7": 1060,
+"subscribers_d28": 1292,
+"p_eligible_d28": 0.375
+},
+{
+"channel_id": "UCAOiKo0Ad8F_eRdxgpQSW_A",
+"strategy": "long_20min_plus_slower",
+"activity_days": 45,
+"subscribers_now": 1690,
+"eligible_now": true,
+"subscribers_d7": 1953,
+"subscribers_d28": 2742,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCAmIjpuiekFQhvFo1BP6tZQ",
+"strategy": "long_20min_plus_daily",
+"activity_days": 16,
+"subscribers_now": 2,
+"eligible_now": false,
+"subscribers_d7": 3,
+"subscribers_d28": 6,
+"p_eligible_d28": 0.385
+},
+{
+"channel_id": "UCAnI_VX2_HbjsdnphHZfQQQ",
+"strategy": "shorts_heavy",
+"activity_days": 10,
+"subscribers_now": 331,
+"eligible_now": false,
+"subscribers_d7": 563,
+"subscribers_d28": 1258,
+"p_eligible_d28": 0.027
+},
+{
+"channel_id": "UCArGF_uJMacDJ1J6azzEWsw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 68,
+"subscribers_now": 808,
+"eligible_now": false,
+"subscribers_d7": 891,
+"subscribers_d28": 1141,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCB7wGmdJ4BPHc4Y8QGKQUIw",
+"strategy": "shorts_heavy",
+"activity_days": 29,
+"subscribers_now": 2310,
+"eligible_now": false,
+"subscribers_d7": 2868,
+"subscribers_d28": 4540,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCB9JLcHgVxmXUS1LYxI3x8g",
+"strategy": "shorts_heavy",
+"activity_days": 19,
+"subscribers_now": 308,
+"eligible_now": false,
+"subscribers_d7": 421,
+"subscribers_d28": 762,
+"p_eligible_d28": 0.034
+},
+{
+"channel_id": "UCBOyNYszhv0QxEQCUWLu-ag",
+"strategy": "long_20min_plus_daily",
+"activity_days": 26,
+"subscribers_now": 2460,
+"eligible_now": true,
+"subscribers_d7": 3122,
+"subscribers_d28": 5109,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCByMlgG0wjx6NPRabyMqMOQ",
+"strategy": "shorts_heavy",
+"activity_days": 38,
+"subscribers_now": 124,
+"eligible_now": false,
+"subscribers_d7": 147,
+"subscribers_d28": 215,
+"p_eligible_d28": 0.074
+},
+{
+"channel_id": "UCC-sjP7BEyW59evY11eDH8w",
+"strategy": "long_3_to_20min",
+"activity_days": 67,
+"subscribers_now": 534,
+"eligible_now": false,
+"subscribers_d7": 590,
+"subscribers_d28": 757,
+"p_eligible_d28": 0.75
+},
+{
+"channel_id": "UCC4S-3SUNfzkPiqpboeP-aw",
+"strategy": "shorts_heavy",
+"activity_days": 91,
+"subscribers_now": 42100,
+"eligible_now": false,
+"subscribers_d7": 45338,
+"subscribers_d28": 55054,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCCM_wh8HJMS4XhVbLZCct4Q",
+"strategy": "shorts_heavy",
+"activity_days": 38,
+"subscribers_now": 230,
+"eligible_now": false,
+"subscribers_d7": 272,
+"subscribers_d28": 399,
+"p_eligible_d28": 0.074
+},
+{
+"channel_id": "UCCjZrEZb9cUFvAXYwnVYHnw",
+"strategy": "shorts_heavy",
+"activity_days": 31,
+"subscribers_now": 367,
+"eligible_now": false,
+"subscribers_d7": 450,
+"subscribers_d28": 698,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCCkNnZJt_wcmtf6vzPUWF6A",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 5,
+"eligible_now": false,
+"subscribers_d7": 40,
+"subscribers_d28": 145,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCD0bv2sY4KOl9EHuKoCXExA",
+"strategy": "shorts_heavy",
+"activity_days": 2,
+"subscribers_now": 915,
+"eligible_now": false,
+"subscribers_d7": 4118,
+"subscribers_d28": 13725,
+"p_eligible_d28": 0.037
+},
+{
+"channel_id": "UCDItJQNr43XtyYLlBAg1Fqg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 59,
+"subscribers_now": 322,
+"eligible_now": false,
+"subscribers_d7": 360,
+"subscribers_d28": 475,
+"p_eligible_d28": 0.2
+},
+{
+"channel_id": "UCDd4ho0-YJHN3QKvKJBY8Ew",
+"strategy": "shorts_heavy",
+"activity_days": 75,
+"subscribers_now": 411,
+"eligible_now": false,
+"subscribers_d7": 449,
+"subscribers_d28": 564,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCDuVvrGnVT-r3s4nddkJJng",
+"strategy": "long_20min_plus_daily",
+"activity_days": 67,
+"subscribers_now": 30900,
+"eligible_now": true,
+"subscribers_d7": 34128,
+"subscribers_d28": 43813,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCE3v3Bm6zJScgmJmfFZwFkw",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 49,
+"eligible_now": false,
+"subscribers_d7": 392,
+"subscribers_d28": 1421,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCECWAnevToK6NwwlIn9AbIA",
+"strategy": "shorts_heavy",
+"activity_days": 75,
+"subscribers_now": 580000,
+"eligible_now": true,
+"subscribers_d7": 634133,
+"subscribers_d28": 796533,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCETWHEe1nj7SFiTO3ocLQEw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 19,
+"subscribers_now": 2660,
+"eligible_now": true,
+"subscribers_d7": 3640,
+"subscribers_d28": 6580,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCEhud0TRTQa8TJ9By6ms5fQ",
+"strategy": "shorts_heavy",
+"activity_days": 112,
+"subscribers_now": 81300,
+"eligible_now": false,
+"subscribers_d7": 86381,
+"subscribers_d28": 101625,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCEp4ioHbfnrqQP7qXUdbiPg",
+"strategy": "long_20min_plus_slower",
+"activity_days": 72,
+"subscribers_now": 2790,
+"eligible_now": true,
+"subscribers_d7": 3061,
+"subscribers_d28": 3875,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCEqOqpOH8abIbAj3TYkRWxw",
+"strategy": "shorts_heavy",
+"activity_days": 75,
+"subscribers_now": 2800,
+"eligible_now": false,
+"subscribers_d7": 3061,
+"subscribers_d28": 3845,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCEuoOd5V8TYYuEcH0JpnsaA",
+"strategy": "long_3_to_20min",
+"activity_days": 65,
+"subscribers_now": 954,
+"eligible_now": false,
+"subscribers_d7": 1057,
+"subscribers_d28": 1365,
+"p_eligible_d28": 1.0
+},
+{
+"channel_id": "UCF0U260sK6KcLvQsV5yj7bw",
+"strategy": "shorts_heavy",
+"activity_days": 2,
+"subscribers_now": 7,
+"eligible_now": false,
+"subscribers_d7": 32,
+"subscribers_d28": 105,
+"p_eligible_d28": 0.037
+},
+{
+"channel_id": "UCF3SHrRV5phYQVFa-1c516Q",
+"strategy": "shorts_heavy",
+"activity_days": 116,
+"subscribers_now": 770,
+"eligible_now": false,
+"subscribers_d7": 816,
+"subscribers_d28": 956,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCF7uHvuKgFWvdi7gxpPn7JA",
+"strategy": "shorts_heavy",
+"activity_days": 53,
+"subscribers_now": 1930,
+"eligible_now": false,
+"subscribers_d7": 2185,
+"subscribers_d28": 2950,
+"p_eligible_d28": 0.102
+},
+{
+"channel_id": "UCFZ2sJlrZKp1mpAr7EF4BdA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 2,
+"subscribers_now": 3,
+"eligible_now": false,
+"subscribers_d7": 14,
+"subscribers_d28": 45,
+"p_eligible_d28": 0.231
+},
+{
+"channel_id": "UCFv2sJtEPcZv5zSq9BEjgJw",
+"strategy": "shorts_heavy",
+"activity_days": 63,
+"subscribers_now": 33400,
+"eligible_now": false,
+"subscribers_d7": 37111,
+"subscribers_d28": 48244,
+"p_eligible_d28": 0.071
+},
+{
+"channel_id": "UCFyTbbIZxy1zlmvInc2IN1w",
+"strategy": "shorts_heavy",
+"activity_days": 10,
+"subscribers_now": 64,
+"eligible_now": false,
+"subscribers_d7": 109,
+"subscribers_d28": 243,
+"p_eligible_d28": 0.027
+},
+{
+"channel_id": "UCGH1GXDCNTTHkhPiLBQ3sLw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 27,
+"subscribers_now": 4750,
+"eligible_now": true,
+"subscribers_d7": 5981,
+"subscribers_d28": 9676,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCGKRcoHU90IK9au_6DG9OmA",
+"strategy": "shorts_heavy",
+"activity_days": 36,
+"subscribers_now": 19,
+"eligible_now": false,
+"subscribers_d7": 23,
+"subscribers_d28": 34,
+"p_eligible_d28": 0.067
+},
+{
+"channel_id": "UCGMgL0Tscj1FfL2nA1Keceg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 15,
+"subscribers_now": 3,
+"eligible_now": false,
+"subscribers_d7": 4,
+"subscribers_d28": 9,
+"p_eligible_d28": 0.385
+},
+{
+"channel_id": "UCGWeKdmqtSIlnGObJcbBbMA",
+"strategy": "shorts_heavy",
+"activity_days": 107,
+"subscribers_now": 3150,
+"eligible_now": false,
+"subscribers_d7": 3356,
+"subscribers_d28": 3974,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCGXF47ma0imaF7pJqXAi0aw",
+"strategy": "shorts_heavy",
+"activity_days": 36,
+"subscribers_now": 75,
+"eligible_now": false,
+"subscribers_d7": 90,
+"subscribers_d28": 133,
+"p_eligible_d28": 0.067
+},
+{
+"channel_id": "UCGbAbGhICgUNAMmGvvJCnnw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 7,
+"subscribers_now": 11,
+"eligible_now": false,
+"subscribers_d7": 22,
+"subscribers_d28": 55,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCGlS3HR7EYJwfSjNeidiDyQ",
+"strategy": "long_20min_plus_slower",
+"activity_days": 71,
+"subscribers_now": 3,
+"eligible_now": false,
+"subscribers_d7": 3,
+"subscribers_d28": 4,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCH69S8nVRmzaGG8KVJBcoWQ",
+"strategy": "shorts_heavy",
+"activity_days": 39,
+"subscribers_now": 4530,
+"eligible_now": false,
+"subscribers_d7": 5343,
+"subscribers_d28": 7782,
+"p_eligible_d28": 0.073
+},
+{
+"channel_id": "UCH9pXQ2Ma6mfZlwFCojmc5Q",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 4,
+"eligible_now": false,
+"subscribers_d7": 32,
+"subscribers_d28": 116,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCHIyKoFARzdk1nCOlKYVhww",
+"strategy": "long_20min_plus_daily",
+"activity_days": 14,
+"subscribers_now": 621,
+"eligible_now": false,
+"subscribers_d7": 932,
+"subscribers_d28": 1863,
+"p_eligible_d28": 0.462
+},
+{
+"channel_id": "UCINgslOC4UElZffSo-x4pMw",
+"strategy": "shorts_heavy",
+"activity_days": 85,
+"subscribers_now": 474,
+"eligible_now": false,
+"subscribers_d7": 513,
+"subscribers_d28": 630,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCI_VHf0uwt_ULUI3zLnkEjw",
+"strategy": "shorts_heavy",
+"activity_days": 17,
+"subscribers_now": 481,
+"eligible_now": false,
+"subscribers_d7": 679,
+"subscribers_d28": 1273,
+"p_eligible_d28": 0.031
+},
+{
+"channel_id": "UCIl6zG00SwWY3XzKQIroW0w",
+"strategy": "long_3_to_20min",
+"activity_days": 110,
+"subscribers_now": 6,
+"eligible_now": false,
+"subscribers_d7": 6,
+"subscribers_d28": 8,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCJ1UUwvwq3E_rP9BsBjx4kw",
+"strategy": "shorts_heavy",
+"activity_days": 88,
+"subscribers_now": 2150,
+"eligible_now": false,
+"subscribers_d7": 2321,
+"subscribers_d28": 2834,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCJ9KvsimBJyAtpo0cnBRX-Q",
+"strategy": "shorts_heavy",
+"activity_days": 38,
+"subscribers_now": 4140,
+"eligible_now": false,
+"subscribers_d7": 4903,
+"subscribers_d28": 7191,
+"p_eligible_d28": 0.074
+},
+{
+"channel_id": "UCJU1b6xVZm5K5rzkPf8R1hw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 26,
+"subscribers_now": 19,
+"eligible_now": false,
+"subscribers_d7": 24,
+"subscribers_d28": 39,
+"p_eligible_d28": 0.176
+},
+{
+"channel_id": "UCJnmOJ3VIUZ5UPdLCRZxIsQ",
+"strategy": "long_20min_plus_daily",
+"activity_days": 32,
+"subscribers_now": 213,
+"eligible_now": false,
+"subscribers_d7": 260,
+"subscribers_d28": 399,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCJuS7nXaaq1oKXhBAwKnNrw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 12,
+"subscribers_now": 72,
+"eligible_now": false,
+"subscribers_d7": 114,
+"subscribers_d28": 240,
+"p_eligible_d28": 0.273
+},
+{
+"channel_id": "UCKM-PTj8fyqOlmgVJqLaQ9Q",
+"strategy": "shorts_heavy",
+"activity_days": 25,
+"subscribers_now": 2,
+"eligible_now": false,
+"subscribers_d7": 3,
+"subscribers_d28": 4,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCKN1LbxlKvMGmUQwD4Cg7wg",
+"strategy": "shorts_heavy",
+"activity_days": 43,
+"subscribers_now": 1100,
+"eligible_now": false,
+"subscribers_d7": 1279,
+"subscribers_d28": 1816,
+"p_eligible_d28": 0.093
+},
+{
+"channel_id": "UCKSBIX530oEh2D7l4lp20QQ",
+"strategy": "long_3_to_20min",
+"activity_days": 66,
+"subscribers_now": 7330,
+"eligible_now": true,
+"subscribers_d7": 8107,
+"subscribers_d28": 10440,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCKqW6W_Y67uCqEGjRtRY2Xw",
+"strategy": "shorts_heavy",
+"activity_days": 23,
+"subscribers_now": 3890,
+"eligible_now": false,
+"subscribers_d7": 5074,
+"subscribers_d28": 8626,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCKxcNiYD_s5bMhN7eJClJDQ",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 1,
+"eligible_now": false,
+"subscribers_d7": 8,
+"subscribers_d28": 29,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCL14z0qKp6qMGvQ12W_fxFw",
+"strategy": "shorts_heavy",
+"activity_days": 24,
+"subscribers_now": 85,
+"eligible_now": false,
+"subscribers_d7": 110,
+"subscribers_d28": 184,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCL7kgaE0s54ZJQX3f95it4A",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 60,
+"subscribers_now": 47,
+"eligible_now": false,
+"subscribers_d7": 52,
+"subscribers_d28": 69,
+"p_eligible_d28": 0.2
+},
+{
+"channel_id": "UCLAsiYJNZ1__FLgqxd335PQ",
+"strategy": "shorts_heavy",
+"activity_days": 2,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.037
+},
+{
+"channel_id": "UCLBTKN_ebUwN_EPsyvL_p8Q",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 7,
+"eligible_now": false,
+"subscribers_d7": 56,
+"subscribers_d28": 203,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCLh2xGLtYE__TaORiqPRWmw",
+"strategy": "shorts_heavy",
+"activity_days": 24,
+"subscribers_now": 127,
+"eligible_now": false,
+"subscribers_d7": 164,
+"subscribers_d28": 275,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCLslifVaE3y8NWl1lf--1cg",
+"strategy": "shorts_heavy",
+"activity_days": 20,
+"subscribers_now": 2950,
+"eligible_now": false,
+"subscribers_d7": 3982,
+"subscribers_d28": 7080,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCLuXMSqr-nAjyjdBq_JxQUA",
+"strategy": "long_20min_plus_slower",
+"activity_days": 30,
+"subscribers_now": 4650,
+"eligible_now": true,
+"subscribers_d7": 5735,
+"subscribers_d28": 8990,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCM7AR_hWnuoRSqHJh9TRmoQ",
+"strategy": "shorts_heavy",
+"activity_days": 79,
+"subscribers_now": 7680,
+"eligible_now": false,
+"subscribers_d7": 8361,
+"subscribers_d28": 10402,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCMI-bKjZ0IFY-cXCM6xJl4A",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 117,
+"subscribers_now": 82,
+"eligible_now": false,
+"subscribers_d7": 87,
+"subscribers_d28": 102,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCMLUUYdpSZ3wZSn2RcAHMlA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 1,
+"subscribers_now": 20,
+"eligible_now": false,
+"subscribers_d7": 160,
+"subscribers_d28": 580,
+"p_eligible_d28": 0.214
+},
+{
+"channel_id": "UCMVJvhSlKvOWPhYImEadYdg",
+"strategy": "shorts_heavy",
+"activity_days": 67,
+"subscribers_now": 320,
+"eligible_now": false,
+"subscribers_d7": 353,
+"subscribers_d28": 454,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UCMWCPXrWNsmphnhMn0yMPLg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 67,
+"subscribers_now": 593,
+"eligible_now": false,
+"subscribers_d7": 655,
+"subscribers_d28": 841,
+"p_eligible_d28": 0.375
+},
+{
+"channel_id": "UCMfhY-nHT4tp-YROgfREdpg",
+"strategy": "shorts_heavy",
+"activity_days": 72,
+"subscribers_now": 28400,
+"eligible_now": true,
+"subscribers_d7": 31161,
+"subscribers_d28": 39444,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCMijVbJw_OKi-ns1VPM19EQ",
+"strategy": "shorts_heavy",
+"activity_days": 21,
+"subscribers_now": 60500,
+"eligible_now": true,
+"subscribers_d7": 80667,
+"subscribers_d28": 141167,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCMtpBOxTMa43yv1UFrGBx2g",
+"strategy": "shorts_heavy",
+"activity_days": 23,
+"subscribers_now": 118,
+"eligible_now": false,
+"subscribers_d7": 154,
+"subscribers_d28": 262,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCN7_-i-VHrmi95YJtGsSwDQ",
+"strategy": "shorts_heavy",
+"activity_days": 17,
+"subscribers_now": 993,
+"eligible_now": false,
+"subscribers_d7": 1402,
+"subscribers_d28": 2629,
+"p_eligible_d28": 0.031
+},
+{
+"channel_id": "UCNJqtHCbvUizgb-ikEiiV9w",
+"strategy": "shorts_heavy",
+"activity_days": 8,
+"subscribers_now": 3,
+"eligible_now": false,
+"subscribers_d7": 6,
+"subscribers_d28": 14,
+"p_eligible_d28": 0.041
+},
+{
+"channel_id": "UCNUP8i-OFWyQK8xSWjZ0QuQ",
+"strategy": "shorts_heavy",
+"activity_days": 69,
+"subscribers_now": 237,
+"eligible_now": false,
+"subscribers_d7": 261,
+"subscribers_d28": 333,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCNWzVtwq0B1aOZ817aOHOVA",
+"strategy": "shorts_heavy",
+"activity_days": 9,
+"subscribers_now": 82,
+"eligible_now": false,
+"subscribers_d7": 146,
+"subscribers_d28": 337,
+"p_eligible_d28": 0.027
+},
+{
+"channel_id": "UCNjJ0ogbBKZcWMMh6PZisow",
+"strategy": "long_3_to_20min",
+"activity_days": 57,
+"subscribers_now": 27100,
+"eligible_now": true,
+"subscribers_d7": 30428,
+"subscribers_d28": 40412,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCNkAwND6xfeYfHcgngED_yA",
+"strategy": "shorts_heavy",
+"activity_days": 90,
+"subscribers_now": 1690,
+"eligible_now": false,
+"subscribers_d7": 1821,
+"subscribers_d28": 2216,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCO-OPraAysAak6Y7jYbzbpA",
+"strategy": "shorts_heavy",
+"activity_days": 27,
+"subscribers_now": 1970,
+"eligible_now": false,
+"subscribers_d7": 2481,
+"subscribers_d28": 4013,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCOI8GyG601v1bIf-UBMB3Rg",
+"strategy": "shorts_heavy",
+"activity_days": 2,
+"subscribers_now": 249,
+"eligible_now": false,
+"subscribers_d7": 1120,
+"subscribers_d28": 3735,
+"p_eligible_d28": 0.037
+},
+{
+"channel_id": "UCOP4b21e6DXSlbM_WtCyD7A",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 43,
+"subscribers_now": 4980,
+"eligible_now": true,
+"subscribers_d7": 5791,
+"subscribers_d28": 8223,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCOUGe50NDhFRgXbWiujWrrg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 89,
+"subscribers_now": 5460,
+"eligible_now": true,
+"subscribers_d7": 5889,
+"subscribers_d28": 7178,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCO_F-khbM8xLrPW_Qvey4Jw",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 17,
+"eligible_now": false,
+"subscribers_d7": 136,
+"subscribers_d28": 493,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCOarne7ePj45u0PXa5JtVMQ",
+"strategy": "shorts_heavy",
+"activity_days": 62,
+"subscribers_now": 780,
+"eligible_now": false,
+"subscribers_d7": 868,
+"subscribers_d28": 1132,
+"p_eligible_d28": 0.097
+},
+{
+"channel_id": "UCOpBiq8Ysm7SFI27WGKrWKA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 1,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.214
+},
+{
+"channel_id": "UCOw8XedrTNMWCd1OtL3cK9w",
+"strategy": "shorts_heavy",
+"activity_days": 47,
+"subscribers_now": 17400,
+"eligible_now": true,
+"subscribers_d7": 19991,
+"subscribers_d28": 27766,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCOzm0f1p9Oyf6iG5Ln7n77g",
+"strategy": "shorts_heavy",
+"activity_days": 103,
+"subscribers_now": 22200,
+"eligible_now": false,
+"subscribers_d7": 23709,
+"subscribers_d28": 28235,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCP3PBBXzzf0l1uJQ-69q7tg",
+"strategy": "shorts_heavy",
+"activity_days": 15,
+"subscribers_now": 52,
+"eligible_now": false,
+"subscribers_d7": 76,
+"subscribers_d28": 149,
+"p_eligible_d28": 0.029
+},
+{
+"channel_id": "UCP3ybGhzAnpEdtW3rimO8ig",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 37,
+"subscribers_now": 257,
+"eligible_now": false,
+"subscribers_d7": 306,
+"subscribers_d28": 451,
+"p_eligible_d28": 0.143
+},
+{
+"channel_id": "UCPAqQ2pwhgDe8udeeUEmBVQ",
+"strategy": "long_20min_plus_slower",
+"activity_days": 80,
+"subscribers_now": 9840,
+"eligible_now": true,
+"subscribers_d7": 10701,
+"subscribers_d28": 13284,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCPWGTNqnyi1hKX8_-22J_gA",
+"strategy": "shorts_heavy",
+"activity_days": 28,
+"subscribers_now": 2050,
+"eligible_now": false,
+"subscribers_d7": 2562,
+"subscribers_d28": 4100,
+"p_eligible_d28": 0.035
+},
+{
+"channel_id": "UCP_qVllcwYKU1fiRDs7e21w",
+"strategy": "shorts_heavy",
+"activity_days": 28,
+"subscribers_now": 81,
+"eligible_now": false,
+"subscribers_d7": 101,
+"subscribers_d28": 162,
+"p_eligible_d28": 0.035
+},
+{
+"channel_id": "UCQ4lAnm_11zIvP0CKVi5htw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 110,
+"subscribers_now": 14100,
+"eligible_now": true,
+"subscribers_d7": 14997,
+"subscribers_d28": 17689,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCQ6walX8yM4MFnBh7dS32Eg",
+"strategy": "shorts_heavy",
+"activity_days": 12,
+"subscribers_now": 227,
+"eligible_now": false,
+"subscribers_d7": 359,
+"subscribers_d28": 757,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCQQt38XpZD8cvUR1gvBQv6w",
+"strategy": "shorts_heavy",
+"activity_days": 57,
+"subscribers_now": 2,
+"eligible_now": false,
+"subscribers_d7": 2,
+"subscribers_d28": 3,
+"p_eligible_d28": 0.135
+},
+{
+"channel_id": "UCQR05cH8be_asRTzO58B47w",
+"strategy": "shorts_heavy",
+"activity_days": 30,
+"subscribers_now": 236,
+"eligible_now": false,
+"subscribers_d7": 291,
+"subscribers_d28": 456,
+"p_eligible_d28": 0.051
+},
+{
+"channel_id": "UCQYXILMGl_-Wfs-z-YPsS_w",
+"strategy": "shorts_heavy",
+"activity_days": 12,
+"subscribers_now": 48,
+"eligible_now": false,
+"subscribers_d7": 76,
+"subscribers_d28": 160,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCQa6TQQUyKA4aP9Ry0zbDeQ",
+"strategy": "shorts_heavy",
+"activity_days": 23,
+"subscribers_now": 45,
+"eligible_now": false,
+"subscribers_d7": 59,
+"subscribers_d28": 100,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCQrynV77ehNNLcCrkmzW2fA",
+"strategy": "shorts_heavy",
+"activity_days": 73,
+"subscribers_now": 71,
+"eligible_now": false,
+"subscribers_d7": 78,
+"subscribers_d28": 98,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCQt-niinnIRk2N9NnWE1fgg",
+"strategy": "shorts_heavy",
+"activity_days": 82,
+"subscribers_now": 236,
+"eligible_now": false,
+"subscribers_d7": 256,
+"subscribers_d28": 317,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCR-BRPWPffOCNZby2ux_4Qg",
+"strategy": "shorts_heavy",
+"activity_days": 83,
+"subscribers_now": 26,
+"eligible_now": false,
+"subscribers_d7": 28,
+"subscribers_d28": 35,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCRL5s8e_5BAvD6I5hKfJMhg",
+"strategy": "shorts_heavy",
+"activity_days": 32,
+"subscribers_now": 5990,
+"eligible_now": false,
+"subscribers_d7": 7300,
+"subscribers_d28": 11231,
+"p_eligible_d28": 0.068
+},
+{
+"channel_id": "UCRas4XQsGVYpUrOHRU_e9bA",
+"strategy": "shorts_heavy",
+"activity_days": 116,
+"subscribers_now": 159000,
+"eligible_now": false,
+"subscribers_d7": 168595,
+"subscribers_d28": 197379,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCRcieE8mUEvcC0bKQ1e6kmg",
+"strategy": "shorts_heavy",
+"activity_days": 58,
+"subscribers_now": 5790,
+"eligible_now": false,
+"subscribers_d7": 6489,
+"subscribers_d28": 8585,
+"p_eligible_d28": 0.121
+},
+{
+"channel_id": "UCRgZ_RZjO3wXgu_VXHJh4Sw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 46,
+"subscribers_now": 43,
+"eligible_now": false,
+"subscribers_d7": 50,
+"subscribers_d28": 69,
+"p_eligible_d28": 0.75
+},
+{
+"channel_id": "UCRoBDHtqGJhvNBm-uki7YTg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 91,
+"subscribers_now": 12100,
+"eligible_now": true,
+"subscribers_d7": 13031,
+"subscribers_d28": 15823,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCRqDM6UCLPqR6T95pTK5ubg",
+"strategy": "shorts_heavy",
+"activity_days": 39,
+"subscribers_now": 419,
+"eligible_now": false,
+"subscribers_d7": 494,
+"subscribers_d28": 720,
+"p_eligible_d28": 0.073
+},
+{
+"channel_id": "UCRq_9hrOOpQh8F7JZHuYKkg",
+"strategy": "long_20min_plus_slower",
+"activity_days": 60,
+"subscribers_now": 698,
+"eligible_now": false,
+"subscribers_d7": 779,
+"subscribers_d28": 1024,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCRxpBWgGF4upPRU8dukt9qg",
+"strategy": "shorts_heavy",
+"activity_days": 68,
+"subscribers_now": 6550,
+"eligible_now": false,
+"subscribers_d7": 7224,
+"subscribers_d28": 9247,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UCS-GPv_zD1p2Q6XbBawnXJg",
+"strategy": "shorts_heavy",
+"activity_days": 36,
+"subscribers_now": 24,
+"eligible_now": false,
+"subscribers_d7": 29,
+"subscribers_d28": 43,
+"p_eligible_d28": 0.067
+},
+{
+"channel_id": "UCS1Cmv9lzOR8ChEnbD_O0dA",
+"strategy": "shorts_heavy",
+"activity_days": 79,
+"subscribers_now": 144,
+"eligible_now": false,
+"subscribers_d7": 157,
+"subscribers_d28": 195,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCSCHUe7EvRATMsJsi4ckbvQ",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 6,
+"eligible_now": false,
+"subscribers_d7": 48,
+"subscribers_d28": 174,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCSJVf3bT1yF0OwczmZcG6QA",
+"strategy": "long_20min_plus_daily",
+"activity_days": 22,
+"subscribers_now": 945,
+"eligible_now": false,
+"subscribers_d7": 1246,
+"subscribers_d28": 2148,
+"p_eligible_d28": 0.455
+},
+{
+"channel_id": "UCSQSgB3_QEtHWvt6t5HS4sQ",
+"strategy": "long_20min_plus_daily",
+"activity_days": 12,
+"subscribers_now": 114,
+"eligible_now": false,
+"subscribers_d7": 180,
+"subscribers_d28": 380,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCSUEM3p_ZiM6w413Uq4XPVg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 66,
+"subscribers_now": 227,
+"eligible_now": false,
+"subscribers_d7": 251,
+"subscribers_d28": 323,
+"p_eligible_d28": 0.286
+},
+{
+"channel_id": "UCSj3df3N_R8QIzD-5UAUOsA",
+"strategy": "shorts_heavy",
+"activity_days": 114,
+"subscribers_now": 507000,
+"eligible_now": false,
+"subscribers_d7": 538132,
+"subscribers_d28": 631526,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCSoNDqkW6AnmW0oz3DmsxVQ",
+"strategy": "shorts_heavy",
+"activity_days": 15,
+"subscribers_now": 37,
+"eligible_now": false,
+"subscribers_d7": 54,
+"subscribers_d28": 106,
+"p_eligible_d28": 0.029
+},
+{
+"channel_id": "UCSrtqVQyCbUiDavRnDjQxTw",
+"strategy": "shorts_heavy",
+"activity_days": 31,
+"subscribers_now": 133,
+"eligible_now": false,
+"subscribers_d7": 163,
+"subscribers_d28": 253,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCSz_1dCC1q6WfmyFGJQLovg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 21,
+"subscribers_now": 17,
+"eligible_now": false,
+"subscribers_d7": 23,
+"subscribers_d28": 40,
+"p_eligible_d28": 0.462
+},
+{
+"channel_id": "UCTF0fAn7R__rhajstVbWTEA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 16,
+"subscribers_now": 7,
+"eligible_now": false,
+"subscribers_d7": 10,
+"subscribers_d28": 19,
+"p_eligible_d28": 0.182
+},
+{
+"channel_id": "UCTFfTgAUQ9wyNeU7ybVp-Og",
+"strategy": "shorts_heavy",
+"activity_days": 106,
+"subscribers_now": 33900,
+"eligible_now": false,
+"subscribers_d7": 36139,
+"subscribers_d28": 42855,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCTOEacDis1qotsMSIhTEHLw",
+"strategy": "shorts_heavy",
+"activity_days": 29,
+"subscribers_now": 2510,
+"eligible_now": false,
+"subscribers_d7": 3116,
+"subscribers_d28": 4933,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCTRtx5A151ak9l2Xbt3fUlw",
+"strategy": "shorts_heavy",
+"activity_days": 16,
+"subscribers_now": 309000,
+"eligible_now": true,
+"subscribers_d7": 444188,
+"subscribers_d28": 849750,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCTWEAO8GLHewJtXWBdl2urw",
+"strategy": "shorts_heavy",
+"activity_days": 62,
+"subscribers_now": 4860,
+"eligible_now": false,
+"subscribers_d7": 5409,
+"subscribers_d28": 7055,
+"p_eligible_d28": 0.097
+},
+{
+"channel_id": "UCTbtLJxUejJqbEfBT67tQEQ",
+"strategy": "long_3_to_20min",
+"activity_days": 103,
+"subscribers_now": 15600,
+"eligible_now": true,
+"subscribers_d7": 16660,
+"subscribers_d28": 19841,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCTlk2dHnHatnferNOAlz-qQ",
+"strategy": "shorts_heavy",
+"activity_days": 31,
+"subscribers_now": 240,
+"eligible_now": false,
+"subscribers_d7": 294,
+"subscribers_d28": 457,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCU28TJ3lErM06Sfn0sCvp_Q",
+"strategy": "long_20min_plus_slower",
+"activity_days": 100,
+"subscribers_now": 110,
+"eligible_now": false,
+"subscribers_d7": 118,
+"subscribers_d28": 141,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCUHhijJMsrzZ57mROr2izNg",
+"strategy": "shorts_heavy",
+"activity_days": 69,
+"subscribers_now": 167,
+"eligible_now": false,
+"subscribers_d7": 184,
+"subscribers_d28": 235,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCUSwkKgWKKurzxiquCne7ng",
+"strategy": "shorts_heavy",
+"activity_days": 83,
+"subscribers_now": 76,
+"eligible_now": false,
+"subscribers_d7": 82,
+"subscribers_d28": 102,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCUdaoB4DfnoH7dFd8tcdvmg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 31,
+"subscribers_now": 1050,
+"eligible_now": true,
+"subscribers_d7": 1287,
+"subscribers_d28": 1998,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCUg1dKUheoqIHDLjTK0c89g",
+"strategy": "shorts_heavy",
+"activity_days": 67,
+"subscribers_now": 84,
+"eligible_now": false,
+"subscribers_d7": 93,
+"subscribers_d28": 119,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UCUrlXR8_1DnJC5i2Z8f-oZQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 65,
+"subscribers_now": 5120,
+"eligible_now": true,
+"subscribers_d7": 5671,
+"subscribers_d28": 7326,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCV2_LNIr6smgfRJeAVDtzVg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 1,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCV6eQeZ-SS6XSeWX5BKdgfQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 16,
+"subscribers_now": 61,
+"eligible_now": false,
+"subscribers_d7": 88,
+"subscribers_d28": 168,
+"p_eligible_d28": 0.182
+},
+{
+"channel_id": "UCVI2wxZ-hJzvu6rw9oqyLCw",
+"strategy": "shorts_heavy",
+"activity_days": 16,
+"subscribers_now": 338,
+"eligible_now": false,
+"subscribers_d7": 486,
+"subscribers_d28": 930,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCVsMX8mQmkUsbQ-O8L6_szQ",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 45,
+"eligible_now": false,
+"subscribers_d7": 360,
+"subscribers_d28": 1305,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCVxCZmejSjVh9jRHGQyJOlA",
+"strategy": "shorts_heavy",
+"activity_days": 70,
+"subscribers_now": 240,
+"eligible_now": false,
+"subscribers_d7": 264,
+"subscribers_d28": 336,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UCWyP4i5ZkKjdL5-FXNVic1g",
+"strategy": "long_20min_plus_daily",
+"activity_days": 69,
+"subscribers_now": 47,
+"eligible_now": false,
+"subscribers_d7": 52,
+"subscribers_d28": 66,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCX6pWLGQZw31FPDhtilteTA",
+"strategy": "shorts_heavy",
+"activity_days": 3,
+"subscribers_now": 36,
+"eligible_now": false,
+"subscribers_d7": 120,
+"subscribers_d28": 372,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCXMyCeE4RwF-NzKDmtCE0kg",
+"strategy": "long_3_to_20min",
+"activity_days": 44,
+"subscribers_now": 2470,
+"eligible_now": true,
+"subscribers_d7": 2863,
+"subscribers_d28": 4042,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCXS-Bca7f0n6Sfy7eb7iGUw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 63,
+"subscribers_now": 5220,
+"eligible_now": true,
+"subscribers_d7": 5800,
+"subscribers_d28": 7540,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCXVENOMZJhTZ9XN8ZnBEHiA",
+"strategy": "shorts_heavy",
+"activity_days": 6,
+"subscribers_now": 336,
+"eligible_now": false,
+"subscribers_d7": 728,
+"subscribers_d28": 1904,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UCXVd6UpX2GUlLWvUjl8OQlA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 67,
+"subscribers_now": 5630,
+"eligible_now": false,
+"subscribers_d7": 6218,
+"subscribers_d28": 7983,
+"p_eligible_d28": 0.375
+},
+{
+"channel_id": "UCXWn2XRkYsxg6QYfX7GuK1A",
+"strategy": "long_3_to_20min",
+"activity_days": 28,
+"subscribers_now": 3090,
+"eligible_now": true,
+"subscribers_d7": 3862,
+"subscribers_d28": 6180,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCXdzv-Deb_lPMn9o0t2yraw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 34,
+"subscribers_now": 463,
+"eligible_now": false,
+"subscribers_d7": 558,
+"subscribers_d28": 844,
+"p_eligible_d28": 0.545
+},
+{
+"channel_id": "UCXivLHnds2B9GU6YuZcILBg",
+"strategy": "shorts_heavy",
+"activity_days": 92,
+"subscribers_now": 11700,
+"eligible_now": false,
+"subscribers_d7": 12590,
+"subscribers_d28": 15261,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCXrndVkc-it6U6MFYy9WIaQ",
+"strategy": "shorts_heavy",
+"activity_days": 14,
+"subscribers_now": 651,
+"eligible_now": false,
+"subscribers_d7": 976,
+"subscribers_d28": 1953,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCY8SCWrnwJjs_fZg3UqPZ3A",
+"strategy": "long_20min_plus_daily",
+"activity_days": 61,
+"subscribers_now": 1930,
+"eligible_now": true,
+"subscribers_d7": 2151,
+"subscribers_d28": 2816,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCYNNs0-hjdf_ZYtH9tcfurQ",
+"strategy": "long_20min_plus_slower",
+"activity_days": 11,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.6
+},
+{
+"channel_id": "UCYRrIjmgVra4urCgVZA90qg",
+"strategy": "shorts_heavy",
+"activity_days": 30,
+"subscribers_now": 116,
+"eligible_now": false,
+"subscribers_d7": 143,
+"subscribers_d28": 224,
+"p_eligible_d28": 0.051
+},
+{
+"channel_id": "UCYTq-MOOeJLI1rzhqhg3Ylw",
+"strategy": "shorts_heavy",
+"activity_days": 20,
+"subscribers_now": 13500,
+"eligible_now": false,
+"subscribers_d7": 18225,
+"subscribers_d28": 32400,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCZ5OCbvuCMF2D5rjdTXFhlg",
+"strategy": "shorts_heavy",
+"activity_days": 58,
+"subscribers_now": 20800,
+"eligible_now": false,
+"subscribers_d7": 23310,
+"subscribers_d28": 30841,
+"p_eligible_d28": 0.121
+},
+{
+"channel_id": "UCZFxfTpybMR0G0PCggwyMkA",
+"strategy": "shorts_heavy",
+"activity_days": 34,
+"subscribers_now": 48500,
+"eligible_now": true,
+"subscribers_d7": 58485,
+"subscribers_d28": 88441,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCZPtPDBm0LlgRBQpSp7nF6g",
+"strategy": "shorts_heavy",
+"activity_days": 13,
+"subscribers_now": 285,
+"eligible_now": false,
+"subscribers_d7": 438,
+"subscribers_d28": 899,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCZYDRm4FZGpJZwTrvjbILnA",
+"strategy": "shorts_heavy",
+"activity_days": 68,
+"subscribers_now": 36,
+"eligible_now": false,
+"subscribers_d7": 40,
+"subscribers_d28": 51,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UCZ_eyAZg8xTVOQ2bVXl4OJA",
+"strategy": "shorts_heavy",
+"activity_days": 78,
+"subscribers_now": 1070,
+"eligible_now": false,
+"subscribers_d7": 1166,
+"subscribers_d28": 1454,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCZiGQPRA5VSN1cppNQTuemw",
+"strategy": "shorts_heavy",
+"activity_days": 58,
+"subscribers_now": 1200,
+"eligible_now": false,
+"subscribers_d7": 1345,
+"subscribers_d28": 1779,
+"p_eligible_d28": 0.121
+},
+{
+"channel_id": "UCZlHKT3sdd7vno-nlpLp7Ow",
+"strategy": "shorts_heavy",
+"activity_days": 18,
+"subscribers_now": 20,
+"eligible_now": false,
+"subscribers_d7": 28,
+"subscribers_d28": 51,
+"p_eligible_d28": 0.033
+},
+{
+"channel_id": "UC_2FKEcQbOyGUdnNus5GocA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 15,
+"subscribers_now": 468,
+"eligible_now": false,
+"subscribers_d7": 686,
+"subscribers_d28": 1342,
+"p_eligible_d28": 0.2
+},
+{
+"channel_id": "UC_JSGDFr9GYTQuole8ZksXQ",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 1,
+"eligible_now": false,
+"subscribers_d7": 8,
+"subscribers_d28": 29,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UC_LxhQnY__qHeCzEFwnsaqQ",
+"strategy": "shorts_heavy",
+"activity_days": 11,
+"subscribers_now": 106,
+"eligible_now": false,
+"subscribers_d7": 173,
+"subscribers_d28": 376,
+"p_eligible_d28": 0.028
+},
+{
+"channel_id": "UC_TvXDtzAfF_-jDGfFpu73Q",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 6,
+"eligible_now": false,
+"subscribers_d7": 48,
+"subscribers_d28": 174,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UC_h1E8wccvaX1gTtx4VsYXw",
+"strategy": "long_20min_plus_slower",
+"activity_days": 72,
+"subscribers_now": 10600,
+"eligible_now": true,
+"subscribers_d7": 11631,
+"subscribers_d28": 14722,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCa4EJfnzG1UjxZNIGXMk6VA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 4,
+"subscribers_now": 423,
+"eligible_now": false,
+"subscribers_d7": 1163,
+"subscribers_d28": 3384,
+"p_eligible_d28": 0.3
+},
+{
+"channel_id": "UCa4tiYRnPZUY2qc7Egs4zpw",
+"strategy": "shorts_heavy",
+"activity_days": 58,
+"subscribers_now": 137,
+"eligible_now": false,
+"subscribers_d7": 154,
+"subscribers_d28": 203,
+"p_eligible_d28": 0.121
+},
+{
+"channel_id": "UCaD9tNCaDYz6bB1-8xXRGGg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 54,
+"subscribers_now": 151,
+"eligible_now": false,
+"subscribers_d7": 171,
+"subscribers_d28": 229,
+"p_eligible_d28": 0.125
+},
+{
+"channel_id": "UCaFqd1yrCSNXsJrJ70MeK5Q",
+"strategy": "shorts_heavy",
+"activity_days": 49,
+"subscribers_now": 770,
+"eligible_now": false,
+"subscribers_d7": 880,
+"subscribers_d28": 1210,
+"p_eligible_d28": 0.094
+},
+{
+"channel_id": "UCaM7G2sr0kHczOMB2ACO4dQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 2,
+"subscribers_now": 9,
+"eligible_now": false,
+"subscribers_d7": 40,
+"subscribers_d28": 135,
+"p_eligible_d28": 0.231
+},
+{
+"channel_id": "UCaovsOc-b5pEv2Jt2sInTDw",
+"strategy": "shorts_heavy",
+"activity_days": 47,
+"subscribers_now": 1180,
+"eligible_now": false,
+"subscribers_d7": 1356,
+"subscribers_d28": 1883,
+"p_eligible_d28": 0.1
+},
+{
+"channel_id": "UCar83iGZXd2cP_QSrmhbpHQ",
+"strategy": "shorts_heavy",
+"activity_days": 29,
+"subscribers_now": 3150,
+"eligible_now": false,
+"subscribers_d7": 3910,
+"subscribers_d28": 6191,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCb6ARkVOaLdPhn_akEuajDw",
+"strategy": "shorts_heavy",
+"activity_days": 90,
+"subscribers_now": 127,
+"eligible_now": false,
+"subscribers_d7": 137,
+"subscribers_d28": 167,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCbgeY7Zd22ANCPlxUpgjESQ",
+"strategy": "shorts_heavy",
+"activity_days": 99,
+"subscribers_now": 25000,
+"eligible_now": false,
+"subscribers_d7": 26768,
+"subscribers_d28": 32071,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCc-Z8D4gpgj03c8h4u-nycg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 35,
+"subscribers_now": 41,
+"eligible_now": false,
+"subscribers_d7": 49,
+"subscribers_d28": 74,
+"p_eligible_d28": 0.133
+},
+{
+"channel_id": "UCc6R2GyXN9QSWzlmJl2vhnQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 115,
+"subscribers_now": 472,
+"eligible_now": false,
+"subscribers_d7": 501,
+"subscribers_d28": 587,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCcI29b2xr7wbexrbQfCbF-w",
+"strategy": "long_20min_plus_slower",
+"activity_days": 54,
+"subscribers_now": 11500,
+"eligible_now": true,
+"subscribers_d7": 12991,
+"subscribers_d28": 17463,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCcKV2lplgduKSNBNs1PyZ8w",
+"strategy": "long_20min_plus_daily",
+"activity_days": 124,
+"subscribers_now": 1420,
+"eligible_now": true,
+"subscribers_d7": 1500,
+"subscribers_d28": 1741,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCcRxm-ya1k9hIynq9P_XZSg",
+"strategy": "shorts_heavy",
+"activity_days": 10,
+"subscribers_now": 168,
+"eligible_now": false,
+"subscribers_d7": 286,
+"subscribers_d28": 638,
+"p_eligible_d28": 0.027
+},
+{
+"channel_id": "UCc_8KF549mLOvtJUaHyRI4w",
+"strategy": "shorts_heavy",
+"activity_days": 39,
+"subscribers_now": 32300,
+"eligible_now": false,
+"subscribers_d7": 38097,
+"subscribers_d28": 55490,
+"p_eligible_d28": 0.073
+},
+{
+"channel_id": "UCcb9dFFxdbWBpyEbvo9voVw",
+"strategy": "shorts_heavy",
+"activity_days": 5,
+"subscribers_now": 79,
+"eligible_now": false,
+"subscribers_d7": 190,
+"subscribers_d28": 521,
+"p_eligible_d28": 0.04
+},
+{
+"channel_id": "UCcj7zJuP09hvIMJzJUsXM4w",
+"strategy": "shorts_heavy",
+"activity_days": 50,
+"subscribers_now": 2150,
+"eligible_now": false,
+"subscribers_d7": 2451,
+"subscribers_d28": 3354,
+"p_eligible_d28": 0.1
+},
+{
+"channel_id": "UCd5CR9ODH_vhzCeBUgWUr2A",
+"strategy": "shorts_heavy",
+"activity_days": 52,
+"subscribers_now": 5470,
+"eligible_now": false,
+"subscribers_d7": 6206,
+"subscribers_d28": 8415,
+"p_eligible_d28": 0.102
+},
+{
+"channel_id": "UCdFA2D2sJ31IuGotpegeRCA",
+"strategy": "shorts_heavy",
+"activity_days": 58,
+"subscribers_now": 138,
+"eligible_now": false,
+"subscribers_d7": 155,
+"subscribers_d28": 205,
+"p_eligible_d28": 0.121
+},
+{
+"channel_id": "UCdIqX7i7yBEqlkLsfTJuuog",
+"strategy": "long_20min_plus_daily",
+"activity_days": 5,
+"subscribers_now": 205,
+"eligible_now": false,
+"subscribers_d7": 492,
+"subscribers_d28": 1353,
+"p_eligible_d28": 0.556
+},
+{
+"channel_id": "UCdQo-RPBLaBg6eCP3C-agug",
+"strategy": "long_20min_plus_daily",
+"activity_days": 13,
+"subscribers_now": 1,
+"eligible_now": false,
+"subscribers_d7": 2,
+"subscribers_d28": 3,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCdTGY7cIQofe-vOiaBak9cg",
+"strategy": "long_3_to_20min",
+"activity_days": 37,
+"subscribers_now": 3370,
+"eligible_now": false,
+"subscribers_d7": 4008,
+"subscribers_d28": 5920,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCda6M5mSa9IwQflFXxTns8g",
+"strategy": "long_20min_plus_daily",
+"activity_days": 36,
+"subscribers_now": 8,
+"eligible_now": false,
+"subscribers_d7": 10,
+"subscribers_d28": 14,
+"p_eligible_d28": 0.6
+},
+{
+"channel_id": "UCdoXfLNQpKS4IPL5vJz6EHA",
+"strategy": "shorts_heavy",
+"activity_days": 40,
+"subscribers_now": 4590,
+"eligible_now": false,
+"subscribers_d7": 5393,
+"subscribers_d28": 7803,
+"p_eligible_d28": 0.088
+},
+{
+"channel_id": "UCe-lSqzaesZ00bsyzLZkdKA",
+"strategy": "shorts_heavy",
+"activity_days": 64,
+"subscribers_now": 583,
+"eligible_now": false,
+"subscribers_d7": 647,
+"subscribers_d28": 838,
+"p_eligible_d28": 0.069
+},
+{
+"channel_id": "UCe36rY_uMnGxjU4kvhNFL5g",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 69,
+"subscribers_now": 128,
+"eligible_now": false,
+"subscribers_d7": 141,
+"subscribers_d28": 180,
+"p_eligible_d28": 0.375
+},
+{
+"channel_id": "UCeBgE-JsNm9lyfwaLjNJJ_w",
+"strategy": "shorts_heavy",
+"activity_days": 6,
+"subscribers_now": 4460,
+"eligible_now": false,
+"subscribers_d7": 9663,
+"subscribers_d28": 25273,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UCejMRtNnJH5UackIlVR_Ssw",
+"strategy": "shorts_heavy",
+"activity_days": 49,
+"subscribers_now": 155,
+"eligible_now": false,
+"subscribers_d7": 177,
+"subscribers_d28": 244,
+"p_eligible_d28": 0.094
+},
+{
+"channel_id": "UCf8BB3HxjJcemKQnsQoVl-A",
+"strategy": "shorts_heavy",
+"activity_days": 71,
+"subscribers_now": 1790,
+"eligible_now": false,
+"subscribers_d7": 1966,
+"subscribers_d28": 2496,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCfjHFHnrbkDuIMMX9G54usg",
+"strategy": "shorts_heavy",
+"activity_days": 46,
+"subscribers_now": 1060,
+"eligible_now": false,
+"subscribers_d7": 1221,
+"subscribers_d28": 1705,
+"p_eligible_d28": 0.104
+},
+{
+"channel_id": "UCfr8GNR0xM2nWCJehyzDIWA",
+"strategy": "shorts_heavy",
+"activity_days": 69,
+"subscribers_now": 4,
+"eligible_now": false,
+"subscribers_d7": 4,
+"subscribers_d28": 6,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCfv5NAgFP977qztHcvj9jJw",
+"strategy": "shorts_heavy",
+"activity_days": 9,
+"subscribers_now": 83,
+"eligible_now": false,
+"subscribers_d7": 148,
+"subscribers_d28": 341,
+"p_eligible_d28": 0.027
+},
+{
+"channel_id": "UCg3K1Gc6bgECWOofwdHXWGw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 109,
+"subscribers_now": 936,
+"eligible_now": false,
+"subscribers_d7": 996,
+"subscribers_d28": 1176,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCgC1LwGQuY-tZQCsujcOWOw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 9,
+"subscribers_now": 449,
+"eligible_now": false,
+"subscribers_d7": 798,
+"subscribers_d28": 1846,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCgm4KPM7PxqMGElxtEmyM9w",
+"strategy": "long_20min_plus_daily",
+"activity_days": 36,
+"subscribers_now": 803,
+"eligible_now": false,
+"subscribers_d7": 959,
+"subscribers_d28": 1428,
+"p_eligible_d28": 0.6
+},
+{
+"channel_id": "UCh9i5gB-Rh74iJGKD2-4b0g",
+"strategy": "shorts_heavy",
+"activity_days": 13,
+"subscribers_now": 384,
+"eligible_now": false,
+"subscribers_d7": 591,
+"subscribers_d28": 1211,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UChLm4aV0UdzyncKW2vzyqYw",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UChO67ZMtTsbX46Wo50p5h3g",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 96,
+"subscribers_now": 713,
+"eligible_now": false,
+"subscribers_d7": 765,
+"subscribers_d28": 921,
+"p_eligible_d28": 0.429
+},
+{
+"channel_id": "UCha9wj0p1vNBz5Bylt9fVQg",
+"strategy": "shorts_heavy",
+"activity_days": 76,
+"subscribers_now": 120,
+"eligible_now": false,
+"subscribers_d7": 131,
+"subscribers_d28": 164,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UChndtFRxMpWBvgfU9BoNVRQ",
+"strategy": "shorts_heavy",
+"activity_days": 27,
+"subscribers_now": 20100,
+"eligible_now": false,
+"subscribers_d7": 25311,
+"subscribers_d28": 40944,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UChsMfMGrjGsyWem1YyQeadg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 62,
+"subscribers_now": 505,
+"eligible_now": false,
+"subscribers_d7": 562,
+"subscribers_d28": 733,
+"p_eligible_d28": 0.2
+},
+{
+"channel_id": "UChtwAHelxiL0r0aHkxJqvsQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 64,
+"subscribers_now": 51,
+"eligible_now": false,
+"subscribers_d7": 57,
+"subscribers_d28": 73,
+"p_eligible_d28": 0.167
+},
+{
+"channel_id": "UCi7xOal3ycH-GbxYZ_GlHHQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 65,
+"subscribers_now": 470,
+"eligible_now": false,
+"subscribers_d7": 521,
+"subscribers_d28": 672,
+"p_eligible_d28": 0.167
+},
+{
+"channel_id": "UCiAsRfw3IIoTymYBzu6LUGA",
+"strategy": "shorts_heavy",
+"activity_days": 24,
+"subscribers_now": 767,
+"eligible_now": false,
+"subscribers_d7": 991,
+"subscribers_d28": 1662,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCiGctp8jiihPxmnkQEcQfyQ",
+"strategy": "shorts_heavy",
+"activity_days": 31,
+"subscribers_now": 46,
+"eligible_now": false,
+"subscribers_d7": 56,
+"subscribers_d28": 88,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCiHHgtKgcz_cx7Qw0_q6C3Q",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 70,
+"eligible_now": false,
+"subscribers_d7": 560,
+"subscribers_d28": 2030,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCiYams_uxqfbaj2LYOYEl2g",
+"strategy": "long_20min_plus_daily",
+"activity_days": 9,
+"subscribers_now": 6,
+"eligible_now": false,
+"subscribers_d7": 11,
+"subscribers_d28": 25,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCiqyj4b9sKWRGCZPoz6TT9w",
+"strategy": "shorts_heavy",
+"activity_days": 14,
+"subscribers_now": 64700,
+"eligible_now": false,
+"subscribers_d7": 97050,
+"subscribers_d28": 194100,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCj4fQ0UosQ6zF69JF7rly_g",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 126,
+"subscribers_now": 5390,
+"eligible_now": true,
+"subscribers_d7": 5689,
+"subscribers_d28": 6588,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCjRKzRROYVL4zQ0KV3OZVMg",
+"strategy": "shorts_heavy",
+"activity_days": 7,
+"subscribers_now": 156,
+"eligible_now": false,
+"subscribers_d7": 312,
+"subscribers_d28": 780,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UCj_Dg8QMVa7An-87D7qGqKA",
+"strategy": "shorts_heavy",
+"activity_days": 91,
+"subscribers_now": 43,
+"eligible_now": false,
+"subscribers_d7": 46,
+"subscribers_d28": 56,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCjjsmiClkv1C-gqB2RUflAA",
+"strategy": "shorts_heavy",
+"activity_days": 26,
+"subscribers_now": 824,
+"eligible_now": false,
+"subscribers_d7": 1046,
+"subscribers_d28": 1711,
+"p_eligible_d28": 0.018
+},
+{
+"channel_id": "UCjupz90R6x4UJu_kjH_eZVQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 14,
+"subscribers_now": 62,
+"eligible_now": false,
+"subscribers_d7": 93,
+"subscribers_d28": 186,
+"p_eligible_d28": 0.273
+},
+{
+"channel_id": "UCk2X3D-2i3Tj3CuQMwBasSw",
+"strategy": "shorts_heavy",
+"activity_days": 56,
+"subscribers_now": 244,
+"eligible_now": false,
+"subscribers_d7": 274,
+"subscribers_d28": 366,
+"p_eligible_d28": 0.119
+},
+{
+"channel_id": "UCk9CVupOcnlYojxkrFrGsWA",
+"strategy": "shorts_heavy",
+"activity_days": 62,
+"subscribers_now": 1140,
+"eligible_now": false,
+"subscribers_d7": 1269,
+"subscribers_d28": 1655,
+"p_eligible_d28": 0.097
+},
+{
+"channel_id": "UCkP0bkR6tmgn71eQ6RMYbsA",
+"strategy": "long_20min_plus_daily",
+"activity_days": 47,
+"subscribers_now": 650,
+"eligible_now": false,
+"subscribers_d7": 747,
+"subscribers_d28": 1037,
+"p_eligible_d28": 0.75
+},
+{
+"channel_id": "UCkRt1X3gL269wVwOCVDFBAg",
+"strategy": "shorts_heavy",
+"activity_days": 11,
+"subscribers_now": 3030,
+"eligible_now": false,
+"subscribers_d7": 4958,
+"subscribers_d28": 10743,
+"p_eligible_d28": 0.028
+},
+{
+"channel_id": "UCkVUsI3vGXO5RaY5ztlbe7A",
+"strategy": "shorts_heavy",
+"activity_days": 6,
+"subscribers_now": 134,
+"eligible_now": false,
+"subscribers_d7": 290,
+"subscribers_d28": 759,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UCkYDo7Xv5jFnEEUPrrz0dww",
+"strategy": "shorts_heavy",
+"activity_days": 29,
+"subscribers_now": 111,
+"eligible_now": false,
+"subscribers_d7": 138,
+"subscribers_d28": 218,
+"p_eligible_d28": 0.053
+},
+{
+"channel_id": "UCkZJIAkwgV0XPCNMPp97h5w",
+"strategy": "long_3_to_20min",
+"activity_days": 5,
+"subscribers_now": 2,
+"eligible_now": false,
+"subscribers_d7": 5,
+"subscribers_d28": 13,
+"p_eligible_d28": 0.286
+},
+{
+"channel_id": "UCklHpM_0MaL4O7VHFhYH9aw",
+"strategy": "shorts_heavy",
+"activity_days": 77,
+"subscribers_now": 127000,
+"eligible_now": true,
+"subscribers_d7": 138545,
+"subscribers_d28": 173182,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCl7_OrEH0wxuuc7uiOK3OvA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 18,
+"subscribers_now": 14,
+"eligible_now": false,
+"subscribers_d7": 19,
+"subscribers_d28": 36,
+"p_eligible_d28": 0.167
+},
+{
+"channel_id": "UCl9JcOsk5Jo_2H9rwCqmrxg",
+"strategy": "shorts_heavy",
+"activity_days": 51,
+"subscribers_now": 20,
+"eligible_now": false,
+"subscribers_d7": 23,
+"subscribers_d28": 31,
+"p_eligible_d28": 0.1
+},
+{
+"channel_id": "UClDUff9UXEeDz8GH2ltokCg",
+"strategy": "shorts_heavy",
+"activity_days": 6,
+"subscribers_now": 129,
+"eligible_now": false,
+"subscribers_d7": 280,
+"subscribers_d28": 731,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UClZRltb6jMiesVTDRem2Egg",
+"strategy": "shorts_heavy",
+"activity_days": 92,
+"subscribers_now": 267,
+"eligible_now": false,
+"subscribers_d7": 287,
+"subscribers_d28": 348,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCloy8X3iu32xidx3X00juLg",
+"strategy": "shorts_heavy",
+"activity_days": 10,
+"subscribers_now": 42,
+"eligible_now": false,
+"subscribers_d7": 71,
+"subscribers_d28": 160,
+"p_eligible_d28": 0.027
+},
+{
+"channel_id": "UClsWlRAaoONUxadhczoV0rQ",
+"strategy": "shorts_heavy",
+"activity_days": 19,
+"subscribers_now": 821,
+"eligible_now": false,
+"subscribers_d7": 1123,
+"subscribers_d28": 2031,
+"p_eligible_d28": 0.034
+},
+{
+"channel_id": "UCmEHZN_Llcj02eGzT60Redw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 1,
+"subscribers_now": 13,
+"eligible_now": false,
+"subscribers_d7": 104,
+"subscribers_d28": 377,
+"p_eligible_d28": 0.214
+},
+{
+"channel_id": "UCmLS_S7ymjoOiuyY-hegGvg",
+"strategy": "shorts_heavy",
+"activity_days": 90,
+"subscribers_now": 8500,
+"eligible_now": false,
+"subscribers_d7": 9161,
+"subscribers_d28": 11144,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCmMJ-J4eDDiyAMltfXKQoLw",
+"strategy": "shorts_heavy",
+"activity_days": 18,
+"subscribers_now": 214,
+"eligible_now": false,
+"subscribers_d7": 297,
+"subscribers_d28": 547,
+"p_eligible_d28": 0.033
+},
+{
+"channel_id": "UCmSH6zLTKqgJC1vi3V5l6JQ",
+"strategy": "shorts_heavy",
+"activity_days": 5,
+"subscribers_now": 75,
+"eligible_now": false,
+"subscribers_d7": 180,
+"subscribers_d28": 495,
+"p_eligible_d28": 0.04
+},
+{
+"channel_id": "UCmc_QW0GBQS6outor6GRIOA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 4,
+"subscribers_now": 18,
+"eligible_now": false,
+"subscribers_d7": 50,
+"subscribers_d28": 144,
+"p_eligible_d28": 0.3
+},
+{
+"channel_id": "UCmit8GhKBZ3x2nlE3cjBvWA",
+"strategy": "shorts_heavy",
+"activity_days": 6,
+"subscribers_now": 3,
+"eligible_now": false,
+"subscribers_d7": 6,
+"subscribers_d28": 17,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UCmj5VEB9lvs1nP2WcpryFtw",
+"strategy": "shorts_heavy",
+"activity_days": 32,
+"subscribers_now": 14800,
+"eligible_now": false,
+"subscribers_d7": 18038,
+"subscribers_d28": 27750,
+"p_eligible_d28": 0.068
+},
+{
+"channel_id": "UCmnmUioWlNNKvISym3D0jGg",
+"strategy": "shorts_heavy",
+"activity_days": 38,
+"subscribers_now": 690,
+"eligible_now": false,
+"subscribers_d7": 817,
+"subscribers_d28": 1198,
+"p_eligible_d28": 0.074
+},
+{
+"channel_id": "UCmp4lSDCkU3WTkEl3NrYl6g",
+"strategy": "shorts_heavy",
+"activity_days": 48,
+"subscribers_now": 387,
+"eligible_now": false,
+"subscribers_d7": 443,
+"subscribers_d28": 613,
+"p_eligible_d28": 0.1
+},
+{
+"channel_id": "UCmqhnA7PYs5z6ci81pSBNQQ",
+"strategy": "long_20min_plus_daily",
+"activity_days": 34,
+"subscribers_now": 24300,
+"eligible_now": true,
+"subscribers_d7": 29303,
+"subscribers_d28": 44312,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCmr44iA-zgS5uLeVKAHFSfA",
+"strategy": "long_3_to_20min",
+"activity_days": 38,
+"subscribers_now": 43,
+"eligible_now": false,
+"subscribers_d7": 51,
+"subscribers_d28": 75,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCmsie57-kWiNbZeIzHVlPPw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 53,
+"subscribers_now": 6570,
+"eligible_now": false,
+"subscribers_d7": 7438,
+"subscribers_d28": 10041,
+"p_eligible_d28": 0.2
+},
+{
+"channel_id": "UCn0JVG9zwtlnKP-Ibxv9WbQ",
+"strategy": "shorts_heavy",
+"activity_days": 54,
+"subscribers_now": 7110,
+"eligible_now": false,
+"subscribers_d7": 8032,
+"subscribers_d28": 10797,
+"p_eligible_d28": 0.109
+},
+{
+"channel_id": "UCn25DjBqrbK5S0ANNuqZo3w",
+"strategy": "long_20min_plus_slower",
+"activity_days": 68,
+"subscribers_now": 1590,
+"eligible_now": true,
+"subscribers_d7": 1754,
+"subscribers_d28": 2245,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCnE48isrnsKm-TJgVkaZl1g",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 6,
+"subscribers_now": 76,
+"eligible_now": false,
+"subscribers_d7": 165,
+"subscribers_d28": 431,
+"p_eligible_d28": 0.3
+},
+{
+"channel_id": "UCnKBybhgXYMl5Cs8cH8rExg",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 1,
+"eligible_now": false,
+"subscribers_d7": 8,
+"subscribers_d28": 29,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCneQPOOMLLftB0lQDRhyUOg",
+"strategy": "shorts_heavy",
+"activity_days": 102,
+"subscribers_now": 2,
+"eligible_now": false,
+"subscribers_d7": 2,
+"subscribers_d28": 3,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCngCIcYNLQoiHQ_Lp3zXHgg",
+"strategy": "shorts_heavy",
+"activity_days": 53,
+"subscribers_now": 974,
+"eligible_now": false,
+"subscribers_d7": 1103,
+"subscribers_d28": 1489,
+"p_eligible_d28": 0.102
+},
+{
+"channel_id": "UCnntUK_1GuwXMra-HEdrMMg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 6,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.529
+},
+{
+"channel_id": "UCnwK9LSruKiy8qa2Z7Ei5rg",
+"strategy": "shorts_heavy",
+"activity_days": 15,
+"subscribers_now": 1110,
+"eligible_now": false,
+"subscribers_d7": 1628,
+"subscribers_d28": 3182,
+"p_eligible_d28": 0.029
+},
+{
+"channel_id": "UCo0KPb-Fa_Dq3W2m5ydL1XA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 86,
+"subscribers_now": 604,
+"eligible_now": false,
+"subscribers_d7": 653,
+"subscribers_d28": 801,
+"p_eligible_d28": 0.375
+},
+{
+"channel_id": "UCo8Da2fNMK67ZVPON2tC63Q",
+"strategy": "long_20min_plus_slower",
+"activity_days": 34,
+"subscribers_now": 135,
+"eligible_now": false,
+"subscribers_d7": 163,
+"subscribers_d28": 246,
+"p_eligible_d28": 0.667
+},
+{
+"channel_id": "UCoQ1ROc7Wq-qlXtIRx0xv7w",
+"strategy": "shorts_heavy",
+"activity_days": 82,
+"subscribers_now": 12500,
+"eligible_now": false,
+"subscribers_d7": 13567,
+"subscribers_d28": 16768,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCoRy88LQuAfIvyeYbpM2GDg",
+"strategy": "shorts_heavy",
+"activity_days": 69,
+"subscribers_now": 8330,
+"eligible_now": false,
+"subscribers_d7": 9175,
+"subscribers_d28": 11710,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCoWDOm2kAOdEx9NHEnWZWuw",
+"strategy": "shorts_heavy",
+"activity_days": 75,
+"subscribers_now": 12700,
+"eligible_now": false,
+"subscribers_d7": 13885,
+"subscribers_d28": 17441,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCoWYmLyIhWQexF0l3iTlQhA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 27,
+"subscribers_now": 3910,
+"eligible_now": true,
+"subscribers_d7": 4924,
+"subscribers_d28": 7965,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCocYdbj3SnuKoihnfLpVIBg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 19,
+"subscribers_now": 137,
+"eligible_now": false,
+"subscribers_d7": 187,
+"subscribers_d28": 339,
+"p_eligible_d28": 0.154
+},
+{
+"channel_id": "UCokIvqip_ZTnGabsfFpYq0Q",
+"strategy": "long_20min_plus_daily",
+"activity_days": 67,
+"subscribers_now": 5950,
+"eligible_now": true,
+"subscribers_d7": 6572,
+"subscribers_d28": 8437,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCp5rbjYu8EvokDj9XO_8kEA",
+"strategy": "shorts_heavy",
+"activity_days": 83,
+"subscribers_now": 32300,
+"eligible_now": true,
+"subscribers_d7": 35024,
+"subscribers_d28": 43196,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCp5s4XuIMpeXXO8CwhSc8dw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 91,
+"subscribers_now": 217,
+"eligible_now": false,
+"subscribers_d7": 234,
+"subscribers_d28": 284,
+"p_eligible_d28": 0.375
+},
+{
+"channel_id": "UCpEJ_eOOfB-_u6n5_KIsDiw",
+"strategy": "shorts_heavy",
+"activity_days": 26,
+"subscribers_now": 44,
+"eligible_now": false,
+"subscribers_d7": 56,
+"subscribers_d28": 91,
+"p_eligible_d28": 0.018
+},
+{
+"channel_id": "UCpFpA8Jm-HK5j3NiNjioQmA",
+"strategy": "long_3_to_20min",
+"activity_days": 26,
+"subscribers_now": 22,
+"eligible_now": false,
+"subscribers_d7": 28,
+"subscribers_d28": 46,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCpJFjMeVfIDUz1gJWzrfa6A",
+"strategy": "shorts_heavy",
+"activity_days": 66,
+"subscribers_now": 6720,
+"eligible_now": false,
+"subscribers_d7": 7433,
+"subscribers_d28": 9571,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCp_LmJgWJjkFbwwB0iEYYAw",
+"strategy": "shorts_heavy",
+"activity_days": 2,
+"subscribers_now": 24,
+"eligible_now": false,
+"subscribers_d7": 108,
+"subscribers_d28": 360,
+"p_eligible_d28": 0.037
+},
+{
+"channel_id": "UCpxGGM9ab-E8xz8yrHDH6ng",
+"strategy": "long_20min_plus_daily",
+"activity_days": 6,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.529
+},
+{
+"channel_id": "UCq5YIsCXM_FtN5t8f0VI6AQ",
+"strategy": "shorts_heavy",
+"activity_days": 73,
+"subscribers_now": 1020,
+"eligible_now": false,
+"subscribers_d7": 1118,
+"subscribers_d28": 1411,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCqEZ82s7WFt-3ZHdINpx4Kg",
+"strategy": "long_3_to_20min",
+"activity_days": 10,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.286
+},
+{
+"channel_id": "UCqIDIr5d4IEriGVHV2aEW2A",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 109,
+"subscribers_now": 1220,
+"eligible_now": true,
+"subscribers_d7": 1298,
+"subscribers_d28": 1533,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCqb0BCgUgHzKat8bU3unOmQ",
+"strategy": "shorts_heavy",
+"activity_days": 66,
+"subscribers_now": 30,
+"eligible_now": false,
+"subscribers_d7": 33,
+"subscribers_d28": 43,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCqmlU_IRfiBLck40RFzcdwA",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 20,
+"eligible_now": false,
+"subscribers_d7": 160,
+"subscribers_d28": 580,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCr31TaVdhzeUFYQ-DZRwRIA",
+"strategy": "long_20min_plus_daily",
+"activity_days": 33,
+"subscribers_now": 3160,
+"eligible_now": true,
+"subscribers_d7": 3830,
+"subscribers_d28": 5841,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCrcH_Y0KPPaNoXwH28ZlfjQ",
+"strategy": "shorts_heavy",
+"activity_days": 114,
+"subscribers_now": 16800,
+"eligible_now": false,
+"subscribers_d7": 17832,
+"subscribers_d28": 20926,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCrkEbLcSkaUfyCJGujNgK-w",
+"strategy": "shorts_heavy",
+"activity_days": 49,
+"subscribers_now": 266,
+"eligible_now": false,
+"subscribers_d7": 304,
+"subscribers_d28": 418,
+"p_eligible_d28": 0.094
+},
+{
+"channel_id": "UCrn8oKlrm13yl-q55flgiWA",
+"strategy": "shorts_heavy",
+"activity_days": 14,
+"subscribers_now": 4,
+"eligible_now": false,
+"subscribers_d7": 6,
+"subscribers_d28": 12,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCrz0bWs77NmWxOTg24whZfA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 66,
+"subscribers_now": 11500,
+"eligible_now": true,
+"subscribers_d7": 12720,
+"subscribers_d28": 16379,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCsNozu45Tmcg07P4-erK-Ig",
+"strategy": "shorts_heavy",
+"activity_days": 16,
+"subscribers_now": 363,
+"eligible_now": false,
+"subscribers_d7": 522,
+"subscribers_d28": 998,
+"p_eligible_d28": 0.03
+},
+{
+"channel_id": "UCsd9M8GtXK5I2EyBtHvyFZw",
+"strategy": "shorts_heavy",
+"activity_days": 107,
+"subscribers_now": 40,
+"eligible_now": false,
+"subscribers_d7": 43,
+"subscribers_d28": 50,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCsgIYxoP62W05QwGJdno_NQ",
+"strategy": "shorts_heavy",
+"activity_days": 23,
+"subscribers_now": 100000,
+"eligible_now": false,
+"subscribers_d7": 130435,
+"subscribers_d28": 221739,
+"p_eligible_d28": 0.019
+},
+{
+"channel_id": "UCsjGS_SdxOEObhv3S3TQITg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 12,
+"subscribers_now": 455,
+"eligible_now": false,
+"subscribers_d7": 720,
+"subscribers_d28": 1517,
+"p_eligible_d28": 0.273
+},
+{
+"channel_id": "UCsv5fEbk8EXvgcfbUe3UHbA",
+"strategy": "shorts_heavy",
+"activity_days": 3,
+"subscribers_now": 60,
+"eligible_now": false,
+"subscribers_d7": 200,
+"subscribers_d28": 620,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCtJ9xrx5S_Z8FNFo7B2yr3Q",
+"strategy": "long_20min_plus_daily",
+"activity_days": 10,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCtPG8LwHIGjYJ-I_rnHZ5WA",
+"strategy": "shorts_heavy",
+"activity_days": 112,
+"subscribers_now": 111000,
+"eligible_now": false,
+"subscribers_d7": 117938,
+"subscribers_d28": 138750,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCtVJxI6C25mFCHEbdfuosVg",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 3,
+"subscribers_now": 40,
+"eligible_now": false,
+"subscribers_d7": 133,
+"subscribers_d28": 413,
+"p_eligible_d28": 0.25
+},
+{
+"channel_id": "UCtWYCrJ3BmV95zF8pjLdrEA",
+"strategy": "shorts_heavy",
+"activity_days": 59,
+"subscribers_now": 2340,
+"eligible_now": false,
+"subscribers_d7": 2618,
+"subscribers_d28": 3451,
+"p_eligible_d28": 0.121
+},
+{
+"channel_id": "UCuDFU11Z-hYEeAygmT5azzA",
+"strategy": "long_3_to_20min",
+"activity_days": 1,
+"subscribers_now": 4,
+"eligible_now": false,
+"subscribers_d7": 32,
+"subscribers_d28": 116,
+"p_eligible_d28": 0.286
+},
+{
+"channel_id": "UCuIxd0p0wljFKxzaj8zPFLw",
+"strategy": "shorts_heavy",
+"activity_days": 4,
+"subscribers_now": 28,
+"eligible_now": false,
+"subscribers_d7": 77,
+"subscribers_d28": 224,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCuJVasC2Xf5-svlSnQVwimw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 42,
+"subscribers_now": 13,
+"eligible_now": false,
+"subscribers_d7": 15,
+"subscribers_d28": 22,
+"p_eligible_d28": 0.167
+},
+{
+"channel_id": "UCuVvwzHRU2IUOpN8TrHsa9A",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 113,
+"subscribers_now": 186,
+"eligible_now": false,
+"subscribers_d7": 198,
+"subscribers_d28": 232,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCudRxLMCRE2JJneBDDu4jvA",
+"strategy": "long_3_to_20min",
+"activity_days": 44,
+"subscribers_now": 43,
+"eligible_now": false,
+"subscribers_d7": 50,
+"subscribers_d28": 70,
+"p_eligible_d28": 0.6
+},
+{
+"channel_id": "UCujb5av5Jwy_xWlPJDSi0zw",
+"strategy": "shorts_heavy",
+"activity_days": 19,
+"subscribers_now": 272,
+"eligible_now": false,
+"subscribers_d7": 372,
+"subscribers_d28": 673,
+"p_eligible_d28": 0.034
+},
+{
+"channel_id": "UCusg92jeHHtVpM0aGjam1jA",
+"strategy": "shorts_heavy",
+"activity_days": 4,
+"subscribers_now": 12,
+"eligible_now": false,
+"subscribers_d7": 33,
+"subscribers_d28": 96,
+"p_eligible_d28": 0.038
+},
+{
+"channel_id": "UCuzVReI8TGThRNJe-mSk5GQ",
+"strategy": "shorts_heavy",
+"activity_days": 37,
+"subscribers_now": 2190,
+"eligible_now": false,
+"subscribers_d7": 2604,
+"subscribers_d28": 3847,
+"p_eligible_d28": 0.071
+},
+{
+"channel_id": "UCvPi243OLkY0Z6YfAMimgyw",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 56,
+"subscribers_now": 38,
+"eligible_now": false,
+"subscribers_d7": 43,
+"subscribers_d28": 57,
+"p_eligible_d28": 0.167
+},
+{
+"channel_id": "UCvg1dwrPAtBBWGTIbeKpOaw",
+"strategy": "shorts_heavy",
+"activity_days": 20,
+"subscribers_now": 1000,
+"eligible_now": false,
+"subscribers_d7": 1350,
+"subscribers_d28": 2400,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCvhKHuH7VuoCcaolgYBRm-Q",
+"strategy": "shorts_heavy",
+"activity_days": 44,
+"subscribers_now": 1150,
+"eligible_now": false,
+"subscribers_d7": 1333,
+"subscribers_d28": 1882,
+"p_eligible_d28": 0.094
+},
+{
+"channel_id": "UCvqpZ5ro60I70QUwnJvwQeA",
+"strategy": "shorts_heavy",
+"activity_days": 35,
+"subscribers_now": 3590,
+"eligible_now": false,
+"subscribers_d7": 4308,
+"subscribers_d28": 6462,
+"p_eligible_d28": 0.068
+},
+{
+"channel_id": "UCvs96x0yrrX8HYbOspri43Q",
+"strategy": "long_3_to_20min",
+"activity_days": 31,
+"subscribers_now": 892,
+"eligible_now": false,
+"subscribers_d7": 1093,
+"subscribers_d28": 1698,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCvvz0_9ro2ikGRMSHBa3EPQ",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 5,
+"eligible_now": false,
+"subscribers_d7": 40,
+"subscribers_d28": 145,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCwAm1eQwxWthQHaX46930NA",
+"strategy": "shorts_heavy",
+"activity_days": 43,
+"subscribers_now": 50,
+"eligible_now": false,
+"subscribers_d7": 58,
+"subscribers_d28": 83,
+"p_eligible_d28": 0.093
+},
+{
+"channel_id": "UCwnpisF5SCopGEnVMsnEpOw",
+"strategy": "shorts_heavy",
+"activity_days": 32,
+"subscribers_now": 45,
+"eligible_now": false,
+"subscribers_d7": 55,
+"subscribers_d28": 84,
+"p_eligible_d28": 0.068
+},
+{
+"channel_id": "UCwqt_oT-Is7MnQqPqbJ2oQw",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 6,
+"eligible_now": false,
+"subscribers_d7": 48,
+"subscribers_d28": 174,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCwsIy72mS04pjgEWoOW7gTg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 1,
+"subscribers_now": 61,
+"eligible_now": false,
+"subscribers_d7": 488,
+"subscribers_d28": 1769,
+"p_eligible_d28": 0.5
+},
+{
+"channel_id": "UCwuwYJr3o1aUnHBhr1U0h1Q",
+"strategy": "shorts_heavy",
+"activity_days": 68,
+"subscribers_now": 80,
+"eligible_now": false,
+"subscribers_d7": 88,
+"subscribers_d28": 113,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UCx7HiCQjZbQFolcu4qQ-Ihg",
+"strategy": "shorts_heavy",
+"activity_days": 49,
+"subscribers_now": 542,
+"eligible_now": false,
+"subscribers_d7": 619,
+"subscribers_d28": 852,
+"p_eligible_d28": 0.094
+},
+{
+"channel_id": "UCxDIcxfv_ilnAY7HzClQbIQ",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 38,
+"subscribers_now": 1170,
+"eligible_now": true,
+"subscribers_d7": 1386,
+"subscribers_d28": 2032,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCxDkzIHMU6EwlonqKjBCrGw",
+"strategy": "shorts_heavy",
+"activity_days": 70,
+"subscribers_now": 1580,
+"eligible_now": false,
+"subscribers_d7": 1738,
+"subscribers_d28": 2212,
+"p_eligible_d28": 0.042
+},
+{
+"channel_id": "UCxL20r3_gfA4ubXmouosgaA",
+"strategy": "mixed_long_and_shorts",
+"activity_days": 49,
+"subscribers_now": 111,
+"eligible_now": false,
+"subscribers_d7": 127,
+"subscribers_d28": 174,
+"p_eligible_d28": 0.231
+},
+{
+"channel_id": "UCxNBf4d6cVn1p1RugtVGbvQ",
+"strategy": "shorts_heavy",
+"activity_days": 35,
+"subscribers_now": 1710,
+"eligible_now": false,
+"subscribers_d7": 2052,
+"subscribers_d28": 3078,
+"p_eligible_d28": 0.068
+},
+{
+"channel_id": "UCxSDAPVgFX4HA3Kjb58Y7qw",
+"strategy": "shorts_heavy",
+"activity_days": 9,
+"subscribers_now": 145,
+"eligible_now": false,
+"subscribers_d7": 258,
+"subscribers_d28": 596,
+"p_eligible_d28": 0.027
+},
+{
+"channel_id": "UCxgnuzZ6PnZcVN-FSmv6i4g",
+"strategy": "shorts_heavy",
+"activity_days": 1,
+"subscribers_now": 0,
+"eligible_now": false,
+"subscribers_d7": 0,
+"subscribers_d28": 0,
+"p_eligible_d28": 0.036
+},
+{
+"channel_id": "UCxkfYNzrKXKJGyNGCM0JE0w",
+"strategy": "long_20min_plus_daily",
+"activity_days": 18,
+"subscribers_now": 9660,
+"eligible_now": true,
+"subscribers_d7": 13417,
+"subscribers_d28": 24687,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCxkrTBqTjjB3Zpn2pgMlhug",
+"strategy": "long_20min_plus_daily",
+"activity_days": 42,
+"subscribers_now": 1470,
+"eligible_now": true,
+"subscribers_d7": 1715,
+"subscribers_d28": 2450,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCyD2hsqSZvBAsrzLGeyupGg",
+"strategy": "long_3_to_20min",
+"activity_days": 104,
+"subscribers_now": 10200,
+"eligible_now": true,
+"subscribers_d7": 10887,
+"subscribers_d28": 12946,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCyKMIM9Yo89iDhypkxLpbhQ",
+"strategy": "shorts_heavy",
+"activity_days": 57,
+"subscribers_now": 530,
+"eligible_now": false,
+"subscribers_d7": 595,
+"subscribers_d28": 790,
+"p_eligible_d28": 0.135
+},
+{
+"channel_id": "UCyewN3tL0tsRu0c72cBR0XQ",
+"strategy": "shorts_heavy",
+"activity_days": 70,
+"subscribers_now": 178000,
+"eligible_now": true,
+"subscribers_d7": 195800,
+"subscribers_d28": 249200,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCz3_JbXDHp7cAwy7sE5S_Vw",
+"strategy": "long_20min_plus_daily",
+"activity_days": 20,
+"subscribers_now": 12100,
+"eligible_now": true,
+"subscribers_d7": 16335,
+"subscribers_d28": 29040,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCzED6oPl2eNJiog0ySgqCrg",
+"strategy": "long_3_to_20min",
+"activity_days": 87,
+"subscribers_now": 1080,
+"eligible_now": true,
+"subscribers_d7": 1167,
+"subscribers_d28": 1428,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCzatL8HmKMs1axIplMVABsg",
+"strategy": "long_20min_plus_daily",
+"activity_days": 61,
+"subscribers_now": 3710,
+"eligible_now": true,
+"subscribers_d7": 4136,
+"subscribers_d28": 5413,
+"p_eligible_d28": null
+},
+{
+"channel_id": "UCzg32XqY-fSQlzGWzKrmYqw",
+"strategy": "shorts_heavy",
+"activity_days": 7,
+"subscribers_now": 18,
+"eligible_now": false,
+"subscribers_d7": 36,
+"subscribers_d28": 90,
+"p_eligible_d28": 0.039
+},
+{
+"channel_id": "UCzgdCKq0ucnYFO0GropU7dw",
+"strategy": "shorts_heavy",
+"activity_days": 33,
+"subscribers_now": 99300,
+"eligible_now": false,
+"subscribers_d7": 120364,
+"subscribers_d28": 183555,
+"p_eligible_d28": 0.067
+},
+{
+"channel_id": "UCzoXhP0AXhDuupPajtZ8q8w",
+"strategy": "shorts_heavy",
+"activity_days": 32,
+"subscribers_now": 181,
+"eligible_now": false,
+"subscribers_d7": 221,
+"subscribers_d28": 339,
+"p_eligible_d28": 0.068
+},
+{
+"channel_id": "UCzp1b2_8rh87wE-uAkNal6g",
+"strategy": "shorts_heavy",
+"activity_days": 102,
+"subscribers_now": 4770,
+"eligible_now": false,
+"subscribers_d7": 5097,
+"subscribers_d28": 6079,
+"p_eligible_d28": 0.0
+},
+{
+"channel_id": "UCzqtFdRbms1HUdL7Lr03JAA",
+"strategy": "shorts_heavy",
+"activity_days": 71,
+"subscribers_now": 1400,
+"eligible_now": false,
+"subscribers_d7": 1538,
+"subscribers_d28": 1952,
+"p_eligible_d28": 0.0
+}
+]
+}
