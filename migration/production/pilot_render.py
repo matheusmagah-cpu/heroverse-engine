@@ -124,8 +124,15 @@ def voice(work, script_path):
         start = cursor
         for index, sentence in enumerate(sentences(segment["text"])):
             path = work / "voice" / f"{segment['id']}-{index:02d}.wav"
-            receipt = synthesize_voice_sample(engine, text=sentence, output_path=path,
-                                              voice_id=cfg["voice_id"], speed=cfg["speed"])
+            for attempt in range(3):  # the adapter occasionally returns empty audio; the same sentence then succeeds
+                try:
+                    receipt = synthesize_voice_sample(engine, text=sentence, output_path=path,
+                                                      voice_id=cfg["voice_id"], speed=cfg["speed"])
+                    break
+                except RuntimeError as e:
+                    if "empty audio" not in str(e) or attempt == 2:
+                        raise RuntimeError(f"VOICE_FAILED {segment['id']}-{index:02d}: {e}") from e
+                    print(f"VOICE_RETRY {segment['id']}-{index:02d}", file=sys.stderr)
             if receipt["clipping"]:
                 raise RuntimeError("VOICE_CLIPPING " + segment["id"])
             samples, rate = sf.read(path, dtype="float32")
