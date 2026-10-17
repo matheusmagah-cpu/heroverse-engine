@@ -41,9 +41,9 @@ class Panel(unittest.TestCase):
         rows = {c["channel_id"]: c for c in record["channels"]}
         self.assertEqual(rows["UCyoung"]["age_days"], 46)
         self.assertEqual(rows["UCyoung"]["uploads"][0]["duration_seconds"], 605)
-        self.assertNotIn("uploads", rows["UCold"])
+        self.assertEqual(rows["UCold"]["uploads_status"], "FETCHED")  # short history, old account
         self.assertIsNone(rows["UCold"]["subscribers"])
-        self.assertEqual(record["data_api_units"], 60 * 100 + 1 + 2)
+        self.assertEqual(record["data_api_units"], 60 * 100 + 1 + 2 + 2)
 
     def test_budget_stops_discovery_without_overspending(self):
         record = mp.build(Fake(450), NOW)
