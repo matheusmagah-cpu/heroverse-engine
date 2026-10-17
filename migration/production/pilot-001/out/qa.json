@@ -1,0 +1,64 @@
+{
+ "version": "pilot-qa-v1",
+ "pilot_id": "pilot-001",
+ "output_sha256": "e7f665724dfe782443a0d62c87d3cf18528f3ab710002a81bc4533cbb3c4e8db",
+ "status": "FAIL",
+ "checks": {
+  "full_decode_without_errors": true,
+  "video_format": true,
+  "duration_min": true,
+  "integrated_lufs": true,
+  "true_peak": true,
+  "speech_presence": false,
+  "no_singing": true,
+  "wer_vs_script": true,
+  "words_per_minute": true,
+  "first_word_onset": true,
+  "hook_second_person": false,
+  "picture_changes_per_minute": true,
+  "median_shot_seconds": true,
+  "no_source_second_reused": true,
+  "clips_creative_commons_with_attribution": true,
+  "music_owned": true,
+  "voice_model_pinned": true
+ },
+ "measurements": {
+  "duration_seconds": 610.8,
+  "loudness": {
+   "integrated_lufs": -15.4,
+   "loudness_range_lu": 2.5,
+   "true_peak_dbtp": -1.2
+  },
+  "speech_presence": 0.572,
+  "music_presence": 0.947,
+  "wer_vs_script": 0.0743,
+  "accepted_words_per_minute": 131.9,
+  "first_word_seconds": 0.05,
+  "editing": {
+   "picture_changes": 269,
+   "picture_changes_per_minute": 26.42,
+   "median_shot_seconds": 2.1,
+   "longest_shot_seconds": 7.6,
+   "motion_median_top_decile_diff": 1.443
+  },
+  "colour": {
+   "mean_brightness": 0.3458,
+   "brightness_std_over_time": 0.1204,
+   "mean_saturation": 0.37,
+   "saturation_std_over_time": 0.1999
+  },
+  "rhythm": {
+   "audio_onsets": 808,
+   "audio_onsets_per_minute": 79.37,
+   "tempo": {
+    "bpm": 49.87,
+    "confidence": 0.016
+   }
+  }
+ },
+ "transcript_head": "Good morning. are holding this day with a tight chest, already counting what could go wrong, stay with me for the next few Before you walk into today, I want you God has already been there. Take one slow breath. Let your shoulders drop. do not have to solve the whole day You only have to bring this moment the one who is not surprised by anything waiting The meeting you are nervous about, the conve",
+ "criteria_sha256": "ee5b52ee99df509a938e70fa9d0f00b0fe9d31ad6f28f4553e306ed8439092eb",
+ "human_review": "PENDING (D-076 calibration by sampling)",
+ "upload_performed": false,
+ "publication_performed": false
+}
