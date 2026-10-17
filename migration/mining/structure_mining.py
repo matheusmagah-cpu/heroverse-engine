@@ -144,7 +144,33 @@ def call(payload, key, models):
     raise ProviderFailure(last or "NO_FREE_MODEL")
 
 
+def degenerate(report):
+    """A model stuck in a loop repeats the same line: such a transcript is never used."""
+    lines = [t["text"].strip().lower() for t in report.get("transcript") or [] if t["text"].strip()]
+    if len(lines) >= 10 and len(set(lines)) / len(lines) < 0.85:
+        return True
+    return any(lines[i] == lines[i + 1] == lines[i + 2] for i in range(len(lines) - 2))
+
+
+def repair(report, start, end, gap=15):
+    """Close small timeline gaps (<= gap s) the model leaves between beats; never invents content."""
+    beats = sorted(report.get("beats") or [], key=lambda b: b["start_seconds"])
+    if not beats:
+        return report
+    if 0 < beats[0]["start_seconds"] - start <= gap:
+        beats[0]["start_seconds"] = start
+    for a, b in zip(beats, beats[1:]):
+        if 0 < b["start_seconds"] - a["end_seconds"] <= gap or 0 < a["end_seconds"] - b["start_seconds"] <= gap:
+            a["end_seconds"] = b["start_seconds"]
+    if 0 < end - beats[-1]["end_seconds"] <= gap or 0 < beats[-1]["end_seconds"] - end <= gap:
+        beats[-1]["end_seconds"] = end
+    report["beats"] = [b for b in beats if b["end_seconds"] > b["start_seconds"]]
+    return report
+
+
 def valid_window(report, video_id, start, end):
+    if degenerate(report):
+        return False
     ok = (report.get("video_id") == video_id and report.get("window_start_seconds") == start
           and report.get("window_end_seconds") == end and report.get("audio_received") is True
           and report.get("visual_received") is True and report.get("beats"))
@@ -306,30 +332,38 @@ def main(out_dir, channels, per_channel=3):
         videos, uploads = pick_videos(client, channel_id, int(per_channel))
         for video in videos:
             path = out / f"structure-{video['video_id']}.json"
-            if path.exists() and json.loads(path.read_text()).get("version") == "structure-record-v2":
-                records.append(json.loads(path.read_text()))   # already mined: re-runs never pay twice
+            old = json.loads(path.read_text()) if path.exists() else {}
+            # keep every earlier window that still passes today's checks; mine only what is missing
+            kept = {w["window_start_seconds"]: w for w in old.get("windows", []) if old.get("version") == "structure-record-v2"
+                    and valid_window(w, video["video_id"], w["window_start_seconds"], w["window_end_seconds"])}
+            expected = [s0 for s0 in range(0, video["seconds"], WINDOW) if min(s0 + WINDOW, video["seconds"]) - s0 >= 5]
+            if old and all(s0 in kept for s0 in expected):
+                records.append(old)   # complete: re-runs never pay twice
                 continue
-            windows = []
-            for start in range(0, video["seconds"], WINDOW):
+            windows, quota = [kept[s0] for s0 in expected if s0 in kept], False
+            for start in [s0 for s0 in expected if s0 not in kept]:
                 end = min(start + WINDOW, video["seconds"])
-                if end - start < 5:
-                    continue
-                try:
-                    model, report = call(video_request(video, start, end), key, models)
-                    log["calls"] += 1
-                    log["models"][model] = log["models"].get(model, 0) + 1
-                except ProviderFailure as e:
-                    log["failed_windows"].append({"video_id": video["video_id"], "start": start, "code": e.code})
-                    if "QUOTA" in str(e.code) or "429" in str(e.code):
+                for attempt in range(2):   # one retry for a malformed or looping answer
+                    try:
+                        model, report = call(video_request(video, start, end), key, models)
+                        log["calls"] += 1
+                        log["models"][model] = log["models"].get(model, 0) + 1
+                    except ProviderFailure as e:
+                        log["failed_windows"].append({"video_id": video["video_id"], "start": start, "code": e.code})
+                        quota = "QUOTA" in str(e.code) or "429" in str(e.code)
                         break
-                    continue
-                if valid_window(report, video["video_id"], start, end):
-                    report["model"] = model
-                    windows.append(report)
-                else:
-                    log["failed_windows"].append({"video_id": video["video_id"], "start": start, "code": "INVALID_WINDOW_REPORT"})
+                    report = repair(report, start, end) if isinstance(report, dict) else {}
+                    if valid_window(report, video["video_id"], start, end):
+                        report["model"] = model
+                        windows.append(report)
+                        break
+                    log["failed_windows"].append({"video_id": video["video_id"], "start": start, "attempt": attempt,
+                                                  "code": "LOOPING_TRANSCRIPT" if degenerate(report) else "INVALID_WINDOW_REPORT"})
+                if quota:
+                    break
+            windows.sort(key=lambda w: w["window_start_seconds"])
             try:
-                thumb = thumbnail(video, key, models)
+                thumb = old.get("thumbnail_analysis") if "error" not in (old.get("thumbnail_analysis") or {"error": 1}) else thumbnail(video, key, models)
             except Exception as e:  # a missing thumbnail analysis never blocks the structure record
                 thumb = {"error": type(e).__name__}
             record = {"version": "structure-record-v2", "thumbnail_analysis": thumb, "status": "MODEL_REPORTED_NOT_VERIFIED", "video": video,
