@@ -1,0 +1,61 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-003",
+ "style": "soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused_from_pilot_002": [
+  "figure-a",
+  "bg-wheat",
+  "bg-meadow",
+  "bg-sky",
+  "bg-river",
+  "bg-garden",
+  "bg-hills"
+ ],
+ "images": [
+  {
+   "id": "bg-sunrise-field",
+   "prompt": "wide field of tall grass at sunrise, golden light breaking over the horizon, dew on the grass, a single path leading forward, no people",
+   "seed": 3000
+  },
+  {
+   "id": "bg-eagle-cliffs",
+   "prompt": "majestic eagle soaring above sunlit mountain cliffs at dawn, wings fully spread, warm golden sky, vast open space",
+   "seed": 3001
+  },
+  {
+   "id": "bg-morning-path",
+   "prompt": "quiet country path through trees in early morning light, soft sun rays through the leaves, gentle mist, no people",
+   "seed": 3002
+  },
+  {
+   "id": "bg-dawn-lake",
+   "prompt": "still lake at first light, mirror reflection of pink and gold clouds, reeds in the foreground, soft mist on the water, no people",
+   "seed": 3003
+  },
+  {
+   "id": "bg-orchard",
+   "prompt": "blossoming orchard in morning sunlight, rows of fruit trees with white blossoms, soft green grass, peaceful, no people",
+   "seed": 3004
+  },
+  {
+   "id": "bg-mountain-sunrise",
+   "prompt": "sun rising behind layered mountain ridges, warm rays across a green valley, wide cinematic landscape, no people",
+   "seed": 3005
+  },
+  {
+   "id": "bg-misty-valley",
+   "prompt": "misty green valley at sunrise with a winding river, soft golden haze, distant hills, no people",
+   "seed": 3006
+  },
+  {
+   "id": "bg-coffee-window",
+   "prompt": "warm cup of coffee and an open Bible on a wooden table beside a sunlit window at sunrise, plants on the sill, cosy morning light, no people",
+   "seed": 3007
+  }
+ ]
+}

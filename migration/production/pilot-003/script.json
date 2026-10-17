@@ -1,0 +1,378 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-003",
+ "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+ "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "working_title": "Morning Prayer | When You Wake Up Tired, God Renews Your Strength",
+ "promise": "Title promise 'God renews your strength' is spoken at 0-8 s ('this morning he wants to give some of it to you').",
+ "angle": "For the listener who wakes up already exhausted: God gives power to the faint; strength is received, not manufactured, one task at a time.",
+ "authorship": "Original text written for HeroVerse by Claude Code (AI assistant) on 2026-10-18. Scripture quotations are from the King James Version (public domain).",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "beat": "0-8 s: direct address, concrete moment, promise",
+   "pause_after": 0.8,
+   "text": "Good morning. If you woke up already tired, before the day has even begun, stay with me for the next few minutes. God has not run out of strength, and this morning he wants to give some of it to you. Take one slow breath with me."
+  },
+  {
+   "id": "invitation",
+   "beat": "8-30 s: settle the body, name the need",
+   "pause_after": 1.2,
+   "text": "You do not have to pretend you are full of energy. You can come to him exactly as you are: the heavy eyes, the long list, the worry you carried to bed and found waiting for you when you woke. Let your shoulders drop. Unclench your hands. For the next few minutes, nothing is required of you except to listen and to let him lift what you cannot lift alone."
+  },
+  {
+   "id": "scripture-1",
+   "beat": "anchor: Isaiah 40:31",
+   "pause_after": 1.5,
+   "text": "The prophet Isaiah wrote these words to people who were exhausted. But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.",
+   "reference": "Isaiah 40:31 (KJV)",
+   "chapter": "Renewed strength (Isaiah 40:31)"
+  },
+  {
+   "id": "reflection-1",
+   "beat": "reflection: renewed, not invented",
+   "pause_after": 1.2,
+   "text": "Notice the word renew. You are not asked to manufacture strength out of nothing. You are invited to receive it again, the way a field receives rain. Waiting on the Lord is not doing nothing. It is turning toward him first, before the phone, before the news, before the noise, and letting him set the pace of your day."
+  },
+  {
+   "id": "prayer-1",
+   "beat": "first guided prayer: honest start",
+   "pause_after": 1.2,
+   "text": "So let us begin honestly. Lord, here I am. You know how I slept, and you know how I feel. I will not hide my tiredness from you. I wait on you this morning. Renew my strength. Not the strength to do everything, but the strength to do the next right thing, and then the one after that."
+  },
+  {
+   "id": "scripture-2",
+   "beat": "anchor: Isaiah 40:29",
+   "pause_after": 1.5,
+   "text": "Isaiah says it again, just two verses earlier. He giveth power to the faint; and to them that have no might he increaseth strength.",
+   "reference": "Isaiah 40:29 (KJV)"
+  },
+  {
+   "id": "reflection-2",
+   "beat": "reflection: the faint are his specialty",
+   "pause_after": 1.2,
+   "text": "Look at who receives the power. Not the strong. Not the people who have it all together. The faint. The ones with no might left. If that describes you this morning, you are not disqualified. You are exactly the person this promise was written for."
+  },
+  {
+   "id": "scripture-3",
+   "beat": "anchor: Psalm 5:3",
+   "pause_after": 1.5,
+   "text": "David prayed like this at the start of his days. My voice shalt thou hear in the morning, O LORD; in the morning will I direct my prayer unto thee, and will look up.",
+   "reference": "Psalm 5:3 (KJV)",
+   "chapter": "In the morning (Psalm 5:3)"
+  },
+  {
+   "id": "prayer-2",
+   "beat": "guided prayer: direct the day to him",
+   "pause_after": 1.2,
+   "text": "Lord, like David, I direct my prayer to you before anything else. Hear my voice this morning. I lift my eyes from the problems in front of me and I look up. Remind me that you are above this day, and that nothing in it will surprise you."
+  },
+  {
+   "id": "scripture-4",
+   "beat": "anchor: Psalm 118:24",
+   "pause_after": 1.5,
+   "text": "This is the day which the LORD hath made; we will rejoice and be glad in it.",
+   "reference": "Psalm 118:24 (KJV)"
+  },
+  {
+   "id": "reflection-3",
+   "beat": "reflection: a made day",
+   "pause_after": 1.2,
+   "text": "This day was made. It did not happen by accident. Before your alarm rang, God had already shaped the hours you are about to live. You may not feel like rejoicing yet, and that is all right. Gladness often arrives after obedience, not before it. So we choose it first, and the feeling can follow."
+  },
+  {
+   "id": "stillness",
+   "beat": "guided stillness: 2 breaths, music forward",
+   "pause_after": 6.0,
+   "text": "Let us be still for a moment. Breathe in slowly. And breathe out. One more time, breathe in, and let it go."
+  },
+  {
+   "id": "transition",
+   "beat": "turn: from listening to praying",
+   "pause_after": 1.5,
+   "text": "Now let us pray through the parts of this day, one at a time, and give each of them to the Lord.",
+   "chapter": "Let us pray"
+  },
+  {
+   "id": "prayer-mind",
+   "beat": "guided prayer: the tired mind",
+   "pause_after": 1.2,
+   "text": "Father, I give you my mind. You know the thoughts that started running before my feet touched the floor. Quiet the noise. Gather my scattered attention. Where I have been rehearsing worst cases, teach me to rehearse your faithfulness instead. Give me a clear head for the decisions I have to make today."
+  },
+  {
+   "id": "scripture-5",
+   "beat": "anchor: Isaiah 26:3",
+   "pause_after": 1.5,
+   "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee.",
+   "reference": "Isaiah 26:3 (KJV)"
+  },
+  {
+   "id": "prayer-body",
+   "beat": "guided prayer: the tired body",
+   "pause_after": 1.2,
+   "text": "Lord, I give you my body. You see the aches, the short night, the energy that feels like it is already spent. Strengthen me physically for what this day asks. Help me to eat well, to rest when I can, and to treat this body as a gift and not a machine. Where there is pain or sickness, I ask for your healing touch."
+  },
+  {
+   "id": "scripture-6",
+   "beat": "anchor: Matthew 11:28",
+   "pause_after": 1.5,
+   "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+   "reference": "Matthew 11:28 (KJV)",
+   "chapter": "Come unto me (Matthew 11:28)"
+  },
+  {
+   "id": "reflection-4",
+   "beat": "reflection: rest that travels with you",
+   "pause_after": 1.2,
+   "text": "The rest Jesus offers is not only for the end of the day. It is a rest you can carry into the middle of it. You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone. He is yoked beside you, pulling with you."
+  },
+  {
+   "id": "prayer-work",
+   "beat": "guided prayer: work and responsibilities",
+   "pause_after": 1.2,
+   "text": "Lord, I bring you my work today. The tasks I enjoy and the ones I have been putting off. The conversations I need to have. The people who depend on me. Give me focus and diligence. Help me to do good work, honestly and well, and to leave the results with you. When I am tempted to rush, slow me down. When I am tempted to give up, keep me going."
+  },
+  {
+   "id": "scripture-7",
+   "beat": "anchor: Colossians 3:23",
+   "pause_after": 1.5,
+   "text": "And whatsoever ye do, do it heartily, as to the Lord, and not unto men.",
+   "reference": "Colossians 3:23 (KJV)"
+  },
+  {
+   "id": "prayer-weakness",
+   "beat": "guided prayer: strength in weakness",
+   "pause_after": 1.2,
+   "text": "Father, there are parts of today I already know I cannot handle on my own. I name them before you now, quietly, in my heart. Instead of pretending, I admit my weakness. And I ask you to meet me right there, in the place where I run out."
+  },
+  {
+   "id": "scripture-8",
+   "beat": "anchor: 2 Corinthians 12:9",
+   "pause_after": 1.5,
+   "text": "The apostle Paul heard this answer when he begged for his weakness to be taken away. My grace is sufficient for thee: for my strength is made perfect in weakness.",
+   "reference": "2 Corinthians 12:9 (KJV)",
+   "chapter": "Strength in weakness (2 Corinthians 12:9)"
+  },
+  {
+   "id": "reflection-5",
+   "beat": "reflection: the empty place becomes the meeting place",
+   "pause_after": 1.2,
+   "text": "God did not remove Paul's weakness. He filled it. The place where Paul ran out became the place where Christ's power showed up most clearly. So your weakness this morning is not the end of the story. It may be the exact spot where God plans to show you what he can do."
+  },
+  {
+   "id": "prayer-family",
+   "beat": "guided prayer: the people at home",
+   "pause_after": 1.2,
+   "text": "Lord, I lift up the people I love. Those who share my home, and those who are far away. Give them strength for their own days. Protect them as they go out and as they come back. Where there is tension between us, soften our hearts. Help me to be patient and kind with them, even when I am tired."
+  },
+  {
+   "id": "prayer-weary",
+   "beat": "guided prayer: the ones carrying more",
+   "pause_after": 1.2,
+   "text": "And Lord, I pray for everyone listening to this prayer who is carrying more than usual. The caregivers who were up in the night. The parents of newborns. The ones grieving. The ones working two jobs. The ones waiting for news. Meet each of them this morning with exactly the strength they need for today."
+  },
+  {
+   "id": "scripture-9",
+   "beat": "anchor: Psalm 73:26",
+   "pause_after": 1.5,
+   "text": "My flesh and my heart faileth: but God is the strength of my heart, and my portion for ever.",
+   "reference": "Psalm 73:26 (KJV)"
+  },
+  {
+   "id": "prayer-provision",
+   "beat": "guided prayer: provision",
+   "pause_after": 1.2,
+   "text": "Father, I trust you with what I need today. The bills, the groceries, the plans that depend on money I do not yet see. You know every need before I speak it. Provide what is necessary, and give me wisdom with what I already have. Keep me from fear, and keep me generous."
+  },
+  {
+   "id": "prayer-decisions",
+   "beat": "guided prayer: decisions",
+   "pause_after": 1.2,
+   "text": "Lord, there are choices in front of me today, some small and some that feel very big. I do not want to make them in a hurry or out of fear. Give me wisdom. Close the doors that should be closed and open the ones you have prepared. And if I cannot see the whole path, give me light enough for the next step."
+  },
+  {
+   "id": "prayer-forgiveness",
+   "beat": "guided prayer: relationships and forgiveness",
+   "pause_after": 1.2,
+   "text": "Father, if I am carrying a grudge into this day, I lay it down before you. You know the words that still sting and the person I keep replaying in my mind. I do not have to pretend it did not hurt. But I choose not to let it drain the strength you are giving me. Help me to forgive as you have forgiven me, and to speak with grace today."
+  },
+  {
+   "id": "scripture-10",
+   "beat": "anchor: Psalm 28:7",
+   "pause_after": 1.5,
+   "text": "The LORD is my strength and my shield; my heart trusted in him, and I am helped: therefore my heart greatly rejoiceth; and with my song will I praise him.",
+   "reference": "Psalm 28:7 (KJV)"
+  },
+  {
+   "id": "reflection-6",
+   "beat": "reflection: strength and shield",
+   "pause_after": 1.2,
+   "text": "Strength for what is inside you. A shield for what comes at you from outside. God offers both in the same sentence. And notice the order: my heart trusted, and I am helped. Trust comes first. The help follows."
+  },
+  {
+   "id": "prayer-home",
+   "beat": "guided prayer: protection over the home",
+   "pause_after": 1.2,
+   "text": "Lord, cover my home today. Watch over the door as it opens and closes. Keep every person who lives here safe on the road, at school, at work, and in every place they go. Let our home be a place of peace when we return tonight, not of tension. Let your presence fill every room."
+  },
+  {
+   "id": "stillness-2",
+   "beat": "guided stillness: second breath",
+   "pause_after": 6.0,
+   "text": "Breathe in again, slowly. And let it go. Rest in his presence for a moment."
+  },
+  {
+   "id": "declaration",
+   "beat": "declaration: short lines to repeat",
+   "pause_after": 1.5,
+   "text": "Now say these words with me, out loud if you can, or quietly in your heart. The Lord is my strength. I am not empty, because he fills me. I am not alone, because he goes with me. I can do all things through Christ which strengtheneth me. The joy of the Lord is my strength today.",
+   "chapter": "Declaration for today"
+  },
+  {
+   "id": "scripture-11",
+   "beat": "anchor: Philippians 4:13",
+   "pause_after": 1.5,
+   "text": "I can do all things through Christ which strengtheneth me.",
+   "reference": "Philippians 4:13 (KJV)"
+  },
+  {
+   "id": "reflection-7",
+   "beat": "reflection: all things, one at a time",
+   "pause_after": 1.2,
+   "text": "All things does not mean everything at once. It means that whatever this day actually brings, Christ will give you strength for that thing, when it comes. Not before. Not all in advance. Enough, and on time."
+  },
+  {
+   "id": "scripture-12",
+   "beat": "anchor: Nehemiah 8:10",
+   "pause_after": 1.5,
+   "text": "When the people wept after hearing God's word, Nehemiah told them, Neither be ye sorry; for the joy of the LORD is your strength.",
+   "reference": "Nehemiah 8:10 (KJV)"
+  },
+  {
+   "id": "prayer-joy",
+   "beat": "guided prayer: joy as strength",
+   "pause_after": 1.2,
+   "text": "Lord, restore my joy. Not a forced smile, but the deep gladness of knowing that I belong to you. Let that joy be my strength today. When things go wrong, let me remember that your love for me has not changed."
+  },
+  {
+   "id": "scripture-13",
+   "beat": "anchor: Psalm 90:17",
+   "pause_after": 1.5,
+   "text": "And let the beauty of the LORD our God be upon us: and establish thou the work of our hands upon us; yea, the work of our hands establish thou it.",
+   "reference": "Psalm 90:17 (KJV)"
+  },
+  {
+   "id": "prayer-thanks",
+   "beat": "guided prayer: thanksgiving",
+   "pause_after": 1.2,
+   "text": "Thank you, Father, for this new morning. For breath in my lungs. For another chance to love, to work, to begin again. Thank you for the strength you have given me in the past, on days I did not think I would get through. You carried me then. I trust you to carry me now."
+  },
+  {
+   "id": "prayer-purpose",
+   "beat": "guided prayer: purpose and service",
+   "pause_after": 1.2,
+   "text": "Lord, give my day a purpose beyond my own list. Show me one person I can encourage, one small kindness I can do, one way to make someone else's load lighter. Let the strength you give me flow through me to others. I do not want to only receive today. I want to give."
+  },
+  {
+   "id": "prayer-world",
+   "beat": "guided prayer: for those who serve and for peace",
+   "pause_after": 1.2,
+   "text": "And Father, I pray for the people who keep our world running while we sleep and while we work: nurses and doctors, drivers and cooks, teachers and soldiers, farmers and cleaners. Give them strength and safety today. Bring peace to the places in the world where there is fighting, and comfort to those who woke up afraid."
+  },
+  {
+   "id": "prayer-evening",
+   "beat": "guided prayer: ending the day well",
+   "pause_after": 1.2,
+   "text": "And when this day is over, Lord, bring me back to you. Whatever happens between now and tonight, let me end the day in your presence, grateful, forgiven, and at rest. I place the evening in your hands already, so that I can live this morning without fear."
+  },
+  {
+   "id": "payoff",
+   "beat": "payoff: one concrete commitment for the day",
+   "pause_after": 1.2,
+   "text": "Here is one thing to take into your day. The next time you feel your strength running out, stop for ten seconds, breathe, and say, Lord, renew my strength. That is all. Ten seconds. Let it become the way you wait on the Lord in the middle of a busy day.",
+   "chapter": "One thing to do today"
+  },
+  {
+   "id": "blessing",
+   "beat": "closing blessing",
+   "pause_after": 1.5,
+   "text": "And now receive this blessing. The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee: The LORD lift up his countenance upon thee, and give thee peace. Go into this day renewed. In Jesus' name, amen.",
+   "reference": "Numbers 6:24-26 (KJV)",
+   "chapter": "Blessing"
+  },
+  {
+   "id": "cta",
+   "beat": "soft call to action after payoff",
+   "pause_after": 2.0,
+   "text": "If this prayer strengthened you, type amen in the comments, so others can pray with you. And come back tomorrow morning. We will start the day with God together again."
+  }
+ ],
+ "figure": "figure-a",
+ "backgrounds": [
+  "bg-sunrise-field",
+  "bg-eagle-cliffs",
+  "bg-morning-path",
+  "bg-wheat",
+  "bg-dawn-lake",
+  "bg-meadow",
+  "bg-orchard",
+  "bg-sky",
+  "bg-mountain-sunrise",
+  "bg-river",
+  "bg-garden",
+  "bg-misty-valley",
+  "bg-hills",
+  "bg-coffee-window"
+ ],
+ "overlay": {
+  "title": "God Renews Your Strength",
+  "subtitle": "MORNING PRAYER",
+  "title_image": "bg-sunrise-field",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "Woke up tired? God gives power to the faint. Pray this morning prayer with us and receive renewed strength for today.",
+ "hashtags": [
+  "#prayer",
+  "#morningprayer",
+  "#jesus"
+ ],
+ "thumbnail": {
+  "lines": [
+   "STRENGTH",
+   "FOR TODAY"
+  ],
+  "sub": "Morning Prayer"
+ },
+ "tags": [
+  "morning prayer",
+  "prayer for strength",
+  "morning prayer for strength",
+  "christian morning prayer",
+  "start your day with God",
+  "Isaiah 40:31",
+  "prayer when you are tired",
+  "renew my strength"
+ ],
+ "figure_choice": "figure-a: the channel's praying figure (frontal, hands folded), kept for brand continuity.",
+ "playlist": {
+  "title": "Morning Prayer",
+  "description": "Guided morning prayers with Scripture for peace, protection and courage. New prayers to start your day with God."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-sunrise-field",
+   "bg-dawn-lake",
+   "bg-misty-valley",
+   "bg-meadow",
+   "bg-garden"
+  ]
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-004",
+ "style": "soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused_from_pilot_002": [
+  "figure-a",
+  "bg-candle",
+  "bg-window",
+  "bg-lake"
+ ],
+ "images": [
+  {
+   "id": "bg-night-sky",
+   "prompt": "vast starry night sky over a calm hilltop, milky way glowing softly, gentle blue and gold tones, peaceful, no people",
+   "seed": 3000
+  },
+  {
+   "id": "bg-moon-lake",
+   "prompt": "full moon reflected on a still lake at night, soft silver light, pine trees silhouetted on the shore, serene, no people",
+   "seed": 3001
+  },
+  {
+   "id": "bg-starry-hills",
+   "prompt": "rolling hills under a sky full of stars, soft moonlight on the grass, a small cottage with a warm lit window in the distance",
+   "seed": 3002
+  },
+  {
+   "id": "bg-lamp-window",
+   "prompt": "warm oil lamp glowing on a windowsill at night, open Bible beside it, moonlit garden outside the window, cosy and calm, no people",
+   "seed": 3003
+  },
+  {
+   "id": "bg-night-garden",
+   "prompt": "quiet garden at night under moonlight, flowers glowing softly, a stone path and fireflies, peaceful, no people",
+   "seed": 3004
+  },
+  {
+   "id": "bg-moonlit-sea",
+   "prompt": "gentle sea waves under a bright moon, silver path of light on the water, calm night, no people",
+   "seed": 3005
+  },
+  {
+   "id": "bg-quiet-chapel",
+   "prompt": "small stone chapel at night with warm candlelight in the windows, stars above, peaceful countryside, no people",
+   "seed": 3006
+  },
+  {
+   "id": "bg-starry-forest",
+   "prompt": "forest clearing at night with stars visible through the tall trees, soft moonlight beams, calm and safe atmosphere, no people",
+   "seed": 3007
+  },
+  {
+   "id": "bg-dusk-field",
+   "prompt": "wheat field at dusk, last warm glow of sunset on the horizon, first stars appearing in a deep blue sky, no people",
+   "seed": 3008
+  },
+  {
+   "id": "bg-night-village",
+   "prompt": "peaceful village at night with warm lights in the windows, snow-free rooftops, starry sky, calm and safe, no people",
+   "seed": 3009
+  },
+  {
+   "id": "bg-first-light",
+   "prompt": "first light of dawn over quiet hills after a calm night, soft pink and gold horizon, gentle mist, hopeful, no people",
+   "seed": 3010
+  }
+ ]
+}

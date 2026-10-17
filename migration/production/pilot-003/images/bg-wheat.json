@@ -1,0 +1,27 @@
+{
+ "id": "bg-wheat",
+ "prompt": "golden wheat field under a warm sunrise sky, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+ "seed": 3002,
+ "steps": 6,
+ "guidance": 1.5,
+ "size": [
+  1344,
+  768
+ ],
+ "models": {
+  "stabilityai/stable-diffusion-xl-base-1.0": {
+   "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+   "license": "openrail++"
+  },
+  "latent-consistency/lcm-lora-sdxl": {
+   "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+   "license": "openrail++"
+  }
+ },
+ "device": "cuda",
+ "seconds": 10.2,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-002-img-bg-wheat-sha256-a3ea2b5bd5e7d9fe8ef9ff8fe4b733f3d2e1ef35a8ca0b08456324b7274cdcc3.png",
+ "sha256": "a3ea2b5bd5e7d9fe8ef9ff8fe4b733f3d2e1ef35a8ca0b08456324b7274cdcc3"
+}
