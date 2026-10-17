@@ -1,0 +1,127 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.08,
+   "editing": {
+    "picture_changes": 0,
+    "picture_changes_per_minute": 0.0,
+    "median_shot_seconds": 40.08,
+    "longest_shot_seconds": 40.08,
+    "motion_median_top_decile_diff": 1.945
+   },
+   "rhythm": {
+    "audio_onsets": 1,
+    "audio_onsets_per_minute": 1.5,
+    "tempo": {
+     "bpm": null,
+     "confidence": 0.0,
+     "reason": "fewer than 4 onsets"
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": null,
+     "chance_fraction": null,
+     "lift": null
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "NOT_MEASURABLE"
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -20.7,
+    "loudness_range_lu": 3.9,
+    "true_peak_dbtp": -7.6
+   },
+   "colour": {
+    "mean_brightness": 0.4849,
+    "brightness_std_over_time": 0.0061,
+    "mean_saturation": 0.12,
+    "saturation_std_over_time": 0.0032
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.94,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 0,
+     "singing": 0,
+     "music": 0,
+     "other": 78,
+     "silence": 0,
+     "UNCERTAIN": 5
+    },
+    "words": 0,
+    "words_per_minute": 0.0,
+    "transcript": ""
+   },
+   "sound_segments": [
+    {
+     "label": "other",
+     "start_seconds": 0.0,
+     "end_seconds": 14.895,
+     "frames": 30
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 14.4,
+     "end_seconds": 15.375,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 14.88,
+     "end_seconds": 17.775,
+     "frames": 5
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 17.28,
+     "end_seconds": 18.255,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 17.76,
+     "end_seconds": 26.415,
+     "frames": 17
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 25.92,
+     "end_seconds": 27.375,
+     "frames": 2
+    },
+    {
+     "label": "other",
+     "start_seconds": 26.88,
+     "end_seconds": 31.695,
+     "frames": 9
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 31.2,
+     "end_seconds": 32.175,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 31.68,
+     "end_seconds": 40.031,
+     "frames": 17
+    }
+   ]
+  }
+ ]
+}
