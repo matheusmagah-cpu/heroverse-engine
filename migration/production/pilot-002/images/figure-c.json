@@ -1,0 +1,27 @@
+{
+ "id": "figure-c",
+ "prompt": "Jesus Christ kneeling in prayer, hands folded, head slightly bowed, calm expression, long hair and beard, off-white robe and blue mantle, full figure side view facing right, plain light grey studio background, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+ "seed": 2002,
+ "steps": 6,
+ "guidance": 1.5,
+ "size": [
+  1344,
+  768
+ ],
+ "models": {
+  "stabilityai/stable-diffusion-xl-base-1.0": {
+   "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+   "license": "openrail++"
+  },
+  "latent-consistency/lcm-lora-sdxl": {
+   "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+   "license": "openrail++"
+  }
+ },
+ "device": "cuda",
+ "seconds": 8.6,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-002-img-figure-c-sha256-d07fc1d706d43a11f0f532c20b16306268b7c7eed5b7b068cdb144f087190b1c.png",
+ "sha256": "d07fc1d706d43a11f0f532c20b16306268b7c7eed5b7b068cdb144f087190b1c"
+}

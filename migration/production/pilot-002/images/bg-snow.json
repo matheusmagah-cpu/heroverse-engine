@@ -1,0 +1,27 @@
+{
+ "id": "bg-snow",
+ "prompt": "snowy pine forest glowing in gentle morning sun, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+ "seed": 3007,
+ "steps": 6,
+ "guidance": 1.5,
+ "size": [
+  1344,
+  768
+ ],
+ "models": {
+  "stabilityai/stable-diffusion-xl-base-1.0": {
+   "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+   "license": "openrail++"
+  },
+  "latent-consistency/lcm-lora-sdxl": {
+   "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+   "license": "openrail++"
+  }
+ },
+ "device": "cuda",
+ "seconds": 10.0,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-002-img-bg-snow-sha256-7a6e96ebc9915a5697b6864633f5c4b19ae8c6da72ed2788172d7a1be3f6869f.png",
+ "sha256": "7a6e96ebc9915a5697b6864633f5c4b19ae8c6da72ed2788172d7a1be3f6869f"
+}

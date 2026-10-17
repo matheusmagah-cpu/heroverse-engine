@@ -1,0 +1,27 @@
+{
+ "id": "bg-river",
+ "prompt": "clear mountain stream flowing over stones in a green forest at morning, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+ "seed": 3001,
+ "steps": 6,
+ "guidance": 1.5,
+ "size": [
+  1344,
+  768
+ ],
+ "models": {
+  "stabilityai/stable-diffusion-xl-base-1.0": {
+   "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+   "license": "openrail++"
+  },
+  "latent-consistency/lcm-lora-sdxl": {
+   "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+   "license": "openrail++"
+  }
+ },
+ "device": "cuda",
+ "seconds": 10.0,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-002-img-bg-river-sha256-d90d8b240a061b6a961d363e4411f81e42b93fa1832d94a1202befb08cb6f392.png",
+ "sha256": "d90d8b240a061b6a961d363e4411f81e42b93fa1832d94a1202befb08cb6f392"
+}
