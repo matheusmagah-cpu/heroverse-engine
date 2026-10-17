@@ -1,0 +1,127 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 24,
+    "picture_changes_per_minute": 35.94,
+    "median_shot_seconds": 1.3,
+    "longest_shot_seconds": 5.067,
+    "motion_median_top_decile_diff": 1.759
+   },
+   "rhythm": {
+    "audio_onsets": 43,
+    "audio_onsets_per_minute": 64.39,
+    "tempo": {
+     "bpm": 109.09,
+     "confidence": 0.039
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.083,
+     "chance_fraction": 0.069,
+     "lift": 1.21
+    },
+    "sync": {
+     "median_offset_seconds": 0.142948,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 5,
+     "visual_events": 24,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -16.8,
+    "loudness_range_lu": 4.1,
+    "true_peak_dbtp": -3.4
+   },
+   "colour": {
+    "mean_brightness": 0.3157,
+    "brightness_std_over_time": 0.1172,
+    "mean_saturation": 0.4252,
+    "saturation_std_over_time": 0.0977
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.88,
+     "singing": 0.0,
+     "music": 0.434,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 69,
+     "singing": 0,
+     "music": 14,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 66,
+    "words_per_minute": 98.8,
+    "transcript": "Beloved, as the morning light slowly fills your room and another day begins, pause before the familiar routines take hold. You have already survived more than most people will ever know. The hard seasons, the quiet battles, the losses, the pressures that stretched across years. You are still here. because you were strong enough on your own because God sustained you morning is a chance to"
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 5.295,
+     "frames": 10
+    },
+    {
+     "label": "speech",
+     "start_seconds": 4.8,
+     "end_seconds": 12.015,
+     "frames": 14
+    },
+    {
+     "label": "music",
+     "start_seconds": 11.52,
+     "end_seconds": 12.975,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 12.48,
+     "end_seconds": 16.815,
+     "frames": 8
+    },
+    {
+     "label": "music",
+     "start_seconds": 16.32,
+     "end_seconds": 17.295,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 16.8,
+     "end_seconds": 21.615,
+     "frames": 9
+    },
+    {
+     "label": "music",
+     "start_seconds": 21.12,
+     "end_seconds": 22.095,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 21.6,
+     "end_seconds": 40.031,
+     "frames": 38
+    }
+   ]
+  }
+ ]
+}
