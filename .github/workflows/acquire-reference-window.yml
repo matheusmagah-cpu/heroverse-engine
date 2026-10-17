@@ -1,15 +1,9 @@
-name: HeroVerse acquire one reference window
+name: HeroVerse acquire reference windows
 on:
   workflow_dispatch:
     inputs:
-      video:
-        description: YouTube video id (11 chars)
-        required: true
-      start:
-        description: Window start in seconds
-        required: true
-      end:
-        description: Window end in seconds (10-60 s window)
+      windows:
+        description: 'Up to 12 windows "VIDEO:START:END" separated by ";" (10-60 s each)'
         required: true
 permissions:
   contents: write
@@ -20,52 +14,19 @@ jobs:
   acquire:
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 120
     env:
-      VIDEO: ${{ inputs.video }}
-      START: ${{ inputs.start }}
-      END: ${{ inputs.end }}
+      WINDOWS: ${{ inputs.windows }}
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Offline guards
         run: python3 -I -B -m unittest discover -s migration/acquisition -p test_acquire_window.py -v
-      - name: Identity for ledger commits
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Reserve and commit the claim before any effect
-        env:
-          HERO_RAPIDAPI_KEY: ${{ secrets.HERO_RAPIDAPI_KEY }}
-        run: |
-          python3 -I -B migration/acquisition/acquire_window.py reserve "$VIDEO" "$START" "$END"
-          git add migration/acquisition/ledger.json
-          git commit -m "Reserve acquisition acq-$VIDEO-$START-$END-v1 before effect"
-          git pull --rebase -q origin main && git push -q origin HEAD:main
-      - name: Install decoder
+      - name: Decoder, pinned runtimes and hash-pinned models
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends ffmpeg
-      - name: One provider job, no retry
-        id: execute
-        env:
-          HERO_RAPIDAPI_KEY: ${{ secrets.HERO_RAPIDAPI_KEY }}
-        run: python3 -I -B migration/acquisition/acquire_window.py execute "$VIDEO" "$START" "$END" "$RUNNER_TEMP/acq"
-      - name: Preserve media privately in the release
-        if: steps.execute.outcome == 'success'
-        run: |
-          sha=$(sha256sum "$RUNNER_TEMP/acq/native.mp4" | cut -d' ' -f1)
-          name="native-$VIDEO-$START-${END}s-sha256-$sha.mp4"
-          cp "$RUNNER_TEMP/acq/native.mp4" "$RUNNER_TEMP/$name"
-          gh release upload "$TAG" "$RUNNER_TEMP/$name" --repo "$GITHUB_REPOSITORY"
-          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$name" --dir "$RUNNER_TEMP/verify"
-          echo "$sha  $RUNNER_TEMP/verify/$name" | sha256sum -c -
-          echo "ASSET=$name" >> "$GITHUB_ENV"
-      - name: Profile the window (meter, semantic layer, loudness, colour)
-        if: steps.execute.outcome == 'success'
-        run: |
-          sudo apt-get install -y --no-install-recommends python3-venv >/dev/null
           python3 -m venv "$RUNNER_TEMP/venv"
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q ai-edge-litert==2.3.0 faster-whisper==1.2.1
           mkdir -p "$RUNNER_TEMP/models" && cd "$RUNNER_TEMP/models"
@@ -74,21 +35,10 @@ jobs:
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern HeroVerse_ASR_base_en_preservado.zip
           echo "78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb  HeroVerse_ASR_base_en_preservado.zip" | sha256sum -c -
           "$RUNNER_TEMP/venv/bin/python" -I -c "import sys; from pathlib import Path; sys.path.insert(0, '$GITHUB_WORKSPACE/migration'); import second_opening_asr as a; a.extract_model(Path('HeroVerse_ASR_base_en_preservado.zip'), Path('whisper'))"
-          cd "$GITHUB_WORKSPACE"
-          mkdir -p migration/acquisition/profiles
-          "$RUNNER_TEMP/venv/bin/python" -I -B migration/diagnostics/av-profile/profile_openings.py \
-            "migration/acquisition/profiles/acq-$VIDEO-$START-$END-v1.json" \
-            "$RUNNER_TEMP/models/yamnet.tflite" "$RUNNER_TEMP/models/whisper" "$RUNNER_TEMP/acq/native.mp4" > /dev/null
-      - name: Record terminal state and commit
-        if: always()
+      - name: Acquire windows sequentially
+        env:
+          HERO_RAPIDAPI_KEY: ${{ secrets.HERO_RAPIDAPI_KEY }}
         run: |
-          mkdir -p migration/acquisition/receipts
-          receipt="$RUNNER_TEMP/acq/public-receipt.json"
-          test -f "$receipt" || echo '{"status":"BLOCKED","effect_status":"NOT_SENT","failure_code":"EXECUTE_STEP_DID_NOT_RUN"}' > "$receipt"
-          python3 -I -c "import json,os,sys; r=json.load(open(sys.argv[1])); r['release_asset']=os.environ.get('ASSET'); json.dump(r, open(sys.argv[1],'w'), indent=2)" "$receipt"
-          cp "$receipt" "migration/acquisition/receipts/acq-$VIDEO-$START-$END-v1.json"
-          git pull --rebase -q origin main || true
-          python3 -I -B migration/acquisition/acquire_window.py finish "$VIDEO" "$START" "$END" "$receipt" || true
-          git add migration/acquisition
-          git commit -q -m "Record acquisition acq-$VIDEO-$START-$END-v1 terminal state" || true
-          git push -q origin HEAD:main
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          bash migration/acquisition/run_batch.sh "$WINDOWS"
