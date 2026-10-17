@@ -1,0 +1,38 @@
+name: HeroVerse picture-change classification (controls and reference openings)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  classify:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      DIR: migration/diagnostics/av-picture-change
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Tools
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ffmpeg fonts-dejavu-core python3-numpy
+      - name: Unit tests and synthetic controls (frozen criteria)
+        run: |
+          /usr/bin/python3 -I -B "$DIR/test_av_picture_change.py"
+          /usr/bin/python3 -I -B "$DIR/qualify_controls.py" "$DIR/qualification-controls.json"
+      - name: Reference openings from the private release
+        run: |
+          mkdir -p "$RUNNER_TEMP/refs"
+          for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1]))))" "$DIR/reference-cohorts.json"); do
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "native-$id-0-40s-sha256-*.mp4" --dir "$RUNNER_TEMP/refs"
+          done
+          ls "$RUNNER_TEMP/refs" | wc -l
+      - name: Classify and render spot-check sheets
+        run: /usr/bin/python3 -I -B "$DIR/measure_references.py" "$DIR/references" "$DIR/reference-cohorts.json" "$RUNNER_TEMP"/refs/*.mp4
+      - name: Commit results (JSON and small JPEG sheets)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DIR"
+          git commit -q -m "Record picture-change classification of reference openings (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
