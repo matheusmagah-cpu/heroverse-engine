@@ -1,7 +1,7 @@
 {
  "version": "cohort-windows-v1",
  "panel": "2026-10-17T10:28:07Z",
- "windows": "VGv3fbxG7OI:0:40;VGv3fbxG7OI:430:470;gPuIK6NIZxs:0:40;zAn_dEYQPiY:0:40;wpUFB3UMNgw:0:40;wpUFB3UMNgw:380:420;kdH74zd9FQU:0:40;7_8C1U8ELdo:0:40",
+ "windows": "VGv3fbxG7OI:0:40;VGv3fbxG7OI:430:470;gPuIK6NIZxs:0:40;zAn_dEYQPiY:0:40;FEyv4xRoPzs:0:40;FEyv4xRoPzs:800:840;oWUdlC0n7TI:0:40;IdY9Fz5tY7I:0:40;wpUFB3UMNgw:0:40;wpUFB3UMNgw:380:420;kdH74zd9FQU:0:40;7_8C1U8ELdo:0:40",
  "plan": [
   {
    "channel_id": "UCXMyCeE4RwF-NzKDmtCE0kg",
@@ -36,6 +36,43 @@
    "title": "Lucifer’s Fall: How Heaven’s Brightest Angel Became Satan",
    "minutes": 17.8,
    "views_per_day": 38.7,
+   "windows": [
+    "0:40"
+   ]
+  },
+  {
+   "channel_id": "UCGH1GXDCNTTHkhPiLBQ3sLw",
+   "channel": "Beneath The Verse ",
+   "cohort": "WINNER",
+   "video_id": "FEyv4xRoPzs",
+   "title": "God Never Said RAINBOW. What \"My Bow\" Really Means in Genesis 9:13",
+   "minutes": 29.8,
+   "views_per_day": 7555.4,
+   "windows": [
+    "0:40",
+    "800:840"
+   ]
+  },
+  {
+   "channel_id": "UCGH1GXDCNTTHkhPiLBQ3sLw",
+   "channel": "Beneath The Verse ",
+   "cohort": "MEDIAN",
+   "video_id": "oWUdlC0n7TI",
+   "title": "Elisha Didn't Ask for TWICE Elijah's Power: What \"Double Portion\" Really Means (2 Kings 2:9)",
+   "minutes": 33.0,
+   "views_per_day": 813.4,
+   "windows": [
+    "0:40"
+   ]
+  },
+  {
+   "channel_id": "UCGH1GXDCNTTHkhPiLBQ3sLw",
+   "channel": "Beneath The Verse ",
+   "cohort": "WEAK",
+   "video_id": "IdY9Fz5tY7I",
+   "title": "Every Person Raised From the Dead in the Bible, in Order (Most Christians Miss This)",
+   "minutes": 29.8,
+   "views_per_day": 67.5,
    "windows": [
     "0:40"
    ]
@@ -76,12 +113,6 @@
    "windows": [
     "0:40"
    ]
-  },
-  {
-   "channel_id": "UCUrlXR8_1DnJC5i2Z8f-oZQ",
-   "title": "Bible Stories TV 247",
-   "status": "FEWER_THAN_3_ELIGIBLE",
-   "eligible": 2
   }
  ]
 }
