@@ -56,6 +56,8 @@ jobs:
           "$RUNNER_TEMP/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$RUNNER_TEMP/in/img/$fig.png" "$RUNNER_TEMP/in/img/$fig.json" "$RUNNER_TEMP/in/figure.png"
       - name: Assemble
         run: python3 -I -B migration/production/still_render.py assemble "$RUNNER_TEMP/work" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac"
+      - name: Shorts (vertical, sentence-exact, from the same sources)
+        run: python3 -I -B migration/production/shorts_cut.py "$RUNNER_TEMP/work" "migration/production/$PILOT/script.json" "$RUNNER_TEMP/in/img" "$RUNNER_TEMP/in/figure.png" "$RUNNER_TEMP/in/original-rest-music.lossless.flac" "$RUNNER_TEMP/work/shorts" 3
       - name: QA against frozen criteria
         run: |
           mkdir -p "$RUNNER_TEMP/models" && cd "$RUNNER_TEMP/models"
@@ -91,9 +93,18 @@ jobs:
           cp "$RUNNER_TEMP/work/qa.json" "migration/production/$PILOT/out/qa.json" || true
           cp "$RUNNER_TEMP/work/package/package.json" "migration/production/$PILOT/out/package.json" || true
           cp "$RUNNER_TEMP/work/package/thumbnail.jpg" "migration/production/$PILOT/inspection/thumbnail.jpg" || true
+          mkdir -p "migration/production/$PILOT/shorts"
+          cp "$RUNNER_TEMP/work/shorts/shorts.json" "migration/production/$PILOT/shorts/" || true
+          for s in "$RUNNER_TEMP"/work/shorts/short-*.mp4; do
+            [ -f "$s" ] || continue
+            ssha=$(sha256sum "$s" | cut -d' ' -f1); n=$(basename "$s" .mp4)
+            cp "$s" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4"
+            gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
+            ffmpeg -v error -y -ss 3 -i "$s" -frames:v 1 -vf scale=360:-1 "migration/production/$PILOT/shorts/$n-frame.jpg" || true
+          done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "migration/production/$PILOT/out" "migration/production/$PILOT/inspection"
+          git add "migration/production/$PILOT/out" "migration/production/$PILOT/inspection" "migration/production/$PILOT/shorts"
           git commit -q -m "Record $PILOT render, QA, package and inspection sheets (run $GITHUB_RUN_ID; not published)"
           git pull --rebase -q origin main && git push -q origin HEAD:main
           test -z "${QA_FAILED:-}"

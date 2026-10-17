@@ -89,7 +89,7 @@ def main(work, script_path, out_dir):
                     + draw, "-q:v", "2", str(thumb)], check=True, capture_output=True)
     package = {"version": "pilot-package-v1", "pilot_id": script["pilot_id"], "title": title,
                "title_length": len(title), "description": description, "tags": tags,
-               "category_id": "29", "default_language": "en", "made_for_kids": False,
+               "category_id": "29", "playlist": script.get("playlist"), "default_language": "en", "made_for_kids": False,
                "privacy_on_upload": "private", "thumbnail": thumb.name,
                "ai_generated_visuals": v2,
                "altered_or_synthetic_disclosure": ("Stylized devotional illustrations, not realistic footage; review YouTube's "
