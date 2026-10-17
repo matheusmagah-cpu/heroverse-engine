@@ -22,6 +22,7 @@ from pilot_render import REFERENCES, RATE_OUT, TAIL, MUSIC_OFFSET, probe_duratio
 
 FADE = 0.6
 BACKGROUND_TARGET = 9.0
+HOLD_MAX = 18.0
 FIGURE_HEIGHT = 1000
 FIGURE_X = 30
 BOX = (1010, 330, 1850, 750)
@@ -70,7 +71,24 @@ def chunks(sentence):
             merged[-1] += " " + part
         else:
             merged.append(part)
-    return [line for part in merged for line in split_balanced(part.split())]
+    lines = [line for part in merged for line in split_balanced(part.split())]
+    # guarantee: no line over the limit (the balanced split's last remainder can overflow)
+    out = []
+    for line in lines:
+        out += [line] if len(line) <= CAPTION_CHARS_MAX else chunks_hard(line)
+    return out
+
+
+def chunks_hard(line):
+    words, out, cur = line.split(), [], []
+    target = -(-len(line) // -(-len(line) // CAPTION_CHARS_MAX))  # even split under the limit
+    for w in words:
+        if cur and len(" ".join(cur + [w])) > min(target + 6, CAPTION_CHARS_MAX):
+            out.append(" ".join(cur))
+            cur = []
+        cur.append(w)
+    out.append(" ".join(cur))
+    return out
 
 
 def caption_events(sentences):
@@ -165,7 +183,20 @@ def holds(script, timeline, total):
     for a, b in zip(plan, plan[1:]):
         a["end"] = b["start"]
     plan[-1]["end"] = total
-    return plan
+    # no background held longer than HOLD_MAX: split long holds evenly with new backgrounds
+    out = [plan[0]]
+    for h in plan[1:]:
+        parts = max(1, -(-(h["end"] - h["start"]) // HOLD_MAX))
+        step = (h["end"] - h["start"]) / parts
+        for p in range(int(parts)):
+            if p:
+                k += 1
+                if backgrounds[k % len(backgrounds)] == out[-1]["image"]:
+                    k += 1
+            image = h["image"] if p == 0 else backgrounds[k % len(backgrounds)]
+            out.append({"image": image, "start": round(h["start"] + p * step, 3),
+                        "end": round(h["start"] + (p + 1) * step, 3), "figure": True})
+    return out
 
 
 def compose(background, figure, out, with_figure):
@@ -228,7 +259,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
     final = work / "pilot.mp4"
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "holds.txt"), "-i", str(mix),
          "-map", "0:v:0", "-map", "1:a:0", "-vf", f"ass={work / 'captions.ass'},format=yuv420p",
-         "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-r", "30", "-g", "60",
+         "-c:v", "libx264", "-preset", "faster", "-crf", "19", "-tune", "stillimage", "-r", "30", "-g", "60",
          "-c:a", "aac", "-b:a", "192k", "-ar", str(RATE_OUT), "-t", f"{total:.3f}", "-movflags", "+faststart",
          str(final)])
     figure_meta = json.loads(Path(figure_path).with_suffix(".json").read_text())
