@@ -202,9 +202,9 @@ def assemble(work, script_path, catalog_path, music_path, clip_paths):
          "-ss", str(MUSIC_OFFSET), "-t", str(total), "-i", str(music_path),
          "-filter_complex",
          f"[0:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,apad=whole_dur={total},asplit=2[v][key];"
-         f"[1:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,volume=0.22,"
+         f"[1:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,volume=0.07,"
          f"afade=t=in:d=2,afade=t=out:st={total - 4}:d=4[m];"
-         "[m][key]sidechaincompress=threshold=0.03:ratio=6:attack=30:release=500[duck];"
+         "[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck];"
          "[v][duck]amix=inputs=2:normalize=0:duration=first,"
          "loudnorm=I=-15:TP=-1.5:LRA=11:linear=true[out]",
          "-map", "[out]", "-ar", str(RATE_OUT), str(mix)])
