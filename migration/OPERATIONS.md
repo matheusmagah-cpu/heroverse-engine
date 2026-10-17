@@ -51,7 +51,7 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 4. **After publication:** the finished files are deleted from the release once YouTube confirms the upload.
 
 ## Status
-- **pilot-002:** cinematic render running (private). The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT.
+- **pilot-002:** cinematic render running on the public runner (heroverse-runner run 39062600672, from 19:28 UTC; private run 39058782907 cancelled). If its `shorts.json` says `NOT_REVIEWED_NO_KEY`, re-run the Shorts review privately. The static PASS version (`9615503`, sha `52766f47…`) is the fallback for 2026-10-18 07:00 BRT.
 - **Mining:**
   - Structure v2 on 4 teaching channels is done (`evidence/structure-mining/20261017`).
   - Clean prayer channels (United Prayer, Morning Grace Prayers, Prayer of Hope, Mercy Harbor Gospel): first run (39056485165) lost its push on a `blueprint.json` rebase conflict; Record now retries (PR #62) and a re-mining request is queued.
@@ -62,6 +62,6 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
   2. Measured modeling spec (`blueprint_stats.py`).
   3. Scripts.
   4. Automate the daily chain.
-- **Secrets (as they stand):** `HERO_GEMINI_API_KEY` exists in heroverse-engine only; heroverse-runner has none; `HERO_ENGINE_PAT` exists nowhere.
+- **Secrets (as they stand):** `HERO_GEMINI_API_KEY` exists in heroverse-engine only; `HERO_ENGINE_PAT` exists in heroverse-runner (its checkout of the engine works); whether the runner has the Gemini key is unknown.
 - **Render path:** private-only is primary. Optimise one long video plus its Shorts to ~40 runner-minutes on the private 2-core workflow (depth parallax on the opening and Shorts only, reuse voice/images when the script hash is unchanged, single-pass assembly), measured from run 39058782907's stage timings.
-- **Runner:** dormant, optional. If ever needed it requires only `HERO_ENGINE_PAT`; every Gemini step (Shorts select/review, mining, watched reviews) stays in the private repo so the runner never needs the Gemini key. No new keys are requested unless truly needed.
+- **Runner:** optional extra, now active for pilot-002; every Gemini step (Shorts select/review, mining, watched reviews) stays in the private repo so the runner never needs the Gemini key. No new keys are requested unless truly needed.
