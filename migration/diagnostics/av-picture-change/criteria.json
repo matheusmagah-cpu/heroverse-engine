@@ -1,0 +1,27 @@
+{
+ "version": "av-picture-change-criteria-v1",
+ "frozen_at": "2026-10-17, before any code or measurement of references",
+ "purpose": "Classify each picture change found by the qualified av-event-meter as a SCENE change (most of the frame replaced) or a LOCAL change (a caption, text box, overlay or small region replaced over a persistent picture). Motivated by the pilot-001 review: the references' 28-36 changes/min were mostly caption changes.",
+ "method": {
+  "change_times": "av-event-meter v2 video events (unchanged, already qualified)",
+  "proxy": "gray 96x54, area scaling, every decoded frame",
+  "compare": "mean of frames in [t-0.40, t-0.15] s versus mean of frames in [t+0.15, t+0.40] s, so fades of up to 0.3 s and small motion are averaged",
+  "grid": "12 columns x 6 rows (8x9 px cells)",
+  "cell_changed": "mean absolute difference > 12 (0-255 scale)",
+  "scene_if_changed_fraction_at_least": 0.45,
+  "otherwise": "LOCAL; its changed-cell bounding box (rows/columns) is reported as the overlay region",
+  "centre_kept": "for a SCENE change, the 4x4 centre cells (columns 4-7, rows 1-4) are 'kept' if at most 25% of them changed; reported as persistent-figure evidence, not used for SCENE/LOCAL"
+ },
+ "qualification": {
+  "controls": {
+   "q1_static_image_captions_lower_band": "every change LOCAL",
+   "q2_hard_cuts_between_different_images": "every change SCENE",
+   "q3_hard_cuts_with_simultaneous_caption_change": "every change SCENE",
+   "q4_large_caption_box_centre_over_static_image": "every change LOCAL",
+   "q5_persistent_figure_with_changing_backgrounds": "every change SCENE (background replacement counts as a scene change; figure persistence is reported separately)"
+  },
+  "pass": "each control: at least 90% of detected changes classified as expected and at least 80% of planted changes detected",
+  "references": "after controls pass, classify the 9 cohort openings and render one before/after thumbnail pair per change for visual spot check of at least 20 changes; the classification is accepted for production targets only if at least 90% of the spot-checked changes agree with the visual judgement"
+ },
+ "limits": "Gray-level only; a colour-only change of equal luma is missed. Slow camera motion that crosses the threshold without a cut is already excluded by the meter. Not a quality verdict."
+}
