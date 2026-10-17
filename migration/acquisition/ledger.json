@@ -579,6 +579,17 @@
       "completed_at": "2026-10-17T04:26:35.030353+00:00",
       "run_id": "39002469910",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-KbEu1FYIRDY-60-100-v1",
+      "video_id": "KbEu1FYIRDY",
+      "start_seconds": 60,
+      "end_seconds": 100,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-17T04:26:44.604986+00:00",
+      "day_utc": "2026-10-17",
+      "units_remaining_at_reservation": 376,
+      "reserved_units": 14
     }
   ]
 }
