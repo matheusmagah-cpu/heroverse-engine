@@ -4,8 +4,8 @@
  "negative": null,
  "seed": null,
  "size": [
-  1024,
-  1024
+  2048,
+  2048
  ],
  "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
  "models": {
@@ -15,8 +15,14 @@
    "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
   }
  },
- "seconds": 2.6,
+ "seconds": 3.3,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
- "release_asset": "pilot-901-img-wide-valley-sha256-0bb217fd088705a41aa31478be55d23bd0cca5563045db36bbe2a33c2e1e7917.png",
- "sha256": "0bb217fd088705a41aa31478be55d23bd0cca5563045db36bbe2a33c2e1e7917"
+ "upscaler": {
+  "model": "Real-ESRGAN x2plus",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth"
+ },
+ "release_asset": "pilot-901-img-wide-valley-sha256-ee111712adedb939f6f00bd284d4d4d2f75aa143ec654b029a41c1f2a48ea860.png",
+ "sha256": "ee111712adedb939f6f00bd284d4d4d2f75aa143ec654b029a41c1f2a48ea860"
 }

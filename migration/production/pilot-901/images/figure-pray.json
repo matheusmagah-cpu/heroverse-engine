@@ -4,8 +4,8 @@
  "negative": null,
  "seed": null,
  "size": [
-  1024,
-  1024
+  2048,
+  2048
  ],
  "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
  "models": {
@@ -15,8 +15,14 @@
    "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
   }
  },
- "seconds": 2.6,
+ "seconds": 2.9,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
- "release_asset": "pilot-901-img-figure-pray-sha256-98c30ada26fc2a4efe8971de08e0108faea8d71da4da624d42f49d428b6e07d2.png",
- "sha256": "98c30ada26fc2a4efe8971de08e0108faea8d71da4da624d42f49d428b6e07d2"
+ "upscaler": {
+  "model": "Real-ESRGAN x2plus",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth"
+ },
+ "release_asset": "pilot-901-img-figure-pray-sha256-5f93152dbb4e3c253b59c42b070c4d398ecd9b0b47fbded6e658921584038212.png",
+ "sha256": "5f93152dbb4e3c253b59c42b070c4d398ecd9b0b47fbded6e658921584038212"
 }
