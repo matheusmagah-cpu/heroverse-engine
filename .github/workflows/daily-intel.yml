@@ -1,0 +1,32 @@
+name: HeroVerse daily intelligence from an existing raw panel
+on:
+  workflow_dispatch:
+    inputs:
+      day:
+        description: Panel day YYYYMMDD already in the private release
+        required: true
+permissions:
+  contents: write
+jobs:
+  intel:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      DAY: ${{ inputs.day }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Intelligence
+        run: |
+          case "$DAY" in 20[0-9][0-9][01][0-9][0-3][0-9]) ;; *) exit 1;; esac
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "market-panel-$DAY.json.gz" --dir "$RUNNER_TEMP"
+          gunzip "$RUNNER_TEMP/market-panel-$DAY.json.gz"
+          mkdir -p migration/evidence/daily-intel
+          python3 -I -B migration/mining/daily_intel.py "$RUNNER_TEMP/market-panel-$DAY.json" "migration/evidence/daily-intel/intel-$DAY.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/daily-intel
+          git commit -q -m "Record daily intelligence $DAY (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
