@@ -37,6 +37,15 @@ jobs:
           test -n "$CLOUDFLARE_API_TOKEN" || { echo CLOUDFLARE_API_TOKEN_MISSING; exit 1; }  # account id: secret, else resolved from the token
           python3 -m venv "$RUNNER_TEMP/v" && "$RUNNER_TEMP/v/bin/pip" install -q --disable-pip-version-check pillow==11.0.0
           "$RUNNER_TEMP/v/bin/python" -I -B migration/production/imagegen/cf_images.py "migration/production/$PILOT/images.json" "$RUNNER_TEMP/img" "$ENGINE"
+      - name: 2x super-resolution on CPU (Real-ESRGAN x2plus, BSD-3; FLUX outputs are 1024 square)
+        if: inputs.engine == 'flux'
+        run: |
+          python3 -m venv "$RUNNER_TEMP/up"
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check spandrel==0.4.1 pillow==11.0.0 numpy==2.2.6
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/RealESRGAN_x2plus.pth" https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth
+          echo "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb  $RUNNER_TEMP/RealESRGAN_x2plus.pth" | sha256sum -c -
+          "$RUNNER_TEMP/up/bin/python" -I -B migration/production/imagegen/upscale.py "$RUNNER_TEMP/RealESRGAN_x2plus.pth" "$RUNNER_TEMP"/img/*.png
       - name: Release assets, metadata and review sheet
         run: |
           sudo apt-get install -y -qq ffmpeg >/dev/null
