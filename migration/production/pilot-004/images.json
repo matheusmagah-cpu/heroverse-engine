@@ -1,7 +1,7 @@
 {
  "version": "pilot-images-v2",
  "pilot_id": "pilot-004",
- "style": "soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours",
+ "style": "soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
  "steps": 6,
  "guidance": 1.5,
@@ -36,7 +36,7 @@
   },
   {
    "id": "bg-night-garden",
-   "prompt": "quiet garden at night under moonlight, flowers glowing softly, a stone path and fireflies, peaceful, no people",
+   "prompt": "quiet cottage garden at night under a bright moon, soft glowing flowers, a stone path and a few fireflies, peaceful, no people",
    "seed": 3004
   },
   {
@@ -51,12 +51,12 @@
   },
   {
    "id": "bg-starry-forest",
-   "prompt": "forest clearing at night with stars visible through the tall trees, soft moonlight beams, calm and safe atmosphere, no people",
+   "prompt": "forest clearing at night with stars visible between tall pine trees, soft silver moonlight beams on the grass, calm and safe atmosphere, no people",
    "seed": 3007
   },
   {
    "id": "bg-dusk-field",
-   "prompt": "wheat field at dusk, last warm glow of sunset on the horizon, first stars appearing in a deep blue sky, no people",
+   "prompt": "golden wheat field at dusk glowing with warm sunset light, bright amber horizon, first stars in a soft blue sky, luminous and peaceful, no people",
    "seed": 3008
   },
   {
@@ -66,7 +66,7 @@
   },
   {
    "id": "bg-first-light",
-   "prompt": "first light of dawn over quiet hills after a calm night, soft pink and gold horizon, gentle mist, hopeful, no people",
+   "prompt": "first light of dawn over quiet green hills after a calm night, soft pink and gold horizon, gentle mist in the valleys, pure nature with no buildings, no poles, no wires, no people",
    "seed": 3010
   }
  ]
