@@ -1,0 +1,143 @@
+{
+  "version": "av-event-meter-control-qualification-v1",
+  "status": "PASS_5_OF_5_BLIND_CONTROLS",
+  "criteria_sha256": "ecefd0d8bc68f731d84dc1cab3c45ea7803716334bd20dea0ae749c3d03bd099",
+  "meter_sha256": "3e7899077f94e0ebaf89bc83989af691c549ab9a877727b8564905c5f2a19c3b",
+  "recipe_sha256": "8b4b9ea021836045c74ec14bd3b881b4f69f9391720534607717de9c4a8fb95d",
+  "stimuli_byte_identical_to_frozen": true,
+  "blind_isolated_subprocess": true,
+  "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "python": "3.13.16",
+  "results": [
+    {
+      "control": "c01.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        1.500125,
+        3.500125,
+        5.500125
+      ],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": 0.500125,
+      "observed_verdict": "OUT_OF_SYNC"
+    },
+    {
+      "control": "c02.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        1.000125,
+        3.000104,
+        5.000146
+      ],
+      "observed_video_onsets": [],
+      "observed_offset_seconds": null,
+      "observed_verdict": "NOT_MEASURABLE"
+    },
+    {
+      "control": "c03.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": null,
+      "observed_verdict": "NOT_MEASURABLE"
+    },
+    {
+      "control": "c04.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        1.000125,
+        3.000104,
+        5.000146
+      ],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": 0.000125,
+      "observed_verdict": "IN_SYNC"
+    },
+    {
+      "control": "c05.mp4",
+      "status": "PASS",
+      "failures": [],
+      "observed_audio_onsets": [
+        0.500125,
+        2.500125,
+        4.500125
+      ],
+      "observed_video_onsets": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "observed_offset_seconds": -0.499875,
+      "observed_verdict": "OUT_OF_SYNC"
+    }
+  ],
+  "model_inferences": 0,
+  "network_calls": 0,
+  "provider_calls": 0,
+  "production_authorized": false,
+  "publication_authorized": false,
+  "runtime_integrated": false,
+  "scope": "Discrete flash/tone onsets and AV offset on five 6 s synthetic controls. Not semantic understanding, real-content accuracy or perceptual approval.",
+  "generalization_tests": {
+    "status": "PASS_11_OFFLINE_SYNTHETIC_TESTS",
+    "command": "python3 -I -B -m unittest discover -s . -p test_av_event_meter.py -v",
+    "test_sha256": "608506051c10c7ff7f6ad3fcd8cde2a05d5065e433cdd8a278d77d716de0137a",
+    "coverage": [
+      "0/1/4/7 events at irregular times",
+      "25 and 30 fps; 24 fps video-only",
+      "44.1 and 48 kHz; mono and stereo",
+      "tones -6 to -24 dBFS RMS over -50 dBFS noise",
+      "right-only and antiphase stereo",
+      "events 60 ms (audio) and 0.4 s (video) apart",
+      "gradual fade and steady noise produce zero events",
+      "bright and dark localized flashes of varied size/position",
+      "documented limit: event under 12 dB above the trailing local level not counted",
+      "percussive hits over a continuous music-like bed after a silent intro (v1 found 1/5; v2 finds 5/5)",
+      "onset straddling the 10 s streaming chunk boundary located within 1 ms",
+      "offset by consensus with 8 non-phase-locked distractor onsets around 4 flashes",
+      "phase-locked distractors and a single flash among many onsets are reported AMBIGUOUS"
+    ]
+  },
+  "mutation_check": {
+    "method": "Constants changed on a temporary copy; qualification and/or tests must fail.",
+    "caught": [
+      "video merge gap 0.2->0.01 s",
+      "audio merge gap 0.03->3 s",
+      "sync lag limit 0.125->0.9 s",
+      "video top-decile metric replaced by whole-frame mean"
+    ],
+    "removed_after_check": "An onset-refinement stage changed no result (1 ms windows are not affected by AAC pre-echo in these cases) and was removed rather than kept untested."
+  },
+  "changes_v2": [
+    "local-novelty audio onsets (trailing 20-210 ms median) replace the whole-file floor rule",
+    "sample-level onset refinement and per-event resolution fields",
+    "bounded-memory streaming with numpy; audio and video measured in parallel",
+    "first-block baseline padding so a background present from t=0 is not an onset",
+    "consensus offset pairing with AMBIGUOUS verdict (first real-opening injection run 38992560157 detected 30/30 audio and 30/30 video events with zero spurious events but failed on nearest-neighbour pairing against natural music onsets)",
+    "fewer than 3 consensus pairs gives verdict LOW_SUPPORT (offset still reported): one or two coincidences can occur by chance in real content"
+  ],
+  "speed": {
+    "40s_1080p30_stereo_seconds": 2.2,
+    "ffmpeg_decode_only_seconds": 1.74,
+    "cpu": "4 vCPU cloud container",
+    "note": "Decode-bound; about 18x real time on this host."
+  },
+  "executed_at_utc": "2026-10-17",
+  "executor": "Claude Code cloud session (AI assistant); not human review"
+}

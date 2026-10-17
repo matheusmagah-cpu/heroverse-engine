@@ -1,0 +1,53 @@
+name: HeroVerse AV event meter real-opening injection
+on:
+  push:
+    paths:
+      - '.github/workflows/av-event-meter-real-openings.yml'
+      - 'migration/diagnostics/av-event-meter/av_event_meter.py'
+      - 'migration/diagnostics/av-event-meter/qualify_injection.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-av-event-meter-real-openings
+  cancel-in-progress: false
+jobs:
+  inject:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Install ffmpeg and numpy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg python3-numpy
+      - name: Download the five preserved 0-40 s openings (read-only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/openings"
+          gh release download v0.0.0-cloud-assets-20261013 --repo "$GITHUB_REPOSITORY" \
+            --pattern 'native-*-0-40s-sha256-*.mp4' --dir "$RUNNER_TEMP/openings"
+          cd "$RUNNER_TEMP/openings"
+          test "$(ls | wc -l)" -eq 5
+          for f in *.mp4; do
+            want="${f##*-sha256-}"; want="${want%.mp4}"
+            echo "$want  $f" | sha256sum -c -
+          done
+      - name: Injection qualification on real openings
+        working-directory: migration/diagnostics/av-event-meter
+        run: |
+          /usr/bin/python3 -I -B -c "import sys; sys.path.insert(0, '.'); import qualify_injection as q; sys.exit(q.main(sys.argv[1], sys.argv[2:]))" \
+            "$RUNNER_TEMP/injection.json" "$RUNNER_TEMP"/openings/*.mp4 || status=$?
+          cat "$RUNNER_TEMP/injection.json"
+          exit ${status:-0}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: av-event-meter-injection
+          path: ${{ runner.temp }}/injection.json
+          retention-days: 30
+          if-no-files-found: warn

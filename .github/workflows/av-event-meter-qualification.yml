@@ -1,0 +1,30 @@
+name: HeroVerse AV event meter qualification
+on:
+  push:
+    paths:
+      - '.github/workflows/av-event-meter-qualification.yml'
+      - 'migration/diagnostics/av-event-meter/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-av-event-meter-qualification
+  cancel-in-progress: false
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg python3-numpy
+      - name: Generalization tests (offline synthetic media)
+        working-directory: migration/diagnostics/av-event-meter
+        run: /usr/bin/python3 -I -B -m unittest discover -s . -p test_av_event_meter.py -v
+      - name: Blind qualification on the five frozen controls
+        working-directory: migration/diagnostics/av-event-meter
+        run: /usr/bin/python3 -I -B qualify_controls.py "$RUNNER_TEMP/av-event-meter-qualification.json"
