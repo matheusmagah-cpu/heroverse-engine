@@ -1,0 +1,194 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 20,
+    "picture_changes_per_minute": 29.95,
+    "median_shot_seconds": 1.9,
+    "longest_shot_seconds": 3.633,
+    "motion_median_top_decile_diff": 1.71
+   },
+   "rhythm": {
+    "audio_onsets": 56,
+    "audio_onsets_per_minute": 83.86,
+    "tempo": {
+     "bpm": 59.23,
+     "confidence": 0.056
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.05,
+     "chance_fraction": 0.089,
+     "lift": 0.56
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 5,
+     "visual_events": 20
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -16.3,
+    "loudness_range_lu": 2.0,
+    "true_peak_dbtp": -3.4
+   },
+   "colour": {
+    "mean_brightness": 0.3676,
+    "brightness_std_over_time": 0.0403,
+    "mean_saturation": 0.2487,
+    "saturation_std_over_time": 0.0681
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.952,
+     "singing": 0.0,
+     "music": 0.723,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 59,
+     "singing": 0,
+     "music": 24,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 98,
+    "words_per_minute": 146.8,
+    "transcript": "Heavenly Father, I come before this morning with a heart overflowing with gratitude, humility, and praise. Thank you for waking me up and giving me the precious gift of another day. Thank you for the breath in my lungs, the strength in my body, the movement of my hands and feet, the ability to see another sunrise, and the opportunity to experience another day under your mercy. Lord, I know that this morning is not something I have earned. It is a gift from Your gracious hand. Your word declares, is the day the Lord has made. will"
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 2.415,
+     "frames": 4
+    },
+    {
+     "label": "speech",
+     "start_seconds": 1.92,
+     "end_seconds": 8.655,
+     "frames": 13
+    },
+    {
+     "label": "music",
+     "start_seconds": 8.16,
+     "end_seconds": 9.615,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 9.12,
+     "end_seconds": 14.415,
+     "frames": 10
+    },
+    {
+     "label": "music",
+     "start_seconds": 13.92,
+     "end_seconds": 14.895,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 14.4,
+     "end_seconds": 20.655,
+     "frames": 12
+    },
+    {
+     "label": "music",
+     "start_seconds": 20.16,
+     "end_seconds": 21.615,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 21.12,
+     "end_seconds": 24.015,
+     "frames": 5
+    },
+    {
+     "label": "music",
+     "start_seconds": 23.52,
+     "end_seconds": 24.975,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 24.48,
+     "end_seconds": 27.855,
+     "frames": 6
+    },
+    {
+     "label": "music",
+     "start_seconds": 27.36,
+     "end_seconds": 28.815,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 28.32,
+     "end_seconds": 29.775,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 29.28,
+     "end_seconds": 30.255,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 29.76,
+     "end_seconds": 32.175,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 31.68,
+     "end_seconds": 36.015,
+     "frames": 8
+    },
+    {
+     "label": "speech",
+     "start_seconds": 35.52,
+     "end_seconds": 36.495,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 36.0,
+     "end_seconds": 36.975,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 36.48,
+     "end_seconds": 38.895,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 38.4,
+     "end_seconds": 39.375,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 38.88,
+     "end_seconds": 40.031,
+     "frames": 2
+    }
+   ]
+  }
+ ]
+}
