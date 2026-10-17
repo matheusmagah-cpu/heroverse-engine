@@ -1,0 +1,151 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 29,
+    "picture_changes_per_minute": 43.43,
+    "median_shot_seconds": 1.233,
+    "longest_shot_seconds": 3.333,
+    "motion_median_top_decile_diff": 2.072
+   },
+   "rhythm": {
+    "audio_onsets": 49,
+    "audio_onsets_per_minute": 73.38,
+    "tempo": {
+     "bpm": 93.02,
+     "confidence": 0.083
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.103,
+     "chance_fraction": 0.078,
+     "lift": 1.32
+    },
+    "sync": {
+     "median_offset_seconds": 0.277551,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 7,
+     "visual_events": 29,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -15.1,
+    "loudness_range_lu": 2.5,
+    "true_peak_dbtp": -0.6
+   },
+   "colour": {
+    "mean_brightness": 0.4673,
+    "brightness_std_over_time": 0.0923,
+    "mean_saturation": 0.2265,
+    "saturation_std_over_time": 0.0737
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.892,
+     "singing": 0.0,
+     "music": 0.831,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 64,
+     "singing": 0,
+     "music": 19,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 94,
+    "words_per_minute": 140.8,
+    "transcript": "Today, I want you to make a decision before we pray, declare that you will not be ruled by fear, you will not be trapped by yesterday, you will not walk blindly into tomorrow, you will seek God, follow His leading, receive His mercy, and trust Him with every step you take today. Now, let us pray. Heavenly Father, I come before You this morning quietly, lead my way today. I need your direction, I need your wisdom, I need your mercy, I need your presence. There are things ahead of me that I..."
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 3.855,
+     "frames": 7
+    },
+    {
+     "label": "speech",
+     "start_seconds": 3.36,
+     "end_seconds": 23.055,
+     "frames": 40
+    },
+    {
+     "label": "music",
+     "start_seconds": 22.56,
+     "end_seconds": 24.495,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 24.0,
+     "end_seconds": 27.855,
+     "frames": 7
+    },
+    {
+     "label": "music",
+     "start_seconds": 27.36,
+     "end_seconds": 28.815,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 28.32,
+     "end_seconds": 29.775,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 29.28,
+     "end_seconds": 30.735,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 30.24,
+     "end_seconds": 35.535,
+     "frames": 10
+    },
+    {
+     "label": "music",
+     "start_seconds": 35.04,
+     "end_seconds": 36.015,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 35.52,
+     "end_seconds": 36.975,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 36.48,
+     "end_seconds": 38.895,
+     "frames": 4
+    },
+    {
+     "label": "speech",
+     "start_seconds": 38.4,
+     "end_seconds": 40.031,
+     "frames": 3
+    }
+   ]
+  }
+ ]
+}
