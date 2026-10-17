@@ -26,6 +26,35 @@ def within(value, bounds):
     return value is not None and bounds[0] <= value <= bounds[1]
 
 
+def grammar_checks(criteria, manifest):
+    """Amended-archetype gates read from the render manifest (pilot-manifest-v2)."""
+    import statistics
+    g, r = criteria["grammar"], criteria["rights"]
+    holds = manifest["holds"]
+    title = holds[0]["end"] - holds[0]["start"]
+    after = [h for h in holds[1:]]
+    span = sum(h["end"] - h["start"] for h in after)
+    lengths = [h["end"] - h["start"] for h in after[:-1]] or [span]
+    caps, sents = manifest["captions"], [s for s in manifest["sentences"] if s["end"] > title]
+    covered = sum(max(0.0, min(s["end"], c["end"]) - max(s["start"], c["start"], title)) for s in sents for c in caps)
+    spoken = sum(s["end"] - max(s["start"], title) for s in sents)
+    allowed = set(r["allowed_model_licences"])
+    models = [m for i in manifest["images"].values() for m in i["models"].values()] + list(manifest["figure"]["models"].values())
+    return {
+        "title_card_seconds": within(title, g["title_card_seconds"]) and not holds[0]["figure"],
+        "figure_present_after_title": sum(h["end"] - h["start"] for h in after if h["figure"]) / span >= g["figure_present_fraction_after_title_min"],
+        "background_hold_median": within(statistics.median(lengths), g["background_hold_seconds_median"]),
+        "background_hold_max": max(lengths) <= g["background_hold_seconds_max"],
+        "no_background_repeated_consecutively": all(a["image"] != b["image"] for a, b in zip(after, after[1:])),
+        "caption_coverage_of_speech": spoken > 0 and covered / spoken >= g["caption_coverage_of_speech_min"],
+        "caption_hold_median": within(statistics.median(c["end"] - c["start"] for c in caps), g["caption_hold_seconds_median"]),
+        "caption_chars_max": max(len(c["text"]) for c in caps) <= g["caption_chars_max"],
+        "channel_mark_badge_and_amen_prompt": bool(manifest["overlay"]["brand"] and manifest["overlay"]["amen"] and manifest["badges"]),
+        "images_open_licence_with_revision": bool(models) and all(str(m.get("license")).lower() in allowed and m.get("revision") for m in models),
+        "no_third_party_footage": not manifest["clips"] and not manifest["shots"],
+    }
+
+
 def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out):
     criteria = json.loads(Path(criteria_path).read_text())
     manifest = json.loads(Path(manifest_path).read_text())
@@ -63,25 +92,30 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
     checks["first_word_onset"] = first is not None and first <= sp["first_word_onset_seconds_max"]
     checks["hook_second_person"] = any(w["word"].lower().strip(".,!?") in ("you", "your", "you're")
                                        and w["start_seconds"] <= sp["hook_second_person_within_seconds"] for w in words)
-    ed = criteria["editing"]
-    checks["picture_changes_per_minute"] = within(profile["editing"]["picture_changes_per_minute"], ed["picture_changes_per_minute"])
-    checks["median_shot_seconds"] = within(profile["editing"]["median_shot_seconds"], ed["median_shot_seconds"])
-    spans = {}
-    for shot in manifest["shots"]:
-        spans.setdefault(shot["video_id"], []).append((shot["source_start"], shot["source_start"] + shot["duration"]))
-    checks["no_source_second_reused"] = all(b0 >= a1 - 1e-6 for s in spans.values()
-                                            for (a0, a1), (b0, b1) in zip(sorted(s), sorted(s)[1:]))
-    clips = manifest["clips"]
-    checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
-        c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
+    if "editing" in criteria:
+        ed = criteria["editing"]
+        checks["picture_changes_per_minute"] = within(profile["editing"]["picture_changes_per_minute"], ed["picture_changes_per_minute"])
+        checks["median_shot_seconds"] = within(profile["editing"]["median_shot_seconds"], ed["median_shot_seconds"])
+        spans = {}
+        for shot in manifest["shots"]:
+            spans.setdefault(shot["video_id"], []).append((shot["source_start"], shot["source_start"] + shot["duration"]))
+        checks["no_source_second_reused"] = all(b0 >= a1 - 1e-6 for s in spans.values()
+                                                for (a0, a1), (b0, b1) in zip(sorted(s), sorted(s)[1:]))
+        clips = manifest["clips"]
+        checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
+            c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
+    else:
+        checks.update(grammar_checks(criteria, manifest))
     checks["music_owned"] = manifest["music"]["sha256"] == OWNED_MUSIC_SHA256
     checks["voice_model_pinned"] = manifest["voice"]["voice_id"] == "am_michael"
     checks = {k: bool(v) for k, v in checks.items()}  # numpy bools are not JSON serializable
     result = {"version": "pilot-qa-v1", "pilot_id": manifest["pilot_id"], "output_sha256": manifest["output_sha256"],
               "status": "PASS" if all(checks.values()) else "FAIL", "checks": checks,
+              "criteria_version": criteria["version"],
               "measurements": {"duration_seconds": round(duration, 2), "loudness": loud,
                                "speech_presence": presence["speech"], "music_presence": presence["music"],
                                "wer_vs_script": round(error, 4), "accepted_words_per_minute": round(wpm, 1),
+                               "caption_lines": len(manifest.get("captions", [])), "holds": len(manifest.get("holds", [])),
                                "first_word_seconds": first, "editing": profile["editing"],
                                "colour": profile["colour"], "rhythm": profile["rhythm"]},
               "transcript_head": semantic["transcript"][:400],

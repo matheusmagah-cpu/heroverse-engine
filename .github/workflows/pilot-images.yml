@@ -5,6 +5,10 @@ on:
       pilot:
         description: Pilot directory with images.json (e.g. pilot-002)
         required: true
+      only:
+        description: Optional comma-separated image ids to (re)generate; empty = all
+        required: false
+        default: ''
 permissions:
   contents: write
 jobs:
@@ -18,13 +22,15 @@ jobs:
         shard: [0, 1, 2, 3]
     env:
       PILOT: ${{ inputs.pilot }}
+      ONLY: ${{ inputs.only }}
       HF_HUB_DISABLE_TELEMETRY: '1'
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Pinned runtime
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
-          df -h / | tail -1
+          sudo fallocate -l 12G /swapgen && sudo chmod 600 /swapgen && sudo mkswap -q /swapgen && sudo swapon /swapgen
+          df -h / | tail -1 && free -g | head -3
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
           python3 -m venv "$RUNNER_TEMP/gen"
           "$RUNNER_TEMP/gen/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu 'torch==2.5.1'
@@ -38,6 +44,7 @@ jobs:
           retention-days: 7
   publish:
     needs: generate
+    if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
@@ -57,6 +64,7 @@ jobs:
           dest="migration/production/$PILOT/images"
           mkdir -p "$dest"
           cd "$RUNNER_TEMP/img"
+          ls *.png >/dev/null
           for png in *.png; do
             id="${png%.png}"; sha=$(sha256sum "$png" | cut -d' ' -f1)
             asset="$PILOT-img-$id-sha256-$sha.png"; cp "$png" "$asset"
