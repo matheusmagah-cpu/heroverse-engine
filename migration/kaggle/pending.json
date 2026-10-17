@@ -1,12 +1,5 @@
 {
  "version": "kaggle-pending-v1",
- "jobs": [
-  {
-   "slug": "heroverse-render-pilot-002",
-   "pilot": "pilot-002",
-   "kind": "render",
-   "launched_at": "2026-10-17T15:44:51.950691+00:00",
-   "run": "39046212261"
-  }
- ]
+ "jobs": [],
+ "note": "2026-10-17: Kaggle use for the monetized channel stopped. Kaggle terms limit the Services to internal, personal, non-commercial purposes (quoted in kaggle.com/discussions/general/272074). The pilot-002 Kaggle kernel output is not collected or used. Image generation moves to Cloudflare Workers AI (FLUX.1 schnell, Apache-2.0); rendering stays on GitHub Actions."
 }

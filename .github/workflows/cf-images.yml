@@ -1,0 +1,58 @@
+name: HeroVerse images on Cloudflare Workers AI (free allocation)
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory with images.json
+        required: true
+      engine:
+        description: flux (FLUX.1 schnell, square) or sdxl (SDXL-Lightning, 16:9)
+        required: true
+        default: flux
+      only:
+        description: Optional comma-separated image ids; empty = all
+        required: false
+        default: ''
+permissions:
+  contents: write
+jobs:
+  images:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+      ENGINE: ${{ inputs.engine }}
+      ONLY: ${{ inputs.only }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Generate
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          case "$ENGINE" in flux|sdxl) ;; *) exit 1;; esac
+          test -n "$CLOUDFLARE_API_TOKEN" && test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo CLOUDFLARE_SECRETS_MISSING; exit 1; }
+          python3 -m venv "$RUNNER_TEMP/v" && "$RUNNER_TEMP/v/bin/pip" install -q --disable-pip-version-check pillow==11.0.0
+          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/imagegen/cf_images.py "migration/production/$PILOT/images.json" "$RUNNER_TEMP/img" "$ENGINE"
+      - name: Release assets, metadata and review sheet
+        run: |
+          sudo apt-get install -y -qq ffmpeg >/dev/null
+          dest="migration/production/$PILOT/images"; mkdir -p "$dest" "$RUNNER_TEMP/sheet"
+          cd "$RUNNER_TEMP/img"
+          for png in *.png; do
+            id="${png%.png}"; sha=$(sha256sum "$png" | cut -d' ' -f1)
+            asset="$PILOT-img-$id-sha256-$sha.png"; cp "$png" "$RUNNER_TEMP/sheet/$png"; cp "$png" "$asset"
+            gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" --clobber
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json"
+          done
+          n=$(ls "$RUNNER_TEMP"/sheet/*.png | wc -l)
+          ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/sheet/*.png" -vf "scale=448:256:force_original_aspect_ratio=decrease,pad=448:256:(ow-iw)/2:(oh-ih)/2,tile=4x$(( (n + 3) / 4 ))" -frames:v 1 -q:v 4 "$GITHUB_WORKSPACE/$dest/review-sheet-cf.jpg"
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dest"
+          git commit -q -m "Record $PILOT images from Cloudflare Workers AI ($ENGINE, run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
