@@ -37,6 +37,20 @@ class StructureMining(unittest.TestCase):
         self.assertEqual(m["shots_per_minute_model_counted"], 6.0)
         self.assertEqual(m["first_spoken_beat"], {"at": 0, "beat": "hook"})
 
+    def test_looping_transcript_is_rejected(self):
+        w = window(0, 300, [20, 140])
+        w["transcript"] = [{"start_seconds": i, "text": "By divine authority."} for i in range(12)]
+        self.assertTrue(sm.degenerate(w))
+        self.assertFalse(sm.valid_window(w, "abcdefghijk", 0, 300))
+
+    def test_small_gaps_are_repaired_large_are_not(self):
+        w = window(0, 300, [20, 140])
+        w["beats"][0]["start_seconds"], w["beats"][1]["start_seconds"] = 5, 30
+        self.assertTrue(sm.valid_window(sm.repair(w, 0, 300), "abcdefghijk", 0, 300))
+        w = window(0, 300, [20, 140])
+        w["beats"][1]["start_seconds"] = 80
+        self.assertFalse(sm.valid_window(sm.repair(w, 0, 300), "abcdefghijk", 0, 300))
+
 
 if __name__ == "__main__":
     unittest.main()
