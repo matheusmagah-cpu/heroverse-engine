@@ -28,13 +28,19 @@ def parse(ts):
     return datetime.fromisoformat(ts.replace("Z", "+00:00"))
 
 
+COMMENTARY = re.compile(r"(?i)(explained|the truth about|what the bible (really )?says|is it (a )?sin|is it biblical|"
+                        r"should christians|why (do|does|did|are|is)|the problem with|debunk|myth|lie|exposed|"
+                        r"perspective|my take|reacts?|response to|answer(ed)?|apologetic|wrong about|mistake)")
+
+
 def features(title):
     words = title.split()
     return {"length": len(title), "has_number": bool(re.search(r"\d", title)), "has_pipe": "|" in title,
             "has_colon": ":" in title, "has_emoji": bool(re.search(r"[\U0001F300-\U0001FAFF☀-➿]", title)),
             "caps_words": sum(1 for w in words if len(w) > 2 and w.isupper()),
             "second_person": bool(re.search(r"(?i)\byou(r)?\b", title)),
-            "says_prayer": bool(re.search(r"(?i)\bpray", title))}
+            "says_prayer": bool(re.search(r"(?i)\bpray", title)),
+            "commentary_structure": bool(COMMENTARY.search(title))}
 
 
 def lift(top, rest, key):
@@ -83,6 +89,8 @@ def main(raw_path, out):
         "publish_hour_utc_top_quartile": Counter(v["publish_hour_utc"] for v in top).most_common(4),
         "title_feature_lift": {k: lift(top, rest, k) for k in features("x")},
         "title_terms_lift": [{"term": t, "top": a, "rest": b} for t, a, b in term_lift],
+        "commentary_videos_in_top_quartile": [{k: v[k] for k in ("video_id", "channel", "title", "minutes", "views_per_day")}
+                                              for v in top if v["features"]["commentary_structure"]][:25],
     }
     fast.sort(key=lambda r: r["subs_per_day"], reverse=True)
     result = {"version": "daily-intel-v1", "panel_captured_at": panel["captured_at"],
