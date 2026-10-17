@@ -51,11 +51,11 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     if not long_entry or "video_id" not in long_entry:
         raise SystemExit("LONG_VIDEO_NOT_PUBLISHED")
     slots = [s for s in slots.split(",") if s]
-    if len(slots) < len(spec["shorts"]):
-        raise SystemExit("NOT_ENOUGH_SLOTS")
-    spec["shorts"] = [r for r in spec["shorts"] if r.get("publish")]
+    spec["shorts"] = [r for r in spec["shorts"] if r.get("publish")]  # only the Shorts the watched review approved
     if not spec["shorts"]:
         raise SystemExit("NO_SHORT_APPROVED_BY_REVIEW")
+    if len(slots) < len(spec["shorts"]):
+        raise SystemExit("NOT_ENOUGH_SLOTS")
     reports = []
     for short in spec["shorts"]:
         if (short.get("review") or {}).get("status") != "PASS":
