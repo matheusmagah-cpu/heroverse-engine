@@ -1,0 +1,30 @@
+{
+  "version": "av-event-meter-criteria-v1",
+  "frozen_before_meter_code_existed": true,
+  "frozen_at_utc": "2026-10-17T01:55:00Z",
+  "purpose": "Pass/fail rules for a blind deterministic meter of discrete audio onsets, visual change onsets and audio-minus-video offset. Not semantic, perceptual or production approval.",
+  "blindness": [
+    "The meter receives only the media path. It never reads manifests, recipes, expected counts or offsets.",
+    "Qualification copies each stimulus alone into an empty directory and runs the meter in a separate isolated interpreter.",
+    "Expected values come from the preserved recipe nominal constants (flash starts 1/3/5 s; tone shift +0.5, 0, -0.5 s; c02 no flashes; c03 exact zero PCM), never from meter output."
+  ],
+  "stimulus_identity": "Stimuli are rebuilt with the preserved recipe and must be byte-identical (SHA-256) to the five frozen controls; otherwise qualification stops before measuring.",
+  "rules": {
+    "audio_onset_count": "EXACT",
+    "audio_onset_tolerance_seconds": 0.015,
+    "visual_onset_count": "EXACT",
+    "visual_onset_tolerance_seconds": 0.0167,
+    "digital_silence": "Control with all-zero PCM must report exact_digital_silence=true and zero audio onsets.",
+    "constant_image": "Control with a constant image must report zero visual onsets.",
+    "offset_tolerance_seconds": 0.02,
+    "offset_definition": "Median of paired (audio onset - visual onset); positive means sound lags picture.",
+    "sync_verdict": "ITU-R BT.1359 detectability window: in sync iff -0.045 <= offset <= +0.125 s. c01 (+0.5) and c05 (-0.5) must be OUT_OF_SYNC; c04 (0) must be IN_SYNC; c02/c03 must be NOT_MEASURABLE (no pairs).",
+    "generalization": "Offline synthetic tests with counts, times, levels, noise floor, frame rates, sample rates and channel layouts that differ from the five controls must pass with the same tolerances; meter parameters may not be tuned per control."
+  },
+  "failure_policy": "Any rule failure is reported as FAIL; criteria are not edited after results to pass.",
+  "out_of_scope": [
+    "Identifying speech, music, sound effects or visual content.",
+    "Continuous music, dense speech or gradual visual motion as countable events.",
+    "Perceptual quality, originality, rights, production or publication approval."
+  ]
+}
