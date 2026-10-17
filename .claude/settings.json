@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push -u origin claude/*)",
+      "Bash(git push origin claude/*)",
+      "Bash(python3 *)",
+      "Bash(ffmpeg *)",
+      "Bash(ffprobe *)"
+    ]
+  }
+}
