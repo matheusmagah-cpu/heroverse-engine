@@ -18,11 +18,11 @@
  "seconds": 3.0,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
  "upscaler": {
-  "model": "Real-ESRGAN x2plus",
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
   "licence": "bsd-3-clause",
-  "weights_sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
-  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth"
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "pilot-901-img-medium-window-sha256-60fa74e91d276543aefeb1dcb794cf451b61fcc72c8e5b96557d468a6a287946.png",
- "sha256": "60fa74e91d276543aefeb1dcb794cf451b61fcc72c8e5b96557d468a6a287946"
+ "release_asset": "pilot-901-img-medium-window-sha256-c9538c56922b52734f43566bd31605ca78d12bbe78861c049a125695b448cb90.png",
+ "sha256": "c9538c56922b52734f43566bd31605ca78d12bbe78861c049a125695b448cb90"
 }

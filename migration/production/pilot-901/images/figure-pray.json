@@ -18,11 +18,11 @@
  "seconds": 2.9,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
  "upscaler": {
-  "model": "Real-ESRGAN x2plus",
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
   "licence": "bsd-3-clause",
-  "weights_sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
-  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth"
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "pilot-901-img-figure-pray-sha256-5f93152dbb4e3c253b59c42b070c4d398ecd9b0b47fbded6e658921584038212.png",
- "sha256": "5f93152dbb4e3c253b59c42b070c4d398ecd9b0b47fbded6e658921584038212"
+ "release_asset": "pilot-901-img-figure-pray-sha256-1b7d57610f4377ced42bfa746b3c3d3ac020fb2bf047795fa6645ed4b9c42419.png",
+ "sha256": "1b7d57610f4377ced42bfa746b3c3d3ac020fb2bf047795fa6645ed4b9c42419"
 }
