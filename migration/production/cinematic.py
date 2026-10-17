@@ -34,11 +34,15 @@ ZOOM = {"dolly_in": 0.07, "dolly_out": 0.07, "truck_right": 0.02, "truck_left": 
 # LOOK once on the final picture: halation on highlights (luma only, computed at quarter size),
 # vignette, fine temporal grain.
 GRADE = "colorbalance=rs=-0.015:bs=0.02:rh=0.03:gh=0.01:bh=-0.03,eq=contrast=1.04:saturation=1.04"
-LOOK = ("split[base][glow];"
-        "[glow]scale=480:270,curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale=1920:1080[halo];"
-        "[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,"
-        "vignette=angle=PI/6:mode=forward,"
-        "noise=c0s=4:c0f=t+u")
+def look(w=W, h=H):
+    return ("split[base][glow];"
+            f"[glow]scale={w // 4}:{h // 4},curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale={w}:{h}[halo];"
+            "[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,"
+            "vignette=angle=PI/6:mode=forward,"
+            "noise=c0s=4:c0f=t+u")
+
+
+LOOK = look()
 
 
 def grade(image, out=None):
@@ -71,10 +75,10 @@ def depth(model_path, images):
         cv2.imwrite(str(Path(image).with_suffix(".depth.png")), (d * 65535).astype(np.uint16))
 
 
-def load(image, depth_png):
+def load(image, depth_png, size=(W, H)):
     """Master image and smoothed depth at MARGIN x the output size."""
     import cv2
-    mw, mh = int(W * MARGIN), int(H * MARGIN)
+    mw, mh = int(size[0] * MARGIN), int(size[1] * MARGIN)
     img = cv2.imread(str(image))
     scale = max(mw / img.shape[1], mh / img.shape[0])
     size = (int(np.ceil(img.shape[1] * scale)), int(np.ceil(img.shape[0] * scale)))
@@ -108,9 +112,10 @@ def camera(move, e):
 class Dust:
     """Sparse motes drifting in the light: depth-sorted, soft, slow (atmosphere, not effect)."""
 
-    def __init__(self, n=70, seed=7):
+    def __init__(self, n=70, seed=7, size=(W, H)):
+        self.w, self.h = size
         rng = np.random.default_rng(seed)
-        self.p = rng.random((n, 2)) * (W, H)
+        self.p = rng.random((n, 2)) * size
         self.v = (rng.random((n, 2)) - 0.5) * (10, 6) + (2, -4)  # px/s, gently upward
         self.z = rng.random(n)                                   # 0 far .. 1 near
         self.phase = rng.random(n) * 6.28
@@ -119,21 +124,22 @@ class Dust:
         import cv2
         layer = np.zeros_like(frame)
         for (x, y), (vx, vy), z, ph in zip(self.p, self.v, self.z, self.phase):
-            px = (x + vx * t + dx * (0.5 + z)) % W
-            py = (y + vy * t + dy * (0.5 + z)) % H
+            px = (x + vx * t + dx * (0.5 + z)) % self.w
+            py = (y + vy * t + dy * (0.5 + z)) % self.h
             r = 1.0 + 2.5 * z
             a = (0.25 + 0.35 * z) * (0.6 + 0.4 * np.sin(ph + t * 0.8))
             cv2.circle(layer, (int(px), int(py)), int(np.ceil(r)), (215 * a, 235 * a, 255 * a), -1, cv2.LINE_AA)
         return cv2.add(frame, cv2.GaussianBlur(layer, (0, 0), 1.6))
 
 
-def frames(img, d, move, n, dust=None, fps=30):
+def frames(img, d, move, n, dust=None, fps=30, size=(W, H)):
     """Yield n BGR frames of the parallax move. Backward warp: each output pixel looks up
     the source displaced by its own depth (two fixed-point passes keep edges stable).
     The displacement field is smooth (blurred depth), so it is solved at half resolution
     and upsampled; only the final image lookup runs at full resolution."""
     import cv2
     mh, mw = d.shape
+    W, H = size
     gx, gy = np.meshgrid(np.linspace(0, W - 1, W // 2, dtype=np.float32), np.linspace(0, H - 1, H // 2, dtype=np.float32))
     cx, cy = (mw - 1) / 2, (mh - 1) / 2
     focus = float(np.median(d))  # the median depth stays put; nearer slides one way, farther the other
@@ -157,14 +163,14 @@ def frames(img, d, move, n, dust=None, fps=30):
         yield out
 
 
-def parallax(image, depth_png, out, length, move, fps=30, dust=False, intermediate=True):
-    img, d = load(image, depth_png)
+def parallax(image, depth_png, out, length, move, fps=30, dust=False, intermediate=True, size=(W, H)):
+    img, d = load(image, depth_png, size)
     n = int(round(length * fps))
     preset, crf = ("ultrafast", "12") if intermediate else ("veryfast", "18")
-    p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}",
+    p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{size[0]}x{size[1]}",
                           "-r", str(fps), "-i", "-", "-c:v", "libx264", "-preset", preset, "-crf", crf,
                           "-pix_fmt", "yuv420p", "-threads", "2", str(out)], stdin=subprocess.PIPE)
-    for f in frames(img, d, move, n, Dust() if dust else None, fps):
+    for f in frames(img, d, move, n, Dust(size=size) if dust else None, fps, size):
         p.stdin.write(f.tobytes())
     p.stdin.close()
     if p.wait():
