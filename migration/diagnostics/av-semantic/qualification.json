@@ -1,0 +1,28 @@
+{
+  "version": "av-semantic-qualification-record-v1",
+  "status": "PASS_9_OF_9_CASES",
+  "ci_run": 38995242464,
+  "head_sha": "d3901363bf42cf257f5801d2bdc95955a0adb1ce",
+  "criteria_sha256": "6d3f768645647bb487b46d9551d2ffef7f561e401c12b27377e5b2930f00b9da",
+  "semantic_sha256": "a9ff9f8a426dc417fa173d2bce24528ebe41c08f9c4643bdd153ffae0aa4bde1",
+  "yamnet_sha256": "10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de",
+  "yamnet_preserved_release_asset": "yamnet-classification-tflite-v1-sha256-10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de.tflite (uploaded by CI run 38995129789 after hash check)",
+  "results": {
+    "c03_digital_silence": {"status": "PASS", "silence_frames": 12, "words": 0},
+    "c04_tones": {"status": "PASS", "speech_frames": 0, "words": 0, "raw_words_ge_0_5": 0},
+    "pink_noise": {"status": "PASS", "speech_frames": 0, "uncertain_frames": 10, "words": 0},
+    "known_speech_clean": {"status": "PASS", "wer": 0.12, "speech_presence": 0.875},
+    "speech_over_BeFOHnncaeQ": {"status": "PASS", "wer": 0.04, "plain_music_presence": 1.0},
+    "speech_over_EkT0XMVln3s": {"status": "PASS", "wer": 0.08, "plain_music_presence": 1.0},
+    "speech_over_VA3qvxoZr4Q": {"status": "PASS", "wer": 0.12, "plain_music_presence": 1.0},
+    "speech_over_j2rk8ycXe3c": {"status": "PASS", "wer": 0.12, "plain_music_presence": 1.0},
+    "speech_over_ksMAEHpzkZo": {"status": "PASS", "wer": 0.24, "plain_music_presence": 1.0}
+  },
+  "observations": [
+    "Rejected words are real words the YAMNet cross-check did not confirm (e.g. 'train', 'lamps'); the agreement rule trades some recall for zero hallucinated words on tones, noise and silence.",
+    "All five openings were classified as music in every frame and contain no detected speech or singing in 0-40 s."
+  ],
+  "executor": "Claude Code cloud session (AI assistant); not human review",
+  "provider_calls": 0, "paid_calls": 0,
+  "production_authorized": false, "publication_authorized": false
+}

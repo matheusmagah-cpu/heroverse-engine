@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/workflows/av-semantic-qualification.yml'
       - 'migration/diagnostics/av-semantic/**'
+      - 'migration/diagnostics/av-profile/**'
   workflow_dispatch:
 permissions:
   contents: write
@@ -61,10 +62,19 @@ jobs:
             "$RUNNER_TEMP/semantic.json" "$RUNNER_TEMP/models/yamnet.tflite" "$RUNNER_TEMP/models/whisper" "$RUNNER_TEMP"/openings/*.mp4 || status=$?
           cat "$RUNNER_TEMP/semantic.json"
           exit ${status:-0}
+      - name: Profile tests and reference AV profiles of the five openings
+        if: always()
+        working-directory: migration/diagnostics/av-profile
+        run: |
+          "$RUNNER_TEMP/venv/bin/python" -I -B -m unittest discover -s . -p test_av_profile.py -v
+          "$RUNNER_TEMP/venv/bin/python" -I -B profile_openings.py "$RUNNER_TEMP/profiles.json" \
+            "$RUNNER_TEMP/models/yamnet.tflite" "$RUNNER_TEMP/models/whisper" "$RUNNER_TEMP"/openings/*.mp4
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: av-semantic-qualification
-          path: ${{ runner.temp }}/semantic.json
+          name: av-semantic-qualification-and-profiles
+          path: |
+            ${{ runner.temp }}/semantic.json
+            ${{ runner.temp }}/profiles.json
           retention-days: 30
           if-no-files-found: warn
