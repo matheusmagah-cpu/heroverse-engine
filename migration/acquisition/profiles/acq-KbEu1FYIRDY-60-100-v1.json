@@ -1,0 +1,199 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 0,
+    "picture_changes_per_minute": 0.0,
+    "median_shot_seconds": 40.067,
+    "longest_shot_seconds": 40.067,
+    "motion_median_top_decile_diff": 7.7
+   },
+   "rhythm": {
+    "audio_onsets": 3,
+    "audio_onsets_per_minute": 4.49,
+    "tempo": {
+     "bpm": null,
+     "confidence": 0.0,
+     "reason": "fewer than 4 onsets"
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": null,
+     "chance_fraction": null,
+     "lift": null
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "NOT_MEASURABLE"
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -19.2,
+    "loudness_range_lu": 7.8,
+    "true_peak_dbtp": -5.5
+   },
+   "colour": {
+    "mean_brightness": 0.4101,
+    "brightness_std_over_time": 0.0352,
+    "mean_saturation": 0.3107,
+    "saturation_std_over_time": 0.0689
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.012,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.614,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 1,
+     "singing": 0,
+     "music": 0,
+     "other": 51,
+     "silence": 0,
+     "UNCERTAIN": 31
+    },
+    "words": 0,
+    "words_per_minute": 0.0,
+    "transcript": ""
+   },
+   "sound_segments": [
+    {
+     "label": "other",
+     "start_seconds": 0.0,
+     "end_seconds": 1.935,
+     "frames": 3
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 1.44,
+     "end_seconds": 2.895,
+     "frames": 2
+    },
+    {
+     "label": "other",
+     "start_seconds": 2.4,
+     "end_seconds": 6.255,
+     "frames": 7
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 5.76,
+     "end_seconds": 7.215,
+     "frames": 2
+    },
+    {
+     "label": "other",
+     "start_seconds": 6.72,
+     "end_seconds": 10.575,
+     "frames": 7
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 10.08,
+     "end_seconds": 11.055,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 10.56,
+     "end_seconds": 12.495,
+     "frames": 3
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 12.0,
+     "end_seconds": 12.975,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 12.48,
+     "end_seconds": 13.455,
+     "frames": 1
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 12.96,
+     "end_seconds": 14.415,
+     "frames": 2
+    },
+    {
+     "label": "other",
+     "start_seconds": 13.92,
+     "end_seconds": 15.855,
+     "frames": 3
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 15.36,
+     "end_seconds": 16.335,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 15.84,
+     "end_seconds": 17.775,
+     "frames": 3
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 17.28,
+     "end_seconds": 18.255,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 17.76,
+     "end_seconds": 22.575,
+     "frames": 9
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 22.08,
+     "end_seconds": 31.215,
+     "frames": 18
+    },
+    {
+     "label": "speech",
+     "start_seconds": 30.72,
+     "end_seconds": 31.695,
+     "frames": 1
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 31.2,
+     "end_seconds": 32.655,
+     "frames": 2
+    },
+    {
+     "label": "other",
+     "start_seconds": 32.16,
+     "end_seconds": 36.975,
+     "frames": 9
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 36.48,
+     "end_seconds": 37.455,
+     "frames": 1
+    },
+    {
+     "label": "other",
+     "start_seconds": 36.96,
+     "end_seconds": 40.031,
+     "frames": 6
+    }
+   ]
+  }
+ ]
+}
