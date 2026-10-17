@@ -89,8 +89,13 @@ def apply(plan_path, out):
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
     tok = token()
     receipt = []
+    limit = int(os.environ.get("MAX_CHANGES", "40"))  # 50 quota units per update
     for vid in plan_record["to_hide"]:
+        if sum(r["result"] == "HIDDEN" for r in receipt) >= limit:
+            break
         current = call(tok, "GET", "videos", {"part": "status,snippet", "id": vid})["items"]
+        if current and current[0]["status"]["privacyStatus"] == "private":
+            continue
         if not current or current[0]["snippet"]["channelId"] != CHANNEL:
             receipt.append({"video_id": vid, "result": "SKIPPED_NOT_OWNED_OR_MISSING"})
             continue
