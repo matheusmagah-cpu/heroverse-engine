@@ -31,7 +31,7 @@ from still_render import ts, ass_text  # noqa: E402
 
 VW, VH = 1080, 1920
 SCENE_S = 7.0
-FIGURE_H = 900
+FIGURE_H = 960
 MOVES = ("dolly_in", "crane_up", "truck_left", "arc", "dolly_out", "truck_right")
 CTA = "Full prayer on the channel ▶"
 LEAN = {"the", "a", "an", "to", "of", "and", "or", "in", "on", "at", "for", "with", "your", "my", "his", "that", "is", "be"}
@@ -46,9 +46,9 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Cap,DejaVu Sans,84,&H0000D7FF,&H00FFFFFF,&H00000000,&H78000000,1,0,0,0,100,100,0,0,1,7,3,5,110,170,0,1
-Style: Hook,DejaVu Sans,78,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,0,0,3,18,0,8,90,170,300,1
+Style: Hook,DejaVu Sans,78,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,0,0,3,18,0,8,90,170,400,1
 Style: Ref,DejaVu Serif,50,&H00A3E7FF,&H00FFFFFF,&H00000000,&H64000000,1,1,0,0,100,100,0,0,1,4,2,8,90,170,520,1
-Style: Cta,DejaVu Sans,50,&H00FFFFFF,&H00FFFFFF,&H00202020,&H00000000,1,0,0,0,100,100,0,0,3,14,0,8,90,170,1180,1
+Style: Cta,DejaVu Sans,50,&H00FFFFFF,&H00FFFFFF,&H00202020,&H00000000,1,0,0,0,100,100,0,0,3,14,0,8,90,170,400,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -96,6 +96,7 @@ def captions(moment):
 
 
 def ass(moment, hook, reference, dur):
+    # the hook (first 2.5 s) and the CTA (last 4 s) share the slot under the top bar; never over the face
     lines = [f"Dialogue: 5,{ts(0)},{ts(min(2.5, dur))},Hook,,0,0,0,,{{\\fad(0,200)}}{ass_text(hook)}"]
     if reference:
         lines.append(f"Dialogue: 3,{ts(0.4)},{ts(dur)},Ref,,0,0,0,,{{\\fad(300,0)}}{ass_text(reference)}")
@@ -113,6 +114,7 @@ def vertical_still(src, out):
 def produce(work, moment, index, script, images, figure, music, out, depth_model=None):
     import cinematic
     dur = moment["end"] - moment["start"] + 0.6
+    voice_s = moment["end"] - moment["start"] + 0.25  # the voice stops after the last word: the next sentence never leaks in
     tmp = out / f"tmp-{index:02d}"
     tmp.mkdir(parents=True, exist_ok=True)
     backgrounds = script["backgrounds"]
@@ -158,12 +160,14 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     mp4 = out / f"short-{index:02d}.mp4"
     swell = f"volume='0.05+0.04*max(0,(t-{dur - 5:.2f})/5)':eval=frame"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(bg), "-loop", "1", "-framerate", "30", "-i", str(graded_fig),
-         "-ss", f"{moment['start']:.3f}", "-t", f"{dur:.3f}", "-i", str(work / "voice.wav"),
+         "-ss", f"{moment['start']:.3f}", "-t", f"{voice_s:.3f}", "-i", str(work / "voice.wav"),
          "-ss", str(MUSIC_OFFSET + moment["start"]), "-t", f"{dur:.3f}", "-i", str(music),
          "-filter_complex",
-         f"[1:v]scale=-1:{FIGURE_H}[fg];[0:v][fg]overlay=x=(W-w)/2:y=H-h-120[pic];[pic]{cinematic.look(VW, VH)}[look];"
+         f"[1:v]crop=iw:ih-8:0:0,scale=-2:'{FIGURE_H}*(1+0.05*t/{dur:.3f})':eval=frame[fg];"
+         f"[0:v][fg]overlay=x='(W-w)/2+12*sin(2*PI*t/9)':y='H-h+40':eval=frame[pic];[pic]{cinematic.look(VW, VH)}[look];"
          f"[look]ass={tmp / 's.ass'},format=yuv420p[vout];"
-         f"[2:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,afade=t=out:st={dur - 0.5:.3f}:d=0.5,asplit=2[vo][key];"
+         f"[2:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,afade=t=out:st={voice_s - 0.12:.3f}:d=0.12,"
+         f"apad=whole_dur={dur:.3f},asplit=2[vo][key];"
          f"[3:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,{swell},afade=t=in:d=0.5,"
          f"afade=t=out:st={dur - 0.8:.3f}:d=0.8[m];[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck];"
          "[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-2:LRA=9,"

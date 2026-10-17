@@ -63,9 +63,20 @@ end
 df -h "$T" | tail -1
 stage "Shorts: analysis of the whole video, own edit per Short, watched review"
 mkdir -p "$T/work/shorts"
-( q "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 5 &&
+HANDOFF=""
+if [ -z "${HERO_GEMINI_API_KEY:-}" ]; then
+  # no Gemini key here (public runner): the Shorts are made privately by shorts.yml from the same voice and figure
+  HANDOFF=1
+  ffmpeg -v error -y -i "$T/work/voice.wav" -c:a flac "$T/voice.flac"
+  vsha=$(sha256sum "$T/voice.flac" | cut -d' ' -f1); fsha=$(sha256sum "$T/in/figure.png" | cut -d' ' -f1)
+  cp "$T/voice.flac" "$T/$PILOT-voice-sha256-$vsha.flac"; cp "$T/in/figure.png" "$T/$PILOT-figure-sha256-$fsha.png"
+  gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
+  printf '{"voice_asset": "%s", "voice_sha256": "%s", "figure_asset": "%s", "figure_sha256": "%s", "render": "%s"}\n' \
+    "$PILOT-voice-sha256-$vsha.flac" "$vsha" "$PILOT-figure-sha256-$fsha.png" "$fsha" "${RUN_LABEL:-run}" > "$T/shorts-inputs.json"
+else ( q "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 5 &&
   q "$T/cine/bin/python" -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/work/shorts" "$HERO_DEPTH_MODEL" &&
   q "$T/cine/bin/python" -I -B migration/production/shorts_review.py "$T/work/shorts" 3 ) || echo "SHORTS_FAILED (the long video continues)"
+fi
 end
 
 stage "QA against frozen criteria"
@@ -100,6 +111,11 @@ cp "$T/work/manifest.json" "$T/work/timeline.json" "$T/work/captions.ass" "migra
 cp "$T/work/qa.json" "migration/production/$PILOT/out/qa.json" || true
 cp "$T/work/package/package.json" "migration/production/$PILOT/out/package.json" || true
 cp "$T/work/package/thumbnail.jpg" "migration/production/$PILOT/inspection/thumbnail.jpg" || true
+if [ -n "$HANDOFF" ]; then
+  # stale Shorts of an earlier render must never be published with this one
+  rm -f "migration/production/$PILOT/shorts/"*.json "migration/production/$PILOT/shorts/"*-frame.jpg
+  cp "$T/shorts-inputs.json" "migration/production/$PILOT/shorts/inputs.json"
+fi
 cp "$T/work/shorts/shorts.json" "$T/work/shorts/selection.json" "migration/production/$PILOT/shorts/" 2>/dev/null || true
 for s in "$T"/work/shorts/short-*.mp4; do
   [ -f "$s" ] || continue
@@ -110,7 +126,7 @@ for s in "$T"/work/shorts/short-*.mp4; do
 done
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-git add "migration/production/$PILOT/out" "migration/production/$PILOT/inspection" "migration/production/$PILOT/shorts"
+git add -A "migration/production/$PILOT/out" "migration/production/$PILOT/inspection" "migration/production/$PILOT/shorts"
 git commit -q -m "Record $PILOT render, QA, package and inspection sheets (${RUN_LABEL:-run}; not published)"
 git pull --rebase -q origin main && git push -q origin HEAD:main
 end
