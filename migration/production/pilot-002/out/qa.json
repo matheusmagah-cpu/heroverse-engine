@@ -1,0 +1,74 @@
+{
+ "version": "pilot-qa-v1",
+ "pilot_id": "pilot-002",
+ "output_sha256": "79b8ff4b18919cd99468f744f4823973f2c5dcde48a43b33ef3a992191653482",
+ "status": "FAIL",
+ "checks": {
+  "full_decode_without_errors": true,
+  "video_format": true,
+  "duration_min": true,
+  "integrated_lufs": true,
+  "true_peak": true,
+  "speech_presence": true,
+  "no_singing": true,
+  "wer_vs_script": true,
+  "words_per_minute": true,
+  "first_word_onset": true,
+  "hook_second_person": true,
+  "title_card_seconds": true,
+  "figure_present_after_title": true,
+  "background_hold_median": true,
+  "background_hold_max": false,
+  "no_background_repeated_consecutively": true,
+  "caption_coverage_of_speech": true,
+  "caption_hold_median": true,
+  "caption_chars_max": false,
+  "channel_mark_badge_and_amen_prompt": true,
+  "images_open_licence_with_revision": true,
+  "no_third_party_footage": true,
+  "music_owned": true,
+  "voice_model_pinned": true
+ },
+ "criteria_version": "pilot-qa-criteria-v2",
+ "measurements": {
+  "duration_seconds": 1295.07,
+  "loudness": {
+   "integrated_lufs": -15.4,
+   "loudness_range_lu": 3.0,
+   "true_peak_dbtp": -1.2
+  },
+  "speech_presence": 0.885,
+  "music_presence": 0.384,
+  "wer_vs_script": 0.0395,
+  "accepted_words_per_minute": 139.7,
+  "caption_lines": 591,
+  "holds": 107,
+  "first_word_seconds": 0.08,
+  "editing": {
+   "picture_changes": 565,
+   "picture_changes_per_minute": 26.18,
+   "median_shot_seconds": 2.2,
+   "longest_shot_seconds": 9.833,
+   "motion_median_top_decile_diff": 0.007
+  },
+  "colour": {
+   "mean_brightness": 0.4565,
+   "brightness_std_over_time": 0.0448,
+   "mean_saturation": 0.4001,
+   "saturation_std_over_time": 0.0866
+  },
+  "rhythm": {
+   "audio_onsets": 1989,
+   "audio_onsets_per_minute": 92.15,
+   "tempo": {
+    "bpm": 78.58,
+    "confidence": 0.007
+   }
+  }
+ },
+ "transcript_head": "Good morning! If you are holding this day with a tight chest, already counting what could go wrong, stay with me for the next few minutes. Before you walk into today, I want you to know something. God has already been there. Take one slow breath. Let your shoulders drop. do not have to solve the whole day right now. You only have to bring this moment to the one who is not surprised by anything wai",
+ "criteria_sha256": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
+ "human_review": "PENDING (D-076 calibration by sampling)",
+ "upload_performed": false,
+ "publication_performed": false
+}

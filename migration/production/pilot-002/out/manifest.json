@@ -1,0 +1,5789 @@
+{
+ "version": "pilot-manifest-v2",
+ "pilot_id": "pilot-002",
+ "grammar": "figure+backgrounds+captions",
+ "output_sha256": "79b8ff4b18919cd99468f744f4823973f2c5dcde48a43b33ef3a992191653482",
+ "output_seconds": 1295.066667,
+ "script_sha256": "bd12ad7f9d6d04452e871b9473da48a98c2cb1a7ee4d6eadb27b248505d2aee3",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85,
+  "voice_wav_sha256": "485f7685e2a3c5bc498099b583ea6ed0a2b6e5a3587d591d6a650d59bf38ce02"
+ },
+ "music": {
+  "file": "original-rest-music.lossless.flac",
+  "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+  "offset_seconds": 1200.0,
+  "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
+ },
+ "figure": {
+  "sha256": "0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b",
+  "id": "figure-a",
+  "prompt": "Jesus Christ praying with hands folded at his chest, eyes closed, gentle peaceful expression, long brown hair and beard, cream robe with a brown sash, upper body portrait facing right, isolated on a plain light grey studio background, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+  "seed": 2000,
+  "steps": 6,
+  "guidance": 1.5,
+  "size": [
+   1344,
+   768
+  ],
+  "models": {
+   "stabilityai/stable-diffusion-xl-base-1.0": {
+    "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+    "license": "openrail++"
+   },
+   "latent-consistency/lcm-lora-sdxl": {
+    "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+    "license": "openrail++"
+   }
+  },
+  "device": "cuda",
+  "seconds": 10.5,
+  "generated_by": "HeroVerse pipeline (AI-generated image)",
+  "release_asset": "pilot-002-img-figure-a-sha256-0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b.png",
+  "cutout_model": "isnet-general-use",
+  "cutout_tool": "rembg",
+  "source_png_sha256": "0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b",
+  "cutout_box": [
+   273,
+   4,
+   1141,
+   768
+  ],
+  "cutout_size": [
+   868,
+   764
+  ],
+  "opaque_fraction_of_box": 0.618
+ },
+ "images": {
+  "bg-valley": {
+   "sha256": "c2a2464a50380ce1a83d0f758ff7da685b4244bcdcf906f1b98d70545ca36766",
+   "release_asset": "pilot-002-img-bg-valley-sha256-c2a2464a50380ce1a83d0f758ff7da685b4244bcdcf906f1b98d70545ca36766.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 1006,
+   "prompt": "misty green valley at sunrise, golden light over rolling hills, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-sky": {
+   "sha256": "617da9bf421ee8daa77db87503c7b3639405f599b15d75bf71c14e8a7c4533aa",
+   "release_asset": "pilot-002-img-bg-sky-sha256-617da9bf421ee8daa77db87503c7b3639405f599b15d75bf71c14e8a7c4533aa.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3000,
+   "prompt": "soft white clouds in a bright blue morning sky with sun rays, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-river": {
+   "sha256": "d90d8b240a061b6a961d363e4411f81e42b93fa1832d94a1202befb08cb6f392",
+   "release_asset": "pilot-002-img-bg-river-sha256-d90d8b240a061b6a961d363e4411f81e42b93fa1832d94a1202befb08cb6f392.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3001,
+   "prompt": "clear mountain stream flowing over stones in a green forest at morning, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-wheat": {
+   "sha256": "a3ea2b5bd5e7d9fe8ef9ff8fe4b733f3d2e1ef35a8ca0b08456324b7274cdcc3",
+   "release_asset": "pilot-002-img-bg-wheat-sha256-a3ea2b5bd5e7d9fe8ef9ff8fe4b733f3d2e1ef35a8ca0b08456324b7274cdcc3.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3002,
+   "prompt": "golden wheat field under a warm sunrise sky, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-lake": {
+   "sha256": "50ea5efbd4c1b733de815ff015881e1f4159f835a327909cd9f9006911445803",
+   "release_asset": "pilot-002-img-bg-lake-sha256-50ea5efbd4c1b733de815ff015881e1f4159f835a327909cd9f9006911445803.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 1009,
+   "prompt": "calm lake at dawn with light mist over the water and pine trees, soft pink and gold sky, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-forest": {
+   "sha256": "d2d343b10ad94777d4e4e8e6584fd5a9f5c3b686d418dad41560448b3a14bc1b",
+   "release_asset": "pilot-002-img-bg-forest-sha256-d2d343b10ad94777d4e4e8e6584fd5a9f5c3b686d418dad41560448b3a14bc1b.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3003,
+   "prompt": "sunbeams through tall trees in a peaceful forest at morning, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-meadow": {
+   "sha256": "3e10d70e3cca51623d727ef11c72e061816bbda5b20a74d2ff237fe3c0219e8a",
+   "release_asset": "pilot-002-img-bg-meadow-sha256-3e10d70e3cca51623d727ef11c72e061816bbda5b20a74d2ff237fe3c0219e8a.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 1010,
+   "prompt": "wildflower meadow glowing in early morning light, dew on the grass, soft focus background, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-sunset-sea": {
+   "sha256": "f3629abdff452eef0d609e1d1e13b42223997206eaa40852319d7d1d2808a7b8",
+   "release_asset": "pilot-002-img-bg-sunset-sea-sha256-f3629abdff452eef0d609e1d1e13b42223997206eaa40852319d7d1d2808a7b8.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3004,
+   "prompt": "calm sea under a glowing orange and pink sky at dawn, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-mountain": {
+   "sha256": "0674276a5a393ebdd56ffe71d4207e839ddcc7279286f3149ba58d81eb53322d",
+   "release_asset": "pilot-002-img-bg-mountain-sha256-0674276a5a393ebdd56ffe71d4207e839ddcc7279286f3149ba58d81eb53322d.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 1011,
+   "prompt": "mountain trail at sunrise above the clouds, warm light on the peaks, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-garden": {
+   "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
+   "release_asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3005,
+   "prompt": "quiet garden path with flowers and soft morning light, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-road": {
+   "sha256": "1051aade2a996308a320422b3ac88644b02e758042049485a212e0d1b21b015c",
+   "release_asset": "pilot-002-img-bg-road-sha256-1051aade2a996308a320422b3ac88644b02e758042049485a212e0d1b21b015c.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 1007,
+   "prompt": "an empty country road leading into a bright sunrise between wheat fields, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-hills": {
+   "sha256": "05fcd087fa690f6e0fbefddfa57963667d7070eacbb19be6da5b67a725e47b21",
+   "release_asset": "pilot-002-img-bg-hills-sha256-05fcd087fa690f6e0fbefddfa57963667d7070eacbb19be6da5b67a725e47b21.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3006,
+   "prompt": "green rolling hills with a single tree under a soft sunrise, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-sea": {
+   "sha256": "22b9960e042b1c4544b5c6fdfb72f99bf8964d1bf0792671164a73f921c37089",
+   "release_asset": "pilot-002-img-bg-sea-sha256-22b9960e042b1c4544b5c6fdfb72f99bf8964d1bf0792671164a73f921c37089.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 1012,
+   "prompt": "gentle ocean waves at sunrise, golden path of light on the water, peaceful beach, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-snow": {
+   "sha256": "7a6e96ebc9915a5697b6864633f5c4b19ae8c6da72ed2788172d7a1be3f6869f",
+   "release_asset": "pilot-002-img-bg-snow-sha256-7a6e96ebc9915a5697b6864633f5c4b19ae8c6da72ed2788172d7a1be3f6869f.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3007,
+   "prompt": "snowy pine forest glowing in gentle morning sun, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  }
+ },
+ "holds": [
+  {
+   "image": "bg-valley",
+   "start": 0.0,
+   "figure": false,
+   "end": 2.0
+  },
+  {
+   "image": "bg-sky",
+   "start": 2.0,
+   "figure": true,
+   "end": 14.536
+  },
+  {
+   "image": "bg-river",
+   "start": 14.536,
+   "figure": true,
+   "end": 25.976
+  },
+  {
+   "image": "bg-valley",
+   "start": 25.976,
+   "figure": true,
+   "end": 42.912
+  },
+  {
+   "image": "bg-wheat",
+   "start": 42.912,
+   "figure": true,
+   "end": 54.413
+  },
+  {
+   "image": "bg-lake",
+   "start": 54.413,
+   "figure": true,
+   "end": 67.205
+  },
+  {
+   "image": "bg-forest",
+   "start": 67.205,
+   "figure": true,
+   "end": 80.277
+  },
+  {
+   "image": "bg-meadow",
+   "start": 80.277,
+   "figure": true,
+   "end": 92.983
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 92.983,
+   "figure": true,
+   "end": 106.429
+  },
+  {
+   "image": "bg-mountain",
+   "start": 106.429,
+   "figure": true,
+   "end": 116.363
+  },
+  {
+   "image": "bg-garden",
+   "start": 116.363,
+   "figure": true,
+   "end": 129.117
+  },
+  {
+   "image": "bg-road",
+   "start": 129.117,
+   "figure": true,
+   "end": 140.924
+  },
+  {
+   "image": "bg-hills",
+   "start": 140.924,
+   "figure": true,
+   "end": 152.243
+  },
+  {
+   "image": "bg-sea",
+   "start": 152.243,
+   "figure": true,
+   "end": 161.52
+  },
+  {
+   "image": "bg-snow",
+   "start": 161.52,
+   "figure": true,
+   "end": 170.707
+  },
+  {
+   "image": "bg-sky",
+   "start": 170.707,
+   "figure": true,
+   "end": 182.523
+  },
+  {
+   "image": "bg-river",
+   "start": 182.523,
+   "figure": true,
+   "end": 195.868
+  },
+  {
+   "image": "bg-valley",
+   "start": 195.868,
+   "figure": true,
+   "end": 205.795
+  },
+  {
+   "image": "bg-wheat",
+   "start": 205.795,
+   "figure": true,
+   "end": 217.435
+  },
+  {
+   "image": "bg-lake",
+   "start": 217.435,
+   "figure": true,
+   "end": 229.324
+  },
+  {
+   "image": "bg-forest",
+   "start": 229.324,
+   "figure": true,
+   "end": 241.977
+  },
+  {
+   "image": "bg-meadow",
+   "start": 241.977,
+   "figure": true,
+   "end": 254.187
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 254.187,
+   "figure": true,
+   "end": 263.321
+  },
+  {
+   "image": "bg-mountain",
+   "start": 263.321,
+   "figure": true,
+   "end": 272.428
+  },
+  {
+   "image": "bg-garden",
+   "start": 272.428,
+   "figure": true,
+   "end": 281.791
+  },
+  {
+   "image": "bg-road",
+   "start": 281.791,
+   "figure": true,
+   "end": 291.137
+  },
+  {
+   "image": "bg-hills",
+   "start": 291.137,
+   "figure": true,
+   "end": 303.508
+  },
+  {
+   "image": "bg-sea",
+   "start": 303.508,
+   "figure": true,
+   "end": 316.571
+  },
+  {
+   "image": "bg-snow",
+   "start": 316.571,
+   "figure": true,
+   "end": 326.749
+  },
+  {
+   "image": "bg-sky",
+   "start": 326.749,
+   "figure": true,
+   "end": 343.679
+  },
+  {
+   "image": "bg-river",
+   "start": 343.679,
+   "figure": true,
+   "end": 356.257
+  },
+  {
+   "image": "bg-valley",
+   "start": 356.257,
+   "figure": true,
+   "end": 365.513
+  },
+  {
+   "image": "bg-wheat",
+   "start": 365.513,
+   "figure": true,
+   "end": 379.456
+  },
+  {
+   "image": "bg-lake",
+   "start": 379.456,
+   "figure": true,
+   "end": 389.767
+  },
+  {
+   "image": "bg-forest",
+   "start": 389.767,
+   "figure": true,
+   "end": 404.051
+  },
+  {
+   "image": "bg-meadow",
+   "start": 404.051,
+   "figure": true,
+   "end": 416.272
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 416.272,
+   "figure": true,
+   "end": 431.239
+  },
+  {
+   "image": "bg-mountain",
+   "start": 431.239,
+   "figure": true,
+   "end": 445.645
+  },
+  {
+   "image": "bg-garden",
+   "start": 445.645,
+   "figure": true,
+   "end": 455.325
+  },
+  {
+   "image": "bg-road",
+   "start": 455.325,
+   "figure": true,
+   "end": 470.052
+  },
+  {
+   "image": "bg-hills",
+   "start": 470.052,
+   "figure": true,
+   "end": 480.661
+  },
+  {
+   "image": "bg-sea",
+   "start": 480.661,
+   "figure": true,
+   "end": 491.032
+  },
+  {
+   "image": "bg-snow",
+   "start": 491.032,
+   "figure": true,
+   "end": 500.309
+  },
+  {
+   "image": "bg-sky",
+   "start": 500.309,
+   "figure": true,
+   "end": 510.973
+  },
+  {
+   "image": "bg-river",
+   "start": 510.973,
+   "figure": true,
+   "end": 521.195
+  },
+  {
+   "image": "bg-valley",
+   "start": 521.195,
+   "figure": true,
+   "end": 534.653
+  },
+  {
+   "image": "bg-wheat",
+   "start": 534.653,
+   "figure": true,
+   "end": 553.417
+  },
+  {
+   "image": "bg-lake",
+   "start": 553.417,
+   "figure": true,
+   "end": 563.344
+  },
+  {
+   "image": "bg-forest",
+   "start": 563.344,
+   "figure": true,
+   "end": 576.284
+  },
+  {
+   "image": "bg-meadow",
+   "start": 576.284,
+   "figure": true,
+   "end": 586.82
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 586.82,
+   "figure": true,
+   "end": 600.976
+  },
+  {
+   "image": "bg-mountain",
+   "start": 600.976,
+   "figure": true,
+   "end": 612.771
+  },
+  {
+   "image": "bg-garden",
+   "start": 612.771,
+   "figure": true,
+   "end": 624.169
+  },
+  {
+   "image": "bg-road",
+   "start": 624.169,
+   "figure": true,
+   "end": 636.183
+  },
+  {
+   "image": "bg-hills",
+   "start": 636.183,
+   "figure": true,
+   "end": 646.804
+  },
+  {
+   "image": "bg-sea",
+   "start": 646.804,
+   "figure": true,
+   "end": 666.613
+  },
+  {
+   "image": "bg-snow",
+   "start": 666.613,
+   "figure": true,
+   "end": 679.612
+  },
+  {
+   "image": "bg-sky",
+   "start": 679.612,
+   "figure": true,
+   "end": 692.969
+  },
+  {
+   "image": "bg-river",
+   "start": 692.969,
+   "figure": true,
+   "end": 710.043
+  },
+  {
+   "image": "bg-valley",
+   "start": 710.043,
+   "figure": true,
+   "end": 726.579
+  },
+  {
+   "image": "bg-wheat",
+   "start": 726.579,
+   "figure": true,
+   "end": 736.633
+  },
+  {
+   "image": "bg-lake",
+   "start": 736.633,
+   "figure": true,
+   "end": 749.885
+  },
+  {
+   "image": "bg-forest",
+   "start": 749.885,
+   "figure": true,
+   "end": 760.485
+  },
+  {
+   "image": "bg-meadow",
+   "start": 760.485,
+   "figure": true,
+   "end": 772.003
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 772.003,
+   "figure": true,
+   "end": 782.907
+  },
+  {
+   "image": "bg-mountain",
+   "start": 782.907,
+   "figure": true,
+   "end": 792.745
+  },
+  {
+   "image": "bg-garden",
+   "start": 792.745,
+   "figure": true,
+   "end": 806.305
+  },
+  {
+   "image": "bg-road",
+   "start": 806.305,
+   "figure": true,
+   "end": 820.952
+  },
+  {
+   "image": "bg-hills",
+   "start": 820.952,
+   "figure": true,
+   "end": 831.241
+  },
+  {
+   "image": "bg-sea",
+   "start": 831.241,
+   "figure": true,
+   "end": 844.631
+  },
+  {
+   "image": "bg-snow",
+   "start": 844.631,
+   "figure": true,
+   "end": 855.581
+  },
+  {
+   "image": "bg-sky",
+   "start": 855.581,
+   "figure": true,
+   "end": 866.191
+  },
+  {
+   "image": "bg-river",
+   "start": 866.191,
+   "figure": true,
+   "end": 878.055
+  },
+  {
+   "image": "bg-valley",
+   "start": 878.055,
+   "figure": true,
+   "end": 893.248
+  },
+  {
+   "image": "bg-wheat",
+   "start": 893.248,
+   "figure": true,
+   "end": 907.676
+  },
+  {
+   "image": "bg-lake",
+   "start": 907.676,
+   "figure": true,
+   "end": 918.413
+  },
+  {
+   "image": "bg-forest",
+   "start": 918.413,
+   "figure": true,
+   "end": 940.688
+  },
+  {
+   "image": "bg-meadow",
+   "start": 940.688,
+   "figure": true,
+   "end": 950.221
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 950.221,
+   "figure": true,
+   "end": 960.869
+  },
+  {
+   "image": "bg-mountain",
+   "start": 960.869,
+   "figure": true,
+   "end": 975.016
+  },
+  {
+   "image": "bg-garden",
+   "start": 975.016,
+   "figure": true,
+   "end": 985.443
+  },
+  {
+   "image": "bg-road",
+   "start": 985.443,
+   "figure": true,
+   "end": 994.452
+  },
+  {
+   "image": "bg-hills",
+   "start": 994.452,
+   "figure": true,
+   "end": 1005.964
+  },
+  {
+   "image": "bg-sea",
+   "start": 1005.964,
+   "figure": true,
+   "end": 1016.144
+  },
+  {
+   "image": "bg-snow",
+   "start": 1016.144,
+   "figure": true,
+   "end": 1025.229
+  },
+  {
+   "image": "bg-sky",
+   "start": 1025.229,
+   "figure": true,
+   "end": 1038.996
+  },
+  {
+   "image": "bg-river",
+   "start": 1038.996,
+   "figure": true,
+   "end": 1056.392
+  },
+  {
+   "image": "bg-valley",
+   "start": 1056.392,
+   "figure": true,
+   "end": 1066.864
+  },
+  {
+   "image": "bg-wheat",
+   "start": 1066.864,
+   "figure": true,
+   "end": 1079.379
+  },
+  {
+   "image": "bg-lake",
+   "start": 1079.379,
+   "figure": true,
+   "end": 1090.533
+  },
+  {
+   "image": "bg-forest",
+   "start": 1090.533,
+   "figure": true,
+   "end": 1100.716
+  },
+  {
+   "image": "bg-meadow",
+   "start": 1100.716,
+   "figure": true,
+   "end": 1113.135
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 1113.135,
+   "figure": true,
+   "end": 1123.635
+  },
+  {
+   "image": "bg-mountain",
+   "start": 1123.635,
+   "figure": true,
+   "end": 1139.364
+  },
+  {
+   "image": "bg-garden",
+   "start": 1139.364,
+   "figure": true,
+   "end": 1151.74
+  },
+  {
+   "image": "bg-road",
+   "start": 1151.74,
+   "figure": true,
+   "end": 1162.371
+  },
+  {
+   "image": "bg-hills",
+   "start": 1162.371,
+   "figure": true,
+   "end": 1173.995
+  },
+  {
+   "image": "bg-sea",
+   "start": 1173.995,
+   "figure": true,
+   "end": 1183.96
+  },
+  {
+   "image": "bg-snow",
+   "start": 1183.96,
+   "figure": true,
+   "end": 1195.861
+  },
+  {
+   "image": "bg-sky",
+   "start": 1195.861,
+   "figure": true,
+   "end": 1208.131
+  },
+  {
+   "image": "bg-river",
+   "start": 1208.131,
+   "figure": true,
+   "end": 1218.048
+  },
+  {
+   "image": "bg-valley",
+   "start": 1218.048,
+   "figure": true,
+   "end": 1228.2
+  },
+  {
+   "image": "bg-wheat",
+   "start": 1228.2,
+   "figure": true,
+   "end": 1241.695
+  },
+  {
+   "image": "bg-lake",
+   "start": 1241.695,
+   "figure": true,
+   "end": 1255.019
+  },
+  {
+   "image": "bg-forest",
+   "start": 1255.019,
+   "figure": true,
+   "end": 1271.217
+  },
+  {
+   "image": "bg-meadow",
+   "start": 1271.217,
+   "figure": true,
+   "end": 1281.867
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 1281.867,
+   "figure": true,
+   "end": 1295.035
+  }
+ ],
+ "captions_ass_sha256": "e9081961c0adf9d11ee418a8ac9113c15c501912d17f1eb2b79338fa5fd37783",
+ "captions": [
+  {
+   "start": 1.845,
+   "end": 3.443,
+   "text": "If you are holding this"
+  },
+  {
+   "start": 3.443,
+   "end": 5.041,
+   "text": "day with a tight chest,"
+  },
+  {
+   "start": 5.041,
+   "end": 7.611,
+   "text": "already counting what could go wrong,"
+  },
+  {
+   "start": 7.611,
+   "end": 10.431,
+   "text": "stay with me for the next few minutes."
+  },
+  {
+   "start": 10.431,
+   "end": 12.323,
+   "text": "Before you walk into today,"
+  },
+  {
+   "start": 12.323,
+   "end": 14.536,
+   "text": "I want you to know something."
+  },
+  {
+   "start": 14.536,
+   "end": 17.211,
+   "text": "God has already been there."
+  },
+  {
+   "start": 17.841,
+   "end": 19.984,
+   "text": "Take one slow breath."
+  },
+  {
+   "start": 19.984,
+   "end": 22.169,
+   "text": "Let your shoulders drop."
+  },
+  {
+   "start": 22.169,
+   "end": 23.983,
+   "text": "You do not have to solve"
+  },
+  {
+   "start": 23.983,
+   "end": 25.976,
+   "text": "the whole day right now."
+  },
+  {
+   "start": 25.976,
+   "end": 28.386,
+   "text": "You only have to bring this moment"
+  },
+  {
+   "start": 28.386,
+   "end": 30.583,
+   "text": "to the One who is not surprised"
+  },
+  {
+   "start": 30.583,
+   "end": 32.748,
+   "text": "by anything waiting for you."
+  },
+  {
+   "start": 32.748,
+   "end": 35.379,
+   "text": "The meeting you are nervous about,"
+  },
+  {
+   "start": 35.379,
+   "end": 38.243,
+   "text": "the conversation you keep rehearsing,"
+  },
+  {
+   "start": 38.243,
+   "end": 40.101,
+   "text": "the bill, the diagnosis,"
+  },
+  {
+   "start": 40.101,
+   "end": 42.912,
+   "text": "the silence from someone you love."
+  },
+  {
+   "start": 42.912,
+   "end": 44.366,
+   "text": "He has seen every one"
+  },
+  {
+   "start": 44.366,
+   "end": 46.654,
+   "text": "of them from the other side."
+  },
+  {
+   "start": 47.684,
+   "end": 49.286,
+   "text": "Listen to this promise,"
+  },
+  {
+   "start": 49.286,
+   "end": 52.004,
+   "text": "spoken to people who were about to step"
+  },
+  {
+   "start": 52.004,
+   "end": 54.413,
+   "text": "into a land they had never seen."
+  },
+  {
+   "start": 54.413,
+   "end": 55.464,
+   "text": "And the Lord,"
+  },
+  {
+   "start": 55.464,
+   "end": 58.391,
+   "text": "he it is that doth go before thee;"
+  },
+  {
+   "start": 58.391,
+   "end": 59.875,
+   "text": "he will be with thee,"
+  },
+  {
+   "start": 59.875,
+   "end": 61.429,
+   "text": "he will not fail thee,"
+  },
+  {
+   "start": 61.429,
+   "end": 63.093,
+   "text": "neither forsake thee:"
+  },
+  {
+   "start": 63.093,
+   "end": 65.875,
+   "text": "fear not, neither be dismayed."
+  },
+  {
+   "start": 67.205,
+   "end": 69.071,
+   "text": "Notice the order."
+  },
+  {
+   "start": 69.071,
+   "end": 71.064,
+   "text": "He goes before you."
+  },
+  {
+   "start": 71.064,
+   "end": 72.993,
+   "text": "Then he is with you."
+  },
+  {
+   "start": 72.993,
+   "end": 75.078,
+   "text": "Your morning does not begin"
+  },
+  {
+   "start": 75.078,
+   "end": 77.626,
+   "text": "with you walking into the unknown"
+  },
+  {
+   "start": 77.626,
+   "end": 80.277,
+   "text": "alone and hoping God catches up."
+  },
+  {
+   "start": 80.277,
+   "end": 82.974,
+   "text": "It begins with God already standing"
+  },
+  {
+   "start": 82.974,
+   "end": 85.62,
+   "text": "in the places you are afraid of."
+  },
+  {
+   "start": 85.62,
+   "end": 88.808,
+   "text": "The road you cannot see is not empty."
+  },
+  {
+   "start": 88.808,
+   "end": 91.953,
+   "text": "Someone faithful has walked it first."
+  },
+  {
+   "start": 92.983,
+   "end": 94.837,
+   "text": "When Israel left Egypt,"
+  },
+  {
+   "start": 94.837,
+   "end": 97.515,
+   "text": "they did not walk out guessing."
+  },
+  {
+   "start": 97.515,
+   "end": 100.617,
+   "text": "Listen to how the Bible describes it."
+  },
+  {
+   "start": 100.617,
+   "end": 102.659,
+   "text": "And the Lord went before them"
+  },
+  {
+   "start": 102.659,
+   "end": 104.771,
+   "text": "by day in a pillar of a cloud,"
+  },
+  {
+   "start": 104.771,
+   "end": 106.429,
+   "text": "to lead them the way;"
+  },
+  {
+   "start": 106.429,
+   "end": 108.907,
+   "text": "and by night in a pillar of fire,"
+  },
+  {
+   "start": 108.907,
+   "end": 110.513,
+   "text": "to give them light;"
+  },
+  {
+   "start": 110.513,
+   "end": 112.869,
+   "text": "to go by day and night."
+  },
+  {
+   "start": 114.199,
+   "end": 116.363,
+   "text": "By day and by night."
+  },
+  {
+   "start": 116.363,
+   "end": 118.581,
+   "text": "God did not lead his people"
+  },
+  {
+   "start": 118.581,
+   "end": 120.635,
+   "text": "only when the sun was out"
+  },
+  {
+   "start": 120.635,
+   "end": 122.623,
+   "text": "and the road was easy."
+  },
+  {
+   "start": 122.623,
+   "end": 124.168,
+   "text": "He led them in the heat"
+  },
+  {
+   "start": 124.168,
+   "end": 126.653,
+   "text": "of the afternoon and in the dark when"
+  },
+  {
+   "start": 126.653,
+   "end": 129.117,
+   "text": "they could not see their own feet."
+  },
+  {
+   "start": 129.117,
+   "end": 130.872,
+   "text": "Whatever part of the day"
+  },
+  {
+   "start": 130.872,
+   "end": 132.115,
+   "text": "you are dreading,"
+  },
+  {
+   "start": 132.115,
+   "end": 133.358,
+   "text": "the long meeting,"
+  },
+  {
+   "start": 133.358,
+   "end": 134.455,
+   "text": "the drive home,"
+  },
+  {
+   "start": 134.455,
+   "end": 136.43,
+   "text": "the quiet hour tonight when"
+  },
+  {
+   "start": 136.43,
+   "end": 138.111,
+   "text": "your thoughts get loud,"
+  },
+  {
+   "start": 138.111,
+   "end": 140.924,
+   "text": "he has already promised to be there."
+  },
+  {
+   "start": 140.924,
+   "end": 142.802,
+   "text": "You are not walking toward"
+  },
+  {
+   "start": 142.802,
+   "end": 144.859,
+   "text": "a place he has never been."
+  },
+  {
+   "start": 144.859,
+   "end": 147.641,
+   "text": "You are following him into it."
+  },
+  {
+   "start": 148.671,
+   "end": 150.555,
+   "text": "There is a second promise"
+  },
+  {
+   "start": 150.555,
+   "end": 152.243,
+   "text": "for this exact hour."
+  },
+  {
+   "start": 152.243,
+   "end": 154.357,
+   "text": "It is of the Lord's mercies"
+  },
+  {
+   "start": 154.357,
+   "end": 156.315,
+   "text": "that we are not consumed,"
+  },
+  {
+   "start": 156.315,
+   "end": 159.079,
+   "text": "because his compassions fail not."
+  },
+  {
+   "start": 159.079,
+   "end": 161.52,
+   "text": "They are new every morning:"
+  },
+  {
+   "start": 161.52,
+   "end": 164.11,
+   "text": "great is thy faithfulness."
+  },
+  {
+   "start": 165.44,
+   "end": 167.497,
+   "text": "New every morning."
+  },
+  {
+   "start": 167.497,
+   "end": 170.707,
+   "text": "Not leftover mercy from yesterday."
+  },
+  {
+   "start": 170.707,
+   "end": 173.27,
+   "text": "Not the small amount that remains"
+  },
+  {
+   "start": 173.27,
+   "end": 175.004,
+   "text": "after your mistakes."
+  },
+  {
+   "start": 175.004,
+   "end": 177.329,
+   "text": "Fresh mercy, measured for today,"
+  },
+  {
+   "start": 177.329,
+   "end": 179.945,
+   "text": "for the person you are this morning,"
+  },
+  {
+   "start": 179.945,
+   "end": 182.523,
+   "text": "with everything you are carrying."
+  },
+  {
+   "start": 182.523,
+   "end": 184.472,
+   "text": "Whatever yesterday held,"
+  },
+  {
+   "start": 184.472,
+   "end": 187.332,
+   "text": "it did not use up his compassion."
+  },
+  {
+   "start": 187.332,
+   "end": 189.218,
+   "text": "It never could."
+  },
+  {
+   "start": 190.248,
+   "end": 191.887,
+   "text": "So we can pray the way"
+  },
+  {
+   "start": 191.887,
+   "end": 193.676,
+   "text": "David prayed when he did"
+  },
+  {
+   "start": 193.676,
+   "end": 195.868,
+   "text": "not know which way to turn."
+  },
+  {
+   "start": 195.868,
+   "end": 197.455,
+   "text": "Cause me to hear thy"
+  },
+  {
+   "start": 197.455,
+   "end": 200.016,
+   "text": "lovingkindness in the morning;"
+  },
+  {
+   "start": 200.016,
+   "end": 202.244,
+   "text": "for in thee do I trust:"
+  },
+  {
+   "start": 202.244,
+   "end": 204.003,
+   "text": "cause me to know the way"
+  },
+  {
+   "start": 204.003,
+   "end": 205.795,
+   "text": "wherein I should walk;"
+  },
+  {
+   "start": 205.795,
+   "end": 208.897,
+   "text": "for I lift up my soul unto thee."
+  },
+  {
+   "start": 210.227,
+   "end": 212.362,
+   "text": "Notice that David did not ask"
+  },
+  {
+   "start": 212.362,
+   "end": 214.161,
+   "text": "to see the whole year."
+  },
+  {
+   "start": 214.161,
+   "end": 215.741,
+   "text": "He asked to know the way"
+  },
+  {
+   "start": 215.741,
+   "end": 217.435,
+   "text": "wherein he should walk."
+  },
+  {
+   "start": 217.435,
+   "end": 218.852,
+   "text": "One step."
+  },
+  {
+   "start": 218.852,
+   "end": 220.461,
+   "text": "One morning."
+  },
+  {
+   "start": 220.461,
+   "end": 223.019,
+   "text": "God rarely hands us the full map,"
+  },
+  {
+   "start": 223.019,
+   "end": 224.88,
+   "text": "because he wants to walk"
+  },
+  {
+   "start": 224.88,
+   "end": 227.128,
+   "text": "with us instead of sending us"
+  },
+  {
+   "start": 227.128,
+   "end": 229.324,
+   "text": "off alone with directions."
+  },
+  {
+   "start": 229.324,
+   "end": 231.536,
+   "text": "If you cannot see past today,"
+  },
+  {
+   "start": 231.536,
+   "end": 233.519,
+   "text": "that is not a sign that he"
+  },
+  {
+   "start": 233.519,
+   "end": 235.072,
+   "text": "has forgotten you."
+  },
+  {
+   "start": 235.072,
+   "end": 237.144,
+   "text": "It is an invitation to hold"
+  },
+  {
+   "start": 237.144,
+   "end": 239.216,
+   "text": "his hand for the next step,"
+  },
+  {
+   "start": 239.216,
+   "end": 240.947,
+   "text": "and then the next."
+  },
+  {
+   "start": 241.977,
+   "end": 244.574,
+   "text": "Jesus said something about tomorrow"
+  },
+  {
+   "start": 244.574,
+   "end": 247.277,
+   "text": "that we need to hear this morning."
+  },
+  {
+   "start": 247.277,
+   "end": 248.528,
+   "text": "Take therefore no"
+  },
+  {
+   "start": 248.528,
+   "end": 250.401,
+   "text": "thought for the morrow:"
+  },
+  {
+   "start": 250.401,
+   "end": 252.453,
+   "text": "for the morrow shall take thought"
+  },
+  {
+   "start": 252.453,
+   "end": 254.187,
+   "text": "for the things of itself."
+  },
+  {
+   "start": 254.187,
+   "end": 256.138,
+   "text": "Sufficient unto the day"
+  },
+  {
+   "start": 256.138,
+   "end": 258.185,
+   "text": "is the evil thereof."
+  },
+  {
+   "start": 259.515,
+   "end": 261.284,
+   "text": "Jesus is not telling"
+  },
+  {
+   "start": 261.284,
+   "end": 263.321,
+   "text": "you to stop planning."
+  },
+  {
+   "start": 263.321,
+   "end": 265.747,
+   "text": "He is telling you to stop carrying"
+  },
+  {
+   "start": 265.747,
+   "end": 267.853,
+   "text": "tomorrow before it arrives."
+  },
+  {
+   "start": 267.853,
+   "end": 270.344,
+   "text": "You were given strength for today,"
+  },
+  {
+   "start": 270.344,
+   "end": 272.428,
+   "text": "not for every day at once."
+  },
+  {
+   "start": 272.428,
+   "end": 274.791,
+   "text": "So much of our anxiety comes from"
+  },
+  {
+   "start": 274.791,
+   "end": 277.583,
+   "text": "trying to live next week with the grace"
+  },
+  {
+   "start": 277.583,
+   "end": 279.84,
+   "text": "God gave us for this morning."
+  },
+  {
+   "start": 279.84,
+   "end": 281.791,
+   "text": "Put tomorrow down."
+  },
+  {
+   "start": 281.791,
+   "end": 283.457,
+   "text": "It will still be there,"
+  },
+  {
+   "start": 283.457,
+   "end": 284.723,
+   "text": "and so will he."
+  },
+  {
+   "start": 284.723,
+   "end": 286.401,
+   "text": "Today has enough in it,"
+  },
+  {
+   "start": 286.401,
+   "end": 288.371,
+   "text": "and today is where his help"
+  },
+  {
+   "start": 288.371,
+   "end": 290.107,
+   "text": "is waiting for you."
+  },
+  {
+   "start": 291.137,
+   "end": 292.761,
+   "text": "Before we go further,"
+  },
+  {
+   "start": 292.761,
+   "end": 295.029,
+   "text": "take a moment to look back."
+  },
+  {
+   "start": 295.029,
+   "end": 297.238,
+   "text": "Think about a morning a year ago,"
+  },
+  {
+   "start": 297.238,
+   "end": 298.442,
+   "text": "or five years ago,"
+  },
+  {
+   "start": 298.442,
+   "end": 300.919,
+   "text": "when you were sure you would not make"
+  },
+  {
+   "start": 300.919,
+   "end": 303.508,
+   "text": "it through what was in front of you."
+  },
+  {
+   "start": 303.508,
+   "end": 305.48,
+   "text": "And yet here you are."
+  },
+  {
+   "start": 305.48,
+   "end": 307.378,
+   "text": "Maybe not everything turned"
+  },
+  {
+   "start": 307.378,
+   "end": 308.995,
+   "text": "out the way you wanted,"
+  },
+  {
+   "start": 308.995,
+   "end": 310.652,
+   "text": "but you were carried."
+  },
+  {
+   "start": 310.652,
+   "end": 313.601,
+   "text": "The same God who went before you then"
+  },
+  {
+   "start": 313.601,
+   "end": 316.571,
+   "text": "is the God who goes before you now."
+  },
+  {
+   "start": 316.571,
+   "end": 318.439,
+   "text": "Your past is not only"
+  },
+  {
+   "start": 318.439,
+   "end": 320.399,
+   "text": "a list of hard days."
+  },
+  {
+   "start": 320.399,
+   "end": 323.117,
+   "text": "It is a record of his faithfulness,"
+  },
+  {
+   "start": 323.117,
+   "end": 325.719,
+   "text": "and it is evidence for today."
+  },
+  {
+   "start": 326.749,
+   "end": 327.913,
+   "text": "Before we pray,"
+  },
+  {
+   "start": 327.913,
+   "end": 330.343,
+   "text": "let us be still for a moment."
+  },
+  {
+   "start": 330.343,
+   "end": 331.199,
+   "text": "Breathe in,"
+  },
+  {
+   "start": 331.199,
+   "end": 333.637,
+   "text": "and remember that he is here."
+  },
+  {
+   "start": 333.637,
+   "end": 334.564,
+   "text": "Breathe out,"
+  },
+  {
+   "start": 334.564,
+   "end": 337.849,
+   "text": "and let go of what you cannot control."
+  },
+  {
+   "start": 343.679,
+   "end": 346.568,
+   "text": "Let us pray those words together now."
+  },
+  {
+   "start": 346.568,
+   "end": 349.223,
+   "text": "If you can, close your eyes."
+  },
+  {
+   "start": 349.223,
+   "end": 351.938,
+   "text": "If you are driving or getting ready,"
+  },
+  {
+   "start": 351.938,
+   "end": 354.927,
+   "text": "simply let your heart follow along."
+  },
+  {
+   "start": 356.257,
+   "end": 356.634,
+   "text": "Lord,"
+  },
+  {
+   "start": 356.634,
+   "end": 358.215,
+   "text": "here is my day before"
+  },
+  {
+   "start": 358.215,
+   "end": 360.128,
+   "text": "I have lived any of it."
+  },
+  {
+   "start": 360.128,
+   "end": 362.649,
+   "text": "I give you the hours I can plan"
+  },
+  {
+   "start": 362.649,
+   "end": 365.513,
+   "text": "and the moments I cannot predict."
+  },
+  {
+   "start": 365.513,
+   "end": 367.587,
+   "text": "You already know where I will"
+  },
+  {
+   "start": 367.587,
+   "end": 370.557,
+   "text": "be at noon and how I will feel tonight."
+  },
+  {
+   "start": 370.557,
+   "end": 371.787,
+   "text": "I choose to trust"
+  },
+  {
+   "start": 371.787,
+   "end": 374.065,
+   "text": "that you are there before me."
+  },
+  {
+   "start": 374.065,
+   "end": 376.111,
+   "text": "Go ahead of me into every"
+  },
+  {
+   "start": 376.111,
+   "end": 378.426,
+   "text": "room I will enter today."
+  },
+  {
+   "start": 379.456,
+   "end": 381.006,
+   "text": "I bring you the worry"
+  },
+  {
+   "start": 381.006,
+   "end": 382.367,
+   "text": "that woke me up."
+  },
+  {
+   "start": 382.367,
+   "end": 384.168,
+   "text": "You know its name."
+  },
+  {
+   "start": 384.168,
+   "end": 386.568,
+   "text": "I will not pretend it is small,"
+  },
+  {
+   "start": 386.568,
+   "end": 389.767,
+   "text": "and I will not pretend you are smaller."
+  },
+  {
+   "start": 389.767,
+   "end": 391.697,
+   "text": "Where I see a closed door,"
+  },
+  {
+   "start": 391.697,
+   "end": 393.659,
+   "text": "you see the way through."
+  },
+  {
+   "start": 393.659,
+   "end": 395.246,
+   "text": "Where I see a delay,"
+  },
+  {
+   "start": 395.246,
+   "end": 397.252,
+   "text": "you see the right time."
+  },
+  {
+   "start": 397.252,
+   "end": 398.955,
+   "text": "Teach my heart to rest"
+  },
+  {
+   "start": 398.955,
+   "end": 400.271,
+   "text": "in what you know,"
+  },
+  {
+   "start": 400.271,
+   "end": 403.021,
+   "text": "even when I do not know it yet."
+  },
+  {
+   "start": 404.051,
+   "end": 404.399,
+   "text": "Lord,"
+  },
+  {
+   "start": 404.399,
+   "end": 405.792,
+   "text": "you know how quickly"
+  },
+  {
+   "start": 405.792,
+   "end": 407.921,
+   "text": "my thoughts run ahead of me."
+  },
+  {
+   "start": 407.921,
+   "end": 410.514,
+   "text": "Before I have finished my coffee,"
+  },
+  {
+   "start": 410.514,
+   "end": 412.949,
+   "text": "my mind is already in tomorrow,"
+  },
+  {
+   "start": 412.949,
+   "end": 416.272,
+   "text": "rehearsing problems that may never come."
+  },
+  {
+   "start": 416.272,
+   "end": 417.847,
+   "text": "Bring my thoughts back"
+  },
+  {
+   "start": 417.847,
+   "end": 419.673,
+   "text": "to this day and to you."
+  },
+  {
+   "start": 419.673,
+   "end": 420.967,
+   "text": "Replace the noise"
+  },
+  {
+   "start": 420.967,
+   "end": 423.203,
+   "text": "in my head with your peace."
+  },
+  {
+   "start": 423.203,
+   "end": 425.636,
+   "text": "When I start to imagine the worst,"
+  },
+  {
+   "start": 425.636,
+   "end": 427.927,
+   "text": "remind me of everything you have"
+  },
+  {
+   "start": 427.927,
+   "end": 430.209,
+   "text": "already carried me through."
+  },
+  {
+   "start": 431.239,
+   "end": 432.893,
+   "text": "Before we keep praying,"
+  },
+  {
+   "start": 432.893,
+   "end": 435.877,
+   "text": "let these words settle over your heart."
+  },
+  {
+   "start": 435.877,
+   "end": 438.02,
+   "text": "Be careful for nothing;"
+  },
+  {
+   "start": 438.02,
+   "end": 440.044,
+   "text": "but in every thing by prayer"
+  },
+  {
+   "start": 440.044,
+   "end": 442.791,
+   "text": "and supplication with thanksgiving let"
+  },
+  {
+   "start": 442.791,
+   "end": 445.645,
+   "text": "your requests be made known unto God."
+  },
+  {
+   "start": 445.645,
+   "end": 447.23,
+   "text": "And the peace of God,"
+  },
+  {
+   "start": 447.23,
+   "end": 449.645,
+   "text": "which passeth all understanding,"
+  },
+  {
+   "start": 449.645,
+   "end": 451.305,
+   "text": "shall keep your hearts"
+  },
+  {
+   "start": 451.305,
+   "end": 453.995,
+   "text": "and minds through Christ Jesus."
+  },
+  {
+   "start": 455.325,
+   "end": 457.639,
+   "text": "So Lord, here are my requests,"
+  },
+  {
+   "start": 457.639,
+   "end": 459.516,
+   "text": "and here is my thanks."
+  },
+  {
+   "start": 459.516,
+   "end": 461.188,
+   "text": "Thank you for the breath"
+  },
+  {
+   "start": 461.188,
+   "end": 463.109,
+   "text": "in my lungs this morning."
+  },
+  {
+   "start": 463.109,
+   "end": 465.689,
+   "text": "Thank you for the people who love me,"
+  },
+  {
+   "start": 465.689,
+   "end": 467.78,
+   "text": "and for the ways you have kept"
+  },
+  {
+   "start": 467.78,
+   "end": 470.052,
+   "text": "me that I did not even notice."
+  },
+  {
+   "start": 470.052,
+   "end": 472.408,
+   "text": "And here is what I need."
+  },
+  {
+   "start": 472.408,
+   "end": 474.207,
+   "text": "I need peace that does"
+  },
+  {
+   "start": 474.207,
+   "end": 477.004,
+   "text": "not depend on how this day goes."
+  },
+  {
+   "start": 477.004,
+   "end": 478.505,
+   "text": "Guard my heart when"
+  },
+  {
+   "start": 478.505,
+   "end": 480.661,
+   "text": "someone is harsh with me."
+  },
+  {
+   "start": 480.661,
+   "end": 483.7,
+   "text": "Guard my mind when bad news comes."
+  },
+  {
+   "start": 483.7,
+   "end": 485.967,
+   "text": "Let your peace stand at the door"
+  },
+  {
+   "start": 485.967,
+   "end": 487.881,
+   "text": "of my thoughts like a guard"
+  },
+  {
+   "start": 487.881,
+   "end": 490.002,
+   "text": "who does not fall asleep."
+  },
+  {
+   "start": 491.032,
+   "end": 493.353,
+   "text": "There are decisions in front of me"
+  },
+  {
+   "start": 493.353,
+   "end": 495.649,
+   "text": "that I do not know how to make."
+  },
+  {
+   "start": 495.649,
+   "end": 496.751,
+   "text": "Some are small,"
+  },
+  {
+   "start": 496.751,
+   "end": 498.44,
+   "text": "and some feel like they"
+  },
+  {
+   "start": 498.44,
+   "end": 500.309,
+   "text": "will change everything."
+  },
+  {
+   "start": 500.309,
+   "end": 502.602,
+   "text": "Give me wisdom that is bigger"
+  },
+  {
+   "start": 502.602,
+   "end": 504.521,
+   "text": "than my understanding."
+  },
+  {
+   "start": 504.521,
+   "end": 506.122,
+   "text": "Close the doors I should"
+  },
+  {
+   "start": 506.122,
+   "end": 507.257,
+   "text": "not walk through,"
+  },
+  {
+   "start": 507.257,
+   "end": 509.058,
+   "text": "and give me courage to walk"
+  },
+  {
+   "start": 509.058,
+   "end": 510.973,
+   "text": "through the ones you open."
+  },
+  {
+   "start": 510.973,
+   "end": 513.43,
+   "text": "Let me hear your direction clearly,"
+  },
+  {
+   "start": 513.43,
+   "end": 515.186,
+   "text": "and let me follow it even"
+  },
+  {
+   "start": 515.186,
+   "end": 517.361,
+   "text": "when it asks for patience."
+  },
+  {
+   "start": 518.391,
+   "end": 518.814,
+   "text": "Lord,"
+  },
+  {
+   "start": 518.814,
+   "end": 521.195,
+   "text": "I bring you my work today."
+  },
+  {
+   "start": 521.195,
+   "end": 523.793,
+   "text": "The tasks I enjoy and the ones"
+  },
+  {
+   "start": 523.793,
+   "end": 525.791,
+   "text": "I have been avoiding."
+  },
+  {
+   "start": 525.791,
+   "end": 527.784,
+   "text": "Help me to work with honesty"
+  },
+  {
+   "start": 527.784,
+   "end": 529.492,
+   "text": "and with a steady heart,"
+  },
+  {
+   "start": 529.492,
+   "end": 530.844,
+   "text": "as if I am doing it"
+  },
+  {
+   "start": 530.844,
+   "end": 532.267,
+   "text": "for you and not only"
+  },
+  {
+   "start": 532.267,
+   "end": 534.653,
+   "text": "for the people who will see it."
+  },
+  {
+   "start": 534.653,
+   "end": 536.345,
+   "text": "Where I am overwhelmed,"
+  },
+  {
+   "start": 536.345,
+   "end": 539.1,
+   "text": "show me the next small thing to do."
+  },
+  {
+   "start": 539.1,
+   "end": 541.778,
+   "text": "Where I am tempted to cut corners,"
+  },
+  {
+   "start": 541.778,
+   "end": 543.376,
+   "text": "give me integrity."
+  },
+  {
+   "start": 543.376,
+   "end": 545.839,
+   "text": "And where my work feels unseen,"
+  },
+  {
+   "start": 545.839,
+   "end": 547.905,
+   "text": "remind me that you see it,"
+  },
+  {
+   "start": 547.905,
+   "end": 550.289,
+   "text": "and that faithfulness in small"
+  },
+  {
+   "start": 550.289,
+   "end": 552.387,
+   "text": "things matters to you."
+  },
+  {
+   "start": 553.417,
+   "end": 555.29,
+   "text": "Thank you that your mercy"
+  },
+  {
+   "start": 555.29,
+   "end": 556.968,
+   "text": "is new this morning."
+  },
+  {
+   "start": 556.968,
+   "end": 559.164,
+   "text": "Where I fell short yesterday,"
+  },
+  {
+   "start": 559.164,
+   "end": 560.177,
+   "text": "forgive me."
+  },
+  {
+   "start": 560.177,
+   "end": 561.953,
+   "text": "Where I was impatient,"
+  },
+  {
+   "start": 561.953,
+   "end": 563.344,
+   "text": "make me gentle."
+  },
+  {
+   "start": 563.344,
+   "end": 564.965,
+   "text": "Where I was afraid,"
+  },
+  {
+   "start": 564.965,
+   "end": 566.34,
+   "text": "make me brave."
+  },
+  {
+   "start": 566.34,
+   "end": 568.992,
+   "text": "Do not let the mistakes of yesterday"
+  },
+  {
+   "start": 568.992,
+   "end": 571.235,
+   "text": "become the script for today."
+  },
+  {
+   "start": 571.235,
+   "end": 572.807,
+   "text": "Give me a clean start"
+  },
+  {
+   "start": 572.807,
+   "end": 575.254,
+   "text": "and the grace to walk in it."
+  },
+  {
+   "start": 576.284,
+   "end": 578.025,
+   "text": "I lift up the people"
+  },
+  {
+   "start": 578.025,
+   "end": 579.771,
+   "text": "I will meet today."
+  },
+  {
+   "start": 579.771,
+   "end": 580.589,
+   "text": "My family,"
+  },
+  {
+   "start": 580.589,
+   "end": 582.388,
+   "text": "the people at my work,"
+  },
+  {
+   "start": 582.388,
+   "end": 584.35,
+   "text": "the stranger I will pass"
+  },
+  {
+   "start": 584.35,
+   "end": 586.82,
+   "text": "without knowing their story."
+  },
+  {
+   "start": 586.82,
+   "end": 588.813,
+   "text": "Go before them too."
+  },
+  {
+   "start": 588.813,
+   "end": 590.627,
+   "text": "Let my words be kind"
+  },
+  {
+   "start": 590.627,
+   "end": 592.983,
+   "text": "and my patience be real."
+  },
+  {
+   "start": 592.983,
+   "end": 594.277,
+   "text": "If someone near me"
+  },
+  {
+   "start": 594.277,
+   "end": 596.289,
+   "text": "is carrying something heavy,"
+  },
+  {
+   "start": 596.289,
+   "end": 597.368,
+   "text": "help me notice,"
+  },
+  {
+   "start": 597.368,
+   "end": 599.946,
+   "text": "and help me carry it with them."
+  },
+  {
+   "start": 600.976,
+   "end": 601.35,
+   "text": "Lord,"
+  },
+  {
+   "start": 601.35,
+   "end": 603.073,
+   "text": "there are people I find"
+  },
+  {
+   "start": 603.073,
+   "end": 604.975,
+   "text": "hard to love right now."
+  },
+  {
+   "start": 604.975,
+   "end": 606.613,
+   "text": "Someone who hurt me,"
+  },
+  {
+   "start": 606.613,
+   "end": 607.841,
+   "text": "someone I hurt,"
+  },
+  {
+   "start": 607.841,
+   "end": 610.38,
+   "text": "a conversation that ended badly"
+  },
+  {
+   "start": 610.38,
+   "end": 612.771,
+   "text": "and still sits in my chest."
+  },
+  {
+   "start": 612.771,
+   "end": 614.468,
+   "text": "I do not want to carry"
+  },
+  {
+   "start": 614.468,
+   "end": 616.577,
+   "text": "bitterness into this day."
+  },
+  {
+   "start": 616.577,
+   "end": 618.477,
+   "text": "Help me to forgive the way"
+  },
+  {
+   "start": 618.477,
+   "end": 620.192,
+   "text": "you have forgiven me."
+  },
+  {
+   "start": 620.192,
+   "end": 622.488,
+   "text": "Where I need to apologize,"
+  },
+  {
+   "start": 622.488,
+   "end": 624.169,
+   "text": "give me humility."
+  },
+  {
+   "start": 624.169,
+   "end": 627.236,
+   "text": "Where I need to set a healthy boundary,"
+  },
+  {
+   "start": 627.236,
+   "end": 628.595,
+   "text": "give me wisdom."
+  },
+  {
+   "start": 628.595,
+   "end": 630.736,
+   "text": "And where a relationship needs"
+  },
+  {
+   "start": 630.736,
+   "end": 633.019,
+   "text": "healing that only you can bring,"
+  },
+  {
+   "start": 633.019,
+   "end": 635.153,
+   "text": "I place it in your hands."
+  },
+  {
+   "start": 636.183,
+   "end": 638.95,
+   "text": "I pray for the children in my life,"
+  },
+  {
+   "start": 638.95,
+   "end": 641.739,
+   "text": "my own and the ones I care about."
+  },
+  {
+   "start": 641.739,
+   "end": 644.215,
+   "text": "Go before them into their classrooms,"
+  },
+  {
+   "start": 644.215,
+   "end": 646.804,
+   "text": "their friendships and their screens."
+  },
+  {
+   "start": 646.804,
+   "end": 649.565,
+   "text": "Protect their minds and their hearts."
+  },
+  {
+   "start": 649.565,
+   "end": 652.149,
+   "text": "Let them know that they are loved by"
+  },
+  {
+   "start": 652.149,
+   "end": 655.057,
+   "text": "you before they ever achieve anything."
+  },
+  {
+   "start": 655.057,
+   "end": 657.66,
+   "text": "Give the parents and grandparents"
+  },
+  {
+   "start": 657.66,
+   "end": 660.263,
+   "text": "listening patience and joy today,"
+  },
+  {
+   "start": 660.263,
+   "end": 662.393,
+   "text": "and let our homes be places"
+  },
+  {
+   "start": 662.393,
+   "end": 663.971,
+   "text": "where faith is seen,"
+  },
+  {
+   "start": 663.971,
+   "end": 665.583,
+   "text": "not only spoken."
+  },
+  {
+   "start": 666.613,
+   "end": 668.807,
+   "text": "I also bring you my needs,"
+  },
+  {
+   "start": 668.807,
+   "end": 670.591,
+   "text": "the practical ones."
+  },
+  {
+   "start": 670.591,
+   "end": 672.938,
+   "text": "You know what is in my account"
+  },
+  {
+   "start": 672.938,
+   "end": 674.995,
+   "text": "and what is on my table."
+  },
+  {
+   "start": 674.995,
+   "end": 676.85,
+   "text": "You know the job I hope"
+  },
+  {
+   "start": 676.85,
+   "end": 679.612,
+   "text": "for and the work I already have."
+  },
+  {
+   "start": 679.612,
+   "end": 681.861,
+   "text": "Provide what I need for today,"
+  },
+  {
+   "start": 681.861,
+   "end": 683.81,
+   "text": "and teach me to be content"
+  },
+  {
+   "start": 683.81,
+   "end": 685.684,
+   "text": "and grateful while I wait"
+  },
+  {
+   "start": 685.684,
+   "end": 687.813,
+   "text": "for what I still hope for."
+  },
+  {
+   "start": 687.813,
+   "end": 689.561,
+   "text": "You have never been late,"
+  },
+  {
+   "start": 689.561,
+   "end": 691.939,
+   "text": "even when I thought you were."
+  },
+  {
+   "start": 692.969,
+   "end": 695.901,
+   "text": "I also lift up my body to you."
+  },
+  {
+   "start": 695.901,
+   "end": 697.858,
+   "text": "You know where I am tired,"
+  },
+  {
+   "start": 697.858,
+   "end": 698.836,
+   "text": "where I hurt,"
+  },
+  {
+   "start": 698.836,
+   "end": 701.5,
+   "text": "and the results I am waiting for."
+  },
+  {
+   "start": 701.5,
+   "end": 704.438,
+   "text": "I ask you for strength and for healing,"
+  },
+  {
+   "start": 704.438,
+   "end": 706.925,
+   "text": "and I thank you for every doctor,"
+  },
+  {
+   "start": 706.925,
+   "end": 710.043,
+   "text": "nurse and caregiver you use to help us."
+  },
+  {
+   "start": 710.043,
+   "end": 711.954,
+   "text": "Give me wisdom to rest when"
+  },
+  {
+   "start": 711.954,
+   "end": 713.936,
+   "text": "I need rest and to take care"
+  },
+  {
+   "start": 713.936,
+   "end": 716.239,
+   "text": "of the body you have given me."
+  },
+  {
+   "start": 716.239,
+   "end": 719.044,
+   "text": "And for anyone listening who is sick"
+  },
+  {
+   "start": 719.044,
+   "end": 721.537,
+   "text": "or waiting on news this morning,"
+  },
+  {
+   "start": 721.537,
+   "end": 723.407,
+   "text": "hold them close and give"
+  },
+  {
+   "start": 723.407,
+   "end": 725.549,
+   "text": "them courage for today."
+  },
+  {
+   "start": 726.579,
+   "end": 728.888,
+   "text": "Here is a promise for your going"
+  },
+  {
+   "start": 728.888,
+   "end": 730.727,
+   "text": "out and your coming in."
+  },
+  {
+   "start": 730.727,
+   "end": 732.444,
+   "text": "The Lord shall preserve"
+  },
+  {
+   "start": 732.444,
+   "end": 734.043,
+   "text": "thee from all evil:"
+  },
+  {
+   "start": 734.043,
+   "end": 736.633,
+   "text": "he shall preserve thy soul."
+  },
+  {
+   "start": 736.633,
+   "end": 739.251,
+   "text": "The Lord shall preserve thy going out"
+  },
+  {
+   "start": 739.251,
+   "end": 742.01,
+   "text": "and thy coming in from this time forth,"
+  },
+  {
+   "start": 742.01,
+   "end": 743.917,
+   "text": "and even for evermore."
+  },
+  {
+   "start": 745.247,
+   "end": 745.66,
+   "text": "Lord,"
+  },
+  {
+   "start": 745.66,
+   "end": 747.724,
+   "text": "as I go out this morning,"
+  },
+  {
+   "start": 747.724,
+   "end": 749.885,
+   "text": "watch over my going out."
+  },
+  {
+   "start": 749.885,
+   "end": 752.407,
+   "text": "Watch over the roads I travel"
+  },
+  {
+   "start": 752.407,
+   "end": 754.588,
+   "text": "and the places I enter."
+  },
+  {
+   "start": 754.588,
+   "end": 756.393,
+   "text": "Watch over my home while"
+  },
+  {
+   "start": 756.393,
+   "end": 757.747,
+   "text": "I am away from it,"
+  },
+  {
+   "start": 757.747,
+   "end": 760.485,
+   "text": "and over everyone who lives there."
+  },
+  {
+   "start": 760.485,
+   "end": 762.235,
+   "text": "Keep my family safe"
+  },
+  {
+   "start": 762.235,
+   "end": 764.441,
+   "text": "in body and in spirit."
+  },
+  {
+   "start": 764.441,
+   "end": 766.902,
+   "text": "When we come back together tonight,"
+  },
+  {
+   "start": 766.902,
+   "end": 769.222,
+   "text": "let us come back to a home filled"
+  },
+  {
+   "start": 769.222,
+   "end": 772.003,
+   "text": "with your peace and not with tension."
+  },
+  {
+   "start": 772.003,
+   "end": 774.115,
+   "text": "Be the strength of our walls"
+  },
+  {
+   "start": 774.115,
+   "end": 776.577,
+   "text": "and the warmth of our table."
+  },
+  {
+   "start": 777.607,
+   "end": 779.038,
+   "text": "And when fear tries"
+  },
+  {
+   "start": 779.038,
+   "end": 780.92,
+   "text": "to speak louder than you,"
+  },
+  {
+   "start": 780.92,
+   "end": 782.907,
+   "text": "remind me of your voice."
+  },
+  {
+   "start": 782.907,
+   "end": 784.687,
+   "text": "Fear thou not;"
+  },
+  {
+   "start": 784.687,
+   "end": 786.637,
+   "text": "for I am with thee:"
+  },
+  {
+   "start": 786.637,
+   "end": 788.567,
+   "text": "be not dismayed;"
+  },
+  {
+   "start": 788.567,
+   "end": 790.709,
+   "text": "for I am thy God:"
+  },
+  {
+   "start": 790.709,
+   "end": 792.745,
+   "text": "I will strengthen thee;"
+  },
+  {
+   "start": 792.745,
+   "end": 794.824,
+   "text": "yea, I will help thee;"
+  },
+  {
+   "start": 794.824,
+   "end": 795.106,
+   "text": "yea,"
+  },
+  {
+   "start": 795.106,
+   "end": 797.434,
+   "text": "I will uphold thee with the right"
+  },
+  {
+   "start": 797.434,
+   "end": 799.547,
+   "text": "hand of my righteousness."
+  },
+  {
+   "start": 800.877,
+   "end": 802.934,
+   "text": "Strengthen me for the hardest"
+  },
+  {
+   "start": 802.934,
+   "end": 804.139,
+   "text": "part of this day,"
+  },
+  {
+   "start": 804.139,
+   "end": 806.305,
+   "text": "whatever it turns out to be."
+  },
+  {
+   "start": 806.305,
+   "end": 807.808,
+   "text": "When I feel weak,"
+  },
+  {
+   "start": 807.808,
+   "end": 808.96,
+   "text": "hold me up."
+  },
+  {
+   "start": 808.96,
+   "end": 811.37,
+   "text": "When I do not know what to say,"
+  },
+  {
+   "start": 811.37,
+   "end": 812.639,
+   "text": "give me words."
+  },
+  {
+   "start": 812.639,
+   "end": 814.577,
+   "text": "When I am tempted to quit,"
+  },
+  {
+   "start": 814.577,
+   "end": 817.112,
+   "text": "remind me that you have not let go"
+  },
+  {
+   "start": 817.112,
+   "end": 819.922,
+   "text": "of me and you will not start now."
+  },
+  {
+   "start": 820.952,
+   "end": 822.571,
+   "text": "Some of you are walking"
+  },
+  {
+   "start": 822.571,
+   "end": 824.652,
+   "text": "into something heavy today."
+  },
+  {
+   "start": 824.652,
+   "end": 826.944,
+   "text": "This promise is for you."
+  },
+  {
+   "start": 826.944,
+   "end": 829.616,
+   "text": "When thou passest through the waters,"
+  },
+  {
+   "start": 829.616,
+   "end": 831.241,
+   "text": "I will be with thee;"
+  },
+  {
+   "start": 831.241,
+   "end": 832.864,
+   "text": "and through the rivers,"
+  },
+  {
+   "start": 832.864,
+   "end": 835.091,
+   "text": "they shall not overflow thee:"
+  },
+  {
+   "start": 835.091,
+   "end": 837.692,
+   "text": "when thou walkest through the fire,"
+  },
+  {
+   "start": 837.692,
+   "end": 839.729,
+   "text": "thou shalt not be burned;"
+  },
+  {
+   "start": 839.729,
+   "end": 841.582,
+   "text": "neither shall the flame"
+  },
+  {
+   "start": 841.582,
+   "end": 843.301,
+   "text": "kindle upon thee."
+  },
+  {
+   "start": 844.631,
+   "end": 846.816,
+   "text": "Notice that God did not say if"
+  },
+  {
+   "start": 846.816,
+   "end": 849.035,
+   "text": "you pass through the waters."
+  },
+  {
+   "start": 849.035,
+   "end": 850.623,
+   "text": "He said when."
+  },
+  {
+   "start": 850.623,
+   "end": 851.028,
+   "text": "Lord,"
+  },
+  {
+   "start": 851.028,
+   "end": 852.972,
+   "text": "I will not pretend there"
+  },
+  {
+   "start": 852.972,
+   "end": 855.581,
+   "text": "are no deep waters in my life."
+  },
+  {
+   "start": 855.581,
+   "end": 857.581,
+   "text": "But I thank you that you do"
+  },
+  {
+   "start": 857.581,
+   "end": 859.836,
+   "text": "not watch me from the shore."
+  },
+  {
+   "start": 859.836,
+   "end": 861.915,
+   "text": "You walk through them with me."
+  },
+  {
+   "start": 861.915,
+   "end": 864.278,
+   "text": "When the pressure rises today,"
+  },
+  {
+   "start": 864.278,
+   "end": 866.191,
+   "text": "let me feel your hand."
+  },
+  {
+   "start": 866.191,
+   "end": 868.486,
+   "text": "When I think I am going under,"
+  },
+  {
+   "start": 868.486,
+   "end": 871.317,
+   "text": "remind me that the river has a limit,"
+  },
+  {
+   "start": 871.317,
+   "end": 873.197,
+   "text": "and that you set it."
+  },
+  {
+   "start": 874.227,
+   "end": 875.924,
+   "text": "Hold on to this when"
+  },
+  {
+   "start": 875.924,
+   "end": 878.055,
+   "text": "the day feels unstable."
+  },
+  {
+   "start": 878.055,
+   "end": 880.593,
+   "text": "God is our refuge and strength,"
+  },
+  {
+   "start": 880.593,
+   "end": 883.312,
+   "text": "a very present help in trouble."
+  },
+  {
+   "start": 883.312,
+   "end": 885.234,
+   "text": "Therefore will not we fear,"
+  },
+  {
+   "start": 885.234,
+   "end": 887.226,
+   "text": "though the earth be removed,"
+  },
+  {
+   "start": 887.226,
+   "end": 889.718,
+   "text": "and though the mountains be carried"
+  },
+  {
+   "start": 889.718,
+   "end": 891.918,
+   "text": "into the midst of the sea."
+  },
+  {
+   "start": 893.248,
+   "end": 895.391,
+   "text": "A very present help."
+  },
+  {
+   "start": 895.391,
+   "end": 896.895,
+   "text": "Not a distant help,"
+  },
+  {
+   "start": 896.895,
+   "end": 899.191,
+   "text": "not a help that arrives after"
+  },
+  {
+   "start": 899.191,
+   "end": 901.011,
+   "text": "everything falls apart,"
+  },
+  {
+   "start": 901.011,
+   "end": 902.141,
+   "text": "but present."
+  },
+  {
+   "start": 902.141,
+   "end": 904.36,
+   "text": "In the moment the phone rings"
+  },
+  {
+   "start": 904.36,
+   "end": 906.425,
+   "text": "with news you did not want,"
+  },
+  {
+   "start": 906.425,
+   "end": 907.676,
+   "text": "he is present."
+  },
+  {
+   "start": 907.676,
+   "end": 909.496,
+   "text": "In the moment you feel"
+  },
+  {
+   "start": 909.496,
+   "end": 911.233,
+   "text": "the old panic rising,"
+  },
+  {
+   "start": 911.233,
+   "end": 912.571,
+   "text": "he is present."
+  },
+  {
+   "start": 912.571,
+   "end": 914.213,
+   "text": "You do not have to find"
+  },
+  {
+   "start": 914.213,
+   "end": 916.463,
+   "text": "the right words to reach him."
+  },
+  {
+   "start": 916.463,
+   "end": 918.413,
+   "text": "He is already there."
+  },
+  {
+   "start": 918.413,
+   "end": 920.445,
+   "text": "Sometimes the most powerful"
+  },
+  {
+   "start": 920.445,
+   "end": 922.552,
+   "text": "prayer of the day is simply,"
+  },
+  {
+   "start": 922.552,
+   "end": 923.981,
+   "text": "Lord, you are here,"
+  },
+  {
+   "start": 923.981,
+   "end": 925.761,
+   "text": "and I am not alone."
+  },
+  {
+   "start": 926.791,
+   "end": 927.448,
+   "text": "And Lord,"
+  },
+  {
+   "start": 927.448,
+   "end": 928.98,
+   "text": "for the one listening"
+  },
+  {
+   "start": 928.98,
+   "end": 930.877,
+   "text": "who woke up already tired,"
+  },
+  {
+   "start": 930.877,
+   "end": 932.628,
+   "text": "the one who is grieving,"
+  },
+  {
+   "start": 932.628,
+   "end": 934.671,
+   "text": "the one who has prayed about"
+  },
+  {
+   "start": 934.671,
+   "end": 936.86,
+   "text": "the same thing for a long time"
+  },
+  {
+   "start": 936.86,
+   "end": 939.049,
+   "text": "and is starting to lose heart,"
+  },
+  {
+   "start": 939.049,
+   "end": 940.688,
+   "text": "meet them right now."
+  },
+  {
+   "start": 940.688,
+   "end": 943.087,
+   "text": "Sit with them in the quiet."
+  },
+  {
+   "start": 943.087,
+   "end": 945.405,
+   "text": "Remind them that a slow morning"
+  },
+  {
+   "start": 945.405,
+   "end": 947.2,
+   "text": "is not a failed morning,"
+  },
+  {
+   "start": 947.2,
+   "end": 948.246,
+   "text": "and that tears"
+  },
+  {
+   "start": 948.246,
+   "end": 950.221,
+   "text": "are not a lack of faith."
+  },
+  {
+   "start": 950.221,
+   "end": 952.957,
+   "text": "Give them enough strength for this hour,"
+  },
+  {
+   "start": 952.957,
+   "end": 954.188,
+   "text": "and then the next,"
+  },
+  {
+   "start": 954.188,
+   "end": 957.206,
+   "text": "until they can see your goodness again."
+  },
+  {
+   "start": 958.236,
+   "end": 960.869,
+   "text": "Let us pause again for a moment."
+  },
+  {
+   "start": 960.869,
+   "end": 962.324,
+   "text": "Breathe in slowly,"
+  },
+  {
+   "start": 962.324,
+   "end": 964.847,
+   "text": "and remember that he is near."
+  },
+  {
+   "start": 964.847,
+   "end": 965.702,
+   "text": "Breathe out,"
+  },
+  {
+   "start": 965.702,
+   "end": 967.483,
+   "text": "and hand him the heaviest"
+  },
+  {
+   "start": 967.483,
+   "end": 969.186,
+   "text": "thing on your mind."
+  },
+  {
+   "start": 975.016,
+   "end": 977.735,
+   "text": "Now say this with me, slowly."
+  },
+  {
+   "start": 977.735,
+   "end": 980.496,
+   "text": "God has gone before me today."
+  },
+  {
+   "start": 980.496,
+   "end": 983.236,
+   "text": "His mercy is new this morning."
+  },
+  {
+   "start": 983.236,
+   "end": 985.443,
+   "text": "I do not walk alone."
+  },
+  {
+   "start": 985.443,
+   "end": 988.097,
+   "text": "I will not be ruled by fear."
+  },
+  {
+   "start": 988.097,
+   "end": 989.296,
+   "text": "I will trust him"
+  },
+  {
+   "start": 989.296,
+   "end": 991.2,
+   "text": "with what I cannot see."
+  },
+  {
+   "start": 991.2,
+   "end": 992.813,
+   "text": "This is the day which"
+  },
+  {
+   "start": 992.813,
+   "end": 994.452,
+   "text": "the Lord hath made;"
+  },
+  {
+   "start": 994.452,
+   "end": 997.533,
+   "text": "I will rejoice and be glad in it."
+  },
+  {
+   "start": 998.863,
+   "end": 1000.627,
+   "text": "Carry one more promise"
+  },
+  {
+   "start": 1000.627,
+   "end": 1003.053,
+   "text": "with you into the next hour."
+  },
+  {
+   "start": 1003.053,
+   "end": 1005.964,
+   "text": "Trust in the Lord with all thine heart;"
+  },
+  {
+   "start": 1005.964,
+   "end": 1007.999,
+   "text": "and lean not unto thine"
+  },
+  {
+   "start": 1007.999,
+   "end": 1009.771,
+   "text": "own understanding."
+  },
+  {
+   "start": 1009.771,
+   "end": 1012.193,
+   "text": "In all thy ways acknowledge him,"
+  },
+  {
+   "start": 1012.193,
+   "end": 1014.814,
+   "text": "and he shall direct thy paths."
+  },
+  {
+   "start": 1016.144,
+   "end": 1018.884,
+   "text": "In all thy ways acknowledge him."
+  },
+  {
+   "start": 1018.884,
+   "end": 1021.286,
+   "text": "Not only in the big decisions,"
+  },
+  {
+   "start": 1021.286,
+   "end": 1022.967,
+   "text": "but in the small ones"
+  },
+  {
+   "start": 1022.967,
+   "end": 1025.229,
+   "text": "that fill an ordinary day."
+  },
+  {
+   "start": 1025.229,
+   "end": 1027.25,
+   "text": "When you sit down to work,"
+  },
+  {
+   "start": 1027.25,
+   "end": 1028.673,
+   "text": "acknowledge him."
+  },
+  {
+   "start": 1028.673,
+   "end": 1031.435,
+   "text": "When you answer a difficult message,"
+  },
+  {
+   "start": 1031.435,
+   "end": 1032.843,
+   "text": "acknowledge him."
+  },
+  {
+   "start": 1032.843,
+   "end": 1035.35,
+   "text": "When you feel the old worry return"
+  },
+  {
+   "start": 1035.35,
+   "end": 1037.636,
+   "text": "in the middle of the afternoon,"
+  },
+  {
+   "start": 1037.636,
+   "end": 1038.996,
+   "text": "acknowledge him."
+  },
+  {
+   "start": 1038.996,
+   "end": 1040.7,
+   "text": "You do not need a long"
+  },
+  {
+   "start": 1040.7,
+   "end": 1042.12,
+   "text": "prayer for that."
+  },
+  {
+   "start": 1042.12,
+   "end": 1044.455,
+   "text": "A quiet word is enough."
+  },
+  {
+   "start": 1044.455,
+   "end": 1046.277,
+   "text": "Lord, you are here."
+  },
+  {
+   "start": 1046.277,
+   "end": 1047.993,
+   "text": "Lord, lead me."
+  },
+  {
+   "start": 1047.993,
+   "end": 1049.998,
+   "text": "And the promise is that he"
+  },
+  {
+   "start": 1049.998,
+   "end": 1051.772,
+   "text": "will direct your paths,"
+  },
+  {
+   "start": 1051.772,
+   "end": 1053.238,
+   "text": "one turn at a time,"
+  },
+  {
+   "start": 1053.238,
+   "end": 1055.362,
+   "text": "all the way to evening."
+  },
+  {
+   "start": 1056.392,
+   "end": 1058.266,
+   "text": "As we come toward the end"
+  },
+  {
+   "start": 1058.266,
+   "end": 1059.841,
+   "text": "of our time together,"
+  },
+  {
+   "start": 1059.841,
+   "end": 1061.94,
+   "text": "hear what God said to Joshua"
+  },
+  {
+   "start": 1061.94,
+   "end": 1064.444,
+   "text": "on the edge of a new beginning."
+  },
+  {
+   "start": 1064.444,
+   "end": 1066.864,
+   "text": "Have not I commanded thee?"
+  },
+  {
+   "start": 1066.864,
+   "end": 1069.668,
+   "text": "Be strong and of a good courage;"
+  },
+  {
+   "start": 1069.668,
+   "end": 1070.847,
+   "text": "be not afraid,"
+  },
+  {
+   "start": 1070.847,
+   "end": 1073.133,
+   "text": "neither be thou dismayed:"
+  },
+  {
+   "start": 1073.133,
+   "end": 1075.731,
+   "text": "for the Lord thy God is with thee"
+  },
+  {
+   "start": 1075.731,
+   "end": 1078.049,
+   "text": "whithersoever thou goest."
+  },
+  {
+   "start": 1079.379,
+   "end": 1082.305,
+   "text": "God did not tell Joshua to be brave"
+  },
+  {
+   "start": 1082.305,
+   "end": 1084.743,
+   "text": "because the task was small."
+  },
+  {
+   "start": 1084.743,
+   "end": 1086.426,
+   "text": "He told him to be strong"
+  },
+  {
+   "start": 1086.426,
+   "end": 1088.53,
+   "text": "because the One going with him"
+  },
+  {
+   "start": 1088.53,
+   "end": 1090.533,
+   "text": "was greater than the task."
+  },
+  {
+   "start": 1090.533,
+   "end": 1092.998,
+   "text": "Your courage today does not have"
+  },
+  {
+   "start": 1092.998,
+   "end": 1095.257,
+   "text": "to come from feeling ready."
+  },
+  {
+   "start": 1095.257,
+   "end": 1096.934,
+   "text": "It can come from knowing"
+  },
+  {
+   "start": 1096.934,
+   "end": 1098.232,
+   "text": "who is with you."
+  },
+  {
+   "start": 1098.232,
+   "end": 1100.716,
+   "text": "Whithersoever thou goest."
+  },
+  {
+   "start": 1100.716,
+   "end": 1102.408,
+   "text": "That means the kitchen,"
+  },
+  {
+   "start": 1102.408,
+   "end": 1104.615,
+   "text": "the office, the hospital room,"
+  },
+  {
+   "start": 1104.615,
+   "end": 1105.645,
+   "text": "the classroom,"
+  },
+  {
+   "start": 1105.645,
+   "end": 1107.296,
+   "text": "the empty apartment."
+  },
+  {
+   "start": 1107.296,
+   "end": 1109.781,
+   "text": "There is no place on your schedule"
+  },
+  {
+   "start": 1109.781,
+   "end": 1112.105,
+   "text": "today where he will not be."
+  },
+  {
+   "start": 1113.135,
+   "end": 1114.852,
+   "text": "And one more promise,"
+  },
+  {
+   "start": 1114.852,
+   "end": 1117.731,
+   "text": "short enough to remember all day."
+  },
+  {
+   "start": 1117.731,
+   "end": 1118.969,
+   "text": "For he hath said,"
+  },
+  {
+   "start": 1118.969,
+   "end": 1120.717,
+   "text": "I will never leave thee,"
+  },
+  {
+   "start": 1120.717,
+   "end": 1122.305,
+   "text": "nor forsake thee."
+  },
+  {
+   "start": 1123.635,
+   "end": 1125.457,
+   "text": "Father, thank you."
+  },
+  {
+   "start": 1125.457,
+   "end": 1128.328,
+   "text": "Thank you that you went before me today,"
+  },
+  {
+   "start": 1128.328,
+   "end": 1129.979,
+   "text": "that your mercy is new,"
+  },
+  {
+   "start": 1129.979,
+   "end": 1132.528,
+   "text": "and that you will never leave me."
+  },
+  {
+   "start": 1132.528,
+   "end": 1134.503,
+   "text": "Thank you for what you have"
+  },
+  {
+   "start": 1134.503,
+   "end": 1136.258,
+   "text": "already done in my life,"
+  },
+  {
+   "start": 1136.258,
+   "end": 1139.364,
+   "text": "even the things I only understood later."
+  },
+  {
+   "start": 1139.364,
+   "end": 1142.084,
+   "text": "I choose to start this day grateful,"
+  },
+  {
+   "start": 1142.084,
+   "end": 1144.426,
+   "text": "not because everything is easy,"
+  },
+  {
+   "start": 1144.426,
+   "end": 1146.797,
+   "text": "but because you are faithful."
+  },
+  {
+   "start": 1146.797,
+   "end": 1148.811,
+   "text": "Let my gratitude be louder"
+  },
+  {
+   "start": 1148.811,
+   "end": 1150.71,
+   "text": "than my worry today."
+  },
+  {
+   "start": 1151.74,
+   "end": 1153.904,
+   "text": "Lord, use me today."
+  },
+  {
+   "start": 1153.904,
+   "end": 1156.263,
+   "text": "Not only to get through my list,"
+  },
+  {
+   "start": 1156.263,
+   "end": 1157.295,
+   "text": "but to be part"
+  },
+  {
+   "start": 1157.295,
+   "end": 1159.097,
+   "text": "of what you are doing."
+  },
+  {
+   "start": 1159.097,
+   "end": 1162.371,
+   "text": "Show me one person I can encourage."
+  },
+  {
+   "start": 1162.371,
+   "end": 1164.513,
+   "text": "Give me eyes to see the need"
+  },
+  {
+   "start": 1164.513,
+   "end": 1167.905,
+   "text": "in front of me and the courage to respond."
+  },
+  {
+   "start": 1167.905,
+   "end": 1169.678,
+   "text": "If there is a gift you have"
+  },
+  {
+   "start": 1169.678,
+   "end": 1171.057,
+   "text": "put in me that I have"
+  },
+  {
+   "start": 1171.057,
+   "end": 1172.633,
+   "text": "been hiding out of fear,"
+  },
+  {
+   "start": 1172.633,
+   "end": 1173.995,
+   "text": "help me to use it."
+  },
+  {
+   "start": 1173.995,
+   "end": 1176.548,
+   "text": "Let my life today point someone,"
+  },
+  {
+   "start": 1176.548,
+   "end": 1177.824,
+   "text": "even one person,"
+  },
+  {
+   "start": 1177.824,
+   "end": 1179.849,
+   "text": "toward your kindness."
+  },
+  {
+   "start": 1180.879,
+   "end": 1183.96,
+   "text": "I also pray beyond my own walls."
+  },
+  {
+   "start": 1183.96,
+   "end": 1186.334,
+   "text": "For the people working early this"
+  },
+  {
+   "start": 1186.334,
+   "end": 1189.175,
+   "text": "morning to keep others safe and well."
+  },
+  {
+   "start": 1189.175,
+   "end": 1191.023,
+   "text": "For leaders who will make"
+  },
+  {
+   "start": 1191.023,
+   "end": 1193.463,
+   "text": "decisions that affect many lives,"
+  },
+  {
+   "start": 1193.463,
+   "end": 1195.861,
+   "text": "give them wisdom and humility."
+  },
+  {
+   "start": 1195.861,
+   "end": 1198.008,
+   "text": "For places where there is war,"
+  },
+  {
+   "start": 1198.008,
+   "end": 1199.082,
+   "text": "fear or hunger,"
+  },
+  {
+   "start": 1199.082,
+   "end": 1201.695,
+   "text": "bring your comfort and your peace."
+  },
+  {
+   "start": 1201.695,
+   "end": 1204.372,
+   "text": "And for the church around the world,"
+  },
+  {
+   "start": 1204.372,
+   "end": 1205.636,
+   "text": "make us faithful,"
+  },
+  {
+   "start": 1205.636,
+   "end": 1207.101,
+   "text": "kind and brave."
+  },
+  {
+   "start": 1208.131,
+   "end": 1208.845,
+   "text": "And Lord,"
+  },
+  {
+   "start": 1208.845,
+   "end": 1209.877,
+   "text": "I ask you now"
+  },
+  {
+   "start": 1209.877,
+   "end": 1211.782,
+   "text": "for the end of this day,"
+  },
+  {
+   "start": 1211.782,
+   "end": 1213.708,
+   "text": "before it even begins."
+  },
+  {
+   "start": 1213.708,
+   "end": 1215.071,
+   "text": "When evening comes,"
+  },
+  {
+   "start": 1215.071,
+   "end": 1216.218,
+   "text": "let me look back"
+  },
+  {
+   "start": 1216.218,
+   "end": 1218.048,
+   "text": "and see where you were."
+  },
+  {
+   "start": 1218.048,
+   "end": 1220.494,
+   "text": "Let me lie down without regret"
+  },
+  {
+   "start": 1220.494,
+   "end": 1223.284,
+   "text": "for words I did not need to say."
+  },
+  {
+   "start": 1223.284,
+   "end": 1225.373,
+   "text": "Let me rest knowing that I did"
+  },
+  {
+   "start": 1225.373,
+   "end": 1228.2,
+   "text": "what I could and left the rest to you."
+  },
+  {
+   "start": 1228.2,
+   "end": 1231.494,
+   "text": "Go before me all the way to tonight."
+  },
+  {
+   "start": 1232.524,
+   "end": 1235.627,
+   "text": "Here is one small thing to do today."
+  },
+  {
+   "start": 1235.627,
+   "end": 1237.668,
+   "text": "The next time worry rises,"
+  },
+  {
+   "start": 1237.668,
+   "end": 1239.317,
+   "text": "and it probably will,"
+  },
+  {
+   "start": 1239.317,
+   "end": 1241.695,
+   "text": "stop for one breath and say:"
+  },
+  {
+   "start": 1241.695,
+   "end": 1243.517,
+   "text": "You were here first."
+  },
+  {
+   "start": 1243.517,
+   "end": 1245.127,
+   "text": "That is all."
+  },
+  {
+   "start": 1245.127,
+   "end": 1248.039,
+   "text": "Six words that turn your attention from"
+  },
+  {
+   "start": 1248.039,
+   "end": 1249.756,
+   "text": "the size of the problem"
+  },
+  {
+   "start": 1249.756,
+   "end": 1253.989,
+   "text": "to the faithfulness of the One who is already in it."
+  },
+  {
+   "start": 1255.019,
+   "end": 1256.757,
+   "text": "May the Lord go before"
+  },
+  {
+   "start": 1256.757,
+   "end": 1259.465,
+   "text": "you into every hour of this day."
+  },
+  {
+   "start": 1259.465,
+   "end": 1262.845,
+   "text": "May his mercy meet you at every turn."
+  },
+  {
+   "start": 1262.845,
+   "end": 1264.928,
+   "text": "May his peace guard your heart"
+  },
+  {
+   "start": 1264.928,
+   "end": 1266.524,
+   "text": "when the day gets loud,"
+  },
+  {
+   "start": 1266.524,
+   "end": 1269.024,
+   "text": "and may you lie down tonight knowing"
+  },
+  {
+   "start": 1269.024,
+   "end": 1271.217,
+   "text": "that he never left your side."
+  },
+  {
+   "start": 1271.217,
+   "end": 1274.319,
+   "text": "In the name of Jesus, amen."
+  },
+  {
+   "start": 1275.649,
+   "end": 1277.141,
+   "text": "If this prayer helped"
+  },
+  {
+   "start": 1277.141,
+   "end": 1278.775,
+   "text": "you begin your morning,"
+  },
+  {
+   "start": 1278.775,
+   "end": 1280.053,
+   "text": "come back tomorrow"
+  },
+  {
+   "start": 1280.053,
+   "end": 1281.867,
+   "text": "and we will pray again."
+  },
+  {
+   "start": 1281.867,
+   "end": 1283.619,
+   "text": "And if someone you love"
+  },
+  {
+   "start": 1283.619,
+   "end": 1285.219,
+   "text": "is facing a hard day,"
+  },
+  {
+   "start": 1285.219,
+   "end": 1286.847,
+   "text": "share it with them."
+  },
+  {
+   "start": 1286.847,
+   "end": 1290.205,
+   "text": "God has already gone ahead of them too."
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Good morning.",
+   "start": 0.3,
+   "end": 1.665
+  },
+  {
+   "segment": "hook",
+   "text": "If you are holding this day with a tight chest, already counting what could go wrong, stay with me for the next few minutes.",
+   "start": 1.845,
+   "end": 10.251
+  },
+  {
+   "segment": "hook",
+   "text": "Before you walk into today, I want you to know something.",
+   "start": 10.431,
+   "end": 14.356
+  },
+  {
+   "segment": "hook",
+   "text": "God has already been there.",
+   "start": 14.536,
+   "end": 16.861
+  },
+  {
+   "segment": "invitation",
+   "text": "Take one slow breath.",
+   "start": 17.841,
+   "end": 19.804
+  },
+  {
+   "segment": "invitation",
+   "text": "Let your shoulders drop.",
+   "start": 19.984,
+   "end": 21.989
+  },
+  {
+   "segment": "invitation",
+   "text": "You do not have to solve the whole day right now.",
+   "start": 22.169,
+   "end": 25.796
+  },
+  {
+   "segment": "invitation",
+   "text": "You only have to bring this moment to the One who is not surprised by anything waiting for you.",
+   "start": 25.976,
+   "end": 32.568
+  },
+  {
+   "segment": "invitation",
+   "text": "The meeting you are nervous about, the conversation you keep rehearsing, the bill, the diagnosis, the silence from someone you love.",
+   "start": 32.748,
+   "end": 42.732
+  },
+  {
+   "segment": "invitation",
+   "text": "He has seen every one of them from the other side.",
+   "start": 42.912,
+   "end": 46.304
+  },
+  {
+   "segment": "scripture-1",
+   "text": "Listen to this promise, spoken to people who were about to step into a land they had never seen.",
+   "start": 47.684,
+   "end": 54.233
+  },
+  {
+   "segment": "scripture-1",
+   "text": "And the Lord, he it is that doth go before thee;",
+   "start": 54.413,
+   "end": 58.211
+  },
+  {
+   "segment": "scripture-1",
+   "text": "he will be with thee, he will not fail thee, neither forsake thee:",
+   "start": 58.391,
+   "end": 62.913
+  },
+  {
+   "segment": "scripture-1",
+   "text": "fear not, neither be dismayed.",
+   "start": 63.093,
+   "end": 65.525
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Notice the order.",
+   "start": 67.205,
+   "end": 68.891
+  },
+  {
+   "segment": "reflection-1",
+   "text": "He goes before you.",
+   "start": 69.071,
+   "end": 70.884
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Then he is with you.",
+   "start": 71.064,
+   "end": 72.813
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Your morning does not begin with you walking into the unknown alone and hoping God catches up.",
+   "start": 72.993,
+   "end": 80.097
+  },
+  {
+   "segment": "reflection-1",
+   "text": "It begins with God already standing in the places you are afraid of.",
+   "start": 80.277,
+   "end": 85.44
+  },
+  {
+   "segment": "reflection-1",
+   "text": "The road you cannot see is not empty.",
+   "start": 85.62,
+   "end": 88.628
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Someone faithful has walked it first.",
+   "start": 88.808,
+   "end": 91.603
+  },
+  {
+   "segment": "scripture-6",
+   "text": "When Israel left Egypt, they did not walk out guessing.",
+   "start": 92.983,
+   "end": 97.335
+  },
+  {
+   "segment": "scripture-6",
+   "text": "Listen to how the Bible describes it.",
+   "start": 97.515,
+   "end": 100.437
+  },
+  {
+   "segment": "scripture-6",
+   "text": "And the Lord went before them by day in a pillar of a cloud, to lead them the way;",
+   "start": 100.617,
+   "end": 106.249
+  },
+  {
+   "segment": "scripture-6",
+   "text": "and by night in a pillar of fire, to give them light;",
+   "start": 106.429,
+   "end": 110.333
+  },
+  {
+   "segment": "scripture-6",
+   "text": "to go by day and night.",
+   "start": 110.513,
+   "end": 112.519
+  },
+  {
+   "segment": "reflection-6",
+   "text": "By day and by night.",
+   "start": 114.199,
+   "end": 116.183
+  },
+  {
+   "segment": "reflection-6",
+   "text": "God did not lead his people only when the sun was out and the road was easy.",
+   "start": 116.363,
+   "end": 122.443
+  },
+  {
+   "segment": "reflection-6",
+   "text": "He led them in the heat of the afternoon and in the dark when they could not see their own feet.",
+   "start": 122.623,
+   "end": 128.937
+  },
+  {
+   "segment": "reflection-6",
+   "text": "Whatever part of the day you are dreading, the long meeting, the drive home, the quiet hour tonight when your thoughts get loud, he has already promised to be there.",
+   "start": 129.117,
+   "end": 140.744
+  },
+  {
+   "segment": "reflection-6",
+   "text": "You are not walking toward a place he has never been.",
+   "start": 140.924,
+   "end": 144.679
+  },
+  {
+   "segment": "reflection-6",
+   "text": "You are following him into it.",
+   "start": 144.859,
+   "end": 147.291
+  },
+  {
+   "segment": "scripture-2",
+   "text": "There is a second promise for this exact hour.",
+   "start": 148.671,
+   "end": 152.063
+  },
+  {
+   "segment": "scripture-2",
+   "text": "It is of the Lord's mercies that we are not consumed, because his compassions fail not.",
+   "start": 152.243,
+   "end": 158.899
+  },
+  {
+   "segment": "scripture-2",
+   "text": "They are new every morning:",
+   "start": 159.079,
+   "end": 161.34
+  },
+  {
+   "segment": "scripture-2",
+   "text": "great is thy faithfulness.",
+   "start": 161.52,
+   "end": 163.76
+  },
+  {
+   "segment": "reflection-2",
+   "text": "New every morning.",
+   "start": 165.44,
+   "end": 167.317
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Not leftover mercy from yesterday.",
+   "start": 167.497,
+   "end": 170.527
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Not the small amount that remains after your mistakes.",
+   "start": 170.707,
+   "end": 174.824
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Fresh mercy, measured for today, for the person you are this morning, with everything you are carrying.",
+   "start": 175.004,
+   "end": 182.343
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Whatever yesterday held, it did not use up his compassion.",
+   "start": 182.523,
+   "end": 187.152
+  },
+  {
+   "segment": "reflection-2",
+   "text": "It never could.",
+   "start": 187.332,
+   "end": 188.868
+  },
+  {
+   "segment": "scripture-3",
+   "text": "So we can pray the way David prayed when he did not know which way to turn.",
+   "start": 190.248,
+   "end": 195.688
+  },
+  {
+   "segment": "scripture-3",
+   "text": "Cause me to hear thy lovingkindness in the morning;",
+   "start": 195.868,
+   "end": 199.836
+  },
+  {
+   "segment": "scripture-3",
+   "text": "for in thee do I trust:",
+   "start": 200.016,
+   "end": 202.064
+  },
+  {
+   "segment": "scripture-3",
+   "text": "cause me to know the way wherein I should walk;",
+   "start": 202.244,
+   "end": 205.615
+  },
+  {
+   "segment": "scripture-3",
+   "text": "for I lift up my soul unto thee.",
+   "start": 205.795,
+   "end": 208.547
+  },
+  {
+   "segment": "reflection-3",
+   "text": "Notice that David did not ask to see the whole year.",
+   "start": 210.227,
+   "end": 213.981
+  },
+  {
+   "segment": "reflection-3",
+   "text": "He asked to know the way wherein he should walk.",
+   "start": 214.161,
+   "end": 217.255
+  },
+  {
+   "segment": "reflection-3",
+   "text": "One step.",
+   "start": 217.435,
+   "end": 218.672
+  },
+  {
+   "segment": "reflection-3",
+   "text": "One morning.",
+   "start": 218.852,
+   "end": 220.281
+  },
+  {
+   "segment": "reflection-3",
+   "text": "God rarely hands us the full map, because he wants to walk with us instead of sending us off alone with directions.",
+   "start": 220.461,
+   "end": 229.144
+  },
+  {
+   "segment": "reflection-3",
+   "text": "If you cannot see past today, that is not a sign that he has forgotten you.",
+   "start": 229.324,
+   "end": 234.892
+  },
+  {
+   "segment": "reflection-3",
+   "text": "It is an invitation to hold his hand for the next step, and then the next.",
+   "start": 235.072,
+   "end": 240.597
+  },
+  {
+   "segment": "scripture-7",
+   "text": "Jesus said something about tomorrow that we need to hear this morning.",
+   "start": 241.977,
+   "end": 247.097
+  },
+  {
+   "segment": "scripture-7",
+   "text": "Take therefore no thought for the morrow:",
+   "start": 247.277,
+   "end": 250.221
+  },
+  {
+   "segment": "scripture-7",
+   "text": "for the morrow shall take thought for the things of itself.",
+   "start": 250.401,
+   "end": 254.007
+  },
+  {
+   "segment": "scripture-7",
+   "text": "Sufficient unto the day is the evil thereof.",
+   "start": 254.187,
+   "end": 257.835
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Jesus is not telling you to stop planning.",
+   "start": 259.515,
+   "end": 263.141
+  },
+  {
+   "segment": "reflection-7",
+   "text": "He is telling you to stop carrying tomorrow before it arrives.",
+   "start": 263.321,
+   "end": 267.673
+  },
+  {
+   "segment": "reflection-7",
+   "text": "You were given strength for today, not for every day at once.",
+   "start": 267.853,
+   "end": 272.248
+  },
+  {
+   "segment": "reflection-7",
+   "text": "So much of our anxiety comes from trying to live next week with the grace God gave us for this morning.",
+   "start": 272.428,
+   "end": 279.66
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Put tomorrow down.",
+   "start": 279.84,
+   "end": 281.611
+  },
+  {
+   "segment": "reflection-7",
+   "text": "It will still be there, and so will he.",
+   "start": 281.791,
+   "end": 284.543
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Today has enough in it, and today is where his help is waiting for you.",
+   "start": 284.723,
+   "end": 289.757
+  },
+  {
+   "segment": "reflection-lookback",
+   "text": "Before we go further, take a moment to look back.",
+   "start": 291.137,
+   "end": 294.849
+  },
+  {
+   "segment": "reflection-lookback",
+   "text": "Think about a morning a year ago, or five years ago, when you were sure you would not make it through what was in front of you.",
+   "start": 295.029,
+   "end": 303.328
+  },
+  {
+   "segment": "reflection-lookback",
+   "text": "And yet here you are.",
+   "start": 303.508,
+   "end": 305.3
+  },
+  {
+   "segment": "reflection-lookback",
+   "text": "Maybe not everything turned out the way you wanted, but you were carried.",
+   "start": 305.48,
+   "end": 310.472
+  },
+  {
+   "segment": "reflection-lookback",
+   "text": "The same God who went before you then is the God who goes before you now.",
+   "start": 310.652,
+   "end": 316.391
+  },
+  {
+   "segment": "reflection-lookback",
+   "text": "Your past is not only a list of hard days.",
+   "start": 316.571,
+   "end": 320.219
+  },
+  {
+   "segment": "reflection-lookback",
+   "text": "It is a record of his faithfulness, and it is evidence for today.",
+   "start": 320.399,
+   "end": 325.369
+  },
+  {
+   "segment": "stillness",
+   "text": "Before we pray, let us be still for a moment.",
+   "start": 326.749,
+   "end": 330.163
+  },
+  {
+   "segment": "stillness",
+   "text": "Breathe in, and remember that he is here.",
+   "start": 330.343,
+   "end": 333.457
+  },
+  {
+   "segment": "stillness",
+   "text": "Breathe out, and let go of what you cannot control.",
+   "start": 333.637,
+   "end": 337.499
+  },
+  {
+   "segment": "transition",
+   "text": "Let us pray those words together now.",
+   "start": 343.679,
+   "end": 346.388
+  },
+  {
+   "segment": "transition",
+   "text": "If you can, close your eyes.",
+   "start": 346.568,
+   "end": 349.043
+  },
+  {
+   "segment": "transition",
+   "text": "If you are driving or getting ready, simply let your heart follow along.",
+   "start": 349.223,
+   "end": 354.577
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Lord, here is my day before I have lived any of it.",
+   "start": 356.257,
+   "end": 359.948
+  },
+  {
+   "segment": "prayer-1",
+   "text": "I give you the hours I can plan and the moments I cannot predict.",
+   "start": 360.128,
+   "end": 365.333
+  },
+  {
+   "segment": "prayer-1",
+   "text": "You already know where I will be at noon and how I will feel tonight.",
+   "start": 365.513,
+   "end": 370.377
+  },
+  {
+   "segment": "prayer-1",
+   "text": "I choose to trust that you are there before me.",
+   "start": 370.557,
+   "end": 373.885
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Go ahead of me into every room I will enter today.",
+   "start": 374.065,
+   "end": 378.076
+  },
+  {
+   "segment": "prayer-2",
+   "text": "I bring you the worry that woke me up.",
+   "start": 379.456,
+   "end": 382.187
+  },
+  {
+   "segment": "prayer-2",
+   "text": "You know its name.",
+   "start": 382.367,
+   "end": 383.988
+  },
+  {
+   "segment": "prayer-2",
+   "text": "I will not pretend it is small, and I will not pretend you are smaller.",
+   "start": 384.168,
+   "end": 389.587
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Where I see a closed door, you see the way through.",
+   "start": 389.767,
+   "end": 393.479
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Where I see a delay, you see the right time.",
+   "start": 393.659,
+   "end": 397.072
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
+   "start": 397.252,
+   "end": 402.671
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Lord, you know how quickly my thoughts run ahead of me.",
+   "start": 404.051,
+   "end": 407.741
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
+   "start": 407.921,
+   "end": 416.092
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Bring my thoughts back to this day and to you.",
+   "start": 416.272,
+   "end": 419.493
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Replace the noise in my head with your peace.",
+   "start": 419.673,
+   "end": 423.023
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "When I start to imagine the worst, remind me of everything you have already carried me through.",
+   "start": 423.203,
+   "end": 429.859
+  },
+  {
+   "segment": "scripture-8",
+   "text": "Before we keep praying, let these words settle over your heart.",
+   "start": 431.239,
+   "end": 435.697
+  },
+  {
+   "segment": "scripture-8",
+   "text": "Be careful for nothing;",
+   "start": 435.877,
+   "end": 437.84
+  },
+  {
+   "segment": "scripture-8",
+   "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+   "start": 438.02,
+   "end": 445.465
+  },
+  {
+   "segment": "scripture-8",
+   "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+   "start": 445.645,
+   "end": 453.645
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "So Lord, here are my requests, and here is my thanks.",
+   "start": 455.325,
+   "end": 459.336
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "Thank you for the breath in my lungs this morning.",
+   "start": 459.516,
+   "end": 462.929
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "Thank you for the people who love me, and for the ways you have kept me that I did not even notice.",
+   "start": 463.109,
+   "end": 469.872
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "And here is what I need.",
+   "start": 470.052,
+   "end": 472.228
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "I need peace that does not depend on how this day goes.",
+   "start": 472.408,
+   "end": 476.824
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "Guard my heart when someone is harsh with me.",
+   "start": 477.004,
+   "end": 480.481
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "Guard my mind when bad news comes.",
+   "start": 480.661,
+   "end": 483.52
+  },
+  {
+   "segment": "prayer-peace",
+   "text": "Let your peace stand at the door of my thoughts like a guard who does not fall asleep.",
+   "start": 483.7,
+   "end": 489.652
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "There are decisions in front of me that I do not know how to make.",
+   "start": 491.032,
+   "end": 495.469
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Some are small, and some feel like they will change everything.",
+   "start": 495.649,
+   "end": 500.129
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Give me wisdom that is bigger than my understanding.",
+   "start": 500.309,
+   "end": 504.341
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Close the doors I should not walk through, and give me courage to walk through the ones you open.",
+   "start": 504.521,
+   "end": 510.793
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Let me hear your direction clearly, and let me follow it even when it asks for patience.",
+   "start": 510.973,
+   "end": 517.011
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Lord, I bring you my work today.",
+   "start": 518.391,
+   "end": 521.015
+  },
+  {
+   "segment": "prayer-work",
+   "text": "The tasks I enjoy and the ones I have been avoiding.",
+   "start": 521.195,
+   "end": 525.611
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Help me to work with honesty and with a steady heart, as if I am doing it for you and not only for the people who will see it.",
+   "start": 525.791,
+   "end": 534.473
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Where I am overwhelmed, show me the next small thing to do.",
+   "start": 534.653,
+   "end": 538.92
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Where I am tempted to cut corners, give me integrity.",
+   "start": 539.1,
+   "end": 543.196
+  },
+  {
+   "segment": "prayer-work",
+   "text": "And where my work feels unseen, remind me that you see it, and that faithfulness in small things matters to you.",
+   "start": 543.376,
+   "end": 552.037
+  },
+  {
+   "segment": "prayer-3",
+   "text": "Thank you that your mercy is new this morning.",
+   "start": 553.417,
+   "end": 556.788
+  },
+  {
+   "segment": "prayer-3",
+   "text": "Where I fell short yesterday, forgive me.",
+   "start": 556.968,
+   "end": 559.997
+  },
+  {
+   "segment": "prayer-3",
+   "text": "Where I was impatient, make me gentle.",
+   "start": 560.177,
+   "end": 563.164
+  },
+  {
+   "segment": "prayer-3",
+   "text": "Where I was afraid, make me brave.",
+   "start": 563.344,
+   "end": 566.16
+  },
+  {
+   "segment": "prayer-3",
+   "text": "Do not let the mistakes of yesterday become the script for today.",
+   "start": 566.34,
+   "end": 571.055
+  },
+  {
+   "segment": "prayer-3",
+   "text": "Give me a clean start and the grace to walk in it.",
+   "start": 571.235,
+   "end": 574.904
+  },
+  {
+   "segment": "prayer-4",
+   "text": "I lift up the people I will meet today.",
+   "start": 576.284,
+   "end": 579.591
+  },
+  {
+   "segment": "prayer-4",
+   "text": "My family, the people at my work, the stranger I will pass without knowing their story.",
+   "start": 579.771,
+   "end": 586.64
+  },
+  {
+   "segment": "prayer-4",
+   "text": "Go before them too.",
+   "start": 586.82,
+   "end": 588.633
+  },
+  {
+   "segment": "prayer-4",
+   "text": "Let my words be kind and my patience be real.",
+   "start": 588.813,
+   "end": 592.803
+  },
+  {
+   "segment": "prayer-4",
+   "text": "If someone near me is carrying something heavy, help me notice, and help me carry it with them.",
+   "start": 592.983,
+   "end": 599.596
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Lord, there are people I find hard to love right now.",
+   "start": 600.976,
+   "end": 604.795
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Someone who hurt me, someone I hurt, a conversation that ended badly and still sits in my chest.",
+   "start": 604.975,
+   "end": 612.591
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "I do not want to carry bitterness into this day.",
+   "start": 612.771,
+   "end": 616.397
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Help me to forgive the way you have forgiven me.",
+   "start": 616.577,
+   "end": 620.012
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Where I need to apologize, give me humility.",
+   "start": 620.192,
+   "end": 623.989
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Where I need to set a healthy boundary, give me wisdom.",
+   "start": 624.169,
+   "end": 628.415
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "And where a relationship needs healing that only you can bring, I place it in your hands.",
+   "start": 628.595,
+   "end": 634.803
+  },
+  {
+   "segment": "prayer-children",
+   "text": "I pray for the children in my life, my own and the ones I care about.",
+   "start": 636.183,
+   "end": 641.559
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Go before them into their classrooms, their friendships and their screens.",
+   "start": 641.739,
+   "end": 646.624
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Protect their minds and their hearts.",
+   "start": 646.804,
+   "end": 649.385
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Let them know that they are loved by you before they ever achieve anything.",
+   "start": 649.565,
+   "end": 654.877
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Give the parents and grandparents listening patience and joy today, and let our homes be places where faith is seen, not only spoken.",
+   "start": 655.057,
+   "end": 665.233
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "I also bring you my needs, the practical ones.",
+   "start": 666.613,
+   "end": 670.411
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "You know what is in my account and what is on my table.",
+   "start": 670.591,
+   "end": 674.815
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "You know the job I hope for and the work I already have.",
+   "start": 674.995,
+   "end": 679.432
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Provide what I need for today, and teach me to be content and grateful while I wait for what I still hope for.",
+   "start": 679.612,
+   "end": 687.633
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "You have never been late, even when I thought you were.",
+   "start": 687.813,
+   "end": 691.589
+  },
+  {
+   "segment": "prayer-health",
+   "text": "I also lift up my body to you.",
+   "start": 692.969,
+   "end": 695.721
+  },
+  {
+   "segment": "prayer-health",
+   "text": "You know where I am tired, where I hurt, and the results I am waiting for.",
+   "start": 695.901,
+   "end": 701.32
+  },
+  {
+   "segment": "prayer-health",
+   "text": "I ask you for strength and for healing, and I thank you for every doctor, nurse and caregiver you use to help us.",
+   "start": 701.5,
+   "end": 709.863
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Give me wisdom to rest when I need rest and to take care of the body you have given me.",
+   "start": 710.043,
+   "end": 716.059
+  },
+  {
+   "segment": "prayer-health",
+   "text": "And for anyone listening who is sick or waiting on news this morning, hold them close and give them courage for today.",
+   "start": 716.239,
+   "end": 725.199
+  },
+  {
+   "segment": "scripture-9",
+   "text": "Here is a promise for your going out and your coming in.",
+   "start": 726.579,
+   "end": 730.547
+  },
+  {
+   "segment": "scripture-9",
+   "text": "The Lord shall preserve thee from all evil:",
+   "start": 730.727,
+   "end": 733.863
+  },
+  {
+   "segment": "scripture-9",
+   "text": "he shall preserve thy soul.",
+   "start": 734.043,
+   "end": 736.453
+  },
+  {
+   "segment": "scripture-9",
+   "text": "The Lord shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "start": 736.633,
+   "end": 743.567
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Lord, as I go out this morning, watch over my going out.",
+   "start": 745.247,
+   "end": 749.705
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Watch over the roads I travel and the places I enter.",
+   "start": 749.885,
+   "end": 754.408
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Watch over my home while I am away from it, and over everyone who lives there.",
+   "start": 754.588,
+   "end": 760.305
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Keep my family safe in body and in spirit.",
+   "start": 760.485,
+   "end": 764.261
+  },
+  {
+   "segment": "prayer-home",
+   "text": "When we come back together tonight, let us come back to a home filled with your peace and not with tension.",
+   "start": 764.441,
+   "end": 771.823
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Be the strength of our walls and the warmth of our table.",
+   "start": 772.003,
+   "end": 776.227
+  },
+  {
+   "segment": "scripture-4",
+   "text": "And when fear tries to speak louder than you, remind me of your voice.",
+   "start": 777.607,
+   "end": 782.727
+  },
+  {
+   "segment": "scripture-4",
+   "text": "Fear thou not;",
+   "start": 782.907,
+   "end": 784.507
+  },
+  {
+   "segment": "scripture-4",
+   "text": "for I am with thee:",
+   "start": 784.687,
+   "end": 786.457
+  },
+  {
+   "segment": "scripture-4",
+   "text": "be not dismayed;",
+   "start": 786.637,
+   "end": 788.387
+  },
+  {
+   "segment": "scripture-4",
+   "text": "for I am thy God:",
+   "start": 788.567,
+   "end": 790.529
+  },
+  {
+   "segment": "scripture-4",
+   "text": "I will strengthen thee;",
+   "start": 790.709,
+   "end": 792.565
+  },
+  {
+   "segment": "scripture-4",
+   "text": "yea, I will help thee;",
+   "start": 792.745,
+   "end": 794.644
+  },
+  {
+   "segment": "scripture-4",
+   "text": "yea, I will uphold thee with the right hand of my righteousness.",
+   "start": 794.824,
+   "end": 799.197
+  },
+  {
+   "segment": "prayer-5",
+   "text": "Strengthen me for the hardest part of this day, whatever it turns out to be.",
+   "start": 800.877,
+   "end": 806.125
+  },
+  {
+   "segment": "prayer-5",
+   "text": "When I feel weak, hold me up.",
+   "start": 806.305,
+   "end": 808.78
+  },
+  {
+   "segment": "prayer-5",
+   "text": "When I do not know what to say, give me words.",
+   "start": 808.96,
+   "end": 812.459
+  },
+  {
+   "segment": "prayer-5",
+   "text": "When I am tempted to quit, remind me that you have not let go of me and you will not start now.",
+   "start": 812.639,
+   "end": 819.572
+  },
+  {
+   "segment": "scripture-10",
+   "text": "Some of you are walking into something heavy today.",
+   "start": 820.952,
+   "end": 824.472
+  },
+  {
+   "segment": "scripture-10",
+   "text": "This promise is for you.",
+   "start": 824.652,
+   "end": 826.764
+  },
+  {
+   "segment": "scripture-10",
+   "text": "When thou passest through the waters, I will be with thee;",
+   "start": 826.944,
+   "end": 831.061
+  },
+  {
+   "segment": "scripture-10",
+   "text": "and through the rivers, they shall not overflow thee:",
+   "start": 831.241,
+   "end": 834.911
+  },
+  {
+   "segment": "scripture-10",
+   "text": "when thou walkest through the fire, thou shalt not be burned;",
+   "start": 835.091,
+   "end": 839.549
+  },
+  {
+   "segment": "scripture-10",
+   "text": "neither shall the flame kindle upon thee.",
+   "start": 839.729,
+   "end": 842.951
+  },
+  {
+   "segment": "prayer-waters",
+   "text": "Notice that God did not say if you pass through the waters.",
+   "start": 844.631,
+   "end": 848.855
+  },
+  {
+   "segment": "prayer-waters",
+   "text": "He said when.",
+   "start": 849.035,
+   "end": 850.443
+  },
+  {
+   "segment": "prayer-waters",
+   "text": "Lord, I will not pretend there are no deep waters in my life.",
+   "start": 850.623,
+   "end": 855.401
+  },
+  {
+   "segment": "prayer-waters",
+   "text": "But I thank you that you do not watch me from the shore.",
+   "start": 855.581,
+   "end": 859.656
+  },
+  {
+   "segment": "prayer-waters",
+   "text": "You walk through them with me.",
+   "start": 859.836,
+   "end": 861.735
+  },
+  {
+   "segment": "prayer-waters",
+   "text": "When the pressure rises today, let me feel your hand.",
+   "start": 861.915,
+   "end": 866.011
+  },
+  {
+   "segment": "prayer-waters",
+   "text": "When I think I am going under, remind me that the river has a limit, and that you set it.",
+   "start": 866.191,
+   "end": 872.847
+  },
+  {
+   "segment": "scripture-13",
+   "text": "Hold on to this when the day feels unstable.",
+   "start": 874.227,
+   "end": 877.875
+  },
+  {
+   "segment": "scripture-13",
+   "text": "God is our refuge and strength, a very present help in trouble.",
+   "start": 878.055,
+   "end": 883.132
+  },
+  {
+   "segment": "scripture-13",
+   "text": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea.",
+   "start": 883.312,
+   "end": 891.568
+  },
+  {
+   "segment": "reflection-present-help",
+   "text": "A very present help.",
+   "start": 893.248,
+   "end": 895.211
+  },
+  {
+   "segment": "reflection-present-help",
+   "text": "Not a distant help, not a help that arrives after everything falls apart, but present.",
+   "start": 895.391,
+   "end": 901.961
+  },
+  {
+   "segment": "reflection-present-help",
+   "text": "In the moment the phone rings with news you did not want, he is present.",
+   "start": 902.141,
+   "end": 907.496
+  },
+  {
+   "segment": "reflection-present-help",
+   "text": "In the moment you feel the old panic rising, he is present.",
+   "start": 907.676,
+   "end": 912.391
+  },
+  {
+   "segment": "reflection-present-help",
+   "text": "You do not have to find the right words to reach him.",
+   "start": 912.571,
+   "end": 916.283
+  },
+  {
+   "segment": "reflection-present-help",
+   "text": "He is already there.",
+   "start": 916.463,
+   "end": 918.233
+  },
+  {
+   "segment": "reflection-present-help",
+   "text": "Sometimes the most powerful prayer of the day is simply, Lord, you are here, and I am not alone.",
+   "start": 918.413,
+   "end": 925.411
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "And Lord, for the one listening who woke up already tired, the one who is grieving, the one who has prayed about the same thing for a long time and is starting to lose heart, meet them right now.",
+   "start": 926.791,
+   "end": 940.508
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "Sit with them in the quiet.",
+   "start": 940.688,
+   "end": 942.907
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "Remind them that a slow morning is not a failed morning, and that tears are not a lack of faith.",
+   "start": 943.087,
+   "end": 950.041
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "Give them enough strength for this hour, and then the next, until they can see your goodness again.",
+   "start": 950.221,
+   "end": 956.856
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Let us pause again for a moment.",
+   "start": 958.236,
+   "end": 960.689
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Breathe in slowly, and remember that he is near.",
+   "start": 960.869,
+   "end": 964.667
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Breathe out, and hand him the heaviest thing on your mind.",
+   "start": 964.847,
+   "end": 968.836
+  },
+  {
+   "segment": "declaration",
+   "text": "Now say this with me, slowly.",
+   "start": 975.016,
+   "end": 977.555
+  },
+  {
+   "segment": "declaration",
+   "text": "God has gone before me today.",
+   "start": 977.735,
+   "end": 980.316
+  },
+  {
+   "segment": "declaration",
+   "text": "His mercy is new this morning.",
+   "start": 980.496,
+   "end": 983.056
+  },
+  {
+   "segment": "declaration",
+   "text": "I do not walk alone.",
+   "start": 983.236,
+   "end": 985.263
+  },
+  {
+   "segment": "declaration",
+   "text": "I will not be ruled by fear.",
+   "start": 985.443,
+   "end": 987.917
+  },
+  {
+   "segment": "declaration",
+   "text": "I will trust him with what I cannot see.",
+   "start": 988.097,
+   "end": 991.02
+  },
+  {
+   "segment": "declaration",
+   "text": "This is the day which the Lord hath made;",
+   "start": 991.2,
+   "end": 994.272
+  },
+  {
+   "segment": "declaration",
+   "text": "I will rejoice and be glad in it.",
+   "start": 994.452,
+   "end": 997.183
+  },
+  {
+   "segment": "scripture-5",
+   "text": "Carry one more promise with you into the next hour.",
+   "start": 998.863,
+   "end": 1002.873
+  },
+  {
+   "segment": "scripture-5",
+   "text": "Trust in the Lord with all thine heart;",
+   "start": 1003.053,
+   "end": 1005.784
+  },
+  {
+   "segment": "scripture-5",
+   "text": "and lean not unto thine own understanding.",
+   "start": 1005.964,
+   "end": 1009.591
+  },
+  {
+   "segment": "scripture-5",
+   "text": "In all thy ways acknowledge him, and he shall direct thy paths.",
+   "start": 1009.771,
+   "end": 1014.464
+  },
+  {
+   "segment": "reflection-4",
+   "text": "In all thy ways acknowledge him.",
+   "start": 1016.144,
+   "end": 1018.704
+  },
+  {
+   "segment": "reflection-4",
+   "text": "Not only in the big decisions, but in the small ones that fill an ordinary day.",
+   "start": 1018.884,
+   "end": 1025.049
+  },
+  {
+   "segment": "reflection-4",
+   "text": "When you sit down to work, acknowledge him.",
+   "start": 1025.229,
+   "end": 1028.493
+  },
+  {
+   "segment": "reflection-4",
+   "text": "When you answer a difficult message, acknowledge him.",
+   "start": 1028.673,
+   "end": 1032.663
+  },
+  {
+   "segment": "reflection-4",
+   "text": "When you feel the old worry return in the middle of the afternoon, acknowledge him.",
+   "start": 1032.843,
+   "end": 1038.816
+  },
+  {
+   "segment": "reflection-4",
+   "text": "You do not need a long prayer for that.",
+   "start": 1038.996,
+   "end": 1041.94
+  },
+  {
+   "segment": "reflection-4",
+   "text": "A quiet word is enough.",
+   "start": 1042.12,
+   "end": 1044.275
+  },
+  {
+   "segment": "reflection-4",
+   "text": "Lord, you are here.",
+   "start": 1044.455,
+   "end": 1046.097
+  },
+  {
+   "segment": "reflection-4",
+   "text": "Lord, lead me.",
+   "start": 1046.277,
+   "end": 1047.813
+  },
+  {
+   "segment": "reflection-4",
+   "text": "And the promise is that he will direct your paths, one turn at a time, all the way to evening.",
+   "start": 1047.993,
+   "end": 1055.012
+  },
+  {
+   "segment": "scripture-11",
+   "text": "As we come toward the end of our time together, hear what God said to Joshua on the edge of a new beginning.",
+   "start": 1056.392,
+   "end": 1064.264
+  },
+  {
+   "segment": "scripture-11",
+   "text": "Have not I commanded thee?",
+   "start": 1064.444,
+   "end": 1066.684
+  },
+  {
+   "segment": "scripture-11",
+   "text": "Be strong and of a good courage;",
+   "start": 1066.864,
+   "end": 1069.488
+  },
+  {
+   "segment": "scripture-11",
+   "text": "be not afraid, neither be thou dismayed:",
+   "start": 1069.668,
+   "end": 1072.953
+  },
+  {
+   "segment": "scripture-11",
+   "text": "for the Lord thy God is with thee whithersoever thou goest.",
+   "start": 1073.133,
+   "end": 1077.699
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "God did not tell Joshua to be brave because the task was small.",
+   "start": 1079.379,
+   "end": 1084.563
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "He told him to be strong because the One going with him was greater than the task.",
+   "start": 1084.743,
+   "end": 1090.353
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "Your courage today does not have to come from feeling ready.",
+   "start": 1090.533,
+   "end": 1095.077
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "It can come from knowing who is with you.",
+   "start": 1095.257,
+   "end": 1098.052
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "Whithersoever thou goest.",
+   "start": 1098.232,
+   "end": 1100.536
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "That means the kitchen, the office, the hospital room, the classroom, the empty apartment.",
+   "start": 1100.716,
+   "end": 1107.116
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "There is no place on your schedule today where he will not be.",
+   "start": 1107.296,
+   "end": 1111.755
+  },
+  {
+   "segment": "scripture-12",
+   "text": "And one more promise, short enough to remember all day.",
+   "start": 1113.135,
+   "end": 1117.551
+  },
+  {
+   "segment": "scripture-12",
+   "text": "For he hath said, I will never leave thee, nor forsake thee.",
+   "start": 1117.731,
+   "end": 1121.955
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Father, thank you.",
+   "start": 1123.635,
+   "end": 1125.277
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
+   "start": 1125.457,
+   "end": 1132.348
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Thank you for what you have already done in my life, even the things I only understood later.",
+   "start": 1132.528,
+   "end": 1139.184
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "I choose to start this day grateful, not because everything is easy, but because you are faithful.",
+   "start": 1139.364,
+   "end": 1146.617
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Let my gratitude be louder than my worry today.",
+   "start": 1146.797,
+   "end": 1150.36
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Lord, use me today.",
+   "start": 1151.74,
+   "end": 1153.724
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Not only to get through my list, but to be part of what you are doing.",
+   "start": 1153.904,
+   "end": 1158.917
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Show me one person I can encourage.",
+   "start": 1159.097,
+   "end": 1162.191
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Give me eyes to see the need in front of me and the courage to respond.",
+   "start": 1162.371,
+   "end": 1167.725
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "If there is a gift you have put in me that I have been hiding out of fear, help me to use it.",
+   "start": 1167.905,
+   "end": 1173.815
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Let my life today point someone, even one person, toward your kindness.",
+   "start": 1173.995,
+   "end": 1179.499
+  },
+  {
+   "segment": "prayer-world",
+   "text": "I also pray beyond my own walls.",
+   "start": 1180.879,
+   "end": 1183.78
+  },
+  {
+   "segment": "prayer-world",
+   "text": "For the people working early this morning to keep others safe and well.",
+   "start": 1183.96,
+   "end": 1188.995
+  },
+  {
+   "segment": "prayer-world",
+   "text": "For leaders who will make decisions that affect many lives, give them wisdom and humility.",
+   "start": 1189.175,
+   "end": 1195.681
+  },
+  {
+   "segment": "prayer-world",
+   "text": "For places where there is war, fear or hunger, bring your comfort and your peace.",
+   "start": 1195.861,
+   "end": 1201.515
+  },
+  {
+   "segment": "prayer-world",
+   "text": "And for the church around the world, make us faithful, kind and brave.",
+   "start": 1201.695,
+   "end": 1206.751
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "And Lord, I ask you now for the end of this day, before it even begins.",
+   "start": 1208.131,
+   "end": 1213.528
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "When evening comes, let me look back and see where you were.",
+   "start": 1213.708,
+   "end": 1217.868
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "Let me lie down without regret for words I did not need to say.",
+   "start": 1218.048,
+   "end": 1223.104
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "Let me rest knowing that I did what I could and left the rest to you.",
+   "start": 1223.284,
+   "end": 1228.02
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "Go before me all the way to tonight.",
+   "start": 1228.2,
+   "end": 1231.144
+  },
+  {
+   "segment": "payoff",
+   "text": "Here is one small thing to do today.",
+   "start": 1232.524,
+   "end": 1235.447
+  },
+  {
+   "segment": "payoff",
+   "text": "The next time worry rises, and it probably will, stop for one breath and say:",
+   "start": 1235.627,
+   "end": 1241.515
+  },
+  {
+   "segment": "payoff",
+   "text": "You were here first.",
+   "start": 1241.695,
+   "end": 1243.337
+  },
+  {
+   "segment": "payoff",
+   "text": "That is all.",
+   "start": 1243.517,
+   "end": 1244.947
+  },
+  {
+   "segment": "payoff",
+   "text": "Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it.",
+   "start": 1245.127,
+   "end": 1253.639
+  },
+  {
+   "segment": "blessing",
+   "text": "May the Lord go before you into every hour of this day.",
+   "start": 1255.019,
+   "end": 1259.285
+  },
+  {
+   "segment": "blessing",
+   "text": "May his mercy meet you at every turn.",
+   "start": 1259.465,
+   "end": 1262.665
+  },
+  {
+   "segment": "blessing",
+   "text": "May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side.",
+   "start": 1262.845,
+   "end": 1271.037
+  },
+  {
+   "segment": "blessing",
+   "text": "In the name of Jesus, amen.",
+   "start": 1271.217,
+   "end": 1273.969
+  },
+  {
+   "segment": "cta",
+   "text": "If this prayer helped you begin your morning, come back tomorrow and we will pray again.",
+   "start": 1275.649,
+   "end": 1281.687
+  },
+  {
+   "segment": "cta",
+   "text": "And if someone you love is facing a hard day, share it with them.",
+   "start": 1281.867,
+   "end": 1286.667
+  },
+  {
+   "segment": "cta",
+   "text": "God has already gone ahead of them too.",
+   "start": 1286.847,
+   "end": 1289.855
+  }
+ ],
+ "overlay": {
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN",
+  "title": "God Has Already Gone Ahead of You",
+  "title_card_seconds": 2.0
+ },
+ "badges": [
+  "SUBSCRIBE",
+  "LIKE",
+  "SHARE"
+ ],
+ "clips": [],
+ "shots": [],
+ "timeline": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 17.041
+  },
+  {
+   "id": "invitation",
+   "start": 17.841,
+   "end": 46.484
+  },
+  {
+   "id": "scripture-1",
+   "start": 47.684,
+   "end": 65.705
+  },
+  {
+   "id": "reflection-1",
+   "start": 67.205,
+   "end": 91.783
+  },
+  {
+   "id": "scripture-6",
+   "start": 92.983,
+   "end": 112.699
+  },
+  {
+   "id": "reflection-6",
+   "start": 114.199,
+   "end": 147.471
+  },
+  {
+   "id": "scripture-2",
+   "start": 148.671,
+   "end": 163.94
+  },
+  {
+   "id": "reflection-2",
+   "start": 165.44,
+   "end": 189.048
+  },
+  {
+   "id": "scripture-3",
+   "start": 190.248,
+   "end": 208.727
+  },
+  {
+   "id": "reflection-3",
+   "start": 210.227,
+   "end": 240.777
+  },
+  {
+   "id": "scripture-7",
+   "start": 241.977,
+   "end": 258.015
+  },
+  {
+   "id": "reflection-7",
+   "start": 259.515,
+   "end": 289.937
+  },
+  {
+   "id": "reflection-lookback",
+   "start": 291.137,
+   "end": 325.549
+  },
+  {
+   "id": "stillness",
+   "start": 326.749,
+   "end": 337.679
+  },
+  {
+   "id": "transition",
+   "start": 343.679,
+   "end": 354.757
+  },
+  {
+   "id": "prayer-1",
+   "start": 356.257,
+   "end": 378.256
+  },
+  {
+   "id": "prayer-2",
+   "start": 379.456,
+   "end": 402.851
+  },
+  {
+   "id": "prayer-mind",
+   "start": 404.051,
+   "end": 430.039
+  },
+  {
+   "id": "scripture-8",
+   "start": 431.239,
+   "end": 453.825
+  },
+  {
+   "id": "prayer-peace",
+   "start": 455.325,
+   "end": 489.832
+  },
+  {
+   "id": "prayer-decisions",
+   "start": 491.032,
+   "end": 517.191
+  },
+  {
+   "id": "prayer-work",
+   "start": 518.391,
+   "end": 552.217
+  },
+  {
+   "id": "prayer-3",
+   "start": 553.417,
+   "end": 575.084
+  },
+  {
+   "id": "prayer-4",
+   "start": 576.284,
+   "end": 599.776
+  },
+  {
+   "id": "prayer-forgiveness",
+   "start": 600.976,
+   "end": 634.983
+  },
+  {
+   "id": "prayer-children",
+   "start": 636.183,
+   "end": 665.413
+  },
+  {
+   "id": "prayer-provision",
+   "start": 666.613,
+   "end": 691.769
+  },
+  {
+   "id": "prayer-health",
+   "start": 692.969,
+   "end": 725.379
+  },
+  {
+   "id": "scripture-9",
+   "start": 726.579,
+   "end": 743.747
+  },
+  {
+   "id": "prayer-home",
+   "start": 745.247,
+   "end": 776.407
+  },
+  {
+   "id": "scripture-4",
+   "start": 777.607,
+   "end": 799.377
+  },
+  {
+   "id": "prayer-5",
+   "start": 800.877,
+   "end": 819.752
+  },
+  {
+   "id": "scripture-10",
+   "start": 820.952,
+   "end": 843.131
+  },
+  {
+   "id": "prayer-waters",
+   "start": 844.631,
+   "end": 873.027
+  },
+  {
+   "id": "scripture-13",
+   "start": 874.227,
+   "end": 891.748
+  },
+  {
+   "id": "reflection-present-help",
+   "start": 893.248,
+   "end": 925.591
+  },
+  {
+   "id": "prayer-weary",
+   "start": 926.791,
+   "end": 957.036
+  },
+  {
+   "id": "stillness-2",
+   "start": 958.236,
+   "end": 969.016
+  },
+  {
+   "id": "declaration",
+   "start": 975.016,
+   "end": 997.363
+  },
+  {
+   "id": "scripture-5",
+   "start": 998.863,
+   "end": 1014.644
+  },
+  {
+   "id": "reflection-4",
+   "start": 1016.144,
+   "end": 1055.192
+  },
+  {
+   "id": "scripture-11",
+   "start": 1056.392,
+   "end": 1077.879
+  },
+  {
+   "id": "reflection-courage",
+   "start": 1079.379,
+   "end": 1111.935
+  },
+  {
+   "id": "scripture-12",
+   "start": 1113.135,
+   "end": 1122.135
+  },
+  {
+   "id": "prayer-thanks",
+   "start": 1123.635,
+   "end": 1150.54
+  },
+  {
+   "id": "prayer-purpose",
+   "start": 1151.74,
+   "end": 1179.679
+  },
+  {
+   "id": "prayer-world",
+   "start": 1180.879,
+   "end": 1206.931
+  },
+  {
+   "id": "prayer-evening",
+   "start": 1208.131,
+   "end": 1231.324
+  },
+  {
+   "id": "payoff",
+   "start": 1232.524,
+   "end": 1253.819
+  },
+  {
+   "id": "blessing",
+   "start": 1255.019,
+   "end": 1274.149
+  },
+  {
+   "id": "cta",
+   "start": 1275.649,
+   "end": 1290.035
+  }
+ ],
+ "upload_performed": false,
+ "publication_performed": false
+}
