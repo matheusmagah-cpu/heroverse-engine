@@ -1,7 +1,7 @@
 {
- "version": "pilot-images-v1",
+ "version": "pilot-images-v2",
  "pilot_id": "pilot-002",
- "style": "soft cinematic devotional painting, warm golden morning light, hopeful and calm mood, rich detail, gentle colours, 16:9 composition",
+ "style": "soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
  "steps": 6,
  "guidance": 1.5,
@@ -9,34 +9,24 @@
  "height": 768,
  "images": [
   {
-   "id": "title",
-   "prompt": "Jesus Christ kneeling in prayer on a grassy hilltop at sunrise, seen from the side at a distance, white and cream robe, golden light rising over distant hills, peaceful",
-   "seed": 1000
+   "id": "figure-a",
+   "prompt": "Jesus Christ praying with hands folded at his chest, eyes closed, gentle peaceful expression, long brown hair and beard, cream robe with a brown sash, upper body portrait facing right, isolated on a plain light grey studio background",
+   "seed": 2000
   },
   {
-   "id": "fig-hill",
-   "prompt": "Jesus Christ praying with folded hands on a hillside at dawn, seen from behind, soft rays of sunlight breaking through clouds over a wide valley",
-   "seed": 1001
+   "id": "figure-b",
+   "prompt": "Jesus Christ in quiet prayer, hands clasped under his chin, eyes closed, serene face, long hair and beard, white robe and red mantle, waist-up portrait in three-quarter view facing right, plain light grey studio background",
+   "seed": 2001
   },
   {
-   "id": "fig-garden",
-   "prompt": "Jesus Christ kneeling in prayer beside an old olive tree in a quiet garden at first light, side view, gentle mist, warm sunlight",
-   "seed": 1002
+   "id": "figure-c",
+   "prompt": "Jesus Christ kneeling in prayer, hands folded, head slightly bowed, calm expression, long hair and beard, off-white robe and blue mantle, full figure side view facing right, plain light grey studio background",
+   "seed": 2002
   },
   {
-   "id": "fig-path",
-   "prompt": "Jesus Christ walking ahead on a winding dirt path through golden fields at sunrise, seen from behind, long soft shadows, light on the horizon",
-   "seed": 1003
-  },
-  {
-   "id": "fig-rock",
-   "prompt": "Jesus Christ praying alone on a large rock overlooking a calm lake at dawn, seen from behind, pastel sky, reflection on the water",
-   "seed": 1004
-  },
-  {
-   "id": "fig-light",
-   "prompt": "Jesus Christ standing in a beam of warm morning light with open arms, seen from a distance, soft clouds, heavenly glow, hopeful",
-   "seed": 1005
+   "id": "figure-d",
+   "prompt": "Jesus Christ with hand on his heart, kind gentle smile, long hair and beard, beige robe and brown cloak, upper body portrait facing slightly right, plain light grey studio background",
+   "seed": 2003
   },
   {
    "id": "bg-valley",
@@ -87,6 +77,46 @@
    "id": "bg-door",
    "prompt": "an open wooden door leading out to a sunlit garden in the morning, light pouring in, no people",
    "seed": 1015
+  },
+  {
+   "id": "bg-sky",
+   "prompt": "soft white clouds in a bright blue morning sky with sun rays, no people",
+   "seed": 3000
+  },
+  {
+   "id": "bg-river",
+   "prompt": "clear mountain stream flowing over stones in a green forest at morning, no people",
+   "seed": 3001
+  },
+  {
+   "id": "bg-wheat",
+   "prompt": "golden wheat field under a warm sunrise sky, no people",
+   "seed": 3002
+  },
+  {
+   "id": "bg-forest",
+   "prompt": "sunbeams through tall trees in a peaceful forest at morning, no people",
+   "seed": 3003
+  },
+  {
+   "id": "bg-sunset-sea",
+   "prompt": "calm sea under a glowing orange and pink sky at dawn, no people",
+   "seed": 3004
+  },
+  {
+   "id": "bg-garden",
+   "prompt": "quiet garden path with flowers and soft morning light, no people",
+   "seed": 3005
+  },
+  {
+   "id": "bg-hills",
+   "prompt": "green rolling hills with a single tree under a soft sunrise, no people",
+   "seed": 3006
+  },
+  {
+   "id": "bg-snow",
+   "prompt": "snowy pine forest glowing in gentle morning sun, no people",
+   "seed": 3007
   }
  ]
 }
