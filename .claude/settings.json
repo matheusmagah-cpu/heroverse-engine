@@ -3,11 +3,24 @@
     "allow": [
       "Bash(git push -u origin claude/*)",
       "Bash(git push origin claude/*)",
+      "Bash(git *)",
+      "Bash(cd *)",
       "Bash(python3 *)",
       "Bash(ffmpeg *)",
       "Bash(ffprobe *)",
-      "mcp__github__create_or_update_file",
-      "mcp__github__actions_run_trigger"
+      "Bash(cat *)",
+      "Bash(sed *)",
+      "Bash(grep *)",
+      "Bash(ls *)",
+      "Bash(echo *)",
+      "Bash(date *)",
+      "Bash(until *)",
+      "Write(migration/**)",
+      "Edit(migration/**)",
+      "Write(.github/**)",
+      "Edit(.github/**)",
+      "mcp__github",
+      "mcp__claude-code-remote"
     ]
   }
 }
