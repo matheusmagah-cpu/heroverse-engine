@@ -22,6 +22,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pilot_render import REFERENCES, RATE_OUT, TAIL, MUSIC_OFFSET, probe_duration, run, sha256  # noqa: E402
 import motion as camera  # noqa: E402
 
+# final file: crf 18 (visually lossless); a slower preset where the CPU allows packs the same quality in fewer bytes
+FINAL_PRESET = "medium" if (os.cpu_count() or 2) >= 4 else "veryfast"
 MOTIONS = ("push_in", "drift", "pull_out", "pan_right", "push_in", "pan_left")
 
 FADE = 0.6
@@ -332,7 +334,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "holds.txt"), "-i", str(mix),
          "-loop", "1", "-framerate", "30", "-i", str(graded_figure if cine else figure_path),
          "-filter_complex", graph, "-map", "[vout]", "-map", "1:a:0", "-shortest",
-         "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-r", "30", "-g", "60",
+         "-c:v", "libx264", "-preset", FINAL_PRESET, "-crf", "18", "-r", "30", "-g", "60",
          "-c:a", "aac", "-b:a", "192k", "-ar", str(RATE_OUT), "-t", f"{total:.3f}", "-movflags", "+faststart",
          str(final)])
     mark("final_encode")

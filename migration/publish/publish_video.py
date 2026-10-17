@@ -119,6 +119,7 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
     receipt = {"version": "publish-receipt-v1", "key": key, "video_id": vid, "url": f"https://youtu.be/{vid}",
                "channel_id": final["snippet"]["channelId"], "title": final["snippet"]["title"],
                "privacy": final["status"]["privacyStatus"], "publish_at": final["status"].get("publishAt"),
+               "upload_status": final["status"].get("uploadStatus"),
                "steps": entry["steps"], "verified_at": datetime.now(timezone.utc).isoformat()}
     Path(receipt_path).write_text(json.dumps(receipt, indent=1) + "\n")
     print(json.dumps(receipt))

@@ -48,6 +48,15 @@ jobs:
           mkdir -p migration/publish/receipts
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_shorts.py "$d/shorts/shorts.json" "$RUNNER_TEMP/shorts" "$key" \
             migration/publish/ledger.json "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" "$SLOTS"
+      - name: Delete the published Shorts files from the private release (owner rule)
+        run: |
+          r="migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json"
+          python3 -I -c "import json,sys;[print(x['file'],x['upload_status']) for x in json.load(open(sys.argv[1]))['shorts']]" "$r" |
+          while read -r f st; do
+            case "$st" in uploaded|processed) ;; *) echo "KEEP $f ($st)"; continue;; esac
+            sha=$(python3 -I -c "import json,sys;print(next(s['sha256'] for s in json.load(open(sys.argv[1]))['shorts'] if s['file']==sys.argv[2]))" "migration/production/$PILOT/shorts/shorts.json" "$f")
+            gh release delete-asset "$TAG" "$PILOT-${f%.mp4}-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" -y
+          done
       - name: Record ledger and receipt
         if: always()
         run: |
