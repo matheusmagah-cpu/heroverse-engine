@@ -99,13 +99,48 @@ def model(rows):
             "fast_le_90d_channels": sorted(fast, key=lambda r: r["activity_days"])}
 
 
+STRATEGIES = {
+    "long_20min_plus_daily": lambda r: (r["short_share"] or 0) <= 0.2 and (r["median_long_seconds"] or 0) >= 1200
+                                        and r["uploads_per_day"] >= 0.5,
+    "long_20min_plus_slower": lambda r: (r["short_share"] or 0) <= 0.2 and (r["median_long_seconds"] or 0) >= 1200
+                                         and r["uploads_per_day"] < 0.5,
+    "long_3_to_20min": lambda r: (r["short_share"] or 0) <= 0.2 and 180 < (r["median_long_seconds"] or 0) < 1200,
+    "mixed_long_and_shorts": lambda r: 0.2 < (r["short_share"] or 0) < 0.8,
+    "shorts_heavy": lambda r: (r["short_share"] or 0) >= 0.8,
+}
+
+
+def by_strategy(rows):
+    out = {}
+    for name, keep in STRATEGIES.items():
+        group = [r for r in rows if keep(r)]
+        bands = []
+        for lo, hi in AGE_BANDS[:4]:
+            b = [r for r in group if lo <= r["activity_days"] <= hi]
+            k = sum(r["eligible_long_low"] or r["eligible_shorts"] for r in b)
+            bands.append({"activity_days": [lo, hi], "n": len(b), "k_low_retention": k,
+                          "share": round(k / len(b), 4) if b else None, "wilson90": wilson(k, len(b))})
+        out[name] = bands
+    return out
+
+
+def conversion(rows):
+    longs = [r for r in rows if (r["short_share"] or 0) <= 0.2 and r["long_views"] > 5000]
+    ratios = sorted(r["subscribers"] / r["long_views"] * 1000 for r in longs)
+    if not ratios:
+        return None
+    return {"channels": len(ratios), "subs_per_1000_long_views_p25": round(ratios[len(ratios) // 4], 2),
+            "median": round(ratios[len(ratios) // 2], 2), "p75": round(ratios[3 * len(ratios) // 4], 2)}
+
+
 def main(out, paths):
     panels = [json.loads(Path(p).read_text()) for p in paths]
     latest = max(panels, key=lambda p: p["captured_at"])
     rows = channel_rows(latest)
-    result = {"version": "ypp-market-model-v1", "panel_captured_at": latest["captured_at"],
+    result = {"version": "ypp-market-model-v2", "panel_captured_at": latest["captured_at"],
               "channels_in_panel": len(latest["channels"]), "channels_modelled": len(rows),
               "retention_scenarios": RETENTION_SCENARIOS, **model(rows),
+              "by_strategy_low_retention": by_strategy(rows), "subscriber_conversion": conversion(rows),
               "limits": ["Public statistics only: real watch hours, retention, CTR, monetization status and RPM of other "
                          "channels are unknown; eligibility is a proxy under stated retention scenarios.",
                          "Cross-sectional: share of channels of a given activity age already over the proxy, not a "

@@ -1,0 +1,1676 @@
+{
+ "version": "ypp-market-model-v2",
+ "panel_captured_at": "2026-10-17T10:28:07Z",
+ "channels_in_panel": 2115,
+ "channels_modelled": 389,
+ "retention_scenarios": {
+  "low": 0.2,
+  "mid": 0.3,
+  "high": 0.45
+ },
+ "bands": [
+  {
+   "activity_days": [
+    0,
+    30
+   ],
+   "channels": 175,
+   "eligible_low": {
+    "k": 11,
+    "share": 0.0629,
+    "wilson90": [
+     0.0388,
+     0.1002
+    ]
+   },
+   "eligible_mid": {
+    "k": 11,
+    "share": 0.0629,
+    "wilson90": [
+     0.0388,
+     0.1002
+    ]
+   },
+   "eligible_high": {
+    "k": 11,
+    "share": 0.0629,
+    "wilson90": [
+     0.0388,
+     0.1002
+    ]
+   },
+   "subs_1000": {
+    "k": 30,
+    "wilson90": [
+     0.1297,
+     0.2232
+    ]
+   }
+  },
+  {
+   "activity_days": [
+    31,
+    60
+   ],
+   "channels": 97,
+   "eligible_low": {
+    "k": 13,
+    "share": 0.134,
+    "wilson90": [
+     0.087,
+     0.2009
+    ]
+   },
+   "eligible_mid": {
+    "k": 14,
+    "share": 0.1443,
+    "wilson90": [
+     0.0953,
+     0.2127
+    ]
+   },
+   "eligible_high": {
+    "k": 14,
+    "share": 0.1443,
+    "wilson90": [
+     0.0953,
+     0.2127
+    ]
+   },
+   "subs_1000": {
+    "k": 43,
+    "wilson90": [
+     0.363,
+     0.5267
+    ]
+   }
+  },
+  {
+   "activity_days": [
+    61,
+    90
+   ],
+   "channels": 77,
+   "eligible_low": {
+    "k": 20,
+    "share": 0.2597,
+    "wilson90": [
+     0.1867,
+     0.3491
+    ]
+   },
+   "eligible_mid": {
+    "k": 20,
+    "share": 0.2597,
+    "wilson90": [
+     0.1867,
+     0.3491
+    ]
+   },
+   "eligible_high": {
+    "k": 22,
+    "share": 0.2857,
+    "wilson90": [
+     0.2094,
+     0.3765
+    ]
+   },
+   "subs_1000": {
+    "k": 41,
+    "wilson90": [
+     0.4394,
+     0.6233
+    ]
+   }
+  },
+  {
+   "activity_days": [
+    91,
+    180
+   ],
+   "channels": 40,
+   "eligible_low": {
+    "k": 7,
+    "share": 0.175,
+    "wilson90": [
+     0.0978,
+     0.2934
+    ]
+   },
+   "eligible_mid": {
+    "k": 7,
+    "share": 0.175,
+    "wilson90": [
+     0.0978,
+     0.2934
+    ]
+   },
+   "eligible_high": {
+    "k": 9,
+    "share": 0.225,
+    "wilson90": [
+     0.1359,
+     0.349
+    ]
+   },
+   "subs_1000": {
+    "k": 25,
+    "wilson90": [
+     0.495,
+     0.7392
+    ]
+   }
+  },
+  {
+   "activity_days": [
+    181,
+    365
+   ],
+   "channels": 0,
+   "eligible_low": {
+    "k": 0,
+    "share": null,
+    "wilson90": null
+   },
+   "eligible_mid": {
+    "k": 0,
+    "share": null,
+    "wilson90": null
+   },
+   "eligible_high": {
+    "k": 0,
+    "share": null,
+    "wilson90": null
+   },
+   "subs_1000": {
+    "k": 0,
+    "wilson90": null
+   }
+  }
+ ],
+ "fast_le_90d_profile": {
+  "channels": 45,
+  "median_uploads_per_day": 1.0,
+  "median_short_share": 0.0,
+  "median_long_seconds": 2171.0,
+  "median_top_video_share": 0.274,
+  "median_subscribers": 5120,
+  "median_subs_per_day": 123.0
+ },
+ "rest_le_90d_profile": {
+  "channels": 304,
+  "median_uploads_per_day": 1.333,
+  "median_short_share": 0.978,
+  "median_long_seconds": 520.5,
+  "median_top_video_share": 0.258,
+  "median_subscribers": 163.0,
+  "median_subs_per_day": 9.165
+ },
+ "fast_le_90d_channels": [
+  {
+   "channel_id": "UC59dm_A7uRyj-32HOYLMPyg",
+   "title": "Fact Rohan K",
+   "activity_days": 10,
+   "subscribers": 2940,
+   "videos": 7,
+   "long_videos": 0,
+   "short_videos": 7,
+   "long_views": 0,
+   "short_views": 11213665,
+   "uploads_per_day": 0.7,
+   "short_share": 1.0,
+   "median_long_seconds": null,
+   "top_share": 0.565,
+   "queries": [
+    "jesus christ"
+   ],
+   "subs_per_day": 294.0,
+   "long_hours_low": 0.0,
+   "eligible_long_low": false,
+   "long_hours_mid": 0.0,
+   "eligible_long_mid": false,
+   "long_hours_high": 0.0,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCTRtx5A151ak9l2Xbt3fUlw",
+   "title": "XRL Vico",
+   "activity_days": 16,
+   "subscribers": 309000,
+   "videos": 15,
+   "long_videos": 0,
+   "short_videos": 15,
+   "long_views": 0,
+   "short_views": 16234945,
+   "uploads_per_day": 0.938,
+   "short_share": 1.0,
+   "median_long_seconds": null,
+   "top_share": 0.46,
+   "queries": [
+    "devotional"
+   ],
+   "subs_per_day": 19312.5,
+   "long_hours_low": 0.0,
+   "eligible_long_low": false,
+   "long_hours_mid": 0.0,
+   "eligible_long_mid": false,
+   "long_hours_high": 0.0,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCxkfYNzrKXKJGyNGCM0JE0w",
+   "title": "Bible Prophecy",
+   "activity_days": 18,
+   "subscribers": 9660,
+   "videos": 10,
+   "long_videos": 10,
+   "short_videos": 0,
+   "long_views": 1025097,
+   "short_views": 0,
+   "uploads_per_day": 0.556,
+   "short_share": 0.0,
+   "median_long_seconds": 1853,
+   "top_share": 0.243,
+   "queries": [
+    "end times prophecy"
+   ],
+   "subs_per_day": 536.67,
+   "long_hours_low": 113431.0,
+   "eligible_long_low": true,
+   "long_hours_mid": 170146.4,
+   "eligible_long_mid": true,
+   "long_hours_high": 255219.7,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCETWHEe1nj7SFiTO3ocLQEw",
+   "title": "Grace & Glory Prayers",
+   "activity_days": 19,
+   "subscribers": 2660,
+   "videos": 31,
+   "long_videos": 31,
+   "short_videos": 0,
+   "long_views": 362634,
+   "short_views": 0,
+   "uploads_per_day": 1.632,
+   "short_share": 0.0,
+   "median_long_seconds": 2161,
+   "top_share": 0.534,
+   "queries": [
+    "powerful prayer",
+    "prayer for financial breakthrough"
+   ],
+   "subs_per_day": 140.0,
+   "long_hours_low": 43957.9,
+   "eligible_long_low": true,
+   "long_hours_mid": 65936.9,
+   "eligible_long_mid": true,
+   "long_hours_high": 98905.4,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCz3_JbXDHp7cAwy7sE5S_Vw",
+   "title": "The Billy Graham Legacy",
+   "activity_days": 20,
+   "subscribers": 12100,
+   "videos": 21,
+   "long_videos": 21,
+   "short_videos": 0,
+   "long_views": 1430894,
+   "short_views": 0,
+   "uploads_per_day": 1.05,
+   "short_share": 0.0,
+   "median_long_seconds": 2456,
+   "top_share": 0.216,
+   "queries": [
+    "god message for you today"
+   ],
+   "subs_per_day": 605.0,
+   "long_hours_low": 196008.2,
+   "eligible_long_low": true,
+   "long_hours_mid": 294012.3,
+   "eligible_long_mid": true,
+   "long_hours_high": 441018.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCMijVbJw_OKi-ns1VPM19EQ",
+   "title": "Rouf on fire",
+   "activity_days": 21,
+   "subscribers": 60500,
+   "videos": 26,
+   "long_videos": 0,
+   "short_videos": 26,
+   "long_views": 0,
+   "short_views": 13534862,
+   "uploads_per_day": 1.238,
+   "short_share": 1.0,
+   "median_long_seconds": null,
+   "top_share": 0.271,
+   "queries": [
+    "devotional"
+   ],
+   "subs_per_day": 2880.95,
+   "long_hours_low": 0.0,
+   "eligible_long_low": false,
+   "long_hours_mid": 0.0,
+   "eligible_long_mid": false,
+   "long_hours_high": 0.0,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCBOyNYszhv0QxEQCUWLu-ag",
+   "title": "Just One Songs",
+   "activity_days": 26,
+   "subscribers": 2460,
+   "videos": 15,
+   "long_videos": 15,
+   "short_videos": 0,
+   "long_views": 640770,
+   "short_views": 0,
+   "uploads_per_day": 0.577,
+   "short_share": 0.0,
+   "median_long_seconds": 4020,
+   "top_share": 0.433,
+   "queries": [
+    "christian music",
+    "worship songs"
+   ],
+   "subs_per_day": 94.62,
+   "long_hours_low": 183796.2,
+   "eligible_long_low": true,
+   "long_hours_mid": 275694.4,
+   "eligible_long_mid": true,
+   "long_hours_high": 413541.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCGH1GXDCNTTHkhPiLBQ3sLw",
+   "title": "Beneath The Verse ",
+   "activity_days": 27,
+   "subscribers": 4750,
+   "videos": 26,
+   "long_videos": 26,
+   "short_videos": 0,
+   "long_views": 475435,
+   "short_views": 0,
+   "uploads_per_day": 0.963,
+   "short_share": 0.0,
+   "median_long_seconds": 1965,
+   "top_share": 0.342,
+   "queries": [
+    "god says"
+   ],
+   "subs_per_day": 175.93,
+   "long_hours_low": 51809.7,
+   "eligible_long_low": true,
+   "long_hours_mid": 77714.5,
+   "eligible_long_mid": true,
+   "long_hours_high": 116571.8,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCoWYmLyIhWQexF0l3iTlQhA",
+   "title": "JUMMY 70K",
+   "activity_days": 27,
+   "subscribers": 3910,
+   "videos": 28,
+   "long_videos": 12,
+   "short_videos": 15,
+   "long_views": 69010,
+   "short_views": 15806523,
+   "uploads_per_day": 1.037,
+   "short_share": 0.536,
+   "median_long_seconds": 4494,
+   "top_share": 0.329,
+   "queries": [
+    "jesus christ"
+   ],
+   "subs_per_day": 144.81,
+   "long_hours_low": 26612.8,
+   "eligible_long_low": true,
+   "long_hours_mid": 39919.2,
+   "eligible_long_mid": true,
+   "long_hours_high": 59878.8,
+   "eligible_long_high": true,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCXWn2XRkYsxg6QYfX7GuK1A",
+   "title": "AaronPageReacts",
+   "activity_days": 28,
+   "subscribers": 3090,
+   "videos": 7,
+   "long_videos": 7,
+   "short_videos": 0,
+   "long_views": 254955,
+   "short_views": 0,
+   "uploads_per_day": 0.25,
+   "short_share": 0.0,
+   "median_long_seconds": 646,
+   "top_share": 0.574,
+   "queries": [
+    "end times prophecy"
+   ],
+   "subs_per_day": 110.36,
+   "long_hours_low": 9634.2,
+   "eligible_long_low": true,
+   "long_hours_mid": 14451.2,
+   "eligible_long_mid": true,
+   "long_hours_high": 21676.9,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCLuXMSqr-nAjyjdBq_JxQUA",
+   "title": "Gospel Library",
+   "activity_days": 30,
+   "subscribers": 4650,
+   "videos": 8,
+   "long_videos": 8,
+   "short_videos": 0,
+   "long_views": 443439,
+   "short_views": 0,
+   "uploads_per_day": 0.267,
+   "short_share": 0.0,
+   "median_long_seconds": 1876,
+   "top_share": 0.336,
+   "queries": [
+    "night prayer before sleep"
+   ],
+   "subs_per_day": 155.0,
+   "long_hours_low": 51971.6,
+   "eligible_long_low": true,
+   "long_hours_mid": 77957.3,
+   "eligible_long_mid": true,
+   "long_hours_high": 116936.0,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCUdaoB4DfnoH7dFd8tcdvmg",
+   "title": "Heaven Speaks",
+   "activity_days": 31,
+   "subscribers": 1050,
+   "videos": 64,
+   "long_videos": 64,
+   "short_videos": 0,
+   "long_views": 74466,
+   "short_views": 0,
+   "uploads_per_day": 2.065,
+   "short_share": 0.0,
+   "median_long_seconds": 2355,
+   "top_share": 0.075,
+   "queries": [
+    "god message for you today",
+    "god says"
+   ],
+   "subs_per_day": 33.87,
+   "long_hours_low": 9717.0,
+   "eligible_long_low": true,
+   "long_hours_mid": 14575.6,
+   "eligible_long_mid": true,
+   "long_hours_high": 21863.3,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCr31TaVdhzeUFYQ-DZRwRIA",
+   "title": "Archangel Voice of Grace",
+   "activity_days": 33,
+   "subscribers": 3160,
+   "videos": 135,
+   "long_videos": 135,
+   "short_videos": 0,
+   "long_views": 157784,
+   "short_views": 0,
+   "uploads_per_day": 4.091,
+   "short_share": 0.0,
+   "median_long_seconds": 3745,
+   "top_share": 0.106,
+   "queries": [
+    "god says"
+   ],
+   "subs_per_day": 95.76,
+   "long_hours_low": 34440.1,
+   "eligible_long_low": true,
+   "long_hours_mid": 51660.1,
+   "eligible_long_mid": true,
+   "long_hours_high": 77490.2,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCZFxfTpybMR0G0PCggwyMkA",
+   "title": "God Nova",
+   "activity_days": 34,
+   "subscribers": 48500,
+   "videos": 33,
+   "long_videos": 0,
+   "short_videos": 33,
+   "long_views": 0,
+   "short_views": 29139568,
+   "uploads_per_day": 0.971,
+   "short_share": 1.0,
+   "median_long_seconds": null,
+   "top_share": 0.225,
+   "queries": [
+    "jesus christ"
+   ],
+   "subs_per_day": 1426.47,
+   "long_hours_low": 0.0,
+   "eligible_long_low": false,
+   "long_hours_mid": 0.0,
+   "eligible_long_mid": false,
+   "long_hours_high": 0.0,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCmqhnA7PYs5z6ci81pSBNQQ",
+   "title": "THE HIDDEN GOSPEL",
+   "activity_days": 34,
+   "subscribers": 24300,
+   "videos": 57,
+   "long_videos": 56,
+   "short_videos": 0,
+   "long_views": 2520599,
+   "short_views": 0,
+   "uploads_per_day": 1.676,
+   "short_share": 0.0,
+   "median_long_seconds": 2562,
+   "top_share": 0.123,
+   "queries": [
+    "god message for you today",
+    "night prayer before sleep"
+   ],
+   "subs_per_day": 714.71,
+   "long_hours_low": 393160.8,
+   "eligible_long_low": true,
+   "long_hours_mid": 589741.2,
+   "eligible_long_mid": true,
+   "long_hours_high": 884611.8,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UC2WKFGnZcieCfVbqJYw1cXw",
+   "title": "Luwalhati Kay Hesus",
+   "activity_days": 37,
+   "subscribers": 1580,
+   "videos": 30,
+   "long_videos": 29,
+   "short_videos": 0,
+   "long_views": 533220,
+   "short_views": 0,
+   "uploads_per_day": 0.811,
+   "short_share": 0.0,
+   "median_long_seconds": 42838,
+   "top_share": 0.56,
+   "queries": [
+    "worship songs"
+   ],
+   "subs_per_day": 42.7,
+   "long_hours_low": 197925.2,
+   "eligible_long_low": true,
+   "long_hours_mid": 296887.8,
+   "eligible_long_mid": true,
+   "long_hours_high": 445331.7,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCdTGY7cIQofe-vOiaBak9cg",
+   "title": "PerkyPeace media",
+   "activity_days": 37,
+   "subscribers": 3370,
+   "videos": 61,
+   "long_videos": 49,
+   "short_videos": 12,
+   "long_views": 314803,
+   "short_views": 531137,
+   "uploads_per_day": 1.649,
+   "short_share": 0.197,
+   "median_long_seconds": 181,
+   "top_share": 0.464,
+   "queries": [
+    "psalm 23"
+   ],
+   "subs_per_day": 91.08,
+   "long_hours_low": 3188.7,
+   "eligible_long_low": false,
+   "long_hours_mid": 4783.1,
+   "eligible_long_mid": true,
+   "long_hours_high": 7174.6,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCxDIcxfv_ilnAY7HzClQbIQ",
+   "title": "Deep Sleep With Bible",
+   "activity_days": 38,
+   "subscribers": 1170,
+   "videos": 73,
+   "long_videos": 48,
+   "short_videos": 25,
+   "long_views": 5995,
+   "short_views": 8240,
+   "uploads_per_day": 1.921,
+   "short_share": 0.342,
+   "median_long_seconds": 12583,
+   "top_share": 0.079,
+   "queries": [
+    "psalm 23",
+    "psalm 91"
+   ],
+   "subs_per_day": 30.79,
+   "long_hours_low": 4177.1,
+   "eligible_long_low": true,
+   "long_hours_mid": 6265.7,
+   "eligible_long_mid": true,
+   "long_hours_high": 9398.6,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCxkrTBqTjjB3Zpn2pgMlhug",
+   "title": "Pabitra Bible Vachan ",
+   "activity_days": 42,
+   "subscribers": 1470,
+   "videos": 96,
+   "long_videos": 81,
+   "short_videos": 14,
+   "long_views": 154762,
+   "short_views": 5077,
+   "uploads_per_day": 2.286,
+   "short_share": 0.146,
+   "median_long_seconds": 1502,
+   "top_share": 0.192,
+   "queries": [
+    "night prayer before sleep"
+   ],
+   "subs_per_day": 35.0,
+   "long_hours_low": 70238.8,
+   "eligible_long_low": true,
+   "long_hours_mid": 105358.2,
+   "eligible_long_mid": true,
+   "long_hours_high": 158037.3,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCOP4b21e6DXSlbM_WtCyD7A",
+   "title": "Heaven bread",
+   "activity_days": 43,
+   "subscribers": 4980,
+   "videos": 29,
+   "long_videos": 20,
+   "short_videos": 9,
+   "long_views": 1018637,
+   "short_views": 12794,
+   "uploads_per_day": 0.674,
+   "short_share": 0.31,
+   "median_long_seconds": 1661,
+   "top_share": 0.211,
+   "queries": [
+    "bible stories",
+    "end times prophecy"
+   ],
+   "subs_per_day": 115.81,
+   "long_hours_low": 89643.6,
+   "eligible_long_low": true,
+   "long_hours_mid": 134465.4,
+   "eligible_long_mid": true,
+   "long_hours_high": 201698.1,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCXMyCeE4RwF-NzKDmtCE0kg",
+   "title": "The Ancient Bible",
+   "activity_days": 44,
+   "subscribers": 2470,
+   "videos": 35,
+   "long_videos": 35,
+   "short_videos": 0,
+   "long_views": 838432,
+   "short_views": 0,
+   "uploads_per_day": 0.795,
+   "short_share": 0.0,
+   "median_long_seconds": 881,
+   "top_share": 0.641,
+   "queries": [
+    "bible stories"
+   ],
+   "subs_per_day": 56.14,
+   "long_hours_low": 44520.3,
+   "eligible_long_low": true,
+   "long_hours_mid": 66780.4,
+   "eligible_long_mid": true,
+   "long_hours_high": 100170.7,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCAOiKo0Ad8F_eRdxgpQSW_A",
+   "title": "Holy Moments",
+   "activity_days": 45,
+   "subscribers": 1690,
+   "videos": 19,
+   "long_videos": 19,
+   "short_videos": 0,
+   "long_views": 294438,
+   "short_views": 0,
+   "uploads_per_day": 0.422,
+   "short_share": 0.0,
+   "median_long_seconds": 11372,
+   "top_share": 0.597,
+   "queries": [
+    "bible study"
+   ],
+   "subs_per_day": 37.56,
+   "long_hours_low": 183898.5,
+   "eligible_long_low": true,
+   "long_hours_mid": 275847.7,
+   "eligible_long_mid": true,
+   "long_hours_high": 413771.6,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCOw8XedrTNMWCd1OtL3cK9w",
+   "title": "ZX Collection Hub",
+   "activity_days": 47,
+   "subscribers": 17400,
+   "videos": 76,
+   "long_videos": 0,
+   "short_videos": 76,
+   "long_views": 0,
+   "short_views": 20574213,
+   "uploads_per_day": 1.617,
+   "short_share": 1.0,
+   "median_long_seconds": null,
+   "top_share": 0.49,
+   "queries": [
+    "jesus christ"
+   ],
+   "subs_per_day": 370.21,
+   "long_hours_low": 0.0,
+   "eligible_long_low": false,
+   "long_hours_mid": 0.0,
+   "eligible_long_mid": false,
+   "long_hours_high": 0.0,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCcI29b2xr7wbexrbQfCbF-w",
+   "title": "Zion Holy Worship",
+   "activity_days": 54,
+   "subscribers": 11500,
+   "videos": 14,
+   "long_videos": 14,
+   "short_videos": 0,
+   "long_views": 782391,
+   "short_views": 0,
+   "uploads_per_day": 0.259,
+   "short_share": 0.0,
+   "median_long_seconds": 2467,
+   "top_share": 0.208,
+   "queries": [
+    "powerful prayer"
+   ],
+   "subs_per_day": 212.96,
+   "long_hours_low": 105843.3,
+   "eligible_long_low": true,
+   "long_hours_mid": 158765.0,
+   "eligible_long_mid": true,
+   "long_hours_high": 238147.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCNjJ0ogbBKZcWMMh6PZisow",
+   "title": "Ryan Lau Discovery",
+   "activity_days": 57,
+   "subscribers": 27100,
+   "videos": 13,
+   "long_videos": 12,
+   "short_videos": 1,
+   "long_views": 458565,
+   "short_views": 3700,
+   "uploads_per_day": 0.228,
+   "short_share": 0.077,
+   "median_long_seconds": 1073,
+   "top_share": 0.431,
+   "queries": [
+    "end times prophecy"
+   ],
+   "subs_per_day": 475.44,
+   "long_hours_low": 24025.5,
+   "eligible_long_low": true,
+   "long_hours_mid": 36038.3,
+   "eligible_long_mid": true,
+   "long_hours_high": 54057.4,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCY8SCWrnwJjs_fZg3UqPZ3A",
+   "title": "Corazón en Oración",
+   "activity_days": 61,
+   "subscribers": 1930,
+   "videos": 45,
+   "long_videos": 45,
+   "short_videos": 0,
+   "long_views": 254867,
+   "short_views": 0,
+   "uploads_per_day": 0.738,
+   "short_share": 0.0,
+   "median_long_seconds": 5638,
+   "top_share": 0.185,
+   "queries": [
+    "psalm 23"
+   ],
+   "subs_per_day": 31.64,
+   "long_hours_low": 81113.3,
+   "eligible_long_low": true,
+   "long_hours_mid": 121669.9,
+   "eligible_long_mid": true,
+   "long_hours_high": 182504.9,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCzatL8HmKMs1axIplMVABsg",
+   "title": "Prayer of Hope",
+   "activity_days": 61,
+   "subscribers": 3710,
+   "videos": 56,
+   "long_videos": 56,
+   "short_videos": 0,
+   "long_views": 613859,
+   "short_views": 0,
+   "uploads_per_day": 0.918,
+   "short_share": 0.0,
+   "median_long_seconds": 3310,
+   "top_share": 0.084,
+   "queries": [
+    "prayer for my family"
+   ],
+   "subs_per_day": 60.82,
+   "long_hours_low": 119895.2,
+   "eligible_long_low": true,
+   "long_hours_mid": 179842.7,
+   "eligible_long_mid": true,
+   "long_hours_high": 269764.1,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCXS-Bca7f0n6Sfy7eb7iGUw",
+   "title": "Wigglesworth Messages",
+   "activity_days": 63,
+   "subscribers": 5220,
+   "videos": 68,
+   "long_videos": 68,
+   "short_videos": 0,
+   "long_views": 390914,
+   "short_views": 0,
+   "uploads_per_day": 1.079,
+   "short_share": 0.0,
+   "median_long_seconds": 2254,
+   "top_share": 0.457,
+   "queries": [
+    "prayer for healing"
+   ],
+   "subs_per_day": 82.86,
+   "long_hours_low": 55800.0,
+   "eligible_long_low": true,
+   "long_hours_mid": 83700.0,
+   "eligible_long_mid": true,
+   "long_hours_high": 125550.0,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCUrlXR8_1DnJC5i2Z8f-oZQ",
+   "title": "Bible Stories TV 247",
+   "activity_days": 65,
+   "subscribers": 5120,
+   "videos": 17,
+   "long_videos": 7,
+   "short_videos": 10,
+   "long_views": 617933,
+   "short_views": 6197,
+   "uploads_per_day": 0.262,
+   "short_share": 0.588,
+   "median_long_seconds": 506,
+   "top_share": 0.683,
+   "queries": [
+    "bible stories"
+   ],
+   "subs_per_day": 78.77,
+   "long_hours_low": 50486.0,
+   "eligible_long_low": true,
+   "long_hours_mid": 75729.1,
+   "eligible_long_mid": true,
+   "long_hours_high": 113593.6,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCKSBIX530oEh2D7l4lp20QQ",
+   "title": "Jesus Return",
+   "activity_days": 66,
+   "subscribers": 7330,
+   "videos": 115,
+   "long_videos": 115,
+   "short_videos": 0,
+   "long_views": 1034962,
+   "short_views": 0,
+   "uploads_per_day": 1.742,
+   "short_share": 0.0,
+   "median_long_seconds": 439,
+   "top_share": 0.2,
+   "queries": [
+    "holy spirit"
+   ],
+   "subs_per_day": 111.06,
+   "long_hours_low": 35821.1,
+   "eligible_long_low": true,
+   "long_hours_mid": 53731.7,
+   "eligible_long_mid": true,
+   "long_hours_high": 80597.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCrz0bWs77NmWxOTg24whZfA",
+   "title": "MUKESH JOHN OFFICIAL ",
+   "activity_days": 66,
+   "subscribers": 11500,
+   "videos": 123,
+   "long_videos": 46,
+   "short_videos": 77,
+   "long_views": 485672,
+   "short_views": 1216427,
+   "uploads_per_day": 1.864,
+   "short_share": 0.626,
+   "median_long_seconds": 181,
+   "top_share": 0.067,
+   "queries": [
+    "prayer for healing"
+   ],
+   "subs_per_day": 174.24,
+   "long_hours_low": 5242.4,
+   "eligible_long_low": true,
+   "long_hours_mid": 7863.6,
+   "eligible_long_mid": true,
+   "long_hours_high": 11795.4,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCDuVvrGnVT-r3s4nddkJJng",
+   "title": "Yonggi Cho Sermons",
+   "activity_days": 67,
+   "subscribers": 30900,
+   "videos": 131,
+   "long_videos": 130,
+   "short_videos": 0,
+   "long_views": 2040186,
+   "short_views": 0,
+   "uploads_per_day": 1.955,
+   "short_share": 0.0,
+   "median_long_seconds": 2595,
+   "top_share": 0.206,
+   "queries": [
+    "prayer for financial breakthrough"
+   ],
+   "subs_per_day": 461.19,
+   "long_hours_low": 347107.7,
+   "eligible_long_low": true,
+   "long_hours_mid": 520661.5,
+   "eligible_long_mid": true,
+   "long_hours_high": 780992.3,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCokIvqip_ZTnGabsfFpYq0Q",
+   "title": "Mercy Harbor Gospel",
+   "activity_days": 67,
+   "subscribers": 5950,
+   "videos": 67,
+   "long_videos": 67,
+   "short_videos": 0,
+   "long_views": 1167959,
+   "short_views": 0,
+   "uploads_per_day": 1.0,
+   "short_share": 0.0,
+   "median_long_seconds": 7658,
+   "top_share": 0.274,
+   "queries": [
+    "prayer for my family"
+   ],
+   "subs_per_day": 88.81,
+   "long_hours_low": 499265.6,
+   "eligible_long_low": true,
+   "long_hours_mid": 748898.4,
+   "eligible_long_mid": true,
+   "long_hours_high": 1123347.6,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCn25DjBqrbK5S0ANNuqZo3w",
+   "title": "Powerful Psalm Prayers",
+   "activity_days": 68,
+   "subscribers": 1590,
+   "videos": 28,
+   "long_videos": 28,
+   "short_videos": 0,
+   "long_views": 174297,
+   "short_views": 0,
+   "uploads_per_day": 0.412,
+   "short_share": 0.0,
+   "median_long_seconds": 1658,
+   "top_share": 0.464,
+   "queries": [
+    "prayer for protection",
+    "psalm 91"
+   ],
+   "subs_per_day": 23.38,
+   "long_hours_low": 22107.4,
+   "eligible_long_low": true,
+   "long_hours_mid": 33161.1,
+   "eligible_long_mid": true,
+   "long_hours_high": 49741.7,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCyewN3tL0tsRu0c72cBR0XQ",
+   "title": "sahwaz iclaimc",
+   "activity_days": 70,
+   "subscribers": 178000,
+   "videos": 123,
+   "long_videos": 0,
+   "short_videos": 123,
+   "long_views": 0,
+   "short_views": 56016437,
+   "uploads_per_day": 1.757,
+   "short_share": 1.0,
+   "median_long_seconds": null,
+   "top_share": 0.192,
+   "queries": [
+    "faith encouragement"
+   ],
+   "subs_per_day": 2542.86,
+   "long_hours_low": 0.0,
+   "eligible_long_low": false,
+   "long_hours_mid": 0.0,
+   "eligible_long_mid": false,
+   "long_hours_high": 0.0,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UC5d0kNPNAQ5aNQKH8lU33WQ",
+   "title": "Heaven’s Daily Whisper",
+   "activity_days": 72,
+   "subscribers": 4050,
+   "videos": 174,
+   "long_videos": 174,
+   "short_videos": 0,
+   "long_views": 321884,
+   "short_views": 0,
+   "uploads_per_day": 2.417,
+   "short_share": 0.0,
+   "median_long_seconds": 7249,
+   "top_share": 0.055,
+   "queries": [
+    "god message for you today"
+   ],
+   "subs_per_day": 56.25,
+   "long_hours_low": 142727.1,
+   "eligible_long_low": true,
+   "long_hours_mid": 214090.6,
+   "eligible_long_mid": true,
+   "long_hours_high": 321135.9,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCEp4ioHbfnrqQP7qXUdbiPg",
+   "title": "Glory Streams Worship ",
+   "activity_days": 72,
+   "subscribers": 2790,
+   "videos": 20,
+   "long_videos": 18,
+   "short_videos": 0,
+   "long_views": 130459,
+   "short_views": 0,
+   "uploads_per_day": 0.278,
+   "short_share": 0.0,
+   "median_long_seconds": 3637,
+   "top_share": 0.655,
+   "queries": [
+    "prayer for my family"
+   ],
+   "subs_per_day": 38.75,
+   "long_hours_low": 17911.3,
+   "eligible_long_low": true,
+   "long_hours_mid": 26867.0,
+   "eligible_long_mid": true,
+   "long_hours_high": 40300.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCMfhY-nHT4tp-YROgfREdpg",
+   "title": "HIDDEN BIBLE FACTS TELUGU-2026",
+   "activity_days": 72,
+   "subscribers": 28400,
+   "videos": 99,
+   "long_videos": 1,
+   "short_videos": 98,
+   "long_views": 2881,
+   "short_views": 13054193,
+   "uploads_per_day": 1.375,
+   "short_share": 0.99,
+   "median_long_seconds": 409,
+   "top_share": 0.189,
+   "queries": [
+    "bible facts",
+    "bible verses"
+   ],
+   "subs_per_day": 394.44,
+   "long_hours_low": 65.5,
+   "eligible_long_low": false,
+   "long_hours_mid": 98.2,
+   "eligible_long_mid": false,
+   "long_hours_high": 147.3,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UC_h1E8wccvaX1gTtx4VsYXw",
+   "title": "Morning Grace Prayers",
+   "activity_days": 72,
+   "subscribers": 10600,
+   "videos": 19,
+   "long_videos": 19,
+   "short_videos": 0,
+   "long_views": 950484,
+   "short_views": 0,
+   "uploads_per_day": 0.264,
+   "short_share": 0.0,
+   "median_long_seconds": 1636,
+   "top_share": 0.426,
+   "queries": [
+    "morning prayer",
+    "powerful prayer",
+    "prayer for protection"
+   ],
+   "subs_per_day": 147.22,
+   "long_hours_low": 84108.2,
+   "eligible_long_low": true,
+   "long_hours_mid": 126162.3,
+   "eligible_long_mid": true,
+   "long_hours_high": 189243.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCECWAnevToK6NwwlIn9AbIA",
+   "title": "AKZY EDITS",
+   "activity_days": 75,
+   "subscribers": 580000,
+   "videos": 120,
+   "long_videos": 5,
+   "short_videos": 114,
+   "long_views": 2785,
+   "short_views": 87757713,
+   "uploads_per_day": 1.6,
+   "short_share": 0.95,
+   "median_long_seconds": 2181,
+   "top_share": 0.111,
+   "queries": [
+    "jesus christ"
+   ],
+   "subs_per_day": 7733.33,
+   "long_hours_low": 382.5,
+   "eligible_long_low": false,
+   "long_hours_mid": 573.8,
+   "eligible_long_mid": false,
+   "long_hours_high": 860.7,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCklHpM_0MaL4O7VHFhYH9aw",
+   "title": "Kingdom Chronicles",
+   "activity_days": 77,
+   "subscribers": 127000,
+   "videos": 142,
+   "long_videos": 0,
+   "short_videos": 142,
+   "long_views": 0,
+   "short_views": 17189945,
+   "uploads_per_day": 1.844,
+   "short_share": 1.0,
+   "median_long_seconds": null,
+   "top_share": 0.691,
+   "queries": [
+    "gospel"
+   ],
+   "subs_per_day": 1649.35,
+   "long_hours_low": 0.0,
+   "eligible_long_low": false,
+   "long_hours_mid": 0.0,
+   "eligible_long_mid": false,
+   "long_hours_high": 0.0,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCPAqQ2pwhgDe8udeeUEmBVQ",
+   "title": "Immortal Rhythms",
+   "activity_days": 80,
+   "subscribers": 9840,
+   "videos": 23,
+   "long_videos": 23,
+   "short_videos": 0,
+   "long_views": 2287723,
+   "short_views": 0,
+   "uploads_per_day": 0.287,
+   "short_share": 0.0,
+   "median_long_seconds": 3609,
+   "top_share": 0.419,
+   "queries": [
+    "worship songs"
+   ],
+   "subs_per_day": 123.0,
+   "long_hours_low": 338823.8,
+   "eligible_long_low": true,
+   "long_hours_mid": 508235.6,
+   "eligible_long_mid": true,
+   "long_hours_high": 762353.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCp5rbjYu8EvokDj9XO_8kEA",
+   "title": "United Prayer",
+   "activity_days": 83,
+   "subscribers": 32300,
+   "videos": 180,
+   "long_videos": 35,
+   "short_videos": 144,
+   "long_views": 1987,
+   "short_views": 75199392,
+   "uploads_per_day": 2.169,
+   "short_share": 0.8,
+   "median_long_seconds": 855,
+   "top_share": 0.114,
+   "queries": [
+    "prayer for healing"
+   ],
+   "subs_per_day": 389.16,
+   "long_hours_low": 142.9,
+   "eligible_long_low": false,
+   "long_hours_mid": 214.3,
+   "eligible_long_mid": false,
+   "long_hours_high": 321.5,
+   "eligible_long_high": false,
+   "eligible_shorts": true
+  },
+  {
+   "channel_id": "UCzED6oPl2eNJiog0ySgqCrg",
+   "title": "Grace & Truth",
+   "activity_days": 87,
+   "subscribers": 1080,
+   "videos": 179,
+   "long_videos": 173,
+   "short_videos": 6,
+   "long_views": 457138,
+   "short_views": 7455,
+   "uploads_per_day": 2.057,
+   "short_share": 0.034,
+   "median_long_seconds": 398,
+   "top_share": 0.144,
+   "queries": [
+    "prayer for financial breakthrough"
+   ],
+   "subs_per_day": 12.41,
+   "long_hours_low": 10207.7,
+   "eligible_long_low": true,
+   "long_hours_mid": 15311.6,
+   "eligible_long_mid": true,
+   "long_hours_high": 22967.4,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  },
+  {
+   "channel_id": "UCOUGe50NDhFRgXbWiujWrrg",
+   "title": "Hill Worship Zimbabwe",
+   "activity_days": 89,
+   "subscribers": 5460,
+   "videos": 27,
+   "long_videos": 8,
+   "short_videos": 19,
+   "long_views": 427424,
+   "short_views": 1018216,
+   "uploads_per_day": 0.303,
+   "short_share": 0.704,
+   "median_long_seconds": 288,
+   "top_share": 0.521,
+   "queries": [
+    "gospel",
+    "worship songs"
+   ],
+   "subs_per_day": 61.35,
+   "long_hours_low": 8244.7,
+   "eligible_long_low": true,
+   "long_hours_mid": 12367.0,
+   "eligible_long_mid": true,
+   "long_hours_high": 18550.5,
+   "eligible_long_high": true,
+   "eligible_shorts": false
+  }
+ ],
+ "by_strategy_low_retention": {
+  "long_20min_plus_daily": [
+   {
+    "activity_days": [
+     0,
+     30
+    ],
+    "n": 22,
+    "k_low_retention": 5,
+    "share": 0.2273,
+    "wilson90": [
+     0.1153,
+     0.399
+    ]
+   },
+   {
+    "activity_days": [
+     31,
+     60
+    ],
+    "n": 13,
+    "k_low_retention": 5,
+    "share": 0.3846,
+    "wilson90": [
+     0.2016,
+     0.6074
+    ]
+   },
+   {
+    "activity_days": [
+     61,
+     90
+    ],
+    "n": 8,
+    "k_low_retention": 6,
+    "share": 0.75,
+    "wilson90": [
+     0.4601,
+     0.9135
+    ]
+   },
+   {
+    "activity_days": [
+     91,
+     180
+    ],
+    "n": 3,
+    "k_low_retention": 2,
+    "share": 0.6667,
+    "wilson90": [
+     0.2535,
+     0.9217
+    ]
+   }
+  ],
+  "long_20min_plus_slower": [
+   {
+    "activity_days": [
+     0,
+     30
+    ],
+    "n": 2,
+    "k_low_retention": 1,
+    "share": 0.5,
+    "wilson90": [
+     0.1209,
+     0.8791
+    ]
+   },
+   {
+    "activity_days": [
+     31,
+     60
+    ],
+    "n": 5,
+    "k_low_retention": 2,
+    "share": 0.4,
+    "wilson90": [
+     0.1427,
+     0.7275
+    ]
+   },
+   {
+    "activity_days": [
+     61,
+     90
+    ],
+    "n": 5,
+    "k_low_retention": 4,
+    "share": 0.8,
+    "wilson90": [
+     0.4353,
+     0.954
+    ]
+   },
+   {
+    "activity_days": [
+     91,
+     180
+    ],
+    "n": 1,
+    "k_low_retention": 0,
+    "share": 0.0,
+    "wilson90": [
+     0.0,
+     0.7302
+    ]
+   }
+  ],
+  "long_3_to_20min": [
+   {
+    "activity_days": [
+     0,
+     30
+    ],
+    "n": 7,
+    "k_low_retention": 1,
+    "share": 0.1429,
+    "wilson90": [
+     0.0325,
+     0.4523
+    ]
+   },
+   {
+    "activity_days": [
+     31,
+     60
+    ],
+    "n": 6,
+    "k_low_retention": 2,
+    "share": 0.3333,
+    "wilson90": [
+     0.1173,
+     0.653
+    ]
+   },
+   {
+    "activity_days": [
+     61,
+     90
+    ],
+    "n": 4,
+    "k_low_retention": 2,
+    "share": 0.5,
+    "wilson90": [
+     0.1824,
+     0.8176
+    ]
+   },
+   {
+    "activity_days": [
+     91,
+     180
+    ],
+    "n": 4,
+    "k_low_retention": 2,
+    "share": 0.5,
+    "wilson90": [
+     0.1824,
+     0.8176
+    ]
+   }
+  ],
+  "mixed_long_and_shorts": [
+   {
+    "activity_days": [
+     0,
+     30
+    ],
+    "n": 26,
+    "k_low_retention": 1,
+    "share": 0.0385,
+    "wilson90": [
+     0.0086,
+     0.1553
+    ]
+   },
+   {
+    "activity_days": [
+     31,
+     60
+    ],
+    "n": 12,
+    "k_low_retention": 2,
+    "share": 0.1667,
+    "wilson90": [
+     0.0568,
+     0.3992
+    ]
+   },
+   {
+    "activity_days": [
+     61,
+     90
+    ],
+    "n": 12,
+    "k_low_retention": 3,
+    "share": 0.25,
+    "wilson90": [
+     0.1046,
+     0.4874
+    ]
+   },
+   {
+    "activity_days": [
+     91,
+     180
+    ],
+    "n": 10,
+    "k_low_retention": 3,
+    "share": 0.3,
+    "wilson90": [
+     0.1269,
+     0.5583
+    ]
+   }
+  ],
+  "shorts_heavy": [
+   {
+    "activity_days": [
+     0,
+     30
+    ],
+    "n": 118,
+    "k_low_retention": 3,
+    "share": 0.0254,
+    "wilson90": [
+     0.0102,
+     0.0619
+    ]
+   },
+   {
+    "activity_days": [
+     31,
+     60
+    ],
+    "n": 61,
+    "k_low_retention": 2,
+    "share": 0.0328,
+    "wilson90": [
+     0.0109,
+     0.0944
+    ]
+   },
+   {
+    "activity_days": [
+     61,
+     90
+    ],
+    "n": 48,
+    "k_low_retention": 5,
+    "share": 0.1042,
+    "wilson90": [
+     0.0516,
+     0.199
+    ]
+   },
+   {
+    "activity_days": [
+     91,
+     180
+    ],
+    "n": 22,
+    "k_low_retention": 0,
+    "share": 0.0,
+    "wilson90": [
+     0.0,
+     0.1095
+    ]
+   }
+  ]
+ },
+ "subscriber_conversion": {
+  "channels": 56,
+  "subs_per_1000_long_views_p25": 5.74,
+  "median": 8.77,
+  "p75": 12.58
+ },
+ "limits": [
+  "Public statistics only: real watch hours, retention, CTR, monetization status and RPM of other channels are unknown; eligibility is a proxy under stated retention scenarios.",
+  "Cross-sectional: share of channels of a given activity age already over the proxy, not a followed cohort. Daily panels add trajectories.",
+  "Discovery requires an upload in the last 30 days that search returns; channels that stopped or were removed are missing (survivorship).",
+  "Upload samples are the most recent 50-200 videos; channels with longer histories are excluded from activity-age bands (marked truncated)."
+ ]
+}

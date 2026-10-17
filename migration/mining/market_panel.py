@@ -138,8 +138,21 @@ def uploads(client, playlist, pages):
     return videos, token is not None
 
 
-def build(client, now):
+def tracked_ids(prior_dir):
+    """Channels with fetched histories in earlier compact panels: always refreshed
+    (1 unit per 50 channels) so trajectories and registered forecasts can be scored."""
+    ids = set()
+    for path in sorted(Path(prior_dir).glob("panel-*.json")) if prior_dir else []:
+        for c in json.loads(path.read_text())["channels"]:
+            if c.get("uploads_status") == "FETCHED":
+                ids.add(c["channel_id"])
+    return ids
+
+
+def build(client, now, prior_dir=None):
     found = discover(client, now)
+    for cid in tracked_ids(prior_dir):
+        found.setdefault(cid, {"queries": {"TRACKED"}, "orders": {"tracked"}})
     info = channels(client, found)
     for cid, row in info.items():
         row["discovery_queries"] = sorted(found[cid]["queries"])
@@ -199,7 +212,8 @@ def compact(record):
 if __name__ == "__main__":
     out = Path(sys.argv[1])
     client = Client(access_token(), int(sys.argv[2]) if len(sys.argv) > 2 else 7500)
-    record = build(client, datetime.now(timezone.utc))
+    prior = Path(sys.argv[3]).parent if len(sys.argv) > 3 else None
+    record = build(client, datetime.now(timezone.utc), prior)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(record, ensure_ascii=False) + "\n")
     if len(sys.argv) > 3:
