@@ -1,14 +1,14 @@
 {
  "version": "pilot-manifest-v1",
  "pilot_id": "pilot-001",
- "output_sha256": "e7f665724dfe782443a0d62c87d3cf18528f3ab710002a81bc4533cbb3c4e8db",
- "output_seconds": 610.8,
+ "output_sha256": "3b962b81f760c3be2fe551e858a71151c4f08e2290431fdb9266f2e2416861f8",
+ "output_seconds": 610.7,
  "script_sha256": "39f543f3766ad3567c9a746d38de31756d4fd014b2b6074fe60041777e3030e5",
  "voice": {
   "engine": "Kokoro v1.0 (preserved, hash-pinned)",
   "voice_id": "am_michael",
   "speed": 0.85,
-  "voice_wav_sha256": "31b6d64c65706009035d1517e5c65e35b84517e47e7f971c71663552fc4aff94"
+  "voice_wav_sha256": "06f8c4fe518509c8e9405be4d31df2399a47b47468067bd943d46824a954ea95"
  },
  "music": {
   "file": "original-rest-music.lossless.flac",
@@ -1375,7 +1375,7 @@
    "source_start": 31.43,
    "duration": 1.61,
    "timeline_start": 365.72,
-   "segment": "prayer"
+   "segment": "prayer-provision"
   },
   {
    "video_id": "mEKdag_zn44",
@@ -2183,9 +2183,9 @@
    "segment": "prayer"
   },
   {
-   "video_id": "dfe_rN_-gd8",
-   "source_start": 38.76,
-   "duration": 0.24,
+   "video_id": "xe-ForUikRk",
+   "source_start": 38.37,
+   "duration": 0.14,
    "timeline_start": 610.55,
    "segment": "prayer"
   }
@@ -2207,127 +2207,127 @@
   {
    "id": "invitation",
    "start": 17.863,
-   "end": 46.505
+   "end": 46.441
   },
   {
    "id": "scripture-1",
-   "start": 47.705,
-   "end": 65.727
+   "start": 47.641,
+   "end": 65.663
   },
   {
    "id": "reflection-1",
-   "start": 67.227,
-   "end": 91.804
+   "start": 67.163,
+   "end": 91.719
   },
   {
    "id": "scripture-2",
-   "start": 93.004,
-   "end": 108.273
+   "start": 92.919,
+   "end": 108.188
   },
   {
    "id": "reflection-2",
-   "start": 109.773,
-   "end": 133.381
+   "start": 109.688,
+   "end": 133.296
   },
   {
    "id": "scripture-3",
-   "start": 134.581,
-   "end": 153.039
+   "start": 134.496,
+   "end": 152.975
   },
   {
    "id": "reflection-3",
-   "start": 154.539,
-   "end": 185.089
+   "start": 154.475,
+   "end": 185.047
   },
   {
    "id": "stillness",
-   "start": 186.289,
-   "end": 197.219
+   "start": 186.247,
+   "end": 197.155
   },
   {
    "id": "transition",
-   "start": 203.219,
-   "end": 214.297
+   "start": 203.155,
+   "end": 214.255
   },
   {
    "id": "prayer-1",
-   "start": 215.797,
-   "end": 237.817
+   "start": 215.755,
+   "end": 237.753
   },
   {
    "id": "prayer-2",
-   "start": 239.017,
-   "end": 262.412
+   "start": 238.953,
+   "end": 262.348
   },
   {
    "id": "prayer-mind",
-   "start": 263.612,
-   "end": 289.6
+   "start": 263.548,
+   "end": 289.536
   },
   {
    "id": "prayer-decisions",
-   "start": 290.8,
-   "end": 316.98
+   "start": 290.736,
+   "end": 316.937
   },
   {
    "id": "prayer-3",
-   "start": 318.18,
-   "end": 339.868
+   "start": 318.137,
+   "end": 339.804
   },
   {
    "id": "prayer-4",
-   "start": 341.068,
-   "end": 364.56
+   "start": 341.004,
+   "end": 364.517
   },
   {
    "id": "prayer-provision",
-   "start": 365.76,
-   "end": 390.916
+   "start": 365.717,
+   "end": 390.873
   },
   {
    "id": "scripture-4",
-   "start": 392.116,
-   "end": 413.887
+   "start": 392.073,
+   "end": 413.844
   },
   {
    "id": "prayer-5",
-   "start": 415.387,
-   "end": 434.261
+   "start": 415.344,
+   "end": 434.219
   },
   {
    "id": "prayer-weary",
-   "start": 435.461,
-   "end": 465.707
+   "start": 435.419,
+   "end": 465.643
   },
   {
    "id": "declaration",
-   "start": 466.907,
-   "end": 489.253
+   "start": 466.843,
+   "end": 489.189
   },
   {
    "id": "scripture-5",
-   "start": 490.753,
-   "end": 506.535
+   "start": 490.689,
+   "end": 506.471
   },
   {
    "id": "reflection-4",
-   "start": 508.035,
-   "end": 547.083
+   "start": 507.971,
+   "end": 546.976
   },
   {
    "id": "payoff",
-   "start": 548.283,
-   "end": 569.577
+   "start": 548.176,
+   "end": 569.471
   },
   {
    "id": "blessing",
-   "start": 570.777,
-   "end": 589.908
+   "start": 570.671,
+   "end": 589.801
   },
   {
    "id": "cta",
-   "start": 591.408,
-   "end": 605.793
+   "start": 591.301,
+   "end": 605.687
   }
  ],
  "upload_performed": false,
