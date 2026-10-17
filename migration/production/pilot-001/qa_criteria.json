@@ -1,0 +1,35 @@
+{
+  "version": "pilot-qa-criteria-v1",
+  "frozen_before_render_code_existed": true,
+  "frozen_at_utc": "2026-10-17T04:10:00Z",
+  "basis": "Measured invariants of the FormatArchetype candidate (migration/evidence/av-cohort-comparison-20261017.json), the ASR intelligibility gate already used for the corrected master (WER <= 0.08 there), and the rights requirements of docs/08_POLICY_AND_RIGHTS.md.",
+  "technical": {
+    "full_decode_without_errors": true,
+    "video": "1920x1080, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+    "duration_seconds_min": 601,
+    "integrated_lufs": [-16.0, -14.0],
+    "true_peak_dbtp_max": -1.0
+  },
+  "speech": {
+    "speech_presence_min": 0.85,
+    "singing_presence_max": 0.0,
+    "wer_vs_script_max": 0.10,
+    "accepted_words_per_minute": [115, 165],
+    "first_word_onset_seconds_max": 1.5,
+    "hook_second_person_within_seconds": 8
+  },
+  "editing": {
+    "picture_changes_per_minute": [20, 40],
+    "median_shot_seconds": [1.4, 2.8],
+    "max_reuse_of_any_source_second": 1
+  },
+  "rights": {
+    "every_visual_clip_creative_commons_with_attribution": true,
+    "picture_only_from_clips_no_clip_audio": true,
+    "music_owned_generator_with_hash": true,
+    "voice_model_hash_pinned": true,
+    "script_original_with_public_domain_scripture_only": true
+  },
+  "failure_policy": "Any FAIL blocks approval; criteria are not edited after results to pass.",
+  "not_claimed": ["Audience response, CTR, retention or revenue", "Perceptual approval by a human", "Publication authority"]
+}
