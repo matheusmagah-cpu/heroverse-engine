@@ -1,0 +1,71 @@
+name: HeroVerse Kaggle collect (record finished productions)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 */2 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-kaggle-collect
+  cancel-in-progress: false
+jobs:
+  collect:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      KAGGLE_RAW: ${{ secrets.KAGGLE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Anything pending?
+        id: pending
+        run: |
+          n=$(python3 -I -c "import json,pathlib;p=pathlib.Path('migration/kaggle/pending.json');print(len(json.loads(p.read_text())['jobs']) if p.exists() else 0)")
+          echo "count=$n" >> "$GITHUB_OUTPUT"; echo "pending jobs: $n"
+      - name: Kaggle client
+        if: steps.pending.outputs.count != '0'
+        run: |
+          token=$(printf '%s' "$KAGGLE_RAW" | grep -o 'KGAT_[A-Za-z0-9]*' | head -1)
+          test -n "$token" || { echo KAGGLE_SECRET_MISSING; exit 1; }
+          echo "::add-mask::$token"
+          echo "KAGGLE_API_TOKEN=$token" >> "$GITHUB_ENV"
+          python3 -m venv "$RUNNER_TEMP/k" && "$RUNNER_TEMP/k/bin/pip" install -q --disable-pip-version-check 'kaggle>=1.7'
+          echo "$RUNNER_TEMP/k/bin" >> "$GITHUB_PATH"
+      - name: Collect finished jobs and record evidence
+        if: steps.pending.outputs.count != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for row in $(python3 -I -c "import json;[print(j['slug']+'|'+j['pilot']) for j in json.load(open('migration/kaggle/pending.json'))['jobs']]"); do
+            slug="${row%%|*}"; PILOT="${row##*|}"; o="$RUNNER_TEMP/$slug"
+            state=$(python3 -I -B migration/kaggle/kaggle_run.py collect "$slug" "$o" | tail -1)
+            echo "$slug: $state"
+            [ "$state" = "RUNNING" ] && continue
+            dest="migration/production/$PILOT"; mkdir -p "$dest/out" "$dest/inspection" "$dest/shorts" migration/kaggle/logs
+            cp "$o"/*.log "migration/kaggle/logs/$slug-$GITHUB_RUN_ID.log" 2>/dev/null || true
+            if [ "$state" = "COMPLETE" ] && [ -f "$o/out/pilot.mp4" ]; then
+              sha=$(sha256sum "$o/out/pilot.mp4" | cut -d' ' -f1)
+              cp "$o/out/pilot.mp4" "$RUNNER_TEMP/$PILOT-sha256-$sha.mp4"
+              gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
+              cp "$o/out/package/thumbnail.jpg" "$RUNNER_TEMP/$PILOT-thumbnail.jpg"
+              gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-thumbnail.jpg" --repo "$GITHUB_REPOSITORY" --clobber
+              for s in "$o"/out/shorts/short-*.mp4; do
+                [ -f "$s" ] || continue
+                ssha=$(sha256sum "$s" | cut -d' ' -f1); n=$(basename "$s" .mp4)
+                cp "$s" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4"
+                gh release upload "$TAG" "$RUNNER_TEMP/$PILOT-$n-sha256-$ssha.mp4" --repo "$GITHUB_REPOSITORY" --clobber
+              done
+              cp "$o/out/manifest.json" "$o/out/timeline.json" "$o/out/captions.ass" "$o/out/qa.json" "$o/out/package/package.json" "$dest/out/"
+              cp "$o"/out/inspection/*.jpg "$dest/inspection/"; cp "$o/out/package/thumbnail.jpg" "$dest/inspection/thumbnail.jpg"
+              cp "$o/out/shorts/shorts.json" "$dest/shorts/" 2>/dev/null || true
+              msg="Record $PILOT Kaggle production: render, QA, package, Shorts, inspection (run $GITHUB_RUN_ID; not published)"
+            else
+              msg="Record failed Kaggle job $slug (run $GITHUB_RUN_ID)"
+            fi
+            python3 -I -c "import json,sys;p='migration/kaggle/pending.json';d=json.load(open(p));d['jobs']=[j for j in d['jobs'] if j['slug']!=sys.argv[1]];open(p,'w').write(json.dumps(d,indent=1)+'\n')" "$slug"
+            git add migration/kaggle "$dest"
+            git commit -q -m "$msg"
+          done
+          git pull --rebase -q origin main && git push -q origin HEAD:main || true
