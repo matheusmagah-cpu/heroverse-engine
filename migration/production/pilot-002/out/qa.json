@@ -1,14 +1,14 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-002",
- "output_sha256": "56ab7e39742b5b37483de89c8cc9d6091930d66dfb82cc8483273abd59fb008e",
- "status": "FAIL",
+ "output_sha256": "52766f47e8871b37734bb06a45cdbf098fefcfbabe39f5f70bb216a15c1cfba6",
+ "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
   "video_format": true,
   "duration_min": true,
   "integrated_lufs": true,
-  "true_peak": false,
+  "true_peak": true,
   "speech_presence": true,
   "no_singing": true,
   "wer_vs_script": true,
@@ -31,25 +31,25 @@
  },
  "criteria_version": "pilot-qa-criteria-v2",
  "measurements": {
-  "duration_seconds": 1294.87,
+  "duration_seconds": 1295.2,
   "loudness": {
-   "integrated_lufs": -15.3,
+   "integrated_lufs": -15.5,
    "loudness_range_lu": 3.0,
-   "true_peak_dbtp": -0.8
+   "true_peak_dbtp": -2.1
   },
-  "speech_presence": 0.883,
-  "music_presence": 0.389,
-  "wer_vs_script": 0.0264,
-  "accepted_words_per_minute": 141.4,
+  "speech_presence": 0.891,
+  "music_presence": 0.399,
+  "wer_vs_script": 0.0283,
+  "accepted_words_per_minute": 141.1,
   "caption_lines": 593,
   "holds": 110,
-  "first_word_seconds": 0.08,
+  "first_word_seconds": 0.14,
   "editing": {
-   "picture_changes": 574,
-   "picture_changes_per_minute": 26.6,
+   "picture_changes": 562,
+   "picture_changes_per_minute": 26.03,
    "median_shot_seconds": 2.2,
-   "longest_shot_seconds": 9.933,
-   "motion_median_top_decile_diff": 0.007
+   "longest_shot_seconds": 9.867,
+   "motion_median_top_decile_diff": 0.0
   },
   "colour": {
    "mean_brightness": 0.4565,
@@ -58,15 +58,15 @@
    "saturation_std_over_time": 0.0862
   },
   "rhythm": {
-   "audio_onsets": 1992,
-   "audio_onsets_per_minute": 92.3,
+   "audio_onsets": 1991,
+   "audio_onsets_per_minute": 92.23,
    "tempo": {
-    "bpm": 49.66,
-    "confidence": 0.012
+    "bpm": 77.09,
+    "confidence": 0.01
    }
   }
  },
- "transcript_head": "Good morning! If you are holding this day with a tight chest, already counting what could go wrong, stay with me for the next few minutes. Before you walk into today, I want you to know something. God has already been there. Take one slow breath. Let your shoulders drop. do not have to solve the whole day right now. You only have to bring this moment to the one who is not surprised by anything wai",
+ "transcript_head": "Good morning! If you are holding this day with a tight chest, already counting what could go wrong, stay with me for the next few minutes. Before you walk into today, I want you to know something. God has already been there. Take one slow breath. Let your shoulders drop. You do not have to solve the whole day right now. You only have to bring this moment to the one who is not surprised by anything",
  "criteria_sha256": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
