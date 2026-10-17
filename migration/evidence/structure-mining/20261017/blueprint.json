@@ -2,238 +2,389 @@
  "version": "structure-blueprint-v2",
  "status": "MODEL_REPORTED_NOT_VERIFIED",
  "videos": [
-  "CqvB4OVD5Nw",
-  "SRaWn0WoP88",
-  "AxInqNJzmyU",
-  "8dLrnuwAABE",
-  "6Q98ZRdnzw8",
-  "FEyv4xRoPzs",
-  "8YXRtsNnGX0",
-  "j6eXNa7NqwU",
-  "VGv3fbxG7OI",
-  "q3wraYaNR-A",
-  "6iERK-74EWg",
-  "noiMjV6UxSk",
-  "wpUFB3UMNgw",
-  "STcBN9l5rfU",
-  "_WD8NVhD5Ps",
-  "MAZXkEhdKU8"
+  "sZUFqcbXii0",
+  "j3hTyX4ZF2M",
+  "8G2j9_RjKOY",
+  "98D3dkzIw8g",
+  "NUXLAy7A8TM",
+  "cX_DvmKryDU",
+  "-BraNWUfS8k",
+  "0UTESr_lC2A",
+  "9iVoAk5NZAM",
+  "uDI9z63AbJg",
+  "dQQxzik8C4o",
+  "TGdYF8jDdXk"
  ],
  "complete_videos": [
-  "CqvB4OVD5Nw",
-  "SRaWn0WoP88",
-  "AxInqNJzmyU",
-  "6Q98ZRdnzw8",
-  "FEyv4xRoPzs",
-  "8YXRtsNnGX0",
-  "j6eXNa7NqwU",
-  "q3wraYaNR-A",
-  "6iERK-74EWg",
-  "noiMjV6UxSk",
-  "wpUFB3UMNgw",
-  "STcBN9l5rfU",
-  "_WD8NVhD5Ps",
-  "MAZXkEhdKU8"
+  "sZUFqcbXii0",
+  "j3hTyX4ZF2M",
+  "8G2j9_RjKOY",
+  "98D3dkzIw8g",
+  "NUXLAy7A8TM",
+  "cX_DvmKryDU",
+  "0UTESr_lC2A"
  ],
- "data_api_units": 21,
+ "data_api_units": 34,
  "gemini": {
-  "calls": 18,
+  "calls": 105,
   "failed_windows": [
    {
-    "video_id": "8dLrnuwAABE",
+    "video_id": "-BraNWUfS8k",
+    "start": 0,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "-BraNWUfS8k",
+    "start": 0,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "-BraNWUfS8k",
+    "start": 300,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "-BraNWUfS8k",
+    "start": 300,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "-BraNWUfS8k",
+    "start": 600,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "-BraNWUfS8k",
+    "start": 600,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "0UTESr_lC2A",
+    "start": 0,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
+    "start": 600,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
+    "start": 1800,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
+    "start": 1800,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
     "start": 2100,
     "attempt": 0,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
-    "video_id": "8dLrnuwAABE",
+    "video_id": "9iVoAk5NZAM",
     "start": 2100,
     "attempt": 1,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
-    "video_id": "j6eXNa7NqwU",
+    "video_id": "9iVoAk5NZAM",
+    "start": 2400,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
+    "start": 2400,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
+    "start": 2700,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
+    "start": 2700,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "9iVoAk5NZAM",
+    "start": 3000,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "uDI9z63AbJg",
+    "start": 600,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "uDI9z63AbJg",
+    "start": 600,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "uDI9z63AbJg",
+    "start": 900,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "uDI9z63AbJg",
     "start": 1500,
     "attempt": 0,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
-    "video_id": "VGv3fbxG7OI",
-    "start": 600,
+    "video_id": "uDI9z63AbJg",
+    "start": 3000,
     "attempt": 0,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
-    "video_id": "VGv3fbxG7OI",
-    "start": 600,
+    "video_id": "uDI9z63AbJg",
+    "start": 3000,
     "attempt": 1,
     "code": "INVALID_WINDOW_REPORT"
    },
    {
-    "video_id": "q3wraYaNR-A",
-    "start": 300,
+    "video_id": "dQQxzik8C4o",
+    "start": 1800,
     "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "dQQxzik8C4o",
+    "start": 2100,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "dQQxzik8C4o",
+    "start": 3000,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "dQQxzik8C4o",
+    "start": 3000,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 900,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 900,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 1500,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 1500,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 1800,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 2100,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 2100,
+    "attempt": 1,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 2700,
+    "attempt": 0,
+    "code": "INVALID_WINDOW_REPORT"
+   },
+   {
+    "video_id": "TGdYF8jDdXk",
+    "start": 2700,
+    "attempt": 1,
     "code": "INVALID_WINDOW_REPORT"
    }
   ],
   "models": {
-   "gemini-3.6-flash": 1,
-   "gemini-3.5-flash-lite": 17
+   "gemini-3.5-flash-lite": 105
   }
  },
  "blueprint": {
   "shared_by_winners": [
    {
-    "pattern": "Linguistic and semantic etymology hooks",
+    "pattern": "Emotional vulnerability and immediate surrender framing",
     "evidence": [
-     "6Q98ZRdnzw8@60",
-     "FEyv4xRoPzs@18",
-     "j6eXNa7NqwU@17"
+     "NUXLAy7A8TM@0",
+     "cX_DvmKryDU@0"
     ]
    },
    {
-    "pattern": "High-density scriptural integration without breaking monetization policy",
+    "pattern": "High-production AI cinematic nature imagery paired with a consistent religious figure motif",
     "evidence": [
-     "CqvB4OVD5Nw@124",
-     "6Q98ZRdnzw8@10",
-     "q3wraYaNR-A@96"
+     "NUXLAy7A8TM@100",
+     "cX_DvmKryDU@150"
+    ]
+   },
+   {
+    "pattern": "Continuous low-register ambient worship underscoring with zero abrupt sound changes",
+    "evidence": [
+     "NUXLAy7A8TM@50",
+     "cX_DvmKryDU@200"
     ]
    }
   ],
   "differences": [
    {
-    "dimension": "Video Format & Pacing",
-    "observation": "Prayer channels rely on rapid, high-intensity vocal cadences and dynamic kinetic typography, whereas deep-dive essay channels use a slow, meditative British voiceover over watercolor artwork.",
+    "dimension": "Focus of Intercession",
+    "observation": "Some winners focus macro-monthly (surrendering the entire upcoming month), whereas others target micro-daily (surrendering today's specific hours).",
     "evidence": [
-     "CqvB4OVD5Nw@0",
-     "6Q98ZRdnzw8@0"
+     "NUXLAy7A8TM@0",
+     "cX_DvmKryDU@0"
+    ]
+   },
+   {
+    "dimension": "Pacing and Delivery Density",
+    "observation": "Word counts per minute vary from moderate contemplation (~137 wpm) to dense, fast-paced intercession (~158 wpm).",
+    "evidence": [
+     "cX_DvmKryDU@0",
+     "0UTESr_lC2A@0"
     ]
    }
   ],
   "script_structure": [
    {
     "order": 1,
-    "beat": "The Curiosty Hook",
+    "beat": "The Opening Surrender Hook",
     "typical_seconds": "0-30",
-    "purpose": "Establish a jarring paradox or counter-intuitive biblical fact to trap viewer attention.",
+    "purpose": "Acknowledge God's presence, the new time period (day/month), and immediate release of control.",
     "evidence": [
-     "6Q98ZRdnzw8@0",
-     "FEyv4xRoPzs@18",
-     "wpUFB3UMNgw@0"
+     "NUXLAy7A8TM@0",
+     "cX_DvmKryDU@0"
     ]
    },
    {
     "order": 2,
-    "beat": "Context & Narrative Setup",
-    "typical_seconds": "30-120",
-    "purpose": "Immerse the audience into the historical setting using sensory language.",
+    "beat": "Night Watch & Protection Reflection",
+    "typical_seconds": "30-90",
+    "purpose": "Remind listeners of unseen nocturnal protection to build psychological safety.",
     "evidence": [
-     "6Q98ZRdnzw8@213",
-     "FEyv4xRoPzs@0",
-     "q3wraYaNR-A@20"
+     "NUXLAy7A8TM@71",
+     "cX_DvmKryDU@26"
     ]
    },
    {
     "order": 3,
-    "beat": "Linguistic or Theological Core",
-    "typical_seconds": "120-600",
-    "purpose": "Break down original Hebrew or Greek words and cross-reference multiple biblical passages.",
+    "beat": "Granular Life Domain Petitions",
+    "typical_seconds": "90-300",
+    "purpose": "Systematically cover mental peace, work, finances, family, and unexpected events.",
     "evidence": [
-     "6Q98ZRdnzw8@104",
-     "FEyv4xRoPzs@31",
-     "q3wraYaNR-A@411"
+     "NUXLAy7A8TM@161",
+     "cX_DvmKryDU@171"
     ]
    },
    {
     "order": 4,
-    "beat": "Application & Payoff",
-    "typical_seconds": "600-900",
-    "purpose": "Connect ancient truths directly to the viewer's modern spiritual life.",
+    "beat": "Closing Reassurance & CTA",
+    "typical_seconds": "300-720",
+    "purpose": "Solidify the spiritual takeaway, provide a direct blessing, and prompt engagement.",
     "evidence": [
-     "6Q98ZRdnzw8@808",
-     "FEyv4xRoPzs@1640",
-     "wpUFB3UMNgw@821"
-    ]
-   },
-   {
-    "order": 5,
-    "beat": "Engagement & CTA",
-    "typical_seconds": "900-1000",
-    "purpose": "Drive subscriptions and community comments by asking a thought-provoking question.",
-    "evidence": [
-     "6Q98ZRdnzw8@1200",
-     "q3wraYaNR-A@994"
+     "NUXLAy7A8TM@983",
+     "cX_DvmKryDU@704"
     ]
    }
   ],
   "hook_patterns": [
    {
-    "pattern": "The Hidden Translation Reveal",
+    "pattern": "Temporal Urgency & Sacred Pause Hook",
     "evidence": [
-     "6Q98ZRdnzw8@60",
-     "FEyv4xRoPzs@18",
-     "j6eXNa7NqwU@17"
-    ]
-   },
-   {
-    "pattern": "The Sensory Narrative Opening",
-    "evidence": [
-     "6Q98ZRdnzw8@0",
-     "FEyv4xRoPzs@0",
-     "q3wraYaNR-A@0"
+     "NUXLAy7A8TM@0",
+     "cX_DvmKryDU@0"
     ]
    }
   ],
-  "picture_format": "Cinematic AI-generated watercolor illustrations with slow pans, gentle crossfades, subtle particle drifts, and synchronized bold yellow/white kinetic caption subtitles.",
-  "sound_and_music": "Continuous ambient cinematic orchestral background pads with low warm drones, soft strings, and a deep, solemn, resonant male narrator voice with a calm British or American accent.",
-  "pacing": "Deliberate and reflective storytelling cadence averaging 1.0 to 1.7 beats per minute, paired with an average speech rate of 80-140 words per minute.",
-  "packaging_titles_thumbnails": "High-contrast split or centered compositions utilizing biblical imagery paired with capitalized, curiosity-driven titles featuring phrases like 'Most Christians Miss This' or posing direct questions.",
+  "picture_format": " Cinematic AI illustrations and stock footage blending slow-zoom nature backdrops (waterfalls, sunrises, floral macro shots) with a consistent side-screen depiction of a praying figure, paired with bold word-by-word white/yellow closed captions.",
+  "sound_and_music": " Warm, deep male American voiceover delivered at a meditative pace, underscored by a continuous low-register cinematic worship pad with soft piano chords and zero sudden audio cuts.",
+  "pacing": " Slow, highly deliberate, and measured contemplative tempo designed to induce calm, averaging 140-160 words per minute with purposeful pauses.",
+  "packaging_titles_thumbnails": " High-contrast gradient or nature thumbnail with clean typography highlighting a short, high-value spiritual promise (e.g., 'A Short Prayer Before You Start Everything'), paired with long, SEO-optimized title strings.",
   "audience_signals_from_comments": [
    {
-    "signal": "Deep appreciation for linguistic word studies and etymology breaking down original Hebrew terms.",
+    "signal": "High emotional resonance driving immediate short-form affirmation typing",
     "evidence": [
-     "6Q98ZRdnzw8:comments",
-     "FEyv4xRoPzs:comments"
-    ]
-   },
-   {
-    "signal": "Strong personal connection and theological reflection on God's omnipresence and protective watch.",
-    "evidence": [
-     "q3wraYaNR-A:comments",
-     "CqvB4OVD5Nw:comments"
+     "NUXLAy7A8TM:comments",
+     "cX_DvmKryDU:comments"
     ]
    }
   ],
   "winners_vs_weak": [
    {
-    "difference": "Winners focus on counter-intuitive linguistic mysteries with broad appeal, whereas weak-contrast videos dive into niche historical sub-topics with less universal emotional resonance.",
+    "difference": "Winners maintain absolute topical alignment between packaging, audio, and visual content, whereas weak videos display severe mismatches (e.g., business logos or puzzle screens paired with prayers).",
     "evidence": [
-     "6Q98ZRdnzw8",
-     "j6eXNa7NqwU",
-     "wpUFB3UMNgw",
-     "MAZXkEhdKU8"
+     "NUXLAy7A8TM@0",
+     "0UTESr_lC2A@0",
+     "sZUFqcbXii0@0",
+     "98D3dkzIw8g@0"
     ]
    }
   ],
   "beat_them": [
    {
-    "where_winners_are_weak": "Winners often rely solely on static watercolor illustrations or talking-head cutouts with simple text overlays, risking visual fatigue over longer runtimes.",
-    "heroverse_move": "Integrate dynamic map animations, 3D textual overlays of ancient Hebrew lexicons, and seamless cross-channel visual motifs that visually illustrate the etymological definitions in real-time.",
+    "where_winners_are_weak": "Winners rely on repetitive structural templates and static visual compositions that can feel generic over longer runtimes.",
+    "heroverse_move": "Introduce dynamic multi-layered narrative arcs, higher-fidelity custom 3D animations, and immersive soundscapes that transition smoothly with the emotional arc of the prayer.",
     "evidence": [
-     "6Q98ZRdnzw8",
-     "wpUFB3UMNgw"
+     "NUXLAy7A8TM@100",
+     "cX_DvmKryDU@150"
     ]
    }
   ],
   "policy_risks_to_avoid": [
-   "No impersonation of real-world living or deceased pastors/preachers.",
-   "No fabricated or sensationalized prophecy, false date-setting, or modern political fortune-telling.",
-   "No fear-baiting users with threats of damnation or manipulative emotional coercion.",
-   "No re-uploading unedited third-party sermon audio or video clips (reused content)."
+   "Impersonating real religious leaders or clergy",
+   "Fabricating specific prophecies or divine pronouncements",
+   "Employing fear-baiting tactics regarding impending doom",
+   "Using unedited or re-uploaded third-party content"
   ],
   "limitations": [
-   "Public YouTube data provides aggregate views and public comment sentiment, but does not expose exact viewer retention graphs per second.",
-   "Algorithmic ranking factors fluctuate over time, meaning stylistic combinations must be continuously tested against current platform distribution."
+   "Public view counts fluctuate and algorithmic testing changes rapidly.",
+   "Audience retention graphs are inferred from public metadata and transcription pacing models rather than direct analytics access."
   ]
  },
  "blueprint_model": "gemini-3.5-flash-lite"
