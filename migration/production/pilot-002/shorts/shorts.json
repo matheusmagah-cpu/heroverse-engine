@@ -42,7 +42,7 @@
    },
    "text": "Your courage today does not have to come from feeling ready. It can come from knowing who is with you. Whithersoever thou goest. That means the kitchen, the office, the hospital room, the classroom, the empty apartment. There is no place on your schedule today where he will not be. And one more promise, short enough to remember all day. For he hath said, I will never leave thee, nor forsake thee. Father, thank you. Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
    "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "file": "migration/production/pilot-002/shorts/short-00.mp4",
     "seconds": 42.4,
     "lufs": -14.8,
     "true_peak_dbtp": -2.4,
@@ -58,7 +58,24 @@
     "status": "PASS"
    },
    "review": {
-    "status": "NOT_REVIEWED_NO_KEY"
+    "hook_in_first_2s": 7.5,
+    "captions_readable_and_synced": 8.5,
+    "text_clear_of_shorts_ui": 9.0,
+    "picture_quality": 7.0,
+    "edit_rhythm": 7.5,
+    "audio_clarity": 9.0,
+    "stands_alone": 9.0,
+    "ending_and_loop": 6.5,
+    "policy_safe": 10.0,
+    "overall": 7.8,
+    "issues": [
+     "00:27 - 00:32: A bright green unmasked line artifact appears at the bottom edge under the praying hands cutout.",
+     "00:00 - 00:41: The Jesus figure is a static cutout layered over shifting AI backgrounds, making the composite feel repetitive and slightly unnatural.",
+     "00:39 - 00:41: The video fades down on a resolved prayer cadence rather than creating a seamless audio/visual loop back into the opening hook."
+    ],
+    "strongest_moment": "00:10 - 00:20 where the script grounds spiritual courage in everyday relatable locations ('the kitchen, the office, the hospital room').",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL"
    },
    "publish": false
   },
@@ -100,7 +117,7 @@
    },
    "text": "You know its name. I will not pretend it is small, and I will not pretend you are smaller. Where I see a closed door, you see the way through. Where I see a delay, you see the right time. Teach my heart to rest in what you know, even when I do not know it yet. Lord, you know how quickly my thoughts run ahead of me. Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come. Bring my thoughts back to this day and to you. Replace the noise in my head with your peace.",
    "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "file": "migration/production/pilot-002/shorts/short-01.mp4",
     "seconds": 41.3,
     "lufs": -14.8,
     "true_peak_dbtp": -2.3,
@@ -116,7 +133,24 @@
     "status": "PASS"
    },
    "review": {
-    "status": "NOT_REVIEWED_NO_KEY"
+    "hook_in_first_2s": 6.5,
+    "captions_readable_and_synced": 8.5,
+    "text_clear_of_shorts_ui": 7.5,
+    "picture_quality": 7.0,
+    "edit_rhythm": 6.0,
+    "audio_clarity": 8.5,
+    "stands_alone": 8.0,
+    "ending_and_loop": 6.5,
+    "policy_safe": 10.0,
+    "overall": 7.0,
+    "issues": [
+     "Foreground figure remains completely static throughout the entire video, causing visual monotony.",
+     "00:37 - Call-to-action banner 'Full prayer on the channel' directly covers the face and eyes of the figure.",
+     "00:00-00:02 - Top hook banner is positioned very close to the top edge header zone."
+    ],
+    "strongest_moment": "00:07-00:14 where the transition to the sunlit wheat field matches the uplifting cadence of the prayer.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL"
    },
    "publish": false
   },
@@ -157,7 +191,7 @@
    },
    "text": "You were here first. That is all. Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it. May the Lord go before you into every hour of this day. May his mercy meet you at every turn. May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side. In the name of Jesus, amen.",
    "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "file": "migration/production/pilot-002/shorts/short-02.mp4",
     "seconds": 32.83,
     "lufs": -14.8,
     "true_peak_dbtp": -2.4,
@@ -173,7 +207,24 @@
     "status": "PASS"
    },
    "review": {
-    "status": "NOT_REVIEWED_NO_KEY"
+    "hook_in_first_2s": 6.5,
+    "captions_readable_and_synced": 8.5,
+    "text_clear_of_shorts_ui": 7.5,
+    "picture_quality": 7.5,
+    "edit_rhythm": 6.5,
+    "audio_clarity": 8.5,
+    "stands_alone": 8.5,
+    "ending_and_loop": 6.0,
+    "policy_safe": 10.0,
+    "overall": 7.3,
+    "issues": [
+     "00:00 - The static text box 'Pray this with me right now' sits in the top 15%, which may collide with UI overlays on some mobile devices.",
+     "00:00-00:32 - The visuals rely on repetitive AI portraits with nearly identical poses and composition, leading to visual monotony.",
+     "00:29-00:32 - The 'Full prayer on the channel' button overlays the lower chest area close to the bottom interface safe zone."
+    ],
+    "strongest_moment": "00:13 - The visual shift to the golden wheat field paired with the spoken blessing creates a warm, peaceful moment of reflection.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL"
    },
    "publish": false
   },
@@ -215,7 +266,7 @@
    },
    "text": "You are following him into it. There is a second promise for this exact hour. It is of the Lord's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness. New every morning. Not leftover mercy from yesterday. Not the small amount that remains after your mistakes. Fresh mercy, measured for today, for the person you are this morning, with everything you are carrying.",
    "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-03.mp4",
+    "file": "migration/production/pilot-002/shorts/short-03.mp4",
     "seconds": 38.1,
     "lufs": -14.8,
     "true_peak_dbtp": -2.4,
@@ -231,7 +282,24 @@
     "status": "PASS"
    },
    "review": {
-    "status": "NOT_REVIEWED_NO_KEY"
+    "hook_in_first_2s": 6.5,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 8.5,
+    "picture_quality": 8.0,
+    "edit_rhythm": 6.5,
+    "audio_clarity": 9.0,
+    "stands_alone": 4.5,
+    "ending_and_loop": 3.0,
+    "policy_safe": 10.0,
+    "overall": 6.0,
+    "issues": [
+     "Audio abruptly cuts off mid-word ('What...') at 00:37 without concluding the thought.",
+     "Static cutout figure of Jesus overlaid onto slowly changing AI background slides feels stiff and repetitive.",
+     "The opening spoken sentence ('You are following him into it') sounds like the middle of an existing conversation rather than an immediate auditory hook."
+    ],
+    "strongest_moment": "00:23 - 00:33 where the script eloquently contextualizes Lamentations into relatable encouragement ('Fresh mercy, measured for the person you are this morning').",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL"
    },
    "publish": false
   },
@@ -272,7 +340,7 @@
    },
    "text": "Some of you are walking into something heavy today. This promise is for you. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee. Notice that God did not say if you pass through the waters. He said when. Lord, I will not pretend there are no deep waters in my life.",
    "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-04.mp4",
+    "file": "migration/production/pilot-002/shorts/short-04.mp4",
     "seconds": 35.03,
     "lufs": -14.9,
     "true_peak_dbtp": -2.3,
@@ -288,7 +356,23 @@
     "status": "PASS"
    },
    "review": {
-    "status": "NOT_REVIEWED_NO_KEY"
+    "hook_in_first_2s": 6,
+    "captions_readable_and_synced": 7,
+    "text_clear_of_shorts_ui": 5,
+    "picture_quality": 6,
+    "edit_rhythm": 6,
+    "audio_clarity": 7,
+    "stands_alone": 6,
+    "ending_and_loop": 5,
+    "policy_safe": 7,
+    "overall": 6,
+    "issues": [
+     "00:31 - Channel CTA graphic enters the lower UI obstruction zone.",
+     "00:33 - Narrative ends abruptly mid-prayer rather than creating a smooth loop."
+    ],
+    "strongest_moment": "00:06 - Scriptural reading of Isaiah 43:2 paired with soft visual background shift.",
+    "model": "gemini-3.6-flash",
+    "status": "FAIL"
    },
    "publish": false
   }
