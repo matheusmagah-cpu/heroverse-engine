@@ -2,14 +2,14 @@
  "version": "pilot-manifest-v2",
  "pilot_id": "pilot-002",
  "grammar": "figure+backgrounds+captions",
- "output_sha256": "79b8ff4b18919cd99468f744f4823973f2c5dcde48a43b33ef3a992191653482",
- "output_seconds": 1295.066667,
+ "output_sha256": "56ab7e39742b5b37483de89c8cc9d6091930d66dfb82cc8483273abd59fb008e",
+ "output_seconds": 1294.866667,
  "script_sha256": "bd12ad7f9d6d04452e871b9473da48a98c2cb1a7ee4d6eadb27b248505d2aee3",
  "voice": {
   "engine": "Kokoro v1.0 (preserved, hash-pinned)",
   "voice_id": "am_michael",
   "speed": 0.85,
-  "voice_wav_sha256": "485f7685e2a3c5bc498099b583ea6ed0a2b6e5a3587d591d6a650d59bf38ce02"
+  "voice_wav_sha256": "56419925f383f01e38989ccabb7bf699b44b0c7ac250987814913f55d23824bc"
  },
  "music": {
   "file": "original-rest-music.lossless.flac",
@@ -294,641 +294,659 @@
   {
    "image": "bg-sky",
    "start": 2.0,
-   "figure": true,
-   "end": 14.536
+   "end": 14.557,
+   "figure": true
   },
   {
    "image": "bg-river",
-   "start": 14.536,
-   "figure": true,
-   "end": 25.976
+   "start": 14.557,
+   "end": 25.976,
+   "figure": true
   },
   {
    "image": "bg-valley",
    "start": 25.976,
-   "figure": true,
-   "end": 42.912
+   "end": 42.848,
+   "figure": true
   },
   {
    "image": "bg-wheat",
-   "start": 42.912,
-   "figure": true,
-   "end": 54.413
+   "start": 42.848,
+   "end": 54.349,
+   "figure": true
   },
   {
    "image": "bg-lake",
-   "start": 54.413,
-   "figure": true,
-   "end": 67.205
+   "start": 54.349,
+   "end": 67.12,
+   "figure": true
   },
   {
    "image": "bg-forest",
-   "start": 67.205,
-   "figure": true,
-   "end": 80.277
+   "start": 67.12,
+   "end": 80.171,
+   "figure": true
   },
   {
    "image": "bg-meadow",
-   "start": 80.277,
-   "figure": true,
-   "end": 92.983
+   "start": 80.171,
+   "end": 92.876,
+   "figure": true
   },
   {
    "image": "bg-sunset-sea",
-   "start": 92.983,
-   "figure": true,
-   "end": 106.429
+   "start": 92.876,
+   "end": 106.323,
+   "figure": true
   },
   {
    "image": "bg-mountain",
-   "start": 106.429,
-   "figure": true,
-   "end": 116.363
+   "start": 106.323,
+   "end": 116.256,
+   "figure": true
   },
   {
    "image": "bg-garden",
-   "start": 116.363,
-   "figure": true,
-   "end": 129.117
+   "start": 116.256,
+   "end": 129.011,
+   "figure": true
   },
   {
    "image": "bg-road",
-   "start": 129.117,
-   "figure": true,
-   "end": 140.924
+   "start": 129.011,
+   "end": 140.839,
+   "figure": true
   },
   {
    "image": "bg-hills",
-   "start": 140.924,
-   "figure": true,
-   "end": 152.243
+   "start": 140.839,
+   "end": 152.136,
+   "figure": true
   },
   {
    "image": "bg-sea",
-   "start": 152.243,
-   "figure": true,
-   "end": 161.52
+   "start": 152.136,
+   "end": 161.435,
+   "figure": true
   },
   {
    "image": "bg-snow",
-   "start": 161.52,
-   "figure": true,
-   "end": 170.707
+   "start": 161.435,
+   "end": 170.621,
+   "figure": true
   },
   {
    "image": "bg-sky",
-   "start": 170.707,
-   "figure": true,
-   "end": 182.523
+   "start": 170.621,
+   "end": 182.437,
+   "figure": true
   },
   {
    "image": "bg-river",
-   "start": 182.523,
-   "figure": true,
-   "end": 195.868
+   "start": 182.437,
+   "end": 195.783,
+   "figure": true
   },
   {
    "image": "bg-valley",
-   "start": 195.868,
-   "figure": true,
-   "end": 205.795
+   "start": 195.783,
+   "end": 205.688,
+   "figure": true
   },
   {
    "image": "bg-wheat",
-   "start": 205.795,
-   "figure": true,
-   "end": 217.435
+   "start": 205.688,
+   "end": 217.328,
+   "figure": true
   },
   {
    "image": "bg-lake",
-   "start": 217.435,
-   "figure": true,
-   "end": 229.324
+   "start": 217.328,
+   "end": 229.217,
+   "figure": true
   },
   {
    "image": "bg-forest",
-   "start": 229.324,
-   "figure": true,
-   "end": 241.977
+   "start": 229.217,
+   "end": 241.871,
+   "figure": true
   },
   {
    "image": "bg-meadow",
-   "start": 241.977,
-   "figure": true,
-   "end": 254.187
+   "start": 241.871,
+   "end": 254.08,
+   "figure": true
   },
   {
    "image": "bg-sunset-sea",
-   "start": 254.187,
-   "figure": true,
-   "end": 263.321
+   "start": 254.08,
+   "end": 263.215,
+   "figure": true
   },
   {
    "image": "bg-mountain",
-   "start": 263.321,
-   "figure": true,
-   "end": 272.428
+   "start": 263.215,
+   "end": 272.321,
+   "figure": true
   },
   {
    "image": "bg-garden",
-   "start": 272.428,
-   "figure": true,
-   "end": 281.791
+   "start": 272.321,
+   "end": 281.684,
+   "figure": true
   },
   {
    "image": "bg-road",
-   "start": 281.791,
-   "figure": true,
-   "end": 291.137
+   "start": 281.684,
+   "end": 291.031,
+   "figure": true
   },
   {
    "image": "bg-hills",
-   "start": 291.137,
-   "figure": true,
-   "end": 303.508
+   "start": 291.031,
+   "end": 303.38,
+   "figure": true
   },
   {
    "image": "bg-sea",
-   "start": 303.508,
-   "figure": true,
-   "end": 316.571
+   "start": 303.38,
+   "end": 316.443,
+   "figure": true
   },
   {
    "image": "bg-snow",
-   "start": 316.571,
-   "figure": true,
-   "end": 326.749
+   "start": 316.443,
+   "end": 326.621,
+   "figure": true
   },
   {
    "image": "bg-sky",
-   "start": 326.749,
-   "figure": true,
-   "end": 343.679
+   "start": 326.621,
+   "end": 343.529,
+   "figure": true
   },
   {
    "image": "bg-river",
-   "start": 343.679,
-   "figure": true,
-   "end": 356.257
+   "start": 343.529,
+   "end": 356.108,
+   "figure": true
   },
   {
    "image": "bg-valley",
-   "start": 356.257,
-   "figure": true,
-   "end": 365.513
+   "start": 356.108,
+   "end": 365.364,
+   "figure": true
   },
   {
    "image": "bg-wheat",
-   "start": 365.513,
-   "figure": true,
-   "end": 379.456
+   "start": 365.364,
+   "end": 379.285,
+   "figure": true
   },
   {
    "image": "bg-lake",
-   "start": 379.456,
-   "figure": true,
-   "end": 389.767
+   "start": 379.285,
+   "end": 389.596,
+   "figure": true
   },
   {
    "image": "bg-forest",
-   "start": 389.767,
-   "figure": true,
-   "end": 404.051
+   "start": 389.596,
+   "end": 403.88,
+   "figure": true
   },
   {
    "image": "bg-meadow",
-   "start": 404.051,
-   "figure": true,
-   "end": 416.272
+   "start": 403.88,
+   "end": 416.101,
+   "figure": true
   },
   {
    "image": "bg-sunset-sea",
-   "start": 416.272,
-   "figure": true,
-   "end": 431.239
+   "start": 416.101,
+   "end": 431.068,
+   "figure": true
   },
   {
    "image": "bg-mountain",
-   "start": 431.239,
-   "figure": true,
-   "end": 445.645
+   "start": 431.068,
+   "end": 445.475,
+   "figure": true
   },
   {
    "image": "bg-garden",
-   "start": 445.645,
-   "figure": true,
-   "end": 455.325
+   "start": 445.475,
+   "end": 455.155,
+   "figure": true
   },
   {
    "image": "bg-road",
-   "start": 455.325,
-   "figure": true,
-   "end": 470.052
+   "start": 455.155,
+   "end": 469.881,
+   "figure": true
   },
   {
    "image": "bg-hills",
-   "start": 470.052,
-   "figure": true,
-   "end": 480.661
+   "start": 469.881,
+   "end": 480.491,
+   "figure": true
   },
   {
    "image": "bg-sea",
-   "start": 480.661,
-   "figure": true,
-   "end": 491.032
+   "start": 480.491,
+   "end": 490.883,
+   "figure": true
   },
   {
    "image": "bg-snow",
-   "start": 491.032,
-   "figure": true,
-   "end": 500.309
+   "start": 490.883,
+   "end": 500.16,
+   "figure": true
   },
   {
    "image": "bg-sky",
-   "start": 500.309,
-   "figure": true,
-   "end": 510.973
+   "start": 500.16,
+   "end": 510.845,
+   "figure": true
   },
   {
    "image": "bg-river",
-   "start": 510.973,
-   "figure": true,
-   "end": 521.195
+   "start": 510.845,
+   "end": 521.067,
+   "figure": true
   },
   {
    "image": "bg-valley",
-   "start": 521.195,
-   "figure": true,
-   "end": 534.653
+   "start": 521.067,
+   "end": 534.525,
+   "figure": true
   },
   {
    "image": "bg-wheat",
-   "start": 534.653,
-   "figure": true,
-   "end": 553.417
-  },
-  {
-   "image": "bg-lake",
-   "start": 553.417,
-   "figure": true,
-   "end": 563.344
-  },
-  {
-   "image": "bg-forest",
-   "start": 563.344,
-   "figure": true,
-   "end": 576.284
-  },
-  {
-   "image": "bg-meadow",
-   "start": 576.284,
-   "figure": true,
-   "end": 586.82
-  },
-  {
-   "image": "bg-sunset-sea",
-   "start": 586.82,
-   "figure": true,
-   "end": 600.976
+   "start": 534.525,
+   "end": 543.918,
+   "figure": true
   },
   {
    "image": "bg-mountain",
-   "start": 600.976,
-   "figure": true,
-   "end": 612.771
-  },
-  {
-   "image": "bg-garden",
-   "start": 612.771,
-   "figure": true,
-   "end": 624.169
-  },
-  {
-   "image": "bg-road",
-   "start": 624.169,
-   "figure": true,
-   "end": 636.183
-  },
-  {
-   "image": "bg-hills",
-   "start": 636.183,
-   "figure": true,
-   "end": 646.804
-  },
-  {
-   "image": "bg-sea",
-   "start": 646.804,
-   "figure": true,
-   "end": 666.613
-  },
-  {
-   "image": "bg-snow",
-   "start": 666.613,
-   "figure": true,
-   "end": 679.612
-  },
-  {
-   "image": "bg-sky",
-   "start": 679.612,
-   "figure": true,
-   "end": 692.969
-  },
-  {
-   "image": "bg-river",
-   "start": 692.969,
-   "figure": true,
-   "end": 710.043
-  },
-  {
-   "image": "bg-valley",
-   "start": 710.043,
-   "figure": true,
-   "end": 726.579
-  },
-  {
-   "image": "bg-wheat",
-   "start": 726.579,
-   "figure": true,
-   "end": 736.633
+   "start": 543.918,
+   "end": 553.311,
+   "figure": true
   },
   {
    "image": "bg-lake",
-   "start": 736.633,
-   "figure": true,
-   "end": 749.885
+   "start": 553.311,
+   "end": 563.216,
+   "figure": true
   },
   {
    "image": "bg-forest",
-   "start": 749.885,
-   "figure": true,
-   "end": 760.485
+   "start": 563.216,
+   "end": 576.156,
+   "figure": true
   },
   {
    "image": "bg-meadow",
-   "start": 760.485,
-   "figure": true,
-   "end": 772.003
+   "start": 576.156,
+   "end": 586.671,
+   "figure": true
   },
   {
    "image": "bg-sunset-sea",
-   "start": 772.003,
-   "figure": true,
-   "end": 782.907
+   "start": 586.671,
+   "end": 600.827,
+   "figure": true
   },
   {
    "image": "bg-mountain",
-   "start": 782.907,
-   "figure": true,
-   "end": 792.745
+   "start": 600.827,
+   "end": 612.621,
+   "figure": true
   },
   {
    "image": "bg-garden",
-   "start": 792.745,
-   "figure": true,
-   "end": 806.305
+   "start": 612.621,
+   "end": 624.02,
+   "figure": true
   },
   {
    "image": "bg-road",
-   "start": 806.305,
-   "figure": true,
-   "end": 820.952
+   "start": 624.02,
+   "end": 636.055,
+   "figure": true
   },
   {
    "image": "bg-hills",
-   "start": 820.952,
-   "figure": true,
-   "end": 831.241
+   "start": 636.055,
+   "end": 646.676,
+   "figure": true
   },
   {
    "image": "bg-sea",
-   "start": 831.241,
-   "figure": true,
-   "end": 844.631
+   "start": 646.676,
+   "end": 656.528,
+   "figure": true
+  },
+  {
+   "image": "bg-garden",
+   "start": 656.528,
+   "end": 666.379,
+   "figure": true
   },
   {
    "image": "bg-snow",
-   "start": 844.631,
-   "figure": true,
-   "end": 855.581
+   "start": 666.379,
+   "end": 679.377,
+   "figure": true
   },
   {
    "image": "bg-sky",
-   "start": 855.581,
-   "figure": true,
-   "end": 866.191
+   "start": 679.377,
+   "end": 692.713,
+   "figure": true
   },
   {
    "image": "bg-river",
-   "start": 866.191,
-   "figure": true,
-   "end": 878.055
+   "start": 692.713,
+   "end": 709.808,
+   "figure": true
   },
   {
    "image": "bg-valley",
-   "start": 878.055,
-   "figure": true,
-   "end": 893.248
+   "start": 709.808,
+   "end": 726.344,
+   "figure": true
   },
   {
    "image": "bg-wheat",
-   "start": 893.248,
-   "figure": true,
-   "end": 907.676
+   "start": 726.344,
+   "end": 736.42,
+   "figure": true
   },
   {
    "image": "bg-lake",
-   "start": 907.676,
-   "figure": true,
-   "end": 918.413
+   "start": 736.42,
+   "end": 749.672,
+   "figure": true
   },
   {
    "image": "bg-forest",
-   "start": 918.413,
-   "figure": true,
-   "end": 940.688
+   "start": 749.672,
+   "end": 760.229,
+   "figure": true
   },
   {
    "image": "bg-meadow",
-   "start": 940.688,
-   "figure": true,
-   "end": 950.221
+   "start": 760.229,
+   "end": 771.747,
+   "figure": true
   },
   {
    "image": "bg-sunset-sea",
-   "start": 950.221,
-   "figure": true,
-   "end": 960.869
+   "start": 771.747,
+   "end": 782.672,
+   "figure": true
   },
   {
    "image": "bg-mountain",
-   "start": 960.869,
-   "figure": true,
-   "end": 975.016
+   "start": 782.672,
+   "end": 792.489,
+   "figure": true
   },
   {
    "image": "bg-garden",
-   "start": 975.016,
-   "figure": true,
-   "end": 985.443
+   "start": 792.489,
+   "end": 806.049,
+   "figure": true
   },
   {
    "image": "bg-road",
-   "start": 985.443,
-   "figure": true,
-   "end": 994.452
+   "start": 806.049,
+   "end": 820.696,
+   "figure": true
   },
   {
    "image": "bg-hills",
-   "start": 994.452,
-   "figure": true,
-   "end": 1005.964
+   "start": 820.696,
+   "end": 831.007,
+   "figure": true
   },
   {
    "image": "bg-sea",
-   "start": 1005.964,
-   "figure": true,
-   "end": 1016.144
+   "start": 831.007,
+   "end": 844.439,
+   "figure": true
   },
   {
    "image": "bg-snow",
-   "start": 1016.144,
-   "figure": true,
-   "end": 1025.229
+   "start": 844.439,
+   "end": 855.389,
+   "figure": true
   },
   {
    "image": "bg-sky",
-   "start": 1025.229,
-   "figure": true,
-   "end": 1038.996
+   "start": 855.389,
+   "end": 865.999,
+   "figure": true
   },
   {
    "image": "bg-river",
-   "start": 1038.996,
-   "figure": true,
-   "end": 1056.392
+   "start": 865.999,
+   "end": 877.863,
+   "figure": true
   },
   {
    "image": "bg-valley",
-   "start": 1056.392,
-   "figure": true,
-   "end": 1066.864
+   "start": 877.863,
+   "end": 893.056,
+   "figure": true
   },
   {
    "image": "bg-wheat",
-   "start": 1066.864,
-   "figure": true,
-   "end": 1079.379
+   "start": 893.056,
+   "end": 907.484,
+   "figure": true
   },
   {
    "image": "bg-lake",
-   "start": 1079.379,
-   "figure": true,
-   "end": 1090.533
+   "start": 907.484,
+   "end": 918.221,
+   "figure": true
   },
   {
    "image": "bg-forest",
-   "start": 1090.533,
-   "figure": true,
-   "end": 1100.716
+   "start": 918.221,
+   "end": 929.369,
+   "figure": true
+  },
+  {
+   "image": "bg-road",
+   "start": 929.369,
+   "end": 940.517,
+   "figure": true
   },
   {
    "image": "bg-meadow",
-   "start": 1100.716,
-   "figure": true,
-   "end": 1113.135
+   "start": 940.517,
+   "end": 950.051,
+   "figure": true
   },
   {
    "image": "bg-sunset-sea",
-   "start": 1113.135,
-   "figure": true,
-   "end": 1123.635
+   "start": 950.051,
+   "end": 960.699,
+   "figure": true
   },
   {
    "image": "bg-mountain",
-   "start": 1123.635,
-   "figure": true,
-   "end": 1139.364
+   "start": 960.699,
+   "end": 974.824,
+   "figure": true
   },
   {
    "image": "bg-garden",
-   "start": 1139.364,
-   "figure": true,
-   "end": 1151.74
+   "start": 974.824,
+   "end": 985.251,
+   "figure": true
   },
   {
    "image": "bg-road",
-   "start": 1151.74,
-   "figure": true,
-   "end": 1162.371
+   "start": 985.251,
+   "end": 994.26,
+   "figure": true
   },
   {
    "image": "bg-hills",
-   "start": 1162.371,
-   "figure": true,
-   "end": 1173.995
+   "start": 994.26,
+   "end": 1005.772,
+   "figure": true
   },
   {
    "image": "bg-sea",
-   "start": 1173.995,
-   "figure": true,
-   "end": 1183.96
+   "start": 1005.772,
+   "end": 1015.952,
+   "figure": true
   },
   {
    "image": "bg-snow",
-   "start": 1183.96,
-   "figure": true,
-   "end": 1195.861
+   "start": 1015.952,
+   "end": 1025.037,
+   "figure": true
   },
   {
    "image": "bg-sky",
-   "start": 1195.861,
-   "figure": true,
-   "end": 1208.131
+   "start": 1025.037,
+   "end": 1038.804,
+   "figure": true
   },
   {
    "image": "bg-river",
-   "start": 1208.131,
-   "figure": true,
-   "end": 1218.048
+   "start": 1038.804,
+   "end": 1056.179,
+   "figure": true
   },
   {
    "image": "bg-valley",
-   "start": 1218.048,
-   "figure": true,
-   "end": 1228.2
+   "start": 1056.179,
+   "end": 1066.651,
+   "figure": true
   },
   {
    "image": "bg-wheat",
-   "start": 1228.2,
-   "figure": true,
-   "end": 1241.695
+   "start": 1066.651,
+   "end": 1079.165,
+   "figure": true
   },
   {
    "image": "bg-lake",
-   "start": 1241.695,
-   "figure": true,
-   "end": 1255.019
+   "start": 1079.165,
+   "end": 1090.32,
+   "figure": true
   },
   {
    "image": "bg-forest",
-   "start": 1255.019,
-   "figure": true,
-   "end": 1271.217
+   "start": 1090.32,
+   "end": 1100.503,
+   "figure": true
   },
   {
    "image": "bg-meadow",
-   "start": 1271.217,
-   "figure": true,
-   "end": 1281.867
+   "start": 1100.503,
+   "end": 1112.921,
+   "figure": true
   },
   {
    "image": "bg-sunset-sea",
-   "start": 1281.867,
-   "figure": true,
-   "end": 1295.035
+   "start": 1112.921,
+   "end": 1123.421,
+   "figure": true
+  },
+  {
+   "image": "bg-mountain",
+   "start": 1123.421,
+   "end": 1139.151,
+   "figure": true
+  },
+  {
+   "image": "bg-garden",
+   "start": 1139.151,
+   "end": 1151.527,
+   "figure": true
+  },
+  {
+   "image": "bg-road",
+   "start": 1151.527,
+   "end": 1162.157,
+   "figure": true
+  },
+  {
+   "image": "bg-hills",
+   "start": 1162.157,
+   "end": 1173.781,
+   "figure": true
+  },
+  {
+   "image": "bg-sea",
+   "start": 1173.781,
+   "end": 1183.747,
+   "figure": true
+  },
+  {
+   "image": "bg-snow",
+   "start": 1183.747,
+   "end": 1195.627,
+   "figure": true
+  },
+  {
+   "image": "bg-sky",
+   "start": 1195.627,
+   "end": 1207.896,
+   "figure": true
+  },
+  {
+   "image": "bg-river",
+   "start": 1207.896,
+   "end": 1217.792,
+   "figure": true
+  },
+  {
+   "image": "bg-valley",
+   "start": 1217.792,
+   "end": 1228.051,
+   "figure": true
+  },
+  {
+   "image": "bg-wheat",
+   "start": 1228.051,
+   "end": 1241.545,
+   "figure": true
+  },
+  {
+   "image": "bg-lake",
+   "start": 1241.545,
+   "end": 1254.848,
+   "figure": true
+  },
+  {
+   "image": "bg-forest",
+   "start": 1254.848,
+   "end": 1271.047,
+   "figure": true
+  },
+  {
+   "image": "bg-meadow",
+   "start": 1271.047,
+   "end": 1281.696,
+   "figure": true
+  },
+  {
+   "image": "bg-sunset-sea",
+   "start": 1281.696,
+   "end": 1294.864,
+   "figure": true
   }
  ],
- "captions_ass_sha256": "e9081961c0adf9d11ee418a8ac9113c15c501912d17f1eb2b79338fa5fd37783",
+ "captions_ass_sha256": "b5a4e67c4618d7eedeedde3d1f8234466ff990ba2574f3fb5b17a947b309405f",
  "captions": [
   {
    "start": 1.845,
@@ -952,26 +970,26 @@
   },
   {
    "start": 10.431,
-   "end": 12.323,
+   "end": 12.334,
    "text": "Before you walk into today,"
   },
   {
-   "start": 12.323,
-   "end": 14.536,
+   "start": 12.334,
+   "end": 14.557,
    "text": "I want you to know something."
   },
   {
-   "start": 14.536,
-   "end": 17.211,
+   "start": 14.557,
+   "end": 17.233,
    "text": "God has already been there."
   },
   {
-   "start": 17.841,
-   "end": 19.984,
+   "start": 17.863,
+   "end": 20.005,
    "text": "Take one slow breath."
   },
   {
-   "start": 19.984,
+   "start": 20.005,
    "end": 22.169,
    "text": "Let your shoulders drop."
   },
@@ -987,2902 +1005,2912 @@
   },
   {
    "start": 25.976,
-   "end": 28.386,
+   "end": 28.37,
    "text": "You only have to bring this moment"
   },
   {
-   "start": 28.386,
-   "end": 30.583,
+   "start": 28.37,
+   "end": 30.553,
    "text": "to the One who is not surprised"
   },
   {
-   "start": 30.583,
-   "end": 32.748,
+   "start": 30.553,
+   "end": 32.705,
    "text": "by anything waiting for you."
   },
   {
-   "start": 32.748,
-   "end": 35.379,
+   "start": 32.705,
+   "end": 35.331,
    "text": "The meeting you are nervous about,"
   },
   {
-   "start": 35.379,
-   "end": 38.243,
+   "start": 35.331,
+   "end": 38.189,
    "text": "the conversation you keep rehearsing,"
   },
   {
-   "start": 38.243,
-   "end": 40.101,
+   "start": 38.189,
+   "end": 40.042,
    "text": "the bill, the diagnosis,"
   },
   {
-   "start": 40.101,
-   "end": 42.912,
+   "start": 40.042,
+   "end": 42.848,
    "text": "the silence from someone you love."
   },
   {
-   "start": 42.912,
-   "end": 44.366,
+   "start": 42.848,
+   "end": 44.302,
    "text": "He has seen every one"
   },
   {
-   "start": 44.366,
-   "end": 46.654,
+   "start": 44.302,
+   "end": 46.59,
    "text": "of them from the other side."
   },
   {
-   "start": 47.684,
-   "end": 49.286,
+   "start": 47.62,
+   "end": 49.222,
    "text": "Listen to this promise,"
   },
   {
-   "start": 49.286,
-   "end": 52.004,
+   "start": 49.222,
+   "end": 51.94,
    "text": "spoken to people who were about to step"
   },
   {
-   "start": 52.004,
-   "end": 54.413,
+   "start": 51.94,
+   "end": 54.349,
    "text": "into a land they had never seen."
   },
   {
-   "start": 54.413,
-   "end": 55.464,
+   "start": 54.349,
+   "end": 55.393,
    "text": "And the Lord,"
   },
   {
-   "start": 55.464,
-   "end": 58.391,
+   "start": 55.393,
+   "end": 58.305,
    "text": "he it is that doth go before thee;"
   },
   {
-   "start": 58.391,
-   "end": 59.875,
+   "start": 58.305,
+   "end": 59.789,
    "text": "he will be with thee,"
   },
   {
-   "start": 59.875,
-   "end": 61.429,
+   "start": 59.789,
+   "end": 61.344,
    "text": "he will not fail thee,"
   },
   {
-   "start": 61.429,
-   "end": 63.093,
+   "start": 61.344,
+   "end": 63.008,
    "text": "neither forsake thee:"
   },
   {
-   "start": 63.093,
-   "end": 65.875,
+   "start": 63.008,
+   "end": 65.79,
    "text": "fear not, neither be dismayed."
   },
   {
-   "start": 67.205,
-   "end": 69.071,
+   "start": 67.12,
+   "end": 68.985,
    "text": "Notice the order."
   },
   {
-   "start": 69.071,
-   "end": 71.064,
+   "start": 68.985,
+   "end": 70.979,
    "text": "He goes before you."
   },
   {
-   "start": 71.064,
-   "end": 72.993,
+   "start": 70.979,
+   "end": 72.908,
    "text": "Then he is with you."
   },
   {
-   "start": 72.993,
-   "end": 75.078,
+   "start": 72.908,
+   "end": 74.987,
    "text": "Your morning does not begin"
   },
   {
-   "start": 75.078,
-   "end": 77.626,
+   "start": 74.987,
+   "end": 77.527,
    "text": "with you walking into the unknown"
   },
   {
-   "start": 77.626,
-   "end": 80.277,
+   "start": 77.527,
+   "end": 80.171,
    "text": "alone and hoping God catches up."
   },
   {
-   "start": 80.277,
-   "end": 82.974,
+   "start": 80.171,
+   "end": 82.868,
    "text": "It begins with God already standing"
   },
   {
-   "start": 82.974,
-   "end": 85.62,
+   "start": 82.868,
+   "end": 85.513,
    "text": "in the places you are afraid of."
   },
   {
-   "start": 85.62,
-   "end": 88.808,
+   "start": 85.513,
+   "end": 88.701,
    "text": "The road you cannot see is not empty."
   },
   {
-   "start": 88.808,
-   "end": 91.953,
+   "start": 88.701,
+   "end": 91.846,
    "text": "Someone faithful has walked it first."
   },
   {
-   "start": 92.983,
-   "end": 94.837,
+   "start": 92.876,
+   "end": 94.73,
    "text": "When Israel left Egypt,"
   },
   {
-   "start": 94.837,
-   "end": 97.515,
+   "start": 94.73,
+   "end": 97.408,
    "text": "they did not walk out guessing."
   },
   {
-   "start": 97.515,
-   "end": 100.617,
+   "start": 97.408,
+   "end": 100.511,
    "text": "Listen to how the Bible describes it."
   },
   {
-   "start": 100.617,
-   "end": 102.659,
+   "start": 100.511,
+   "end": 102.553,
    "text": "And the Lord went before them"
   },
   {
-   "start": 102.659,
-   "end": 104.771,
+   "start": 102.553,
+   "end": 104.665,
    "text": "by day in a pillar of a cloud,"
   },
   {
-   "start": 104.771,
-   "end": 106.429,
+   "start": 104.665,
+   "end": 106.323,
    "text": "to lead them the way;"
   },
   {
-   "start": 106.429,
-   "end": 108.907,
+   "start": 106.323,
+   "end": 108.801,
    "text": "and by night in a pillar of fire,"
   },
   {
-   "start": 108.907,
-   "end": 110.513,
+   "start": 108.801,
+   "end": 110.407,
    "text": "to give them light;"
   },
   {
-   "start": 110.513,
-   "end": 112.869,
+   "start": 110.407,
+   "end": 112.762,
    "text": "to go by day and night."
   },
   {
-   "start": 114.199,
-   "end": 116.363,
+   "start": 114.092,
+   "end": 116.256,
    "text": "By day and by night."
   },
   {
-   "start": 116.363,
-   "end": 118.581,
+   "start": 116.256,
+   "end": 118.474,
    "text": "God did not lead his people"
   },
   {
-   "start": 118.581,
-   "end": 120.635,
+   "start": 118.474,
+   "end": 120.528,
    "text": "only when the sun was out"
   },
   {
-   "start": 120.635,
-   "end": 122.623,
+   "start": 120.528,
+   "end": 122.516,
    "text": "and the road was easy."
   },
   {
-   "start": 122.623,
-   "end": 124.168,
+   "start": 122.516,
+   "end": 124.061,
    "text": "He led them in the heat"
   },
   {
-   "start": 124.168,
-   "end": 126.653,
+   "start": 124.061,
+   "end": 126.547,
    "text": "of the afternoon and in the dark when"
   },
   {
-   "start": 126.653,
-   "end": 129.117,
+   "start": 126.547,
+   "end": 129.011,
    "text": "they could not see their own feet."
   },
   {
-   "start": 129.117,
-   "end": 130.872,
+   "start": 129.011,
+   "end": 130.769,
    "text": "Whatever part of the day"
   },
   {
-   "start": 130.872,
-   "end": 132.115,
+   "start": 130.769,
+   "end": 132.015,
    "text": "you are dreading,"
   },
   {
-   "start": 132.115,
-   "end": 133.358,
+   "start": 132.015,
+   "end": 133.26,
    "text": "the long meeting,"
   },
   {
-   "start": 133.358,
-   "end": 134.455,
+   "start": 133.26,
+   "end": 134.359,
    "text": "the drive home,"
   },
   {
-   "start": 134.455,
-   "end": 136.43,
+   "start": 134.359,
+   "end": 136.337,
    "text": "the quiet hour tonight when"
   },
   {
-   "start": 136.43,
-   "end": 138.111,
+   "start": 136.337,
+   "end": 138.022,
    "text": "your thoughts get loud,"
   },
   {
-   "start": 138.111,
-   "end": 140.924,
+   "start": 138.022,
+   "end": 140.839,
    "text": "he has already promised to be there."
   },
   {
-   "start": 140.924,
-   "end": 142.802,
+   "start": 140.839,
+   "end": 142.706,
    "text": "You are not walking toward"
   },
   {
-   "start": 142.802,
-   "end": 144.859,
+   "start": 142.706,
+   "end": 144.752,
    "text": "a place he has never been."
   },
   {
-   "start": 144.859,
-   "end": 147.641,
+   "start": 144.752,
+   "end": 147.534,
    "text": "You are following him into it."
   },
   {
-   "start": 148.671,
-   "end": 150.555,
+   "start": 148.564,
+   "end": 150.448,
    "text": "There is a second promise"
   },
   {
-   "start": 150.555,
-   "end": 152.243,
+   "start": 150.448,
+   "end": 152.136,
    "text": "for this exact hour."
   },
   {
-   "start": 152.243,
-   "end": 154.357,
+   "start": 152.136,
+   "end": 154.257,
    "text": "It is of the Lord's mercies"
   },
   {
-   "start": 154.357,
-   "end": 156.315,
+   "start": 154.257,
+   "end": 156.221,
    "text": "that we are not consumed,"
   },
   {
-   "start": 156.315,
-   "end": 159.079,
+   "start": 156.221,
+   "end": 158.993,
    "text": "because his compassions fail not."
   },
   {
-   "start": 159.079,
-   "end": 161.52,
+   "start": 158.993,
+   "end": 161.435,
    "text": "They are new every morning:"
   },
   {
-   "start": 161.52,
-   "end": 164.11,
+   "start": 161.435,
+   "end": 164.025,
    "text": "great is thy faithfulness."
   },
   {
-   "start": 165.44,
-   "end": 167.497,
+   "start": 165.355,
+   "end": 167.412,
    "text": "New every morning."
   },
   {
-   "start": 167.497,
-   "end": 170.707,
+   "start": 167.412,
+   "end": 170.621,
    "text": "Not leftover mercy from yesterday."
   },
   {
-   "start": 170.707,
-   "end": 173.27,
+   "start": 170.621,
+   "end": 173.185,
    "text": "Not the small amount that remains"
   },
   {
-   "start": 173.27,
-   "end": 175.004,
+   "start": 173.185,
+   "end": 174.919,
    "text": "after your mistakes."
   },
   {
-   "start": 175.004,
-   "end": 177.329,
+   "start": 174.919,
+   "end": 177.244,
    "text": "Fresh mercy, measured for today,"
   },
   {
-   "start": 177.329,
-   "end": 179.945,
+   "start": 177.244,
+   "end": 179.859,
    "text": "for the person you are this morning,"
   },
   {
-   "start": 179.945,
-   "end": 182.523,
+   "start": 179.859,
+   "end": 182.437,
    "text": "with everything you are carrying."
   },
   {
-   "start": 182.523,
-   "end": 184.472,
+   "start": 182.437,
+   "end": 184.386,
    "text": "Whatever yesterday held,"
   },
   {
-   "start": 184.472,
-   "end": 187.332,
+   "start": 184.386,
+   "end": 187.247,
    "text": "it did not use up his compassion."
   },
   {
-   "start": 187.332,
-   "end": 189.218,
+   "start": 187.247,
+   "end": 189.133,
    "text": "It never could."
   },
   {
-   "start": 190.248,
-   "end": 191.887,
+   "start": 190.163,
+   "end": 191.802,
    "text": "So we can pray the way"
   },
   {
-   "start": 191.887,
-   "end": 193.676,
+   "start": 191.802,
+   "end": 193.591,
    "text": "David prayed when he did"
   },
   {
-   "start": 193.676,
-   "end": 195.868,
+   "start": 193.591,
+   "end": 195.783,
    "text": "not know which way to turn."
   },
   {
-   "start": 195.868,
-   "end": 197.455,
+   "start": 195.783,
+   "end": 197.361,
    "text": "Cause me to hear thy"
   },
   {
-   "start": 197.455,
-   "end": 200.016,
+   "start": 197.361,
+   "end": 199.909,
    "text": "lovingkindness in the morning;"
   },
   {
-   "start": 200.016,
-   "end": 202.244,
+   "start": 199.909,
+   "end": 202.137,
    "text": "for in thee do I trust:"
   },
   {
-   "start": 202.244,
-   "end": 204.003,
+   "start": 202.137,
+   "end": 203.896,
    "text": "cause me to know the way"
   },
   {
-   "start": 204.003,
-   "end": 205.795,
+   "start": 203.896,
+   "end": 205.688,
    "text": "wherein I should walk;"
   },
   {
-   "start": 205.795,
-   "end": 208.897,
+   "start": 205.688,
+   "end": 208.79,
    "text": "for I lift up my soul unto thee."
   },
   {
-   "start": 210.227,
-   "end": 212.362,
+   "start": 210.12,
+   "end": 212.255,
    "text": "Notice that David did not ask"
   },
   {
-   "start": 212.362,
-   "end": 214.161,
+   "start": 212.255,
+   "end": 214.055,
    "text": "to see the whole year."
   },
   {
-   "start": 214.161,
-   "end": 215.741,
+   "start": 214.055,
+   "end": 215.634,
    "text": "He asked to know the way"
   },
   {
-   "start": 215.741,
-   "end": 217.435,
+   "start": 215.634,
+   "end": 217.328,
    "text": "wherein he should walk."
   },
   {
-   "start": 217.435,
-   "end": 218.852,
+   "start": 217.328,
+   "end": 218.745,
    "text": "One step."
   },
   {
-   "start": 218.852,
-   "end": 220.461,
+   "start": 218.745,
+   "end": 220.355,
    "text": "One morning."
   },
   {
-   "start": 220.461,
-   "end": 223.019,
+   "start": 220.355,
+   "end": 222.913,
    "text": "God rarely hands us the full map,"
   },
   {
-   "start": 223.019,
-   "end": 224.88,
+   "start": 222.913,
+   "end": 224.774,
    "text": "because he wants to walk"
   },
   {
-   "start": 224.88,
-   "end": 227.128,
+   "start": 224.774,
+   "end": 227.022,
    "text": "with us instead of sending us"
   },
   {
-   "start": 227.128,
-   "end": 229.324,
+   "start": 227.022,
+   "end": 229.217,
    "text": "off alone with directions."
   },
   {
-   "start": 229.324,
-   "end": 231.536,
+   "start": 229.217,
+   "end": 231.429,
    "text": "If you cannot see past today,"
   },
   {
-   "start": 231.536,
-   "end": 233.519,
+   "start": 231.429,
+   "end": 233.412,
    "text": "that is not a sign that he"
   },
   {
-   "start": 233.519,
-   "end": 235.072,
+   "start": 233.412,
+   "end": 234.965,
    "text": "has forgotten you."
   },
   {
-   "start": 235.072,
-   "end": 237.144,
+   "start": 234.965,
+   "end": 237.037,
    "text": "It is an invitation to hold"
   },
   {
-   "start": 237.144,
-   "end": 239.216,
+   "start": 237.037,
+   "end": 239.109,
    "text": "his hand for the next step,"
   },
   {
-   "start": 239.216,
-   "end": 240.947,
+   "start": 239.109,
+   "end": 240.841,
    "text": "and then the next."
   },
   {
-   "start": 241.977,
-   "end": 244.574,
+   "start": 241.871,
+   "end": 244.468,
    "text": "Jesus said something about tomorrow"
   },
   {
-   "start": 244.574,
-   "end": 247.277,
+   "start": 244.468,
+   "end": 247.171,
    "text": "that we need to hear this morning."
   },
   {
-   "start": 247.277,
-   "end": 248.528,
+   "start": 247.171,
+   "end": 248.422,
    "text": "Take therefore no"
   },
   {
-   "start": 248.528,
-   "end": 250.401,
+   "start": 248.422,
+   "end": 250.295,
    "text": "thought for the morrow:"
   },
   {
-   "start": 250.401,
-   "end": 252.453,
+   "start": 250.295,
+   "end": 252.346,
    "text": "for the morrow shall take thought"
   },
   {
-   "start": 252.453,
-   "end": 254.187,
+   "start": 252.346,
+   "end": 254.08,
    "text": "for the things of itself."
   },
   {
-   "start": 254.187,
-   "end": 256.138,
+   "start": 254.08,
+   "end": 256.031,
    "text": "Sufficient unto the day"
   },
   {
-   "start": 256.138,
-   "end": 258.185,
+   "start": 256.031,
+   "end": 258.078,
    "text": "is the evil thereof."
   },
   {
-   "start": 259.515,
-   "end": 261.284,
+   "start": 259.408,
+   "end": 261.177,
    "text": "Jesus is not telling"
   },
   {
-   "start": 261.284,
-   "end": 263.321,
+   "start": 261.177,
+   "end": 263.215,
    "text": "you to stop planning."
   },
   {
-   "start": 263.321,
-   "end": 265.747,
+   "start": 263.215,
+   "end": 265.641,
    "text": "He is telling you to stop carrying"
   },
   {
-   "start": 265.747,
-   "end": 267.853,
+   "start": 265.641,
+   "end": 267.747,
    "text": "tomorrow before it arrives."
   },
   {
-   "start": 267.853,
-   "end": 270.344,
+   "start": 267.747,
+   "end": 270.237,
    "text": "You were given strength for today,"
   },
   {
-   "start": 270.344,
-   "end": 272.428,
+   "start": 270.237,
+   "end": 272.321,
    "text": "not for every day at once."
   },
   {
-   "start": 272.428,
-   "end": 274.791,
+   "start": 272.321,
+   "end": 274.684,
    "text": "So much of our anxiety comes from"
   },
   {
-   "start": 274.791,
-   "end": 277.583,
+   "start": 274.684,
+   "end": 277.476,
    "text": "trying to live next week with the grace"
   },
   {
-   "start": 277.583,
-   "end": 279.84,
+   "start": 277.476,
+   "end": 279.733,
    "text": "God gave us for this morning."
   },
   {
-   "start": 279.84,
-   "end": 281.791,
+   "start": 279.733,
+   "end": 281.684,
    "text": "Put tomorrow down."
   },
   {
-   "start": 281.791,
-   "end": 283.457,
+   "start": 281.684,
+   "end": 283.35,
    "text": "It will still be there,"
   },
   {
-   "start": 283.457,
-   "end": 284.723,
+   "start": 283.35,
+   "end": 284.616,
    "text": "and so will he."
   },
   {
-   "start": 284.723,
-   "end": 286.401,
+   "start": 284.616,
+   "end": 286.294,
    "text": "Today has enough in it,"
   },
   {
-   "start": 286.401,
-   "end": 288.371,
+   "start": 286.294,
+   "end": 288.265,
    "text": "and today is where his help"
   },
   {
-   "start": 288.371,
-   "end": 290.107,
+   "start": 288.265,
+   "end": 290.001,
    "text": "is waiting for you."
   },
   {
-   "start": 291.137,
-   "end": 292.761,
+   "start": 291.031,
+   "end": 292.655,
    "text": "Before we go further,"
   },
   {
-   "start": 292.761,
-   "end": 295.029,
+   "start": 292.655,
+   "end": 294.923,
    "text": "take a moment to look back."
   },
   {
-   "start": 295.029,
-   "end": 297.238,
+   "start": 294.923,
+   "end": 297.126,
    "text": "Think about a morning a year ago,"
   },
   {
-   "start": 297.238,
-   "end": 298.442,
+   "start": 297.126,
+   "end": 298.327,
    "text": "or five years ago,"
   },
   {
-   "start": 298.442,
-   "end": 300.919,
+   "start": 298.327,
+   "end": 300.797,
    "text": "when you were sure you would not make"
   },
   {
-   "start": 300.919,
-   "end": 303.508,
+   "start": 300.797,
+   "end": 303.38,
    "text": "it through what was in front of you."
   },
   {
-   "start": 303.508,
-   "end": 305.48,
+   "start": 303.38,
+   "end": 305.352,
    "text": "And yet here you are."
   },
   {
-   "start": 305.48,
-   "end": 307.378,
+   "start": 305.352,
+   "end": 307.25,
    "text": "Maybe not everything turned"
   },
   {
-   "start": 307.378,
-   "end": 308.995,
+   "start": 307.25,
+   "end": 308.867,
    "text": "out the way you wanted,"
   },
   {
-   "start": 308.995,
-   "end": 310.652,
+   "start": 308.867,
+   "end": 310.524,
    "text": "but you were carried."
   },
   {
-   "start": 310.652,
-   "end": 313.601,
+   "start": 310.524,
+   "end": 313.473,
    "text": "The same God who went before you then"
   },
   {
-   "start": 313.601,
-   "end": 316.571,
+   "start": 313.473,
+   "end": 316.443,
    "text": "is the God who goes before you now."
   },
   {
-   "start": 316.571,
-   "end": 318.439,
+   "start": 316.443,
+   "end": 318.322,
    "text": "Your past is not only"
   },
   {
-   "start": 318.439,
-   "end": 320.399,
+   "start": 318.322,
+   "end": 320.292,
    "text": "a list of hard days."
   },
   {
-   "start": 320.399,
-   "end": 323.117,
+   "start": 320.292,
+   "end": 322.998,
    "text": "It is a record of his faithfulness,"
   },
   {
-   "start": 323.117,
-   "end": 325.719,
+   "start": 322.998,
+   "end": 325.591,
    "text": "and it is evidence for today."
   },
   {
-   "start": 326.749,
-   "end": 327.913,
+   "start": 326.621,
+   "end": 327.777,
    "text": "Before we pray,"
   },
   {
-   "start": 327.913,
-   "end": 330.343,
+   "start": 327.777,
+   "end": 330.193,
    "text": "let us be still for a moment."
   },
   {
-   "start": 330.343,
-   "end": 331.199,
+   "start": 330.193,
+   "end": 331.05,
    "text": "Breathe in,"
   },
   {
-   "start": 331.199,
-   "end": 333.637,
+   "start": 331.05,
+   "end": 333.488,
    "text": "and remember that he is here."
   },
   {
-   "start": 333.637,
-   "end": 334.564,
+   "start": 333.488,
+   "end": 334.415,
    "text": "Breathe out,"
   },
   {
-   "start": 334.564,
-   "end": 337.849,
+   "start": 334.415,
+   "end": 337.699,
    "text": "and let go of what you cannot control."
   },
   {
-   "start": 343.679,
-   "end": 346.568,
+   "start": 343.529,
+   "end": 346.419,
    "text": "Let us pray those words together now."
   },
   {
-   "start": 346.568,
-   "end": 349.223,
+   "start": 346.419,
+   "end": 349.073,
    "text": "If you can, close your eyes."
   },
   {
-   "start": 349.223,
-   "end": 351.938,
+   "start": 349.073,
+   "end": 351.788,
    "text": "If you are driving or getting ready,"
   },
   {
-   "start": 351.938,
-   "end": 354.927,
+   "start": 351.788,
+   "end": 354.778,
    "text": "simply let your heart follow along."
   },
   {
-   "start": 356.257,
-   "end": 356.634,
+   "start": 356.108,
+   "end": 356.485,
    "text": "Lord,"
   },
   {
-   "start": 356.634,
-   "end": 358.215,
+   "start": 356.485,
+   "end": 358.066,
    "text": "here is my day before"
   },
   {
-   "start": 358.215,
-   "end": 360.128,
+   "start": 358.066,
+   "end": 359.979,
    "text": "I have lived any of it."
   },
   {
-   "start": 360.128,
-   "end": 362.649,
+   "start": 359.979,
+   "end": 362.5,
    "text": "I give you the hours I can plan"
   },
   {
-   "start": 362.649,
-   "end": 365.513,
+   "start": 362.5,
+   "end": 365.364,
    "text": "and the moments I cannot predict."
   },
   {
-   "start": 365.513,
-   "end": 367.587,
+   "start": 365.364,
+   "end": 367.438,
    "text": "You already know where I will"
   },
   {
-   "start": 367.587,
-   "end": 370.557,
+   "start": 367.438,
+   "end": 370.408,
    "text": "be at noon and how I will feel tonight."
   },
   {
-   "start": 370.557,
-   "end": 371.787,
+   "start": 370.408,
+   "end": 371.638,
    "text": "I choose to trust"
   },
   {
-   "start": 371.787,
-   "end": 374.065,
+   "start": 371.638,
+   "end": 373.916,
    "text": "that you are there before me."
   },
   {
-   "start": 374.065,
-   "end": 376.111,
+   "start": 373.916,
+   "end": 375.951,
    "text": "Go ahead of me into every"
   },
   {
-   "start": 376.111,
-   "end": 378.426,
+   "start": 375.951,
+   "end": 378.255,
    "text": "room I will enter today."
   },
   {
-   "start": 379.456,
-   "end": 381.006,
+   "start": 379.285,
+   "end": 380.835,
    "text": "I bring you the worry"
   },
   {
-   "start": 381.006,
-   "end": 382.367,
+   "start": 380.835,
+   "end": 382.196,
    "text": "that woke me up."
   },
   {
-   "start": 382.367,
-   "end": 384.168,
+   "start": 382.196,
+   "end": 383.997,
    "text": "You know its name."
   },
   {
-   "start": 384.168,
-   "end": 386.568,
+   "start": 383.997,
+   "end": 386.397,
    "text": "I will not pretend it is small,"
   },
   {
-   "start": 386.568,
-   "end": 389.767,
+   "start": 386.397,
+   "end": 389.596,
    "text": "and I will not pretend you are smaller."
   },
   {
-   "start": 389.767,
-   "end": 391.697,
+   "start": 389.596,
+   "end": 391.526,
    "text": "Where I see a closed door,"
   },
   {
-   "start": 391.697,
-   "end": 393.659,
+   "start": 391.526,
+   "end": 393.488,
    "text": "you see the way through."
   },
   {
-   "start": 393.659,
-   "end": 395.246,
+   "start": 393.488,
+   "end": 395.075,
    "text": "Where I see a delay,"
   },
   {
-   "start": 395.246,
-   "end": 397.252,
+   "start": 395.075,
+   "end": 397.081,
    "text": "you see the right time."
   },
   {
-   "start": 397.252,
-   "end": 398.955,
+   "start": 397.081,
+   "end": 398.784,
    "text": "Teach my heart to rest"
   },
   {
-   "start": 398.955,
-   "end": 400.271,
+   "start": 398.784,
+   "end": 400.1,
    "text": "in what you know,"
   },
   {
-   "start": 400.271,
-   "end": 403.021,
+   "start": 400.1,
+   "end": 402.85,
    "text": "even when I do not know it yet."
   },
   {
-   "start": 404.051,
-   "end": 404.399,
+   "start": 403.88,
+   "end": 404.228,
    "text": "Lord,"
   },
   {
-   "start": 404.399,
-   "end": 405.792,
+   "start": 404.228,
+   "end": 405.621,
    "text": "you know how quickly"
   },
   {
-   "start": 405.792,
-   "end": 407.921,
+   "start": 405.621,
+   "end": 407.751,
    "text": "my thoughts run ahead of me."
   },
   {
-   "start": 407.921,
-   "end": 410.514,
+   "start": 407.751,
+   "end": 410.343,
    "text": "Before I have finished my coffee,"
   },
   {
-   "start": 410.514,
-   "end": 412.949,
+   "start": 410.343,
+   "end": 412.779,
    "text": "my mind is already in tomorrow,"
   },
   {
-   "start": 412.949,
-   "end": 416.272,
+   "start": 412.779,
+   "end": 416.101,
    "text": "rehearsing problems that may never come."
   },
   {
-   "start": 416.272,
-   "end": 417.847,
+   "start": 416.101,
+   "end": 417.676,
    "text": "Bring my thoughts back"
   },
   {
-   "start": 417.847,
-   "end": 419.673,
+   "start": 417.676,
+   "end": 419.503,
    "text": "to this day and to you."
   },
   {
-   "start": 419.673,
-   "end": 420.967,
+   "start": 419.503,
+   "end": 420.797,
    "text": "Replace the noise"
   },
   {
-   "start": 420.967,
-   "end": 423.203,
+   "start": 420.797,
+   "end": 423.032,
    "text": "in my head with your peace."
   },
   {
-   "start": 423.203,
-   "end": 425.636,
+   "start": 423.032,
+   "end": 425.465,
    "text": "When I start to imagine the worst,"
   },
   {
-   "start": 425.636,
-   "end": 427.927,
+   "start": 425.465,
+   "end": 427.756,
    "text": "remind me of everything you have"
   },
   {
-   "start": 427.927,
-   "end": 430.209,
+   "start": 427.756,
+   "end": 430.038,
    "text": "already carried me through."
   },
   {
-   "start": 431.239,
-   "end": 432.893,
+   "start": 431.068,
+   "end": 432.722,
    "text": "Before we keep praying,"
   },
   {
-   "start": 432.893,
-   "end": 435.877,
+   "start": 432.722,
+   "end": 435.707,
    "text": "let these words settle over your heart."
   },
   {
-   "start": 435.877,
-   "end": 438.02,
+   "start": 435.707,
+   "end": 437.849,
    "text": "Be careful for nothing;"
   },
   {
-   "start": 438.02,
-   "end": 440.044,
+   "start": 437.849,
+   "end": 439.873,
    "text": "but in every thing by prayer"
   },
   {
-   "start": 440.044,
-   "end": 442.791,
+   "start": 439.873,
+   "end": 442.62,
    "text": "and supplication with thanksgiving let"
   },
   {
-   "start": 442.791,
-   "end": 445.645,
+   "start": 442.62,
+   "end": 445.475,
    "text": "your requests be made known unto God."
   },
   {
-   "start": 445.645,
-   "end": 447.23,
+   "start": 445.475,
+   "end": 447.06,
    "text": "And the peace of God,"
   },
   {
-   "start": 447.23,
-   "end": 449.645,
+   "start": 447.06,
+   "end": 449.475,
    "text": "which passeth all understanding,"
   },
   {
-   "start": 449.645,
-   "end": 451.305,
+   "start": 449.475,
+   "end": 451.135,
    "text": "shall keep your hearts"
   },
   {
-   "start": 451.305,
-   "end": 453.995,
+   "start": 451.135,
+   "end": 453.825,
    "text": "and minds through Christ Jesus."
   },
   {
-   "start": 455.325,
-   "end": 457.639,
+   "start": 455.155,
+   "end": 457.468,
    "text": "So Lord, here are my requests,"
   },
   {
-   "start": 457.639,
-   "end": 459.516,
+   "start": 457.468,
+   "end": 459.345,
    "text": "and here is my thanks."
   },
   {
-   "start": 459.516,
-   "end": 461.188,
+   "start": 459.345,
+   "end": 461.017,
    "text": "Thank you for the breath"
   },
   {
-   "start": 461.188,
-   "end": 463.109,
+   "start": 461.017,
+   "end": 462.939,
    "text": "in my lungs this morning."
   },
   {
-   "start": 463.109,
-   "end": 465.689,
+   "start": 462.939,
+   "end": 465.518,
    "text": "Thank you for the people who love me,"
   },
   {
-   "start": 465.689,
-   "end": 467.78,
+   "start": 465.518,
+   "end": 467.61,
    "text": "and for the ways you have kept"
   },
   {
-   "start": 467.78,
-   "end": 470.052,
+   "start": 467.61,
+   "end": 469.881,
    "text": "me that I did not even notice."
   },
   {
-   "start": 470.052,
-   "end": 472.408,
+   "start": 469.881,
+   "end": 472.237,
    "text": "And here is what I need."
   },
   {
-   "start": 472.408,
-   "end": 474.207,
+   "start": 472.237,
+   "end": 474.036,
    "text": "I need peace that does"
   },
   {
-   "start": 474.207,
-   "end": 477.004,
+   "start": 474.036,
+   "end": 476.833,
    "text": "not depend on how this day goes."
   },
   {
-   "start": 477.004,
-   "end": 478.505,
+   "start": 476.833,
+   "end": 478.335,
    "text": "Guard my heart when"
   },
   {
-   "start": 478.505,
-   "end": 480.661,
+   "start": 478.335,
+   "end": 480.491,
    "text": "someone is harsh with me."
   },
   {
-   "start": 480.661,
-   "end": 483.7,
+   "start": 480.491,
+   "end": 483.551,
    "text": "Guard my mind when bad news comes."
   },
   {
-   "start": 483.7,
-   "end": 485.967,
+   "start": 483.551,
+   "end": 485.818,
    "text": "Let your peace stand at the door"
   },
   {
-   "start": 485.967,
-   "end": 487.881,
+   "start": 485.818,
+   "end": 487.732,
    "text": "of my thoughts like a guard"
   },
   {
-   "start": 487.881,
-   "end": 490.002,
+   "start": 487.732,
+   "end": 489.853,
    "text": "who does not fall asleep."
   },
   {
-   "start": 491.032,
-   "end": 493.353,
+   "start": 490.883,
+   "end": 493.204,
    "text": "There are decisions in front of me"
   },
   {
-   "start": 493.353,
-   "end": 495.649,
+   "start": 493.204,
+   "end": 495.5,
    "text": "that I do not know how to make."
   },
   {
-   "start": 495.649,
-   "end": 496.751,
+   "start": 495.5,
+   "end": 496.602,
    "text": "Some are small,"
   },
   {
-   "start": 496.751,
-   "end": 498.44,
+   "start": 496.602,
+   "end": 498.291,
    "text": "and some feel like they"
   },
   {
-   "start": 498.44,
-   "end": 500.309,
+   "start": 498.291,
+   "end": 500.16,
    "text": "will change everything."
   },
   {
-   "start": 500.309,
-   "end": 502.602,
+   "start": 500.16,
+   "end": 502.465,
    "text": "Give me wisdom that is bigger"
   },
   {
-   "start": 502.602,
-   "end": 504.521,
+   "start": 502.465,
+   "end": 504.393,
    "text": "than my understanding."
   },
   {
-   "start": 504.521,
-   "end": 506.122,
+   "start": 504.393,
+   "end": 505.994,
    "text": "Close the doors I should"
   },
   {
-   "start": 506.122,
-   "end": 507.257,
+   "start": 505.994,
+   "end": 507.129,
    "text": "not walk through,"
   },
   {
-   "start": 507.257,
-   "end": 509.058,
+   "start": 507.129,
+   "end": 508.93,
    "text": "and give me courage to walk"
   },
   {
-   "start": 509.058,
-   "end": 510.973,
+   "start": 508.93,
+   "end": 510.845,
    "text": "through the ones you open."
   },
   {
-   "start": 510.973,
-   "end": 513.43,
+   "start": 510.845,
+   "end": 513.302,
    "text": "Let me hear your direction clearly,"
   },
   {
-   "start": 513.43,
-   "end": 515.186,
+   "start": 513.302,
+   "end": 515.058,
    "text": "and let me follow it even"
   },
   {
-   "start": 515.186,
-   "end": 517.361,
+   "start": 515.058,
+   "end": 517.233,
    "text": "when it asks for patience."
   },
   {
-   "start": 518.391,
-   "end": 518.814,
+   "start": 518.263,
+   "end": 518.686,
    "text": "Lord,"
   },
   {
-   "start": 518.814,
-   "end": 521.195,
+   "start": 518.686,
+   "end": 521.067,
    "text": "I bring you my work today."
   },
   {
-   "start": 521.195,
-   "end": 523.793,
+   "start": 521.067,
+   "end": 523.665,
    "text": "The tasks I enjoy and the ones"
   },
   {
-   "start": 523.793,
-   "end": 525.791,
+   "start": 523.665,
+   "end": 525.663,
    "text": "I have been avoiding."
   },
   {
-   "start": 525.791,
-   "end": 527.784,
+   "start": 525.663,
+   "end": 527.656,
    "text": "Help me to work with honesty"
   },
   {
-   "start": 527.784,
-   "end": 529.492,
+   "start": 527.656,
+   "end": 529.364,
    "text": "and with a steady heart,"
   },
   {
-   "start": 529.492,
-   "end": 530.844,
+   "start": 529.364,
+   "end": 530.716,
    "text": "as if I am doing it"
   },
   {
-   "start": 530.844,
-   "end": 532.267,
+   "start": 530.716,
+   "end": 532.139,
    "text": "for you and not only"
   },
   {
-   "start": 532.267,
-   "end": 534.653,
+   "start": 532.139,
+   "end": 534.525,
    "text": "for the people who will see it."
   },
   {
-   "start": 534.653,
-   "end": 536.345,
+   "start": 534.525,
+   "end": 536.217,
    "text": "Where I am overwhelmed,"
   },
   {
-   "start": 536.345,
-   "end": 539.1,
+   "start": 536.217,
+   "end": 538.972,
    "text": "show me the next small thing to do."
   },
   {
-   "start": 539.1,
-   "end": 541.778,
+   "start": 538.972,
+   "end": 541.664,
    "text": "Where I am tempted to cut corners,"
   },
   {
-   "start": 541.778,
-   "end": 543.376,
+   "start": 541.664,
+   "end": 543.269,
    "text": "give me integrity."
   },
   {
-   "start": 543.376,
-   "end": 545.839,
+   "start": 543.269,
+   "end": 545.733,
    "text": "And where my work feels unseen,"
   },
   {
-   "start": 545.839,
-   "end": 547.905,
+   "start": 545.733,
+   "end": 547.799,
    "text": "remind me that you see it,"
   },
   {
-   "start": 547.905,
-   "end": 550.289,
+   "start": 547.799,
+   "end": 550.183,
    "text": "and that faithfulness in small"
   },
   {
-   "start": 550.289,
-   "end": 552.387,
+   "start": 550.183,
+   "end": 552.281,
    "text": "things matters to you."
   },
   {
-   "start": 553.417,
-   "end": 555.29,
+   "start": 553.311,
+   "end": 555.183,
    "text": "Thank you that your mercy"
   },
   {
-   "start": 555.29,
-   "end": 556.968,
+   "start": 555.183,
+   "end": 556.861,
    "text": "is new this morning."
   },
   {
-   "start": 556.968,
-   "end": 559.164,
+   "start": 556.861,
+   "end": 559.058,
    "text": "Where I fell short yesterday,"
   },
   {
-   "start": 559.164,
-   "end": 560.177,
+   "start": 559.058,
+   "end": 560.071,
    "text": "forgive me."
   },
   {
-   "start": 560.177,
-   "end": 561.953,
+   "start": 560.071,
+   "end": 561.834,
    "text": "Where I was impatient,"
   },
   {
-   "start": 561.953,
-   "end": 563.344,
+   "start": 561.834,
+   "end": 563.216,
    "text": "make me gentle."
   },
   {
-   "start": 563.344,
-   "end": 564.965,
+   "start": 563.216,
+   "end": 564.837,
    "text": "Where I was afraid,"
   },
   {
-   "start": 564.965,
-   "end": 566.34,
+   "start": 564.837,
+   "end": 566.212,
    "text": "make me brave."
   },
   {
-   "start": 566.34,
-   "end": 568.992,
+   "start": 566.212,
+   "end": 568.864,
    "text": "Do not let the mistakes of yesterday"
   },
   {
-   "start": 568.992,
-   "end": 571.235,
+   "start": 568.864,
+   "end": 571.107,
    "text": "become the script for today."
   },
   {
-   "start": 571.235,
-   "end": 572.807,
+   "start": 571.107,
+   "end": 572.679,
    "text": "Give me a clean start"
   },
   {
-   "start": 572.807,
-   "end": 575.254,
+   "start": 572.679,
+   "end": 575.126,
    "text": "and the grace to walk in it."
   },
   {
-   "start": 576.284,
-   "end": 578.025,
+   "start": 576.156,
+   "end": 577.897,
    "text": "I lift up the people"
   },
   {
-   "start": 578.025,
-   "end": 579.771,
+   "start": 577.897,
+   "end": 579.643,
    "text": "I will meet today."
   },
   {
-   "start": 579.771,
-   "end": 580.589,
+   "start": 579.643,
+   "end": 580.458,
    "text": "My family,"
   },
   {
-   "start": 580.589,
-   "end": 582.388,
+   "start": 580.458,
+   "end": 582.252,
    "text": "the people at my work,"
   },
   {
-   "start": 582.388,
-   "end": 584.35,
+   "start": 582.252,
+   "end": 584.208,
    "text": "the stranger I will pass"
   },
   {
-   "start": 584.35,
-   "end": 586.82,
+   "start": 584.208,
+   "end": 586.671,
    "text": "without knowing their story."
   },
   {
-   "start": 586.82,
-   "end": 588.813,
+   "start": 586.671,
+   "end": 588.664,
    "text": "Go before them too."
   },
   {
-   "start": 588.813,
-   "end": 590.627,
+   "start": 588.664,
+   "end": 590.477,
    "text": "Let my words be kind"
   },
   {
-   "start": 590.627,
-   "end": 592.983,
+   "start": 590.477,
+   "end": 592.833,
    "text": "and my patience be real."
   },
   {
-   "start": 592.983,
-   "end": 594.277,
+   "start": 592.833,
+   "end": 594.127,
    "text": "If someone near me"
   },
   {
-   "start": 594.277,
-   "end": 596.289,
+   "start": 594.127,
+   "end": 596.14,
    "text": "is carrying something heavy,"
   },
   {
-   "start": 596.289,
-   "end": 597.368,
+   "start": 596.14,
+   "end": 597.218,
    "text": "help me notice,"
   },
   {
-   "start": 597.368,
-   "end": 599.946,
+   "start": 597.218,
+   "end": 599.797,
    "text": "and help me carry it with them."
   },
   {
-   "start": 600.976,
-   "end": 601.35,
+   "start": 600.827,
+   "end": 601.201,
    "text": "Lord,"
   },
   {
-   "start": 601.35,
-   "end": 603.073,
+   "start": 601.201,
+   "end": 602.923,
    "text": "there are people I find"
   },
   {
-   "start": 603.073,
-   "end": 604.975,
+   "start": 602.923,
+   "end": 604.825,
    "text": "hard to love right now."
   },
   {
-   "start": 604.975,
-   "end": 606.613,
+   "start": 604.825,
+   "end": 606.463,
    "text": "Someone who hurt me,"
   },
   {
-   "start": 606.613,
-   "end": 607.841,
+   "start": 606.463,
+   "end": 607.691,
    "text": "someone I hurt,"
   },
   {
-   "start": 607.841,
-   "end": 610.38,
+   "start": 607.691,
+   "end": 610.23,
    "text": "a conversation that ended badly"
   },
   {
-   "start": 610.38,
-   "end": 612.771,
+   "start": 610.23,
+   "end": 612.621,
    "text": "and still sits in my chest."
   },
   {
-   "start": 612.771,
-   "end": 614.468,
+   "start": 612.621,
+   "end": 614.319,
    "text": "I do not want to carry"
   },
   {
-   "start": 614.468,
-   "end": 616.577,
+   "start": 614.319,
+   "end": 616.428,
    "text": "bitterness into this day."
   },
   {
-   "start": 616.577,
-   "end": 618.477,
+   "start": 616.428,
+   "end": 618.328,
    "text": "Help me to forgive the way"
   },
   {
-   "start": 618.477,
-   "end": 620.192,
+   "start": 618.328,
+   "end": 620.043,
    "text": "you have forgiven me."
   },
   {
-   "start": 620.192,
-   "end": 622.488,
+   "start": 620.043,
+   "end": 622.339,
    "text": "Where I need to apologize,"
   },
   {
-   "start": 622.488,
-   "end": 624.169,
+   "start": 622.339,
+   "end": 624.02,
    "text": "give me humility."
   },
   {
-   "start": 624.169,
-   "end": 627.236,
+   "start": 624.02,
+   "end": 627.086,
    "text": "Where I need to set a healthy boundary,"
   },
   {
-   "start": 627.236,
-   "end": 628.595,
+   "start": 627.086,
+   "end": 628.445,
    "text": "give me wisdom."
   },
   {
-   "start": 628.595,
-   "end": 630.736,
+   "start": 628.445,
+   "end": 630.593,
    "text": "And where a relationship needs"
   },
   {
-   "start": 630.736,
-   "end": 633.019,
+   "start": 630.593,
+   "end": 632.885,
    "text": "healing that only you can bring,"
   },
   {
-   "start": 633.019,
-   "end": 635.153,
+   "start": 632.885,
+   "end": 635.025,
    "text": "I place it in your hands."
   },
   {
-   "start": 636.183,
-   "end": 638.95,
+   "start": 636.055,
+   "end": 638.833,
    "text": "I pray for the children in my life,"
   },
   {
-   "start": 638.95,
-   "end": 641.739,
+   "start": 638.833,
+   "end": 641.632,
    "text": "my own and the ones I care about."
   },
   {
-   "start": 641.739,
-   "end": 644.215,
+   "start": 641.632,
+   "end": 644.097,
    "text": "Go before them into their classrooms,"
   },
   {
-   "start": 644.215,
-   "end": 646.804,
+   "start": 644.097,
+   "end": 646.676,
    "text": "their friendships and their screens."
   },
   {
-   "start": 646.804,
-   "end": 649.565,
+   "start": 646.676,
+   "end": 649.437,
    "text": "Protect their minds and their hearts."
   },
   {
-   "start": 649.565,
-   "end": 652.149,
+   "start": 649.437,
+   "end": 652.021,
    "text": "Let them know that they are loved by"
   },
   {
-   "start": 652.149,
-   "end": 655.057,
+   "start": 652.021,
+   "end": 654.929,
    "text": "you before they ever achieve anything."
   },
   {
-   "start": 655.057,
-   "end": 657.66,
+   "start": 654.929,
+   "end": 657.505,
    "text": "Give the parents and grandparents"
   },
   {
-   "start": 657.66,
-   "end": 660.263,
+   "start": 657.505,
+   "end": 660.081,
    "text": "listening patience and joy today,"
   },
   {
-   "start": 660.263,
-   "end": 662.393,
+   "start": 660.081,
+   "end": 662.189,
    "text": "and let our homes be places"
   },
   {
-   "start": 662.393,
-   "end": 663.971,
+   "start": 662.189,
+   "end": 663.75,
    "text": "where faith is seen,"
   },
   {
-   "start": 663.971,
-   "end": 665.583,
+   "start": 663.75,
+   "end": 665.349,
    "text": "not only spoken."
   },
   {
-   "start": 666.613,
-   "end": 668.807,
+   "start": 666.379,
+   "end": 668.573,
    "text": "I also bring you my needs,"
   },
   {
-   "start": 668.807,
-   "end": 670.591,
+   "start": 668.573,
+   "end": 670.356,
    "text": "the practical ones."
   },
   {
-   "start": 670.591,
-   "end": 672.938,
+   "start": 670.356,
+   "end": 672.703,
    "text": "You know what is in my account"
   },
   {
-   "start": 672.938,
-   "end": 674.995,
+   "start": 672.703,
+   "end": 674.76,
    "text": "and what is on my table."
   },
   {
-   "start": 674.995,
-   "end": 676.85,
+   "start": 674.76,
+   "end": 676.615,
    "text": "You know the job I hope"
   },
   {
-   "start": 676.85,
-   "end": 679.612,
+   "start": 676.615,
+   "end": 679.377,
    "text": "for and the work I already have."
   },
   {
-   "start": 679.612,
-   "end": 681.861,
+   "start": 679.377,
+   "end": 681.62,
    "text": "Provide what I need for today,"
   },
   {
-   "start": 681.861,
-   "end": 683.81,
+   "start": 681.62,
+   "end": 683.564,
    "text": "and teach me to be content"
   },
   {
-   "start": 683.81,
-   "end": 685.684,
+   "start": 683.564,
+   "end": 685.433,
    "text": "and grateful while I wait"
   },
   {
-   "start": 685.684,
-   "end": 687.813,
+   "start": 685.433,
+   "end": 687.557,
    "text": "for what I still hope for."
   },
   {
-   "start": 687.813,
-   "end": 689.561,
+   "start": 687.557,
+   "end": 689.305,
    "text": "You have never been late,"
   },
   {
-   "start": 689.561,
-   "end": 691.939,
+   "start": 689.305,
+   "end": 691.683,
    "text": "even when I thought you were."
   },
   {
-   "start": 692.969,
-   "end": 695.901,
+   "start": 692.713,
+   "end": 695.645,
    "text": "I also lift up my body to you."
   },
   {
-   "start": 695.901,
-   "end": 697.858,
+   "start": 695.645,
+   "end": 697.609,
    "text": "You know where I am tired,"
   },
   {
-   "start": 697.858,
-   "end": 698.836,
+   "start": 697.609,
+   "end": 698.592,
    "text": "where I hurt,"
   },
   {
-   "start": 698.836,
-   "end": 701.5,
+   "start": 698.592,
+   "end": 701.265,
    "text": "and the results I am waiting for."
   },
   {
-   "start": 701.5,
-   "end": 704.438,
+   "start": 701.265,
+   "end": 704.203,
    "text": "I ask you for strength and for healing,"
   },
   {
-   "start": 704.438,
-   "end": 706.925,
+   "start": 704.203,
+   "end": 706.69,
    "text": "and I thank you for every doctor,"
   },
   {
-   "start": 706.925,
-   "end": 710.043,
+   "start": 706.69,
+   "end": 709.808,
    "text": "nurse and caregiver you use to help us."
   },
   {
-   "start": 710.043,
-   "end": 711.954,
+   "start": 709.808,
+   "end": 711.719,
    "text": "Give me wisdom to rest when"
   },
   {
-   "start": 711.954,
-   "end": 713.936,
+   "start": 711.719,
+   "end": 713.701,
    "text": "I need rest and to take care"
   },
   {
-   "start": 713.936,
-   "end": 716.239,
+   "start": 713.701,
+   "end": 716.004,
    "text": "of the body you have given me."
   },
   {
-   "start": 716.239,
-   "end": 719.044,
+   "start": 716.004,
+   "end": 718.809,
    "text": "And for anyone listening who is sick"
   },
   {
-   "start": 719.044,
-   "end": 721.537,
+   "start": 718.809,
+   "end": 721.302,
    "text": "or waiting on news this morning,"
   },
   {
-   "start": 721.537,
-   "end": 723.407,
+   "start": 721.302,
+   "end": 723.172,
    "text": "hold them close and give"
   },
   {
-   "start": 723.407,
-   "end": 725.549,
+   "start": 723.172,
+   "end": 725.314,
    "text": "them courage for today."
   },
   {
-   "start": 726.579,
-   "end": 728.888,
+   "start": 726.344,
+   "end": 728.653,
    "text": "Here is a promise for your going"
   },
   {
-   "start": 728.888,
-   "end": 730.727,
+   "start": 728.653,
+   "end": 730.492,
    "text": "out and your coming in."
   },
   {
-   "start": 730.727,
-   "end": 732.444,
+   "start": 730.492,
+   "end": 732.221,
    "text": "The Lord shall preserve"
   },
   {
-   "start": 732.444,
-   "end": 734.043,
+   "start": 732.221,
+   "end": 733.829,
    "text": "thee from all evil:"
   },
   {
-   "start": 734.043,
-   "end": 736.633,
+   "start": 733.829,
+   "end": 736.42,
    "text": "he shall preserve thy soul."
   },
   {
-   "start": 736.633,
-   "end": 739.251,
+   "start": 736.42,
+   "end": 739.038,
    "text": "The Lord shall preserve thy going out"
   },
   {
-   "start": 739.251,
-   "end": 742.01,
+   "start": 739.038,
+   "end": 741.797,
    "text": "and thy coming in from this time forth,"
   },
   {
-   "start": 742.01,
-   "end": 743.917,
+   "start": 741.797,
+   "end": 743.703,
    "text": "and even for evermore."
   },
   {
-   "start": 745.247,
-   "end": 745.66,
+   "start": 745.033,
+   "end": 745.446,
    "text": "Lord,"
   },
   {
-   "start": 745.66,
-   "end": 747.724,
+   "start": 745.446,
+   "end": 747.51,
    "text": "as I go out this morning,"
   },
   {
-   "start": 747.724,
-   "end": 749.885,
+   "start": 747.51,
+   "end": 749.672,
    "text": "watch over my going out."
   },
   {
-   "start": 749.885,
-   "end": 752.407,
+   "start": 749.672,
+   "end": 752.194,
    "text": "Watch over the roads I travel"
   },
   {
-   "start": 752.407,
-   "end": 754.588,
+   "start": 752.194,
+   "end": 754.375,
    "text": "and the places I enter."
   },
   {
-   "start": 754.588,
-   "end": 756.393,
+   "start": 754.375,
+   "end": 756.167,
    "text": "Watch over my home while"
   },
   {
-   "start": 756.393,
-   "end": 757.747,
+   "start": 756.167,
+   "end": 757.511,
    "text": "I am away from it,"
   },
   {
-   "start": 757.747,
-   "end": 760.485,
+   "start": 757.511,
+   "end": 760.229,
    "text": "and over everyone who lives there."
   },
   {
-   "start": 760.485,
-   "end": 762.235,
+   "start": 760.229,
+   "end": 761.979,
    "text": "Keep my family safe"
   },
   {
-   "start": 762.235,
-   "end": 764.441,
+   "start": 761.979,
+   "end": 764.185,
    "text": "in body and in spirit."
   },
   {
-   "start": 764.441,
-   "end": 766.902,
+   "start": 764.185,
+   "end": 766.646,
    "text": "When we come back together tonight,"
   },
   {
-   "start": 766.902,
-   "end": 769.222,
+   "start": 766.646,
+   "end": 768.966,
    "text": "let us come back to a home filled"
   },
   {
-   "start": 769.222,
-   "end": 772.003,
+   "start": 768.966,
+   "end": 771.747,
    "text": "with your peace and not with tension."
   },
   {
-   "start": 772.003,
-   "end": 774.115,
+   "start": 771.747,
+   "end": 773.859,
    "text": "Be the strength of our walls"
   },
   {
-   "start": 774.115,
-   "end": 776.577,
+   "start": 773.859,
+   "end": 776.321,
    "text": "and the warmth of our table."
   },
   {
-   "start": 777.607,
-   "end": 779.038,
+   "start": 777.351,
+   "end": 778.787,
    "text": "And when fear tries"
   },
   {
-   "start": 779.038,
-   "end": 780.92,
+   "start": 778.787,
+   "end": 780.678,
    "text": "to speak louder than you,"
   },
   {
-   "start": 780.92,
-   "end": 782.907,
+   "start": 780.678,
+   "end": 782.672,
    "text": "remind me of your voice."
   },
   {
-   "start": 782.907,
-   "end": 784.687,
+   "start": 782.672,
+   "end": 784.452,
    "text": "Fear thou not;"
   },
   {
-   "start": 784.687,
-   "end": 786.637,
+   "start": 784.452,
+   "end": 786.403,
    "text": "for I am with thee:"
   },
   {
-   "start": 786.637,
-   "end": 788.567,
+   "start": 786.403,
+   "end": 788.311,
    "text": "be not dismayed;"
   },
   {
-   "start": 788.567,
-   "end": 790.709,
+   "start": 788.311,
+   "end": 790.453,
    "text": "for I am thy God:"
   },
   {
-   "start": 790.709,
-   "end": 792.745,
+   "start": 790.453,
+   "end": 792.489,
    "text": "I will strengthen thee;"
   },
   {
-   "start": 792.745,
-   "end": 794.824,
+   "start": 792.489,
+   "end": 794.568,
    "text": "yea, I will help thee;"
   },
   {
-   "start": 794.824,
-   "end": 795.106,
+   "start": 794.568,
+   "end": 794.85,
    "text": "yea,"
   },
   {
-   "start": 795.106,
-   "end": 797.434,
+   "start": 794.85,
+   "end": 797.178,
    "text": "I will uphold thee with the right"
   },
   {
-   "start": 797.434,
-   "end": 799.547,
+   "start": 797.178,
+   "end": 799.291,
    "text": "hand of my righteousness."
   },
   {
-   "start": 800.877,
-   "end": 802.934,
+   "start": 800.621,
+   "end": 802.678,
    "text": "Strengthen me for the hardest"
   },
   {
-   "start": 802.934,
-   "end": 804.139,
+   "start": 802.678,
+   "end": 803.883,
    "text": "part of this day,"
   },
   {
-   "start": 804.139,
-   "end": 806.305,
+   "start": 803.883,
+   "end": 806.049,
    "text": "whatever it turns out to be."
   },
   {
-   "start": 806.305,
-   "end": 807.808,
+   "start": 806.049,
+   "end": 807.552,
    "text": "When I feel weak,"
   },
   {
-   "start": 807.808,
-   "end": 808.96,
+   "start": 807.552,
+   "end": 808.704,
    "text": "hold me up."
   },
   {
-   "start": 808.96,
-   "end": 811.37,
+   "start": 808.704,
+   "end": 811.114,
    "text": "When I do not know what to say,"
   },
   {
-   "start": 811.37,
-   "end": 812.639,
+   "start": 811.114,
+   "end": 812.383,
    "text": "give me words."
   },
   {
-   "start": 812.639,
-   "end": 814.577,
+   "start": 812.383,
+   "end": 814.321,
    "text": "When I am tempted to quit,"
   },
   {
-   "start": 814.577,
-   "end": 817.112,
+   "start": 814.321,
+   "end": 816.856,
    "text": "remind me that you have not let go"
   },
   {
-   "start": 817.112,
-   "end": 819.922,
+   "start": 816.856,
+   "end": 819.666,
    "text": "of me and you will not start now."
   },
   {
-   "start": 820.952,
-   "end": 822.571,
+   "start": 820.696,
+   "end": 822.325,
    "text": "Some of you are walking"
   },
   {
-   "start": 822.571,
-   "end": 824.652,
+   "start": 822.325,
+   "end": 824.417,
    "text": "into something heavy today."
   },
   {
-   "start": 824.652,
-   "end": 826.944,
+   "start": 824.417,
+   "end": 826.709,
    "text": "This promise is for you."
   },
   {
-   "start": 826.944,
-   "end": 829.616,
+   "start": 826.709,
+   "end": 829.382,
    "text": "When thou passest through the waters,"
   },
   {
-   "start": 829.616,
-   "end": 831.241,
+   "start": 829.382,
+   "end": 831.007,
    "text": "I will be with thee;"
   },
   {
-   "start": 831.241,
-   "end": 832.864,
+   "start": 831.007,
+   "end": 832.639,
    "text": "and through the rivers,"
   },
   {
-   "start": 832.864,
-   "end": 835.091,
+   "start": 832.639,
+   "end": 834.877,
    "text": "they shall not overflow thee:"
   },
   {
-   "start": 835.091,
-   "end": 837.692,
+   "start": 834.877,
+   "end": 837.49,
    "text": "when thou walkest through the fire,"
   },
   {
-   "start": 837.692,
-   "end": 839.729,
+   "start": 837.49,
+   "end": 839.537,
    "text": "thou shalt not be burned;"
   },
   {
-   "start": 839.729,
-   "end": 841.582,
+   "start": 839.537,
+   "end": 841.39,
    "text": "neither shall the flame"
   },
   {
-   "start": 841.582,
-   "end": 843.301,
+   "start": 841.39,
+   "end": 843.109,
    "text": "kindle upon thee."
   },
   {
-   "start": 844.631,
-   "end": 846.816,
+   "start": 844.439,
+   "end": 846.624,
    "text": "Notice that God did not say if"
   },
   {
-   "start": 846.816,
-   "end": 849.035,
+   "start": 846.624,
+   "end": 848.843,
    "text": "you pass through the waters."
   },
   {
-   "start": 849.035,
-   "end": 850.623,
+   "start": 848.843,
+   "end": 850.431,
    "text": "He said when."
   },
   {
-   "start": 850.623,
-   "end": 851.028,
+   "start": 850.431,
+   "end": 850.836,
    "text": "Lord,"
   },
   {
-   "start": 851.028,
-   "end": 852.972,
+   "start": 850.836,
+   "end": 852.78,
    "text": "I will not pretend there"
   },
   {
-   "start": 852.972,
-   "end": 855.581,
+   "start": 852.78,
+   "end": 855.389,
    "text": "are no deep waters in my life."
   },
   {
-   "start": 855.581,
-   "end": 857.581,
+   "start": 855.389,
+   "end": 857.389,
    "text": "But I thank you that you do"
   },
   {
-   "start": 857.581,
-   "end": 859.836,
+   "start": 857.389,
+   "end": 859.644,
    "text": "not watch me from the shore."
   },
   {
-   "start": 859.836,
-   "end": 861.915,
+   "start": 859.644,
+   "end": 861.723,
    "text": "You walk through them with me."
   },
   {
-   "start": 861.915,
-   "end": 864.278,
+   "start": 861.723,
+   "end": 864.086,
    "text": "When the pressure rises today,"
   },
   {
-   "start": 864.278,
-   "end": 866.191,
+   "start": 864.086,
+   "end": 865.999,
    "text": "let me feel your hand."
   },
   {
-   "start": 866.191,
-   "end": 868.486,
+   "start": 865.999,
+   "end": 868.294,
    "text": "When I think I am going under,"
   },
   {
-   "start": 868.486,
-   "end": 871.317,
+   "start": 868.294,
+   "end": 871.125,
    "text": "remind me that the river has a limit,"
   },
   {
-   "start": 871.317,
-   "end": 873.197,
+   "start": 871.125,
+   "end": 873.005,
    "text": "and that you set it."
   },
   {
-   "start": 874.227,
-   "end": 875.924,
+   "start": 874.035,
+   "end": 875.732,
    "text": "Hold on to this when"
   },
   {
-   "start": 875.924,
-   "end": 878.055,
+   "start": 875.732,
+   "end": 877.863,
    "text": "the day feels unstable."
   },
   {
-   "start": 878.055,
-   "end": 880.593,
+   "start": 877.863,
+   "end": 880.402,
    "text": "God is our refuge and strength,"
   },
   {
-   "start": 880.593,
-   "end": 883.312,
+   "start": 880.402,
+   "end": 883.12,
    "text": "a very present help in trouble."
   },
   {
-   "start": 883.312,
-   "end": 885.234,
+   "start": 883.12,
+   "end": 885.042,
    "text": "Therefore will not we fear,"
   },
   {
-   "start": 885.234,
-   "end": 887.226,
+   "start": 885.042,
+   "end": 887.034,
    "text": "though the earth be removed,"
   },
   {
-   "start": 887.226,
-   "end": 889.718,
+   "start": 887.034,
+   "end": 889.526,
    "text": "and though the mountains be carried"
   },
   {
-   "start": 889.718,
-   "end": 891.918,
+   "start": 889.526,
+   "end": 891.726,
    "text": "into the midst of the sea."
   },
   {
-   "start": 893.248,
-   "end": 895.391,
+   "start": 893.056,
+   "end": 895.199,
    "text": "A very present help."
   },
   {
-   "start": 895.391,
-   "end": 896.895,
+   "start": 895.199,
+   "end": 896.703,
    "text": "Not a distant help,"
   },
   {
-   "start": 896.895,
-   "end": 899.191,
+   "start": 896.703,
+   "end": 898.999,
    "text": "not a help that arrives after"
   },
   {
-   "start": 899.191,
-   "end": 901.011,
+   "start": 898.999,
+   "end": 900.819,
    "text": "everything falls apart,"
   },
   {
-   "start": 901.011,
-   "end": 902.141,
+   "start": 900.819,
+   "end": 901.949,
    "text": "but present."
   },
   {
-   "start": 902.141,
-   "end": 904.36,
+   "start": 901.949,
+   "end": 904.168,
    "text": "In the moment the phone rings"
   },
   {
-   "start": 904.36,
-   "end": 906.425,
+   "start": 904.168,
+   "end": 906.233,
    "text": "with news you did not want,"
   },
   {
-   "start": 906.425,
-   "end": 907.676,
+   "start": 906.233,
+   "end": 907.484,
    "text": "he is present."
   },
   {
-   "start": 907.676,
-   "end": 909.496,
+   "start": 907.484,
+   "end": 909.304,
    "text": "In the moment you feel"
   },
   {
-   "start": 909.496,
-   "end": 911.233,
+   "start": 909.304,
+   "end": 911.041,
    "text": "the old panic rising,"
   },
   {
-   "start": 911.233,
-   "end": 912.571,
+   "start": 911.041,
+   "end": 912.379,
    "text": "he is present."
   },
   {
-   "start": 912.571,
-   "end": 914.213,
+   "start": 912.379,
+   "end": 914.021,
    "text": "You do not have to find"
   },
   {
-   "start": 914.213,
-   "end": 916.463,
+   "start": 914.021,
+   "end": 916.271,
    "text": "the right words to reach him."
   },
   {
-   "start": 916.463,
-   "end": 918.413,
+   "start": 916.271,
+   "end": 918.221,
    "text": "He is already there."
   },
   {
-   "start": 918.413,
-   "end": 920.445,
+   "start": 918.221,
+   "end": 920.253,
    "text": "Sometimes the most powerful"
   },
   {
-   "start": 920.445,
-   "end": 922.552,
+   "start": 920.253,
+   "end": 922.36,
    "text": "prayer of the day is simply,"
   },
   {
-   "start": 922.552,
-   "end": 923.981,
+   "start": 922.36,
+   "end": 923.789,
    "text": "Lord, you are here,"
   },
   {
-   "start": 923.981,
-   "end": 925.761,
+   "start": 923.789,
+   "end": 925.569,
    "text": "and I am not alone."
   },
   {
-   "start": 926.791,
-   "end": 927.448,
+   "start": 926.599,
+   "end": 927.257,
    "text": "And Lord,"
   },
   {
-   "start": 927.448,
-   "end": 928.98,
+   "start": 927.257,
+   "end": 928.791,
    "text": "for the one listening"
   },
   {
-   "start": 928.98,
-   "end": 930.877,
+   "start": 928.791,
+   "end": 930.691,
    "text": "who woke up already tired,"
   },
   {
-   "start": 930.877,
-   "end": 932.628,
+   "start": 930.691,
+   "end": 932.445,
    "text": "the one who is grieving,"
   },
   {
-   "start": 932.628,
-   "end": 934.671,
+   "start": 932.445,
+   "end": 934.491,
    "text": "the one who has prayed about"
   },
   {
-   "start": 934.671,
-   "end": 936.86,
+   "start": 934.491,
+   "end": 936.683,
    "text": "the same thing for a long time"
   },
   {
-   "start": 936.86,
-   "end": 939.049,
+   "start": 936.683,
+   "end": 938.876,
    "text": "and is starting to lose heart,"
   },
   {
-   "start": 939.049,
-   "end": 940.688,
+   "start": 938.876,
+   "end": 940.517,
    "text": "meet them right now."
   },
   {
-   "start": 940.688,
-   "end": 943.087,
+   "start": 940.517,
+   "end": 942.916,
    "text": "Sit with them in the quiet."
   },
   {
-   "start": 943.087,
-   "end": 945.405,
+   "start": 942.916,
+   "end": 945.234,
    "text": "Remind them that a slow morning"
   },
   {
-   "start": 945.405,
-   "end": 947.2,
+   "start": 945.234,
+   "end": 947.029,
    "text": "is not a failed morning,"
   },
   {
-   "start": 947.2,
-   "end": 948.246,
+   "start": 947.029,
+   "end": 948.076,
    "text": "and that tears"
   },
   {
-   "start": 948.246,
-   "end": 950.221,
+   "start": 948.076,
+   "end": 950.051,
    "text": "are not a lack of faith."
   },
   {
-   "start": 950.221,
-   "end": 952.957,
+   "start": 950.051,
+   "end": 952.787,
    "text": "Give them enough strength for this hour,"
   },
   {
-   "start": 952.957,
-   "end": 954.188,
+   "start": 952.787,
+   "end": 954.018,
    "text": "and then the next,"
   },
   {
-   "start": 954.188,
-   "end": 957.206,
+   "start": 954.018,
+   "end": 957.035,
    "text": "until they can see your goodness again."
   },
   {
-   "start": 958.236,
-   "end": 960.869,
+   "start": 958.065,
+   "end": 960.699,
    "text": "Let us pause again for a moment."
   },
   {
-   "start": 960.869,
-   "end": 962.324,
+   "start": 960.699,
+   "end": 962.153,
    "text": "Breathe in slowly,"
   },
   {
-   "start": 962.324,
-   "end": 964.847,
+   "start": 962.153,
+   "end": 964.676,
    "text": "and remember that he is near."
   },
   {
-   "start": 964.847,
-   "end": 965.702,
+   "start": 964.676,
+   "end": 965.526,
    "text": "Breathe out,"
   },
   {
-   "start": 965.702,
-   "end": 967.483,
+   "start": 965.526,
+   "end": 967.298,
    "text": "and hand him the heaviest"
   },
   {
-   "start": 967.483,
-   "end": 969.186,
+   "start": 967.298,
+   "end": 968.994,
    "text": "thing on your mind."
   },
   {
-   "start": 975.016,
-   "end": 977.735,
+   "start": 974.824,
+   "end": 977.543,
    "text": "Now say this with me, slowly."
   },
   {
-   "start": 977.735,
-   "end": 980.496,
+   "start": 977.543,
+   "end": 980.304,
    "text": "God has gone before me today."
   },
   {
-   "start": 980.496,
-   "end": 983.236,
+   "start": 980.304,
+   "end": 983.044,
    "text": "His mercy is new this morning."
   },
   {
-   "start": 983.236,
-   "end": 985.443,
+   "start": 983.044,
+   "end": 985.251,
    "text": "I do not walk alone."
   },
   {
-   "start": 985.443,
-   "end": 988.097,
+   "start": 985.251,
+   "end": 987.905,
    "text": "I will not be ruled by fear."
   },
   {
-   "start": 988.097,
-   "end": 989.296,
+   "start": 987.905,
+   "end": 989.104,
    "text": "I will trust him"
   },
   {
-   "start": 989.296,
-   "end": 991.2,
+   "start": 989.104,
+   "end": 991.008,
    "text": "with what I cannot see."
   },
   {
-   "start": 991.2,
-   "end": 992.813,
+   "start": 991.008,
+   "end": 992.621,
    "text": "This is the day which"
   },
   {
-   "start": 992.813,
-   "end": 994.452,
+   "start": 992.621,
+   "end": 994.26,
    "text": "the Lord hath made;"
   },
   {
-   "start": 994.452,
-   "end": 997.533,
+   "start": 994.26,
+   "end": 997.341,
    "text": "I will rejoice and be glad in it."
   },
   {
-   "start": 998.863,
-   "end": 1000.627,
+   "start": 998.671,
+   "end": 1000.435,
    "text": "Carry one more promise"
   },
   {
-   "start": 1000.627,
-   "end": 1003.053,
+   "start": 1000.435,
+   "end": 1002.861,
    "text": "with you into the next hour."
   },
   {
-   "start": 1003.053,
-   "end": 1005.964,
+   "start": 1002.861,
+   "end": 1005.772,
    "text": "Trust in the Lord with all thine heart;"
   },
   {
-   "start": 1005.964,
-   "end": 1007.999,
+   "start": 1005.772,
+   "end": 1007.807,
    "text": "and lean not unto thine"
   },
   {
-   "start": 1007.999,
-   "end": 1009.771,
+   "start": 1007.807,
+   "end": 1009.579,
    "text": "own understanding."
   },
   {
-   "start": 1009.771,
-   "end": 1012.193,
+   "start": 1009.579,
+   "end": 1012.001,
    "text": "In all thy ways acknowledge him,"
   },
   {
-   "start": 1012.193,
-   "end": 1014.814,
+   "start": 1012.001,
+   "end": 1014.622,
    "text": "and he shall direct thy paths."
   },
   {
-   "start": 1016.144,
-   "end": 1018.884,
+   "start": 1015.952,
+   "end": 1018.692,
    "text": "In all thy ways acknowledge him."
   },
   {
-   "start": 1018.884,
-   "end": 1021.286,
+   "start": 1018.692,
+   "end": 1021.094,
    "text": "Not only in the big decisions,"
   },
   {
-   "start": 1021.286,
-   "end": 1022.967,
+   "start": 1021.094,
+   "end": 1022.775,
    "text": "but in the small ones"
   },
   {
-   "start": 1022.967,
-   "end": 1025.229,
+   "start": 1022.775,
+   "end": 1025.037,
    "text": "that fill an ordinary day."
   },
   {
-   "start": 1025.229,
-   "end": 1027.25,
+   "start": 1025.037,
+   "end": 1027.058,
    "text": "When you sit down to work,"
   },
   {
-   "start": 1027.25,
-   "end": 1028.673,
+   "start": 1027.058,
+   "end": 1028.481,
    "text": "acknowledge him."
   },
   {
-   "start": 1028.673,
-   "end": 1031.435,
+   "start": 1028.481,
+   "end": 1031.243,
    "text": "When you answer a difficult message,"
   },
   {
-   "start": 1031.435,
-   "end": 1032.843,
+   "start": 1031.243,
+   "end": 1032.651,
    "text": "acknowledge him."
   },
   {
-   "start": 1032.843,
-   "end": 1035.35,
+   "start": 1032.651,
+   "end": 1035.158,
    "text": "When you feel the old worry return"
   },
   {
-   "start": 1035.35,
-   "end": 1037.636,
+   "start": 1035.158,
+   "end": 1037.444,
    "text": "in the middle of the afternoon,"
   },
   {
-   "start": 1037.636,
-   "end": 1038.996,
+   "start": 1037.444,
+   "end": 1038.804,
    "text": "acknowledge him."
   },
   {
-   "start": 1038.996,
-   "end": 1040.7,
+   "start": 1038.804,
+   "end": 1040.508,
    "text": "You do not need a long"
   },
   {
-   "start": 1040.7,
-   "end": 1042.12,
+   "start": 1040.508,
+   "end": 1041.928,
    "text": "prayer for that."
   },
   {
-   "start": 1042.12,
-   "end": 1044.455,
+   "start": 1041.928,
+   "end": 1044.263,
    "text": "A quiet word is enough."
   },
   {
-   "start": 1044.455,
-   "end": 1046.277,
+   "start": 1044.263,
+   "end": 1046.085,
    "text": "Lord, you are here."
   },
   {
-   "start": 1046.277,
-   "end": 1047.993,
+   "start": 1046.085,
+   "end": 1047.801,
    "text": "Lord, lead me."
   },
   {
-   "start": 1047.993,
-   "end": 1049.998,
+   "start": 1047.801,
+   "end": 1049.8,
    "text": "And the promise is that he"
   },
   {
-   "start": 1049.998,
-   "end": 1051.772,
+   "start": 1049.8,
+   "end": 1051.569,
    "text": "will direct your paths,"
   },
   {
-   "start": 1051.772,
-   "end": 1053.238,
+   "start": 1051.569,
+   "end": 1053.03,
    "text": "one turn at a time,"
   },
   {
-   "start": 1053.238,
-   "end": 1055.362,
+   "start": 1053.03,
+   "end": 1055.149,
    "text": "all the way to evening."
   },
   {
-   "start": 1056.392,
-   "end": 1058.266,
+   "start": 1056.179,
+   "end": 1058.053,
    "text": "As we come toward the end"
   },
   {
-   "start": 1058.266,
-   "end": 1059.841,
+   "start": 1058.053,
+   "end": 1059.628,
    "text": "of our time together,"
   },
   {
-   "start": 1059.841,
-   "end": 1061.94,
+   "start": 1059.628,
+   "end": 1061.727,
    "text": "hear what God said to Joshua"
   },
   {
-   "start": 1061.94,
-   "end": 1064.444,
+   "start": 1061.727,
+   "end": 1064.231,
    "text": "on the edge of a new beginning."
   },
   {
-   "start": 1064.444,
-   "end": 1066.864,
+   "start": 1064.231,
+   "end": 1066.651,
    "text": "Have not I commanded thee?"
   },
   {
-   "start": 1066.864,
-   "end": 1069.668,
+   "start": 1066.651,
+   "end": 1069.433,
    "text": "Be strong and of a good courage;"
   },
   {
-   "start": 1069.668,
-   "end": 1070.847,
+   "start": 1069.433,
+   "end": 1070.613,
    "text": "be not afraid,"
   },
   {
-   "start": 1070.847,
-   "end": 1073.133,
+   "start": 1070.613,
+   "end": 1072.899,
    "text": "neither be thou dismayed:"
   },
   {
-   "start": 1073.133,
-   "end": 1075.731,
+   "start": 1072.899,
+   "end": 1075.508,
    "text": "for the Lord thy God is with thee"
   },
   {
-   "start": 1075.731,
-   "end": 1078.049,
+   "start": 1075.508,
+   "end": 1077.835,
    "text": "whithersoever thou goest."
   },
   {
-   "start": 1079.379,
-   "end": 1082.305,
+   "start": 1079.165,
+   "end": 1082.091,
    "text": "God did not tell Joshua to be brave"
   },
   {
-   "start": 1082.305,
-   "end": 1084.743,
+   "start": 1082.091,
+   "end": 1084.529,
    "text": "because the task was small."
   },
   {
-   "start": 1084.743,
-   "end": 1086.426,
+   "start": 1084.529,
+   "end": 1086.212,
    "text": "He told him to be strong"
   },
   {
-   "start": 1086.426,
-   "end": 1088.53,
+   "start": 1086.212,
+   "end": 1088.316,
    "text": "because the One going with him"
   },
   {
-   "start": 1088.53,
-   "end": 1090.533,
+   "start": 1088.316,
+   "end": 1090.32,
    "text": "was greater than the task."
   },
   {
-   "start": 1090.533,
-   "end": 1092.998,
+   "start": 1090.32,
+   "end": 1092.785,
    "text": "Your courage today does not have"
   },
   {
-   "start": 1092.998,
-   "end": 1095.257,
+   "start": 1092.785,
+   "end": 1095.044,
    "text": "to come from feeling ready."
   },
   {
-   "start": 1095.257,
-   "end": 1096.934,
+   "start": 1095.044,
+   "end": 1096.721,
    "text": "It can come from knowing"
   },
   {
-   "start": 1096.934,
-   "end": 1098.232,
+   "start": 1096.721,
+   "end": 1098.019,
    "text": "who is with you."
   },
   {
-   "start": 1098.232,
-   "end": 1100.716,
+   "start": 1098.019,
+   "end": 1100.503,
    "text": "Whithersoever thou goest."
   },
   {
-   "start": 1100.716,
-   "end": 1102.408,
+   "start": 1100.503,
+   "end": 1102.195,
    "text": "That means the kitchen,"
   },
   {
-   "start": 1102.408,
-   "end": 1104.615,
+   "start": 1102.195,
+   "end": 1104.402,
    "text": "the office, the hospital room,"
   },
   {
-   "start": 1104.615,
-   "end": 1105.645,
+   "start": 1104.402,
+   "end": 1105.432,
    "text": "the classroom,"
   },
   {
-   "start": 1105.645,
-   "end": 1107.296,
+   "start": 1105.432,
+   "end": 1107.083,
    "text": "the empty apartment."
   },
   {
-   "start": 1107.296,
-   "end": 1109.781,
+   "start": 1107.083,
+   "end": 1109.568,
    "text": "There is no place on your schedule"
   },
   {
-   "start": 1109.781,
-   "end": 1112.105,
+   "start": 1109.568,
+   "end": 1111.891,
    "text": "today where he will not be."
   },
   {
-   "start": 1113.135,
-   "end": 1114.852,
+   "start": 1112.921,
+   "end": 1114.638,
    "text": "And one more promise,"
   },
   {
-   "start": 1114.852,
-   "end": 1117.731,
+   "start": 1114.638,
+   "end": 1117.517,
    "text": "short enough to remember all day."
   },
   {
-   "start": 1117.731,
-   "end": 1118.969,
+   "start": 1117.517,
+   "end": 1118.755,
    "text": "For he hath said,"
   },
   {
-   "start": 1118.969,
-   "end": 1120.717,
+   "start": 1118.755,
+   "end": 1120.503,
    "text": "I will never leave thee,"
   },
   {
-   "start": 1120.717,
-   "end": 1122.305,
+   "start": 1120.503,
+   "end": 1122.091,
    "text": "nor forsake thee."
   },
   {
-   "start": 1123.635,
-   "end": 1125.457,
+   "start": 1123.421,
+   "end": 1125.244,
    "text": "Father, thank you."
   },
   {
-   "start": 1125.457,
-   "end": 1128.328,
+   "start": 1125.244,
+   "end": 1128.115,
    "text": "Thank you that you went before me today,"
   },
   {
-   "start": 1128.328,
-   "end": 1129.979,
+   "start": 1128.115,
+   "end": 1129.766,
    "text": "that your mercy is new,"
   },
   {
-   "start": 1129.979,
-   "end": 1132.528,
+   "start": 1129.766,
+   "end": 1132.315,
    "text": "and that you will never leave me."
   },
   {
-   "start": 1132.528,
-   "end": 1134.503,
+   "start": 1132.315,
+   "end": 1134.29,
    "text": "Thank you for what you have"
   },
   {
-   "start": 1134.503,
-   "end": 1136.258,
+   "start": 1134.29,
+   "end": 1136.045,
    "text": "already done in my life,"
   },
   {
-   "start": 1136.258,
-   "end": 1139.364,
+   "start": 1136.045,
+   "end": 1139.151,
    "text": "even the things I only understood later."
   },
   {
-   "start": 1139.364,
-   "end": 1142.084,
+   "start": 1139.151,
+   "end": 1141.871,
    "text": "I choose to start this day grateful,"
   },
   {
-   "start": 1142.084,
-   "end": 1144.426,
+   "start": 1141.871,
+   "end": 1144.213,
    "text": "not because everything is easy,"
   },
   {
-   "start": 1144.426,
-   "end": 1146.797,
+   "start": 1144.213,
+   "end": 1146.584,
    "text": "but because you are faithful."
   },
   {
-   "start": 1146.797,
-   "end": 1148.811,
+   "start": 1146.584,
+   "end": 1148.598,
    "text": "Let my gratitude be louder"
   },
   {
-   "start": 1148.811,
-   "end": 1150.71,
+   "start": 1148.598,
+   "end": 1150.497,
    "text": "than my worry today."
   },
   {
-   "start": 1151.74,
-   "end": 1153.904,
+   "start": 1151.527,
+   "end": 1153.691,
    "text": "Lord, use me today."
   },
   {
-   "start": 1153.904,
-   "end": 1156.263,
+   "start": 1153.691,
+   "end": 1156.05,
    "text": "Not only to get through my list,"
   },
   {
-   "start": 1156.263,
-   "end": 1157.295,
+   "start": 1156.05,
+   "end": 1157.082,
    "text": "but to be part"
   },
   {
-   "start": 1157.295,
-   "end": 1159.097,
+   "start": 1157.082,
+   "end": 1158.884,
    "text": "of what you are doing."
   },
   {
-   "start": 1159.097,
-   "end": 1162.371,
+   "start": 1158.884,
+   "end": 1162.157,
    "text": "Show me one person I can encourage."
   },
   {
-   "start": 1162.371,
-   "end": 1164.513,
+   "start": 1162.157,
+   "end": 1164.33,
    "text": "Give me eyes to see the need"
   },
   {
-   "start": 1164.513,
-   "end": 1167.905,
-   "text": "in front of me and the courage to respond."
+   "start": 1164.33,
+   "end": 1166.037,
+   "text": "in front of me and the"
   },
   {
-   "start": 1167.905,
-   "end": 1169.678,
+   "start": 1166.037,
+   "end": 1167.692,
+   "text": "courage to respond."
+  },
+  {
+   "start": 1167.692,
+   "end": 1169.465,
    "text": "If there is a gift you have"
   },
   {
-   "start": 1169.678,
-   "end": 1171.057,
+   "start": 1169.465,
+   "end": 1170.843,
    "text": "put in me that I have"
   },
   {
-   "start": 1171.057,
-   "end": 1172.633,
+   "start": 1170.843,
+   "end": 1172.419,
    "text": "been hiding out of fear,"
   },
   {
-   "start": 1172.633,
-   "end": 1173.995,
+   "start": 1172.419,
+   "end": 1173.781,
    "text": "help me to use it."
   },
   {
-   "start": 1173.995,
-   "end": 1176.548,
+   "start": 1173.781,
+   "end": 1176.334,
    "text": "Let my life today point someone,"
   },
   {
-   "start": 1176.548,
-   "end": 1177.824,
+   "start": 1176.334,
+   "end": 1177.61,
    "text": "even one person,"
   },
   {
-   "start": 1177.824,
-   "end": 1179.849,
+   "start": 1177.61,
+   "end": 1179.635,
    "text": "toward your kindness."
   },
   {
-   "start": 1180.879,
-   "end": 1183.96,
+   "start": 1180.665,
+   "end": 1183.747,
    "text": "I also pray beyond my own walls."
   },
   {
-   "start": 1183.96,
-   "end": 1186.334,
+   "start": 1183.747,
+   "end": 1186.12,
    "text": "For the people working early this"
   },
   {
-   "start": 1186.334,
-   "end": 1189.175,
+   "start": 1186.12,
+   "end": 1188.961,
    "text": "morning to keep others safe and well."
   },
   {
-   "start": 1189.175,
-   "end": 1191.023,
+   "start": 1188.961,
+   "end": 1190.804,
    "text": "For leaders who will make"
   },
   {
-   "start": 1191.023,
-   "end": 1193.463,
+   "start": 1190.804,
+   "end": 1193.236,
    "text": "decisions that affect many lives,"
   },
   {
-   "start": 1193.463,
-   "end": 1195.861,
+   "start": 1193.236,
+   "end": 1195.627,
    "text": "give them wisdom and humility."
   },
   {
-   "start": 1195.861,
-   "end": 1198.008,
+   "start": 1195.627,
+   "end": 1197.774,
    "text": "For places where there is war,"
   },
   {
-   "start": 1198.008,
-   "end": 1199.082,
+   "start": 1197.774,
+   "end": 1198.847,
    "text": "fear or hunger,"
   },
   {
-   "start": 1199.082,
-   "end": 1201.695,
+   "start": 1198.847,
+   "end": 1201.46,
    "text": "bring your comfort and your peace."
   },
   {
-   "start": 1201.695,
-   "end": 1204.372,
+   "start": 1201.46,
+   "end": 1204.137,
    "text": "And for the church around the world,"
   },
   {
-   "start": 1204.372,
-   "end": 1205.636,
+   "start": 1204.137,
+   "end": 1205.401,
    "text": "make us faithful,"
   },
   {
-   "start": 1205.636,
-   "end": 1207.101,
+   "start": 1205.401,
+   "end": 1206.866,
    "text": "kind and brave."
   },
   {
-   "start": 1208.131,
-   "end": 1208.845,
+   "start": 1207.896,
+   "end": 1208.61,
    "text": "And Lord,"
   },
   {
-   "start": 1208.845,
-   "end": 1209.877,
+   "start": 1208.61,
+   "end": 1209.642,
    "text": "I ask you now"
   },
   {
-   "start": 1209.877,
-   "end": 1211.782,
+   "start": 1209.642,
+   "end": 1211.547,
    "text": "for the end of this day,"
   },
   {
-   "start": 1211.782,
-   "end": 1213.708,
+   "start": 1211.547,
+   "end": 1213.473,
    "text": "before it even begins."
   },
   {
-   "start": 1213.708,
-   "end": 1215.071,
+   "start": 1213.473,
+   "end": 1214.829,
    "text": "When evening comes,"
   },
   {
-   "start": 1215.071,
-   "end": 1216.218,
+   "start": 1214.829,
+   "end": 1215.971,
    "text": "let me look back"
   },
   {
-   "start": 1216.218,
-   "end": 1218.048,
+   "start": 1215.971,
+   "end": 1217.792,
    "text": "and see where you were."
   },
   {
-   "start": 1218.048,
-   "end": 1220.494,
+   "start": 1217.792,
+   "end": 1220.29,
    "text": "Let me lie down without regret"
   },
   {
-   "start": 1220.494,
-   "end": 1223.284,
+   "start": 1220.29,
+   "end": 1223.135,
    "text": "for words I did not need to say."
   },
   {
-   "start": 1223.284,
-   "end": 1225.373,
+   "start": 1223.135,
+   "end": 1225.224,
    "text": "Let me rest knowing that I did"
   },
   {
-   "start": 1225.373,
-   "end": 1228.2,
+   "start": 1225.224,
+   "end": 1228.051,
    "text": "what I could and left the rest to you."
   },
   {
-   "start": 1228.2,
-   "end": 1231.494,
+   "start": 1228.051,
+   "end": 1231.345,
    "text": "Go before me all the way to tonight."
   },
   {
-   "start": 1232.524,
-   "end": 1235.627,
+   "start": 1232.375,
+   "end": 1235.477,
    "text": "Here is one small thing to do today."
   },
   {
-   "start": 1235.627,
-   "end": 1237.668,
+   "start": 1235.477,
+   "end": 1237.518,
    "text": "The next time worry rises,"
   },
   {
-   "start": 1237.668,
-   "end": 1239.317,
+   "start": 1237.518,
+   "end": 1239.167,
    "text": "and it probably will,"
   },
   {
-   "start": 1239.317,
-   "end": 1241.695,
+   "start": 1239.167,
+   "end": 1241.545,
    "text": "stop for one breath and say:"
   },
   {
-   "start": 1241.695,
-   "end": 1243.517,
+   "start": 1241.545,
+   "end": 1243.368,
    "text": "You were here first."
   },
   {
-   "start": 1243.517,
-   "end": 1245.127,
+   "start": 1243.368,
+   "end": 1244.956,
    "text": "That is all."
   },
   {
-   "start": 1245.127,
-   "end": 1248.039,
+   "start": 1244.956,
+   "end": 1247.894,
    "text": "Six words that turn your attention from"
   },
   {
-   "start": 1248.039,
-   "end": 1249.756,
+   "start": 1247.894,
+   "end": 1249.626,
    "text": "the size of the problem"
   },
   {
-   "start": 1249.756,
-   "end": 1253.989,
-   "text": "to the faithfulness of the One who is already in it."
+   "start": 1249.626,
+   "end": 1251.886,
+   "text": "to the faithfulness of the One"
   },
   {
-   "start": 1255.019,
-   "end": 1256.757,
+   "start": 1251.886,
+   "end": 1253.818,
+   "text": "who is already in it."
+  },
+  {
+   "start": 1254.848,
+   "end": 1256.595,
    "text": "May the Lord go before"
   },
   {
-   "start": 1256.757,
-   "end": 1259.465,
+   "start": 1256.595,
+   "end": 1259.316,
    "text": "you into every hour of this day."
   },
   {
-   "start": 1259.465,
-   "end": 1262.845,
+   "start": 1259.316,
+   "end": 1262.696,
    "text": "May his mercy meet you at every turn."
   },
   {
-   "start": 1262.845,
-   "end": 1264.928,
+   "start": 1262.696,
+   "end": 1264.773,
    "text": "May his peace guard your heart"
   },
   {
-   "start": 1264.928,
-   "end": 1266.524,
+   "start": 1264.773,
+   "end": 1266.366,
    "text": "when the day gets loud,"
   },
   {
-   "start": 1266.524,
-   "end": 1269.024,
+   "start": 1266.366,
+   "end": 1268.859,
    "text": "and may you lie down tonight knowing"
   },
   {
-   "start": 1269.024,
-   "end": 1271.217,
+   "start": 1268.859,
+   "end": 1271.047,
    "text": "that he never left your side."
   },
   {
-   "start": 1271.217,
-   "end": 1274.319,
+   "start": 1271.047,
+   "end": 1274.149,
    "text": "In the name of Jesus, amen."
   },
   {
-   "start": 1275.649,
-   "end": 1277.141,
+   "start": 1275.479,
+   "end": 1276.97,
    "text": "If this prayer helped"
   },
   {
-   "start": 1277.141,
-   "end": 1278.775,
+   "start": 1276.97,
+   "end": 1278.604,
    "text": "you begin your morning,"
   },
   {
-   "start": 1278.775,
-   "end": 1280.053,
+   "start": 1278.604,
+   "end": 1279.882,
    "text": "come back tomorrow"
   },
   {
-   "start": 1280.053,
-   "end": 1281.867,
+   "start": 1279.882,
+   "end": 1281.696,
    "text": "and we will pray again."
   },
   {
-   "start": 1281.867,
-   "end": 1283.619,
+   "start": 1281.696,
+   "end": 1283.448,
    "text": "And if someone you love"
   },
   {
-   "start": 1283.619,
-   "end": 1285.219,
+   "start": 1283.448,
+   "end": 1285.048,
    "text": "is facing a hard day,"
   },
   {
-   "start": 1285.219,
-   "end": 1286.847,
+   "start": 1285.048,
+   "end": 1286.676,
    "text": "share it with them."
   },
   {
-   "start": 1286.847,
-   "end": 1290.205,
+   "start": 1286.676,
+   "end": 1290.034,
    "text": "God has already gone ahead of them too."
   }
  ],
@@ -3903,24 +3931,24 @@
    "segment": "hook",
    "text": "Before you walk into today, I want you to know something.",
    "start": 10.431,
-   "end": 14.356
+   "end": 14.377
   },
   {
    "segment": "hook",
    "text": "God has already been there.",
-   "start": 14.536,
-   "end": 16.861
+   "start": 14.557,
+   "end": 16.883
   },
   {
    "segment": "invitation",
    "text": "Take one slow breath.",
-   "start": 17.841,
-   "end": 19.804
+   "start": 17.863,
+   "end": 19.825
   },
   {
    "segment": "invitation",
    "text": "Let your shoulders drop.",
-   "start": 19.984,
+   "start": 20.005,
    "end": 21.989
   },
   {
@@ -3933,1585 +3961,1585 @@
    "segment": "invitation",
    "text": "You only have to bring this moment to the One who is not surprised by anything waiting for you.",
    "start": 25.976,
-   "end": 32.568
+   "end": 32.525
   },
   {
    "segment": "invitation",
    "text": "The meeting you are nervous about, the conversation you keep rehearsing, the bill, the diagnosis, the silence from someone you love.",
-   "start": 32.748,
-   "end": 42.732
+   "start": 32.705,
+   "end": 42.668
   },
   {
    "segment": "invitation",
    "text": "He has seen every one of them from the other side.",
-   "start": 42.912,
-   "end": 46.304
+   "start": 42.848,
+   "end": 46.24
   },
   {
    "segment": "scripture-1",
    "text": "Listen to this promise, spoken to people who were about to step into a land they had never seen.",
-   "start": 47.684,
-   "end": 54.233
+   "start": 47.62,
+   "end": 54.169
   },
   {
    "segment": "scripture-1",
    "text": "And the Lord, he it is that doth go before thee;",
-   "start": 54.413,
-   "end": 58.211
+   "start": 54.349,
+   "end": 58.125
   },
   {
    "segment": "scripture-1",
    "text": "he will be with thee, he will not fail thee, neither forsake thee:",
-   "start": 58.391,
-   "end": 62.913
+   "start": 58.305,
+   "end": 62.828
   },
   {
    "segment": "scripture-1",
    "text": "fear not, neither be dismayed.",
-   "start": 63.093,
-   "end": 65.525
+   "start": 63.008,
+   "end": 65.44
   },
   {
    "segment": "reflection-1",
    "text": "Notice the order.",
-   "start": 67.205,
-   "end": 68.891
+   "start": 67.12,
+   "end": 68.805
   },
   {
    "segment": "reflection-1",
    "text": "He goes before you.",
-   "start": 69.071,
-   "end": 70.884
+   "start": 68.985,
+   "end": 70.799
   },
   {
    "segment": "reflection-1",
    "text": "Then he is with you.",
-   "start": 71.064,
-   "end": 72.813
+   "start": 70.979,
+   "end": 72.728
   },
   {
    "segment": "reflection-1",
    "text": "Your morning does not begin with you walking into the unknown alone and hoping God catches up.",
-   "start": 72.993,
-   "end": 80.097
+   "start": 72.908,
+   "end": 79.991
   },
   {
    "segment": "reflection-1",
    "text": "It begins with God already standing in the places you are afraid of.",
-   "start": 80.277,
-   "end": 85.44
+   "start": 80.171,
+   "end": 85.333
   },
   {
    "segment": "reflection-1",
    "text": "The road you cannot see is not empty.",
-   "start": 85.62,
-   "end": 88.628
+   "start": 85.513,
+   "end": 88.521
   },
   {
    "segment": "reflection-1",
    "text": "Someone faithful has walked it first.",
-   "start": 88.808,
-   "end": 91.603
+   "start": 88.701,
+   "end": 91.496
   },
   {
    "segment": "scripture-6",
    "text": "When Israel left Egypt, they did not walk out guessing.",
-   "start": 92.983,
-   "end": 97.335
+   "start": 92.876,
+   "end": 97.228
   },
   {
    "segment": "scripture-6",
    "text": "Listen to how the Bible describes it.",
-   "start": 97.515,
-   "end": 100.437
+   "start": 97.408,
+   "end": 100.331
   },
   {
    "segment": "scripture-6",
    "text": "And the Lord went before them by day in a pillar of a cloud, to lead them the way;",
-   "start": 100.617,
-   "end": 106.249
+   "start": 100.511,
+   "end": 106.143
   },
   {
    "segment": "scripture-6",
    "text": "and by night in a pillar of fire, to give them light;",
-   "start": 106.429,
-   "end": 110.333
+   "start": 106.323,
+   "end": 110.227
   },
   {
    "segment": "scripture-6",
    "text": "to go by day and night.",
-   "start": 110.513,
-   "end": 112.519
+   "start": 110.407,
+   "end": 112.412
   },
   {
    "segment": "reflection-6",
    "text": "By day and by night.",
-   "start": 114.199,
-   "end": 116.183
+   "start": 114.092,
+   "end": 116.076
   },
   {
    "segment": "reflection-6",
    "text": "God did not lead his people only when the sun was out and the road was easy.",
-   "start": 116.363,
-   "end": 122.443
+   "start": 116.256,
+   "end": 122.336
   },
   {
    "segment": "reflection-6",
    "text": "He led them in the heat of the afternoon and in the dark when they could not see their own feet.",
-   "start": 122.623,
-   "end": 128.937
+   "start": 122.516,
+   "end": 128.831
   },
   {
    "segment": "reflection-6",
    "text": "Whatever part of the day you are dreading, the long meeting, the drive home, the quiet hour tonight when your thoughts get loud, he has already promised to be there.",
-   "start": 129.117,
-   "end": 140.744
+   "start": 129.011,
+   "end": 140.659
   },
   {
    "segment": "reflection-6",
    "text": "You are not walking toward a place he has never been.",
-   "start": 140.924,
-   "end": 144.679
+   "start": 140.839,
+   "end": 144.572
   },
   {
    "segment": "reflection-6",
    "text": "You are following him into it.",
-   "start": 144.859,
-   "end": 147.291
+   "start": 144.752,
+   "end": 147.184
   },
   {
    "segment": "scripture-2",
    "text": "There is a second promise for this exact hour.",
-   "start": 148.671,
-   "end": 152.063
+   "start": 148.564,
+   "end": 151.956
   },
   {
    "segment": "scripture-2",
    "text": "It is of the Lord's mercies that we are not consumed, because his compassions fail not.",
-   "start": 152.243,
-   "end": 158.899
+   "start": 152.136,
+   "end": 158.813
   },
   {
    "segment": "scripture-2",
    "text": "They are new every morning:",
-   "start": 159.079,
-   "end": 161.34
+   "start": 158.993,
+   "end": 161.255
   },
   {
    "segment": "scripture-2",
    "text": "great is thy faithfulness.",
-   "start": 161.52,
-   "end": 163.76
+   "start": 161.435,
+   "end": 163.675
   },
   {
    "segment": "reflection-2",
    "text": "New every morning.",
-   "start": 165.44,
-   "end": 167.317
+   "start": 165.355,
+   "end": 167.232
   },
   {
    "segment": "reflection-2",
    "text": "Not leftover mercy from yesterday.",
-   "start": 167.497,
-   "end": 170.527
+   "start": 167.412,
+   "end": 170.441
   },
   {
    "segment": "reflection-2",
    "text": "Not the small amount that remains after your mistakes.",
-   "start": 170.707,
-   "end": 174.824
+   "start": 170.621,
+   "end": 174.739
   },
   {
    "segment": "reflection-2",
    "text": "Fresh mercy, measured for today, for the person you are this morning, with everything you are carrying.",
-   "start": 175.004,
-   "end": 182.343
+   "start": 174.919,
+   "end": 182.257
   },
   {
    "segment": "reflection-2",
    "text": "Whatever yesterday held, it did not use up his compassion.",
-   "start": 182.523,
-   "end": 187.152
+   "start": 182.437,
+   "end": 187.067
   },
   {
    "segment": "reflection-2",
    "text": "It never could.",
-   "start": 187.332,
-   "end": 188.868
+   "start": 187.247,
+   "end": 188.783
   },
   {
    "segment": "scripture-3",
    "text": "So we can pray the way David prayed when he did not know which way to turn.",
-   "start": 190.248,
-   "end": 195.688
+   "start": 190.163,
+   "end": 195.603
   },
   {
    "segment": "scripture-3",
    "text": "Cause me to hear thy lovingkindness in the morning;",
-   "start": 195.868,
-   "end": 199.836
+   "start": 195.783,
+   "end": 199.729
   },
   {
    "segment": "scripture-3",
    "text": "for in thee do I trust:",
-   "start": 200.016,
-   "end": 202.064
+   "start": 199.909,
+   "end": 201.957
   },
   {
    "segment": "scripture-3",
    "text": "cause me to know the way wherein I should walk;",
-   "start": 202.244,
-   "end": 205.615
+   "start": 202.137,
+   "end": 205.508
   },
   {
    "segment": "scripture-3",
    "text": "for I lift up my soul unto thee.",
-   "start": 205.795,
-   "end": 208.547
+   "start": 205.688,
+   "end": 208.44
   },
   {
    "segment": "reflection-3",
    "text": "Notice that David did not ask to see the whole year.",
-   "start": 210.227,
-   "end": 213.981
+   "start": 210.12,
+   "end": 213.875
   },
   {
    "segment": "reflection-3",
    "text": "He asked to know the way wherein he should walk.",
-   "start": 214.161,
-   "end": 217.255
+   "start": 214.055,
+   "end": 217.148
   },
   {
    "segment": "reflection-3",
    "text": "One step.",
-   "start": 217.435,
-   "end": 218.672
+   "start": 217.328,
+   "end": 218.565
   },
   {
    "segment": "reflection-3",
    "text": "One morning.",
-   "start": 218.852,
-   "end": 220.281
+   "start": 218.745,
+   "end": 220.175
   },
   {
    "segment": "reflection-3",
    "text": "God rarely hands us the full map, because he wants to walk with us instead of sending us off alone with directions.",
-   "start": 220.461,
-   "end": 229.144
+   "start": 220.355,
+   "end": 229.037
   },
   {
    "segment": "reflection-3",
    "text": "If you cannot see past today, that is not a sign that he has forgotten you.",
-   "start": 229.324,
-   "end": 234.892
+   "start": 229.217,
+   "end": 234.785
   },
   {
    "segment": "reflection-3",
    "text": "It is an invitation to hold his hand for the next step, and then the next.",
-   "start": 235.072,
-   "end": 240.597
+   "start": 234.965,
+   "end": 240.491
   },
   {
    "segment": "scripture-7",
    "text": "Jesus said something about tomorrow that we need to hear this morning.",
-   "start": 241.977,
-   "end": 247.097
+   "start": 241.871,
+   "end": 246.991
   },
   {
    "segment": "scripture-7",
    "text": "Take therefore no thought for the morrow:",
-   "start": 247.277,
-   "end": 250.221
+   "start": 247.171,
+   "end": 250.115
   },
   {
    "segment": "scripture-7",
    "text": "for the morrow shall take thought for the things of itself.",
-   "start": 250.401,
-   "end": 254.007
+   "start": 250.295,
+   "end": 253.9
   },
   {
    "segment": "scripture-7",
    "text": "Sufficient unto the day is the evil thereof.",
-   "start": 254.187,
-   "end": 257.835
+   "start": 254.08,
+   "end": 257.728
   },
   {
    "segment": "reflection-7",
    "text": "Jesus is not telling you to stop planning.",
-   "start": 259.515,
-   "end": 263.141
+   "start": 259.408,
+   "end": 263.035
   },
   {
    "segment": "reflection-7",
    "text": "He is telling you to stop carrying tomorrow before it arrives.",
-   "start": 263.321,
-   "end": 267.673
+   "start": 263.215,
+   "end": 267.567
   },
   {
    "segment": "reflection-7",
    "text": "You were given strength for today, not for every day at once.",
-   "start": 267.853,
-   "end": 272.248
+   "start": 267.747,
+   "end": 272.141
   },
   {
    "segment": "reflection-7",
    "text": "So much of our anxiety comes from trying to live next week with the grace God gave us for this morning.",
-   "start": 272.428,
-   "end": 279.66
+   "start": 272.321,
+   "end": 279.553
   },
   {
    "segment": "reflection-7",
    "text": "Put tomorrow down.",
-   "start": 279.84,
-   "end": 281.611
+   "start": 279.733,
+   "end": 281.504
   },
   {
    "segment": "reflection-7",
    "text": "It will still be there, and so will he.",
-   "start": 281.791,
-   "end": 284.543
+   "start": 281.684,
+   "end": 284.436
   },
   {
    "segment": "reflection-7",
    "text": "Today has enough in it, and today is where his help is waiting for you.",
-   "start": 284.723,
-   "end": 289.757
+   "start": 284.616,
+   "end": 289.651
   },
   {
    "segment": "reflection-lookback",
    "text": "Before we go further, take a moment to look back.",
-   "start": 291.137,
-   "end": 294.849
+   "start": 291.031,
+   "end": 294.743
   },
   {
    "segment": "reflection-lookback",
    "text": "Think about a morning a year ago, or five years ago, when you were sure you would not make it through what was in front of you.",
-   "start": 295.029,
-   "end": 303.328
+   "start": 294.923,
+   "end": 303.2
   },
   {
    "segment": "reflection-lookback",
    "text": "And yet here you are.",
-   "start": 303.508,
-   "end": 305.3
+   "start": 303.38,
+   "end": 305.172
   },
   {
    "segment": "reflection-lookback",
    "text": "Maybe not everything turned out the way you wanted, but you were carried.",
-   "start": 305.48,
-   "end": 310.472
+   "start": 305.352,
+   "end": 310.344
   },
   {
    "segment": "reflection-lookback",
    "text": "The same God who went before you then is the God who goes before you now.",
-   "start": 310.652,
-   "end": 316.391
+   "start": 310.524,
+   "end": 316.263
   },
   {
    "segment": "reflection-lookback",
    "text": "Your past is not only a list of hard days.",
-   "start": 316.571,
-   "end": 320.219
+   "start": 316.443,
+   "end": 320.112
   },
   {
    "segment": "reflection-lookback",
    "text": "It is a record of his faithfulness, and it is evidence for today.",
-   "start": 320.399,
-   "end": 325.369
+   "start": 320.292,
+   "end": 325.241
   },
   {
    "segment": "stillness",
    "text": "Before we pray, let us be still for a moment.",
-   "start": 326.749,
-   "end": 330.163
+   "start": 326.621,
+   "end": 330.013
   },
   {
    "segment": "stillness",
    "text": "Breathe in, and remember that he is here.",
-   "start": 330.343,
-   "end": 333.457
+   "start": 330.193,
+   "end": 333.308
   },
   {
    "segment": "stillness",
    "text": "Breathe out, and let go of what you cannot control.",
-   "start": 333.637,
-   "end": 337.499
+   "start": 333.488,
+   "end": 337.349
   },
   {
    "segment": "transition",
    "text": "Let us pray those words together now.",
-   "start": 343.679,
-   "end": 346.388
+   "start": 343.529,
+   "end": 346.239
   },
   {
    "segment": "transition",
    "text": "If you can, close your eyes.",
-   "start": 346.568,
-   "end": 349.043
+   "start": 346.419,
+   "end": 348.893
   },
   {
    "segment": "transition",
    "text": "If you are driving or getting ready, simply let your heart follow along.",
-   "start": 349.223,
-   "end": 354.577
+   "start": 349.073,
+   "end": 354.428
   },
   {
    "segment": "prayer-1",
    "text": "Lord, here is my day before I have lived any of it.",
-   "start": 356.257,
-   "end": 359.948
+   "start": 356.108,
+   "end": 359.799
   },
   {
    "segment": "prayer-1",
    "text": "I give you the hours I can plan and the moments I cannot predict.",
-   "start": 360.128,
-   "end": 365.333
+   "start": 359.979,
+   "end": 365.184
   },
   {
    "segment": "prayer-1",
    "text": "You already know where I will be at noon and how I will feel tonight.",
-   "start": 365.513,
-   "end": 370.377
+   "start": 365.364,
+   "end": 370.228
   },
   {
    "segment": "prayer-1",
    "text": "I choose to trust that you are there before me.",
-   "start": 370.557,
-   "end": 373.885
+   "start": 370.408,
+   "end": 373.736
   },
   {
    "segment": "prayer-1",
    "text": "Go ahead of me into every room I will enter today.",
-   "start": 374.065,
-   "end": 378.076
+   "start": 373.916,
+   "end": 377.905
   },
   {
    "segment": "prayer-2",
    "text": "I bring you the worry that woke me up.",
-   "start": 379.456,
-   "end": 382.187
+   "start": 379.285,
+   "end": 382.016
   },
   {
    "segment": "prayer-2",
    "text": "You know its name.",
-   "start": 382.367,
-   "end": 383.988
+   "start": 382.196,
+   "end": 383.817
   },
   {
    "segment": "prayer-2",
    "text": "I will not pretend it is small, and I will not pretend you are smaller.",
-   "start": 384.168,
-   "end": 389.587
+   "start": 383.997,
+   "end": 389.416
   },
   {
    "segment": "prayer-2",
    "text": "Where I see a closed door, you see the way through.",
-   "start": 389.767,
-   "end": 393.479
+   "start": 389.596,
+   "end": 393.308
   },
   {
    "segment": "prayer-2",
    "text": "Where I see a delay, you see the right time.",
-   "start": 393.659,
-   "end": 397.072
+   "start": 393.488,
+   "end": 396.901
   },
   {
    "segment": "prayer-2",
    "text": "Teach my heart to rest in what you know, even when I do not know it yet.",
-   "start": 397.252,
-   "end": 402.671
+   "start": 397.081,
+   "end": 402.5
   },
   {
    "segment": "prayer-mind",
    "text": "Lord, you know how quickly my thoughts run ahead of me.",
-   "start": 404.051,
-   "end": 407.741
+   "start": 403.88,
+   "end": 407.571
   },
   {
    "segment": "prayer-mind",
    "text": "Before I have finished my coffee, my mind is already in tomorrow, rehearsing problems that may never come.",
-   "start": 407.921,
-   "end": 416.092
+   "start": 407.751,
+   "end": 415.921
   },
   {
    "segment": "prayer-mind",
    "text": "Bring my thoughts back to this day and to you.",
-   "start": 416.272,
-   "end": 419.493
+   "start": 416.101,
+   "end": 419.323
   },
   {
    "segment": "prayer-mind",
    "text": "Replace the noise in my head with your peace.",
-   "start": 419.673,
-   "end": 423.023
+   "start": 419.503,
+   "end": 422.852
   },
   {
    "segment": "prayer-mind",
    "text": "When I start to imagine the worst, remind me of everything you have already carried me through.",
-   "start": 423.203,
-   "end": 429.859
+   "start": 423.032,
+   "end": 429.688
   },
   {
    "segment": "scripture-8",
    "text": "Before we keep praying, let these words settle over your heart.",
-   "start": 431.239,
-   "end": 435.697
+   "start": 431.068,
+   "end": 435.527
   },
   {
    "segment": "scripture-8",
    "text": "Be careful for nothing;",
-   "start": 435.877,
-   "end": 437.84
+   "start": 435.707,
+   "end": 437.669
   },
   {
    "segment": "scripture-8",
    "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
-   "start": 438.02,
-   "end": 445.465
+   "start": 437.849,
+   "end": 445.295
   },
   {
    "segment": "scripture-8",
    "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
-   "start": 445.645,
-   "end": 453.645
+   "start": 445.475,
+   "end": 453.475
   },
   {
    "segment": "prayer-peace",
    "text": "So Lord, here are my requests, and here is my thanks.",
-   "start": 455.325,
-   "end": 459.336
+   "start": 455.155,
+   "end": 459.165
   },
   {
    "segment": "prayer-peace",
    "text": "Thank you for the breath in my lungs this morning.",
-   "start": 459.516,
-   "end": 462.929
+   "start": 459.345,
+   "end": 462.759
   },
   {
    "segment": "prayer-peace",
    "text": "Thank you for the people who love me, and for the ways you have kept me that I did not even notice.",
-   "start": 463.109,
-   "end": 469.872
+   "start": 462.939,
+   "end": 469.701
   },
   {
    "segment": "prayer-peace",
    "text": "And here is what I need.",
-   "start": 470.052,
-   "end": 472.228
+   "start": 469.881,
+   "end": 472.057
   },
   {
    "segment": "prayer-peace",
    "text": "I need peace that does not depend on how this day goes.",
-   "start": 472.408,
-   "end": 476.824
+   "start": 472.237,
+   "end": 476.653
   },
   {
    "segment": "prayer-peace",
    "text": "Guard my heart when someone is harsh with me.",
-   "start": 477.004,
-   "end": 480.481
+   "start": 476.833,
+   "end": 480.311
   },
   {
    "segment": "prayer-peace",
    "text": "Guard my mind when bad news comes.",
-   "start": 480.661,
-   "end": 483.52
+   "start": 480.491,
+   "end": 483.371
   },
   {
    "segment": "prayer-peace",
    "text": "Let your peace stand at the door of my thoughts like a guard who does not fall asleep.",
-   "start": 483.7,
-   "end": 489.652
+   "start": 483.551,
+   "end": 489.503
   },
   {
    "segment": "prayer-decisions",
    "text": "There are decisions in front of me that I do not know how to make.",
-   "start": 491.032,
-   "end": 495.469
+   "start": 490.883,
+   "end": 495.32
   },
   {
    "segment": "prayer-decisions",
    "text": "Some are small, and some feel like they will change everything.",
-   "start": 495.649,
-   "end": 500.129
+   "start": 495.5,
+   "end": 499.98
   },
   {
    "segment": "prayer-decisions",
    "text": "Give me wisdom that is bigger than my understanding.",
-   "start": 500.309,
-   "end": 504.341
+   "start": 500.16,
+   "end": 504.213
   },
   {
    "segment": "prayer-decisions",
    "text": "Close the doors I should not walk through, and give me courage to walk through the ones you open.",
-   "start": 504.521,
-   "end": 510.793
+   "start": 504.393,
+   "end": 510.665
   },
   {
    "segment": "prayer-decisions",
    "text": "Let me hear your direction clearly, and let me follow it even when it asks for patience.",
-   "start": 510.973,
-   "end": 517.011
+   "start": 510.845,
+   "end": 516.883
   },
   {
    "segment": "prayer-work",
    "text": "Lord, I bring you my work today.",
-   "start": 518.391,
-   "end": 521.015
+   "start": 518.263,
+   "end": 520.887
   },
   {
    "segment": "prayer-work",
    "text": "The tasks I enjoy and the ones I have been avoiding.",
-   "start": 521.195,
-   "end": 525.611
+   "start": 521.067,
+   "end": 525.483
   },
   {
    "segment": "prayer-work",
    "text": "Help me to work with honesty and with a steady heart, as if I am doing it for you and not only for the people who will see it.",
-   "start": 525.791,
-   "end": 534.473
+   "start": 525.663,
+   "end": 534.345
   },
   {
    "segment": "prayer-work",
    "text": "Where I am overwhelmed, show me the next small thing to do.",
-   "start": 534.653,
-   "end": 538.92
+   "start": 534.525,
+   "end": 538.792
   },
   {
    "segment": "prayer-work",
    "text": "Where I am tempted to cut corners, give me integrity.",
-   "start": 539.1,
-   "end": 543.196
+   "start": 538.972,
+   "end": 543.089
   },
   {
    "segment": "prayer-work",
    "text": "And where my work feels unseen, remind me that you see it, and that faithfulness in small things matters to you.",
-   "start": 543.376,
-   "end": 552.037
+   "start": 543.269,
+   "end": 551.931
   },
   {
    "segment": "prayer-3",
    "text": "Thank you that your mercy is new this morning.",
-   "start": 553.417,
-   "end": 556.788
+   "start": 553.311,
+   "end": 556.681
   },
   {
    "segment": "prayer-3",
    "text": "Where I fell short yesterday, forgive me.",
-   "start": 556.968,
-   "end": 559.997
+   "start": 556.861,
+   "end": 559.891
   },
   {
    "segment": "prayer-3",
    "text": "Where I was impatient, make me gentle.",
-   "start": 560.177,
-   "end": 563.164
+   "start": 560.071,
+   "end": 563.036
   },
   {
    "segment": "prayer-3",
    "text": "Where I was afraid, make me brave.",
-   "start": 563.344,
-   "end": 566.16
+   "start": 563.216,
+   "end": 566.032
   },
   {
    "segment": "prayer-3",
    "text": "Do not let the mistakes of yesterday become the script for today.",
-   "start": 566.34,
-   "end": 571.055
+   "start": 566.212,
+   "end": 570.927
   },
   {
    "segment": "prayer-3",
    "text": "Give me a clean start and the grace to walk in it.",
-   "start": 571.235,
-   "end": 574.904
+   "start": 571.107,
+   "end": 574.776
   },
   {
    "segment": "prayer-4",
    "text": "I lift up the people I will meet today.",
-   "start": 576.284,
-   "end": 579.591
+   "start": 576.156,
+   "end": 579.463
   },
   {
    "segment": "prayer-4",
    "text": "My family, the people at my work, the stranger I will pass without knowing their story.",
-   "start": 579.771,
-   "end": 586.64
+   "start": 579.643,
+   "end": 586.491
   },
   {
    "segment": "prayer-4",
    "text": "Go before them too.",
-   "start": 586.82,
-   "end": 588.633
+   "start": 586.671,
+   "end": 588.484
   },
   {
    "segment": "prayer-4",
    "text": "Let my words be kind and my patience be real.",
-   "start": 588.813,
-   "end": 592.803
+   "start": 588.664,
+   "end": 592.653
   },
   {
    "segment": "prayer-4",
    "text": "If someone near me is carrying something heavy, help me notice, and help me carry it with them.",
-   "start": 592.983,
-   "end": 599.596
+   "start": 592.833,
+   "end": 599.447
   },
   {
    "segment": "prayer-forgiveness",
    "text": "Lord, there are people I find hard to love right now.",
-   "start": 600.976,
-   "end": 604.795
+   "start": 600.827,
+   "end": 604.645
   },
   {
    "segment": "prayer-forgiveness",
    "text": "Someone who hurt me, someone I hurt, a conversation that ended badly and still sits in my chest.",
-   "start": 604.975,
-   "end": 612.591
+   "start": 604.825,
+   "end": 612.441
   },
   {
    "segment": "prayer-forgiveness",
    "text": "I do not want to carry bitterness into this day.",
-   "start": 612.771,
-   "end": 616.397
+   "start": 612.621,
+   "end": 616.248
   },
   {
    "segment": "prayer-forgiveness",
    "text": "Help me to forgive the way you have forgiven me.",
-   "start": 616.577,
-   "end": 620.012
+   "start": 616.428,
+   "end": 619.863
   },
   {
    "segment": "prayer-forgiveness",
    "text": "Where I need to apologize, give me humility.",
-   "start": 620.192,
-   "end": 623.989
+   "start": 620.043,
+   "end": 623.84
   },
   {
    "segment": "prayer-forgiveness",
    "text": "Where I need to set a healthy boundary, give me wisdom.",
-   "start": 624.169,
-   "end": 628.415
+   "start": 624.02,
+   "end": 628.265
   },
   {
    "segment": "prayer-forgiveness",
    "text": "And where a relationship needs healing that only you can bring, I place it in your hands.",
-   "start": 628.595,
-   "end": 634.803
+   "start": 628.445,
+   "end": 634.675
   },
   {
    "segment": "prayer-children",
    "text": "I pray for the children in my life, my own and the ones I care about.",
-   "start": 636.183,
-   "end": 641.559
+   "start": 636.055,
+   "end": 641.452
   },
   {
    "segment": "prayer-children",
    "text": "Go before them into their classrooms, their friendships and their screens.",
-   "start": 641.739,
-   "end": 646.624
+   "start": 641.632,
+   "end": 646.496
   },
   {
    "segment": "prayer-children",
    "text": "Protect their minds and their hearts.",
-   "start": 646.804,
-   "end": 649.385
+   "start": 646.676,
+   "end": 649.257
   },
   {
    "segment": "prayer-children",
    "text": "Let them know that they are loved by you before they ever achieve anything.",
-   "start": 649.565,
-   "end": 654.877
+   "start": 649.437,
+   "end": 654.749
   },
   {
    "segment": "prayer-children",
    "text": "Give the parents and grandparents listening patience and joy today, and let our homes be places where faith is seen, not only spoken.",
-   "start": 655.057,
-   "end": 665.233
+   "start": 654.929,
+   "end": 664.999
   },
   {
    "segment": "prayer-provision",
    "text": "I also bring you my needs, the practical ones.",
-   "start": 666.613,
-   "end": 670.411
+   "start": 666.379,
+   "end": 670.176
   },
   {
    "segment": "prayer-provision",
    "text": "You know what is in my account and what is on my table.",
-   "start": 670.591,
-   "end": 674.815
+   "start": 670.356,
+   "end": 674.58
   },
   {
    "segment": "prayer-provision",
    "text": "You know the job I hope for and the work I already have.",
-   "start": 674.995,
-   "end": 679.432
+   "start": 674.76,
+   "end": 679.197
   },
   {
    "segment": "prayer-provision",
    "text": "Provide what I need for today, and teach me to be content and grateful while I wait for what I still hope for.",
-   "start": 679.612,
-   "end": 687.633
+   "start": 679.377,
+   "end": 687.377
   },
   {
    "segment": "prayer-provision",
    "text": "You have never been late, even when I thought you were.",
-   "start": 687.813,
-   "end": 691.589
+   "start": 687.557,
+   "end": 691.333
   },
   {
    "segment": "prayer-health",
    "text": "I also lift up my body to you.",
-   "start": 692.969,
-   "end": 695.721
+   "start": 692.713,
+   "end": 695.465
   },
   {
    "segment": "prayer-health",
    "text": "You know where I am tired, where I hurt, and the results I am waiting for.",
-   "start": 695.901,
-   "end": 701.32
+   "start": 695.645,
+   "end": 701.085
   },
   {
    "segment": "prayer-health",
    "text": "I ask you for strength and for healing, and I thank you for every doctor, nurse and caregiver you use to help us.",
-   "start": 701.5,
-   "end": 709.863
+   "start": 701.265,
+   "end": 709.628
   },
   {
    "segment": "prayer-health",
    "text": "Give me wisdom to rest when I need rest and to take care of the body you have given me.",
-   "start": 710.043,
-   "end": 716.059
+   "start": 709.808,
+   "end": 715.824
   },
   {
    "segment": "prayer-health",
    "text": "And for anyone listening who is sick or waiting on news this morning, hold them close and give them courage for today.",
-   "start": 716.239,
-   "end": 725.199
+   "start": 716.004,
+   "end": 724.964
   },
   {
    "segment": "scripture-9",
    "text": "Here is a promise for your going out and your coming in.",
-   "start": 726.579,
-   "end": 730.547
+   "start": 726.344,
+   "end": 730.312
   },
   {
    "segment": "scripture-9",
    "text": "The Lord shall preserve thee from all evil:",
-   "start": 730.727,
-   "end": 733.863
+   "start": 730.492,
+   "end": 733.649
   },
   {
    "segment": "scripture-9",
    "text": "he shall preserve thy soul.",
-   "start": 734.043,
-   "end": 736.453
+   "start": 733.829,
+   "end": 736.24
   },
   {
    "segment": "scripture-9",
    "text": "The Lord shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
-   "start": 736.633,
-   "end": 743.567
+   "start": 736.42,
+   "end": 743.353
   },
   {
    "segment": "prayer-home",
    "text": "Lord, as I go out this morning, watch over my going out.",
-   "start": 745.247,
-   "end": 749.705
+   "start": 745.033,
+   "end": 749.492
   },
   {
    "segment": "prayer-home",
    "text": "Watch over the roads I travel and the places I enter.",
-   "start": 749.885,
-   "end": 754.408
+   "start": 749.672,
+   "end": 754.195
   },
   {
    "segment": "prayer-home",
    "text": "Watch over my home while I am away from it, and over everyone who lives there.",
-   "start": 754.588,
-   "end": 760.305
+   "start": 754.375,
+   "end": 760.049
   },
   {
    "segment": "prayer-home",
    "text": "Keep my family safe in body and in spirit.",
-   "start": 760.485,
-   "end": 764.261
+   "start": 760.229,
+   "end": 764.005
   },
   {
    "segment": "prayer-home",
    "text": "When we come back together tonight, let us come back to a home filled with your peace and not with tension.",
-   "start": 764.441,
-   "end": 771.823
+   "start": 764.185,
+   "end": 771.567
   },
   {
    "segment": "prayer-home",
    "text": "Be the strength of our walls and the warmth of our table.",
-   "start": 772.003,
-   "end": 776.227
+   "start": 771.747,
+   "end": 775.971
   },
   {
    "segment": "scripture-4",
    "text": "And when fear tries to speak louder than you, remind me of your voice.",
-   "start": 777.607,
-   "end": 782.727
+   "start": 777.351,
+   "end": 782.492
   },
   {
    "segment": "scripture-4",
    "text": "Fear thou not;",
-   "start": 782.907,
-   "end": 784.507
+   "start": 782.672,
+   "end": 784.272
   },
   {
    "segment": "scripture-4",
    "text": "for I am with thee:",
-   "start": 784.687,
-   "end": 786.457
+   "start": 784.452,
+   "end": 786.223
   },
   {
    "segment": "scripture-4",
    "text": "be not dismayed;",
-   "start": 786.637,
-   "end": 788.387
+   "start": 786.403,
+   "end": 788.131
   },
   {
    "segment": "scripture-4",
    "text": "for I am thy God:",
-   "start": 788.567,
-   "end": 790.529
+   "start": 788.311,
+   "end": 790.273
   },
   {
    "segment": "scripture-4",
    "text": "I will strengthen thee;",
-   "start": 790.709,
-   "end": 792.565
+   "start": 790.453,
+   "end": 792.309
   },
   {
    "segment": "scripture-4",
    "text": "yea, I will help thee;",
-   "start": 792.745,
-   "end": 794.644
+   "start": 792.489,
+   "end": 794.388
   },
   {
    "segment": "scripture-4",
    "text": "yea, I will uphold thee with the right hand of my righteousness.",
-   "start": 794.824,
-   "end": 799.197
+   "start": 794.568,
+   "end": 798.941
   },
   {
    "segment": "prayer-5",
    "text": "Strengthen me for the hardest part of this day, whatever it turns out to be.",
-   "start": 800.877,
-   "end": 806.125
+   "start": 800.621,
+   "end": 805.869
   },
   {
    "segment": "prayer-5",
    "text": "When I feel weak, hold me up.",
-   "start": 806.305,
-   "end": 808.78
+   "start": 806.049,
+   "end": 808.524
   },
   {
    "segment": "prayer-5",
    "text": "When I do not know what to say, give me words.",
-   "start": 808.96,
-   "end": 812.459
+   "start": 808.704,
+   "end": 812.203
   },
   {
    "segment": "prayer-5",
    "text": "When I am tempted to quit, remind me that you have not let go of me and you will not start now.",
-   "start": 812.639,
-   "end": 819.572
+   "start": 812.383,
+   "end": 819.316
   },
   {
    "segment": "scripture-10",
    "text": "Some of you are walking into something heavy today.",
-   "start": 820.952,
-   "end": 824.472
+   "start": 820.696,
+   "end": 824.237
   },
   {
    "segment": "scripture-10",
    "text": "This promise is for you.",
-   "start": 824.652,
-   "end": 826.764
+   "start": 824.417,
+   "end": 826.529
   },
   {
    "segment": "scripture-10",
    "text": "When thou passest through the waters, I will be with thee;",
-   "start": 826.944,
-   "end": 831.061
+   "start": 826.709,
+   "end": 830.827
   },
   {
    "segment": "scripture-10",
    "text": "and through the rivers, they shall not overflow thee:",
-   "start": 831.241,
-   "end": 834.911
+   "start": 831.007,
+   "end": 834.697
   },
   {
    "segment": "scripture-10",
    "text": "when thou walkest through the fire, thou shalt not be burned;",
-   "start": 835.091,
-   "end": 839.549
+   "start": 834.877,
+   "end": 839.357
   },
   {
    "segment": "scripture-10",
    "text": "neither shall the flame kindle upon thee.",
-   "start": 839.729,
-   "end": 842.951
+   "start": 839.537,
+   "end": 842.759
   },
   {
    "segment": "prayer-waters",
    "text": "Notice that God did not say if you pass through the waters.",
-   "start": 844.631,
-   "end": 848.855
+   "start": 844.439,
+   "end": 848.663
   },
   {
    "segment": "prayer-waters",
    "text": "He said when.",
-   "start": 849.035,
-   "end": 850.443
+   "start": 848.843,
+   "end": 850.251
   },
   {
    "segment": "prayer-waters",
    "text": "Lord, I will not pretend there are no deep waters in my life.",
-   "start": 850.623,
-   "end": 855.401
+   "start": 850.431,
+   "end": 855.209
   },
   {
    "segment": "prayer-waters",
    "text": "But I thank you that you do not watch me from the shore.",
-   "start": 855.581,
-   "end": 859.656
+   "start": 855.389,
+   "end": 859.464
   },
   {
    "segment": "prayer-waters",
    "text": "You walk through them with me.",
-   "start": 859.836,
-   "end": 861.735
+   "start": 859.644,
+   "end": 861.543
   },
   {
    "segment": "prayer-waters",
    "text": "When the pressure rises today, let me feel your hand.",
-   "start": 861.915,
-   "end": 866.011
+   "start": 861.723,
+   "end": 865.819
   },
   {
    "segment": "prayer-waters",
    "text": "When I think I am going under, remind me that the river has a limit, and that you set it.",
-   "start": 866.191,
-   "end": 872.847
+   "start": 865.999,
+   "end": 872.655
   },
   {
    "segment": "scripture-13",
    "text": "Hold on to this when the day feels unstable.",
-   "start": 874.227,
-   "end": 877.875
+   "start": 874.035,
+   "end": 877.683
   },
   {
    "segment": "scripture-13",
    "text": "God is our refuge and strength, a very present help in trouble.",
-   "start": 878.055,
-   "end": 883.132
+   "start": 877.863,
+   "end": 882.94
   },
   {
    "segment": "scripture-13",
    "text": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea.",
-   "start": 883.312,
-   "end": 891.568
+   "start": 883.12,
+   "end": 891.376
   },
   {
    "segment": "reflection-present-help",
    "text": "A very present help.",
-   "start": 893.248,
-   "end": 895.211
+   "start": 893.056,
+   "end": 895.019
   },
   {
    "segment": "reflection-present-help",
    "text": "Not a distant help, not a help that arrives after everything falls apart, but present.",
-   "start": 895.391,
-   "end": 901.961
+   "start": 895.199,
+   "end": 901.769
   },
   {
    "segment": "reflection-present-help",
    "text": "In the moment the phone rings with news you did not want, he is present.",
-   "start": 902.141,
-   "end": 907.496
+   "start": 901.949,
+   "end": 907.304
   },
   {
    "segment": "reflection-present-help",
    "text": "In the moment you feel the old panic rising, he is present.",
-   "start": 907.676,
-   "end": 912.391
+   "start": 907.484,
+   "end": 912.199
   },
   {
    "segment": "reflection-present-help",
    "text": "You do not have to find the right words to reach him.",
-   "start": 912.571,
-   "end": 916.283
+   "start": 912.379,
+   "end": 916.091
   },
   {
    "segment": "reflection-present-help",
    "text": "He is already there.",
-   "start": 916.463,
-   "end": 918.233
+   "start": 916.271,
+   "end": 918.041
   },
   {
    "segment": "reflection-present-help",
    "text": "Sometimes the most powerful prayer of the day is simply, Lord, you are here, and I am not alone.",
-   "start": 918.413,
-   "end": 925.411
+   "start": 918.221,
+   "end": 925.219
   },
   {
    "segment": "prayer-weary",
    "text": "And Lord, for the one listening who woke up already tired, the one who is grieving, the one who has prayed about the same thing for a long time and is starting to lose heart, meet them right now.",
-   "start": 926.791,
-   "end": 940.508
+   "start": 926.599,
+   "end": 940.337
   },
   {
    "segment": "prayer-weary",
    "text": "Sit with them in the quiet.",
-   "start": 940.688,
-   "end": 942.907
+   "start": 940.517,
+   "end": 942.736
   },
   {
    "segment": "prayer-weary",
    "text": "Remind them that a slow morning is not a failed morning, and that tears are not a lack of faith.",
-   "start": 943.087,
-   "end": 950.041
+   "start": 942.916,
+   "end": 949.871
   },
   {
    "segment": "prayer-weary",
    "text": "Give them enough strength for this hour, and then the next, until they can see your goodness again.",
-   "start": 950.221,
-   "end": 956.856
+   "start": 950.051,
+   "end": 956.685
   },
   {
    "segment": "stillness-2",
    "text": "Let us pause again for a moment.",
-   "start": 958.236,
-   "end": 960.689
+   "start": 958.065,
+   "end": 960.519
   },
   {
    "segment": "stillness-2",
    "text": "Breathe in slowly, and remember that he is near.",
-   "start": 960.869,
-   "end": 964.667
+   "start": 960.699,
+   "end": 964.496
   },
   {
    "segment": "stillness-2",
    "text": "Breathe out, and hand him the heaviest thing on your mind.",
-   "start": 964.847,
-   "end": 968.836
+   "start": 964.676,
+   "end": 968.644
   },
   {
    "segment": "declaration",
    "text": "Now say this with me, slowly.",
-   "start": 975.016,
-   "end": 977.555
+   "start": 974.824,
+   "end": 977.363
   },
   {
    "segment": "declaration",
    "text": "God has gone before me today.",
-   "start": 977.735,
-   "end": 980.316
+   "start": 977.543,
+   "end": 980.124
   },
   {
    "segment": "declaration",
    "text": "His mercy is new this morning.",
-   "start": 980.496,
-   "end": 983.056
+   "start": 980.304,
+   "end": 982.864
   },
   {
    "segment": "declaration",
    "text": "I do not walk alone.",
-   "start": 983.236,
-   "end": 985.263
+   "start": 983.044,
+   "end": 985.071
   },
   {
    "segment": "declaration",
    "text": "I will not be ruled by fear.",
-   "start": 985.443,
-   "end": 987.917
+   "start": 985.251,
+   "end": 987.725
   },
   {
    "segment": "declaration",
    "text": "I will trust him with what I cannot see.",
-   "start": 988.097,
-   "end": 991.02
+   "start": 987.905,
+   "end": 990.828
   },
   {
    "segment": "declaration",
    "text": "This is the day which the Lord hath made;",
-   "start": 991.2,
-   "end": 994.272
+   "start": 991.008,
+   "end": 994.08
   },
   {
    "segment": "declaration",
    "text": "I will rejoice and be glad in it.",
-   "start": 994.452,
-   "end": 997.183
+   "start": 994.26,
+   "end": 996.991
   },
   {
    "segment": "scripture-5",
    "text": "Carry one more promise with you into the next hour.",
-   "start": 998.863,
-   "end": 1002.873
+   "start": 998.671,
+   "end": 1002.681
   },
   {
    "segment": "scripture-5",
    "text": "Trust in the Lord with all thine heart;",
-   "start": 1003.053,
-   "end": 1005.784
+   "start": 1002.861,
+   "end": 1005.592
   },
   {
    "segment": "scripture-5",
    "text": "and lean not unto thine own understanding.",
-   "start": 1005.964,
-   "end": 1009.591
+   "start": 1005.772,
+   "end": 1009.399
   },
   {
    "segment": "scripture-5",
    "text": "In all thy ways acknowledge him, and he shall direct thy paths.",
-   "start": 1009.771,
-   "end": 1014.464
+   "start": 1009.579,
+   "end": 1014.272
   },
   {
    "segment": "reflection-4",
    "text": "In all thy ways acknowledge him.",
-   "start": 1016.144,
-   "end": 1018.704
+   "start": 1015.952,
+   "end": 1018.512
   },
   {
    "segment": "reflection-4",
    "text": "Not only in the big decisions, but in the small ones that fill an ordinary day.",
-   "start": 1018.884,
-   "end": 1025.049
+   "start": 1018.692,
+   "end": 1024.857
   },
   {
    "segment": "reflection-4",
    "text": "When you sit down to work, acknowledge him.",
-   "start": 1025.229,
-   "end": 1028.493
+   "start": 1025.037,
+   "end": 1028.301
   },
   {
    "segment": "reflection-4",
    "text": "When you answer a difficult message, acknowledge him.",
-   "start": 1028.673,
-   "end": 1032.663
+   "start": 1028.481,
+   "end": 1032.471
   },
   {
    "segment": "reflection-4",
    "text": "When you feel the old worry return in the middle of the afternoon, acknowledge him.",
-   "start": 1032.843,
-   "end": 1038.816
+   "start": 1032.651,
+   "end": 1038.624
   },
   {
    "segment": "reflection-4",
    "text": "You do not need a long prayer for that.",
-   "start": 1038.996,
-   "end": 1041.94
+   "start": 1038.804,
+   "end": 1041.748
   },
   {
    "segment": "reflection-4",
    "text": "A quiet word is enough.",
-   "start": 1042.12,
-   "end": 1044.275
+   "start": 1041.928,
+   "end": 1044.083
   },
   {
    "segment": "reflection-4",
    "text": "Lord, you are here.",
-   "start": 1044.455,
-   "end": 1046.097
+   "start": 1044.263,
+   "end": 1045.905
   },
   {
    "segment": "reflection-4",
    "text": "Lord, lead me.",
-   "start": 1046.277,
-   "end": 1047.813
+   "start": 1046.085,
+   "end": 1047.621
   },
   {
    "segment": "reflection-4",
    "text": "And the promise is that he will direct your paths, one turn at a time, all the way to evening.",
-   "start": 1047.993,
-   "end": 1055.012
+   "start": 1047.801,
+   "end": 1054.799
   },
   {
    "segment": "scripture-11",
    "text": "As we come toward the end of our time together, hear what God said to Joshua on the edge of a new beginning.",
-   "start": 1056.392,
-   "end": 1064.264
+   "start": 1056.179,
+   "end": 1064.051
   },
   {
    "segment": "scripture-11",
    "text": "Have not I commanded thee?",
-   "start": 1064.444,
-   "end": 1066.684
+   "start": 1064.231,
+   "end": 1066.471
   },
   {
    "segment": "scripture-11",
    "text": "Be strong and of a good courage;",
-   "start": 1066.864,
-   "end": 1069.488
+   "start": 1066.651,
+   "end": 1069.253
   },
   {
    "segment": "scripture-11",
    "text": "be not afraid, neither be thou dismayed:",
-   "start": 1069.668,
-   "end": 1072.953
+   "start": 1069.433,
+   "end": 1072.719
   },
   {
    "segment": "scripture-11",
    "text": "for the Lord thy God is with thee whithersoever thou goest.",
-   "start": 1073.133,
-   "end": 1077.699
+   "start": 1072.899,
+   "end": 1077.485
   },
   {
    "segment": "reflection-courage",
    "text": "God did not tell Joshua to be brave because the task was small.",
-   "start": 1079.379,
-   "end": 1084.563
+   "start": 1079.165,
+   "end": 1084.349
   },
   {
    "segment": "reflection-courage",
    "text": "He told him to be strong because the One going with him was greater than the task.",
-   "start": 1084.743,
-   "end": 1090.353
+   "start": 1084.529,
+   "end": 1090.14
   },
   {
    "segment": "reflection-courage",
    "text": "Your courage today does not have to come from feeling ready.",
-   "start": 1090.533,
-   "end": 1095.077
+   "start": 1090.32,
+   "end": 1094.864
   },
   {
    "segment": "reflection-courage",
    "text": "It can come from knowing who is with you.",
-   "start": 1095.257,
-   "end": 1098.052
+   "start": 1095.044,
+   "end": 1097.839
   },
   {
    "segment": "reflection-courage",
    "text": "Whithersoever thou goest.",
-   "start": 1098.232,
-   "end": 1100.536
+   "start": 1098.019,
+   "end": 1100.323
   },
   {
    "segment": "reflection-courage",
    "text": "That means the kitchen, the office, the hospital room, the classroom, the empty apartment.",
-   "start": 1100.716,
-   "end": 1107.116
+   "start": 1100.503,
+   "end": 1106.903
   },
   {
    "segment": "reflection-courage",
    "text": "There is no place on your schedule today where he will not be.",
-   "start": 1107.296,
-   "end": 1111.755
+   "start": 1107.083,
+   "end": 1111.541
   },
   {
    "segment": "scripture-12",
    "text": "And one more promise, short enough to remember all day.",
-   "start": 1113.135,
-   "end": 1117.551
+   "start": 1112.921,
+   "end": 1117.337
   },
   {
    "segment": "scripture-12",
    "text": "For he hath said, I will never leave thee, nor forsake thee.",
-   "start": 1117.731,
-   "end": 1121.955
+   "start": 1117.517,
+   "end": 1121.741
   },
   {
    "segment": "prayer-thanks",
    "text": "Father, thank you.",
-   "start": 1123.635,
-   "end": 1125.277
+   "start": 1123.421,
+   "end": 1125.064
   },
   {
    "segment": "prayer-thanks",
    "text": "Thank you that you went before me today, that your mercy is new, and that you will never leave me.",
-   "start": 1125.457,
-   "end": 1132.348
+   "start": 1125.244,
+   "end": 1132.135
   },
   {
    "segment": "prayer-thanks",
    "text": "Thank you for what you have already done in my life, even the things I only understood later.",
-   "start": 1132.528,
-   "end": 1139.184
+   "start": 1132.315,
+   "end": 1138.971
   },
   {
    "segment": "prayer-thanks",
    "text": "I choose to start this day grateful, not because everything is easy, but because you are faithful.",
-   "start": 1139.364,
-   "end": 1146.617
+   "start": 1139.151,
+   "end": 1146.404
   },
   {
    "segment": "prayer-thanks",
    "text": "Let my gratitude be louder than my worry today.",
-   "start": 1146.797,
-   "end": 1150.36
+   "start": 1146.584,
+   "end": 1150.147
   },
   {
    "segment": "prayer-purpose",
    "text": "Lord, use me today.",
-   "start": 1151.74,
-   "end": 1153.724
+   "start": 1151.527,
+   "end": 1153.511
   },
   {
    "segment": "prayer-purpose",
    "text": "Not only to get through my list, but to be part of what you are doing.",
-   "start": 1153.904,
-   "end": 1158.917
+   "start": 1153.691,
+   "end": 1158.704
   },
   {
    "segment": "prayer-purpose",
    "text": "Show me one person I can encourage.",
-   "start": 1159.097,
-   "end": 1162.191
+   "start": 1158.884,
+   "end": 1161.977
   },
   {
    "segment": "prayer-purpose",
    "text": "Give me eyes to see the need in front of me and the courage to respond.",
-   "start": 1162.371,
-   "end": 1167.725
+   "start": 1162.157,
+   "end": 1167.512
   },
   {
    "segment": "prayer-purpose",
    "text": "If there is a gift you have put in me that I have been hiding out of fear, help me to use it.",
-   "start": 1167.905,
-   "end": 1173.815
+   "start": 1167.692,
+   "end": 1173.601
   },
   {
    "segment": "prayer-purpose",
    "text": "Let my life today point someone, even one person, toward your kindness.",
-   "start": 1173.995,
-   "end": 1179.499
+   "start": 1173.781,
+   "end": 1179.285
   },
   {
    "segment": "prayer-world",
    "text": "I also pray beyond my own walls.",
-   "start": 1180.879,
-   "end": 1183.78
+   "start": 1180.665,
+   "end": 1183.567
   },
   {
    "segment": "prayer-world",
    "text": "For the people working early this morning to keep others safe and well.",
-   "start": 1183.96,
-   "end": 1188.995
+   "start": 1183.747,
+   "end": 1188.781
   },
   {
    "segment": "prayer-world",
    "text": "For leaders who will make decisions that affect many lives, give them wisdom and humility.",
-   "start": 1189.175,
-   "end": 1195.681
+   "start": 1188.961,
+   "end": 1195.447
   },
   {
    "segment": "prayer-world",
    "text": "For places where there is war, fear or hunger, bring your comfort and your peace.",
-   "start": 1195.861,
-   "end": 1201.515
+   "start": 1195.627,
+   "end": 1201.28
   },
   {
    "segment": "prayer-world",
    "text": "And for the church around the world, make us faithful, kind and brave.",
-   "start": 1201.695,
-   "end": 1206.751
+   "start": 1201.46,
+   "end": 1206.516
   },
   {
    "segment": "prayer-evening",
    "text": "And Lord, I ask you now for the end of this day, before it even begins.",
-   "start": 1208.131,
-   "end": 1213.528
+   "start": 1207.896,
+   "end": 1213.293
   },
   {
    "segment": "prayer-evening",
    "text": "When evening comes, let me look back and see where you were.",
-   "start": 1213.708,
-   "end": 1217.868
+   "start": 1213.473,
+   "end": 1217.612
   },
   {
    "segment": "prayer-evening",
    "text": "Let me lie down without regret for words I did not need to say.",
-   "start": 1218.048,
-   "end": 1223.104
+   "start": 1217.792,
+   "end": 1222.955
   },
   {
    "segment": "prayer-evening",
    "text": "Let me rest knowing that I did what I could and left the rest to you.",
-   "start": 1223.284,
-   "end": 1228.02
+   "start": 1223.135,
+   "end": 1227.871
   },
   {
    "segment": "prayer-evening",
    "text": "Go before me all the way to tonight.",
-   "start": 1228.2,
-   "end": 1231.144
+   "start": 1228.051,
+   "end": 1230.995
   },
   {
    "segment": "payoff",
    "text": "Here is one small thing to do today.",
-   "start": 1232.524,
-   "end": 1235.447
+   "start": 1232.375,
+   "end": 1235.297
   },
   {
    "segment": "payoff",
    "text": "The next time worry rises, and it probably will, stop for one breath and say:",
-   "start": 1235.627,
-   "end": 1241.515
+   "start": 1235.477,
+   "end": 1241.365
   },
   {
    "segment": "payoff",
    "text": "You were here first.",
-   "start": 1241.695,
-   "end": 1243.337
+   "start": 1241.545,
+   "end": 1243.188
   },
   {
    "segment": "payoff",
    "text": "That is all.",
-   "start": 1243.517,
-   "end": 1244.947
+   "start": 1243.368,
+   "end": 1244.776
   },
   {
    "segment": "payoff",
    "text": "Six words that turn your attention from the size of the problem to the faithfulness of the One who is already in it.",
-   "start": 1245.127,
-   "end": 1253.639
+   "start": 1244.956,
+   "end": 1253.468
   },
   {
    "segment": "blessing",
    "text": "May the Lord go before you into every hour of this day.",
-   "start": 1255.019,
-   "end": 1259.285
+   "start": 1254.848,
+   "end": 1259.136
   },
   {
    "segment": "blessing",
    "text": "May his mercy meet you at every turn.",
-   "start": 1259.465,
-   "end": 1262.665
+   "start": 1259.316,
+   "end": 1262.516
   },
   {
    "segment": "blessing",
    "text": "May his peace guard your heart when the day gets loud, and may you lie down tonight knowing that he never left your side.",
-   "start": 1262.845,
-   "end": 1271.037
+   "start": 1262.696,
+   "end": 1270.867
   },
   {
    "segment": "blessing",
    "text": "In the name of Jesus, amen.",
-   "start": 1271.217,
-   "end": 1273.969
+   "start": 1271.047,
+   "end": 1273.799
   },
   {
    "segment": "cta",
    "text": "If this prayer helped you begin your morning, come back tomorrow and we will pray again.",
-   "start": 1275.649,
-   "end": 1281.687
+   "start": 1275.479,
+   "end": 1281.516
   },
   {
    "segment": "cta",
    "text": "And if someone you love is facing a hard day, share it with them.",
-   "start": 1281.867,
-   "end": 1286.667
+   "start": 1281.696,
+   "end": 1286.496
   },
   {
    "segment": "cta",
    "text": "God has already gone ahead of them too.",
-   "start": 1286.847,
-   "end": 1289.855
+   "start": 1286.676,
+   "end": 1289.684
   }
  ],
  "overlay": {
@@ -5531,257 +5559,257 @@
   {
    "id": "hook",
    "start": 0.3,
-   "end": 17.041
+   "end": 17.063
   },
   {
    "id": "invitation",
-   "start": 17.841,
-   "end": 46.484
+   "start": 17.863,
+   "end": 46.42
   },
   {
    "id": "scripture-1",
-   "start": 47.684,
-   "end": 65.705
+   "start": 47.62,
+   "end": 65.62
   },
   {
    "id": "reflection-1",
-   "start": 67.205,
-   "end": 91.783
+   "start": 67.12,
+   "end": 91.676
   },
   {
    "id": "scripture-6",
-   "start": 92.983,
-   "end": 112.699
+   "start": 92.876,
+   "end": 112.592
   },
   {
    "id": "reflection-6",
-   "start": 114.199,
-   "end": 147.471
+   "start": 114.092,
+   "end": 147.364
   },
   {
    "id": "scripture-2",
-   "start": 148.671,
-   "end": 163.94
+   "start": 148.564,
+   "end": 163.855
   },
   {
    "id": "reflection-2",
-   "start": 165.44,
-   "end": 189.048
+   "start": 165.355,
+   "end": 188.963
   },
   {
    "id": "scripture-3",
-   "start": 190.248,
-   "end": 208.727
+   "start": 190.163,
+   "end": 208.62
   },
   {
    "id": "reflection-3",
-   "start": 210.227,
-   "end": 240.777
+   "start": 210.12,
+   "end": 240.671
   },
   {
    "id": "scripture-7",
-   "start": 241.977,
-   "end": 258.015
+   "start": 241.871,
+   "end": 257.908
   },
   {
    "id": "reflection-7",
-   "start": 259.515,
-   "end": 289.937
+   "start": 259.408,
+   "end": 289.831
   },
   {
    "id": "reflection-lookback",
-   "start": 291.137,
-   "end": 325.549
+   "start": 291.031,
+   "end": 325.421
   },
   {
    "id": "stillness",
-   "start": 326.749,
-   "end": 337.679
+   "start": 326.621,
+   "end": 337.529
   },
   {
    "id": "transition",
-   "start": 343.679,
-   "end": 354.757
+   "start": 343.529,
+   "end": 354.608
   },
   {
    "id": "prayer-1",
-   "start": 356.257,
-   "end": 378.256
+   "start": 356.108,
+   "end": 378.085
   },
   {
    "id": "prayer-2",
-   "start": 379.456,
-   "end": 402.851
+   "start": 379.285,
+   "end": 402.68
   },
   {
    "id": "prayer-mind",
-   "start": 404.051,
-   "end": 430.039
+   "start": 403.88,
+   "end": 429.868
   },
   {
    "id": "scripture-8",
-   "start": 431.239,
-   "end": 453.825
+   "start": 431.068,
+   "end": 453.655
   },
   {
    "id": "prayer-peace",
-   "start": 455.325,
-   "end": 489.832
+   "start": 455.155,
+   "end": 489.683
   },
   {
    "id": "prayer-decisions",
-   "start": 491.032,
-   "end": 517.191
+   "start": 490.883,
+   "end": 517.063
   },
   {
    "id": "prayer-work",
-   "start": 518.391,
-   "end": 552.217
+   "start": 518.263,
+   "end": 552.111
   },
   {
    "id": "prayer-3",
-   "start": 553.417,
-   "end": 575.084
+   "start": 553.311,
+   "end": 574.956
   },
   {
    "id": "prayer-4",
-   "start": 576.284,
-   "end": 599.776
+   "start": 576.156,
+   "end": 599.627
   },
   {
    "id": "prayer-forgiveness",
-   "start": 600.976,
-   "end": 634.983
+   "start": 600.827,
+   "end": 634.855
   },
   {
    "id": "prayer-children",
-   "start": 636.183,
-   "end": 665.413
+   "start": 636.055,
+   "end": 665.179
   },
   {
    "id": "prayer-provision",
-   "start": 666.613,
-   "end": 691.769
+   "start": 666.379,
+   "end": 691.513
   },
   {
    "id": "prayer-health",
-   "start": 692.969,
-   "end": 725.379
+   "start": 692.713,
+   "end": 725.144
   },
   {
    "id": "scripture-9",
-   "start": 726.579,
-   "end": 743.747
+   "start": 726.344,
+   "end": 743.533
   },
   {
    "id": "prayer-home",
-   "start": 745.247,
-   "end": 776.407
+   "start": 745.033,
+   "end": 776.151
   },
   {
    "id": "scripture-4",
-   "start": 777.607,
-   "end": 799.377
+   "start": 777.351,
+   "end": 799.121
   },
   {
    "id": "prayer-5",
-   "start": 800.877,
-   "end": 819.752
+   "start": 800.621,
+   "end": 819.496
   },
   {
    "id": "scripture-10",
-   "start": 820.952,
-   "end": 843.131
+   "start": 820.696,
+   "end": 842.939
   },
   {
    "id": "prayer-waters",
-   "start": 844.631,
-   "end": 873.027
+   "start": 844.439,
+   "end": 872.835
   },
   {
    "id": "scripture-13",
-   "start": 874.227,
-   "end": 891.748
+   "start": 874.035,
+   "end": 891.556
   },
   {
    "id": "reflection-present-help",
-   "start": 893.248,
-   "end": 925.591
+   "start": 893.056,
+   "end": 925.399
   },
   {
    "id": "prayer-weary",
-   "start": 926.791,
-   "end": 957.036
+   "start": 926.599,
+   "end": 956.865
   },
   {
    "id": "stillness-2",
-   "start": 958.236,
-   "end": 969.016
+   "start": 958.065,
+   "end": 968.824
   },
   {
    "id": "declaration",
-   "start": 975.016,
-   "end": 997.363
+   "start": 974.824,
+   "end": 997.171
   },
   {
    "id": "scripture-5",
-   "start": 998.863,
-   "end": 1014.644
+   "start": 998.671,
+   "end": 1014.452
   },
   {
    "id": "reflection-4",
-   "start": 1016.144,
-   "end": 1055.192
+   "start": 1015.952,
+   "end": 1054.979
   },
   {
    "id": "scripture-11",
-   "start": 1056.392,
-   "end": 1077.879
+   "start": 1056.179,
+   "end": 1077.665
   },
   {
    "id": "reflection-courage",
-   "start": 1079.379,
-   "end": 1111.935
+   "start": 1079.165,
+   "end": 1111.721
   },
   {
    "id": "scripture-12",
-   "start": 1113.135,
-   "end": 1122.135
+   "start": 1112.921,
+   "end": 1121.921
   },
   {
    "id": "prayer-thanks",
-   "start": 1123.635,
-   "end": 1150.54
+   "start": 1123.421,
+   "end": 1150.327
   },
   {
    "id": "prayer-purpose",
-   "start": 1151.74,
-   "end": 1179.679
+   "start": 1151.527,
+   "end": 1179.465
   },
   {
    "id": "prayer-world",
-   "start": 1180.879,
-   "end": 1206.931
+   "start": 1180.665,
+   "end": 1206.696
   },
   {
    "id": "prayer-evening",
-   "start": 1208.131,
-   "end": 1231.324
+   "start": 1207.896,
+   "end": 1231.175
   },
   {
    "id": "payoff",
-   "start": 1232.524,
-   "end": 1253.819
+   "start": 1232.375,
+   "end": 1253.648
   },
   {
    "id": "blessing",
-   "start": 1255.019,
-   "end": 1274.149
+   "start": 1254.848,
+   "end": 1273.979
   },
   {
    "id": "cta",
-   "start": 1275.649,
-   "end": 1290.035
+   "start": 1275.479,
+   "end": 1289.864
   }
  ],
  "upload_performed": false,
