@@ -1,0 +1,32 @@
+{
+  "version": "acquire-window-v1",
+  "request_id": "acq-8Jk4Efftvd4-60-100-v1",
+  "video_id": "8Jk4Efftvd4",
+  "window": [
+    60,
+    100
+  ],
+  "run_id": "38998293513",
+  "status": "WINDOW_RECEIVED_AND_DECODED",
+  "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+  "download_tools_call_requests": 1,
+  "progress_polls": 4,
+  "control_response_bytes": 1739,
+  "production": false,
+  "publication": false,
+  "start_reply_received_bytes": 1183,
+  "provider_job_id": "v2_stream_251a72c8360cd8418042",
+  "observed_units_change_since_info": 4,
+  "delivery_http_status": 200,
+  "delivery_host": "ricky4.savenow.to",
+  "media_file": {
+    "bytes": 13733127,
+    "sha256": "3f8961c1e64c48edf6f964c2e8ff7d927f2f45a3aca1489f31072e0b92b9c1ac"
+  },
+  "returned_duration_seconds": 40.033,
+  "video_height": 1080,
+  "complete_clip_decode_passed": true,
+  "units_used_observed": 4,
+  "completed_at": "2026-10-17T03:33:29.637597+00:00",
+  "release_asset": "native-8Jk4Efftvd4-60-100s-sha256-3f8961c1e64c48edf6f964c2e8ff7d927f2f45a3aca1489f31072e0b92b9c1ac.mp4"
+}
