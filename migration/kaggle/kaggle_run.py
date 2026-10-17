@@ -7,7 +7,7 @@ privately with GPU and internet enabled, polled until it finishes, and its
 KAGGLE_API_TOKEN environment variable (GitHub secret); it is never written to
 disk inside the repository or printed.
 usage: kaggle_run.py whoami
-       kaggle_run.py run JOB_SCRIPT PAYLOAD_JSON SLUG OUT_DIR [TIMEOUT_MIN] [DATASETS_CSV]
+       kaggle_run.py run JOB_SCRIPT PAYLOAD_JSON SLUG OUT_DIR [TIMEOUT_MIN] [DATASETS_CSV] [gpu|cpu]
        kaggle_run.py dataset DIR SLUG TITLE   (private dataset in the owner's account: create or new version, wait until ready)
 
 Owner authorization 2026-10-17: production code and files may be sent to the
@@ -43,7 +43,7 @@ def username():
     raise RuntimeError("KAGGLE_USERNAME_UNRESOLVED: " + (out + listed)[-400:].replace("KGAT_", "KGAT_***"))
 
 
-def run(job_script, payload_path, slug, out_dir, timeout_min=110, datasets=""):
+def run(job_script, payload_path, slug, out_dir, timeout_min=110, datasets="", accelerator="gpu"):
     user = username()
     payload = json.loads(Path(payload_path).read_text())
     body = Path(job_script).read_text()
@@ -52,7 +52,7 @@ def run(job_script, payload_path, slug, out_dir, timeout_min=110, datasets=""):
         (d / "job.py").write_text(f"PAYLOAD = {json.dumps(payload)!r}\n" + body)
         (d / "kernel-metadata.json").write_text(json.dumps({
             "id": f"{user}/{slug}", "title": slug, "code_file": "job.py", "language": "python",
-            "kernel_type": "script", "is_private": True, "enable_gpu": True, "enable_internet": True,
+            "kernel_type": "script", "is_private": True, "enable_gpu": accelerator == "gpu", "enable_internet": True,
             "dataset_sources": [f"{user}/{d}" if "/" not in d else d for d in datasets.split(",") if d],
             "competition_sources": [], "kernel_sources": []}))
         print(kaggle("kernels", "push", "-p", str(d)).strip()[-300:])
@@ -103,6 +103,6 @@ if __name__ == "__main__":
     elif sys.argv[1] == "dataset":
         dataset(*sys.argv[2:5])
     elif sys.argv[1] == "run":
-        run(*sys.argv[2:8])
+        run(*sys.argv[2:9])
     else:
         raise SystemExit(__doc__)

@@ -63,7 +63,7 @@ jobs:
         run: |
           printf '{"pilot": "%s", "shorts": %s}' "$PILOT" "$SHORTS" > "$RUNNER_TEMP/payload.json"
           python3 -I -B migration/kaggle/kaggle_run.py run migration/kaggle/job_render.py "$RUNNER_TEMP/payload.json" \
-            "heroverse-render-$PILOT" "$RUNNER_TEMP/kout" 220 heroverse-assets
+            "heroverse-render-$PILOT" "$RUNNER_TEMP/kout" 220 heroverse-assets cpu
           ls -la "$RUNNER_TEMP/kout/out" | head -30
       - name: Preserve render privately and record evidence
         run: |
