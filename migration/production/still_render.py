@@ -278,7 +278,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
             else:
                 plan[i]["motion"] = "push_in" if i == 0 else MOTIONS[i % len(MOTIONS)]
                 camera.render(frames / f"{i:03d}.png", out, seconds, plan[i]["motion"], intermediate=True)
-        with ThreadPoolExecutor(max_workers=2 if cine else 4) as pool:
+        with ThreadPoolExecutor(max_workers=max(2, (os.cpu_count() or 4) // 2) if cine else 4) as pool:
             list(pool.map(raw, range(len(plan))))
         mark("moves")
 
