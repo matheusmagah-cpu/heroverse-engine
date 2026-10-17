@@ -1,0 +1,139 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 40.067,
+   "editing": {
+    "picture_changes": 27,
+    "picture_changes_per_minute": 40.43,
+    "median_shot_seconds": 1.167,
+    "longest_shot_seconds": 4.333,
+    "motion_median_top_decile_diff": 1.736
+   },
+   "rhythm": {
+    "audio_onsets": 56,
+    "audio_onsets_per_minute": 83.86,
+    "tempo": {
+     "bpm": 63.97,
+     "confidence": 0.088
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.037,
+     "chance_fraction": 0.089,
+     "lift": 0.42
+    },
+    "sync": {
+     "median_offset_seconds": 0.509751,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 7,
+     "visual_events": 27,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -10.0,
+    "loudness_range_lu": 1.5,
+    "true_peak_dbtp": 0.9
+   },
+   "colour": {
+    "mean_brightness": 0.3837,
+    "brightness_std_over_time": 0.0704,
+    "mean_saturation": 0.2932,
+    "saturation_std_over_time": 0.0809
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.952,
+     "singing": 0.0,
+     "music": 0.422,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 76,
+     "singing": 0,
+     "music": 6,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 1
+    },
+    "words": 97,
+    "words_per_minute": 145.3,
+    "transcript": "Beloved, welcome to this sacred moment. Before the noise of the world begins, before the rush of responsibilities, let us pause together to invite the presence of God into our day. This is not just another morning, it is a divine gift, a fresh opportunity to walk hand in hand with the Lord. Today we declare, walk with me today. we pray, let your heart open wide, let your spirit be lifted, and let your soul be anchored in His peace. This prayer is your shield, your strength, and your song for the day ahead. Heavenly Father..."
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 1.935,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 1.44,
+     "end_seconds": 4.815,
+     "frames": 6
+    },
+    {
+     "label": "music",
+     "start_seconds": 4.32,
+     "end_seconds": 5.295,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 4.8,
+     "end_seconds": 14.895,
+     "frames": 20
+    },
+    {
+     "label": "music",
+     "start_seconds": 14.4,
+     "end_seconds": 15.375,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 14.88,
+     "end_seconds": 33.615,
+     "frames": 38
+    },
+    {
+     "label": "music",
+     "start_seconds": 33.12,
+     "end_seconds": 34.095,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 33.6,
+     "end_seconds": 38.415,
+     "frames": 9
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 37.92,
+     "end_seconds": 38.895,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 38.4,
+     "end_seconds": 40.031,
+     "frames": 3
+    }
+   ]
+  }
+ ]
+}
