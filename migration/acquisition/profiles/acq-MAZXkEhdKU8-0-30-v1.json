@@ -1,0 +1,85 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 17,
+    "picture_changes_per_minute": 33.92,
+    "median_shot_seconds": 1.283,
+    "longest_shot_seconds": 4.833,
+    "motion_median_top_decile_diff": 7.072
+   },
+   "rhythm": {
+    "audio_onsets": 59,
+    "audio_onsets_per_minute": 117.74,
+    "tempo": {
+     "bpm": 56.6,
+     "confidence": 0.064
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.471,
+     "chance_fraction": 0.123,
+     "lift": 3.84
+    },
+    "sync": {
+     "median_offset_seconds": -0.004161,
+     "verdict": "IN_SYNC",
+     "consensus_pairs": 8,
+     "visual_events": 17,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -8.5,
+    "loudness_range_lu": 2.1,
+    "true_peak_dbtp": 0.1
+   },
+   "colour": {
+    "mean_brightness": 0.7443,
+    "brightness_std_over_time": 0.1583,
+    "mean_saturation": 0.1942,
+    "saturation_std_over_time": 0.1451
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 118,
+    "words_per_minute": 235.5,
+    "transcript": "There was a woman in the Bible whose name has been remembered for generations as one of the most evil queens in the Bible. She was ruthless, obsessed with power, and she wanted the throne so badly that she was willing to kill her own family just to take it. She became known as the of evil. For generations, her name has been remembered as one of the darkest names in the history of Judah. Her story is filled with power, betrayal, violence, and a hunger for the throne that would push her to do the unthinkable. But how did she become this wicked? And what made her willing to go this far? This is the story of"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
