@@ -1,0 +1,212 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 13,
+    "picture_changes_per_minute": 25.94,
+    "median_shot_seconds": 2.25,
+    "longest_shot_seconds": 4.933,
+    "motion_median_top_decile_diff": 5.085
+   },
+   "rhythm": {
+    "audio_onsets": 53,
+    "audio_onsets_per_minute": 105.76,
+    "tempo": {
+     "bpm": 60.0,
+     "confidence": 0.065
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.308,
+     "chance_fraction": 0.111,
+     "lift": 2.78
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 4,
+     "visual_events": 13
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -19.2,
+    "loudness_range_lu": 2.2,
+    "true_peak_dbtp": -5.4
+   },
+   "colour": {
+    "mean_brightness": 0.4202,
+    "brightness_std_over_time": 0.0858,
+    "mean_saturation": 0.5349,
+    "saturation_std_over_time": 0.1516
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.855,
+     "singing": 0.0,
+     "music": 0.806,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 30,
+     "singing": 0,
+     "music": 31,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 1
+    },
+    "words": 78,
+    "words_per_minute": 155.7,
+    "transcript": "tomorrow's grace. Heavenly Father, I pray for the person listening right now who has entered this new month with a prayer in their heart. Maybe they are waiting for a financial breakthrough. Maybe they for a job. Maybe they are believing for healing. Maybe they are praying for their marriage, their family, their children, or a relationship. Maybe they simply want peace after a season that has been emotionally exhausting. exhausting. Father, meet them exactly where they are."
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 2.415,
+     "frames": 4
+    },
+    {
+     "label": "speech",
+     "start_seconds": 1.92,
+     "end_seconds": 3.375,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 2.88,
+     "end_seconds": 3.855,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 3.36,
+     "end_seconds": 4.815,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 4.32,
+     "end_seconds": 7.215,
+     "frames": 5
+    },
+    {
+     "label": "speech",
+     "start_seconds": 6.72,
+     "end_seconds": 7.695,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 7.2,
+     "end_seconds": 9.135,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 8.64,
+     "end_seconds": 11.055,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 10.56,
+     "end_seconds": 11.535,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 11.04,
+     "end_seconds": 12.015,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 11.52,
+     "end_seconds": 12.495,
+     "frames": 1
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 12.0,
+     "end_seconds": 12.975,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 12.48,
+     "end_seconds": 13.455,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 12.96,
+     "end_seconds": 15.375,
+     "frames": 4
+    },
+    {
+     "label": "speech",
+     "start_seconds": 14.88,
+     "end_seconds": 16.815,
+     "frames": 3
+    },
+    {
+     "label": "music",
+     "start_seconds": 16.32,
+     "end_seconds": 18.255,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 17.76,
+     "end_seconds": 20.175,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 19.68,
+     "end_seconds": 22.575,
+     "frames": 5
+    },
+    {
+     "label": "speech",
+     "start_seconds": 22.08,
+     "end_seconds": 26.415,
+     "frames": 8
+    },
+    {
+     "label": "music",
+     "start_seconds": 25.92,
+     "end_seconds": 27.855,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 27.36,
+     "end_seconds": 28.815,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 28.32,
+     "end_seconds": 29.295,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 28.8,
+     "end_seconds": 30.023,
+     "frames": 2
+    }
+   ]
+  }
+ ]
+}

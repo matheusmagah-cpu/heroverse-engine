@@ -1,0 +1,32 @@
+{
+  "version": "acquire-window-v1",
+  "request_id": "acq-NUXLAy7A8TM-518-548-v1",
+  "video_id": "NUXLAy7A8TM",
+  "window": [
+    518,
+    548
+  ],
+  "run_id": "39081822294",
+  "status": "WINDOW_RECEIVED_AND_DECODED",
+  "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+  "download_tools_call_requests": 1,
+  "progress_polls": 3,
+  "control_response_bytes": 1458,
+  "production": false,
+  "publication": false,
+  "start_reply_received_bytes": 1355,
+  "provider_job_id": "v2_stream_164579625be8697c8777",
+  "observed_units_change_since_info": 4,
+  "delivery_http_status": 200,
+  "delivery_host": "dave15.savenow.to",
+  "media_file": {
+    "bytes": 13656127,
+    "sha256": "4000d5605da8aabd896c4a83081bf1ced3ad068b5b6607d8fc5153e77a2c663d"
+  },
+  "returned_duration_seconds": 30.067,
+  "video_height": 1080,
+  "complete_clip_decode_passed": true,
+  "units_used_observed": 4,
+  "completed_at": "2026-10-18T00:20:57.891833+00:00",
+  "release_asset": "native-NUXLAy7A8TM-518-548s-sha256-4000d5605da8aabd896c4a83081bf1ced3ad068b5b6607d8fc5153e77a2c663d.mp4"
+}

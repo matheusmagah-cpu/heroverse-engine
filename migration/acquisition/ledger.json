@@ -861,11 +861,23 @@
       "video_id": "NUXLAy7A8TM",
       "start_seconds": 518,
       "end_seconds": 548,
-      "status": "RESERVED_BEFORE_EFFECT",
+      "status": "COMPLETED",
       "reserved_at": "2026-10-18T00:20:00.576196+00:00",
       "day_utc": "2026-10-18",
       "units_remaining_at_reservation": 472,
-      "reserved_units": 14
+      "reserved_units": 14,
+      "provider_job_id": "v2_stream_164579625be8697c8777",
+      "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+      "media_file": {
+        "bytes": 13656127,
+        "sha256": "4000d5605da8aabd896c4a83081bf1ced3ad068b5b6607d8fc5153e77a2c663d"
+      },
+      "returned_duration_seconds": 30.067,
+      "video_height": 1080,
+      "units_used_observed": 4,
+      "completed_at": "2026-10-18T00:20:57.891833+00:00",
+      "run_id": "39081822294",
+      "restart_allowed": false
     }
   ]
 }
