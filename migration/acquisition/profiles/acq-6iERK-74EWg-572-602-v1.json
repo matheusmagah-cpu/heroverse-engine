@@ -1,0 +1,85 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 16,
+    "picture_changes_per_minute": 31.93,
+    "median_shot_seconds": 1.633,
+    "longest_shot_seconds": 3.167,
+    "motion_median_top_decile_diff": 1.349
+   },
+   "rhythm": {
+    "audio_onsets": 76,
+    "audio_onsets_per_minute": 151.66,
+    "tempo": {
+     "bpm": 76.23,
+     "confidence": 0.082
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.25,
+     "chance_fraction": 0.155,
+     "lift": 1.61
+    },
+    "sync": {
+     "median_offset_seconds": -0.682811,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 7,
+     "visual_events": 16,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -16.4,
+    "loudness_range_lu": 2.3,
+    "true_peak_dbtp": -3.1
+   },
+   "colour": {
+    "mean_brightness": 0.1845,
+    "brightness_std_over_time": 0.0647,
+    "mean_saturation": 0.4791,
+    "saturation_std_over_time": 0.1171
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 76,
+    "words_per_minute": 151.7,
+    "transcript": "happened to the story. Genesis gives us four verses and two verbs. Enoch gives us an oath, a mountain, and a reason the earth became soaked in violence. It is a rich account, and it was clearly known to the writers of Jude and 2 Peter. But it is not scripture, and Genesis itself never mentions teaching, weapons, or an oath. Hold this account as an ancient tradition that illuminates how early readers understood the text,"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
