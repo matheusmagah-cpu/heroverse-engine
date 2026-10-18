@@ -3,6 +3,7 @@
  "pilot_id": "pilot-006",
  "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
  "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "format_note": "Night format ~33 min: guided prayer, CTA, then healing Scripture for sleep (D-2026-10-18-01).",
  "working_title": "Night Prayer for Healing | Rest Your Body and Heart in God's Care",
  "promise": "Title promise 'bring every pain to the God who heals and rest in his care' is spoken at 0-8 s.",
  "angle": "For the listener lying down in pain or sorrow: the God who counts the stars bends to bind up wounds; healing for body, heart and mind, alongside medical care, with no guarantees.",
@@ -324,18 +325,237 @@
    "chapter": "One thing to do tonight"
   },
   {
+   "id": "cta",
+   "beat": "soft call to action before the sleep section",
+   "pause_after": 2.0,
+   "text": "If you prayed this prayer, type amen in the comments now, and if you want, share the name of someone who needs healing, so others can pray too. Then stay right where you are. For the rest of this time, I will read healing Scripture over you slowly, so you can fall asleep in God's care.",
+   "chapter": "Healing Scripture for sleep"
+  },
+  {
+   "id": "sleep-relax-1",
+   "beat": "guided relaxation: breath",
+   "pause_after": 3.0,
+   "text": "Let us begin by letting your body settle. Breathe in gently, as deeply as is comfortable for you, and let the breath go slowly. If there is pain, do not fight it. Just notice it, and place it in God's hands. Let your face soften. Let your eyes close."
+  },
+  {
+   "id": "sleep-relax-2",
+   "beat": "guided relaxation: release",
+   "pause_after": 3.0,
+   "text": "Let your shoulders drop. Let your arms rest heavy at your sides. Let your hands open. Feel the mattress holding you, the pillow supporting your head. You do not have to hold yourself up tonight. You are held."
+  },
+  {
+   "id": "sleep-relax-3",
+   "beat": "guided relaxation: the whole body",
+   "pause_after": 4.0,
+   "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet. Every part of you is known by the God who made you. Every cell is in his care. Rest now."
+  },
+  {
+   "id": "sleep-relax-4",
+   "beat": "guided relaxation: letting go of the day",
+   "pause_after": 4.0,
+   "text": "Now let the day itself go. The appointments, the phone calls, the waiting rooms, the worry. Let each one drift away like a leaf on slow water. There is nothing more you need to do today. Tonight, your only task is to rest."
+  },
+  {
+   "id": "sleep-psalm-103",
+   "beat": "sleep reading: Psalm 103:1-5, 8-13",
+   "pause_after": 4.0,
+   "text": "Listen to this psalm of healing and mercy. Bless the LORD, O my soul: and all that is within me, bless his holy name. Bless the LORD, O my soul, and forget not all his benefits: Who forgiveth all thine iniquities; who healeth all thy diseases; Who redeemeth thy life from destruction; who crowneth thee with lovingkindness and tender mercies; Who satisfieth thy mouth with good things; so that thy youth is renewed like the eagle's. The LORD is merciful and gracious, slow to anger, and plenteous in mercy. He will not always chide: neither will he keep his anger for ever. He hath not dealt with us after our sins; nor rewarded us according to our iniquities. For as the heaven is high above the earth, so great is his mercy toward them that fear him. As far as the east is from the west, so far hath he removed our transgressions from us. Like as a father pitieth his children, so the LORD pitieth them that fear him.",
+   "reference": "Psalm 103:1-5, 8-13 (KJV)",
+   "chapter": "Who healeth all thy diseases (Psalm 103)"
+  },
+  {
+   "id": "sleep-reflect-103",
+   "beat": "sleep reflection: like a father",
+   "pause_after": 4.0,
+   "text": "Like as a father pitieth his children. Think of a loving father sitting beside a sick child's bed at night, watching, caring, staying. That is how God is with you tonight."
+  },
+  {
+   "id": "sleep-psalm-23",
+   "beat": "sleep reading: Psalm 23",
+   "pause_after": 4.0,
+   "text": "The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake. Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me. Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over. Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.",
+   "reference": "Psalm 23 (KJV)",
+   "chapter": "He restoreth my soul (Psalm 23)"
+  },
+  {
+   "id": "sleep-reflect-23",
+   "beat": "sleep reflection: he restores",
+   "pause_after": 4.0,
+   "text": "He restoreth my soul. Restoring is slow, quiet work, the kind that often happens while we sleep. Let the shepherd do his restoring work in you tonight."
+  },
+  {
+   "id": "sleep-psalm-46",
+   "beat": "sleep reading: Psalm 46:1-3, 10-11",
+   "pause_after": 4.0,
+   "text": "God is our refuge and strength, a very present help in trouble. Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea; Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof. Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth. The LORD of hosts is with us; the God of Jacob is our refuge.",
+   "reference": "Psalm 46:1-3, 10-11 (KJV)",
+   "chapter": "Be still and know (Psalm 46)"
+  },
+  {
+   "id": "sleep-reflect-46",
+   "beat": "sleep reflection: the Lord of hosts is with us",
+   "pause_after": 4.0,
+   "text": "The Lord of hosts is with us. Even when the body feels fragile and the future uncertain, the God of angel armies is beside your bed. Be still. He is God, and you can rest."
+  },
+  {
+   "id": "sleep-stillness-1",
+   "beat": "sleep stillness",
+   "pause_after": 8.0,
+   "text": "Breathe in slowly. And let it go. Rest in the quiet."
+  },
+  {
+   "id": "sleep-isaiah-43",
+   "beat": "sleep reading: Isaiah 43:1-2",
+   "pause_after": 4.0,
+   "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "chapter": "Through the waters (Isaiah 43:1-2)"
+  },
+  {
+   "id": "sleep-reflect-43",
+   "beat": "sleep reflection: through, with him",
+   "pause_after": 4.0,
+   "text": "When thou passest through the waters, I will be with thee. Illness can feel like deep water. But God does not watch from the shore. He walks through it with you. You are his. He knows your name."
+  },
+  {
+   "id": "sleep-2cor-4",
+   "beat": "sleep reading: 2 Corinthians 4:16-18",
+   "pause_after": 4.0,
+   "text": "For which cause we faint not; but though our outward man perish, yet the inward man is renewed day by day. For our light affliction, which is but for a moment, worketh for us a far more exceeding and eternal weight of glory; While we look not at the things which are seen, but at the things which are not seen: for the things which are seen are temporal; but the things which are not seen are eternal.",
+   "reference": "2 Corinthians 4:16-18 (KJV)",
+   "chapter": "Renewed day by day (2 Corinthians 4:16-18)"
+  },
+  {
+   "id": "sleep-reflect-2cor",
+   "beat": "sleep reflection: what is unseen",
+   "pause_after": 4.0,
+   "text": "The things which are seen are temporal. The pain you feel tonight is real, but it is not the whole story, and it is not forever. Beneath it, God is renewing the part of you that lasts."
+  },
+  {
+   "id": "sleep-psalm-27",
+   "beat": "sleep reading: Psalm 27:13-14",
+   "pause_after": 4.0,
+   "text": "I had fainted, unless I had believed to see the goodness of the LORD in the land of the living. Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.",
+   "reference": "Psalm 27:13-14 (KJV)",
+   "chapter": "Wait on the Lord (Psalm 27:13-14)"
+  },
+  {
+   "id": "sleep-reflect-27",
+   "beat": "sleep reflection: the goodness of the Lord in the land of the living",
+   "pause_after": 4.0,
+   "text": "To see the goodness of the Lord in the land of the living. Not only someday, but here, in this life, in the days ahead. Wait on the Lord tonight, and be of good courage. He will strengthen your heart."
+  },
+  {
+   "id": "sleep-psalm-34",
+   "beat": "sleep reading: Psalm 34:4, 8, 18",
+   "pause_after": 4.0,
+   "text": "I sought the LORD, and he heard me, and delivered me from all my fears. O taste and see that the LORD is good: blessed is the man that trusteth in him. The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+   "reference": "Psalm 34:4, 8, 18 (KJV)",
+   "chapter": "Nigh unto the broken hearted (Psalm 34)"
+  },
+  {
+   "id": "sleep-reflect-34",
+   "beat": "sleep reflection: near to the broken",
+   "pause_after": 4.0,
+   "text": "The Lord is nigh unto them that are of a broken heart. If your heart is broken tonight, you are not far from God. You are exactly where he comes closest."
+  },
+  {
+   "id": "sleep-stillness-2",
+   "beat": "sleep stillness",
+   "pause_after": 8.0,
+   "text": "Let your breathing slow even more. You are safe. Rest."
+  },
+  {
+   "id": "sleep-psalm-121",
+   "beat": "sleep reading: Psalm 121",
+   "pause_after": 4.0,
+   "text": "I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth. He will not suffer thy foot to be moved: he that keepeth thee will not slumber. Behold, he that keepeth Israel shall neither slumber nor sleep. The LORD is thy keeper: the LORD is thy shade upon thy right hand. The sun shall not smite thee by day, nor the moon by night. The LORD shall preserve thee from all evil: he shall preserve thy soul. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "reference": "Psalm 121 (KJV)",
+   "chapter": "He that keepeth thee (Psalm 121)"
+  },
+  {
+   "id": "sleep-reflect-121",
+   "beat": "sleep reflection: he will not slumber",
+   "pause_after": 4.0,
+   "text": "He that keepeth thee will not slumber. Through every hour of this night, while you rest, God is awake and watching over you. You can let go. He will not."
+  },
+  {
+   "id": "sleep-philippians-4",
+   "beat": "sleep reading: Philippians 4:6-7",
+   "pause_after": 4.0,
+   "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+   "reference": "Philippians 4:6-7 (KJV)",
+   "chapter": "The peace of God (Philippians 4:6-7)"
+  },
+  {
+   "id": "sleep-reflect-phil",
+   "beat": "sleep reflection: peace that guards",
+   "pause_after": 4.0,
+   "text": "The peace of God shall keep your heart and mind, like a guard at the door. Whatever news tomorrow brings, tonight that peace stands watch over you."
+  },
+  {
+   "id": "sleep-isaiah-26",
+   "beat": "sleep reading: Isaiah 26:3-4",
+   "pause_after": 4.0,
+   "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee. Trust ye in the LORD for ever: for in the LORD JEHOVAH is everlasting strength.",
+   "reference": "Isaiah 26:3-4 (KJV)",
+   "chapter": "Perfect peace (Isaiah 26:3-4)"
+  },
+  {
+   "id": "sleep-reflect-26",
+   "beat": "sleep reflection: a mind stayed on him",
+   "pause_after": 4.0,
+   "text": "Perfect peace for a mind stayed on him. As you drift toward sleep, let your last thought rest on God, his kindness, his nearness, his strength. Everlasting strength. It does not run out."
+  },
+  {
+   "id": "sleep-psalm-147",
+   "beat": "sleep reading: Psalm 147:3-5",
+   "pause_after": 4.0,
+   "text": "He healeth the broken in heart, and bindeth up their wounds. He telleth the number of the stars; he calleth them all by their names. Great is our Lord, and of great power: his understanding is infinite.",
+   "reference": "Psalm 147:3-5 (KJV)",
+   "chapter": "He calleth the stars by name (Psalm 147:3-5)"
+  },
+  {
+   "id": "sleep-reflect-147",
+   "beat": "sleep reflection: the stars and you",
+   "pause_after": 4.0,
+   "text": "Above your roof tonight there are more stars than anyone can count, and God calls every one of them by name. The same God is binding up your wounds. Nothing about you is too small for his care, and nothing about your pain is too big for his power."
+  },
+  {
+   "id": "sleep-psalm-3",
+   "beat": "sleep reading: Psalm 3:3-5",
+   "pause_after": 4.0,
+   "text": "But thou, O LORD, art a shield for me; my glory, and the lifter up of mine head. I cried unto the LORD with my voice, and he heard me out of his holy hill. I laid me down and slept; I awaked; for the LORD sustained me.",
+   "reference": "Psalm 3:3-5 (KJV)",
+   "chapter": "The lifter up of mine head (Psalm 3:3-5)"
+  },
+  {
+   "id": "sleep-reflect-3",
+   "beat": "sleep reflection: the lifter of your head",
+   "pause_after": 4.0,
+   "text": "The lifter up of mine head. When illness or sorrow bows your head low, God gently lifts it again. Lay your head down now. He will lift it up in the morning."
+  },
+  {
+   "id": "sleep-psalm-91",
+   "beat": "sleep reading: Psalm 91:1-2, 4, 9-11",
+   "pause_after": 4.0,
+   "text": "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty. I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust. He shall cover thee with his feathers, and under his wings shalt thou trust: his truth shall be thy shield and buckler. Because thou hast made the LORD, which is my refuge, even the most High, thy habitation; There shall no evil befall thee, neither shall any plague come nigh thy dwelling. For he shall give his angels charge over thee, to keep thee in all thy ways.",
+   "reference": "Psalm 91:1-2, 4, 9-11 (KJV)",
+   "chapter": "Under his wings (Psalm 91)"
+  },
+  {
+   "id": "sleep-prayer-final",
+   "beat": "sleep prayer: final surrender",
+   "pause_after": 4.0,
+   "text": "Lord, as sleep comes, I give you my body, my heart and my mind. Heal what needs healing. Comfort what needs comfort. Watch over me through the night, and let me wake to your mercy in the morning."
+  },
+  {
    "id": "blessing",
-   "beat": "closing blessing",
-   "pause_after": 1.5,
+   "beat": "closing blessing (end of the sleep section)",
+   "pause_after": 3.0,
    "text": "And now receive this blessing as you sleep. Beloved, I wish above all things that thou mayest prosper and be in health, even as thy soul prospereth. Rest in his care tonight. In Jesus' name, amen.",
    "reference": "3 John 1:2 (KJV)",
    "chapter": "Blessing"
-  },
-  {
-   "id": "cta",
-   "beat": "soft call to action after payoff",
-   "pause_after": 2.0,
-   "text": "If you prayed this prayer, type amen in the comments, and if you want, share the name of someone who needs healing, so others can pray too. Join us again tomorrow night, to end the day with God."
   }
  ],
  "figure": "figure-a",
@@ -353,7 +573,7 @@
   "bg-moonlit-sea",
   "bg-night-village",
   "bg-lake",
-  "bg-dawn-hope"
+  "bg-first-light"
  ],
  "overlay": {
   "title": "Healing Rest Tonight",
@@ -363,7 +583,7 @@
   "brand": "HeroVerse Prayer",
   "amen": "Type AMEN"
  },
- "description_intro": "Hurting in body or heart? Bring every pain to the God who heals and rest in his care tonight. A gentle night prayer for healing with Scripture.",
+ "description_intro": "Hurting in body or heart? Bring every pain to the God who heals, then fall asleep to healing Scripture read slowly over you: Psalm 103, Psalm 23, Psalm 46, Isaiah 43 and more.",
  "hashtags": [
   "#prayer",
   "#healingprayer",
