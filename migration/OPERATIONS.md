@@ -64,6 +64,12 @@ real run history and dispatches every task whose slot has passed without a run s
 after 45 min, up to the task's attempts); tasks with a work condition run only when there is work
 (`migration/ops/heartbeat.py`, tested). The daily report lists the health of every task, of the heartbeat and of
 the runner, with alerts (`migration/ops/health.py`). The public runner checks the render queue at :13 and :43.
+**External clock (2026-10-18):** GitHub then fired none of the heartbeat's or the runner's crons for hours, so an
+hourly scheduled task of the Claude platform, bound to the main Claude session (which has repository access;
+fresh routine sessions get GitHub 403), dispatches `heartbeat.yml` and the runner's `render.yml` every hour at :14.
+Both are idempotent, so the GitHub crons that do fire and the clock never double any work. The daily Claude
+analysis (08:05 UTC) is bound to the same session; the two older routines that ran in fresh sessions were disabled
+(no repository access; one still told the session to write APPROVAL.json by hand, bypassing the gate).
 
 | Slot (UTC) | What | Where | Runs when |
 |---|---|---|---|
