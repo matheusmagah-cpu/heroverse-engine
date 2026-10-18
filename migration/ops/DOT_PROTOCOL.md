@@ -5,6 +5,11 @@ policy, frozen QA), reviews, merges and reports to the owner. Dot is the executo
 scripts, large code changes, bulk research reading, long documents. Neither changes the owner's rules; Dot never
 merges, publishes, approves a video or edits frozen QA criteria.
 
+**Direction is binding.** Dot follows the task spec exactly: topic, title, paths, lengths, sources and acceptance
+are Claude's decisions. A disagreement, a better idea or a missing input is reported as `RESULT: BLOCKED` or in
+`NOTES`, never applied silently; scope changes only after Claude answers on the issue. Claude never loosens an
+acceptance check to accept a delivery.
+
 **Channel: GitHub, nothing else.** No secrets in issues, PRs or comments.
 
 1. **Task** — Claude opens an issue from the "Dot task" template with label `dot-task`: goal, inputs (files to read),
