@@ -16,6 +16,7 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import pending_shorts  # noqa: E402
 import publish_video as pv  # noqa: E402
 import shorts_qa  # noqa: E402
 
@@ -62,8 +63,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     slot_of = dict(zip((r["sha256"] for r in todo), slots))
     reports = {}
     for short in todo:  # files of Shorts already uploaded were deleted from the release; nothing to check there
-        if (short.get("review") or {}).get("status") != "PASS":
-            raise SystemExit("SHORT_NOT_REVIEWED_PASS " + short["file"])
+        if not pending_shorts.approved(short):
+            raise SystemExit("SHORT_NOT_REVIEWED_PASS_BY_DESIGNATED_MODEL " + short["file"])
         path = Path(shorts_dir) / short["file"]
         if sha256_file(path) != short["sha256"]:
             raise SystemExit("SHORT_HASH_MISMATCH " + short["file"])

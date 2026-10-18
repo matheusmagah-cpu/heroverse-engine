@@ -19,7 +19,7 @@ def setup(tmp, approved=2, long_published=True, done=()):
     (d / "out").mkdir()
     (d / "out" / "manifest.json").write_text(json.dumps({"output_sha256": "abc"}))
     (d / "schedule.json").write_text(json.dumps(SCHED))
-    shorts = [{"file": f"short-0{i}.mp4", "sha256": f"s{i}", "publish": i < approved, "review": {"status": "PASS" if i < approved else "FAIL"}}
+    shorts = [{"file": f"short-0{i}.mp4", "sha256": f"s{i}", "publish": i < approved, "review": {"status": "PASS" if i < approved else "FAIL", "model": "gemini-3.8-flash"}}
               for i in range(4)]
     (d / "shorts" / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-002", "shorts": shorts}))
     entries = {"pilot-002:abc": {"video_id": "L"}} if long_published else {}
