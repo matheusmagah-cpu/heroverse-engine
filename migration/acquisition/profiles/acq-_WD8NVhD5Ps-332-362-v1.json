@@ -1,0 +1,85 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 12,
+    "picture_changes_per_minute": 23.95,
+    "median_shot_seconds": 2.533,
+    "longest_shot_seconds": 4.633,
+    "motion_median_top_decile_diff": 3.313
+   },
+   "rhythm": {
+    "audio_onsets": 78,
+    "audio_onsets_per_minute": 155.65,
+    "tempo": {
+     "bpm": 134.8,
+     "confidence": 0.062
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.25,
+     "chance_fraction": 0.159,
+     "lift": 1.57
+    },
+    "sync": {
+     "median_offset_seconds": 0.059784,
+     "verdict": "IN_SYNC",
+     "consensus_pairs": 6,
+     "visual_events": 12,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -8.6,
+    "loudness_range_lu": 1.6,
+    "true_peak_dbtp": 0.2
+   },
+   "colour": {
+    "mean_brightness": 0.6907,
+    "brightness_std_over_time": 0.1687,
+    "mean_saturation": 0.1662,
+    "saturation_std_over_time": 0.1182
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 86,
+    "words_per_minute": 171.6,
+    "transcript": "taken possession of the land God promised them. He also believed these structures might have been places called Gilgal in the Bible. In Joshua the Bible tells us that the Israelites camped at a place called Gilgal after crossing the Jordan River. Zertal suggested that the giant foot -shaped structures were similar gathering places, although the exact Gilgal where Joshua camped has not been identified. Today, these giant foot -shaped stone walls can still be seen in the Jordan Valley. Assyrian message. In 2025, archaeologists and"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
