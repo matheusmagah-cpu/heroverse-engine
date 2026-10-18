@@ -1,63 +1,61 @@
 {
  "version": "shorts-produce-v1",
  "source_pilot": "pilot-004",
- "selection_rubric_model": "gemini-3.8-flash",
+ "selection_rubric_model": "gemini-3.5-flash-lite",
  "shorts": [
   {
    "file": "short-00.mp4",
-   "sha256": "5ab0f57c1d9b3e49a9885a23e5144211615466369f70e0b137e11d9c8e9330e8",
-   "seconds": 48.4,
-   "source_start": 1741.676,
-   "source_end": 1789.451,
+   "sha256": "d054ac4d580df7f8fd2de5eb8800100a8c3688a794db3d1c48e43c7f2abca613",
+   "seconds": 37.0,
+   "source_start": 1787.488,
+   "source_end": 1823.885,
    "segments": [
-    "sleep-reflect-62",
-    "sleep-psalm-16",
-    "sleep-reflect-16"
+    "sleep-reflect-16",
+    "sleep-prayer-3",
+    "blessing"
    ],
-   "hook": "Lean your whole weight on Him",
-   "title": "You Can Rest Even Before Problems Solve",
-   "reference": "Psalm 16:8-9, 11 (KJV)",
+   "hook": "You will not be moved tonight.",
+   "title": "A Peaceful Prayer Before Sleep",
+   "reference": "2 Thessalonians 3:16 (KJV)",
    "scenes": [
     "bg-starry-hills",
     "bg-night-garden",
     "bg-moonlit-sea",
     "bg-starry-forest",
-    "bg-night-village",
-    "bg-first-light",
     "bg-starry-hills"
    ],
    "parallax": true,
    "selection": {
-    "final_score": 0.8846,
-    "measured_score": 0.8415,
+    "final_score": 0.8892,
+    "measured_score": 0.9481,
     "features": {
-     "opening_short": 0.6,
+     "opening_short": 1.0,
      "opening_direct": 1.0,
-     "second_person": 0.5504587155963303,
+     "second_person": 0.7499999999999999,
      "scripture": 1.0,
      "promise": 1.0,
      "resolution": 1.0,
-     "length_fit": 0.6889999999999963
+     "length_fit": 0.8558799999999974
     },
     "rubric": {
-     "index": 9,
-     "hook_first_2s": 9.2,
-     "stands_alone": 9.2,
-     "emotional_payoff": 9.0,
-     "shareability": 8.6,
-     "loop_potential": 8.8,
-     "policy_safe": 10.0,
-     "reasons": "Strong opening metaphor of leaning whole weight on God; perfectly loops from ending 'You will not be moved'.",
-     "hook_line": "Lean your whole weight on Him",
-     "title": "You Can Rest Even Before Problems Solve"
+     "index": 0,
+     "hook_first_2s": 8,
+     "stands_alone": 9,
+     "emotional_payoff": 9,
+     "shareability": 7,
+     "loop_potential": 8,
+     "policy_safe": 10,
+     "reasons": "Starts strong with a firm statement of security. Great flow into a bedtime blessing.",
+     "hook_line": "You will not be moved tonight.",
+     "title": "A Peaceful Prayer Before Sleep"
     }
    },
-   "text": "You can lean your whole weight on him, and he will not move. I have set the LORD always before me: because he is at my right hand, I shall not be moved. Therefore my heart is glad, and my glory rejoiceth: my flesh also shall rest in hope. Thou wilt shew me the path of life: in thy presence is fulness of joy; at thy right hand there are pleasures for evermore. My flesh also shall rest in hope. Your body can rest tonight, not because every problem is solved, but because your hope is in God. He is at your right hand. You will not be moved.",
+   "text": "You will not be moved. Lord, as sleep comes, I place myself completely in your hands. My body, my mind, my heart, my family, my tomorrow. Watch over me through the night, and wake me to your mercy in the morning. And now receive this blessing as you sleep. Now the Lord of peace himself give you peace always by all means. The Lord be with you all. Sleep well, in the shelter of his love. In Jesus' name, amen.",
    "qa": {
     "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
-    "seconds": 48.4,
-    "lufs": -14.5,
-    "true_peak_dbtp": -2.4,
+    "seconds": 37.0,
+    "lufs": -15.1,
+    "true_peak_dbtp": -2.3,
     "checks": {
      "decode_clean": true,
      "one_h264_1080x1920": true,
@@ -76,7 +74,7 @@
   },
   {
    "file": "short-01.mp4",
-   "sha256": "203f95095988a8a9457617b3be16accd025295a5a2d888919af5c117489933ea",
+   "sha256": "f55d0112728cac43919c9dc8232baba5f1f3cdc930bcfeda9362492a53f650ed",
    "seconds": 47.3,
    "source_start": 237.575,
    "source_end": 284.272,
@@ -85,8 +83,8 @@
     "scripture-4",
     "reflection-4"
    ],
-   "hook": "Lay your head down clean tonight",
-   "title": "Lay Your Head Down Free from Guilt",
+   "hook": "Do not carry guilt into sleep.",
+   "title": "Lay Your Head Down Clean Tonight",
    "reference": "1 John 1:9 (KJV)",
    "scenes": [
     "bg-quiet-chapel",
@@ -112,15 +110,15 @@
     },
     "rubric": {
      "index": 12,
-     "hook_first_2s": 8.7,
-     "stands_alone": 9.4,
-     "emotional_payoff": 9.5,
-     "shareability": 8.8,
-     "loop_potential": 7.6,
-     "policy_safe": 10.0,
-     "reasons": "Deeply compassionate release of bedtime guilt and regret, resolving with assurance of God's faithful pardon.",
-     "hook_line": "Lay your head down clean tonight",
-     "title": "Lay Your Head Down Free from Guilt"
+     "hook_first_2s": 9,
+     "stands_alone": 9,
+     "emotional_payoff": 10,
+     "shareability": 9,
+     "loop_potential": 7,
+     "policy_safe": 10,
+     "reasons": "Tackles guilt and regret directly, offering a profound sense of a clean slate for sleep.",
+     "hook_line": "Do not carry guilt into sleep.",
+     "title": "Lay Your Head Down Clean Tonight"
     }
    },
    "text": "Father, I also bring you what I regret. The impatient word. The thing I should have done and did not. The moment I chose myself over someone else. I do not want to carry guilt into my sleep. I confess it to you honestly, and I receive your forgiveness. If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness. Faithful and just. God does not forgive you reluctantly. He forgives you because he promised he would, and he always keeps his promises. So tonight you can lay your head down clean.",
@@ -147,56 +145,58 @@
   },
   {
    "file": "short-02.mp4",
-   "sha256": "36ce43720121dbba1db1d7fd6d3c4d7ab06a8f3d5b00df3827bf14608860d525",
-   "seconds": 33.37,
-   "source_start": 1791.131,
-   "source_end": 1823.885,
+   "sha256": "0800646abdc4db1f1c5fec03a1069f1ae54182a54682b2c45afe2f25ff3eb5af",
+   "seconds": 40.13,
+   "source_start": 148.324,
+   "source_end": 187.835,
    "segments": [
-    "sleep-prayer-3",
-    "blessing"
+    "prayer-worries",
+    "scripture-3",
+    "reflection-3"
    ],
-   "hook": "Place your tomorrow in God's hands",
-   "title": "A Nighttime Blessing for Peaceful Sleep",
-   "reference": "2 Thessalonians 3:16 (KJV)",
+   "hook": "Let God hold your worries.",
+   "title": "Jesus Promises Rest For Your Soul",
+   "reference": "Matthew 11:28-30 (KJV)",
    "scenes": [
     "bg-first-light",
     "bg-moon-lake",
     "bg-starry-hills",
     "bg-night-garden",
+    "bg-moonlit-sea",
     "bg-first-light"
    ],
    "parallax": true,
    "selection": {
-    "final_score": 0.8714,
-    "measured_score": 0.861,
+    "final_score": 0.8727,
+    "measured_score": 0.8818,
     "features": {
-     "opening_short": 0.6,
+     "opening_short": 1.0,
      "opening_direct": 1.0,
-     "second_person": 0.6666666666666666,
+     "second_person": 0.8247422680412371,
      "scripture": 1.0,
      "promise": 1.0,
-     "resolution": 1.0,
-     "length_fit": 0.7101599999999962
+     "resolution": 0.4,
+     "length_fit": 0.9804399999999999
     },
     "rubric": {
-     "index": 4,
-     "hook_first_2s": 8.0,
-     "stands_alone": 9.5,
-     "emotional_payoff": 9.2,
-     "shareability": 8.5,
-     "loop_potential": 7.5,
-     "policy_safe": 10.0,
-     "reasons": "Clean, standalone evening prayer and blessing with a clear, comforting start and ending.",
-     "hook_line": "Place your tomorrow in God's hands",
-     "title": "A Nighttime Blessing for Peaceful Sleep"
+     "index": 2,
+     "hook_first_2s": 8,
+     "stands_alone": 9,
+     "emotional_payoff": 9,
+     "shareability": 8,
+     "loop_potential": 8,
+     "policy_safe": 10,
+     "reasons": "The distinction between resting the body and resting the soul is a powerful emotional hook.",
+     "hook_line": "Let God hold your worries.",
+     "title": "Jesus Promises Rest For Your Soul"
     }
    },
-   "text": "Lord, as sleep comes, I place myself completely in your hands. My body, my mind, my heart, my family, my tomorrow. Watch over me through the night, and wake me to your mercy in the morning. And now receive this blessing as you sleep. Now the Lord of peace himself give you peace always by all means. The Lord be with you all. Sleep well, in the shelter of his love. In Jesus' name, amen.",
+   "text": "You can hold them while I sleep. Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls. For my yoke is easy, and my burden is light. Jesus promises rest for your souls. Sleep can rest your body, but only he can rest the part of you that keeps running even when your eyes are closed. He is gentle and humble in heart.",
    "qa": {
     "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
-    "seconds": 33.37,
-    "lufs": -15.1,
-    "true_peak_dbtp": -2.4,
+    "seconds": 40.13,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.1,
     "checks": {
      "decode_clean": true,
      "one_h264_1080x1920": true,
