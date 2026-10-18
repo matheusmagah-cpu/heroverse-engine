@@ -59,6 +59,8 @@ One of three outcomes, written on the issue:
   stating what changed and why), then label back to `dot-task`. Claude's error is corrected in the card, never
   pushed onto Dot.
 Two REWORKs on one task → Claude reports to the owner with the cause.
+Every REWORK or SPEC-FIX is an error: Claude also adds its antidote (a check in `script_check.py`, `dot_scope.py`,
+a test, or a line in the card template) and a line in `ops/ERRORS.json`, so the same miss cannot pass again.
 
 ## 4. Standard card for a script (the main load)
 - ALLOWED (two lines): `migration/production/<pilot>/*.json` and `migration/production/<pilot>/images/*.json`.
