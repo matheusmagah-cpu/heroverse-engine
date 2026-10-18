@@ -66,7 +66,10 @@ after 45 min, up to the task's attempts); tasks with a work condition run only w
 the runner, with alerts (`migration/ops/health.py`). The public runner checks the render queue at :13 and :43.
 **External clock (2026-10-18):** GitHub then fired none of the heartbeat's or the runner's crons for hours, so an
 hourly scheduled task of the Claude platform, bound to the main Claude session (which has repository access;
-fresh routine sessions get GitHub 403), dispatches `heartbeat.yml` and the runner's `render.yml` every hour at :14.
+fresh routine sessions get GitHub 403), dispatches `heartbeat.yml` every hour at :14. Since engine PR #106
+(Dot) the heartbeat's own `runner-wake` job wakes the runner (`HERO_RUNNER_PAT`, active-run guard, cooldown,
+per-hash attempt bound, `migration/ops/RUNNER_WAKEUP.md`), so the clock no longer dispatches `render.yml` itself.
+First real `runner-wake` run 2026-10-18 13:11 UTC: success, QUEUE_EMPTY (nothing due); first real dispatch pending.
 Both are idempotent, so the GitHub crons that do fire and the clock never double any work. The daily Claude
 analysis (08:05 UTC) is bound to the same session; the two older routines that ran in fresh sessions were disabled
 (no repository access; one still told the session to write APPROVAL.json by hand, bypassing the gate).
