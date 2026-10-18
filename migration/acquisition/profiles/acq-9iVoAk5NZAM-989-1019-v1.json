@@ -1,0 +1,85 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 17,
+    "picture_changes_per_minute": 33.92,
+    "median_shot_seconds": 1.733,
+    "longest_shot_seconds": 4.733,
+    "motion_median_top_decile_diff": 3.511
+   },
+   "rhythm": {
+    "audio_onsets": 46,
+    "audio_onsets_per_minute": 91.8,
+    "tempo": {
+     "bpm": 88.89,
+     "confidence": 0.058
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.118,
+     "chance_fraction": 0.097,
+     "lift": 1.21
+    },
+    "sync": {
+     "median_offset_seconds": 0.187982,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 6,
+     "visual_events": 17,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -10.9,
+    "loudness_range_lu": 1.8,
+    "true_peak_dbtp": -0.0
+   },
+   "colour": {
+    "mean_brightness": 0.4138,
+    "brightness_std_over_time": 0.0142,
+    "mean_saturation": 0.2158,
+    "saturation_std_over_time": 0.0199
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 71,
+    "words_per_minute": 141.7,
+    "transcript": "your strength. When you don't know where to turn, you can turn toward him, so release the burden, release the fear, release the need to control every outcome, open your hands before God and say, I cannot carry this by myself anymore, I give it to you, and when the worry tries to return later today, remind yourself that you already surrendered it. You may have to surrender it again and"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
