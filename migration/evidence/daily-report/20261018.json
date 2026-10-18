@@ -1,12 +1,12 @@
 {
  "version": "goal-report-v2",
- "at": "2026-10-18T08:00:43.604003+00:00",
+ "at": "2026-10-18T10:12:07.196045+00:00",
  "day": 1,
  "target_day": 14,
  "max_day": 30,
- "subscribers": 263,
+ "subscribers": 262,
  "views_total": 2681,
- "public_videos": 23,
+ "public_videos": 24,
  "shorts_views_public_lifetime": 2645,
  "analytics": {
   "status": "OK",
@@ -864,7 +864,7 @@
   }
  },
  "needed_from_today": {
-  "subscribers_per_day": 52.6,
+  "subscribers_per_day": 52.7,
   "watch_hours_per_day": 285.5
  },
  "ypp": {
@@ -873,6 +873,16 @@
   "shorts_views_90d": 10000000
  },
  "videos": [
+  {
+   "id": "v4zN53ZiUIs",
+   "title": "Morning Prayer | God Has Already Gone Ahead of You Today",
+   "published": "2026-10-18T10:00",
+   "views": 4,
+   "likes": 0,
+   "comments": 0,
+   "short": false,
+   "policy_risk_title": false
+  },
   {
    "id": "FifnlNUQKNk",
    "title": "Rest Is Not Giving Up | A Christian Reflection + Quiet Piano for Prayer",
@@ -1138,20 +1148,6 @@
    "subscribers_gained": 0,
    "content_type": null,
    "policy_risk_title": false
-  },
-  {
-   "id": "ElLDYV5WA8w",
-   "title": "When God Goes Silent... This Is Why 🔥 #shorts #faith #motivation",
-   "published": "2026-06-30T22:00",
-   "views": 7,
-   "likes": 4,
-   "comments": 0,
-   "short": true,
-   "watch_hours": 0.0,
-   "average_view_percentage": 46.4,
-   "subscribers_gained": 0,
-   "content_type": null,
-   "policy_risk_title": false
   }
  ],
  "pipeline": [
@@ -1169,7 +1165,7 @@
    "publish_at": "2026-10-19 10:00 UTC",
    "rendered": true,
    "qa": "PASS",
-   "review": "FAIL",
+   "review": "ERROR",
    "published": false,
    "title": "Morning Prayer | When You Wake Up Tired, God Renews Your Strength"
   },
@@ -1201,9 +1197,8 @@
    "title": "Night Prayer for Healing | Rest Your Body and Heart in God's Care"
   }
  ],
- "script_runway_days": 2.7,
+ "script_runway_days": 2.6,
  "alerts": [
-  "pilot-003 review FAIL: read out/review.json",
   "pilot-004 QA FAIL"
  ],
  "data_api_units": 3,
