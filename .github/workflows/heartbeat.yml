@@ -43,3 +43,23 @@ jobs:
             echo "DISPATCH $w"
             gh workflow run "$w" --repo "$GITHUB_REPOSITORY" --ref main
           done < "$T/due"
+
+  runner-wake:
+    # Independent of the engine scheduler's NOTHING_DUE exit and failures.
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Offline runner wake-up tests
+        run: python3 -I -B migration/ops/test_runner_dispatch.py
+      - name: Wake runner only for eligible work
+        env:
+          # This credential is never given to the engine scheduler or checkout.
+          HERO_RUNNER_PAT: ${{ secrets.HERO_RUNNER_PAT }}
+        run: python3 -I -B migration/ops/runner_dispatch.py migration/production migration/publish/ledger.json
