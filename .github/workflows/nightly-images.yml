@@ -4,6 +4,7 @@ name: HeroVerse nightly images (pilots publishing in the next 72 h)
 on:
   schedule:
     - cron: '30 0 * * *'
+    - cron: '37 */4 * * *'   # redundancy: GitHub may delay or skip a scheduled run
   workflow_dispatch:
 permissions:
   contents: read
