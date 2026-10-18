@@ -43,6 +43,12 @@ The goal is YPP in 14 days (30 at most), and the system is being validated to be
 - **Measure:** watch hours per video and average view % at 48 h / 7 days, pilot-004 (33 min) vs pilot-002/003 (15–21 min). Keep if hours per video ≥ 3× the short format; revert to 15–20 min if the average view % falls below 15% and hours do not rise.
 - **Not done:** 60–90 min (lower subscribers/day in the data).
 
-### D-2026-10-18-02 — Old fear-bait / "prophecy" public videos: pending evidence
-- **Observation:** some old public titles conflict with the owner's policy ("The 2026 Prophecy: What They Are Hiding From You…").
-- **Before any action:** measure the watch hours each carries (Analytics per video) and quote the YouTube policy that applies. Decide only with both.
+### D-2026-10-18-02 — Hide 4 old fear-bait / "prophecy" public videos (reversible)
+- **Evidence:** `evidence/daily-report/20261018.json` (Analytics, 365 days). The 5 public titles flagged as fear-bait or prophecy carry 2.5 of the channel's 76.9 watch hours.
+  - "The 2026 Prophecy: What They Are Hiding From You…" (×2) and "The 2026 Warning: What They DON'T Want You to Know": 0 h each.
+  - "God is WARNIG you: The Law of Divine Return is HERE!": 1.3 h, 0 subscribers gained.
+  - "Why God Chose YOU… (Don't Ignore This)": 1.2 h, 12 subscribers gained, 57% average view. Mild urgency, not prophecy, so it stays public.
+- **Why:** the owner's policy forbids fear-bait and fabricated prophecy. YPP reviewers look at the channel's main theme and its most viewed and latest videos, and misleading metadata is a YouTube spam and deceptive-practices risk. A rejection costs at least 30 days, longer than the 14-day goal.
+- **Cost:** at most 1.3 watch hours (1.7% of 76.9).
+- **Change:** the 4 ids are added to `channel/privacy-plan.json` (`policy_hidden`, with reasons); the daily 08:05 UTC privacy job sets them private.
+- **Measure:** the channel's public watch hours (expected drop ≤ 1.3 h); reversible at any time.
