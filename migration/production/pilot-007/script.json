@@ -1,0 +1,462 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-007",
+ "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+ "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "format_note": "Morning guided prayer with peace verses read aloud, followed by Scripture to carry into the day; approximately 25 minutes under the preserved narration settings. Length follows strategy/DECISIONS.md D-2026-10-18-04.",
+ "working_title": "Morning Prayer with Bible Verses for Peace | Start Your Day in God's Word",
+ "promise": "The opening addresses the listener reaching for their phone this morning and promises to pray Scripture for peace within the first 18 words.",
+ "angle": "Give the first response of the day to God: turn one named worry into a request with thanksgiving, then practice a peaceful response at work, at home and with loved ones. Peace grows into concrete attention, truthful words and patient action.",
+ "authorship": "Original English text written for HeroVerse by dot (OpenAI AI assistant) on 2026-10-18. Scripture quotations are verbatim from the King James Version (public domain).",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "beat": "0-8 s: concrete morning moment and Scripture prayer promise",
+   "pause_after": 0.7,
+   "text": "Before you check your phone this morning, let's pray Bible verses for peace over the day ahead."
+  },
+  {
+   "id": "invitation",
+   "beat": "8-30 s: settle and name one concern",
+   "pause_after": 1.0,
+   "text": "Let your hands rest for a moment, if you can. You may already be thinking about a message, a meeting, or somebody you love. Bring that one concern with you. You can join these prayers aloud or quietly. We begin with Paul's words in Philippians, chapter four, verse six."
+  },
+  {
+   "id": "scripture-requests",
+   "beat": "anchor: bring requests with thanksgiving",
+   "pause_after": 1.3,
+   "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+   "reference": "Philippians 4:6 (KJV)",
+   "chapter": "Bring the morning to God"
+  },
+  {
+   "id": "prayer-first-request",
+   "beat": "first guided prayer: honest beginning",
+   "pause_after": 1.0,
+   "text": "Father, here is the concern that reached me before I even got out of bed. I bring it into this prayer without tidying it up. I am grateful that I can speak honestly with you. Help me with the part I understand, and guide me through the part I cannot see. I offer you this morning, with its unfinished plans and ordinary responsibilities. Please teach me to receive your peace while I take the next faithful step."
+  },
+  {
+   "id": "scripture-hearts-minds",
+   "beat": "anchor: peace keeping heart and mind",
+   "pause_after": 1.3,
+   "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+   "reference": "Philippians 4:7 (KJV)"
+  },
+  {
+   "id": "reflection-requests",
+   "beat": "reflection: prayer can include an unsettled mind",
+   "pause_after": 1.0,
+   "text": "You have heard an invitation to bring everything to God. The older phrase about being careful speaks to anxious care. You can take your responsibilities seriously while bringing their weight into prayer. You may still have unanswered questions when these minutes end. You can still walk toward your responsibilities with those words beside you: hearts and minds kept through Christ. You are welcome here even if your thoughts keep interrupting your prayer."
+  },
+  {
+   "id": "prayer-name-worry",
+   "beat": "guided prayer: separate a concern from imagined outcomes",
+   "pause_after": 1.0,
+   "text": "Lord, I name the worry plainly before you. I need help with this situation. I have been rehearsing conversations that have not happened and trying to solve decisions that are not mine to make. Gather my attention around what is actually before me. Give me courage to make the call, patience to wait for information, and humility to ask a clear question. Where I have filled the gaps with frightening guesses, lead me back to what I truly know."
+  },
+  {
+   "id": "prayer-thanksgiving",
+   "beat": "guided prayer: gratitude alongside the request",
+   "pause_after": 1.0,
+   "text": "I thank you for something small and real this morning: a drink of water, light through a window, a person whose kindness I remember. I receive these gifts without requiring them to explain away my trouble. Let gratitude make room in my attention for goodness I have overlooked. As I ask for help, remind me of help already given. Keep me willing to notice another gift, even in a crowded and imperfect day."
+  },
+  {
+   "id": "scripture-stayed-mind",
+   "beat": "anchor: a mind resting its trust on God",
+   "pause_after": 1.3,
+   "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee.",
+   "reference": "Isaiah 26:3 (KJV)",
+   "chapter": "Peace for a crowded mind"
+  },
+  {
+   "id": "reflection-return-attention",
+   "beat": "reflection: return gently when attention wanders",
+   "pause_after": 1.0,
+   "text": "You can let this verse become a place to return. Your attention may wander toward the appointment, the unfinished task, or yesterday's mistake. When you notice that, bring your thoughts back gently. You do not need to count distractions or turn prayer into another examination. You are learning where to rest your trust. Isaiah points your attention toward God, whose faithfulness can hold your concern while you attend to the person or task in front of you."
+  },
+  {
+   "id": "stillness-one",
+   "beat": "guided stillness: a brief unhurried breath",
+   "pause_after": 3.5,
+   "text": "Take an easy breath and let it leave without forcing it. Notice where you are sitting or standing. For this quiet moment, you can leave the next task where it is. Let your prayer be simple: Father, I am here, and I am listening."
+  },
+  {
+   "id": "prayer-attention",
+   "beat": "guided prayer: choose what receives attention",
+   "pause_after": 1.0,
+   "text": "God, help me notice what I invite into my mind today. Give me discernment with headlines, conversations, and the little screen that can fill every spare moment. When I reach for more information because I feel unsettled, help me recognize what I actually need. Lead me toward truth, useful action, and enough quiet to listen. I ask for a steadier attention, so the people beside me receive my presence instead of the distracted remainder of it."
+  },
+  {
+   "id": "scripture-christ-peace",
+   "beat": "anchor: the peace Jesus gives",
+   "pause_after": 1.3,
+   "text": "Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid.",
+   "reference": "John 14:27 (KJV)"
+  },
+  {
+   "id": "reflection-receive-peace",
+   "beat": "reflection: receive the gift in a complicated morning",
+   "pause_after": 1.0,
+   "text": "Jesus speaks these words to disciples facing a difficult farewell. You can hear them in a morning that also feels uncertain. His gift does not depend on every person agreeing with you or every plan working smoothly. You can receive his words while your calendar is full and your feelings are mixed. Let them reach the part of you that assumes everything must be settled before you are allowed to breathe or be kind."
+  },
+  {
+   "id": "prayer-receive-peace",
+   "beat": "guided prayer: receive peace without controlling the day",
+   "pause_after": 1.0,
+   "text": "Jesus, I receive the peace you offer. I have tried to earn calm by checking every detail and pleasing every person. That effort has left me tired. Teach me to make room for your presence within my responsibilities. When my plans change, help me pause long enough to respond thoughtfully. When I cannot make someone understand me, keep me truthful and gentle. I place my need to control this day before you and ask for a willing, teachable heart."
+  },
+  {
+   "id": "scripture-wisdom",
+   "beat": "anchor: ask God for wisdom",
+   "pause_after": 1.3,
+   "text": "If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him.",
+   "reference": "James 1:5 (KJV)",
+   "chapter": "Peace in the work before you"
+  },
+  {
+   "id": "reflection-ask-wisdom",
+   "beat": "reflection: uncertainty at the start of work",
+   "pause_after": 1.0,
+   "text": "You may be opening a laptop, starting a shift, caring for someone, studying, or looking for work. Each kind of work brings decisions. You can admit that you need wisdom without pretending you have failed. James gives you permission to ask. You can seek counsel, check the details, and learn from someone else's experience. Bring your next decision into this prayer, especially the one you feel pressured to make before you have understood it."
+  },
+  {
+   "id": "prayer-work-task",
+   "beat": "guided prayer: one task with honest care",
+   "pause_after": 1.0,
+   "text": "Father, I place the work ahead of me before you. Show me what deserves my attention first. Help me begin the difficult task without spending the morning avoiding it. Give me care with details that affect other people. If I make a mistake, help me acknowledge it and repair what I can. Let my work be honest when nobody is watching. I ask for patience with learning, courage with responsibility, and enough humility to receive correction without turning it into a judgment on my worth."
+  },
+  {
+   "id": "prayer-work-people",
+   "beat": "guided prayer: the people behind demands",
+   "pause_after": 1.0,
+   "text": "Lord, help me remember the people behind each request. The colleague who sounds impatient may be carrying pressure I cannot see. The person I serve deserves attention even when the task feels repetitive. Keep me from passing my frustration to someone with less power to answer. Give me words that clarify expectations and the courage to speak about an unreasonable load. Let me contribute to a workplace where people can tell the truth, ask for help, and be treated with dignity."
+  },
+  {
+   "id": "scripture-strength-peace",
+   "beat": "anchor: strength and peace together",
+   "pause_after": 1.3,
+   "text": "The LORD will give strength unto his people; the LORD will bless his people with peace.",
+   "reference": "Psalm 29:11 (KJV)"
+  },
+  {
+   "id": "reflection-strength",
+   "beat": "reflection: peaceful strength in ordinary work",
+   "pause_after": 1.0,
+   "text": "This psalm brings strength and peace together. You may need both before your morning is over. You may need strength to finish something demanding and peace to keep your words measured. You may need strength to tell the truth and peace to listen after you speak. Let this verse accompany the work of your hands. You can be diligent without treating every interruption as an enemy or every delay as a personal defeat."
+  },
+  {
+   "id": "prayer-pace",
+   "beat": "guided prayer: a sustainable pace",
+   "pause_after": 1.0,
+   "text": "Give me strength for the effort this day requires, Lord. Help me recognize the difference between something urgent and something merely loud. When several demands arrive together, guide me to sort them wisely. Let me ask what is needed, what can wait, and what should be shared. Keep hurry from deciding how I treat people. I offer you the pace of my day, including the moments when slowing down a little would help me do the work more carefully."
+  },
+  {
+   "id": "prayer-limits",
+   "beat": "guided prayer: accept limits and receive help",
+   "pause_after": 1.0,
+   "text": "Father, I bring you the limits I find difficult to accept. There are hours I cannot add and responsibilities I cannot carry alone. Help me make an honest plan with the strength and time available. Give me grace to say what I can do without promising what I cannot. If today includes searching for work or waiting for an opportunity, keep my hope patient and my steps practical. Help me receive support without shame and offer it without pride."
+  },
+  {
+   "id": "scripture-soft-answer",
+   "beat": "anchor: choose a gentle answer",
+   "pause_after": 1.3,
+   "text": "A soft answer turneth away wrath: but grievous words stir up anger.",
+   "reference": "Proverbs 15:1 (KJV)",
+   "chapter": "Peace in your words and home"
+  },
+  {
+   "id": "reflection-before-answer",
+   "beat": "reflection: the space before a response",
+   "pause_after": 1.0,
+   "text": "Picture the next conversation that could become tense. You cannot choose the other person's tone, but you can attend to your own. A gentle answer can still be clear. You can state a boundary, correct a misunderstanding, or ask for a moment to think. You do not have to answer every sharp word immediately. Let this proverb give you a little space between what you hear and what you choose to say in return."
+  },
+  {
+   "id": "prayer-words",
+   "beat": "guided prayer: truthful and gentle speech",
+   "pause_after": 1.0,
+   "text": "Lord, I offer you my first response when I feel criticized. Help me hear the whole sentence before preparing my defense. If my words have wounded someone, give me a sincere apology without excuses attached. If I need to speak firmly, help me do it with care. Keep me from using silence as punishment or kindness as a way to hide resentment. Let my words be clear enough to understand and gentle enough to leave room for another person's dignity."
+  },
+  {
+   "id": "scripture-one-body",
+   "beat": "anchor: peace in a shared life",
+   "pause_after": 1.3,
+   "text": "And let the peace of God rule in your hearts, to the which also ye are called in one body; and be ye thankful.",
+   "reference": "Colossians 3:15 (KJV)"
+  },
+  {
+   "id": "reflection-shared-peace",
+   "beat": "reflection: peace has a place at the table",
+   "pause_after": 1.0,
+   "text": "The verse speaks of people called into one body. Peace reaches beyond your private thoughts into the life you share. You may live with a full household, with one other person, or on your own. You still belong among people who need patience and care. Think of the table, the kitchen, the shared hallway, or the conversation by phone. You can make one of those ordinary places more welcoming through the way you listen today."
+  },
+  {
+   "id": "prayer-home",
+   "beat": "guided prayer: the atmosphere of home",
+   "pause_after": 1.0,
+   "text": "God, I bring you the place I call home. Meet us in the hurried breakfast, the misplaced keys, and the small jobs that somebody must do. Help me notice what needs attention without letting irritation become my usual voice. Where there is tension, guide us toward honest conversation and wise support. Where there is loneliness, help me make room for connection. I ask that my home become a place where care is practiced in ordinary, visible ways."
+  },
+  {
+   "id": "prayer-loved-ones",
+   "beat": "guided prayer: loved ones as people with their own needs",
+   "pause_after": 1.0,
+   "text": "Father, I bring the people I love into your care. I think of each as a person with their own questions, hopes, and burdens. Help me listen closely enough to learn what support would actually help. Give me patience when their pace differs from mine. Lead me to encourage without taking over and to remain present without demanding that everything be explained. Bless our conversations with honesty, affection, and the freedom to ask for what we need."
+  },
+  {
+   "id": "prayer-distance",
+   "beat": "guided prayer: care across distance",
+   "pause_after": 1.0,
+   "text": "I pray for the loved one I cannot sit beside this morning. I miss knowing the little details of their day. Help me express care in a way they can receive, perhaps through a thoughtful message or a patient call. When I am tempted to fill the distance with worry, remind me to bring that concern to you. Guide them toward wise help and good companionship. Teach me to love faithfully across the space between us."
+  },
+  {
+   "id": "stillness-two",
+   "beat": "guided stillness: hold one person in prayer",
+   "pause_after": 3.5,
+   "text": "Let one person come to mind now. You do not need to rehearse their whole story. Remember their face, or simply their name. Hold that person before God for this brief quiet moment. You can pray, Lord, help me love them well today."
+  },
+  {
+   "id": "scripture-hope",
+   "beat": "anchor: joy and peace in believing",
+   "pause_after": 1.3,
+   "text": "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.",
+   "reference": "Romans 15:13 (KJV)",
+   "chapter": "Peace while you wait"
+  },
+  {
+   "id": "reflection-hope",
+   "beat": "reflection: hope for a day without all the answers",
+   "pause_after": 1.0,
+   "text": "You can bring an unfinished situation into these words. Perhaps you are waiting for a reply, a decision, or a change that has taken longer than expected. Hope can help you remain open to goodness while you wait. You do not need to predict the outcome to ask God for peace. Let this blessing give language to your desire: enough hope to remain present, enough joy to recognize a gift, enough peace to continue with today's work."
+  },
+  {
+   "id": "prayer-waiting",
+   "beat": "guided prayer: patient hope in uncertainty",
+   "pause_after": 1.0,
+   "text": "God of hope, I ask for help in the waiting. I have looked at the same message and checked the same place for an answer. Help me know when there is a useful step to take and when I need to leave room for time. Keep me from spending all my attention on what has not arrived. Let me care for the life around me while I wait. Please sustain my hope without making me impatient with the present."
+  },
+  {
+   "id": "prayer-sorrow",
+   "beat": "guided prayer: room for sadness in the morning",
+   "pause_after": 1.0,
+   "text": "Lord, I bring you the sadness that a new morning does not erase. There are people I miss and changes I am still learning to live with. Allow me to be honest about that sorrow. Help me accept company when I need it and a quiet moment when words are difficult. I ask for the tenderness to treat myself and others patiently. Let some small sign of care reach me today, and help me recognize it when it comes."
+  },
+  {
+   "id": "scripture-burden",
+   "beat": "anchor: entrust the burden to God",
+   "pause_after": 1.3,
+   "text": "Cast thy burden upon the LORD, and he shall sustain thee: he shall never suffer the righteous to be moved.",
+   "reference": "Psalm 55:22 (KJV)"
+  },
+  {
+   "id": "reflection-supported",
+   "beat": "reflection: receive support without shame",
+   "pause_after": 1.0,
+   "text": "The psalm gives you a place to bring a burden. You may also need another person to help you carry today's practical responsibilities. You can pray and ask for that help. You can tell a trusted friend that the morning feels hard, accept a meal, or ask someone to share a task. Receiving care does not make your prayer less sincere. It can be one of the ways you acknowledge that you were never meant to manage everything alone."
+  },
+  {
+   "id": "prayer-help",
+   "beat": "guided prayer: recognize and accept practical help",
+   "pause_after": 1.0,
+   "text": "Father, I entrust this weight to you and ask for the support I need. Help me name my need clearly instead of hoping someone will guess it. Give me discernment about whom to trust and courage to reach out. Where I can lighten another person's load, make me attentive and willing. Let me offer practical kindness without making promises I cannot keep. Teach me the shared work of receiving care gratefully and giving care with patience."
+  },
+  {
+   "id": "prayer-neighbours",
+   "beat": "guided prayer: peace beyond the household",
+   "pause_after": 1.0,
+   "text": "I pray for the people whose mornings touch mine: the driver, the shop worker, the neighbour, the person walking past. Each carries a life beyond what I see. Keep me from treating them as obstacles in my schedule. Where I can offer consideration, let me do it freely. Where someone needs assistance beyond what I can give, guide them toward reliable help. Let my small choices add patience to the places I enter and leave others with a little more room to breathe."
+  },
+  {
+   "id": "day-transition",
+   "beat": "turn: Scripture to carry into daily choices",
+   "pause_after": 1.2,
+   "text": "Now gather a few words for the hours after this prayer. You have brought your worry, your work, your home, and your loved ones before God. These next readings can accompany the small choices through which your day takes shape. You can listen for one verse that speaks to the situation ahead of you. Keep it close enough to remember when the room grows busy or your attention begins to scatter.",
+   "chapter": "Scripture to carry into your day"
+  },
+  {
+   "id": "day-scripture-word",
+   "beat": "day reading: loving the word of God",
+   "pause_after": 1.3,
+   "text": "Great peace have they which love thy law: and nothing shall offend them.",
+   "reference": "Psalm 119:165 (KJV)"
+  },
+  {
+   "id": "day-reflection-word",
+   "beat": "day reflection: let Scripture guide the next step",
+   "pause_after": 1.0,
+   "text": "You can receive this verse as an invitation to love God's instruction. The psalm celebrates a life shaped by his word. You may still feel hurt or troubled; you can bring those feelings honestly while seeking a faithful way forward. Read with the intention to practice what you understand. A verse can guide the answer you give, the promise you keep, and the decision you reconsider. Let your love for Scripture take an ordinary, visible form today."
+  },
+  {
+   "id": "day-prayer-word",
+   "beat": "day prayer: put the reading into practice",
+   "pause_after": 1.0,
+   "text": "Lord, keep these readings from becoming words I hear and immediately set aside. Help me remember one when I need it. Give me the willingness to be changed by what I understand, especially where my habits are familiar and comfortable. If your word calls me toward patience, let me practice patience with an actual person. If it calls me toward gratitude, let me say thank you. Let the truth I receive this morning shape the way I live this afternoon."
+  },
+  {
+   "id": "day-scripture-today",
+   "beat": "day reading: attend to the day given",
+   "pause_after": 1.3,
+   "text": "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.",
+   "reference": "Matthew 6:34 (KJV)"
+  },
+  {
+   "id": "day-reflection-today",
+   "beat": "day reflection: distinguish preparation from rehearsed worry",
+   "pause_after": 1.0,
+   "text": "You can prepare responsibly for tomorrow while giving today's work your attention. Jesus' words address the worry that pulls you ahead of the life you can actually live. You can write down a task, make a necessary plan, and then return to the hour in front of you. When your mind starts borrowing another day's trouble, remember the person waiting for your attention now. Remember the useful step available now. You are here, in this morning."
+  },
+  {
+   "id": "day-prayer-today",
+   "beat": "day prayer: work within the present hour",
+   "pause_after": 1.0,
+   "text": "Father, help me live within the day you have given me. I bring tomorrow's questions to you and ask for wisdom about any preparation needed today. Then help me return to the present with a willing heart. I want to taste my breakfast, hear the person speaking, and do the task I have begun. Keep me attentive to moments I might rush past. Help me leave room for an unexpected kindness and enough patience to recognize an unexpected need."
+  },
+  {
+   "id": "day-scripture-peace-always",
+   "beat": "day reading: the Lord of peace accompanies the day",
+   "pause_after": 1.3,
+   "text": "Now the Lord of peace himself give you peace always by all means. The Lord be with you all.",
+   "reference": "2 Thessalonians 3:16 (KJV)"
+  },
+  {
+   "id": "day-reflection-changing-plans",
+   "beat": "day reflection: carry the prayer through a change of plans",
+   "pause_after": 1.0,
+   "text": "Carry this blessing into a change of plans. Your peaceful morning may soon include traffic, a delayed appointment, or a conversation you did not expect. You can return to prayer within that moment. You do not have to protect these minutes by resenting everything that comes afterward. You can ask for peace in the situation as it is. Let the words about the Lord's presence accompany you through the ordinary movement from one responsibility to the next."
+  },
+  {
+   "id": "day-prayer-interruptions",
+   "beat": "day prayer: an attentive response to interruptions",
+   "pause_after": 1.0,
+   "text": "Lord of peace, stay near in my awareness when the day becomes crowded. If something interrupts my plan, help me look carefully before deciding what it means. Give me patience with necessary delays and wisdom about what deserves a response. When I feel my words getting sharp, help me stop and begin again. I ask for a spirit that can adapt without abandoning care. Let me recognize chances to serve within the day that actually unfolds."
+  },
+  {
+   "id": "reflection-return-again",
+   "beat": "reflection: begin again without measuring a perfect morning",
+   "pause_after": 1.0,
+   "text": "If you lose your patience later, you can acknowledge it and begin again. You can repair a careless word, take responsibility, and return to the verse you chose. This prayer does not require you to maintain a perfect feeling until evening. You are practicing a faithful response in a real day. Each return matters. You can bring the next worry to God with the same honesty you brought to the first one this morning."
+  },
+  {
+   "id": "declaration",
+   "beat": "declaration: a willing response rooted in prayer",
+   "pause_after": 1.2,
+   "text": "You can make these words your own: I will bring my concerns to God honestly. I will notice one gift and give thanks. I will listen before I answer. I will ask for wisdom when I need it. I will make room for help and offer the care I can give. With Christ's words in my memory, I will take responsibility for the next loving step within my reach.",
+   "chapter": "One peaceful response today"
+  },
+  {
+   "id": "commitment-prepare",
+   "beat": "application: choose the moment for the practice",
+   "pause_after": 1.0,
+   "text": "Think ahead to one likely point of pressure: opening your messages, entering a meeting, beginning a difficult task, or greeting someone at home. Choose one of those moments now. You can remember it without rehearsing everything that might go wrong. That moment will be your invitation to practice what you have prayed. Place a short reminder where you will see it if that helps. The aim is one attentive response when your usual habit would be to hurry."
+  },
+  {
+   "id": "payoff",
+   "beat": "payoff: one concrete response before answering pressure",
+   "pause_after": 1.2,
+   "text": "Here is your commitment for today: before answering the first message or request that makes you tense, pause. Name the concern to God in one sentence. Thank him for one real gift. Then pray, Jesus, guide my next words in your peace. After that, give the most truthful and considerate response you can. If you need time, say so kindly. You can carry John fourteen, verse twenty-seven with you as you practice this one deliberate response."
+  },
+  {
+   "id": "prayer-commitment",
+   "beat": "guided prayer: entrust the chosen response",
+   "pause_after": 1.0,
+   "text": "Father, I offer you that specific moment before it arrives. Help me recognize it and remember this prayer. I ask for enough patience to pause, enough honesty to name my concern, and enough gratitude to notice your goodness. Jesus, guide my next words in your peace. Where an apology is needed, help me give it. Where a clear boundary is needed, help me state it. Let this small commitment become a faithful expression of the trust I have offered you today."
+  },
+  {
+   "id": "blessing-introduction",
+   "beat": "closing preparation: receive the blessing from Numbers",
+   "pause_after": 1.0,
+   "text": "As you prepare to continue your morning, receive the blessing in Numbers, chapter six. These words speak of God's keeping, grace, and peace. Let them settle beside the concern you named at the beginning. You can carry that concern into your day with prayer still open and your next step held before God.",
+   "chapter": "The Lord give you peace"
+  },
+  {
+   "id": "blessing-keep-grace",
+   "beat": "closing Scripture: keeping and grace",
+   "pause_after": 1.3,
+   "text": "The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee:",
+   "reference": "Numbers 6:24-25 (KJV)"
+  },
+  {
+   "id": "blessing-peace",
+   "beat": "closing Scripture: the gift of peace",
+   "pause_after": 1.5,
+   "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+   "reference": "Numbers 6:26 (KJV)"
+  },
+  {
+   "id": "closing-prayer",
+   "beat": "closing prayer: carry the blessing into the morning",
+   "pause_after": 1.0,
+   "text": "Father, thank you for receiving this morning's prayer. I entrust my attention, my words, and the people I love to your care. Help me carry what I have heard into the next ordinary moment. May my response be patient, my work honest, and my care practical. I go forward asking for your wisdom and receiving your grace. In the name of Jesus, amen."
+  },
+  {
+   "id": "cta",
+   "beat": "soft amen-only call to action after the payoff",
+   "pause_after": 1.2,
+   "text": "If you would like to join this prayer in the comments, you can write amen."
+  }
+ ],
+ "figure": "figure-a",
+ "backgrounds": [
+  "bg-coffee-window",
+  "bg-sunrise-field",
+  "bg-mountain-sunrise",
+  "bg-meadow",
+  "bg-morning-path",
+  "bg-misty-valley",
+  "bg-sky",
+  "bg-garden",
+  "bg-hills",
+  "bg-dawn-lake",
+  "bg-orchard"
+ ],
+ "overlay": {
+  "title": "Begin Your Day in God's Peace",
+  "subtitle": "MORNING PRAYER",
+  "title_image": "bg-dawn-lake",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "Pray Bible verses for peace over your morning, your work, your home and the people you love. Carry one peaceful response into your day.",
+ "hashtags": [
+  "#prayer",
+  "#morningprayer",
+  "#jesus"
+ ],
+ "thumbnail": {
+  "lines": [
+   "PEACE FOR",
+   "YOUR MORNING"
+  ],
+  "sub": "Bible Verses & Prayer"
+ },
+ "tags": [
+  "morning prayer",
+  "bible verses for peace",
+  "prayer for peace",
+  "morning prayer with Bible verses",
+  "prayer for worry",
+  "Christian guided prayer",
+  "peace for my family",
+  "start your day with God",
+  "KJV scripture prayer"
+ ],
+ "figure_choice": "figure-a: the channel's praying figure (frontal, hands folded), kept for brand continuity.",
+ "playlist": {
+  "title": "Morning Prayer",
+  "description": "Guided morning prayers with Scripture for peace, protection and courage. New prayers to start your day with God."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-dawn-lake",
+   "bg-misty-valley",
+   "bg-sunrise-field",
+   "bg-orchard",
+   "bg-mountain-sunrise"
+  ]
+ }
+}
