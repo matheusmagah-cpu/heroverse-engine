@@ -1,0 +1,217 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 19,
+    "picture_changes_per_minute": 37.92,
+    "median_shot_seconds": 1.517,
+    "longest_shot_seconds": 3.233,
+    "motion_median_top_decile_diff": 7.261
+   },
+   "rhythm": {
+    "audio_onsets": 56,
+    "audio_onsets_per_minute": 111.75,
+    "tempo": {
+     "bpm": 52.31,
+     "confidence": 0.093
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.117,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": 0.091179,
+     "verdict": "IN_SYNC",
+     "consensus_pairs": 7,
+     "visual_events": 19,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -19.8,
+    "loudness_range_lu": 2.2,
+    "true_peak_dbtp": -5.9
+   },
+   "colour": {
+    "mean_brightness": 0.4433,
+    "brightness_std_over_time": 0.0424,
+    "mean_saturation": 0.2976,
+    "saturation_std_over_time": 0.0629
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.968,
+     "singing": 0.0,
+     "music": 0.839,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 39,
+     "singing": 0,
+     "music": 23,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 81,
+    "words_per_minute": 161.6,
+    "transcript": "Heavenly Father, as this new morning begins, I come into your presence with a grateful heart. Thank you for the gift of life, for the breath in my lungs, and for the opportunity to see another day. Thank you for keeping me through the night and carrying me through every moment I could not see or understand. Heavenly Father, you are the Eternal God, the one who never sleeps and never grows weary. While I rested, you watched over me. I"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 0.975,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 0.48,
+     "end_seconds": 2.415,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 1.92,
+     "end_seconds": 4.335,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 3.84,
+     "end_seconds": 5.775,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 5.28,
+     "end_seconds": 6.255,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 5.76,
+     "end_seconds": 7.215,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 6.72,
+     "end_seconds": 8.175,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 7.68,
+     "end_seconds": 10.575,
+     "frames": 5
+    },
+    {
+     "label": "speech",
+     "start_seconds": 10.08,
+     "end_seconds": 12.975,
+     "frames": 5
+    },
+    {
+     "label": "music",
+     "start_seconds": 12.48,
+     "end_seconds": 13.455,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 12.96,
+     "end_seconds": 15.375,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 14.88,
+     "end_seconds": 15.855,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 15.36,
+     "end_seconds": 18.255,
+     "frames": 5
+    },
+    {
+     "label": "music",
+     "start_seconds": 17.76,
+     "end_seconds": 19.215,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 18.72,
+     "end_seconds": 21.615,
+     "frames": 5
+    },
+    {
+     "label": "music",
+     "start_seconds": 21.12,
+     "end_seconds": 22.575,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 22.08,
+     "end_seconds": 25.935,
+     "frames": 7
+    },
+    {
+     "label": "music",
+     "start_seconds": 25.44,
+     "end_seconds": 26.415,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 25.92,
+     "end_seconds": 26.895,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 26.4,
+     "end_seconds": 27.375,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 26.88,
+     "end_seconds": 27.855,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 27.36,
+     "end_seconds": 28.815,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 28.32,
+     "end_seconds": 30.023,
+     "frames": 3
+    }
+   ]
+  }
+ ]
+}
