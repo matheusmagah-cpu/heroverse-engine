@@ -125,6 +125,10 @@ def check(pilot_dir, production=None):
     for b in s.get("backgrounds", []) + [s.get("figure")]:
         if b and b not in planned | have:
             problems.append(f"IMAGE_NOT_PLANNED {b}")
+    for source, ids in (img.get("reused") or {}).items():
+        for i in ids if isinstance(ids, list) else []:
+            if i not in have:   # the render reads records from the pilot's own images/ folder
+                problems.append(f"REUSED_NOT_HYDRATED {source}/{i} (run imagegen/hydrate_reused.py)")
     new = [x.get("id") for x in img.get("images", []) if isinstance(x, dict) and x.get("id") not in have]
     if len(new) > 12:
         problems.append(f"TOO_MANY_NEW_IMAGES {len(new)} > 12 (Cloudflare free day)")

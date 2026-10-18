@@ -60,6 +60,11 @@ class Check(unittest.TestCase):
                 x["pause_after"] = 4.0
         self.assertTrue(any(p.startswith("SPEECH_PRESENCE_EST") for p in self.run_check(silent)))
 
+    def test_reused_images_must_be_hydrated(self):
+        def unhydrated(s, d):
+            (d / "images" / "figure-a.json").unlink()
+        self.assertTrue(any(p.startswith("REUSED_NOT_HYDRATED") for p in self.run_check(unhydrated)))
+
     def test_frozen_criteria_and_slot(self):
         def edit(s, d):
             (d / "qa_criteria.json").write_text((d / "qa_criteria.json").read_text() + " ")
