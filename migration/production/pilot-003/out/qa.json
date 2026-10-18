@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-003",
- "output_sha256": "91e24033aece99585094d6ffe4a52482b0625588df5cd6a57aa5a4c2a54e2ee1",
+ "output_sha256": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -31,42 +31,42 @@
  },
  "criteria_version": "pilot-qa-criteria-v2",
  "measurements": {
-  "duration_seconds": 868.26,
+  "duration_seconds": 868.49,
   "loudness": {
-   "integrated_lufs": -15.5,
-   "loudness_range_lu": 3.3,
-   "true_peak_dbtp": -2.3
+   "integrated_lufs": -15.6,
+   "loudness_range_lu": 3.2,
+   "true_peak_dbtp": -2.7
   },
-  "speech_presence": 0.861,
-  "music_presence": 0.412,
-  "wer_vs_script": 0.0378,
+  "speech_presence": 0.868,
+  "music_presence": 0.418,
+  "wer_vs_script": 0.0394,
   "accepted_words_per_minute": 132.7,
   "caption_lines": 398,
   "holds": 75,
-  "first_word_seconds": 0.14,
+  "first_word_seconds": 0.08,
   "editing": {
-   "picture_changes": 418,
-   "picture_changes_per_minute": 28.89,
-   "median_shot_seconds": 2.033,
-   "longest_shot_seconds": 7.867,
-   "motion_median_top_decile_diff": 1.003
+   "picture_changes": 495,
+   "picture_changes_per_minute": 34.2,
+   "median_shot_seconds": 1.7,
+   "longest_shot_seconds": 7.3,
+   "motion_median_top_decile_diff": 1.007
   },
   "colour": {
    "mean_brightness": 0.3679,
    "brightness_std_over_time": 0.0492,
-   "mean_saturation": 0.5189,
-   "saturation_std_over_time": 0.1025
+   "mean_saturation": 0.5193,
+   "saturation_std_over_time": 0.1026
   },
   "rhythm": {
-   "audio_onsets": 1372,
-   "audio_onsets_per_minute": 94.81,
+   "audio_onsets": 1361,
+   "audio_onsets_per_minute": 94.03,
    "tempo": {
-    "bpm": 89.05,
-    "confidence": 0.02
+    "bpm": 89.14,
+    "confidence": 0.018
    }
   }
  },
- "transcript_head": "Good morning! If you woke up already tired before the day has even begun, stay with me for the next few minutes. God has not run out of strength, and this morning He wants to give some of it to you. Take one slow breath with me. You do not have to pretend you are full of energy. You can come to Him exactly as you are. heavy eyes, the long list, the worry you carried to bed and found waiting for yo",
+ "transcript_head": "Good morning! If you woke up already tired before the day has even begun, stay with me for the next few minutes. God has not run out of strength, and this morning He wants to give some of it to you. Take one slow breath with me. do not have to pretend you are full of energy. You can come to Him exactly as you are. heavy eyes, the long list, the worry you carried to bed and found waiting for you wh",
  "criteria_sha256": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
