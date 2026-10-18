@@ -1,15 +1,15 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-004",
- "output_sha256": "ecab8da574eed199fcced56767ae3dfd71395a75daa8fe21e9ba3e4637843249",
- "status": "FAIL",
+ "output_sha256": "3a7c6c28b1c806859b36ad8c856b4e425eeedabf84eeaaf6facae1c3fe6b2f24",
+ "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
   "video_format": true,
   "duration_min": true,
   "integrated_lufs": true,
-  "true_peak": false,
-  "speech_presence": false,
+  "true_peak": true,
+  "speech_presence": true,
   "no_singing": true,
   "wer_vs_script": true,
   "words_per_minute": true,
@@ -19,7 +19,7 @@
   "figure_present_after_title": true,
   "background_hold_median": true,
   "background_hold_max": true,
-  "no_background_repeated_consecutively": false,
+  "no_background_repeated_consecutively": true,
   "caption_coverage_of_speech": true,
   "caption_hold_median": true,
   "caption_chars_max": true,
@@ -31,42 +31,42 @@
  },
  "criteria_version": "pilot-qa-criteria-v2",
  "measurements": {
-  "duration_seconds": 1912.19,
+  "duration_seconds": 1828.57,
   "loudness": {
-   "integrated_lufs": -15.5,
-   "loudness_range_lu": 4.0,
-   "true_peak_dbtp": -0.2
+   "integrated_lufs": -15.6,
+   "loudness_range_lu": 2.9,
+   "true_peak_dbtp": -2.7
   },
-  "speech_presence": 0.835,
-  "music_presence": 0.435,
-  "wer_vs_script": 0.0714,
-  "accepted_words_per_minute": 123.9,
+  "speech_presence": 0.872,
+  "music_presence": 0.41,
+  "wer_vs_script": 0.0482,
+  "accepted_words_per_minute": 132.1,
   "caption_lines": 825,
-  "holds": 166,
+  "holds": 164,
   "first_word_seconds": 0.02,
   "editing": {
-   "picture_changes": 923,
-   "picture_changes_per_minute": 28.96,
-   "median_shot_seconds": 2.033,
-   "longest_shot_seconds": 7.833,
-   "motion_median_top_decile_diff": 1.007
+   "picture_changes": 1040,
+   "picture_changes_per_minute": 34.13,
+   "median_shot_seconds": 1.8,
+   "longest_shot_seconds": 6.267,
+   "motion_median_top_decile_diff": 1.01
   },
   "colour": {
-   "mean_brightness": 0.2569,
-   "brightness_std_over_time": 0.0514,
-   "mean_saturation": 0.566,
-   "saturation_std_over_time": 0.1043
+   "mean_brightness": 0.2571,
+   "brightness_std_over_time": 0.0507,
+   "mean_saturation": 0.564,
+   "saturation_std_over_time": 0.1018
   },
   "rhythm": {
-   "audio_onsets": 2726,
-   "audio_onsets_per_minute": 85.54,
+   "audio_onsets": 2719,
+   "audio_onsets_per_minute": 89.22,
    "tempo": {
-    "bpm": 79.12,
-    "confidence": 0.014
+    "bpm": 78.29,
+    "confidence": 0.011
    }
   }
  },
- "transcript_head": "Good evening. If your body is tired, but your mind will not stop, stay with me for the next few minutes. Before you sleep tonight, you can hand every worry to God and rest in His peace. Take one slow breath with me. Let your head sink into the pillow. Let your jaw relax and your shoulders and your hands. day is finished. was left undone can wait until morning. Right now, you are invited to do only",
+ "transcript_head": "Good evening. If your body is tired but your mind will not stop, stay with me for the next few minutes. Before you sleep tonight, you can hand every worry to God and rest in His peace. Take one slow breath with me. Let your head sink into the pillow. Let your jaw relax and your shoulders your hands. The day is finished. Whatever was left undone can wait until morning. Right now, you are invited to",
  "criteria_sha256": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
