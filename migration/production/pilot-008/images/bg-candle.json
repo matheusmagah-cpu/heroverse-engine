@@ -1,0 +1,27 @@
+{
+ "id": "bg-candle",
+ "prompt": "a single lit candle beside an open Bible on a table at dawn, warm glow, shallow depth of field, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+ "seed": 1013,
+ "steps": 6,
+ "guidance": 1.5,
+ "size": [
+  1344,
+  768
+ ],
+ "models": {
+  "stabilityai/stable-diffusion-xl-base-1.0": {
+   "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+   "license": "openrail++"
+  },
+  "latent-consistency/lcm-lora-sdxl": {
+   "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+   "license": "openrail++"
+  }
+ },
+ "device": "cuda",
+ "seconds": 10.3,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-002-img-bg-candle-sha256-d1ecc94e88cb24365df9fddd4db51c92c6701e756a082c7bc020d98a58789559.png",
+ "sha256": "d1ecc94e88cb24365df9fddd4db51c92c6701e756a082c7bc020d98a58789559"
+}
