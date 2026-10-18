@@ -1,0 +1,85 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 22,
+    "picture_changes_per_minute": 43.9,
+    "median_shot_seconds": 1.133,
+    "longest_shot_seconds": 2.633,
+    "motion_median_top_decile_diff": 5.277
+   },
+   "rhythm": {
+    "audio_onsets": 74,
+    "audio_onsets_per_minute": 147.67,
+    "tempo": {
+     "bpm": 137.07,
+     "confidence": 0.099
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.318,
+     "chance_fraction": 0.151,
+     "lift": 2.1
+    },
+    "sync": {
+     "median_offset_seconds": -0.998548,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 9,
+     "visual_events": 22,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -8.6,
+    "loudness_range_lu": 1.4,
+    "true_peak_dbtp": 0.3
+   },
+   "colour": {
+    "mean_brightness": 0.7859,
+    "brightness_std_over_time": 0.1502,
+    "mean_saturation": 0.1217,
+    "saturation_std_over_time": 0.1111
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 108,
+    "words_per_minute": 215.5,
+    "transcript": "the bones dry out and fall into the pit in the middle of the tower. Why do they do this? Zoroastrians consider fire, water, and earth sacred, so traditionally a dead body is seen as impure. So burying or burning it would contaminate something holy. This tradition isn't as common today as it used to be. Here's why. Farmers in India used to give a painkiller to sick livestock and other farm animals. But that painkiller turned out to be deadly to vultures. When vultures ate the bodies of animals that had been given the drug, the vultures died too. time, this wiped out most of the vulture."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
