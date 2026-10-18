@@ -2,7 +2,8 @@ name: HeroVerse approval (automatic gates before publication)
 # Owner rule: automatic publication is authorised once everything passes the gates.
 # Starts when a render is recorded (out/qa.json pushed by the runner or the private render).
 # Gates, in order: frozen QA PASS; preflight; same-instrument scorecard (our render mined with the reference
-# miner through the Gemini Files API); watched review of the long video. All pass -> inspection/APPROVAL.json
+# miner through the Gemini Files API); watched review of the long video; final decision PASS/FAIL/UNKNOWN over
+# every dimension (publish/prepublish_gate.py, out/gate.json). Only PASS -> inspection/APPROVAL.json
 # bound to the file hash, then publish.yml at the schedule.json time. Any failure -> out/review.json, no publication.
 on:
   push:
@@ -72,7 +73,11 @@ jobs:
         run: |
           d="migration/production/$PILOT"
           status=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['status'])" "$d/out/review.json")
-          if [ "$status" = PASS ]; then
+          # final decision over every dimension (prepublish_gate.py): only PASS approves; UNKNOWN is retried like ERROR
+          decision=$(python3 -I -B migration/publish/prepublish_gate.py "$d" "$RUNNER_TEMP/video.mp4" | python3 -I -c "import json,sys;print(json.loads(sys.stdin.read())['decision'])" || true)
+          echo "GATE=$decision"
+          [ "$status" = ERROR ] || [ "$decision" = PASS ] || status="GATE_$decision"
+          if [ "$status" = PASS ] && [ "$decision" = PASS ]; then
             python3 -I - "$d" <<'PY'
           import json, sys
           from datetime import datetime, timezone
@@ -83,8 +88,9 @@ jobs:
                      "reviewer": "HeroVerse automatic gates (owner rule: automatic publication once every gate passes)",
                      "reviewed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "qa_status": qa["status"],
                      "gates": {"qa": "PASS", "preflight": "PASS", "scorecard_hard": "PASS",
-                               "watched_review": {"overall": w.get("overall"), "model": w.get("model")}},
-                     "notes": "Scorecard and watched review in out/review.json."},
+                               "watched_review": {"overall": w.get("overall"), "model": w.get("model")},
+                               "prepublish_gate": "PASS"},
+                     "notes": "Scorecard and watched review in out/review.json; final decision in out/gate.json."},
                     open(f"{d}/inspection/APPROVAL.json", "w"), indent=1)
           PY
             msg="Approve $PILOT automatically (QA, preflight, scorecard, watched review; run $GITHUB_RUN_ID)"
@@ -93,7 +99,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$d/out/review.json" "$d/inspection/APPROVAL.json" 2>/dev/null || git add "$d/out/review.json"
+          git add "$d/out/review.json" "$d/out/gate.json" "$d/inspection/APPROVAL.json" 2>/dev/null || git add "$d/out/review.json" "$d/out/gate.json" 2>/dev/null || git add "$d/out/review.json"
           git commit -q -m "$msg"
           for i in 1 2 3 4; do
             git pull --rebase -q origin main && git push -q origin HEAD:main && break

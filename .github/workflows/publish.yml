@@ -60,6 +60,10 @@ jobs:
           assert qa["status"] == "PASS", "QA_NOT_PASS"
           assert ap["approved"] is True, "NOT_APPROVED"
           assert ap["output_sha256"] == qa["output_sha256"] == man["output_sha256"], "APPROVAL_NOT_FOR_THIS_FILE"
+          # automatic approvals need the final decision PASS for this file; an owner approval recorded by hand is kept
+          if ap.get("reviewer", "").startswith("HeroVerse automatic gates"):
+              gate = json.load(open(f"{d}/out/gate.json"))
+              assert gate["decision"] == "PASS" and gate["output_sha256"] == qa["output_sha256"], "GATE_NOT_PASS_FOR_THIS_FILE"
           print("GATES_PASS", qa["output_sha256"])
           PY
       - name: Preflight (everything YouTube would reject; skipped when resuming an upload already made)
@@ -79,6 +83,7 @@ jobs:
           echo "$sha  $RUNNER_TEMP/video.mp4" | sha256sum -c -
           cp "$d/inspection/thumbnail.jpg" "$RUNNER_TEMP/thumbnail.jpg"
       - name: Publish (resumable upload, thumbnail, captions, playlist, verify)
+        id: upload
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: |
@@ -90,8 +95,10 @@ jobs:
             "$RUNNER_TEMP/video.mp4" "$RUNNER_TEMP/thumbnail.jpg" migration/publish/ledger.json \
             "migration/publish/receipts/$PILOT-$GITHUB_RUN_ID.json" $PUBLISH_AT
       - name: Shorts of this pilot (approved by the watched review), each at its slot
+        # a Short that cannot go out here is not lost: publish-shorts.yml (daily) retries every approved Short not
+        # in the ledger. The failure stays visible (no continue-on-error); the steps after it still run.
         if: hashFiles(format('migration/production/{0}/shorts/shorts.json', env.PILOT)) != ''
-        continue-on-error: true
+        id: shorts
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: |
@@ -100,7 +107,7 @@ jobs:
           test -n "$slots" || { echo "NO_SHORTS_SLOTS"; exit 0; }
           sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
           mkdir -p "$RUNNER_TEMP/shorts"
-          python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts'] if s.get('publish')]" "$d/shorts/shorts.json" |
+          python3 -I -B migration/publish/pending_shorts.py --todo "$d" migration/publish/ledger.json |
           while read -r f sha; do
             gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-${f%.mp4}-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
             echo "$sha  $RUNNER_TEMP/shorts/$f" | sha256sum -c -
@@ -115,6 +122,7 @@ jobs:
             gh release delete-asset "$TAG" "$PILOT-${f%.mp4}-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" -y || true
           done
       - name: Delete the finished video from the private release (owner rule; YouTube now holds it)
+        if: always() && steps.upload.outcome == 'success'
         run: |
           r="migration/publish/receipts/$PILOT-$GITHUB_RUN_ID.json"
           st=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1])).get('upload_status'))" "$r")
