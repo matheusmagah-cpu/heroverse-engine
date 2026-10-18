@@ -73,6 +73,13 @@ class Check(unittest.TestCase):
         probs = self.run_check(at=taken)
         self.assertTrue(any(p.startswith("SLOT_TAKEN") or p == "PUBLISH_AT_IN_THE_PAST" for p in probs))
 
+    def test_shorts_slot_taken(self):
+        def same(s, d):
+            sch = json.loads((d / "schedule.json").read_text())
+            sch["shorts_slots"] = json.loads((HERE / "pilot-003" / "schedule.json").read_text())["shorts_slots"][:1]
+            (d / "schedule.json").write_text(json.dumps(sch))
+        self.assertTrue(any(p.startswith("SHORTS_SLOT_TAKEN") for p in self.run_check(same)))
+
 
 if __name__ == "__main__":
     unittest.main()
