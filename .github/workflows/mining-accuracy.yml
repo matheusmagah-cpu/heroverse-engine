@@ -3,8 +3,7 @@ name: HeroVerse mining accuracy (native audio vs model-reported mining)
 # from the original audio (acquire-reference-window.yml). When their profiles (our own ASR) are recorded, the
 # mined transcripts and opening words are compared with them and accuracy.json is written.
 on:
-  schedule:
-    - cron: '20 0 * * *'   # daily, after the acquisition day resets; only windows of videos never checked
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   push:
     branches: [main]
     paths: ['migration/acquisition/profiles/**']

@@ -1,7 +1,6 @@
 name: HeroVerse channel cleanup (hide Portuguese uploads, reversible)
 on:
-  schedule:
-    - cron: '5 8 * * *'   # daily after the Data API quota reset: hides what is left of the reviewed plan, then no-op
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
     inputs:
       mode:

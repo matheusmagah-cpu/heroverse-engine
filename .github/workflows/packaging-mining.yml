@@ -1,7 +1,6 @@
 name: HeroVerse packaging mining (titles, descriptions, tags, thumbnails, channel setup)
 on:
-  schedule:
-    - cron: '50 7 * * 0'
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
     inputs:
       queries:

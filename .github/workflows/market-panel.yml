@@ -1,8 +1,7 @@
 name: HeroVerse market panel (English Christian niche, read-only Data API)
 on:
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
-  schedule:
-    - cron: '17 7 * * *'
 permissions:
   contents: write
 concurrency:

@@ -58,21 +58,29 @@ Read this file first; do not re-read history, logs or whole evidence files.
 - **YouTube Data API (10k units/day, resets 07:00 UTC):** panel 2,400 (half of the queries each day, alternating); packaging mining 500 (Sundays); long video ~2,100 (upload 1,600 + captions 400 + thumbnail/playlist); each Short ~1,650. A normal day: panel + 1 long + 3 Shorts = 9,450. Uploads go after the 07:00 UTC reset when the day's units are spent. A second Google Cloud project's API key for the public reads (panel, packaging) would free the whole 10k for uploads.
 
 ## Daily schedule (UTC; BRT = UTC-3) — the nightly chain runs without Claude
-| UTC | What | Where |
-|---|---|---|
-| 00:20 | native windows of videos never checked, then accuracy.json | mining-accuracy.yml → acquire-reference-window.yml |
-| 00:30 | missing images of pilots publishing in the next 72 h (FLUX + 2x upscale) | nightly-images.yml → cf-images.yml |
-| 01:00, 03:30 | next pilot of the queue (publishes ≤ 48 h, images complete, no render of this script): long video, QA; Shorts handed off | heroverse-runner render.yml (render_queue.py) |
-| after each render | Shorts: Gemini selection, own edit, watched review | shorts.yml (on shorts/inputs.json) |
-| after each render | approval gates: QA, preflight, same-instrument scorecard, watched review → APPROVAL.json → publish at schedule.json | approve.yml → publish.yml |
-| 07:17 | market panel (2,400 units, alternating queries) + model + forecast + daily intel | market-panel.yml |
-| 07:20, 13:20, 19:20 | retry approvals that errored and publications that failed (due pilots only) | reconcile.yml |
-| 07:35 | the approved Short (one per long video, D-2026-10-18-03) at its slot | publish-shorts.yml (pending_shorts.py) |
-| 07:50 Sun | packaging mining (titles, tags, thumbnails, channel setup; 3 adjacent niches) | packaging-mining.yml |
-| 08:05 | hide remaining Portuguese uploads | channel-privacy.yml |
-| 08:05 | **daily Claude analysis**: goal report + intel → decisions protocol (strategy/DECISIONS.md) → next scripts | scheduled Claude session |
-| 08:30 | structure mining of migration/mining/structure_channels.txt, incremental (new uploads only) | structure-mining.yml |
-| schedule.json | long video at publish_at; Shorts at shorts_slots (BRT 07:00 morning, 21:00 night) | YouTube publishAt |
+**Scheduler:** GitHub delays and drops scheduled runs under load (2026-10-17/18: every daily cron of the engine was
+dropped). The engine has one cron, `heartbeat.yml` at minutes 11 and 41 (48 chances a day). Each beat reads the
+real run history and dispatches every task whose slot has passed without a run since it (a failed run is retried
+after 45 min, up to the task's attempts); tasks with a work condition run only when there is work
+(`migration/ops/heartbeat.py`, tested). The daily report lists the health of every task, of the heartbeat and of
+the runner, with alerts (`migration/ops/health.py`). The public runner checks the render queue at :13 and :43.
+
+| Slot (UTC) | What | Where | Runs when |
+|---|---|---|---|
+| 00:20 | native windows of videos never checked, then accuracy.json | mining-accuracy.yml → acquire-reference-window.yml | daily |
+| 00:30, 01:30, 03:30, 12:30 | missing images of pilots publishing in the next 72 h (FLUX + 2x upscale) | nightly-images.yml → cf-images.yml | images missing |
+| :13 and :43 hourly | next pilot of the queue (publishes ≤ 48 h, images complete, no render of this script): long video, QA; Shorts handed off | heroverse-runner render.yml (render_queue.py) | queue not empty |
+| after each render | Shorts (QA-PASS render only): selection, own edit, watched review (gemini-3.8-flash only) | shorts.yml (on shorts/inputs.json) | push |
+| after each render | gates: QA, preflight, scorecard, watched review (gemini-3.8-flash only), whole-file scan → gate.json PASS/FAIL/UNKNOWN; PASS → APPROVAL.json → publish | approve.yml → publish.yml | push |
+| 07:17 | market panel (2,400 units) + model + forecast + daily intel | market-panel.yml | daily |
+| 07:20, 10:20, 13:20, 16:20, 19:20, 22:20 | retry approvals (ERROR/UNKNOWN), Shorts never reviewed, failed publications | reconcile.yml | work waiting |
+| 07:35, 13:35, 19:35 | the approved Short (one per long video) at its slot | publish-shorts.yml (pending_shorts.py) | Short pending |
+| 07:45 | goal report + scheduler health (waits for the panel until 09:30) | goal-report.yml | daily |
+| 07:50 Sun | packaging mining (3 adjacent niches) | packaging-mining.yml | production idle |
+| 08:05 | hide remaining Portuguese uploads | channel-privacy.yml | daily |
+| 08:05 | **daily Claude analysis**: goal report + intel → decisions protocol → next scripts | scheduled Claude session | daily |
+| 08:30 | structure mining, incremental | structure-mining.yml | production idle |
+| schedule.json | long video at publish_at; Shorts at their slots | YouTube publishAt | — |
 
 Claude's part: write the next scripts (2 per day: morning + night prayer) with schedule.json and images.json, at least 2 days ahead, and read the daily report. Scheduled workflows of the public runner stop after 60 days without a commit there.
 

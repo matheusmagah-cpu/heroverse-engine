@@ -1,7 +1,6 @@
 name: HeroVerse full-structure mining (whole videos of winning channels)
 on:
-  schedule:
-    - cron: '30 8 * * *'   # daily and incremental (living intelligence): only new uploads cost Gemini calls
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
     inputs:
       channels:
