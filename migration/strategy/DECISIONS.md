@@ -79,3 +79,8 @@ The goal is YPP in 14 days (30 at most), and the system is being validated to be
   - pilot-003 (15 min) is already rendering and stays as the measured control.
 - **Checked:** same as D-01 (approval band ≤ 50 min, token-safe review, runner time). Morning CTA stays after the payoff (viewers are awake); night CTA comes before the sleep section.
 - **Measure:** watch hours per video and average view % at 48 h / 7 days: pilot-003 (15 min) vs pilot-005 (25 min) for mornings, pilot-004/006 for nights. Keep if hours per video rise ≥ 2× without the average view % falling below 15%.
+
+### D-2026-10-18-05 — Ask for the subscription, with a reason, in every CTA
+- **Evidence:** `evidence/structure-mining/20261017` (policy-clean winners, model transcripts). 13 of 20 videos ask to subscribe (65%), always with a reason ("subscribe so you can keep walking through the text with us"). Comments 11/20, share 9/20. Our CTAs asked for "amen" only. Subscribers are the binding constraint (8.8 per 1,000 long-form views).
+- **Change:** pilots 003–006: "subscribe, so tomorrow's prayer is waiting for you / ready when you lie down", kept after the payoff (morning) or before the sleep section (night). No early or repeated asks: the prayer is not interrupted.
+- **Measure:** subscribers gained per 1,000 views per video (Analytics), against 8.8 (market median) and our earlier videos.
