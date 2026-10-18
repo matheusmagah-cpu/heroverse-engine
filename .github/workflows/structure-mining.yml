@@ -26,9 +26,15 @@ jobs:
       PER_CHANNEL: ${{ inputs.per_channel }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Production first (the free Gemini day is shared; approvals and Shorts must not starve)
+        run: |
+          todo=$(python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json reconcile 48 | grep -E '^(approve|shorts) ' || true)
+          if [ -n "$todo" ]; then echo "PRODUCTION_PENDING, mining skipped today:"; echo "$todo"; echo "SKIP=1" >> "$GITHUB_ENV"; fi
       - name: Unit tests
+        if: env.SKIP != '1'
         run: python3 -I -B migration/mining/test_structure_mining.py
       - name: Mine (Data API metadata and comments; Gemini free tier on the whole public video)
+        if: env.SKIP != '1'
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
@@ -46,7 +52,7 @@ jobs:
           [ -n "$prev" ] && [ -z "$(ls "$out"/structure-*.json 2>/dev/null)" ] && cp "$prev"/structure-*.json "$out"/ 2>/dev/null || true
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/structure_mining.py "$out" "$CHANNELS" "$PER_CHANNEL"
       - name: Record
-        if: always()
+        if: always() && env.SKIP != '1'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
