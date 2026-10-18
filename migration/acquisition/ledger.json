@@ -740,6 +740,17 @@
       "completed_at": "2026-10-18T00:14:24.882135+00:00",
       "run_id": "39081822294",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-6iERK-74EWg-572-602-v1",
+      "video_id": "6iERK-74EWg",
+      "start_seconds": 572,
+      "end_seconds": 602,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-18T00:14:37.895829+00:00",
+      "day_utc": "2026-10-18",
+      "units_remaining_at_reservation": 492,
+      "reserved_units": 14
     }
   ]
 }
