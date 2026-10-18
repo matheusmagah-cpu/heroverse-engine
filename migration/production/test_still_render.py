@@ -30,6 +30,23 @@ class Holds(unittest.TestCase):
         self.assertTrue(all(h["end"] - h["start"] <= sr.HOLD_MAX + 1e-6 for h in plan[1:]))
         self.assertTrue(all(a["image"] != b["image"] for a, b in zip(plan[1:], plan[2:])))
 
+    def test_no_repeat_after_a_split_hold_pilot_004(self):
+        # the pilot-004 render (QA FAIL 2026-10-18) had bg-dusk-field twice in a row: a long hold was split and
+        # the next hold's image, chosen before the split, was the same as the split's last piece
+        script = json.loads((HERE / "pilot-004/script.json").read_text())
+        timeline = json.loads((HERE / "pilot-004/out/timeline.json").read_text())
+        plan = sr.holds(script, timeline, timeline["voice_seconds"] + sr.TAIL)
+        self.assertTrue(all(a["image"] != b["image"] for a, b in zip(plan[1:], plan[2:])))
+        self.assertTrue(all(h["end"] - h["start"] <= sr.HOLD_MAX + 1e-6 for h in plan[1:]))
+
+    def test_split_then_next_hold_never_repeats(self):
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": ["a", "b", "c", "d"]}
+        sents = [{"start": 2.5, "end": 40.0, "text": "x"}, {"start": 41.0, "end": 45.0, "text": "y"},
+                 {"start": 55.0, "end": 70.0, "text": "z"}, {"start": 80.0, "end": 90.0, "text": "w"}]
+        for total in (60.0, 75.0, 95.0, 120.0):
+            plan = sr.holds(script, {"sentences": sents}, total)
+            self.assertTrue(all(a["image"] != b["image"] for a, b in zip(plan[1:], plan[2:])), total)
+
 
 if __name__ == "__main__":
     unittest.main()
