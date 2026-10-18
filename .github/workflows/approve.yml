@@ -89,7 +89,7 @@ jobs:
           PY
             msg="Approve $PILOT automatically (QA, preflight, scorecard, watched review; run $GITHUB_RUN_ID)"
           else
-            msg="Record $PILOT review: FAIL, not approved (run $GITHUB_RUN_ID)"
+            msg="Record $PILOT review: $status, not approved (run $GITHUB_RUN_ID; ERROR is retried by reconcile.yml)"
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

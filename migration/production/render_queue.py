@@ -5,9 +5,11 @@ A pilot is due when its schedule.json opens within HORIZON hours and it is not
 yet on YouTube. It needs images while any image its script uses has no
 images/<id>.json record; it needs a render when its images are complete and no
 render manifest exists for the current script (manifest.script_sha256).
-usage: render_queue.py PRODUCTION_DIR LEDGER {images|render} [HOURS]
+usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
   images: prints "PILOT id,id,..." for every pilot with images still missing
   render: prints the next pilot to render (earliest publish time) or nothing
+  reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR) and
+             "publish PILOT" (approved for this file, not on YouTube) so failed steps are retried
 """
 from datetime import datetime, timedelta, timezone
 import hashlib
@@ -52,6 +54,21 @@ def main(production, ledger_path, mode, hours="48"):
         for r in rows:
             if r["missing_images"]:
                 print(r["pilot"], ",".join(r["missing_images"]))
+    elif mode == "reconcile":
+        for r in rows:
+            d = Path(production) / r["pilot"]
+            try:
+                qa = json.loads((d / "out" / "qa.json").read_text())
+            except (FileNotFoundError, ValueError):
+                continue
+            if not r["rendered"] or qa.get("status") != "PASS":
+                continue
+            ap = json.loads((d / "inspection" / "APPROVAL.json").read_text()) if (d / "inspection" / "APPROVAL.json").exists() else {}
+            rev = json.loads((d / "out" / "review.json").read_text()) if (d / "out" / "review.json").exists() else {}
+            if ap.get("approved") and ap.get("output_sha256") == qa["output_sha256"]:
+                print("publish", r["pilot"])  # due rows are never already on YouTube
+            elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR":
+                print("approve", r["pilot"])
     else:
         nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"]), None)
         if nxt:

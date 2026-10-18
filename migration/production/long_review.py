@@ -99,15 +99,22 @@ def main(pilot_dir, video_path):
     manifest = json.loads((d / "out" / "manifest.json").read_text())
     video = {"video_id": script["pilot_id"], "title": script["working_title"], "seconds": manifest["output_seconds"],
              "description": "", "likes": 0, "views": 1, "comments": 0}
-    file = sr.upload(video_path, key)
     try:
-        windows, failed = mine(file, video, key)
-        review = watch(file, script["working_title"], key)
-    finally:
+        file = sr.upload(video_path, key)
         try:
-            sr.request(sr.BASE + "/v1beta/" + file["name"], key, method="DELETE")
-        except Exception:
-            pass
+            windows, failed = mine(file, video, key)
+            review = watch(file, script["working_title"], key)
+        finally:
+            try:
+                sr.request(sr.BASE + "/v1beta/" + file["name"], key, method="DELETE")
+            except Exception:
+                pass
+    except Exception as e:  # provider trouble is not a verdict: ERROR is retried by reconcile.yml, FAIL is not
+        out = {"version": "long-review-v1", "pilot_id": script["pilot_id"], "output_sha256": manifest["output_sha256"],
+               "status": "ERROR", "error": f"{type(e).__name__}: {str(e)[:200]}"}
+        (d / "out" / "review.json").write_text(json.dumps(out, indent=1) + "\n")
+        print(json.dumps({"status": "ERROR", "error": out["error"]}))
+        return
     measured = sm.measured(video, windows) if windows else None
     hard, reported = scorecard(measured) if measured else ({"mining": {"pass": False, "value": "NO_WINDOWS"}}, {})
     status = "PASS" if all(v["pass"] for v in hard.values()) and review["status"] == "PASS" else "FAIL"

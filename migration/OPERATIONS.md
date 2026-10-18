@@ -66,7 +66,8 @@ Read this file first; do not re-read history, logs or whole evidence files.
 | after each render | Shorts: Gemini selection, own edit, watched review | shorts.yml (on shorts/inputs.json) |
 | after each render | approval gates: QA, preflight, same-instrument scorecard, watched review → APPROVAL.json → publish at schedule.json | approve.yml → publish.yml |
 | 07:17 | market panel (2,400 units, alternating queries) + model + forecast + daily intel | market-panel.yml |
-| 07:35 | approved Shorts not yet on YouTube, at their slots | publish-shorts.yml (pending_shorts.py) |
+| 07:20, 13:20, 19:20 | retry approvals that errored and publications that failed (due pilots only) | reconcile.yml |
+| 07:35 | the approved Short (one per long video, D-2026-10-18-03) at its slot | publish-shorts.yml (pending_shorts.py) |
 | 07:50 Sun | packaging mining (titles, tags, thumbnails, channel setup; 3 adjacent niches) | packaging-mining.yml |
 | 08:05 | hide remaining Portuguese uploads | channel-privacy.yml |
 | 08:30 Sun | structure mining of migration/mining/structure_channels.txt | structure-mining.yml |

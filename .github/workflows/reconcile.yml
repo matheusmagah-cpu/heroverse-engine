@@ -1,0 +1,32 @@
+name: HeroVerse reconcile (retry approvals that errored and publications that failed)
+# 07:20 UTC is right after the YouTube Data API day resets (uploads that failed on quota succeed then); the other
+# two runs catch provider errors during the day. Only due pilots (publishing within 48 h, not on YouTube) are touched.
+on:
+  schedule:
+    - cron: '20 7 * * *'
+    - cron: '20 13 * * *'
+    - cron: '20 19 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  reconcile:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Dispatch what is due
+        run: |
+          python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json reconcile 48 > "$RUNNER_TEMP/todo"
+          [ -s "$RUNNER_TEMP/todo" ] || { echo "NOTHING_TO_RECONCILE"; exit 0; }
+          while read -r action pilot; do
+            echo "$action $pilot"
+            case "$action" in
+              approve) gh workflow run approve.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" ;;
+              publish) gh workflow run publish.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" -f publish_at="" ;;
+            esac
+          done < "$RUNNER_TEMP/todo"

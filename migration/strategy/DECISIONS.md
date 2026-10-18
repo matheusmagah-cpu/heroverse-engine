@@ -52,3 +52,21 @@ The goal is YPP in 14 days (30 at most), and the system is being validated to be
 - **Cost:** at most 1.3 watch hours (1.7% of 76.9).
 - **Change:** the 4 ids are added to `channel/privacy-plan.json` (`policy_hidden`, with reasons); the daily 08:05 UTC privacy job sets them private.
 - **Measure:** the channel's public watch hours (expected drop ≤ 1.3 h); reversible at any time.
+
+### D-2026-10-18-03 — One Short per long video (from three)
+- **Evidence:** `strategy/MARKET_FORECAST_TIME_TO_YPP_20261017.md` (panel 2026-10-17, Wilson 90% intervals). Share of channels over the YPP proxy at 0–30 days:
+
+  | Strategy | Share |
+  |---|---|
+  | Long-form ≥ 20 min, ≤ 20% Shorts | 23% (5/22) |
+  | Mixed long + Shorts | 4% (1/26) |
+  | Shorts-heavy | 3% (3/118) |
+
+  The fast profile (45 channels) has a median Shorts share of 0%. Subscribers are the binding constraint, at 8.8 per 1,000 long-form views. Shorts views count for neither the watch-hour path nor the long-form conversion.
+- **Change:** 3 candidates selected (was 5); only the best watched-review score is published (was 3). pilot-002 keeps short-02 (9/10). This follows the owner rule: Shorts stay, as the gateway to the long video.
+- **Checked:** `publish_shorts`, `pending_shorts` and preflight count only Shorts marked to publish. Fewer candidates save private minutes and Gemini calls.
+- **Measure:** subscribers gained per Short and the Short→long click path (Analytics) over 7 days. Raise back to 2 per long video if Shorts bring ≥ 30% of the subscribers gained at under 30% of uploads.
+
+### Robustness (no verdict change)
+- `long_review.py`: provider errors write `status: ERROR` (retried), distinct from FAIL (never retried).
+- `reconcile.yml` at 07:20, 13:20 and 19:20 UTC re-dispatches approval for due QA-PASS renders with no review or an ERROR review, and publication for approved files not yet on YouTube. 07:20 is right after the Data API day resets, so an upload that failed on quota succeeds then.
