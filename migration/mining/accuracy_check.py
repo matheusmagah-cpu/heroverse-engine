@@ -82,12 +82,17 @@ def check(structure_dir, profiles_dir):
 
 
 def pick(structure_dir, n=12):
-    """Openings (0-30 s) of a third of the videos, mid-video beats of the rest; 30 s each, one per video."""
+    """Openings (0-30 s) of a third of the videos, mid-video beats of the rest; 30 s each, one per video,
+    skipping videos an earlier accuracy run already compared (daily runs add new evidence only)."""
+    done = set()
+    for f in glob.glob(str(Path(structure_dir).parent / "*" / "accuracy.json")):
+        done |= {w["video_id"] for w in json.load(open(f)).get("windows", []) if w.get("status") == "COMPARED"}
     picks = []
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from blueprint_stats import BORROWED
     clean = [(v, r) for v, r in sorted(records(structure_dir).items()) if not BORROWED.search(r["video"]["title"])
              and ((r.get("measured") or {}).get("speech") or {}).get("words_per_minute", 0) >= 40]  # narrated only
+    clean = [(v, r) for v, r in clean if v not in done]
     for i, (vid, r) in enumerate(clean):
         beats = [b for w in r["windows"] for b in w.get("beats", []) if b.get("opening_words_verbatim") not in (None, "", "UNKNOWN")]
         if not beats:

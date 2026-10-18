@@ -1,7 +1,7 @@
 name: HeroVerse full-structure mining (whole videos of winning channels)
 on:
   schedule:
-    - cron: '30 8 * * 0'   # weekly, channels from migration/mining/structure_channels.txt (living intelligence)
+    - cron: '30 8 * * *'   # daily and incremental (living intelligence): only new uploads cost Gemini calls
   workflow_dispatch:
     inputs:
       channels:
@@ -41,6 +41,9 @@ jobs:
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
           day=$(date -u +%Y%m%d); echo "DAY=$day" >> "$GITHUB_ENV"
           out="migration/evidence/structure-mining/$day"; mkdir -p "$out"
+          # incremental: start from the previous run's complete records (identical files cost nothing in git)
+          prev=$(ls -d migration/evidence/structure-mining/2* 2>/dev/null | grep -v "/$day$" | sort | tail -1)
+          [ -n "$prev" ] && [ -z "$(ls "$out"/structure-*.json 2>/dev/null)" ] && cp "$prev"/structure-*.json "$out"/ 2>/dev/null || true
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/structure_mining.py "$out" "$CHANNELS" "$PER_CHANNEL"
       - name: Record
         if: always()
