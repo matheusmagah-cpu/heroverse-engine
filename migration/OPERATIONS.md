@@ -7,6 +7,7 @@ Read this file first. **It wins over every other document.** The only documents 
 - `strategy/MODELING_SPEC.md`: what each format must contain (with the rules it cites: `BEAT_THE_REFERENCE_RULE.md`,
   `FORMAT_OPINION_AND_CRITIQUE.md`, `FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md`).
 - `strategy/VIDIQ.md`: the vidIQ research plan.
+- `ops/ERRORS.json`: every error made, its fix and the automatic antidote that stops it coming back.
 
 Everything else is evidence (`evidence/`, `receipts/`, registered forecasts) or instrument documentation
 (`diagnostics/*/README.md`); it records what happened and directs nothing. The older plans and policies (integration
@@ -34,6 +35,11 @@ views in 90 d) in 14 days from 2026-10-18; 30 days at most.
 **Changes.** A change of strategy, format, packaging or cadence needs evidence of ≥ 90 % (one-sided p < 0.10, better
 p < 0.01) of a clear effect toward the goal (`strategy/DECISIONS.md`). Defect fixes, policy compliance and conformance
 to the registered strategy are always done. Nothing is removed to make the system worse; tools are added to improve.
+
+**Errors.** Every error is fixed **and** gets an antidote in the same PR: an automatic check or test that fails if
+the same error comes back, plus one line in `ops/ERRORS.json` (what happened, fix, antidote). PR checks fail a line
+whose antidote does not exist (`ops/test_errors_register.py`). The same error twice is a defect of the antidote and is
+fixed there. This applies to Claude's errors, Dot's and the pipeline's.
 
 **Policy.** No borrowed identities or recordings, fear-bait, fabricated prophecy, reused content, health or wealth
 promises. Original text; KJV Scripture quoted exactly. English only; Portuguese uploads stay hidden (reversible).
