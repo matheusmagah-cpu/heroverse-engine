@@ -34,6 +34,7 @@ SCENE_S = 7.0
 FIGURE_H = 960
 MOVES = ("dolly_in", "crane_up", "truck_left", "arc", "dolly_out", "truck_right")
 CTA = "Full prayer on the channel ▶"
+HOOK_S = 2.5
 LEAN = {"the", "a", "an", "to", "of", "and", "or", "in", "on", "at", "for", "with", "your", "my", "his", "that", "is", "be"}
 
 HEAD = """[Script Info]
@@ -96,10 +97,13 @@ def captions(moment):
 
 
 def ass(moment, hook, reference, dur):
-    # the hook (first 2.5 s) and the CTA (last 4 s) share the slot under the top bar; never over the face
-    lines = [f"Dialogue: 5,{ts(0)},{ts(min(2.5, dur))},Hook,,0,0,0,,{{\\fad(0,200)}}{ass_text(hook)}"]
-    if reference:
-        lines.append(f"Dialogue: 3,{ts(0.4)},{ts(dur)},Ref,,0,0,0,,{{\\fad(300,0)}}{ass_text(reference)}")
+    # the hook (first 2.5 s) and the CTA (last 4 s) share the slot under the top bar; never over the face.
+    # The reference sits just under that slot and a two-line hook reaches into it, so it enters when the hook
+    # has gone (the watched review saw them overlap at 0-2 s on every pilot-003 Short with a reference).
+    hook_end = min(HOOK_S, dur)
+    lines = [f"Dialogue: 5,{ts(0)},{ts(hook_end)},Hook,,0,0,0,,{{\\fad(0,200)}}{ass_text(hook)}"]
+    if reference and dur > hook_end:
+        lines.append(f"Dialogue: 3,{ts(hook_end)},{ts(dur)},Ref,,0,0,0,,{{\\fad(300,0)}}{ass_text(reference)}")
     lines += captions(moment)
     lines.append(f"Dialogue: 5,{ts(max(0, dur - 4.0))},{ts(dur)},Cta,,0,0,0,,{{\\fad(200,0)}}{ass_text(CTA)}")
     return HEAD + "\n".join(lines) + "\n"
