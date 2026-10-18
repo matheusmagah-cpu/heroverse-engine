@@ -1,11 +1,242 @@
 {
  "version": "mining-accuracy-v1",
  "structure_dir": "migration/evidence/structure-mining/20261017",
- "windows_compared": 0,
- "transcript_agreement_median": null,
- "transcript_agreement_min": null,
- "opening_words_agreement": null,
- "openings_checked": 0,
- "windows": [],
+ "windows_compared": 10,
+ "transcript_agreement_median": 0.881,
+ "transcript_agreement_min": 0.109,
+ "opening_words_agreement": 0.733,
+ "openings_checked": 15,
+ "windows": [
+  {
+   "video_id": "0UTESr_lC2A",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 81,
+   "mined_words": 89,
+   "transcript_agreement": 0.953,
+   "openings_checked": 2,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "Heavenly Father as this new morning",
+     "found": true
+    },
+    {
+     "mined": "Heavenly Father you are the eternal",
+     "found": true
+    }
+   ]
+  },
+  {
+   "video_id": "6Q98ZRdnzw8",
+   "window": [
+    719,
+    749
+   ],
+   "status": "COMPARED",
+   "asr_words": 73,
+   "mined_words": 55,
+   "transcript_agreement": 0.109,
+   "openings_checked": 1,
+   "openings_found": 0,
+   "examples": [
+    {
+     "mined": "There is one more almond image",
+     "found": false
+    }
+   ]
+  },
+  {
+   "video_id": "6iERK-74EWg",
+   "window": [
+    572,
+    602
+   ],
+   "status": "COMPARED",
+   "asr_words": 76,
+   "mined_words": 80,
+   "transcript_agreement": 0.782,
+   "openings_checked": 1,
+   "openings_found": 0,
+   "examples": [
+    {
+     "mined": "Notice what has happened to",
+     "found": false
+    }
+   ]
+  },
+  {
+   "video_id": "8YXRtsNnGX0",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 64,
+   "mined_words": 893,
+   "transcript_agreement": 0.121,
+   "openings_checked": 2,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "It is the ninth hour.",
+     "found": true
+    },
+    {
+     "mined": "You know this moment.",
+     "found": true
+    }
+   ]
+  },
+  {
+   "video_id": "9iVoAk5NZAM",
+   "window": [
+    989,
+    1019
+   ],
+   "status": "NO_SPEECH_TO_COMPARE",
+   "asr_words": 71,
+   "mined_words": 0
+  },
+  {
+   "video_id": "FEyv4xRoPzs",
+   "window": [
+    1198,
+    1228
+   ],
+   "status": "COMPARED",
+   "asr_words": 67,
+   "mined_words": 87,
+   "transcript_agreement": 0.195,
+   "openings_checked": 2,
+   "openings_found": 0,
+   "examples": [
+    {
+     "mined": "And there was a rainbow round",
+     "found": false
+    },
+    {
+     "mined": "That is interesting because the Greek",
+     "found": false
+    }
+   ]
+  },
+  {
+   "video_id": "MAZXkEhdKU8",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 118,
+   "mined_words": 120,
+   "transcript_agreement": 0.992,
+   "openings_checked": 2,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "There was a woman in the Bible",
+     "found": true
+    },
+    {
+     "mined": "She became known as the mistress of evil",
+     "found": true
+    }
+   ]
+  },
+  {
+   "video_id": "NUXLAy7A8TM",
+   "window": [
+    518,
+    548
+   ],
+   "status": "COMPARED",
+   "asr_words": 78,
+   "mined_words": 77,
+   "transcript_agreement": 0.968,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "Heavenly Father, I pray for the",
+     "found": true
+    }
+   ]
+  },
+  {
+   "video_id": "STcBN9l5rfU",
+   "window": [
+    336,
+    366
+   ],
+   "status": "COMPARED",
+   "asr_words": 108,
+   "mined_words": 114,
+   "transcript_agreement": 0.946,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "Why do they do this? Zoroastrians consider",
+     "found": true
+    }
+   ]
+  },
+  {
+   "video_id": "TGdYF8jDdXk",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 62,
+   "mined_words": 74,
+   "transcript_agreement": 0.897,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "As the first light of Friday",
+     "found": true
+    }
+   ]
+  },
+  {
+   "video_id": "VGv3fbxG7OI",
+   "window": [
+    429,
+    459
+   ],
+   "status": "NO_SPEECH_TO_COMPARE",
+   "asr_words": 65,
+   "mined_words": 0
+  },
+  {
+   "video_id": "_WD8NVhD5Ps",
+   "window": [
+    332,
+    362
+   ],
+   "status": "COMPARED",
+   "asr_words": 86,
+   "mined_words": 92,
+   "transcript_agreement": 0.865,
+   "openings_checked": 2,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "He also believed these structures",
+     "found": true
+    },
+    {
+     "mined": "The Assyrian message. In 2025,",
+     "found": true
+    }
+   ]
+  }
+ ],
  "reading": "agreement >= 0.85 and openings >= 0.8: mined structure usable as measured; below: model-reported only"
 }
