@@ -1,0 +1,296 @@
+{
+ "version": "vidiq-validation-v1",
+ "at": "2026-10-18",
+ "n": 30,
+ "pre_registered_in": "strategy/VIDIQ.md (PR #107, before any call)",
+ "criterion": "one-sided Spearman rho >= 0.5 with p < 0.10 between vidIQ volume and our measured demand",
+ "our_measure": "median views/day of the channels our Data API panel finds for the query (panel-20261017/18)",
+ "results": {
+  "estimated_monthly_searches": {
+   "spearman_rho": 0.404,
+   "p_one_sided": 0.0142
+  },
+  "volume_score": {
+   "spearman_rho": 0.404,
+   "p_one_sided": 0.014
+  },
+  "overall_score": {
+   "spearman_rho": 0.097,
+   "p_one_sided": 0.3005
+  }
+ },
+ "pass_primary": false,
+ "rows": {
+  "bible facts": {
+   "vidiq": {
+    "volume": 67.9,
+    "est_monthly": 35353,
+    "competition": 51.5,
+    "overall": 60.14
+   },
+   "ours_median_views_per_day": 1744.8
+  },
+  "bible stories": {
+   "vidiq": {
+    "volume": 88.88,
+    "est_monthly": 899199,
+    "competition": 64,
+    "overall": 67.73
+   },
+   "ours_median_views_per_day": 337.8
+  },
+  "bible study": {
+   "vidiq": {
+    "volume": 80.49,
+    "est_monthly": 246756,
+    "competition": 36.3,
+    "overall": 73.78
+   },
+   "ours_median_views_per_day": 1908.9
+  },
+  "bible verses": {
+   "vidiq": {
+    "volume": 74.63,
+    "est_monthly": 99821,
+    "competition": 35.2,
+    "overall": 70.7
+   },
+   "ours_median_views_per_day": 274.5
+  },
+  "christian motivation": {
+   "vidiq": {
+    "volume": 79.58,
+    "est_monthly": 214396,
+    "competition": 44.4,
+    "overall": 69.99
+   },
+   "ours_median_views_per_day": 263.0
+  },
+  "christian music": {
+   "vidiq": {
+    "volume": 82.71,
+    "est_monthly": 347576,
+    "competition": 48.5,
+    "overall": 70.23
+   },
+   "ours_median_views_per_day": 9504.9
+  },
+  "christian shorts": {
+   "vidiq": {
+    "volume": 70.91,
+    "est_monthly": 56270,
+    "competition": 37,
+    "overall": 67.75
+   },
+   "ours_median_views_per_day": 787.0
+  },
+  "daily devotion": {
+   "vidiq": {
+    "volume": 61.03,
+    "est_monthly": 12250,
+    "competition": 71,
+    "overall": 48.22
+   },
+   "ours_median_views_per_day": 251.4
+  },
+  "devotional": {
+   "vidiq": {
+    "volume": 74.71,
+    "est_monthly": 101093,
+    "competition": 73,
+    "overall": 55.63
+   },
+   "ours_median_views_per_day": 3750.3
+  },
+  "end times prophecy": {
+   "vidiq": {
+    "volume": 63.31,
+    "est_monthly": 17424,
+    "competition": 39.1,
+    "overall": 62.35
+   },
+   "ours_median_views_per_day": 282.6
+  },
+  "faith encouragement": {
+   "vidiq": {
+    "volume": 53.6,
+    "est_monthly": 3898,
+    "competition": 32,
+    "overall": 59.36
+   },
+   "ours_median_views_per_day": 187.3
+  },
+  "god is telling you": {
+   "vidiq": {
+    "volume": 53.09,
+    "est_monthly": 3599,
+    "competition": 51.3,
+    "overall": 51.33
+   },
+   "ours_median_views_per_day": 1244.6
+  },
+  "god message for you today": {
+   "vidiq": {
+    "volume": 69.37,
+    "est_monthly": 44383,
+    "competition": 38,
+    "overall": 66.42
+   },
+   "ours_median_views_per_day": 636.1
+  },
+  "god says": {
+   "vidiq": {
+    "volume": 77.9,
+    "est_monthly": 165342,
+    "competition": 60.1,
+    "overall": 62.7
+   },
+   "ours_median_views_per_day": 4706.0
+  },
+  "gospel": {
+   "vidiq": {
+    "volume": 88.42,
+    "est_monthly": 837616,
+    "competition": 48.9,
+    "overall": 73.49
+   },
+   "ours_median_views_per_day": 1764.5
+  },
+  "holy spirit": {
+   "vidiq": {
+    "volume": 76.74,
+    "est_monthly": 138379,
+    "competition": 61,
+    "overall": 61.65
+   },
+   "ours_median_views_per_day": 3631.0
+  },
+  "jesus christ": {
+   "vidiq": {
+    "volume": 79.19,
+    "est_monthly": 201661,
+    "competition": 64.5,
+    "overall": 61.71
+   },
+   "ours_median_views_per_day": 120619.3
+  },
+  "jesus message": {
+   "vidiq": {
+    "volume": 67.94,
+    "est_monthly": 35575,
+    "competition": 34.1,
+    "overall": 67.12
+   },
+   "ours_median_views_per_day": 3327.3
+  },
+  "morning prayer": {
+   "vidiq": {
+    "volume": 90.38,
+    "est_monthly": 1133695,
+    "competition": 71,
+    "overall": 65.83
+   },
+   "ours_median_views_per_day": 5696.8
+  },
+  "night prayer before sleep": {
+   "vidiq": {
+    "volume": 64.79,
+    "est_monthly": 21906,
+    "competition": 47.5,
+    "overall": 59.88
+   },
+   "ours_median_views_per_day": 151.0
+  },
+  "powerful prayer": {
+   "vidiq": {
+    "volume": 71.39,
+    "est_monthly": 60580,
+    "competition": 47.1,
+    "overall": 63.99
+   },
+   "ours_median_views_per_day": 475.3
+  },
+  "prayer for financial breakthrough": {
+   "vidiq": {
+    "volume": 66.82,
+    "est_monthly": 29943,
+    "competition": 55.5,
+    "overall": 57.89
+   },
+   "ours_median_views_per_day": 297.6
+  },
+  "prayer for healing": {
+   "vidiq": {
+    "volume": 73.86,
+    "est_monthly": 88641,
+    "competition": 47.4,
+    "overall": 65.35
+   },
+   "ours_median_views_per_day": 153.1
+  },
+  "prayer for my family": {
+   "vidiq": {
+    "volume": 59.26,
+    "est_monthly": 9322,
+    "competition": 56.9,
+    "overall": 52.79
+   },
+   "ours_median_views_per_day": 254.4
+  },
+  "prayer for protection": {
+   "vidiq": {
+    "volume": 74.88,
+    "est_monthly": 103741,
+    "competition": 48.5,
+    "overall": 65.53
+   },
+   "ours_median_views_per_day": 1614.6
+  },
+  "psalm 23": {
+   "vidiq": {
+    "volume": 75.27,
+    "est_monthly": 110276,
+    "competition": 36.4,
+    "overall": 70.6
+   },
+   "ours_median_views_per_day": 90.1
+  },
+  "psalm 91": {
+   "vidiq": {
+    "volume": 80.86,
+    "est_monthly": 261183,
+    "competition": 37.3,
+    "overall": 73.6
+   },
+   "ours_median_views_per_day": 313.6
+  },
+  "scripture for sleep": {
+   "vidiq": {
+    "volume": 53.55,
+    "est_monthly": 3866,
+    "competition": 44.5,
+    "overall": 54.33
+   },
+   "ours_median_views_per_day": 454.2
+  },
+  "sermon": {
+   "vidiq": {
+    "volume": 73.85,
+    "est_monthly": 88490,
+    "competition": 56,
+    "overall": 61.91
+   },
+   "ours_median_views_per_day": 5910.5
+  },
+  "worship songs": {
+   "vidiq": {
+    "volume": 90.52,
+    "est_monthly": 1158500,
+    "competition": 54.9,
+    "overall": 72.35
+   },
+   "ours_median_views_per_day": 514.8
+  }
+ },
+ "limits": "cross-sectional, one day; our measure is channel-level (whole channel views/age), not per-query video views; vidIQ volumes are modelled estimates"
+}
