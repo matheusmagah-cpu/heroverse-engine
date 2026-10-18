@@ -47,6 +47,32 @@ class Queue(unittest.TestCase):
             self.assertTrue(rq.due(t, {}, NOW, 48)[0]["rendered"])
             self.assertEqual(rq.due(t, {"entries": {"pilot-003:x": {"video_id": "v"}}}, NOW, 48), [])
 
+    def test_reconcile_retries_errors_and_failed_publications(self):
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as t:
+            for name, review, approved in (("pilot-003", "ERROR", False), ("pilot-004", None, True), ("pilot-005", "FAIL", False)):
+                pilot(t, name, "2026-10-19T10:00:00Z", rendered=True)
+                d = Path(t) / name
+                (d / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x"}))
+                if review:
+                    (d / "out" / "review.json").write_text(json.dumps({"status": review, "output_sha256": "x"}))
+                if approved:
+                    (d / "inspection").mkdir()
+                    (d / "inspection" / "APPROVAL.json").write_text(json.dumps({"approved": True, "output_sha256": "x"}))
+            buf = io.StringIO()
+            real = rq.datetime
+            class Fixed(real):
+                @classmethod
+                def now(cls, tz=None):
+                    return NOW
+            rq.datetime = Fixed
+            try:
+                with contextlib.redirect_stdout(buf):
+                    rq.main(t, str(Path(t) / "none.json"), "reconcile")
+            finally:
+                rq.datetime = real
+            self.assertEqual(buf.getvalue().split("\n")[:-1], ["approve pilot-003", "publish pilot-004"])
+
 
 if __name__ == "__main__":
     unittest.main()

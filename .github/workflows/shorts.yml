@@ -79,10 +79,10 @@ jobs:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
           T="$RUNNER_TEMP"; d="migration/production/$PILOT"; py="$T/cine/bin/python"
-          $py -I -B migration/production/shorts_select.py "$T/work/timeline.json" "$d/script.json" "$T/work/shorts/selection.json" 5
+          $py -I -B migration/production/shorts_select.py "$T/work/timeline.json" "$d/script.json" "$T/work/shorts/selection.json" 3
           $py -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "$d/script.json" "$T/in/img" \
             "$T/in/figure.png" "$T/in/music.flac" "$T/work/shorts" "$T/models/depth.onnx"
-          $py -I -B migration/production/shorts_review.py "$T/work/shorts" 3
+          $py -I -B migration/production/shorts_review.py "$T/work/shorts" 1  # D-2026-10-18-03: one Short per long video
       - name: Preserve privately and record
         run: |
           T="$RUNNER_TEMP"; d="migration/production/$PILOT/shorts"
