@@ -26,12 +26,7 @@ The owner uses vidIQ (app.vidiq.com, channel HeroVerse connected; screenshot 202
 | AI titles/thumbnails/ideas | not used to decide | our packaging is mined and gated; an AI suggestion is not evidence |
 | Any change of strategy, format, packaging or cadence | only through the owner's 90 % rule (DECISIONS.md) | vidIQ numbers alone never pass it |
 
-Cadence (owner, 2026-10-18): **at most 1 research call a day**, on the most important decision in the queue; its
-result is saved and reused by every later step (script, title/thumbnail, pre-publication package). A research that
-needs more calls or credits is announced to the owner first. Every call goes in `evidence/vidiq/ledger.json`
-(`market_evidence.py budget` tells whether today's call is still free). Account calls (balance, linked channel) cost 0.
-Plan: the connected account has 6,000 renewable credits a month + 120 add-on (read 2026-10-18; renews 2026-11-18);
-research tools cost 5 credits. No plan change or purchase.
+Cadence: superseded by the 30-day plan below (owner delegated the management, 2026-10-18).
 
 ## Validation before vidIQ may break a tie between topics (pre-registered)
 - Sample: the 30 queries of our market panel (`market-panel/panel-*.json`), plus the next 10 script topics.
@@ -65,6 +60,25 @@ needed (reversible; reconnect any time).
 - Available in the main Claude Code session (and the daily analysis bound to it): yes (tools listed and called).
 - Fresh routine sessions: no (they have no repository access). GitHub Actions: no (would need a read-only vidIQ API
   key as a secret; not configured, owner decision).
+
+## 30-day plan (2026-10-18 → 2026-11-18, one credit cycle) — vidIQ adds, nothing is removed
+Caps (enforced by `market_evidence.py budget`): ≤ 10 research calls a day, ≤ 2,000 credits in the cycle (of 6,000);
+beyond that only after telling the owner. Every call in `evidence/vidiq/ledger.json`; every result saved and reused.
+
+| Tool (5 credits) | What it adds to HeroVerse | Where it enters | Cadence |
+|---|---|---|---|
+| `video_transcript` | YouTube captions of reference videos: an independent instrument for the mining-accuracy check (the miner FAILED 0.50) and for wpm/beat/structure measures | `mining/accuracy_check.py` holdout, structure mining | setup ~20, then ~10/week |
+| `outliers` | comparable videos that beat their channel, with dates: comparables of each topic, candidates for `structure_channels.txt`, title/thumbnail patterns | per-pilot opinion; mining list | 1 per pilot topic; 3 formats at setup; weekly refresh |
+| `comment_insights` (discover/validate) | what the prayer audience asks for and dislikes; test of a topic idea against real comments | script topic and angle (before writing) | discover 2 at setup; validate 1 per new script |
+| `keyword_research` (research / rising) | demand and rising topics (validated only as direction: ρ 0.40) | topic priority in the queue | 1 per script; rising weekly |
+| `score_title` | comparison of 2 title variants we wrote (unvalidated; later checked against our CTR) | pre-publication package (informative) | 2 per pilot |
+| `channel_performance_trends` | view curve of comparable channels: 24/48 h benchmark for our videos | measurement plan in DECISIONS | weekly, 3 channels |
+| `similar_channels` | competitors of the niche for the mining list | `structure_channels.txt` review | once |
+| not used | own-channel analytics (official API already), subscriber overlap (channel too small), media generators (own pipeline), every write tool (denied) | — | — |
+
+Budget estimate: setup ≈ 130, per-video ≈ 1,200, weekly ≈ 340 → ≈ 1,700 credits in the cycle.
+Validation duties: `score_title` vs our CTR and outlier patterns vs our results are measured before either may
+pass the owner's 90% rule; transcripts are compared with our own ASR like any instrument.
 
 ## Place in the existing flow (no new routine)
 1. Daily analysis (08:05 UTC, main session): picks the queue's most important open decision (next script's topic,
