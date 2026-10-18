@@ -84,3 +84,12 @@ The goal is YPP in 14 days (30 at most), and the system is being validated to be
 - **Evidence:** `evidence/structure-mining/20261017` (policy-clean winners, model transcripts). 13 of 20 videos ask to subscribe (65%), always with a reason ("subscribe so you can keep walking through the text with us"). Comments 11/20, share 9/20. Our CTAs asked for "amen" only. Subscribers are the binding constraint (8.8 per 1,000 long-form views).
 - **Change:** pilots 003–006: "subscribe, so tomorrow's prayer is waiting for you / ready when you lie down", kept after the payoff (morning) or before the sleep section (night). No early or repeated asks: the prayer is not interrupted.
 - **Measure:** subscribers gained per 1,000 views per video (Analytics), against 8.8 (market median) and our earlier videos.
+
+### Measurement 2026-10-18 — mining accuracy vs native audio (first run)
+- **File:** `evidence/structure-mining/20261017/accuracy.json`. 10 windows compared, 2 without speech.
+- **Results:**
+  - Transcript agreement: median 0.881. Openings (0–30 s) score 0.90–0.99.
+  - Three mid-video windows score 0.11–0.20. One of them has both opening phrases found, so the text is right and the mined timestamps drift late in long videos.
+  - Opening-words agreement: 0.733 (11/15).
+- **Reading:** content and openings are usable. Mid-video timing is not yet measured-grade. Beat and shot counts stay reported rows, not hard gates (MODELING_SPEC section 3).
+- **Next:** the weekly run repeats this. If the drift persists, structure mining moves to shorter windows (180 s) so timestamps stay anchored.
