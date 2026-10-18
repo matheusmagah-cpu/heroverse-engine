@@ -52,6 +52,7 @@ class Scorecard(unittest.TestCase):
         sys.path.insert(0, str(HERE.parent / "publish"))
         import prepublish_gate
         self.assertEqual(lr.REVIEW_MODELS, prepublish_gate.REVIEW_MODELS)
+        self.assertEqual(lr.sr.REVIEW_MODELS, prepublish_gate.REVIEW_MODELS)    # Shorts review: same reviewer
 
 
 if __name__ == "__main__":

@@ -27,6 +27,7 @@ BASE = "https://generativelanguage.googleapis.com"
 RUBRIC = ("hook_in_first_2s", "captions_readable_and_synced", "text_clear_of_shorts_ui", "picture_quality",
           "edit_rhythm", "audio_clarity", "stands_alone", "ending_and_loop", "policy_safe")
 PASS_ITEM, PASS_OVERALL = 7, 8
+REVIEW_MODELS = ("gemini-3.8-flash",)  # same tuple as publish/prepublish_gate.py
 
 
 def request(url, key, data=None, headers=None, method="GET"):
@@ -69,7 +70,8 @@ def review(path, record, key):
         payload = {"contents": [{"role": "user", "parts": [{"fileData": {"fileUri": f["uri"], "mimeType": "video/mp4"}},
                                                             {"text": prompt}]}],
                    "generationConfig": {"maxOutputTokens": 4096, "responseMimeType": "application/json", "responseSchema": schema}}
-        model, r = call(payload, key, list(FREE_MODELS))
+        # only the designated reviewer decides (same rule as the long video; fallback models score differently)
+        model, r = call(payload, key, list(REVIEW_MODELS))
     finally:
         try:
             request(BASE + "/v1beta/" + f["name"], key, method="DELETE")

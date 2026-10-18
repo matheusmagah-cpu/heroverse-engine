@@ -48,6 +48,14 @@ def due(production, ledger, now, hours):
     return sorted(out, key=lambda x: x["publish_at"])
 
 
+def reviewed_shorts(path):
+    """True when Shorts exist and at least one got a verdict (PASS or FAIL) from the watched review; Shorts left
+    unreviewed (provider quota or error, NOT_REVIEWED_*) are made again."""
+    if not path.exists():
+        return False
+    return any((s.get("review") or {}).get("status") in ("PASS", "FAIL") for s in json.loads(path.read_text())["shorts"])
+
+
 def main(production, ledger_path, mode, hours="48"):
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
     rows = due(production, ledger, datetime.now(timezone.utc), int(hours))
@@ -73,7 +81,7 @@ def main(production, ledger_path, mode, hours="48"):
             elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:
                 print("approve", r["pilot"])
             # Shorts handed off by the render but never made (provider quota or error): made again
-            if (d / "shorts" / "inputs.json").exists() and not (d / "shorts" / "shorts.json").exists():
+            if (d / "shorts" / "inputs.json").exists() and not reviewed_shorts(d / "shorts" / "shorts.json"):
                 print("shorts", r["pilot"])
     else:
         nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"]), None)
