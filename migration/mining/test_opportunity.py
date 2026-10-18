@@ -1,8 +1,11 @@
 """Known-answer tests for interval growth and within-channel cohorts."""
 import datetime as dt
+from pathlib import Path
+import sys
 import unittest
 
-import opportunity as o
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import opportunity as o  # noqa: E402
 
 T0 = dt.datetime(2026, 10, 14, tzinfo=dt.timezone.utc)
 
