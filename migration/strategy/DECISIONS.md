@@ -20,6 +20,29 @@ The goal is YPP in 14 days (30 at most), and the system is being validated to be
 3. **Apply** only to pilots not yet rendered. Criteria of a rendered pilot and frozen QA criteria are never edited.
 4. **Measure:** our own Analytics per video (watch hours, average view %, subscribers gained) at 48 h and 7 days; keep, adjust or revert, and write the outcome here.
 
+## The 99% rule (owner, 2026-10-18, supersedes looser wording above)
+A change happens **only** when the evidence shows, with about 99% confidence, a clear effect toward the goal:
+- **Statistics:** one-sided p < 0.01, or a 99% confidence interval that excludes "no improvement".
+- **Data:** our own Analytics first, then market data with an adequate sample.
+- **Mechanism:** a plausible link from the change to subscribers/day or watch hours/day.
+- **Checks:** consequences checked across the pipeline.
+
+Otherwise nothing changes. The daily analysis still runs and records measurements, but it does not act on weaker evidence.
+
+**Not "changes" (always done):**
+- fixing defects (bugs, failures, broken automation);
+- compliance with the owner's fixed rules (policy, zero cost, English-only);
+- execution drifting from the strategy registered before publication (`MARKET_FORECAST_TIME_TO_YPP_20261017.md`: daily original 25–40 min prayer videos, Shorts as acquisition).
+
+**Applied to today's decisions:**
+
+| Decision | Evidence | Confidence | Outcome |
+|---|---|---|---|
+| D-03 (1 Short per long) | 5/22 vs 1/26 | Fisher p = 0.062 (94%) | **reverted** to 3 Shorts per long video |
+| D-05 (subscribe ask) | 13/20 winners | no comparison group, not testable | **reverted** in pilots 004–006 (pilot-003 had already rendered with it) |
+| D-01/D-04 (length) | 5/22 vs 1/7 | p = 0.55, not a proven improvement | **kept as conformance**: they return execution to the registered 25–40 min strategy that the 15-min scripts had drifted from |
+| D-02 (hide 4 fear-bait videos) | owner policy | compliance | **kept** |
+
 ## Ledger
 
 ### D-2026-10-18-01 — Night prayer to ~33–40 min (from ~15)
