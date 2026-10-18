@@ -31,6 +31,7 @@ BACKGROUND_TARGET = 9.0
 HOLD_MAX = 18.0
 FIGURE_HEIGHT = 1000
 FIGURE_X = 30
+BREATH = "0.012*sin(2*PI*t/7)"
 BOX = (1010, 330, 1850, 750)
 BADGES = ("SUBSCRIBE", "LIKE", "SHARE")
 BADGE_SECONDS = 6.0
@@ -169,8 +170,18 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     refs = {seg["id"]: seg["reference"] for seg in script["segments"] if seg.get("reference")} or REFERENCES
     for seg in timeline["segments"]:
         if seg["id"] in refs:
-            add("Ref", seg["start"], seg["end"], refs[seg["id"]], 4)
+            add("Ref", seg["start"], reference_end(seg, timeline["sentences"]), refs[seg["id"]], 4)
     return head + "\n".join(lines) + "\n"
+
+
+KJV = re.compile(r"\b(thee|thou|thy|thine|ye|unto|hath|shalt|shall|art|LORD|saith|doth|cometh)\b")
+
+
+def reference_end(seg, sentences):
+    """The reference stays while the Scripture is read: until the last KJV sentence of the segment, not over
+    the words that follow it in the same segment (pilot-003: 'Numbers 6:24-26' stayed over 'In Jesus' name, amen')."""
+    quoted = [s["end"] for s in sentences if s["segment"] == seg["id"] and KJV.search(s["text"])]
+    return max(quoted) if quoted else seg["end"]
 
 
 def holds(script, timeline, total):
@@ -327,7 +338,10 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
     (work / "captions.ass").write_text(build_ass(script, timeline, total))
     final = work / "pilot.mp4"
     title_end = script["overlay"]["title_card_seconds"]
-    graph = (f"[2:v]scale=-1:{FIGURE_HEIGHT}[fg];[0:v][fg]overlay=x={FIGURE_X}:y=H-h:enable='gte(t,{title_end})'"
+    # the figure breathes (scale +-1.2 %, 7 s) and drifts (+-6 px, 11 s): the watched review of pilot-003 scored
+    # pacing 6.5 for a figure "completely static with zero pose variation or subtle animation" for 14 minutes
+    graph = (f"[2:v]scale=w=-2:h='trunc({FIGURE_HEIGHT}*(1+{BREATH})/2)*2':eval=frame[fg];"
+             f"[0:v][fg]overlay=x='{FIGURE_X}+6*sin(2*PI*t/11)':y=H-h:eval=frame:enable='gte(t,{title_end})'"
              if moving else "[0:v]null")
     if cine:  # film finish on picture and figure together, under the captions (text stays clean)
         graph += f"[pic];[pic]{cinematic.LOOK}"
