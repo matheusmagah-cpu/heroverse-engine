@@ -43,7 +43,7 @@ def main(runs_json, report_md, now=None):
     now = hb.ts(now) if now else datetime.now(timezone.utc)
     rows, alerts = check(json.load(open(runs_json)), now)
     md = ["", "## Scheduler health (heartbeat.yml; GitHub drops crons, the heartbeat catches up)",
-          *(f"- ⚠ {a}" for a in alerts or ["all scheduled work ran"]),
+          *([f"- ⚠ {a}" for a in alerts] or ["- all scheduled work ran"]),
           "| workflow | last run (UTC) | result |", "|---|---|---|",
           *(f"| {r['workflow']} | {(r['last_run'] or '-')[:16]} | {r['last_result'] or '-'}{' ⚠' if r['missed'] else ''} |" for r in rows)]
     with open(report_md, "a") as f:
