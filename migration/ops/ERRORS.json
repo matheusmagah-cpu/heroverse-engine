@@ -170,6 +170,16 @@
     "file": "migration/ops/test_card_check.py",
     "contains": "def test_deadline_after_the_runway_fails"
    }
+  },
+  {
+   "id": "E18",
+   "date": "2026-10-18",
+   "error": "Scripts 003-006 broke the modeling beat order (hook 43-47 words instead of a promise spoken by 8 s; first prayer at 1:36 in 003) and acceptance did not check it",
+   "fix": "script_check enforces HOOK_TOO_LONG (> 20 words), FIRST_PRAYER_LATE (> 90 s), CTA_BEFORE_PAYOFF; hooks of 005/006 rewritten before render (003/004 already rendered, frozen)",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_modeling_beat_order"
+   }
   }
  ]
 }

@@ -26,6 +26,10 @@ RISK = re.compile(r"(?i)prophec|warning|hiding from you|they don.?t want you|bef
                   r"is here!|exposed|banned|last chance")
 PROMISE = re.compile(r"(?i)guarantee|you will be healed|instantly healed|money will come|get rich|miracle money")
 FORMULA = ("stillness", "cta", "blessing")   # channel formulas (breathing guide, call to action, closing blessing)
+# modeling (strategy/MODELING_SPEC.md section 1, beat order): the promise is spoken by 8 s, the first prayer
+# starts by 1:30, the CTA comes only after the payoff
+HOOK_MAX_WORDS = 20          # 8.6 s at WPM
+FIRST_PRAYER_MAX_S = 90
 SHINGLE = 12
 MAX_SHARED = 3
 
@@ -84,6 +88,20 @@ def check(pilot_dir, production=None):
         problems.append(f"LENGTH {minutes:.1f} min outside {fmt} band {lo}-{hi}")
     if speech < SPEECH_MIN:
         problems.append(f"SPEECH_PRESENCE_EST {speech:.3f} < {SPEECH_MIN}")
+    if segs and ids[0] == "hook" and len(words(segs[0].get("text", ""))) > HOOK_MAX_WORDS:
+        problems.append(f"HOOK_TOO_LONG {len(words(segs[0].get('text', '')))} words > {HOOK_MAX_WORDS} (promise spoken by 8 s)")
+    t, first_prayer = 0.0, None
+    for x in segs:
+        if x.get("id", "").startswith("prayer"):
+            first_prayer = t
+            break
+        t += len(words(x.get("text", ""))) / WPM * 60 + float(x.get("pause_after", 0))
+    if first_prayer is None or first_prayer > FIRST_PRAYER_MAX_S:
+        problems.append(f"FIRST_PRAYER_LATE {'none' if first_prayer is None else f'{first_prayer:.0f} s'} > {FIRST_PRAYER_MAX_S} s")
+    if "payoff" not in ids or "cta" not in ids:
+        problems.append("PAYOFF_OR_CTA_MISSING")
+    elif ids.index("cta") < ids.index("payoff"):
+        problems.append("CTA_BEFORE_PAYOFF")
     refs = sum(1 for x in segs if x.get("reference"))
     per10 = refs / max(minutes, 1e-6) * 10
     if per10 < 4:

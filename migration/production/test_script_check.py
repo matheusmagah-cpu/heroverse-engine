@@ -60,6 +60,20 @@ class Check(unittest.TestCase):
                 x["pause_after"] = 4.0
         self.assertTrue(any(p.startswith("SPEECH_PRESENCE_EST") for p in self.run_check(silent)))
 
+    def test_modeling_beat_order(self):
+        def long_hook(s, d):
+            s["segments"][0]["text"] = "Good morning. " + "Stay with me for a few minutes and breathe slowly, " * 3
+        self.assertTrue(any(p.startswith("HOOK_TOO_LONG") for p in self.run_check(long_hook)))
+        def late_prayer(s, d):
+            first = next(i for i, x in enumerate(s["segments"]) if x["id"].startswith("prayer"))
+            s["segments"].insert(first, {"id": "reflection-extra", "beat": "x", "pause_after": 1.0, "text": "word " * 300})
+        self.assertTrue(any(p.startswith("FIRST_PRAYER_LATE") for p in self.run_check(late_prayer)))
+        def cta_first(s, d):
+            ids = [x["id"] for x in s["segments"]]
+            i, j = ids.index("payoff"), ids.index("cta")
+            s["segments"][i]["id"], s["segments"][j]["id"] = "cta", "payoff"
+        self.assertIn("CTA_BEFORE_PAYOFF", self.run_check(cta_first))
+
     def test_reused_images_must_be_hydrated(self):
         def unhydrated(s, d):
             (d / "images" / "figure-a.json").unlink()
