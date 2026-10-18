@@ -1,7 +1,7 @@
 {
  "version": "shorts-select-v1",
  "pilot_id": "pilot-004",
- "rubric_model": "gemini-3.5-flash-lite",
+ "rubric_model": "gemini-3.8-flash",
  "candidates_considered": 924,
  "shortlist": [
   {
@@ -81,19 +81,223 @@
    },
    "rubric": {
     "index": 0,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 7,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "Starts strong with a firm statement of security. Great flow into a bedtime blessing.",
-    "hook_line": "You will not be moved tonight.",
-    "title": "A Peaceful Prayer Before Sleep"
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Opens with an authoritative reassurance and finishes with a full bedtime blessing and scripture benediction.",
+    "hook_line": "You will not be moved tonight",
+    "title": "A Bedtime Blessing for Deep Peace | 2 Thessalonians 3:16"
    },
-   "final_score": 0.8892,
-   "hook": "You will not be moved tonight.",
-   "title": "A Peaceful Prayer Before Sleep"
+   "final_score": 0.9042,
+   "hook": "You will not be moved tonight",
+   "title": "A Bedtime Blessing for Deep Peace | 2 Thessalonians 3:16"
+  },
+  {
+   "start": 237.575,
+   "end": 284.272,
+   "sentences": [
+    {
+     "segment": "prayer-confession",
+     "text": "Father, I also bring you what I regret.",
+     "start": 237.575,
+     "end": 240.796
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "The impatient word.",
+     "start": 240.976,
+     "end": 242.832
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "The thing I should have done and did not.",
+     "start": 243.012,
+     "end": 245.913
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "The moment I chose myself over someone else.",
+     "start": 246.093,
+     "end": 249.677
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I do not want to carry guilt into my sleep.",
+     "start": 249.857,
+     "end": 253.057
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I confess it to you honestly, and I receive your forgiveness.",
+     "start": 253.237,
+     "end": 257.888
+    },
+    {
+     "segment": "scripture-4",
+     "text": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.",
+     "start": 259.268,
+     "end": 268.377
+    },
+    {
+     "segment": "reflection-4",
+     "text": "Faithful and just.",
+     "start": 270.057,
+     "end": 271.849
+    },
+    {
+     "segment": "reflection-4",
+     "text": "God does not forgive you reluctantly.",
+     "start": 272.029,
+     "end": 274.995
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He forgives you because he promised he would, and he always keeps his promises.",
+     "start": 275.175,
+     "end": 280.7
+    },
+    {
+     "segment": "reflection-4",
+     "text": "So tonight you can lay your head down clean.",
+     "start": 280.88,
+     "end": 284.272
+    }
+   ],
+   "segments": [
+    "prayer-confession",
+    "scripture-4",
+    "reflection-4"
+   ],
+   "reference": "1 John 1:9 (KJV)",
+   "measured_score": 0.8322,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6796116504854368,
+    "scripture": 1.0,
+    "promise": 0.970873786407767,
+    "resolution": 0.4,
+    "length_fit": 0.7321199999999999
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 8.5,
+    "stands_alone": 10.0,
+    "emotional_payoff": 10.0,
+    "shareability": 9.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Tackles bedtime guilt with honest vulnerability and delivers a powerful, liberating gospel conclusion.",
+    "hook_line": "Do not carry guilt into sleep",
+    "title": "Lay Your Head Down Clean Tonight | 1 John 1:9"
+   },
+   "final_score": 0.8929,
+   "hook": "Do not carry guilt into sleep",
+   "title": "Lay Your Head Down Clean Tonight | 1 John 1:9"
+  },
+  {
+   "start": 1777.869,
+   "end": 1823.885,
+   "sentences": [
+    {
+     "segment": "sleep-reflect-16",
+     "text": "Your body can rest tonight, not because every problem is solved, but because your hope is in God.",
+     "start": 1777.869,
+     "end": 1784.931
+    },
+    {
+     "segment": "sleep-reflect-16",
+     "text": "He is at your right hand.",
+     "start": 1785.111,
+     "end": 1787.308
+    },
+    {
+     "segment": "sleep-reflect-16",
+     "text": "You will not be moved.",
+     "start": 1787.488,
+     "end": 1789.451
+    },
+    {
+     "segment": "sleep-prayer-3",
+     "text": "Lord, as sleep comes, I place myself completely in your hands.",
+     "start": 1791.131,
+     "end": 1796.08
+    },
+    {
+     "segment": "sleep-prayer-3",
+     "text": "My body, my mind, my heart, my family, my tomorrow.",
+     "start": 1796.26,
+     "end": 1800.825
+    },
+    {
+     "segment": "sleep-prayer-3",
+     "text": "Watch over me through the night, and wake me to your mercy in the morning.",
+     "start": 1801.005,
+     "end": 1805.869
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing as you sleep.",
+     "start": 1807.549,
+     "end": 1810.707
+    },
+    {
+     "segment": "blessing",
+     "text": "Now the Lord of peace himself give you peace always by all means.",
+     "start": 1810.887,
+     "end": 1816.007
+    },
+    {
+     "segment": "blessing",
+     "text": "The Lord be with you all.",
+     "start": 1816.187,
+     "end": 1818.149
+    },
+    {
+     "segment": "blessing",
+     "text": "Sleep well, in the shelter of his love.",
+     "start": 1818.329,
+     "end": 1821.252
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 1821.432,
+     "end": 1823.885
+    }
+   ],
+   "segments": [
+    "sleep-reflect-16",
+    "sleep-prayer-3",
+    "blessing"
+   ],
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "measured_score": 0.8357,
+   "features": {
+    "opening_short": 0.2,
+    "opening_direct": 1.0,
+    "second_person": 0.8653846153846153,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.7593599999999969
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 9.0,
+    "stands_alone": 10.0,
+    "emotional_payoff": 10.0,
+    "shareability": 9.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Bridges realistic calm into total surrender and an authentic liturgical benediction.",
+    "hook_line": "You can rest before problems solve",
+    "title": "Sleep Well in the Shelter of His Love"
+   },
+   "final_score": 0.8893
   },
   {
    "start": 1741.676,
@@ -190,125 +394,34 @@
    },
    "rubric": {
     "index": 9,
-    "hook_first_2s": 9,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 9,
-    "policy_safe": 10,
-    "reasons": "Strong anchor on stability and hope. The ending seamlessly loops to the start.",
-    "hook_line": "Lean your whole weight on Him.",
-    "title": "Your Flesh Shall Rest In Hope"
+    "hook_first_2s": 9.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Powerful physical metaphor in hook, completes Psalm 16 beautifully, loops seamlessly back to start.",
+    "hook_line": "Lean your whole weight on Him",
+    "title": "You Can Rest Even If Unresolved | Psalm 16"
    },
-   "final_score": 0.8766
+   "final_score": 0.8816
   },
   {
-   "start": 237.575,
-   "end": 284.272,
+   "start": 141.756,
+   "end": 184.817,
    "sentences": [
     {
-     "segment": "prayer-confession",
-     "text": "Father, I also bring you what I regret.",
-     "start": 237.575,
-     "end": 240.796
+     "segment": "prayer-worries",
+     "text": "One by one, I open my hands and give them to you.",
+     "start": 141.756,
+     "end": 145.66
     },
     {
-     "segment": "prayer-confession",
-     "text": "The impatient word.",
-     "start": 240.976,
-     "end": 242.832
+     "segment": "prayer-worries",
+     "text": "I cannot solve them tonight.",
+     "start": 145.84,
+     "end": 148.144
     },
-    {
-     "segment": "prayer-confession",
-     "text": "The thing I should have done and did not.",
-     "start": 243.012,
-     "end": 245.913
-    },
-    {
-     "segment": "prayer-confession",
-     "text": "The moment I chose myself over someone else.",
-     "start": 246.093,
-     "end": 249.677
-    },
-    {
-     "segment": "prayer-confession",
-     "text": "I do not want to carry guilt into my sleep.",
-     "start": 249.857,
-     "end": 253.057
-    },
-    {
-     "segment": "prayer-confession",
-     "text": "I confess it to you honestly, and I receive your forgiveness.",
-     "start": 253.237,
-     "end": 257.888
-    },
-    {
-     "segment": "scripture-4",
-     "text": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.",
-     "start": 259.268,
-     "end": 268.377
-    },
-    {
-     "segment": "reflection-4",
-     "text": "Faithful and just.",
-     "start": 270.057,
-     "end": 271.849
-    },
-    {
-     "segment": "reflection-4",
-     "text": "God does not forgive you reluctantly.",
-     "start": 272.029,
-     "end": 274.995
-    },
-    {
-     "segment": "reflection-4",
-     "text": "He forgives you because he promised he would, and he always keeps his promises.",
-     "start": 275.175,
-     "end": 280.7
-    },
-    {
-     "segment": "reflection-4",
-     "text": "So tonight you can lay your head down clean.",
-     "start": 280.88,
-     "end": 284.272
-    }
-   ],
-   "segments": [
-    "prayer-confession",
-    "scripture-4",
-    "reflection-4"
-   ],
-   "reference": "1 John 1:9 (KJV)",
-   "measured_score": 0.8322,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 0.6796116504854368,
-    "scripture": 1.0,
-    "promise": 0.970873786407767,
-    "resolution": 0.4,
-    "length_fit": 0.7321199999999999
-   },
-   "rubric": {
-    "index": 12,
-    "hook_first_2s": 9,
-    "stands_alone": 9,
-    "emotional_payoff": 10,
-    "shareability": 9,
-    "loop_potential": 7,
-    "policy_safe": 10,
-    "reasons": "Tackles guilt and regret directly, offering a profound sense of a clean slate for sleep.",
-    "hook_line": "Do not carry guilt into sleep.",
-    "title": "Lay Your Head Down Clean Tonight"
-   },
-   "final_score": 0.8729,
-   "hook": "Do not carry guilt into sleep.",
-   "title": "Lay Your Head Down Clean Tonight"
-  },
-  {
-   "start": 148.324,
-   "end": 187.835,
-   "sentences": [
     {
      "segment": "prayer-worries",
      "text": "You can hold them while I sleep.",
@@ -356,12 +469,6 @@
      "text": "Sleep can rest your body, but only he can rest the part of you that keeps running even when your eyes are closed.",
      "start": 177.031,
      "end": 184.817
-    },
-    {
-     "segment": "reflection-3",
-     "text": "He is gentle and humble in heart.",
-     "start": 184.997,
-     "end": 187.835
     }
    ],
    "segments": [
@@ -370,31 +477,214 @@
     "reflection-3"
    ],
    "reference": "Matthew 11:28-30 (KJV)",
-   "measured_score": 0.8818,
+   "measured_score": 0.8139,
    "features": {
-    "opening_short": 1.0,
+    "opening_short": 0.6,
     "opening_direct": 1.0,
-    "second_person": 0.8247422680412371,
+    "second_person": 0.8411214953271027,
     "scripture": 1.0,
     "promise": 1.0,
     "resolution": 0.4,
-    "length_fit": 0.9804399999999999
+    "length_fit": 0.8775599999999997
    },
    "rubric": {
-    "index": 2,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "The distinction between resting the body and resting the soul is a powerful emotional hook.",
-    "hook_line": "Let God hold your worries.",
-    "title": "Jesus Promises Rest For Your Soul"
+    "index": 14,
+    "hook_first_2s": 9.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 10.0,
+    "shareability": 9.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Captures bedtime anxiety immediately and ends on an unforgettable insight about soul exhaustion.",
+    "hook_line": "I cannot solve them tonight",
+    "title": "Rest for the Part of You Still Awake"
    },
-   "final_score": 0.8727,
-   "hook": "Let God hold your worries.",
-   "title": "Jesus Promises Rest For Your Soul"
+   "final_score": 0.8806,
+   "hook": "I cannot solve them tonight",
+   "title": "Rest for the Part of You Still Awake"
+  },
+  {
+   "start": 1791.131,
+   "end": 1823.885,
+   "sentences": [
+    {
+     "segment": "sleep-prayer-3",
+     "text": "Lord, as sleep comes, I place myself completely in your hands.",
+     "start": 1791.131,
+     "end": 1796.08
+    },
+    {
+     "segment": "sleep-prayer-3",
+     "text": "My body, my mind, my heart, my family, my tomorrow.",
+     "start": 1796.26,
+     "end": 1800.825
+    },
+    {
+     "segment": "sleep-prayer-3",
+     "text": "Watch over me through the night, and wake me to your mercy in the morning.",
+     "start": 1801.005,
+     "end": 1805.869
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing as you sleep.",
+     "start": 1807.549,
+     "end": 1810.707
+    },
+    {
+     "segment": "blessing",
+     "text": "Now the Lord of peace himself give you peace always by all means.",
+     "start": 1810.887,
+     "end": 1816.007
+    },
+    {
+     "segment": "blessing",
+     "text": "The Lord be with you all.",
+     "start": 1816.187,
+     "end": 1818.149
+    },
+    {
+     "segment": "blessing",
+     "text": "Sleep well, in the shelter of his love.",
+     "start": 1818.329,
+     "end": 1821.252
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 1821.432,
+     "end": 1823.885
+    }
+   ],
+   "segments": [
+    "sleep-prayer-3",
+    "blessing"
+   ],
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "measured_score": 0.861,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.6666666666666666,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.7101599999999962
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 8.0,
+    "stands_alone": 10.0,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Self-contained evening prayer and benediction with a complete narrative arc and gentle resolution.",
+    "hook_line": "Place your tomorrow in God's hands",
+    "title": "Receive This Blessing Before You Sleep"
+   },
+   "final_score": 0.8794
+  },
+  {
+   "start": 425.028,
+   "end": 474.817,
+   "sentences": [
+    {
+     "segment": "reflection-6",
+     "text": "To you the night may feel long and heavy.",
+     "start": 425.028,
+     "end": 428.015
+    },
+    {
+     "segment": "reflection-6",
+     "text": "To God, it shines like the day.",
+     "start": 428.195,
+     "end": 430.904
+    },
+    {
+     "segment": "reflection-6",
+     "text": "He sees you as clearly at midnight as he did at noon.",
+     "start": 431.084,
+     "end": 435.244
+    },
+    {
+     "segment": "reflection-6",
+     "text": "Nothing that happens in the dark is hidden from him, and nothing in the dark can separate you from his love.",
+     "start": 435.424,
+     "end": 442.72
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, I give you my thoughts.",
+     "start": 444.1,
+     "end": 446.404
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "When my mind starts replaying the day or rehearsing tomorrow, bring it back to you.",
+     "start": 446.584,
+     "end": 452.707
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace every anxious thought with a promise from your word.",
+     "start": 452.887,
+     "end": 457.132
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Let my last thoughts tonight be thoughts of your goodness.",
+     "start": 457.312,
+     "end": 460.896
+    },
+    {
+     "segment": "scripture-9",
+     "text": "Jesus said, Peace I leave with you, my peace I give unto you:",
+     "start": 462.276,
+     "end": 466.777
+    },
+    {
+     "segment": "scripture-9",
+     "text": "not as the world giveth, give I unto you.",
+     "start": 466.957,
+     "end": 470.371
+    },
+    {
+     "segment": "scripture-9",
+     "text": "Let not your heart be troubled, neither let it be afraid.",
+     "start": 470.551,
+     "end": 474.817
+    }
+   ],
+   "segments": [
+    "reflection-6",
+    "prayer-mind",
+    "scripture-9"
+   ],
+   "reference": "John 14:27 (KJV)",
+   "measured_score": 0.855,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8943089430894309,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.6084400000000005
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 9.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 9.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Exceptional opening hook addressing nocturnal loneliness directly, backed by John 14:27 comfort.",
+    "hook_line": "The night is not dark to God",
+    "title": "When the Night Feels Too Heavy | John 14:27"
+   },
+   "final_score": 0.872
   },
   {
    "start": 1733.913,
@@ -503,128 +793,206 @@
    },
    "rubric": {
     "index": 13,
-    "hook_first_2s": 9,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 9,
-    "policy_safe": 10,
-    "reasons": "A comprehensive release of lingering sadness and worry with a powerful loop.",
-    "hook_line": "Pour out your last worry.",
-    "title": "Pour Out Your Last Worry To God"
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Invites total emotional surrender, grounded in strong Psalm 16 scripture with a comforting payoff.",
+    "hook_line": "Pour out the last worry tonight",
+    "title": "He Is Your Rock Tonight | Psalm 16"
    },
-   "final_score": 0.8684
+   "final_score": 0.8634
   },
   {
-   "start": 1791.131,
-   "end": 1823.885,
+   "start": 452.887,
+   "end": 491.532,
    "sentences": [
     {
-     "segment": "sleep-prayer-3",
-     "text": "Lord, as sleep comes, I place myself completely in your hands.",
-     "start": 1791.131,
-     "end": 1796.08
+     "segment": "prayer-mind",
+     "text": "Replace every anxious thought with a promise from your word.",
+     "start": 452.887,
+     "end": 457.132
     },
     {
-     "segment": "sleep-prayer-3",
-     "text": "My body, my mind, my heart, my family, my tomorrow.",
-     "start": 1796.26,
-     "end": 1800.825
+     "segment": "prayer-mind",
+     "text": "Let my last thoughts tonight be thoughts of your goodness.",
+     "start": 457.312,
+     "end": 460.896
     },
     {
-     "segment": "sleep-prayer-3",
-     "text": "Watch over me through the night, and wake me to your mercy in the morning.",
-     "start": 1801.005,
-     "end": 1805.869
+     "segment": "scripture-9",
+     "text": "Jesus said, Peace I leave with you, my peace I give unto you:",
+     "start": 462.276,
+     "end": 466.777
     },
     {
-     "segment": "blessing",
-     "text": "And now receive this blessing as you sleep.",
-     "start": 1807.549,
-     "end": 1810.707
+     "segment": "scripture-9",
+     "text": "not as the world giveth, give I unto you.",
+     "start": 466.957,
+     "end": 470.371
     },
     {
-     "segment": "blessing",
-     "text": "Now the Lord of peace himself give you peace always by all means.",
-     "start": 1810.887,
-     "end": 1816.007
+     "segment": "scripture-9",
+     "text": "Let not your heart be troubled, neither let it be afraid.",
+     "start": 470.551,
+     "end": 474.817
     },
     {
-     "segment": "blessing",
-     "text": "The Lord be with you all.",
-     "start": 1816.187,
-     "end": 1818.149
+     "segment": "prayer-body",
+     "text": "Father, I give you my body.",
+     "start": 476.497,
+     "end": 478.887
     },
     {
-     "segment": "blessing",
-     "text": "Sleep well, in the shelter of his love.",
-     "start": 1818.329,
-     "end": 1821.252
+     "segment": "prayer-body",
+     "text": "Heal what hurts.",
+     "start": 479.067,
+     "end": 480.752
     },
     {
-     "segment": "blessing",
-     "text": "In Jesus' name, amen.",
-     "start": 1821.432,
-     "end": 1823.885
+     "segment": "prayer-body",
+     "text": "Ease the tension in my muscles.",
+     "start": 480.932,
+     "end": 483.663
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Slow my breathing and my heartbeat.",
+     "start": 483.843,
+     "end": 486.723
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Give me deep, restful sleep, the kind that truly restores.",
+     "start": 486.903,
+     "end": 491.532
     }
    ],
    "segments": [
-    "sleep-prayer-3",
-    "blessing"
+    "prayer-mind",
+    "scripture-9",
+    "prayer-body"
    ],
-   "reference": "2 Thessalonians 3:16 (KJV)",
-   "measured_score": 0.861,
+   "reference": "John 14:27 (KJV)",
+   "measured_score": 0.8796,
    "features": {
-    "opening_short": 0.6,
+    "opening_short": 1.0,
     "opening_direct": 1.0,
-    "second_person": 0.6666666666666666,
+    "second_person": 0.8333333333333333,
     "scripture": 1.0,
     "promise": 1.0,
-    "resolution": 1.0,
-    "length_fit": 0.7101599999999962
+    "resolution": 0.4,
+    "length_fit": 0.9457999999999993
    },
    "rubric": {
-    "index": 4,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 7,
-    "loop_potential": 9,
-    "policy_safe": 10,
-    "reasons": "Concise, peaceful, and ends with a strong blessing that loops neatly back to the opening.",
-    "hook_line": "Place yourself in His hands.",
-    "title": "A Short Nighttime Blessing"
+    "index": 3,
+    "hook_first_2s": 6.5,
+    "stands_alone": 7.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.0,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Starts mid-sentence without context, but resolves into a soothing prayer for physical rest.",
+    "hook_line": "Trade anxious thoughts for God's promises",
+    "title": "Night Prayer: Trade Anxiety for Peace"
    },
-   "final_score": 0.8644
+   "final_score": 0.7968
   },
   {
-   "start": 425.028,
-   "end": 474.817,
+   "start": 457.312,
+   "end": 491.532,
    "sentences": [
     {
-     "segment": "reflection-6",
-     "text": "To you the night may feel long and heavy.",
-     "start": 425.028,
-     "end": 428.015
+     "segment": "prayer-mind",
+     "text": "Let my last thoughts tonight be thoughts of your goodness.",
+     "start": 457.312,
+     "end": 460.896
     },
     {
-     "segment": "reflection-6",
-     "text": "To God, it shines like the day.",
-     "start": 428.195,
-     "end": 430.904
+     "segment": "scripture-9",
+     "text": "Jesus said, Peace I leave with you, my peace I give unto you:",
+     "start": 462.276,
+     "end": 466.777
     },
     {
-     "segment": "reflection-6",
-     "text": "He sees you as clearly at midnight as he did at noon.",
-     "start": 431.084,
-     "end": 435.244
+     "segment": "scripture-9",
+     "text": "not as the world giveth, give I unto you.",
+     "start": 466.957,
+     "end": 470.371
     },
     {
-     "segment": "reflection-6",
-     "text": "Nothing that happens in the dark is hidden from him, and nothing in the dark can separate you from his love.",
-     "start": 435.424,
-     "end": 442.72
+     "segment": "scripture-9",
+     "text": "Let not your heart be troubled, neither let it be afraid.",
+     "start": 470.551,
+     "end": 474.817
     },
+    {
+     "segment": "prayer-body",
+     "text": "Father, I give you my body.",
+     "start": 476.497,
+     "end": 478.887
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Heal what hurts.",
+     "start": 479.067,
+     "end": 480.752
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Ease the tension in my muscles.",
+     "start": 480.932,
+     "end": 483.663
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Slow my breathing and my heartbeat.",
+     "start": 483.843,
+     "end": 486.723
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Give me deep, restful sleep, the kind that truly restores.",
+     "start": 486.903,
+     "end": 491.532
+    }
+   ],
+   "segments": [
+    "prayer-mind",
+    "scripture-9",
+    "prayer-body"
+   ],
+   "reference": "John 14:27 (KJV)",
+   "measured_score": 0.8585,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8108108108108109,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7687999999999988
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 6.5,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.0,
+    "shareability": 7.0,
+    "loop_potential": 5.5,
+    "policy_safe": 10.0,
+    "reasons": "Beginning feels slightly excerpted, but delivers a very peaceful physical surrender prayer.",
+    "hook_line": "Let your final thoughts be peace",
+    "title": "A Calming Bedtime Scripture and Prayer"
+   },
+   "final_score": 0.7884
+  },
+  {
+   "start": 444.1,
+   "end": 483.663,
+   "sentences": [
     {
      "segment": "prayer-mind",
      "text": "Lord, I give you my thoughts.",
@@ -666,37 +1034,144 @@
      "text": "Let not your heart be troubled, neither let it be afraid.",
      "start": 470.551,
      "end": 474.817
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Father, I give you my body.",
+     "start": 476.497,
+     "end": 478.887
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Heal what hurts.",
+     "start": 479.067,
+     "end": 480.752
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Ease the tension in my muscles.",
+     "start": 480.932,
+     "end": 483.663
     }
    ],
    "segments": [
-    "reflection-6",
     "prayer-mind",
-    "scripture-9"
+    "scripture-9",
+    "prayer-body"
    ],
    "reference": "John 14:27 (KJV)",
-   "measured_score": 0.855,
+   "measured_score": 0.9083,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
-    "second_person": 0.8943089430894309,
+    "second_person": 1.0,
     "scripture": 1.0,
     "promise": 1.0,
     "resolution": 0.4,
-    "length_fit": 0.6084400000000005
+    "length_fit": 0.9825199999999995
    },
    "rubric": {
-    "index": 6,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "The contrast between the dark night and God's light is deeply comforting.",
-    "hook_line": "The night does not hide you.",
-    "title": "God Sees You In The Dark"
+    "index": 1,
+    "hook_first_2s": 7.5,
+    "stands_alone": 6.0,
+    "emotional_payoff": 6.5,
+    "shareability": 6.5,
+    "loop_potential": 4.5,
+    "policy_safe": 10.0,
+    "reasons": "Good relatable prayer for an overthinking mind, but cuts off abruptly mid-prayer at the end.",
+    "hook_line": "When your mind replays the day",
+    "title": "A Night Prayer for an Overthinking Mind"
    },
-   "final_score": 0.862
+   "final_score": 0.0
+  },
+  {
+   "start": 148.324,
+   "end": 187.835,
+   "sentences": [
+    {
+     "segment": "prayer-worries",
+     "text": "You can hold them while I sleep.",
+     "start": 148.324,
+     "end": 150.735
+    },
+    {
+     "segment": "scripture-3",
+     "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+     "start": 152.115,
+     "end": 158.707
+    },
+    {
+     "segment": "scripture-3",
+     "text": "Take my yoke upon you, and learn of me;",
+     "start": 158.887,
+     "end": 162.044
+    },
+    {
+     "segment": "scripture-3",
+     "text": "for I am meek and lowly in heart:",
+     "start": 162.224,
+     "end": 165.019
+    },
+    {
+     "segment": "scripture-3",
+     "text": "and ye shall find rest unto your souls.",
+     "start": 165.199,
+     "end": 168.207
+    },
+    {
+     "segment": "scripture-3",
+     "text": "For my yoke is easy, and my burden is light.",
+     "start": 168.387,
+     "end": 172.056
+    },
+    {
+     "segment": "reflection-3",
+     "text": "Jesus promises rest for your souls.",
+     "start": 173.736,
+     "end": 176.851
+    },
+    {
+     "segment": "reflection-3",
+     "text": "Sleep can rest your body, but only he can rest the part of you that keeps running even when your eyes are closed.",
+     "start": 177.031,
+     "end": 184.817
+    },
+    {
+     "segment": "reflection-3",
+     "text": "He is gentle and humble in heart.",
+     "start": 184.997,
+     "end": 187.835
+    }
+   ],
+   "segments": [
+    "prayer-worries",
+    "scripture-3",
+    "reflection-3"
+   ],
+   "reference": "Matthew 11:28-30 (KJV)",
+   "measured_score": 0.8818,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8247422680412371,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9804399999999999
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 6.0,
+    "stands_alone": 6.5,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
+    "loop_potential": 5.0,
+    "policy_safe": 10.0,
+    "reasons": "Starting with the pronoun them lacks context, though the explanation of soul rest is profound.",
+    "hook_line": "Only God can rest your soul",
+    "title": "Rest for the Part of You Still Running"
+   },
+   "final_score": 0.0
   },
   {
    "start": 95.619,
@@ -805,17 +1280,17 @@
    },
    "rubric": {
     "index": 7,
-    "hook_first_2s": 9,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 7,
-    "policy_safe": 10,
-    "reasons": "Actionable metaphor about casting cares makes for an instant hook.",
-    "hook_line": "Throw your cares away from you.",
-    "title": "Cast All Your Cares On Him"
+    "hook_first_2s": 8.5,
+    "stands_alone": 5.5,
+    "emotional_payoff": 5.0,
+    "shareability": 6.0,
+    "loop_potential": 4.0,
+    "policy_safe": 10.0,
+    "reasons": "Strong biblical insight on casting cares, but ends abruptly in an unfinished list of fears.",
+    "hook_line": "Don't pick up your worries tonight",
+    "title": "What It Really Means to Cast Your Cares"
    },
-   "final_score": 0.8595
+   "final_score": 0.0
   },
   {
    "start": 88.192,
@@ -937,492 +1412,17 @@
    },
    "rubric": {
     "index": 8,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "Brings the listener straight into an active surrender of specific worries.",
-    "hook_line": "Bring it all to Him now.",
-    "title": "Quiet Your Heart And Surrender Worries"
+    "hook_first_2s": 5.0,
+    "stands_alone": 5.0,
+    "emotional_payoff": 4.5,
+    "shareability": 5.5,
+    "loop_potential": 3.5,
+    "policy_safe": 10.0,
+    "reasons": "Weak start on a dangling pronoun and leaves the viewer hanging at the end with unresolved worries.",
+    "hook_line": "God is not tired of your worries",
+    "title": "Surrender Your Anxieties Tonight"
    },
-   "final_score": 0.8583
-  },
-  {
-   "start": 141.756,
-   "end": 184.817,
-   "sentences": [
-    {
-     "segment": "prayer-worries",
-     "text": "One by one, I open my hands and give them to you.",
-     "start": 141.756,
-     "end": 145.66
-    },
-    {
-     "segment": "prayer-worries",
-     "text": "I cannot solve them tonight.",
-     "start": 145.84,
-     "end": 148.144
-    },
-    {
-     "segment": "prayer-worries",
-     "text": "You can hold them while I sleep.",
-     "start": 148.324,
-     "end": 150.735
-    },
-    {
-     "segment": "scripture-3",
-     "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
-     "start": 152.115,
-     "end": 158.707
-    },
-    {
-     "segment": "scripture-3",
-     "text": "Take my yoke upon you, and learn of me;",
-     "start": 158.887,
-     "end": 162.044
-    },
-    {
-     "segment": "scripture-3",
-     "text": "for I am meek and lowly in heart:",
-     "start": 162.224,
-     "end": 165.019
-    },
-    {
-     "segment": "scripture-3",
-     "text": "and ye shall find rest unto your souls.",
-     "start": 165.199,
-     "end": 168.207
-    },
-    {
-     "segment": "scripture-3",
-     "text": "For my yoke is easy, and my burden is light.",
-     "start": 168.387,
-     "end": 172.056
-    },
-    {
-     "segment": "reflection-3",
-     "text": "Jesus promises rest for your souls.",
-     "start": 173.736,
-     "end": 176.851
-    },
-    {
-     "segment": "reflection-3",
-     "text": "Sleep can rest your body, but only he can rest the part of you that keeps running even when your eyes are closed.",
-     "start": 177.031,
-     "end": 184.817
-    }
-   ],
-   "segments": [
-    "prayer-worries",
-    "scripture-3",
-    "reflection-3"
-   ],
-   "reference": "Matthew 11:28-30 (KJV)",
-   "measured_score": 0.8139,
-   "features": {
-    "opening_short": 0.6,
-    "opening_direct": 1.0,
-    "second_person": 0.8411214953271027,
-    "scripture": 1.0,
-    "promise": 1.0,
-    "resolution": 0.4,
-    "length_fit": 0.8775599999999997
-   },
-   "rubric": {
-    "index": 14,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "Opens with the visceral act of opening closed hands to surrender burdens.",
-    "hook_line": "Open your hands and let go.",
-    "title": "Open Your Hands And Receive His Rest"
-   },
-   "final_score": 0.8456
-  },
-  {
-   "start": 1777.869,
-   "end": 1823.885,
-   "sentences": [
-    {
-     "segment": "sleep-reflect-16",
-     "text": "Your body can rest tonight, not because every problem is solved, but because your hope is in God.",
-     "start": 1777.869,
-     "end": 1784.931
-    },
-    {
-     "segment": "sleep-reflect-16",
-     "text": "He is at your right hand.",
-     "start": 1785.111,
-     "end": 1787.308
-    },
-    {
-     "segment": "sleep-reflect-16",
-     "text": "You will not be moved.",
-     "start": 1787.488,
-     "end": 1789.451
-    },
-    {
-     "segment": "sleep-prayer-3",
-     "text": "Lord, as sleep comes, I place myself completely in your hands.",
-     "start": 1791.131,
-     "end": 1796.08
-    },
-    {
-     "segment": "sleep-prayer-3",
-     "text": "My body, my mind, my heart, my family, my tomorrow.",
-     "start": 1796.26,
-     "end": 1800.825
-    },
-    {
-     "segment": "sleep-prayer-3",
-     "text": "Watch over me through the night, and wake me to your mercy in the morning.",
-     "start": 1801.005,
-     "end": 1805.869
-    },
-    {
-     "segment": "blessing",
-     "text": "And now receive this blessing as you sleep.",
-     "start": 1807.549,
-     "end": 1810.707
-    },
-    {
-     "segment": "blessing",
-     "text": "Now the Lord of peace himself give you peace always by all means.",
-     "start": 1810.887,
-     "end": 1816.007
-    },
-    {
-     "segment": "blessing",
-     "text": "The Lord be with you all.",
-     "start": 1816.187,
-     "end": 1818.149
-    },
-    {
-     "segment": "blessing",
-     "text": "Sleep well, in the shelter of his love.",
-     "start": 1818.329,
-     "end": 1821.252
-    },
-    {
-     "segment": "blessing",
-     "text": "In Jesus' name, amen.",
-     "start": 1821.432,
-     "end": 1823.885
-    }
-   ],
-   "segments": [
-    "sleep-reflect-16",
-    "sleep-prayer-3",
-    "blessing"
-   ],
-   "reference": "2 Thessalonians 3:16 (KJV)",
-   "measured_score": 0.8357,
-   "features": {
-    "opening_short": 0.2,
-    "opening_direct": 1.0,
-    "second_person": 0.8653846153846153,
-    "scripture": 1.0,
-    "promise": 1.0,
-    "resolution": 1.0,
-    "length_fit": 0.7593599999999969
-   },
-   "rubric": {
-    "index": 10,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 7,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "Reassures that resting doesn't require solved problems, transitioning into a blessing.",
-    "hook_line": "Your body can rest tonight.",
-    "title": "Rest Because Your Hope Is In God"
-   },
-   "final_score": 0.8443
-  },
-  {
-   "start": 444.1,
-   "end": 483.663,
-   "sentences": [
-    {
-     "segment": "prayer-mind",
-     "text": "Lord, I give you my thoughts.",
-     "start": 444.1,
-     "end": 446.404
-    },
-    {
-     "segment": "prayer-mind",
-     "text": "When my mind starts replaying the day or rehearsing tomorrow, bring it back to you.",
-     "start": 446.584,
-     "end": 452.707
-    },
-    {
-     "segment": "prayer-mind",
-     "text": "Replace every anxious thought with a promise from your word.",
-     "start": 452.887,
-     "end": 457.132
-    },
-    {
-     "segment": "prayer-mind",
-     "text": "Let my last thoughts tonight be thoughts of your goodness.",
-     "start": 457.312,
-     "end": 460.896
-    },
-    {
-     "segment": "scripture-9",
-     "text": "Jesus said, Peace I leave with you, my peace I give unto you:",
-     "start": 462.276,
-     "end": 466.777
-    },
-    {
-     "segment": "scripture-9",
-     "text": "not as the world giveth, give I unto you.",
-     "start": 466.957,
-     "end": 470.371
-    },
-    {
-     "segment": "scripture-9",
-     "text": "Let not your heart be troubled, neither let it be afraid.",
-     "start": 470.551,
-     "end": 474.817
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Father, I give you my body.",
-     "start": 476.497,
-     "end": 478.887
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Heal what hurts.",
-     "start": 479.067,
-     "end": 480.752
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Ease the tension in my muscles.",
-     "start": 480.932,
-     "end": 483.663
-    }
-   ],
-   "segments": [
-    "prayer-mind",
-    "scripture-9",
-    "prayer-body"
-   ],
-   "reference": "John 14:27 (KJV)",
-   "measured_score": 0.9083,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 1.0,
-    "scripture": 1.0,
-    "promise": 1.0,
-    "resolution": 0.4,
-    "length_fit": 0.9825199999999995
-   },
-   "rubric": {
-    "index": 1,
-    "hook_first_2s": 7,
-    "stands_alone": 8,
-    "emotional_payoff": 8,
-    "shareability": 6,
-    "loop_potential": 7,
-    "policy_safe": 10,
-    "reasons": "Addresses racing thoughts well. Very relatable for night-time anxiety.",
-    "hook_line": "Give God your racing thoughts.",
-    "title": "Calm Your Anxious Mind Tonight"
-   },
-   "final_score": 0.8233
-  },
-  {
-   "start": 452.887,
-   "end": 491.532,
-   "sentences": [
-    {
-     "segment": "prayer-mind",
-     "text": "Replace every anxious thought with a promise from your word.",
-     "start": 452.887,
-     "end": 457.132
-    },
-    {
-     "segment": "prayer-mind",
-     "text": "Let my last thoughts tonight be thoughts of your goodness.",
-     "start": 457.312,
-     "end": 460.896
-    },
-    {
-     "segment": "scripture-9",
-     "text": "Jesus said, Peace I leave with you, my peace I give unto you:",
-     "start": 462.276,
-     "end": 466.777
-    },
-    {
-     "segment": "scripture-9",
-     "text": "not as the world giveth, give I unto you.",
-     "start": 466.957,
-     "end": 470.371
-    },
-    {
-     "segment": "scripture-9",
-     "text": "Let not your heart be troubled, neither let it be afraid.",
-     "start": 470.551,
-     "end": 474.817
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Father, I give you my body.",
-     "start": 476.497,
-     "end": 478.887
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Heal what hurts.",
-     "start": 479.067,
-     "end": 480.752
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Ease the tension in my muscles.",
-     "start": 480.932,
-     "end": 483.663
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Slow my breathing and my heartbeat.",
-     "start": 483.843,
-     "end": 486.723
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Give me deep, restful sleep, the kind that truly restores.",
-     "start": 486.903,
-     "end": 491.532
-    }
-   ],
-   "segments": [
-    "prayer-mind",
-    "scripture-9",
-    "prayer-body"
-   ],
-   "reference": "John 14:27 (KJV)",
-   "measured_score": 0.8796,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 0.8333333333333333,
-    "scripture": 1.0,
-    "promise": 1.0,
-    "resolution": 0.4,
-    "length_fit": 0.9457999999999993
-   },
-   "rubric": {
-    "index": 3,
-    "hook_first_2s": 7,
-    "stands_alone": 8,
-    "emotional_payoff": 8,
-    "shareability": 6,
-    "loop_potential": 7,
-    "policy_safe": 10,
-    "reasons": "Good physical relaxation focus paired with scripture, though a bit abrupt at the start.",
-    "hook_line": "Replace every anxious thought.",
-    "title": "Let Go Of Tension And Sleep Well"
-   },
-   "final_score": 0.8118
-  },
-  {
-   "start": 457.312,
-   "end": 491.532,
-   "sentences": [
-    {
-     "segment": "prayer-mind",
-     "text": "Let my last thoughts tonight be thoughts of your goodness.",
-     "start": 457.312,
-     "end": 460.896
-    },
-    {
-     "segment": "scripture-9",
-     "text": "Jesus said, Peace I leave with you, my peace I give unto you:",
-     "start": 462.276,
-     "end": 466.777
-    },
-    {
-     "segment": "scripture-9",
-     "text": "not as the world giveth, give I unto you.",
-     "start": 466.957,
-     "end": 470.371
-    },
-    {
-     "segment": "scripture-9",
-     "text": "Let not your heart be troubled, neither let it be afraid.",
-     "start": 470.551,
-     "end": 474.817
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Father, I give you my body.",
-     "start": 476.497,
-     "end": 478.887
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Heal what hurts.",
-     "start": 479.067,
-     "end": 480.752
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Ease the tension in my muscles.",
-     "start": 480.932,
-     "end": 483.663
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Slow my breathing and my heartbeat.",
-     "start": 483.843,
-     "end": 486.723
-    },
-    {
-     "segment": "prayer-body",
-     "text": "Give me deep, restful sleep, the kind that truly restores.",
-     "start": 486.903,
-     "end": 491.532
-    }
-   ],
-   "segments": [
-    "prayer-mind",
-    "scripture-9",
-    "prayer-body"
-   ],
-   "reference": "John 14:27 (KJV)",
-   "measured_score": 0.8585,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 0.8108108108108109,
-    "scripture": 1.0,
-    "promise": 1.0,
-    "resolution": 0.4,
-    "length_fit": 0.7687999999999988
-   },
-   "rubric": {
-    "index": 5,
-    "hook_first_2s": 7,
-    "stands_alone": 8,
-    "emotional_payoff": 8,
-    "shareability": 6,
-    "loop_potential": 7,
-    "policy_safe": 10,
-    "reasons": "Direct and comforting focus on God's goodness and physical ease.",
-    "hook_line": "Let your last thoughts be good.",
-    "title": "End Your Day In His Peace"
-   },
-   "final_score": 0.8034
+   "final_score": 0.0
   },
   {
    "start": 446.584,
@@ -1507,17 +1507,17 @@
    },
    "rubric": {
     "index": 11,
-    "hook_first_2s": 7,
-    "stands_alone": 8,
-    "emotional_payoff": 8,
-    "shareability": 6,
-    "loop_potential": 7,
-    "policy_safe": 10,
-    "reasons": "Practical transition from mental looping to bodily relaxation.",
-    "hook_line": "Bring your mind back to Him.",
-    "title": "Release Anxiety Before You Sleep"
+    "hook_first_2s": 7.5,
+    "stands_alone": 5.5,
+    "emotional_payoff": 6.5,
+    "shareability": 6.0,
+    "loop_potential": 4.0,
+    "policy_safe": 10.0,
+    "reasons": "Relatable theme of racing thoughts, but begins with a subordinate clause and ends unfinished.",
+    "hook_line": "When your thoughts keep you awake",
+    "title": "Peace for Racing Thoughts at Night"
    },
-   "final_score": 0.7937
+   "final_score": 0.0
   }
  ],
  "chosen": [
@@ -1598,19 +1598,19 @@
    },
    "rubric": {
     "index": 0,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 7,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "Starts strong with a firm statement of security. Great flow into a bedtime blessing.",
-    "hook_line": "You will not be moved tonight.",
-    "title": "A Peaceful Prayer Before Sleep"
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Opens with an authoritative reassurance and finishes with a full bedtime blessing and scripture benediction.",
+    "hook_line": "You will not be moved tonight",
+    "title": "A Bedtime Blessing for Deep Peace | 2 Thessalonians 3:16"
    },
-   "final_score": 0.8892,
-   "hook": "You will not be moved tonight.",
-   "title": "A Peaceful Prayer Before Sleep"
+   "final_score": 0.9042,
+   "hook": "You will not be moved tonight",
+   "title": "A Bedtime Blessing for Deep Peace | 2 Thessalonians 3:16"
   },
   {
    "start": 237.575,
@@ -1701,24 +1701,36 @@
    },
    "rubric": {
     "index": 12,
-    "hook_first_2s": 9,
-    "stands_alone": 9,
-    "emotional_payoff": 10,
-    "shareability": 9,
-    "loop_potential": 7,
-    "policy_safe": 10,
-    "reasons": "Tackles guilt and regret directly, offering a profound sense of a clean slate for sleep.",
-    "hook_line": "Do not carry guilt into sleep.",
-    "title": "Lay Your Head Down Clean Tonight"
+    "hook_first_2s": 8.5,
+    "stands_alone": 10.0,
+    "emotional_payoff": 10.0,
+    "shareability": 9.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Tackles bedtime guilt with honest vulnerability and delivers a powerful, liberating gospel conclusion.",
+    "hook_line": "Do not carry guilt into sleep",
+    "title": "Lay Your Head Down Clean Tonight | 1 John 1:9"
    },
-   "final_score": 0.8729,
-   "hook": "Do not carry guilt into sleep.",
-   "title": "Lay Your Head Down Clean Tonight"
+   "final_score": 0.8929,
+   "hook": "Do not carry guilt into sleep",
+   "title": "Lay Your Head Down Clean Tonight | 1 John 1:9"
   },
   {
-   "start": 148.324,
-   "end": 187.835,
+   "start": 141.756,
+   "end": 184.817,
    "sentences": [
+    {
+     "segment": "prayer-worries",
+     "text": "One by one, I open my hands and give them to you.",
+     "start": 141.756,
+     "end": 145.66
+    },
+    {
+     "segment": "prayer-worries",
+     "text": "I cannot solve them tonight.",
+     "start": 145.84,
+     "end": 148.144
+    },
     {
      "segment": "prayer-worries",
      "text": "You can hold them while I sleep.",
@@ -1766,12 +1778,6 @@
      "text": "Sleep can rest your body, but only he can rest the part of you that keeps running even when your eyes are closed.",
      "start": 177.031,
      "end": 184.817
-    },
-    {
-     "segment": "reflection-3",
-     "text": "He is gentle and humble in heart.",
-     "start": 184.997,
-     "end": 187.835
     }
    ],
    "segments": [
@@ -1780,31 +1786,31 @@
     "reflection-3"
    ],
    "reference": "Matthew 11:28-30 (KJV)",
-   "measured_score": 0.8818,
+   "measured_score": 0.8139,
    "features": {
-    "opening_short": 1.0,
+    "opening_short": 0.6,
     "opening_direct": 1.0,
-    "second_person": 0.8247422680412371,
+    "second_person": 0.8411214953271027,
     "scripture": 1.0,
     "promise": 1.0,
     "resolution": 0.4,
-    "length_fit": 0.9804399999999999
+    "length_fit": 0.8775599999999997
    },
    "rubric": {
-    "index": 2,
-    "hook_first_2s": 8,
-    "stands_alone": 9,
-    "emotional_payoff": 9,
-    "shareability": 8,
-    "loop_potential": 8,
-    "policy_safe": 10,
-    "reasons": "The distinction between resting the body and resting the soul is a powerful emotional hook.",
-    "hook_line": "Let God hold your worries.",
-    "title": "Jesus Promises Rest For Your Soul"
+    "index": 14,
+    "hook_first_2s": 9.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 10.0,
+    "shareability": 9.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Captures bedtime anxiety immediately and ends on an unforgettable insight about soul exhaustion.",
+    "hook_line": "I cannot solve them tonight",
+    "title": "Rest for the Part of You Still Awake"
    },
-   "final_score": 0.8727,
-   "hook": "Let God hold your worries.",
-   "title": "Jesus Promises Rest For Your Soul"
+   "final_score": 0.8806,
+   "hook": "I cannot solve them tonight",
+   "title": "Rest for the Part of You Still Awake"
   }
  ]
 }
