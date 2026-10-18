@@ -1,0 +1,80 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 6,
+    "picture_changes_per_minute": 11.97,
+    "median_shot_seconds": 3.2,
+    "longest_shot_seconds": 11.333,
+    "motion_median_top_decile_diff": 1.274
+   },
+   "rhythm": {
+    "audio_onsets": 47,
+    "audio_onsets_per_minute": 93.79,
+    "tempo": {
+     "bpm": 202.21,
+     "confidence": 0.073
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.167,
+     "chance_fraction": 0.099,
+     "lift": 1.68
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 2,
+     "visual_events": 6
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -21.9,
+    "loudness_range_lu": 9.7,
+    "true_peak_dbtp": -5.5
+   },
+   "colour": {
+    "mean_brightness": 0.596,
+    "brightness_std_over_time": 0.0815,
+    "mean_saturation": 0.2265,
+    "saturation_std_over_time": 0.0571
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 64,
+    "words_per_minute": 127.7,
+    "transcript": "It is the ninth hour. For three hours, darkness has lain over all the land. A man hangs on a Roman cross. A centurion stands facing him, watching. Then the man cries out with a loud voice. lee, I lee, lama sabaktani! My God, my God, why hast thou forsaken me? You know this moment. So here's the question almost nobody asks out loud."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
