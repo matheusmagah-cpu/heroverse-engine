@@ -142,19 +142,37 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
    captions, sync, image, rights, content/policy, scorecard, whole-file scan, preflight).
 4. **Shorts:** `shorts_qa` + watched review by the designated model (items ≥ 7, overall ≥ 8), from QA-PASS renders only.
 
-## Status (2026-10-18 14:30 UTC)
-- **Published:** pilot-002 `v4zN53ZiUIs` (public 2026-10-18 10:00 UTC, owner-approved before the gate existed);
-  its Short `_sUdOLxWy5c` public 14:00 UTC.
-- **Queue:** pilot-003 morning 10-19 10:00 (render PASS QA; gate UNKNOWN until the designated reviewer, retried
-  after the Gemini reset 07:00) · pilot-004 night 10-20 00:00 (re-render QA PASS; gate pending, same) · pilot-005
-  morning Psalm 91 10-20 10:00 (images after 00:00 UTC, then render) · pilot-006 night healing 10-21 00:00 (images
-  after 00:00) · pilot-007 morning 10-21 10:00 (written by Dot, merged, no new images) · pilot-008 night Psalm 23
-  10-22 00:00 (Dot, PR #117 in progress).
-- **Scheduler:** heartbeat + runner-wake (Dot, PR #106) + hourly Claude clock; GitHub crons unreliable. First real
-  runner dispatch expected tonight (pilot-005).
-- **Proofs pending:** first gate PASS on a real render; first runner-wake dispatch; Shorts with the designated
-  reviewer; review calibration; mining holdout; vidIQ title-score vs CTR.
-- **Indicators (official 2026-10-18):** 263 subscribers; public long-form watch hours 365 d ≈ 3.3 (own calc.);
-  public Shorts views 90 d ≈ 40.
-- **Decisions active:** D-01/D-04 lengths (conformance), D-02 fear-bait hidden (compliance), D-03 one Short per
-  long video (p = 0.062, observational). D-05 subscribe ask reverted.
+## Status (2026-10-18 17:20 UTC) — day 1 of the plan
+
+**Publication calendar (UTC; one Short per long video, D-03):**
+
+| Day | Long video | Short | State |
+|---|---|---|---|
+| 10-18 | pilot-002 10:00 ✅ `v4zN53ZiUIs` | 14:00 ✅ `_sUdOLxWy5c` | published |
+| 10-19 | pilot-003 10:00 | 14:00 | render, QA, scan, preflight PASS; Short approved (gemini-3.8-flash). Watched review waits for the Gemini reset 07:00 → approve → upload before 10:00 |
+| 10-20 | pilot-004 00:00 · pilot-005 10:00 | 14:00 · 20:00 | 004 as 003 (Short approved); 005 images after 00:00 UTC, then render |
+| 10-21 | pilot-006 00:00 · pilot-007 10:00 | 14:00 · 20:00 | scripts on main; images and render in the nights before |
+| 10-22 | pilot-008 00:00 · pilot-009 10:00 | 14:00 · 20:00 | 008: Dot finishing PR #117 (card #114 SPEC v2, due 10-19 06:00); 009: card #119 waits TOPIC CONFIRMED |
+| 10-23 | pilot-010 00:00 · (D+4 card) | 14:00 · 20:00 | 010: card #120 waits TOPIC CONFIRMED; next cards opened at each daily analysis |
+
+**Dot:** contract `ops/DOT_PROTOCOL.md` (8-part cards, ALLOWED PATHS enforced by PR checks). Open: #114 (SPEC v2),
+#119, #120. Dot's own 2-hour polling is not yet confirmed; a card not delivered shows up as a Content runway alert.
+
+**Today's changes (all PR checks green):** #121 superseded documents deleted · #122 one Short slot per pilot ·
+#123 late Shorts never take another pilot's slot; more tests in PR checks · #124 Claude–Dot contract with scope check
+· #125 error register with enforced antidotes (`ops/ERRORS.json`) · #126 content runway in the daily report.
+
+**Scheduler:** heartbeat (GitHub crons unreliable: dropped again 14:41) + runner-wake (Dot, PR #106) + hourly Claude
+clock at :14 (dispatching the heartbeat every hour since 12:14).
+
+**Checkpoints:** 02:15 first real runner-wake dispatch (pilot-005) · 06:00 Dot deadline #114 · 07:25 approval of
+pilot-003 (deadline 10:00) and 004 · 08:05 daily analysis (TOPIC CONFIRMED for #119/#120, cards for D+4).
+
+**Not yet proven:** gate PASS on a real render; runner-wake real dispatch; Short reviewed by the designated model and
+published by the pipeline; review calibration; mining holdout; vidIQ title score vs CTR.
+
+**Indicators (official 2026-10-18):** 263 subscribers; public long-form watch hours 365 d ≈ 3.3 (own calc.); public
+Shorts views 90 d ≈ 40.
+
+**Decisions active:** D-01/D-04 lengths (conformance), D-02 fear-bait hidden (compliance), D-03 one Short per long
+video (p = 0.062, observational). D-05 subscribe ask reverted.
