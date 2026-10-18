@@ -37,7 +37,13 @@ jobs:
           fi
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) echo "NO_PILOT"; exit 1;; esac
           echo "PILOT=$PILOT" >> "$GITHUB_ENV"
+          # Shorts are cut only from a render that passed QA (a failed render is re-rendered; its Shorts would be
+          # thrown away after spending the free Gemini day)
+          ok=$(python3 -I -c "import json,sys;q=json.load(open(sys.argv[1]));m=json.load(open(sys.argv[2]));print(int(q['status']=='PASS' and q['output_sha256']==m['output_sha256']))" \
+               "migration/production/$PILOT/out/qa.json" "migration/production/$PILOT/out/manifest.json" 2>/dev/null || echo 0)
+          [ "$ok" = 1 ] || { echo "QA_NOT_PASS: no Shorts from this render"; echo "SKIP=1" >> "$GITHUB_ENV"; }
       - name: Tools, depth model, verified inputs (narration, figure, music, images)
+        if: env.SKIP != '1'
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core >/dev/null
@@ -64,7 +70,7 @@ jobs:
             cp "$meta" "$T/in/img/$id.json"
           done
       - name: Narration and figure regenerated as in the render (only when the render handed off nothing)
-        if: hashFiles(format('migration/production/{0}/shorts/inputs.json', env.PILOT)) == ''
+        if: env.SKIP != '1' && hashFiles(format('migration/production/{0}/shorts/inputs.json', env.PILOT)) == ''
         run: |
           T="$RUNNER_TEMP"; d="migration/production/$PILOT"
           sudo apt-get install -y -qq --no-install-recommends espeak-ng >/dev/null
@@ -75,6 +81,7 @@ jobs:
           fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "$d/script.json")
           "$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"
       - name: Select (whole video, Gemini), produce (own edit, depth parallax), watched review
+        if: env.SKIP != '1'
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
@@ -84,6 +91,7 @@ jobs:
             "$T/in/figure.png" "$T/in/music.flac" "$T/work/shorts" "$T/models/depth.onnx"
           $py -I -B migration/production/shorts_review.py "$T/work/shorts" 1
       - name: Preserve privately and record
+        if: env.SKIP != '1'
         run: |
           T="$RUNNER_TEMP"; d="migration/production/$PILOT/shorts"
           rm -f "$d"/*-frame.jpg
