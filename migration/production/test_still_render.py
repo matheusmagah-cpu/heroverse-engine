@@ -55,7 +55,8 @@ class Reference(unittest.TestCase):
         end = sr.reference_end(seg, timeline["sentences"])
         amen = next(s for s in timeline["sentences"] if s["segment"] == "blessing" and "amen" in s["text"])
         self.assertLessEqual(end, amen["start"])
-        self.assertAlmostEqual(end, 840.795, places=2)            # end of "...and give thee peace."
+        peace = next(s for s in timeline["sentences"] if s["segment"] == "blessing" and "give thee peace" in s["text"])
+        self.assertAlmostEqual(end, peace["end"], places=3)        # end of "...and give thee peace.", from the timeline
 
     def test_whole_segment_when_no_kjv_sentence(self):
         seg = {"id": "s", "start": 1.0, "end": 9.0}
