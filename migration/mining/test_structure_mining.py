@@ -6,9 +6,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import structure_mining as sm  # noqa: E402
 
 
+def narration(start, end, every=5, words=12):
+    """A realistic transcript: one sentence every 5 s, 12 words each (144 wpm), stamped inside the window."""
+    return [{"start_seconds": t, "text": " ".join([f"sentence{t}"] + ["word"] * (words - 1))} for t in range(start, end, every)]
+
+
 def window(start, end, cuts):
     edges = [start, *cuts, end]
     return {"video_id": "abcdefghijk", "window_start_seconds": start, "window_end_seconds": end,
+            "transcript": narration(start, end),
             "audio_received": True, "visual_received": True,
             "beats": [{"start_seconds": a, "end_seconds": b, "beat": "hook" if a == 0 else "teaching",
                        "opening_words_verbatim": "x", "content": "x", "device": "none", "emotion": "calm"}
@@ -17,6 +23,38 @@ def window(start, end, cuts):
 
 
 class StructureMining(unittest.TestCase):
+    # regression cases from the 2026-10-18 accuracy audit (structure-mining/20261017 vs native ASR)
+    def test_transcript_stamped_outside_its_window_is_rejected(self):
+        w = window(900, 1200, [960])  # e.g. 8YXRtsNnGX0 window 900-1200 stamped 15-19 s
+        w["transcript"] = [{"start_seconds": 15 + i * 0.07, "text": f"line{i} " + "word " * 11} for i in range(67)]
+        self.assertIn("TRANSCRIPT_TIME_OUTSIDE_WINDOW", sm.transcript_problems(w, 900, 1200))
+        self.assertFalse(sm.valid_window(w, "abcdefghijk", 900, 1200))
+
+    def test_rescaled_times_are_rejected(self):
+        w = window(300, 600, [400])  # e.g. 6Q98ZRdnzw8 window 300-600 stamped up to 3375 s
+        w["transcript"] = [{"start_seconds": 300 + i * 58.0, "text": f"line{i} " + "word " * 11} for i in range(53)]
+        self.assertIn("TRANSCRIPT_TIME_OUTSIDE_WINDOW", sm.transcript_problems(w, 300, 600))
+
+    def test_whole_window_in_one_line_is_rejected(self):
+        w = window(300, 600, [400])  # e.g. VGv3fbxG7OI window 300-600: one 770-word line
+        w["transcript"] = [{"start_seconds": 305, "text": "word " * 770}]
+        self.assertIn("TRANSCRIPT_LINE_TOO_LONG", sm.transcript_problems(w, 300, 600))
+
+    def test_truncated_transcript_is_rejected(self):
+        w = window(0, 300, [23, 51, 109])  # e.g. 8YXRtsNnGX0 window 0-300: lines stop at 130 s, 207 words
+        w["transcript"] = narration(0, 130, every=5, words=8)
+        self.assertIn("TRANSCRIPT_INCOMPLETE", sm.transcript_problems(w, 0, 300))
+
+    def test_music_only_window_with_no_words_is_valid(self):
+        w = window(0, 300, [20, 140])
+        for b in w["beats"]:
+            b["beat"] = "music_only"
+        w["transcript"] = []
+        self.assertEqual(sm.transcript_problems(w, 0, 300), [])
+
+    def test_normal_narration_has_no_problem(self):
+        self.assertEqual(sm.transcript_problems(window(0, 300, [20, 140]), 0, 300), [])
+
     def test_contiguous_window_is_valid(self):
         self.assertTrue(sm.valid_window(window(0, 300, [20, 140]), "abcdefghijk", 0, 300))
 

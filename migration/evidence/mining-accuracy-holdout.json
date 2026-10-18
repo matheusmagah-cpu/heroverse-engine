@@ -1,0 +1,31 @@
+{
+ "version": "mining-accuracy-holdout-v1",
+ "registered_at": "2026-10-18T03:20:00Z",
+ "rule": "Windows listed under tuning_windows were inspected while diagnosing and fixing the miner and the comparator (2026-10-18). They never count as proof. Precision is proven only on windows acquired after this registration (holdout), judged with the criteria below, fixed before any holdout result exists.",
+ "criteria": {
+  "agreement_min": 0.85,
+  "openings_min": 0.8,
+  "window_pass_rate_min": 0.8,
+  "errors_count_as_failures": [
+   "MINED_WINDOW_INVALID",
+   "MINED_OMISSION",
+   "ASR_SILENT_MINED_SPEECH",
+   "MINED_WINDOW_MISSING"
+  ]
+ },
+ "independence": "Mined transcript: Gemini (structure_mining.py). Reference: our own faster-whisper ASR of the natively acquired window (different model family and pipeline). Neither is assumed correct; conflicts are reported, not resolved by preference.",
+ "tuning_windows": [
+  "0UTESr_lC2A:0:30",
+  "6Q98ZRdnzw8:719:749",
+  "6iERK-74EWg:572:602",
+  "8YXRtsNnGX0:0:30",
+  "9iVoAk5NZAM:989:1019",
+  "FEyv4xRoPzs:1198:1228",
+  "MAZXkEhdKU8:0:30",
+  "NUXLAy7A8TM:518:548",
+  "STcBN9l5rfU:336:366",
+  "TGdYF8jDdXk:0:30",
+  "VGv3fbxG7OI:429:459",
+  "_WD8NVhD5Ps:332:362"
+ ]
+}
