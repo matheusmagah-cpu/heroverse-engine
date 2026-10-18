@@ -35,6 +35,10 @@ import sys
 VERSION = "prepublish-gate-v1"
 FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"}
 PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
+# the watched review decides only when the designated model answered. Fallback free models score the same file
+# very differently (pilot-003: gemini-3.8-flash audio 9 / picture 8.5 / policy 10; gemini-3.6-flash on a near-identical
+# render 6.8 / 6.7 / 7.0; flash-lite gave 8-10 to four of five pilot-002 Shorts): their answer is UNKNOWN, retried
+REVIEW_MODELS = ("gemini-3.8-flash",)
 
 # dimension -> qa checks (whole file, deterministic) and review rubric items (sampled, model)
 DIMENSIONS = {
@@ -115,6 +119,8 @@ def review_items(review, names, sha):
     if review.get("status") not in ("PASS", "FAIL"):
         return [item("review", n, "UNKNOWN", f"review {review.get('status')}: {review.get('error', '')}"[:200]) for n in names]
     w = review.get("watched_review") or {}
+    if w.get("model") not in REVIEW_MODELS:
+        return [item("review", n, "UNKNOWN", f"reviewer model {w.get('model')} is not the designated one") for n in names]
     out = []
     for n in names:
         v = w.get(n)
@@ -139,6 +145,8 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     w = (review or {}).get("watched_review") or {}
     if review is None or review.get("output_sha256") != sha or review.get("status") not in ("PASS", "FAIL"):
         overall = [item("review", "overall", "UNKNOWN", "no completed watched review for this file")]
+    elif w.get("model") not in REVIEW_MODELS:
+        overall = [item("review", "overall", "UNKNOWN", f"reviewer model {w.get('model')} is not the designated one")]
     elif not isinstance(w.get("overall"), (int, float)):
         overall = [item("review", "overall", "UNKNOWN", "score absent")]
     else:

@@ -27,6 +27,7 @@ import structure_mining as sm  # noqa: E402
 RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integrity", "captions_readable_and_synced",
           "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 PASS_ITEM, PASS_OVERALL = 7, 8
+REVIEW_MODELS = ("gemini-3.8-flash",)  # same tuple as publish/prepublish_gate.py
 # hard rows (block) and reported rows (winner bands, MODELING_SPEC.md section 1), prayer format.
 # minutes and scripture are measured on our own file and script (deterministic). The miner-derived rows block
 # only once the miner's accuracy is proven on the holdout (mining-accuracy-v2 verdict PASS): on pilot-003 the
@@ -80,7 +81,9 @@ def watch(file, title, key):
                                                         {"text": prompt}]}],
                "generationConfig": {"maxOutputTokens": 4096, "responseMimeType": "application/json",
                                     "responseSchema": schema, "mediaResolution": "MEDIA_RESOLUTION_LOW"}}
-    model, r = sm.call(payload, key, list(sm.FREE_MODELS))
+    # only the designated reviewer decides (prepublish_gate.REVIEW_MODELS); out of its quota this is an ERROR,
+    # retried by reconcile, never a verdict from a fallback model
+    model, r = sm.call(payload, key, list(REVIEW_MODELS))
     r["model"] = model
     r["status"] = "PASS" if all(r.get(k, 0) >= PASS_ITEM for k in RUBRIC) and r.get("overall", 0) >= PASS_OVERALL else "FAIL"
     return r

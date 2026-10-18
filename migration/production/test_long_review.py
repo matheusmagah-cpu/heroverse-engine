@@ -48,5 +48,11 @@ class Scorecard(unittest.TestCase):
             self.assertTrue(lr.miner_proven(root))
 
 
+    def test_reviewer_model_matches_the_gate(self):
+        sys.path.insert(0, str(HERE.parent / "publish"))
+        import prepublish_gate
+        self.assertEqual(lr.REVIEW_MODELS, prepublish_gate.REVIEW_MODELS)
+
+
 if __name__ == "__main__":
     unittest.main()
