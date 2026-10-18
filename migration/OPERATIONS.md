@@ -109,7 +109,11 @@ analysis (08:05 UTC) is bound to the same session; the two older routines that r
 | 08:30 | structure mining, incremental | structure-mining.yml | production idle |
 | schedule.json | long video at publish_at; Shorts at their slots | YouTube publishAt | — |
 
-Claude's part: write the next scripts (2 per day: morning + night prayer) with schedule.json and images.json, at least 2 days ahead, and read the daily report. Scheduled workflows of the public runner stop after 60 days without a commit there.
+**The engine never stops (content runway).** Every day has two publication slots (night 00:00, morning 10:00 UTC).
+Claude keeps scripts **4 days ahead**: at each daily analysis (08:05) Claude opens the Dot cards for the two slots of
+day D+4 (topic from the decisions protocol + vidIQ), so Dot's cycle, images, render and gate always fit. The daily
+report's **Content runway** (`ops/runway.py`) lists every slot of the next 4 days with its stage and alerts when a slot
+has no script < 72 h before, no render < 20 h before, or no gate PASS < 6 h before. An alert is handled the same day. Scheduled workflows of the public runner stop after 60 days without a commit there.
 
 ## External tools
 - **vidIQ** (connected 2026-10-18, account linked to HeroVerse): research only — demand, rising topics, outliers

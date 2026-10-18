@@ -1,47 +1,155 @@
 {
  "rule": "Every error is fixed AND gets an antidote: an automatic check or test that fails if the same error comes back. One line here per error, in the same PR as the fix. test_errors_register.py fails any line whose antidote does not exist.",
  "errors": [
-  {"id": "E01", "date": "2026-10-18", "error": "Three pilots (006, 007, 008) given the same Short slot by the direction's task cards",
+  {
+   "id": "E01",
+   "date": "2026-10-18",
+   "error": "Three pilots (006, 007, 008) given the same Short slot by the direction's task cards",
    "fix": "PR #122: one slot per pilot (night of day D at D 14:00 UTC, morning at D 20:00 UTC)",
-   "antidote": {"file": "migration/production/test_script_check.py", "contains": "def test_shorts_slot_taken"}},
-  {"id": "E02", "date": "2026-10-18", "error": "A Short that missed its slot rolled onto another pilot's slot",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_shorts_slot_taken"
+   }
+  },
+  {
+   "id": "E02",
+   "date": "2026-10-18",
+   "error": "A Short that missed its slot rolled onto another pilot's slot",
    "fix": "PR #123: pending_shorts skips slots used in the ledger or reserved by another pilot",
-   "antidote": {"file": "migration/publish/test_pending_shorts.py", "contains": "def test_late_short_never_takes_another_pilots_slot"}},
-  {"id": "E03", "date": "2026-10-18", "error": "Reused image records missing from a new pilot (task card gap): render queue would skip it",
+   "antidote": {
+    "file": "migration/publish/test_pending_shorts.py",
+    "contains": "def test_late_short_never_takes_another_pilots_slot"
+   }
+  },
+  {
+   "id": "E03",
+   "date": "2026-10-18",
+   "error": "Reused image records missing from a new pilot (task card gap): render queue would skip it",
    "fix": "PR #116: hydrate_reused.py is part of every script delivery",
-   "antidote": {"file": "migration/production/test_script_check.py", "contains": "def test_reused_images_must_be_hydrated"}},
-  {"id": "E04", "date": "2026-10-18", "error": "Nothing stopped a Dot delivery from changing files outside its task card",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_reused_images_must_be_hydrated"
+   }
+  },
+  {
+   "id": "E04",
+   "date": "2026-10-18",
+   "error": "Nothing stopped a Dot delivery from changing files outside its task card",
    "fix": "PR #124: ALLOWED PATHS block in every card, checked on every Dot PR",
-   "antidote": {"file": "migration/ops/test_dot_scope.py", "contains": "def test_outside_and_no_crossing_folders"}},
-  {"id": "E05", "date": "2026-10-18", "error": "Offline tests existed that PR checks did not run",
+   "antidote": {
+    "file": "migration/ops/test_dot_scope.py",
+    "contains": "def test_outside_and_no_crossing_folders"
+   }
+  },
+  {
+   "id": "E05",
+   "date": "2026-10-18",
+   "error": "Offline tests existed that PR checks did not run",
    "fix": "PR #123 and this PR: every test of the active folders runs on every PR",
-   "antidote": {"file": "migration/ops/test_errors_register.py", "contains": "def test_every_active_test_runs_in_pr_checks"}},
-  {"id": "E06", "date": "2026-10-18", "error": "Old plans contradicted the current rules (one told sessions to write APPROVAL.json by hand)",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_every_active_test_runs_in_pr_checks"
+   }
+  },
+  {
+   "id": "E06",
+   "date": "2026-10-18",
+   "error": "Old plans contradicted the current rules (one told sessions to write APPROVAL.json by hand)",
    "fix": "PR #121: superseded documents deleted; OPERATIONS.md lists the only directing documents",
-   "antidote": {"file": "migration/ops/test_errors_register.py", "contains": "def test_only_listed_documents_direct"}},
-  {"id": "E07", "date": "2026-10-18", "error": "Fallback reviewer models scored the same video very differently and could approve",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_only_listed_documents_direct"
+   }
+  },
+  {
+   "id": "E07",
+   "date": "2026-10-18",
+   "error": "Fallback reviewer models scored the same video very differently and could approve",
    "fix": "Only the designated reviewer (gemini-3.8-flash) can PASS; others are UNKNOWN",
-   "antidote": {"file": "migration/production/test_long_review.py", "contains": "def test_reviewer_model_matches_the_gate"}},
-  {"id": "E08", "date": "2026-10-17", "error": "GitHub dropped the daily crons; tasks did not run",
+   "antidote": {
+    "file": "migration/production/test_long_review.py",
+    "contains": "def test_reviewer_model_matches_the_gate"
+   }
+  },
+  {
+   "id": "E08",
+   "date": "2026-10-17",
+   "error": "GitHub dropped the daily crons; tasks did not run",
    "fix": "heartbeat.yml decides from the real run history and catches up",
-   "antidote": {"file": "migration/ops/test_heartbeat.py", "contains": "def test_dropped_crons_are_caught_up"}},
-  {"id": "E09", "date": "2026-10-18", "error": "Mining spent the Gemini quota the production review needed",
+   "antidote": {
+    "file": "migration/ops/test_heartbeat.py",
+    "contains": "def test_dropped_crons_are_caught_up"
+   }
+  },
+  {
+   "id": "E09",
+   "date": "2026-10-18",
+   "error": "Mining spent the Gemini quota the production review needed",
    "fix": "Minings wait while production has work",
-   "antidote": {"file": "migration/ops/test_heartbeat.py", "contains": "def test_minings_wait_for_production_and_stay_due"}},
-  {"id": "E10", "date": "2026-10-18", "error": "Runner render dispatched twice for the same work",
+   "antidote": {
+    "file": "migration/ops/test_heartbeat.py",
+    "contains": "def test_minings_wait_for_production_and_stay_due"
+   }
+  },
+  {
+   "id": "E10",
+   "date": "2026-10-18",
+   "error": "Runner render dispatched twice for the same work",
    "fix": "runner-wake: active-run guard, cooldown, per-hash attempt bound (PR #106)",
-   "antidote": {"file": "migration/ops/test_runner_dispatch.py", "contains": "def test_cooldown_dedupe_and_limit_per_artifact"}},
-  {"id": "E11", "date": "2026-10-18", "error": "pilot-004 QA FAIL: the same background repeated after a split hold",
+   "antidote": {
+    "file": "migration/ops/test_runner_dispatch.py",
+    "contains": "def test_cooldown_dedupe_and_limit_per_artifact"
+   }
+  },
+  {
+   "id": "E11",
+   "date": "2026-10-18",
+   "error": "pilot-004 QA FAIL: the same background repeated after a split hold",
    "fix": "Hold images assigned once over the final holds",
-   "antidote": {"file": "migration/production/test_still_render.py", "contains": "def test_no_repeat_after_a_split_hold_pilot_004"}},
-  {"id": "E12", "date": "2026-10-18", "error": "pilot-003: the Scripture reference stayed on screen after the closing words",
+   "antidote": {
+    "file": "migration/production/test_still_render.py",
+    "contains": "def test_no_repeat_after_a_split_hold_pilot_004"
+   }
+  },
+  {
+   "id": "E12",
+   "date": "2026-10-18",
+   "error": "pilot-003: the Scripture reference stayed on screen after the closing words",
    "fix": "reference_end from the KJV sentence",
-   "antidote": {"file": "migration/production/test_still_render.py", "contains": "def test_reference_leaves_before_the_closing_words_pilot_003"}},
-  {"id": "E13", "date": "2026-10-18", "error": "Miner rows (unproven instrument) blocked a good render",
+   "antidote": {
+    "file": "migration/production/test_still_render.py",
+    "contains": "def test_reference_leaves_before_the_closing_words_pilot_003"
+   }
+  },
+  {
+   "id": "E13",
+   "date": "2026-10-18",
+   "error": "Miner rows (unproven instrument) blocked a good render",
    "fix": "Miner rows are informative until proven on the holdout",
-   "antidote": {"file": "migration/production/test_long_review.py", "contains": "def test_miner_rows_reported_until_proven"}},
-  {"id": "E14", "date": "2026-10-17", "error": "pilot-003 script (15.3 min, phrases shared with pilot-002) was written before any script acceptance existed",
+   "antidote": {
+    "file": "migration/production/test_long_review.py",
+    "contains": "def test_miner_rows_reported_until_proven"
+   }
+  },
+  {
+   "id": "E14",
+   "date": "2026-10-17",
+   "error": "pilot-003 script (15.3 min, phrases shared with pilot-002) was written before any script acceptance existed",
    "fix": "script_check.py runs on every pilot a PR touches, before images",
-   "antidote": {"file": "migration/production/test_script_check.py", "contains": "def test_length_and_speech"}}
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_length_and_speech"
+   }
+  },
+  {
+   "id": "E15",
+   "date": "2026-10-18",
+   "error": "Nothing alerted when the queue of scripts ran short of the coming publication slots (engine could stop unnoticed)",
+   "fix": "Scripts kept 4 days ahead; daily report lists every slot of the next 4 days with its stage",
+   "antidote": {
+    "file": "migration/ops/test_runway.py",
+    "contains": "def test_every_slot_listed_and_gaps_alerted"
+   }
+  }
  ]
 }
