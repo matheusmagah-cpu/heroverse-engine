@@ -1,5 +1,7 @@
 # FormatArchetype candidate: Morning Prayer, direct address (10–30 min)
 
+> Kept because frozen QA criteria and pilot scripts cite it. Lengths, cadence and slots in force are those of `OPERATIONS.md` and `strategy/DECISIONS.md` (D-01/D-04), which win over the 10–30 min range below.
+
 Status: **CANDIDATE, from measured evidence. Pilot not yet approved.** Built 2026-10-17 by Claude Code (AI assistant), following `docs/03_MODELING_SPEC.md` §5 and the monetization decision of 2026-10-13. It is a hypothesis set for the modeler. It is not a causal rule, a forecast or a production/publication authorization.
 
 ## Evidence base
