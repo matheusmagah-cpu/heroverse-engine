@@ -1,0 +1,49 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-006",
+ "style": "soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused": {
+  "pilot-002": [
+   "figure-a",
+   "bg-candle",
+   "bg-window",
+   "bg-lake"
+  ],
+  "pilot-004": [
+   "bg-night-sky",
+   "bg-lamp-window",
+   "bg-moon-lake",
+   "bg-starry-hills",
+   "bg-quiet-chapel",
+   "bg-moonlit-sea",
+   "bg-night-village"
+  ]
+ },
+ "images": [
+  {
+   "id": "bg-moonlit-meadow",
+   "prompt": "soft moonlit meadow with gentle wildflowers, warm silver light, a calm starry sky, healing and peaceful atmosphere, no people",
+   "seed": 5000
+  },
+  {
+   "id": "bg-still-water-night",
+   "prompt": "perfectly still pond at night reflecting the moon and stars, soft glowing water lilies, deep calm, no people",
+   "seed": 5001
+  },
+  {
+   "id": "bg-healing-garden",
+   "prompt": "quiet garden at night with a small fountain, lavender and white flowers in moonlight, warm lantern glow, restful and safe, no people",
+   "seed": 5002
+  },
+  {
+   "id": "bg-dawn-hope",
+   "prompt": "first soft light of dawn over calm hills after a long night, gentle pink and gold horizon, mist in the valleys, pure nature, no buildings, no people",
+   "seed": 5003
+  }
+ ]
+}

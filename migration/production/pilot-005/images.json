@@ -1,0 +1,57 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-005",
+ "style": "soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused": {
+  "pilot-002": [
+   "figure-a",
+   "bg-meadow",
+   "bg-sky",
+   "bg-garden",
+   "bg-hills"
+  ],
+  "pilot-003": [
+   "bg-sunrise-field",
+   "bg-mountain-sunrise",
+   "bg-misty-valley",
+   "bg-dawn-lake"
+  ]
+ },
+ "images": [
+  {
+   "id": "bg-fortress-dawn",
+   "prompt": "ancient stone fortress on a green hill at sunrise, warm golden light on its walls, peaceful sky, sheltering and strong, no people",
+   "seed": 5000
+  },
+  {
+   "id": "bg-tower-hill",
+   "prompt": "tall old stone watchtower on a grassy hill at dawn, soft clouds glowing pink and gold, calm countryside below, no people",
+   "seed": 5001
+  },
+  {
+   "id": "bg-sheltered-valley",
+   "prompt": "green valley sheltered by high mountains on every side, morning sunlight pouring in, a small river and trees, safe and peaceful, no people",
+   "seed": 5002
+  },
+  {
+   "id": "bg-eagle-wings",
+   "prompt": "great eagle with outstretched wings sheltering over a sunlit valley at morning, warm light through its feathers, majestic and protective",
+   "seed": 5003
+  },
+  {
+   "id": "bg-home-sunrise",
+   "prompt": "cosy family home with warm lit windows at sunrise, garden path and flowers, soft golden morning light, peaceful, no people",
+   "seed": 5004
+  },
+  {
+   "id": "bg-sunlit-road",
+   "prompt": "quiet country road winding through green fields in early morning sunlight, soft mist, safe and open, no cars, no people",
+   "seed": 5005
+  }
+ ]
+}
