@@ -1,0 +1,284 @@
+{
+ "version": "shorts-produce-v1",
+ "source_pilot": "pilot-004",
+ "selection_rubric_model": "gemini-3.8-flash",
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "c3a18f42d5d2603c04ca87e62d7a41a4357a5f5bbd4433eb68fe4cd6e04e051e",
+   "seconds": 42.03,
+   "source_start": 1864.595,
+   "source_end": 1906.013,
+   "segments": [
+    "sleep-reflect-16",
+    "sleep-prayer-3",
+    "blessing"
+   ],
+   "hook": "You will not be moved tonight",
+   "title": "A Bedtime Blessing for Deep Peace",
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "scenes": [
+    "bg-starry-hills",
+    "bg-night-garden",
+    "bg-moonlit-sea",
+    "bg-starry-forest",
+    "bg-night-village",
+    "bg-starry-hills"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8827,
+    "measured_score": 0.9568,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.7499999999999999,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 1.0,
+     "length_fit": 0.9432800000000043
+    },
+    "rubric": {
+     "index": 0,
+     "hook_first_2s": 7.5,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.0,
+     "shareability": 8.0,
+     "loop_potential": 6.5,
+     "policy_safe": 10.0,
+     "reasons": "Opens with an affirming declaration, flows into a complete bedtime surrender, and closes with a gentle priestly blessing.",
+     "hook_line": "You will not be moved tonight",
+     "title": "A Bedtime Blessing for Deep Peace"
+    }
+   },
+   "text": "You will not be moved. Lord, as sleep comes, I place myself completely in your hands. My body, my mind, my heart, my family, my tomorrow. Watch over me through the night, and wake me to your mercy in the morning. And now receive this blessing as you sleep. Now the Lord of peace himself give you peace always by all means. The Lord be with you all. Sleep well, in the shelter of his love. In Jesus' name, amen.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 42.03,
+    "lufs": -15.3,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 7.5,
+    "captions_readable_and_synced": 8.5,
+    "text_clear_of_shorts_ui": 8.5,
+    "picture_quality": 8.0,
+    "edit_rhythm": 7.2,
+    "audio_clarity": 8.5,
+    "stands_alone": 9.0,
+    "ending_and_loop": 6.5,
+    "policy_safe": 9.5,
+    "overall": 7.9,
+    "issues": [
+     "Foreground character remains largely static across the entire video, which can feel repetitive despite background shifts.",
+     "The ending closes with a standard 'Amen' and does not create an engaging audio or visual loop back to the opening hook.",
+     "Around 00:37-00:41, the overlay 'Full prayer on the channel' overlaps visually close to the verse citation."
+    ],
+    "strongest_moment": "00:06 to 00:15 where the transition into gentle ambient night scenery pairs effectively with the calming voiceover.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "5a6c0862e3b5eff8606ed62b6868d6035e7b6024a3f967afb75af89ee79e8eb8",
+   "seconds": 47.3,
+   "source_start": 239.639,
+   "source_end": 286.336,
+   "segments": [
+    "prayer-confession",
+    "scripture-4",
+    "reflection-4"
+   ],
+   "hook": "Don't carry guilt into your sleep",
+   "title": "Lay Your Head Down Clean Tonight",
+   "reference": "1 John 1:9 (KJV)",
+   "scenes": [
+    "bg-quiet-chapel",
+    "bg-dusk-field",
+    "bg-lake",
+    "bg-night-sky",
+    "bg-candle",
+    "bg-lamp-window",
+    "bg-quiet-chapel"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8729,
+    "measured_score": 0.8322,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.6796116504854368,
+     "scripture": 1.0,
+     "promise": 0.970873786407767,
+     "resolution": 0.4,
+     "length_fit": 0.7321199999999999
+    },
+    "rubric": {
+     "index": 11,
+     "hook_first_2s": 8.5,
+     "stands_alone": 9.5,
+     "emotional_payoff": 9.5,
+     "shareability": 9.0,
+     "loop_potential": 7.5,
+     "policy_safe": 10.0,
+     "reasons": "Tackles nighttime regret honestly and delivers immense emotional release with the closing promise of laying down clean.",
+     "hook_line": "Don't carry guilt into your sleep",
+     "title": "Lay Your Head Down Clean Tonight"
+    }
+   },
+   "text": "Father, I also bring you what I regret. The impatient word. The thing I should have done and did not. The moment I chose myself over someone else. I do not want to carry guilt into my sleep. I confess it to you honestly, and I receive your forgiveness. If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness. Faithful and just. God does not forgive you reluctantly. He forgives you because he promised he would, and he always keeps his promises. So tonight you can lay your head down clean.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 47.3,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 8.5,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 9.0,
+    "picture_quality": 8.5,
+    "edit_rhythm": 8.5,
+    "audio_clarity": 9.2,
+    "stands_alone": 9.5,
+    "ending_and_loop": 8.5,
+    "policy_safe": 10.0,
+    "overall": 8.8,
+    "issues": [
+     "00:03 - 00:46: The persistent static foreground cutout of Jesus over changing AI backgrounds feels slightly repetitive across the 47 seconds.",
+     "00:43: The CTA badge 'Full prayer on the channel' appears near the top citation and momentarily clutters the upper section."
+    ],
+    "strongest_moment": "00:32 - 00:46 where the narration transitions from the scripture recitation to personal reassurance ('God does not forgive you reluctantly... lay your head down clean').",
+    "model": "gemini-3.8-flash",
+    "status": "PASS"
+   },
+   "publish": true
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "e432606d4fb389a612c51f9385e65345b9dfc29968988c9d80b883bc7227e018",
+   "seconds": 50.37,
+   "source_start": 427.049,
+   "source_end": 476.796,
+   "segments": [
+    "reflection-6",
+    "prayer-mind",
+    "scripture-9"
+   ],
+   "hook": "Midnight is not dark to God",
+   "title": "When the Night Feels Too Heavy",
+   "reference": "John 14:27 (KJV)",
+   "scenes": [
+    "bg-first-light",
+    "bg-moon-lake",
+    "bg-starry-hills",
+    "bg-night-garden",
+    "bg-moonlit-sea",
+    "bg-starry-forest",
+    "bg-first-light"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8621,
+    "measured_score": 0.8552,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.8943089430894309,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.6101199999999994
+    },
+    "rubric": {
+     "index": 6,
+     "hook_first_2s": 9.0,
+     "stands_alone": 9.0,
+     "emotional_payoff": 8.5,
+     "shareability": 8.5,
+     "loop_potential": 7.0,
+     "policy_safe": 10.0,
+     "reasons": "Outstanding opening contrast between human darkness and God's light, carrying strong emotional reassurance throughout.",
+     "hook_line": "Midnight is not dark to God",
+     "title": "When the Night Feels Too Heavy"
+    }
+   },
+   "text": "To you the night may feel long and heavy. To God, it shines like the day. He sees you as clearly at midnight as he did at noon. Nothing that happens in the dark is hidden from him, and nothing in the dark can separate you from his love. Lord, I give you my thoughts. When my mind starts replaying the day or rehearsing tomorrow, bring it back to you. Replace every anxious thought with a promise from your word. Let my last thoughts tonight be thoughts of your goodness. Jesus said, Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 50.37,
+    "lufs": -14.6,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 7.5,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 9.5,
+    "picture_quality": 8.5,
+    "edit_rhythm": 8.0,
+    "audio_clarity": 9.0,
+    "stands_alone": 9.0,
+    "ending_and_loop": 7.5,
+    "policy_safe": 10.0,
+    "overall": 8.4,
+    "issues": [
+     "Foreground cutout of Jesus remains completely static throughout the entire 50-second runtime, which can feel repetitive.",
+     "00:46 - Callout banner 'Full prayer on the channel' pops up abruptly and distracts from the final scripture quote.",
+     "The ending line does not seamlessly cycle back into the opening hook for a smooth loop."
+    ],
+    "strongest_moment": "00:36 - The transition into the deep night forest scene paired with the recital of John 14:27 creates a peaceful, immersive emotional atmosphere.",
+    "model": "gemini-3.8-flash",
+    "status": "PASS"
+   },
+   "publish": false
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}
