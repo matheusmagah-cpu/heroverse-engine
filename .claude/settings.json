@@ -32,7 +32,25 @@
       "Bash(git branch -D*)",
       "mcp__github__delete_file",
       "mcp__github__create_repository",
-      "mcp__github__fork_repository"
+      "mcp__github__fork_repository",
+      "mcp__vidIQ__vidiq_update_video",
+      "mcp__vidIQ__vidiq_update_video_thumbnail",
+      "mcp__vidIQ__vidiq_video_upload",
+      "mcp__vidIQ__vidiq_reply_to_comment",
+      "mcp__vidIQ__vidiq_generate_comment_replies",
+      "mcp__vidIQ__vidiq_comment_reply_permission",
+      "mcp__vidIQ__vidiq_instagram_publish_reel",
+      "mcp__vidIQ__vidiq_connect_youtube_channel",
+      "mcp__vidIQ__vidiq_authorize_with_youtube",
+      "mcp__vidIQ__vidiq_update_competitors",
+      "mcp__vidIQ__vidiq_generate_video",
+      "mcp__vidIQ__vidiq_generate_clips",
+      "mcp__vidIQ__vidiq_generate_broll",
+      "mcp__vidIQ__vidiq_generate_music",
+      "mcp__vidIQ__vidiq_voiceover_generate",
+      "mcp__vidIQ__vidiq_edit_media",
+      "mcp__vidIQ__vidiq_motion_graphics",
+      "mcp__vidIQ__vidiq_compose"
     ]
   }
 }

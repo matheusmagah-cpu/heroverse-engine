@@ -26,8 +26,10 @@ The owner uses vidIQ (app.vidiq.com, channel HeroVerse connected; screenshot 202
 | AI titles/thumbnails/ideas | not used to decide | our packaging is mined and gated; an AI suggestion is not evidence |
 | Any change of strategy, format, packaging or cadence | only through the owner's 90 % rule (DECISIONS.md) | vidIQ numbers alone never pass it |
 
-Budget: at most 30 calls/month on Free (≈ 1/day), spent by the daily Claude analysis; never in GitHub Actions
-without a read-only API key stored as a secret (owner decision).
+Budget: the connected account holds 6,000 renewable credits a month (+120 add-on; balance read 2026-10-18,
+renews 2026-11-18); keyword research costs 5 credits. Cap for the project: 1,000 credits a month (≈ 200 calls),
+spent by the main/daily Claude session; never in GitHub Actions without a read-only API key stored as a secret
+(owner decision). No plan change or purchase.
 
 ## Validation before vidIQ may break a tie between topics (pre-registered)
 - Sample: the 30 queries of our market panel (`market-panel/panel-*.json`), plus the next 10 script topics.
@@ -38,12 +40,22 @@ without a read-only API key stored as a secret (owner decision).
   vidIQ may break ties between topics that are otherwise equal under MODELING_SPEC; otherwise it stays
   informative. Re-checked monthly.
 
+## Validation result 2026-10-18 (`evidence/vidiq/validation-20261018.json`)
+30 panel queries, 150 credits. vidIQ estimated monthly searches vs our measured demand: Spearman ρ = 0.404,
+one-sided p = 0.014 (permutation, 100k). The association is real but below the pre-registered ρ ≥ 0.5: **FAIL**.
+vidIQ stays informative and does not break topic ties. Overall score (volume + competition) vs our demand:
+ρ = 0.10, p = 0.30 (no signal). Re-check monthly with the same criterion; the criterion is not lowered.
+
+## Tool safety
+`.claude/settings.json` denies every vidIQ tool that writes to the channel or to Instagram (update video/thumbnail,
+upload, reply to comments, publish reel, connect/authorize channel, competitor edits) and the credit-heavy media
+generators. Publication only ever goes through the pipeline's gate.
+
 ## Security note (owner decision)
 vidIQ's channel connection asks for "Manage your YouTube account" (scope `youtube`, write access) plus Analytics
 read. The research tools and the MCP connector do not need the channel connected. Least privilege: keep the vidIQ
 account for research and revoke its channel access at myaccount.google.com/permissions if write access is not
 needed (reversible; reconnect any time).
 
-## Owner action to enable
-claude.ai → Settings → Connectors → vidIQ → Connect (vidIQ sign-in). Then the main HeroVerse session and the
-daily analysis can call it within the budget above.
+## Status
+Connector connected 2026-10-18 by the owner (claude.ai → Settings → Connectors → vidIQ).
