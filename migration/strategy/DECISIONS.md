@@ -70,3 +70,12 @@ The goal is YPP in 14 days (30 at most), and the system is being validated to be
 ### Robustness (no verdict change)
 - `long_review.py`: provider errors write `status: ERROR` (retried), distinct from FAIL (never retried).
 - `reconcile.yml` at 07:20, 13:20 and 19:20 UTC re-dispatches approval for due QA-PASS renders with no review or an ERROR review, and publication for approved files not yet on YouTube. 07:20 is right after the Data API day resets, so an upload that failed on quota succeeds then.
+
+### D-2026-10-18-04 — Morning prayer to ~25 min (from ~15); night ~28–33 min
+- **Evidence:** `strategy/MARKET_FORECAST_TIME_TO_YPP_20261017.md`. Base rate at 0–30 days: long-form ≥ 20 min 23% (5/22) vs 3–20 min 14% (1/7). The fast profile (45 channels over the proxy within 90 days) has a median long video of 36 min at 1 upload/day. D-2026-10-18-01 shows the hours per video.
+- **Change:**
+  - pilot-005 (morning): guided prayer, then "Scripture to carry into your day" (Psalm 91, 23, 27, 46, 121; Ephesians 6; Isaiah 43; Romans 8, each with a reflection), ~25 min.
+  - pilot-006 (night): guided prayer, CTA, then healing Scripture for sleep, ~28 min.
+  - pilot-003 (15 min) is already rendering and stays as the measured control.
+- **Checked:** same as D-01 (approval band ≤ 50 min, token-safe review, runner time). Morning CTA stays after the payoff (viewers are awake); night CTA comes before the sleep section.
+- **Measure:** watch hours per video and average view % at 48 h / 7 days: pilot-003 (15 min) vs pilot-005 (25 min) for mornings, pilot-004/006 for nights. Keep if hours per video rise ≥ 2× without the average view % falling below 15%.

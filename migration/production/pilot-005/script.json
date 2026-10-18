@@ -3,6 +3,7 @@
  "pilot_id": "pilot-005",
  "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
  "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "format_note": "Morning format ~29 min (guided prayer + Scripture to carry into the day); length per strategy/DECISIONS.md D-2026-10-18-04.",
  "working_title": "Morning Prayer for Protection | Psalm 91 Over You and Your Family",
  "promise": "Title promise 'protection over you and your family' is spoken at 0-8 s.",
  "angle": "Protection as a place to live, not an emergency visit: Psalm 91 prayed over the mind, the home, the road, the family and the work, in peace, never fear.",
@@ -316,6 +317,125 @@
    "text": "And Lord, when this day is done, bring every one of us home safely. Let us sit down tonight together, grateful for your protection. I trust you with every hour between now and then."
   },
   {
+   "id": "day-transition",
+   "beat": "turn: Scripture to carry into the day",
+   "pause_after": 1.5,
+   "text": "Before you go, let me read you some Scripture to carry into this day. Let these words go with you, into every room and every road.",
+   "chapter": "Scripture to carry into your day"
+  },
+  {
+   "id": "day-psalm-91",
+   "beat": "day reading: Psalm 91",
+   "pause_after": 2.0,
+   "text": "Here is the whole of Psalm ninety-one. He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty. I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust. Surely he shall deliver thee from the snare of the fowler, and from the noisome pestilence. He shall cover thee with his feathers, and under his wings shalt thou trust: his truth shall be thy shield and buckler. Thou shalt not be afraid for the terror by night; nor for the arrow that flieth by day; Nor for the pestilence that walketh in darkness; nor for the destruction that wasteth at noonday. A thousand shall fall at thy side, and ten thousand at thy right hand; but it shall not come nigh thee. Only with thine eyes shalt thou behold and see the reward of the wicked. Because thou hast made the LORD, which is my refuge, even the most High, thy habitation; There shall no evil befall thee, neither shall any plague come nigh thy dwelling. For he shall give his angels charge over thee, to keep thee in all thy ways. They shall bear thee up in their hands, lest thou dash thy foot against a stone. Thou shalt tread upon the lion and adder: the young lion and the dragon shalt thou trample under feet. Because he hath set his love upon me, therefore will I deliver him: I will set him on high, because he hath known my name. He shall call upon me, and I will answer him: I will be with him in trouble; I will deliver him, and honour him. With long life will I satisfy him, and shew him my salvation.",
+   "reference": "Psalm 91 (KJV)",
+   "chapter": "Psalm 91, read in full"
+  },
+  {
+   "id": "day-reflect-91",
+   "beat": "day reflection: the whole psalm",
+   "pause_after": 1.5,
+   "text": "Notice how the psalm moves. It begins with a person choosing to dwell with God, and it ends with God himself speaking: I will be with him in trouble. Protection in this psalm is not a promise that nothing hard will ever happen. It is the promise that you will never face it alone."
+  },
+  {
+   "id": "day-psalm-23",
+   "beat": "day reading: Psalm 23",
+   "pause_after": 2.0,
+   "text": "And now the shepherd's psalm. The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake. Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me. Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over. Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.",
+   "reference": "Psalm 23 (KJV)",
+   "chapter": "The Lord is my shepherd (Psalm 23)"
+  },
+  {
+   "id": "day-reflect-23",
+   "beat": "day reflection: goodness follows you",
+   "pause_after": 1.5,
+   "text": "Surely goodness and mercy shall follow me. Picture that today: as you walk out of your door, goodness and mercy walk right behind you, all day long. The shepherd's rod and staff were for protection and guidance. He uses both for you."
+  },
+  {
+   "id": "day-ephesians-6",
+   "beat": "day reading: Ephesians 6:13-17",
+   "pause_after": 2.0,
+   "text": "Hear how Paul describes God's protection for the believer. Wherefore take unto you the whole armour of God, that ye may be able to withstand in the evil day, and having done all, to stand. Stand therefore, having your loins girt about with truth, and having on the breastplate of righteousness; And your feet shod with the preparation of the gospel of peace; Above all, taking the shield of faith, wherewith ye shall be able to quench all the fiery darts of the wicked. And take the helmet of salvation, and the sword of the Spirit, which is the word of God.",
+   "reference": "Ephesians 6:13-17 (KJV)",
+   "chapter": "The whole armour of God (Ephesians 6:13-17)"
+  },
+  {
+   "id": "day-reflect-6",
+   "beat": "day reflection: dressing for the day",
+   "pause_after": 1.5,
+   "text": "You will get dressed this morning anyway. As you do, put on the armour too. Truth as your belt. Righteousness over your heart. Peace on your feet. Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand."
+  },
+  {
+   "id": "day-isaiah-43",
+   "beat": "day reading: Isaiah 43:1-2",
+   "pause_after": 2.0,
+   "text": "Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "chapter": "I have called thee by thy name (Isaiah 43:1-2)"
+  },
+  {
+   "id": "day-reflect-43",
+   "beat": "day reflection: called by name",
+   "pause_after": 1.5,
+   "text": "I have called thee by thy name; thou art mine. God's protection is personal. He does not watch over a crowd. He watches over you, by name. Through the waters, through the fire. Not around them, but through them, with him."
+  },
+  {
+   "id": "day-romans-8",
+   "beat": "day reading: Romans 8:31, 35, 37-39",
+   "pause_after": 2.0,
+   "text": "What shall we then say to these things? If God be for us, who can be against us? Who shall separate us from the love of Christ? shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword? Nay, in all these things we are more than conquerors through him that loved us. For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.",
+   "reference": "Romans 8:31, 35, 37-39 (KJV)",
+   "chapter": "If God be for us (Romans 8)"
+  },
+  {
+   "id": "day-reflect-romans",
+   "beat": "day reflection: more than conquerors",
+   "pause_after": 1.5,
+   "text": "If God be for us, who can be against us? Whatever you face today, you do not face it as someone barely surviving. You face it as someone deeply loved. Nothing you meet today can separate you from that love."
+  },
+  {
+   "id": "day-psalm-27",
+   "beat": "day reading: Psalm 27:1-5",
+   "pause_after": 2.0,
+   "text": "Hear David's song of confidence. The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid? When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell. Though an host should encamp against me, my heart shall not fear: though war should rise against me, in this will I be confident. One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple. For in the time of trouble he shall hide me in his pavilion: in the secret of his tabernacle shall he hide me; he shall set me up upon a rock.",
+   "reference": "Psalm 27:1-5 (KJV)",
+   "chapter": "In this will I be confident (Psalm 27:1-5)"
+  },
+  {
+   "id": "day-reflect-27",
+   "beat": "day reflection: one thing",
+   "pause_after": 1.5,
+   "text": "In the middle of enemies and armies, David asks for one thing: to dwell with the Lord. He knew that closeness to God was the safest place in the world. Let that be your one thing today too. Stay close, and let him set you up upon a rock."
+  },
+  {
+   "id": "day-psalm-46",
+   "beat": "day reading: Psalm 46:1-3",
+   "pause_after": 2.0,
+   "text": "God is our refuge and strength, a very present help in trouble. Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea; Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof.",
+   "reference": "Psalm 46:1-3 (KJV)",
+   "chapter": "A very present help (Psalm 46:1-3)"
+  },
+  {
+   "id": "day-reflect-46",
+   "beat": "day reflection: a very present help",
+   "pause_after": 1.5,
+   "text": "A very present help. Not a distant help that arrives too late. Present. Here. In the trouble, at the very moment you need him. Even if the ground seems to shake today, your refuge does not move."
+  },
+  {
+   "id": "day-psalm-121",
+   "beat": "day reading: Psalm 121",
+   "pause_after": 2.0,
+   "text": "And finally, the traveller's psalm, for every road you take today. I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth. He will not suffer thy foot to be moved: he that keepeth thee will not slumber. Behold, he that keepeth Israel shall neither slumber nor sleep. The LORD is thy keeper: the LORD is thy shade upon thy right hand. The sun shall not smite thee by day, nor the moon by night. The LORD shall preserve thee from all evil: he shall preserve thy soul. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "reference": "Psalm 121 (KJV)",
+   "chapter": "The Lord is thy keeper (Psalm 121)"
+  },
+  {
+   "id": "day-reflect-121",
+   "beat": "day reflection: going out and coming in",
+   "pause_after": 1.5,
+   "text": "Thy going out and thy coming in. Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey. Carry that with you."
+  },
+  {
    "id": "payoff",
    "beat": "payoff: one concrete commitment for the day",
    "pause_after": 1.2,
@@ -362,7 +482,7 @@
   "brand": "HeroVerse Prayer",
   "amen": "Type AMEN"
  },
- "description_intro": "Start your day under God's protection. Pray Psalm 91 over yourself, your home and your family with this morning prayer.",
+ "description_intro": "Start your day under God's protection. Pray Psalm 91 over yourself, your home and your family, then carry Psalm 91, Psalm 23 and Psalm 121 into your day.",
  "hashtags": [
   "#prayer",
   "#psalm91",
