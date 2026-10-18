@@ -14,7 +14,7 @@
   "image": "UNKNOWN",
   "rights": "PASS",
   "content_and_policy": "UNKNOWN",
-  "scorecard": "PASS",
+  "scorecard": "UNKNOWN",
   "full_file_scan": "PASS",
   "preflight": "PASS"
  },
@@ -45,6 +45,12 @@
    {
     "source": "binding",
     "item": "review_for_this_file",
+    "state": "PASS",
+    "detail": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50"
+   },
+   {
+    "source": "binding",
+    "item": "video_file_hash",
     "state": "PASS",
     "detail": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50"
    }
@@ -91,7 +97,7 @@
     "source": "review",
     "item": "audio_clarity_and_mix",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    }
   ],
   "transcript": [
@@ -136,7 +142,7 @@
     "source": "review",
     "item": "captions_readable_and_synced",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    }
   ],
   "sync": [
@@ -154,7 +160,7 @@
     "source": "review",
     "item": "captions_readable_and_synced",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    }
   ],
   "image": [
@@ -192,13 +198,13 @@
     "source": "review",
     "item": "picture_quality",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    }
   ],
   "rights": [
@@ -228,45 +234,45 @@
     "source": "review",
     "item": "opening_and_promise",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    },
    {
     "source": "review",
     "item": "policy_safe",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
    },
    {
     "source": "review",
     "item": "overall",
     "state": "UNKNOWN",
-    "detail": "reviewer model gemini-3.6-flash is not the designated one"
+    "detail": "no completed watched review for this file"
    }
   ],
   "scorecard": [
    {
     "source": "score",
     "item": "minutes",
-    "state": "PASS",
-    "detail": 14.47
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
    },
    {
     "source": "score",
     "item": "scripture_per_10_min",
-    "state": "PASS",
-    "detail": 9.67
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
    }
   ],
   "full_file_scan": [
@@ -292,65 +298,6 @@
   ]
  },
  "informative_not_deciding": {
-  "words_per_minute": {
-   "value": 142.4,
-   "band": [
-    115,
-    165
-   ],
-   "inside": true,
-   "note": "miner accuracy unproven: reported, not blocking"
-  },
-  "beats_per_minute": {
-   "value": 3.2,
-   "band": [
-    2.0,
-    2.6
-   ],
-   "inside": false
-  },
-  "shots_per_minute_model_counted": {
-   "value": 3.4,
-   "band": [
-    6,
-    99
-   ],
-   "inside": false
-  },
-  "you_per_100_words": {
-   "value": 2.9,
-   "band": [
-    6,
-    99
-   ],
-   "inside": false
-  },
-  "minutes": {
-   "value": 14.47,
-   "band": [
-    15,
-    45
-   ],
-   "inside": false
-  },
-  "first_spoken_at": {
-   "value": 300.0,
-   "band": [
-    0,
-    1.5
-   ],
-   "inside": false,
-   "note": "miner accuracy unproven: reported, not blocking"
-  },
-  "coverage": {
-   "value": 0.345,
-   "band": [
-    0.9,
-    1.01
-   ],
-   "inside": false,
-   "note": "miner accuracy unproven: reported, not blocking"
-  },
   "scan_frozen_picture": {
    "longest_s": 1.33,
    "report_s": 5.0,
