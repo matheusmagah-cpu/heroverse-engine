@@ -14,6 +14,7 @@ usage: goal_report.py PRODUCTION_DIR LEDGER OUT_DIR [START_DATE]
 from datetime import date, datetime, timedelta, timezone
 import json
 from pathlib import Path
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -24,6 +25,9 @@ import market_panel as mp  # noqa: E402
 from packaging_mining import seconds  # noqa: E402
 
 ANALYTICS = "https://youtubeanalytics.googleapis.com/v2/reports"
+# titles that read as fear-bait or fabricated prophecy (owner policy; YouTube misleading-metadata risk at YPP review)
+RISK = re.compile(r"(?i)prophec|warning|warnig|hiding from you|they don.?t want you|before it.?s too late|don.?t ignore|"
+                  r"is here!|exposed|banned")
 YPP = {"subscribers": 1000, "watch_hours_365d": 4000, "shorts_views_90d": 10_000_000}
 TARGET_DAYS, MAX_DAYS = 14, 30
 
@@ -84,6 +88,11 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
         r = (tot.get("rows") or [[0, 0, 0, 0]])[0]
         a = {"status": "OK", "watch_hours_365d": round(r[0] / 60, 1), "views_365d": r[1], "subscribers_gained_365d": r[2],
              "average_view_percentage": r[3]}
+        per = analytics(token, (now.date() - timedelta(days=365)).isoformat(), end,
+                        "estimatedMinutesWatched,views,averageViewPercentage,subscribersGained",
+                        dimensions="video", extra={"sort": "-estimatedMinutesWatched", "maxResults": 50})
+        a["per_video"] = {r[0]: {"watch_hours": round(r[1] / 60, 1), "views": r[2], "average_view_percentage": r[3],
+                                 "subscribers_gained": r[4]} for r in per.get("rows", [])}
     except Exception as e:
         a["error"] = type(e).__name__
     subs = int(st.get("subscriberCount", 0))
@@ -95,6 +104,11 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
         need["watch_hours_per_day"] = round(max(YPP["watch_hours_365d"] - a["watch_hours_365d"], 0) / left, 1)
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
     rows, runway = pipeline(production, ledger, now)
+    for v in videos:
+        v.update((a.get("per_video") or {}).get(v["id"], {}))
+        v["policy_risk_title"] = bool(RISK.search(v["title"]))
+    risky = [v for v in videos if v["policy_risk_title"]]
+    risk_hours = round(sum(v.get("watch_hours", 0) for v in risky), 1)
     alerts = []
     if runway < 2:
         alerts.append(f"SCRIPT RUNWAY {runway} days (< 2): write the next pilots now")
@@ -104,7 +118,9 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
               "subscribers": subs, "views_total": int(st.get("viewCount", 0)), "public_videos": len(videos),
               "shorts_views_public": shorts_views, "analytics": a, "needed_from_today": need, "ypp": YPP,
               "videos": sorted(videos, key=lambda v: v["published"], reverse=True)[:20], "pipeline": rows,
-              "script_runway_days": runway, "alerts": alerts, "data_api_units": client.units}
+              "script_runway_days": runway, "alerts": alerts, "data_api_units": client.units,
+              "policy_risk_videos": [{k: v.get(k) for k in ("id", "title", "views", "watch_hours", "subscribers_gained", "short")} for v in risky],
+              "policy_risk_watch_hours": risk_hours}
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     (out / f"{now:%Y%m%d}.json").write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n")
@@ -120,8 +136,11 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
           "| pilot | publishes | rendered | QA | review | published | title |", "|---|---|---|---|---|---|---|",
           *(f"| {r['pilot']} | {r['publish_at']} | {'yes' if r['rendered'] else 'no'} | {r['qa'] or '-'} | {r['review'] or '-'} | "
             f"{'yes' if r['published'] else 'no'} | {r['title'] or ''} |" for r in rows), "",
-          "## Latest public videos", "| published | views | likes | comments | title |", "|---|---|---|---|---|",
-          *(f"| {v['published']} | {v['views']} | {v['likes']} | {v['comments']} | {v['title'][:70]} |" for v in report["videos"][:10]), "",
+          "## Latest public videos", "| published | views | watch h | avg view % | subs gained | title |", "|---|---|---|---|---|---|",
+          *(f"| {v['published']} | {v['views']} | {v.get('watch_hours', '-')} | {v.get('average_view_percentage', '-')} | "
+            f"{v.get('subscribers_gained', '-')} | {v['title'][:70]} |" for v in report["videos"][:12]), "",
+          f"## Public videos with fear-bait/prophecy-style titles ({len(risky)}; {risk_hours} of the channel's watch hours)",
+          *(f"- {v['title'][:80]} — {v.get('watch_hours', 0)} h, {v['views']} views" for v in risky), "",
           "Market and production directives of the day: `migration/evidence/daily-intel/` (latest file)."]
     (out / "latest.md").write_text("\n".join(md) + "\n")
     print(json.dumps({"day": day, "subscribers": subs, "analytics": a["status"], "runway": runway, "alerts": alerts}))
