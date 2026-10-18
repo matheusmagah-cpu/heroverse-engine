@@ -1,11 +1,60 @@
 {
- "version": "mining-accuracy-v1",
+ "version": "mining-accuracy-v2",
  "structure_dir": "migration/evidence/structure-mining/20261017",
- "windows_compared": 10,
- "transcript_agreement_median": 0.881,
- "transcript_agreement_min": 0.109,
- "opening_words_agreement": 0.733,
- "openings_checked": 15,
+ "all": {
+  "windows": 12,
+  "speech_windows": 12,
+  "status_counts": {
+   "COMPARED": 8,
+   "MINED_WINDOW_INVALID": 4
+  },
+  "transcript_agreement_median": 0.921,
+  "transcript_agreement_min": 0.109,
+  "window_pass_rate": 0.5,
+  "opening_words_agreement": 0.818,
+  "openings_checked": 11,
+  "criteria": {
+   "agreement_min": 0.85,
+   "openings_min": 0.8,
+   "window_pass_rate_min": 0.8
+  },
+  "verdict": "FAIL"
+ },
+ "holdout": {
+  "windows": 0,
+  "speech_windows": 0,
+  "status_counts": {},
+  "transcript_agreement_median": null,
+  "transcript_agreement_min": null,
+  "window_pass_rate": null,
+  "opening_words_agreement": null,
+  "openings_checked": 0,
+  "criteria": {
+   "agreement_min": 0.85,
+   "openings_min": 0.8,
+   "window_pass_rate_min": 0.8
+  },
+  "verdict": "UNKNOWN"
+ },
+ "tuning": {
+  "windows": 12,
+  "speech_windows": 12,
+  "status_counts": {
+   "COMPARED": 8,
+   "MINED_WINDOW_INVALID": 4
+  },
+  "transcript_agreement_median": 0.921,
+  "transcript_agreement_min": 0.109,
+  "window_pass_rate": 0.5,
+  "opening_words_agreement": 0.818,
+  "openings_checked": 11,
+  "criteria": {
+   "agreement_min": 0.85,
+   "openings_min": 0.8,
+   "window_pass_rate_min": 0.8
+  },
+  "verdict": "FAIL"
+ },
  "windows": [
   {
    "video_id": "0UTESr_lC2A",
@@ -28,7 +77,8 @@
      "mined": "Heavenly Father you are the eternal",
      "found": true
     }
-   ]
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "6Q98ZRdnzw8",
@@ -47,7 +97,8 @@
      "mined": "There is one more almond image",
      "found": false
     }
-   ]
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "6iERK-74EWg",
@@ -66,7 +117,8 @@
      "mined": "Notice what has happened to",
      "found": false
     }
-   ]
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "8YXRtsNnGX0",
@@ -74,22 +126,11 @@
     0,
     30
    ],
-   "status": "COMPARED",
-   "asr_words": 64,
-   "mined_words": 893,
-   "transcript_agreement": 0.121,
-   "openings_checked": 2,
-   "openings_found": 2,
-   "examples": [
-    {
-     "mined": "It is the ninth hour.",
-     "found": true
-    },
-    {
-     "mined": "You know this moment.",
-     "found": true
-    }
-   ]
+   "status": "MINED_WINDOW_INVALID",
+   "problems": [
+    "TRANSCRIPT_INCOMPLETE"
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "9iVoAk5NZAM",
@@ -97,9 +138,11 @@
     989,
     1019
    ],
-   "status": "NO_SPEECH_TO_COMPARE",
-   "asr_words": 71,
-   "mined_words": 0
+   "status": "MINED_WINDOW_INVALID",
+   "problems": [
+    "TRANSCRIPT_TIME_OUTSIDE_WINDOW"
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "FEyv4xRoPzs",
@@ -107,22 +150,11 @@
     1198,
     1228
    ],
-   "status": "COMPARED",
-   "asr_words": 67,
-   "mined_words": 87,
-   "transcript_agreement": 0.195,
-   "openings_checked": 2,
-   "openings_found": 0,
-   "examples": [
-    {
-     "mined": "And there was a rainbow round",
-     "found": false
-    },
-    {
-     "mined": "That is interesting because the Greek",
-     "found": false
-    }
-   ]
+   "status": "MINED_WINDOW_INVALID",
+   "problems": [
+    "TRANSCRIPT_INCOMPLETE"
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "MAZXkEhdKU8",
@@ -145,7 +177,8 @@
      "mined": "She became known as the mistress of evil",
      "found": true
     }
-   ]
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "NUXLAy7A8TM",
@@ -164,7 +197,8 @@
      "mined": "Heavenly Father, I pray for the",
      "found": true
     }
-   ]
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "STcBN9l5rfU",
@@ -183,7 +217,8 @@
      "mined": "Why do they do this? Zoroastrians consider",
      "found": true
     }
-   ]
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "TGdYF8jDdXk",
@@ -202,7 +237,8 @@
      "mined": "As the first light of Friday",
      "found": true
     }
-   ]
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "VGv3fbxG7OI",
@@ -210,9 +246,12 @@
     429,
     459
    ],
-   "status": "NO_SPEECH_TO_COMPARE",
-   "asr_words": 65,
-   "mined_words": 0
+   "status": "MINED_WINDOW_INVALID",
+   "problems": [
+    "TRANSCRIPT_LINE_TOO_LONG",
+    "TRANSCRIPT_TIME_OUTSIDE_WINDOW"
+   ],
+   "set": "tuning"
   },
   {
    "video_id": "_WD8NVhD5Ps",
@@ -235,8 +274,9 @@
      "mined": "The Assyrian message. In 2025,",
      "found": true
     }
-   ]
+   ],
+   "set": "tuning"
   }
  ],
- "reading": "agreement >= 0.85 and openings >= 0.8: mined structure usable as measured; below: model-reported only"
+ "reading": "verdict on the holdout set only; tuning windows were used to find defects and prove nothing"
 }

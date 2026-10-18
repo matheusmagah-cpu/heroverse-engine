@@ -1,5 +1,7 @@
 # HeroVerse modeling spec (measured, 2026-10-18)
 
+> **Warning (2026-10-18):** transcript-derived numbers here (wpm, beats, shots, "you" rate) include windows later found defective (DECISIONS, correction 2026-10-18). Informative only until recomputed from valid windows.
+
 Source: `evidence/structure-mining/20261017/measured.json` (`blueprint_stats.py`). Usable records need ≥ 90% coverage, narration (≥ 40 wpm) and a policy-clean source.
 
 - **Prayer:** 2 winners (Morning Grace Prayers).

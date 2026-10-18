@@ -1,5 +1,5 @@
 name: HeroVerse mining accuracy (native audio vs model-reported mining)
-# Mondays 00:20 UTC (after the acquisition day resets): 12 windows of the latest structure mining are acquired
+# Daily 00:20 UTC (after the acquisition day resets): up to 12 holdout windows (videos never used before) of the latest structure mining are acquired
 # from the original audio (acquire-reference-window.yml). When their profiles (our own ASR) are recorded, the
 # mined transcripts and opening words are compared with them and accuracy.json is written.
 on:
@@ -41,7 +41,7 @@ jobs:
         if: github.event_name == 'push' || inputs.mode == 'compare'
         run: |
           latest=$(ls -d migration/evidence/structure-mining/2* | sort | tail -1)
-          python3 -I -B migration/mining/accuracy_check.py "$latest" migration/acquisition/profiles
+          python3 -I -B migration/mining/accuracy_check.py "$latest" migration/acquisition/profiles migration/evidence/mining-accuracy-holdout.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$latest/accuracy.json"

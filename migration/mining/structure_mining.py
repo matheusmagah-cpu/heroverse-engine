@@ -168,8 +168,33 @@ def repair(report, start, end, gap=15):
     return report
 
 
+MAX_LINE_WORDS = 90         # one spoken sentence (long KJV verses included); a whole window in one line is not a transcript
+MIN_SPEECH_WPM = 60         # narration in these formats runs 90-160 wpm; far below means the model summarised or skipped
+
+
+def transcript_problems(report, start, end):
+    """Defects found in the 2026-10-18 accuracy audit (accuracy.json of 20261017): transcript lines stamped outside
+    their window (relative or rescaled times), a whole window in one line, and windows whose transcript covers a
+    fraction of the narration its own beats report. Empty list = usable transcript."""
+    lines = report.get("transcript") or []
+    problems = []
+    times = [t.get("start_seconds") for t in lines]
+    if any(not isinstance(x, (int, float)) or not start - 2 <= x <= end + 2 for x in times):
+        problems.append("TRANSCRIPT_TIME_OUTSIDE_WINDOW")
+    elif any(b < a - 2 for a, b in zip(times, times[1:])):
+        problems.append("TRANSCRIPT_TIME_NOT_ORDERED")
+    if any(len(str(t.get("text", "")).split()) > MAX_LINE_WORDS for t in lines):
+        problems.append("TRANSCRIPT_LINE_TOO_LONG")
+    speech = sum(max(0.0, min(b["end_seconds"], end) - max(b["start_seconds"], start))
+                 for b in report.get("beats") or [] if b.get("beat") != "music_only")
+    words = sum(len(str(t.get("text", "")).split()) for t in lines)
+    if speech >= 60 and words / (speech / 60) < MIN_SPEECH_WPM:
+        problems.append("TRANSCRIPT_INCOMPLETE")
+    return problems
+
+
 def valid_window(report, video_id, start, end):
-    if degenerate(report):
+    if degenerate(report) or transcript_problems(report, start, end):
         return False
     ok = (report.get("video_id") == video_id and report.get("window_start_seconds") == start
           and report.get("window_end_seconds") == end and report.get("audio_received") is True
