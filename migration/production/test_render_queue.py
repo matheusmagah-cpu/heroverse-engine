@@ -60,6 +60,9 @@ class Queue(unittest.TestCase):
                 if name in ("pilot-006", "pilot-007"):  # final decision UNKNOWN is retried, FAIL is not
                     gate = "UNKNOWN" if name == "pilot-006" else "FAIL"
                     (d / "out" / "gate.json").write_text(json.dumps({"decision": gate, "output_sha256": "x"}))
+                if name == "pilot-005":  # Shorts handed off, never made -> made again
+                    (d / "shorts").mkdir()
+                    (d / "shorts" / "inputs.json").write_text("{}")
                 if approved:
                     (d / "inspection").mkdir()
                     (d / "inspection" / "APPROVAL.json").write_text(json.dumps({"approved": True, "output_sha256": "x"}))
@@ -75,7 +78,7 @@ class Queue(unittest.TestCase):
                     rq.main(t, str(Path(t) / "none.json"), "reconcile")
             finally:
                 rq.datetime = real
-            self.assertEqual(buf.getvalue().split("\n")[:-1], ["approve pilot-003", "publish pilot-004", "approve pilot-006"])
+            self.assertEqual(buf.getvalue().split("\n")[:-1], ["approve pilot-003", "publish pilot-004", "shorts pilot-005", "approve pilot-006"])
 
 
 if __name__ == "__main__":

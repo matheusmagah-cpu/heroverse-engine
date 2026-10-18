@@ -8,7 +8,8 @@ render manifest exists for the current script (manifest.script_sha256).
 usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
   images: prints "PILOT id,id,..." for every pilot with images still missing
   render: prints the next pilot to render (earliest publish time) or nothing
-  reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR, or final decision UNKNOWN) and
+  reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR, or final decision UNKNOWN),
+  "shorts PILOT" (Shorts inputs handed off, Shorts never made) and
              "publish PILOT" (approved for this file, not on YouTube) so failed steps are retried
 """
 from datetime import datetime, timedelta, timezone
@@ -71,6 +72,9 @@ def main(production, ledger_path, mode, hours="48"):
                 print("publish", r["pilot"])  # due rows are never already on YouTube
             elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:
                 print("approve", r["pilot"])
+            # Shorts handed off by the render but never made (provider quota or error): made again
+            if (d / "shorts" / "inputs.json").exists() and not (d / "shorts" / "shorts.json").exists():
+                print("shorts", r["pilot"])
     else:
         nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"]), None)
         if nxt:
