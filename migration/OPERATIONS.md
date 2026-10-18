@@ -60,7 +60,7 @@ Read this file first; do not re-read history, logs or whole evidence files.
 ## Daily schedule (UTC; BRT = UTC-3) — the nightly chain runs without Claude
 | UTC | What | Where |
 |---|---|---|
-| 00:20 Mon | 12 native windows of the latest structure mining, then accuracy.json | mining-accuracy.yml → acquire-reference-window.yml |
+| 00:20 | native windows of videos never checked, then accuracy.json | mining-accuracy.yml → acquire-reference-window.yml |
 | 00:30 | missing images of pilots publishing in the next 72 h (FLUX + 2x upscale) | nightly-images.yml → cf-images.yml |
 | 01:00, 03:30 | next pilot of the queue (publishes ≤ 48 h, images complete, no render of this script): long video, QA; Shorts handed off | heroverse-runner render.yml (render_queue.py) |
 | after each render | Shorts: Gemini selection, own edit, watched review | shorts.yml (on shorts/inputs.json) |
@@ -70,7 +70,8 @@ Read this file first; do not re-read history, logs or whole evidence files.
 | 07:35 | the approved Short (one per long video, D-2026-10-18-03) at its slot | publish-shorts.yml (pending_shorts.py) |
 | 07:50 Sun | packaging mining (titles, tags, thumbnails, channel setup; 3 adjacent niches) | packaging-mining.yml |
 | 08:05 | hide remaining Portuguese uploads | channel-privacy.yml |
-| 08:30 Sun | structure mining of migration/mining/structure_channels.txt | structure-mining.yml |
+| 08:05 | **daily Claude analysis**: goal report + intel → decisions protocol (strategy/DECISIONS.md) → next scripts | scheduled Claude session |
+| 08:30 | structure mining of migration/mining/structure_channels.txt, incremental (new uploads only) | structure-mining.yml |
 | schedule.json | long video at publish_at; Shorts at shorts_slots (BRT 07:00 morning, 21:00 night) | YouTube publishAt |
 
 Claude's part: write the next scripts (2 per day: morning + night prayer) with schedule.json and images.json, at least 2 days ahead, and read the daily report. Scheduled workflows of the public runner stop after 60 days without a commit there.

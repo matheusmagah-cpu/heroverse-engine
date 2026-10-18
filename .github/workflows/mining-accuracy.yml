@@ -4,7 +4,7 @@ name: HeroVerse mining accuracy (native audio vs model-reported mining)
 # mined transcripts and opening words are compared with them and accuracy.json is written.
 on:
   schedule:
-    - cron: '20 0 * * 1'
+    - cron: '20 0 * * *'   # daily, after the acquisition day resets; only windows of videos never checked
   push:
     branches: [main]
     paths: ['migration/acquisition/profiles/**']
