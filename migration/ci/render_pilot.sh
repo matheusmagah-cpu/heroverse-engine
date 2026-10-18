@@ -73,9 +73,9 @@ if [ -z "${HERO_GEMINI_API_KEY:-}" ]; then
   gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
   printf '{"voice_asset": "%s", "voice_sha256": "%s", "figure_asset": "%s", "figure_sha256": "%s", "render": "%s"}\n' \
     "$PILOT-voice-sha256-$vsha.flac" "$vsha" "$PILOT-figure-sha256-$fsha.png" "$fsha" "${RUN_LABEL:-run}" > "$T/shorts-inputs.json"
-else ( q "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 5 &&
+else ( q "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 3 &&
   q "$T/cine/bin/python" -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/work/shorts" "$HERO_DEPTH_MODEL" &&
-  q "$T/cine/bin/python" -I -B migration/production/shorts_review.py "$T/work/shorts" 3 ) || echo "SHORTS_FAILED (the long video continues)"
+  q "$T/cine/bin/python" -I -B migration/production/shorts_review.py "$T/work/shorts" 1 ) || echo "SHORTS_FAILED (the long video continues)"
 fi
 end
 

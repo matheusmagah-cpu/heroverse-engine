@@ -338,7 +338,7 @@
     "model": "gemini-3.5-flash-lite",
     "status": "PASS"
    },
-   "publish": true
+   "publish": false
   },
   {
    "file": "short-04.mp4",
@@ -423,7 +423,7 @@
     "model": "gemini-3.5-flash-lite",
     "status": "PASS"
    },
-   "publish": true
+   "publish": false
   }
  ],
  "review_rubric": {
@@ -440,5 +440,6 @@
   ],
   "pass_item": 7,
   "pass_overall": 8
- }
+ },
+ "publish_note": "D-2026-10-18-03 (passes the 90% minimum: Fisher p = 0.062): one Short per long video."
 }
