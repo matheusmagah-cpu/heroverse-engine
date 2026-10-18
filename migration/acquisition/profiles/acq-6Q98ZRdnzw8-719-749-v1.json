@@ -1,0 +1,121 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 3,
+    "picture_changes_per_minute": 5.99,
+    "median_shot_seconds": 8.267,
+    "longest_shot_seconds": 12.5,
+    "motion_median_top_decile_diff": 1.029
+   },
+   "rhythm": {
+    "audio_onsets": 46,
+    "audio_onsets_per_minute": 91.8,
+    "tempo": {
+     "bpm": 101.48,
+     "confidence": 0.104
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.097,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": 0.580181,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 3,
+     "visual_events": 3,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -23.2,
+    "loudness_range_lu": 4.6,
+    "true_peak_dbtp": -8.6
+   },
+   "colour": {
+    "mean_brightness": 0.7353,
+    "brightness_std_over_time": 0.0916,
+    "mean_saturation": 0.1765,
+    "saturation_std_over_time": 0.0914
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.952,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.048
+    },
+    "label_counts": {
+     "speech": 59,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 3,
+     "UNCERTAIN": 0
+    },
+    "words": 73,
+    "words_per_minute": 145.7,
+    "transcript": "of the standard Hebrew lexicons connect the two directly. They explain that the almond was called the wakeful tree, or the watcher, because it is the first tree to wake up after winter. That is not poetry invented later. It is botany anyone in the land could see. In the hills of Israel, the almond blossoms in late winter, often while the other trees are still bare, Sometimes before its own leaves have"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 13.935,
+     "frames": 28
+    },
+    {
+     "label": "silence",
+     "start_seconds": 13.44,
+     "end_seconds": 14.415,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 13.92,
+     "end_seconds": 17.295,
+     "frames": 6
+    },
+    {
+     "label": "silence",
+     "start_seconds": 16.8,
+     "end_seconds": 17.775,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 17.28,
+     "end_seconds": 21.135,
+     "frames": 7
+    },
+    {
+     "label": "silence",
+     "start_seconds": 20.64,
+     "end_seconds": 21.615,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 21.12,
+     "end_seconds": 30.023,
+     "frames": 18
+    }
+   ]
+  }
+ ]
+}
