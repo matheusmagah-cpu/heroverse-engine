@@ -12,6 +12,12 @@ from pathlib import Path
 import sys
 
 DAILY = (14, 20, 23)
+REVIEW_MODELS = ("gemini-3.8-flash",)  # only the designated reviewer's PASS publishes (publish/prepublish_gate.py)
+
+
+def approved(s):
+    r = s.get("review") or {}
+    return bool(s.get("publish")) and r.get("status") == "PASS" and r.get("model") in REVIEW_MODELS
 LEAD = timedelta(minutes=45)
 
 
@@ -46,8 +52,8 @@ def pending(production, ledger, now=None):
         if not shorts_path.exists() or not manifest.exists():
             continue
         spec = json.loads(shorts_path.read_text())
-        approved = [s for s in spec["shorts"] if s.get("publish") and (s.get("review") or {}).get("status") == "PASS"]
-        todo = [s for s in approved if "video_id" not in entries.get(f"short:{spec['source_pilot']}:{s['sha256']}", {})]
+        ok = [s for s in spec["shorts"] if approved(s)]
+        todo = [s for s in ok if "video_id" not in entries.get(f"short:{spec['source_pilot']}:{s['sha256']}", {})]
         long_entry = entries.get(f"{d.name}:{json.loads(manifest.read_text())['output_sha256']}", {})
         if not todo or "video_id" not in long_entry:
             continue
@@ -74,6 +80,8 @@ def states(pilot_dir, ledger, now=None):
             state = "failed"
         elif not s.get("publish"):
             state = "not_selected"
+        elif not approved(s):
+            state = "review_by_undesignated_model"
         else:
             state = "approved_awaiting_slot"
         out.append({"file": s["file"], "sha256": s["sha256"], "state": state, "video_id": entry.get("video_id")})
