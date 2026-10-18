@@ -129,6 +129,15 @@ def review_items(review, names, sha):
     return out
 
 
+def market_summary(d):
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "mining"))
+        import market_evidence
+        return market_evidence.summary(d / "market" / "vidiq.json")
+    except Exception as e:  # informative only: an error here never touches the decision
+        return {"status": "UNKNOWN", "detail": f"{type(e).__name__}"}
+
+
 def decide(states):
     return "FAIL" if "FAIL" in states else ("UNKNOWN" if "UNKNOWN" in states or not states else "PASS")
 
@@ -176,6 +185,8 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
             "informative_not_deciding": {**(review or {}).get("scorecard_reported", {}),
                                          **{f"scan_{n}": r for n, r in ((scan or {}).get("rows") or {}).items()
                                             if not r.get("blocking")}},
+            # market evidence (vidIQ opinion) travels with the package, separate from the decision above
+            "market_evidence_not_deciding": market_summary(d),
             "method_notes": {"review_sampling": "watched review samples pictures at 0.5 frames/s, low resolution",
                              "not_claimed": ["perceived quality by viewers", "retention, CTR or revenue",
                                              "originality beyond the rights checks listed"]}}

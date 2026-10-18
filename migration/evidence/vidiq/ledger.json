@@ -1,0 +1,39 @@
+{
+ "version": "vidiq-ledger-v1",
+ "rule": "<= 1 research call a day (owner, 2026-10-18); more only announced first and approved",
+ "calls": [
+  {
+   "date": "2026-10-18",
+   "kind": "account",
+   "tool": "vidiq_balance",
+   "credits": 0,
+   "purpose": "plan limits",
+   "saved_to": "strategy/VIDIQ.md"
+  },
+  {
+   "date": "2026-10-18",
+   "kind": "research",
+   "tool": "vidiq_keyword_research x30",
+   "credits": 150,
+   "purpose": "pre-registered validation vs our panel demand (made before the owner's 1-call/day rule; counted, not repeated without notice)",
+   "saved_to": "evidence/vidiq/validation-20261018.json",
+   "approved_by_owner": false
+  },
+  {
+   "date": "2026-10-18",
+   "kind": "account",
+   "tool": "vidiq_balance",
+   "credits": 0,
+   "purpose": "credit check after validation",
+   "saved_to": "-"
+  },
+  {
+   "date": "2026-10-18",
+   "kind": "account",
+   "tool": "vidiq_user_channels",
+   "credits": 0,
+   "purpose": "connection check: HeroVerse UCuMF6pJQkyMzaVoAxFL86yA, account matheusmagah@gmail.com",
+   "saved_to": "strategy/VIDIQ.md"
+  }
+ ]
+}

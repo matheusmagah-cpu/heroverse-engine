@@ -99,6 +99,11 @@ class Gate(unittest.TestCase):
         self.assertEqual(run(qa, man, rev, scan=None)["decision"], "UNKNOWN")            # whole-file scan missing
         self.assertEqual(run(qa, man, rev, scan={"status": "ERROR", "error": "x"})["decision"], "UNKNOWN")
 
+    def test_market_evidence_never_decides(self):
+        r = run(*good())
+        self.assertEqual(r["decision"], "PASS")
+        self.assertEqual(r["market_evidence_not_deciding"]["status"], "UNKNOWN")   # no opinion: shown, not blocking
+
     def test_fail_outranks_unknown(self):
         qa, man, _ = good()
         qa["checks"]["no_third_party_footage"] = False

@@ -1,0 +1,52 @@
+{
+ "version": "vidiq-opinion-v1",
+ "pilot_id": "pilot-005",
+ "title": "Morning Prayer for Protection | Psalm 91 Over You and Your Family",
+ "generated_at": "2026-10-18T16:00:00Z",
+ "source": "vidIQ MCP (keyword research), reused from evidence/vidiq/validation-20261018.json; no new call",
+ "calls": [
+  {
+   "tool": "vidiq_keyword_research",
+   "args": "psalm 91",
+   "credits": 0,
+   "reused_from": "validation-20261018"
+  },
+  {
+   "tool": "vidiq_keyword_research",
+   "args": "prayer for protection",
+   "credits": 0,
+   "reused_from": "validation-20261018"
+  },
+  {
+   "tool": "vidiq_keyword_research",
+   "args": "morning prayer",
+   "credits": 0,
+   "reused_from": "validation-20261018"
+  }
+ ],
+ "data_as_of": "2026-10-18T09:20:09Z",
+ "opportunity": "'psalm 91': ~261k est. monthly YouTube searches, volume 80.9/100, competition 37.3/100 (low), +19.7% vs 30 days earlier; the only queried topic of our format with high volume, low competition and rising demand.",
+ "comparables": [],
+ "comparables_status": "UNKNOWN: no outlier/comparable query run yet; planned as the next daily call (vidiq_outliers 'psalm 91 prayer', long-form, 3 months, 5 credits)",
+ "evidence_for": [
+  "psalm 91: volume 80.9, competition 37.3, demand +19.7% in 30 days (vidIQ)",
+  "prayer for protection: ~104k/month, competition 48.5 (vidIQ); the title combines both",
+  "our panel: channels found for 'psalm 91' have a median of 313.6 views/day (Data API, panel-20261017, 69 channels)"
+ ],
+ "evidence_against": [
+  "morning prayer: competition 71/100 (high); 'Morning Prayer' is the title's first words",
+  "prayer for protection demand -14% in 30 days (vidIQ)",
+  "top markets for psalm 91: BR 28%, US 22%, VN 17% (vidIQ) — part of the demand is not English-language",
+  "vidIQ demand failed our validation (rho 0.40 < 0.50): direction only, not magnitude"
+ ],
+ "freshness": "vidIQ metrics as of 2026-10-18 09:20 UTC; our panel value from 2026-10-17",
+ "limitations": [
+  "vidIQ volumes are modelled estimates with no published accuracy",
+  "validation FAIL: informative only",
+  "no comparables yet",
+  "not a forecast of views, subscribers, watch hours or revenue"
+ ],
+ "recommendation": "Keep pilot-005 as written (Psalm 91 protection, ~23 min). No change to title or format: the vidIQ evidence supports the topic but cannot pass the 90% rule for a change. Next call: comparables for Psalm 91 before its publication (2026-10-20 10:00 UTC).",
+ "relation_to_content": "Our own original prayer over the KJV text of Psalm 91; nothing copied from any competitor (script, voice, images or identity).",
+ "validation_status": "informative_only (vidIQ validation FAIL 2026-10-18, rho 0.404 < 0.5)"
+}

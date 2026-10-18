@@ -26,10 +26,12 @@ The owner uses vidIQ (app.vidiq.com, channel HeroVerse connected; screenshot 202
 | AI titles/thumbnails/ideas | not used to decide | our packaging is mined and gated; an AI suggestion is not evidence |
 | Any change of strategy, format, packaging or cadence | only through the owner's 90 % rule (DECISIONS.md) | vidIQ numbers alone never pass it |
 
-Budget: the connected account holds 6,000 renewable credits a month (+120 add-on; balance read 2026-10-18,
-renews 2026-11-18); keyword research costs 5 credits. Cap for the project: 1,000 credits a month (≈ 200 calls),
-spent by the main/daily Claude session; never in GitHub Actions without a read-only API key stored as a secret
-(owner decision). No plan change or purchase.
+Cadence (owner, 2026-10-18): **at most 1 research call a day**, on the most important decision in the queue; its
+result is saved and reused by every later step (script, title/thumbnail, pre-publication package). A research that
+needs more calls or credits is announced to the owner first. Every call goes in `evidence/vidiq/ledger.json`
+(`market_evidence.py budget` tells whether today's call is still free). Account calls (balance, linked channel) cost 0.
+Plan: the connected account has 6,000 renewable credits a month + 120 add-on (read 2026-10-18; renews 2026-11-18);
+research tools cost 5 credits. No plan change or purchase.
 
 ## Validation before vidIQ may break a tie between topics (pre-registered)
 - Sample: the 30 queries of our market panel (`market-panel/panel-*.json`), plus the next 10 script topics.
@@ -57,5 +59,20 @@ read. The research tools and the MCP connector do not need the channel connected
 account for research and revoke its channel access at myaccount.google.com/permissions if write access is not
 needed (reversible; reconnect any time).
 
-## Status
-Connector connected 2026-10-18 by the owner (claude.ai → Settings → Connectors → vidIQ).
+## Status and availability (checked 2026-10-18)
+- Connected account matheusmagah@gmail.com; linked channel HeroVerse `UCuMF6pJQkyMzaVoAxFL86yA` (@heroverse74), the
+  same channel the pipeline publishes to. vidIQ showed 262 subscribers, the Data API 263: our numbers stay official.
+- Available in the main Claude Code session (and the daily analysis bound to it): yes (tools listed and called).
+- Fresh routine sessions: no (they have no repository access). GitHub Actions: no (would need a read-only vidIQ API
+  key as a secret; not configured, owner decision).
+
+## Place in the existing flow (no new routine)
+1. Daily analysis (08:05 UTC, main session): picks the queue's most important open decision (next script's topic,
+   or the next video to publish), checks the ledger, makes at most one research call, saves the raw result under
+   `evidence/vidiq/` and writes/updates `production/<pilot>/market/vidiq.json` (opinion).
+2. Opinion fields (validated by `mining/market_evidence.py`): opportunity, comparables (or comparables_status
+   UNKNOWN), evidence_for, evidence_against (mandatory), data_as_of, limitations, recommendation,
+   relation_to_content (our own original work, nothing copied), validation_status, calls with credits.
+3. Pre-publication package: `gate.json` carries `market_evidence_not_deciding` (KNOWN / STALE > 14 days /
+   INVALID / UNKNOWN when absent). It never changes PASS/FAIL/UNKNOWN; technical quality, the watched review,
+   rights and QA stay the only gates; no forecast of views, revenue or monetization is implied.
