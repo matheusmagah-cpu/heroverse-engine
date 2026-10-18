@@ -90,6 +90,10 @@ analysis (08:05 UTC) is bound to the same session; the two older routines that r
 
 Claude's part: write the next scripts (2 per day: morning + night prayer) with schedule.json and images.json, at least 2 days ahead, and read the daily report. Scheduled workflows of the public runner stop after 60 days without a commit there.
 
+## External tools
+- vidIQ: research only (keyword demand, outliers, trending), informative until validated; budget ≤ 30 MCP calls
+  a month on Free; never a source of our own channel's numbers; rules in `strategy/VIDIQ.md`.
+
 ## How publication starts (no Claude tools needed)
 Each pilot has `schedule.json` (`publish_at` plus `shorts_slots`, in UTC).
 
