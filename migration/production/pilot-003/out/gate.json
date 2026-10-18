@@ -2,18 +2,18 @@
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-003",
  "output_sha256": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50",
- "decision": "FAIL",
+ "decision": "UNKNOWN",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
   "technical": "PASS",
-  "audio": "FAIL",
+  "audio": "UNKNOWN",
   "transcript": "PASS",
-  "captions": "PASS",
-  "sync": "PASS",
-  "image": "FAIL",
+  "captions": "UNKNOWN",
+  "sync": "UNKNOWN",
+  "image": "UNKNOWN",
   "rights": "PASS",
-  "content_and_policy": "FAIL",
+  "content_and_policy": "UNKNOWN",
   "scorecard": "PASS",
   "full_file_scan": "PASS",
   "preflight": "PASS"
@@ -45,12 +45,6 @@
    {
     "source": "binding",
     "item": "review_for_this_file",
-    "state": "PASS",
-    "detail": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50"
-   },
-   {
-    "source": "binding",
-    "item": "video_file_hash",
     "state": "PASS",
     "detail": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50"
    }
@@ -96,8 +90,8 @@
    {
     "source": "review",
     "item": "audio_clarity_and_mix",
-    "state": "FAIL",
-    "detail": 6.8
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    }
   ],
   "transcript": [
@@ -141,8 +135,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "PASS",
-    "detail": 7.0
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    }
   ],
   "sync": [
@@ -159,8 +153,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "PASS",
-    "detail": 7.0
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    }
   ],
   "image": [
@@ -197,14 +191,14 @@
    {
     "source": "review",
     "item": "picture_quality",
-    "state": "FAIL",
-    "detail": 6.7
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
-    "state": "FAIL",
-    "detail": 6.2
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    }
   ],
   "rights": [
@@ -233,32 +227,32 @@
    {
     "source": "review",
     "item": "opening_and_promise",
-    "state": "FAIL",
-    "detail": 6.8
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
-    "state": "FAIL",
-    "detail": 6.4
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
-    "state": "PASS",
-    "detail": 7.0
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    },
    {
     "source": "review",
     "item": "policy_safe",
-    "state": "PASS",
-    "detail": 7.0
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    },
    {
     "source": "review",
     "item": "overall",
-    "state": "FAIL",
-    "detail": 6.7
+    "state": "UNKNOWN",
+    "detail": "reviewer model gemini-3.6-flash is not the designated one"
    }
   ],
   "scorecard": [
