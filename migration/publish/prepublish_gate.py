@@ -52,7 +52,9 @@ DIMENSIONS = {
     "content_and_policy": {"qa": [], "review": ["opening_and_promise", "pacing_and_visual_variety", "scripture_on_screen",
                                                 "policy_safe"]},
 }
-SCORE_HARD = ("minutes", "words_per_minute", "first_spoken_at", "scripture_per_10_min", "coverage")
+# rows measured on our own file and script always block; miner rows block when long_review reports them as hard
+# (only once the miner is proven on the holdout) and are then checked like any other hard row
+SCORE_HARD = ("minutes", "scripture_per_10_min")
 
 
 def sha256_file(path):

@@ -48,5 +48,19 @@ class Holds(unittest.TestCase):
             self.assertTrue(all(a["image"] != b["image"] for a, b in zip(plan[1:], plan[2:])), total)
 
 
+class Reference(unittest.TestCase):
+    def test_reference_leaves_before_the_closing_words_pilot_003(self):
+        timeline = json.loads((HERE / "pilot-003/out/timeline.json").read_text())
+        seg = next(s for s in timeline["segments"] if s["id"] == "blessing")
+        end = sr.reference_end(seg, timeline["sentences"])
+        amen = next(s for s in timeline["sentences"] if s["segment"] == "blessing" and "amen" in s["text"])
+        self.assertLessEqual(end, amen["start"])
+        self.assertAlmostEqual(end, 840.795, places=2)            # end of "...and give thee peace."
+
+    def test_whole_segment_when_no_kjv_sentence(self):
+        seg = {"id": "s", "start": 1.0, "end": 9.0}
+        self.assertEqual(sr.reference_end(seg, [{"segment": "s", "text": "Be still and know.", "end": 4.0}]), 9.0)
+
+
 if __name__ == "__main__":
     unittest.main()

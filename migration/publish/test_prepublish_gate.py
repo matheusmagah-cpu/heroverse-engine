@@ -64,8 +64,10 @@ class Gate(unittest.TestCase):
         self.assertEqual((r["decision"], r["dimensions"]["image"]), ("FAIL", "FAIL"))
         low = copy.deepcopy(rev); low["watched_review"]["overall"] = 7.5
         self.assertEqual(run(qa, man, low)["decision"], "FAIL")
-        hard = copy.deepcopy(rev); hard["scorecard_hard"]["coverage"]["pass"] = False
+        hard = copy.deepcopy(rev); hard["scorecard_hard"]["minutes"]["pass"] = False
         self.assertEqual(run(qa, man, hard)["decision"], "FAIL")
+        miner = copy.deepcopy(rev); miner["scorecard_hard"]["coverage"] = {"pass": False, "value": 0.69}  # proven miner row
+        self.assertEqual(run(qa, man, miner)["decision"], "FAIL")
         self.assertEqual(run(qa, man, rev, preflight=["THUMBNAIL_SIZE"])["decision"], "FAIL")
         gap = copy.deepcopy(SCAN); gap["status"] = "FAIL"; gap["rows"]["black_picture"].update(longest_s=1.0, **{"pass": False})
         self.assertEqual(run(qa, man, rev, scan=gap)["dimensions"]["full_file_scan"], "FAIL")   # 1 s black gap
