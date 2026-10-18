@@ -1,69 +1,46 @@
 {
  "version": "long-review-v1",
  "pilot_id": "pilot-003",
- "output_sha256": "91e24033aece99585094d6ffe4a52482b0625588df5cd6a57aa5a4c2a54e2ee1",
+ "output_sha256": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50",
  "status": "FAIL",
  "scorecard_hard": {
   "minutes": {
-   "value": 14.5,
+   "value": 14.47,
    "band": [
     10.02,
     50.0
    ],
    "pass": true
   },
-  "words_per_minute": {
-   "value": 113.9,
-   "band": [
-    115,
-    165
-   ],
-   "pass": false
-  },
-  "first_spoken_at": {
-   "value": 0,
-   "band": [
-    0,
-    1.5
-   ],
-   "pass": true
-  },
   "scripture_per_10_min": {
-   "value": 8.0,
+   "value": 9.67,
    "band": [
     4,
     99
    ],
    "pass": true
-  },
-  "coverage": {
-   "value": 0.691,
-   "band": [
-    0.9,
-    1.01
-   ],
-   "pass": false
   }
  },
  "scorecard_reported": {
   "words_per_minute": {
-   "value": 113.9,
+   "value": 142.4,
    "band": [
-    140,
-    160
+    115,
+    165
    ],
-   "inside": false
+   "inside": true,
+   "note": "miner accuracy unproven: reported, not blocking"
   },
   "beats_per_minute": {
-   "value": 2.6,
+   "value": 3.2,
    "band": [
     2.0,
     2.6
    ],
-   "inside": true
+   "inside": false
   },
   "shots_per_minute_model_counted": {
-   "value": 3.9,
+   "value": 3.4,
    "band": [
     6,
     99
@@ -71,7 +48,7 @@
    "inside": false
   },
   "you_per_100_words": {
-   "value": 4.1,
+   "value": 2.9,
    "band": [
     6,
     99
@@ -79,35 +56,51 @@
    "inside": false
   },
   "minutes": {
-   "value": 14.5,
+   "value": 14.47,
    "band": [
     15,
     45
    ],
    "inside": false
+  },
+  "first_spoken_at": {
+   "value": 300.0,
+   "band": [
+    0,
+    1.5
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
+  },
+  "coverage": {
+   "value": 0.345,
+   "band": [
+    0.9,
+    1.01
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
   }
  },
  "watched_review": {
-  "opening_and_promise": 9.0,
-  "picture_quality": 8.5,
-  "figure_and_background_integrity": 7.5,
-  "captions_readable_and_synced": 9.0,
-  "audio_clarity_and_mix": 9.0,
-  "pacing_and_visual_variety": 6.5,
-  "scripture_on_screen": 8.5,
-  "policy_safe": 10.0,
-  "overall": 8.0,
+  "opening_and_promise": 6.8,
+  "picture_quality": 6.7,
+  "figure_and_background_integrity": 6.2,
+  "captions_readable_and_synced": 7.0,
+  "audio_clarity_and_mix": 6.8,
+  "pacing_and_visual_variety": 6.4,
+  "scripture_on_screen": 7.0,
+  "policy_safe": 7.0,
+  "overall": 6.7,
   "issues": [
-   "00:00-14:28: The foreground figure cutout remains completely static with zero pose variation or subtle animation across the entire 14-minute video.",
-   "00:00-14:28: Visual background variety relies on cycling through the same 5-6 AI background plates repeatedly.",
-   "00:02-14:28: Corner overlay prompts ('Type AMEN', 'LIKE', 'SHARE', 'SUBSCRIBE') are permanently onscreen, causing slight visual clutter during a quiet devotional.",
-   "14:01-14:06: The 'Numbers 6:24-26 (KJV)' scripture tag lingers on screen during the closing 'In Jesus' name, amen' after the scripture reading has finished."
+   "Static character overlay remains unchanged across numerous background transitions, creating repetitive composition."
   ],
-  "strongest_moment": "00:00-00:46: The gentle, welcoming opening hook directly meets tired viewers with empathy, establishing an inviting and peaceful rhythm for prayer.",
-  "model": "gemini-3.8-flash",
+  "strongest_moment": "The structured breathing pause at 03:38 that pairs relaxing music with a calm, inviting tone.",
+  "model": "gemini-3.6-flash",
   "status": "FAIL"
  },
  "failed_windows": [
+  0,
   600
  ],
  "measured": {
@@ -117,325 +110,38 @@
   "chapters": 0,
   "likes_per_1k_views": 0.0,
   "comments_per_1k_views": 0.0,
-  "coverage_fraction": 0.691,
-  "beats": 26,
-  "beat_seconds_median": 22.0,
-  "beats_per_minute": 2.6,
-  "shots_per_minute_model_counted": 3.9,
+  "coverage_fraction": 0.345,
+  "beats": 16,
+  "beat_seconds_median": 20.5,
+  "beats_per_minute": 3.2,
+  "shots_per_minute_model_counted": 3.4,
   "first_spoken_beat": {
-   "at": 0,
-   "beat": "hook"
+   "at": 300.0,
+   "beat": "scripture"
   },
   "beat_mix": {
-   "hook": 1,
-   "promise": 1,
-   "scripture": 8,
-   "teaching": 5,
-   "application": 1,
-   "prayer": 10
+   "scripture": 5,
+   "teaching": 3,
+   "prayer": 8
   },
   "scripture_references": [
-   "2 Corinthians 12:9",
-   "Colossians 3:23",
-   "Isaiah 40:29",
-   "Isaiah 40:31",
-   "Matthew 11:28",
-   "Psalm 28:7",
-   "Psalm 5:3",
-   "Psalm 73:26"
+   "2 Corinthians 12:9 (KJV)",
+   "Colossians 3:23 (KJV)",
+   "Matthew 11:28 (KJV)",
+   "Psalm 28:7 (KJV)",
+   "Psalm 73:26 (KJV)"
   ],
-  "scripture_per_10_min": 8.0,
+  "scripture_per_10_min": 10.0,
   "speech": {
-   "words": 1139,
-   "words_per_minute": 113.9,
-   "sentence_words_median": 10.0,
-   "you_per_100_words": 4.1,
+   "words": 712,
+   "words_per_minute": 142.4,
+   "sentence_words_median": 11.0,
+   "you_per_100_words": 2.9,
    "questions_per_minute": 0.0,
-   "first_15s_words": "Good morning. If you woke up already tired, before the day has even begun, stay with me for the next few minutes. God has not run out of strength, and this morning he wants to give some of it to you."
+   "first_15s_words": ""
   }
  },
  "windows": [
-  {
-   "video_id": "pilot-003",
-   "window_start_seconds": 0,
-   "window_end_seconds": 300,
-   "audio_received": true,
-   "visual_received": true,
-   "transcript": [
-    {
-     "start_seconds": 0.0,
-     "text": "Good morning."
-    },
-    {
-     "start_seconds": 1.9,
-     "text": "If you woke up already tired, before the day has even begun, stay with me for the next few minutes."
-    },
-    {
-     "start_seconds": 9.2,
-     "text": "God has not run out of strength, and this morning he wants to give some of it to you."
-    },
-    {
-     "start_seconds": 15.0,
-     "text": "Take one slow breath with me."
-    },
-    {
-     "start_seconds": 19.0,
-     "text": "You do not have to pretend you are full of energy."
-    },
-    {
-     "start_seconds": 23.2,
-     "text": "You can come to him exactly as you are: the heavy eyes, the long list, the worry you carried to bed and found waiting for you when you woke."
-    },
-    {
-     "start_seconds": 33.2,
-     "text": "Let your shoulders drop."
-    },
-    {
-     "start_seconds": 35.8,
-     "text": "Unclench your hands."
-    },
-    {
-     "start_seconds": 38.0,
-     "text": "For the next few minutes, nothing is required of you except to listen and to let him lift what you cannot lift alone."
-    },
-    {
-     "start_seconds": 47.0,
-     "text": "The prophet Isaiah wrote these words to people who were exhausted."
-    },
-    {
-     "start_seconds": 52.2,
-     "text": "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint."
-    },
-    {
-     "start_seconds": 107.0,
-     "text": "Notice the word renew."
-    },
-    {
-     "start_seconds": 109.0,
-     "text": "You are not asked to manufacture strength out of nothing."
-    },
-    {
-     "start_seconds": 113.2,
-     "text": "You are invited to receive it again, the way a field receives rain."
-    },
-    {
-     "start_seconds": 118.5,
-     "text": "Waiting on the Lord is not doing nothing."
-    },
-    {
-     "start_seconds": 122.2,
-     "text": "It is turning toward him first, before the phone, before the news, before the noise, and letting him set the pace of your day."
-    },
-    {
-     "start_seconds": 133.0,
-     "text": "So let us begin honestly."
-    },
-    {
-     "start_seconds": 135.2,
-     "text": "Lord, here I am."
-    },
-    {
-     "start_seconds": 137.0,
-     "text": "You know how I slept, and you know how I feel."
-    },
-    {
-     "start_seconds": 141.0,
-     "text": "I will not hide my tiredness from you."
-    },
-    {
-     "start_seconds": 144.2,
-     "text": "I wait on you this morning."
-    },
-    {
-     "start_seconds": 146.5,
-     "text": "Renew my strength."
-    },
-    {
-     "start_seconds": 148.2,
-     "text": "Not the strength to do everything, but the strength to do the next right thing, and then the one after that."
-    },
-    {
-     "start_seconds": 157.1,
-     "text": "Isaiah says it again, just two verses earlier."
-    },
-    {
-     "start_seconds": 201.0,
-     "text": "He giveth power to the faint; and to them that have no might he increaseth strength."
-    },
-    {
-     "start_seconds": 209.0,
-     "text": "Look at who receives the power."
-    },
-    {
-     "start_seconds": 211.5,
-     "text": "Not the strong."
-    },
-    {
-     "start_seconds": 212.8,
-     "text": "Not the people who have it all together."
-    },
-    {
-     "start_seconds": 216.0,
-     "text": "The faint."
-    },
-    {
-     "start_seconds": 217.8,
-     "text": "The ones with no might left."
-    },
-    {
-     "start_seconds": 220.2,
-     "text": "If that describes you this morning, you are not disqualified."
-    },
-    {
-     "start_seconds": 225.0,
-     "text": "You are exactly the person this promise was written for."
-    },
-    {
-     "start_seconds": 231.0,
-     "text": "David prayed like this at the start of his days."
-    },
-    {
-     "start_seconds": 235.0,
-     "text": "My voice shalt thou hear in the morning, O LORD; in the morning will I direct my prayer unto thee, and will look up."
-    },
-    {
-     "start_seconds": 244.8,
-     "text": "Lord, like David, I direct my prayer to you before anything else."
-    },
-    {
-     "start_seconds": 250.0,
-     "text": "Hear my voice this morning."
-    },
-    {
-     "start_seconds": 252.2,
-     "text": "I lift my eyes from the problems in front of me and I look up."
-    },
-    {
-     "start_seconds": 257.0,
-     "text": "Remind me that you are above this day, and that nothing in it will surprise you."
-    }
-   ],
-   "beats": [
-    {
-     "start_seconds": 0,
-     "end_seconds": 8.5,
-     "beat": "hook",
-     "opening_words_verbatim": "Good morning. If you woke up",
-     "content": "Invites tired viewers to pause for a morning prayer.",
-     "device": "direct address",
-     "emotion": "welcoming"
-    },
-    {
-     "start_seconds": 8.5,
-     "end_seconds": 18.5,
-     "beat": "promise",
-     "opening_words_verbatim": "God has not run out of strength,",
-     "content": "Assures viewers that God desires to renew their energy.",
-     "device": "promise",
-     "emotion": "hopeful"
-    },
-    {
-     "start_seconds": 18.5,
-     "end_seconds": 46.5,
-     "beat": "application",
-     "opening_words_verbatim": "You do not have to pretend you",
-     "content": "Encourages physical relaxation and surrendering daily worries.",
-     "device": "direct instruction",
-     "emotion": "comforting"
-    },
-    {
-     "start_seconds": 46.5,
-     "end_seconds": 106.5,
-     "beat": "scripture",
-     "opening_words_verbatim": "The prophet Isaiah wrote these words to",
-     "content": "Quotes Isaiah 40:31 on waiting upon the Lord.",
-     "device": "scripture quotation",
-     "emotion": "reverent"
-    },
-    {
-     "start_seconds": 106.5,
-     "end_seconds": 132.5,
-     "beat": "teaching",
-     "opening_words_verbatim": "Notice the word renew. You are not",
-     "content": "Explains renewal as receiving strength rather than self-generating it.",
-     "device": "metaphor",
-     "emotion": "encouraging"
-    },
-    {
-     "start_seconds": 132.5,
-     "end_seconds": 156.5,
-     "beat": "prayer",
-     "opening_words_verbatim": "So let us begin honestly. Lord, here",
-     "content": "Leads a prayer expressing exhaustion and requesting step-by-step guidance.",
-     "device": "guided prayer",
-     "emotion": "humble"
-    },
-    {
-     "start_seconds": 156.5,
-     "end_seconds": 208.5,
-     "beat": "scripture",
-     "opening_words_verbatim": "Isaiah says it again, just two verses",
-     "content": "Recites Isaiah 40:29 regarding God empowering the weak.",
-     "device": "scripture quotation",
-     "emotion": "reassuring"
-    },
-    {
-     "start_seconds": 208.5,
-     "end_seconds": 230.5,
-     "beat": "teaching",
-     "opening_words_verbatim": "Look at who receives the power. Not",
-     "content": "Highlights that divine help targets those who feel spent.",
-     "device": "contrast",
-     "emotion": "uplifting"
-    },
-    {
-     "start_seconds": 230.5,
-     "end_seconds": 244.5,
-     "beat": "scripture",
-     "opening_words_verbatim": "David prayed like this at the start",
-     "content": "Quotes Psalm 5:3 on seeking God early in the morning.",
-     "device": "scripture quotation",
-     "emotion": "devoted"
-    },
-    {
-     "start_seconds": 244.5,
-     "end_seconds": 300,
-     "beat": "prayer",
-     "opening_words_verbatim": "Lord, like David, I direct my prayer",
-     "content": "Prays to prioritize God over daily troubles.",
-     "device": "guided prayer",
-     "emotion": "faithful"
-    }
-   ],
-   "picture": {
-    "image_kind": "AI artwork",
-    "shot_sizes": [
-     "medium shot",
-     "wide shot"
-    ],
-    "shots_counted": 12,
-    "motion": "slow zoom and gentle particle animation",
-    "on_screen_text": "Centered bold captions and Scripture citations.",
-    "figure_or_presenter": "AI figure of Jesus praying",
-    "colour_and_light": "Warm sunrise tones, soft lighting, natural scenery",
-    "transitions": "cross-dissolve"
-   },
-   "sound": {
-    "voice": "Calm, slow male narration",
-    "pace": "Slow and reflective",
-    "music": "Gentle ambient synth pad and piano",
-    "music_changes": "Consistent background level throughout",
-    "sound_effects": "none"
-   },
-   "scripture_references": [
-    "Isaiah 40:31",
-    "Isaiah 40:29",
-    "Psalm 5:3"
-   ],
-   "limitations": [
-    "AI generated visuals and synthetic voice actor."
-   ]
-  },
   {
    "video_id": "pilot-003",
    "window_start_seconds": 300,
@@ -444,51 +150,51 @@
    "visual_received": true,
    "transcript": [
     {
-     "start_seconds": 300.9,
+     "start_seconds": 301.2,
      "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest."
     },
     {
-     "start_seconds": 308.8,
+     "start_seconds": 308.7,
      "text": "The rest Jesus offers is not only for the end of the day."
     },
     {
-     "start_seconds": 313.7,
+     "start_seconds": 313.9,
      "text": "It is a rest you can carry into the middle of it."
     },
     {
-     "start_seconds": 317.4,
+     "start_seconds": 317.7,
      "text": "You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone."
     },
     {
-     "start_seconds": 325.8,
+     "start_seconds": 325.5,
      "text": "He is yoked beside you, pulling with you."
     },
     {
-     "start_seconds": 329.8,
+     "start_seconds": 329.7,
      "text": "Lord, I bring you my work today."
     },
     {
-     "start_seconds": 332.9,
+     "start_seconds": 332.8,
      "text": "The tasks I enjoy and the ones I have been putting off."
     },
     {
-     "start_seconds": 337.1,
+     "start_seconds": 336.9,
      "text": "The conversations I need to have."
     },
     {
-     "start_seconds": 340.5,
+     "start_seconds": 340.4,
      "text": "The people who depend on me."
     },
     {
-     "start_seconds": 343.3,
+     "start_seconds": 343.4,
      "text": "Give me focus and diligence."
     },
     {
-     "start_seconds": 345.8,
+     "start_seconds": 345.9,
      "text": "Help me to do good work, honestly and well, and to leave the results with you."
     },
     {
-     "start_seconds": 351.9,
+     "start_seconds": 351.8,
      "text": "When I am tempted to rush, slow me down."
     },
     {
@@ -500,23 +206,23 @@
      "text": "And whatsoever ye do, do it heartily, as to the Lord, and not unto men."
     },
     {
-     "start_seconds": 366.9,
+     "start_seconds": 367.0,
      "text": "Father, there are parts of today I already know I cannot handle on my own."
     },
     {
-     "start_seconds": 372.9,
+     "start_seconds": 373.1,
      "text": "I name them before you now, quietly, in my heart."
     },
     {
-     "start_seconds": 377.3,
+     "start_seconds": 377.2,
      "text": "Instead of pretending, I admit my weakness."
     },
     {
-     "start_seconds": 381.1,
+     "start_seconds": 380.9,
      "text": "And I ask you to meet me right there, in the place where I run out."
     },
     {
-     "start_seconds": 386.9,
+     "start_seconds": 387.0,
      "text": "The apostle Paul heard this answer when he begged for his weakness to be taken away."
     },
     {
@@ -524,11 +230,11 @@
      "text": "My grace is sufficient for thee: for my strength is made perfect in weakness."
     },
     {
-     "start_seconds": 401.1,
+     "start_seconds": 401.3,
      "text": "God did not remove Paul's weakness."
     },
     {
-     "start_seconds": 404.3,
+     "start_seconds": 404.7,
      "text": "He filled it."
     },
     {
@@ -536,15 +242,15 @@
      "text": "The place where Paul ran out became the place where Christ's power showed up most clearly."
     },
     {
-     "start_seconds": 412.1,
+     "start_seconds": 412.3,
      "text": "So your weakness this morning is not the end of the story."
     },
     {
-     "start_seconds": 416.7,
+     "start_seconds": 417.1,
      "text": "It may be the exact spot where God plans to show you what he can do."
     },
     {
-     "start_seconds": 423.2,
+     "start_seconds": 422.8,
      "text": "Lord, I lift up the people I love."
     },
     {
@@ -556,19 +262,19 @@
      "text": "Give them strength for their own days."
     },
     {
-     "start_seconds": 433.4,
+     "start_seconds": 433.2,
      "text": "Protect them as they go out and as they come back."
     },
     {
-     "start_seconds": 437.5,
+     "start_seconds": 437.3,
      "text": "Where there is tension between us, soften our hearts."
     },
     {
-     "start_seconds": 441.3,
+     "start_seconds": 441.1,
      "text": "Help me to be patient and kind with them, even when I am tired."
     },
     {
-     "start_seconds": 447.1,
+     "start_seconds": 447.4,
      "text": "And Lord, I pray for everyone listening to this prayer who is carrying more than usual."
     },
     {
@@ -576,7 +282,7 @@
      "text": "The caregivers who were up in the night."
     },
     {
-     "start_seconds": 457.2,
+     "start_seconds": 457.4,
      "text": "The parents of newborns."
     },
     {
@@ -588,11 +294,11 @@
      "text": "The ones working two jobs."
     },
     {
-     "start_seconds": 463.9,
+     "start_seconds": 464.2,
      "text": "The ones waiting for news."
     },
     {
-     "start_seconds": 466.1,
+     "start_seconds": 466.8,
      "text": "Meet each of them this morning with exactly the strength they need for today."
     },
     {
@@ -600,7 +306,7 @@
      "text": "My flesh and my heart faileth: but God is the strength of my heart, and my portion for ever."
     },
     {
-     "start_seconds": 481.9,
+     "start_seconds": 481.6,
      "text": "Father, I trust you with what I need today."
     },
     {
@@ -608,19 +314,19 @@
      "text": "The bills, the groceries, the plans that depend on money I do not yet see."
     },
     {
-     "start_seconds": 491.5,
+     "start_seconds": 491.0,
      "text": "You know every need before I speak it."
     },
     {
-     "start_seconds": 494.6,
+     "start_seconds": 494.3,
      "text": "Provide what is necessary, and give me wisdom with what I already have."
     },
     {
-     "start_seconds": 499.9,
+     "start_seconds": 500.0,
      "text": "Keep me from fear, and keep me generous."
     },
     {
-     "start_seconds": 504.3,
+     "start_seconds": 503.7,
      "text": "Lord, there are choices in front of me today, some small and some that feel very big."
     },
     {
@@ -632,19 +338,19 @@
      "text": "Give me wisdom."
     },
     {
-     "start_seconds": 516.8,
+     "start_seconds": 517.2,
      "text": "Close the doors that should be closed and open the ones you have prepared."
     },
     {
-     "start_seconds": 522.3,
+     "start_seconds": 522.2,
      "text": "And if I cannot see the whole path, give me light enough for the next step."
     },
     {
-     "start_seconds": 528.3,
+     "start_seconds": 528.2,
      "text": "Father, if I am carrying a grudge into this day, I lay it down before you."
     },
     {
-     "start_seconds": 534.5,
+     "start_seconds": 534.6,
      "text": "You know the words that still sting and the person I keep replaying in my mind."
     },
     {
@@ -656,19 +362,23 @@
      "text": "But I choose not to let it drain the strength you are giving me."
     },
     {
-     "start_seconds": 548.5,
+     "start_seconds": 548.7,
      "text": "Help me to forgive as you have forgiven me, and to speak with grace today."
     },
     {
-     "start_seconds": 554.8,
+     "start_seconds": 555.0,
      "text": "The LORD is my strength and my shield; my heart trusted in him, and I am helped: therefore my heart greatly rejoiceth; and with my song will I praise him."
     },
     {
-     "start_seconds": 569.1,
-     "text": "Strength for what is inside you. A shield for what comes at you from outside."
+     "start_seconds": 569.2,
+     "text": "Strength for what is inside you."
     },
     {
-     "start_seconds": 574.9,
+     "start_seconds": 571.9,
+     "text": "A shield for what comes at you from outside."
+    },
+    {
+     "start_seconds": 575.0,
      "text": "God offers both in the same sentence."
     },
     {
@@ -677,196 +387,200 @@
     },
     {
      "start_seconds": 583.5,
-     "text": "Trust comes first. The help follows."
+     "text": "Trust comes first."
     },
     {
-     "start_seconds": 587.6,
+     "start_seconds": 585.3,
+     "text": "The help follows."
+    },
+    {
+     "start_seconds": 587.8,
      "text": "Lord, cover my home today."
     },
     {
-     "start_seconds": 590.7,
+     "start_seconds": 590.9,
      "text": "Watch over the door as it opens and closes."
     },
     {
-     "start_seconds": 594.2,
-     "text": "Keep every person who lives here safe on the road, at school, at work,"
+     "start_seconds": 594.3,
+     "text": "Keep every person who lives here safe on the road, at school, at work, and in"
     }
    ],
    "beats": [
     {
      "start_seconds": 300.0,
-     "end_seconds": 308.2,
+     "end_seconds": 308.7,
      "beat": "scripture",
-     "opening_words_verbatim": "Jesus said, Come unto me, all ye",
-     "content": "Narrator recites Jesus' promise to provide rest to those who labour and are heavy laden from Matthew 11:28.",
-     "device": "scripture quotation",
-     "emotion": "comfort"
+     "opening_words_verbatim": "Jesus said, Come unto me,",
+     "content": "The narrator recites Matthew 11:28 offering divine rest to those who labour.",
+     "device": "promise",
+     "emotion": "peaceful"
     },
     {
-     "start_seconds": 308.2,
-     "end_seconds": 329.5,
+     "start_seconds": 308.7,
+     "end_seconds": 329.7,
      "beat": "teaching",
      "opening_words_verbatim": "The rest Jesus offers is not only",
-     "content": "The speaker explains that Christ's rest is internal and carries through daily labour because He pulls beside you.",
-     "device": "metaphor",
+     "content": "The narrator clarifies that spiritual rest accompanies you throughout busy daily responsibilities rather than waiting for day's end.",
+     "device": "contrast",
+     "emotion": "reassured"
+    },
+    {
+     "start_seconds": 329.7,
+     "end_seconds": 359.8,
+     "beat": "prayer",
+     "opening_words_verbatim": "Lord, I bring you my work today.",
+     "content": "A guided prayer dedicating daily tasks, conversations, and duties to God while asking for diligence and patience.",
+     "device": "number list",
+     "emotion": "focused"
+    },
+    {
+     "start_seconds": 359.8,
+     "end_seconds": 367.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "And whatsoever ye do, do it heartily,",
+     "content": "The narrator cites Colossians 3:23 urging listeners to work for the Lord rather than men.",
+     "device": "none",
+     "emotion": "convicted"
+    },
+    {
+     "start_seconds": 367.0,
+     "end_seconds": 387.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "Father, there are parts of today I already",
+     "content": "A guided prayer confessing personal limitation and inviting God into moments of exhaustion.",
+     "device": "contrast",
+     "emotion": "humble"
+    },
+    {
+     "start_seconds": 387.0,
+     "end_seconds": 401.3,
+     "beat": "scripture",
+     "opening_words_verbatim": "The apostle Paul heard this answer when",
+     "content": "The speaker recites 2 Corinthians 12:9 where God declares His grace sufficient and strength perfected in human weakness.",
+     "device": "promise",
+     "emotion": "comforted"
+    },
+    {
+     "start_seconds": 401.3,
+     "end_seconds": 422.8,
+     "beat": "teaching",
+     "opening_words_verbatim": "God did not remove Paul's weakness.",
+     "content": "The speaker explains that weakness is not defeat but the specific setting for divine intervention.",
+     "device": "payoff",
      "emotion": "encouraged"
     },
     {
-     "start_seconds": 329.5,
-     "end_seconds": 359.0,
-     "beat": "prayer",
-     "opening_words_verbatim": "Lord, I bring you my work today.",
-     "content": "The prayer surrenders daily tasks, conversations, and responsibilities, asking for focus and steadiness.",
-     "device": "parallelism",
-     "emotion": "surrender"
-    },
-    {
-     "start_seconds": 359.0,
-     "end_seconds": 366.5,
-     "beat": "scripture",
-     "opening_words_verbatim": "And whatsoever ye do, do it heartily,",
-     "content": "Recites Colossians 3:23 urging listeners to work heartily as unto the Lord.",
-     "device": "scripture quotation",
-     "emotion": "dedication"
-    },
-    {
-     "start_seconds": 366.5,
-     "end_seconds": 386.4,
-     "beat": "prayer",
-     "opening_words_verbatim": "Father, there are parts of today I",
-     "content": "A prayer acknowledging human limitations and asking God to meet weakness directly.",
-     "device": "confession",
-     "emotion": "humility"
-    },
-    {
-     "start_seconds": 386.4,
-     "end_seconds": 400.8,
-     "beat": "scripture",
-     "opening_words_verbatim": "The apostle Paul heard this answer when",
-     "content": "Quotes 2 Corinthians 12:9 about God's grace being sufficient and power perfected in weakness.",
-     "device": "exemplum",
-     "emotion": "reassurance"
-    },
-    {
-     "start_seconds": 400.8,
-     "end_seconds": 422.8,
-     "beat": "teaching",
-     "opening_words_verbatim": "God did not remove Paul's weakness. He",
-     "content": "Teaches that God fills weakness rather than removes it, turning vulnerability into a venue for His power.",
-     "device": "contrast",
-     "emotion": "hope"
-    },
-    {
      "start_seconds": 422.8,
-     "end_seconds": 446.7,
+     "end_seconds": 447.4,
      "beat": "prayer",
      "opening_words_verbatim": "Lord, I lift up the people I",
-     "content": "Intercession for family and loved ones, requesting protection, patience, and softened hearts.",
-     "device": "petition",
-     "emotion": "affection"
+     "content": "Intercession for loved ones, asking for household safety, family protection, and patience in tense relationships.",
+     "device": "number list",
+     "emotion": "affectionate"
     },
     {
-     "start_seconds": 446.7,
-     "end_seconds": 472.5,
+     "start_seconds": 447.4,
+     "end_seconds": 472.9,
      "beat": "prayer",
      "opening_words_verbatim": "And Lord, I pray for everyone listening",
-     "content": "Intercedes specifically for exhausted listeners, caregivers, grieving souls, and the overburdened.",
-     "device": "empathetic listing",
-     "emotion": "compassion"
+     "content": "Intercession for listeners bearing heavy burdens, such as exhausted caregivers, new parents, and the grieving.",
+     "device": "number list",
+     "emotion": "compassionate"
     },
     {
-     "start_seconds": 472.5,
-     "end_seconds": 481.5,
+     "start_seconds": 472.9,
+     "end_seconds": 481.6,
      "beat": "scripture",
      "opening_words_verbatim": "My flesh and my heart faileth:",
-     "content": "Recites Psalm 73:26 affirming God as the eternal strength of the heart.",
-     "device": "scripture quotation",
-     "emotion": "trust"
+     "content": "The speaker recites Psalm 73:26, affirming God as the strength of the heart forever.",
+     "device": "promise",
+     "emotion": "reassured"
     },
     {
-     "start_seconds": 481.5,
-     "end_seconds": 503.8,
+     "start_seconds": 481.6,
+     "end_seconds": 503.7,
      "beat": "prayer",
      "opening_words_verbatim": "Father, I trust you with what I",
-     "content": "Prays over financial and practical needs like bills and groceries, rejecting fear.",
-     "device": "enumeration",
-     "emotion": "faith"
+     "content": "A prayer of surrender over material and financial needs, asking for wisdom and deliverance from fear.",
+     "device": "number list",
+     "emotion": "trusting"
     },
     {
-     "start_seconds": 503.8,
-     "end_seconds": 527.8,
+     "start_seconds": 503.7,
+     "end_seconds": 528.2,
      "beat": "prayer",
      "opening_words_verbatim": "Lord, there are choices in front of",
-     "content": "Prays for guidance in decisions, requesting God to open the right doors and close the wrong ones.",
+     "content": "A petition asking for guidance in impending decisions, open and closed doors, and step-by-step illumination.",
      "device": "contrast",
-     "emotion": "reliance"
+     "emotion": "guided"
     },
     {
-     "start_seconds": 527.8,
-     "end_seconds": 554.4,
+     "start_seconds": 528.2,
+     "end_seconds": 555.0,
      "beat": "prayer",
      "opening_words_verbatim": "Father, if I am carrying a grudge",
-     "content": "Prays for release of grudges and emotional hurt, choosing forgiveness and grace.",
-     "device": "declaration",
-     "emotion": "peace"
+     "content": "A prayer relinquishing grudges and past hurts in exchange for grace and forgiveness.",
+     "device": "contrast",
+     "emotion": "relieved"
     },
     {
-     "start_seconds": 554.4,
-     "end_seconds": 568.6,
+     "start_seconds": 555.0,
+     "end_seconds": 569.2,
      "beat": "scripture",
      "opening_words_verbatim": "The LORD is my strength and my",
-     "content": "Recites Psalm 28:7 celebrating the Lord as strength, shield, and cause for joyful praise.",
-     "device": "scripture quotation",
-     "emotion": "joy"
+     "content": "The narrator recites Psalm 28:7 declaring the Lord as strength and shield leading to joyful praise.",
+     "device": "declaration",
+     "emotion": "uplifted"
     },
     {
-     "start_seconds": 568.6,
-     "end_seconds": 587.3,
+     "start_seconds": 569.2,
+     "end_seconds": 587.8,
      "beat": "teaching",
-     "opening_words_verbatim": "Strength for what is inside you. A",
-     "content": "Highlights that God provides both internal strength and external protection, emphasizing that trust precedes help.",
-     "device": "analytical breakdown",
-     "emotion": "assurance"
+     "opening_words_verbatim": "Strength for what is inside you.",
+     "content": "The speaker breaks down the structure of Psalm 28:7, illustrating that trust precedes divine assistance.",
+     "device": "contrast",
+     "emotion": "inspired"
     },
     {
-     "start_seconds": 587.3,
+     "start_seconds": 587.8,
      "end_seconds": 600.0,
      "beat": "prayer",
-     "opening_words_verbatim": "Lord, cover my home today. Watch over",
-     "content": "Petitions divine protection over household members as they commute and go about daily routines.",
-     "device": "blessing",
-     "emotion": "safety"
+     "opening_words_verbatim": "Lord, cover my home today.",
+     "content": "A prayer petitioning divine protection over the home and family members as they go about their day.",
+     "device": "number list",
+     "emotion": "safe"
     }
    ],
    "picture": {
     "image_kind": "AI illustration",
     "shot_sizes": [
-     "medium close-up",
-     "close-up"
+     "medium close-up"
     ],
-    "shots_counted": 27,
-    "motion": "gentle slow zoom in / subtle pan on static generated artwork",
-    "on_screen_text": "White sans-serif text centered on the right half, with scripture references displayed below verses in gold italics ('Matthew 11:28 (KJV)', etc.); watermark 'HeroVerse Prayer' top left; engagement cues 'LIKE' / 'SHARE' / 'SUBSCRIBE' top right; 'Type AMEN' bottom right",
-    "figure_or_presenter": "Illustrated depiction of Jesus Christ with shoulder-length brown hair, white robe, hands folded in prayer with head bowed slightly",
-    "colour_and_light": "Warm morning sunlight, golden glows, pastoral green meadows, glowing skies, blossoms, warm domestic lamp light, wheat fields",
-    "transitions": "soft dissolve / cross-fade between themed background illustrations"
+    "shots_counted": 17,
+    "motion": "subtle background motion graphic particle drift and slow background image crossfades",
+    "on_screen_text": "white bold sans-serif subtitles centered right, Bible citations in smaller yellow italics, channel watermark top left ('HeroVerse Prayer'), engagement CTA bottom right ('Type AMEN') and animated buttons top right ('LIKE', 'SHARE', 'SUBSCRIBE')",
+    "figure_or_presenter": "static AI-generated depiction of Jesus Christ with hands folded in prayer, eyes cast downward, wearing a cream robe",
+    "colour_and_light": "warm golden morning light, soft atmospheric sunrise haze with varying scenic background backplates (hills, wheat fields, cherry blossoms, sunlit forest paths, mountain streams)",
+    "transitions": "soft dissolve and crossfade between landscape backgrounds behind the foreground figure"
    },
    "sound": {
-    "voice": "Deep, warm, calm male voice with an American accent, contemplative and soothing delivery (likely high-grade synthetic narration or professional voiceover)",
-    "pace": "deliberate, slow, meditative pace (approx. 90-110 words per minute) with gentle pauses",
-    "music": "Soft ambient Christian instrumental with gentle piano chords, warm sustained synth pads, and reflective strings",
-    "music_changes": "Continuous flowing ambient bed without sudden key or tempo changes, maintaining a steady tranquil atmosphere",
+    "voice": "deep male synthetic / AI narration, calm, reverent, measured pace, warm North American accent",
+    "pace": "slow and meditative, approximately 95 to 110 words per minute",
+    "music": "ambient cinematic Christian instrumental with warm acoustic piano chords, gentle pads, and soft ambient synth textures mixed underneath the narration",
+    "music_changes": "continuous seamless loop with gradual dynamic swells during prayer beats and scripture readings",
     "sound_effects": "none"
    },
    "scripture_references": [
-    "Matthew 11:28",
-    "Colossians 3:23",
-    "2 Corinthians 12:9",
-    "Psalm 73:26",
-    "Psalm 28:7"
+    "Matthew 11:28 (KJV)",
+    "Colossians 3:23 (KJV)",
+    "2 Corinthians 12:9 (KJV)",
+    "Psalm 73:26 (KJV)",
+    "Psalm 28:7 (KJV)"
    ],
    "limitations": []
   }
  ],
+ "miner_rows_blocking": false,
  "instrument": "structure_mining.py prompt/schema/models via Gemini Files API (same as the reference mining)"
 }
