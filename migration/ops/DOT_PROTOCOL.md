@@ -26,6 +26,8 @@ Every card has these eight parts; a card missing one is not sent.
 
 Before sending, Claude checks every value against the repository as it is (schedules, slots, existing files,
 `script_check.py` rules) — the card must be executable as written.
+A script card must also pass `python3 -I -B migration/ops/card_check.py <card>` (ALLOWED block, slot, one Short
+slot, DEADLINE ≤ publish_at − 72 h, frozen QA SHA); PR checks run it again on every Dot PR.
 
 ## 2. Dot's line
 - Claim: label `dot-working` + comment `CLAIMED <ISO time>`. One task at a time, oldest deadline first; a card that
