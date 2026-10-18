@@ -1,13 +1,13 @@
 {
- "version": "goal-report-v1",
- "at": "2026-10-18T00:17:30.088820+00:00",
+ "version": "goal-report-v2",
+ "at": "2026-10-18T03:07:31.931942+00:00",
  "day": 1,
  "target_day": 14,
  "max_day": 30,
  "subscribers": 263,
  "views_total": 2681,
  "public_videos": 23,
- "shorts_views_public": 2645,
+ "shorts_views_public_lifetime": 2645,
  "analytics": {
   "status": "OK",
   "watch_hours_365d": 76.9,
@@ -18,308 +18,854 @@
    "RI-uNS8jhfU": {
     "watch_hours": 6.3,
     "views": 435,
-    "average_view_percentage": 225.55999999999997,
-    "subscribers_gained": 7
+    "average_view_percentage": 225.6,
+    "subscribers_gained": 7,
+    "content_type": null
    },
    "SwqYQKZFvTQ": {
     "watch_hours": 5.1,
     "views": 4397,
-    "average_view_percentage": 65.49,
-    "subscribers_gained": 0
+    "average_view_percentage": 65.5,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "wHQ81IfBsF0": {
     "watch_hours": 3.4,
     "views": 1020,
-    "average_view_percentage": 79.86,
-    "subscribers_gained": 2
+    "average_view_percentage": 79.9,
+    "subscribers_gained": 2,
+    "content_type": null
    },
    "FifnlNUQKNk": {
     "watch_hours": 3.1,
     "views": 9,
-    "average_view_percentage": 11.43,
-    "subscribers_gained": 0
+    "average_view_percentage": 11.4,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "YeasXxVErNg": {
     "watch_hours": 2.6,
     "views": 391,
-    "average_view_percentage": 77.87,
-    "subscribers_gained": 9
+    "average_view_percentage": 77.9,
+    "subscribers_gained": 9,
+    "content_type": null
    },
    "gxlUunQlgpQ": {
     "watch_hours": 2.3,
     "views": 468,
-    "average_view_percentage": 30.659999999999997,
-    "subscribers_gained": 1
+    "average_view_percentage": 30.7,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "EHcBsHzVZCM": {
     "watch_hours": 2.2,
     "views": 929,
-    "average_view_percentage": 49.09,
-    "subscribers_gained": 1
+    "average_view_percentage": 49.1,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "v9lGlFmBHNs": {
     "watch_hours": 2.2,
     "views": 1379,
-    "average_view_percentage": 106.06,
-    "subscribers_gained": 11
+    "average_view_percentage": 106.1,
+    "subscribers_gained": 11,
+    "content_type": null
    },
    "1EKs4d1X1-I": {
     "watch_hours": 1.8,
     "views": 422,
-    "average_view_percentage": 52.99,
-    "subscribers_gained": 4
+    "average_view_percentage": 53.0,
+    "subscribers_gained": 4,
+    "content_type": null
    },
    "4qHma1PUCfc": {
     "watch_hours": 1.8,
     "views": 1319,
-    "average_view_percentage": 33.33,
-    "subscribers_gained": 0
+    "average_view_percentage": 33.3,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "gRpg9YOUp0M": {
     "watch_hours": 1.7,
     "views": 1449,
-    "average_view_percentage": 111.46000000000001,
-    "subscribers_gained": 0
+    "average_view_percentage": 111.5,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "2lzdvqVdLVo": {
     "watch_hours": 1.7,
     "views": 979,
-    "average_view_percentage": 42.49,
-    "subscribers_gained": 1
+    "average_view_percentage": 42.5,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "6xo9d91kpjg": {
     "watch_hours": 1.7,
     "views": 1235,
-    "average_view_percentage": 49.42,
-    "subscribers_gained": 0
+    "average_view_percentage": 49.4,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "dFU_kfP79VE": {
     "watch_hours": 1.7,
     "views": 976,
     "average_view_percentage": 68.1,
-    "subscribers_gained": 2
+    "subscribers_gained": 2,
+    "content_type": null
    },
    "YQbkEC7ifK0": {
     "watch_hours": 1.7,
     "views": 1901,
-    "average_view_percentage": 146.21,
-    "subscribers_gained": 0
+    "average_view_percentage": 146.2,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "uf23o3bYvEI": {
     "watch_hours": 1.7,
     "views": 1997,
-    "average_view_percentage": 31.209999999999997,
-    "subscribers_gained": 0
+    "average_view_percentage": 31.2,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "tVP1R9TH3lE": {
     "watch_hours": 1.6,
     "views": 1244,
-    "average_view_percentage": 110.35,
-    "subscribers_gained": 2
+    "average_view_percentage": 110.3,
+    "subscribers_gained": 2,
+    "content_type": null
    },
    "va3xfGCwIX8": {
     "watch_hours": 1.4,
     "views": 1155,
-    "average_view_percentage": 133.99,
-    "subscribers_gained": 13
+    "average_view_percentage": 134.0,
+    "subscribers_gained": 13,
+    "content_type": null
    },
    "BaNsd7j64YI": {
     "watch_hours": 1.4,
     "views": 240,
-    "average_view_percentage": 55.669999999999995,
-    "subscribers_gained": 8
+    "average_view_percentage": 55.7,
+    "subscribers_gained": 8,
+    "content_type": null
    },
    "06WN0acBHV0": {
     "watch_hours": 1.3,
     "views": 23,
-    "average_view_percentage": 691.91,
-    "subscribers_gained": 0
+    "average_view_percentage": 691.9,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "DLAuMbdphn8": {
     "watch_hours": 1.2,
     "views": 379,
-    "average_view_percentage": 47.12,
-    "subscribers_gained": 1
+    "average_view_percentage": 47.1,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "imfvOr3Q0aI": {
     "watch_hours": 1.2,
     "views": 367,
-    "average_view_percentage": 56.82000000000001,
-    "subscribers_gained": 12
+    "average_view_percentage": 56.8,
+    "subscribers_gained": 12,
+    "content_type": null
    },
    "TS9e9e5CpMk": {
     "watch_hours": 1.2,
     "views": 869,
-    "average_view_percentage": 69.77,
-    "subscribers_gained": 0
+    "average_view_percentage": 69.8,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "uwr_rIM_340": {
     "watch_hours": 1.1,
     "views": 885,
-    "average_view_percentage": 23.83,
-    "subscribers_gained": 0
+    "average_view_percentage": 23.8,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "9weESfLQWzQ": {
     "watch_hours": 1.1,
     "views": 998,
-    "average_view_percentage": 92.55,
-    "subscribers_gained": 0
+    "average_view_percentage": 92.5,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "ObTo2Y8mBls": {
     "watch_hours": 1.1,
     "views": 639,
-    "average_view_percentage": 31.71,
-    "subscribers_gained": 1
+    "average_view_percentage": 31.7,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "Y6uS9MuP2xQ": {
     "watch_hours": 1.1,
     "views": 676,
-    "average_view_percentage": 27.529999999999998,
-    "subscribers_gained": 2
+    "average_view_percentage": 27.5,
+    "subscribers_gained": 2,
+    "content_type": null
    },
    "mJ9rZS6npAA": {
     "watch_hours": 1.0,
     "views": 460,
     "average_view_percentage": 48.8,
-    "subscribers_gained": 0
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "o1hHZgYzUZA": {
     "watch_hours": 0.9,
     "views": 254,
-    "average_view_percentage": 61.46,
-    "subscribers_gained": 6
+    "average_view_percentage": 61.5,
+    "subscribers_gained": 6,
+    "content_type": null
    },
    "-pFb7CBOMbI": {
     "watch_hours": 0.9,
     "views": 535,
-    "average_view_percentage": 31.920000000000005,
-    "subscribers_gained": 1
+    "average_view_percentage": 31.9,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "hhJGujSiScM": {
     "watch_hours": 0.8,
     "views": 283,
-    "average_view_percentage": 68.37,
-    "subscribers_gained": 9
+    "average_view_percentage": 68.4,
+    "subscribers_gained": 9,
+    "content_type": null
    },
    "dW6dfCEGeKM": {
     "watch_hours": 0.5,
     "views": 306,
-    "average_view_percentage": 71.08,
-    "subscribers_gained": 0
+    "average_view_percentage": 71.1,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "28ejTLbNJY0": {
     "watch_hours": 0.5,
     "views": 611,
-    "average_view_percentage": 168.36,
-    "subscribers_gained": 0
+    "average_view_percentage": 168.4,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "dHPZ-lY_opA": {
     "watch_hours": 0.4,
     "views": 284,
-    "average_view_percentage": 38.37,
-    "subscribers_gained": 0
+    "average_view_percentage": 38.4,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "W3NBRjTOitI": {
     "watch_hours": 0.4,
     "views": 469,
-    "average_view_percentage": 105.10999999999999,
-    "subscribers_gained": 0
+    "average_view_percentage": 105.1,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "0e4q0UP0mBQ": {
     "watch_hours": 0.3,
     "views": 334,
-    "average_view_percentage": 33.85,
-    "subscribers_gained": 0
+    "average_view_percentage": 33.9,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "le9Il94s-mY": {
     "watch_hours": 0.3,
     "views": 364,
-    "average_view_percentage": 30.95,
-    "subscribers_gained": 1
+    "average_view_percentage": 30.9,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "RXMoDBTy6-k": {
     "watch_hours": 0.3,
     "views": 160,
-    "average_view_percentage": 88.48,
-    "subscribers_gained": 0
+    "average_view_percentage": 88.5,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "qdsaMEK5Q8s": {
     "watch_hours": 0.3,
     "views": 246,
-    "average_view_percentage": 35.23,
-    "subscribers_gained": 0
+    "average_view_percentage": 35.2,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "bgC1xOfQkzA": {
     "watch_hours": 0.3,
     "views": 549,
-    "average_view_percentage": 18.61,
-    "subscribers_gained": 1
+    "average_view_percentage": 18.6,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "6KucJ2RNlCs": {
     "watch_hours": 0.3,
     "views": 405,
-    "average_view_percentage": 157.11,
-    "subscribers_gained": 0
+    "average_view_percentage": 157.1,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "TRQUE6Xgrz0": {
     "watch_hours": 0.3,
     "views": 277,
-    "average_view_percentage": 35.44,
-    "subscribers_gained": 0
+    "average_view_percentage": 35.4,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "l1MnAjlO55Y": {
     "watch_hours": 0.3,
     "views": 394,
-    "average_view_percentage": 61.92999999999999,
-    "subscribers_gained": 1
+    "average_view_percentage": 61.9,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "NrcIhXBb0ko": {
     "watch_hours": 0.3,
     "views": 162,
-    "average_view_percentage": 81.64,
-    "subscribers_gained": 0
+    "average_view_percentage": 81.6,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "-LaDjuPUER8": {
     "watch_hours": 0.3,
     "views": 237,
-    "average_view_percentage": 103.22,
-    "subscribers_gained": 0
+    "average_view_percentage": 103.2,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "FFS9uLSMLis": {
     "watch_hours": 0.2,
     "views": 260,
-    "average_view_percentage": 63.56,
-    "subscribers_gained": 0
+    "average_view_percentage": 63.6,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "IibBSGe8nZg": {
     "watch_hours": 0.2,
     "views": 86,
-    "average_view_percentage": 72.09,
-    "subscribers_gained": 0
+    "average_view_percentage": 72.1,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "NnCixw61xzA": {
     "watch_hours": 0.2,
     "views": 159,
-    "average_view_percentage": 62.82,
-    "subscribers_gained": 1
+    "average_view_percentage": 62.8,
+    "subscribers_gained": 1,
+    "content_type": null
    },
    "qoySvyBIwdg": {
     "watch_hours": 0.2,
     "views": 371,
-    "average_view_percentage": 40.26,
-    "subscribers_gained": 0
+    "average_view_percentage": 40.3,
+    "subscribers_gained": 0,
+    "content_type": null
    },
    "8CNl9LAC4J8": {
     "watch_hours": 0.2,
     "views": 114,
-    "average_view_percentage": 52.44,
-    "subscribers_gained": 0
+    "average_view_percentage": 52.4,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "tBEvsFwK8S0": {
+    "watch_hours": 0.2,
+    "views": 293,
+    "average_view_percentage": 85.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "84YxlPaRDtU": {
+    "watch_hours": 0.2,
+    "views": 157,
+    "average_view_percentage": 55.6,
+    "subscribers_gained": 2,
+    "content_type": null
+   },
+   "iK_5edYQtx8": {
+    "watch_hours": 0.2,
+    "views": 27,
+    "average_view_percentage": 17.6,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "_Zc1JLjiLo4": {
+    "watch_hours": 0.2,
+    "views": 356,
+    "average_view_percentage": 13.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "EvRaVAkYHMw": {
+    "watch_hours": 0.2,
+    "views": 226,
+    "average_view_percentage": 58.0,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "YEzPbOrF9Vg": {
+    "watch_hours": 0.2,
+    "views": 310,
+    "average_view_percentage": 21.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Y6-QvWxk0R4": {
+    "watch_hours": 0.2,
+    "views": 133,
+    "average_view_percentage": 36.0,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "6N5D_l7F5MA": {
+    "watch_hours": 0.2,
+    "views": 318,
+    "average_view_percentage": 57.5,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "xOCNezmMbOM": {
+    "watch_hours": 0.2,
+    "views": 220,
+    "average_view_percentage": 59.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Qc4WfrVLoIs": {
+    "watch_hours": 0.2,
+    "views": 136,
+    "average_view_percentage": 45.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "bAsb6Ov0A-A": {
+    "watch_hours": 0.2,
+    "views": 40,
+    "average_view_percentage": 56.9,
+    "subscribers_gained": 1,
+    "content_type": null
+   },
+   "jp2GOsLN0J4": {
+    "watch_hours": 0.2,
+    "views": 257,
+    "average_view_percentage": 27.4,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "1PBzy2mq0gE": {
+    "watch_hours": 0.2,
+    "views": 29,
+    "average_view_percentage": 51.5,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "HAUUs2dr3wU": {
+    "watch_hours": 0.2,
+    "views": 223,
+    "average_view_percentage": 33.3,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "lkuFDIOausw": {
+    "watch_hours": 0.2,
+    "views": 273,
+    "average_view_percentage": 45.5,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "9mFditYFeNo": {
+    "watch_hours": 0.1,
+    "views": 104,
+    "average_view_percentage": 55.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "XC8KtfE5PIc": {
+    "watch_hours": 0.1,
+    "views": 212,
+    "average_view_percentage": 17.5,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "HhdbkhCmDxQ": {
+    "watch_hours": 0.1,
+    "views": 226,
+    "average_view_percentage": 26.6,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "I7dCCMILl6w": {
+    "watch_hours": 0.1,
+    "views": 116,
+    "average_view_percentage": 42.7,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "PkxoHcPnCjc": {
+    "watch_hours": 0.1,
+    "views": 162,
+    "average_view_percentage": 38.0,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "ucf6p67sijw": {
+    "watch_hours": 0.1,
+    "views": 12,
+    "average_view_percentage": 23.5,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Pfe3CcD47rc": {
+    "watch_hours": 0.1,
+    "views": 103,
+    "average_view_percentage": 35.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "_z2kvnufvHk": {
+    "watch_hours": 0.1,
+    "views": 176,
+    "average_view_percentage": 31.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "tMFGym1G-aA": {
+    "watch_hours": 0.1,
+    "views": 103,
+    "average_view_percentage": 37.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "VZs3RQ9xNVE": {
+    "watch_hours": 0.1,
+    "views": 64,
+    "average_view_percentage": 17.2,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "CMQ-VAN7R3k": {
+    "watch_hours": 0.1,
+    "views": 73,
+    "average_view_percentage": 28.4,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Z1ohsB0VGIM": {
+    "watch_hours": 0.1,
+    "views": 44,
+    "average_view_percentage": 62.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "qeovLqujR60": {
+    "watch_hours": 0.1,
+    "views": 135,
+    "average_view_percentage": 14.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "NBG3n4b7biQ": {
+    "watch_hours": 0.1,
+    "views": 191,
+    "average_view_percentage": 43.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "7bj3F4KLClM": {
+    "watch_hours": 0.1,
+    "views": 127,
+    "average_view_percentage": 19.2,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "ctfH7D-g6ZU": {
+    "watch_hours": 0.1,
+    "views": 102,
+    "average_view_percentage": 26.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "7dw7hYq_P6M": {
+    "watch_hours": 0.1,
+    "views": 93,
+    "average_view_percentage": 32.8,
+    "subscribers_gained": 1,
+    "content_type": null
+   },
+   "kWHN8HWSkCQ": {
+    "watch_hours": 0.1,
+    "views": 103,
+    "average_view_percentage": 28.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "cWn8j_eo1QU": {
+    "watch_hours": 0.1,
+    "views": 91,
+    "average_view_percentage": 19.5,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "xuyS06s1alA": {
+    "watch_hours": 0.1,
+    "views": 107,
+    "average_view_percentage": 20.7,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "fYN7X_QWg68": {
+    "watch_hours": 0.1,
+    "views": 97,
+    "average_view_percentage": 19.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "__wto_r22v8": {
+    "watch_hours": 0.1,
+    "views": 71,
+    "average_view_percentage": 22.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Hy54XVINoiQ": {
+    "watch_hours": 0.1,
+    "views": 19,
+    "average_view_percentage": 28.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "sSBHh3G24-A": {
+    "watch_hours": 0.1,
+    "views": 12,
+    "average_view_percentage": 172.3,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Rd7g2I7ziMs": {
+    "watch_hours": 0.1,
+    "views": 75,
+    "average_view_percentage": 24.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "JBLHw1ST7zo": {
+    "watch_hours": 0.1,
+    "views": 104,
+    "average_view_percentage": 22.1,
+    "subscribers_gained": 1,
+    "content_type": null
+   },
+   "vXsR9GRp21E": {
+    "watch_hours": 0.1,
+    "views": 36,
+    "average_view_percentage": 22.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "k_x6UagYdQ0": {
+    "watch_hours": 0.1,
+    "views": 76,
+    "average_view_percentage": 23.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "82fA5j2f7Sg": {
+    "watch_hours": 0.1,
+    "views": 105,
+    "average_view_percentage": 38.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "KN8DvgCebE0": {
+    "watch_hours": 0.1,
+    "views": 17,
+    "average_view_percentage": 33.6,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "PLZytCBqQFw": {
+    "watch_hours": 0.1,
+    "views": 77,
+    "average_view_percentage": 24.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "srpAI5uGR3E": {
+    "watch_hours": 0.1,
+    "views": 23,
+    "average_view_percentage": 96.6,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "s6zpsF3HUj4": {
+    "watch_hours": 0.1,
+    "views": 101,
+    "average_view_percentage": 18.2,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "g_UUFkdlPwI": {
+    "watch_hours": 0.1,
+    "views": 17,
+    "average_view_percentage": 78.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "grKDTIgMHQM": {
+    "watch_hours": 0.1,
+    "views": 105,
+    "average_view_percentage": 90.6,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "1BYHtZ8yftE": {
+    "watch_hours": 0.1,
+    "views": 114,
+    "average_view_percentage": 17.2,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "zaMQ3IT3uU0": {
+    "watch_hours": 0.1,
+    "views": 76,
+    "average_view_percentage": 34.2,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "PkG-MIo5Hh4": {
+    "watch_hours": 0.0,
+    "views": 69,
+    "average_view_percentage": 89.2,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Zle-Y5cC9No": {
+    "watch_hours": 0.0,
+    "views": 91,
+    "average_view_percentage": 20.6,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "3px82ScNj5w": {
+    "watch_hours": 0.0,
+    "views": 88,
+    "average_view_percentage": 10.0,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "3kqSOD2vKh0": {
+    "watch_hours": 0.0,
+    "views": 69,
+    "average_view_percentage": 67.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "ltn5D1Jz_O4": {
+    "watch_hours": 0.0,
+    "views": 12,
+    "average_view_percentage": 259.3,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "nkAjzvd9rR4": {
+    "watch_hours": 0.0,
+    "views": 23,
+    "average_view_percentage": 42.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "mdhtMEIfsn8": {
+    "watch_hours": 0.0,
+    "views": 11,
+    "average_view_percentage": 56.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "ZYYxyFqzmUM": {
+    "watch_hours": 0.0,
+    "views": 6,
+    "average_view_percentage": 120.3,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "xvCy9HfYhNE": {
+    "watch_hours": 0.0,
+    "views": 15,
+    "average_view_percentage": 23,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "wnz5wFFn_U0": {
+    "watch_hours": 0.0,
+    "views": 50,
+    "average_view_percentage": 21.8,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "PckGlcLLo64": {
+    "watch_hours": 0.0,
+    "views": 17,
+    "average_view_percentage": 21.1,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "g8WWPCvf-fY": {
+    "watch_hours": 0.0,
+    "views": 9,
+    "average_view_percentage": 54.3,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "IEBgXBM02I8": {
+    "watch_hours": 0.0,
+    "views": 15,
+    "average_view_percentage": 88.9,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "U-jwOCJ85j8": {
+    "watch_hours": 0.0,
+    "views": 8,
+    "average_view_percentage": 42.0,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "gmaxaeWKI8U": {
+    "watch_hours": 0.0,
+    "views": 9,
+    "average_view_percentage": 40.7,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "ElLDYV5WA8w": {
+    "watch_hours": 0.0,
+    "views": 7,
+    "average_view_percentage": 46.4,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "Oa3Unyg3jCU": {
+    "watch_hours": 0.0,
+    "views": 21,
+    "average_view_percentage": 14.2,
+    "subscribers_gained": 0,
+    "content_type": null
+   },
+   "8tJIVjIPN2Q": {
+    "watch_hours": 0.0,
+    "views": 12,
+    "average_view_percentage": 16.8,
+    "subscribers_gained": 0,
+    "content_type": null
    }
+  },
+  "eligible_estimate": {
+   "public_long_form_watch_hours_365d": 3.3,
+   "public_shorts_views_90d": 40,
+   "all_content_watch_hours_365d_top200": 70.3,
+   "classification": "duration <= 180 s (Analytics content type unavailable)"
   }
  },
  "needed_from_today": {
   "subscribers_per_day": 52.6,
-  "watch_hours_per_day": 280.2
+  "watch_hours_per_day": 285.5
  },
  "ypp": {
   "subscribers": 1000,
@@ -336,8 +882,9 @@
    "comments": 0,
    "short": false,
    "watch_hours": 3.1,
-   "average_view_percentage": 11.43,
+   "average_view_percentage": 11.4,
    "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -348,6 +895,10 @@
    "likes": 1,
    "comments": 1,
    "short": false,
+   "watch_hours": 0.2,
+   "average_view_percentage": 17.6,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -358,6 +909,10 @@
    "likes": 3,
    "comments": 1,
    "short": true,
+   "watch_hours": 0.1,
+   "average_view_percentage": 28.1,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": true
   },
   {
@@ -369,8 +924,9 @@
    "comments": 8,
    "short": true,
    "watch_hours": 1.2,
-   "average_view_percentage": 56.82000000000001,
+   "average_view_percentage": 56.8,
    "subscribers_gained": 12,
+   "content_type": null,
    "policy_risk_title": true
   },
   {
@@ -381,6 +937,10 @@
    "likes": 5,
    "comments": 1,
    "short": true,
+   "watch_hours": 0.2,
+   "average_view_percentage": 56.9,
+   "subscribers_gained": 1,
+   "content_type": null,
    "policy_risk_title": true
   },
   {
@@ -392,8 +952,9 @@
    "comments": 7,
    "short": true,
    "watch_hours": 0.9,
-   "average_view_percentage": 61.46,
+   "average_view_percentage": 61.5,
    "subscribers_gained": 6,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -405,8 +966,9 @@
    "comments": 5,
    "short": true,
    "watch_hours": 0.8,
-   "average_view_percentage": 68.37,
+   "average_view_percentage": 68.4,
    "subscribers_gained": 9,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -417,6 +979,10 @@
    "likes": 1,
    "comments": 3,
    "short": true,
+   "watch_hours": 0.1,
+   "average_view_percentage": 23.5,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": true
   },
   {
@@ -428,8 +994,9 @@
    "comments": 14,
    "short": true,
    "watch_hours": 1.4,
-   "average_view_percentage": 55.669999999999995,
+   "average_view_percentage": 55.7,
    "subscribers_gained": 8,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -441,8 +1008,9 @@
    "comments": 6,
    "short": true,
    "watch_hours": 1.3,
-   "average_view_percentage": 691.91,
+   "average_view_percentage": 691.9,
    "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": true
   },
   {
@@ -454,8 +1022,9 @@
    "comments": 15,
    "short": true,
    "watch_hours": 6.3,
-   "average_view_percentage": 225.55999999999997,
+   "average_view_percentage": 225.6,
    "subscribers_gained": 7,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -467,8 +1036,9 @@
    "comments": 6,
    "short": true,
    "watch_hours": 2.6,
-   "average_view_percentage": 77.87,
+   "average_view_percentage": 77.9,
    "subscribers_gained": 9,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -480,8 +1050,9 @@
    "comments": 8,
    "short": true,
    "watch_hours": 1.8,
-   "average_view_percentage": 52.99,
+   "average_view_percentage": 53.0,
    "subscribers_gained": 4,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -492,6 +1063,10 @@
    "likes": 4,
    "comments": 4,
    "short": true,
+   "watch_hours": 0.1,
+   "average_view_percentage": 62.9,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -502,6 +1077,10 @@
    "likes": 2,
    "comments": 0,
    "short": true,
+   "watch_hours": 0.0,
+   "average_view_percentage": 21.1,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -512,6 +1091,10 @@
    "likes": 1,
    "comments": 0,
    "short": true,
+   "watch_hours": 0.0,
+   "average_view_percentage": 42.9,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -522,6 +1105,10 @@
    "likes": 2,
    "comments": 0,
    "short": true,
+   "watch_hours": 0.0,
+   "average_view_percentage": 88.9,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -532,6 +1119,10 @@
    "likes": 2,
    "comments": 0,
    "short": true,
+   "watch_hours": 0.0,
+   "average_view_percentage": 16.8,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -542,6 +1133,10 @@
    "likes": 2,
    "comments": 0,
    "short": true,
+   "watch_hours": 0.0,
+   "average_view_percentage": 259.3,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   },
   {
@@ -552,6 +1147,10 @@
    "likes": 4,
    "comments": 0,
    "short": true,
+   "watch_hours": 0.0,
+   "average_view_percentage": 46.4,
+   "subscribers_gained": 0,
+   "content_type": null,
    "policy_risk_title": false
   }
  ],
@@ -602,7 +1201,7 @@
    "title": "Night Prayer for Healing | Rest Your Body and Heart in God's Care"
   }
  ],
- "script_runway_days": 3.0,
+ "script_runway_days": 2.9,
  "alerts": [],
  "data_api_units": 3,
  "policy_risk_videos": [
@@ -610,8 +1209,8 @@
    "id": "Hy54XVINoiQ",
    "title": "The 2026 Warning: What They DON’T Want You to Know. ⚠️📖 #prophecy #christianmotivation #faith",
    "views": 19,
-   "watch_hours": null,
-   "subscribers_gained": null,
+   "watch_hours": 0.1,
+   "subscribers_gained": 0,
    "short": true
   },
   {
@@ -626,16 +1225,16 @@
    "id": "bAsb6Ov0A-A",
    "title": "The 2026 Prophecy: What They Are Hiding From You (Watch Before It’s Too Late) #faith #god",
    "views": 40,
-   "watch_hours": null,
-   "subscribers_gained": null,
+   "watch_hours": 0.2,
+   "subscribers_gained": 1,
    "short": true
   },
   {
    "id": "ucf6p67sijw",
    "title": "The 2026 Prophecy: What They Are Hiding From You (Watch Before It’s Too Late)",
    "views": 12,
-   "watch_hours": null,
-   "subscribers_gained": null,
+   "watch_hours": 0.1,
+   "subscribers_gained": 0,
    "short": true
   },
   {
@@ -647,5 +1246,5 @@
    "short": true
   }
  ],
- "policy_risk_watch_hours": 2.5
+ "policy_risk_watch_hours": 2.9
 }
