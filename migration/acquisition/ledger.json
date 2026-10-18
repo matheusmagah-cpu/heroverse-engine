@@ -907,11 +907,23 @@
       "video_id": "TGdYF8jDdXk",
       "start_seconds": 0,
       "end_seconds": 30,
-      "status": "RESERVED_BEFORE_EFFECT",
+      "status": "COMPLETED",
       "reserved_at": "2026-10-18T00:22:18.666599+00:00",
       "day_utc": "2026-10-18",
       "units_remaining_at_reservation": 464,
-      "reserved_units": 14
+      "reserved_units": 14,
+      "provider_job_id": "v2_stream_c7b58e3a7c5aeaf92678",
+      "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+      "media_file": {
+        "bytes": 4803659,
+        "sha256": "ec4ea1068be3cb02842019a98204b8f1cd7e05fbcc75b1424fcca947f30b00f1"
+      },
+      "returned_duration_seconds": 30.067,
+      "video_height": 1080,
+      "units_used_observed": 0,
+      "completed_at": "2026-10-18T00:23:32.734631+00:00",
+      "run_id": "39081822294",
+      "restart_allowed": false
     }
   ]
 }

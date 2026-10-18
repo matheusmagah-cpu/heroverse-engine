@@ -1,0 +1,85 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 26,
+    "picture_changes_per_minute": 51.88,
+    "median_shot_seconds": 0.933,
+    "longest_shot_seconds": 2.7,
+    "motion_median_top_decile_diff": 2.58
+   },
+   "rhythm": {
+    "audio_onsets": 52,
+    "audio_onsets_per_minute": 103.77,
+    "tempo": {
+     "bpm": 108.6,
+     "confidence": 0.056
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.192,
+     "chance_fraction": 0.109,
+     "lift": 1.77
+    },
+    "sync": {
+     "median_offset_seconds": 0.027755,
+     "verdict": "IN_SYNC",
+     "consensus_pairs": 8,
+     "visual_events": 26,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -16.9,
+    "loudness_range_lu": 2.0,
+    "true_peak_dbtp": -3.8
+   },
+   "colour": {
+    "mean_brightness": 0.2251,
+    "brightness_std_over_time": 0.0066,
+    "mean_saturation": 0.5636,
+    "saturation_std_over_time": 0.0087
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 62,
+    "words_per_minute": 123.7,
+    "transcript": "As the first light of Friday, the ninth of October, begins to rise, take a deep breath and remind your soul of this truth. God is not finished with you. What you have been crying about in the darkness, God is already preparing to transform in the light. You may have walked through disappointment, rejection, closed doors, financial pressure, prayers, emotional exhaustion."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
