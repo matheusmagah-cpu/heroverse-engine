@@ -19,7 +19,7 @@ The prayer sample is small. Its targets are bands, not points, and are re-measur
 
 | Measure | Winner median | HeroVerse target |
 |---|---|---|
-| Length | 14.7 min (12.2–17.1) | **15–20 min** (watch hours; QA floor 10:01) |
+| Length | 14.7 min (12.2–17.1) | **morning 22–32, night 25–38 min** (DECISIONS D-01/D-04 supersede the earlier 15–20; enforced by `script_check.py`) |
 | Words per minute | 154 (149–159) | **140–160** (QA band 115–165) |
 | Beats per minute | 2.1 (1.8–2.5) | **2.0–2.6**: segments of 20–35 s |
 | Mean beat length | 25.5 s | 20–30 s |
@@ -30,6 +30,8 @@ The prayer sample is small. Its targets are bands, not points, and are re-measur
 | First spoken word | ≤ 1 s | ≤ 0.5 s |
 
 **Beat order by phase** (winners: 100% prayer from second 0; prayer 90% and declaration 10% in the middle; prayer 50%, CTA 33% and application 17% in the last 10%):
+
+Enforced by `script_check.py`: hook ≤ 20 words, first prayer by 90 s, CTA after the payoff.
 
 1. **0–8 s, hook:** "Good morning/evening" plus the listener's concrete felt need (second person) plus the promise of what this prayer does. The promise is in the title and is spoken by 8 s.
 2. **8–30 s, invitation:** settle the body (breath, shoulders), name the need.
