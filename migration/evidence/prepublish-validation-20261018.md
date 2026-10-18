@@ -128,6 +128,31 @@ at the market median of 8.8 per 1,000 long views that is ~6,000 or ~2,800 long v
 long-form hours (365 d) or 10 M Shorts views (90 d), plus policy review (no reused content, no misleading metadata).
 The first measurable signal is 48 h after pilot-002/003 open; no horizon or range is claimed before that.
 
+## 6b. First real runs (2026-10-18, after the reinforcement)
+
+- **Indicators, corrected run (goal report 08:00 UTC):** public long-form watch hours 365 d = **3.3** (the old
+  report showed 76.9 = all content incl. Shorts and hidden/removed videos); public Shorts views 90 d = **40** (old:
+  2,645 lifetime). Subscribers 263 (official). The real starting point for YPP is close to zero watch hours.
+- **Gate on pilot-003 (render `91e24033…`, QA PASS):** run 1 → **UNKNOWN** (watched review ERROR, Gemini quota),
+  nothing approved; run 2 → **FAIL**: watched review pacing 6.5 < 7 ("figure completely static, zero pose variation
+  or subtle animation", backgrounds cycling, reference lingering over "amen"); scorecard words/min 113.9 and
+  coverage 0.69 came from the miner — our ASR on the same file measured 132.7 words/min (WER 3.8% vs script), so
+  those rows measured the miner's error (now reported until the miner passes its holdout; the same limits stay
+  blocking through frozen QA). Scan PASS, preflight PASS, binding PASS.
+- **QA on pilot-004 (render `ecab8da5…`):** FAIL on three frozen rows, each traced to a cause and fixed with a
+  regression test: repeated background (split-hold bug in `still_render.holds`), true peak −0.2 dBTP (one plosive at
+  1087 s passed the sample limiter; 4× oversampled limiter → −2.8 dBTP on the same audio), speech presence 0.835
+  (night pauses 201 s; shortened to 117 s, estimated 0.873; pilot-006 pre-emptively 210 → 106 s, est. 0.868).
+- **Shorts:** pilot-003's three Shorts all failed the watched review (scores 5–7.9; overlap of hook and reference
+  at 0–2 s fixed); pilot-002 short-02 scheduled (`_sUdOLxWy5c`). Shorts are now cut only from a QA-PASS render.
+- **Operations defects found by the runs:** a mining run exhausted the shared free Gemini day (mining now yields to
+  pending approvals/Shorts); Shorts that failed on quota had no retry (reconcile now re-dispatches); the runner's
+  scheduled trigger has not fired once since it was added (renders dispatched manually meanwhile); GitHub delayed
+  every morning cron by > 40 min (Shorts publication dispatched manually, idempotent ledger).
+- **Re-render once** of pilot-003 and pilot-004 with the fixes (figure breathing, reference timing, QA fixes);
+  one review each. If the gate still fails, the pilot is not published and the result is reported — no further
+  tuning to force approval.
+
 ## 7. Proof and what remains unproven
 
 Delivered with tests: mining validator (11), comparator (5), gate (5, good/bad/missing incl. timeout and quota),
@@ -137,7 +162,7 @@ Shorts publication (4, incl. no duplicate uploads), render queue (UNKNOWN retrie
 1. Mining accuracy on the holdout (UNKNOWN until re-mined windows are acquired and compared).
 2. Watched-review calibration results (run pending on the pilot-003 render).
 3. Frozen-picture threshold (informative until calibrated on known-good renders).
-4. Real end-to-end run of the new gate (first on pilot-003).
+4. ~~Real end-to-end run of the new gate~~ — done on pilot-003 (UNKNOWN on quota, then FAIL with reasons); a PASS path on a real render is still unproven.
 5. Transcript-derived spec numbers (to be recomputed from valid windows).
 6. Any per-video performance forecast; channel forecast score arrives 2026-10-24.
 7. Whether our Analytics estimate of public long-form hours matches YouTube Studio's YPP counter.
