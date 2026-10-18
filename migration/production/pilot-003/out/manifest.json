@@ -1,0 +1,4311 @@
+{
+ "version": "pilot-manifest-v2",
+ "pilot_id": "pilot-003",
+ "grammar": "figure+depth-parallax-backgrounds+film-look+captions",
+ "output_sha256": "91e24033aece99585094d6ffe4a52482b0625588df5cd6a57aa5a4c2a54e2ee1",
+ "output_seconds": 868.257,
+ "script_sha256": "9ff467bc8cb63098635071f1c950d197f12949e99e8302bef5f6c72ea1740fcb",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85,
+  "voice_wav_sha256": "45e83917619944084925ef04ba95c68204a9864f9ae3f0bf11e51c26f80a11eb"
+ },
+ "music": {
+  "file": "original-rest-music.lossless.flac",
+  "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+  "offset_seconds": 1200.0,
+  "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
+ },
+ "figure": {
+  "sha256": "0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b",
+  "id": "figure-a",
+  "prompt": "Jesus Christ praying with hands folded at his chest, eyes closed, gentle peaceful expression, long brown hair and beard, cream robe with a brown sash, upper body portrait facing right, isolated on a plain light grey studio background, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+  "seed": 2000,
+  "steps": 6,
+  "guidance": 1.5,
+  "size": [
+   1344,
+   768
+  ],
+  "models": {
+   "stabilityai/stable-diffusion-xl-base-1.0": {
+    "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+    "license": "openrail++"
+   },
+   "latent-consistency/lcm-lora-sdxl": {
+    "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+    "license": "openrail++"
+   }
+  },
+  "device": "cuda",
+  "seconds": 10.5,
+  "generated_by": "HeroVerse pipeline (AI-generated image)",
+  "release_asset": "pilot-002-img-figure-a-sha256-0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b.png",
+  "cutout_model": "isnet-general-use",
+  "cutout_tool": "rembg",
+  "source_png_sha256": "0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b",
+  "cutout_box": [
+   273,
+   4,
+   1141,
+   768
+  ],
+  "cutout_size": [
+   868,
+   764
+  ],
+  "opaque_fraction_of_box": 0.618
+ },
+ "images": {
+  "bg-sunrise-field": {
+   "sha256": "8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0",
+   "release_asset": "pilot-003-img-bg-sunrise-field-sha256-8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "wide field of tall grass at sunrise, golden light breaking over the horizon, dew on the grass, a single path leading forward, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-eagle-cliffs": {
+   "sha256": "704e37b23d0e14510fbee959e4d06218c4798f51781923dd48fe8d37c546b8e2",
+   "release_asset": "pilot-003-img-bg-eagle-cliffs-sha256-704e37b23d0e14510fbee959e4d06218c4798f51781923dd48fe8d37c546b8e2.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "majestic eagle soaring above sunlit mountain cliffs at dawn, wings fully spread, warm golden sky, vast open space, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-morning-path": {
+   "sha256": "7fa78bb87bca5a097c60e22927ae8e373151765dbc90abf1566c6d633a863419",
+   "release_asset": "pilot-003-img-bg-morning-path-sha256-7fa78bb87bca5a097c60e22927ae8e373151765dbc90abf1566c6d633a863419.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "quiet country path through trees in early morning light, soft sun rays through the leaves, gentle mist, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-wheat": {
+   "sha256": "a3ea2b5bd5e7d9fe8ef9ff8fe4b733f3d2e1ef35a8ca0b08456324b7274cdcc3",
+   "release_asset": "pilot-002-img-bg-wheat-sha256-a3ea2b5bd5e7d9fe8ef9ff8fe4b733f3d2e1ef35a8ca0b08456324b7274cdcc3.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3002,
+   "prompt": "golden wheat field under a warm sunrise sky, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-dawn-lake": {
+   "sha256": "74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018",
+   "release_asset": "pilot-003-img-bg-dawn-lake-sha256-74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "still lake at first light, mirror reflection of pink and gold clouds, reeds in the foreground, soft mist on the water, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-meadow": {
+   "sha256": "3e10d70e3cca51623d727ef11c72e061816bbda5b20a74d2ff237fe3c0219e8a",
+   "release_asset": "pilot-002-img-bg-meadow-sha256-3e10d70e3cca51623d727ef11c72e061816bbda5b20a74d2ff237fe3c0219e8a.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 1010,
+   "prompt": "wildflower meadow glowing in early morning light, dew on the grass, soft focus background, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-orchard": {
+   "sha256": "070c890d275ff5c1ffe0b34698af707a42de104f65d70a30f1c07c782971fa80",
+   "release_asset": "pilot-003-img-bg-orchard-sha256-070c890d275ff5c1ffe0b34698af707a42de104f65d70a30f1c07c782971fa80.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "blossoming orchard in morning sunlight, rows of fruit trees with white blossoms, soft green grass, peaceful, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-sky": {
+   "sha256": "617da9bf421ee8daa77db87503c7b3639405f599b15d75bf71c14e8a7c4533aa",
+   "release_asset": "pilot-002-img-bg-sky-sha256-617da9bf421ee8daa77db87503c7b3639405f599b15d75bf71c14e8a7c4533aa.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3000,
+   "prompt": "soft white clouds in a bright blue morning sky with sun rays, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-mountain-sunrise": {
+   "sha256": "886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5",
+   "release_asset": "pilot-003-img-bg-mountain-sunrise-sha256-886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "sun rising behind layered mountain ridges, warm rays across a green valley, wide cinematic landscape, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-river": {
+   "sha256": "d90d8b240a061b6a961d363e4411f81e42b93fa1832d94a1202befb08cb6f392",
+   "release_asset": "pilot-002-img-bg-river-sha256-d90d8b240a061b6a961d363e4411f81e42b93fa1832d94a1202befb08cb6f392.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3001,
+   "prompt": "clear mountain stream flowing over stones in a green forest at morning, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-garden": {
+   "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
+   "release_asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3005,
+   "prompt": "quiet garden path with flowers and soft morning light, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-misty-valley": {
+   "sha256": "a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc",
+   "release_asset": "pilot-003-img-bg-misty-valley-sha256-a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "misty green valley at sunrise with a winding river, soft golden haze, distant hills, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-hills": {
+   "sha256": "05fcd087fa690f6e0fbefddfa57963667d7070eacbb19be6da5b67a725e47b21",
+   "release_asset": "pilot-002-img-bg-hills-sha256-05fcd087fa690f6e0fbefddfa57963667d7070eacbb19be6da5b67a725e47b21.png",
+   "models": {
+    "stabilityai/stable-diffusion-xl-base-1.0": {
+     "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+     "license": "openrail++"
+    },
+    "latent-consistency/lcm-lora-sdxl": {
+     "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+     "license": "openrail++"
+    }
+   },
+   "seed": 3006,
+   "prompt": "green rolling hills with a single tree under a soft sunrise, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-coffee-window": {
+   "sha256": "2af78033d634e8d01dda6fac8344084f7c4cc09e82b992973821fc0109b733c5",
+   "release_asset": "pilot-003-img-bg-coffee-window-sha256-2af78033d634e8d01dda6fac8344084f7c4cc09e82b992973821fc0109b733c5.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "warm cup of coffee and an open Bible on a wooden table beside a sunlit window at sunrise, plants on the sill, cosy morning light, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  }
+ },
+ "holds": [
+  {
+   "image": "bg-sunrise-field",
+   "start": 0.0,
+   "figure": false,
+   "end": 2.0,
+   "motion": "dolly_in",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-sunrise-field",
+   "start": 2.0,
+   "end": 15.389,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-eagle-cliffs",
+   "start": 15.389,
+   "end": 26.265,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-morning-path",
+   "start": 26.265,
+   "end": 35.607,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-wheat",
+   "start": 35.607,
+   "end": 47.449,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-dawn-lake",
+   "start": 47.449,
+   "end": 56.577,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-meadow",
+   "start": 56.577,
+   "end": 66.831,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-orchard",
+   "start": 66.831,
+   "end": 78.443,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sky",
+   "start": 78.443,
+   "end": 92.611,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-mountain-sunrise",
+   "start": 92.611,
+   "end": 103.997,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-river",
+   "start": 103.997,
+   "end": 117.023,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-garden",
+   "start": 117.023,
+   "end": 129.004,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-misty-valley",
+   "start": 129.004,
+   "end": 140.165,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-hills",
+   "start": 140.165,
+   "end": 150.749,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-coffee-window",
+   "start": 150.749,
+   "end": 164.523,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sunrise-field",
+   "start": 164.523,
+   "end": 177.052,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-eagle-cliffs",
+   "start": 177.052,
+   "end": 187.593,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-morning-path",
+   "start": 187.593,
+   "end": 196.737,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-wheat",
+   "start": 196.737,
+   "end": 207.593,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-dawn-lake",
+   "start": 207.593,
+   "end": 217.58,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-meadow",
+   "start": 217.58,
+   "end": 233.111,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-orchard",
+   "start": 233.111,
+   "end": 244.443,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sky",
+   "start": 244.443,
+   "end": 253.687,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-mountain-sunrise",
+   "start": 253.687,
+   "end": 265.892,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-river",
+   "start": 265.892,
+   "end": 275.091,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-garden",
+   "start": 275.091,
+   "end": 287.449,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-misty-valley",
+   "start": 287.449,
+   "end": 300.615,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-hills",
+   "start": 300.615,
+   "end": 313.632,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-coffee-window",
+   "start": 313.632,
+   "end": 325.683,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sunrise-field",
+   "start": 325.683,
+   "end": 337.087,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-eagle-cliffs",
+   "start": 337.087,
+   "end": 351.695,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-morning-path",
+   "start": 351.695,
+   "end": 366.86,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-wheat",
+   "start": 366.86,
+   "end": 377.161,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-dawn-lake",
+   "start": 377.161,
+   "end": 387.148,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-meadow",
+   "start": 387.148,
+   "end": 401.092,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-orchard",
+   "start": 401.092,
+   "end": 411.915,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sky",
+   "start": 411.915,
+   "end": 423.224,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-mountain-sunrise",
+   "start": 423.224,
+   "end": 433.236,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-river",
+   "start": 433.236,
+   "end": 447.328,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-garden",
+   "start": 447.328,
+   "end": 456.84,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-misty-valley",
+   "start": 456.84,
+   "end": 472.657,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-hills",
+   "start": 472.657,
+   "end": 481.771,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-coffee-window",
+   "start": 481.771,
+   "end": 491.069,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sunrise-field",
+   "start": 491.069,
+   "end": 504.116,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-eagle-cliffs",
+   "start": 504.116,
+   "end": 514.759,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-morning-path",
+   "start": 514.759,
+   "end": 528.36,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-wheat",
+   "start": 528.36,
+   "end": 540.197,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-dawn-lake",
+   "start": 540.197,
+   "end": 554.951,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-meadow",
+   "start": 554.951,
+   "end": 564.643,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-orchard",
+   "start": 564.643,
+   "end": 574.917,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sky",
+   "start": 574.917,
+   "end": 585.024,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-mountain-sunrise",
+   "start": 585.024,
+   "end": 594.252,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-river",
+   "start": 594.252,
+   "end": 607.305,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-garden",
+   "start": 607.305,
+   "end": 624.185,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-misty-valley",
+   "start": 624.185,
+   "end": 635.925,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-hills",
+   "start": 635.925,
+   "end": 648.483,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-coffee-window",
+   "start": 648.483,
+   "end": 657.553,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sunrise-field",
+   "start": 657.553,
+   "end": 667.023,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-eagle-cliffs",
+   "start": 667.023,
+   "end": 679.067,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-morning-path",
+   "start": 679.067,
+   "end": 691.88,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-wheat",
+   "start": 691.88,
+   "end": 701.589,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-dawn-lake",
+   "start": 701.589,
+   "end": 714.403,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-meadow",
+   "start": 714.403,
+   "end": 723.775,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-orchard",
+   "start": 723.775,
+   "end": 732.796,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sky",
+   "start": 732.796,
+   "end": 749.213,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-mountain-sunrise",
+   "start": 749.213,
+   "end": 759.124,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-river",
+   "start": 759.124,
+   "end": 772.689,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-garden",
+   "start": 772.689,
+   "end": 783.935,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-misty-valley",
+   "start": 783.935,
+   "end": 796.647,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-hills",
+   "start": 796.647,
+   "end": 807.785,
+   "figure": true,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-coffee-window",
+   "start": 807.785,
+   "end": 817.916,
+   "figure": true,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-sunrise-field",
+   "start": 817.916,
+   "end": 828.445,
+   "figure": true,
+   "motion": "arc",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-eagle-cliffs",
+   "start": 828.445,
+   "end": 840.975,
+   "figure": true,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-morning-path",
+   "start": 840.975,
+   "end": 853.788,
+   "figure": true,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-wheat",
+   "start": 853.788,
+   "end": 868.257,
+   "figure": true,
+   "motion": "crane_up",
+   "atmosphere": false
+  }
+ ],
+ "captions_ass_sha256": "4f4a7325aad7c46f7f31202df92c54529441ec849f49cf69cae99c1713aaf7a6",
+ "captions": [
+  {
+   "start": 1.845,
+   "end": 4.007,
+   "text": "If you woke up already tired,"
+  },
+  {
+   "start": 4.007,
+   "end": 6.244,
+   "text": "before the day has even begun,"
+  },
+  {
+   "start": 6.244,
+   "end": 9.257,
+   "text": "stay with me for the next few minutes."
+  },
+  {
+   "start": 9.257,
+   "end": 11.552,
+   "text": "God has not run out of strength,"
+  },
+  {
+   "start": 11.552,
+   "end": 13.345,
+   "text": "and this morning he wants"
+  },
+  {
+   "start": 13.345,
+   "end": 15.389,
+   "text": "to give some of it to you."
+  },
+  {
+   "start": 15.389,
+   "end": 18.193,
+   "text": "Take one slow breath with me."
+  },
+  {
+   "start": 18.823,
+   "end": 20.849,
+   "text": "You do not have to pretend"
+  },
+  {
+   "start": 20.849,
+   "end": 22.821,
+   "text": "you are full of energy."
+  },
+  {
+   "start": 22.821,
+   "end": 24.453,
+   "text": "You can come to him"
+  },
+  {
+   "start": 24.453,
+   "end": 26.265,
+   "text": "exactly as you are:"
+  },
+  {
+   "start": 26.265,
+   "end": 28.407,
+   "text": "the heavy eyes, the long list,"
+  },
+  {
+   "start": 28.407,
+   "end": 31.121,
+   "text": "the worry you carried to bed and found"
+  },
+  {
+   "start": 31.121,
+   "end": 33.443,
+   "text": "waiting for you when you woke."
+  },
+  {
+   "start": 33.443,
+   "end": 35.607,
+   "text": "Let your shoulders drop."
+  },
+  {
+   "start": 35.607,
+   "end": 37.643,
+   "text": "Unclench your hands."
+  },
+  {
+   "start": 37.643,
+   "end": 39.491,
+   "text": "For the next few minutes,"
+  },
+  {
+   "start": 39.491,
+   "end": 41.93,
+   "text": "nothing is required of you except"
+  },
+  {
+   "start": 41.93,
+   "end": 44.073,
+   "text": "to listen and to let him lift"
+  },
+  {
+   "start": 44.073,
+   "end": 46.419,
+   "text": "what you cannot lift alone."
+  },
+  {
+   "start": 47.449,
+   "end": 49.615,
+   "text": "The prophet Isaiah wrote these"
+  },
+  {
+   "start": 49.615,
+   "end": 52.323,
+   "text": "words to people who were exhausted."
+  },
+  {
+   "start": 52.323,
+   "end": 54.533,
+   "text": "But they that wait upon the LORD"
+  },
+  {
+   "start": 54.533,
+   "end": 56.577,
+   "text": "shall renew their strength;"
+  },
+  {
+   "start": 56.577,
+   "end": 57.975,
+   "text": "they shall mount up"
+  },
+  {
+   "start": 57.975,
+   "end": 59.701,
+   "text": "with wings as eagles;"
+  },
+  {
+   "start": 59.701,
+   "end": 60.991,
+   "text": "they shall run,"
+  },
+  {
+   "start": 60.991,
+   "end": 62.633,
+   "text": "and not be weary;"
+  },
+  {
+   "start": 62.633,
+   "end": 64.114,
+   "text": "and they shall walk,"
+  },
+  {
+   "start": 64.114,
+   "end": 65.501,
+   "text": "and not faint."
+  },
+  {
+   "start": 66.831,
+   "end": 68.845,
+   "text": "Notice the word renew."
+  },
+  {
+   "start": 68.845,
+   "end": 71.076,
+   "text": "You are not asked to manufacture"
+  },
+  {
+   "start": 71.076,
+   "end": 72.929,
+   "text": "strength out of nothing."
+  },
+  {
+   "start": 72.929,
+   "end": 75.838,
+   "text": "You are invited to receive it again,"
+  },
+  {
+   "start": 75.838,
+   "end": 78.443,
+   "text": "the way a field receives rain."
+  },
+  {
+   "start": 78.443,
+   "end": 80.074,
+   "text": "Waiting on the Lord"
+  },
+  {
+   "start": 80.074,
+   "end": 82.057,
+   "text": "is not doing nothing."
+  },
+  {
+   "start": 82.057,
+   "end": 84.407,
+   "text": "It is turning toward him first,"
+  },
+  {
+   "start": 84.407,
+   "end": 85.696,
+   "text": "before the phone,"
+  },
+  {
+   "start": 85.696,
+   "end": 86.909,
+   "text": "before the news,"
+  },
+  {
+   "start": 86.909,
+   "end": 88.198,
+   "text": "before the noise,"
+  },
+  {
+   "start": 88.198,
+   "end": 89.639,
+   "text": "and letting him set"
+  },
+  {
+   "start": 89.639,
+   "end": 91.581,
+   "text": "the pace of your day."
+  },
+  {
+   "start": 92.611,
+   "end": 95.308,
+   "text": "So let us begin honestly."
+  },
+  {
+   "start": 95.308,
+   "end": 97.195,
+   "text": "Lord, here I am."
+  },
+  {
+   "start": 97.195,
+   "end": 98.838,
+   "text": "You know how I slept,"
+  },
+  {
+   "start": 98.838,
+   "end": 100.895,
+   "text": "and you know how I feel."
+  },
+  {
+   "start": 100.895,
+   "end": 103.997,
+   "text": "I will not hide my tiredness from you."
+  },
+  {
+   "start": 103.997,
+   "end": 106.439,
+   "text": "I wait on you this morning."
+  },
+  {
+   "start": 106.439,
+   "end": 108.347,
+   "text": "Renew my strength."
+  },
+  {
+   "start": 108.347,
+   "end": 110.71,
+   "text": "Not the strength to do everything,"
+  },
+  {
+   "start": 110.71,
+   "end": 112.238,
+   "text": "but the strength to do"
+  },
+  {
+   "start": 112.238,
+   "end": 113.697,
+   "text": "the next right thing,"
+  },
+  {
+   "start": 113.697,
+   "end": 115.993,
+   "text": "and then the one after that."
+  },
+  {
+   "start": 117.023,
+   "end": 118.855,
+   "text": "Isaiah says it again,"
+  },
+  {
+   "start": 118.855,
+   "end": 121.128,
+   "text": "just two verses earlier."
+  },
+  {
+   "start": 121.128,
+   "end": 123.527,
+   "text": "He giveth power to the faint;"
+  },
+  {
+   "start": 123.527,
+   "end": 125.246,
+   "text": "and to them that have no"
+  },
+  {
+   "start": 125.246,
+   "end": 127.674,
+   "text": "might he increaseth strength."
+  },
+  {
+   "start": 129.004,
+   "end": 131.509,
+   "text": "Look at who receives the power."
+  },
+  {
+   "start": 131.509,
+   "end": 133.311,
+   "text": "Not the strong."
+  },
+  {
+   "start": 133.311,
+   "end": 136.349,
+   "text": "Not the people who have it all together."
+  },
+  {
+   "start": 136.349,
+   "end": 137.745,
+   "text": "The faint."
+  },
+  {
+   "start": 137.745,
+   "end": 140.165,
+   "text": "The ones with no might left."
+  },
+  {
+   "start": 140.165,
+   "end": 143.002,
+   "text": "If that describes you this morning,"
+  },
+  {
+   "start": 143.002,
+   "end": 145.209,
+   "text": "you are not disqualified."
+  },
+  {
+   "start": 145.209,
+   "end": 147.176,
+   "text": "You are exactly the person"
+  },
+  {
+   "start": 147.176,
+   "end": 149.719,
+   "text": "this promise was written for."
+  },
+  {
+   "start": 150.749,
+   "end": 152.457,
+   "text": "David prayed like this"
+  },
+  {
+   "start": 152.457,
+   "end": 154.577,
+   "text": "at the start of his days."
+  },
+  {
+   "start": 154.577,
+   "end": 157.591,
+   "text": "My voice shalt thou hear in the morning,"
+  },
+  {
+   "start": 157.591,
+   "end": 158.299,
+   "text": "O LORD;"
+  },
+  {
+   "start": 158.299,
+   "end": 160.256,
+   "text": "in the morning will I direct"
+  },
+  {
+   "start": 160.256,
+   "end": 161.655,
+   "text": "my prayer unto thee,"
+  },
+  {
+   "start": 161.655,
+   "end": 163.193,
+   "text": "and will look up."
+  },
+  {
+   "start": 164.523,
+   "end": 165.881,
+   "text": "Lord, like David,"
+  },
+  {
+   "start": 165.881,
+   "end": 167.32,
+   "text": "I direct my prayer"
+  },
+  {
+   "start": 167.32,
+   "end": 169.737,
+   "text": "to you before anything else."
+  },
+  {
+   "start": 169.737,
+   "end": 172.243,
+   "text": "Hear my voice this morning."
+  },
+  {
+   "start": 172.243,
+   "end": 174.671,
+   "text": "I lift my eyes from the problems"
+  },
+  {
+   "start": 174.671,
+   "end": 177.052,
+   "text": "in front of me and I look up."
+  },
+  {
+   "start": 177.052,
+   "end": 179.931,
+   "text": "Remind me that you are above this day,"
+  },
+  {
+   "start": 179.931,
+   "end": 181.597,
+   "text": "and that nothing in it"
+  },
+  {
+   "start": 181.597,
+   "end": 183.311,
+   "text": "will surprise you."
+  },
+  {
+   "start": 184.341,
+   "end": 185.954,
+   "text": "This is the day which"
+  },
+  {
+   "start": 185.954,
+   "end": 187.593,
+   "text": "the LORD hath made;"
+  },
+  {
+   "start": 187.593,
+   "end": 190.738,
+   "text": "we will rejoice and be glad in it."
+  },
+  {
+   "start": 192.068,
+   "end": 193.955,
+   "text": "This day was made."
+  },
+  {
+   "start": 193.955,
+   "end": 196.737,
+   "text": "It did not happen by accident."
+  },
+  {
+   "start": 196.737,
+   "end": 198.477,
+   "text": "Before your alarm rang,"
+  },
+  {
+   "start": 198.477,
+   "end": 200.897,
+   "text": "God had already shaped the hours"
+  },
+  {
+   "start": 200.897,
+   "end": 202.741,
+   "text": "you are about to live."
+  },
+  {
+   "start": 202.741,
+   "end": 205.641,
+   "text": "You may not feel like rejoicing yet,"
+  },
+  {
+   "start": 205.641,
+   "end": 207.593,
+   "text": "and that is all right."
+  },
+  {
+   "start": 207.593,
+   "end": 211.078,
+   "text": "Gladness often arrives after obedience,"
+  },
+  {
+   "start": 211.078,
+   "end": 212.509,
+   "text": "not before it."
+  },
+  {
+   "start": 212.509,
+   "end": 214.166,
+   "text": "So we choose it first,"
+  },
+  {
+   "start": 214.166,
+   "end": 216.55,
+   "text": "and the feeling can follow."
+  },
+  {
+   "start": 217.58,
+   "end": 219.979,
+   "text": "Let us be still for a moment."
+  },
+  {
+   "start": 219.979,
+   "end": 221.929,
+   "text": "Breathe in slowly."
+  },
+  {
+   "start": 221.929,
+   "end": 223.603,
+   "text": "And breathe out."
+  },
+  {
+   "start": 223.603,
+   "end": 225.766,
+   "text": "One more time, breathe in,"
+  },
+  {
+   "start": 225.766,
+   "end": 227.281,
+   "text": "and let it go."
+  },
+  {
+   "start": 233.111,
+   "end": 234.841,
+   "text": "Now let us pray through"
+  },
+  {
+   "start": 234.841,
+   "end": 236.497,
+   "text": "the parts of this day,"
+  },
+  {
+   "start": 236.497,
+   "end": 237.55,
+   "text": "one at a time,"
+  },
+  {
+   "start": 237.55,
+   "end": 240.458,
+   "text": "and give each of them to the Lord."
+  },
+  {
+   "start": 241.788,
+   "end": 244.443,
+   "text": "Father, I give you my mind."
+  },
+  {
+   "start": 244.443,
+   "end": 246.609,
+   "text": "You know the thoughts that started"
+  },
+  {
+   "start": 246.609,
+   "end": 248.01,
+   "text": "running before my feet"
+  },
+  {
+   "start": 248.01,
+   "end": 249.337,
+   "text": "touched the floor."
+  },
+  {
+   "start": 249.337,
+   "end": 251.203,
+   "text": "Quiet the noise."
+  },
+  {
+   "start": 251.203,
+   "end": 253.687,
+   "text": "Gather my scattered attention."
+  },
+  {
+   "start": 253.687,
+   "end": 254.927,
+   "text": "Where I have been"
+  },
+  {
+   "start": 254.927,
+   "end": 256.604,
+   "text": "rehearsing worst cases,"
+  },
+  {
+   "start": 256.604,
+   "end": 258.063,
+   "text": "teach me to rehearse"
+  },
+  {
+   "start": 258.063,
+   "end": 260.139,
+   "text": "your faithfulness instead."
+  },
+  {
+   "start": 260.139,
+   "end": 262.956,
+   "text": "Give me a clear head for the decisions"
+  },
+  {
+   "start": 262.956,
+   "end": 264.862,
+   "text": "I have to make today."
+  },
+  {
+   "start": 265.892,
+   "end": 268.739,
+   "text": "Thou wilt keep him in perfect peace,"
+  },
+  {
+   "start": 268.739,
+   "end": 271.213,
+   "text": "whose mind is stayed on thee:"
+  },
+  {
+   "start": 271.213,
+   "end": 273.761,
+   "text": "because he trusteth in thee."
+  },
+  {
+   "start": 275.091,
+   "end": 277.489,
+   "text": "Lord, I give you my body."
+  },
+  {
+   "start": 277.489,
+   "end": 278.891,
+   "text": "You see the aches,"
+  },
+  {
+   "start": 278.891,
+   "end": 280.137,
+   "text": "the short night,"
+  },
+  {
+   "start": 280.137,
+   "end": 281.772,
+   "text": "the energy that feels"
+  },
+  {
+   "start": 281.772,
+   "end": 283.899,
+   "text": "like it is already spent."
+  },
+  {
+   "start": 283.899,
+   "end": 285.62,
+   "text": "Strengthen me physically"
+  },
+  {
+   "start": 285.62,
+   "end": 287.449,
+   "text": "for what this day asks."
+  },
+  {
+   "start": 287.449,
+   "end": 289.055,
+   "text": "Help me to eat well,"
+  },
+  {
+   "start": 289.055,
+   "end": 290.581,
+   "text": "to rest when I can,"
+  },
+  {
+   "start": 290.581,
+   "end": 292.588,
+   "text": "and to treat this body as"
+  },
+  {
+   "start": 292.588,
+   "end": 294.776,
+   "text": "a gift and not a machine."
+  },
+  {
+   "start": 294.776,
+   "end": 297.115,
+   "text": "Where there is pain or sickness,"
+  },
+  {
+   "start": 297.115,
+   "end": 299.585,
+   "text": "I ask for your healing touch."
+  },
+  {
+   "start": 300.615,
+   "end": 302.467,
+   "text": "Jesus said, Come unto me,"
+  },
+  {
+   "start": 302.467,
+   "end": 305.355,
+   "text": "all ye that labour and are heavy laden,"
+  },
+  {
+   "start": 305.355,
+   "end": 307.557,
+   "text": "and I will give you rest."
+  },
+  {
+   "start": 308.887,
+   "end": 311.577,
+   "text": "The rest Jesus offers is not only"
+  },
+  {
+   "start": 311.577,
+   "end": 313.632,
+   "text": "for the end of the day."
+  },
+  {
+   "start": 313.632,
+   "end": 315.573,
+   "text": "It is a rest you can carry"
+  },
+  {
+   "start": 315.573,
+   "end": 317.396,
+   "text": "into the middle of it."
+  },
+  {
+   "start": 317.396,
+   "end": 319.326,
+   "text": "You can be busy and still"
+  },
+  {
+   "start": 319.326,
+   "end": 321.256,
+   "text": "be at rest on the inside,"
+  },
+  {
+   "start": 321.256,
+   "end": 323.65,
+   "text": "because the weight is no longer"
+  },
+  {
+   "start": 323.65,
+   "end": 325.683,
+   "text": "on your shoulders alone."
+  },
+  {
+   "start": 325.683,
+   "end": 327.241,
+   "text": "He is yoked beside you,"
+  },
+  {
+   "start": 327.241,
+   "end": 328.742,
+   "text": "pulling with you."
+  },
+  {
+   "start": 329.772,
+   "end": 330.199,
+   "text": "Lord,"
+  },
+  {
+   "start": 330.199,
+   "end": 332.597,
+   "text": "I bring you my work today."
+  },
+  {
+   "start": 332.597,
+   "end": 334.991,
+   "text": "The tasks I enjoy and the ones"
+  },
+  {
+   "start": 334.991,
+   "end": 337.087,
+   "text": "I have been putting off."
+  },
+  {
+   "start": 337.087,
+   "end": 340.189,
+   "text": "The conversations I need to have."
+  },
+  {
+   "start": 340.189,
+   "end": 342.865,
+   "text": "The people who depend on me."
+  },
+  {
+   "start": 342.865,
+   "end": 345.648,
+   "text": "Give me focus and diligence."
+  },
+  {
+   "start": 345.648,
+   "end": 347.501,
+   "text": "Help me to do good work,"
+  },
+  {
+   "start": 347.501,
+   "end": 348.89,
+   "text": "honestly and well,"
+  },
+  {
+   "start": 348.89,
+   "end": 351.695,
+   "text": "and to leave the results with you."
+  },
+  {
+   "start": 351.695,
+   "end": 353.8,
+   "text": "When I am tempted to rush,"
+  },
+  {
+   "start": 353.8,
+   "end": 355.032,
+   "text": "slow me down."
+  },
+  {
+   "start": 355.032,
+   "end": 357.233,
+   "text": "When I am tempted to give up,"
+  },
+  {
+   "start": 357.233,
+   "end": 358.646,
+   "text": "keep me going."
+  },
+  {
+   "start": 359.676,
+   "end": 361.376,
+   "text": "And whatsoever ye do,"
+  },
+  {
+   "start": 361.376,
+   "end": 362.59,
+   "text": "do it heartily,"
+  },
+  {
+   "start": 362.59,
+   "end": 363.804,
+   "text": "as to the Lord,"
+  },
+  {
+   "start": 363.804,
+   "end": 365.53,
+   "text": "and not unto men."
+  },
+  {
+   "start": 366.86,
+   "end": 367.437,
+   "text": "Father,"
+  },
+  {
+   "start": 367.437,
+   "end": 370.237,
+   "text": "there are parts of today I already"
+  },
+  {
+   "start": 370.237,
+   "end": 372.971,
+   "text": "know I cannot handle on my own."
+  },
+  {
+   "start": 372.971,
+   "end": 375.227,
+   "text": "I name them before you now,"
+  },
+  {
+   "start": 375.227,
+   "end": 377.161,
+   "text": "quietly, in my heart."
+  },
+  {
+   "start": 377.161,
+   "end": 379.061,
+   "text": "Instead of pretending,"
+  },
+  {
+   "start": 379.061,
+   "end": 380.968,
+   "text": "I admit my weakness."
+  },
+  {
+   "start": 380.968,
+   "end": 382.519,
+   "text": "And I ask you to meet"
+  },
+  {
+   "start": 382.519,
+   "end": 383.626,
+   "text": "me right there,"
+  },
+  {
+   "start": 383.626,
+   "end": 386.118,
+   "text": "in the place where I run out."
+  },
+  {
+   "start": 387.148,
+   "end": 389.087,
+   "text": "The apostle Paul heard this"
+  },
+  {
+   "start": 389.087,
+   "end": 390.595,
+   "text": "answer when he begged"
+  },
+  {
+   "start": 390.595,
+   "end": 393.216,
+   "text": "for his weakness to be taken away."
+  },
+  {
+   "start": 393.216,
+   "end": 396.063,
+   "text": "My grace is sufficient for thee:"
+  },
+  {
+   "start": 396.063,
+   "end": 397.854,
+   "text": "for my strength is made"
+  },
+  {
+   "start": 397.854,
+   "end": 399.762,
+   "text": "perfect in weakness."
+  },
+  {
+   "start": 401.092,
+   "end": 404.152,
+   "text": "God did not remove Paul's weakness."
+  },
+  {
+   "start": 404.152,
+   "end": 405.676,
+   "text": "He filled it."
+  },
+  {
+   "start": 405.676,
+   "end": 407.604,
+   "text": "The place where Paul ran out"
+  },
+  {
+   "start": 407.604,
+   "end": 409.738,
+   "text": "became the place where Christ's"
+  },
+  {
+   "start": 409.738,
+   "end": 411.915,
+   "text": "power showed up most clearly."
+  },
+  {
+   "start": 411.915,
+   "end": 414.238,
+   "text": "So your weakness this morning"
+  },
+  {
+   "start": 414.238,
+   "end": 416.66,
+   "text": "is not the end of the story."
+  },
+  {
+   "start": 416.66,
+   "end": 419.291,
+   "text": "It may be the exact spot where God"
+  },
+  {
+   "start": 419.291,
+   "end": 422.194,
+   "text": "plans to show you what he can do."
+  },
+  {
+   "start": 423.224,
+   "end": 423.644,
+   "text": "Lord,"
+  },
+  {
+   "start": 423.644,
+   "end": 426.177,
+   "text": "I lift up the people I love."
+  },
+  {
+   "start": 426.177,
+   "end": 428.175,
+   "text": "Those who share my home,"
+  },
+  {
+   "start": 428.175,
+   "end": 430.603,
+   "text": "and those who are far away."
+  },
+  {
+   "start": 430.603,
+   "end": 433.236,
+   "text": "Give them strength for their own days."
+  },
+  {
+   "start": 433.236,
+   "end": 435.048,
+   "text": "Protect them as they go"
+  },
+  {
+   "start": 435.048,
+   "end": 437.277,
+   "text": "out and as they come back."
+  },
+  {
+   "start": 437.277,
+   "end": 439.718,
+   "text": "Where there is tension between us,"
+  },
+  {
+   "start": 439.718,
+   "end": 441.191,
+   "text": "soften our hearts."
+  },
+  {
+   "start": 441.191,
+   "end": 442.829,
+   "text": "Help me to be patient"
+  },
+  {
+   "start": 442.829,
+   "end": 444.31,
+   "text": "and kind with them,"
+  },
+  {
+   "start": 444.31,
+   "end": 446.298,
+   "text": "even when I am tired."
+  },
+  {
+   "start": 447.328,
+   "end": 448.006,
+   "text": "And Lord,"
+  },
+  {
+   "start": 448.006,
+   "end": 450.792,
+   "text": "I pray for everyone listening to this"
+  },
+  {
+   "start": 450.792,
+   "end": 453.908,
+   "text": "prayer who is carrying more than usual."
+  },
+  {
+   "start": 453.908,
+   "end": 456.84,
+   "text": "The caregivers who were up in the night."
+  },
+  {
+   "start": 456.84,
+   "end": 459.281,
+   "text": "The parents of newborns."
+  },
+  {
+   "start": 459.281,
+   "end": 461.019,
+   "text": "The ones grieving."
+  },
+  {
+   "start": 461.019,
+   "end": 463.481,
+   "text": "The ones working two jobs."
+  },
+  {
+   "start": 463.481,
+   "end": 465.752,
+   "text": "The ones waiting for news."
+  },
+  {
+   "start": 465.752,
+   "end": 467.962,
+   "text": "Meet each of them this morning"
+  },
+  {
+   "start": 467.962,
+   "end": 469.804,
+   "text": "with exactly the strength"
+  },
+  {
+   "start": 469.804,
+   "end": 471.627,
+   "text": "they need for today."
+  },
+  {
+   "start": 472.657,
+   "end": 475.312,
+   "text": "My flesh and my heart faileth:"
+  },
+  {
+   "start": 475.312,
+   "end": 478.179,
+   "text": "but God is the strength of my heart,"
+  },
+  {
+   "start": 478.179,
+   "end": 480.441,
+   "text": "and my portion for ever."
+  },
+  {
+   "start": 481.771,
+   "end": 482.329,
+   "text": "Father,"
+  },
+  {
+   "start": 482.329,
+   "end": 485.3,
+   "text": "I trust you with what I need today."
+  },
+  {
+   "start": 485.3,
+   "end": 487.241,
+   "text": "The bills, the groceries,"
+  },
+  {
+   "start": 487.241,
+   "end": 488.871,
+   "text": "the plans that depend"
+  },
+  {
+   "start": 488.871,
+   "end": 491.069,
+   "text": "on money I do not yet see."
+  },
+  {
+   "start": 491.069,
+   "end": 494.236,
+   "text": "You know every need before I speak it."
+  },
+  {
+   "start": 494.236,
+   "end": 496.189,
+   "text": "Provide what is necessary,"
+  },
+  {
+   "start": 496.189,
+   "end": 497.542,
+   "text": "and give me wisdom"
+  },
+  {
+   "start": 497.542,
+   "end": 499.6,
+   "text": "with what I already have."
+  },
+  {
+   "start": 499.6,
+   "end": 501.047,
+   "text": "Keep me from fear,"
+  },
+  {
+   "start": 501.047,
+   "end": 503.086,
+   "text": "and keep me generous."
+  },
+  {
+   "start": 504.116,
+   "end": 504.489,
+   "text": "Lord,"
+  },
+  {
+   "start": 504.489,
+   "end": 507.396,
+   "text": "there are choices in front of me today,"
+  },
+  {
+   "start": 507.396,
+   "end": 510.483,
+   "text": "some small and some that feel very big."
+  },
+  {
+   "start": 510.483,
+   "end": 512.531,
+   "text": "I do not want to make them"
+  },
+  {
+   "start": 512.531,
+   "end": 514.759,
+   "text": "in a hurry or out of fear."
+  },
+  {
+   "start": 514.759,
+   "end": 516.539,
+   "text": "Give me wisdom."
+  },
+  {
+   "start": 516.539,
+   "end": 519.155,
+   "text": "Close the doors that should be closed"
+  },
+  {
+   "start": 519.155,
+   "end": 521.881,
+   "text": "and open the ones you have prepared."
+  },
+  {
+   "start": 521.881,
+   "end": 524.293,
+   "text": "And if I cannot see the whole path,"
+  },
+  {
+   "start": 524.293,
+   "end": 527.33,
+   "text": "give me light enough for the next step."
+  },
+  {
+   "start": 528.36,
+   "end": 528.922,
+   "text": "Father,"
+  },
+  {
+   "start": 528.922,
+   "end": 530.205,
+   "text": "if I am carrying"
+  },
+  {
+   "start": 530.205,
+   "end": 532.05,
+   "text": "a grudge into this day,"
+  },
+  {
+   "start": 532.05,
+   "end": 534.236,
+   "text": "I lay it down before you."
+  },
+  {
+   "start": 534.236,
+   "end": 536.864,
+   "text": "You know the words that still sting"
+  },
+  {
+   "start": 536.864,
+   "end": 538.44,
+   "text": "and the person I keep"
+  },
+  {
+   "start": 538.44,
+   "end": 540.197,
+   "text": "replaying in my mind."
+  },
+  {
+   "start": 540.197,
+   "end": 542.104,
+   "text": "I do not have to pretend"
+  },
+  {
+   "start": 542.104,
+   "end": 543.556,
+   "text": "it did not hurt."
+  },
+  {
+   "start": 543.556,
+   "end": 545.951,
+   "text": "But I choose not to let it drain"
+  },
+  {
+   "start": 545.951,
+   "end": 548.451,
+   "text": "the strength you are giving me."
+  },
+  {
+   "start": 548.451,
+   "end": 549.944,
+   "text": "Help me to forgive as"
+  },
+  {
+   "start": 549.944,
+   "end": 551.438,
+   "text": "you have forgiven me,"
+  },
+  {
+   "start": 551.438,
+   "end": 553.921,
+   "text": "and to speak with grace today."
+  },
+  {
+   "start": 554.951,
+   "end": 557.968,
+   "text": "The LORD is my strength and my shield;"
+  },
+  {
+   "start": 557.968,
+   "end": 559.926,
+   "text": "my heart trusted in him,"
+  },
+  {
+   "start": 559.926,
+   "end": 561.412,
+   "text": "and I am helped:"
+  },
+  {
+   "start": 561.412,
+   "end": 564.643,
+   "text": "therefore my heart greatly rejoiceth;"
+  },
+  {
+   "start": 564.643,
+   "end": 567.723,
+   "text": "and with my song will I praise him."
+  },
+  {
+   "start": 569.053,
+   "end": 571.537,
+   "text": "Strength for what is inside you."
+  },
+  {
+   "start": 571.537,
+   "end": 573.249,
+   "text": "A shield for what comes"
+  },
+  {
+   "start": 573.249,
+   "end": 574.917,
+   "text": "at you from outside."
+  },
+  {
+   "start": 574.917,
+   "end": 578.084,
+   "text": "God offers both in the same sentence."
+  },
+  {
+   "start": 578.084,
+   "end": 580.141,
+   "text": "And notice the order:"
+  },
+  {
+   "start": 580.141,
+   "end": 581.581,
+   "text": "my heart trusted,"
+  },
+  {
+   "start": 581.581,
+   "end": 583.116,
+   "text": "and I am helped."
+  },
+  {
+   "start": 583.116,
+   "end": 585.024,
+   "text": "Trust comes first."
+  },
+  {
+   "start": 585.024,
+   "end": 586.974,
+   "text": "The help follows."
+  },
+  {
+   "start": 588.004,
+   "end": 590.445,
+   "text": "Lord, cover my home today."
+  },
+  {
+   "start": 590.445,
+   "end": 592.345,
+   "text": "Watch over the door as"
+  },
+  {
+   "start": 592.345,
+   "end": 594.252,
+   "text": "it opens and closes."
+  },
+  {
+   "start": 594.252,
+   "end": 596.35,
+   "text": "Keep every person who lives"
+  },
+  {
+   "start": 596.35,
+   "end": 598.059,
+   "text": "here safe on the road,"
+  },
+  {
+   "start": 598.059,
+   "end": 599.535,
+   "text": "at school, at work,"
+  },
+  {
+   "start": 599.535,
+   "end": 601.813,
+   "text": "and in every place they go."
+  },
+  {
+   "start": 601.813,
+   "end": 604.241,
+   "text": "Let our home be a place of peace"
+  },
+  {
+   "start": 604.241,
+   "end": 605.987,
+   "text": "when we return tonight,"
+  },
+  {
+   "start": 605.987,
+   "end": 607.305,
+   "text": "not of tension."
+  },
+  {
+   "start": 607.305,
+   "end": 610.365,
+   "text": "Let your presence fill every room."
+  },
+  {
+   "start": 611.395,
+   "end": 613.772,
+   "text": "Breathe in again, slowly."
+  },
+  {
+   "start": 613.772,
+   "end": 615.509,
+   "text": "And let it go."
+  },
+  {
+   "start": 615.509,
+   "end": 618.355,
+   "text": "Rest in his presence for a moment."
+  },
+  {
+   "start": 624.185,
+   "end": 626.452,
+   "text": "Now say these words with me,"
+  },
+  {
+   "start": 626.452,
+   "end": 628.071,
+   "text": "out loud if you can,"
+  },
+  {
+   "start": 628.071,
+   "end": 630.275,
+   "text": "or quietly in your heart."
+  },
+  {
+   "start": 630.275,
+   "end": 632.567,
+   "text": "The Lord is my strength."
+  },
+  {
+   "start": 632.567,
+   "end": 633.929,
+   "text": "I am not empty,"
+  },
+  {
+   "start": 633.929,
+   "end": 635.925,
+   "text": "because he fills me."
+  },
+  {
+   "start": 635.925,
+   "end": 637.205,
+   "text": "I am not alone,"
+  },
+  {
+   "start": 637.205,
+   "end": 639.433,
+   "text": "because he goes with me."
+  },
+  {
+   "start": 639.433,
+   "end": 641.313,
+   "text": "I can do all things through"
+  },
+  {
+   "start": 641.313,
+   "end": 643.581,
+   "text": "Christ which strengtheneth me."
+  },
+  {
+   "start": 643.581,
+   "end": 645.111,
+   "text": "The joy of the Lord"
+  },
+  {
+   "start": 645.111,
+   "end": 647.153,
+   "text": "is my strength today."
+  },
+  {
+   "start": 648.483,
+   "end": 650.363,
+   "text": "I can do all things through"
+  },
+  {
+   "start": 650.363,
+   "end": 652.801,
+   "text": "Christ which strengtheneth me."
+  },
+  {
+   "start": 654.131,
+   "end": 655.94,
+   "text": "All things does not mean"
+  },
+  {
+   "start": 655.94,
+   "end": 657.553,
+   "text": "everything at once."
+  },
+  {
+   "start": 657.553,
+   "end": 659.144,
+   "text": "It means that whatever"
+  },
+  {
+   "start": 659.144,
+   "end": 660.953,
+   "text": "this day actually brings,"
+  },
+  {
+   "start": 660.953,
+   "end": 662.11,
+   "text": "Christ will give"
+  },
+  {
+   "start": 662.11,
+   "end": 664.135,
+   "text": "you strength for that thing,"
+  },
+  {
+   "start": 664.135,
+   "end": 665.328,
+   "text": "when it comes."
+  },
+  {
+   "start": 665.328,
+   "end": 667.023,
+   "text": "Not before."
+  },
+  {
+   "start": 667.023,
+   "end": 669.101,
+   "text": "Not all in advance."
+  },
+  {
+   "start": 669.101,
+   "end": 671.329,
+   "text": "Enough, and on time."
+  },
+  {
+   "start": 672.359,
+   "end": 673.913,
+   "text": "When the people wept"
+  },
+  {
+   "start": 673.913,
+   "end": 675.856,
+   "text": "after hearing God's word,"
+  },
+  {
+   "start": 675.856,
+   "end": 677.333,
+   "text": "Nehemiah told them,"
+  },
+  {
+   "start": 677.333,
+   "end": 679.067,
+   "text": "Neither be ye sorry;"
+  },
+  {
+   "start": 679.067,
+   "end": 680.784,
+   "text": "for the joy of the LORD"
+  },
+  {
+   "start": 680.784,
+   "end": 682.403,
+   "text": "is your strength."
+  },
+  {
+   "start": 683.733,
+   "end": 686.068,
+   "text": "Lord, restore my joy."
+  },
+  {
+   "start": 686.068,
+   "end": 687.554,
+   "text": "Not a forced smile,"
+  },
+  {
+   "start": 687.554,
+   "end": 690.057,
+   "text": "but the deep gladness of knowing"
+  },
+  {
+   "start": 690.057,
+   "end": 691.88,
+   "text": "that I belong to you."
+  },
+  {
+   "start": 691.88,
+   "end": 694.769,
+   "text": "Let that joy be my strength today."
+  },
+  {
+   "start": 694.769,
+   "end": 696.313,
+   "text": "When things go wrong,"
+  },
+  {
+   "start": 696.313,
+   "end": 698.518,
+   "text": "let me remember that your love"
+  },
+  {
+   "start": 698.518,
+   "end": 700.559,
+   "text": "for me has not changed."
+  },
+  {
+   "start": 701.589,
+   "end": 703.783,
+   "text": "And let the beauty of the LORD"
+  },
+  {
+   "start": 703.783,
+   "end": 705.353,
+   "text": "our God be upon us:"
+  },
+  {
+   "start": 705.353,
+   "end": 707.489,
+   "text": "and establish thou the work"
+  },
+  {
+   "start": 707.489,
+   "end": 709.331,
+   "text": "of our hands upon us;"
+  },
+  {
+   "start": 709.331,
+   "end": 709.639,
+   "text": "yea,"
+  },
+  {
+   "start": 709.639,
+   "end": 713.073,
+   "text": "the work of our hands establish thou it."
+  },
+  {
+   "start": 714.403,
+   "end": 715.781,
+   "text": "Thank you, Father,"
+  },
+  {
+   "start": 715.781,
+   "end": 717.569,
+   "text": "for this new morning."
+  },
+  {
+   "start": 717.569,
+   "end": 719.691,
+   "text": "For breath in my lungs."
+  },
+  {
+   "start": 719.691,
+   "end": 721.758,
+   "text": "For another chance to love,"
+  },
+  {
+   "start": 721.758,
+   "end": 723.775,
+   "text": "to work, to begin again."
+  },
+  {
+   "start": 723.775,
+   "end": 725.579,
+   "text": "Thank you for the strength"
+  },
+  {
+   "start": 725.579,
+   "end": 727.66,
+   "text": "you have given me in the past,"
+  },
+  {
+   "start": 727.66,
+   "end": 729.256,
+   "text": "on days I did not think"
+  },
+  {
+   "start": 729.256,
+   "end": 730.824,
+   "text": "I would get through."
+  },
+  {
+   "start": 730.824,
+   "end": 732.796,
+   "text": "You carried me then."
+  },
+  {
+   "start": 732.796,
+   "end": 735.514,
+   "text": "I trust you to carry me now."
+  },
+  {
+   "start": 736.544,
+   "end": 736.952,
+   "text": "Lord,"
+  },
+  {
+   "start": 736.952,
+   "end": 738.664,
+   "text": "give my day a purpose"
+  },
+  {
+   "start": 738.664,
+   "end": 740.393,
+   "text": "beyond my own list."
+  },
+  {
+   "start": 740.393,
+   "end": 743.246,
+   "text": "Show me one person I can encourage,"
+  },
+  {
+   "start": 743.246,
+   "end": 745.528,
+   "text": "one small kindness I can do,"
+  },
+  {
+   "start": 745.528,
+   "end": 747.403,
+   "text": "one way to make someone"
+  },
+  {
+   "start": 747.403,
+   "end": 749.213,
+   "text": "else's load lighter."
+  },
+  {
+   "start": 749.213,
+   "end": 751.116,
+   "text": "Let the strength you give me"
+  },
+  {
+   "start": 751.116,
+   "end": 753.063,
+   "text": "flow through me to others."
+  },
+  {
+   "start": 753.063,
+   "end": 756.187,
+   "text": "I do not want to only receive today."
+  },
+  {
+   "start": 756.187,
+   "end": 758.094,
+   "text": "I want to give."
+  },
+  {
+   "start": 759.124,
+   "end": 759.916,
+   "text": "And Father,"
+  },
+  {
+   "start": 759.916,
+   "end": 762.075,
+   "text": "I pray for the people who keep"
+  },
+  {
+   "start": 762.075,
+   "end": 763.946,
+   "text": "our world running while we"
+  },
+  {
+   "start": 763.946,
+   "end": 765.853,
+   "text": "sleep and while we work:"
+  },
+  {
+   "start": 765.853,
+   "end": 767.434,
+   "text": "nurses and doctors,"
+  },
+  {
+   "start": 767.434,
+   "end": 768.931,
+   "text": "drivers and cooks,"
+  },
+  {
+   "start": 768.931,
+   "end": 770.762,
+   "text": "teachers and soldiers,"
+  },
+  {
+   "start": 770.762,
+   "end": 772.689,
+   "text": "farmers and cleaners."
+  },
+  {
+   "start": 772.689,
+   "end": 775.451,
+   "text": "Give them strength and safety today."
+  },
+  {
+   "start": 775.451,
+   "end": 777.192,
+   "text": "Bring peace to the places"
+  },
+  {
+   "start": 777.192,
+   "end": 779.769,
+   "text": "in the world where there is fighting,"
+  },
+  {
+   "start": 779.769,
+   "end": 782.905,
+   "text": "and comfort to those who woke up afraid."
+  },
+  {
+   "start": 783.935,
+   "end": 785.902,
+   "text": "And when this day is over,"
+  },
+  {
+   "start": 785.902,
+   "end": 788.125,
+   "text": "Lord, bring me back to you."
+  },
+  {
+   "start": 788.125,
+   "end": 789.979,
+   "text": "Whatever happens between"
+  },
+  {
+   "start": 789.979,
+   "end": 791.215,
+   "text": "now and tonight,"
+  },
+  {
+   "start": 791.215,
+   "end": 793.995,
+   "text": "let me end the day in your presence,"
+  },
+  {
+   "start": 793.995,
+   "end": 796.647,
+   "text": "grateful, forgiven, and at rest."
+  },
+  {
+   "start": 796.647,
+   "end": 798.073,
+   "text": "I place the evening"
+  },
+  {
+   "start": 798.073,
+   "end": 799.723,
+   "text": "in your hands already,"
+  },
+  {
+   "start": 799.723,
+   "end": 801.449,
+   "text": "so that I can live this"
+  },
+  {
+   "start": 801.449,
+   "end": 803.375,
+   "text": "morning without fear."
+  },
+  {
+   "start": 804.405,
+   "end": 805.8,
+   "text": "Here is one thing"
+  },
+  {
+   "start": 805.8,
+   "end": 807.785,
+   "text": "to take into your day."
+  },
+  {
+   "start": 807.785,
+   "end": 809.453,
+   "text": "The next time you feel"
+  },
+  {
+   "start": 809.453,
+   "end": 811.425,
+   "text": "your strength running out,"
+  },
+  {
+   "start": 811.425,
+   "end": 813.7,
+   "text": "stop for ten seconds, breathe,"
+  },
+  {
+   "start": 813.7,
+   "end": 814.762,
+   "text": "and say, Lord,"
+  },
+  {
+   "start": 814.762,
+   "end": 816.307,
+   "text": "renew my strength."
+  },
+  {
+   "start": 816.307,
+   "end": 817.916,
+   "text": "That is all."
+  },
+  {
+   "start": 817.916,
+   "end": 819.589,
+   "text": "Ten seconds."
+  },
+  {
+   "start": 819.589,
+   "end": 821.082,
+   "text": "Let it become the way"
+  },
+  {
+   "start": 821.082,
+   "end": 822.505,
+   "text": "you wait on the Lord"
+  },
+  {
+   "start": 822.505,
+   "end": 824.846,
+   "text": "in the middle of a busy day."
+  },
+  {
+   "start": 825.876,
+   "end": 828.445,
+   "text": "And now receive this blessing."
+  },
+  {
+   "start": 828.445,
+   "end": 830.026,
+   "text": "The LORD bless thee,"
+  },
+  {
+   "start": 830.026,
+   "end": 831.313,
+   "text": "and keep thee:"
+  },
+  {
+   "start": 831.313,
+   "end": 834.18,
+   "text": "The LORD make his face shine upon thee,"
+  },
+  {
+   "start": 834.18,
+   "end": 836.272,
+   "text": "and be gracious unto thee:"
+  },
+  {
+   "start": 836.272,
+   "end": 837.439,
+   "text": "The LORD lift up"
+  },
+  {
+   "start": 837.439,
+   "end": 839.336,
+   "text": "his countenance upon thee,"
+  },
+  {
+   "start": 839.336,
+   "end": 840.975,
+   "text": "and give thee peace."
+  },
+  {
+   "start": 840.975,
+   "end": 843.288,
+   "text": "Go into this day renewed."
+  },
+  {
+   "start": 843.288,
+   "end": 846.091,
+   "text": "In Jesus' name, amen."
+  },
+  {
+   "start": 847.421,
+   "end": 849.723,
+   "text": "If this prayer strengthened you,"
+  },
+  {
+   "start": 849.723,
+   "end": 851.594,
+   "text": "type amen in the comments,"
+  },
+  {
+   "start": 851.594,
+   "end": 853.788,
+   "text": "so others can pray with you."
+  },
+  {
+   "start": 853.788,
+   "end": 854.803,
+   "text": "And subscribe,"
+  },
+  {
+   "start": 854.803,
+   "end": 856.832,
+   "text": "so tomorrow morning's prayer"
+  },
+  {
+   "start": 856.832,
+   "end": 859.621,
+   "text": "is waiting for you when you wake up."
+  },
+  {
+   "start": 859.621,
+   "end": 861.234,
+   "text": "We will start the day"
+  },
+  {
+   "start": 861.234,
+   "end": 863.427,
+   "text": "with God together again."
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Good morning.",
+   "start": 0.3,
+   "end": 1.665
+  },
+  {
+   "segment": "hook",
+   "text": "If you woke up already tired, before the day has even begun, stay with me for the next few minutes.",
+   "start": 1.845,
+   "end": 9.077
+  },
+  {
+   "segment": "hook",
+   "text": "God has not run out of strength, and this morning he wants to give some of it to you.",
+   "start": 9.257,
+   "end": 15.209
+  },
+  {
+   "segment": "hook",
+   "text": "Take one slow breath with me.",
+   "start": 15.389,
+   "end": 17.843
+  },
+  {
+   "segment": "invitation",
+   "text": "You do not have to pretend you are full of energy.",
+   "start": 18.823,
+   "end": 22.641
+  },
+  {
+   "segment": "invitation",
+   "text": "You can come to him exactly as you are:",
+   "start": 22.821,
+   "end": 26.085
+  },
+  {
+   "segment": "invitation",
+   "text": "the heavy eyes, the long list, the worry you carried to bed and found waiting for you when you woke.",
+   "start": 26.265,
+   "end": 33.263
+  },
+  {
+   "segment": "invitation",
+   "text": "Let your shoulders drop.",
+   "start": 33.443,
+   "end": 35.427
+  },
+  {
+   "segment": "invitation",
+   "text": "Unclench your hands.",
+   "start": 35.607,
+   "end": 37.463
+  },
+  {
+   "segment": "invitation",
+   "text": "For the next few minutes, nothing is required of you except to listen and to let him lift what you cannot lift alone.",
+   "start": 37.643,
+   "end": 46.069
+  },
+  {
+   "segment": "scripture-1",
+   "text": "The prophet Isaiah wrote these words to people who were exhausted.",
+   "start": 47.449,
+   "end": 52.143
+  },
+  {
+   "segment": "scripture-1",
+   "text": "But they that wait upon the LORD shall renew their strength;",
+   "start": 52.323,
+   "end": 56.397
+  },
+  {
+   "segment": "scripture-1",
+   "text": "they shall mount up with wings as eagles;",
+   "start": 56.577,
+   "end": 59.521
+  },
+  {
+   "segment": "scripture-1",
+   "text": "they shall run, and not be weary;",
+   "start": 59.701,
+   "end": 62.453
+  },
+  {
+   "segment": "scripture-1",
+   "text": "and they shall walk, and not faint.",
+   "start": 62.633,
+   "end": 65.151
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Notice the word renew.",
+   "start": 66.831,
+   "end": 68.665
+  },
+  {
+   "segment": "reflection-1",
+   "text": "You are not asked to manufacture strength out of nothing.",
+   "start": 68.845,
+   "end": 72.749
+  },
+  {
+   "segment": "reflection-1",
+   "text": "You are invited to receive it again, the way a field receives rain.",
+   "start": 72.929,
+   "end": 78.263
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Waiting on the Lord is not doing nothing.",
+   "start": 78.443,
+   "end": 81.877
+  },
+  {
+   "segment": "reflection-1",
+   "text": "It is turning toward him first, before the phone, before the news, before the noise, and letting him set the pace of your day.",
+   "start": 82.057,
+   "end": 91.231
+  },
+  {
+   "segment": "prayer-1",
+   "text": "So let us begin honestly.",
+   "start": 92.611,
+   "end": 95.128
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Lord, here I am.",
+   "start": 95.308,
+   "end": 97.015
+  },
+  {
+   "segment": "prayer-1",
+   "text": "You know how I slept, and you know how I feel.",
+   "start": 97.195,
+   "end": 100.715
+  },
+  {
+   "segment": "prayer-1",
+   "text": "I will not hide my tiredness from you.",
+   "start": 100.895,
+   "end": 103.817
+  },
+  {
+   "segment": "prayer-1",
+   "text": "I wait on you this morning.",
+   "start": 103.997,
+   "end": 106.259
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Renew my strength.",
+   "start": 106.439,
+   "end": 108.167
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Not the strength to do everything, but the strength to do the next right thing, and then the one after that.",
+   "start": 108.347,
+   "end": 115.643
+  },
+  {
+   "segment": "scripture-2",
+   "text": "Isaiah says it again, just two verses earlier.",
+   "start": 117.023,
+   "end": 120.948
+  },
+  {
+   "segment": "scripture-2",
+   "text": "He giveth power to the faint;",
+   "start": 121.128,
+   "end": 123.347
+  },
+  {
+   "segment": "scripture-2",
+   "text": "and to them that have no might he increaseth strength.",
+   "start": 123.527,
+   "end": 127.324
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Look at who receives the power.",
+   "start": 129.004,
+   "end": 131.329
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Not the strong.",
+   "start": 131.509,
+   "end": 133.131
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Not the people who have it all together.",
+   "start": 133.311,
+   "end": 136.169
+  },
+  {
+   "segment": "reflection-2",
+   "text": "The faint.",
+   "start": 136.349,
+   "end": 137.565
+  },
+  {
+   "segment": "reflection-2",
+   "text": "The ones with no might left.",
+   "start": 137.745,
+   "end": 139.985
+  },
+  {
+   "segment": "reflection-2",
+   "text": "If that describes you this morning, you are not disqualified.",
+   "start": 140.165,
+   "end": 145.029
+  },
+  {
+   "segment": "reflection-2",
+   "text": "You are exactly the person this promise was written for.",
+   "start": 145.209,
+   "end": 149.369
+  },
+  {
+   "segment": "scripture-3",
+   "text": "David prayed like this at the start of his days.",
+   "start": 150.749,
+   "end": 154.397
+  },
+  {
+   "segment": "scripture-3",
+   "text": "My voice shalt thou hear in the morning, O LORD;",
+   "start": 154.577,
+   "end": 158.119
+  },
+  {
+   "segment": "scripture-3",
+   "text": "in the morning will I direct my prayer unto thee, and will look up.",
+   "start": 158.299,
+   "end": 162.843
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Lord, like David, I direct my prayer to you before anything else.",
+   "start": 164.523,
+   "end": 169.557
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Hear my voice this morning.",
+   "start": 169.737,
+   "end": 172.063
+  },
+  {
+   "segment": "prayer-2",
+   "text": "I lift my eyes from the problems in front of me and I look up.",
+   "start": 172.243,
+   "end": 176.872
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Remind me that you are above this day, and that nothing in it will surprise you.",
+   "start": 177.052,
+   "end": 182.961
+  },
+  {
+   "segment": "scripture-4",
+   "text": "This is the day which the LORD hath made;",
+   "start": 184.341,
+   "end": 187.413
+  },
+  {
+   "segment": "scripture-4",
+   "text": "we will rejoice and be glad in it.",
+   "start": 187.593,
+   "end": 190.388
+  },
+  {
+   "segment": "reflection-3",
+   "text": "This day was made.",
+   "start": 192.068,
+   "end": 193.775
+  },
+  {
+   "segment": "reflection-3",
+   "text": "It did not happen by accident.",
+   "start": 193.955,
+   "end": 196.557
+  },
+  {
+   "segment": "reflection-3",
+   "text": "Before your alarm rang, God had already shaped the hours you are about to live.",
+   "start": 196.737,
+   "end": 202.561
+  },
+  {
+   "segment": "reflection-3",
+   "text": "You may not feel like rejoicing yet, and that is all right.",
+   "start": 202.741,
+   "end": 207.413
+  },
+  {
+   "segment": "reflection-3",
+   "text": "Gladness often arrives after obedience, not before it.",
+   "start": 207.593,
+   "end": 212.329
+  },
+  {
+   "segment": "reflection-3",
+   "text": "So we choose it first, and the feeling can follow.",
+   "start": 212.509,
+   "end": 216.2
+  },
+  {
+   "segment": "stillness",
+   "text": "Let us be still for a moment.",
+   "start": 217.58,
+   "end": 219.799
+  },
+  {
+   "segment": "stillness",
+   "text": "Breathe in slowly.",
+   "start": 219.979,
+   "end": 221.749
+  },
+  {
+   "segment": "stillness",
+   "text": "And breathe out.",
+   "start": 221.929,
+   "end": 223.423
+  },
+  {
+   "segment": "stillness",
+   "text": "One more time, breathe in, and let it go.",
+   "start": 223.603,
+   "end": 226.931
+  },
+  {
+   "segment": "transition",
+   "text": "Now let us pray through the parts of this day, one at a time, and give each of them to the Lord.",
+   "start": 233.111,
+   "end": 240.108
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Father, I give you my mind.",
+   "start": 241.788,
+   "end": 244.263
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "You know the thoughts that started running before my feet touched the floor.",
+   "start": 244.443,
+   "end": 249.157
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Quiet the noise.",
+   "start": 249.337,
+   "end": 251.023
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Gather my scattered attention.",
+   "start": 251.203,
+   "end": 253.507
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Where I have been rehearsing worst cases, teach me to rehearse your faithfulness instead.",
+   "start": 253.687,
+   "end": 259.959
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Give me a clear head for the decisions I have to make today.",
+   "start": 260.139,
+   "end": 264.512
+  },
+  {
+   "segment": "scripture-5",
+   "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee:",
+   "start": 265.892,
+   "end": 271.033
+  },
+  {
+   "segment": "scripture-5",
+   "text": "because he trusteth in thee.",
+   "start": 271.213,
+   "end": 273.411
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Lord, I give you my body.",
+   "start": 275.091,
+   "end": 277.309
+  },
+  {
+   "segment": "prayer-body",
+   "text": "You see the aches, the short night, the energy that feels like it is already spent.",
+   "start": 277.489,
+   "end": 283.719
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Strengthen me physically for what this day asks.",
+   "start": 283.899,
+   "end": 287.269
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Help me to eat well, to rest when I can, and to treat this body as a gift and not a machine.",
+   "start": 287.449,
+   "end": 294.596
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Where there is pain or sickness, I ask for your healing touch.",
+   "start": 294.776,
+   "end": 299.235
+  },
+  {
+   "segment": "scripture-6",
+   "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+   "start": 300.615,
+   "end": 307.207
+  },
+  {
+   "segment": "reflection-4",
+   "text": "The rest Jesus offers is not only for the end of the day.",
+   "start": 308.887,
+   "end": 313.452
+  },
+  {
+   "segment": "reflection-4",
+   "text": "It is a rest you can carry into the middle of it.",
+   "start": 313.632,
+   "end": 317.216
+  },
+  {
+   "segment": "reflection-4",
+   "text": "You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone.",
+   "start": 317.396,
+   "end": 325.503
+  },
+  {
+   "segment": "reflection-4",
+   "text": "He is yoked beside you, pulling with you.",
+   "start": 325.683,
+   "end": 328.392
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Lord, I bring you my work today.",
+   "start": 329.772,
+   "end": 332.417
+  },
+  {
+   "segment": "prayer-work",
+   "text": "The tasks I enjoy and the ones I have been putting off.",
+   "start": 332.597,
+   "end": 336.907
+  },
+  {
+   "segment": "prayer-work",
+   "text": "The conversations I need to have.",
+   "start": 337.087,
+   "end": 340.009
+  },
+  {
+   "segment": "prayer-work",
+   "text": "The people who depend on me.",
+   "start": 340.189,
+   "end": 342.685
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Give me focus and diligence.",
+   "start": 342.865,
+   "end": 345.468
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Help me to do good work, honestly and well, and to leave the results with you.",
+   "start": 345.648,
+   "end": 351.515
+  },
+  {
+   "segment": "prayer-work",
+   "text": "When I am tempted to rush, slow me down.",
+   "start": 351.695,
+   "end": 354.852
+  },
+  {
+   "segment": "prayer-work",
+   "text": "When I am tempted to give up, keep me going.",
+   "start": 355.032,
+   "end": 358.296
+  },
+  {
+   "segment": "scripture-7",
+   "text": "And whatsoever ye do, do it heartily, as to the Lord, and not unto men.",
+   "start": 359.676,
+   "end": 365.18
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "Father, there are parts of today I already know I cannot handle on my own.",
+   "start": 366.86,
+   "end": 372.791
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "I name them before you now, quietly, in my heart.",
+   "start": 372.971,
+   "end": 376.981
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "Instead of pretending, I admit my weakness.",
+   "start": 377.161,
+   "end": 380.788
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "And I ask you to meet me right there, in the place where I run out.",
+   "start": 380.968,
+   "end": 385.768
+  },
+  {
+   "segment": "scripture-8",
+   "text": "The apostle Paul heard this answer when he begged for his weakness to be taken away.",
+   "start": 387.148,
+   "end": 393.036
+  },
+  {
+   "segment": "scripture-8",
+   "text": "My grace is sufficient for thee:",
+   "start": 393.216,
+   "end": 395.883
+  },
+  {
+   "segment": "scripture-8",
+   "text": "for my strength is made perfect in weakness.",
+   "start": 396.063,
+   "end": 399.412
+  },
+  {
+   "segment": "reflection-5",
+   "text": "God did not remove Paul's weakness.",
+   "start": 401.092,
+   "end": 403.972
+  },
+  {
+   "segment": "reflection-5",
+   "text": "He filled it.",
+   "start": 404.152,
+   "end": 405.496
+  },
+  {
+   "segment": "reflection-5",
+   "text": "The place where Paul ran out became the place where Christ's power showed up most clearly.",
+   "start": 405.676,
+   "end": 411.735
+  },
+  {
+   "segment": "reflection-5",
+   "text": "So your weakness this morning is not the end of the story.",
+   "start": 411.915,
+   "end": 416.48
+  },
+  {
+   "segment": "reflection-5",
+   "text": "It may be the exact spot where God plans to show you what he can do.",
+   "start": 416.66,
+   "end": 421.844
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Lord, I lift up the people I love.",
+   "start": 423.224,
+   "end": 425.997
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Those who share my home, and those who are far away.",
+   "start": 426.177,
+   "end": 430.423
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Give them strength for their own days.",
+   "start": 430.603,
+   "end": 433.056
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Protect them as they go out and as they come back.",
+   "start": 433.236,
+   "end": 437.097
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Where there is tension between us, soften our hearts.",
+   "start": 437.277,
+   "end": 441.011
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Help me to be patient and kind with them, even when I am tired.",
+   "start": 441.191,
+   "end": 445.948
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "And Lord, I pray for everyone listening to this prayer who is carrying more than usual.",
+   "start": 447.328,
+   "end": 453.728
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "The caregivers who were up in the night.",
+   "start": 453.908,
+   "end": 456.66
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "The parents of newborns.",
+   "start": 456.84,
+   "end": 459.101
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "The ones grieving.",
+   "start": 459.281,
+   "end": 460.839
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "The ones working two jobs.",
+   "start": 461.019,
+   "end": 463.301
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "The ones waiting for news.",
+   "start": 463.481,
+   "end": 465.572
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "Meet each of them this morning with exactly the strength they need for today.",
+   "start": 465.752,
+   "end": 471.277
+  },
+  {
+   "segment": "scripture-9",
+   "text": "My flesh and my heart faileth:",
+   "start": 472.657,
+   "end": 475.132
+  },
+  {
+   "segment": "scripture-9",
+   "text": "but God is the strength of my heart, and my portion for ever.",
+   "start": 475.312,
+   "end": 480.091
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Father, I trust you with what I need today.",
+   "start": 481.771,
+   "end": 485.12
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "The bills, the groceries, the plans that depend on money I do not yet see.",
+   "start": 485.3,
+   "end": 490.889
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "You know every need before I speak it.",
+   "start": 491.069,
+   "end": 494.056
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Provide what is necessary, and give me wisdom with what I already have.",
+   "start": 494.236,
+   "end": 499.42
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Keep me from fear, and keep me generous.",
+   "start": 499.6,
+   "end": 502.736
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Lord, there are choices in front of me today, some small and some that feel very big.",
+   "start": 504.116,
+   "end": 510.303
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "I do not want to make them in a hurry or out of fear.",
+   "start": 510.483,
+   "end": 514.579
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Give me wisdom.",
+   "start": 514.759,
+   "end": 516.359
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Close the doors that should be closed and open the ones you have prepared.",
+   "start": 516.539,
+   "end": 521.701
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "And if I cannot see the whole path, give me light enough for the next step.",
+   "start": 521.881,
+   "end": 526.98
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Father, if I am carrying a grudge into this day, I lay it down before you.",
+   "start": 528.36,
+   "end": 534.056
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "You know the words that still sting and the person I keep replaying in my mind.",
+   "start": 534.236,
+   "end": 540.017
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "I do not have to pretend it did not hurt.",
+   "start": 540.197,
+   "end": 543.376
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "But I choose not to let it drain the strength you are giving me.",
+   "start": 543.556,
+   "end": 548.271
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Help me to forgive as you have forgiven me, and to speak with grace today.",
+   "start": 548.451,
+   "end": 553.571
+  },
+  {
+   "segment": "scripture-10",
+   "text": "The LORD is my strength and my shield;",
+   "start": 554.951,
+   "end": 557.788
+  },
+  {
+   "segment": "scripture-10",
+   "text": "my heart trusted in him, and I am helped:",
+   "start": 557.968,
+   "end": 561.232
+  },
+  {
+   "segment": "scripture-10",
+   "text": "therefore my heart greatly rejoiceth;",
+   "start": 561.412,
+   "end": 564.463
+  },
+  {
+   "segment": "scripture-10",
+   "text": "and with my song will I praise him.",
+   "start": 564.643,
+   "end": 567.373
+  },
+  {
+   "segment": "reflection-6",
+   "text": "Strength for what is inside you.",
+   "start": 569.053,
+   "end": 571.357
+  },
+  {
+   "segment": "reflection-6",
+   "text": "A shield for what comes at you from outside.",
+   "start": 571.537,
+   "end": 574.737
+  },
+  {
+   "segment": "reflection-6",
+   "text": "God offers both in the same sentence.",
+   "start": 574.917,
+   "end": 577.904
+  },
+  {
+   "segment": "reflection-6",
+   "text": "And notice the order:",
+   "start": 578.084,
+   "end": 579.961
+  },
+  {
+   "segment": "reflection-6",
+   "text": "my heart trusted, and I am helped.",
+   "start": 580.141,
+   "end": 582.936
+  },
+  {
+   "segment": "reflection-6",
+   "text": "Trust comes first.",
+   "start": 583.116,
+   "end": 584.844
+  },
+  {
+   "segment": "reflection-6",
+   "text": "The help follows.",
+   "start": 585.024,
+   "end": 586.624
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Lord, cover my home today.",
+   "start": 588.004,
+   "end": 590.265
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Watch over the door as it opens and closes.",
+   "start": 590.445,
+   "end": 594.072
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Keep every person who lives here safe on the road, at school, at work, and in every place they go.",
+   "start": 594.252,
+   "end": 601.633
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Let our home be a place of peace when we return tonight, not of tension.",
+   "start": 601.813,
+   "end": 607.125
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Let your presence fill every room.",
+   "start": 607.305,
+   "end": 610.015
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Breathe in again, slowly.",
+   "start": 611.395,
+   "end": 613.592
+  },
+  {
+   "segment": "stillness-2",
+   "text": "And let it go.",
+   "start": 613.772,
+   "end": 615.329
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Rest in his presence for a moment.",
+   "start": 615.509,
+   "end": 618.005
+  },
+  {
+   "segment": "declaration",
+   "text": "Now say these words with me, out loud if you can, or quietly in your heart.",
+   "start": 624.185,
+   "end": 630.095
+  },
+  {
+   "segment": "declaration",
+   "text": "The Lord is my strength.",
+   "start": 630.275,
+   "end": 632.387
+  },
+  {
+   "segment": "declaration",
+   "text": "I am not empty, because he fills me.",
+   "start": 632.567,
+   "end": 635.745
+  },
+  {
+   "segment": "declaration",
+   "text": "I am not alone, because he goes with me.",
+   "start": 635.925,
+   "end": 639.253
+  },
+  {
+   "segment": "declaration",
+   "text": "I can do all things through Christ which strengtheneth me.",
+   "start": 639.433,
+   "end": 643.401
+  },
+  {
+   "segment": "declaration",
+   "text": "The joy of the Lord is my strength today.",
+   "start": 643.581,
+   "end": 646.803
+  },
+  {
+   "segment": "scripture-11",
+   "text": "I can do all things through Christ which strengtheneth me.",
+   "start": 648.483,
+   "end": 652.451
+  },
+  {
+   "segment": "reflection-7",
+   "text": "All things does not mean everything at once.",
+   "start": 654.131,
+   "end": 657.373
+  },
+  {
+   "segment": "reflection-7",
+   "text": "It means that whatever this day actually brings, Christ will give you strength for that thing, when it comes.",
+   "start": 657.553,
+   "end": 665.148
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Not before.",
+   "start": 665.328,
+   "end": 666.843
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Not all in advance.",
+   "start": 667.023,
+   "end": 668.921
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Enough, and on time.",
+   "start": 669.101,
+   "end": 670.979
+  },
+  {
+   "segment": "scripture-12",
+   "text": "When the people wept after hearing God's word, Nehemiah told them, Neither be ye sorry;",
+   "start": 672.359,
+   "end": 678.887
+  },
+  {
+   "segment": "scripture-12",
+   "text": "for the joy of the LORD is your strength.",
+   "start": 679.067,
+   "end": 682.053
+  },
+  {
+   "segment": "prayer-joy",
+   "text": "Lord, restore my joy.",
+   "start": 683.733,
+   "end": 685.888
+  },
+  {
+   "segment": "prayer-joy",
+   "text": "Not a forced smile, but the deep gladness of knowing that I belong to you.",
+   "start": 686.068,
+   "end": 691.7
+  },
+  {
+   "segment": "prayer-joy",
+   "text": "Let that joy be my strength today.",
+   "start": 691.88,
+   "end": 694.589
+  },
+  {
+   "segment": "prayer-joy",
+   "text": "When things go wrong, let me remember that your love for me has not changed.",
+   "start": 694.769,
+   "end": 700.209
+  },
+  {
+   "segment": "scripture-13",
+   "text": "And let the beauty of the LORD our God be upon us:",
+   "start": 701.589,
+   "end": 705.173
+  },
+  {
+   "segment": "scripture-13",
+   "text": "and establish thou the work of our hands upon us;",
+   "start": 705.353,
+   "end": 709.151
+  },
+  {
+   "segment": "scripture-13",
+   "text": "yea, the work of our hands establish thou it.",
+   "start": 709.331,
+   "end": 712.723
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Thank you, Father, for this new morning.",
+   "start": 714.403,
+   "end": 717.389
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "For breath in my lungs.",
+   "start": 717.569,
+   "end": 719.511
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "For another chance to love, to work, to begin again.",
+   "start": 719.691,
+   "end": 723.595
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Thank you for the strength you have given me in the past, on days I did not think I would get through.",
+   "start": 723.775,
+   "end": 730.644
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "You carried me then.",
+   "start": 730.824,
+   "end": 732.616
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "I trust you to carry me now.",
+   "start": 732.796,
+   "end": 735.164
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Lord, give my day a purpose beyond my own list.",
+   "start": 736.544,
+   "end": 740.213
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Show me one person I can encourage, one small kindness I can do, one way to make someone else's load lighter.",
+   "start": 740.393,
+   "end": 749.033
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Let the strength you give me flow through me to others.",
+   "start": 749.213,
+   "end": 752.883
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "I do not want to only receive today.",
+   "start": 753.063,
+   "end": 756.007
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "I want to give.",
+   "start": 756.187,
+   "end": 757.744
+  },
+  {
+   "segment": "prayer-world",
+   "text": "And Father, I pray for the people who keep our world running while we sleep and while we work:",
+   "start": 759.124,
+   "end": 765.673
+  },
+  {
+   "segment": "prayer-world",
+   "text": "nurses and doctors, drivers and cooks, teachers and soldiers, farmers and cleaners.",
+   "start": 765.853,
+   "end": 772.509
+  },
+  {
+   "segment": "prayer-world",
+   "text": "Give them strength and safety today.",
+   "start": 772.689,
+   "end": 775.271
+  },
+  {
+   "segment": "prayer-world",
+   "text": "Bring peace to the places in the world where there is fighting, and comfort to those who woke up afraid.",
+   "start": 775.451,
+   "end": 782.555
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "And when this day is over, Lord, bring me back to you.",
+   "start": 783.935,
+   "end": 787.945
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "Whatever happens between now and tonight, let me end the day in your presence, grateful, forgiven, and at rest.",
+   "start": 788.125,
+   "end": 796.467
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "I place the evening in your hands already, so that I can live this morning without fear.",
+   "start": 796.647,
+   "end": 803.025
+  },
+  {
+   "segment": "payoff",
+   "text": "Here is one thing to take into your day.",
+   "start": 804.405,
+   "end": 807.605
+  },
+  {
+   "segment": "payoff",
+   "text": "The next time you feel your strength running out, stop for ten seconds, breathe, and say, Lord, renew my strength.",
+   "start": 807.785,
+   "end": 816.127
+  },
+  {
+   "segment": "payoff",
+   "text": "That is all.",
+   "start": 816.307,
+   "end": 817.736
+  },
+  {
+   "segment": "payoff",
+   "text": "Ten seconds.",
+   "start": 817.916,
+   "end": 819.409
+  },
+  {
+   "segment": "payoff",
+   "text": "Let it become the way you wait on the Lord in the middle of a busy day.",
+   "start": 819.589,
+   "end": 824.496
+  },
+  {
+   "segment": "blessing",
+   "text": "And now receive this blessing.",
+   "start": 825.876,
+   "end": 828.265
+  },
+  {
+   "segment": "blessing",
+   "text": "The LORD bless thee, and keep thee:",
+   "start": 828.445,
+   "end": 831.133
+  },
+  {
+   "segment": "blessing",
+   "text": "The LORD make his face shine upon thee, and be gracious unto thee:",
+   "start": 831.313,
+   "end": 836.092
+  },
+  {
+   "segment": "blessing",
+   "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+   "start": 836.272,
+   "end": 840.795
+  },
+  {
+   "segment": "blessing",
+   "text": "Go into this day renewed.",
+   "start": 840.975,
+   "end": 843.108
+  },
+  {
+   "segment": "blessing",
+   "text": "In Jesus' name, amen.",
+   "start": 843.288,
+   "end": 845.741
+  },
+  {
+   "segment": "cta",
+   "text": "If this prayer strengthened you, type amen in the comments, so others can pray with you.",
+   "start": 847.421,
+   "end": 853.608
+  },
+  {
+   "segment": "cta",
+   "text": "And subscribe, so tomorrow morning's prayer is waiting for you when you wake up.",
+   "start": 853.788,
+   "end": 859.441
+  },
+  {
+   "segment": "cta",
+   "text": "We will start the day with God together again.",
+   "start": 859.621,
+   "end": 863.077
+  }
+ ],
+ "overlay": {
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN",
+  "title": "God Renews Your Strength",
+  "title_card_seconds": 2.0
+ },
+ "badges": [
+  "SUBSCRIBE",
+  "LIKE",
+  "SHARE"
+ ],
+ "cinematic": {
+  "depth_model": {
+   "name": "Depth Anything V2 Small (ONNX)",
+   "licence": "apache-2.0",
+   "sha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c"
+  },
+  "grade": "colorbalance=rs=-0.015:bs=0.02:rh=0.03:gh=0.01:bh=-0.03,eq=contrast=1.04:saturation=1.04",
+  "look": "split[base][glow];[glow]scale=480:270,curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale=1920:1080[halo];[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,vignette=angle=PI/6:mode=forward,noise=c0s=4:c0f=t+u",
+  "atmosphere": [
+   "bg-sunrise-field",
+   "bg-dawn-lake",
+   "bg-misty-valley",
+   "bg-meadow",
+   "bg-garden"
+  ]
+ },
+ "clips": [],
+ "shots": [],
+ "timeline": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 18.023
+  },
+  {
+   "id": "invitation",
+   "start": 18.823,
+   "end": 46.249
+  },
+  {
+   "id": "scripture-1",
+   "start": 47.449,
+   "end": 65.331
+  },
+  {
+   "id": "reflection-1",
+   "start": 66.831,
+   "end": 91.411
+  },
+  {
+   "id": "prayer-1",
+   "start": 92.611,
+   "end": 115.823
+  },
+  {
+   "id": "scripture-2",
+   "start": 117.023,
+   "end": 127.504
+  },
+  {
+   "id": "reflection-2",
+   "start": 129.004,
+   "end": 149.549
+  },
+  {
+   "id": "scripture-3",
+   "start": 150.749,
+   "end": 163.023
+  },
+  {
+   "id": "prayer-2",
+   "start": 164.523,
+   "end": 183.141
+  },
+  {
+   "id": "scripture-4",
+   "start": 184.341,
+   "end": 190.568
+  },
+  {
+   "id": "reflection-3",
+   "start": 192.068,
+   "end": 216.38
+  },
+  {
+   "id": "stillness",
+   "start": 217.58,
+   "end": 227.111
+  },
+  {
+   "id": "transition",
+   "start": 233.111,
+   "end": 240.288
+  },
+  {
+   "id": "prayer-mind",
+   "start": 241.788,
+   "end": 264.692
+  },
+  {
+   "id": "scripture-5",
+   "start": 265.892,
+   "end": 273.591
+  },
+  {
+   "id": "prayer-body",
+   "start": 275.091,
+   "end": 299.415
+  },
+  {
+   "id": "scripture-6",
+   "start": 300.615,
+   "end": 307.387
+  },
+  {
+   "id": "reflection-4",
+   "start": 308.887,
+   "end": 328.572
+  },
+  {
+   "id": "prayer-work",
+   "start": 329.772,
+   "end": 358.476
+  },
+  {
+   "id": "scripture-7",
+   "start": 359.676,
+   "end": 365.36
+  },
+  {
+   "id": "prayer-weakness",
+   "start": 366.86,
+   "end": 385.948
+  },
+  {
+   "id": "scripture-8",
+   "start": 387.148,
+   "end": 399.592
+  },
+  {
+   "id": "reflection-5",
+   "start": 401.092,
+   "end": 422.024
+  },
+  {
+   "id": "prayer-family",
+   "start": 423.224,
+   "end": 446.128
+  },
+  {
+   "id": "prayer-weary",
+   "start": 447.328,
+   "end": 471.457
+  },
+  {
+   "id": "scripture-9",
+   "start": 472.657,
+   "end": 480.271
+  },
+  {
+   "id": "prayer-provision",
+   "start": 481.771,
+   "end": 502.916
+  },
+  {
+   "id": "prayer-decisions",
+   "start": 504.116,
+   "end": 527.16
+  },
+  {
+   "id": "prayer-forgiveness",
+   "start": 528.36,
+   "end": 553.751
+  },
+  {
+   "id": "scripture-10",
+   "start": 554.951,
+   "end": 567.553
+  },
+  {
+   "id": "reflection-6",
+   "start": 569.053,
+   "end": 586.804
+  },
+  {
+   "id": "prayer-home",
+   "start": 588.004,
+   "end": 610.195
+  },
+  {
+   "id": "stillness-2",
+   "start": 611.395,
+   "end": 618.185
+  },
+  {
+   "id": "declaration",
+   "start": 624.185,
+   "end": 646.983
+  },
+  {
+   "id": "scripture-11",
+   "start": 648.483,
+   "end": 652.631
+  },
+  {
+   "id": "reflection-7",
+   "start": 654.131,
+   "end": 671.159
+  },
+  {
+   "id": "scripture-12",
+   "start": 672.359,
+   "end": 682.233
+  },
+  {
+   "id": "prayer-joy",
+   "start": 683.733,
+   "end": 700.389
+  },
+  {
+   "id": "scripture-13",
+   "start": 701.589,
+   "end": 712.903
+  },
+  {
+   "id": "prayer-thanks",
+   "start": 714.403,
+   "end": 735.344
+  },
+  {
+   "id": "prayer-purpose",
+   "start": 736.544,
+   "end": 757.924
+  },
+  {
+   "id": "prayer-world",
+   "start": 759.124,
+   "end": 782.735
+  },
+  {
+   "id": "prayer-evening",
+   "start": 783.935,
+   "end": 803.205
+  },
+  {
+   "id": "payoff",
+   "start": 804.405,
+   "end": 824.676
+  },
+  {
+   "id": "blessing",
+   "start": 825.876,
+   "end": 845.921
+  },
+  {
+   "id": "cta",
+   "start": 847.421,
+   "end": 863.257
+  }
+ ],
+ "upload_performed": false,
+ "publication_performed": false
+}

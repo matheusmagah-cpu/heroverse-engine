@@ -1,0 +1,979 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,DejaVu Sans,66,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,1,0,0,0,100,100,0,0,1,0,2,5,1040,100,0,1
+Style: Box,DejaVu Sans,20,&H5A2A2A2A,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+Style: Title,DejaVu Serif,112,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,1,0,1,5,4,5,120,120,0,1
+Style: Subtitle,DejaVu Sans,58,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,2,0,1,4,3,5,120,120,0,1
+Style: Ref,DejaVu Serif,50,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,4,2,2,1040,100,250,1
+Style: Brand,DejaVu Sans,36,&H20FFFFFF,&H00FFFFFF,&H64000000,&H00000000,1,0,0,0,100,100,2,0,1,3,1,7,50,0,40,1
+Style: Badge,DejaVu Sans,34,&H00FFFFFF,&H00FFFFFF,&H001A1AD0,&H00000000,1,0,0,0,100,100,1,0,3,10,0,9,0,50,46,1
+Style: Amen,DejaVu Sans,58,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,1,0,1,4,3,3,0,60,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:02.00,Title,,0,0,0,,{\fad(200,300)}God Renews Your Strength
+Dialogue: 2,0:00:00.00,0:00:02.00,Subtitle,,0,0,0,,{\fad(200,300)\pos(960,700)}MORNING PRAYER
+Dialogue: 1,0:00:02.00,0:14:28.26,Brand,,0,0,0,,{\fad(300,0)}HeroVerse Prayer
+Dialogue: 1,0:00:02.00,0:14:28.26,Amen,,0,0,0,,{\fad(300,0)}Type AMEN
+Dialogue: 1,0:00:02.00,0:00:07.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:00:08.00,0:00:13.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:00:14.00,0:00:19.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:00:20.00,0:00:25.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:00:26.00,0:00:31.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:00:32.00,0:00:37.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:00:38.00,0:00:43.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:00:44.00,0:00:49.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:00:50.00,0:00:55.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:00:56.00,0:01:01.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:01:02.00,0:01:07.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:01:08.00,0:01:13.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:01:14.00,0:01:19.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:01:20.00,0:01:25.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:01:26.00,0:01:31.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:01:32.00,0:01:37.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:01:38.00,0:01:43.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:01:44.00,0:01:49.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:01:50.00,0:01:55.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:01:56.00,0:02:01.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:02:02.00,0:02:07.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:02:08.00,0:02:13.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:02:14.00,0:02:19.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:02:20.00,0:02:25.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:02:26.00,0:02:31.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:02:32.00,0:02:37.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:02:38.00,0:02:43.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:02:44.00,0:02:49.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:02:50.00,0:02:55.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:02:56.00,0:03:01.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:03:02.00,0:03:07.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:03:08.00,0:03:13.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:03:14.00,0:03:19.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:03:20.00,0:03:25.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:03:26.00,0:03:31.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:03:32.00,0:03:37.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:03:38.00,0:03:43.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:03:44.00,0:03:49.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:03:50.00,0:03:55.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:03:56.00,0:04:01.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:04:02.00,0:04:07.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:04:08.00,0:04:13.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:04:14.00,0:04:19.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:04:20.00,0:04:25.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:04:26.00,0:04:31.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:04:32.00,0:04:37.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:04:38.00,0:04:43.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:04:44.00,0:04:49.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:04:50.00,0:04:55.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:04:56.00,0:05:01.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:05:02.00,0:05:07.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:05:08.00,0:05:13.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:05:14.00,0:05:19.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:05:20.00,0:05:25.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:05:26.00,0:05:31.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:05:32.00,0:05:37.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:05:38.00,0:05:43.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:05:44.00,0:05:49.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:05:50.00,0:05:55.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:05:56.00,0:06:01.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:06:02.00,0:06:07.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:06:08.00,0:06:13.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:06:14.00,0:06:19.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:06:20.00,0:06:25.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:06:26.00,0:06:31.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:06:32.00,0:06:37.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:06:38.00,0:06:43.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:06:44.00,0:06:49.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:06:50.00,0:06:55.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:06:56.00,0:07:01.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:07:02.00,0:07:07.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:07:08.00,0:07:13.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:07:14.00,0:07:19.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:07:20.00,0:07:25.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:07:26.00,0:07:31.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:07:32.00,0:07:37.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:07:38.00,0:07:43.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:07:44.00,0:07:49.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:07:50.00,0:07:55.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:07:56.00,0:08:01.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:08:02.00,0:08:07.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:08:08.00,0:08:13.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:08:14.00,0:08:19.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:08:20.00,0:08:25.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:08:26.00,0:08:31.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:08:32.00,0:08:37.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:08:38.00,0:08:43.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:08:44.00,0:08:49.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:08:50.00,0:08:55.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:08:56.00,0:09:01.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:09:02.00,0:09:07.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:09:08.00,0:09:13.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:09:14.00,0:09:19.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:09:20.00,0:09:25.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:09:26.00,0:09:31.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:09:32.00,0:09:37.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:09:38.00,0:09:43.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:09:44.00,0:09:49.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:09:50.00,0:09:55.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:09:56.00,0:10:01.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:10:02.00,0:10:07.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:10:08.00,0:10:13.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:10:14.00,0:10:19.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:10:20.00,0:10:25.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:10:26.00,0:10:31.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:10:32.00,0:10:37.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:10:38.00,0:10:43.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:10:44.00,0:10:49.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:10:50.00,0:10:55.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:10:56.00,0:11:01.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:11:02.00,0:11:07.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:11:08.00,0:11:13.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:11:14.00,0:11:19.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:11:20.00,0:11:25.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:11:26.00,0:11:31.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:11:32.00,0:11:37.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:11:38.00,0:11:43.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:11:44.00,0:11:49.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:11:50.00,0:11:55.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:11:56.00,0:12:01.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:12:02.00,0:12:07.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:12:08.00,0:12:13.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:12:14.00,0:12:19.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:12:20.00,0:12:25.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:12:26.00,0:12:31.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:12:32.00,0:12:37.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:12:38.00,0:12:43.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:12:44.00,0:12:49.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:12:50.00,0:12:55.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:12:56.00,0:13:01.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:13:02.00,0:13:07.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:13:08.00,0:13:13.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:13:14.00,0:13:19.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:13:20.00,0:13:25.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:13:26.00,0:13:31.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:13:32.00,0:13:37.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:13:38.00,0:13:43.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:13:44.00,0:13:49.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:13:50.00,0:13:55.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:13:56.00,0:14:01.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:14:02.00,0:14:07.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:14:08.00,0:14:13.70,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 1,0:14:14.00,0:14:19.70,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 1,0:14:20.00,0:14:25.70,Badge,,0,0,0,,{\fad(200,200)}SHARE
+Dialogue: 1,0:14:26.00,0:14:28.26,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
+Dialogue: 3,0:00:02.00,0:00:04.01,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:02.00,0:00:04.01,Caption,,0,0,0,,{\pos(1430,540)}If you woke up already tired,
+Dialogue: 3,0:00:04.01,0:00:06.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:04.01,0:00:06.24,Caption,,0,0,0,,{\pos(1430,540)}before the day has even begun,
+Dialogue: 3,0:00:06.24,0:00:09.26,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:06.24,0:00:09.26,Caption,,0,0,0,,{\pos(1430,540)}stay with me for the next few minutes.
+Dialogue: 3,0:00:09.26,0:00:11.55,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:09.26,0:00:11.55,Caption,,0,0,0,,{\pos(1430,540)}God has not run out of strength,
+Dialogue: 3,0:00:11.55,0:00:13.34,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:11.55,0:00:13.34,Caption,,0,0,0,,{\pos(1430,540)}and this morning he wants
+Dialogue: 3,0:00:13.34,0:00:15.39,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:13.34,0:00:15.39,Caption,,0,0,0,,{\pos(1430,540)}to give some of it to you.
+Dialogue: 3,0:00:15.39,0:00:18.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:15.39,0:00:18.19,Caption,,0,0,0,,{\pos(1430,540)}Take one slow breath with me.
+Dialogue: 3,0:00:18.82,0:00:20.85,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:18.82,0:00:20.85,Caption,,0,0,0,,{\pos(1430,540)}You do not have to pretend
+Dialogue: 3,0:00:20.85,0:00:22.82,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:20.85,0:00:22.82,Caption,,0,0,0,,{\pos(1430,540)}you are full of energy.
+Dialogue: 3,0:00:22.82,0:00:24.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:22.82,0:00:24.45,Caption,,0,0,0,,{\pos(1430,540)}You can come to him
+Dialogue: 3,0:00:24.45,0:00:26.26,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:24.45,0:00:26.26,Caption,,0,0,0,,{\pos(1430,540)}exactly as you are:
+Dialogue: 3,0:00:26.26,0:00:28.41,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:26.26,0:00:28.41,Caption,,0,0,0,,{\pos(1430,540)}the heavy eyes, the long list,
+Dialogue: 3,0:00:28.41,0:00:31.12,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:28.41,0:00:31.12,Caption,,0,0,0,,{\pos(1430,540)}the worry you carried to bed and found
+Dialogue: 3,0:00:31.12,0:00:33.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:31.12,0:00:33.44,Caption,,0,0,0,,{\pos(1430,540)}waiting for you when you woke.
+Dialogue: 3,0:00:33.44,0:00:35.61,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:33.44,0:00:35.61,Caption,,0,0,0,,{\pos(1430,540)}Let your shoulders drop.
+Dialogue: 3,0:00:35.61,0:00:37.64,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:35.61,0:00:37.64,Caption,,0,0,0,,{\pos(1430,540)}Unclench your hands.
+Dialogue: 3,0:00:37.64,0:00:39.49,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:37.64,0:00:39.49,Caption,,0,0,0,,{\pos(1430,540)}For the next few minutes,
+Dialogue: 3,0:00:39.49,0:00:41.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:39.49,0:00:41.93,Caption,,0,0,0,,{\pos(1430,540)}nothing is required of you except
+Dialogue: 3,0:00:41.93,0:00:44.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:41.93,0:00:44.07,Caption,,0,0,0,,{\pos(1430,540)}to listen and to let him lift
+Dialogue: 3,0:00:44.07,0:00:46.42,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:44.07,0:00:46.42,Caption,,0,0,0,,{\pos(1430,540)}what you cannot lift alone.
+Dialogue: 3,0:00:47.45,0:00:49.62,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:47.45,0:00:49.62,Caption,,0,0,0,,{\pos(1430,540)}The prophet Isaiah wrote these
+Dialogue: 3,0:00:49.62,0:00:52.32,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:49.62,0:00:52.32,Caption,,0,0,0,,{\pos(1430,540)}words to people who were exhausted.
+Dialogue: 3,0:00:52.32,0:00:54.53,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:52.32,0:00:54.53,Caption,,0,0,0,,{\pos(1430,540)}But they that wait upon the LORD
+Dialogue: 3,0:00:54.53,0:00:56.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:54.53,0:00:56.58,Caption,,0,0,0,,{\pos(1430,540)}shall renew their strength;
+Dialogue: 3,0:00:56.58,0:00:57.98,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:56.58,0:00:57.98,Caption,,0,0,0,,{\pos(1430,540)}they shall mount up
+Dialogue: 3,0:00:57.98,0:00:59.70,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:57.98,0:00:59.70,Caption,,0,0,0,,{\pos(1430,540)}with wings as eagles;
+Dialogue: 3,0:00:59.70,0:01:00.99,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:00:59.70,0:01:00.99,Caption,,0,0,0,,{\pos(1430,540)}they shall run,
+Dialogue: 3,0:01:00.99,0:01:02.63,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:00.99,0:01:02.63,Caption,,0,0,0,,{\pos(1430,540)}and not be weary;
+Dialogue: 3,0:01:02.63,0:01:04.11,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:02.63,0:01:04.11,Caption,,0,0,0,,{\pos(1430,540)}and they shall walk,
+Dialogue: 3,0:01:04.11,0:01:05.50,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:04.11,0:01:05.50,Caption,,0,0,0,,{\pos(1430,540)}and not faint.
+Dialogue: 3,0:01:06.83,0:01:08.84,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:06.83,0:01:08.84,Caption,,0,0,0,,{\pos(1430,540)}Notice the word renew.
+Dialogue: 3,0:01:08.84,0:01:11.08,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:08.84,0:01:11.08,Caption,,0,0,0,,{\pos(1430,540)}You are not asked to manufacture
+Dialogue: 3,0:01:11.08,0:01:12.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:11.08,0:01:12.93,Caption,,0,0,0,,{\pos(1430,540)}strength out of nothing.
+Dialogue: 3,0:01:12.93,0:01:15.84,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:12.93,0:01:15.84,Caption,,0,0,0,,{\pos(1430,540)}You are invited to receive it again,
+Dialogue: 3,0:01:15.84,0:01:18.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:15.84,0:01:18.44,Caption,,0,0,0,,{\pos(1430,540)}the way a field receives rain.
+Dialogue: 3,0:01:18.44,0:01:20.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:18.44,0:01:20.07,Caption,,0,0,0,,{\pos(1430,540)}Waiting on the Lord
+Dialogue: 3,0:01:20.07,0:01:22.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:20.07,0:01:22.06,Caption,,0,0,0,,{\pos(1430,540)}is not doing nothing.
+Dialogue: 3,0:01:22.06,0:01:24.41,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:22.06,0:01:24.41,Caption,,0,0,0,,{\pos(1430,540)}It is turning toward him first,
+Dialogue: 3,0:01:24.41,0:01:25.70,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:24.41,0:01:25.70,Caption,,0,0,0,,{\pos(1430,540)}before the phone,
+Dialogue: 3,0:01:25.70,0:01:26.91,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:25.70,0:01:26.91,Caption,,0,0,0,,{\pos(1430,540)}before the news,
+Dialogue: 3,0:01:26.91,0:01:28.20,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:26.91,0:01:28.20,Caption,,0,0,0,,{\pos(1430,540)}before the noise,
+Dialogue: 3,0:01:28.20,0:01:29.64,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:28.20,0:01:29.64,Caption,,0,0,0,,{\pos(1430,540)}and letting him set
+Dialogue: 3,0:01:29.64,0:01:31.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:29.64,0:01:31.58,Caption,,0,0,0,,{\pos(1430,540)}the pace of your day.
+Dialogue: 3,0:01:32.61,0:01:35.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:32.61,0:01:35.31,Caption,,0,0,0,,{\pos(1430,540)}So let us begin honestly.
+Dialogue: 3,0:01:35.31,0:01:37.20,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:35.31,0:01:37.20,Caption,,0,0,0,,{\pos(1430,540)}Lord, here I am.
+Dialogue: 3,0:01:37.20,0:01:38.84,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:37.20,0:01:38.84,Caption,,0,0,0,,{\pos(1430,540)}You know how I slept,
+Dialogue: 3,0:01:38.84,0:01:40.90,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:38.84,0:01:40.90,Caption,,0,0,0,,{\pos(1430,540)}and you know how I feel.
+Dialogue: 3,0:01:40.90,0:01:44.00,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:40.90,0:01:44.00,Caption,,0,0,0,,{\pos(1430,540)}I will not hide my tiredness from you.
+Dialogue: 3,0:01:44.00,0:01:46.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:44.00,0:01:46.44,Caption,,0,0,0,,{\pos(1430,540)}I wait on you this morning.
+Dialogue: 3,0:01:46.44,0:01:48.35,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:46.44,0:01:48.35,Caption,,0,0,0,,{\pos(1430,540)}Renew my strength.
+Dialogue: 3,0:01:48.35,0:01:50.71,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:48.35,0:01:50.71,Caption,,0,0,0,,{\pos(1430,540)}Not the strength to do everything,
+Dialogue: 3,0:01:50.71,0:01:52.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:50.71,0:01:52.24,Caption,,0,0,0,,{\pos(1430,540)}but the strength to do
+Dialogue: 3,0:01:52.24,0:01:53.70,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:52.24,0:01:53.70,Caption,,0,0,0,,{\pos(1430,540)}the next right thing,
+Dialogue: 3,0:01:53.70,0:01:55.99,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:53.70,0:01:55.99,Caption,,0,0,0,,{\pos(1430,540)}and then the one after that.
+Dialogue: 3,0:01:57.02,0:01:58.86,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:57.02,0:01:58.86,Caption,,0,0,0,,{\pos(1430,540)}Isaiah says it again,
+Dialogue: 3,0:01:58.86,0:02:01.13,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:01:58.86,0:02:01.13,Caption,,0,0,0,,{\pos(1430,540)}just two verses earlier.
+Dialogue: 3,0:02:01.13,0:02:03.53,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:01.13,0:02:03.53,Caption,,0,0,0,,{\pos(1430,540)}He giveth power to the faint;
+Dialogue: 3,0:02:03.53,0:02:05.25,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:03.53,0:02:05.25,Caption,,0,0,0,,{\pos(1430,540)}and to them that have no
+Dialogue: 3,0:02:05.25,0:02:07.67,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:05.25,0:02:07.67,Caption,,0,0,0,,{\pos(1430,540)}might he increaseth strength.
+Dialogue: 3,0:02:09.00,0:02:11.51,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:09.00,0:02:11.51,Caption,,0,0,0,,{\pos(1430,540)}Look at who receives the power.
+Dialogue: 3,0:02:11.51,0:02:13.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:11.51,0:02:13.31,Caption,,0,0,0,,{\pos(1430,540)}Not the strong.
+Dialogue: 3,0:02:13.31,0:02:16.35,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:13.31,0:02:16.35,Caption,,0,0,0,,{\pos(1430,540)}Not the people who have it all together.
+Dialogue: 3,0:02:16.35,0:02:17.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:16.35,0:02:17.74,Caption,,0,0,0,,{\pos(1430,540)}The faint.
+Dialogue: 3,0:02:17.74,0:02:20.16,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:17.74,0:02:20.16,Caption,,0,0,0,,{\pos(1430,540)}The ones with no might left.
+Dialogue: 3,0:02:20.16,0:02:23.00,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:20.16,0:02:23.00,Caption,,0,0,0,,{\pos(1430,540)}If that describes you this morning,
+Dialogue: 3,0:02:23.00,0:02:25.21,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:23.00,0:02:25.21,Caption,,0,0,0,,{\pos(1430,540)}you are not disqualified.
+Dialogue: 3,0:02:25.21,0:02:27.18,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:25.21,0:02:27.18,Caption,,0,0,0,,{\pos(1430,540)}You are exactly the person
+Dialogue: 3,0:02:27.18,0:02:29.72,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:27.18,0:02:29.72,Caption,,0,0,0,,{\pos(1430,540)}this promise was written for.
+Dialogue: 3,0:02:30.75,0:02:32.46,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:30.75,0:02:32.46,Caption,,0,0,0,,{\pos(1430,540)}David prayed like this
+Dialogue: 3,0:02:32.46,0:02:34.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:32.46,0:02:34.58,Caption,,0,0,0,,{\pos(1430,540)}at the start of his days.
+Dialogue: 3,0:02:34.58,0:02:37.59,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:34.58,0:02:37.59,Caption,,0,0,0,,{\pos(1430,540)}My voice shalt thou hear in the morning,
+Dialogue: 3,0:02:37.59,0:02:38.30,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:37.59,0:02:38.30,Caption,,0,0,0,,{\pos(1430,540)}O LORD;
+Dialogue: 3,0:02:38.30,0:02:40.26,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:38.30,0:02:40.26,Caption,,0,0,0,,{\pos(1430,540)}in the morning will I direct
+Dialogue: 3,0:02:40.26,0:02:41.66,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:40.26,0:02:41.66,Caption,,0,0,0,,{\pos(1430,540)}my prayer unto thee,
+Dialogue: 3,0:02:41.66,0:02:43.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:41.66,0:02:43.19,Caption,,0,0,0,,{\pos(1430,540)}and will look up.
+Dialogue: 3,0:02:44.52,0:02:45.88,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:44.52,0:02:45.88,Caption,,0,0,0,,{\pos(1430,540)}Lord, like David,
+Dialogue: 3,0:02:45.88,0:02:47.32,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:45.88,0:02:47.32,Caption,,0,0,0,,{\pos(1430,540)}I direct my prayer
+Dialogue: 3,0:02:47.32,0:02:49.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:47.32,0:02:49.74,Caption,,0,0,0,,{\pos(1430,540)}to you before anything else.
+Dialogue: 3,0:02:49.74,0:02:52.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:49.74,0:02:52.24,Caption,,0,0,0,,{\pos(1430,540)}Hear my voice this morning.
+Dialogue: 3,0:02:52.24,0:02:54.67,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:52.24,0:02:54.67,Caption,,0,0,0,,{\pos(1430,540)}I lift my eyes from the problems
+Dialogue: 3,0:02:54.67,0:02:57.05,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:54.67,0:02:57.05,Caption,,0,0,0,,{\pos(1430,540)}in front of me and I look up.
+Dialogue: 3,0:02:57.05,0:02:59.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:57.05,0:02:59.93,Caption,,0,0,0,,{\pos(1430,540)}Remind me that you are above this day,
+Dialogue: 3,0:02:59.93,0:03:01.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:02:59.93,0:03:01.60,Caption,,0,0,0,,{\pos(1430,540)}and that nothing in it
+Dialogue: 3,0:03:01.60,0:03:03.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:01.60,0:03:03.31,Caption,,0,0,0,,{\pos(1430,540)}will surprise you.
+Dialogue: 3,0:03:04.34,0:03:05.95,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:04.34,0:03:05.95,Caption,,0,0,0,,{\pos(1430,540)}This is the day which
+Dialogue: 3,0:03:05.95,0:03:07.59,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:05.95,0:03:07.59,Caption,,0,0,0,,{\pos(1430,540)}the LORD hath made;
+Dialogue: 3,0:03:07.59,0:03:10.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:07.59,0:03:10.74,Caption,,0,0,0,,{\pos(1430,540)}we will rejoice and be glad in it.
+Dialogue: 3,0:03:12.07,0:03:13.96,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:12.07,0:03:13.96,Caption,,0,0,0,,{\pos(1430,540)}This day was made.
+Dialogue: 3,0:03:13.96,0:03:16.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:13.96,0:03:16.74,Caption,,0,0,0,,{\pos(1430,540)}It did not happen by accident.
+Dialogue: 3,0:03:16.74,0:03:18.48,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:16.74,0:03:18.48,Caption,,0,0,0,,{\pos(1430,540)}Before your alarm rang,
+Dialogue: 3,0:03:18.48,0:03:20.90,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:18.48,0:03:20.90,Caption,,0,0,0,,{\pos(1430,540)}God had already shaped the hours
+Dialogue: 3,0:03:20.90,0:03:22.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:20.90,0:03:22.74,Caption,,0,0,0,,{\pos(1430,540)}you are about to live.
+Dialogue: 3,0:03:22.74,0:03:25.64,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:22.74,0:03:25.64,Caption,,0,0,0,,{\pos(1430,540)}You may not feel like rejoicing yet,
+Dialogue: 3,0:03:25.64,0:03:27.59,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:25.64,0:03:27.59,Caption,,0,0,0,,{\pos(1430,540)}and that is all right.
+Dialogue: 3,0:03:27.59,0:03:31.08,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:27.59,0:03:31.08,Caption,,0,0,0,,{\pos(1430,540)}Gladness often arrives after obedience,
+Dialogue: 3,0:03:31.08,0:03:32.51,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:31.08,0:03:32.51,Caption,,0,0,0,,{\pos(1430,540)}not before it.
+Dialogue: 3,0:03:32.51,0:03:34.17,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:32.51,0:03:34.17,Caption,,0,0,0,,{\pos(1430,540)}So we choose it first,
+Dialogue: 3,0:03:34.17,0:03:36.55,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:34.17,0:03:36.55,Caption,,0,0,0,,{\pos(1430,540)}and the feeling can follow.
+Dialogue: 3,0:03:37.58,0:03:39.98,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:37.58,0:03:39.98,Caption,,0,0,0,,{\pos(1430,540)}Let us be still for a moment.
+Dialogue: 3,0:03:39.98,0:03:41.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:39.98,0:03:41.93,Caption,,0,0,0,,{\pos(1430,540)}Breathe in slowly.
+Dialogue: 3,0:03:41.93,0:03:43.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:41.93,0:03:43.60,Caption,,0,0,0,,{\pos(1430,540)}And breathe out.
+Dialogue: 3,0:03:43.60,0:03:45.77,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:43.60,0:03:45.77,Caption,,0,0,0,,{\pos(1430,540)}One more time, breathe in,
+Dialogue: 3,0:03:45.77,0:03:47.28,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:45.77,0:03:47.28,Caption,,0,0,0,,{\pos(1430,540)}and let it go.
+Dialogue: 3,0:03:53.11,0:03:54.84,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:53.11,0:03:54.84,Caption,,0,0,0,,{\pos(1430,540)}Now let us pray through
+Dialogue: 3,0:03:54.84,0:03:56.50,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:54.84,0:03:56.50,Caption,,0,0,0,,{\pos(1430,540)}the parts of this day,
+Dialogue: 3,0:03:56.50,0:03:57.55,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:56.50,0:03:57.55,Caption,,0,0,0,,{\pos(1430,540)}one at a time,
+Dialogue: 3,0:03:57.55,0:04:00.46,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:03:57.55,0:04:00.46,Caption,,0,0,0,,{\pos(1430,540)}and give each of them to the Lord.
+Dialogue: 3,0:04:01.79,0:04:04.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:01.79,0:04:04.44,Caption,,0,0,0,,{\pos(1430,540)}Father, I give you my mind.
+Dialogue: 3,0:04:04.44,0:04:06.61,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:04.44,0:04:06.61,Caption,,0,0,0,,{\pos(1430,540)}You know the thoughts that started
+Dialogue: 3,0:04:06.61,0:04:08.01,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:06.61,0:04:08.01,Caption,,0,0,0,,{\pos(1430,540)}running before my feet
+Dialogue: 3,0:04:08.01,0:04:09.34,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:08.01,0:04:09.34,Caption,,0,0,0,,{\pos(1430,540)}touched the floor.
+Dialogue: 3,0:04:09.34,0:04:11.20,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:09.34,0:04:11.20,Caption,,0,0,0,,{\pos(1430,540)}Quiet the noise.
+Dialogue: 3,0:04:11.20,0:04:13.69,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:11.20,0:04:13.69,Caption,,0,0,0,,{\pos(1430,540)}Gather my scattered attention.
+Dialogue: 3,0:04:13.69,0:04:14.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:13.69,0:04:14.93,Caption,,0,0,0,,{\pos(1430,540)}Where I have been
+Dialogue: 3,0:04:14.93,0:04:16.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:14.93,0:04:16.60,Caption,,0,0,0,,{\pos(1430,540)}rehearsing worst cases,
+Dialogue: 3,0:04:16.60,0:04:18.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:16.60,0:04:18.06,Caption,,0,0,0,,{\pos(1430,540)}teach me to rehearse
+Dialogue: 3,0:04:18.06,0:04:20.14,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:18.06,0:04:20.14,Caption,,0,0,0,,{\pos(1430,540)}your faithfulness instead.
+Dialogue: 3,0:04:20.14,0:04:22.96,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:20.14,0:04:22.96,Caption,,0,0,0,,{\pos(1430,540)}Give me a clear head for the decisions
+Dialogue: 3,0:04:22.96,0:04:24.86,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:22.96,0:04:24.86,Caption,,0,0,0,,{\pos(1430,540)}I have to make today.
+Dialogue: 3,0:04:25.89,0:04:28.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:25.89,0:04:28.74,Caption,,0,0,0,,{\pos(1430,540)}Thou wilt keep him in perfect peace,
+Dialogue: 3,0:04:28.74,0:04:31.21,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:28.74,0:04:31.21,Caption,,0,0,0,,{\pos(1430,540)}whose mind is stayed on thee:
+Dialogue: 3,0:04:31.21,0:04:33.76,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:31.21,0:04:33.76,Caption,,0,0,0,,{\pos(1430,540)}because he trusteth in thee.
+Dialogue: 3,0:04:35.09,0:04:37.49,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:35.09,0:04:37.49,Caption,,0,0,0,,{\pos(1430,540)}Lord, I give you my body.
+Dialogue: 3,0:04:37.49,0:04:38.89,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:37.49,0:04:38.89,Caption,,0,0,0,,{\pos(1430,540)}You see the aches,
+Dialogue: 3,0:04:38.89,0:04:40.14,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:38.89,0:04:40.14,Caption,,0,0,0,,{\pos(1430,540)}the short night,
+Dialogue: 3,0:04:40.14,0:04:41.77,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:40.14,0:04:41.77,Caption,,0,0,0,,{\pos(1430,540)}the energy that feels
+Dialogue: 3,0:04:41.77,0:04:43.90,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:41.77,0:04:43.90,Caption,,0,0,0,,{\pos(1430,540)}like it is already spent.
+Dialogue: 3,0:04:43.90,0:04:45.62,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:43.90,0:04:45.62,Caption,,0,0,0,,{\pos(1430,540)}Strengthen me physically
+Dialogue: 3,0:04:45.62,0:04:47.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:45.62,0:04:47.45,Caption,,0,0,0,,{\pos(1430,540)}for what this day asks.
+Dialogue: 3,0:04:47.45,0:04:49.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:47.45,0:04:49.06,Caption,,0,0,0,,{\pos(1430,540)}Help me to eat well,
+Dialogue: 3,0:04:49.06,0:04:50.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:49.06,0:04:50.58,Caption,,0,0,0,,{\pos(1430,540)}to rest when I can,
+Dialogue: 3,0:04:50.58,0:04:52.59,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:50.58,0:04:52.59,Caption,,0,0,0,,{\pos(1430,540)}and to treat this body as
+Dialogue: 3,0:04:52.59,0:04:54.78,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:52.59,0:04:54.78,Caption,,0,0,0,,{\pos(1430,540)}a gift and not a machine.
+Dialogue: 3,0:04:54.78,0:04:57.12,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:54.78,0:04:57.12,Caption,,0,0,0,,{\pos(1430,540)}Where there is pain or sickness,
+Dialogue: 3,0:04:57.12,0:04:59.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:04:57.12,0:04:59.58,Caption,,0,0,0,,{\pos(1430,540)}I ask for your healing touch.
+Dialogue: 3,0:05:00.62,0:05:02.47,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:00.62,0:05:02.47,Caption,,0,0,0,,{\pos(1430,540)}Jesus said, Come unto me,
+Dialogue: 3,0:05:02.47,0:05:05.36,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:02.47,0:05:05.36,Caption,,0,0,0,,{\pos(1430,540)}all ye that labour and are heavy laden,
+Dialogue: 3,0:05:05.36,0:05:07.56,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:05.36,0:05:07.56,Caption,,0,0,0,,{\pos(1430,540)}and I will give you rest.
+Dialogue: 3,0:05:08.89,0:05:11.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:08.89,0:05:11.58,Caption,,0,0,0,,{\pos(1430,540)}The rest Jesus offers is not only
+Dialogue: 3,0:05:11.58,0:05:13.63,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:11.58,0:05:13.63,Caption,,0,0,0,,{\pos(1430,540)}for the end of the day.
+Dialogue: 3,0:05:13.63,0:05:15.57,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:13.63,0:05:15.57,Caption,,0,0,0,,{\pos(1430,540)}It is a rest you can carry
+Dialogue: 3,0:05:15.57,0:05:17.40,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:15.57,0:05:17.40,Caption,,0,0,0,,{\pos(1430,540)}into the middle of it.
+Dialogue: 3,0:05:17.40,0:05:19.33,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:17.40,0:05:19.33,Caption,,0,0,0,,{\pos(1430,540)}You can be busy and still
+Dialogue: 3,0:05:19.33,0:05:21.26,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:19.33,0:05:21.26,Caption,,0,0,0,,{\pos(1430,540)}be at rest on the inside,
+Dialogue: 3,0:05:21.26,0:05:23.65,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:21.26,0:05:23.65,Caption,,0,0,0,,{\pos(1430,540)}because the weight is no longer
+Dialogue: 3,0:05:23.65,0:05:25.68,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:23.65,0:05:25.68,Caption,,0,0,0,,{\pos(1430,540)}on your shoulders alone.
+Dialogue: 3,0:05:25.68,0:05:27.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:25.68,0:05:27.24,Caption,,0,0,0,,{\pos(1430,540)}He is yoked beside you,
+Dialogue: 3,0:05:27.24,0:05:28.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:27.24,0:05:28.74,Caption,,0,0,0,,{\pos(1430,540)}pulling with you.
+Dialogue: 3,0:05:29.77,0:05:30.20,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:29.77,0:05:30.20,Caption,,0,0,0,,{\pos(1430,540)}Lord,
+Dialogue: 3,0:05:30.20,0:05:32.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:30.20,0:05:32.60,Caption,,0,0,0,,{\pos(1430,540)}I bring you my work today.
+Dialogue: 3,0:05:32.60,0:05:34.99,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:32.60,0:05:34.99,Caption,,0,0,0,,{\pos(1430,540)}The tasks I enjoy and the ones
+Dialogue: 3,0:05:34.99,0:05:37.09,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:34.99,0:05:37.09,Caption,,0,0,0,,{\pos(1430,540)}I have been putting off.
+Dialogue: 3,0:05:37.09,0:05:40.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:37.09,0:05:40.19,Caption,,0,0,0,,{\pos(1430,540)}The conversations I need to have.
+Dialogue: 3,0:05:40.19,0:05:42.86,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:40.19,0:05:42.86,Caption,,0,0,0,,{\pos(1430,540)}The people who depend on me.
+Dialogue: 3,0:05:42.86,0:05:45.65,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:42.86,0:05:45.65,Caption,,0,0,0,,{\pos(1430,540)}Give me focus and diligence.
+Dialogue: 3,0:05:45.65,0:05:47.50,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:45.65,0:05:47.50,Caption,,0,0,0,,{\pos(1430,540)}Help me to do good work,
+Dialogue: 3,0:05:47.50,0:05:48.89,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:47.50,0:05:48.89,Caption,,0,0,0,,{\pos(1430,540)}honestly and well,
+Dialogue: 3,0:05:48.89,0:05:51.70,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:48.89,0:05:51.70,Caption,,0,0,0,,{\pos(1430,540)}and to leave the results with you.
+Dialogue: 3,0:05:51.70,0:05:53.80,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:51.70,0:05:53.80,Caption,,0,0,0,,{\pos(1430,540)}When I am tempted to rush,
+Dialogue: 3,0:05:53.80,0:05:55.03,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:53.80,0:05:55.03,Caption,,0,0,0,,{\pos(1430,540)}slow me down.
+Dialogue: 3,0:05:55.03,0:05:57.23,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:55.03,0:05:57.23,Caption,,0,0,0,,{\pos(1430,540)}When I am tempted to give up,
+Dialogue: 3,0:05:57.23,0:05:58.65,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:57.23,0:05:58.65,Caption,,0,0,0,,{\pos(1430,540)}keep me going.
+Dialogue: 3,0:05:59.68,0:06:01.38,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:05:59.68,0:06:01.38,Caption,,0,0,0,,{\pos(1430,540)}And whatsoever ye do,
+Dialogue: 3,0:06:01.38,0:06:02.59,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:01.38,0:06:02.59,Caption,,0,0,0,,{\pos(1430,540)}do it heartily,
+Dialogue: 3,0:06:02.59,0:06:03.80,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:02.59,0:06:03.80,Caption,,0,0,0,,{\pos(1430,540)}as to the Lord,
+Dialogue: 3,0:06:03.80,0:06:05.53,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:03.80,0:06:05.53,Caption,,0,0,0,,{\pos(1430,540)}and not unto men.
+Dialogue: 3,0:06:06.86,0:06:07.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:06.86,0:06:07.44,Caption,,0,0,0,,{\pos(1430,540)}Father,
+Dialogue: 3,0:06:07.44,0:06:10.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:07.44,0:06:10.24,Caption,,0,0,0,,{\pos(1430,540)}there are parts of today I already
+Dialogue: 3,0:06:10.24,0:06:12.97,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:10.24,0:06:12.97,Caption,,0,0,0,,{\pos(1430,540)}know I cannot handle on my own.
+Dialogue: 3,0:06:12.97,0:06:15.23,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:12.97,0:06:15.23,Caption,,0,0,0,,{\pos(1430,540)}I name them before you now,
+Dialogue: 3,0:06:15.23,0:06:17.16,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:15.23,0:06:17.16,Caption,,0,0,0,,{\pos(1430,540)}quietly, in my heart.
+Dialogue: 3,0:06:17.16,0:06:19.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:17.16,0:06:19.06,Caption,,0,0,0,,{\pos(1430,540)}Instead of pretending,
+Dialogue: 3,0:06:19.06,0:06:20.97,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:19.06,0:06:20.97,Caption,,0,0,0,,{\pos(1430,540)}I admit my weakness.
+Dialogue: 3,0:06:20.97,0:06:22.52,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:20.97,0:06:22.52,Caption,,0,0,0,,{\pos(1430,540)}And I ask you to meet
+Dialogue: 3,0:06:22.52,0:06:23.63,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:22.52,0:06:23.63,Caption,,0,0,0,,{\pos(1430,540)}me right there,
+Dialogue: 3,0:06:23.63,0:06:26.12,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:23.63,0:06:26.12,Caption,,0,0,0,,{\pos(1430,540)}in the place where I run out.
+Dialogue: 3,0:06:27.15,0:06:29.09,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:27.15,0:06:29.09,Caption,,0,0,0,,{\pos(1430,540)}The apostle Paul heard this
+Dialogue: 3,0:06:29.09,0:06:30.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:29.09,0:06:30.60,Caption,,0,0,0,,{\pos(1430,540)}answer when he begged
+Dialogue: 3,0:06:30.60,0:06:33.22,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:30.60,0:06:33.22,Caption,,0,0,0,,{\pos(1430,540)}for his weakness to be taken away.
+Dialogue: 3,0:06:33.22,0:06:36.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:33.22,0:06:36.06,Caption,,0,0,0,,{\pos(1430,540)}My grace is sufficient for thee:
+Dialogue: 3,0:06:36.06,0:06:37.85,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:36.06,0:06:37.85,Caption,,0,0,0,,{\pos(1430,540)}for my strength is made
+Dialogue: 3,0:06:37.85,0:06:39.76,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:37.85,0:06:39.76,Caption,,0,0,0,,{\pos(1430,540)}perfect in weakness.
+Dialogue: 3,0:06:41.09,0:06:44.15,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:41.09,0:06:44.15,Caption,,0,0,0,,{\pos(1430,540)}God did not remove Paul's weakness.
+Dialogue: 3,0:06:44.15,0:06:45.68,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:44.15,0:06:45.68,Caption,,0,0,0,,{\pos(1430,540)}He filled it.
+Dialogue: 3,0:06:45.68,0:06:47.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:45.68,0:06:47.60,Caption,,0,0,0,,{\pos(1430,540)}The place where Paul ran out
+Dialogue: 3,0:06:47.60,0:06:49.74,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:47.60,0:06:49.74,Caption,,0,0,0,,{\pos(1430,540)}became the place where Christ's
+Dialogue: 3,0:06:49.74,0:06:51.92,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:49.74,0:06:51.92,Caption,,0,0,0,,{\pos(1430,540)}power showed up most clearly.
+Dialogue: 3,0:06:51.92,0:06:54.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:51.92,0:06:54.24,Caption,,0,0,0,,{\pos(1430,540)}So your weakness this morning
+Dialogue: 3,0:06:54.24,0:06:56.66,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:54.24,0:06:56.66,Caption,,0,0,0,,{\pos(1430,540)}is not the end of the story.
+Dialogue: 3,0:06:56.66,0:06:59.29,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:56.66,0:06:59.29,Caption,,0,0,0,,{\pos(1430,540)}It may be the exact spot where God
+Dialogue: 3,0:06:59.29,0:07:02.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:06:59.29,0:07:02.19,Caption,,0,0,0,,{\pos(1430,540)}plans to show you what he can do.
+Dialogue: 3,0:07:03.22,0:07:03.64,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:03.22,0:07:03.64,Caption,,0,0,0,,{\pos(1430,540)}Lord,
+Dialogue: 3,0:07:03.64,0:07:06.18,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:03.64,0:07:06.18,Caption,,0,0,0,,{\pos(1430,540)}I lift up the people I love.
+Dialogue: 3,0:07:06.18,0:07:08.18,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:06.18,0:07:08.18,Caption,,0,0,0,,{\pos(1430,540)}Those who share my home,
+Dialogue: 3,0:07:08.18,0:07:10.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:08.18,0:07:10.60,Caption,,0,0,0,,{\pos(1430,540)}and those who are far away.
+Dialogue: 3,0:07:10.60,0:07:13.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:10.60,0:07:13.24,Caption,,0,0,0,,{\pos(1430,540)}Give them strength for their own days.
+Dialogue: 3,0:07:13.24,0:07:15.05,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:13.24,0:07:15.05,Caption,,0,0,0,,{\pos(1430,540)}Protect them as they go
+Dialogue: 3,0:07:15.05,0:07:17.28,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:15.05,0:07:17.28,Caption,,0,0,0,,{\pos(1430,540)}out and as they come back.
+Dialogue: 3,0:07:17.28,0:07:19.72,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:17.28,0:07:19.72,Caption,,0,0,0,,{\pos(1430,540)}Where there is tension between us,
+Dialogue: 3,0:07:19.72,0:07:21.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:19.72,0:07:21.19,Caption,,0,0,0,,{\pos(1430,540)}soften our hearts.
+Dialogue: 3,0:07:21.19,0:07:22.83,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:21.19,0:07:22.83,Caption,,0,0,0,,{\pos(1430,540)}Help me to be patient
+Dialogue: 3,0:07:22.83,0:07:24.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:22.83,0:07:24.31,Caption,,0,0,0,,{\pos(1430,540)}and kind with them,
+Dialogue: 3,0:07:24.31,0:07:26.30,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:24.31,0:07:26.30,Caption,,0,0,0,,{\pos(1430,540)}even when I am tired.
+Dialogue: 3,0:07:27.33,0:07:28.01,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:27.33,0:07:28.01,Caption,,0,0,0,,{\pos(1430,540)}And Lord,
+Dialogue: 3,0:07:28.01,0:07:30.79,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:28.01,0:07:30.79,Caption,,0,0,0,,{\pos(1430,540)}I pray for everyone listening to this
+Dialogue: 3,0:07:30.79,0:07:33.91,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:30.79,0:07:33.91,Caption,,0,0,0,,{\pos(1430,540)}prayer who is carrying more than usual.
+Dialogue: 3,0:07:33.91,0:07:36.84,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:33.91,0:07:36.84,Caption,,0,0,0,,{\pos(1430,540)}The caregivers who were up in the night.
+Dialogue: 3,0:07:36.84,0:07:39.28,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:36.84,0:07:39.28,Caption,,0,0,0,,{\pos(1430,540)}The parents of newborns.
+Dialogue: 3,0:07:39.28,0:07:41.02,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:39.28,0:07:41.02,Caption,,0,0,0,,{\pos(1430,540)}The ones grieving.
+Dialogue: 3,0:07:41.02,0:07:43.48,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:41.02,0:07:43.48,Caption,,0,0,0,,{\pos(1430,540)}The ones working two jobs.
+Dialogue: 3,0:07:43.48,0:07:45.75,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:43.48,0:07:45.75,Caption,,0,0,0,,{\pos(1430,540)}The ones waiting for news.
+Dialogue: 3,0:07:45.75,0:07:47.96,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:45.75,0:07:47.96,Caption,,0,0,0,,{\pos(1430,540)}Meet each of them this morning
+Dialogue: 3,0:07:47.96,0:07:49.80,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:47.96,0:07:49.80,Caption,,0,0,0,,{\pos(1430,540)}with exactly the strength
+Dialogue: 3,0:07:49.80,0:07:51.63,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:49.80,0:07:51.63,Caption,,0,0,0,,{\pos(1430,540)}they need for today.
+Dialogue: 3,0:07:52.66,0:07:55.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:52.66,0:07:55.31,Caption,,0,0,0,,{\pos(1430,540)}My flesh and my heart faileth:
+Dialogue: 3,0:07:55.31,0:07:58.18,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:55.31,0:07:58.18,Caption,,0,0,0,,{\pos(1430,540)}but God is the strength of my heart,
+Dialogue: 3,0:07:58.18,0:08:00.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:07:58.18,0:08:00.44,Caption,,0,0,0,,{\pos(1430,540)}and my portion for ever.
+Dialogue: 3,0:08:01.77,0:08:02.33,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:01.77,0:08:02.33,Caption,,0,0,0,,{\pos(1430,540)}Father,
+Dialogue: 3,0:08:02.33,0:08:05.30,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:02.33,0:08:05.30,Caption,,0,0,0,,{\pos(1430,540)}I trust you with what I need today.
+Dialogue: 3,0:08:05.30,0:08:07.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:05.30,0:08:07.24,Caption,,0,0,0,,{\pos(1430,540)}The bills, the groceries,
+Dialogue: 3,0:08:07.24,0:08:08.87,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:07.24,0:08:08.87,Caption,,0,0,0,,{\pos(1430,540)}the plans that depend
+Dialogue: 3,0:08:08.87,0:08:11.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:08.87,0:08:11.07,Caption,,0,0,0,,{\pos(1430,540)}on money I do not yet see.
+Dialogue: 3,0:08:11.07,0:08:14.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:11.07,0:08:14.24,Caption,,0,0,0,,{\pos(1430,540)}You know every need before I speak it.
+Dialogue: 3,0:08:14.24,0:08:16.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:14.24,0:08:16.19,Caption,,0,0,0,,{\pos(1430,540)}Provide what is necessary,
+Dialogue: 3,0:08:16.19,0:08:17.54,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:16.19,0:08:17.54,Caption,,0,0,0,,{\pos(1430,540)}and give me wisdom
+Dialogue: 3,0:08:17.54,0:08:19.60,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:17.54,0:08:19.60,Caption,,0,0,0,,{\pos(1430,540)}with what I already have.
+Dialogue: 3,0:08:19.60,0:08:21.05,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:19.60,0:08:21.05,Caption,,0,0,0,,{\pos(1430,540)}Keep me from fear,
+Dialogue: 3,0:08:21.05,0:08:23.09,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:21.05,0:08:23.09,Caption,,0,0,0,,{\pos(1430,540)}and keep me generous.
+Dialogue: 3,0:08:24.12,0:08:24.49,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:24.12,0:08:24.49,Caption,,0,0,0,,{\pos(1430,540)}Lord,
+Dialogue: 3,0:08:24.49,0:08:27.40,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:24.49,0:08:27.40,Caption,,0,0,0,,{\pos(1430,540)}there are choices in front of me today,
+Dialogue: 3,0:08:27.40,0:08:30.48,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:27.40,0:08:30.48,Caption,,0,0,0,,{\pos(1430,540)}some small and some that feel very big.
+Dialogue: 3,0:08:30.48,0:08:32.53,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:30.48,0:08:32.53,Caption,,0,0,0,,{\pos(1430,540)}I do not want to make them
+Dialogue: 3,0:08:32.53,0:08:34.76,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:32.53,0:08:34.76,Caption,,0,0,0,,{\pos(1430,540)}in a hurry or out of fear.
+Dialogue: 3,0:08:34.76,0:08:36.54,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:34.76,0:08:36.54,Caption,,0,0,0,,{\pos(1430,540)}Give me wisdom.
+Dialogue: 3,0:08:36.54,0:08:39.16,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:36.54,0:08:39.16,Caption,,0,0,0,,{\pos(1430,540)}Close the doors that should be closed
+Dialogue: 3,0:08:39.16,0:08:41.88,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:39.16,0:08:41.88,Caption,,0,0,0,,{\pos(1430,540)}and open the ones you have prepared.
+Dialogue: 3,0:08:41.88,0:08:44.29,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:41.88,0:08:44.29,Caption,,0,0,0,,{\pos(1430,540)}And if I cannot see the whole path,
+Dialogue: 3,0:08:44.29,0:08:47.33,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:44.29,0:08:47.33,Caption,,0,0,0,,{\pos(1430,540)}give me light enough for the next step.
+Dialogue: 3,0:08:48.36,0:08:48.92,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:48.36,0:08:48.92,Caption,,0,0,0,,{\pos(1430,540)}Father,
+Dialogue: 3,0:08:48.92,0:08:50.21,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:48.92,0:08:50.21,Caption,,0,0,0,,{\pos(1430,540)}if I am carrying
+Dialogue: 3,0:08:50.21,0:08:52.05,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:50.21,0:08:52.05,Caption,,0,0,0,,{\pos(1430,540)}a grudge into this day,
+Dialogue: 3,0:08:52.05,0:08:54.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:52.05,0:08:54.24,Caption,,0,0,0,,{\pos(1430,540)}I lay it down before you.
+Dialogue: 3,0:08:54.24,0:08:56.86,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:54.24,0:08:56.86,Caption,,0,0,0,,{\pos(1430,540)}You know the words that still sting
+Dialogue: 3,0:08:56.86,0:08:58.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:56.86,0:08:58.44,Caption,,0,0,0,,{\pos(1430,540)}and the person I keep
+Dialogue: 3,0:08:58.44,0:09:00.20,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:08:58.44,0:09:00.20,Caption,,0,0,0,,{\pos(1430,540)}replaying in my mind.
+Dialogue: 3,0:09:00.20,0:09:02.10,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:00.20,0:09:02.10,Caption,,0,0,0,,{\pos(1430,540)}I do not have to pretend
+Dialogue: 3,0:09:02.10,0:09:03.56,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:02.10,0:09:03.56,Caption,,0,0,0,,{\pos(1430,540)}it did not hurt.
+Dialogue: 3,0:09:03.56,0:09:05.95,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:03.56,0:09:05.95,Caption,,0,0,0,,{\pos(1430,540)}But I choose not to let it drain
+Dialogue: 3,0:09:05.95,0:09:08.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:05.95,0:09:08.45,Caption,,0,0,0,,{\pos(1430,540)}the strength you are giving me.
+Dialogue: 3,0:09:08.45,0:09:09.94,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:08.45,0:09:09.94,Caption,,0,0,0,,{\pos(1430,540)}Help me to forgive as
+Dialogue: 3,0:09:09.94,0:09:11.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:09.94,0:09:11.44,Caption,,0,0,0,,{\pos(1430,540)}you have forgiven me,
+Dialogue: 3,0:09:11.44,0:09:13.92,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:11.44,0:09:13.92,Caption,,0,0,0,,{\pos(1430,540)}and to speak with grace today.
+Dialogue: 3,0:09:14.95,0:09:17.97,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:14.95,0:09:17.97,Caption,,0,0,0,,{\pos(1430,540)}The LORD is my strength and my shield;
+Dialogue: 3,0:09:17.97,0:09:19.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:17.97,0:09:19.93,Caption,,0,0,0,,{\pos(1430,540)}my heart trusted in him,
+Dialogue: 3,0:09:19.93,0:09:21.41,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:19.93,0:09:21.41,Caption,,0,0,0,,{\pos(1430,540)}and I am helped:
+Dialogue: 3,0:09:21.41,0:09:24.64,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:21.41,0:09:24.64,Caption,,0,0,0,,{\pos(1430,540)}therefore my heart greatly rejoiceth;
+Dialogue: 3,0:09:24.64,0:09:27.72,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:24.64,0:09:27.72,Caption,,0,0,0,,{\pos(1430,540)}and with my song will I praise him.
+Dialogue: 3,0:09:29.05,0:09:31.54,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:29.05,0:09:31.54,Caption,,0,0,0,,{\pos(1430,540)}Strength for what is inside you.
+Dialogue: 3,0:09:31.54,0:09:33.25,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:31.54,0:09:33.25,Caption,,0,0,0,,{\pos(1430,540)}A shield for what comes
+Dialogue: 3,0:09:33.25,0:09:34.92,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:33.25,0:09:34.92,Caption,,0,0,0,,{\pos(1430,540)}at you from outside.
+Dialogue: 3,0:09:34.92,0:09:38.08,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:34.92,0:09:38.08,Caption,,0,0,0,,{\pos(1430,540)}God offers both in the same sentence.
+Dialogue: 3,0:09:38.08,0:09:40.14,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:38.08,0:09:40.14,Caption,,0,0,0,,{\pos(1430,540)}And notice the order:
+Dialogue: 3,0:09:40.14,0:09:41.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:40.14,0:09:41.58,Caption,,0,0,0,,{\pos(1430,540)}my heart trusted,
+Dialogue: 3,0:09:41.58,0:09:43.12,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:41.58,0:09:43.12,Caption,,0,0,0,,{\pos(1430,540)}and I am helped.
+Dialogue: 3,0:09:43.12,0:09:45.02,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:43.12,0:09:45.02,Caption,,0,0,0,,{\pos(1430,540)}Trust comes first.
+Dialogue: 3,0:09:45.02,0:09:46.97,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:45.02,0:09:46.97,Caption,,0,0,0,,{\pos(1430,540)}The help follows.
+Dialogue: 3,0:09:48.00,0:09:50.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:48.00,0:09:50.45,Caption,,0,0,0,,{\pos(1430,540)}Lord, cover my home today.
+Dialogue: 3,0:09:50.45,0:09:52.34,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:50.45,0:09:52.34,Caption,,0,0,0,,{\pos(1430,540)}Watch over the door as
+Dialogue: 3,0:09:52.34,0:09:54.25,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:52.34,0:09:54.25,Caption,,0,0,0,,{\pos(1430,540)}it opens and closes.
+Dialogue: 3,0:09:54.25,0:09:56.35,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:54.25,0:09:56.35,Caption,,0,0,0,,{\pos(1430,540)}Keep every person who lives
+Dialogue: 3,0:09:56.35,0:09:58.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:56.35,0:09:58.06,Caption,,0,0,0,,{\pos(1430,540)}here safe on the road,
+Dialogue: 3,0:09:58.06,0:09:59.54,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:58.06,0:09:59.54,Caption,,0,0,0,,{\pos(1430,540)}at school, at work,
+Dialogue: 3,0:09:59.54,0:10:01.81,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:09:59.54,0:10:01.81,Caption,,0,0,0,,{\pos(1430,540)}and in every place they go.
+Dialogue: 3,0:10:01.81,0:10:04.24,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:01.81,0:10:04.24,Caption,,0,0,0,,{\pos(1430,540)}Let our home be a place of peace
+Dialogue: 3,0:10:04.24,0:10:05.99,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:04.24,0:10:05.99,Caption,,0,0,0,,{\pos(1430,540)}when we return tonight,
+Dialogue: 3,0:10:05.99,0:10:07.30,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:05.99,0:10:07.30,Caption,,0,0,0,,{\pos(1430,540)}not of tension.
+Dialogue: 3,0:10:07.30,0:10:10.36,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:07.30,0:10:10.36,Caption,,0,0,0,,{\pos(1430,540)}Let your presence fill every room.
+Dialogue: 3,0:10:11.40,0:10:13.77,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:11.40,0:10:13.77,Caption,,0,0,0,,{\pos(1430,540)}Breathe in again, slowly.
+Dialogue: 3,0:10:13.77,0:10:15.51,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:13.77,0:10:15.51,Caption,,0,0,0,,{\pos(1430,540)}And let it go.
+Dialogue: 3,0:10:15.51,0:10:18.36,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:15.51,0:10:18.36,Caption,,0,0,0,,{\pos(1430,540)}Rest in his presence for a moment.
+Dialogue: 3,0:10:24.18,0:10:26.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:24.18,0:10:26.45,Caption,,0,0,0,,{\pos(1430,540)}Now say these words with me,
+Dialogue: 3,0:10:26.45,0:10:28.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:26.45,0:10:28.07,Caption,,0,0,0,,{\pos(1430,540)}out loud if you can,
+Dialogue: 3,0:10:28.07,0:10:30.28,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:28.07,0:10:30.28,Caption,,0,0,0,,{\pos(1430,540)}or quietly in your heart.
+Dialogue: 3,0:10:30.28,0:10:32.57,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:30.28,0:10:32.57,Caption,,0,0,0,,{\pos(1430,540)}The Lord is my strength.
+Dialogue: 3,0:10:32.57,0:10:33.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:32.57,0:10:33.93,Caption,,0,0,0,,{\pos(1430,540)}I am not empty,
+Dialogue: 3,0:10:33.93,0:10:35.92,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:33.93,0:10:35.92,Caption,,0,0,0,,{\pos(1430,540)}because he fills me.
+Dialogue: 3,0:10:35.92,0:10:37.21,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:35.92,0:10:37.21,Caption,,0,0,0,,{\pos(1430,540)}I am not alone,
+Dialogue: 3,0:10:37.21,0:10:39.43,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:37.21,0:10:39.43,Caption,,0,0,0,,{\pos(1430,540)}because he goes with me.
+Dialogue: 3,0:10:39.43,0:10:41.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:39.43,0:10:41.31,Caption,,0,0,0,,{\pos(1430,540)}I can do all things through
+Dialogue: 3,0:10:41.31,0:10:43.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:41.31,0:10:43.58,Caption,,0,0,0,,{\pos(1430,540)}Christ which strengtheneth me.
+Dialogue: 3,0:10:43.58,0:10:45.11,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:43.58,0:10:45.11,Caption,,0,0,0,,{\pos(1430,540)}The joy of the Lord
+Dialogue: 3,0:10:45.11,0:10:47.15,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:45.11,0:10:47.15,Caption,,0,0,0,,{\pos(1430,540)}is my strength today.
+Dialogue: 3,0:10:48.48,0:10:50.36,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:48.48,0:10:50.36,Caption,,0,0,0,,{\pos(1430,540)}I can do all things through
+Dialogue: 3,0:10:50.36,0:10:52.80,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:50.36,0:10:52.80,Caption,,0,0,0,,{\pos(1430,540)}Christ which strengtheneth me.
+Dialogue: 3,0:10:54.13,0:10:55.94,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:54.13,0:10:55.94,Caption,,0,0,0,,{\pos(1430,540)}All things does not mean
+Dialogue: 3,0:10:55.94,0:10:57.55,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:55.94,0:10:57.55,Caption,,0,0,0,,{\pos(1430,540)}everything at once.
+Dialogue: 3,0:10:57.55,0:10:59.14,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:57.55,0:10:59.14,Caption,,0,0,0,,{\pos(1430,540)}It means that whatever
+Dialogue: 3,0:10:59.14,0:11:00.95,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:10:59.14,0:11:00.95,Caption,,0,0,0,,{\pos(1430,540)}this day actually brings,
+Dialogue: 3,0:11:00.95,0:11:02.11,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:00.95,0:11:02.11,Caption,,0,0,0,,{\pos(1430,540)}Christ will give
+Dialogue: 3,0:11:02.11,0:11:04.14,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:02.11,0:11:04.14,Caption,,0,0,0,,{\pos(1430,540)}you strength for that thing,
+Dialogue: 3,0:11:04.14,0:11:05.33,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:04.14,0:11:05.33,Caption,,0,0,0,,{\pos(1430,540)}when it comes.
+Dialogue: 3,0:11:05.33,0:11:07.02,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:05.33,0:11:07.02,Caption,,0,0,0,,{\pos(1430,540)}Not before.
+Dialogue: 3,0:11:07.02,0:11:09.10,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:07.02,0:11:09.10,Caption,,0,0,0,,{\pos(1430,540)}Not all in advance.
+Dialogue: 3,0:11:09.10,0:11:11.33,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:09.10,0:11:11.33,Caption,,0,0,0,,{\pos(1430,540)}Enough, and on time.
+Dialogue: 3,0:11:12.36,0:11:13.91,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:12.36,0:11:13.91,Caption,,0,0,0,,{\pos(1430,540)}When the people wept
+Dialogue: 3,0:11:13.91,0:11:15.86,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:13.91,0:11:15.86,Caption,,0,0,0,,{\pos(1430,540)}after hearing God's word,
+Dialogue: 3,0:11:15.86,0:11:17.33,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:15.86,0:11:17.33,Caption,,0,0,0,,{\pos(1430,540)}Nehemiah told them,
+Dialogue: 3,0:11:17.33,0:11:19.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:17.33,0:11:19.07,Caption,,0,0,0,,{\pos(1430,540)}Neither be ye sorry;
+Dialogue: 3,0:11:19.07,0:11:20.78,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:19.07,0:11:20.78,Caption,,0,0,0,,{\pos(1430,540)}for the joy of the LORD
+Dialogue: 3,0:11:20.78,0:11:22.40,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:20.78,0:11:22.40,Caption,,0,0,0,,{\pos(1430,540)}is your strength.
+Dialogue: 3,0:11:23.73,0:11:26.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:23.73,0:11:26.07,Caption,,0,0,0,,{\pos(1430,540)}Lord, restore my joy.
+Dialogue: 3,0:11:26.07,0:11:27.55,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:26.07,0:11:27.55,Caption,,0,0,0,,{\pos(1430,540)}Not a forced smile,
+Dialogue: 3,0:11:27.55,0:11:30.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:27.55,0:11:30.06,Caption,,0,0,0,,{\pos(1430,540)}but the deep gladness of knowing
+Dialogue: 3,0:11:30.06,0:11:31.88,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:30.06,0:11:31.88,Caption,,0,0,0,,{\pos(1430,540)}that I belong to you.
+Dialogue: 3,0:11:31.88,0:11:34.77,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:31.88,0:11:34.77,Caption,,0,0,0,,{\pos(1430,540)}Let that joy be my strength today.
+Dialogue: 3,0:11:34.77,0:11:36.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:34.77,0:11:36.31,Caption,,0,0,0,,{\pos(1430,540)}When things go wrong,
+Dialogue: 3,0:11:36.31,0:11:38.52,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:36.31,0:11:38.52,Caption,,0,0,0,,{\pos(1430,540)}let me remember that your love
+Dialogue: 3,0:11:38.52,0:11:40.56,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:38.52,0:11:40.56,Caption,,0,0,0,,{\pos(1430,540)}for me has not changed.
+Dialogue: 3,0:11:41.59,0:11:43.78,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:41.59,0:11:43.78,Caption,,0,0,0,,{\pos(1430,540)}And let the beauty of the LORD
+Dialogue: 3,0:11:43.78,0:11:45.35,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:43.78,0:11:45.35,Caption,,0,0,0,,{\pos(1430,540)}our God be upon us:
+Dialogue: 3,0:11:45.35,0:11:47.49,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:45.35,0:11:47.49,Caption,,0,0,0,,{\pos(1430,540)}and establish thou the work
+Dialogue: 3,0:11:47.49,0:11:49.33,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:47.49,0:11:49.33,Caption,,0,0,0,,{\pos(1430,540)}of our hands upon us;
+Dialogue: 3,0:11:49.33,0:11:49.64,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:49.33,0:11:49.64,Caption,,0,0,0,,{\pos(1430,540)}yea,
+Dialogue: 3,0:11:49.64,0:11:53.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:49.64,0:11:53.07,Caption,,0,0,0,,{\pos(1430,540)}the work of our hands establish thou it.
+Dialogue: 3,0:11:54.40,0:11:55.78,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:54.40,0:11:55.78,Caption,,0,0,0,,{\pos(1430,540)}Thank you, Father,
+Dialogue: 3,0:11:55.78,0:11:57.57,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:55.78,0:11:57.57,Caption,,0,0,0,,{\pos(1430,540)}for this new morning.
+Dialogue: 3,0:11:57.57,0:11:59.69,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:57.57,0:11:59.69,Caption,,0,0,0,,{\pos(1430,540)}For breath in my lungs.
+Dialogue: 3,0:11:59.69,0:12:01.76,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:11:59.69,0:12:01.76,Caption,,0,0,0,,{\pos(1430,540)}For another chance to love,
+Dialogue: 3,0:12:01.76,0:12:03.78,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:01.76,0:12:03.78,Caption,,0,0,0,,{\pos(1430,540)}to work, to begin again.
+Dialogue: 3,0:12:03.78,0:12:05.58,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:03.78,0:12:05.58,Caption,,0,0,0,,{\pos(1430,540)}Thank you for the strength
+Dialogue: 3,0:12:05.58,0:12:07.66,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:05.58,0:12:07.66,Caption,,0,0,0,,{\pos(1430,540)}you have given me in the past,
+Dialogue: 3,0:12:07.66,0:12:09.26,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:07.66,0:12:09.26,Caption,,0,0,0,,{\pos(1430,540)}on days I did not think
+Dialogue: 3,0:12:09.26,0:12:10.82,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:09.26,0:12:10.82,Caption,,0,0,0,,{\pos(1430,540)}I would get through.
+Dialogue: 3,0:12:10.82,0:12:12.80,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:10.82,0:12:12.80,Caption,,0,0,0,,{\pos(1430,540)}You carried me then.
+Dialogue: 3,0:12:12.80,0:12:15.51,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:12.80,0:12:15.51,Caption,,0,0,0,,{\pos(1430,540)}I trust you to carry me now.
+Dialogue: 3,0:12:16.54,0:12:16.95,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:16.54,0:12:16.95,Caption,,0,0,0,,{\pos(1430,540)}Lord,
+Dialogue: 3,0:12:16.95,0:12:18.66,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:16.95,0:12:18.66,Caption,,0,0,0,,{\pos(1430,540)}give my day a purpose
+Dialogue: 3,0:12:18.66,0:12:20.39,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:18.66,0:12:20.39,Caption,,0,0,0,,{\pos(1430,540)}beyond my own list.
+Dialogue: 3,0:12:20.39,0:12:23.25,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:20.39,0:12:23.25,Caption,,0,0,0,,{\pos(1430,540)}Show me one person I can encourage,
+Dialogue: 3,0:12:23.25,0:12:25.53,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:23.25,0:12:25.53,Caption,,0,0,0,,{\pos(1430,540)}one small kindness I can do,
+Dialogue: 3,0:12:25.53,0:12:27.40,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:25.53,0:12:27.40,Caption,,0,0,0,,{\pos(1430,540)}one way to make someone
+Dialogue: 3,0:12:27.40,0:12:29.21,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:27.40,0:12:29.21,Caption,,0,0,0,,{\pos(1430,540)}else's load lighter.
+Dialogue: 3,0:12:29.21,0:12:31.12,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:29.21,0:12:31.12,Caption,,0,0,0,,{\pos(1430,540)}Let the strength you give me
+Dialogue: 3,0:12:31.12,0:12:33.06,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:31.12,0:12:33.06,Caption,,0,0,0,,{\pos(1430,540)}flow through me to others.
+Dialogue: 3,0:12:33.06,0:12:36.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:33.06,0:12:36.19,Caption,,0,0,0,,{\pos(1430,540)}I do not want to only receive today.
+Dialogue: 3,0:12:36.19,0:12:38.09,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:36.19,0:12:38.09,Caption,,0,0,0,,{\pos(1430,540)}I want to give.
+Dialogue: 3,0:12:39.12,0:12:39.92,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:39.12,0:12:39.92,Caption,,0,0,0,,{\pos(1430,540)}And Father,
+Dialogue: 3,0:12:39.92,0:12:42.08,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:39.92,0:12:42.08,Caption,,0,0,0,,{\pos(1430,540)}I pray for the people who keep
+Dialogue: 3,0:12:42.08,0:12:43.95,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:42.08,0:12:43.95,Caption,,0,0,0,,{\pos(1430,540)}our world running while we
+Dialogue: 3,0:12:43.95,0:12:45.85,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:43.95,0:12:45.85,Caption,,0,0,0,,{\pos(1430,540)}sleep and while we work:
+Dialogue: 3,0:12:45.85,0:12:47.43,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:45.85,0:12:47.43,Caption,,0,0,0,,{\pos(1430,540)}nurses and doctors,
+Dialogue: 3,0:12:47.43,0:12:48.93,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:47.43,0:12:48.93,Caption,,0,0,0,,{\pos(1430,540)}drivers and cooks,
+Dialogue: 3,0:12:48.93,0:12:50.76,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:48.93,0:12:50.76,Caption,,0,0,0,,{\pos(1430,540)}teachers and soldiers,
+Dialogue: 3,0:12:50.76,0:12:52.69,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:50.76,0:12:52.69,Caption,,0,0,0,,{\pos(1430,540)}farmers and cleaners.
+Dialogue: 3,0:12:52.69,0:12:55.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:52.69,0:12:55.45,Caption,,0,0,0,,{\pos(1430,540)}Give them strength and safety today.
+Dialogue: 3,0:12:55.45,0:12:57.19,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:55.45,0:12:57.19,Caption,,0,0,0,,{\pos(1430,540)}Bring peace to the places
+Dialogue: 3,0:12:57.19,0:12:59.77,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:57.19,0:12:59.77,Caption,,0,0,0,,{\pos(1430,540)}in the world where there is fighting,
+Dialogue: 3,0:12:59.77,0:13:02.90,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:12:59.77,0:13:02.90,Caption,,0,0,0,,{\pos(1430,540)}and comfort to those who woke up afraid.
+Dialogue: 3,0:13:03.94,0:13:05.90,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:03.94,0:13:05.90,Caption,,0,0,0,,{\pos(1430,540)}And when this day is over,
+Dialogue: 3,0:13:05.90,0:13:08.12,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:05.90,0:13:08.12,Caption,,0,0,0,,{\pos(1430,540)}Lord, bring me back to you.
+Dialogue: 3,0:13:08.12,0:13:09.98,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:08.12,0:13:09.98,Caption,,0,0,0,,{\pos(1430,540)}Whatever happens between
+Dialogue: 3,0:13:09.98,0:13:11.22,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:09.98,0:13:11.22,Caption,,0,0,0,,{\pos(1430,540)}now and tonight,
+Dialogue: 3,0:13:11.22,0:13:14.00,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:11.22,0:13:14.00,Caption,,0,0,0,,{\pos(1430,540)}let me end the day in your presence,
+Dialogue: 3,0:13:14.00,0:13:16.65,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:14.00,0:13:16.65,Caption,,0,0,0,,{\pos(1430,540)}grateful, forgiven, and at rest.
+Dialogue: 3,0:13:16.65,0:13:18.07,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:16.65,0:13:18.07,Caption,,0,0,0,,{\pos(1430,540)}I place the evening
+Dialogue: 3,0:13:18.07,0:13:19.72,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:18.07,0:13:19.72,Caption,,0,0,0,,{\pos(1430,540)}in your hands already,
+Dialogue: 3,0:13:19.72,0:13:21.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:19.72,0:13:21.45,Caption,,0,0,0,,{\pos(1430,540)}so that I can live this
+Dialogue: 3,0:13:21.45,0:13:23.38,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:21.45,0:13:23.38,Caption,,0,0,0,,{\pos(1430,540)}morning without fear.
+Dialogue: 3,0:13:24.40,0:13:25.80,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:24.40,0:13:25.80,Caption,,0,0,0,,{\pos(1430,540)}Here is one thing
+Dialogue: 3,0:13:25.80,0:13:27.78,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:25.80,0:13:27.78,Caption,,0,0,0,,{\pos(1430,540)}to take into your day.
+Dialogue: 3,0:13:27.78,0:13:29.45,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:27.78,0:13:29.45,Caption,,0,0,0,,{\pos(1430,540)}The next time you feel
+Dialogue: 3,0:13:29.45,0:13:31.42,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:29.45,0:13:31.42,Caption,,0,0,0,,{\pos(1430,540)}your strength running out,
+Dialogue: 3,0:13:31.42,0:13:33.70,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:31.42,0:13:33.70,Caption,,0,0,0,,{\pos(1430,540)}stop for ten seconds, breathe,
+Dialogue: 3,0:13:33.70,0:13:34.76,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:33.70,0:13:34.76,Caption,,0,0,0,,{\pos(1430,540)}and say, Lord,
+Dialogue: 3,0:13:34.76,0:13:36.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:34.76,0:13:36.31,Caption,,0,0,0,,{\pos(1430,540)}renew my strength.
+Dialogue: 3,0:13:36.31,0:13:37.92,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:36.31,0:13:37.92,Caption,,0,0,0,,{\pos(1430,540)}That is all.
+Dialogue: 3,0:13:37.92,0:13:39.59,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:37.92,0:13:39.59,Caption,,0,0,0,,{\pos(1430,540)}Ten seconds.
+Dialogue: 3,0:13:39.59,0:13:41.08,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:39.59,0:13:41.08,Caption,,0,0,0,,{\pos(1430,540)}Let it become the way
+Dialogue: 3,0:13:41.08,0:13:42.50,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:41.08,0:13:42.50,Caption,,0,0,0,,{\pos(1430,540)}you wait on the Lord
+Dialogue: 3,0:13:42.50,0:13:44.85,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:42.50,0:13:44.85,Caption,,0,0,0,,{\pos(1430,540)}in the middle of a busy day.
+Dialogue: 3,0:13:45.88,0:13:48.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:45.88,0:13:48.44,Caption,,0,0,0,,{\pos(1430,540)}And now receive this blessing.
+Dialogue: 3,0:13:48.44,0:13:50.03,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:48.44,0:13:50.03,Caption,,0,0,0,,{\pos(1430,540)}The LORD bless thee,
+Dialogue: 3,0:13:50.03,0:13:51.31,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:50.03,0:13:51.31,Caption,,0,0,0,,{\pos(1430,540)}and keep thee:
+Dialogue: 3,0:13:51.31,0:13:54.18,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:51.31,0:13:54.18,Caption,,0,0,0,,{\pos(1430,540)}The LORD make his face shine upon thee,
+Dialogue: 3,0:13:54.18,0:13:56.27,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:54.18,0:13:56.27,Caption,,0,0,0,,{\pos(1430,540)}and be gracious unto thee:
+Dialogue: 3,0:13:56.27,0:13:57.44,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:56.27,0:13:57.44,Caption,,0,0,0,,{\pos(1430,540)}The LORD lift up
+Dialogue: 3,0:13:57.44,0:13:59.34,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:57.44,0:13:59.34,Caption,,0,0,0,,{\pos(1430,540)}his countenance upon thee,
+Dialogue: 3,0:13:59.34,0:14:00.98,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:13:59.34,0:14:00.98,Caption,,0,0,0,,{\pos(1430,540)}and give thee peace.
+Dialogue: 3,0:14:00.98,0:14:03.29,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:00.98,0:14:03.29,Caption,,0,0,0,,{\pos(1430,540)}Go into this day renewed.
+Dialogue: 3,0:14:03.29,0:14:06.09,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:03.29,0:14:06.09,Caption,,0,0,0,,{\pos(1430,540)}In Jesus' name, amen.
+Dialogue: 3,0:14:07.42,0:14:09.72,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:07.42,0:14:09.72,Caption,,0,0,0,,{\pos(1430,540)}If this prayer strengthened you,
+Dialogue: 3,0:14:09.72,0:14:11.59,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:09.72,0:14:11.59,Caption,,0,0,0,,{\pos(1430,540)}type amen in the comments,
+Dialogue: 3,0:14:11.59,0:14:13.79,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:11.59,0:14:13.79,Caption,,0,0,0,,{\pos(1430,540)}so others can pray with you.
+Dialogue: 3,0:14:13.79,0:14:14.80,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:13.79,0:14:14.80,Caption,,0,0,0,,{\pos(1430,540)}And subscribe,
+Dialogue: 3,0:14:14.80,0:14:16.83,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:14.80,0:14:16.83,Caption,,0,0,0,,{\pos(1430,540)}so tomorrow morning's prayer
+Dialogue: 3,0:14:16.83,0:14:19.62,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:16.83,0:14:19.62,Caption,,0,0,0,,{\pos(1430,540)}is waiting for you when you wake up.
+Dialogue: 3,0:14:19.62,0:14:21.23,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:19.62,0:14:21.23,Caption,,0,0,0,,{\pos(1430,540)}We will start the day
+Dialogue: 3,0:14:21.23,0:14:23.43,Box,,0,0,0,,{\pos(0,0)\p1}m 1010 330 l 1850 330 l 1850 750 l 1010 750{\p0}
+Dialogue: 4,0:14:21.23,0:14:23.43,Caption,,0,0,0,,{\pos(1430,540)}with God together again.
+Dialogue: 4,0:00:47.45,0:01:05.33,Ref,,0,0,0,,{\fad(250,250)}Isaiah 40:31 (KJV)
+Dialogue: 4,0:01:57.02,0:02:07.50,Ref,,0,0,0,,{\fad(250,250)}Isaiah 40:29 (KJV)
+Dialogue: 4,0:02:30.75,0:02:43.02,Ref,,0,0,0,,{\fad(250,250)}Psalm 5:3 (KJV)
+Dialogue: 4,0:03:04.34,0:03:10.57,Ref,,0,0,0,,{\fad(250,250)}Psalm 118:24 (KJV)
+Dialogue: 4,0:04:25.89,0:04:33.59,Ref,,0,0,0,,{\fad(250,250)}Isaiah 26:3 (KJV)
+Dialogue: 4,0:05:00.62,0:05:07.39,Ref,,0,0,0,,{\fad(250,250)}Matthew 11:28 (KJV)
+Dialogue: 4,0:05:59.68,0:06:05.36,Ref,,0,0,0,,{\fad(250,250)}Colossians 3:23 (KJV)
+Dialogue: 4,0:06:27.15,0:06:39.59,Ref,,0,0,0,,{\fad(250,250)}2 Corinthians 12:9 (KJV)
+Dialogue: 4,0:07:52.66,0:08:00.27,Ref,,0,0,0,,{\fad(250,250)}Psalm 73:26 (KJV)
+Dialogue: 4,0:09:14.95,0:09:27.55,Ref,,0,0,0,,{\fad(250,250)}Psalm 28:7 (KJV)
+Dialogue: 4,0:10:48.48,0:10:52.63,Ref,,0,0,0,,{\fad(250,250)}Philippians 4:13 (KJV)
+Dialogue: 4,0:11:12.36,0:11:22.23,Ref,,0,0,0,,{\fad(250,250)}Nehemiah 8:10 (KJV)
+Dialogue: 4,0:11:41.59,0:11:52.90,Ref,,0,0,0,,{\fad(250,250)}Psalm 90:17 (KJV)
+Dialogue: 4,0:13:45.88,0:14:05.92,Ref,,0,0,0,,{\fad(250,250)}Numbers 6:24-26 (KJV)

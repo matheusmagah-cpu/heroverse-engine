@@ -1,0 +1,74 @@
+{
+ "version": "pilot-qa-v1",
+ "pilot_id": "pilot-003",
+ "output_sha256": "91e24033aece99585094d6ffe4a52482b0625588df5cd6a57aa5a4c2a54e2ee1",
+ "status": "PASS",
+ "checks": {
+  "full_decode_without_errors": true,
+  "video_format": true,
+  "duration_min": true,
+  "integrated_lufs": true,
+  "true_peak": true,
+  "speech_presence": true,
+  "no_singing": true,
+  "wer_vs_script": true,
+  "words_per_minute": true,
+  "first_word_onset": true,
+  "hook_second_person": true,
+  "title_card_seconds": true,
+  "figure_present_after_title": true,
+  "background_hold_median": true,
+  "background_hold_max": true,
+  "no_background_repeated_consecutively": true,
+  "caption_coverage_of_speech": true,
+  "caption_hold_median": true,
+  "caption_chars_max": true,
+  "channel_mark_badge_and_amen_prompt": true,
+  "images_open_licence_with_revision": true,
+  "no_third_party_footage": true,
+  "music_owned": true,
+  "voice_model_pinned": true
+ },
+ "criteria_version": "pilot-qa-criteria-v2",
+ "measurements": {
+  "duration_seconds": 868.26,
+  "loudness": {
+   "integrated_lufs": -15.5,
+   "loudness_range_lu": 3.3,
+   "true_peak_dbtp": -2.3
+  },
+  "speech_presence": 0.861,
+  "music_presence": 0.412,
+  "wer_vs_script": 0.0378,
+  "accepted_words_per_minute": 132.7,
+  "caption_lines": 398,
+  "holds": 75,
+  "first_word_seconds": 0.14,
+  "editing": {
+   "picture_changes": 418,
+   "picture_changes_per_minute": 28.89,
+   "median_shot_seconds": 2.033,
+   "longest_shot_seconds": 7.867,
+   "motion_median_top_decile_diff": 1.003
+  },
+  "colour": {
+   "mean_brightness": 0.3679,
+   "brightness_std_over_time": 0.0492,
+   "mean_saturation": 0.5189,
+   "saturation_std_over_time": 0.1025
+  },
+  "rhythm": {
+   "audio_onsets": 1372,
+   "audio_onsets_per_minute": 94.81,
+   "tempo": {
+    "bpm": 89.05,
+    "confidence": 0.02
+   }
+  }
+ },
+ "transcript_head": "Good morning! If you woke up already tired before the day has even begun, stay with me for the next few minutes. God has not run out of strength, and this morning He wants to give some of it to you. Take one slow breath with me. You do not have to pretend you are full of energy. You can come to Him exactly as you are. heavy eyes, the long list, the worry you carried to bed and found waiting for yo",
+ "criteria_sha256": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
+ "human_review": "PENDING (D-076 calibration by sampling)",
+ "upload_performed": false,
+ "publication_performed": false
+}
