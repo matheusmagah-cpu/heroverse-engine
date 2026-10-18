@@ -28,15 +28,21 @@ RUBRIC = ("opening_and_promise", "picture_quality", "figure_and_background_integ
           "audio_clarity_and_mix", "pacing_and_visual_variety", "scripture_on_screen", "policy_safe")
 PASS_ITEM, PASS_OVERALL = 7, 8
 # hard rows (block) and reported rows (winner bands, MODELING_SPEC.md section 1), prayer format
-HARD = {"minutes": (10.02, 25.0), "words_per_minute": (115, 165), "first_spoken_at": (0, 1.5),
+HARD = {"minutes": (10.02, 50.0), "words_per_minute": (115, 165), "first_spoken_at": (0, 1.5),
         "scripture_per_10_min": (4, 99)}
 REPORTED = {"words_per_minute": (140, 160), "beats_per_minute": (2.0, 2.6), "shots_per_minute_model_counted": (6, 99),
-            "you_per_100_words": (6, 99), "minutes": (15, 20)}
+            "you_per_100_words": (6, 99), "minutes": (15, 45)}
+# free-tier tokens per minute: windows are spaced out and the whole-video review samples fewer frames
+WINDOW_GAP_S = 35
+WATCH_FPS = 0.5
 
 
 def mine(file, video, key):
     windows, failed = [], []
+    import time
     for start in range(0, int(video["seconds"]), sm.WINDOW):
+        if start:
+            time.sleep(WINDOW_GAP_S)
         end = min(start + sm.WINDOW, int(video["seconds"]))
         payload = sm.video_request(video, start, end)
         payload["contents"][0]["parts"][0]["fileData"] = {"fileUri": file["uri"], "mimeType": "video/mp4"}
@@ -63,7 +69,8 @@ def watch(file, title, key):
               "pacing_and_visual_variety (scene changes and camera motion keep attention without distracting), "
               "scripture_on_screen (references shown when read, accurate), policy_safe (no fear-bait, false promises, "
               "impersonation or misleading claims). Then overall, and concrete issues with timestamps.")
-    payload = {"contents": [{"role": "user", "parts": [{"fileData": {"fileUri": file["uri"], "mimeType": "video/mp4"}},
+    payload = {"contents": [{"role": "user", "parts": [{"fileData": {"fileUri": file["uri"], "mimeType": "video/mp4"},
+                                                         "videoMetadata": {"fps": WATCH_FPS}},
                                                         {"text": prompt}]}],
                "generationConfig": {"maxOutputTokens": 4096, "responseMimeType": "application/json",
                                     "responseSchema": schema, "mediaResolution": "MEDIA_RESOLUTION_LOW"}}
