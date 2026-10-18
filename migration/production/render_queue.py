@@ -8,7 +8,7 @@ render manifest exists for the current script (manifest.script_sha256).
 usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
   images: prints "PILOT id,id,..." for every pilot with images still missing
   render: prints the next pilot to render (earliest publish time) or nothing
-  reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR) and
+  reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR, or final decision UNKNOWN) and
              "publish PILOT" (approved for this file, not on YouTube) so failed steps are retried
 """
 from datetime import datetime, timedelta, timezone
@@ -65,9 +65,11 @@ def main(production, ledger_path, mode, hours="48"):
                 continue
             ap = json.loads((d / "inspection" / "APPROVAL.json").read_text()) if (d / "inspection" / "APPROVAL.json").exists() else {}
             rev = json.loads((d / "out" / "review.json").read_text()) if (d / "out" / "review.json").exists() else {}
+            gate = json.loads((d / "out" / "gate.json").read_text()) if (d / "out" / "gate.json").exists() else {}
+            unknown = gate.get("output_sha256") == qa["output_sha256"] and gate.get("decision") == "UNKNOWN"
             if ap.get("approved") and ap.get("output_sha256") == qa["output_sha256"]:
                 print("publish", r["pilot"])  # due rows are never already on YouTube
-            elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR":
+            elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:
                 print("approve", r["pilot"])
     else:
         nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"]), None)

@@ -44,7 +44,7 @@ jobs:
           echo "$SLOTS" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z(,[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)*$' || { echo INVALID_SLOTS; exit 1; }
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
           d="migration/production/$PILOT"; mkdir -p "$RUNNER_TEMP/shorts"
-          python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts'] if s.get('publish')]" "$d/shorts/shorts.json" |
+          python3 -I -B migration/publish/pending_shorts.py --todo "$d" migration/publish/ledger.json |
           while read -r f sha; do
             n="${f%.mp4}"
             gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-$n-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"

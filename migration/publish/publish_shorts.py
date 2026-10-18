@@ -54,17 +54,21 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     spec["shorts"] = [r for r in spec["shorts"] if r.get("publish")]  # only the Shorts the watched review approved
     if not spec["shorts"]:
         raise SystemExit("NO_SHORT_APPROVED_BY_REVIEW")
-    if len(slots) < len(spec["shorts"]):
-        raise SystemExit("NOT_ENOUGH_SLOTS")
-    reports = []
-    for short in spec["shorts"]:
+    # Shorts already in the ledger keep their slot; only the ones still to upload need one (a partial earlier run
+    # used to make this fail with NOT_ENOUGH_SLOTS although nothing was missing)
+    todo = [r for r in spec["shorts"] if "video_id" not in ledger["entries"].get(f"short:{spec['source_pilot']}:{r['sha256']}", {})]
+    if len(slots) < len(todo):
+        raise SystemExit(f"NOT_ENOUGH_SLOTS {len(slots)} slots for {len(todo)} Shorts to upload")
+    slot_of = dict(zip((r["sha256"] for r in todo), slots))
+    reports = {}
+    for short in todo:  # files of Shorts already uploaded were deleted from the release; nothing to check there
         if (short.get("review") or {}).get("status") != "PASS":
             raise SystemExit("SHORT_NOT_REVIEWED_PASS " + short["file"])
         path = Path(shorts_dir) / short["file"]
         if sha256_file(path) != short["sha256"]:
             raise SystemExit("SHORT_HASH_MISMATCH " + short["file"])
         report = shorts_qa.check(path)
-        reports.append(report)
+        reports[short["sha256"]] = report
         if report["status"] != "PASS":
             raise SystemExit("SHORT_QA_FAIL " + json.dumps(report))
     s = pv.session()
@@ -73,7 +77,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     long_id = long_entry["video_id"]
     long = pv.check(s.get(pv.API + "videos", params={"part": "snippet", "id": long_id}), "LONG")["items"][0]
     out = []
-    for short, slot, report in zip(spec["shorts"], slots, reports):
+    for short in spec["shorts"]:
+        slot, report = slot_of.get(short["sha256"]), reports.get(short["sha256"])
         key = f"short:{spec['source_pilot']}:{short['sha256']}"
         entry = ledger["entries"].get(key, {"steps": {}})
         if "video_id" not in entry:

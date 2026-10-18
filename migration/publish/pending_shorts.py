@@ -57,7 +57,42 @@ def pending(production, ledger, now=None):
     return None
 
 
+def states(pilot_dir, ledger, now=None):
+    """Every Short of a pilot in exactly one state: failed (QA or watched review not PASS), not_selected (passed,
+    left out by the one-Short-per-video rule), approved_awaiting_slot (approved, not uploaded yet), scheduled
+    (uploaded, slot ahead) or published (uploaded, slot passed)."""
+    now = now or datetime.now(timezone.utc)
+    spec = json.loads((Path(pilot_dir) / "shorts" / "shorts.json").read_text())
+    entries = ledger.get("entries", {})
+    out = []
+    for s in spec["shorts"]:
+        entry = entries.get(f"short:{spec['source_pilot']}:{s['sha256']}", {})
+        passed = (s.get("review") or {}).get("status") == "PASS" and (s.get("qa") or {}).get("status", "PASS") == "PASS"
+        if "video_id" in entry:
+            state = "scheduled" if entry.get("slot") and when(entry["slot"]) > now else "published"
+        elif not passed:
+            state = "failed"
+        elif not s.get("publish"):
+            state = "not_selected"
+        else:
+            state = "approved_awaiting_slot"
+        out.append({"file": s["file"], "sha256": s["sha256"], "state": state, "video_id": entry.get("video_id")})
+    return out
+
+
+def todo_files(pilot_dir, ledger):
+    """file and sha256 of the approved Shorts still to upload (the only files a publish run downloads)."""
+    return [(r["file"], r["sha256"]) for r in states(pilot_dir, ledger) if r["state"] == "approved_awaiting_slot"]
+
+
 if __name__ == "__main__":
+    if sys.argv[1] == "--todo":  # pending_shorts.py --todo PILOT_DIR LEDGER
+        for f, sha in todo_files(sys.argv[2], json.loads(Path(sys.argv[3]).read_text())):
+            print(f, sha)
+        sys.exit(0)
+    if sys.argv[1] == "--states":  # pending_shorts.py --states PILOT_DIR LEDGER
+        print(json.dumps(states(sys.argv[2], json.loads(Path(sys.argv[3]).read_text()))))
+        sys.exit(0)
     found = pending(sys.argv[1], json.loads(Path(sys.argv[2]).read_text()))
     if found:
         print(found[0], ",".join(found[1]))
