@@ -9,6 +9,29 @@
    },
    "video_id": "v4zN53ZiUIs",
    "uploaded_at": "2026-10-17T22:40:41.769491+00:00"
+  },
+  "short:pilot-002:6361e55f6c56c19c86c41665ea02d95c3321100c6e6be15db5011b03c73b65db": {
+   "steps": {},
+   "video_id": "_sUdOLxWy5c",
+   "uploaded_at": "2026-10-18T08:01:16.945824+00:00",
+   "long_video_id": "v4zN53ZiUIs",
+   "slot": "2026-10-18T14:00:00Z",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-02.mp4",
+    "seconds": 53.07,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   }
   }
  }
 }
