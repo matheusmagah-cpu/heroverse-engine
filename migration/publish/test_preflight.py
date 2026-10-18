@@ -39,13 +39,35 @@ class Preflight(unittest.TestCase):
     def test_catches_everything_youtube_rejects(self):
         with tempfile.TemporaryDirectory() as t:
             d = pilot(t, title="x" * 101 + " <b>", tags=["a very long tag " * 4] * 10, publish_at="2026-10-17T23:00:00Z",
-                      slots=("2026-10-17T22:00:00Z",))
+                      slots=("2026-10-18T20:00:00Z", "2026-10-18T14:00:00Z"))   # out of order
             png(d / "thumb.png", 1280, 1280)
             (d / "shorts").mkdir()
             (d / "shorts" / "shorts.json").write_text(json.dumps({"shorts": [{"file": "short-00.mp4", "publish": True, "title": "Pray"}]}))
             problems = " ".join(pf.check(d, d / "thumb.png", now=NOW)[0])
             for code in ("TITLE_LENGTH", "TITLE_ANGLE_BRACKETS", "TAGS_CHARS", "THUMBNAIL_SIZE", "PUBLISH_AT_NOT_AHEAD", "SHORTS_SLOTS"):
                 self.assertIn(code, problems)
+
+    def test_late_approval_publishes_now_never_blocks(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = pilot(t)
+            (d / "shorts").mkdir()
+            (d / "shorts" / "shorts.json").write_text(json.dumps({"shorts": [{"file": "s.mp4", "publish": True, "title": "Pray"}]}))
+            late = datetime(2026, 10, 18, 9, 50, tzinfo=timezone.utc)          # 10 min before the 10:00 slot
+            self.assertEqual(pf.effective_publish_at(d, late), "")             # publish.yml: public now
+            self.assertEqual(pf.check(d, d / "thumb.png", pf.effective_publish_at(d, late), now=late)[0], [])
+            after = datetime(2026, 10, 18, 15, 0, tzinfo=timezone.utc)         # after the Short slot too: it rolls forward
+            self.assertEqual(pf.check(d, d / "thumb.png", pf.effective_publish_at(d, after), now=after)[0], [])
+            early = datetime(2026, 10, 18, 7, 0, tzinfo=timezone.utc)
+            self.assertEqual(pf.effective_publish_at(d, early), "2026-10-18T10:00:00Z")
+            # the schedule's own time, when explicitly checked late, is still caught
+            self.assertTrue(any(p.startswith("PUBLISH_AT_NOT_AHEAD") for p in pf.check(d, d / "thumb.png", now=late)[0]))
+
+    def test_short_slot_before_the_long_video_fails(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = pilot(t, slots=("2026-10-18T09:00:00Z",))                     # ahead of now, before the 10:00 video
+            (d / "shorts").mkdir()
+            (d / "shorts" / "shorts.json").write_text(json.dumps({"shorts": [{"file": "s.mp4", "publish": True, "title": "Pray"}]}))
+            self.assertIn("SHORTS_SLOTS (must be ordered and after the long video)", pf.check(d, d / "thumb.png", now=NOW)[0])
 
     def test_tag_chars_counts_quotes(self):
         self.assertEqual(pf.tag_chars(["morning prayer", "faith"]), 16 + 5 + 1)
