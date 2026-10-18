@@ -40,5 +40,6 @@ merges, publishes, approves a video or edits frozen QA criteria.
 
 **Script tasks** (the main load): Dot writes original text only (no copying of any channel's script, voice, images or
 identity), KJV quoted exactly with "(KJV)" references, following `strategy/MODELING_SPEC.md`, the archetype files and
-the pilot layout of the latest pilot; acceptance = `python3 -I -B migration/production/script_check.py migration/production/<pilot>`
+the pilot layout of the latest pilot; reused images are listed in images.json `reused` and their records copied with
+`python3 -I -B migration/production/imagegen/hydrate_reused.py migration/production/<pilot>` (part of the deliverable); acceptance = `python3 -I -B migration/production/script_check.py migration/production/<pilot>`
 PASS. Claude spot-reads hook, CTA and policy-sensitive lines only.
