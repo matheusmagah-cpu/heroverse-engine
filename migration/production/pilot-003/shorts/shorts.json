@@ -1,0 +1,280 @@
+{
+ "version": "shorts-produce-v1",
+ "source_pilot": "pilot-003",
+ "selection_rubric_model": "gemini-3.8-flash",
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "bf67edf712bb8adcac1476f77d4b87aab6908f6480d1f782940c72f33d157401",
+   "seconds": 41.97,
+   "source_start": 804.619,
+   "source_end": 845.955,
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "hook": "Try this 10-second pause today",
+   "title": "A 10-Second Prayer to Renew Your Strength",
+   "reference": "Numbers 6:24-26 (KJV)",
+   "scenes": [
+    "bg-wheat",
+    "bg-meadow",
+    "bg-sky",
+    "bg-river",
+    "bg-misty-valley",
+    "bg-wheat"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8885,
+    "measured_score": 0.8838,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.41237113402061853,
+     "scripture": 1.0,
+     "promise": 0.7731958762886598,
+     "resolution": 1.0,
+     "length_fit": 0.9465599999999995
+    },
+    "rubric": {
+     "index": 2,
+     "hook_first_2s": 8.5,
+     "stands_alone": 9.5,
+     "emotional_payoff": 9.0,
+     "shareability": 8.5,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Actionable 10-second breath habit paired directly with the Aaronic Blessing makes a complete, highly shareable standalone devotional.",
+     "hook_line": "Try this 10-second pause today",
+     "title": "A 10-Second Prayer to Renew Your Strength"
+    }
+   },
+   "text": "Here is one thing to take into your day. The next time you feel your strength running out, stop for ten seconds, breathe, and say, Lord, renew my strength. That is all. Ten seconds. Let it become the way you wait on the Lord in the middle of a busy day. And now receive this blessing. The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee: The LORD lift up his countenance upon thee, and give thee peace. Go into this day renewed. In Jesus' name, amen.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 41.97,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 8.5,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 9.0,
+    "picture_quality": 8.5,
+    "edit_rhythm": 8.5,
+    "audio_clarity": 9.2,
+    "stands_alone": 9.0,
+    "ending_and_loop": 7.5,
+    "policy_safe": 10.0,
+    "overall": 8.7,
+    "issues": [
+     "00:00 - The foreground character cutout remains static while backgrounds change, which can feel repetitive across the full duration.",
+     "00:39 - The ending resolves clearly with 'amen' but does not create a seamless narrative loop back to the hook."
+    ],
+    "strongest_moment": "00:24 - Delivery of the priestly blessing (Numbers 6:24-26) accompanied by serene landscape background changes.",
+    "model": "gemini-3.8-flash",
+    "status": "PASS"
+   },
+   "publish": true
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "e58094e40be6cc0723b296c9e968d3c0063dd4114f070049df09395d00c9d5e3",
+   "seconds": 39.7,
+   "source_start": 528.509,
+   "source_end": 567.587,
+   "segments": [
+    "prayer-forgiveness",
+    "scripture-10"
+   ],
+   "hook": "Stop carrying yesterday's hurt today",
+   "title": "Prayer to Release Grudges Before Your Day Begins",
+   "reference": "Psalm 28:7 (KJV)",
+   "scenes": [
+    "bg-mountain-sunrise",
+    "bg-garden",
+    "bg-hills",
+    "bg-sunrise-field",
+    "bg-morning-path",
+    "bg-mountain-sunrise"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8629,
+    "measured_score": 0.8447,
+    "features": {
+     "opening_short": 0.6,
+     "opening_direct": 1.0,
+     "second_person": 0.396039603960396,
+     "scripture": 1.0,
+     "promise": 0.9900990099009901,
+     "resolution": 1.0,
+     "length_fit": 0.963119999999999
+    },
+    "rubric": {
+     "index": 4,
+     "hook_first_2s": 8.5,
+     "stands_alone": 9.0,
+     "emotional_payoff": 8.5,
+     "shareability": 9.0,
+     "loop_potential": 7.5,
+     "policy_safe": 10.0,
+     "reasons": "Honest opening about grudges and replaying painful words hits a very common emotional nerve with a clean release and Scripture.",
+     "hook_line": "Stop carrying yesterday's hurt today",
+     "title": "Prayer to Release Grudges Before Your Day Begins"
+    }
+   },
+   "text": "Father, if I am carrying a grudge into this day, I lay it down before you. You know the words that still sting and the person I keep replaying in my mind. I do not have to pretend it did not hurt. But I choose not to let it drain the strength you are giving me. Help me to forgive as you have forgiven me, and to speak with grace today. The LORD is my strength and my shield; my heart trusted in him, and I am helped: therefore my heart greatly rejoiceth; and with my song will I praise him.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 39.7,
+    "lufs": -14.6,
+    "true_peak_dbtp": -2.2,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 8.0,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 9.5,
+    "picture_quality": 7.5,
+    "edit_rhythm": 7.0,
+    "audio_clarity": 8.5,
+    "stands_alone": 9.0,
+    "ending_and_loop": 7.5,
+    "policy_safe": 10.0,
+    "overall": 8.0,
+    "issues": [
+     "00:00-00:40: The foreground figure cutout remains completely static while backgrounds swap behind him, creating a cutout sticker effect.",
+     "00:36: The 'Full prayer on the channel' prompt appears abruptly without transition."
+    ],
+    "strongest_moment": "00:26 when the scene transitions to the sunlit forest canopy as the reading of Psalm 28:7 begins.",
+    "model": "gemini-3.8-flash",
+    "status": "PASS"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "8643bad53c0fe13c8a8af4375a3b72fbd2241dd2223f3c5ae04817c4d091db4a",
+   "seconds": 53.93,
+   "source_start": 275.24,
+   "source_end": 328.541,
+   "segments": [
+    "prayer-body",
+    "scripture-6",
+    "reflection-4"
+   ],
+   "hook": "Tired before the day even starts?",
+   "title": "A Morning Prayer for the Physically Exhausted",
+   "reference": "Matthew 11:28 (KJV)",
+   "scenes": [
+    "bg-coffee-window",
+    "bg-eagle-cliffs",
+    "bg-wheat",
+    "bg-meadow",
+    "bg-sky",
+    "bg-river",
+    "bg-misty-valley",
+    "bg-coffee-window"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8528,
+    "measured_score": 0.8946,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.6521739130434782,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 1.0,
+     "length_fit": 0.4679600000000005
+    },
+    "rubric": {
+     "index": 0,
+     "hook_first_2s": 7.5,
+     "stands_alone": 8.5,
+     "emotional_payoff": 9.0,
+     "shareability": 8.0,
+     "loop_potential": 7.0,
+     "policy_safe": 9.5,
+     "reasons": "Begins with relatable physical exhaustion and concludes with a deeply comforting truth about inner rest beside Christ.",
+     "hook_line": "Tired before the day even starts?",
+     "title": "A Morning Prayer for the Physically Exhausted"
+    }
+   },
+   "text": "Lord, I give you my body. You see the aches, the short night, the energy that feels like it is already spent. Strengthen me physically for what this day asks. Help me to eat well, to rest when I can, and to treat this body as a gift and not a machine. Where there is pain or sickness, I ask for your healing touch. Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest. The rest Jesus offers is not only for the end of the day. It is a rest you can carry into the middle of it. You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone. He is yoked beside you, pulling with you.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 53.93,
+    "lufs": -15.0,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 6.2,
+    "captions_readable_and_synced": 6.8,
+    "text_clear_of_shorts_ui": 6.5,
+    "picture_quality": 5.8,
+    "edit_rhythm": 5.5,
+    "audio_clarity": 7.0,
+    "stands_alone": 6.8,
+    "ending_and_loop": 6.0,
+    "policy_safe": 7.2,
+    "overall": 6.4,
+    "issues": [
+     "Static foreground visual overlay reduces visual dynamism across background transitions.",
+     "Top callout banner near 00:50 slightly encroaches on upper interface margins."
+    ],
+    "strongest_moment": "00:26 citation of scripture with uplifting background visual shift.",
+    "model": "gemini-3.6-flash",
+    "status": "FAIL"
+   },
+   "publish": false
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}

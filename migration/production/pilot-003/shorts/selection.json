@@ -1,0 +1,1679 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-003",
+ "rubric_model": "gemini-3.8-flash",
+ "candidates_considered": 823,
+ "shortlist": [
+  {
+   "start": 804.619,
+   "end": 845.955,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "Here is one thing to take into your day.",
+     "start": 804.619,
+     "end": 807.819
+    },
+    {
+     "segment": "payoff",
+     "text": "The next time you feel your strength running out, stop for ten seconds, breathe, and say, Lord, renew my strength.",
+     "start": 807.999,
+     "end": 816.34
+    },
+    {
+     "segment": "payoff",
+     "text": "That is all.",
+     "start": 816.52,
+     "end": 817.949
+    },
+    {
+     "segment": "payoff",
+     "text": "Ten seconds.",
+     "start": 818.129,
+     "end": 819.623
+    },
+    {
+     "segment": "payoff",
+     "text": "Let it become the way you wait on the Lord in the middle of a busy day.",
+     "start": 819.803,
+     "end": 824.709
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing.",
+     "start": 826.089,
+     "end": 828.479
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD bless thee, and keep thee:",
+     "start": 828.659,
+     "end": 831.347
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD make his face shine upon thee, and be gracious unto thee:",
+     "start": 831.527,
+     "end": 836.305
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+     "start": 836.485,
+     "end": 841.008
+    },
+    {
+     "segment": "blessing",
+     "text": "Go into this day renewed.",
+     "start": 841.188,
+     "end": 843.321
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 843.501,
+     "end": 845.955
+    }
+   ],
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "reference": "Numbers 6:24-26 (KJV)",
+   "measured_score": 0.8838,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.41237113402061853,
+    "scripture": 1.0,
+    "promise": 0.7731958762886598,
+    "resolution": 1.0,
+    "length_fit": 0.9465599999999995
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Actionable 10-second breath habit paired directly with the Aaronic Blessing makes a complete, highly shareable standalone devotional.",
+    "hook_line": "Try this 10-second pause today",
+    "title": "A 10-Second Prayer to Renew Your Strength"
+   },
+   "final_score": 0.8885,
+   "hook": "Try this 10-second pause today",
+   "title": "A 10-Second Prayer to Renew Your Strength"
+  },
+  {
+   "start": 528.509,
+   "end": 567.587,
+   "sentences": [
+    {
+     "segment": "prayer-forgiveness",
+     "text": "Father, if I am carrying a grudge into this day, I lay it down before you.",
+     "start": 528.509,
+     "end": 534.205
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "You know the words that still sting and the person I keep replaying in my mind.",
+     "start": 534.385,
+     "end": 540.167
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "I do not have to pretend it did not hurt.",
+     "start": 540.347,
+     "end": 543.525
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "But I choose not to let it drain the strength you are giving me.",
+     "start": 543.705,
+     "end": 548.441
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "Help me to forgive as you have forgiven me, and to speak with grace today.",
+     "start": 548.621,
+     "end": 553.741
+    },
+    {
+     "segment": "scripture-10",
+     "text": "The LORD is my strength and my shield;",
+     "start": 555.121,
+     "end": 557.959
+    },
+    {
+     "segment": "scripture-10",
+     "text": "my heart trusted in him, and I am helped:",
+     "start": 558.139,
+     "end": 561.424
+    },
+    {
+     "segment": "scripture-10",
+     "text": "therefore my heart greatly rejoiceth;",
+     "start": 561.604,
+     "end": 564.676
+    },
+    {
+     "segment": "scripture-10",
+     "text": "and with my song will I praise him.",
+     "start": 564.856,
+     "end": 567.587
+    }
+   ],
+   "segments": [
+    "prayer-forgiveness",
+    "scripture-10"
+   ],
+   "reference": "Psalm 28:7 (KJV)",
+   "measured_score": 0.8447,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.396039603960396,
+    "scripture": 1.0,
+    "promise": 0.9900990099009901,
+    "resolution": 1.0,
+    "length_fit": 0.963119999999999
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 9.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Honest opening about grudges and replaying painful words hits a very common emotional nerve with a clean release and Scripture.",
+    "hook_line": "Stop carrying yesterday's hurt today",
+    "title": "Prayer to Release Grudges Before Your Day Begins"
+   },
+   "final_score": 0.8629,
+   "hook": "Stop carrying yesterday's hurt today",
+   "title": "Prayer to Release Grudges Before Your Day Begins"
+  },
+  {
+   "start": 275.24,
+   "end": 328.541,
+   "sentences": [
+    {
+     "segment": "prayer-body",
+     "text": "Lord, I give you my body.",
+     "start": 275.24,
+     "end": 277.48
+    },
+    {
+     "segment": "prayer-body",
+     "text": "You see the aches, the short night, the energy that feels like it is already spent.",
+     "start": 277.66,
+     "end": 283.889
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Strengthen me physically for what this day asks.",
+     "start": 284.069,
+     "end": 287.44
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Help me to eat well, to rest when I can, and to treat this body as a gift and not a machine.",
+     "start": 287.62,
+     "end": 294.767
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Where there is pain or sickness, I ask for your healing touch.",
+     "start": 294.947,
+     "end": 299.405
+    },
+    {
+     "segment": "scripture-6",
+     "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+     "start": 300.785,
+     "end": 307.377
+    },
+    {
+     "segment": "reflection-4",
+     "text": "The rest Jesus offers is not only for the end of the day.",
+     "start": 309.057,
+     "end": 313.623
+    },
+    {
+     "segment": "reflection-4",
+     "text": "It is a rest you can carry into the middle of it.",
+     "start": 313.803,
+     "end": 317.365
+    },
+    {
+     "segment": "reflection-4",
+     "text": "You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone.",
+     "start": 317.545,
+     "end": 325.652
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He is yoked beside you, pulling with you.",
+     "start": 325.832,
+     "end": 328.541
+    }
+   ],
+   "segments": [
+    "prayer-body",
+    "scripture-6",
+    "reflection-4"
+   ],
+   "reference": "Matthew 11:28 (KJV)",
+   "measured_score": 0.8946,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6521739130434782,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.4679600000000005
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 9.5,
+    "reasons": "Begins with relatable physical exhaustion and concludes with a deeply comforting truth about inner rest beside Christ.",
+    "hook_line": "Tired before the day even starts?",
+    "title": "A Morning Prayer for the Physically Exhausted"
+   },
+   "final_score": 0.8528,
+   "hook": "Tired before the day even starts?",
+   "title": "A Morning Prayer for the Physically Exhausted"
+  },
+  {
+   "start": 100.937,
+   "end": 145.115,
+   "sentences": [
+    {
+     "segment": "prayer-1",
+     "text": "I will not hide my tiredness from you.",
+     "start": 100.937,
+     "end": 103.86
+    },
+    {
+     "segment": "prayer-1",
+     "text": "I wait on you this morning.",
+     "start": 104.04,
+     "end": 106.301
+    },
+    {
+     "segment": "prayer-1",
+     "text": "Renew my strength.",
+     "start": 106.481,
+     "end": 108.209
+    },
+    {
+     "segment": "prayer-1",
+     "text": "Not the strength to do everything, but the strength to do the next right thing, and then the one after that.",
+     "start": 108.389,
+     "end": 115.685
+    },
+    {
+     "segment": "scripture-2",
+     "text": "Isaiah says it again, just two verses earlier.",
+     "start": 117.065,
+     "end": 121.012
+    },
+    {
+     "segment": "scripture-2",
+     "text": "He giveth power to the faint;",
+     "start": 121.192,
+     "end": 123.411
+    },
+    {
+     "segment": "scripture-2",
+     "text": "and to them that have no might he increaseth strength.",
+     "start": 123.591,
+     "end": 127.388
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Look at who receives the power.",
+     "start": 129.068,
+     "end": 131.393
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not the strong.",
+     "start": 131.573,
+     "end": 133.195
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not the people who have it all together.",
+     "start": 133.375,
+     "end": 136.233
+    },
+    {
+     "segment": "reflection-2",
+     "text": "The faint.",
+     "start": 136.413,
+     "end": 137.629
+    },
+    {
+     "segment": "reflection-2",
+     "text": "The ones with no might left.",
+     "start": 137.809,
+     "end": 140.071
+    },
+    {
+     "segment": "reflection-2",
+     "text": "If that describes you this morning, you are not disqualified.",
+     "start": 140.251,
+     "end": 145.115
+    }
+   ],
+   "segments": [
+    "prayer-1",
+    "scripture-2",
+    "reflection-2"
+   ],
+   "reference": "Isaiah 40:29 (KJV)",
+   "measured_score": 0.8051,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.41237113402061853,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.8328799999999995
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Strong opening confession of fatigue. Excellent exposition of Isaiah 40:29 showing God meets the weak, not the self-sufficient.",
+    "hook_line": "Don't hide your tiredness from God",
+    "title": "A Honest Prayer When You Feel Weak"
+   },
+   "final_score": 0.832
+  },
+  {
+   "start": 607.497,
+   "end": 652.664,
+   "sentences": [
+    {
+     "segment": "prayer-home",
+     "text": "Let your presence fill every room.",
+     "start": 607.497,
+     "end": 610.207
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Breathe in again, slowly.",
+     "start": 611.587,
+     "end": 613.784
+    },
+    {
+     "segment": "stillness-2",
+     "text": "And let it go.",
+     "start": 613.964,
+     "end": 615.521
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Rest in his presence for a moment.",
+     "start": 615.701,
+     "end": 618.197
+    },
+    {
+     "segment": "declaration",
+     "text": "Now say these words with me, out loud if you can, or quietly in your heart.",
+     "start": 624.377,
+     "end": 630.287
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my strength.",
+     "start": 630.467,
+     "end": 632.579
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not empty, because he fills me.",
+     "start": 632.759,
+     "end": 635.937
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone, because he goes with me.",
+     "start": 636.117,
+     "end": 639.467
+    },
+    {
+     "segment": "declaration",
+     "text": "I can do all things through Christ which strengtheneth me.",
+     "start": 639.647,
+     "end": 643.615
+    },
+    {
+     "segment": "declaration",
+     "text": "The joy of the Lord is my strength today.",
+     "start": 643.795,
+     "end": 647.016
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I can do all things through Christ which strengtheneth me.",
+     "start": 648.696,
+     "end": 652.664
+    }
+   ],
+   "segments": [
+    "prayer-home",
+    "stillness-2",
+    "declaration",
+    "scripture-11"
+   ],
+   "reference": "Philippians 4:13 (KJV)",
+   "measured_score": 0.7905,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.3409090909090909,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7933199999999988
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Guided breathwork combined with spoken confession creates high participation and immediate emotional grounding.",
+    "hook_line": "Breathe and say this out loud",
+    "title": "A Guided Morning Declaration of Strength"
+   },
+   "final_score": 0.8312
+  },
+  {
+   "start": 694.961,
+   "end": 735.356,
+   "sentences": [
+    {
+     "segment": "prayer-joy",
+     "text": "When things go wrong, let me remember that your love for me has not changed.",
+     "start": 694.961,
+     "end": 700.359
+    },
+    {
+     "segment": "scripture-13",
+     "text": "And let the beauty of the LORD our God be upon us:",
+     "start": 701.739,
+     "end": 705.344
+    },
+    {
+     "segment": "scripture-13",
+     "text": "and establish thou the work of our hands upon us;",
+     "start": 705.524,
+     "end": 709.321
+    },
+    {
+     "segment": "scripture-13",
+     "text": "yea, the work of our hands establish thou it.",
+     "start": 709.501,
+     "end": 712.915
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you, Father, for this new morning.",
+     "start": 714.595,
+     "end": 717.603
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "For breath in my lungs.",
+     "start": 717.783,
+     "end": 719.724
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "For another chance to love, to work, to begin again.",
+     "start": 719.904,
+     "end": 723.808
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you for the strength you have given me in the past, on days I did not think I would get through.",
+     "start": 723.988,
+     "end": 730.836
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "You carried me then.",
+     "start": 731.016,
+     "end": 732.808
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "I trust you to carry me now.",
+     "start": 732.988,
+     "end": 735.356
+    }
+   ],
+   "segments": [
+    "prayer-joy",
+    "scripture-13",
+    "prayer-thanks"
+   ],
+   "reference": "Psalm 90:17 (KJV)",
+   "measured_score": 0.7865,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.594059405940594,
+    "scripture": 1.0,
+    "promise": 0.9900990099009901,
+    "resolution": 0.4,
+    "length_fit": 0.9842000000000007
+   },
+   "rubric": {
+    "index": 14,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Warm, reassuring remembrance of God's past faithfulness, ending on a strong note of trust that loops cleanly.",
+    "hook_line": "He carried you then, he will now",
+    "title": "Remembering God's Faithfulness This Morning"
+   },
+   "final_score": 0.8296
+  },
+  {
+   "start": 104.04,
+   "end": 145.115,
+   "sentences": [
+    {
+     "segment": "prayer-1",
+     "text": "I wait on you this morning.",
+     "start": 104.04,
+     "end": 106.301
+    },
+    {
+     "segment": "prayer-1",
+     "text": "Renew my strength.",
+     "start": 106.481,
+     "end": 108.209
+    },
+    {
+     "segment": "prayer-1",
+     "text": "Not the strength to do everything, but the strength to do the next right thing, and then the one after that.",
+     "start": 108.389,
+     "end": 115.685
+    },
+    {
+     "segment": "scripture-2",
+     "text": "Isaiah says it again, just two verses earlier.",
+     "start": 117.065,
+     "end": 121.012
+    },
+    {
+     "segment": "scripture-2",
+     "text": "He giveth power to the faint;",
+     "start": 121.192,
+     "end": 123.411
+    },
+    {
+     "segment": "scripture-2",
+     "text": "and to them that have no might he increaseth strength.",
+     "start": 123.591,
+     "end": 127.388
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Look at who receives the power.",
+     "start": 129.068,
+     "end": 131.393
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not the strong.",
+     "start": 131.573,
+     "end": 133.195
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Not the people who have it all together.",
+     "start": 133.375,
+     "end": 136.233
+    },
+    {
+     "segment": "reflection-2",
+     "text": "The faint.",
+     "start": 136.413,
+     "end": 137.629
+    },
+    {
+     "segment": "reflection-2",
+     "text": "The ones with no might left.",
+     "start": 137.809,
+     "end": 140.071
+    },
+    {
+     "segment": "reflection-2",
+     "text": "If that describes you this morning, you are not disqualified.",
+     "start": 140.251,
+     "end": 145.115
+    }
+   ],
+   "segments": [
+    "prayer-1",
+    "scripture-2",
+    "reflection-2"
+   ],
+   "reference": "Isaiah 40:29 (KJV)",
+   "measured_score": 0.8063,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.33707865168539325,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9569999999999999
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Realistic focus on doing the next right thing rather than everything; ends somewhat abruptly on an open conditional thought.",
+    "hook_line": "Strength for the next right step",
+    "title": "God Gives Strength to the Weary"
+   },
+   "final_score": 0.8225
+  },
+  {
+   "start": 300.785,
+   "end": 328.541,
+   "sentences": [
+    {
+     "segment": "scripture-6",
+     "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+     "start": 300.785,
+     "end": 307.377
+    },
+    {
+     "segment": "reflection-4",
+     "text": "The rest Jesus offers is not only for the end of the day.",
+     "start": 309.057,
+     "end": 313.623
+    },
+    {
+     "segment": "reflection-4",
+     "text": "It is a rest you can carry into the middle of it.",
+     "start": 313.803,
+     "end": 317.365
+    },
+    {
+     "segment": "reflection-4",
+     "text": "You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone.",
+     "start": 317.545,
+     "end": 325.652
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He is yoked beside you, pulling with you.",
+     "start": 325.832,
+     "end": 328.541
+    }
+   ],
+   "segments": [
+    "scripture-6",
+    "reflection-4"
+   ],
+   "reference": "Matthew 11:28 (KJV)",
+   "measured_score": 0.8026,
+   "features": {
+    "opening_short": 0.2,
+    "opening_direct": 1.0,
+    "second_person": 0.8108108108108109,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.5102399999999989
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Direct Scripture quote opening can feel generic, but the practical insight about inner rest while busy is concise and potent.",
+    "hook_line": "He is carrying the weight too",
+    "title": "How to Carry Rest Into a Busy Day"
+   },
+   "final_score": 0.821
+  },
+  {
+   "start": 534.385,
+   "end": 567.587,
+   "sentences": [
+    {
+     "segment": "prayer-forgiveness",
+     "text": "You know the words that still sting and the person I keep replaying in my mind.",
+     "start": 534.385,
+     "end": 540.167
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "I do not have to pretend it did not hurt.",
+     "start": 540.347,
+     "end": 543.525
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "But I choose not to let it drain the strength you are giving me.",
+     "start": 543.705,
+     "end": 548.441
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "Help me to forgive as you have forgiven me, and to speak with grace today.",
+     "start": 548.621,
+     "end": 553.741
+    },
+    {
+     "segment": "scripture-10",
+     "text": "The LORD is my strength and my shield;",
+     "start": 555.121,
+     "end": 557.959
+    },
+    {
+     "segment": "scripture-10",
+     "text": "my heart trusted in him, and I am helped:",
+     "start": 558.139,
+     "end": 561.424
+    },
+    {
+     "segment": "scripture-10",
+     "text": "therefore my heart greatly rejoiceth;",
+     "start": 561.604,
+     "end": 564.676
+    },
+    {
+     "segment": "scripture-10",
+     "text": "and with my song will I praise him.",
+     "start": 564.856,
+     "end": 567.587
+    }
+   ],
+   "segments": [
+    "prayer-forgiveness",
+    "scripture-10"
+   ],
+   "reference": "Psalm 28:7 (KJV)",
+   "measured_score": 0.8157,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.3529411764705882,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.72808
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 8.0,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.0,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Very relatable starting line about words that sting, though missing the initial prayer address present in moment 4.",
+    "hook_line": "Let go of words that sting",
+    "title": "How to Let Go of Hurtful Words"
+   },
+   "final_score": 0.8113
+  },
+  {
+   "start": 277.66,
+   "end": 328.541,
+   "sentences": [
+    {
+     "segment": "prayer-body",
+     "text": "You see the aches, the short night, the energy that feels like it is already spent.",
+     "start": 277.66,
+     "end": 283.889
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Strengthen me physically for what this day asks.",
+     "start": 284.069,
+     "end": 287.44
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Help me to eat well, to rest when I can, and to treat this body as a gift and not a machine.",
+     "start": 287.62,
+     "end": 294.767
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Where there is pain or sickness, I ask for your healing touch.",
+     "start": 294.947,
+     "end": 299.405
+    },
+    {
+     "segment": "scripture-6",
+     "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+     "start": 300.785,
+     "end": 307.377
+    },
+    {
+     "segment": "reflection-4",
+     "text": "The rest Jesus offers is not only for the end of the day.",
+     "start": 309.057,
+     "end": 313.623
+    },
+    {
+     "segment": "reflection-4",
+     "text": "It is a rest you can carry into the middle of it.",
+     "start": 313.803,
+     "end": 317.365
+    },
+    {
+     "segment": "reflection-4",
+     "text": "You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone.",
+     "start": 317.545,
+     "end": 325.652
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He is yoked beside you, pulling with you.",
+     "start": 325.832,
+     "end": 328.541
+    }
+   ],
+   "segments": [
+    "prayer-body",
+    "scripture-6",
+    "reflection-4"
+   ],
+   "reference": "Matthew 11:28 (KJV)",
+   "measured_score": 0.8374,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.6060606060606061,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.5647600000000011
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 7.5,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 6.5,
+    "policy_safe": 9.0,
+    "reasons": "Captures low energy nicely, though lacks the explicit 'Lord, I give you my body' greeting found in moment 0.",
+    "hook_line": "When your energy is already spent",
+    "title": "When You Wake Up Already Exhausted"
+   },
+   "final_score": 0.8
+  },
+  {
+   "start": 294.947,
+   "end": 328.541,
+   "sentences": [
+    {
+     "segment": "prayer-body",
+     "text": "Where there is pain or sickness, I ask for your healing touch.",
+     "start": 294.947,
+     "end": 299.405
+    },
+    {
+     "segment": "scripture-6",
+     "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+     "start": 300.785,
+     "end": 307.377
+    },
+    {
+     "segment": "reflection-4",
+     "text": "The rest Jesus offers is not only for the end of the day.",
+     "start": 309.057,
+     "end": 313.623
+    },
+    {
+     "segment": "reflection-4",
+     "text": "It is a rest you can carry into the middle of it.",
+     "start": 313.803,
+     "end": 317.365
+    },
+    {
+     "segment": "reflection-4",
+     "text": "You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone.",
+     "start": 317.545,
+     "end": 325.652
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He is yoked beside you, pulling with you.",
+     "start": 325.832,
+     "end": 328.541
+    }
+   ],
+   "segments": [
+    "prayer-body",
+    "scripture-6",
+    "reflection-4"
+   ],
+   "reference": "Matthew 11:28 (KJV)",
+   "measured_score": 0.8865,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.813953488372093,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.7437599999999998
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 6.0,
+    "stands_alone": 7.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 6.5,
+    "policy_safe": 9.0,
+    "reasons": "Starts mid-thought on sickness/pain which softens the hook, but delivers a strong explanation of mid-day spiritual rest.",
+    "hook_line": "Rest in the middle of busy",
+    "title": "Finding God's Rest in a Busy Day"
+   },
+   "final_score": 0.7996
+  },
+  {
+   "start": 516.688,
+   "end": 567.587,
+   "sentences": [
+    {
+     "segment": "prayer-decisions",
+     "text": "Close the doors that should be closed and open the ones you have prepared.",
+     "start": 516.688,
+     "end": 521.851
+    },
+    {
+     "segment": "prayer-decisions",
+     "text": "And if I cannot see the whole path, give me light enough for the next step.",
+     "start": 522.031,
+     "end": 527.129
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "Father, if I am carrying a grudge into this day, I lay it down before you.",
+     "start": 528.509,
+     "end": 534.205
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "You know the words that still sting and the person I keep replaying in my mind.",
+     "start": 534.385,
+     "end": 540.167
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "I do not have to pretend it did not hurt.",
+     "start": 540.347,
+     "end": 543.525
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "But I choose not to let it drain the strength you are giving me.",
+     "start": 543.705,
+     "end": 548.441
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "Help me to forgive as you have forgiven me, and to speak with grace today.",
+     "start": 548.621,
+     "end": 553.741
+    },
+    {
+     "segment": "scripture-10",
+     "text": "The LORD is my strength and my shield;",
+     "start": 555.121,
+     "end": 557.959
+    },
+    {
+     "segment": "scripture-10",
+     "text": "my heart trusted in him, and I am helped:",
+     "start": 558.139,
+     "end": 561.424
+    },
+    {
+     "segment": "scripture-10",
+     "text": "therefore my heart greatly rejoiceth;",
+     "start": 561.604,
+     "end": 564.676
+    },
+    {
+     "segment": "scripture-10",
+     "text": "and with my song will I praise him.",
+     "start": 564.856,
+     "end": 567.587
+    }
+   ],
+   "segments": [
+    "prayer-decisions",
+    "prayer-forgiveness",
+    "scripture-10"
+   ],
+   "reference": "Psalm 28:7 (KJV)",
+   "measured_score": 0.7991,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.38167938931297707,
+    "scripture": 1.0,
+    "promise": 0.9541984732824428,
+    "resolution": 1.0,
+    "length_fit": 0.56404
+   },
+   "rubric": {
+    "index": 11,
+    "hook_first_2s": 6.5,
+    "stands_alone": 7.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Combines guidance for closed doors with letting go of grudges; slightly disjointed compared to focused forgiveness cuts.",
+    "hook_line": "Light for your next small step",
+    "title": "Prayer for Guidance and Letting Go"
+   },
+   "final_score": 0.7796
+  },
+  {
+   "start": 241.916,
+   "end": 283.889,
+   "sentences": [
+    {
+     "segment": "prayer-mind",
+     "text": "Father, I give you my mind.",
+     "start": 241.916,
+     "end": 244.391
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "You know the thoughts that started running before my feet touched the floor.",
+     "start": 244.571,
+     "end": 249.285
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Quiet the noise.",
+     "start": 249.465,
+     "end": 251.172
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Gather my scattered attention.",
+     "start": 251.352,
+     "end": 253.656
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Where I have been rehearsing worst cases, teach me to rehearse your faithfulness instead.",
+     "start": 253.836,
+     "end": 260.108
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Give me a clear head for the decisions I have to make today.",
+     "start": 260.288,
+     "end": 264.661
+    },
+    {
+     "segment": "scripture-5",
+     "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee:",
+     "start": 266.041,
+     "end": 271.183
+    },
+    {
+     "segment": "scripture-5",
+     "text": "because he trusteth in thee.",
+     "start": 271.363,
+     "end": 273.56
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Lord, I give you my body.",
+     "start": 275.24,
+     "end": 277.48
+    },
+    {
+     "segment": "prayer-body",
+     "text": "You see the aches, the short night, the energy that feels like it is already spent.",
+     "start": 277.66,
+     "end": 283.889
+    }
+   ],
+   "segments": [
+    "prayer-mind",
+    "scripture-5",
+    "prayer-body"
+   ],
+   "reference": "Isaiah 26:3 (KJV)",
+   "measured_score": 0.7865,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5376344086021505,
+    "scripture": 1.0,
+    "promise": 0.5376344086021505,
+    "resolution": 0.4,
+    "length_fit": 0.9210799999999995
+   },
+   "rubric": {
+    "index": 13,
+    "hook_first_2s": 8.5,
+    "stands_alone": 7.0,
+    "emotional_payoff": 7.5,
+    "shareability": 7.5,
+    "loop_potential": 5.5,
+    "policy_safe": 10.0,
+    "reasons": "Fantastic hook on racing thoughts before feet hit the floor, but trails off abruptly into a new topic about physical aches at the end.",
+    "hook_line": "Quiet racing thoughts before getting up",
+    "title": "Prayer for a Racing Mind in the Morning"
+   },
+   "final_score": 0.7746
+  },
+  {
+   "start": 140.251,
+   "end": 183.047,
+   "sentences": [
+    {
+     "segment": "reflection-2",
+     "text": "If that describes you this morning, you are not disqualified.",
+     "start": 140.251,
+     "end": 145.115
+    },
+    {
+     "segment": "reflection-2",
+     "text": "You are exactly the person this promise was written for.",
+     "start": 145.295,
+     "end": 149.455
+    },
+    {
+     "segment": "scripture-3",
+     "text": "David prayed like this at the start of his days.",
+     "start": 150.835,
+     "end": 154.461
+    },
+    {
+     "segment": "scripture-3",
+     "text": "My voice shalt thou hear in the morning, O LORD;",
+     "start": 154.641,
+     "end": 158.183
+    },
+    {
+     "segment": "scripture-3",
+     "text": "in the morning will I direct my prayer unto thee, and will look up.",
+     "start": 158.363,
+     "end": 162.907
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Lord, like David, I direct my prayer to you before anything else.",
+     "start": 164.587,
+     "end": 169.621
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Hear my voice this morning.",
+     "start": 169.801,
+     "end": 172.127
+    },
+    {
+     "segment": "prayer-2",
+     "text": "I lift my eyes from the problems in front of me and I look up.",
+     "start": 172.307,
+     "end": 176.957
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Remind me that you are above this day, and that nothing in it will surprise you.",
+     "start": 177.137,
+     "end": 183.047
+    }
+   ],
+   "segments": [
+    "reflection-2",
+    "scripture-3",
+    "prayer-2"
+   ],
+   "reference": "Psalm 5:3 (KJV)",
+   "measured_score": 0.8516,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.588235294117647,
+    "scripture": 1.0,
+    "promise": 0.24509803921568626,
+    "resolution": 1.0,
+    "length_fit": 0.8881600000000003
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 6.5,
+    "stands_alone": 6.0,
+    "emotional_payoff": 7.5,
+    "shareability": 6.5,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Starts with 'If that describes you', signaling missing context. The prayer itself resolves well into perspective on God.",
+    "hook_line": "Look up before you look down",
+    "title": "Start Your Morning Looking Up"
+   },
+   "final_score": 0.0
+  },
+  {
+   "start": 145.295,
+   "end": 183.047,
+   "sentences": [
+    {
+     "segment": "reflection-2",
+     "text": "You are exactly the person this promise was written for.",
+     "start": 145.295,
+     "end": 149.455
+    },
+    {
+     "segment": "scripture-3",
+     "text": "David prayed like this at the start of his days.",
+     "start": 150.835,
+     "end": 154.461
+    },
+    {
+     "segment": "scripture-3",
+     "text": "My voice shalt thou hear in the morning, O LORD;",
+     "start": 154.641,
+     "end": 158.183
+    },
+    {
+     "segment": "scripture-3",
+     "text": "in the morning will I direct my prayer unto thee, and will look up.",
+     "start": 158.363,
+     "end": 162.907
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Lord, like David, I direct my prayer to you before anything else.",
+     "start": 164.587,
+     "end": 169.621
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Hear my voice this morning.",
+     "start": 169.801,
+     "end": 172.127
+    },
+    {
+     "segment": "prayer-2",
+     "text": "I lift my eyes from the problems in front of me and I look up.",
+     "start": 172.307,
+     "end": 176.957
+    },
+    {
+     "segment": "prayer-2",
+     "text": "Remind me that you are above this day, and that nothing in it will surprise you.",
+     "start": 177.137,
+     "end": 183.047
+    }
+   ],
+   "segments": [
+    "reflection-2",
+    "scripture-3",
+    "prayer-2"
+   ],
+   "reference": "Psalm 5:3 (KJV)",
+   "measured_score": 0.8334,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.43478260869565216,
+    "scripture": 1.0,
+    "promise": 0.2717391304347826,
+    "resolution": 1.0,
+    "length_fit": 0.9100800000000004
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 6.5,
+    "stands_alone": 5.5,
+    "emotional_payoff": 7.0,
+    "shareability": 6.0,
+    "loop_potential": 5.5,
+    "policy_safe": 10.0,
+    "reasons": "Opening phrase clearly refers to an unstated premise. The prayer itself is solid but feels clipped.",
+    "hook_line": "God is not surprised today",
+    "title": "Give God Your First Morning Thought"
+   },
+   "final_score": 0.0
+  }
+ ],
+ "chosen": [
+  {
+   "start": 804.619,
+   "end": 845.955,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "Here is one thing to take into your day.",
+     "start": 804.619,
+     "end": 807.819
+    },
+    {
+     "segment": "payoff",
+     "text": "The next time you feel your strength running out, stop for ten seconds, breathe, and say, Lord, renew my strength.",
+     "start": 807.999,
+     "end": 816.34
+    },
+    {
+     "segment": "payoff",
+     "text": "That is all.",
+     "start": 816.52,
+     "end": 817.949
+    },
+    {
+     "segment": "payoff",
+     "text": "Ten seconds.",
+     "start": 818.129,
+     "end": 819.623
+    },
+    {
+     "segment": "payoff",
+     "text": "Let it become the way you wait on the Lord in the middle of a busy day.",
+     "start": 819.803,
+     "end": 824.709
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing.",
+     "start": 826.089,
+     "end": 828.479
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD bless thee, and keep thee:",
+     "start": 828.659,
+     "end": 831.347
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD make his face shine upon thee, and be gracious unto thee:",
+     "start": 831.527,
+     "end": 836.305
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+     "start": 836.485,
+     "end": 841.008
+    },
+    {
+     "segment": "blessing",
+     "text": "Go into this day renewed.",
+     "start": 841.188,
+     "end": 843.321
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 843.501,
+     "end": 845.955
+    }
+   ],
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "reference": "Numbers 6:24-26 (KJV)",
+   "measured_score": 0.8838,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.41237113402061853,
+    "scripture": 1.0,
+    "promise": 0.7731958762886598,
+    "resolution": 1.0,
+    "length_fit": 0.9465599999999995
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Actionable 10-second breath habit paired directly with the Aaronic Blessing makes a complete, highly shareable standalone devotional.",
+    "hook_line": "Try this 10-second pause today",
+    "title": "A 10-Second Prayer to Renew Your Strength"
+   },
+   "final_score": 0.8885,
+   "hook": "Try this 10-second pause today",
+   "title": "A 10-Second Prayer to Renew Your Strength"
+  },
+  {
+   "start": 528.509,
+   "end": 567.587,
+   "sentences": [
+    {
+     "segment": "prayer-forgiveness",
+     "text": "Father, if I am carrying a grudge into this day, I lay it down before you.",
+     "start": 528.509,
+     "end": 534.205
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "You know the words that still sting and the person I keep replaying in my mind.",
+     "start": 534.385,
+     "end": 540.167
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "I do not have to pretend it did not hurt.",
+     "start": 540.347,
+     "end": 543.525
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "But I choose not to let it drain the strength you are giving me.",
+     "start": 543.705,
+     "end": 548.441
+    },
+    {
+     "segment": "prayer-forgiveness",
+     "text": "Help me to forgive as you have forgiven me, and to speak with grace today.",
+     "start": 548.621,
+     "end": 553.741
+    },
+    {
+     "segment": "scripture-10",
+     "text": "The LORD is my strength and my shield;",
+     "start": 555.121,
+     "end": 557.959
+    },
+    {
+     "segment": "scripture-10",
+     "text": "my heart trusted in him, and I am helped:",
+     "start": 558.139,
+     "end": 561.424
+    },
+    {
+     "segment": "scripture-10",
+     "text": "therefore my heart greatly rejoiceth;",
+     "start": 561.604,
+     "end": 564.676
+    },
+    {
+     "segment": "scripture-10",
+     "text": "and with my song will I praise him.",
+     "start": 564.856,
+     "end": 567.587
+    }
+   ],
+   "segments": [
+    "prayer-forgiveness",
+    "scripture-10"
+   ],
+   "reference": "Psalm 28:7 (KJV)",
+   "measured_score": 0.8447,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.396039603960396,
+    "scripture": 1.0,
+    "promise": 0.9900990099009901,
+    "resolution": 1.0,
+    "length_fit": 0.963119999999999
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 9.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Honest opening about grudges and replaying painful words hits a very common emotional nerve with a clean release and Scripture.",
+    "hook_line": "Stop carrying yesterday's hurt today",
+    "title": "Prayer to Release Grudges Before Your Day Begins"
+   },
+   "final_score": 0.8629,
+   "hook": "Stop carrying yesterday's hurt today",
+   "title": "Prayer to Release Grudges Before Your Day Begins"
+  },
+  {
+   "start": 275.24,
+   "end": 328.541,
+   "sentences": [
+    {
+     "segment": "prayer-body",
+     "text": "Lord, I give you my body.",
+     "start": 275.24,
+     "end": 277.48
+    },
+    {
+     "segment": "prayer-body",
+     "text": "You see the aches, the short night, the energy that feels like it is already spent.",
+     "start": 277.66,
+     "end": 283.889
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Strengthen me physically for what this day asks.",
+     "start": 284.069,
+     "end": 287.44
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Help me to eat well, to rest when I can, and to treat this body as a gift and not a machine.",
+     "start": 287.62,
+     "end": 294.767
+    },
+    {
+     "segment": "prayer-body",
+     "text": "Where there is pain or sickness, I ask for your healing touch.",
+     "start": 294.947,
+     "end": 299.405
+    },
+    {
+     "segment": "scripture-6",
+     "text": "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+     "start": 300.785,
+     "end": 307.377
+    },
+    {
+     "segment": "reflection-4",
+     "text": "The rest Jesus offers is not only for the end of the day.",
+     "start": 309.057,
+     "end": 313.623
+    },
+    {
+     "segment": "reflection-4",
+     "text": "It is a rest you can carry into the middle of it.",
+     "start": 313.803,
+     "end": 317.365
+    },
+    {
+     "segment": "reflection-4",
+     "text": "You can be busy and still be at rest on the inside, because the weight is no longer on your shoulders alone.",
+     "start": 317.545,
+     "end": 325.652
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He is yoked beside you, pulling with you.",
+     "start": 325.832,
+     "end": 328.541
+    }
+   ],
+   "segments": [
+    "prayer-body",
+    "scripture-6",
+    "reflection-4"
+   ],
+   "reference": "Matthew 11:28 (KJV)",
+   "measured_score": 0.8946,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6521739130434782,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.4679600000000005
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 9.5,
+    "reasons": "Begins with relatable physical exhaustion and concludes with a deeply comforting truth about inner rest beside Christ.",
+    "hook_line": "Tired before the day even starts?",
+    "title": "A Morning Prayer for the Physically Exhausted"
+   },
+   "final_score": 0.8528,
+   "hook": "Tired before the day even starts?",
+   "title": "A Morning Prayer for the Physically Exhausted"
+  }
+ ]
+}
