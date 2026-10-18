@@ -179,29 +179,27 @@ def holds(script, timeline, total):
     plan's backgrounds in order (never the same one twice in a row)."""
     overlay, backgrounds = script["overlay"], script["backgrounds"]
     plan = [{"image": overlay["title_image"], "start": 0.0, "figure": False}]
-    last, k = overlay["title_card_seconds"], 0
-    plan.append({"image": backgrounds[0], "start": last, "figure": True})
+    last = overlay["title_card_seconds"]
+    plan.append({"start": last, "figure": True})
     for s in timeline["sentences"]:
         if s["start"] - last >= BACKGROUND_TARGET and total - s["start"] > BACKGROUND_TARGET / 2:
-            k += 1
-            plan.append({"image": backgrounds[k % len(backgrounds)], "start": s["start"], "figure": True})
+            plan.append({"start": s["start"], "figure": True})
             last = s["start"]
     for a, b in zip(plan, plan[1:]):
         a["end"] = b["start"]
     plan[-1]["end"] = total
-    # no background held longer than HOLD_MAX: split long holds evenly with new backgrounds
+    # no background held longer than HOLD_MAX: split long holds evenly
     out = [plan[0]]
     for h in plan[1:]:
         parts = max(1, -(-(h["end"] - h["start"]) // HOLD_MAX))
         step = (h["end"] - h["start"]) / parts
         for p in range(int(parts)):
-            if p:
-                k += 1
-                if backgrounds[k % len(backgrounds)] == out[-1]["image"]:
-                    k += 1
-            image = h["image"] if p == 0 else backgrounds[k % len(backgrounds)]
-            out.append({"image": image, "start": round(h["start"] + p * step, 3),
+            out.append({"image": None, "start": round(h["start"] + p * step, 3),
                         "end": round(h["start"] + (p + 1) * step, 3), "figure": True})
+    # images assigned once, in plan order over the final holds: choosing them before the split let a split
+    # piece and the next hold get the same background (pilot-004, QA FAIL 2026-10-18)
+    for j, h in enumerate(out[1:]):
+        h["image"] = backgrounds[j % len(backgrounds)]
     return out
 
 
@@ -236,7 +234,10 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
          f"afade=t=in:d=2,afade=t=out:st={total - 4}:d=4[m];"
          "[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck];"
          "[v][duck]amix=inputs=2:normalize=0:duration=first,"
-         "loudnorm=I=-15:TP=-2:LRA=11:linear=true,alimiter=limit=0.75:attack=5:release=50:level=false[out]",
+         "loudnorm=I=-15:TP=-2:LRA=11:linear=true,alimiter=limit=0.75:attack=5:release=50:level=false,"
+         # true-peak safety: the sample limiter misses inter-sample peaks (pilot-004: -0.2 dBTP after AAC from one
+         # plosive at 1087 s); limiting at 4x oversampling gave -2.8 dBTP on that audio, loudness -15.6 LUFS
+         f"aresample=192000,alimiter=limit=0.70:attack=1:release=100:level=false,aresample={RATE_OUT}[out]",
          "-map", "[out]", "-ar", str(RATE_OUT), str(mix)])
     mark("mix")
     plan = holds(script, timeline, total)
