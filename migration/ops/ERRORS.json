@@ -160,6 +160,16 @@
     "file": "migration/publish/test_preflight.py",
     "contains": "def test_late_approval_publishes_now_never_blocks"
    }
+  },
+  {
+   "id": "E17",
+   "date": "2026-10-18",
+   "error": "Dot cards #119/#120 had deadlines later than publish_at - 72 h, so the content runway would alert before the card was even due",
+   "fix": "Cards rewritten with deadline = publish_at - 72 h at the latest; card_check.py lints every script card before sending and on every Dot PR",
+   "antidote": {
+    "file": "migration/ops/test_card_check.py",
+    "contains": "def test_deadline_after_the_runway_fails"
+   }
   }
  ]
 }
