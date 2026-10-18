@@ -1,6 +1,6 @@
 {
  "version": "vidiq-ledger-v1",
- "rule": "<= 1 research call a day (owner, 2026-10-18); more only announced first and approved",
+ "rule": "30-day plan (owner, 2026-10-18): <= 10 research calls a day, <= 2,000 credits per credit cycle; more only announced first and approved",
  "calls": [
   {
    "date": "2026-10-18",
@@ -17,7 +17,8 @@
    "credits": 150,
    "purpose": "pre-registered validation vs our panel demand (made before the owner's 1-call/day rule; counted, not repeated without notice)",
    "saved_to": "evidence/vidiq/validation-20261018.json",
-   "approved_by_owner": false
+   "approved_by_owner": false,
+   "count": 30
   },
   {
    "date": "2026-10-18",

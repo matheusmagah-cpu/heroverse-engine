@@ -35,13 +35,15 @@ class Market(unittest.TestCase):
             p.write_text(json.dumps(opinion(data_as_of="2026-09-01T00:00:00Z")))
             self.assertEqual(me.summary(p, NOW)["status"], "STALE")
 
-    def test_one_research_call_a_day(self):
-        led = {"calls": [{"date": "2026-10-19", "kind": "research"}]}
-        self.assertFalse(me.budget(led, "2026-10-19")["may_call"])
+    def test_daily_and_cycle_caps(self):
+        led = {"calls": [{"date": "2026-10-19", "kind": "research", "count": 10, "credits": 50}]}
+        self.assertFalse(me.budget(led, "2026-10-19")["may_call"])                 # 10 calls used today
         self.assertTrue(me.budget(led, "2026-10-20")["may_call"])
-        led["calls"].append({"date": "2026-10-20", "kind": "research", "approved_by_owner": True})
-        self.assertTrue(me.budget(led, "2026-10-20")["may_call"])            # announced and approved extra
-        self.assertTrue(me.budget({"calls": [{"date": "2026-10-20", "kind": "account"}]}, "2026-10-20")["may_call"])
+        led["calls"].append({"date": "2026-10-20", "kind": "research", "count": 40, "credits": 200, "approved_by_owner": True})
+        self.assertTrue(me.budget(led, "2026-10-20")["may_call"])                  # announced and approved extra
+        full = {"calls": [{"date": "2026-10-25", "kind": "research", "count": 1, "credits": 1998}]}
+        self.assertFalse(me.budget(full, "2026-10-26")["may_call"])                # cycle cap
+        self.assertTrue(me.budget({"calls": [{"date": "2026-10-20", "kind": "account", "credits": 0}]}, "2026-10-20")["may_call"])
 
 
 if __name__ == "__main__":
