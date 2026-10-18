@@ -44,6 +44,18 @@ def tag_chars(tags):
     return sum(len(t) + (2 if " " in t else 0) for t in tags) + max(len(tags) - 1, 0)
 
 
+LATE = timedelta(minutes=20)  # same margin as publish.yml: closer than this to the slot, the video goes public now
+
+
+def effective_publish_at(pilot_dir, now=None):
+    """The time publish.yml will use: the schedule's time while at least LATE ahead, else "" (public now). A late
+    approval is still a publication the same day, never a block."""
+    now = now or datetime.now(timezone.utc)
+    p = Path(pilot_dir) / "schedule.json"
+    at = json.loads(p.read_text()).get("publish_at") if p.exists() else None
+    return at if at and when(at) > now + LATE else ""
+
+
 def check(pilot_dir, thumbnail, publish_at=None, now=None):
     now = now or datetime.now(timezone.utc)
     d = Path(pilot_dir)
@@ -86,7 +98,8 @@ def check(pilot_dir, thumbnail, publish_at=None, now=None):
         problems.append(f"PUBLISH_AT_NOT_AHEAD {publish_at} (at least 15 min in the future)")
     shorts_path = d / "shorts" / "shorts.json"
     shorts = [s for s in json.loads(shorts_path.read_text())["shorts"] if s.get("publish")] if shorts_path.exists() else []
-    slots = [when(s) for s in sched.get("shorts_slots", [])]
+    # slots already past are rolled forward by pending_shorts.py (tested); only the ones still ahead must be valid
+    slots = [x for x in (when(s) for s in sched.get("shorts_slots", [])) if x > now]
     if shorts and (slots != sorted(slots) or any(s <= t for s in slots)):
         problems.append("SHORTS_SLOTS (must be ordered and after the long video)")
     for s in shorts:

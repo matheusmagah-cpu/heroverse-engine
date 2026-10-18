@@ -150,6 +150,16 @@
     "file": "migration/ops/test_runway.py",
     "contains": "def test_every_slot_listed_and_gaps_alerted"
    }
+  },
+  {
+   "id": "E16",
+   "date": "2026-10-18",
+   "error": "The final gate checked preflight against the scheduled time: an approval finishing < 15 min before the slot (or after it) would FAIL and the video would never publish, although publish.yml publishes a late approval at once",
+   "fix": "prepublish_gate checks preflight against preflight.effective_publish_at (the time publish.yml really uses); past Short slots are rolled forward, not a FAIL",
+   "antidote": {
+    "file": "migration/publish/test_preflight.py",
+    "contains": "def test_late_approval_publishes_now_never_blocks"
+   }
   }
  ]
 }

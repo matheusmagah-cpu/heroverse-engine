@@ -197,7 +197,8 @@ def main(pilot_dir, video=None):
     import preflight  # noqa: E402
     d = Path(pilot_dir)
     try:
-        problems, _ = preflight.check(d, d / "inspection" / "thumbnail.jpg")
+        # checked against the time publish.yml will really use: a late approval publishes now, it is not a FAIL
+        problems, _ = preflight.check(d, d / "inspection" / "thumbnail.jpg", preflight.effective_publish_at(d))
     except Exception as e:  # a preflight that cannot run is missing evidence, not a pass
         problems = None
         print(f"PREFLIGHT_ERROR {type(e).__name__}: {e}"[:300], file=sys.stderr)
