@@ -1,0 +1,35 @@
+name: HeroVerse daily goal report (YPP progress, video performance, pipeline health)
+on:
+  schedule:
+    - cron: '45 7 * * *'   # after the market panel (07:17) and the Shorts publication (07:35)
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-goal-report
+  cancel-in-progress: false
+jobs:
+  report:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Report (about 5 Data API units; Analytics API when the credential allows)
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/goal_report.py migration/production migration/publish/ledger.json migration/evidence/daily-report
+      - name: Record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/daily-report
+          git commit -q -m "Daily goal report $(date -u +%Y-%m-%d) (run $GITHUB_RUN_ID)" || exit 0
+          for i in 1 2 3 4; do
+            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true; sleep $((i * 5))
+          done
+          exit 1

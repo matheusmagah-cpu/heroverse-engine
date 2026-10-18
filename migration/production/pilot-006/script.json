@@ -1,0 +1,404 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-006",
+ "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+ "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "working_title": "Night Prayer for Healing | Rest Your Body and Heart in God's Care",
+ "promise": "Title promise 'bring every pain to the God who heals and rest in his care' is spoken at 0-8 s.",
+ "angle": "For the listener lying down in pain or sorrow: the God who counts the stars bends to bind up wounds; healing for body, heart and mind, alongside medical care, with no guarantees.",
+ "policy_note": "No health guarantee: the prayer asks for healing, thanks doctors and medicine, and encourages following medical care.",
+ "authorship": "Original text written for HeroVerse by Claude Code (AI assistant) on 2026-10-18. Scripture quotations are from the King James Version (public domain).",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "beat": "0-8 s: direct address, concrete moment, promise",
+   "pause_after": 0.8,
+   "text": "Good evening. If your body is hurting, or your heart is, stay with me for the next few minutes. Tonight we will bring every pain to the God who heals, and rest in his care while you sleep. Take one slow breath with me."
+  },
+  {
+   "id": "invitation",
+   "beat": "8-30 s: settle the body, name the need",
+   "pause_after": 1.2,
+   "text": "Lie down and let the bed hold your weight. Let your hands rest, your jaw soften, your breathing slow. You may be tired of being sick, tired of waiting for results, tired of carrying sorrow. Bring all of it here. You do not have to be strong tonight."
+  },
+  {
+   "id": "scripture-1",
+   "beat": "anchor: Jeremiah 17:14",
+   "pause_after": 1.5,
+   "text": "The prophet Jeremiah prayed this simple prayer. Heal me, O LORD, and I shall be healed; save me, and I shall be saved: for thou art my praise.",
+   "reference": "Jeremiah 17:14 (KJV)",
+   "chapter": "Heal me, O Lord (Jeremiah 17:14)"
+  },
+  {
+   "id": "reflection-1",
+   "beat": "reflection: a short, honest prayer",
+   "pause_after": 1.2,
+   "text": "Jeremiah's prayer is short and honest. He does not explain or perform. He simply asks. Tonight you can pray the same way. You do not need the right words. You only need to bring yourself to the One who heals."
+  },
+  {
+   "id": "prayer-1",
+   "beat": "first guided prayer: arriving",
+   "pause_after": 1.2,
+   "text": "So let us pray. Lord, here I am at the end of this day, with my body and my heart just as they are. You know every ache, every symptom, every fear I have not said out loud. Heal me, O Lord. Hold me tonight."
+  },
+  {
+   "id": "scripture-2",
+   "beat": "anchor: Psalm 147:3",
+   "pause_after": 1.5,
+   "text": "He healeth the broken in heart, and bindeth up their wounds.",
+   "reference": "Psalm 147:3 (KJV)",
+   "chapter": "He binds up wounds (Psalm 147:3)"
+  },
+  {
+   "id": "reflection-2",
+   "beat": "reflection: the God who bandages",
+   "pause_after": 1.2,
+   "text": "The same psalm says God counts the stars and calls them all by name. And yet he bends down to bind up wounds, like a nurse tending a bandage. The God of the galaxies is gentle with your hurt tonight."
+  },
+  {
+   "id": "prayer-body",
+   "beat": "guided prayer: healing for the body",
+   "pause_after": 1.2,
+   "text": "Father, I bring you my body. Where there is pain, bring relief. Where there is inflammation, bring calm. Where there is sickness, bring your healing touch. Strengthen my immune system, steady my heart, and restore what is worn out. Let my body rest deeply tonight and heal while I sleep."
+  },
+  {
+   "id": "scripture-3",
+   "beat": "anchor: Psalm 41:3",
+   "pause_after": 1.5,
+   "text": "The LORD will strengthen him upon the bed of languishing: thou wilt make all his bed in his sickness.",
+   "reference": "Psalm 41:3 (KJV)"
+  },
+  {
+   "id": "reflection-3",
+   "beat": "reflection: he makes the bed",
+   "pause_after": 1.2,
+   "text": "Thou wilt make all his bed in his sickness. What a tender picture: God himself arranging the pillows, smoothing the sheets for the one who is ill. You are not forgotten in that bed. He is there."
+  },
+  {
+   "id": "prayer-doctors",
+   "beat": "guided prayer: medicine and care",
+   "pause_after": 1.2,
+   "text": "Lord, I thank you for doctors, nurses, medicine and every person whose work helps us heal. Give them wisdom, skill and compassion. Guide every decision about treatment. Let the medicine work as it should. And help me to keep following the care I have been given, trusting you through all of it."
+  },
+  {
+   "id": "prayer-chronic",
+   "beat": "guided prayer: long illness",
+   "pause_after": 1.2,
+   "text": "Father, for those living with an illness that does not go away, the chronic pain, the long treatments, the bodies that never quite feel well, give endurance. On the days when hope runs thin, renew it. Let them know that their worth is not measured by what their body can do."
+  },
+  {
+   "id": "stillness",
+   "beat": "guided stillness: 2 breaths, music forward",
+   "pause_after": 6.0,
+   "text": "Let us be still. Breathe in slowly. And breathe out. Once more, breathe in, and let your body grow heavy."
+  },
+  {
+   "id": "transition",
+   "beat": "turn: the heart and the mind",
+   "pause_after": 1.5,
+   "text": "Healing is not only for the body. Let us bring the heart and the mind to God as well.",
+   "chapter": "Healing for the heart"
+  },
+  {
+   "id": "prayer-heart",
+   "beat": "guided prayer: the broken heart",
+   "pause_after": 1.2,
+   "text": "Father, heal the broken places in my heart. The losses I still grieve. The words that wounded me. The disappointments I never got over. I do not have to hide them from you. Bind up these wounds, Lord, the way only you can."
+  },
+  {
+   "id": "scripture-4",
+   "beat": "anchor: Isaiah 53:5",
+   "pause_after": 1.5,
+   "text": "But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed.",
+   "reference": "Isaiah 53:5 (KJV)",
+   "chapter": "By his stripes (Isaiah 53:5)"
+  },
+  {
+   "id": "reflection-4",
+   "beat": "reflection: wounded for us",
+   "pause_after": 1.2,
+   "text": "Before Jesus ever healed anyone, he chose to be wounded himself. He knows pain from the inside. So when you bring him your pain tonight, you are not bringing it to someone distant. You are bringing it to someone who understands."
+  },
+  {
+   "id": "prayer-mind",
+   "beat": "guided prayer: the anxious mind",
+   "pause_after": 1.2,
+   "text": "Lord, heal my anxious mind. Quiet the questions that run in circles. What if the results are bad? What if it does not get better? I give you every what if. Replace my fear with your peace, and let my mind rest in you tonight."
+  },
+  {
+   "id": "prayer-mental",
+   "beat": "guided prayer: depression and the weary mind",
+   "pause_after": 1.2,
+   "text": "Lord, I pray for every mind that is tired and heavy tonight. For depression that makes mornings hard. For anxiety that tightens the chest. For thoughts that feel too dark to say out loud. Bring light into those places. Lead each person to the help they need, the friend, the counsellor, the doctor, and let them never feel ashamed to ask."
+  },
+  {
+   "id": "scripture-5",
+   "beat": "anchor: Psalm 46:10",
+   "pause_after": 1.5,
+   "text": "Be still, and know that I am God.",
+   "reference": "Psalm 46:10 (KJV)",
+   "chapter": "Be still (Psalm 46:10)"
+  },
+  {
+   "id": "reflection-5",
+   "beat": "reflection: stillness as trust",
+   "pause_after": 1.2,
+   "text": "Be still. Not because nothing is happening, but because God is still God, even in the dark, even in the hospital, even in the waiting. Your stillness tonight is an act of trust."
+  },
+  {
+   "id": "scripture-6",
+   "beat": "anchor: Psalm 6:2",
+   "pause_after": 1.5,
+   "text": "Have mercy upon me, O LORD; for I am weak: O LORD, heal me; for my bones are vexed.",
+   "reference": "Psalm 6:2 (KJV)"
+  },
+  {
+   "id": "prayer-weakness",
+   "beat": "guided prayer: honest weakness",
+   "pause_after": 1.2,
+   "text": "Father, like David, I admit that I am weak. I have run out of my own strength. Have mercy on me. Meet me in the weakness. Carry me where I cannot walk, and give me the strength to face tomorrow."
+  },
+  {
+   "id": "scripture-7",
+   "beat": "anchor: 2 Corinthians 4:16",
+   "pause_after": 1.5,
+   "text": "For which cause we faint not; but though our outward man perish, yet the inward man is renewed day by day.",
+   "reference": "2 Corinthians 4:16 (KJV)"
+  },
+  {
+   "id": "reflection-6",
+   "beat": "reflection: renewed inside",
+   "pause_after": 1.2,
+   "text": "Even when the body is struggling, something deeper can be renewed: your hope, your faith, your sense that you are loved. God is at work on the inside of you tonight, whatever the outside feels like."
+  },
+  {
+   "id": "prayer-family",
+   "beat": "guided prayer: those who care for the sick",
+   "pause_after": 1.2,
+   "text": "Lord, I pray for everyone who cares for someone who is sick. The parents beside a child's bed. The husband or wife who has not slept well in weeks. The children caring for aging parents. Give them strength, patience and rest. Let them know that what they do is seen and treasured by you."
+  },
+  {
+   "id": "prayer-children",
+   "beat": "guided prayer: sick children",
+   "pause_after": 1.2,
+   "text": "Father, I lift up every sick child tonight, and every parent who is afraid for them. Hold these little ones close. Ease their fever, calm their fear, and bring them back to playing and laughing. Give their parents peace and sleep."
+  },
+  {
+   "id": "prayer-others",
+   "beat": "guided prayer: for others who are ill",
+   "pause_after": 1.2,
+   "text": "Father, I lift up the people I know who are ill tonight. I bring their names to you now, quietly. Heal them. Comfort them. Surround them with people who love them, and let them feel your presence in the long hours of the night."
+  },
+  {
+   "id": "prayer-forgiveness",
+   "beat": "guided prayer: forgiveness that heals",
+   "pause_after": 1.2,
+   "text": "Lord, if bitterness or unforgiveness is weighing on me, I bring it to you as well. Some wounds stay open because I keep holding them. Help me to forgive, and to receive your forgiveness, so that my heart can heal tonight too."
+  },
+  {
+   "id": "scripture-12",
+   "beat": "anchor: Psalm 30:2",
+   "pause_after": 1.5,
+   "text": "O LORD my God, I cried unto thee, and thou hast healed me.",
+   "reference": "Psalm 30:2 (KJV)"
+  },
+  {
+   "id": "scripture-8",
+   "beat": "anchor: Psalm 103:2-3",
+   "pause_after": 1.5,
+   "text": "Bless the LORD, O my soul, and forget not all his benefits: Who forgiveth all thine iniquities; who healeth all thy diseases.",
+   "reference": "Psalm 103:2-3 (KJV)",
+   "chapter": "Forget not his benefits (Psalm 103:2-3)"
+  },
+  {
+   "id": "prayer-thanks",
+   "beat": "guided prayer: remembering his benefits",
+   "pause_after": 1.2,
+   "text": "Thank you, Lord, for every healing I have already received. The sicknesses that passed. The wounds that closed. The sorrows that lifted. I will not forget your benefits. You have been good to me, and I trust you to be good to me tonight."
+  },
+  {
+   "id": "prayer-hospital",
+   "beat": "guided prayer: those in hospital tonight",
+   "pause_after": 1.2,
+   "text": "Father, I pray for everyone in a hospital bed tonight. For those waiting for surgery, those in pain, those far from home, those afraid of what the doctors will say. Sit beside each of them. Let the beeping machines and the long corridors be filled with your peace."
+  },
+  {
+   "id": "prayer-nightshift",
+   "beat": "guided prayer: night-shift caregivers",
+   "pause_after": 1.2,
+   "text": "And Lord, bless the nurses, doctors and carers working through this night. Keep them alert, kind and safe. Let their hands bring comfort, and refresh them when their shift is over."
+  },
+  {
+   "id": "prayer-grief",
+   "beat": "guided prayer: grief",
+   "pause_after": 1.2,
+   "text": "And Father, for anyone who is grieving tonight, especially for someone they could not save, hold them close. Heal the ache of loss. Let them weep without shame, and let them feel that you are weeping with them."
+  },
+  {
+   "id": "scripture-9",
+   "beat": "anchor: Revelation 21:4",
+   "pause_after": 1.5,
+   "text": "And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away.",
+   "reference": "Revelation 21:4 (KJV)",
+   "chapter": "No more pain (Revelation 21:4)"
+  },
+  {
+   "id": "reflection-7",
+   "beat": "reflection: the final healing",
+   "pause_after": 1.2,
+   "text": "This is the promise beneath every other promise. One day God himself will wipe away every tear. Pain will not have the last word. Whatever healing you receive tonight is a small taste of that day."
+  },
+  {
+   "id": "reflection-cried",
+   "beat": "reflection: I cried and he answered",
+   "pause_after": 1.2,
+   "text": "O Lord my God, I cried unto thee, and thou hast healed me. David wrote that looking back on a night he thought he would not survive. One day you may look back on this night too, and see how God carried you through it."
+  },
+  {
+   "id": "scripture-10",
+   "beat": "anchor: Romans 8:28",
+   "pause_after": 1.5,
+   "text": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+   "reference": "Romans 8:28 (KJV)"
+  },
+  {
+   "id": "prayer-trust",
+   "beat": "guided prayer: trust in the waiting",
+   "pause_after": 1.2,
+   "text": "Lord, I do not understand everything I am going through. But I choose to trust that you are working, even here, even now. Help me to wait with hope, and to see your goodness again in the land of the living."
+  },
+  {
+   "id": "prayer-hope",
+   "beat": "guided prayer: hope for tomorrow",
+   "pause_after": 1.2,
+   "text": "Father, give me hope for tomorrow. Not a forced cheerfulness, but a quiet confidence that you are with me, whatever the morning brings. Let me wake with new strength, and see your mercy again when the sun rises."
+  },
+  {
+   "id": "prayer-sleep",
+   "beat": "guided prayer: deep, restoring sleep",
+   "pause_after": 1.2,
+   "text": "And now, Lord, give me sleep. Deep, restoring sleep that lets my body do the healing work you designed it to do. If pain wakes me, let me feel your nearness. If fear wakes me, let me hear your peace. And let me fall asleep again in your arms."
+  },
+  {
+   "id": "prayer-surrender",
+   "beat": "guided prayer: surrender",
+   "pause_after": 1.2,
+   "text": "I surrender my body, my heart and my future to you tonight. I do not have to hold everything together. You hold me. Into your hands I commit my spirit, as I rest."
+  },
+  {
+   "id": "stillness-2",
+   "beat": "guided stillness: second breath",
+   "pause_after": 6.0,
+   "text": "Breathe in again, slowly. And let it out. Let every muscle relax. Let God hold you."
+  },
+  {
+   "id": "declaration",
+   "beat": "declaration: short lines to repeat",
+   "pause_after": 1.5,
+   "text": "Say these words with me quietly, as you rest. The Lord is my healer. He binds up my wounds. I am not alone in this bed. My body, my heart and my mind are in his hands. I will rest tonight, and he will renew me.",
+   "chapter": "Declaration for tonight"
+  },
+  {
+   "id": "scripture-11",
+   "beat": "anchor: Psalm 3:5",
+   "pause_after": 1.5,
+   "text": "I laid me down and slept; I awaked; for the LORD sustained me.",
+   "reference": "Psalm 3:5 (KJV)"
+  },
+  {
+   "id": "reflection-sustained",
+   "beat": "reflection: sustained through the night",
+   "pause_after": 1.2,
+   "text": "I laid me down and slept; I awaked; for the Lord sustained me. Sleep itself is an act of trust. You let go of control for hours, and God keeps your heart beating and your lungs breathing. Tonight, he will sustain you again."
+  },
+  {
+   "id": "payoff",
+   "beat": "payoff: one concrete commitment for tonight",
+   "pause_after": 1.2,
+   "text": "Here is one thing to do tonight. Place your hand where it hurts, or over your heart, and pray just three words: Lord, heal me. Then leave it with him, and let yourself sleep.",
+   "chapter": "One thing to do tonight"
+  },
+  {
+   "id": "blessing",
+   "beat": "closing blessing",
+   "pause_after": 1.5,
+   "text": "And now receive this blessing as you sleep. Beloved, I wish above all things that thou mayest prosper and be in health, even as thy soul prospereth. Rest in his care tonight. In Jesus' name, amen.",
+   "reference": "3 John 1:2 (KJV)",
+   "chapter": "Blessing"
+  },
+  {
+   "id": "cta",
+   "beat": "soft call to action after payoff",
+   "pause_after": 2.0,
+   "text": "If you prayed this prayer, type amen in the comments, and if you want, share the name of someone who needs healing, so others can pray too. Join us again tomorrow night, to end the day with God."
+  }
+ ],
+ "figure": "figure-a",
+ "backgrounds": [
+  "bg-moonlit-meadow",
+  "bg-candle",
+  "bg-night-sky",
+  "bg-still-water-night",
+  "bg-lamp-window",
+  "bg-healing-garden",
+  "bg-moon-lake",
+  "bg-starry-hills",
+  "bg-quiet-chapel",
+  "bg-window",
+  "bg-moonlit-sea",
+  "bg-night-village",
+  "bg-lake",
+  "bg-dawn-hope"
+ ],
+ "overlay": {
+  "title": "Healing Rest Tonight",
+  "subtitle": "NIGHT PRAYER",
+  "title_image": "bg-moonlit-meadow",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "Hurting in body or heart? Bring every pain to the God who heals and rest in his care tonight. A gentle night prayer for healing with Scripture.",
+ "hashtags": [
+  "#prayer",
+  "#healingprayer",
+  "#nightprayer"
+ ],
+ "thumbnail": {
+  "lines": [
+   "HEALING",
+   "TONIGHT"
+  ],
+  "sub": "Night Prayer"
+ },
+ "tags": [
+  "night prayer",
+  "prayer for healing",
+  "healing prayer",
+  "night prayer for healing",
+  "prayer before sleep",
+  "Jeremiah 17:14",
+  "prayer for the sick",
+  "christian sleep prayer"
+ ],
+ "figure_choice": "figure-a: the channel's praying figure (frontal, hands folded), kept for brand continuity.",
+ "playlist": {
+  "title": "Night Prayer",
+  "description": "Calm night prayers with Scripture to end the day with God: peace, forgiveness, protection and restful sleep."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-moonlit-meadow",
+   "bg-night-sky",
+   "bg-still-water-night",
+   "bg-healing-garden",
+   "bg-moonlit-sea"
+  ]
+ }
+}
