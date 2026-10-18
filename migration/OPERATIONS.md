@@ -97,6 +97,7 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 4. **After publication:** the finished files are deleted from the release once YouTube confirms the upload.
 
 ## Status
+- **Decisions:** every change follows strategy/DECISIONS.md (evidence → checks → measurement → keep or revert). Active: D-01 night ~28–33 min, D-02 four fear-bait videos hidden, D-03 one Short per long video, D-04 morning ~25 min, D-05 subscribe ask in the CTA. First measurements: 48 h after pilot-003/004 open.
 - **Published:** pilot-002 (v4zN53ZiUIs) opens 2026-10-18 10:00 UTC; its Shorts were re-made privately with the review fixes and publish at 07:35 UTC if they pass.
 - **Next videos:** pilot-003 (morning prayer, strength) 2026-10-19 10:00 UTC; pilot-004 (night prayer, sleep) 2026-10-20 00:00 UTC. Scripts, images.json, schedule.json in place; images generated 2026-10-18 ~00:00 UTC; renders by the nightly chain.
 - **Spec:** strategy/MODELING_SPEC.md (measured targets, scorecard, policy). Teaching format needs its own frozen QA criteria before its first render.
