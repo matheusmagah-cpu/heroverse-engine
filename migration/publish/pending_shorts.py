@@ -29,19 +29,30 @@ def iso(t):
     return t.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def slots_for(n, schedule, opens, now):
+def slots_for(n, schedule, opens, now, taken=frozenset()):
+    """taken: times already used by uploaded Shorts or reserved by another pilot's schedule; a late Short that rolls
+    forward never lands on them (two Shorts at the same minute)."""
     floor = max(now + LEAD, opens + timedelta(minutes=30))
-    out = [when(s) for s in schedule.get("shorts_slots", []) if when(s) >= floor][:n]
+    out = [when(s) for s in schedule.get("shorts_slots", []) if when(s) >= floor and when(s) not in taken][:n]
     day = floor.replace(hour=0, minute=0, second=0, microsecond=0)
     while len(out) < n:
         for h in DAILY:
             t = day.replace(hour=h)
-            if t >= floor and t not in out and (not out or t > max(out)):
+            if t >= floor and t not in out and t not in taken and (not out or t > max(out)):
                 out.append(t)
                 if len(out) == n:
                     break
         day += timedelta(days=1)
     return [iso(t) for t in sorted(out)]
+
+
+def taken(production, entries, pilot):
+    out = {when(e["slot"]) for e in entries.values() if isinstance(e, dict) and e.get("slot")}
+    for f in Path(production).glob("pilot-[0-9][0-9][0-9]/schedule.json"):
+        first = (json.loads(f.read_text()).get("shorts_slots") or [None])[0]
+        if first and f.parent.name != pilot:
+            out.add(when(first))
+    return out
 
 
 def pending(production, ledger, now=None):
@@ -59,7 +70,7 @@ def pending(production, ledger, now=None):
             continue
         schedule = json.loads((d / "schedule.json").read_text()) if (d / "schedule.json").exists() else {}
         opens = when(schedule["publish_at"]) if schedule.get("publish_at") else now
-        return d.name, slots_for(len(todo), schedule, opens, now)
+        return d.name, slots_for(len(todo), schedule, opens, now, taken(production, entries, d.name))
     return None
 
 
