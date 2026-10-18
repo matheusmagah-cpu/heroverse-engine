@@ -38,10 +38,17 @@ Otherwise nothing changes. The daily analysis still runs and records measurement
 
 | Decision | Evidence | Confidence | Outcome |
 |---|---|---|---|
-| D-03 (1 Short per long) | 5/22 vs 1/26 | Fisher p = 0.062 (93.8%) | **active**: passes the 90% minimum |
+| D-03 (1 Short per long) | 5/22 vs 1/26 channels | one-sided Fisher p = 0.062 (< 0.10) | **active**: passes the 90% minimum |
 | D-05 (subscribe ask) | 13/20 winners | no comparison group, not testable | **reverted** in pilots 004–006 (pilot-003 had already rendered with it) |
 | D-01/D-04 (length) | 5/22 vs 1/7 | p = 0.55, not a proven improvement | **kept as conformance**: they return execution to the registered 25–40 min strategy that the 15-min scripts had drifted from |
 | D-02 (hide 4 fear-bait videos) | owner policy | compliance | **kept** |
+
+**How to read these numbers (correction 2026-10-18):** p = 0.062 is NOT a 93.8% chance that the strategy works. It is
+the chance of seeing a gap at least this large between the two groups if strategy made no difference. The evidence is
+observational and small: 48 market channels (22 long-form ≥ 20 min, of which 5 reached the fast outcome; 26 mixed, of
+which 1), not our channel, not randomised; niche, start date, budget and luck can explain part of the gap, and one
+channel more or less in a group moves p a lot. It clears the owner's 90% bar as a statistical threshold; it does not
+predict how fast HeroVerse reaches YPP.
 
 ## Ledger
 

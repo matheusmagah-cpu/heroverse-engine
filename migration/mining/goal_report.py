@@ -41,6 +41,33 @@ def analytics(token, start, end, metrics, dimensions=None, extra=None):
         return json.loads(r.read())
 
 
+def per_video(token, start, end, metrics):
+    """{video_id: (content_type or None, *metric values)} for the channel's videos in the period. The content type
+    (LONG_FORM_CONTENT, SHORTS, ...) comes from Analytics when the report accepts it; otherwise None."""
+    extra = {"sort": "-" + metrics.split(",")[0], "maxResults": 200}
+    try:
+        rows = analytics(token, start, end, metrics, dimensions="video,creatorContentType", extra=extra).get("rows", [])
+        return {r[0]: (r[1], *r[2:]) for r in rows}, "analytics creatorContentType"
+    except Exception:
+        rows = analytics(token, start, end, metrics, dimensions="video", extra=extra).get("rows", [])
+        return {r[0]: (None, *r[1:]) for r in rows}, "duration <= 180 s (Analytics content type unavailable)"
+
+
+def eligible(videos, per365, per90):
+    """Own calculation of the two YPP counters from Analytics rows, restricted to what YPP counts: watch hours of
+    videos that are PUBLIC and long-form now (365 days), views of PUBLIC Shorts (90 days). Not YouTube's own counter
+    (it can still remove invalid views or count differently); reported as an estimate next to it."""
+    def kind(v, row):
+        if row and row[0]:
+            return "short" if row[0] == "SHORTS" else ("long" if row[0] == "LONG_FORM_CONTENT" else row[0].lower())
+        return "short" if v["short"] else "long"
+    hours = sum((per365.get(v["id"]) or (None, 0))[1] for v in videos if kind(v, per365.get(v["id"])) == "long") / 60
+    shorts = sum((per90.get(v["id"]) or (None, 0))[1] for v in videos if kind(v, per90.get(v["id"])) == "short")
+    all_hours = sum(r[1] for r in per365.values()) / 60
+    return {"public_long_form_watch_hours_365d": round(hours, 1), "public_shorts_views_90d": int(shorts),
+            "all_content_watch_hours_365d_top200": round(all_hours, 1)}
+
+
 def pipeline(production, ledger, now):
     rows = []
     for d in sorted(Path(production).glob("pilot-[0-9][0-9][0-9]")):
@@ -88,11 +115,12 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
         r = (tot.get("rows") or [[0, 0, 0, 0]])[0]
         a = {"status": "OK", "watch_hours_365d": round(r[0] / 60, 1), "views_365d": r[1], "subscribers_gained_365d": r[2],
              "average_view_percentage": r[3]}
-        per = analytics(token, (now.date() - timedelta(days=365)).isoformat(), end,
-                        "estimatedMinutesWatched,views,averageViewPercentage,subscribersGained",
-                        dimensions="video", extra={"sort": "-estimatedMinutesWatched", "maxResults": 50})
-        a["per_video"] = {r[0]: {"watch_hours": round(r[1] / 60, 1), "views": r[2], "average_view_percentage": r[3],
-                                 "subscribers_gained": r[4]} for r in per.get("rows", [])}
+        per, method = per_video(token, (now.date() - timedelta(days=365)).isoformat(), end,
+                                "estimatedMinutesWatched,views,averageViewPercentage,subscribersGained")
+        a["per_video"] = {k: {"watch_hours": round(r[1] / 60, 1), "views": r[2], "average_view_percentage": round(r[3], 1),
+                              "subscribers_gained": r[4], "content_type": r[0]} for k, r in per.items()}
+        per90, _ = per_video(token, (now.date() - timedelta(days=90)).isoformat(), end, "views")
+        a["eligible_estimate"] = {**eligible(videos, per, per90), "classification": method}
     except Exception as e:
         a["error"] = type(e).__name__
     subs = int(st.get("subscriberCount", 0))
@@ -100,8 +128,9 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
     left = max(TARGET_DAYS - day + 1, 1)
     shorts_views = sum(v["views"] for v in videos if v["short"])
     need = {"subscribers_per_day": round(max(YPP["subscribers"] - subs, 0) / left, 1)}
-    if a["status"] == "OK":
-        need["watch_hours_per_day"] = round(max(YPP["watch_hours_365d"] - a["watch_hours_365d"], 0) / left, 1)
+    est = a.get("eligible_estimate")
+    if est:
+        need["watch_hours_per_day"] = round(max(YPP["watch_hours_365d"] - est["public_long_form_watch_hours_365d"], 0) / left, 1)
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
     rows, runway = pipeline(production, ledger, now)
     for v in videos:
@@ -114,9 +143,9 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
         alerts.append(f"SCRIPT RUNWAY {runway} days (< 2): write the next pilots now")
     alerts += [f"{r['pilot']} review FAIL: read out/review.json" for r in rows if r["review"] == "FAIL"]
     alerts += [f"{r['pilot']} QA FAIL" for r in rows if r["qa"] == "FAIL"]
-    report = {"version": "goal-report-v1", "at": now.isoformat(), "day": day, "target_day": TARGET_DAYS, "max_day": MAX_DAYS,
+    report = {"version": "goal-report-v2", "at": now.isoformat(), "day": day, "target_day": TARGET_DAYS, "max_day": MAX_DAYS,
               "subscribers": subs, "views_total": int(st.get("viewCount", 0)), "public_videos": len(videos),
-              "shorts_views_public": shorts_views, "analytics": a, "needed_from_today": need, "ypp": YPP,
+              "shorts_views_public_lifetime": shorts_views, "analytics": a, "needed_from_today": need, "ypp": YPP,
               "videos": sorted(videos, key=lambda v: v["published"], reverse=True)[:20], "pipeline": rows,
               "script_runway_days": runway, "alerts": alerts, "data_api_units": client.units,
               "policy_risk_videos": [{k: v.get(k) for k in ("id", "title", "views", "watch_hours", "subscribers_gained", "short")} for v in risky],
@@ -124,13 +153,20 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     (out / f"{now:%Y%m%d}.json").write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n")
-    wh = f"{a['watch_hours_365d']} / 4,000" if a["status"] == "OK" else a["status"]
+    wh = f"{est['public_long_form_watch_hours_365d']} / 4,000" if est else a["status"]
+    sv = f"{est['public_shorts_views_90d']:,} / 10,000,000" if est else a["status"]
+    allh = f"{a['watch_hours_365d']} h" if a["status"] == "OK" else a["status"]
     md = [f"# HeroVerse daily report — {now:%Y-%m-%d %H:%M} UTC (day {day} of {TARGET_DAYS}, max {MAX_DAYS})", "",
           "## YPP progress",
-          f"- Subscribers: **{subs} / 1,000** (need {need['subscribers_per_day']}/day to qualify by day {TARGET_DAYS})",
-          f"- Watch hours (365 d, long-form): **{wh}**" + (f" (need {need['watch_hours_per_day']}/day)" if "watch_hours_per_day" in need else ""),
-          f"- Public Shorts views: {shorts_views:,} / 10,000,000 (90 d path)",
-          f"- Public videos: {len(videos)}; total views {int(st.get('viewCount', 0)):,}", "",
+          "Sources: [official] YouTube Data API count; [own] our calculation from YouTube Analytics rows (an estimate of",
+          "the YPP counter, which only YouTube Studio shows and which can differ); [plan] our arithmetic toward day 14.", "",
+          f"- Subscribers [official]: **{subs} / 1,000** — [plan] {need['subscribers_per_day']}/day to reach it by day {TARGET_DAYS}",
+          f"- Public long-form watch hours, last 365 d [own]: **{wh}**" + (f" — [plan] {need['watch_hours_per_day']}/day" if "watch_hours_per_day" in need else ""),
+          f"- Public Shorts views, last 90 d [own]: {sv} (the alternative YPP path)",
+          f"- For contrast, NOT the YPP counters: all-content watch hours 365 d incl. Shorts and private/removed videos [own] {allh}; "
+          f"lifetime views of public Shorts [official] {shorts_views:,}",
+          f"- Classification of long vs Shorts: {est['classification'] if est else '-'}",
+          f"- Public videos [official]: {len(videos)}; total channel views {int(st.get('viewCount', 0)):,}", "",
           "## Alerts", *(f"- ⚠ {x}" for x in alerts or ["none"]), "",
           f"## Pipeline (script runway {runway} days)",
           "| pilot | publishes | rendered | QA | review | published | title |", "|---|---|---|---|---|---|---|",
