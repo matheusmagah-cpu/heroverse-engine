@@ -1,4 +1,4 @@
-# HeroVerse daily report — 2026-10-18 03:07 UTC (day 1 of 14, max 30)
+# HeroVerse daily report — 2026-10-18 08:00 UTC (day 1 of 14, max 30)
 
 ## YPP progress
 Sources: [official] YouTube Data API count; [own] our calculation from YouTube Analytics rows (an estimate of
@@ -12,14 +12,15 @@ the YPP counter, which only YouTube Studio shows and which can differ); [plan] o
 - Public videos [official]: 23; total channel views 2,681
 
 ## Alerts
-- ⚠ none
+- ⚠ pilot-003 review FAIL: read out/review.json
+- ⚠ pilot-004 QA FAIL
 
-## Pipeline (script runway 2.9 days)
+## Pipeline (script runway 2.7 days)
 | pilot | publishes | rendered | QA | review | published | title |
 |---|---|---|---|---|---|---|
 | pilot-002 | 2026-10-18 10:00 UTC | yes | PASS | - | yes | Morning Prayer | God Has Already Gone Ahead of You Today |
-| pilot-003 | 2026-10-19 10:00 UTC | no | - | - | no | Morning Prayer | When You Wake Up Tired, God Renews Your Strength |
-| pilot-004 | 2026-10-20 00:00 UTC | no | - | - | no | Night Prayer Before Sleep | Give God Your Worries, Rest in His Peace |
+| pilot-003 | 2026-10-19 10:00 UTC | yes | PASS | FAIL | no | Morning Prayer | When You Wake Up Tired, God Renews Your Strength |
+| pilot-004 | 2026-10-20 00:00 UTC | yes | FAIL | - | no | Night Prayer Before Sleep | Give God Your Worries, Rest in His Peace |
 | pilot-005 | 2026-10-20 10:00 UTC | no | - | - | no | Morning Prayer for Protection | Psalm 91 Over You and Your Family |
 | pilot-006 | 2026-10-21 00:00 UTC | no | - | - | no | Night Prayer for Healing | Rest Your Body and Heart in God's Care |
 

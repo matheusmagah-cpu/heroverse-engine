@@ -1,6 +1,6 @@
 {
  "version": "goal-report-v2",
- "at": "2026-10-18T03:07:31.931942+00:00",
+ "at": "2026-10-18T08:00:43.604003+00:00",
  "day": 1,
  "target_day": 14,
  "max_day": 30,
@@ -920,7 +920,7 @@
    "title": "Why God Chose YOU For This Exact Moment In History ⚔️ (Don’t Ignore This) #motivation #faith #god",
    "published": "2026-07-18T20:53",
    "views": 367,
-   "likes": 51,
+   "likes": 50,
    "comments": 8,
    "short": true,
    "watch_hours": 1.2,
@@ -962,7 +962,7 @@
    "title": "STOP! What Angels REALLY Look Like 👁️🛡️ #bibletruth #motivation #movie #marvel  #shorts #god",
    "published": "2026-07-12T22:39",
    "views": 283,
-   "likes": 50,
+   "likes": 49,
    "comments": 5,
    "short": true,
    "watch_hours": 0.8,
@@ -990,7 +990,7 @@
    "title": "STOP. God is not rejecting you. He is HIDING you. 🛡️🔥",
    "published": "2026-07-12T10:18",
    "views": 240,
-   "likes": 44,
+   "likes": 43,
    "comments": 14,
    "short": true,
    "watch_hours": 1.4,
@@ -1004,7 +1004,7 @@
    "title": "God is WARNIG you: The Law of Divine Return is HERE! ⚔️🛡️ #faith #god #movie #theflash #marvel",
    "published": "2026-07-12T01:41",
    "views": 23,
-   "likes": 7,
+   "likes": 6,
    "comments": 6,
    "short": true,
    "watch_hours": 1.3,
@@ -1018,7 +1018,7 @@
    "title": "God’s Silence Is NOT Rejection… (Watch This) ✝️ #motivation #god #movie #theflash #faith",
    "published": "2026-07-11T11:23",
    "views": 435,
-   "likes": 77,
+   "likes": 76,
    "comments": 15,
    "short": true,
    "watch_hours": 6.3,
@@ -1032,7 +1032,7 @@
    "title": "You're Not Waiting On God. God Is Waiting On You. 🔥 #shorts #faith",
    "published": "2026-07-10T16:48",
    "views": 391,
-   "likes": 44,
+   "likes": 43,
    "comments": 6,
    "short": true,
    "watch_hours": 2.6,
@@ -1046,7 +1046,7 @@
    "title": "You Think You're Too Late. You're Not. 🔥 #shorts #faith #god",
    "published": "2026-07-10T11:52",
    "views": 422,
-   "likes": 48,
+   "likes": 47,
    "comments": 8,
    "short": true,
    "watch_hours": 1.8,
@@ -1167,17 +1167,17 @@
   {
    "pilot": "pilot-003",
    "publish_at": "2026-10-19 10:00 UTC",
-   "rendered": false,
-   "qa": null,
-   "review": null,
+   "rendered": true,
+   "qa": "PASS",
+   "review": "FAIL",
    "published": false,
    "title": "Morning Prayer | When You Wake Up Tired, God Renews Your Strength"
   },
   {
    "pilot": "pilot-004",
    "publish_at": "2026-10-20 00:00 UTC",
-   "rendered": false,
-   "qa": null,
+   "rendered": true,
+   "qa": "FAIL",
    "review": null,
    "published": false,
    "title": "Night Prayer Before Sleep | Give God Your Worries, Rest in His Peace"
@@ -1201,8 +1201,11 @@
    "title": "Night Prayer for Healing | Rest Your Body and Heart in God's Care"
   }
  ],
- "script_runway_days": 2.9,
- "alerts": [],
+ "script_runway_days": 2.7,
+ "alerts": [
+  "pilot-003 review FAIL: read out/review.json",
+  "pilot-004 QA FAIL"
+ ],
  "data_api_units": 3,
  "policy_risk_videos": [
   {
