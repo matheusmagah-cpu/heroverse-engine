@@ -2,19 +2,19 @@
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-003",
  "output_sha256": "91e24033aece99585094d6ffe4a52482b0625588df5cd6a57aa5a4c2a54e2ee1",
- "decision": "UNKNOWN",
+ "decision": "FAIL",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
   "technical": "PASS",
-  "audio": "UNKNOWN",
+  "audio": "PASS",
   "transcript": "PASS",
-  "captions": "UNKNOWN",
-  "sync": "UNKNOWN",
-  "image": "UNKNOWN",
+  "captions": "PASS",
+  "sync": "PASS",
+  "image": "PASS",
   "rights": "PASS",
-  "content_and_policy": "UNKNOWN",
-  "scorecard": "UNKNOWN",
+  "content_and_policy": "FAIL",
+  "scorecard": "FAIL",
   "full_file_scan": "PASS",
   "preflight": "PASS"
  },
@@ -96,8 +96,8 @@
    {
     "source": "review",
     "item": "audio_clarity_and_mix",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.0
    }
   ],
   "transcript": [
@@ -141,8 +141,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.0
    }
   ],
   "sync": [
@@ -159,8 +159,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.0
    }
   ],
   "image": [
@@ -197,14 +197,14 @@
    {
     "source": "review",
     "item": "picture_quality",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 8.5
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 7.5
    }
   ],
   "rights": [
@@ -233,64 +233,64 @@
    {
     "source": "review",
     "item": "opening_and_promise",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.0
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "FAIL",
+    "detail": 6.5
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 8.5
    },
    {
     "source": "review",
     "item": "policy_safe",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 10.0
    },
    {
     "source": "review",
     "item": "overall",
-    "state": "UNKNOWN",
-    "detail": "no completed watched review for this file"
+    "state": "PASS",
+    "detail": 8.0
    }
   ],
   "scorecard": [
    {
     "source": "score",
-    "item": "minutes",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
-   },
-   {
-    "source": "score",
-    "item": "words_per_minute",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "item": "coverage",
+    "state": "FAIL",
+    "detail": 0.691
    },
    {
     "source": "score",
     "item": "first_spoken_at",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "state": "PASS",
+    "detail": 0
+   },
+   {
+    "source": "score",
+    "item": "minutes",
+    "state": "PASS",
+    "detail": 14.5
    },
    {
     "source": "score",
     "item": "scripture_per_10_min",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "state": "PASS",
+    "detail": 8.0
    },
    {
     "source": "score",
-    "item": "coverage",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "item": "words_per_minute",
+    "state": "FAIL",
+    "detail": 113.9
    }
   ],
   "full_file_scan": [
@@ -316,6 +316,46 @@
   ]
  },
  "informative_not_deciding": {
+  "words_per_minute": {
+   "value": 113.9,
+   "band": [
+    140,
+    160
+   ],
+   "inside": false
+  },
+  "beats_per_minute": {
+   "value": 2.6,
+   "band": [
+    2.0,
+    2.6
+   ],
+   "inside": true
+  },
+  "shots_per_minute_model_counted": {
+   "value": 3.9,
+   "band": [
+    6,
+    99
+   ],
+   "inside": false
+  },
+  "you_per_100_words": {
+   "value": 4.1,
+   "band": [
+    6,
+    99
+   ],
+   "inside": false
+  },
+  "minutes": {
+   "value": 14.5,
+   "band": [
+    15,
+    45
+   ],
+   "inside": false
+  },
   "scan_frozen_picture": {
    "longest_s": 2.63,
    "report_s": 5.0,
