@@ -2,10 +2,7 @@ name: HeroVerse reconcile (retry approvals that errored, Shorts never made and p
 # 07:20 UTC is right after the YouTube Data API day resets (uploads that failed on quota succeed then); the other
 # two runs catch provider errors during the day. Only due pilots (publishing within 48 h, not on YouTube) are touched.
 on:
-  schedule:
-    - cron: '20 7 * * *'
-    - cron: '20 13 * * *'
-    - cron: '20 19 * * *'
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
 permissions:
   contents: read

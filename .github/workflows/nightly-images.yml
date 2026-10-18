@@ -2,9 +2,7 @@ name: HeroVerse nightly images (pilots publishing in the next 72 h)
 # 00:30 UTC, after the Cloudflare Workers AI allocation resets (00:00 UTC): every due pilot whose script uses an
 # image without a record gets its images (FLUX + 2x upscale, cf-images.yml). The runner renders from 01:00 UTC.
 on:
-  schedule:
-    - cron: '30 0 * * *'
-    - cron: '37 */4 * * *'   # redundancy: GitHub may delay or skip a scheduled run
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
 permissions:
   contents: read

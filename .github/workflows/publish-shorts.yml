@@ -1,7 +1,6 @@
 name: HeroVerse publish Shorts (cut from a published long video, scheduled slots)
 on:
-  schedule:
-    - cron: '35 7 * * *'
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
     inputs:
       pilot:

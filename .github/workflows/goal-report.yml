@@ -1,10 +1,10 @@
 name: HeroVerse daily goal report (YPP progress, video performance, pipeline health)
 on:
-  schedule:
-    - cron: '45 7 * * *'   # after the market panel (07:17) and the Shorts publication (07:35)
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
   workflow_dispatch:
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: heroverse-goal-report
   cancel-in-progress: false
@@ -22,6 +22,17 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/venv"
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/goal_report.py migration/production migration/publish/ledger.json migration/evidence/daily-report
+      - name: Scheduler health (every task of the heartbeat, the heartbeat itself, the render runner)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          T="$RUNNER_TEMP"; echo '{}' > "$T/runs.json"
+          add() { python3 -I -c "import json,sys;a=json.load(open(sys.argv[1]));a[sys.argv[2]]=json.load(open(sys.argv[3]));json.dump(a,open(sys.argv[1],'w'))" "$T/runs.json" "$1" "$T/r.json"; }
+          for w in heartbeat.yml $(python3 -I -c "import sys;sys.path.insert(0,'migration/ops');import heartbeat as h;print(' '.join(t['workflow'] for t in h.TASKS))"); do
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$w" --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json" && add "$w"
+          done
+          gh run list --repo matheusmagah-cpu/heroverse-runner --workflow render.yml --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json" && add runner || true
+          python3 -I -B migration/ops/health.py "$T/runs.json" migration/evidence/daily-report/latest.md
       - name: Record
         run: |
           git config user.name "github-actions[bot]"

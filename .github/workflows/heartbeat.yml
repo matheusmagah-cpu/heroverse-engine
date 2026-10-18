@@ -1,0 +1,45 @@
+name: HeroVerse heartbeat (the engine's scheduler)
+# GitHub delays and drops scheduled runs under load: on 2026-10-17/18 every daily cron of this repository was
+# dropped. This workflow fires 48 times a day (minutes 11 and 41, away from the top of the hour) and dispatches
+# what is due from the real run history (migration/ops/heartbeat.py); it is the only cron of the daily plan.
+on:
+  schedule:
+    - cron: '11,41 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: heroverse-heartbeat
+  cancel-in-progress: false
+jobs:
+  beat:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Tests of the scheduler
+        run: python3 -I -B migration/ops/test_heartbeat.py
+      - name: Work waiting, run history, dispatch what is due
+        run: |
+          T="$RUNNER_TEMP"
+          python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json images 72 > "$T/images"
+          python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json reconcile 48 > "$T/reconcile"
+          python3 -I -B migration/publish/pending_shorts.py migration/production migration/publish/ledger.json > "$T/shorts" || true
+          python3 -I -c "import json,os,sys;s=lambda p:os.path.getsize(p)>0;busy=any(l.split()[0] in ('approve','shorts') for l in open(sys.argv[2]) if l.strip());json.dump({'images_missing':s(sys.argv[1]),'reconcile_todo':s(sys.argv[2]),'shorts_pending':s(sys.argv[3]),'production_idle':not busy},open(sys.argv[4],'w'))" \
+            "$T/images" "$T/reconcile" "$T/shorts" "$T/conditions.json"
+          echo '{}' > "$T/runs.json"
+          for w in $(python3 -I -c "import sys;sys.path.insert(0,'migration/ops');import heartbeat as h;print(' '.join(t['workflow'] for t in h.TASKS))"); do
+            gh run list --repo "$GITHUB_REPOSITORY" --workflow "$w" --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json"
+            python3 -I -c "import json,sys;a=json.load(open(sys.argv[1]));a[sys.argv[2]]=json.load(open(sys.argv[3]));json.dump(a,open(sys.argv[1],'w'))" "$T/runs.json" "$w" "$T/r.json"
+          done
+          cat "$T/conditions.json"; echo
+          python3 -I -B migration/ops/heartbeat.py "$T/runs.json" "$T/conditions.json" > "$T/due"
+          [ -s "$T/due" ] || { echo "NOTHING_DUE"; exit 0; }
+          while read -r w; do
+            echo "DISPATCH $w"
+            gh workflow run "$w" --repo "$GITHUB_REPOSITORY" --ref main
+          done < "$T/due"
