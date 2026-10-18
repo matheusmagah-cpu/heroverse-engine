@@ -1,9 +1,8 @@
 # HeroVerse
 
-Repositório privado de migração para execução Linux sem depender do computador Windows.
+Automated English Christian YouTube channel (prayer videos), produced and published by GitHub Actions.
 
-Status: preparação e validação parcial. Nenhuma produção/publicação ativada.
+**Start with [`migration/OPERATIONS.md`](migration/OPERATIONS.md)** — the single source of truth: rules, roles
+(Claude = direction, Dot = executor via `dot-task` issues), budgets, schedule, pipeline gates and status.
 
-Preservar gates, F0, histórico, identidade e idempotência. Custo adicional autorizado: R$0.
-
-Não incluir credenciais, tokens, modelos, mídias, bancos ativos ou caches no Git. A origem é preservada até ciclo integral e restauração verificáveis.
+Never commit credentials, tokens, models, media or caches. Additional cost authorised: zero.

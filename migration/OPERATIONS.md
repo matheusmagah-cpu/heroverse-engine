@@ -1,52 +1,70 @@
-# HeroVerse operations (compact state for any session)
+# HeroVerse operations — the single source of truth (rewritten 2026-10-18)
 
-Read this file first; do not re-read history, logs or whole evidence files.
+Read this file first. **It wins over every other document.** The only documents that direct the work are:
+- `OPERATIONS.md` (this file): rules, roles, budgets, schedule, pipeline, status.
+- `ops/DOT_PROTOCOL.md`: how Claude gives Dot tasks and accepts its work. `ops/RUNNER_WAKEUP.md`: the runner wake-up.
+- `strategy/DECISIONS.md`: the decision protocol and the decisions in force.
+- `strategy/MODELING_SPEC.md`: what each format must contain (with the rules it cites: `BEAT_THE_REFERENCE_RULE.md`,
+  `FORMAT_OPINION_AND_CRITIQUE.md`, `FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md`).
+- `strategy/VIDIQ.md`: the vidIQ research plan.
+- `ops/ERRORS.json`: every error made, its fix and the automatic antidote that stops it coming back.
 
-## Owner rules (the owner, Matheus, is Brazilian: talk to him in Portuguese; the channel is English-only)
+Everything else is evidence (`evidence/`, `receipts/`, registered forecasts) or instrument documentation
+(`diagnostics/*/README.md`); it records what happened and directs nothing. The older plans and policies (integration
+plan, operating policy, cutover status, monetization decision and plan, predictability contract, mining directives,
+OAuth recovery, probe reviews) were deleted on 2026-10-18 so no one reads two versions of a rule; they remain in git
+history. When something here changes, this file is edited in the same PR.
 
-**Goal and pace**
-- **Goal:** all YPP requirements in 14 days. 30 days is only the error margin.
-- **Benchmarks:** the fastest *policy-clean* channels.
-- **Decisions:** daily, from market data, not on 7/14-day cycles.
+**Accounts (never switched):** channel HeroVerse @heroverse74 (`UCuMF6pJQkyMzaVoAxFL86yA`); repositories
+`matheusmagah-cpu/heroverse-engine` (private) and `matheusmagah-cpu/heroverse-runner` (public). Credentials only in
+GitHub secrets, never in files.
 
-**Policy and channel**
-- **Policy first:** nothing that risks demonetisation. Never use borrowed identities or recordings, fear-bait, fabricated prophecy or reused content.
-- **Channel:** English only. Portuguese uploads are hidden; that is reversible.
-- **Format:** long videos plus Shorts, and every format model the system can produce.
+## Owner rules (Matheus, Brazilian: talk to him in Portuguese; the channel is English-only)
 
-**Mining**
-- **Scope:** whole-video structure mining — script, structure, hook, theme, picture/video format, pacing, music, packaging, comments. Never opening-only.
-- **Accuracy:** must be measured.
+**Goal.** YouTube Partner Program (1,000 subscribers + 4,000 public long-form watch hours in 365 d, or 10 M Shorts
+views in 90 d) in 14 days from 2026-10-18; 30 days at most.
 
-**Modelling**
-- **Bar:** the model must BEAT the mined reference. It needs measured targets and the same-instrument scorecard.
-- **After that:** an authenticity layer of own reasoning, opinion and critique.
+**Who does what.**
+- **Claude = direction** (the brain): strategy, decisions, specs, task order, gate rules, statistics, review, merges,
+  scheduled tasks, reports to the owner. Claude does not loosen any rule to make something pass.
+- **Dot = executor** of token-heavy work (full scripts, large code, long reading), only through `dot-task` issues and
+  PRs (`ops/DOT_PROTOCOL.md`). Dot never merges, publishes, approves, edits frozen QA or touches secrets.
+- **GitHub Actions** = the factory (images, renders, gates, publication, panel, mining). **The owner** decides money,
+  accounts, permissions and anything outward that is not already authorised.
 
-**Production**
-- **Look:** truly cinematic at zero cost: FLUX images, upscale, depth parallax, film finish.
-- **Paid video engines:** only after revenue.
-- **Shorts:** never a blind cut. Analyse the whole video for the best moments, give each Short its own edit, and run a watched review before publishing.
+**Changes.** A change of strategy, format, packaging or cadence needs evidence of ≥ 90 % (one-sided p < 0.10, better
+p < 0.01) of a clear effect toward the goal (`strategy/DECISIONS.md`). Defect fixes, policy compliance and conformance
+to the registered strategy are always done. Nothing is removed to make the system worse; tools are added to improve.
 
-**Publication**
-- **Order:** validate BEFORE upload. Upload public, or private + publishAt when scheduled.
-- **Authority:** automatic publication is authorised once everything passes the gates.
-- **After upload:** once YouTube confirms it, delete the finished video files. Keep only production files.
-- **Compression:** yes, but never at a loss of quality.
+**Errors.** Every error is fixed **and** gets an antidote in the same PR: an automatic check or test that fails if
+the same error comes back, plus one line in `ops/ERRORS.json` (what happened, fix, antidote). PR checks fail a line
+whose antidote does not exist (`ops/test_errors_register.py`). The same error twice is a defect of the antidote and is
+fixed there. This applies to Claude's errors, Dot's and the pipeline's.
 
-**Cost and workflow**
-- **Spending:** zero money.
-- **Claude usage:** everything must fit the owner's Claude Code plan. Claude supervises in short sessions; GitHub, Cloudflare and Gemini do the recurring work. Open new lean sessions yourself when useful.
-- **No rework:** if something fails, find another way, unless an equally good alternative exists.
-- **The owner decides:** for example, the public runner is kept by his decision. He communicates directly; "Dot" is his assistant that does GitHub UI steps.
+**Policy.** No borrowed identities or recordings, fear-bait, fabricated prophecy, reused content, health or wealth
+promises. Original text; KJV Scripture quoted exactly. English only; Portuguese uploads stay hidden (reversible).
+
+**Format (registered strategy).** Daily original prayer videos: morning ~25 min at 10:00 UTC, night ~28–33 min (prayer
++ Scripture for sleep) at 00:00 UTC; one Short per long video (D-03), cut from a QA-PASS render and reviewed. Its
+slot (`schedule.json` `shorts_slots`, one entry): night pilot of day D at D 14:00 UTC, morning pilot of day D at D
+20:00 UTC; `script_check.py` fails two pilots with the same Short slot (`SHORTS_SLOT_TAKEN`).
+
+**Publication.** Only a final decision **PASS** (`publish/prepublish_gate.py` → `out/gate.json`) publishes: frozen QA,
+preflight, whole-file scan, scorecard rows measured on our own file, watched review by the **designated model only**
+(`gemini-3.8-flash`; a fallback model's answer is UNKNOWN). Missing or errored evidence = UNKNOWN = no publication,
+retried. **Nobody writes `APPROVAL.json` by hand.** Frozen QA criteria are never edited after a render. After YouTube
+confirms an upload the finished files are deleted from the release.
+
+**Measurement.** Official numbers (Data API / Analytics API) are separated from own calculations and estimates; YPP
+counters are estimated as YPP counts them (public long-form hours 365 d, public Shorts views 90 d).
 
 ## Budgets (owner rules)
 - **Money:** zero. No paid API, plan or card. Paid video engines (Veo, Runway…) only after the
   channel earns.
-- **Claude (owner's ~R$110/month plan):**
-  - Claude supervises; it does not run the factory.
-  - Everything recurring runs in GitHub Actions and the free APIs.
-  - One short Claude check-in per day, in a fresh session reading this file and `migration/evidence/daily-report/latest.md`.
-  - No polling loops, no full log dumps, no re-reading of large JSON (use `jq`/`python -c` to extract only the needed fields).
+- **Claude (owner's plan):** direction only; token-heavy writing goes to Dot. Claude runs in the main session
+  (it has repository access; fresh routine sessions do not): an hourly clock (dispatch the heartbeat, review Dot's
+  deliveries) and the daily analysis at 08:05 UTC. No polling loops, no full log dumps; extract only needed fields.
+- **Dot:** heavy writing through `dot-task` issues; its own scheduled check of the issue queue at least every 2 h.
 - **GitHub:**
   - Heavy renders run on the public `heroverse-runner` (owner decision, 2026-10-17). It has 4 cores and no minute cap.
   - The owner was told that GitHub's Actions terms restrict runners to work related to their own repository, and accepted the risk to the account.
@@ -91,21 +109,26 @@ analysis (08:05 UTC) is bound to the same session; the two older routines that r
 | 08:30 | structure mining, incremental | structure-mining.yml | production idle |
 | schedule.json | long video at publish_at; Shorts at their slots | YouTube publishAt | — |
 
-Claude's part: write the next scripts (2 per day: morning + night prayer) with schedule.json and images.json, at least 2 days ahead, and read the daily report. Scheduled workflows of the public runner stop after 60 days without a commit there.
+**The engine never stops (content runway).** Every day has two publication slots (night 00:00, morning 10:00 UTC).
+Claude keeps scripts **4 days ahead**: at each daily analysis (08:05) Claude opens the Dot cards for the two slots of
+day D+4 (topic from the decisions protocol + vidIQ), so Dot's cycle, images, render and gate always fit. The daily
+report's **Content runway** (`ops/runway.py`) lists every slot of the next 4 days with its stage and alerts when a slot
+has no script < 72 h before, no render < 20 h before, or no gate PASS < 6 h before. An alert is handled the same day. Scheduled workflows of the public runner stop after 60 days without a commit there.
 
 ## External tools
-- vidIQ: research only (keyword demand, outliers, trending), informative until validated; budget ≤ 30 MCP calls
-  a month on Free; never a source of our own channel's numbers; rules in `strategy/VIDIQ.md`.
+- **vidIQ** (connected 2026-10-18, account linked to HeroVerse): research only — demand, rising topics, outliers
+  (comparables), audience comments, title scores, competitor curves, reference transcripts. 30-day plan with caps
+  ≤ 10 research calls a day and ≤ 2,000 credits per cycle (`strategy/VIDIQ.md`, ledger `evidence/vidiq/ledger.json`).
+  Informative until validated (first validation FAIL, ρ 0.40). Its opinion travels in `gate.json` as
+  `market_evidence_not_deciding`. Write tools are denied in `.claude/settings.json`.
 
-## How publication starts (no Claude tools needed)
-Each pilot has `schedule.json` (`publish_at` plus `shorts_slots`, in UTC).
-
-1. A session reviews the render's inspection sheets.
-2. If they are clean, it writes `inspection/APPROVAL.json`: `approved`, the `output_sha256` from `out/qa.json`, `reviewed_at` and notes.
-3. It merges that file to main.
-4. The push triggers `publish.yml`. It checks the gates, uploads the video scheduled at `publish_at`, publishes the reviewed Shorts at their slots, and deletes the finished files.
-
-`git` push through the session proxy is enough to start this.
+## How publication starts (automatic)
+1. A render pushes `out/qa.json` → `approve.yml`: QA, preflight, scorecard, watched review, whole-file scan →
+   `out/gate.json`. Only PASS writes `inspection/APPROVAL.json` (bound to the file hash) and dispatches `publish.yml`.
+2. `publish.yml` re-checks the gate for that hash, uploads private + `publishAt` from `schedule.json`, captions,
+   thumbnail, playlist, receipt and ledger; then deletes the finished file from the release.
+3. `publish-shorts.yml` uploads the approved Short of a published long video at its slot (ledger, no duplicates).
+4. ERROR/UNKNOWN (quota, fallback reviewer, missing evidence) is retried by `reconcile.yml`; FAIL stops and is reported.
 
 ## Starting any workflow without GitHub API tools
 Commit `migration/requests/<name>.json` with `{"workflow": "file.yml", "inputs": {...}}` to main, through a branch and merge. `requests.yml` dispatches it once and moves the file to `done/`.
@@ -113,15 +136,43 @@ Commit `migration/requests/<name>.json` with `{"workflow": "file.yml", "inputs":
 Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003"}}`.
 
 ## Pipeline gates (never edited after results)
-1. **QA (frozen):** frozen criteria.
-2. **Long video:** perceptual approval (`inspection/APPROVAL.json` bound to the file hash).
-3. **Shorts:** `shorts_qa` plus the watched review (every item ≥ 7, overall ≥ 8).
-4. **After publication:** the finished files are deleted from the release once YouTube confirms the upload.
+1. **Script acceptance** (before images): `production/script_check.py` — PR checks run it on every pilot a PR touches.
+2. **Render QA (frozen criteria v2).**
+3. **Final decision** `prepublish_gate.py`: PASS / FAIL / UNKNOWN per dimension (binding, technical, audio, transcript,
+   captions, sync, image, rights, content/policy, scorecard, whole-file scan, preflight).
+4. **Shorts:** `shorts_qa` + watched review by the designated model (items ≥ 7, overall ≥ 8), from QA-PASS renders only.
 
-## Status
-- **Decisions:** every change follows strategy/DECISIONS.md (evidence → checks → measurement → keep or revert). Active: D-01 night ~28–33 min and D-04 morning ~25 min (conformance to the registered strategy), D-02 four fear-bait videos hidden (compliance), D-03 one Short per long video (one-sided p = 0.062, observational, 48 channels). D-05 subscribe ask reverted (pilot-003 rendered with it before the revert). First measurements: 48 h after pilot-003/004 open.
-- **Published:** pilot-002 (v4zN53ZiUIs) opens 2026-10-18 10:00 UTC; its Shorts were re-made privately with the review fixes and publish at 07:35 UTC if they pass.
-- **Next videos:** pilot-003 (morning prayer, strength) 2026-10-19 10:00 UTC; pilot-004 (night prayer, sleep) 2026-10-20 00:00 UTC. Scripts, images.json, schedule.json in place; images generated 2026-10-18 ~00:00 UTC; renders by the nightly chain.
-- **Spec:** strategy/MODELING_SPEC.md (measured targets, scorecard, policy). Teaching format needs its own frozen QA criteria before its first render.
-- **Mining:** structure 20261017 (+ prayer); accuracy check automated weekly (first windows requested 2026-10-18); packaging mining weekly.
-- **Quota:** YouTube may count uploads and searches separately since 2026-06 (secondary sources; official page unreachable from the session). Until confirmed, the panel stays at 2,400 units. Never split the project to get more quota (sharding is prohibited by the YouTube Developer Policies); more quota only through the API Compliance Audit.
+## Status (2026-10-18 17:20 UTC) — day 1 of the plan
+
+**Publication calendar (UTC; one Short per long video, D-03):**
+
+| Day | Long video | Short | State |
+|---|---|---|---|
+| 10-18 | pilot-002 10:00 ✅ `v4zN53ZiUIs` | 14:00 ✅ `_sUdOLxWy5c` | published |
+| 10-19 | pilot-003 10:00 | 14:00 | render, QA, scan, preflight PASS; Short approved (gemini-3.8-flash). Watched review waits for the Gemini reset 07:00 → approve → upload before 10:00 |
+| 10-20 | pilot-004 00:00 · pilot-005 10:00 | 14:00 · 20:00 | 004 as 003 (Short approved); 005 images after 00:00 UTC, then render |
+| 10-21 | pilot-006 00:00 · pilot-007 10:00 | 14:00 · 20:00 | scripts on main; images and render in the nights before |
+| 10-22 | pilot-008 00:00 · pilot-009 10:00 | 14:00 · 20:00 | 008: Dot finishing PR #117 (card #114 SPEC v2, due 10-19 06:00); 009: card #119 waits TOPIC CONFIRMED |
+| 10-23 | pilot-010 00:00 · (D+4 card) | 14:00 · 20:00 | 010: card #120 waits TOPIC CONFIRMED; next cards opened at each daily analysis |
+
+**Dot:** contract `ops/DOT_PROTOCOL.md` (8-part cards, ALLOWED PATHS enforced by PR checks). Open: #114 (SPEC v2),
+#119, #120. Dot's own 2-hour polling is not yet confirmed; a card not delivered shows up as a Content runway alert.
+
+**Today's changes (all PR checks green):** #121 superseded documents deleted · #122 one Short slot per pilot ·
+#123 late Shorts never take another pilot's slot; more tests in PR checks · #124 Claude–Dot contract with scope check
+· #125 error register with enforced antidotes (`ops/ERRORS.json`) · #126 content runway in the daily report.
+
+**Scheduler:** heartbeat (GitHub crons unreliable: dropped again 14:41) + runner-wake (Dot, PR #106) + hourly Claude
+clock at :14 (dispatching the heartbeat every hour since 12:14).
+
+**Checkpoints:** 02:15 first real runner-wake dispatch (pilot-005) · 06:00 Dot deadline #114 · 07:25 approval of
+pilot-003 (deadline 10:00) and 004 · 08:05 daily analysis (TOPIC CONFIRMED for #119/#120, cards for D+4).
+
+**Not yet proven:** gate PASS on a real render; runner-wake real dispatch; Short reviewed by the designated model and
+published by the pipeline; review calibration; mining holdout; vidIQ title score vs CTR.
+
+**Indicators (official 2026-10-18):** 263 subscribers; public long-form watch hours 365 d ≈ 3.3 (own calc.); public
+Shorts views 90 d ≈ 40.
+
+**Decisions active:** D-01/D-04 lengths (conformance), D-02 fear-bait hidden (compliance), D-03 one Short per long
+video (p = 0.062, observational). D-05 subscribe ask reverted.

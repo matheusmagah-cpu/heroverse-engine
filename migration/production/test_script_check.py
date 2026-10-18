@@ -60,6 +60,11 @@ class Check(unittest.TestCase):
                 x["pause_after"] = 4.0
         self.assertTrue(any(p.startswith("SPEECH_PRESENCE_EST") for p in self.run_check(silent)))
 
+    def test_reused_images_must_be_hydrated(self):
+        def unhydrated(s, d):
+            (d / "images" / "figure-a.json").unlink()
+        self.assertTrue(any(p.startswith("REUSED_NOT_HYDRATED") for p in self.run_check(unhydrated)))
+
     def test_frozen_criteria_and_slot(self):
         def edit(s, d):
             (d / "qa_criteria.json").write_text((d / "qa_criteria.json").read_text() + " ")
@@ -67,6 +72,13 @@ class Check(unittest.TestCase):
         taken = json.loads((HERE / "pilot-003" / "schedule.json").read_text())["publish_at"]
         probs = self.run_check(at=taken)
         self.assertTrue(any(p.startswith("SLOT_TAKEN") or p == "PUBLISH_AT_IN_THE_PAST" for p in probs))
+
+    def test_shorts_slot_taken(self):
+        def same(s, d):
+            sch = json.loads((d / "schedule.json").read_text())
+            sch["shorts_slots"] = json.loads((HERE / "pilot-003" / "schedule.json").read_text())["shorts_slots"][:1]
+            (d / "schedule.json").write_text(json.dumps(sch))
+        self.assertTrue(any(p.startswith("SHORTS_SLOT_TAKEN") for p in self.run_check(same)))
 
 
 if __name__ == "__main__":

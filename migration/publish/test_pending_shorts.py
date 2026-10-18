@@ -40,6 +40,17 @@ class Pending(unittest.TestCase):
             self.assertEqual(ps.pending(prod, ledger, datetime(2026, 10, 18, 19, 50, tzinfo=timezone.utc))[1],
                              ["2026-10-18T23:00:00Z", "2026-10-19T14:00:00Z", "2026-10-19T20:00:00Z"])
 
+    def test_late_short_never_takes_another_pilots_slot(self):
+        with tempfile.TemporaryDirectory() as t:
+            prod, ledger = setup(t, approved=1)
+            other = prod / "pilot-003"; other.mkdir()
+            (other / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-18T10:00:00Z",
+                                                             "shorts_slots": ["2026-10-18T20:00:00Z"]}))
+            ledger["entries"]["short:pilot-001:z"] = {"video_id": "y", "slot": "2026-10-18T23:00:00Z"}
+            # missed its 14:00 slot (run at 14:11): 20:00 is pilot-003's, 23:00 is already used -> next free slot
+            self.assertEqual(ps.pending(prod, ledger, datetime(2026, 10, 18, 14, 11, tzinfo=timezone.utc))[1],
+                             ["2026-10-19T14:00:00Z"])
+
     def test_nothing_when_long_unpublished_or_all_done(self):
         with tempfile.TemporaryDirectory() as t:
             prod, ledger = setup(t, long_published=False)

@@ -117,6 +117,12 @@ def check(pilot_dir, production=None):
     for other in production.glob("pilot-[0-9][0-9][0-9]/schedule.json"):
         if other.parent.name != d.name and json.loads(other.read_text()).get("publish_at") == at:
             problems.append(f"SLOT_TAKEN by {other.parent.name}")
+    # one Short per long video goes at the pilot's first Shorts slot: night pilot of day D at D 14:00 UTC, morning
+    # pilot of day D at D 20:00 UTC, so two pilots never put their Short at the same minute
+    first = (sch.get("shorts_slots") or [None])[0]
+    for other in production.glob("pilot-[0-9][0-9][0-9]/schedule.json"):
+        if first and other.parent.name != d.name and (json.loads(other.read_text()).get("shorts_slots") or [None])[0] == first:
+            problems.append(f"SHORTS_SLOT_TAKEN {first} by {other.parent.name}")
     img = json.loads((d / "images.json").read_text())
     planned = {x.get("id") for x in img.get("images", []) if isinstance(x, dict)}
     for ids in (img.get("reused") or {}).values():
@@ -125,6 +131,10 @@ def check(pilot_dir, production=None):
     for b in s.get("backgrounds", []) + [s.get("figure")]:
         if b and b not in planned | have:
             problems.append(f"IMAGE_NOT_PLANNED {b}")
+    for source, ids in (img.get("reused") or {}).items():
+        for i in ids if isinstance(ids, list) else []:
+            if i not in have:   # the render reads records from the pilot's own images/ folder
+                problems.append(f"REUSED_NOT_HYDRATED {source}/{i} (run imagegen/hydrate_reused.py)")
     new = [x.get("id") for x in img.get("images", []) if isinstance(x, dict) and x.get("id") not in have]
     if len(new) > 12:
         problems.append(f"TOO_MANY_NEW_IMAGES {len(new)} > 12 (Cloudflare free day)")
