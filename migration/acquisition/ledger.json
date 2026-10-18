@@ -855,6 +855,17 @@
       "completed_at": "2026-10-18T00:19:47.262234+00:00",
       "run_id": "39081822294",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-NUXLAy7A8TM-518-548-v1",
+      "video_id": "NUXLAy7A8TM",
+      "start_seconds": 518,
+      "end_seconds": 548,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-18T00:20:00.576196+00:00",
+      "day_utc": "2026-10-18",
+      "units_remaining_at_reservation": 472,
+      "reserved_units": 14
     }
   ]
 }
