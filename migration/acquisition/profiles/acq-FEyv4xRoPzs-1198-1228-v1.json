@@ -1,0 +1,146 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 4,
+    "picture_changes_per_minute": 7.98,
+    "median_shot_seconds": 7.333,
+    "longest_shot_seconds": 8.733,
+    "motion_median_top_decile_diff": 1.14
+   },
+   "rhythm": {
+    "audio_onsets": 44,
+    "audio_onsets_per_minute": 87.8,
+    "tempo": {
+     "bpm": 57.05,
+     "confidence": 0.054
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.093,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 2,
+     "visual_events": 4
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -25.9,
+    "loudness_range_lu": 7.8,
+    "true_peak_dbtp": -11.4
+   },
+   "colour": {
+    "mean_brightness": 0.6826,
+    "brightness_std_over_time": 0.1612,
+    "mean_saturation": 0.2142,
+    "saturation_std_over_time": 0.089
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.903,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.048
+    },
+    "label_counts": {
+     "speech": 56,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 3,
+     "UNCERTAIN": 3
+    },
+    "words": 67,
+    "words_per_minute": 133.7,
+    "transcript": "great cloud, fire, living creatures, wheels, a throne, and on the throne, a likeness, like a man. Then, in the last verse of the chapter, Ezekiel tries to describe the brightness all around the one on the throne, verse 28. the appearance of the bow that is in the cloud in the day of rain, so was the appearance of the brightness roundabout. This was the appearance"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 4.815,
+     "frames": 9
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 4.32,
+     "end_seconds": 5.295,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 4.8,
+     "end_seconds": 9.135,
+     "frames": 8
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 8.64,
+     "end_seconds": 9.615,
+     "frames": 1
+    },
+    {
+     "label": "silence",
+     "start_seconds": 9.12,
+     "end_seconds": 10.095,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 9.6,
+     "end_seconds": 17.775,
+     "frames": 16
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 17.28,
+     "end_seconds": 18.255,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 17.76,
+     "end_seconds": 19.695,
+     "frames": 3
+    },
+    {
+     "label": "silence",
+     "start_seconds": 19.2,
+     "end_seconds": 20.175,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 19.68,
+     "end_seconds": 28.335,
+     "frames": 17
+    },
+    {
+     "label": "silence",
+     "start_seconds": 27.84,
+     "end_seconds": 28.815,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 28.32,
+     "end_seconds": 30.023,
+     "frames": 3
+    }
+   ]
+  }
+ ]
+}
