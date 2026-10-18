@@ -1,8 +1,22 @@
 # HeroVerse operations — the single source of truth (rewritten 2026-10-18)
 
-Read this file first. **It wins over every other document**: older plans (`INTEGRATION_PLAN.md`,
-`OPERATING_POLICY.md`, `CUTOVER_STATUS.md`, `MONETIZATION_DECISION.md`, earlier evidence notes) are history. When
-something here changes, this file is edited in the same PR.
+Read this file first. **It wins over every other document.** The only documents that direct the work are:
+- `OPERATIONS.md` (this file): rules, roles, budgets, schedule, pipeline, status.
+- `ops/DOT_PROTOCOL.md`: how Claude gives Dot tasks and accepts its work. `ops/RUNNER_WAKEUP.md`: the runner wake-up.
+- `strategy/DECISIONS.md`: the decision protocol and the decisions in force.
+- `strategy/MODELING_SPEC.md`: what each format must contain (with the rules it cites: `BEAT_THE_REFERENCE_RULE.md`,
+  `FORMAT_OPINION_AND_CRITIQUE.md`, `FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md`).
+- `strategy/VIDIQ.md`: the vidIQ research plan.
+
+Everything else is evidence (`evidence/`, `receipts/`, registered forecasts) or instrument documentation
+(`diagnostics/*/README.md`); it records what happened and directs nothing. The older plans and policies (integration
+plan, operating policy, cutover status, monetization decision and plan, predictability contract, mining directives,
+OAuth recovery, probe reviews) were deleted on 2026-10-18 so no one reads two versions of a rule; they remain in git
+history. When something here changes, this file is edited in the same PR.
+
+**Accounts (never switched):** channel HeroVerse @heroverse74 (`UCuMF6pJQkyMzaVoAxFL86yA`); repositories
+`matheusmagah-cpu/heroverse-engine` (private) and `matheusmagah-cpu/heroverse-runner` (public). Credentials only in
+GitHub secrets, never in files.
 
 ## Owner rules (Matheus, Brazilian: talk to him in Portuguese; the channel is English-only)
 
