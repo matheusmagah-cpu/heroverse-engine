@@ -39,7 +39,9 @@ to the registered strategy are always done. Nothing is removed to make the syste
 promises. Original text; KJV Scripture quoted exactly. English only; Portuguese uploads stay hidden (reversible).
 
 **Format (registered strategy).** Daily original prayer videos: morning ~25 min at 10:00 UTC, night ~28–33 min (prayer
-+ Scripture for sleep) at 00:00 UTC; one Short per long video (D-03), cut from a QA-PASS render and reviewed.
++ Scripture for sleep) at 00:00 UTC; one Short per long video (D-03), cut from a QA-PASS render and reviewed. Its
+slot (`schedule.json` `shorts_slots`, one entry): night pilot of day D at D 14:00 UTC, morning pilot of day D at D
+20:00 UTC; `script_check.py` fails two pilots with the same Short slot (`SHORTS_SLOT_TAKEN`).
 
 **Publication.** Only a final decision **PASS** (`publish/prepublish_gate.py` → `out/gate.json`) publishes: frozen QA,
 preflight, whole-file scan, scorecard rows measured on our own file, watched review by the **designated model only**
