@@ -1,0 +1,145 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 16,
+    "picture_changes_per_minute": 31.93,
+    "median_shot_seconds": 1.933,
+    "longest_shot_seconds": 4.133,
+    "motion_median_top_decile_diff": 1.208
+   },
+   "rhythm": {
+    "audio_onsets": 49,
+    "audio_onsets_per_minute": 97.78,
+    "tempo": {
+     "bpm": 143.2,
+     "confidence": 0.049
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.25,
+     "chance_fraction": 0.103,
+     "lift": 2.43
+    },
+    "sync": {
+     "median_offset_seconds": 0.245782,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 6,
+     "visual_events": 16,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -15.4,
+    "loudness_range_lu": 3.0,
+    "true_peak_dbtp": -2.4
+   },
+   "colour": {
+    "mean_brightness": 0.2741,
+    "brightness_std_over_time": 0.0915,
+    "mean_saturation": 0.3433,
+    "saturation_std_over_time": 0.1278
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.968,
+     "singing": 0.0,
+     "music": 0.79,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 54,
+     "singing": 0,
+     "music": 8,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 65,
+    "words_per_minute": 129.7,
+    "transcript": "In dispute, over the body of Moses, Scripture gives no more than that, no location, no cause, no outcome. Jude mentions the scene as something his readers already knew and uses it for a single point. Even Michael did not dare to pronounce judgment on his own authority. Where did Jude get it? Here story moves into tradition. Christian writers, origin among them, connected this"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 5.775,
+     "frames": 11
+    },
+    {
+     "label": "music",
+     "start_seconds": 5.28,
+     "end_seconds": 6.255,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 5.76,
+     "end_seconds": 13.455,
+     "frames": 15
+    },
+    {
+     "label": "music",
+     "start_seconds": 12.96,
+     "end_seconds": 13.935,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 13.44,
+     "end_seconds": 17.295,
+     "frames": 7
+    },
+    {
+     "label": "music",
+     "start_seconds": 16.8,
+     "end_seconds": 17.775,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 17.28,
+     "end_seconds": 22.095,
+     "frames": 9
+    },
+    {
+     "label": "music",
+     "start_seconds": 21.6,
+     "end_seconds": 23.055,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 22.56,
+     "end_seconds": 25.455,
+     "frames": 5
+    },
+    {
+     "label": "music",
+     "start_seconds": 24.96,
+     "end_seconds": 26.895,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 26.4,
+     "end_seconds": 30.023,
+     "frames": 7
+    }
+   ]
+  }
+ ]
+}
