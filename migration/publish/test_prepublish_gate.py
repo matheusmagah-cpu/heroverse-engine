@@ -21,7 +21,7 @@ RUBRIC = sorted({c for spec in g.DIMENSIONS.values() for c in spec["review"]})
 def good():
     qa = {"output_sha256": SHA, "status": "PASS", "criteria_version": "pilot-qa-criteria-v2",
           "criteria_sha256": hashlib.sha256(CRITERIA).hexdigest(), "checks": {c: True for c in CHECKS}}
-    review = {"output_sha256": SHA, "status": "PASS", "watched_review": {**{c: 9 for c in RUBRIC}, "overall": 9},
+    review = {"output_sha256": SHA, "status": "PASS", "watched_review": {**{c: 9 for c in RUBRIC}, "overall": 9, "model": "gemini-3.8-flash"},
               "scorecard_hard": {n: {"pass": True, "value": 1} for n in g.SCORE_HARD},
               "scorecard_reported": {"beats_per_minute": {"value": 1.0, "inside": False}}}
     return qa, {"output_sha256": SHA}, review
@@ -91,6 +91,10 @@ class Gate(unittest.TestCase):
         miss = copy.deepcopy(rev); del miss["watched_review"]["policy_safe"]
         self.assertEqual(run(qa, man, miss)["decision"], "UNKNOWN")                      # score absent
         self.assertEqual(run(qa, man, rev, preflight=None)["decision"], "UNKNOWN")       # preflight could not run
+        fallback = copy.deepcopy(rev); fallback["watched_review"].update({"model": "gemini-3.6-flash", "policy_safe": 6})
+        self.assertEqual(run(qa, man, fallback)["decision"], "UNKNOWN")                  # uncalibrated reviewer: no verdict
+        lite = copy.deepcopy(rev); lite["watched_review"]["model"] = "gemini-3.5-flash-lite"
+        self.assertFalse(run(qa, man, lite)["eligible_for_automatic_publication"])     # not even when it says 9
         self.assertEqual(run(qa, {}, rev)["decision"], "UNKNOWN")                        # no manifest hash
         self.assertEqual(run(qa, man, rev, scan=None)["decision"], "UNKNOWN")            # whole-file scan missing
         self.assertEqual(run(qa, man, rev, scan={"status": "ERROR", "error": "x"})["decision"], "UNKNOWN")
