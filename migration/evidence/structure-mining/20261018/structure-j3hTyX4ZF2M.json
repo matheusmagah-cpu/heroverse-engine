@@ -1,0 +1,362 @@
+{
+ "version": "structure-record-v2",
+ "thumbnail_analysis": {
+  "text_on_thumbnail": "UNKNOWN",
+  "words": 0,
+  "faces": 1,
+  "figure": "Young woman",
+  "emotion": "Exhausted",
+  "colours": "White background, red shirt, grey blanket",
+  "composition": "Close-up of a person sleeping on a bed",
+  "contrast_with_title": "The title calls for urgency ('come quickly'), but the image shows someone sleeping peacefully",
+  "curiosity_device": "Why is she sleeping when the title demands haste?"
+ },
+ "status": "MODEL_REPORTED_NOT_VERIFIED",
+ "video": {
+  "video_id": "j3hTyX4ZF2M",
+  "channel_id": "UCp5rbjYu8EvokDj9XO_8kEA",
+  "channel": "United Prayer",
+  "channel_subscribers": 32300,
+  "title": "Aaa Jao Jaldi Jaldi 😱😱",
+  "published_at": "2026-09-05T21:15:36Z",
+  "description": "",
+  "tags": [],
+  "seconds": 1882,
+  "views": 132,
+  "likes": 3,
+  "comments": 1,
+  "thumbnail": "https://i.ytimg.com/vi/j3hTyX4ZF2M/maxresdefault.jpg",
+  "role": "winner"
+ },
+ "comments": [
+  {
+   "text": "Yes!",
+   "likes": 0
+  }
+ ],
+ "windows": [
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "window_start_seconds": 0,
+   "window_end_seconds": 300,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 0,
+     "end_seconds": 300,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A person is lying on a bed under a blanket.",
+     "device": "none",
+     "emotion": "neutral"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter",
+    "shot_sizes": [
+     "medium shot",
+     "close up"
+    ],
+    "shots_counted": 1,
+    "motion": "static camera with minor handheld movement",
+    "on_screen_text": "UNKNOWN",
+    "figure_or_presenter": "a person lying in bed",
+    "colour_and_light": "natural indoor lighting",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "UNKNOWN",
+    "pace": "UNKNOWN",
+    "music": "ambient background noise",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "window_start_seconds": 300,
+   "window_end_seconds": 600,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 300,
+     "end_seconds": 600,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A young woman is resting on a bed while various visual filters and effects are applied to the footage.",
+     "device": "none",
+     "emotion": "neutral"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter",
+    "shot_sizes": [
+     "medium close up",
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static camera with video filters applied",
+    "on_screen_text": "none",
+    "figure_or_presenter": "young woman resting on a bed",
+    "colour_and_light": "natural lighting with various color and filter effects",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "none",
+    "pace": "none",
+    "music": "ambient or background sounds",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "window_start_seconds": 600,
+   "window_end_seconds": 900,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 600,
+     "end_seconds": 900,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A symmetrical mirrored visual of a person resting on a bed with no spoken dialogue or sound effects throughout the entire window.",
+     "device": "none",
+     "emotion": "neutral"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter and mirrored filter effect",
+    "shot_sizes": [
+     "medium close-up"
+    ],
+    "shots_counted": 1,
+    "motion": "static mirrored reflection",
+    "on_screen_text": "none",
+    "figure_or_presenter": "one female figure lying down",
+    "colour_and_light": "natural indoor lighting, bright white tones",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "none",
+    "pace": "none",
+    "music": "none",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [
+    "No audio or dialogue present in this timeframe"
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "window_start_seconds": 900,
+   "window_end_seconds": 1200,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 900,
+     "end_seconds": 1200,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A symmetrical mirrored visual of a person resting in bed with a sock puppet appearing later in the scene.",
+     "device": "none",
+     "emotion": "calm"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter",
+    "shot_sizes": [
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static with symmetrical mirror filter",
+    "on_screen_text": "none",
+    "figure_or_presenter": "a person resting in bed with symmetrical reflection effect",
+    "colour_and_light": "bright indoor lighting",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "none",
+    "pace": "none",
+    "music": "ambient music",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "window_start_seconds": 1200,
+   "window_end_seconds": 1500,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 1200,
+     "end_seconds": 1500,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A symmetrical mirrored visual of a person resting with a patterned blanket or garment, accompanied by ambient audio.",
+     "device": "none",
+     "emotion": "calm"
+    }
+   ],
+   "picture": {
+    "image_kind": "live action video with mirror effect",
+    "shot_sizes": [
+     "close up"
+    ],
+    "shots_counted": 1,
+    "motion": "static with symmetrical mirror filter",
+    "on_screen_text": "UNKNOWN",
+    "figure_or_presenter": "person lying down resting",
+    "colour_and_light": "neutral indoor lighting",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "UNKNOWN",
+    "pace": "UNKNOWN",
+    "music": "ambient sound",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [
+    "No speech in this time window",
+    "Mirror filter applied to the visuals"
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "window_start_seconds": 1500,
+   "window_end_seconds": 1800,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 1500,
+     "end_seconds": 1800,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A mirrored, symmetrical view of a person lying in bed next to a pet bird wrapped in a cloth.",
+     "device": "none",
+     "emotion": "calm"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter",
+    "shot_sizes": [
+     "Medium close-up"
+    ],
+    "shots_counted": 1,
+    "motion": "static",
+    "on_screen_text": "none",
+    "figure_or_presenter": "A person lying in bed with a bird",
+    "colour_and_light": "Bright interior lighting with mirror effect",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "none",
+    "pace": "none",
+    "music": "ambient music",
+    "music_changes": "constant ambient background music",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [
+    "No speech in this video segment"
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "j3hTyX4ZF2M",
+   "window_start_seconds": 1800,
+   "window_end_seconds": 1882,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 1800,
+     "end_seconds": 1882,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A video segment featuring a symmetrical mirror effect of a person resting with a bird in the center.",
+     "device": "none",
+     "emotion": "neutral"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter video with mirror effect",
+    "shot_sizes": [
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static with symmetrical mirror filter",
+    "on_screen_text": "none",
+    "figure_or_presenter": "a person resting with a bird",
+    "colour_and_light": "natural lighting with mirror reflection symmetry",
+    "transitions": "cut"
+   },
+   "sound": {
+    "voice": "none",
+    "pace": "none",
+    "music": "none",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  }
+ ],
+ "measured": {
+  "minutes": 31.4,
+  "title_words": 5,
+  "title_chars": 22,
+  "chapters": 0,
+  "likes_per_1k_views": 22.7,
+  "comments_per_1k_views": 7.58,
+  "coverage_fraction": 1.0,
+  "beats": 7,
+  "beat_seconds_median": 300,
+  "beats_per_minute": 0.22,
+  "shots_per_minute_model_counted": 0.22,
+  "first_spoken_beat": null,
+  "beat_mix": {
+   "music_only": 7
+  },
+  "scripture_references": [],
+  "scripture_per_10_min": 0.0,
+  "speech": {
+   "words": 0,
+   "words_per_minute": 0.0,
+   "sentence_words_median": null,
+   "you_per_100_words": 0.0,
+   "questions_per_minute": 0.0,
+   "first_15s_words": ""
+  }
+ }
+}
