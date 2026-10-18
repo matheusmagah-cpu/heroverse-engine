@@ -27,12 +27,17 @@ def good():
     return qa, {"output_sha256": SHA}, review
 
 
-def run(qa, manifest, review, preflight=(), video_bytes=None, criteria=CRITERIA):
+SCAN = {"status": "PASS", "rows": {"black_picture": {"longest_s": 0, "pass": True, "blocking": True},
+                                   "digital_silence": {"longest_s": 0, "pass": True, "blocking": True},
+                                   "frozen_picture": {"longest_s": 9, "inside": False, "blocking": False}}}
+
+
+def run(qa, manifest, review, preflight=(), video_bytes=None, criteria=CRITERIA, scan=SCAN):
     with tempfile.TemporaryDirectory() as t:
         d = Path(t) / "pilot-009"
         (d / "out").mkdir(parents=True)
         (d / "qa_criteria.json").write_bytes(criteria)
-        for name, obj in (("qa", qa), ("manifest", manifest), ("review", review)):
+        for name, obj in (("qa", qa), ("manifest", manifest), ("review", review), ("scan", scan)):
             if obj is not None:
                 (d / "out" / f"{name}.json").write_text(json.dumps(obj))
         video = None
@@ -48,6 +53,7 @@ class Gate(unittest.TestCase):
         self.assertEqual(r["decision"], "PASS")
         self.assertTrue(r["eligible_for_automatic_publication"])
         self.assertIn("beats_per_minute", r["informative_not_deciding"])  # outside its band, still PASS
+        self.assertIn("scan_frozen_picture", r["informative_not_deciding"])  # reported until calibrated
 
     def test_bad_cases_fail(self):
         qa, man, rev = good()
@@ -61,6 +67,8 @@ class Gate(unittest.TestCase):
         hard = copy.deepcopy(rev); hard["scorecard_hard"]["coverage"]["pass"] = False
         self.assertEqual(run(qa, man, hard)["decision"], "FAIL")
         self.assertEqual(run(qa, man, rev, preflight=["THUMBNAIL_SIZE"])["decision"], "FAIL")
+        gap = copy.deepcopy(SCAN); gap["status"] = "FAIL"; gap["rows"]["black_picture"].update(longest_s=1.0, **{"pass": False})
+        self.assertEqual(run(qa, man, rev, scan=gap)["dimensions"]["full_file_scan"], "FAIL")   # 1 s black gap
         # a render whose QA criteria were edited after the freeze never passes
         self.assertEqual(run(qa, man, rev, criteria=CRITERIA + b" ")["dimensions"]["binding"], "FAIL")
         # the file given is not the approved one
@@ -82,6 +90,8 @@ class Gate(unittest.TestCase):
         self.assertEqual(run(qa, man, miss)["decision"], "UNKNOWN")                      # score absent
         self.assertEqual(run(qa, man, rev, preflight=None)["decision"], "UNKNOWN")       # preflight could not run
         self.assertEqual(run(qa, {}, rev)["decision"], "UNKNOWN")                        # no manifest hash
+        self.assertEqual(run(qa, man, rev, scan=None)["decision"], "UNKNOWN")            # whole-file scan missing
+        self.assertEqual(run(qa, man, rev, scan={"status": "ERROR", "error": "x"})["decision"], "UNKNOWN")
 
     def test_fail_outranks_unknown(self):
         qa, man, _ = good()
