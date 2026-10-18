@@ -14,6 +14,9 @@ Evidence and method (each item names where it comes from):
           miss a defect shorter than ~2 s. Independent of qa (different instrument).
 - score   out/review.json scorecard hard rows (same miner as the reference winners).
 - preflight  publish/preflight.py (YouTube limits, thumbnail, schedule, captions).
+- scan    out/scan.json (production/signal_scan.py): ffmpeg black/silence detectors over EVERY frame and
+          sample, covering what the 0.5 fps review can miss. Scan rows are not bound to a hash inside the file:
+          approve.yml writes it from the hash-verified download in the same job.
 - binding qa, manifest and review name the same output_sha256; the QA criteria file
           is the frozen one; when the video file is given, its hash is recomputed.
 
@@ -146,6 +149,12 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
         dims["scorecard"] = [item("score", n, "UNKNOWN", "row absent") if n not in hard else
                              item("score", n, "PASS" if hard[n].get("pass") else "FAIL", hard[n].get("value"))
                              for n in sorted(set(SCORE_HARD) | set(hard))]
+    scan = load(d / "out" / "scan.json")
+    if scan is None or scan.get("status") not in ("PASS", "FAIL"):
+        dims["full_file_scan"] = [item("scan", "signal_scan", "UNKNOWN", (scan or {}).get("error", "out/scan.json missing"))]
+    else:
+        dims["full_file_scan"] = [item("scan", n, "PASS" if r["pass"] else "FAIL", r["longest_s"])
+                                  for n, r in scan["rows"].items() if r.get("blocking")]
     if preflight_problems is None:
         dims["preflight"] = [item("preflight", "preflight", "UNKNOWN", "not run")]
     else:
@@ -154,7 +163,9 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     decision = decide(list(summary.values()))
     return {"version": VERSION, "pilot_id": d.name, "output_sha256": sha, "decision": decision,
             "eligible_for_automatic_publication": decision == "PASS", "dimensions": summary, "items": dims,
-            "informative_not_deciding": (review or {}).get("scorecard_reported", {}),
+            "informative_not_deciding": {**(review or {}).get("scorecard_reported", {}),
+                                         **{f"scan_{n}": r for n, r in ((scan or {}).get("rows") or {}).items()
+                                            if not r.get("blocking")}},
             "method_notes": {"review_sampling": "watched review samples pictures at 0.5 frames/s, low resolution",
                              "not_claimed": ["perceived quality by viewers", "retention, CTR or revenue",
                                              "originality beyond the rights checks listed"]}}
