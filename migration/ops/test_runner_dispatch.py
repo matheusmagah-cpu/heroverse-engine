@@ -82,6 +82,25 @@ class Dispatch(unittest.TestCase):
             with self.assertRaisesRegex(d.Blocked, 'INCOMPLETE_RUN_HISTORY'):
                 api.runs(NOW)
 
+    def test_malformed_pages_and_metadata_fail_closed(self):
+        for page in (None, [], {}, {'total_count': True, 'workflow_runs': []},
+                     {'total_count': -1, 'workflow_runs': []},
+                     {'total_count': 0, 'workflow_runs': [run()]}):
+            with self.assertRaises(d.Blocked):
+                d.history_page(page)
+        for field in ('event', 'display_title', 'status', 'created_at', 'updated_at'):
+            row = run()
+            del row[field]
+            api = d.GitHub('fake-offline-token')
+            responses = [{'total_count': 0, 'workflow_runs': []}] * len(d.ACTIVE)
+            responses += [{'total_count': 1, 'workflow_runs': [row]}]
+            with patch.object(api, 'request', side_effect=responses):
+                with self.assertRaisesRegex(d.Blocked, 'INVALID_RUN_METADATA'):
+                    api.runs(NOW)
+        for row in (None, {}, dict(run(), event=42), dict(run(), updated_at='invalid')):
+            with self.assertRaises(d.Blocked):
+                d.validate_run(row)
+
     def test_execute_empty_active_dispatch_and_api_error(self):
         with tempfile.TemporaryDirectory() as t:
             ledger = Path(t) / 'ledger.json'

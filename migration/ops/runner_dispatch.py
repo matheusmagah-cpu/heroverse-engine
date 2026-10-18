@@ -33,6 +33,28 @@ def timestamp(value):
     return value
 
 
+def history_page(data):
+    if not isinstance(data, dict):
+        raise Blocked('INVALID_RUN_HISTORY')
+    count, rows = data.get('total_count'), data.get('workflow_runs')
+    if type(count) is not int or count < 0 or not isinstance(rows, list) or len(rows) > count:
+        raise Blocked('INVALID_RUN_HISTORY')
+    return count, rows
+
+
+def validate_run(row):
+    if not isinstance(row, dict):
+        raise Blocked('INVALID_RUN_METADATA')
+    for field in ('status', 'event', 'display_title', 'created_at', 'updated_at'):
+        if not isinstance(row.get(field), str) or not row[field]:
+            raise Blocked('INVALID_RUN_METADATA')
+    try:
+        if timestamp(row['updated_at']) < timestamp(row['created_at']):
+            raise ValueError('inverted timestamps')
+    except (ValueError, TypeError):
+        raise Blocked('INVALID_RUN_METADATA') from None
+
+
 def candidate(production, ledger, now):
     rows = render_queue.due(production, ledger, now, 48)
     row = next((r for r in rows if not r['missing_images'] and not r['rendered']), None)
@@ -91,19 +113,18 @@ class GitHub:
         # Check active runs independently of age, including approvals and queued concurrency.
         for status in ACTIVE:
             data = self.request(base + '?per_page=1&status=' + status)
-            if not isinstance(data.get('total_count'), int) or not isinstance(data.get('workflow_runs'), list):
-                raise Blocked('INVALID_ACTIVE_HISTORY')
-            if data['total_count']:
+            count, _ = history_page(data)
+            if count:
                 return [{'status': status}]
         rows = []
         since = (now - WINDOW).strftime('%Y-%m-%dT%H:%M:%SZ')
         for page in range(1, 11):
             data = self.request(base + f'?per_page=100&page={page}&created=%3E%3D{since}')
-            batch = data['workflow_runs']
-            if not isinstance(batch, list):
-                raise Blocked('INVALID_RUN_HISTORY')
+            count, batch = history_page(data)
+            for row in batch:
+                validate_run(row)
             rows.extend(batch)
-            if len(rows) >= data['total_count']:
+            if len(rows) >= count:
                 return rows
             if not batch:
                 break
