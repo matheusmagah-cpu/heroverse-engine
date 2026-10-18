@@ -337,6 +337,11 @@
    ]
   }
  },
+ "market_evidence_not_deciding": {
+  "status": "UNKNOWN",
+  "detail": "no vidIQ market opinion for this pilot",
+  "not_claimed": "market evidence only: not technical quality, not a performance forecast, not a guarantee of views, revenue or monetization"
+ },
  "method_notes": {
   "review_sampling": "watched review samples pictures at 0.5 frames/s, low resolution",
   "not_claimed": [
