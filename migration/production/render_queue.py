@@ -4,7 +4,8 @@
 A pilot is due when its schedule.json opens within HORIZON hours and it is not
 yet on YouTube. It needs images while any image its script uses has no
 images/<id>.json record; it needs a render when its images are complete and no
-render manifest exists for the current script (manifest.script_sha256).
+completed frozen-v3 render exists for the current script and matching output hash.
+A completed v3 QA FAIL is not rerendered repeatedly; it awaits an input correction.
 usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
   images: prints "PILOT id,id,..." for every pilot with images still missing
   render: prints the next pilot to render (earliest publish time) or nothing
@@ -15,6 +16,7 @@ usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
 from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+import re
 from pathlib import Path
 import sys
 
@@ -31,6 +33,29 @@ def needed_images(d, script):
 
 STANDARD_QA = "pilot-qa-criteria-v3"  # migration/STANDARD.md v1: the only renders that may be approved or published
 
+STANDARD_QA_SHA256 = "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
+
+
+def object_or_empty(path):
+    try:
+        value = json.loads(Path(path).read_bytes())
+    except (OSError, ValueError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def current_render(manifest, qa, script_sha):
+    """Completed current render, not a publication verdict. FAIL must not loop."""
+    if not isinstance(manifest, dict) or not isinstance(qa, dict):
+        return False
+    output = manifest.get("output_sha256")
+    return (isinstance(output, str) and re.fullmatch(r"[0-9a-f]{64}", output) is not None
+            and manifest.get("script_sha256") == script_sha
+            and qa.get("output_sha256") == output
+            and qa.get("criteria_version") == STANDARD_QA
+            and qa.get("criteria_sha256") == STANDARD_QA_SHA256
+            and qa.get("status") in ("PASS", "FAIL"))
+
 
 def due(production, ledger, now, hours):
     entries = ledger.get("entries", {})
@@ -42,12 +67,12 @@ def due(production, ledger, now, hours):
         if not now - timedelta(hours=6) <= t <= now + timedelta(hours=hours):
             continue
         manifest = d / "out" / "manifest.json"
-        m = json.loads(manifest.read_text()) if manifest.exists() else {}
+        m = object_or_empty(manifest)
         if m and "video_id" in entries.get(f"{d.name}:{m.get('output_sha256')}", {}):
             continue  # already on YouTube
         script_sha = hashlib.sha256((d / "script.json").read_bytes()).hexdigest()
         out.append({"pilot": d.name, "publish_at": t, "missing_images": needed_images(d, json.loads((d / "script.json").read_text())),
-                    "rendered": m.get("script_sha256") == script_sha})
+                    "rendered": current_render(m, object_or_empty(d / "out" / "qa.json"), script_sha)})
     return sorted(out, key=lambda x: x["publish_at"])
 
 
