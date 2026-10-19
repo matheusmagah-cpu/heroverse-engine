@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: plan (read-only list), apply (set the reviewed plan's videos to private) or unschedule (hold-plan.json: private, no publishAt)
+        description: "plan (read-only list), apply (set the reviewed plan videos to private) or unschedule (hold-plan.json - private, no publishAt)"
         required: true
         default: plan
       max_changes:
