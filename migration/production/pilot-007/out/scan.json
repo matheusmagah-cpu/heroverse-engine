@@ -1,0 +1,98 @@
+{
+ "version": "signal-scan-v1",
+ "criteria": {
+  "black_max_s": 0.5,
+  "black_pic_th": 0.98,
+  "silence_max_s": 3.0,
+  "silence_db": -60,
+  "freeze_report_s": 5.0,
+  "freeze_noise": 0.003
+ },
+ "edge_excluded_s": 2.0,
+ "duration_s": 1569.85,
+ "status": "PASS",
+ "rows": {
+  "black_picture": {
+   "longest_s": 0.0,
+   "max_s": 0.5,
+   "blocking": true,
+   "pass": true,
+   "spans": []
+  },
+  "digital_silence": {
+   "longest_s": 0.0,
+   "max_s": 3.0,
+   "blocking": true,
+   "pass": true,
+   "spans": []
+  },
+  "frozen_picture": {
+   "longest_s": 1.33,
+   "report_s": 5.0,
+   "blocking": false,
+   "inside": true,
+   "spans": [
+    [
+     288.1,
+     289.37,
+     1.27
+    ],
+    [
+     424.8,
+     425.83,
+     1.03
+    ],
+    [
+     452.83,
+     453.93,
+     1.1
+    ],
+    [
+     662.6,
+     663.63,
+     1.03
+    ],
+    [
+     844.6,
+     845.73,
+     1.13
+    ],
+    [
+     848.33,
+     849.43,
+     1.1
+    ],
+    [
+     1114.1,
+     1115.23,
+     1.13
+    ],
+    [
+     1184.3,
+     1185.43,
+     1.13
+    ],
+    [
+     1310.3,
+     1311.43,
+     1.13
+    ],
+    [
+     1338.1,
+     1339.13,
+     1.03
+    ],
+    [
+     1425.8,
+     1426.93,
+     1.13
+    ],
+    [
+     1432.6,
+     1433.93,
+     1.33
+    ]
+   ]
+  }
+ }
+}

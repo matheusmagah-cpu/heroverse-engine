@@ -1,0 +1,114 @@
+{
+ "version": "long-review-v1",
+ "pilot_id": "pilot-007",
+ "output_sha256": "c57cafe657dd88c13c36eea8cdc8ff32302a7932d0ce860e9723a5ae21a140d1",
+ "status": "ERROR",
+ "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA",
+ "provider_message": "",
+ "failed_at": "2026-10-19T12:36:44Z",
+ "usage": [
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27671,
+   "candidatesTokenCount": 3530,
+   "totalTokenCount": 31201,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 371
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27675,
+   "candidatesTokenCount": 2945,
+   "totalTokenCount": 30620,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 375
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27675,
+   "candidatesTokenCount": 3284,
+   "totalTokenCount": 30959,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 375
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 27677,
+   "candidatesTokenCount": 3801,
+   "totalTokenCount": 34344,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 377
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "thoughtsTokenCount": 2866,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27679,
+   "candidatesTokenCount": 3757,
+   "totalTokenCount": 31436,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 379
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 6658,
+   "candidatesTokenCount": 1213,
+   "totalTokenCount": 7871,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 379
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 6279
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ ]
+}
