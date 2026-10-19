@@ -1,0 +1,234 @@
+{
+ "version": "shorts-produce-v1",
+ "source_pilot": "pilot-006",
+ "selection_rubric_model": "gemini-3.8-flash",
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "3469d8519ed061efa60c48f7fc2f185c1bb99473ca770dc8c48713e4c99434c6",
+   "seconds": 41.57,
+   "source_start": 1306.977,
+   "source_end": 1347.928,
+   "segments": [
+    "sleep-reflect-121",
+    "sleep-philippians-4",
+    "sleep-reflect-phil"
+   ],
+   "hook": "God is awake while you rest",
+   "title": "God Is Awake and Watching Over You",
+   "reference": "Philippians 4:6-7 (KJV)",
+   "scenes": [
+    "bg-still-water-night",
+    "bg-healing-garden",
+    "bg-starry-hills",
+    "bg-window",
+    "bg-night-village",
+    "bg-still-water-night"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8922,
+    "measured_score": 0.8129,
+    "features": {
+     "opening_short": 0.6,
+     "opening_direct": 1.0,
+     "second_person": 0.7777777777777778,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.9619599999999991
+    },
+    "rubric": {
+     "index": 9,
+     "hook_first_2s": 9.4,
+     "stands_alone": 9.8,
+     "emotional_payoff": 9.3,
+     "shareability": 9.4,
+     "loop_potential": 8.8,
+     "policy_safe": 10.0,
+     "reasons": "Outstanding opening premise that God stays awake while you sleep. Completely self-contained, scripture-grounded, and comforting.",
+     "hook_line": "God is awake while you rest",
+     "title": "God Is Awake and Watching Over You"
+    }
+   },
+   "text": "Through every hour of this night, while you rest, God is awake and watching over you. You can let go. He will not. Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus. The peace of God shall keep your heart and mind, like a guard at the door. Whatever news tomorrow brings, tonight that peace stands watch over you.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 41.57,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "94cdae3975dc57e081a431838f090fa5ad15032fdc6c24e7aa5dca57c00e0f28",
+   "seconds": 41.33,
+   "source_start": 815.38,
+   "source_end": 856.091,
+   "segments": [
+    "sleep-relax-1",
+    "sleep-relax-2",
+    "sleep-relax-3"
+   ],
+   "hook": "Let your face soften and rest",
+   "title": "Sleep Meditation: You Are Held Tonight",
+   "reference": null,
+   "scenes": [
+    "bg-quiet-chapel",
+    "bg-moonlit-sea",
+    "bg-lake",
+    "bg-moonlit-meadow",
+    "bg-night-sky",
+    "bg-quiet-chapel"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8686,
+    "measured_score": 0.8014,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 1.0,
+     "scripture": 0.4,
+     "promise": 0.8426966292134831,
+     "resolution": 0.4,
+     "length_fit": 0.9715599999999995
+    },
+    "rubric": {
+     "index": 14,
+     "hook_first_2s": 8.4,
+     "stands_alone": 9.6,
+     "emotional_payoff": 9.4,
+     "shareability": 8.6,
+     "loop_potential": 8.8,
+     "policy_safe": 10.0,
+     "reasons": "Begins at the top of the body ('Let your face soften') and flows naturally to a clean resolution ('Rest now.'). Highly soothing for sleepless viewers.",
+     "hook_line": "Let your face soften and rest",
+     "title": "Sleep Meditation: You Are Held Tonight"
+    }
+   },
+   "text": "Let your face soften. Let your eyes close. Let your shoulders drop. Let your arms rest heavy at your sides. Let your hands open. Feel the mattress holding you, the pillow supporting your head. You do not have to hold yourself up tonight. You are held. Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet. Every part of you is known by the God who made you. Every cell is in his care. Rest now.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 41.33,
+    "lufs": -15.0,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "d827d58c431f5892153c7a11fca846a7b2772749c6f7be20cf65beebdd200196",
+   "seconds": 51.1,
+   "source_start": 708.341,
+   "source_end": 758.815,
+   "segments": [
+    "stillness-2",
+    "declaration",
+    "scripture-11",
+    "reflection-sustained"
+   ],
+   "hook": "Let God hold you tonight",
+   "title": "Let God Hold You Tonight | Bedtime Prayer",
+   "reference": "Psalm 3:5 (KJV)",
+   "scenes": [
+    "bg-first-light",
+    "bg-candle",
+    "bg-still-water-night",
+    "bg-healing-garden",
+    "bg-starry-hills",
+    "bg-window",
+    "bg-first-light"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8595,
+    "measured_score": 0.8638,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.5660377358490566,
+     "scripture": 1.0,
+     "promise": 0.7075471698113207,
+     "resolution": 1.0,
+     "length_fit": 0.5810399999999982
+    },
+    "rubric": {
+     "index": 1,
+     "hook_first_2s": 8.5,
+     "stands_alone": 8.8,
+     "emotional_payoff": 8.8,
+     "shareability": 8.3,
+     "loop_potential": 7.0,
+     "policy_safe": 10.0,
+     "reasons": "'Let God hold you' is an immediate, comforting scroll-stopper. Fully coherent and emotionally grounding from start to finish.",
+     "hook_line": "Let God hold you tonight",
+     "title": "Let God Hold You Tonight | Bedtime Prayer"
+    }
+   },
+   "text": "Let God hold you. Say these words with me quietly, as you rest. The Lord is my healer. He binds up my wounds. I am not alone in this bed. My body, my heart and my mind are in his hands. I will rest tonight, and he will renew me. I laid me down and slept; I awaked; for the LORD sustained me. I laid me down and slept; I awaked; for the Lord sustained me. Sleep itself is an act of trust. You let go of control for hours, and God keeps your heart beating and your lungs breathing. Tonight, he will sustain you again.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 51.1,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}
