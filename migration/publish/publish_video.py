@@ -8,7 +8,10 @@ when it is scheduled to open at a chosen hour. Idempotent: ledger.json maps
 publish_key -> video_id; an existing key is never uploaded again, the run only
 finishes missing steps. Steps: resumable videos.insert (private, or scheduled
 with publishAt) -> thumbnails.set -> captions.insert (SRT from the narration
-timeline) -> playlist add -> verify. Writes a receipt.
+timeline) -> playlist add -> first comment (commentThreads.insert, from the
+package's first_comment; a refusal is recorded as "PENDING: <reason>" and never
+fails the publication, first_comment.py retries it once the video is public;
+pinning is manual, the API cannot pin) -> verify. Writes a receipt.
 usage: publish_video.py PACKAGE_JSON MANIFEST_JSON VIDEO THUMBNAIL LEDGER RECEIPT [PUBLISH_AT_ISO]
 """
 from datetime import datetime, timezone
@@ -83,6 +86,64 @@ def ensure_playlist(s, title, description):
                               "status": {"privacyStatus": "public"}}), "PLAYLIST_CREATE")["id"]
 
 
+def comment_done(value):
+    """A recorded comment id; None, empty and "PENDING: ..." are not done."""
+    return isinstance(value, str) and bool(value) and not value.startswith("PENDING")
+
+
+def api_reason(response):
+    try:
+        err = response.json()["error"]
+        reason = (err.get("errors") or [{}])[0].get("reason") or err.get("status") or ""
+        return f"HTTP_{response.status_code} {reason}: {err.get('message', '')}".strip()[:200]
+    except (ValueError, KeyError, TypeError, AttributeError):
+        return f"HTTP_{response.status_code}: {response.text[:150]}"
+
+
+def existing_comment(s, vid, text):
+    """The channel's own top-level comment with this exact text, if one is already there (a run that stopped
+    before recording it); any listing error just means "not known", never a failure."""
+    try:
+        r = s.get(API + "commentThreads", params={"part": "snippet", "videoId": vid, "maxResults": 100, "order": "time"})
+        if r.status_code >= 300:
+            return None
+        for t in (r.json() or {}).get("items", []):
+            c = t.get("snippet", {}).get("topLevelComment", {}).get("snippet", {})
+            if c.get("authorChannelId", {}).get("value") == CHANNEL and text in (c.get("textOriginal"), c.get("textDisplay")):
+                return t.get("id")
+    except Exception:  # noqa: BLE001 - best effort only
+        return None
+    return None
+
+
+def first_comment(s, vid, text, tries=3):
+    """Post the channel's first comment. Returns the comment-thread id, or "PENDING: <reason>" when YouTube refuses
+    (missing scope, comments disabled, private or scheduled video) or stays unavailable. Never raises."""
+    text = (text or "").strip()
+    if not text or len(text) > 300:
+        return "PENDING: FIRST_COMMENT_TEXT_INVALID (empty or over 300 characters)"
+    found = existing_comment(s, vid, text)
+    if found:
+        return found
+    body = {"snippet": {"videoId": vid, "topLevelComment": {"snippet": {"textOriginal": text}}}}
+    reason = "NOT_ATTEMPTED"
+    for i in range(tries):
+        try:
+            r = s.post(API + "commentThreads", params={"part": "snippet"}, json=body)
+        except Exception as e:  # noqa: BLE001 - a network failure leaves the comment pending, never the video
+            reason = f"{type(e).__name__}"
+        else:
+            if r.status_code < 300:
+                cid = (r.json() or {}).get("id")
+                return cid if cid else "PENDING: NO_ID_IN_RESPONSE"
+            reason = api_reason(r)
+            if r.status_code not in (409, 500, 502, 503, 504):
+                break
+        if i < tries - 1:
+            time.sleep(5 * 2 ** i)
+    return f"PENDING: {reason}"
+
+
 def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_path, publish_at=None):
     package = json.loads(Path(package_path).read_text())
     manifest = json.loads(Path(manifest_path).read_text())
@@ -141,6 +202,10 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
         except RuntimeError as e:
             entry["steps"]["playlist_error"] = str(e)[:200]
     save()
+    if package.get("first_comment") and not comment_done(entry["steps"].get("first_comment")):
+        # a refused comment (scope, comments off, video still private/scheduled) is PENDING, never a failed publication
+        entry["steps"]["first_comment"] = first_comment(s, vid, package["first_comment"])
+        save()
     final = check(s.get(API + "videos", params={"part": "status,snippet", "id": vid}), "VERIFY")["items"][0]
     receipt = {"version": "publish-receipt-v1", "key": key, "video_id": vid, "url": f"https://youtu.be/{vid}",
                "channel_id": final["snippet"]["channelId"], "title": final["snippet"]["title"],

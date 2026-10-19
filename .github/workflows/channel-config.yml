@@ -1,0 +1,40 @@
+name: HeroVerse channel configuration (diff structures/channel.json against the channel; apply on request)
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "false = print the diff only; true = channels.update brandingSettings with the measured fields that differ"
+        required: true
+        default: 'false'
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-publish
+  cancel-in-progress: false
+jobs:
+  config:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      APPLY: ${{ inputs.apply }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Diff (and apply when asked)
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          test -f migration/structures/channel.json || { echo "NO_CHANNEL_JSON"; exit 1; }
+          case "$APPLY" in true) flag=--apply ;; false) flag= ;; *) echo "APPLY_MUST_BE_true_OR_false"; exit 1 ;; esac
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          mkdir -p migration/publish/receipts
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/channel_config.py migration/structures/channel.json $flag
+      - name: Record receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/publish/receipts 2>/dev/null || true
+          git commit -q -m "Channel configuration ${APPLY} (run $GITHUB_RUN_ID)" || exit 0
+          git pull --rebase -q origin main && git push -q origin HEAD:main
