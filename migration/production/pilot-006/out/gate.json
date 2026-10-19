@@ -1,0 +1,403 @@
+{
+ "version": "prepublish-gate-v1",
+ "pilot_id": "pilot-006",
+ "output_sha256": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c",
+ "decision": "UNKNOWN",
+ "eligible_for_automatic_publication": false,
+ "dimensions": {
+  "binding": "PASS",
+  "technical": "PASS",
+  "audio": "UNKNOWN",
+  "transcript": "PASS",
+  "captions": "UNKNOWN",
+  "sync": "UNKNOWN",
+  "image": "UNKNOWN",
+  "rights": "PASS",
+  "content_and_policy": "UNKNOWN",
+  "scorecard": "UNKNOWN",
+  "full_file_scan": "PASS",
+  "preflight": "PASS"
+ },
+ "items": {
+  "binding": [
+   {
+    "source": "binding",
+    "item": "manifest",
+    "state": "PASS",
+    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+   },
+   {
+    "source": "binding",
+    "item": "qa_for_this_file",
+    "state": "PASS",
+    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+   },
+   {
+    "source": "binding",
+    "item": "qa_criteria_frozen",
+    "state": "PASS",
+    "detail": {
+     "version": "pilot-qa-criteria-v2",
+     "recorded": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
+     "file": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"
+    }
+   },
+   {
+    "source": "binding",
+    "item": "review_for_this_file",
+    "state": "PASS",
+    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+   },
+   {
+    "source": "binding",
+    "item": "video_file_hash",
+    "state": "PASS",
+    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+   }
+  ],
+  "technical": [
+   {
+    "source": "qa",
+    "item": "full_decode_without_errors",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "video_format",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "duration_min",
+    "state": "PASS"
+   }
+  ],
+  "audio": [
+   {
+    "source": "qa",
+    "item": "integrated_lufs",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "true_peak",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "speech_presence",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_singing",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "audio_clarity_and_mix",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   }
+  ],
+  "transcript": [
+   {
+    "source": "qa",
+    "item": "wer_vs_script",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "words_per_minute",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "hook_second_person",
+    "state": "PASS"
+   }
+  ],
+  "captions": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_hold_median",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_chars_max",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   }
+  ],
+  "sync": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   }
+  ],
+  "image": [
+   {
+    "source": "qa",
+    "item": "title_card_seconds",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "figure_present_after_title",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "background_hold_median",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "background_hold_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_background_repeated_consecutively",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "channel_mark_badge_and_amen_prompt",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "picture_quality",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   },
+   {
+    "source": "review",
+    "item": "figure_and_background_integrity",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   }
+  ],
+  "rights": [
+   {
+    "source": "qa",
+    "item": "images_open_licence_with_revision",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_third_party_footage",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "music_owned",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "voice_model_pinned",
+    "state": "PASS"
+   }
+  ],
+  "content_and_policy": [
+   {
+    "source": "review",
+    "item": "opening_and_promise",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   },
+   {
+    "source": "review",
+    "item": "pacing_and_visual_variety",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   },
+   {
+    "source": "review",
+    "item": "scripture_on_screen",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   },
+   {
+    "source": "review",
+    "item": "policy_safe",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+   },
+   {
+    "source": "review",
+    "item": "overall",
+    "state": "UNKNOWN",
+    "detail": "no completed watched review for this file"
+   }
+  ],
+  "scorecard": [
+   {
+    "source": "score",
+    "item": "minutes",
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
+   },
+   {
+    "source": "score",
+    "item": "scripture_per_10_min",
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
+   }
+  ],
+  "full_file_scan": [
+   {
+    "source": "scan",
+    "item": "black_picture",
+    "state": "PASS",
+    "detail": 0.0
+   },
+   {
+    "source": "scan",
+    "item": "digital_silence",
+    "state": "PASS",
+    "detail": 0.0
+   }
+  ],
+  "preflight": [
+   {
+    "source": "preflight",
+    "item": "preflight",
+    "state": "PASS"
+   }
+  ]
+ },
+ "informative_not_deciding": {
+  "scan_frozen_picture": {
+   "longest_s": 1.33,
+   "report_s": 5.0,
+   "blocking": false,
+   "inside": true,
+   "spans": [
+    [
+     36.1,
+     37.23,
+     1.13
+    ],
+    [
+     78.3,
+     79.43,
+     1.13
+    ],
+    [
+     326.6,
+     327.93,
+     1.33
+    ],
+    [
+     498.1,
+     499.23,
+     1.13
+    ],
+    [
+     568.33,
+     569.43,
+     1.1
+    ],
+    [
+     652.1,
+     653.1,
+     1.0
+    ],
+    [
+     848.3,
+     849.43,
+     1.13
+    ],
+    [
+     886.8,
+     887.83,
+     1.03
+    ],
+    [
+     904.1,
+     905.27,
+     1.17
+    ],
+    [
+     970.67,
+     971.93,
+     1.27
+    ],
+    [
+     998.6,
+     999.73,
+     1.13
+    ],
+    [
+     1114.1,
+     1115.23,
+     1.13
+    ],
+    [
+     1124.6,
+     1125.93,
+     1.33
+    ],
+    [
+     1222.7,
+     1223.9,
+     1.2
+    ],
+    [
+     1376.6,
+     1377.73,
+     1.13
+    ],
+    [
+     1432.6,
+     1433.7,
+     1.1
+    ]
+   ]
+  }
+ },
+ "market_evidence_not_deciding": {
+  "status": "UNKNOWN",
+  "detail": "no vidIQ market opinion for this pilot",
+  "not_claimed": "market evidence only: not technical quality, not a performance forecast, not a guarantee of views, revenue or monetization"
+ },
+ "method_notes": {
+  "review_sampling": "watched review samples pictures at 0.5 frames/s, low resolution",
+  "not_claimed": [
+   "perceived quality by viewers",
+   "retention, CTR or revenue",
+   "originality beyond the rights checks listed"
+  ]
+ }
+}
