@@ -4,6 +4,7 @@ CLI: owned_feedback.py OUT_JSON LEDGER_JSON REACH_JSON SNAPSHOT_JSON [SNAPSHOT_J
 """
 import copy
 import hashlib
+import gzip
 import json
 import math
 from pathlib import Path
@@ -49,12 +50,12 @@ def source(document, provided=None):
 
 
 def evidence(src, pointer):
-    return dict(src, json_pointer=pointer)
+    return {'source_id': src.get('sha256') or src.get('content_fingerprint'), 'json_pointer': pointer}
 
 
-def metric(value, unit, src, pointer):
+def metric(value, unit, src, pointer, trusted=True):
     val = number(value)
-    return {'value': val, 'unit': unit, 'status': 'OBSERVED' if val is not None else 'UNKNOWN',
+    return {'value': val, 'raw_value': copy.deepcopy(value), 'unit': unit, 'status': ('OBSERVED' if trusted else 'SOURCE_REPORTED_UNVERIFIED') if val is not None else 'UNKNOWN',
             'evidence': evidence(src, pointer)}
 
 
@@ -74,19 +75,21 @@ def build_feedback(snapshots, ledger, *, structure_assignments=None, reach_recei
     """Inputs are immutable; source metadata is supplied by the exact-byte CLI reader."""
     finite([snapshots, ledger, structure_assignments, reach_receipt, sources])
     sources = sources or {}; assignments = structure_assignments or {}; reach = reach_receipt or {}
-    records = {}; seen = {}; snapshot_sources = sources.get('snapshots', [])
+    records = {}; seen = {}; source_records = {}; snapshot_sources = sources.get('snapshots', [])
     if snapshot_sources and len(snapshot_sources) != len(snapshots): raise ValueError('snapshot source count')
     def record(vid):
         if not isinstance(vid, str) or not vid: raise ValueError('invalid video id')
         return records.setdefault(vid, {'video_id': vid, 'observations': [], 'ledger_events': [], 'reach': []})
-    for si, snap in enumerate(snapshots):
-        src = source(snap, snapshot_sources[si] if snapshot_sources else None)
+    pairs = [(snap, source(snap, snapshot_sources[i] if snapshot_sources else None)) for i, snap in enumerate(snapshots)]
+    pairs.sort(key=lambda pair: canonical(pair[1]))
+    for snap, src in pairs:
         identity = src.get('sha256') or src.get('content_fingerprint')
         fingerprint = hashlib.sha256(canonical(snap).encode()).hexdigest()
         if identity in seen:
             if seen[identity] != fingerprint: raise ValueError('source identity conflict')
             continue
         seen[identity] = fingerprint
+        source_records[identity] = src
         videos = snap.get('owned_videos', []); private = snap.get('owned_private', [])
         unique(videos, 'id'); unique(private, 'video_id')
         for vi, video in enumerate(videos):
@@ -101,29 +104,34 @@ def build_feedback(snapshots, ledger, *, structure_assignments=None, reach_recei
             vid = item['video_id']; p = '/owned_private/' + str(pi); basic = item.get('basic') or {}
             rows = basic.get('rows') or []; retention = item.get('retention') or {}; rr = retention.get('rows') or []
             # No row reduction: multiple rows have no declared aggregation contract.
-            basic_rows = [{k: metric(row.get(k), unit, src, p + '/basic/rows/' + str(i) + '/' + k)
+            basic_rows = [{k: metric(row.get(k), unit, src, p + '/basic/rows/' + str(i) + '/' + k, basic.get('status') == 'OBSERVED')
                            for k, unit in UNITS.items()} for i, row in enumerate(rows)]
             retention_rows = []
             for i, row in enumerate(rr):
                 rp = p + '/retention/rows/' + str(i)
-                retention_rows.append({k: metric(row.get(k), 'ratio', src, rp + '/' + k)
+                retention_rows.append({k: metric(row.get(k), 'ratio', src, rp + '/' + k, retention.get('status') == 'OBSERVED')
                                        for k in ('audienceWatchRatio', 'elapsedVideoTimeRatio')})
             record(vid)['observations'].append({'kind': 'PRIVATE_REQUESTED_RANGE', 'captured_at': snap.get('captured_at'),
                 'coverage': {'scope': 'requested_dates_only', 'requested': copy.deepcopy(item.get('date_window')),
                     'effective_start': None, 'effective_end': None, 'data_lag': None, 'exact_checkpoint': False},
-                'basic_source_status': basic.get('status'), 'basic_status': 'OBSERVED' if rows else 'UNKNOWN',
+                'basic_source_status': basic.get('status'), 'basic_status': 'OBSERVED' if rows and basic.get('status') == 'OBSERVED' else 'UNKNOWN',
                 'basic_rows': basic_rows, 'retention_source_status': retention.get('status'),
-                'retention_status': 'OBSERVED' if rr else 'UNKNOWN', 'retention_rows': retention_rows,
+                'retention_status': 'OBSERVED' if rr and retention.get('status') == 'OBSERVED' else 'UNKNOWN', 'retention_rows': retention_rows,
                 'reach': {k: metric((item.get('reach') or {}).get(k), unit, src, p + '/reach/' + k)
                           for k, unit in (('impressions', 'impressions'), ('ctr', 'source_unspecified'))},
                 'evidence': evidence(src, p)})
     ls = source(ledger, sources.get('ledger'))
+    source_records[ls.get('sha256') or ls.get('content_fingerprint')] = ls
     for key, event in sorted(ledger.get('entries', {}).items()):
         if not event.get('video_id'): continue
         pointer = '/entries/' + key.replace('~', '~0').replace('/', '~1')
         record(event['video_id'])['ledger_events'].append({'uploaded_at': event.get('uploaded_at'), 'slot': event.get('slot'),
             'proven_public_publication_at': None, 'evidence': evidence(ls, pointer)})
+    ctr_unit = 'source_unspecified'
+    ctr_representation = reach.get('ctr_representation')
     rs = source(reach, sources.get('reach'))
+    source_records[rs.get('sha256') or rs.get('content_fingerprint')] = rs
+    unique(reach.get('target_observations', []), 'video_id')
     for i, item in enumerate(reach.get('target_observations', [])):
         unique([item], 'video_id'); p = '/target_observations/' + str(i); rows = []
         for j, row in enumerate(item.get('rows', [])):
@@ -131,9 +139,19 @@ def build_feedback(snapshots, ledger, *, structure_assignments=None, reach_recei
             rp = p + '/rows/' + str(j)
             rows.append({'date': row.get('date_normalized') or row.get('date'), 'report_id': row.get('report_id'),
                 'impressions': metric(row.get('video_thumbnail_impressions'), 'impressions', rs, rp + '/video_thumbnail_impressions'),
-                'ctr': metric(row.get('video_thumbnail_impressions_ctr'), 'ratio', rs, rp + '/video_thumbnail_impressions_ctr')})
+                'ctr': metric(row.get('video_thumbnail_impressions_ctr'), ctr_unit, rs, rp + '/video_thumbnail_impressions_ctr')})
         record(item['video_id'])['reach'].append({'status': 'OBSERVED' if rows else 'UNKNOWN', 'rows': rows,
-            'aggregate_ctr': metric(item.get('aggregate_ctr'), 'ratio', rs, p + '/aggregate_ctr'),
+            'aggregate_ctr': metric(item.get('aggregate_ctr'), ctr_unit, rs, p + '/aggregate_ctr'),
+            'ctr_representation': copy.deepcopy(ctr_representation),
+            'coverage': copy.deepcopy(reach.get('coverage')), 'evidence': evidence(rs, p)})
+    for i, row in enumerate(reach.get('other_video_rows', [])):
+        p = '/other_video_rows/' + str(i)
+        record(row.get('video_id'))['reach'].append({'status': 'OBSERVED', 'rows': [{
+            'date': row.get('date_normalized') or row.get('date'), 'report_id': row.get('report_id'),
+            'impressions': metric(row.get('video_thumbnail_impressions'), 'impressions', rs, p + '/video_thumbnail_impressions'),
+            'ctr': metric(row.get('video_thumbnail_impressions_ctr'), ctr_unit, rs, p + '/video_thumbnail_impressions_ctr')}],
+            'aggregate_ctr': metric(None, ctr_unit, rs, '/aggregate_ctr'),
+            'ctr_representation': copy.deepcopy(ctr_representation),
             'coverage': copy.deepcopy(reach.get('coverage')), 'evidence': evidence(rs, p)})
     result = []
     for vid, rec in sorted(records.items()):
@@ -156,7 +174,7 @@ def build_feedback(snapshots, ledger, *, structure_assignments=None, reach_recei
             if len({canonical(without_evidence(o)) for o in group}) > 1]
         result.append(rec)
     return {'version': 'owned-feedback-v1', 'report_only': True, 'snapshot_count': len(seen),
-            'video_count': len(result), 'videos': result,
+            'video_count': len(result), 'videos': result, 'source_records': dict(sorted(source_records.items())),
             'limitations': ['descriptive observations only; no causal or market-performance claim',
                             'no new collection; no structure is updated']}
 
@@ -169,7 +187,8 @@ def main(argv):
     pairs = [read_source(p) for p in paths]
     report = build_feedback([p[0] for p in pairs], ledger, reach_receipt=reach,
                             sources={'snapshots': [p[1] for p in pairs], 'ledger': ls, 'reach': rs})
-    Path(out).write_text(canonical(report))
+    data = canonical(report).encode('utf-8')
+    Path(out).write_bytes(gzip.compress(data, mtime=0) if str(out).endswith('.gz') else data)
 
 
 if __name__ == '__main__': main(sys.argv[1:])

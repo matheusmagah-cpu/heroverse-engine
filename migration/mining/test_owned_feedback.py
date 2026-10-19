@@ -56,13 +56,57 @@ class Tests(unittest.TestCase):
             p=Path(d)/'x';data=b'{ "a": 1 }\n';p.write_bytes(data);_,src=f.read_source(p)
             self.assertEqual(src['sha256'],hashlib.sha256(data).hexdigest());self.assertEqual(src['hash_method'],'EXACT_FILE_BYTES')
     def test_reach(self):
-        receipt={'target_observations':[{'video_id':'v','rows':[{'video_id':'v','date_normalized':'2026-10-12','report_id':'r','video_thumbnail_impressions':'175','video_thumbnail_impressions_ctr':'0.0057142857142857143'}],'aggregate_ctr':None}]}
+        receipt={'ctr_representation':'provider_raw_representation_unverified','target_observations':[{'video_id':'v','rows':[{'video_id':'v','date_normalized':'2026-10-12','report_id':'r','video_thumbnail_impressions':'175','video_thumbnail_impressions_ctr':'0.0057142857142857143'}],'aggregate_ctr':None}]}
         r=self.build(reach_receipt=receipt)['videos'][0]['reach'][0]
-        self.assertEqual(r['rows'][0]['impressions']['value'],175);self.assertIsNone(r['aggregate_ctr']['value']);self.assertEqual(r['rows'][0]['ctr']['unit'],'ratio')
+        self.assertEqual(r['rows'][0]['impressions']['value'],175);self.assertIsNone(r['aggregate_ctr']['value']);self.assertEqual(r['rows'][0]['ctr']['unit'],'source_unspecified')
+        self.assertEqual(r['ctr_representation'],'provider_raw_representation_unverified')
+        self.assertEqual(r['rows'][0]['ctr']['raw_value'],'0.0057142857142857143')
         receipt['target_observations'][0]['rows'][0]['video_id']='wrong'
         with self.assertRaises(ValueError): self.build(reach_receipt=receipt)
     def test_source_fingerprint_not_file_hash(self):
-        r=self.build()['videos'][0]['observations'][0]['evidence'];self.assertIsNone(r['sha256']);self.assertIn('content_fingerprint',r)
+        d=self.build();ref=d['videos'][0]['observations'][0]['evidence'];r=d['source_records'][ref['source_id']];self.assertIsNone(r['sha256']);self.assertIn('content_fingerprint',r)
+    def test_other_reach_rows_preserved(self):
+        receipt={'other_video_rows':[{'video_id':'other','video_thumbnail_impressions':'1','video_thumbnail_impressions_ctr':'0','report_id':'r'}]}
+        r=self.build(reach_receipt=receipt);v=next(v for v in r['videos'] if v['video_id']=='other')
+        self.assertEqual(v['reach'][0]['rows'][0]['ctr']['value'],0)
+    def test_source_duplicate_order(self):
+        a=snapshot();srcs=[{'path':'b','sha256':'same'},{'path':'a','sha256':'same'}]
+        self.assertEqual(self.build([a,a],sources={'snapshots':srcs}),self.build([a,a],sources={'snapshots':list(reversed(srcs))}))
+    def test_source_identity_conflict(self):
+        a=snapshot();b=copy.deepcopy(a);b['captured_at']='other'
+        with self.assertRaises(ValueError):self.build([a,b],sources={'snapshots':[{'sha256':'same'},{'sha256':'same'}]})
+    def test_source_error_not_promoted(self):
+        s=snapshot();s['owned_private'][0]['basic']['status']='ERROR'
+        r=next(o for o in self.build([s])['videos'][0]['observations'] if o['kind']=='PRIVATE_REQUESTED_RANGE')
+        self.assertEqual(r['basic_status'],'UNKNOWN')
+        self.assertEqual(r['basic_rows'][0]['views']['status'],'SOURCE_REPORTED_UNVERIFIED')
+        self.assertEqual(r['basic_rows'][0]['subscribersGained']['status'],'UNKNOWN')
+    def test_cli_source_overwrite_forbidden(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'source';p.write_text('{}');before=p.read_bytes()
+            with self.assertRaises(ValueError):f.main([str(p),str(p),str(p),str(p)])
+            self.assertEqual(p.read_bytes(),before)
+    def test_no_network_imports(self):
+        import ast
+        tree=ast.parse(Path(f.__file__).read_text());names=set()
+        for node in ast.walk(tree):
+            if isinstance(node,ast.Import):names.update(x.name.split('.')[0] for x in node.names)
+            elif isinstance(node,ast.ImportFrom):names.add(node.module.split('.')[0])
+        self.assertLessEqual(names,{'copy','hashlib','gzip','json','math','pathlib','sys'})
+
+    def test_gzip_cli_is_deterministic_and_lossless(self):
+        import gzip
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);a=root/'a.json';l=root/'l.json';r=root/'r.json';a.write_text(json.dumps(snapshot()));l.write_text('{}');r.write_text('{}')
+            out=root/'out.json.gz';again=root/'again.json.gz'
+            for p in (out,again):f.main([str(p),str(l),str(r),str(a)])
+            self.assertEqual(out.read_bytes(),again.read_bytes());report=json.loads(gzip.decompress(out.read_bytes()))
+            ref=report['videos'][0]['observations'][0]['evidence'];source=report['source_records'][ref['source_id']]
+            self.assertEqual(source['sha256'],hashlib.sha256(a.read_bytes()).hexdigest())
+            node=json.loads(a.read_text())
+            for key in ref['json_pointer'].strip('/').split('/'):node=node[int(key)] if isinstance(node,list) else node[key]
+            self.assertEqual(node['video_id'],'v')
+
     def test_actual_sources(self):
         root=Path(__file__).resolve().parents[1];paths=[root/'evidence'/p for p in ('20261013-official-observations.json','observer-38581303747.json','observer-38749052276.json','observer-38911991729.json')]
         pairs=[f.read_source(p) for p in paths];ledger,ls=f.read_source(root/'publish/ledger.json');reach,rs=f.read_source(root/'evidence/owned-reach-two-report-receipt.json')
