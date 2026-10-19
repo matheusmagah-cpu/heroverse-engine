@@ -24,6 +24,17 @@ def window(start, end, cuts):
 
 class StructureMining(unittest.TestCase):
     # regression cases from the 2026-10-18 accuracy audit (structure-mining/20261017 vs native ASR)
+    def test_every_call_records_its_token_usage(self):
+        real, sm.USAGE[:] = sm.transport, []
+        sm.transport = lambda payload, key, model: {"candidates": [{"content": {"parts": [{"text": "{}"}]}}],
+                                                    "usageMetadata": {"promptTokenCount": 1200, "totalTokenCount": 1300}}
+        try:
+            sm.call({}, "k", ["m"])
+        finally:
+            sm.transport = real
+        self.assertEqual(sm.USAGE, [{"model": "m", "promptTokenCount": 1200, "totalTokenCount": 1300}])
+        sm.USAGE[:] = []
+
     def test_transcript_stamped_outside_its_window_is_rejected(self):
         w = window(900, 1200, [960])  # e.g. 8YXRtsNnGX0 window 900-1200 stamped 15-19 s
         w["transcript"] = [{"start_seconds": 15 + i * 0.07, "text": f"line{i} " + "word " * 11} for i in range(67)]
