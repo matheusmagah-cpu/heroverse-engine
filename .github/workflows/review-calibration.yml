@@ -7,6 +7,12 @@ on:
       pilot:
         description: Pilot whose QA-PASS render is still in the private release (e.g. pilot-003)
         required: true
+      model:
+        description: Reviewer to calibrate (designated reviewer, or a free backup candidate; never decides by itself)
+        required: false
+        default: gemini-3.8-flash
+        type: choice
+        options: [gemini-3.8-flash, gemini-3.6-flash, gemini-3.5-flash-lite]
 permissions:
   contents: write
 concurrency:
@@ -21,6 +27,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
       PILOT: ${{ inputs.pilot }}
+      MODEL: ${{ inputs.model || 'gemini-3.8-flash' }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Render (hash-verified, QA PASS only)
@@ -29,23 +36,23 @@ jobs:
           d="migration/production/$PILOT"
           read -r st sha < <(python3 -I -c "import json,sys;q=json.load(open(sys.argv[1]));print(q['status'],q['output_sha256'])" "$d/out/qa.json")
           [ "$st" = PASS ] || { echo "QA_NOT_PASS"; exit 1; }
-          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-sha256-$sha.mp4" -O "$RUNNER_TEMP/render.mp4"
-          echo "$sha  $RUNNER_TEMP/render.mp4" | sha256sum -c -
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-sha256-$sha.mp4" -O "$RUNNER_TEMP/$PILOT.mp4"
+          echo "$sha  $RUNNER_TEMP/$PILOT.mp4" | sha256sum -c -
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
       - name: Cases, scan and watched review
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
           title=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['working_title'])" "migration/production/$PILOT/script.json")
-          python3 -I -B migration/production/review_calibration.py "$RUNNER_TEMP/render.mp4" "$RUNNER_TEMP/work" \
-            "migration/evidence/review-calibration/$PILOT.json" "$title"
+          python3 -I -B migration/production/review_calibration.py "$RUNNER_TEMP/$PILOT.mp4" "$RUNNER_TEMP/work" \
+            "migration/evidence/review-calibration/$PILOT-$MODEL.json" "$title" "$MODEL"
       - name: Record
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add migration/evidence/review-calibration || true
-          git commit -q -m "Record review calibration $PILOT (run $GITHUB_RUN_ID)" || exit 0
+          git commit -q -m "Record review calibration $PILOT $MODEL (run $GITHUB_RUN_ID)" || exit 0
           for i in 1 2 3 4; do
             git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
             git rebase --abort 2>/dev/null || true; sleep $((i * 5))
