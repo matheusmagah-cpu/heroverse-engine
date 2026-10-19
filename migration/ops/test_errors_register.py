@@ -8,7 +8,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 ACTIVE = ("migration/production", "migration/publish", "migration/ops", "migration/mining")
-DIRECTING = {"migration/OPERATIONS.md", "migration/STANDARD.md", "migration/ops/DOT_PROTOCOL.md", "migration/ops/RUNNER_WAKEUP.md",
+DIRECTING = {"migration/OPERATIONS.md", "migration/SYSTEM.md", "migration/STANDARD.md", "migration/ops/DOT_PROTOCOL.md", "migration/ops/RUNNER_WAKEUP.md",
              "migration/strategy/DECISIONS.md", "migration/strategy/MODELING_SPEC.md", "migration/strategy/VIDIQ.md",
              "migration/strategy/BEAT_THE_REFERENCE_RULE.md", "migration/strategy/FORMAT_OPINION_AND_CRITIQUE.md",
              "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
