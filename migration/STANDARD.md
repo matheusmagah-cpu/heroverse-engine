@@ -29,7 +29,7 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
 
 - **R1.** No persistent person or figure on screen. Every frame is full-frame scenery (light, sky, water, fields, a church or altar with no people).
 - **R2.** The picture is never still. Each scene has continuous camera motion (zoom 1.00→1.08 or a pan). There is no hard freeze of 2 s or more outside the fades.
-- **R3.** Scenes last 18–35 s, change with a cross-fade of at most 1.0 s, and no image repeats within 5 minutes.
+- **R3.** Scenes last 18–36 s, change with a cross-fade of at most 1.0 s, and no image repeats within 5 minutes.
 - **R4.** Captions are phrase-level (at most 7 words, at most 2 lines), bold white sans-serif with a dark outline or shadow, no box, centered in the lower third. They are timed to the narration.
 - **R5.** Scripture: when a verse is read, the verse text (KJV) and its reference appear in a rounded translucent card. The card appears only while that verse is spoken and is removed when the verse ends. No reference badge stays on screen.
 - **R6.** Calls to action:
@@ -37,7 +37,7 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - the spoken CTA (Amen, like, share, subscribe) only in the outro, at most 35 s;
   - nothing persistent except a small channel mark of at most 4 % of the frame area.
 - **R7.** Opening:
-  - 0–15 s: direct "you" address, the title promise in concrete words, then "Let us pray";
+  - within 8 s: direct "you" address and the title promise in concrete words (L2 by 0:03, L1 by 0:02); "Let us pray" is not required (L1 prays only after 1:40);
   - no title card longer than 3 s;
   - no claim that God sent this video or that something will happen to the viewer (fabricated prophecy is forbidden even though L1 uses it).
 - **R8.** Short:
@@ -48,4 +48,4 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
 
 ## Gate
 
-`standard_check.py` (deterministic, from the render manifest and the file) checks R1–R8. One miss is a FAIL. It runs before the watched review, so the watched review never has to judge what a rule already decides.
+`qa_pilot.py` with the frozen criteria `production/qa_criteria_v3.json` (deterministic, from the render manifest and the file) checks R1–R7; `prepublish_gate.py` blocks on every row (`DIMENSIONS_V3`). R8 is checked by the Shorts tests. One miss is a FAIL. It runs before the watched review, so the watched review never has to judge what a rule already decides.

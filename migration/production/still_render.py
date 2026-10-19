@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""pilot-002 grammar renderer: generated stills + synchronized captions.
+"""Production renderer (migration/STANDARD.md v1): generated stills + synchronized captions.
 
   still_render.py assemble WORK SCRIPT IMAGES_DIR FIGURE_RGBA_PNG MUSIC
 
-Picture (archetype amendment 2026-10-17): one persistent cut-out figure at
-the left of the frame over generated backgrounds that change at sentence
-starts about every BACKGROUND_TARGET seconds, with short cross-fades; a title
-card first. Text (libass): large spoken-line captions in a translucent box at
-right-centre timed from the exact per-sentence narration timeline, scripture
-references, a channel mark, a rotating subscribe/like/share badge and a
-persistent "Type AMEN" prompt. Audio: identical to pilot_render (voice forward, owned
-music ducked, -15 LUFS). Writes pilot.mp4 and manifest.json; no upload.
+Picture: full-frame scenery, no person or figure (R1; FIGURE_RGBA_PNG is accepted
+for the job interface and not drawn), every scene in continuous camera motion (R2),
+a new scene at a sentence start every SCENE_TARGET seconds or more, 18-36 s, and
+no image again within REPEAT_GAP seconds (R3); a title card first. Text (libass):
+phrase captions centred in the lower third, bold white with an outline and no box
+(R4); the verse being read in a rounded Scripture card with its reference, only
+while it is read (R5); two short mid-video calls to action and a small channel
+mark, nothing else persistent (R6). Audio: identical to pilot_render (voice
+forward, owned music ducked, -15 LUFS). Writes pilot.mp4 and manifest.json; no upload.
 """
 import json
 import os
@@ -27,15 +28,15 @@ FINAL_PRESET = "medium" if (os.cpu_count() or 2) >= 4 else "veryfast"
 MOTIONS = ("push_in", "drift", "pull_out", "pan_right", "push_in", "pan_left")
 
 FADE = 0.6
-BACKGROUND_TARGET = 9.0
-HOLD_MAX = 18.0
-FIGURE_HEIGHT = 1000
-FIGURE_X = 30
-BREATH = "0.012*sin(2*PI*t/7)"
-BOX = (1010, 330, 1850, 750)
-BADGES = ("SUBSCRIBE", "LIKE", "SHARE")
-BADGE_SECONDS = 6.0
-CAPTION_WORDS_MAX = 8
+SCENE_TARGET = 22.0  # STANDARD R3: winners change scene every 20-30 s
+HOLD_MIN = 18.0
+HOLD_MAX = 36.0      # a longer hold is split in equal parts, each >= HOLD_MAX / 2 = HOLD_MIN
+REPEAT_GAP = 300.0   # no image again within 5 minutes
+CARD = (310, 300, 1610, 700)  # Scripture card (R5), rounded, centred
+CARD_RADIUS = 36
+CTA = (("SUBSCRIBE", 60.0), ("LIKE", 0.45))  # R6: (text, start: seconds, or fraction of the length if < 1)
+CTA_SECONDS = 8.0
+CAPTION_WORDS_MAX = 7
 CAPTION_CHARS_MAX = 40
 CAPTION_HOLD_AFTER = 0.35
 
@@ -79,10 +80,16 @@ def chunks(sentence):
         else:
             merged.append(part)
     lines = [line for part in merged for line in split_balanced(part.split())]
-    # guarantee: no line over the limit (the balanced split's last remainder can overflow)
+    # guarantee: no line over the limits (the balanced split's last remainder can overflow)
     out = []
     for line in lines:
-        out += [line] if len(line) <= CAPTION_CHARS_MAX else chunks_hard(line)
+        for part in ([line] if len(line) <= CAPTION_CHARS_MAX else chunks_hard(line)):
+            words = part.split()
+            while len(words) > CAPTION_WORDS_MAX:
+                half = -(-len(words) // 2)
+                out.append(" ".join(words[:half]))
+                words = words[half:]
+            out.append(" ".join(words))
     return out
 
 
@@ -135,14 +142,14 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Caption,DejaVu Sans,66,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,1,0,0,0,100,100,0,0,1,0,2,5,1040,100,0,1
-Style: Box,DejaVu Sans,20,&H5A2A2A2A,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+Style: Caption,DejaVu Sans,64,&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,1,0,0,0,100,100,0,0,1,4,2,2,120,120,90,1
+Style: Card,DejaVu Sans,20,&H50140F0A,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+Style: Verse,DejaVu Serif,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,0,0,0,0,100,100,0,0,1,3,1,5,0,0,0,1
 Style: Title,DejaVu Serif,112,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,1,0,1,5,4,5,120,120,0,1
 Style: Subtitle,DejaVu Sans,58,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,2,0,1,4,3,5,120,120,0,1
-Style: Ref,DejaVu Serif,50,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,4,2,2,1040,100,250,1
+Style: Ref,DejaVu Serif,44,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,3,1,5,0,0,0,1
 Style: Brand,DejaVu Sans,36,&H20FFFFFF,&H00FFFFFF,&H64000000,&H00000000,1,0,0,0,100,100,2,0,1,3,1,7,50,0,40,1
 Style: Badge,DejaVu Sans,34,&H00FFFFFF,&H00FFFFFF,&H001A1AD0,&H00000000,1,0,0,0,100,100,1,0,3,10,0,9,0,50,46,1
-Style: Amen,DejaVu Sans,58,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,1,0,1,4,3,3,0,60,40,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -155,23 +162,57 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     add("Title", 0.0, title_end, overlay["title"], 2, (200, 300))
     lines.append(f"Dialogue: 2,{ts(0)},{ts(title_end)},Subtitle,,0,0,0,,{{\\fad(200,300)\\pos(960,700)}}{ass_text(overlay['subtitle'])}")
     add("Brand", title_end, total, overlay["brand"], 1, (300, 0))
-    add("Amen", title_end, total, overlay["amen"], 1, (300, 0))
-    t, k = title_end, 0
-    while t < total - 1:
-        add("Badge", t, min(total, t + BADGE_SECONDS - 0.3), BADGES[k % len(BADGES)], 1, (200, 200))
-        t, k = t + BADGE_SECONDS, k + 1
-    x0, y0, x1, y1 = BOX
-    shape = f"m {x0} {y0} l {x1} {y0} l {x1} {y1} l {x0} {y1}"
+    for c in cta_events(total):
+        add("Badge", c["start"], c["end"], c["text"], 1, (200, 200))
+    x0, y0, x1, y1 = CARD
+    cards = scripture_cards(script, timeline)
+    for c in cards:
+        lines.append(f"Dialogue: 3,{ts(c['start'])},{ts(c['end'])},Card,,0,0,0,,{{\\fad(250,250)\\pos(0,0)\\p1}}"
+                     f"{rounded(x0, y0, x1, y1, CARD_RADIUS)}{{\\p0}}")
+        lines.append(f"Dialogue: 4,{ts(c['start'])},{ts(c['end'])},Ref,,0,0,0,,{{\\fad(250,250)\\pos({(x0 + x1) // 2},{y1 - 50})}}"
+                     f"{ass_text(c['reference'])}")
     for e in caption_events(timeline["sentences"]):
         if e["end"] > title_end:
             a = max(e["start"], title_end)
-            lines.append(f"Dialogue: 3,{ts(a)},{ts(e['end'])},Box,,0,0,0,,{{\\pos(0,0)\\p1}}{shape}{{\\p0}}")
-            lines.append(f"Dialogue: 4,{ts(a)},{ts(e['end'])},Caption,,0,0,0,,{{\\pos({(x0 + x1) // 2},{(y0 + y1) // 2})}}{ass_text(e['text'])}")
+            mid = (a + e["end"]) / 2
+            if any(c["start"] <= mid < c["end"] for c in cards):  # the verse is read: its words go in the card
+                lines.append(f"Dialogue: 5,{ts(a)},{ts(e['end'])},Verse,,0,0,0,,{{\\pos({(x0 + x1) // 2},{(y0 + y1) // 2 - 30})}}"
+                             f"{ass_text(e['text'])}")
+            else:
+                lines.append(f"Dialogue: 4,{ts(a)},{ts(e['end'])},Caption,,0,0,0,,{ass_text(e['text'])}")
+    return head + "\n".join(lines) + "\n"
+
+
+def rounded(x0, y0, x1, y1, r):
+    """ASS drawing of a rectangle with rounded corners (cubic Bezier corners)."""
+    k = r * 0.45
+    return (f"m {x0 + r} {y0} l {x1 - r} {y0} b {x1 - k} {y0} {x1} {y0 + k} {x1} {y0 + r} "
+            f"l {x1} {y1 - r} b {x1} {y1 - k} {x1 - k} {y1} {x1 - r} {y1} "
+            f"l {x0 + r} {y1} b {x0 + k} {y1} {x0} {y1 - k} {x0} {y1 - r} "
+            f"l {x0} {y0 + r} b {x0} {y0 + k} {x0 + k} {y0} {x0 + r} {y0}")
+
+
+def cta_events(total):
+    """R6: two short mid-video calls to action, the first not before 0:45; nothing else is persistent."""
+    out = []
+    for text, start in CTA:
+        a = start if start >= 1 else round(total * start, 3)
+        if a + CTA_SECONDS < total - 60 and (not out or a >= out[-1]["end"] + 60):  # never over the outro or each other
+            out.append({"text": text, "start": a, "end": round(a + CTA_SECONDS, 3)})
+    return out
+
+
+def scripture_cards(script, timeline):
+    """R5: one card per Scripture segment, from its first KJV sentence to the end of the last one."""
     refs = {seg["id"]: seg["reference"] for seg in script["segments"] if seg.get("reference")} or REFERENCES
+    cards = []
     for seg in timeline["segments"]:
         if seg["id"] in refs:
-            add("Ref", seg["start"], reference_end(seg, timeline["sentences"]), refs[seg["id"]], 4)
-    return head + "\n".join(lines) + "\n"
+            quoted = [s for s in timeline["sentences"] if s["segment"] == seg["id"] and KJV.search(s["text"])]
+            if quoted:
+                cards.append({"segment": seg["id"], "reference": refs[seg["id"]], "start": quoted[0]["start"],
+                              "end": reference_end(seg, timeline["sentences"])})
+    return cards
 
 
 KJV = re.compile(r"\b(thee|thou|thy|thine|ye|unto|hath|shalt|shall|art|LORD|saith|doth|cometh)\b")
@@ -184,17 +225,26 @@ def reference_end(seg, sentences):
     return max(quoted) if quoted else seg["end"]
 
 
+def scene_target(backgrounds):
+    """R3: scenes of at least SCENE_TARGET s, longer when there are too few images to keep REPEAT_GAP."""
+    target = max(SCENE_TARGET, REPEAT_GAP / len(backgrounds) + 1.0)
+    if target > HOLD_MAX:
+        raise SystemExit(f"TOO_FEW_BACKGROUNDS: {len(backgrounds)} images cannot keep {REPEAT_GAP:.0f} s between repeats")
+    return target
+
+
 def holds(script, timeline, total):
-    """Title card, then a new background at the first sentence start at least
-    BACKGROUND_TARGET seconds after the previous change, cycling through the
-    plan's backgrounds in order (never the same one twice in a row)."""
+    """Title card, then a new scene at the first sentence start at least scene_target() seconds after the
+    previous change (and at least HOLD_MIN before the end), cycling through the plan's backgrounds in order.
+    No person or figure is drawn (STANDARD R1)."""
     overlay, backgrounds = script["overlay"], script["backgrounds"]
+    target = scene_target(backgrounds)
     plan = [{"image": overlay["title_image"], "start": 0.0, "figure": False}]
     last = overlay["title_card_seconds"]
-    plan.append({"start": last, "figure": True})
+    plan.append({"start": last, "figure": False})
     for s in timeline["sentences"]:
-        if s["start"] - last >= BACKGROUND_TARGET and total - s["start"] > BACKGROUND_TARGET / 2:
-            plan.append({"start": s["start"], "figure": True})
+        if s["start"] - last >= target and total - s["start"] >= HOLD_MIN:
+            plan.append({"start": s["start"], "figure": False})
             last = s["start"]
     for a, b in zip(plan, plan[1:]):
         a["end"] = b["start"]
@@ -206,7 +256,7 @@ def holds(script, timeline, total):
         step = (h["end"] - h["start"]) / parts
         for p in range(int(parts)):
             out.append({"image": None, "start": round(h["start"] + p * step, 3),
-                        "end": round(h["start"] + (p + 1) * step, 3), "figure": True})
+                        "end": round(h["start"] + (p + 1) * step, 3), "figure": False})
     # images assigned once, in plan order over the final holds: choosing them before the split let a split
     # piece and the next hold get the same background (pilot-004, QA FAIL 2026-10-18)
     for j, h in enumerate(out[1:]):
@@ -214,16 +264,10 @@ def holds(script, timeline, total):
     return out
 
 
-def compose(background, figure, out, with_figure):
-    """Background filled to 1920x1080 and slightly darkened, figure bottom-left."""
-    vf = "[0:v]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,eq=brightness=-0.04:saturation=1.05[bg]"
-    if with_figure:
-        vf += f";[1:v]scale=-1:{FIGURE_HEIGHT}[fg];[bg][fg]overlay=x={FIGURE_X}:y=H-h[out]"
-        args = ["-i", str(background), "-i", str(figure)]
-    else:
-        vf += ";[bg]null[out]"
-        args = ["-i", str(background)]
-    run(["ffmpeg", "-v", "error", "-y", *args, "-filter_complex", vf, "-map", "[out]", "-frames:v", "1", str(out)])
+def compose(background, out):
+    """Background filled to 1920x1080 and slightly darkened (full frame, no figure: STANDARD R1)."""
+    vf = "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,eq=brightness=-0.04:saturation=1.05"
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(background), "-vf", vf, "-frames:v", "1", str(out)])
 
 
 def assemble(work, script_path, images_dir, figure_path, music_path):
@@ -252,7 +296,6 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
          "-map", "[out]", "-ar", str(RATE_OUT), str(mix)])
     mark("mix")
     plan = holds(script, timeline, total)
-    moving = script.get("motion", True)  # camera motion on backgrounds; the figure stays still on top (2.5D depth)
     frames, clips = work / "frames", work / "holds"
     frames.mkdir(exist_ok=True)
     clips.mkdir(exist_ok=True)
@@ -262,7 +305,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
         meta = json.loads((images / f"{h['image']}.json").read_text())
         used[h["image"]] = {"sha256": sha256(src), "release_asset": meta.get("release_asset"), "models": meta["models"],
                             "seed": meta["seed"], "prompt": meta["prompt"]}
-        compose(src, figure_path, frames / f"{i:03d}.png", h["figure"] and not moving)
+        compose(src, frames / f"{i:03d}.png")
     mark("frames")
     from concurrent.futures import ThreadPoolExecutor
 
@@ -275,87 +318,57 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
         model = Path(os.environ.get("HERO_DEPTH_MODEL", cine.get("depth_model", "")))
         for i in range(len(plan)):
             cinematic.grade(frames / f"{i:03d}.png")
-        graded_figure = work / "figure-graded.png"
-        cinematic.grade(figure_path, graded_figure)
         cinematic.depth(model, [frames / f"{i:03d}.png" for i in range(len(plan))])
         mark("depth")
-    if moving:
-        # 1) each background moves for its hold plus the cross-fade tail: true depth parallax when
-        #    cinematic, otherwise a smooth single-plane camera
-        def raw(i):
-            out, seconds = clips / f"raw-{i:03d}.mp4", length(i) + FADE
-            if cine:
-                plan[i]["motion"] = "dolly_in" if i == 0 else cinematic.MOVES[i % len(cinematic.MOVES)]
-                plan[i]["atmosphere"] = plan[i]["image"] in cine.get("atmosphere", [])
-                cinematic.parallax(frames / f"{i:03d}.png", frames / f"{i:03d}.depth.png", out, seconds,
-                                   plan[i]["motion"], dust=plan[i]["atmosphere"], intermediate=True)
-            else:
-                plan[i]["motion"] = "push_in" if i == 0 else MOTIONS[i % len(MOTIONS)]
-                camera.render(frames / f"{i:03d}.png", out, seconds, plan[i]["motion"], intermediate=True)
-        with ThreadPoolExecutor(max_workers=max(2, (os.cpu_count() or 4) // 2) if cine else 4) as pool:
-            list(pool.map(raw, range(len(plan))))
-        mark("moves")
+    # 1) each background moves for its hold plus the cross-fade tail: true depth parallax when
+    #    cinematic, otherwise a smooth single-plane camera
+    def raw(i):
+        out, seconds = clips / f"raw-{i:03d}.mp4", length(i) + FADE
+        if cine:
+            plan[i]["motion"] = "dolly_in" if i == 0 else cinematic.MOVES[i % len(cinematic.MOVES)]
+            plan[i]["atmosphere"] = plan[i]["image"] in cine.get("atmosphere", [])
+            cinematic.parallax(frames / f"{i:03d}.png", frames / f"{i:03d}.depth.png", out, seconds,
+                               plan[i]["motion"], dust=plan[i]["atmosphere"], intermediate=True)
+        else:
+            plan[i]["motion"] = "push_in" if i == 0 else MOTIONS[i % len(MOTIONS)]
+            camera.render(frames / f"{i:03d}.png", out, seconds, plan[i]["motion"], intermediate=True)
+    with ThreadPoolExecutor(max_workers=max(2, (os.cpu_count() or 4) // 2) if cine else 4) as pool:
+        list(pool.map(raw, range(len(plan))))
+    mark("moves")
 
-        # 2) segment i = tail of the previous move cross-faded into the start of this one
-        def segment(i):
-            out = clips / f"{i:03d}.mp4"
-            common = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-r", "30", "-pix_fmt", "yuv420p",
-                      "-video_track_timescale", "15360", "-threads", "2"]
-            if i == 0:
-                run(["ffmpeg", "-v", "error", "-y", "-i", str(clips / "raw-000.mp4"), "-vf",
-                     f"trim=duration={length(0):.3f},setpts=PTS-STARTPTS", *common, str(out)])
-            else:
-                run(["ffmpeg", "-v", "error", "-y", "-i", str(clips / f"raw-{i - 1:03d}.mp4"), "-i", str(clips / f"raw-{i:03d}.mp4"),
-                     "-filter_complex", f"[0:v]trim=start={length(i - 1):.3f},setpts=PTS-STARTPTS[a];[1:v]setpts=PTS-STARTPTS[b];"
-                     f"[a][b]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length(i):.3f}", *common, str(out)])
-            return f"file '{out}'"
-        with ThreadPoolExecutor(max_workers=4) as pool:
-            listing = list(pool.map(segment, range(len(plan))))
-        for raw_clip in clips.glob("raw-*.mp4"):  # every segment is built: free the disk before the final pass
-            raw_clip.unlink()
-    else:
-        def encode(i):
-            out = clips / f"{i:03d}.mp4"
-            common = ["-c:v", "libx264", "-preset", "veryfast", "-tune", "stillimage", "-crf", "17", "-r", "30",
-                      "-pix_fmt", "yuv420p", "-video_track_timescale", "15360", "-threads", "2"]
-            # Stills are read at 1 fps and repeated to 30 fps by the fps filter: same frames,
-            # without decoding the PNG 30 times per second.
-            if i == 0:
-                run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", f"{length(i) + 1:.3f}",
-                     "-i", str(frames / "000.png"), "-vf", f"fps=30,trim=duration={length(i):.3f}", *common, str(out)])
-            else:
-                run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-framerate", "1", "-t", "2",
-                     "-i", str(frames / f"{i - 1:03d}.png"), "-loop", "1", "-framerate", "1", "-t", f"{length(i) + 1:.3f}",
-                     "-i", str(frames / f"{i:03d}.png"), "-filter_complex",
-                     f"[0:v]fps=30,trim=duration={FADE},setpts=PTS-STARTPTS[a];[1:v]fps=30,setpts=PTS-STARTPTS[b];"
-                     f"[a][b]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length(i):.3f}",
-                     *common, str(out)])
-            return f"file '{out}'"
-        with ThreadPoolExecutor(max_workers=4) as pool:
-            listing = list(pool.map(encode, range(len(plan))))
+    # 2) segment i = tail of the previous move cross-faded into the start of this one
+    def segment(i):
+        out = clips / f"{i:03d}.mp4"
+        common = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-r", "30", "-pix_fmt", "yuv420p",
+                  "-video_track_timescale", "15360", "-threads", "2"]
+        if i == 0:
+            run(["ffmpeg", "-v", "error", "-y", "-i", str(clips / "raw-000.mp4"), "-vf",
+                 f"trim=duration={length(0):.3f},setpts=PTS-STARTPTS", *common, str(out)])
+        else:
+            run(["ffmpeg", "-v", "error", "-y", "-i", str(clips / f"raw-{i - 1:03d}.mp4"), "-i", str(clips / f"raw-{i:03d}.mp4"),
+                 "-filter_complex", f"[0:v]trim=start={length(i - 1):.3f},setpts=PTS-STARTPTS[a];[1:v]setpts=PTS-STARTPTS[b];"
+                 f"[a][b]xfade=transition=fade:duration={FADE}:offset=0,trim=duration={length(i):.3f}", *common, str(out)])
+        return f"file '{out}'"
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        listing = list(pool.map(segment, range(len(plan))))
+    for raw_clip in clips.glob("raw-*.mp4"):  # every segment is built: free the disk before the final pass
+        raw_clip.unlink()
     mark("hold_clips")
     (work / "holds.txt").write_text("\n".join(listing) + "\n")
     (work / "captions.ass").write_text(build_ass(script, timeline, total))
     final = work / "pilot.mp4"
     title_end = script["overlay"]["title_card_seconds"]
-    # the figure breathes (scale +-1.2 %, 7 s) and drifts (+-6 px, 11 s): the watched review of pilot-003 scored
-    # pacing 6.5 for a figure "completely static with zero pose variation or subtle animation" for 14 minutes
-    graph = (f"[2:v]scale=w=-2:h='trunc({FIGURE_HEIGHT}*(1+{BREATH})/2)*2':eval=frame[fg];"
-             f"[0:v][fg]overlay=x='{FIGURE_X}+6*sin(2*PI*t/11)':y=H-h:eval=frame:enable='gte(t,{title_end})'"
-             if moving else "[0:v]null")
-    if cine:  # film finish on picture and figure together, under the captions (text stays clean)
+    graph = "[0:v]null"  # STANDARD R1: full-frame scenery, no figure on top
+    if cine:  # film finish on the picture, under the captions (text stays clean)
         graph += f"[pic];[pic]{cinematic.LOOK}"
     graph += f",ass={work / 'captions.ass'},format=yuv420p[vout]"
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "holds.txt"), "-i", str(mix),
-         "-loop", "1", "-framerate", "30", "-i", str(graded_figure if cine else figure_path),
          "-filter_complex", graph, "-map", "[vout]", "-map", "1:a:0", "-shortest",
          "-c:v", "libx264", "-preset", FINAL_PRESET, "-crf", "18", "-r", "30", "-g", "60",
          "-c:a", "aac", "-b:a", "192k", "-ar", str(RATE_OUT), "-t", f"{total:.3f}", "-movflags", "+faststart",
          str(final)])
     mark("final_encode")
-    figure_meta = json.loads(Path(figure_path).with_suffix(".json").read_text())
-    grammar = ("figure+depth-parallax-backgrounds+film-look+captions" if cine else
-               "figure+moving-backgrounds+captions" if moving else "figure+backgrounds+captions")
+    grammar = "standard-v1:fullframe-depth-parallax+film-look+captions" if cine else "standard-v1:fullframe-moving+captions"
     manifest = {"version": "pilot-manifest-v2", "pilot_id": script["pilot_id"], "grammar": grammar,
                 "output_sha256": sha256(final), "output_seconds": probe_duration(final),
                 "script_sha256": sha256(script_path),
@@ -363,12 +376,17 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
                           "speed": timeline["speed"], "voice_wav_sha256": sha256(work / "voice.wav")},
                 "music": {"file": Path(music_path).name, "sha256": sha256(music_path), "offset_seconds": MUSIC_OFFSET,
                           "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"},
-                "figure": {"sha256": sha256(figure_path), **figure_meta},
+                "figure": None,
                 "images": used, "holds": plan, "captions_ass_sha256": sha256(work / "captions.ass"),
                 "captions": [e for e in caption_events(timeline["sentences"]) if e["end"] > script["overlay"]["title_card_seconds"]],
                 "sentences": timeline["sentences"],
-                "overlay": {k: script["overlay"][k] for k in ("brand", "amen", "title", "title_card_seconds")},
-                "badges": list(BADGES),
+                "overlay": {k: script["overlay"][k] for k in ("brand", "title", "title_card_seconds")},
+                "persistent_overlays": ["brand"],
+                "caption_style": {"box": False, "alignment": "bottom-centre", "outline": 4, "words_max": CAPTION_WORDS_MAX},
+                "cta": cta_events(total),
+                "scripture_cards": scripture_cards(script, timeline),
+                "scene_target_seconds": scene_target(script["backgrounds"]),
+                "crossfade_seconds": FADE,
                 "cinematic": ({"depth_model": {"name": "Depth Anything V2 Small (ONNX)", "licence": "apache-2.0",
                                                "sha256": sha256(model)}, "grade": cinematic.GRADE, "look": cinematic.LOOK,
                                "atmosphere": cine.get("atmosphere", [])} if cine else None),

@@ -24,9 +24,9 @@ class Captions(unittest.TestCase):
 
 class Holds(unittest.TestCase):
     def test_hold_cap_and_no_repeat(self):
-        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": ["a", "b", "c"]}
-        sents = [{"start": 2.5, "end": 40.0, "text": "x"}, {"start": 41.0, "end": 45.0, "text": "y"}]
-        plan = sr.holds(script, {"sentences": sents}, 60.0)
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": list("abcdefghijklmn")}
+        sents = [{"start": 2.5, "end": 80.0, "text": "x"}, {"start": 81.0, "end": 85.0, "text": "y"}]
+        plan = sr.holds(script, {"sentences": sents}, 120.0)
         self.assertTrue(all(h["end"] - h["start"] <= sr.HOLD_MAX + 1e-6 for h in plan[1:]))
         self.assertTrue(all(a["image"] != b["image"] for a, b in zip(plan[1:], plan[2:])))
 
@@ -40,10 +40,10 @@ class Holds(unittest.TestCase):
         self.assertTrue(all(h["end"] - h["start"] <= sr.HOLD_MAX + 1e-6 for h in plan[1:]))
 
     def test_split_then_next_hold_never_repeats(self):
-        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": ["a", "b", "c", "d"]}
-        sents = [{"start": 2.5, "end": 40.0, "text": "x"}, {"start": 41.0, "end": 45.0, "text": "y"},
-                 {"start": 55.0, "end": 70.0, "text": "z"}, {"start": 80.0, "end": 90.0, "text": "w"}]
-        for total in (60.0, 75.0, 95.0, 120.0):
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": list("abcdefghijklmn")}
+        sents = [{"start": 2.5, "end": 80.0, "text": "x"}, {"start": 81.0, "end": 85.0, "text": "y"},
+                 {"start": 110.0, "end": 140.0, "text": "z"}, {"start": 160.0, "end": 190.0, "text": "w"}]
+        for total in (120.0, 150.0, 200.0, 260.0):
             plan = sr.holds(script, {"sentences": sents}, total)
             self.assertTrue(all(a["image"] != b["image"] for a, b in zip(plan[1:], plan[2:])), total)
 
@@ -61,6 +61,53 @@ class Reference(unittest.TestCase):
     def test_whole_segment_when_no_kjv_sentence(self):
         seg = {"id": "s", "start": 1.0, "end": 9.0}
         self.assertEqual(sr.reference_end(seg, [{"segment": "s", "text": "Be still and know.", "end": 4.0}]), 9.0)
+
+
+class StandardV1(unittest.TestCase):
+    """migration/STANDARD.md R1-R6 on the real narration timelines of the rendered pilots."""
+    PILOTS = ("pilot-003", "pilot-004", "pilot-005", "pilot-006")
+
+    def plan(self, pilot):
+        script = json.loads((HERE / pilot / "script.json").read_text())
+        timeline = json.loads((HERE / pilot / "out/timeline.json").read_text())
+        total = timeline["voice_seconds"] + sr.TAIL
+        return script, timeline, total, sr.holds(script, timeline, total)
+
+    def test_scenes_no_figure_lengths_and_repeat_gap(self):
+        for pilot in self.PILOTS:
+            script, timeline, total, plan = self.plan(pilot)
+            self.assertFalse(any(h["figure"] for h in plan), pilot)                       # R1
+            self.assertLessEqual(plan[0]["end"] - plan[0]["start"], 3.0, pilot)           # title card
+            for h in plan[1:]:                                                            # R3
+                self.assertGreaterEqual(h["end"] - h["start"], sr.HOLD_MIN - 1e-6, (pilot, h))
+                self.assertLessEqual(h["end"] - h["start"], sr.HOLD_MAX + 1e-6, (pilot, h))
+            seen = {}
+            for h in plan[1:]:
+                if h["image"] in seen:
+                    self.assertGreaterEqual(h["start"] - seen[h["image"]], sr.REPEAT_GAP - 1e-6, (pilot, h))
+                seen[h["image"]] = h["end"]
+
+    def test_too_few_backgrounds_refused(self):
+        with self.assertRaises(SystemExit):
+            sr.scene_target(["a"] * 6)
+
+    def test_captions_cards_and_cta(self):
+        for pilot in self.PILOTS:
+            script, timeline, total, _ = self.plan(pilot)
+            script.setdefault("overlay", {}).setdefault("subtitle", "")
+            ass = sr.build_ass(script, timeline, total)
+            self.assertNotIn(",Box,", ass)                                                # R4: no box
+            self.assertNotIn(",Amen,", ass)                                               # R6
+            self.assertNotIn(script["overlay"].get("amen", "Type AMEN"), ass)
+            ctas = sr.cta_events(total)
+            self.assertLessEqual(len(ctas), 2)
+            self.assertTrue(all(c["end"] - c["start"] <= 10 and c["start"] >= 45 for c in ctas), pilot)
+            self.assertEqual(ass.count(",Badge,"), len(ctas))
+            for c in sr.scripture_cards(script, timeline):                                # R5
+                seg = next(s for s in timeline["segments"] if s["id"] == c["segment"])
+                self.assertLessEqual(c["end"], sr.reference_end(seg, timeline["sentences"]) + 1e-6)
+                self.assertGreaterEqual(c["start"], seg["start"] - 1e-6)
+            self.assertTrue(all(len(e["text"].split()) <= sr.CAPTION_WORDS_MAX for e in sr.caption_events(timeline["sentences"])))
 
 
 if __name__ == "__main__":

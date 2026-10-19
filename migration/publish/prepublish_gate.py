@@ -33,7 +33,10 @@ from pathlib import Path
 import sys
 
 VERSION = "prepublish-gate-v1"
-FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"}
+FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
+                          # migration/STANDARD.md v1, frozen 2026-10-19 before the first v3 render; v2 is unchanged
+                          "pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"}
+CRITERIA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v3.json"
 PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
 # the watched review decides only when the designated model answered. Fallback free models score the same file
 # very differently (pilot-003: gemini-3.8-flash audio 9 / picture 8.5 / policy 10; gemini-3.6-flash on a near-identical
@@ -56,6 +59,14 @@ DIMENSIONS = {
     "content_and_policy": {"qa": [], "review": ["opening_and_promise", "pacing_and_visual_variety", "scripture_on_screen",
                                                 "policy_safe"]},
 }
+# STANDARD v1 renders (pilot-qa-criteria-v3) are held to its grammar instead of the v2 figure grammar
+DIMENSIONS_V3 = {**DIMENSIONS,
+                 "captions": {"qa": ["caption_coverage_of_speech", "caption_hold_median", "caption_chars_max",
+                                     "caption_words_max", "caption_no_box"], "review": ["captions_readable_and_synced"]},
+                 "image": {"qa": ["title_card_seconds", "no_figure", "every_scene_in_motion", "scene_seconds",
+                                  "crossfade_seconds_max", "image_repeat_gap", "scripture_card_only_while_read", "cta_count",
+                                  "cta_short_and_not_early", "persistent_overlays_only_brand"],
+                           "review": ["picture_quality", "figure_and_background_integrity"]}}
 # rows measured on our own file and script always block; miner rows block when long_review reports them as hard
 # (only once the miner is proven on the holdout) and are then checked like any other hard row
 SCORE_HARD = ("minutes", "scripture_per_10_min")
@@ -90,7 +101,7 @@ def binding(d, qa, manifest, review, video):
         out.append(item("binding", "qa_for_this_file", "PASS" if qa.get("output_sha256") == sha else "UNKNOWN",
                         qa.get("output_sha256")))
         frozen = FROZEN_CRITERIA_SHA256.get(qa.get("criteria_version"))
-        crit = d / "qa_criteria.json"
+        crit = CRITERIA_V3 if qa.get("criteria_version") == "pilot-qa-criteria-v3" else d / "qa_criteria.json"
         real = sha256_file(crit) if crit.exists() else None
         ok = frozen is not None and qa.get("criteria_sha256") == frozen == real
         out.append(item("binding", "qa_criteria_frozen", "PASS" if ok else "FAIL",
@@ -148,7 +159,8 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     review = load(d / "out" / "review.json")
     sha = (manifest or {}).get("output_sha256")
     dims = {"binding": binding(d, qa, manifest, review, video)}
-    for name, spec in DIMENSIONS.items():
+    spec_by_dim = DIMENSIONS_V3 if (qa or {}).get("criteria_version") == "pilot-qa-criteria-v3" else DIMENSIONS
+    for name, spec in spec_by_dim.items():
         dims[name] = qa_items(qa, spec["qa"], sha) + review_items(review, spec["review"], sha)
     # whole-video watched review: its overall score is a gate of its own
     w = (review or {}).get("watched_review") or {}
