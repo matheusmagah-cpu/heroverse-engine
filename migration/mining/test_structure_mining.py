@@ -1,3 +1,4 @@
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -24,6 +25,23 @@ def window(start, end, cuts):
 
 class StructureMining(unittest.TestCase):
     # regression cases from the 2026-10-18 accuracy audit (structure-mining/20261017 vs native ASR)
+    def test_reviewer_allowance_is_reserved_for_decisions(self):
+        # E26: mining and Shorts selection spent gemini-3.8-flash's small free daily allowance before the reviews
+        root = Path(__file__).resolve().parents[2]
+        reviewers = set()
+        for f in ("migration/production/long_review.py", "migration/production/shorts_review.py"):
+            reviewers |= set(re.findall(r'REVIEW_MODELS = \(([^)]*)\)', (root / f).read_text())[0].replace('"', "").replace(",", " ").split())
+        self.assertEqual(set(sm.DECISION_MODELS), reviewers)
+        self.assertFalse(set(sm.SUPPORT_MODELS) & reviewers)
+        self.assertTrue(sm.SUPPORT_MODELS)
+        for f in ("migration/production/long_review.py", "migration/production/shorts_select.py", "migration/mining/structure_mining.py",
+                  "migration/mining/packaging_mining.py"):
+            text = (root / f).read_text()
+            self.assertNotIn("call(payload, key, list(sm.FREE_MODELS))", text, f)
+            self.assertNotIn("call(payload, key, list(FREE_MODELS))", text, f)
+            self.assertNotIn('",".join(FREE_MODELS)', text, f)
+            self.assertNotIn("sm.FREE_MODELS)", text, f)
+
     def test_every_call_records_its_token_usage(self):
         real, sm.USAGE[:] = sm.transport, []
         sm.transport = lambda payload, key, model: {"candidates": [{"content": {"parts": [{"text": "{}"}]}}],

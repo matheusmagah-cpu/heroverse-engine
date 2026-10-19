@@ -55,7 +55,7 @@ def mine(file, video, key):
         payload = sm.video_request(video, start, end)
         payload["contents"][0]["parts"][0]["fileData"] = {"fileUri": file["uri"], "mimeType": "video/mp4"}
         try:
-            _, report = sm.call(payload, key, list(sm.FREE_MODELS))
+            _, report = sm.call(payload, key, list(sm.SUPPORT_MODELS))  # never the reviewer's allowance (E26)
             report = sm.repair(report, start, end)
             if sm.valid_window(report, video["video_id"], start, end):
                 windows.append(report)
