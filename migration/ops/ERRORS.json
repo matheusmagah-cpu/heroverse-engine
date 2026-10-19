@@ -230,6 +230,16 @@
     "file": "migration/publish/test_preflight.py",
     "contains": "def test_approve_step_without_a_time_checks_the_effective_time"
    }
+  },
+  {
+   "id": "E24",
+   "date": "2026-10-19",
+   "error": "Approval was allowed to happen hours before the slot (runway alerted only at < 6 h without gate PASS); pilot-003 had 3 h between the 07:00 quota reset and its 10:00 slot and missed it on a Gemini 503",
+   "fix": "Owner: approve one full day ahead. Runway alerts at < 24 h without gate PASS and < 36 h without render; quality gates unchanged, no automatic provider retry",
+   "antidote": {
+    "file": "migration/ops/test_runway.py",
+    "contains": "def test_approval_one_day_ahead"
+   }
   }
  ]
 }

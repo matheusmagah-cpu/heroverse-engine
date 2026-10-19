@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Offline checks of the content runway."""
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 import sys
@@ -29,11 +29,11 @@ class Runway(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             prod = Path(t)
             pilot(prod, "pilot-008", "2026-10-22T00:00:00Z", rendered=True, approved=True)
-            pilot(prod, "pilot-009", "2026-10-22T10:00:00Z", rendered=True)         # 22 h left, not approved yet: fine
-            pilot(prod, "pilot-010", "2026-10-23T00:00:00Z")                        # 36 h left, script only: fine
+            pilot(prod, "pilot-009", "2026-10-22T10:00:00Z", rendered=True, approved=True)  # 22 h left, approved
+            pilot(prod, "pilot-010", "2026-10-23T00:00:00Z", rendered=True)         # 36 h left, rendered: fine
             rows, alerts = r.check(prod, {}, NOW)
             self.assertEqual(len(rows), 8)                                          # 4 days x 2 slots
-            self.assertEqual([x["stage"] for x in rows[:3]], ["approved", "rendered", "script"])
+            self.assertEqual([x["stage"] for x in rows[:3]], ["approved", "approved", "rendered"])
             self.assertTrue(any("2026-10-23 10:00" in a and "NO PILOT" in a for a in alerts))  # 46 h, no script
             self.assertFalse(any("pilot-009" in a or "pilot-010" in a for a in alerts))
 
@@ -45,6 +45,21 @@ class Runway(unittest.TestCase):
             alerts = r.check(prod, {}, datetime(2026, 10, 21, 19, 0, tzinfo=timezone.utc))[1]
             self.assertTrue(any("pilot-008" in a and "rendered" in a for a in alerts))
             self.assertTrue(any("pilot-009" in a and "script" in a for a in alerts))
+
+    def test_approval_one_day_ahead(self):
+        # E24: pilot-003 had 3 h between the quota reset and its slot and missed it on a provider error
+        self.assertGreaterEqual(r.APPROVAL_LEAD, timedelta(hours=24))
+        self.assertGreater(r.RENDER_LEAD, r.APPROVAL_LEAD)
+        with tempfile.TemporaryDirectory() as t:
+            prod = Path(t)
+            pilot(prod, "pilot-008", "2026-10-22T10:00:00Z", rendered=True)         # 22 h left, not approved: late
+            pilot(prod, "pilot-009", "2026-10-23T00:00:00Z", rendered=True)         # 36 h left, not approved: fine
+            pilot(prod, "pilot-010", "2026-10-23T10:00:00Z")                        # 46 h left, script only: fine
+            pilot(prod, "pilot-011", "2026-10-22T00:00:00Z")                        # 12 h, script only: late
+            alerts = r.check(prod, {}, NOW)[1]
+            self.assertTrue(any("pilot-008" in a and "rendered" in a for a in alerts))
+            self.assertTrue(any("pilot-011" in a and "script" in a for a in alerts))
+            self.assertFalse(any("pilot-009" in a or "pilot-010" in a for a in alerts))
 
     def test_uploaded_counts_and_format_start(self):
         with tempfile.TemporaryDirectory() as t:
