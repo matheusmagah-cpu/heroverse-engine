@@ -16,6 +16,7 @@ usage: channel_config.py CHANNEL_JSON [--apply]
 import copy
 from datetime import datetime, timezone
 import json
+import time
 from pathlib import Path
 import shlex
 import sys
@@ -98,6 +99,9 @@ def show(value):
     return text if len(text) <= 120 else text[:117] + "..."
 
 
+VERIFY_WAITS = (0, 20, 40, 60, 120)  # seconds; run 39320063115 read the old text right after the update
+
+
 def main(channel_json, apply=False, receipts_dir=RECEIPTS):
     config = json.loads(Path(channel_json).read_text())
     if config.get("version") != "channel-v1":
@@ -121,9 +125,13 @@ def main(channel_json, apply=False, receipts_dir=RECEIPTS):
             sent.setdefault("channel", {})[FIELDS[r["setting"]]] = r["target"]
         pv.check(s.put(pv.API + "channels", params={"part": "brandingSettings"},
                        json={"id": item["id"], "brandingSettings": sent}), "CHANNELS_UPDATE")
-        after = fetch(s, config["channel_id"]).get("brandingSettings", {})
-        for r in changes:
-            r["applied"] = same(r["setting"], after.get("channel", {}).get(FIELDS[r["setting"]]), r["target"])
+        for wait in VERIFY_WAITS:  # YouTube serves the old branding for a while after a successful update
+            time.sleep(wait)
+            after = fetch(s, config["channel_id"]).get("brandingSettings", {})
+            for r in changes:
+                r["applied"] = same(r["setting"], after.get("channel", {}).get(FIELDS[r["setting"]]), r["target"])
+            if all(r["applied"] for r in changes):
+                break
     now = datetime.now(timezone.utc)
     receipt = {"version": "channel-config-receipt-v1", "channel_id": item["id"], "channel_json": str(channel_json),
                "mode": "apply" if apply else "plan", "applied": bool(apply and changes),
