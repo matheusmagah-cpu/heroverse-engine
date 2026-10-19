@@ -1,0 +1,110 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 16,
+    "picture_changes_per_minute": 31.93,
+    "median_shot_seconds": 1.8,
+    "longest_shot_seconds": 4.167,
+    "motion_median_top_decile_diff": 1.267
+   },
+   "rhythm": {
+    "audio_onsets": 33,
+    "audio_onsets_per_minute": 65.85,
+    "tempo": {
+     "bpm": 64.87,
+     "confidence": 0.061
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.071,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 4,
+     "visual_events": 16
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -15.1,
+    "loudness_range_lu": 2.9,
+    "true_peak_dbtp": -2.6
+   },
+   "colour": {
+    "mean_brightness": 0.4547,
+    "brightness_std_over_time": 0.0998,
+    "mean_saturation": 0.3608,
+    "saturation_std_over_time": 0.0779
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.887,
+     "singing": 0.0,
+     "music": 0.339,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 53,
+     "singing": 0,
+     "music": 9,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 61,
+    "words_per_minute": 121.7,
+    "transcript": "Before you go any further this morning, I want you to do something simple. Stop and just notice your breathing. Your heart is beating. You made it to today. That alone is worth stopping for. This morning isn't about what's wrong or what's missing. It's about what's already right, already good, already here. We're going to spend the next few minutes"
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 3.375,
+     "frames": 6
+    },
+    {
+     "label": "speech",
+     "start_seconds": 2.88,
+     "end_seconds": 22.095,
+     "frames": 39
+    },
+    {
+     "label": "music",
+     "start_seconds": 21.6,
+     "end_seconds": 23.055,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 22.56,
+     "end_seconds": 27.855,
+     "frames": 10
+    },
+    {
+     "label": "music",
+     "start_seconds": 27.36,
+     "end_seconds": 28.335,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 27.84,
+     "end_seconds": 30.023,
+     "frames": 4
+    }
+   ]
+  }
+ ]
+}
