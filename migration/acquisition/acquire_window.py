@@ -22,6 +22,7 @@ from pathlib import Path
 import re
 import sys
 import time
+from urllib.error import HTTPError
 from urllib.parse import urlsplit
 
 HERE = Path(__file__).resolve().parent
@@ -130,9 +131,23 @@ def quota_from_completed_job(key):
                 "baseline_quota_headers": prior["last_quota_headers"]}
     out = Path(os.environ.get("RUNNER_TEMP", "/tmp")) / "acq-quota"
     out.mkdir(exist_ok=True)
-    value = n.progress(prior["provider_job_id"], key, evidence, out, 0)
+    try:
+        value = n.progress(prior["provider_job_id"], key, evidence, out, 0)
+    except HTTPError as error:
+        # the provider purges old jobs (2026-10-19: 404 for the 2026-10-15 reference job, every reservation refused).
+        # The gateway's quota counters still come on that reply; check_quota then enforces the free plan and the floor
+        # exactly as before, and refuses when they are absent.
+        return quota_from_error(error)
     require(value.get("success") == 1, "REFERENCE_JOB_NOT_COMPLETE")
     return evidence["last_quota_headers"]
+
+
+def quota_from_error(error):
+    from preflight import quota_headers
+    require(getattr(error, "code", None) == 404, f"QUOTA_READ_HTTP_{getattr(error, 'code', 'ERROR')}")
+    q = quota_headers(error.headers or {})
+    require("x-ratelimit-units-remaining" in q, "QUOTA_HEADERS_MISSING_ON_PURGED_JOB")
+    return q
 
 
 def inspect(path, start, end, evidence):

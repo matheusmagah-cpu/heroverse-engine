@@ -60,6 +60,20 @@ class Guards(unittest.TestCase):
         with self.assertRaisesRegex(a.AcquisitionError, "DAILY_JOB_CAP"):
             a.reserve("BeFOHnncaeQ", 120, 160, NOW, FREE, led)
 
+    def test_purged_reference_job_still_reads_quota_from_the_reply(self):
+        import email.message
+        from urllib.error import HTTPError
+        h = email.message.Message()
+        h["x-ratelimit-units-limit"] = "500"
+        h["x-ratelimit-units-remaining"] = "480"
+        h["x-ratelimit-rapid-free-plans-hard-limit-limit"] = "500"
+        q = a.quota_from_error(HTTPError("u", 404, "Not Found", h, None))
+        self.assertEqual(q["x-ratelimit-units-remaining"], "480")
+        with self.assertRaises(a.AcquisitionError):                       # no counters: refused, never guessed
+            a.quota_from_error(HTTPError("u", 404, "Not Found", email.message.Message(), None))
+        with self.assertRaises(a.AcquisitionError):                       # any other error stays a refusal
+            a.quota_from_error(HTTPError("u", 500, "x", h, None))
+
     def test_finish_is_terminal(self):
         led = ledger()
         a.reserve("BeFOHnncaeQ", 120, 160, NOW, FREE, led)
