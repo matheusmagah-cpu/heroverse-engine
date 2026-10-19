@@ -1,0 +1,227 @@
+{
+ "version": "shorts-produce-v1",
+ "source_pilot": "pilot-012",
+ "selection_rubric_model": "gemini-3.5-flash-lite",
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "e341563bfa5c02f174bd773a62b478723920b9df1b03998d93798595b4546954",
+   "seconds": 27.1,
+   "source_start": 1140.605,
+   "source_end": 1167.072,
+   "segments": [
+    "sleep-reflection-bed",
+    "sleep-psalm-help"
+   ],
+   "hook": "You need not search through every memory.",
+   "title": "Release Your Day to God",
+   "reference": "Psalm 63:7 (KJV)",
+   "scenes": [
+    "bg-lamp-window",
+    "bg-moonlit-sea",
+    "bg-starry-forest",
+    "bg-lamp-window"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8684,
+    "measured_score": 0.8459,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 1.0,
+     "scripture": 1.0,
+     "promise": 0.0,
+     "resolution": 1.0,
+     "length_fit": 0.45867999999999487
+    },
+    "rubric": {
+     "index": 4,
+     "hook_first_2s": 8.0,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.0,
+     "shareability": 8.0,
+     "loop_potential": 9.0,
+     "policy_safe": 10.0,
+     "reasons": "Concise, highly reassuring, great loop potential.",
+     "hook_line": "You need not search through every memory.",
+     "title": "Release Your Day to God"
+    }
+   },
+   "text": "You need not search through every memory again. As you listen, you can allow your attention to soften around the words. Even if you are still alert, you can spend these moments without demanding a particular feeling or measuring how well you are resting. Because thou hast been my help, therefore in the shadow of thy wings will I rejoice.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 27.1,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "6d47dd39d79612bc6f69a6a4cbf9a8b1058e8f4927d8e080fb5c344802306e96",
+   "seconds": 36.73,
+   "source_start": 1644.975,
+   "source_end": 1681.076,
+   "segments": [
+    "sleep-reflection-unfinished-list",
+    "sleep-numbers-keep",
+    "sleep-reflection-keeping"
+   ],
+   "hook": "You have paid attention; now rest.",
+   "title": "The Lord Bless You and Keep You",
+   "reference": "Numbers 6:24 (KJV)",
+   "scenes": [
+    "bg-dusk-field",
+    "bg-candle",
+    "bg-night-sky",
+    "bg-starry-hills",
+    "bg-dusk-field"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8662,
+    "measured_score": 0.8155,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.9210526315789472,
+     "scripture": 1.0,
+     "promise": 0.32894736842105265,
+     "resolution": 0.4,
+     "length_fit": 0.8440400000000046
+    },
+    "rubric": {
+     "index": 10,
+     "hook_first_2s": 8.5,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.5,
+     "shareability": 8.5,
+     "loop_potential": 8.5,
+     "policy_safe": 10.0,
+     "reasons": "Strong opening hook giving permission to stop working.",
+     "hook_line": "You have paid attention; now rest.",
+     "title": "The Lord Bless You and Keep You"
+    }
+   },
+   "text": "You have paid attention; now you can stop working at it. You can receive the remaining Scriptures as words spoken beside your rest. There is no need to repeat every phrase after the voice or recover anything you missed. You can listen lightly, let your hands be comfortable, and allow this moment to contain less effort than the day required. The LORD bless thee, and keep thee: These words belong to the blessing given for Israel.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 36.73,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "2e2fd4b53bea0e2d9fe38322efeaebbd6f1154bac4bbd02f61d6e246f77c82be",
+   "seconds": 42.17,
+   "source_start": 1085.032,
+   "source_end": 1126.567,
+   "segments": [
+    "sleep-introduction",
+    "sleep-psalm-bed"
+   ],
+   "hook": "Let the remembering become less deliberate.",
+   "title": "Scripture for Sleep: Psalm 63",
+   "reference": "Psalm 63:6 (KJV)",
+   "scenes": [
+    "bg-moon-lake",
+    "bg-lamp-window",
+    "bg-moonlit-sea",
+    "bg-starry-forest",
+    "bg-night-village",
+    "bg-moon-lake"
+   ],
+   "parallax": true,
+   "selection": {
+    "final_score": 0.8446,
+    "measured_score": 0.899,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.9677419354838709,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.9385999999999968
+    },
+    "rubric": {
+     "index": 0,
+     "hook_first_2s": 7.0,
+     "stands_alone": 8.0,
+     "emotional_payoff": 8.5,
+     "shareability": 7.0,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Gentle transition into sleep scripture, calming and grounded.",
+     "hook_line": "Let the remembering become less deliberate.",
+     "title": "Scripture for Sleep: Psalm 63"
+    }
+   },
+   "text": "Now you can let the remembering become less deliberate. The prayer has brought your day into God’s presence, and the next part is Scripture for sleep. You can listen as you rest, allowing the words to come without testing your concentration. You do not need to keep collecting examples or finish a list. If you are comfortable, let your eyes rest. You can receive these passages quietly, with the thanks already offered and the difficult parts already named. When I remember thee upon my bed, and meditate on thee in the night watches.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 42.17,
+    "lufs": -14.6,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}
