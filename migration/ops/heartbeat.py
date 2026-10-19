@@ -19,7 +19,6 @@ import sys
 RETRY_AFTER = timedelta(minutes=45)
 # workflow, slots "HH:MM" UTC, attempts per slot, condition, weekdays (Mon=0) or None
 TASKS = [
-    {"workflow": "mining-accuracy.yml", "slots": ["00:20"], "attempts": 2},
     # Cloudflare's free allocation resets at 00:00 UTC: tries right after it, and once at midday for pilots
     # written during the day (an exhausted allocation fails fast and is not retried before the next slot)
     {"workflow": "nightly-images.yml", "slots": ["00:30", "01:30", "03:30", "12:30"], "attempts": 1, "when": "images_missing"},
@@ -28,11 +27,7 @@ TASKS = [
      "when": "reconcile_todo"},
     {"workflow": "publish-shorts.yml", "slots": ["07:35", "13:35", "19:35"], "attempts": 2, "when": "shorts_pending"},
     {"workflow": "goal-report.yml", "slots": ["07:45"], "attempts": 2, "after": "market-panel.yml", "wait_max": "09:30"},
-    # the two minings share the free Gemini day with production: dispatched only when no approval or Shorts
-    # job is waiting, and stay due until then
-    {"workflow": "packaging-mining.yml", "slots": ["07:50"], "attempts": 1, "weekdays": [6], "when": "production_idle"},
     {"workflow": "channel-privacy.yml", "slots": ["08:05"], "attempts": 1},
-    {"workflow": "structure-mining.yml", "slots": ["08:30"], "attempts": 1, "when": "production_idle"},
 ]
 
 
