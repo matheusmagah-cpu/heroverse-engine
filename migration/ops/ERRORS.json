@@ -220,6 +220,16 @@
     "file": "migration/ops/DOT_PROTOCOL.md",
     "contains": "When the owner changes a task's goal, Claude rewrites the card as `SPEC vN` before Dot resumes"
    }
+  },
+  {
+   "id": "E23",
+   "date": "2026-10-19",
+   "error": "approve.yml runs preflight.py without a time, so a late approval was checked against the schedule's past time and failed PUBLISH_AT_NOT_AHEAD (pilot-003 at 10:01 UTC); the E16 fix covered the gate but not this step",
+   "fix": "preflight.main() with no time checks effective_publish_at (the time publish.yml uses: the slot, or public now when late)",
+   "antidote": {
+    "file": "migration/publish/test_preflight.py",
+    "contains": "def test_approve_step_without_a_time_checks_the_effective_time"
+   }
   }
  ]
 }

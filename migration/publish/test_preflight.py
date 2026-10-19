@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Offline checks of the pre-upload preflight."""
 from datetime import datetime, timezone
+import contextlib
+import io
 import json
 from pathlib import Path
 import struct
@@ -61,6 +63,14 @@ class Preflight(unittest.TestCase):
             self.assertEqual(pf.effective_publish_at(d, early), "2026-10-18T10:00:00Z")
             # the schedule's own time, when explicitly checked late, is still caught
             self.assertTrue(any(p.startswith("PUBLISH_AT_NOT_AHEAD") for p in pf.check(d, d / "thumb.png", now=late)[0]))
+
+    def test_approve_step_without_a_time_checks_the_effective_time(self):
+        # approve.yml calls preflight.py with no publish_at; a late approval must pass (E23)
+        with tempfile.TemporaryDirectory() as t:
+            d = pilot(t)
+            late = datetime(2026, 10, 18, 10, 1, tzinfo=timezone.utc)          # 1 min after the 10:00 slot
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(pf.main(d, d / "thumb.png", now=late), 0)
 
     def test_short_slot_before_the_long_video_fails(self):
         with tempfile.TemporaryDirectory() as t:

@@ -112,8 +112,11 @@ def check(pilot_dir, thumbnail, publish_at=None, now=None):
     return problems, units
 
 
-def main(pilot_dir, thumbnail, publish_at=None):
-    problems, units = check(pilot_dir, thumbnail, publish_at)
+def main(pilot_dir, thumbnail, publish_at=None, now=None):
+    # no time given (approve.yml): check the time publish.yml will actually use, so a late approval is not blocked
+    if publish_at is None:
+        publish_at = effective_publish_at(pilot_dir, now)
+    problems, units = check(pilot_dir, thumbnail, publish_at, now)
     print(json.dumps({"preflight": "FAIL" if problems else "PASS", "problems": problems, "estimated_units": units}))
     return 1 if problems else 0
 
