@@ -1,0 +1,127 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 13,
+    "picture_changes_per_minute": 25.94,
+    "median_shot_seconds": 2.3,
+    "longest_shot_seconds": 3.567,
+    "motion_median_top_decile_diff": 2.762
+   },
+   "rhythm": {
+    "audio_onsets": 41,
+    "audio_onsets_per_minute": 81.82,
+    "tempo": {
+     "bpm": 200.48,
+     "confidence": 0.06
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.077,
+     "chance_fraction": 0.087,
+     "lift": 0.89
+    },
+    "sync": {
+     "median_offset_seconds": 0.150839,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 5,
+     "visual_events": 13,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -16.1,
+    "loudness_range_lu": 2.3,
+    "true_peak_dbtp": -0.5
+   },
+   "colour": {
+    "mean_brightness": 0.3785,
+    "brightness_std_over_time": 0.0822,
+    "mean_saturation": 0.3343,
+    "saturation_std_over_time": 0.0381
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.887,
+     "singing": 0.0,
+     "music": 0.306,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 50,
+     "singing": 0,
+     "music": 12,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 66,
+    "words_per_minute": 131.7,
+    "transcript": "Good morning, beloved. Before you rush into today, take a moment to breathe, and remember this. You woke up because God's mercy has met you again. You may not know everything this day will bring, but you know the one who goes before you. God loves you unconditionally, He has not forgotten you, and He is too faithful to fail you. So begin this morning with"
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 3.855,
+     "frames": 7
+    },
+    {
+     "label": "speech",
+     "start_seconds": 3.36,
+     "end_seconds": 14.895,
+     "frames": 23
+    },
+    {
+     "label": "music",
+     "start_seconds": 14.4,
+     "end_seconds": 15.375,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 14.88,
+     "end_seconds": 20.175,
+     "frames": 10
+    },
+    {
+     "label": "music",
+     "start_seconds": 19.68,
+     "end_seconds": 21.135,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 20.64,
+     "end_seconds": 27.855,
+     "frames": 14
+    },
+    {
+     "label": "music",
+     "start_seconds": 27.36,
+     "end_seconds": 28.815,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 28.32,
+     "end_seconds": 30.023,
+     "frames": 3
+    }
+   ]
+  }
+ ]
+}
