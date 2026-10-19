@@ -154,6 +154,7 @@ def decide(states):
 
 
 def evaluate(pilot_dir, video=None, preflight_problems=None):
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     d = Path(pilot_dir)
     qa, manifest = load(d / "out" / "qa.json"), load(d / "out" / "manifest.json")
     review = load(d / "out" / "review.json")
@@ -186,6 +187,16 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     else:
         dims["full_file_scan"] = [item("scan", n, "PASS" if r["pass"] else "FAIL", r["longest_s"])
                                   for n, r in scan["rows"].items() if r.get("blocking")]
+    if (qa or {}).get("criteria_version") == "pilot-qa-criteria-v3":
+        # owner rule 2026-10-19: approved by the system when it passes STRUCTURE (mined), MODELING (above) and
+        # AUTHENTICITY; computed from the pilot's own files (three_stage.py), any error is UNKNOWN, never PASS
+        try:
+            import three_stage
+            for stage, rows in (("structure", three_stage.structure_rows(d)), ("authenticity", three_stage.authenticity_rows(d))):
+                dims[stage] = [item(stage, r["name"], r["state"], r["value"]) for r in rows]
+        except Exception as e:
+            for stage in ("structure", "authenticity"):
+                dims[stage] = [item(stage, "three_stage", "UNKNOWN", f"{type(e).__name__}: {str(e)[:120]}")]
     if preflight_problems is None:
         dims["preflight"] = [item("preflight", "preflight", "UNKNOWN", "not run")]
     else:
