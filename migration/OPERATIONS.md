@@ -72,6 +72,7 @@ counters are estimated as YPP counts them (public long-form hours 365 d, public 
   - Fallback: the private `pilot-render-stills.yml` runs the same script. Keep each render within about 45 min where possible so the fallback fits the 2,000 private minutes.
   - The private repo handles the panel, publication and light jobs.
 - **Cloudflare Workers AI (10k neurons/day, resets 00:00 UTC):** images only (FLUX + 2x upscale on GitHub).
+- **RapidAPI free plan (500 units/day, 14 per native window, floor 100 → ≤ 28 windows a day):** native reference windows for mining — 12 a day for the accuracy holdout, the rest for native measurement.
 - **Gemini free tier (no billing):** mining, Shorts selection/review, watched reviews.
 - **YouTube Data API (10k units/day, resets 07:00 UTC):** panel 2,400 (half of the queries each day, alternating); packaging mining 500 (Sundays); long video ~2,100 (upload 1,600 + captions 400 + thumbnail/playlist); each Short ~1,650. A normal day: panel + 1 long + 3 Shorts = 9,450. Uploads go after the 07:00 UTC reset when the day's units are spent. A second Google Cloud project's API key for the public reads (panel, packaging) would free the whole 10k for uploads.
 
@@ -134,6 +135,22 @@ has no script < 72 h before, no render < 20 h before, or no gate PASS < 6 h befo
 Commit `migration/requests/<name>.json` with `{"workflow": "file.yml", "inputs": {...}}` to main, through a branch and merge. `requests.yml` dispatches it once and moves the file to `done/`.
 
 Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003"}}`.
+
+## Mining: native-first (owner rule 2026-10-19: mining is a strong point, never a weak one)
+- **Weak point found (2026-10-19 audit):**
+  - The structure miner is a free Gemini model watching the video and reporting what it heard.
+  - On 12 native test windows: 4 were invalid (times outside the window, incomplete transcript); one valid-looking window agreed 11 % with the real audio; the pass rate was 50 % against an 80 % criterion.
+  - Its accuracy was never proven on independent (holdout) windows.
+  - The prayer sample had 2 usable winners.
+  - So every modeling number derived from it is informative only.
+- **Rule from now:**
+  - **Numbers:** every modeling number comes from **measurement of the original audio**: our faster-whisper ASR, YAMNet sound classes and the picture-change meter on natively acquired 60 s windows (`mining/native_metrics.py`).
+  - **Validation per video:** a mined video counts only when its own native windows agree ≥ 0.85 with the mined transcript.
+  - **Targets:** a format's numbers become targets only with ≥ 8 validated winners (90 % bootstrap intervals). Otherwise they are INSUFFICIENT and shown, never used.
+  - **What Gemini keeps:** labelling structure on validated transcripts.
+- **Proof:** the miner's holdout check (criteria fixed 2026-10-18: agreement ≥ 0.85, openings ≥ 0.80, window pass rate ≥ 0.80) runs every night. Only PASS lets miner rows decide in the gate.
+- **Sample:** ≥ 10 prayer winners from ≥ 4 policy-clean channels, plus median and weak videos of the same channels, chosen with vidIQ outliers and the panel.
+- **Work:** Dot card #136 (native_metrics + native_plan, tested). Claude wires the nightly measurement windows into the heartbeat and recomputes MODELING_SPEC from MEASURED numbers only.
 
 ## Pipeline gates (never edited after results)
 1. **Script acceptance** (before images): `production/script_check.py` — PR checks run it on every pilot a PR touches.
