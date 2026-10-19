@@ -1,0 +1,97 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 18,
+    "picture_changes_per_minute": 35.92,
+    "median_shot_seconds": 1.833,
+    "longest_shot_seconds": 3.367,
+    "motion_median_top_decile_diff": 1.059
+   },
+   "rhythm": {
+    "audio_onsets": 61,
+    "audio_onsets_per_minute": 121.73,
+    "tempo": {
+     "bpm": 55.3,
+     "confidence": 0.041
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.056,
+     "chance_fraction": 0.127,
+     "lift": 0.44
+    },
+    "sync": {
+     "median_offset_seconds": -0.984217,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 7,
+     "visual_events": 18,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -17.9,
+    "loudness_range_lu": 1.9,
+    "true_peak_dbtp": -4.5
+   },
+   "colour": {
+    "mean_brightness": 0.2976,
+    "brightness_std_over_time": 0.0507,
+    "mean_saturation": 0.3265,
+    "saturation_std_over_time": 0.1189
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.984,
+     "singing": 0.0,
+     "music": 0.629,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 61,
+     "singing": 0,
+     "music": 1,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 78,
+    "words_per_minute": 155.7,
+    "transcript": "Two men carried it on a pole between them. One cluster of grapes, too heavy for a single man to lift. Twelve spies had gone into Canaan. Twelve came back, and ten of them stood before the whole nation of Israel and said something that should have been impossible. We saw the Nephilim there. The Nephilim belonged to Genesis 6 to the world before the flood. Genesis 7 says everything with the breath of life on dry land,"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 20.655,
+     "frames": 42
+    },
+    {
+     "label": "music",
+     "start_seconds": 20.16,
+     "end_seconds": 21.135,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 20.64,
+     "end_seconds": 30.023,
+     "frames": 19
+    }
+   ]
+  }
+ ]
+}
