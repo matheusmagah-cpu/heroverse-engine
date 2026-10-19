@@ -1,0 +1,481 @@
+{
+  "version": "pilot-script-v3",
+  "pilot_id": "pilot-010",
+  "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+  "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+  "working_title": "Night Prayer for Anxiety | Cast Your Cares on God and Sleep in Peace",
+  "promise": "Bring the worries of this evening into prayer, one concern at a time, and settle with Scripture before rest.",
+  "angle": "Name the specific concerns left by the day, entrust them to God one by one, choose one practical next step, and continue into a separate Scripture-for-sleep section without medical claims.",
+  "authorship": "Original English prayer written for HeroVerse by dot (OpenAI AI assistant), 2026-10-19. Scripture quotations are verbatim public-domain KJV.",
+  "voice": {
+    "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+    "voice_id": "am_michael",
+    "speed": 0.85
+  },
+  "segments": [
+    {
+      "id": "hook",
+      "beat": "hook",
+      "pause_after": 0.8,
+      "text": "Good evening. Before you check again, pray through tonight’s worries and place each concern in God’s care."
+    },
+    {
+      "id": "invitation",
+      "beat": "invitation",
+      "pause_after": 1.2,
+      "text": "You may have checked the same message several times, hoping a reply would change how you feel. You can put the phone within reach but turn its face away. Let the place where you are sitting or lying support your weight. You can arrive with a busy mind. In this prayer, you will name your concerns separately, so you do not have to wrestle with every uncertainty at once."
+    },
+    {
+      "id": "scripture-peter",
+      "beat": "scripture peter",
+      "pause_after": 1.5,
+      "text": "Casting all your care upon him; for he careth for you.",
+      "reference": "1 Peter 5:7 (KJV)"
+    },
+    {
+      "id": "prayer-first-care",
+      "beat": "prayer first care",
+      "pause_after": 1.2,
+      "text": "Father, I begin with the concern closest to the surface. I give it a plain name before you. It may be an unanswered message, a decision at work, or someone whose voice sounded troubled. I have carried it through dinner and into this room. Now I bring it into our conversation. Help me entrust this particular care to you, even before my feelings catch up with the words I am praying."
+    },
+    {
+      "id": "reflection-separate",
+      "beat": "reflection separate",
+      "pause_after": 1.2,
+      "text": "When several worries arrive together, you can feel as though your whole life needs fixing before bedtime. You can take a smaller approach here. You are allowed to name one subject and let the others wait their turn. You do not need a complete explanation. A person’s name, a pending answer, or a sentence about tomorrow is enough to begin. You are addressing someone who cares about the person doing the praying."
+    },
+    {
+      "id": "prayer-awaited-answer",
+      "beat": "prayer awaited answer",
+      "pause_after": 1.2,
+      "text": "Lord, I bring the answer I cannot make arrive. I have imagined reasons for the silence and measured the hours since I last checked. Help me stop treating a missing reply as a verdict about my worth. If there is a sensible time to follow up, let me choose it in daylight. For this evening, receive both my hope and my disappointment. Hold the uncertainty I cannot settle by checking again."
+    },
+    {
+      "id": "prayer-phone-boundary",
+      "beat": "prayer phone boundary",
+      "pause_after": 1.2,
+      "text": "Father, help me make one kind boundary with the stream of information. Let necessary messages remain available without making every notification my responsibility. I ask for wisdom about the difference between being reachable and being constantly on watch. If no urgent duty requires my attention, help me let the phone grow quiet. I give you the impulse to search for one more update, and the fear that stopping means I have stopped caring."
+    },
+    {
+      "id": "scripture-philippians-six",
+      "beat": "scripture philippians six",
+      "pause_after": 1.5,
+      "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+      "reference": "Philippians 4:6 (KJV)"
+    },
+    {
+      "id": "reflection-request",
+      "beat": "reflection request",
+      "pause_after": 1.2,
+      "text": "You hear an invitation to bring requests to God. You can speak about what you need without first making yourself sound confident. You can ask for an honest conversation, a workable plan, or help getting through an appointment. Your request can be specific. You can also remember a small kindness from today. Gratitude gives another truth room beside the worry; you do not have to pretend the worry has already disappeared."
+    },
+    {
+      "id": "prayer-work-mistake",
+      "beat": "prayer work mistake",
+      "pause_after": 1.2,
+      "text": "Lord, I name the work concern that followed me home. There is something I sent, something I missed, or something I may be asked to explain. Help me separate the actual facts from the harsh story I am telling about myself. If I made an error, give me the honesty to acknowledge it and the patience to correct it. Tonight I hand over the imagined meeting that keeps starting again inside my head."
+    },
+    {
+      "id": "prayer-next-step",
+      "beat": "prayer next step",
+      "pause_after": 1.2,
+      "text": "Father, make the next useful step clear enough to recognize. Perhaps I need to check a number, ask a question, or explain a delay. I do not need to rehearse every response another person might give. Help me prepare what is mine to prepare and leave their reaction outside my control. Receive my desire to do good work. Let that desire become steady attention tomorrow, rather than another hour of self-punishment tonight."
+    },
+    {
+      "id": "prayer-thanksgiving",
+      "beat": "prayer thanksgiving",
+      "pause_after": 1.2,
+      "text": "God, I remember a moment today when someone made a difficult thing easier. Perhaps they answered patiently, held a door, or let me start a sentence again. Thank you for that ordinary generosity. Thank you for the ability to ask for help and for people who have helped before. I bring this memory alongside the unfinished work. My day contained more than the moment I keep regretting; help me remember it with greater honesty."
+    },
+    {
+      "id": "scripture-philippians-seven",
+      "beat": "scripture philippians seven",
+      "pause_after": 1.5,
+      "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+      "reference": "Philippians 4:7 (KJV)"
+    },
+    {
+      "id": "reflection-guarded",
+      "beat": "reflection guarded",
+      "pause_after": 1.2,
+      "text": "You do not have to solve the meaning of every word tonight. Notice that the promise speaks of hearts and minds, the very places where you may feel tired. You can ask for God’s peace while there are unanswered questions around you. You are not being asked to explain everything into order. You can turn toward Christ with the thoughts you have, including the ones you wish would leave you alone."
+    },
+    {
+      "id": "prayer-household-cost",
+      "beat": "prayer household cost",
+      "pause_after": 1.2,
+      "text": "Father, I name the household expense that has been pressing on me. I bring the bill, the estimate, or the balance I need to review. Give me clear judgment when I look at the facts. Help me ask about arrangements when I need them, and speak honestly with anyone who shares this responsibility. I place these practical concerns before you without inventing a certainty about how they will turn out. Guide my next responsible choice."
+    },
+    {
+      "id": "prayer-sufficient-plan",
+      "beat": "prayer sufficient plan",
+      "pause_after": 1.2,
+      "text": "Lord, I release the midnight calculations that repeat without giving me new information. Tomorrow, help me set aside a definite time to look carefully, with paper, accurate figures, and whatever advice is needed. Keep shame from isolating me. Let courage take the form of a call made or a question asked. Tonight I give you my fear of falling behind, and ask for companionship and wisdom as I address what is real."
+    },
+    {
+      "id": "stillness-first",
+      "beat": "stillness first",
+      "pause_after": 3.0,
+      "text": "You can pause before naming anything else. Feel where your hands have come to rest. You do not need to move them into a special position. Let an ordinary breath come and go. For these moments, you can leave the unfinished calculation unfinished."
+    },
+    {
+      "id": "scripture-matthew-tomorrow",
+      "beat": "scripture matthew tomorrow",
+      "pause_after": 1.5,
+      "text": "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.",
+      "reference": "Matthew 6:34 (KJV)"
+    },
+    {
+      "id": "reflection-tomorrow",
+      "beat": "reflection tomorrow",
+      "pause_after": 1.2,
+      "text": "You can prepare for tomorrow without trying to live it from your bed. Perhaps you already know the time of your appointment and where you put the keys. You have done something useful. Beyond that, you may be rehearsing events that have not happened. You can notice the difference gently. This evening has its own limits, and you can let tomorrow’s conversation belong to tomorrow, where you will have actual information to meet."
+    },
+    {
+      "id": "prayer-appointment",
+      "beat": "prayer appointment",
+      "pause_after": 1.2,
+      "text": "Father, I name the appointment on the calendar. I bring the questions I hope to ask and the answers I am afraid to hear. Help me bring any notes or documents I need, and seek appropriate support if I want someone with me. I place the unknown parts before you. Give me courage for the actual hour when it comes. I release the demand to experience that hour many times before it arrives."
+    },
+    {
+      "id": "prayer-loved-person",
+      "beat": "prayer loved person",
+      "pause_after": 1.2,
+      "text": "Lord, I name the person whose trouble weighs on me. I wish I could know exactly what they need and make their next day easier. Help me listen to what they actually tell me. Keep my concern from becoming pressure for them to reassure me. Show me a practical kindness within my reach. As I leave the rest with you, teach me a love that respects their voice, their choices, and my own limits."
+    },
+    {
+      "id": "reflection-loving-limits",
+      "beat": "reflection loving limits",
+      "pause_after": 1.2,
+      "text": "You can care about someone deeply and still need a night away from problem solving. You may have already offered a ride, sent a message, or agreed on a time to speak. You can recognize that offering as real. You do not have to prove your love by staying mentally beside every possible difficulty. Where you have a genuine responsibility tonight, attend to it. Where you have done your part, you may pause."
+    },
+    {
+      "id": "prayer-unfinished-conversation",
+      "beat": "prayer unfinished conversation",
+      "pause_after": 1.2,
+      "text": "Father, I name the conversation that ended awkwardly. There was a look I could not read, a sentence I wish I had softened, or a silence I did not understand. Help me resist filling that silence with accusations against myself or someone else. Where I owe an apology, let it be sincere and specific. Where I need clarification, help me ask kindly. I surrender the imaginary versions of that conversation that cannot give me truth."
+    },
+    {
+      "id": "prayer-repair",
+      "beat": "prayer repair",
+      "pause_after": 1.2,
+      "text": "Lord, I accept responsibility for the words that were mine. I ask your forgiveness where I used tiredness as an excuse to be unkind. Help me make repair without demanding immediate reassurance in return. If another person needs time, give me patience with their pace. Tonight, let remorse point toward an honest action instead of an endless replay. I place the relationship in your care while I wait for an appropriate moment to speak."
+    },
+    {
+      "id": "scripture-psalm-thoughts",
+      "beat": "scripture psalm thoughts",
+      "pause_after": 1.5,
+      "text": "In the multitude of my thoughts within me thy comforts delight my soul.",
+      "reference": "Psalm 94:19 (KJV)"
+    },
+    {
+      "id": "reflection-multitude",
+      "beat": "reflection multitude",
+      "pause_after": 1.2,
+      "text": "The psalm gives you words for a crowded inner life. You can hear that multitude of thoughts named without embarrassment. Perhaps your mind moves from a bill to a conversation to a forgotten errand in seconds. You do not have to chase every thought to its conclusion. You can receive one comfort at a time: a remembered kindness, a truthful verse, the knowledge that you can bring your confusion into prayer."
+    },
+    {
+      "id": "prayer-inner-criticism",
+      "beat": "prayer inner criticism",
+      "pause_after": 1.2,
+      "text": "God, I name the judgment I keep passing on myself when everything becomes quiet. I hear that I should have known more, finished more, or handled the day better. Help me learn from what happened without treating myself with contempt. Show me the difference between correction that helps me grow and accusation that only wears me down. I ask for the humility to be a learner, with room to receive mercy and try again."
+    },
+    {
+      "id": "prayer-body-kindness",
+      "beat": "prayer body kindness",
+      "pause_after": 1.2,
+      "text": "Father, I bring my tired body into this prayer as well. I notice the tension I carried through the day and the impatience I sometimes feel toward my own limits. Help me respond with care. Guide me toward appropriate help when I need it, and toward ordinary habits that support rest. I am not asking my body to prove my faith tonight. I ask to treat it as something entrusted to me with tenderness."
+    },
+    {
+      "id": "reflection-returning-care",
+      "beat": "reflection returning care",
+      "pause_after": 1.2,
+      "text": "A concern may come back after you have prayed about it. You can notice that without declaring the prayer unsuccessful. You are practicing trust with a mind that has learned to keep checking. You can simply recognize the familiar concern and bring it back to God in fewer words. You do not need to restart the whole evening. You can return as many times as you need, with less argument and more kindness."
+    },
+    {
+      "id": "prayer-returning",
+      "beat": "prayer returning",
+      "pause_after": 1.2,
+      "text": "Lord, when the same concern returns, help me answer it gently. I have named it before you. I have considered whether anything requires action now. If there is no new information and no present responsibility, help me stop reopening the case. Receive my repeated turning toward you. Teach me a patient trust that can be practiced in small moments, without demanding a perfect feeling or an uninterrupted silence inside my thoughts."
+    },
+    {
+      "id": "scripture-isaiah-mind",
+      "beat": "scripture isaiah mind",
+      "pause_after": 1.5,
+      "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee.",
+      "reference": "Isaiah 26:3 (KJV)"
+    },
+    {
+      "id": "reflection-attention",
+      "beat": "reflection attention",
+      "pause_after": 1.2,
+      "text": "You can give your attention a place to return without forcing it to stay perfectly still. In Isaiah’s words, trust turns toward God. You can turn that way now. When you notice that you are planning again, you can come back to the prayer already underway. You are allowed to begin again quietly. You do not need to monitor your mind as though every wandering thought were evidence against the sincerity of your faith."
+    },
+    {
+      "id": "prayer-steady-trust",
+      "beat": "prayer steady trust",
+      "pause_after": 1.2,
+      "text": "Faithful God, I place my trust in your character rather than the strength of my concentration. I know how easily my attention wanders. Help me return to what is true about you with patience. Keep me from using this prayer as another task to perform flawlessly. I want to become more honest in your presence, more willing to receive help, and more able to leave an unanswered question without following it through every imagined outcome."
+    },
+    {
+      "id": "prayer-gathering-cares",
+      "beat": "prayer gathering cares",
+      "pause_after": 1.2,
+      "text": "Father, I have named the unanswered message, the work concern, the practical expense, the coming appointment, and the person I love. Receive whichever of these belongs to my life tonight. Receive also the worry I could not explain aloud. I do not need to make them one enormous burden again. Each has been brought before you separately. Help me remember that I can address one real responsibility at a time when morning comes."
+    },
+    {
+      "id": "reflection-single-line",
+      "beat": "reflection: make responsibility small enough to schedule",
+      "pause_after": 1.2,
+      "text": "You may notice that a worry becomes less tangled when you give it a concrete task. You cannot schedule certainty, but you can schedule a question. You cannot determine a conversation’s outcome, but you can choose when to ask for one. You can make that distinction without dismissing what matters to you. Before the quieter readings begin, you will give one concern a practical place, so your mind does not have to serve as its reminder all night."
+    },
+    {
+      "id": "declaration",
+      "beat": "declaration",
+      "pause_after": 1.2,
+      "text": "I can be honest about what troubles me. I can ask for help before I reach the end of my strength. I can make a plan without predicting every result. I can care for another person without carrying their entire future. I can leave a message unanswered for a time when no urgent need is present. God receives the concern I can name and the concern I cannot yet put into words."
+    },
+    {
+      "id": "payoff",
+      "beat": "payoff",
+      "pause_after": 1.2,
+      "text": "Make this small commitment before the readings for sleep: choose one concern that needs attention tomorrow, and give it one practical next step and a time. You might decide, “After breakfast, I will call about the bill.” If you need a reminder, write only that short line. Then close the note. You have given your responsibility a place in tomorrow, so you can stop trying to keep it alive by rehearsing it tonight."
+    },
+    {
+      "id": "prayer-commitment",
+      "beat": "prayer commitment",
+      "pause_after": 1.2,
+      "text": "Father, I commit this one step and its time to you. Help me follow through with the strength and information available then. For tonight, I will leave the note closed unless a genuine need changes the situation. When I want to reopen it merely to feel certain, remind me of the care I have already taken. Bless this modest act of trust, and guide me in the quieter hours that follow."
+    },
+    {
+      "id": "cta",
+      "beat": "cta",
+      "pause_after": 1.0,
+      "text": "If you want to affirm this prayer in the comments, write amen. Now let the Scripture readings accompany your rest."
+    },
+    {
+      "id": "sleep-introduction",
+      "beat": "sleep introduction",
+      "pause_after": 1.5,
+      "text": "You can let your eyes settle wherever they are comfortable. From here, the pace stays gentle, with Scripture and short prayers for the night. You do not need to keep a list of the passages. You can receive one sentence and let the next arrive when it arrives. The concern you set down has a next step already. You may leave it there while you listen, without checking the time or measuring your progress."
+    },
+    {
+      "id": "sleep-proverbs",
+      "beat": "sleep proverbs",
+      "pause_after": 1.5,
+      "text": "When thou liest down, thou shalt not be afraid: yea, thou shalt lie down, and thy sleep shall be sweet.",
+      "reference": "Proverbs 3:24 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-lying-down",
+      "beat": "sleep reflection lying down",
+      "pause_after": 1.5,
+      "text": "You hear a picture of lying down within the life of wisdom. You can let that picture be gentle company rather than another standard you must meet tonight. If you are still alert, you can simply remain here with the reading. You do not have to manufacture a particular sensation. Your pillow can be a place to receive care, and this verse can be a prayerful hope you hold with open hands."
+    },
+    {
+      "id": "sleep-prayer-bedside",
+      "beat": "sleep prayer bedside",
+      "pause_after": 1.5,
+      "text": "Lord, I receive this ordinary place of rest with gratitude. Help me stop treating the bedside as a desk where every problem must be solved. Let the blanket be a blanket and the pillow a pillow. I ask for rest, and I leave the manner and timing outside my command. Give me patience with this night as it unfolds. May I meet my own weariness with the kindness I would offer someone dear to me."
+    },
+    {
+      "id": "sleep-reflection-simple",
+      "beat": "sleep reflection simple",
+      "pause_after": 1.5,
+      "text": "You can allow the room to be ordinary. A distant sound, a little light, or a passing thought does not require you to begin again. You can stay with what is comfortable and let the reading continue. You do not need to create an ideal night before you are allowed to rest. You are here in the night you have, and you can meet it with less struggle, one quiet moment at a time."
+    },
+    {
+      "id": "sleep-psalm-labour",
+      "beat": "sleep psalm labour",
+      "pause_after": 1.5,
+      "text": "It is vain for you to rise up early, to sit up late, to eat the bread of sorrows: for so he giveth his beloved sleep.",
+      "reference": "Psalm 127:2 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-labour",
+      "beat": "sleep reflection labour",
+      "pause_after": 1.5,
+      "text": "This psalm speaks into the work of building a life. You may know the feeling of adding another hour because you are afraid everything depends on your effort. You can hear its invitation to dependence. Your work matters, and you can also reach a stopping place. You are a person who needs replenishment. You can let that need belong within your relationship with God, without making exhaustion the measure of your devotion."
+    },
+    {
+      "id": "sleep-prayer-stopping",
+      "beat": "sleep prayer stopping",
+      "pause_after": 1.5,
+      "text": "God, I leave the extra hour of effort I was trying to borrow from this night. If my duties require me to be awake, give me practical support and a chance to rest when I can. If I am free to stop, help me accept that freedom. I ask for enough humility to live as a person with limits. Receive the work I completed and the work that must wait for another part of the day."
+    },
+    {
+      "id": "sleep-stillness",
+      "beat": "sleep stillness",
+      "pause_after": 3.0,
+      "text": "You can let the last sentence fade without replacing it. Notice the support beneath your head or back. There is no special rhythm to achieve. You may be quiet for a little while, with nothing to explain and no new concern to name."
+    },
+    {
+      "id": "sleep-john-peace",
+      "beat": "sleep john peace",
+      "pause_after": 1.5,
+      "text": "Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid.",
+      "reference": "John 14:27 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-gift",
+      "beat": "sleep reflection gift",
+      "pause_after": 1.5,
+      "text": "Jesus speaks these words to his disciples as they face a difficult parting. You can hear the care in what he leaves with them. His peace is offered amid a story that still contains sorrow and uncertainty. You can bring your own unfinished story near these words. You do not need to know its next chapter. You can receive Christ’s invitation as a gift addressed to people who need his company and courage."
+    },
+    {
+      "id": "sleep-prayer-receiving",
+      "beat": "sleep prayer receiving",
+      "pause_after": 1.5,
+      "text": "Jesus, help me receive what you give with a willing heart. I have searched for peace in a completed list, an encouraging reply, or knowing exactly what will happen. Those things cannot carry everything I ask of them. I turn toward you now. Stay with me in the uncertainty that remains, and teach me to recognize your kindness through Scripture, through prayer, and through the people who offer steady care in my life."
+    },
+    {
+      "id": "sleep-reflection-message",
+      "beat": "sleep reflection message",
+      "pause_after": 1.5,
+      "text": "You can leave the unanswered message where it is. You have brought the waiting into prayer, and you do not need to refresh the story now. Somewhere beyond this room, another person has their own evening and their own limits. You can let them have that space. You can let yourself have this one. For the moment, your attention may rest with words already given, instead of words you are still waiting to receive."
+    },
+    {
+      "id": "sleep-psalm-preserve",
+      "beat": "sleep psalm preserve",
+      "pause_after": 1.5,
+      "text": "The LORD shall preserve thee from all evil: he shall preserve thy soul.",
+      "reference": "Psalm 121:7 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-preserve",
+      "beat": "sleep reflection preserve",
+      "pause_after": 1.5,
+      "text": "The pilgrim’s song gives you language for trusting the Lord as keeper. You can hear its strong confidence without using it to predict the details of tomorrow. The psalm turns your attention toward the One to whom your life matters. You can pray for protection and still make wise choices in the world you inhabit. Here in this quiet portion of the night, you can place your whole self within that prayer."
+    },
+    {
+      "id": "sleep-prayer-keeping",
+      "beat": "sleep prayer keeping",
+      "pause_after": 1.5,
+      "text": "Keeper of my life, I entrust the deepest parts of me to your care. Preserve what is tender from becoming hard through fear. Protect my willingness to love, my desire to tell the truth, and my readiness to ask for guidance. Where I need a wise boundary, help me recognize it. Where I need a trustworthy companion, help me welcome one. I rest my hope in you beyond the small circle of what I can oversee."
+    },
+    {
+      "id": "sleep-psalm-coming-going",
+      "beat": "sleep psalm coming going",
+      "pause_after": 1.5,
+      "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+      "reference": "Psalm 121:8 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-doorway",
+      "beat": "sleep reflection doorway",
+      "pause_after": 1.5,
+      "text": "You have crossed doorways today, entering places with things to do and leaving them with things unfinished. The psalm includes coming and going in its language of care. You can let that breadth comfort you. Your life is more than the last difficult moment before bed. You are known across the ordinary movements of a day, and you can entrust the movements still ahead without walking through them in your imagination tonight."
+    },
+    {
+      "id": "sleep-prayer-threshold",
+      "beat": "sleep prayer threshold",
+      "pause_after": 1.5,
+      "text": "Lord, receive the journeys of this day, the familiar roads and the unexpected turns. I thank you for places where I was welcomed and people whose presence helped me. I bring the places that felt difficult as well. As I remain here now, I release the need to visit them all again in thought. When it is time to go out or come in tomorrow, guide my choices with wisdom and my words with care."
+    },
+    {
+      "id": "sleep-reflection-fewer-words",
+      "beat": "sleep reflection fewer words",
+      "pause_after": 1.5,
+      "text": "You may find that you have fewer words now, or you may notice that your mind remains active. Either way, you can let the prayer become simpler. You have already said much that matters. You do not need to repeat every concern to keep it within God’s attention. You can rest beside a single truth from these readings, allowing the rest of the conversation to become quiet without bringing it to a perfect conclusion."
+    },
+    {
+      "id": "sleep-prayer-hours",
+      "beat": "sleep prayer: receive time without watching the clock",
+      "pause_after": 1.5,
+      "text": "Father, I bring the urge to keep counting the hours. Sometimes I turn the clock into another source of pressure, measuring how well I am resting. Help me step away from that judgment. Give me patience for the present moment, whether it is quiet or restless. I ask for the rest I need without bargaining with the night. Receive my wish for an easier morning, and help me meet whatever morning brings with appropriate support and care."
+    },
+    {
+      "id": "sleep-matthew-rest",
+      "beat": "sleep matthew rest",
+      "pause_after": 1.5,
+      "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+      "reference": "Matthew 11:28 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-coming",
+      "beat": "sleep reflection coming",
+      "pause_after": 1.5,
+      "text": "The invitation begins with coming. You can come with the weight you actually carry, even if you cannot explain why it feels so heavy. You can come after a productive day or a day that seemed to get away from you. You can come with faith that feels small. You do not need to sort yourself into a more acceptable condition first. Let the welcome of Jesus have room in the place where you are resting."
+    },
+    {
+      "id": "sleep-prayer-welcome",
+      "beat": "sleep prayer welcome",
+      "pause_after": 1.5,
+      "text": "Jesus, I answer your welcome with the small amount of attention I have left. I bring the weight of trying to be ready for every possibility. Teach me a life that receives help and makes room for rest. I leave the next step in its appointed place tomorrow. For these remaining moments, let my prayer be uncomplicated: I am here before you, with my weariness, trusting your invitation enough to stop preparing another explanation."
+    },
+    {
+      "id": "sleep-reflection-unfinished",
+      "beat": "sleep reflection unfinished",
+      "pause_after": 1.5,
+      "text": "You can leave tonight unfinished in small, ordinary ways. The note can stay folded. The message can remain where you left it. The question can wait for the person who can answer it. You have not forgotten your responsibilities; you have given one of them a practical place. Now you can allow the night to contain something besides preparation. You can listen, be still, and receive these moments without turning them into another assignment."
+    },
+    {
+      "id": "sleep-prayer-closing",
+      "beat": "sleep prayer closing",
+      "pause_after": 1.5,
+      "text": "Father, I place this evening before you just as it has been. Thank you for hearing each concern separately and receiving the words I struggled to find. Help me carry the practical commitment into tomorrow when its time comes. Until then, I ask for a gentle heart toward myself and those around me. Let your care remain the thought beside my unanswered questions. I leave the conversation here for now, held within your enduring love."
+    }
+  ],
+  "figure": "figure-a",
+  "backgrounds": [
+    "bg-night-sky",
+    "bg-moon-lake",
+    "bg-starry-hills",
+    "bg-lamp-window",
+    "bg-night-garden",
+    "bg-moonlit-sea",
+    "bg-quiet-chapel",
+    "bg-starry-forest",
+    "bg-dusk-field",
+    "bg-night-village",
+    "bg-candle",
+    "bg-window"
+  ],
+  "overlay": {
+    "title": "Lay Down Your Cares Tonight",
+    "subtitle": "NIGHT PRAYER",
+    "title_image": "bg-moon-lake",
+    "title_card_seconds": 2.0,
+    "brand": "HeroVerse Prayer",
+    "amen": "Type AMEN"
+  },
+  "description_intro": "Bring tonight's worries to God in prayer, then listen to gentle KJV Scripture readings as you prepare for rest.",
+  "hashtags": [
+    "#prayer",
+    "#nightprayer",
+    "#jesus"
+  ],
+  "thumbnail": {
+    "lines": [
+      "LAY DOWN",
+      "YOUR CARES"
+    ],
+    "sub": "Night Prayer"
+  },
+  "tags": [
+    "night prayer",
+    "prayer for anxiety",
+    "cast your cares on God",
+    "scripture for sleep",
+    "bedtime prayer",
+    "KJV night prayer",
+    "Christian guided prayer",
+    "peace before rest"
+  ],
+  "figure_choice": "figure-a: HeroVerse's own generated praying illustration, reused from pilot-004 for brand continuity; no real-person likeness or borrowed identity.",
+  "playlist": {
+    "title": "Night Prayer",
+    "description": "Calm night prayers with Scripture to end the day with God: peace, forgiveness, protection and restful sleep."
+  },
+  "motion": true,
+  "cinematic": {
+    "atmosphere": [
+      "bg-night-sky",
+      "bg-moon-lake",
+      "bg-starry-hills",
+      "bg-starry-forest",
+      "bg-moonlit-sea"
+    ]
+  },
+  "format_note": "Original night prayer followed by a distinct Scripture-for-sleep section. Fixed pilot-008 narration, image layout and pause pattern preserved. One amen-only CTA follows the concrete payoff before sleep readings. Existing own artwork reused; no new images."
+}
