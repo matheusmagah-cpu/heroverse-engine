@@ -1,0 +1,2056 @@
+{
+ "segments": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 6.987
+  },
+  {
+   "id": "invitation",
+   "start": 7.687,
+   "end": 29.728
+  },
+  {
+   "id": "scripture-requests",
+   "start": 30.728,
+   "end": 40.496
+  },
+  {
+   "id": "prayer-first-request",
+   "start": 41.796,
+   "end": 72.977
+  },
+  {
+   "id": "scripture-hearts-minds",
+   "start": 73.977,
+   "end": 82.157
+  },
+  {
+   "id": "reflection-requests",
+   "start": 83.457,
+   "end": 116.269
+  },
+  {
+   "id": "prayer-name-worry",
+   "start": 117.269,
+   "end": 150.605
+  },
+  {
+   "id": "prayer-thanksgiving",
+   "start": 151.605,
+   "end": 183.64
+  },
+  {
+   "id": "scripture-stayed-mind",
+   "start": 184.64,
+   "end": 192.339
+  },
+  {
+   "id": "reflection-return-attention",
+   "start": 193.639,
+   "end": 228.724
+  },
+  {
+   "id": "stillness-one",
+   "start": 229.724,
+   "end": 247.669
+  },
+  {
+   "id": "prayer-attention",
+   "start": 251.169,
+   "end": 285.264
+  },
+  {
+   "id": "scripture-christ-peace",
+   "start": 286.264,
+   "end": 298.239
+  },
+  {
+   "id": "reflection-receive-peace",
+   "start": 299.539,
+   "end": 330.455
+  },
+  {
+   "id": "prayer-receive-peace",
+   "start": 331.455,
+   "end": 366.421
+  },
+  {
+   "id": "scripture-wisdom",
+   "start": 367.421,
+   "end": 377.893
+  },
+  {
+   "id": "reflection-ask-wisdom",
+   "start": 379.193,
+   "end": 411.271
+  },
+  {
+   "id": "prayer-work-task",
+   "start": 412.271,
+   "end": 449.285
+  },
+  {
+   "id": "prayer-work-people",
+   "start": 450.285,
+   "end": 486.651
+  },
+  {
+   "id": "scripture-strength-peace",
+   "start": 487.651,
+   "end": 493.749
+  },
+  {
+   "id": "reflection-strength",
+   "start": 495.049,
+   "end": 525.697
+  },
+  {
+   "id": "prayer-pace",
+   "start": 526.697,
+   "end": 559.329
+  },
+  {
+   "id": "prayer-limits",
+   "start": 560.329,
+   "end": 594.775
+  },
+  {
+   "id": "scripture-soft-answer",
+   "start": 595.775,
+   "end": 601.553
+  },
+  {
+   "id": "reflection-before-answer",
+   "start": 602.853,
+   "end": 633.373
+  },
+  {
+   "id": "prayer-words",
+   "start": 634.373,
+   "end": 669.096
+  },
+  {
+   "id": "scripture-one-body",
+   "start": 670.096,
+   "end": 678.904
+  },
+  {
+   "id": "reflection-shared-peace",
+   "start": 680.204,
+   "end": 711.321
+  },
+  {
+   "id": "prayer-home",
+   "start": 712.321,
+   "end": 747.641
+  },
+  {
+   "id": "prayer-loved-ones",
+   "start": 748.641,
+   "end": 782.255
+  },
+  {
+   "id": "prayer-distance",
+   "start": 783.255,
+   "end": 813.924
+  },
+  {
+   "id": "stillness-two",
+   "start": 814.924,
+   "end": 833.403
+  },
+  {
+   "id": "scripture-hope",
+   "start": 836.903,
+   "end": 847.024
+  },
+  {
+   "id": "reflection-hope",
+   "start": 848.324,
+   "end": 881.553
+  },
+  {
+   "id": "prayer-waiting",
+   "start": 882.553,
+   "end": 910.961
+  },
+  {
+   "id": "prayer-sorrow",
+   "start": 911.961,
+   "end": 942.887
+  },
+  {
+   "id": "scripture-burden",
+   "start": 943.887,
+   "end": 951.863
+  },
+  {
+   "id": "reflection-supported",
+   "start": 953.163,
+   "end": 985.475
+  },
+  {
+   "id": "prayer-help",
+   "start": 986.475,
+   "end": 1019.021
+  },
+  {
+   "id": "prayer-neighbours",
+   "start": 1020.021,
+   "end": 1055.863
+  },
+  {
+   "id": "day-transition",
+   "start": 1056.863,
+   "end": 1085.112
+  },
+  {
+   "id": "day-scripture-word",
+   "start": 1086.312,
+   "end": 1091.749
+  },
+  {
+   "id": "day-reflection-word",
+   "start": 1093.049,
+   "end": 1128.421
+  },
+  {
+   "id": "day-prayer-word",
+   "start": 1129.421,
+   "end": 1162.949
+  },
+  {
+   "id": "day-scripture-today",
+   "start": 1163.949,
+   "end": 1174.687
+  },
+  {
+   "id": "day-reflection-today",
+   "start": 1175.987,
+   "end": 1208.939
+  },
+  {
+   "id": "day-prayer-today",
+   "start": 1209.939,
+   "end": 1242.848
+  },
+  {
+   "id": "day-scripture-peace-always",
+   "start": 1243.848,
+   "end": 1251.291
+  },
+  {
+   "id": "day-reflection-changing-plans",
+   "start": 1252.591,
+   "end": 1287.399
+  },
+  {
+   "id": "day-prayer-interruptions",
+   "start": 1288.399,
+   "end": 1322.14
+  },
+  {
+   "id": "reflection-return-again",
+   "start": 1323.14,
+   "end": 1354.705
+  },
+  {
+   "id": "declaration",
+   "start": 1355.705,
+   "end": 1383.227
+  },
+  {
+   "id": "commitment-prepare",
+   "start": 1384.427,
+   "end": 1418.924
+  },
+  {
+   "id": "payoff",
+   "start": 1419.924,
+   "end": 1455.327
+  },
+  {
+   "id": "prayer-commitment",
+   "start": 1456.527,
+   "end": 1491.749
+  },
+  {
+   "id": "blessing-introduction",
+   "start": 1492.749,
+   "end": 1515.421
+  },
+  {
+   "id": "blessing-keep-grace",
+   "start": 1516.421,
+   "end": 1524.248
+  },
+  {
+   "id": "blessing-peace",
+   "start": 1525.548,
+   "end": 1530.251
+  },
+  {
+   "id": "closing-prayer",
+   "start": 1531.751,
+   "end": 1559.156
+  },
+  {
+   "id": "cta",
+   "start": 1560.156,
+   "end": 1565.648
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Before you check your phone this morning, let's pray Bible verses for peace over the day ahead.",
+   "start": 0.3,
+   "end": 6.807
+  },
+  {
+   "segment": "invitation",
+   "text": "Let your hands rest for a moment, if you can.",
+   "start": 7.687,
+   "end": 11.079
+  },
+  {
+   "segment": "invitation",
+   "text": "You may already be thinking about a message, a meeting, or somebody you love.",
+   "start": 11.259,
+   "end": 17.531
+  },
+  {
+   "segment": "invitation",
+   "text": "Bring that one concern with you.",
+   "start": 17.711,
+   "end": 20.121
+  },
+  {
+   "segment": "invitation",
+   "text": "You can join these prayers aloud or quietly.",
+   "start": 20.301,
+   "end": 23.992
+  },
+  {
+   "segment": "invitation",
+   "text": "We begin with Paul's words in Philippians, chapter four, verse six.",
+   "start": 24.172,
+   "end": 29.548
+  },
+  {
+   "segment": "scripture-requests",
+   "text": "Be careful for nothing;",
+   "start": 30.728,
+   "end": 32.691
+  },
+  {
+   "segment": "scripture-requests",
+   "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+   "start": 32.871,
+   "end": 40.316
+  },
+  {
+   "segment": "prayer-first-request",
+   "text": "Father, here is the concern that reached me before I even got out of bed.",
+   "start": 41.796,
+   "end": 47.513
+  },
+  {
+   "segment": "prayer-first-request",
+   "text": "I bring it into this prayer without tidying it up.",
+   "start": 47.693,
+   "end": 51.299
+  },
+  {
+   "segment": "prayer-first-request",
+   "text": "I am grateful that I can speak honestly with you.",
+   "start": 51.479,
+   "end": 55.084
+  },
+  {
+   "segment": "prayer-first-request",
+   "text": "Help me with the part I understand, and guide me through the part I cannot see.",
+   "start": 55.264,
+   "end": 60.981
+  },
+  {
+   "segment": "prayer-first-request",
+   "text": "I offer you this morning, with its unfinished plans and ordinary responsibilities.",
+   "start": 61.161,
+   "end": 67.433
+  },
+  {
+   "segment": "prayer-first-request",
+   "text": "Please teach me to receive your peace while I take the next faithful step.",
+   "start": 67.613,
+   "end": 72.797
+  },
+  {
+   "segment": "scripture-hearts-minds",
+   "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+   "start": 73.977,
+   "end": 81.977
+  },
+  {
+   "segment": "reflection-requests",
+   "text": "You have heard an invitation to bring everything to God.",
+   "start": 83.457,
+   "end": 87.703
+  },
+  {
+   "segment": "reflection-requests",
+   "text": "The older phrase about being careful speaks to anxious care.",
+   "start": 87.883,
+   "end": 92.0
+  },
+  {
+   "segment": "reflection-requests",
+   "text": "You can take your responsibilities seriously while bringing their weight into prayer.",
+   "start": 92.18,
+   "end": 97.748
+  },
+  {
+   "segment": "reflection-requests",
+   "text": "You may still have unanswered questions when these minutes end.",
+   "start": 97.928,
+   "end": 102.515
+  },
+  {
+   "segment": "reflection-requests",
+   "text": "You can still walk toward your responsibilities with those words beside you:",
+   "start": 102.695,
+   "end": 107.9
+  },
+  {
+   "segment": "reflection-requests",
+   "text": "hearts and minds kept through Christ.",
+   "start": 108.08,
+   "end": 110.917
+  },
+  {
+   "segment": "reflection-requests",
+   "text": "You are welcome here even if your thoughts keep interrupting your prayer.",
+   "start": 111.097,
+   "end": 116.089
+  },
+  {
+   "segment": "prayer-name-worry",
+   "text": "Lord, I name the worry plainly before you.",
+   "start": 117.269,
+   "end": 120.405
+  },
+  {
+   "segment": "prayer-name-worry",
+   "text": "I need help with this situation.",
+   "start": 120.585,
+   "end": 123.167
+  },
+  {
+   "segment": "prayer-name-worry",
+   "text": "I have been rehearsing conversations that have not happened and trying to solve decisions that are not mine to make.",
+   "start": 123.347,
+   "end": 131.603
+  },
+  {
+   "segment": "prayer-name-worry",
+   "text": "Gather my attention around what is actually before me.",
+   "start": 131.783,
+   "end": 135.985
+  },
+  {
+   "segment": "prayer-name-worry",
+   "text": "Give me courage to make the call, patience to wait for information, and humility to ask a clear question.",
+   "start": 136.165,
+   "end": 144.144
+  },
+  {
+   "segment": "prayer-name-worry",
+   "text": "Where I have filled the gaps with frightening guesses, lead me back to what I truly know.",
+   "start": 144.324,
+   "end": 150.425
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "I thank you for something small and real this morning:",
+   "start": 151.605,
+   "end": 155.531
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "a drink of water, light through a window, a person whose kindness I remember.",
+   "start": 155.711,
+   "end": 161.407
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "I receive these gifts without requiring them to explain away my trouble.",
+   "start": 161.587,
+   "end": 167.389
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "Let gratitude make room in my attention for goodness I have overlooked.",
+   "start": 167.569,
+   "end": 173.073
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "As I ask for help, remind me of help already given.",
+   "start": 173.253,
+   "end": 177.669
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "Keep me willing to notice another gift, even in a crowded and imperfect day.",
+   "start": 177.849,
+   "end": 183.46
+  },
+  {
+   "segment": "scripture-stayed-mind",
+   "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee:",
+   "start": 184.64,
+   "end": 189.781
+  },
+  {
+   "segment": "scripture-stayed-mind",
+   "text": "because he trusteth in thee.",
+   "start": 189.961,
+   "end": 192.159
+  },
+  {
+   "segment": "reflection-return-attention",
+   "text": "You can let this verse become a place to return.",
+   "start": 193.639,
+   "end": 197.159
+  },
+  {
+   "segment": "reflection-return-attention",
+   "text": "Your attention may wander toward the appointment, the unfinished task, or yesterday's mistake.",
+   "start": 197.339,
+   "end": 204.571
+  },
+  {
+   "segment": "reflection-return-attention",
+   "text": "When you notice that, bring your thoughts back gently.",
+   "start": 204.751,
+   "end": 208.356
+  },
+  {
+   "segment": "reflection-return-attention",
+   "text": "You do not need to count distractions or turn prayer into another examination.",
+   "start": 208.536,
+   "end": 215.043
+  },
+  {
+   "segment": "reflection-return-attention",
+   "text": "You are learning where to rest your trust.",
+   "start": 215.223,
+   "end": 218.06
+  },
+  {
+   "segment": "reflection-return-attention",
+   "text": "Isaiah points your attention toward God, whose faithfulness can hold your concern while you attend to the person or task in front of you.",
+   "start": 218.24,
+   "end": 228.544
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Take an easy breath and let it leave without forcing it.",
+   "start": 229.724,
+   "end": 234.012
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Notice where you are sitting or standing.",
+   "start": 234.192,
+   "end": 237.115
+  },
+  {
+   "segment": "stillness-one",
+   "text": "For this quiet moment, you can leave the next task where it is.",
+   "start": 237.295,
+   "end": 241.924
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Let your prayer be simple:",
+   "start": 242.104,
+   "end": 244.216
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Father, I am here, and I am listening.",
+   "start": 244.396,
+   "end": 247.489
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "God, help me notice what I invite into my mind today.",
+   "start": 251.169,
+   "end": 255.436
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "Give me discernment with headlines, conversations, and the little screen that can fill every spare moment.",
+   "start": 255.616,
+   "end": 263.509
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "When I reach for more information because I feel unsettled, help me recognize what I actually need.",
+   "start": 263.689,
+   "end": 270.9
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "Lead me toward truth, useful action, and enough quiet to listen.",
+   "start": 271.08,
+   "end": 276.221
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "I ask for a steadier attention, so the people beside me receive my presence instead of the distracted remainder of it.",
+   "start": 276.401,
+   "end": 285.084
+  },
+  {
+   "segment": "scripture-christ-peace",
+   "text": "Peace I leave with you, my peace I give unto you:",
+   "start": 286.264,
+   "end": 290.019
+  },
+  {
+   "segment": "scripture-christ-peace",
+   "text": "not as the world giveth, give I unto you.",
+   "start": 290.199,
+   "end": 293.612
+  },
+  {
+   "segment": "scripture-christ-peace",
+   "text": "Let not your heart be troubled, neither let it be afraid.",
+   "start": 293.792,
+   "end": 298.059
+  },
+  {
+   "segment": "reflection-receive-peace",
+   "text": "Jesus speaks these words to disciples facing a difficult farewell.",
+   "start": 299.539,
+   "end": 304.765
+  },
+  {
+   "segment": "reflection-receive-peace",
+   "text": "You can hear them in a morning that also feels uncertain.",
+   "start": 304.945,
+   "end": 309.255
+  },
+  {
+   "segment": "reflection-receive-peace",
+   "text": "His gift does not depend on every person agreeing with you or every plan working smoothly.",
+   "start": 309.435,
+   "end": 316.219
+  },
+  {
+   "segment": "reflection-receive-peace",
+   "text": "You can receive his words while your calendar is full and your feelings are mixed.",
+   "start": 316.399,
+   "end": 322.18
+  },
+  {
+   "segment": "reflection-receive-peace",
+   "text": "Let them reach the part of you that assumes everything must be settled before you are allowed to breathe or be kind.",
+   "start": 322.36,
+   "end": 330.275
+  },
+  {
+   "segment": "prayer-receive-peace",
+   "text": "Jesus, I receive the peace you offer.",
+   "start": 331.455,
+   "end": 334.569
+  },
+  {
+   "segment": "prayer-receive-peace",
+   "text": "I have tried to earn calm by checking every detail and pleasing every person.",
+   "start": 334.749,
+   "end": 340.787
+  },
+  {
+   "segment": "prayer-receive-peace",
+   "text": "That effort has left me tired.",
+   "start": 340.967,
+   "end": 343.42
+  },
+  {
+   "segment": "prayer-receive-peace",
+   "text": "Teach me to make room for your presence within my responsibilities.",
+   "start": 343.6,
+   "end": 348.528
+  },
+  {
+   "segment": "prayer-receive-peace",
+   "text": "When my plans change, help me pause long enough to respond thoughtfully.",
+   "start": 348.708,
+   "end": 354.084
+  },
+  {
+   "segment": "prayer-receive-peace",
+   "text": "When I cannot make someone understand me, keep me truthful and gentle.",
+   "start": 354.264,
+   "end": 359.661
+  },
+  {
+   "segment": "prayer-receive-peace",
+   "text": "I place my need to control this day before you and ask for a willing, teachable heart.",
+   "start": 359.841,
+   "end": 366.241
+  },
+  {
+   "segment": "scripture-wisdom",
+   "text": "If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not;",
+   "start": 367.421,
+   "end": 375.485
+  },
+  {
+   "segment": "scripture-wisdom",
+   "text": "and it shall be given him.",
+   "start": 375.665,
+   "end": 377.713
+  },
+  {
+   "segment": "reflection-ask-wisdom",
+   "text": "You may be opening a laptop, starting a shift, caring for someone, studying, or looking for work.",
+   "start": 379.193,
+   "end": 386.255
+  },
+  {
+   "segment": "reflection-ask-wisdom",
+   "text": "Each kind of work brings decisions.",
+   "start": 386.435,
+   "end": 389.208
+  },
+  {
+   "segment": "reflection-ask-wisdom",
+   "text": "You can admit that you need wisdom without pretending you have failed.",
+   "start": 389.388,
+   "end": 394.465
+  },
+  {
+   "segment": "reflection-ask-wisdom",
+   "text": "James gives you permission to ask.",
+   "start": 394.645,
+   "end": 397.291
+  },
+  {
+   "segment": "reflection-ask-wisdom",
+   "text": "You can seek counsel, check the details, and learn from someone else's experience.",
+   "start": 397.471,
+   "end": 403.444
+  },
+  {
+   "segment": "reflection-ask-wisdom",
+   "text": "Bring your next decision into this prayer, especially the one you feel pressured to make before you have understood it.",
+   "start": 403.624,
+   "end": 411.091
+  },
+  {
+   "segment": "prayer-work-task",
+   "text": "Father, I place the work ahead of me before you.",
+   "start": 412.271,
+   "end": 415.748
+  },
+  {
+   "segment": "prayer-work-task",
+   "text": "Show me what deserves my attention first.",
+   "start": 415.928,
+   "end": 419.085
+  },
+  {
+   "segment": "prayer-work-task",
+   "text": "Help me begin the difficult task without spending the morning avoiding it.",
+   "start": 419.265,
+   "end": 424.193
+  },
+  {
+   "segment": "prayer-work-task",
+   "text": "Give me care with details that affect other people.",
+   "start": 424.373,
+   "end": 428.171
+  },
+  {
+   "segment": "prayer-work-task",
+   "text": "If I make a mistake, help me acknowledge it and repair what I can.",
+   "start": 428.351,
+   "end": 433.577
+  },
+  {
+   "segment": "prayer-work-task",
+   "text": "Let my work be honest when nobody is watching.",
+   "start": 433.757,
+   "end": 437.427
+  },
+  {
+   "segment": "prayer-work-task",
+   "text": "I ask for patience with learning, courage with responsibility, and enough humility to receive correction without turning it into a judgment on my worth.",
+   "start": 437.607,
+   "end": 449.105
+  },
+  {
+   "segment": "prayer-work-people",
+   "text": "Lord, help me remember the people behind each request.",
+   "start": 450.285,
+   "end": 454.403
+  },
+  {
+   "segment": "prayer-work-people",
+   "text": "The colleague who sounds impatient may be carrying pressure I cannot see.",
+   "start": 454.583,
+   "end": 459.745
+  },
+  {
+   "segment": "prayer-work-people",
+   "text": "The person I serve deserves attention even when the task feels repetitive.",
+   "start": 459.925,
+   "end": 465.664
+  },
+  {
+   "segment": "prayer-work-people",
+   "text": "Keep me from passing my frustration to someone with less power to answer.",
+   "start": 465.844,
+   "end": 471.305
+  },
+  {
+   "segment": "prayer-work-people",
+   "text": "Give me words that clarify expectations and the courage to speak about an unreasonable load.",
+   "start": 471.485,
+   "end": 478.675
+  },
+  {
+   "segment": "prayer-work-people",
+   "text": "Let me contribute to a workplace where people can tell the truth, ask for help, and be treated with dignity.",
+   "start": 478.855,
+   "end": 486.471
+  },
+  {
+   "segment": "scripture-strength-peace",
+   "text": "The LORD will give strength unto his people;",
+   "start": 487.651,
+   "end": 490.616
+  },
+  {
+   "segment": "scripture-strength-peace",
+   "text": "the LORD will bless his people with peace.",
+   "start": 490.796,
+   "end": 493.569
+  },
+  {
+   "segment": "reflection-strength",
+   "text": "This psalm brings strength and peace together.",
+   "start": 495.049,
+   "end": 497.929
+  },
+  {
+   "segment": "reflection-strength",
+   "text": "You may need both before your morning is over.",
+   "start": 498.109,
+   "end": 501.373
+  },
+  {
+   "segment": "reflection-strength",
+   "text": "You may need strength to finish something demanding and peace to keep your words measured.",
+   "start": 501.553,
+   "end": 507.825
+  },
+  {
+   "segment": "reflection-strength",
+   "text": "You may need strength to tell the truth and peace to listen after you speak.",
+   "start": 508.005,
+   "end": 513.339
+  },
+  {
+   "segment": "reflection-strength",
+   "text": "Let this verse accompany the work of your hands.",
+   "start": 513.519,
+   "end": 517.273
+  },
+  {
+   "segment": "reflection-strength",
+   "text": "You can be diligent without treating every interruption as an enemy or every delay as a personal defeat.",
+   "start": 517.453,
+   "end": 525.517
+  },
+  {
+   "segment": "prayer-pace",
+   "text": "Give me strength for the effort this day requires, Lord.",
+   "start": 526.697,
+   "end": 530.623
+  },
+  {
+   "segment": "prayer-pace",
+   "text": "Help me recognize the difference between something urgent and something merely loud.",
+   "start": 530.803,
+   "end": 536.627
+  },
+  {
+   "segment": "prayer-pace",
+   "text": "When several demands arrive together, guide me to sort them wisely.",
+   "start": 536.807,
+   "end": 541.948
+  },
+  {
+   "segment": "prayer-pace",
+   "text": "Let me ask what is needed, what can wait, and what should be shared.",
+   "start": 542.128,
+   "end": 546.928
+  },
+  {
+   "segment": "prayer-pace",
+   "text": "Keep hurry from deciding how I treat people.",
+   "start": 547.108,
+   "end": 550.543
+  },
+  {
+   "segment": "prayer-pace",
+   "text": "I offer you the pace of my day, including the moments when slowing down a little would help me do the work more carefully.",
+   "start": 550.723,
+   "end": 559.149
+  },
+  {
+   "segment": "prayer-limits",
+   "text": "Father, I bring you the limits I find difficult to accept.",
+   "start": 560.329,
+   "end": 564.532
+  },
+  {
+   "segment": "prayer-limits",
+   "text": "There are hours I cannot add and responsibilities I cannot carry alone.",
+   "start": 564.712,
+   "end": 570.835
+  },
+  {
+   "segment": "prayer-limits",
+   "text": "Help me make an honest plan with the strength and time available.",
+   "start": 571.015,
+   "end": 575.644
+  },
+  {
+   "segment": "prayer-limits",
+   "text": "Give me grace to say what I can do without promising what I cannot.",
+   "start": 575.824,
+   "end": 580.688
+  },
+  {
+   "segment": "prayer-limits",
+   "text": "If today includes searching for work or waiting for an opportunity, keep my hope patient and my steps practical.",
+   "start": 580.868,
+   "end": 589.508
+  },
+  {
+   "segment": "prayer-limits",
+   "text": "Help me receive support without shame and offer it without pride.",
+   "start": 589.688,
+   "end": 594.595
+  },
+  {
+   "segment": "scripture-soft-answer",
+   "text": "A soft answer turneth away wrath:",
+   "start": 595.775,
+   "end": 598.484
+  },
+  {
+   "segment": "scripture-soft-answer",
+   "text": "but grievous words stir up anger.",
+   "start": 598.664,
+   "end": 601.373
+  },
+  {
+   "segment": "reflection-before-answer",
+   "text": "Picture the next conversation that could become tense.",
+   "start": 602.853,
+   "end": 606.629
+  },
+  {
+   "segment": "reflection-before-answer",
+   "text": "You cannot choose the other person's tone, but you can attend to your own.",
+   "start": 606.809,
+   "end": 612.164
+  },
+  {
+   "segment": "reflection-before-answer",
+   "text": "A gentle answer can still be clear.",
+   "start": 612.344,
+   "end": 615.203
+  },
+  {
+   "segment": "reflection-before-answer",
+   "text": "You can state a boundary, correct a misunderstanding, or ask for a moment to think.",
+   "start": 615.383,
+   "end": 621.719
+  },
+  {
+   "segment": "reflection-before-answer",
+   "text": "You do not have to answer every sharp word immediately.",
+   "start": 621.899,
+   "end": 626.165
+  },
+  {
+   "segment": "reflection-before-answer",
+   "text": "Let this proverb give you a little space between what you hear and what you choose to say in return.",
+   "start": 626.345,
+   "end": 633.193
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Lord, I offer you my first response when I feel criticized.",
+   "start": 634.373,
+   "end": 638.96
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Help me hear the whole sentence before preparing my defense.",
+   "start": 639.14,
+   "end": 643.556
+  },
+  {
+   "segment": "prayer-words",
+   "text": "If my words have wounded someone, give me a sincere apology without excuses attached.",
+   "start": 643.736,
+   "end": 650.52
+  },
+  {
+   "segment": "prayer-words",
+   "text": "If I need to speak firmly, help me do it with care.",
+   "start": 650.7,
+   "end": 654.561
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Keep me from using silence as punishment or kindness as a way to hide resentment.",
+   "start": 654.741,
+   "end": 661.44
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Let my words be clear enough to understand and gentle enough to leave room for another person's dignity.",
+   "start": 661.62,
+   "end": 668.916
+  },
+  {
+   "segment": "scripture-one-body",
+   "text": "And let the peace of God rule in your hearts, to the which also ye are called in one body;",
+   "start": 670.096,
+   "end": 676.752
+  },
+  {
+   "segment": "scripture-one-body",
+   "text": "and be ye thankful.",
+   "start": 676.932,
+   "end": 678.724
+  },
+  {
+   "segment": "reflection-shared-peace",
+   "text": "The verse speaks of people called into one body.",
+   "start": 680.204,
+   "end": 683.681
+  },
+  {
+   "segment": "reflection-shared-peace",
+   "text": "Peace reaches beyond your private thoughts into the life you share.",
+   "start": 683.861,
+   "end": 688.405
+  },
+  {
+   "segment": "reflection-shared-peace",
+   "text": "You may live with a full household, with one other person, or on your own.",
+   "start": 688.585,
+   "end": 694.409
+  },
+  {
+   "segment": "reflection-shared-peace",
+   "text": "You still belong among people who need patience and care.",
+   "start": 694.589,
+   "end": 698.323
+  },
+  {
+   "segment": "reflection-shared-peace",
+   "text": "Think of the table, the kitchen, the shared hallway, or the conversation by phone.",
+   "start": 698.503,
+   "end": 704.305
+  },
+  {
+   "segment": "reflection-shared-peace",
+   "text": "You can make one of those ordinary places more welcoming through the way you listen today.",
+   "start": 704.485,
+   "end": 711.141
+  },
+  {
+   "segment": "prayer-home",
+   "text": "God, I bring you the place I call home.",
+   "start": 712.321,
+   "end": 715.479
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Meet us in the hurried breakfast, the misplaced keys, and the small jobs that somebody must do.",
+   "start": 715.659,
+   "end": 723.147
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Help me notice what needs attention without letting irritation become my usual voice.",
+   "start": 723.327,
+   "end": 730.047
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Where there is tension, guide us toward honest conversation and wise support.",
+   "start": 730.227,
+   "end": 736.008
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Where there is loneliness, help me make room for connection.",
+   "start": 736.188,
+   "end": 740.519
+  },
+  {
+   "segment": "prayer-home",
+   "text": "I ask that my home become a place where care is practiced in ordinary, visible ways.",
+   "start": 740.699,
+   "end": 747.461
+  },
+  {
+   "segment": "prayer-loved-ones",
+   "text": "Father, I bring the people I love into your care.",
+   "start": 748.641,
+   "end": 752.332
+  },
+  {
+   "segment": "prayer-loved-ones",
+   "text": "I think of each as a person with their own questions, hopes, and burdens.",
+   "start": 752.512,
+   "end": 757.824
+  },
+  {
+   "segment": "prayer-loved-ones",
+   "text": "Help me listen closely enough to learn what support would actually help.",
+   "start": 758.004,
+   "end": 762.655
+  },
+  {
+   "segment": "prayer-loved-ones",
+   "text": "Give me patience when their pace differs from mine.",
+   "start": 762.835,
+   "end": 766.525
+  },
+  {
+   "segment": "prayer-loved-ones",
+   "text": "Lead me to encourage without taking over and to remain present without demanding that everything be explained.",
+   "start": 766.705,
+   "end": 775.196
+  },
+  {
+   "segment": "prayer-loved-ones",
+   "text": "Bless our conversations with honesty, affection, and the freedom to ask for what we need.",
+   "start": 775.376,
+   "end": 782.075
+  },
+  {
+   "segment": "prayer-distance",
+   "text": "I pray for the loved one I cannot sit beside this morning.",
+   "start": 783.255,
+   "end": 787.948
+  },
+  {
+   "segment": "prayer-distance",
+   "text": "I miss knowing the little details of their day.",
+   "start": 788.128,
+   "end": 791.541
+  },
+  {
+   "segment": "prayer-distance",
+   "text": "Help me express care in a way they can receive, perhaps through a thoughtful message or a patient call.",
+   "start": 791.721,
+   "end": 798.889
+  },
+  {
+   "segment": "prayer-distance",
+   "text": "When I am tempted to fill the distance with worry, remind me to bring that concern to you.",
+   "start": 799.069,
+   "end": 805.299
+  },
+  {
+   "segment": "prayer-distance",
+   "text": "Guide them toward wise help and good companionship.",
+   "start": 805.479,
+   "end": 809.425
+  },
+  {
+   "segment": "prayer-distance",
+   "text": "Teach me to love faithfully across the space between us.",
+   "start": 809.605,
+   "end": 813.744
+  },
+  {
+   "segment": "stillness-two",
+   "text": "Let one person come to mind now.",
+   "start": 814.924,
+   "end": 817.697
+  },
+  {
+   "segment": "stillness-two",
+   "text": "You do not need to rehearse their whole story.",
+   "start": 817.877,
+   "end": 821.312
+  },
+  {
+   "segment": "stillness-two",
+   "text": "Remember their face, or simply their name.",
+   "start": 821.492,
+   "end": 824.82
+  },
+  {
+   "segment": "stillness-two",
+   "text": "Hold that person before God for this brief quiet moment.",
+   "start": 825.0,
+   "end": 829.245
+  },
+  {
+   "segment": "stillness-two",
+   "text": "You can pray, Lord, help me love them well today.",
+   "start": 829.425,
+   "end": 833.223
+  },
+  {
+   "segment": "scripture-hope",
+   "text": "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.",
+   "start": 836.903,
+   "end": 846.844
+  },
+  {
+   "segment": "reflection-hope",
+   "text": "You can bring an unfinished situation into these words.",
+   "start": 848.324,
+   "end": 852.569
+  },
+  {
+   "segment": "reflection-hope",
+   "text": "Perhaps you are waiting for a reply, a decision, or a change that has taken longer than expected.",
+   "start": 852.749,
+   "end": 860.387
+  },
+  {
+   "segment": "reflection-hope",
+   "text": "Hope can help you remain open to goodness while you wait.",
+   "start": 860.567,
+   "end": 864.535
+  },
+  {
+   "segment": "reflection-hope",
+   "text": "You do not need to predict the outcome to ask God for peace.",
+   "start": 864.715,
+   "end": 869.088
+  },
+  {
+   "segment": "reflection-hope",
+   "text": "Let this blessing give language to your desire:",
+   "start": 869.268,
+   "end": 872.959
+  },
+  {
+   "segment": "reflection-hope",
+   "text": "enough hope to remain present, enough joy to recognize a gift, enough peace to continue with today's work.",
+   "start": 873.139,
+   "end": 881.373
+  },
+  {
+   "segment": "prayer-waiting",
+   "text": "God of hope, I ask for help in the waiting.",
+   "start": 882.553,
+   "end": 885.839
+  },
+  {
+   "segment": "prayer-waiting",
+   "text": "I have looked at the same message and checked the same place for an answer.",
+   "start": 886.019,
+   "end": 891.096
+  },
+  {
+   "segment": "prayer-waiting",
+   "text": "Help me know when there is a useful step to take and when I need to leave room for time.",
+   "start": 891.276,
+   "end": 897.228
+  },
+  {
+   "segment": "prayer-waiting",
+   "text": "Keep me from spending all my attention on what has not arrived.",
+   "start": 897.408,
+   "end": 901.888
+  },
+  {
+   "segment": "prayer-waiting",
+   "text": "Let me care for the life around me while I wait.",
+   "start": 902.068,
+   "end": 905.524
+  },
+  {
+   "segment": "prayer-waiting",
+   "text": "Please sustain my hope without making me impatient with the present.",
+   "start": 905.704,
+   "end": 910.781
+  },
+  {
+   "segment": "prayer-sorrow",
+   "text": "Lord, I bring you the sadness that a new morning does not erase.",
+   "start": 911.961,
+   "end": 916.655
+  },
+  {
+   "segment": "prayer-sorrow",
+   "text": "There are people I miss and changes I am still learning to live with.",
+   "start": 916.835,
+   "end": 921.955
+  },
+  {
+   "segment": "prayer-sorrow",
+   "text": "Allow me to be honest about that sorrow.",
+   "start": 922.135,
+   "end": 925.335
+  },
+  {
+   "segment": "prayer-sorrow",
+   "text": "Help me accept company when I need it and a quiet moment when words are difficult.",
+   "start": 925.515,
+   "end": 931.36
+  },
+  {
+   "segment": "prayer-sorrow",
+   "text": "I ask for the tenderness to treat myself and others patiently.",
+   "start": 931.54,
+   "end": 936.233
+  },
+  {
+   "segment": "prayer-sorrow",
+   "text": "Let some small sign of care reach me today, and help me recognize it when it comes.",
+   "start": 936.413,
+   "end": 942.707
+  },
+  {
+   "segment": "scripture-burden",
+   "text": "Cast thy burden upon the LORD, and he shall sustain thee:",
+   "start": 943.887,
+   "end": 948.217
+  },
+  {
+   "segment": "scripture-burden",
+   "text": "he shall never suffer the righteous to be moved.",
+   "start": 948.397,
+   "end": 951.683
+  },
+  {
+   "segment": "reflection-supported",
+   "text": "The psalm gives you a place to bring a burden.",
+   "start": 953.163,
+   "end": 956.683
+  },
+  {
+   "segment": "reflection-supported",
+   "text": "You may also need another person to help you carry today's practical responsibilities.",
+   "start": 956.863,
+   "end": 963.369
+  },
+  {
+   "segment": "reflection-supported",
+   "text": "You can pray and ask for that help.",
+   "start": 963.549,
+   "end": 966.237
+  },
+  {
+   "segment": "reflection-supported",
+   "text": "You can tell a trusted friend that the morning feels hard, accept a meal, or ask someone to share a task.",
+   "start": 966.417,
+   "end": 974.268
+  },
+  {
+   "segment": "reflection-supported",
+   "text": "Receiving care does not make your prayer less sincere.",
+   "start": 974.448,
+   "end": 978.501
+  },
+  {
+   "segment": "reflection-supported",
+   "text": "It can be one of the ways you acknowledge that you were never meant to manage everything alone.",
+   "start": 978.681,
+   "end": 985.295
+  },
+  {
+   "segment": "prayer-help",
+   "text": "Father, I entrust this weight to you and ask for the support I need.",
+   "start": 986.475,
+   "end": 991.488
+  },
+  {
+   "segment": "prayer-help",
+   "text": "Help me name my need clearly instead of hoping someone will guess it.",
+   "start": 991.668,
+   "end": 996.724
+  },
+  {
+   "segment": "prayer-help",
+   "text": "Give me discernment about whom to trust and courage to reach out.",
+   "start": 996.904,
+   "end": 1001.491
+  },
+  {
+   "segment": "prayer-help",
+   "text": "Where I can lighten another person's load, make me attentive and willing.",
+   "start": 1001.671,
+   "end": 1006.876
+  },
+  {
+   "segment": "prayer-help",
+   "text": "Let me offer practical kindness without making promises I cannot keep.",
+   "start": 1007.056,
+   "end": 1012.773
+  },
+  {
+   "segment": "prayer-help",
+   "text": "Teach me the shared work of receiving care gratefully and giving care with patience.",
+   "start": 1012.953,
+   "end": 1018.841
+  },
+  {
+   "segment": "prayer-neighbours",
+   "text": "I pray for the people whose mornings touch mine:",
+   "start": 1020.021,
+   "end": 1023.456
+  },
+  {
+   "segment": "prayer-neighbours",
+   "text": "the driver, the shop worker, the neighbour, the person walking past.",
+   "start": 1023.636,
+   "end": 1028.436
+  },
+  {
+   "segment": "prayer-neighbours",
+   "text": "Each carries a life beyond what I see.",
+   "start": 1028.616,
+   "end": 1031.816
+  },
+  {
+   "segment": "prayer-neighbours",
+   "text": "Keep me from treating them as obstacles in my schedule.",
+   "start": 1031.996,
+   "end": 1036.156
+  },
+  {
+   "segment": "prayer-neighbours",
+   "text": "Where I can offer consideration, let me do it freely.",
+   "start": 1036.336,
+   "end": 1040.667
+  },
+  {
+   "segment": "prayer-neighbours",
+   "text": "Where someone needs assistance beyond what I can give, guide them toward reliable help.",
+   "start": 1040.847,
+   "end": 1047.503
+  },
+  {
+   "segment": "prayer-neighbours",
+   "text": "Let my small choices add patience to the places I enter and leave others with a little more room to breathe.",
+   "start": 1047.683,
+   "end": 1055.683
+  },
+  {
+   "segment": "day-transition",
+   "text": "Now gather a few words for the hours after this prayer.",
+   "start": 1056.863,
+   "end": 1061.001
+  },
+  {
+   "segment": "day-transition",
+   "text": "You have brought your worry, your work, your home, and your loved ones before God.",
+   "start": 1061.181,
+   "end": 1066.643
+  },
+  {
+   "segment": "day-transition",
+   "text": "These next readings can accompany the small choices through which your day takes shape.",
+   "start": 1066.823,
+   "end": 1072.967
+  },
+  {
+   "segment": "day-transition",
+   "text": "You can listen for one verse that speaks to the situation ahead of you.",
+   "start": 1073.147,
+   "end": 1078.181
+  },
+  {
+   "segment": "day-transition",
+   "text": "Keep it close enough to remember when the room grows busy or your attention begins to scatter.",
+   "start": 1078.361,
+   "end": 1084.932
+  },
+  {
+   "segment": "day-scripture-word",
+   "text": "Great peace have they which love thy law:",
+   "start": 1086.312,
+   "end": 1089.149
+  },
+  {
+   "segment": "day-scripture-word",
+   "text": "and nothing shall offend them.",
+   "start": 1089.329,
+   "end": 1091.569
+  },
+  {
+   "segment": "day-reflection-word",
+   "text": "You can receive this verse as an invitation to love God's instruction.",
+   "start": 1093.049,
+   "end": 1098.809
+  },
+  {
+   "segment": "day-reflection-word",
+   "text": "The psalm celebrates a life shaped by his word.",
+   "start": 1098.989,
+   "end": 1102.765
+  },
+  {
+   "segment": "day-reflection-word",
+   "text": "You may still feel hurt or troubled;",
+   "start": 1102.945,
+   "end": 1105.719
+  },
+  {
+   "segment": "day-reflection-word",
+   "text": "you can bring those feelings honestly while seeking a faithful way forward.",
+   "start": 1105.899,
+   "end": 1111.381
+  },
+  {
+   "segment": "day-reflection-word",
+   "text": "Read with the intention to practice what you understand.",
+   "start": 1111.561,
+   "end": 1115.977
+  },
+  {
+   "segment": "day-reflection-word",
+   "text": "A verse can guide the answer you give, the promise you keep, and the decision you reconsider.",
+   "start": 1116.157,
+   "end": 1122.877
+  },
+  {
+   "segment": "day-reflection-word",
+   "text": "Let your love for Scripture take an ordinary, visible form today.",
+   "start": 1123.057,
+   "end": 1128.241
+  },
+  {
+   "segment": "day-prayer-word",
+   "text": "Lord, keep these readings from becoming words I hear and immediately set aside.",
+   "start": 1129.421,
+   "end": 1135.48
+  },
+  {
+   "segment": "day-prayer-word",
+   "text": "Help me remember one when I need it.",
+   "start": 1135.66,
+   "end": 1138.369
+  },
+  {
+   "segment": "day-prayer-word",
+   "text": "Give me the willingness to be changed by what I understand, especially where my habits are familiar and comfortable.",
+   "start": 1138.549,
+   "end": 1146.315
+  },
+  {
+   "segment": "day-prayer-word",
+   "text": "If your word calls me toward patience, let me practice patience with an actual person.",
+   "start": 1146.495,
+   "end": 1152.788
+  },
+  {
+   "segment": "day-prayer-word",
+   "text": "If it calls me toward gratitude, let me say thank you.",
+   "start": 1152.968,
+   "end": 1157.171
+  },
+  {
+   "segment": "day-prayer-word",
+   "text": "Let the truth I receive this morning shape the way I live this afternoon.",
+   "start": 1157.351,
+   "end": 1162.769
+  },
+  {
+   "segment": "day-scripture-today",
+   "text": "Take therefore no thought for the morrow:",
+   "start": 1163.949,
+   "end": 1166.893
+  },
+  {
+   "segment": "day-scripture-today",
+   "text": "for the morrow shall take thought for the things of itself.",
+   "start": 1167.073,
+   "end": 1170.679
+  },
+  {
+   "segment": "day-scripture-today",
+   "text": "Sufficient unto the day is the evil thereof.",
+   "start": 1170.859,
+   "end": 1174.507
+  },
+  {
+   "segment": "day-reflection-today",
+   "text": "You can prepare responsibly for tomorrow while giving today's work your attention.",
+   "start": 1175.987,
+   "end": 1181.747
+  },
+  {
+   "segment": "day-reflection-today",
+   "text": "Jesus' words address the worry that pulls you ahead of the life you can actually live.",
+   "start": 1181.927,
+   "end": 1188.113
+  },
+  {
+   "segment": "day-reflection-today",
+   "text": "You can write down a task, make a necessary plan, and then return to the hour in front of you.",
+   "start": 1188.293,
+   "end": 1195.312
+  },
+  {
+   "segment": "day-reflection-today",
+   "text": "When your mind starts borrowing another day's trouble, remember the person waiting for your attention now.",
+   "start": 1195.492,
+   "end": 1202.681
+  },
+  {
+   "segment": "day-reflection-today",
+   "text": "Remember the useful step available now.",
+   "start": 1202.861,
+   "end": 1206.168
+  },
+  {
+   "segment": "day-reflection-today",
+   "text": "You are here, in this morning.",
+   "start": 1206.348,
+   "end": 1208.759
+  },
+  {
+   "segment": "day-prayer-today",
+   "text": "Father, help me live within the day you have given me.",
+   "start": 1209.939,
+   "end": 1213.736
+  },
+  {
+   "segment": "day-prayer-today",
+   "text": "I bring tomorrow's questions to you and ask for wisdom about any preparation needed today.",
+   "start": 1213.916,
+   "end": 1220.785
+  },
+  {
+   "segment": "day-prayer-today",
+   "text": "Then help me return to the present with a willing heart.",
+   "start": 1220.965,
+   "end": 1224.699
+  },
+  {
+   "segment": "day-prayer-today",
+   "text": "I want to taste my breakfast, hear the person speaking, and do the task I have begun.",
+   "start": 1224.879,
+   "end": 1231.236
+  },
+  {
+   "segment": "day-prayer-today",
+   "text": "Keep me attentive to moments I might rush past.",
+   "start": 1231.416,
+   "end": 1235.107
+  },
+  {
+   "segment": "day-prayer-today",
+   "text": "Help me leave room for an unexpected kindness and enough patience to recognize an unexpected need.",
+   "start": 1235.287,
+   "end": 1242.668
+  },
+  {
+   "segment": "day-scripture-peace-always",
+   "text": "Now the Lord of peace himself give you peace always by all means.",
+   "start": 1243.848,
+   "end": 1248.968
+  },
+  {
+   "segment": "day-scripture-peace-always",
+   "text": "The Lord be with you all.",
+   "start": 1249.148,
+   "end": 1251.111
+  },
+  {
+   "segment": "day-reflection-changing-plans",
+   "text": "Carry this blessing into a change of plans.",
+   "start": 1252.591,
+   "end": 1255.855
+  },
+  {
+   "segment": "day-reflection-changing-plans",
+   "text": "Your peaceful morning may soon include traffic, a delayed appointment, or a conversation you did not expect.",
+   "start": 1256.035,
+   "end": 1264.355
+  },
+  {
+   "segment": "day-reflection-changing-plans",
+   "text": "You can return to prayer within that moment.",
+   "start": 1264.535,
+   "end": 1267.564
+  },
+  {
+   "segment": "day-reflection-changing-plans",
+   "text": "You do not have to protect these minutes by resenting everything that comes afterward.",
+   "start": 1267.744,
+   "end": 1273.824
+  },
+  {
+   "segment": "day-reflection-changing-plans",
+   "text": "You can ask for peace in the situation as it is.",
+   "start": 1274.004,
+   "end": 1278.249
+  },
+  {
+   "segment": "day-reflection-changing-plans",
+   "text": "Let the words about the Lord's presence accompany you through the ordinary movement from one responsibility to the next.",
+   "start": 1278.429,
+   "end": 1287.219
+  },
+  {
+   "segment": "day-prayer-interruptions",
+   "text": "Lord of peace, stay near in my awareness when the day becomes crowded.",
+   "start": 1288.399,
+   "end": 1293.647
+  },
+  {
+   "segment": "day-prayer-interruptions",
+   "text": "If something interrupts my plan, help me look carefully before deciding what it means.",
+   "start": 1293.827,
+   "end": 1299.949
+  },
+  {
+   "segment": "day-prayer-interruptions",
+   "text": "Give me patience with necessary delays and wisdom about what deserves a response.",
+   "start": 1300.129,
+   "end": 1306.636
+  },
+  {
+   "segment": "day-prayer-interruptions",
+   "text": "When I feel my words getting sharp, help me stop and begin again.",
+   "start": 1306.816,
+   "end": 1311.765
+  },
+  {
+   "segment": "day-prayer-interruptions",
+   "text": "I ask for a spirit that can adapt without abandoning care.",
+   "start": 1311.945,
+   "end": 1316.276
+  },
+  {
+   "segment": "day-prayer-interruptions",
+   "text": "Let me recognize chances to serve within the day that actually unfolds.",
+   "start": 1316.456,
+   "end": 1321.96
+  },
+  {
+   "segment": "reflection-return-again",
+   "text": "If you lose your patience later, you can acknowledge it and begin again.",
+   "start": 1323.14,
+   "end": 1328.239
+  },
+  {
+   "segment": "reflection-return-again",
+   "text": "You can repair a careless word, take responsibility, and return to the verse you chose.",
+   "start": 1328.419,
+   "end": 1335.139
+  },
+  {
+   "segment": "reflection-return-again",
+   "text": "This prayer does not require you to maintain a perfect feeling until evening.",
+   "start": 1335.319,
+   "end": 1340.951
+  },
+  {
+   "segment": "reflection-return-again",
+   "text": "You are practicing a faithful response in a real day.",
+   "start": 1341.131,
+   "end": 1345.248
+  },
+  {
+   "segment": "reflection-return-again",
+   "text": "Each return matters.",
+   "start": 1345.428,
+   "end": 1347.433
+  },
+  {
+   "segment": "reflection-return-again",
+   "text": "You can bring the next worry to God with the same honesty you brought to the first one this morning.",
+   "start": 1347.613,
+   "end": 1354.525
+  },
+  {
+   "segment": "declaration",
+   "text": "You can make these words your own:",
+   "start": 1355.705,
+   "end": 1358.265
+  },
+  {
+   "segment": "declaration",
+   "text": "I will bring my concerns to God honestly.",
+   "start": 1358.445,
+   "end": 1361.901
+  },
+  {
+   "segment": "declaration",
+   "text": "I will notice one gift and give thanks.",
+   "start": 1362.081,
+   "end": 1364.983
+  },
+  {
+   "segment": "declaration",
+   "text": "I will listen before I answer.",
+   "start": 1365.163,
+   "end": 1367.637
+  },
+  {
+   "segment": "declaration",
+   "text": "I will ask for wisdom when I need it.",
+   "start": 1367.817,
+   "end": 1370.676
+  },
+  {
+   "segment": "declaration",
+   "text": "I will make room for help and offer the care I can give.",
+   "start": 1370.856,
+   "end": 1375.08
+  },
+  {
+   "segment": "declaration",
+   "text": "With Christ's words in my memory, I will take responsibility for the next loving step within my reach.",
+   "start": 1375.26,
+   "end": 1383.047
+  },
+  {
+   "segment": "commitment-prepare",
+   "text": "Think ahead to one likely point of pressure:",
+   "start": 1384.427,
+   "end": 1387.776
+  },
+  {
+   "segment": "commitment-prepare",
+   "text": "opening your messages, entering a meeting, beginning a difficult task, or greeting someone at home.",
+   "start": 1387.956,
+   "end": 1395.209
+  },
+  {
+   "segment": "commitment-prepare",
+   "text": "Choose one of those moments now.",
+   "start": 1395.389,
+   "end": 1397.971
+  },
+  {
+   "segment": "commitment-prepare",
+   "text": "You can remember it without rehearsing everything that might go wrong.",
+   "start": 1398.151,
+   "end": 1403.164
+  },
+  {
+   "segment": "commitment-prepare",
+   "text": "That moment will be your invitation to practice what you have prayed.",
+   "start": 1403.344,
+   "end": 1408.272
+  },
+  {
+   "segment": "commitment-prepare",
+   "text": "Place a short reminder where you will see it if that helps.",
+   "start": 1408.452,
+   "end": 1412.441
+  },
+  {
+   "segment": "commitment-prepare",
+   "text": "The aim is one attentive response when your usual habit would be to hurry.",
+   "start": 1412.621,
+   "end": 1418.744
+  },
+  {
+   "segment": "payoff",
+   "text": "Here is your commitment for today:",
+   "start": 1419.924,
+   "end": 1422.697
+  },
+  {
+   "segment": "payoff",
+   "text": "before answering the first message or request that makes you tense, pause.",
+   "start": 1422.877,
+   "end": 1428.445
+  },
+  {
+   "segment": "payoff",
+   "text": "Name the concern to God in one sentence.",
+   "start": 1428.625,
+   "end": 1432.06
+  },
+  {
+   "segment": "payoff",
+   "text": "Thank him for one real gift.",
+   "start": 1432.24,
+   "end": 1434.8
+  },
+  {
+   "segment": "payoff",
+   "text": "Then pray, Jesus, guide my next words in your peace.",
+   "start": 1434.98,
+   "end": 1439.183
+  },
+  {
+   "segment": "payoff",
+   "text": "After that, give the most truthful and considerate response you can.",
+   "start": 1439.363,
+   "end": 1444.163
+  },
+  {
+   "segment": "payoff",
+   "text": "If you need time, say so kindly.",
+   "start": 1444.343,
+   "end": 1447.287
+  },
+  {
+   "segment": "payoff",
+   "text": "You can carry John fourteen, verse twenty-seven with you as you practice this one deliberate response.",
+   "start": 1447.467,
+   "end": 1455.147
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Father, I offer you that specific moment before it arrives.",
+   "start": 1456.527,
+   "end": 1460.921
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Help me recognize it and remember this prayer.",
+   "start": 1461.101,
+   "end": 1464.472
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "I ask for enough patience to pause, enough honesty to name my concern, and enough gratitude to notice your goodness.",
+   "start": 1464.652,
+   "end": 1473.761
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Jesus, guide my next words in your peace.",
+   "start": 1473.941,
+   "end": 1477.333
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Where an apology is needed, help me give it.",
+   "start": 1477.513,
+   "end": 1480.905
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Where a clear boundary is needed, help me state it.",
+   "start": 1481.085,
+   "end": 1484.712
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Let this small commitment become a faithful expression of the trust I have offered you today.",
+   "start": 1484.892,
+   "end": 1491.569
+  },
+  {
+   "segment": "blessing-introduction",
+   "text": "As you prepare to continue your morning, receive the blessing in Numbers, chapter six.",
+   "start": 1492.749,
+   "end": 1499.149
+  },
+  {
+   "segment": "blessing-introduction",
+   "text": "These words speak of God's keeping, grace, and peace.",
+   "start": 1499.329,
+   "end": 1503.276
+  },
+  {
+   "segment": "blessing-introduction",
+   "text": "Let them settle beside the concern you named at the beginning.",
+   "start": 1503.456,
+   "end": 1507.808
+  },
+  {
+   "segment": "blessing-introduction",
+   "text": "You can carry that concern into your day with prayer still open and your next step held before God.",
+   "start": 1507.988,
+   "end": 1515.241
+  },
+  {
+   "segment": "blessing-keep-grace",
+   "text": "The LORD bless thee, and keep thee:",
+   "start": 1516.421,
+   "end": 1519.109
+  },
+  {
+   "segment": "blessing-keep-grace",
+   "text": "The LORD make his face shine upon thee, and be gracious unto thee:",
+   "start": 1519.289,
+   "end": 1524.068
+  },
+  {
+   "segment": "blessing-peace",
+   "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+   "start": 1525.548,
+   "end": 1530.071
+  },
+  {
+   "segment": "closing-prayer",
+   "text": "Father, thank you for receiving this morning's prayer.",
+   "start": 1531.751,
+   "end": 1535.356
+  },
+  {
+   "segment": "closing-prayer",
+   "text": "I entrust my attention, my words, and the people I love to your care.",
+   "start": 1535.536,
+   "end": 1540.955
+  },
+  {
+   "segment": "closing-prayer",
+   "text": "Help me carry what I have heard into the next ordinary moment.",
+   "start": 1541.135,
+   "end": 1545.721
+  },
+  {
+   "segment": "closing-prayer",
+   "text": "May my response be patient, my work honest, and my care practical.",
+   "start": 1545.901,
+   "end": 1551.171
+  },
+  {
+   "segment": "closing-prayer",
+   "text": "I go forward asking for your wisdom and receiving your grace.",
+   "start": 1551.351,
+   "end": 1556.044
+  },
+  {
+   "segment": "closing-prayer",
+   "text": "In the name of Jesus, amen.",
+   "start": 1556.224,
+   "end": 1558.976
+  },
+  {
+   "segment": "cta",
+   "text": "If you would like to join this prayer in the comments, you can write amen.",
+   "start": 1560.156,
+   "end": 1565.468
+  }
+ ],
+ "voice_seconds": 1566.848,
+ "sample_rate": 24000,
+ "voice_id": "am_michael",
+ "speed": 0.85
+}
