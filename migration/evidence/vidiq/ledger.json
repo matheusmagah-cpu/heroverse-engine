@@ -241,6 +241,24 @@
    "purpose": "structure audit EENCUww2Lns",
    "saved_to": "evidence/vidiq/20261019/animated-story/mining.json",
    "note": "over the 10/day plan: announced; owner's animation request 2026-10-19 asks for mining of this structure"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_get_channels_by_ids",
+   "credits": 5,
+   "purpose": "stage 0: winners' channel settings + ours",
+   "saved_to": "evidence/vidiq/20261019/channels.json",
+   "note": "owner 2026-10-19: 'resolva tudo agora'"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_get_videos_by_ids",
+   "credits": 5,
+   "purpose": "stage 0/5: winners' video packages",
+   "saved_to": "evidence/vidiq/20261019/channels.json",
+   "note": "owner 2026-10-19: 'resolva tudo agora'"
   }
  ]
 }

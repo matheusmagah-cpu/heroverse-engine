@@ -1,0 +1,54 @@
+{
+ "version": "channel-evidence-v1",
+ "date": "2026-10-19",
+ "source": "vidiq_get_channels_by_ids + vidiq_get_videos_by_ids on the 6 validated winners of structures/guided-prayer-scenic.json (and our channel UCuMF6pJQkyMzaVoAxFL86yA)",
+ "counts": {
+  "channel_name_contains_prayer": "5/6 (Morning Grace Prayers, Grace & Purpose Prayer Altar, Evening Mercy Prayer, Bedtime Prayer Moment, Prayer Before Sleep; not: Morning Grace Daily)",
+  "channel_name_names_time_or_grace": "6/6 (Morning, Evening, Bedtime, Before Sleep, Grace)",
+  "description_first_line_says_what_and_when": "6/6 (e.g. morning prayers / bedtime prayers / end your day with God)",
+  "description_lists_what_you_will_find": "6/6",
+  "description_subscribe_line": "6/6",
+  "description_quotes_a_verse": "2/6",
+  "description_ai_disclosure": "1/6 (Evening Mercy Prayer)",
+  "country_set": "4/6 (US 2, KE 1, NG 1)",
+  "video_description_amen_cta": "4/6",
+  "video_description_hashtags": "6/6",
+  "video_description_chapters": "1/6",
+  "video_tags_count": [
+   21,
+   23,
+   22,
+   23,
+   23,
+   21
+  ],
+  "publish_utc": {
+   "night": [
+    "00:33",
+    "23:32",
+    "00:30"
+   ],
+   "morning": [
+    "07:09",
+    "04:30",
+    "10:00"
+   ]
+  }
+ },
+ "ours": {
+  "title": "HeroVerse",
+  "country": "US",
+  "subscribers": 267,
+  "videos": 25,
+  "description_theme": "Christian motivation / action (does not say prayer, night or morning)"
+ },
+ "gap": [
+  "Our description does not say what the channel is now (spoken prayer, night and morning, KJV) - 6/6 winners do.",
+  "Our name has no prayer/time word - 5/6 and 6/6 of winners do (name change is an owner decision in Studio; not settable by API)."
+ ],
+ "not_measured": [
+  "unsubscribed trailer use",
+  "home sections layout",
+  "banner and avatar style (images blocked here)"
+ ]
+}

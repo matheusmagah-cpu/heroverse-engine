@@ -1,0 +1,53 @@
+{
+ "version": "channel-v1",
+ "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+ "evidence": "migration/evidence/vidiq/20261019/channels.json",
+ "settings": {
+  "description": {
+   "value": "HeroVerse is a quiet place to pray in English with Scripture, at night and in the morning.\n\nEach prayer is written for HeroVerse and read slowly, with King James Bible verses shown on screen, so you can pray along: gratitude at the end of the day, honest words for what was hard, and trust for tomorrow.\n\nOn this channel you will find:\n- Night prayers to end your day with God and rest in His care\n- Morning prayers to begin the day with Scripture\n- Short stories of everyday faith\n\nNew prayers every week. Subscribe so you can pray with us again tonight.\n\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\" - Psalm 4:8 (KJV)\n\nDisclosure: our narration uses a synthetic voice and our pictures are generated; every prayer is original and every verse is quoted from the public-domain KJV.",
+   "source": "6/6 winners: first line says what and when, a list of what you will find, a subscribe line; 2/6 quote a verse; 1/6 discloses AI (we disclose: honesty rule)",
+   "verified_at": "2026-10-19"
+  },
+  "keywords": {
+   "value": "\"night prayer\" \"bedtime prayer\" \"prayer before sleep\" \"morning prayer\" \"christian prayer\" \"daily prayer\" \"KJV\" \"Scripture\" \"gratitude prayer\" \"everyday faith\"",
+   "source": "most frequent terms in the 6 winners' video tags (vidiq_get_videos_by_ids 2026-10-19), 10 terms, no stuffing",
+   "verified_at": "2026-10-19"
+  },
+  "country": {
+   "value": "US",
+   "source": "already set; 2/4 winners that set a country use US",
+   "verified_at": "2026-10-19"
+  },
+  "default_language": {
+   "value": "en",
+   "source": "every winner and every script is English",
+   "verified_at": "2026-10-19"
+  },
+  "unsubscribed_trailer": {
+   "value": null,
+   "source": "UNMEASURED",
+   "verified_at": null
+  },
+  "sections": {
+   "value": null,
+   "source": "UNMEASURED",
+   "verified_at": null
+  }
+ },
+ "owner_actions_in_studio": [
+  {
+   "setting": "channel name",
+   "proposal": "HeroVerse Prayer",
+   "why": "5/6 winners' names contain 'Prayer'; 'HeroVerse Prayer' is already our on-screen brand",
+   "api": "not settable by the API"
+  },
+  {
+   "setting": "pin the first comment of each new video",
+   "api": "the API cannot pin"
+  },
+  {
+   "setting": "default end screen template: subscribe + latest video/playlist",
+   "api": "the API cannot set end screens"
+  }
+ ]
+}
