@@ -13,7 +13,7 @@ permissions:
   contents: write
 jobs:
   generate:
-    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main'
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 150
     strategy:

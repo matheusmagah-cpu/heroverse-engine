@@ -65,6 +65,7 @@ counters are estimated as YPP counts them (public long-form hours 365 d, public 
   (it has repository access; fresh routine sessions do not): an hourly clock (dispatch the heartbeat, review Dot's
   deliveries) and the daily analysis at 08:05 UTC. No polling loops, no full log dumps; extract only needed fields.
 - **Dot:** heavy writing through `dot-task` issues; its own scheduled check of the issue queue at least every 2 h.
+- **Repository visibility (owner decision 2026-10-19):** The repository is to be public and otherwise identical, so standard GitHub-hosted Actions minutes are free. Nothing is removed and history is not rewritten. Production workflows use `github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'`. Secrets are never sent to pull requests from forks. Historical diagnostic workflows retain their private-only guard and do not run while the repository is public. The owner may return the repository to private when the channel earns revenue; the private Actions minutes budget then applies again. The owner changes visibility after Claude approves this PR.
 - **GitHub Actions minutes of the private engine (owner decision 2026-10-19: everything stays private; the owner pays
   the overage):**
   - **Budget:** 7,000 min per 30 days (2,000 included + paid overage), about 233 min a day.
