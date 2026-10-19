@@ -54,21 +54,7 @@ jobs:
         run: |
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
           d="migration/production/$PILOT"
-          python3 -I - "$d" <<'PY'
-          import json, sys
-          d = sys.argv[1]
-          qa = json.load(open(f"{d}/out/qa.json"))
-          ap = json.load(open(f"{d}/inspection/APPROVAL.json"))
-          man = json.load(open(f"{d}/out/manifest.json"))
-          assert qa["status"] == "PASS", "QA_NOT_PASS"
-          assert ap["approved"] is True, "NOT_APPROVED"
-          assert ap["output_sha256"] == qa["output_sha256"] == man["output_sha256"], "APPROVAL_NOT_FOR_THIS_FILE"
-          # automatic approvals need the final decision PASS for this file; an owner approval recorded by hand is kept
-          if ap.get("reviewer", "").startswith("HeroVerse automatic gates"):
-              gate = json.load(open(f"{d}/out/gate.json"))
-              assert gate["decision"] == "PASS" and gate["output_sha256"] == qa["output_sha256"], "GATE_NOT_PASS_FOR_THIS_FILE"
-          print("GATES_PASS", qa["output_sha256"])
-          PY
+          python3 -I -B migration/publish/publication_binding.py "$d"
       - name: Preflight (everything YouTube would reject; skipped when resuming an upload already made)
         run: |
           d="migration/production/$PILOT"
