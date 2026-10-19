@@ -29,6 +29,9 @@ def needed_images(d, script):
     return sorted(i for i in ids if not (d / "images" / f"{i}.json").exists())
 
 
+STANDARD_QA = "pilot-qa-criteria-v3"  # migration/STANDARD.md v1: the only renders that may be approved or published
+
+
 def due(production, ledger, now, hours):
     entries = ledger.get("entries", {})
     out = []
@@ -98,6 +101,8 @@ def main(production, ledger_path, mode, hours="48"):
                 continue
             if not r["rendered"] or qa.get("status") != "PASS":
                 continue
+            if qa.get("criteria_version") != STANDARD_QA:
+                continue  # renders made before migration/STANDARD.md (owner: "amateur") are never approved or published
             ap = json.loads((d / "inspection" / "APPROVAL.json").read_text()) if (d / "inspection" / "APPROVAL.json").exists() else {}
             rev = json.loads((d / "out" / "review.json").read_text()) if (d / "out" / "review.json").exists() else {}
             gate = json.loads((d / "out" / "gate.json").read_text()) if (d / "out" / "gate.json").exists() else {}

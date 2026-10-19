@@ -72,7 +72,7 @@ class Queue(unittest.TestCase):
                                            ("pilot-006", "PASS", False), ("pilot-007", "PASS", False)):
                 pilot(t, name, "2026-10-19T10:00:00Z", rendered=True)
                 d = Path(t) / name
-                (d / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x"}))
+                (d / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x", "criteria_version": rq.STANDARD_QA}))
                 if review:
                     (d / "out" / "review.json").write_text(json.dumps({"status": review, "output_sha256": "x"}))
                 if name in ("pilot-006", "pilot-007"):  # final decision UNKNOWN is retried, FAIL is not
@@ -116,7 +116,7 @@ class Queue(unittest.TestCase):
         import contextlib, io
         with tempfile.TemporaryDirectory() as t:
             pilot(t, "pilot-005", "2026-10-19T10:00:00Z", rendered=True)
-            (Path(t) / "pilot-005" / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x"}))
+            (Path(t) / "pilot-005" / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x", "criteria_version": rq.STANDARD_QA}))
             hold = Path(t) / "PUBLICATION_HOLD"
             hold.write_text("owner pause")
             real_hold, real = rq.HOLD, rq.datetime
@@ -138,7 +138,7 @@ class Queue(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             for name, at in (("pilot-006", "2026-10-19T20:00:00Z"), ("pilot-005", "2026-10-19T10:00:00Z")):
                 pilot(t, name, at, rendered=True)
-                (Path(t) / name / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x"}))
+                (Path(t) / name / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x", "criteria_version": rq.STANDARD_QA}))
             buf = io.StringIO()
             real = rq.datetime
             class Fixed(real):
@@ -152,6 +152,29 @@ class Queue(unittest.TestCase):
             finally:
                 rq.datetime = real
             self.assertEqual(buf.getvalue().split("\n")[:-1], ["approve pilot-005"])
+
+    def test_renders_before_the_standard_are_never_approved_or_published(self):
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, "pilot-005", "2026-10-19T10:00:00Z", rendered=True)
+            d = Path(t) / "pilot-005"
+            (d / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x",
+                                                           "criteria_version": "pilot-qa-criteria-v2"}))
+            (d / "inspection").mkdir()
+            (d / "inspection" / "APPROVAL.json").write_text(json.dumps({"approved": True, "output_sha256": "x"}))
+            buf = io.StringIO()
+            real = rq.datetime
+            class Fixed(real):
+                @classmethod
+                def now(cls, tz=None):
+                    return NOW
+            rq.datetime = Fixed
+            try:
+                with contextlib.redirect_stdout(buf):
+                    rq.main(t, str(Path(t) / "none.json"), "reconcile")
+            finally:
+                rq.datetime = real
+            self.assertEqual(buf.getvalue(), "")
 
 
 if __name__ == "__main__":
