@@ -116,10 +116,44 @@ def apply(plan_path, out):
     print(json.dumps({"hidden": sum(r["result"] == "HIDDEN" for r in receipt), "total": len(receipt)}))
 
 
+def unschedule(plan_path, out):
+    """Owner hold: each listed video becomes private with no pending publishAt (a scheduled upload already is
+    private, so apply() would skip it and it would still go public at its time). Reversible: the receipt keeps
+    the old publishAt."""
+    plan_record = json.loads(Path(plan_path).read_text())
+    if plan_record["channel_id"] != CHANNEL:
+        raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
+    tok = token()
+    receipt = []
+    for vid in plan_record["to_unschedule"]:
+        current = call(tok, "GET", "videos", {"part": "status,snippet", "id": vid})["items"]
+        if not current or current[0]["snippet"]["channelId"] != CHANNEL:
+            receipt.append({"video_id": vid, "result": "SKIPPED_NOT_OWNED_OR_MISSING"})
+            continue
+        status = current[0]["status"]
+        before = {"privacy": status["privacyStatus"], "publishAt": status.get("publishAt")}
+        body = {"id": vid, "status": {"privacyStatus": "private", "embeddable": status.get("embeddable", True),
+                                      "license": status.get("license", "youtube"),
+                                      "publicStatsViewable": status.get("publicStatsViewable", True),
+                                      "selfDeclaredMadeForKids": status.get("madeForKids", False)}}
+        after = call(tok, "PUT", "videos", {"part": "status"}, body)["status"]
+        ok = after["privacyStatus"] == "private" and not after.get("publishAt")
+        receipt.append({"video_id": vid, "before": before, "after": {"privacy": after["privacyStatus"],
+                        "publishAt": after.get("publishAt")}, "result": "UNSCHEDULED" if ok else "UNEXPECTED"})
+    Path(out).write_text(json.dumps({"version": "channel-unschedule-receipt-v1", "channel_id": CHANNEL,
+                                     "plan": Path(plan_path).name, "undo": "set each video back to its 'before'",
+                                     "changes": receipt}, indent=1) + "\n")
+    print(json.dumps({"unscheduled": sum(r["result"] == "UNSCHEDULED" for r in receipt), "total": len(receipt)}))
+    if any(r["result"] != "UNSCHEDULED" for r in receipt):
+        raise SystemExit("UNSCHEDULE_INCOMPLETE")
+
+
 if __name__ == "__main__":
     if sys.argv[1] == "plan":
         plan(sys.argv[2])
     elif sys.argv[1] == "apply":
         apply(sys.argv[2], sys.argv[3])
+    elif sys.argv[1] == "unschedule":
+        unschedule(sys.argv[2], sys.argv[3])
     else:
         raise SystemExit(__doc__)

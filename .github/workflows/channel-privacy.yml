@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: plan (read-only list) or apply (set the reviewed plan's videos to private)
+        description: plan (read-only list), apply (set the reviewed plan's videos to private) or unschedule (hold-plan.json: private, no publishAt)
         required: true
         default: plan
       max_changes:
@@ -36,6 +36,8 @@ jobs:
             plan) "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/channel_privacy.py plan migration/channel/privacy-plan.json ;;
             apply) test -f migration/channel/privacy-plan.json
                    "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/channel_privacy.py apply migration/channel/privacy-plan.json "migration/channel/privacy-receipt-$GITHUB_RUN_ID.json" ;;
+            unschedule) test -f migration/channel/hold-plan.json
+                   "$RUNNER_TEMP/venv/bin/python" -I -B migration/channel/channel_privacy.py unschedule migration/channel/hold-plan.json "migration/channel/unschedule-receipt-$GITHUB_RUN_ID.json" ;;
             *) exit 1 ;;
           esac
       - name: Commit plan or receipt

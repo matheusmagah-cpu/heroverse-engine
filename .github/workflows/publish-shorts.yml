@@ -26,6 +26,9 @@ jobs:
       INPUT_SLOTS: ${{ inputs.slots }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Publication hold (owner pause, migration/ops/PUBLICATION_HOLD)
+        run: |
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
       - name: Which pilot and slots
         run: |
           PILOT="$INPUT_PILOT"; SLOTS="$INPUT_SLOTS"
