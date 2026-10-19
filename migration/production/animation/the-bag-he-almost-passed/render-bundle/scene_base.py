@@ -19,8 +19,8 @@ def bone(n,a,b,r,m):
 def posebone(o,a,b):
  a=Vector(a);b=Vector(b);o.location=(a+b)/2;o.rotation_euler=(b-a).to_track_quat('Z','Y').to_euler();o.scale.z=(b-a).length
 box('Square',(0,0,-.14),(200,200,.2),'sand')
-box('Back wall',(0,4,1.7),(15,.5,3.6),'wall')
-for x in [-5,-2.8,0,2.8,5]:
+box('Back wall',(0,4,1.7),(30,.5,3.6),'wall')
+for x in [-12,-9,-6,-3,0,3,6,9,12]:
  box('Recess',(x,3.71,1.4),(1.5,.05,2.1),'wood',.35)
  box('Door',(x,3.65,1.35),(1.25,.06,1.9),'teal',.25)
 for x in [-4,4]:

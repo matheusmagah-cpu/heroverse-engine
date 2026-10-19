@@ -4,6 +4,10 @@ from pathlib import Path
 import bpy
 from mathutils import Vector
 sys.dont_write_bytecode=True
+if not os.environ.get('RENDER_OUT'):raise ValueError('RENDER_OUT_REQUIRED')
+cache_root=Path(os.environ['RENDER_OUT']).resolve()/'cache'
+os.environ['XDG_CACHE_HOME']=str(cache_root)
+os.environ['MESA_SHADER_CACHE_DIR']=str(cache_root/'mesa')
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT))
 from scene_base import s, cam, box, uv, M, bread, bag
@@ -57,7 +61,7 @@ EY=.35
 def set_camera(index,u,dx,ex,vertical):
     # Perspective lenses and independent portrait composition.
     target=Vector(((dx+ex)/2,0,1.05));lens=50;location=target+Vector((2,-6,2))
-    if index==0: lens=28;target=Vector((dx+.8,0,1));location=target+Vector((0,-9,2.3))
+    if index==0: lens=28;target=Vector(((dx+ex)/2,0,1));location=target+Vector((0,-12,2.3))
     elif index in [1,3,7,8,9]:target=Vector((.35,0,.9));location=target+Vector((1.7,-5,1.4))
     elif index==2:target=Vector(((dx+ex)/2,0,1.1));location=target+Vector((2.2,-6.5+u*.15,1.0));lens=45
     elif index in [4,5]:target=Vector((dx,0,1.55));location=target+Vector((.8,-3, .4));lens=65
@@ -69,8 +73,9 @@ def set_camera(index,u,dx,ex,vertical):
     if vertical:
         # Own camera, fitted to both models and action, never a master crop.
         target=Vector(((dx+ex)/2,0,1.0))
-        if index in [4,5]:target=Vector((dx,0,1.35))
-        extent=abs(dx-ex) if index not in [4,5] else .6
+        if index in [4,5,6]:target=Vector((dx,0,1.35))
+        if index in [1,3]:target=Vector((ex,0,1.0))
+        extent=abs(dx-ex) if index not in [1,3,4,5,6] else .6
         distance=max(6,extent*2.2+3)
         location=target+Vector((.5,-distance,1.2));cam.data.lens=45
     cam.location=location;cam.rotation_euler=(target-location).to_track_quat('-Z','Y').to_euler()
