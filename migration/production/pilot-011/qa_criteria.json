@@ -1,0 +1,69 @@
+{
+ "version": "pilot-qa-criteria-v2",
+ "frozen_before_render_code_existed": false,
+ "frozen_at_utc": "2026-10-17T10:40:00Z",
+ "basis": "As v1 for technical and speech gates. Editing gates replaced by the amended archetype grammar (strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md, amendment 2026-10-17; diagnostics/av-picture-change/references/SPOT_CHECK.md), read from the render manifest and the burned caption file.",
+ "technical": {
+  "full_decode_without_errors": true,
+  "video": "1920x1080, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+  "duration_seconds_min": 601,
+  "integrated_lufs": [
+   -16.0,
+   -14.0
+  ],
+  "true_peak_dbtp_max": -1.0
+ },
+ "speech": {
+  "speech_presence_min": 0.85,
+  "singing_presence_max": 0.0,
+  "wer_vs_script_max": 0.1,
+  "accepted_words_per_minute": [
+   115,
+   165
+  ],
+  "first_word_onset_seconds_max": 1.5,
+  "hook_second_person_within_seconds": 8
+ },
+ "rights": {
+  "every_image_generated_by_allowed_open_licence_model_with_revision": true,
+  "allowed_model_licences": [
+   "openrail++",
+   "openrail++-m",
+   "creativeml-openrail-m",
+   "apache-2.0",
+   "mit"
+  ],
+  "no_third_party_footage": true,
+  "music_owned_generator_with_hash": true,
+  "voice_model_hash_pinned": true,
+  "script_original_with_public_domain_scripture_only": true
+ },
+ "failure_policy": "Any FAIL blocks approval; criteria are not edited after results to pass.",
+ "not_claimed": [
+  "Audience response, CTR, retention or revenue",
+  "Perceptual approval by a human",
+  "Publication authority"
+ ],
+ "frozen_before_first_pilot_002_render": true,
+ "grammar": {
+  "title_card_seconds": [
+   1.0,
+   3.0
+  ],
+  "figure_present_fraction_after_title_min": 0.98,
+  "background_hold_seconds_median": [
+   6.0,
+   13.0
+  ],
+  "background_hold_seconds_max": 20.0,
+  "no_background_repeated_consecutively": true,
+  "caption_coverage_of_speech_min": 0.95,
+  "caption_hold_seconds_median": [
+   1.5,
+   5.0
+  ],
+  "caption_chars_max": 44,
+  "channel_mark_badge_and_amen_prompt_present": true
+ },
+ "perceptual_review_required_before_approval": "Contact sheet reviewed by Claude Code against the reference sheets; human review recommended (D-076). An automatic PASS alone does not approve the pilot."
+}
