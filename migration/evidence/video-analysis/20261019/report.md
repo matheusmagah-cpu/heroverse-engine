@@ -59,3 +59,5 @@ Run from repository root:
 Originality pre-render reconciliation belongs to existing #141; owned48h/7d
 feedback is a later patch. This deliverable supplies traceable inputs for those
 steps without redoing the research or promoting unverified claims.
+
+Independent review correction: disjoint or partially overlapping legacy windows are not automatically treated as source conflicts. Identical-window incompatible values remain visible. Three regression tests cover these cases.

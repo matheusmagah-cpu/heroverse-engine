@@ -50,13 +50,23 @@ def observation(field,value,status,method,ref=None,span=None):
 
 
 def conflicts(observations):
+    # Different or partially overlapping windows can legitimately describe changes.
+    # Compare only identical declared temporal scopes. Thumbnail count reconciliation
+    # compares reports about the same image, including a count of its reported text.
     grouped={}
     for row in observations:
-        if row['status']!='UNKNOWN':grouped.setdefault(row['field'],[]).append(row)
+        if row['status']=='UNKNOWN':continue
+        span=row['coverage']
+        if row['field'].startswith('thumbnail.'):
+            identity=tuple(sorted({r.get('image_sha256') or '' for r in row['evidence']}))
+            scope=('thumbnail_image',identity)
+        else:
+            scope=(span.get('scope'),span.get('start_seconds'),span.get('end_seconds'))
+        grouped.setdefault((row['field'],scope),[]).append(row)
     return [{'field':field,'values':[copy.deepcopy(r['value']) for r in rows],
              'evidence':[copy.deepcopy(r['evidence']) for r in rows],
              'resolution':'UNRESOLVED_SOURCE_DISAGREEMENT'}
-            for field,rows in grouped.items() if len({canonical(r['value']) for r in rows})>1]
+            for (field,scope),rows in grouped.items() if len({canonical(r['value']) for r in rows})>1]
 
 
 def thumbnail_observations(row,index,sources):

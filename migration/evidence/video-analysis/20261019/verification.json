@@ -21,7 +21,7 @@
       "unchanged": true
     }
   ],
-  "new_tests": 18,
+  "new_tests": 21,
   "regression_suites_passed": 7,
   "cohort_counts": {
     "weak": 3,
@@ -37,5 +37,6 @@
     "All9 promise sections UNKNOWN; no title-derived promise inference.",
     "Source audit has unknown exact temporal coverage.",
     "Reported thumbnail text mismatches are not independently verified pixel errors."
-  ]
+  ],
+  "independent_review_fix": "Compare conflicts only within identical declared temporal scopes; partial overlaps do not establish contradiction."
 }

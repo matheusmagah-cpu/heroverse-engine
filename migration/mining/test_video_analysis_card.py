@@ -126,6 +126,26 @@ class Cards(unittest.TestCase):
         conflict=next(c for c in result['conflicts'] if c['field']=='person_or_figure')
         self.assertEqual(conflict['values'],[False,True])
         self.assertNotEqual(conflict['evidence'][0],conflict['evidence'][1])
+    def test_disjoint_legacy_windows_are_not_conflicts(self):
+        windows=[]
+        for start,end,sound in ((0,10,'piano'),(10,20,'strings')):
+            windows.append({'window_start_seconds':start,'window_end_seconds':end,'audio_received':True,
+                'sound':{'music':sound},'beats':[{'beat':sound,'content':sound}]})
+        result=self.build(legacy_structure={'video':{'video_id':self.video},'windows':windows})
+        self.assertFalse(any(c['field'] in ('sound.music','beats') for c in result['conflicts']))
+
+    def test_same_legacy_window_disagreement_retained(self):
+        windows=[{'window_start_seconds':0,'window_end_seconds':10,'audio_received':True,
+                  'sound':{'music':sound}} for sound in ('piano','strings')]
+        result=self.build(legacy_structure={'video':{'video_id':self.video},'windows':windows})
+        conflict=next(c for c in result['conflicts'] if c['field']=='sound.music')
+        self.assertEqual(conflict['values'],['piano','strings'])
+
+    def test_partially_overlapping_windows_not_automatically_conflict(self):
+        rows=[card.observation('sound.music',value,'MODEL_REPORTED','test',span=card.coverage(start,end,'source_declared_window'))
+              for start,end,value in ((0,15,'piano'),(10,20,'strings'))]
+        self.assertEqual(card.conflicts(rows),[])
+
     def test_cli_refuses_source_overwrite(self):
         import subprocess
         with tempfile.TemporaryDirectory() as tmp:
