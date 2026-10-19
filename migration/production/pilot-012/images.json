@@ -1,0 +1,28 @@
+{
+  "version": "pilot-images-v2",
+  "pilot_id": "pilot-012",
+  "style": "soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+  "steps": 6,
+  "guidance": 1.5,
+  "width": 1344,
+  "height": 768,
+  "reused": {
+    "pilot-008": [
+      "figure-a",
+      "bg-night-sky",
+      "bg-moon-lake",
+      "bg-starry-hills",
+      "bg-lamp-window",
+      "bg-night-garden",
+      "bg-moonlit-sea",
+      "bg-quiet-chapel",
+      "bg-starry-forest",
+      "bg-dusk-field",
+      "bg-night-village",
+      "bg-candle",
+      "bg-window"
+    ]
+  },
+  "images": []
+}

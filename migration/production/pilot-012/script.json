@@ -1,0 +1,512 @@
+{
+  "version": "pilot-script-v3",
+  "pilot_id": "pilot-012",
+  "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+  "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+  "working_title": "Night Prayer of Thanksgiving | His Mercies Are New, Rest in His Faithfulness",
+  "promise": "Name the mercies you received today, entrust what was hard to God, and listen to Scripture as you prepare for rest.",
+  "angle": "Ending the day in gratitude by naming its mercies one by one, with honest prayer for what was hard, then a distinct Scripture-for-sleep section.",
+  "authorship": "Original English prayer written for HeroVerse by dot (OpenAI AI assistant), 2026-10-19. Scripture quotations are verbatim public-domain KJV.",
+  "voice": {
+    "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+    "voice_id": "am_michael",
+    "speed": 0.85
+  },
+  "segments": [
+    {
+      "id": "hook",
+      "beat": "Evening need and the promise of honest thanksgiving",
+      "pause_after": 0.8,
+      "text": "Good evening. You keep replaying that argument; tonight, pray with gratitude and entrust the hurt to God."
+    },
+    {
+      "id": "invitation",
+      "beat": "Arrive with the whole day, including its difficulty",
+      "pause_after": 1.2,
+      "text": "You may remember the sharpest moment first: the spilled cup, the difficult news, the sentence you wish you had answered differently. Let your hands rest comfortably as you settle here. You can let the day become more than its hardest moment. You will have room for both thanksgiving and sorrow. Begin with what you actually lived, and let this prayer help you notice the care you received."
+    },
+    {
+      "id": "scripture-thessalonians-thanks",
+      "beat": "Anchor: thanksgiving within every circumstance",
+      "pause_after": 1.5,
+      "text": "In every thing give thanks: for this is the will of God in Christ Jesus concerning you.",
+      "chapter": "Prayer: naming the day’s mercies",
+      "reference": "1 Thessalonians 5:18 (KJV)"
+    },
+    {
+      "id": "prayer-honest-beginning",
+      "beat": "First prayer: truthful gratitude without denial",
+      "pause_after": 1.2,
+      "text": "Father, I come with a day that has several stories inside it. Some moments gave me pleasure; others left me tired or uncertain. I want to offer truthful thanks. Keep me from decorating pain with cheerful words simply because I think I should. Help me recognize mercy wherever it really appeared. I bring this whole day before you, trusting that honesty belongs within worship. Receive this evening prayer from the person I am tonight."
+    },
+    {
+      "id": "reflection-first-detail",
+      "beat": "Guidance: identify one real mercy rather than inventing a story",
+      "pause_after": 1.2,
+      "text": "You can begin with one small detail you might otherwise pass over. Perhaps you found a seat when you needed one, or someone waited while you gathered your things. Perhaps you had a few minutes outside. Choose something that really happened to you. As you recall that detail, you can acknowledge the good it carried. Let your thanks have the shape of an actual moment, with a place, a person, or a simple object."
+    },
+    {
+      "id": "prayer-early-hours",
+      "beat": "Prayer: remember concrete support in the morning",
+      "pause_after": 1.2,
+      "text": "Lord, I remember the beginning of this day. I thank you for whatever helped me enter it: a familiar voice, a working light, clothing I could put on, or a little food before leaving. I often hurry past these familiar things. Tonight I receive them with attention. Where the morning was difficult, help me remember any kindness that met me there. I offer thanks for the support I actually had, however modest it may have seemed."
+    },
+    {
+      "id": "scripture-psalm-mercy",
+      "beat": "Anchor: enduring mercy gives thanksgiving its center",
+      "pause_after": 1.5,
+      "text": "O give thanks unto the LORD; for he is good: for his mercy endureth for ever.",
+      "reference": "Psalm 136:1 (KJV)"
+    },
+    {
+      "id": "reflection-recognize-care",
+      "beat": "Guidance: recall care in specific actions",
+      "pause_after": 1.2,
+      "text": "You may have received help through someone whose name you know well, or through a person you will never meet again. You can remember the specific action: they explained the form, held the elevator, listened carefully, or made space for you. If no such encounter comes to mind, you can notice another kind of mercy. You are learning to recognize what was given without comparing your day with another’s."
+    },
+    {
+      "id": "prayer-table-water",
+      "beat": "Prayer: gratitude for food, water, and the people behind them",
+      "pause_after": 1.2,
+      "text": "God of everyday provision, I thank you for the food and water that were available to me today. I remember those whose labor brought them near: those who grew, carried, stocked, prepared, or shared them. Let my gratitude reach beyond the meal to the hands behind it. If I ate alone, receive my thanks from that quiet table. If I had company, help me cherish the welcome we offered each other, even when our conversation was ordinary and brief."
+    },
+    {
+      "id": "prayer-place-to-pause",
+      "beat": "Prayer: shelter received and compassion for others",
+      "pause_after": 1.2,
+      "text": "Father, I give thanks for the places where I could pause today. Perhaps it was a kitchen chair, a covered doorway, a bench, or a borrowed corner where I could collect myself. I remember the relief of that brief pause. Thank you for any shelter and welcome I received. Make me attentive to those who lack a safe place tonight, and show me a practical way to support their dignity when I am able to help."
+    },
+    {
+      "id": "reflection-unmet-needs",
+      "beat": "Guidance: leave room for unmet needs without forced gratitude",
+      "pause_after": 1.2,
+      "text": "You may hear these examples and feel the ache of something you lacked. You do not have to claim a full cupboard, a safe home, or dependable company if that was not your experience. You can ask for help while giving thanks for a smaller kindness. If you need practical support, prayer can accompany the step of seeking it. You are allowed to bring need into this conversation without apologizing for the space it takes."
+    },
+    {
+      "id": "prayer-provision-with-need",
+      "beat": "Prayer: gratitude alongside an honest request for practical provision",
+      "pause_after": 1.2,
+      "text": "Lord, I name what remains scarce or uncertain in my life. I bring the cost I am trying to meet and the help I have been hesitant to request. Thank you for each resource that has reached me, and give me wisdom about what to do next. Help me recognize trustworthy assistance. Keep shame from shutting my mouth when I need support. Teach me to receive generosity with dignity and to offer it responsibly when I have enough to share."
+    },
+    {
+      "id": "scripture-lamentations-compassions",
+      "beat": "Anchor: compassion spoken from within lament",
+      "pause_after": 1.5,
+      "text": "It is of the LORD's mercies that we are not consumed, because his compassions fail not.",
+      "chapter": "Mercy within a difficult day",
+      "reference": "Lamentations 3:22 (KJV)"
+    },
+    {
+      "id": "scripture-lamentations-faithfulness",
+      "beat": "Anchor: new mercies and divine faithfulness",
+      "pause_after": 1.5,
+      "text": "They are new every morning: great is thy faithfulness.",
+      "reference": "Lamentations 3:23 (KJV)"
+    },
+    {
+      "id": "reflection-lament-room",
+      "beat": "Guidance: distinguish gratitude for mercy from appreciation of harm",
+      "pause_after": 1.2,
+      "text": "These words appear in a book that gives grief a voice. You can hear their hope without erasing what you have lost. You are not being asked to appreciate an injury, an injustice, or a frightening experience. You can thank God for the person who stood beside you, for courage you found, or for help you sought. You can also say that something hurt. Let the mercy you remember stand beside that truth, without forcing the two into a tidy explanation."
+    },
+    {
+      "id": "prayer-hardest-part",
+      "beat": "Prayer: entrust pain while preserving truth and appropriate action",
+      "pause_after": 1.2,
+      "text": "Merciful God, I entrust the part of today I would rather not revisit. I will not pretend that cruelty was kindness or that disappointment felt easy. Accompany me as I face what happened. Thank you for any protection, clarity, or support I received along the way. Give me courage to seek safety where it is needed and counsel where I feel unsure. Let gratitude strengthen my honesty, so that I can receive good without excusing what was wrong."
+    },
+    {
+      "id": "prayer-absent-person",
+      "beat": "Prayer: grateful remembrance with room for grief",
+      "pause_after": 1.2,
+      "text": "Father, I bring the absence that shaped my day. I bring the empty chair, the quiet phone, or the name that stayed with me through ordinary tasks. Thank you for whatever love remains mine to remember. I can receive those memories with mixed feelings. Help me receive them at the pace I can bear. Where loneliness has narrowed my world, make room for gentle company and patient care. Receive the affection I still carry when I cannot give it in familiar ways."
+    },
+    {
+      "id": "stillness-first",
+      "beat": "First guided stillness: hold one real kindness",
+      "pause_after": 6.0,
+      "text": "For the next few moments, you can hold one genuine kindness in mind. You might remember its color, its sound, or the person who offered it. Let your breathing continue naturally. You can let that small mercy be present while the music carries this quiet space."
+    },
+    {
+      "id": "prayer-one-mercy",
+      "beat": "Prayer: receive one mercy and let it inform daily conduct",
+      "pause_after": 1.2,
+      "text": "Lord, I thank you for this particular mercy I have remembered. I want to receive its goodness instead of rushing beyond it. If another person offered it, bless the life behind that gesture, including the concerns I know nothing about. Help me remember that I also move through the days of others. Let the care I have received shape how I speak, how I wait, and how I notice the next person before me."
+    },
+    {
+      "id": "scripture-psalm-night-thanks",
+      "beat": "Anchor: thanksgiving as a fitting response",
+      "pause_after": 1.5,
+      "text": "It is a good thing to give thanks unto the LORD, and to sing praises unto thy name, O Most High:",
+      "reference": "Psalm 92:1 (KJV)"
+    },
+    {
+      "id": "scripture-psalm-night-faithfulness",
+      "beat": "Anchor: remembering faithfulness at night",
+      "pause_after": 1.5,
+      "text": "To shew forth thy lovingkindness in the morning, and thy faithfulness every night,",
+      "chapter": "Thanksgiving across the ordinary hours",
+      "reference": "Psalm 92:2 (KJV)"
+    },
+    {
+      "id": "reflection-middle-hours",
+      "beat": "Guidance: find particular gifts within ordinary work",
+      "pause_after": 1.2,
+      "text": "Now recall the middle of your day. Think of where you were when you checked the time, took a break, or changed from one task to another. You may notice something your hurried mind missed: a problem explained, a mistake caught early, a few minutes of laughter. You can give thanks for the help inside an imperfect task. You do not have to call the whole day successful before you acknowledge a useful or generous moment within it."
+    },
+    {
+      "id": "prayer-work-and-learning",
+      "beat": "Prayer: work, learning, and worth beyond productivity",
+      "pause_after": 1.2,
+      "text": "Lord, I thank you for the opportunities I had to contribute or learn today. I remember the tools that worked, the instruction that made sense, and the help that arrived when I was stuck. Where my work was unnoticed, let me value the care it still required. Where I had no paid work, help me recognize the worth of the responsibilities I carried. Teach me to honor useful effort without measuring my value by productivity."
+    },
+    {
+      "id": "prayer-correction",
+      "beat": "Prayer: gratitude for correction and the possibility of repair",
+      "pause_after": 1.2,
+      "text": "Father, I am grateful for the moments when correction was possible. Thank you for the person who explained rather than humiliated, for the chance to start a task again, or for the clarity to admit a mistake. Help me respond to that mercy with humility. If I owe an apology or a repair, guide me toward an honest next step. Tonight I can acknowledge what needs attention without turning the entire evening into a rehearsal of my failure. Receive my willingness to learn."
+    },
+    {
+      "id": "reflection-people-details",
+      "beat": "Guidance: name a person and the kindness actually received",
+      "pause_after": 1.2,
+      "text": "You can remember one person through a small detail rather than a general description. Perhaps you hear the patience in their voice or picture the chair they pulled closer. If you received a message, you might recall the sentence that helped you feel remembered. You can thank God for that exact kindness. You may remember help offered awkwardly but sincerely. Let your attention rest on what you truly received, without requiring that person to have done everything perfectly."
+    },
+    {
+      "id": "prayer-company",
+      "beat": "Prayer: companionship, appreciation, and healthy boundaries",
+      "pause_after": 1.2,
+      "text": "God, thank you for companionship in the forms it took today. I give thanks for people who made room for my words and for those whose quiet presence needed little explanation. Bless the friend who remembered, the relative who called, and the patient colleague. Where a relationship is strained, help me recognize any genuine kindness without overlooking needed boundaries. Let my own gratitude become clear enough to express, so that good care is received and those who offer it are remembered."
+    },
+    {
+      "id": "prayer-those-who-care",
+      "beat": "Prayer: recognize caregivers and respect their limits",
+      "pause_after": 1.2,
+      "text": "Father, I thank you for people whose care made this day more bearable. Some of their work happened before I noticed a need. Someone cleaned, prepared, organized, repaired, or stayed available. I remember professional help and informal kindness alike. Let them also receive support, respect, and time to rest. Keep me from treating another person’s generosity as an endless supply. Teach me to recognize their limits and to share responsibility wherever I can carry a fair part."
+    },
+    {
+      "id": "scripture-psalm-whole-soul",
+      "beat": "Anchor: blessing God with the whole self",
+      "pause_after": 1.5,
+      "text": "Bless the LORD, O my soul: and all that is within me, bless his holy name.",
+      "reference": "Psalm 103:1 (KJV)"
+    },
+    {
+      "id": "scripture-psalm-remember",
+      "beat": "Anchor: remembering received benefits",
+      "pause_after": 1.5,
+      "text": "Bless the LORD, O my soul, and forget not all his benefits:",
+      "chapter": "Remembering without keeping score",
+      "reference": "Psalm 103:2 (KJV)"
+    },
+    {
+      "id": "reflection-body-care",
+      "beat": "Guidance: bodily care without health promises or moral judgment",
+      "pause_after": 1.2,
+      "text": "You can notice the ways you cared for your body today, even if your body felt uncomfortable or tired. You may have eaten, taken prescribed medicine, used a mobility aid, asked for a break, or attended an appointment. You can give thanks for available care while still naming pain. You do not have to turn illness into a lesson tonight. Let your attention include the assistance you received and the small choices through which you treated yourself as someone worth caring for."
+    },
+    {
+      "id": "prayer-body",
+      "beat": "Prayer: receive bodily limits and appropriate care",
+      "pause_after": 1.2,
+      "text": "Lord, I bring my body into this thanksgiving with all its needs. Thank you for whatever movement, sensation, strength, or comfort was available today, and for the support that helped me where it was difficult. Give me patience with limits I did not choose. Help me use appropriate care and ask questions when I need guidance. Help me stop scolding myself for being tired. Let my gratitude include the ordinary permission to sit, eat, receive assistance, and be treated gently."
+    },
+    {
+      "id": "prayer-unseen-service",
+      "beat": "Prayer: gratitude for overlooked everyday service",
+      "pause_after": 1.2,
+      "text": "God, I remember the people whose names were missing from my account of this day. I benefited from unseen work and systems others maintained. Thank you for those who collected waste, kept roads usable, answered questions, and did the careful tasks others depend on. Help me meet such workers with respect when our paths cross. Let gratitude change my manner at the counter, on the phone, and in the doorway, especially when I am impatient or preoccupied."
+    },
+    {
+      "id": "reflection-ordinary-beauty",
+      "beat": "Guidance: notice beauty and pleasure without denying difficulty",
+      "pause_after": 1.2,
+      "text": "You may remember something beautiful that asked nothing from you: light across a wall, a bird on a wire, steam lifting from a cup. You can choose a detail from your own surroundings instead of borrowing somebody else’s peaceful scene. If beauty was hard to notice, you can receive whatever simple pleasure was available. Perhaps you enjoyed a familiar sound or the feel of clean fabric. You are allowed to value an ordinary delight without making it prove that everything else was fine."
+    },
+    {
+      "id": "prayer-small-delight",
+      "beat": "Prayer: thanksgiving for a concrete ordinary delight",
+      "pause_after": 1.2,
+      "text": "Creator, thank you for the small delights that met me in the middle of practical life. I remember a color, a sound, a taste, or an expression that briefly caught my attention. Help me appreciate these unremarkable gifts as I truly notice them. Let wonder remain possible in a life with responsibilities. I offer this detail back to you with affection, thankful that goodness can be encountered in a small moment and received without needing to own it."
+    },
+    {
+      "id": "prayer-missed-kindness",
+      "beat": "Prayer: acknowledge overlooked kindness without inventing a happier day",
+      "pause_after": 1.2,
+      "text": "Father, I also remember kindness I failed to acknowledge at the time. I may have been distracted, hurried, or too absorbed in my own concern to say thank you. Receive my gratitude now, and help me express it when an appropriate opportunity comes. Where I missed goodness, teach me attentiveness. I do not ask to manufacture a better memory of the day. I ask to see its actual gifts more clearly and to respond with a more generous heart."
+    },
+    {
+      "id": "declaration",
+      "beat": "Declaration: truthful thanks and entrusted difficulty",
+      "pause_after": 1.2,
+      "text": "I can tell the truth about this day. I can name the mercy I received. I can bring the hurt I still carry. God’s faithfulness is worthy of my thanks even when my understanding is incomplete. I will honor the help that came through other people. I will receive care without shame and offer kindness within my limits. I entrust this evening to the Lord, carrying gratitude and honest need into the same prayer."
+    },
+    {
+      "id": "payoff",
+      "beat": "Concrete payoff: tonight name real mercies and entrust one difficulty",
+      "pause_after": 1.2,
+      "text": "Before you turn off the light tonight, name three actual mercies from this day, aloud or quietly in your mind. Give each one a simple detail: what happened, who helped, or what you received. Then name one hard part and entrust it to God in a single sentence. If you can recall only one mercy, begin there. You will have given your day an honest ending: its goodness acknowledged and its difficulty brought into prayer. You can make that small commitment now."
+    },
+    {
+      "id": "prayer-commitment",
+      "beat": "Prayer: make the concrete evening commitment",
+      "pause_after": 1.2,
+      "text": "Father, tonight I will pause before the light goes out and remember the mercies I can name honestly. I will bring you the difficult part as well. Help me keep this commitment simple enough to carry into an ordinary evening. Thank you for receiving my simple, sincere words. Let this practice make me more attentive to kindness when tomorrow arrives. For now, I have offered my thanks and entrusted what hurts; receive the whole day within your compassion."
+    },
+    {
+      "id": "cta",
+      "beat": "One amen-only invitation after the practical payoff",
+      "pause_after": 1.0,
+      "text": "If this prayer expresses your thanks, you may write Amen as your quiet agreement with what we have prayed."
+    },
+    {
+      "id": "sleep-introduction",
+      "beat": "Distinct transition from active thanksgiving prayer to Scripture for sleep",
+      "pause_after": 1.5,
+      "text": "Now you can let the remembering become less deliberate. The prayer has brought your day into God’s presence, and the next part is Scripture for sleep. You can listen as you rest, allowing the words to come without testing your concentration. You do not need to keep collecting examples or finish a list. If you are comfortable, let your eyes rest. You can receive these passages quietly, with the thanks already offered and the difficult parts already named.",
+      "chapter": "Scripture for sleep: remembered mercy"
+    },
+    {
+      "id": "sleep-psalm-bed",
+      "beat": "Sleep Scripture: remembering God upon the bed",
+      "pause_after": 1.5,
+      "text": "When I remember thee upon my bed, and meditate on thee in the night watches.",
+      "reference": "Psalm 63:6 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-bed",
+      "beat": "Sleep reflection: remembrance without effort or sleep pressure",
+      "pause_after": 1.5,
+      "text": "The psalm gives you a simple place for remembrance: the bed itself, in the hours of night. You can be where you are and let a familiar truth remain nearby. You need not search through every memory again. As you listen, you can allow your attention to soften around the words. Even if you are still alert, you can spend these moments without demanding a particular feeling or measuring how well you are resting."
+    },
+    {
+      "id": "sleep-psalm-help",
+      "beat": "Sleep Scripture: gratitude for help and shelter",
+      "pause_after": 1.5,
+      "text": "Because thou hast been my help, therefore in the shadow of thy wings will I rejoice.",
+      "reference": "Psalm 63:7 (KJV)"
+    },
+    {
+      "id": "sleep-prayer-shelter",
+      "beat": "Sleep prayer: remembered help and the image of shelter",
+      "pause_after": 1.5,
+      "text": "Lord, I remember that help has reached me. Some of it arrived quietly, through ordinary people and ordinary means. I thank you for each instance I can recognize and for the care I did not know how to name. Receive my trust in this sheltered image of your wings. I bring my tired attention beneath the thought of your mercy. Where the day still feels exposed or unsettled, be my comfort as I leave its details with you for these quiet moments."
+    },
+    {
+      "id": "sleep-reflection-wings",
+      "beat": "Sleep reflection: receive the image of refuge gently",
+      "pause_after": 1.5,
+      "text": "The image of wings gives you something gentle to picture without building a whole scene. You can hear it as a word of refuge, a way the psalm speaks about God’s care. You do not need to make your surroundings feel different before you receive it. Let the room be familiar. Let the night remain the night. You can rest your attention on the help you remembered, then allow even that memory to become quiet while the reading continues."
+    },
+    {
+      "id": "sleep-psalm-counsel",
+      "beat": "Sleep Scripture: thanksgiving for counsel in the night",
+      "pause_after": 1.5,
+      "text": "I will bless the LORD, who hath given me counsel: my reins also instruct me in the night seasons.",
+      "chapter": "Quiet counsel and steady trust",
+      "reference": "Psalm 16:7 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-counsel",
+      "beat": "Sleep reflection: appreciate counsel without restarting problem solving",
+      "pause_after": 1.5,
+      "text": "You may recognize the gift of wise counsel in something you heard today or learned long ago. You can be grateful for guidance without solving another problem at this hour. The verse lets you bless God for what has already helped you find your way. You can leave tomorrow’s decisions for their proper time. For now, you have room to receive one settled truth: you are allowed to learn, to seek help, and to proceed with humility when the next step becomes clearer."
+    },
+    {
+      "id": "sleep-prayer-teachable",
+      "beat": "Sleep prayer: gratitude for guidance and permission to stop deliberating",
+      "pause_after": 1.5,
+      "text": "God of wisdom, thank you for counsel that has kept me from careless choices and helped me recognize what matters. I remember a patient explanation, a useful question, or an honest word that redirected me. Keep my heart teachable as the days unfold. Tonight I leave the work of deciding where it belongs. I can stop rehearsing possible conversations while I rest. Let gratitude for the guidance I have received accompany me into these quieter hours, with room to learn again tomorrow."
+    },
+    {
+      "id": "sleep-psalm-right-hand",
+      "beat": "Sleep Scripture: the Lord before the psalmist",
+      "pause_after": 1.5,
+      "text": "I have set the LORD always before me: because he is at my right hand, I shall not be moved.",
+      "reference": "Psalm 16:8 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-steady",
+      "beat": "Sleep reflection: trust as a gentle orientation",
+      "pause_after": 1.5,
+      "text": "The psalmist speaks with trust, setting the Lord before him. You can receive that posture without pretending you never feel shaken. You may have had an unsteady day, and you can still turn toward God here. Let the verse give your attention a place to return. You do not have to argue with every thought that passes. When you notice the reading again, you can simply listen again, allowing trust to be a direction you choose rather than a feeling you must produce."
+    },
+    {
+      "id": "stillness-second",
+      "beat": "Second guided stillness: receive support and unforced breath",
+      "pause_after": 6.0,
+      "text": "You can let the last words settle without adding an explanation. Notice the support beneath you, and allow your breathing its ordinary rhythm. For this brief quiet, you have nothing else to name. You can simply remain here as the music continues."
+    },
+    {
+      "id": "sleep-prayer-remembered-gifts",
+      "beat": "Sleep prayer: release effort and ask for rest without a guarantee",
+      "pause_after": 1.5,
+      "text": "Father, the gifts I named do not need to be held tightly for my thanks to remain sincere. I can release the effort of remembering every detail. Receive the gratitude already spoken and the gratitude that remained wordless. Thank you for meeting me in a day made of ordinary hours. I ask for rest with an open hand, and for patience with myself if wakefulness continues. Let this time be marked by kindness rather than another demand I place upon my body or mind."
+    },
+    {
+      "id": "sleep-zephaniah-joy",
+      "beat": "Sleep Scripture: God’s presence and rejoicing over his people",
+      "pause_after": 1.5,
+      "text": "The LORD thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing.",
+      "chapter": "The warmth of divine love",
+      "reference": "Zephaniah 3:17 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-zephaniah",
+      "beat": "Sleep reflection: contextualized comfort without personal prediction",
+      "pause_after": 1.5,
+      "text": "Zephaniah speaks here to God’s people with a picture of restoration and rejoicing. You can hear the warmth of that picture as you rest. You are listening to words of divine love, with no need to compete for attention. You can set aside the day’s comparisons. Let the thought of God’s loving presence occupy some of the space where self-criticism has been speaking. You may receive comfort without using the passage to predict exactly what tomorrow will bring."
+    },
+    {
+      "id": "sleep-prayer-love",
+      "beat": "Sleep prayer: receive loving care beyond achievement",
+      "pause_after": 1.5,
+      "text": "Lord, I thank you for love that invites me beyond the narrow story of what I accomplished. I bring the parts of myself I quickly criticize, asking for a more truthful, compassionate perspective. Let your goodness teach me how to receive love without immediately earning another approval. I am grateful for every person who has reflected patient care toward me. May the warmth of that care remind me that relationship can include welcome, gentleness, and room to grow."
+    },
+    {
+      "id": "sleep-reflection-welcome",
+      "beat": "Sleep reflection: quiet welcome for the actual listener",
+      "pause_after": 1.5,
+      "text": "You can let welcome be a quiet word now. You need not attach a task to it. You may remember being offered a seat, being greeted by name, or being allowed to speak at your own pace. If those memories feel distant, you can still hear the invitation to bring your actual self before God. You can arrive tired, disappointed, grateful, or unsure. The prayer has room for what you are experiencing, and you can remain without preparing a better version of yourself."
+    },
+    {
+      "id": "sleep-psalm-taste",
+      "beat": "Sleep Scripture: an invitation to experience God’s goodness",
+      "pause_after": 1.5,
+      "text": "O taste and see that the LORD is good: blessed is the man that trusteth in him.",
+      "reference": "Psalm 34:8 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-taste",
+      "beat": "Sleep reflection: modest, experienced goodness amid unanswered questions",
+      "pause_after": 1.5,
+      "text": "The psalm uses a word you know through ordinary life: taste. You can recall receiving something good in a small, direct way, before understanding everything about it. Tonight you have named a few mercies that you actually encountered. You can let those memories remain modest and real. You do not have to make them answer every question. Receive the invitation to trust God with what you know and what you still cannot explain, while the evening grows quieter around you."
+    },
+    {
+      "id": "sleep-prayer-goodness",
+      "beat": "Sleep prayer: thanksgiving with discernment and open questions",
+      "pause_after": 1.5,
+      "text": "Good God, I thank you for the kindness I have encountered, in small portions and familiar places. I have not understood every part of today, but I can acknowledge the gifts I received. Help me remain open to goodness without becoming careless about what harms. Keep my discernment clear and my heart capable of gratitude. I give thanks for what was good today, and I entrust the unanswered questions to your wisdom."
+    },
+    {
+      "id": "sleep-reflection-unfinished-list",
+      "beat": "Sleep reflection: let attention become less effortful",
+      "pause_after": 1.5,
+      "text": "You can allow the list to end where it is. A forgotten kindness has not become less real because you cannot recall it tonight. You have paid attention; now you can stop working at it. You can receive the remaining Scriptures as words spoken beside your rest. There is no need to repeat every phrase after the voice or recover anything you missed. You can listen lightly, let your hands be comfortable, and allow this moment to contain less effort than the day required."
+    },
+    {
+      "id": "sleep-numbers-keep",
+      "beat": "Sleep Scripture: the first line of the priestly blessing",
+      "pause_after": 1.5,
+      "text": "The LORD bless thee, and keep thee:",
+      "chapter": "The ancient blessing",
+      "reference": "Numbers 6:24 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-keeping",
+      "beat": "Sleep reflection: receive the blessing as prayer rather than prediction",
+      "pause_after": 1.5,
+      "text": "These words belong to the blessing given for Israel. You can hear their simple request for God’s blessing and keeping as the evening reading draws toward its close. You need not turn these words into a forecast. Receive them as a prayer offered with care. You can be thankful for the support you know and bring the places where you still feel vulnerable. The blessing gives you language for entrusting yourself to God when your own words have become few."
+    },
+    {
+      "id": "sleep-numbers-gracious",
+      "beat": "Sleep Scripture: the Lord’s shining face and grace",
+      "pause_after": 1.5,
+      "text": "The LORD make his face shine upon thee, and be gracious unto thee:",
+      "reference": "Numbers 6:25 (KJV)"
+    },
+    {
+      "id": "sleep-prayer-grace",
+      "beat": "Sleep prayer: receive gracious attention and release self-criticism",
+      "pause_after": 1.5,
+      "text": "Father, I receive this prayer for your gracious attention. Thank you for the kindness that has reached me through the day, and for the invitation to draw near with sincerity. Where I have been harsh with myself or another person, teach me the patience of grace. Where I have needed tenderness, help me accept the care available. I leave my gratitude here in your presence, with no need to polish it further. Let your goodness remain the quiet theme of these last moments of prayer."
+    },
+    {
+      "id": "sleep-numbers-peace",
+      "beat": "Sleep Scripture: the closing request for peace",
+      "pause_after": 1.5,
+      "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+      "reference": "Numbers 6:26 (KJV)"
+    },
+    {
+      "id": "sleep-reflection-peace",
+      "beat": "Sleep reflection: receive peace without testing a result",
+      "pause_after": 1.5,
+      "text": "You can hear the word peace without searching your body for evidence that you have achieved it. This is a blessing you are receiving, a prayer whose words can accompany you. You have brought the day’s mercies and its difficult places into the same conversation with God. You can leave them there as you rest. If your attention returns to an ordinary sound in the room, you can let it come and pass. You have no further account of today to prepare tonight."
+    },
+    {
+      "id": "sleep-prayer-close",
+      "beat": "Closing prayer: gratitude, entrusted pain, and requested care",
+      "pause_after": 1.5,
+      "text": "Lord, I close this day’s prayer with thanks for the mercies I remembered and honesty about the pain I entrusted. I ask for rest, for sustaining care, and for wisdom when the morning calls for action. Receive the people I have remembered throughout this evening. Bless those who helped me, and guide me in whatever care I can offer others. I leave these words with you now, grateful that prayer has made room for the whole day, including the parts I could not resolve."
+    },
+    {
+      "id": "blessing",
+      "beat": "Quiet closing blessing with no further call to action",
+      "pause_after": 1.5,
+      "text": "May the Lord’s gracious care accompany you through the remaining hours of this night. May remembered kindness give your heart something gentle to receive, and may you find courage to seek the support you need. Your thanksgiving has been offered. The difficult parts have been named before God. You can let the words grow quiet now, with this day entrusted to his faithfulness."
+    }
+  ],
+  "figure": "figure-a",
+  "backgrounds": [
+    "bg-night-sky",
+    "bg-moon-lake",
+    "bg-starry-hills",
+    "bg-lamp-window",
+    "bg-night-garden",
+    "bg-moonlit-sea",
+    "bg-quiet-chapel",
+    "bg-starry-forest",
+    "bg-dusk-field",
+    "bg-night-village",
+    "bg-candle",
+    "bg-window"
+  ],
+  "overlay": {
+    "title": "Remember the Good Tonight",
+    "subtitle": "NIGHT PRAYER",
+    "title_image": "bg-moon-lake",
+    "title_card_seconds": 2.0,
+    "brand": "HeroVerse Prayer",
+    "amen": "Type AMEN"
+  },
+  "description_intro": "Thank God for today’s mercies, entrust its difficulties to him, and settle into KJV Scripture for the night.",
+  "hashtags": [
+    "#prayer",
+    "#nightprayer",
+    "#jesus"
+  ],
+  "thumbnail": {
+    "lines": [
+      "MERCY IN",
+      "ORDINARY MOMENTS"
+    ],
+    "sub": "Night Prayer"
+  },
+  "tags": [
+    "night prayer",
+    "prayer of thanksgiving",
+    "evening gratitude prayer",
+    "Scripture for sleep",
+    "KJV Bible",
+    "God faithfulness",
+    "Christian evening prayer",
+    "mercies every morning"
+  ],
+  "figure_choice": "figure-a: HeroVerse's own generated praying illustration, reused from pilot-004 for brand continuity; no real-person likeness or borrowed identity.",
+  "playlist": {
+    "title": "Night Prayer",
+    "description": "Calm night prayers with Scripture to end the day with God: peace, forgiveness, protection and restful sleep."
+  },
+  "motion": true,
+  "cinematic": {
+    "atmosphere": [
+      "bg-night-sky",
+      "bg-moon-lake",
+      "bg-starry-hills",
+      "bg-starry-forest",
+      "bg-moonlit-sea"
+    ]
+  },
+  "format_note": "Original night thanksgiving prayer followed by Scripture for sleep, preserving the current night narration and cinematic layout."
+}
