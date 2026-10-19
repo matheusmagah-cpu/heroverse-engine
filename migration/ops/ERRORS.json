@@ -260,6 +260,16 @@
     "file": "migration/mining/test_structure_mining.py",
     "contains": "def test_reviewer_allowance_is_reserved_for_decisions"
    }
+  },
+  {
+   "id": "E27",
+   "date": "2026-10-19",
+   "error": "review_calibration.py wrote its evidence into a folder that did not exist yet; the first calibration of gemini-3.5-flash-lite (run 39254220059) ran all cases and then lost the JSON",
+   "fix": "the evidence folder is created before writing; the run's printed results were transcribed into the evidence file",
+   "antidote": {
+    "file": "migration/production/review_calibration.py",
+    "contains": "Path(out_json).parent.mkdir(parents=True, exist_ok=True)"
+   }
   }
  ]
 }

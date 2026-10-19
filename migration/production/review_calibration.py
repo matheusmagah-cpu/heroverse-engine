@@ -115,6 +115,7 @@ def main(render, work, out_json, title="Morning Prayer", model=None):
     out = {"version": VERSION, "at": datetime.now(timezone.utc).isoformat(), "excerpt_s": EXCERPT,
            "render": Path(render).name, "model": model or lr.REVIEW_MODELS[0], "summary": summary, "cases": rows,
            "limits": "one excerpt of one render; small n; synthetic defects stand for, not equal, real render faults"}
+    Path(out_json).parent.mkdir(parents=True, exist_ok=True)  # first run of a model: the evidence folder may not exist
     Path(out_json).write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     print(json.dumps(summary))
 
