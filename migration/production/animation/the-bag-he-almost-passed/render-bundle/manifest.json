@@ -1,7 +1,9 @@
 {
+  "version": "animation-bundle-v2",
   "blender_version": "4.3.2",
   "engine": "BLENDER_EEVEE_NEXT",
-  "render_samples": 16,
+  "render_samples": 32,
+  "animation_fps": 24,
   "master_dimensions": [
     1920,
     1080
@@ -10,196 +12,13 @@
     1080,
     1920
   ],
-  "animation_fps": 10,
-  "master_seconds": 152,
-  "short_seconds": [
-    42,
-    41
-  ],
-  "master_frames": 1520,
-  "unique_vertical_frames": 470,
-  "chunks": [
-    {
-      "id": "master-01",
-      "mode": "master",
-      "start": 0,
-      "end": 100,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-02",
-      "mode": "master",
-      "start": 100,
-      "end": 200,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-03",
-      "mode": "master",
-      "start": 200,
-      "end": 300,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-04",
-      "mode": "master",
-      "start": 300,
-      "end": 400,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-05",
-      "mode": "master",
-      "start": 400,
-      "end": 500,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-06",
-      "mode": "master",
-      "start": 500,
-      "end": 620,
-      "frames": 120,
-      "estimated_seconds_local": 1313
-    },
-    {
-      "id": "master-07",
-      "mode": "master",
-      "start": 620,
-      "end": 720,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-08",
-      "mode": "master",
-      "start": 720,
-      "end": 820,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-09",
-      "mode": "master",
-      "start": 820,
-      "end": 920,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-10",
-      "mode": "master",
-      "start": 920,
-      "end": 1020,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-11",
-      "mode": "master",
-      "start": 1020,
-      "end": 1120,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-12",
-      "mode": "master",
-      "start": 1120,
-      "end": 1220,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-13",
-      "mode": "master",
-      "start": 1220,
-      "end": 1320,
-      "frames": 100,
-      "estimated_seconds_local": 1094
-    },
-    {
-      "id": "master-14",
-      "mode": "master",
-      "start": 1320,
-      "end": 1460,
-      "frames": 140,
-      "estimated_seconds_local": 1532
-    },
-    {
-      "id": "master-15",
-      "mode": "master",
-      "start": 1460,
-      "end": 1520,
-      "frames": 60,
-      "estimated_seconds_local": 656
-    },
-    {
-      "id": "vertical-01",
-      "mode": "vertical",
-      "start": 0,
-      "end": 100,
-      "frames": 100,
-      "estimated_seconds_local": 965
-    },
-    {
-      "id": "vertical-02",
-      "mode": "vertical",
-      "start": 100,
-      "end": 200,
-      "frames": 100,
-      "estimated_seconds_local": 965
-    },
-    {
-      "id": "vertical-03",
-      "mode": "vertical",
-      "start": 200,
-      "end": 300,
-      "frames": 100,
-      "estimated_seconds_local": 965
-    },
-    {
-      "id": "vertical-04",
-      "mode": "vertical",
-      "start": 300,
-      "end": 400,
-      "frames": 100,
-      "estimated_seconds_local": 965
-    },
-    {
-      "id": "vertical-05",
-      "mode": "vertical",
-      "start": 400,
-      "end": 470,
-      "frames": 70,
-      "estimated_seconds_local": 676
-    }
-  ],
-  "assets": [
-    {
-      "name": "production.py",
-      "bytes": 13217,
-      "sha256": "d3859e40a452cee71a69c96af1fff2203d27857172cdce9cd77edce1291cfcf1"
-    },
-    {
-      "name": "scene_base.py",
-      "bytes": 7602,
-      "sha256": "f02c0aa6b65b52f85c1813071bc02b63ecea4df24967c93ad508e5e2f0daceff"
-    },
-    {
-      "name": "short-frame-maps.json",
-      "bytes": 13770,
-      "sha256": "6c78424f261841a3aa8593bae5e620d2ceaee1572336e37640ac52fa9597e074"
-    },
-    {
-      "name": "story.json",
-      "bytes": 6147,
-      "sha256": "a5b9ea8bca243cb06c60c5d4e32d7c8f71986911bc14a0bd94ce22d1fbecf8eb"
-    }
-  ]
+  "timing": "required measured --timing",
+  "asset_sha256": {
+    "production.py": "fd9f21b52c47b9a63a5c7591bff7096c9a7c6b850b6b429f08970f82417b4367",
+    "scene_base.py": "f1932cfadc5c674799e23e1764ed4ec566fe0452f30fa75850cbe7af6b17213a",
+    "characters.py": "3dd4bb3c2edd87a14340dc5f58e96bb210bd5ebee3c9c5653d8fc0908649c1d6",
+    "story.json": "3ffd9d252a6a61830a8c6c202358fa6b5955162673d6d37176dd42d7c46d00c1",
+    "short-frame-maps.json": "d0713aa0e1f45b27729e83933cba1925c22f0a5ec4813dfce520d168d8f0ca2d",
+    "README.txt": "959593b3435274cd440fb44dc09680a2942434ffe1bc1d5ce14f88af7ba1f47b"
+  }
 }
