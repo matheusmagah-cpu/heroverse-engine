@@ -88,8 +88,11 @@
    "fix": "Minings wait while production has work",
    "antidote": {
     "file": "migration/ops/test_heartbeat.py",
-    "contains": "def test_minings_wait_for_production_and_stay_due"
-   }
+    "contains": "def test_retired_gemini_minings_are_never_dispatched"
+   },
+   "history": [
+    "2026-10-19: the Gemini minings were retired (SYSTEM.md, vidIQ mining); the antidote is now that they are never dispatched"
+   ]
   },
   {
    "id": "E10",
