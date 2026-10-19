@@ -1,0 +1,34 @@
+{
+ "version": "structure-v1",
+ "id": "guided-prayer-scenic",
+ "line": "English Christian spoken prayer",
+ "status": "candidate",
+ "validation": {
+  "rule": "SYSTEM.md 1.5: >=6 winners from >=4 channels, no channel > 1/3, >=3 weak contrasts, drivers measured",
+  "winners": 2, "channels": 2, "weak_contrasts": 0,
+  "missing": ["4 winners", "2 channels", "3 weak contrasts"]
+ },
+ "evidence": [
+  {"video": "OuqwfEgNavE", "channel": "UCUzhKXXA4vF87u4eOZLILaQ", "role": "winner", "breakout": 2310.11, "audit": "evidence/vidiq/20261019/watch-OuqwfEgNavE.md"},
+  {"video": "fXhKzleJhxI", "channel": "UC3TTATL5b72sjCqxRDFTpWA", "role": "winner", "breakout": 1332.76, "audit": "evidence/vidiq/20261019/watch-fXhKzleJhxI.md", "measured": "evidence/vidiq/20261019/pace.json"}
+ ],
+ "attributes": {
+  "length_minutes": {"values": [14.3, 5.8], "label": "free", "note": "outlier median of 20 spoken-prayer winners: 26.4 min (outliers.json); not a driver yet"},
+  "person_or_figure_on_screen": {"values": ["none", "none"], "label": "candidate-driver", "rule": "STANDARD R1"},
+  "picture": {"values": ["drone/stock footage", "AI 2.5D landscapes"], "label": "free (both full-frame scenery)"},
+  "continuous_camera_motion": {"values": [true, true], "label": "candidate-driver", "rule": "R2"},
+  "scene_seconds": {"values": ["20-30", "25-30"], "label": "candidate-driver", "rule": "R3"},
+  "captions": {"values": ["bottom-centre, white outline, no box, phrase", "centre, white shadow, no box, word-synced"], "label": "candidate-driver: no box", "rule": "R4"},
+  "scripture_on_screen": {"values": ["verse-text cards 6-25 s while read", "reference only"], "label": "free; cards in the stronger winner", "rule": "R5"},
+  "cta": {"values": ["2 short mid graphics + spoken outro", "small persistent subscribe pill + spoken outro"], "label": "hygiene: spoken outro CTA", "rule": "R6"},
+  "hook": {"values": ["pattern interrupt + direct address by 0:02", "direct address + promise by 0:03, 'Let us pray' 0:12"], "label": "candidate-driver: direct 'you' address + promise within 3 s", "rule": "R7"},
+  "narration_wpm": {"values": [null, 136.6], "label": "hygiene", "note": "measured exactly on one; our pilots 134-137"},
+  "voice": {"values": ["male 40s-50s pastoral", "male 30s-40s warm"], "label": "candidate-hygiene"},
+  "music": {"values": ["ambient piano/pads low", "ambient piano/strings ~18-20 dB under"], "label": "hygiene"},
+  "retention_devices": {"values": ["'say it with me', 'this next part is for you'", "none observed"], "label": "free"},
+  "title_pattern": {"values": ["Psalm 91 Prayer for Protection | Morning Prayer for God's Covering Over You!", "Thank You, Lord, for Today | A Gentle Bedtime Prayer for Gratitude and Rest"], "label": "candidate: '<promise> | <format keyword phrase>'"},
+  "thumbnail": {"values": null, "label": "unmeasured", "pending": "#173 item 5"}
+ },
+ "execution_spec": "migration/STANDARD.md v1 (R1-R8), QA criteria production/qa_criteria_v3.json",
+ "our_results": []
+}

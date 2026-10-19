@@ -6,6 +6,7 @@ Read this file first. **It wins over every other document.** The only documents 
 - `strategy/DECISIONS.md`: the decision protocol and the decisions in force.
 - `strategy/MODELING_SPEC.md`: what each format must contain (with the rules it cites: `BEAT_THE_REFERENCE_RULE.md`,
   `FORMAT_OPINION_AND_CRITIQUE.md`, `FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md`).
+- **`SYSTEM.md`: the master direction (owner, 2026-10-19): one loop of six stages, mining by structure (not by channel), few tools. Where anything here conflicts with it, SYSTEM.md wins. Structures are catalogued in `structures/`.**
 - `STANDARD.md`: the production standard (measured on breakout videos with vidIQ). It overrides any visual, caption or CTA rule elsewhere.
 - `strategy/VIDIQ.md`: the vidIQ research plan.
 - `ops/ERRORS.json`: every error made, its fix and the automatic antidote that stops it coming back.

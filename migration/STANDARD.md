@@ -1,5 +1,7 @@
 # HeroVerse Production Standard v1 (2026-10-19)
 
+> Scope (SYSTEM.md): these are the execution rules of the structure `structures/guided-prayer-scenic.json`, status **candidate** (2 winners, 2 channels). They are widened or changed only by structure mining (SYSTEM.md stage 1).
+
 One standard. Every rule is measured on breakout videos (vidIQ, read-only) and is checked
 before publication. Evidence: `migration/evidence/vidiq/20261019/`.
 
