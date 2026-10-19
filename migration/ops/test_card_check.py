@@ -34,9 +34,9 @@ class Card(unittest.TestCase):
 
     def test_code_card_interfaces_must_exist_verbatim(self):
         root = str(Path(__file__).resolve().parents[2])
-        ok = "```interfaces\nmigration/mining/accuracy_check.py: def classify(windows, start, end, asr):\n```"
+        ok = "```interfaces\nmigration/production/long_review.py: def watch(file, title, key, models=REVIEW_MODELS):\n```"
         self.assertEqual(c.check(ok, root), [])
-        bad = ok.replace("asr):", "asr, extra):")
+        bad = ok.replace("models=REVIEW_MODELS):", "models=REVIEW_MODELS, extra):")
         self.assertTrue(c.check(bad, root)[0].startswith("INTERFACE_NOT_IN_FILE"))
         self.assertTrue(c.check("```interfaces\nno/such.py: x\n```", root)[0].startswith("INTERFACE_FILE_MISSING"))
 

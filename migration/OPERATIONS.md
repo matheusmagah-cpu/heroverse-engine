@@ -112,7 +112,7 @@ analysis (08:05 UTC) is bound to the same session; the two older routines that r
 
 | Slot (UTC) | What | Where | Runs when |
 |---|---|---|---|
-| 00:20 | native windows of videos never checked, then accuracy.json | mining-accuracy.yml → acquire-reference-window.yml | daily |
+| 00:20 | native windows of videos never checked, then accuracy.json | mining-accuracy.yml (archived: migration/archive/workflows/mining-accuracy.yml) → acquire-reference-window.yml (archived: migration/archive/workflows/acquire-reference-window.yml) | daily |
 | 00:30, 01:30, 03:30, 12:30 | missing images of pilots publishing in the next 72 h (FLUX + 2x upscale) | nightly-images.yml → cf-images.yml | images missing |
 | :13 and :43 hourly | next pilot of the queue (publishes ≤ 48 h, images complete, no render of this script): long video, QA; Shorts handed off | heroverse-runner render.yml (render_queue.py) | queue not empty |
 | after each render | Shorts (QA-PASS render only): selection, own edit, watched review (gemini-3.8-flash only) | shorts.yml (on shorts/inputs.json) | push |
@@ -121,10 +121,10 @@ analysis (08:05 UTC) is bound to the same session; the two older routines that r
 | 07:20, 10:20, 13:20, 16:20, 19:20, 22:20 | retry approvals (ERROR/UNKNOWN), Shorts never reviewed, failed publications | reconcile.yml | work waiting |
 | 07:35, 13:35, 19:35 | the approved Short (one per long video) at its slot | publish-shorts.yml (pending_shorts.py) | Short pending |
 | 07:45 | goal report + scheduler health (waits for the panel until 09:30) | goal-report.yml | daily |
-| 07:50 Sun | packaging mining (3 adjacent niches) | packaging-mining.yml | production idle |
+| 07:50 Sun | packaging mining (3 adjacent niches) | packaging-mining.yml (archived: migration/archive/workflows/packaging-mining.yml) | production idle |
 | 08:05 | hide remaining Portuguese uploads | channel-privacy.yml | daily |
 | 08:05 | **daily Claude analysis**: goal report + intel → decisions protocol → next scripts | scheduled Claude session | daily |
-| 08:30 | structure mining, incremental | structure-mining.yml | production idle |
+| 08:30 | structure mining, incremental | structure-mining.yml (archived: migration/archive/workflows/structure-mining.yml) | production idle |
 | schedule.json | long video at publish_at; Shorts at their slots | YouTube publishAt | — |
 
 **Quota claims need the provider's own words (E29).** A quota is called "spent for the day" only when the recorded `quota_ids` say PerDay; any other 429 is retried after 30 min, and nobody (Claude included) tells the owner otherwise.
@@ -152,7 +152,7 @@ full day ahead, so a provider error or a FAIL has a day to be fixed; quality is 
 4. ERROR/UNKNOWN (quota, fallback reviewer, missing evidence) is retried by `reconcile.yml`; FAIL stops and is reported.
 
 ## Starting any workflow without GitHub API tools
-Commit `migration/requests/<name>.json` with `{"workflow": "file.yml", "inputs": {...}}` to main, through a branch and merge. `requests.yml` dispatches it once and moves the file to `done/`.
+Commit `migration/requests/<name>.json` with `{"workflow": "file.yml", "inputs": {...}}` to main, through a branch and merge. `requests.yml` (archived: migration/archive/workflows/requests.yml) dispatches it once and moves the file to `done/`.
 
 Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003"}}`.
 
@@ -164,7 +164,7 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
   - The prayer sample had 2 usable winners.
   - So every modeling number derived from it is informative only.
 - **Rule from now:**
-  - **Numbers:** every modeling number comes from **measurement of the original audio**: our faster-whisper ASR, YAMNet sound classes and the picture-change meter on natively acquired 60 s windows (`mining/native_metrics.py`).
+  - **Numbers:** every modeling number comes from **measurement of the original audio**: our faster-whisper ASR, YAMNet sound classes and the picture-change meter on natively acquired 60 s windows (`mining/native_metrics.py` (archived: migration/archive/mining/native_metrics.py)).
   - **Validation per video:** a mined video counts only when its own native windows agree ≥ 0.85 with the mined transcript.
   - **Targets:** a format's numbers become targets only with ≥ 8 validated winners (90 % bootstrap intervals). Otherwise they are INSUFFICIENT and shown, never used.
   - **What Gemini keeps:** labelling structure on validated transcripts.
