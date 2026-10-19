@@ -1,0 +1,122 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 14,
+    "picture_changes_per_minute": 27.94,
+    "median_shot_seconds": 2.267,
+    "longest_shot_seconds": 4.233,
+    "motion_median_top_decile_diff": 2.889
+   },
+   "rhythm": {
+    "audio_onsets": 41,
+    "audio_onsets_per_minute": 81.82,
+    "tempo": {
+     "bpm": 58.37,
+     "confidence": 0.084
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.143,
+     "chance_fraction": 0.087,
+     "lift": 1.64
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 3,
+     "visual_events": 14
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -14.9,
+    "loudness_range_lu": 1.8,
+    "true_peak_dbtp": -0.3
+   },
+   "colour": {
+    "mean_brightness": 0.505,
+    "brightness_std_over_time": 0.1053,
+    "mean_saturation": 0.2016,
+    "saturation_std_over_time": 0.0512
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.968,
+     "singing": 0.0,
+     "music": 0.758,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 56,
+     "singing": 0,
+     "music": 6,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 77,
+    "words_per_minute": 153.7,
+    "transcript": "to accept practical help when it is offered with genuine care. Let me also become someone who notices when another person needs encouragement, because the strength you give me can become a source of kindness to someone else. There may be a person listening to this prayer who has spent months trying to recover from a major disappointment. Perhaps a business did not survive, a job ended unexpectedly, or a carefully prepared plan had to be abandoned."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 14.895,
+     "frames": 30
+    },
+    {
+     "label": "music",
+     "start_seconds": 14.4,
+     "end_seconds": 15.855,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 15.36,
+     "end_seconds": 17.775,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 17.28,
+     "end_seconds": 18.255,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 17.76,
+     "end_seconds": 21.135,
+     "frames": 6
+    },
+    {
+     "label": "music",
+     "start_seconds": 20.64,
+     "end_seconds": 22.095,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 21.6,
+     "end_seconds": 29.775,
+     "frames": 16
+    },
+    {
+     "label": "music",
+     "start_seconds": 29.28,
+     "end_seconds": 30.023,
+     "frames": 1
+    }
+   ]
+  }
+ ]
+}

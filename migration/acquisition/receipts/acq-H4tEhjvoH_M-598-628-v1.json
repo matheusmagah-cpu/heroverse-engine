@@ -1,0 +1,32 @@
+{
+  "version": "acquire-window-v1",
+  "request_id": "acq-H4tEhjvoH_M-598-628-v1",
+  "video_id": "H4tEhjvoH_M",
+  "window": [
+    598,
+    628
+  ],
+  "run_id": "39181031092",
+  "status": "WINDOW_RECEIVED_AND_DECODED",
+  "effect_status": "JOB_ID_RECEIVED_NO_RESTART_ALLOWED",
+  "download_tools_call_requests": 1,
+  "progress_polls": 3,
+  "control_response_bytes": 1442,
+  "production": false,
+  "publication": false,
+  "start_reply_received_bytes": 1308,
+  "provider_job_id": "v2_stream_bd2fb47d3fd822a70699",
+  "observed_units_change_since_info": 4,
+  "delivery_http_status": 200,
+  "delivery_host": "pamela88.savenow.to",
+  "media_file": {
+    "bytes": 7436682,
+    "sha256": "e8e5fd0e933dd79f0f4932ec9ee893631976bacf806c5cf1de0e62f40bc08db8"
+  },
+  "returned_duration_seconds": 30.067,
+  "video_height": 1080,
+  "complete_clip_decode_passed": true,
+  "units_used_observed": 4,
+  "completed_at": "2026-10-19T00:33:32.620572+00:00",
+  "release_asset": "native-H4tEhjvoH_M-598-628s-sha256-e8e5fd0e933dd79f0f4932ec9ee893631976bacf806c5cf1de0e62f40bc08db8.mp4"
+}
