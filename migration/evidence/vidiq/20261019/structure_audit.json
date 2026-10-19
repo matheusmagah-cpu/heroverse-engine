@@ -1,0 +1,211 @@
+{
+ "version": "structure-audit-v1",
+ "date": "2026-10-19",
+ "method": "vidIQ video_watch with the same production-audit prompt on every video; booleans are observed presence (not model estimates of numbers); labels per SYSTEM.md 1.4",
+ "videos": [
+  {
+   "id": "OuqwfEgNavE",
+   "role": "winner",
+   "channel": "UCUzhKXXA4vF87u4eOZLILaQ",
+   "breakout": 2310.11,
+   "person_or_figure": false,
+   "caption_box": false,
+   "persistent_cta": false,
+   "cuts_per_min": "2-3",
+   "continuous_camera_motion": true,
+   "viewer_directed_hook_5s": true,
+   "scripture_ref_on_screen": true,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "fXhKzleJhxI",
+   "role": "winner",
+   "channel": "UC3TTATL5b72sjCqxRDFTpWA",
+   "breakout": 1332.76,
+   "person_or_figure": false,
+   "caption_box": false,
+   "persistent_cta": true,
+   "cuts_per_min": "2",
+   "continuous_camera_motion": true,
+   "viewer_directed_hook_5s": true,
+   "scripture_ref_on_screen": true,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "mtWtsL5hOLg",
+   "role": "winner",
+   "channel": "UCiDIx-d75j224E8gEJcBI_w",
+   "breakout": 839.24,
+   "person_or_figure": true,
+   "caption_box": true,
+   "persistent_cta": false,
+   "cuts_per_min": "11-12",
+   "continuous_camera_motion": true,
+   "viewer_directed_hook_5s": true,
+   "scripture_ref_on_screen": true,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "1YkQeS5ankw",
+   "role": "winner",
+   "channel": "UCWMfwuBANjoFpPCVrqCHVtg",
+   "breakout": 424.56,
+   "person_or_figure": true,
+   "caption_box": true,
+   "persistent_cta": true,
+   "cuts_per_min": "8-10",
+   "continuous_camera_motion": true,
+   "viewer_directed_hook_5s": false,
+   "scripture_ref_on_screen": false,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "TjkOf6Dgwb4",
+   "role": "winner",
+   "channel": "UC_h1E8wccvaX1gTtx4VsYXw",
+   "breakout": 402.36,
+   "person_or_figure": true,
+   "caption_box": true,
+   "persistent_cta": true,
+   "cuts_per_min": "6",
+   "continuous_camera_motion": true,
+   "viewer_directed_hook_5s": true,
+   "scripture_ref_on_screen": true,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "tYdS0TngzuQ",
+   "role": "winner",
+   "channel": "UCYHAMIcw4LEqmsCn_SNmjag",
+   "breakout": 116.36,
+   "person_or_figure": false,
+   "caption_box": true,
+   "persistent_cta": true,
+   "cuts_per_min": "1-4",
+   "continuous_camera_motion": true,
+   "viewer_directed_hook_5s": true,
+   "scripture_ref_on_screen": false,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "JGj76i7s0XM",
+   "role": "weak",
+   "channel": "UCYHAMIcw4LEqmsCn_SNmjag",
+   "breakout": null,
+   "person_or_figure": false,
+   "caption_box": true,
+   "persistent_cta": true,
+   "cuts_per_min": "0",
+   "continuous_camera_motion": false,
+   "viewer_directed_hook_5s": false,
+   "scripture_ref_on_screen": false,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "lnULY_fWzgU",
+   "role": "weak",
+   "channel": "UCYHAMIcw4LEqmsCn_SNmjag",
+   "breakout": null,
+   "person_or_figure": false,
+   "caption_box": true,
+   "persistent_cta": true,
+   "cuts_per_min": "0",
+   "continuous_camera_motion": false,
+   "viewer_directed_hook_5s": false,
+   "scripture_ref_on_screen": false,
+   "spoken_outro_amen_cta": false,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  },
+  {
+   "id": "ndv-iT9wZik",
+   "role": "weak",
+   "channel": "UCWMfwuBANjoFpPCVrqCHVtg",
+   "breakout": null,
+   "person_or_figure": true,
+   "caption_box": true,
+   "persistent_cta": true,
+   "cuts_per_min": "2",
+   "continuous_camera_motion": false,
+   "viewer_directed_hook_5s": false,
+   "scripture_ref_on_screen": false,
+   "spoken_outro_amen_cta": true,
+   "recurring_refrain": true,
+   "gratitude_block": true
+  }
+ ],
+ "labels": {
+  "person_or_figure": {
+   "winners": "3/6",
+   "weak": "1/3",
+   "label": "free"
+  },
+  "caption_box": {
+   "winners": "4/6",
+   "weak": "3/3",
+   "label": "free"
+  },
+  "persistent_cta": {
+   "winners": "4/6",
+   "weak": "3/3",
+   "label": "free"
+  },
+  "continuous_camera_motion": {
+   "winners": "6/6",
+   "weak": "0/3",
+   "label": "driver"
+  },
+  "viewer_directed_hook_5s": {
+   "winners": "5/6",
+   "weak": "0/3",
+   "label": "driver"
+  },
+  "scripture_ref_on_screen": {
+   "winners": "4/6",
+   "weak": "0/3",
+   "label": "free"
+  },
+  "spoken_outro_amen_cta": {
+   "winners": "6/6",
+   "weak": "2/3",
+   "label": "free"
+  },
+  "recurring_refrain": {
+   "winners": "6/6",
+   "weak": "3/3",
+   "label": "hygiene"
+  },
+  "gratitude_block": {
+   "winners": "6/6",
+   "weak": "3/3",
+   "label": "hygiene"
+  }
+ },
+ "audit_jobs": {
+  "mtWtsL5hOLg": "job_900612a5",
+  "1YkQeS5ankw": "job_e8f627d4",
+  "TjkOf6Dgwb4": "job_724a11dd",
+  "tYdS0TngzuQ": "job_081f2a83",
+  "JGj76i7s0XM": "job_1727c561",
+  "lnULY_fWzgU": "job_5dfeed71",
+  "ndv-iT9wZik": "job_3179a0e0"
+ },
+ "notes": [
+  "the two highest breakouts (2310, 1333) are the clean grammar (no figure, no caption box, no persistent CTA on OuqwfEgNavE): an indication with n=6, not a rule",
+  "vidIQ wpm estimates (75-120) are not used; exact count on fXhKzleJhxI = 137 wpm (pace.json)"
+ ]
+}
