@@ -1,0 +1,86 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 13,
+    "picture_changes_per_minute": 25.94,
+    "median_shot_seconds": 2.433,
+    "longest_shot_seconds": 4.867,
+    "motion_median_top_decile_diff": 5.254
+   },
+   "rhythm": {
+    "audio_onsets": 51,
+    "audio_onsets_per_minute": 101.77,
+    "tempo": {
+     "bpm": 89.87,
+     "confidence": 0.078
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.154,
+     "chance_fraction": 0.107,
+     "lift": 1.44
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 4,
+     "visual_events": 13
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -16.8,
+    "loudness_range_lu": 2.1,
+    "true_peak_dbtp": -4.1
+   },
+   "colour": {
+    "mean_brightness": 0.2286,
+    "brightness_std_over_time": 0.0061,
+    "mean_saturation": 0.1909,
+    "saturation_std_over_time": 0.0069
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.984,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 61,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 1
+    },
+    "words": 69,
+    "words_per_minute": 137.7,
+    "transcript": "Before the sun rises fully over the horizon, before the world awakens and the demands of another day begin to weigh upon your shoulders. Take a deep breath and remember this precious truth. God knows what your family needs. He sees every sacrifice you make, and has not forgotten your household. Perhaps you woke up this morning with a smile on your face, but a storm in your heart."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 29.775,
+     "frames": 61
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 29.28,
+     "end_seconds": 30.023,
+     "frames": 1
+    }
+   ]
+  }
+ ]
+}
