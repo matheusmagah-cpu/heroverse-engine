@@ -1,0 +1,127 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 3,
+    "picture_changes_per_minute": 5.99,
+    "median_shot_seconds": 5.8,
+    "longest_shot_seconds": 16.533,
+    "motion_median_top_decile_diff": 1.091
+   },
+   "rhythm": {
+    "audio_onsets": 45,
+    "audio_onsets_per_minute": 89.8,
+    "tempo": {
+     "bpm": 200.01,
+     "confidence": 0.032
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.095,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": 0.291995,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 3,
+     "visual_events": 3,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -23.6,
+    "loudness_range_lu": 7.7,
+    "true_peak_dbtp": -7.5
+   },
+   "colour": {
+    "mean_brightness": 0.6423,
+    "brightness_std_over_time": 0.1596,
+    "mean_saturation": 0.1944,
+    "saturation_std_over_time": 0.0913
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.935,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.032
+    },
+    "label_counts": {
+     "speech": 58,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 2,
+     "UNCERTAIN": 2
+    },
+    "words": 53,
+    "words_per_minute": 105.8,
+    "transcript": "it in Kings. After wind, after earthquake, after fire. Stillness. Now the third word, It comes from a root, dakkah, which means to crush, to grind fine, to beat into powder. The adjective form means thin, fine, small. Genesis chapter 41, Pharaoh dreams of seven lean cows and seven thin ears of grain."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 7.695,
+     "frames": 15
+    },
+    {
+     "label": "silence",
+     "start_seconds": 7.2,
+     "end_seconds": 8.175,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 7.68,
+     "end_seconds": 18.255,
+     "frames": 21
+    },
+    {
+     "label": "silence",
+     "start_seconds": 17.76,
+     "end_seconds": 18.735,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 18.24,
+     "end_seconds": 22.575,
+     "frames": 8
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 22.08,
+     "end_seconds": 23.055,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 22.56,
+     "end_seconds": 29.775,
+     "frames": 14
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 29.28,
+     "end_seconds": 30.023,
+     "frames": 1
+    }
+   ]
+  }
+ ]
+}
