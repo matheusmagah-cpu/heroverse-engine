@@ -1,0 +1,97 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 18,
+    "picture_changes_per_minute": 35.92,
+    "median_shot_seconds": 1.933,
+    "longest_shot_seconds": 2.633,
+    "motion_median_top_decile_diff": 9.733
+   },
+   "rhythm": {
+    "audio_onsets": 58,
+    "audio_onsets_per_minute": 115.74,
+    "tempo": {
+     "bpm": 55.99,
+     "confidence": 0.069
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.121,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": 1.005409,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 6,
+     "visual_events": 18,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -14.5,
+    "loudness_range_lu": 1.5,
+    "true_peak_dbtp": -0.4
+   },
+   "colour": {
+    "mean_brightness": 0.3969,
+    "brightness_std_over_time": 0.0679,
+    "mean_saturation": 0.3665,
+    "saturation_std_over_time": 0.0704
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.274,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 61,
+     "singing": 0,
+     "music": 1,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 69,
+    "words_per_minute": 137.7,
+    "transcript": "is that you are near. Father, I pray for peace in my home. Let my home become a place of refuge, a place where people can breathe, a place where people can feel safe, a place where people can feel safe, a place where forgiveness is practiced, a place where your presence is welcomed. Remove unnecessary conflict, remove bitterness, remove tension, remove harsh words, and replace them with patience."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 4.815,
+     "frames": 9
+    },
+    {
+     "label": "music",
+     "start_seconds": 4.32,
+     "end_seconds": 5.295,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 4.8,
+     "end_seconds": 30.023,
+     "frames": 52
+    }
+   ]
+  }
+ ]
+}
