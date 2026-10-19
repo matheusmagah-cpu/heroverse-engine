@@ -180,6 +180,16 @@
     "file": "migration/production/test_script_check.py",
     "contains": "def test_modeling_beat_order"
    }
+  },
+  {
+   "id": "E19",
+   "date": "2026-10-19",
+   "error": "Native window acquisition (the mining's ground truth) refused every reservation: the quota was read by polling a 2026-10-15 provider job that the provider had purged (HTTP 404), so no holdout window was ever acquired",
+   "fix": "On a purged reference job the quota counters are read from the 404 reply itself; check_quota still enforces the free 500-unit plan, the hard-limit header and the unit floor, and refuses when counters are absent",
+   "antidote": {
+    "file": "migration/acquisition/test_acquire_window.py",
+    "contains": "def test_purged_reference_job_still_reads_quota_from_the_reply"
+   }
   }
  ]
 }
