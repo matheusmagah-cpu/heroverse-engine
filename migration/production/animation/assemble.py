@@ -131,7 +131,7 @@ def assemble(work,scenes_path,timing_path,map_path,music,out):
     if abs(timing['frames_total']/24-timeline['voice_seconds'])>1/24:raise ValueError('VOICE_TIMING_MISMATCH')
     source=work/'voice.wav';voice_level=mean_volume(source);music_level=mean_volume(music)
     gain=voice_level-music_level-16 # headroom beyond the required 12dB integrated separation
-    evidence={'voice_mean_db':voice_level,'music_mean_db_before_gain':music_level,'music_gain_db':gain,'mean_separation_db':16,'phrase_timing':'parallel lines, each 1-5 words, all using source sentence timestamps','outputs':{}}
+    evidence={'input_sha256':{name:hashlib.sha256(Path(path).read_bytes()).hexdigest() for name,path in {'voice':source,'music':music,'timeline':work/'timeline.json','scenes':scenes_path,'timing':timing_path,'shorts_map':map_path}.items()},'voice_mean_db':voice_level,'music_mean_db_before_gain':music_level,'music_gain_db':gain,'mean_separation_db':16,'phrase_timing':'parallel lines, each 1-5 words, all using source sentence timestamps','outputs':{}}
     with tempfile.TemporaryDirectory(prefix='assembly-',dir=out) as temp:
         temp=Path(temp)
         mixed=temp/'mixed.wav'
@@ -140,7 +140,7 @@ def assemble(work,scenes_path,timing_path,map_path,music,out):
             vertical=name!='master';sentences=short_sentences(timeline,maps[name]) if vertical else timeline['sentences']
             if vertical and sentences[-1]['text']!=next(s['overlay']['cta_card'] for s in scenes['scenes'] if s.get('overlay',{}).get('cta_card')):raise ValueError('SHORT_CTA_REQUIRED')
             duration=maps[name]['total_s'] if vertical else timeline['voice_seconds']
-            count=sum(round(s['master_end_s']*24)-round(s['master_start_s']*24) for s in maps[name]['spans']) if vertical else timing['frames_total']
+            count=round(maps[name]['total_s']*24) if vertical else timing['frames_total']
             folder=work/('vertical-frames' if vertical else 'hd-frames');pattern=(name+'-%05d.png') if vertical else '%05d.png'
             for index in range(count):
                 frame=folder/(pattern%index)

@@ -13,7 +13,9 @@ START is inclusive, END exclusive. Master output hd-frames/%05d.png is
 1920x1080. Vertical output vertical-frames/<short>-%05d.png is 1080x1920,
 with independent perspective cameras, no cropping or upscaling. Portrait
 chunk indices enumerate short1 then short2, concatenated, while filename
-indices restart at zero within each Short. Span endpoints use round(s*24).
+indices restart at zero within each Short. Output time is mapped through
+source spans at speed1, rendered at fractional source-frame times. Total
+frames = round(total_s*24), avoiding cumulative per-span rounding drift.
 Each frames-<kind>-<START>-<END>.json maps global chunk indices to PNG SHA256.
 Do not reuse old 10fps output. The previous invocation below is retained
 only as the issue card's literal interface anchor, and is now incomplete:

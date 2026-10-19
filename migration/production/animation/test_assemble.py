@@ -11,6 +11,22 @@ class AssemblyTests(unittest.TestCase):
     def test_sentence_boundary(self):
         timeline={'sentences':[{'segment':'S15','text':'A test.','start':0,'end':2}]}
         with self.assertRaises(ValueError):a.short_sentences(timeline,{'spans':[{'scene':'S15','master_start_s':.1,'master_end_s':2}],'total_s':1.9})
+    def test_exact_verse_and_phrase_windows(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path=Path(temp)/'captions.ass';quote='Thou shalt love thy neighbour as thyself.'
+            scenes={'scenes':[{'id':'S06','overlay':{'verse_card':quote,'reference':'Matthew 22:39 (KJV)'}}]}
+            sentences=[{'segment':'S06','text':quote,'start':1.25,'end':3.5}]
+            a.write_ass(path,sentences,scenes,False);text=path.read_text()
+            self.assertIn(quote,text);self.assertIn('Matthew 22:39 (KJV)',text)
+            for event in text.splitlines():
+                if event.startswith('Dialogue:'):self.assertIn('0:00:01.25,0:00:03.50',event)
+            a.write_ass(path,sentences,{'scenes':[]},True)
+            for event in path.read_text().splitlines():
+                if event.startswith('Dialogue:'):
+                    phrase=event.rsplit('}',1)[-1];self.assertTrue(1<=len(phrase.split())<=5)
+                    self.assertIn('0:00:01.25,0:00:03.50',event)
+    def test_invalid_caption_markup(self):
+        with self.assertRaises(ValueError):a.safe_text(r'{\pos(0,0)}inject')
     def test_real_two_second_assembly(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);work=root/'work';out=root/'out';work.mkdir();(work/'hd-frames').mkdir();(work/'vertical-frames').mkdir()

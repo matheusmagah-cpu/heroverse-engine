@@ -12,6 +12,8 @@ ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT))
 from scene_base import s, cam, box, uv, M, bread, bag
 from characters import Character
+from png_manifest import canonical_png
+from frame_mapping import short_frames
 
 
 def smooth(u):
@@ -43,6 +45,8 @@ os.environ['MESA_SHADER_CACHE_DIR']=str(out/'cache'/'mesa')
 timing=load(a.timing);validate_timing(timing)
 s.render.fps=24;s.render.resolution_percentage=100;s.render.image_settings.color_mode='RGB';s.render.image_settings.compression=15
 s.render.film_transparent=False;s.render.use_file_extension=True;s.render.use_stamp=False
+for prop in s.render.bl_rna.properties:
+    if prop.identifier.startswith('use_stamp'):setattr(s.render,prop.identifier,False)
 s.render.threads_mode='FIXED';s.render.threads=max(1,bpy.context.scene.render.threads)
 # Existing original environment is retained, relocated around the bench origin.
 for ob in bpy.data.objects:
@@ -95,25 +99,25 @@ def scene(frame,vertical):
     young.pose(dx,-.15,yaw,t,walk,db,1 if 7<=index<=10 else 0,smooth(u) if index==12 else .5 if index>9 else 0)
     elder.pose(ex,EY,-math.pi/2 if index>=11 else 0,t,t*4 if index>=11 else 0,eb,.5 if index in [0,1,8,9,10] else 0,.6 if index>=8 else 0)
     ground=[(-.35,-.55,.11),(.05,-.50,.11),(.42,-.65,.11)]
-    bagroot.location=(ex+.22,.1,.67);bagroot.rotation_euler=(0,0,0)
+    bagroot.location=(ex+.22,0,.67);bagroot.rotation_euler=(0,0,0)
     if index==1:bagroot.rotation_euler.y=mix(0,.7,u)
     if 2<=index<=7:bagroot.rotation_euler.y=.7
-    if index>=10:bagroot.location=(dx+.28,-.42,.70)
+    if index>=10:bagroot.location=(dx+.10,-.58,.70)
     for k,obj in enumerate(loaves):
         obj.hide_render=False
         if k>0:obj.scale.x=.17 if index>=9 else .24;obj.scale.y=.09 if index>=9 else .11
-        if index==0:obj.location=(.22,.1,.90+k*.035)
+        if index==0:obj.location=(.22,0,.90+k*.035)
         elif index==1:
-            v=smooth((u-.15-k*.12)/.55);obj.location=Vector((.22,.1,.90)).lerp(Vector(ground[k]),v)
+            v=smooth((u-.15-k*.12)/.55);obj.location=Vector((.22,0,.90)).lerp(Vector(ground[k]),v)
         elif index<=6:obj.location=ground[k]
         elif index==7:obj.location=Vector(ground[k]).lerp(Vector((.4+k*.16,-.55,.12)),smooth(u))
         elif index==8:
-            target=(.55,1,.66) if k==0 else (.65+(k-1)*.15,-.45,.90)
+            target=(.55,1,.75) if k==0 else (.65+(k-1)*.15,-.45,.90)
             obj.location=Vector((.4+k*.16,-.55,.12)).lerp(Vector(target),smooth(u))
         elif index==9:
-            obj.location=(.55,1,.66) if k==0 else Vector((.65+(k-1)*.15,-.45,.90)).lerp(Vector((.22,.1,.90)),smooth(u))
+            obj.location=(.55,1,.75) if k==0 else Vector((.65+(k-1)*.15,-.45,.90)).lerp(Vector((.22,0,.90)),smooth(u))
         else:
-            obj.location=(.55,1,.66) if k==0 else bagroot.location+Vector((0,0,.23+(k-1)*.04))
+            obj.location=(.55,1,.75) if k==0 else bagroot.location+Vector((0,0,.23+(k-1)*.04))
     # Constrain wrists to actual carried props rather than detached gestures.
     if index in [0,1,2,3,4,5,6,7,8,9]:
         elder.hand(1,bagroot.location+Vector((.16,-.14,.36)))
@@ -129,7 +133,7 @@ def scene(frame,vertical):
         young.hand(-1,loaves[1].location+Vector((0,0,.04)))
     set_camera(index,u,dx,ex,vertical)
     # Scene15 fade is composited by assembly; body and camera keep moving.
-    s.frame_set(frame+1);bpy.context.view_layer.update()
+    s.frame_set(math.floor(frame)+1,subframe=frame-math.floor(frame));bpy.context.view_layer.update()
 
 
 jobs=[]
@@ -139,11 +143,8 @@ else:
     if not a.shorts:raise ValueError('SHORTS_REQUIRED')
     maps=load(a.shorts)
     for name in ['short1','short2']:
-        local=0
-        for span in maps[name]['spans']:
-            first=round(span['master_start_s']*24);last=round(span['master_end_s']*24)
-            for frame in range(first,last):
-                jobs.append((len(jobs),f'vertical-frames/{name}-{local:05d}.png',frame));local+=1
+        for local,frame in enumerate(short_frames(maps[name])):
+            jobs.append((len(jobs),f'vertical-frames/{name}-{local:05d}.png',frame))
 if not 0<=a.start<a.end<=len(jobs):raise ValueError('CHUNK_RANGE')
 s.render.resolution_x,s.render.resolution_y=(1920,1080) if a.kind=='master' else (1080,1920)
 hashes={};elapsed=[]
@@ -151,6 +152,7 @@ for index,relative,frame in jobs[a.start:a.end]:
     dest=out/relative;dest.parent.mkdir(parents=True,exist_ok=True)
     scene(frame,a.kind=='vertical');s.render.filepath=str(dest)
     started=time.monotonic();bpy.ops.render.render(write_still=True);elapsed.append(time.monotonic()-started)
+    dest.write_bytes(canonical_png(dest.read_bytes()))
     hashes[str(index)]=hashlib.sha256(dest.read_bytes()).hexdigest()
     print('FRAME',index,relative,elapsed[-1],hashes[str(index)],flush=True)
 (out/f'frames-{a.kind}-{a.start}-{a.end}.json').write_text(json.dumps(hashes,sort_keys=True,indent=2)+'\n')

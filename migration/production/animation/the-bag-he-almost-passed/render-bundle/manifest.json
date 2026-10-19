@@ -14,11 +14,18 @@
   ],
   "timing": "required measured --timing",
   "asset_sha256": {
-    "production.py": "83cc63cf61a23f4901f66d35f67f99442ecd99afbc929df6dde77aee75ce74c7",
-    "scene_base.py": "297bbc0b93cdd665d74334ba8456cfa4d3ccfe4376b7969bd677d3f723b6e7f1",
+    "README.txt": "17393b0a03e2c5c6a704d4315eae3ce8e4484725affebe615ef393d011a4f102",
     "characters.py": "3dd4bb3c2edd87a14340dc5f58e96bb210bd5ebee3c9c5653d8fc0908649c1d6",
-    "story.json": "3ffd9d252a6a61830a8c6c202358fa6b5955162673d6d37176dd42d7c46d00c1",
+    "frame_mapping.py": "5349efbe1d55e831cf5fe5596de617bba20b78bce0d90ba42a9eab5ad5168f71",
+    "png_manifest.py": "b22fde173ee688a1d40551036753c7129b99b41526cff566ebe2f9f264dd5864",
+    "production.py": "661f91ad8ad2a76cfdc9db32c15fa0a6dc5064b0fcd097bcb4c38594a16f0abe",
+    "scene_base.py": "297bbc0b93cdd665d74334ba8456cfa4d3ccfe4376b7969bd677d3f723b6e7f1",
     "short-frame-maps.json": "d0713aa0e1f45b27729e83933cba1925c22f0a5ec4813dfce520d168d8f0ca2d",
-    "README.txt": "959593b3435274cd440fb44dc09680a2942434ffe1bc1d5ce14f88af7ba1f47b"
+    "still-S03.png": "452860745abef2391d43ac42c17e0c362bab536448be0c92555670ab309ff107",
+    "still-S08.png": "b39cd01522c29ab3613e3e11f281cdb518062bff03a6a2ff1affd54c96fd9285",
+    "still-S13.png": "b752c51c3877e5b61a121125d859e82384db429b0f65dbabc31c6b963172669c",
+    "story.json": "3ffd9d252a6a61830a8c6c202358fa6b5955162673d6d37176dd42d7c46d00c1",
+    "test_frame_mapping.py": "ef1ecf1000bd6f53f94d72eede3902a8da8aa38c75572d9b76fa76d03471b1ef",
+    "test_png_manifest.py": "32fd65c3478dee5ca43be4ec0d8c34e52c5e8cdd723ec31d077b5d6196662934"
   }
 }
