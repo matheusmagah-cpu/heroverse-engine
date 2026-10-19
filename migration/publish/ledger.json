@@ -32,6 +32,38 @@
     },
     "status": "PASS"
    }
+  },
+  "pilot-004:3a7c6c28b1c806859b36ad8c856b4e425eeedabf84eeaaf6facae1c3fe6b2f24": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist_error": "PLAYLIST_ITEMS_HTTP_404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The playlist identified with the request's \\u003ccode\\u003eplaylistId\\u003c/code\\u003e parameter cannot be found.\",\n    \"errors"
+   },
+   "video_id": "Iegu_RD_wbE",
+   "uploaded_at": "2026-10-19T12:56:36.796658+00:00"
+  },
+  "short:pilot-004:01cb68d9bf1471155b276916d903c25c91745605193ea3f7deb41faada01705c": {
+   "steps": {},
+   "video_id": "SsgCGkM6knQ",
+   "uploaded_at": "2026-10-19T12:57:06.731212+00:00",
+   "long_video_id": "Iegu_RD_wbE",
+   "slot": "2026-10-20T14:00:00Z",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-02.mp4",
+    "seconds": 43.67,
+    "lufs": -15.0,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   }
   }
  }
 }
