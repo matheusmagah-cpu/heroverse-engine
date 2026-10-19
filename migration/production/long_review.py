@@ -140,7 +140,7 @@ def main(pilot_dir, video_path):
     except Exception as e:  # provider trouble is not a verdict: ERROR is retried by reconcile.yml, FAIL is not
         out = {"version": "long-review-v1", "pilot_id": script["pilot_id"], "output_sha256": manifest["output_sha256"],
                "status": "ERROR", "error": f"{type(e).__name__}: {str(e)[:200]}",
-               "failed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+               "failed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "usage": sm.USAGE}
         (d / "out" / "review.json").write_text(json.dumps(out, indent=1) + "\n")
         print(json.dumps({"status": "ERROR", "error": out["error"]}))
         return
@@ -159,7 +159,8 @@ def main(pilot_dir, video_path):
     out = {"version": "long-review-v1", "pilot_id": script["pilot_id"], "output_sha256": manifest["output_sha256"],
            "status": status, "scorecard_hard": hard, "scorecard_reported": reported, "watched_review": review,
            "failed_windows": failed, "measured": measured, "windows": windows, "miner_rows_blocking": proven,
-           "instrument": "structure_mining.py prompt/schema/models via Gemini Files API (same as the reference mining)"}
+           "instrument": "structure_mining.py prompt/schema/models via Gemini Files API (same as the reference mining)",
+           "usage": sm.USAGE}  # tokens per call: the measured cost of one approval
     (d / "out" / "review.json").write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     print(json.dumps({"status": status, "hard": {k: v["pass"] for k, v in hard.items()},
                       "review": {k: review.get(k) for k in (*RUBRIC, "overall", "status")}}))

@@ -37,6 +37,7 @@ import market_panel as mp  # noqa: E402
 from gemini_public_av import FREE_MODELS, ProviderFailure, canonical, sanitized_provider_error  # noqa: E402
 
 WINDOW = 300             # seconds of video per model call
+USAGE = []  # usageMetadata of every successful call in this process (model + token counts), for cost and quota
 MIN_LONG = 8 * 60
 MAX_VIDEO = 75 * 60      # the free tier day is shared; very long ambient videos teach little structure
 UNITS = 600              # Data API units for this run
@@ -129,7 +130,9 @@ def call(payload, key, models):
     for model in models:
         for attempt in range(2):
             try:
-                return model, json.loads(text_of(transport(payload, key, model)))
+                response = transport(payload, key, model)
+                USAGE.append({"model": model, **(response.get("usageMetadata") or {})})
+                return model, json.loads(text_of(response))
             except ProviderFailure as e:
                 last = e.code
                 if "QUOTA" in e.code or "429" in e.code:
