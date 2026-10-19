@@ -1085,6 +1085,17 @@
       "completed_at": "2026-10-19T00:35:51.479981+00:00",
       "run_id": "39181031092",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-cX_DvmKryDU-414-444-v1",
+      "video_id": "cX_DvmKryDU",
+      "start_seconds": 414,
+      "end_seconds": 444,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-19T00:36:05.639892+00:00",
+      "day_utc": "2026-10-19",
+      "units_remaining_at_reservation": 480,
+      "reserved_units": 14
     }
   ]
 }
