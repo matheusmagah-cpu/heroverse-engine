@@ -33,7 +33,10 @@ A code card lists every function, signature and data value it relies on in an ` 
 is assumed.
 
 ## 2. Dot's line
-- Claim: label `dot-working` + comment `CLAIMED <ISO time>`. One task at a time, oldest deadline first; a card that
+- Claim: label `dot-working` + comment `CLAIMED <ISO time>`, and **at once open a draft PR** from the card's branch
+  (`Closes #<issue>`, title like the card). The draft PR is the live channel: PR comments and reviews wake Dot at
+  once, issues only on the hourly check. Claude writes every answer, SPEC-FIX notice and REWORK on that PR (and
+  edits the card on the issue); Dot asks BLOCKED questions on the PR too. Mark the PR ready when delivering. One task at a time, oldest deadline first; a card that
   says "START ONLY AFTER …" waits for that comment.
 - Work only inside ALLOWED PATHS, with the EXACT VALUES. Merge `origin/main` into the branch before delivering (merge
   commit; no rebase, no force-push).
