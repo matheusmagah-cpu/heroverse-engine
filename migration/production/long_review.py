@@ -13,6 +13,7 @@ any publication (strategy/MODELING_SPEC.md section 3):
 Writes out/review.json; prints PASS or FAIL. Never edits QA criteria.
 usage: long_review.py PILOT_DIR VIDEO_MP4
 """
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -138,7 +139,8 @@ def main(pilot_dir, video_path):
                 pass
     except Exception as e:  # provider trouble is not a verdict: ERROR is retried by reconcile.yml, FAIL is not
         out = {"version": "long-review-v1", "pilot_id": script["pilot_id"], "output_sha256": manifest["output_sha256"],
-               "status": "ERROR", "error": f"{type(e).__name__}: {str(e)[:200]}"}
+               "status": "ERROR", "error": f"{type(e).__name__}: {str(e)[:200]}",
+               "failed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
         (d / "out" / "review.json").write_text(json.dumps(out, indent=1) + "\n")
         print(json.dumps({"status": "ERROR", "error": out["error"]}))
         return

@@ -56,9 +56,20 @@ def reviewed_shorts(path):
     return any((s.get("review") or {}).get("status") in ("PASS", "FAIL") for s in json.loads(path.read_text())["shorts"])
 
 
+def quota_spent(rev, now):
+    """True when the last watched review failed on the provider's daily quota after the last 07:00 UTC reset."""
+    if rev.get("status") != "ERROR" or "QUOTA" not in str(rev.get("error", "")) or not rev.get("failed_at"):
+        return False
+    reset = now.replace(hour=7, minute=0, second=0, microsecond=0)
+    if now < reset:
+        reset -= timedelta(days=1)
+    return datetime.fromisoformat(rev["failed_at"].replace("Z", "+00:00")) >= reset
+
+
 def main(production, ledger_path, mode, hours="48"):
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
-    rows = due(production, ledger, datetime.now(timezone.utc), int(hours))
+    now = datetime.now(timezone.utc)
+    rows = due(production, ledger, now, int(hours))
     if mode == "images":  # "PILOT id,id": only the images still missing (never regenerate a recorded one)
         for r in rows:
             if r["missing_images"]:
@@ -78,6 +89,8 @@ def main(production, ledger_path, mode, hours="48"):
             unknown = gate.get("output_sha256") == qa["output_sha256"] and gate.get("decision") == "UNKNOWN"
             if ap.get("approved") and ap.get("output_sha256") == qa["output_sha256"]:
                 print("publish", r["pilot"])  # due rows are never already on YouTube
+            elif quota_spent(rev, now):
+                pass  # the free Gemini quota resets at 07:00 UTC; retrying before that only spends Actions minutes
             elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:
                 print("approve", r["pilot"])
             # Shorts handed off by the render but never made (provider quota or error): made again

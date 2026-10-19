@@ -125,7 +125,7 @@ class Dispatch(unittest.TestCase):
     def test_workflow_isolated_job_and_existing_cron(self):
         root = Path(__file__).resolve().parents[2]
         workflow = (root / '.github/workflows/heartbeat.yml').read_text()
-        self.assertIn("cron: '11,41 * * * *'", workflow)
+        self.assertIn("cron: '41 * * * *'", workflow)   # hourly + the Claude clock at :14 (minutes budget, 2026-10-19)
         self.assertIn('  runner-wake:\n', workflow)
         wake = workflow.split('  runner-wake:\n')[1]
         self.assertNotIn('needs:', wake)
