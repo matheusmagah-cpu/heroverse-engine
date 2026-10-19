@@ -73,12 +73,16 @@ jobs:
         run: python3 -I -B migration/production/long_review.py "migration/production/$PILOT" "$RUNNER_TEMP/video.mp4"
       - name: Approve and record, or record the failure
         if: env.SKIP != '1'
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
           d="migration/production/$PILOT"
           status=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['status'])" "$d/out/review.json")
           # whole-file scan (every frame and sample) of the hash-verified download; complements the sampled review
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null || true
           python3 -I -B migration/production/signal_scan.py "$RUNNER_TEMP/video.mp4" "$d/out/scan.json" || true
+          # stage 3 critique (authenticity, YPP inauthentic/reused content, content rules) on a support model
+          python3 -I -B migration/publish/three_stage.py critique "$d" || true
           # final decision over every dimension (prepublish_gate.py): only PASS approves; UNKNOWN is retried like ERROR
           decision=$(python3 -I -B migration/publish/prepublish_gate.py "$d" "$RUNNER_TEMP/video.mp4" | python3 -I -c "import json,sys;print(json.loads(sys.stdin.read())['decision'])" || true)
           echo "GATE=$decision"
@@ -91,11 +95,11 @@ jobs:
           r = json.load(open(f"{d}/out/review.json")); qa = json.load(open(f"{d}/out/qa.json"))
           w = r["watched_review"]
           json.dump({"approved": True, "output_sha256": qa["output_sha256"],
-                     "reviewer": "HeroVerse automatic gates (owner rule: automatic publication once every gate passes)",
+                     "reviewer": "HeroVerse three-stage approval (owner rule 2026-10-19: mined structure + modeling + authenticity, no person approves)",
                      "reviewed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "qa_status": qa["status"],
                      "gates": {"qa": "PASS", "preflight": "PASS", "scorecard_hard": "PASS",
                                "watched_review": {"overall": w.get("overall"), "model": w.get("model")},
-                               "prepublish_gate": "PASS"},
+                               "prepublish_gate": "PASS", "structure": "PASS", "authenticity": "PASS"},
                      "notes": "Scorecard and watched review in out/review.json; final decision in out/gate.json."},
                     open(f"{d}/inspection/APPROVAL.json", "w"), indent=1)
           PY
@@ -105,7 +109,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$d/out/review.json" "$d/out/gate.json" "$d/out/scan.json" "$d/inspection/APPROVAL.json" 2>/dev/null || git add "$d/out/review.json" "$d/out/gate.json" "$d/out/scan.json" 2>/dev/null || git add "$d/out/review.json"
+          git add "$d/out/review.json" "$d/out/gate.json" "$d/out/scan.json" "$d/out/critique.json" "$d/inspection/APPROVAL.json" 2>/dev/null || git add "$d/out/review.json" "$d/out/gate.json" "$d/out/scan.json" "$d/out/critique.json" 2>/dev/null || git add "$d/out/review.json"
           git commit -q -m "$msg"
           for i in 1 2 3 4; do
             git pull --rebase -q origin main && git push -q origin HEAD:main && break

@@ -153,6 +153,15 @@ Every item and its source are written into the package. An item without evidence
   - `active` → `retired` when our own results or the market turn against them.
 - **Decisions** follow `strategy/DECISIONS.md` (90 % evidence for strategy). Defects and compliance are always fixed.
 
+## Approval: the system approves, no person does (owner, 2026-10-19)
+
+A video publishes when it passes **three stages**, each measured against the mining:
+1. **Structure.** It carries the drivers and hygiene of its validated structure and the measured publication package (`publish/three_stage.py` `structure_rows`).
+2. **Modeling.** Execution quality: frozen QA v3, the signal scan, and the designated watched review (`prepublish_gate.py`).
+3. **Authenticity.** Every rule of stage 3 (`three_stage.py` `authenticity_rows`), plus the support-model critique (`out/critique.json`).
+
+`prepublish_gate.py` blocks on every row. FAIL is final until the video is fixed. UNKNOWN (missing evidence) is retried and is never a pass. "Visible on the channel" means uploaded and not made private by a recorded unschedule.
+
 ## Loop discipline
 
 - Every stage writes its evidence to the repo. A stage that cannot meet its bar stops the loop **at that stage** and says why. Nothing is skipped and nothing is loosened.
