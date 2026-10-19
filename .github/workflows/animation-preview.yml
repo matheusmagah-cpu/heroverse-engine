@@ -1,0 +1,79 @@
+name: HeroVerse animation preview (chosen frames, committed as small JPGs)
+# Iteration tool for the render bundle: renders the chosen frames of the dispatched ref on a standard runner and
+# commits 960-px JPG previews + timings back to that same branch, so they can be inspected without artifact access.
+# Never runs on main (previews never land on main by this path).
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: Folder under migration/production/animation
+        required: true
+        default: the-bag-he-almost-passed
+      master:
+        description: Space-separated master frame indices
+        required: true
+        default: '0'
+      vertical:
+        description: Space-separated vertical indices (may be empty)
+        required: false
+        default: ''
+      extra:
+        description: Extra bundle arguments after START END (e.g. --timing preview-timing.json)
+        required: false
+        default: ''
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-animation-preview-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  preview:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      BLENDER_URL: https://download.blender.org/release/Blender4.3/blender-4.3.2-linux-x64.tar.xz
+      BLENDER_SHA_URL: https://download.blender.org/release/Blender4.3/blender-4.3.2.sha256
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Blender 4.3.2 (official sha256)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends libegl1 libgl1 libgl1-mesa-dri libglx-mesa0 libxi6 libxxf86vm1 \
+            libxfixes3 libxrender1 libxkbcommon0 libsm6 libice6 ffmpeg >/dev/null
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/b.tar.xz" "$BLENDER_URL"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/b.sha256" "$BLENDER_SHA_URL"
+          echo "$(grep blender-4.3.2-linux-x64.tar.xz "$RUNNER_TEMP/b.sha256" | cut -d' ' -f1)  $RUNNER_TEMP/b.tar.xz" | sha256sum -c -
+          tar -xf "$RUNNER_TEMP/b.tar.xz" -C "$RUNNER_TEMP"
+          echo "BLENDER=$RUNNER_TEMP/blender-4.3.2-linux-x64/blender" >> "$GITHUB_ENV"
+      - name: Render the chosen frames
+        env:
+          PROJECT: ${{ inputs.project }}
+          MASTER: ${{ inputs.master }}
+          VERTICAL: ${{ inputs.vertical }}
+          EXTRA: ${{ inputs.extra }}
+        run: |
+          case "$PROJECT" in *[!a-z0-9-]*|'') echo BAD_PROJECT; exit 1;; esac
+          B="migration/production/animation/$PROJECT/render-bundle"; O="$RUNNER_TEMP/out"; mkdir -p "$O"
+          P="migration/production/animation/$PROJECT/previews/${{ github.run_id }}"; mkdir -p "$P"
+          echo '[' > "$P/timings.json"; first=1
+          one() { kind=$1; i=$2
+            case "$i" in *[!0-9]*) echo BAD_INDEX; exit 1;; esac
+            t0=$(date +%s.%N)
+            ( cd "$B" && RENDER_OUT="$O" "$BLENDER" -b -t 0 --python production.py -- "$kind" "$i" "$((i + 1))" $EXTRA ) > "$P/$kind-$i.log" 2>&1 || { tail -30 "$P/$kind-$i.log"; }
+            t1=$(date +%s.%N)
+            [ $first = 1 ] || echo ',' >> "$P/timings.json"; first=0
+            echo "{\"kind\": \"$kind\", \"index\": $i, \"wall_s\": $(echo "$t1 - $t0" | bc)}" >> "$P/timings.json"
+            png=$(ls -t "$O"/*/*.png 2>/dev/null | head -1)
+            if [ -n "$png" ]; then ffmpeg -v error -y -i "$png" -vf "scale='if(gt(iw,ih),960,-2)':'if(gt(iw,ih),-2,960)'" -q:v 3 "$P/$kind-$i.jpg"; rm -f "$png"; fi
+            tail -c 4000 "$P/$kind-$i.log" > "$P/$kind-$i.tail.log"; rm -f "$P/$kind-$i.log"
+          }
+          for i in $MASTER; do one master "$i"; done
+          for i in $VERTICAL; do one vertical "$i"; done
+          echo ']' >> "$P/timings.json"; cat "$P/timings.json"; ls -la "$P"
+      - name: Commit previews to this branch
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "migration/production/animation/${{ inputs.project }}/previews/${{ github.run_id }}"
+          git commit -m "Animation previews (run ${{ github.run_id }})" || exit 0
+          for i in 1 2 3; do git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
