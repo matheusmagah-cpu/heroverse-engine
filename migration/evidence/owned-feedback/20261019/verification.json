@@ -1,0 +1,58 @@
+{
+  "version": "owned-feedback-verification-v1",
+  "new_tests": 22,
+  "ci_suites_locally_passed": 36,
+  "source_integrity": [
+    {
+      "path": "migration/evidence/observer-38911991729.json",
+      "sha256": "2fc5060440d8fa94f5c32a22a5ff108b0b1073012d4e07e63516e22c902f30f5",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/20261013-official-observations.json",
+      "sha256": "31930714a7c812bd2817c1a55b2294d0ab2d02ac99d9430fb73c38f036a996a7",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/observer-38749052276.json",
+      "sha256": "49032963a3e1bd0421c487ea6e4aa6d8f5e96b0f2d6153506f9e62d2f25a1a3c",
+      "unchanged": true
+    },
+    {
+      "path": "migration/publish/ledger.json",
+      "sha256": "c10858b9ffc69c3ab427bbb1fb42ea703d469446e3bcfcf9fb48aefc7cd023e6",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/observer-38581303747.json",
+      "sha256": "c4a02e477a4b31766bf8ec5fdeafad283ab42c7d988ad081d3112531d9cc686e",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/owned-reach-two-report-receipt.json",
+      "sha256": "ff0aade1c6fce7e0d69a00d94829384b550f3ed0627d6a667815a868782c3da6",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/qa_criteria_v3.json",
+      "sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+      "unchanged": true
+    }
+  ],
+  "snapshot_count": 4,
+  "video_count": 55,
+  "observations": 232,
+  "daily_reach_rows": 4,
+  "classified_sufficient": 0,
+  "verified_exact_checkpoints": 0,
+  "report_gzip_sha256": "f46bc98f4085909456c19bf5e4783d681f1251b0ffae39c8d8b73543fb256845",
+  "uncompressed_sha256": "49760315e0e6122b91ae3a22565f1767c8c2eb94a4863155f75682f94188adbd",
+  "deterministic_repeat": true,
+  "network_calls": 0,
+  "gates_changed": false,
+  "review_corrections": [
+    "CTR representation remains provider_raw_representation_unverified, never promoted to ratio",
+    "Source ERROR rows retain numbers as SOURCE_REPORTED_UNVERIFIED",
+    "Raw numeric source values retained alongside normalized numeric values"
+  ]
+}
