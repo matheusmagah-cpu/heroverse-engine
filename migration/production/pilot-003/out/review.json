@@ -3,5 +3,6 @@
  "pilot_id": "pilot-003",
  "output_sha256": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50",
  "status": "ERROR",
- "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+ "error": "ProviderFailure: HTTP_503_UNAVAILABLE",
+ "failed_at": "2026-10-19T10:20:02Z"
 }
