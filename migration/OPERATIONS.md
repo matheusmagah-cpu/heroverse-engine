@@ -152,6 +152,19 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
 - **Sample:** ≥ 10 prayer winners from ≥ 4 policy-clean channels, plus median and weak videos of the same channels, chosen with vidIQ outliers and the panel.
 - **Work:** Dot card #136 (native_metrics + native_plan, tested). Claude wires the nightly measurement windows into the heartbeat and recomputes MODELING_SPEC from MEASURED numbers only.
 
+## Qualify before use (owner rule 2026-10-19)
+An instrument is a strong point **before** it is used, proven on known answers with criteria frozen before any result
+(SHA-256 asserted in the tests). If it fails, it is fixed and qualified again; it is never used while failing.
+- **Mining:** the native instrument (ASR + YAMNet + picture meter) and Gemini labelling, run on our own renders, whose
+  every word, timing, Scripture and picture change is known (incl. degraded copies) — card #140, workflow
+  `mining-qualification.yml`.
+- **Authenticity and originality:** a detector against our pilots and the mined competitor transcripts and titles
+  (verbatim, close paraphrase, title near-copies; Scripture never counts), qualified on a labelled holdout corpus and
+  enforced in `script_check.py` — card #141.
+- **Modeling:** exact numbers, honest 90 % intervals (simulated coverage 85–95 %) and every acceptance rule proven to
+  accept good scripts and reject each bad mutation — card #142 (after #136).
+Claude reviews each delivery against its card; a stage is called a strong point only with its qualification PASS on file.
+
 ## Pipeline gates (never edited after results)
 1. **Script acceptance** (before images): `production/script_check.py` — PR checks run it on every pilot a PR touches.
 2. **Render QA (frozen criteria v2).**
