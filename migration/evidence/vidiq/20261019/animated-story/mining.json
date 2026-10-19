@@ -1,0 +1,55 @@
+{
+ "version": "mining-v1",
+ "structure_candidate": "animated-faith-story",
+ "date": "2026-10-19",
+ "rule": "Facts are numbers returned by vidIQ or exact counts. Model descriptions of a watched video are labelled 'observed (model)'. Nothing here is a validated driver: the SYSTEM.md 1.5 bar (>=6 winners, >=4 channels, >=3 weak contrasts, counted drivers) is not met.",
+ "calls": [
+  {"tool": "vidiq_outliers", "query": "short animated Christian story about kindness, loving your neighbor, Bible lesson cartoon, 2 to 5 minutes", "type": "long", "within": "sixMonths", "min_views": 20000},
+  {"tool": "vidiq_outliers", "query": "animated short film for adults about faith, kindness to a stranger, helping a neighbor, emotional story with narration", "type": "short", "within": "sixMonths", "min_views": 50000},
+  {"tool": "vidiq_video_watch", "video": "EENCUww2Lns"}
+ ],
+ "facts_measured": {
+  "long_outliers_relevant": [
+   {"video": "EENCUww2Lns", "channel": "Three-Quarter Town", "seconds": 306, "breakout": 132.1, "views": 394000, "audience": "general", "note": "closest to our adult everyday-kindness tone"},
+   {"video": "I28u7ik4gXU", "channel": "KidSpark", "seconds": 166, "breakout": 81.7, "audience": "kids"},
+   {"video": "F8S1iak3mgc", "channel": "Queen English Kids", "seconds": 307, "breakout": 72.34, "audience": "kids"},
+   {"video": "2iI5z0JIugY", "channel": "Christianitee Kids", "seconds": 541, "breakout": 73.7, "audience": "kids"},
+   {"video": "3XW0yL1bIAM", "channel": "Saddleback Kids", "seconds": 280, "breakout": 42.65, "audience": "kids"},
+   {"video": "0f5nCN49aiI", "channel": "MiniKoVerse", "seconds": 324, "breakout": 24.66, "audience": "kids"}
+  ],
+  "short_outliers_relevant": [
+   {"video": "TZY1ZVbGbtQ", "channel": "MUK&72", "seconds": 179, "breakout": 196.52, "views": 726368, "topic": "neighbour lesson"},
+   {"video": "LDasx9ioYgU", "channel": "Close Call TV", "seconds": 25, "breakout": 58.74, "views": 793246, "topic": "stranger's kindness"},
+   {"video": "U63FLvNSbHg", "channel": "warmly", "seconds": 21, "breakout": 17.61, "views": 611246, "topic": "small act of kindness, short film"},
+   {"video": "IkEGOlHKNVU", "channel": "Ali Baba", "seconds": 46, "breakout": 29.93, "audience": "kids"}
+  ],
+  "short_outliers_excluded": "NT Sayings (12 results, 6-second loops, breakout 2-9: not a story structure); movie trailers/clips (H2JSqUFfM78, 7XLo4HJwJhM): not animation we can make; Telugu live-action (7ApwgzYS3JI).",
+  "counts": {"long_relevant": 6, "long_adult_audience": 1, "short_relevant": 4, "channels_distinct": 10}
+ },
+ "observed_model_EENCUww2Lns": {
+  "source": "vidiq_video_watch (model description, not a count)",
+  "hook_0_15s": "one continuous wide/medium establishing shot; a vulnerable small character appears; no dialogue; soft music",
+  "beats": [[0, 60, "encounter + shelter"], [60, 108, "rescue indoors"], [109, 158, "bond"], [158, 202, "time passes"], [203, 252, "turning point"], [253, 306, "resolution: the kindness is returned"]],
+  "animation": "full 3D character animation (skeletal motion, breathing, blinks, expressions); smooth ~24-30 fps; consistent characters across shots",
+  "camera": "wide / medium / close-up alternation; slow dollies and pull-backs; ~6-8 cuts per minute",
+  "audio": "sung narration (male tenor ballad), acoustic guitar + piano + strings, low foley (rain, footsteps, fire)",
+  "on_screen_text": "none",
+  "cta": "none",
+  "ending": "slow pull-back wide shot, music resolves, fade to black"
+ },
+ "hypotheses_not_validated": [
+  "Real character animation at >=24 unique fps is necessary (1 adult winner observed; no weak contrast yet).",
+  "One continuous, wordless establishing shot with a vulnerable character works as the hook for adults (1 of 1 observed).",
+  "Cut rate of 6-8 per minute with slow camera moves (1 of 1 observed).",
+  "Story arc: small need -> hesitation or encounter -> act of kindness -> quiet consequence -> resolution (matches 1 adult winner and the kids' moral stories).",
+  "Short story Shorts of 20-60 s about a stranger's kindness break out (3 adult-audience Shorts, no audit yet)."
+ ],
+ "unavailable": [
+  "Retention curves and CTR of third-party videos (not exposed by vidIQ).",
+  "Thumbnails: i.ytimg.com is blocked in both environments.",
+  "Weak contrasts of the same shape: none mined yet.",
+  "Audits of the Shorts (vidiq_watch_shortform_content) and of the kids' long videos: not run (budget).",
+  "Whether a spoken (not sung) narrator performs better: no evidence either way."
+ ],
+ "status": "candidate: may be piloted (SYSTEM.md 1.5), never scaled, until validated"
+}

@@ -1,0 +1,85 @@
+{
+ "version": "animation-qa-criteria-v1",
+ "structure": "migration/structures/animated-faith-story.json",
+ "frozen_at_utc": "2026-10-19T19:31:00Z",
+ "frozen_before_first_render": true,
+ "scope": "Animated narrated story (master 16:9 + derived 9:16 Shorts). Separate from pilot-qa-criteria-v3, which stays frozen and unchanged for guided-prayer-scenic.",
+ "failure_policy": "Every row blocks. A FAIL is fixed in the work, never by editing these criteria. Criteria are not edited after results to pass.",
+ "master": {
+  "full_decode_without_errors": true,
+  "width": 1920, "height": 1080, "native_render": true, "upscaled": false,
+  "codec": "h264", "pix_fmt": "yuv420p", "fps": 24,
+  "duration_seconds": [151.0, 153.0],
+  "audio": "one stream, AAC 48 kHz stereo",
+  "av_duration_delta_seconds_max": 0.05
+ },
+ "shorts": {
+  "count": 2,
+  "width": 1080, "height": 1920, "native_render": true, "upscaled": false, "cropped_from_master": false,
+  "codec": "h264", "pix_fmt": "yuv420p", "fps": 24,
+  "duration_seconds": {"short1": [41.0, 43.0], "short2": [40.0, 42.0]},
+  "source_spans_recorded": true,
+  "source_speed": [0.98, 1.02],
+  "starts_on_sentence_start": true,
+  "ends_on_sentence_end_or_cta": true,
+  "self_contained_cta": true
+ },
+ "fluidity": {
+  "unique_render_fps_min": 24,
+  "unique_frame_ratio_min": 0.97,
+  "hold_seconds_max": 2.0,
+  "rule": "Counted from the render manifest: every output frame maps to one rendered frame hash. Repeating a frame to reach the container rate is a duplicate and counts against unique_frame_ratio. Only holds declared in scenes.json are exempt, each at most hold_seconds_max."
+ },
+ "continuity": {
+  "every_scene_in_scenes_json_rendered": true,
+  "frame_set_contiguous_no_missing_no_duplicate_index": true,
+  "chunk_joins_decoded_end_to_end": true,
+  "chunk_boundary_frames_identical_on_rerender": true,
+  "scene_end_state_equals_next_start_state": "checked from scenes.json state fields (character position, held props, wardrobe); a mismatch is a FAIL unless the scene declares a cut with a reason"
+ },
+ "audio": {
+  "integrated_lufs": [-16.0, -14.0],
+  "true_peak_dbtp_max": -1.0,
+  "voice_engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_model_hash_pinned": true,
+  "flite_or_espeak_direct_voice": false,
+  "accepted_words_per_minute": [115, 150],
+  "wer_vs_script_max": 0.05,
+  "singing_presence_max": 0.0,
+  "music_owned_generator_with_hash": true,
+  "music_under_voice_db_min": 12.0
+ },
+ "subtitles": {
+  "srt_present_for_master_and_each_short": true,
+  "text_equals_narration_exactly": true,
+  "cue_start_offset_seconds_max": 0.15,
+  "cue_end_offset_seconds_max": 0.25,
+  "timing_source": "the voice timeline (per-sentence start/end), never estimated",
+  "shorts_burned_phrase_words": [1, 5]
+ },
+ "scripture": {
+  "quote": "Thou shalt love thy neighbour as thyself.",
+  "reference": "Matthew 22:39",
+  "translation": "KJV",
+  "spoken_exactly": true,
+  "card_text_exactly": true,
+  "card_only_while_spoken": true
+ },
+ "cta": {
+  "text": "Subscribe to this channel for more stories of everyday faith.",
+  "spoken_exactly_in_master_and_each_short": true,
+  "on_screen_exactly_in_master_and_each_short": true,
+  "position": "last segment; master ends within 1.0 s after it; never mid-story"
+ },
+ "render_identity": {
+  "fields": ["script_sha256", "scenes_sha256", "voice_wav_sha256", "music_sha256", "srt_sha256", "bundle_sha256 (each file)", "blender_version", "engine", "samples", "fps", "resolution", "criteria_sha256"],
+  "rule": "One render_id = sha256 of the canonical JSON of these fields. Any change makes a new render_id; review and approval bind to it."
+ },
+ "rights": {
+  "no_third_party_footage_or_characters": true,
+  "characters_and_assets_generated_by_our_code": true,
+  "script_original_with_public_domain_scripture_only": true
+ },
+ "perceptual_review_required_before_approval": "Watched critique with timestamps (acting, expressions, camera, rhythm, voice, finish) by the designated review, plus the three-stage approval. A structure that is only a candidate is piloted, never scaled.",
+ "not_claimed": ["Audience response, CTR, retention or revenue", "That the candidate structure is validated"]
+}
