@@ -2,32 +2,27 @@
  "version": "channel-config-receipt-v1",
  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
  "channel_json": "migration/structures/channel.json",
- "mode": "apply",
- "applied": true,
- "changed_fields": [
-  "description",
-  "keywords"
- ],
+ "mode": "plan",
+ "applied": false,
+ "changed_fields": [],
  "rows": [
   {
    "setting": "description",
    "field": "brandingSettings.channel.description",
-   "current": "Practical faith for the moment between prayer and action.\n\nHeroVerse turns Christian wisdom into clear next steps through original English narration, commentary, and cinematic storytelling. We explore faith under pressure, spiritual growth, discipline, leadership, purpose, prayer, and hope—always with one honest tension and one useful takeaway.\n\nOur standard is simple: every new video must add meaningful perspective, substantive editing, and real value. No empty inspiration. No recycled promise.\n\nSubscribe for Christian motivation designed to move beyond emotion and into action.\n",
+   "current": "HeroVerse is a quiet place to pray in English with Scripture, at night and in the morning.\n\nEach prayer is written for HeroVerse and read slowly, with King James Bible verses shown on screen, so you can pray along: gratitude at the end of the day, honest words for what was hard, and trust for tomorrow.\n\nOn this channel you will find:\n- Night prayers to end your day with God and rest in His care\n- Morning prayers to begin the day with Scripture\n- Short stories of everyday faith\n\nNew prayers every week. Subscribe so you can pray with us again tonight.\n\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\" - Psalm 4:8 (KJV)\n\nDisclosure: our narration uses a synthetic voice and our pictures are generated; every prayer is original and every verse is quoted from the public-domain KJV.",
    "target": "HeroVerse is a quiet place to pray in English with Scripture, at night and in the morning.\n\nEach prayer is written for HeroVerse and read slowly, with King James Bible verses shown on screen, so you can pray along: gratitude at the end of the day, honest words for what was hard, and trust for tomorrow.\n\nOn this channel you will find:\n- Night prayers to end your day with God and rest in His care\n- Morning prayers to begin the day with Scripture\n- Short stories of everyday faith\n\nNew prayers every week. Subscribe so you can pray with us again tonight.\n\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\" - Psalm 4:8 (KJV)\n\nDisclosure: our narration uses a synthetic voice and our pictures are generated; every prayer is original and every verse is quoted from the public-domain KJV.",
    "source": "6/6 winners: first line says what and when, a list of what you will find, a subscribe line; 2/6 quote a verse; 1/6 discloses AI (we disclose: honesty rule)",
    "verified_at": "2026-10-19",
-   "status": "CHANGE",
-   "applied": false
+   "status": "SAME"
   },
   {
    "setting": "keywords",
    "field": "brandingSettings.channel.keywords",
-   "current": "\"Christian motivation\" \"practical faith\" \"spiritual growth\" \"biblical wisdom\" \"faith in action\" \"prayer and purpose\" \"Christian encouragement\" \"Christian storytelling\" \"cinematic Christian stories\" \"Bible based motivation\" \"discipline and faith\" \"leadership and faith\" \"God's timing\" \"hope and purpose\" \"Christian life\"",
+   "current": "\"night prayer\" \"bedtime prayer\" \"prayer before sleep\" \"morning prayer\" \"christian prayer\" \"daily prayer\" KJV Scripture \"gratitude prayer\" \"everyday faith\"",
    "target": "\"night prayer\" \"bedtime prayer\" \"prayer before sleep\" \"morning prayer\" \"christian prayer\" \"daily prayer\" KJV Scripture \"gratitude prayer\" \"everyday faith\"",
    "source": "most frequent terms in the 6 winners' video tags (vidiq_get_videos_by_ids 2026-10-19), 10 terms, no stuffing",
    "verified_at": "2026-10-19",
-   "status": "CHANGE",
-   "applied": false
+   "status": "SAME"
   },
   {
    "setting": "country",
@@ -63,8 +58,8 @@
   "brandingSettings": {
    "channel": {
     "title": "HeroVerse",
-    "description": "Practical faith for the moment between prayer and action.\n\nHeroVerse turns Christian wisdom into clear next steps through original English narration, commentary, and cinematic storytelling. We explore faith under pressure, spiritual growth, discipline, leadership, purpose, prayer, and hope—always with one honest tension and one useful takeaway.\n\nOur standard is simple: every new video must add meaningful perspective, substantive editing, and real value. No empty inspiration. No recycled promise.\n\nSubscribe for Christian motivation designed to move beyond emotion and into action.\n",
-    "keywords": "\"Christian motivation\" \"practical faith\" \"spiritual growth\" \"biblical wisdom\" \"faith in action\" \"prayer and purpose\" \"Christian encouragement\" \"Christian storytelling\" \"cinematic Christian stories\" \"Bible based motivation\" \"discipline and faith\" \"leadership and faith\" \"God's timing\" \"hope and purpose\" \"Christian life\"",
+    "description": "HeroVerse is a quiet place to pray in English with Scripture, at night and in the morning.\n\nEach prayer is written for HeroVerse and read slowly, with King James Bible verses shown on screen, so you can pray along: gratitude at the end of the day, honest words for what was hard, and trust for tomorrow.\n\nOn this channel you will find:\n- Night prayers to end your day with God and rest in His care\n- Morning prayers to begin the day with Scripture\n- Short stories of everyday faith\n\nNew prayers every week. Subscribe so you can pray with us again tonight.\n\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\" - Psalm 4:8 (KJV)\n\nDisclosure: our narration uses a synthetic voice and our pictures are generated; every prayer is original and every verse is quoted from the public-domain KJV.",
+    "keywords": "\"night prayer\" \"bedtime prayer\" \"prayer before sleep\" \"morning prayer\" \"christian prayer\" \"daily prayer\" KJV Scripture \"gratitude prayer\" \"everyday faith\"",
     "defaultLanguage": "en",
     "country": "US"
    },
@@ -75,7 +70,7 @@
   "localizations": {
    "en_US": {
     "title": "HeroVerse",
-    "description": "Practical faith for the moment between prayer and action.\n\nHeroVerse turns Christian wisdom into clear next steps through original English narration, commentary, and cinematic storytelling. We explore faith under pressure, spiritual growth, discipline, leadership, purpose, prayer, and hope—always with one honest tension and one useful takeaway.\n\nOur standard is simple: every new video must add meaningful perspective, substantive editing, and real value. No empty inspiration. No recycled promise.\n\nSubscribe for Christian motivation designed to move beyond emotion and into action.\n"
+    "description": "HeroVerse is a quiet place to pray in English with Scripture, at night and in the morning.\n\nEach prayer is written for HeroVerse and read slowly, with King James Bible verses shown on screen, so you can pray along: gratitude at the end of the day, honest words for what was hard, and trust for tomorrow.\n\nOn this channel you will find:\n- Night prayers to end your day with God and rest in His care\n- Morning prayers to begin the day with Scripture\n- Short stories of everyday faith\n\nNew prayers every week. Subscribe so you can pray with us again tonight.\n\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\" - Psalm 4:8 (KJV)\n\nDisclosure: our narration uses a synthetic voice and our pictures are generated; every prayer is original and every verse is quoted from the public-domain KJV."
    }
   }
  },
@@ -83,8 +78,8 @@
   "brandingSettings": {
    "channel": {
     "title": "HeroVerse",
-    "description": "Practical faith for the moment between prayer and action.\n\nHeroVerse turns Christian wisdom into clear next steps through original English narration, commentary, and cinematic storytelling. We explore faith under pressure, spiritual growth, discipline, leadership, purpose, prayer, and hope—always with one honest tension and one useful takeaway.\n\nOur standard is simple: every new video must add meaningful perspective, substantive editing, and real value. No empty inspiration. No recycled promise.\n\nSubscribe for Christian motivation designed to move beyond emotion and into action.\n",
-    "keywords": "\"Christian motivation\" \"practical faith\" \"spiritual growth\" \"biblical wisdom\" \"faith in action\" \"prayer and purpose\" \"Christian encouragement\" \"Christian storytelling\" \"cinematic Christian stories\" \"Bible based motivation\" \"discipline and faith\" \"leadership and faith\" \"God's timing\" \"hope and purpose\" \"Christian life\"",
+    "description": "HeroVerse is a quiet place to pray in English with Scripture, at night and in the morning.\n\nEach prayer is written for HeroVerse and read slowly, with King James Bible verses shown on screen, so you can pray along: gratitude at the end of the day, honest words for what was hard, and trust for tomorrow.\n\nOn this channel you will find:\n- Night prayers to end your day with God and rest in His care\n- Morning prayers to begin the day with Scripture\n- Short stories of everyday faith\n\nNew prayers every week. Subscribe so you can pray with us again tonight.\n\n\"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.\" - Psalm 4:8 (KJV)\n\nDisclosure: our narration uses a synthetic voice and our pictures are generated; every prayer is original and every verse is quoted from the public-domain KJV.",
+    "keywords": "\"night prayer\" \"bedtime prayer\" \"prayer before sleep\" \"morning prayer\" \"christian prayer\" \"daily prayer\" KJV Scripture \"gratitude prayer\" \"everyday faith\"",
     "defaultLanguage": "en",
     "country": "US"
    },
@@ -93,5 +88,5 @@
    }
   }
  },
- "at": "2026-10-19T20:32:00.746969+00:00"
+ "at": "2026-10-19T20:33:07.698279+00:00"
 }
