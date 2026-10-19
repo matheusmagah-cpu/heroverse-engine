@@ -1,0 +1,1480 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-007",
+ "rubric_model": "gemini-3.6-flash",
+ "candidates_considered": 1385,
+ "shortlist": [
+  {
+   "start": 1419.924,
+   "end": 1455.147,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "Here is your commitment for today:",
+     "start": 1419.924,
+     "end": 1422.697
+    },
+    {
+     "segment": "payoff",
+     "text": "before answering the first message or request that makes you tense, pause.",
+     "start": 1422.877,
+     "end": 1428.445
+    },
+    {
+     "segment": "payoff",
+     "text": "Name the concern to God in one sentence.",
+     "start": 1428.625,
+     "end": 1432.06
+    },
+    {
+     "segment": "payoff",
+     "text": "Thank him for one real gift.",
+     "start": 1432.24,
+     "end": 1434.8
+    },
+    {
+     "segment": "payoff",
+     "text": "Then pray, Jesus, guide my next words in your peace.",
+     "start": 1434.98,
+     "end": 1439.183
+    },
+    {
+     "segment": "payoff",
+     "text": "After that, give the most truthful and considerate response you can.",
+     "start": 1439.363,
+     "end": 1444.163
+    },
+    {
+     "segment": "payoff",
+     "text": "If you need time, say so kindly.",
+     "start": 1444.343,
+     "end": 1447.287
+    },
+    {
+     "segment": "payoff",
+     "text": "You can carry John fourteen, verse twenty-seven with you as you practice this one deliberate response.",
+     "start": 1447.467,
+     "end": 1455.147
+    }
+   ],
+   "segments": [
+    "payoff"
+   ],
+   "reference": null,
+   "measured_score": 0.8896,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.9868421052631579,
+    "resolution": 1.0,
+    "length_fit": 0.8089199999999983
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 9.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.0,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Highly actionable practical commitment for managing morning communication stress.",
+    "hook_line": "Pause before answering tense messages",
+    "title": "Do This Before Responding to Stressful Messages"
+   },
+   "final_score": 0.8758,
+   "hook": "Pause before answering tense messages",
+   "title": "Do This Before Responding to Stressful Messages"
+  },
+  {
+   "start": 1243.848,
+   "end": 1278.249,
+   "sentences": [
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "Now the Lord of peace himself give you peace always by all means.",
+     "start": 1243.848,
+     "end": 1248.968
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "The Lord be with you all.",
+     "start": 1249.148,
+     "end": 1251.111
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "Carry this blessing into a change of plans.",
+     "start": 1252.591,
+     "end": 1255.855
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "Your peaceful morning may soon include traffic, a delayed appointment, or a conversation you did not expect.",
+     "start": 1256.035,
+     "end": 1264.355
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "You can return to prayer within that moment.",
+     "start": 1264.535,
+     "end": 1267.564
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "You do not have to protect these minutes by resenting everything that comes afterward.",
+     "start": 1267.744,
+     "end": 1273.824
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "You can ask for peace in the situation as it is.",
+     "start": 1274.004,
+     "end": 1278.249
+    }
+   ],
+   "segments": [
+    "day-scripture-peace-always",
+    "day-reflection-changing-plans"
+   ],
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "measured_score": 0.814,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.9090909090909091,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7760400000000027
+   },
+   "rubric": {
+    "index": 14,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Connects spiritual blessing to practical everyday disruptions like traffic.",
+    "hook_line": "Peace when your plans get delayed",
+    "title": "How to Stay Peaceful When Plans Change"
+   },
+   "final_score": 0.8556,
+   "hook": "Peace when your plans get delayed",
+   "title": "How to Stay Peaceful When Plans Change"
+  },
+  {
+   "start": 1206.348,
+   "end": 1251.111,
+   "sentences": [
+    {
+     "segment": "day-reflection-today",
+     "text": "You are here, in this morning.",
+     "start": 1206.348,
+     "end": 1208.759
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Father, help me live within the day you have given me.",
+     "start": 1209.939,
+     "end": 1213.736
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "I bring tomorrow's questions to you and ask for wisdom about any preparation needed today.",
+     "start": 1213.916,
+     "end": 1220.785
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Then help me return to the present with a willing heart.",
+     "start": 1220.965,
+     "end": 1224.699
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "I want to taste my breakfast, hear the person speaking, and do the task I have begun.",
+     "start": 1224.879,
+     "end": 1231.236
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Keep me attentive to moments I might rush past.",
+     "start": 1231.416,
+     "end": 1235.107
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Help me leave room for an unexpected kindness and enough patience to recognize an unexpected need.",
+     "start": 1235.287,
+     "end": 1242.668
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "Now the Lord of peace himself give you peace always by all means.",
+     "start": 1243.848,
+     "end": 1248.968
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "The Lord be with you all.",
+     "start": 1249.148,
+     "end": 1251.111
+    }
+   ],
+   "segments": [
+    "day-reflection-today",
+    "day-prayer-today",
+    "day-scripture-peace-always"
+   ],
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "measured_score": 0.8992,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.4807692307692308,
+    "scripture": 1.0,
+    "promise": 0.9615384615384616,
+    "resolution": 1.0,
+    "length_fit": 0.8094799999999941
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Grounds the listener gently in the present moment with relatable daily detail like breakfast.",
+    "hook_line": "Live within the day you are given",
+    "title": "A Morning Prayer to Stay Present Today"
+   },
+   "final_score": 0.8547
+  },
+  {
+   "start": 817.877,
+   "end": 864.535,
+   "sentences": [
+    {
+     "segment": "stillness-two",
+     "text": "You do not need to rehearse their whole story.",
+     "start": 817.877,
+     "end": 821.312
+    },
+    {
+     "segment": "stillness-two",
+     "text": "Remember their face, or simply their name.",
+     "start": 821.492,
+     "end": 824.82
+    },
+    {
+     "segment": "stillness-two",
+     "text": "Hold that person before God for this brief quiet moment.",
+     "start": 825.0,
+     "end": 829.245
+    },
+    {
+     "segment": "stillness-two",
+     "text": "You can pray, Lord, help me love them well today.",
+     "start": 829.425,
+     "end": 833.223
+    },
+    {
+     "segment": "scripture-hope",
+     "text": "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.",
+     "start": 836.903,
+     "end": 846.844
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "You can bring an unfinished situation into these words.",
+     "start": 848.324,
+     "end": 852.569
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "Perhaps you are waiting for a reply, a decision, or a change that has taken longer than expected.",
+     "start": 852.749,
+     "end": 860.387
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "Hope can help you remain open to goodness while you wait.",
+     "start": 860.567,
+     "end": 864.535
+    }
+   ],
+   "segments": [
+    "stillness-two",
+    "scripture-hope",
+    "reflection-hope"
+   ],
+   "reference": "Romans 15:13 (KJV)",
+   "measured_score": 0.8373,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6930693069306931,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7336799999999994
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Very gentle and practical instruction on how to intercede for loved ones.",
+    "hook_line": "Hold a friend in quiet prayer",
+    "title": "How to Pray for Someone Right Now"
+   },
+   "final_score": 0.8499,
+   "hook": "Hold a friend in quiet prayer",
+   "title": "How to Pray for Someone Right Now"
+  },
+  {
+   "start": 1412.621,
+   "end": 1455.147,
+   "sentences": [
+    {
+     "segment": "commitment-prepare",
+     "text": "The aim is one attentive response when your usual habit would be to hurry.",
+     "start": 1412.621,
+     "end": 1418.744
+    },
+    {
+     "segment": "payoff",
+     "text": "Here is your commitment for today:",
+     "start": 1419.924,
+     "end": 1422.697
+    },
+    {
+     "segment": "payoff",
+     "text": "before answering the first message or request that makes you tense, pause.",
+     "start": 1422.877,
+     "end": 1428.445
+    },
+    {
+     "segment": "payoff",
+     "text": "Name the concern to God in one sentence.",
+     "start": 1428.625,
+     "end": 1432.06
+    },
+    {
+     "segment": "payoff",
+     "text": "Thank him for one real gift.",
+     "start": 1432.24,
+     "end": 1434.8
+    },
+    {
+     "segment": "payoff",
+     "text": "Then pray, Jesus, guide my next words in your peace.",
+     "start": 1434.98,
+     "end": 1439.183
+    },
+    {
+     "segment": "payoff",
+     "text": "After that, give the most truthful and considerate response you can.",
+     "start": 1439.363,
+     "end": 1444.163
+    },
+    {
+     "segment": "payoff",
+     "text": "If you need time, say so kindly.",
+     "start": 1444.343,
+     "end": 1447.287
+    },
+    {
+     "segment": "payoff",
+     "text": "You can carry John fourteen, verse twenty-seven with you as you practice this one deliberate response.",
+     "start": 1447.467,
+     "end": 1455.147
+    }
+   ],
+   "segments": [
+    "commitment-prepare",
+    "payoff"
+   ],
+   "reference": null,
+   "measured_score": 0.8232,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.8333333333333334,
+    "resolution": 1.0,
+    "length_fit": 0.8989600000000064
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Strong conceptual opening on breaking the habit of hurrying.",
+    "hook_line": "Break the habit of rushing today",
+    "title": "A Simple Routine to Stop Hurrying"
+   },
+   "final_score": 0.8493
+  },
+  {
+   "start": 829.425,
+   "end": 869.088,
+   "sentences": [
+    {
+     "segment": "stillness-two",
+     "text": "You can pray, Lord, help me love them well today.",
+     "start": 829.425,
+     "end": 833.223
+    },
+    {
+     "segment": "scripture-hope",
+     "text": "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.",
+     "start": 836.903,
+     "end": 846.844
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "You can bring an unfinished situation into these words.",
+     "start": 848.324,
+     "end": 852.569
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "Perhaps you are waiting for a reply, a decision, or a change that has taken longer than expected.",
+     "start": 852.749,
+     "end": 860.387
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "Hope can help you remain open to goodness while you wait.",
+     "start": 860.567,
+     "end": 864.535
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "You do not need to predict the outcome to ask God for peace.",
+     "start": 864.715,
+     "end": 869.088
+    }
+   ],
+   "segments": [
+    "stillness-two",
+    "scripture-hope",
+    "reflection-hope"
+   ],
+   "reference": "Romans 15:13 (KJV)",
+   "measured_score": 0.878,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7954545454545454,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9865200000000004
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Encouraging prayer for navigating unfinished situations and waiting.",
+    "hook_line": "Pray this while waiting for answers",
+    "title": "A Simple Prayer for Waiting and Hope"
+   },
+   "final_score": 0.8412
+  },
+  {
+   "start": 1209.939,
+   "end": 1251.111,
+   "sentences": [
+    {
+     "segment": "day-prayer-today",
+     "text": "Father, help me live within the day you have given me.",
+     "start": 1209.939,
+     "end": 1213.736
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "I bring tomorrow's questions to you and ask for wisdom about any preparation needed today.",
+     "start": 1213.916,
+     "end": 1220.785
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Then help me return to the present with a willing heart.",
+     "start": 1220.965,
+     "end": 1224.699
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "I want to taste my breakfast, hear the person speaking, and do the task I have begun.",
+     "start": 1224.879,
+     "end": 1231.236
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Keep me attentive to moments I might rush past.",
+     "start": 1231.416,
+     "end": 1235.107
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Help me leave room for an unexpected kindness and enough patience to recognize an unexpected need.",
+     "start": 1235.287,
+     "end": 1242.668
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "Now the Lord of peace himself give you peace always by all means.",
+     "start": 1243.848,
+     "end": 1248.968
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "The Lord be with you all.",
+     "start": 1249.148,
+     "end": 1251.111
+    }
+   ],
+   "segments": [
+    "day-prayer-today",
+    "day-scripture-peace-always"
+   ],
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "measured_score": 0.8465,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.4081632653061224,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.953119999999999
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Clear prayer petition to stay present and avoid rushing through the day.",
+    "hook_line": "Help me live in today only",
+    "title": "A Prayer to Live Intentionally Today"
+   },
+   "final_score": 0.8386
+  },
+  {
+   "start": 1213.916,
+   "end": 1251.111,
+   "sentences": [
+    {
+     "segment": "day-prayer-today",
+     "text": "I bring tomorrow's questions to you and ask for wisdom about any preparation needed today.",
+     "start": 1213.916,
+     "end": 1220.785
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Then help me return to the present with a willing heart.",
+     "start": 1220.965,
+     "end": 1224.699
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "I want to taste my breakfast, hear the person speaking, and do the task I have begun.",
+     "start": 1224.879,
+     "end": 1231.236
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Keep me attentive to moments I might rush past.",
+     "start": 1231.416,
+     "end": 1235.107
+    },
+    {
+     "segment": "day-prayer-today",
+     "text": "Help me leave room for an unexpected kindness and enough patience to recognize an unexpected need.",
+     "start": 1235.287,
+     "end": 1242.668
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "Now the Lord of peace himself give you peace always by all means.",
+     "start": 1243.848,
+     "end": 1248.968
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "The Lord be with you all.",
+     "start": 1249.148,
+     "end": 1251.111
+    }
+   ],
+   "segments": [
+    "day-prayer-today",
+    "day-scripture-peace-always"
+   ],
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "measured_score": 0.8305,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.3448275862068965,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.8878000000000066
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Focuses directly on surrendering tomorrow's anxiety to receive today's peace.",
+    "hook_line": "Leave tomorrow's worries with God",
+    "title": "A Morning Prayer for Tomorrow's Anxiety"
+   },
+   "final_score": 0.8272
+  },
+  {
+   "start": 286.264,
+   "end": 316.219,
+   "sentences": [
+    {
+     "segment": "scripture-christ-peace",
+     "text": "Peace I leave with you, my peace I give unto you:",
+     "start": 286.264,
+     "end": 290.019
+    },
+    {
+     "segment": "scripture-christ-peace",
+     "text": "not as the world giveth, give I unto you.",
+     "start": 290.199,
+     "end": 293.612
+    },
+    {
+     "segment": "scripture-christ-peace",
+     "text": "Let not your heart be troubled, neither let it be afraid.",
+     "start": 293.792,
+     "end": 298.059
+    },
+    {
+     "segment": "reflection-receive-peace",
+     "text": "Jesus speaks these words to disciples facing a difficult farewell.",
+     "start": 299.539,
+     "end": 304.765
+    },
+    {
+     "segment": "reflection-receive-peace",
+     "text": "You can hear them in a morning that also feels uncertain.",
+     "start": 304.945,
+     "end": 309.255
+    },
+    {
+     "segment": "reflection-receive-peace",
+     "text": "His gift does not depend on every person agreeing with you or every plan working smoothly.",
+     "start": 309.435,
+     "end": 316.219
+    }
+   ],
+   "segments": [
+    "scripture-christ-peace",
+    "reflection-receive-peace"
+   ],
+   "reference": "John 14:27 (KJV)",
+   "measured_score": 0.8822,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.8823529411764706,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.5981999999999994
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Opens with scripture; gives comfort for an uncertain morning.",
+    "hook_line": "Finding peace in an uncertain morning",
+    "title": "A Scripture for When Morning Feels Uncertain"
+   },
+   "final_score": 0.8229
+  },
+  {
+   "start": 953.163,
+   "end": 996.724,
+   "sentences": [
+    {
+     "segment": "reflection-supported",
+     "text": "The psalm gives you a place to bring a burden.",
+     "start": 953.163,
+     "end": 956.683
+    },
+    {
+     "segment": "reflection-supported",
+     "text": "You may also need another person to help you carry today's practical responsibilities.",
+     "start": 956.863,
+     "end": 963.369
+    },
+    {
+     "segment": "reflection-supported",
+     "text": "You can pray and ask for that help.",
+     "start": 963.549,
+     "end": 966.237
+    },
+    {
+     "segment": "reflection-supported",
+     "text": "You can tell a trusted friend that the morning feels hard, accept a meal, or ask someone to share a task.",
+     "start": 966.417,
+     "end": 974.268
+    },
+    {
+     "segment": "reflection-supported",
+     "text": "Receiving care does not make your prayer less sincere.",
+     "start": 974.448,
+     "end": 978.501
+    },
+    {
+     "segment": "reflection-supported",
+     "text": "It can be one of the ways you acknowledge that you were never meant to manage everything alone.",
+     "start": 978.681,
+     "end": 985.295
+    },
+    {
+     "segment": "prayer-help",
+     "text": "Father, I entrust this weight to you and ask for the support I need.",
+     "start": 986.475,
+     "end": 991.488
+    },
+    {
+     "segment": "prayer-help",
+     "text": "Help me name my need clearly instead of hoping someone will guess it.",
+     "start": 991.668,
+     "end": 996.724
+    }
+   ],
+   "segments": [
+    "reflection-supported",
+    "prayer-help"
+   ],
+   "reference": null,
+   "measured_score": 0.8203,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8490566037735848,
+    "scripture": 0.4,
+    "promise": 0.4716981132075472,
+    "resolution": 1.0,
+    "length_fit": 0.8575599999999985
+   },
+   "rubric": {
+    "index": 11,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Relatable message encouraging asking for practical help when overwhelmed.",
+    "hook_line": "You don't have to manage alone",
+    "title": "Why It Is Okay to Ask for Help"
+   },
+   "final_score": 0.8181
+  },
+  {
+   "start": 1422.877,
+   "end": 1455.147,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "before answering the first message or request that makes you tense, pause.",
+     "start": 1422.877,
+     "end": 1428.445
+    },
+    {
+     "segment": "payoff",
+     "text": "Name the concern to God in one sentence.",
+     "start": 1428.625,
+     "end": 1432.06
+    },
+    {
+     "segment": "payoff",
+     "text": "Thank him for one real gift.",
+     "start": 1432.24,
+     "end": 1434.8
+    },
+    {
+     "segment": "payoff",
+     "text": "Then pray, Jesus, guide my next words in your peace.",
+     "start": 1434.98,
+     "end": 1439.183
+    },
+    {
+     "segment": "payoff",
+     "text": "After that, give the most truthful and considerate response you can.",
+     "start": 1439.363,
+     "end": 1444.163
+    },
+    {
+     "segment": "payoff",
+     "text": "If you need time, say so kindly.",
+     "start": 1444.343,
+     "end": 1447.287
+    },
+    {
+     "segment": "payoff",
+     "text": "You can carry John fourteen, verse twenty-seven with you as you practice this one deliberate response.",
+     "start": 1447.467,
+     "end": 1455.147
+    }
+   ],
+   "segments": [
+    "payoff"
+   ],
+   "reference": null,
+   "measured_score": 0.8191,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.6907999999999992
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Direct practical step, though sentence opening is slightly abrupt.",
+    "hook_line": "Pause before responding in tension",
+    "title": "A Quick Habit for Stressful Messages"
+   },
+   "final_score": 0.8176
+  },
+  {
+   "start": 51.479,
+   "end": 92.0,
+   "sentences": [
+    {
+     "segment": "prayer-first-request",
+     "text": "I am grateful that I can speak honestly with you.",
+     "start": 51.479,
+     "end": 55.084
+    },
+    {
+     "segment": "prayer-first-request",
+     "text": "Help me with the part I understand, and guide me through the part I cannot see.",
+     "start": 55.264,
+     "end": 60.981
+    },
+    {
+     "segment": "prayer-first-request",
+     "text": "I offer you this morning, with its unfinished plans and ordinary responsibilities.",
+     "start": 61.161,
+     "end": 67.433
+    },
+    {
+     "segment": "prayer-first-request",
+     "text": "Please teach me to receive your peace while I take the next faithful step.",
+     "start": 67.613,
+     "end": 72.797
+    },
+    {
+     "segment": "scripture-hearts-minds",
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+     "start": 73.977,
+     "end": 81.977
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "You have heard an invitation to bring everything to God.",
+     "start": 83.457,
+     "end": 87.703
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "The older phrase about being careful speaks to anxious care.",
+     "start": 87.883,
+     "end": 92.0
+    }
+   ],
+   "segments": [
+    "prayer-first-request",
+    "scripture-hearts-minds",
+    "reflection-requests"
+   ],
+   "reference": "Philippians 4:7 (KJV)",
+   "measured_score": 0.8412,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5555555555555555,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9791599999999999
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Honest prayer about taking steps forward when the path isn't completely clear.",
+    "hook_line": "A prayer for unfinished plans",
+    "title": "Praying When You Cannot See Ahead"
+   },
+   "final_score": 0.8165
+  },
+  {
+   "start": 67.613,
+   "end": 110.917,
+   "sentences": [
+    {
+     "segment": "prayer-first-request",
+     "text": "Please teach me to receive your peace while I take the next faithful step.",
+     "start": 67.613,
+     "end": 72.797
+    },
+    {
+     "segment": "scripture-hearts-minds",
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+     "start": 73.977,
+     "end": 81.977
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "You have heard an invitation to bring everything to God.",
+     "start": 83.457,
+     "end": 87.703
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "The older phrase about being careful speaks to anxious care.",
+     "start": 87.883,
+     "end": 92.0
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "You can take your responsibilities seriously while bringing their weight into prayer.",
+     "start": 92.18,
+     "end": 97.748
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "You may still have unanswered questions when these minutes end.",
+     "start": 97.928,
+     "end": 102.515
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "You can still walk toward your responsibilities with those words beside you:",
+     "start": 102.695,
+     "end": 107.9
+    },
+    {
+     "segment": "reflection-requests",
+     "text": "hearts and minds kept through Christ.",
+     "start": 108.08,
+     "end": 110.917
+    }
+   ],
+   "segments": [
+    "prayer-first-request",
+    "scripture-hearts-minds",
+    "reflection-requests"
+   ],
+   "reference": "Philippians 4:7 (KJV)",
+   "measured_score": 0.815,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.9782608695652174,
+    "scripture": 1.0,
+    "promise": 0.8152173913043478,
+    "resolution": 0.4,
+    "length_fit": 0.86784
+   },
+   "rubric": {
+    "index": 13,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Comforting reminder to move forward in peace even with unanswered questions.",
+    "hook_line": "Take the next faithful step today",
+    "title": "Finding Peace When Questions Remain"
+   },
+   "final_score": 0.806
+  },
+  {
+   "start": 1061.181,
+   "end": 1102.765,
+   "sentences": [
+    {
+     "segment": "day-transition",
+     "text": "You have brought your worry, your work, your home, and your loved ones before God.",
+     "start": 1061.181,
+     "end": 1066.643
+    },
+    {
+     "segment": "day-transition",
+     "text": "These next readings can accompany the small choices through which your day takes shape.",
+     "start": 1066.823,
+     "end": 1072.967
+    },
+    {
+     "segment": "day-transition",
+     "text": "You can listen for one verse that speaks to the situation ahead of you.",
+     "start": 1073.147,
+     "end": 1078.181
+    },
+    {
+     "segment": "day-transition",
+     "text": "Keep it close enough to remember when the room grows busy or your attention begins to scatter.",
+     "start": 1078.361,
+     "end": 1084.932
+    },
+    {
+     "segment": "day-scripture-word",
+     "text": "Great peace have they which love thy law:",
+     "start": 1086.312,
+     "end": 1089.149
+    },
+    {
+     "segment": "day-scripture-word",
+     "text": "and nothing shall offend them.",
+     "start": 1089.329,
+     "end": 1091.569
+    },
+    {
+     "segment": "day-reflection-word",
+     "text": "You can receive this verse as an invitation to love God's instruction.",
+     "start": 1093.049,
+     "end": 1098.809
+    },
+    {
+     "segment": "day-reflection-word",
+     "text": "The psalm celebrates a life shaped by his word.",
+     "start": 1098.989,
+     "end": 1102.765
+    }
+   ],
+   "segments": [
+    "day-transition",
+    "day-scripture-word",
+    "day-reflection-word"
+   ],
+   "reference": "Psalm 119:165 (KJV)",
+   "measured_score": 0.8437,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9366399999999976
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 7.0,
+    "stands_alone": 7.0,
+    "emotional_payoff": 7.5,
+    "shareability": 7.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Starts mid-thought with reference to next readings, but gives sound advice.",
+    "hook_line": "Carry one verse into your day",
+    "title": "Finding God's Peace in Everyday Moments"
+   },
+   "final_score": 0.7875
+  },
+  {
+   "start": 1503.456,
+   "end": 1558.976,
+   "sentences": [
+    {
+     "segment": "blessing-introduction",
+     "text": "Let them settle beside the concern you named at the beginning.",
+     "start": 1503.456,
+     "end": 1507.808
+    },
+    {
+     "segment": "blessing-introduction",
+     "text": "You can carry that concern into your day with prayer still open and your next step held before God.",
+     "start": 1507.988,
+     "end": 1515.241
+    },
+    {
+     "segment": "blessing-keep-grace",
+     "text": "The LORD bless thee, and keep thee:",
+     "start": 1516.421,
+     "end": 1519.109
+    },
+    {
+     "segment": "blessing-keep-grace",
+     "text": "The LORD make his face shine upon thee, and be gracious unto thee:",
+     "start": 1519.289,
+     "end": 1524.068
+    },
+    {
+     "segment": "blessing-peace",
+     "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+     "start": 1525.548,
+     "end": 1530.071
+    },
+    {
+     "segment": "closing-prayer",
+     "text": "Father, thank you for receiving this morning's prayer.",
+     "start": 1531.751,
+     "end": 1535.356
+    },
+    {
+     "segment": "closing-prayer",
+     "text": "I entrust my attention, my words, and the people I love to your care.",
+     "start": 1535.536,
+     "end": 1540.955
+    },
+    {
+     "segment": "closing-prayer",
+     "text": "Help me carry what I have heard into the next ordinary moment.",
+     "start": 1541.135,
+     "end": 1545.721
+    },
+    {
+     "segment": "closing-prayer",
+     "text": "May my response be patient, my work honest, and my care practical.",
+     "start": 1545.901,
+     "end": 1551.171
+    },
+    {
+     "segment": "closing-prayer",
+     "text": "I go forward asking for your wisdom and receiving your grace.",
+     "start": 1551.351,
+     "end": 1556.044
+    },
+    {
+     "segment": "closing-prayer",
+     "text": "In the name of Jesus, amen.",
+     "start": 1556.224,
+     "end": 1558.976
+    }
+   ],
+   "segments": [
+    "blessing-introduction",
+    "blessing-keep-grace",
+    "blessing-peace",
+    "closing-prayer"
+   ],
+   "reference": "Numbers 6:24-25 (KJV)",
+   "measured_score": 0.8239,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.64,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.37919999999999165
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 5.5,
+    "stands_alone": 6.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Opens abruptly with reference to previous context, though includes Aaron's blessing.",
+    "hook_line": "A morning blessing and prayer",
+    "title": "A Morning Blessing for Your Day"
+   },
+   "final_score": 0.0
+  }
+ ],
+ "chosen": [
+  {
+   "start": 1419.924,
+   "end": 1455.147,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "Here is your commitment for today:",
+     "start": 1419.924,
+     "end": 1422.697
+    },
+    {
+     "segment": "payoff",
+     "text": "before answering the first message or request that makes you tense, pause.",
+     "start": 1422.877,
+     "end": 1428.445
+    },
+    {
+     "segment": "payoff",
+     "text": "Name the concern to God in one sentence.",
+     "start": 1428.625,
+     "end": 1432.06
+    },
+    {
+     "segment": "payoff",
+     "text": "Thank him for one real gift.",
+     "start": 1432.24,
+     "end": 1434.8
+    },
+    {
+     "segment": "payoff",
+     "text": "Then pray, Jesus, guide my next words in your peace.",
+     "start": 1434.98,
+     "end": 1439.183
+    },
+    {
+     "segment": "payoff",
+     "text": "After that, give the most truthful and considerate response you can.",
+     "start": 1439.363,
+     "end": 1444.163
+    },
+    {
+     "segment": "payoff",
+     "text": "If you need time, say so kindly.",
+     "start": 1444.343,
+     "end": 1447.287
+    },
+    {
+     "segment": "payoff",
+     "text": "You can carry John fourteen, verse twenty-seven with you as you practice this one deliberate response.",
+     "start": 1447.467,
+     "end": 1455.147
+    }
+   ],
+   "segments": [
+    "payoff"
+   ],
+   "reference": null,
+   "measured_score": 0.8896,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.9868421052631579,
+    "resolution": 1.0,
+    "length_fit": 0.8089199999999983
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 9.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.0,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Highly actionable practical commitment for managing morning communication stress.",
+    "hook_line": "Pause before answering tense messages",
+    "title": "Do This Before Responding to Stressful Messages"
+   },
+   "final_score": 0.8758,
+   "hook": "Pause before answering tense messages",
+   "title": "Do This Before Responding to Stressful Messages"
+  },
+  {
+   "start": 1243.848,
+   "end": 1278.249,
+   "sentences": [
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "Now the Lord of peace himself give you peace always by all means.",
+     "start": 1243.848,
+     "end": 1248.968
+    },
+    {
+     "segment": "day-scripture-peace-always",
+     "text": "The Lord be with you all.",
+     "start": 1249.148,
+     "end": 1251.111
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "Carry this blessing into a change of plans.",
+     "start": 1252.591,
+     "end": 1255.855
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "Your peaceful morning may soon include traffic, a delayed appointment, or a conversation you did not expect.",
+     "start": 1256.035,
+     "end": 1264.355
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "You can return to prayer within that moment.",
+     "start": 1264.535,
+     "end": 1267.564
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "You do not have to protect these minutes by resenting everything that comes afterward.",
+     "start": 1267.744,
+     "end": 1273.824
+    },
+    {
+     "segment": "day-reflection-changing-plans",
+     "text": "You can ask for peace in the situation as it is.",
+     "start": 1274.004,
+     "end": 1278.249
+    }
+   ],
+   "segments": [
+    "day-scripture-peace-always",
+    "day-reflection-changing-plans"
+   ],
+   "reference": "2 Thessalonians 3:16 (KJV)",
+   "measured_score": 0.814,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.9090909090909091,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7760400000000027
+   },
+   "rubric": {
+    "index": 14,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Connects spiritual blessing to practical everyday disruptions like traffic.",
+    "hook_line": "Peace when your plans get delayed",
+    "title": "How to Stay Peaceful When Plans Change"
+   },
+   "final_score": 0.8556,
+   "hook": "Peace when your plans get delayed",
+   "title": "How to Stay Peaceful When Plans Change"
+  },
+  {
+   "start": 817.877,
+   "end": 864.535,
+   "sentences": [
+    {
+     "segment": "stillness-two",
+     "text": "You do not need to rehearse their whole story.",
+     "start": 817.877,
+     "end": 821.312
+    },
+    {
+     "segment": "stillness-two",
+     "text": "Remember their face, or simply their name.",
+     "start": 821.492,
+     "end": 824.82
+    },
+    {
+     "segment": "stillness-two",
+     "text": "Hold that person before God for this brief quiet moment.",
+     "start": 825.0,
+     "end": 829.245
+    },
+    {
+     "segment": "stillness-two",
+     "text": "You can pray, Lord, help me love them well today.",
+     "start": 829.425,
+     "end": 833.223
+    },
+    {
+     "segment": "scripture-hope",
+     "text": "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost.",
+     "start": 836.903,
+     "end": 846.844
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "You can bring an unfinished situation into these words.",
+     "start": 848.324,
+     "end": 852.569
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "Perhaps you are waiting for a reply, a decision, or a change that has taken longer than expected.",
+     "start": 852.749,
+     "end": 860.387
+    },
+    {
+     "segment": "reflection-hope",
+     "text": "Hope can help you remain open to goodness while you wait.",
+     "start": 860.567,
+     "end": 864.535
+    }
+   ],
+   "segments": [
+    "stillness-two",
+    "scripture-hope",
+    "reflection-hope"
+   ],
+   "reference": "Romans 15:13 (KJV)",
+   "measured_score": 0.8373,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6930693069306931,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7336799999999994
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Very gentle and practical instruction on how to intercede for loved ones.",
+    "hook_line": "Hold a friend in quiet prayer",
+    "title": "How to Pray for Someone Right Now"
+   },
+   "final_score": 0.8499,
+   "hook": "Hold a friend in quiet prayer",
+   "title": "How to Pray for Someone Right Now"
+  }
+ ]
+}
