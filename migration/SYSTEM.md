@@ -15,7 +15,12 @@ repeatable shape of a video:
 The format may change whenever mining proves a better structure **in the same line** (English
 Christian prayer and devotion) that does not conflict with the channel. No format is frozen.
 
+Every stage, **from the channel configuration to the pinned comment**, is held to the same bar:
+- **ultra-professional and measured;**
+- **better than the market's current best.** For every measurable attribute, our target is the **best** value among the validated winners, never their median (`strategy/BEAT_THE_REFERENCE_RULE.md`). Where we can measure quality ourselves (sync, loudness, sharpness, caption accuracy, policy), our bar is stricter than any winner shows.
+
 ```
+ 0 CHANNEL CONFIGURATION (once, then kept true by stage 6)
  1 MINE structures ─► 2 MODEL ─► 3 AUTHENTICITY + CRITIQUE ─► 4 SHORTS from the long ─► 5 PUBLISH
         ▲                                                                                      │
         └────────────────────────── 6 LIVE INTELLIGENCE (measure, catalogue, decide) ◄─────────┘
@@ -32,6 +37,22 @@ Christian prayer and devotion) that does not conflict with the channel. No forma
 | GitHub Actions + Dot | Running and building everything | Public repo; Dot works only through cards |
 
 Nothing else is added unless a stage cannot meet its bar without it, and that is proven first.
+
+## 0. Channel configuration (once, then audited by stage 6)
+
+The channel is configured as a top Christian prayer channel, and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
+- **the official YouTube Help pages**, quoted verbatim (Dot reads them; this environment cannot reach support.google.com);
+- **what the validated winners' channels do**, measured with vidIQ.
+
+| Setting | Set by | Rule |
+|---|---|---|
+| Name, handle, profile picture, banner (sizes per Help) | owner in Studio (the handle cannot be set by the API) | Evidence-based spec in `structures/channel.json` |
+| Channel description and keywords; country, default language; trailer for non-subscribers | API (`channels.update` brandingSettings) | From the winners' channels and Help, with no keyword stuffing |
+| Home sections and playlists, one per active structure | API (`channelSections`, `playlists`) | Every video goes into its structure's playlist |
+| Upload defaults: category, language, licence, comments, description template | Studio, plus the per-video API fields | Category = the most frequent among the validated winners (measured, not assumed) |
+| Altered/synthetic disclosure | per video (`containsSyntheticMedia`, already on) | Help: realistic synthetic voice narration requires disclosure |
+
+`structures/channel.json` records each setting's value, its source, and when it was last verified. Stage 6 re-verifies it weekly.
 
 ## 1. Mine winning structures (Claude + vidIQ)
 
@@ -98,9 +119,31 @@ Every video passes all of these, or it is not published:
 
 The Short is cut from the long video's own narration and pictures. It starts and ends on full sentences, uses the long video's structure rules for Shorts (#173), and links back to the long video.
 
-## 5. Publish
+## 5. Publish: the complete package
 
-The long video is published by `approve.yml` → `prepublish_gate.py` → `publish.yml`; the Shorts by `publish-shorts.yml`. The gate is unchanged: every hard row blocks, and ERROR is retried, never passed.
+The long video is published by `approve.yml` → `prepublish_gate.py` → `publish.yml`, and the Shorts by `publish-shorts.yml`. Every hard row blocks, and ERROR is retried, never passed.
+
+**The publication package is part of the structure** and is mined like the video itself: the winners' titles, thumbnails, descriptions, hashtags, tags, chapters, first and pinned comments, end screens, publish hour and playlist use.
+
+Each video ships the full package, and `preflight.py` checks every measurable item:
+- **title**: the structure's measured pattern; ≤ 100 characters (Help); the promise matches the first 30 s;
+- **thumbnail**: 1280×720, under the Help size limit; the structure's measured pattern (#173 item 5); a clear subject and readable text at small size;
+- **description**:
+  - the promise in its first lines;
+  - **chapters** (Help rules: start at 0:00, at least 3, each ≥ 10 s);
+  - the Scripture references;
+  - one call to action;
+  - **≤ 3 hashtags**, which show above the title;
+  - ≤ 5,000 characters;
+- **tags**: ≤ 500 characters, taken from vidIQ keyword research, never stuffed;
+- **captions**: our exact narration SRT (already sent), never auto-captions;
+- **first comment**: posted by the channel through the API (`commentThreads.insert`), with the structure's measured CTA. **Pinning it is manual**: the API cannot pin, so the owner pins it, or it is listed for the owner on publication day;
+- **end screen and cards**: the API cannot set them. They come from the channel's default end-screen template, set once in Studio by the owner, pointing to the structure's playlist and to subscribe;
+- **playlist**: the structure's playlist;
+- **publish hour**: the structure's measured best window for the audience;
+- **disclosure**: on.
+
+Every item and its source are written into the package. An item without evidence is marked `UNMEASURED` and listed for stage 1. It is never guessed.
 
 ## 6. Live intelligence: back to stage 1 (Claude + vidIQ)
 
