@@ -1,0 +1,27 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-009",
+ "style": "soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused": {
+  "pilot-007": [
+   "figure-a",
+   "bg-coffee-window",
+   "bg-sunrise-field",
+   "bg-mountain-sunrise",
+   "bg-meadow",
+   "bg-morning-path",
+   "bg-misty-valley",
+   "bg-sky",
+   "bg-garden",
+   "bg-hills",
+   "bg-dawn-lake",
+   "bg-orchard"
+  ]
+ },
+ "images": []
+}
