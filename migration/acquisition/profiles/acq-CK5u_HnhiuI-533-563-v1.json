@@ -1,0 +1,80 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 4,
+    "picture_changes_per_minute": 7.98,
+    "median_shot_seconds": 5.867,
+    "longest_shot_seconds": 8.9,
+    "motion_median_top_decile_diff": 1.241
+   },
+   "rhythm": {
+    "audio_onsets": 59,
+    "audio_onsets_per_minute": 117.74,
+    "tempo": {
+     "bpm": 171.7,
+     "confidence": 0.053
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.25,
+     "chance_fraction": 0.123,
+     "lift": 2.04
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 2,
+     "visual_events": 4
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -25.9,
+    "loudness_range_lu": 3.9,
+    "true_peak_dbtp": -9.7
+   },
+   "colour": {
+    "mean_brightness": 0.643,
+    "brightness_std_over_time": 0.0895,
+    "mean_saturation": 0.2156,
+    "saturation_std_over_time": 0.0475
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 1.0,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 62,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 88,
+    "words_per_minute": 175.6,
+    "transcript": "of the men that went in jeopardy of their lives, therefore he would not drink it. Chronicles tells the same story and puts it even more sharply, verse 19, and said, God forbid it me that I should do this thing. Shall I drink the blood of these men that have put their lives in jeopardy? For with the jeopardy of their lives they brought it. Shall I drink the blood of these men? That is a startling sentence for any Israelite to say. and the word translated"
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 30.023,
+     "frames": 62
+    }
+   ]
+  }
+ ]
+}
