@@ -1,0 +1,463 @@
+{
+ "version": "official-rules-v1",
+ "issue": 180,
+ "topics": {
+  "ypp-monetization-policies.md": {
+   "verified": 40,
+   "dropped": 0,
+   "verified_over_cap_not_written": 6,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/1311392",
+     "status": 200,
+     "read": "2026-10-19T20:32:26Z",
+     "model": "gemini-3.6-flash"
+    },
+    {
+     "url": "https://support.google.com/youtube/answer/6162278",
+     "status": 200,
+     "read": "2026-10-19T20:33:02Z",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "ypp-eligibility.md": {
+   "verified": 19,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/72851",
+     "status": 200,
+     "read": "2026-10-19T20:33:35Z",
+     "last_updated": "updated terms in YouTube Studio by January 31, 2027",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "altered-synthetic-disclosure.md": {
+   "verified": 22,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/14328491",
+     "status": 200,
+     "read": "2026-10-19T20:33:38Z",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "video-details.md": {
+   "verified": 40,
+   "dropped": 0,
+   "verified_over_cap_not_written": 29,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/57404",
+     "status": 200,
+     "read": "2026-10-19T20:33:41Z",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://support.google.com/youtube/answer/6390658",
+     "status": 200,
+     "read": "2026-10-19T20:33:43Z",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://support.google.com/youtube/answer/146402",
+     "status": 200,
+     "read": "2026-10-19T20:33:47Z",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://support.google.com/youtube/answer/2734796",
+     "status": 200,
+     "read": "2026-10-19T20:33:49Z",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "chapters.md": {
+   "verified": 13,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/9884579",
+     "status": 200,
+     "read": "2026-10-19T20:33:51Z",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "thumbnails.md": {
+   "verified": 31,
+   "dropped": 2,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/72431",
+     "status": 200,
+     "read": "2026-10-19T20:33:53Z",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "end-screens-and-cards.md": {
+   "verified": 20,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/6388789",
+     "status": 200,
+     "read": "2026-10-19T20:33:57Z",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://support.google.com/youtube/answer/6140493",
+     "status": 200,
+     "read": "2026-10-19T20:33:59Z",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "comments-pinning.md": {
+   "verified": 6,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/9482367",
+     "status": 200,
+     "read": "2026-10-19T20:34:01Z",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://developers.google.com/youtube/v3/docs/commentThreads",
+     "status": 200,
+     "read": "2026-10-19T20:34:03Z",
+     "last_updated": "Last updated 2026",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://developers.google.com/youtube/v3/docs/comments",
+     "status": 200,
+     "read": "2026-10-19T20:34:04Z",
+     "last_updated": "last updated. The value is specified in ISO 8601",
+     "model": "gemini-3.5-flash-lite"
+    }
+   ]
+  },
+  "channel-branding.md": {
+   "verified": 40,
+   "dropped": 0,
+   "verified_over_cap_not_written": 12,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/2972003",
+     "status": 200,
+     "read": "2026-10-19T20:34:06Z",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://support.google.com/youtube/answer/10456525",
+     "status": 200,
+     "read": "2026-10-19T20:34:09Z",
+     "model": "gemini-3.5-flash-lite"
+    },
+    {
+     "url": "https://support.google.com/youtube/answer/2976309",
+     "status": 200,
+     "read": "2026-10-19T20:34:12Z",
+     "select_error": "ProviderFailure HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    }
+   ]
+  },
+  "playlists.md": {
+   "verified": 0,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/57792",
+     "status": 200,
+     "read": "2026-10-19T20:34:13Z",
+     "select_error": "ProviderFailure HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    }
+   ]
+  },
+  "spam-deceptive-metadata.md": {
+   "verified": 0,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/2801973",
+     "status": 200,
+     "read": "2026-10-19T20:34:14Z",
+     "select_error": "ProviderFailure HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    }
+   ]
+  },
+  "made-for-kids.md": {
+   "verified": 0,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://support.google.com/youtube/answer/9528076",
+     "status": 200,
+     "read": "2026-10-19T20:34:14Z",
+     "select_error": "ProviderFailure HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    }
+   ]
+  },
+  "recommendations-signals.md": {
+   "verified": 0,
+   "dropped": 0,
+   "verified_over_cap_not_written": 0,
+   "urls": [
+    {
+     "url": "https://www.youtube.com/howyoutubeworks/product-features/recommendations/",
+     "status": 404,
+     "read": "2026-10-19T20:34:15Z",
+     "error": "HTTP 404"
+    },
+    {
+     "url": "https://www.youtube.com/howyoutubeworks/product-features/search/",
+     "status": 404,
+     "read": "2026-10-19T20:34:15Z",
+     "error": "HTTP 404"
+    }
+   ]
+  }
+ },
+ "rule": "Only exact substrings of the fetched official page text are kept. Never paraphrased.",
+ "usage": [
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 5366,
+   "candidatesTokenCount": 1354,
+   "totalTokenCount": 8702,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 5366
+    }
+   ],
+   "thoughtsTokenCount": 1982,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 16738,
+   "candidatesTokenCount": 917,
+   "totalTokenCount": 17655,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 16738
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 2805,
+   "candidatesTokenCount": 898,
+   "totalTokenCount": 3703,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 2805
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1921,
+   "candidatesTokenCount": 1105,
+   "totalTokenCount": 3026,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1921
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1899,
+   "candidatesTokenCount": 448,
+   "totalTokenCount": 2347,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1899
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1595,
+   "candidatesTokenCount": 1262,
+   "totalTokenCount": 2857,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1595
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 928,
+   "candidatesTokenCount": 526,
+   "totalTokenCount": 1454,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 928
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1404,
+   "candidatesTokenCount": 653,
+   "totalTokenCount": 2057,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1404
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1170,
+   "candidatesTokenCount": 554,
+   "totalTokenCount": 1724,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1170
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1717,
+   "candidatesTokenCount": 1310,
+   "totalTokenCount": 3027,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1717
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 2448,
+   "candidatesTokenCount": 407,
+   "totalTokenCount": 2855,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 2448
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1319,
+   "candidatesTokenCount": 439,
+   "totalTokenCount": 1758,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1319
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1749,
+   "candidatesTokenCount": 291,
+   "totalTokenCount": 2040,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1749
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1021,
+   "candidatesTokenCount": 9,
+   "totalTokenCount": 1030,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1021
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1356,
+   "candidatesTokenCount": 5,
+   "totalTokenCount": 1361,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1356
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1563,
+   "candidatesTokenCount": 997,
+   "totalTokenCount": 2560,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1563
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1704,
+   "candidatesTokenCount": 1061,
+   "totalTokenCount": 2765,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 1704
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ ]
+}
