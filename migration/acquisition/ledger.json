@@ -1200,6 +1200,17 @@
       "completed_at": "2026-10-19T00:41:50.736549+00:00",
       "run_id": "39181031092",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-q3wraYaNR-A-553-583-v1",
+      "video_id": "q3wraYaNR-A",
+      "start_seconds": 553,
+      "end_seconds": 583,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-19T00:42:02.190202+00:00",
+      "day_utc": "2026-10-19",
+      "units_remaining_at_reservation": 460,
+      "reserved_units": 14
     }
   ]
 }
