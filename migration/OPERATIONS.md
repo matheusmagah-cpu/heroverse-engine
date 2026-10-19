@@ -162,6 +162,11 @@ Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003
   - **Validation per video:** a mined video counts only when its own native windows agree ≥ 0.85 with the mined transcript.
   - **Targets:** a format's numbers become targets only with ≥ 8 validated winners (90 % bootstrap intervals). Otherwise they are INSUFFICIENT and shown, never used.
   - **What Gemini keeps:** labelling structure on validated transcripts.
+- **First holdout verdict, 2026-10-19 00:44 UTC: FAIL.**
+  - 12 independent native windows, all compared: median agreement 0.909; window pass rate 0.75 against the 0.80 criterion.
+  - Two windows were invented text (agreement 0.075 and 0.226) and one fell short at 0.838.
+  - Evidence: `evidence/structure-mining/20261018/accuracy.json`.
+  - Consequence: the Gemini miner stays informative and never decides. Numbers come only from the native instrument once it is qualified (#140).
 - **Proof:** the miner's holdout check (criteria fixed 2026-10-18: agreement ≥ 0.85, openings ≥ 0.80, window pass rate ≥ 0.80) runs every night. Only PASS lets miner rows decide in the gate.
 - **Sample:** ≥ 10 prayer winners from ≥ 4 policy-clean channels, plus median and weak videos of the same channels, chosen with vidIQ outliers and the panel.
 - **Work:** Dot card #136 (native_metrics + native_plan, tested). Claude wires the nightly measurement windows into the heartbeat and recomputes MODELING_SPEC from MEASURED numbers only.
