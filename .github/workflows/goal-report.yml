@@ -33,6 +33,13 @@ jobs:
           done
           gh run list --repo matheusmagah-cpu/heroverse-runner --workflow render.yml --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json" && add runner || true
           python3 -I -B migration/ops/health.py "$T/runs.json" migration/evidence/daily-report/latest.md
+      - name: Actions minutes (private engine; budget in OPERATIONS.md)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          since=$(date -u -d '30 days ago' +%Y-%m-%d)
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs?per_page=100&created=%3E%3D$since" --paginate --jq '.workflow_runs' | jq -s 'add' > "$RUNNER_TEMP/runs30.json"
+          python3 -I -B migration/ops/minutes.py "$RUNNER_TEMP/runs30.json" migration/evidence/daily-report/latest.md
       - name: Content runway (every slot of the next 4 days has a pilot at the right stage)
         run: python3 -I -B migration/ops/runway.py migration/production migration/publish/ledger.json migration/evidence/daily-report/latest.md
       - name: Record

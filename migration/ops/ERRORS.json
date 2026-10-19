@@ -200,6 +200,16 @@
     "file": "migration/ops/test_card_check.py",
     "contains": "def test_code_card_interfaces_must_exist_verbatim"
    }
+  },
+  {
+   "id": "E21",
+   "date": "2026-10-19",
+   "error": "The private engine spent its 2,000 included Actions minutes with no monitoring (2026-10-19 01:21 UTC); with a US$0 spending limit every workflow stopped, including approval and publication",
+   "fix": "Owner pays the overage (everything stays private); 7,000 min / 30 d budget; heartbeat hourly + clock (48 beats a day instead of 72); no approval retry while the Gemini quota is spent; daily minutes report with alerts",
+   "antidote": {
+    "file": "migration/ops/test_minutes.py",
+    "contains": "def test_rounding_windows_and_alerts"
+   }
   }
  ]
 }

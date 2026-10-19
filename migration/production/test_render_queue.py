@@ -30,6 +30,13 @@ def pilot(root, name, publish_at, images_done=True, rendered=False):
 
 
 class Queue(unittest.TestCase):
+    def test_no_approval_retry_while_the_gemini_quota_is_spent(self):
+        err = {"status": "ERROR", "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA", "failed_at": "2026-10-19T01:30:00Z"}
+        self.assertTrue(rq.quota_spent(err, datetime(2026, 10, 19, 5, 0, tzinfo=timezone.utc)))    # before the 07:00 reset
+        self.assertFalse(rq.quota_spent(err, datetime(2026, 10, 19, 7, 5, tzinfo=timezone.utc)))   # after it: retried
+        self.assertFalse(rq.quota_spent({**err, "error": "TimeoutError"}, datetime(2026, 10, 19, 5, 0, tzinfo=timezone.utc)))
+        self.assertFalse(rq.quota_spent({k: v for k, v in err.items() if k != "failed_at"}, datetime(2026, 10, 19, 5, 0, tzinfo=timezone.utc)))
+
     def test_images_then_render_by_publish_time(self):
         with tempfile.TemporaryDirectory() as t:
             pilot(t, "pilot-003", "2026-10-19T10:00:00Z", images_done=False)
