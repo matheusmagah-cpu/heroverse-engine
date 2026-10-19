@@ -1,0 +1,101 @@
+{
+ "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+ "revision": "482adb537c021c86670beed01cd58990d01e72e4",
+ "render": "pilot-005.mp4",
+ "at": "2026-10-19T14:17:43.930027+00:00",
+ "timing": {
+  "seconds_per_180s_case": 66.34871721471427
+ },
+ "cases": {
+  "control": {
+   "expected": "PASS",
+   "verdict": "ERROR",
+   "review": {
+    "status": "ERROR",
+    "error": "ASR_WORD_TIMESTAMPS_INVALID"
+   },
+   "wall_seconds": 82.065223471
+  },
+  "control_repeat": {
+   "expected": "PASS",
+   "verdict": "ERROR",
+   "review": {
+    "status": "ERROR",
+    "error": "ASR_WORD_TIMESTAMPS_INVALID"
+   },
+   "wall_seconds": 25.648745793000018
+  },
+  "av_desync_1500ms": {
+   "expected": "FAIL",
+   "verdict": "ERROR",
+   "review": {
+    "status": "ERROR",
+    "error": "ASR_WORD_TIMESTAMPS_INVALID"
+   },
+   "wall_seconds": 72.53642388899996
+  },
+  "audio_dropouts": {
+   "expected": "FAIL",
+   "verdict": "ERROR",
+   "review": {
+    "status": "ERROR",
+    "error": "ASR_WORD_TIMESTAMPS_INVALID"
+   },
+   "wall_seconds": 71.51252633399997
+  },
+  "degraded_picture": {
+   "expected": "FAIL",
+   "verdict": "ERROR",
+   "review": {
+    "status": "ERROR",
+    "error": "ASR_WORD_TIMESTAMPS_INVALID"
+   },
+   "wall_seconds": 70.85746344899997
+  },
+  "black_flash_800ms": {
+   "expected": "FAIL",
+   "verdict": "ERROR",
+   "review": {
+    "status": "ERROR",
+    "error": "ASR_WORD_TIMESTAMPS_INVALID"
+   },
+   "wall_seconds": 74.21790149099996
+  },
+  "frozen_60s": {
+   "expected": "FAIL",
+   "verdict": "ERROR",
+   "review": {
+    "status": "ERROR",
+    "error": "ASR_WORD_TIMESTAMPS_INVALID"
+   },
+   "wall_seconds": 67.60273607599999
+  }
+ },
+ "input_mode": "FRAMES_PLUS_WORD_TIMESTAMPED_ASR_NOT_NATIVE_AUDIO",
+ "sample_fps": 0.5,
+ "asr": {
+  "package": "openai-whisper==20250625",
+  "model": "base.en",
+  "license": "MIT",
+  "license_url": "https://github.com/openai/whisper/blob/v20250625/LICENSE",
+  "weights_sha256": "25a8566e1d0c1e2231d1c762132cd20e0f96a85d16145c3a00adf5d1ac670ead"
+ },
+ "limits": [
+  "Calibration only; never production approval.",
+  "No native audio reaches the visual model.",
+  "Timing is a linear projection, not a full 28-minute context/memory benchmark."
+ ],
+ "license": {
+  "identifier": "Apache-2.0",
+  "source_file": "README.md",
+  "standalone_license_file": false,
+  "source_url": "https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct/blob/482adb537c021c86670beed01cd58990d01e72e4/README.md",
+  "source_sha256": "8e46e92a3a40643b85a6df905b1a2014bcb7a01daaf6566588c89a95c5c6e700",
+  "declaration": [
+   "license: apache-2.0"
+  ]
+ },
+ "timing_status": null,
+ "render_sha256": "833e46e4c7872ceceddd0605a470f4be15716b1f73418a97b008d4b9576a4e2a",
+ "workflow_run_id": "39267452111"
+}
