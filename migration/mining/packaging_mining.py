@@ -192,7 +192,7 @@ def main(model_json, out_dir, extra_queries="", thumbs_per_channel="2"):
         for rec in channels:
             for v in sorted(rec["videos"], key=lambda r: r["views_per_day"], reverse=True)[: int(thumbs_per_channel)]:
                 try:
-                    v["thumbnail_analysis"] = sm.thumbnail(v, key, sm.FREE_MODELS)
+                    v["thumbnail_analysis"] = sm.thumbnail(v, key, sm.SUPPORT_MODELS)
                 except Exception as e:  # one unreadable thumbnail never stops the run
                     v["thumbnail_analysis"] = {"status": f"UNAVAILABLE_{type(e).__name__}"}
     by_group = {}

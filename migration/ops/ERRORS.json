@@ -250,6 +250,16 @@
     "file": "migration/production/test_render_queue.py",
     "contains": "def test_only_the_earliest_approval_is_dispatched"
    }
+  },
+  {
+   "id": "E26",
+   "date": "2026-10-19",
+   "error": "Mining, Shorts selection and thumbnail analysis tried gemini-3.8-flash first (FREE_MODELS order), spending the designated reviewer's small free daily allowance; the watched reviews of pilot-003, 004 and 006 then failed with 429 QUOTA and nothing could be approved on 2026-10-19",
+   "fix": "structure_mining.DECISION_MODELS (the reviewer) is reserved for the watched reviews; mining, Shorts selection and thumbnail analysis use SUPPORT_MODELS (the other free models) only",
+   "antidote": {
+    "file": "migration/mining/test_structure_mining.py",
+    "contains": "def test_reviewer_allowance_is_reserved_for_decisions"
+   }
   }
  ]
 }

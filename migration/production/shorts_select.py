@@ -83,7 +83,7 @@ def measured(c):
 def rubric(cands, key):
     """One text-only Gemini call rating all shortlisted candidates."""
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "mining"))
-    from structure_mining import call, FREE_MODELS, S, STR, NUM, INT, arr  # noqa: E402
+    from structure_mining import call, SUPPORT_MODELS, S, STR, NUM, INT, arr  # noqa: E402
     item = S(index=INT, **{k: NUM for k in RUBRIC}, reasons=STR, hook_line=STR, title=STR)
     schema = S(ratings=arr(item))
     listing = "\n\n".join(f"[{i}] ({c['end'] - c['start']:.0f} s{', ' + c['reference'] if c['reference'] else ''})\n"
@@ -97,7 +97,7 @@ def rubric(cands, key):
               "original, honest and not clickbait, and a Short title under 70 characters.\n\n" + listing)
     payload = {"contents": [{"role": "user", "parts": [{"text": prompt}]}],
                "generationConfig": {"maxOutputTokens": 8192, "responseMimeType": "application/json", "responseSchema": schema}}
-    model, out = call(payload, key, list(FREE_MODELS))
+    model, out = call(payload, key, list(SUPPORT_MODELS))  # never the reviewer's allowance (E26)
     return model, {r["index"]: r for r in out.get("ratings", [])}
 
 

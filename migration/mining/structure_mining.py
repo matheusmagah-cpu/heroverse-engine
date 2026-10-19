@@ -37,6 +37,11 @@ import market_panel as mp  # noqa: E402
 from gemini_public_av import FREE_MODELS, ProviderFailure, canonical, sanitized_provider_error  # noqa: E402
 
 WINDOW = 300             # seconds of video per model call
+# E26: the designated reviewer (publish/prepublish_gate.REVIEW_MODELS) has a small free daily allowance; it is
+# kept for the decisions (watched review of every long video and Short). Mining and Shorts selection use the
+# other free models only, so they can never spend the reviewer's allowance.
+DECISION_MODELS = ("gemini-3.8-flash",)
+SUPPORT_MODELS = tuple(m for m in FREE_MODELS if m not in DECISION_MODELS)
 USAGE = []  # usageMetadata of every successful call in this process (model + token counts), for cost and quota
 MIN_LONG = 8 * 60
 MAX_VIDEO = 75 * 60      # the free tier day is shared; very long ambient videos teach little structure
@@ -353,7 +358,7 @@ def main(out_dir, channels, per_channel=3):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     key = os.environ["HERO_GEMINI_API_KEY"]
-    models = [m for m in os.environ.get("HERO_MINING_MODELS", ",".join(FREE_MODELS)).split(",") if m in FREE_MODELS]
+    models = [m for m in os.environ.get("HERO_MINING_MODELS", ",".join(SUPPORT_MODELS)).split(",") if m in FREE_MODELS]
     client = mp.Client(mp.access_token(), UNITS)
     records, log = [], {"calls": 0, "failed_windows": [], "models": {}}
     for channel_id in channels:
