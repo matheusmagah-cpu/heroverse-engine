@@ -32,6 +32,14 @@ class Card(unittest.TestCase):
         self.assertIn("NO_ALLOWED_BLOCK", p)
         self.assertIn("FROZEN_QA_SHA_MISSING", p)
 
+    def test_code_card_interfaces_must_exist_verbatim(self):
+        root = str(Path(__file__).resolve().parents[2])
+        ok = "```interfaces\nmigration/mining/accuracy_check.py: def classify(windows, start, end, asr):\n```"
+        self.assertEqual(c.check(ok, root), [])
+        bad = ok.replace("asr):", "asr, extra):")
+        self.assertTrue(c.check(bad, root)[0].startswith("INTERFACE_NOT_IN_FILE"))
+        self.assertTrue(c.check("```interfaces\nno/such.py: x\n```", root)[0].startswith("INTERFACE_FILE_MISSING"))
+
     def test_not_a_script_card(self):
         self.assertEqual(c.check("a code task"), [])
 

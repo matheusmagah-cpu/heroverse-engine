@@ -190,6 +190,16 @@
     "file": "migration/acquisition/test_acquire_window.py",
     "contains": "def test_purged_reference_job_still_reads_quota_from_the_reply"
    }
+  },
+  {
+   "id": "E20",
+   "date": "2026-10-19",
+   "error": "Card #136 assumed interfaces and data values that do not exist as written (pick() signature and window length, roles winner/median/weak while measured.json has winner/latest/weak_contrast); Dot correctly stopped with BLOCKED",
+   "fix": "#136 SPEC v2 with every interface copied verbatim; code cards carry an interfaces block that card_check verifies against the repository, before sending and on every Dot PR",
+   "antidote": {
+    "file": "migration/ops/test_card_check.py",
+    "contains": "def test_code_card_interfaces_must_exist_verbatim"
+   }
   }
  ]
 }

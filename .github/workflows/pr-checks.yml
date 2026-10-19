@@ -37,7 +37,7 @@ jobs:
           gh api "repos/$GITHUB_REPOSITORY/issues/$n" --jq .body > "$RUNNER_TEMP/issue.md"
           git diff --name-only "${{ github.event.pull_request.base.sha }}...HEAD" > "$RUNNER_TEMP/changed.txt"
           python3 -I -B migration/ops/dot_scope.py "$BRANCH" "$RUNNER_TEMP/issue.md" "$RUNNER_TEMP/changed.txt"
-          python3 -I -B migration/ops/card_check.py "$RUNNER_TEMP/issue.md"
+          python3 -I -B migration/ops/card_check.py "$RUNNER_TEMP/issue.md" .
       - name: Acceptance of every pilot this PR touches
         run: |
           base="${{ github.event.pull_request.base.sha }}"
