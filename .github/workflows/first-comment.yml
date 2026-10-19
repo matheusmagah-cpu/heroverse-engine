@@ -1,0 +1,56 @@
+name: HeroVerse first comment (retry a PENDING channel comment once the video is public)
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory (e.g. pilot-012); its latest receipt in migration/publish/receipts is used
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-publish
+  cancel-in-progress: false
+jobs:
+  comment:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PILOT: ${{ inputs.pilot }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Receipt, video and comment text of this pilot
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          r=$(ls migration/publish/receipts/"$PILOT"-[0-9]*.json 2>/dev/null | sort -t- -k3 -n | tail -1)
+          test -n "$r" || { echo "NO_RECEIPT_FOR_$PILOT"; exit 1; }
+          echo "RECEIPT=$r" >> "$GITHUB_ENV"
+          python3 -I -B - "$r" "migration/production/$PILOT/out/package.json" "$RUNNER_TEMP/comment.txt" <<'PY'
+          import json, os, sys
+          sys.path.insert(0, "migration/production")
+          import package_pilot
+          receipt, package = json.load(open(sys.argv[1])), json.load(open(sys.argv[2]))
+          state = receipt.get("steps", {}).get("first_comment")
+          print("RECEIPT", sys.argv[1], "VIDEO", receipt["video_id"], "STATE", state)
+          # packages made before first_comment existed get the default built from the title's promise
+          text = package.get("first_comment") or package_pilot.default_first_comment(package["title"])
+          open(sys.argv[3], "w").write(package_pilot.check_first_comment(text))
+          with open(os.environ["GITHUB_ENV"], "a") as env:
+              env.write(f"VIDEO_ID={receipt['video_id']}\n")
+          PY
+      - name: Post the comment if still PENDING (or never attempted)
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/first_comment.py "$VIDEO_ID" "$(cat "$RUNNER_TEMP/comment.txt")" \
+            "$RECEIPT" migration/publish/ledger.json
+      - name: Record receipt and ledger
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/publish/ledger.json migration/publish/receipts 2>/dev/null || true
+          git commit -q -m "First comment $PILOT (run $GITHUB_RUN_ID)" || exit 0
+          git pull --rebase -q origin main && git push -q origin HEAD:main

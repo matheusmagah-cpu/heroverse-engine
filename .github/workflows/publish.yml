@@ -85,7 +85,7 @@ jobs:
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-sha256-$sha.mp4" -O "$RUNNER_TEMP/video.mp4"
           echo "$sha  $RUNNER_TEMP/video.mp4" | sha256sum -c -
           cp "$d/inspection/thumbnail.jpg" "$RUNNER_TEMP/thumbnail.jpg"
-      - name: Publish (resumable upload, thumbnail, captions, playlist, verify)
+      - name: Publish (resumable upload, thumbnail, captions, playlist, first comment, verify)
         id: upload
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
