@@ -1,0 +1,28 @@
+{
+ "id": "bg-hills",
+ "prompt": "green rolling hills with a single tree under a soft sunrise, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+ "seed": 3006,
+ "steps": 6,
+ "guidance": 1.5,
+ "size": [
+  1344,
+  768
+ ],
+ "models": {
+  "stabilityai/stable-diffusion-xl-base-1.0": {
+   "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+   "license": "openrail++"
+  },
+  "latent-consistency/lcm-lora-sdxl": {
+   "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+   "license": "openrail++"
+  }
+ },
+ "device": "cuda",
+ "seconds": 10.1,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "release_asset": "pilot-002-img-bg-hills-sha256-05fcd087fa690f6e0fbefddfa57963667d7070eacbb19be6da5b67a725e47b21.png",
+ "sha256": "05fcd087fa690f6e0fbefddfa57963667d7070eacbb19be6da5b67a725e47b21"
+}
+

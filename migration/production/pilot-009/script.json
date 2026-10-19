@@ -1,0 +1,423 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-009",
+ "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+ "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "format_note": "Morning guided prayer through the armour of God in Ephesians 6, followed by Scripture and a concrete response for the coming day. Preserve pilot-007 narration and cinematic layout.",
+ "working_title": "Powerful Morning Prayer | Put On the Whole Armor of God Today (Ephesians 6)",
+ "promise": "Pray through the armour of God before the first decisions of the morning, with Scripture and one faithful action to carry into the day.",
+ "angle": "Truth in the first conversation, righteousness in private choices, peace at the doorway, faith amid uncertainty, salvation amid comparison, and the Word guiding the next response.",
+ "authorship": "Original English prayer written for HeroVerse by dot (OpenAI AI assistant), 2026-10-19. Scripture quotations are verbatim public-domain KJV. Existing HeroVerse artwork is reused with provenance records.",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "beat": "0-8 s: concrete morning and armor prayer promise",
+   "pause_after": 0.7,
+   "chapter": "Begin in God's strength",
+   "text": "Before you pick up your keys this morning, let's pray God's whole armor over the day you face."
+  },
+  {
+   "id": "invitation",
+   "beat": "settle into the coming day",
+   "pause_after": 1.0,
+   "text": "You may have your shoes beside the door or breakfast still on the table. Wherever this morning finds you, bring the day as it is. You may have work to finish, someone to care for, or a difficult conversation ahead. If you can, let your shoulders settle as you listen. We will pray through the armor named in Ephesians, asking God to shape our thoughts, words, and actions. You can join quietly while you prepare. First, hear where our strength begins."
+  },
+  {
+   "id": "scripture-strength",
+   "beat": "anchor: strength in the Lord",
+   "pause_after": 1.3,
+   "text": "Finally, my brethren, be strong in the Lord, and in the power of his might.",
+   "reference": "Ephesians 6:10 (KJV)"
+  },
+  {
+   "id": "prayer-beginning",
+   "beat": "prayer: receive strength without pretending",
+   "pause_after": 1.0,
+   "text": "Father, I come to you before I know everything this day will require. You see the tasks already arranged and the interruptions I cannot anticipate. Some mornings I feel ready; this morning I bring whatever strength I actually have. Teach me to depend on you without hiding my limits. Help me begin with a willing heart instead of waiting until I feel impressive or completely prepared. I place my plans before you, asking for wisdom to recognize the good that is mine to do and humility to receive help along the way."
+  },
+  {
+   "id": "scripture-whole-armor",
+   "beat": "anchor: receive the whole armor",
+   "pause_after": 1.3,
+   "text": "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil.",
+   "reference": "Ephesians 6:11 (KJV)"
+  },
+  {
+   "id": "prayer-wholeness",
+   "beat": "prayer: integrity across the entire day",
+   "pause_after": 1.0,
+   "text": "Lord, let this prayer reach beyond these quiet minutes. I need truth when I answer questions, righteousness when nobody is watching, and peace when another person tries my patience. I need faith when the way ahead is unclear, the assurance of your salvation when shame grows loud, and your Word when I must choose. Gather these requests into a life that belongs to you. Keep me from treating prayer as a morning task I finish and forget. Let dependence on you accompany my first decision and remain with me through the last."
+  },
+  {
+   "id": "scripture-struggle",
+   "beat": "anchor: people are not the enemy",
+   "pause_after": 1.3,
+   "text": "For we wrestle not against flesh and blood, but against principalities, against powers, against the rulers of the darkness of this world, against spiritual wickedness in high places.",
+   "reference": "Ephesians 6:12 (KJV)"
+  },
+  {
+   "id": "prayer-people",
+   "beat": "prayer: resist evil without dehumanizing people",
+   "pause_after": 1.0,
+   "text": "God of mercy, guard the way I look at people today. When I disagree with someone, keep me from reducing that person to an obstacle or a threat. Help me resist cruelty, deception, and injustice without cultivating hatred. Give me discernment to recognize harmful behavior and courage to establish a needed boundary. Teach me to protect what is good while remembering the humanity of those involved. Where anger has narrowed my vision, make room for wise counsel, fair questions, and the possibility that I have more to learn."
+  },
+  {
+   "id": "scripture-stand",
+   "beat": "anchor: stand faithfully",
+   "pause_after": 1.3,
+   "text": "Wherefore take unto you the whole armour of God, that ye may be able to withstand in the evil day, and having done all, to stand.",
+   "reference": "Ephesians 6:13 (KJV)"
+  },
+  {
+   "id": "prayer-standing",
+   "beat": "prayer: define faithfulness in ordinary decisions",
+   "pause_after": 1.0,
+   "text": "Father, show me what standing faithfully looks like in the circumstances I actually face. It may mean refusing to repeat a rumor, admitting an error, keeping a promise, or leaving a conversation that has become harmful. It may mean doing patient work that nobody will praise. Free me from the need to make every faithful act dramatic. When pressure comes, help me remember what matters before I react. Give me the steadiness to do what is right, even when the result arrives slowly and the approval I hoped for never comes."
+  },
+  {
+   "id": "scripture-truth-righteousness",
+   "beat": "anchor: truth and righteousness",
+   "pause_after": 1.3,
+   "chapter": "Truth and righteousness for today",
+   "text": "Stand therefore, having your loins girt about with truth, and having on the breastplate of righteousness;",
+   "reference": "Ephesians 6:14 (KJV)"
+  },
+  {
+   "id": "prayer-truth",
+   "beat": "prayer: honest speech before the first conversation",
+   "pause_after": 1.0,
+   "text": "Lord, fasten truth around the way I live today. Let my words match what I know, and give me freedom to say when I do not know. Before I send a message, help me check whether it is accurate. Before I explain myself, help me notice where I am tempted to exaggerate. I surrender the wish to appear more capable, more certain, or more innocent than I am. Make honesty a place where I can stand securely, without constantly managing an image or remembering which version of a story I told."
+  },
+  {
+   "id": "guidance-truth",
+   "beat": "listener application: one accurate sentence",
+   "pause_after": 1.0,
+   "text": "Think of one conversation you expect today. Someone may ask you about your progress, your availability, or a postponed decision. You do not need a polished answer right now. Consider one honest sentence you could offer. You might acknowledge unfinished work, ask for clarification, or explain a limit respectfully. Truth becomes practical when you stop decorating the facts. As you pray, bring that conversation to God, including the fear you feel about honesty and the person who deserves a clear answer from you."
+  },
+  {
+   "id": "prayer-hidden-habits",
+   "beat": "prayer: integrity in private habits",
+   "pause_after": 1.0,
+   "text": "Father, bring your light into the small choices I am tempted to dismiss. Guide what I record, what I claim, what I borrow, and what I return. Keep my conduct trustworthy when there is no audience. If I discover that I have benefited from someone else's mistake, give me the courage to address it. If I owe an apology or a correction, help me take responsibility without burying it under excuses. Let righteousness reach the ordinary details of my morning, where character is formed through decisions that seem small at the time."
+  },
+  {
+   "id": "prayer-responsibility",
+   "beat": "prayer: use responsibility without favoritism",
+   "pause_after": 1.0,
+   "text": "Father, I pray about whatever influence I hold today. If I assign work, make a decision, care for a dependent person, or respond to someone's request, help me use that responsibility fairly. Keep convenience from deciding whose needs deserve attention. Give me patience to explain what another person needs to understand. When I must say no, help me do so respectfully. When I have the ability to remove an unnecessary burden, make me willing. Let my authority, however small, become a place where integrity protects the dignity of others."
+  },
+  {
+   "id": "prayer-heart",
+   "beat": "prayer: righteousness without self-righteousness",
+   "pause_after": 1.0,
+   "text": "Jesus, protect my heart from the pride that can grow even around good behavior. I need your mercy as surely as the person I am tempted to judge. Help me do right without turning another person's failure into proof of my worth. When correction is needed, give me words that are clear and measured. When I receive correction, help me listen before defending myself. Let the breastplate of righteousness remind me to seek a clean heart, to welcome your forgiveness, and to make repair where my choices have caused harm."
+  },
+  {
+   "id": "scripture-light",
+   "beat": "anchor: put on the armor of light",
+   "pause_after": 1.3,
+   "text": "The night is far spent, the day is at hand: let us therefore cast off the works of darkness, and let us put on the armour of light.",
+   "reference": "Romans 13:12 (KJV)"
+  },
+  {
+   "id": "prayer-turning",
+   "beat": "prayer: a concrete change of direction",
+   "pause_after": 1.0,
+   "text": "God, I place before you the habit that keeps drawing me away from honesty and love. I will not rename it to make it harmless. Help me recognize the moment when I usually surrender to it: the idle minute, the injured pride, the private screen, the wish to escape discomfort. Give me wisdom to change what I can change around that moment. Help me seek appropriate support instead of relying on secrecy. Let this new morning become an opportunity to turn toward the light through one real and manageable act of obedience."
+  },
+  {
+   "id": "scripture-peace",
+   "beat": "anchor: feet prepared with the gospel of peace",
+   "pause_after": 1.3,
+   "chapter": "Walk with the gospel of peace",
+   "text": "And your feet shod with the preparation of the gospel of peace;",
+   "reference": "Ephesians 6:15 (KJV)"
+  },
+  {
+   "id": "prayer-footsteps",
+   "beat": "prayer: peace through thresholds and transitions",
+   "pause_after": 1.0,
+   "text": "Lord Jesus, prepare my feet to carry peace into the places I enter. When I step into the kitchen, the workplace, the classroom, or the waiting room, help me notice the people already there. Let my arrival make room for kindness. Slow the sharp greeting that comes from feeling rushed. Keep me attentive when somebody speaks before I am ready to listen. As I move between responsibilities, remind me that the person in front of me is more than an interruption. Give me a peaceful presence that can coexist with necessary urgency."
+  },
+  {
+   "id": "prayer-conflict",
+   "beat": "prayer: truthful peace during disagreement",
+   "pause_after": 1.0,
+   "text": "Father, teach me the difference between making peace and avoiding a conversation that needs to happen. Some matters require a clear answer, a firm boundary, or a difficult truth. Help me approach them without rehearsing insults in advance. Let me describe what happened accurately, ask what I need to understand, and speak about the next step without threatening or belittling. If the conversation becomes unsafe, give me wisdom to leave and seek support. Keep my desire for peace connected to justice, dignity, and care for everyone affected."
+  },
+  {
+   "id": "guidance-threshold",
+   "beat": "listener application: use a doorway as a reminder",
+   "pause_after": 1.0,
+   "text": "Picture the next doorway you will pass through. You might be leaving home or entering another room. Let that ordinary threshold remind you of these prepared feet. Before you cross it, you can pause long enough to choose your tone. You may not control the mood inside, but you can ask God to guide your contribution. A quieter voice, an attentive question, or a greeting that uses someone's name may become your first practical expression of peace. You can begin with the person nearest to you."
+  },
+  {
+   "id": "prayer-home",
+   "beat": "prayer: kindness toward familiar people",
+   "pause_after": 1.0,
+   "text": "God, help me offer those closest to me the patience I sometimes reserve for strangers. You know the familiar tensions, the repeated requests, and the tiredness that can make affection difficult to express. Show me where I can share a burden instead of announcing another complaint. Help me ask for what I need directly and receive another person's answer with respect. Where repair will take longer than this morning, keep me faithful to the next honest step. Let love be visible in my attention, my reliability, and the way I respond when plans change."
+  },
+  {
+   "id": "stillness-one",
+   "beat": "guided stillness: remember a person with care",
+   "pause_after": 6.0,
+   "text": "Allow a quiet moment here. You can bring one person's name before God without planning their entire future. Hold that person in prayer, and ask for wisdom about your own next act of care."
+  },
+  {
+   "id": "scripture-faith",
+   "beat": "anchor: lift the shield of faith",
+   "pause_after": 1.3,
+   "chapter": "Faith when pressure rises",
+   "text": "Above all, taking the shield of faith, wherewith ye shall be able to quench all the fiery darts of the wicked.",
+   "reference": "Ephesians 6:16 (KJV)"
+  },
+  {
+   "id": "prayer-faith",
+   "beat": "prayer: trust while uncertainty remains",
+   "pause_after": 1.0,
+   "text": "Father, I lift the shield of faith as I face what I cannot settle this morning. There are answers I would like to have and outcomes I cannot secure by thinking harder. Help me trust your character while doing the work that belongs to me. When an alarming thought arrives, give me room to examine it before I obey it. Keep me from treating every possibility as a certainty. Let faith steady my attention, so I can respond to the situation before me with wisdom rather than surrendering the whole day to imagined trouble."
+  },
+  {
+   "id": "prayer-accusation",
+   "beat": "prayer: answer shame with repentance and mercy",
+   "pause_after": 1.0,
+   "text": "Lord, you know the accusation that returns when I am tired: the old failure, the comparison, the fear that I will always disappoint. Help me distinguish a real responsibility from a sweeping judgment against my whole life. Where I have sinned, lead me toward confession and changed conduct. Where I have already sought forgiveness and made repair, teach me to receive mercy instead of reopening the same trial every morning. Let faith help me move forward honestly. I do not need to deny my history in order to entrust my future to you."
+  },
+  {
+   "id": "scripture-sound-mind",
+   "beat": "anchor: power, love, and a sound mind",
+   "pause_after": 1.3,
+   "text": "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.",
+   "reference": "2 Timothy 1:7 (KJV)"
+  },
+  {
+   "id": "prayer-discernment",
+   "beat": "prayer: courage with sensible preparation",
+   "pause_after": 1.0,
+   "text": "God, help me receive courage with a thoughtful mind and a loving heart. When I feel afraid, let me bring that feeling to you without shame. Guide me toward the information, preparation, and support the situation requires. Help me read the instructions, ask the useful question, and allow enough time for the journey. Keep me from confusing confidence with carelessness. If I need assistance, let me request it plainly. Shape a courage that can admit uncertainty, learn from others, and still take the next responsible step in your presence."
+  },
+  {
+   "id": "guidance-pressure",
+   "beat": "reflection: recognize the moment before a reaction",
+   "pause_after": 1.0,
+   "text": "You may recognize pressure first in your body: a tightened jaw, hurried words, or the urge to answer immediately. When you notice that signal today, you can create a little space before acting. You can check the facts, reread the message, or ask for time to think. You are allowed to respond carefully. Faith does not require you to ignore what is happening; it can help you face it without letting the first surge of emotion make every decision. Bring that moment to God now."
+  },
+  {
+   "id": "prayer-waiting",
+   "beat": "prayer: faith during an unresolved wait",
+   "pause_after": 1.0,
+   "text": "Father, I pray about the reply that has not arrived, the opportunity still undecided, and the situation that remains outside my control. Show me whether there is a respectful follow-up to make or whether this is a time to wait. While I wait, help me remain available to the life in front of me. Let me finish a necessary task, eat with attention, and listen when somebody needs me. I entrust the unresolved matter to you again, asking for endurance that makes room for ordinary goodness while the answer is still unknown."
+  },
+  {
+   "id": "scripture-salvation-word",
+   "beat": "anchor: helmet of salvation and sword of the Spirit",
+   "pause_after": 1.3,
+   "chapter": "Guard your mind with salvation and Scripture",
+   "text": "And take the helmet of salvation, and the sword of the Spirit, which is the word of God:",
+   "reference": "Ephesians 6:17 (KJV)"
+  },
+  {
+   "id": "prayer-salvation",
+   "beat": "prayer: rest identity in Christ",
+   "pause_after": 1.0,
+   "text": "Jesus, let the hope of your salvation guard my mind today. Before I measure my value by an achievement, a response, or another person's approval, turn my attention toward your grace. I bring you my need for forgiveness and my desire to belong. Help me live as someone learning to receive mercy and extend it. When I make a mistake, keep me from calling the whole day ruined. When I succeed, keep me grateful. Let my identity grow deeper than the latest evaluation, held in the hope I have in you."
+  },
+  {
+   "id": "prayer-attention",
+   "beat": "prayer: care for what enters the mind",
+   "pause_after": 1.0,
+   "text": "Father, guide what I allow to occupy my attention this morning. There are headlines to read and messages to answer, but I do not need to absorb every argument offered to me. Help me recognize when useful information has become restless consumption. Give me the freedom to close a page, silence an unnecessary alert, or return to the task I chose. Let me make space for thoughts that are truthful and constructive. When my mind feels crowded, help me choose one responsibility at a time instead of demanding that I carry everything at once."
+  },
+  {
+   "id": "prayer-word",
+   "beat": "prayer: use Scripture faithfully and gently",
+   "pause_after": 1.0,
+   "text": "Holy Spirit, help me receive the Word of God with reverence and understanding. Keep me from reaching for a verse only to win an argument or justify what I already wanted. Teach me to read carefully, notice the setting, and welcome correction. Let Scripture examine my motives before I use it to examine somebody else. When I speak about your truth, give me humility about what I understand and patience with honest questions. May your Word strengthen love, deepen obedience, and guide the decisions that no one else will see."
+  },
+  {
+   "id": "guidance-remember",
+   "beat": "listener application: carry one biblical image",
+   "pause_after": 1.0,
+   "text": "You have heard six pieces of armor: truth, righteousness, the gospel of peace, faith, salvation, and the Word of God. You do not need to memorize a long speech to carry this prayer with you. Choose the image you most need for your next responsibility. If you have an unfinished report, consider truth. If you anticipate a tense conversation, remember peace. If you are waiting for an answer, remember faith. Let that image direct you back to the passage, and let Scripture guide what you do next."
+  },
+  {
+   "id": "prayer-practice",
+   "beat": "prayer: let hearing become doing",
+   "pause_after": 1.0,
+   "text": "Lord, connect what I have heard with what I will do. When I recognize the honest answer, help me give it. When I see the kind action, help me take it before I explain it away. If Scripture exposes a motive I would rather defend, make me willing to change direction. Give me patience with the slow work of learning. I ask for a life shaped by your Word in repeated, ordinary choices: how I handle a delay, how I use authority, and how I treat a person who cannot repay my kindness."
+  },
+  {
+   "id": "scripture-praying",
+   "beat": "anchor: ongoing prayer for all saints",
+   "pause_after": 1.3,
+   "text": "Praying always with all prayer and supplication in the Spirit, and watching thereunto with all perseverance and supplication for all saints;",
+   "reference": "Ephesians 6:18 (KJV)"
+  },
+  {
+   "id": "prayer-others",
+   "beat": "prayer: widen attention to other believers",
+   "pause_after": 1.0,
+   "text": "Father, widen this prayer beyond my own schedule. I remember those who begin today carrying grief, those responsible for difficult decisions, and those whose labor is easily overlooked. Strengthen believers who face hostility, loneliness, or discouragement. Give wisdom to the people serving their communities and caring for those in need. Bring trustworthy support to people who feel isolated. Show me whether I can become part of an answer through a practical act of care. Keep me watchful for needs that are close enough for me to notice and respond to today."
+  },
+  {
+   "id": "prayer-practical-care",
+   "beat": "prayer: turn intercession into a specific act of service",
+   "pause_after": 1.0,
+   "text": "Lord, help me notice the difference between wishing someone well and offering the help I can responsibly give. Perhaps I can share a task, deliver something needed, or make time to listen without checking a screen. Guide me to ask what would actually help rather than assuming I know. Give me wisdom about my limits, so that my promises remain trustworthy. Let generosity be thoughtful and concrete. Where another person needs support beyond what I can provide, help me encourage a connection with someone qualified to assist."
+  },
+  {
+   "id": "prayer-perseverance",
+   "beat": "prayer: return to God through the day",
+   "pause_after": 1.0,
+   "text": "God, teach me to pray in the spaces between activities. A brief request before a meeting, a word of gratitude after help, or an honest confession after an impatient response can turn my attention toward you again. I do not want to wait for perfect quiet before remembering your presence. Help me continue in prayer when the morning becomes busy and these words are no longer fresh. Keep my requests attentive to other people as well as myself, and let perseverance include the willingness to begin again after distraction."
+  },
+  {
+   "id": "scripture-courage",
+   "beat": "carry into the day: courage and God's presence",
+   "pause_after": 1.3,
+   "chapter": "Carry God's Word into the day",
+   "text": "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.",
+   "reference": "Joshua 1:9 (KJV)"
+  },
+  {
+   "id": "prayer-next-step",
+   "beat": "prayer: courage for the next responsibility",
+   "pause_after": 1.0,
+   "text": "Lord, as I hear the words you spoke to Joshua, I remember that courage grows through trust and obedience. Guide me in my own responsibilities today. I may need to make a call I have avoided, begin work that feels beyond me, or ask for help with a problem I cannot solve alone. Help me prepare carefully and move without demanding complete certainty first. When the task feels large, bring my attention to the first honest step. Let your presence matter more to me than the appearance of being fearless."
+  },
+  {
+   "id": "scripture-strength-path",
+   "beat": "carry into the day: God supplies strength",
+   "pause_after": 1.3,
+   "text": "It is God that girdeth me with strength, and maketh my way perfect.",
+   "reference": "Psalm 18:32 (KJV)"
+  },
+  {
+   "id": "prayer-work",
+   "beat": "prayer: strength for steady and sustainable work",
+   "pause_after": 1.0,
+   "text": "Father, strengthen me for the work that is truly mine today. Help me identify what needs attention first and give it the care it deserves. When I am tempted to hurry through something important, teach me to slow down enough to do it well. When I am polishing something unnecessarily, help me recognize what is sufficient. Guide me to take a needed break, honor reasonable limits, and ask for help before exhaustion becomes resentment. Let my work serve real people, and keep my ambition accountable to love and integrity."
+  },
+  {
+   "id": "scripture-upheld",
+   "beat": "carry into the day: receive God's help",
+   "pause_after": 1.3,
+   "text": "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.",
+   "reference": "Isaiah 41:10 (KJV)"
+  },
+  {
+   "id": "prayer-help",
+   "beat": "prayer: receive help through appropriate means",
+   "pause_after": 1.0,
+   "text": "God, I receive these words as an invitation to lean on your faithfulness. Help me recognize support when it arrives in ordinary forms: wise advice, shared work, a patient friend, or the opportunity to ask a clearer question. Give me humility to accept help without making my need a source of shame. For the challenge that still feels heavy, guide me toward the next appropriate resource. I bring you both my hope and my uncertainty, trusting that I can speak honestly while seeking the strength to continue."
+  },
+  {
+   "id": "scripture-christ-strength",
+   "beat": "carry into the day: strength through Christ",
+   "pause_after": 1.3,
+   "text": "I can do all things through Christ which strengtheneth me.",
+   "reference": "Philippians 4:13 (KJV)"
+  },
+  {
+   "id": "prayer-contentment",
+   "beat": "prayer: strength for faithfulness in varied circumstances",
+   "pause_after": 1.0,
+   "text": "Jesus, teach me the contentment Paul describes around these words. In times of plenty and in times of need, strengthen me to remain faithful. If today brings encouragement, help me receive it with gratitude. If it brings disappointment, keep me from abandoning what is good. I ask for strength to be generous within my means, patient within my responsibilities, and honest about my limitations. Let me recognize that a faithful day may include unfinished work, an unanswered question, and a quiet decision to trust you again."
+  },
+  {
+   "id": "stillness-two",
+   "beat": "guided stillness: entrust one immediate choice",
+   "pause_after": 6.0,
+   "text": "For this quiet moment, place one immediate choice before God. There is no need to solve the whole day. Let your next faithful step become clear enough to begin."
+  },
+  {
+   "id": "commitment",
+   "beat": "concrete payoff: one prepared threshold and one peaceful greeting",
+   "pause_after": 1.2,
+   "text": "Choose the first doorway you will enter after this prayer. Before crossing it, pause and pray: Lord, prepare my feet for peace. Then greet the first person you meet with deliberate kindness, giving them your attention before making a request. If you are alone, use that same pause before your first message. This is your commitment for the morning: one threshold, one brief prayer, one considerate beginning."
+  },
+  {
+   "id": "payoff",
+   "beat": "payoff: bring each piece of armor into today's actions",
+   "pause_after": 1.1,
+   "text": "Father, I am ready to begin the next part of this morning with you. Let truth guide my answers and righteousness shape my private choices. Prepare my feet to bring peace where I enter. Strengthen faith when uncertainty presses close. Guard my mind with the hope of salvation, and let your Word direct my conduct. Keep me prayerful and attentive to others. When I stumble, lead me toward repair. When I am weary, help me receive support. I offer you this day through Jesus Christ, with gratitude for the grace to begin."
+  },
+  {
+   "id": "cta",
+   "beat": "one optional amen-only response after prayer payoff",
+   "pause_after": 1.0,
+   "text": "If you would like to join this prayer, you can write Amen."
+  },
+  {
+   "id": "closing",
+   "beat": "quiet departure with a concrete morning action",
+   "pause_after": 1.3,
+   "text": "As you pick up your keys or return to the room around you, carry one part of this prayer into your first action. Give the honest answer. Enter with a peaceful greeting. Ask for help with the responsibility that feels heavy. You have brought the day before God; now take the next step with care. May the words of Scripture remain close as the morning unfolds, guiding your attention back to truth, love, and faithful action. Go into your responsibilities with the hope of Christ beside you."
+  }
+ ],
+ "figure": "figure-a",
+ "backgrounds": [
+  "bg-coffee-window",
+  "bg-sunrise-field",
+  "bg-mountain-sunrise",
+  "bg-meadow",
+  "bg-morning-path",
+  "bg-misty-valley",
+  "bg-sky",
+  "bg-garden",
+  "bg-hills",
+  "bg-dawn-lake",
+  "bg-orchard"
+ ],
+ "overlay": {
+  "title": "Stand Firm with God Today",
+  "subtitle": "MORNING PRAYER",
+  "title_image": "bg-morning-path",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "Pray through the armour of God for an honest, peaceful and courageous morning, with Ephesians 6 and a practical commitment for today.",
+ "hashtags": [
+  "#prayer",
+  "#morningprayer",
+  "#jesus"
+ ],
+ "thumbnail": {
+  "lines": [
+   "STEADY FOR",
+   "TODAY"
+  ],
+  "sub": "MORNING PRAYER"
+ },
+ "tags": [
+  "morning prayer",
+  "armor of God prayer",
+  "Ephesians 6 prayer",
+  "whole armour of God",
+  "Christian morning prayer",
+  "KJV Bible prayer",
+  "prayer for courage",
+  "start the day with God"
+ ],
+ "figure_choice": "figure-a: the channel's praying figure (frontal, hands folded), kept for brand continuity.",
+ "playlist": {
+  "title": "Morning Prayer",
+  "description": "Guided morning prayers with Scripture for peace, protection and courage. New prayers to start your day with God."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-dawn-lake",
+   "bg-misty-valley",
+   "bg-sunrise-field",
+   "bg-orchard",
+   "bg-mountain-sunrise"
+  ]
+ }
+}
