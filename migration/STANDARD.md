@@ -1,6 +1,6 @@
 # HeroVerse Production Standard v1 (2026-10-19)
 
-> Scope (SYSTEM.md): these are the execution rules of the structure `structures/guided-prayer-scenic.json`, status **candidate** (2 winners, 2 channels). They are widened or changed only by structure mining (SYSTEM.md stage 1).
+> Scope (SYSTEM.md): execution rules of `structures/guided-prayer-scenic.json`, **validated 2026-10-19** (6 winners from 6 channels, 3 weak contrasts; `evidence/vidiq/20261019/structure_audit.json`). Measured **drivers**: continuous camera motion (R2; 6/6 winners vs 0/3 weak), a viewer-directed hook within 5 s (R7; 5/6 vs 0/3), and for night prayers a gratitude topic (2.08x median views, same channel). R1 (no figure), R4 (no caption box) and R6 (no persistent CTA) are **house choices on free attributes**: the market splits on them (3/6, 4/6, 4/6), and the two highest breakouts use the clean grammar. They are kept for a cleaner, more professional look, not claimed as drivers.
 
 One standard. Every rule is measured on breakout videos (vidIQ, read-only) and is checked
 before publication. Evidence: `migration/evidence/vidiq/20261019/`.
