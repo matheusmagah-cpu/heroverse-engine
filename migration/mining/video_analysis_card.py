@@ -61,6 +61,8 @@ def conflicts(observations):
 
 def thumbnail_observations(row,index,sources):
     output=[];base=f'/rows/{index}';image_hash=row.get('image_sha256')
+    if row.get('status')!='measured':
+        return [observation('thumbnail',None,'UNKNOWN','SOURCE_UNAVAILABLE',source_ref(sources,'thumbnails',base))]
     for field in THUMB_MEASURES:
         output.append(observation('thumbnail.'+field,row.get(field),'MEASURED','IMAGE_INSTRUMENT_REPORTED',
             source_ref(sources,'thumbnails',base+'/'+field,image_sha256=image_hash),coverage(scope='thumbnail_image')))
@@ -97,8 +99,12 @@ def build_card(structure,structure_audit,thumbnails,*,video_id,own_review=None,l
         if row.get('id')==video_id:sections['packaging'].extend(thumbnail_observations(row,i,sources))
     if own_review is not None:
         audit=own_review.get('audit')
-        if not isinstance(audit,dict) or audit.get('status')=='ERROR':
+        if own_review.get('video_id',own_review.get('pilot_id')) not in (None,video_id):
+            limitations.append('OWN_REVIEW_IDENTITY_MISMATCH; no observations imported.')
+        elif not isinstance(audit,dict) or audit.get('status')=='ERROR':
             limitations.append('OWN_REVIEW_AUDIT_MISSING_OR_ERROR; review PASS is not audit evidence.')
+        elif own_review.get('video_id',own_review.get('pilot_id')) is None:
+            limitations.append('OWN_REVIEW_IDENTITY_UNPROVEN; no audit attached to this video.')
         else:
             mapping={'first_30s':'opening','visuals':'visuals','on_screen_text':'on_screen_text','audio':'audio','structure':'script_beats','ending':'ending'}
             for field,section in mapping.items():
@@ -114,9 +120,12 @@ def build_card(structure,structure_audit,thumbnails,*,video_id,own_review=None,l
                 span=coverage(start,end,'source_declared_window',['Model-reported coverage; no transcript copied.'])
                 for field,section,modality in [('picture','visuals','visual_received'),('sound','audio','audio_received')]:
                     value=window.get(field) if window.get(modality) is True else None
-                    add(section,field,value,'MODEL_REPORTED','LEGACY_MODEL_WINDOW','legacy_structure',f'/windows/{i}/{field}',span,window.get('model'))
+                    if isinstance(value,dict):
+                        for key,item in sorted(value.items()):
+                            add(section,field+'.'+key,item,'MODEL_REPORTED','LEGACY_MODEL_WINDOW','legacy_structure',f'/windows/{i}/{field}/'+key,span,window.get('model'))
+                    else:add(section,field,None,'UNKNOWN','LEGACY_MODEL_WINDOW','legacy_structure',f'/windows/{i}/{field}',span,window.get('model'))
                 # Structural summaries only; never transcript or opening_words_verbatim.
-                beats=[{k:b.get(k) for k in ('start_seconds','end_seconds','beat','content','device','emotion')} for b in window.get('beats',[])]
+                beats=[{k:b.get(k) for k in ('start_seconds','end_seconds','beat','content','device','emotion')} for b in window.get('beats',[])] if window.get('audio_received') is True else []
                 add('script_beats','beats',beats or None,'MODEL_REPORTED','LEGACY_MODEL_WINDOW','legacy_structure',f'/windows/{i}/beats',span,window.get('model'))
             limitations.append('Legacy windows do not establish whole-video ending or fulfilled title promise.')
     for name,rows in sections.items():
@@ -146,7 +155,7 @@ def build_report(structure,structure_audit,thumbnails,sources=None):
                 'conflict_rows':sum(bool(r['conflicts']) for r in thumb_rows),
                 'unknown_observations':sum(o['status']=='UNKNOWN' for r in thumb_rows for o in r['observations']),
                 'structure_thumbnail_label':structure.get('attributes',{}).get('thumbnail',{}).get('label'),
-                'stale_unmeasured_label':structure.get('attributes',{}).get('thumbnail',{}).get('label')=='unmeasured' and bool(thumb_rows),
+                'stale_unmeasured_label':structure.get('attributes',{}).get('thumbnail',{}).get('label')=='unmeasured' and any(row.get('status')=='measured' for row in thumbnails.get('rows',[])),
                 'interpretation':'Descriptive reported sample only; no causal rule, CTR prediction or cohort promotion.'}}
 
 
@@ -156,6 +165,8 @@ def main():
     args=parser.parse_args();data={};sources={}
     for kind in ('structure','structure_audit','thumbnails'):data[kind],sources[kind]=read_source(getattr(args,kind))
     result=build_report(**data,sources=sources)
+    if Path(args.output).resolve() in {Path(getattr(args,k)).resolve() for k in ('structure','structure_audit','thumbnails')}:
+        raise ValueError('SOURCE_OVERWRITE_FORBIDDEN')
     out=Path(args.output);out.parent.mkdir(parents=True,exist_ok=True);out.write_text(canonical(result))
     print(json.dumps({'cards':len(result['cards']),'cohort_counts':result['cohort_counts'],'thumbnail_sample':len(result['thumbnail_reconciliation']['rows'])}))
 

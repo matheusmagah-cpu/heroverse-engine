@@ -1,0 +1,41 @@
+{
+  "source_integrity": [
+    {
+      "path": "migration/structures/guided-prayer-scenic.json",
+      "sha256": "7102200b407501a7d3d76e7eacef9113b36f259966663bf5a87fa1061ba19b47",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/vidiq/20261019/structure_audit.json",
+      "sha256": "4aa64454e2cd3ee912089d86a052a08c996c9c6dc1c1c9fc38e3ceac3988a142",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/vidiq/20261019/thumbnails.json",
+      "sha256": "3feb853468fd03943285d9d622281ce09d91ecedec94c6b8205ad4bb6fb9fece",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/qa_criteria_v3.json",
+      "sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+      "unchanged": true
+    }
+  ],
+  "new_tests": 18,
+  "regression_suites_passed": 7,
+  "cohort_counts": {
+    "weak": 3,
+    "winner": 6
+  },
+  "cohort_cards": 9,
+  "thumbnail_sample": 20,
+  "thumbnail_conflict_rows": 10,
+  "deterministic_repeat": true,
+  "network_calls": 0,
+  "gates_changed": false,
+  "limitations": [
+    "All9 promise sections UNKNOWN; no title-derived promise inference.",
+    "Source audit has unknown exact temporal coverage.",
+    "Reported thumbnail text mismatches are not independently verified pixel errors."
+  ]
+}
