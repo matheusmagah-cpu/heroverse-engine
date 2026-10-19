@@ -18,6 +18,8 @@ Without a Gemini key the measured score alone decides and the record says so.
 usage: shorts_select.py TIMELINE_JSON SCRIPT_JSON OUT_JSON [N]
 """
 import json
+import hashlib
+from collections import Counter
 import os
 from pathlib import Path
 import re
@@ -28,17 +30,42 @@ CONTEXT_START = re.compile(r"(?i)^(and|but|so|this|that|it|he|she|they|notice|th
 YOU = re.compile(r"(?i)\b(you|your|you're|yours|yourself)\b")
 PROMISE = re.compile(r"(?i)\b(peace|never|always|already|promise|strength|carry|go before|with you|not alone|fear not|"
                      r"rest|hope|healed|faithful|love[sd]?|grace|mercy|protect|shield|light)\b")
-RESOLVE = re.compile(r"(?i)(amen|in jesus'? name|never leave|not alone|with you|go(es|ne)? before|is faithful|\bwill\b)[^,;:]*[.!]$")
+RESOLVE = re.compile(r"(?i)(amen|in jesus'? name|never leave|not alone|with you|is faithful|"
+                     r"thank(?:s| you)|receive|entrust|rejoice|rest|peace)[^,;:]*[.!]$")
 FULL_STOP = re.compile(r"[.!?]$")
 NOT_IN_SHORTS = {"cta", "invitation", "transition"}
 RUBRIC = ("hook_first_2s", "stands_alone", "emotional_payoff", "shareability", "loop_potential", "policy_safe")
+
+
+OPENING_MAX_S = 3.0  # STANDARD R8, actual spoken complete line
+DEPENDENT_REFERENCE = re.compile(r"(?i)\b(it|them|these|those)\b|\b(the remembering|the next part|the prayer has|that small commitment|also)\b")
+
+
+def opening_reason(sentence):
+    text=sentence['text'].strip().lstrip('"“‘')
+    if CONTEXT_START.match(text):return 'CONTEXT_OPENER'
+    if not FULL_STOP.search(text):return 'INCOMPLETE_OPENING_LINE'
+    if not text or text[0].islower():return 'CONTINUATION_OPENING_LINE'
+    if DEPENDENT_REFERENCE.search(text):return 'DEPENDENT_OPENING_REFERENCE'
+    if sentence['end']-sentence['start']>OPENING_MAX_S:return 'OPENING_OVER_3S'
+    return None
+
+
+def ending_reason(run, sentences):
+    last=run[-1]
+    if not FULL_STOP.search(last['text'].strip()):return 'INCOMPLETE_ENDING'
+    # A punctuation mark alone does not close a newly introduced reflection.
+    # Finish its authored segment or land an explicit resolution within it.
+    following=[s for s in sentences if s['segment']==last['segment'] and s['start']>last['start']]
+    if following and not RESOLVE.search(last['text'].strip()):return 'UNRESOLVED_SEGMENT_END'
+    return None
 
 
 def candidates(sentences, refs):
     out = []
     for a in range(len(sentences)):
         first = sentences[a]["text"].strip()
-        if CONTEXT_START.match(first):
+        if opening_reason(sentences[a]):
             continue
         for b in range(a, len(sentences)):
             length = sentences[b]["end"] - sentences[a]["start"]
@@ -47,7 +74,7 @@ def candidates(sentences, refs):
             if length < MIN_S:
                 continue
             run = sentences[a:b + 1]
-            if not FULL_STOP.search(run[-1]["text"].strip()):
+            if ending_reason(run, sentences):
                 continue  # never end on a comma, colon or semicolon (mid-verse or mid-thought)
             ids = {s["segment"] for s in run}
             if ids & NOT_IN_SHORTS:
@@ -68,11 +95,11 @@ def measured(c):
     fw = len(first.split())
     f = {
         "opening_short": 1.0 if fw <= 10 else 0.6 if fw <= 16 else 0.2,
-        "opening_direct": 1.0 if (YOU.search(first) or first.rstrip().endswith("?")) else 0.3,
+        "opening_direct": 1.0 if (re.search(r"(?i)^you\b",first) or first.rstrip().endswith("?")) else 0.3,
         "second_person": min(1.0, len(YOU.findall(text)) / max(len(words), 1) / 0.10),
         "scripture": 1.0 if c["reference"] else 0.4,
         "promise": min(1.0, 100 * len(PROMISE.findall(text)) / max(len(words), 1) / 4),
-        "resolution": 1.0 if RESOLVE.search(c["sentences"][-1]["text"].strip()) else 0.4,
+        "resolution": 1.0 if RESOLVE.search(c["sentences"][-1]["text"].strip()) else 0.6,
         "length_fit": max(0.0, 1 - abs((c["end"] - c["start"]) - TARGET_S) / 25),
     }
     weights = {"opening_short": 0.15, "opening_direct": 0.2, "second_person": 0.15, "scripture": 0.15,
@@ -143,10 +170,12 @@ def main(timeline_path, script_path, out_path, n="3"):
             break
     for c in chosen:
         r = c.get("rubric") or {}
-        c["hook"] = r.get("hook_line") or next((s.get("short_hook") for s in script["segments"] if s["id"] in c["segments"] and s.get("short_hook")), None) \
-            or ("Read this before your day starts" if c["reference"] else "Pray this with me right now")
+        c["hook"] = c["sentences"][0]["text"] if len(c["sentences"][0]["text"].split())<=7 else None
         c["title"] = r.get("title") or c["hook"]
-    Path(out_path).write_text(json.dumps({"version": "shorts-select-v1", "pilot_id": script["pilot_id"], "rubric_model": model,
+    Path(out_path).write_text(json.dumps({"version": "shorts-select-v2-r8-opening", "pilot_id": script["pilot_id"], "rubric_model": model,
+                                          "selection_mode": "MODEL_RATED" if ratings else "MEASURED_ONLY",
+                                          "input_sha256": {"timeline":hashlib.sha256(Path(timeline_path).read_bytes()).hexdigest(),"script":hashlib.sha256(Path(script_path).read_bytes()).hexdigest()},
+                                          "opening_rejections":dict(Counter(reason for row in timeline["sentences"] if (reason:=opening_reason(row)))),
                                           "candidates_considered": len(cands), "shortlist": shortlist, "chosen": chosen},
                                          indent=1, ensure_ascii=False) + "\n")
     print(json.dumps([{k: c.get(k) for k in ("start", "end", "final_score", "hook", "title")} for c in chosen], ensure_ascii=False))

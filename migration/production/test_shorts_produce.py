@@ -123,6 +123,32 @@ class Windows(unittest.TestCase):
         self.assertTrue(long_why.startswith(("LENGTH_", "CTA_")), long_why)
 
 
+class Repair012(unittest.TestCase):
+    def test_observed_openings_rejected(self):
+        baseline=load(HERE/'pilot-012'/'shorts'/'selection.json')
+        self.assertEqual([shorts_select.opening_reason(c['sentences'][0]) for c in baseline['chosen']],
+                         ['INCOMPLETE_OPENING_LINE','DEPENDENT_OPENING_REFERENCE','INCOMPLETE_OPENING_LINE'])
+        for c in baseline['chosen']:
+            self.assertIsNone(sp.snap(c,c['sentences'])[0])
+    def test_exact_three_second_boundary_and_complete_text(self):
+        line={'text':'You can rest.','start':4.0,'end':7.0}
+        self.assertIsNone(shorts_select.opening_reason(line))
+        self.assertEqual(shorts_select.opening_reason(dict(line,end=7.001)),'OPENING_OVER_3S')
+        self.assertEqual(shorts_select.opening_reason(dict(line,text='A little kindness:')),'INCOMPLETE_OPENING_LINE')
+        self.assertEqual(shorts_select.opening_reason(dict(line,text='the bed itself.')),'CONTINUATION_OPENING_LINE')
+    def test_actual_pilot012_candidates_and_resolution(self):
+        timeline=load(HERE/'pilot-012'/'out'/'timeline.json')['sentences']
+        script=load(HERE/'pilot-012'/'script.json');refs={r['id']:r.get('reference') for r in script['segments']}
+        candidates=shorts_select.candidates(timeline,refs);self.assertTrue(candidates)
+        for c in candidates:
+            self.assertIsNone(shorts_select.opening_reason(c['sentences'][0]))
+            self.assertIsNone(shorts_select.ending_reason(c['sentences'],timeline))
+            self.assertIsNone(sp.snap(c,timeline)[1])
+        old=load(HERE/'pilot-012'/'shorts'/'selection.json')['chosen'][0]
+        next_line={'segment':old['sentences'][-1]['segment'],'text':'A later thought.','start':166,'end':170}
+        self.assertEqual(shorts_select.ending_reason(old['sentences'],old['sentences']+[next_line]),'UNRESOLVED_SEGMENT_END')
+
+
 class Text(unittest.TestCase):
     def ass_of(self, w):
         return sp.ass(w, w.get("hook"), REFS, w["end"] - w["start"] + sp.TAIL_S, SENTENCES)

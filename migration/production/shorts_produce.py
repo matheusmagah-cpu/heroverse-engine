@@ -26,7 +26,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pilot_render import RATE_OUT, MUSIC_OFFSET, run, sha256, probe_duration  # noqa: E402
 from still_render import ts, ass_text, chunks, KJV  # noqa: E402
-from shorts_select import CONTEXT_START, FULL_STOP, NOT_IN_SHORTS  # noqa: E402
+from shorts_select import CONTEXT_START, FULL_STOP, NOT_IN_SHORTS, opening_reason, ending_reason  # noqa: E402
 
 VW, VH = 1080, 1920
 FPS = 30
@@ -77,13 +77,15 @@ def snap(moment, sentences):
         inside.pop()  # never end on a comma, colon or semicolon: the window ends on a completed sentence
     if not inside:
         return None, "NO_WHOLE_SENTENCE"
-    if CONTEXT_START.match(inside[0]["text"].strip()):
-        return None, "CONTEXT_OPENER"
+    why=opening_reason(inside[0])
+    if why:return None, why
     if {s["segment"] for s in inside} & NOT_IN_SHORTS:
         return None, "CTA_OR_TRANSITION_SEGMENT"
     length = inside[-1]["end"] - inside[0]["start"]
     if not WINDOW_S[0] <= length <= WINDOW_S[1]:
         return None, f"LENGTH_{length:.1f}S"
+    why=ending_reason(inside,sentences)
+    if why:return None, why
     segs = [s["segment"] for s in inside]
     out = dict(moment, start=inside[0]["start"], end=inside[-1]["end"], sentences=inside,
                segments=sorted(set(segs), key=segs.index))
