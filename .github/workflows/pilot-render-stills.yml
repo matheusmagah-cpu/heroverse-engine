@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   render:
-    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event.repository.private == true && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 200
     env:
