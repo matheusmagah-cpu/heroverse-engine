@@ -1,0 +1,29 @@
+{
+ "id": "bg-dawn-lake",
+ "prompt": "still lake at first light, mirror reflection of pink and gold clouds, reeds in the foreground, soft mist on the water, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 3.0,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-003-img-bg-dawn-lake-sha256-74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018.png",
+ "sha256": "74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018"
+}
+
