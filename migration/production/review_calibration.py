@@ -9,7 +9,11 @@ twice (consistency). Expected answers are fixed in CASES before any review runs.
 Measured: false rejections (control fails), false approvals (a defective case passes every signal), which
 signal caught which defect, score spread between the two control runs. A defect only the frame-by-frame scan
 catches is evidence that the review's 0.5 fps sampling misses it.
-usage: review_calibration.py RENDER_MP4 WORK_DIR OUT_JSON
+usage: review_calibration.py RENDER_MP4 WORK_DIR OUT_JSON [TITLE] [MODEL]
+       review_calibration.py qualify OUT_JSON CALIBRATION_JSON...   (backup reviewer verdicts, see qualification())
+A backup reviewer is QUALIFIED only when, on the renders of at least two different pilots, every defect case is FAIL,
+every control is PASS, and its watched-review status equals the designated reviewer's on every case of the same
+render. Any error, missing case or single miss is NOT_QUALIFIED. Qualification never changes the gate by itself.
 """
 from datetime import datetime, timezone
 import json
@@ -60,10 +64,10 @@ def make(render, work, name, filters):
     return out
 
 
-def review(path, title, key):
+def review(path, title, key, model=None):
     f = sr.upload(str(path), key)
     try:
-        return lr.watch(f, title, key)
+        return lr.watch(f, title, key, (model,) if model else lr.REVIEW_MODELS)
     finally:
         try:
             sr.request(sr.BASE + "/v1beta/" + f["name"], key, method="DELETE")
@@ -71,7 +75,7 @@ def review(path, title, key):
             pass
 
 
-def main(render, work, out_json, title="Morning Prayer"):
+def main(render, work, out_json, title="Morning Prayer", model=None):
     key = os.environ["HERO_GEMINI_API_KEY"]
     Path(work).mkdir(parents=True, exist_ok=True)
     rows = {}
@@ -81,7 +85,7 @@ def main(render, work, out_json, title="Morning Prayer"):
         if i:
             time.sleep(GAP_S)
         try:
-            r = review(path, title, key)
+            r = review(path, title, key, model)
             rev = {"status": r["status"], **{k: r.get(k) for k in (*lr.RUBRIC, "overall")}, "issues": r.get("issues", [])[:6],
                    "model": r.get("model")}
         except Exception as e:
@@ -109,11 +113,52 @@ def main(render, work, out_json, title="Morning Prayer"):
                "defects_caught_only_by_scan": sum(r["caught_by"] == ["scan"] for r in defects),
                "defects": len(defects), "controls": len(controls), "control_max_score_spread": spread}
     out = {"version": VERSION, "at": datetime.now(timezone.utc).isoformat(), "excerpt_s": EXCERPT,
-           "render": Path(render).name, "summary": summary, "cases": rows,
+           "render": Path(render).name, "model": model or lr.REVIEW_MODELS[0], "summary": summary, "cases": rows,
            "limits": "one excerpt of one render; small n; synthetic defects stand for, not equal, real render faults"}
     Path(out_json).write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
     print(json.dumps(summary))
 
 
+def qualification(runs, reference=None):
+    """runs: calibration outputs (any models, any renders). reference: the designated reviewer.
+    Returns {model: {"verdict": "QUALIFIED" | "NOT_QUALIFIED", "renders": [...], "reasons": [...]}} for every other model."""
+    reference = reference or lr.REVIEW_MODELS[0]
+    ref = {r["render"]: r for r in runs if r.get("model") == reference}
+    out = {}
+    for model in sorted({r.get("model") for r in runs} - {reference, None}):
+        reasons, renders = [], []
+        for run in (r for r in runs if r.get("model") == model):
+            render = run["render"]
+            renders.append(render)
+            base = ref.get(render)
+            if base is None:
+                reasons.append(f"{render}: NO_REFERENCE_RUN")
+                continue
+            for name in CASES:
+                case, rcase = run["cases"].get(name), base["cases"].get(name)
+                if case is None or rcase is None:
+                    reasons.append(f"{render}/{name}: MISSING_CASE")
+                    continue
+                status, rstatus = case["review"].get("status"), rcase["review"].get("status")
+                if status not in ("PASS", "FAIL") or rstatus not in ("PASS", "FAIL"):
+                    reasons.append(f"{render}/{name}: REVIEW_{status}_REFERENCE_{rstatus}")
+                    continue
+                if case["expected"] == "FAIL" and case["verdict"] != "FAIL":
+                    reasons.append(f"{render}/{name}: FALSE_APPROVAL")
+                if case["expected"] == "PASS" and case["verdict"] != "PASS":
+                    reasons.append(f"{render}/{name}: FALSE_REJECTION")
+                if status != rstatus:
+                    reasons.append(f"{render}/{name}: DIFFERS_FROM_REFERENCE {status} != {rstatus}")
+        if len(set(renders)) < 2:
+            reasons.append(f"FEW_RENDERS {len(set(renders))} (two different pilots required)")
+        out[model] = {"verdict": "NOT_QUALIFIED" if reasons else "QUALIFIED", "renders": sorted(set(renders)), "reasons": reasons}
+    return out
+
+
 if __name__ == "__main__":
-    main(*sys.argv[1:5])
+    if sys.argv[1] == "qualify":
+        result = qualification([json.loads(Path(f).read_text()) for f in sys.argv[3:]])
+        Path(sys.argv[2]).write_text(json.dumps(result, indent=1) + "\n")
+        print(json.dumps({m: v["verdict"] for m, v in result.items()}))
+    else:
+        main(*sys.argv[1:6])
