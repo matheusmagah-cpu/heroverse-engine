@@ -1,19 +1,25 @@
 {
-  "producer_tests": {
-    "count": 21,
-    "status": "PASS"
-  },
-  "review_tests": {
-    "count": 4,
-    "status": "PASS"
-  },
+  "producer_tests": "22 PASS",
+  "review_tests": "4 PASS",
   "designated_review_function_ast_unchanged": true,
   "review_function_ast_sha256": "323c476217e0a5f7882e23a70bf895c3210176e39b45b6c4aec352ad64dfb5b0",
   "review_model": "gemini-3.8-flash",
   "pass_item": 7,
   "pass_overall": 8,
   "historical_provider_failure_cause": "UNKNOWN: previous recorder retained exception class only",
-  "production_audio_timeline_status": "REGENERATING_HASH_PINNED_SOURCE",
+  "production_audio_timeline_status": "MATCHED_REGENERATED_VOICE_AND_MEASURED_TIMELINE",
   "watched_review": "NOT_RUN",
-  "approved": false
+  "approved": false,
+  "voice_status": "REGENERATED_VERIFIED_ORIGINAL_KOKORO_ADAPTER",
+  "voice": {
+    "seconds": 1861.11,
+    "sentences": 319,
+    "model": "kokoro-v1.0.fp16.onnx",
+    "voice_id": "am_michael",
+    "speed": 0.85,
+    "sha256": "fc1a438aec0f4821b67223420dc1b6554b45731a92109f9c8a29a8df4592d2ba",
+    "timeline_sha256": "76bfb5b4161cfceae13c4438face28696a90b320a04189efd491a8b2058211cb"
+  },
+  "listening_status": "BLOCKED_INTERFACE_AUDIO_INPUT_UNSUPPORTED",
+  "watched_review_status": "BLOCKED_NO_AUTHORIZED_DESIGNATED_REVIEW_ACCESS"
 }

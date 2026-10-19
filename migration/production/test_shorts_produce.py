@@ -141,6 +141,19 @@ class Repair012(unittest.TestCase):
         self.assertEqual(shorts_select.opening_hook(first),'I can tell the truth')
         self.assertTrue(sp.hook_shown({'sentences':[first]},shorts_select.opening_hook(first)))
 
+    def test_duplicate_hook_overlay_omitted_without_removing_caption(self):
+        first={'segment':'p','text':'I can tell the truth about this day.','start':0.0,'end':2.795}
+        moment={'start':0.0,'sentences':[first]}
+        hook='I can tell the truth'
+        self.assertIsNone(sp.nonredundant_hook(moment,hook))
+        rendered=sp.ass(moment,sp.nonredundant_hook(moment,hook),{'p':None},3.295)
+        self.assertEqual(events(rendered,'Hook'),[])
+        captions=events(rendered,'Cap')
+        self.assertEqual(len(captions),2)
+        self.assertEqual(captions[0][0],0.0)
+        self.assertLessEqual(abs(captions[-1][1]-first["end"]),.01)
+        self.assertIn('about this day.',captions[-1][2])
+
     def test_actual_pilot012_candidates_and_resolution(self):
         timeline=load(HERE/'pilot-012'/'out'/'timeline.json')['sentences']
         script=load(HERE/'pilot-012'/'script.json');refs={r['id']:r.get('reference') for r in script['segments']}

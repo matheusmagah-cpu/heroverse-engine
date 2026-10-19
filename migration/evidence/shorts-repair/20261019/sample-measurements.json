@@ -1,0 +1,69 @@
+{
+  "file": "short-00.mp4",
+  "sha256": "c135476a1d5a27da217ad289035cc6fe7d76500837c6ef6fb8a62fa037e9d029",
+  "seconds": 32.77,
+  "source_start": 969.668,
+  "source_end": 1001.937,
+  "segments": [
+    "declaration"
+  ],
+  "hook": "I can tell the truth",
+  "hook_shown": false,
+  "hook_overlay_reason": "OMITTED_DUPLICATE_CAPTION",
+  "title": "I can tell the truth",
+  "reference": null,
+  "scenes": [
+    "bg-lamp-window",
+    "bg-moonlit-sea"
+  ],
+  "parallax": false,
+  "figure": false,
+  "selection": {
+    "final_score": 0.6966,
+    "measured_score": 0.6966,
+    "features": {
+      "opening_short": 1.0,
+      "opening_direct": 1.0,
+      "second_person": 0.0,
+      "scripture": 0.4,
+      "promise": 0.6756756756756757,
+      "resolution": 1.0,
+      "length_fit": 0.6907600000000003
+    },
+    "rubric": null
+  },
+  "text": "I can tell the truth about this day. I can name the mercy I received. I can bring the hurt I still carry. God’s faithfulness is worthy of my thanks even when my understanding is incomplete. I will honor the help that came through other people. I will receive care without shame and offer kindness within my limits. I entrust this evening to the Lord, carrying gratitude and honest need into the same prayer.",
+  "qa": {
+    "file": "short-00.mp4",
+    "seconds": 32.77,
+    "lufs": -15.1,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+      "decode_clean": true,
+      "one_h264_1080x1920": true,
+      "fps_30": true,
+      "one_aac_stereo_48k": true,
+      "duration": true,
+      "loudness": true,
+      "true_peak": true
+    },
+    "status": "PASS"
+  },
+  "publish": false,
+  "review": {
+    "status": "NOT_RUN_AUTHORIZED_ACCESS_UNAVAILABLE",
+    "model_required": "gemini-3.8-flash"
+  },
+  "bytes": 12701458,
+  "delivery": "Native MP4 attached to owner conversation; not a production artifact replacement",
+  "frame_inspection": {
+    "timestamps_s": [
+      0.5,
+      16.4,
+      31.5
+    ],
+    "observed": "Single opening caption, slow crossfade, complete final phrase; no creative approval"
+  },
+  "listening": "UNSUPPORTED_AUDIO_INPUT",
+  "ffmpeg": "7.1.5-0+deb13u1"
+}

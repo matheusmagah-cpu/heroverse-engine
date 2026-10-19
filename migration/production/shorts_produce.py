@@ -178,6 +178,14 @@ def hook_shown(moment, hook):
     return bool(h) and first[:len(h)] == h
 
 
+def nonredundant_hook(moment, hook):
+    """Keep the opening caption; omit an optional overlay that repeats it."""
+    captions = caption_events(moment)
+    if captions and words_of(captions[0][2]) == words_of(hook or ""):
+        return None
+    return hook
+
+
 def ass(moment, hook, refs, dur, timeline_sentences=None):
     """The Short's subtitles: captions, the reference while a verse is read, the hook only when it is the
     first line's own words; no CTA. refs maps segment id -> reference."""
@@ -265,14 +273,16 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
         stills.append(p)
     refs = {s["id"]: s.get("reference") for s in script["segments"]}
     hook = moment.get("hook")
-    (tmp / "s.ass").write_text(ass(moment, hook, refs, dur, timeline_sentences))
+    overlay_hook = nonredundant_hook(moment, hook)
+    (tmp / "s.ass").write_text(ass(moment, overlay_hook, refs, dur, timeline_sentences))
     mp4 = out / f"short-{index:02d}.mp4"
     run(render_args(stills, work / "voice.wav", music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4))
     shutil.rmtree(tmp)
     shown = [r for _, _, r in reference_events(moment, refs, timeline_sentences)]
     return {"file": mp4.name, "sha256": sha256(mp4), "seconds": round(probe_duration(mp4), 2),
             "source_start": moment["start"], "source_end": moment["end"], "segments": moment["segments"],
-            "hook": hook, "hook_shown": hook_shown(moment, hook), "title": moment.get("title") or hook,
+            "hook": hook, "hook_shown": hook_shown(moment, overlay_hook),
+            "hook_overlay_reason": "OMITTED_DUPLICATE_CAPTION" if hook and overlay_hook is None else "FIRST_LINE_ONLY", "title": moment.get("title") or hook,
             "reference": shown[0] if shown else None,
             "scenes": picks, "parallax": False, "figure": False,
             "selection": {k: moment.get(k) for k in ("final_score", "measured_score", "features", "rubric")},
