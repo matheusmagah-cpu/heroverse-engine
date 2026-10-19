@@ -31,11 +31,20 @@ def pilot(root, name, publish_at, images_done=True, rendered=False):
 
 class Queue(unittest.TestCase):
     def test_no_approval_retry_while_the_gemini_quota_is_spent(self):
-        err = {"status": "ERROR", "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA", "failed_at": "2026-10-19T01:30:00Z"}
-        self.assertTrue(rq.quota_spent(err, datetime(2026, 10, 19, 5, 0, tzinfo=timezone.utc)))    # before the 07:00 reset
+        err = {"status": "ERROR", "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA", "failed_at": "2026-10-19T01:30:00Z",
+               "quota_ids": ["GenerateRequestsPerDayPerProjectPerModel-FreeTier"]}
+        self.assertTrue(rq.quota_spent(err, datetime(2026, 10, 19, 5, 0, tzinfo=timezone.utc)))    # per day: until the 07:00 reset
         self.assertFalse(rq.quota_spent(err, datetime(2026, 10, 19, 7, 5, tzinfo=timezone.utc)))   # after it: retried
         self.assertFalse(rq.quota_spent({**err, "error": "TimeoutError"}, datetime(2026, 10, 19, 5, 0, tzinfo=timezone.utc)))
         self.assertFalse(rq.quota_spent({k: v for k, v in err.items() if k != "failed_at"}, datetime(2026, 10, 19, 5, 0, tzinfo=timezone.utc)))
+
+    def test_per_minute_or_unnamed_quota_waits_minutes_not_a_day(self):
+        # E29: on 2026-10-19 an unnamed 429 held pilot-003 for 5 h while the same quota approved pilot-004
+        for ids in ([], ["GenerateContentInputTokensPerModelPerMinute-FreeTier"]):
+            err = {"status": "ERROR", "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA",
+                   "failed_at": "2026-10-19T11:30:00Z", "quota_ids": ids}
+            self.assertTrue(rq.quota_spent(err, datetime(2026, 10, 19, 11, 50, tzinfo=timezone.utc)))
+            self.assertFalse(rq.quota_spent(err, datetime(2026, 10, 19, 12, 1, tzinfo=timezone.utc)))
 
     def test_images_then_render_by_publish_time(self):
         with tempfile.TemporaryDirectory() as t:

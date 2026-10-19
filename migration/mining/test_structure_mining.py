@@ -42,6 +42,19 @@ class StructureMining(unittest.TestCase):
             self.assertNotIn('",".join(FREE_MODELS)', text, f)
             self.assertNotIn("sm.FREE_MODELS)", text, f)
 
+    def test_the_last_failure_keeps_the_provider_diagnostic(self):
+        # E29: call() re-raised a bare code, so nobody could tell a per-minute from a per-day quota
+        real = sm.transport
+        def fail(payload, key, model):
+            raise sm.ProviderFailure("HTTP_429_RESOURCE_EXHAUSTED:QUOTA", {"quota_ids": ["X-PerMinute"], "message": "m"})
+        sm.transport = fail
+        try:
+            with self.assertRaises(sm.ProviderFailure) as e:
+                sm.call({}, "k", ["m"])
+        finally:
+            sm.transport = real
+        self.assertEqual(e.exception.diagnostic["quota_ids"], ["X-PerMinute"])
+
     def test_every_call_records_its_token_usage(self):
         real, sm.USAGE[:] = sm.transport, []
         sm.transport = lambda payload, key, model: {"candidates": [{"content": {"parts": [{"text": "{}"}]}}],

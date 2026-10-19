@@ -131,7 +131,7 @@ def transport(payload, key, model):
 
 def call(payload, key, models):
     """Free models only, in order; a quota answer moves to the next free model, never to a paid one."""
-    last = None
+    last, diagnostic = None, None
     for model in models:
         for attempt in range(2):
             try:
@@ -139,7 +139,7 @@ def call(payload, key, models):
                 USAGE.append({"model": model, **(response.get("usageMetadata") or {})})
                 return model, json.loads(text_of(response))
             except ProviderFailure as e:
-                last = e.code
+                last, diagnostic = e.code, e.diagnostic  # kept: it says which quota answered (E29)
                 if "QUOTA" in e.code or "429" in e.code:
                     break                      # this model's free allowance is used up today
                 if "503" in e.code or "UNAVAILABLE" in e.code:
@@ -149,7 +149,7 @@ def call(payload, key, models):
             except (ValueError, KeyError):
                 last = "UNPARSEABLE_MODEL_OUTPUT"
                 break
-    raise ProviderFailure(last or "NO_FREE_MODEL")
+    raise ProviderFailure(last or "NO_FREE_MODEL", diagnostic)
 
 
 def degenerate(report):

@@ -125,6 +125,8 @@ analysis (08:05 UTC) is bound to the same session; the two older routines that r
 | 08:30 | structure mining, incremental | structure-mining.yml | production idle |
 | schedule.json | long video at publish_at; Shorts at their slots | YouTube publishAt | — |
 
+**Quota claims need the provider's own words (E29).** A quota is called "spent for the day" only when the recorded `quota_ids` say PerDay; any other 429 is retried after 30 min, and nobody (Claude included) tells the owner otherwise.
+
 **The engine never stops (content runway).** Every day has two publication slots (night 00:00, morning 10:00 UTC).
 Claude keeps scripts **4 days ahead**: at each daily analysis (08:05) Claude opens the Dot cards for the two slots of
 day D+4 (topic from the decisions protocol + vidIQ), so Dot's cycle, images, render and gate always fit. The daily

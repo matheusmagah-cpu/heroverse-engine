@@ -147,6 +147,8 @@ def main(pilot_dir, video_path):
                "status": "ERROR", "error": f"{type(e).__name__}: {str(e)[:200]}",
                # the provider's own (sanitized, key-redacted) message names the exact quota: per minute or per day
                "provider_message": str((getattr(e, "diagnostic", None) or {}).get("message", ""))[:600],
+               "quota_ids": (getattr(e, "diagnostic", None) or {}).get("quota_ids", []),
+               "retry_delay": (getattr(e, "diagnostic", None) or {}).get("retry_delay"),
                "failed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "usage": sm.USAGE}
         (d / "out" / "review.json").write_text(json.dumps(out, indent=1) + "\n")
         print(json.dumps({"status": "ERROR", "error": out["error"]}))

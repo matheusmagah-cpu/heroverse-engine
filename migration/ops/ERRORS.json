@@ -280,6 +280,16 @@
     "file": "migration/production/test_review_calibration.py",
     "contains": "def test_failing_for_the_wrong_reason_is_not_qualified"
    }
+  },
+  {
+   "id": "E29",
+   "date": "2026-10-19",
+   "error": "A 429 QUOTA was read as the free DAILY quota without proof: call() dropped the provider's diagnostic, review.json kept no quota id, and quota_spent() blocked retries until 07:00 UTC. Claude told the owner nothing could be approved that day; the same reviewer approved pilot-004 at 12:55 UTC. Hours lost",
+   "fix": "The sanitizer keeps Google's quotaId and retryDelay; call() re-raises with the diagnostic; review.json records quota_ids; only a quotaId containing PerDay waits for the reset, any other 429 is retried after 30 min",
+   "antidote": {
+    "file": "migration/production/test_render_queue.py",
+    "contains": "def test_per_minute_or_unnamed_quota_waits_minutes_not_a_day"
+   }
   }
  ]
 }
