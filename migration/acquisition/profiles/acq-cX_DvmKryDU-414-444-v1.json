@@ -1,0 +1,181 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 14,
+    "picture_changes_per_minute": 27.94,
+    "median_shot_seconds": 2.4,
+    "longest_shot_seconds": 3.667,
+    "motion_median_top_decile_diff": 6.02
+   },
+   "rhythm": {
+    "audio_onsets": 41,
+    "audio_onsets_per_minute": 81.82,
+    "tempo": {
+     "bpm": 61.85,
+     "confidence": 0.086
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.071,
+     "chance_fraction": 0.087,
+     "lift": 0.82
+    },
+    "sync": {
+     "median_offset_seconds": 0.256893,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 5,
+     "visual_events": 14,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -9.9,
+    "loudness_range_lu": 2.4,
+    "true_peak_dbtp": 0.5
+   },
+   "colour": {
+    "mean_brightness": 0.4464,
+    "brightness_std_over_time": 0.073,
+    "mean_saturation": 0.3992,
+    "saturation_std_over_time": 0.0963
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.887,
+     "singing": 0.0,
+     "music": 0.806,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 35,
+     "singing": 0,
+     "music": 27,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 0
+    },
+    "words": 82,
+    "words_per_minute": 163.6,
+    "transcript": "on days when I felt like I had none left. Father, I ask you to settle my heart concerning the things I have been waiting for. If there are prayers that have been on my heart for a long time, help me not to become discouraged. Teach me to trust your timing. Help me remember that silence is not absence, and waiting is not abandonment. You are still even when I cannot see it. Heavenly Father, give me peace about my future.\""
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 2.895,
+     "frames": 5
+    },
+    {
+     "label": "music",
+     "start_seconds": 2.4,
+     "end_seconds": 4.815,
+     "frames": 4
+    },
+    {
+     "label": "speech",
+     "start_seconds": 4.32,
+     "end_seconds": 7.695,
+     "frames": 6
+    },
+    {
+     "label": "music",
+     "start_seconds": 7.2,
+     "end_seconds": 10.095,
+     "frames": 5
+    },
+    {
+     "label": "speech",
+     "start_seconds": 9.6,
+     "end_seconds": 11.055,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 10.56,
+     "end_seconds": 12.975,
+     "frames": 4
+    },
+    {
+     "label": "speech",
+     "start_seconds": 12.48,
+     "end_seconds": 14.895,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 14.4,
+     "end_seconds": 15.855,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 15.36,
+     "end_seconds": 16.815,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 16.32,
+     "end_seconds": 17.775,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 17.28,
+     "end_seconds": 18.735,
+     "frames": 2
+    },
+    {
+     "label": "music",
+     "start_seconds": 18.24,
+     "end_seconds": 21.135,
+     "frames": 5
+    },
+    {
+     "label": "speech",
+     "start_seconds": 20.64,
+     "end_seconds": 21.615,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 21.12,
+     "end_seconds": 23.055,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 22.56,
+     "end_seconds": 25.935,
+     "frames": 6
+    },
+    {
+     "label": "music",
+     "start_seconds": 25.44,
+     "end_seconds": 26.895,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 26.4,
+     "end_seconds": 30.023,
+     "frames": 7
+    }
+   ]
+  }
+ ]
+}
