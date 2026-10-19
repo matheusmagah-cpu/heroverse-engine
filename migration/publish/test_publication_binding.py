@@ -12,11 +12,8 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def documents():
-    sha='a'*64
-    return [{'status':'PASS','output_sha256':sha}, {'approved':True,'output_sha256':sha},
-            {'output_sha256':sha}, {'version':'prepublish-gate-v1','output_sha256':sha,'decision':'PASS',
-             'eligible_for_automatic_publication':True,'dimensions':{'binding':'PASS'},
-             'items':{'binding':[{'state':'PASS'}]}}]
+    d=ROOT/'migration/production/pilot-012'
+    return [json.loads((d/p).read_bytes()) for p in binding.FILES]
 
 
 class Tests(unittest.TestCase):
@@ -59,6 +56,23 @@ class Tests(unittest.TestCase):
     def test_actual012(self):
         d=ROOT/'migration/production/pilot-012';docs=[json.loads((d/p).read_bytes()) for p in binding.FILES]
         self.assertEqual(binding.check(*docs),[])
+    def test_missing_each_canonical_dimension(self):
+        self.assertEqual(len(documents()[3]['dimensions']),14)
+        for name in documents()[3]['dimensions']:
+            d=documents();del d[3]['dimensions'][name];del d[3]['items'][name]
+            self.assertIn('GATE_CANONICAL_DIMENSIONS_MISSING',binding.check(*d),name)
+    def test_missing_static_required_item(self):
+        d=documents();d[3]['items']['audio']=[r for r in d[3]['items']['audio'] if r['item']!='integrated_lufs']
+        self.assertIn('GATE_CANONICAL_ITEMS_MISSING:audio',binding.check(*d))
+    def test_unknown_criteria_version(self):
+        d=documents();d[0]['criteria_version']='unknown'
+        self.assertIn('QA_CRITERIA_VERSION_UNKNOWN',binding.check(*d))
+    def test_existing_review_binding(self):
+        d=documents();review={'status':'PASS','output_sha256':d[0]['output_sha256']}
+        self.assertEqual(binding.check(*d,review=review),[])
+        for bad in ({'status':'FAIL','output_sha256':d[0]['output_sha256']},{'status':'PASS','output_sha256':'b'*64},[]):
+            self.assertIn('REVIEW_NOT_PASS_FOR_THIS_FILE',binding.check(*d,review=bad))
+
     def test_cli_optimized_missing_malformed_fail(self):
         with tempfile.TemporaryDirectory() as tmp:
             d=Path(tmp)

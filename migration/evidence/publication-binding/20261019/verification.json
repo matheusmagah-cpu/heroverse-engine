@@ -1,5 +1,5 @@
 {
-  "new_tests": 13,
+  "new_tests": 17,
   "ci_suites_locally_passed": 37,
   "source_integrity": [
     {
@@ -31,11 +31,18 @@
       "path": ".github/workflows/approve.yml",
       "sha256": "0c721e02ec317b9df3b0c6debb1befb371e5beb349e7c304ce733b725ea47ee0",
       "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/review.json",
+      "sha256": "19bc4ea8c07502e29fb2ff99234b779187ec857c229c87f5f215a16f900c14a2",
+      "unchanged": true
     }
   ],
   "actual_pilot012_binding": "PASS",
   "actual_output_sha256": "82276559bdfdb5600e7e0ae13b5e7b337611fdacf0d2c2cc25d3533957e9dbfe",
   "publication_performed": false,
   "dispatch_performed": false,
-  "frozen_qa_changed": false
+  "frozen_qa_changed": false,
+  "canonical_dimensions_v3": 14,
+  "independent_review_fix": "Required canonical dimensions/static item identities; optional existing review hash/status binding; unknown QA schema rejected."
 }
