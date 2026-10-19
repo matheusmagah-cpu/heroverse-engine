@@ -1,0 +1,97 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 13,
+    "picture_changes_per_minute": 25.94,
+    "median_shot_seconds": 2.233,
+    "longest_shot_seconds": 4.433,
+    "motion_median_top_decile_diff": 6.772
+   },
+   "rhythm": {
+    "audio_onsets": 64,
+    "audio_onsets_per_minute": 127.72,
+    "tempo": {
+     "bpm": 79.11,
+     "confidence": 0.059
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.0,
+     "chance_fraction": 0.132,
+     "lift": 0.0
+    },
+    "sync": {
+     "median_offset_seconds": -0.616462,
+     "verdict": "OUT_OF_SYNC",
+     "consensus_pairs": 6,
+     "visual_events": 13,
+     "sign": "positive means sound lags picture",
+     "window_seconds": [
+      -0.045,
+      0.125
+     ]
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -12.4,
+    "loudness_range_lu": 3.3,
+    "true_peak_dbtp": 0.0
+   },
+   "colour": {
+    "mean_brightness": 0.3402,
+    "brightness_std_over_time": 0.0198,
+    "mean_saturation": 0.3297,
+    "saturation_std_over_time": 0.0296
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.984,
+     "singing": 0.0,
+     "music": 0.0,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 61,
+     "singing": 0,
+     "music": 0,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 1
+    },
+    "words": 87,
+    "words_per_minute": 173.6,
+    "transcript": "is the doctrine of purgatory. It is not a place of punishment for the sake of vengeance, but a place of purification for the sake of love. It is the goldsmith holding the precious metal in the fire. The goldsmith does not hold the gold in the fire to destroy it, but to remove the dross so that the gold may be pure and reflect the light perfectly. You You are that gold. God is the goldsmith. The fire of purgatory is the intense love of God."
+   },
+   "sound_segments": [
+    {
+     "label": "speech",
+     "start_seconds": 0.0,
+     "end_seconds": 12.975,
+     "frames": 26
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 12.48,
+     "end_seconds": 13.455,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 12.96,
+     "end_seconds": 30.023,
+     "frames": 35
+    }
+   ]
+  }
+ ]
+}
