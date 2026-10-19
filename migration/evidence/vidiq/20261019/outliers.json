@@ -1,0 +1,40 @@
+{
+ "version": "vidiq-outliers-v1",
+ "fetched_utc": "2026-10-19",
+ "source": "vidIQ MCP vidiq_outliers (read-only), publishedWithin=threeMonths",
+ "queries": [
+  {"keyword": "morning prayer to start your day with God, Christian prayer", "contentType": "long", "minViews": 20000, "returned": 24},
+  {"keyword": "night prayer before sleep, fall asleep in God's presence", "contentType": "long", "minViews": 20000, "returned": 24},
+  {"keyword": "Christian prayer short, Jesus speaks, daily prayer", "contentType": "short", "minViews": 50000, "returned": 25}
+ ],
+ "note": "Spoken-prayer winners only (music/psalm-song/kids/non-English results excluded from the benchmark set). breakoutScore = vidIQ views vs the channel's own norm.",
+ "long_spoken_prayer_winners": [
+  {"id": "OuqwfEgNavE", "channel": "Grace & Purpose Prayer Altar", "subs": 4810, "views": 237234, "breakout": 2310.11, "dur_s": 858, "title": "Psalm 91 Prayer for Protection | Morning Prayer for God's Covering Over You!", "ai_label": false},
+  {"id": "fXhKzleJhxI", "channel": "Bedtime Prayer Moment", "subs": 1480, "views": 68067, "breakout": 1332.76, "dur_s": 347, "title": "Thank You, Lord, for Today | A Gentle Bedtime Prayer for Gratitude and Rest", "ai_label": true},
+  {"id": "mtWtsL5hOLg", "channel": "Evening Mercy Prayer", "subs": 1870, "views": 93448, "breakout": 839.24, "dur_s": 568, "title": "Put God First Tonight | powerful Night Prayer to End Your Day with God", "ai_label": true},
+  {"id": "k3QWu6asmFk", "channel": "Walking With God Almighty", "subs": 1430, "views": 41938, "breakout": 676.42, "dur_s": 3989, "title": "Night Prayer for Protection | Psalm 91 — Leave Your Burdens with God"},
+  {"id": "h5qR3G2I1EU", "channel": "Daily Word of Jesus", "subs": 59100, "views": 96109, "breakout": 643.21, "dur_s": 13562, "title": "Thank You, God! A Powerful Morning Prayer to Start Your Day with Faith, Protection & Blessings", "ai_label": false},
+  {"id": "UvB-bJLSzwI", "channel": "Walking With God Almighty", "subs": 1430, "views": 27295, "breakout": 440.19, "dur_s": 4348, "title": "Night Prayer for the Weary Heart | Peace, Healing & Deep Rest Tonight"},
+  {"id": "1YkQeS5ankw", "channel": "Morning Grace Daily", "subs": 10700, "views": 213566, "breakout": 424.56, "dur_s": 1201, "title": "Seek God First Today Before Anything Else | Morning Prayer To Start Your Day With God"},
+  {"id": "TjkOf6Dgwb4", "channel": "Morning Grace Prayers", "subs": 10800, "views": 192094, "breakout": 402.36, "dur_s": 1479, "title": "Fill My Mind With Peace | Morning Prayer To Start Your Day With God", "ai_label": true},
+  {"id": "Xc4UT3Jig9o", "channel": "Walking With God Almighty", "subs": 1430, "views": 23753, "breakout": 383.11, "dur_s": 2229, "title": "Night Prayer: Put On the Armor of God Tonight | Psalm 35 & 91"},
+  {"id": "guTmelUNZiU", "channel": "The Grace Hour", "subs": 5450, "views": 39340, "breakout": 314.7, "dur_s": 2772, "title": "Morning Prayer To Start Your Day with God | Invite God To Walk With You Today"},
+  {"id": "zHkHICPKyDo", "channel": "Morning Grace Daily", "subs": 10700, "views": 67171, "breakout": 201.7, "dur_s": 1201, "title": "Morning Prayer to Start Your Day with God | Lord Walk With Me Today", "ai_label": true},
+  {"id": "VwZqiYqi40o", "channel": "Prayer of Hope", "subs": 3710, "views": 46774, "breakout": 199.02, "dur_s": 3195, "title": "Wednesday September 16 Thank God First & Watch What Happens Powerful Morning Prayer for Breakthrough"},
+  {"id": "cyyqnkJwxJw", "channel": "Night Blessing", "subs": 2960, "views": 139085, "breakout": 133.71, "dur_s": 3537, "title": "Holy Spirit, Help Me Pray When I Don't Know What to Say | Night Prayer", "ai_label": true},
+  {"id": "Z8ogwcMKnqY", "channel": "Restful Prayers", "subs": 5020, "views": 26849, "breakout": 120.76, "dur_s": 299, "title": "A Powerful Night Prayer for Peace, Protection & Rest | Sleep in God's Presence", "ai_label": false},
+  {"id": "htx4YZVYBVs", "channel": "Morning Grace Prayers", "subs": 10800, "views": 75174, "breakout": 119.99, "dur_s": 1329, "title": "Powerful Morning Prayer To Start Your Day With God | Lord, Forgive Me, Guide Me & Bless Me", "ai_label": true},
+  {"id": "tYdS0TngzuQ", "channel": "Prayer Before Sleep", "subs": 3600, "views": 193116, "breakout": 116.36, "dur_s": 354, "title": "Never Forget to Thank God Before You Sleep | POWERFUL Gratitude Prayer", "ai_label": false},
+  {"id": "y3SsQ7s-VkY", "channel": "Morning Grace Prayers", "subs": 10800, "views": 62175, "breakout": 105.98, "dur_s": 1694, "title": "Start Your Day With God | Powerful Morning Prayer for a Beautiful & Blessed Day", "ai_label": true},
+  {"id": "BHMBdEwqoYE", "channel": "PRAYER LINE ONLINE", "subs": 58800, "views": 269615, "breakout": 82.03, "dur_s": 941, "title": "FATHER, SHOW ME THE WAY THAT I SHOULD GO", "ai_label": false},
+  {"id": "QKI8sGXQ2dU", "channel": "Morning Prayer With God", "subs": 7740, "views": 131360, "breakout": 34.29, "dur_s": 3301, "title": "Thank God First This Morning 🙏 | Powerful Morning Prayer to Start Your Day With God", "ai_label": false},
+  {"id": "T2N6pPQ-9Ps", "channel": "Peaceful Night Prayers", "subs": 9680, "views": 226329, "breakout": 28.84, "dur_s": 3334, "title": "God Will Protect You Tonight 🙏  Powerful Bedtime Prayer For Peace, Protection & Breakthrough", "ai_label": false}
+ ],
+ "short_spoken_prayer_winners": [
+  {"id": "DigF0F0LrfY", "channel": "The Divine Echo", "subs": 42900, "views": 197058, "breakout": 56.08, "dur_s": 178, "engagement": 0.091},
+  {"id": "z1nRGps5x1E", "channel": "The Divine Echo", "subs": 42900, "views": 201108, "breakout": 78.61, "dur_s": 167, "engagement": 0.087},
+  {"id": "pQTj7FQ1Hq4", "channel": "The Sojourner's Path", "subs": 3200, "views": 154389, "breakout": 96.85, "dur_s": 151, "engagement": 0.081},
+  {"id": "fqEQZzMuel0", "channel": "DAILY PRAYER & BLESSING", "subs": 27400, "views": 97996, "breakout": 30.22, "dur_s": 65, "engagement": 0.232},
+  {"id": "g1ARgM2lzGA", "channel": "Echoes of Grace daily", "subs": 16300, "views": 67664, "breakout": 31.27, "dur_s": 181, "engagement": 0.042}
+ ]
+}

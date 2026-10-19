@@ -38,7 +38,7 @@ audience: English-speaking Christians starting the day → desire: peace, guidan
 2. Choose a visual source with documented rights at zero cost.
 3. Original script and TakePlan → render → existing QA gates (loudness target −15 ± 1 LUFS, speech intelligibility via ASR WER, meter and semantic checks against the archetype) → approval → publication within the D-047 envelope.
 
-## Amendment 2026-10-17: visual grammar (after the pilot-001 review)
+## Amendment 2026-10-17: visual grammar (after the pilot-001 review) — SUPERSEDED 2026-10-19 by `migration/STANDARD.md` (no persistent figure, no persistent badges or AMEN prompt, captions with no box)
 The "28–36 picture changes/min" above counted **caption changes**, not scene cuts (see `production/pilot-001/inspection/REVIEW.md` and `diagnostics/av-picture-change/references/SPOT_CHECK.md`). Corrected visual grammar for this archetype:
 - a title card in the first 1–2 s, matching the thumbnail promise;
 - one persistent central figure (Jesus in prayer) at the left ~40% of the frame, the same across the video;

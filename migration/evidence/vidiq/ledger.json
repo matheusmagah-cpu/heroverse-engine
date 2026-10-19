@@ -35,6 +35,78 @@
    "credits": 0,
    "purpose": "connection check: HeroVerse UCuMF6pJQkyMzaVoAxFL86yA, account matheusmagah@gmail.com",
    "saved_to": "strategy/VIDIQ.md"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "long outliers: morning prayer",
+   "saved_to": "evidence/vidiq/20261019/outliers.json"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "long outliers: night prayer",
+   "saved_to": "evidence/vidiq/20261019/outliers.json"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "short outliers: prayer Shorts",
+   "saved_to": "evidence/vidiq/20261019/outliers.json"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "account",
+   "tool": "vidiq_balance",
+   "credits": 0,
+   "purpose": "credit check: 5955 total (5835 renewable, resets 2026-11-18)",
+   "saved_to": "-"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_video_watch",
+   "credits": 25,
+   "purpose": "production audit OuqwfEgNavE",
+   "saved_to": "evidence/vidiq/20261019/watch-OuqwfEgNavE.md"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_video_watch",
+   "credits": 25,
+   "purpose": "production audit fXhKzleJhxI",
+   "saved_to": "evidence/vidiq/20261019/watch-fXhKzleJhxI.md"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_watch_shortform_content",
+   "credits": 10,
+   "purpose": "production audit Short DigF0F0LrfY",
+   "saved_to": "evidence/vidiq/20261019/watch-DigF0F0LrfY.md"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_video_transcript",
+   "credits": 5,
+   "purpose": "exact pace fXhKzleJhxI: 790 words / 347 s = 137 wpm (transcript not stored: third-party text)",
+   "saved_to": "evidence/vidiq/20261019/pace.json"
+  },
+  {
+   "date": "2026-10-19",
+   "kind": "research",
+   "tool": "vidiq_video_transcript",
+   "credits": 5,
+   "purpose": "exact pace OuqwfEgNavE (transcript not stored: third-party text)",
+   "saved_to": "evidence/vidiq/20261019/pace.json"
   }
  ]
 }
