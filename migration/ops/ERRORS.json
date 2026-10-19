@@ -128,10 +128,10 @@
    "id": "E13",
    "date": "2026-10-18",
    "error": "Miner rows (unproven instrument) blocked a good render",
-   "fix": "Miner rows are informative until proven on the holdout",
+   "fix": "Miner rows are informative until proven on the holdout; 2026-10-19 (#178): the miner is retired; the production audit that replaced it is report-only and can never change the status",
    "antidote": {
     "file": "migration/production/test_long_review.py",
-    "contains": "def test_miner_rows_reported_until_proven"
+    "contains": "def test_raising_audit_never_changes_the_status"
    }
   },
   {
