@@ -143,7 +143,8 @@ def unschedule(plan_path, out):
     Path(out).write_text(json.dumps({"version": "channel-unschedule-receipt-v1", "channel_id": CHANNEL,
                                      "plan": Path(plan_path).name, "undo": "set each video back to its 'before'",
                                      "changes": receipt}, indent=1) + "\n")
-    print(json.dumps({"unscheduled": sum(r["result"] == "UNSCHEDULED" for r in receipt), "total": len(receipt)}))
+    print(json.dumps({"unscheduled": sum(r["result"] == "UNSCHEDULED" for r in receipt), "total": len(receipt),
+                      "changes": receipt}))  # public ids and statuses only
     if any(r["result"] != "UNSCHEDULED" for r in receipt):
         raise SystemExit("UNSCHEDULE_INCOMPLETE")
 
