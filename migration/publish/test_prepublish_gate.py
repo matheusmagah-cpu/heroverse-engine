@@ -118,5 +118,27 @@ class Gate(unittest.TestCase):
         self.assertEqual(run(qa, man, rev, video_bytes=data)["decision"], "PASS")
 
 
+class StandardV3(unittest.TestCase):
+    def test_v3_render_is_held_to_the_standard_grammar(self):
+        crit = (PROD / "qa_criteria_v3.json").read_bytes()
+        checks = sorted({c for spec in g.DIMENSIONS_V3.values() for c in spec["qa"]})
+        qa, man, rev = good()
+        qa.update({"criteria_version": "pilot-qa-criteria-v3", "criteria_sha256": hashlib.sha256(crit).hexdigest(),
+                   "checks": {c: True for c in checks}})
+        r = run(qa, man, rev, criteria=b"not the v3 file")       # v3 binds to the shared frozen file, not the pilot copy
+        self.assertEqual(r["dimensions"]["binding"], "PASS")
+        self.assertEqual(r["dimensions"]["image"], "PASS")
+        figure = copy.deepcopy(qa); figure["checks"]["no_figure"] = False
+        self.assertEqual(run(figure, man, rev)["dimensions"]["image"], "FAIL")
+        box = copy.deepcopy(qa); box["checks"]["caption_no_box"] = False
+        self.assertEqual(run(box, man, rev)["dimensions"]["captions"], "FAIL")
+        # the v2 figure grammar is not what a v3 render is judged by
+        self.assertNotIn("figure_present_after_title", {c for spec in g.DIMENSIONS_V3.values() for c in spec["qa"]})
+
+    def test_v3_criteria_frozen_hash(self):
+        self.assertEqual(hashlib.sha256((PROD / "qa_criteria_v3.json").read_bytes()).hexdigest(),
+                         g.FROZEN_CRITERIA_SHA256["pilot-qa-criteria-v3"])
+
+
 if __name__ == "__main__":
     unittest.main()

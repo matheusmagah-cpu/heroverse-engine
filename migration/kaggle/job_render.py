@@ -76,7 +76,8 @@ models.mkdir(exist_ok=True)
 sh([py["qa"], "-I", "-c", f"import sys; from pathlib import Path; sys.path.insert(0, '{repo / 'migration'}'); "
     f"import second_opening_asr as a; a.extract_model(Path('{src / 'HeroVerse_ASR_base_en_preservado.zip'}'), Path('{models / 'whisper'}'))"])
 qa = subprocess.run([py["qa"], "-I", "-B", str(prod / "qa_pilot.py"), str(work / "pilot.mp4"), str(work / "manifest.json"),
-                     str(script), str(prod / PILOT / "qa_criteria.json"), str(src / "yamnet.tflite"), str(models / "whisper"),
+                     str(script), str(prod / "qa_criteria_v3.json"),  # STANDARD v1 (v2 stays with the old renders)
+                     str(src / "yamnet.tflite"), str(models / "whisper"),
                      str(work / "qa.json")], env=env)
 sh([py["voice"], "-I", "-B", str(prod / "package_pilot.py"), str(work), str(script), str(work / "package")], env=env)
 sh([py["voice"], "-I", "-B", str(prod / "shorts_cut.py"), str(work), str(script), str(inp / "img"), str(inp / "figure.png"),

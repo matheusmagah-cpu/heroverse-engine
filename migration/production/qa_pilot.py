@@ -55,6 +55,53 @@ def grammar_checks(criteria, manifest):
     }
 
 
+def grammar_checks_v3(criteria, manifest):
+    """migration/STANDARD.md v1 (R1-R6) read from the render manifest (pilot-qa-criteria-v3)."""
+    import statistics
+    g, r = criteria["grammar"], criteria["rights"]
+    holds = manifest["holds"]
+    title = holds[0]["end"] - holds[0]["start"]
+    scenes = holds[1:]
+    inner = [h["end"] - h["start"] for h in scenes[:-1]] or [scenes[0]["end"] - scenes[0]["start"]]
+    last_seen, gaps = {}, []
+    for h in scenes:
+        if h["image"] in last_seen:
+            gaps.append(h["start"] - last_seen[h["image"]])
+        last_seen[h["image"]] = h["end"]
+    caps, sents = manifest["captions"], [s for s in manifest["sentences"] if s["end"] > title]
+    covered = sum(max(0.0, min(s["end"], c["end"]) - max(s["start"], c["start"], title)) for s in sents for c in caps)
+    spoken = sum(s["end"] - max(s["start"], title) for s in sents)
+    seg_end = {}
+    for s in manifest["sentences"]:
+        seg_end[s["segment"]] = max(seg_end.get(s["segment"], 0.0), s["end"])
+    cta = manifest.get("cta", [])
+    style = manifest.get("caption_style", {})
+    allowed = set(r["allowed_model_licences"])
+    models = [m for i in manifest["images"].values() for m in i["models"].values()]
+    return {
+        "title_card_seconds": within(title, g["title_card_seconds"]),
+        "no_figure": manifest.get("figure") is None and not any(h["figure"] for h in holds),
+        "every_scene_in_motion": all(h.get("motion") for h in holds),
+        "scene_seconds": all(within(x, g["scene_seconds"]) for x in inner)
+                         and scenes[-1]["end"] - scenes[-1]["start"] >= g["scene_seconds"][0],
+        "crossfade_seconds_max": manifest.get("crossfade_seconds", 99) <= g["crossfade_seconds_max"],
+        "image_repeat_gap": all(x >= g["image_repeat_gap_seconds_min"] for x in gaps),
+        "caption_coverage_of_speech": spoken > 0 and covered / spoken >= g["caption_coverage_of_speech_min"],
+        "caption_hold_median": within(statistics.median(c["end"] - c["start"] for c in caps), g["caption_hold_seconds_median"]),
+        "caption_chars_max": max(len(c["text"]) for c in caps) <= g["caption_chars_max"],
+        "caption_words_max": max(len(c["text"].split()) for c in caps) <= g["caption_words_max"],
+        "caption_no_box": style.get("box") is g["caption_box"],
+        "scripture_card_only_while_read": all(c["end"] <= seg_end.get(c["segment"], -1) + 1e-6 and c["end"] > c["start"]
+                                              for c in manifest.get("scripture_cards", [])),
+        "cta_count": len(cta) <= g["cta_mid_video_max"],
+        "cta_short_and_not_early": all(c["end"] - c["start"] <= g["cta_seconds_max"] and c["start"] >= g["cta_first_start_seconds_min"]
+                                       for c in cta),
+        "persistent_overlays_only_brand": manifest.get("persistent_overlays") == g["persistent_overlays_allowed"],
+        "images_open_licence_with_revision": bool(models) and all(str(m.get("license")).lower() in allowed and m.get("revision") for m in models),
+        "no_third_party_footage": not manifest["clips"] and not manifest["shots"],
+    }
+
+
 def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out):
     criteria = json.loads(Path(criteria_path).read_text())
     manifest = json.loads(Path(manifest_path).read_text())
@@ -105,7 +152,8 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
         checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
             c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
     else:
-        checks.update(grammar_checks(criteria, manifest))
+        checks.update(grammar_checks_v3(criteria, manifest) if criteria["version"] == "pilot-qa-criteria-v3"
+                      else grammar_checks(criteria, manifest))
     checks["music_owned"] = manifest["music"]["sha256"] == OWNED_MUSIC_SHA256
     checks["voice_model_pinned"] = manifest["voice"]["voice_id"] == "am_michael"
     checks = {k: bool(v) for k, v in checks.items()}  # numpy bools are not JSON serializable
