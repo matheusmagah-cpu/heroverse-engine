@@ -2,18 +2,18 @@
  "version": "mining-accuracy-v2",
  "structure_dir": "migration/evidence/structure-mining/20261018",
  "all": {
-  "windows": 12,
-  "speech_windows": 12,
+  "windows": 24,
+  "speech_windows": 24,
   "status_counts": {
-   "COMPARED": 9,
+   "COMPARED": 21,
    "MINED_WINDOW_INVALID": 1,
    "MINED_WINDOW_MISSING": 2
   },
   "transcript_agreement_median": 0.897,
-  "transcript_agreement_min": 0.109,
-  "window_pass_rate": 0.5,
-  "opening_words_agreement": 0.692,
-  "openings_checked": 13,
+  "transcript_agreement_min": 0.075,
+  "window_pass_rate": 0.625,
+  "opening_words_agreement": 0.781,
+  "openings_checked": 32,
   "criteria": {
    "agreement_min": 0.85,
    "openings_min": 0.8,
@@ -22,20 +22,22 @@
   "verdict": "FAIL"
  },
  "holdout": {
-  "windows": 0,
-  "speech_windows": 0,
-  "status_counts": {},
-  "transcript_agreement_median": null,
-  "transcript_agreement_min": null,
-  "window_pass_rate": null,
-  "opening_words_agreement": null,
-  "openings_checked": 0,
+  "windows": 12,
+  "speech_windows": 12,
+  "status_counts": {
+   "COMPARED": 12
+  },
+  "transcript_agreement_median": 0.909,
+  "transcript_agreement_min": 0.075,
+  "window_pass_rate": 0.75,
+  "opening_words_agreement": 0.842,
+  "openings_checked": 19,
   "criteria": {
    "agreement_min": 0.85,
    "openings_min": 0.8,
    "window_pass_rate_min": 0.8
   },
-  "verdict": "UNKNOWN"
+  "verdict": "FAIL"
  },
  "tuning": {
   "windows": 12,
@@ -144,6 +146,54 @@
    "set": "tuning"
   },
   {
+   "video_id": "Aw9iRkGi-CU",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 61,
+   "mined_words": 74,
+   "transcript_agreement": 0.889,
+   "openings_checked": 3,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "BEGIN YOUR DAY IN HIS PRESENCE",
+     "found": false
+    },
+    {
+     "mined": "Before you go any further this morning,",
+     "found": true
+    },
+    {
+     "mined": "This morning isn't about what's wrong",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "CK5u_HnhiuI",
+   "window": [
+    533,
+    563
+   ],
+   "status": "COMPARED",
+   "asr_words": 88,
+   "mined_words": 45,
+   "transcript_agreement": 0.075,
+   "openings_checked": 1,
+   "openings_found": 0,
+   "examples": [
+    {
+     "mined": "In 1 Samuel chapter 24, Saul is",
+     "found": false
+    }
+   ],
+   "set": "holdout"
+  },
+  {
    "video_id": "FEyv4xRoPzs",
    "window": [
     1198,
@@ -166,6 +216,46 @@
     }
    ],
    "set": "tuning"
+  },
+  {
+   "video_id": "H4tEhjvoH_M",
+   "window": [
+    598,
+    628
+   ],
+   "status": "COMPARED",
+   "asr_words": 77,
+   "mined_words": 78,
+   "transcript_agreement": 0.994,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "And To Accept Practical Help When It Is Offered With Genuine Care.",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "IPMKBDrVwZA",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 66,
+   "mined_words": 70,
+   "transcript_agreement": 0.971,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "Good morning beloved. Before you rush",
+     "found": true
+    }
+   ],
+   "set": "holdout"
   },
   {
    "video_id": "MAZXkEhdKU8",
@@ -252,6 +342,26 @@
    "set": "tuning"
   },
   {
+   "video_id": "TjkOf6Dgwb4",
+   "window": [
+    441,
+    471
+   ],
+   "status": "COMPARED",
+   "asr_words": 69,
+   "mined_words": 61,
+   "transcript_agreement": 0.877,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "Father I pray for peace in my",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
    "video_id": "VGv3fbxG7OI",
    "window": [
     429,
@@ -283,6 +393,166 @@
     }
    ],
    "set": "tuning"
+  },
+  {
+   "video_id": "cX_DvmKryDU",
+   "window": [
+    414,
+    444
+   ],
+   "status": "COMPARED",
+   "asr_words": 82,
+   "mined_words": 73,
+   "transcript_agreement": 0.929,
+   "openings_checked": 2,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "Father, I ask you to settle",
+     "found": true
+    },
+    {
+     "mined": "Heavenly Father, give me peace about",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "dQQxzik8C4o",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 69,
+   "mined_words": 70,
+   "transcript_agreement": 0.993,
+   "openings_checked": 3,
+   "openings_found": 3,
+   "examples": [
+    {
+     "mined": "Before the sun rises fully",
+     "found": true
+    },
+    {
+     "mined": "God knows what your family",
+     "found": true
+    },
+    {
+     "mined": "Perhaps you woke up this",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "e4BYWoswaUk",
+   "window": [
+    768,
+    798
+   ],
+   "status": "COMPARED",
+   "asr_words": 61,
+   "mined_words": 57,
+   "transcript_agreement": 0.949,
+   "openings_checked": 2,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "You may not receive every answer",
+     "found": true
+    },
+    {
+     "mined": "When your heart feels overwhelmed, pray",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "j6eXNa7NqwU",
+   "window": [
+    852,
+    882
+   ],
+   "status": "COMPARED",
+   "asr_words": 53,
+   "mined_words": 45,
+   "transcript_agreement": 0.857,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "Now the third word, dakah.",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "noiMjV6UxSk",
+   "window": [
+    0,
+    30
+   ],
+   "status": "COMPARED",
+   "asr_words": 78,
+   "mined_words": 82,
+   "transcript_agreement": 0.963,
+   "openings_checked": 2,
+   "openings_found": 2,
+   "examples": [
+    {
+     "mined": "Two men carried it on a pole",
+     "found": true
+    },
+    {
+     "mined": "The Nephilim belong to Genesis 6",
+     "found": true
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "q3wraYaNR-A",
+   "window": [
+    553,
+    583
+   ],
+   "status": "COMPARED",
+   "asr_words": 73,
+   "mined_words": 51,
+   "transcript_agreement": 0.226,
+   "openings_checked": 1,
+   "openings_found": 0,
+   "examples": [
+    {
+     "mined": "Now you can see why the stakes of",
+     "found": false
+    }
+   ],
+   "set": "holdout"
+  },
+  {
+   "video_id": "sPzwCy2fRjM",
+   "window": [
+    341,
+    371
+   ],
+   "status": "COMPARED",
+   "asr_words": 87,
+   "mined_words": 111,
+   "transcript_agreement": 0.838,
+   "openings_checked": 1,
+   "openings_found": 1,
+   "examples": [
+    {
+     "mined": "This is the doctrine of purgatory",
+     "found": true
+    }
+   ],
+   "set": "holdout"
   }
  ],
  "reading": "verdict on the holdout set only; tuning windows were used to find defects and prove nothing"
