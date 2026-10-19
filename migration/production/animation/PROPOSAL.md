@@ -26,7 +26,7 @@ criteria (`qa_criteria_v3.json`, frozen) and every publication control stay as t
 4. `render_queue.STANDARD_QA` becomes a set: `{"pilot-qa-criteria-v3", "animation-qa-criteria-v1"}`; the gate checks
    the frozen sha of whichever criteria the manifest names (both listed in `FROZEN_CRITERIA_SHA256`).
 5. Chunk render workflow (from the test): `workflow_dispatch` with `chunks` input; matrix with `max-parallel: 4`;
-   each chunk uploads `frames-<a>-<b>` (retention 3 days) with `frames.json` (index → sha256). A resume run is
+   each chunk uploads one lossless FFV1 clip `frames-<a>-<b>.mkv` (retention 1 day) with `frames.json` (index → sha256). A resume run is
    dispatched with only the missing or invalid chunk ranges, found by `qa_animation.py` (`frame_set_contiguous`).
 
 ## 3. Tests
@@ -44,11 +44,31 @@ Both repositories are **public**: standard GitHub-hosted runner minutes are free
 Measured on the standard runner (run 39311356367): see `MEASURED` below; the full-render estimate is
 `frames × seconds_per_frame / 4 jobs` and is not a promise of linear speed-up (each job also pays preparation).
 
-MEASURED: pending the test run.
+MEASURED (run 39311356367, `the-bag-he-almost-passed/evidence/render-test-39311356367.json`):
+- graphics: **EGL headless works**; Xvfb not needed;
+- preparation: 35 s (apt 14 s, verified Blender download 2 s, extract 19 s) + ~20 s Blender start per process;
+- **28.8 s per frame** (master and vertical alike, 4-CPU runner), peak memory **1.8 GB**, PNG ~2.9 MB per frame;
+- join of two chunks from separate processes: exact (10/10 frames, all distinct); 84 GB disk free.
+
+| Render | Frames | Job time | Wall time with 4 jobs |
+|---|---|---|---|
+| Current bundle (10 fps, 152 s + 2 Shorts) | 1,520 + 470 = 1,990 | ~16 h | ~4 h |
+| Target bundle (24 fps, 152 s + ~83 s of Shorts) | 3,648 + ~1,990 = ~5,640 | ~45 h | ~11-12 h |
+
+The target figure assumes today's cost per frame; rigged characters may cost more and are measured again on the
+first chunk of the new bundle before any matrix. Consequences, built into the design:
+- **job limit**: a standard job stops at 6 h, so chunks are sized to ≤ 3 h (~350 frames) and a run has 16 chunks,
+  4 at a time;
+- **artifact size**: 5,640 PNGs would be ~16 GB. Each chunk job encodes its frames into one lossless FFV1 clip (its size is measured on the first chunk) and
+  uploads only that plus `frames.json` (index → sha256), retention **1 day**; the assembly job deletes nothing it did
+  not verify;
+- **resume**: a second run is dispatched only with the chunk ranges that are missing or fail the hash/dimension check.
+
+No paid runner, no larger runner, no external service. Cost stays at zero.
 
 ## 5. Rollback
 
 - Every change is one squash-merged PR; reverting it restores the previous behaviour.
 - The animation branch in `render_pilot.sh` runs only when `script.json` says `"backend": "animation"`; prayer pilots never take it.
 - Frozen criteria are never edited; a new version is a new file.
-- Artifacts expire after 3 days; nothing is published without the unchanged three-stage approval.
+- Chunk artifacts expire after 1 day (the test's after 3); nothing is published without the unchanged three-stage approval.
