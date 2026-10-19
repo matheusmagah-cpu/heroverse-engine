@@ -1,0 +1,28 @@
+name: HeroVerse official rules (YouTube rules quoted verbatim, issue #180)
+# Fetches the official YouTube pages on the runner, lets a free support model pick the rule sentences and keeps
+# only the quotes that are exact substrings of the fetched text. Rules only, never full pages.
+# Free support models only (never the designated reviewer's allowance).
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-official-rules
+  cancel-in-progress: false
+jobs:
+  rules:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Fetch and quote
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: python3 -B migration/mining/official_rules.py migration/evidence/youtube-official/20261020
+      - name: Record the evidence
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/youtube-official/20261020
+          git commit -m "Official YouTube rules, verbatim quotes (issue #180, run ${{ github.run_id }})" || exit 0
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
