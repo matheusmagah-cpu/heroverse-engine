@@ -129,7 +129,8 @@ analysis (08:05 UTC) is bound to the same session; the two older routines that r
 Claude keeps scripts **4 days ahead**: at each daily analysis (08:05) Claude opens the Dot cards for the two slots of
 day D+4 (topic from the decisions protocol + vidIQ), so Dot's cycle, images, render and gate always fit. The daily
 report's **Content runway** (`ops/runway.py`) lists every slot of the next 4 days with its stage and alerts when a slot
-has no script < 72 h before, no render < 20 h before, or no gate PASS < 6 h before. An alert is handled the same day. Scheduled workflows of the public runner stop after 60 days without a commit there.
+has no script < 72 h before, no render < 36 h before, or no gate PASS < 24 h before (owner 2026-10-19: approve one
+full day ahead, so a provider error or a FAIL has a day to be fixed; quality is never traded for time). An alert is handled the same day. Scheduled workflows of the public runner stop after 60 days without a commit there.
 
 ## External tools
 - **vidIQ** (connected 2026-10-18, account linked to HeroVerse): research only — demand, rising topics, outliers

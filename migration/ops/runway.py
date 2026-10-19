@@ -13,7 +13,9 @@ import sys
 
 DAYS = 4
 FIRST_NIGHT = datetime(2026, 10, 20, 0, 0, tzinfo=timezone.utc)
-SCRIPT_LEAD, RENDER_LEAD, APPROVAL_LEAD = timedelta(hours=72), timedelta(hours=20), timedelta(hours=6)
+# owner 2026-10-19: approval (gate PASS) one full day ahead, so a provider hiccup or a FAIL has a day to be fixed
+# without missing the slot; the render comes 12 h before that (E24)
+SCRIPT_LEAD, RENDER_LEAD, APPROVAL_LEAD = timedelta(hours=72), timedelta(hours=36), timedelta(hours=24)
 
 
 def ts(s):
