@@ -97,7 +97,7 @@
     "source": "review",
     "item": "audio_clarity_and_mix",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "transcript": [
@@ -142,7 +142,7 @@
     "source": "review",
     "item": "captions_readable_and_synced",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "sync": [
@@ -160,7 +160,7 @@
     "source": "review",
     "item": "captions_readable_and_synced",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "image": [
@@ -198,13 +198,13 @@
     "source": "review",
     "item": "picture_quality",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "rights": [
@@ -234,25 +234,25 @@
     "source": "review",
     "item": "opening_and_promise",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "policy_safe",
     "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
