@@ -1131,6 +1131,17 @@
       "completed_at": "2026-10-19T00:38:38.416107+00:00",
       "run_id": "39181031092",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-e4BYWoswaUk-768-798-v1",
+      "video_id": "e4BYWoswaUk",
+      "start_seconds": 768,
+      "end_seconds": 798,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-19T00:38:51.740931+00:00",
+      "day_utc": "2026-10-19",
+      "units_remaining_at_reservation": 472,
+      "reserved_units": 14
     }
   ]
 }
