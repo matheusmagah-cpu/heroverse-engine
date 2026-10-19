@@ -2,6 +2,962 @@
  "version": "long-review-v1",
  "pilot_id": "pilot-004",
  "output_sha256": "3a7c6c28b1c806859b36ad8c856b4e425eeedabf84eeaaf6facae1c3fe6b2f24",
- "status": "ERROR",
- "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 30.48,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 8.53,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {
+  "words_per_minute": {
+   "value": 111.4,
+   "band": [
+    115,
+    165
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
+  },
+  "beats_per_minute": {
+   "value": 1.82,
+   "band": [
+    2.0,
+    2.6
+   ],
+   "inside": false
+  },
+  "shots_per_minute_model_counted": {
+   "value": 4.78,
+   "band": [
+    6,
+    99
+   ],
+   "inside": false
+  },
+  "you_per_100_words": {
+   "value": 4.5,
+   "band": [
+    6,
+    99
+   ],
+   "inside": false
+  },
+  "minutes": {
+   "value": 30.48,
+   "band": [
+    15,
+    45
+   ],
+   "inside": true
+  },
+  "first_spoken_at": {
+   "value": 900.0,
+   "band": [
+    0,
+    1.5
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
+  },
+  "coverage": {
+   "value": 0.343,
+   "band": [
+    0.9,
+    1.01
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
+  }
+ },
+ "watched_review": {
+  "opening_and_promise": 9.0,
+  "picture_quality": 8.5,
+  "figure_and_background_integrity": 8.8,
+  "captions_readable_and_synced": 9.2,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 7.5,
+  "scripture_on_screen": 9.0,
+  "policy_safe": 10.0,
+  "overall": 8.8,
+  "issues": [
+   "The praying figure cutout remains identical and completely static across the entire 30-minute duration without micro-animations or posture shifts.",
+   "Constant cycling of engagement overlays (Subscribe, Like, Share, 'Type AMEN') throughout the corner margins slightly conflicts with the peaceful sleep/meditation tone.",
+   "At 30:21-30:24, the scripture citation badge for 2 Thessalonians 3:16 persists on screen after the scripture reading ends and the closing prayer concludes."
+  ],
+  "strongest_moment": "The guided breathing sequence transitioning into the reading of Psalm 23 (around 12:00), where the soothing vocal cadence and gentle background shift create an effective, calming atmosphere for sleep.",
+  "model": "gemini-3.8-flash",
+  "status": "PASS"
+ },
+ "failed_windows": [
+  0,
+  300,
+  600,
+  1500
+ ],
+ "measured": {
+  "minutes": 30.5,
+  "title_words": 13,
+  "title_chars": 68,
+  "chapters": 0,
+  "likes_per_1k_views": 0.0,
+  "comments_per_1k_views": 0.0,
+  "coverage_fraction": 0.343,
+  "beats": 19,
+  "beat_seconds_median": 21.0,
+  "beats_per_minute": 1.82,
+  "shots_per_minute_model_counted": 4.78,
+  "first_spoken_beat": {
+   "at": 900.0,
+   "beat": "application"
+  },
+  "beat_mix": {
+   "scripture": 8,
+   "teaching": 3,
+   "application": 4,
+   "prayer": 3,
+   "music_only": 1
+  },
+  "scripture_references": [
+   "2 Thessalonians 3:16",
+   "John 14:1-3",
+   "Lamentations 3:22-26",
+   "Matthew 6:25-34",
+   "Philippians 4:6-8",
+   "Psalm 121",
+   "Psalm 139:1-6",
+   "Romans 8:35-39"
+  ],
+  "scripture_per_10_min": 7.64,
+  "speech": {
+   "words": 1166,
+   "words_per_minute": 111.4,
+   "sentence_words_median": 10,
+   "you_per_100_words": 4.5,
+   "questions_per_minute": 0.96,
+   "first_15s_words": ""
+  }
+ },
+ "windows": [
+  {
+   "video_id": "pilot-004",
+   "window_start_seconds": 900,
+   "window_end_seconds": 1200,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 900.0,
+     "text": "from the elbows to the wrists, all the way to the tips of your fingers."
+    },
+    {
+     "start_seconds": 906.0,
+     "text": "Open your hands a little, as if you were giving the whole day back to God."
+    },
+    {
+     "start_seconds": 912.0,
+     "text": "There is nothing left to hold."
+    },
+    {
+     "start_seconds": 915.0,
+     "text": "Let your breathing slow down on its own."
+    },
+    {
+     "start_seconds": 918.0,
+     "text": "Feel your chest rise and fall, gently, without effort."
+    },
+    {
+     "start_seconds": 923.0,
+     "text": "Let your stomach relax."
+    },
+    {
+     "start_seconds": 925.0,
+     "text": "Let your legs grow heavy and warm, from your hips to your knees, from your knees to your ankles, all the way down to your feet."
+    },
+    {
+     "start_seconds": 935.0,
+     "text": "Your whole body is resting now."
+    },
+    {
+     "start_seconds": 938.0,
+     "text": "And the Lord who made it is watching over you."
+    },
+    {
+     "start_seconds": 943.0,
+     "text": "Listen to the psalm of the God who keeps you."
+    },
+    {
+     "start_seconds": 946.0,
+     "text": "I will lift up mine eyes unto the hills, from whence cometh my help."
+    },
+    {
+     "start_seconds": 951.0,
+     "text": "My help cometh from the LORD, which made heaven and earth."
+    },
+    {
+     "start_seconds": 955.0,
+     "text": "He will not suffer thy foot to be moved: he that keepeth thee will not slumber."
+    },
+    {
+     "start_seconds": 961.0,
+     "text": "Behold, he that keepeth Israel shall neither slumber nor sleep."
+    },
+    {
+     "start_seconds": 966.0,
+     "text": "The LORD is thy keeper: the LORD is thy shade upon thy right hand."
+    },
+    {
+     "start_seconds": 971.0,
+     "text": "The sun shall not smite thee by day, nor the moon by night."
+    },
+    {
+     "start_seconds": 976.0,
+     "text": "The LORD shall preserve thee from all evil: he shall preserve thy soul."
+    },
+    {
+     "start_seconds": 982.0,
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore."
+    },
+    {
+     "start_seconds": 990.0,
+     "text": "The Lord is thy keeper."
+    },
+    {
+     "start_seconds": 993.0,
+     "text": "Not only in the daytime, when you can see what is coming, but in the night, when you cannot."
+    },
+    {
+     "start_seconds": 1040.0,
+     "text": "Not the moon by night."
+    },
+    {
+     "start_seconds": 1042.0,
+     "text": "Even the darkness is under his care."
+    },
+    {
+     "start_seconds": 1045.0,
+     "text": "Let that word settle over you: kept."
+    },
+    {
+     "start_seconds": 1049.0,
+     "text": "Tonight you are kept."
+    },
+    {
+     "start_seconds": 1052.0,
+     "text": "Now hear the words of Jesus about worry."
+    },
+    {
+     "start_seconds": 1056.0,
+     "text": "Therefore I say unto you, Take no thought for your life, what ye shall eat, or what ye shall drink; nor yet for your body, what ye shall put on."
+    },
+    {
+     "start_seconds": 1067.0,
+     "text": "Is not the life more than meat, and the body than raiment?"
+    },
+    {
+     "start_seconds": 1072.0,
+     "text": "Behold the fowls of the air: for they sow not, neither do they reap, nor gather into barns; yet your heavenly Father feedeth them."
+    },
+    {
+     "start_seconds": 1081.0,
+     "text": "Are ye not much better than they?"
+    },
+    {
+     "start_seconds": 1084.0,
+     "text": "Which of you by taking thought can add one cubit unto his stature?"
+    },
+    {
+     "start_seconds": 1090.0,
+     "text": "And why take ye thought for raiment?"
+    },
+    {
+     "start_seconds": 1092.0,
+     "text": "Consider the lilies of the field, how they grow; they toil not, neither do they spin:"
+    },
+    {
+     "start_seconds": 1099.0,
+     "text": "And yet I say unto you, That even Solomon in all his glory was not arrayed like one of these."
+    },
+    {
+     "start_seconds": 1107.0,
+     "text": "Wherefore, if God so clothe the grass of the field, which to day is, and to morrow is cast into the oven, shall he not much more clothe you, O ye of little faith?"
+    },
+    {
+     "start_seconds": 1119.0,
+     "text": "Therefore take no thought, saying, What shall we eat? or, What shall we drink? or, Wherewithall shall we be clothed?"
+    },
+    {
+     "start_seconds": 1128.0,
+     "text": "For after all these things do the Gentiles seek: for your heavenly Father knoweth that ye have need of all these things."
+    },
+    {
+     "start_seconds": 1137.0,
+     "text": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you."
+    },
+    {
+     "start_seconds": 1145.0,
+     "text": "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself."
+    },
+    {
+     "start_seconds": 1152.0,
+     "text": "Sufficient unto the day is the evil thereof."
+    },
+    {
+     "start_seconds": 1157.0,
+     "text": "Somewhere tonight the birds Jesus spoke about are asleep in their nests."
+    },
+    {
+     "start_seconds": 1162.0,
+     "text": "They did not plan tomorrow's food."
+    },
+    {
+     "start_seconds": 1165.0,
+     "text": "They simply rest, and the Father feeds them."
+    },
+    {
+     "start_seconds": 1168.0,
+     "text": "You are worth far more to him than they are."
+    },
+    {
+     "start_seconds": 1172.0,
+     "text": "Tomorrow will take care of itself."
+    },
+    {
+     "start_seconds": 1175.0,
+     "text": "For now, only rest."
+    },
+    {
+     "start_seconds": 1178.0,
+     "text": "Father, I give you tomorrow."
+    },
+    {
+     "start_seconds": 1181.0,
+     "text": "Every meeting, every bill, every conversation, every unknown."
+    },
+    {
+     "start_seconds": 1186.0,
+     "text": "I do not need to solve any of it tonight."
+    },
+    {
+     "start_seconds": 1189.0,
+     "text": "You know what I need before I ask."
+    },
+    {
+     "start_seconds": 1192.0,
+     "text": "I rest in that."
+    },
+    {
+     "start_seconds": 1195.0,
+     "text": "Jesus said to his friends on the night before he died, Let not your heart be troubled:"
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 900.0,
+     "end_seconds": 915.0,
+     "beat": "application",
+     "opening_words_verbatim": "from the elbows to the wrists",
+     "content": "Guiding the listener through physical relaxation and surrendering the day to God.",
+     "device": "sensory instruction",
+     "emotion": "calm"
+    },
+    {
+     "start_seconds": 915.0,
+     "end_seconds": 943.0,
+     "beat": "application",
+     "opening_words_verbatim": "Let your breathing slow down",
+     "content": "Deepening relaxation by focusing on breathing and body awareness under God's watchful eye.",
+     "device": "guided meditation",
+     "emotion": "peaceful"
+    },
+    {
+     "start_seconds": 943.0,
+     "end_seconds": 990.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "Listen to the psalm of",
+     "content": "Reciting Psalm 121 as assurance of divine protection and help.",
+     "device": "scripture reading",
+     "emotion": "reverent"
+    },
+    {
+     "start_seconds": 990.0,
+     "end_seconds": 1052.0,
+     "beat": "teaching",
+     "opening_words_verbatim": "The Lord is thy keeper",
+     "content": "Reflecting on God's constant protection through day and night.",
+     "device": "explanation",
+     "emotion": "reassuring"
+    },
+    {
+     "start_seconds": 1052.0,
+     "end_seconds": 1157.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "Now hear the words of",
+     "content": "Reciting Matthew 6:25-34 regarding worry and trust in the Father.",
+     "device": "scripture reading",
+     "emotion": "comforting"
+    },
+    {
+     "start_seconds": 1157.0,
+     "end_seconds": 1178.0,
+     "beat": "teaching",
+     "opening_words_verbatim": "Somewhere tonight the birds Jesus",
+     "content": "Applying the lesson of the birds to encourage rest and letting go of tomorrow's worries.",
+     "device": "analogy",
+     "emotion": "serene"
+    },
+    {
+     "start_seconds": 1178.0,
+     "end_seconds": 1195.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "Father, I give you tomorrow",
+     "content": "Offering a bedtime prayer surrendering anxieties and resting in God's provision.",
+     "device": "personal prayer",
+     "emotion": "surrendered"
+    },
+    {
+     "start_seconds": 1195.0,
+     "end_seconds": 1200.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "Jesus said to his friends",
+     "content": "Introducing Jesus' words of comfort to His disciples before His death.",
+     "device": "callback",
+     "emotion": "reflective"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration",
+    "shot_sizes": [
+     "Medium shot",
+     "Wide shot"
+    ],
+    "shots_counted": 24,
+    "motion": "Slow pan / gentle zoom",
+    "on_screen_text": "Subtitles sentence by sentence, channel header 'HeroVerse Prayer', share/subscribe/like overlays, scripture reference citations, 'Type AMEN'",
+    "figure_or_presenter": "Depiction of Jesus praying with clasped hands",
+    "colour_and_light": "Dark night tones, moonlight, warm window light, sunset gradients",
+    "transitions": "Crossfade / smooth cuts"
+   },
+   "sound": {
+    "voice": "Calm male voice, soothing, American accent, human",
+    "pace": "Very slow and deliberate",
+    "music": "Ambient relaxing instrumental pad with soft pads",
+    "music_changes": "Gentle volume shifts matching the meditative tone",
+    "sound_effects": "None"
+   },
+   "scripture_references": [
+    "Psalm 121",
+    "Matthew 6:25-34",
+    "John 14:1-3"
+   ],
+   "limitations": []
+  },
+  {
+   "video_id": "pilot-004",
+   "window_start_seconds": 1200,
+   "window_end_seconds": 1500,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 1200.5,
+     "text": "Rest in the quiet."
+    },
+    {
+     "start_seconds": 1215.1,
+     "text": "The apostle Paul wrote these words from a prison cell."
+    },
+    {
+     "start_seconds": 1219.2,
+     "text": "Be careful for nothing, but in everything by prayer and supplication with thanksgiving let your requests be made known unto God."
+    },
+    {
+     "start_seconds": 1229.1,
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus."
+    },
+    {
+     "start_seconds": 1237.1,
+     "text": "Finally, brethren, whatsoever things are true, whatsoever things are honest, whatsoever things are just, whatsoever things are pure, whatsoever things are lovely, whatsoever things are of good report, if there be any virtue, and if there be any praise, think on these things."
+    },
+    {
+     "start_seconds": 1260.1,
+     "text": "As you fall asleep, let your mind rest on what is lovely."
+    },
+    {
+     "start_seconds": 1264.2,
+     "text": "A kind word someone said to you today."
+    },
+    {
+     "start_seconds": 1268.1,
+     "text": "The face of someone you love."
+    },
+    {
+     "start_seconds": 1270.2,
+     "text": "The goodness of God that brought you to this moment."
+    },
+    {
+     "start_seconds": 1274.2,
+     "text": "Think on these things, and let the peace that passes understanding stand guard over your heart."
+    },
+    {
+     "start_seconds": 1283.1,
+     "text": "Hear these words of assurance."
+    },
+    {
+     "start_seconds": 1285.2,
+     "text": "Who shall separate us from the love of Christ?"
+    },
+    {
+     "start_seconds": 1289.1,
+     "text": "Shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword?"
+    },
+    {
+     "start_seconds": 1296.2,
+     "text": "Nay, in all these things we are more than conquerors through him that loved us."
+    },
+    {
+     "start_seconds": 1302.2,
+     "text": "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord."
+    },
+    {
+     "start_seconds": 1323.8,
+     "text": "Nothing."
+    },
+    {
+     "start_seconds": 1325.2,
+     "text": "Not the things you did today."
+    },
+    {
+     "start_seconds": 1328.1,
+     "text": "Not the things that worry you about tomorrow."
+    },
+    {
+     "start_seconds": 1331.2,
+     "text": "Not the darkness of this night."
+    },
+    {
+     "start_seconds": 1334.2,
+     "text": "Nothing in all creation can separate you from the love of God."
+    },
+    {
+     "start_seconds": 1339.2,
+     "text": "Rest in that love now."
+    },
+    {
+     "start_seconds": 1343.1,
+     "text": "Lord, thank you that your love does not depend on how well I did today."
+    },
+    {
+     "start_seconds": 1348.1,
+     "text": "Hold me in that love as I sleep."
+    },
+    {
+     "start_seconds": 1351.2,
+     "text": "And hold the people I love, wherever they are tonight."
+    },
+    {
+     "start_seconds": 1357.1,
+     "text": "It is of the LORD'S mercies that we are not consumed, because his compassions fail not."
+    },
+    {
+     "start_seconds": 1363.5,
+     "text": "They are new every morning: great is thy faithfulness."
+    },
+    {
+     "start_seconds": 1368.2,
+     "text": "The LORD is my portion, saith my soul; therefore will I hope in him."
+    },
+    {
+     "start_seconds": 1374.2,
+     "text": "The LORD is good unto them that wait for him, to the soul that seeketh him."
+    },
+    {
+     "start_seconds": 1400.1,
+     "text": "When you wake, fresh mercy will already be there, waiting for you, new every morning."
+    },
+    {
+     "start_seconds": 1414.1,
+     "text": "Tonight you only need to do what the prophet says: hope, and quietly wait."
+    },
+    {
+     "start_seconds": 1421.1,
+     "text": "Listen to the psalm of the God who knows you completely."
+    },
+    {
+     "start_seconds": 1425.2,
+     "text": "O LORD, thou hast searched me, and known me."
+    },
+    {
+     "start_seconds": 1429.2,
+     "text": "Thou knowest my downsitting and mine uprising, thou understandest my thought afar off."
+    },
+    {
+     "start_seconds": 1436.2,
+     "text": "Thou compassest my path and my lying down, and art acquainted with all my ways."
+    },
+    {
+     "start_seconds": 1443.2,
+     "text": "For there is not a word in my tongue, but, lo, O LORD, thou knowest it altogether."
+    },
+    {
+     "start_seconds": 1449.1,
+     "text": "Thou hast beset me behind and before, and laid thine hand upon me."
+    },
+    {
+     "start_seconds": 1455.1,
+     "text": "Such knowledge is too wonderful for me; it is high, I cannot attain unto it."
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 1200.0,
+     "end_seconds": 1215.0,
+     "beat": "application",
+     "opening_words_verbatim": "Rest in the quiet.",
+     "content": "A brief breathing transition encouraging the listener to rest.",
+     "device": "imperative command",
+     "emotion": "peaceful"
+    },
+    {
+     "start_seconds": 1215.0,
+     "end_seconds": 1260.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "The apostle Paul wrote these words from a prison cell.",
+     "content": "Reading Philippians 4:6-8 about prayer and focusing on noble things.",
+     "device": "scripture reading",
+     "emotion": "reverent"
+    },
+    {
+     "start_seconds": 1260.0,
+     "end_seconds": 1283.0,
+     "beat": "application",
+     "opening_words_verbatim": "As you fall asleep, let your mind rest",
+     "content": "Guiding the listener's thoughts toward lovely things and God's goodness before sleep.",
+     "device": "guided meditation",
+     "emotion": "comforting"
+    },
+    {
+     "start_seconds": 1283.0,
+     "end_seconds": 1339.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "Hear these words of assurance. Who shall separate",
+     "content": "Reading Romans 8:35-39 assuring the listener that nothing can separate them from God's love.",
+     "device": "scripture reading",
+     "emotion": "reassuring"
+    },
+    {
+     "start_seconds": 1339.0,
+     "end_seconds": 1357.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "Rest in that love now. Lord, thank",
+     "content": "A closing evening prayer thanking God for unconditional love and asking for protection.",
+     "device": "personal prayer",
+     "emotion": "devotional"
+    },
+    {
+     "start_seconds": 1357.0,
+     "end_seconds": 1400.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "It is of the LORD'S mercies",
+     "content": "Reciting Lamentations 3:22-26 on God's compassions being new every morning.",
+     "device": "scripture reading",
+     "emotion": "hopeful"
+    },
+    {
+     "start_seconds": 1400.0,
+     "end_seconds": 1421.0,
+     "beat": "teaching",
+     "opening_words_verbatim": "When you wake, fresh mercy will already",
+     "content": "Applying the verse to the listener's upcoming morning and night.",
+     "device": "reassurance",
+     "emotion": "calming"
+    },
+    {
+     "start_seconds": 1421.0,
+     "end_seconds": 1500.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "Listen to the psalm of the God",
+     "content": "Reading Psalm 139:1-6 about God's complete knowledge of us.",
+     "device": "scripture reading",
+     "emotion": "awed"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration and painting style",
+    "shot_sizes": [
+     "medium shot",
+     "close up"
+    ],
+    "shots_counted": 22,
+    "motion": "slow subtle zoom and pan",
+    "on_screen_text": "white sans-serif captions centered with black semi-transparent background box, top left channel watermark, top right engagement buttons",
+    "figure_or_presenter": "depiction of Jesus praying with clasped hands",
+    "colour_and_light": "dark moody night tones, warm candle light, sunset gradients, deep blue night skies with glowing stars",
+    "transitions": "smooth cross dissolve"
+   },
+   "sound": {
+    "voice": "warm male voice, American accent, human",
+    "pace": "slow, deliberate, soothing",
+    "music": "ambient cinematic orchestral pad with soft piano",
+    "music_changes": "constant very soft ambient background with subtle shifts matching scene changes",
+    "sound_effects": "none"
+   },
+   "scripture_references": [
+    "Philippians 4:6-8",
+    "Romans 8:35-39",
+    "Lamentations 3:22-26",
+    "Psalm 139:1-6"
+   ],
+   "limitations": []
+  },
+  {
+   "video_id": "pilot-004",
+   "window_start_seconds": 1800,
+   "window_end_seconds": 1828,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 1800.0,
+     "text": "morrow."
+    },
+    {
+     "start_seconds": 1801.0,
+     "text": "Watch over me through the night,"
+    },
+    {
+     "start_seconds": 1803.0,
+     "text": "and wake me to your mercy in the morning."
+    },
+    {
+     "start_seconds": 1808.0,
+     "text": "And now receive this blessing as you sleep."
+    },
+    {
+     "start_seconds": 1811.0,
+     "text": "Now the Lord of peace himself give you peace always by all means."
+    },
+    {
+     "start_seconds": 1816.0,
+     "text": "The Lord be with you all."
+    },
+    {
+     "start_seconds": 1818.0,
+     "text": "Sleep well, in the shelter of his love."
+    },
+    {
+     "start_seconds": 1821.0,
+     "text": "In Jesus' name, amen."
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 1800.0,
+     "end_seconds": 1807.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "morrow. Watch over me through the night",
+     "content": "Concluding the night prayer asking God for protection through the night.",
+     "device": "prayer",
+     "emotion": "peaceful"
+    },
+    {
+     "start_seconds": 1807.0,
+     "end_seconds": 1824.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "And now receive this blessing as you sleep.",
+     "content": "Delivering a blessing based on 2 Thessalonians 3:16 for peaceful sleep.",
+     "device": "scripture",
+     "emotion": "comforting"
+    },
+    {
+     "start_seconds": 1824.0,
+     "end_seconds": 1828.0,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "Calm instrumental outro transitioning to nighttime scenery.",
+     "device": "none",
+     "emotion": "serene"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration",
+    "shot_sizes": [
+     "Medium Shot",
+     "Wide Shot"
+    ],
+    "shots_counted": 4,
+    "motion": "slow zoom and crossfade transitions",
+    "on_screen_text": "subtitles synced with speech, scripture reference 2 Thessalonians 3:16 (KJV), and 'Type AMEN'",
+    "figure_or_presenter": "depiction of Jesus praying",
+    "colour_and_light": "warm indoor lighting transitioning to peaceful night blue background and lit cottage",
+    "transitions": "crossfade"
+   },
+   "sound": {
+    "voice": "calm male voiceover, warm tone",
+    "pace": "slow and meditative",
+    "music": "ambient gentle orchestral background music",
+    "music_changes": "steady soothing tone throughout",
+    "sound_effects": "none"
+   },
+   "scripture_references": [
+    "2 Thessalonians 3:16"
+   ],
+   "limitations": [
+    "none"
+   ]
+  }
+ ],
+ "miner_rows_blocking": false,
+ "instrument": "structure_mining.py prompt/schema/models via Gemini Files API (same as the reference mining)",
+ "usage": [
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27669,
+   "candidatesTokenCount": 1765,
+   "totalTokenCount": 29434,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 369
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27673,
+   "candidatesTokenCount": 4009,
+   "totalTokenCount": 31682,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 373
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27673,
+   "candidatesTokenCount": 2948,
+   "totalTokenCount": 30621,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 373
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27675,
+   "candidatesTokenCount": 3291,
+   "totalTokenCount": 30966,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 375
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27677,
+   "candidatesTokenCount": 2849,
+   "totalTokenCount": 30526,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 377
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27677,
+   "candidatesTokenCount": 2828,
+   "totalTokenCount": 30505,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 377
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 2925,
+   "candidatesTokenCount": 923,
+   "totalTokenCount": 3848,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 377
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 2548
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 106244,
+   "candidatesTokenCount": 302,
+   "totalTokenCount": 107669,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 220
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 106024
+    }
+   ],
+   "thoughtsTokenCount": 1123,
+   "serviceTier": "standard"
+  }
+ ]
 }

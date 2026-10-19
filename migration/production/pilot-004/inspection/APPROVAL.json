@@ -1,0 +1,18 @@
+{
+ "approved": true,
+ "output_sha256": "3a7c6c28b1c806859b36ad8c856b4e425eeedabf84eeaaf6facae1c3fe6b2f24",
+ "reviewer": "HeroVerse automatic gates (owner rule: automatic publication once every gate passes)",
+ "reviewed_at": "2026-10-19T12:55:39Z",
+ "qa_status": "PASS",
+ "gates": {
+  "qa": "PASS",
+  "preflight": "PASS",
+  "scorecard_hard": "PASS",
+  "watched_review": {
+   "overall": 8.8,
+   "model": "gemini-3.8-flash"
+  },
+  "prepublish_gate": "PASS"
+ },
+ "notes": "Scorecard and watched review in out/review.json; final decision in out/gate.json."
+}
