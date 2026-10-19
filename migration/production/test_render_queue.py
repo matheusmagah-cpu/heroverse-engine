@@ -87,7 +87,39 @@ class Queue(unittest.TestCase):
                     rq.main(t, str(Path(t) / "none.json"), "reconcile")
             finally:
                 rq.datetime = real
-            self.assertEqual(buf.getvalue().split("\n")[:-1], ["approve pilot-003", "publish pilot-004", "shorts pilot-005", "approve pilot-006", "shorts pilot-006"])
+            # E25: one approval only, the earliest slot; Shorts wait while an approval is pending (same Gemini quota)
+            self.assertEqual(buf.getvalue().split("\n")[:-1], ["publish pilot-004", "approve pilot-003"])
+            for name in ("pilot-003", "pilot-006"):  # approvals done: the Shorts go
+                (Path(t) / name / "out" / "review.json").write_text(json.dumps({"status": "FAIL", "output_sha256": "x"}))
+            (Path(t) / "pilot-006" / "out" / "gate.json").write_text(json.dumps({"decision": "FAIL", "output_sha256": "x"}))
+            buf = io.StringIO()
+            rq.datetime = Fixed
+            try:
+                with contextlib.redirect_stdout(buf):
+                    rq.main(t, str(Path(t) / "none.json"), "reconcile")
+            finally:
+                rq.datetime = real
+            self.assertEqual(buf.getvalue().split("\n")[:-1], ["publish pilot-004", "shorts pilot-005", "shorts pilot-006"])
+
+    def test_only_the_earliest_approval_is_dispatched(self):
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as t:
+            for name, at in (("pilot-006", "2026-10-19T20:00:00Z"), ("pilot-005", "2026-10-19T10:00:00Z")):
+                pilot(t, name, at, rendered=True)
+                (Path(t) / name / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x"}))
+            buf = io.StringIO()
+            real = rq.datetime
+            class Fixed(real):
+                @classmethod
+                def now(cls, tz=None):
+                    return NOW
+            rq.datetime = Fixed
+            try:
+                with contextlib.redirect_stdout(buf):
+                    rq.main(t, str(Path(t) / "none.json"), "reconcile")
+            finally:
+                rq.datetime = real
+            self.assertEqual(buf.getvalue().split("\n")[:-1], ["approve pilot-005"])
 
 
 if __name__ == "__main__":

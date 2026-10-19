@@ -240,6 +240,16 @@
     "file": "migration/ops/test_runway.py",
     "contains": "def test_approval_one_day_ahead"
    }
+  },
+  {
+   "id": "E25",
+   "date": "2026-10-19",
+   "error": "reconcile dispatched approvals for pilot-003, 004, 005 and 006 at once; approve.yml's concurrency group keeps one pending run, so GitHub cancelled 003/004/005 and reviewed only 006 (the farthest slot), and Shorts of 005 spent the same free Gemini quota first; the quota ran out at 10:35 UTC with 003 still unapproved",
+   "fix": "reconcile sends only the earliest due approval; Shorts wait until no approval is pending",
+   "antidote": {
+    "file": "migration/production/test_render_queue.py",
+    "contains": "def test_only_the_earliest_approval_is_dispatched"
+   }
   }
  ]
 }

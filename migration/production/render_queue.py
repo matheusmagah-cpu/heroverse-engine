@@ -75,6 +75,10 @@ def main(production, ledger_path, mode, hours="48"):
             if r["missing_images"]:
                 print(r["pilot"], ",".join(r["missing_images"]))
     elif mode == "reconcile":
+        # E25: approve.yml keeps ONE pending run (concurrency group): dispatching several approvals cancels all but the
+        # last, i.e. the farthest slot. So only the earliest due approval is sent, and Shorts wait until no approval is
+        # pending, because both spend the same free Gemini quota and the long video publishes first.
+        approve, publish, shorts = [], [], []
         for r in rows:
             d = Path(production) / r["pilot"]
             try:
@@ -88,14 +92,21 @@ def main(production, ledger_path, mode, hours="48"):
             gate = json.loads((d / "out" / "gate.json").read_text()) if (d / "out" / "gate.json").exists() else {}
             unknown = gate.get("output_sha256") == qa["output_sha256"] and gate.get("decision") == "UNKNOWN"
             if ap.get("approved") and ap.get("output_sha256") == qa["output_sha256"]:
-                print("publish", r["pilot"])  # due rows are never already on YouTube
+                publish.append(r["pilot"])  # due rows are never already on YouTube
             elif quota_spent(rev, now):
                 pass  # the free Gemini quota resets at 07:00 UTC; retrying before that only spends Actions minutes
             elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:
-                print("approve", r["pilot"])
+                approve.append(r["pilot"])
             # Shorts handed off by the render but never made (provider quota or error): made again
             if (d / "shorts" / "inputs.json").exists() and not reviewed_shorts(d / "shorts" / "shorts.json"):
-                print("shorts", r["pilot"])
+                shorts.append(r["pilot"])
+        for p in publish:
+            print("publish", p)
+        if approve:
+            print("approve", approve[0])  # rows are sorted by publish time: the earliest slot first
+        else:
+            for p in shorts:
+                print("shorts", p)
     else:
         nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"]), None)
         if nxt:
