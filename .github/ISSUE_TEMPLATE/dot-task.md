@@ -21,6 +21,8 @@ labels: dot-task
 **ACCEPTANCE (must print PASS; run by Dot and by PR checks)**
 -
 
+**SPEC** v1 — if the owner changes the goal, Claude rewrites this card as SPEC v2 before Dot resumes.
+
 **FORBIDDEN** — secrets; merge, publication, approval; editing frozen QA; copying any channel; any file outside ALLOWED PATHS; anything not in this card (report it as BLOCKED or NOTES).
 
 **DEADLINE (UTC)** —
