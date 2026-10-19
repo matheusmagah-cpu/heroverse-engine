@@ -56,14 +56,22 @@ def reviewed_shorts(path):
     return any((s.get("review") or {}).get("status") in ("PASS", "FAIL") for s in json.loads(path.read_text())["shorts"])
 
 
+RETRY_AFTER = timedelta(minutes=30)
+
+
 def quota_spent(rev, now):
-    """True when the last watched review failed on the provider's daily quota after the last 07:00 UTC reset."""
+    """True while a retry would only hit the same quota again. E29: only a quota the provider names as per day
+    (quotaId containing "PerDay") waits for the 07:00 UTC reset; a per-minute or unnamed quota waits RETRY_AFTER,
+    never a whole day (pilot-003 waited 5 h on 2026-10-19 while pilot-004 was approved on the same quota)."""
     if rev.get("status") != "ERROR" or "QUOTA" not in str(rev.get("error", "")) or not rev.get("failed_at"):
         return False
-    reset = now.replace(hour=7, minute=0, second=0, microsecond=0)
-    if now < reset:
-        reset -= timedelta(days=1)
-    return datetime.fromisoformat(rev["failed_at"].replace("Z", "+00:00")) >= reset
+    failed = datetime.fromisoformat(rev["failed_at"].replace("Z", "+00:00"))
+    if any("PerDay" in q for q in rev.get("quota_ids") or []):
+        reset = now.replace(hour=7, minute=0, second=0, microsecond=0)
+        if now < reset:
+            reset -= timedelta(days=1)
+        return failed >= reset
+    return now - failed < RETRY_AFTER
 
 
 def main(production, ledger_path, mode, hours="48"):

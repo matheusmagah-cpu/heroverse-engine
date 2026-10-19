@@ -223,6 +223,20 @@ def sanitized_provider_error(raw, http_status, api_key):
                 if len(violations)==4:break
             if len(violations)==4:break
     if violations:result['field_violations']=violations
+    # Which quota answered (per minute or per day) and when to retry: Google's own metadata, no secret (E29)
+    quota_ids,retry=[],None
+    if type(details) is list:
+        for detail in details[:8]:
+            if type(detail) is not dict:continue
+            kind=detail.get('@type')
+            if kind=='type.googleapis.com/google.rpc.QuotaFailure' and type(detail.get('violations')) is list:
+                for v in detail['violations'][:4]:
+                    if type(v) is dict and type(v.get('quotaId')) is str:
+                        quota_ids.append(re.sub(r'[^A-Za-z0-9_.-]','',v['quotaId'])[:128])
+            elif kind=='type.googleapis.com/google.rpc.RetryInfo' and type(detail.get('retryDelay')) is str:
+                retry=re.sub(r'[^0-9.s]','',detail['retryDelay'])[:16]
+    if quota_ids:result['quota_ids']=quota_ids
+    if retry:result['retry_delay']=retry
     if len(canonical(result))>ERROR_DIAGNOSTIC_LIMIT:
         result.pop('field_violations',None);result.pop('message',None)
         result['diagnostic_size_limited']=True
