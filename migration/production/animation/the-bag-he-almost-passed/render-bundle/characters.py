@@ -31,10 +31,17 @@ class Character:
         remesh=body.modifiers.new('Unified tailored topology','REMESH');remesh.mode='VOXEL';remesh.voxel_size=.035
         bpy.ops.object.modifier_apply(modifier=remesh.name)
         smooth=body.modifiers.new('Relax surface','SMOOTH');smooth.factor=.8;smooth.iterations=4;bpy.ops.object.modifier_apply(modifier=smooth.name)
-        body.data.materials.append(materials['red' if old else 'teal']);body.data.materials.append(materials['dark'])
-        for poly in body.data.polygons:
-            poly.use_smooth=True
-            if poly.center.z<.84:poly.material_index=1
+        # Interpolated rest-height avoids jagged polygon-by-polygon trouser hems.
+        rest=body.data.attributes.new('tailored_height','FLOAT','POINT')
+        for vertex,item in zip(body.data.vertices,rest.data):item.value=vertex.co.z
+        cloth=materials['red' if old else 'teal'].copy();cloth.name=name+' continuous tailoring';cloth.use_nodes=True
+        nodes=cloth.node_tree.nodes;links=cloth.node_tree.links;shader=nodes.get('Principled BSDF')
+        attr=nodes.new('ShaderNodeAttribute');attr.attribute_name='tailored_height'
+        threshold=nodes.new('ShaderNodeMath');threshold.operation='GREATER_THAN';threshold.inputs[1].default_value=.84
+        mix=nodes.new('ShaderNodeMixRGB');mix.inputs[1].default_value=materials['dark'].diffuse_color;mix.inputs[2].default_value=shader.inputs['Base Color'].default_value[:]
+        links.new(attr.outputs['Fac'],threshold.inputs[0]);links.new(threshold.outputs[0],mix.inputs[0]);links.new(mix.outputs[0],shader.inputs['Base Color'])
+        body.data.materials.append(cloth)
+        for poly in body.data.polygons:poly.use_smooth=True
         arm=bpy.data.armatures.new(name+' skeleton');rig=bpy.data.objects.new(name+' rig',arm);bpy.context.collection.objects.link(rig)
         bpy.context.view_layer.objects.active=rig;bpy.ops.object.mode_set(mode='EDIT')
         definitions={'pelvis':((0,0,.77),(0,0,.95),None),'spine':((0,0,.95),(0,0,1.38),'pelvis'),'head':((0,0,1.38),(0,0,1.85),'spine')}
@@ -72,7 +79,7 @@ class Character:
             self.targets[side]=(target,constraint)
             foot=bpy.data.objects.new(name+' foot target '+str(side),None);bpy.context.collection.objects.link(foot)
             pole=bpy.data.objects.new(name+' knee pole '+str(side),None);bpy.context.collection.objects.link(pole)
-            ik=rig.pose.bones['shin'+str(side)].constraints.new('IK');ik.target=foot;ik.pole_target=pole;ik.chain_count=2;ik.use_stretch=False;ik.pole_angle=math.pi/2
+            ik=rig.pose.bones['shin'+str(side)].constraints.new('IK');ik.target=foot;ik.chain_count=2;ik.use_stretch=False
             self.feet[side]=(foot,pole)
         def attach(ob,key,bone):
             ob.parent=rig
@@ -97,7 +104,13 @@ class Character:
             ellipsoid('eye'+suffix,(side*.075,-.164,1.74),(.045,.022,.038),'white')
             ellipsoid('pupil'+suffix,(side*.075,-.186,1.74),(.019,.01,.023),'dark')
             ellipsoid('brow'+suffix,(side*.075,-.17,1.80),(.052,.018,.012),'gray' if old else 'hair')
-            ellipsoid('hand'+suffix,(side*.49,-.03,.79),(.065,.055,.095),skin,'forearm'+suffix)
+            ellipsoid('hand'+suffix,(side*.49,-.03,.79),(.055,.035,.062),skin,'forearm'+suffix)
+            for finger in range(4):
+                ob=ellipsoid('finger'+suffix+str(finger),(side*.49+(finger-1.5)*.024,-.035,.721),(.014,.021,.048),skin,'forearm'+suffix)
+                ob.shape_key_add(name='Basis');grip=ob.shape_key_add(name='Grip')
+                for vertex in grip.data:
+                    amount=max(0,(.755-vertex.co.z)/.08);vertex.co.y-=.045*amount;vertex.co.z+=.025*amount
+            ellipsoid('thumb'+suffix,(side*.545,-.065,.77),(.026,.025,.046),skin,'forearm'+suffix)
             ellipsoid('shoe'+suffix,(side*.15,-.075,.10),(.095,.17,.085),'dark','shin'+suffix)
             shoe=self.features['shoe'+suffix];shoe.parent=None
             for modifier in list(shoe.modifiers):shoe.modifiers.remove(modifier)
@@ -117,17 +130,17 @@ class Character:
             ob=self.features[key];look=ob.shape_key_add(name='Look')
             for vertex in look.data:vertex.co.x+=.018
     def pose(self,x,y,yaw,t,walk=0,bend=0,gesture=0,smile=0):
-        self.rig.location=(x,y,-.43*bend+.018*math.sin(t*2.1)+.015*abs(math.sin(walk)))
+        self.rig.location=(x,y,-.45*bend+.018*math.sin(t*2.1)+.015*abs(math.sin(walk)))
         self.rig.rotation_euler.z=yaw
         for bone in self.rig.pose.bones:bone.rotation_mode='XYZ';bone.rotation_euler=(0,0,0)
         for target,constraint in self.targets.values():constraint.influence=0
-        p=self.rig.pose.bones;p['pelvis'].rotation_euler.y=.035*math.sin(walk);p['spine'].rotation_euler.x=.5*bend+.018*math.sin(t*2.1)
+        p=self.rig.pose.bones;p['pelvis'].rotation_euler.y=.035*math.sin(walk);p['spine'].rotation_euler.x= (.75 if self.old else 1.15)*bend+.018*math.sin(t*2.1)
         p['head'].rotation_euler.x=-.18*bend+.025*math.sin(t*.8);p['head'].rotation_euler.y=.12*math.sin(t*.7)
         for side in [-1,1]:
             suffix=str(side);phase=math.sin(walk)*side if walk else 0
-            p['thigh'+suffix].rotation_euler.x=.48*phase-.65*bend
+            p['thigh'+suffix].rotation_euler.x=-.48*phase-.65*bend
             p['shin'+suffix].rotation_euler.x=max(0,-phase)*.65+1.05*bend
-            p['arm'+suffix].rotation_euler.x=-.35*phase-.55*gesture-.45*bend
+            p['arm'+suffix].rotation_euler.x=.35*phase-.55*gesture-.45*bend
             p['forearm'+suffix].rotation_euler.x=-.28-.6*gesture-.45*bend
             p['arm'+suffix].rotation_euler.z=side*(.04+.03*math.sin(t))
             foot,pole=self.feet[side]
@@ -142,6 +155,7 @@ class Character:
         for key,ob in self.features.items():
             if ob.data.shape_keys:
                 keys=ob.data.shape_keys.key_blocks
+                if 'Grip' in keys:keys['Grip'].value=0
                 if 'Blink' in keys:keys['Blink'].value=blink
                 if 'Look' in keys:keys['Look'].value=.5+.5*math.sin(t*.7)
                 if 'Smile' in keys:keys['Smile'].value=smile
@@ -149,3 +163,4 @@ class Character:
 
     def hand(self,side,position):
         target,constraint=self.targets[side];target.location=position;constraint.influence=1
+        for finger in range(4):self.features['finger'+str(side)+str(finger)].data.shape_keys.key_blocks['Grip'].value=1

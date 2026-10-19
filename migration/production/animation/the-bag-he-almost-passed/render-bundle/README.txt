@@ -44,3 +44,13 @@ must still pass frozen QA, actual audio measurements and watched review.
 
 No claim of full visual approval or end-to-end qualification is made by
 this bundle. Use PR evidence for actual acceptance status and measurements.
+
+Visual refinement: interpolated rest-height tailoring prevents polygonal
+hem artifacts; foot IK has no twisting pole constraint. Fingers have grip
+shape keys. The paper bag is a tapered, folded open shell. Gathering is
+staged after the kneel, and transfer is continuous between scene states.
+Eevee uses 64 samples; this reduces but does not eliminate shadow noise.
+Blender evaluated-pose checks: blender -b --python test_rig.py
+These assert wrist-target reach within 3cm at eight specified poses and
+knees above 10cm in the full kneel. They do not prove full-surface contact,
+absence of every interpenetration, or natural motion throughout the film.

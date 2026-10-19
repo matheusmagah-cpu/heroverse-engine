@@ -3,7 +3,7 @@ from mathutils import Vector
 
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 s=bpy.context.scene;s.render.engine='BLENDER_EEVEE_NEXT';s.cycles.samples=12;s.cycles.use_denoising=False;s.cycles.max_bounces=3
-s.eevee.taa_render_samples=32
+s.eevee.taa_render_samples=64
 s.render.resolution_x=768;s.render.resolution_y=432;s.render.resolution_percentage=100
 s.render.image_settings.file_format='PNG';s.world.color=(.32,.32,.32)
 s.view_settings.view_transform='AgX'
