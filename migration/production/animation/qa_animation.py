@@ -23,8 +23,15 @@ def run(args):
 
 
 def load(path):
+    def unique_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError('DUPLICATE_JSON_KEY')
+            result[key] = value
+        return result
     try:
-        return json.loads(Path(path).read_text())
+        return json.loads(Path(path).read_text(), object_pairs_hook=unique_pairs)
     except (OSError, ValueError):
         return None
 
@@ -225,10 +232,20 @@ def evaluate(out, criteria):
             equal('continuity.every_scene_in_scenes_json_rendered',None,True) # timing alone does not prove rendering
             add('timing.scene_ids',timed_ids,expected_ids,timed_ids==expected_ids)
     frames=load(out/'frames.json')
+    if frames is None and (out/'frames.json').exists():
+        add('continuity.frame_set_contiguous_no_missing_no_duplicate_index','INVALID_FRAME_JSON',True,False)
     if frames is not None and timing and scenes:
         try:
             hold_ranges=[]
-            tm={s['id']:s for s in timing['scenes']}
+            ranges=timing['scenes']
+            if (not ranges or ranges[0]['first_frame'] != 0
+                    or ranges[-1]['end_frame'] != timing['frames_total']
+                    or len({s['id'] for s in ranges}) != len(ranges)
+                    or any(s['end_frame'] <= s['first_frame'] for s in ranges)
+                    or any(a['end_frame'] != b['first_frame'] for a,b in zip(ranges,ranges[1:]))
+                    or timing['fps'] != criteria['master']['fps']):
+                raise ValueError('INVALID_TIMING_RANGES')
+            tm={s['id']:s for s in ranges}
             for s in scenes['scenes']:
                 if s.get('hold'):
                     last=tm[s['id']]['end_frame']; first=last-round(s['hold']['seconds']*timing['fps']); hold_ranges.append((first,last))

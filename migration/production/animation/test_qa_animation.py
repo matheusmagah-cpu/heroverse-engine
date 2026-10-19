@@ -85,6 +85,12 @@ class QATests(unittest.TestCase):
         self.assertEqual(r.returncode,1)
         data=json.loads((self.d/'qa.json').read_text()); self.assertEqual(data['status'],'FAIL'); self.assertEqual(data['criteria_sha256'],q.FROZEN_SHA256)
         self.assertTrue(all(row['status'] in ('PASS','FAIL','UNKNOWN') for row in data['rows']))
+    def test_duplicate_json_frame_index_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d); (p/'frames.json').write_text('{"0":"'+'a'*64+'","0":"'+'b'*64+'"}')
+            report=q.evaluate(p,self.c)
+            row=next(r for r in report['rows'] if r['id']=='continuity.frame_set_contiguous_no_missing_no_duplicate_index')
+            self.assertEqual(row['status'],'FAIL')
     def test_short_boundaries(self):
         t={'sentences':[{'segment':'S01','start':2,'end':3,'text':'First.'},{'segment':'S15','start':8,'end':9,'text':'CTA.'}]}
         short={'spans':[{'scene':'S01','master_start_s':2,'master_end_s':3},{'scene':'S15','master_start_s':8,'master_end_s':9}],'total_s':2}
