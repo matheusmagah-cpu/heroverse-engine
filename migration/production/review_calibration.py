@@ -120,6 +120,22 @@ def main(render, work, out_json, title="Morning Prayer", model=None):
     print(json.dumps(summary))
 
 
+MAX_FULL_VIDEO_S = 5 * 3600  # a backup must review a 28-minute video in under 5 h on its runner
+FULL_VIDEO_S = 28 * 60
+
+
+def timing_status(run):
+    """run["timing"] = {"seconds_per_180s_case": s} (measured; API models may omit it). The 28-minute time is
+    derived from the measured per-case time (180 s of video per case): s * FULL_VIDEO_S / 180."""
+    t = run.get("timing")
+    if not t:
+        return None
+    s = t.get("seconds_per_180s_case")
+    if not isinstance(s, (int, float)) or s <= 0:
+        return "TIMING_INVALID"
+    return "TOO_SLOW" if s * FULL_VIDEO_S / 180 > MAX_FULL_VIDEO_S else None
+
+
 def qualification(runs, reference=None):
     """runs: calibration outputs (any models, any renders). reference: the designated reviewer.
     Returns {model: {"verdict": "QUALIFIED" | "NOT_QUALIFIED", "renders": [...], "reasons": [...]}} for every other model."""
@@ -135,7 +151,10 @@ def qualification(runs, reference=None):
             if base is None:
                 reasons.append(f"{render}: NO_REFERENCE_RUN")
                 continue
-            for name in CASES:
+            slow = timing_status(run)
+            if slow:
+                reasons.append(f"{render}: {slow}")
+            for name, (_, _, items) in CASES.items():
                 case, rcase = run["cases"].get(name), base["cases"].get(name)
                 if case is None or rcase is None:
                     reasons.append(f"{render}/{name}: MISSING_CASE")
@@ -146,6 +165,11 @@ def qualification(runs, reference=None):
                     continue
                 if case["expected"] == "FAIL" and case["verdict"] != "FAIL":
                     reasons.append(f"{render}/{name}: FALSE_APPROVAL")
+                if case["expected"] == "FAIL":  # its own review must see the defect where it is, not fail for another reason
+                    for item in items:
+                        v = case["review"].get(item)
+                        if not isinstance(v, (int, float)) or v >= lr.PASS_ITEM:
+                            reasons.append(f"{render}/{name}: EXPECTED_ITEM_NOT_DROPPED {item}={v}")
                 if case["expected"] == "PASS" and case["verdict"] != "PASS":
                     reasons.append(f"{render}/{name}: FALSE_REJECTION")
                 if status != rstatus:
