@@ -1,0 +1,195 @@
+{
+ "version": "structure-record-v2",
+ "thumbnail_analysis": {
+  "text_on_thumbnail": "BUSINESS IDEA START GROW SUCCEED",
+  "words": 6,
+  "faces": 0,
+  "figure": "Business logo featuring a lightbulb, gear, growth chart, and rocket",
+  "emotion": "Inspirational",
+  "colours": "Blue, orange, yellow, white",
+  "composition": "Centered circular logo on a dark blue background",
+  "contrast_with_title": "The thumbnail is a business logo, while the title is about gaming, ASMR, and streaming, creating a complete mismatch.",
+  "curiosity_device": "The presence of a business startup logo in a streaming context creates confusion and curiosity."
+ },
+ "status": "MODEL_REPORTED_NOT_VERIFIED",
+ "video": {
+  "video_id": "98D3dkzIw8g",
+  "channel_id": "UCp5rbjYu8EvokDj9XO_8kEA",
+  "channel": "United Prayer",
+  "channel_subscribers": 32300,
+  "title": "#oddlysatisfying #satisfying #asmr #hair #live #livestream #1million #subscribe #usa #uk#pubgmobile",
+  "published_at": "2026-09-25T05:13:52Z",
+  "description": "",
+  "tags": [],
+  "seconds": 738,
+  "views": 28,
+  "likes": 1,
+  "comments": 0,
+  "thumbnail": "https://i.ytimg.com/vi/98D3dkzIw8g/maxresdefault.jpg",
+  "role": "weak_contrast"
+ },
+ "comments": [],
+ "windows": [
+  {
+   "video_id": "98D3dkzIw8g",
+   "window_start_seconds": 0,
+   "window_end_seconds": 300,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 0,
+     "end_seconds": 300,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A close-up view of hairy skin being touched and stroked, followed by clips of an onion and feet.",
+     "device": "none",
+     "emotion": "calm"
+    }
+   ],
+   "picture": {
+    "image_kind": "live video",
+    "shot_sizes": [
+     "close-up",
+     "medium shot"
+    ],
+    "shots_counted": 6,
+    "motion": "hand-held camera movement, panning, mirroring effect",
+    "on_screen_text": "none",
+    "figure_or_presenter": "presenter's hands, legs, and feet",
+    "colour_and_light": "dim indoor lighting with warm tones",
+    "transitions": "cuts and mirror effects"
+   },
+   "sound": {
+    "voice": "UNKNOWN",
+    "pace": "UNKNOWN",
+    "music": "ambient sound effects and light background music",
+    "music_changes": "constant ambient sound throughout",
+    "sound_effects": "scraping and touching sounds"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "98D3dkzIw8g",
+   "window_start_seconds": 300,
+   "window_end_seconds": 600,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 407,
+     "text": "Jo traders hote hain jo scalping karne mein kafi jyada ghabrate hain kyunki scalping mein kya hota hai ki trades bahut jyada lene padte hain jo number of trades hote hain wo bahut jyada hote hain."
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 300,
+     "end_seconds": 600,
+     "beat": "teaching",
+     "opening_words_verbatim": "Jo traders hote hain jo scalping karne mein",
+     "content": "The speaker explains the challenges and nature of scalping trades in trading.",
+     "device": "explanation",
+     "emotion": "informative"
+    }
+   ],
+   "picture": {
+    "image_kind": "live video with mirror effect",
+    "shot_sizes": [
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static mirror split-screen",
+    "on_screen_text": "UNKNOWN",
+    "figure_or_presenter": "presenter legs and room background with mirror effect",
+    "colour_and_light": "warm indoor lighting",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "male, calm, Indian accent, human",
+    "pace": "moderate",
+    "music": "none",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "98D3dkzIw8g",
+   "window_start_seconds": 600,
+   "window_end_seconds": 738,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 600,
+     "end_seconds": 738,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A symmetrical mirror effect view showing feet resting on a bed in a room with a curtain and a red bag in the background.",
+     "device": "none",
+     "emotion": "calm"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter",
+    "shot_sizes": [
+     "wide shot",
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static mirror effect",
+    "on_screen_text": "none",
+    "figure_or_presenter": "feet resting on a bed",
+    "colour_and_light": "warm indoor lighting",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "none",
+    "pace": "none",
+    "music": "ambient background noise",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  }
+ ],
+ "measured": {
+  "minutes": 12.3,
+  "title_words": 10,
+  "title_chars": 99,
+  "chapters": 0,
+  "likes_per_1k_views": 35.7,
+  "comments_per_1k_views": 0.0,
+  "coverage_fraction": 1.0,
+  "beats": 3,
+  "beat_seconds_median": 300,
+  "beats_per_minute": 0.24,
+  "shots_per_minute_model_counted": 0.65,
+  "first_spoken_beat": {
+   "at": 300,
+   "beat": "teaching"
+  },
+  "beat_mix": {
+   "teaching": 1,
+   "music_only": 2
+  },
+  "scripture_references": [],
+  "scripture_per_10_min": 0.0,
+  "speech": {
+   "words": 36,
+   "words_per_minute": 2.9,
+   "sentence_words_median": 36,
+   "you_per_100_words": 0.0,
+   "questions_per_minute": 0.0,
+   "first_15s_words": ""
+  }
+ }
+}
