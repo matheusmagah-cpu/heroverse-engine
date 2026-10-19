@@ -1,0 +1,152 @@
+{
+ "version": "reference-av-profiles-v1",
+ "profiles": [
+  {
+   "version": "av-profile-v1",
+   "media_file": "native.mp4",
+   "duration_seconds": 30.067,
+   "editing": {
+    "picture_changes": 16,
+    "picture_changes_per_minute": 31.93,
+    "median_shot_seconds": 2.167,
+    "longest_shot_seconds": 3.633,
+    "motion_median_top_decile_diff": 1.098
+   },
+   "rhythm": {
+    "audio_onsets": 55,
+    "audio_onsets_per_minute": 109.76,
+    "tempo": {
+     "bpm": 70.06,
+     "confidence": 0.046
+    }
+   },
+   "image_sound": {
+    "cut_on_audio_onset": {
+     "fraction": 0.188,
+     "chance_fraction": 0.115,
+     "lift": 1.63
+    },
+    "sync": {
+     "median_offset_seconds": null,
+     "verdict": "AMBIGUOUS",
+     "consensus_pairs": 6,
+     "visual_events": 16
+    }
+   },
+   "loudness": {
+    "integrated_lufs": -14.6,
+    "loudness_range_lu": 2.6,
+    "true_peak_dbtp": -2.0
+   },
+   "colour": {
+    "mean_brightness": 0.3129,
+    "brightness_std_over_time": 0.0613,
+    "mean_saturation": 0.3232,
+    "saturation_std_over_time": 0.0668
+   },
+   "meter_version": "av-event-meter-v2",
+   "scope": "MEASUREMENTS_OF_THIS_FILE_NOT_QUALITY_OR_AUDIENCE_PREDICTION",
+   "provider_calls": 0,
+   "sound_classes": {
+    "presence_fraction": {
+     "speech": 0.952,
+     "singing": 0.0,
+     "music": 0.935,
+     "other": 0.0,
+     "silence": 0.0
+    },
+    "label_counts": {
+     "speech": 51,
+     "singing": 0,
+     "music": 10,
+     "other": 0,
+     "silence": 0,
+     "UNCERTAIN": 1
+    },
+    "words": 73,
+    "words_per_minute": 145.7,
+    "transcript": "cover. The same vision carries mercy for one group and judgment for the other, and that is what makes it so unbearable to read. In chapter 10, the wheels return. Burning coals are scattered over the city, and then comes the moment everyone in the temple has refused to believe was possible. The glory of the Lord rises from the cherub and moves the threshold of the temple, the cherubim spread their wings."
+   },
+   "sound_segments": [
+    {
+     "label": "music",
+     "start_seconds": 0.0,
+     "end_seconds": 1.455,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 0.96,
+     "end_seconds": 3.855,
+     "frames": 5
+    },
+    {
+     "label": "music",
+     "start_seconds": 3.36,
+     "end_seconds": 4.815,
+     "frames": 2
+    },
+    {
+     "label": "speech",
+     "start_seconds": 4.32,
+     "end_seconds": 5.295,
+     "frames": 1
+    },
+    {
+     "label": "music",
+     "start_seconds": 4.8,
+     "end_seconds": 6.735,
+     "frames": 3
+    },
+    {
+     "label": "speech",
+     "start_seconds": 6.24,
+     "end_seconds": 19.695,
+     "frames": 27
+    },
+    {
+     "label": "music",
+     "start_seconds": 19.2,
+     "end_seconds": 20.175,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 19.68,
+     "end_seconds": 24.975,
+     "frames": 10
+    },
+    {
+     "label": "music",
+     "start_seconds": 24.48,
+     "end_seconds": 25.455,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 24.96,
+     "end_seconds": 27.375,
+     "frames": 4
+    },
+    {
+     "label": "music",
+     "start_seconds": 26.88,
+     "end_seconds": 27.855,
+     "frames": 1
+    },
+    {
+     "label": "speech",
+     "start_seconds": 27.36,
+     "end_seconds": 29.775,
+     "frames": 4
+    },
+    {
+     "label": "UNCERTAIN",
+     "start_seconds": 29.28,
+     "end_seconds": 30.023,
+     "frames": 1
+    }
+   ]
+  }
+ ]
+}
