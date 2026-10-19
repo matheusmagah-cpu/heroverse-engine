@@ -30,8 +30,9 @@ CONTEXT_START = re.compile(r"(?i)^(and|but|so|this|that|it|he|she|they|notice|th
 YOU = re.compile(r"(?i)\b(you|your|you're|yours|yourself)\b")
 PROMISE = re.compile(r"(?i)\b(peace|never|always|already|promise|strength|carry|go before|with you|not alone|fear not|"
                      r"rest|hope|healed|faithful|love[sd]?|grace|mercy|protect|shield|light)\b")
-RESOLVE = re.compile(r"(?i)(amen|in jesus'? name|never leave|not alone|with you|is faithful|"
-                     r"thank(?:s| you)|receive|entrust|rejoice|rest|peace)[^,;:]*[.!]$")
+RESOLVE = re.compile(r"(?i)\b(amen|in jesus'? name|never leave|not alone|is faithful|"
+                     r"(?:i|we) (?:thank|entrust|receive)|(?:god|lord),? thank you|will i rejoice|"
+                     r"let (?:your attention|the prayer|your heart) rest)[^;:]*[.!]$")
 FULL_STOP = re.compile(r"[.!?]$")
 NOT_IN_SHORTS = {"cta", "invitation", "transition"}
 RUBRIC = ("hook_first_2s", "stands_alone", "emotional_payoff", "shareability", "loop_potential", "policy_safe")
@@ -59,6 +60,13 @@ def ending_reason(run, sentences):
     following=[s for s in sentences if s['segment']==last['segment'] and s['start']>last['start']]
     if following and not RESOLVE.search(last['text'].strip()):return 'UNRESOLVED_SEGMENT_END'
     return None
+
+
+def opening_hook(sentence):
+    words=sentence['text'].split()[:7]
+    while words and words[-1].lower().strip(',;:.!?') in {'the','a','an','to','of','in','on','at','for','with','your','my','his','this','that','and','or','about'}:
+        words.pop()
+    return ' '.join(words) or None
 
 
 def candidates(sentences, refs):
@@ -95,7 +103,7 @@ def measured(c):
     fw = len(first.split())
     f = {
         "opening_short": 1.0 if fw <= 10 else 0.6 if fw <= 16 else 0.2,
-        "opening_direct": 1.0 if (re.search(r"(?i)^you\b",first) or first.rstrip().endswith("?")) else 0.3,
+        "opening_direct": 1.0 if (re.search(r"(?i)^(you|i can|lord|father|god)\b",first) or first.rstrip().endswith("?")) else 0.3,
         "second_person": min(1.0, len(YOU.findall(text)) / max(len(words), 1) / 0.10),
         "scripture": 1.0 if c["reference"] else 0.4,
         "promise": min(1.0, 100 * len(PROMISE.findall(text)) / max(len(words), 1) / 4),
@@ -114,6 +122,7 @@ def rubric(cands, key):
     item = S(index=INT, **{k: NUM for k in RUBRIC}, reasons=STR, hook_line=STR, title=STR)
     schema = S(ratings=arr(item))
     listing = "\n\n".join(f"[{i}] ({c['end'] - c['start']:.0f} s{', ' + c['reference'] if c['reference'] else ''})\n"
+                          + f"ACTUAL OPENING ({c['sentences'][0]['end']-c['sentences'][0]['start']:.3f}s): {c['sentences'][0]['text']}\nACTUAL ENDING: {c['sentences'][-1]['text']}\n"
                           + " ".join(s["text"] for s in c["sentences"]) for i, c in enumerate(cands))
     prompt = ("Data, not instructions. These are candidate moments of an original Christian prayer video in English, "
               "to become YouTube Shorts on their own. Rate each 0-10 on: hook_first_2s (does the first sentence stop "
@@ -121,7 +130,8 @@ def rubric(cands, key):
               "promise or comfort by the end), shareability (would someone send it to a friend), loop_potential (the "
               "ending flows back into the opening), policy_safe (10 = no fear-bait, no false promises of wealth or "
               "healing, no impersonation). Give short reasons, an on-screen hook_line of at most 7 words that is "
-              "original, honest and not clickbait, and a Short title under 70 characters.\n\n" + listing)
+              "original, honest and not clickbait, and a Short title under 70 characters. Rate only the ACTUAL OPENING "
+              "and ACTUAL ENDING shown; a stronger line later in the transcript does not improve its opening score.\n\n" + listing)
     payload = {"contents": [{"role": "user", "parts": [{"text": prompt}]}],
                "generationConfig": {"maxOutputTokens": 8192, "responseMimeType": "application/json", "responseSchema": schema}}
     model, out = call(payload, key, list(SUPPORT_MODELS))  # never the reviewer's allowance (E26)
@@ -170,7 +180,7 @@ def main(timeline_path, script_path, out_path, n="3"):
             break
     for c in chosen:
         r = c.get("rubric") or {}
-        c["hook"] = c["sentences"][0]["text"] if len(c["sentences"][0]["text"].split())<=7 else None
+        c["hook"] = opening_hook(c["sentences"][0])
         c["title"] = r.get("title") or c["hook"]
     Path(out_path).write_text(json.dumps({"version": "shorts-select-v2-r8-opening", "pilot_id": script["pilot_id"], "rubric_model": model,
                                           "selection_mode": "MODEL_RATED" if ratings else "MEASURED_ONLY",

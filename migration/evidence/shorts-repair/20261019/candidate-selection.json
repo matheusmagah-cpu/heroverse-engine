@@ -1,0 +1,626 @@
+{
+ "version": "shorts-select-v2-r8-opening",
+ "pilot_id": "pilot-012",
+ "rubric_model": null,
+ "selection_mode": "MEASURED_ONLY",
+ "input_sha256": {
+  "timeline": "02ea9eaffa0adf77f076cc7d25c3f7360f7ace20b5e8df2719a8dd7e3b74ac9e",
+  "script": "89bc1c0db301da95c6cbde9f26d0f37eb4022a2609beac2507f69e5f8f507ad6"
+ },
+ "opening_rejections": {
+  "INCOMPLETE_OPENING_LINE": 27,
+  "CONTINUATION_OPENING_LINE": 18,
+  "OPENING_OVER_3S": 182,
+  "DEPENDENT_OPENING_REFERENCE": 63,
+  "CONTEXT_OPENER": 16
+ },
+ "candidates_considered": 10,
+ "shortlist": [
+  {
+   "start": 969.796,
+   "end": 1002.087,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can tell the truth about this day.",
+     "start": 969.796,
+     "end": 972.591
+    },
+    {
+     "segment": "declaration",
+     "text": "I can name the mercy I received.",
+     "start": 972.771,
+     "end": 975.523
+    },
+    {
+     "segment": "declaration",
+     "text": "I can bring the hurt I still carry.",
+     "start": 975.703,
+     "end": 978.412
+    },
+    {
+     "segment": "declaration",
+     "text": "God’s faithfulness is worthy of my thanks even when my understanding is incomplete.",
+     "start": 978.592,
+     "end": 985.44
+    },
+    {
+     "segment": "declaration",
+     "text": "I will honor the help that came through other people.",
+     "start": 985.62,
+     "end": 989.161
+    },
+    {
+     "segment": "declaration",
+     "text": "I will receive care without shame and offer kindness within my limits.",
+     "start": 989.341,
+     "end": 994.824
+    },
+    {
+     "segment": "declaration",
+     "text": "I entrust this evening to the Lord, carrying gratitude and honest need into the same prayer.",
+     "start": 995.004,
+     "end": 1002.087
+    }
+   ],
+   "segments": [
+    "declaration"
+   ],
+   "reference": null,
+   "measured_score": 0.6967,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.0,
+    "scripture": 0.4,
+    "promise": 0.6756756756756757,
+    "resolution": 1.0,
+    "length_fit": 0.6916399999999976
+   },
+   "final_score": 0.6967,
+   "hook": "I can tell the truth",
+   "title": "I can tell the truth"
+  },
+  {
+   "start": 618.453,
+   "end": 657.064,
+   "sentences": [
+    {
+     "segment": "prayer-correction",
+     "text": "Receive my willingness to learn.",
+     "start": 618.453,
+     "end": 620.843
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "You can remember one person through a small detail rather than a general description.",
+     "start": 622.223,
+     "end": 628.431
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "Perhaps you hear the patience in their voice or picture the chair they pulled closer.",
+     "start": 628.611,
+     "end": 634.477
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "If you received a message, you might recall the sentence that helped you feel remembered.",
+     "start": 634.657,
+     "end": 640.759
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "You can thank God for that exact kindness.",
+     "start": 640.939,
+     "end": 644.288
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "You may remember help offered awkwardly but sincerely.",
+     "start": 644.468,
+     "end": 648.457
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "Let your attention rest on what you truly received, without requiring that person to have done everything perfectly.",
+     "start": 648.637,
+     "end": 657.064
+    }
+   ],
+   "segments": [
+    "prayer-correction",
+    "reflection-people-details"
+   ],
+   "reference": null,
+   "measured_score": 0.6946,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.30120481927710846,
+    "resolution": 1.0,
+    "length_fit": 0.9444399999999996
+   },
+   "final_score": 0.6946,
+   "hook": "Receive my willingness to learn.",
+   "title": "Receive my willingness to learn."
+  },
+  {
+   "start": 517.877,
+   "end": 557.661,
+   "sentences": [
+    {
+     "segment": "reflection-middle-hours",
+     "text": "Now recall the middle of your day.",
+     "start": 517.877,
+     "end": 520.608
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "Think of where you were when you checked the time, took a break, or changed from one task to another.",
+     "start": 520.788,
+     "end": 527.828
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "You may notice something your hurried mind missed:",
+     "start": 528.008,
+     "end": 531.443
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "a problem explained, a mistake caught early, a few minutes of laughter.",
+     "start": 531.623,
+     "end": 537.169
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "You can give thanks for the help inside an imperfect task.",
+     "start": 537.349,
+     "end": 541.637
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "You do not have to call the whole day successful before you acknowledge a useful or generous moment within it.",
+     "start": 541.817,
+     "end": 550.543
+    },
+    {
+     "segment": "prayer-work-and-learning",
+     "text": "Lord, I thank you for the opportunities I had to contribute or learn today.",
+     "start": 551.923,
+     "end": 557.661
+    }
+   ],
+   "segments": [
+    "reflection-middle-hours",
+    "prayer-work-and-learning"
+   ],
+   "reference": null,
+   "measured_score": 0.6659,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.9782608695652174,
+    "scripture": 0.4,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.9913599999999997
+   },
+   "final_score": 0.6659,
+   "hook": "Now recall the middle of your day.",
+   "title": "Now recall the middle of your day."
+  },
+  {
+   "start": 95.82,
+   "end": 135.601,
+   "sentences": [
+    {
+     "segment": "reflection-first-detail",
+     "text": "Perhaps you had a few minutes outside.",
+     "start": 95.82,
+     "end": 98.572
+    },
+    {
+     "segment": "reflection-first-detail",
+     "text": "Choose something that really happened to you.",
+     "start": 98.752,
+     "end": 101.611
+    },
+    {
+     "segment": "reflection-first-detail",
+     "text": "As you recall that detail, you can acknowledge the good it carried.",
+     "start": 101.791,
+     "end": 106.676
+    },
+    {
+     "segment": "reflection-first-detail",
+     "text": "Let your thanks have the shape of an actual moment, with a place, a person, or a simple object.",
+     "start": 106.856,
+     "end": 114.323
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Lord, I remember the beginning of this day.",
+     "start": 115.703,
+     "end": 118.817
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I thank you for whatever helped me enter it:",
+     "start": 118.997,
+     "end": 122.283
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "a familiar voice, a working light, clothing I could put on, or a little food before leaving.",
+     "start": 122.463,
+     "end": 129.204
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I often hurry past these familiar things.",
+     "start": 129.384,
+     "end": 132.541
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Tonight I receive them with attention.",
+     "start": 132.721,
+     "end": 135.601
+    }
+   ],
+   "segments": [
+    "reflection-first-detail",
+    "prayer-early-hours"
+   ],
+   "reference": null,
+   "measured_score": 0.6441,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.6521739130434782,
+    "scripture": 0.4,
+    "promise": 0.2717391304347826,
+    "resolution": 1.0,
+    "length_fit": 0.9912400000000002
+   },
+   "final_score": 0.6441
+  },
+  {
+   "start": 98.752,
+   "end": 135.601,
+   "sentences": [
+    {
+     "segment": "reflection-first-detail",
+     "text": "Choose something that really happened to you.",
+     "start": 98.752,
+     "end": 101.611
+    },
+    {
+     "segment": "reflection-first-detail",
+     "text": "As you recall that detail, you can acknowledge the good it carried.",
+     "start": 101.791,
+     "end": 106.676
+    },
+    {
+     "segment": "reflection-first-detail",
+     "text": "Let your thanks have the shape of an actual moment, with a place, a person, or a simple object.",
+     "start": 106.856,
+     "end": 114.323
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Lord, I remember the beginning of this day.",
+     "start": 115.703,
+     "end": 118.817
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I thank you for whatever helped me enter it:",
+     "start": 118.997,
+     "end": 122.283
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "a familiar voice, a working light, clothing I could put on, or a little food before leaving.",
+     "start": 122.463,
+     "end": 129.204
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I often hurry past these familiar things.",
+     "start": 129.384,
+     "end": 132.541
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Tonight I receive them with attention.",
+     "start": 132.721,
+     "end": 135.601
+    }
+   ],
+   "segments": [
+    "reflection-first-detail",
+    "prayer-early-hours"
+   ],
+   "reference": null,
+   "measured_score": 0.625,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.588235294117647,
+    "scripture": 0.4,
+    "promise": 0.29411764705882354,
+    "resolution": 1.0,
+    "length_fit": 0.8739600000000002
+   },
+   "final_score": 0.625
+  },
+  {
+   "start": 453.577,
+   "end": 499.548,
+   "sentences": [
+    {
+     "segment": "stillness-first",
+     "text": "Let your breathing continue naturally.",
+     "start": 453.577,
+     "end": 456.521
+    },
+    {
+     "segment": "stillness-first",
+     "text": "You can let that small mercy be present while the music carries this quiet space.",
+     "start": 456.701,
+     "end": 462.696
+    },
+    {
+     "segment": "prayer-one-mercy",
+     "text": "Lord, I thank you for this particular mercy I have remembered.",
+     "start": 468.876,
+     "end": 473.527
+    },
+    {
+     "segment": "prayer-one-mercy",
+     "text": "I want to receive its goodness instead of rushing beyond it.",
+     "start": 473.707,
+     "end": 478.208
+    },
+    {
+     "segment": "prayer-one-mercy",
+     "text": "If another person offered it, bless the life behind that gesture, including the concerns I know nothing about.",
+     "start": 478.388,
+     "end": 486.772
+    },
+    {
+     "segment": "prayer-one-mercy",
+     "text": "Help me remember that I also move through the days of others.",
+     "start": 486.952,
+     "end": 491.389
+    },
+    {
+     "segment": "prayer-one-mercy",
+     "text": "Let the care I have received shape how I speak, how I wait, and how I notice the next person before me.",
+     "start": 491.569,
+     "end": 499.548
+    }
+   ],
+   "segments": [
+    "stillness-first",
+    "prayer-one-mercy"
+   ],
+   "reference": null,
+   "measured_score": 0.5372,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.3191489361702127,
+    "scripture": 0.4,
+    "promise": 0.5319148936170213,
+    "resolution": 0.6,
+    "length_fit": 0.7611599999999998
+   },
+   "final_score": 0.5372
+  }
+ ],
+ "chosen": [
+  {
+   "start": 969.796,
+   "end": 1002.087,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can tell the truth about this day.",
+     "start": 969.796,
+     "end": 972.591
+    },
+    {
+     "segment": "declaration",
+     "text": "I can name the mercy I received.",
+     "start": 972.771,
+     "end": 975.523
+    },
+    {
+     "segment": "declaration",
+     "text": "I can bring the hurt I still carry.",
+     "start": 975.703,
+     "end": 978.412
+    },
+    {
+     "segment": "declaration",
+     "text": "God’s faithfulness is worthy of my thanks even when my understanding is incomplete.",
+     "start": 978.592,
+     "end": 985.44
+    },
+    {
+     "segment": "declaration",
+     "text": "I will honor the help that came through other people.",
+     "start": 985.62,
+     "end": 989.161
+    },
+    {
+     "segment": "declaration",
+     "text": "I will receive care without shame and offer kindness within my limits.",
+     "start": 989.341,
+     "end": 994.824
+    },
+    {
+     "segment": "declaration",
+     "text": "I entrust this evening to the Lord, carrying gratitude and honest need into the same prayer.",
+     "start": 995.004,
+     "end": 1002.087
+    }
+   ],
+   "segments": [
+    "declaration"
+   ],
+   "reference": null,
+   "measured_score": 0.6967,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.0,
+    "scripture": 0.4,
+    "promise": 0.6756756756756757,
+    "resolution": 1.0,
+    "length_fit": 0.6916399999999976
+   },
+   "final_score": 0.6967,
+   "hook": "I can tell the truth",
+   "title": "I can tell the truth"
+  },
+  {
+   "start": 618.453,
+   "end": 657.064,
+   "sentences": [
+    {
+     "segment": "prayer-correction",
+     "text": "Receive my willingness to learn.",
+     "start": 618.453,
+     "end": 620.843
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "You can remember one person through a small detail rather than a general description.",
+     "start": 622.223,
+     "end": 628.431
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "Perhaps you hear the patience in their voice or picture the chair they pulled closer.",
+     "start": 628.611,
+     "end": 634.477
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "If you received a message, you might recall the sentence that helped you feel remembered.",
+     "start": 634.657,
+     "end": 640.759
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "You can thank God for that exact kindness.",
+     "start": 640.939,
+     "end": 644.288
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "You may remember help offered awkwardly but sincerely.",
+     "start": 644.468,
+     "end": 648.457
+    },
+    {
+     "segment": "reflection-people-details",
+     "text": "Let your attention rest on what you truly received, without requiring that person to have done everything perfectly.",
+     "start": 648.637,
+     "end": 657.064
+    }
+   ],
+   "segments": [
+    "prayer-correction",
+    "reflection-people-details"
+   ],
+   "reference": null,
+   "measured_score": 0.6946,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.30120481927710846,
+    "resolution": 1.0,
+    "length_fit": 0.9444399999999996
+   },
+   "final_score": 0.6946,
+   "hook": "Receive my willingness to learn.",
+   "title": "Receive my willingness to learn."
+  },
+  {
+   "start": 517.877,
+   "end": 557.661,
+   "sentences": [
+    {
+     "segment": "reflection-middle-hours",
+     "text": "Now recall the middle of your day.",
+     "start": 517.877,
+     "end": 520.608
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "Think of where you were when you checked the time, took a break, or changed from one task to another.",
+     "start": 520.788,
+     "end": 527.828
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "You may notice something your hurried mind missed:",
+     "start": 528.008,
+     "end": 531.443
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "a problem explained, a mistake caught early, a few minutes of laughter.",
+     "start": 531.623,
+     "end": 537.169
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "You can give thanks for the help inside an imperfect task.",
+     "start": 537.349,
+     "end": 541.637
+    },
+    {
+     "segment": "reflection-middle-hours",
+     "text": "You do not have to call the whole day successful before you acknowledge a useful or generous moment within it.",
+     "start": 541.817,
+     "end": 550.543
+    },
+    {
+     "segment": "prayer-work-and-learning",
+     "text": "Lord, I thank you for the opportunities I had to contribute or learn today.",
+     "start": 551.923,
+     "end": 557.661
+    }
+   ],
+   "segments": [
+    "reflection-middle-hours",
+    "prayer-work-and-learning"
+   ],
+   "reference": null,
+   "measured_score": 0.6659,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.9782608695652174,
+    "scripture": 0.4,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.9913599999999997
+   },
+   "final_score": 0.6659,
+   "hook": "Now recall the middle of your day.",
+   "title": "Now recall the middle of your day."
+  }
+ ]
+}

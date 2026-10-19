@@ -11,6 +11,7 @@ marked publish=true. A failing Short is never "fixed" by editing the rubric.
 usage: shorts_review.py SHORTS_DIR [N]
 """
 import json
+import re
 import os
 from pathlib import Path
 import sys
@@ -82,6 +83,28 @@ def review(path, record, key):
     return r
 
 
+def failure_record(error):
+    """Keep only bounded categorical diagnostics; never persist provider prose/URLs."""
+    result={'status':f'NOT_REVIEWED_{type(error).__name__}'}
+    code=getattr(error,'code',None)
+    allowed_codes={'PROVIDER_CALL_FAILED','NO_FREE_MODEL','UNPARSEABLE_MODEL_OUTPUT'}
+    if isinstance(code,str) and (code in allowed_codes or re.fullmatch(
+            r'HTTP_[1-5][0-9]{2}_(?:INVALID_ARGUMENT|UNAUTHENTICATED|PERMISSION_DENIED|NOT_FOUND|RESOURCE_EXHAUSTED|UNAVAILABLE)?(?::QUOTA)?',code)):
+        result['error_code']=code
+    else:result['error_code']='UNKNOWN'
+    diagnostic=getattr(error,'diagnostic',None)
+    safe={}
+    if isinstance(diagnostic,dict):
+        if type(diagnostic.get('http_status')) is int and 100<=diagnostic['http_status']<=599:safe['http_status']=diagnostic['http_status']
+        if diagnostic.get('provider_status') in ('INVALID_ARGUMENT','UNAUTHENTICATED','PERMISSION_DENIED','NOT_FOUND','RESOURCE_EXHAUSTED','UNAVAILABLE'):safe['provider_status']=diagnostic['provider_status']
+        for name in ['body_truncated','raw_body_retained','sanitized']:
+            if type(diagnostic.get(name)) is bool:safe[name]=diagnostic[name]
+        if diagnostic.get('body_parse_status') in ('NOT_PARSED','INVALID_JSON_OR_SHAPE','JSON_ERROR_OBJECT'):safe['body_parse_status']=diagnostic['body_parse_status']
+        if type(diagnostic.get('body_bytes_read')) is int:safe['body_bytes_read']=max(0,min(8193,diagnostic['body_bytes_read']))
+    result['provider_diagnostic']=safe
+    return result
+
+
 def main(shorts_dir, n="3"):
     d = Path(shorts_dir)
     spec = json.loads((d / "shorts.json").read_text())
@@ -94,7 +117,7 @@ def main(shorts_dir, n="3"):
         try:
             rec["review"] = review(d / rec["file"], rec, key) if key else {"status": "NOT_REVIEWED_NO_KEY"}
         except Exception as e:
-            rec["review"] = {"status": f"NOT_REVIEWED_{type(e).__name__}"}
+            rec["review"] = failure_record(e)
     passing = sorted([r for r in spec["shorts"] if r["review"].get("status") == "PASS"],
                      key=lambda r: (r["review"]["overall"], r["selection"].get("final_score") or 0), reverse=True)
     keep = {r["file"] for r in passing[:int(n)]}

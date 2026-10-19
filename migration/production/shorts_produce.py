@@ -186,7 +186,7 @@ def ass(moment, hook, refs, dur, timeline_sentences=None):
     if hook_shown(moment, hook):
         first = moment["sentences"][0]
         hook_end = min(HOOK_S, first["end"] - moment["start"], dur)
-        lines.append(f"Dialogue: 5,{ts(0)},{ts(hook_end)},Hook,,0,0,0,,{{\\fad(0,200)}}{ass_text(hook)}")
+        lines.append(f"Dialogue: 5,{ts(0)},{ts(hook_end)},Hook,,0,0,0,,{{\\fad(200,200)}}{ass_text(hook)}")
     for a, b, ref in reference_events(moment, refs, timeline_sentences):
         a = max(a, hook_end)  # the reference slot sits under the hook: never both at once
         if b > a:
@@ -229,7 +229,7 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out):
     graph.append(f"{last}scale={2 * VW}:{2 * VH},"
                  f"zoompan=z='min({z1:.2f},{z0:.2f}+{z1 - z0:.2f}*on/{max(frames - 1, 1)})':"
                  f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={VW}x{VH}:fps={FPS},"
-                 f"{look},ass={ass_path},format=yuv420p[vout]")
+                 f"{look},ass={ass_path},fade=t=out:st={voice_s:.3f}:d={TAIL_S:.3f},format=yuv420p[vout]")
     a_voice, a_music = n, n + 1
     swell = f"volume='0.05+0.04*max(0,(t-{dur - 5:.2f})/5)':eval=frame"
     graph.append(f"[{a_voice}:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,"

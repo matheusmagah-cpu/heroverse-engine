@@ -136,6 +136,11 @@ class Repair012(unittest.TestCase):
         self.assertEqual(shorts_select.opening_reason(dict(line,end=7.001)),'OPENING_OVER_3S')
         self.assertEqual(shorts_select.opening_reason(dict(line,text='A little kindness:')),'INCOMPLETE_OPENING_LINE')
         self.assertEqual(shorts_select.opening_reason(dict(line,text='the bed itself.')),'CONTINUATION_OPENING_LINE')
+    def test_hook_uses_actual_opening_not_a_later_line(self):
+        first={'text':'I can tell the truth about this day.'}
+        self.assertEqual(shorts_select.opening_hook(first),'I can tell the truth')
+        self.assertTrue(sp.hook_shown({'sentences':[first]},shorts_select.opening_hook(first)))
+
     def test_actual_pilot012_candidates_and_resolution(self):
         timeline=load(HERE/'pilot-012'/'out'/'timeline.json')['sentences']
         script=load(HERE/'pilot-012'/'script.json');refs={r['id']:r.get('reference') for r in script['segments']}
@@ -259,6 +264,13 @@ class Picture(unittest.TestCase):
             self.assertEqual(graph.count("zoompan"), 1)  # one zoom over the whole Short, after the cross-fades
             self.assertIn("zoompan=z='min(1.06,1.00+0.06*on/", graph)
             self.assertLess(graph.index("xfade") if n > 1 else 0, graph.index("zoompan"))
+
+    def test_cinematic_tail_only_after_last_spoken_word(self):
+        for w in WINDOWS:
+            dur,n,length,args=self.args(w);graph=args[args.index('-filter_complex')+1]
+            voice_s=w['end']-w['start']
+            self.assertIn(f'fade=t=out:st={voice_s:.3f}:d={sp.TAIL_S:.3f}',graph)
+            self.assertEqual(sp.TAIL_S,.5)
 
     def test_voice_is_the_window(self):
         w = WINDOWS[0]
