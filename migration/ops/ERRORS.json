@@ -210,6 +210,16 @@
     "file": "migration/ops/test_minutes.py",
     "contains": "def test_rounding_windows_and_alerts"
    }
+  },
+  {
+   "id": "E22",
+   "date": "2026-10-19",
+   "error": "Card #148 kept its SPEC v1 goal (public runner, 'making the engine public' forbidden) after the owner changed the order to 'make the engine public'; Dot built PR #149 from the verbal order, and the delivery could not be reviewed against the card",
+   "fix": "#148 rewritten as SPEC v2 matching the owner's order; Dot posts the RESULT for PR #149",
+   "antidote": {
+    "file": "migration/ops/DOT_PROTOCOL.md",
+    "contains": "When the owner changes a task's goal, Claude rewrites the card as `SPEC vN` before Dot resumes"
+   }
   }
  ]
 }

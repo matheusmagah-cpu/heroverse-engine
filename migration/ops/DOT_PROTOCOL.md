@@ -63,6 +63,8 @@ One of three outcomes, written on the issue:
 - **SPEC-FIX** — the card was wrong or too small for the needed result: Claude edits the card (marks it `SPEC v2`,
   stating what changed and why), then label back to `dot-task`. Claude's error is corrected in the card, never
   pushed onto Dot.
+When the owner changes a task's goal, Claude rewrites the card as `SPEC vN` before Dot resumes; Dot works only
+from the card text, never from an instruction that is not in the card.
 Two REWORKs on one task → Claude reports to the owner with the cause.
 Every REWORK or SPEC-FIX is an error: Claude also adds its antidote (a check in `script_check.py`, `dot_scope.py`,
 a test, or a line in the card template) and a line in `ops/ERRORS.json`, so the same miss cannot pass again.
