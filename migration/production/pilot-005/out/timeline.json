@@ -1,0 +1,2331 @@
+{
+ "segments": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 8.809
+  },
+  {
+   "id": "invitation",
+   "start": 9.609,
+   "end": 40.383
+  },
+  {
+   "id": "scripture-1",
+   "start": 41.583,
+   "end": 60.211
+  },
+  {
+   "id": "reflection-1",
+   "start": 61.711,
+   "end": 81.68
+  },
+  {
+   "id": "prayer-1",
+   "start": 82.88,
+   "end": 102.328
+  },
+  {
+   "id": "scripture-2",
+   "start": 103.528,
+   "end": 110.181
+  },
+  {
+   "id": "reflection-2",
+   "start": 111.681,
+   "end": 133.125
+  },
+  {
+   "id": "scripture-3",
+   "start": 134.325,
+   "end": 143.987
+  },
+  {
+   "id": "prayer-2",
+   "start": 145.487,
+   "end": 165.523
+  },
+  {
+   "id": "stillness",
+   "start": 166.723,
+   "end": 175.357
+  },
+  {
+   "id": "transition",
+   "start": 181.357,
+   "end": 186.935
+  },
+  {
+   "id": "prayer-mind",
+   "start": 188.435,
+   "end": 206.648
+  },
+  {
+   "id": "scripture-4",
+   "start": 207.848,
+   "end": 213.127
+  },
+  {
+   "id": "prayer-home",
+   "start": 214.627,
+   "end": 232.989
+  },
+  {
+   "id": "scripture-5",
+   "start": 234.189,
+   "end": 240.001
+  },
+  {
+   "id": "reflection-3",
+   "start": 241.501,
+   "end": 258.947
+  },
+  {
+   "id": "prayer-travel",
+   "start": 260.147,
+   "end": 276.696
+  },
+  {
+   "id": "prayer-family",
+   "start": 277.896,
+   "end": 298.508
+  },
+  {
+   "id": "prayer-children",
+   "start": 299.708,
+   "end": 319.125
+  },
+  {
+   "id": "scripture-6",
+   "start": 320.325,
+   "end": 326.607
+  },
+  {
+   "id": "reflection-camp",
+   "start": 328.107,
+   "end": 348.185
+  },
+  {
+   "id": "prayer-work",
+   "start": 349.385,
+   "end": 366.873
+  },
+  {
+   "id": "prayer-decisions",
+   "start": 368.073,
+   "end": 386.256
+  },
+  {
+   "id": "prayer-finances",
+   "start": 387.456,
+   "end": 405.797
+  },
+  {
+   "id": "scripture-7",
+   "start": 406.997,
+   "end": 417.979
+  },
+  {
+   "id": "reflection-4",
+   "start": 419.479,
+   "end": 435.535
+  },
+  {
+   "id": "prayer-health",
+   "start": 436.735,
+   "end": 458.788
+  },
+  {
+   "id": "prayer-relationships",
+   "start": 459.988,
+   "end": 480.941
+  },
+  {
+   "id": "prayer-words",
+   "start": 482.141,
+   "end": 500.001
+  },
+  {
+   "id": "prayer-emotions",
+   "start": 501.201,
+   "end": 517.272
+  },
+  {
+   "id": "scripture-8",
+   "start": 518.472,
+   "end": 526.661
+  },
+  {
+   "id": "prayer-spiritual",
+   "start": 528.161,
+   "end": 545.457
+  },
+  {
+   "id": "scripture-9",
+   "start": 546.657,
+   "end": 558.601
+  },
+  {
+   "id": "reflection-5",
+   "start": 560.101,
+   "end": 570.028
+  },
+  {
+   "id": "scripture-10",
+   "start": 571.228,
+   "end": 580.621
+  },
+  {
+   "id": "reflection-hiding",
+   "start": 582.121,
+   "end": 603.117
+  },
+  {
+   "id": "prayer-weary",
+   "start": 604.317,
+   "end": 626.072
+  },
+  {
+   "id": "scripture-11",
+   "start": 627.272,
+   "end": 640.377
+  },
+  {
+   "id": "reflection-courage",
+   "start": 641.877,
+   "end": 658.829
+  },
+  {
+   "id": "stillness-2",
+   "start": 660.029,
+   "end": 667.289
+  },
+  {
+   "id": "declaration",
+   "start": 673.289,
+   "end": 694.721
+  },
+  {
+   "id": "scripture-12",
+   "start": 696.221,
+   "end": 717.397
+  },
+  {
+   "id": "reflection-6",
+   "start": 718.897,
+   "end": 736.501
+  },
+  {
+   "id": "prayer-thanks",
+   "start": 737.701,
+   "end": 755.177
+  },
+  {
+   "id": "prayer-purpose",
+   "start": 756.377,
+   "end": 771.573
+  },
+  {
+   "id": "prayer-community",
+   "start": 772.773,
+   "end": 790.252
+  },
+  {
+   "id": "prayer-evening",
+   "start": 791.452,
+   "end": 805.112
+  },
+  {
+   "id": "day-transition",
+   "start": 806.312,
+   "end": 816.208
+  },
+  {
+   "id": "day-psalm-91",
+   "start": 817.708,
+   "end": 935.933
+  },
+  {
+   "id": "day-reflect-91",
+   "start": 937.933,
+   "end": 959.868
+  },
+  {
+   "id": "day-psalm-23",
+   "start": 961.368,
+   "end": 1013.22
+  },
+  {
+   "id": "day-reflect-23",
+   "start": 1015.22,
+   "end": 1033.72
+  },
+  {
+   "id": "day-ephesians-6",
+   "start": 1035.22,
+   "end": 1076.428
+  },
+  {
+   "id": "day-reflect-6",
+   "start": 1078.428,
+   "end": 1100.848
+  },
+  {
+   "id": "day-isaiah-43",
+   "start": 1102.348,
+   "end": 1136.407
+  },
+  {
+   "id": "day-reflect-43",
+   "start": 1138.407,
+   "end": 1156.563
+  },
+  {
+   "id": "day-romans-8",
+   "start": 1158.063,
+   "end": 1201.617
+  },
+  {
+   "id": "day-reflect-romans",
+   "start": 1203.617,
+   "end": 1220.401
+  },
+  {
+   "id": "day-psalm-27",
+   "start": 1221.901,
+   "end": 1279.751
+  },
+  {
+   "id": "day-reflect-27",
+   "start": 1281.751,
+   "end": 1300.72
+  },
+  {
+   "id": "day-psalm-46",
+   "start": 1302.22,
+   "end": 1322.579
+  },
+  {
+   "id": "day-reflect-46",
+   "start": 1324.579,
+   "end": 1341.488
+  },
+  {
+   "id": "day-psalm-121",
+   "start": 1342.988,
+   "end": 1391.719
+  },
+  {
+   "id": "day-reflect-121",
+   "start": 1393.719,
+   "end": 1406.696
+  },
+  {
+   "id": "payoff",
+   "start": 1408.196,
+   "end": 1424.767
+  },
+  {
+   "id": "blessing",
+   "start": 1425.967,
+   "end": 1441.151
+  },
+  {
+   "id": "cta",
+   "start": 1442.651,
+   "end": 1457.539
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Good morning.",
+   "start": 0.3,
+   "end": 1.665
+  },
+  {
+   "segment": "hook",
+   "text": "Let us place you and those you love under God's protection, and walk into today in his peace.",
+   "start": 1.845,
+   "end": 8.629
+  },
+  {
+   "segment": "invitation",
+   "text": "Before you step out into today, stay with me for the next few minutes.",
+   "start": 9.609,
+   "end": 14.281
+  },
+  {
+   "segment": "invitation",
+   "text": "Take one slow breath with me.",
+   "start": 14.461,
+   "end": 16.936
+  },
+  {
+   "segment": "invitation",
+   "text": "Maybe you are carrying something heavy into this day:",
+   "start": 17.116,
+   "end": 21.063
+  },
+  {
+   "segment": "invitation",
+   "text": "a hard meeting, a long drive, a child going to school, news you are waiting for.",
+   "start": 21.243,
+   "end": 27.856
+  },
+  {
+   "segment": "invitation",
+   "text": "You do not have to face any of it alone.",
+   "start": 28.036,
+   "end": 31.172
+  },
+  {
+   "segment": "invitation",
+   "text": "Let your shoulders drop.",
+   "start": 31.352,
+   "end": 33.336
+  },
+  {
+   "segment": "invitation",
+   "text": "Open your hands.",
+   "start": 33.516,
+   "end": 35.137
+  },
+  {
+   "segment": "invitation",
+   "text": "For the next few minutes, simply rest in the shelter of the Most High.",
+   "start": 35.317,
+   "end": 40.203
+  },
+  {
+   "segment": "scripture-1",
+   "text": "Psalm ninety-one begins like this.",
+   "start": 41.583,
+   "end": 44.42
+  },
+  {
+   "segment": "scripture-1",
+   "text": "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.",
+   "start": 44.6,
+   "end": 51.597
+  },
+  {
+   "segment": "scripture-1",
+   "text": "I will say of the LORD, He is my refuge and my fortress:",
+   "start": 51.777,
+   "end": 56.385
+  },
+  {
+   "segment": "scripture-1",
+   "text": "my God;",
+   "start": 56.565,
+   "end": 57.867
+  },
+  {
+   "segment": "scripture-1",
+   "text": "in him will I trust.",
+   "start": 58.047,
+   "end": 60.031
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Notice the word dwelleth.",
+   "start": 61.711,
+   "end": 63.695
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Protection here is not a visit you make in an emergency.",
+   "start": 63.875,
+   "end": 68.355
+  },
+  {
+   "segment": "reflection-1",
+   "text": "It is a place you live.",
+   "start": 68.535,
+   "end": 70.625
+  },
+  {
+   "segment": "reflection-1",
+   "text": "And the psalmist does something simple:",
+   "start": 70.805,
+   "end": 73.408
+  },
+  {
+   "segment": "reflection-1",
+   "text": "he says it out loud.",
+   "start": 73.588,
+   "end": 75.465
+  },
+  {
+   "segment": "reflection-1",
+   "text": "I will say of the Lord, he is my refuge.",
+   "start": 75.645,
+   "end": 79.08
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Today, you can say it too.",
+   "start": 79.26,
+   "end": 81.5
+  },
+  {
+   "segment": "prayer-1",
+   "text": "So let us pray.",
+   "start": 82.88,
+   "end": 84.608
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Lord, this morning I choose to dwell in your shelter.",
+   "start": 84.788,
+   "end": 88.692
+  },
+  {
+   "segment": "prayer-1",
+   "text": "You are my refuge and my fortress.",
+   "start": 88.872,
+   "end": 91.901
+  },
+  {
+   "segment": "prayer-1",
+   "text": "My God, in you I trust.",
+   "start": 92.081,
+   "end": 94.343
+  },
+  {
+   "segment": "prayer-1",
+   "text": "I do not begin this day relying on my own strength or my own plans.",
+   "start": 94.523,
+   "end": 99.877
+  },
+  {
+   "segment": "prayer-1",
+   "text": "I begin it hidden in you.",
+   "start": 100.057,
+   "end": 102.148
+  },
+  {
+   "segment": "scripture-2",
+   "text": "The name of the LORD is a strong tower:",
+   "start": 103.528,
+   "end": 106.579
+  },
+  {
+   "segment": "scripture-2",
+   "text": "the righteous runneth into it, and is safe.",
+   "start": 106.759,
+   "end": 110.001
+  },
+  {
+   "segment": "reflection-2",
+   "text": "A tower in the ancient world was where people ran when danger came.",
+   "start": 111.681,
+   "end": 117.015
+  },
+  {
+   "segment": "reflection-2",
+   "text": "And the strongest tower, Solomon says, is not made of stone.",
+   "start": 117.195,
+   "end": 122.123
+  },
+  {
+   "segment": "reflection-2",
+   "text": "It is the name of the Lord.",
+   "start": 122.303,
+   "end": 124.607
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Whenever today feels unsafe, you can run into that name with one short prayer:",
+   "start": 124.787,
+   "end": 130.973
+  },
+  {
+   "segment": "reflection-2",
+   "text": "Jesus, help me.",
+   "start": 131.153,
+   "end": 132.945
+  },
+  {
+   "segment": "scripture-3",
+   "text": "I will lift up mine eyes unto the hills, from whence cometh my help.",
+   "start": 134.325,
+   "end": 139.488
+  },
+  {
+   "segment": "scripture-3",
+   "text": "My help cometh from the LORD, which made heaven and earth.",
+   "start": 139.668,
+   "end": 143.807
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Father, I lift my eyes to you.",
+   "start": 145.487,
+   "end": 148.196
+  },
+  {
+   "segment": "prayer-2",
+   "text": "My help does not come from my bank account, my connections or my own cleverness.",
+   "start": 148.376,
+   "end": 154.349
+  },
+  {
+   "segment": "prayer-2",
+   "text": "My help comes from you, the maker of heaven and earth.",
+   "start": 154.529,
+   "end": 158.476
+  },
+  {
+   "segment": "prayer-2",
+   "text": "The One who holds the stars in place is watching over my small day.",
+   "start": 158.656,
+   "end": 163.989
+  },
+  {
+   "segment": "prayer-2",
+   "text": "Thank you.",
+   "start": 164.169,
+   "end": 165.343
+  },
+  {
+   "segment": "stillness",
+   "text": "Let us be still for a moment.",
+   "start": 166.723,
+   "end": 168.963
+  },
+  {
+   "segment": "stillness",
+   "text": "Breathe in slowly.",
+   "start": 169.143,
+   "end": 170.913
+  },
+  {
+   "segment": "stillness",
+   "text": "And breathe out.",
+   "start": 171.093,
+   "end": 172.587
+  },
+  {
+   "segment": "stillness",
+   "text": "Once more, breathe in, and rest.",
+   "start": 172.767,
+   "end": 175.177
+  },
+  {
+   "segment": "transition",
+   "text": "Now let us pray protection over every part of this day, one by one.",
+   "start": 181.357,
+   "end": 186.755
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Lord, protect my mind today.",
+   "start": 188.435,
+   "end": 190.931
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Guard me from anxious thoughts that spiral, from lies about who I am, and from fear that wants to take over.",
+   "start": 191.111,
+   "end": 199.495
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Fill my thoughts with what is true and good.",
+   "start": 199.675,
+   "end": 202.619
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "When worry knocks, let your peace answer the door.",
+   "start": 202.799,
+   "end": 206.468
+  },
+  {
+   "segment": "scripture-4",
+   "text": "But the Lord is faithful, who shall stablish you, and keep you from evil.",
+   "start": 207.848,
+   "end": 212.947
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Father, I place my home under your protection.",
+   "start": 214.627,
+   "end": 218.296
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Watch over every door and every room.",
+   "start": 218.476,
+   "end": 221.591
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Keep away harm, accidents and every kind of danger.",
+   "start": 221.771,
+   "end": 226.101
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Let our home be a place of peace, where your presence is felt the moment anyone walks in.",
+   "start": 226.281,
+   "end": 232.809
+  },
+  {
+   "segment": "scripture-5",
+   "text": "For he shall give his angels charge over thee, to keep thee in all thy ways.",
+   "start": 234.189,
+   "end": 239.821
+  },
+  {
+   "segment": "reflection-3",
+   "text": "In all thy ways.",
+   "start": 241.501,
+   "end": 243.293
+  },
+  {
+   "segment": "reflection-3",
+   "text": "Not only in church, not only on good days.",
+   "start": 243.473,
+   "end": 247.164
+  },
+  {
+   "segment": "reflection-3",
+   "text": "On the highway, at the office, in the hospital waiting room, on the walk home.",
+   "start": 247.344,
+   "end": 253.104
+  },
+  {
+   "segment": "reflection-3",
+   "text": "There is no road you will travel today where God's care cannot reach you.",
+   "start": 253.284,
+   "end": 258.767
+  },
+  {
+   "segment": "prayer-travel",
+   "text": "Lord, protect everyone who travels today.",
+   "start": 260.147,
+   "end": 263.453
+  },
+  {
+   "segment": "prayer-travel",
+   "text": "Every car, every bus, every train and every plane carrying someone I love.",
+   "start": 263.633,
+   "end": 269.671
+  },
+  {
+   "segment": "prayer-travel",
+   "text": "Keep drivers alert and roads safe.",
+   "start": 269.851,
+   "end": 272.773
+  },
+  {
+   "segment": "prayer-travel",
+   "text": "Bring each one home again tonight, safe and whole.",
+   "start": 272.953,
+   "end": 276.516
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Father, I lift up my family one by one before you.",
+   "start": 277.896,
+   "end": 281.971
+  },
+  {
+   "segment": "prayer-family",
+   "text": "You know their names, their needs and their worries better than I do.",
+   "start": 282.151,
+   "end": 286.951
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Cover them with your protection.",
+   "start": 287.131,
+   "end": 289.541
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Guard their health, their relationships and their hearts.",
+   "start": 289.721,
+   "end": 293.796
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Where any of them are far from you, draw them gently closer.",
+   "start": 293.976,
+   "end": 298.328
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Lord, I pray especially for the children.",
+   "start": 299.708,
+   "end": 302.78
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Watch over them at school, on the playground, online and in every friendship.",
+   "start": 302.96,
+   "end": 308.677
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Protect their innocence.",
+   "start": 308.857,
+   "end": 310.735
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Surround them with good influences and kind adults.",
+   "start": 310.915,
+   "end": 315.16
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Let them grow up knowing they are safe in your love.",
+   "start": 315.34,
+   "end": 318.945
+  },
+  {
+   "segment": "scripture-6",
+   "text": "The angel of the LORD encampeth round about them that fear him, and delivereth them.",
+   "start": 320.325,
+   "end": 326.427
+  },
+  {
+   "segment": "reflection-camp",
+   "text": "Encampeth round about.",
+   "start": 328.107,
+   "end": 330.112
+  },
+  {
+   "segment": "reflection-camp",
+   "text": "The picture is an army setting up camp all around you, on every side, through the night and through the day.",
+   "start": 330.292,
+   "end": 338.228
+  },
+  {
+   "segment": "reflection-camp",
+   "text": "You may feel exposed this morning, but heaven sees you surrounded.",
+   "start": 338.408,
+   "end": 343.315
+  },
+  {
+   "segment": "reflection-camp",
+   "text": "God's care is not thin.",
+   "start": 343.495,
+   "end": 345.628
+  },
+  {
+   "segment": "reflection-camp",
+   "text": "It is all the way around.",
+   "start": 345.808,
+   "end": 348.005
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Father, protect my work today.",
+   "start": 349.385,
+   "end": 351.967
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Guard my reputation and my integrity.",
+   "start": 352.147,
+   "end": 355.688
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Keep me from mistakes that could hurt others, and from people who would take advantage.",
+   "start": 355.868,
+   "end": 361.777
+  },
+  {
+   "segment": "prayer-work",
+   "text": "Give me favour, wisdom and patience with every person I meet.",
+   "start": 361.957,
+   "end": 366.693
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Lord, protect me from foolish decisions today.",
+   "start": 368.073,
+   "end": 371.593
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Before I sign, agree, buy or reply, give me a pause and a clear mind.",
+   "start": 371.773,
+   "end": 377.576
+  },
+  {
+   "segment": "prayer-decisions",
+   "text": "Close the doors that would lead me into harm, even when they look attractive, and open the doors you have prepared.",
+   "start": 377.756,
+   "end": 386.076
+  },
+  {
+   "segment": "prayer-finances",
+   "text": "Father, I place my finances under your care.",
+   "start": 387.456,
+   "end": 391.104
+  },
+  {
+   "segment": "prayer-finances",
+   "text": "Protect what you have entrusted to me from loss, from deception and from waste.",
+   "start": 391.284,
+   "end": 397.044
+  },
+  {
+   "segment": "prayer-finances",
+   "text": "Give me wisdom to spend well, to save well and to give generously.",
+   "start": 397.224,
+   "end": 402.173
+  },
+  {
+   "segment": "prayer-finances",
+   "text": "Provide for every need in my home today.",
+   "start": 402.353,
+   "end": 405.617
+  },
+  {
+   "segment": "scripture-7",
+   "text": "The LORD is my light and my salvation;",
+   "start": 406.997,
+   "end": 410.304
+  },
+  {
+   "segment": "scripture-7",
+   "text": "whom shall I fear?",
+   "start": 410.484,
+   "end": 412.255
+  },
+  {
+   "segment": "scripture-7",
+   "text": "the LORD is the strength of my life;",
+   "start": 412.435,
+   "end": 415.229
+  },
+  {
+   "segment": "scripture-7",
+   "text": "of whom shall I be afraid?",
+   "start": 415.409,
+   "end": 417.799
+  },
+  {
+   "segment": "reflection-4",
+   "text": "David does not answer his fear with a technique.",
+   "start": 419.479,
+   "end": 423.02
+  },
+  {
+   "segment": "reflection-4",
+   "text": "He answers it with a person.",
+   "start": 423.2,
+   "end": 425.547
+  },
+  {
+   "segment": "reflection-4",
+   "text": "The Lord is my light.",
+   "start": 425.727,
+   "end": 427.711
+  },
+  {
+   "segment": "reflection-4",
+   "text": "The Lord is my strength.",
+   "start": 427.891,
+   "end": 430.003
+  },
+  {
+   "segment": "reflection-4",
+   "text": "Fear shrinks when God is in view.",
+   "start": 430.183,
+   "end": 432.935
+  },
+  {
+   "segment": "reflection-4",
+   "text": "So keep him in view today.",
+   "start": 433.115,
+   "end": 435.355
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Lord, I ask for protection over my body and the bodies of those I love.",
+   "start": 436.735,
+   "end": 442.537
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Guard us from sickness and injury.",
+   "start": 442.717,
+   "end": 445.491
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Strengthen what is weak.",
+   "start": 445.671,
+   "end": 447.633
+  },
+  {
+   "segment": "prayer-health",
+   "text": "For anyone already facing illness today, be their healer, their comfort and their peace, and give wisdom to every doctor and nurse who cares for them.",
+   "start": 447.813,
+   "end": 458.608
+  },
+  {
+   "segment": "prayer-relationships",
+   "text": "Lord, protect my relationships.",
+   "start": 459.988,
+   "end": 462.655
+  },
+  {
+   "segment": "prayer-relationships",
+   "text": "Guard marriages from coldness and from anything that would divide them.",
+   "start": 462.835,
+   "end": 468.104
+  },
+  {
+   "segment": "prayer-relationships",
+   "text": "Protect friendships from gossip and misunderstanding.",
+   "start": 468.284,
+   "end": 472.444
+  },
+  {
+   "segment": "prayer-relationships",
+   "text": "Where there is tension, bring honest conversations and quick forgiveness.",
+   "start": 472.624,
+   "end": 477.787
+  },
+  {
+   "segment": "prayer-relationships",
+   "text": "Let love win in every home today.",
+   "start": 477.967,
+   "end": 480.761
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Father, set a guard over my mouth today.",
+   "start": 482.141,
+   "end": 485.405
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Protect me from words I would regret:",
+   "start": 485.585,
+   "end": 488.572
+  },
+  {
+   "segment": "prayer-words",
+   "text": "harsh words, careless words, words spoken in anger.",
+   "start": 488.752,
+   "end": 493.083
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Let what I say build people up.",
+   "start": 493.263,
+   "end": 495.631
+  },
+  {
+   "segment": "prayer-words",
+   "text": "Let my words carry your peace into every room I enter.",
+   "start": 495.811,
+   "end": 499.821
+  },
+  {
+   "segment": "prayer-emotions",
+   "text": "Lord, protect my heart from bitterness, discouragement and despair.",
+   "start": 501.201,
+   "end": 506.172
+  },
+  {
+   "segment": "prayer-emotions",
+   "text": "When disappointment comes today, do not let it settle in.",
+   "start": 506.352,
+   "end": 510.725
+  },
+  {
+   "segment": "prayer-emotions",
+   "text": "Keep my heart soft toward you and toward others, and fill it again and again with hope.",
+   "start": 510.905,
+   "end": 517.092
+  },
+  {
+   "segment": "scripture-8",
+   "text": "For I the LORD thy God will hold thy right hand, saying unto thee, Fear not;",
+   "start": 518.472,
+   "end": 524.723
+  },
+  {
+   "segment": "scripture-8",
+   "text": "I will help thee.",
+   "start": 524.903,
+   "end": 526.481
+  },
+  {
+   "segment": "prayer-spiritual",
+   "text": "Father, protect my heart and my faith.",
+   "start": 528.161,
+   "end": 531.233
+  },
+  {
+   "segment": "prayer-spiritual",
+   "text": "Keep me from temptation and from everything that would pull me away from you.",
+   "start": 531.413,
+   "end": 536.725
+  },
+  {
+   "segment": "prayer-spiritual",
+   "text": "Help me to put on the whole armour of God today:",
+   "start": 536.905,
+   "end": 540.489
+  },
+  {
+   "segment": "prayer-spiritual",
+   "text": "truth, righteousness, peace, faith, and your word in my mouth.",
+   "start": 540.669,
+   "end": 545.277
+  },
+  {
+   "segment": "scripture-9",
+   "text": "Finally, my brethren, be strong in the Lord, and in the power of his might.",
+   "start": 546.657,
+   "end": 551.82
+  },
+  {
+   "segment": "scripture-9",
+   "text": "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil.",
+   "start": 552.0,
+   "end": 558.421
+  },
+  {
+   "segment": "reflection-5",
+   "text": "Be strong in the Lord, not in yourself.",
+   "start": 560.101,
+   "end": 563.344
+  },
+  {
+   "segment": "reflection-5",
+   "text": "The armour is his, not yours.",
+   "start": 563.524,
+   "end": 566.276
+  },
+  {
+   "segment": "reflection-5",
+   "text": "Your part is to put it on, and to stand.",
+   "start": 566.456,
+   "end": 569.848
+  },
+  {
+   "segment": "scripture-10",
+   "text": "Thou art my hiding place;",
+   "start": 571.228,
+   "end": 573.447
+  },
+  {
+   "segment": "scripture-10",
+   "text": "thou shalt preserve me from trouble;",
+   "start": 573.627,
+   "end": 576.379
+  },
+  {
+   "segment": "scripture-10",
+   "text": "thou shalt compass me about with songs of deliverance.",
+   "start": 576.559,
+   "end": 580.441
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "A hiding place and songs of deliverance.",
+   "start": 582.121,
+   "end": 585.471
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "God does not only hide you from trouble.",
+   "start": 585.651,
+   "end": 588.979
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "He surrounds you with music while you wait.",
+   "start": 589.159,
+   "end": 592.273
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "Even in a hard day, there can be a song underneath it:",
+   "start": 592.453,
+   "end": 596.613
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
+   "start": 596.793,
+   "end": 602.937
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "And Lord, I pray for everyone listening who woke up afraid this morning.",
+   "start": 604.317,
+   "end": 609.629
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "Those in unsafe homes, those in places of war, those facing a diagnosis, those who feel alone.",
+   "start": 609.809,
+   "end": 618.065
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "Be their hiding place.",
+   "start": 618.245,
+   "end": 620.101
+  },
+  {
+   "segment": "prayer-weary",
+   "text": "Surround them with songs of deliverance, and send people to help them today.",
+   "start": 620.281,
+   "end": 625.892
+  },
+  {
+   "segment": "scripture-11",
+   "text": "Be strong and of a good courage, fear not, nor be afraid of them:",
+   "start": 627.272,
+   "end": 632.413
+  },
+  {
+   "segment": "scripture-11",
+   "text": "for the LORD thy God, he it is that doth go with thee;",
+   "start": 632.593,
+   "end": 636.753
+  },
+  {
+   "segment": "scripture-11",
+   "text": "he will not fail thee, nor forsake thee.",
+   "start": 636.933,
+   "end": 640.197
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "He it is that doth go with thee.",
+   "start": 641.877,
+   "end": 644.501
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "Courage is not pretending the danger is not there.",
+   "start": 644.681,
+   "end": 648.713
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "It is knowing who walks beside you into it.",
+   "start": 648.893,
+   "end": 652.115
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "He will not fail you.",
+   "start": 652.295,
+   "end": 654.172
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "He will not forsake you.",
+   "start": 654.352,
+   "end": 656.421
+  },
+  {
+   "segment": "reflection-courage",
+   "text": "Not today, not ever.",
+   "start": 656.601,
+   "end": 658.649
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Breathe in again, slowly.",
+   "start": 660.029,
+   "end": 662.248
+  },
+  {
+   "segment": "stillness-2",
+   "text": "And let it go.",
+   "start": 662.428,
+   "end": 663.985
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Feel the peace of being covered by God.",
+   "start": 664.165,
+   "end": 667.109
+  },
+  {
+   "segment": "declaration",
+   "text": "Say these words with me, out loud if you can.",
+   "start": 673.289,
+   "end": 677.044
+  },
+  {
+   "segment": "declaration",
+   "text": "The Lord is my refuge and my fortress.",
+   "start": 677.224,
+   "end": 680.595
+  },
+  {
+   "segment": "declaration",
+   "text": "I dwell in the shelter of the Most High.",
+   "start": 680.775,
+   "end": 683.804
+  },
+  {
+   "segment": "declaration",
+   "text": "His angels watch over me in all my ways.",
+   "start": 683.984,
+   "end": 687.589
+  },
+  {
+   "segment": "declaration",
+   "text": "I will not fear, for God is with me.",
+   "start": 687.769,
+   "end": 690.969
+  },
+  {
+   "segment": "declaration",
+   "text": "My family and my home are in his hands.",
+   "start": 691.149,
+   "end": 694.541
+  },
+  {
+   "segment": "scripture-12",
+   "text": "God himself answers in the psalm.",
+   "start": 696.221,
+   "end": 698.888
+  },
+  {
+   "segment": "scripture-12",
+   "text": "Because he hath set his love upon me, therefore will I deliver him:",
+   "start": 699.068,
+   "end": 703.825
+  },
+  {
+   "segment": "scripture-12",
+   "text": "I will set him on high, because he hath known my name.",
+   "start": 704.005,
+   "end": 708.059
+  },
+  {
+   "segment": "scripture-12",
+   "text": "He shall call upon me, and I will answer him:",
+   "start": 708.239,
+   "end": 711.823
+  },
+  {
+   "segment": "scripture-12",
+   "text": "I will be with him in trouble;",
+   "start": 712.003,
+   "end": 714.328
+  },
+  {
+   "segment": "scripture-12",
+   "text": "I will deliver him, and honour him.",
+   "start": 714.508,
+   "end": 717.217
+  },
+  {
+   "segment": "reflection-6",
+   "text": "Listen to why God protects:",
+   "start": 718.897,
+   "end": 721.244
+  },
+  {
+   "segment": "reflection-6",
+   "text": "because he hath set his love upon me, because he hath known my name.",
+   "start": 721.424,
+   "end": 726.139
+  },
+  {
+   "segment": "reflection-6",
+   "text": "Protection flows out of relationship.",
+   "start": 726.319,
+   "end": 729.348
+  },
+  {
+   "segment": "reflection-6",
+   "text": "You are not protected because you are perfect.",
+   "start": 729.528,
+   "end": 733.176
+  },
+  {
+   "segment": "reflection-6",
+   "text": "You are protected because you are his.",
+   "start": 733.356,
+   "end": 736.321
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Thank you, Father, for every time you have protected me without my even knowing it.",
+   "start": 737.701,
+   "end": 743.632
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "The accidents that did not happen.",
+   "start": 743.812,
+   "end": 746.479
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "The dangers I never saw.",
+   "start": 746.659,
+   "end": 748.941
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Thank you for keeping me until this morning.",
+   "start": 749.121,
+   "end": 752.428
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "I trust you to keep me today.",
+   "start": 752.608,
+   "end": 754.997
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Lord, make me a shelter for others today.",
+   "start": 756.377,
+   "end": 759.492
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "Let me notice the person who feels unsafe, and offer kindness, help and prayer.",
+   "start": 759.672,
+   "end": 765.923
+  },
+  {
+   "segment": "prayer-purpose",
+   "text": "As you protect me, let me protect the weak and speak up for those who cannot.",
+   "start": 766.103,
+   "end": 771.393
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Father, protect my church and my neighbourhood.",
+   "start": 772.773,
+   "end": 776.144
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Watch over the streets where I live, the schools, the shops and the people who work in them.",
+   "start": 776.324,
+   "end": 782.66
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Bring peace where there is violence, help where there is need, and let your people be a light in this place.",
+   "start": 782.84,
+   "end": 790.072
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "And Lord, when this day is done, bring every one of us home safely.",
+   "start": 791.452,
+   "end": 796.231
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "Let us sit down tonight together, grateful for your protection.",
+   "start": 796.411,
+   "end": 800.955
+  },
+  {
+   "segment": "prayer-evening",
+   "text": "I trust you with every hour between now and then.",
+   "start": 801.135,
+   "end": 804.932
+  },
+  {
+   "segment": "day-transition",
+   "text": "Before you go, let me read you some Scripture to carry into this day.",
+   "start": 806.312,
+   "end": 811.133
+  },
+  {
+   "segment": "day-transition",
+   "text": "Let these words go with you, into every room and every road.",
+   "start": 811.313,
+   "end": 816.028
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Here is the whole of Psalm ninety-one.",
+   "start": 817.708,
+   "end": 820.588
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.",
+   "start": 820.768,
+   "end": 827.765
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "I will say of the LORD, He is my refuge and my fortress:",
+   "start": 827.945,
+   "end": 832.532
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "my God;",
+   "start": 832.712,
+   "end": 834.013
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "in him will I trust.",
+   "start": 834.193,
+   "end": 836.177
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Surely he shall deliver thee from the snare of the fowler, and from the noisome pestilence.",
+   "start": 836.357,
+   "end": 842.395
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "He shall cover thee with his feathers, and under his wings shalt thou trust:",
+   "start": 842.575,
+   "end": 847.823
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "his truth shall be thy shield and buckler.",
+   "start": 848.003,
+   "end": 851.032
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Thou shalt not be afraid for the terror by night;",
+   "start": 851.212,
+   "end": 854.839
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "nor for the arrow that flieth by day;",
+   "start": 855.019,
+   "end": 858.005
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Nor for the pestilence that walketh in darkness;",
+   "start": 858.185,
+   "end": 861.769
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "nor for the destruction that wasteth at noonday.",
+   "start": 861.949,
+   "end": 865.597
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "A thousand shall fall at thy side, and ten thousand at thy right hand;",
+   "start": 865.777,
+   "end": 871.388
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "but it shall not come nigh thee.",
+   "start": 871.568,
+   "end": 873.893
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Only with thine eyes shalt thou behold and see the reward of the wicked.",
+   "start": 874.073,
+   "end": 879.791
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Because thou hast made the LORD, which is my refuge, even the most High, thy habitation;",
+   "start": 879.971,
+   "end": 886.883
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "There shall no evil befall thee, neither shall any plague come nigh thy dwelling.",
+   "start": 887.063,
+   "end": 892.865
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "For he shall give his angels charge over thee, to keep thee in all thy ways.",
+   "start": 893.045,
+   "end": 898.677
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "They shall bear thee up in their hands, lest thou dash thy foot against a stone.",
+   "start": 898.857,
+   "end": 904.34
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Thou shalt tread upon the lion and adder:",
+   "start": 904.52,
+   "end": 907.613
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "the young lion and the dragon shalt thou trample under feet.",
+   "start": 907.793,
+   "end": 912.209
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "Because he hath set his love upon me, therefore will I deliver him:",
+   "start": 912.389,
+   "end": 917.147
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "I will set him on high, because he hath known my name.",
+   "start": 917.327,
+   "end": 921.401
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "He shall call upon me, and I will answer him:",
+   "start": 921.581,
+   "end": 925.165
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "I will be with him in trouble;",
+   "start": 925.345,
+   "end": 927.671
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "I will deliver him, and honour him.",
+   "start": 927.851,
+   "end": 930.56
+  },
+  {
+   "segment": "day-psalm-91",
+   "text": "With long life will I satisfy him, and shew him my salvation.",
+   "start": 930.74,
+   "end": 935.753
+  },
+  {
+   "segment": "day-reflect-91",
+   "text": "Notice how the psalm moves.",
+   "start": 937.933,
+   "end": 940.109
+  },
+  {
+   "segment": "day-reflect-91",
+   "text": "It begins with a person choosing to dwell with God, and it ends with God himself speaking:",
+   "start": 940.289,
+   "end": 947.073
+  },
+  {
+   "segment": "day-reflect-91",
+   "text": "I will be with him in trouble.",
+   "start": 947.253,
+   "end": 949.579
+  },
+  {
+   "segment": "day-reflect-91",
+   "text": "Protection in this psalm is not a promise that nothing hard will ever happen.",
+   "start": 949.759,
+   "end": 955.604
+  },
+  {
+   "segment": "day-reflect-91",
+   "text": "It is the promise that you will never face it alone.",
+   "start": 955.784,
+   "end": 959.688
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "And now the shepherd's psalm.",
+   "start": 961.368,
+   "end": 963.608
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "The LORD is my shepherd;",
+   "start": 963.788,
+   "end": 965.793
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "I shall not want.",
+   "start": 965.973,
+   "end": 967.68
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "He maketh me to lie down in green pastures:",
+   "start": 967.86,
+   "end": 971.337
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "he leadeth me beside the still waters.",
+   "start": 971.517,
+   "end": 974.525
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "He restoreth my soul:",
+   "start": 974.705,
+   "end": 976.839
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "he leadeth me in the paths of righteousness for his name's sake.",
+   "start": 977.019,
+   "end": 981.968
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil:",
+   "start": 982.148,
+   "end": 987.887
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "for thou art with me;",
+   "start": 988.067,
+   "end": 990.157
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "thy rod and thy staff they comfort me.",
+   "start": 990.337,
+   "end": 993.431
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "Thou preparest a table before me in the presence of mine enemies:",
+   "start": 993.611,
+   "end": 998.795
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "thou anointest my head with oil;",
+   "start": 998.975,
+   "end": 1001.684
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "my cup runneth over.",
+   "start": 1001.864,
+   "end": 1003.741
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "Surely goodness and mercy shall follow me all the days of my life:",
+   "start": 1003.921,
+   "end": 1009.191
+  },
+  {
+   "segment": "day-psalm-23",
+   "text": "and I will dwell in the house of the LORD for ever.",
+   "start": 1009.371,
+   "end": 1013.04
+  },
+  {
+   "segment": "day-reflect-23",
+   "text": "Surely goodness and mercy shall follow me.",
+   "start": 1015.22,
+   "end": 1018.591
+  },
+  {
+   "segment": "day-reflect-23",
+   "text": "Picture that today:",
+   "start": 1018.771,
+   "end": 1020.477
+  },
+  {
+   "segment": "day-reflect-23",
+   "text": "as you walk out of your door, goodness and mercy walk right behind you, all day long.",
+   "start": 1020.657,
+   "end": 1026.908
+  },
+  {
+   "segment": "day-reflect-23",
+   "text": "The shepherd's rod and staff were for protection and guidance.",
+   "start": 1027.088,
+   "end": 1031.44
+  },
+  {
+   "segment": "day-reflect-23",
+   "text": "He uses both for you.",
+   "start": 1031.62,
+   "end": 1033.54
+  },
+  {
+   "segment": "day-ephesians-6",
+   "text": "Hear how Paul describes God's protection for the believer.",
+   "start": 1035.22,
+   "end": 1039.188
+  },
+  {
+   "segment": "day-ephesians-6",
+   "text": "Wherefore take unto you the whole armour of God, that ye may be able to withstand in the evil day, and having done all, to stand.",
+   "start": 1039.368,
+   "end": 1048.989
+  },
+  {
+   "segment": "day-ephesians-6",
+   "text": "Stand therefore, having your loins girt about with truth, and having on the breastplate of righteousness;",
+   "start": 1049.169,
+   "end": 1056.679
+  },
+  {
+   "segment": "day-ephesians-6",
+   "text": "And your feet shod with the preparation of the gospel of peace;",
+   "start": 1056.859,
+   "end": 1061.403
+  },
+  {
+   "segment": "day-ephesians-6",
+   "text": "Above all, taking the shield of faith, wherewith ye shall be able to quench all the fiery darts of the wicked.",
+   "start": 1061.583,
+   "end": 1069.412
+  },
+  {
+   "segment": "day-ephesians-6",
+   "text": "And take the helmet of salvation, and the sword of the Spirit, which is the word of God.",
+   "start": 1069.592,
+   "end": 1076.248
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "You will get dressed this morning anyway.",
+   "start": 1078.428,
+   "end": 1081.223
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "As you do, put on the armour too.",
+   "start": 1081.403,
+   "end": 1084.069
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "Truth as your belt.",
+   "start": 1084.249,
+   "end": 1086.148
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "Righteousness over your heart.",
+   "start": 1086.328,
+   "end": 1088.781
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "Peace on your feet.",
+   "start": 1088.961,
+   "end": 1090.775
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "Faith as your shield.",
+   "start": 1090.955,
+   "end": 1092.811
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "Salvation as your helmet.",
+   "start": 1092.991,
+   "end": 1095.359
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "The word of God in your hand.",
+   "start": 1095.539,
+   "end": 1097.928
+  },
+  {
+   "segment": "day-reflect-6",
+   "text": "And then, having done all, stand.",
+   "start": 1098.108,
+   "end": 1100.668
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "Listen to what God says to the people he loves.",
+   "start": 1102.348,
+   "end": 1105.655
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+   "start": 1105.835,
+   "end": 1113.685
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "for I have redeemed thee, I have called thee by thy name;",
+   "start": 1113.865,
+   "end": 1118.175
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "thou art mine.",
+   "start": 1118.355,
+   "end": 1119.997
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "When thou passest through the waters, I will be with thee;",
+   "start": 1120.177,
+   "end": 1124.295
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "and through the rivers, they shall not overflow thee:",
+   "start": 1124.475,
+   "end": 1128.165
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "when thou walkest through the fire, thou shalt not be burned;",
+   "start": 1128.345,
+   "end": 1132.825
+  },
+  {
+   "segment": "day-isaiah-43",
+   "text": "neither shall the flame kindle upon thee.",
+   "start": 1133.005,
+   "end": 1136.227
+  },
+  {
+   "segment": "day-reflect-43",
+   "text": "I have called thee by thy name;",
+   "start": 1138.407,
+   "end": 1140.753
+  },
+  {
+   "segment": "day-reflect-43",
+   "text": "thou art mine.",
+   "start": 1140.933,
+   "end": 1142.576
+  },
+  {
+   "segment": "day-reflect-43",
+   "text": "God's protection is personal.",
+   "start": 1142.756,
+   "end": 1145.231
+  },
+  {
+   "segment": "day-reflect-43",
+   "text": "He does not watch over a crowd.",
+   "start": 1145.411,
+   "end": 1147.971
+  },
+  {
+   "segment": "day-reflect-43",
+   "text": "He watches over you, by name.",
+   "start": 1148.151,
+   "end": 1150.604
+  },
+  {
+   "segment": "day-reflect-43",
+   "text": "Through the waters, through the fire.",
+   "start": 1150.784,
+   "end": 1153.152
+  },
+  {
+   "segment": "day-reflect-43",
+   "text": "Not around them, but through them, with him.",
+   "start": 1153.332,
+   "end": 1156.383
+  },
+  {
+   "segment": "day-romans-8",
+   "text": "What shall we then say to these things?",
+   "start": 1158.063,
+   "end": 1160.58
+  },
+  {
+   "segment": "day-romans-8",
+   "text": "If God be for us, who can be against us?",
+   "start": 1160.76,
+   "end": 1164.216
+  },
+  {
+   "segment": "day-romans-8",
+   "text": "Who shall separate us from the love of Christ?",
+   "start": 1164.396,
+   "end": 1167.596
+  },
+  {
+   "segment": "day-romans-8",
+   "text": "shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword?",
+   "start": 1167.776,
+   "end": 1175.157
+  },
+  {
+   "segment": "day-romans-8",
+   "text": "Nay, in all these things we are more than conquerors through him that loved us.",
+   "start": 1175.337,
+   "end": 1181.012
+  },
+  {
+   "segment": "day-romans-8",
+   "text": "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.",
+   "start": 1181.192,
+   "end": 1201.437
+  },
+  {
+   "segment": "day-reflect-romans",
+   "text": "If God be for us, who can be against us?",
+   "start": 1203.617,
+   "end": 1207.073
+  },
+  {
+   "segment": "day-reflect-romans",
+   "text": "Whatever you face today, you do not face it as someone barely surviving.",
+   "start": 1207.253,
+   "end": 1212.885
+  },
+  {
+   "segment": "day-reflect-romans",
+   "text": "You face it as someone deeply loved.",
+   "start": 1213.065,
+   "end": 1215.988
+  },
+  {
+   "segment": "day-reflect-romans",
+   "text": "Nothing you meet today can separate you from that love.",
+   "start": 1216.168,
+   "end": 1220.221
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "Hear David's song of confidence.",
+   "start": 1221.901,
+   "end": 1224.547
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "The LORD is my light and my salvation;",
+   "start": 1224.727,
+   "end": 1228.033
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "whom shall I fear?",
+   "start": 1228.213,
+   "end": 1229.984
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "the LORD is the strength of my life;",
+   "start": 1230.164,
+   "end": 1232.959
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "of whom shall I be afraid?",
+   "start": 1233.139,
+   "end": 1235.528
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell.",
+   "start": 1235.708,
+   "end": 1244.028
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "Though an host should encamp against me, my heart shall not fear:",
+   "start": 1244.208,
+   "end": 1248.709
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "though war should rise against me, in this will I be confident.",
+   "start": 1248.889,
+   "end": 1253.647
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "One thing have I desired of the LORD, that will I seek after;",
+   "start": 1253.827,
+   "end": 1258.499
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple.",
+   "start": 1258.679,
+   "end": 1268.492
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "For in the time of trouble he shall hide me in his pavilion:",
+   "start": 1268.672,
+   "end": 1272.96
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "in the secret of his tabernacle shall he hide me;",
+   "start": 1273.14,
+   "end": 1276.873
+  },
+  {
+   "segment": "day-psalm-27",
+   "text": "he shall set me up upon a rock.",
+   "start": 1277.053,
+   "end": 1279.571
+  },
+  {
+   "segment": "day-reflect-27",
+   "text": "In the middle of enemies and armies, David asks for one thing:",
+   "start": 1281.751,
+   "end": 1286.508
+  },
+  {
+   "segment": "day-reflect-27",
+   "text": "to dwell with the Lord.",
+   "start": 1286.688,
+   "end": 1288.629
+  },
+  {
+   "segment": "day-reflect-27",
+   "text": "He knew that closeness to God was the safest place in the world.",
+   "start": 1288.809,
+   "end": 1293.78
+  },
+  {
+   "segment": "day-reflect-27",
+   "text": "Let that be your one thing today too.",
+   "start": 1293.96,
+   "end": 1296.669
+  },
+  {
+   "segment": "day-reflect-27",
+   "text": "Stay close, and let him set you up upon a rock.",
+   "start": 1296.849,
+   "end": 1300.54
+  },
+  {
+   "segment": "day-psalm-46",
+   "text": "God is our refuge and strength, a very present help in trouble.",
+   "start": 1302.22,
+   "end": 1307.297
+  },
+  {
+   "segment": "day-psalm-46",
+   "text": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea;",
+   "start": 1307.477,
+   "end": 1315.733
+  },
+  {
+   "segment": "day-psalm-46",
+   "text": "Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof.",
+   "start": 1315.913,
+   "end": 1322.399
+  },
+  {
+   "segment": "day-reflect-46",
+   "text": "A very present help.",
+   "start": 1324.579,
+   "end": 1326.52
+  },
+  {
+   "segment": "day-reflect-46",
+   "text": "Not a distant help that arrives too late.",
+   "start": 1326.7,
+   "end": 1329.751
+  },
+  {
+   "segment": "day-reflect-46",
+   "text": "Present.",
+   "start": 1329.931,
+   "end": 1331.061
+  },
+  {
+   "segment": "day-reflect-46",
+   "text": "Here.",
+   "start": 1331.241,
+   "end": 1332.159
+  },
+  {
+   "segment": "day-reflect-46",
+   "text": "In the trouble, at the very moment you need him.",
+   "start": 1332.339,
+   "end": 1335.816
+  },
+  {
+   "segment": "day-reflect-46",
+   "text": "Even if the ground seems to shake today, your refuge does not move.",
+   "start": 1335.996,
+   "end": 1341.308
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "And finally, the traveller's psalm, for every road you take today.",
+   "start": 1342.988,
+   "end": 1347.916
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "I will lift up mine eyes unto the hills, from whence cometh my help.",
+   "start": 1348.096,
+   "end": 1353.259
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "My help cometh from the LORD, which made heaven and earth.",
+   "start": 1353.439,
+   "end": 1357.577
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "He will not suffer thy foot to be moved:",
+   "start": 1357.757,
+   "end": 1360.659
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "he that keepeth thee will not slumber.",
+   "start": 1360.839,
+   "end": 1363.633
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "Behold, he that keepeth Israel shall neither slumber nor sleep.",
+   "start": 1363.813,
+   "end": 1368.187
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "The LORD is thy keeper:",
+   "start": 1368.367,
+   "end": 1370.457
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "the LORD is thy shade upon thy right hand.",
+   "start": 1370.637,
+   "end": 1373.88
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "The sun shall not smite thee by day, nor the moon by night.",
+   "start": 1374.06,
+   "end": 1378.497
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "The LORD shall preserve thee from all evil:",
+   "start": 1378.677,
+   "end": 1381.835
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "he shall preserve thy soul.",
+   "start": 1382.015,
+   "end": 1384.425
+  },
+  {
+   "segment": "day-psalm-121",
+   "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "start": 1384.605,
+   "end": 1391.539
+  },
+  {
+   "segment": "day-reflect-121",
+   "text": "Thy going out and thy coming in.",
+   "start": 1393.719,
+   "end": 1396.343
+  },
+  {
+   "segment": "day-reflect-121",
+   "text": "Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey.",
+   "start": 1396.523,
+   "end": 1404.608
+  },
+  {
+   "segment": "day-reflect-121",
+   "text": "Carry that with you.",
+   "start": 1404.788,
+   "end": 1406.516
+  },
+  {
+   "segment": "payoff",
+   "text": "Here is one thing to take into your day.",
+   "start": 1408.196,
+   "end": 1411.396
+  },
+  {
+   "segment": "payoff",
+   "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
+   "start": 1411.576,
+   "end": 1419.384
+  },
+  {
+   "segment": "payoff",
+   "text": "Six words.",
+   "start": 1419.564,
+   "end": 1421.057
+  },
+  {
+   "segment": "payoff",
+   "text": "Let them mark every doorway you walk through.",
+   "start": 1421.237,
+   "end": 1424.587
+  },
+  {
+   "segment": "blessing",
+   "text": "And now receive this blessing.",
+   "start": 1425.967,
+   "end": 1428.356
+  },
+  {
+   "segment": "blessing",
+   "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "start": 1428.536,
+   "end": 1435.555
+  },
+  {
+   "segment": "blessing",
+   "text": "Go into this day covered by his peace.",
+   "start": 1435.735,
+   "end": 1438.337
+  },
+  {
+   "segment": "blessing",
+   "text": "In Jesus' name, amen.",
+   "start": 1438.517,
+   "end": 1440.971
+  },
+  {
+   "segment": "cta",
+   "text": "If you prayed this prayer with me, type amen in the comments, and write the name of someone you want covered in prayer today.",
+   "start": 1442.651,
+   "end": 1451.547
+  },
+  {
+   "segment": "cta",
+   "text": "Come back tomorrow morning, and we will start the day with God together again.",
+   "start": 1451.727,
+   "end": 1457.359
+  }
+ ],
+ "voice_seconds": 1459.539,
+ "sample_rate": 24000,
+ "voice_id": "am_michael",
+ "speed": 0.85
+}
