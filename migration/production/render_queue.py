@@ -56,6 +56,7 @@ def reviewed_shorts(path):
     return any((s.get("review") or {}).get("status") in ("PASS", "FAIL") for s in json.loads(path.read_text())["shorts"])
 
 
+HOLD = Path(__file__).resolve().parents[1] / "ops" / "PUBLICATION_HOLD"
 RETRY_AFTER = timedelta(minutes=30)
 
 
@@ -82,6 +83,8 @@ def main(production, ledger_path, mode, hours="48"):
         for r in rows:
             if r["missing_images"]:
                 print(r["pilot"], ",".join(r["missing_images"]))
+    elif mode == "reconcile" and HOLD.exists():
+        print("PUBLICATION_HOLD", file=sys.stderr)  # owner pause: no approval, publication or Shorts is dispatched
     elif mode == "reconcile":
         # E25: approve.yml keeps ONE pending run (concurrency group): dispatching several approvals cancels all but the
         # last, i.e. the farthest slot. So only the earliest due approval is sent, and Shorts wait until no approval is

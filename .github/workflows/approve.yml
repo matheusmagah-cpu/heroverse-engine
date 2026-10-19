@@ -33,6 +33,9 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           fetch-depth: 2
+      - name: Publication hold (owner pause, migration/ops/PUBLICATION_HOLD)
+        run: |
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
       - name: Pilot and frozen QA gate
         run: |
           PILOT="$INPUT_PILOT"

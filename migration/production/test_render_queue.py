@@ -11,6 +11,8 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import render_queue as rq  # noqa: E402
 
+rq.HOLD = Path(tempfile.gettempdir()) / "no-such-hold-file"  # the live repo may be on hold; these tests are not
+
 NOW = datetime(2026, 10, 18, 1, 0, tzinfo=timezone.utc)
 
 
@@ -109,6 +111,27 @@ class Queue(unittest.TestCase):
             finally:
                 rq.datetime = real
             self.assertEqual(buf.getvalue().split("\n")[:-1], ["publish pilot-004", "shorts pilot-005", "shorts pilot-006"])
+
+    def test_publication_hold_dispatches_nothing(self):
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, "pilot-005", "2026-10-19T10:00:00Z", rendered=True)
+            (Path(t) / "pilot-005" / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "x"}))
+            hold = Path(t) / "PUBLICATION_HOLD"
+            hold.write_text("owner pause")
+            real_hold, real = rq.HOLD, rq.datetime
+            class Fixed(real):
+                @classmethod
+                def now(cls, tz=None):
+                    return NOW
+            rq.HOLD, rq.datetime = hold, Fixed
+            buf = io.StringIO()
+            try:
+                with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(io.StringIO()):
+                    rq.main(t, str(Path(t) / "none.json"), "reconcile")
+            finally:
+                rq.HOLD, rq.datetime = real_hold, real
+            self.assertEqual(buf.getvalue(), "")
 
     def test_only_the_earliest_approval_is_dispatched(self):
         import contextlib, io
