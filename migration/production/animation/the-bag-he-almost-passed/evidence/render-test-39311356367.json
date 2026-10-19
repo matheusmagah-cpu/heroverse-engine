@@ -1,0 +1,16 @@
+{
+ "run": 39311356367,
+ "runner": "ubuntu-24.04 standard (public repo, no cost)",
+ "bundle": "render-bundle v1 (10 unique fps, procedural shapes, Eevee Next 16 samples)",
+ "context": "egl-headless (Xvfb not needed)",
+ "prep_s": {"apt": 14, "blender_download": 2, "extract": 19, "graphics_context_first_frame": 51},
+ "blender_download_bytes": 368852356,
+ "seconds_per_frame": {"master_1920x1080": [28.89, 28.82], "vertical_1080x1920": [28.72]},
+ "max_rss_mb": {"master0": 1795, "master1": 1776, "vertical": 1811},
+ "png_bytes_avg": {"master": 2958877, "vertical": 2689589},
+ "frames_checked": {"master": "920-929 contiguous, all 10 distinct", "vertical": 5, "dimensions": "exact"},
+ "join": "two chunks from separate processes decoded end to end: 10/10 frames",
+ "disk": "84 GB free on the runner after the test",
+ "artifact_bytes": 43242657,
+ "artifact_retention_days": 3
+}

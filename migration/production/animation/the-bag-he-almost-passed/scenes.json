@@ -1,0 +1,266 @@
+{
+ "version": "scenes-v1",
+ "project": "the-bag-he-almost-passed",
+ "structure": "migration/structures/animated-faith-story.json",
+ "criteria": "migration/production/animation/qa_criteria_animation_v1.json",
+ "master": {
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "target_seconds": 152
+ },
+ "characters": {
+  "Daniel": "adult man, about 30, teal jacket, dark trousers, short dark hair; hurried posture, softens after S07",
+  "Eli": "older man, about 70, peach cardigan, grey hair, cap; slow careful movements",
+  "continuity": "same models, wardrobe, props and morning light in every scene and in the vertical cameras"
+ },
+ "scenes": [
+  {
+   "id": "S01",
+   "narration": "Daniel hurried down the same street every morning. He knew its cracks, its corners, and exactly how long his journey took.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "slow lateral track at walking pace, wide 28mm",
+   "action": "Street wide tracking Daniel, teal clothing; bench and Eli ahead.",
+   "start_state": "Daniel enters frame left walking fast; Eli at the bench ahead holding a full paper bag",
+   "end_state": "Daniel 6 m before the bench, walking fast; Eli at the bench holding a full paper bag",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S02",
+   "narration": "Today, an older man named Eli stood beside the bench. When his paper bag slipped, bread scattered across the pavement.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "medium 50mm, locked with slight drift",
+   "action": "Medium on Eli, peach clothing; paper bag tips and bread drops.",
+   "start_state": "Daniel 6 m before the bench, walking fast; Eli at the bench holding a full paper bag",
+   "end_state": "bag tipped in Eli's arms, three loaves on the pavement; Daniel 3 m before the bench, walking",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience; bread drop foley",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S03",
+   "narration": "Daniel saw it happen. He shortened his stride, then looked away. Someone else would stop. Surely someone else had more time.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "over-shoulder medium, slow push-in 3%",
+   "action": "Daniel slows in foreground, glances toward Eli, turns gaze forward, walks past.",
+   "start_state": "bag tipped in Eli's arms, three loaves on the pavement; Daniel 3 m before the bench, walking",
+   "end_state": "Daniel walking past the bench, gaze forward; Eli standing, looking at the loaves",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S04",
+   "narration": "But after a few steps, the street grew quiet. Behind him, Eli lowered himself carefully, reaching for bread just beyond his fingers.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "low close 85mm at pavement height, static",
+   "action": "Low close view of Eli bending and reaching; Daniel recedes.",
+   "start_state": "Daniel walking past the bench, gaze forward; Eli standing, looking at the loaves",
+   "end_state": "Eli crouched, fingers short of the far loaf; Daniel 4 m past the bench, slowing",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S05",
+   "narration": "Daniel stopped beside the bench. He remembered words he had heard many times, but had not yet practiced that morning.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "medium, slow arc 10 degrees around Daniel",
+   "action": "Daniel stops near far end of bench; shoulder turn and thoughtful look back.",
+   "start_state": "Eli crouched, fingers short of the far loaf; Daniel 4 m past the bench, slowing",
+   "end_state": "Daniel stopped 5 m past the bench, half-turned toward Eli; Eli crouched",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S06",
+   "narration": "Jesus said, “Thou shalt love thy neighbour as thyself.” Matthew twenty-two, verse thirty-nine. The words asked something simple of him now.",
+   "target_seconds": 12,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "close-up 85mm on Daniel, rack focus to Eli",
+   "action": "Close-up Daniel, then focus toward Eli; small readable verse overlay with reference.",
+   "start_state": "Daniel stopped 5 m past the bench, half-turned toward Eli; Eli crouched",
+   "end_state": "Daniel looking at Eli from the same spot; Eli crouched",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p",
+   "overlay": {
+    "verse_card": "Thou shalt love thy neighbour as thyself.",
+    "reference": "Matthew 22:39 (KJV)",
+    "only_while_spoken": true
+   }
+  },
+  {
+   "id": "S07",
+   "narration": "Daniel turned around. He could not change the whole world before breakfast. But he could return to the person he had passed.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "side tracking medium, follows the turn",
+   "action": "Side tracking shot: deliberate turn and return to Eli.",
+   "start_state": "Daniel looking at Eli from the same spot; Eli crouched",
+   "end_state": "Daniel 1 m from Eli, facing him; Eli crouched over the loaves",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S08",
+   "narration": "He approached slowly and asked if Eli would like a hand. Eli nodded. Daniel knelt and gathered the scattered loaves.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "two-shot 35mm, eye level, slow push-in",
+   "action": "Two-shot: Daniel open-palm offer, Eli nod; Daniel kneels.",
+   "start_state": "Daniel 1 m from Eli, facing him; Eli crouched over the loaves",
+   "end_state": "Daniel kneeling beside Eli, three loaves gathered in front of him",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S09",
+   "narration": "Some bread was still wrapped. One piece had fallen loose. Daniel set that piece aside instead of putting it back.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "insert 100mm on hands and bread, static",
+   "action": "Hand/bread insert; two wrapped loaves, one loose piece placed separately on bench edge.",
+   "start_state": "Daniel kneeling beside Eli, three loaves gathered in front of him",
+   "end_state": "two wrapped loaves in Daniel's hands; loose piece on the bench edge; Eli holding the bag",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S10",
+   "narration": "Together, they opened the bag. Eli steadied it while Daniel placed the wrapped bread inside. Neither needed to hurry now.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "close two-shot of hands, 85mm, static",
+   "action": "Close two-shot hands: Eli holds bag open; Daniel places wrapped loaves inside.",
+   "start_state": "two wrapped loaves in Daniel's hands; loose piece on the bench edge; Eli holding the bag",
+   "end_state": "bag full, held by Eli; both standing",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience; paper-bag foley",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S11",
+   "narration": "Daniel offered to carry the bag. Eli accepted, then pointed down the street. They began walking together, at Eli’s pace.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "medium two-shot, slow pull-back as they start walking",
+   "action": "Daniel lifts bag with Eli’s assent; Eli points, both begin walking.",
+   "start_state": "bag full, held by Eli; both standing",
+   "end_state": "Daniel holds the bag in his right arm; both walking side by side",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience; paper-bag foley",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S12",
+   "narration": "The journey took longer than Daniel had planned. Yet for once, he noticed the warmth of the morning along the way.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "side tracking medium, matched to their pace",
+   "action": "Side medium tracking their matched steps and warm light.",
+   "start_state": "Daniel holds the bag in his right arm; both walking side by side",
+   "end_state": "both walking side by side, Daniel at Eli's pace",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S13",
+   "narration": "Loving a neighbour had not required a grand speech. It had begun with noticing, turning back, and offering help without taking over.",
+   "target_seconds": 10,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "reverse medium tracking, faces visible",
+   "action": "Reverse medium: Daniel slows slightly to remain alongside Eli; exchanged small smiles.",
+   "start_state": "both walking side by side, Daniel at Eli's pace",
+   "end_state": "both walking, small smiles exchanged",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": null,
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S14",
+   "narration": "That morning, Daniel arrived late. But he understood something he had almost walked past: love becomes visible in the next kind thing we do.",
+   "target_seconds": 14,
+   "duration_rule": "equals this scene's span on the voice timeline (timeline.json); the target is a planning value",
+   "framing_and_camera": "wide rear 24mm, slow crane rise",
+   "action": "Wide rear view both continuing down street, gentle camera rise; hold final 2 seconds.",
+   "start_state": "both walking, small smiles exchanged",
+   "end_state": "both small in frame, walking away; held 2.0 s (declared hold)",
+   "required_motion": "character body animation (walk cycle with weight shift, head and eye turns, hand gestures, breathing) at 24 unique fps; camera moves alone never satisfy this",
+   "sound": "voice; owned music bed -12 dB or lower under voice; street ambience",
+   "hold": {
+    "seconds": 2.0,
+    "reason": "closing image"
+   },
+   "approve_if": "start_state matches previous end_state; the action reads without narration in a muted watch; no interpenetration or popping; faces readable at 1080p"
+  },
+  {
+   "id": "S15",
+   "narration": "Subscribe to this channel for more stories of everyday faith.",
+   "target_seconds": 6.0,
+   "framing_and_camera": "continues S14 wide; title card fades in",
+   "action": "CTA card over the final wide image",
+   "start_state": "both small in frame, walking away; held 2.0 s (declared hold)",
+   "end_state": "fade to black 0.5 s",
+   "required_motion": "the S14 shot keeps moving (crane continues); never a frozen frame",
+   "sound": "voice CTA; music resolves",
+   "hold": null,
+   "overlay": {
+    "cta_card": "Subscribe to this channel for more stories of everyday faith."
+   },
+   "approve_if": "CTA text and voice exactly equal the criteria text; ends within 1.0 s after the line"
+  }
+ ],
+ "shorts": {
+  "rule": "Source speed 1.0 (no time compression). Cuts on sentence boundaries of the voice timeline. Native 1080x1920 from the vertical cameras. Exact master seconds are written to shorts-map.json after the voice timeline exists.",
+  "short1": {
+   "title_working": "He saw it happen. He kept walking.",
+   "target_seconds": 42,
+   "scenes": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S15"
+   ],
+   "note": "S04 left out to fit; S05 first sentence opens on 'Daniel stopped beside the bench.'"
+  },
+  "short2": {
+   "title_working": "He went back.",
+   "target_seconds": 41,
+   "scenes": [
+    "S07",
+    "S08",
+    "S11",
+    "S14",
+    "S15"
+   ],
+   "note": "S14 trimmed to its last sentence if needed to fit"
+  }
+ }
+}
