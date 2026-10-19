@@ -3,6 +3,63 @@
  "pilot_id": "pilot-003",
  "output_sha256": "a6e6c4a0395898f15b2f01ad216529daeb1a56ce3942c21ba1164e1e3cf8bb50",
  "status": "ERROR",
- "error": "ProviderFailure: HTTP_503_UNAVAILABLE",
- "failed_at": "2026-10-19T10:20:02Z"
+ "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA",
+ "provider_message": "",
+ "failed_at": "2026-10-19T11:13:23Z",
+ "usage": [
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 27668,
+   "candidatesTokenCount": 4611,
+   "totalTokenCount": 35192,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 368
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "thoughtsTokenCount": 2913,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 27672,
+   "candidatesTokenCount": 3172,
+   "totalTokenCount": 32610,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 372
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "thoughtsTokenCount": 1766,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 24760,
+   "candidatesTokenCount": 2840,
+   "totalTokenCount": 30428,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 372
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 24388
+    }
+   ],
+   "thoughtsTokenCount": 2828,
+   "serviceTier": "standard"
+  }
+ ]
 }
