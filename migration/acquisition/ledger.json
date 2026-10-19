@@ -993,6 +993,17 @@
       "completed_at": "2026-10-19T00:31:27.666966+00:00",
       "run_id": "39181031092",
       "restart_allowed": false
+    },
+    {
+      "request_id": "acq-CK5u_HnhiuI-533-563-v1",
+      "video_id": "CK5u_HnhiuI",
+      "start_seconds": 533,
+      "end_seconds": 563,
+      "status": "RESERVED_BEFORE_EFFECT",
+      "reserved_at": "2026-10-19T00:31:37.682155+00:00",
+      "day_utc": "2026-10-19",
+      "units_remaining_at_reservation": 496,
+      "reserved_units": 14
     }
   ]
 }
