@@ -3,6 +3,7 @@
 Creative Commons attribution, tags and a 1280x720 thumbnail. Writes files only;
 no upload. Packaging promise must match the opening (archetype rule)."""
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -56,9 +57,21 @@ def first_comment_for(script):
     return default_first_comment(script["working_title"])
 
 
+def opening_chapter(script):
+    """Use the spoken greeting, never guess a daypart from publication time."""
+    hook = next((s for s in script.get("segments", []) if s.get("id") == "hook"), {})
+    if hook.get("chapter"):
+        return hook["chapter"]
+    text = hook.get("text", "").strip()
+    for greeting in ("Good morning", "Good evening"):
+        if re.match(re.escape(greeting) + r"(?:\b|$)", text, re.IGNORECASE):
+            return greeting
+    return "Opening prayer"
+
+
 def chapters_from_script(script, timeline):
     """Chapters at every scripture anchor plus the opening, prayer and blessing turns."""
-    named = {"hook": "Good morning", "transition": "Let us pray", "declaration": "Declaration for today",
+    named = {"hook": opening_chapter(script), "transition": "Let us pray", "declaration": "Declaration for today",
              "payoff": "One thing to do today", "blessing": "Blessing"}
     named.update({s["id"]: s["chapter"] for s in script["segments"] if s.get("chapter")})  # the script's own chapter names win
     refs = {s["id"]: s["reference"].replace(" (KJV)", "") for s in script["segments"] if s.get("reference")}
@@ -72,7 +85,7 @@ def chapters_from_script(script, timeline):
 
 
 def chapters(timeline):
-    names = {"hook": "Good morning", "scripture-1": "He goes before you (Deuteronomy 31:8)",
+    names = {"hook": "Opening prayer", "scripture-1": "He goes before you (Deuteronomy 31:8)",
              "scripture-2": "New mercy every morning (Lamentations 3:22-23)",
              "scripture-3": "Show me the way (Psalm 143:8)", "transition": "Let us pray",
              "scripture-4": "Fear not (Isaiah 41:10)", "declaration": "Declaration for today",
