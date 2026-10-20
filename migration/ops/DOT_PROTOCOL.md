@@ -13,7 +13,7 @@ Channel: GitHub issues and PRs only. No secrets anywhere.
 
 **Dot is the media producer (owner, 2026-10-20).** Dot makes every kind of image and video and every format: cinematic animation of a still scene, animated stories, thumbnails, vertical and horizontal clips, any format the mining finds. It needs only a precise prompt and a precise destination. So when mining (stage 1) finds a winning format our tools cannot render, the format is **not** dropped for lack of a tool: Claude writes a media card for Dot. That card states:
 - the prompt: subject, style, motion, light, duration, no people or text unless the structure allows them;
-- the destination: path, resolution, fps, codec, size limit, aspect ratio;
+- the destination: path, resolution (**never below 1080p**: 1920×1080 or 1080×1920, STANDARD R10), fps, codec, size limit, aspect ratio, and the **3D cinematic look** of R10;
 - the acceptance: ffprobe output, frames, R1–R9, the output licence, and whether the clip is realistic (YouTube altered/synthetic disclosure).
 
 The delivered media then passes the same gates as everything else. #183 holds the first measured proof.

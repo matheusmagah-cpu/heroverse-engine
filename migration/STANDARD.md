@@ -54,6 +54,11 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - no realistic human face (house choice, consistent with R1; 13/20 winners show no person);
   - 1280×720 JPG under the Help size limit (stage 5).
 
+- **R10.** Resolution and 3D look (owner, 2026-10-20). It blocks from pilot-008 on; pilot-006 (published 2026-10-21 00:00) keeps its painted set, so one video never mixes two looks.
+  - **Minimum 1080p everywhere.** Every delivered video is at least 1920×1080 (long) or 1080×1920 (Short), at ≥ 24 fps. Every source image is at least 1920×1080 after the 16:9 crop (vertical: 1080×1920), generated at that size or larger and never upscaled from a smaller source. Dot's media (DOT_PROTOCOL) follows the same floor.
+  - **3D cinematic look.** Every image and animation reads as a photoreal 3D cinematic render: volumetric light, global illumination, depth of field, real depth for the parallax. No flat illustration and no painting style.
+  - Prompts end with the house suffix: `photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text`.
+
 ## Gate
 
 `qa_pilot.py` with the frozen criteria `production/qa_criteria_v3.json` (deterministic, from the render manifest and the file) checks R1–R7; `prepublish_gate.py` blocks on every row (`DIMENSIONS_V3`). R8 is checked by the Shorts tests. One miss is a FAIL. It runs before the watched review, so the watched review never has to judge what a rule already decides.
