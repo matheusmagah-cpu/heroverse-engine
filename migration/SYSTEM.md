@@ -93,8 +93,9 @@ Execution is judged on technical, professional, cinematographic and policy groun
 1. the frozen QA;
 2. the signal scan;
 3. the designated watched review;
-4. the audit against the winners' audits;
-5. the owner for the first sample of every new structure.
+4. the audit against the winners' audits.
+
+Approval is decided by the automatic three-stage gate defined below, including the first sample of a structure.
 
 ## 3. Authenticity, originality and critique (YouTube monetization)
 
@@ -153,7 +154,9 @@ Every item and its source are written into the package. An item without evidence
   - `active` → `retired` when our own results or the market turn against them.
 - **Decisions** follow `strategy/DECISIONS.md` (90 % evidence for strategy). Defects and compliance are always fixed.
 
-## Approval: the system approves, no person does (owner, 2026-10-19)
+## Approval: automatic qualification (owner, 2026-10-19 23:55 UTC)
+
+The system approves or rejects each video; personal first-sample approval is not required. This is the active governance rule. The historical personal-approval wording in the immutable `production/qa_criteria_v3.json` is not an additional active approval step; its technical, speech, rights and grammar requirements remain unchanged, as do its bytes and SHA256. Automated qualification does not establish owner visual inspection or audience success.
 
 A video publishes when it passes **three stages**, each measured against the mining:
 1. **Structure.** It carries the drivers and hygiene of its validated structure and the measured publication package (`publish/three_stage.py` `structure_rows`).

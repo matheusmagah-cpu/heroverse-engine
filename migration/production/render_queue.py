@@ -20,6 +20,9 @@ import re
 from pathlib import Path
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "publish"))
+from shorts_prerequisite import ready as shorts_ready
+
 
 def when(s):
     return datetime.fromisoformat(s.replace("Z", "+00:00"))
@@ -118,6 +121,7 @@ def main(production, ledger_path, mode, hours="48"):
         # last, i.e. the farthest slot. So only the earliest due approval is sent, and Shorts wait until no approval is
         # pending, because both spend the same free Gemini quota and the long video publishes first.
         approve, publish, shorts = [], [], []
+        long_quota_pending = False
         for r in rows:
             d = Path(production) / r["pilot"]
             try:
@@ -135,17 +139,17 @@ def main(production, ledger_path, mode, hours="48"):
             if ap.get("approved") and ap.get("output_sha256") == qa["output_sha256"]:
                 publish.append(r["pilot"])  # due rows are never already on YouTube
             elif quota_spent(rev, now):
-                pass  # the free Gemini quota resets at 07:00 UTC; retrying before that only spends Actions minutes
+                long_quota_pending = True  # reserve shared review quota for the waiting long
             elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:
                 approve.append(r["pilot"])
             # Shorts handed off by the render but never made (provider quota or error): made again
-            if (d / "shorts" / "inputs.json").exists() and not reviewed_shorts(d / "shorts" / "shorts.json"):
+            if (d / "shorts" / "inputs.json").exists() and not reviewed_shorts(d / "shorts" / "shorts.json") and shorts_ready(d):
                 shorts.append(r["pilot"])
         for p in publish:
             print("publish", p)
         if approve:
             print("approve", approve[0])  # rows are sorted by publish time: the earliest slot first
-        else:
+        elif not long_quota_pending:
             for p in shorts:
                 print("shorts", p)
     else:

@@ -1,6 +1,6 @@
 name: "HeroVerse Shorts (private): Gemini selection, own edit per Short, watched review"
-# The public runner renders the long video without the Gemini key and hands off the narration and the figure
-# (shorts/inputs.json). This private job makes the Shorts from them: whole-video selection with per-Short hook and
+# The runner renders the long video and hands off the narration and the figure
+# (shorts/inputs.json). Only after the long qualifies, this job makes the Shorts: whole-video selection with per-Short hook and
 # title, vertical edit to STANDARD R8 (whole sentences, 1-5 word captions, scenery only, no CTA), shorts_qa and the watched review. Every Gemini step stays here.
 on:
   push:
@@ -40,11 +40,9 @@ jobs:
           fi
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) echo "NO_PILOT"; exit 1;; esac
           echo "PILOT=$PILOT" >> "$GITHUB_ENV"
-          # Shorts are cut only from a render that passed QA (a failed render is re-rendered; its Shorts would be
-          # thrown away after spending the free Gemini day)
-          ok=$(python3 -I -c "import json,sys;q=json.load(open(sys.argv[1]));m=json.load(open(sys.argv[2]));print(int(q['status']=='PASS' and q['output_sha256']==m['output_sha256']))" \
-               "migration/production/$PILOT/out/qa.json" "migration/production/$PILOT/out/manifest.json" 2>/dev/null || echo 0)
-          [ "$ok" = 1 ] || { echo "QA_NOT_PASS: no Shorts from this render"; echo "SKIP=1" >> "$GITHUB_ENV"; }
+          if ! python3 -I -B migration/publish/shorts_prerequisite.py "migration/production/$PILOT"; then
+            echo "LONG_NOT_QUALIFIED: defer Shorts"; echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
       - name: Tools, verified inputs (narration, figure, music, images)
         if: env.SKIP != '1'
         run: |
