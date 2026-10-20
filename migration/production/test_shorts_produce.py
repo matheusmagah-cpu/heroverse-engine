@@ -1146,6 +1146,162 @@ class EditorialMotion(unittest.TestCase):
                 sp.portrait_crop(*dimensions)
 
 
+class EditorialSerialStaging(unittest.TestCase):
+    def test_serial_range_requires_a_measured_allowlisted_value(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        arguments = (stills, Path("/synthetic/voice.flac"), Path("/synthetic/music.flac"),
+                     Path("/synthetic/captions.ass"), moment, 40.312, "null", Path("/synthetic/result.mp4"))
+        options = {"edit_plan": EDITORIAL_PLAN, "hook_video": Path("/synthetic/opening.mkv"),
+                   "picture_video": Path("/synthetic/picture.mkv")}
+        self.assertEqual(inspect.signature(sp.render_args).parameters["picture_range"].kind,
+                         inspect.Parameter.KEYWORD_ONLY)
+        with self.assertRaisesRegex(ValueError, "EDITORIAL_PICTURE_RANGE_REQUIRED"):
+            sp.render_args(*arguments, **options)
+        for value in ("", "limited", "full", "TV", "auto", "unknown,scale=1:1", 1, False):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "EDITORIAL_PICTURE_RANGE_INVALID"):
+                sp.render_args(*arguments, **options, picture_range=value)
+        for value, tag in (("unknown", "unspecified"), ("tv", "tv"), ("pc", "pc")):
+            with self.subTest(value=value):
+                args = sp.render_args(*arguments, **options, picture_range=value)
+                graph = args[args.index("-filter_complex") + 1]
+                self.assertIn(f"fps=30,setparams=range={tag},trim=end_frame=1209[picture]", graph)
+                self.assertEqual(graph.count("setparams="), 1)
+
+    def test_reference_range_probe_uses_the_real_capped_graph_and_one_frame(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        hook = Path("/synthetic/opening.mkv")
+        inputs, graph = sp.editorial_picture(stills, moment, EDITORIAL_PLAN, hook_video=hook)
+        for measured in ("unknown", "tv", "pc"):
+            with self.subTest(measured=measured), mock.patch.object(sp.subprocess, "run", return_value=
+                    SimpleNamespace(stderr=f"[Parsed_showinfo] color_range:{measured} color_space:unknown\n")) as process:
+                self.assertEqual(sp.reference_picture_range(stills, moment, EDITORIAL_PLAN, hook_video=hook), measured)
+            command = process.call_args.args[0]
+            self.assertEqual(process.call_args.kwargs, {"check": True, "capture_output": True, "text": True})
+            self.assertEqual(command[command.index("-filter_complex") + 1],
+                             ";".join([*graph, "[picture]trim=end_frame=1,showinfo[inspection]"]))
+            self.assertEqual(command[command.index("-y") + 1:command.index("-filter_complex")], inputs)
+            self.assertEqual(command[command.index("-frames:v") + 1], "1")
+            self.assertEqual(command.count("-threads"), 8)
+            for flag in ("-filter_complex_threads", "-filter_threads", "-threads:v"):
+                self.assertEqual(command[command.index(flag) + 1], "1")
+            self.assertEqual(command[-3:], ["-f", "null", "-"])
+            self.assertNotIn("scale=108:192", command[command.index("-filter_complex") + 1])
+
+    def test_reference_range_probe_fails_closed_without_unambiguous_metadata(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        for stderr in ("", "color_range:invalid", "color_range:tv\ncolor_range:pc", "color_range:unknown\ncolor_range:unknown"):
+            with self.subTest(stderr=stderr), mock.patch.object(sp.subprocess, "run", return_value=
+                    SimpleNamespace(stderr=stderr)):
+                with self.assertRaisesRegex(ValueError, "EDITORIAL_COLOR_RANGE_PROBE_FAILED"):
+                    sp.reference_picture_range(stills, moment, EDITORIAL_PLAN, hook_video=Path("/synthetic/opening.mkv"))
+        error = subprocess.CalledProcessError(7, ["ffmpeg"])
+        with mock.patch.object(sp.subprocess, "run", side_effect=error):
+            with self.assertRaises(subprocess.CalledProcessError) as caught:
+                sp.reference_picture_range(stills, moment, EDITORIAL_PLAN, hook_video=Path("/synthetic/opening.mkv"))
+        self.assertIs(caught.exception, error)
+
+    def test_scene_fade_and_final_commands_have_bounded_input_and_output_scopes(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        hook = Path("/synthetic/opening.mkv")
+        plan = sp.scene_frame_plan(EDITORIAL_PLAN)
+        commands = []
+        for index in range(8):
+            args = sp.scene_clip_args(stills, moment, EDITORIAL_PLAN, index,
+                                      Path(f"/synthetic/scene-{index}.mkv"), hook_video=hook)
+            commands.append((args, 1, "ffv1"))
+            self.assertEqual(args[args.index("-pix_fmt") + 1], "yuv420p")
+            self.assertEqual(int(args[args.index("-frames:v") + 1]), plan["scene_frames"][index])
+            expected = sp.editorial_scene_filter(0, plan["scene_frames"][index], plan["scene_spans"][index],
+                                                 moment, EDITORIAL_PLAN["scenes"][index]["motion_profile"])
+            self.assertEqual(args[args.index("-filter_complex") + 1], expected)
+        for index in range(1, 8):
+            args = sp.xfade_clip_args(Path("/synthetic/left.mkv"), Path("/synthetic/right.mkv"),
+                                      index, EDITORIAL_PLAN, Path("/synthetic/fade.mkv"))
+            commands.append((args, 2, "ffv1"))
+            self.assertEqual(args[args.index("-pix_fmt") + 1], "yuv444p")
+            self.assertEqual(int(args[args.index("-frames:v") + 1]), plan["scene_spans"][index][1])
+            graph = args[args.index("-filter_complex") + 1]
+            self.assertEqual(graph.count("xfade="), 1)
+            self.assertNotIn("zoompan", graph)
+        arguments = (stills, Path("/synthetic/voice.flac"), Path("/synthetic/music.flac"),
+                     Path("/synthetic/captions.ass"), moment, 40.312, "null", Path("/synthetic/result.mp4"))
+        final = sp.render_args(*arguments, edit_plan=EDITORIAL_PLAN, hook_video=hook,
+                               picture_video=Path("/synthetic/picture.mkv"), picture_range="unknown")
+        commands.append((final, 3, "libx264"))
+        graph = final[final.index("-filter_complex") + 1]
+        self.assertNotIn("xfade=", graph)
+        self.assertNotIn("zoompan", graph)
+        self.assertEqual(final[final.index("-i") + 1], "/synthetic/picture.mkv")
+        reference = sp.render_args(*arguments, edit_plan=EDITORIAL_PLAN, hook_video=hook)
+        audio_parts = lambda text: [part for part in text.split(";") if ":a]" in part or
+                                   part.startswith(("[m][key]", "[vo][duck]"))]
+        self.assertEqual(audio_parts(graph.replace("[1:a]", "[8:a]").replace("[2:a]", "[9:a]")),
+                         audio_parts(reference[reference.index("-filter_complex") + 1]))
+        self.assertEqual(inspect.signature(sp.render_args).parameters["picture_video"].kind,
+                         inspect.Parameter.KEYWORD_ONLY)
+        for args, count, codec in commands:
+            with self.subTest(inputs=count, output=args[-1]):
+                inputs = [i for i, value in enumerate(args) if value == "-i"]
+                self.assertEqual(len(inputs), count)
+                for flag in ("-filter_complex_threads", "-filter_threads"):
+                    self.assertEqual(args.count(flag), 1)
+                    self.assertEqual(args[args.index(flag) + 1], "1")
+                    self.assertLess(args.index(flag), inputs[0])
+                start = 1
+                for end in inputs:
+                    options = args[start:end]
+                    self.assertEqual(options.count("-threads"), 1)
+                    self.assertEqual(options[options.index("-threads") + 1], "1")
+                    start = end + 2
+                self.assertEqual(args.count("-threads"), count)
+                output = args[inputs[-1] + 2:]
+                self.assertEqual(output.count("-threads:v"), 1)
+                self.assertEqual(output[output.index("-threads:v") + 1], "1")
+                self.assertEqual(output[output.index("-c:v") + 1], codec)
+
+    def test_progress_markers_follow_success_and_failures_never_claim_completion(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        expected = []
+        for index in range(8):
+            for stage, name in [("SCENE", f"scene-{index:02d}.mkv"),
+                                *(([("FADE", f"picture-{index:02d}.mkv")]) if index else [])]:
+                expected += [("phase", f"SHORTS_PHASE_{stage}_{index:02d}_START", True),
+                             ("run", name), ("phase", f"SHORTS_PHASE_{stage}_{index:02d}_END", True)]
+        run_positions = [index for index, event in enumerate(expected) if event[0] == "run"]
+        for failure in (None, *range(15)):
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as directory:
+                tmp = Path(directory)
+                observed = []
+                run_count = 0
+                def run(command):
+                    nonlocal run_count
+                    observed.append(("run", Path(command[-1]).name))
+                    index = run_count
+                    run_count += 1
+                    if index == failure:
+                        raise subprocess.CalledProcessError(19, command)
+                    Path(command[-1]).write_bytes(b"synthetic orchestration witness, not media")
+                def phase(text, *, flush):
+                    observed.append(("phase", text, flush))
+                with mock.patch.object(sp, "run", side_effect=run), mock.patch("builtins.print", side_effect=phase):
+                    if failure is None:
+                        result = sp.write_editorial_picture(stills, moment, EDITORIAL_PLAN, tmp,
+                                                            hook_video=Path("/synthetic/opening.mkv"))
+                        self.assertEqual(result, tmp / "picture-07.mkv")
+                    else:
+                        with self.assertRaises(subprocess.CalledProcessError):
+                            sp.write_editorial_picture(stills, moment, EDITORIAL_PLAN, tmp,
+                                                       hook_video=Path("/synthetic/opening.mkv"))
+                self.assertEqual(observed, expected if failure is None else expected[:run_positions[failure] + 1])
+                if failure is None:
+                    self.assertEqual([path.name for path in tmp.iterdir()], ["picture-07.mkv"])
+
+
 class EditorialOpeningAtmosphere(unittest.TestCase):
     """Exercise actual atmosphere pixels with a fixed camera, no grain, and no provider."""
     @classmethod
@@ -1455,6 +1611,8 @@ class EditorialProducerSources(unittest.TestCase):
                             mock.patch.object(sp, "probe_duration", return_value=40.3), \
                             mock.patch.object(sp, "vertical_still") as prepare, \
                             mock.patch.object(sp, "write_opening_video", return_value=root / "synthetic-opening.mkv") as opening, \
+                            mock.patch.object(sp, "write_editorial_picture", return_value=root / "synthetic-picture.mkv") as picture, \
+                            mock.patch.object(sp, "reference_picture_range", return_value="unknown") as range_probe, \
                             mock.patch.object(sp, "ass", wraps=sp.ass) as captions, \
                             mock.patch.object(sp, "render_args", wraps=sp.render_args) as renderer, \
                             mock.patch.object(sp, "run") as render, \
@@ -1468,20 +1626,29 @@ class EditorialProducerSources(unittest.TestCase):
                         actual_args = render.call_args.args[0]
                         actual_inputs = [actual_args[i + 1] for i, value in enumerate(actual_args) if value == "-i"]
                         self.assertIn(str(expected_voice), actual_inputs)
-                        self.assertEqual(len(actual_inputs), 10 if edit_plan is not None else 4)
+                        self.assertEqual(len(actual_inputs), 3 if edit_plan is not None else 4)
                         self.assertEqual(prepare.call_count, 8 if edit_plan is not None else 2)
                         self.assertEqual(record["sha256"], "f" * 64)
                         if edit_plan is not None:
                             self.assertEqual(phase.call_args_list, [
                                 mock.call(f"SHORTS_PHASE_{name}", flush=True) for name in (
                                     "PREPARE_START", "PREPARE_END", "HOOK_START", "HOOK_END",
-                                    "ENCODE_START", "ENCODE_END")])
+                                    "RANGE_START", "RANGE_END", "ENCODE_START", "ENCODE_END")])
                             self.assertEqual(hashed.call_args_list[0].args[0], expected_voice)
                             self.assertNotIn(str(legacy_wav), actual_inputs)
                             self.assertEqual(probe.call_count, 8)
                             opening.assert_called_once_with(out / "tmp-00" / "s00.png",
                                                             out / "tmp-00" / "opening.mkv")
                             self.assertEqual(renderer.call_args.kwargs["hook_video"], root / "synthetic-opening.mkv")
+                            picture.assert_called_once_with([out / "tmp-00" / f"s{i:02d}.png" for i in range(8)],
+                                                            moment, edit_plan, out / "tmp-00",
+                                                            hook_video=root / "synthetic-opening.mkv")
+                            self.assertEqual(renderer.call_args.kwargs["picture_video"], root / "synthetic-picture.mkv")
+                            self.assertEqual(renderer.call_args.kwargs["picture_range"], "unknown")
+                            range_probe.assert_called_once_with(
+                                [out / "tmp-00" / f"s{i:02d}.png" for i in range(8)], moment, edit_plan,
+                                hook_video=root / "synthetic-opening.mkv")
+                            self.assertEqual(actual_inputs[0], str(root / "synthetic-picture.mkv"))
                             self.assertEqual(captions.call_args.kwargs["hook_mode"], "caption_only")
                             self.assertEqual({Path(call.args[0]).stem for call in hashed.call_args_list
                                               if Path(call.args[0]).suffix == ".png"},
@@ -1495,6 +1662,8 @@ class EditorialProducerSources(unittest.TestCase):
                             self.assertNotIn(str(original_flac), actual_inputs)
                             probe.assert_not_called()
                             opening.assert_not_called()
+                            picture.assert_not_called()
+                            range_probe.assert_not_called()
                             self.assertEqual(captions.call_args.kwargs["hook_mode"], "overlay")
 
 
@@ -1575,10 +1744,27 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
         cls.output, cls.pcm_output = cls.root / "synthetic-stills.mp4", cls.root / "preencoder.wav"
         cls.hook = cls.root / "synthetic-opening.mkv"
         sp.write_opening_video(cls.stills[0], cls.hook)
-        with mock.patch.multiple(sp, VW=cls.width, VH=cls.height):
+        cls.serial_tmp = cls.root / "serial"
+        cls.serial_tmp.mkdir()
+        cls.serial_probes = []
+        def run_and_probe(command):
+            result = cls.invoke(command)
+            probe = json.loads(cls.invoke([
+                "ffprobe", "-v", "error", "-select_streams", "v:0", "-count_frames",
+                "-show_entries", "stream=codec_name,pix_fmt,width,height,avg_frame_rate,nb_read_frames,color_range,color_space,color_primaries,color_transfer,chroma_location,sample_aspect_ratio",
+                "-of", "json", command[-1]]).stdout)["streams"][0]
+            cls.serial_probes.append(probe)
+            return result
+        with mock.patch.multiple(sp, VW=cls.width, VH=cls.height), \
+                mock.patch.object(sp, "run", side_effect=run_and_probe) as serial_run:
+            cls.picture_range = sp.reference_picture_range(cls.stills, cls.moment, EDITORIAL_PLAN,
+                                                           hook_video=cls.hook)
+            cls.picture = sp.write_editorial_picture(cls.stills, cls.moment, EDITORIAL_PLAN,
+                                                     cls.serial_tmp, hook_video=cls.hook)
+            cls.serial_commands = [call.args[0] for call in serial_run.call_args_list]
             args = sp.render_args(cls.stills, cls.audio, cls.music, cls.captions,
                                   cls.moment, 40.312, "null", cls.output, edit_plan=EDITORIAL_PLAN,
-                                  hook_video=cls.hook)
+                                  hook_video=cls.hook, picture_video=cls.picture, picture_range=cls.picture_range)
         # Keep all production processing. An output-only split captures the actual
         # pre-AAC samples, without changing any media filter or resampling decision.
         graph_index = args.index("-filter_complex") + 1
@@ -1692,6 +1878,108 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
             fingerprints.append(records)
         self.assertEqual(fingerprints[0], fingerprints[1],
                          "thread bounds must preserve each preencoder picture frame and its PTS")
+
+    def test_serial_lossless_picture_matches_all_1209_monolithic_frames_and_pts(self):
+        with mock.patch.multiple(sp, VW=self.width, VH=self.height):
+            args = sp.render_args(self.stills, self.audio, self.music, self.captions,
+                                  self.moment, 40.312, "null", self.root / "reference.mp4",
+                                  edit_plan=EDITORIAL_PLAN, hook_video=self.hook)
+        graph_index = args.index("-filter_complex") + 1
+        parts = args[graph_index].split(";")
+        finish = next(index for index, part in enumerate(parts) if part.startswith("[picture]"))
+        reference = [*args[:graph_index], ";".join(parts[:finish]), "-map", "[picture]", "-an",
+                     "-threads:v", "1", "-c:v", "rawvideo", "-fps_mode", "passthrough",
+                     "-f", "framemd5", "-"]
+        with mock.patch.multiple(sp, VW=self.width, VH=self.height):
+            final_args = sp.render_args(self.stills, self.audio, self.music, self.captions,
+                                        self.moment, 40.312, "null", self.root / "serial-reference.mp4",
+                                        edit_plan=EDITORIAL_PLAN, hook_video=self.hook,
+                                        picture_video=self.picture, picture_range=self.picture_range)
+        final_graph_index = final_args.index("-filter_complex") + 1
+        final_parts = final_args[final_graph_index].split(";")
+        final_finish = next(index for index, part in enumerate(final_parts) if part.startswith("[picture]"))
+        serial = [*final_args[:final_graph_index], ";".join(final_parts[:final_finish]),
+                  "-map", "[picture]", "-an", "-threads:v", "1", "-c:v", "rawvideo",
+                  "-fps_mode", "passthrough", "-f", "framemd5", "-"]
+        fingerprints = []
+        for command in (reference, serial):
+            output = self.invoke(command).stdout.decode()
+            self.assertRegex(output, r"(?m)^#tb 0: 1/30$")
+            records = [[value.strip() for value in line.split(",")]
+                       for line in output.splitlines() if line and not line.startswith("#")]
+            self.assertEqual(len(records), 1209)
+            self.assertEqual([int(row[2]) for row in records], list(range(1209)))
+            fingerprints.append(records)
+        self.assertEqual(fingerprints[0], fingerprints[1],
+                         "lossless scene/fade round trips must preserve every monolithic picture sample")
+
+    def test_all_serial_scene_and_fade_clips_are_lossless_and_have_exact_frame_counts(self):
+        self.assertEqual(len(self.serial_commands), 15)
+        scene_counts = [158, 165, 165, 165, 165, 165, 165, 166]
+        fade_counts = [308, 458, 608, 758, 908, 1058, 1209]
+        scenes, fades = [], []
+        for command, probe in zip(self.serial_commands, self.serial_probes):
+            inputs = command.count("-i")
+            self.assertIn(inputs, (1, 2))
+            target = scenes if inputs == 1 else fades
+            expected_format = "yuv420p" if inputs == 1 else "yuv444p"
+            self.assertEqual(probe["codec_name"], "ffv1")
+            self.assertEqual(probe["pix_fmt"], expected_format)
+            self.assertEqual((probe["width"], probe["height"], probe["avg_frame_rate"]),
+                             (self.width, self.height, "30/1"))
+            target.append(int(probe["nb_read_frames"]))
+        self.assertEqual(scenes, scene_counts)
+        self.assertEqual(fades, fade_counts)
+
+    def test_serial_audio_remap_preserves_every_preencoder_pcm_sample(self):
+        with mock.patch.multiple(sp, VW=self.width, VH=self.height):
+            args = sp.render_args(self.stills, self.audio, self.music, self.captions,
+                                  self.moment, 40.312, "null", self.root / "reference.mp4",
+                                  edit_plan=EDITORIAL_PLAN, hook_video=self.hook)
+        graph_index = args.index("-filter_complex") + 1
+        parts = args[graph_index].split(";")
+        audio = ";".join(part for part in parts if ":a]" in part or
+                         part.startswith(("[m][key]", "[vo][duck]")))
+        audio = audio.replace("[aout]", "[preencoder]") + ";[preencoder]asplit=2[aout][samplecheck]"
+        reference = [*args[:graph_index], audio, "-map", "[aout]", "-c:a", "aac", "-b:a", "160k",
+                     "-ar", "48000", "-t", "40.312", "-f", "null", "-",
+                     "-map", "[samplecheck]", "-c:a", "pcm_s16le", "-f", "s16le", "-"]
+        raw = self.invoke(reference).stdout
+        with wave.open(str(self.pcm_output), "rb") as sound:
+            actual = sound.readframes(sound.getnframes())
+        self.assertEqual(len(raw), 1934976 * 2 * 2)
+        self.assertEqual(raw, actual, "remapping final audio inputs must not change even one PCM sample")
+
+    def test_serial_picture_preserves_effective_color_properties_and_sar(self):
+        properties = []
+        for picture in (None, self.picture):
+            with mock.patch.multiple(sp, VW=self.width, VH=self.height):
+                args = sp.render_args(self.stills, self.audio, self.music, self.captions,
+                                      self.moment, 40.312, "null", self.root / "unused.mp4",
+                                      edit_plan=EDITORIAL_PLAN, hook_video=self.hook, picture_video=picture,
+                                      picture_range=self.picture_range if picture is not None else None)
+            graph_index = args.index("-filter_complex") + 1
+            parts = args[graph_index].split(";")
+            finish = next(i for i, part in enumerate(parts) if part.startswith("[picture]"))
+            graph = ";".join([*parts[:finish], "[picture]showinfo[inspection]"])
+            output_cap = args.index("-threads:v")
+            command = [*args[:graph_index], graph, "-map", "[inspection]", "-an",
+                       *args[output_cap:output_cap + 2], "-frames:v", "1209", "-f", "null", "-"]
+            command[command.index("-v") + 1] = "info"
+            text = self.invoke(command).stderr.decode()
+            geometry = re.findall(r"fmt:(\S+)(?: cl:(\S+))? sar:(\S+) s:(\S+)", text)
+            color = re.findall(r"color_range:(\S+) color_space:(\S+) color_primaries:(\S+) color_trc:(\S+)", text)
+            self.assertEqual(len(geometry), 1209)
+            self.assertEqual(len(color), 1209)
+            # Both taps are full-resolution 4:4:4: there is no subsampled chroma siting
+            # to reinterpret. The lossless 4:2:0 scene round trips are pixel-checked above.
+            self.assertTrue(all(frame[0] == "yuv444p" for frame in geometry))
+            properties.append((geometry, color))
+        mismatches = [(kind, index, left, right)
+                      for kind, (before, after) in zip(("geometry", "color"), zip(properties[0], properties[1]))
+                      for index, (left, right) in enumerate(zip(before, after)) if left != right]
+        self.assertFalse(bool(mismatches), f"actual picture metadata differs: {mismatches[:3]!r}")
+
 
     def test_actual_opening_clip_has_91_lossless_frames_and_transparent_endpoint(self):
         probe = json.loads(self.invoke([
