@@ -303,6 +303,16 @@
     "file": "migration/production/test_no_live_pilot_data.py",
     "contains": "def test_no_live_pilot_data"
    }
+  },
+  {
+   "id": "E33",
+   "date": "2026-10-20",
+   "error": "market panel aborted on one dead playlist (404)",
+   "fix": "Record isolated uploads 404 per channel and preserve budget accounting; retain evidence and exit 1 when more than 25% of the panel is unavailable",
+   "antidote": {
+    "file": "migration/mining/test_market_panel.py",
+    "contains": "def test_one_404_channel_is_recorded_and_other_channels_continue"
+   }
   }
  ]
 }
