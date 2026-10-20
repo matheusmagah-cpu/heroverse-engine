@@ -197,7 +197,23 @@ Claude reviews each delivery against its card; a stage is called a strong point 
    captions, sync, image, rights, content/policy, scorecard, whole-file scan, preflight).
 4. **Shorts:** `shorts_qa` + watched review by the designated model (items ≥ 7, overall ≥ 8), from QA-PASS renders only.
 
-## Status (2026-10-18 17:20 UTC) — day 1 of the plan
+## Status (2026-10-20 08:15 UTC) — day 3 of the plan
+
+**Published / scheduled (UTC):** pilot-002 10-18 10:00 ✅ · pilot-004 10-20 00:00 ✅ · pilot-012 10-20 00:30 ✅ `1bT9pEROuhI` (first comment posted) · pilot-005 10-20 10:00 (uploaded, scheduled) · pilot-007 10-21 10:00 (approved 9.0, uploaded).
+
+**At risk:** pilot-006 (10-21 00:00) GATE FAIL on image-set overlap. Fix #225 is due 12:00, then images, re-render and re-approval. If the reviewer quota is spent, the slot slips and nothing publishes without PASS. Pilots 008–011 have the same defect and are fixed in #225 before their renders. Slot 10-24 00:00 has no script: #224 (automatic script runway) is due 10-21 00:00.
+
+**Shorts:** none published since 10-18. 012 and 005 Shorts failed the watched review (hook, rhythm, ending); the repair is #203.
+
+**Dot cards open:** #225 (P0) · #226 (P0, E30) · #222 (P0, self-reliant loop, includes the automatic first comment) · #224 (P0, script runway) · #216 (thumbnail R9) · #223 (full metadata) · #203 (Shorts) · #177 (archive) · #191 / #192 (animation) · #141 (originality).
+
+**Owner rule (2026-10-20):** heavy work is done by Dot and the tools; Claude directs, reviews, unblocks and dispatches the tools. No owner action may block the loop.
+
+**Indicators (official 2026-10-20 01:52):** 269 subscribers; public long-form watch hours 365 d ≈ 3.3 (own calc.).
+
+### Previous status (2026-10-18)
+
+
 
 **Publication calendar (UTC; one Short per long video, D-03):**
 
