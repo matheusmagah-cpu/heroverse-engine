@@ -1034,6 +1034,57 @@ class EditorialMotion(unittest.TestCase):
         i = args.index("/synthetic/voice.flac")
         self.assertEqual(args[i - 5:i - 1], ["-ss", "459.860", "-t", "39.812"])
 
+    def test_editorial_command_owns_exact_tested_thread_limits(self):
+        _, _, _, moment = editorial_source()
+        args = sp.render_args([Path(f"/synthetic/scene-{i}.ppm") for i in range(8)],
+                              Path("/synthetic/voice.flac"), Path("/synthetic/music.flac"),
+                              Path("/synthetic/captions.ass"), moment, 40.312, "null",
+                              Path("/synthetic/result.mp4"), edit_plan=EDITORIAL_PLAN,
+                              hook_video=Path("/synthetic/opening.mkv"))
+        self.assertEqual(args[1:5], ["-filter_complex_threads", "1", "-filter_threads", "1"])
+        inputs = [i for i, value in enumerate(args) if value == "-i"]
+        self.assertEqual(len(inputs), 10)
+        for flag in ("-filter_complex_threads", "-filter_threads"):
+            self.assertEqual(args.count(flag), 1)
+            position = args.index(flag)
+            self.assertEqual(args[position + 1], "1")
+            self.assertLess(position, inputs[0])
+        start = 1
+        for index, end in enumerate(inputs):
+            options = args[start:end]
+            self.assertEqual(options.count("-threads"), 1, f"input {index} must own its decoder cap")
+            self.assertEqual(options[options.index("-threads") + 1], "1")
+            start = end + 2
+        self.assertEqual(args.count("-threads"), 10)
+        output = args[inputs[-1] + 2:]
+        self.assertEqual(output.count("-threads:v"), 1)
+        self.assertEqual(output[output.index("-threads:v") + 1], "1")
+        self.assertEqual(args.count("-threads:v"), 1)
+        # Resource bounds must not alter the graph, source seeks, dimensions, or codecs.
+        resource_flags = {"-filter_complex_threads", "-filter_threads", "-threads", "-threads:v"}
+        uncapped = []
+        index = 0
+        while index < len(args):
+            if args[index] in resource_flags:
+                index += 2
+            else:
+                uncapped.append(args[index])
+                index += 1
+        self.assertEqual(hashlib.sha256(json.dumps(uncapped, separators=(",", ":")).encode()).hexdigest(),
+                         "5637a6a4a6493ab37fc886337718f98b274fe50e4f2fcae74422ce74c0d5689b")
+
+    def test_legacy_render_command_is_unchanged_by_editorial_resource_limits(self):
+        args = sp.render_args([Path("/synthetic/first.ppm"), Path("/synthetic/second.ppm")],
+                              Path("/synthetic/voice.wav"), Path("/synthetic/music.wav"),
+                              Path("/synthetic/captions.ass"), {"start": 12.0, "end": 44.0},
+                              32.5, "null", Path("/synthetic/result.mp4"))
+        self.assertNotIn("-filter_complex_threads", args)
+        self.assertNotIn("-filter_threads", args)
+        self.assertNotIn("-threads", args)
+        self.assertNotIn("-threads:v", args)
+        self.assertEqual(hashlib.sha256(json.dumps(args, separators=(",", ":")).encode()).hexdigest(),
+                         "b7f6ae24310a5795195aa75e09e17e27d43d195a09c3ab3eb16243026d36179a")
+
     def test_actual_emitted_camera_expressions_reach_the_declared_endpoints_without_clamping(self):
         _, _, _, moment = editorial_source()
         _, parts = sp.editorial_picture([Path(f"/synthetic/scene-{i}.ppm") for i in range(8)],
@@ -1406,7 +1457,8 @@ class EditorialProducerSources(unittest.TestCase):
                             mock.patch.object(sp, "write_opening_video", return_value=root / "synthetic-opening.mkv") as opening, \
                             mock.patch.object(sp, "ass", wraps=sp.ass) as captions, \
                             mock.patch.object(sp, "render_args", wraps=sp.render_args) as renderer, \
-                            mock.patch.object(sp, "run") as render:
+                            mock.patch.object(sp, "run") as render, \
+                            mock.patch("builtins.print") as phase:
                         record = sp.produce(work, moment, 0, script, images, None, music, out,
                                             timeline_sentences=timeline["sentences"], script_refs=refs,
                                             edit_plan=edit_plan)
@@ -1420,6 +1472,10 @@ class EditorialProducerSources(unittest.TestCase):
                         self.assertEqual(prepare.call_count, 8 if edit_plan is not None else 2)
                         self.assertEqual(record["sha256"], "f" * 64)
                         if edit_plan is not None:
+                            self.assertEqual(phase.call_args_list, [
+                                mock.call(f"SHORTS_PHASE_{name}", flush=True) for name in (
+                                    "PREPARE_START", "PREPARE_END", "HOOK_START", "HOOK_END",
+                                    "ENCODE_START", "ENCODE_END")])
                             self.assertEqual(hashed.call_args_list[0].args[0], expected_voice)
                             self.assertNotIn(str(legacy_wav), actual_inputs)
                             self.assertEqual(probe.call_count, 8)
@@ -1435,6 +1491,7 @@ class EditorialProducerSources(unittest.TestCase):
                             self.assertEqual(record["scenes"], [s["image_id"] for s in EDITORIAL_PLAN["scenes"]])
                             self.assertIs(record["publish"], False)
                         else:
+                            phase.assert_not_called()
                             self.assertNotIn(str(original_flac), actual_inputs)
                             probe.assert_not_called()
                             opening.assert_not_called()
@@ -1528,7 +1585,6 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
         args[graph_index] = args[graph_index].replace("[aout]", "[preencoder]") + (
             ";[preencoder]asplit=2[aout][samplecheck]")
         args += ["-map", "[samplecheck]", "-c:a", "pcm_s16le", str(cls.pcm_output)]
-        args[1:1] = ["-filter_complex_threads", "1", "-threads", "1"]
         args[args.index("-preset") + 1] = "ultrafast"
         cls.invoke(args)
         cls.probe = json.loads(cls.invoke([
@@ -1602,6 +1658,40 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
             "ffmpeg", "-hide_banner", "-i", str(self.output), "-an", "-vf",
             "blackdetect=d=0.0333333333333333:pix_th=0.02:pic_th=0.99", "-f", "null", "-"])
         self.assertNotIn(b"black_start:", black.stderr)
+
+    def test_resource_limits_preserve_all_preencoder_picture_frames_and_timestamps(self):
+        with mock.patch.multiple(sp, VW=self.width, VH=self.height):
+            args = sp.render_args(self.stills, self.audio, self.music, self.captions,
+                                  self.moment, 40.312, "null", self.root / "not-encoded.mp4",
+                                  edit_plan=EDITORIAL_PLAN, hook_video=self.hook)
+        graph_index = args.index("-filter_complex") + 1
+        parts = args[graph_index].split(";")
+        finish = next(index for index, part in enumerate(parts) if part.startswith("[picture]"))
+        # Tap the actual geometric picture before film finish, captions, or encoding.
+        # Only the diagnostic output format changes; the production camera/fade graph stays exact.
+        graph = ";".join(parts[:finish])
+        output_cap = args.index("-threads:v")
+        capped = [*args[:graph_index], graph, "-map", "[picture]", "-an",
+                  *args[output_cap:output_cap + 2], "-c:v", "rawvideo", "-fps_mode", "passthrough",
+                  "-f", "framemd5", "-"]
+        uncapped = []
+        index = 0
+        while index < len(capped):
+            if capped[index] in {"-filter_complex_threads", "-filter_threads", "-threads", "-threads:v"}:
+                index += 2
+            else:
+                uncapped.append(capped[index])
+                index += 1
+        fingerprints = []
+        for command in (uncapped, capped):
+            result = self.invoke(command).stdout.decode()
+            records = [[value.strip() for value in line.split(",")]
+                       for line in result.splitlines() if line and not line.startswith("#")]
+            self.assertEqual(len(records), 1209)
+            self.assertEqual([int(row[2]) for row in records], list(range(1209)))
+            fingerprints.append(records)
+        self.assertEqual(fingerprints[0], fingerprints[1],
+                         "thread bounds must preserve each preencoder picture frame and its PTS")
 
     def test_actual_opening_clip_has_91_lossless_frames_and_transparent_endpoint(self):
         probe = json.loads(self.invoke([
@@ -1685,7 +1775,6 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
         end = args.index(str(self.hook)) + 1
         args[end - 2:end] = ["-f", "lavfi", "-i",
                             f"testsrc2=size={self.width}x{self.height}:rate=30:duration={158 / 30}"]
-        args[1:1] = ["-filter_complex_threads", "1", "-threads", "1"]
         args[args.index("-preset") + 1] = "ultrafast"
         self.invoke(args)
         decoded = self.invoke([

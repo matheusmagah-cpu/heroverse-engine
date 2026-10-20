@@ -98,5 +98,115 @@
   "publish": false,
   "release_status": "REVIEW_FAIL",
   "publication": null,
-  "publication_reason": "Actual watched review failed; no publication attempted."
+  "publication_reason": "Actual watched review failed; no publication attempted.",
+  "corrective_execution_attempts": [
+    {
+      "run_id": 39472534741,
+      "attempt": 1,
+      "job_id": 118800017375,
+      "code_sha": "65bdd5621456c174ffae1728f22b6e29e80420c1",
+      "status": "failure",
+      "runner_region": "eastus",
+      "shutdown_at": "2026-10-20T18:13:20.8387015Z",
+      "exit_code": 143,
+      "inputs_hash_check": "PASS",
+      "preservation": "MP4_UNPRESERVED",
+      "output_sha256": null,
+      "qa": null,
+      "watched_review": null,
+      "provider_outcome": null,
+      "unknown_reason": "No result emitted before runner shutdown; preservation skipped",
+      "diagnosis": "Runner shutdown signal observed; underlying cause unproven",
+      "publication_attempted": false
+    },
+    {
+      "run_id": 39472534741,
+      "attempt": 2,
+      "job_id": 118802622558,
+      "code_sha": "65bdd5621456c174ffae1728f22b6e29e80420c1",
+      "status": "failure",
+      "runner_region": "westus3",
+      "shutdown_at": "2026-10-20T18:18:40.7938929Z",
+      "exit_code": 143,
+      "inputs_hash_check": "PASS",
+      "preservation": "MP4_UNPRESERVED",
+      "output_sha256": null,
+      "qa": null,
+      "watched_review": null,
+      "provider_outcome": null,
+      "unknown_reason": "No result emitted before runner shutdown; preservation skipped",
+      "diagnosis": "Runner shutdown signal observed; underlying cause unproven",
+      "publication_attempted": false
+    }
+  ],
+  "synthetic_resource_validation": {
+    "status": "FULLHD_SYNTHETIC_PASS",
+    "scope": "Final editorial encode only; no production asset/provider/render; hook/preparation unchanged.",
+    "runtime": "Local FFmpeg7.1.5; production6.1 not reproduced.",
+    "baseline": {
+      "exit": -9,
+      "seconds": 12.677,
+      "maxrss_kb": 3522052,
+      "maxthreads": 301,
+      "stopped": "SAFETY_RSS_3.5GB"
+    },
+    "patched_actual_command": {
+      "exit": 0,
+      "seconds": 228.175,
+      "maxrss_kb": 2005184,
+      "maxthreads": 25,
+      "stopped": null
+    },
+    "validation": {
+      "sha256": "a7a32f8a588f0e1b63ee8d315898a68bba1ff95fcda6cb15a15e0aafba59980e",
+      "bytes": 15602303,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "duration": "40.300000"
+      },
+      "decoded_video_frames": 1209,
+      "video_pts_gaps": [],
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "40.312000",
+        "time_base": "1/48000"
+      },
+      "decoded_audio_frames": 1890,
+      "decoded_audio_samples_including_padding": 1935360,
+      "audio_pts_gaps": [],
+      "black_intervals": []
+    },
+    "pcm_equivalence": [
+      {
+        "case": "preencoder-before",
+        "bytes": 15479808,
+        "samples_per_channel": 1934976,
+        "sha256": "0f24286a744d04e0487973c9ecc4305bf89b1fc11f379aa3747ec977e1fb4c7e",
+        "seconds": 1.6956915789996856
+      },
+      {
+        "case": "preencoder-after",
+        "bytes": 15479808,
+        "samples_per_channel": 1934976,
+        "sha256": "0f24286a744d04e0487973c9ecc4305bf89b1fc11f379aa3747ec977e1fb4c7e",
+        "seconds": 1.619476144998771
+      }
+    ],
+    "limits": [
+      "Uncapped control was deliberately killed at safety ceiling; its natural peak/completion is unknown.",
+      "Remote SIGTERM143 is not provenOOM.",
+      "Earlier short-music measurements are INVALID_FIXTURE and excluded.",
+      "FullHD resource run uses synthetic gradients/tones, not watched editorial qualification.",
+      "Thread changes do not promise final encoded-bitstream identity.",
+      "Only full caps were compared with valid baseline; necessity of each individual cap was not isolated."
+    ],
+    "production_qualification": false
+  }
 }

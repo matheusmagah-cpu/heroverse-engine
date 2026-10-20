@@ -396,9 +396,10 @@ def editorial_picture(stills, moment, edit_plan, *, hook_video=None):
     inputs, graph = [], []
     for i, (path, frames, span) in enumerate(zip(stills, plan["scene_frames"], plan["scene_spans"])):
         if i == 0:
-            inputs += ["-i", str(hook_video)]
+            inputs += ["-threads", "1", "-i", str(hook_video)]
         else:
-            inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{frames / FPS:.12f}", "-i", str(path)]
+            inputs += ["-threads", "1", "-loop", "1", "-framerate", str(FPS),
+                       "-t", f"{frames / FPS:.12f}", "-i", str(path)]
         a, b = span[0] / FPS, span[1] / FPS
         boundaries = motion_boundaries(moment, a, b)
         progress = motion_expression(boundaries, f"on/{frames - 1}*{b - a:.12f}+{a:.12f}")
@@ -464,11 +465,18 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_
         graph.append("[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck]")
         graph.append("[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-2:LRA=9,"
                  "alimiter=limit=0.75:attack=5:release=50:level=false[aout]")
-    return ["ffmpeg", "-v", "error", "-y", *inputs,
-            "-ss", f"{moment['start']:.3f}", "-t", f"{voice_s:.3f}", "-i", str(voice),
-            "-ss", f"{MUSIC_OFFSET + moment['start']:.3f}", "-t", f"{dur:.3f}", "-i", str(music),
+    # Thread options are input/output scoped: a flag before only the first
+    # input cannot bound the other decoders or the final encoder. Keep the
+    # legacy command byte-for-byte equivalent; this is the editorial path only.
+    filters = ["-filter_complex_threads", "1", "-filter_threads", "1"] if edit_plan is not None else []
+    audio_threads = ["-threads", "1"] if edit_plan is not None else []
+    encoder_threads = ["-threads:v", "1"] if edit_plan is not None else []
+    return ["ffmpeg", *filters, "-v", "error", "-y", *inputs,
+            *audio_threads, "-ss", f"{moment['start']:.3f}", "-t", f"{voice_s:.3f}", "-i", str(voice),
+            *audio_threads, "-ss", f"{MUSIC_OFFSET + moment['start']:.3f}", "-t", f"{dur:.3f}", "-i", str(music),
             "-filter_complex", ";".join(graph),
-            "-map", "[vout]", "-map", "[aout]", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-r", str(FPS),
+            "-map", "[vout]", "-map", "[aout]", *encoder_threads,
+            "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-r", str(FPS),
             "-c:a", "aac", "-b:a", "160k", "-ar", str(RATE_OUT), "-t", f"{dur:.3f}", "-movflags", "+faststart", str(out)]
 
 
@@ -520,20 +528,32 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     picks = ([x["image_id"] for x in edit_plan["scenes"]] if edit_plan is not None else
              [backgrounds[(index * 5 + 3 + 2 * k) % len(backgrounds)] for k in range(n)])
     stills = []
+    if edit_plan is not None:
+        print("SHORTS_PHASE_PREPARE_START", flush=True)
     for k, b in enumerate(picks):
         p = tmp / f"s{k:02d}.png"
         vertical_still(images / f"{b}.png", p)
         cinematic.grade(p)
         stills.append(p)
+    if edit_plan is not None:
+        print("SHORTS_PHASE_PREPARE_END", flush=True)
     refs = {s["id"]: s.get("reference") for s in script["segments"]}
     hook = moment.get("hook")
     hook_mode = "caption_only" if edit_plan is not None else "overlay"
     (tmp / "s.ass").write_text(ass(moment, hook, refs, dur, timeline_sentences, hook_mode=hook_mode))
-    hook_video = write_opening_video(stills[0], tmp / "opening.mkv") if edit_plan is not None else None
+    hook_video = None
+    if edit_plan is not None:
+        print("SHORTS_PHASE_HOOK_START", flush=True)
+        hook_video = write_opening_video(stills[0], tmp / "opening.mkv")
+        print("SHORTS_PHASE_HOOK_END", flush=True)
     mp4 = out / f"short-{index:02d}.mp4"
     source_voice = work.parent / "voice.flac" if edit_plan is not None else work / "voice.wav"
+    if edit_plan is not None:
+        print("SHORTS_PHASE_ENCODE_START", flush=True)
     run(render_args(stills, source_voice, music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4,
                     edit_plan=edit_plan, hook_video=hook_video))
+    if edit_plan is not None:
+        print("SHORTS_PHASE_ENCODE_END", flush=True)
     shutil.rmtree(tmp)
     shown = [r for _, _, r in reference_events(moment, refs, timeline_sentences)]
     record = {"file": mp4.name, "sha256": sha256(mp4), "seconds": round(probe_duration(mp4), 2),
