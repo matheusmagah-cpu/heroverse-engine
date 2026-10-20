@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# One full render of a pilot: voice, images, figure, cinematic assembly, Shorts
-# (select, produce, watched review), QA, package, private release upload and the
+# One full render of a pilot: voice, images, figure, assembly, Shorts input handoff
+# (selection/review deferred until the long qualifies), QA, package, release upload and the
 # evidence commit. Single source of truth for every runner: the private repo's
 # own workflow and the public execution repo (more CPU, no minute cap) both run
 # this script on a checkout of the private repo.
 # env: PILOT, TAG, ENGINE_REPO (owner/repo of the private engine), GH_TOKEN,
-#      HERO_GEMINI_API_KEY (Shorts selection/review), RUN_LABEL, T (scratch dir)
+#      RUN_LABEL, T (scratch dir); no Shorts model calls in this renderer
 set -euo pipefail
 case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) echo "INVALID_PILOT"; exit 1;; esac
 T="${T:-${RUNNER_TEMP:-/tmp}}"; ROOT="$(pwd)"; QA_FAILED=""

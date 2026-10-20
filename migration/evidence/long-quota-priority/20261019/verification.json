@@ -1,0 +1,71 @@
+{
+  "base_sha": "d3c91439990a0ebdb454429e8015c6840800e90b",
+  "unchanged_sources": [
+    {
+      "path": "migration/production/qa_criteria_v3.json",
+      "sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/long_review.py",
+      "sha256": "59add48731cac4138da5362713c57e95547e0f573e95e96a061c3ceaa16a5813",
+      "unchanged": true
+    },
+    {
+      "path": "migration/publish/prepublish_gate.py",
+      "sha256": "56d90a77f547756b7e06b6c4a4e63e721aa4139cf59673bc9bd82104600957b7",
+      "unchanged": true
+    },
+    {
+      "path": "migration/publish/publication_binding.py",
+      "sha256": "6300408758bed378795557e51e057663409106a5add8b2bab27fd99c9261734a",
+      "unchanged": true
+    },
+    {
+      "path": "migration/publish/three_stage.py",
+      "sha256": "f1a8fa871aceaaaa09bd5685586b7303237c7f982e3c8a60494a7b9df0fe1930",
+      "unchanged": true
+    },
+    {
+      "path": ".github/workflows/publish.yml",
+      "sha256": "12f4037359f7680ce5756410663b0c8717401e9acdcc0efa2d3819910b6524b2",
+      "unchanged": true
+    },
+    {
+      "path": ".github/workflows/pr-checks.yml",
+      "sha256": "b33398fb0284b47ef5c01d2a8ee2f3675ecceacacf72cd1198aea58c8f1c7894",
+      "unchanged": true
+    },
+    {
+      "path": "migration/publish/ledger.json",
+      "sha256": "c10858b9ffc69c3ab427bbb1fb42ea703d469446e3bcfcf9fb48aefc7cd023e6",
+      "unchanged": true
+    }
+  ],
+  "workflow_controls": [
+    {
+      "workflow": ".github/workflows/approve.yml",
+      "triggers_permissions_concurrency_unchanged": true,
+      "secret_references_unchanged": true
+    },
+    {
+      "workflow": ".github/workflows/shorts.yml",
+      "triggers_permissions_concurrency_unchanged": true,
+      "secret_references_unchanged": true
+    },
+    {
+      "workflow": ".github/workflows/shorts-review.yml",
+      "triggers_permissions_concurrency_unchanged": true,
+      "secret_references_unchanged": true
+    }
+  ],
+  "local_tests": {
+    "shorts_prerequisite": 6,
+    "render_queue": 14,
+    "runner_dispatch": 11,
+    "ci_scripts": 38
+  },
+  "owner_governance_clarification_utc": "2026-10-19T23:55:26Z",
+  "owner_conflict_cleanup_utc": "2026-10-19T23:57:06Z",
+  "governance_record": "https://github.com/matheusmagah-cpu/heroverse-engine/pull/212#issuecomment-6279983724"
+}

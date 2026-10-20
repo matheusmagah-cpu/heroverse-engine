@@ -1,6 +1,6 @@
 name: "HeroVerse Shorts (private): Gemini selection, own edit per Short, watched review"
-# The public runner renders the long video without the Gemini key and hands off the narration and the figure
-# (shorts/inputs.json). This private job makes the Shorts from them: whole-video selection with per-Short hook and
+# The runner renders the long video and hands off the narration and the figure
+# (shorts/inputs.json). Only after the long qualifies, this job makes the Shorts: whole-video selection with per-Short hook and
 # title, vertical edit to STANDARD R8 (whole sentences, 1-5 word captions, scenery only, no CTA), shorts_qa and the watched review. Every Gemini step stays here.
 on:
   push:
