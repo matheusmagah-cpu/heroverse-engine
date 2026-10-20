@@ -1,0 +1,229 @@
+{
+ "version": "shorts-produce-v2-r8",
+ "source_pilot": "pilot-006",
+ "selection_rubric_model": "gemini-3.5-flash-lite",
+ "rejected_r8": [],
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707",
+   "seconds": 35.2,
+   "source_start": 1311.607,
+   "source_end": 1346.297,
+   "segments": [
+    "sleep-reflect-121",
+    "sleep-philippians-4",
+    "sleep-reflect-phil"
+   ],
+   "hook": "You can let go. He will not.",
+   "hook_shown": false,
+   "title": "His Peace Stands Watch Over You",
+   "reference": "Philippians 4:6-7 (KJV)",
+   "scenes": [
+    "bg-still-water-night",
+    "bg-healing-garden"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.856,
+    "measured_score": 0.8401,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.6756756756756757,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.7876000000000022
+    },
+    "rubric": {
+     "index": 5,
+     "hook_first_2s": 8.5,
+     "stands_alone": 8.5,
+     "emotional_payoff": 9.0,
+     "shareability": 8.0,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Powerful reminder to let go, excellent verse integration.",
+     "hook_line": "You can let go. He will not.",
+     "title": "His Peace Stands Watch Over You"
+    }
+   },
+   "text": "You can let go. He will not. Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus. The peace of God shall keep your heart and mind, like a guard at the door. Whatever news tomorrow brings, tonight that peace stands watch over you.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 35.2,
+    "lufs": -15.2,
+    "true_peak_dbtp": -2.2,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "bea4aa6c83a5648c0b5b4b2b2f8992d3cc5f0991229c05f61e2d1219c3920fb2",
+   "seconds": 39.54,
+   "source_start": 291.06,
+   "source_end": 330.1,
+   "segments": [
+    "prayer-mind",
+    "prayer-mental",
+    "scripture-5"
+   ],
+   "hook": "I give you every what if.",
+   "hook_shown": true,
+   "title": "A Prayer for Depression and Heavy Minds",
+   "reference": "Psalm 46:10 (KJV)",
+   "scenes": [
+    "bg-cottage-hearth",
+    "bg-moonlit-sea"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8477,
+    "measured_score": 0.8067,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.33707865168539325,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.9616000000000008
+    },
+    "rubric": {
+     "index": 10,
+     "hook_first_2s": 8.5,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.5,
+     "shareability": 8.5,
+     "loop_potential": 7.0,
+     "policy_safe": 10.0,
+     "reasons": "Explicitly mentions depression and anxiety, encourages professional help safely.",
+     "hook_line": "I give you every what if.",
+     "title": "A Prayer for Depression and Heavy Minds"
+    }
+   },
+   "text": "I give you every what if. Replace my fear with your peace, and let my mind rest in you tonight. Lord, I pray for every mind that is tired and heavy tonight. For depression that makes mornings hard. For anxiety that tightens the chest. For thoughts that feel too dark to say out loud. Bring light into those places. Lead each person to the help they need, the friend, the counsellor, the doctor, and let them never feel ashamed to ask. Be still, and know that I am God.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 39.54,
+    "lufs": -15.1,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "4be1ca67db4748da8c1055f8e2870528fea8e9fb119db1232c6c07a769e7e2e9",
+   "seconds": 51.02,
+   "source_start": 706.625,
+   "source_end": 757.141,
+   "segments": [
+    "stillness-2",
+    "declaration",
+    "scripture-11",
+    "reflection-sustained"
+   ],
+   "hook": "Let God hold you tonight.",
+   "hook_shown": false,
+   "title": "Let God Hold You As You Sleep",
+   "reference": "Psalm 3:5 (KJV)",
+   "scenes": [
+    "bg-first-light",
+    "bg-candle",
+    "bg-still-water-night"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8404,
+    "measured_score": 0.8636,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.5660377358490566,
+     "scripture": 1.0,
+     "promise": 0.7075471698113207,
+     "resolution": 1.0,
+     "length_fit": 0.5793600000000014
+    },
+    "rubric": {
+     "index": 1,
+     "hook_first_2s": 8.0,
+     "stands_alone": 8.0,
+     "emotional_payoff": 8.5,
+     "shareability": 7.0,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Direct command hook works well for tired viewers.",
+     "hook_line": "Let God hold you tonight.",
+     "title": "Let God Hold You As You Sleep"
+    }
+   },
+   "text": "Let God hold you. Say these words with me quietly, as you rest. The Lord is my healer. He binds up my wounds. I am not alone in this bed. My body, my heart and my mind are in his hands. I will rest tonight, and he will renew me. I laid me down and slept; I awaked; for the LORD sustained me. I laid me down and slept; I awaked; for the Lord sustained me. Sleep itself is an act of trust. You let go of control for hours, and God keeps your heart beating and your lungs breathing. Tonight, he will sustain you again.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 51.02,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}
