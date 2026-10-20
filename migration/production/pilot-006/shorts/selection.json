@@ -1,0 +1,1894 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-006",
+ "rubric_model": "gemini-3.5-flash-lite",
+ "candidates_considered": 843,
+ "shortlist": [
+  {
+   "start": 1311.607,
+   "end": 1346.297,
+   "sentences": [
+    {
+     "segment": "sleep-reflect-121",
+     "text": "You can let go.",
+     "start": 1311.607,
+     "end": 1313.228
+    },
+    {
+     "segment": "sleep-reflect-121",
+     "text": "He will not.",
+     "start": 1313.408,
+     "end": 1314.837
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "Be careful for nothing;",
+     "start": 1316.217,
+     "end": 1318.18
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+     "start": 1318.36,
+     "end": 1325.805
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+     "start": 1325.985,
+     "end": 1333.985
+    },
+    {
+     "segment": "sleep-reflect-phil",
+     "text": "The peace of God shall keep your heart and mind, like a guard at the door.",
+     "start": 1335.365,
+     "end": 1340.848
+    },
+    {
+     "segment": "sleep-reflect-phil",
+     "text": "Whatever news tomorrow brings, tonight that peace stands watch over you.",
+     "start": 1341.028,
+     "end": 1346.297
+    }
+   ],
+   "segments": [
+    "sleep-reflect-121",
+    "sleep-philippians-4",
+    "sleep-reflect-phil"
+   ],
+   "reference": "Philippians 4:6-7 (KJV)",
+   "measured_score": 0.8401,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6756756756756757,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7876000000000022
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Powerful reminder to let go, excellent verse integration.",
+    "hook_line": "You can let go. He will not.",
+    "title": "His Peace Stands Watch Over You"
+   },
+   "final_score": 0.856,
+   "hook": "You can let go. He will not.",
+   "title": "His Peace Stands Watch Over You"
+  },
+  {
+   "start": 291.06,
+   "end": 330.1,
+   "sentences": [
+    {
+     "segment": "prayer-mind",
+     "text": "I give you every what if.",
+     "start": 291.06,
+     "end": 293.193
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace my fear with your peace, and let my mind rest in you tonight.",
+     "start": 293.373,
+     "end": 298.664
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "Lord, I pray for every mind that is tired and heavy tonight.",
+     "start": 300.044,
+     "end": 304.439
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "For depression that makes mornings hard.",
+     "start": 304.619,
+     "end": 307.691
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "For anxiety that tightens the chest.",
+     "start": 307.871,
+     "end": 310.772
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "For thoughts that feel too dark to say out loud.",
+     "start": 310.952,
+     "end": 314.408
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "Bring light into those places.",
+     "start": 314.588,
+     "end": 317.063
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "Lead each person to the help they need, the friend, the counsellor, the doctor, and let them never feel ashamed to ask.",
+     "start": 317.243,
+     "end": 326.011
+    },
+    {
+     "segment": "scripture-5",
+     "text": "Be still, and know that I am God.",
+     "start": 327.391,
+     "end": 330.1
+    }
+   ],
+   "segments": [
+    "prayer-mind",
+    "prayer-mental",
+    "scripture-5"
+   ],
+   "reference": "Psalm 46:10 (KJV)",
+   "measured_score": 0.8067,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.33707865168539325,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9616000000000008
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Explicitly mentions depression and anxiety, encourages professional help safely.",
+    "hook_line": "I give you every what if.",
+    "title": "A Prayer for Depression and Heavy Minds"
+   },
+   "final_score": 0.8477,
+   "hook": "I give you every what if.",
+   "title": "A Prayer for Depression and Heavy Minds"
+  },
+  {
+   "start": 706.625,
+   "end": 757.141,
+   "sentences": [
+    {
+     "segment": "stillness-2",
+     "text": "Let God hold you.",
+     "start": 706.625,
+     "end": 708.439
+    },
+    {
+     "segment": "declaration",
+     "text": "Say these words with me quietly, as you rest.",
+     "start": 710.619,
+     "end": 714.203
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my healer.",
+     "start": 714.383,
+     "end": 716.452
+    },
+    {
+     "segment": "declaration",
+     "text": "He binds up my wounds.",
+     "start": 716.632,
+     "end": 718.829
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone in this bed.",
+     "start": 719.009,
+     "end": 721.484
+    },
+    {
+     "segment": "declaration",
+     "text": "My body, my heart and my mind are in his hands.",
+     "start": 721.664,
+     "end": 725.611
+    },
+    {
+     "segment": "declaration",
+     "text": "I will rest tonight, and he will renew me.",
+     "start": 725.791,
+     "end": 728.884
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I laid me down and slept;",
+     "start": 730.564,
+     "end": 732.889
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I awaked;",
+     "start": 733.069,
+     "end": 734.413
+    },
+    {
+     "segment": "scripture-11",
+     "text": "for the LORD sustained me.",
+     "start": 734.593,
+     "end": 736.791
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "I laid me down and slept;",
+     "start": 738.471,
+     "end": 740.796
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "I awaked;",
+     "start": 740.976,
+     "end": 742.341
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "for the Lord sustained me.",
+     "start": 742.521,
+     "end": 744.719
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "Sleep itself is an act of trust.",
+     "start": 744.899,
+     "end": 747.736
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "You let go of control for hours, and God keeps your heart beating and your lungs breathing.",
+     "start": 747.916,
+     "end": 754.359
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "Tonight, he will sustain you again.",
+     "start": 754.539,
+     "end": 757.141
+    }
+   ],
+   "segments": [
+    "stillness-2",
+    "declaration",
+    "scripture-11",
+    "reflection-sustained"
+   ],
+   "reference": "Psalm 3:5 (KJV)",
+   "measured_score": 0.8636,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5660377358490566,
+    "scripture": 1.0,
+    "promise": 0.7075471698113207,
+    "resolution": 1.0,
+    "length_fit": 0.5793600000000014
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Direct command hook works well for tired viewers.",
+    "hook_line": "Let God hold you tonight.",
+    "title": "Let God Hold You As You Sleep"
+   },
+   "final_score": 0.8404,
+   "hook": "Let God hold you tonight.",
+   "title": "Let God Hold You As You Sleep"
+  },
+  {
+   "start": 1305.347,
+   "end": 1346.297,
+   "sentences": [
+    {
+     "segment": "sleep-reflect-121",
+     "text": "Through every hour of this night, while you rest, God is awake and watching over you.",
+     "start": 1305.347,
+     "end": 1311.427
+    },
+    {
+     "segment": "sleep-reflect-121",
+     "text": "You can let go.",
+     "start": 1311.607,
+     "end": 1313.228
+    },
+    {
+     "segment": "sleep-reflect-121",
+     "text": "He will not.",
+     "start": 1313.408,
+     "end": 1314.837
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "Be careful for nothing;",
+     "start": 1316.217,
+     "end": 1318.18
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+     "start": 1318.36,
+     "end": 1325.805
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+     "start": 1325.985,
+     "end": 1333.985
+    },
+    {
+     "segment": "sleep-reflect-phil",
+     "text": "The peace of God shall keep your heart and mind, like a guard at the door.",
+     "start": 1335.365,
+     "end": 1340.848
+    },
+    {
+     "segment": "sleep-reflect-phil",
+     "text": "Whatever news tomorrow brings, tonight that peace stands watch over you.",
+     "start": 1341.028,
+     "end": 1346.297
+    }
+   ],
+   "segments": [
+    "sleep-reflect-121",
+    "sleep-philippians-4",
+    "sleep-reflect-phil"
+   ],
+   "reference": "Philippians 4:6-7 (KJV)",
+   "measured_score": 0.8129,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.7777777777777778,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9619999999999982
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Reassuring message that God stays awake while we sleep.",
+    "hook_line": "While you rest, God is awake.",
+    "title": "God Is Awake and Watching Over You"
+   },
+   "final_score": 0.8402
+  },
+  {
+   "start": 1405.296,
+   "end": 1450.252,
+   "sentences": [
+    {
+     "segment": "sleep-reflect-147",
+     "text": "The same God is binding up your wounds.",
+     "start": 1405.296,
+     "end": 1408.517
+    },
+    {
+     "segment": "sleep-reflect-147",
+     "text": "Nothing about you is too small for his care, and nothing about your pain is too big for his power.",
+     "start": 1408.697,
+     "end": 1415.716
+    },
+    {
+     "segment": "sleep-psalm-3",
+     "text": "But thou, O LORD, art a shield for me;",
+     "start": 1417.096,
+     "end": 1420.445
+    },
+    {
+     "segment": "sleep-psalm-3",
+     "text": "my glory, and the lifter up of mine head.",
+     "start": 1420.625,
+     "end": 1423.761
+    },
+    {
+     "segment": "sleep-psalm-3",
+     "text": "I cried unto the LORD with my voice, and he heard me out of his holy hill.",
+     "start": 1423.941,
+     "end": 1429.68
+    },
+    {
+     "segment": "sleep-psalm-3",
+     "text": "I laid me down and slept;",
+     "start": 1429.86,
+     "end": 1432.185
+    },
+    {
+     "segment": "sleep-psalm-3",
+     "text": "I awaked;",
+     "start": 1432.365,
+     "end": 1433.709
+    },
+    {
+     "segment": "sleep-psalm-3",
+     "text": "for the LORD sustained me.",
+     "start": 1433.889,
+     "end": 1436.087
+    },
+    {
+     "segment": "sleep-reflect-3",
+     "text": "The lifter up of mine head.",
+     "start": 1437.467,
+     "end": 1439.707
+    },
+    {
+     "segment": "sleep-reflect-3",
+     "text": "When illness or sorrow bows your head low, God gently lifts it again.",
+     "start": 1439.887,
+     "end": 1445.433
+    },
+    {
+     "segment": "sleep-reflect-3",
+     "text": "Lay your head down now.",
+     "start": 1445.613,
+     "end": 1447.597
+    },
+    {
+     "segment": "sleep-reflect-3",
+     "text": "He will lift it up in the morning.",
+     "start": 1447.777,
+     "end": 1450.252
+    }
+   ],
+   "segments": [
+    "sleep-reflect-147",
+    "sleep-psalm-3",
+    "sleep-reflect-3"
+   ],
+   "reference": "Psalm 3:3-5 (KJV)",
+   "measured_score": 0.8228,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.4629629629629629,
+    "scripture": 1.0,
+    "promise": 0.23148148148148148,
+    "resolution": 1.0,
+    "length_fit": 0.8017600000000038
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Uplifting focus on God lifting the head in sorrow.",
+    "hook_line": "Nothing about your pain is too big.",
+    "title": "When Sorrow Bows Your Head Low"
+   },
+   "final_score": 0.8391
+  },
+  {
+   "start": 240.169,
+   "end": 278.997,
+   "sentences": [
+    {
+     "segment": "prayer-heart",
+     "text": "I do not have to hide them from you.",
+     "start": 240.169,
+     "end": 242.879
+    },
+    {
+     "segment": "prayer-heart",
+     "text": "Bind up these wounds, Lord, the way only you can.",
+     "start": 243.059,
+     "end": 247.091
+    },
+    {
+     "segment": "scripture-4",
+     "text": "But he was wounded for our transgressions, he was bruised for our iniquities:",
+     "start": 248.471,
+     "end": 253.889
+    },
+    {
+     "segment": "scripture-4",
+     "text": "the chastisement of our peace was upon him;",
+     "start": 254.069,
+     "end": 257.781
+    },
+    {
+     "segment": "scripture-4",
+     "text": "and with his stripes we are healed.",
+     "start": 257.961,
+     "end": 260.351
+    },
+    {
+     "segment": "reflection-4",
+     "text": "Before Jesus ever healed anyone, he chose to be wounded himself.",
+     "start": 262.031,
+     "end": 267.321
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He knows pain from the inside.",
+     "start": 267.501,
+     "end": 269.955
+    },
+    {
+     "segment": "reflection-4",
+     "text": "So when you bring him your pain tonight, you are not bringing it to someone distant.",
+     "start": 270.135,
+     "end": 275.575
+    },
+    {
+     "segment": "reflection-4",
+     "text": "You are bringing it to someone who understands.",
+     "start": 275.755,
+     "end": 278.997
+    }
+   ],
+   "segments": [
+    "prayer-heart",
+    "scripture-4",
+    "reflection-4"
+   ],
+   "reference": "Isaiah 53:5 (KJV)",
+   "measured_score": 0.8428,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6818181818181818,
+    "scripture": 1.0,
+    "promise": 0.8522727272727273,
+    "resolution": 0.4,
+    "length_fit": 0.9531200000000001
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Strong theological anchor on Jesus understanding personal pain.",
+    "hook_line": "You do not have to hide your pain.",
+    "title": "He Knows Your Pain From the Inside"
+   },
+   "final_score": 0.8371
+  },
+  {
+   "start": 710.619,
+   "end": 757.141,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "Say these words with me quietly, as you rest.",
+     "start": 710.619,
+     "end": 714.203
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my healer.",
+     "start": 714.383,
+     "end": 716.452
+    },
+    {
+     "segment": "declaration",
+     "text": "He binds up my wounds.",
+     "start": 716.632,
+     "end": 718.829
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone in this bed.",
+     "start": 719.009,
+     "end": 721.484
+    },
+    {
+     "segment": "declaration",
+     "text": "My body, my heart and my mind are in his hands.",
+     "start": 721.664,
+     "end": 725.611
+    },
+    {
+     "segment": "declaration",
+     "text": "I will rest tonight, and he will renew me.",
+     "start": 725.791,
+     "end": 728.884
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I laid me down and slept;",
+     "start": 730.564,
+     "end": 732.889
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I awaked;",
+     "start": 733.069,
+     "end": 734.413
+    },
+    {
+     "segment": "scripture-11",
+     "text": "for the LORD sustained me.",
+     "start": 734.593,
+     "end": 736.791
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "I laid me down and slept;",
+     "start": 738.471,
+     "end": 740.796
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "I awaked;",
+     "start": 740.976,
+     "end": 742.341
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "for the Lord sustained me.",
+     "start": 742.521,
+     "end": 744.719
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "Sleep itself is an act of trust.",
+     "start": 744.899,
+     "end": 747.736
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "You let go of control for hours, and God keeps your heart beating and your lungs breathing.",
+     "start": 747.916,
+     "end": 754.359
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "Tonight, he will sustain you again.",
+     "start": 754.539,
+     "end": 757.141
+    }
+   ],
+   "segments": [
+    "declaration",
+    "scripture-11",
+    "reflection-sustained"
+   ],
+   "reference": "Psalm 3:5 (KJV)",
+   "measured_score": 0.871,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.49019607843137253,
+    "scripture": 1.0,
+    "promise": 0.7352941176470589,
+    "resolution": 1.0,
+    "length_fit": 0.7391200000000027
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 6.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Gentle opening, strong sleep theme, flows well back to the start.",
+    "hook_line": "Rest tonight, you are not alone.",
+    "title": "A Bedtime Prayer for Peace and Rest"
+   },
+   "final_score": 0.8284
+  },
+  {
+   "start": 673.625,
+   "end": 721.484,
+   "sentences": [
+    {
+     "segment": "prayer-sleep",
+     "text": "If pain wakes me, let me feel your nearness.",
+     "start": 673.625,
+     "end": 677.06
+    },
+    {
+     "segment": "prayer-sleep",
+     "text": "If fear wakes me, let me hear your peace.",
+     "start": 677.24,
+     "end": 680.44
+    },
+    {
+     "segment": "prayer-sleep",
+     "text": "And let me fall asleep again in your arms.",
+     "start": 680.62,
+     "end": 683.777
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "I surrender my body, my heart and my future to you tonight.",
+     "start": 685.157,
+     "end": 689.872
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "I do not have to hold everything together.",
+     "start": 690.052,
+     "end": 693.124
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "You hold me.",
+     "start": 693.304,
+     "end": 694.691
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "Into your hands I commit my spirit, as I rest.",
+     "start": 694.871,
+     "end": 698.753
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Breathe in again, slowly.",
+     "start": 700.133,
+     "end": 702.331
+    },
+    {
+     "segment": "stillness-2",
+     "text": "And let it out.",
+     "start": 702.511,
+     "end": 704.068
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let every muscle relax.",
+     "start": 704.248,
+     "end": 706.445
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let God hold you.",
+     "start": 706.625,
+     "end": 708.439
+    },
+    {
+     "segment": "declaration",
+     "text": "Say these words with me quietly, as you rest.",
+     "start": 710.619,
+     "end": 714.203
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my healer.",
+     "start": 714.383,
+     "end": 716.452
+    },
+    {
+     "segment": "declaration",
+     "text": "He binds up my wounds.",
+     "start": 716.632,
+     "end": 718.829
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone in this bed.",
+     "start": 719.009,
+     "end": 721.484
+    }
+   ],
+   "segments": [
+    "prayer-sleep",
+    "prayer-surrender",
+    "stillness-2",
+    "declaration"
+   ],
+   "reference": null,
+   "measured_score": 0.8443,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7843137254901961,
+    "scripture": 0.4,
+    "promise": 0.9803921568627451,
+    "resolution": 1.0,
+    "length_fit": 0.6856399999999985
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Addresses physical pain and fear, offering immediate comfort.",
+    "hook_line": "If pain wakes you, feel His nearness.",
+    "title": "Prayer for Pain and Restful Sleep"
+   },
+   "final_score": 0.8227
+  },
+  {
+   "start": 813.728,
+   "end": 854.417,
+   "sentences": [
+    {
+     "segment": "sleep-relax-1",
+     "text": "Let your face soften.",
+     "start": 813.728,
+     "end": 815.669
+    },
+    {
+     "segment": "sleep-relax-1",
+     "text": "Let your eyes close.",
+     "start": 815.849,
+     "end": 817.791
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your shoulders drop.",
+     "start": 819.171,
+     "end": 821.155
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your arms rest heavy at your sides.",
+     "start": 821.335,
+     "end": 824.343
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your hands open.",
+     "start": 824.523,
+     "end": 826.443
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Feel the mattress holding you, the pillow supporting your head.",
+     "start": 826.623,
+     "end": 831.081
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "You do not have to hold yourself up tonight.",
+     "start": 831.261,
+     "end": 834.525
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "You are held.",
+     "start": 834.705,
+     "end": 836.135
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet.",
+     "start": 837.515,
+     "end": 846.389
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Every part of you is known by the God who made you.",
+     "start": 846.569,
+     "end": 850.559
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Every cell is in his care.",
+     "start": 850.739,
+     "end": 852.915
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Rest now.",
+     "start": 853.095,
+     "end": 854.417
+    }
+   ],
+   "segments": [
+    "sleep-relax-1",
+    "sleep-relax-2",
+    "sleep-relax-3"
+   ],
+   "reference": null,
+   "measured_score": 0.8015,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.8426966292134831,
+    "resolution": 0.4,
+    "length_fit": 0.9724399999999969
+   },
+   "rubric": {
+    "index": 14,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Starts with facial softening, highly effective for somatic calm.",
+    "hook_line": "Let your face soften right now.",
+    "title": "Release Tension With This Prayer"
+   },
+   "final_score": 0.8156
+  },
+  {
+   "start": 815.849,
+   "end": 854.417,
+   "sentences": [
+    {
+     "segment": "sleep-relax-1",
+     "text": "Let your eyes close.",
+     "start": 815.849,
+     "end": 817.791
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your shoulders drop.",
+     "start": 819.171,
+     "end": 821.155
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your arms rest heavy at your sides.",
+     "start": 821.335,
+     "end": 824.343
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your hands open.",
+     "start": 824.523,
+     "end": 826.443
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Feel the mattress holding you, the pillow supporting your head.",
+     "start": 826.623,
+     "end": 831.081
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "You do not have to hold yourself up tonight.",
+     "start": 831.261,
+     "end": 834.525
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "You are held.",
+     "start": 834.705,
+     "end": 836.135
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet.",
+     "start": 837.515,
+     "end": 846.389
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Every part of you is known by the God who made you.",
+     "start": 846.569,
+     "end": 850.559
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Every cell is in his care.",
+     "start": 850.739,
+     "end": 852.915
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Rest now.",
+     "start": 853.095,
+     "end": 854.417
+    }
+   ],
+   "segments": [
+    "sleep-relax-1",
+    "sleep-relax-2",
+    "sleep-relax-3"
+   ],
+   "reference": null,
+   "measured_score": 0.8025,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.8823529411764706,
+    "resolution": 0.4,
+    "length_fit": 0.9427199999999993
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Very somatic, great guided relaxation for physical anxiety.",
+    "hook_line": "You do not have to hold yourself.",
+    "title": "Guided Christian Relaxation for Sleep"
+   },
+   "final_score": 0.811
+  },
+  {
+   "start": 819.171,
+   "end": 858.165,
+   "sentences": [
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your shoulders drop.",
+     "start": 819.171,
+     "end": 821.155
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your arms rest heavy at your sides.",
+     "start": 821.335,
+     "end": 824.343
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Let your hands open.",
+     "start": 824.523,
+     "end": 826.443
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "Feel the mattress holding you, the pillow supporting your head.",
+     "start": 826.623,
+     "end": 831.081
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "You do not have to hold yourself up tonight.",
+     "start": 831.261,
+     "end": 834.525
+    },
+    {
+     "segment": "sleep-relax-2",
+     "text": "You are held.",
+     "start": 834.705,
+     "end": 836.135
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet.",
+     "start": 837.515,
+     "end": 846.389
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Every part of you is known by the God who made you.",
+     "start": 846.569,
+     "end": 850.559
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Every cell is in his care.",
+     "start": 850.739,
+     "end": 852.915
+    },
+    {
+     "segment": "sleep-relax-3",
+     "text": "Rest now.",
+     "start": 853.095,
+     "end": 854.417
+    },
+    {
+     "segment": "sleep-relax-4",
+     "text": "Now let the day itself go.",
+     "start": 855.797,
+     "end": 858.165
+    }
+   ],
+   "segments": [
+    "sleep-relax-2",
+    "sleep-relax-3",
+    "sleep-relax-4"
+   ],
+   "reference": null,
+   "measured_score": 0.8022,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 0.4,
+    "promise": 0.8620689655172413,
+    "resolution": 0.4,
+    "length_fit": 0.9597599999999966
+   },
+   "rubric": {
+    "index": 13,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Encourages letting go of the day's burdens completely.",
+    "hook_line": "Let your shoulders drop right now.",
+    "title": "Let the Day Go and Rest in Him"
+   },
+   "final_score": 0.8109
+  },
+  {
+   "start": 243.059,
+   "end": 282.788,
+   "sentences": [
+    {
+     "segment": "prayer-heart",
+     "text": "Bind up these wounds, Lord, the way only you can.",
+     "start": 243.059,
+     "end": 247.091
+    },
+    {
+     "segment": "scripture-4",
+     "text": "But he was wounded for our transgressions, he was bruised for our iniquities:",
+     "start": 248.471,
+     "end": 253.889
+    },
+    {
+     "segment": "scripture-4",
+     "text": "the chastisement of our peace was upon him;",
+     "start": 254.069,
+     "end": 257.781
+    },
+    {
+     "segment": "scripture-4",
+     "text": "and with his stripes we are healed.",
+     "start": 257.961,
+     "end": 260.351
+    },
+    {
+     "segment": "reflection-4",
+     "text": "Before Jesus ever healed anyone, he chose to be wounded himself.",
+     "start": 262.031,
+     "end": 267.321
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He knows pain from the inside.",
+     "start": 267.501,
+     "end": 269.955
+    },
+    {
+     "segment": "reflection-4",
+     "text": "So when you bring him your pain tonight, you are not bringing it to someone distant.",
+     "start": 270.135,
+     "end": 275.575
+    },
+    {
+     "segment": "reflection-4",
+     "text": "You are bringing it to someone who understands.",
+     "start": 275.755,
+     "end": 278.997
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Lord, heal my anxious mind.",
+     "start": 280.377,
+     "end": 282.788
+    }
+   ],
+   "segments": [
+    "prayer-heart",
+    "scripture-4",
+    "reflection-4",
+    "prayer-mind"
+   ],
+   "reference": "Isaiah 53:5 (KJV)",
+   "measured_score": 0.8375,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5952380952380951,
+    "scripture": 1.0,
+    "promise": 0.8928571428571429,
+    "resolution": 0.4,
+    "length_fit": 0.9891600000000005
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Direct plea for healing anxiety, deeply emotional payoff.",
+    "hook_line": "Bind up these wounds, Lord.",
+    "title": "A Prayer to Heal Your Anxious Mind"
+   },
+   "final_score": 0.81
+  },
+  {
+   "start": 677.24,
+   "end": 721.484,
+   "sentences": [
+    {
+     "segment": "prayer-sleep",
+     "text": "If fear wakes me, let me hear your peace.",
+     "start": 677.24,
+     "end": 680.44
+    },
+    {
+     "segment": "prayer-sleep",
+     "text": "And let me fall asleep again in your arms.",
+     "start": 680.62,
+     "end": 683.777
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "I surrender my body, my heart and my future to you tonight.",
+     "start": 685.157,
+     "end": 689.872
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "I do not have to hold everything together.",
+     "start": 690.052,
+     "end": 693.124
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "You hold me.",
+     "start": 693.304,
+     "end": 694.691
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "Into your hands I commit my spirit, as I rest.",
+     "start": 694.871,
+     "end": 698.753
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Breathe in again, slowly.",
+     "start": 700.133,
+     "end": 702.331
+    },
+    {
+     "segment": "stillness-2",
+     "text": "And let it out.",
+     "start": 702.511,
+     "end": 704.068
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let every muscle relax.",
+     "start": 704.248,
+     "end": 706.445
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let God hold you.",
+     "start": 706.625,
+     "end": 708.439
+    },
+    {
+     "segment": "declaration",
+     "text": "Say these words with me quietly, as you rest.",
+     "start": 710.619,
+     "end": 714.203
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my healer.",
+     "start": 714.383,
+     "end": 716.452
+    },
+    {
+     "segment": "declaration",
+     "text": "He binds up my wounds.",
+     "start": 716.632,
+     "end": 718.829
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone in this bed.",
+     "start": 719.009,
+     "end": 721.484
+    }
+   ],
+   "segments": [
+    "prayer-sleep",
+    "prayer-surrender",
+    "stillness-2",
+    "declaration"
+   ],
+   "reference": null,
+   "measured_score": 0.8559,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7526881720430108,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.8302399999999989
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.5,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.0,
+    "shareability": 6.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Focuses on fear and surrender, very relatable for insomnia sufferers.",
+    "hook_line": "If fear wakes you, hear His peace.",
+    "title": "Prayer for When Fear Wakes You"
+   },
+   "final_score": 0.8074
+  },
+  {
+   "start": 694.871,
+   "end": 736.791,
+   "sentences": [
+    {
+     "segment": "prayer-surrender",
+     "text": "Into your hands I commit my spirit, as I rest.",
+     "start": 694.871,
+     "end": 698.753
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Breathe in again, slowly.",
+     "start": 700.133,
+     "end": 702.331
+    },
+    {
+     "segment": "stillness-2",
+     "text": "And let it out.",
+     "start": 702.511,
+     "end": 704.068
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let every muscle relax.",
+     "start": 704.248,
+     "end": 706.445
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let God hold you.",
+     "start": 706.625,
+     "end": 708.439
+    },
+    {
+     "segment": "declaration",
+     "text": "Say these words with me quietly, as you rest.",
+     "start": 710.619,
+     "end": 714.203
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my healer.",
+     "start": 714.383,
+     "end": 716.452
+    },
+    {
+     "segment": "declaration",
+     "text": "He binds up my wounds.",
+     "start": 716.632,
+     "end": 718.829
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone in this bed.",
+     "start": 719.009,
+     "end": 721.484
+    },
+    {
+     "segment": "declaration",
+     "text": "My body, my heart and my mind are in his hands.",
+     "start": 721.664,
+     "end": 725.611
+    },
+    {
+     "segment": "declaration",
+     "text": "I will rest tonight, and he will renew me.",
+     "start": 725.791,
+     "end": 728.884
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I laid me down and slept;",
+     "start": 730.564,
+     "end": 732.889
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I awaked;",
+     "start": 733.069,
+     "end": 734.413
+    },
+    {
+     "segment": "scripture-11",
+     "text": "for the LORD sustained me.",
+     "start": 734.593,
+     "end": 736.791
+    }
+   ],
+   "segments": [
+    "prayer-surrender",
+    "stillness-2",
+    "declaration",
+    "scripture-11"
+   ],
+   "reference": "Psalm 3:5 (KJV)",
+   "measured_score": 0.8053,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.3529411764705882,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9231999999999971
+   },
+   "rubric": {
+    "index": 11,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 6.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Calming transition from breathing exercises into scripture.",
+    "hook_line": "Into Your hands I commit my spirit.",
+    "title": "Commit Your Sleep Into His Hands"
+   },
+   "final_score": 0.8021
+  },
+  {
+   "start": 693.304,
+   "end": 728.884,
+   "sentences": [
+    {
+     "segment": "prayer-surrender",
+     "text": "You hold me.",
+     "start": 693.304,
+     "end": 694.691
+    },
+    {
+     "segment": "prayer-surrender",
+     "text": "Into your hands I commit my spirit, as I rest.",
+     "start": 694.871,
+     "end": 698.753
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Breathe in again, slowly.",
+     "start": 700.133,
+     "end": 702.331
+    },
+    {
+     "segment": "stillness-2",
+     "text": "And let it out.",
+     "start": 702.511,
+     "end": 704.068
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let every muscle relax.",
+     "start": 704.248,
+     "end": 706.445
+    },
+    {
+     "segment": "stillness-2",
+     "text": "Let God hold you.",
+     "start": 706.625,
+     "end": 708.439
+    },
+    {
+     "segment": "declaration",
+     "text": "Say these words with me quietly, as you rest.",
+     "start": 710.619,
+     "end": 714.203
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my healer.",
+     "start": 714.383,
+     "end": 716.452
+    },
+    {
+     "segment": "declaration",
+     "text": "He binds up my wounds.",
+     "start": 716.632,
+     "end": 718.829
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone in this bed.",
+     "start": 719.009,
+     "end": 721.484
+    },
+    {
+     "segment": "declaration",
+     "text": "My body, my heart and my mind are in his hands.",
+     "start": 721.664,
+     "end": 725.611
+    },
+    {
+     "segment": "declaration",
+     "text": "I will rest tonight, and he will renew me.",
+     "start": 725.791,
+     "end": 728.884
+    }
+   ],
+   "segments": [
+    "prayer-surrender",
+    "stillness-2",
+    "declaration"
+   ],
+   "reference": null,
+   "measured_score": 0.8223,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5333333333333333,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.8232000000000016
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 6.5,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.0,
+    "shareability": 6.0,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Good relaxation flow, mid-sentence start slightly hurts the hook.",
+    "hook_line": "Let every muscle relax right now.",
+    "title": "Release Your Tension Into His Hands"
+   },
+   "final_score": 0.7939
+  }
+ ],
+ "chosen": [
+  {
+   "start": 1311.607,
+   "end": 1346.297,
+   "sentences": [
+    {
+     "segment": "sleep-reflect-121",
+     "text": "You can let go.",
+     "start": 1311.607,
+     "end": 1313.228
+    },
+    {
+     "segment": "sleep-reflect-121",
+     "text": "He will not.",
+     "start": 1313.408,
+     "end": 1314.837
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "Be careful for nothing;",
+     "start": 1316.217,
+     "end": 1318.18
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+     "start": 1318.36,
+     "end": 1325.805
+    },
+    {
+     "segment": "sleep-philippians-4",
+     "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+     "start": 1325.985,
+     "end": 1333.985
+    },
+    {
+     "segment": "sleep-reflect-phil",
+     "text": "The peace of God shall keep your heart and mind, like a guard at the door.",
+     "start": 1335.365,
+     "end": 1340.848
+    },
+    {
+     "segment": "sleep-reflect-phil",
+     "text": "Whatever news tomorrow brings, tonight that peace stands watch over you.",
+     "start": 1341.028,
+     "end": 1346.297
+    }
+   ],
+   "segments": [
+    "sleep-reflect-121",
+    "sleep-philippians-4",
+    "sleep-reflect-phil"
+   ],
+   "reference": "Philippians 4:6-7 (KJV)",
+   "measured_score": 0.8401,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6756756756756757,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.7876000000000022
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Powerful reminder to let go, excellent verse integration.",
+    "hook_line": "You can let go. He will not.",
+    "title": "His Peace Stands Watch Over You"
+   },
+   "final_score": 0.856,
+   "hook": "You can let go. He will not.",
+   "title": "His Peace Stands Watch Over You"
+  },
+  {
+   "start": 291.06,
+   "end": 330.1,
+   "sentences": [
+    {
+     "segment": "prayer-mind",
+     "text": "I give you every what if.",
+     "start": 291.06,
+     "end": 293.193
+    },
+    {
+     "segment": "prayer-mind",
+     "text": "Replace my fear with your peace, and let my mind rest in you tonight.",
+     "start": 293.373,
+     "end": 298.664
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "Lord, I pray for every mind that is tired and heavy tonight.",
+     "start": 300.044,
+     "end": 304.439
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "For depression that makes mornings hard.",
+     "start": 304.619,
+     "end": 307.691
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "For anxiety that tightens the chest.",
+     "start": 307.871,
+     "end": 310.772
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "For thoughts that feel too dark to say out loud.",
+     "start": 310.952,
+     "end": 314.408
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "Bring light into those places.",
+     "start": 314.588,
+     "end": 317.063
+    },
+    {
+     "segment": "prayer-mental",
+     "text": "Lead each person to the help they need, the friend, the counsellor, the doctor, and let them never feel ashamed to ask.",
+     "start": 317.243,
+     "end": 326.011
+    },
+    {
+     "segment": "scripture-5",
+     "text": "Be still, and know that I am God.",
+     "start": 327.391,
+     "end": 330.1
+    }
+   ],
+   "segments": [
+    "prayer-mind",
+    "prayer-mental",
+    "scripture-5"
+   ],
+   "reference": "Psalm 46:10 (KJV)",
+   "measured_score": 0.8067,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.33707865168539325,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9616000000000008
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Explicitly mentions depression and anxiety, encourages professional help safely.",
+    "hook_line": "I give you every what if.",
+    "title": "A Prayer for Depression and Heavy Minds"
+   },
+   "final_score": 0.8477,
+   "hook": "I give you every what if.",
+   "title": "A Prayer for Depression and Heavy Minds"
+  },
+  {
+   "start": 706.625,
+   "end": 757.141,
+   "sentences": [
+    {
+     "segment": "stillness-2",
+     "text": "Let God hold you.",
+     "start": 706.625,
+     "end": 708.439
+    },
+    {
+     "segment": "declaration",
+     "text": "Say these words with me quietly, as you rest.",
+     "start": 710.619,
+     "end": 714.203
+    },
+    {
+     "segment": "declaration",
+     "text": "The Lord is my healer.",
+     "start": 714.383,
+     "end": 716.452
+    },
+    {
+     "segment": "declaration",
+     "text": "He binds up my wounds.",
+     "start": 716.632,
+     "end": 718.829
+    },
+    {
+     "segment": "declaration",
+     "text": "I am not alone in this bed.",
+     "start": 719.009,
+     "end": 721.484
+    },
+    {
+     "segment": "declaration",
+     "text": "My body, my heart and my mind are in his hands.",
+     "start": 721.664,
+     "end": 725.611
+    },
+    {
+     "segment": "declaration",
+     "text": "I will rest tonight, and he will renew me.",
+     "start": 725.791,
+     "end": 728.884
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I laid me down and slept;",
+     "start": 730.564,
+     "end": 732.889
+    },
+    {
+     "segment": "scripture-11",
+     "text": "I awaked;",
+     "start": 733.069,
+     "end": 734.413
+    },
+    {
+     "segment": "scripture-11",
+     "text": "for the LORD sustained me.",
+     "start": 734.593,
+     "end": 736.791
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "I laid me down and slept;",
+     "start": 738.471,
+     "end": 740.796
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "I awaked;",
+     "start": 740.976,
+     "end": 742.341
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "for the Lord sustained me.",
+     "start": 742.521,
+     "end": 744.719
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "Sleep itself is an act of trust.",
+     "start": 744.899,
+     "end": 747.736
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "You let go of control for hours, and God keeps your heart beating and your lungs breathing.",
+     "start": 747.916,
+     "end": 754.359
+    },
+    {
+     "segment": "reflection-sustained",
+     "text": "Tonight, he will sustain you again.",
+     "start": 754.539,
+     "end": 757.141
+    }
+   ],
+   "segments": [
+    "stillness-2",
+    "declaration",
+    "scripture-11",
+    "reflection-sustained"
+   ],
+   "reference": "Psalm 3:5 (KJV)",
+   "measured_score": 0.8636,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5660377358490566,
+    "scripture": 1.0,
+    "promise": 0.7075471698113207,
+    "resolution": 1.0,
+    "length_fit": 0.5793600000000014
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Direct command hook works well for tired viewers.",
+    "hook_line": "Let God hold you tonight.",
+    "title": "Let God Hold You As You Sleep"
+   },
+   "final_score": 0.8404,
+   "hook": "Let God hold you tonight.",
+   "title": "Let God Hold You As You Sleep"
+  }
+ ]
+}
