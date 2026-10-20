@@ -293,6 +293,16 @@
     "file": "migration/production/test_render_queue.py",
     "contains": "def test_per_minute_or_unnamed_quota_waits_minutes_not_a_day"
    }
+  },
+  {
+   "id": "E31",
+   "date": "2026-10-20",
+   "error": "Shorts tests read live pilot-006 production inputs; a re-render removed selection.json and broke main CI",
+   "fix": "Freeze byte-identical historical fixtures from 4ca2b3b and point the test at them without changing assertions",
+   "antidote": {
+    "file": "migration/production/test_no_live_pilot_data.py",
+    "contains": "def test_no_live_pilot_data"
+   }
   }
  ]
 }
