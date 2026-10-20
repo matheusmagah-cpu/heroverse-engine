@@ -33,6 +33,33 @@ def pilot(root, name, publish_at, images_done=True, rendered=False):
 
 
 class Queue(unittest.TestCase):
+    def test_quota_pending_suppresses_same_and_other_shorts(self):
+        import contextlib, io
+        from unittest.mock import patch
+        from datetime import timedelta
+        for quota_ids, age in (([], 0), (['RequestsPerDay'], 0)):
+            with tempfile.TemporaryDirectory() as t:
+                for name in ('pilot-005','pilot-006'):
+                    pilot(t,name,'2026-10-19T10:00:00Z',rendered=True)
+                    d=Path(t)/name;(d/'shorts').mkdir();(d/'shorts/inputs.json').write_text('{}')
+                    (d/'out/review.json').write_text(json.dumps({'status':'FAIL','output_sha256':'a'*64}))
+                d=Path(t)/'pilot-005'
+                (d/'out/review.json').write_text(json.dumps({'status':'ERROR','error':'QUOTA',
+                    'failed_at':NOW.isoformat(),'quota_ids':quota_ids,'output_sha256':'a'*64}))
+                class Fixed(rq.datetime):
+                    @classmethod
+                    def now(cls,tz=None): return NOW
+                # Isolate scheduling from qualification, tested by test_shorts_prerequisite.
+                with patch.object(rq,'datetime',Fixed), patch.object(rq,'shorts_ready',return_value=True):
+                    buf=io.StringIO()
+                    with contextlib.redirect_stdout(buf):rq.main(t,str(Path(t)/'none'),'reconcile')
+                    self.assertEqual(buf.getvalue(),'')
+                    (d/'out/review.json').write_text(json.dumps({'status':'ERROR','error':'QUOTA',
+                        'failed_at':(NOW-timedelta(days=1)).isoformat(),'quota_ids':quota_ids,'output_sha256':'a'*64}))
+                    buf=io.StringIO()
+                    with contextlib.redirect_stdout(buf):rq.main(t,str(Path(t)/'none'),'reconcile')
+                    self.assertEqual(buf.getvalue(),'approve pilot-005\n')
+
     def test_current_render_requires_complete_frozen_v3_binding(self):
         manifest={'output_sha256':'a'*64,'script_sha256':'script'}
         qa={'output_sha256':'a'*64,'criteria_version':rq.STANDARD_QA,'criteria_sha256':rq.STANDARD_QA_SHA256,'status':'PASS'}
@@ -137,7 +164,7 @@ class Queue(unittest.TestCase):
                 rq.datetime = real
             # E25: one approval only, the earliest slot; Shorts wait while an approval is pending (same Gemini quota)
             self.assertEqual(buf.getvalue().split("\n")[:-1], ["publish pilot-004", "approve pilot-003"])
-            for name in ("pilot-003", "pilot-006"):  # approvals done: the Shorts go
+            for name in ("pilot-003", "pilot-006"):  # terminal failures: unqualified longs must not produce Shorts
                 (Path(t) / name / "out" / "review.json").write_text(json.dumps({"status": "FAIL", "output_sha256": "a"*64}))
             (Path(t) / "pilot-006" / "out" / "gate.json").write_text(json.dumps({"decision": "FAIL", "output_sha256": "a"*64}))
             buf = io.StringIO()
@@ -147,7 +174,7 @@ class Queue(unittest.TestCase):
                     rq.main(t, str(Path(t) / "none.json"), "reconcile")
             finally:
                 rq.datetime = real
-            self.assertEqual(buf.getvalue().split("\n")[:-1], ["publish pilot-004", "shorts pilot-005", "shorts pilot-006"])
+            self.assertEqual(buf.getvalue().split("\n")[:-1], ["publish pilot-004"])
 
     def test_publication_hold_dispatches_nothing(self):
         import contextlib, io

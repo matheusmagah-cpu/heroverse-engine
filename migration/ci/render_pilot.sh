@@ -61,22 +61,16 @@ q "$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/w
 end
 
 df -h "$T" | tail -1
-stage "Shorts: analysis of the whole video, own edit per Short, watched review"
+stage "Preserve Shorts inputs for after long qualification"
 mkdir -p "$T/work/shorts"
-HANDOFF=""
-if [ -z "${HERO_GEMINI_API_KEY:-}" ]; then
-  # no Gemini key here (public runner): the Shorts are made privately by shorts.yml from the same voice and figure
-  HANDOFF=1
-  ffmpeg -v error -y -i "$T/work/voice.wav" -c:a flac "$T/voice.flac"
-  vsha=$(sha256sum "$T/voice.flac" | cut -d' ' -f1); fsha=$(sha256sum "$T/in/figure.png" | cut -d' ' -f1)
-  cp "$T/voice.flac" "$T/$PILOT-voice-sha256-$vsha.flac"; cp "$T/in/figure.png" "$T/$PILOT-figure-sha256-$fsha.png"
-  gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
-  printf '{"voice_asset": "%s", "voice_sha256": "%s", "figure_asset": "%s", "figure_sha256": "%s", "render": "%s"}\n' \
-    "$PILOT-voice-sha256-$vsha.flac" "$vsha" "$PILOT-figure-sha256-$fsha.png" "$fsha" "${RUN_LABEL:-run}" > "$T/shorts-inputs.json"
-else ( q "$T/cine/bin/python" -I -B migration/production/shorts_select.py "$T/work/timeline.json" "migration/production/$PILOT/script.json" "$T/work/shorts/selection.json" 3 &&
-  q "$T/cine/bin/python" -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/work/shorts" "$HERO_DEPTH_MODEL" &&
-  q "$T/cine/bin/python" -I -B migration/production/shorts_review.py "$T/work/shorts" 1 ) || echo "SHORTS_FAILED (the long video continues)"
-fi
+# Always hand off: long QA and designated review must finish before Shorts spend quota.
+HANDOFF=1
+ffmpeg -v error -y -i "$T/work/voice.wav" -c:a flac "$T/voice.flac"
+vsha=$(sha256sum "$T/voice.flac" | cut -d' ' -f1); fsha=$(sha256sum "$T/in/figure.png" | cut -d' ' -f1)
+cp "$T/voice.flac" "$T/$PILOT-voice-sha256-$vsha.flac"; cp "$T/in/figure.png" "$T/$PILOT-figure-sha256-$fsha.png"
+gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
+printf '{"voice_asset": "%s", "voice_sha256": "%s", "figure_asset": "%s", "figure_sha256": "%s", "render": "%s"}\n' \
+  "$PILOT-voice-sha256-$vsha.flac" "$vsha" "$PILOT-figure-sha256-$fsha.png" "$fsha" "${RUN_LABEL:-run}" > "$T/shorts-inputs.json"
 end
 
 stage "QA against frozen criteria"
