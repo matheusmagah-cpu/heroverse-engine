@@ -18,6 +18,7 @@ import os
 from pathlib import Path
 import re
 import sys
+from urllib.error import HTTPError
 import urllib.parse
 import urllib.request
 
@@ -191,12 +192,22 @@ def build(client, now, prior_dir=None):
         if not client.can(pages * 2):
             row["uploads_status"] = "NOT_FETCHED_BUDGET"
             continue
-        row["uploads"], row["uploads_truncated"] = uploads(client, row["uploads_playlist"], pages)
-        row["uploads_status"] = "FETCHED"
+        try:
+            row["uploads"], row["uploads_truncated"] = uploads(client, row["uploads_playlist"], pages)
+        except HTTPError as exc:
+            if exc.code != 404:
+                raise
+            row["uploads"] = []
+            row["uploads_truncated"] = False
+            row["uploads_status"] = "UNAVAILABLE_404"
+        else:
+            row["uploads_status"] = "FETCHED"
     return {"version": "market-panel-v3", "captured_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "queries": list(QUERIES), "cross_niche_queries": list(CROSS_NICHE_QUERIES), "discovery_window_days": DISCOVERY_DAYS, "young_days": YOUNG_DAYS,
             "region_code": "US", "relevance_language": "en",
             "channels": sorted(info.values(), key=lambda r: r["channel_id"]),
+            "unavailable_channels": sorted(cid for cid, row in info.items()
+                                           if row["uploads_status"] == "UNAVAILABLE_404"),
             "data_api_units": client.units, "calls": client.calls, "paid_calls": 0,
             "scope": "PUBLIC_STATISTICS_ONLY; CTR, retention, revenue, RPM and monetization status are not public"}
 
@@ -230,16 +241,25 @@ def compact(record):
     return {k: record[k] for k in record if k != "channels"} | {"version": "market-panel-compact-v1", "channels": rows}
 
 
-if __name__ == "__main__":
-    out = Path(sys.argv[1])
-    client = Client(access_token(), int(sys.argv[2]) if len(sys.argv) > 2 else 7500)
-    prior = Path(sys.argv[3]).parent if len(sys.argv) > 3 else None
+def main(argv=None):
+    argv = sys.argv if argv is None else argv
+    out = Path(argv[1])
+    client = Client(access_token(), int(argv[2]) if len(argv) > 2 else 7500)
+    prior = Path(argv[3]).parent if len(argv) > 3 else None
     record = build(client, datetime.now(timezone.utc), prior)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(record, ensure_ascii=False) + "\n")
-    if len(sys.argv) > 3:
-        Path(sys.argv[3]).parent.mkdir(parents=True, exist_ok=True)
-        Path(sys.argv[3]).write_text(json.dumps(compact(record), ensure_ascii=False, indent=0) + "\n")
+    if len(argv) > 3:
+        Path(argv[3]).parent.mkdir(parents=True, exist_ok=True)
+        Path(argv[3]).write_text(json.dumps(compact(record), ensure_ascii=False, indent=0) + "\n")
     young = [c for c in record["channels"] if c.get("uploads_status") == "FETCHED"]
     print(json.dumps({"channels": len(record["channels"]), "young_with_uploads": len(young),
                       "units": record["data_api_units"], "calls": record["calls"]}))
+    if len(record["unavailable_channels"]) * 4 > len(record["channels"]):
+        print("PANEL_MOSTLY_UNAVAILABLE", file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
