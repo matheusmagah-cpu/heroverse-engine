@@ -33,6 +33,67 @@ class Check(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             return sc.check(make(t, mutate, **kw))[0]
 
+    def overlap_fixture(self, mine, others):
+        """Known background sets; other pilots need only script.json, not publication."""
+        with tempfile.TemporaryDirectory() as t:
+            pilot = make(t, name="pilot-008")
+            # Remove the unrelated source fixture; isolate the known-answer sets.
+            shutil.rmtree(Path(t) / "pilot-003")
+            script = json.loads((pilot / "script.json").read_text())
+            script["backgrounds"] = mine
+            script["figure"] = None
+            (pilot / "script.json").write_text(json.dumps(script))
+            (pilot / "images.json").write_text(json.dumps({"images": [{"id": x} for x in set(mine)]}))
+            for name, backgrounds in others.items():
+                other = Path(t) / name
+                other.mkdir()
+                (other / "script.json").write_text(json.dumps({"backgrounds": backgrounds, "segments": []}))
+            return sc.check(pilot, Path(t))
+
+    def test_image_set_overlap_identical_008_012(self):
+        problems, stats = self.overlap_fixture(["a", "b"], {"pilot-012": ["a", "b"]})
+        self.assertEqual(problems, ["image_set_overlap vs pilot-012: 1.000000 > 0.5"])
+        self.assertEqual(stats["image_set_overlap"]["status"], "FAIL")
+        print("KNOWN ANSWER identical 008=012: FAIL Jaccard=1")
+
+    def test_image_set_overlap_0529_fails(self):
+        mine = [f"bg-{i}" for i in range(12)]
+        other = mine[:9] + [f"other-{i}" for i in range(5)]
+        problems, stats = self.overlap_fixture(mine, {"pilot-012": other})
+        self.assertEqual(problems, ["image_set_overlap vs pilot-012: 0.529412 > 0.5"])
+        self.assertAlmostEqual(stats["image_set_overlap"]["comparisons"][0]["jaccard"], 9 / 17)
+        print("KNOWN ANSWER overlap 9/17=0.529412: FAIL")
+
+    def test_image_set_overlap_low_passes(self):
+        problems, stats = self.overlap_fixture(["a", "b"], {"pilot-012": ["a", "c"]})
+        self.assertEqual(problems, [])
+        self.assertEqual(stats["image_set_overlap"]["status"], "PASS")
+        self.assertAlmostEqual(stats["image_set_overlap"]["comparisons"][0]["jaccard"], 1 / 3)
+        print("KNOWN ANSWER overlap 1/3<=0.35: PASS")
+
+    def test_image_set_overlap_boundary_all_pilots_and_duplicates(self):
+        problems, stats = self.overlap_fixture(["a", "a", "b"], {
+            "pilot-002": ["a"], "pilot-012": ["a", "b"], "pilot-099": ["z"]})
+        self.assertEqual(problems, ["image_set_overlap vs pilot-012: 1.000000 > 0.5"])
+        self.assertEqual([r["jaccard"] for r in stats["image_set_overlap"]["comparisons"]], [0.5, 1.0, 0.0])
+        self.assertEqual([r["pilot"] for r in stats["image_set_overlap"]["comparisons"]],
+                         ["pilot-002", "pilot-012", "pilot-099"])
+        print("KNOWN ANSWER boundary0.5 PASS; unpublished identical FAIL; duplicate IDs deduplicated")
+
+    def test_image_set_overlap_uses_approval_limit_and_excludes_self(self):
+        original = sc.three_stage.IMAGE_SHARE_MAX
+        try:
+            sc.three_stage.IMAGE_SHARE_MAX = 0.25
+            problems, stats = self.overlap_fixture(["a", "b"], {"pilot-012": ["a", "c"]})
+            self.assertEqual(problems, ["image_set_overlap vs pilot-012: 0.333333 > 0.25"])
+            self.assertEqual(stats["image_set_overlap"]["limit"], 0.25)
+        finally:
+            sc.three_stage.IMAGE_SHARE_MAX = original
+        problems, stats = self.overlap_fixture(["a", "b"], {})
+        self.assertEqual(problems, [])
+        self.assertEqual(stats["image_set_overlap"]["comparisons"], [])
+        self.assertEqual(sc.three_stage.IMAGE_SHARE_MAX, 0.5)
+
     def test_real_pilot_passes(self):
         self.assertEqual(self.run_check(), [])
 

@@ -13,6 +13,9 @@ from pathlib import Path
 import re
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "publish"))
+import three_stage  # noqa: E402; approval owns the shared image-overlap limit
+
 FROZEN_QA = "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"
 WPM = 140                    # Kokoro narration measured on pilots 002-004 (QA ASR 132.7-141)
 RESIDUAL_GAP = 0.067         # non-speech share inside spoken time, measured on the 003/004 renders
@@ -116,10 +119,19 @@ def check(pilot_dir, production=None):
     if len(",".join(s.get("tags", []))) > 450:
         problems.append("TAGS_TOO_LONG")
     mine = shingles(segs)
+    backgrounds = set(s.get("backgrounds", []))
+    image_comparisons = []
     for other in sorted(production.glob("pilot-[0-9][0-9][0-9]/script.json")):
         if other.parent.name == d.name:
             continue
-        shared = mine & shingles(json.loads(other.read_text()).get("segments", []))
+        other_script = json.loads(other.read_text())
+        other_backgrounds = set(other_script.get("backgrounds", []))
+        union = backgrounds | other_backgrounds
+        overlap = len(backgrounds & other_backgrounds) / max(1, len(union))
+        image_comparisons.append({"pilot": other.parent.name, "jaccard": overlap})
+        if overlap > three_stage.IMAGE_SHARE_MAX:
+            problems.append(f"image_set_overlap vs {other.parent.name}: {overlap:.6f} > {three_stage.IMAGE_SHARE_MAX}")
+        shared = mine & shingles(other_script.get("segments", []))
         if len(shared) > MAX_SHARED:
             problems.append(f"NOT_ORIGINAL vs {other.parent.name}: {len(shared)} shared {SHINGLE}-word runs")
     sch = json.loads((d / "schedule.json").read_text())
@@ -158,6 +170,10 @@ def check(pilot_dir, production=None):
         problems.append(f"TOO_MANY_NEW_IMAGES {len(new)} > 12 (Cloudflare free day)")
     stats = {"format": fmt, "words": n_words, "minutes_est": round(minutes, 1), "speech_presence_est": round(speech, 3),
              "scripture_per_10_min": round(per10, 1), "new_images": len(new)}
+    stats["image_set_overlap"] = {
+        "status": "FAIL" if any(r["jaccard"] > three_stage.IMAGE_SHARE_MAX for r in image_comparisons) else "PASS",
+        "limit": three_stage.IMAGE_SHARE_MAX, "comparisons": image_comparisons,
+    }
     return problems, stats
 
 
