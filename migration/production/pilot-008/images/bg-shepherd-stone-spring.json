@@ -1,0 +1,28 @@
+{
+ "id": "bg-shepherd-stone-spring",
+ "prompt": "Clear spring water emerging between smooth stones beside a pasture, moon reflections on the ripples, tiny white flowers and moss, peaceful night scenery, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 4.2,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-008-img-bg-shepherd-stone-spring-sha256-8130203f7256dafab615585afc18acd871012b0d19519852290ceb2db7b2027b.png",
+ "sha256": "8130203f7256dafab615585afc18acd871012b0d19519852290ceb2db7b2027b"
+}
