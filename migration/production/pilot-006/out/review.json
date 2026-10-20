@@ -1,8 +1,14 @@
 {
  "version": "long-review-v1",
  "pilot_id": "pilot-006",
- "output_sha256": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c",
+ "output_sha256": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc",
  "status": "ERROR",
  "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA",
- "failed_at": "2026-10-19T10:35:48Z"
+ "provider_message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: [REDACTED_URL] To monitor your current usage, head to: [REDACTED_URL] \n* Quota exceeded for metric: [REDACTED_URL] limit: 20, model: gemini-3.8-flash\nPlease retry in 3h43m15.383214926s.",
+ "quota_ids": [
+  "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+ ],
+ "retry_delay": "13395s",
+ "failed_at": "2026-10-20T03:16:45Z",
+ "usage": []
 }
