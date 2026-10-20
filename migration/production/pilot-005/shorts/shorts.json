@@ -1,61 +1,137 @@
 {
  "version": "shorts-produce-v2-r8",
  "source_pilot": "pilot-005",
- "selection_rubric_model": "gemini-3.6-flash",
+ "selection_rubric_model": null,
  "rejected_r8": [],
  "shorts": [
   {
    "file": "short-00.mp4",
-   "sha256": "eb0646b09bd28a0623dcc32bdfe69aa3959111f522aff1f5797876f66caba74c",
-   "seconds": 42.34,
-   "source_start": 729.251,
-   "source_end": 771.095,
+   "sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
+   "seconds": 40.31,
+   "source_start": 459.86,
+   "source_end": 499.672,
    "segments": [
-    "reflection-6",
-    "prayer-thanks",
-    "prayer-purpose"
+    "prayer-relationships",
+    "prayer-words"
    ],
-   "hook": "You are protected because you are His",
-   "hook_shown": false,
-   "title": "You Are Protected Not Because You Are Perfect",
+   "hook": "Lord, protect my relationships.",
+   "hook_shown": true,
+   "title": "A Prayer for Peace in Your Relationships",
    "reference": null,
    "scenes": [
-    "bg-sunrise-field",
-    "bg-home-sunrise"
+    "bg-home-sunrise",
+    "bg-garden"
    ],
    "parallax": false,
    "figure": false,
    "selection": {
-    "final_score": 0.8644,
-    "measured_score": 0.786,
-    "features": {
-     "opening_short": 1.0,
-     "opening_direct": 1.0,
-     "second_person": 0.9574468085106382,
-     "scripture": 0.4,
-     "promise": 0.7978723404255319,
-     "resolution": 0.4,
-     "length_fit": 0.926239999999998
+    "final_score": null,
+    "measured_score": null,
+    "features": null,
+    "rubric": null
+   },
+   "text": "Lord, protect my relationships. Guard marriages from coldness and from anything that would divide them. Protect friendships from gossip and misunderstanding. Where there is tension, bring honest conversations and quick forgiveness. Let love win in every home today. Father, set a guard over my mouth today. Protect me from words I would regret: harsh words, careless words, words spoken in anger. Let what I say build people up. Let my words carry your peace into every room I enter.",
+   "render_plan": {
+    "expected_frame_count": 1209,
+    "fps": 30,
+    "scene_frame_spans": [
+     {
+      "image_id": "bg-home-sunrise",
+      "start_frame": 0,
+      "end_frame": 672,
+      "nominal_start_frame": 0,
+      "nominal_end_frame": 665
+     },
+     {
+      "image_id": "bg-garden",
+      "start_frame": 657,
+      "end_frame": 1209,
+      "nominal_start_frame": 665,
+      "nominal_end_frame": 1209
+     }
+    ]
+   },
+   "source_image_info": {
+    "bg-home-sunrise": {
+     "source_width": 2048,
+     "source_height": 2048,
+     "scaled_width": 1920,
+     "scaled_height": 1920,
+     "crop_width": 1080,
+     "crop_height": 1920,
+     "crop_x": 420.0,
+     "crop_y": 0.0,
+     "native_portrait_width": 1152.0,
+     "native_portrait_height": 2048
     },
-    "rubric": {
-     "index": 10,
-     "hook_first_2s": 9.0,
-     "stands_alone": 9.5,
-     "emotional_payoff": 9.5,
-     "shareability": 9.0,
-     "loop_potential": 8.0,
-     "policy_safe": 10.0,
-     "reasons": "Exceptional hook line that removes shame and offers profound comfort. Beautiful prayer of gratitude and intercession.",
-     "hook_line": "You are protected because you are His",
-     "title": "You Are Protected Not Because You Are Perfect"
+    "bg-garden": {
+     "source_width": 1344,
+     "source_height": 768,
+     "scaled_width": 3360,
+     "scaled_height": 1920,
+     "crop_width": 1080,
+     "crop_height": 1920,
+     "crop_x": 1140.0,
+     "crop_y": 0.0,
+     "native_portrait_width": 432.0,
+     "native_portrait_height": 768
     }
    },
-   "text": "You are not protected because you are perfect. You are protected because you are his. Thank you, Father, for every time you have protected me without my even knowing it. The accidents that did not happen. The dangers I never saw. Thank you for keeping me until this morning. I trust you to keep me today. Lord, make me a shelter for others today. Let me notice the person who feels unsafe, and offer kindness, help and prayer. As you protect me, let me protect the weak and speak up for those who cannot.",
+   "publish": false,
+   "media_checks": {
+    "version": "shorts-media-checks-v1",
+    "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
+    "source_voice_sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc",
+    "source_music_sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+    "source_image_sha256": {
+     "bg-home-sunrise": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+     "bg-garden": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04"
+    },
+    "measured_at": "2026-10-20T17:36:36.888040+00:00",
+    "acoustic": {
+     "pcm_sample_rate": 48000,
+     "window_samples": 480,
+     "active_threshold_dbfs": -40.0,
+     "leading_inactive_seconds": 0.14,
+     "trailing_inactive_seconds": 0.212,
+     "first_active_sample": 6720,
+     "last_active_sample": 1900800,
+     "narration_samples": 1910976,
+     "status": "PASS"
+    },
+    "video": {
+     "decoded_frame_count": 1209,
+     "fps": 30.0,
+     "seconds": 40.312,
+     "expected_frame_count": 1209,
+     "black_intervals": [],
+     "scene_frame_spans": [
+      {
+       "image_id": "bg-home-sunrise",
+       "start_frame": 0,
+       "end_frame": 672,
+       "nominal_start_frame": 0,
+       "nominal_end_frame": 665
+      },
+      {
+       "image_id": "bg-garden",
+       "start_frame": 657,
+       "end_frame": 1209,
+       "nominal_start_frame": 665,
+       "nominal_end_frame": 1209
+      }
+     ],
+     "status": "PASS"
+    },
+    "status": "PASS"
+   },
+   "media_checks_reason": null,
+   "qa_output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
    "qa": {
     "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
-    "seconds": 42.34,
-    "lufs": -14.8,
-    "true_peak_dbtp": -1.6,
+    "seconds": 40.31,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.3,
     "checks": {
      "decode_clean": true,
      "one_h264_1080x1920": true,
@@ -69,179 +145,80 @@
    },
    "review": {
     "hook_in_first_2s": 7.5,
-    "captions_readable_and_synced": 9.0,
+    "captions_readable_and_synced": 8.5,
     "text_clear_of_shorts_ui": 9.0,
-    "picture_quality": 8.0,
-    "edit_rhythm": 5.0,
-    "audio_clarity": 9.0,
-    "stands_alone": 9.0,
-    "ending_and_loop": 5.5,
-    "policy_safe": 10.0,
-    "overall": 7.2,
-    "issues": [
-     "00:00 - 00:20: The opening visual is held for 20 continuous seconds with minimal motion, which risks viewer drop-off on fast-paced short-form platforms.",
-     "00:41: The video ends mid-thought musically and narratively without a conclusive closing or seamless loop back to the start."
-    ],
-    "strongest_moment": "00:00 - 00:06: The powerful opening contrast ('You are not protected because you are perfect. You are protected because you are His.') delivers an emotionally resonant hook immediately.",
-    "model": "gemini-3.8-flash",
-    "status": "FAIL"
-   },
-   "publish": false
-  },
-  {
-   "file": "short-01.mp4",
-   "sha256": "19b9569e93d53d71e9d22026e4a0384414abcddf538bac1d3aa1b3c01273d8b7",
-   "seconds": 36.57,
-   "source_start": 1404.681,
-   "source_end": 1440.736,
-   "segments": [
-    "day-reflect-121",
-    "payoff",
-    "blessing"
-   ],
-   "hook": "Take this promise into your day",
-   "hook_shown": false,
-   "title": "A Simple Prayer for Every Doorway You Walk Through",
-   "reference": "Psalm 121:8 (KJV)",
-   "scenes": [
-    "bg-sunlit-road",
-    "bg-sky"
-   ],
-   "parallax": false,
-   "figure": false,
-   "selection": {
-    "final_score": 0.861,
-    "measured_score": 0.965,
-    "features": {
-     "opening_short": 1.0,
-     "opening_direct": 1.0,
-     "second_person": 0.8974358974358974,
-     "scripture": 1.0,
-     "promise": 0.9615384615384616,
-     "resolution": 1.0,
-     "length_fit": 0.8422000000000025
-    },
-    "rubric": {
-     "index": 0,
-     "hook_first_2s": 6.5,
-     "stands_alone": 8.5,
-     "emotional_payoff": 8.5,
-     "shareability": 8.0,
-     "loop_potential": 6.0,
-     "policy_safe": 10.0,
-     "reasons": "Starts mid-thought with 'Carry that with you', but transitions quickly into a practical prayer habit and scripture blessing.",
-     "hook_line": "Take this promise into your day",
-     "title": "A Simple Prayer for Every Doorway You Walk Through"
-    }
-   },
-   "text": "Carry that with you. Here is one thing to take into your day. Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge. Six words. Let them mark every doorway you walk through. And now receive this blessing. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore. Go into this day covered by his peace. In Jesus' name, amen.",
-   "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
-    "seconds": 36.57,
-    "lufs": -14.7,
-    "true_peak_dbtp": -2.2,
-    "checks": {
-     "decode_clean": true,
-     "one_h264_1080x1920": true,
-     "fps_30": true,
-     "one_aac_stereo_48k": true,
-     "duration": true,
-     "loudness": true,
-     "true_peak": true
-    },
-    "status": "PASS"
-   },
-   "review": {
-    "hook_in_first_2s": 5.0,
-    "captions_readable_and_synced": 9.0,
-    "text_clear_of_shorts_ui": 9.0,
-    "picture_quality": 8.5,
+    "picture_quality": 7.5,
     "edit_rhythm": 5.5,
-    "audio_clarity": 9.0,
+    "audio_clarity": 8.5,
     "stands_alone": 9.0,
-    "ending_and_loop": 6.0,
+    "ending_and_loop": 6.5,
     "policy_safe": 10.0,
-    "overall": 7.1,
+    "overall": 7.3,
     "issues": [
-     "00:00 - Opening with an isolated fragment 'Carry that with you' feels confusing and disorienting before the actual hook starts at 00:02.",
-     "00:00-00:17 - Visual pacing is very slow, relying on only two static/slow-zoom images across 37 seconds, which risks viewer drop-off.",
-     "00:34-00:37 - The ending concludes with 'amen' followed by dead air, making the loop back into 'Carry that with you' feel unnatural."
+     "00:00 - Redundant text: static hook text at the top clashes with animated caption in the center displaying the exact same words.",
+     "00:00-00:21 - Pacing is visually static; staying on a single AI illustration for over 20 seconds causes visual fatigue on Shorts.",
+     "00:39 - Background audio and voice cut out abruptly at the loop point without a smooth transition."
     ],
-    "strongest_moment": "00:21-00:29 delivering the scripture blessing over the radiant sunbeam sky background.",
+    "strongest_moment": "00:21 - The shift in visual theme and prayer topic to guarding words spoken over a tranquil garden path.",
     "model": "gemini-3.8-flash",
-    "status": "FAIL"
+    "status": "FAIL",
+    "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7"
    },
-   "publish": false
-  },
-  {
-   "file": "short-02.mp4",
-   "sha256": "cdb21f50a4aa431a2d662ebe409846816cee9a109da26bb2bbce3652df369d73",
-   "seconds": 30.51,
-   "source_start": 202.735,
-   "source_end": 232.745,
-   "segments": [
-    "prayer-mind",
-    "scripture-4",
-    "prayer-home"
-   ],
-   "hook": "When worry knocks, let peace answer",
-   "hook_shown": false,
-   "title": "A Prayer to Cover Your Home in Peace Today",
-   "reference": "2 Thessalonians 3:3 (KJV)",
-   "scenes": [
-    "bg-dawn-lake",
-    "bg-tower-hill"
-   ],
-   "parallax": false,
-   "figure": false,
-   "selection": {
-    "final_score": 0.8592,
-    "measured_score": 0.8354,
-    "features": {
-     "opening_short": 1.0,
-     "opening_direct": 1.0,
-     "second_person": 0.7692307692307693,
-     "scripture": 1.0,
-     "promise": 1.0,
-     "resolution": 0.4,
-     "length_fit": 0.6003999999999996
-    },
-    "rubric": {
-     "index": 4,
-     "hook_first_2s": 8.5,
-     "stands_alone": 9.0,
-     "emotional_payoff": 9.0,
-     "shareability": 9.0,
-     "loop_potential": 7.0,
-     "policy_safe": 10.0,
-     "reasons": "Excellent metaphorical opening line about worry and peace that immediately grabs attention. Deeply relatable house prayer.",
-     "hook_line": "When worry knocks, let peace answer",
-     "title": "A Prayer to Cover Your Home in Peace Today"
-    }
-   },
-   "text": "When worry knocks, let your peace answer the door. But the Lord is faithful, who shall stablish you, and keep you from evil. Father, I place my home under your protection. Watch over every door and every room. Keep away harm, accidents and every kind of danger. Let our home be a place of peace, where your presence is felt the moment anyone walks in.",
-   "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
-    "seconds": 30.51,
-    "lufs": -14.9,
-    "true_peak_dbtp": -2.4,
-    "checks": {
-     "decode_clean": true,
-     "one_h264_1080x1920": true,
-     "fps_30": true,
-     "one_aac_stereo_48k": true,
-     "duration": true,
-     "loudness": true,
-     "true_peak": true
-    },
-    "status": "PASS"
-   },
-   "review": {
-    "status": "NOT_REVIEWED_ProviderFailure"
-   },
-   "publish": false
+   "release_status": "REVIEW_FAIL"
   }
  ],
+ "edit_plan": {
+  "version": "shorts-editorial-plan-v1",
+  "source_pilot": "pilot-005",
+  "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
+  "source_sha256": {
+   "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a",
+   "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
+   "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"
+  },
+  "voice": {
+   "asset": "pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac",
+   "sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc"
+  },
+  "music": {
+   "asset": "original-rest-music.lossless.flac",
+   "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c"
+  },
+  "candidate": {
+   "start": 459.86,
+   "end": 499.672,
+   "hook": "Lord, protect my relationships.",
+   "title": "A Prayer for Peace in Your Relationships",
+   "reference": null
+  },
+  "tail_seconds": 0.5,
+  "transition": {
+   "type": "fade",
+   "seconds": 0.5,
+   "center_seconds": 22.153
+  },
+  "scenes": [
+   {
+    "image_id": "bg-home-sunrise",
+    "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
+    "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+    "nominal_start": 0.0,
+    "nominal_end": 22.153,
+    "motion_profile": "phrase_push_in_v1"
+   },
+   {
+    "image_id": "bg-garden",
+    "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+    "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
+    "nominal_start": 22.153,
+    "nominal_end": 40.312,
+    "motion_profile": "phrase_pan_right_v1"
+   }
+  ],
+  "publish": false
+ },
+ "publish": false,
+ "release_status": "REVIEW_FAIL",
  "review_rubric": {
   "items": [
    "hook_in_first_2s",
@@ -256,5 +233,11 @@
   ],
   "pass_item": 7,
   "pass_overall": 8
+ },
+ "finalization": {
+  "status": "COMPLETE",
+  "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
+  "finalized_at": "2026-10-20T17:38:44.399454+00:00",
+  "target_slot": "2026-10-20T20:00:00Z"
  }
 }
