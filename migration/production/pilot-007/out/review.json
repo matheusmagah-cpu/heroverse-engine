@@ -1,111 +1,114 @@
 {
  "version": "long-review-v1",
  "pilot_id": "pilot-007",
- "output_sha256": "c57cafe657dd88c13c36eea8cdc8ff32302a7932d0ce860e9723a5ae21a140d1",
- "status": "ERROR",
- "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA",
- "provider_message": "",
- "failed_at": "2026-10-19T12:36:44Z",
+ "output_sha256": "25231edcdc2ed15687c7c5cb9fb774b19a44c4d171ace6e756917fa09d488dde",
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 26.16,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 5.73,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.5,
+  "picture_quality": 8.5,
+  "figure_and_background_integrity": 9.0,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 7.5,
+  "scripture_on_screen": 10.0,
+  "policy_safe": 10.0,
+  "overall": 9.0,
+  "issues": [
+   "01:00 - Channel branding/subscribe animation badge appears briefly in the top right, slightly breaking contemplative immersion.",
+   "11:46 - YouTube 'LIKE' button overlay briefly interrupts the calm aesthetic.",
+   "17:40 - Over the 26-minute duration, the background video loops cycle through a limited set of roughly six AI nature backdrops, resulting in noticeable visual repetition."
+  ],
+  "strongest_moment": "00:00 to 00:35 - The gentle, direct opening hook ('Before you check your phone this morning, let's pray Bible verses for peace...') immediately establishes a calming tone and clearly fulfills the title's promise.",
+  "model": "gemini-3.8-flash",
+  "status": "PASS"
+ },
+ "audit": {
+  "first_30s": "00:00 to 00:05 displays a still title screen over a sunrise background with wheat silhouettes and text 'Begin Your Day in God's Peace MORNING PRAYER' with a brand logo 'HeroVerse Prayer' top left. At 00:01 the video transitions to a coffee cup on a Bible near a sunlit window with plants while voiceover begins: 'Before you check your phone this morning, let's pray Bible verses for peace over the day ahead.' Hook is built by addressing a daily habit (checking phone) and offering an immediate calm alternative.",
+  "visuals": "AI illustrations throughout: morning rooms, wheat fields, mountain sunrises, flower meadows, sunbeams in trees, winding rivers, blossoming orchards, and skies with sun rays. Cut frequency: 01:00-02:00 has 5 cuts (approx 5 cuts/min); 05:00-06:00 has 4 cuts (approx 4 cuts/min); 10:00-11:00 has 4 cuts (approx 4 cuts/min). Camera motion consists of subtle slow zooms, gentle pans, and parallax drifting effects. No human faces or people appear in the AI imagery.",
+  "on_screen_text": "Captions are present throughout for every spoken word, centered in white font with dark shadow and translucent rounded background boxes for scripture quotes. Scripture references appear as book chapter and verse (e.g., Philippians 4:6 (KJV)) inside dark caption boxes. Call to action 'SUBSCRIBE' appears top right at 01:00 for 5 seconds and 'LIKE' appears top right at 11:45 for 4 seconds.",
+  "audio": "Male voice, mature tone, calm and steady pace estimated around 110 words per minute. Background music is gentle ambient meditative instrumental (soft piano/pads), mixed low, clearly quieter than the voiceover.",
+  "structure": "Structured as a morning guided prayer broken into thematic sections based on scripture passages: Philippians 4:6-7, Isaiah 26:3, John 14:27, James 1:5, Psalm 29:11, Colossians 3:15, Romans 15:13, Psalm 55:22, Psalm 119:165, Matthew 6:34, and Numbers 6:24-26. Each section follows a pattern of scripture reading, personal reflection, and petition.",
+  "ending": "Closes with a final blessing (Numbers 6:24-26), a concluding thank you prayer to God, an invitation to type 'Amen' in the comments, and fades out with gentle ambient music over an AI illustration of sunlit clouds.",
+  "amateur_elements": [
+   {
+    "timestamp": "00:00",
+    "element": "Static title card with generic stock look",
+    "rule": "R3"
+   },
+   {
+    "timestamp": "01:00",
+    "element": "Abrupt SUBSCRIBE badge pop-up top right",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "03:04",
+    "element": "Scripture citation box overlaying scenic background abruptly",
+    "rule": "R2"
+   },
+   {
+    "timestamp": "11:45",
+    "element": "LIKE button pop-up appearing mid-video without context",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "26:00",
+    "element": "Call to action prompt to type Amen in comments at the very end",
+    "rule": "R8"
+   }
+  ],
+  "model": "gemini-3.5-flash-lite"
+ },
  "usage": [
   {
-   "model": "gemini-3.5-flash-lite",
-   "promptTokenCount": 27671,
-   "candidatesTokenCount": 3530,
-   "totalTokenCount": 31201,
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 91274,
+   "candidatesTokenCount": 294,
+   "totalTokenCount": 92403,
    "promptTokensDetails": [
     {
-     "modality": "VIDEO",
-     "tokenCount": 27300
+     "modality": "TEXT",
+     "tokenCount": 222
     },
     {
-     "modality": "TEXT",
-     "tokenCount": 371
+     "modality": "VIDEO",
+     "tokenCount": 91052
     }
    ],
+   "thoughtsTokenCount": 835,
    "serviceTier": "standard"
   },
   {
    "model": "gemini-3.5-flash-lite",
-   "promptTokenCount": 27675,
-   "candidatesTokenCount": 2945,
-   "totalTokenCount": 30620,
-   "promptTokensDetails": [
-    {
-     "modality": "VIDEO",
-     "tokenCount": 27300
-    },
-    {
-     "modality": "TEXT",
-     "tokenCount": 375
-    }
-   ],
-   "serviceTier": "standard"
-  },
-  {
-   "model": "gemini-3.5-flash-lite",
-   "promptTokenCount": 27675,
-   "candidatesTokenCount": 3284,
-   "totalTokenCount": 30959,
-   "promptTokensDetails": [
-    {
-     "modality": "VIDEO",
-     "tokenCount": 27300
-    },
-    {
-     "modality": "TEXT",
-     "tokenCount": 375
-    }
-   ],
-   "serviceTier": "standard"
-  },
-  {
-   "model": "gemini-3.6-flash",
-   "promptTokenCount": 27677,
-   "candidatesTokenCount": 3801,
-   "totalTokenCount": 34344,
+   "promptTokenCount": 91286,
+   "candidatesTokenCount": 849,
+   "totalTokenCount": 92135,
    "promptTokensDetails": [
     {
      "modality": "TEXT",
-     "tokenCount": 377
+     "tokenCount": 234
     },
     {
      "modality": "VIDEO",
-     "tokenCount": 27300
-    }
-   ],
-   "thoughtsTokenCount": 2866,
-   "serviceTier": "standard"
-  },
-  {
-   "model": "gemini-3.5-flash-lite",
-   "promptTokenCount": 27679,
-   "candidatesTokenCount": 3757,
-   "totalTokenCount": 31436,
-   "promptTokensDetails": [
-    {
-     "modality": "TEXT",
-     "tokenCount": 379
-    },
-    {
-     "modality": "VIDEO",
-     "tokenCount": 27300
-    }
-   ],
-   "serviceTier": "standard"
-  },
-  {
-   "model": "gemini-3.5-flash-lite",
-   "promptTokenCount": 6658,
-   "candidatesTokenCount": 1213,
-   "totalTokenCount": 7871,
-   "promptTokensDetails": [
-    {
-     "modality": "TEXT",
-     "tokenCount": 379
-    },
-    {
-     "modality": "VIDEO",
-     "tokenCount": 6279
+     "tokenCount": 91052
     }
    ],
    "serviceTier": "standard"
