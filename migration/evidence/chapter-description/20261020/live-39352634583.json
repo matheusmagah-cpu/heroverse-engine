@@ -1,0 +1,22 @@
+{
+  "video_id": "1bT9pEROuhI",
+  "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+  "status": "PASS",
+  "mode": "inspect",
+  "applied": false,
+  "mutation_attempted": false,
+  "diagnostics": {
+    "stage": "INSPECTION_COMPLETE",
+    "mutation_attempted": false,
+    "identity_matches": true,
+    "title_matches": true,
+    "etag_present": true,
+    "remote_description_sha256": "23ba9b29b7546f6fcc67b567083cb4941073672f529fb2cf71a0d4b11a35a79d",
+    "expected_old_description_sha256": "7008aeade9e50caf1ddb3bfaa24ff9d9439ca988f23f3010e14adcc7ae631b8e",
+    "desired_description_sha256": "23ba9b29b7546f6fcc67b567083cb4941073672f529fb2cf71a0d4b11a35a79d",
+    "remote_matches_old": false,
+    "remote_matches_desired": true,
+    "public_at_read": true
+  },
+  "checked_at_utc": "2026-10-20T01:18:01.973740+00:00"
+}

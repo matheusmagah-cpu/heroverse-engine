@@ -1,0 +1,196 @@
+{
+  "version": "intrashot-ab-v1",
+  "checked_at": "2026-10-20T01:47:00Z",
+  "artifacts": [
+    {
+      "role": "preserved_baseline",
+      "file": "short-00.mp4",
+      "sha256": "c135476a1d5a27da217ad289035cc6fe7d76500837c6ef6fb8a62fa037e9d029",
+      "bytes": 12701458,
+      "audio_decoded_sha256": "e8084e5fb51b292fdb8f6b42a824f6b902304b8d6a8b134c4c2f87ffeae99b5e",
+      "frames": 983,
+      "seconds": 32.769,
+      "publish": false
+    },
+    {
+      "role": "zero_strength_control",
+      "file": "short-00.mp4",
+      "sha256": "e0dcca44ea7139aa5f26c0bbe3867d30f189e0e5e83c5a4c98f9e01740d0513b",
+      "bytes": 12530740,
+      "audio_decoded_sha256": "e8084e5fb51b292fdb8f6b42a824f6b902304b8d6a8b134c4c2f87ffeae99b5e",
+      "frames": 983,
+      "seconds": 32.769,
+      "publish": false,
+      "technical_qa": {
+        "file": "short-00.mp4",
+        "seconds": 32.77,
+        "lufs": -15.1,
+        "true_peak_dbtp": -2.3,
+        "checks": {
+          "decode_clean": true,
+          "one_h264_1080x1920": true,
+          "fps_30": true,
+          "one_aac_stereo_48k": true,
+          "duration": true,
+          "loudness": true,
+          "true_peak": true
+        },
+        "status": "PASS"
+      }
+    },
+    {
+      "role": "animated_candidate",
+      "file": "short-00.mp4",
+      "sha256": "ddec0596c29de06d152e6586d8961d0816ac84fa147cb13d1a8b56d11f3558ec",
+      "bytes": 13042244,
+      "audio_decoded_sha256": "e8084e5fb51b292fdb8f6b42a824f6b902304b8d6a8b134c4c2f87ffeae99b5e",
+      "frames": 983,
+      "seconds": 32.769,
+      "publish": false,
+      "technical_qa": {
+        "file": "short-00.mp4",
+        "seconds": 32.77,
+        "lufs": -15.1,
+        "true_peak_dbtp": -2.3,
+        "checks": {
+          "decode_clean": true,
+          "one_h264_1080x1920": true,
+          "fps_30": true,
+          "one_aac_stereo_48k": true,
+          "duration": true,
+          "loudness": true,
+          "true_peak": true
+        },
+        "status": "PASS"
+      }
+    }
+  ],
+  "motion_measurement": {
+    "version": "intrashot-residual-v1",
+    "opencv": "4.10.0",
+    "numpy": "2.2.6",
+    "rows": [
+      {
+        "scene": "lamp",
+        "source_sha256": "e751e3c917d9b154aade9ec49f25b1da564626273af0bcb9c6f5be582ca841a8",
+        "graded_crop_sha256": "5fcd9d4bb776029ec583b9d4c2daf9b90e1930f9631cf34a461a9f9c12497908",
+        "camera_enabled": false,
+        "timestamps_seconds": [
+          0,
+          2
+        ],
+        "active_pixels": 878837,
+        "active_mean_absolute_pixel_delta": 0.6972115800009939,
+        "active_fraction_changed": 0.22284564714503372,
+        "stable_pixels": 769815,
+        "stable_max_absolute_pixel_delta": 0.0,
+        "stable_exact": true,
+        "method": "Compare native BGR pixels before camera, captions and encoding. Masks are fixed scene-specific regions, not quality scores."
+      },
+      {
+        "scene": "water",
+        "source_sha256": "a08cf077c6ea6aeef018f5ca066aa75dfd138093aa5804e33691a1b57e5a9eb1",
+        "graded_crop_sha256": "c9547e853e1f40ba9b49ac651f6f5c564eda6ab788c8f210a0b7f5ef96c353dc",
+        "camera_enabled": false,
+        "timestamps_seconds": [
+          0,
+          2
+        ],
+        "active_pixels": 1155600,
+        "active_mean_absolute_pixel_delta": 7.76359380408446,
+        "active_fraction_changed": 0.9040515749394255,
+        "stable_pixels": 882360,
+        "stable_max_absolute_pixel_delta": 0.0,
+        "stable_exact": true,
+        "method": "Compare native BGR pixels before camera, captions and encoding. Masks are fixed scene-specific regions, not quality scores."
+      }
+    ],
+    "creative_quality": "NOT_MEASURED",
+    "ending_intervals": [
+      {
+        "timestamps_seconds": [
+          26,
+          28
+        ],
+        "rendered_strengths": [
+          1.0,
+          0.9616421258277985
+        ],
+        "active_mean_absolute_pixel_delta": 7.844261855313261,
+        "stable_max_absolute_pixel_delta": 0.0,
+        "stable_exact": true
+      },
+      {
+        "timestamps_seconds": [
+          28,
+          30
+        ],
+        "rendered_strengths": [
+          0.9616421258277985,
+          0.8110467815753567
+        ],
+        "active_mean_absolute_pixel_delta": 7.183903888311985,
+        "stable_max_absolute_pixel_delta": 0.0,
+        "stable_exact": true
+      },
+      {
+        "timestamps_seconds": [
+          30,
+          32
+        ],
+        "rendered_strengths": [
+          0.8110467815753567,
+          0.7020826920186326
+        ],
+        "active_mean_absolute_pixel_delta": 6.419519730010382,
+        "stable_max_absolute_pixel_delta": 0.0,
+        "stable_exact": true
+      }
+    ],
+    "ending_measurement_stage": "Exact source scene and per-frame strength before camera/captions/grade finish/encoding, not final MP4 pixel difference."
+  },
+  "comparison": {
+    "control_motion_strength": 0,
+    "animated_motion_strength": 1,
+    "same_renderer": true,
+    "same_audio_pcm": true,
+    "candidate_repeated_sha256_identical": true,
+    "baseline_resampling_differs": true,
+    "attribution": "Use zero-strength control to isolate intrashot. Old baseline uses ffmpeg 2x zoompan; new renderer uses native affine, so baseline pixel differences are not all animation."
+  },
+  "visual_inspection": {
+    "method": "Actual decoded frames, not full audiovisual watched review",
+    "times_seconds": [
+      1,
+      16.4,
+      30
+    ],
+    "findings": [
+      "Opening caption remains legible without duplicate hook overlay.",
+      "Water/reflected-light shapes differ with stable sky in pre-camera measurements.",
+      "Crossfade temporarily shows both moons, inherited from the two source scenes.",
+      "No gross corruption or displaced captions observed in inspected frames."
+    ],
+    "limitations": [
+      "Localized deformation of still images, not a physically simulated scene or cinematic quality guarantee.",
+      "Existing dark exposure and stylized source texture retained.",
+      "No designated watched review of this exact animated MP4."
+    ]
+  },
+  "integration": {
+    "isolated_only": true,
+    "normal_shorts_workflow_calls_intrashot": false,
+    "watched_review": "NOT_RUN",
+    "question": "https://github.com/matheusmagah-cpu/heroverse-engine/pull/204#issuecomment-6281386124"
+  },
+  "tools": {
+    "opencv": "4.10.0",
+    "numpy": "2.2.6",
+    "generation_api_calls": 0
+  },
+  "fixes": [
+    "Explicit float32 OpenCV remap maps.",
+    "Separate video encoding and audio mux avoids truncating the final AAC packet.",
+    "Protect baseline and all input files from output/work-directory collisions."
+  ]
+}

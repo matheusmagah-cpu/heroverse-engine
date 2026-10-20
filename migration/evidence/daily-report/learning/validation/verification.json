@@ -1,0 +1,50 @@
+{
+  "version": "learning-loop-validation-v1",
+  "unit_tests": 12,
+  "ci_suites": 41,
+  "mocked_collection_requests": {
+    "data_api": 3,
+    "analytics": 3,
+    "added_by_loop": 0
+  },
+  "network_calls_in_tests": 0,
+  "source_integrity": [
+    {
+      "path": "migration/structures/guided-prayer-scenic.json",
+      "sha256": "7102200b407501a7d3d76e7eacef9113b36f259966663bf5a87fa1061ba19b47",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/vidiq/20261019/structure_audit.json",
+      "sha256": "4aa64454e2cd3ee912089d86a052a08c996c9c6dc1c1c9fc38e3ceac3988a142",
+      "unchanged": true
+    },
+    {
+      "path": "migration/evidence/vidiq/20261019/thumbnails.json",
+      "sha256": "3feb853468fd03943285d9d622281ce09d91ecedec94c6b8205ad4bb6fb9fece",
+      "unchanged": true
+    },
+    {
+      "path": "migration/publish/ledger.json",
+      "sha256": "b58337df116dd3f245478ebae9870a24bba4ece3bdd76538ecbce1930e4be896",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/qa_criteria_v3.json",
+      "sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/script.json",
+      "sha256": "89bc1c0db301da95c6cbde9f26d0f37eb4022a2609beac2507f69e5f8f507ad6",
+      "unchanged": true
+    }
+  ],
+  "runtime_status": "PENDING_QUALIFIED_MERGE_AND_EXISTING_WORKFLOW_RUN",
+  "performance_learning": "INSUFFICIENT",
+  "review_fixes": [
+    "CLI isolated-mode bootstrap tested in subprocess",
+    "Input/output collision and symlink escape checks before writes",
+    "Learning failure preserves existing health steps and captured evidence while run remains failed"
+  ]
+}

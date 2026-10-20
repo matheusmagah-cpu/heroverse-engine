@@ -65,10 +65,34 @@ The native MP4, exact technical measurements and inspected frames are identified
 in sample-measurements.json. Technical QA and frame inspection do not replace
 listening or the designated watched review. An audio inspection attempt returned
 “audio content omitted because you do not support audio input”; no listening is
-claimed. The required gemini-3.8-flash review remains BLOCKED because it needs
-credential-backed access or workflow execution outside current authority.
-No alternate reviewer, invented score, publish=true or approval is supplied.
+claimed. Claude SPEC-FIX (issue203 comment6280245640) delegates the repaired normal cuts'
+watched review to shorts.yml after merge. The card body has not yet incorporated
+that acceptance; reconciliation was requested once in PR204 comment6281293008.
 
-Existing production artifacts and frozen QA remain untouched. The sample is a
-candidate for review, not an approved Short. Full completion remains BLOCKED
-until actual listening and the unchanged designated watched review are available.
+## Intrashot A/B, 2026-10-20
+The original MP4 remains byte-identical. A zero-strength control and animated
+candidate use the same new renderer and copied baseline audio. All three decoded
+audio hashes are identical. Both new files pass the unchanged technical gate:
+1080x1920/30fps, 983 frames, 32.769 seconds, -15.1 LUFS, -2.3 dBTP, clean decode.
+Exact hashes, source provenance, localized-motion measurements and limitations
+are in intrashot-measurements.json. Nine intrashot tests and the full 43-script
+current-main suite pass. No paid generation or network is used by this renderer.
+
+The lamp/light and water/reflection transformations operate before captions.
+Native pixels outside their masks are unchanged with the camera disabled; the
+ending is measured at 26/28/30/32 seconds using the actual decaying strengths.
+The preserved baseline's ffmpeg 2x zoompan differs from this native affine camera,
+so it is a third reference, not an animation-only pixel control. The zero-strength
+control is the proper matched comparison. Actual frames at 1,16.4,30s were inspected.
+This is restrained deformation of existing stills; no cinematic or creative PASS
+is claimed. Audio is unchanged but no new listening review is claimed.
+
+The exact A/B remains isolated: shorts.yml calls shorts_produce, not
+shorts_intrashot. The delegated normal workflow therefore does not qualify this
+animated MP4. PR204 comment6281386124 requests an explicit artifact handoff/review
+contract. Existing production artifacts and frozen QA remain untouched.
+
+Reproduce using pinned baseline and assets described above:
+`python3 -I -B migration/production/shorts_intrashot.py BASELINE.mp4 candidate-selection.json source-timeline.json migration/production/pilot-012/script.json IMAGES candidate/short-00.mp4 1`
+Use a separate output directory and final argument `0` for the matched control.
+Run `python3 -I -B migration/publish/shorts_qa.py` on each result.

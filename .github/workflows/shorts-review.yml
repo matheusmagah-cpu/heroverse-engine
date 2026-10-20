@@ -23,6 +23,10 @@ jobs:
       PILOT: ${{ inputs.pilot }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Qualified long prerequisite
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          python3 -I -B migration/publish/shorts_prerequisite.py "migration/production/$PILOT"
       - name: Shorts from the private release (hash-verified)
         run: |
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac

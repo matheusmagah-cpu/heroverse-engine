@@ -1,72 +1,72 @@
 {
  "version": "shorts-select-v1",
  "pilot_id": "pilot-005",
- "rubric_model": "gemini-3.8-flash",
- "candidates_considered": 841,
+ "rubric_model": "gemini-3.6-flash",
+ "candidates_considered": 625,
  "shortlist": [
   {
-   "start": 729.528,
-   "end": 771.393,
+   "start": 729.251,
+   "end": 771.095,
    "sentences": [
     {
      "segment": "reflection-6",
      "text": "You are not protected because you are perfect.",
-     "start": 729.528,
-     "end": 733.176
+     "start": 729.251,
+     "end": 732.899
     },
     {
      "segment": "reflection-6",
      "text": "You are protected because you are his.",
-     "start": 733.356,
-     "end": 736.321
+     "start": 733.079,
+     "end": 736.044
     },
     {
      "segment": "prayer-thanks",
      "text": "Thank you, Father, for every time you have protected me without my even knowing it.",
-     "start": 737.701,
-     "end": 743.632
+     "start": 737.424,
+     "end": 743.355
     },
     {
      "segment": "prayer-thanks",
      "text": "The accidents that did not happen.",
-     "start": 743.812,
-     "end": 746.479
+     "start": 743.535,
+     "end": 746.201
     },
     {
      "segment": "prayer-thanks",
      "text": "The dangers I never saw.",
-     "start": 746.659,
-     "end": 748.941
+     "start": 746.381,
+     "end": 748.664
     },
     {
      "segment": "prayer-thanks",
      "text": "Thank you for keeping me until this morning.",
-     "start": 749.121,
-     "end": 752.428
+     "start": 748.844,
+     "end": 752.151
     },
     {
      "segment": "prayer-thanks",
      "text": "I trust you to keep me today.",
-     "start": 752.608,
-     "end": 754.997
+     "start": 752.331,
+     "end": 754.699
     },
     {
      "segment": "prayer-purpose",
      "text": "Lord, make me a shelter for others today.",
-     "start": 756.377,
-     "end": 759.492
+     "start": 756.079,
+     "end": 759.193
     },
     {
      "segment": "prayer-purpose",
      "text": "Let me notice the person who feels unsafe, and offer kindness, help and prayer.",
-     "start": 759.672,
-     "end": 765.923
+     "start": 759.373,
+     "end": 765.624
     },
     {
      "segment": "prayer-purpose",
      "text": "As you protect me, let me protect the weak and speak up for those who cannot.",
-     "start": 766.103,
-     "end": 771.393
+     "start": 765.804,
+     "end": 771.095
     }
    ],
    "segments": [
@@ -75,7 +75,7 @@
     "prayer-purpose"
    ],
    "reference": null,
-   "measured_score": 0.7859,
+   "measured_score": 0.786,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
@@ -83,87 +83,81 @@
     "scripture": 0.4,
     "promise": 0.7978723404255319,
     "resolution": 0.4,
-    "length_fit": 0.9253999999999997
+    "length_fit": 0.926239999999998
    },
    "rubric": {
     "index": 10,
-    "hook_first_2s": 9.6,
+    "hook_first_2s": 9.0,
     "stands_alone": 9.5,
-    "emotional_payoff": 9.4,
-    "shareability": 9.3,
-    "loop_potential": 8.2,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 8.0,
     "policy_safe": 10.0,
-    "reasons": "Exceptional first sentence halts the scroll; turns personal gratitude outward toward serving others.",
-    "hook_line": "You are protected because you're His",
-    "title": "You Don't Have to Be Perfect"
+    "reasons": "Exceptional hook line that removes shame and offers profound comfort. Beautiful prayer of gratitude and intercession.",
+    "hook_line": "You are protected because you are His",
+    "title": "You Are Protected Not Because You Are Perfect"
    },
-   "final_score": 0.8744,
-   "hook": "You are protected because you're His",
-   "title": "You Don't Have to Be Perfect"
+   "final_score": 0.8644,
+   "hook": "You are protected because you are His",
+   "title": "You Are Protected Not Because You Are Perfect"
   },
   {
-   "start": 1396.523,
-   "end": 1440.971,
+   "start": 1404.681,
+   "end": 1440.736,
    "sentences": [
     {
      "segment": "day-reflect-121",
-     "text": "Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey.",
-     "start": 1396.523,
-     "end": 1404.608
-    },
-    {
-     "segment": "day-reflect-121",
      "text": "Carry that with you.",
-     "start": 1404.788,
-     "end": 1406.516
+     "start": 1404.681,
+     "end": 1406.409
     },
     {
      "segment": "payoff",
      "text": "Here is one thing to take into your day.",
-     "start": 1408.196,
-     "end": 1411.396
+     "start": 1408.089,
+     "end": 1411.289
     },
     {
      "segment": "payoff",
      "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
-     "start": 1411.576,
-     "end": 1419.384
+     "start": 1411.469,
+     "end": 1419.235
     },
     {
      "segment": "payoff",
      "text": "Six words.",
-     "start": 1419.564,
-     "end": 1421.057
+     "start": 1419.415,
+     "end": 1420.908
     },
     {
      "segment": "payoff",
      "text": "Let them mark every doorway you walk through.",
-     "start": 1421.237,
-     "end": 1424.587
+     "start": 1421.088,
+     "end": 1424.437
     },
     {
      "segment": "blessing",
      "text": "And now receive this blessing.",
-     "start": 1425.967,
-     "end": 1428.356
+     "start": 1425.817,
+     "end": 1428.207
     },
     {
      "segment": "blessing",
      "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
-     "start": 1428.536,
-     "end": 1435.555
+     "start": 1428.387,
+     "end": 1435.32
     },
     {
      "segment": "blessing",
      "text": "Go into this day covered by his peace.",
-     "start": 1435.735,
-     "end": 1438.337
+     "start": 1435.5,
+     "end": 1438.103
     },
     {
      "segment": "blessing",
      "text": "In Jesus' name, amen.",
-     "start": 1438.517,
-     "end": 1440.971
+     "start": 1438.283,
+     "end": 1440.736
     }
    ],
    "segments": [
@@ -172,290 +166,7 @@
     "blessing"
    ],
    "reference": "Psalm 121:8 (KJV)",
-   "measured_score": 0.8222,
-   "features": {
-    "opening_short": 0.2,
-    "opening_direct": 1.0,
-    "second_person": 0.8999999999999999,
-    "scripture": 1.0,
-    "promise": 0.75,
-    "resolution": 1.0,
-    "length_fit": 0.8220799999999963
-   },
-   "rubric": {
-    "index": 6,
-    "hook_first_2s": 9.1,
-    "stands_alone": 9.4,
-    "emotional_payoff": 9.0,
-    "shareability": 8.8,
-    "loop_potential": 7.8,
-    "policy_safe": 10.0,
-    "reasons": "Immediately reorients the viewer with a profound truth about daily travel, followed by a tangible action.",
-    "hook_line": "God is at both ends today",
-    "title": "God Is There Before You Arrive"
-   },
-   "final_score": 0.8699,
-   "hook": "God is at both ends today",
-   "title": "God Is There Before You Arrive"
-  },
-  {
-   "start": 560.101,
-   "end": 602.937,
-   "sentences": [
-    {
-     "segment": "reflection-5",
-     "text": "Be strong in the Lord, not in yourself.",
-     "start": 560.101,
-     "end": 563.344
-    },
-    {
-     "segment": "reflection-5",
-     "text": "The armour is his, not yours.",
-     "start": 563.524,
-     "end": 566.276
-    },
-    {
-     "segment": "reflection-5",
-     "text": "Your part is to put it on, and to stand.",
-     "start": 566.456,
-     "end": 569.848
-    },
-    {
-     "segment": "scripture-10",
-     "text": "Thou art my hiding place;",
-     "start": 571.228,
-     "end": 573.447
-    },
-    {
-     "segment": "scripture-10",
-     "text": "thou shalt preserve me from trouble;",
-     "start": 573.627,
-     "end": 576.379
-    },
-    {
-     "segment": "scripture-10",
-     "text": "thou shalt compass me about with songs of deliverance.",
-     "start": 576.559,
-     "end": 580.441
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "A hiding place and songs of deliverance.",
-     "start": 582.121,
-     "end": 585.471
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "God does not only hide you from trouble.",
-     "start": 585.651,
-     "end": 588.979
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "He surrounds you with music while you wait.",
-     "start": 589.159,
-     "end": 592.273
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "Even in a hard day, there can be a song underneath it:",
-     "start": 592.453,
-     "end": 596.613
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
-     "start": 596.793,
-     "end": 602.937
-    }
-   ],
-   "segments": [
-    "reflection-5",
-    "scripture-10",
-    "reflection-hiding"
-   ],
-   "reference": "Psalm 32:7 (KJV)",
-   "measured_score": 0.8469,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 0.7216494845360824,
-    "scripture": 1.0,
-    "promise": 0.0,
-    "resolution": 1.0,
-    "length_fit": 0.8865599999999995
-   },
-   "rubric": {
-    "index": 3,
-    "hook_first_2s": 8.7,
-    "stands_alone": 8.9,
-    "emotional_payoff": 8.9,
-    "shareability": 8.4,
-    "loop_potential": 7.5,
-    "policy_safe": 10.0,
-    "reasons": "Clear, commanding opening sentence sets up an encouraging promise of perseverance and protection.",
-    "hook_line": "You don't fight this battle alone",
-    "title": "When You Feel Weak, Stand in Him"
-   },
-   "final_score": 0.8628,
-   "hook": "You don't fight this battle alone",
-   "title": "When You Feel Weak, Stand in Him"
-  },
-  {
-   "start": 214.627,
-   "end": 258.767,
-   "sentences": [
-    {
-     "segment": "prayer-home",
-     "text": "Father, I place my home under your protection.",
-     "start": 214.627,
-     "end": 218.296
-    },
-    {
-     "segment": "prayer-home",
-     "text": "Watch over every door and every room.",
-     "start": 218.476,
-     "end": 221.591
-    },
-    {
-     "segment": "prayer-home",
-     "text": "Keep away harm, accidents and every kind of danger.",
-     "start": 221.771,
-     "end": 226.101
-    },
-    {
-     "segment": "prayer-home",
-     "text": "Let our home be a place of peace, where your presence is felt the moment anyone walks in.",
-     "start": 226.281,
-     "end": 232.809
-    },
-    {
-     "segment": "scripture-5",
-     "text": "For he shall give his angels charge over thee, to keep thee in all thy ways.",
-     "start": 234.189,
-     "end": 239.821
-    },
-    {
-     "segment": "reflection-3",
-     "text": "In all thy ways.",
-     "start": 241.501,
-     "end": 243.293
-    },
-    {
-     "segment": "reflection-3",
-     "text": "Not only in church, not only on good days.",
-     "start": 243.473,
-     "end": 247.164
-    },
-    {
-     "segment": "reflection-3",
-     "text": "On the highway, at the office, in the hospital waiting room, on the walk home.",
-     "start": 247.344,
-     "end": 253.104
-    },
-    {
-     "segment": "reflection-3",
-     "text": "There is no road you will travel today where God's care cannot reach you.",
-     "start": 253.284,
-     "end": 258.767
-    }
-   ],
-   "segments": [
-    "prayer-home",
-    "scripture-5",
-    "reflection-3"
-   ],
-   "reference": "Psalm 91:11 (KJV)",
-   "measured_score": 0.8184,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 0.39999999999999997,
-    "scripture": 1.0,
-    "promise": 0.25,
-    "resolution": 1.0,
-    "length_fit": 0.8344000000000006
-   },
-   "rubric": {
-    "index": 7,
-    "hook_first_2s": 8.2,
-    "stands_alone": 9.2,
-    "emotional_payoff": 9.3,
-    "shareability": 9.1,
-    "loop_potential": 7.6,
-    "policy_safe": 10.0,
-    "reasons": "Grounded real-world locations make the promise of Psalm 91 feel deeply personal and comforting.",
-    "hook_line": "God's care follows you everywhere today",
-    "title": "A Prayer for Protection Wherever You Go"
-   },
-   "final_score": 0.8614
-  },
-  {
-   "start": 1404.788,
-   "end": 1440.971,
-   "sentences": [
-    {
-     "segment": "day-reflect-121",
-     "text": "Carry that with you.",
-     "start": 1404.788,
-     "end": 1406.516
-    },
-    {
-     "segment": "payoff",
-     "text": "Here is one thing to take into your day.",
-     "start": 1408.196,
-     "end": 1411.396
-    },
-    {
-     "segment": "payoff",
-     "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
-     "start": 1411.576,
-     "end": 1419.384
-    },
-    {
-     "segment": "payoff",
-     "text": "Six words.",
-     "start": 1419.564,
-     "end": 1421.057
-    },
-    {
-     "segment": "payoff",
-     "text": "Let them mark every doorway you walk through.",
-     "start": 1421.237,
-     "end": 1424.587
-    },
-    {
-     "segment": "blessing",
-     "text": "And now receive this blessing.",
-     "start": 1425.967,
-     "end": 1428.356
-    },
-    {
-     "segment": "blessing",
-     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
-     "start": 1428.536,
-     "end": 1435.555
-    },
-    {
-     "segment": "blessing",
-     "text": "Go into this day covered by his peace.",
-     "start": 1435.735,
-     "end": 1438.337
-    },
-    {
-     "segment": "blessing",
-     "text": "In Jesus' name, amen.",
-     "start": 1438.517,
-     "end": 1440.971
-    }
-   ],
-   "segments": [
-    "day-reflect-121",
-    "payoff",
-    "blessing"
-   ],
-   "reference": "Psalm 121:8 (KJV)",
-   "measured_score": 0.9655,
+   "measured_score": 0.965,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
@@ -463,61 +174,63 @@
     "scripture": 1.0,
     "promise": 0.9615384615384616,
     "resolution": 1.0,
-    "length_fit": 0.8473199999999997
+    "length_fit": 0.8422000000000025
    },
    "rubric": {
     "index": 0,
-    "hook_first_2s": 6.8,
-    "stands_alone": 7.2,
+    "hook_first_2s": 6.5,
+    "stands_alone": 8.5,
     "emotional_payoff": 8.5,
-    "shareability": 7.9,
-    "loop_potential": 6.5,
+    "shareability": 8.0,
+    "loop_potential": 6.0,
     "policy_safe": 10.0,
-    "reasons": "Opening pronoun 'that' lacks context, but the doorway practice and Scripture blessing deliver deep peace.",
-    "hook_line": "Six words for every doorway today",
-    "title": "Whisper This at Every Doorway Today"
+    "reasons": "Starts mid-thought with 'Carry that with you', but transitions quickly into a practical prayer habit and scripture blessing.",
+    "hook_line": "Take this promise into your day",
+    "title": "A Simple Prayer for Every Doorway You Walk Through"
    },
-   "final_score": 0.8552
+   "final_score": 0.861,
+   "hook": "Take this promise into your day",
+   "title": "A Simple Prayer for Every Doorway You Walk Through"
   },
   {
-   "start": 202.799,
-   "end": 232.809,
+   "start": 202.735,
+   "end": 232.745,
    "sentences": [
     {
      "segment": "prayer-mind",
      "text": "When worry knocks, let your peace answer the door.",
-     "start": 202.799,
-     "end": 206.468
+     "start": 202.735,
+     "end": 206.404
     },
     {
      "segment": "scripture-4",
      "text": "But the Lord is faithful, who shall stablish you, and keep you from evil.",
-     "start": 207.848,
-     "end": 212.947
+     "start": 207.784,
+     "end": 212.861
     },
     {
      "segment": "prayer-home",
      "text": "Father, I place my home under your protection.",
-     "start": 214.627,
-     "end": 218.296
+     "start": 214.541,
+     "end": 218.211
     },
     {
      "segment": "prayer-home",
      "text": "Watch over every door and every room.",
-     "start": 218.476,
-     "end": 221.591
+     "start": 218.391,
+     "end": 221.505
     },
     {
      "segment": "prayer-home",
      "text": "Keep away harm, accidents and every kind of danger.",
-     "start": 221.771,
-     "end": 226.101
+     "start": 221.685,
+     "end": 226.016
     },
     {
      "segment": "prayer-home",
      "text": "Let our home be a place of peace, where your presence is felt the moment anyone walks in.",
-     "start": 226.281,
-     "end": 232.809
+     "start": 226.196,
+     "end": 232.745
     }
    ],
    "segments": [
@@ -538,436 +251,172 @@
    },
    "rubric": {
     "index": 4,
-    "hook_first_2s": 8.9,
+    "hook_first_2s": 8.5,
     "stands_alone": 9.0,
-    "emotional_payoff": 8.5,
-    "shareability": 8.7,
+    "emotional_payoff": 9.0,
+    "shareability": 9.0,
     "loop_potential": 7.0,
     "policy_safe": 10.0,
-    "reasons": "Memorable metaphorical aphorism at the start followed by an earnest prayer for family and home peace.",
-    "hook_line": "When worry knocks, answer with peace",
-    "title": "A Morning Prayer for Your Home"
+    "reasons": "Excellent metaphorical opening line about worry and peace that immediately grabs attention. Deeply relatable house prayer.",
+    "hook_line": "When worry knocks, let peace answer",
+    "title": "A Prayer to Cover Your Home in Peace Today"
    },
-   "final_score": 0.8552
+   "final_score": 0.8592,
+   "hook": "When worry knocks, let peace answer",
+   "title": "A Prayer to Cover Your Home in Peace Today"
   },
   {
-   "start": 1408.196,
-   "end": 1440.971,
+   "start": 214.541,
+   "end": 258.724,
    "sentences": [
     {
-     "segment": "payoff",
-     "text": "Here is one thing to take into your day.",
-     "start": 1408.196,
-     "end": 1411.396
+     "segment": "prayer-home",
+     "text": "Father, I place my home under your protection.",
+     "start": 214.541,
+     "end": 218.211
     },
     {
-     "segment": "payoff",
-     "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
-     "start": 1411.576,
-     "end": 1419.384
+     "segment": "prayer-home",
+     "text": "Watch over every door and every room.",
+     "start": 218.391,
+     "end": 221.505
     },
     {
-     "segment": "payoff",
-     "text": "Six words.",
-     "start": 1419.564,
-     "end": 1421.057
+     "segment": "prayer-home",
+     "text": "Keep away harm, accidents and every kind of danger.",
+     "start": 221.685,
+     "end": 226.016
     },
     {
-     "segment": "payoff",
-     "text": "Let them mark every doorway you walk through.",
-     "start": 1421.237,
-     "end": 1424.587
+     "segment": "prayer-home",
+     "text": "Let our home be a place of peace, where your presence is felt the moment anyone walks in.",
+     "start": 226.196,
+     "end": 232.745
     },
     {
-     "segment": "blessing",
-     "text": "And now receive this blessing.",
-     "start": 1425.967,
-     "end": 1428.356
+     "segment": "scripture-5",
+     "text": "For he shall give his angels charge over thee, to keep thee in all thy ways.",
+     "start": 234.125,
+     "end": 239.757
     },
     {
-     "segment": "blessing",
-     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
-     "start": 1428.536,
-     "end": 1435.555
+     "segment": "reflection-3",
+     "text": "In all thy ways.",
+     "start": 241.437,
+     "end": 243.208
     },
     {
-     "segment": "blessing",
-     "text": "Go into this day covered by his peace.",
-     "start": 1435.735,
-     "end": 1438.337
+     "segment": "reflection-3",
+     "text": "Not only in church, not only on good days.",
+     "start": 243.388,
+     "end": 247.1
     },
     {
-     "segment": "blessing",
-     "text": "In Jesus' name, amen.",
-     "start": 1438.517,
-     "end": 1440.971
+     "segment": "reflection-3",
+     "text": "On the highway, at the office, in the hospital waiting room, on the walk home.",
+     "start": 247.28,
+     "end": 253.04
+    },
+    {
+     "segment": "reflection-3",
+     "text": "There is no road you will travel today where God's care cannot reach you.",
+     "start": 253.22,
+     "end": 258.724
     }
    ],
    "segments": [
-    "payoff",
-    "blessing"
+    "prayer-home",
+    "scripture-5",
+    "reflection-3"
    ],
-   "reference": "Psalm 121:8 (KJV)",
-   "measured_score": 0.8765,
+   "reference": "Psalm 91:11 (KJV)",
+   "measured_score": 0.8183,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
-    "second_person": 0.8108108108108109,
+    "second_person": 0.39999999999999997,
     "scripture": 1.0,
-    "promise": 0.33783783783783783,
+    "promise": 0.25,
     "resolution": 1.0,
-    "length_fit": 0.7110000000000036
+    "length_fit": 0.8326800000000003
    },
    "rubric": {
-    "index": 1,
-    "hook_first_2s": 7.8,
-    "stands_alone": 8.4,
-    "emotional_payoff": 8.6,
-    "shareability": 8.2,
-    "loop_potential": 6.8,
+    "index": 7,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.0,
+    "shareability": 9.0,
+    "loop_potential": 7.0,
     "policy_safe": 10.0,
-    "reasons": "A clear practical prompt that leads cleanly into Scripture and an uplifting blessing.",
-    "hook_line": "One thing to take into today",
-    "title": "A Daily Practice for God's Protection"
+    "reasons": "Starts directly with a clear home prayer and expands into angel protection across all daily locations. Very applicable.",
+    "hook_line": "God's care reaches you everywhere today",
+    "title": "A Prayer for Your Home and Daily Journey"
    },
-   "final_score": 0.8486
+   "final_score": 0.8523
   },
   {
-   "start": 563.524,
-   "end": 602.937,
+   "start": 1396.416,
+   "end": 1440.736,
    "sentences": [
-    {
-     "segment": "reflection-5",
-     "text": "The armour is his, not yours.",
-     "start": 563.524,
-     "end": 566.276
-    },
-    {
-     "segment": "reflection-5",
-     "text": "Your part is to put it on, and to stand.",
-     "start": 566.456,
-     "end": 569.848
-    },
-    {
-     "segment": "scripture-10",
-     "text": "Thou art my hiding place;",
-     "start": 571.228,
-     "end": 573.447
-    },
-    {
-     "segment": "scripture-10",
-     "text": "thou shalt preserve me from trouble;",
-     "start": 573.627,
-     "end": 576.379
-    },
-    {
-     "segment": "scripture-10",
-     "text": "thou shalt compass me about with songs of deliverance.",
-     "start": 576.559,
-     "end": 580.441
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "A hiding place and songs of deliverance.",
-     "start": 582.121,
-     "end": 585.471
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "God does not only hide you from trouble.",
-     "start": 585.651,
-     "end": 588.979
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "He surrounds you with music while you wait.",
-     "start": 589.159,
-     "end": 592.273
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "Even in a hard day, there can be a song underneath it:",
-     "start": 592.453,
-     "end": 596.613
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
-     "start": 596.793,
-     "end": 602.937
-    }
-   ],
-   "segments": [
-    "reflection-5",
-    "scripture-10",
-    "reflection-hiding"
-   ],
-   "reference": "Psalm 32:7 (KJV)",
-   "measured_score": 0.8488,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 0.6741573033707865,
-    "scripture": 1.0,
-    "promise": 0.0,
-    "resolution": 1.0,
-    "length_fit": 0.9765200000000004
-   },
-   "rubric": {
-    "index": 2,
-    "hook_first_2s": 8.4,
-    "stands_alone": 8.2,
-    "emotional_payoff": 8.8,
-    "shareability": 8.1,
-    "loop_potential": 7.4,
-    "policy_safe": 10.0,
-    "reasons": "Strong theological contrast upfront and a comforting insight about God singing over you in trouble.",
-    "hook_line": "The battle is not yours alone",
-    "title": "God Surrounds You with Songs Today"
-   },
-   "final_score": 0.8485
-  },
-  {
-   "start": 495.811,
-   "end": 526.481,
-   "sentences": [
-    {
-     "segment": "prayer-words",
-     "text": "Let my words carry your peace into every room I enter.",
-     "start": 495.811,
-     "end": 499.821
-    },
-    {
-     "segment": "prayer-emotions",
-     "text": "Lord, protect my heart from bitterness, discouragement and despair.",
-     "start": 501.201,
-     "end": 506.172
-    },
-    {
-     "segment": "prayer-emotions",
-     "text": "When disappointment comes today, do not let it settle in.",
-     "start": 506.352,
-     "end": 510.725
-    },
-    {
-     "segment": "prayer-emotions",
-     "text": "Keep my heart soft toward you and toward others, and fill it again and again with hope.",
-     "start": 510.905,
-     "end": 517.092
-    },
-    {
-     "segment": "scripture-8",
-     "text": "For I the LORD thy God will hold thy right hand, saying unto thee, Fear not;",
-     "start": 518.472,
-     "end": 524.723
-    },
-    {
-     "segment": "scripture-8",
-     "text": "I will help thee.",
-     "start": 524.903,
-     "end": 526.481
-    }
-   ],
-   "segments": [
-    "prayer-words",
-    "prayer-emotions",
-    "scripture-8"
-   ],
-   "reference": "Isaiah 41:13 (KJV)",
-   "measured_score": 0.7975,
-   "features": {
-    "opening_short": 0.6,
-    "opening_direct": 1.0,
-    "second_person": 0.29850746268656714,
-    "scripture": 1.0,
-    "promise": 1.0,
-    "resolution": 1.0,
-    "length_fit": 0.6268000000000007
-   },
-   "rubric": {
-    "index": 8,
-    "hook_first_2s": 7.9,
-    "stands_alone": 8.6,
-    "emotional_payoff": 8.7,
-    "shareability": 8.3,
-    "loop_potential": 7.2,
-    "policy_safe": 10.0,
-    "reasons": "Vulnerable prayer against bitterness resolved by the gentle reassurance of Isaiah 41:13.",
-    "hook_line": "Keep your heart soft today",
-    "title": "A Prayer to Protect Your Heart"
-   },
-   "final_score": 0.826
-  },
-  {
-   "start": 387.456,
-   "end": 427.711,
-   "sentences": [
-    {
-     "segment": "prayer-finances",
-     "text": "Father, I place my finances under your care.",
-     "start": 387.456,
-     "end": 391.104
-    },
-    {
-     "segment": "prayer-finances",
-     "text": "Protect what you have entrusted to me from loss, from deception and from waste.",
-     "start": 391.284,
-     "end": 397.044
-    },
-    {
-     "segment": "prayer-finances",
-     "text": "Give me wisdom to spend well, to save well and to give generously.",
-     "start": 397.224,
-     "end": 402.173
-    },
-    {
-     "segment": "prayer-finances",
-     "text": "Provide for every need in my home today.",
-     "start": 402.353,
-     "end": 405.617
-    },
-    {
-     "segment": "scripture-7",
-     "text": "The LORD is my light and my salvation;",
-     "start": 406.997,
-     "end": 410.304
-    },
-    {
-     "segment": "scripture-7",
-     "text": "whom shall I fear?",
-     "start": 410.484,
-     "end": 412.255
-    },
-    {
-     "segment": "scripture-7",
-     "text": "the LORD is the strength of my life;",
-     "start": 412.435,
-     "end": 415.229
-    },
-    {
-     "segment": "scripture-7",
-     "text": "of whom shall I be afraid?",
-     "start": 415.409,
-     "end": 417.799
-    },
-    {
-     "segment": "reflection-4",
-     "text": "David does not answer his fear with a technique.",
-     "start": 419.479,
-     "end": 423.02
-    },
-    {
-     "segment": "reflection-4",
-     "text": "He answers it with a person.",
-     "start": 423.2,
-     "end": 425.547
-    },
-    {
-     "segment": "reflection-4",
-     "text": "The Lord is my light.",
-     "start": 425.727,
-     "end": 427.711
-    }
-   ],
-   "segments": [
-    "prayer-finances",
-    "scripture-7",
-    "reflection-4"
-   ],
-   "reference": "Psalm 27:1 (KJV)",
-   "measured_score": 0.7927,
-   "features": {
-    "opening_short": 1.0,
-    "opening_direct": 1.0,
-    "second_person": 0.2247191011235955,
-    "scripture": 1.0,
-    "promise": 1.0,
-    "resolution": 0.4,
-    "length_fit": 0.9898000000000002
-   },
-   "rubric": {
-    "index": 9,
-    "hook_first_2s": 7.7,
-    "stands_alone": 8.8,
-    "emotional_payoff": 8.1,
-    "shareability": 7.8,
-    "loop_potential": 6.9,
-    "policy_safe": 10.0,
-    "reasons": "Addresses financial anxiety responsibly without false prosperity promises, focusing on wisdom and trust.",
-    "hook_line": "Answer fear with God's presence",
-    "title": "Trusting God with Your Daily Needs"
-   },
-   "final_score": 0.8101
-  },
-  {
-   "start": 1393.719,
-   "end": 1440.971,
-   "sentences": [
-    {
-     "segment": "day-reflect-121",
-     "text": "Thy going out and thy coming in.",
-     "start": 1393.719,
-     "end": 1396.343
-    },
     {
      "segment": "day-reflect-121",
      "text": "Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey.",
-     "start": 1396.523,
-     "end": 1404.608
+     "start": 1396.416,
+     "end": 1404.501
     },
     {
      "segment": "day-reflect-121",
      "text": "Carry that with you.",
-     "start": 1404.788,
-     "end": 1406.516
+     "start": 1404.681,
+     "end": 1406.409
     },
     {
      "segment": "payoff",
      "text": "Here is one thing to take into your day.",
-     "start": 1408.196,
-     "end": 1411.396
+     "start": 1408.089,
+     "end": 1411.289
     },
     {
      "segment": "payoff",
      "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
-     "start": 1411.576,
-     "end": 1419.384
+     "start": 1411.469,
+     "end": 1419.235
     },
     {
      "segment": "payoff",
      "text": "Six words.",
-     "start": 1419.564,
-     "end": 1421.057
+     "start": 1419.415,
+     "end": 1420.908
     },
     {
      "segment": "payoff",
      "text": "Let them mark every doorway you walk through.",
-     "start": 1421.237,
-     "end": 1424.587
+     "start": 1421.088,
+     "end": 1424.437
     },
     {
      "segment": "blessing",
      "text": "And now receive this blessing.",
-     "start": 1425.967,
-     "end": 1428.356
+     "start": 1425.817,
+     "end": 1428.207
     },
     {
      "segment": "blessing",
      "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
-     "start": 1428.536,
-     "end": 1435.555
+     "start": 1428.387,
+     "end": 1435.32
     },
     {
      "segment": "blessing",
      "text": "Go into this day covered by his peace.",
-     "start": 1435.735,
-     "end": 1438.337
+     "start": 1435.5,
+     "end": 1438.103
     },
     {
      "segment": "blessing",
      "text": "In Jesus' name, amen.",
-     "start": 1438.517,
-     "end": 1440.971
+     "start": 1438.283,
+     "end": 1440.736
     }
    ],
    "segments": [
@@ -976,7 +425,386 @@
     "blessing"
    ],
    "reference": "Psalm 121:8 (KJV)",
-   "measured_score": 0.7773,
+   "measured_score": 0.8227,
+   "features": {
+    "opening_short": 0.2,
+    "opening_direct": 1.0,
+    "second_person": 0.8999999999999999,
+    "scripture": 1.0,
+    "promise": 0.75,
+    "resolution": 1.0,
+    "length_fit": 0.8271999999999935
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Strong initial premise about God being at both ends of your journey. Great structure and complete thought.",
+    "hook_line": "God is with you at both ends",
+    "title": "A Doorway Prayer for God's Protection Today"
+   },
+   "final_score": 0.8491
+  },
+  {
+   "start": 1408.089,
+   "end": 1440.736,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "Here is one thing to take into your day.",
+     "start": 1408.089,
+     "end": 1411.289
+    },
+    {
+     "segment": "payoff",
+     "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
+     "start": 1411.469,
+     "end": 1419.235
+    },
+    {
+     "segment": "payoff",
+     "text": "Six words.",
+     "start": 1419.415,
+     "end": 1420.908
+    },
+    {
+     "segment": "payoff",
+     "text": "Let them mark every doorway you walk through.",
+     "start": 1421.088,
+     "end": 1424.437
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing.",
+     "start": 1425.817,
+     "end": 1428.207
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+     "start": 1428.387,
+     "end": 1435.32
+    },
+    {
+     "segment": "blessing",
+     "text": "Go into this day covered by his peace.",
+     "start": 1435.5,
+     "end": 1438.103
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 1438.283,
+     "end": 1440.736
+    }
+   ],
+   "segments": [
+    "payoff",
+    "blessing"
+   ],
+   "reference": "Psalm 121:8 (KJV)",
+   "measured_score": 0.876,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.8108108108108109,
+    "scripture": 1.0,
+    "promise": 0.33783783783783783,
+    "resolution": 1.0,
+    "length_fit": 0.7058800000000065
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 7.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.5,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Direct opening offering a tangible practice for the day. Strong scripture callout and reassuring blessing.",
+    "hook_line": "One short prayer for your entire day",
+    "title": "Whisper These 6 Words Every Time You Leave Home"
+   },
+   "final_score": 0.8454
+  },
+  {
+   "start": 559.931,
+   "end": 602.745,
+   "sentences": [
+    {
+     "segment": "reflection-5",
+     "text": "Be strong in the Lord, not in yourself.",
+     "start": 559.931,
+     "end": 563.173
+    },
+    {
+     "segment": "reflection-5",
+     "text": "The armour is his, not yours.",
+     "start": 563.353,
+     "end": 566.127
+    },
+    {
+     "segment": "reflection-5",
+     "text": "Your part is to put it on, and to stand.",
+     "start": 566.307,
+     "end": 569.677
+    },
+    {
+     "segment": "scripture-10",
+     "text": "Thou art my hiding place;",
+     "start": 571.057,
+     "end": 573.276
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt preserve me from trouble;",
+     "start": 573.456,
+     "end": 576.208
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt compass me about with songs of deliverance.",
+     "start": 576.388,
+     "end": 580.271
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "A hiding place and songs of deliverance.",
+     "start": 581.951,
+     "end": 585.3
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "God does not only hide you from trouble.",
+     "start": 585.48,
+     "end": 588.808
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "He surrounds you with music while you wait.",
+     "start": 588.988,
+     "end": 592.103
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "Even in a hard day, there can be a song underneath it:",
+     "start": 592.283,
+     "end": 596.443
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
+     "start": 596.623,
+     "end": 602.745
+    }
+   ],
+   "segments": [
+    "reflection-5",
+    "scripture-10",
+    "reflection-hiding"
+   ],
+   "reference": "Psalm 32:7 (KJV)",
+   "measured_score": 0.847,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7216494845360824,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.8874400000000014
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 7.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Clear initial directive to rely on God rather than self. Good scriptural backing and comforting resolution.",
+    "hook_line": "Be strong in the Lord, not yourself",
+    "title": "When You Feel Weak, Remember Who Holds You"
+   },
+   "final_score": 0.8338
+  },
+  {
+   "start": 563.353,
+   "end": 602.745,
+   "sentences": [
+    {
+     "segment": "reflection-5",
+     "text": "The armour is his, not yours.",
+     "start": 563.353,
+     "end": 566.127
+    },
+    {
+     "segment": "reflection-5",
+     "text": "Your part is to put it on, and to stand.",
+     "start": 566.307,
+     "end": 569.677
+    },
+    {
+     "segment": "scripture-10",
+     "text": "Thou art my hiding place;",
+     "start": 571.057,
+     "end": 573.276
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt preserve me from trouble;",
+     "start": 573.456,
+     "end": 576.208
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt compass me about with songs of deliverance.",
+     "start": 576.388,
+     "end": 580.271
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "A hiding place and songs of deliverance.",
+     "start": 581.951,
+     "end": 585.3
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "God does not only hide you from trouble.",
+     "start": 585.48,
+     "end": 588.808
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "He surrounds you with music while you wait.",
+     "start": 588.988,
+     "end": 592.103
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "Even in a hard day, there can be a song underneath it:",
+     "start": 592.283,
+     "end": 596.443
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
+     "start": 596.623,
+     "end": 602.745
+    }
+   ],
+   "segments": [
+    "reflection-5",
+    "scripture-10",
+    "reflection-hiding"
+   ],
+   "reference": "Psalm 32:7 (KJV)",
+   "measured_score": 0.8487,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6741573033707865,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.9756800000000021
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Strong theological concept of God's armor and songs of deliverance. Beautiful comfort for a difficult day.",
+    "hook_line": "God surrounds you with songs in trials",
+    "title": "God Is Surrounding You With Songs While You Wait"
+   },
+   "final_score": 0.8245
+  },
+  {
+   "start": 1393.612,
+   "end": 1440.736,
+   "sentences": [
+    {
+     "segment": "day-reflect-121",
+     "text": "Thy going out and thy coming in.",
+     "start": 1393.612,
+     "end": 1396.236
+    },
+    {
+     "segment": "day-reflect-121",
+     "text": "Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey.",
+     "start": 1396.416,
+     "end": 1404.501
+    },
+    {
+     "segment": "day-reflect-121",
+     "text": "Carry that with you.",
+     "start": 1404.681,
+     "end": 1406.409
+    },
+    {
+     "segment": "payoff",
+     "text": "Here is one thing to take into your day.",
+     "start": 1408.089,
+     "end": 1411.289
+    },
+    {
+     "segment": "payoff",
+     "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
+     "start": 1411.469,
+     "end": 1419.235
+    },
+    {
+     "segment": "payoff",
+     "text": "Six words.",
+     "start": 1419.415,
+     "end": 1420.908
+    },
+    {
+     "segment": "payoff",
+     "text": "Let them mark every doorway you walk through.",
+     "start": 1421.088,
+     "end": 1424.437
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing.",
+     "start": 1425.817,
+     "end": 1428.207
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+     "start": 1428.387,
+     "end": 1435.32
+    },
+    {
+     "segment": "blessing",
+     "text": "Go into this day covered by his peace.",
+     "start": 1435.5,
+     "end": 1438.103
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 1438.283,
+     "end": 1440.736
+    }
+   ],
+   "segments": [
+    "day-reflect-121",
+    "payoff",
+    "blessing"
+   ],
+   "reference": "Psalm 121:8 (KJV)",
+   "measured_score": 0.7778,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 0.3,
@@ -984,227 +812,275 @@
     "scripture": 1.0,
     "promise": 0.7009345794392523,
     "resolution": 1.0,
-    "length_fit": 0.7099200000000019
+    "length_fit": 0.715039999999999
    },
    "rubric": {
     "index": 12,
-    "hook_first_2s": 7.1,
-    "stands_alone": 8.0,
-    "emotional_payoff": 8.7,
-    "shareability": 8.1,
-    "loop_potential": 7.3,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
     "policy_safe": 10.0,
-    "reasons": "Opening fragment is slightly clunky, though the exposition and doorway whisper are very actionable.",
-    "hook_line": "Covered wherever you go today",
-    "title": "A Blessing for Your Journey Today"
+    "reasons": "Opens with King James phrasing, then unpacks it into a full practical blessing for going out and coming in. Excellent loop potential.",
+    "hook_line": "God is present at every single doorway",
+    "title": "The 6-Word Prayer for Your Going Out and Coming In"
    },
-   "final_score": 0.8029
+   "final_score": 0.8211
   },
   {
-   "start": 1084.249,
-   "end": 1136.227,
+   "start": 495.683,
+   "end": 526.332,
    "sentences": [
     {
-     "segment": "day-reflect-6",
-     "text": "Truth as your belt.",
-     "start": 1084.249,
-     "end": 1086.148
+     "segment": "prayer-words",
+     "text": "Let my words carry your peace into every room I enter.",
+     "start": 495.683,
+     "end": 499.672
     },
     {
-     "segment": "day-reflect-6",
-     "text": "Righteousness over your heart.",
-     "start": 1086.328,
-     "end": 1088.781
+     "segment": "prayer-emotions",
+     "text": "Lord, protect my heart from bitterness, discouragement and despair.",
+     "start": 501.052,
+     "end": 506.044
     },
     {
-     "segment": "day-reflect-6",
-     "text": "Peace on your feet.",
-     "start": 1088.961,
-     "end": 1090.775
+     "segment": "prayer-emotions",
+     "text": "When disappointment comes today, do not let it settle in.",
+     "start": 506.224,
+     "end": 510.597
     },
     {
-     "segment": "day-reflect-6",
-     "text": "Faith as your shield.",
-     "start": 1090.955,
-     "end": 1092.811
+     "segment": "prayer-emotions",
+     "text": "Keep my heart soft toward you and toward others, and fill it again and again with hope.",
+     "start": 510.777,
+     "end": 516.964
     },
     {
-     "segment": "day-reflect-6",
-     "text": "Salvation as your helmet.",
-     "start": 1092.991,
-     "end": 1095.359
+     "segment": "scripture-8",
+     "text": "For I the LORD thy God will hold thy right hand, saying unto thee, Fear not;",
+     "start": 518.344,
+     "end": 524.573
     },
     {
-     "segment": "day-reflect-6",
-     "text": "The word of God in your hand.",
-     "start": 1095.539,
-     "end": 1097.928
-    },
-    {
-     "segment": "day-reflect-6",
-     "text": "And then, having done all, stand.",
-     "start": 1098.108,
-     "end": 1100.668
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "Listen to what God says to the people he loves.",
-     "start": 1102.348,
-     "end": 1105.655
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
-     "start": 1105.835,
-     "end": 1113.685
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "for I have redeemed thee, I have called thee by thy name;",
-     "start": 1113.865,
-     "end": 1118.175
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "thou art mine.",
-     "start": 1118.355,
-     "end": 1119.997
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "When thou passest through the waters, I will be with thee;",
-     "start": 1120.177,
-     "end": 1124.295
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "and through the rivers, they shall not overflow thee:",
-     "start": 1124.475,
-     "end": 1128.165
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "when thou walkest through the fire, thou shalt not be burned;",
-     "start": 1128.345,
-     "end": 1132.825
-    },
-    {
-     "segment": "day-isaiah-43",
-     "text": "neither shall the flame kindle upon thee.",
-     "start": 1133.005,
-     "end": 1136.227
+     "segment": "scripture-8",
+     "text": "I will help thee.",
+     "start": 524.753,
+     "end": 526.332
     }
    ],
    "segments": [
-    "day-reflect-6",
-    "day-isaiah-43"
+    "prayer-words",
+    "prayer-emotions",
+    "scripture-8"
    ],
-   "reference": "Isaiah 43:1-2 (KJV)",
-   "measured_score": 0.7759,
+   "reference": "Isaiah 41:13 (KJV)",
+   "measured_score": 0.7974,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.29850746268656714,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.6259600000000001
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Good practical prayer against bitterness and disappointment. Concludes with a reassuring scripture from Isaiah.",
+    "hook_line": "Protect your heart from bitterness today",
+    "title": "A Prayer When Disappointment Tries to Settle In"
+   },
+   "final_score": 0.814
+  },
+  {
+   "start": 387.392,
+   "end": 427.604,
+   "sentences": [
+    {
+     "segment": "prayer-finances",
+     "text": "Father, I place my finances under your care.",
+     "start": 387.392,
+     "end": 391.04
+    },
+    {
+     "segment": "prayer-finances",
+     "text": "Protect what you have entrusted to me from loss, from deception and from waste.",
+     "start": 391.22,
+     "end": 396.959
+    },
+    {
+     "segment": "prayer-finances",
+     "text": "Give me wisdom to spend well, to save well and to give generously.",
+     "start": 397.139,
+     "end": 402.088
+    },
+    {
+     "segment": "prayer-finances",
+     "text": "Provide for every need in my home today.",
+     "start": 402.268,
+     "end": 405.532
+    },
+    {
+     "segment": "scripture-7",
+     "text": "The LORD is my light and my salvation;",
+     "start": 406.912,
+     "end": 410.219
+    },
+    {
+     "segment": "scripture-7",
+     "text": "whom shall I fear?",
+     "start": 410.399,
+     "end": 412.169
+    },
+    {
+     "segment": "scripture-7",
+     "text": "the LORD is the strength of my life;",
+     "start": 412.349,
+     "end": 415.123
+    },
+    {
+     "segment": "scripture-7",
+     "text": "of whom shall I be afraid?",
+     "start": 415.303,
+     "end": 417.692
+    },
+    {
+     "segment": "reflection-4",
+     "text": "David does not answer his fear with a technique.",
+     "start": 419.372,
+     "end": 422.913
+    },
+    {
+     "segment": "reflection-4",
+     "text": "He answers it with a person.",
+     "start": 423.093,
+     "end": 425.44
+    },
+    {
+     "segment": "reflection-4",
+     "text": "The Lord is my light.",
+     "start": 425.62,
+     "end": 427.604
+    }
+   ],
+   "segments": [
+    "prayer-finances",
+    "scripture-7",
+    "reflection-4"
+   ],
+   "reference": "Psalm 27:1 (KJV)",
+   "measured_score": 0.7929,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
-    "second_person": 0.5172413793103448,
+    "second_person": 0.2247191011235955,
     "scripture": 1.0,
-    "promise": 0.8620689655172413,
+    "promise": 1.0,
     "resolution": 0.4,
-    "length_fit": 0.5208799999999973
+    "length_fit": 0.9915200000000004
    },
    "rubric": {
-    "index": 14,
-    "hook_first_2s": 7.4,
-    "stands_alone": 7.9,
-    "emotional_payoff": 9.0,
-    "shareability": 8.2,
+    "index": 9,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
     "loop_potential": 6.5,
     "policy_safe": 10.0,
-    "reasons": "Full armor catalog takes time to build momentum, but concludes on powerful promises of presence.",
-    "hook_line": "God will walk through fire with you",
-    "title": "Do Not Fear: You Are His"
+    "reasons": "Addresses financial worries directly without prosperity gospel traps. Powerful closing line about answering fear with a person.",
+    "hook_line": "Answer your fear with a Person",
+    "title": "A Prayer Over Your Finances and Peace of Mind"
    },
-   "final_score": 0.8004
+   "final_score": 0.8072
   },
   {
-   "start": 1088.961,
-   "end": 1136.227,
+   "start": 1088.684,
+   "end": 1135.949,
    "sentences": [
     {
      "segment": "day-reflect-6",
      "text": "Peace on your feet.",
-     "start": 1088.961,
-     "end": 1090.775
+     "start": 1088.684,
+     "end": 1090.497
     },
     {
      "segment": "day-reflect-6",
      "text": "Faith as your shield.",
-     "start": 1090.955,
-     "end": 1092.811
+     "start": 1090.677,
+     "end": 1092.533
     },
     {
      "segment": "day-reflect-6",
      "text": "Salvation as your helmet.",
-     "start": 1092.991,
-     "end": 1095.359
+     "start": 1092.713,
+     "end": 1095.081
     },
     {
      "segment": "day-reflect-6",
      "text": "The word of God in your hand.",
-     "start": 1095.539,
-     "end": 1097.928
+     "start": 1095.261,
+     "end": 1097.651
     },
     {
      "segment": "day-reflect-6",
      "text": "And then, having done all, stand.",
-     "start": 1098.108,
-     "end": 1100.668
+     "start": 1097.831,
+     "end": 1100.391
     },
     {
      "segment": "day-isaiah-43",
      "text": "Listen to what God says to the people he loves.",
-     "start": 1102.348,
-     "end": 1105.655
+     "start": 1102.071,
+     "end": 1105.377
     },
     {
      "segment": "day-isaiah-43",
      "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
-     "start": 1105.835,
-     "end": 1113.685
+     "start": 1105.557,
+     "end": 1113.408
     },
     {
      "segment": "day-isaiah-43",
      "text": "for I have redeemed thee, I have called thee by thy name;",
-     "start": 1113.865,
-     "end": 1118.175
+     "start": 1113.588,
+     "end": 1117.897
     },
     {
      "segment": "day-isaiah-43",
      "text": "thou art mine.",
-     "start": 1118.355,
-     "end": 1119.997
+     "start": 1118.077,
+     "end": 1119.741
     },
     {
      "segment": "day-isaiah-43",
      "text": "When thou passest through the waters, I will be with thee;",
-     "start": 1120.177,
-     "end": 1124.295
+     "start": 1119.921,
+     "end": 1124.039
     },
     {
      "segment": "day-isaiah-43",
      "text": "and through the rivers, they shall not overflow thee:",
-     "start": 1124.475,
-     "end": 1128.165
+     "start": 1124.219,
+     "end": 1127.888
     },
     {
      "segment": "day-isaiah-43",
      "text": "when thou walkest through the fire, thou shalt not be burned;",
-     "start": 1128.345,
-     "end": 1132.825
+     "start": 1128.068,
+     "end": 1132.548
     },
     {
      "segment": "day-isaiah-43",
      "text": "neither shall the flame kindle upon thee.",
-     "start": 1133.005,
-     "end": 1136.227
+     "start": 1132.728,
+     "end": 1135.949
     }
    ],
    "segments": [
@@ -1220,109 +1096,198 @@
     "scripture": 1.0,
     "promise": 0.9259259259259259,
     "resolution": 0.4,
-    "length_fit": 0.7093599999999969
+    "length_fit": 0.709399999999996
    },
    "rubric": {
     "index": 11,
-    "hook_first_2s": 7.3,
-    "stands_alone": 7.5,
-    "emotional_payoff": 8.9,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
     "shareability": 8.0,
-    "loop_potential": 6.4,
+    "loop_potential": 6.0,
     "policy_safe": 10.0,
-    "reasons": "Begins in the middle of listing armor, but recovers strongly with the iconic Isaiah 43 promise.",
-    "hook_line": "Stand firm in His promises today",
-    "title": "When You Pass Through the Waters"
+    "reasons": "Recites armor fragments before launching into Isaiah 43 scripture reading. Strong scriptural reassurance.",
+    "hook_line": "God called you by name: You are His",
+    "title": "Do Not Fear: God Promises to Walk With You"
    },
-   "final_score": 0.7926
+   "final_score": 0.7866
   },
   {
-   "start": 1086.328,
-   "end": 1136.227,
+   "start": 566.307,
+   "end": 602.745,
+   "sentences": [
+    {
+     "segment": "reflection-5",
+     "text": "Your part is to put it on, and to stand.",
+     "start": 566.307,
+     "end": 569.677
+    },
+    {
+     "segment": "scripture-10",
+     "text": "Thou art my hiding place;",
+     "start": 571.057,
+     "end": 573.276
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt preserve me from trouble;",
+     "start": 573.456,
+     "end": 576.208
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt compass me about with songs of deliverance.",
+     "start": 576.388,
+     "end": 580.271
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "A hiding place and songs of deliverance.",
+     "start": 581.951,
+     "end": 585.3
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "God does not only hide you from trouble.",
+     "start": 585.48,
+     "end": 588.808
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "He surrounds you with music while you wait.",
+     "start": 588.988,
+     "end": 592.103
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "Even in a hard day, there can be a song underneath it:",
+     "start": 592.283,
+     "end": 596.443
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
+     "start": 596.623,
+     "end": 602.745
+    }
+   ],
+   "segments": [
+    "reflection-5",
+    "scripture-10",
+    "reflection-hiding"
+   ],
+   "reference": "Psalm 32:7 (KJV)",
+   "measured_score": 0.8261,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6024096385542168,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.8575199999999995
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 6.0,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Starts mid-sentence on 'Your part is to put it on', which cuts into context a bit abruptly. Still delivers a good message.",
+    "hook_line": "Your only job is to stand firm",
+    "title": "There Is a Quiet Song Underneath Your Hard Day"
+   },
+   "final_score": 0.7804
+  },
+  {
+   "start": 1086.051,
+   "end": 1135.949,
    "sentences": [
     {
      "segment": "day-reflect-6",
      "text": "Righteousness over your heart.",
-     "start": 1086.328,
-     "end": 1088.781
+     "start": 1086.051,
+     "end": 1088.504
     },
     {
      "segment": "day-reflect-6",
      "text": "Peace on your feet.",
-     "start": 1088.961,
-     "end": 1090.775
+     "start": 1088.684,
+     "end": 1090.497
     },
     {
      "segment": "day-reflect-6",
      "text": "Faith as your shield.",
-     "start": 1090.955,
-     "end": 1092.811
+     "start": 1090.677,
+     "end": 1092.533
     },
     {
      "segment": "day-reflect-6",
      "text": "Salvation as your helmet.",
-     "start": 1092.991,
-     "end": 1095.359
+     "start": 1092.713,
+     "end": 1095.081
     },
     {
      "segment": "day-reflect-6",
      "text": "The word of God in your hand.",
-     "start": 1095.539,
-     "end": 1097.928
+     "start": 1095.261,
+     "end": 1097.651
     },
     {
      "segment": "day-reflect-6",
      "text": "And then, having done all, stand.",
-     "start": 1098.108,
-     "end": 1100.668
+     "start": 1097.831,
+     "end": 1100.391
     },
     {
      "segment": "day-isaiah-43",
      "text": "Listen to what God says to the people he loves.",
-     "start": 1102.348,
-     "end": 1105.655
+     "start": 1102.071,
+     "end": 1105.377
     },
     {
      "segment": "day-isaiah-43",
      "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
-     "start": 1105.835,
-     "end": 1113.685
+     "start": 1105.557,
+     "end": 1113.408
     },
     {
      "segment": "day-isaiah-43",
      "text": "for I have redeemed thee, I have called thee by thy name;",
-     "start": 1113.865,
-     "end": 1118.175
+     "start": 1113.588,
+     "end": 1117.897
     },
     {
      "segment": "day-isaiah-43",
      "text": "thou art mine.",
-     "start": 1118.355,
-     "end": 1119.997
+     "start": 1118.077,
+     "end": 1119.741
     },
     {
      "segment": "day-isaiah-43",
      "text": "When thou passest through the waters, I will be with thee;",
-     "start": 1120.177,
-     "end": 1124.295
+     "start": 1119.921,
+     "end": 1124.039
     },
     {
      "segment": "day-isaiah-43",
      "text": "and through the rivers, they shall not overflow thee:",
-     "start": 1124.475,
-     "end": 1128.165
+     "start": 1124.219,
+     "end": 1127.888
     },
     {
      "segment": "day-isaiah-43",
      "text": "when thou walkest through the fire, thou shalt not be burned;",
-     "start": 1128.345,
-     "end": 1132.825
+     "start": 1128.068,
+     "end": 1132.548
     },
     {
      "segment": "day-isaiah-43",
      "text": "neither shall the flame kindle upon thee.",
-     "start": 1133.005,
-     "end": 1136.227
+     "start": 1132.728,
+     "end": 1135.949
     }
    ],
    "segments": [
@@ -1338,176 +1303,211 @@
     "scripture": 1.0,
     "promise": 0.8928571428571429,
     "resolution": 0.4,
-    "length_fit": 0.6040399999999955
+    "length_fit": 0.6040799999999944
    },
    "rubric": {
     "index": 13,
-    "hook_first_2s": 7.0,
-    "stands_alone": 7.4,
-    "emotional_payoff": 8.9,
-    "shareability": 8.0,
-    "loop_potential": 6.3,
+    "hook_first_2s": 6.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 6.0,
     "policy_safe": 10.0,
-    "reasons": "Armor fragments start mid-sequence; strong emotional resonance once Isaiah 43 begins.",
-    "hook_line": "You are not facing this alone",
-    "title": "He Calls You by Your Name"
+    "reasons": "Slightly longer armor listing header before the core Isaiah scripture. Powerful promise of presence in trials.",
+    "hook_line": "When you pass through waters, He is there",
+    "title": "When You Pass Through Waters, He Is With You"
    },
-   "final_score": 0.7867
+   "final_score": 0.7757
   },
   {
-   "start": 566.456,
-   "end": 602.937,
+   "start": 1083.951,
+   "end": 1135.949,
    "sentences": [
     {
-     "segment": "reflection-5",
-     "text": "Your part is to put it on, and to stand.",
-     "start": 566.456,
-     "end": 569.848
+     "segment": "day-reflect-6",
+     "text": "Truth as your belt.",
+     "start": 1083.951,
+     "end": 1085.871
     },
     {
-     "segment": "scripture-10",
-     "text": "Thou art my hiding place;",
-     "start": 571.228,
-     "end": 573.447
+     "segment": "day-reflect-6",
+     "text": "Righteousness over your heart.",
+     "start": 1086.051,
+     "end": 1088.504
     },
     {
-     "segment": "scripture-10",
-     "text": "thou shalt preserve me from trouble;",
-     "start": 573.627,
-     "end": 576.379
+     "segment": "day-reflect-6",
+     "text": "Peace on your feet.",
+     "start": 1088.684,
+     "end": 1090.497
     },
     {
-     "segment": "scripture-10",
-     "text": "thou shalt compass me about with songs of deliverance.",
-     "start": 576.559,
-     "end": 580.441
+     "segment": "day-reflect-6",
+     "text": "Faith as your shield.",
+     "start": 1090.677,
+     "end": 1092.533
     },
     {
-     "segment": "reflection-hiding",
-     "text": "A hiding place and songs of deliverance.",
-     "start": 582.121,
-     "end": 585.471
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
     },
     {
-     "segment": "reflection-hiding",
-     "text": "God does not only hide you from trouble.",
-     "start": 585.651,
-     "end": 588.979
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
     },
     {
-     "segment": "reflection-hiding",
-     "text": "He surrounds you with music while you wait.",
-     "start": 589.159,
-     "end": 592.273
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
     },
     {
-     "segment": "reflection-hiding",
-     "text": "Even in a hard day, there can be a song underneath it:",
-     "start": 592.453,
-     "end": 596.613
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
     },
     {
-     "segment": "reflection-hiding",
-     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
-     "start": 596.793,
-     "end": 602.937
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
     }
    ],
    "segments": [
-    "reflection-5",
-    "scripture-10",
-    "reflection-hiding"
+    "day-reflect-6",
+    "day-isaiah-43"
    ],
-   "reference": "Psalm 32:7 (KJV)",
-   "measured_score": 0.8263,
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7758,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
-    "second_person": 0.6024096385542168,
+    "second_person": 0.5172413793103448,
     "scripture": 1.0,
-    "promise": 0.0,
-    "resolution": 1.0,
-    "length_fit": 0.8592399999999998
+    "promise": 0.8620689655172413,
+    "resolution": 0.4,
+    "length_fit": 0.5200799999999981
    },
    "rubric": {
-    "index": 5,
-    "hook_first_2s": 6.2,
-    "stands_alone": 6.8,
-    "emotional_payoff": 8.4,
+    "index": 14,
+    "hook_first_2s": 6.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
     "shareability": 7.5,
-    "loop_potential": 7.1,
+    "loop_potential": 6.0,
     "policy_safe": 10.0,
-    "reasons": "Starting mid-thought without specifying the armor weakens the hook, though the payoff remains tender.",
-    "hook_line": "God's quiet song in hard days",
-    "title": "He Surrounds You While You Wait"
+    "reasons": "Longest version of the armor listing before reading Isaiah 43. Strong biblical foundation and comfort.",
+    "hook_line": "Stand firm in God's protection today",
+    "title": "A Scriptural Reminder That God Holds You"
    },
-   "final_score": 0.0
+   "final_score": 0.7753
   }
  ],
  "chosen": [
   {
-   "start": 729.528,
-   "end": 771.393,
+   "start": 729.251,
+   "end": 771.095,
    "sentences": [
     {
      "segment": "reflection-6",
      "text": "You are not protected because you are perfect.",
-     "start": 729.528,
-     "end": 733.176
+     "start": 729.251,
+     "end": 732.899
     },
     {
      "segment": "reflection-6",
      "text": "You are protected because you are his.",
-     "start": 733.356,
-     "end": 736.321
+     "start": 733.079,
+     "end": 736.044
     },
     {
      "segment": "prayer-thanks",
      "text": "Thank you, Father, for every time you have protected me without my even knowing it.",
-     "start": 737.701,
-     "end": 743.632
+     "start": 737.424,
+     "end": 743.355
     },
     {
      "segment": "prayer-thanks",
      "text": "The accidents that did not happen.",
-     "start": 743.812,
-     "end": 746.479
+     "start": 743.535,
+     "end": 746.201
     },
     {
      "segment": "prayer-thanks",
      "text": "The dangers I never saw.",
-     "start": 746.659,
-     "end": 748.941
+     "start": 746.381,
+     "end": 748.664
     },
     {
      "segment": "prayer-thanks",
      "text": "Thank you for keeping me until this morning.",
-     "start": 749.121,
-     "end": 752.428
+     "start": 748.844,
+     "end": 752.151
     },
     {
      "segment": "prayer-thanks",
      "text": "I trust you to keep me today.",
-     "start": 752.608,
-     "end": 754.997
+     "start": 752.331,
+     "end": 754.699
     },
     {
      "segment": "prayer-purpose",
      "text": "Lord, make me a shelter for others today.",
-     "start": 756.377,
-     "end": 759.492
+     "start": 756.079,
+     "end": 759.193
     },
     {
      "segment": "prayer-purpose",
      "text": "Let me notice the person who feels unsafe, and offer kindness, help and prayer.",
-     "start": 759.672,
-     "end": 765.923
+     "start": 759.373,
+     "end": 765.624
     },
     {
      "segment": "prayer-purpose",
      "text": "As you protect me, let me protect the weak and speak up for those who cannot.",
-     "start": 766.103,
-     "end": 771.393
+     "start": 765.804,
+     "end": 771.095
     }
    ],
    "segments": [
@@ -1516,7 +1516,7 @@
     "prayer-purpose"
    ],
    "reference": null,
-   "measured_score": 0.7859,
+   "measured_score": 0.786,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
@@ -1524,87 +1524,81 @@
     "scripture": 0.4,
     "promise": 0.7978723404255319,
     "resolution": 0.4,
-    "length_fit": 0.9253999999999997
+    "length_fit": 0.926239999999998
    },
    "rubric": {
     "index": 10,
-    "hook_first_2s": 9.6,
+    "hook_first_2s": 9.0,
     "stands_alone": 9.5,
-    "emotional_payoff": 9.4,
-    "shareability": 9.3,
-    "loop_potential": 8.2,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 8.0,
     "policy_safe": 10.0,
-    "reasons": "Exceptional first sentence halts the scroll; turns personal gratitude outward toward serving others.",
-    "hook_line": "You are protected because you're His",
-    "title": "You Don't Have to Be Perfect"
+    "reasons": "Exceptional hook line that removes shame and offers profound comfort. Beautiful prayer of gratitude and intercession.",
+    "hook_line": "You are protected because you are His",
+    "title": "You Are Protected Not Because You Are Perfect"
    },
-   "final_score": 0.8744,
-   "hook": "You are protected because you're His",
-   "title": "You Don't Have to Be Perfect"
+   "final_score": 0.8644,
+   "hook": "You are protected because you are His",
+   "title": "You Are Protected Not Because You Are Perfect"
   },
   {
-   "start": 1396.523,
-   "end": 1440.971,
+   "start": 1404.681,
+   "end": 1440.736,
    "sentences": [
     {
      "segment": "day-reflect-121",
-     "text": "Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey.",
-     "start": 1396.523,
-     "end": 1404.608
-    },
-    {
-     "segment": "day-reflect-121",
      "text": "Carry that with you.",
-     "start": 1404.788,
-     "end": 1406.516
+     "start": 1404.681,
+     "end": 1406.409
     },
     {
      "segment": "payoff",
      "text": "Here is one thing to take into your day.",
-     "start": 1408.196,
-     "end": 1411.396
+     "start": 1408.089,
+     "end": 1411.289
     },
     {
      "segment": "payoff",
      "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
-     "start": 1411.576,
-     "end": 1419.384
+     "start": 1411.469,
+     "end": 1419.235
     },
     {
      "segment": "payoff",
      "text": "Six words.",
-     "start": 1419.564,
-     "end": 1421.057
+     "start": 1419.415,
+     "end": 1420.908
     },
     {
      "segment": "payoff",
      "text": "Let them mark every doorway you walk through.",
-     "start": 1421.237,
-     "end": 1424.587
+     "start": 1421.088,
+     "end": 1424.437
     },
     {
      "segment": "blessing",
      "text": "And now receive this blessing.",
-     "start": 1425.967,
-     "end": 1428.356
+     "start": 1425.817,
+     "end": 1428.207
     },
     {
      "segment": "blessing",
      "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
-     "start": 1428.536,
-     "end": 1435.555
+     "start": 1428.387,
+     "end": 1435.32
     },
     {
      "segment": "blessing",
      "text": "Go into this day covered by his peace.",
-     "start": 1435.735,
-     "end": 1438.337
+     "start": 1435.5,
+     "end": 1438.103
     },
     {
      "segment": "blessing",
      "text": "In Jesus' name, amen.",
-     "start": 1438.517,
-     "end": 1440.971
+     "start": 1438.283,
+     "end": 1440.736
     }
    ],
    "segments": [
@@ -1613,134 +1607,104 @@
     "blessing"
    ],
    "reference": "Psalm 121:8 (KJV)",
-   "measured_score": 0.8222,
-   "features": {
-    "opening_short": 0.2,
-    "opening_direct": 1.0,
-    "second_person": 0.8999999999999999,
-    "scripture": 1.0,
-    "promise": 0.75,
-    "resolution": 1.0,
-    "length_fit": 0.8220799999999963
-   },
-   "rubric": {
-    "index": 6,
-    "hook_first_2s": 9.1,
-    "stands_alone": 9.4,
-    "emotional_payoff": 9.0,
-    "shareability": 8.8,
-    "loop_potential": 7.8,
-    "policy_safe": 10.0,
-    "reasons": "Immediately reorients the viewer with a profound truth about daily travel, followed by a tangible action.",
-    "hook_line": "God is at both ends today",
-    "title": "God Is There Before You Arrive"
-   },
-   "final_score": 0.8699,
-   "hook": "God is at both ends today",
-   "title": "God Is There Before You Arrive"
-  },
-  {
-   "start": 560.101,
-   "end": 602.937,
-   "sentences": [
-    {
-     "segment": "reflection-5",
-     "text": "Be strong in the Lord, not in yourself.",
-     "start": 560.101,
-     "end": 563.344
-    },
-    {
-     "segment": "reflection-5",
-     "text": "The armour is his, not yours.",
-     "start": 563.524,
-     "end": 566.276
-    },
-    {
-     "segment": "reflection-5",
-     "text": "Your part is to put it on, and to stand.",
-     "start": 566.456,
-     "end": 569.848
-    },
-    {
-     "segment": "scripture-10",
-     "text": "Thou art my hiding place;",
-     "start": 571.228,
-     "end": 573.447
-    },
-    {
-     "segment": "scripture-10",
-     "text": "thou shalt preserve me from trouble;",
-     "start": 573.627,
-     "end": 576.379
-    },
-    {
-     "segment": "scripture-10",
-     "text": "thou shalt compass me about with songs of deliverance.",
-     "start": 576.559,
-     "end": 580.441
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "A hiding place and songs of deliverance.",
-     "start": 582.121,
-     "end": 585.471
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "God does not only hide you from trouble.",
-     "start": 585.651,
-     "end": 588.979
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "He surrounds you with music while you wait.",
-     "start": 589.159,
-     "end": 592.273
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "Even in a hard day, there can be a song underneath it:",
-     "start": 592.453,
-     "end": 596.613
-    },
-    {
-     "segment": "reflection-hiding",
-     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
-     "start": 596.793,
-     "end": 602.937
-    }
-   ],
-   "segments": [
-    "reflection-5",
-    "scripture-10",
-    "reflection-hiding"
-   ],
-   "reference": "Psalm 32:7 (KJV)",
-   "measured_score": 0.8469,
+   "measured_score": 0.965,
    "features": {
     "opening_short": 1.0,
     "opening_direct": 1.0,
-    "second_person": 0.7216494845360824,
+    "second_person": 0.8974358974358974,
     "scripture": 1.0,
-    "promise": 0.0,
+    "promise": 0.9615384615384616,
     "resolution": 1.0,
-    "length_fit": 0.8865599999999995
+    "length_fit": 0.8422000000000025
    },
    "rubric": {
-    "index": 3,
-    "hook_first_2s": 8.7,
-    "stands_alone": 8.9,
-    "emotional_payoff": 8.9,
-    "shareability": 8.4,
-    "loop_potential": 7.5,
+    "index": 0,
+    "hook_first_2s": 6.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.0,
     "policy_safe": 10.0,
-    "reasons": "Clear, commanding opening sentence sets up an encouraging promise of perseverance and protection.",
-    "hook_line": "You don't fight this battle alone",
-    "title": "When You Feel Weak, Stand in Him"
+    "reasons": "Starts mid-thought with 'Carry that with you', but transitions quickly into a practical prayer habit and scripture blessing.",
+    "hook_line": "Take this promise into your day",
+    "title": "A Simple Prayer for Every Doorway You Walk Through"
    },
-   "final_score": 0.8628,
-   "hook": "You don't fight this battle alone",
-   "title": "When You Feel Weak, Stand in Him"
+   "final_score": 0.861,
+   "hook": "Take this promise into your day",
+   "title": "A Simple Prayer for Every Doorway You Walk Through"
+  },
+  {
+   "start": 202.735,
+   "end": 232.745,
+   "sentences": [
+    {
+     "segment": "prayer-mind",
+     "text": "When worry knocks, let your peace answer the door.",
+     "start": 202.735,
+     "end": 206.404
+    },
+    {
+     "segment": "scripture-4",
+     "text": "But the Lord is faithful, who shall stablish you, and keep you from evil.",
+     "start": 207.784,
+     "end": 212.861
+    },
+    {
+     "segment": "prayer-home",
+     "text": "Father, I place my home under your protection.",
+     "start": 214.541,
+     "end": 218.211
+    },
+    {
+     "segment": "prayer-home",
+     "text": "Watch over every door and every room.",
+     "start": 218.391,
+     "end": 221.505
+    },
+    {
+     "segment": "prayer-home",
+     "text": "Keep away harm, accidents and every kind of danger.",
+     "start": 221.685,
+     "end": 226.016
+    },
+    {
+     "segment": "prayer-home",
+     "text": "Let our home be a place of peace, where your presence is felt the moment anyone walks in.",
+     "start": 226.196,
+     "end": 232.745
+    }
+   ],
+   "segments": [
+    "prayer-mind",
+    "scripture-4",
+    "prayer-home"
+   ],
+   "reference": "2 Thessalonians 3:3 (KJV)",
+   "measured_score": 0.8354,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7692307692307693,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.6003999999999996
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 9.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Excellent metaphorical opening line about worry and peace that immediately grabs attention. Deeply relatable house prayer.",
+    "hook_line": "When worry knocks, let peace answer",
+    "title": "A Prayer to Cover Your Home in Peace Today"
+   },
+   "final_score": 0.8592,
+   "hook": "When worry knocks, let peace answer",
+   "title": "A Prayer to Cover Your Home in Peace Today"
   }
  ]
 }

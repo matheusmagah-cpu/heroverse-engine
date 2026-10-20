@@ -55,6 +55,32 @@ class FakeSession:
 
 
 class ChannelConfig(unittest.TestCase):
+    def setUp(self):
+        self.sleeps = []
+        self._sleep = cc.time.sleep
+        cc.time.sleep = self.sleeps.append  # verification waits are recorded, not slept
+
+    def tearDown(self):
+        cc.time.sleep = self._sleep
+
+    def test_late_propagation_is_verified_on_a_later_read(self):
+        class Late(FakeSession):  # YouTube keeps serving the old branding for the first reads
+            reads = 0
+
+            def get(self, url, params=None, **kw):
+                Late.reads += 1
+                r = super().get(url, params=params, **kw)
+                if self.updates and Late.reads <= 3:  # first two reads after the update: old text
+                    old = copy.deepcopy(r.json())
+                    old["items"][0]["brandingSettings"] = copy.deepcopy(self.updates[0]["brandingSettings"])
+                    old["items"][0]["brandingSettings"]["channel"]["description"] = "old"
+                    return R(200, old)
+                return r
+        with tempfile.TemporaryDirectory() as t:
+            cc.pv.session = lambda: Late()
+            (Path(t) / "c.json").write_text(json.dumps(FIXTURE))
+            cc.main(Path(t) / "c.json", apply=True, receipts_dir=Path(t))
+        self.assertGreater(len(self.sleeps), 1)
     def run_cfg(self, d, fake, apply, fixture=FIXTURE):
         cc.pv.session = lambda: fake
         (d / "channel.json").write_text(json.dumps(fixture))
@@ -137,6 +163,7 @@ class ChannelConfig(unittest.TestCase):
             with self.assertRaises(SystemExit) as e:
                 cc.main(Path(t) / "c.json", apply=True, receipts_dir=Path(t) / "receipts")
             self.assertIn("CHANNEL_UPDATE_NOT_VERIFIED", str(e.exception))
+            self.assertEqual(self.sleeps, list(cc.VERIFY_WAITS))  # every wait was tried before failing
             self.assertTrue(list((Path(t) / "receipts").glob("channel-config-*.json")))  # receipt still written
 
 

@@ -1,0 +1,64 @@
+{
+  "additional_api_calls": 0,
+  "brief": {
+    "path": "migration/evidence/daily-report/learning/briefs/695a7592679054392d76e135ef72281417f83993495b16cd83fa9293851eec5c.json",
+    "sha256": "07eec966dd9b49e85f4dfbe66ec693d0a9384f9deaee6725020e2fab3456b885"
+  },
+  "capture": {
+    "path": "migration/evidence/daily-report/learning/captures/aaa3ea00fd579e3a439a18ca2660362bafcfc2af641f47bb23a97768744e3d15.json",
+    "sha256": "aaa3ea00fd579e3a439a18ca2660362bafcfc2af641f47bb23a97768744e3d15"
+  },
+  "captured_at": "2026-10-20T01:35:44.590502+00:00",
+  "decision": {
+    "causal_claim": null,
+    "evidence_decision": "HOLD",
+    "performance_classification": "INSUFFICIENT",
+    "plan_action": "KEEP_EXISTING_PENDING_EVIDENCE",
+    "reasons": [
+      "NO_VERIFIED_EXACT_CHECKPOINT",
+      "NO_MATCHED_BASELINE",
+      "NO_VERSIONED_OWNED_STRUCTURE_ASSIGNMENT",
+      "REFERENCE_SOURCE_CONFLICTS"
+    ]
+  },
+  "report": {
+    "path": "migration/evidence/daily-report/learning/reports/7e00a7996945d4d11f2e58b5c0368d14c5efa24b41b2403b2a403afb602f68c0.json.gz",
+    "sha256": "e4e53cbd6bd3ca161afdf2974faa0f895f2041f6380b5f0076dec1dcfe6dcf89",
+    "uncompressed_sha256": "7e00a7996945d4d11f2e58b5c0368d14c5efa24b41b2403b2a403afb602f68c0"
+  },
+  "report_only": true,
+  "source_records": {
+    "ledger": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/publish/ledger.json",
+      "path": "migration/evidence/daily-report/learning/sources/2547de6302620e5b96336b876b7970ffe00f3325a24dd6f6db870c8479f7fe8a.json",
+      "sha256": "2547de6302620e5b96336b876b7970ffe00f3325a24dd6f6db870c8479f7fe8a"
+    },
+    "snapshot": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/evidence/daily-report/learning/captures/aaa3ea00fd579e3a439a18ca2660362bafcfc2af641f47bb23a97768744e3d15.json",
+      "path": "migration/evidence/daily-report/learning/sources/aaa3ea00fd579e3a439a18ca2660362bafcfc2af641f47bb23a97768744e3d15.json",
+      "sha256": "aaa3ea00fd579e3a439a18ca2660362bafcfc2af641f47bb23a97768744e3d15"
+    },
+    "structure": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/structures/guided-prayer-scenic.json",
+      "path": "migration/evidence/daily-report/learning/sources/7102200b407501a7d3d76e7eacef9113b36f259966663bf5a87fa1061ba19b47.json",
+      "sha256": "7102200b407501a7d3d76e7eacef9113b36f259966663bf5a87fa1061ba19b47"
+    },
+    "structure_audit": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/evidence/vidiq/20261019/structure_audit.json",
+      "path": "migration/evidence/daily-report/learning/sources/4aa64454e2cd3ee912089d86a052a08c996c9c6dc1c1c9fc38e3ceac3988a142.json",
+      "sha256": "4aa64454e2cd3ee912089d86a052a08c996c9c6dc1c1c9fc38e3ceac3988a142"
+    },
+    "thumbnails": {
+      "hash_method": "EXACT_FILE_BYTES",
+      "origin_path": "migration/evidence/vidiq/20261019/thumbnails.json",
+      "path": "migration/evidence/daily-report/learning/sources/3feb853468fd03943285d9d622281ce09d91ecedec94c6b8205ad4bb6fb9fece.json",
+      "sha256": "3feb853468fd03943285d9d622281ce09d91ecedec94c6b8205ad4bb6fb9fece"
+    }
+  },
+  "status": "REPORT_BUILT",
+  "version": "learning-loop-receipt-v1"
+}

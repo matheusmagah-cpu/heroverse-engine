@@ -1,0 +1,75 @@
+{
+  "base_sha": "d3da63a1c6fb4566a68a825a5d73fa67a4446c6e",
+  "only_package_field_changed": "description",
+  "exact_replacement": {
+    "old": "0:00 Good morning",
+    "new": "0:00 Good evening"
+  },
+  "before_description_sha256": "7008aeade9e50caf1ddb3bfaa24ff9d9439ca988f23f3010e14adcc7ae631b8e",
+  "after_description_sha256": "23ba9b29b7546f6fcc67b567083cb4941073672f529fb2cf71a0d4b11a35a79d",
+  "source_integrity": [
+    {
+      "path": "migration/production/pilot-012/script.json",
+      "sha256": "89bc1c0db301da95c6cbde9f26d0f37eb4022a2609beac2507f69e5f8f507ad6",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/schedule.json",
+      "sha256": "43d2f69548a3978d562a4fc49ebf957a06b6497ab223270851b9b3475b91f1fa",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/manifest.json",
+      "sha256": "8a81cc7d0c32d2f3e84678d8830d71365e01f781eacd7c4d32297dcdd9a87c34",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/qa.json",
+      "sha256": "74b1249d5bee2c570d2b0be71d8375870cc0d9ba2617f8e0b4e89c846d8244d4",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/review.json",
+      "sha256": "19bc4ea8c07502e29fb2ff99234b779187ec857c229c87f5f215a16f900c14a2",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/gate.json",
+      "sha256": "1bb3414da32b77470766a4c3aafa66902b4ee8f3b50d975403e3cf509d0fdf8b",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/inspection/APPROVAL.json",
+      "sha256": "836523e3a8d7a815f2b87337219c8d241009a2d59f2c99df2503e1ad9f16ec3f",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/inspection/thumbnail.jpg",
+      "sha256": "b36de4831267a18708657137e26a9cf79b119a41c07e7e2b77c8a68e7a982209",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/qa_criteria_v3.json",
+      "sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+      "unchanged": true
+    },
+    {
+      "path": ".github/workflows/publish.yml",
+      "sha256": "12f4037359f7680ce5756410663b0c8717401e9acdcc0efa2d3819910b6524b2",
+      "unchanged": true
+    },
+    {
+      "path": "migration/publish/ledger.json",
+      "sha256": "c10858b9ffc69c3ab427bbb1fb42ea703d469446e3bcfcf9fb48aefc7cd023e6",
+      "unchanged": true
+    }
+  ],
+  "local_tests": {
+    "package_chapters": 4,
+    "refresh_description": 8,
+    "ci_scripts": 40
+  },
+  "live_mutation_performed": false,
+  "official_api": "https://developers.google.com/youtube/v3/docs/videos/update",
+  "etag_documentation": "https://developers.google.com/youtube/v3/getting-started#etags"
+}
