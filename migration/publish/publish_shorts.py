@@ -157,10 +157,54 @@ def verification(observation, error, video_id, slot, expected, now=None):
     return ("SCHEDULED_VERIFIED" if now < target else "PUBLIC_VERIFIED"), None
 
 
+
+def exception_binding(spec):
+    """Validate the closed registry and retained media gates, never a free-form flag."""
+    final = spec.get("finalization", {})
+    if not isinstance(final, dict) or "owner_exception" not in final:
+        return None
+    import publication_exception as pe
+    records = spec.get("shorts", [])
+    if len(records) != 1 or final.get("status") != "COMPLETE":
+        raise SystemExit("EXCEPTION_MANIFEST_INVALID")
+    record = records[0]
+    if (spec.get("release_status") != "READY_BY_OWNER_TEMPORAL_EXCEPTION" or
+            record.get("release_status") != "READY_BY_OWNER_TEMPORAL_EXCEPTION" or
+            final.get("ordinary_release_status") != "TARGET_SLOT_LEAD_MISSED"):
+        raise SystemExit("EXCEPTION_RELEASE_MARKER_INVALID")
+    binding = final["owner_exception"]
+    pe.validate_binding(binding, pilot=spec.get("source_pilot"),
+                        output_sha256=record.get("sha256"), now_utc=utc_now())
+    if final.get("target_slot") != binding["target_slot"]:
+        raise SystemExit("EXCEPTION_TARGET_SLOT_MISMATCH")
+    digest = record.get("sha256")
+    review, qa, media = record.get("review", {}), record.get("qa", {}), record.get("media_checks", {})
+    scores = ("hook_in_first_2s", "captions_readable_and_synced", "text_clear_of_shorts_ui",
+              "picture_quality", "edit_rhythm", "audio_clarity", "stands_alone", "ending_and_loop", "policy_safe")
+    checks = ("decode_clean", "one_h264_1080x1920", "fps_30", "one_aac_stereo_48k", "duration", "loudness", "true_peak")
+    def score(value, minimum):
+        return type(value) in (int, float) and minimum <= value <= 10
+    if not (record.get("publish") is True and final.get("output_sha256") == digest
+            and record.get("qa_output_sha256") == review.get("output_sha256") == media.get("output_sha256") == digest
+            and qa.get("status") == media.get("status") == review.get("status") == "PASS"
+            and all(qa.get("checks", {}).get(key) is True for key in checks)
+            and review.get("model") == "gemini-3.8-flash"
+            and all(score(review.get(key), 7) for key in scores) and score(review.get("overall"), 8)):
+        raise SystemExit("EXCEPTION_MEDIA_GATES_FAILED")
+    return binding
+
+
 def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     spec = json.loads(Path(shorts_json).read_text())
+    binding = exception_binding(spec)
     ledger_path = Path(ledger_path)
     ledger = json.loads(ledger_path.read_text())
+    run_key = None
+    if binding is not None:
+        import publication_exception as pe
+        run_key = os.environ.get("GITHUB_RUN_ID", "") + ":" + os.environ.get("GITHUB_RUN_ATTEMPT", "")
+        if not all(x.isdigit() and int(x) > 0 for x in run_key.split(":")):
+            raise SystemExit("EXCEPTION_RUN_KEY_INVALID")
     long_entry = ledger["entries"].get(long_key)
     if not long_entry or "video_id" not in long_entry:
         raise SystemExit("LONG_VIDEO_NOT_PUBLISHED")
@@ -208,13 +252,17 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
         slot, report = slot_of.get(short["sha256"]), reports.get(short["sha256"])
         key = f"short:{spec['source_pilot']}:{short['sha256']}"
         entry = ledger["entries"].get(key, {"steps": {}})
+        if binding is not None:
+            consumption = pe.validate_consumption(ledger, binding, run_key=run_key, video_id=entry.get("video_id"))
+            if consumption["mode"] == "readback_only" and not entry.get("video_id"):
+                raise SystemExit("EXCEPTION_ID_REQUIRES_LEDGER_RECONCILIATION")
         expected = {"title": title_for(short), "description": description_for(
             short, f"https://youtu.be/{long_id}", long["snippet"]["title"])}
         if "video_id" not in entry:
             try:
                 if target_slot is not None and utc_instant(slot) != target_instant:
                     raise SystemExit("UPLOAD_SLOT_DIFFERS_FROM_AUTHORIZED_TARGET")
-                if utc_instant(slot) <= utc_now():
+                if utc_instant(slot) <= utc_now() and binding is None:
                     raise ValueError("PAST_SLOT")
             except (ValueError, TypeError):
                 raise SystemExit("INVALID_OR_PAST_UPLOAD_SLOT")
@@ -224,10 +272,21 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
                     "status": {"privacyStatus": "private", "publishAt": slot, "selfDeclaredMadeForKids": False,
                                "embeddable": True, "license": "youtube", "publicStatsViewable": True,
                                "containsSyntheticMedia": True}}
+            if binding is not None and utc_now() >= target_instant:
+                body["status"]["privacyStatus"] = "public"
+                body["status"].pop("publishAt")
+            if binding is not None:
+                ledger["owner_exceptions"][binding["exception_id"]]["state"] = "UNCERTAIN"
+                atomic_json(ledger_path, ledger)  # no second attempt even if upload never returns
             entry.update({"video_id": pv.upload(s, Path(shorts_dir) / short["file"], body)["id"],
                           "uploaded_at": utc_now().isoformat(), "long_video_id": long_id, "slot": slot,
                           "output_sha256": short["sha256"],
                           "qa": report})
+            if binding is not None:
+                pe.validate_consumption(ledger, binding, run_key=run_key, video_id=entry["video_id"])
+                reserved = ledger["owner_exceptions"][binding["exception_id"]]
+                reserved.update(state="CONSUMED", video_id=entry["video_id"])
+                entry["owner_exception_id"] = binding["exception_id"]
             ledger["entries"][key] = entry
             atomic_json(ledger_path, ledger)  # durable ID before readback
         result = {"key": key, "file": short["file"], "output_sha256": entry.get("output_sha256"),
@@ -237,6 +296,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
                   "slot": entry["slot"], "title": title_for(short),
                   "verification_status": "VERIFICATION_UNKNOWN", "verification_reason": "READBACK_PENDING",
                   "observation": None}
+        if binding is not None:
+            result["owner_exception_id"] = binding["exception_id"]
         out.append(result)
         atomic_json(receipt_path, receipt)  # accepted ID survives readback failure
         observation, error = observe_video(s, entry["video_id"])

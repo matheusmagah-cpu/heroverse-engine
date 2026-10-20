@@ -1236,5 +1236,98 @@ class MediaAndCliTests(unittest.TestCase):
             self.assertNotIn("secret", str(raised.exception))
 
 
+class OwnerExceptionTests(unittest.TestCase):
+    HASH = "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f"
+    CLOCK = "2026-10-20T21:15:00Z"
+
+    def receipt(self):
+        return json.loads('{\n  "version": "owner-publication-exception-v1",\n  "exception_id": "owner-temporal-pilot005-cb3ce331-20261020",\n  "owner": "Matheus",\n  "source": "authenticated_owner_dot_conversation",\n  "attested_by": "dot",\n  "trust_model": "operational_dot_attestation_not_cryptographic_signature",\n  "scope": "temporal_only",\n  "pilot": "pilot-005",\n  "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",\n  "baseline_cutoff": "2026-10-20T19:30:00Z",\n  "target_slot": "2026-10-20T20:00:00Z",\n  "owner_authorized_at": "2026-10-20T21:08:15.004165+00:00",\n  "owner_messages": [\n    {\n      "message_id": "Sentinel_b40883ebd1d88191bc6cf23c59f08c49",\n      "at": "2026-10-20T21:06:51.416099+00:00",\n      "text": "minha ordem não desfaz nada. minha ordem é só uma exceção que eu tô passando, entendeu? A minha fala sempre vai ser uma exceção. Eu não quero. a não ser quando eu falar muda o processo. Aí se eu falar muda o processo, aí sim, aí eu tô falando pra mudar. caso contrário, é tudo em caráter de exceção. Então faz essa postagem em caráter de exceção. a trava de horário tem que continuar."\n    },\n    {\n      "message_id": "Sentinel_c3a1c9f1e7908191883cbda6ed27e9c1",\n      "at": "2026-10-20T21:07:33.550886+00:00",\n      "text": "E isso tem que ter no projeto, tem que ter uma válvula de exceção, entendeu? Só que essa válvula de exceção só quem pode dar sou eu, entendeu? Então assim, se não existe isso no projeto, cria agora a válvula de exceção."\n    },\n    {\n      "message_id": "Sentinel_1512cc545d6c81919a5535ce6fc9e0e6",\n      "at": "2026-10-20T21:08:15.004165+00:00",\n      "text": "Exatamente. Todas as válvulas do mecanismo foi aprovado? Tudo, tudo, 100%? Qualidade, técnica, operacional, tudo? Tá tudo aprovado? Se tiver tudo aprovado, eu cria essa válvula e já pode aplicar. Já vai lá e já posta."\n    }\n  ]\n}\n')
+
+    def qualified(self):
+        s = spec()
+        r = s["shorts"][0]
+        r["sha256"] = r["qa_output_sha256"] = self.HASH
+        r["review"]["output_sha256"] = r["media_checks"]["output_sha256"] = self.HASH
+        return s
+
+    def run_exception(self, s, receipt=None, now=None):
+        return ep.finalize_exception_manifest(s, self.receipt() if receipt is None else receipt,
+                     actual_output_sha256=self.HASH, now_utc=now or self.CLOCK)
+
+    def test_preserved_default_and_explicit_exception_are_distinct(self):
+        self.assertEqual(ep.LEAD_DEADLINE, "2026-10-20T19:30:00Z")
+        s = self.qualified()
+        normal = finish(s, self.CLOCK, self.HASH)
+        self.assertEqual(normal["release_status"], "TARGET_SLOT_LEAD_MISSED")
+        self.assertFalse(normal["shorts"][0]["publish"])
+        result = self.run_exception(s)
+        self.assertEqual(result["release_status"], "READY_BY_OWNER_TEMPORAL_EXCEPTION")
+        self.assertTrue(result["shorts"][0]["publish"])
+        self.assertFalse(result["publish"])
+        self.assertEqual(result["finalization"]["ordinary_release_status"], normal["release_status"])
+        self.assertEqual(result["finalization"]["target_slot"], ep.TARGET_SLOT)
+        for key in ("qa", "review", "media_checks"):
+            self.assertEqual(s["shorts"][0][key], result["shorts"][0][key])
+
+    def test_exception_never_rescues_quality_or_binding_failure(self):
+        for mutation in (
+            lambda r: r["qa"].update(status="FAIL"),
+            lambda r: r["qa"]["checks"].update(decode_clean=False),
+            lambda r: r["review"].update(overall=7.9),
+            lambda r: r["review"].update(status="FAIL"),
+            lambda r: r["review"].update(model="other"),
+            lambda r: r["review"].update(hook_in_first_2s=True),
+            lambda r: r["media_checks"].update(status="FAIL"),
+            lambda r: r.update(qa_output_sha256="f" * 64),
+        ):
+            with self.subTest(mutation=mutation):
+                s = self.qualified(); mutation(s["shorts"][0])
+                result = self.run_exception(s)
+                self.assertFalse(result["shorts"][0]["publish"])
+                self.assertNotIn("owner_exception", result["finalization"])
+
+    def test_absent_altered_receipt_and_early_clock_fail_closed(self):
+        for receipt in ({}, None, {**self.receipt(), "scope": "all"}):
+            if receipt is None:
+                receipt = {"approved_by_owner": True}
+            result = self.run_exception(self.qualified(), receipt)
+            self.assertFalse(result["shorts"][0]["publish"])
+            self.assertEqual(result["finalization"]["status"], "ERROR")
+        result = self.run_exception(self.qualified(), now="2026-10-20T21:08:14Z")
+        self.assertFalse(result["shorts"][0]["publish"])
+
+    def test_other_pilot_and_hash_cannot_use_exception(self):
+        s = self.qualified(); s["source_pilot"] = "pilot-006"
+        self.assertFalse(self.run_exception(s)["shorts"][0]["publish"])
+        result = ep.finalize_exception_manifest(spec(), self.receipt(), actual_output_sha256=OUTPUT_SHA, now_utc=self.CLOCK)
+        self.assertFalse(result["shorts"][0]["publish"])
+
+    def test_exception_cli_missing_receipt_revokes_inherited_eligibility(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); manifest = root / "shorts.json"; mp4 = root / "short-00.mp4"
+            manifest.write_text(json.dumps(self.qualified())); mp4.write_bytes(b"synthetic-not-production")
+            self.assertEqual(ep.cli(["--finalize-exception", str(manifest), str(mp4), str(root / "missing.json")]), 1)
+            self.assertFalse(json.loads(manifest.read_text())["shorts"][0]["publish"])
+
+    def test_exception_file_toctou_leaves_manifest_revoked(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); manifest = root / "shorts.json"; mp4 = root / "short-00.mp4"; receipt = root / "receipt.json"
+            manifest.write_text(json.dumps(self.qualified())); mp4.write_bytes(b"synthetic-not-production")
+            receipt.write_text(json.dumps(self.receipt()))
+            with patch.object(ep, "hash_file", side_effect=[self.HASH, "a" * 64]):
+                with self.assertRaisesRegex(ValueError, "OUTPUT_CHANGED_DURING_FINALIZATION"):
+                    ep.finalize_exception_file(manifest, mp4, receipt)
+            self.assertFalse(json.loads(manifest.read_text())["shorts"][0]["publish"])
+
+    def test_ordinary_functions_unchanged_from_baseline(self):
+        import ast
+        source = ast.parse(Path(ep.__file__).read_text())
+        expected = {"finalize_manifest": "89ff8b6d6daffe82cbb60bc856741d791cc4f88044d6ce5cb5416d814637a2a4",
+                    "finalize_file": "509e97f2625ea6f685bfc6ab4ce2e20d3444871d55bebea1ae9ec16d8abe1d97"}
+        for name, digest in expected.items():
+            node = next(n for n in source.body if isinstance(n, ast.FunctionDef) and n.name == name)
+            self.assertEqual(hashlib.sha256(ast.dump(node).encode()).hexdigest(), digest)
+
+
 if __name__ == "__main__":
     unittest.main()

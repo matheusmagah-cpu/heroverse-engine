@@ -69,6 +69,21 @@ jobs:
           actual=$(sha256sum "$d/shorts/shorts.json" | cut -d' ' -f1)
           [ "$expected" = "$actual" ] || { echo APPROVED_MANIFEST_CHANGED; exit 1; }
           key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/manifest.json")"
+          if python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));sys.exit(0 if 'owner_exception' in m.get('finalization', {}) else 1)" "$d/shorts/shorts.json"; then
+            exception_slot=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['finalization']['owner_exception']['target_slot'])" "$d/shorts/shorts.json")
+            [ "$SLOTS" = "$exception_slot" ] || { echo EXCEPTION_SLOT_MISMATCH_BEFORE_RESERVATION; exit 1; }
+            run_key="$GITHUB_RUN_ID:$GITHUB_RUN_ATTEMPT"
+            python3 -I -B migration/publish/publication_exception.py --reserve migration/publish/ledger.json "$d/shorts/shorts.json" "$run_key"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add migration/publish/ledger.json
+            if ! git diff --cached --quiet; then git commit -q -m "Reserve publication exception ($run_key)"; fi
+            git push -q origin HEAD:main
+            git fetch -q origin main
+            [ "$(git rev-parse FETCH_HEAD)" = "$(git rev-parse HEAD)" ] || { echo EXCEPTION_REMOTE_HEAD_CHANGED; exit 1; }
+            git show FETCH_HEAD:migration/publish/ledger.json > "$RUNNER_TEMP/reserved-publication-ledger.json"
+            cmp migration/publish/ledger.json "$RUNNER_TEMP/reserved-publication-ledger.json" || { echo EXCEPTION_RESERVATION_PERSISTENCE_UNCONFIRMED; exit 1; }
+          fi
           mkdir -p migration/publish/receipts
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_shorts.py "$d/shorts/shorts.json" "$RUNNER_TEMP/shorts" "$key" \
             migration/publish/ledger.json "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" "$SLOTS"
