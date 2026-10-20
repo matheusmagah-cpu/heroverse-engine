@@ -46,7 +46,13 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - starts at a sentence start, with a complete line within the first 3 s, and ends on a completed sentence;
   - phrase captions of 1–5 words;
   - no CTA overlay.
-- **R9.** Thumbnail: to be measured. Dot's card collects the thumbnails of the 20 winners; until then no rule is assumed.
+- **R9.** Thumbnail, measured on the 20 spoken-prayer winners (`evidence/vidiq/20261019/thumbnails.json`, runner audit 2026-10-19; images not stored). Each item is in ≥ 70 % of winners; no weak contrasts were measured, so none is claimed as a driver. They block as our standard:
+  - overlaid text present (20/20), **4–12 words in 2–4 lines** (17/20 each);
+  - white text (20/20) with a **dark outline or shadow** (19/20) and **no box** (19/20); a yellow or gold accent line is a house choice (13/20);
+  - **mean luminance 48–147 of 255** (all 20 inside; none bright, 8/20 dark), measured on the 1280×720 file;
+  - a **visible light source** in the picture: sun, moon, lamp, candle or window light (15/20);
+  - no realistic human face (house choice, consistent with R1; 13/20 winners show no person);
+  - 1280×720 JPG under the Help size limit (stage 5).
 
 ## Gate
 
