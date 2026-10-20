@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-007",
- "output_sha256": "c57cafe657dd88c13c36eea8cdc8ff32302a7932d0ce860e9723a5ae21a140d1",
+ "output_sha256": "25231edcdc2ed15687c7c5cb9fb774b19a44c4d171ace6e756917fa09d488dde",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -16,58 +16,64 @@
   "first_word_onset": true,
   "hook_second_person": true,
   "title_card_seconds": true,
-  "figure_present_after_title": true,
-  "background_hold_median": true,
-  "background_hold_max": true,
-  "no_background_repeated_consecutively": true,
+  "no_figure": true,
+  "every_scene_in_motion": true,
+  "scene_seconds": true,
+  "crossfade_seconds_max": true,
+  "image_repeat_gap": true,
   "caption_coverage_of_speech": true,
   "caption_hold_median": true,
   "caption_chars_max": true,
-  "channel_mark_badge_and_amen_prompt": true,
+  "caption_words_max": true,
+  "caption_no_box": true,
+  "scripture_card_only_while_read": true,
+  "cta_count": true,
+  "cta_short_and_not_early": true,
+  "persistent_overlays_only_brand": true,
   "images_open_licence_with_revision": true,
   "no_third_party_footage": true,
   "music_owned": true,
   "voice_model_pinned": true
  },
- "criteria_version": "pilot-qa-criteria-v2",
+ "criteria_version": "pilot-qa-criteria-v3",
  "measurements": {
-  "duration_seconds": 1569.85,
+  "duration_seconds": 1569.63,
   "loudness": {
    "integrated_lufs": -15.6,
    "loudness_range_lu": 2.7,
    "true_peak_dbtp": -2.8
   },
-  "speech_presence": 0.907,
-  "music_presence": 0.383,
-  "wer_vs_script": 0.0293,
-  "accepted_words_per_minute": 130.9,
-  "caption_lines": 707,
-  "holds": 136,
-  "first_word_seconds": 0.11,
+  "speech_presence": 0.906,
+  "music_presence": 0.382,
+  "wer_vs_script": 0.0296,
+  "accepted_words_per_minute": 131.0,
+  "caption_lines": 736,
+  "holds": 52,
+  "first_word_seconds": 0.14,
   "editing": {
-   "picture_changes": 956,
-   "picture_changes_per_minute": 36.54,
-   "median_shot_seconds": 1.633,
-   "longest_shot_seconds": 4.5,
+   "picture_changes": 509,
+   "picture_changes_per_minute": 19.46,
+   "median_shot_seconds": 2.417,
+   "longest_shot_seconds": 28.733,
    "motion_median_top_decile_diff": 1.003
   },
   "colour": {
-   "mean_brightness": 0.3644,
-   "brightness_std_over_time": 0.0517,
-   "mean_saturation": 0.4927,
-   "saturation_std_over_time": 0.0932
+   "mean_brightness": 0.3599,
+   "brightness_std_over_time": 0.0942,
+   "mean_saturation": 0.6123,
+   "saturation_std_over_time": 0.1647
   },
   "rhythm": {
-   "audio_onsets": 2617,
-   "audio_onsets_per_minute": 100.02,
+   "audio_onsets": 2609,
+   "audio_onsets_per_minute": 99.73,
    "tempo": {
-    "bpm": 57.71,
-    "confidence": 0.01
+    "bpm": 85.41,
+    "confidence": 0.009
    }
   }
  },
  "transcript_head": "Before you check your phone this morning, let's pray Bible verses for peace over the day ahead. Let your hands rest for a moment if you can. You may already be thinking about a message, a meeting, or somebody you love. Bring that one concern with you. You can join these prayers aloud or quietly. We begin with Paul's words in Philippians, chapter 4, verse 6. careful for nothing, but in everything b",
- "criteria_sha256": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
+ "criteria_sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
  "publication_performed": false
