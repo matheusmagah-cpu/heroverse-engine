@@ -39,6 +39,7 @@ def prepare(video, desired, title):
     actual=snippet.get('description')
     if actual not in (previous,desired): raise ValueError('REMOTE_DESCRIPTION_CHANGED')
     if actual==desired: return None
+    if not isinstance(video.get('etag'),str) or not video['etag']: raise ValueError('MISSING_ETAG')
     payload={key:deepcopy(snippet[key]) for key in WRITABLE if key in snippet}
     payload['description']=desired
     return {'id':VIDEO,'snippet':payload}
@@ -53,7 +54,7 @@ def refresh(session, desired, title, check):
     before=read(); payload=prepare(before,desired,title)
     if payload is not None:
         # One mutation only. An uncertain network result must be reconciled by a fresh read, never blind retry.
-        check(session.put(API,params={'part':'snippet'},json=payload),'UPDATE_DESCRIPTION')
+        check(session.put(API,params={'part':'snippet'},json=payload,headers={'If-Match':before['etag']}),'UPDATE_DESCRIPTION')
     after=read()
     if after.get('id')!=VIDEO or after.get('snippet',{}).get('channelId')!=CHANNEL: raise ValueError('VERIFY_IDENTITY')
     if after.get('snippet',{}).get('description')!=desired: raise ValueError('VERIFY_DESCRIPTION')

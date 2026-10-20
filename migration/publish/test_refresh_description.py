@@ -4,7 +4,7 @@ sys.path.insert(0,str(Path(__file__).parent))
 import refresh_description as r
 DESIRED='Night prayer\n\nChapters\n0:00 Good evening\n0:39 Gratitude\n'
 def video(description=None):
- return {'id':r.VIDEO,'snippet':{'channelId':r.CHANNEL,'title':'Night Prayer','categoryId':'29',
+ return {'id':r.VIDEO,'etag':'fixture-v1','snippet':{'channelId':r.CHANNEL,'title':'Night Prayer','categoryId':'29',
  'description':description or r.old_description(DESIRED),'tags':['night'],'defaultLanguage':'en','defaultAudioLanguage':'en'},
  'status':{'privacyStatus':'public','license':'youtube'}}
 class Session:
@@ -15,7 +15,7 @@ class Session:
 class Tests(unittest.TestCase):
  def test_exact_write_and_idempotence(self):
   s=Session(video());before=copy.deepcopy(s.v);out=r.refresh(s,DESIRED,'Night Prayer',lambda response,label:response)
-  self.assertTrue(out['applied']);self.assertEqual(len(s.writes),1);self.assertEqual(s.writes[0]['params'],{'part':'snippet'})
+  self.assertEqual(s.writes[0]['headers'],{'If-Match':'fixture-v1'});self.assertTrue(out['applied']);self.assertEqual(len(s.writes),1);self.assertEqual(s.writes[0]['params'],{'part':'snippet'})
   self.assertEqual(set(s.writes[0]['json']),{'id','snippet'});self.assertEqual(s.v['status'],before['status'])
   self.assertFalse(r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x)['applied']);self.assertEqual(len(s.writes),1)
  def test_conflicts_never_write(self):
@@ -32,6 +32,17 @@ class Tests(unittest.TestCase):
   s.put=put
   with self.assertRaisesRegex(ValueError,'VERIFY_DESCRIPTION'):r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x)
   self.assertEqual(len(s.writes),1)
+ def test_missing_or_changed_etag_cannot_overwrite(self):
+  v=video();v.pop('etag');s=Session(v)
+  with self.assertRaisesRegex(ValueError,'MISSING_ETAG'):r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x)
+  self.assertEqual(s.writes,[])
+  s=Session(video())
+  def reject(*a,**kw):
+   self.assertEqual(kw['headers'],{'If-Match':'fixture-v1'})
+   raise RuntimeError('HTTP_412')
+  s.put=reject
+  with self.assertRaisesRegex(RuntimeError,'HTTP_412'):r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x)
+  self.assertEqual(s.v['snippet']['description'],r.old_description(DESIRED))
  def test_read_error_has_no_write(self):
   s=Session(video())
   def fail(*a,**kw):raise OSError('offline')
