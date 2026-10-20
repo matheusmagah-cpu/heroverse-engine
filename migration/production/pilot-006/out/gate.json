@@ -1,23 +1,23 @@
 {
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-006",
- "output_sha256": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc",
- "decision": "FAIL",
+ "output_sha256": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877",
+ "decision": "UNKNOWN",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
   "technical": "PASS",
-  "audio": "PASS",
+  "audio": "UNKNOWN",
   "transcript": "PASS",
-  "captions": "PASS",
-  "sync": "PASS",
-  "image": "PASS",
+  "captions": "UNKNOWN",
+  "sync": "UNKNOWN",
+  "image": "UNKNOWN",
   "rights": "PASS",
-  "content_and_policy": "PASS",
-  "scorecard": "PASS",
+  "content_and_policy": "UNKNOWN",
+  "scorecard": "UNKNOWN",
   "full_file_scan": "PASS",
   "structure": "PASS",
-  "authenticity": "FAIL",
+  "authenticity": "PASS",
   "preflight": "PASS"
  },
  "items": {
@@ -26,13 +26,13 @@
     "source": "binding",
     "item": "manifest",
     "state": "PASS",
-    "detail": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    },
    {
     "source": "binding",
     "item": "qa_for_this_file",
     "state": "PASS",
-    "detail": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    },
    {
     "source": "binding",
@@ -48,13 +48,13 @@
     "source": "binding",
     "item": "review_for_this_file",
     "state": "PASS",
-    "detail": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    },
    {
     "source": "binding",
     "item": "video_file_hash",
     "state": "PASS",
-    "detail": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    }
   ],
   "technical": [
@@ -98,8 +98,8 @@
    {
     "source": "review",
     "item": "audio_clarity_and_mix",
-    "state": "PASS",
-    "detail": 9.0
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "transcript": [
@@ -153,8 +153,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "sync": [
@@ -171,8 +171,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "image": [
@@ -229,14 +229,14 @@
    {
     "source": "review",
     "item": "picture_quality",
-    "state": "PASS",
-    "detail": 8.5
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
-    "state": "PASS",
-    "detail": 9.0
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    }
   ],
   "rights": [
@@ -265,46 +265,46 @@
    {
     "source": "review",
     "item": "opening_and_promise",
-    "state": "PASS",
-    "detail": 9.0
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
-    "state": "PASS",
-    "detail": 7.0
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "policy_safe",
-    "state": "PASS",
-    "detail": 10.0
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
    },
    {
     "source": "review",
     "item": "overall",
-    "state": "PASS",
-    "detail": 8.5
+    "state": "UNKNOWN",
+    "detail": "no completed watched review for this file"
    }
   ],
   "scorecard": [
    {
     "source": "score",
     "item": "minutes",
-    "state": "PASS",
-    "detail": 25.57
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
    },
    {
     "source": "score",
     "item": "scripture_per_10_min",
-    "state": "PASS",
-    "detail": 10.17
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
    }
   ],
   "full_file_scan": [
@@ -333,7 +333,6 @@
     "item": "driver_viewer_hook_5s",
     "state": "PASS",
     "detail": [
-     "Good evening.",
      "Bring every pain, of body or heart, to God tonight, and rest"
     ]
    },
@@ -385,9 +384,9 @@
     "state": "PASS",
     "detail": [
      "0:00",
-     "0:39",
-     "1:30",
-     "2:17"
+     "0:37",
+     "1:29",
+     "2:16"
     ]
    },
    {
@@ -416,6 +415,7 @@
      "visible": [
       "pilot-002",
       "pilot-005",
+      "pilot-007",
       "pilot-012"
      ]
     }
@@ -423,10 +423,10 @@
    {
     "source": "authenticity",
     "item": "no_template_image_set",
-    "state": "FAIL",
+    "state": "PASS",
     "detail": {
      "max": [
-      0.529,
+      0.238,
       "pilot-012"
      ]
     }
@@ -490,104 +490,104 @@
    "inside": true,
    "spans": [
     [
-     27.0,
-     28.0,
-     1.0
-    ],
-    [
-     49.53,
-     51.0,
-     1.47
-    ],
-    [
-     68.6,
-     69.6,
-     1.0
-    ],
-    [
-     70.4,
-     71.4,
-     1.0
-    ],
-    [
-     72.03,
-     73.17,
-     1.13
-    ],
-    [
-     148.4,
-     150.47,
-     2.07
-    ],
-    [
-     150.47,
-     152.0,
-     1.53
-    ],
-    [
-     152.47,
-     154.0,
-     1.53
-    ],
-    [
-     154.9,
-     156.0,
-     1.1
-    ],
-    [
-     156.33,
-     158.0,
-     1.67
-    ],
-    [
-     158.17,
-     159.83,
-     1.67
-    ],
-    [
-     159.83,
-     160.9,
+     72.3,
+     73.37,
      1.07
     ],
     [
-     160.9,
-     162.0,
-     1.1
+     96.07,
+     97.07,
+     1.0
     ],
     [
-     162.6,
-     163.63,
+     146.7,
+     148.8,
+     2.1
+    ],
+    [
+     148.8,
+     150.77,
+     1.97
+    ],
+    [
+     150.77,
+     152.0,
+     1.23
+    ],
+    [
+     152.0,
+     153.2,
+     1.2
+    ],
+    [
+     154.63,
+     156.0,
+     1.37
+    ],
+    [
+     156.47,
+     158.0,
+     1.53
+    ],
+    [
+     158.0,
+     159.2,
+     1.2
+    ],
+    [
+     160.9,
+     161.93,
      1.03
     ],
     [
-     163.63,
-     165.03,
-     1.4
+     161.93,
+     163.2,
+     1.27
     ],
     [
-     165.03,
-     166.1,
-     1.07
+     163.2,
+     164.4,
+     1.2
     ],
     [
-     166.67,
-     168.7,
+     164.97,
+     167.0,
      2.03
     ],
     [
-     168.7,
-     170.93,
+     167.0,
+     169.23,
      2.23
     ],
     [
-     172.33,
-     173.63,
-     1.3
+     196.23,
+     197.27,
+     1.03
     ],
     [
-     174.27,
-     175.63,
-     1.37
+     223.17,
+     224.2,
+     1.03
+    ],
+    [
+     224.2,
+     226.83,
+     2.63
+    ],
+    [
+     226.83,
+     228.17,
+     1.33
+    ],
+    [
+     228.77,
+     230.9,
+     2.13
+    ],
+    [
+     230.9,
+     231.93,
+     1.03
     ]
    ]
   }
