@@ -1,15 +1,15 @@
 {
  "version": "pilot-manifest-v2",
  "pilot_id": "pilot-006",
- "grammar": "figure+depth-parallax-backgrounds+film-look+captions",
- "output_sha256": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c",
- "output_seconds": 1534.667,
+ "grammar": "standard-v1:fullframe-depth-parallax+film-look+captions",
+ "output_sha256": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc",
+ "output_seconds": 1534.496,
  "script_sha256": "c490b3a894962f6bd14b8b94c2096bfccce6cb745ac63efb4a93ed05613cc503",
  "voice": {
   "engine": "Kokoro v1.0 (preserved, hash-pinned)",
   "voice_id": "am_michael",
   "speed": 0.85,
-  "voice_wav_sha256": "edc54eff3f9e2fe72f9dfd212ae3af4e725ceccc1d23983f0818600d0b86772b"
+  "voice_wav_sha256": "e562ee2841dfe3bb4f79d8a5ca3d8e15e538df75e7328f9153b438b1ffeb7228"
  },
  "music": {
   "file": "original-rest-music.lossless.flac",
@@ -17,47 +17,7 @@
   "offset_seconds": 1200.0,
   "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
  },
- "figure": {
-  "sha256": "0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b",
-  "id": "figure-a",
-  "prompt": "Jesus Christ praying with hands folded at his chest, eyes closed, gentle peaceful expression, long brown hair and beard, cream robe with a brown sash, upper body portrait facing right, isolated on a plain light grey studio background, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
-  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
-  "seed": 2000,
-  "steps": 6,
-  "guidance": 1.5,
-  "size": [
-   1344,
-   768
-  ],
-  "models": {
-   "stabilityai/stable-diffusion-xl-base-1.0": {
-    "revision": "462165984030d82259a11f4367a4eed129e94a7b",
-    "license": "openrail++"
-   },
-   "latent-consistency/lcm-lora-sdxl": {
-    "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
-    "license": "openrail++"
-   }
-  },
-  "device": "cuda",
-  "seconds": 10.5,
-  "generated_by": "HeroVerse pipeline (AI-generated image)",
-  "release_asset": "pilot-002-img-figure-a-sha256-0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b.png",
-  "cutout_model": "isnet-general-use",
-  "cutout_tool": "rembg",
-  "source_png_sha256": "0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b",
-  "cutout_box": [
-   273,
-   4,
-   1141,
-   768
-  ],
-  "cutout_size": [
-   868,
-   764
-  ],
-  "opaque_fraction_of_box": 0.618
- },
+ "figure": null,
  "images": {
   "bg-moonlit-meadow": {
    "sha256": "d016ed079b0a8f0f02e863ecfd9a5b185282517626a9560cc6a815d658162732",
@@ -263,1233 +223,656 @@
   {
    "image": "bg-moonlit-meadow",
    "start": 2.0,
-   "end": 15.741,
-   "figure": true,
+   "end": 26.393,
+   "figure": false,
    "motion": "truck_right",
    "atmosphere": true
   },
   {
    "image": "bg-candle",
-   "start": 15.741,
-   "end": 26.415,
-   "figure": true,
+   "start": 26.393,
+   "end": 48.94,
+   "figure": false,
    "motion": "crane_up",
    "atmosphere": false
   },
   {
    "image": "bg-night-sky",
-   "start": 26.415,
-   "end": 39.376,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-still-water-night",
-   "start": 39.376,
-   "end": 48.961,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
-   "start": 48.961,
-   "end": 59.044,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 59.044,
+   "start": 48.94,
    "end": 71.396,
-   "figure": true,
-   "motion": "dolly_in",
+   "figure": false,
+   "motion": "dolly_out",
    "atmosphere": true
   },
   {
-   "image": "bg-moon-lake",
+   "image": "bg-still-water-night",
    "start": 71.396,
-   "end": 85.611,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-starry-hills",
-   "start": 85.611,
    "end": 97.043,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": true
   },
   {
-   "image": "bg-quiet-chapel",
+   "image": "bg-lamp-window",
    "start": 97.043,
-   "end": 108.325,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-window",
-   "start": 108.325,
    "end": 119.623,
-   "figure": true,
-   "motion": "truck_left",
+   "figure": false,
+   "motion": "arc",
    "atmosphere": false
   },
   {
-   "image": "bg-moonlit-sea",
+   "image": "bg-healing-garden",
    "start": 119.623,
-   "end": 132.557,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-night-village",
-   "start": 132.557,
-   "end": 141.947,
-   "figure": true,
+   "end": 146.955,
+   "figure": false,
    "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-lake",
-   "start": 141.947,
-   "end": 152.456,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-first-light",
-   "start": 152.456,
-   "end": 163.604,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-meadow",
-   "start": 163.604,
-   "end": 174.225,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-candle",
-   "start": 174.225,
-   "end": 187.443,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-night-sky",
-   "start": 187.443,
-   "end": 199.249,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-still-water-night",
-   "start": 199.249,
-   "end": 209.257,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
-   "start": 209.257,
-   "end": 220.98,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 220.98,
-   "end": 233.644,
-   "figure": true,
-   "motion": "crane_up",
    "atmosphere": true
   },
   {
    "image": "bg-moon-lake",
-   "start": 233.644,
-   "end": 244.753,
-   "figure": true,
-   "motion": "dolly_out",
+   "start": 146.955,
+   "end": 170.931,
+   "figure": false,
+   "motion": "truck_right",
    "atmosphere": false
   },
   {
    "image": "bg-starry-hills",
-   "start": 244.753,
-   "end": 255.764,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-quiet-chapel",
-   "start": 255.764,
-   "end": 269.175,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-window",
-   "start": 269.175,
-   "end": 282.051,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-sea",
-   "start": 282.051,
-   "end": 292.755,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-night-village",
-   "start": 292.755,
-   "end": 306.313,
-   "figure": true,
+   "start": 170.931,
+   "end": 199.271,
+   "figure": false,
    "motion": "crane_up",
    "atmosphere": false
   },
   {
-   "image": "bg-lake",
-   "start": 306.313,
-   "end": 316.261,
-   "figure": true,
+   "image": "bg-quiet-chapel",
+   "start": 199.271,
+   "end": 224.083,
+   "figure": false,
    "motion": "dolly_out",
    "atmosphere": false
   },
   {
-   "image": "bg-first-light",
-   "start": 316.261,
-   "end": 329.064,
-   "figure": true,
+   "image": "bg-window",
+   "start": 224.083,
+   "end": 250.165,
+   "figure": false,
    "motion": "truck_left",
    "atmosphere": false
   },
   {
-   "image": "bg-moonlit-meadow",
-   "start": 329.064,
-   "end": 344.075,
-   "figure": true,
+   "image": "bg-moonlit-sea",
+   "start": 250.165,
+   "end": 277.449,
+   "figure": false,
    "motion": "arc",
    "atmosphere": true
   },
   {
-   "image": "bg-candle",
-   "start": 344.075,
+   "image": "bg-night-village",
+   "start": 277.449,
+   "end": 301.76,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-lake",
+   "start": 301.76,
+   "end": 329.085,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-first-light",
+   "start": 329.085,
    "end": 353.26,
-   "figure": true,
-   "motion": "dolly_in",
+   "figure": false,
+   "motion": "crane_up",
    "atmosphere": false
   },
   {
-   "image": "bg-night-sky",
+   "image": "bg-moonlit-meadow",
    "start": 353.26,
-   "end": 363.087,
-   "figure": true,
-   "motion": "truck_right",
+   "end": 376.484,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-candle",
+   "start": 376.484,
+   "end": 402.719,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-night-sky",
+   "start": 402.719,
+   "end": 425.692,
+   "figure": false,
+   "motion": "arc",
    "atmosphere": true
   },
   {
    "image": "bg-still-water-night",
-   "start": 363.087,
-   "end": 376.505,
-   "figure": true,
-   "motion": "crane_up",
+   "start": 425.692,
+   "end": 448.293,
+   "figure": false,
+   "motion": "dolly_in",
    "atmosphere": true
   },
   {
    "image": "bg-lamp-window",
-   "start": 376.505,
-   "end": 386.707,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 386.707,
-   "end": 402.697,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-moon-lake",
-   "start": 402.697,
-   "end": 414.16,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-starry-hills",
-   "start": 414.16,
-   "end": 425.671,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-quiet-chapel",
-   "start": 425.671,
-   "end": 440.077,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-window",
-   "start": 440.077,
-   "end": 451.609,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-sea",
-   "start": 451.609,
-   "end": 463.056,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-night-village",
-   "start": 463.056,
+   "start": 448.293,
    "end": 473.229,
-   "figure": true,
-   "motion": "truck_left",
+   "figure": false,
+   "motion": "truck_right",
    "atmosphere": false
   },
   {
-   "image": "bg-lake",
+   "image": "bg-healing-garden",
    "start": 473.229,
-   "end": 487.319,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-first-light",
-   "start": 487.319,
-   "end": 499.364,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-meadow",
-   "start": 499.364,
-   "end": 508.565,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-candle",
-   "start": 508.565,
-   "end": 519.329,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-night-sky",
-   "start": 519.329,
-   "end": 532.361,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-still-water-night",
-   "start": 532.361,
-   "end": 546.795,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
-   "start": 546.795,
-   "end": 556.163,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 556.163,
-   "end": 566.357,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-moon-lake",
-   "start": 566.357,
-   "end": 577.027,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-starry-hills",
-   "start": 577.027,
-   "end": 588.849,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-quiet-chapel",
-   "start": 588.849,
-   "end": 599.331,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-window",
-   "start": 599.331,
-   "end": 610.341,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-sea",
-   "start": 610.341,
-   "end": 622.483,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-night-village",
-   "start": 622.483,
-   "end": 632.909,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-lake",
-   "start": 632.909,
-   "end": 642.443,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-first-light",
-   "start": 642.443,
-   "end": 652.067,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-meadow",
-   "start": 652.067,
-   "end": 666.021,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-candle",
-   "start": 666.021,
-   "end": 675.341,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-night-sky",
-   "start": 675.341,
-   "end": 686.873,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-still-water-night",
-   "start": 686.873,
-   "end": 696.587,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
-   "start": 696.587,
-   "end": 705.964,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 705.964,
-   "end": 716.099,
-   "figure": true,
+   "end": 499.321,
+   "figure": false,
    "motion": "crane_up",
    "atmosphere": true
   },
   {
    "image": "bg-moon-lake",
-   "start": 716.099,
-   "end": 727.485,
-   "figure": true,
+   "start": 499.321,
+   "end": 523.563,
+   "figure": false,
    "motion": "dolly_out",
    "atmosphere": false
   },
   {
    "image": "bg-starry-hills",
-   "start": 727.485,
-   "end": 740.165,
-   "figure": true,
+   "start": 523.563,
+   "end": 546.731,
+   "figure": false,
    "motion": "truck_left",
    "atmosphere": false
   },
   {
    "image": "bg-quiet-chapel",
-   "start": 740.165,
-   "end": 749.589,
-   "figure": true,
+   "start": 546.731,
+   "end": 572.985,
+   "figure": false,
    "motion": "arc",
    "atmosphere": false
   },
   {
    "image": "bg-window",
-   "start": 749.589,
-   "end": 760.195,
-   "figure": true,
+   "start": 572.985,
+   "end": 596.484,
+   "figure": false,
    "motion": "dolly_in",
    "atmosphere": false
   },
   {
    "image": "bg-moonlit-sea",
-   "start": 760.195,
-   "end": 770.484,
-   "figure": true,
+   "start": 596.484,
+   "end": 622.419,
+   "figure": false,
    "motion": "truck_right",
    "atmosphere": true
   },
   {
    "image": "bg-night-village",
-   "start": 770.484,
-   "end": 785.761,
-   "figure": true,
+   "start": 622.419,
+   "end": 649.156,
+   "figure": false,
    "motion": "crane_up",
    "atmosphere": false
   },
   {
    "image": "bg-lake",
-   "start": 785.761,
-   "end": 798.447,
-   "figure": true,
+   "start": 649.156,
+   "end": 675.277,
+   "figure": false,
    "motion": "dolly_out",
    "atmosphere": false
   },
   {
    "image": "bg-first-light",
-   "start": 798.447,
+   "start": 675.277,
+   "end": 701.785,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-moonlit-meadow",
+   "start": 701.785,
+   "end": 727.421,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-candle",
+   "start": 727.421,
+   "end": 756.148,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-night-sky",
+   "start": 756.148,
+   "end": 785.697,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-still-water-night",
+   "start": 785.697,
    "end": 808.791,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": true
   },
   {
-   "image": "bg-moonlit-meadow",
+   "image": "bg-lamp-window",
    "start": 808.791,
-   "end": 820.801,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-candle",
-   "start": 820.801,
-   "end": 832.913,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-night-sky",
-   "start": 832.913,
-   "end": 848.221,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-still-water-night",
-   "start": 848.221,
-   "end": 857.471,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
-   "start": 857.471,
-   "end": 868.635,
-   "figure": true,
+   "end": 832.935,
+   "figure": false,
    "motion": "dolly_out",
    "atmosphere": false
   },
   {
    "image": "bg-healing-garden",
-   "start": 868.635,
-   "end": 879.377,
-   "figure": true,
+   "start": 832.935,
+   "end": 857.492,
+   "figure": false,
    "motion": "truck_left",
    "atmosphere": true
   },
   {
    "image": "bg-moon-lake",
-   "start": 879.377,
-   "end": 890.605,
-   "figure": true,
+   "start": 857.492,
+   "end": 881.755,
+   "figure": false,
    "motion": "arc",
    "atmosphere": false
   },
   {
    "image": "bg-starry-hills",
-   "start": 890.605,
-   "end": 903.869,
-   "figure": true,
+   "start": 881.755,
+   "end": 907.121,
+   "figure": false,
    "motion": "dolly_in",
    "atmosphere": false
   },
   {
    "image": "bg-quiet-chapel",
-   "start": 903.869,
-   "end": 917.124,
-   "figure": true,
+   "start": 907.121,
+   "end": 929.727,
+   "figure": false,
    "motion": "truck_right",
    "atmosphere": false
   },
   {
    "image": "bg-window",
-   "start": 917.124,
-   "end": 926.133,
-   "figure": true,
+   "start": 929.727,
+   "end": 953.663,
+   "figure": false,
    "motion": "crane_up",
    "atmosphere": false
   },
   {
    "image": "bg-moonlit-sea",
-   "start": 926.133,
-   "end": 936.947,
-   "figure": true,
+   "start": 953.663,
+   "end": 978.096,
+   "figure": false,
    "motion": "dolly_out",
    "atmosphere": true
   },
   {
    "image": "bg-night-village",
-   "start": 936.947,
-   "end": 950.667,
-   "figure": true,
+   "start": 978.096,
+   "end": 1002.941,
+   "figure": false,
    "motion": "truck_left",
    "atmosphere": false
   },
   {
    "image": "bg-lake",
-   "start": 950.667,
-   "end": 960.84,
-   "figure": true,
+   "start": 1002.941,
+   "end": 1028.843,
+   "figure": false,
    "motion": "arc",
    "atmosphere": false
   },
   {
    "image": "bg-first-light",
-   "start": 960.84,
-   "end": 972.723,
-   "figure": true,
+   "start": 1028.843,
+   "end": 1052.048,
+   "figure": false,
    "motion": "dolly_in",
    "atmosphere": false
   },
   {
    "image": "bg-moonlit-meadow",
-   "start": 972.723,
-   "end": 983.353,
-   "figure": true,
+   "start": 1052.048,
+   "end": 1075.588,
+   "figure": false,
    "motion": "truck_right",
    "atmosphere": true
   },
   {
    "image": "bg-candle",
-   "start": 983.353,
-   "end": 994.816,
-   "figure": true,
+   "start": 1075.588,
+   "end": 1100.848,
+   "figure": false,
    "motion": "crane_up",
    "atmosphere": false
   },
   {
    "image": "bg-night-sky",
-   "start": 994.816,
-   "end": 1005.127,
-   "figure": true,
+   "start": 1100.848,
+   "end": 1124.291,
+   "figure": false,
    "motion": "dolly_out",
    "atmosphere": true
   },
   {
    "image": "bg-still-water-night",
-   "start": 1005.127,
-   "end": 1015.625,
-   "figure": true,
+   "start": 1124.291,
+   "end": 1154.771,
+   "figure": false,
    "motion": "truck_left",
    "atmosphere": true
   },
   {
    "image": "bg-lamp-window",
-   "start": 1015.625,
-   "end": 1028.971,
-   "figure": true,
+   "start": 1154.771,
+   "end": 1178.609,
+   "figure": false,
    "motion": "arc",
    "atmosphere": false
   },
   {
    "image": "bg-healing-garden",
-   "start": 1028.971,
-   "end": 1042.664,
-   "figure": true,
+   "start": 1178.609,
+   "end": 1204.937,
+   "figure": false,
    "motion": "dolly_in",
    "atmosphere": true
   },
   {
    "image": "bg-moon-lake",
-   "start": 1042.664,
-   "end": 1052.155,
-   "figure": true,
+   "start": 1204.937,
+   "end": 1228.849,
+   "figure": false,
    "motion": "truck_right",
    "atmosphere": false
   },
   {
    "image": "bg-starry-hills",
-   "start": 1052.155,
-   "end": 1064.391,
-   "figure": true,
+   "start": 1228.849,
+   "end": 1251.456,
+   "figure": false,
    "motion": "crane_up",
    "atmosphere": false
   },
   {
    "image": "bg-quiet-chapel",
-   "start": 1064.391,
-   "end": 1075.695,
-   "figure": true,
+   "start": 1251.456,
+   "end": 1274.897,
+   "figure": false,
    "motion": "dolly_out",
    "atmosphere": false
   },
   {
    "image": "bg-window",
-   "start": 1075.695,
-   "end": 1088.435,
-   "figure": true,
+   "start": 1274.897,
+   "end": 1304.003,
+   "figure": false,
    "motion": "truck_left",
    "atmosphere": false
   },
   {
    "image": "bg-moonlit-sea",
-   "start": 1088.435,
-   "end": 1100.955,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-night-village",
-   "start": 1100.955,
-   "end": 1110.945,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-lake",
-   "start": 1110.945,
-   "end": 1120.207,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-first-light",
-   "start": 1120.207,
-   "end": 1130.368,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-meadow",
-   "start": 1130.368,
-   "end": 1139.776,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-candle",
-   "start": 1139.776,
-   "end": 1154.963,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-night-sky",
-   "start": 1154.963,
-   "end": 1164.005,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-still-water-night",
-   "start": 1164.005,
-   "end": 1178.801,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
-   "start": 1178.801,
-   "end": 1191.327,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 1191.327,
-   "end": 1200.896,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-moon-lake",
-   "start": 1200.896,
-   "end": 1213.639,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-starry-hills",
-   "start": 1213.639,
-   "end": 1222.687,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-quiet-chapel",
-   "start": 1222.687,
-   "end": 1233.147,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-window",
-   "start": 1233.147,
-   "end": 1242.365,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-sea",
-   "start": 1242.365,
-   "end": 1251.541,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-night-village",
-   "start": 1251.541,
-   "end": 1264.587,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-lake",
-   "start": 1264.587,
-   "end": 1274.961,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-first-light",
-   "start": 1274.961,
-   "end": 1285.144,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-meadow",
-   "start": 1285.144,
-   "end": 1295.689,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-candle",
-   "start": 1295.689,
-   "end": 1306.977,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-night-sky",
-   "start": 1306.977,
-   "end": 1317.848,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-still-water-night",
-   "start": 1317.848,
+   "start": 1304.003,
    "end": 1327.616,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
-   "start": 1327.616,
-   "end": 1336.996,
-   "figure": true,
-   "motion": "dolly_out",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 1336.996,
-   "end": 1349.308,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-moon-lake",
-   "start": 1349.308,
-   "end": 1359.555,
-   "figure": true,
+   "figure": false,
    "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-starry-hills",
-   "start": 1359.555,
-   "end": 1375.652,
-   "figure": true,
-   "motion": "dolly_in",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-quiet-chapel",
-   "start": 1375.652,
-   "end": 1385.755,
-   "figure": true,
-   "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-window",
-   "start": 1385.755,
-   "end": 1394.913,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-moonlit-sea",
-   "start": 1394.913,
-   "end": 1406.948,
-   "figure": true,
-   "motion": "dolly_out",
    "atmosphere": true
   },
   {
    "image": "bg-night-village",
-   "start": 1406.948,
-   "end": 1418.748,
-   "figure": true,
-   "motion": "truck_left",
+   "start": 1327.616,
+   "end": 1354.629,
+   "figure": false,
+   "motion": "dolly_in",
    "atmosphere": false
   },
   {
    "image": "bg-lake",
-   "start": 1418.748,
-   "end": 1431.491,
-   "figure": true,
-   "motion": "arc",
+   "start": 1354.629,
+   "end": 1377.709,
+   "figure": false,
+   "motion": "truck_right",
    "atmosphere": false
   },
   {
    "image": "bg-first-light",
-   "start": 1431.491,
-   "end": 1441.517,
-   "figure": true,
-   "motion": "dolly_in",
+   "start": 1377.709,
+   "end": 1406.905,
+   "figure": false,
+   "motion": "crane_up",
    "atmosphere": false
   },
   {
    "image": "bg-moonlit-meadow",
-   "start": 1441.517,
-   "end": 1453.284,
-   "figure": true,
-   "motion": "truck_right",
+   "start": 1406.905,
+   "end": 1431.469,
+   "figure": false,
+   "motion": "dolly_out",
    "atmosphere": true
   },
   {
    "image": "bg-candle",
-   "start": 1453.284,
-   "end": 1465.228,
-   "figure": true,
-   "motion": "crane_up",
+   "start": 1431.469,
+   "end": 1460.44,
+   "figure": false,
+   "motion": "truck_left",
    "atmosphere": false
   },
   {
    "image": "bg-night-sky",
-   "start": 1465.228,
-   "end": 1474.301,
-   "figure": true,
-   "motion": "dolly_out",
+   "start": 1460.44,
+   "end": 1484.603,
+   "figure": false,
+   "motion": "arc",
    "atmosphere": true
   },
   {
    "image": "bg-still-water-night",
-   "start": 1474.301,
-   "end": 1484.603,
-   "figure": true,
-   "motion": "truck_left",
-   "atmosphere": true
-  },
-  {
-   "image": "bg-lamp-window",
    "start": 1484.603,
-   "end": 1497.597,
-   "figure": true,
-   "motion": "arc",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-healing-garden",
-   "start": 1497.597,
-   "end": 1507.545,
-   "figure": true,
+   "end": 1507.503,
+   "figure": false,
    "motion": "dolly_in",
    "atmosphere": true
   },
   {
-   "image": "bg-moon-lake",
-   "start": 1507.545,
-   "end": 1517.404,
-   "figure": true,
+   "image": "bg-lamp-window",
+   "start": 1507.503,
+   "end": 1534.496,
+   "figure": false,
    "motion": "truck_right",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-starry-hills",
-   "start": 1517.404,
-   "end": 1527.833,
-   "figure": true,
-   "motion": "crane_up",
-   "atmosphere": false
-  },
-  {
-   "image": "bg-quiet-chapel",
-   "start": 1527.833,
-   "end": 1534.667,
-   "figure": true,
-   "motion": "dolly_out",
    "atmosphere": false
   }
  ],
- "captions_ass_sha256": "ee03b72b2b4fe6d5b479f8e3280de5295b4ced0e52ee3033770a7307a7217e7d",
+ "captions_ass_sha256": "88fed401c5d158c4987d1f1d8fc3a7872155c62a4afb9e4a9da7c3ed82774028",
  "captions": [
   {
-   "start": 1.845,
-   "end": 3.182,
+   "start": 1.824,
+   "end": 3.177,
    "text": "Bring every pain,"
   },
   {
-   "start": 3.182,
-   "end": 4.519,
+   "start": 3.177,
+   "end": 4.529,
    "text": "of body or heart,"
   },
   {
-   "start": 4.519,
-   "end": 5.698,
+   "start": 4.529,
+   "end": 5.723,
    "text": "to God tonight,"
   },
   {
-   "start": 5.698,
-   "end": 8.958,
-   "text": "and rest in his care while you sleep."
+   "start": 5.723,
+   "end": 7.314,
+   "text": "and rest in his care"
   },
   {
-   "start": 9.588,
-   "end": 11.403,
+   "start": 7.314,
+   "end": 8.937,
+   "text": "while you sleep."
+  },
+  {
+   "start": 9.567,
+   "end": 11.398,
    "text": "If your body is hurting,"
   },
   {
-   "start": 11.403,
-   "end": 12.688,
+   "start": 11.398,
+   "end": 12.696,
    "text": "or your heart is,"
   },
   {
-   "start": 12.688,
-   "end": 15.741,
-   "text": "stay with me for the next few minutes."
+   "start": 12.696,
+   "end": 14.603,
+   "text": "stay with me for the next"
   },
   {
-   "start": 15.741,
-   "end": 18.396,
+   "start": 14.603,
+   "end": 15.699,
+   "text": "few minutes."
+  },
+  {
+   "start": 15.699,
+   "end": 18.375,
    "text": "Take one slow breath with me."
   },
   {
-   "start": 18.396,
-   "end": 20.332,
+   "start": 18.375,
+   "end": 20.31,
    "text": "Lie down and let the bed"
   },
   {
-   "start": 20.332,
-   "end": 21.883,
+   "start": 20.31,
+   "end": 21.861,
    "text": "hold your weight."
   },
   {
-   "start": 21.883,
-   "end": 23.437,
+   "start": 21.861,
+   "end": 23.415,
    "text": "Let your hands rest,"
   },
   {
-   "start": 23.437,
-   "end": 24.681,
+   "start": 23.415,
+   "end": 24.659,
    "text": "your jaw soften,"
   },
   {
-   "start": 24.681,
-   "end": 26.415,
+   "start": 24.659,
+   "end": 26.393,
    "text": "your breathing slow."
   },
   {
-   "start": 26.415,
-   "end": 28.873,
+   "start": 26.393,
+   "end": 28.852,
    "text": "You may be tired of being sick,"
   },
   {
-   "start": 28.873,
-   "end": 31.173,
+   "start": 28.852,
+   "end": 31.152,
    "text": "tired of waiting for results,"
   },
   {
-   "start": 31.173,
-   "end": 33.336,
+   "start": 31.152,
+   "end": 33.315,
    "text": "tired of carrying sorrow."
   },
   {
-   "start": 33.336,
-   "end": 35.329,
+   "start": 33.315,
+   "end": 35.308,
    "text": "Bring all of it here."
   },
   {
-   "start": 35.329,
-   "end": 38.346,
-   "text": "You do not have to be strong tonight."
+   "start": 35.308,
+   "end": 36.419,
+   "text": "You do not have"
   },
   {
-   "start": 39.376,
-   "end": 40.86,
+   "start": 36.419,
+   "end": 38.325,
+   "text": "to be strong tonight."
+  },
+  {
+   "start": 39.355,
+   "end": 40.839,
    "text": "The prophet Jeremiah"
   },
   {
-   "start": 40.86,
-   "end": 42.969,
+   "start": 40.839,
+   "end": 42.948,
    "text": "prayed this simple prayer."
   },
   {
-   "start": 42.969,
-   "end": 44.326,
+   "start": 42.948,
+   "end": 44.304,
    "text": "Heal me, O LORD,"
   },
   {
-   "start": 44.326,
-   "end": 46.371,
+   "start": 44.304,
+   "end": 46.349,
    "text": "and I shall be healed;"
   },
   {
-   "start": 46.371,
-   "end": 47.036,
+   "start": 46.349,
+   "end": 47.014,
    "text": "save me,"
   },
   {
-   "start": 47.036,
-   "end": 48.961,
+   "start": 47.014,
+   "end": 48.94,
    "text": "and I shall be saved:"
   },
   {
-   "start": 48.961,
-   "end": 51.594,
+   "start": 48.94,
+   "end": 51.573,
    "text": "for thou art my praise."
   },
   {
-   "start": 52.924,
-   "end": 56.197,
+   "start": 52.903,
+   "end": 56.176,
    "text": "Jeremiah's prayer is short and honest."
   },
   {
-   "start": 56.197,
-   "end": 59.044,
+   "start": 56.176,
+   "end": 59.023,
    "text": "He does not explain or perform."
   },
   {
-   "start": 59.044,
-   "end": 60.952,
+   "start": 59.023,
+   "end": 60.931,
    "text": "He simply asks."
   },
   {
-   "start": 60.952,
-   "end": 63.799,
+   "start": 60.931,
+   "end": 63.777,
    "text": "Tonight you can pray the same way."
   },
   {
-   "start": 63.799,
+   "start": 63.777,
    "end": 66.517,
    "text": "You do not need the right words."
   },
@@ -1535,18 +918,23 @@
   },
   {
    "start": 79.713,
-   "end": 81.347,
+   "end": 81.37,
    "text": "You know every ache,"
   },
   {
-   "start": 81.347,
-   "end": 82.49,
+   "start": 81.37,
+   "end": 82.531,
    "text": "every symptom,"
   },
   {
-   "start": 82.49,
+   "start": 82.531,
+   "end": 83.939,
+   "text": "every fear I have"
+  },
+  {
+   "start": 83.939,
    "end": 85.611,
-   "text": "every fear I have not said out loud."
+   "text": "not said out loud."
   },
   {
    "start": 85.611,
@@ -1555,51 +943,56 @@
   },
   {
    "start": 87.732,
-   "end": 89.661,
+   "end": 89.682,
    "text": "Hold me tonight."
   },
   {
-   "start": 90.691,
-   "end": 93.146,
+   "start": 90.712,
+   "end": 93.156,
    "text": "He healeth the broken in heart,"
   },
   {
-   "start": 93.146,
+   "start": 93.156,
    "end": 95.713,
    "text": "and bindeth up their wounds."
   },
   {
    "start": 97.043,
-   "end": 99.431,
+   "end": 99.467,
    "text": "The same psalm says God counts"
   },
   {
-   "start": 99.431,
+   "start": 99.467,
+   "end": 101.002,
+   "text": "the stars and calls"
+  },
+  {
+   "start": 101.002,
    "end": 102.556,
-   "text": "the stars and calls them all by name."
+   "text": "them all by name."
   },
   {
    "start": 102.556,
-   "end": 104.233,
+   "end": 104.239,
    "text": "And yet he bends down"
   },
   {
-   "start": 104.233,
-   "end": 105.67,
+   "start": 104.239,
+   "end": 105.682,
    "text": "to bind up wounds,"
   },
   {
-   "start": 105.67,
-   "end": 108.325,
+   "start": 105.682,
+   "end": 108.347,
    "text": "like a nurse tending a bandage."
   },
   {
-   "start": 108.325,
-   "end": 111.028,
+   "start": 108.347,
+   "end": 111.037,
    "text": "The God of the galaxies is gentle"
   },
   {
-   "start": 111.028,
+   "start": 111.037,
    "end": 113.262,
    "text": "with your hurt tonight."
   },
@@ -1715,128 +1108,128 @@
   },
   {
    "start": 158.14,
-   "end": 160.88,
+   "end": 160.901,
    "text": "You are not forgotten in that bed."
   },
   {
-   "start": 160.88,
-   "end": 162.574,
+   "start": 160.901,
+   "end": 162.595,
    "text": "He is there."
   },
   {
-   "start": 163.604,
-   "end": 166.061,
+   "start": 163.625,
+   "end": 166.082,
    "text": "Lord, I thank you for doctors,"
   },
   {
-   "start": 166.061,
-   "end": 166.634,
+   "start": 166.082,
+   "end": 166.656,
    "text": "nurses,"
   },
   {
-   "start": 166.634,
-   "end": 168.682,
+   "start": 166.656,
+   "end": 168.703,
    "text": "medicine and every person"
   },
   {
-   "start": 168.682,
-   "end": 170.909,
+   "start": 168.703,
+   "end": 170.931,
    "text": "whose work helps us heal."
   },
   {
-   "start": 170.909,
-   "end": 172.312,
+   "start": 170.931,
+   "end": 172.334,
    "text": "Give them wisdom,"
   },
   {
-   "start": 172.312,
-   "end": 174.225,
+   "start": 172.334,
+   "end": 174.247,
    "text": "skill and compassion."
   },
   {
-   "start": 174.225,
-   "end": 177.435,
+   "start": 174.247,
+   "end": 177.456,
    "text": "Guide every decision about treatment."
   },
   {
-   "start": 177.435,
-   "end": 180.26,
+   "start": 177.456,
+   "end": 180.281,
    "text": "Let the medicine work as it should."
   },
   {
-   "start": 180.26,
-   "end": 182.194,
+   "start": 180.281,
+   "end": 182.215,
    "text": "And help me to keep following"
   },
   {
-   "start": 182.194,
-   "end": 183.995,
+   "start": 182.215,
+   "end": 184.016,
    "text": "the care I have been given,"
   },
   {
-   "start": 183.995,
-   "end": 186.413,
+   "start": 184.016,
+   "end": 186.434,
    "text": "trusting you through all of it."
   },
   {
-   "start": 187.443,
-   "end": 187.982,
+   "start": 187.464,
+   "end": 188.003,
    "text": "Father,"
   },
   {
-   "start": 187.982,
-   "end": 190.446,
+   "start": 188.003,
+   "end": 190.467,
    "text": "for those living with an illness"
   },
   {
-   "start": 190.446,
-   "end": 192.14,
+   "start": 190.467,
+   "end": 192.161,
    "text": "that does not go away,"
   },
   {
-   "start": 192.14,
-   "end": 193.448,
+   "start": 192.161,
+   "end": 193.47,
    "text": "the chronic pain,"
   },
   {
-   "start": 193.448,
-   "end": 194.988,
+   "start": 193.47,
+   "end": 195.01,
    "text": "the long treatments,"
   },
   {
-   "start": 194.988,
-   "end": 197.914,
+   "start": 195.01,
+   "end": 197.936,
    "text": "the bodies that never quite feel well,"
   },
   {
-   "start": 197.914,
-   "end": 199.249,
+   "start": 197.936,
+   "end": 199.271,
    "text": "give endurance."
   },
   {
-   "start": 199.249,
-   "end": 201.747,
+   "start": 199.271,
+   "end": 201.769,
    "text": "On the days when hope runs thin,"
   },
   {
-   "start": 201.747,
-   "end": 202.629,
+   "start": 201.769,
+   "end": 202.651,
    "text": "renew it."
   },
   {
-   "start": 202.629,
-   "end": 204.846,
-   "text": "Let them know that their worth"
+   "start": 202.651,
+   "end": 204.418,
+   "text": "Let them know that their"
   },
   {
-   "start": 204.846,
-   "end": 206.547,
-   "text": "is not measured by what"
+   "start": 204.418,
+   "end": 206.184,
+   "text": "worth is not measured by"
   },
   {
-   "start": 206.547,
+   "start": 206.184,
    "end": 208.227,
-   "text": "their body can do."
+   "text": "what their body can do."
   },
   {
    "start": 209.257,
@@ -1955,176 +1348,196 @@
   },
   {
    "start": 263.725,
-   "end": 266.402,
+   "end": 266.412,
    "text": "Before Jesus ever healed anyone,"
   },
   {
-   "start": 266.402,
-   "end": 269.175,
+   "start": 266.412,
+   "end": 269.196,
    "text": "he chose to be wounded himself."
   },
   {
-   "start": 269.175,
-   "end": 271.808,
+   "start": 269.196,
+   "end": 271.829,
    "text": "He knows pain from the inside."
   },
   {
-   "start": 271.808,
-   "end": 274.462,
-   "text": "So when you bring him your pain tonight,"
+   "start": 271.829,
+   "end": 273.239,
+   "text": "So when you bring him"
   },
   {
-   "start": 274.462,
-   "end": 275.788,
+   "start": 273.239,
+   "end": 274.448,
+   "text": "your pain tonight,"
+  },
+  {
+   "start": 274.448,
+   "end": 275.791,
    "text": "you are not bringing"
   },
   {
-   "start": 275.788,
-   "end": 277.428,
+   "start": 275.791,
+   "end": 277.449,
    "text": "it to someone distant."
   },
   {
-   "start": 277.428,
-   "end": 278.767,
+   "start": 277.449,
+   "end": 278.788,
    "text": "You are bringing it"
   },
   {
-   "start": 278.767,
-   "end": 281.021,
+   "start": 278.788,
+   "end": 281.042,
    "text": "to someone who understands."
   },
   {
-   "start": 282.051,
-   "end": 284.641,
+   "start": 282.072,
+   "end": 284.663,
    "text": "Lord, heal my anxious mind."
   },
   {
-   "start": 284.641,
-   "end": 287.872,
+   "start": 284.663,
+   "end": 287.893,
    "text": "Quiet the questions that run in circles."
   },
   {
-   "start": 287.872,
-   "end": 290.292,
+   "start": 287.893,
+   "end": 290.313,
    "text": "What if the results are bad?"
   },
   {
-   "start": 290.292,
-   "end": 292.755,
+   "start": 290.313,
+   "end": 292.776,
    "text": "What if it does not get better?"
   },
   {
-   "start": 292.755,
-   "end": 295.068,
+   "start": 292.776,
+   "end": 295.089,
    "text": "I give you every what if."
   },
   {
-   "start": 295.068,
-   "end": 297.558,
+   "start": 295.089,
+   "end": 297.616,
    "text": "Replace my fear with your peace,"
   },
   {
-   "start": 297.558,
-   "end": 300.709,
-   "text": "and let my mind rest in you tonight."
+   "start": 297.616,
+   "end": 299.195,
+   "text": "and let my mind rest"
   },
   {
-   "start": 301.739,
-   "end": 302.118,
+   "start": 299.195,
+   "end": 300.73,
+   "text": "in you tonight."
+  },
+  {
+   "start": 301.76,
+   "end": 302.139,
    "text": "Lord,"
   },
   {
-   "start": 302.118,
-   "end": 303.709,
+   "start": 302.139,
+   "end": 303.73,
    "text": "I pray for every mind"
   },
   {
-   "start": 303.709,
-   "end": 306.313,
+   "start": 303.73,
+   "end": 306.335,
    "text": "that is tired and heavy tonight."
   },
   {
-   "start": 306.313,
-   "end": 309.565,
+   "start": 306.335,
+   "end": 309.587,
    "text": "For depression that makes mornings hard."
   },
   {
-   "start": 309.565,
-   "end": 312.625,
+   "start": 309.587,
+   "end": 312.647,
    "text": "For anxiety that tightens the chest."
   },
   {
-   "start": 312.625,
-   "end": 314.243,
+   "start": 312.647,
+   "end": 314.265,
    "text": "For thoughts that feel"
   },
   {
-   "start": 314.243,
-   "end": 316.261,
+   "start": 314.265,
+   "end": 316.283,
    "text": "too dark to say out loud."
   },
   {
-   "start": 316.261,
-   "end": 318.916,
+   "start": 316.283,
+   "end": 318.937,
    "text": "Bring light into those places."
   },
   {
-   "start": 318.916,
-   "end": 321.864,
-   "text": "Lead each person to the help they need,"
+   "start": 318.937,
+   "end": 320.168,
+   "text": "Lead each person"
   },
   {
-   "start": 321.864,
-   "end": 323.905,
+   "start": 320.168,
+   "end": 321.86,
+   "text": "to the help they need,"
+  },
+  {
+   "start": 321.86,
+   "end": 323.936,
    "text": "the friend, the counsellor,"
   },
   {
-   "start": 323.905,
-   "end": 324.736,
+   "start": 323.936,
+   "end": 324.782,
    "text": "the doctor,"
   },
   {
-   "start": 324.736,
-   "end": 328.034,
-   "text": "and let them never feel ashamed to ask."
+   "start": 324.782,
+   "end": 326.167,
+   "text": "and let them never"
   },
   {
-   "start": 329.064,
-   "end": 329.826,
+   "start": 326.167,
+   "end": 328.055,
+   "text": "feel ashamed to ask."
+  },
+  {
+   "start": 329.085,
+   "end": 329.847,
    "text": "Be still,"
   },
   {
-   "start": 329.826,
-   "end": 332.123,
+   "start": 329.847,
+   "end": 332.145,
    "text": "and know that I am God."
   },
   {
-   "start": 333.453,
-   "end": 334.785,
+   "start": 333.475,
+   "end": 334.807,
    "text": "Be still."
   },
   {
-   "start": 334.785,
-   "end": 337.29,
+   "start": 334.807,
+   "end": 337.306,
    "text": "Not because nothing is happening,"
   },
   {
-   "start": 337.29,
-   "end": 339.492,
+   "start": 337.306,
+   "end": 339.502,
    "text": "but because God is still God,"
   },
   {
-   "start": 339.492,
-   "end": 340.782,
+   "start": 339.502,
+   "end": 340.79,
    "text": "even in the dark,"
   },
   {
-   "start": 340.782,
-   "end": 342.377,
+   "start": 340.79,
+   "end": 342.38,
    "text": "even in the hospital,"
   },
   {
-   "start": 342.377,
+   "start": 342.38,
    "end": 344.075,
    "text": "even in the waiting."
   },
@@ -2160,191 +1573,201 @@
   },
   {
    "start": 359.088,
-   "end": 360.816,
+   "end": 360.806,
    "text": "Father, like David,"
   },
   {
-   "start": 360.816,
-   "end": 363.087,
+   "start": 360.806,
+   "end": 363.065,
    "text": "I admit that I am weak."
   },
   {
-   "start": 363.087,
-   "end": 365.869,
-   "text": "I have run out of my own strength."
+   "start": 363.065,
+   "end": 364.169,
+   "text": "I have run out"
   },
   {
-   "start": 365.869,
-   "end": 367.905,
+   "start": 364.169,
+   "end": 365.848,
+   "text": "of my own strength."
+  },
+  {
+   "start": 365.848,
+   "end": 367.884,
    "text": "Have mercy on me."
   },
   {
-   "start": 367.905,
-   "end": 370.069,
+   "start": 367.884,
+   "end": 370.048,
    "text": "Meet me in the weakness."
   },
   {
-   "start": 370.069,
-   "end": 372.164,
+   "start": 370.048,
+   "end": 372.143,
    "text": "Carry me where I cannot walk,"
   },
   {
-   "start": 372.164,
-   "end": 373.897,
+   "start": 372.143,
+   "end": 373.876,
    "text": "and give me the strength"
   },
   {
-   "start": 373.897,
-   "end": 375.475,
+   "start": 373.876,
+   "end": 375.454,
    "text": "to face tomorrow."
   },
   {
-   "start": 376.505,
-   "end": 379.053,
+   "start": 376.484,
+   "end": 379.032,
    "text": "For which cause we faint not;"
   },
   {
-   "start": 379.053,
-   "end": 381.798,
+   "start": 379.032,
+   "end": 381.796,
    "text": "but though our outward man perish,"
   },
   {
-   "start": 381.798,
-   "end": 383.251,
+   "start": 381.796,
+   "end": 383.259,
    "text": "yet the inward man"
   },
   {
-   "start": 383.251,
-   "end": 385.377,
+   "start": 383.259,
+   "end": 385.398,
    "text": "is renewed day by day."
   },
   {
-   "start": 386.707,
-   "end": 389.057,
+   "start": 386.728,
+   "end": 389.078,
    "text": "Even when the body is struggling,"
   },
   {
-   "start": 389.057,
-   "end": 391.516,
+   "start": 389.078,
+   "end": 391.537,
    "text": "something deeper can be renewed:"
   },
   {
-   "start": 391.516,
-   "end": 393.122,
+   "start": 391.537,
+   "end": 393.144,
    "text": "your hope, your faith,"
   },
   {
-   "start": 393.122,
-   "end": 395.493,
+   "start": 393.144,
+   "end": 395.515,
    "text": "your sense that you are loved."
   },
   {
-   "start": 395.493,
-   "end": 397.667,
+   "start": 395.515,
+   "end": 397.689,
    "text": "God is at work on the inside"
   },
   {
-   "start": 397.667,
-   "end": 398.832,
+   "start": 397.689,
+   "end": 398.854,
    "text": "of you tonight,"
   },
   {
-   "start": 398.832,
-   "end": 401.667,
+   "start": 398.854,
+   "end": 401.689,
    "text": "whatever the outside feels like."
   },
   {
-   "start": 402.697,
-   "end": 403.065,
+   "start": 402.719,
+   "end": 403.087,
    "text": "Lord,"
   },
   {
-   "start": 403.065,
-   "end": 405.198,
+   "start": 403.087,
+   "end": 405.22,
    "text": "I pray for everyone who cares"
   },
   {
-   "start": 405.198,
-   "end": 407.144,
+   "start": 405.22,
+   "end": 407.165,
    "text": "for someone who is sick."
   },
   {
-   "start": 407.144,
-   "end": 410.076,
+   "start": 407.165,
+   "end": 410.097,
    "text": "The parents beside a child's bed."
   },
   {
-   "start": 410.076,
-   "end": 412.143,
+   "start": 410.097,
+   "end": 412.164,
    "text": "The husband or wife who has"
   },
   {
-   "start": 412.143,
-   "end": 414.16,
+   "start": 412.164,
+   "end": 414.181,
    "text": "not slept well in weeks."
   },
   {
-   "start": 414.16,
-   "end": 417.284,
+   "start": 414.181,
+   "end": 417.305,
    "text": "The children caring for aging parents."
   },
   {
-   "start": 417.284,
-   "end": 418.741,
+   "start": 417.305,
+   "end": 418.762,
    "text": "Give them strength,"
   },
   {
-   "start": 418.741,
-   "end": 420.301,
+   "start": 418.762,
+   "end": 420.323,
    "text": "patience and rest."
   },
   {
-   "start": 420.301,
-   "end": 422.363,
+   "start": 420.323,
+   "end": 422.384,
    "text": "Let them know that what they do"
   },
   {
-   "start": 422.363,
-   "end": 424.641,
+   "start": 422.384,
+   "end": 424.662,
    "text": "is seen and treasured by you."
   },
   {
-   "start": 425.671,
-   "end": 426.199,
+   "start": 425.692,
+   "end": 426.227,
    "text": "Father,"
   },
   {
-   "start": 426.199,
-   "end": 428.839,
+   "start": 426.227,
+   "end": 428.9,
    "text": "I lift up every sick child tonight,"
   },
   {
-   "start": 428.839,
-   "end": 432.037,
-   "text": "and every parent who is afraid for them."
+   "start": 428.9,
+   "end": 430.122,
+   "text": "and every parent"
   },
   {
-   "start": 432.037,
-   "end": 434.393,
+   "start": 430.122,
+   "end": 432.059,
+   "text": "who is afraid for them."
+  },
+  {
+   "start": 432.059,
+   "end": 434.415,
    "text": "Hold these little ones close."
   },
   {
-   "start": 434.393,
-   "end": 435.624,
+   "start": 434.415,
+   "end": 435.641,
    "text": "Ease their fever,"
   },
   {
-   "start": 435.624,
-   "end": 436.783,
+   "start": 435.641,
+   "end": 436.795,
    "text": "calm their fear,"
   },
   {
-   "start": 436.783,
-   "end": 438.159,
+   "start": 436.795,
+   "end": 438.166,
    "text": "and bring them back"
   },
   {
-   "start": 438.159,
+   "start": 438.166,
    "end": 440.077,
    "text": "to playing and laughing."
   },
@@ -2435,758 +1858,793 @@
   },
   {
    "start": 473.229,
-   "end": 474.6,
+   "end": 474.616,
    "text": "Help me to forgive,"
   },
   {
-   "start": 474.6,
-   "end": 476.909,
+   "start": 474.616,
+   "end": 476.951,
    "text": "and to receive your forgiveness,"
   },
   {
-   "start": 476.909,
+   "start": 476.951,
+   "end": 478.41,
+   "text": "so that my heart can"
+  },
+  {
+   "start": 478.41,
    "end": 480.001,
-   "text": "so that my heart can heal tonight too."
+   "text": "heal tonight too."
   },
   {
    "start": 481.031,
-   "end": 482.183,
+   "end": 482.178,
    "text": "O LORD my God,"
   },
   {
-   "start": 482.183,
-   "end": 483.664,
+   "start": 482.178,
+   "end": 483.652,
    "text": "I cried unto thee,"
   },
   {
-   "start": 483.664,
-   "end": 485.989,
+   "start": 483.652,
+   "end": 485.967,
    "text": "and thou hast healed me."
   },
   {
-   "start": 487.319,
-   "end": 489.423,
+   "start": 487.297,
+   "end": 489.401,
    "text": "Bless the LORD, O my soul,"
   },
   {
-   "start": 489.423,
-   "end": 492.192,
+   "start": 489.401,
+   "end": 492.171,
    "text": "and forget not all his benefits:"
   },
   {
-   "start": 492.192,
-   "end": 494.996,
+   "start": 492.171,
+   "end": 494.975,
    "text": "Who forgiveth all thine iniquities;"
   },
   {
-   "start": 494.996,
-   "end": 498.034,
+   "start": 494.975,
+   "end": 497.991,
    "text": "who healeth all thy diseases."
   },
   {
-   "start": 499.364,
-   "end": 500.627,
+   "start": 499.321,
+   "end": 500.585,
    "text": "Thank you, Lord,"
   },
   {
-   "start": 500.627,
-   "end": 502.523,
+   "start": 500.585,
+   "end": 502.48,
    "text": "for every healing I have"
   },
   {
-   "start": 502.523,
-   "end": 504.045,
+   "start": 502.48,
+   "end": 504.003,
    "text": "already received."
   },
   {
-   "start": 504.045,
-   "end": 506.359,
+   "start": 504.003,
+   "end": 506.316,
    "text": "The sicknesses that passed."
   },
   {
-   "start": 506.359,
-   "end": 508.565,
+   "start": 506.316,
+   "end": 508.523,
    "text": "The wounds that closed."
   },
   {
-   "start": 508.565,
-   "end": 510.9,
+   "start": 508.523,
+   "end": 510.857,
    "text": "The sorrows that lifted."
   },
   {
-   "start": 510.9,
-   "end": 513.576,
+   "start": 510.857,
+   "end": 513.533,
    "text": "I will not forget your benefits."
   },
   {
-   "start": 513.576,
-   "end": 515.258,
+   "start": 513.533,
+   "end": 515.215,
    "text": "You have been good to me,"
   },
   {
-   "start": 515.258,
-   "end": 517.007,
+   "start": 515.215,
+   "end": 516.965,
    "text": "and I trust you to be good"
   },
   {
-   "start": 517.007,
-   "end": 518.299,
+   "start": 516.965,
+   "end": 518.257,
    "text": "to me tonight."
   },
   {
-   "start": 519.329,
-   "end": 519.88,
+   "start": 519.287,
+   "end": 519.838,
    "text": "Father,"
   },
   {
-   "start": 519.88,
-   "end": 521.377,
+   "start": 519.838,
+   "end": 521.335,
    "text": "I pray for everyone"
   },
   {
-   "start": 521.377,
-   "end": 523.605,
+   "start": 521.335,
+   "end": 523.563,
    "text": "in a hospital bed tonight."
   },
   {
-   "start": 523.605,
-   "end": 526.055,
+   "start": 523.563,
+   "end": 526.013,
    "text": "For those waiting for surgery,"
   },
   {
-   "start": 526.055,
-   "end": 527.199,
+   "start": 526.013,
+   "end": 527.157,
    "text": "those in pain,"
   },
   {
-   "start": 527.199,
-   "end": 528.832,
+   "start": 527.157,
+   "end": 528.79,
    "text": "those far from home,"
   },
   {
-   "start": 528.832,
-   "end": 529.812,
+   "start": 528.79,
+   "end": 529.77,
    "text": "those afraid"
   },
   {
-   "start": 529.812,
-   "end": 532.361,
+   "start": 529.77,
+   "end": 532.319,
    "text": "of what the doctors will say."
   },
   {
-   "start": 532.361,
-   "end": 534.696,
+   "start": 532.319,
+   "end": 534.632,
    "text": "Sit beside each of them."
   },
   {
-   "start": 534.696,
-   "end": 537.324,
+   "start": 534.632,
+   "end": 537.26,
    "text": "Let the beeping machines and the long"
   },
   {
-   "start": 537.324,
-   "end": 540.23,
+   "start": 537.26,
+   "end": 540.166,
    "text": "corridors be filled with your peace."
   },
   {
-   "start": 541.26,
-   "end": 543.268,
+   "start": 541.196,
+   "end": 543.204,
    "text": "And Lord, bless the nurses,"
   },
   {
-   "start": 543.268,
-   "end": 545.202,
+   "start": 543.204,
+   "end": 545.138,
    "text": "doctors and carers working"
   },
   {
-   "start": 545.202,
-   "end": 546.795,
+   "start": 545.138,
+   "end": 546.731,
    "text": "through this night."
   },
   {
-   "start": 546.795,
-   "end": 549.727,
+   "start": 546.731,
+   "end": 549.663,
    "text": "Keep them alert, kind and safe."
   },
   {
-   "start": 549.727,
-   "end": 551.863,
+   "start": 549.663,
+   "end": 551.799,
    "text": "Let their hands bring comfort,"
   },
   {
-   "start": 551.863,
-   "end": 553.359,
+   "start": 551.799,
+   "end": 553.295,
    "text": "and refresh them when"
   },
   {
-   "start": 553.359,
-   "end": 555.133,
+   "start": 553.295,
+   "end": 555.069,
    "text": "their shift is over."
   },
   {
-   "start": 556.163,
-   "end": 557.0,
+   "start": 556.099,
+   "end": 556.936,
    "text": "And Father,"
   },
   {
-   "start": 557.0,
-   "end": 559.663,
+   "start": 556.936,
+   "end": 559.599,
    "text": "for anyone who is grieving tonight,"
   },
   {
-   "start": 559.663,
-   "end": 561.338,
+   "start": 559.599,
+   "end": 561.274,
    "text": "especially for someone"
   },
   {
-   "start": 561.338,
-   "end": 562.859,
+   "start": 561.274,
+   "end": 562.795,
    "text": "they could not save,"
   },
   {
-   "start": 562.859,
-   "end": 564.257,
+   "start": 562.795,
+   "end": 564.193,
    "text": "hold them close."
   },
   {
-   "start": 564.257,
-   "end": 566.357,
+   "start": 564.193,
+   "end": 566.293,
    "text": "Heal the ache of loss."
   },
   {
-   "start": 566.357,
-   "end": 568.306,
+   "start": 566.293,
+   "end": 568.25,
    "text": "Let them weep without shame,"
   },
   {
-   "start": 568.306,
-   "end": 569.49,
+   "start": 568.25,
+   "end": 569.438,
    "text": "and let them feel"
   },
   {
-   "start": 569.49,
-   "end": 571.998,
+   "start": 569.438,
+   "end": 571.955,
    "text": "that you are weeping with them."
   },
   {
-   "start": 573.028,
-   "end": 574.821,
+   "start": 572.985,
+   "end": 574.778,
    "text": "And God shall wipe away"
   },
   {
-   "start": 574.821,
-   "end": 577.027,
+   "start": 574.778,
+   "end": 576.984,
    "text": "all tears from their eyes;"
   },
   {
-   "start": 577.027,
-   "end": 579.466,
+   "start": 576.984,
+   "end": 579.423,
    "text": "and there shall be no more death,"
   },
   {
-   "start": 579.466,
-   "end": 581.461,
+   "start": 579.423,
+   "end": 581.418,
    "text": "neither sorrow, nor crying,"
   },
   {
-   "start": 581.461,
-   "end": 584.375,
+   "start": 581.418,
+   "end": 584.332,
    "text": "neither shall there be any more pain:"
   },
   {
-   "start": 584.375,
-   "end": 587.519,
+   "start": 584.332,
+   "end": 587.477,
    "text": "for the former things are passed away."
   },
   {
-   "start": 588.849,
-   "end": 590.896,
+   "start": 588.807,
+   "end": 590.853,
    "text": "This is the promise beneath"
   },
   {
-   "start": 590.896,
-   "end": 592.592,
+   "start": 590.853,
+   "end": 592.549,
    "text": "every other promise."
   },
   {
-   "start": 592.592,
-   "end": 594.595,
+   "start": 592.549,
+   "end": 594.552,
    "text": "One day God himself will"
   },
   {
-   "start": 594.595,
-   "end": 596.527,
+   "start": 594.552,
+   "end": 596.484,
    "text": "wipe away every tear."
   },
   {
-   "start": 596.527,
-   "end": 599.331,
+   "start": 596.484,
+   "end": 599.288,
    "text": "Pain will not have the last word."
   },
   {
-   "start": 599.331,
-   "end": 602.013,
+   "start": 599.288,
+   "end": 601.97,
    "text": "Whatever healing you receive tonight"
   },
   {
-   "start": 602.013,
-   "end": 604.523,
+   "start": 601.97,
+   "end": 604.481,
    "text": "is a small taste of that day."
   },
   {
-   "start": 605.553,
-   "end": 606.705,
+   "start": 605.511,
+   "end": 606.658,
    "text": "O Lord my God,"
   },
   {
-   "start": 606.705,
-   "end": 608.186,
+   "start": 606.658,
+   "end": 608.132,
    "text": "I cried unto thee,"
   },
   {
-   "start": 608.186,
-   "end": 610.341,
+   "start": 608.132,
+   "end": 610.277,
    "text": "and thou hast healed me."
   },
   {
-   "start": 610.341,
-   "end": 613.103,
-   "text": "David wrote that looking back on a night"
+   "start": 610.277,
+   "end": 612.316,
+   "text": "David wrote that looking back"
   },
   {
-   "start": 613.103,
-   "end": 615.492,
-   "text": "he thought he would not survive."
+   "start": 612.316,
+   "end": 614.003,
+   "text": "on a night he thought he"
   },
   {
-   "start": 615.492,
-   "end": 616.861,
+   "start": 614.003,
+   "end": 615.449,
+   "text": "would not survive."
+  },
+  {
+   "start": 615.449,
+   "end": 616.829,
    "text": "One day you may look"
   },
   {
-   "start": 616.861,
-   "end": 618.434,
+   "start": 616.829,
+   "end": 618.417,
    "text": "back on this night too,"
   },
   {
-   "start": 618.434,
-   "end": 621.453,
-   "text": "and see how God carried you through it."
+   "start": 618.417,
+   "end": 620.004,
+   "text": "and see how God carried"
   },
   {
-   "start": 622.483,
-   "end": 624.758,
-   "text": "And we know that all things work"
+   "start": 620.004,
+   "end": 621.389,
+   "text": "you through it."
   },
   {
-   "start": 624.758,
-   "end": 627.603,
-   "text": "together for good to them that love God,"
+   "start": 622.419,
+   "end": 624.355,
+   "text": "And we know that all things"
   },
   {
-   "start": 627.603,
-   "end": 629.451,
+   "start": 624.355,
+   "end": 625.932,
+   "text": "work together for good"
+  },
+  {
+   "start": 625.932,
+   "end": 627.509,
+   "text": "to them that love God,"
+  },
+  {
+   "start": 627.509,
+   "end": 629.373,
    "text": "to them who are the called"
   },
   {
-   "start": 629.451,
-   "end": 631.579,
+   "start": 629.373,
+   "end": 631.515,
    "text": "according to his purpose."
   },
   {
-   "start": 632.909,
-   "end": 633.288,
+   "start": 632.845,
+   "end": 633.224,
    "text": "Lord,"
   },
   {
-   "start": 633.288,
-   "end": 635.564,
+   "start": 633.224,
+   "end": 635.5,
    "text": "I do not understand everything"
   },
   {
-   "start": 635.564,
-   "end": 637.185,
+   "start": 635.5,
+   "end": 637.121,
    "text": "I am going through."
   },
   {
-   "start": 637.185,
-   "end": 638.905,
+   "start": 637.121,
+   "end": 638.841,
    "text": "But I choose to trust"
   },
   {
-   "start": 638.905,
-   "end": 640.625,
+   "start": 638.841,
+   "end": 640.561,
    "text": "that you are working,"
   },
   {
-   "start": 640.625,
-   "end": 642.443,
+   "start": 640.561,
+   "end": 642.379,
    "text": "even here, even now."
   },
   {
-   "start": 642.443,
-   "end": 644.154,
+   "start": 642.379,
+   "end": 644.09,
    "text": "Help me to wait with hope,"
   },
   {
-   "start": 644.154,
-   "end": 646.129,
+   "start": 644.09,
+   "end": 646.065,
    "text": "and to see your goodness again"
   },
   {
-   "start": 646.129,
-   "end": 648.19,
+   "start": 646.065,
+   "end": 648.126,
    "text": "in the land of the living."
   },
   {
-   "start": 649.22,
-   "end": 649.786,
+   "start": 649.156,
+   "end": 649.722,
    "text": "Father,"
   },
   {
-   "start": 649.786,
-   "end": 652.067,
+   "start": 649.722,
+   "end": 652.003,
    "text": "give me hope for tomorrow."
   },
   {
-   "start": 652.067,
-   "end": 653.977,
+   "start": 652.003,
+   "end": 653.913,
    "text": "Not a forced cheerfulness,"
   },
   {
-   "start": 653.977,
-   "end": 655.593,
+   "start": 653.913,
+   "end": 655.529,
    "text": "but a quiet confidence"
   },
   {
-   "start": 655.593,
-   "end": 657.135,
+   "start": 655.529,
+   "end": 657.071,
    "text": "that you are with me,"
   },
   {
-   "start": 657.135,
-   "end": 659.372,
+   "start": 657.071,
+   "end": 659.308,
    "text": "whatever the morning brings."
   },
   {
-   "start": 659.372,
-   "end": 661.537,
+   "start": 659.308,
+   "end": 661.473,
    "text": "Let me wake with new strength,"
   },
   {
-   "start": 661.537,
-   "end": 663.27,
+   "start": 661.473,
+   "end": 663.206,
    "text": "and see your mercy again"
   },
   {
-   "start": 663.27,
-   "end": 664.991,
+   "start": 663.206,
+   "end": 664.927,
    "text": "when the sun rises."
   },
   {
-   "start": 666.021,
-   "end": 668.719,
+   "start": 665.957,
+   "end": 668.655,
    "text": "And now, Lord, give me sleep."
   },
   {
-   "start": 668.719,
-   "end": 669.122,
+   "start": 668.655,
+   "end": 669.063,
    "text": "Deep,"
   },
   {
-   "start": 669.122,
-   "end": 672.021,
-   "text": "restoring sleep that lets my body do"
+   "start": 669.063,
+   "end": 671.101,
+   "text": "restoring sleep that lets"
   },
   {
-   "start": 672.021,
-   "end": 675.341,
-   "text": "the healing work you designed it to do."
+   "start": 671.101,
+   "end": 673.303,
+   "text": "my body do the healing work"
   },
   {
-   "start": 675.341,
-   "end": 676.699,
+   "start": 673.303,
+   "end": 675.277,
+   "text": "you designed it to do."
+  },
+  {
+   "start": 675.277,
+   "end": 676.635,
    "text": "If pain wakes me,"
   },
   {
-   "start": 676.699,
-   "end": 678.956,
+   "start": 676.635,
+   "end": 678.892,
    "text": "let me feel your nearness."
   },
   {
-   "start": 678.956,
-   "end": 680.316,
+   "start": 678.892,
+   "end": 680.252,
    "text": "If fear wakes me,"
   },
   {
-   "start": 680.316,
-   "end": 682.336,
+   "start": 680.252,
+   "end": 682.272,
    "text": "let me hear your peace."
   },
   {
-   "start": 682.336,
-   "end": 684.03,
+   "start": 682.272,
+   "end": 683.966,
    "text": "And let me fall asleep"
   },
   {
-   "start": 684.03,
-   "end": 685.843,
+   "start": 683.966,
+   "end": 685.779,
    "text": "again in your arms."
   },
   {
-   "start": 686.873,
-   "end": 688.499,
+   "start": 686.809,
+   "end": 688.463,
    "text": "I surrender my body,"
   },
   {
-   "start": 688.499,
-   "end": 691.768,
-   "text": "my heart and my future to you tonight."
+   "start": 688.463,
+   "end": 690.283,
+   "text": "my heart and my future"
   },
   {
-   "start": 691.768,
-   "end": 693.341,
+   "start": 690.283,
+   "end": 691.704,
+   "text": "to you tonight."
+  },
+  {
+   "start": 691.704,
+   "end": 693.277,
    "text": "I do not have to hold"
   },
   {
-   "start": 693.341,
-   "end": 695.02,
+   "start": 693.277,
+   "end": 694.956,
    "text": "everything together."
   },
   {
-   "start": 695.02,
-   "end": 696.587,
+   "start": 694.956,
+   "end": 696.523,
    "text": "You hold me."
   },
   {
-   "start": 696.587,
-   "end": 699.606,
+   "start": 696.523,
+   "end": 699.542,
    "text": "Into your hands I commit my spirit,"
   },
   {
-   "start": 699.606,
-   "end": 700.819,
+   "start": 699.542,
+   "end": 700.755,
    "text": "as I rest."
   },
   {
-   "start": 701.849,
-   "end": 704.227,
+   "start": 701.785,
+   "end": 704.184,
    "text": "Breathe in again, slowly."
   },
   {
-   "start": 704.227,
-   "end": 705.964,
+   "start": 704.184,
+   "end": 705.921,
    "text": "And let it out."
   },
   {
-   "start": 705.964,
-   "end": 708.341,
+   "start": 705.921,
+   "end": 708.299,
    "text": "Let every muscle relax."
   },
   {
-   "start": 708.341,
-   "end": 710.505,
+   "start": 708.299,
+   "end": 710.462,
    "text": "Let God hold you."
   },
   {
-   "start": 712.335,
-   "end": 714.942,
+   "start": 712.292,
+   "end": 714.899,
    "text": "Say these words with me quietly,"
   },
   {
-   "start": 714.942,
-   "end": 716.099,
+   "start": 714.899,
+   "end": 716.056,
    "text": "as you rest."
   },
   {
-   "start": 716.099,
-   "end": 718.348,
+   "start": 716.056,
+   "end": 718.305,
    "text": "The Lord is my healer."
   },
   {
-   "start": 718.348,
-   "end": 720.725,
+   "start": 718.305,
+   "end": 720.661,
    "text": "He binds up my wounds."
   },
   {
-   "start": 720.725,
-   "end": 723.38,
+   "start": 720.661,
+   "end": 723.316,
    "text": "I am not alone in this bed."
   },
   {
-   "start": 723.38,
-   "end": 724.078,
+   "start": 723.316,
+   "end": 724.014,
    "text": "My body,"
   },
   {
-   "start": 724.078,
-   "end": 725.822,
+   "start": 724.014,
+   "end": 725.758,
    "text": "my heart and my mind"
   },
   {
-   "start": 725.822,
-   "end": 727.485,
+   "start": 725.758,
+   "end": 727.421,
    "text": "are in his hands."
   },
   {
-   "start": 727.485,
-   "end": 728.984,
+   "start": 727.421,
+   "end": 728.93,
    "text": "I will rest tonight,"
   },
   {
-   "start": 728.984,
-   "end": 730.907,
+   "start": 728.93,
+   "end": 730.865,
    "text": "and he will renew me."
   },
   {
-   "start": 732.237,
-   "end": 734.743,
+   "start": 732.195,
+   "end": 734.7,
    "text": "I laid me down and slept;"
   },
   {
-   "start": 734.743,
-   "end": 736.288,
+   "start": 734.7,
+   "end": 736.224,
    "text": "I awaked;"
   },
   {
-   "start": 736.288,
-   "end": 738.835,
+   "start": 736.224,
+   "end": 738.771,
    "text": "for the LORD sustained me."
   },
   {
-   "start": 740.165,
-   "end": 742.671,
+   "start": 740.101,
+   "end": 742.607,
    "text": "I laid me down and slept;"
   },
   {
-   "start": 742.671,
-   "end": 744.195,
+   "start": 742.607,
+   "end": 744.131,
    "text": "I awaked;"
   },
   {
-   "start": 744.195,
-   "end": 746.572,
+   "start": 744.131,
+   "end": 746.508,
    "text": "for the Lord sustained me."
   },
   {
-   "start": 746.572,
-   "end": 749.589,
+   "start": 746.508,
+   "end": 749.525,
    "text": "Sleep itself is an act of trust."
   },
   {
-   "start": 749.589,
-   "end": 751.906,
+   "start": 749.525,
+   "end": 751.842,
    "text": "You let go of control for hours,"
   },
   {
-   "start": 751.906,
-   "end": 754.222,
+   "start": 751.842,
+   "end": 754.158,
    "text": "and God keeps your heart beating"
   },
   {
-   "start": 754.222,
-   "end": 756.212,
+   "start": 754.158,
+   "end": 756.148,
    "text": "and your lungs breathing."
   },
   {
-   "start": 756.212,
-   "end": 756.824,
+   "start": 756.148,
+   "end": 756.76,
    "text": "Tonight,"
   },
   {
-   "start": 756.824,
-   "end": 759.165,
+   "start": 756.76,
+   "end": 759.101,
    "text": "he will sustain you again."
   },
   {
-   "start": 760.195,
-   "end": 763.041,
+   "start": 760.131,
+   "end": 762.977,
    "text": "Here is one thing to do tonight."
   },
   {
-   "start": 763.041,
-   "end": 765.295,
+   "start": 762.977,
+   "end": 765.231,
    "text": "Place your hand where it hurts,"
   },
   {
-   "start": 765.295,
-   "end": 766.677,
+   "start": 765.231,
+   "end": 766.613,
    "text": "or over your heart,"
   },
   {
-   "start": 766.677,
-   "end": 768.747,
+   "start": 766.613,
+   "end": 768.683,
    "text": "and pray just three words:"
   },
   {
-   "start": 768.747,
-   "end": 770.484,
+   "start": 768.683,
+   "end": 770.42,
    "text": "Lord, heal me."
   },
   {
-   "start": 770.484,
-   "end": 772.138,
+   "start": 770.42,
+   "end": 772.073,
    "text": "Then leave it with him,"
   },
   {
-   "start": 772.138,
-   "end": 774.141,
+   "start": 772.073,
+   "end": 774.077,
    "text": "and let yourself sleep."
   },
   {
-   "start": 775.171,
-   "end": 777.132,
+   "start": 775.107,
+   "end": 777.068,
    "text": "If you prayed this prayer,"
   },
   {
-   "start": 777.132,
-   "end": 779.395,
+   "start": 777.068,
+   "end": 779.331,
    "text": "type amen in the comments now,"
   },
   {
-   "start": 779.395,
-   "end": 780.602,
+   "start": 779.331,
+   "end": 780.538,
    "text": "and if you want,"
   },
   {
-   "start": 780.602,
-   "end": 782.488,
+   "start": 780.538,
+   "end": 782.424,
    "text": "share the name of someone"
   },
   {
-   "start": 782.488,
-   "end": 783.846,
+   "start": 782.424,
+   "end": 783.782,
    "text": "who needs healing,"
   },
   {
-   "start": 783.846,
-   "end": 785.761,
+   "start": 783.782,
+   "end": 785.697,
    "text": "so others can pray too."
   },
   {
-   "start": 785.761,
-   "end": 788.288,
+   "start": 785.697,
+   "end": 788.245,
    "text": "Then stay right where you are."
   },
   {
-   "start": 788.288,
-   "end": 790.209,
+   "start": 788.245,
+   "end": 790.194,
    "text": "For the rest of this time,"
   },
   {
-   "start": 790.209,
-   "end": 791.613,
+   "start": 790.194,
+   "end": 791.619,
    "text": "I will read healing"
   },
   {
-   "start": 791.613,
-   "end": 793.533,
+   "start": 791.619,
+   "end": 793.568,
    "text": "Scripture over you slowly,"
   },
   {
-   "start": 793.533,
+   "start": 793.568,
+   "end": 794.693,
+   "text": "so you can fall"
+  },
+  {
+   "start": 794.693,
    "end": 796.617,
-   "text": "so you can fall asleep in God's care."
+   "text": "asleep in God's care."
   },
   {
    "start": 798.447,
@@ -3240,1091 +2698,1141 @@
   },
   {
    "start": 817.501,
-   "end": 819.771,
+   "end": 819.793,
    "text": "Let your eyes close."
   },
   {
-   "start": 820.801,
-   "end": 822.987,
+   "start": 820.823,
+   "end": 823.008,
    "text": "Let your shoulders drop."
   },
   {
-   "start": 822.987,
-   "end": 826.175,
-   "text": "Let your arms rest heavy at your sides."
+   "start": 823.008,
+   "end": 824.433,
+   "text": "Let your arms rest"
   },
   {
-   "start": 826.175,
-   "end": 828.275,
+   "start": 824.433,
+   "end": 826.196,
+   "text": "heavy at your sides."
+  },
+  {
+   "start": 826.196,
+   "end": 828.296,
    "text": "Let your hands open."
   },
   {
-   "start": 828.275,
-   "end": 830.432,
+   "start": 828.296,
+   "end": 830.454,
    "text": "Feel the mattress holding you,"
   },
   {
-   "start": 830.432,
-   "end": 832.913,
+   "start": 830.454,
+   "end": 832.935,
    "text": "the pillow supporting your head."
   },
   {
-   "start": 832.913,
-   "end": 834.659,
+   "start": 832.935,
+   "end": 834.681,
    "text": "You do not have to hold"
   },
   {
-   "start": 834.659,
-   "end": 836.357,
+   "start": 834.681,
+   "end": 836.379,
    "text": "yourself up tonight."
   },
   {
-   "start": 836.357,
-   "end": 838.137,
+   "start": 836.379,
+   "end": 838.158,
    "text": "You are held."
   },
   {
-   "start": 839.167,
-   "end": 841.33,
+   "start": 839.188,
+   "end": 841.351,
    "text": "Let the warmth of rest spread"
   },
   {
-   "start": 841.33,
-   "end": 843.268,
+   "start": 841.351,
+   "end": 843.29,
    "text": "slowly through your chest,"
   },
   {
-   "start": 843.268,
-   "end": 845.058,
+   "start": 843.29,
+   "end": 845.08,
    "text": "your stomach, your hips,"
   },
   {
-   "start": 845.058,
-   "end": 845.804,
+   "start": 845.08,
+   "end": 845.826,
    "text": "your legs,"
   },
   {
-   "start": 845.804,
-   "end": 848.221,
+   "start": 845.826,
+   "end": 848.243,
    "text": "all the way down to your feet."
   },
   {
-   "start": 848.221,
-   "end": 850.296,
+   "start": 848.243,
+   "end": 850.317,
    "text": "Every part of you is known"
   },
   {
-   "start": 850.296,
-   "end": 852.391,
+   "start": 850.317,
+   "end": 852.412,
    "text": "by the God who made you."
   },
   {
-   "start": 852.391,
-   "end": 854.768,
+   "start": 852.412,
+   "end": 854.789,
    "text": "Every cell is in his care."
   },
   {
-   "start": 854.768,
-   "end": 856.441,
+   "start": 854.789,
+   "end": 856.462,
    "text": "Rest now."
   },
   {
-   "start": 857.471,
-   "end": 860.019,
+   "start": 857.492,
+   "end": 860.04,
    "text": "Now let the day itself go."
   },
   {
-   "start": 860.019,
-   "end": 861.183,
+   "start": 860.04,
+   "end": 861.21,
    "text": "The appointments,"
   },
   {
-   "start": 861.183,
-   "end": 862.278,
+   "start": 861.21,
+   "end": 862.311,
    "text": "the phone calls,"
   },
   {
-   "start": 862.278,
-   "end": 864.444,
+   "start": 862.311,
+   "end": 864.487,
    "text": "the waiting rooms, the worry."
   },
   {
-   "start": 864.444,
-   "end": 866.327,
+   "start": 864.487,
+   "end": 866.369,
    "text": "Let each one drift away"
   },
   {
-   "start": 866.327,
-   "end": 868.635,
+   "start": 866.369,
+   "end": 868.677,
    "text": "like a leaf on slow water."
   },
   {
-   "start": 868.635,
-   "end": 870.149,
+   "start": 868.677,
+   "end": 870.192,
    "text": "There is nothing more"
   },
   {
-   "start": 870.149,
-   "end": 871.844,
+   "start": 870.192,
+   "end": 871.887,
    "text": "you need to do today."
   },
   {
-   "start": 871.844,
-   "end": 872.527,
+   "start": 871.887,
+   "end": 872.565,
    "text": "Tonight,"
   },
   {
-   "start": 872.527,
-   "end": 875.095,
+   "start": 872.565,
+   "end": 875.117,
    "text": "your only task is to rest."
   },
   {
-   "start": 876.125,
-   "end": 877.624,
+   "start": 876.147,
+   "end": 877.572,
    "text": "Listen to this psalm"
   },
   {
-   "start": 877.624,
-   "end": 879.377,
+   "start": 877.572,
+   "end": 879.249,
    "text": "of healing and mercy."
   },
   {
-   "start": 879.377,
-   "end": 881.904,
+   "start": 879.249,
+   "end": 881.755,
    "text": "Bless the LORD, O my soul:"
   },
   {
-   "start": 881.904,
-   "end": 883.966,
+   "start": 881.755,
+   "end": 883.817,
    "text": "and all that is within me,"
   },
   {
-   "start": 883.966,
-   "end": 885.732,
+   "start": 883.817,
+   "end": 885.583,
    "text": "bless his holy name."
   },
   {
-   "start": 885.732,
-   "end": 887.836,
+   "start": 885.583,
+   "end": 887.687,
    "text": "Bless the LORD, O my soul,"
   },
   {
-   "start": 887.836,
-   "end": 890.605,
+   "start": 887.687,
+   "end": 890.456,
    "text": "and forget not all his benefits:"
   },
   {
-   "start": 890.605,
-   "end": 893.409,
+   "start": 890.456,
+   "end": 893.26,
    "text": "Who forgiveth all thine iniquities;"
   },
   {
-   "start": 893.409,
-   "end": 896.277,
+   "start": 893.26,
+   "end": 896.128,
    "text": "who healeth all thy diseases;"
   },
   {
-   "start": 896.277,
-   "end": 899.529,
+   "start": 896.128,
+   "end": 899.38,
    "text": "Who redeemeth thy life from destruction;"
   },
   {
-   "start": 899.529,
-   "end": 902.278,
+   "start": 899.38,
+   "end": 902.129,
    "text": "who crowneth thee with lovingkindness"
   },
   {
-   "start": 902.278,
-   "end": 903.869,
+   "start": 902.129,
+   "end": 903.72,
    "text": "and tender mercies;"
   },
   {
-   "start": 903.869,
-   "end": 905.274,
+   "start": 903.72,
+   "end": 905.134,
    "text": "Who satisfieth thy"
   },
   {
-   "start": 905.274,
-   "end": 907.249,
+   "start": 905.134,
+   "end": 907.121,
    "text": "mouth with good things;"
   },
   {
-   "start": 907.249,
-   "end": 909.413,
+   "start": 907.121,
+   "end": 909.285,
    "text": "so that thy youth is renewed"
   },
   {
-   "start": 909.413,
-   "end": 910.907,
+   "start": 909.285,
+   "end": 910.779,
    "text": "like the eagle's."
   },
   {
-   "start": 910.907,
-   "end": 913.798,
+   "start": 910.779,
+   "end": 913.67,
    "text": "The LORD is merciful and gracious,"
   },
   {
-   "start": 913.798,
-   "end": 914.988,
+   "start": 913.67,
+   "end": 914.86,
    "text": "slow to anger,"
   },
   {
-   "start": 914.988,
-   "end": 917.124,
+   "start": 914.86,
+   "end": 916.996,
    "text": "and plenteous in mercy."
   },
   {
-   "start": 917.124,
-   "end": 919.523,
+   "start": 916.996,
+   "end": 919.395,
    "text": "He will not always chide:"
   },
   {
-   "start": 919.523,
-   "end": 922.775,
-   "text": "neither will he keep his anger for ever."
+   "start": 919.395,
+   "end": 920.97,
+   "text": "neither will he keep"
   },
   {
-   "start": 922.775,
-   "end": 924.126,
+   "start": 920.97,
+   "end": 922.647,
+   "text": "his anger for ever."
+  },
+  {
+   "start": 922.647,
+   "end": 923.998,
    "text": "He hath not dealt"
   },
   {
-   "start": 924.126,
-   "end": 926.133,
+   "start": 923.998,
+   "end": 926.005,
    "text": "with us after our sins;"
   },
   {
-   "start": 926.133,
-   "end": 928.192,
+   "start": 926.005,
+   "end": 928.064,
    "text": "nor rewarded us according"
   },
   {
-   "start": 928.192,
-   "end": 929.855,
+   "start": 928.064,
+   "end": 929.727,
    "text": "to our iniquities."
   },
   {
-   "start": 929.855,
-   "end": 931.19,
+   "start": 929.727,
+   "end": 931.062,
    "text": "For as the heaven"
   },
   {
-   "start": 931.19,
-   "end": 933.075,
+   "start": 931.062,
+   "end": 932.947,
    "text": "is high above the earth,"
   },
   {
-   "start": 933.075,
-   "end": 934.725,
+   "start": 932.947,
+   "end": 934.597,
    "text": "so great is his mercy"
   },
   {
-   "start": 934.725,
-   "end": 936.947,
+   "start": 934.597,
+   "end": 936.819,
    "text": "toward them that fear him."
   },
   {
-   "start": 936.947,
-   "end": 938.323,
+   "start": 936.819,
+   "end": 938.195,
    "text": "As far as the east"
   },
   {
-   "start": 938.323,
-   "end": 939.622,
+   "start": 938.195,
+   "end": 939.494,
    "text": "is from the west,"
   },
   {
-   "start": 939.622,
-   "end": 941.61,
+   "start": 939.494,
+   "end": 941.482,
    "text": "so far hath he removed our"
   },
   {
-   "start": 941.61,
-   "end": 943.548,
+   "start": 941.482,
+   "end": 943.42,
    "text": "transgressions from us."
   },
   {
-   "start": 943.548,
-   "end": 946.38,
+   "start": 943.42,
+   "end": 946.289,
    "text": "Like as a father pitieth his children,"
   },
   {
-   "start": 946.38,
-   "end": 949.637,
-   "text": "so the LORD pitieth them that fear him."
+   "start": 946.289,
+   "end": 947.724,
+   "text": "so the LORD pitieth"
   },
   {
-   "start": 950.667,
-   "end": 953.791,
+   "start": 947.724,
+   "end": 949.509,
+   "text": "them that fear him."
+  },
+  {
+   "start": 950.539,
+   "end": 953.663,
    "text": "Like as a father pitieth his children."
   },
   {
-   "start": 953.791,
-   "end": 956.155,
+   "start": 953.663,
+   "end": 956.027,
    "text": "Think of a loving father sitting"
   },
   {
-   "start": 956.155,
-   "end": 958.74,
+   "start": 956.027,
+   "end": 958.612,
    "text": "beside a sick child's bed at night,"
   },
   {
-   "start": 958.74,
-   "end": 960.84,
+   "start": 958.612,
+   "end": 960.712,
    "text": "watching, caring, staying."
   },
   {
-   "start": 960.84,
-   "end": 963.963,
-   "text": "That is how God is with you tonight."
+   "start": 960.712,
+   "end": 961.9,
+   "text": "That is how God"
   },
   {
-   "start": 964.993,
-   "end": 967.179,
+   "start": 961.9,
+   "end": 963.835,
+   "text": "is with you tonight."
+  },
+  {
+   "start": 964.865,
+   "end": 967.051,
    "text": "The LORD is my shepherd;"
   },
   {
-   "start": 967.179,
-   "end": 969.065,
+   "start": 967.051,
+   "end": 968.937,
    "text": "I shall not want."
   },
   {
-   "start": 969.065,
-   "end": 970.638,
+   "start": 968.937,
+   "end": 970.51,
    "text": "He maketh me to lie"
   },
   {
-   "start": 970.638,
-   "end": 972.723,
+   "start": 970.51,
+   "end": 972.595,
    "text": "down in green pastures:"
   },
   {
-   "start": 972.723,
-   "end": 975.911,
+   "start": 972.595,
+   "end": 975.783,
    "text": "he leadeth me beside the still waters."
   },
   {
-   "start": 975.911,
-   "end": 978.224,
+   "start": 975.783,
+   "end": 978.096,
    "text": "He restoreth my soul:"
   },
   {
-   "start": 978.224,
-   "end": 980.266,
+   "start": 978.096,
+   "end": 980.138,
    "text": "he leadeth me in the paths"
   },
   {
-   "start": 980.266,
-   "end": 983.353,
+   "start": 980.138,
+   "end": 983.225,
    "text": "of righteousness for his name's sake."
   },
   {
-   "start": 983.353,
-   "end": 983.644,
+   "start": 983.225,
+   "end": 983.516,
    "text": "Yea,"
   },
   {
-   "start": 983.644,
-   "end": 985.968,
+   "start": 983.516,
+   "end": 985.84,
    "text": "though I walk through the valley"
   },
   {
-   "start": 985.968,
-   "end": 987.639,
+   "start": 985.84,
+   "end": 987.511,
    "text": "of the shadow of death,"
   },
   {
-   "start": 987.639,
-   "end": 989.272,
+   "start": 987.511,
+   "end": 989.144,
    "text": "I will fear no evil:"
   },
   {
-   "start": 989.272,
-   "end": 991.543,
+   "start": 989.144,
+   "end": 991.415,
    "text": "for thou art with me;"
   },
   {
-   "start": 991.543,
-   "end": 994.816,
-   "text": "thy rod and thy staff they comfort me."
+   "start": 991.415,
+   "end": 993.17,
+   "text": "thy rod and thy staff"
   },
   {
-   "start": 994.816,
-   "end": 997.408,
+   "start": 993.17,
+   "end": 994.688,
+   "text": "they comfort me."
+  },
+  {
+   "start": 994.688,
+   "end": 997.28,
    "text": "Thou preparest a table before me"
   },
   {
-   "start": 997.408,
-   "end": 1000.18,
+   "start": 997.28,
+   "end": 1000.052,
    "text": "in the presence of mine enemies:"
   },
   {
-   "start": 1000.18,
-   "end": 1003.069,
+   "start": 1000.052,
+   "end": 1002.941,
    "text": "thou anointest my head with oil;"
   },
   {
-   "start": 1003.069,
-   "end": 1005.127,
+   "start": 1002.941,
+   "end": 1004.999,
    "text": "my cup runneth over."
   },
   {
-   "start": 1005.127,
-   "end": 1007.64,
+   "start": 1004.999,
+   "end": 1007.541,
    "text": "Surely goodness and mercy shall"
   },
   {
-   "start": 1007.64,
-   "end": 1010.576,
-   "text": "follow me all the days of my life:"
+   "start": 1007.541,
+   "end": 1008.935,
+   "text": "follow me all the"
   },
   {
-   "start": 1010.576,
-   "end": 1012.704,
+   "start": 1008.935,
+   "end": 1010.427,
+   "text": "days of my life:"
+  },
+  {
+   "start": 1010.427,
+   "end": 1012.555,
    "text": "and I will dwell in the house"
   },
   {
-   "start": 1012.704,
-   "end": 1014.595,
+   "start": 1012.555,
+   "end": 1014.446,
    "text": "of the LORD for ever."
   },
   {
-   "start": 1015.625,
-   "end": 1017.917,
+   "start": 1015.476,
+   "end": 1017.768,
    "text": "He restoreth my soul."
   },
   {
-   "start": 1017.917,
-   "end": 1020.353,
+   "start": 1017.768,
+   "end": 1020.203,
    "text": "Restoring is slow, quiet work,"
   },
   {
-   "start": 1020.353,
-   "end": 1021.896,
+   "start": 1020.203,
+   "end": 1021.746,
    "text": "the kind that often"
   },
   {
-   "start": 1021.896,
-   "end": 1023.943,
+   "start": 1021.746,
+   "end": 1023.793,
    "text": "happens while we sleep."
   },
   {
-   "start": 1023.943,
-   "end": 1026.214,
+   "start": 1023.793,
+   "end": 1026.078,
    "text": "Let the shepherd do his restoring"
   },
   {
-   "start": 1026.214,
-   "end": 1027.941,
+   "start": 1026.078,
+   "end": 1027.813,
    "text": "work in you tonight."
   },
   {
-   "start": 1028.971,
-   "end": 1031.51,
+   "start": 1028.843,
+   "end": 1031.381,
    "text": "God is our refuge and strength,"
   },
   {
-   "start": 1031.51,
-   "end": 1034.228,
+   "start": 1031.381,
+   "end": 1034.1,
    "text": "a very present help in trouble."
   },
   {
-   "start": 1034.228,
-   "end": 1036.15,
+   "start": 1034.1,
+   "end": 1036.022,
    "text": "Therefore will not we fear,"
   },
   {
-   "start": 1036.15,
-   "end": 1038.142,
+   "start": 1036.022,
+   "end": 1038.014,
    "text": "though the earth be removed,"
   },
   {
-   "start": 1038.142,
-   "end": 1040.634,
+   "start": 1038.014,
+   "end": 1040.506,
    "text": "and though the mountains be carried"
   },
   {
-   "start": 1040.634,
-   "end": 1042.664,
+   "start": 1040.506,
+   "end": 1042.536,
    "text": "into the midst of the sea;"
   },
   {
-   "start": 1042.664,
-   "end": 1044.313,
+   "start": 1042.536,
+   "end": 1044.19,
    "text": "Though the waters thereof"
   },
   {
-   "start": 1044.313,
-   "end": 1045.698,
+   "start": 1044.19,
+   "end": 1045.58,
    "text": "roar and be troubled,"
   },
   {
-   "start": 1045.698,
-   "end": 1047.413,
+   "start": 1045.58,
+   "end": 1047.3,
    "text": "though the mountains shake"
   },
   {
-   "start": 1047.413,
-   "end": 1049.308,
+   "start": 1047.3,
+   "end": 1049.201,
    "text": "with the swelling thereof."
   },
   {
-   "start": 1049.308,
-   "end": 1050.058,
+   "start": 1049.201,
+   "end": 1049.951,
    "text": "Be still,"
   },
   {
-   "start": 1050.058,
-   "end": 1052.155,
+   "start": 1049.951,
+   "end": 1052.048,
    "text": "and know that I am God:"
   },
   {
-   "start": 1052.155,
-   "end": 1054.963,
+   "start": 1052.048,
+   "end": 1054.857,
    "text": "I will be exalted among the heathen,"
   },
   {
-   "start": 1054.963,
-   "end": 1057.561,
+   "start": 1054.857,
+   "end": 1057.455,
    "text": "I will be exalted in the earth."
   },
   {
-   "start": 1057.561,
-   "end": 1060.088,
+   "start": 1057.455,
+   "end": 1059.981,
    "text": "The LORD of hosts is with us;"
   },
   {
-   "start": 1060.088,
-   "end": 1063.361,
+   "start": 1059.981,
+   "end": 1063.254,
    "text": "the God of Jacob is our refuge."
   },
   {
-   "start": 1064.391,
-   "end": 1066.981,
+   "start": 1064.284,
+   "end": 1066.875,
    "text": "The Lord of hosts is with us."
   },
   {
-   "start": 1066.981,
-   "end": 1069.739,
+   "start": 1066.875,
+   "end": 1069.633,
    "text": "Even when the body feels fragile"
   },
   {
-   "start": 1069.739,
-   "end": 1071.895,
+   "start": 1069.633,
+   "end": 1071.788,
    "text": "and the future uncertain,"
   },
   {
-   "start": 1071.895,
-   "end": 1073.877,
+   "start": 1071.788,
+   "end": 1073.77,
    "text": "the God of angel armies"
   },
   {
-   "start": 1073.877,
-   "end": 1075.695,
+   "start": 1073.77,
+   "end": 1075.588,
    "text": "is beside your bed."
   },
   {
-   "start": 1075.695,
-   "end": 1077.027,
+   "start": 1075.588,
+   "end": 1076.92,
    "text": "Be still."
   },
   {
-   "start": 1077.027,
-   "end": 1077.92,
+   "start": 1076.92,
+   "end": 1077.813,
    "text": "He is God,"
   },
   {
-   "start": 1077.92,
-   "end": 1079.787,
+   "start": 1077.813,
+   "end": 1079.681,
    "text": "and you can rest."
   },
   {
-   "start": 1080.817,
-   "end": 1082.768,
+   "start": 1080.711,
+   "end": 1082.661,
    "text": "Breathe in slowly."
   },
   {
-   "start": 1082.768,
-   "end": 1084.505,
+   "start": 1082.661,
+   "end": 1084.399,
    "text": "And let it go."
   },
   {
-   "start": 1084.505,
-   "end": 1086.605,
+   "start": 1084.399,
+   "end": 1086.498,
    "text": "Rest in the quiet."
   },
   {
-   "start": 1088.435,
-   "end": 1090.643,
+   "start": 1088.328,
+   "end": 1090.53,
    "text": "But now thus saith the LORD"
   },
   {
-   "start": 1090.643,
-   "end": 1092.115,
+   "start": 1090.53,
+   "end": 1091.998,
    "text": "that created thee,"
   },
   {
-   "start": 1092.115,
-   "end": 1092.769,
+   "start": 1091.998,
+   "end": 1092.65,
    "text": "O Jacob,"
   },
   {
-   "start": 1092.769,
-   "end": 1094.731,
+   "start": 1092.65,
+   "end": 1094.608,
    "text": "and he that formed thee,"
   },
   {
-   "start": 1094.731,
-   "end": 1096.465,
+   "start": 1094.608,
+   "end": 1096.337,
    "text": "O Israel, Fear not:"
   },
   {
-   "start": 1096.465,
-   "end": 1098.389,
+   "start": 1096.337,
+   "end": 1098.27,
    "text": "for I have redeemed thee,"
   },
   {
-   "start": 1098.389,
-   "end": 1100.955,
+   "start": 1098.27,
+   "end": 1100.848,
    "text": "I have called thee by thy name;"
   },
   {
-   "start": 1100.955,
-   "end": 1102.777,
+   "start": 1100.848,
+   "end": 1102.671,
    "text": "thou art mine."
   },
   {
-   "start": 1102.777,
-   "end": 1105.45,
+   "start": 1102.671,
+   "end": 1105.343,
    "text": "When thou passest through the waters,"
   },
   {
-   "start": 1105.45,
-   "end": 1107.075,
+   "start": 1105.343,
+   "end": 1106.968,
    "text": "I will be with thee;"
   },
   {
-   "start": 1107.075,
-   "end": 1108.707,
+   "start": 1106.968,
+   "end": 1108.591,
    "text": "and through the rivers,"
   },
   {
-   "start": 1108.707,
-   "end": 1110.945,
+   "start": 1108.591,
+   "end": 1110.817,
    "text": "they shall not overflow thee:"
   },
   {
-   "start": 1110.945,
-   "end": 1113.558,
+   "start": 1110.817,
+   "end": 1113.418,
    "text": "when thou walkest through the fire,"
   },
   {
-   "start": 1113.558,
-   "end": 1115.605,
+   "start": 1113.418,
+   "end": 1115.456,
    "text": "thou shalt not be burned;"
   },
   {
-   "start": 1115.605,
-   "end": 1117.458,
+   "start": 1115.456,
+   "end": 1117.308,
    "text": "neither shall the flame"
   },
   {
-   "start": 1117.458,
-   "end": 1119.177,
+   "start": 1117.308,
+   "end": 1119.027,
    "text": "kindle upon thee."
   },
   {
-   "start": 1120.207,
-   "end": 1122.838,
+   "start": 1120.057,
+   "end": 1122.689,
    "text": "When thou passest through the waters,"
   },
   {
-   "start": 1122.838,
-   "end": 1124.44,
+   "start": 1122.689,
+   "end": 1124.291,
    "text": "I will be with thee."
   },
   {
-   "start": 1124.44,
-   "end": 1127.329,
+   "start": 1124.291,
+   "end": 1127.18,
    "text": "Illness can feel like deep water."
   },
   {
-   "start": 1127.329,
-   "end": 1130.368,
-   "text": "But God does not watch from the shore."
+   "start": 1127.18,
+   "end": 1128.88,
+   "text": "But God does not watch"
   },
   {
-   "start": 1130.368,
-   "end": 1132.468,
+   "start": 1128.88,
+   "end": 1130.219,
+   "text": "from the shore."
+  },
+  {
+   "start": 1130.219,
+   "end": 1132.319,
    "text": "He walks through it with you."
   },
   {
-   "start": 1132.468,
-   "end": 1134.099,
+   "start": 1132.319,
+   "end": 1133.949,
    "text": "You are his."
   },
   {
-   "start": 1134.099,
-   "end": 1136.198,
+   "start": 1133.949,
+   "end": 1136.049,
    "text": "He knows your name."
   },
   {
-   "start": 1137.228,
-   "end": 1139.776,
+   "start": 1137.079,
+   "end": 1139.627,
    "text": "For which cause we faint not;"
   },
   {
-   "start": 1139.776,
-   "end": 1142.54,
+   "start": 1139.627,
+   "end": 1142.371,
    "text": "but though our outward man perish,"
   },
   {
-   "start": 1142.54,
-   "end": 1144.003,
+   "start": 1142.371,
+   "end": 1143.824,
    "text": "yet the inward man"
   },
   {
-   "start": 1144.003,
-   "end": 1145.972,
+   "start": 1143.824,
+   "end": 1145.78,
    "text": "is renewed day by day."
   },
   {
-   "start": 1145.972,
-   "end": 1147.904,
+   "start": 1145.78,
+   "end": 1147.712,
    "text": "For our light affliction,"
   },
   {
-   "start": 1147.904,
-   "end": 1149.914,
+   "start": 1147.712,
+   "end": 1149.722,
    "text": "which is but for a moment,"
   },
   {
-   "start": 1149.914,
-   "end": 1152.619,
+   "start": 1149.722,
+   "end": 1152.427,
    "text": "worketh for us a far more exceeding"
   },
   {
-   "start": 1152.619,
-   "end": 1154.963,
+   "start": 1152.427,
+   "end": 1154.771,
    "text": "and eternal weight of glory;"
   },
   {
-   "start": 1154.963,
-   "end": 1157.082,
+   "start": 1154.771,
+   "end": 1156.916,
    "text": "While we look not at the things"
   },
   {
-   "start": 1157.082,
-   "end": 1158.108,
+   "start": 1156.916,
+   "end": 1157.954,
    "text": "which are seen,"
   },
   {
-   "start": 1158.108,
-   "end": 1160.817,
-   "text": "but at the things which are not seen:"
+   "start": 1157.954,
+   "end": 1159.13,
+   "text": "but at the things"
   },
   {
-   "start": 1160.817,
-   "end": 1162.249,
+   "start": 1159.13,
+   "end": 1160.625,
+   "text": "which are not seen:"
+  },
+  {
+   "start": 1160.625,
+   "end": 1162.057,
    "text": "for the things which"
   },
   {
-   "start": 1162.249,
-   "end": 1164.005,
+   "start": 1162.057,
+   "end": 1163.813,
    "text": "are seen are temporal;"
   },
   {
-   "start": 1164.005,
-   "end": 1165.532,
+   "start": 1163.813,
+   "end": 1165.34,
    "text": "but the things which"
   },
   {
-   "start": 1165.532,
-   "end": 1167.79,
+   "start": 1165.34,
+   "end": 1167.598,
    "text": "are not seen are eternal."
   },
   {
-   "start": 1168.82,
-   "end": 1171.837,
+   "start": 1168.628,
+   "end": 1171.645,
    "text": "The things which are seen are temporal."
   },
   {
-   "start": 1171.837,
-   "end": 1174.519,
+   "start": 1171.645,
+   "end": 1174.327,
    "text": "The pain you feel tonight is real,"
   },
   {
-   "start": 1174.519,
-   "end": 1176.886,
+   "start": 1174.327,
+   "end": 1176.694,
    "text": "but it is not the whole story,"
   },
   {
-   "start": 1176.886,
-   "end": 1178.801,
+   "start": 1176.694,
+   "end": 1178.609,
    "text": "and it is not forever."
   },
   {
-   "start": 1178.801,
-   "end": 1179.642,
+   "start": 1178.609,
+   "end": 1179.45,
    "text": "Beneath it,"
   },
   {
-   "start": 1179.642,
-   "end": 1181.478,
+   "start": 1179.45,
+   "end": 1181.286,
    "text": "God is renewing the part"
   },
   {
-   "start": 1181.478,
-   "end": 1183.205,
+   "start": 1181.286,
+   "end": 1183.013,
    "text": "of you that lasts."
   },
   {
-   "start": 1184.235,
-   "end": 1185.287,
+   "start": 1184.043,
+   "end": 1185.095,
    "text": "I had fainted,"
   },
   {
-   "start": 1185.287,
-   "end": 1187.39,
+   "start": 1185.095,
+   "end": 1187.198,
    "text": "unless I had believed to see"
   },
   {
-   "start": 1187.39,
-   "end": 1189.194,
+   "start": 1187.198,
+   "end": 1189.002,
    "text": "the goodness of the LORD"
   },
   {
-   "start": 1189.194,
-   "end": 1191.327,
+   "start": 1189.002,
+   "end": 1191.135,
    "text": "in the land of the living."
   },
   {
-   "start": 1191.327,
-   "end": 1193.299,
+   "start": 1191.135,
+   "end": 1193.107,
    "text": "Wait on the LORD:"
   },
   {
-   "start": 1193.299,
-   "end": 1194.655,
+   "start": 1193.107,
+   "end": 1194.463,
    "text": "be of good courage,"
   },
   {
-   "start": 1194.655,
-   "end": 1197.404,
+   "start": 1194.463,
+   "end": 1197.212,
    "text": "and he shall strengthen thine heart:"
   },
   {
-   "start": 1197.404,
-   "end": 1199.866,
+   "start": 1197.212,
+   "end": 1199.674,
    "text": "wait, I say, on the LORD."
   },
   {
-   "start": 1200.896,
-   "end": 1203.077,
+   "start": 1200.704,
+   "end": 1202.908,
    "text": "To see the goodness of the Lord"
   },
   {
-   "start": 1203.077,
-   "end": 1205.087,
+   "start": 1202.908,
+   "end": 1204.937,
    "text": "in the land of the living."
   },
   {
-   "start": 1205.087,
-   "end": 1207.222,
+   "start": 1204.937,
+   "end": 1207.072,
    "text": "Not only someday, but here,"
   },
   {
-   "start": 1207.222,
-   "end": 1208.25,
+   "start": 1207.072,
+   "end": 1208.1,
    "text": "in this life,"
   },
   {
-   "start": 1208.25,
-   "end": 1209.853,
+   "start": 1208.1,
+   "end": 1209.704,
    "text": "in the days ahead."
   },
   {
-   "start": 1209.853,
-   "end": 1211.731,
+   "start": 1209.704,
+   "end": 1211.582,
    "text": "Wait on the Lord tonight,"
   },
   {
-   "start": 1211.731,
-   "end": 1213.639,
+   "start": 1211.582,
+   "end": 1213.489,
    "text": "and be of good courage."
   },
   {
-   "start": 1213.639,
-   "end": 1216.165,
+   "start": 1213.489,
+   "end": 1216.037,
    "text": "He will strengthen your heart."
   },
   {
-   "start": 1217.195,
-   "end": 1218.581,
+   "start": 1217.067,
+   "end": 1218.458,
    "text": "I sought the LORD,"
   },
   {
-   "start": 1218.581,
-   "end": 1219.813,
+   "start": 1218.458,
+   "end": 1219.695,
    "text": "and he heard me,"
   },
   {
-   "start": 1219.813,
-   "end": 1222.687,
+   "start": 1219.695,
+   "end": 1222.58,
    "text": "and delivered me from all my fears."
   },
   {
-   "start": 1222.687,
-   "end": 1223.898,
+   "start": 1222.58,
+   "end": 1223.791,
    "text": "O taste and see"
   },
   {
-   "start": 1223.898,
-   "end": 1225.853,
+   "start": 1223.791,
+   "end": 1225.747,
    "text": "that the LORD is good:"
   },
   {
-   "start": 1225.853,
-   "end": 1228.956,
-   "text": "blessed is the man that trusteth in him."
+   "start": 1225.747,
+   "end": 1227.096,
+   "text": "blessed is the man"
   },
   {
-   "start": 1228.956,
-   "end": 1230.924,
+   "start": 1227.096,
+   "end": 1228.849,
+   "text": "that trusteth in him."
+  },
+  {
+   "start": 1228.849,
+   "end": 1230.817,
    "text": "The LORD is nigh unto them"
   },
   {
-   "start": 1230.924,
-   "end": 1233.147,
+   "start": 1230.817,
+   "end": 1233.04,
    "text": "that are of a broken heart;"
   },
   {
-   "start": 1233.147,
-   "end": 1234.674,
+   "start": 1233.04,
+   "end": 1234.576,
    "text": "and saveth such as"
   },
   {
-   "start": 1234.674,
-   "end": 1237.059,
+   "start": 1234.576,
+   "end": 1236.974,
    "text": "be of a contrite spirit."
   },
   {
-   "start": 1238.089,
-   "end": 1240.098,
+   "start": 1238.004,
+   "end": 1240.013,
    "text": "The Lord is nigh unto them"
   },
   {
-   "start": 1240.098,
-   "end": 1242.365,
+   "start": 1240.013,
+   "end": 1242.28,
    "text": "that are of a broken heart."
   },
   {
-   "start": 1242.365,
-   "end": 1244.988,
+   "start": 1242.28,
+   "end": 1244.903,
    "text": "If your heart is broken tonight,"
   },
   {
-   "start": 1244.988,
-   "end": 1247.217,
+   "start": 1244.903,
+   "end": 1247.132,
    "text": "you are not far from God."
   },
   {
-   "start": 1247.217,
-   "end": 1250.511,
+   "start": 1247.132,
+   "end": 1250.426,
    "text": "You are exactly where he comes closest."
   },
   {
-   "start": 1251.541,
-   "end": 1254.473,
+   "start": 1251.456,
+   "end": 1254.388,
    "text": "Let your breathing slow even more."
   },
   {
-   "start": 1254.473,
-   "end": 1256.104,
+   "start": 1254.388,
+   "end": 1256.019,
    "text": "You are safe."
   },
   {
-   "start": 1256.104,
-   "end": 1257.414,
+   "start": 1256.019,
+   "end": 1257.329,
    "text": "Rest."
   },
   {
-   "start": 1259.244,
-   "end": 1260.73,
+   "start": 1259.159,
+   "end": 1260.645,
    "text": "I will lift up mine"
   },
   {
-   "start": 1260.73,
-   "end": 1262.295,
+   "start": 1260.645,
+   "end": 1262.209,
    "text": "eyes unto the hills,"
   },
   {
-   "start": 1262.295,
-   "end": 1264.587,
+   "start": 1262.209,
+   "end": 1264.501,
    "text": "from whence cometh my help."
   },
   {
-   "start": 1264.587,
-   "end": 1266.692,
+   "start": 1264.501,
+   "end": 1266.607,
    "text": "My help cometh from the LORD,"
   },
   {
-   "start": 1266.692,
-   "end": 1268.905,
+   "start": 1266.607,
+   "end": 1268.82,
    "text": "which made heaven and earth."
   },
   {
-   "start": 1268.905,
-   "end": 1270.244,
+   "start": 1268.82,
+   "end": 1270.169,
    "text": "He will not suffer"
   },
   {
-   "start": 1270.244,
-   "end": 1271.987,
+   "start": 1270.169,
+   "end": 1271.923,
    "text": "thy foot to be moved:"
   },
   {
-   "start": 1271.987,
-   "end": 1274.961,
+   "start": 1271.923,
+   "end": 1274.897,
    "text": "he that keepeth thee will not slumber."
   },
   {
-   "start": 1274.961,
-   "end": 1275.463,
+   "start": 1274.897,
+   "end": 1275.399,
    "text": "Behold,"
   },
   {
-   "start": 1275.463,
-   "end": 1277.471,
+   "start": 1275.399,
+   "end": 1277.407,
    "text": "he that keepeth Israel shall"
   },
   {
-   "start": 1277.471,
-   "end": 1279.515,
+   "start": 1277.407,
+   "end": 1279.451,
    "text": "neither slumber nor sleep."
   },
   {
-   "start": 1279.515,
-   "end": 1281.785,
+   "start": 1279.451,
+   "end": 1281.721,
    "text": "The LORD is thy keeper:"
   },
   {
-   "start": 1281.785,
-   "end": 1283.413,
+   "start": 1281.721,
+   "end": 1283.382,
    "text": "the LORD is thy shade"
   },
   {
-   "start": 1283.413,
+   "start": 1283.382,
    "end": 1285.144,
    "text": "upon thy right hand."
   },
   {
    "start": 1285.144,
-   "end": 1287.898,
-   "text": "The sun shall not smite thee by day,"
+   "end": 1286.156,
+   "text": "The sun shall"
   },
   {
-   "start": 1287.898,
+   "start": 1286.156,
+   "end": 1287.868,
+   "text": "not smite thee by day,"
+  },
+  {
+   "start": 1287.868,
    "end": 1289.761,
    "text": "nor the moon by night."
   },
@@ -4345,16 +3853,21 @@
   },
   {
    "start": 1295.689,
-   "end": 1298.307,
-   "text": "The LORD shall preserve thy going out"
+   "end": 1297.619,
+   "text": "The LORD shall preserve thy"
   },
   {
-   "start": 1298.307,
-   "end": 1301.066,
-   "text": "and thy coming in from this time forth,"
+   "start": 1297.619,
+   "end": 1299.335,
+   "text": "going out and thy coming"
   },
   {
-   "start": 1301.066,
+   "start": 1299.335,
+   "end": 1301.05,
+   "text": "in from this time forth,"
+  },
+  {
+   "start": 1301.05,
    "end": 1302.973,
    "text": "and even for evermore."
   },
@@ -4475,61 +3988,66 @@
   },
   {
    "start": 1357.007,
-   "end": 1359.555,
+   "end": 1359.533,
    "text": "Trust ye in the LORD for ever:"
   },
   {
-   "start": 1359.555,
-   "end": 1361.465,
+   "start": 1359.533,
+   "end": 1361.443,
    "text": "for in the LORD JEHOVAH"
   },
   {
-   "start": 1361.465,
-   "end": 1363.809,
+   "start": 1361.443,
+   "end": 1363.787,
    "text": "is everlasting strength."
   },
   {
-   "start": 1364.839,
-   "end": 1367.877,
-   "text": "Perfect peace for a mind stayed on him."
+   "start": 1364.817,
+   "end": 1366.623,
+   "text": "Perfect peace for a mind"
   },
   {
-   "start": 1367.877,
-   "end": 1369.852,
+   "start": 1366.623,
+   "end": 1367.856,
+   "text": "stayed on him."
+  },
+  {
+   "start": 1367.856,
+   "end": 1369.831,
    "text": "As you drift toward sleep,"
   },
   {
-   "start": 1369.852,
-   "end": 1372.434,
+   "start": 1369.831,
+   "end": 1372.413,
    "text": "let your last thought rest on God,"
   },
   {
-   "start": 1372.434,
-   "end": 1374.485,
+   "start": 1372.413,
+   "end": 1374.464,
    "text": "his kindness, his nearness,"
   },
   {
-   "start": 1374.485,
-   "end": 1375.652,
+   "start": 1374.464,
+   "end": 1375.631,
    "text": "his strength."
   },
   {
-   "start": 1375.652,
-   "end": 1377.731,
+   "start": 1375.631,
+   "end": 1377.709,
    "text": "Everlasting strength."
   },
   {
-   "start": 1377.731,
-   "end": 1379.894,
+   "start": 1377.709,
+   "end": 1379.873,
    "text": "It does not run out."
   },
   {
-   "start": 1380.924,
-   "end": 1383.368,
+   "start": 1380.903,
+   "end": 1383.358,
    "text": "He healeth the broken in heart,"
   },
   {
-   "start": 1383.368,
+   "start": 1383.358,
    "end": 1385.755,
    "text": "and bindeth up their wounds."
   },
@@ -4560,91 +4078,101 @@
   },
   {
    "start": 1398.896,
-   "end": 1401.07,
+   "end": 1401.058,
    "text": "Above your roof tonight there"
   },
   {
-   "start": 1401.07,
-   "end": 1403.844,
+   "start": 1401.058,
+   "end": 1403.817,
    "text": "are more stars than anyone can count,"
   },
   {
-   "start": 1403.844,
-   "end": 1405.269,
+   "start": 1403.817,
+   "end": 1405.234,
    "text": "and God calls every"
   },
   {
-   "start": 1405.269,
-   "end": 1406.948,
+   "start": 1405.234,
+   "end": 1406.905,
    "text": "one of them by name."
   },
   {
-   "start": 1406.948,
-   "end": 1410.349,
-   "text": "The same God is binding up your wounds."
+   "start": 1406.905,
+   "end": 1408.855,
+   "text": "The same God is binding"
   },
   {
-   "start": 1410.349,
-   "end": 1412.122,
+   "start": 1408.855,
+   "end": 1410.307,
+   "text": "up your wounds."
+  },
+  {
+   "start": 1410.307,
+   "end": 1412.08,
    "text": "Nothing about you is too"
   },
   {
-   "start": 1412.122,
-   "end": 1413.526,
+   "start": 1412.08,
+   "end": 1413.484,
    "text": "small for his care,"
   },
   {
-   "start": 1413.526,
-   "end": 1415.521,
+   "start": 1413.484,
+   "end": 1415.478,
    "text": "and nothing about your pain"
   },
   {
-   "start": 1415.521,
-   "end": 1417.718,
+   "start": 1415.478,
+   "end": 1417.675,
    "text": "is too big for his power."
   },
   {
-   "start": 1418.748,
-   "end": 1420.287,
+   "start": 1418.705,
+   "end": 1420.244,
    "text": "But thou, O LORD,"
   },
   {
-   "start": 1420.287,
-   "end": 1422.277,
+   "start": 1420.244,
+   "end": 1422.235,
    "text": "art a shield for me;"
   },
   {
-   "start": 1422.277,
-   "end": 1422.978,
+   "start": 1422.235,
+   "end": 1422.941,
    "text": "my glory,"
   },
   {
-   "start": 1422.978,
-   "end": 1425.572,
+   "start": 1422.941,
+   "end": 1425.551,
    "text": "and the lifter up of mine head."
   },
   {
-   "start": 1425.572,
-   "end": 1428.441,
-   "text": "I cried unto the LORD with my voice,"
+   "start": 1425.551,
+   "end": 1427.248,
+   "text": "I cried unto the LORD"
   },
   {
-   "start": 1428.441,
-   "end": 1429.956,
+   "start": 1427.248,
+   "end": 1428.38,
+   "text": "with my voice,"
+  },
+  {
+   "start": 1428.38,
+   "end": 1429.915,
    "text": "and he heard me out"
   },
   {
-   "start": 1429.956,
-   "end": 1431.491,
+   "start": 1429.915,
+   "end": 1431.469,
    "text": "of his holy hill."
   },
   {
-   "start": 1431.491,
-   "end": 1433.996,
+   "start": 1431.469,
+   "end": 1433.975,
    "text": "I laid me down and slept;"
   },
   {
-   "start": 1433.996,
+   "start": 1433.975,
    "end": 1435.52,
    "text": "I awaked;"
   },
@@ -4660,51 +4188,56 @@
   },
   {
    "start": 1441.517,
-   "end": 1443.345,
+   "end": 1443.338,
    "text": "When illness or sorrow"
   },
   {
-   "start": 1443.345,
-   "end": 1444.924,
+   "start": 1443.338,
+   "end": 1444.911,
    "text": "bows your head low,"
   },
   {
-   "start": 1444.924,
-   "end": 1447.265,
+   "start": 1444.911,
+   "end": 1447.244,
    "text": "God gently lifts it again."
   },
   {
-   "start": 1447.265,
-   "end": 1449.429,
+   "start": 1447.244,
+   "end": 1449.408,
    "text": "Lay your head down now."
   },
   {
-   "start": 1449.429,
-   "end": 1452.254,
-   "text": "He will lift it up in the morning."
+   "start": 1449.408,
+   "end": 1450.758,
+   "text": "He will lift it up"
   },
   {
-   "start": 1453.284,
-   "end": 1455.448,
+   "start": 1450.758,
+   "end": 1452.233,
+   "text": "in the morning."
+  },
+  {
+   "start": 1453.263,
+   "end": 1455.427,
    "text": "He that dwelleth in the secret"
   },
   {
-   "start": 1455.448,
-   "end": 1457.901,
+   "start": 1455.427,
+   "end": 1457.88,
    "text": "place of the most High shall abide"
   },
   {
-   "start": 1457.901,
-   "end": 1460.461,
+   "start": 1457.88,
+   "end": 1460.44,
    "text": "under the shadow of the Almighty."
   },
   {
-   "start": 1460.461,
-   "end": 1462.379,
+   "start": 1460.44,
+   "end": 1462.367,
    "text": "I will say of the LORD,"
   },
   {
-   "start": 1462.379,
+   "start": 1462.367,
    "end": 1465.228,
    "text": "He is my refuge and my fortress:"
   },
@@ -4810,62 +4343,62 @@
   },
   {
    "start": 1505.147,
-   "end": 1507.545,
+   "end": 1507.503,
    "text": "Comfort what needs comfort."
   },
   {
-   "start": 1507.545,
-   "end": 1509.71,
+   "start": 1507.503,
+   "end": 1509.614,
    "text": "Watch over me through the night,"
   },
   {
-   "start": 1509.71,
-   "end": 1511.672,
+   "start": 1509.614,
+   "end": 1511.527,
    "text": "and let me wake to your mercy"
   },
   {
-   "start": 1511.672,
-   "end": 1513.037,
+   "start": 1511.527,
+   "end": 1512.866,
    "text": "in the morning."
   },
   {
-   "start": 1514.067,
-   "end": 1515.57,
+   "start": 1513.896,
+   "end": 1515.399,
    "text": "And now receive this"
   },
   {
-   "start": 1515.57,
-   "end": 1517.404,
+   "start": 1515.399,
+   "end": 1517.233,
    "text": "blessing as you sleep."
   },
   {
-   "start": 1517.404,
-   "end": 1518.046,
+   "start": 1517.233,
+   "end": 1517.875,
    "text": "Beloved,"
   },
   {
-   "start": 1518.046,
-   "end": 1520.695,
+   "start": 1517.875,
+   "end": 1520.524,
    "text": "I wish above all things that thou"
   },
   {
-   "start": 1520.695,
-   "end": 1523.264,
+   "start": 1520.524,
+   "end": 1523.093,
    "text": "mayest prosper and be in health,"
   },
   {
-   "start": 1523.264,
-   "end": 1525.691,
+   "start": 1523.093,
+   "end": 1525.52,
    "text": "even as thy soul prospereth."
   },
   {
-   "start": 1525.691,
-   "end": 1527.833,
+   "start": 1525.52,
+   "end": 1527.663,
    "text": "Rest in his care tonight."
   },
   {
-   "start": 1527.833,
-   "end": 1530.637,
+   "start": 1527.663,
+   "end": 1530.466,
    "text": "In Jesus' name, amen."
   }
  ],
@@ -4874,108 +4407,108 @@
    "segment": "hook",
    "text": "Good evening.",
    "start": 0.3,
-   "end": 1.665
+   "end": 1.644
   },
   {
    "segment": "hook",
    "text": "Bring every pain, of body or heart, to God tonight, and rest in his care while you sleep.",
-   "start": 1.845,
-   "end": 8.608
+   "start": 1.824,
+   "end": 8.587
   },
   {
    "segment": "invitation",
    "text": "If your body is hurting, or your heart is, stay with me for the next few minutes.",
-   "start": 9.588,
-   "end": 15.561
+   "start": 9.567,
+   "end": 15.519
   },
   {
    "segment": "invitation",
    "text": "Take one slow breath with me.",
-   "start": 15.741,
-   "end": 18.216
+   "start": 15.699,
+   "end": 18.195
   },
   {
    "segment": "invitation",
    "text": "Lie down and let the bed hold your weight.",
-   "start": 18.396,
-   "end": 21.703
+   "start": 18.375,
+   "end": 21.681
   },
   {
    "segment": "invitation",
    "text": "Let your hands rest, your jaw soften, your breathing slow.",
-   "start": 21.883,
-   "end": 26.235
+   "start": 21.861,
+   "end": 26.213
   },
   {
    "segment": "invitation",
    "text": "You may be tired of being sick, tired of waiting for results, tired of carrying sorrow.",
-   "start": 26.415,
-   "end": 33.156
+   "start": 26.393,
+   "end": 33.135
   },
   {
    "segment": "invitation",
    "text": "Bring all of it here.",
-   "start": 33.336,
-   "end": 35.149
+   "start": 33.315,
+   "end": 35.128
   },
   {
    "segment": "invitation",
    "text": "You do not have to be strong tonight.",
-   "start": 35.329,
-   "end": 37.996
+   "start": 35.308,
+   "end": 37.975
   },
   {
    "segment": "scripture-1",
    "text": "The prophet Jeremiah prayed this simple prayer.",
-   "start": 39.376,
-   "end": 42.789
+   "start": 39.355,
+   "end": 42.768
   },
   {
    "segment": "scripture-1",
    "text": "Heal me, O LORD, and I shall be healed;",
-   "start": 42.969,
-   "end": 46.191
+   "start": 42.948,
+   "end": 46.169
   },
   {
    "segment": "scripture-1",
    "text": "save me, and I shall be saved:",
-   "start": 46.371,
-   "end": 48.781
+   "start": 46.349,
+   "end": 48.76
   },
   {
    "segment": "scripture-1",
    "text": "for thou art my praise.",
-   "start": 48.961,
-   "end": 51.244
+   "start": 48.94,
+   "end": 51.223
   },
   {
    "segment": "reflection-1",
    "text": "Jeremiah's prayer is short and honest.",
-   "start": 52.924,
-   "end": 56.017
+   "start": 52.903,
+   "end": 55.996
   },
   {
    "segment": "reflection-1",
    "text": "He does not explain or perform.",
-   "start": 56.197,
-   "end": 58.864
+   "start": 56.176,
+   "end": 58.843
   },
   {
    "segment": "reflection-1",
    "text": "He simply asks.",
-   "start": 59.044,
-   "end": 60.772
+   "start": 59.023,
+   "end": 60.751
   },
   {
    "segment": "reflection-1",
    "text": "Tonight you can pray the same way.",
-   "start": 60.952,
-   "end": 63.619
+   "start": 60.931,
+   "end": 63.597
   },
   {
    "segment": "reflection-1",
    "text": "You do not need the right words.",
-   "start": 63.799,
+   "start": 63.777,
    "end": 66.337
   },
   {
@@ -5012,12 +4545,12 @@
    "segment": "prayer-1",
    "text": "Hold me tonight.",
    "start": 87.732,
-   "end": 89.311
+   "end": 89.332
   },
   {
    "segment": "scripture-2",
    "text": "He healeth the broken in heart, and bindeth up their wounds.",
-   "start": 90.691,
+   "start": 90.712,
    "end": 95.363
   },
   {
@@ -5030,12 +4563,12 @@
    "segment": "reflection-2",
    "text": "And yet he bends down to bind up wounds, like a nurse tending a bandage.",
    "start": 102.556,
-   "end": 108.145
+   "end": 108.167
   },
   {
    "segment": "reflection-2",
    "text": "The God of the galaxies is gentle with your hurt tonight.",
-   "start": 108.325,
+   "start": 108.347,
    "end": 112.912
   },
   {
@@ -5108,60 +4641,60 @@
    "segment": "reflection-3",
    "text": "You are not forgotten in that bed.",
    "start": 158.14,
-   "end": 160.7
+   "end": 160.721
   },
   {
    "segment": "reflection-3",
    "text": "He is there.",
-   "start": 160.88,
-   "end": 162.224
+   "start": 160.901,
+   "end": 162.245
   },
   {
    "segment": "prayer-doctors",
    "text": "Lord, I thank you for doctors, nurses, medicine and every person whose work helps us heal.",
-   "start": 163.604,
-   "end": 170.729
+   "start": 163.625,
+   "end": 170.751
   },
   {
    "segment": "prayer-doctors",
    "text": "Give them wisdom, skill and compassion.",
-   "start": 170.909,
-   "end": 174.045
+   "start": 170.931,
+   "end": 174.067
   },
   {
    "segment": "prayer-doctors",
    "text": "Guide every decision about treatment.",
-   "start": 174.225,
-   "end": 177.255
+   "start": 174.247,
+   "end": 177.276
   },
   {
    "segment": "prayer-doctors",
    "text": "Let the medicine work as it should.",
-   "start": 177.435,
-   "end": 180.08
+   "start": 177.456,
+   "end": 180.101
   },
   {
    "segment": "prayer-doctors",
    "text": "And help me to keep following the care I have been given, trusting you through all of it.",
-   "start": 180.26,
-   "end": 186.063
+   "start": 180.281,
+   "end": 186.084
   },
   {
    "segment": "prayer-chronic",
    "text": "Father, for those living with an illness that does not go away, the chronic pain, the long treatments, the bodies that never quite feel well, give endurance.",
-   "start": 187.443,
-   "end": 199.069
+   "start": 187.464,
+   "end": 199.091
   },
   {
    "segment": "prayer-chronic",
    "text": "On the days when hope runs thin, renew it.",
-   "start": 199.249,
-   "end": 202.449
+   "start": 199.271,
+   "end": 202.471
   },
   {
    "segment": "prayer-chronic",
    "text": "Let them know that their worth is not measured by what their body can do.",
-   "start": 202.629,
+   "start": 202.651,
    "end": 207.877
   },
   {
@@ -5258,114 +4791,114 @@
    "segment": "reflection-4",
    "text": "Before Jesus ever healed anyone, he chose to be wounded himself.",
    "start": 263.725,
-   "end": 268.995
+   "end": 269.016
   },
   {
    "segment": "reflection-4",
    "text": "He knows pain from the inside.",
-   "start": 269.175,
-   "end": 271.628
+   "start": 269.196,
+   "end": 271.649
   },
   {
    "segment": "reflection-4",
    "text": "So when you bring him your pain tonight, you are not bringing it to someone distant.",
-   "start": 271.808,
-   "end": 277.248
+   "start": 271.829,
+   "end": 277.269
   },
   {
    "segment": "reflection-4",
    "text": "You are bringing it to someone who understands.",
-   "start": 277.428,
-   "end": 280.671
+   "start": 277.449,
+   "end": 280.692
   },
   {
    "segment": "prayer-mind",
    "text": "Lord, heal my anxious mind.",
-   "start": 282.051,
-   "end": 284.461
+   "start": 282.072,
+   "end": 284.483
   },
   {
    "segment": "prayer-mind",
    "text": "Quiet the questions that run in circles.",
-   "start": 284.641,
-   "end": 287.692
+   "start": 284.663,
+   "end": 287.713
   },
   {
    "segment": "prayer-mind",
    "text": "What if the results are bad?",
-   "start": 287.872,
-   "end": 290.112
+   "start": 287.893,
+   "end": 290.133
   },
   {
    "segment": "prayer-mind",
    "text": "What if it does not get better?",
-   "start": 290.292,
-   "end": 292.575
+   "start": 290.313,
+   "end": 292.596
   },
   {
    "segment": "prayer-mind",
    "text": "I give you every what if.",
-   "start": 292.755,
-   "end": 294.888
+   "start": 292.776,
+   "end": 294.909
   },
   {
    "segment": "prayer-mind",
    "text": "Replace my fear with your peace, and let my mind rest in you tonight.",
-   "start": 295.068,
-   "end": 300.359
+   "start": 295.089,
+   "end": 300.38
   },
   {
    "segment": "prayer-mental",
    "text": "Lord, I pray for every mind that is tired and heavy tonight.",
-   "start": 301.739,
-   "end": 306.133
+   "start": 301.76,
+   "end": 306.155
   },
   {
    "segment": "prayer-mental",
    "text": "For depression that makes mornings hard.",
-   "start": 306.313,
-   "end": 309.385
+   "start": 306.335,
+   "end": 309.407
   },
   {
    "segment": "prayer-mental",
    "text": "For anxiety that tightens the chest.",
-   "start": 309.565,
-   "end": 312.445
+   "start": 309.587,
+   "end": 312.467
   },
   {
    "segment": "prayer-mental",
    "text": "For thoughts that feel too dark to say out loud.",
-   "start": 312.625,
-   "end": 316.081
+   "start": 312.647,
+   "end": 316.103
   },
   {
    "segment": "prayer-mental",
    "text": "Bring light into those places.",
-   "start": 316.261,
-   "end": 318.736
+   "start": 316.283,
+   "end": 318.757
   },
   {
    "segment": "prayer-mental",
    "text": "Lead each person to the help they need, the friend, the counsellor, the doctor, and let them never feel ashamed to ask.",
-   "start": 318.916,
-   "end": 327.684
+   "start": 318.937,
+   "end": 327.705
   },
   {
    "segment": "scripture-5",
    "text": "Be still, and know that I am God.",
-   "start": 329.064,
-   "end": 331.773
+   "start": 329.085,
+   "end": 331.795
   },
   {
    "segment": "reflection-5",
    "text": "Be still.",
-   "start": 333.453,
-   "end": 334.605
+   "start": 333.475,
+   "end": 334.627
   },
   {
    "segment": "reflection-5",
    "text": "Not because nothing is happening, but because God is still God, even in the dark, even in the hospital, even in the waiting.",
-   "start": 334.785,
+   "start": 334.807,
    "end": 343.895
   },
   {
@@ -5402,114 +4935,114 @@
    "segment": "prayer-weakness",
    "text": "Father, like David, I admit that I am weak.",
    "start": 359.088,
-   "end": 362.907
+   "end": 362.885
   },
   {
    "segment": "prayer-weakness",
    "text": "I have run out of my own strength.",
-   "start": 363.087,
-   "end": 365.689
+   "start": 363.065,
+   "end": 365.668
   },
   {
    "segment": "prayer-weakness",
    "text": "Have mercy on me.",
-   "start": 365.869,
-   "end": 367.725
+   "start": 365.848,
+   "end": 367.704
   },
   {
    "segment": "prayer-weakness",
    "text": "Meet me in the weakness.",
-   "start": 367.905,
-   "end": 369.889
+   "start": 367.884,
+   "end": 369.868
   },
   {
    "segment": "prayer-weakness",
    "text": "Carry me where I cannot walk, and give me the strength to face tomorrow.",
-   "start": 370.069,
-   "end": 375.125
+   "start": 370.048,
+   "end": 375.104
   },
   {
    "segment": "scripture-7",
    "text": "For which cause we faint not;",
-   "start": 376.505,
-   "end": 378.873
+   "start": 376.484,
+   "end": 378.852
   },
   {
    "segment": "scripture-7",
    "text": "but though our outward man perish, yet the inward man is renewed day by day.",
-   "start": 379.053,
-   "end": 385.027
+   "start": 379.032,
+   "end": 385.048
   },
   {
    "segment": "reflection-6",
    "text": "Even when the body is struggling, something deeper can be renewed:",
-   "start": 386.707,
-   "end": 391.336
+   "start": 386.728,
+   "end": 391.357
   },
   {
    "segment": "reflection-6",
    "text": "your hope, your faith, your sense that you are loved.",
-   "start": 391.516,
-   "end": 395.313
+   "start": 391.537,
+   "end": 395.335
   },
   {
    "segment": "reflection-6",
    "text": "God is at work on the inside of you tonight, whatever the outside feels like.",
-   "start": 395.493,
-   "end": 401.317
+   "start": 395.515,
+   "end": 401.339
   },
   {
    "segment": "prayer-family",
    "text": "Lord, I pray for everyone who cares for someone who is sick.",
-   "start": 402.697,
-   "end": 406.964
+   "start": 402.719,
+   "end": 406.985
   },
   {
    "segment": "prayer-family",
    "text": "The parents beside a child's bed.",
-   "start": 407.144,
-   "end": 409.896
+   "start": 407.165,
+   "end": 409.917
   },
   {
    "segment": "prayer-family",
    "text": "The husband or wife who has not slept well in weeks.",
-   "start": 410.076,
-   "end": 413.98
+   "start": 410.097,
+   "end": 414.001
   },
   {
    "segment": "prayer-family",
    "text": "The children caring for aging parents.",
-   "start": 414.16,
-   "end": 417.104
+   "start": 414.181,
+   "end": 417.125
   },
   {
    "segment": "prayer-family",
    "text": "Give them strength, patience and rest.",
-   "start": 417.284,
-   "end": 420.121
+   "start": 417.305,
+   "end": 420.143
   },
   {
    "segment": "prayer-family",
    "text": "Let them know that what they do is seen and treasured by you.",
-   "start": 420.301,
-   "end": 424.291
+   "start": 420.323,
+   "end": 424.312
   },
   {
    "segment": "prayer-children",
    "text": "Father, I lift up every sick child tonight, and every parent who is afraid for them.",
-   "start": 425.671,
-   "end": 431.857
+   "start": 425.692,
+   "end": 431.879
   },
   {
    "segment": "prayer-children",
    "text": "Hold these little ones close.",
-   "start": 432.037,
-   "end": 434.213
+   "start": 432.059,
+   "end": 434.235
   },
   {
    "segment": "prayer-children",
    "text": "Ease their fever, calm their fear, and bring them back to playing and laughing.",
-   "start": 434.393,
+   "start": 434.415,
    "end": 439.897
   },
   {
@@ -5570,432 +5103,432 @@
    "segment": "scripture-12",
    "text": "O LORD my God, I cried unto thee, and thou hast healed me.",
    "start": 481.031,
-   "end": 485.639
+   "end": 485.617
   },
   {
    "segment": "scripture-8",
    "text": "Bless the LORD, O my soul, and forget not all his benefits:",
-   "start": 487.319,
-   "end": 492.012
+   "start": 487.297,
+   "end": 491.991
   },
   {
    "segment": "scripture-8",
    "text": "Who forgiveth all thine iniquities;",
-   "start": 492.192,
-   "end": 494.816
+   "start": 492.171,
+   "end": 494.795
   },
   {
    "segment": "scripture-8",
    "text": "who healeth all thy diseases.",
-   "start": 494.996,
-   "end": 497.684
+   "start": 494.975,
+   "end": 497.641
   },
   {
    "segment": "prayer-thanks",
    "text": "Thank you, Lord, for every healing I have already received.",
-   "start": 499.364,
-   "end": 503.865
+   "start": 499.321,
+   "end": 503.823
   },
   {
    "segment": "prayer-thanks",
    "text": "The sicknesses that passed.",
-   "start": 504.045,
-   "end": 506.179
+   "start": 504.003,
+   "end": 506.136
   },
   {
    "segment": "prayer-thanks",
    "text": "The wounds that closed.",
-   "start": 506.359,
-   "end": 508.385
+   "start": 506.316,
+   "end": 508.343
   },
   {
    "segment": "prayer-thanks",
    "text": "The sorrows that lifted.",
-   "start": 508.565,
-   "end": 510.72
+   "start": 508.523,
+   "end": 510.677
   },
   {
    "segment": "prayer-thanks",
    "text": "I will not forget your benefits.",
-   "start": 510.9,
-   "end": 513.396
+   "start": 510.857,
+   "end": 513.353
   },
   {
    "segment": "prayer-thanks",
    "text": "You have been good to me, and I trust you to be good to me tonight.",
-   "start": 513.576,
-   "end": 517.949
+   "start": 513.533,
+   "end": 517.907
   },
   {
    "segment": "prayer-hospital",
    "text": "Father, I pray for everyone in a hospital bed tonight.",
-   "start": 519.329,
-   "end": 523.425
+   "start": 519.287,
+   "end": 523.383
   },
   {
    "segment": "prayer-hospital",
    "text": "For those waiting for surgery, those in pain, those far from home, those afraid of what the doctors will say.",
-   "start": 523.605,
-   "end": 532.181
+   "start": 523.563,
+   "end": 532.139
   },
   {
    "segment": "prayer-hospital",
    "text": "Sit beside each of them.",
-   "start": 532.361,
-   "end": 534.516
+   "start": 532.319,
+   "end": 534.452
   },
   {
    "segment": "prayer-hospital",
    "text": "Let the beeping machines and the long corridors be filled with your peace.",
-   "start": 534.696,
-   "end": 539.88
+   "start": 534.632,
+   "end": 539.816
   },
   {
    "segment": "prayer-nightshift",
    "text": "And Lord, bless the nurses, doctors and carers working through this night.",
-   "start": 541.26,
-   "end": 546.615
+   "start": 541.196,
+   "end": 546.551
   },
   {
    "segment": "prayer-nightshift",
    "text": "Keep them alert, kind and safe.",
-   "start": 546.795,
-   "end": 549.547
+   "start": 546.731,
+   "end": 549.483
   },
   {
    "segment": "prayer-nightshift",
    "text": "Let their hands bring comfort, and refresh them when their shift is over.",
-   "start": 549.727,
-   "end": 554.783
+   "start": 549.663,
+   "end": 554.719
   },
   {
    "segment": "prayer-grief",
    "text": "And Father, for anyone who is grieving tonight, especially for someone they could not save, hold them close.",
-   "start": 556.163,
-   "end": 564.077
+   "start": 556.099,
+   "end": 564.013
   },
   {
    "segment": "prayer-grief",
    "text": "Heal the ache of loss.",
-   "start": 564.257,
-   "end": 566.177
+   "start": 564.193,
+   "end": 566.113
   },
   {
    "segment": "prayer-grief",
    "text": "Let them weep without shame, and let them feel that you are weeping with them.",
-   "start": 566.357,
-   "end": 571.648
+   "start": 566.293,
+   "end": 571.605
   },
   {
    "segment": "scripture-9",
    "text": "And God shall wipe away all tears from their eyes;",
-   "start": 573.028,
-   "end": 576.847
+   "start": 572.985,
+   "end": 576.804
   },
   {
    "segment": "scripture-9",
    "text": "and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain:",
-   "start": 577.027,
-   "end": 584.195
+   "start": 576.984,
+   "end": 584.152
   },
   {
    "segment": "scripture-9",
    "text": "for the former things are passed away.",
-   "start": 584.375,
-   "end": 587.169
+   "start": 584.332,
+   "end": 587.127
   },
   {
    "segment": "reflection-7",
    "text": "This is the promise beneath every other promise.",
-   "start": 588.849,
-   "end": 592.412
+   "start": 588.807,
+   "end": 592.369
   },
   {
    "segment": "reflection-7",
    "text": "One day God himself will wipe away every tear.",
-   "start": 592.592,
-   "end": 596.347
+   "start": 592.549,
+   "end": 596.304
   },
   {
    "segment": "reflection-7",
    "text": "Pain will not have the last word.",
-   "start": 596.527,
-   "end": 599.151
+   "start": 596.484,
+   "end": 599.108
   },
   {
    "segment": "reflection-7",
    "text": "Whatever healing you receive tonight is a small taste of that day.",
-   "start": 599.331,
-   "end": 604.173
+   "start": 599.288,
+   "end": 604.131
   },
   {
    "segment": "reflection-cried",
    "text": "O Lord my God, I cried unto thee, and thou hast healed me.",
-   "start": 605.553,
-   "end": 610.161
+   "start": 605.511,
+   "end": 610.097
   },
   {
    "segment": "reflection-cried",
    "text": "David wrote that looking back on a night he thought he would not survive.",
-   "start": 610.341,
-   "end": 615.312
+   "start": 610.277,
+   "end": 615.269
   },
   {
    "segment": "reflection-cried",
    "text": "One day you may look back on this night too, and see how God carried you through it.",
-   "start": 615.492,
-   "end": 621.103
+   "start": 615.449,
+   "end": 621.039
   },
   {
    "segment": "scripture-10",
    "text": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
-   "start": 622.483,
-   "end": 631.229
+   "start": 622.419,
+   "end": 631.165
   },
   {
    "segment": "prayer-trust",
    "text": "Lord, I do not understand everything I am going through.",
-   "start": 632.909,
-   "end": 637.005
+   "start": 632.845,
+   "end": 636.941
   },
   {
    "segment": "prayer-trust",
    "text": "But I choose to trust that you are working, even here, even now.",
-   "start": 637.185,
-   "end": 642.263
+   "start": 637.121,
+   "end": 642.199
   },
   {
    "segment": "prayer-trust",
    "text": "Help me to wait with hope, and to see your goodness again in the land of the living.",
-   "start": 642.443,
-   "end": 647.84
+   "start": 642.379,
+   "end": 647.776
   },
   {
    "segment": "prayer-hope",
    "text": "Father, give me hope for tomorrow.",
-   "start": 649.22,
-   "end": 651.887
+   "start": 649.156,
+   "end": 651.823
   },
   {
    "segment": "prayer-hope",
    "text": "Not a forced cheerfulness, but a quiet confidence that you are with me, whatever the morning brings.",
-   "start": 652.067,
-   "end": 659.192
+   "start": 652.003,
+   "end": 659.128
   },
   {
    "segment": "prayer-hope",
    "text": "Let me wake with new strength, and see your mercy again when the sun rises.",
-   "start": 659.372,
-   "end": 664.641
+   "start": 659.308,
+   "end": 664.577
   },
   {
    "segment": "prayer-sleep",
    "text": "And now, Lord, give me sleep.",
-   "start": 666.021,
-   "end": 668.539
+   "start": 665.957,
+   "end": 668.475
   },
   {
    "segment": "prayer-sleep",
    "text": "Deep, restoring sleep that lets my body do the healing work you designed it to do.",
-   "start": 668.719,
-   "end": 675.161
+   "start": 668.655,
+   "end": 675.097
   },
   {
    "segment": "prayer-sleep",
    "text": "If pain wakes me, let me feel your nearness.",
-   "start": 675.341,
-   "end": 678.776
+   "start": 675.277,
+   "end": 678.712
   },
   {
    "segment": "prayer-sleep",
    "text": "If fear wakes me, let me hear your peace.",
-   "start": 678.956,
-   "end": 682.156
+   "start": 678.892,
+   "end": 682.092
   },
   {
    "segment": "prayer-sleep",
    "text": "And let me fall asleep again in your arms.",
-   "start": 682.336,
-   "end": 685.493
+   "start": 682.272,
+   "end": 685.429
   },
   {
    "segment": "prayer-surrender",
    "text": "I surrender my body, my heart and my future to you tonight.",
-   "start": 686.873,
-   "end": 691.588
+   "start": 686.809,
+   "end": 691.524
   },
   {
    "segment": "prayer-surrender",
    "text": "I do not have to hold everything together.",
-   "start": 691.768,
-   "end": 694.84
+   "start": 691.704,
+   "end": 694.776
   },
   {
    "segment": "prayer-surrender",
    "text": "You hold me.",
-   "start": 695.02,
-   "end": 696.407
+   "start": 694.956,
+   "end": 696.343
   },
   {
    "segment": "prayer-surrender",
    "text": "Into your hands I commit my spirit, as I rest.",
-   "start": 696.587,
-   "end": 700.469
+   "start": 696.523,
+   "end": 700.405
   },
   {
    "segment": "stillness-2",
    "text": "Breathe in again, slowly.",
-   "start": 701.849,
-   "end": 704.047
+   "start": 701.785,
+   "end": 704.004
   },
   {
    "segment": "stillness-2",
    "text": "And let it out.",
-   "start": 704.227,
-   "end": 705.784
+   "start": 704.184,
+   "end": 705.741
   },
   {
    "segment": "stillness-2",
    "text": "Let every muscle relax.",
-   "start": 705.964,
-   "end": 708.161
+   "start": 705.921,
+   "end": 708.119
   },
   {
    "segment": "stillness-2",
    "text": "Let God hold you.",
-   "start": 708.341,
-   "end": 710.155
+   "start": 708.299,
+   "end": 710.112
   },
   {
    "segment": "declaration",
    "text": "Say these words with me quietly, as you rest.",
-   "start": 712.335,
-   "end": 715.919
+   "start": 712.292,
+   "end": 715.876
   },
   {
    "segment": "declaration",
    "text": "The Lord is my healer.",
-   "start": 716.099,
-   "end": 718.168
+   "start": 716.056,
+   "end": 718.125
   },
   {
    "segment": "declaration",
    "text": "He binds up my wounds.",
-   "start": 718.348,
-   "end": 720.545
+   "start": 718.305,
+   "end": 720.481
   },
   {
    "segment": "declaration",
    "text": "I am not alone in this bed.",
-   "start": 720.725,
-   "end": 723.2
+   "start": 720.661,
+   "end": 723.136
   },
   {
    "segment": "declaration",
    "text": "My body, my heart and my mind are in his hands.",
-   "start": 723.38,
-   "end": 727.305
+   "start": 723.316,
+   "end": 727.241
   },
   {
    "segment": "declaration",
    "text": "I will rest tonight, and he will renew me.",
-   "start": 727.485,
-   "end": 730.557
+   "start": 727.421,
+   "end": 730.515
   },
   {
    "segment": "scripture-11",
    "text": "I laid me down and slept;",
-   "start": 732.237,
-   "end": 734.563
+   "start": 732.195,
+   "end": 734.52
   },
   {
    "segment": "scripture-11",
    "text": "I awaked;",
-   "start": 734.743,
-   "end": 736.108
+   "start": 734.7,
+   "end": 736.044
   },
   {
    "segment": "scripture-11",
    "text": "for the LORD sustained me.",
-   "start": 736.288,
-   "end": 738.485
+   "start": 736.224,
+   "end": 738.421
   },
   {
    "segment": "reflection-sustained",
    "text": "I laid me down and slept;",
-   "start": 740.165,
-   "end": 742.491
+   "start": 740.101,
+   "end": 742.427
   },
   {
    "segment": "reflection-sustained",
    "text": "I awaked;",
-   "start": 742.671,
-   "end": 744.015
+   "start": 742.607,
+   "end": 743.951
   },
   {
    "segment": "reflection-sustained",
    "text": "for the Lord sustained me.",
-   "start": 744.195,
-   "end": 746.392
+   "start": 744.131,
+   "end": 746.328
   },
   {
    "segment": "reflection-sustained",
    "text": "Sleep itself is an act of trust.",
-   "start": 746.572,
-   "end": 749.409
+   "start": 746.508,
+   "end": 749.345
   },
   {
    "segment": "reflection-sustained",
    "text": "You let go of control for hours, and God keeps your heart beating and your lungs breathing.",
-   "start": 749.589,
-   "end": 756.032
+   "start": 749.525,
+   "end": 755.968
   },
   {
    "segment": "reflection-sustained",
    "text": "Tonight, he will sustain you again.",
-   "start": 756.212,
-   "end": 758.815
+   "start": 756.148,
+   "end": 758.751
   },
   {
    "segment": "payoff",
    "text": "Here is one thing to do tonight.",
-   "start": 760.195,
-   "end": 762.861
+   "start": 760.131,
+   "end": 762.797
   },
   {
    "segment": "payoff",
    "text": "Place your hand where it hurts, or over your heart, and pray just three words:",
-   "start": 763.041,
-   "end": 768.567
+   "start": 762.977,
+   "end": 768.503
   },
   {
    "segment": "payoff",
    "text": "Lord, heal me.",
-   "start": 768.747,
-   "end": 770.304
+   "start": 768.683,
+   "end": 770.24
   },
   {
    "segment": "payoff",
    "text": "Then leave it with him, and let yourself sleep.",
-   "start": 770.484,
-   "end": 773.791
+   "start": 770.42,
+   "end": 773.727
   },
   {
    "segment": "cta",
    "text": "If you prayed this prayer, type amen in the comments now, and if you want, share the name of someone who needs healing, so others can pray too.",
-   "start": 775.171,
-   "end": 785.581
+   "start": 775.107,
+   "end": 785.517
   },
   {
    "segment": "cta",
    "text": "Then stay right where you are.",
-   "start": 785.761,
-   "end": 788.108
+   "start": 785.697,
+   "end": 788.065
   },
   {
    "segment": "cta",
    "text": "For the rest of this time, I will read healing Scripture over you slowly, so you can fall asleep in God's care.",
-   "start": 788.288,
+   "start": 788.245,
    "end": 796.267
   },
   {
@@ -6032,696 +5565,696 @@
    "segment": "sleep-relax-1",
    "text": "Let your eyes close.",
    "start": 817.501,
-   "end": 819.421
+   "end": 819.443
   },
   {
    "segment": "sleep-relax-2",
    "text": "Let your shoulders drop.",
-   "start": 820.801,
-   "end": 822.807
+   "start": 820.823,
+   "end": 822.828
   },
   {
    "segment": "sleep-relax-2",
    "text": "Let your arms rest heavy at your sides.",
-   "start": 822.987,
-   "end": 825.995
+   "start": 823.008,
+   "end": 826.016
   },
   {
    "segment": "sleep-relax-2",
    "text": "Let your hands open.",
-   "start": 826.175,
-   "end": 828.095
+   "start": 826.196,
+   "end": 828.116
   },
   {
    "segment": "sleep-relax-2",
    "text": "Feel the mattress holding you, the pillow supporting your head.",
-   "start": 828.275,
-   "end": 832.733
+   "start": 828.296,
+   "end": 832.755
   },
   {
    "segment": "sleep-relax-2",
    "text": "You do not have to hold yourself up tonight.",
-   "start": 832.913,
-   "end": 836.177
+   "start": 832.935,
+   "end": 836.199
   },
   {
    "segment": "sleep-relax-2",
    "text": "You are held.",
-   "start": 836.357,
-   "end": 837.787
+   "start": 836.379,
+   "end": 837.808
   },
   {
    "segment": "sleep-relax-3",
    "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet.",
-   "start": 839.167,
-   "end": 848.041
+   "start": 839.188,
+   "end": 848.063
   },
   {
    "segment": "sleep-relax-3",
    "text": "Every part of you is known by the God who made you.",
-   "start": 848.221,
-   "end": 852.211
+   "start": 848.243,
+   "end": 852.232
   },
   {
    "segment": "sleep-relax-3",
    "text": "Every cell is in his care.",
-   "start": 852.391,
-   "end": 854.588
+   "start": 852.412,
+   "end": 854.609
   },
   {
    "segment": "sleep-relax-3",
    "text": "Rest now.",
-   "start": 854.768,
-   "end": 856.091
+   "start": 854.789,
+   "end": 856.112
   },
   {
    "segment": "sleep-relax-4",
    "text": "Now let the day itself go.",
-   "start": 857.471,
-   "end": 859.839
+   "start": 857.492,
+   "end": 859.86
   },
   {
    "segment": "sleep-relax-4",
    "text": "The appointments, the phone calls, the waiting rooms, the worry.",
-   "start": 860.019,
-   "end": 864.264
+   "start": 860.04,
+   "end": 864.307
   },
   {
    "segment": "sleep-relax-4",
    "text": "Let each one drift away like a leaf on slow water.",
-   "start": 864.444,
-   "end": 868.455
+   "start": 864.487,
+   "end": 868.497
   },
   {
    "segment": "sleep-relax-4",
    "text": "There is nothing more you need to do today.",
-   "start": 868.635,
-   "end": 871.664
+   "start": 868.677,
+   "end": 871.707
   },
   {
    "segment": "sleep-relax-4",
    "text": "Tonight, your only task is to rest.",
-   "start": 871.844,
-   "end": 874.745
+   "start": 871.887,
+   "end": 874.767
   },
   {
    "segment": "sleep-psalm-103",
    "text": "Listen to this psalm of healing and mercy.",
-   "start": 876.125,
-   "end": 879.197
+   "start": 876.147,
+   "end": 879.069
   },
   {
    "segment": "sleep-psalm-103",
    "text": "Bless the LORD, O my soul:",
-   "start": 879.377,
-   "end": 881.724
+   "start": 879.249,
+   "end": 881.575
   },
   {
    "segment": "sleep-psalm-103",
    "text": "and all that is within me, bless his holy name.",
-   "start": 881.904,
-   "end": 885.552
+   "start": 881.755,
+   "end": 885.403
   },
   {
    "segment": "sleep-psalm-103",
    "text": "Bless the LORD, O my soul, and forget not all his benefits:",
-   "start": 885.732,
-   "end": 890.425
+   "start": 885.583,
+   "end": 890.276
   },
   {
    "segment": "sleep-psalm-103",
    "text": "Who forgiveth all thine iniquities;",
-   "start": 890.605,
-   "end": 893.229
+   "start": 890.456,
+   "end": 893.08
   },
   {
    "segment": "sleep-psalm-103",
    "text": "who healeth all thy diseases;",
-   "start": 893.409,
-   "end": 896.097
+   "start": 893.26,
+   "end": 895.948
   },
   {
    "segment": "sleep-psalm-103",
    "text": "Who redeemeth thy life from destruction;",
-   "start": 896.277,
-   "end": 899.349
+   "start": 896.128,
+   "end": 899.2
   },
   {
    "segment": "sleep-psalm-103",
    "text": "who crowneth thee with lovingkindness and tender mercies;",
-   "start": 899.529,
-   "end": 903.689
+   "start": 899.38,
+   "end": 903.54
   },
   {
    "segment": "sleep-psalm-103",
    "text": "Who satisfieth thy mouth with good things;",
-   "start": 903.869,
-   "end": 907.069
+   "start": 903.72,
+   "end": 906.941
   },
   {
    "segment": "sleep-psalm-103",
    "text": "so that thy youth is renewed like the eagle's.",
-   "start": 907.249,
-   "end": 910.727
+   "start": 907.121,
+   "end": 910.599
   },
   {
    "segment": "sleep-psalm-103",
    "text": "The LORD is merciful and gracious, slow to anger, and plenteous in mercy.",
-   "start": 910.907,
-   "end": 916.944
+   "start": 910.779,
+   "end": 916.816
   },
   {
    "segment": "sleep-psalm-103",
    "text": "He will not always chide:",
-   "start": 917.124,
-   "end": 919.343
+   "start": 916.996,
+   "end": 919.215
   },
   {
    "segment": "sleep-psalm-103",
    "text": "neither will he keep his anger for ever.",
-   "start": 919.523,
-   "end": 922.595
+   "start": 919.395,
+   "end": 922.467
   },
   {
    "segment": "sleep-psalm-103",
    "text": "He hath not dealt with us after our sins;",
-   "start": 922.775,
-   "end": 925.953
+   "start": 922.647,
+   "end": 925.825
   },
   {
    "segment": "sleep-psalm-103",
    "text": "nor rewarded us according to our iniquities.",
-   "start": 926.133,
-   "end": 929.675
+   "start": 926.005,
+   "end": 929.547
   },
   {
    "segment": "sleep-psalm-103",
    "text": "For as the heaven is high above the earth, so great is his mercy toward them that fear him.",
-   "start": 929.855,
-   "end": 936.767
+   "start": 929.727,
+   "end": 936.639
   },
   {
    "segment": "sleep-psalm-103",
    "text": "As far as the east is from the west, so far hath he removed our transgressions from us.",
-   "start": 936.947,
-   "end": 943.368
+   "start": 936.819,
+   "end": 943.24
   },
   {
    "segment": "sleep-psalm-103",
    "text": "Like as a father pitieth his children, so the LORD pitieth them that fear him.",
-   "start": 943.548,
-   "end": 949.287
+   "start": 943.42,
+   "end": 949.159
   },
   {
    "segment": "sleep-reflect-103",
    "text": "Like as a father pitieth his children.",
-   "start": 950.667,
-   "end": 953.611
+   "start": 950.539,
+   "end": 953.483
   },
   {
    "segment": "sleep-reflect-103",
    "text": "Think of a loving father sitting beside a sick child's bed at night, watching, caring, staying.",
-   "start": 953.791,
-   "end": 960.66
+   "start": 953.663,
+   "end": 960.532
   },
   {
    "segment": "sleep-reflect-103",
    "text": "That is how God is with you tonight.",
-   "start": 960.84,
-   "end": 963.613
+   "start": 960.712,
+   "end": 963.485
   },
   {
    "segment": "sleep-psalm-23",
    "text": "The LORD is my shepherd;",
-   "start": 964.993,
-   "end": 966.999
+   "start": 964.865,
+   "end": 966.871
   },
   {
    "segment": "sleep-psalm-23",
    "text": "I shall not want.",
-   "start": 967.179,
-   "end": 968.885
+   "start": 967.051,
+   "end": 968.757
   },
   {
    "segment": "sleep-psalm-23",
    "text": "He maketh me to lie down in green pastures:",
-   "start": 969.065,
-   "end": 972.543
+   "start": 968.937,
+   "end": 972.415
   },
   {
    "segment": "sleep-psalm-23",
    "text": "he leadeth me beside the still waters.",
-   "start": 972.723,
-   "end": 975.731
+   "start": 972.595,
+   "end": 975.603
   },
   {
    "segment": "sleep-psalm-23",
    "text": "He restoreth my soul:",
-   "start": 975.911,
-   "end": 978.044
+   "start": 975.783,
+   "end": 977.916
   },
   {
    "segment": "sleep-psalm-23",
    "text": "he leadeth me in the paths of righteousness for his name's sake.",
-   "start": 978.224,
-   "end": 983.173
+   "start": 978.096,
+   "end": 983.045
   },
   {
    "segment": "sleep-psalm-23",
    "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil:",
-   "start": 983.353,
-   "end": 989.092
+   "start": 983.225,
+   "end": 988.964
   },
   {
    "segment": "sleep-psalm-23",
    "text": "for thou art with me;",
-   "start": 989.272,
-   "end": 991.363
+   "start": 989.144,
+   "end": 991.235
   },
   {
    "segment": "sleep-psalm-23",
    "text": "thy rod and thy staff they comfort me.",
-   "start": 991.543,
-   "end": 994.636
+   "start": 991.415,
+   "end": 994.508
   },
   {
    "segment": "sleep-psalm-23",
    "text": "Thou preparest a table before me in the presence of mine enemies:",
-   "start": 994.816,
-   "end": 1000.0
+   "start": 994.688,
+   "end": 999.872
   },
   {
    "segment": "sleep-psalm-23",
    "text": "thou anointest my head with oil;",
-   "start": 1000.18,
-   "end": 1002.889
+   "start": 1000.052,
+   "end": 1002.761
   },
   {
    "segment": "sleep-psalm-23",
    "text": "my cup runneth over.",
-   "start": 1003.069,
-   "end": 1004.947
+   "start": 1002.941,
+   "end": 1004.819
   },
   {
    "segment": "sleep-psalm-23",
    "text": "Surely goodness and mercy shall follow me all the days of my life:",
-   "start": 1005.127,
-   "end": 1010.396
+   "start": 1004.999,
+   "end": 1010.247
   },
   {
    "segment": "sleep-psalm-23",
    "text": "and I will dwell in the house of the LORD for ever.",
-   "start": 1010.576,
-   "end": 1014.245
+   "start": 1010.427,
+   "end": 1014.096
   },
   {
    "segment": "sleep-reflect-23",
    "text": "He restoreth my soul.",
-   "start": 1015.625,
-   "end": 1017.737
+   "start": 1015.476,
+   "end": 1017.588
   },
   {
    "segment": "sleep-reflect-23",
    "text": "Restoring is slow, quiet work, the kind that often happens while we sleep.",
-   "start": 1017.917,
-   "end": 1023.763
+   "start": 1017.768,
+   "end": 1023.613
   },
   {
    "segment": "sleep-reflect-23",
    "text": "Let the shepherd do his restoring work in you tonight.",
-   "start": 1023.943,
-   "end": 1027.591
+   "start": 1023.793,
+   "end": 1027.463
   },
   {
    "segment": "sleep-psalm-46",
    "text": "God is our refuge and strength, a very present help in trouble.",
-   "start": 1028.971,
-   "end": 1034.048
+   "start": 1028.843,
+   "end": 1033.92
   },
   {
    "segment": "sleep-psalm-46",
    "text": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea;",
-   "start": 1034.228,
-   "end": 1042.484
+   "start": 1034.1,
+   "end": 1042.356
   },
   {
    "segment": "sleep-psalm-46",
    "text": "Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof.",
-   "start": 1042.664,
-   "end": 1049.128
+   "start": 1042.536,
+   "end": 1049.021
   },
   {
    "segment": "sleep-psalm-46",
    "text": "Be still, and know that I am God:",
-   "start": 1049.308,
-   "end": 1051.975
+   "start": 1049.201,
+   "end": 1051.868
   },
   {
    "segment": "sleep-psalm-46",
    "text": "I will be exalted among the heathen, I will be exalted in the earth.",
-   "start": 1052.155,
-   "end": 1057.381
+   "start": 1052.048,
+   "end": 1057.275
   },
   {
    "segment": "sleep-psalm-46",
    "text": "The LORD of hosts is with us;",
-   "start": 1057.561,
-   "end": 1059.908
+   "start": 1057.455,
+   "end": 1059.801
   },
   {
    "segment": "sleep-psalm-46",
    "text": "the God of Jacob is our refuge.",
-   "start": 1060.088,
-   "end": 1063.011
+   "start": 1059.981,
+   "end": 1062.904
   },
   {
    "segment": "sleep-reflect-46",
    "text": "The Lord of hosts is with us.",
-   "start": 1064.391,
-   "end": 1066.801
+   "start": 1064.284,
+   "end": 1066.695
   },
   {
    "segment": "sleep-reflect-46",
    "text": "Even when the body feels fragile and the future uncertain, the God of angel armies is beside your bed.",
-   "start": 1066.981,
-   "end": 1075.515
+   "start": 1066.875,
+   "end": 1075.408
   },
   {
    "segment": "sleep-reflect-46",
    "text": "Be still.",
-   "start": 1075.695,
-   "end": 1076.847
+   "start": 1075.588,
+   "end": 1076.74
   },
   {
    "segment": "sleep-reflect-46",
    "text": "He is God, and you can rest.",
-   "start": 1077.027,
-   "end": 1079.437
+   "start": 1076.92,
+   "end": 1079.331
   },
   {
    "segment": "sleep-stillness-1",
    "text": "Breathe in slowly.",
-   "start": 1080.817,
-   "end": 1082.588
+   "start": 1080.711,
+   "end": 1082.481
   },
   {
    "segment": "sleep-stillness-1",
    "text": "And let it go.",
-   "start": 1082.768,
-   "end": 1084.325
+   "start": 1082.661,
+   "end": 1084.219
   },
   {
    "segment": "sleep-stillness-1",
    "text": "Rest in the quiet.",
-   "start": 1084.505,
-   "end": 1086.255
+   "start": 1084.399,
+   "end": 1086.148
   },
   {
    "segment": "sleep-isaiah-43",
    "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
-   "start": 1088.435,
-   "end": 1096.285
+   "start": 1088.328,
+   "end": 1096.157
   },
   {
    "segment": "sleep-isaiah-43",
    "text": "for I have redeemed thee, I have called thee by thy name;",
-   "start": 1096.465,
-   "end": 1100.775
+   "start": 1096.337,
+   "end": 1100.668
   },
   {
    "segment": "sleep-isaiah-43",
    "text": "thou art mine.",
-   "start": 1100.955,
-   "end": 1102.597
+   "start": 1100.848,
+   "end": 1102.491
   },
   {
    "segment": "sleep-isaiah-43",
    "text": "When thou passest through the waters, I will be with thee;",
-   "start": 1102.777,
-   "end": 1106.895
+   "start": 1102.671,
+   "end": 1106.788
   },
   {
    "segment": "sleep-isaiah-43",
    "text": "and through the rivers, they shall not overflow thee:",
-   "start": 1107.075,
-   "end": 1110.765
+   "start": 1106.968,
+   "end": 1110.637
   },
   {
    "segment": "sleep-isaiah-43",
    "text": "when thou walkest through the fire, thou shalt not be burned;",
-   "start": 1110.945,
-   "end": 1115.425
+   "start": 1110.817,
+   "end": 1115.276
   },
   {
    "segment": "sleep-isaiah-43",
    "text": "neither shall the flame kindle upon thee.",
-   "start": 1115.605,
-   "end": 1118.827
+   "start": 1115.456,
+   "end": 1118.677
   },
   {
    "segment": "sleep-reflect-43",
    "text": "When thou passest through the waters, I will be with thee.",
-   "start": 1120.207,
-   "end": 1124.26
+   "start": 1120.057,
+   "end": 1124.111
   },
   {
    "segment": "sleep-reflect-43",
    "text": "Illness can feel like deep water.",
-   "start": 1124.44,
-   "end": 1127.149
+   "start": 1124.291,
+   "end": 1127.0
   },
   {
    "segment": "sleep-reflect-43",
    "text": "But God does not watch from the shore.",
-   "start": 1127.329,
-   "end": 1130.188
+   "start": 1127.18,
+   "end": 1130.039
   },
   {
    "segment": "sleep-reflect-43",
    "text": "He walks through it with you.",
-   "start": 1130.368,
-   "end": 1132.288
+   "start": 1130.219,
+   "end": 1132.139
   },
   {
    "segment": "sleep-reflect-43",
    "text": "You are his.",
-   "start": 1132.468,
-   "end": 1133.919
+   "start": 1132.319,
+   "end": 1133.769
   },
   {
    "segment": "sleep-reflect-43",
    "text": "He knows your name.",
-   "start": 1134.099,
-   "end": 1135.848
+   "start": 1133.949,
+   "end": 1135.699
   },
   {
    "segment": "sleep-2cor-4",
    "text": "For which cause we faint not;",
-   "start": 1137.228,
-   "end": 1139.596
+   "start": 1137.079,
+   "end": 1139.447
   },
   {
    "segment": "sleep-2cor-4",
    "text": "but though our outward man perish, yet the inward man is renewed day by day.",
-   "start": 1139.776,
-   "end": 1145.792
+   "start": 1139.627,
+   "end": 1145.6
   },
   {
    "segment": "sleep-2cor-4",
    "text": "For our light affliction, which is but for a moment, worketh for us a far more exceeding and eternal weight of glory;",
-   "start": 1145.972,
-   "end": 1154.783
+   "start": 1145.78,
+   "end": 1154.591
   },
   {
    "segment": "sleep-2cor-4",
    "text": "While we look not at the things which are seen, but at the things which are not seen:",
-   "start": 1154.963,
-   "end": 1160.637
+   "start": 1154.771,
+   "end": 1160.445
   },
   {
    "segment": "sleep-2cor-4",
    "text": "for the things which are seen are temporal;",
-   "start": 1160.817,
-   "end": 1163.825
+   "start": 1160.625,
+   "end": 1163.633
   },
   {
    "segment": "sleep-2cor-4",
    "text": "but the things which are not seen are eternal.",
-   "start": 1164.005,
-   "end": 1167.44
+   "start": 1163.813,
+   "end": 1167.248
   },
   {
    "segment": "sleep-reflect-2cor",
    "text": "The things which are seen are temporal.",
-   "start": 1168.82,
-   "end": 1171.657
+   "start": 1168.628,
+   "end": 1171.465
   },
   {
    "segment": "sleep-reflect-2cor",
    "text": "The pain you feel tonight is real, but it is not the whole story, and it is not forever.",
-   "start": 1171.837,
-   "end": 1178.621
+   "start": 1171.645,
+   "end": 1178.429
   },
   {
    "segment": "sleep-reflect-2cor",
    "text": "Beneath it, God is renewing the part of you that lasts.",
-   "start": 1178.801,
-   "end": 1182.855
+   "start": 1178.609,
+   "end": 1182.663
   },
   {
    "segment": "sleep-psalm-27",
    "text": "I had fainted, unless I had believed to see the goodness of the LORD in the land of the living.",
-   "start": 1184.235,
-   "end": 1191.147
+   "start": 1184.043,
+   "end": 1190.955
   },
   {
    "segment": "sleep-psalm-27",
    "text": "Wait on the LORD:",
-   "start": 1191.327,
-   "end": 1193.119
+   "start": 1191.135,
+   "end": 1192.927
   },
   {
    "segment": "sleep-psalm-27",
    "text": "be of good courage, and he shall strengthen thine heart:",
-   "start": 1193.299,
-   "end": 1197.224
+   "start": 1193.107,
+   "end": 1197.032
   },
   {
    "segment": "sleep-psalm-27",
    "text": "wait, I say, on the LORD.",
-   "start": 1197.404,
-   "end": 1199.516
+   "start": 1197.212,
+   "end": 1199.324
   },
   {
    "segment": "sleep-reflect-27",
    "text": "To see the goodness of the Lord in the land of the living.",
-   "start": 1200.896,
-   "end": 1204.907
+   "start": 1200.704,
+   "end": 1204.757
   },
   {
    "segment": "sleep-reflect-27",
    "text": "Not only someday, but here, in this life, in the days ahead.",
-   "start": 1205.087,
-   "end": 1209.673
+   "start": 1204.937,
+   "end": 1209.524
   },
   {
    "segment": "sleep-reflect-27",
    "text": "Wait on the Lord tonight, and be of good courage.",
-   "start": 1209.853,
-   "end": 1213.459
+   "start": 1209.704,
+   "end": 1213.309
   },
   {
    "segment": "sleep-reflect-27",
    "text": "He will strengthen your heart.",
-   "start": 1213.639,
-   "end": 1215.815
+   "start": 1213.489,
+   "end": 1215.687
   },
   {
    "segment": "sleep-psalm-34",
    "text": "I sought the LORD, and he heard me, and delivered me from all my fears.",
-   "start": 1217.195,
-   "end": 1222.507
+   "start": 1217.067,
+   "end": 1222.4
   },
   {
    "segment": "sleep-psalm-34",
    "text": "O taste and see that the LORD is good:",
-   "start": 1222.687,
-   "end": 1225.673
+   "start": 1222.58,
+   "end": 1225.567
   },
   {
    "segment": "sleep-psalm-34",
    "text": "blessed is the man that trusteth in him.",
-   "start": 1225.853,
-   "end": 1228.776
+   "start": 1225.747,
+   "end": 1228.669
   },
   {
    "segment": "sleep-psalm-34",
    "text": "The LORD is nigh unto them that are of a broken heart;",
-   "start": 1228.956,
-   "end": 1232.967
+   "start": 1228.849,
+   "end": 1232.86
   },
   {
    "segment": "sleep-psalm-34",
    "text": "and saveth such as be of a contrite spirit.",
-   "start": 1233.147,
-   "end": 1236.709
+   "start": 1233.04,
+   "end": 1236.624
   },
   {
    "segment": "sleep-reflect-34",
    "text": "The Lord is nigh unto them that are of a broken heart.",
-   "start": 1238.089,
-   "end": 1242.185
+   "start": 1238.004,
+   "end": 1242.1
   },
   {
    "segment": "sleep-reflect-34",
    "text": "If your heart is broken tonight, you are not far from God.",
-   "start": 1242.365,
-   "end": 1247.037
+   "start": 1242.28,
+   "end": 1246.952
   },
   {
    "segment": "sleep-reflect-34",
    "text": "You are exactly where he comes closest.",
-   "start": 1247.217,
-   "end": 1250.161
+   "start": 1247.132,
+   "end": 1250.076
   },
   {
    "segment": "sleep-stillness-2",
    "text": "Let your breathing slow even more.",
-   "start": 1251.541,
-   "end": 1254.293
+   "start": 1251.456,
+   "end": 1254.208
   },
   {
    "segment": "sleep-stillness-2",
    "text": "You are safe.",
-   "start": 1254.473,
-   "end": 1255.924
+   "start": 1254.388,
+   "end": 1255.839
   },
   {
    "segment": "sleep-stillness-2",
    "text": "Rest.",
-   "start": 1256.104,
-   "end": 1257.064
+   "start": 1256.019,
+   "end": 1256.979
   },
   {
    "segment": "sleep-psalm-121",
    "text": "I will lift up mine eyes unto the hills, from whence cometh my help.",
-   "start": 1259.244,
-   "end": 1264.407
+   "start": 1259.159,
+   "end": 1264.321
   },
   {
    "segment": "sleep-psalm-121",
    "text": "My help cometh from the LORD, which made heaven and earth.",
-   "start": 1264.587,
-   "end": 1268.725
+   "start": 1264.501,
+   "end": 1268.64
   },
   {
    "segment": "sleep-psalm-121",
    "text": "He will not suffer thy foot to be moved:",
-   "start": 1268.905,
-   "end": 1271.807
+   "start": 1268.82,
+   "end": 1271.743
   },
   {
    "segment": "sleep-psalm-121",
    "text": "he that keepeth thee will not slumber.",
-   "start": 1271.987,
-   "end": 1274.781
+   "start": 1271.923,
+   "end": 1274.717
   },
   {
    "segment": "sleep-psalm-121",
    "text": "Behold, he that keepeth Israel shall neither slumber nor sleep.",
-   "start": 1274.961,
-   "end": 1279.335
+   "start": 1274.897,
+   "end": 1279.271
   },
   {
    "segment": "sleep-psalm-121",
    "text": "The LORD is thy keeper:",
-   "start": 1279.515,
-   "end": 1281.605
+   "start": 1279.451,
+   "end": 1281.541
   },
   {
    "segment": "sleep-psalm-121",
    "text": "the LORD is thy shade upon thy right hand.",
-   "start": 1281.785,
+   "start": 1281.721,
    "end": 1284.964
   },
   {
@@ -6818,42 +6351,42 @@
    "segment": "sleep-isaiah-26",
    "text": "Trust ye in the LORD for ever:",
    "start": 1357.007,
-   "end": 1359.375
+   "end": 1359.353
   },
   {
    "segment": "sleep-isaiah-26",
    "text": "for in the LORD JEHOVAH is everlasting strength.",
-   "start": 1359.555,
-   "end": 1363.459
+   "start": 1359.533,
+   "end": 1363.437
   },
   {
    "segment": "sleep-reflect-26",
    "text": "Perfect peace for a mind stayed on him.",
-   "start": 1364.839,
-   "end": 1367.697
+   "start": 1364.817,
+   "end": 1367.676
   },
   {
    "segment": "sleep-reflect-26",
    "text": "As you drift toward sleep, let your last thought rest on God, his kindness, his nearness, his strength.",
-   "start": 1367.877,
-   "end": 1375.472
+   "start": 1367.856,
+   "end": 1375.451
   },
   {
    "segment": "sleep-reflect-26",
    "text": "Everlasting strength.",
-   "start": 1375.652,
-   "end": 1377.551
+   "start": 1375.631,
+   "end": 1377.529
   },
   {
    "segment": "sleep-reflect-26",
    "text": "It does not run out.",
-   "start": 1377.731,
-   "end": 1379.544
+   "start": 1377.709,
+   "end": 1379.523
   },
   {
    "segment": "sleep-psalm-147",
    "text": "He healeth the broken in heart, and bindeth up their wounds.",
-   "start": 1380.924,
+   "start": 1380.903,
    "end": 1385.575
   },
   {
@@ -6884,48 +6417,48 @@
    "segment": "sleep-reflect-147",
    "text": "Above your roof tonight there are more stars than anyone can count, and God calls every one of them by name.",
    "start": 1398.896,
-   "end": 1406.768
+   "end": 1406.725
   },
   {
    "segment": "sleep-reflect-147",
    "text": "The same God is binding up your wounds.",
-   "start": 1406.948,
-   "end": 1410.169
+   "start": 1406.905,
+   "end": 1410.127
   },
   {
    "segment": "sleep-reflect-147",
    "text": "Nothing about you is too small for his care, and nothing about your pain is too big for his power.",
-   "start": 1410.349,
-   "end": 1417.368
+   "start": 1410.307,
+   "end": 1417.325
   },
   {
    "segment": "sleep-psalm-3",
    "text": "But thou, O LORD, art a shield for me;",
-   "start": 1418.748,
-   "end": 1422.097
+   "start": 1418.705,
+   "end": 1422.055
   },
   {
    "segment": "sleep-psalm-3",
    "text": "my glory, and the lifter up of mine head.",
-   "start": 1422.277,
-   "end": 1425.392
+   "start": 1422.235,
+   "end": 1425.371
   },
   {
    "segment": "sleep-psalm-3",
    "text": "I cried unto the LORD with my voice, and he heard me out of his holy hill.",
-   "start": 1425.572,
-   "end": 1431.311
+   "start": 1425.551,
+   "end": 1431.289
   },
   {
    "segment": "sleep-psalm-3",
    "text": "I laid me down and slept;",
-   "start": 1431.491,
-   "end": 1433.816
+   "start": 1431.469,
+   "end": 1433.795
   },
   {
    "segment": "sleep-psalm-3",
    "text": "I awaked;",
-   "start": 1433.996,
+   "start": 1433.975,
    "end": 1435.34
   },
   {
@@ -6944,30 +6477,30 @@
    "segment": "sleep-reflect-3",
    "text": "When illness or sorrow bows your head low, God gently lifts it again.",
    "start": 1441.517,
-   "end": 1447.085
+   "end": 1447.064
   },
   {
    "segment": "sleep-reflect-3",
    "text": "Lay your head down now.",
-   "start": 1447.265,
-   "end": 1449.249
+   "start": 1447.244,
+   "end": 1449.228
   },
   {
    "segment": "sleep-reflect-3",
    "text": "He will lift it up in the morning.",
-   "start": 1449.429,
-   "end": 1451.904
+   "start": 1449.408,
+   "end": 1451.883
   },
   {
    "segment": "sleep-psalm-91",
    "text": "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.",
-   "start": 1453.284,
-   "end": 1460.281
+   "start": 1453.263,
+   "end": 1460.26
   },
   {
    "segment": "sleep-psalm-91",
    "text": "I will say of the LORD, He is my refuge and my fortress:",
-   "start": 1460.461,
+   "start": 1460.44,
    "end": 1465.048
   },
   {
@@ -7028,50 +6561,183 @@
    "segment": "sleep-prayer-final",
    "text": "Comfort what needs comfort.",
    "start": 1505.147,
-   "end": 1507.365
+   "end": 1507.323
   },
   {
    "segment": "sleep-prayer-final",
    "text": "Watch over me through the night, and let me wake to your mercy in the morning.",
-   "start": 1507.545,
-   "end": 1512.687
+   "start": 1507.503,
+   "end": 1512.516
   },
   {
    "segment": "blessing",
    "text": "And now receive this blessing as you sleep.",
-   "start": 1514.067,
-   "end": 1517.224
+   "start": 1513.896,
+   "end": 1517.053
   },
   {
    "segment": "blessing",
    "text": "Beloved, I wish above all things that thou mayest prosper and be in health, even as thy soul prospereth.",
-   "start": 1517.404,
-   "end": 1525.511
+   "start": 1517.233,
+   "end": 1525.34
   },
   {
    "segment": "blessing",
    "text": "Rest in his care tonight.",
-   "start": 1525.691,
-   "end": 1527.653
+   "start": 1525.52,
+   "end": 1527.483
   },
   {
    "segment": "blessing",
    "text": "In Jesus' name, amen.",
-   "start": 1527.833,
-   "end": 1530.287
+   "start": 1527.663,
+   "end": 1530.116
   }
  ],
  "overlay": {
   "brand": "HeroVerse Prayer",
-  "amen": "Type AMEN",
   "title": "Healing Rest Tonight",
   "title_card_seconds": 2.0
  },
- "badges": [
-  "SUBSCRIBE",
-  "LIKE",
-  "SHARE"
+ "persistent_overlays": [
+  "brand"
  ],
+ "caption_style": {
+  "box": false,
+  "alignment": "bottom-centre",
+  "outline": 4,
+  "words_max": 7
+ },
+ "cta": [
+  {
+   "text": "SUBSCRIBE",
+   "start": 60.0,
+   "end": 68.0
+  },
+  {
+   "text": "LIKE",
+   "start": 690.523,
+   "end": 698.523
+  }
+ ],
+ "scripture_cards": [
+  {
+   "segment": "scripture-1",
+   "reference": "Jeremiah 17:14 (KJV)",
+   "start": 42.948,
+   "end": 51.223
+  },
+  {
+   "segment": "scripture-3",
+   "reference": "Psalm 41:3 (KJV)",
+   "start": 137.905,
+   "end": 145.275
+  },
+  {
+   "segment": "scripture-6",
+   "reference": "Psalm 6:2 (KJV)",
+   "start": 348.569,
+   "end": 355.031
+  },
+  {
+   "segment": "scripture-12",
+   "reference": "Psalm 30:2 (KJV)",
+   "start": 481.031,
+   "end": 485.617
+  },
+  {
+   "segment": "scripture-8",
+   "reference": "Psalm 103:2-3 (KJV)",
+   "start": 487.297,
+   "end": 497.641
+  },
+  {
+   "segment": "scripture-9",
+   "reference": "Revelation 21:4 (KJV)",
+   "start": 572.985,
+   "end": 584.152
+  },
+  {
+   "segment": "scripture-11",
+   "reference": "Psalm 3:5 (KJV)",
+   "start": 736.224,
+   "end": 738.421
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "reference": "Psalm 103:1-5, 8-13 (KJV)",
+   "start": 879.249,
+   "end": 949.159
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "reference": "Psalm 23 (KJV)",
+   "start": 964.865,
+   "end": 1014.096
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "reference": "Psalm 46:1-3, 10-11 (KJV)",
+   "start": 1057.455,
+   "end": 1059.801
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "start": 1088.328,
+   "end": 1118.677
+  },
+  {
+   "segment": "sleep-psalm-27",
+   "reference": "Psalm 27:13-14 (KJV)",
+   "start": 1184.043,
+   "end": 1199.324
+  },
+  {
+   "segment": "sleep-psalm-34",
+   "reference": "Psalm 34:4, 8, 18 (KJV)",
+   "start": 1217.067,
+   "end": 1232.86
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "reference": "Psalm 121 (KJV)",
+   "start": 1259.159,
+   "end": 1302.623
+  },
+  {
+   "segment": "sleep-philippians-4",
+   "reference": "Philippians 4:6-7 (KJV)",
+   "start": 1319.991,
+   "end": 1335.616
+  },
+  {
+   "segment": "sleep-isaiah-26",
+   "reference": "Isaiah 26:3-4 (KJV)",
+   "start": 1349.308,
+   "end": 1363.437
+  },
+  {
+   "segment": "sleep-psalm-3",
+   "reference": "Psalm 3:3-5 (KJV)",
+   "start": 1418.705,
+   "end": 1437.717
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "reference": "Psalm 91:1-2, 4, 9-11 (KJV)",
+   "start": 1453.263,
+   "end": 1496.217
+  },
+  {
+   "segment": "blessing",
+   "reference": "3 John 1:2 (KJV)",
+   "start": 1517.233,
+   "end": 1525.34
+  }
+ ],
+ "scene_target_seconds": 22.428571428571427,
+ "crossfade_seconds": 0.6,
  "cinematic": {
   "depth_model": {
    "name": "Depth Anything V2 Small (ONNX)",
@@ -7094,31 +6760,31 @@
   {
    "id": "hook",
    "start": 0.3,
-   "end": 8.788
+   "end": 8.767
   },
   {
    "id": "invitation",
-   "start": 9.588,
-   "end": 38.176
+   "start": 9.567,
+   "end": 38.155
   },
   {
    "id": "scripture-1",
-   "start": 39.376,
-   "end": 51.424
+   "start": 39.355,
+   "end": 51.403
   },
   {
    "id": "reflection-1",
-   "start": 52.924,
+   "start": 52.903,
    "end": 70.196
   },
   {
    "id": "prayer-1",
    "start": 71.396,
-   "end": 89.491
+   "end": 89.512
   },
   {
    "id": "scripture-2",
-   "start": 90.691,
+   "start": 90.712,
    "end": 95.543
   },
   {
@@ -7139,16 +6805,16 @@
   {
    "id": "reflection-3",
    "start": 146.955,
-   "end": 162.404
+   "end": 162.425
   },
   {
    "id": "prayer-doctors",
-   "start": 163.604,
-   "end": 186.243
+   "start": 163.625,
+   "end": 186.264
   },
   {
    "id": "prayer-chronic",
-   "start": 187.443,
+   "start": 187.464,
    "end": 208.057
   },
   {
@@ -7174,26 +6840,26 @@
   {
    "id": "reflection-4",
    "start": 263.725,
-   "end": 280.851
+   "end": 280.872
   },
   {
    "id": "prayer-mind",
-   "start": 282.051,
-   "end": 300.539
+   "start": 282.072,
+   "end": 300.56
   },
   {
    "id": "prayer-mental",
-   "start": 301.739,
-   "end": 327.864
+   "start": 301.76,
+   "end": 327.885
   },
   {
    "id": "scripture-5",
-   "start": 329.064,
-   "end": 331.953
+   "start": 329.085,
+   "end": 331.975
   },
   {
    "id": "reflection-5",
-   "start": 333.453,
+   "start": 333.475,
    "end": 347.369
   },
   {
@@ -7204,26 +6870,26 @@
   {
    "id": "prayer-weakness",
    "start": 359.088,
-   "end": 375.305
+   "end": 375.284
   },
   {
    "id": "scripture-7",
-   "start": 376.505,
-   "end": 385.207
+   "start": 376.484,
+   "end": 385.228
   },
   {
    "id": "reflection-6",
-   "start": 386.707,
-   "end": 401.497
+   "start": 386.728,
+   "end": 401.519
   },
   {
    "id": "prayer-family",
-   "start": 402.697,
-   "end": 424.471
+   "start": 402.719,
+   "end": 424.492
   },
   {
    "id": "prayer-children",
-   "start": 425.671,
+   "start": 425.692,
    "end": 442.775
   },
   {
@@ -7239,206 +6905,206 @@
   {
    "id": "scripture-12",
    "start": 481.031,
-   "end": 485.819
+   "end": 485.797
   },
   {
    "id": "scripture-8",
-   "start": 487.319,
-   "end": 497.864
+   "start": 487.297,
+   "end": 497.821
   },
   {
    "id": "prayer-thanks",
-   "start": 499.364,
-   "end": 518.129
+   "start": 499.321,
+   "end": 518.087
   },
   {
    "id": "prayer-hospital",
-   "start": 519.329,
-   "end": 540.06
+   "start": 519.287,
+   "end": 539.996
   },
   {
    "id": "prayer-nightshift",
-   "start": 541.26,
-   "end": 554.963
+   "start": 541.196,
+   "end": 554.899
   },
   {
    "id": "prayer-grief",
-   "start": 556.163,
-   "end": 571.828
+   "start": 556.099,
+   "end": 571.785
   },
   {
    "id": "scripture-9",
-   "start": 573.028,
-   "end": 587.349
+   "start": 572.985,
+   "end": 587.307
   },
   {
    "id": "reflection-7",
-   "start": 588.849,
-   "end": 604.353
+   "start": 588.807,
+   "end": 604.311
   },
   {
    "id": "reflection-cried",
-   "start": 605.553,
-   "end": 621.283
+   "start": 605.511,
+   "end": 621.219
   },
   {
    "id": "scripture-10",
-   "start": 622.483,
-   "end": 631.409
+   "start": 622.419,
+   "end": 631.345
   },
   {
    "id": "prayer-trust",
-   "start": 632.909,
-   "end": 648.02
+   "start": 632.845,
+   "end": 647.956
   },
   {
    "id": "prayer-hope",
-   "start": 649.22,
-   "end": 664.821
+   "start": 649.156,
+   "end": 664.757
   },
   {
    "id": "prayer-sleep",
-   "start": 666.021,
-   "end": 685.673
+   "start": 665.957,
+   "end": 685.609
   },
   {
    "id": "prayer-surrender",
-   "start": 686.873,
-   "end": 700.649
+   "start": 686.809,
+   "end": 700.585
   },
   {
    "id": "stillness-2",
-   "start": 701.849,
-   "end": 710.335
+   "start": 701.785,
+   "end": 710.292
   },
   {
    "id": "declaration",
-   "start": 712.335,
-   "end": 730.737
+   "start": 712.292,
+   "end": 730.695
   },
   {
    "id": "scripture-11",
-   "start": 732.237,
-   "end": 738.665
+   "start": 732.195,
+   "end": 738.601
   },
   {
    "id": "reflection-sustained",
-   "start": 740.165,
-   "end": 758.995
+   "start": 740.101,
+   "end": 758.931
   },
   {
    "id": "payoff",
-   "start": 760.195,
-   "end": 773.971
+   "start": 760.131,
+   "end": 773.907
   },
   {
    "id": "cta",
-   "start": 775.171,
+   "start": 775.107,
    "end": 796.447
   },
   {
    "id": "sleep-relax-1",
    "start": 798.447,
-   "end": 819.601
+   "end": 819.623
   },
   {
    "id": "sleep-relax-2",
-   "start": 820.801,
-   "end": 837.967
+   "start": 820.823,
+   "end": 837.988
   },
   {
    "id": "sleep-relax-3",
-   "start": 839.167,
-   "end": 856.271
+   "start": 839.188,
+   "end": 856.292
   },
   {
    "id": "sleep-relax-4",
-   "start": 857.471,
-   "end": 874.925
+   "start": 857.492,
+   "end": 874.947
   },
   {
    "id": "sleep-psalm-103",
-   "start": 876.125,
-   "end": 949.467
+   "start": 876.147,
+   "end": 949.339
   },
   {
    "id": "sleep-reflect-103",
-   "start": 950.667,
-   "end": 963.793
+   "start": 950.539,
+   "end": 963.665
   },
   {
    "id": "sleep-psalm-23",
-   "start": 964.993,
-   "end": 1014.425
+   "start": 964.865,
+   "end": 1014.276
   },
   {
    "id": "sleep-reflect-23",
-   "start": 1015.625,
-   "end": 1027.771
+   "start": 1015.476,
+   "end": 1027.643
   },
   {
    "id": "sleep-psalm-46",
-   "start": 1028.971,
-   "end": 1063.191
+   "start": 1028.843,
+   "end": 1063.084
   },
   {
    "id": "sleep-reflect-46",
-   "start": 1064.391,
-   "end": 1079.617
+   "start": 1064.284,
+   "end": 1079.511
   },
   {
    "id": "sleep-stillness-1",
-   "start": 1080.817,
-   "end": 1086.435
+   "start": 1080.711,
+   "end": 1086.328
   },
   {
    "id": "sleep-isaiah-43",
-   "start": 1088.435,
-   "end": 1119.007
+   "start": 1088.328,
+   "end": 1118.857
   },
   {
    "id": "sleep-reflect-43",
-   "start": 1120.207,
-   "end": 1136.028
+   "start": 1120.057,
+   "end": 1135.879
   },
   {
    "id": "sleep-2cor-4",
-   "start": 1137.228,
-   "end": 1167.62
+   "start": 1137.079,
+   "end": 1167.428
   },
   {
    "id": "sleep-reflect-2cor",
-   "start": 1168.82,
-   "end": 1183.035
+   "start": 1168.628,
+   "end": 1182.843
   },
   {
    "id": "sleep-psalm-27",
-   "start": 1184.235,
-   "end": 1199.696
+   "start": 1184.043,
+   "end": 1199.504
   },
   {
    "id": "sleep-reflect-27",
-   "start": 1200.896,
-   "end": 1215.995
+   "start": 1200.704,
+   "end": 1215.867
   },
   {
    "id": "sleep-psalm-34",
-   "start": 1217.195,
-   "end": 1236.889
+   "start": 1217.067,
+   "end": 1236.804
   },
   {
    "id": "sleep-reflect-34",
-   "start": 1238.089,
-   "end": 1250.341
+   "start": 1238.004,
+   "end": 1250.256
   },
   {
    "id": "sleep-stillness-2",
-   "start": 1251.541,
-   "end": 1257.244
+   "start": 1251.456,
+   "end": 1257.159
   },
   {
    "id": "sleep-psalm-121",
-   "start": 1259.244,
+   "start": 1259.159,
    "end": 1302.803
   },
   {
@@ -7459,47 +7125,47 @@
   {
    "id": "sleep-isaiah-26",
    "start": 1349.308,
-   "end": 1363.639
+   "end": 1363.617
   },
   {
    "id": "sleep-reflect-26",
-   "start": 1364.839,
-   "end": 1379.724
+   "start": 1364.817,
+   "end": 1379.703
   },
   {
    "id": "sleep-psalm-147",
-   "start": 1380.924,
+   "start": 1380.903,
    "end": 1397.696
   },
   {
    "id": "sleep-reflect-147",
    "start": 1398.896,
-   "end": 1417.548
+   "end": 1417.505
   },
   {
    "id": "sleep-psalm-3",
-   "start": 1418.748,
+   "start": 1418.705,
    "end": 1437.897
   },
   {
    "id": "sleep-reflect-3",
    "start": 1439.097,
-   "end": 1452.084
+   "end": 1452.063
   },
   {
    "id": "sleep-psalm-91",
-   "start": 1453.284,
+   "start": 1453.263,
    "end": 1496.397
   },
   {
    "id": "sleep-prayer-final",
    "start": 1497.597,
-   "end": 1512.867
+   "end": 1512.696
   },
   {
    "id": "blessing",
-   "start": 1514.067,
-   "end": 1530.467
+   "start": 1513.896,
+   "end": 1530.296
   }
  ],
  "upload_performed": false,
