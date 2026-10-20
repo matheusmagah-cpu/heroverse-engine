@@ -1,0 +1,523 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-005",
+ "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+ "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "format_note": "Morning format ~29 min (guided prayer + Scripture to carry into the day); length per strategy/DECISIONS.md D-2026-10-18-04.",
+ "working_title": "Morning Prayer for Protection | Psalm 91 Over You and Your Family",
+ "promise": "Title promise 'protection over you and your family' is spoken at 0-8 s.",
+ "angle": "Protection as a place to live, not an emergency visit: Psalm 91 prayed over the mind, the home, the road, the family and the work, in peace, never fear.",
+ "authorship": "Original text written for HeroVerse by Claude Code (AI assistant) on 2026-10-18. Scripture quotations are from the King James Version (public domain).",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "beat": "0-8 s: direct address, concrete moment, promise",
+   "pause_after": 0.8,
+   "text": "Good morning. Let us place you and those you love under God's protection, and walk into today in his peace."
+  },
+  {
+   "id": "invitation",
+   "beat": "8-30 s: settle the body, name the need",
+   "pause_after": 1.2,
+   "text": "Before you step out into today, stay with me for the next few minutes. Take one slow breath with me. Maybe you are carrying something heavy into this day: a hard meeting, a long drive, a child going to school, news you are waiting for. You do not have to face any of it alone. Let your shoulders drop. Open your hands. For the next few minutes, simply rest in the shelter of the Most High."
+  },
+  {
+   "id": "scripture-1",
+   "beat": "anchor: Psalm 91:1-2",
+   "pause_after": 1.5,
+   "text": "Psalm ninety-one begins like this. He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty. I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust.",
+   "reference": "Psalm 91:1-2 (KJV)",
+   "chapter": "Under his shadow (Psalm 91:1-2)"
+  },
+  {
+   "id": "reflection-1",
+   "beat": "reflection: dwelling, not visiting",
+   "pause_after": 1.2,
+   "text": "Notice the word dwelleth. Protection here is not a visit you make in an emergency. It is a place you live. And the psalmist does something simple: he says it out loud. I will say of the Lord, he is my refuge. Today, you can say it too."
+  },
+  {
+   "id": "prayer-1",
+   "beat": "first guided prayer: entering the shelter",
+   "pause_after": 1.2,
+   "text": "So let us pray. Lord, this morning I choose to dwell in your shelter. You are my refuge and my fortress. My God, in you I trust. I do not begin this day relying on my own strength or my own plans. I begin it hidden in you."
+  },
+  {
+   "id": "scripture-2",
+   "beat": "anchor: Proverbs 18:10",
+   "pause_after": 1.5,
+   "text": "The name of the LORD is a strong tower: the righteous runneth into it, and is safe.",
+   "reference": "Proverbs 18:10 (KJV)",
+   "chapter": "A strong tower (Proverbs 18:10)"
+  },
+  {
+   "id": "reflection-2",
+   "beat": "reflection: running into the name",
+   "pause_after": 1.2,
+   "text": "A tower in the ancient world was where people ran when danger came. And the strongest tower, Solomon says, is not made of stone. It is the name of the Lord. Whenever today feels unsafe, you can run into that name with one short prayer: Jesus, help me."
+  },
+  {
+   "id": "scripture-3",
+   "beat": "anchor: Psalm 121:1-2",
+   "pause_after": 1.5,
+   "text": "I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth.",
+   "reference": "Psalm 121:1-2 (KJV)"
+  },
+  {
+   "id": "prayer-2",
+   "beat": "guided prayer: lifting my eyes",
+   "pause_after": 1.2,
+   "text": "Father, I lift my eyes to you. My help does not come from my bank account, my connections or my own cleverness. My help comes from you, the maker of heaven and earth. The One who holds the stars in place is watching over my small day. Thank you."
+  },
+  {
+   "id": "stillness",
+   "beat": "guided stillness: 2 breaths, music forward",
+   "pause_after": 6.0,
+   "text": "Let us be still for a moment. Breathe in slowly. And breathe out. Once more, breathe in, and rest."
+  },
+  {
+   "id": "transition",
+   "beat": "turn: praying protection over each part of the day",
+   "pause_after": 1.5,
+   "text": "Now let us pray protection over every part of this day, one by one.",
+   "chapter": "Let us pray"
+  },
+  {
+   "id": "prayer-mind",
+   "beat": "guided prayer: protection for the mind",
+   "pause_after": 1.2,
+   "text": "Lord, protect my mind today. Guard me from anxious thoughts that spiral, from lies about who I am, and from fear that wants to take over. Fill my thoughts with what is true and good. When worry knocks, let your peace answer the door."
+  },
+  {
+   "id": "scripture-4",
+   "beat": "anchor: 2 Thessalonians 3:3",
+   "pause_after": 1.5,
+   "text": "But the Lord is faithful, who shall stablish you, and keep you from evil.",
+   "reference": "2 Thessalonians 3:3 (KJV)"
+  },
+  {
+   "id": "prayer-home",
+   "beat": "guided prayer: protection over the home",
+   "pause_after": 1.2,
+   "text": "Father, I place my home under your protection. Watch over every door and every room. Keep away harm, accidents and every kind of danger. Let our home be a place of peace, where your presence is felt the moment anyone walks in."
+  },
+  {
+   "id": "scripture-5",
+   "beat": "anchor: Psalm 91:11",
+   "pause_after": 1.5,
+   "text": "For he shall give his angels charge over thee, to keep thee in all thy ways.",
+   "reference": "Psalm 91:11 (KJV)",
+   "chapter": "Angels charged over you (Psalm 91:11)"
+  },
+  {
+   "id": "reflection-3",
+   "beat": "reflection: kept in all thy ways",
+   "pause_after": 1.2,
+   "text": "In all thy ways. Not only in church, not only on good days. On the highway, at the office, in the hospital waiting room, on the walk home. There is no road you will travel today where God's care cannot reach you."
+  },
+  {
+   "id": "prayer-travel",
+   "beat": "guided prayer: protection on the road",
+   "pause_after": 1.2,
+   "text": "Lord, protect everyone who travels today. Every car, every bus, every train and every plane carrying someone I love. Keep drivers alert and roads safe. Bring each one home again tonight, safe and whole."
+  },
+  {
+   "id": "prayer-family",
+   "beat": "guided prayer: protection for family",
+   "pause_after": 1.2,
+   "text": "Father, I lift up my family one by one before you. You know their names, their needs and their worries better than I do. Cover them with your protection. Guard their health, their relationships and their hearts. Where any of them are far from you, draw them gently closer."
+  },
+  {
+   "id": "prayer-children",
+   "beat": "guided prayer: protection for children",
+   "pause_after": 1.2,
+   "text": "Lord, I pray especially for the children. Watch over them at school, on the playground, online and in every friendship. Protect their innocence. Surround them with good influences and kind adults. Let them grow up knowing they are safe in your love."
+  },
+  {
+   "id": "scripture-6",
+   "beat": "anchor: Psalm 34:7",
+   "pause_after": 1.5,
+   "text": "The angel of the LORD encampeth round about them that fear him, and delivereth them.",
+   "reference": "Psalm 34:7 (KJV)"
+  },
+  {
+   "id": "reflection-camp",
+   "beat": "reflection: an encampment around you",
+   "pause_after": 1.2,
+   "text": "Encampeth round about. The picture is an army setting up camp all around you, on every side, through the night and through the day. You may feel exposed this morning, but heaven sees you surrounded. God's care is not thin. It is all the way around."
+  },
+  {
+   "id": "prayer-work",
+   "beat": "guided prayer: protection at work",
+   "pause_after": 1.2,
+   "text": "Father, protect my work today. Guard my reputation and my integrity. Keep me from mistakes that could hurt others, and from people who would take advantage. Give me favour, wisdom and patience with every person I meet."
+  },
+  {
+   "id": "prayer-decisions",
+   "beat": "guided prayer: protection in decisions",
+   "pause_after": 1.2,
+   "text": "Lord, protect me from foolish decisions today. Before I sign, agree, buy or reply, give me a pause and a clear mind. Close the doors that would lead me into harm, even when they look attractive, and open the doors you have prepared."
+  },
+  {
+   "id": "prayer-finances",
+   "beat": "guided prayer: protection over finances",
+   "pause_after": 1.2,
+   "text": "Father, I place my finances under your care. Protect what you have entrusted to me from loss, from deception and from waste. Give me wisdom to spend well, to save well and to give generously. Provide for every need in my home today."
+  },
+  {
+   "id": "scripture-7",
+   "beat": "anchor: Psalm 27:1",
+   "pause_after": 1.5,
+   "text": "The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?",
+   "reference": "Psalm 27:1 (KJV)",
+   "chapter": "Whom shall I fear? (Psalm 27:1)"
+  },
+  {
+   "id": "reflection-4",
+   "beat": "reflection: fear answered by a person",
+   "pause_after": 1.2,
+   "text": "David does not answer his fear with a technique. He answers it with a person. The Lord is my light. The Lord is my strength. Fear shrinks when God is in view. So keep him in view today."
+  },
+  {
+   "id": "prayer-health",
+   "beat": "guided prayer: protection for health",
+   "pause_after": 1.2,
+   "text": "Lord, I ask for protection over my body and the bodies of those I love. Guard us from sickness and injury. Strengthen what is weak. For anyone already facing illness today, be their healer, their comfort and their peace, and give wisdom to every doctor and nurse who cares for them."
+  },
+  {
+   "id": "prayer-relationships",
+   "beat": "guided prayer: protection over marriages and friendships",
+   "pause_after": 1.2,
+   "text": "Lord, protect my relationships. Guard marriages from coldness and from anything that would divide them. Protect friendships from gossip and misunderstanding. Where there is tension, bring honest conversations and quick forgiveness. Let love win in every home today."
+  },
+  {
+   "id": "prayer-words",
+   "beat": "guided prayer: guard my words",
+   "pause_after": 1.2,
+   "text": "Father, set a guard over my mouth today. Protect me from words I would regret: harsh words, careless words, words spoken in anger. Let what I say build people up. Let my words carry your peace into every room I enter."
+  },
+  {
+   "id": "prayer-emotions",
+   "beat": "guided prayer: protection for the heart",
+   "pause_after": 1.2,
+   "text": "Lord, protect my heart from bitterness, discouragement and despair. When disappointment comes today, do not let it settle in. Keep my heart soft toward you and toward others, and fill it again and again with hope."
+  },
+  {
+   "id": "scripture-8",
+   "beat": "anchor: Isaiah 41:13",
+   "pause_after": 1.5,
+   "text": "For I the LORD thy God will hold thy right hand, saying unto thee, Fear not; I will help thee.",
+   "reference": "Isaiah 41:13 (KJV)"
+  },
+  {
+   "id": "prayer-spiritual",
+   "beat": "guided prayer: spiritual protection",
+   "pause_after": 1.2,
+   "text": "Father, protect my heart and my faith. Keep me from temptation and from everything that would pull me away from you. Help me to put on the whole armour of God today: truth, righteousness, peace, faith, and your word in my mouth."
+  },
+  {
+   "id": "scripture-9",
+   "beat": "anchor: Ephesians 6:10-11",
+   "pause_after": 1.5,
+   "text": "Finally, my brethren, be strong in the Lord, and in the power of his might. Put on the whole armour of God, that ye may be able to stand against the wiles of the devil.",
+   "reference": "Ephesians 6:10-11 (KJV)",
+   "chapter": "The armour of God (Ephesians 6:10-11)"
+  },
+  {
+   "id": "reflection-5",
+   "beat": "reflection: strong in the Lord",
+   "pause_after": 1.2,
+   "text": "Be strong in the Lord, not in yourself. The armour is his, not yours. Your part is to put it on, and to stand."
+  },
+  {
+   "id": "scripture-10",
+   "beat": "anchor: Psalm 32:7",
+   "pause_after": 1.5,
+   "text": "Thou art my hiding place; thou shalt preserve me from trouble; thou shalt compass me about with songs of deliverance.",
+   "reference": "Psalm 32:7 (KJV)"
+  },
+  {
+   "id": "reflection-hiding",
+   "beat": "reflection: a hiding place and a song",
+   "pause_after": 1.2,
+   "text": "A hiding place and songs of deliverance. God does not only hide you from trouble. He surrounds you with music while you wait. Even in a hard day, there can be a song underneath it: the quiet confidence that he has you, and that this will not be the end of the story."
+  },
+  {
+   "id": "prayer-weary",
+   "beat": "guided prayer: for those afraid today",
+   "pause_after": 1.2,
+   "text": "And Lord, I pray for everyone listening who woke up afraid this morning. Those in unsafe homes, those in places of war, those facing a diagnosis, those who feel alone. Be their hiding place. Surround them with songs of deliverance, and send people to help them today."
+  },
+  {
+   "id": "scripture-11",
+   "beat": "anchor: Deuteronomy 31:6",
+   "pause_after": 1.5,
+   "text": "Be strong and of a good courage, fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.",
+   "reference": "Deuteronomy 31:6 (KJV)"
+  },
+  {
+   "id": "reflection-courage",
+   "beat": "reflection: he goes with thee",
+   "pause_after": 1.2,
+   "text": "He it is that doth go with thee. Courage is not pretending the danger is not there. It is knowing who walks beside you into it. He will not fail you. He will not forsake you. Not today, not ever."
+  },
+  {
+   "id": "stillness-2",
+   "beat": "guided stillness: second breath",
+   "pause_after": 6.0,
+   "text": "Breathe in again, slowly. And let it go. Feel the peace of being covered by God."
+  },
+  {
+   "id": "declaration",
+   "beat": "declaration: short lines to repeat",
+   "pause_after": 1.5,
+   "text": "Say these words with me, out loud if you can. The Lord is my refuge and my fortress. I dwell in the shelter of the Most High. His angels watch over me in all my ways. I will not fear, for God is with me. My family and my home are in his hands.",
+   "chapter": "Declaration for today"
+  },
+  {
+   "id": "scripture-12",
+   "beat": "anchor: Psalm 91:14-15",
+   "pause_after": 1.5,
+   "text": "God himself answers in the psalm. Because he hath set his love upon me, therefore will I deliver him: I will set him on high, because he hath known my name. He shall call upon me, and I will answer him: I will be with him in trouble; I will deliver him, and honour him.",
+   "reference": "Psalm 91:14-15 (KJV)",
+   "chapter": "I will be with him (Psalm 91:14-15)"
+  },
+  {
+   "id": "reflection-6",
+   "beat": "reflection: protection is a relationship",
+   "pause_after": 1.2,
+   "text": "Listen to why God protects: because he hath set his love upon me, because he hath known my name. Protection flows out of relationship. You are not protected because you are perfect. You are protected because you are his."
+  },
+  {
+   "id": "prayer-thanks",
+   "beat": "guided prayer: thanksgiving",
+   "pause_after": 1.2,
+   "text": "Thank you, Father, for every time you have protected me without my even knowing it. The accidents that did not happen. The dangers I never saw. Thank you for keeping me until this morning. I trust you to keep me today."
+  },
+  {
+   "id": "prayer-purpose",
+   "beat": "guided prayer: being a shelter for others",
+   "pause_after": 1.2,
+   "text": "Lord, make me a shelter for others today. Let me notice the person who feels unsafe, and offer kindness, help and prayer. As you protect me, let me protect the weak and speak up for those who cannot."
+  },
+  {
+   "id": "prayer-community",
+   "beat": "guided prayer: the church and the neighbourhood",
+   "pause_after": 1.2,
+   "text": "Father, protect my church and my neighbourhood. Watch over the streets where I live, the schools, the shops and the people who work in them. Bring peace where there is violence, help where there is need, and let your people be a light in this place."
+  },
+  {
+   "id": "prayer-evening",
+   "beat": "guided prayer: bringing everyone home",
+   "pause_after": 1.2,
+   "text": "And Lord, when this day is done, bring every one of us home safely. Let us sit down tonight together, grateful for your protection. I trust you with every hour between now and then."
+  },
+  {
+   "id": "day-transition",
+   "beat": "turn: Scripture to carry into the day",
+   "pause_after": 1.5,
+   "text": "Before you go, let me read you some Scripture to carry into this day. Let these words go with you, into every room and every road.",
+   "chapter": "Scripture to carry into your day"
+  },
+  {
+   "id": "day-psalm-91",
+   "beat": "day reading: Psalm 91",
+   "pause_after": 2.0,
+   "text": "Here is the whole of Psalm ninety-one. He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty. I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust. Surely he shall deliver thee from the snare of the fowler, and from the noisome pestilence. He shall cover thee with his feathers, and under his wings shalt thou trust: his truth shall be thy shield and buckler. Thou shalt not be afraid for the terror by night; nor for the arrow that flieth by day; Nor for the pestilence that walketh in darkness; nor for the destruction that wasteth at noonday. A thousand shall fall at thy side, and ten thousand at thy right hand; but it shall not come nigh thee. Only with thine eyes shalt thou behold and see the reward of the wicked. Because thou hast made the LORD, which is my refuge, even the most High, thy habitation; There shall no evil befall thee, neither shall any plague come nigh thy dwelling. For he shall give his angels charge over thee, to keep thee in all thy ways. They shall bear thee up in their hands, lest thou dash thy foot against a stone. Thou shalt tread upon the lion and adder: the young lion and the dragon shalt thou trample under feet. Because he hath set his love upon me, therefore will I deliver him: I will set him on high, because he hath known my name. He shall call upon me, and I will answer him: I will be with him in trouble; I will deliver him, and honour him. With long life will I satisfy him, and shew him my salvation.",
+   "reference": "Psalm 91 (KJV)",
+   "chapter": "Psalm 91, read in full"
+  },
+  {
+   "id": "day-reflect-91",
+   "beat": "day reflection: the whole psalm",
+   "pause_after": 1.5,
+   "text": "Notice how the psalm moves. It begins with a person choosing to dwell with God, and it ends with God himself speaking: I will be with him in trouble. Protection in this psalm is not a promise that nothing hard will ever happen. It is the promise that you will never face it alone."
+  },
+  {
+   "id": "day-psalm-23",
+   "beat": "day reading: Psalm 23",
+   "pause_after": 2.0,
+   "text": "And now the shepherd's psalm. The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake. Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me. Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over. Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.",
+   "reference": "Psalm 23 (KJV)",
+   "chapter": "The Lord is my shepherd (Psalm 23)"
+  },
+  {
+   "id": "day-reflect-23",
+   "beat": "day reflection: goodness follows you",
+   "pause_after": 1.5,
+   "text": "Surely goodness and mercy shall follow me. Picture that today: as you walk out of your door, goodness and mercy walk right behind you, all day long. The shepherd's rod and staff were for protection and guidance. He uses both for you."
+  },
+  {
+   "id": "day-ephesians-6",
+   "beat": "day reading: Ephesians 6:13-17",
+   "pause_after": 2.0,
+   "text": "Hear how Paul describes God's protection for the believer. Wherefore take unto you the whole armour of God, that ye may be able to withstand in the evil day, and having done all, to stand. Stand therefore, having your loins girt about with truth, and having on the breastplate of righteousness; And your feet shod with the preparation of the gospel of peace; Above all, taking the shield of faith, wherewith ye shall be able to quench all the fiery darts of the wicked. And take the helmet of salvation, and the sword of the Spirit, which is the word of God.",
+   "reference": "Ephesians 6:13-17 (KJV)",
+   "chapter": "The whole armour of God (Ephesians 6:13-17)"
+  },
+  {
+   "id": "day-reflect-6",
+   "beat": "day reflection: dressing for the day",
+   "pause_after": 1.5,
+   "text": "You will get dressed this morning anyway. As you do, put on the armour too. Truth as your belt. Righteousness over your heart. Peace on your feet. Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand."
+  },
+  {
+   "id": "day-isaiah-43",
+   "beat": "day reading: Isaiah 43:1-2",
+   "pause_after": 2.0,
+   "text": "Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "chapter": "I have called thee by thy name (Isaiah 43:1-2)"
+  },
+  {
+   "id": "day-reflect-43",
+   "beat": "day reflection: called by name",
+   "pause_after": 1.5,
+   "text": "I have called thee by thy name; thou art mine. God's protection is personal. He does not watch over a crowd. He watches over you, by name. Through the waters, through the fire. Not around them, but through them, with him."
+  },
+  {
+   "id": "day-romans-8",
+   "beat": "day reading: Romans 8:31, 35, 37-39",
+   "pause_after": 2.0,
+   "text": "What shall we then say to these things? If God be for us, who can be against us? Who shall separate us from the love of Christ? shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword? Nay, in all these things we are more than conquerors through him that loved us. For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.",
+   "reference": "Romans 8:31, 35, 37-39 (KJV)",
+   "chapter": "If God be for us (Romans 8)"
+  },
+  {
+   "id": "day-reflect-romans",
+   "beat": "day reflection: more than conquerors",
+   "pause_after": 1.5,
+   "text": "If God be for us, who can be against us? Whatever you face today, you do not face it as someone barely surviving. You face it as someone deeply loved. Nothing you meet today can separate you from that love."
+  },
+  {
+   "id": "day-psalm-27",
+   "beat": "day reading: Psalm 27:1-5",
+   "pause_after": 2.0,
+   "text": "Hear David's song of confidence. The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid? When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell. Though an host should encamp against me, my heart shall not fear: though war should rise against me, in this will I be confident. One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD all the days of my life, to behold the beauty of the LORD, and to enquire in his temple. For in the time of trouble he shall hide me in his pavilion: in the secret of his tabernacle shall he hide me; he shall set me up upon a rock.",
+   "reference": "Psalm 27:1-5 (KJV)",
+   "chapter": "In this will I be confident (Psalm 27:1-5)"
+  },
+  {
+   "id": "day-reflect-27",
+   "beat": "day reflection: one thing",
+   "pause_after": 1.5,
+   "text": "In the middle of enemies and armies, David asks for one thing: to dwell with the Lord. He knew that closeness to God was the safest place in the world. Let that be your one thing today too. Stay close, and let him set you up upon a rock."
+  },
+  {
+   "id": "day-psalm-46",
+   "beat": "day reading: Psalm 46:1-3",
+   "pause_after": 2.0,
+   "text": "God is our refuge and strength, a very present help in trouble. Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea; Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof.",
+   "reference": "Psalm 46:1-3 (KJV)",
+   "chapter": "A very present help (Psalm 46:1-3)"
+  },
+  {
+   "id": "day-reflect-46",
+   "beat": "day reflection: a very present help",
+   "pause_after": 1.5,
+   "text": "A very present help. Not a distant help that arrives too late. Present. Here. In the trouble, at the very moment you need him. Even if the ground seems to shake today, your refuge does not move."
+  },
+  {
+   "id": "day-psalm-121",
+   "beat": "day reading: Psalm 121",
+   "pause_after": 2.0,
+   "text": "And finally, the traveller's psalm, for every road you take today. I will lift up mine eyes unto the hills, from whence cometh my help. My help cometh from the LORD, which made heaven and earth. He will not suffer thy foot to be moved: he that keepeth thee will not slumber. Behold, he that keepeth Israel shall neither slumber nor sleep. The LORD is thy keeper: the LORD is thy shade upon thy right hand. The sun shall not smite thee by day, nor the moon by night. The LORD shall preserve thee from all evil: he shall preserve thy soul. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "reference": "Psalm 121 (KJV)",
+   "chapter": "The Lord is thy keeper (Psalm 121)"
+  },
+  {
+   "id": "day-reflect-121",
+   "beat": "day reflection: going out and coming in",
+   "pause_after": 1.5,
+   "text": "Thy going out and thy coming in. Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey. Carry that with you."
+  },
+  {
+   "id": "payoff",
+   "beat": "payoff: one concrete commitment for the day",
+   "pause_after": 1.2,
+   "text": "Here is one thing to take into your day. Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge. Six words. Let them mark every doorway you walk through.",
+   "chapter": "One thing to do today"
+  },
+  {
+   "id": "blessing",
+   "beat": "closing blessing",
+   "pause_after": 1.5,
+   "text": "And now receive this blessing. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore. Go into this day covered by his peace. In Jesus' name, amen.",
+   "reference": "Psalm 121:8 (KJV)",
+   "chapter": "Blessing"
+  },
+  {
+   "id": "cta",
+   "beat": "soft call to action after payoff",
+   "pause_after": 2.0,
+   "text": "If you prayed this prayer with me, type amen in the comments, and write the name of someone you want covered in prayer today. Come back tomorrow morning, and we will start the day with God together again."
+  }
+ ],
+ "figure": "figure-a",
+ "backgrounds": [
+  "bg-fortress-dawn",
+  "bg-tower-hill",
+  "bg-sheltered-valley",
+  "bg-sunrise-field",
+  "bg-eagle-wings",
+  "bg-home-sunrise",
+  "bg-mountain-sunrise",
+  "bg-meadow",
+  "bg-sunlit-road",
+  "bg-misty-valley",
+  "bg-sky",
+  "bg-garden",
+  "bg-hills",
+  "bg-dawn-lake"
+ ],
+ "overlay": {
+  "title": "Protection Over You Today",
+  "subtitle": "MORNING PRAYER",
+  "title_image": "bg-fortress-dawn",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "Start your day under God's protection. Pray Psalm 91 over yourself, your home and your family, then carry Psalm 91, Psalm 23 and Psalm 121 into your day.",
+ "hashtags": [
+  "#prayer",
+  "#psalm91",
+  "#morningprayer"
+ ],
+ "thumbnail": {
+  "lines": [
+   "COVERED",
+   "TODAY"
+  ],
+  "sub": "Psalm 91 Prayer"
+ },
+ "tags": [
+  "morning prayer",
+  "prayer for protection",
+  "psalm 91",
+  "psalm 91 prayer",
+  "morning prayer for protection",
+  "prayer for my family",
+  "christian morning prayer",
+  "start your day with God"
+ ],
+ "figure_choice": "figure-a: the channel's praying figure (frontal, hands folded), kept for brand continuity.",
+ "playlist": {
+  "title": "Morning Prayer",
+  "description": "Guided morning prayers with Scripture for peace, protection and courage. New prayers to start your day with God."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-fortress-dawn",
+   "bg-sheltered-valley",
+   "bg-sunrise-field",
+   "bg-misty-valley",
+   "bg-dawn-lake"
+  ]
+ }
+}

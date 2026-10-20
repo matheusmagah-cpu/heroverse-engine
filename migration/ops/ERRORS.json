@@ -323,6 +323,16 @@
     "file": "migration/production/test_script_check.py",
     "contains": "def test_image_set_overlap_identical_008_012"
    }
+  },
+  {
+   "id": "E32",
+   "date": "2026-10-20",
+   "error": "Shorts passed technical QA but failed watched review for dependent openings, weak visual rhythm and unresolved endings; provider failure diagnostics were discarded.",
+   "fix": "PARTIAL: phase 1 validates structural openings and complete endings against full source timelines, preserves whole Scripture segments, and records strictly sanitized failure evidence. Real editing, technical QA and watched review remain pending in phase 2.",
+   "antidote": {
+    "file": "migration/production/shorts_select.py",
+    "contains": "def validate_candidate(sentences, refs, moment):"
+   }
   }
  ]
 }
