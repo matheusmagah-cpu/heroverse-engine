@@ -1,0 +1,65 @@
+{
+ "version": "structure-v1",
+ "id": "spoken-prayer-short",
+ "line": "English Christian spoken prayer, Shorts",
+ "status": "candidate",
+ "validation": {
+  "rule": "SYSTEM.md 1.5",
+  "winners": 4,
+  "channels": 4,
+  "weak_contrasts": 0,
+  "evidence": [
+   "evidence/vidiq/20261019/watch-DigF0F0LrfY.md",
+   "evidence/vidiq/20261020/shorts_structure_audit.json"
+  ],
+  "missing": [
+   "2 more winners from new channels",
+   "3 weak contrasts of the same shape",
+   "transcript word counts"
+  ]
+ },
+ "attributes": {
+  "length_seconds": {
+   "values": [
+    114,
+    163,
+    130,
+    178
+   ],
+   "label": "candidate driver (4/4 winners >= 110 s; weak contrasts not measured)"
+  },
+  "ends_on_amen_or_blessing": {
+   "value": "3/3",
+   "label": "candidate hygiene"
+  },
+  "first_line_complete_sentence": {
+   "value": "1/3",
+   "label": "free (our R8 keeps it as a house rule)"
+  },
+  "picture_cuts": {
+   "values": [
+    0,
+    6,
+    0
+   ],
+   "label": "free"
+  },
+  "captions": {
+   "value": "2/3",
+   "label": "free"
+  },
+  "explicit_cta": {
+   "value": "1/3",
+   "label": "free (R8: no CTA overlay)"
+  },
+  "scripture_quoted": {
+   "value": "2/3",
+   "label": "free"
+  }
+ },
+ "conflict_check": {
+  "language_and_line": "same",
+  "policy": "no risk found",
+  "coherence": "Shorts of our own long prayers"
+ }
+}
