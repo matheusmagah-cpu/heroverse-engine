@@ -1,0 +1,104 @@
+{
+ "version": "structure-evidence-v1",
+ "date": "2026-10-20",
+ "query": {
+  "tool": "vidiq_outliers",
+  "keyword": "Christian sleep prayer with scripture for hours, fall asleep in God's presence",
+  "contentType": "long",
+  "publishedWithin": "threeMonths",
+  "maxSubscribers": 200000,
+  "minViews": 20000
+ },
+ "winners_spoken_scripture_ge_2h": [
+  {
+   "video": "TRGA1Kk_W3U",
+   "channel": "Selah",
+   "subs": 18000,
+   "seconds": 12974,
+   "views": 310961,
+   "breakout": 120.3,
+   "title": "Don't Go to Sleep Worried… Let These Psalms Calm Your Heart"
+  },
+  {
+   "video": "G3Eb3mgxWqk",
+   "channel": "Selah",
+   "subs": 18000,
+   "seconds": 13556,
+   "views": 107117,
+   "breakout": 64.56,
+   "title": "If You're Overwhelmed, Sleep To These Psalms Tonight"
+  },
+  {
+   "video": "LFw8-P7jtxA",
+   "channel": "Faithful Rest",
+   "subs": 2210,
+   "seconds": 9489,
+   "views": 106555,
+   "breakout": 114.07,
+   "title": "Fall Asleep Without Worry… Jesus Is With You"
+  },
+  {
+   "video": "5vIkpwExKW0",
+   "channel": "Faithful Rest",
+   "subs": 2210,
+   "seconds": 7972,
+   "views": 68315,
+   "breakout": 53.66,
+   "title": "Play THESE Psalms All Night And Watch Your Stress Disappear"
+  },
+  {
+   "video": "SdoSJnYaQQ8",
+   "channel": "Scripture at Night",
+   "subs": 783,
+   "seconds": 10332,
+   "views": 115373,
+   "breakout": 589.96,
+   "title": "When You Need Rescuing, Let the Psalms Carry You to Sleep"
+  },
+  {
+   "video": "EajQi436zFs",
+   "channel": "Jesus Loves You Scriptures",
+   "subs": 10700,
+   "seconds": 28852,
+   "views": 123726,
+   "breakout": 13.16,
+   "title": "Play These Bible Verses All Night and Watch What God Does in Your Life"
+  }
+ ],
+ "weak_contrasts_same_shape": [
+  {
+   "video": "F6xqYAb0qYw",
+   "channel": "Faithful Rest",
+   "seconds": 8118,
+   "views": 3787,
+   "breakout": 4.7,
+   "title": "If You're Seeking Peace.. Sleep to God's Word Tonight"
+  },
+  {
+   "video": "MEXrA5uC_c0",
+   "channel": "Faithful Rest",
+   "seconds": 7561,
+   "views": 3010,
+   "breakout": 3.86,
+   "title": "Don't Sleep Overwhelmed, Let These Psalms Calm Your Heart"
+  },
+  {
+   "video": "jH_cxSZ1M_E",
+   "channel": "Faithful Rest",
+   "seconds": 7405,
+   "views": 3543,
+   "breakout": 2.84,
+   "title": "The Gospel of John (Full Book) | Peaceful Bible Reading with Rain Sounds for Sleep"
+  }
+ ],
+ "other_long_sleep_results": "music/sung variants (SLDNGAOSo6Q 2.7 h, BELmAerjz_4 3.1 h, wdRNitAZkoc 3.5 h, nuobKtBfw7I 4.1 h) and short bedtime prayers (5-9 min: fXhKzleJhxI, mtWtsL5hOLg, Z8ogwcMKnqY) also broke out; 10 of the 19 outliers are >= 2 h sleep videos",
+ "counts": {
+  "winners": 6,
+  "channels": 4,
+  "max_channel_share": "2/6 = 1/3",
+  "weak_contrasts": 3,
+  "weak_channels": 1
+ },
+ "reading": "SHAPE validated by count (SYSTEM 1.5: >=6 winners, >=4 channels, no channel > 1/3, >=3 weak). The weak contrasts share the shape, titles and channel, so length/shape is the entry ticket, not the separating driver; the separating driver (packaging, timing) is NOT measured. Watch-time lever: a 2-3 h sleep video accumulates far more watch time per viewer than a 26-min prayer (not measured on our channel yet).",
+ "weak_contrast_caveat": "all 3 weak contrasts come from one channel (Faithful Rest); more channels for weak contrasts are pending (#234 tool)"
+}
