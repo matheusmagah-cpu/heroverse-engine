@@ -155,3 +155,13 @@ predict how fast HeroVerse reaches YPP.
   - **Decision:** the night slot (00:00 UTC) moves to the sleep-scripture-long shape (2–3 h, original prayers and reflections ≥ 35 % of words, KJV readings) as soon as Dot delivers the first one. The morning slot stays at the validated guided prayer.
 - **Subscriber lever:** Shorts v2 (#231) and the bell strategy (#241). 66 subscribers a day needs roughly 2,000–6,000 Shorts views a day, at the 1–3 % subscribe rate seen on our July Shorts.
 - **Daily:** the daily analysis routine computes the needed pace against the measured pace and the projection for day 14 and day 30, and adjusts the next day's plan with this lever list.
+
+## Owner directive: 14 days, flexible format (2026-10-20 14:30 UTC)
+- **The goal is to meet the YPP requirements (1,000 subscribers + 4,000 public long-form watch hours) by day 14 (2026-10-31).** Day 30 (2026-11-16) is an exception, not the plan. Monetization itself is then YouTube's decision.
+- **The project is not locked to a format.** Only two things are fixed:
+  - the niche: English Christian prayer;
+  - coherence between posts.
+- Everything else is chosen by what mining, modeling and the daily analysis show, and can change from one day to the next: format, length, slot, cadence, the Shorts mix and packaging.
+- **How a format enters.** It enters production when mining shows it winning in our niche (count rule: winners and weak contrasts), or when our own measured results show it.
+- **Allocation** (which format in which slot, how many videos and Shorts) is adjusted **daily** from the numbers, with no waiting period.
+- **Quality and policy gates never change:** R1–R10, originality, the watched review, and no fear-bait.
