@@ -1,8 +1,8 @@
 {
  "version": "pilot-images-v2",
  "pilot_id": "pilot-008",
- "style": "soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
- "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "style": "photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon, painting, illustration, cartoon, flat, low resolution",
  "steps": 6,
  "guidance": 1.5,
  "width": 1344,
@@ -25,5 +25,66 @@
    "bg-lake"
   ]
  },
- "images": []
+ "images": [
+  {
+   "id": "bg-shepherd-pasture-moon",
+   "prompt": "Wide empty pasture beneath a visible full moon, silver grass along a low dry stone boundary, a sheltered valley beyond, tranquil night landscape, no people, no animals, no text",
+   "seed": 8000
+  },
+  {
+   "id": "bg-psalm-still-waters",
+   "prompt": "Still water in a sheltered meadow reflecting moonlight, soft reeds and a winding grassy bank, deep peaceful blue night, no people, no text",
+   "seed": 8001
+  },
+  {
+   "id": "bg-shepherd-valley-lantern",
+   "prompt": "A narrow path through a dark green valley lit by a small visible warm lantern on a stone ledge, open sky above, gentle reassuring scenery, no people, no text",
+   "seed": 8002
+  },
+  {
+   "id": "bg-psalm-resting-meadow",
+   "prompt": "Soft grass beneath an old spreading tree, quiet hill country at night with pale silver clouds, a protected place of rest, no people, no text",
+   "seed": 8003
+  },
+  {
+   "id": "bg-shepherd-stone-spring",
+   "prompt": "Clear spring water emerging between smooth stones beside a pasture, moon reflections on the ripples, tiny white flowers and moss, peaceful night scenery, no people, no text",
+   "seed": 8004
+  },
+  {
+   "id": "bg-psalm-hill-path",
+   "prompt": "A gently curving path over grassy hills beneath a calm starry sky, warm light from a distant unoccupied cottage window, serene devotional landscape, no people, no text",
+   "seed": 8005
+  },
+  {
+   "id": "bg-shepherd-shelter-oaks",
+   "prompt": "A grove of oak trees sheltering a quiet open glade, silver leaves under moonlight and soft mist near the ground, tranquil natural scenery, no people, no text",
+   "seed": 8006
+  },
+  {
+   "id": "bg-psalm-dawn-pasture",
+   "prompt": "First pale dawn beyond an open pasture, soft gold light touching tall grass and a clear stream, peaceful hope after the night, no people, no text",
+   "seed": 8007
+  },
+  {
+   "id": "bg-shepherd-grass-dew",
+   "prompt": "Moonlit drops of dew on a wide green pasture, soft hills and a calm stream beyond, no people, no text",
+   "seed": 8008
+  },
+  {
+   "id": "bg-psalm-sheltered-cove",
+   "prompt": "A sheltered cove of still water beside grassy banks under a visible moon, no people, no text",
+   "seed": 8009
+  },
+  {
+   "id": "bg-shepherd-lamp-gate",
+   "prompt": "An empty pasture gate beside a visible warm oil lamp, a gentle path and silver night sky beyond, no people, no text",
+   "seed": 8010
+  },
+  {
+   "id": "bg-psalm-hills-moonrise",
+   "prompt": "A visible moon rising above peaceful grassy hill country, delicate mist in the hollows, no people, no text",
+   "seed": 8011
+  }
+ ]
 }
