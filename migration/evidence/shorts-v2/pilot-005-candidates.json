@@ -1,0 +1,1645 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-005",
+ "rubric_model": null,
+ "candidates_considered": 54,
+ "shortlist": [
+  {
+   "start": 563.353,
+   "end": 602.745,
+   "sentences": [
+    {
+     "segment": "reflection-5",
+     "text": "The armour is his, not yours.",
+     "start": 563.353,
+     "end": 566.127
+    },
+    {
+     "segment": "reflection-5",
+     "text": "Your part is to put it on, and to stand.",
+     "start": 566.307,
+     "end": 569.677
+    },
+    {
+     "segment": "scripture-10",
+     "text": "Thou art my hiding place;",
+     "start": 571.057,
+     "end": 573.276
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt preserve me from trouble;",
+     "start": 573.456,
+     "end": 576.208
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt compass me about with songs of deliverance.",
+     "start": 576.388,
+     "end": 580.271
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "A hiding place and songs of deliverance.",
+     "start": 581.951,
+     "end": 585.3
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "God does not only hide you from trouble.",
+     "start": 585.48,
+     "end": 588.808
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "He surrounds you with music while you wait.",
+     "start": 588.988,
+     "end": 592.103
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "Even in a hard day, there can be a song underneath it:",
+     "start": 592.283,
+     "end": 596.443
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
+     "start": 596.623,
+     "end": 602.745
+    }
+   ],
+   "segments": [
+    "reflection-5",
+    "scripture-10",
+    "reflection-hiding"
+   ],
+   "text": "The armour is his, not yours. Your part is to put it on, and to stand. Thou art my hiding place; thou shalt preserve me from trouble; thou shalt compass me about with songs of deliverance. A hiding place and songs of deliverance. God does not only hide you from trouble. He surrounds you with music while you wait. Even in a hard day, there can be a song underneath it: the quiet confidence that he has you, and that this will not be the end of the story.",
+   "reference": "Psalm 32:7 (KJV)",
+   "measured_score": 0.8487,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6741573033707865,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.9756800000000021
+   },
+   "final_score": 0.8487,
+   "hook": "The armour is his, not yours.",
+   "title": "The armour is his, not yours."
+  },
+  {
+   "start": 1088.684,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "Peace on your feet.",
+     "start": 1088.684,
+     "end": 1090.497
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Faith as your shield.",
+     "start": 1090.677,
+     "end": 1092.533
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "Peace on your feet. Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7791,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.37037037037037035,
+    "scripture": 1.0,
+    "promise": 0.9259259259259259,
+    "resolution": 0.4,
+    "length_fit": 0.709399999999996
+   },
+   "final_score": 0.7791,
+   "hook": "Peace on your feet.",
+   "title": "Peace on your feet."
+  },
+  {
+   "start": 1393.612,
+   "end": 1440.736,
+   "sentences": [
+    {
+     "segment": "day-reflect-121",
+     "text": "Thy going out and thy coming in.",
+     "start": 1393.612,
+     "end": 1396.236
+    },
+    {
+     "segment": "day-reflect-121",
+     "text": "Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey.",
+     "start": 1396.416,
+     "end": 1404.501
+    },
+    {
+     "segment": "day-reflect-121",
+     "text": "Carry that with you.",
+     "start": 1404.681,
+     "end": 1406.409
+    },
+    {
+     "segment": "payoff",
+     "text": "Here is one thing to take into your day.",
+     "start": 1408.089,
+     "end": 1411.289
+    },
+    {
+     "segment": "payoff",
+     "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
+     "start": 1411.469,
+     "end": 1419.235
+    },
+    {
+     "segment": "payoff",
+     "text": "Six words.",
+     "start": 1419.415,
+     "end": 1420.908
+    },
+    {
+     "segment": "payoff",
+     "text": "Let them mark every doorway you walk through.",
+     "start": 1421.088,
+     "end": 1424.437
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing.",
+     "start": 1425.817,
+     "end": 1428.207
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+     "start": 1428.387,
+     "end": 1435.32
+    },
+    {
+     "segment": "blessing",
+     "text": "Go into this day covered by his peace.",
+     "start": 1435.5,
+     "end": 1438.103
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 1438.283,
+     "end": 1440.736
+    }
+   ],
+   "segments": [
+    "day-reflect-121",
+    "payoff",
+    "blessing"
+   ],
+   "text": "Thy going out and thy coming in. Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey. Carry that with you. Here is one thing to take into your day. Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge. Six words. Let them mark every doorway you walk through. And now receive this blessing. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore. Go into this day covered by his peace. In Jesus' name, amen.",
+   "reference": "Psalm 121:8 (KJV)",
+   "measured_score": 0.7778,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.8411214953271027,
+    "scripture": 1.0,
+    "promise": 0.7009345794392523,
+    "resolution": 1.0,
+    "length_fit": 0.715039999999999
+   },
+   "final_score": 0.7778,
+   "hook": "Thy going out and thy coming",
+   "title": "Thy going out and thy coming"
+  },
+  {
+   "start": 1086.051,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "Righteousness over your heart.",
+     "start": 1086.051,
+     "end": 1088.504
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Peace on your feet.",
+     "start": 1088.684,
+     "end": 1090.497
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Faith as your shield.",
+     "start": 1090.677,
+     "end": 1092.533
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "Righteousness over your heart. Peace on your feet. Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7767,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.4464285714285714,
+    "scripture": 1.0,
+    "promise": 0.8928571428571429,
+    "resolution": 0.4,
+    "length_fit": 0.6040799999999944
+   },
+   "final_score": 0.7767
+  },
+  {
+   "start": 1083.951,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "Truth as your belt.",
+     "start": 1083.951,
+     "end": 1085.871
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Righteousness over your heart.",
+     "start": 1086.051,
+     "end": 1088.504
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Peace on your feet.",
+     "start": 1088.684,
+     "end": 1090.497
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Faith as your shield.",
+     "start": 1090.677,
+     "end": 1092.533
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "Truth as your belt. Righteousness over your heart. Peace on your feet. Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7758,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5172413793103448,
+    "scripture": 1.0,
+    "promise": 0.8620689655172413,
+    "resolution": 0.4,
+    "length_fit": 0.5200799999999981
+   },
+   "final_score": 0.7758
+  },
+  {
+   "start": 287.088,
+   "end": 326.363,
+   "sentences": [
+    {
+     "segment": "prayer-family",
+     "text": "Cover them with your protection.",
+     "start": 287.088,
+     "end": 289.499
+    },
+    {
+     "segment": "prayer-family",
+     "text": "Guard their health, their relationships and their hearts.",
+     "start": 289.679,
+     "end": 293.753
+    },
+    {
+     "segment": "prayer-family",
+     "text": "Where any of them are far from you, draw them gently closer.",
+     "start": 293.933,
+     "end": 298.285
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Lord, I pray especially for the children.",
+     "start": 299.665,
+     "end": 302.737
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Watch over them at school, on the playground, online and in every friendship.",
+     "start": 302.917,
+     "end": 308.635
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Protect their innocence.",
+     "start": 308.815,
+     "end": 310.692
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Surround them with good influences and kind adults.",
+     "start": 310.872,
+     "end": 315.117
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Let them grow up knowing they are safe in your love.",
+     "start": 315.297,
+     "end": 318.903
+    },
+    {
+     "segment": "scripture-6",
+     "text": "The angel of the LORD encampeth round about them that fear him, and delivereth them.",
+     "start": 320.283,
+     "end": 326.363
+    }
+   ],
+   "segments": [
+    "prayer-family",
+    "prayer-children",
+    "scripture-6"
+   ],
+   "text": "Cover them with your protection. Guard their health, their relationships and their hearts. Where any of them are far from you, draw them gently closer. Lord, I pray especially for the children. Watch over them at school, on the playground, online and in every friendship. Protect their innocence. Surround them with good influences and kind adults. Let them grow up knowing they are safe in your love. The angel of the LORD encampeth round about them that fear him, and delivereth them.",
+   "reference": "Psalm 34:7 (KJV)",
+   "measured_score": 0.773,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.3658536585365853,
+    "scripture": 1.0,
+    "promise": 0.6097560975609756,
+    "resolution": 0.4,
+    "length_fit": 0.9709999999999991
+   },
+   "final_score": 0.773
+  },
+  {
+   "start": 733.079,
+   "end": 771.095,
+   "sentences": [
+    {
+     "segment": "reflection-6",
+     "text": "You are protected because you are his.",
+     "start": 733.079,
+     "end": 736.044
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you, Father, for every time you have protected me without my even knowing it.",
+     "start": 737.424,
+     "end": 743.355
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "The accidents that did not happen.",
+     "start": 743.535,
+     "end": 746.201
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "The dangers I never saw.",
+     "start": 746.381,
+     "end": 748.664
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "Thank you for keeping me until this morning.",
+     "start": 748.844,
+     "end": 752.151
+    },
+    {
+     "segment": "prayer-thanks",
+     "text": "I trust you to keep me today.",
+     "start": 752.331,
+     "end": 754.699
+    },
+    {
+     "segment": "prayer-purpose",
+     "text": "Lord, make me a shelter for others today.",
+     "start": 756.079,
+     "end": 759.193
+    },
+    {
+     "segment": "prayer-purpose",
+     "text": "Let me notice the person who feels unsafe, and offer kindness, help and prayer.",
+     "start": 759.373,
+     "end": 765.624
+    },
+    {
+     "segment": "prayer-purpose",
+     "text": "As you protect me, let me protect the weak and speak up for those who cannot.",
+     "start": 765.804,
+     "end": 771.095
+    }
+   ],
+   "segments": [
+    "reflection-6",
+    "prayer-thanks",
+    "prayer-purpose"
+   ],
+   "text": "You are protected because you are his. Thank you, Father, for every time you have protected me without my even knowing it. The accidents that did not happen. The dangers I never saw. Thank you for keeping me until this morning. I trust you to keep me today. Lord, make me a shelter for others today. Let me notice the person who feels unsafe, and offer kindness, help and prayer. As you protect me, let me protect the weak and speak up for those who cannot.",
+   "reference": null,
+   "measured_score": 0.7714,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.813953488372093,
+    "scripture": 0.4,
+    "promise": 0.872093023255814,
+    "resolution": 0.4,
+    "length_fit": 0.920640000000003
+   },
+   "final_score": 0.7714
+  },
+  {
+   "start": 1081.104,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "As you do, put on the armour too.",
+     "start": 1081.104,
+     "end": 1083.771
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Truth as your belt.",
+     "start": 1083.951,
+     "end": 1085.871
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Righteousness over your heart.",
+     "start": 1086.051,
+     "end": 1088.504
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Peace on your feet.",
+     "start": 1088.684,
+     "end": 1090.497
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Faith as your shield.",
+     "start": 1090.677,
+     "end": 1092.533
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "As you do, put on the armour too. Truth as your belt. Righteousness over your heart. Peace on your feet. Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7659,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.564516129032258,
+    "scripture": 1.0,
+    "promise": 0.8064516129032258,
+    "resolution": 0.4,
+    "length_fit": 0.4061999999999989
+   },
+   "final_score": 0.7659
+  },
+  {
+   "start": 79.239,
+   "end": 109.98,
+   "sentences": [
+    {
+     "segment": "reflection-1",
+     "text": "Today, you can say it too.",
+     "start": 79.239,
+     "end": 81.479
+    },
+    {
+     "segment": "prayer-1",
+     "text": "So let us pray.",
+     "start": 82.859,
+     "end": 84.587
+    },
+    {
+     "segment": "prayer-1",
+     "text": "Lord, this morning I choose to dwell in your shelter.",
+     "start": 84.767,
+     "end": 88.671
+    },
+    {
+     "segment": "prayer-1",
+     "text": "You are my refuge and my fortress.",
+     "start": 88.851,
+     "end": 91.88
+    },
+    {
+     "segment": "prayer-1",
+     "text": "My God, in you I trust.",
+     "start": 92.06,
+     "end": 94.321
+    },
+    {
+     "segment": "prayer-1",
+     "text": "I do not begin this day relying on my own strength or my own plans.",
+     "start": 94.501,
+     "end": 99.856
+    },
+    {
+     "segment": "prayer-1",
+     "text": "I begin it hidden in you.",
+     "start": 100.036,
+     "end": 102.127
+    },
+    {
+     "segment": "scripture-2",
+     "text": "The name of the LORD is a strong tower:",
+     "start": 103.507,
+     "end": 106.557
+    },
+    {
+     "segment": "scripture-2",
+     "text": "the righteous runneth into it, and is safe.",
+     "start": 106.737,
+     "end": 109.98
+    }
+   ],
+   "segments": [
+    "reflection-1",
+    "prayer-1",
+    "scripture-2"
+   ],
+   "text": "Today, you can say it too. So let us pray. Lord, this morning I choose to dwell in your shelter. You are my refuge and my fortress. My God, in you I trust. I do not begin this day relying on my own strength or my own plans. I begin it hidden in you. The name of the LORD is a strong tower: the righteous runneth into it, and is safe.",
+   "reference": "Proverbs 18:10 (KJV)",
+   "measured_score": 0.7638,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.704225352112676,
+    "scripture": 1.0,
+    "promise": 0.352112676056338,
+    "resolution": 0.4,
+    "length_fit": 0.62964
+   },
+   "final_score": 0.7638
+  },
+  {
+   "start": 1090.677,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "Faith as your shield.",
+     "start": 1090.677,
+     "end": 1092.533
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7543,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.28846153846153844,
+    "scripture": 1.0,
+    "promise": 0.7211538461538461,
+    "resolution": 0.4,
+    "length_fit": 0.7891199999999935
+   },
+   "final_score": 0.7543
+  },
+  {
+   "start": 92.06,
+   "end": 132.903,
+   "sentences": [
+    {
+     "segment": "prayer-1",
+     "text": "My God, in you I trust.",
+     "start": 92.06,
+     "end": 94.321
+    },
+    {
+     "segment": "prayer-1",
+     "text": "I do not begin this day relying on my own strength or my own plans.",
+     "start": 94.501,
+     "end": 99.856
+    },
+    {
+     "segment": "prayer-1",
+     "text": "I begin it hidden in you.",
+     "start": 100.036,
+     "end": 102.127
+    },
+    {
+     "segment": "scripture-2",
+     "text": "The name of the LORD is a strong tower:",
+     "start": 103.507,
+     "end": 106.557
+    },
+    {
+     "segment": "scripture-2",
+     "text": "the righteous runneth into it, and is safe.",
+     "start": 106.737,
+     "end": 109.98
+    },
+    {
+     "segment": "reflection-2",
+     "text": "A tower in the ancient world was where people ran when danger came.",
+     "start": 111.66,
+     "end": 116.993
+    },
+    {
+     "segment": "reflection-2",
+     "text": "And the strongest tower, Solomon says, is not made of stone.",
+     "start": 117.173,
+     "end": 122.08
+    },
+    {
+     "segment": "reflection-2",
+     "text": "It is the name of the Lord.",
+     "start": 122.26,
+     "end": 124.564
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Whenever today feels unsafe, you can run into that name with one short prayer:",
+     "start": 124.744,
+     "end": 130.931
+    },
+    {
+     "segment": "reflection-2",
+     "text": "Jesus, help me.",
+     "start": 131.111,
+     "end": 132.903
+    }
+   ],
+   "segments": [
+    "prayer-1",
+    "scripture-2",
+    "reflection-2"
+   ],
+   "text": "My God, in you I trust. I do not begin this day relying on my own strength or my own plans. I begin it hidden in you. The name of the LORD is a strong tower: the righteous runneth into it, and is safe. A tower in the ancient world was where people ran when danger came. And the strongest tower, Solomon says, is not made of stone. It is the name of the Lord. Whenever today feels unsafe, you can run into that name with one short prayer: Jesus, help me.",
+   "reference": "Proverbs 18:10 (KJV)",
+   "measured_score": 0.7327,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.3260869565217391,
+    "scripture": 1.0,
+    "promise": 0.2717391304347826,
+    "resolution": 0.4,
+    "length_fit": 0.9662800000000005
+   },
+   "final_score": 0.7327
+  },
+  {
+   "start": 1092.713,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "Salvation as your helmet. The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7271,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.19999999999999998,
+    "scripture": 1.0,
+    "promise": 0.5,
+    "resolution": 0.4,
+    "length_fit": 0.8705599999999959
+   },
+   "final_score": 0.7271
+  },
+  {
+   "start": 1095.261,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.725,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.10416666666666666,
+    "scripture": 1.0,
+    "promise": 0.5208333333333334,
+    "resolution": 0.4,
+    "length_fit": 0.9724799999999959
+   },
+   "final_score": 0.725
+  },
+  {
+   "start": 493.135,
+   "end": 526.332,
+   "sentences": [
+    {
+     "segment": "prayer-words",
+     "text": "Let what I say build people up.",
+     "start": 493.135,
+     "end": 495.503
+    },
+    {
+     "segment": "prayer-words",
+     "text": "Let my words carry your peace into every room I enter.",
+     "start": 495.683,
+     "end": 499.672
+    },
+    {
+     "segment": "prayer-emotions",
+     "text": "Lord, protect my heart from bitterness, discouragement and despair.",
+     "start": 501.052,
+     "end": 506.044
+    },
+    {
+     "segment": "prayer-emotions",
+     "text": "When disappointment comes today, do not let it settle in.",
+     "start": 506.224,
+     "end": 510.597
+    },
+    {
+     "segment": "prayer-emotions",
+     "text": "Keep my heart soft toward you and toward others, and fill it again and again with hope.",
+     "start": 510.777,
+     "end": 516.964
+    },
+    {
+     "segment": "scripture-8",
+     "text": "For I the LORD thy God will hold thy right hand, saying unto thee, Fear not;",
+     "start": 518.344,
+     "end": 524.573
+    },
+    {
+     "segment": "scripture-8",
+     "text": "I will help thee.",
+     "start": 524.753,
+     "end": 526.332
+    }
+   ],
+   "segments": [
+    "prayer-words",
+    "prayer-emotions",
+    "scripture-8"
+   ],
+   "text": "Let what I say build people up. Let my words carry your peace into every room I enter. Lord, protect my heart from bitterness, discouragement and despair. When disappointment comes today, do not let it settle in. Keep my heart soft toward you and toward others, and fill it again and again with hope. For I the LORD thy God will hold thy right hand, saying unto thee, Fear not; I will help thee.",
+   "reference": "Isaiah 41:13 (KJV)",
+   "measured_score": 0.7233,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.2702702702702703,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.7278800000000001
+   },
+   "final_score": 0.7233
+  },
+  {
+   "start": 1157.785,
+   "end": 1201.16,
+   "sentences": [
+    {
+     "segment": "day-romans-8",
+     "text": "What shall we then say to these things?",
+     "start": 1157.785,
+     "end": 1160.303
+    },
+    {
+     "segment": "day-romans-8",
+     "text": "If God be for us, who can be against us?",
+     "start": 1160.483,
+     "end": 1163.917
+    },
+    {
+     "segment": "day-romans-8",
+     "text": "Who shall separate us from the love of Christ?",
+     "start": 1164.097,
+     "end": 1167.297
+    },
+    {
+     "segment": "day-romans-8",
+     "text": "shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword?",
+     "start": 1167.477,
+     "end": 1174.88
+    },
+    {
+     "segment": "day-romans-8",
+     "text": "Nay, in all these things we are more than conquerors through him that loved us.",
+     "start": 1175.06,
+     "end": 1180.735
+    },
+    {
+     "segment": "day-romans-8",
+     "text": "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.",
+     "start": 1180.915,
+     "end": 1201.16
+    }
+   ],
+   "segments": [
+    "day-romans-8"
+   ],
+   "text": "What shall we then say to these things? If God be for us, who can be against us? Who shall separate us from the love of Christ? shall tribulation, or distress, or persecution, or famine, or nakedness, or peril, or sword? Nay, in all these things we are more than conquerors through him that loved us. For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.",
+   "reference": "Romans 8:31, 35, 37-39 (KJV)",
+   "measured_score": 0.7186,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.0,
+    "scripture": 1.0,
+    "promise": 0.7211538461538461,
+    "resolution": 0.4,
+    "length_fit": 0.865
+   },
+   "final_score": 0.7186
+  }
+ ],
+ "chosen": [
+  {
+   "start": 563.353,
+   "end": 602.745,
+   "sentences": [
+    {
+     "segment": "reflection-5",
+     "text": "The armour is his, not yours.",
+     "start": 563.353,
+     "end": 566.127
+    },
+    {
+     "segment": "reflection-5",
+     "text": "Your part is to put it on, and to stand.",
+     "start": 566.307,
+     "end": 569.677
+    },
+    {
+     "segment": "scripture-10",
+     "text": "Thou art my hiding place;",
+     "start": 571.057,
+     "end": 573.276
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt preserve me from trouble;",
+     "start": 573.456,
+     "end": 576.208
+    },
+    {
+     "segment": "scripture-10",
+     "text": "thou shalt compass me about with songs of deliverance.",
+     "start": 576.388,
+     "end": 580.271
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "A hiding place and songs of deliverance.",
+     "start": 581.951,
+     "end": 585.3
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "God does not only hide you from trouble.",
+     "start": 585.48,
+     "end": 588.808
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "He surrounds you with music while you wait.",
+     "start": 588.988,
+     "end": 592.103
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "Even in a hard day, there can be a song underneath it:",
+     "start": 592.283,
+     "end": 596.443
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "the quiet confidence that he has you, and that this will not be the end of the story.",
+     "start": 596.623,
+     "end": 602.745
+    }
+   ],
+   "segments": [
+    "reflection-5",
+    "scripture-10",
+    "reflection-hiding"
+   ],
+   "text": "The armour is his, not yours. Your part is to put it on, and to stand. Thou art my hiding place; thou shalt preserve me from trouble; thou shalt compass me about with songs of deliverance. A hiding place and songs of deliverance. God does not only hide you from trouble. He surrounds you with music while you wait. Even in a hard day, there can be a song underneath it: the quiet confidence that he has you, and that this will not be the end of the story.",
+   "reference": "Psalm 32:7 (KJV)",
+   "measured_score": 0.8487,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6741573033707865,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.9756800000000021
+   },
+   "final_score": 0.8487,
+   "hook": "The armour is his, not yours.",
+   "title": "The armour is his, not yours."
+  },
+  {
+   "start": 1088.684,
+   "end": 1135.949,
+   "sentences": [
+    {
+     "segment": "day-reflect-6",
+     "text": "Peace on your feet.",
+     "start": 1088.684,
+     "end": 1090.497
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Faith as your shield.",
+     "start": 1090.677,
+     "end": 1092.533
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "Salvation as your helmet.",
+     "start": 1092.713,
+     "end": 1095.081
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "The word of God in your hand.",
+     "start": 1095.261,
+     "end": 1097.651
+    },
+    {
+     "segment": "day-reflect-6",
+     "text": "And then, having done all, stand.",
+     "start": 1097.831,
+     "end": 1100.391
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "Listen to what God says to the people he loves.",
+     "start": 1102.071,
+     "end": 1105.377
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+     "start": 1105.557,
+     "end": 1113.408
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "for I have redeemed thee, I have called thee by thy name;",
+     "start": 1113.588,
+     "end": 1117.897
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "thou art mine.",
+     "start": 1118.077,
+     "end": 1119.741
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "When thou passest through the waters, I will be with thee;",
+     "start": 1119.921,
+     "end": 1124.039
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "and through the rivers, they shall not overflow thee:",
+     "start": 1124.219,
+     "end": 1127.888
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "when thou walkest through the fire, thou shalt not be burned;",
+     "start": 1128.068,
+     "end": 1132.548
+    },
+    {
+     "segment": "day-isaiah-43",
+     "text": "neither shall the flame kindle upon thee.",
+     "start": 1132.728,
+     "end": 1135.949
+    }
+   ],
+   "segments": [
+    "day-reflect-6",
+    "day-isaiah-43"
+   ],
+   "text": "Peace on your feet. Faith as your shield. Salvation as your helmet. The word of God in your hand. And then, having done all, stand. Listen to what God says to the people he loves. But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine. When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.",
+   "reference": "Isaiah 43:1-2 (KJV)",
+   "measured_score": 0.7791,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.37037037037037035,
+    "scripture": 1.0,
+    "promise": 0.9259259259259259,
+    "resolution": 0.4,
+    "length_fit": 0.709399999999996
+   },
+   "final_score": 0.7791,
+   "hook": "Peace on your feet.",
+   "title": "Peace on your feet."
+  },
+  {
+   "start": 1393.612,
+   "end": 1440.736,
+   "sentences": [
+    {
+     "segment": "day-reflect-121",
+     "text": "Thy going out and thy coming in.",
+     "start": 1393.612,
+     "end": 1396.236
+    },
+    {
+     "segment": "day-reflect-121",
+     "text": "Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey.",
+     "start": 1396.416,
+     "end": 1404.501
+    },
+    {
+     "segment": "day-reflect-121",
+     "text": "Carry that with you.",
+     "start": 1404.681,
+     "end": 1406.409
+    },
+    {
+     "segment": "payoff",
+     "text": "Here is one thing to take into your day.",
+     "start": 1408.089,
+     "end": 1411.289
+    },
+    {
+     "segment": "payoff",
+     "text": "Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge.",
+     "start": 1411.469,
+     "end": 1419.235
+    },
+    {
+     "segment": "payoff",
+     "text": "Six words.",
+     "start": 1419.415,
+     "end": 1420.908
+    },
+    {
+     "segment": "payoff",
+     "text": "Let them mark every doorway you walk through.",
+     "start": 1421.088,
+     "end": 1424.437
+    },
+    {
+     "segment": "blessing",
+     "text": "And now receive this blessing.",
+     "start": 1425.817,
+     "end": 1428.207
+    },
+    {
+     "segment": "blessing",
+     "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+     "start": 1428.387,
+     "end": 1435.32
+    },
+    {
+     "segment": "blessing",
+     "text": "Go into this day covered by his peace.",
+     "start": 1435.5,
+     "end": 1438.103
+    },
+    {
+     "segment": "blessing",
+     "text": "In Jesus' name, amen.",
+     "start": 1438.283,
+     "end": 1440.736
+    }
+   ],
+   "segments": [
+    "day-reflect-121",
+    "payoff",
+    "blessing"
+   ],
+   "text": "Thy going out and thy coming in. Every time you leave a place today and every time you arrive, the Lord is there, at both ends of the journey. Carry that with you. Here is one thing to take into your day. Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge. Six words. Let them mark every doorway you walk through. And now receive this blessing. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore. Go into this day covered by his peace. In Jesus' name, amen.",
+   "reference": "Psalm 121:8 (KJV)",
+   "measured_score": 0.7778,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.8411214953271027,
+    "scripture": 1.0,
+    "promise": 0.7009345794392523,
+    "resolution": 1.0,
+    "length_fit": 0.715039999999999
+   },
+   "final_score": 0.7778,
+   "hook": "Thy going out and thy coming",
+   "title": "Thy going out and thy coming"
+  }
+ ],
+ "selection_mode": "MEASURED_ONLY",
+ "input_sha256": {
+  "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
+  "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a"
+ },
+ "structural_counts": {
+  "opening_starts_total": 331,
+  "opening_starts_accepted": 63,
+  "opening_rejections": {
+   "OPENING_OVER_3S": 122,
+   "EMPTY_OR_INCOMPLETE_OPENING": 61,
+   "CONTINUATION_OPENING_LINE": 24,
+   "CONTEXT_OPENER": 46,
+   "DEPENDENT_OPENING_REFERENCE": 15
+  },
+  "window_pairs_total": 354,
+  "window_pairs_accepted": 54,
+  "window_rejections": {
+   "CTA_OR_TRANSITION_SEGMENT": 55,
+   "INCOMPLETE_ENDING": 12,
+   "UNRESOLVED_SEGMENT_END": 110,
+   "PARTIAL_SCRIPTURE": 123
+  }
+ },
+ "reason": null
+}

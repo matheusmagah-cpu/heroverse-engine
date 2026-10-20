@@ -10,9 +10,12 @@ Each Short gets its review in shorts.json; only the best N passing Shorts are
 marked publish=true. A failing Short is never "fixed" by editing the rubric.
 usage: shorts_review.py SHORTS_DIR [N]
 """
+from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import sys
 import time
 import urllib.request
@@ -82,6 +85,53 @@ def review(path, record, key):
     return r
 
 
+def failure_record(error, path=None):
+    """Project categorical evidence only; exception prose is never inspected.
+
+    Adapted from PR204, with exact types, a UTC failure clock and a digest of
+    local output bytes. A missing or unreadable output cannot supply a digest.
+    """
+    result = {"status": f"NOT_REVIEWED_{type(error).__name__}",
+              "error_code": "UNKNOWN",
+              "failed_at": datetime.now(timezone.utc).isoformat(),
+              "output_sha256": None}
+    code = getattr(error, "code", None)
+    if type(code) is str and (code in {"PROVIDER_CALL_FAILED", "NO_FREE_MODEL", "UNPARSEABLE_MODEL_OUTPUT"}
+                             or re.fullmatch(
+                                 r"HTTP_[1-5][0-9]{2}_(?:INVALID_ARGUMENT|UNAUTHENTICATED|PERMISSION_DENIED|"
+                                 r"NOT_FOUND|RESOURCE_EXHAUSTED|UNAVAILABLE)?(?::QUOTA)?", code)):
+        result["error_code"] = code
+    diagnostic = getattr(error, "diagnostic", None)
+    safe = {}
+    if type(diagnostic) is dict:
+        value = diagnostic.get("http_status")
+        if type(value) is int and 100 <= value <= 599:
+            safe["http_status"] = value
+        value = diagnostic.get("provider_status")
+        if type(value) is str and value in ("INVALID_ARGUMENT", "UNAUTHENTICATED", "PERMISSION_DENIED",
+                                            "NOT_FOUND", "RESOURCE_EXHAUSTED", "UNAVAILABLE"):
+            safe["provider_status"] = value
+        for name in ("body_truncated", "raw_body_retained", "sanitized"):
+            if type(diagnostic.get(name)) is bool:
+                safe[name] = diagnostic[name]
+        value = diagnostic.get("body_parse_status")
+        if type(value) is str and value in ("NOT_PARSED", "INVALID_JSON_OR_SHAPE", "JSON_ERROR_OBJECT"):
+            safe["body_parse_status"] = value
+        value = diagnostic.get("body_bytes_read")
+        if type(value) is int:
+            safe["body_bytes_read"] = max(0, min(8193, value))
+    result["provider_diagnostic"] = safe
+    try:
+        digest = hashlib.sha256()
+        with Path(path).open("rb") as output:
+            for chunk in iter(lambda: output.read(1024 * 1024), b""):
+                digest.update(chunk)
+        result["output_sha256"] = digest.hexdigest()
+    except Exception:
+        result["output_hash_error"] = "FILE_UNREADABLE"
+    return result
+
+
 def main(shorts_dir, n="3"):
     d = Path(shorts_dir)
     spec = json.loads((d / "shorts.json").read_text())
@@ -94,7 +144,10 @@ def main(shorts_dir, n="3"):
         try:
             rec["review"] = review(d / rec["file"], rec, key) if key else {"status": "NOT_REVIEWED_NO_KEY"}
         except Exception as e:
-            rec["review"] = {"status": f"NOT_REVIEWED_{type(e).__name__}"}
+            previous = rec.get("review")
+            if isinstance(previous, dict) and previous.get("status") == "FAIL":
+                rec["previous_editorial_review"] = previous
+            rec["review"] = failure_record(e, d / rec["file"])
     passing = sorted([r for r in spec["shorts"] if r["review"].get("status") == "PASS"],
                      key=lambda r: (r["review"]["overall"], r["selection"].get("final_score") or 0), reverse=True)
     keep = {r["file"] for r in passing[:int(n)]}

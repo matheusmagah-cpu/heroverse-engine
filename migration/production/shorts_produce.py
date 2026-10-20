@@ -26,7 +26,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pilot_render import RATE_OUT, MUSIC_OFFSET, run, sha256, probe_duration  # noqa: E402
 from still_render import ts, ass_text, chunks, KJV  # noqa: E402
-from shorts_select import CONTEXT_START, FULL_STOP, NOT_IN_SHORTS  # noqa: E402
+from shorts_select import CONTEXT_START, FULL_STOP, NOT_IN_SHORTS, validate_candidate  # noqa: E402
 
 VW, VH = 1080, 1920
 FPS = 30
@@ -245,9 +245,17 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out):
             "-c:a", "aac", "-b:a", "160k", "-ar", str(RATE_OUT), "-t", f"{dur:.3f}", "-movflags", "+faststart", str(out)]
 
 
-def produce(work, moment, index, script, images, figure, music, out, depth_model=None, timeline_sentences=None):
+def produce(work, moment, index, script, images, figure, music, out, depth_model=None, timeline_sentences=None, *, script_refs=None):
     """figure and depth_model are kept for interface compatibility; R1/R8 forbid the figure, and the Short
     uses one continuous zoom instead of per-scene parallax moves."""
+    if timeline_sentences is None or script_refs is None:
+        raise ValueError("FULL_SOURCE_REQUIRED")
+    authoritative_refs = {s["id"]: s.get("reference") for s in script["segments"]}
+    if script_refs != authoritative_refs:
+        raise ValueError("SOURCE_REFS_MISMATCH")
+    moment, reason = validate_candidate(timeline_sentences, authoritative_refs, moment)
+    if reason:
+        raise ValueError(reason)
     import cinematic
     dur = moment["end"] - moment["start"] + TAIL_S
     tmp = out / f"tmp-{index:02d}"
@@ -277,10 +285,13 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
             "text": " ".join(s["text"] for s in moment["sentences"])}
 
 
-def snap_all(chosen, sentences):
+def snap_all(chosen, sentences, refs=None):
     moments, rejected = [], []
     for m in chosen:
-        snapped, why = snap(m, sentences)
+        if refs is not None:
+            snapped, why = validate_candidate(sentences, refs, m)
+        else:
+            snapped, why = snap(m, sentences)
         if snapped:
             moments.append(snapped)
         else:
@@ -294,12 +305,13 @@ def main(work, selection, script_path, images_dir, figure, music, out_dir, depth
     script = json.loads(Path(script_path).read_text())
     sel = json.loads(Path(selection).read_text())
     timeline = json.loads((work / "timeline.json").read_text())  # the sentence clock is required (R8)
-    moments, rejected = snap_all(sel["chosen"], timeline["sentences"])
+    refs = {s["id"]: s.get("reference") for s in script["segments"]}
+    moments, rejected = snap_all(sel["chosen"], timeline["sentences"], refs)
     if rejected:
         print(json.dumps({"rejected_r8": rejected}))
     if not moments:
         raise SystemExit("NO_SHORT_MEETS_R8")
-    records = [produce(work, m, i, script, Path(images_dir), figure, music, out, depth_model, timeline["sentences"])
+    records = [produce(work, m, i, script, Path(images_dir), figure, music, out, depth_model, timeline["sentences"], script_refs=refs)
                for i, m in enumerate(moments)]
     (out / "shorts.json").write_text(json.dumps({"version": "shorts-produce-v2-r8", "source_pilot": script["pilot_id"],
                                                  "selection_rubric_model": sel.get("rubric_model"),

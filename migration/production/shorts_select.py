@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Choose the best Shorts moments of a long video (analysis, not a blind cut).
 
-1. Every candidate window of whole sentences (MIN_S..MAX_S) that can stand alone:
-   it never opens on a word that leans on earlier context and ends on a full
-   sentence.
+1. Structurally eligible windows of whole sentences (MIN_S..MAX_S), with a closed
+   opening-reference heuristic and a complete segment/explicit prayer ending.
+   This is not semantic comprehension, acoustic QA or editorial acceptance.
 2. Measured features per candidate (computed here):
    opening strength (short first sentence, direct address or question), second
    person density, scripture inside, promise / comfort vocabulary, resolution at
@@ -15,9 +15,11 @@
    and the Short title. Rubric scores and reasons are recorded.
 4. Final score = 0.4 measured + 0.6 rubric; at most N non-overlapping moments.
 Without a Gemini key the measured score alone decides and the record says so.
-usage: shorts_select.py TIMELINE_JSON SCRIPT_JSON OUT_JSON [N]
+usage: shorts_select.py TIMELINE_JSON SCRIPT_JSON OUT_JSON [N] [--measured-only]
 """
 import json
+import hashlib
+from collections import Counter
 import os
 from pathlib import Path
 import re
@@ -34,31 +36,122 @@ NOT_IN_SHORTS = {"cta", "invitation", "transition"}
 RUBRIC = ("hook_first_2s", "stands_alone", "emotional_payoff", "shareability", "loop_potential", "policy_safe")
 
 
-def candidates(sentences, refs):
-    out = []
-    for a in range(len(sentences)):
-        first = sentences[a]["text"].strip()
-        if CONTEXT_START.match(first):
+def tokens(text):
+    return re.findall(r"[a-z0-9']+", text.replace("’", "'").lower())
+
+
+def opening_reason(sentence):
+    """Closed structural heuristic, not semantic or acoustic qualification."""
+    text = sentence["text"].strip()
+    if not text or not FULL_STOP.search(text):
+        return "EMPTY_OR_INCOMPLETE_OPENING"
+    if CONTEXT_START.match(text):
+        return "CONTEXT_OPENER"
+    words = tokens(text)
+    for i, word in enumerate(words[:4]):
+        if word in {"it", "this", "those", "these"}:
+            return "DEPENDENT_OPENING_REFERENCE"
+        if word == "that" and not (i > 0 and words[i - 1] in {"know", "believe", "trust", "pray"}
+                                    and i + 1 < len(words)
+                                    and words[i + 1] in {"god", "the", "lord", "jesus", "you", "we", "i", "he"}):
+            return "DEPENDENT_OPENING_REFERENCE"
+    first = next((c for c in text if c.isalpha()), "")
+    if not first or not first.isupper():
+        return "CONTINUATION_OPENING_LINE"
+    if sentence["end"] - sentence["start"] > 3.0:
+        return "OPENING_OVER_3S"
+    return None
+
+
+def ending_reason(run, sentences):
+    last = run[-1]
+    if not FULL_STOP.search(last["text"].strip()):
+        return "INCOMPLETE_ENDING"
+    own = [s for s in sentences if s["segment"] == last["segment"]]
+    words = tokens(last["text"])
+    if last is not own[-1] and not (words[-1:] == ["amen"] or words[:3] == ["may", "the", "lord"]):
+        return "UNRESOLVED_SEGMENT_END"
+    return None
+
+
+def opening_hook(sentence):
+    # Reused from PR204, preserving actual spoken words rather than a generic hook.
+    words = sentence["text"].split()[:7]
+    while words and words[-1].lower().strip(",;:.!?") in {
+            "the", "a", "an", "to", "of", "in", "on", "at", "for", "with", "your", "my", "his", "this", "that", "and", "or", "about"}:
+        words.pop()
+    return " ".join(words) or None
+
+
+def window_reason(run, sentences, refs):
+    ids = {s["segment"] for s in run}
+    if ids & NOT_IN_SHORTS:
+        return "CTA_OR_TRANSITION_SEGMENT"
+    if any(seg not in refs or (refs[seg] and any(
+            not any(s is item for item in run) for s in sentences if s["segment"] == seg)) for seg in ids):
+        return "PARTIAL_SCRIPTURE"
+    return ending_reason(run, sentences)
+
+
+def source_moment(run, refs):
+    ids = list(dict.fromkeys(s["segment"] for s in run))
+    return {"start": run[0]["start"], "end": run[-1]["end"], "sentences": run,
+            "segments": ids, "text": " ".join(s["text"] for s in run),
+            "reference": next((refs[x] for x in ids if refs.get(x)), None)}
+
+
+def validate_candidate(sentences, refs, moment):
+    """Reconstruct a cut from full source data; never trust supplied text or score."""
+    if sentences is None or refs is None:
+        return None, "FULL_SOURCE_REQUIRED"
+    inside = [s for s in sentences if s["start"] >= moment["start"] - 0.05 and s["end"] <= moment["end"] + 0.05]
+    if not inside:
+        return None, "NO_WHOLE_SENTENCE"
+    offset = inside[0]["start"] - moment["start"]
+    if offset < 0 or offset > 0.3 + 1e-12:
+        return None, "FIRST_WORD_OFFSET"
+    reason = opening_reason(inside[0])
+    if reason:
+        return None, reason
+    length = inside[-1]["end"] - inside[0]["start"]
+    if not MIN_S <= length <= MAX_S:
+        return None, f"LENGTH_{length:.1f}S"
+    reason = window_reason(inside, sentences, refs)
+    if reason:
+        return None, reason
+    out = dict(moment, **source_moment(inside, refs))
+    return out, None
+
+
+def candidate_analysis(sentences, refs):
+    out, openings, windows = [], Counter(), Counter()
+    eligible, pairs = 0, 0
+    for a, first in enumerate(sentences):
+        reason = opening_reason(first)
+        if reason:
+            openings[reason] += 1
             continue
+        eligible += 1
         for b in range(a, len(sentences)):
-            length = sentences[b]["end"] - sentences[a]["start"]
+            length = sentences[b]["end"] - first["start"]
             if length > MAX_S:
                 break
             if length < MIN_S:
                 continue
+            pairs += 1
             run = sentences[a:b + 1]
-            if not FULL_STOP.search(run[-1]["text"].strip()):
-                continue  # never end on a comma, colon or semicolon (mid-verse or mid-thought)
-            ids = {s["segment"] for s in run}
-            if ids & NOT_IN_SHORTS:
-                continue  # the long video's own channel CTA / invitation / transition never ends a Short
-            # a scripture passage is used whole or not at all
-            if any(refs.get(seg) and not all(s in run for s in sentences if s["segment"] == seg) for seg in ids):
+            reason = window_reason(run, sentences, refs)
+            if reason:
+                windows[reason] += 1
                 continue
-            out.append({"start": run[0]["start"], "end": run[-1]["end"], "sentences": run,
-                        "segments": sorted({s["segment"] for s in run}, key=[s["segment"] for s in run].index),
-                        "reference": next((refs[s["segment"]] for s in run if refs.get(s["segment"])), None)})
-    return out
+            out.append(source_moment(run, refs))
+    return out, {"opening_starts_total": len(sentences), "opening_starts_accepted": eligible,
+                 "opening_rejections": dict(openings), "window_pairs_total": pairs,
+                 "window_pairs_accepted": len(out), "window_rejections": dict(windows)}
+
+
+def candidates(sentences, refs):
+    return candidate_analysis(sentences, refs)[0]
 
 
 def measured(c):
@@ -101,11 +194,13 @@ def rubric(cands, key):
     return model, {r["index"]: r for r in out.get("ratings", [])}
 
 
-def main(timeline_path, script_path, out_path, n="3"):
+def select(timeline_path, script_path, out_path, n="3", *, measured_only=False):
+    if not str(n).isdigit() or int(n) < 1:
+        raise ValueError("N_MUST_BE_POSITIVE_INTEGER")
     timeline = json.loads(Path(timeline_path).read_text())
     script = json.loads(Path(script_path).read_text())
     refs = {s["id"]: s.get("reference") for s in script["segments"]}
-    cands = candidates(timeline["sentences"], refs)
+    cands, counts = candidate_analysis(timeline["sentences"], refs)
     for c in cands:
         c["measured_score"], c["features"] = measured(c)
     cands.sort(key=lambda c: c["measured_score"], reverse=True)
@@ -120,7 +215,7 @@ def main(timeline_path, script_path, out_path, n="3"):
             break
     model, ratings = None, {}
     key = os.environ.get("HERO_GEMINI_API_KEY")
-    if key:
+    if key and not measured_only:
         try:
             model, ratings = rubric(shortlist, key)
         except Exception as e:  # the measured score still decides; the record says why
@@ -143,14 +238,31 @@ def main(timeline_path, script_path, out_path, n="3"):
             break
     for c in chosen:
         r = c.get("rubric") or {}
-        c["hook"] = r.get("hook_line") or next((s.get("short_hook") for s in script["segments"] if s["id"] in c["segments"] and s.get("short_hook")), None) \
+        c["hook"] = opening_hook(c["sentences"][0]) if measured_only else r.get("hook_line") or next((s.get("short_hook") for s in script["segments"] if s["id"] in c["segments"] and s.get("short_hook")), None) \
             or ("Read this before your day starts" if c["reference"] else "Pray this with me right now")
         c["title"] = r.get("title") or c["hook"]
     Path(out_path).write_text(json.dumps({"version": "shorts-select-v1", "pilot_id": script["pilot_id"], "rubric_model": model,
-                                          "candidates_considered": len(cands), "shortlist": shortlist, "chosen": chosen},
+                                          "candidates_considered": len(cands), "shortlist": shortlist, "chosen": chosen,
+                                          "selection_mode": "MEASURED_ONLY" if measured_only else "LEGACY",
+                                          "input_sha256": {"timeline": hashlib.sha256(Path(timeline_path).read_bytes()).hexdigest(),
+                                                           "script": hashlib.sha256(Path(script_path).read_bytes()).hexdigest()},
+                                          "structural_counts": counts,
+                                          "reason": None if chosen else "NO_STRUCTURAL_CANDIDATE"},
                                          indent=1, ensure_ascii=False) + "\n")
     print(json.dumps([{k: c.get(k) for k in ("start", "end", "final_score", "hook", "title")} for c in chosen], ensure_ascii=False))
 
 
+def main(timeline_path, script_path, out_path, n="3"):
+    return select(timeline_path, script_path, out_path, n)
+
+
+def cli(args):
+    measured_only = bool(args and args[-1] == "--measured-only")
+    positional = args[:-1] if measured_only else args
+    if len(positional) not in (3, 4):
+        raise SystemExit("usage: shorts_select.py TIMELINE SCRIPT OUT [N] [--measured-only]")
+    return select(*positional, measured_only=measured_only)
+
+
 if __name__ == "__main__":
-    main(*sys.argv[1:5])
+    cli(sys.argv[1:])
