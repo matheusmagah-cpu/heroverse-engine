@@ -18,7 +18,7 @@ sys.path.insert(0, str(HERE))
 import shorts_produce as sp  # noqa: E402
 import shorts_select  # noqa: E402
 
-PILOT = HERE / "pilot-006"
+PILOT = HERE / "fixtures" / "shorts-pilot-006"
 OPENER = re.compile(r"(?i)^(and|but|so|then|this|that|it|he|she|they|because|or)\b")
 CTA_TEXT = re.compile(r"(?i)subscribe|full prayer|on the channel|▶|\blike (this|the video)|\bshare (this|it)\b|\blink\b")
 EPS = 0.05
