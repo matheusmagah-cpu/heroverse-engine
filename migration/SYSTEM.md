@@ -34,9 +34,11 @@ Every stage, **from the channel configuration to the pinned comment**, is held t
 | Gemini, free tier | Stages 3 and 5: watched review (designated `gemini-3.8-flash` only), audit and critique (support models) | Free daily quota (E26/E29) |
 | Kokoro voice, FLUX images (Cloudflare), ffmpeg | Stage 2 execution | Free, hash-pinned |
 | YouTube Data API | Stage 5 | Our OAuth |
-| GitHub Actions + Dot | Running and building everything | Public repo; Dot works only through cards |
+| GitHub Actions + Dot | Running and building everything. **Dot also produces any image or video format** (cinematic animation, animated stories, thumbnails, clips) from a precise prompt and destination (owner, 2026-10-20) | Public repo; Dot works only through cards; media passes the same gates |
 
 Nothing else is added unless a stage cannot meet its bar without it, and that is proven first.
+
+**Format feasibility rule (owner, 2026-10-20).** A structure or format found by mining is never rejected because our render tools cannot make it. If it wins, Dot produces it through a media card (DOT_PROTOCOL, "Dot is the media producer"), and the result is judged by the same gates.
 
 ## 0. Channel configuration (once, then audited by stage 6)
 
