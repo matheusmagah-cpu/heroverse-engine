@@ -1,0 +1,97 @@
+{
+ "version": "shorts-structure-audit-v1",
+ "date": "2026-10-20",
+ "query": {
+  "tool": "vidiq_outliers",
+  "keyword": "prayer",
+  "contentType": "short",
+  "publishedWithin": "threeMonths",
+  "minViews": 50000,
+  "maxSubscribers": 200000
+ },
+ "prompt": "production audit (first 3 s, visuals, on-screen text, audio, beats, ending/CTA, length) — same fields as evidence/vidiq/20261019 audits",
+ "winners": [
+  {
+   "video": "9XacNi2bD0M",
+   "channel": "Her Faith Journey",
+   "channel_id": "UCoQ1ROc7Wq-qlXtIRx0xv7w",
+   "breakout": 614.92,
+   "seconds": 114,
+   "first_line_complete_sentence": false,
+   "hook": "date hook ('October 5th, 6th, and 7th') + 'don't skip this prayer'",
+   "picture": "one continuous real b-roll shot, 0 cuts, static",
+   "person": false,
+   "captions": "word-by-word highlight, 2-7 words, white bold outline, bottom-centre",
+   "voice": "synthetic male, ~115-120 wpm (model estimate)",
+   "music": "soft ambient pad/piano under voice",
+   "scripture_quoted": false,
+   "cta": "share at 0:09 and 1:41; persistent Bible-study banner 0:31-1:54; 'put Amen' at end",
+   "ending": "Amen CTA, no loop"
+  },
+  {
+   "video": "6k1MsIah6nQ",
+   "channel": "1 Minuite Prayer",
+   "channel_id": "UCcPt8OSTIQ4ps9yruV4SYMQ",
+   "breakout": 81.48,
+   "seconds": 163,
+   "first_line_complete_sentence": true,
+   "hook": "'Pray this before you sleep tonight.' (direct address + promise, on screen 0:00-0:01)",
+   "picture": "stock sea/sunset footage, 6 cuts (clips 11-44 s), natural motion",
+   "person": false,
+   "captions": "4-10 words, white bold in dark rounded box, centre",
+   "voice": "synthetic male, ~115-120 wpm (model estimate)",
+   "music": "soft ambient piano/pad under voice",
+   "scripture_quoted": [
+    "Psalm 51:1",
+    "Psalm 4:8",
+    "Psalm 91:11",
+    "Lamentations 3:22-23"
+   ],
+   "cta": "none",
+   "ending": "'In the mighty name of Jesus Christ, Amen.' then a closing blessing, no loop"
+  },
+  {
+   "video": "_-7JaTduni4",
+   "channel": "House of Divine Worship",
+   "channel_id": "UCtPOeqoKXDzi8ANJzt726CA",
+   "breakout": 101.13,
+   "seconds": 130,
+   "first_line_complete_sentence": false,
+   "hook": "vocative 'Father, in the mighty name of Jesus' + persistent title text and verse card",
+   "picture": "one static AI illustration, 0 cuts, no motion",
+   "person": true,
+   "captions": "none (static title + verse card for the whole video)",
+   "voice": "female adult, ~105 wpm, partly sung after 1:03",
+   "music": "gospel pads + drums, rising",
+   "scripture_quoted": [
+    "Psalm 35:1",
+    "Isaiah 54:17",
+    "2 Chronicles 20:15 (card)"
+   ],
+   "cta": "none",
+   "ending": "'Amen.' + drum outro, no loop"
+  }
+ ],
+ "counts": {
+  "length_seconds": [
+   114,
+   163,
+   130
+  ],
+  "length_ge_110s": "3/3 (and S1 DigF0F0LrfY 178 s from 20261019: 4/4 across 4 channels)",
+  "first_line_complete_sentence": "1/3",
+  "cuts": "0,6,0",
+  "captions": "2/3",
+  "scripture_quoted": "2/3",
+  "explicit_cta": "1/3",
+  "ends_on_amen_or_blessing": "3/3",
+  "loops_to_start": "0/3"
+ },
+ "contrast_with_ours": "Our Shorts are cut to 30-55 s (shorts_produce/shorts_select window). 4/4 audited prayer-Short winners are 114-178 s. Our 012 and 005 Shorts failed the watched review on hook, rhythm and ending.",
+ "status": "hypothesis: candidate structure 'spoken-prayer-short' needs >=2 more winners from new channels and >=3 weak contrasts of the same shape before any STANDARD change (SYSTEM.md 1.5)",
+ "not_measured": [
+  "retention of these Shorts",
+  "weak contrasts",
+  "exact word counts (no transcript pulled)"
+ ]
+}
