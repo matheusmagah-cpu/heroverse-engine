@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-006",
- "output_sha256": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc",
+ "output_sha256": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -37,42 +37,42 @@
  },
  "criteria_version": "pilot-qa-criteria-v3",
  "measurements": {
-  "duration_seconds": 1534.5,
+  "duration_seconds": 1532.99,
   "loudness": {
    "integrated_lufs": -15.6,
    "loudness_range_lu": 3.1,
-   "true_peak_dbtp": -2.7
+   "true_peak_dbtp": -2.8
   },
-  "speech_presence": 0.867,
-  "music_presence": 0.404,
-  "wer_vs_script": 0.0428,
-  "accepted_words_per_minute": 129.7,
-  "caption_lines": 738,
+  "speech_presence": 0.875,
+  "music_presence": 0.412,
+  "wer_vs_script": 0.0446,
+  "accepted_words_per_minute": 129.6,
+  "caption_lines": 737,
   "holds": 62,
-  "first_word_seconds": 0.02,
+  "first_word_seconds": 0.08,
   "editing": {
-   "picture_changes": 566,
-   "picture_changes_per_minute": 22.13,
+   "picture_changes": 565,
+   "picture_changes_per_minute": 22.11,
    "median_shot_seconds": 2.133,
-   "longest_shot_seconds": 26.5,
-   "motion_median_top_decile_diff": 1.01
+   "longest_shot_seconds": 28.6,
+   "motion_median_top_decile_diff": 1.007
   },
   "colour": {
-   "mean_brightness": 0.1794,
-   "brightness_std_over_time": 0.0904,
-   "mean_saturation": 0.7787,
-   "saturation_std_over_time": 0.1869
+   "mean_brightness": 0.165,
+   "brightness_std_over_time": 0.0918,
+   "mean_saturation": 0.7575,
+   "saturation_std_over_time": 0.1628
   },
   "rhythm": {
-   "audio_onsets": 2302,
-   "audio_onsets_per_minute": 90.01,
+   "audio_onsets": 2298,
+   "audio_onsets_per_minute": 89.94,
    "tempo": {
-    "bpm": 54.09,
-    "confidence": 0.008
+    "bpm": 102.56,
+    "confidence": 0.007
    }
   }
  },
- "transcript_head": "Good evening. Bring every pain of body or heart to God tonight and rest in care while you sleep. If your body is hurting or your heart is, stay with me for the next few minutes. Take one slow breath with me. down and let the bed hold your weight. Let your hands rest, your jaw soften, your breathing slow. You tired of carrying sorrow. Bring all of it here. You do not have to be strong tonight. prop",
+ "transcript_head": "Bring every pain of body or heart to God tonight, and rest in His care while you sleep. If your body is hurting, or your heart is, stay with me for the next few minutes. Take one slow breath with me. Lie down and let the bed hold your weight. Let your hands rest, your jaw soften, your breathing slow. may be tired of being sick, tired of waiting for results, tired of carrying sorrow. Bring all of i",
  "criteria_sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,

@@ -20,782 +20,781 @@ Style: Badge,DejaVu Sans,34,&H00FFFFFF,&H00FFFFFF,&H001A1AD0,&H00000000,1,0,0,0,
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 2,0:00:00.00,0:00:02.00,Title,,0,0,0,,{\fad(200,300)}Healing Rest Tonight
 Dialogue: 2,0:00:00.00,0:00:02.00,Subtitle,,0,0,0,,{\fad(200,300)\pos(960,700)}NIGHT PRAYER
-Dialogue: 1,0:00:02.00,0:25:34.50,Brand,,0,0,0,,{\fad(300,0)}HeroVerse Prayer
+Dialogue: 1,0:00:02.00,0:25:32.99,Brand,,0,0,0,,{\fad(300,0)}HeroVerse Prayer
 Dialogue: 1,0:01:00.00,0:01:08.00,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
-Dialogue: 1,0:11:30.52,0:11:38.52,Badge,,0,0,0,,{\fad(200,200)}LIKE
-Dialogue: 3,0:00:42.95,0:00:51.22,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:00:42.95,0:00:51.22,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Jeremiah 17:14 (KJV)
-Dialogue: 3,0:02:17.90,0:02:25.28,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:02:17.90,0:02:25.28,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 41:3 (KJV)
-Dialogue: 3,0:05:48.57,0:05:55.03,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:05:48.57,0:05:55.03,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 6:2 (KJV)
-Dialogue: 3,0:08:01.03,0:08:05.62,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:08:01.03,0:08:05.62,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 30:2 (KJV)
-Dialogue: 3,0:08:07.30,0:08:17.64,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:08:07.30,0:08:17.64,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 103:2-3 (KJV)
-Dialogue: 3,0:09:32.98,0:09:44.15,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:09:32.98,0:09:44.15,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Revelation 21:4 (KJV)
-Dialogue: 3,0:12:16.22,0:12:18.42,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:12:16.22,0:12:18.42,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 3:5 (KJV)
-Dialogue: 3,0:14:39.25,0:15:49.16,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:14:39.25,0:15:49.16,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 103:1-5, 8-13 (KJV)
-Dialogue: 3,0:16:04.86,0:16:54.10,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:16:04.86,0:16:54.10,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 23 (KJV)
-Dialogue: 3,0:17:37.46,0:17:39.80,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:17:37.46,0:17:39.80,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 46:1-3, 10-11 (KJV)
-Dialogue: 3,0:18:08.33,0:18:38.68,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:18:08.33,0:18:38.68,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 43:1-2 (KJV)
-Dialogue: 3,0:19:44.04,0:19:59.32,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:19:44.04,0:19:59.32,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 27:13-14 (KJV)
-Dialogue: 3,0:20:17.07,0:20:32.86,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:20:17.07,0:20:32.86,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 34:4, 8, 18 (KJV)
-Dialogue: 3,0:20:59.16,0:21:42.62,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:20:59.16,0:21:42.62,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 121 (KJV)
-Dialogue: 3,0:21:59.99,0:22:15.62,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:21:59.99,0:22:15.62,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Philippians 4:6-7 (KJV)
-Dialogue: 3,0:22:29.31,0:22:43.44,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:22:29.31,0:22:43.44,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 26:3-4 (KJV)
-Dialogue: 3,0:23:38.70,0:23:57.72,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:23:38.70,0:23:57.72,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 3:3-5 (KJV)
-Dialogue: 3,0:24:13.26,0:24:56.22,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:24:13.26,0:24:56.22,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 91:1-2, 4, 9-11 (KJV)
-Dialogue: 3,0:25:17.23,0:25:25.34,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:25:17.23,0:25:25.34,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}3 John 1:2 (KJV)
-Dialogue: 4,0:00:02.00,0:00:03.18,Caption,,0,0,0,,Bring every pain,
-Dialogue: 4,0:00:03.18,0:00:04.53,Caption,,0,0,0,,of body or heart,
-Dialogue: 4,0:00:04.53,0:00:05.72,Caption,,0,0,0,,to God tonight,
-Dialogue: 4,0:00:05.72,0:00:07.31,Caption,,0,0,0,,and rest in his care
-Dialogue: 4,0:00:07.31,0:00:08.94,Caption,,0,0,0,,while you sleep.
-Dialogue: 4,0:00:09.57,0:00:11.40,Caption,,0,0,0,,If your body is hurting,
-Dialogue: 4,0:00:11.40,0:00:12.70,Caption,,0,0,0,,or your heart is,
-Dialogue: 4,0:00:12.70,0:00:14.60,Caption,,0,0,0,,stay with me for the next
-Dialogue: 4,0:00:14.60,0:00:15.70,Caption,,0,0,0,,few minutes.
-Dialogue: 4,0:00:15.70,0:00:18.38,Caption,,0,0,0,,Take one slow breath with me.
-Dialogue: 4,0:00:18.38,0:00:20.31,Caption,,0,0,0,,Lie down and let the bed
-Dialogue: 4,0:00:20.31,0:00:21.86,Caption,,0,0,0,,hold your weight.
-Dialogue: 4,0:00:21.86,0:00:23.42,Caption,,0,0,0,,Let your hands rest,
-Dialogue: 4,0:00:23.42,0:00:24.66,Caption,,0,0,0,,your jaw soften,
-Dialogue: 4,0:00:24.66,0:00:26.39,Caption,,0,0,0,,your breathing slow.
-Dialogue: 4,0:00:26.39,0:00:28.85,Caption,,0,0,0,,You may be tired of being sick,
-Dialogue: 4,0:00:28.85,0:00:31.15,Caption,,0,0,0,,tired of waiting for results,
-Dialogue: 4,0:00:31.15,0:00:33.32,Caption,,0,0,0,,tired of carrying sorrow.
-Dialogue: 4,0:00:33.32,0:00:35.31,Caption,,0,0,0,,Bring all of it here.
-Dialogue: 4,0:00:35.31,0:00:36.42,Caption,,0,0,0,,You do not have
-Dialogue: 4,0:00:36.42,0:00:38.33,Caption,,0,0,0,,to be strong tonight.
-Dialogue: 4,0:00:39.35,0:00:40.84,Caption,,0,0,0,,The prophet Jeremiah
-Dialogue: 4,0:00:40.84,0:00:42.95,Caption,,0,0,0,,prayed this simple prayer.
-Dialogue: 5,0:00:42.95,0:00:44.30,Verse,,0,0,0,,{\pos(960,470)}Heal me, O LORD,
-Dialogue: 5,0:00:44.30,0:00:46.35,Verse,,0,0,0,,{\pos(960,470)}and I shall be healed;
-Dialogue: 5,0:00:46.35,0:00:47.01,Verse,,0,0,0,,{\pos(960,470)}save me,
-Dialogue: 5,0:00:47.01,0:00:48.94,Verse,,0,0,0,,{\pos(960,470)}and I shall be saved:
-Dialogue: 5,0:00:48.94,0:00:51.57,Verse,,0,0,0,,{\pos(960,470)}for thou art my praise.
-Dialogue: 4,0:00:52.90,0:00:56.18,Caption,,0,0,0,,Jeremiah's prayer is short and honest.
-Dialogue: 4,0:00:56.18,0:00:59.02,Caption,,0,0,0,,He does not explain or perform.
-Dialogue: 4,0:00:59.02,0:01:00.93,Caption,,0,0,0,,He simply asks.
-Dialogue: 4,0:01:00.93,0:01:03.78,Caption,,0,0,0,,Tonight you can pray the same way.
-Dialogue: 4,0:01:03.78,0:01:06.52,Caption,,0,0,0,,You do not need the right words.
-Dialogue: 4,0:01:06.52,0:01:08.00,Caption,,0,0,0,,You only need to bring
-Dialogue: 4,0:01:08.00,0:01:10.37,Caption,,0,0,0,,yourself to the One who heals.
-Dialogue: 4,0:01:11.40,0:01:13.30,Caption,,0,0,0,,So let us pray.
-Dialogue: 4,0:01:13.30,0:01:13.70,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:01:13.70,0:01:15.28,Caption,,0,0,0,,here I am at the end
-Dialogue: 4,0:01:15.28,0:01:16.22,Caption,,0,0,0,,of this day,
-Dialogue: 4,0:01:16.22,0:01:18.19,Caption,,0,0,0,,with my body and my heart
-Dialogue: 4,0:01:18.19,0:01:19.71,Caption,,0,0,0,,just as they are.
-Dialogue: 4,0:01:19.71,0:01:21.37,Caption,,0,0,0,,You know every ache,
-Dialogue: 4,0:01:21.37,0:01:22.53,Caption,,0,0,0,,every symptom,
-Dialogue: 4,0:01:22.53,0:01:23.94,Caption,,0,0,0,,every fear I have
-Dialogue: 4,0:01:23.94,0:01:25.61,Caption,,0,0,0,,not said out loud.
-Dialogue: 4,0:01:25.61,0:01:27.73,Caption,,0,0,0,,Heal me, O Lord.
-Dialogue: 4,0:01:27.73,0:01:29.68,Caption,,0,0,0,,Hold me tonight.
-Dialogue: 4,0:01:30.71,0:01:33.16,Caption,,0,0,0,,He healeth the broken in heart,
-Dialogue: 4,0:01:33.16,0:01:35.71,Caption,,0,0,0,,and bindeth up their wounds.
-Dialogue: 4,0:01:37.04,0:01:39.47,Caption,,0,0,0,,The same psalm says God counts
-Dialogue: 4,0:01:39.47,0:01:41.00,Caption,,0,0,0,,the stars and calls
-Dialogue: 4,0:01:41.00,0:01:42.56,Caption,,0,0,0,,them all by name.
-Dialogue: 4,0:01:42.56,0:01:44.24,Caption,,0,0,0,,And yet he bends down
-Dialogue: 4,0:01:44.24,0:01:45.68,Caption,,0,0,0,,to bind up wounds,
-Dialogue: 4,0:01:45.68,0:01:48.35,Caption,,0,0,0,,like a nurse tending a bandage.
-Dialogue: 4,0:01:48.35,0:01:51.04,Caption,,0,0,0,,The God of the galaxies is gentle
-Dialogue: 4,0:01:51.04,0:01:53.26,Caption,,0,0,0,,with your hurt tonight.
-Dialogue: 4,0:01:54.29,0:01:56.92,Caption,,0,0,0,,Father, I bring you my body.
-Dialogue: 4,0:01:56.92,0:01:58.45,Caption,,0,0,0,,Where there is pain,
-Dialogue: 4,0:01:58.45,0:01:59.62,Caption,,0,0,0,,bring relief.
-Dialogue: 4,0:01:59.62,0:02:01.81,Caption,,0,0,0,,Where there is inflammation,
-Dialogue: 4,0:02:01.81,0:02:02.85,Caption,,0,0,0,,bring calm.
-Dialogue: 4,0:02:02.85,0:02:04.50,Caption,,0,0,0,,Where there is sickness,
-Dialogue: 4,0:02:04.50,0:02:06.40,Caption,,0,0,0,,bring your healing touch.
-Dialogue: 4,0:02:06.40,0:02:08.70,Caption,,0,0,0,,Strengthen my immune system,
-Dialogue: 4,0:02:08.70,0:02:10.00,Caption,,0,0,0,,steady my heart,
-Dialogue: 4,0:02:10.00,0:02:12.56,Caption,,0,0,0,,and restore what is worn out.
-Dialogue: 4,0:02:12.56,0:02:14.84,Caption,,0,0,0,,Let my body rest deeply tonight
-Dialogue: 4,0:02:14.84,0:02:16.88,Caption,,0,0,0,,and heal while I sleep.
-Dialogue: 5,0:02:17.90,0:02:19.84,Verse,,0,0,0,,{\pos(960,470)}The LORD will strengthen him
-Dialogue: 5,0:02:19.84,0:02:21.95,Verse,,0,0,0,,{\pos(960,470)}upon the bed of languishing:
-Dialogue: 5,0:02:21.95,0:02:23.37,Verse,,0,0,0,,{\pos(960,470)}thou wilt make all
-Dialogue: 5,0:02:23.37,0:02:25.62,Verse,,0,0,0,,{\pos(960,470)}his bed in his sickness.
-Dialogue: 4,0:02:26.96,0:02:28.38,Caption,,0,0,0,,Thou wilt make all
-Dialogue: 4,0:02:28.38,0:02:30.46,Caption,,0,0,0,,his bed in his sickness.
-Dialogue: 4,0:02:30.46,0:02:32.46,Caption,,0,0,0,,What a tender picture:
-Dialogue: 4,0:02:32.46,0:02:34.89,Caption,,0,0,0,,God himself arranging the pillows,
-Dialogue: 4,0:02:34.89,0:02:36.32,Caption,,0,0,0,,smoothing the sheets
-Dialogue: 4,0:02:36.32,0:02:38.14,Caption,,0,0,0,,for the one who is ill.
-Dialogue: 4,0:02:38.14,0:02:40.90,Caption,,0,0,0,,You are not forgotten in that bed.
-Dialogue: 4,0:02:40.90,0:02:42.60,Caption,,0,0,0,,He is there.
-Dialogue: 4,0:02:43.62,0:02:46.08,Caption,,0,0,0,,Lord, I thank you for doctors,
-Dialogue: 4,0:02:46.08,0:02:46.66,Caption,,0,0,0,,nurses,
-Dialogue: 4,0:02:46.66,0:02:48.70,Caption,,0,0,0,,medicine and every person
-Dialogue: 4,0:02:48.70,0:02:50.93,Caption,,0,0,0,,whose work helps us heal.
-Dialogue: 4,0:02:50.93,0:02:52.33,Caption,,0,0,0,,Give them wisdom,
-Dialogue: 4,0:02:52.33,0:02:54.25,Caption,,0,0,0,,skill and compassion.
-Dialogue: 4,0:02:54.25,0:02:57.46,Caption,,0,0,0,,Guide every decision about treatment.
-Dialogue: 4,0:02:57.46,0:03:00.28,Caption,,0,0,0,,Let the medicine work as it should.
-Dialogue: 4,0:03:00.28,0:03:02.22,Caption,,0,0,0,,And help me to keep following
-Dialogue: 4,0:03:02.22,0:03:04.02,Caption,,0,0,0,,the care I have been given,
-Dialogue: 4,0:03:04.02,0:03:06.43,Caption,,0,0,0,,trusting you through all of it.
-Dialogue: 4,0:03:07.46,0:03:08.00,Caption,,0,0,0,,Father,
-Dialogue: 4,0:03:08.00,0:03:10.47,Caption,,0,0,0,,for those living with an illness
-Dialogue: 4,0:03:10.47,0:03:12.16,Caption,,0,0,0,,that does not go away,
-Dialogue: 4,0:03:12.16,0:03:13.47,Caption,,0,0,0,,the chronic pain,
-Dialogue: 4,0:03:13.47,0:03:15.01,Caption,,0,0,0,,the long treatments,
-Dialogue: 4,0:03:15.01,0:03:17.94,Caption,,0,0,0,,the bodies that never quite feel well,
-Dialogue: 4,0:03:17.94,0:03:19.27,Caption,,0,0,0,,give endurance.
-Dialogue: 4,0:03:19.27,0:03:21.77,Caption,,0,0,0,,On the days when hope runs thin,
-Dialogue: 4,0:03:21.77,0:03:22.65,Caption,,0,0,0,,renew it.
-Dialogue: 4,0:03:22.65,0:03:24.42,Caption,,0,0,0,,Let them know that their
-Dialogue: 4,0:03:24.42,0:03:26.18,Caption,,0,0,0,,worth is not measured by
-Dialogue: 4,0:03:26.18,0:03:28.23,Caption,,0,0,0,,what their body can do.
-Dialogue: 4,0:03:29.26,0:03:31.08,Caption,,0,0,0,,Let us be still.
-Dialogue: 4,0:03:31.08,0:03:33.03,Caption,,0,0,0,,Breathe in slowly.
-Dialogue: 4,0:03:33.03,0:03:34.70,Caption,,0,0,0,,And breathe out.
-Dialogue: 4,0:03:34.70,0:03:36.47,Caption,,0,0,0,,Once more, breathe in,
-Dialogue: 4,0:03:36.47,0:03:39.15,Caption,,0,0,0,,and let your body grow heavy.
-Dialogue: 4,0:03:40.98,0:03:44.08,Caption,,0,0,0,,Healing is not only for the body.
-Dialogue: 4,0:03:44.08,0:03:45.88,Caption,,0,0,0,,Let us bring the heart
-Dialogue: 4,0:03:45.88,0:03:48.51,Caption,,0,0,0,,and the mind to God as well.
-Dialogue: 4,0:03:49.84,0:03:50.44,Caption,,0,0,0,,Father,
-Dialogue: 4,0:03:50.44,0:03:53.64,Caption,,0,0,0,,heal the broken places in my heart.
-Dialogue: 4,0:03:53.64,0:03:56.11,Caption,,0,0,0,,The losses I still grieve.
-Dialogue: 4,0:03:56.11,0:03:58.44,Caption,,0,0,0,,The words that wounded me.
-Dialogue: 4,0:03:58.44,0:04:01.86,Caption,,0,0,0,,The disappointments I never got over.
-Dialogue: 4,0:04:01.86,0:04:03.49,Caption,,0,0,0,,I do not have to hide
-Dialogue: 4,0:04:03.49,0:04:04.75,Caption,,0,0,0,,them from you.
-Dialogue: 4,0:04:04.75,0:04:07.02,Caption,,0,0,0,,Bind up these wounds, Lord,
-Dialogue: 4,0:04:07.02,0:04:09.14,Caption,,0,0,0,,the way only you can.
-Dialogue: 4,0:04:10.16,0:04:11.47,Caption,,0,0,0,,But he was wounded
-Dialogue: 4,0:04:11.47,0:04:13.13,Caption,,0,0,0,,for our transgressions,
-Dialogue: 4,0:04:13.13,0:04:15.76,Caption,,0,0,0,,he was bruised for our iniquities:
-Dialogue: 4,0:04:15.76,0:04:17.80,Caption,,0,0,0,,the chastisement of our
-Dialogue: 4,0:04:17.80,0:04:19.66,Caption,,0,0,0,,peace was upon him;
-Dialogue: 4,0:04:19.66,0:04:22.40,Caption,,0,0,0,,and with his stripes we are healed.
-Dialogue: 4,0:04:23.73,0:04:26.41,Caption,,0,0,0,,Before Jesus ever healed anyone,
-Dialogue: 4,0:04:26.41,0:04:29.20,Caption,,0,0,0,,he chose to be wounded himself.
-Dialogue: 4,0:04:29.20,0:04:31.83,Caption,,0,0,0,,He knows pain from the inside.
-Dialogue: 4,0:04:31.83,0:04:33.24,Caption,,0,0,0,,So when you bring him
-Dialogue: 4,0:04:33.24,0:04:34.45,Caption,,0,0,0,,your pain tonight,
-Dialogue: 4,0:04:34.45,0:04:35.79,Caption,,0,0,0,,you are not bringing
-Dialogue: 4,0:04:35.79,0:04:37.45,Caption,,0,0,0,,it to someone distant.
-Dialogue: 4,0:04:37.45,0:04:38.79,Caption,,0,0,0,,You are bringing it
-Dialogue: 4,0:04:38.79,0:04:41.04,Caption,,0,0,0,,to someone who understands.
-Dialogue: 4,0:04:42.07,0:04:44.66,Caption,,0,0,0,,Lord, heal my anxious mind.
-Dialogue: 4,0:04:44.66,0:04:47.89,Caption,,0,0,0,,Quiet the questions that run in circles.
-Dialogue: 4,0:04:47.89,0:04:50.31,Caption,,0,0,0,,What if the results are bad?
-Dialogue: 4,0:04:50.31,0:04:52.78,Caption,,0,0,0,,What if it does not get better?
-Dialogue: 4,0:04:52.78,0:04:55.09,Caption,,0,0,0,,I give you every what if.
-Dialogue: 4,0:04:55.09,0:04:57.62,Caption,,0,0,0,,Replace my fear with your peace,
-Dialogue: 4,0:04:57.62,0:04:59.20,Caption,,0,0,0,,and let my mind rest
-Dialogue: 4,0:04:59.20,0:05:00.73,Caption,,0,0,0,,in you tonight.
-Dialogue: 4,0:05:01.76,0:05:02.14,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:05:02.14,0:05:03.73,Caption,,0,0,0,,I pray for every mind
-Dialogue: 4,0:05:03.73,0:05:06.33,Caption,,0,0,0,,that is tired and heavy tonight.
-Dialogue: 4,0:05:06.33,0:05:09.59,Caption,,0,0,0,,For depression that makes mornings hard.
-Dialogue: 4,0:05:09.59,0:05:12.65,Caption,,0,0,0,,For anxiety that tightens the chest.
-Dialogue: 4,0:05:12.65,0:05:14.26,Caption,,0,0,0,,For thoughts that feel
-Dialogue: 4,0:05:14.26,0:05:16.28,Caption,,0,0,0,,too dark to say out loud.
-Dialogue: 4,0:05:16.28,0:05:18.94,Caption,,0,0,0,,Bring light into those places.
-Dialogue: 4,0:05:18.94,0:05:20.17,Caption,,0,0,0,,Lead each person
-Dialogue: 4,0:05:20.17,0:05:21.86,Caption,,0,0,0,,to the help they need,
-Dialogue: 4,0:05:21.86,0:05:23.94,Caption,,0,0,0,,the friend, the counsellor,
-Dialogue: 4,0:05:23.94,0:05:24.78,Caption,,0,0,0,,the doctor,
-Dialogue: 4,0:05:24.78,0:05:26.17,Caption,,0,0,0,,and let them never
-Dialogue: 4,0:05:26.17,0:05:28.06,Caption,,0,0,0,,feel ashamed to ask.
-Dialogue: 4,0:05:29.08,0:05:29.85,Caption,,0,0,0,,Be still,
-Dialogue: 4,0:05:29.85,0:05:32.14,Caption,,0,0,0,,and know that I am God.
-Dialogue: 4,0:05:33.48,0:05:34.81,Caption,,0,0,0,,Be still.
-Dialogue: 4,0:05:34.81,0:05:37.31,Caption,,0,0,0,,Not because nothing is happening,
-Dialogue: 4,0:05:37.31,0:05:39.50,Caption,,0,0,0,,but because God is still God,
-Dialogue: 4,0:05:39.50,0:05:40.79,Caption,,0,0,0,,even in the dark,
-Dialogue: 4,0:05:40.79,0:05:42.38,Caption,,0,0,0,,even in the hospital,
-Dialogue: 4,0:05:42.38,0:05:44.08,Caption,,0,0,0,,even in the waiting.
-Dialogue: 4,0:05:44.08,0:05:45.75,Caption,,0,0,0,,Your stillness tonight
-Dialogue: 4,0:05:45.75,0:05:47.54,Caption,,0,0,0,,is an act of trust.
-Dialogue: 5,0:05:48.57,0:05:51.50,Verse,,0,0,0,,{\pos(960,470)}Have mercy upon me, O LORD;
-Dialogue: 5,0:05:51.50,0:05:53.26,Verse,,0,0,0,,{\pos(960,470)}for I am weak:
-Dialogue: 5,0:05:53.26,0:05:55.21,Verse,,0,0,0,,{\pos(960,470)}O LORD, heal me;
-Dialogue: 4,0:05:55.21,0:05:57.76,Caption,,0,0,0,,for my bones are vexed.
-Dialogue: 4,0:05:59.09,0:06:00.81,Caption,,0,0,0,,Father, like David,
-Dialogue: 4,0:06:00.81,0:06:03.06,Caption,,0,0,0,,I admit that I am weak.
-Dialogue: 4,0:06:03.06,0:06:04.17,Caption,,0,0,0,,I have run out
-Dialogue: 4,0:06:04.17,0:06:05.85,Caption,,0,0,0,,of my own strength.
-Dialogue: 4,0:06:05.85,0:06:07.88,Caption,,0,0,0,,Have mercy on me.
-Dialogue: 4,0:06:07.88,0:06:10.05,Caption,,0,0,0,,Meet me in the weakness.
-Dialogue: 4,0:06:10.05,0:06:12.14,Caption,,0,0,0,,Carry me where I cannot walk,
-Dialogue: 4,0:06:12.14,0:06:13.88,Caption,,0,0,0,,and give me the strength
-Dialogue: 4,0:06:13.88,0:06:15.45,Caption,,0,0,0,,to face tomorrow.
-Dialogue: 4,0:06:16.48,0:06:19.03,Caption,,0,0,0,,For which cause we faint not;
-Dialogue: 4,0:06:19.03,0:06:21.80,Caption,,0,0,0,,but though our outward man perish,
-Dialogue: 4,0:06:21.80,0:06:23.26,Caption,,0,0,0,,yet the inward man
-Dialogue: 4,0:06:23.26,0:06:25.40,Caption,,0,0,0,,is renewed day by day.
-Dialogue: 4,0:06:26.73,0:06:29.08,Caption,,0,0,0,,Even when the body is struggling,
-Dialogue: 4,0:06:29.08,0:06:31.54,Caption,,0,0,0,,something deeper can be renewed:
-Dialogue: 4,0:06:31.54,0:06:33.14,Caption,,0,0,0,,your hope, your faith,
-Dialogue: 4,0:06:33.14,0:06:35.52,Caption,,0,0,0,,your sense that you are loved.
-Dialogue: 4,0:06:35.52,0:06:37.69,Caption,,0,0,0,,God is at work on the inside
-Dialogue: 4,0:06:37.69,0:06:38.85,Caption,,0,0,0,,of you tonight,
-Dialogue: 4,0:06:38.85,0:06:41.69,Caption,,0,0,0,,whatever the outside feels like.
-Dialogue: 4,0:06:42.72,0:06:43.09,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:06:43.09,0:06:45.22,Caption,,0,0,0,,I pray for everyone who cares
-Dialogue: 4,0:06:45.22,0:06:47.16,Caption,,0,0,0,,for someone who is sick.
-Dialogue: 4,0:06:47.16,0:06:50.10,Caption,,0,0,0,,The parents beside a child's bed.
-Dialogue: 4,0:06:50.10,0:06:52.16,Caption,,0,0,0,,The husband or wife who has
-Dialogue: 4,0:06:52.16,0:06:54.18,Caption,,0,0,0,,not slept well in weeks.
-Dialogue: 4,0:06:54.18,0:06:57.30,Caption,,0,0,0,,The children caring for aging parents.
-Dialogue: 4,0:06:57.30,0:06:58.76,Caption,,0,0,0,,Give them strength,
-Dialogue: 4,0:06:58.76,0:07:00.32,Caption,,0,0,0,,patience and rest.
-Dialogue: 4,0:07:00.32,0:07:02.38,Caption,,0,0,0,,Let them know that what they do
-Dialogue: 4,0:07:02.38,0:07:04.66,Caption,,0,0,0,,is seen and treasured by you.
-Dialogue: 4,0:07:05.69,0:07:06.23,Caption,,0,0,0,,Father,
-Dialogue: 4,0:07:06.23,0:07:08.90,Caption,,0,0,0,,I lift up every sick child tonight,
-Dialogue: 4,0:07:08.90,0:07:10.12,Caption,,0,0,0,,and every parent
-Dialogue: 4,0:07:10.12,0:07:12.06,Caption,,0,0,0,,who is afraid for them.
-Dialogue: 4,0:07:12.06,0:07:14.42,Caption,,0,0,0,,Hold these little ones close.
-Dialogue: 4,0:07:14.42,0:07:15.64,Caption,,0,0,0,,Ease their fever,
-Dialogue: 4,0:07:15.64,0:07:16.80,Caption,,0,0,0,,calm their fear,
-Dialogue: 4,0:07:16.80,0:07:18.17,Caption,,0,0,0,,and bring them back
-Dialogue: 4,0:07:18.17,0:07:20.08,Caption,,0,0,0,,to playing and laughing.
-Dialogue: 4,0:07:20.08,0:07:22.94,Caption,,0,0,0,,Give their parents peace and sleep.
-Dialogue: 4,0:07:23.98,0:07:24.51,Caption,,0,0,0,,Father,
-Dialogue: 4,0:07:24.51,0:07:26.58,Caption,,0,0,0,,I lift up the people I know
-Dialogue: 4,0:07:26.58,0:07:28.29,Caption,,0,0,0,,who are ill tonight.
-Dialogue: 4,0:07:28.29,0:07:30.79,Caption,,0,0,0,,I bring their names to you now,
-Dialogue: 4,0:07:30.79,0:07:31.61,Caption,,0,0,0,,quietly.
-Dialogue: 4,0:07:31.61,0:07:33.11,Caption,,0,0,0,,Heal them.
-Dialogue: 4,0:07:33.11,0:07:34.68,Caption,,0,0,0,,Comfort them.
-Dialogue: 4,0:07:34.68,0:07:37.42,Caption,,0,0,0,,Surround them with people who love them,
-Dialogue: 4,0:07:37.42,0:07:39.55,Caption,,0,0,0,,and let them feel your presence
-Dialogue: 4,0:07:39.55,0:07:42.03,Caption,,0,0,0,,in the long hours of the night.
-Dialogue: 4,0:07:43.06,0:07:43.44,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:07:43.44,0:07:45.71,Caption,,0,0,0,,if bitterness or unforgiveness
-Dialogue: 4,0:07:45.71,0:07:47.08,Caption,,0,0,0,,is weighing on me,
-Dialogue: 4,0:07:47.08,0:07:49.23,Caption,,0,0,0,,I bring it to you as well.
-Dialogue: 4,0:07:49.23,0:07:50.87,Caption,,0,0,0,,Some wounds stay open
-Dialogue: 4,0:07:50.87,0:07:53.23,Caption,,0,0,0,,because I keep holding them.
-Dialogue: 4,0:07:53.23,0:07:54.62,Caption,,0,0,0,,Help me to forgive,
-Dialogue: 4,0:07:54.62,0:07:56.95,Caption,,0,0,0,,and to receive your forgiveness,
-Dialogue: 4,0:07:56.95,0:07:58.41,Caption,,0,0,0,,so that my heart can
-Dialogue: 4,0:07:58.41,0:08:00.00,Caption,,0,0,0,,heal tonight too.
-Dialogue: 5,0:08:01.03,0:08:02.18,Verse,,0,0,0,,{\pos(960,470)}O LORD my God,
-Dialogue: 5,0:08:02.18,0:08:03.65,Verse,,0,0,0,,{\pos(960,470)}I cried unto thee,
-Dialogue: 5,0:08:03.65,0:08:05.97,Verse,,0,0,0,,{\pos(960,470)}and thou hast healed me.
-Dialogue: 5,0:08:07.30,0:08:09.40,Verse,,0,0,0,,{\pos(960,470)}Bless the LORD, O my soul,
-Dialogue: 5,0:08:09.40,0:08:12.17,Verse,,0,0,0,,{\pos(960,470)}and forget not all his benefits:
-Dialogue: 5,0:08:12.17,0:08:14.98,Verse,,0,0,0,,{\pos(960,470)}Who forgiveth all thine iniquities;
-Dialogue: 5,0:08:14.98,0:08:17.99,Verse,,0,0,0,,{\pos(960,470)}who healeth all thy diseases.
-Dialogue: 4,0:08:19.32,0:08:20.58,Caption,,0,0,0,,Thank you, Lord,
-Dialogue: 4,0:08:20.58,0:08:22.48,Caption,,0,0,0,,for every healing I have
-Dialogue: 4,0:08:22.48,0:08:24.00,Caption,,0,0,0,,already received.
-Dialogue: 4,0:08:24.00,0:08:26.32,Caption,,0,0,0,,The sicknesses that passed.
-Dialogue: 4,0:08:26.32,0:08:28.52,Caption,,0,0,0,,The wounds that closed.
-Dialogue: 4,0:08:28.52,0:08:30.86,Caption,,0,0,0,,The sorrows that lifted.
-Dialogue: 4,0:08:30.86,0:08:33.53,Caption,,0,0,0,,I will not forget your benefits.
-Dialogue: 4,0:08:33.53,0:08:35.22,Caption,,0,0,0,,You have been good to me,
-Dialogue: 4,0:08:35.22,0:08:36.96,Caption,,0,0,0,,and I trust you to be good
-Dialogue: 4,0:08:36.96,0:08:38.26,Caption,,0,0,0,,to me tonight.
-Dialogue: 4,0:08:39.29,0:08:39.84,Caption,,0,0,0,,Father,
-Dialogue: 4,0:08:39.84,0:08:41.34,Caption,,0,0,0,,I pray for everyone
-Dialogue: 4,0:08:41.34,0:08:43.56,Caption,,0,0,0,,in a hospital bed tonight.
-Dialogue: 4,0:08:43.56,0:08:46.01,Caption,,0,0,0,,For those waiting for surgery,
-Dialogue: 4,0:08:46.01,0:08:47.16,Caption,,0,0,0,,those in pain,
-Dialogue: 4,0:08:47.16,0:08:48.79,Caption,,0,0,0,,those far from home,
-Dialogue: 4,0:08:48.79,0:08:49.77,Caption,,0,0,0,,those afraid
-Dialogue: 4,0:08:49.77,0:08:52.32,Caption,,0,0,0,,of what the doctors will say.
-Dialogue: 4,0:08:52.32,0:08:54.63,Caption,,0,0,0,,Sit beside each of them.
-Dialogue: 4,0:08:54.63,0:08:57.26,Caption,,0,0,0,,Let the beeping machines and the long
-Dialogue: 4,0:08:57.26,0:09:00.17,Caption,,0,0,0,,corridors be filled with your peace.
-Dialogue: 4,0:09:01.20,0:09:03.20,Caption,,0,0,0,,And Lord, bless the nurses,
-Dialogue: 4,0:09:03.20,0:09:05.14,Caption,,0,0,0,,doctors and carers working
-Dialogue: 4,0:09:05.14,0:09:06.73,Caption,,0,0,0,,through this night.
-Dialogue: 4,0:09:06.73,0:09:09.66,Caption,,0,0,0,,Keep them alert, kind and safe.
-Dialogue: 4,0:09:09.66,0:09:11.80,Caption,,0,0,0,,Let their hands bring comfort,
-Dialogue: 4,0:09:11.80,0:09:13.29,Caption,,0,0,0,,and refresh them when
-Dialogue: 4,0:09:13.29,0:09:15.07,Caption,,0,0,0,,their shift is over.
-Dialogue: 4,0:09:16.10,0:09:16.94,Caption,,0,0,0,,And Father,
-Dialogue: 4,0:09:16.94,0:09:19.60,Caption,,0,0,0,,for anyone who is grieving tonight,
-Dialogue: 4,0:09:19.60,0:09:21.27,Caption,,0,0,0,,especially for someone
-Dialogue: 4,0:09:21.27,0:09:22.79,Caption,,0,0,0,,they could not save,
-Dialogue: 4,0:09:22.79,0:09:24.19,Caption,,0,0,0,,hold them close.
-Dialogue: 4,0:09:24.19,0:09:26.29,Caption,,0,0,0,,Heal the ache of loss.
-Dialogue: 4,0:09:26.29,0:09:28.25,Caption,,0,0,0,,Let them weep without shame,
-Dialogue: 4,0:09:28.25,0:09:29.44,Caption,,0,0,0,,and let them feel
-Dialogue: 4,0:09:29.44,0:09:31.96,Caption,,0,0,0,,that you are weeping with them.
-Dialogue: 5,0:09:32.98,0:09:34.78,Verse,,0,0,0,,{\pos(960,470)}And God shall wipe away
-Dialogue: 5,0:09:34.78,0:09:36.98,Verse,,0,0,0,,{\pos(960,470)}all tears from their eyes;
-Dialogue: 5,0:09:36.98,0:09:39.42,Verse,,0,0,0,,{\pos(960,470)}and there shall be no more death,
-Dialogue: 5,0:09:39.42,0:09:41.42,Verse,,0,0,0,,{\pos(960,470)}neither sorrow, nor crying,
-Dialogue: 5,0:09:41.42,0:09:44.33,Verse,,0,0,0,,{\pos(960,470)}neither shall there be any more pain:
-Dialogue: 4,0:09:44.33,0:09:47.48,Caption,,0,0,0,,for the former things are passed away.
-Dialogue: 4,0:09:48.81,0:09:50.85,Caption,,0,0,0,,This is the promise beneath
-Dialogue: 4,0:09:50.85,0:09:52.55,Caption,,0,0,0,,every other promise.
-Dialogue: 4,0:09:52.55,0:09:54.55,Caption,,0,0,0,,One day God himself will
-Dialogue: 4,0:09:54.55,0:09:56.48,Caption,,0,0,0,,wipe away every tear.
-Dialogue: 4,0:09:56.48,0:09:59.29,Caption,,0,0,0,,Pain will not have the last word.
-Dialogue: 4,0:09:59.29,0:10:01.97,Caption,,0,0,0,,Whatever healing you receive tonight
-Dialogue: 4,0:10:01.97,0:10:04.48,Caption,,0,0,0,,is a small taste of that day.
-Dialogue: 4,0:10:05.51,0:10:06.66,Caption,,0,0,0,,O Lord my God,
-Dialogue: 4,0:10:06.66,0:10:08.13,Caption,,0,0,0,,I cried unto thee,
-Dialogue: 4,0:10:08.13,0:10:10.28,Caption,,0,0,0,,and thou hast healed me.
-Dialogue: 4,0:10:10.28,0:10:12.32,Caption,,0,0,0,,David wrote that looking back
-Dialogue: 4,0:10:12.32,0:10:14.00,Caption,,0,0,0,,on a night he thought he
-Dialogue: 4,0:10:14.00,0:10:15.45,Caption,,0,0,0,,would not survive.
-Dialogue: 4,0:10:15.45,0:10:16.83,Caption,,0,0,0,,One day you may look
-Dialogue: 4,0:10:16.83,0:10:18.42,Caption,,0,0,0,,back on this night too,
-Dialogue: 4,0:10:18.42,0:10:20.00,Caption,,0,0,0,,and see how God carried
-Dialogue: 4,0:10:20.00,0:10:21.39,Caption,,0,0,0,,you through it.
-Dialogue: 4,0:10:22.42,0:10:24.36,Caption,,0,0,0,,And we know that all things
-Dialogue: 4,0:10:24.36,0:10:25.93,Caption,,0,0,0,,work together for good
-Dialogue: 4,0:10:25.93,0:10:27.51,Caption,,0,0,0,,to them that love God,
-Dialogue: 4,0:10:27.51,0:10:29.37,Caption,,0,0,0,,to them who are the called
-Dialogue: 4,0:10:29.37,0:10:31.52,Caption,,0,0,0,,according to his purpose.
-Dialogue: 4,0:10:32.84,0:10:33.22,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:10:33.22,0:10:35.50,Caption,,0,0,0,,I do not understand everything
-Dialogue: 4,0:10:35.50,0:10:37.12,Caption,,0,0,0,,I am going through.
-Dialogue: 4,0:10:37.12,0:10:38.84,Caption,,0,0,0,,But I choose to trust
-Dialogue: 4,0:10:38.84,0:10:40.56,Caption,,0,0,0,,that you are working,
-Dialogue: 4,0:10:40.56,0:10:42.38,Caption,,0,0,0,,even here, even now.
-Dialogue: 4,0:10:42.38,0:10:44.09,Caption,,0,0,0,,Help me to wait with hope,
-Dialogue: 4,0:10:44.09,0:10:46.07,Caption,,0,0,0,,and to see your goodness again
-Dialogue: 4,0:10:46.07,0:10:48.13,Caption,,0,0,0,,in the land of the living.
-Dialogue: 4,0:10:49.16,0:10:49.72,Caption,,0,0,0,,Father,
-Dialogue: 4,0:10:49.72,0:10:52.00,Caption,,0,0,0,,give me hope for tomorrow.
-Dialogue: 4,0:10:52.00,0:10:53.91,Caption,,0,0,0,,Not a forced cheerfulness,
-Dialogue: 4,0:10:53.91,0:10:55.53,Caption,,0,0,0,,but a quiet confidence
-Dialogue: 4,0:10:55.53,0:10:57.07,Caption,,0,0,0,,that you are with me,
-Dialogue: 4,0:10:57.07,0:10:59.31,Caption,,0,0,0,,whatever the morning brings.
-Dialogue: 4,0:10:59.31,0:11:01.47,Caption,,0,0,0,,Let me wake with new strength,
-Dialogue: 4,0:11:01.47,0:11:03.21,Caption,,0,0,0,,and see your mercy again
-Dialogue: 4,0:11:03.21,0:11:04.93,Caption,,0,0,0,,when the sun rises.
-Dialogue: 4,0:11:05.96,0:11:08.66,Caption,,0,0,0,,And now, Lord, give me sleep.
-Dialogue: 4,0:11:08.66,0:11:09.06,Caption,,0,0,0,,Deep,
-Dialogue: 4,0:11:09.06,0:11:11.10,Caption,,0,0,0,,restoring sleep that lets
-Dialogue: 4,0:11:11.10,0:11:13.30,Caption,,0,0,0,,my body do the healing work
-Dialogue: 4,0:11:13.30,0:11:15.28,Caption,,0,0,0,,you designed it to do.
-Dialogue: 4,0:11:15.28,0:11:16.64,Caption,,0,0,0,,If pain wakes me,
-Dialogue: 4,0:11:16.64,0:11:18.89,Caption,,0,0,0,,let me feel your nearness.
-Dialogue: 4,0:11:18.89,0:11:20.25,Caption,,0,0,0,,If fear wakes me,
-Dialogue: 4,0:11:20.25,0:11:22.27,Caption,,0,0,0,,let me hear your peace.
-Dialogue: 4,0:11:22.27,0:11:23.97,Caption,,0,0,0,,And let me fall asleep
-Dialogue: 4,0:11:23.97,0:11:25.78,Caption,,0,0,0,,again in your arms.
-Dialogue: 4,0:11:26.81,0:11:28.46,Caption,,0,0,0,,I surrender my body,
-Dialogue: 4,0:11:28.46,0:11:30.28,Caption,,0,0,0,,my heart and my future
-Dialogue: 4,0:11:30.28,0:11:31.70,Caption,,0,0,0,,to you tonight.
-Dialogue: 4,0:11:31.70,0:11:33.28,Caption,,0,0,0,,I do not have to hold
-Dialogue: 4,0:11:33.28,0:11:34.96,Caption,,0,0,0,,everything together.
-Dialogue: 4,0:11:34.96,0:11:36.52,Caption,,0,0,0,,You hold me.
-Dialogue: 4,0:11:36.52,0:11:39.54,Caption,,0,0,0,,Into your hands I commit my spirit,
-Dialogue: 4,0:11:39.54,0:11:40.76,Caption,,0,0,0,,as I rest.
-Dialogue: 4,0:11:41.78,0:11:44.18,Caption,,0,0,0,,Breathe in again, slowly.
-Dialogue: 4,0:11:44.18,0:11:45.92,Caption,,0,0,0,,And let it out.
-Dialogue: 4,0:11:45.92,0:11:48.30,Caption,,0,0,0,,Let every muscle relax.
-Dialogue: 4,0:11:48.30,0:11:50.46,Caption,,0,0,0,,Let God hold you.
-Dialogue: 4,0:11:52.29,0:11:54.90,Caption,,0,0,0,,Say these words with me quietly,
-Dialogue: 4,0:11:54.90,0:11:56.06,Caption,,0,0,0,,as you rest.
-Dialogue: 4,0:11:56.06,0:11:58.30,Caption,,0,0,0,,The Lord is my healer.
-Dialogue: 4,0:11:58.30,0:12:00.66,Caption,,0,0,0,,He binds up my wounds.
-Dialogue: 4,0:12:00.66,0:12:03.32,Caption,,0,0,0,,I am not alone in this bed.
-Dialogue: 4,0:12:03.32,0:12:04.01,Caption,,0,0,0,,My body,
-Dialogue: 4,0:12:04.01,0:12:05.76,Caption,,0,0,0,,my heart and my mind
-Dialogue: 4,0:12:05.76,0:12:07.42,Caption,,0,0,0,,are in his hands.
-Dialogue: 4,0:12:07.42,0:12:08.93,Caption,,0,0,0,,I will rest tonight,
-Dialogue: 4,0:12:08.93,0:12:10.86,Caption,,0,0,0,,and he will renew me.
-Dialogue: 4,0:12:12.20,0:12:14.70,Caption,,0,0,0,,I laid me down and slept;
-Dialogue: 4,0:12:14.70,0:12:16.22,Caption,,0,0,0,,I awaked;
-Dialogue: 5,0:12:16.22,0:12:18.77,Verse,,0,0,0,,{\pos(960,470)}for the LORD sustained me.
-Dialogue: 4,0:12:20.10,0:12:22.61,Caption,,0,0,0,,I laid me down and slept;
-Dialogue: 4,0:12:22.61,0:12:24.13,Caption,,0,0,0,,I awaked;
-Dialogue: 4,0:12:24.13,0:12:26.51,Caption,,0,0,0,,for the Lord sustained me.
-Dialogue: 4,0:12:26.51,0:12:29.52,Caption,,0,0,0,,Sleep itself is an act of trust.
-Dialogue: 4,0:12:29.52,0:12:31.84,Caption,,0,0,0,,You let go of control for hours,
-Dialogue: 4,0:12:31.84,0:12:34.16,Caption,,0,0,0,,and God keeps your heart beating
-Dialogue: 4,0:12:34.16,0:12:36.15,Caption,,0,0,0,,and your lungs breathing.
-Dialogue: 4,0:12:36.15,0:12:36.76,Caption,,0,0,0,,Tonight,
-Dialogue: 4,0:12:36.76,0:12:39.10,Caption,,0,0,0,,he will sustain you again.
-Dialogue: 4,0:12:40.13,0:12:42.98,Caption,,0,0,0,,Here is one thing to do tonight.
-Dialogue: 4,0:12:42.98,0:12:45.23,Caption,,0,0,0,,Place your hand where it hurts,
-Dialogue: 4,0:12:45.23,0:12:46.61,Caption,,0,0,0,,or over your heart,
-Dialogue: 4,0:12:46.61,0:12:48.68,Caption,,0,0,0,,and pray just three words:
-Dialogue: 4,0:12:48.68,0:12:50.42,Caption,,0,0,0,,Lord, heal me.
-Dialogue: 4,0:12:50.42,0:12:52.07,Caption,,0,0,0,,Then leave it with him,
-Dialogue: 4,0:12:52.07,0:12:54.08,Caption,,0,0,0,,and let yourself sleep.
-Dialogue: 4,0:12:55.11,0:12:57.07,Caption,,0,0,0,,If you prayed this prayer,
-Dialogue: 4,0:12:57.07,0:12:59.33,Caption,,0,0,0,,type amen in the comments now,
-Dialogue: 4,0:12:59.33,0:13:00.54,Caption,,0,0,0,,and if you want,
-Dialogue: 4,0:13:00.54,0:13:02.42,Caption,,0,0,0,,share the name of someone
-Dialogue: 4,0:13:02.42,0:13:03.78,Caption,,0,0,0,,who needs healing,
-Dialogue: 4,0:13:03.78,0:13:05.70,Caption,,0,0,0,,so others can pray too.
-Dialogue: 4,0:13:05.70,0:13:08.24,Caption,,0,0,0,,Then stay right where you are.
-Dialogue: 4,0:13:08.24,0:13:10.19,Caption,,0,0,0,,For the rest of this time,
-Dialogue: 4,0:13:10.19,0:13:11.62,Caption,,0,0,0,,I will read healing
-Dialogue: 4,0:13:11.62,0:13:13.57,Caption,,0,0,0,,Scripture over you slowly,
-Dialogue: 4,0:13:13.57,0:13:14.69,Caption,,0,0,0,,so you can fall
-Dialogue: 4,0:13:14.69,0:13:16.62,Caption,,0,0,0,,asleep in God's care.
-Dialogue: 4,0:13:18.45,0:13:20.36,Caption,,0,0,0,,Let us begin by letting
-Dialogue: 4,0:13:20.36,0:13:21.96,Caption,,0,0,0,,your body settle.
-Dialogue: 4,0:13:21.96,0:13:23.40,Caption,,0,0,0,,Breathe in gently,
-Dialogue: 4,0:13:23.40,0:13:26.28,Caption,,0,0,0,,as deeply as is comfortable for you,
-Dialogue: 4,0:13:26.28,0:13:28.79,Caption,,0,0,0,,and let the breath go slowly.
-Dialogue: 4,0:13:28.79,0:13:30.19,Caption,,0,0,0,,If there is pain,
-Dialogue: 4,0:13:30.19,0:13:31.68,Caption,,0,0,0,,do not fight it.
-Dialogue: 4,0:13:31.68,0:13:32.91,Caption,,0,0,0,,Just notice it,
-Dialogue: 4,0:13:32.91,0:13:35.38,Caption,,0,0,0,,and place it in God's hands.
-Dialogue: 4,0:13:35.38,0:13:37.50,Caption,,0,0,0,,Let your face soften.
-Dialogue: 4,0:13:37.50,0:13:39.79,Caption,,0,0,0,,Let your eyes close.
-Dialogue: 4,0:13:40.82,0:13:43.01,Caption,,0,0,0,,Let your shoulders drop.
-Dialogue: 4,0:13:43.01,0:13:44.43,Caption,,0,0,0,,Let your arms rest
-Dialogue: 4,0:13:44.43,0:13:46.20,Caption,,0,0,0,,heavy at your sides.
-Dialogue: 4,0:13:46.20,0:13:48.30,Caption,,0,0,0,,Let your hands open.
-Dialogue: 4,0:13:48.30,0:13:50.45,Caption,,0,0,0,,Feel the mattress holding you,
-Dialogue: 4,0:13:50.45,0:13:52.94,Caption,,0,0,0,,the pillow supporting your head.
-Dialogue: 4,0:13:52.94,0:13:54.68,Caption,,0,0,0,,You do not have to hold
-Dialogue: 4,0:13:54.68,0:13:56.38,Caption,,0,0,0,,yourself up tonight.
-Dialogue: 4,0:13:56.38,0:13:58.16,Caption,,0,0,0,,You are held.
-Dialogue: 4,0:13:59.19,0:14:01.35,Caption,,0,0,0,,Let the warmth of rest spread
-Dialogue: 4,0:14:01.35,0:14:03.29,Caption,,0,0,0,,slowly through your chest,
-Dialogue: 4,0:14:03.29,0:14:05.08,Caption,,0,0,0,,your stomach, your hips,
-Dialogue: 4,0:14:05.08,0:14:05.83,Caption,,0,0,0,,your legs,
-Dialogue: 4,0:14:05.83,0:14:08.24,Caption,,0,0,0,,all the way down to your feet.
-Dialogue: 4,0:14:08.24,0:14:10.32,Caption,,0,0,0,,Every part of you is known
-Dialogue: 4,0:14:10.32,0:14:12.41,Caption,,0,0,0,,by the God who made you.
-Dialogue: 4,0:14:12.41,0:14:14.79,Caption,,0,0,0,,Every cell is in his care.
-Dialogue: 4,0:14:14.79,0:14:16.46,Caption,,0,0,0,,Rest now.
-Dialogue: 4,0:14:17.49,0:14:20.04,Caption,,0,0,0,,Now let the day itself go.
-Dialogue: 4,0:14:20.04,0:14:21.21,Caption,,0,0,0,,The appointments,
-Dialogue: 4,0:14:21.21,0:14:22.31,Caption,,0,0,0,,the phone calls,
-Dialogue: 4,0:14:22.31,0:14:24.49,Caption,,0,0,0,,the waiting rooms, the worry.
-Dialogue: 4,0:14:24.49,0:14:26.37,Caption,,0,0,0,,Let each one drift away
-Dialogue: 4,0:14:26.37,0:14:28.68,Caption,,0,0,0,,like a leaf on slow water.
-Dialogue: 4,0:14:28.68,0:14:30.19,Caption,,0,0,0,,There is nothing more
-Dialogue: 4,0:14:30.19,0:14:31.89,Caption,,0,0,0,,you need to do today.
-Dialogue: 4,0:14:31.89,0:14:32.56,Caption,,0,0,0,,Tonight,
-Dialogue: 4,0:14:32.56,0:14:35.12,Caption,,0,0,0,,your only task is to rest.
-Dialogue: 4,0:14:36.15,0:14:37.57,Caption,,0,0,0,,Listen to this psalm
-Dialogue: 4,0:14:37.57,0:14:39.25,Caption,,0,0,0,,of healing and mercy.
-Dialogue: 5,0:14:39.25,0:14:41.76,Verse,,0,0,0,,{\pos(960,470)}Bless the LORD, O my soul:
-Dialogue: 5,0:14:41.76,0:14:43.82,Verse,,0,0,0,,{\pos(960,470)}and all that is within me,
-Dialogue: 5,0:14:43.82,0:14:45.58,Verse,,0,0,0,,{\pos(960,470)}bless his holy name.
-Dialogue: 5,0:14:45.58,0:14:47.69,Verse,,0,0,0,,{\pos(960,470)}Bless the LORD, O my soul,
-Dialogue: 5,0:14:47.69,0:14:50.46,Verse,,0,0,0,,{\pos(960,470)}and forget not all his benefits:
-Dialogue: 5,0:14:50.46,0:14:53.26,Verse,,0,0,0,,{\pos(960,470)}Who forgiveth all thine iniquities;
-Dialogue: 5,0:14:53.26,0:14:56.13,Verse,,0,0,0,,{\pos(960,470)}who healeth all thy diseases;
-Dialogue: 5,0:14:56.13,0:14:59.38,Verse,,0,0,0,,{\pos(960,470)}Who redeemeth thy life from destruction;
-Dialogue: 5,0:14:59.38,0:15:02.13,Verse,,0,0,0,,{\pos(960,470)}who crowneth thee with lovingkindness
-Dialogue: 5,0:15:02.13,0:15:03.72,Verse,,0,0,0,,{\pos(960,470)}and tender mercies;
-Dialogue: 5,0:15:03.72,0:15:05.13,Verse,,0,0,0,,{\pos(960,470)}Who satisfieth thy
-Dialogue: 5,0:15:05.13,0:15:07.12,Verse,,0,0,0,,{\pos(960,470)}mouth with good things;
-Dialogue: 5,0:15:07.12,0:15:09.28,Verse,,0,0,0,,{\pos(960,470)}so that thy youth is renewed
-Dialogue: 5,0:15:09.28,0:15:10.78,Verse,,0,0,0,,{\pos(960,470)}like the eagle's.
-Dialogue: 5,0:15:10.78,0:15:13.67,Verse,,0,0,0,,{\pos(960,470)}The LORD is merciful and gracious,
-Dialogue: 5,0:15:13.67,0:15:14.86,Verse,,0,0,0,,{\pos(960,470)}slow to anger,
-Dialogue: 5,0:15:14.86,0:15:17.00,Verse,,0,0,0,,{\pos(960,470)}and plenteous in mercy.
-Dialogue: 5,0:15:17.00,0:15:19.40,Verse,,0,0,0,,{\pos(960,470)}He will not always chide:
-Dialogue: 5,0:15:19.40,0:15:20.97,Verse,,0,0,0,,{\pos(960,470)}neither will he keep
-Dialogue: 5,0:15:20.97,0:15:22.65,Verse,,0,0,0,,{\pos(960,470)}his anger for ever.
-Dialogue: 5,0:15:22.65,0:15:24.00,Verse,,0,0,0,,{\pos(960,470)}He hath not dealt
-Dialogue: 5,0:15:24.00,0:15:26.00,Verse,,0,0,0,,{\pos(960,470)}with us after our sins;
-Dialogue: 5,0:15:26.00,0:15:28.06,Verse,,0,0,0,,{\pos(960,470)}nor rewarded us according
-Dialogue: 5,0:15:28.06,0:15:29.73,Verse,,0,0,0,,{\pos(960,470)}to our iniquities.
-Dialogue: 5,0:15:29.73,0:15:31.06,Verse,,0,0,0,,{\pos(960,470)}For as the heaven
-Dialogue: 5,0:15:31.06,0:15:32.95,Verse,,0,0,0,,{\pos(960,470)}is high above the earth,
-Dialogue: 5,0:15:32.95,0:15:34.60,Verse,,0,0,0,,{\pos(960,470)}so great is his mercy
-Dialogue: 5,0:15:34.60,0:15:36.82,Verse,,0,0,0,,{\pos(960,470)}toward them that fear him.
-Dialogue: 5,0:15:36.82,0:15:38.20,Verse,,0,0,0,,{\pos(960,470)}As far as the east
-Dialogue: 5,0:15:38.20,0:15:39.49,Verse,,0,0,0,,{\pos(960,470)}is from the west,
-Dialogue: 5,0:15:39.49,0:15:41.48,Verse,,0,0,0,,{\pos(960,470)}so far hath he removed our
-Dialogue: 5,0:15:41.48,0:15:43.42,Verse,,0,0,0,,{\pos(960,470)}transgressions from us.
-Dialogue: 5,0:15:43.42,0:15:46.29,Verse,,0,0,0,,{\pos(960,470)}Like as a father pitieth his children,
-Dialogue: 5,0:15:46.29,0:15:47.72,Verse,,0,0,0,,{\pos(960,470)}so the LORD pitieth
-Dialogue: 5,0:15:47.72,0:15:49.51,Verse,,0,0,0,,{\pos(960,470)}them that fear him.
-Dialogue: 4,0:15:50.54,0:15:53.66,Caption,,0,0,0,,Like as a father pitieth his children.
-Dialogue: 4,0:15:53.66,0:15:56.03,Caption,,0,0,0,,Think of a loving father sitting
-Dialogue: 4,0:15:56.03,0:15:58.61,Caption,,0,0,0,,beside a sick child's bed at night,
-Dialogue: 4,0:15:58.61,0:16:00.71,Caption,,0,0,0,,watching, caring, staying.
-Dialogue: 4,0:16:00.71,0:16:01.90,Caption,,0,0,0,,That is how God
-Dialogue: 4,0:16:01.90,0:16:03.84,Caption,,0,0,0,,is with you tonight.
-Dialogue: 5,0:16:04.86,0:16:07.05,Verse,,0,0,0,,{\pos(960,470)}The LORD is my shepherd;
-Dialogue: 5,0:16:07.05,0:16:08.94,Verse,,0,0,0,,{\pos(960,470)}I shall not want.
-Dialogue: 5,0:16:08.94,0:16:10.51,Verse,,0,0,0,,{\pos(960,470)}He maketh me to lie
-Dialogue: 5,0:16:10.51,0:16:12.60,Verse,,0,0,0,,{\pos(960,470)}down in green pastures:
-Dialogue: 5,0:16:12.60,0:16:15.78,Verse,,0,0,0,,{\pos(960,470)}he leadeth me beside the still waters.
-Dialogue: 5,0:16:15.78,0:16:18.10,Verse,,0,0,0,,{\pos(960,470)}He restoreth my soul:
-Dialogue: 5,0:16:18.10,0:16:20.14,Verse,,0,0,0,,{\pos(960,470)}he leadeth me in the paths
-Dialogue: 5,0:16:20.14,0:16:23.22,Verse,,0,0,0,,{\pos(960,470)}of righteousness for his name's sake.
-Dialogue: 5,0:16:23.22,0:16:23.52,Verse,,0,0,0,,{\pos(960,470)}Yea,
-Dialogue: 5,0:16:23.52,0:16:25.84,Verse,,0,0,0,,{\pos(960,470)}though I walk through the valley
-Dialogue: 5,0:16:25.84,0:16:27.51,Verse,,0,0,0,,{\pos(960,470)}of the shadow of death,
-Dialogue: 5,0:16:27.51,0:16:29.14,Verse,,0,0,0,,{\pos(960,470)}I will fear no evil:
-Dialogue: 5,0:16:29.14,0:16:31.42,Verse,,0,0,0,,{\pos(960,470)}for thou art with me;
-Dialogue: 5,0:16:31.42,0:16:33.17,Verse,,0,0,0,,{\pos(960,470)}thy rod and thy staff
-Dialogue: 5,0:16:33.17,0:16:34.69,Verse,,0,0,0,,{\pos(960,470)}they comfort me.
-Dialogue: 5,0:16:34.69,0:16:37.28,Verse,,0,0,0,,{\pos(960,470)}Thou preparest a table before me
-Dialogue: 5,0:16:37.28,0:16:40.05,Verse,,0,0,0,,{\pos(960,470)}in the presence of mine enemies:
-Dialogue: 5,0:16:40.05,0:16:42.94,Verse,,0,0,0,,{\pos(960,470)}thou anointest my head with oil;
-Dialogue: 5,0:16:42.94,0:16:45.00,Verse,,0,0,0,,{\pos(960,470)}my cup runneth over.
-Dialogue: 5,0:16:45.00,0:16:47.54,Verse,,0,0,0,,{\pos(960,470)}Surely goodness and mercy shall
-Dialogue: 5,0:16:47.54,0:16:48.94,Verse,,0,0,0,,{\pos(960,470)}follow me all the
-Dialogue: 5,0:16:48.94,0:16:50.43,Verse,,0,0,0,,{\pos(960,470)}days of my life:
-Dialogue: 5,0:16:50.43,0:16:52.56,Verse,,0,0,0,,{\pos(960,470)}and I will dwell in the house
-Dialogue: 5,0:16:52.56,0:16:54.45,Verse,,0,0,0,,{\pos(960,470)}of the LORD for ever.
-Dialogue: 4,0:16:55.48,0:16:57.77,Caption,,0,0,0,,He restoreth my soul.
-Dialogue: 4,0:16:57.77,0:17:00.20,Caption,,0,0,0,,Restoring is slow, quiet work,
-Dialogue: 4,0:17:00.20,0:17:01.75,Caption,,0,0,0,,the kind that often
-Dialogue: 4,0:17:01.75,0:17:03.79,Caption,,0,0,0,,happens while we sleep.
-Dialogue: 4,0:17:03.79,0:17:06.08,Caption,,0,0,0,,Let the shepherd do his restoring
-Dialogue: 4,0:17:06.08,0:17:07.81,Caption,,0,0,0,,work in you tonight.
-Dialogue: 4,0:17:08.84,0:17:11.38,Caption,,0,0,0,,God is our refuge and strength,
-Dialogue: 4,0:17:11.38,0:17:14.10,Caption,,0,0,0,,a very present help in trouble.
-Dialogue: 4,0:17:14.10,0:17:16.02,Caption,,0,0,0,,Therefore will not we fear,
-Dialogue: 4,0:17:16.02,0:17:18.01,Caption,,0,0,0,,though the earth be removed,
-Dialogue: 4,0:17:18.01,0:17:20.51,Caption,,0,0,0,,and though the mountains be carried
-Dialogue: 4,0:17:20.51,0:17:22.54,Caption,,0,0,0,,into the midst of the sea;
-Dialogue: 4,0:17:22.54,0:17:24.19,Caption,,0,0,0,,Though the waters thereof
-Dialogue: 4,0:17:24.19,0:17:25.58,Caption,,0,0,0,,roar and be troubled,
-Dialogue: 4,0:17:25.58,0:17:27.30,Caption,,0,0,0,,though the mountains shake
-Dialogue: 4,0:17:27.30,0:17:29.20,Caption,,0,0,0,,with the swelling thereof.
-Dialogue: 4,0:17:29.20,0:17:29.95,Caption,,0,0,0,,Be still,
-Dialogue: 4,0:17:29.95,0:17:32.05,Caption,,0,0,0,,and know that I am God:
-Dialogue: 4,0:17:32.05,0:17:34.86,Caption,,0,0,0,,I will be exalted among the heathen,
-Dialogue: 4,0:17:34.86,0:17:37.46,Caption,,0,0,0,,I will be exalted in the earth.
-Dialogue: 5,0:17:37.46,0:17:39.98,Verse,,0,0,0,,{\pos(960,470)}The LORD of hosts is with us;
-Dialogue: 4,0:17:39.98,0:17:43.25,Caption,,0,0,0,,the God of Jacob is our refuge.
-Dialogue: 4,0:17:44.28,0:17:46.88,Caption,,0,0,0,,The Lord of hosts is with us.
-Dialogue: 4,0:17:46.88,0:17:49.63,Caption,,0,0,0,,Even when the body feels fragile
-Dialogue: 4,0:17:49.63,0:17:51.79,Caption,,0,0,0,,and the future uncertain,
-Dialogue: 4,0:17:51.79,0:17:53.77,Caption,,0,0,0,,the God of angel armies
-Dialogue: 4,0:17:53.77,0:17:55.59,Caption,,0,0,0,,is beside your bed.
-Dialogue: 4,0:17:55.59,0:17:56.92,Caption,,0,0,0,,Be still.
-Dialogue: 4,0:17:56.92,0:17:57.81,Caption,,0,0,0,,He is God,
-Dialogue: 4,0:17:57.81,0:17:59.68,Caption,,0,0,0,,and you can rest.
-Dialogue: 4,0:18:00.71,0:18:02.66,Caption,,0,0,0,,Breathe in slowly.
-Dialogue: 4,0:18:02.66,0:18:04.40,Caption,,0,0,0,,And let it go.
-Dialogue: 4,0:18:04.40,0:18:06.50,Caption,,0,0,0,,Rest in the quiet.
-Dialogue: 5,0:18:08.33,0:18:10.53,Verse,,0,0,0,,{\pos(960,470)}But now thus saith the LORD
-Dialogue: 5,0:18:10.53,0:18:12.00,Verse,,0,0,0,,{\pos(960,470)}that created thee,
-Dialogue: 5,0:18:12.00,0:18:12.65,Verse,,0,0,0,,{\pos(960,470)}O Jacob,
-Dialogue: 5,0:18:12.65,0:18:14.61,Verse,,0,0,0,,{\pos(960,470)}and he that formed thee,
-Dialogue: 5,0:18:14.61,0:18:16.34,Verse,,0,0,0,,{\pos(960,470)}O Israel, Fear not:
-Dialogue: 5,0:18:16.34,0:18:18.27,Verse,,0,0,0,,{\pos(960,470)}for I have redeemed thee,
-Dialogue: 5,0:18:18.27,0:18:20.85,Verse,,0,0,0,,{\pos(960,470)}I have called thee by thy name;
-Dialogue: 5,0:18:20.85,0:18:22.67,Verse,,0,0,0,,{\pos(960,470)}thou art mine.
-Dialogue: 5,0:18:22.67,0:18:25.34,Verse,,0,0,0,,{\pos(960,470)}When thou passest through the waters,
-Dialogue: 5,0:18:25.34,0:18:26.97,Verse,,0,0,0,,{\pos(960,470)}I will be with thee;
-Dialogue: 5,0:18:26.97,0:18:28.59,Verse,,0,0,0,,{\pos(960,470)}and through the rivers,
-Dialogue: 5,0:18:28.59,0:18:30.82,Verse,,0,0,0,,{\pos(960,470)}they shall not overflow thee:
-Dialogue: 5,0:18:30.82,0:18:33.42,Verse,,0,0,0,,{\pos(960,470)}when thou walkest through the fire,
-Dialogue: 5,0:18:33.42,0:18:35.46,Verse,,0,0,0,,{\pos(960,470)}thou shalt not be burned;
-Dialogue: 5,0:18:35.46,0:18:37.31,Verse,,0,0,0,,{\pos(960,470)}neither shall the flame
-Dialogue: 5,0:18:37.31,0:18:39.03,Verse,,0,0,0,,{\pos(960,470)}kindle upon thee.
-Dialogue: 4,0:18:40.06,0:18:42.69,Caption,,0,0,0,,When thou passest through the waters,
-Dialogue: 4,0:18:42.69,0:18:44.29,Caption,,0,0,0,,I will be with thee.
-Dialogue: 4,0:18:44.29,0:18:47.18,Caption,,0,0,0,,Illness can feel like deep water.
-Dialogue: 4,0:18:47.18,0:18:48.88,Caption,,0,0,0,,But God does not watch
-Dialogue: 4,0:18:48.88,0:18:50.22,Caption,,0,0,0,,from the shore.
-Dialogue: 4,0:18:50.22,0:18:52.32,Caption,,0,0,0,,He walks through it with you.
-Dialogue: 4,0:18:52.32,0:18:53.95,Caption,,0,0,0,,You are his.
-Dialogue: 4,0:18:53.95,0:18:56.05,Caption,,0,0,0,,He knows your name.
-Dialogue: 4,0:18:57.08,0:18:59.63,Caption,,0,0,0,,For which cause we faint not;
-Dialogue: 4,0:18:59.63,0:19:02.37,Caption,,0,0,0,,but though our outward man perish,
-Dialogue: 4,0:19:02.37,0:19:03.82,Caption,,0,0,0,,yet the inward man
-Dialogue: 4,0:19:03.82,0:19:05.78,Caption,,0,0,0,,is renewed day by day.
-Dialogue: 4,0:19:05.78,0:19:07.71,Caption,,0,0,0,,For our light affliction,
-Dialogue: 4,0:19:07.71,0:19:09.72,Caption,,0,0,0,,which is but for a moment,
-Dialogue: 4,0:19:09.72,0:19:12.43,Caption,,0,0,0,,worketh for us a far more exceeding
-Dialogue: 4,0:19:12.43,0:19:14.77,Caption,,0,0,0,,and eternal weight of glory;
-Dialogue: 4,0:19:14.77,0:19:16.92,Caption,,0,0,0,,While we look not at the things
-Dialogue: 4,0:19:16.92,0:19:17.95,Caption,,0,0,0,,which are seen,
-Dialogue: 4,0:19:17.95,0:19:19.13,Caption,,0,0,0,,but at the things
-Dialogue: 4,0:19:19.13,0:19:20.62,Caption,,0,0,0,,which are not seen:
-Dialogue: 4,0:19:20.62,0:19:22.06,Caption,,0,0,0,,for the things which
-Dialogue: 4,0:19:22.06,0:19:23.81,Caption,,0,0,0,,are seen are temporal;
-Dialogue: 4,0:19:23.81,0:19:25.34,Caption,,0,0,0,,but the things which
-Dialogue: 4,0:19:25.34,0:19:27.60,Caption,,0,0,0,,are not seen are eternal.
-Dialogue: 4,0:19:28.63,0:19:31.64,Caption,,0,0,0,,The things which are seen are temporal.
-Dialogue: 4,0:19:31.64,0:19:34.33,Caption,,0,0,0,,The pain you feel tonight is real,
-Dialogue: 4,0:19:34.33,0:19:36.69,Caption,,0,0,0,,but it is not the whole story,
-Dialogue: 4,0:19:36.69,0:19:38.61,Caption,,0,0,0,,and it is not forever.
-Dialogue: 4,0:19:38.61,0:19:39.45,Caption,,0,0,0,,Beneath it,
-Dialogue: 4,0:19:39.45,0:19:41.29,Caption,,0,0,0,,God is renewing the part
-Dialogue: 4,0:19:41.29,0:19:43.01,Caption,,0,0,0,,of you that lasts.
-Dialogue: 5,0:19:44.04,0:19:45.10,Verse,,0,0,0,,{\pos(960,470)}I had fainted,
-Dialogue: 5,0:19:45.10,0:19:47.20,Verse,,0,0,0,,{\pos(960,470)}unless I had believed to see
-Dialogue: 5,0:19:47.20,0:19:49.00,Verse,,0,0,0,,{\pos(960,470)}the goodness of the LORD
-Dialogue: 5,0:19:49.00,0:19:51.14,Verse,,0,0,0,,{\pos(960,470)}in the land of the living.
-Dialogue: 5,0:19:51.14,0:19:53.11,Verse,,0,0,0,,{\pos(960,470)}Wait on the LORD:
-Dialogue: 5,0:19:53.11,0:19:54.46,Verse,,0,0,0,,{\pos(960,470)}be of good courage,
-Dialogue: 5,0:19:54.46,0:19:57.21,Verse,,0,0,0,,{\pos(960,470)}and he shall strengthen thine heart:
-Dialogue: 5,0:19:57.21,0:19:59.67,Verse,,0,0,0,,{\pos(960,470)}wait, I say, on the LORD.
-Dialogue: 4,0:20:00.70,0:20:02.91,Caption,,0,0,0,,To see the goodness of the Lord
-Dialogue: 4,0:20:02.91,0:20:04.94,Caption,,0,0,0,,in the land of the living.
-Dialogue: 4,0:20:04.94,0:20:07.07,Caption,,0,0,0,,Not only someday, but here,
-Dialogue: 4,0:20:07.07,0:20:08.10,Caption,,0,0,0,,in this life,
-Dialogue: 4,0:20:08.10,0:20:09.70,Caption,,0,0,0,,in the days ahead.
-Dialogue: 4,0:20:09.70,0:20:11.58,Caption,,0,0,0,,Wait on the Lord tonight,
-Dialogue: 4,0:20:11.58,0:20:13.49,Caption,,0,0,0,,and be of good courage.
-Dialogue: 4,0:20:13.49,0:20:16.04,Caption,,0,0,0,,He will strengthen your heart.
-Dialogue: 5,0:20:17.07,0:20:18.46,Verse,,0,0,0,,{\pos(960,470)}I sought the LORD,
-Dialogue: 5,0:20:18.46,0:20:19.70,Verse,,0,0,0,,{\pos(960,470)}and he heard me,
-Dialogue: 5,0:20:19.70,0:20:22.58,Verse,,0,0,0,,{\pos(960,470)}and delivered me from all my fears.
-Dialogue: 5,0:20:22.58,0:20:23.79,Verse,,0,0,0,,{\pos(960,470)}O taste and see
-Dialogue: 5,0:20:23.79,0:20:25.75,Verse,,0,0,0,,{\pos(960,470)}that the LORD is good:
-Dialogue: 5,0:20:25.75,0:20:27.10,Verse,,0,0,0,,{\pos(960,470)}blessed is the man
-Dialogue: 5,0:20:27.10,0:20:28.85,Verse,,0,0,0,,{\pos(960,470)}that trusteth in him.
-Dialogue: 5,0:20:28.85,0:20:30.82,Verse,,0,0,0,,{\pos(960,470)}The LORD is nigh unto them
-Dialogue: 5,0:20:30.82,0:20:33.04,Verse,,0,0,0,,{\pos(960,470)}that are of a broken heart;
-Dialogue: 4,0:20:33.04,0:20:34.58,Caption,,0,0,0,,and saveth such as
-Dialogue: 4,0:20:34.58,0:20:36.97,Caption,,0,0,0,,be of a contrite spirit.
-Dialogue: 4,0:20:38.00,0:20:40.01,Caption,,0,0,0,,The Lord is nigh unto them
-Dialogue: 4,0:20:40.01,0:20:42.28,Caption,,0,0,0,,that are of a broken heart.
-Dialogue: 4,0:20:42.28,0:20:44.90,Caption,,0,0,0,,If your heart is broken tonight,
-Dialogue: 4,0:20:44.90,0:20:47.13,Caption,,0,0,0,,you are not far from God.
-Dialogue: 4,0:20:47.13,0:20:50.43,Caption,,0,0,0,,You are exactly where he comes closest.
-Dialogue: 4,0:20:51.46,0:20:54.39,Caption,,0,0,0,,Let your breathing slow even more.
-Dialogue: 4,0:20:54.39,0:20:56.02,Caption,,0,0,0,,You are safe.
-Dialogue: 4,0:20:56.02,0:20:57.33,Caption,,0,0,0,,Rest.
-Dialogue: 5,0:20:59.16,0:21:00.64,Verse,,0,0,0,,{\pos(960,470)}I will lift up mine
-Dialogue: 5,0:21:00.64,0:21:02.21,Verse,,0,0,0,,{\pos(960,470)}eyes unto the hills,
-Dialogue: 5,0:21:02.21,0:21:04.50,Verse,,0,0,0,,{\pos(960,470)}from whence cometh my help.
-Dialogue: 5,0:21:04.50,0:21:06.61,Verse,,0,0,0,,{\pos(960,470)}My help cometh from the LORD,
-Dialogue: 5,0:21:06.61,0:21:08.82,Verse,,0,0,0,,{\pos(960,470)}which made heaven and earth.
-Dialogue: 5,0:21:08.82,0:21:10.17,Verse,,0,0,0,,{\pos(960,470)}He will not suffer
-Dialogue: 5,0:21:10.17,0:21:11.92,Verse,,0,0,0,,{\pos(960,470)}thy foot to be moved:
-Dialogue: 5,0:21:11.92,0:21:14.90,Verse,,0,0,0,,{\pos(960,470)}he that keepeth thee will not slumber.
-Dialogue: 5,0:21:14.90,0:21:15.40,Verse,,0,0,0,,{\pos(960,470)}Behold,
-Dialogue: 5,0:21:15.40,0:21:17.41,Verse,,0,0,0,,{\pos(960,470)}he that keepeth Israel shall
-Dialogue: 5,0:21:17.41,0:21:19.45,Verse,,0,0,0,,{\pos(960,470)}neither slumber nor sleep.
-Dialogue: 5,0:21:19.45,0:21:21.72,Verse,,0,0,0,,{\pos(960,470)}The LORD is thy keeper:
-Dialogue: 5,0:21:21.72,0:21:23.38,Verse,,0,0,0,,{\pos(960,470)}the LORD is thy shade
-Dialogue: 5,0:21:23.38,0:21:25.14,Verse,,0,0,0,,{\pos(960,470)}upon thy right hand.
-Dialogue: 5,0:21:25.14,0:21:26.16,Verse,,0,0,0,,{\pos(960,470)}The sun shall
-Dialogue: 5,0:21:26.16,0:21:27.87,Verse,,0,0,0,,{\pos(960,470)}not smite thee by day,
-Dialogue: 5,0:21:27.87,0:21:29.76,Verse,,0,0,0,,{\pos(960,470)}nor the moon by night.
-Dialogue: 5,0:21:29.76,0:21:31.49,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve
-Dialogue: 5,0:21:31.49,0:21:33.10,Verse,,0,0,0,,{\pos(960,470)}thee from all evil:
-Dialogue: 5,0:21:33.10,0:21:35.69,Verse,,0,0,0,,{\pos(960,470)}he shall preserve thy soul.
-Dialogue: 5,0:21:35.69,0:21:37.62,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve thy
-Dialogue: 5,0:21:37.62,0:21:39.34,Verse,,0,0,0,,{\pos(960,470)}going out and thy coming
-Dialogue: 5,0:21:39.34,0:21:41.05,Verse,,0,0,0,,{\pos(960,470)}in from this time forth,
-Dialogue: 5,0:21:41.05,0:21:42.97,Verse,,0,0,0,,{\pos(960,470)}and even for evermore.
-Dialogue: 4,0:21:44.00,0:21:46.98,Caption,,0,0,0,,He that keepeth thee will not slumber.
-Dialogue: 4,0:21:46.98,0:21:49.39,Caption,,0,0,0,,Through every hour of this night,
-Dialogue: 4,0:21:49.39,0:21:50.49,Caption,,0,0,0,,while you rest,
-Dialogue: 4,0:21:50.49,0:21:53.24,Caption,,0,0,0,,God is awake and watching over you.
-Dialogue: 4,0:21:53.24,0:21:55.04,Caption,,0,0,0,,You can let go.
-Dialogue: 4,0:21:55.04,0:21:56.82,Caption,,0,0,0,,He will not.
-Dialogue: 4,0:21:57.85,0:21:59.99,Caption,,0,0,0,,Be careful for nothing;
-Dialogue: 5,0:21:59.99,0:22:02.02,Verse,,0,0,0,,{\pos(960,470)}but in every thing by prayer
-Dialogue: 5,0:22:02.02,0:22:04.76,Verse,,0,0,0,,{\pos(960,470)}and supplication with thanksgiving let
-Dialogue: 5,0:22:04.76,0:22:07.62,Verse,,0,0,0,,{\pos(960,470)}your requests be made known unto God.
-Dialogue: 5,0:22:07.62,0:22:09.20,Verse,,0,0,0,,{\pos(960,470)}And the peace of God,
-Dialogue: 5,0:22:09.20,0:22:11.62,Verse,,0,0,0,,{\pos(960,470)}which passeth all understanding,
-Dialogue: 5,0:22:11.62,0:22:13.28,Verse,,0,0,0,,{\pos(960,470)}shall keep your hearts
-Dialogue: 5,0:22:13.28,0:22:15.97,Verse,,0,0,0,,{\pos(960,470)}and minds through Christ Jesus.
-Dialogue: 4,0:22:17.00,0:22:18.67,Caption,,0,0,0,,The peace of God shall
-Dialogue: 4,0:22:18.67,0:22:20.58,Caption,,0,0,0,,keep your heart and mind,
-Dialogue: 4,0:22:20.58,0:22:22.66,Caption,,0,0,0,,like a guard at the door.
-Dialogue: 4,0:22:22.66,0:22:24.92,Caption,,0,0,0,,Whatever news tomorrow brings,
-Dialogue: 4,0:22:24.92,0:22:26.27,Caption,,0,0,0,,tonight that peace
-Dialogue: 4,0:22:26.27,0:22:28.28,Caption,,0,0,0,,stands watch over you.
-Dialogue: 5,0:22:29.31,0:22:32.16,Verse,,0,0,0,,{\pos(960,470)}Thou wilt keep him in perfect peace,
-Dialogue: 5,0:22:32.16,0:22:34.63,Verse,,0,0,0,,{\pos(960,470)}whose mind is stayed on thee:
-Dialogue: 5,0:22:34.63,0:22:37.01,Verse,,0,0,0,,{\pos(960,470)}because he trusteth in thee.
-Dialogue: 5,0:22:37.01,0:22:39.53,Verse,,0,0,0,,{\pos(960,470)}Trust ye in the LORD for ever:
-Dialogue: 5,0:22:39.53,0:22:41.44,Verse,,0,0,0,,{\pos(960,470)}for in the LORD JEHOVAH
-Dialogue: 5,0:22:41.44,0:22:43.79,Verse,,0,0,0,,{\pos(960,470)}is everlasting strength.
-Dialogue: 4,0:22:44.82,0:22:46.62,Caption,,0,0,0,,Perfect peace for a mind
-Dialogue: 4,0:22:46.62,0:22:47.86,Caption,,0,0,0,,stayed on him.
-Dialogue: 4,0:22:47.86,0:22:49.83,Caption,,0,0,0,,As you drift toward sleep,
-Dialogue: 4,0:22:49.83,0:22:52.41,Caption,,0,0,0,,let your last thought rest on God,
-Dialogue: 4,0:22:52.41,0:22:54.46,Caption,,0,0,0,,his kindness, his nearness,
-Dialogue: 4,0:22:54.46,0:22:55.63,Caption,,0,0,0,,his strength.
-Dialogue: 4,0:22:55.63,0:22:57.71,Caption,,0,0,0,,Everlasting strength.
-Dialogue: 4,0:22:57.71,0:22:59.87,Caption,,0,0,0,,It does not run out.
-Dialogue: 4,0:23:00.90,0:23:03.36,Caption,,0,0,0,,He healeth the broken in heart,
-Dialogue: 4,0:23:03.36,0:23:05.76,Caption,,0,0,0,,and bindeth up their wounds.
-Dialogue: 4,0:23:05.76,0:23:08.73,Caption,,0,0,0,,He telleth the number of the stars;
-Dialogue: 4,0:23:08.73,0:23:11.60,Caption,,0,0,0,,he calleth them all by their names.
-Dialogue: 4,0:23:11.60,0:23:13.12,Caption,,0,0,0,,Great is our Lord,
-Dialogue: 4,0:23:13.12,0:23:14.91,Caption,,0,0,0,,and of great power:
-Dialogue: 4,0:23:14.91,0:23:17.87,Caption,,0,0,0,,his understanding is infinite.
-Dialogue: 4,0:23:18.90,0:23:21.06,Caption,,0,0,0,,Above your roof tonight there
-Dialogue: 4,0:23:21.06,0:23:23.82,Caption,,0,0,0,,are more stars than anyone can count,
-Dialogue: 4,0:23:23.82,0:23:25.23,Caption,,0,0,0,,and God calls every
-Dialogue: 4,0:23:25.23,0:23:26.90,Caption,,0,0,0,,one of them by name.
-Dialogue: 4,0:23:26.90,0:23:28.86,Caption,,0,0,0,,The same God is binding
-Dialogue: 4,0:23:28.86,0:23:30.31,Caption,,0,0,0,,up your wounds.
-Dialogue: 4,0:23:30.31,0:23:32.08,Caption,,0,0,0,,Nothing about you is too
-Dialogue: 4,0:23:32.08,0:23:33.48,Caption,,0,0,0,,small for his care,
-Dialogue: 4,0:23:33.48,0:23:35.48,Caption,,0,0,0,,and nothing about your pain
-Dialogue: 4,0:23:35.48,0:23:37.68,Caption,,0,0,0,,is too big for his power.
-Dialogue: 5,0:23:38.70,0:23:40.24,Verse,,0,0,0,,{\pos(960,470)}But thou, O LORD,
-Dialogue: 5,0:23:40.24,0:23:42.24,Verse,,0,0,0,,{\pos(960,470)}art a shield for me;
-Dialogue: 5,0:23:42.24,0:23:42.94,Verse,,0,0,0,,{\pos(960,470)}my glory,
-Dialogue: 5,0:23:42.94,0:23:45.55,Verse,,0,0,0,,{\pos(960,470)}and the lifter up of mine head.
-Dialogue: 5,0:23:45.55,0:23:47.25,Verse,,0,0,0,,{\pos(960,470)}I cried unto the LORD
-Dialogue: 5,0:23:47.25,0:23:48.38,Verse,,0,0,0,,{\pos(960,470)}with my voice,
-Dialogue: 5,0:23:48.38,0:23:49.92,Verse,,0,0,0,,{\pos(960,470)}and he heard me out
-Dialogue: 5,0:23:49.92,0:23:51.47,Verse,,0,0,0,,{\pos(960,470)}of his holy hill.
-Dialogue: 5,0:23:51.47,0:23:53.98,Verse,,0,0,0,,{\pos(960,470)}I laid me down and slept;
-Dialogue: 5,0:23:53.98,0:23:55.52,Verse,,0,0,0,,{\pos(960,470)}I awaked;
-Dialogue: 5,0:23:55.52,0:23:58.07,Verse,,0,0,0,,{\pos(960,470)}for the LORD sustained me.
-Dialogue: 4,0:23:59.10,0:24:01.52,Caption,,0,0,0,,The lifter up of mine head.
-Dialogue: 4,0:24:01.52,0:24:03.34,Caption,,0,0,0,,When illness or sorrow
-Dialogue: 4,0:24:03.34,0:24:04.91,Caption,,0,0,0,,bows your head low,
-Dialogue: 4,0:24:04.91,0:24:07.24,Caption,,0,0,0,,God gently lifts it again.
-Dialogue: 4,0:24:07.24,0:24:09.41,Caption,,0,0,0,,Lay your head down now.
-Dialogue: 4,0:24:09.41,0:24:10.76,Caption,,0,0,0,,He will lift it up
-Dialogue: 4,0:24:10.76,0:24:12.23,Caption,,0,0,0,,in the morning.
-Dialogue: 5,0:24:13.26,0:24:15.43,Verse,,0,0,0,,{\pos(960,470)}He that dwelleth in the secret
-Dialogue: 5,0:24:15.43,0:24:17.88,Verse,,0,0,0,,{\pos(960,470)}place of the most High shall abide
-Dialogue: 5,0:24:17.88,0:24:20.44,Verse,,0,0,0,,{\pos(960,470)}under the shadow of the Almighty.
-Dialogue: 5,0:24:20.44,0:24:22.37,Verse,,0,0,0,,{\pos(960,470)}I will say of the LORD,
-Dialogue: 5,0:24:22.37,0:24:25.23,Verse,,0,0,0,,{\pos(960,470)}He is my refuge and my fortress:
-Dialogue: 5,0:24:25.23,0:24:26.71,Verse,,0,0,0,,{\pos(960,470)}my God;
-Dialogue: 5,0:24:26.71,0:24:28.87,Verse,,0,0,0,,{\pos(960,470)}in him will I trust.
-Dialogue: 5,0:24:28.87,0:24:31.53,Verse,,0,0,0,,{\pos(960,470)}He shall cover thee with his feathers,
-Dialogue: 5,0:24:31.53,0:24:34.30,Verse,,0,0,0,,{\pos(960,470)}and under his wings shalt thou trust:
-Dialogue: 5,0:24:34.30,0:24:35.93,Verse,,0,0,0,,{\pos(960,470)}his truth shall be thy
-Dialogue: 5,0:24:35.93,0:24:37.51,Verse,,0,0,0,,{\pos(960,470)}shield and buckler.
-Dialogue: 5,0:24:37.51,0:24:40.11,Verse,,0,0,0,,{\pos(960,470)}Because thou hast made the LORD,
-Dialogue: 5,0:24:40.11,0:24:41.66,Verse,,0,0,0,,{\pos(960,470)}which is my refuge,
-Dialogue: 5,0:24:41.66,0:24:43.20,Verse,,0,0,0,,{\pos(960,470)}even the most High,
-Dialogue: 5,0:24:43.20,0:24:44.60,Verse,,0,0,0,,{\pos(960,470)}thy habitation;
-Dialogue: 5,0:24:44.60,0:24:46.95,Verse,,0,0,0,,{\pos(960,470)}There shall no evil befall thee,
-Dialogue: 5,0:24:46.95,0:24:48.72,Verse,,0,0,0,,{\pos(960,470)}neither shall any plague
-Dialogue: 5,0:24:48.72,0:24:50.58,Verse,,0,0,0,,{\pos(960,470)}come nigh thy dwelling.
-Dialogue: 5,0:24:50.58,0:24:52.72,Verse,,0,0,0,,{\pos(960,470)}For he shall give his angels
-Dialogue: 5,0:24:52.72,0:24:54.01,Verse,,0,0,0,,{\pos(960,470)}charge over thee,
-Dialogue: 5,0:24:54.01,0:24:56.57,Verse,,0,0,0,,{\pos(960,470)}to keep thee in all thy ways.
-Dialogue: 4,0:24:57.60,0:24:59.37,Caption,,0,0,0,,Lord, as sleep comes,
-Dialogue: 4,0:24:59.37,0:25:00.97,Caption,,0,0,0,,I give you my body,
-Dialogue: 4,0:25:00.97,0:25:02.92,Caption,,0,0,0,,my heart and my mind.
-Dialogue: 4,0:25:02.92,0:25:05.15,Caption,,0,0,0,,Heal what needs healing.
-Dialogue: 4,0:25:05.15,0:25:07.50,Caption,,0,0,0,,Comfort what needs comfort.
-Dialogue: 4,0:25:07.50,0:25:09.61,Caption,,0,0,0,,Watch over me through the night,
-Dialogue: 4,0:25:09.61,0:25:11.53,Caption,,0,0,0,,and let me wake to your mercy
-Dialogue: 4,0:25:11.53,0:25:12.87,Caption,,0,0,0,,in the morning.
-Dialogue: 4,0:25:13.90,0:25:15.40,Caption,,0,0,0,,And now receive this
-Dialogue: 4,0:25:15.40,0:25:17.23,Caption,,0,0,0,,blessing as you sleep.
-Dialogue: 5,0:25:17.23,0:25:17.88,Verse,,0,0,0,,{\pos(960,470)}Beloved,
-Dialogue: 5,0:25:17.88,0:25:20.52,Verse,,0,0,0,,{\pos(960,470)}I wish above all things that thou
-Dialogue: 5,0:25:20.52,0:25:23.09,Verse,,0,0,0,,{\pos(960,470)}mayest prosper and be in health,
-Dialogue: 5,0:25:23.09,0:25:25.52,Verse,,0,0,0,,{\pos(960,470)}even as thy soul prospereth.
-Dialogue: 4,0:25:25.52,0:25:27.66,Caption,,0,0,0,,Rest in his care tonight.
-Dialogue: 4,0:25:27.66,0:25:30.47,Caption,,0,0,0,,In Jesus' name, amen.
+Dialogue: 1,0:11:29.85,0:11:37.85,Badge,,0,0,0,,{\fad(200,200)}LIKE
+Dialogue: 3,0:00:41.42,0:00:49.70,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:00:41.42,0:00:49.70,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Jeremiah 17:14 (KJV)
+Dialogue: 3,0:02:16.21,0:02:23.58,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:02:16.21,0:02:23.58,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 41:3 (KJV)
+Dialogue: 3,0:05:46.88,0:05:53.32,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:05:46.88,0:05:53.32,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 6:2 (KJV)
+Dialogue: 3,0:07:59.32,0:08:03.92,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:07:59.32,0:08:03.92,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 30:2 (KJV)
+Dialogue: 3,0:08:05.60,0:08:15.97,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:08:05.60,0:08:15.97,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 103:2-3 (KJV)
+Dialogue: 3,0:09:31.29,0:09:42.46,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:09:31.29,0:09:42.46,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Revelation 21:4 (KJV)
+Dialogue: 3,0:12:14.59,0:12:16.79,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:12:14.59,0:12:16.79,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 3:5 (KJV)
+Dialogue: 3,0:14:37.66,0:15:47.59,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:14:37.66,0:15:47.59,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 103:1-5, 8-13 (KJV)
+Dialogue: 3,0:16:03.30,0:16:52.55,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:16:03.30,0:16:52.55,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 23 (KJV)
+Dialogue: 3,0:17:35.89,0:17:38.23,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:17:35.89,0:17:38.23,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 46:1-3, 10-11 (KJV)
+Dialogue: 3,0:18:06.76,0:18:37.15,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:18:06.76,0:18:37.15,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 43:1-2 (KJV)
+Dialogue: 3,0:19:42.58,0:19:57.86,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:19:42.58,0:19:57.86,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 27:13-14 (KJV)
+Dialogue: 3,0:20:15.54,0:20:31.32,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:20:15.54,0:20:31.32,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 34:4, 8, 18 (KJV)
+Dialogue: 3,0:20:57.57,0:21:40.99,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:20:57.57,0:21:40.99,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 121 (KJV)
+Dialogue: 3,0:21:58.36,0:22:13.98,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:21:58.36,0:22:13.98,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Philippians 4:6-7 (KJV)
+Dialogue: 3,0:22:27.68,0:22:41.81,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:22:27.68,0:22:41.81,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 26:3-4 (KJV)
+Dialogue: 3,0:23:37.10,0:23:56.09,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:23:37.10,0:23:56.09,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 3:3-5 (KJV)
+Dialogue: 3,0:24:11.63,0:24:54.59,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:24:11.63,0:24:54.59,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 91:1-2, 4, 9-11 (KJV)
+Dialogue: 3,0:25:15.73,0:25:23.84,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:25:15.73,0:25:23.84,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}3 John 1:2 (KJV)
+Dialogue: 4,0:00:02.00,0:00:03.00,Caption,,0,0,0,,of body or heart,
+Dialogue: 4,0:00:03.00,0:00:04.20,Caption,,0,0,0,,to God tonight,
+Dialogue: 4,0:00:04.20,0:00:05.79,Caption,,0,0,0,,and rest in his care
+Dialogue: 4,0:00:05.79,0:00:07.41,Caption,,0,0,0,,while you sleep.
+Dialogue: 4,0:00:08.04,0:00:09.88,Caption,,0,0,0,,If your body is hurting,
+Dialogue: 4,0:00:09.88,0:00:11.18,Caption,,0,0,0,,or your heart is,
+Dialogue: 4,0:00:11.18,0:00:13.10,Caption,,0,0,0,,stay with me for the next
+Dialogue: 4,0:00:13.10,0:00:14.20,Caption,,0,0,0,,few minutes.
+Dialogue: 4,0:00:14.20,0:00:16.85,Caption,,0,0,0,,Take one slow breath with me.
+Dialogue: 4,0:00:16.85,0:00:18.79,Caption,,0,0,0,,Lie down and let the bed
+Dialogue: 4,0:00:18.79,0:00:20.34,Caption,,0,0,0,,hold your weight.
+Dialogue: 4,0:00:20.34,0:00:21.89,Caption,,0,0,0,,Let your hands rest,
+Dialogue: 4,0:00:21.89,0:00:23.14,Caption,,0,0,0,,your jaw soften,
+Dialogue: 4,0:00:23.14,0:00:24.87,Caption,,0,0,0,,your breathing slow.
+Dialogue: 4,0:00:24.87,0:00:27.33,Caption,,0,0,0,,You may be tired of being sick,
+Dialogue: 4,0:00:27.33,0:00:29.63,Caption,,0,0,0,,tired of waiting for results,
+Dialogue: 4,0:00:29.63,0:00:31.79,Caption,,0,0,0,,tired of carrying sorrow.
+Dialogue: 4,0:00:31.79,0:00:33.78,Caption,,0,0,0,,Bring all of it here.
+Dialogue: 4,0:00:33.78,0:00:34.90,Caption,,0,0,0,,You do not have
+Dialogue: 4,0:00:34.90,0:00:36.80,Caption,,0,0,0,,to be strong tonight.
+Dialogue: 4,0:00:37.83,0:00:39.32,Caption,,0,0,0,,The prophet Jeremiah
+Dialogue: 4,0:00:39.32,0:00:41.42,Caption,,0,0,0,,prayed this simple prayer.
+Dialogue: 5,0:00:41.42,0:00:42.78,Verse,,0,0,0,,{\pos(960,470)}Heal me, O LORD,
+Dialogue: 5,0:00:42.78,0:00:44.82,Verse,,0,0,0,,{\pos(960,470)}and I shall be healed;
+Dialogue: 5,0:00:44.82,0:00:45.49,Verse,,0,0,0,,{\pos(960,470)}save me,
+Dialogue: 5,0:00:45.49,0:00:47.42,Verse,,0,0,0,,{\pos(960,470)}and I shall be saved:
+Dialogue: 5,0:00:47.42,0:00:50.05,Verse,,0,0,0,,{\pos(960,470)}for thou art my praise.
+Dialogue: 4,0:00:51.38,0:00:54.63,Caption,,0,0,0,,Jeremiah's prayer is short and honest.
+Dialogue: 4,0:00:54.63,0:00:57.48,Caption,,0,0,0,,He does not explain or perform.
+Dialogue: 4,0:00:57.48,0:00:59.38,Caption,,0,0,0,,He simply asks.
+Dialogue: 4,0:00:59.38,0:01:02.23,Caption,,0,0,0,,Tonight you can pray the same way.
+Dialogue: 4,0:01:02.23,0:01:04.95,Caption,,0,0,0,,You do not need the right words.
+Dialogue: 4,0:01:04.95,0:01:06.40,Caption,,0,0,0,,You only need to bring
+Dialogue: 4,0:01:06.40,0:01:08.71,Caption,,0,0,0,,yourself to the One who heals.
+Dialogue: 4,0:01:09.74,0:01:11.65,Caption,,0,0,0,,So let us pray.
+Dialogue: 4,0:01:11.65,0:01:12.05,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:01:12.05,0:01:13.62,Caption,,0,0,0,,here I am at the end
+Dialogue: 4,0:01:13.62,0:01:14.57,Caption,,0,0,0,,of this day,
+Dialogue: 4,0:01:14.57,0:01:16.54,Caption,,0,0,0,,with my body and my heart
+Dialogue: 4,0:01:16.54,0:01:18.06,Caption,,0,0,0,,just as they are.
+Dialogue: 4,0:01:18.06,0:01:19.72,Caption,,0,0,0,,You know every ache,
+Dialogue: 4,0:01:19.72,0:01:20.88,Caption,,0,0,0,,every symptom,
+Dialogue: 4,0:01:20.88,0:01:22.29,Caption,,0,0,0,,every fear I have
+Dialogue: 4,0:01:22.29,0:01:23.96,Caption,,0,0,0,,not said out loud.
+Dialogue: 4,0:01:23.96,0:01:26.06,Caption,,0,0,0,,Heal me, O Lord.
+Dialogue: 4,0:01:26.06,0:01:28.01,Caption,,0,0,0,,Hold me tonight.
+Dialogue: 4,0:01:29.04,0:01:31.48,Caption,,0,0,0,,He healeth the broken in heart,
+Dialogue: 4,0:01:31.48,0:01:34.04,Caption,,0,0,0,,and bindeth up their wounds.
+Dialogue: 4,0:01:35.37,0:01:37.79,Caption,,0,0,0,,The same psalm says God counts
+Dialogue: 4,0:01:37.79,0:01:39.33,Caption,,0,0,0,,the stars and calls
+Dialogue: 4,0:01:39.33,0:01:40.88,Caption,,0,0,0,,them all by name.
+Dialogue: 4,0:01:40.88,0:01:42.57,Caption,,0,0,0,,And yet he bends down
+Dialogue: 4,0:01:42.57,0:01:44.01,Caption,,0,0,0,,to bind up wounds,
+Dialogue: 4,0:01:44.01,0:01:46.67,Caption,,0,0,0,,like a nurse tending a bandage.
+Dialogue: 4,0:01:46.67,0:01:49.36,Caption,,0,0,0,,The God of the galaxies is gentle
+Dialogue: 4,0:01:49.36,0:01:51.59,Caption,,0,0,0,,with your hurt tonight.
+Dialogue: 4,0:01:52.62,0:01:55.25,Caption,,0,0,0,,Father, I bring you my body.
+Dialogue: 4,0:01:55.25,0:01:56.78,Caption,,0,0,0,,Where there is pain,
+Dialogue: 4,0:01:56.78,0:01:57.95,Caption,,0,0,0,,bring relief.
+Dialogue: 4,0:01:57.95,0:02:00.14,Caption,,0,0,0,,Where there is inflammation,
+Dialogue: 4,0:02:00.14,0:02:01.18,Caption,,0,0,0,,bring calm.
+Dialogue: 4,0:02:01.18,0:02:02.83,Caption,,0,0,0,,Where there is sickness,
+Dialogue: 4,0:02:02.83,0:02:04.73,Caption,,0,0,0,,bring your healing touch.
+Dialogue: 4,0:02:04.73,0:02:07.01,Caption,,0,0,0,,Strengthen my immune system,
+Dialogue: 4,0:02:07.01,0:02:08.32,Caption,,0,0,0,,steady my heart,
+Dialogue: 4,0:02:08.32,0:02:10.86,Caption,,0,0,0,,and restore what is worn out.
+Dialogue: 4,0:02:10.86,0:02:13.14,Caption,,0,0,0,,Let my body rest deeply tonight
+Dialogue: 4,0:02:13.14,0:02:15.18,Caption,,0,0,0,,and heal while I sleep.
+Dialogue: 5,0:02:16.21,0:02:18.14,Verse,,0,0,0,,{\pos(960,470)}The LORD will strengthen him
+Dialogue: 5,0:02:18.14,0:02:20.25,Verse,,0,0,0,,{\pos(960,470)}upon the bed of languishing:
+Dialogue: 5,0:02:20.25,0:02:21.68,Verse,,0,0,0,,{\pos(960,470)}thou wilt make all
+Dialogue: 5,0:02:21.68,0:02:23.93,Verse,,0,0,0,,{\pos(960,470)}his bed in his sickness.
+Dialogue: 4,0:02:25.26,0:02:26.69,Caption,,0,0,0,,Thou wilt make all
+Dialogue: 4,0:02:26.69,0:02:28.77,Caption,,0,0,0,,his bed in his sickness.
+Dialogue: 4,0:02:28.77,0:02:30.76,Caption,,0,0,0,,What a tender picture:
+Dialogue: 4,0:02:30.76,0:02:33.19,Caption,,0,0,0,,God himself arranging the pillows,
+Dialogue: 4,0:02:33.19,0:02:34.62,Caption,,0,0,0,,smoothing the sheets
+Dialogue: 4,0:02:34.62,0:02:36.44,Caption,,0,0,0,,for the one who is ill.
+Dialogue: 4,0:02:36.44,0:02:39.18,Caption,,0,0,0,,You are not forgotten in that bed.
+Dialogue: 4,0:02:39.18,0:02:40.88,Caption,,0,0,0,,He is there.
+Dialogue: 4,0:02:41.91,0:02:44.37,Caption,,0,0,0,,Lord, I thank you for doctors,
+Dialogue: 4,0:02:44.37,0:02:44.94,Caption,,0,0,0,,nurses,
+Dialogue: 4,0:02:44.94,0:02:46.99,Caption,,0,0,0,,medicine and every person
+Dialogue: 4,0:02:46.99,0:02:49.22,Caption,,0,0,0,,whose work helps us heal.
+Dialogue: 4,0:02:49.22,0:02:50.62,Caption,,0,0,0,,Give them wisdom,
+Dialogue: 4,0:02:50.62,0:02:52.53,Caption,,0,0,0,,skill and compassion.
+Dialogue: 4,0:02:52.53,0:02:55.74,Caption,,0,0,0,,Guide every decision about treatment.
+Dialogue: 4,0:02:55.74,0:02:58.56,Caption,,0,0,0,,Let the medicine work as it should.
+Dialogue: 4,0:02:58.56,0:03:00.50,Caption,,0,0,0,,And help me to keep following
+Dialogue: 4,0:03:00.50,0:03:02.30,Caption,,0,0,0,,the care I have been given,
+Dialogue: 4,0:03:02.30,0:03:04.72,Caption,,0,0,0,,trusting you through all of it.
+Dialogue: 4,0:03:05.75,0:03:06.29,Caption,,0,0,0,,Father,
+Dialogue: 4,0:03:06.29,0:03:08.75,Caption,,0,0,0,,for those living with an illness
+Dialogue: 4,0:03:08.75,0:03:10.44,Caption,,0,0,0,,that does not go away,
+Dialogue: 4,0:03:10.44,0:03:11.75,Caption,,0,0,0,,the chronic pain,
+Dialogue: 4,0:03:11.75,0:03:13.29,Caption,,0,0,0,,the long treatments,
+Dialogue: 4,0:03:13.29,0:03:16.22,Caption,,0,0,0,,the bodies that never quite feel well,
+Dialogue: 4,0:03:16.22,0:03:17.56,Caption,,0,0,0,,give endurance.
+Dialogue: 4,0:03:17.56,0:03:20.05,Caption,,0,0,0,,On the days when hope runs thin,
+Dialogue: 4,0:03:20.05,0:03:20.94,Caption,,0,0,0,,renew it.
+Dialogue: 4,0:03:20.94,0:03:22.71,Caption,,0,0,0,,Let them know that their
+Dialogue: 4,0:03:22.71,0:03:24.48,Caption,,0,0,0,,worth is not measured by
+Dialogue: 4,0:03:24.48,0:03:26.53,Caption,,0,0,0,,what their body can do.
+Dialogue: 4,0:03:27.56,0:03:29.38,Caption,,0,0,0,,Let us be still.
+Dialogue: 4,0:03:29.38,0:03:31.34,Caption,,0,0,0,,Breathe in slowly.
+Dialogue: 4,0:03:31.34,0:03:33.01,Caption,,0,0,0,,And breathe out.
+Dialogue: 4,0:03:33.01,0:03:34.78,Caption,,0,0,0,,Once more, breathe in,
+Dialogue: 4,0:03:34.78,0:03:37.46,Caption,,0,0,0,,and let your body grow heavy.
+Dialogue: 4,0:03:39.28,0:03:42.39,Caption,,0,0,0,,Healing is not only for the body.
+Dialogue: 4,0:03:42.39,0:03:44.18,Caption,,0,0,0,,Let us bring the heart
+Dialogue: 4,0:03:44.18,0:03:46.81,Caption,,0,0,0,,and the mind to God as well.
+Dialogue: 4,0:03:48.14,0:03:48.75,Caption,,0,0,0,,Father,
+Dialogue: 4,0:03:48.75,0:03:51.95,Caption,,0,0,0,,heal the broken places in my heart.
+Dialogue: 4,0:03:51.95,0:03:54.41,Caption,,0,0,0,,The losses I still grieve.
+Dialogue: 4,0:03:54.41,0:03:56.75,Caption,,0,0,0,,The words that wounded me.
+Dialogue: 4,0:03:56.75,0:04:00.17,Caption,,0,0,0,,The disappointments I never got over.
+Dialogue: 4,0:04:00.17,0:04:01.80,Caption,,0,0,0,,I do not have to hide
+Dialogue: 4,0:04:01.80,0:04:03.06,Caption,,0,0,0,,them from you.
+Dialogue: 4,0:04:03.06,0:04:05.33,Caption,,0,0,0,,Bind up these wounds, Lord,
+Dialogue: 4,0:04:05.33,0:04:07.44,Caption,,0,0,0,,the way only you can.
+Dialogue: 4,0:04:08.47,0:04:09.77,Caption,,0,0,0,,But he was wounded
+Dialogue: 4,0:04:09.77,0:04:11.43,Caption,,0,0,0,,for our transgressions,
+Dialogue: 4,0:04:11.43,0:04:14.07,Caption,,0,0,0,,he was bruised for our iniquities:
+Dialogue: 4,0:04:14.07,0:04:16.10,Caption,,0,0,0,,the chastisement of our
+Dialogue: 4,0:04:16.10,0:04:17.96,Caption,,0,0,0,,peace was upon him;
+Dialogue: 4,0:04:17.96,0:04:20.70,Caption,,0,0,0,,and with his stripes we are healed.
+Dialogue: 4,0:04:22.03,0:04:24.72,Caption,,0,0,0,,Before Jesus ever healed anyone,
+Dialogue: 4,0:04:24.72,0:04:27.50,Caption,,0,0,0,,he chose to be wounded himself.
+Dialogue: 4,0:04:27.50,0:04:30.14,Caption,,0,0,0,,He knows pain from the inside.
+Dialogue: 4,0:04:30.14,0:04:31.54,Caption,,0,0,0,,So when you bring him
+Dialogue: 4,0:04:31.54,0:04:32.75,Caption,,0,0,0,,your pain tonight,
+Dialogue: 4,0:04:32.75,0:04:34.10,Caption,,0,0,0,,you are not bringing
+Dialogue: 4,0:04:34.10,0:04:35.76,Caption,,0,0,0,,it to someone distant.
+Dialogue: 4,0:04:35.76,0:04:37.09,Caption,,0,0,0,,You are bringing it
+Dialogue: 4,0:04:37.09,0:04:39.35,Caption,,0,0,0,,to someone who understands.
+Dialogue: 4,0:04:40.38,0:04:42.97,Caption,,0,0,0,,Lord, heal my anxious mind.
+Dialogue: 4,0:04:42.97,0:04:46.20,Caption,,0,0,0,,Quiet the questions that run in circles.
+Dialogue: 4,0:04:46.20,0:04:48.60,Caption,,0,0,0,,What if the results are bad?
+Dialogue: 4,0:04:48.60,0:04:51.06,Caption,,0,0,0,,What if it does not get better?
+Dialogue: 4,0:04:51.06,0:04:53.37,Caption,,0,0,0,,I give you every what if.
+Dialogue: 4,0:04:53.37,0:04:55.90,Caption,,0,0,0,,Replace my fear with your peace,
+Dialogue: 4,0:04:55.90,0:04:57.48,Caption,,0,0,0,,and let my mind rest
+Dialogue: 4,0:04:57.48,0:04:59.01,Caption,,0,0,0,,in you tonight.
+Dialogue: 4,0:05:00.04,0:05:00.42,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:05:00.42,0:05:02.01,Caption,,0,0,0,,I pray for every mind
+Dialogue: 4,0:05:02.01,0:05:04.62,Caption,,0,0,0,,that is tired and heavy tonight.
+Dialogue: 4,0:05:04.62,0:05:07.87,Caption,,0,0,0,,For depression that makes mornings hard.
+Dialogue: 4,0:05:07.87,0:05:10.95,Caption,,0,0,0,,For anxiety that tightens the chest.
+Dialogue: 4,0:05:10.95,0:05:12.57,Caption,,0,0,0,,For thoughts that feel
+Dialogue: 4,0:05:12.57,0:05:14.59,Caption,,0,0,0,,too dark to say out loud.
+Dialogue: 4,0:05:14.59,0:05:17.24,Caption,,0,0,0,,Bring light into those places.
+Dialogue: 4,0:05:17.24,0:05:18.47,Caption,,0,0,0,,Lead each person
+Dialogue: 4,0:05:18.47,0:05:20.17,Caption,,0,0,0,,to the help they need,
+Dialogue: 4,0:05:20.17,0:05:22.24,Caption,,0,0,0,,the friend, the counsellor,
+Dialogue: 4,0:05:22.24,0:05:23.09,Caption,,0,0,0,,the doctor,
+Dialogue: 4,0:05:23.09,0:05:24.47,Caption,,0,0,0,,and let them never
+Dialogue: 4,0:05:24.47,0:05:26.36,Caption,,0,0,0,,feel ashamed to ask.
+Dialogue: 4,0:05:27.39,0:05:28.15,Caption,,0,0,0,,Be still,
+Dialogue: 4,0:05:28.15,0:05:30.45,Caption,,0,0,0,,and know that I am God.
+Dialogue: 4,0:05:31.78,0:05:33.11,Caption,,0,0,0,,Be still.
+Dialogue: 4,0:05:33.11,0:05:35.62,Caption,,0,0,0,,Not because nothing is happening,
+Dialogue: 4,0:05:35.62,0:05:37.82,Caption,,0,0,0,,but because God is still God,
+Dialogue: 4,0:05:37.82,0:05:39.11,Caption,,0,0,0,,even in the dark,
+Dialogue: 4,0:05:39.11,0:05:40.70,Caption,,0,0,0,,even in the hospital,
+Dialogue: 4,0:05:40.70,0:05:42.40,Caption,,0,0,0,,even in the waiting.
+Dialogue: 4,0:05:42.40,0:05:44.06,Caption,,0,0,0,,Your stillness tonight
+Dialogue: 4,0:05:44.06,0:05:45.84,Caption,,0,0,0,,is an act of trust.
+Dialogue: 5,0:05:46.88,0:05:49.81,Verse,,0,0,0,,{\pos(960,470)}Have mercy upon me, O LORD;
+Dialogue: 5,0:05:49.81,0:05:51.54,Verse,,0,0,0,,{\pos(960,470)}for I am weak:
+Dialogue: 5,0:05:51.54,0:05:53.50,Verse,,0,0,0,,{\pos(960,470)}O LORD, heal me;
+Dialogue: 4,0:05:53.50,0:05:56.04,Caption,,0,0,0,,for my bones are vexed.
+Dialogue: 4,0:05:57.37,0:05:59.10,Caption,,0,0,0,,Father, like David,
+Dialogue: 4,0:05:59.10,0:06:01.37,Caption,,0,0,0,,I admit that I am weak.
+Dialogue: 4,0:06:01.37,0:06:02.48,Caption,,0,0,0,,I have run out
+Dialogue: 4,0:06:02.48,0:06:04.15,Caption,,0,0,0,,of my own strength.
+Dialogue: 4,0:06:04.15,0:06:06.19,Caption,,0,0,0,,Have mercy on me.
+Dialogue: 4,0:06:06.19,0:06:08.35,Caption,,0,0,0,,Meet me in the weakness.
+Dialogue: 4,0:06:08.35,0:06:10.44,Caption,,0,0,0,,Carry me where I cannot walk,
+Dialogue: 4,0:06:10.44,0:06:12.16,Caption,,0,0,0,,and give me the strength
+Dialogue: 4,0:06:12.16,0:06:13.74,Caption,,0,0,0,,to face tomorrow.
+Dialogue: 4,0:06:14.77,0:06:17.32,Caption,,0,0,0,,For which cause we faint not;
+Dialogue: 4,0:06:17.32,0:06:20.09,Caption,,0,0,0,,but though our outward man perish,
+Dialogue: 4,0:06:20.09,0:06:21.56,Caption,,0,0,0,,yet the inward man
+Dialogue: 4,0:06:21.56,0:06:23.70,Caption,,0,0,0,,is renewed day by day.
+Dialogue: 4,0:06:25.03,0:06:27.38,Caption,,0,0,0,,Even when the body is struggling,
+Dialogue: 4,0:06:27.38,0:06:29.84,Caption,,0,0,0,,something deeper can be renewed:
+Dialogue: 4,0:06:29.84,0:06:31.45,Caption,,0,0,0,,your hope, your faith,
+Dialogue: 4,0:06:31.45,0:06:33.82,Caption,,0,0,0,,your sense that you are loved.
+Dialogue: 4,0:06:33.82,0:06:35.99,Caption,,0,0,0,,God is at work on the inside
+Dialogue: 4,0:06:35.99,0:06:37.16,Caption,,0,0,0,,of you tonight,
+Dialogue: 4,0:06:37.16,0:06:39.99,Caption,,0,0,0,,whatever the outside feels like.
+Dialogue: 4,0:06:41.02,0:06:41.39,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:06:41.39,0:06:43.52,Caption,,0,0,0,,I pray for everyone who cares
+Dialogue: 4,0:06:43.52,0:06:45.47,Caption,,0,0,0,,for someone who is sick.
+Dialogue: 4,0:06:45.47,0:06:48.40,Caption,,0,0,0,,The parents beside a child's bed.
+Dialogue: 4,0:06:48.40,0:06:50.47,Caption,,0,0,0,,The husband or wife who has
+Dialogue: 4,0:06:50.47,0:06:52.49,Caption,,0,0,0,,not slept well in weeks.
+Dialogue: 4,0:06:52.49,0:06:55.61,Caption,,0,0,0,,The children caring for aging parents.
+Dialogue: 4,0:06:55.61,0:06:57.07,Caption,,0,0,0,,Give them strength,
+Dialogue: 4,0:06:57.07,0:06:58.63,Caption,,0,0,0,,patience and rest.
+Dialogue: 4,0:06:58.63,0:07:00.69,Caption,,0,0,0,,Let them know that what they do
+Dialogue: 4,0:07:00.69,0:07:02.97,Caption,,0,0,0,,is seen and treasured by you.
+Dialogue: 4,0:07:04.00,0:07:04.53,Caption,,0,0,0,,Father,
+Dialogue: 4,0:07:04.53,0:07:07.20,Caption,,0,0,0,,I lift up every sick child tonight,
+Dialogue: 4,0:07:07.20,0:07:08.43,Caption,,0,0,0,,and every parent
+Dialogue: 4,0:07:08.43,0:07:10.36,Caption,,0,0,0,,who is afraid for them.
+Dialogue: 4,0:07:10.36,0:07:12.72,Caption,,0,0,0,,Hold these little ones close.
+Dialogue: 4,0:07:12.72,0:07:13.95,Caption,,0,0,0,,Ease their fever,
+Dialogue: 4,0:07:13.95,0:07:15.10,Caption,,0,0,0,,calm their fear,
+Dialogue: 4,0:07:15.10,0:07:16.47,Caption,,0,0,0,,and bring them back
+Dialogue: 4,0:07:16.47,0:07:18.38,Caption,,0,0,0,,to playing and laughing.
+Dialogue: 4,0:07:18.38,0:07:21.25,Caption,,0,0,0,,Give their parents peace and sleep.
+Dialogue: 4,0:07:22.28,0:07:22.82,Caption,,0,0,0,,Father,
+Dialogue: 4,0:07:22.82,0:07:24.89,Caption,,0,0,0,,I lift up the people I know
+Dialogue: 4,0:07:24.89,0:07:26.60,Caption,,0,0,0,,who are ill tonight.
+Dialogue: 4,0:07:26.60,0:07:29.09,Caption,,0,0,0,,I bring their names to you now,
+Dialogue: 4,0:07:29.09,0:07:29.92,Caption,,0,0,0,,quietly.
+Dialogue: 4,0:07:29.92,0:07:31.42,Caption,,0,0,0,,Heal them.
+Dialogue: 4,0:07:31.42,0:07:32.98,Caption,,0,0,0,,Comfort them.
+Dialogue: 4,0:07:32.98,0:07:35.72,Caption,,0,0,0,,Surround them with people who love them,
+Dialogue: 4,0:07:35.72,0:07:37.84,Caption,,0,0,0,,and let them feel your presence
+Dialogue: 4,0:07:37.84,0:07:40.31,Caption,,0,0,0,,in the long hours of the night.
+Dialogue: 4,0:07:41.34,0:07:41.72,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:07:41.72,0:07:44.00,Caption,,0,0,0,,if bitterness or unforgiveness
+Dialogue: 4,0:07:44.00,0:07:45.36,Caption,,0,0,0,,is weighing on me,
+Dialogue: 4,0:07:45.36,0:07:47.52,Caption,,0,0,0,,I bring it to you as well.
+Dialogue: 4,0:07:47.52,0:07:49.15,Caption,,0,0,0,,Some wounds stay open
+Dialogue: 4,0:07:49.15,0:07:51.51,Caption,,0,0,0,,because I keep holding them.
+Dialogue: 4,0:07:51.51,0:07:52.90,Caption,,0,0,0,,Help me to forgive,
+Dialogue: 4,0:07:52.90,0:07:55.24,Caption,,0,0,0,,and to receive your forgiveness,
+Dialogue: 4,0:07:55.24,0:07:56.69,Caption,,0,0,0,,so that my heart can
+Dialogue: 4,0:07:56.69,0:07:58.28,Caption,,0,0,0,,heal tonight too.
+Dialogue: 5,0:07:59.32,0:08:00.47,Verse,,0,0,0,,{\pos(960,470)}O LORD my God,
+Dialogue: 5,0:08:00.47,0:08:01.95,Verse,,0,0,0,,{\pos(960,470)}I cried unto thee,
+Dialogue: 5,0:08:01.95,0:08:04.27,Verse,,0,0,0,,{\pos(960,470)}and thou hast healed me.
+Dialogue: 5,0:08:05.60,0:08:07.71,Verse,,0,0,0,,{\pos(960,470)}Bless the LORD, O my soul,
+Dialogue: 5,0:08:07.71,0:08:10.48,Verse,,0,0,0,,{\pos(960,470)}and forget not all his benefits:
+Dialogue: 5,0:08:10.48,0:08:13.28,Verse,,0,0,0,,{\pos(960,470)}Who forgiveth all thine iniquities;
+Dialogue: 5,0:08:13.28,0:08:16.32,Verse,,0,0,0,,{\pos(960,470)}who healeth all thy diseases.
+Dialogue: 4,0:08:17.65,0:08:18.91,Caption,,0,0,0,,Thank you, Lord,
+Dialogue: 4,0:08:18.91,0:08:20.81,Caption,,0,0,0,,for every healing I have
+Dialogue: 4,0:08:20.81,0:08:22.33,Caption,,0,0,0,,already received.
+Dialogue: 4,0:08:22.33,0:08:24.64,Caption,,0,0,0,,The sicknesses that passed.
+Dialogue: 4,0:08:24.64,0:08:26.85,Caption,,0,0,0,,The wounds that closed.
+Dialogue: 4,0:08:26.85,0:08:29.18,Caption,,0,0,0,,The sorrows that lifted.
+Dialogue: 4,0:08:29.18,0:08:31.86,Caption,,0,0,0,,I will not forget your benefits.
+Dialogue: 4,0:08:31.86,0:08:33.54,Caption,,0,0,0,,You have been good to me,
+Dialogue: 4,0:08:33.54,0:08:35.29,Caption,,0,0,0,,and I trust you to be good
+Dialogue: 4,0:08:35.29,0:08:36.58,Caption,,0,0,0,,to me tonight.
+Dialogue: 4,0:08:37.61,0:08:38.16,Caption,,0,0,0,,Father,
+Dialogue: 4,0:08:38.16,0:08:39.66,Caption,,0,0,0,,I pray for everyone
+Dialogue: 4,0:08:39.66,0:08:41.89,Caption,,0,0,0,,in a hospital bed tonight.
+Dialogue: 4,0:08:41.89,0:08:44.34,Caption,,0,0,0,,For those waiting for surgery,
+Dialogue: 4,0:08:44.34,0:08:45.48,Caption,,0,0,0,,those in pain,
+Dialogue: 4,0:08:45.48,0:08:47.12,Caption,,0,0,0,,those far from home,
+Dialogue: 4,0:08:47.12,0:08:48.10,Caption,,0,0,0,,those afraid
+Dialogue: 4,0:08:48.10,0:08:50.64,Caption,,0,0,0,,of what the doctors will say.
+Dialogue: 4,0:08:50.64,0:08:52.96,Caption,,0,0,0,,Sit beside each of them.
+Dialogue: 4,0:08:52.96,0:08:55.59,Caption,,0,0,0,,Let the beeping machines and the long
+Dialogue: 4,0:08:55.59,0:08:58.49,Caption,,0,0,0,,corridors be filled with your peace.
+Dialogue: 4,0:08:59.52,0:09:01.53,Caption,,0,0,0,,And Lord, bless the nurses,
+Dialogue: 4,0:09:01.53,0:09:03.46,Caption,,0,0,0,,doctors and carers working
+Dialogue: 4,0:09:03.46,0:09:05.06,Caption,,0,0,0,,through this night.
+Dialogue: 4,0:09:05.06,0:09:07.99,Caption,,0,0,0,,Keep them alert, kind and safe.
+Dialogue: 4,0:09:07.99,0:09:10.12,Caption,,0,0,0,,Let their hands bring comfort,
+Dialogue: 4,0:09:10.12,0:09:11.62,Caption,,0,0,0,,and refresh them when
+Dialogue: 4,0:09:11.62,0:09:13.40,Caption,,0,0,0,,their shift is over.
+Dialogue: 4,0:09:14.42,0:09:15.26,Caption,,0,0,0,,And Father,
+Dialogue: 4,0:09:15.26,0:09:17.93,Caption,,0,0,0,,for anyone who is grieving tonight,
+Dialogue: 4,0:09:17.93,0:09:19.60,Caption,,0,0,0,,especially for someone
+Dialogue: 4,0:09:19.60,0:09:21.12,Caption,,0,0,0,,they could not save,
+Dialogue: 4,0:09:21.12,0:09:22.52,Caption,,0,0,0,,hold them close.
+Dialogue: 4,0:09:22.52,0:09:24.62,Caption,,0,0,0,,Heal the ache of loss.
+Dialogue: 4,0:09:24.62,0:09:26.57,Caption,,0,0,0,,Let them weep without shame,
+Dialogue: 4,0:09:26.57,0:09:27.75,Caption,,0,0,0,,and let them feel
+Dialogue: 4,0:09:27.75,0:09:30.26,Caption,,0,0,0,,that you are weeping with them.
+Dialogue: 5,0:09:31.29,0:09:33.08,Verse,,0,0,0,,{\pos(960,470)}And God shall wipe away
+Dialogue: 5,0:09:33.08,0:09:35.29,Verse,,0,0,0,,{\pos(960,470)}all tears from their eyes;
+Dialogue: 5,0:09:35.29,0:09:37.73,Verse,,0,0,0,,{\pos(960,470)}and there shall be no more death,
+Dialogue: 5,0:09:37.73,0:09:39.72,Verse,,0,0,0,,{\pos(960,470)}neither sorrow, nor crying,
+Dialogue: 5,0:09:39.72,0:09:42.64,Verse,,0,0,0,,{\pos(960,470)}neither shall there be any more pain:
+Dialogue: 4,0:09:42.64,0:09:45.80,Caption,,0,0,0,,for the former things are passed away.
+Dialogue: 4,0:09:47.13,0:09:49.18,Caption,,0,0,0,,This is the promise beneath
+Dialogue: 4,0:09:49.18,0:09:50.88,Caption,,0,0,0,,every other promise.
+Dialogue: 4,0:09:50.88,0:09:52.88,Caption,,0,0,0,,One day God himself will
+Dialogue: 4,0:09:52.88,0:09:54.81,Caption,,0,0,0,,wipe away every tear.
+Dialogue: 4,0:09:54.81,0:09:57.62,Caption,,0,0,0,,Pain will not have the last word.
+Dialogue: 4,0:09:57.62,0:10:00.30,Caption,,0,0,0,,Whatever healing you receive tonight
+Dialogue: 4,0:10:00.30,0:10:02.81,Caption,,0,0,0,,is a small taste of that day.
+Dialogue: 4,0:10:03.84,0:10:04.99,Caption,,0,0,0,,O Lord my God,
+Dialogue: 4,0:10:04.99,0:10:06.47,Caption,,0,0,0,,I cried unto thee,
+Dialogue: 4,0:10:06.47,0:10:08.62,Caption,,0,0,0,,and thou hast healed me.
+Dialogue: 4,0:10:08.62,0:10:10.66,Caption,,0,0,0,,David wrote that looking back
+Dialogue: 4,0:10:10.66,0:10:12.34,Caption,,0,0,0,,on a night he thought he
+Dialogue: 4,0:10:12.34,0:10:13.78,Caption,,0,0,0,,would not survive.
+Dialogue: 4,0:10:13.78,0:10:15.16,Caption,,0,0,0,,One day you may look
+Dialogue: 4,0:10:15.16,0:10:16.76,Caption,,0,0,0,,back on this night too,
+Dialogue: 4,0:10:16.76,0:10:18.35,Caption,,0,0,0,,and see how God carried
+Dialogue: 4,0:10:18.35,0:10:19.74,Caption,,0,0,0,,you through it.
+Dialogue: 4,0:10:20.77,0:10:22.70,Caption,,0,0,0,,And we know that all things
+Dialogue: 4,0:10:22.70,0:10:24.27,Caption,,0,0,0,,work together for good
+Dialogue: 4,0:10:24.27,0:10:25.84,Caption,,0,0,0,,to them that love God,
+Dialogue: 4,0:10:25.84,0:10:27.70,Caption,,0,0,0,,to them who are the called
+Dialogue: 4,0:10:27.70,0:10:29.84,Caption,,0,0,0,,according to his purpose.
+Dialogue: 4,0:10:31.17,0:10:31.55,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:10:31.55,0:10:33.83,Caption,,0,0,0,,I do not understand everything
+Dialogue: 4,0:10:33.83,0:10:35.45,Caption,,0,0,0,,I am going through.
+Dialogue: 4,0:10:35.45,0:10:37.17,Caption,,0,0,0,,But I choose to trust
+Dialogue: 4,0:10:37.17,0:10:38.89,Caption,,0,0,0,,that you are working,
+Dialogue: 4,0:10:38.89,0:10:40.71,Caption,,0,0,0,,even here, even now.
+Dialogue: 4,0:10:40.71,0:10:42.42,Caption,,0,0,0,,Help me to wait with hope,
+Dialogue: 4,0:10:42.42,0:10:44.39,Caption,,0,0,0,,and to see your goodness again
+Dialogue: 4,0:10:44.39,0:10:46.45,Caption,,0,0,0,,in the land of the living.
+Dialogue: 4,0:10:47.48,0:10:48.05,Caption,,0,0,0,,Father,
+Dialogue: 4,0:10:48.05,0:10:50.33,Caption,,0,0,0,,give me hope for tomorrow.
+Dialogue: 4,0:10:50.33,0:10:52.24,Caption,,0,0,0,,Not a forced cheerfulness,
+Dialogue: 4,0:10:52.24,0:10:53.86,Caption,,0,0,0,,but a quiet confidence
+Dialogue: 4,0:10:53.86,0:10:55.40,Caption,,0,0,0,,that you are with me,
+Dialogue: 4,0:10:55.40,0:10:57.64,Caption,,0,0,0,,whatever the morning brings.
+Dialogue: 4,0:10:57.64,0:10:59.80,Caption,,0,0,0,,Let me wake with new strength,
+Dialogue: 4,0:10:59.80,0:11:01.53,Caption,,0,0,0,,and see your mercy again
+Dialogue: 4,0:11:01.53,0:11:03.25,Caption,,0,0,0,,when the sun rises.
+Dialogue: 4,0:11:04.28,0:11:07.00,Caption,,0,0,0,,And now, Lord, give me sleep.
+Dialogue: 4,0:11:07.00,0:11:07.41,Caption,,0,0,0,,Deep,
+Dialogue: 4,0:11:07.41,0:11:09.45,Caption,,0,0,0,,restoring sleep that lets
+Dialogue: 4,0:11:09.45,0:11:11.65,Caption,,0,0,0,,my body do the healing work
+Dialogue: 4,0:11:11.65,0:11:13.62,Caption,,0,0,0,,you designed it to do.
+Dialogue: 4,0:11:13.62,0:11:14.98,Caption,,0,0,0,,If pain wakes me,
+Dialogue: 4,0:11:14.98,0:11:17.24,Caption,,0,0,0,,let me feel your nearness.
+Dialogue: 4,0:11:17.24,0:11:18.60,Caption,,0,0,0,,If fear wakes me,
+Dialogue: 4,0:11:18.60,0:11:20.62,Caption,,0,0,0,,let me hear your peace.
+Dialogue: 4,0:11:20.62,0:11:22.31,Caption,,0,0,0,,And let me fall asleep
+Dialogue: 4,0:11:22.31,0:11:24.13,Caption,,0,0,0,,again in your arms.
+Dialogue: 4,0:11:25.16,0:11:26.81,Caption,,0,0,0,,I surrender my body,
+Dialogue: 4,0:11:26.81,0:11:28.63,Caption,,0,0,0,,my heart and my future
+Dialogue: 4,0:11:28.63,0:11:30.05,Caption,,0,0,0,,to you tonight.
+Dialogue: 4,0:11:30.05,0:11:31.62,Caption,,0,0,0,,I do not have to hold
+Dialogue: 4,0:11:31.62,0:11:33.30,Caption,,0,0,0,,everything together.
+Dialogue: 4,0:11:33.30,0:11:34.87,Caption,,0,0,0,,You hold me.
+Dialogue: 4,0:11:34.87,0:11:37.89,Caption,,0,0,0,,Into your hands I commit my spirit,
+Dialogue: 4,0:11:37.89,0:11:39.10,Caption,,0,0,0,,as I rest.
+Dialogue: 4,0:11:40.13,0:11:42.51,Caption,,0,0,0,,Breathe in again, slowly.
+Dialogue: 4,0:11:42.51,0:11:44.25,Caption,,0,0,0,,And let it out.
+Dialogue: 4,0:11:44.25,0:11:46.62,Caption,,0,0,0,,Let every muscle relax.
+Dialogue: 4,0:11:46.62,0:11:48.79,Caption,,0,0,0,,Let God hold you.
+Dialogue: 4,0:11:50.62,0:11:53.23,Caption,,0,0,0,,Say these words with me quietly,
+Dialogue: 4,0:11:53.23,0:11:54.38,Caption,,0,0,0,,as you rest.
+Dialogue: 4,0:11:54.38,0:11:56.63,Caption,,0,0,0,,The Lord is my healer.
+Dialogue: 4,0:11:56.63,0:11:59.01,Caption,,0,0,0,,He binds up my wounds.
+Dialogue: 4,0:11:59.01,0:12:01.66,Caption,,0,0,0,,I am not alone in this bed.
+Dialogue: 4,0:12:01.66,0:12:02.37,Caption,,0,0,0,,My body,
+Dialogue: 4,0:12:02.37,0:12:04.12,Caption,,0,0,0,,my heart and my mind
+Dialogue: 4,0:12:04.12,0:12:05.79,Caption,,0,0,0,,are in his hands.
+Dialogue: 4,0:12:05.79,0:12:07.30,Caption,,0,0,0,,I will rest tonight,
+Dialogue: 4,0:12:07.30,0:12:09.23,Caption,,0,0,0,,and he will renew me.
+Dialogue: 4,0:12:10.56,0:12:13.07,Caption,,0,0,0,,I laid me down and slept;
+Dialogue: 4,0:12:13.07,0:12:14.59,Caption,,0,0,0,,I awaked;
+Dialogue: 5,0:12:14.59,0:12:17.14,Verse,,0,0,0,,{\pos(960,470)}for the LORD sustained me.
+Dialogue: 4,0:12:18.47,0:12:20.98,Caption,,0,0,0,,I laid me down and slept;
+Dialogue: 4,0:12:20.98,0:12:22.52,Caption,,0,0,0,,I awaked;
+Dialogue: 4,0:12:22.52,0:12:24.90,Caption,,0,0,0,,for the Lord sustained me.
+Dialogue: 4,0:12:24.90,0:12:27.92,Caption,,0,0,0,,Sleep itself is an act of trust.
+Dialogue: 4,0:12:27.92,0:12:30.23,Caption,,0,0,0,,You let go of control for hours,
+Dialogue: 4,0:12:30.23,0:12:32.55,Caption,,0,0,0,,and God keeps your heart beating
+Dialogue: 4,0:12:32.55,0:12:34.54,Caption,,0,0,0,,and your lungs breathing.
+Dialogue: 4,0:12:34.54,0:12:35.15,Caption,,0,0,0,,Tonight,
+Dialogue: 4,0:12:35.15,0:12:37.49,Caption,,0,0,0,,he will sustain you again.
+Dialogue: 4,0:12:38.52,0:12:41.39,Caption,,0,0,0,,Here is one thing to do tonight.
+Dialogue: 4,0:12:41.39,0:12:43.64,Caption,,0,0,0,,Place your hand where it hurts,
+Dialogue: 4,0:12:43.64,0:12:45.02,Caption,,0,0,0,,or over your heart,
+Dialogue: 4,0:12:45.02,0:12:47.10,Caption,,0,0,0,,and pray just three words:
+Dialogue: 4,0:12:47.10,0:12:48.83,Caption,,0,0,0,,Lord, heal me.
+Dialogue: 4,0:12:48.83,0:12:50.49,Caption,,0,0,0,,Then leave it with him,
+Dialogue: 4,0:12:50.49,0:12:52.49,Caption,,0,0,0,,and let yourself sleep.
+Dialogue: 4,0:12:53.52,0:12:55.48,Caption,,0,0,0,,If you prayed this prayer,
+Dialogue: 4,0:12:55.48,0:12:57.74,Caption,,0,0,0,,type amen in the comments now,
+Dialogue: 4,0:12:57.74,0:12:58.94,Caption,,0,0,0,,and if you want,
+Dialogue: 4,0:12:58.94,0:13:00.82,Caption,,0,0,0,,share the name of someone
+Dialogue: 4,0:13:00.82,0:13:02.18,Caption,,0,0,0,,who needs healing,
+Dialogue: 4,0:13:02.18,0:13:04.09,Caption,,0,0,0,,so others can pray too.
+Dialogue: 4,0:13:04.09,0:13:06.64,Caption,,0,0,0,,Then stay right where you are.
+Dialogue: 4,0:13:06.64,0:13:08.58,Caption,,0,0,0,,For the rest of this time,
+Dialogue: 4,0:13:08.58,0:13:09.99,Caption,,0,0,0,,I will read healing
+Dialogue: 4,0:13:09.99,0:13:11.93,Caption,,0,0,0,,Scripture over you slowly,
+Dialogue: 4,0:13:11.93,0:13:13.05,Caption,,0,0,0,,so you can fall
+Dialogue: 4,0:13:13.05,0:13:14.96,Caption,,0,0,0,,asleep in God's care.
+Dialogue: 4,0:13:16.80,0:13:18.71,Caption,,0,0,0,,Let us begin by letting
+Dialogue: 4,0:13:18.71,0:13:20.30,Caption,,0,0,0,,your body settle.
+Dialogue: 4,0:13:20.30,0:13:21.75,Caption,,0,0,0,,Breathe in gently,
+Dialogue: 4,0:13:21.75,0:13:24.63,Caption,,0,0,0,,as deeply as is comfortable for you,
+Dialogue: 4,0:13:24.63,0:13:27.14,Caption,,0,0,0,,and let the breath go slowly.
+Dialogue: 4,0:13:27.14,0:13:28.54,Caption,,0,0,0,,If there is pain,
+Dialogue: 4,0:13:28.54,0:13:30.03,Caption,,0,0,0,,do not fight it.
+Dialogue: 4,0:13:30.03,0:13:31.26,Caption,,0,0,0,,Just notice it,
+Dialogue: 4,0:13:31.26,0:13:33.73,Caption,,0,0,0,,and place it in God's hands.
+Dialogue: 4,0:13:33.73,0:13:35.85,Caption,,0,0,0,,Let your face soften.
+Dialogue: 4,0:13:35.85,0:13:38.14,Caption,,0,0,0,,Let your eyes close.
+Dialogue: 4,0:13:39.17,0:13:41.34,Caption,,0,0,0,,Let your shoulders drop.
+Dialogue: 4,0:13:41.34,0:13:42.76,Caption,,0,0,0,,Let your arms rest
+Dialogue: 4,0:13:42.76,0:13:44.52,Caption,,0,0,0,,heavy at your sides.
+Dialogue: 4,0:13:44.52,0:13:46.62,Caption,,0,0,0,,Let your hands open.
+Dialogue: 4,0:13:46.62,0:13:48.78,Caption,,0,0,0,,Feel the mattress holding you,
+Dialogue: 4,0:13:48.78,0:13:51.26,Caption,,0,0,0,,the pillow supporting your head.
+Dialogue: 4,0:13:51.26,0:13:53.01,Caption,,0,0,0,,You do not have to hold
+Dialogue: 4,0:13:53.01,0:13:54.70,Caption,,0,0,0,,yourself up tonight.
+Dialogue: 4,0:13:54.70,0:13:56.48,Caption,,0,0,0,,You are held.
+Dialogue: 4,0:13:57.52,0:13:59.68,Caption,,0,0,0,,Let the warmth of rest spread
+Dialogue: 4,0:13:59.68,0:14:01.62,Caption,,0,0,0,,slowly through your chest,
+Dialogue: 4,0:14:01.62,0:14:03.41,Caption,,0,0,0,,your stomach, your hips,
+Dialogue: 4,0:14:03.41,0:14:04.15,Caption,,0,0,0,,your legs,
+Dialogue: 4,0:14:04.15,0:14:06.57,Caption,,0,0,0,,all the way down to your feet.
+Dialogue: 4,0:14:06.57,0:14:08.64,Caption,,0,0,0,,Every part of you is known
+Dialogue: 4,0:14:08.64,0:14:10.74,Caption,,0,0,0,,by the God who made you.
+Dialogue: 4,0:14:10.74,0:14:13.10,Caption,,0,0,0,,Every cell is in his care.
+Dialogue: 4,0:14:13.10,0:14:14.77,Caption,,0,0,0,,Rest now.
+Dialogue: 4,0:14:15.80,0:14:18.34,Caption,,0,0,0,,Now let the day itself go.
+Dialogue: 4,0:14:18.34,0:14:19.52,Caption,,0,0,0,,The appointments,
+Dialogue: 4,0:14:19.52,0:14:20.62,Caption,,0,0,0,,the phone calls,
+Dialogue: 4,0:14:20.62,0:14:22.79,Caption,,0,0,0,,the waiting rooms, the worry.
+Dialogue: 4,0:14:22.79,0:14:24.68,Caption,,0,0,0,,Let each one drift away
+Dialogue: 4,0:14:24.68,0:14:26.98,Caption,,0,0,0,,like a leaf on slow water.
+Dialogue: 4,0:14:26.98,0:14:28.50,Caption,,0,0,0,,There is nothing more
+Dialogue: 4,0:14:28.50,0:14:30.19,Caption,,0,0,0,,you need to do today.
+Dialogue: 4,0:14:30.19,0:14:30.87,Caption,,0,0,0,,Tonight,
+Dialogue: 4,0:14:30.87,0:14:33.42,Caption,,0,0,0,,your only task is to rest.
+Dialogue: 4,0:14:34.45,0:14:35.93,Caption,,0,0,0,,Listen to this psalm
+Dialogue: 4,0:14:35.93,0:14:37.66,Caption,,0,0,0,,of healing and mercy.
+Dialogue: 5,0:14:37.66,0:14:40.19,Verse,,0,0,0,,{\pos(960,470)}Bless the LORD, O my soul:
+Dialogue: 5,0:14:40.19,0:14:42.26,Verse,,0,0,0,,{\pos(960,470)}and all that is within me,
+Dialogue: 5,0:14:42.26,0:14:44.04,Verse,,0,0,0,,{\pos(960,470)}bless his holy name.
+Dialogue: 5,0:14:44.04,0:14:46.14,Verse,,0,0,0,,{\pos(960,470)}Bless the LORD, O my soul,
+Dialogue: 5,0:14:46.14,0:14:48.91,Verse,,0,0,0,,{\pos(960,470)}and forget not all his benefits:
+Dialogue: 5,0:14:48.91,0:14:51.72,Verse,,0,0,0,,{\pos(960,470)}Who forgiveth all thine iniquities;
+Dialogue: 5,0:14:51.72,0:14:54.58,Verse,,0,0,0,,{\pos(960,470)}who healeth all thy diseases;
+Dialogue: 5,0:14:54.58,0:14:57.84,Verse,,0,0,0,,{\pos(960,470)}Who redeemeth thy life from destruction;
+Dialogue: 5,0:14:57.84,0:15:00.58,Verse,,0,0,0,,{\pos(960,470)}who crowneth thee with lovingkindness
+Dialogue: 5,0:15:00.58,0:15:02.18,Verse,,0,0,0,,{\pos(960,470)}and tender mercies;
+Dialogue: 5,0:15:02.18,0:15:03.58,Verse,,0,0,0,,{\pos(960,470)}Who satisfieth thy
+Dialogue: 5,0:15:03.58,0:15:05.56,Verse,,0,0,0,,{\pos(960,470)}mouth with good things;
+Dialogue: 5,0:15:05.56,0:15:07.70,Verse,,0,0,0,,{\pos(960,470)}so that thy youth is renewed
+Dialogue: 5,0:15:07.70,0:15:09.19,Verse,,0,0,0,,{\pos(960,470)}like the eagle's.
+Dialogue: 5,0:15:09.19,0:15:12.08,Verse,,0,0,0,,{\pos(960,470)}The LORD is merciful and gracious,
+Dialogue: 5,0:15:12.08,0:15:13.27,Verse,,0,0,0,,{\pos(960,470)}slow to anger,
+Dialogue: 5,0:15:13.27,0:15:15.41,Verse,,0,0,0,,{\pos(960,470)}and plenteous in mercy.
+Dialogue: 5,0:15:15.41,0:15:17.83,Verse,,0,0,0,,{\pos(960,470)}He will not always chide:
+Dialogue: 5,0:15:17.83,0:15:19.40,Verse,,0,0,0,,{\pos(960,470)}neither will he keep
+Dialogue: 5,0:15:19.40,0:15:21.08,Verse,,0,0,0,,{\pos(960,470)}his anger for ever.
+Dialogue: 5,0:15:21.08,0:15:22.43,Verse,,0,0,0,,{\pos(960,470)}He hath not dealt
+Dialogue: 5,0:15:22.43,0:15:24.44,Verse,,0,0,0,,{\pos(960,470)}with us after our sins;
+Dialogue: 5,0:15:24.44,0:15:26.50,Verse,,0,0,0,,{\pos(960,470)}nor rewarded us according
+Dialogue: 5,0:15:26.50,0:15:28.16,Verse,,0,0,0,,{\pos(960,470)}to our iniquities.
+Dialogue: 5,0:15:28.16,0:15:29.50,Verse,,0,0,0,,{\pos(960,470)}For as the heaven
+Dialogue: 5,0:15:29.50,0:15:31.38,Verse,,0,0,0,,{\pos(960,470)}is high above the earth,
+Dialogue: 5,0:15:31.38,0:15:33.03,Verse,,0,0,0,,{\pos(960,470)}so great is his mercy
+Dialogue: 5,0:15:33.03,0:15:35.25,Verse,,0,0,0,,{\pos(960,470)}toward them that fear him.
+Dialogue: 5,0:15:35.25,0:15:36.63,Verse,,0,0,0,,{\pos(960,470)}As far as the east
+Dialogue: 5,0:15:36.63,0:15:37.93,Verse,,0,0,0,,{\pos(960,470)}is from the west,
+Dialogue: 5,0:15:37.93,0:15:39.92,Verse,,0,0,0,,{\pos(960,470)}so far hath he removed our
+Dialogue: 5,0:15:39.92,0:15:41.85,Verse,,0,0,0,,{\pos(960,470)}transgressions from us.
+Dialogue: 5,0:15:41.85,0:15:44.72,Verse,,0,0,0,,{\pos(960,470)}Like as a father pitieth his children,
+Dialogue: 5,0:15:44.72,0:15:46.16,Verse,,0,0,0,,{\pos(960,470)}so the LORD pitieth
+Dialogue: 5,0:15:46.16,0:15:47.94,Verse,,0,0,0,,{\pos(960,470)}them that fear him.
+Dialogue: 4,0:15:48.97,0:15:52.10,Caption,,0,0,0,,Like as a father pitieth his children.
+Dialogue: 4,0:15:52.10,0:15:54.46,Caption,,0,0,0,,Think of a loving father sitting
+Dialogue: 4,0:15:54.46,0:15:57.04,Caption,,0,0,0,,beside a sick child's bed at night,
+Dialogue: 4,0:15:57.04,0:15:59.14,Caption,,0,0,0,,watching, caring, staying.
+Dialogue: 4,0:15:59.14,0:16:00.33,Caption,,0,0,0,,That is how God
+Dialogue: 4,0:16:00.33,0:16:02.27,Caption,,0,0,0,,is with you tonight.
+Dialogue: 5,0:16:03.30,0:16:05.48,Verse,,0,0,0,,{\pos(960,470)}The LORD is my shepherd;
+Dialogue: 5,0:16:05.48,0:16:07.37,Verse,,0,0,0,,{\pos(960,470)}I shall not want.
+Dialogue: 5,0:16:07.37,0:16:08.94,Verse,,0,0,0,,{\pos(960,470)}He maketh me to lie
+Dialogue: 5,0:16:08.94,0:16:11.03,Verse,,0,0,0,,{\pos(960,470)}down in green pastures:
+Dialogue: 5,0:16:11.03,0:16:14.22,Verse,,0,0,0,,{\pos(960,470)}he leadeth me beside the still waters.
+Dialogue: 5,0:16:14.22,0:16:16.53,Verse,,0,0,0,,{\pos(960,470)}He restoreth my soul:
+Dialogue: 5,0:16:16.53,0:16:18.57,Verse,,0,0,0,,{\pos(960,470)}he leadeth me in the paths
+Dialogue: 5,0:16:18.57,0:16:21.66,Verse,,0,0,0,,{\pos(960,470)}of righteousness for his name's sake.
+Dialogue: 5,0:16:21.66,0:16:21.95,Verse,,0,0,0,,{\pos(960,470)}Yea,
+Dialogue: 5,0:16:21.95,0:16:24.27,Verse,,0,0,0,,{\pos(960,470)}though I walk through the valley
+Dialogue: 5,0:16:24.27,0:16:25.94,Verse,,0,0,0,,{\pos(960,470)}of the shadow of death,
+Dialogue: 5,0:16:25.94,0:16:27.58,Verse,,0,0,0,,{\pos(960,470)}I will fear no evil:
+Dialogue: 5,0:16:27.58,0:16:29.85,Verse,,0,0,0,,{\pos(960,470)}for thou art with me;
+Dialogue: 5,0:16:29.85,0:16:31.60,Verse,,0,0,0,,{\pos(960,470)}thy rod and thy staff
+Dialogue: 5,0:16:31.60,0:16:33.12,Verse,,0,0,0,,{\pos(960,470)}they comfort me.
+Dialogue: 5,0:16:33.12,0:16:35.71,Verse,,0,0,0,,{\pos(960,470)}Thou preparest a table before me
+Dialogue: 5,0:16:35.71,0:16:38.48,Verse,,0,0,0,,{\pos(960,470)}in the presence of mine enemies:
+Dialogue: 5,0:16:38.48,0:16:41.38,Verse,,0,0,0,,{\pos(960,470)}thou anointest my head with oil;
+Dialogue: 5,0:16:41.38,0:16:43.43,Verse,,0,0,0,,{\pos(960,470)}my cup runneth over.
+Dialogue: 5,0:16:43.43,0:16:45.98,Verse,,0,0,0,,{\pos(960,470)}Surely goodness and mercy shall
+Dialogue: 5,0:16:45.98,0:16:47.38,Verse,,0,0,0,,{\pos(960,470)}follow me all the
+Dialogue: 5,0:16:47.38,0:16:48.88,Verse,,0,0,0,,{\pos(960,470)}days of my life:
+Dialogue: 5,0:16:48.88,0:16:51.01,Verse,,0,0,0,,{\pos(960,470)}and I will dwell in the house
+Dialogue: 5,0:16:51.01,0:16:52.90,Verse,,0,0,0,,{\pos(960,470)}of the LORD for ever.
+Dialogue: 4,0:16:53.93,0:16:56.22,Caption,,0,0,0,,He restoreth my soul.
+Dialogue: 4,0:16:56.22,0:16:58.66,Caption,,0,0,0,,Restoring is slow, quiet work,
+Dialogue: 4,0:16:58.66,0:17:00.20,Caption,,0,0,0,,the kind that often
+Dialogue: 4,0:17:00.20,0:17:02.25,Caption,,0,0,0,,happens while we sleep.
+Dialogue: 4,0:17:02.25,0:17:04.52,Caption,,0,0,0,,Let the shepherd do his restoring
+Dialogue: 4,0:17:04.52,0:17:06.25,Caption,,0,0,0,,work in you tonight.
+Dialogue: 4,0:17:07.28,0:17:09.81,Caption,,0,0,0,,God is our refuge and strength,
+Dialogue: 4,0:17:09.81,0:17:12.53,Caption,,0,0,0,,a very present help in trouble.
+Dialogue: 4,0:17:12.53,0:17:14.46,Caption,,0,0,0,,Therefore will not we fear,
+Dialogue: 4,0:17:14.46,0:17:16.45,Caption,,0,0,0,,though the earth be removed,
+Dialogue: 4,0:17:16.45,0:17:18.94,Caption,,0,0,0,,and though the mountains be carried
+Dialogue: 4,0:17:18.94,0:17:20.97,Caption,,0,0,0,,into the midst of the sea;
+Dialogue: 4,0:17:20.97,0:17:22.62,Caption,,0,0,0,,Though the waters thereof
+Dialogue: 4,0:17:22.62,0:17:24.01,Caption,,0,0,0,,roar and be troubled,
+Dialogue: 4,0:17:24.01,0:17:25.73,Caption,,0,0,0,,though the mountains shake
+Dialogue: 4,0:17:25.73,0:17:27.64,Caption,,0,0,0,,with the swelling thereof.
+Dialogue: 4,0:17:27.64,0:17:28.38,Caption,,0,0,0,,Be still,
+Dialogue: 4,0:17:28.38,0:17:30.48,Caption,,0,0,0,,and know that I am God:
+Dialogue: 4,0:17:30.48,0:17:33.29,Caption,,0,0,0,,I will be exalted among the heathen,
+Dialogue: 4,0:17:33.29,0:17:35.89,Caption,,0,0,0,,I will be exalted in the earth.
+Dialogue: 5,0:17:35.89,0:17:38.42,Verse,,0,0,0,,{\pos(960,470)}The LORD of hosts is with us;
+Dialogue: 4,0:17:38.42,0:17:41.69,Caption,,0,0,0,,the God of Jacob is our refuge.
+Dialogue: 4,0:17:42.72,0:17:45.31,Caption,,0,0,0,,The Lord of hosts is with us.
+Dialogue: 4,0:17:45.31,0:17:48.06,Caption,,0,0,0,,Even when the body feels fragile
+Dialogue: 4,0:17:48.06,0:17:50.21,Caption,,0,0,0,,and the future uncertain,
+Dialogue: 4,0:17:50.21,0:17:52.19,Caption,,0,0,0,,the God of angel armies
+Dialogue: 4,0:17:52.19,0:17:54.00,Caption,,0,0,0,,is beside your bed.
+Dialogue: 4,0:17:54.00,0:17:55.33,Caption,,0,0,0,,Be still.
+Dialogue: 4,0:17:55.33,0:17:56.22,Caption,,0,0,0,,He is God,
+Dialogue: 4,0:17:56.22,0:17:58.09,Caption,,0,0,0,,and you can rest.
+Dialogue: 4,0:17:59.12,0:18:01.07,Caption,,0,0,0,,Breathe in slowly.
+Dialogue: 4,0:18:01.07,0:18:02.81,Caption,,0,0,0,,And let it go.
+Dialogue: 4,0:18:02.81,0:18:04.93,Caption,,0,0,0,,Rest in the quiet.
+Dialogue: 5,0:18:06.76,0:18:08.97,Verse,,0,0,0,,{\pos(960,470)}But now thus saith the LORD
+Dialogue: 5,0:18:08.97,0:18:10.44,Verse,,0,0,0,,{\pos(960,470)}that created thee,
+Dialogue: 5,0:18:10.44,0:18:11.10,Verse,,0,0,0,,{\pos(960,470)}O Jacob,
+Dialogue: 5,0:18:11.10,0:18:13.06,Verse,,0,0,0,,{\pos(960,470)}and he that formed thee,
+Dialogue: 5,0:18:13.06,0:18:14.79,Verse,,0,0,0,,{\pos(960,470)}O Israel, Fear not:
+Dialogue: 5,0:18:14.79,0:18:16.72,Verse,,0,0,0,,{\pos(960,470)}for I have redeemed thee,
+Dialogue: 5,0:18:16.72,0:18:19.30,Verse,,0,0,0,,{\pos(960,470)}I have called thee by thy name;
+Dialogue: 5,0:18:19.30,0:18:21.12,Verse,,0,0,0,,{\pos(960,470)}thou art mine.
+Dialogue: 5,0:18:21.12,0:18:23.80,Verse,,0,0,0,,{\pos(960,470)}When thou passest through the waters,
+Dialogue: 5,0:18:23.80,0:18:25.42,Verse,,0,0,0,,{\pos(960,470)}I will be with thee;
+Dialogue: 5,0:18:25.42,0:18:27.06,Verse,,0,0,0,,{\pos(960,470)}and through the rivers,
+Dialogue: 5,0:18:27.06,0:18:29.29,Verse,,0,0,0,,{\pos(960,470)}they shall not overflow thee:
+Dialogue: 5,0:18:29.29,0:18:31.89,Verse,,0,0,0,,{\pos(960,470)}when thou walkest through the fire,
+Dialogue: 5,0:18:31.89,0:18:33.93,Verse,,0,0,0,,{\pos(960,470)}thou shalt not be burned;
+Dialogue: 5,0:18:33.93,0:18:35.78,Verse,,0,0,0,,{\pos(960,470)}neither shall the flame
+Dialogue: 5,0:18:35.78,0:18:37.50,Verse,,0,0,0,,{\pos(960,470)}kindle upon thee.
+Dialogue: 4,0:18:38.53,0:18:41.16,Caption,,0,0,0,,When thou passest through the waters,
+Dialogue: 4,0:18:41.16,0:18:42.77,Caption,,0,0,0,,I will be with thee.
+Dialogue: 4,0:18:42.77,0:18:45.66,Caption,,0,0,0,,Illness can feel like deep water.
+Dialogue: 4,0:18:45.66,0:18:47.36,Caption,,0,0,0,,But God does not watch
+Dialogue: 4,0:18:47.36,0:18:48.70,Caption,,0,0,0,,from the shore.
+Dialogue: 4,0:18:48.70,0:18:50.80,Caption,,0,0,0,,He walks through it with you.
+Dialogue: 4,0:18:50.80,0:18:52.42,Caption,,0,0,0,,You are his.
+Dialogue: 4,0:18:52.42,0:18:54.53,Caption,,0,0,0,,He knows your name.
+Dialogue: 4,0:18:55.56,0:18:58.10,Caption,,0,0,0,,For which cause we faint not;
+Dialogue: 4,0:18:58.10,0:19:00.88,Caption,,0,0,0,,but though our outward man perish,
+Dialogue: 4,0:19:00.88,0:19:02.34,Caption,,0,0,0,,yet the inward man
+Dialogue: 4,0:19:02.34,0:19:04.32,Caption,,0,0,0,,is renewed day by day.
+Dialogue: 4,0:19:04.32,0:19:06.25,Caption,,0,0,0,,For our light affliction,
+Dialogue: 4,0:19:06.25,0:19:08.26,Caption,,0,0,0,,which is but for a moment,
+Dialogue: 4,0:19:08.26,0:19:10.97,Caption,,0,0,0,,worketh for us a far more exceeding
+Dialogue: 4,0:19:10.97,0:19:13.31,Caption,,0,0,0,,and eternal weight of glory;
+Dialogue: 4,0:19:13.31,0:19:15.46,Caption,,0,0,0,,While we look not at the things
+Dialogue: 4,0:19:15.46,0:19:16.49,Caption,,0,0,0,,which are seen,
+Dialogue: 4,0:19:16.49,0:19:17.67,Caption,,0,0,0,,but at the things
+Dialogue: 4,0:19:17.67,0:19:19.16,Caption,,0,0,0,,which are not seen:
+Dialogue: 4,0:19:19.16,0:19:20.60,Caption,,0,0,0,,for the things which
+Dialogue: 4,0:19:20.60,0:19:22.35,Caption,,0,0,0,,are seen are temporal;
+Dialogue: 4,0:19:22.35,0:19:23.88,Caption,,0,0,0,,but the things which
+Dialogue: 4,0:19:23.88,0:19:26.14,Caption,,0,0,0,,are not seen are eternal.
+Dialogue: 4,0:19:27.17,0:19:30.18,Caption,,0,0,0,,The things which are seen are temporal.
+Dialogue: 4,0:19:30.18,0:19:32.87,Caption,,0,0,0,,The pain you feel tonight is real,
+Dialogue: 4,0:19:32.87,0:19:35.23,Caption,,0,0,0,,but it is not the whole story,
+Dialogue: 4,0:19:35.23,0:19:37.15,Caption,,0,0,0,,and it is not forever.
+Dialogue: 4,0:19:37.15,0:19:37.99,Caption,,0,0,0,,Beneath it,
+Dialogue: 4,0:19:37.99,0:19:39.83,Caption,,0,0,0,,God is renewing the part
+Dialogue: 4,0:19:39.83,0:19:41.55,Caption,,0,0,0,,of you that lasts.
+Dialogue: 5,0:19:42.58,0:19:43.64,Verse,,0,0,0,,{\pos(960,470)}I had fainted,
+Dialogue: 5,0:19:43.64,0:19:45.74,Verse,,0,0,0,,{\pos(960,470)}unless I had believed to see
+Dialogue: 5,0:19:45.74,0:19:47.54,Verse,,0,0,0,,{\pos(960,470)}the goodness of the LORD
+Dialogue: 5,0:19:47.54,0:19:49.68,Verse,,0,0,0,,{\pos(960,470)}in the land of the living.
+Dialogue: 5,0:19:49.68,0:19:51.65,Verse,,0,0,0,,{\pos(960,470)}Wait on the LORD:
+Dialogue: 5,0:19:51.65,0:19:53.00,Verse,,0,0,0,,{\pos(960,470)}be of good courage,
+Dialogue: 5,0:19:53.00,0:19:55.75,Verse,,0,0,0,,{\pos(960,470)}and he shall strengthen thine heart:
+Dialogue: 5,0:19:55.75,0:19:58.21,Verse,,0,0,0,,{\pos(960,470)}wait, I say, on the LORD.
+Dialogue: 4,0:19:59.24,0:20:01.42,Caption,,0,0,0,,To see the goodness of the Lord
+Dialogue: 4,0:20:01.42,0:20:03.44,Caption,,0,0,0,,in the land of the living.
+Dialogue: 4,0:20:03.44,0:20:05.57,Caption,,0,0,0,,Not only someday, but here,
+Dialogue: 4,0:20:05.57,0:20:06.60,Caption,,0,0,0,,in this life,
+Dialogue: 4,0:20:06.60,0:20:08.20,Caption,,0,0,0,,in the days ahead.
+Dialogue: 4,0:20:08.20,0:20:10.08,Caption,,0,0,0,,Wait on the Lord tonight,
+Dialogue: 4,0:20:10.08,0:20:11.99,Caption,,0,0,0,,and be of good courage.
+Dialogue: 4,0:20:11.99,0:20:14.51,Caption,,0,0,0,,He will strengthen your heart.
+Dialogue: 5,0:20:15.54,0:20:16.93,Verse,,0,0,0,,{\pos(960,470)}I sought the LORD,
+Dialogue: 5,0:20:16.93,0:20:18.17,Verse,,0,0,0,,{\pos(960,470)}and he heard me,
+Dialogue: 5,0:20:18.17,0:20:21.06,Verse,,0,0,0,,{\pos(960,470)}and delivered me from all my fears.
+Dialogue: 5,0:20:21.06,0:20:22.27,Verse,,0,0,0,,{\pos(960,470)}O taste and see
+Dialogue: 5,0:20:22.27,0:20:24.22,Verse,,0,0,0,,{\pos(960,470)}that the LORD is good:
+Dialogue: 5,0:20:24.22,0:20:25.56,Verse,,0,0,0,,{\pos(960,470)}blessed is the man
+Dialogue: 5,0:20:25.56,0:20:27.30,Verse,,0,0,0,,{\pos(960,470)}that trusteth in him.
+Dialogue: 5,0:20:27.30,0:20:29.27,Verse,,0,0,0,,{\pos(960,470)}The LORD is nigh unto them
+Dialogue: 5,0:20:29.27,0:20:31.49,Verse,,0,0,0,,{\pos(960,470)}that are of a broken heart;
+Dialogue: 4,0:20:31.49,0:20:33.02,Caption,,0,0,0,,and saveth such as
+Dialogue: 4,0:20:33.02,0:20:35.41,Caption,,0,0,0,,be of a contrite spirit.
+Dialogue: 4,0:20:36.44,0:20:38.44,Caption,,0,0,0,,The Lord is nigh unto them
+Dialogue: 4,0:20:38.44,0:20:40.69,Caption,,0,0,0,,that are of a broken heart.
+Dialogue: 4,0:20:40.69,0:20:43.32,Caption,,0,0,0,,If your heart is broken tonight,
+Dialogue: 4,0:20:43.32,0:20:45.54,Caption,,0,0,0,,you are not far from God.
+Dialogue: 4,0:20:45.54,0:20:48.84,Caption,,0,0,0,,You are exactly where he comes closest.
+Dialogue: 4,0:20:49.87,0:20:52.80,Caption,,0,0,0,,Let your breathing slow even more.
+Dialogue: 4,0:20:52.80,0:20:54.43,Caption,,0,0,0,,You are safe.
+Dialogue: 4,0:20:54.43,0:20:55.74,Caption,,0,0,0,,Rest.
+Dialogue: 5,0:20:57.57,0:20:59.06,Verse,,0,0,0,,{\pos(960,470)}I will lift up mine
+Dialogue: 5,0:20:59.06,0:21:00.62,Verse,,0,0,0,,{\pos(960,470)}eyes unto the hills,
+Dialogue: 5,0:21:00.62,0:21:02.91,Verse,,0,0,0,,{\pos(960,470)}from whence cometh my help.
+Dialogue: 5,0:21:02.91,0:21:05.02,Verse,,0,0,0,,{\pos(960,470)}My help cometh from the LORD,
+Dialogue: 5,0:21:05.02,0:21:07.23,Verse,,0,0,0,,{\pos(960,470)}which made heaven and earth.
+Dialogue: 5,0:21:07.23,0:21:08.56,Verse,,0,0,0,,{\pos(960,470)}He will not suffer
+Dialogue: 5,0:21:08.56,0:21:10.29,Verse,,0,0,0,,{\pos(960,470)}thy foot to be moved:
+Dialogue: 5,0:21:10.29,0:21:13.29,Verse,,0,0,0,,{\pos(960,470)}he that keepeth thee will not slumber.
+Dialogue: 5,0:21:13.29,0:21:13.79,Verse,,0,0,0,,{\pos(960,470)}Behold,
+Dialogue: 5,0:21:13.79,0:21:15.80,Verse,,0,0,0,,{\pos(960,470)}he that keepeth Israel shall
+Dialogue: 5,0:21:15.80,0:21:17.84,Verse,,0,0,0,,{\pos(960,470)}neither slumber nor sleep.
+Dialogue: 5,0:21:17.84,0:21:20.11,Verse,,0,0,0,,{\pos(960,470)}The LORD is thy keeper:
+Dialogue: 5,0:21:20.11,0:21:21.77,Verse,,0,0,0,,{\pos(960,470)}the LORD is thy shade
+Dialogue: 5,0:21:21.77,0:21:23.54,Verse,,0,0,0,,{\pos(960,470)}upon thy right hand.
+Dialogue: 5,0:21:23.54,0:21:24.55,Verse,,0,0,0,,{\pos(960,470)}The sun shall
+Dialogue: 5,0:21:24.55,0:21:26.26,Verse,,0,0,0,,{\pos(960,470)}not smite thee by day,
+Dialogue: 5,0:21:26.26,0:21:28.15,Verse,,0,0,0,,{\pos(960,470)}nor the moon by night.
+Dialogue: 5,0:21:28.15,0:21:29.87,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve
+Dialogue: 5,0:21:29.87,0:21:31.47,Verse,,0,0,0,,{\pos(960,470)}thee from all evil:
+Dialogue: 5,0:21:31.47,0:21:34.06,Verse,,0,0,0,,{\pos(960,470)}he shall preserve thy soul.
+Dialogue: 5,0:21:34.06,0:21:35.99,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve thy
+Dialogue: 5,0:21:35.99,0:21:37.70,Verse,,0,0,0,,{\pos(960,470)}going out and thy coming
+Dialogue: 5,0:21:37.70,0:21:39.42,Verse,,0,0,0,,{\pos(960,470)}in from this time forth,
+Dialogue: 5,0:21:39.42,0:21:41.34,Verse,,0,0,0,,{\pos(960,470)}and even for evermore.
+Dialogue: 4,0:21:42.37,0:21:45.35,Caption,,0,0,0,,He that keepeth thee will not slumber.
+Dialogue: 4,0:21:45.35,0:21:47.76,Caption,,0,0,0,,Through every hour of this night,
+Dialogue: 4,0:21:47.76,0:21:48.86,Caption,,0,0,0,,while you rest,
+Dialogue: 4,0:21:48.86,0:21:51.61,Caption,,0,0,0,,God is awake and watching over you.
+Dialogue: 4,0:21:51.61,0:21:53.41,Caption,,0,0,0,,You can let go.
+Dialogue: 4,0:21:53.41,0:21:55.19,Caption,,0,0,0,,He will not.
+Dialogue: 4,0:21:56.22,0:21:58.36,Caption,,0,0,0,,Be careful for nothing;
+Dialogue: 5,0:21:58.36,0:22:00.38,Verse,,0,0,0,,{\pos(960,470)}but in every thing by prayer
+Dialogue: 5,0:22:00.38,0:22:03.13,Verse,,0,0,0,,{\pos(960,470)}and supplication with thanksgiving let
+Dialogue: 5,0:22:03.13,0:22:05.98,Verse,,0,0,0,,{\pos(960,470)}your requests be made known unto God.
+Dialogue: 5,0:22:05.98,0:22:07.57,Verse,,0,0,0,,{\pos(960,470)}And the peace of God,
+Dialogue: 5,0:22:07.57,0:22:09.98,Verse,,0,0,0,,{\pos(960,470)}which passeth all understanding,
+Dialogue: 5,0:22:09.98,0:22:11.64,Verse,,0,0,0,,{\pos(960,470)}shall keep your hearts
+Dialogue: 5,0:22:11.64,0:22:14.34,Verse,,0,0,0,,{\pos(960,470)}and minds through Christ Jesus.
+Dialogue: 4,0:22:15.36,0:22:17.04,Caption,,0,0,0,,The peace of God shall
+Dialogue: 4,0:22:17.04,0:22:18.94,Caption,,0,0,0,,keep your heart and mind,
+Dialogue: 4,0:22:18.94,0:22:21.03,Caption,,0,0,0,,like a guard at the door.
+Dialogue: 4,0:22:21.03,0:22:23.29,Caption,,0,0,0,,Whatever news tomorrow brings,
+Dialogue: 4,0:22:23.29,0:22:24.64,Caption,,0,0,0,,tonight that peace
+Dialogue: 4,0:22:24.64,0:22:26.65,Caption,,0,0,0,,stands watch over you.
+Dialogue: 5,0:22:27.68,0:22:30.52,Verse,,0,0,0,,{\pos(960,470)}Thou wilt keep him in perfect peace,
+Dialogue: 5,0:22:30.52,0:22:33.00,Verse,,0,0,0,,{\pos(960,470)}whose mind is stayed on thee:
+Dialogue: 5,0:22:33.00,0:22:35.38,Verse,,0,0,0,,{\pos(960,470)}because he trusteth in thee.
+Dialogue: 5,0:22:35.38,0:22:37.90,Verse,,0,0,0,,{\pos(960,470)}Trust ye in the LORD for ever:
+Dialogue: 5,0:22:37.90,0:22:39.81,Verse,,0,0,0,,{\pos(960,470)}for in the LORD JEHOVAH
+Dialogue: 5,0:22:39.81,0:22:42.16,Verse,,0,0,0,,{\pos(960,470)}is everlasting strength.
+Dialogue: 4,0:22:43.19,0:22:44.99,Caption,,0,0,0,,Perfect peace for a mind
+Dialogue: 4,0:22:44.99,0:22:46.22,Caption,,0,0,0,,stayed on him.
+Dialogue: 4,0:22:46.22,0:22:48.20,Caption,,0,0,0,,As you drift toward sleep,
+Dialogue: 4,0:22:48.20,0:22:50.78,Caption,,0,0,0,,let your last thought rest on God,
+Dialogue: 4,0:22:50.78,0:22:52.83,Caption,,0,0,0,,his kindness, his nearness,
+Dialogue: 4,0:22:52.83,0:22:54.00,Caption,,0,0,0,,his strength.
+Dialogue: 4,0:22:54.00,0:22:56.08,Caption,,0,0,0,,Everlasting strength.
+Dialogue: 4,0:22:56.08,0:22:58.24,Caption,,0,0,0,,It does not run out.
+Dialogue: 4,0:22:59.27,0:23:01.72,Caption,,0,0,0,,He healeth the broken in heart,
+Dialogue: 4,0:23:01.72,0:23:04.10,Caption,,0,0,0,,and bindeth up their wounds.
+Dialogue: 4,0:23:04.10,0:23:07.08,Caption,,0,0,0,,He telleth the number of the stars;
+Dialogue: 4,0:23:07.08,0:23:09.94,Caption,,0,0,0,,he calleth them all by their names.
+Dialogue: 4,0:23:09.94,0:23:11.47,Caption,,0,0,0,,Great is our Lord,
+Dialogue: 4,0:23:11.47,0:23:13.26,Caption,,0,0,0,,and of great power:
+Dialogue: 4,0:23:13.26,0:23:16.21,Caption,,0,0,0,,his understanding is infinite.
+Dialogue: 4,0:23:17.24,0:23:19.42,Caption,,0,0,0,,Above your roof tonight there
+Dialogue: 4,0:23:19.42,0:23:22.19,Caption,,0,0,0,,are more stars than anyone can count,
+Dialogue: 4,0:23:22.19,0:23:23.62,Caption,,0,0,0,,and God calls every
+Dialogue: 4,0:23:23.62,0:23:25.30,Caption,,0,0,0,,one of them by name.
+Dialogue: 4,0:23:25.30,0:23:27.25,Caption,,0,0,0,,The same God is binding
+Dialogue: 4,0:23:27.25,0:23:28.70,Caption,,0,0,0,,up your wounds.
+Dialogue: 4,0:23:28.70,0:23:30.47,Caption,,0,0,0,,Nothing about you is too
+Dialogue: 4,0:23:30.47,0:23:31.87,Caption,,0,0,0,,small for his care,
+Dialogue: 4,0:23:31.87,0:23:33.87,Caption,,0,0,0,,and nothing about your pain
+Dialogue: 4,0:23:33.87,0:23:36.07,Caption,,0,0,0,,is too big for his power.
+Dialogue: 5,0:23:37.10,0:23:38.64,Verse,,0,0,0,,{\pos(960,470)}But thou, O LORD,
+Dialogue: 5,0:23:38.64,0:23:40.62,Verse,,0,0,0,,{\pos(960,470)}art a shield for me;
+Dialogue: 5,0:23:40.62,0:23:41.33,Verse,,0,0,0,,{\pos(960,470)}my glory,
+Dialogue: 5,0:23:41.33,0:23:43.94,Verse,,0,0,0,,{\pos(960,470)}and the lifter up of mine head.
+Dialogue: 5,0:23:43.94,0:23:45.64,Verse,,0,0,0,,{\pos(960,470)}I cried unto the LORD
+Dialogue: 5,0:23:45.64,0:23:46.77,Verse,,0,0,0,,{\pos(960,470)}with my voice,
+Dialogue: 5,0:23:46.77,0:23:48.31,Verse,,0,0,0,,{\pos(960,470)}and he heard me out
+Dialogue: 5,0:23:48.31,0:23:49.86,Verse,,0,0,0,,{\pos(960,470)}of his holy hill.
+Dialogue: 5,0:23:49.86,0:23:52.36,Verse,,0,0,0,,{\pos(960,470)}I laid me down and slept;
+Dialogue: 5,0:23:52.36,0:23:53.89,Verse,,0,0,0,,{\pos(960,470)}I awaked;
+Dialogue: 5,0:23:53.89,0:23:56.44,Verse,,0,0,0,,{\pos(960,470)}for the LORD sustained me.
+Dialogue: 4,0:23:57.47,0:23:59.89,Caption,,0,0,0,,The lifter up of mine head.
+Dialogue: 4,0:23:59.89,0:24:01.71,Caption,,0,0,0,,When illness or sorrow
+Dialogue: 4,0:24:01.71,0:24:03.28,Caption,,0,0,0,,bows your head low,
+Dialogue: 4,0:24:03.28,0:24:05.61,Caption,,0,0,0,,God gently lifts it again.
+Dialogue: 4,0:24:05.61,0:24:07.78,Caption,,0,0,0,,Lay your head down now.
+Dialogue: 4,0:24:07.78,0:24:09.13,Caption,,0,0,0,,He will lift it up
+Dialogue: 4,0:24:09.13,0:24:10.60,Caption,,0,0,0,,in the morning.
+Dialogue: 5,0:24:11.63,0:24:13.80,Verse,,0,0,0,,{\pos(960,470)}He that dwelleth in the secret
+Dialogue: 5,0:24:13.80,0:24:16.25,Verse,,0,0,0,,{\pos(960,470)}place of the most High shall abide
+Dialogue: 5,0:24:16.25,0:24:18.81,Verse,,0,0,0,,{\pos(960,470)}under the shadow of the Almighty.
+Dialogue: 5,0:24:18.81,0:24:20.74,Verse,,0,0,0,,{\pos(960,470)}I will say of the LORD,
+Dialogue: 5,0:24:20.74,0:24:23.60,Verse,,0,0,0,,{\pos(960,470)}He is my refuge and my fortress:
+Dialogue: 5,0:24:23.60,0:24:25.08,Verse,,0,0,0,,{\pos(960,470)}my God;
+Dialogue: 5,0:24:25.08,0:24:27.24,Verse,,0,0,0,,{\pos(960,470)}in him will I trust.
+Dialogue: 5,0:24:27.24,0:24:29.90,Verse,,0,0,0,,{\pos(960,470)}He shall cover thee with his feathers,
+Dialogue: 5,0:24:29.90,0:24:32.67,Verse,,0,0,0,,{\pos(960,470)}and under his wings shalt thou trust:
+Dialogue: 5,0:24:32.67,0:24:34.30,Verse,,0,0,0,,{\pos(960,470)}his truth shall be thy
+Dialogue: 5,0:24:34.30,0:24:35.88,Verse,,0,0,0,,{\pos(960,470)}shield and buckler.
+Dialogue: 5,0:24:35.88,0:24:38.48,Verse,,0,0,0,,{\pos(960,470)}Because thou hast made the LORD,
+Dialogue: 5,0:24:38.48,0:24:40.03,Verse,,0,0,0,,{\pos(960,470)}which is my refuge,
+Dialogue: 5,0:24:40.03,0:24:41.57,Verse,,0,0,0,,{\pos(960,470)}even the most High,
+Dialogue: 5,0:24:41.57,0:24:42.97,Verse,,0,0,0,,{\pos(960,470)}thy habitation;
+Dialogue: 5,0:24:42.97,0:24:45.32,Verse,,0,0,0,,{\pos(960,470)}There shall no evil befall thee,
+Dialogue: 5,0:24:45.32,0:24:47.09,Verse,,0,0,0,,{\pos(960,470)}neither shall any plague
+Dialogue: 5,0:24:47.09,0:24:48.96,Verse,,0,0,0,,{\pos(960,470)}come nigh thy dwelling.
+Dialogue: 5,0:24:48.96,0:24:51.09,Verse,,0,0,0,,{\pos(960,470)}For he shall give his angels
+Dialogue: 5,0:24:51.09,0:24:52.38,Verse,,0,0,0,,{\pos(960,470)}charge over thee,
+Dialogue: 5,0:24:52.38,0:24:54.94,Verse,,0,0,0,,{\pos(960,470)}to keep thee in all thy ways.
+Dialogue: 4,0:24:55.97,0:24:57.74,Caption,,0,0,0,,Lord, as sleep comes,
+Dialogue: 4,0:24:57.74,0:24:59.34,Caption,,0,0,0,,I give you my body,
+Dialogue: 4,0:24:59.34,0:25:01.29,Caption,,0,0,0,,my heart and my mind.
+Dialogue: 4,0:25:01.29,0:25:03.52,Caption,,0,0,0,,Heal what needs healing.
+Dialogue: 4,0:25:03.52,0:25:05.87,Caption,,0,0,0,,Comfort what needs comfort.
+Dialogue: 4,0:25:05.87,0:25:08.04,Caption,,0,0,0,,Watch over me through the night,
+Dialogue: 4,0:25:08.04,0:25:10.00,Caption,,0,0,0,,and let me wake to your mercy
+Dialogue: 4,0:25:10.00,0:25:11.36,Caption,,0,0,0,,in the morning.
+Dialogue: 4,0:25:12.39,0:25:13.90,Caption,,0,0,0,,And now receive this
+Dialogue: 4,0:25:13.90,0:25:15.73,Caption,,0,0,0,,blessing as you sleep.
+Dialogue: 5,0:25:15.73,0:25:16.37,Verse,,0,0,0,,{\pos(960,470)}Beloved,
+Dialogue: 5,0:25:16.37,0:25:19.02,Verse,,0,0,0,,{\pos(960,470)}I wish above all things that thou
+Dialogue: 5,0:25:19.02,0:25:21.59,Verse,,0,0,0,,{\pos(960,470)}mayest prosper and be in health,
+Dialogue: 5,0:25:21.59,0:25:24.02,Verse,,0,0,0,,{\pos(960,470)}even as thy soul prospereth.
+Dialogue: 4,0:25:24.02,0:25:26.16,Caption,,0,0,0,,Rest in his care tonight.
+Dialogue: 4,0:25:26.16,0:25:28.96,Caption,,0,0,0,,In Jesus' name, amen.
