@@ -1,4 +1,4 @@
-# HeroVerse daily report — 2026-10-20 01:35 UTC (day 3 of 14, max 30)
+# HeroVerse daily report — 2026-10-20 01:52 UTC (day 3 of 14, max 30)
 
 ## YPP progress
 Sources: [official] YouTube Data API count; [own] our calculation from YouTube Analytics rows (an estimate of
@@ -7,14 +7,14 @@ the YPP counter, which only YouTube Studio shows and which can differ); [plan] o
 - Subscribers [official]: **269 / 1,000** — [plan] 60.9/day to reach it by day 14
 - Public long-form watch hours, last 365 d [own]: **3.3 / 4,000** — [plan] 333.1/day
 - Public Shorts views, last 90 d [own]: 22 / 10,000,000 (the alternative YPP path)
-- For contrast, NOT the YPP counters: all-content watch hours 365 d incl. Shorts and private/removed videos [own] 76.9 h; lifetime views of public Shorts [official] 2,960
+- For contrast, NOT the YPP counters: all-content watch hours 365 d incl. Shorts and private/removed videos [own] 76.9 h; lifetime views of public Shorts [official] 2,964
 - Classification of long vs Shorts: duration <= 180 s (Analytics content type unavailable)
 - Public videos [official]: 28; total channel views 2,888
 
 ## Alerts
 - ⚠ none
 
-## Pipeline (script runway 3.4 days)
+## Pipeline (script runway 3.3 days)
 | pilot | publishes | rendered | QA | review | uploaded | public observed | title |
 |---|---|---|---|---|---|---|---|
 | pilot-002 | 2026-10-18 10:00 UTC | yes | PASS | - | yes | yes | Morning Prayer | God Has Already Gone Ahead of You Today |
@@ -32,10 +32,10 @@ the YPP counter, which only YouTube Studio shows and which can differ); [plan] o
 ## Latest public videos
 | published | views | watch h | avg view % | subs gained | title |
 |---|---|---|---|---|---|
-| 2026-10-20T00:30 | 4 | - | - | - | Night Prayer of Thanksgiving | His Mercies Are New, Rest in His Faithf |
+| 2026-10-20T00:30 | 3 | - | - | - | Night Prayer of Thanksgiving | His Mercies Are New, Rest in His Faithf |
 | 2026-10-19T20:17 | 45 | - | - | - | Rest for the Part of You Still Awake #shorts |
-| 2026-10-19T20:16 | 0 | - | - | - | Night Prayer Before Sleep | Give God Your Worries, Rest in His Peace |
-| 2026-10-18T14:00 | 270 | - | - | - | The Ultimate Morning Prayer for Peace #shorts |
+| 2026-10-19T20:16 | 1 | - | - | - | Night Prayer Before Sleep | Give God Your Worries, Rest in His Peace |
+| 2026-10-18T14:00 | 274 | - | - | - | The Ultimate Morning Prayer for Peace #shorts |
 | 2026-10-18T10:00 | 9 | - | - | - | Morning Prayer | God Has Already Gone Ahead of You Today |
 | 2026-10-10T18:45 | 9 | 3.1 | 11.4 | 0 | Rest Is Not Giving Up | A Christian Reflection + Quiet Piano for Praye |
 | 2026-09-04T18:45 | 27 | 0.2 | 17.6 | 0 | The 24-Hour Test: What To Do After You Pray |
@@ -62,20 +62,20 @@ Market and production directives of the day: `migration/evidence/daily-intel/` (
 | market-panel.yml | 2026-10-19T12:25 | failure |
 | reconcile.yml | 2026-10-19T14:20 | success |
 | publish-shorts.yml | 2026-10-18T08:00 | success |
-| goal-report.yml | 2026-10-20T01:35 | in_progress |
+| goal-report.yml | 2026-10-20T01:51 | in_progress |
 | channel-privacy.yml | 2026-10-19T14:49 | success |
 | heartbeat.yml | 2026-10-20T01:14 | failure |
 | runner | 2026-10-20T00:37 | in_progress |
 
 ## Actions minutes (private engine; budget 7000 min / 30 days)
-- ⚠ last 24 h used 901 min (target 233/day)
-- ⚠ 30-day projection 11259 min ≥ 90 % of the 7000 min budget
-- last 24 h 901 · last 7 d 2627 · last 30 d 2627 · 30-day projection 11259
+- ⚠ last 24 h used 902 min (target 233/day)
+- ⚠ 30-day projection 11267 min ≥ 90 % of the 7000 min budget
+- last 24 h 902 · last 7 d 2629 · last 30 d 2629 · 30-day projection 11267
 | workflow (30 d) | minutes | runs |
 |---|---|---|
 | HeroVerse pilot render (figure + backgrounds + captions) and QA | 573 | 8 |
 | HeroVerse approval (automatic gates before publication) | 427 | 34 |
-| HeroVerse PR checks (unit tests + pilot acceptance) | 285 | 110 |
+| HeroVerse PR checks (unit tests + pilot acceptance) | 286 | 111 |
 | HeroVerse Shorts (private): Gemini selection, own edit per Short, watched review | 240 | 16 |
 | HeroVerse full-structure mining (whole videos of winning channels) | 212 | 7 |
 | HeroVerse pilot image generation (open-weight model, CPU) | 129 | 3 |
@@ -83,7 +83,7 @@ Market and production directives of the day: `migration/evidence/daily-intel/` (
 | HeroVerse acquire reference windows | 101 | 9 |
 
 ## Content runway (next 4 days; the engine must never run out of videos)
-- ⚠ 2026-10-21 00:00 UTC (22:23:51 left): pilot-006 is at 'rendered'
+- ⚠ 2026-10-21 00:00 UTC (22:07:32 left): pilot-006 is at 'rendered'
 | slot (UTC) | pilot | stage |
 |---|---|---|
 | 2026-10-20T10:00Z | pilot-005 | uploaded |
