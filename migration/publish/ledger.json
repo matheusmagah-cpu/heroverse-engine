@@ -105,5 +105,22 @@
    "video_id": "tri-CUwy_m0",
    "uploaded_at": "2026-10-20T16:00:32.286443+00:00"
   }
+ },
+ "owner_exceptions": {
+  "owner-temporal-pilot005-cb3ce331-20261020": {
+   "state": "RESERVED",
+   "run_key": "39500765705:1",
+   "binding": {
+    "version": "owner-publication-exception-binding-v1",
+    "exception_id": "owner-temporal-pilot005-cb3ce331-20261020",
+    "receipt_sha256": "dd2990b2ecebe3a7a4ed93d842d248f8e9ea9c3a2ecbfb6921d7b91d3f4db5f2",
+    "pilot": "pilot-005",
+    "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+    "scope": "temporal_only",
+    "baseline_cutoff": "2026-10-20T19:30:00Z",
+    "target_slot": "2026-10-20T20:00:00Z",
+    "owner_authorized_at": "2026-10-20T21:08:15.004165+00:00"
+   }
+  }
  }
 }
