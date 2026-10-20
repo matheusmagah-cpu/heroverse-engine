@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from shorts_select import validate_candidate  # noqa: E402
 
 TARGET_SLOT = "2026-10-20T20:00:00Z"
-LEAD_DEADLINE = "2026-10-20T19:30:00Z"
+LEAD_DEADLINE = "2026-10-20T19:45:00Z"
 RUBRIC = ("hook_in_first_2s", "captions_readable_and_synced", "text_clear_of_shorts_ui", "picture_quality",
           "edit_rhythm", "audio_clarity", "stands_alone", "ending_and_loop", "policy_safe")
 QA_CHECKS = {"decode_clean", "one_h264_1080x1920", "fps_30", "one_aac_stereo_48k", "duration", "loudness", "true_peak"}

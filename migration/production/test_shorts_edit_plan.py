@@ -678,9 +678,10 @@ class FinalizeTests(unittest.TestCase):
         self.assertEqual(result["shorts"][0]["review"], original["shorts"][0]["review"])
 
     def test_deadline_is_exact_and_never_rolls_target_slot(self):
-        self.assertTrue(finish(spec(), "2026-10-20T19:30:00Z")["shorts"][0]["publish"])
+        self.assertTrue(finish(spec(), "2026-10-20T19:45:00Z")["shorts"][0]["publish"])
+        self.assertTrue(finish(spec(), "2026-10-20T19:30:01Z")["shorts"][0]["publish"])
         self.assertTrue(finish(spec(), "2026-10-20T19:15:01Z")["shorts"][0]["publish"])
-        r = finish(spec(), "2026-10-20T19:30:01Z")
+        r = finish(spec(), "2026-10-20T19:45:01Z")
         self.assertFalse(r["shorts"][0]["publish"])
         self.assertEqual(r["release_status"], "TARGET_SLOT_LEAD_MISSED")
         self.assertEqual(r["finalization"]["target_slot"], "2026-10-20T20:00:00Z")
@@ -689,10 +690,36 @@ class FinalizeTests(unittest.TestCase):
     def test_extended_operational_margin_still_requires_real_review(self):
         missing = spec()
         del missing["shorts"][0]["review"]
-        result = finish(missing, "2026-10-20T19:20:00Z")
+        result = finish(missing, "2026-10-20T19:44:59Z")
         self.assertFalse(result["shorts"][0]["publish"])
         self.assertNotEqual(result["release_status"], "READY_FOR_TARGET_SLOT")
         self.assertEqual(result["finalization"]["target_slot"], "2026-10-20T20:00:00Z")
+
+    def test_extended_margin_preserves_failed_review_qa_and_hash_gates(self):
+        for gate in ("review", "qa", "qa_hash", "media_hash", "review_hash"):
+            with self.subTest(gate=gate):
+                s = spec()
+                record = s["shorts"][0]
+                if gate == "review":
+                    record["review"].update(status="FAIL", edit_rhythm=6)
+                    expected = "REVIEW_FAIL"
+                elif gate == "qa":
+                    record["qa"]["status"] = "FAIL"
+                    record["qa"]["checks"]["decode_clean"] = False
+                    expected = "QA_FAIL"
+                elif gate == "qa_hash":
+                    record["qa_output_sha256"] = "a" * 64
+                    expected = "QA_OUTPUT_HASH_MISMATCH"
+                elif gate == "media_hash":
+                    record["media_checks"]["output_sha256"] = "a" * 64
+                    expected = "MEDIA_OUTPUT_HASH_MISMATCH"
+                else:
+                    record["review"]["output_sha256"] = "a" * 64
+                    expected = "REVIEW_OUTPUT_HASH_MISMATCH"
+                result = finish(s, "2026-10-20T19:44:59Z")
+                self.assertFalse(result["shorts"][0]["publish"])
+                self.assertEqual(result["release_status"], expected)
+                self.assertEqual(result["finalization"]["target_slot"], "2026-10-20T20:00:00Z")
 
     def test_invalid_clocks_and_slots_reject(self):
         for now in ("2026-10-20T19:14:59", datetime(2026, 10, 20, 19), None, "not a date", "2026-10-20T20:14:59+01:00"):
