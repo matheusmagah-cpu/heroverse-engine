@@ -41,6 +41,7 @@ class Tests(unittest.TestCase):
             for name,key,value in [('out/gate.json','decision','UNKNOWN'),('out/gate.json','decision','FAIL'),
                                    ('out/review.json','status','ERROR'),('out/review.json','output_sha256','a'*64),
                                    ('out/qa.json','criteria_version','pilot-qa-criteria-v2'),
+                                   ('out/qa.json','criteria_sha256','0'*64),('out/qa.json','criteria_sha256',None),
                                    ('inspection/APPROVAL.json','approved',False)]:
                 p=d/name; original=p.read_bytes();obj=json.loads(original);obj[key]=value;p.write_text(json.dumps(obj))
                 self.assertFalse(prerequisite.ready(d),(name,key,value));p.write_bytes(original)

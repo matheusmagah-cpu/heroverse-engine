@@ -7,3 +7,5 @@ Three previously distinct paths are covered: the renderer no longer calls Shorts
 6 prerequisite tests,14 queue tests,11 runner tests and all38 CI scripts PASS. Shell syntax and card interfaces pass. Workflow triggers, permissions, concurrency and secret references are unchanged. The existing publish step and scheduled slot remain unchanged. No dispatch occurred in this patch.
 
 Limits: this is ordering and evidence-binding correctness, not a claim of cinematic quality or audience performance. Existing already-running independent jobs are not atomically preempted or globally quota-reserved. No quality rule was weakened; UNKNOWN/ERROR and malformed evidence remain blocking. A terminal failed long is no longer a valid source for Shorts in this revised scope.
+
+Independent review caught a missing explicit QA criteria-hash check in the direct Shorts prerequisite. It now compares criteria_sha256 with the existing canonical frozen-v3 hash; wrong or absent hashes are regression cases. This closes the direct-workflow path as well as reconcile's existing current_render check.

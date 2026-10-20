@@ -23,6 +23,8 @@ def problems(pilot_dir):
     if not isinstance(review, dict): errors.append('LONG_REVIEW_MISSING')
     if not isinstance(qa, dict) or qa.get('criteria_version') != 'pilot-qa-criteria-v3':
         errors.append('LONG_NOT_V3')
+    if not isinstance(qa, dict) or qa.get('criteria_sha256') != binding.canonical_gate.FROZEN_CRITERIA_SHA256['pilot-qa-criteria-v3']:
+        errors.append('LONG_CRITERIA_HASH_CHANGED')
     if not isinstance(manifest, dict) or manifest.get('script_sha256') != script_sha:
         errors.append('LONG_SCRIPT_CHANGED')
     return errors
