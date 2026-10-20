@@ -1,0 +1,9 @@
+# Existing-capture learning connection
+
+The daily goal-report already collects owned videos and Analytics. This increment preserves that capture and composes the existing owned-feedback and audiovisual-card adapters in the same workflow. It adds no endpoint, model, quota allocation, scheduler or dependency.
+
+The pipeline now distinguishes an uploaded ledger entry from privacy observed in the current API response. Unknown remains unknown. Report/brief artifacts retain source bytes under content hashes, use immutable capture IDs, and replay deterministically. The next-video brief links its evidence and explicit unknowns; it never changes scripts or rendered inputs.
+
+Evidence decision is HOLD; KEEP_EXISTING_PENDING_EVIDENCE only means leaving the existing plan unchanged. There is no verified exact48h/7d checkpoint, matched baseline, or versioned owned structure assignment, so no winner/loser or causal recommendation is manufactured. Reference cohorts remain6 winners/3 weak, with the20-thumbnail audit separate.
+
+Twelve tests cover the real adapters, null/error metrics, missing private detail, cohort preservation, immutable sources/hash verification, repeat idempotence, corrupted-capture rejection, and mocked whole goal_report collection through brief persistence. The end-to-end spy observes the same3 Data API and3 Analytics requests as before; none are added by the loop. All41 CI scripts passed locally. The exact isolated Python CLI is exercised in a subprocess. Input/output aliases and symlink escapes are rejected before writing; a loop failure remains visible while the existing health steps and captured evidence are preserved. Capture contains the selected unrounded numeric values and required metadata, not full HTTP responses. Live output is pending qualified integration and the existing goal-report workflow; offline evidence is not a fresh channel observation.
