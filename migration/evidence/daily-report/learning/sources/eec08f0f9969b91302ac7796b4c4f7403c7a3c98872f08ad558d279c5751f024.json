@@ -1,0 +1,99 @@
+{
+ "version": "publish-ledger-v1",
+ "entries": {
+  "pilot-002:d0c35d58ebd63824bc90bda17383c2a2e197a00ab0541356c4a89c77d44ef321": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0"
+   },
+   "video_id": "v4zN53ZiUIs",
+   "uploaded_at": "2026-10-17T22:40:41.769491+00:00"
+  },
+  "short:pilot-002:6361e55f6c56c19c86c41665ea02d95c3321100c6e6be15db5011b03c73b65db": {
+   "steps": {},
+   "video_id": "_sUdOLxWy5c",
+   "uploaded_at": "2026-10-18T08:01:16.945824+00:00",
+   "long_video_id": "v4zN53ZiUIs",
+   "slot": "2026-10-18T14:00:00Z",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-02.mp4",
+    "seconds": 53.07,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   }
+  },
+  "pilot-004:3a7c6c28b1c806859b36ad8c856b4e425eeedabf84eeaaf6facae1c3fe6b2f24": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist_error": "PLAYLIST_ITEMS_HTTP_404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The playlist identified with the request's \\u003ccode\\u003eplaylistId\\u003c/code\\u003e parameter cannot be found.\",\n    \"errors"
+   },
+   "video_id": "Iegu_RD_wbE",
+   "uploaded_at": "2026-10-19T12:56:36.796658+00:00"
+  },
+  "short:pilot-004:01cb68d9bf1471155b276916d903c25c91745605193ea3f7deb41faada01705c": {
+   "steps": {},
+   "video_id": "SsgCGkM6knQ",
+   "uploaded_at": "2026-10-19T12:57:06.731212+00:00",
+   "long_video_id": "Iegu_RD_wbE",
+   "slot": "2026-10-20T14:00:00Z",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-02.mp4",
+    "seconds": 43.67,
+    "lufs": -15.0,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   }
+  },
+  "pilot-012:82276559bdfdb5600e7e0ae13b5e7b337611fdacf0d2c2cc25d3533957e9dbfe": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLNTgDANXGT4Y",
+    "first_comment": "Ugz55NP038soIEFpewV4AaABAg"
+   },
+   "video_id": "1bT9pEROuhI",
+   "uploaded_at": "2026-10-19T19:38:13.007108+00:00"
+  },
+  "pilot-005:c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0",
+    "first_comment": "PENDING: HTTP_403 forbidden: The comment thread could not be created due to insufficient permissions. The request might not be properly authorized."
+   },
+   "video_id": "XDwxi4pvllM",
+   "uploaded_at": "2026-10-20T01:26:51.273208+00:00"
+  },
+  "pilot-007:25231edcdc2ed15687c7c5cb9fb774b19a44c4d171ace6e756917fa09d488dde": {
+   "steps": {
+    "thumbnail": true,
+    "captions": true,
+    "playlist": "PLEvBSeoTzGX0",
+    "first_comment": "PENDING: HTTP_403 forbidden: The comment thread could not be created due to insufficient permissions. The request might not be properly authorized."
+   },
+   "video_id": "NGfnyTul-K0",
+   "uploaded_at": "2026-10-20T07:22:45.905535+00:00"
+  }
+ }
+}
