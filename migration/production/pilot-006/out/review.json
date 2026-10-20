@@ -2,13 +2,117 @@
  "version": "long-review-v1",
  "pilot_id": "pilot-006",
  "output_sha256": "98e2a3027f6bc3f4736d0adb0e12aac5507e9929c9e32f84ee14963f5facf9bc",
- "status": "ERROR",
- "error": "ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA",
- "provider_message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: [REDACTED_URL] To monitor your current usage, head to: [REDACTED_URL] \n* Quota exceeded for metric: [REDACTED_URL] limit: 20, model: gemini-3.8-flash\nPlease retry in 3h43m15.383214926s.",
- "quota_ids": [
-  "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
- ],
- "retry_delay": "13395s",
- "failed_at": "2026-10-20T03:16:45Z",
- "usage": []
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 25.57,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 10.17,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.0,
+  "picture_quality": 8.5,
+  "figure_and_background_integrity": 9.0,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.0,
+  "pacing_and_visual_variety": 7.0,
+  "scripture_on_screen": 9.5,
+  "policy_safe": 10.0,
+  "overall": 8.5,
+  "issues": [
+   "02:26 - Noticeable hard cut between scenes rather than smooth crossfade matching the sleep aesthetic.",
+   "05:01 - Background visual loops repeat the same small set of AI-generated landscapes throughout the 25-minute runtime, leading to visual monotony.",
+   "16:17 - Cross-dissolve transition reveals overlapping geometry between two differing landscapes."
+  ],
+  "strongest_moment": "00:41 - The clear, legible scripture overlay card for Jeremiah 17:14 paired with tranquil candle imagery and gentle pacing perfectly suits bedtime prayer.",
+  "model": "gemini-3.8-flash",
+  "status": "PASS"
+ },
+ "audit": {
+  "first_30s": "The video opens at 00:00 with a dark wheat field at night under a starry sky featuring on-screen title text 'Healing Rest Tonight - NIGHT PRAYER'. At 00:01, a calm male narrator begins speaking ('Good evening. Bring every pain of body or heart to God tonight...'). The narrator guides the viewer to breathe slowly and lie back. At 00:26, the scene transitions to an open Bible next to lit candles as the narrator validates physical and emotional weariness ('You may be tired of being sick...'). The hook engages viewers by offering immediate calm, spiritual comfort, and guided relaxation for bed.",
+  "visuals": "The visuals consist of AI-generated dark atmospheric illustrations (wheat fields, cozy candlelit Bibles, starry night skies, lily ponds, winter cottages, ocean waves) with subtle parallax/motion effects and flickering light loops. Camera motion includes slow Ken Burns pans and zooms. Cuts occur roughly 3 to 4 times per minute (e.g. Min 1 has 4 cuts, Min 5 has 3 cuts, Min 10 has 3 cuts). No real human faces or live-action people appear.",
+  "on_screen_text": "Captions are present throughout at the bottom center in clear white bold font. Scripture verses are displayed inside dark translucent rounded banners in the center screen with golden citation text (e.g. Jeremiah 17:14 KJV at 00:42). A red 'SUBSCRIBE' badge appears at top right from 00:59 to 01:09, a 'LIKE' badge appears from 11:30 to 11:40, and an engagement prompt ('type amen in the comments') appears in audio and captions from 12:56 to 13:05.",
+  "audio": "Audio features a deep, gentle male voice (estimated age 40-50) speaking at a very slow, relaxing pace (~85-95 WPM). The tone is warm, soothing, and pastoral. Background audio consists of soft ambient piano and pad music maintained at a steady, low volume behind the voiceover.",
+  "structure": "The video is structured into distinct prayer and meditation phases: 00:00-00:38 Hook & Physical Relaxation; 00:39-03:43 Scripture Reflection & Body Healing; 03:44-06:43 Mental & Emotional Healing; 06:44-11:41 Intercession for Sick, Caregivers & Hospitals; 11:42-25:33 Extended Scripture Reading & Deep Sleep Relaxation. Recurring refrains include breathing prompts ('Breathe in slowly...') and short prayers ('Lord, heal me').",
+  "ending": "The video concludes at 25:30 with a gentle closing blessing ('Rest in his care tonight. In Jesus' name, amen') over a cozy candlelit window visual, with audio quietly fading into peaceful silence.",
+  "amateur_elements": [
+   {
+    "timestamp": "00:59",
+    "element": "Sudden 'SUBSCRIBE' button pop-up badge at the top right during a serene prayer moment.",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "00:43",
+    "element": "Dark translucent box for Scripture text cuts awkwardly across the center composition.",
+    "rule": "R3"
+   },
+   {
+    "timestamp": "01:38",
+    "element": "Abrupt scene transition from lotus pond to oil lamp window without smooth cross-dissolve.",
+    "rule": "R2"
+   },
+   {
+    "timestamp": "11:30",
+    "element": "Red 'LIKE' badge overlay popping up during a quiet moment of prayer.",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "16:17",
+    "element": "Ghosting double-exposure effect visible during image transition.",
+    "rule": "R1"
+   }
+  ],
+  "model": "gemini-3.6-flash"
+ },
+ "usage": [
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 89192,
+   "candidatesTokenCount": 270,
+   "totalTokenCount": 90338,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 220
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 88972
+    }
+   ],
+   "thoughtsTokenCount": 876,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 89206,
+   "candidatesTokenCount": 915,
+   "totalTokenCount": 91835,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 234
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 88972
+    }
+   ],
+   "thoughtsTokenCount": 1714,
+   "serviceTier": "standard"
+  }
+ ]
 }
