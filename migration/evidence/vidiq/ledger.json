@@ -259,6 +259,38 @@
    "purpose": "stage 0/5: winners' video packages",
    "saved_to": "evidence/vidiq/20261019/channels.json",
    "note": "owner 2026-10-19: 'resolva tudo agora'"
+  },
+  {
+   "date": "2026-10-20",
+   "kind": "research",
+   "tool": "vidiq_score_title",
+   "credits": 5,
+   "purpose": "title score pilot-008",
+   "saved_to": "production/pilot-008/market/vidiq.json"
+  },
+  {
+   "date": "2026-10-20",
+   "kind": "research",
+   "tool": "vidiq_score_title",
+   "credits": 5,
+   "purpose": "title score pilot-009",
+   "saved_to": "production/pilot-009/market/vidiq.json"
+  },
+  {
+   "date": "2026-10-20",
+   "kind": "research",
+   "tool": "vidiq_score_title",
+   "credits": 5,
+   "purpose": "title score pilot-010",
+   "saved_to": "production/pilot-010/market/vidiq.json"
+  },
+  {
+   "date": "2026-10-20",
+   "kind": "research",
+   "tool": "vidiq_score_title",
+   "credits": 5,
+   "purpose": "title score pilot-011",
+   "saved_to": "production/pilot-011/market/vidiq.json"
   }
  ]
 }

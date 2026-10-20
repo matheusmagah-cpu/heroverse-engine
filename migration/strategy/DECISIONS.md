@@ -129,3 +129,10 @@ predict how fast HeroVerse reaches YPP.
 - **Fix:** `structure_mining.transcript_problems` rejects such windows (re-mined, never used); `accuracy_check` compares only the window's own lines, counts invalid, omitted and conflicting windows as errors, and gives PASS only when ≥ 80% of speech windows agree ≥ 0.85 and openings ≥ 0.80; no speech or no openings → UNKNOWN. Regression tests for each defect.
 - **Honest re-run (tuning set, the 12 windows used to find the bugs):** FAIL — 8 compared, 4 invalid, window pass rate 0.50, openings 0.818. Proof needs the holdout (`evidence/mining-accuracy-holdout.json`, criteria fixed before it is acquired, videos never used before): UNKNOWN until then.
 - **Consequence:** wpm/beats/shots numbers in `measured.json` and MODELING_SPEC section 1 include defective windows. They stay informative only and are recomputed from valid windows after re-mining. Data API durations (D-01, D-04) and the frozen QA criteria do not depend on transcripts and are unaffected.
+
+### Measurement 2026-10-20 — day 3 (daily analysis 08:10 UTC)
+- **Official (YouTube Data API, goal report 01:52 UTC):** 269 subscribers; 28 public videos; 2,888 total channel views.
+- **Own calculation (Analytics rows):** public long-form watch hours 365 d ≈ 3.3; public Shorts views 90 d = 22.
+- **Estimate (vidIQ title score, informative only, never blocks):** pilot-008 87 · pilot-009 82 · pilot-010 84 · pilot-011 80 (`production/pilot-0NN/market/vidiq.json`).
+- **Gates:** pilot-007 approved (watched review 9.0, `gemini-3.8-flash`), uploaded for 2026-10-21 10:00 UTC. pilot-006 GATE FAIL on `authenticity / no_template_image_set` (0.529 vs pilot-012; limit 0.5, not loosened). The same check finds identical background sets in 008 = 010 = 012 and 009 = 011, so all would fail. Data fix #225 and antidote E30 #226 (check moved to `script_check`).
+- **Learning loop:** `learning/latest.json` decision HOLD / INSUFFICIENT (no exact 48 h checkpoint, no matched baseline). No strategy change today; the 90 % rule is not met by any new evidence.
