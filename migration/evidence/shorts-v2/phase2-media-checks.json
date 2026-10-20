@@ -137,6 +137,31 @@
       "unknown_reason": "No result emitted before runner shutdown; preservation skipped",
       "diagnosis": "Runner shutdown signal observed; underlying cause unproven",
       "publication_attempted": false
+    },
+    {
+      "run_id": 39477217432,
+      "attempt": 1,
+      "job_id": 118816190687,
+      "code_sha": "296f618a878985d0b81c8347fab6f7b2a8d43853",
+      "status": "failure",
+      "runner_region": "eastus",
+      "shutdown_at": "2026-10-20T18:45:52.9883287Z",
+      "exit_code": 143,
+      "inputs_hash_check": "PASS",
+      "phases": {
+        "prepare_end": "2026-10-20T18:44:31.3369426Z",
+        "hook_end": "2026-10-20T18:44:50.5399991Z",
+        "encode_start": "2026-10-20T18:44:50.5401837Z",
+        "encode_end": null
+      },
+      "preservation": "MP4_UNPRESERVED",
+      "output_sha256": null,
+      "qa": null,
+      "watched_review": null,
+      "provider_outcome": null,
+      "unknown_reason": "Runner shutdown during encode; no emitted result or preserved MP4",
+      "diagnosis": "Thread caps passed synthetic FullHD test but did not resolve remote shutdown. Underlying cause unproven; no OOM or watchdog attribution.",
+      "publication_attempted": false
     }
   ],
   "synthetic_resource_validation": {

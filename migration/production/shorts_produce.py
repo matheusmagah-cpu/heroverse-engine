@@ -385,7 +385,23 @@ def portrait_crop(width, height):
             "native_portrait_height": min(height, width * VH / VW)}
 
 
+def editorial_scene_filter(index, frames, span, moment, profile):
+    """One camera branch, shared by the reference graph and lossless staging."""
+    a, b = span[0] / FPS, span[1] / FPS
+    boundaries = motion_boundaries(moment, a, b)
+    progress = motion_expression(boundaries, f"on/{frames - 1}*{b - a:.12f}+{a:.12f}")
+    if profile == "phrase_push_in_v1":
+        zoom, x = f"1+0.08*({progress})", "(iw-iw/zoom)/2"
+    else:
+        zoom, x = "1.08", f"(iw-iw/zoom)*({progress})"
+    pad = f"tpad=stop_mode=clone:stop={frames - 91}," if span[0] == 0 else ""
+    return (f"[{index}:v]{pad}scale={2 * VW}:{2 * VH},zoompan=z='{zoom}':x='{x}':"
+            f"y='(ih-ih/zoom)/2':d=1:s={VW}x{VH}:fps={FPS},trim=end_frame={frames},"
+            f"setpts=PTS-STARTPTS,settb=AVTB,fps={FPS},format=yuv420p[scene{index}]")
+
+
 def editorial_picture(stills, moment, edit_plan, *, hook_video=None):
+    """Monolithic reference graph; production uses lossless serial staging."""
     from shorts_edit_plan import validate_plan_schema
     validate_plan_schema(edit_plan)
     if len(stills) != len(edit_plan["scenes"]):
@@ -400,17 +416,7 @@ def editorial_picture(stills, moment, edit_plan, *, hook_video=None):
         else:
             inputs += ["-threads", "1", "-loop", "1", "-framerate", str(FPS),
                        "-t", f"{frames / FPS:.12f}", "-i", str(path)]
-        a, b = span[0] / FPS, span[1] / FPS
-        boundaries = motion_boundaries(moment, a, b)
-        progress = motion_expression(boundaries, f"on/{frames - 1}*{b - a:.12f}+{a:.12f}")
-        if edit_plan["scenes"][i]["motion_profile"] == "phrase_push_in_v1":
-            zoom, x = f"1+0.08*({progress})", "(iw-iw/zoom)/2"
-        else:
-            zoom, x = "1.08", f"(iw-iw/zoom)*({progress})"
-        pad = f"tpad=stop_mode=clone:stop={frames - 91}," if i == 0 else ""
-        graph.append(f"[{i}:v]{pad}scale={2 * VW}:{2 * VH},zoompan=z='{zoom}':x='{x}':"
-                     f"y='(ih-ih/zoom)/2':d=1:s={VW}x{VH}:fps={FPS},trim=end_frame={frames},"
-                     f"setpts=PTS-STARTPTS,settb=AVTB,fps={FPS},format=yuv420p[scene{i}]")
+        graph.append(editorial_scene_filter(i, frames, span, moment, edit_plan["scenes"][i]["motion_profile"]))
     last = "scene0"
     for i, offset in enumerate(plan["fade_start_frames"], 1):
         graph.append(f"[{last}][scene{i}]xfade=transition=fade:duration={plan['fade_frames'] / FPS:.12f}:"
@@ -420,7 +426,67 @@ def editorial_picture(stills, moment, edit_plan, *, hook_video=None):
     return inputs, graph
 
 
-def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_plan=None, hook_video=None):
+def lossless_args(inputs, graph, label, frames, pixel_format, out):
+    """Bounded FFV1 process: samples are lossless, clocks are rebuilt on read."""
+    return ["ffmpeg", "-filter_complex_threads", "1", "-filter_threads", "1", "-v", "error", "-y",
+            *inputs, "-filter_complex", graph, "-map", label, "-an", "-threads:v", "1",
+            "-c:v", "ffv1", "-level", "3", "-pix_fmt", pixel_format,
+            "-frames:v", str(frames), "-r", str(FPS), str(out)]
+
+
+def scene_clip_args(stills, moment, edit_plan, index, out, *, hook_video):
+    from shorts_edit_plan import validate_plan_schema
+    validate_plan_schema(edit_plan)
+    if len(stills) != len(edit_plan["scenes"]):
+        raise ValueError("EDITORIAL_PLAN_IMAGE_COUNT")
+    if hook_video is None:
+        raise ValueError("EDITORIAL_HOOK_VIDEO_REQUIRED")
+    plan = scene_frame_plan(edit_plan)
+    frames, span = plan["scene_frames"][index], plan["scene_spans"][index]
+    inputs = (["-threads", "1", "-i", str(hook_video)] if index == 0 else
+              ["-threads", "1", "-loop", "1", "-framerate", str(FPS),
+               "-t", f"{frames / FPS:.12f}", "-i", str(stills[index])])
+    graph = editorial_scene_filter(0, frames, span, moment, edit_plan["scenes"][index]["motion_profile"])
+    return lossless_args(inputs, graph, "[scene0]", frames, "yuv420p", out)
+
+
+def xfade_clip_args(left, right, index, edit_plan, out):
+    plan = scene_frame_plan(edit_plan)
+    if not 1 <= index < len(plan["scene_frames"]):
+        raise ValueError("EDITORIAL_FADE_INDEX")
+    frames = plan["scene_spans"][index][1]
+    offset = plan["fade_start_frames"][index - 1]
+    graph = (f"[0:v]settb=1/{FPS},setpts=N,fps={FPS},format=yuv444p[left];"
+             f"[1:v]settb=1/{FPS},setpts=N,fps={FPS},format=yuv444p[right];"
+             f"[left][right]xfade=transition=fade:duration={plan['fade_frames'] / FPS:.12f}:"
+             f"offset={offset / FPS:.12f},trim=end_frame={frames},settb=1/{FPS},setpts=N[picture]")
+    return lossless_args(["-threads", "1", "-i", str(left), "-threads", "1", "-i", str(right)],
+                         graph, "[picture]", frames, "yuv444p", out)
+
+
+def write_editorial_picture(stills, moment, edit_plan, tmp, *, hook_video):
+    """One scene/transition at a time; never retain eight live video branches."""
+    accumulator = None
+    for index in range(len(edit_plan["scenes"])):
+        scene = tmp / f"scene-{index:02d}.mkv"
+        print(f"SHORTS_PHASE_SCENE_{index:02d}_START", flush=True)
+        run(scene_clip_args(stills, moment, edit_plan, index, scene, hook_video=hook_video))
+        print(f"SHORTS_PHASE_SCENE_{index:02d}_END", flush=True)
+        if accumulator is None:
+            accumulator = scene
+            continue
+        merged = tmp / f"picture-{index:02d}.mkv"
+        print(f"SHORTS_PHASE_FADE_{index:02d}_START", flush=True)
+        run(xfade_clip_args(accumulator, scene, index, edit_plan, merged))
+        print(f"SHORTS_PHASE_FADE_{index:02d}_END", flush=True)
+        accumulator.unlink()
+        scene.unlink()
+        accumulator = merged
+    return accumulator
+
+
+def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_plan=None, hook_video=None,
+                picture_video=None):
     """Full-frame backgrounds and legacy zoom or validated editorial cameras/local hook;
     the film look, subtitles, narration of the window and ducked music."""
     n = len(stills)
@@ -428,7 +494,12 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_
     voice_s = moment["end"] - moment["start"]
     frames = int(round(dur * FPS))
     if edit_plan is not None:
-        inputs, graph = editorial_picture(stills, moment, edit_plan, hook_video=hook_video)
+        if picture_video is None:
+            inputs, graph = editorial_picture(stills, moment, edit_plan, hook_video=hook_video)
+        else:
+            n = 1
+            inputs = ["-threads", "1", "-i", str(picture_video)]
+            graph = [f"[0:v]settb=1/{FPS},setpts=N,fps={FPS},trim=end_frame={scene_frame_plan(edit_plan)['output_frames']}[picture]"]
         graph.append(f"[picture]{look},ass={ass_path},format=yuv420p[vout]")
     else:
         inputs = []
@@ -542,16 +613,18 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     hook_mode = "caption_only" if edit_plan is not None else "overlay"
     (tmp / "s.ass").write_text(ass(moment, hook, refs, dur, timeline_sentences, hook_mode=hook_mode))
     hook_video = None
+    picture_video = None
     if edit_plan is not None:
         print("SHORTS_PHASE_HOOK_START", flush=True)
         hook_video = write_opening_video(stills[0], tmp / "opening.mkv")
         print("SHORTS_PHASE_HOOK_END", flush=True)
+        picture_video = write_editorial_picture(stills, moment, edit_plan, tmp, hook_video=hook_video)
     mp4 = out / f"short-{index:02d}.mp4"
     source_voice = work.parent / "voice.flac" if edit_plan is not None else work / "voice.wav"
     if edit_plan is not None:
         print("SHORTS_PHASE_ENCODE_START", flush=True)
     run(render_args(stills, source_voice, music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4,
-                    edit_plan=edit_plan, hook_video=hook_video))
+                    edit_plan=edit_plan, hook_video=hook_video, picture_video=picture_video))
     if edit_plan is not None:
         print("SHORTS_PHASE_ENCODE_END", flush=True)
     shutil.rmtree(tmp)
