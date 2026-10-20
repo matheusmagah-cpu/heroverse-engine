@@ -1,0 +1,50 @@
+{
+  "version": "shorts-editorial-plan-v1",
+  "source_pilot": "pilot-005",
+  "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
+  "source_sha256": {
+    "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a",
+    "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
+    "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"
+  },
+  "voice": {
+    "asset": "pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac",
+    "sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc"
+  },
+  "music": {
+    "asset": "original-rest-music.lossless.flac",
+    "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c"
+  },
+  "candidate": {
+    "start": 459.86,
+    "end": 499.672,
+    "hook": "Lord, protect my relationships.",
+    "title": "A Prayer for Peace in Your Relationships",
+    "reference": null
+  },
+  "tail_seconds": 0.5,
+  "transition": {
+    "type": "fade",
+    "seconds": 0.5,
+    "center_seconds": 22.153
+  },
+  "scenes": [
+    {
+      "image_id": "bg-home-sunrise",
+      "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
+      "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+      "nominal_start": 0.0,
+      "nominal_end": 22.153,
+      "motion_profile": "phrase_push_in_v1"
+    },
+    {
+      "image_id": "bg-garden",
+      "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+      "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
+      "nominal_start": 22.153,
+      "nominal_end": 40.312,
+      "motion_profile": "phrase_pan_right_v1"
+    }
+  ],
+  "publish": false
+}

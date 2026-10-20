@@ -86,10 +86,19 @@ jobs:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
           T="$RUNNER_TEMP"; d="migration/production/$PILOT"; py="$T/cine/bin/python"
-          $py -I -B migration/production/shorts_select.py "$T/work/timeline.json" "$d/script.json" "$T/work/shorts/selection.json" 3
-          $py -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "$d/script.json" "$T/in/img" \
-            "$T/in/figure.png" "$T/in/music.flac" "$T/work/shorts"
-          $py -I -B migration/production/shorts_review.py "$T/work/shorts" 1
+          if [ -f "$d/shorts/edit-plan.json" ]; then
+            $py -I -B migration/production/shorts_edit_plan.py "$d/shorts/edit-plan.json" "$T/work/timeline.json" "$d/script.json" "$d/shorts/inputs.json" "$T/work/shorts/selection.json"
+            $py -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "$d/script.json" "$T/in/img" \
+              "$T/in/figure.png" "$T/in/music.flac" "$T/work/shorts"
+            $py -I -B migration/production/shorts_edit_plan.py --check-media "$T/work" "$d/shorts/edit-plan.json" "$T/work/shorts/shorts.json" "$T/voice.flac" "$T/in/music.flac" "$T/in/img" migration/evidence/shorts-v2/phase2-review-history.json
+            $py -I -B migration/production/shorts_review.py "$T/work/shorts" 1
+            $py -I -B migration/production/shorts_edit_plan.py --finalize "$T/work/shorts/shorts.json" "$T/work/shorts/short-00.mp4"
+          else
+            $py -I -B migration/production/shorts_select.py "$T/work/timeline.json" "$d/script.json" "$T/work/shorts/selection.json" 3
+            $py -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "$d/script.json" "$T/in/img" \
+              "$T/in/figure.png" "$T/in/music.flac" "$T/work/shorts"
+            $py -I -B migration/production/shorts_review.py "$T/work/shorts" 1
+          fi
       - name: Preserve privately and record
         if: env.SKIP != '1'
         run: |

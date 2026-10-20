@@ -18,6 +18,8 @@ usage: shorts_produce.py WORK SELECTION_JSON SCRIPT IMAGES_DIR FIGURE MUSIC OUT_
 FIGURE and DEPTH_MODEL are accepted for interface compatibility and are not used (R1, R8).
 """
 import json
+import math
+import subprocess
 from pathlib import Path
 import re
 import shutil
@@ -209,25 +211,111 @@ def vertical_still(src, out):
          "-frames:v", "1", str(out)])
 
 
-def render_args(stills, voice, music, ass_path, moment, dur, look, out):
+def motion_progress(t, boundaries):
+    """C1 monotonic camera progress, on the scene's own source clock."""
+    if len(boundaries) < 2 or any(not math.isfinite(x) for x in boundaries + [t]):
+        raise ValueError("INVALID_MOTION_CLOCK")
+    if any(a >= b for a, b in zip(boundaries, boundaries[1:])) or not boundaries[0] <= t <= boundaries[-1]:
+        raise ValueError("INVALID_MOTION_CLOCK")
+    total = boundaries[-1] - boundaries[0]
+    for a, b in zip(boundaries, boundaries[1:]):
+        if t <= b:
+            u = (t - a) / (b - a)
+            g = u - 0.35 * math.sin(2 * math.pi * u) / (2 * math.pi)
+            return (a - boundaries[0] + (b - a) * g) / total
+    return 1.0
+
+
+def scene_frame_plan(edit_plan):
+    from shorts_edit_plan import frame_plan
+    canonical = frame_plan(edit_plan)
+    spans = canonical["scene_frame_spans"]
+    first, second = spans
+    return {"fps": canonical["fps"], "output_frames": canonical["expected_frame_count"],
+            "boundary_frame": first["nominal_end_frame"],
+            "fade_start_frame": second["start_frame"], "fade_end_frame": first["end_frame"],
+            "fade_frames": first["end_frame"] - second["start_frame"],
+            "scene_frames": [x["end_frame"] - x["start_frame"] for x in spans],
+            "nominal_scene_frames": [x["nominal_end_frame"] - x["nominal_start_frame"] for x in spans],
+            "scene_spans": [[x["start_frame"], x["end_frame"]] for x in spans]}
+
+
+def motion_boundaries(moment, start, end):
+    points = [s[k] - moment["start"] for s in moment["sentences"] for k in ("start", "end")]
+    return sorted({start, end, *(x for x in points if start < x < end)})
+
+
+def motion_expression(boundaries, clock):
+    """Code-owned expression; no JSON-supplied FFmpeg expression is accepted."""
+    total = boundaries[-1] - boundaries[0]
+    expression = "1"
+    for a, b in reversed(list(zip(boundaries, boundaries[1:]))):
+        u = f"(({clock})-{a:.12f})/{b - a:.12f}"
+        g = f"(({u})-0.35*sin(2*PI*({u}))/(2*PI))"
+        value = f"({a - boundaries[0]:.12f}+{b - a:.12f}*{g})/{total:.12f}"
+        expression = f"if(lte({clock},{b:.12f}),{value},{expression})"
+    return expression
+
+
+def portrait_crop(width, height):
+    if type(width) is not int or type(height) is not int or min(width, height) <= 0:
+        raise ValueError("INVALID_IMAGE_DIMENSIONS")
+    scale = max(VW / width, VH / height)
+    sw, sh = math.ceil(width * scale), math.ceil(height * scale)
+    return {"source_width": width, "source_height": height, "scaled_width": sw, "scaled_height": sh,
+            "crop_width": VW, "crop_height": VH, "crop_x": (sw - VW) / 2, "crop_y": (sh - VH) / 2,
+            "native_portrait_width": min(width, height * VW / VH),
+            "native_portrait_height": min(height, width * VH / VW)}
+
+
+def editorial_picture(stills, moment, edit_plan):
+    from shorts_edit_plan import validate_plan_schema
+    validate_plan_schema(edit_plan)
+    if len(stills) != 2:
+        raise ValueError("EDITORIAL_PLAN_REQUIRES_TWO_IMAGES")
+    plan = scene_frame_plan(edit_plan)
+    inputs, graph = [], []
+    for i, (path, frames, span) in enumerate(zip(stills, plan["scene_frames"], plan["scene_spans"])):
+        inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{frames / FPS:.12f}", "-i", str(path)]
+        a, b = span[0] / FPS, span[1] / FPS
+        boundaries = motion_boundaries(moment, a, b)
+        progress = motion_expression(boundaries, f"on/{frames - 1}*{b - a:.12f}+{a:.12f}")
+        if edit_plan["scenes"][i]["motion_profile"] == "phrase_push_in_v1":
+            zoom, x = f"1+0.08*({progress})", "(iw-iw/zoom)/2"
+        else:
+            zoom, x = "1.08", f"(iw-iw/zoom)*({progress})"
+        graph.append(f"[{i}:v]scale={2 * VW}:{2 * VH},zoompan=z='{zoom}':x='{x}':"
+                     f"y='(ih-ih/zoom)/2':d=1:s={VW}x{VH}:fps={FPS},trim=end_frame={frames},"
+                     f"setpts=PTS-STARTPTS,settb=AVTB,fps={FPS},format=yuv420p[scene{i}]")
+    graph.append(f"[scene0][scene1]xfade=transition=fade:duration={plan['fade_frames'] / FPS:.12f}:"
+                 f"offset={plan['fade_start_frame'] / FPS:.12f},trim=end_frame={plan['output_frames']},"
+                 "setpts=PTS-STARTPTS[picture]")
+    return inputs, graph
+
+
+def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_plan=None):
     """The one ffmpeg call that makes a Short: full-frame backgrounds cross-faded, one continuous zoom over
     the whole Short, the film look, the subtitles; the narration of the window and the ducked music."""
     n = len(stills)
     length = dur / n
     voice_s = moment["end"] - moment["start"]
     frames = int(round(dur * FPS))
-    inputs = []
-    for p in stills:
-        inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{length + FADE_S:.3f}", "-i", str(p)]
-    graph, last = [], "[0:v]"
-    for k in range(1, n):
-        graph.append(f"{last}[{k}:v]xfade=transition=fade:duration={FADE_S}:offset={k * length - FADE_S / 2:.3f}[x{k}]")
-        last = f"[x{k}]"
-    z0, z1 = ZOOM
-    graph.append(f"{last}scale={2 * VW}:{2 * VH},"
-                 f"zoompan=z='min({z1:.2f},{z0:.2f}+{z1 - z0:.2f}*on/{max(frames - 1, 1)})':"
-                 f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={VW}x{VH}:fps={FPS},"
-                 f"{look},ass={ass_path},format=yuv420p[vout]")
+    if edit_plan is not None:
+        inputs, graph = editorial_picture(stills, moment, edit_plan)
+        graph.append(f"[picture]{look},ass={ass_path},format=yuv420p[vout]")
+    else:
+        inputs = []
+        for p in stills:
+            inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{length + FADE_S:.3f}", "-i", str(p)]
+        graph, last = [], "[0:v]"
+        for k in range(1, n):
+            graph.append(f"{last}[{k}:v]xfade=transition=fade:duration={FADE_S}:offset={k * length - FADE_S / 2:.3f}[x{k}]")
+            last = f"[x{k}]"
+        z0, z1 = ZOOM
+        graph.append(f"{last}scale={2 * VW}:{2 * VH},"
+                     f"zoompan=z='min({z1:.2f},{z0:.2f}+{z1 - z0:.2f}*on/{max(frames - 1, 1)})':"
+                     f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={VW}x{VH}:fps={FPS},"
+                     f"{look},ass={ass_path},format=yuv420p[vout]")
     a_voice, a_music = n, n + 1
     swell = f"volume='0.05+0.04*max(0,(t-{dur - 5:.2f})/5)':eval=frame"
     graph.append(f"[{a_voice}:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,"
@@ -245,7 +333,7 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out):
             "-c:a", "aac", "-b:a", "160k", "-ar", str(RATE_OUT), "-t", f"{dur:.3f}", "-movflags", "+faststart", str(out)]
 
 
-def produce(work, moment, index, script, images, figure, music, out, depth_model=None, timeline_sentences=None, *, script_refs=None):
+def produce(work, moment, index, script, images, figure, music, out, depth_model=None, timeline_sentences=None, *, script_refs=None, edit_plan=None):
     """figure and depth_model are kept for interface compatibility; R1/R8 forbid the figure, and the Short
     uses one continuous zoom instead of per-scene parallax moves."""
     if timeline_sentences is None or script_refs is None:
@@ -256,13 +344,42 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     moment, reason = validate_candidate(timeline_sentences, authoritative_refs, moment)
     if reason:
         raise ValueError(reason)
+    image_info = None
+    if edit_plan is not None:
+        from shorts_edit_plan import validate_plan_schema
+        validate_plan_schema(edit_plan)
+        if moment["start"] != edit_plan["candidate"]["start"] or moment["end"] != edit_plan["candidate"]["end"]:
+            raise ValueError("EDITORIAL_CUT_MISMATCH")
+        if script["pilot_id"] != edit_plan["source_pilot"]:
+            raise ValueError("EDITORIAL_PILOT_MISMATCH")
+        # All raw-byte and mapping checks precede every rendering/probing subprocess.
+        if sha256(work.parent / "voice.flac") != edit_plan["voice"]["sha256"]:
+            raise ValueError("VOICE_HASH_MISMATCH")
+        if sha256(music) != edit_plan["music"]["sha256"]:
+            raise ValueError("MUSIC_HASH_MISMATCH")
+        for scene in edit_plan["scenes"]:
+            meta = json.loads((images / (scene["image_id"] + ".json")).read_text())
+            if meta.get("id") != scene["image_id"] or meta.get("release_asset") != scene["asset"] or meta.get("sha256") != scene["sha256"]:
+                raise ValueError("IMAGE_MAPPING_MISMATCH")
+            if not meta.get("models") or any(not value.get("license") for value in meta["models"].values()):
+                raise ValueError("IMAGE_LICENSE_MISSING")
+            if sha256(images / (scene["image_id"] + ".png")) != scene["sha256"]:
+                raise ValueError("IMAGE_HASH_MISMATCH")
+        image_info = {}
+        for scene in edit_plan["scenes"]:
+            data = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                                   "stream=width,height", "-of", "json", str(images / (scene["image_id"] + ".png"))],
+                                  check=True, capture_output=True, text=True)
+            size = json.loads(data.stdout)["streams"][0]
+            image_info[scene["image_id"]] = portrait_crop(size["width"], size["height"])
     import cinematic
     dur = moment["end"] - moment["start"] + TAIL_S
     tmp = out / f"tmp-{index:02d}"
     tmp.mkdir(parents=True, exist_ok=True)
     backgrounds = script["backgrounds"]
     n, _ = scene_plan(dur)
-    picks = [backgrounds[(index * 5 + 3 + 2 * k) % len(backgrounds)] for k in range(n)]
+    picks = ([x["image_id"] for x in edit_plan["scenes"]] if edit_plan is not None else
+             [backgrounds[(index * 5 + 3 + 2 * k) % len(backgrounds)] for k in range(n)])
     stills = []
     for k, b in enumerate(picks):
         p = tmp / f"s{k:02d}.png"
@@ -273,16 +390,21 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     hook = moment.get("hook")
     (tmp / "s.ass").write_text(ass(moment, hook, refs, dur, timeline_sentences))
     mp4 = out / f"short-{index:02d}.mp4"
-    run(render_args(stills, work / "voice.wav", music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4))
+    source_voice = work.parent / "voice.flac" if edit_plan is not None else work / "voice.wav"
+    run(render_args(stills, source_voice, music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4, edit_plan=edit_plan))
     shutil.rmtree(tmp)
     shown = [r for _, _, r in reference_events(moment, refs, timeline_sentences)]
-    return {"file": mp4.name, "sha256": sha256(mp4), "seconds": round(probe_duration(mp4), 2),
+    record = {"file": mp4.name, "sha256": sha256(mp4), "seconds": round(probe_duration(mp4), 2),
             "source_start": moment["start"], "source_end": moment["end"], "segments": moment["segments"],
             "hook": hook, "hook_shown": hook_shown(moment, hook), "title": moment.get("title") or hook,
             "reference": shown[0] if shown else None,
             "scenes": picks, "parallax": False, "figure": False,
             "selection": {k: moment.get(k) for k in ("final_score", "measured_score", "features", "rubric")},
             "text": " ".join(s["text"] for s in moment["sentences"])}
+    if edit_plan is not None:
+        from shorts_edit_plan import frame_plan
+        record.update(render_plan=frame_plan(edit_plan), source_image_info=image_info, publish=False)
+    return record
 
 
 def snap_all(chosen, sentences, refs=None):
@@ -305,17 +427,29 @@ def main(work, selection, script_path, images_dir, figure, music, out_dir, depth
     script = json.loads(Path(script_path).read_text())
     sel = json.loads(Path(selection).read_text())
     timeline = json.loads((work / "timeline.json").read_text())  # the sentence clock is required (R8)
+    edit_plan = sel.get("edit_plan")
+    if sel.get("selection_mode") == "EDITORIAL_PLAN" and edit_plan is None:
+        raise ValueError("EDITORIAL_PLAN_MISSING")
+    if edit_plan is not None:
+        from shorts_edit_plan import validate_plan, hash_file
+        inputs_path = Path(script_path).parent / "shorts" / "inputs.json"
+        prepared = validate_plan(edit_plan, timeline, script, json.loads(inputs_path.read_text()), raw_sha256={
+            "timeline": hash_file(work / "timeline.json"), "script": hash_file(script_path), "inputs": hash_file(inputs_path)})
+        if sel.get("chosen") != prepared["chosen"] or sel.get("selection_mode") != "EDITORIAL_PLAN":
+            raise ValueError("EDITORIAL_SELECTION_MISMATCH")
+        sel = prepared
     refs = {s["id"]: s.get("reference") for s in script["segments"]}
     moments, rejected = snap_all(sel["chosen"], timeline["sentences"], refs)
     if rejected:
         print(json.dumps({"rejected_r8": rejected}))
     if not moments:
         raise SystemExit("NO_SHORT_MEETS_R8")
-    records = [produce(work, m, i, script, Path(images_dir), figure, music, out, depth_model, timeline["sentences"], script_refs=refs)
+    records = [produce(work, m, i, script, Path(images_dir), figure, music, out, depth_model, timeline["sentences"], script_refs=refs, edit_plan=edit_plan)
                for i, m in enumerate(moments)]
     (out / "shorts.json").write_text(json.dumps({"version": "shorts-produce-v2-r8", "source_pilot": script["pilot_id"],
                                                  "selection_rubric_model": sel.get("rubric_model"),
-                                                 "rejected_r8": rejected, "shorts": records},
+                                                 "rejected_r8": rejected, "shorts": records,
+                                                 **({"edit_plan": edit_plan} if edit_plan is not None else {})},
                                                 indent=1, ensure_ascii=False) + "\n")
     print(json.dumps([{k: r[k] for k in ("file", "seconds", "hook")} for r in records], ensure_ascii=False))
 
