@@ -114,7 +114,7 @@ def failure(exc, diagnostics):
     return {'status':'FAIL','error_type':type(exc).__name__,'error_code':code,'diagnostics':diagnostics}
 
 
-def main(pilot_dir, receipt_path, output_receipt, mode='apply'):
+def main(pilot_dir, receipt_path, output_receipt, mode='inspect'):
     out=Path(output_receipt)
     diagnostics={'stage':'INPUTS','mutation_attempted':False}
     try:

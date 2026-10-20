@@ -1,4 +1,4 @@
-import copy,sys,unittest
+import copy,sys,unittest,subprocess,inspect
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).parent))
 import refresh_description as r
@@ -80,6 +80,14 @@ class Tests(unittest.TestCase):
   except ValueError as exc:out=r.failure(exc,d)
   self.assertTrue(d['mutation_attempted']);self.assertEqual(out['error_code'],'VERIFY_DESCRIPTION')
   self.assertEqual(d['stage'],'VERIFY_AFTER')
+ def test_cli_default_and_receipt_assignment(self):
+  self.assertEqual(inspect.signature(r.main).parameters['mode'].default,'inspect')
+  root=Path(__file__).resolve().parents[2]
+  workflow=(root/'.github/workflows/description-refresh.yml').read_text()
+  line=next(x.strip() for x in workflow.splitlines() if x.strip().startswith('path='))
+  result=subprocess.run(['bash','-eu','-c',line+'\nprintf "%s" "$path"'],env={'GITHUB_RUN_ID':'42'},text=True,capture_output=True)
+  self.assertEqual(result.returncode,0,result.stderr)
+  self.assertEqual(result.stdout,'migration/evidence/chapter-description/20261020/live-42.json')
  def test_real_inputs_and_bounded_workflow(self):
   root=Path(__file__).resolve().parents[2]
   package=r.inputs(root/'migration/production/pilot-012',root/'migration/publish/receipts/pilot-012-39312563293.json')
@@ -88,6 +96,8 @@ class Tests(unittest.TestCase):
   self.assertNotIn('publish_video.py',workflow)
   self.assertNotIn('publish.yml',workflow)
   self.assertIn('default: inspect',workflow)
+  self.assertIn('path="migration/evidence/chapter-description/20261020/live-${GITHUB_RUN_ID}.json"\n',workflow)
+  self.assertIn('if: always()',workflow)
   self.assertIn('group: heroverse-publish',workflow)
   self.assertLess(workflow.index('test_refresh_description.py'),workflow.index('HERO_YT_AUTHORIZED_USER_JSON'))
 if __name__=='__main__':unittest.main()

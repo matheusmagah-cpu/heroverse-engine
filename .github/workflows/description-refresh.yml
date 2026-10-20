@@ -42,7 +42,7 @@ jobs:
       - name: Record sanitized metadata-only result
         if: always()
         run: |
-          path="migration/evidence/chapter-description/20261020/live-${GITHUB_RUN_ID}.json" "$REFRESH_MODE"
+          path="migration/evidence/chapter-description/20261020/live-${GITHUB_RUN_ID}.json"
           test -f "$path" || exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
