@@ -1,8 +1,8 @@
 {
  "version": "pilot-images-v2",
  "pilot_id": "pilot-009",
- "style": "soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
- "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "style": "photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon, painting, illustration, cartoon, flat, low resolution",
  "steps": 6,
  "guidance": 1.5,
  "width": 1344,
@@ -23,5 +23,61 @@
    "bg-orchard"
   ]
  },
- "images": []
+ "images": [
+  {
+   "id": "bg-armour-dawn-rampart",
+   "prompt": "Ancient empty stone rampart above a green valley at sunrise, visible golden sun on sturdy weathered walls, peaceful protective architecture with no weapons, no people, no text",
+   "seed": 9000
+  },
+  {
+   "id": "bg-armour-gate-light",
+   "prompt": "An open stone garden gateway in warm morning sunlight, a clear path beyond through green trees, quiet sense of readiness, no people, no weapons, no text",
+   "seed": 9001
+  },
+  {
+   "id": "bg-armour-rock-foundation",
+   "prompt": "Broad layered rock ledges beside a calm stream in bright morning light, small wildflowers rooted in crevices, grounded peaceful natural scene, no people, no text",
+   "seed": 9002
+  },
+  {
+   "id": "bg-armour-watchtower-dawn",
+   "prompt": "An empty old stone watchtower on a gentle hill, visible sunrise illuminating the doorway and meadow below, serene nonmilitary landscape, no people, no weapons, no text",
+   "seed": 9003
+  },
+  {
+   "id": "bg-armour-olive-path",
+   "prompt": "Morning path between olive trees beside a low stone wall, golden leaves and soft blue distant hills, peaceful steady journey, no people, no text",
+   "seed": 9004
+  },
+  {
+   "id": "bg-armour-sheltered-courtyard",
+   "prompt": "Quiet empty courtyard enclosed by warm stone walls, a modest fountain in morning sunlight and green vines, safe restful scenery, no people, no text",
+   "seed": 9005
+  },
+  {
+   "id": "bg-armour-clear-river",
+   "prompt": "A clear river flowing around a firm rock beneath open morning sky, sparkling sunlight and fresh green banks, calm strength in nature, no people, no text",
+   "seed": 9006
+  },
+  {
+   "id": "bg-armour-sunlit-cedars",
+   "prompt": "Tall cedar trees with morning sunlight streaming between their trunks, soft ferns and an open forest path, peaceful upright natural shapes, no people, no text",
+   "seed": 9007
+  },
+  {
+   "id": "bg-armour-morning-arch",
+   "prompt": "A strong ancient stone arch framing a sunlit olive garden, peaceful empty landscape with no weapons, no people, no text",
+   "seed": 9008
+  },
+  {
+   "id": "bg-armour-bright-spring",
+   "prompt": "Bright spring water beside firm granite stones in golden morning sunlight, fresh greenery, no people, no text",
+   "seed": 9009
+  },
+  {
+   "id": "bg-armour-valley-wall",
+   "prompt": "A low solid stone wall along a quiet open valley at sunrise, no weapons, no people, no text",
+   "seed": 9010
+  }
+ ]
 }
