@@ -1,0 +1,264 @@
+{
+ "version": "structure-v1",
+ "id": "guided-prayer-scenic",
+ "line": "English Christian spoken prayer",
+ "status": "validated",
+ "validation": {
+  "rule": "SYSTEM.md 1.5: >=6 winners from >=4 channels, no channel > 1/3, >=3 weak contrasts, drivers measured",
+  "winners": 6,
+  "channels": 6,
+  "max_channel_share": "1/6",
+  "weak_contrasts": 3,
+  "weak_channels": 2,
+  "validated_on": "2026-10-19",
+  "evidence": "evidence/vidiq/20261019/structure_audit.json"
+ },
+ "evidence": [
+  {
+   "video": "OuqwfEgNavE",
+   "channel": "UCUzhKXXA4vF87u4eOZLILaQ",
+   "role": "winner",
+   "breakout": 2310.11
+  },
+  {
+   "video": "fXhKzleJhxI",
+   "channel": "UC3TTATL5b72sjCqxRDFTpWA",
+   "role": "winner",
+   "breakout": 1332.76
+  },
+  {
+   "video": "mtWtsL5hOLg",
+   "channel": "UCiDIx-d75j224E8gEJcBI_w",
+   "role": "winner",
+   "breakout": 839.24
+  },
+  {
+   "video": "1YkQeS5ankw",
+   "channel": "UCWMfwuBANjoFpPCVrqCHVtg",
+   "role": "winner",
+   "breakout": 424.56
+  },
+  {
+   "video": "TjkOf6Dgwb4",
+   "channel": "UC_h1E8wccvaX1gTtx4VsYXw",
+   "role": "winner",
+   "breakout": 402.36
+  },
+  {
+   "video": "tYdS0TngzuQ",
+   "channel": "UCYHAMIcw4LEqmsCn_SNmjag",
+   "role": "winner",
+   "breakout": 116.36
+  },
+  {
+   "video": "JGj76i7s0XM",
+   "channel": "UCYHAMIcw4LEqmsCn_SNmjag",
+   "role": "weak",
+   "breakout": null
+  },
+  {
+   "video": "lnULY_fWzgU",
+   "channel": "UCYHAMIcw4LEqmsCn_SNmjag",
+   "role": "weak",
+   "breakout": null
+  },
+  {
+   "video": "ndv-iT9wZik",
+   "channel": "UCWMfwuBANjoFpPCVrqCHVtg",
+   "role": "weak",
+   "breakout": null
+  }
+ ],
+ "attributes": {
+  "length_minutes": {
+   "values": [
+    14.3,
+    5.8
+   ],
+   "label": "free",
+   "note": "outlier median of 20 spoken-prayer winners: 26.4 min (outliers.json); not a driver yet"
+  },
+  "person_or_figure_on_screen": {
+   "values": [
+    "none",
+    "none"
+   ],
+   "label": "free (3/6 winners); house choice: none",
+   "rule": "STANDARD R1"
+  },
+  "picture": {
+   "values": [
+    "drone/stock footage",
+    "AI 2.5D landscapes"
+   ],
+   "label": "free (both full-frame scenery)"
+  },
+  "continuous_camera_motion": {
+   "values": [
+    true,
+    true
+   ],
+   "label": "driver (6/6 vs 0/3)",
+   "rule": "R2"
+  },
+  "scene_seconds": {
+   "values": [
+    "20-30",
+    "25-30"
+   ],
+   "label": "candidate-driver",
+   "rule": "R3"
+  },
+  "captions": {
+   "values": [
+    "bottom-centre, white outline, no box, phrase",
+    "centre, white shadow, no box, word-synced"
+   ],
+   "label": "free (box 4/6 winners); house choice: outline, no box",
+   "rule": "R4"
+  },
+  "scripture_on_screen": {
+   "values": [
+    "verse-text cards 6-25 s while read",
+    "reference only"
+   ],
+   "label": "free; cards in the stronger winner",
+   "rule": "R5"
+  },
+  "cta": {
+   "values": [
+    "2 short mid graphics + spoken outro",
+    "small persistent subscribe pill + spoken outro"
+   ],
+   "label": "free (persistent CTA 4/6 winners); house choice: 2 short mid CTAs + spoken outro",
+   "rule": "R6"
+  },
+  "hook": {
+   "values": [
+    "pattern interrupt + direct address by 0:02",
+    "direct address + promise by 0:03, 'Let us pray' 0:12"
+   ],
+   "label": "driver: viewer-directed hook within 5 s (5/6 vs 0/3)",
+   "rule": "R7"
+  },
+  "narration_wpm": {
+   "values": [
+    null,
+    136.6
+   ],
+   "label": "hygiene",
+   "note": "measured exactly on one; our pilots 134-137"
+  },
+  "voice": {
+   "values": [
+    "male 40s-50s pastoral",
+    "male 30s-40s warm"
+   ],
+   "label": "candidate-hygiene"
+  },
+  "music": {
+   "values": [
+    "ambient piano/pads low",
+    "ambient piano/strings ~18-20 dB under"
+   ],
+   "label": "hygiene"
+  },
+  "retention_devices": {
+   "values": [
+    "'say it with me', 'this next part is for you'",
+    "none observed"
+   ],
+   "label": "free"
+  },
+  "title_pattern": {
+   "values": [
+    "Psalm 91 Prayer for Protection | Morning Prayer for God's Covering Over You!",
+    "Thank You, Lord, for Today | A Gentle Bedtime Prayer for Gratitude and Rest"
+   ],
+   "label": "candidate: '<promise> | <format keyword phrase>'"
+  },
+  "thumbnail": {
+   "values": null,
+   "label": "unmeasured",
+   "pending": "#173 item 5"
+  }
+ },
+ "execution_spec": "migration/STANDARD.md v1 (R1-R8), QA criteria production/qa_criteria_v3.json",
+ "our_results": [],
+ "labels": {
+  "person_or_figure": {
+   "winners": "3/6",
+   "weak": "1/3",
+   "label": "free"
+  },
+  "caption_box": {
+   "winners": "4/6",
+   "weak": "3/3",
+   "label": "free"
+  },
+  "persistent_cta": {
+   "winners": "4/6",
+   "weak": "3/3",
+   "label": "free"
+  },
+  "continuous_camera_motion": {
+   "winners": "6/6",
+   "weak": "0/3",
+   "label": "driver"
+  },
+  "viewer_directed_hook_5s": {
+   "winners": "5/6",
+   "weak": "0/3",
+   "label": "driver"
+  },
+  "scripture_ref_on_screen": {
+   "winners": "4/6",
+   "weak": "0/3",
+   "label": "free"
+  },
+  "spoken_outro_amen_cta": {
+   "winners": "6/6",
+   "weak": "2/3",
+   "label": "free"
+  },
+  "recurring_refrain": {
+   "winners": "6/6",
+   "weak": "3/3",
+   "label": "hygiene"
+  },
+  "gratitude_block": {
+   "winners": "6/6",
+   "weak": "3/3",
+   "label": "hygiene"
+  }
+ },
+ "topic": {
+  "night_gratitude": {
+   "label": "driver",
+   "measure": "same channel/same production: gratitude night titles 2.08x median views of others (47 videos)",
+   "evidence": "evidence/vidiq/20261019/topic_contrast.json",
+   "also": [
+    "fXhKzleJhxI",
+    "tYdS0TngzuQ"
+   ]
+  },
+  "morning_gratitude": {
+   "label": "unmeasured",
+   "note": "0.38x but confounded by channel age; no rule"
+  }
+ },
+ "package": {
+  "title_promise_pipe_format_keyword": "6/6",
+  "promise_in_first_description_lines": "6/6",
+  "tags_20_to_23": "6/6",
+  "hashtags_in_description": "6/6",
+  "amen_cta_in_description": "4/6",
+  "scripture_refs_in_description": "4/6",
+  "chapters": "1/6 (the top breakout) -> exceed-the-market item",
+  "night_publish_23:30-00:35_UTC": "3/3",
+  "morning_publish_04:30-10:00_UTC": "3/3",
+  "channel_description_mission_schedule_subscribe": "6/6",
+  "ai_disclosure_in_channel_description": "1/6",
+  "evidence": "vidiq_get_videos_by_ids / vidiq_get_channels_by_ids 2026-10-19 (ledger)"
+ }
+}
