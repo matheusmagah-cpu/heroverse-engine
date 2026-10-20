@@ -104,11 +104,59 @@
    },
    "video_id": "tri-CUwy_m0",
    "uploaded_at": "2026-10-20T16:00:32.286443+00:00"
+  },
+  "short:pilot-005:cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f": {
+   "steps": {},
+   "video_id": "VEbS6pvirTA",
+   "uploaded_at": "2026-10-20T21:30:35.248088+00:00",
+   "long_video_id": "XDwxi4pvllM",
+   "slot": "2026-10-20T20:00:00Z",
+   "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+   "qa": {
+    "file": "/home/runner/work/_temp/shorts/short-00.mp4",
+    "seconds": 40.31,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "owner_exception_id": "owner-temporal-pilot005-cb3ce331-20261020",
+   "verification": {
+    "status": "VERIFICATION_UNKNOWN",
+    "reason": "MISSING_CONTAINS_SYNTHETIC_MEDIA",
+    "observation": {
+     "video_id": "VEbS6pvirTA",
+     "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+     "title": "A Prayer for Peace in Your Relationships #shorts",
+     "description": "▶ Full prayer: https://youtu.be/XDwxi4pvllM\nMorning Prayer for Protection | Psalm 91 Over You and Your Family\n\nPray this with me and type AMEN if you receive it.\n\n#prayer #morningprayer #jesus #faith #shorts",
+     "default_language": "en",
+     "default_audio_language": "en",
+     "upload_status": "uploaded",
+     "privacy_status": "public",
+     "publish_at": null,
+     "license": "youtube",
+     "contains_synthetic_media": null,
+     "processing_status": "processing",
+     "observed_at": "2026-10-20T21:30:35.259035+00:00",
+     "unknown_fields": {
+      "publish_at": "MISSING_OR_INVALID_FIELD",
+      "contains_synthetic_media": "MISSING_OR_INVALID_FIELD"
+     }
+    }
+   }
   }
  },
  "owner_exceptions": {
   "owner-temporal-pilot005-cb3ce331-20261020": {
-   "state": "RESERVED",
+   "state": "CONSUMED",
    "run_key": "39500765705:1",
    "binding": {
     "version": "owner-publication-exception-binding-v1",
@@ -120,7 +168,8 @@
     "baseline_cutoff": "2026-10-20T19:30:00Z",
     "target_slot": "2026-10-20T20:00:00Z",
     "owner_authorized_at": "2026-10-20T21:08:15.004165+00:00"
-   }
+   },
+   "video_id": "VEbS6pvirTA"
   }
  }
 }

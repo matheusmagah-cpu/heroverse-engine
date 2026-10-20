@@ -1,0 +1,41 @@
+{
+ "version": "shorts-receipt-v1",
+ "long_video_id": "XDwxi4pvllM",
+ "shorts": [
+  {
+   "key": "short:pilot-005:cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+   "file": "short-00.mp4",
+   "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+   "expected_output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+   "upload_status": "uploaded",
+   "video_id": "VEbS6pvirTA",
+   "url": "https://youtube.com/shorts/VEbS6pvirTA",
+   "slot": "2026-10-20T20:00:00Z",
+   "title": "A Prayer for Peace in Your Relationships #shorts",
+   "verification_status": "VERIFICATION_UNKNOWN",
+   "verification_reason": "MISSING_CONTAINS_SYNTHETIC_MEDIA",
+   "observation": {
+    "video_id": "VEbS6pvirTA",
+    "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+    "title": "A Prayer for Peace in Your Relationships #shorts",
+    "description": "▶ Full prayer: https://youtu.be/XDwxi4pvllM\nMorning Prayer for Protection | Psalm 91 Over You and Your Family\n\nPray this with me and type AMEN if you receive it.\n\n#prayer #morningprayer #jesus #faith #shorts",
+    "default_language": "en",
+    "default_audio_language": "en",
+    "upload_status": "uploaded",
+    "privacy_status": "public",
+    "publish_at": null,
+    "license": "youtube",
+    "contains_synthetic_media": null,
+    "processing_status": "processing",
+    "observed_at": "2026-10-20T21:30:35.259035+00:00",
+    "unknown_fields": {
+     "publish_at": "MISSING_OR_INVALID_FIELD",
+     "contains_synthetic_media": "MISSING_OR_INVALID_FIELD"
+    }
+   },
+   "owner_exception_id": "owner-temporal-pilot005-cb3ce331-20261020",
+   "authorized_target_slot": "2026-10-20T20:00:00Z"
+  }
+ ],
+ "verified_at": "2026-10-20T21:30:35.347029+00:00"
+}
