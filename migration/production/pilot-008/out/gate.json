@@ -594,8 +594,8 @@
   }
  },
  "market_evidence_not_deciding": {
-  "status": "UNKNOWN",
-  "detail": "no vidIQ market opinion for this pilot",
+  "status": "INVALID",
+  "detail": "missing fields: generated_at, source, calls, data_as_of, opportunity, comparables, evidence_for, evidence_against, limitations, recommendation, relation_to_content, validation_status",
   "not_claimed": "market evidence only: not technical quality, not a performance forecast, not a guarantee of views, revenue or monetization"
  },
  "method_notes": {
