@@ -2,11 +2,65 @@
  "version": "long-review-v1",
  "pilot_id": "pilot-006",
  "output_sha256": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877",
- "status": "ERROR",
- "error": "ProviderFailure: HTTP_503_UNAVAILABLE",
- "provider_message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
- "quota_ids": [],
- "retry_delay": null,
- "failed_at": "2026-10-20T14:58:11Z",
- "usage": []
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 25.55,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 10.18,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.5,
+  "picture_quality": 9.0,
+  "figure_and_background_integrity": 9.5,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 8.5,
+  "scripture_on_screen": 9.5,
+  "policy_safe": 10.0,
+  "overall": 9.3,
+  "issues": [
+   "02:42 - While the script commendably supports doctors and medical care, scenic variety relies on repeating a small loop of backgrounds across the 25-minute duration."
+  ],
+  "strongest_moment": "02:42 - 03:16 where the prayer specifically honors doctors, medicine, and caregivers while acknowledging chronic illness with grounded, compassionate pastoral care.",
+  "model": "gemini-3.8-flash",
+  "status": "PASS"
+ },
+ "audit": {
+  "status": "ERROR",
+  "error": "ProviderFailure: HTTP_503_UNAVAILABLE"
+ },
+ "usage": [
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 89076,
+   "candidatesTokenCount": 226,
+   "totalTokenCount": 90238,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 220
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 88856
+    }
+   ],
+   "thoughtsTokenCount": 936,
+   "serviceTier": "standard"
+  }
+ ]
 }
