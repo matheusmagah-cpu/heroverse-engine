@@ -16,9 +16,13 @@ sentence clock (WORK/timeline.json). Per Short, 1080x1920, from the long video's
   * sound: the exact narration of the window, music ducked under the voice, loudness -14 LUFS.
 usage: shorts_produce.py WORK SELECTION_JSON SCRIPT IMAGES_DIR FIGURE MUSIC OUT_DIR [DEPTH_MODEL]
 FIGURE and DEPTH_MODEL are accepted for interface compatibility and are not used (R1, R8).
+The source-bound editorial v2 plan has its own scoped eight-scene exception:
+caption-only hook, local three-second atmosphere and sample-continuous audio.
+That exception never changes the legacy no-plan constants or behavior.
 """
 import json
 import math
+import random
 import subprocess
 from pathlib import Path
 import re
@@ -178,12 +182,15 @@ def hook_shown(moment, hook):
     return bool(h) and first[:len(h)] == h
 
 
-def ass(moment, hook, refs, dur, timeline_sentences=None):
+def ass(moment, hook, refs, dur, timeline_sentences=None, *, hook_mode="overlay"):
     """The Short's subtitles: captions, the reference while a verse is read, the hook only when it is the
-    first line's own words; no CTA. refs maps segment id -> reference."""
+    first line's own words; no CTA. caption_only avoids duplicating the first caption.
+    refs maps segment id -> reference."""
+    if hook_mode not in ("overlay", "caption_only"):
+        raise ValueError("INVALID_HOOK_MODE")
     lines = []
     hook_end = 0.0
-    if hook_shown(moment, hook):
+    if hook_mode == "overlay" and hook_shown(moment, hook):
         first = moment["sentences"][0]
         hook_end = min(HOOK_S, first["end"] - moment["start"], dur)
         lines.append(f"Dialogue: 5,{ts(0)},{ts(hook_end)},Hook,,0,0,0,,{{\\fad(0,200)}}{ass_text(hook)}")
@@ -230,14 +237,124 @@ def scene_frame_plan(edit_plan):
     from shorts_edit_plan import frame_plan
     canonical = frame_plan(edit_plan)
     spans = canonical["scene_frame_spans"]
-    first, second = spans
     return {"fps": canonical["fps"], "output_frames": canonical["expected_frame_count"],
-            "boundary_frame": first["nominal_end_frame"],
-            "fade_start_frame": second["start_frame"], "fade_end_frame": first["end_frame"],
-            "fade_frames": first["end_frame"] - second["start_frame"],
+            "boundary_frames": [x["nominal_end_frame"] for x in spans[:-1]],
+            "fade_start_frames": [x["start_frame"] for x in spans[1:]],
+            "fade_end_frames": [x["end_frame"] for x in spans[:-1]],
+            "fade_frames": spans[0]["end_frame"] - spans[1]["start_frame"],
             "scene_frames": [x["end_frame"] - x["start_frame"] for x in spans],
             "nominal_scene_frames": [x["nominal_end_frame"] - x["nominal_start_frame"] for x in spans],
             "scene_spans": [[x["start_frame"], x["end_frame"]] for x in spans]}
+
+
+def opening_envelope(frame_index):
+    """Zero outside the approved three-second hook; smooth entry and exit."""
+    if type(frame_index) is not int:
+        raise ValueError("INVALID_HOOK_FRAME")
+    t = frame_index / FPS
+    if not 0 <= t < 3:
+        return 0.0
+    def smooth(u):
+        u = min(1.0, max(0.0, u))
+        return u * u * (3 - 2 * u)
+    return smooth(t / 0.35) * smooth((3 - t) / 0.45)
+
+
+def opening_particles(frame_index, width, height, seed=231005):
+    """Deterministic dust paths in source coordinates, never in the caption zone."""
+    if any(type(x) is not int for x in (width, height, seed)) or min(width, height) <= 0:
+        raise ValueError("INVALID_HOOK_GEOMETRY")
+    envelope = opening_envelope(frame_index)
+    t, rng = frame_index / FPS, random.Random(seed)
+    particles = []
+    for _ in range(24):
+        x, y = rng.uniform(50, 1030), rng.uniform(100, 900)
+        radius, vx, vy = rng.uniform(1, 2.5), rng.uniform(6, 12), rng.uniform(-18, -10)
+        particles.append({"x": (x + vx * t) * width / 1080,
+                          "y": (y + vy * t) * height / 1920,
+                          "radius": radius * width / 1080, "alpha": 0.10 * envelope})
+    return particles
+
+
+def opening_atmosphere(base_rgb, frame_index, seed=231005):
+    """Source-bound fog, warm highlights and dust; no camera, grain or generated asset.
+
+    RGB and diagnostic alpha are floats in [0,1]. Input uint8 is also accepted;
+    the caller's source is never mutated. The helper is deterministic and local.
+    """
+    import cv2
+    import numpy as np
+    base = np.asarray(base_rgb)
+    if base.ndim != 3 or base.shape[2] != 3 or min(base.shape[:2]) <= 0:
+        raise ValueError("INVALID_HOOK_IMAGE")
+    base = base.astype(np.float32) / (255 if base.dtype == np.uint8 else 1)
+    if not np.isfinite(base).all() or np.any(base < 0) or np.any(base > 1):
+        raise ValueError("INVALID_HOOK_IMAGE")
+    envelope = opening_envelope(frame_index)
+    h, w = base.shape[:2]
+    particles = opening_particles(frame_index, w, h, seed)
+    if not envelope:
+        return base.copy(), np.zeros((h, w), dtype=np.float32)
+    t = frame_index / FPS
+    y, x = np.mgrid[:h, :w].astype(np.float32)
+    fog = (np.exp(-((y / h - 0.72) / 0.22) ** 2) *
+           (0.50 + 0.25 * np.sin(2 * np.pi * (x / w - 0.035 * t)) +
+            0.25 * np.sin(2 * np.pi * (1.7 * x / w + 0.7 * y / h - 0.05 * t))))
+    fog_alpha = 0.09 * envelope * fog
+    luma = base @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
+    highlights = cv2.GaussianBlur(np.clip((luma - 0.65) / 0.35, 0, 1),
+                                  (0, 0), sigmaX=0.025 * w)
+    light_alpha = 0.06 * envelope * highlights
+    dust_alpha = np.zeros((h, w), dtype=np.float32)
+    subsamples = (np.arange(8, dtype=np.float32) + 0.5) / 8 - 0.5
+    for p in particles:
+        # A compact C1 disk has the declared physical radius. Subpixel area
+        # integration avoids blinking when the dust is smaller than one pixel.
+        radius = p["radius"]
+        x0, x1 = max(0, math.floor(p["x"] - radius - 0.5)), min(w, math.ceil(p["x"] + radius + 0.5))
+        y0, y1 = max(0, math.floor(p["y"] - radius - 0.5)), min(h, math.ceil(p["y"] + radius + 0.5))
+        if x0 < x1 and y0 < y1:
+            dx2 = (np.arange(x0, x1)[:, None] + subsamples - p["x"]) ** 2
+            dy2 = (np.arange(y0, y1)[:, None] + subsamples - p["y"]) ** 2
+            disk = np.maximum(0, 1 - (dy2[:, :, None, None] + dx2[None, None, :, :]) / radius ** 2) ** 2
+            dust_alpha[y0:y1, x0:x1] += p["alpha"] * disk.mean(axis=(1, 3))
+    dust_alpha = np.minimum(dust_alpha, 0.10 * envelope)
+    total = fog_alpha + light_alpha + dust_alpha
+    factor = np.minimum(1, 0.18 / np.maximum(total, 1e-20))
+    alpha = total * factor
+    light = (fog_alpha[..., None] * np.array([0.92, 0.94, 1.0], np.float32) +
+             light_alpha[..., None] * np.array([1.0, 0.92, 0.75], np.float32) +
+             dust_alpha[..., None] * np.array([1.0, 0.96, 0.84], np.float32)) * factor[..., None]
+    composed = base * (1 - alpha[..., None]) + light
+    return np.clip(composed, 0, 1).astype(np.float32), alpha.astype(np.float32)
+
+
+def write_opening_video(still_path, out_path):
+    """Lossless local hook input, including its transparent endpoint frame 90."""
+    import cv2
+    import numpy as np
+    bgr = cv2.imread(str(still_path), cv2.IMREAD_COLOR)
+    if bgr is None:
+        raise ValueError("HOOK_SOURCE_UNREADABLE")
+    base = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+    h, w = base.shape[:2]
+    command = ["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
+               "-s", f"{w}x{h}", "-framerate", str(FPS), "-i", "pipe:0", "-an",
+               "-c:v", "ffv1", "-level", "3", "-pix_fmt", "bgr0", str(out_path)]
+    with subprocess.Popen(command, stdin=subprocess.PIPE, stderr=subprocess.PIPE) as process:
+        try:
+            for frame in range(91):
+                rgb, _ = opening_atmosphere(base, frame)
+                process.stdin.write(np.rint(rgb * 255).astype(np.uint8).tobytes())
+            process.stdin.close()
+            error = process.stderr.read()
+            if process.wait():
+                raise subprocess.CalledProcessError(process.returncode, command, stderr=error)
+        except BaseException:
+            process.kill()
+            process.wait()
+            raise
+    return Path(out_path)
 
 
 def motion_boundaries(moment, start, end):
@@ -268,15 +385,20 @@ def portrait_crop(width, height):
             "native_portrait_height": min(height, width * VH / VW)}
 
 
-def editorial_picture(stills, moment, edit_plan):
+def editorial_picture(stills, moment, edit_plan, *, hook_video=None):
     from shorts_edit_plan import validate_plan_schema
     validate_plan_schema(edit_plan)
-    if len(stills) != 2:
-        raise ValueError("EDITORIAL_PLAN_REQUIRES_TWO_IMAGES")
+    if len(stills) != len(edit_plan["scenes"]):
+        raise ValueError("EDITORIAL_PLAN_IMAGE_COUNT")
+    if hook_video is None:
+        raise ValueError("EDITORIAL_HOOK_VIDEO_REQUIRED")
     plan = scene_frame_plan(edit_plan)
     inputs, graph = [], []
     for i, (path, frames, span) in enumerate(zip(stills, plan["scene_frames"], plan["scene_spans"])):
-        inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{frames / FPS:.12f}", "-i", str(path)]
+        if i == 0:
+            inputs += ["-i", str(hook_video)]
+        else:
+            inputs += ["-loop", "1", "-framerate", str(FPS), "-t", f"{frames / FPS:.12f}", "-i", str(path)]
         a, b = span[0] / FPS, span[1] / FPS
         boundaries = motion_boundaries(moment, a, b)
         progress = motion_expression(boundaries, f"on/{frames - 1}*{b - a:.12f}+{a:.12f}")
@@ -284,24 +406,28 @@ def editorial_picture(stills, moment, edit_plan):
             zoom, x = f"1+0.08*({progress})", "(iw-iw/zoom)/2"
         else:
             zoom, x = "1.08", f"(iw-iw/zoom)*({progress})"
-        graph.append(f"[{i}:v]scale={2 * VW}:{2 * VH},zoompan=z='{zoom}':x='{x}':"
+        pad = f"tpad=stop_mode=clone:stop={frames - 91}," if i == 0 else ""
+        graph.append(f"[{i}:v]{pad}scale={2 * VW}:{2 * VH},zoompan=z='{zoom}':x='{x}':"
                      f"y='(ih-ih/zoom)/2':d=1:s={VW}x{VH}:fps={FPS},trim=end_frame={frames},"
                      f"setpts=PTS-STARTPTS,settb=AVTB,fps={FPS},format=yuv420p[scene{i}]")
-    graph.append(f"[scene0][scene1]xfade=transition=fade:duration={plan['fade_frames'] / FPS:.12f}:"
-                 f"offset={plan['fade_start_frame'] / FPS:.12f},trim=end_frame={plan['output_frames']},"
-                 "setpts=PTS-STARTPTS[picture]")
+    last = "scene0"
+    for i, offset in enumerate(plan["fade_start_frames"], 1):
+        graph.append(f"[{last}][scene{i}]xfade=transition=fade:duration={plan['fade_frames'] / FPS:.12f}:"
+                     f"offset={offset / FPS:.12f}[mix{i}]")
+        last = f"mix{i}"
+    graph.append(f"[{last}]trim=end_frame={plan['output_frames']},setpts=PTS-STARTPTS[picture]")
     return inputs, graph
 
 
-def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_plan=None):
-    """The one ffmpeg call that makes a Short: full-frame backgrounds cross-faded, one continuous zoom over
-    the whole Short, the film look, the subtitles; the narration of the window and the ducked music."""
+def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_plan=None, hook_video=None):
+    """Full-frame backgrounds and legacy zoom or validated editorial cameras/local hook;
+    the film look, subtitles, narration of the window and ducked music."""
     n = len(stills)
     length = dur / n
     voice_s = moment["end"] - moment["start"]
     frames = int(round(dur * FPS))
     if edit_plan is not None:
-        inputs, graph = editorial_picture(stills, moment, edit_plan)
+        inputs, graph = editorial_picture(stills, moment, edit_plan, hook_video=hook_video)
         graph.append(f"[picture]{look},ass={ass_path},format=yuv420p[vout]")
     else:
         inputs = []
@@ -318,12 +444,25 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_
                      f"{look},ass={ass_path},format=yuv420p[vout]")
     a_voice, a_music = n, n + 1
     swell = f"volume='0.05+0.04*max(0,(t-{dur - 5:.2f})/5)':eval=frame"
-    graph.append(f"[{a_voice}:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,"
+    if edit_plan is not None:
+        samples = round(dur * RATE_OUT)
+        graph.append(f"[{a_voice}:a]aresample={RATE_OUT},asetpts=N/SR/TB,aformat=channel_layouts=stereo,"
+                     f"apad=whole_len={samples},asplit=2[vo][key]")
+        graph.append(f"[{a_music}:a]aresample={RATE_OUT},asetpts=N/SR/TB,aformat=channel_layouts=stereo,"
+                     f"{swell},afade=t=in:d=0.5[m]")
+        graph.append("[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600,"
+                     f"afade=t=out:st={dur - 2:.3f}:d=2:curve=hsin[duck]")
+        graph.append("[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-2:LRA=9,"
+                     "alimiter=limit=0.75:attack=5:release=50:level=false,"
+                     f"aresample={RATE_OUT},apad=whole_len={samples},atrim=end_sample={samples},asetpts=N/SR/TB,"
+                     f"afade=t=out:st={voice_s:.3f}:d={TAIL_S}:curve=hsin[aout]")
+    else:
+        graph.append(f"[{a_voice}:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,"
                  f"afade=t=out:st={max(0.0, voice_s - 0.04):.3f}:d=0.04,apad=whole_dur={dur:.3f},asplit=2[vo][key]")
-    graph.append(f"[{a_music}:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,{swell},afade=t=in:d=0.5,"
+        graph.append(f"[{a_music}:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,{swell},afade=t=in:d=0.5,"
                  f"afade=t=out:st={dur - 0.8:.3f}:d=0.8[m]")
-    graph.append("[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck]")
-    graph.append("[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-2:LRA=9,"
+        graph.append("[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck]")
+        graph.append("[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-2:LRA=9,"
                  "alimiter=limit=0.75:attack=5:release=50:level=false[aout]")
     return ["ffmpeg", "-v", "error", "-y", *inputs,
             "-ss", f"{moment['start']:.3f}", "-t", f"{voice_s:.3f}", "-i", str(voice),
@@ -388,10 +527,13 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
         stills.append(p)
     refs = {s["id"]: s.get("reference") for s in script["segments"]}
     hook = moment.get("hook")
-    (tmp / "s.ass").write_text(ass(moment, hook, refs, dur, timeline_sentences))
+    hook_mode = "caption_only" if edit_plan is not None else "overlay"
+    (tmp / "s.ass").write_text(ass(moment, hook, refs, dur, timeline_sentences, hook_mode=hook_mode))
+    hook_video = write_opening_video(stills[0], tmp / "opening.mkv") if edit_plan is not None else None
     mp4 = out / f"short-{index:02d}.mp4"
     source_voice = work.parent / "voice.flac" if edit_plan is not None else work / "voice.wav"
-    run(render_args(stills, source_voice, music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4, edit_plan=edit_plan))
+    run(render_args(stills, source_voice, music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4,
+                    edit_plan=edit_plan, hook_video=hook_video))
     shutil.rmtree(tmp)
     shown = [r for _, _, r in reference_events(moment, refs, timeline_sentences)]
     record = {"file": mp4.name, "sha256": sha256(mp4), "seconds": round(probe_duration(mp4), 2),
@@ -403,7 +545,8 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
             "text": " ".join(s["text"] for s in moment["sentences"])}
     if edit_plan is not None:
         from shorts_edit_plan import frame_plan
-        record.update(render_plan=frame_plan(edit_plan), source_image_info=image_info, publish=False)
+        record.update(render_plan=frame_plan(edit_plan), source_image_info=image_info,
+                      hook_mode=hook_mode, publish=False)
     return record
 
 

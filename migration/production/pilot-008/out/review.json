@@ -1,12 +1,117 @@
 {
  "version": "long-review-v1",
  "pilot_id": "pilot-008",
- "output_sha256": "c3bcad71aa142cfac3b91b028726f061bee0ffbd4f90a50953740ca4afa0978b",
- "status": "ERROR",
- "error": "ProviderFailure: HTTP_503_UNAVAILABLE",
- "provider_message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
- "quota_ids": [],
- "retry_delay": null,
- "failed_at": "2026-10-20T12:25:32Z",
- "usage": []
+ "output_sha256": "1dcb03d39049d9a5592351a5e868af75fc3f71297f85510083713078161f0fff",
+ "status": "FAIL",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 28.22,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 6.02,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 8.5,
+  "picture_quality": 8.0,
+  "figure_and_background_integrity": 8.0,
+  "captions_readable_and_synced": 9.0,
+  "audio_clarity_and_mix": 8.5,
+  "pacing_and_visual_variety": 6.5,
+  "scripture_on_screen": 9.0,
+  "policy_safe": 10.0,
+  "overall": 8.0,
+  "issues": [
+   "13:34 - Sudden crossfade glitch where water ripple reflection abruptly overlaps onto the tree branches during transition.",
+   "17:36 - Voiceover articulates 'GOD' letter by letter ('G-O-D') instead of pronouncing the word naturally when reading Ezekiel 34:11.",
+   "28:05 - Visual variety is limited over the 28-minute duration, relying heavily on a small loop of recurring AI landscape images with basic push-in zooms."
+  ],
+  "strongest_moment": "00:30 - The calm introduction into Psalm 23 with the moonlight reflecting over the water paired with gentle, grounding prayer prompts.",
+  "model": "gemini-3.8-flash",
+  "status": "FAIL"
+ },
+ "audit": {
+  "first_30s": "00:00-00:05 Title card showing 'Rest in Your Shepherd's Care / NIGHT PRAYER' with ambient nature sounds. 00:05-00:15 AI-generated night landscape with full moon, captioning starts: 'Good evening, tonight pray Psalm 23...' 00:15-00:30 Voiceover continues addressing the viewer's unfinished day and tired shoulders, setting a reflective tone while visual remains a static AI landscape.",
+  "visuals": "AI illustrations throughout (night landscapes, river scenes, lanterns, fields, silhouettes of trees). Picture changes slowly, averaging around 3 to 4 cuts per minute (measured at approximately 3.2 cuts/min across minutes 1, 5, and 10). Camera motion consists of slow cross-dissolves, subtle pans, and static parallax-like digital zooms. No human faces or people appear in any shot.",
+  "on_screen_text": "Captions are present for every spoken word, centered at the bottom in a clean white sans-serif font with a semi-transparent dark rounded box behind them. Scripture references appear periodically inside distinct gray banner boxes with reference citations (e.g., Psalm 23:1 (KJV) at 00:38). Call-to-action overlays include a red 'SUBSCRIBE' button top-right at 01:00 for 5 seconds, a red 'LIKE' button top-right at 12:40 for 5 seconds.",
+  "audio": "Male voice, mature tone, spoken at a slow, deliberate pace of approximately 105 words per minute. Background music features soft, ambient, cinematic pads and gentle piano notes, mixed very low so the voice remains clear and prominent.",
+  "structure": "The video follows a continuous thematic meditation structured around verses of Psalm 23 and related scripture passages, interspersed with reflective prayers, pauses, and personal applications. It features recurring refrains on releasing the day, embracing rest, and acknowledging God as the Shepherd.",
+  "ending": "The video concludes at 28:11 with a final peaceful night landscape visual showing a glowing lantern on a wooden fence under a starry sky, accompanied by a final benediction wishing God's mercy and quietness before fading to black.",
+  "amateur_elements": [
+   {
+    "timestamp": "00:00",
+    "element": "Generic stock title card with plain font and gradient background",
+    "rule": "R3"
+   },
+   {
+    "timestamp": "01:00",
+    "element": "Abrupt bright red YouTube 'SUBSCRIBE' graphic overlay in top right corner",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "07:18",
+    "element": "Abrupt transition to scripture box overlay with different styling and boxed format",
+    "rule": "R3"
+   },
+   {
+    "timestamp": "12:40",
+    "element": "Second abrupt call-to-action red 'LIKE' button appearing top right",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "13:30",
+    "element": "Visible subtle AI generation artifact bubbles floating in water reflection during dissolve",
+    "rule": "R2"
+   }
+  ],
+  "model": "gemini-3.5-flash-lite"
+ },
+ "usage": [
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 98458,
+   "candidatesTokenCount": 290,
+   "totalTokenCount": 99247,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 98235
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 223
+    }
+   ],
+   "thoughtsTokenCount": 499,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 98469,
+   "candidatesTokenCount": 755,
+   "totalTokenCount": 99224,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 98235
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 234
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ ]
 }

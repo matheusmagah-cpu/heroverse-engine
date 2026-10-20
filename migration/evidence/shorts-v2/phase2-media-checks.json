@@ -1,0 +1,102 @@
+{
+  "run_url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39467256840",
+  "run_id": 39467256840,
+  "code_sha": "bd95c9bf82994c4408eb33f16ee6c2b78579ce6d",
+  "evidence_commit_sha": "3905cec7c3b66f6918b353b9b7c2bae254103b1d",
+  "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
+  "media_checks": {
+    "version": "shorts-media-checks-v1",
+    "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
+    "source_voice_sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc",
+    "source_music_sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+    "source_image_sha256": {
+      "bg-home-sunrise": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+      "bg-garden": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04"
+    },
+    "measured_at": "2026-10-20T17:36:36.888040+00:00",
+    "acoustic": {
+      "pcm_sample_rate": 48000,
+      "window_samples": 480,
+      "active_threshold_dbfs": -40.0,
+      "leading_inactive_seconds": 0.14,
+      "trailing_inactive_seconds": 0.212,
+      "first_active_sample": 6720,
+      "last_active_sample": 1900800,
+      "narration_samples": 1910976,
+      "status": "PASS"
+    },
+    "video": {
+      "decoded_frame_count": 1209,
+      "fps": 30.0,
+      "seconds": 40.312,
+      "expected_frame_count": 1209,
+      "black_intervals": [],
+      "scene_frame_spans": [
+        {
+          "image_id": "bg-home-sunrise",
+          "start_frame": 0,
+          "end_frame": 672,
+          "nominal_start_frame": 0,
+          "nominal_end_frame": 665
+        },
+        {
+          "image_id": "bg-garden",
+          "start_frame": 657,
+          "end_frame": 1209,
+          "nominal_start_frame": 665,
+          "nominal_end_frame": 1209
+        }
+      ],
+      "status": "PASS"
+    },
+    "status": "PASS"
+  },
+  "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 40.31,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+      "decode_clean": true,
+      "one_h264_1080x1920": true,
+      "fps_30": true,
+      "one_aac_stereo_48k": true,
+      "duration": true,
+      "loudness": true,
+      "true_peak": true
+    },
+    "status": "PASS"
+  },
+  "qa_output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
+  "review": {
+    "hook_in_first_2s": 7.5,
+    "captions_readable_and_synced": 8.5,
+    "text_clear_of_shorts_ui": 9.0,
+    "picture_quality": 7.5,
+    "edit_rhythm": 5.5,
+    "audio_clarity": 8.5,
+    "stands_alone": 9.0,
+    "ending_and_loop": 6.5,
+    "policy_safe": 10.0,
+    "overall": 7.3,
+    "issues": [
+      "00:00 - Redundant text: static hook text at the top clashes with animated caption in the center displaying the exact same words.",
+      "00:00-00:21 - Pacing is visually static; staying on a single AI illustration for over 20 seconds causes visual fatigue on Shorts.",
+      "00:39 - Background audio and voice cut out abruptly at the loop point without a smooth transition."
+    ],
+    "strongest_moment": "00:21 - The shift in visual theme and prayer topic to guarding words spoken over a tranquil garden path.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7"
+  },
+  "finalization": {
+    "status": "COMPLETE",
+    "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7",
+    "finalized_at": "2026-10-20T17:38:44.399454+00:00",
+    "target_slot": "2026-10-20T20:00:00Z"
+  },
+  "publish": false,
+  "release_status": "REVIEW_FAIL",
+  "publication": null,
+  "publication_reason": "Actual watched review failed; no publication attempted."
+}

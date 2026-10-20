@@ -46,6 +46,7 @@ jobs:
           echo "$SLOTS" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z(,[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)*$' || { echo INVALID_SLOTS; exit 1; }
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
           d="migration/production/$PILOT"; mkdir -p "$RUNNER_TEMP/shorts"
+          sha256sum "$d/shorts/shorts.json" | cut -d' ' -f1 > "$RUNNER_TEMP/downloaded-shorts-manifest.sha256"
           python3 -I -B migration/publish/pending_shorts.py --todo "$d" migration/publish/ledger.json |
           while read -r f sha; do
             n="${f%.mp4}"
@@ -58,27 +59,46 @@ jobs:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
         run: |
           d="migration/production/$PILOT"
-          key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/manifest.json")"
           python3 -m venv "$RUNNER_TEMP/venv"
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+          git fetch -q origin main
+          git merge --ff-only FETCH_HEAD
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then echo PUBLICATION_HOLD; exit 1; fi
+          python3 -I -B migration/publish/shorts_prerequisite.py "$d"
+          expected=$(cat "$RUNNER_TEMP/downloaded-shorts-manifest.sha256")
+          actual=$(sha256sum "$d/shorts/shorts.json" | cut -d' ' -f1)
+          [ "$expected" = "$actual" ] || { echo APPROVED_MANIFEST_CHANGED; exit 1; }
+          key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/manifest.json")"
           mkdir -p migration/publish/receipts
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_shorts.py "$d/shorts/shorts.json" "$RUNNER_TEMP/shorts" "$key" \
             migration/publish/ledger.json "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json" "$SLOTS"
-      - name: Delete the published Shorts files from the private release (owner rule)
-        if: env.SKIP != '1'
-        run: |
-          r="migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json"
-          python3 -I -c "import json,sys;[print(x['file'],x['upload_status']) for x in json.load(open(sys.argv[1]))['shorts']]" "$r" |
-          while read -r f st; do
-            case "$st" in uploaded|processed) ;; *) echo "KEEP $f ($st)"; continue;; esac
-            sha=$(python3 -I -c "import json,sys;print(next(s['sha256'] for s in json.load(open(sys.argv[1]))['shorts'] if s['file']==sys.argv[2]))" "migration/production/$PILOT/shorts/shorts.json" "$f")
-            gh release delete-asset "$TAG" "$PILOT-${f%.mp4}-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" -y
-          done
       - name: Record ledger and receipt
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add migration/publish/ledger.json migration/publish/receipts 2>/dev/null || true
-          git commit -q -m "Publish $PILOT Shorts (run $GITHUB_RUN_ID)" || exit 0
-          git pull --rebase -q origin main && git push -q origin HEAD:main
+          git add migration/publish/ledger.json migration/publish/receipts
+          if ! git diff --cached --quiet; then git commit -q -m "Publish $PILOT Shorts (run $GITHUB_RUN_ID)"; fi
+          git pull --rebase -q origin main
+          git push -q origin HEAD:main
+          git fetch -q origin main
+          for path in migration/publish/ledger.json "migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json"; do
+            [ -f "$path" ] || continue
+            git show "FETCH_HEAD:$path" > "$RUNNER_TEMP/persisted-publication.json"
+            cmp "$path" "$RUNNER_TEMP/persisted-publication.json" || { echo PUBLICATION_PERSISTENCE_UNCONFIRMED; exit 1; }
+          done
+      - name: Delete the published Shorts files from the private release (owner rule)
+        if: env.SKIP != '1'
+        run: |
+          r="migration/publish/receipts/$PILOT-shorts-$GITHUB_RUN_ID.json"
+          python3 -I -c "import json,sys;[print(x['file'],x.get('verification_status', 'VERIFICATION_UNKNOWN'),x['output_sha256']) for x in json.load(open(sys.argv[1]))['shorts']]" "$r" |
+          while read -r f st sha; do
+            case "$st" in SCHEDULED_VERIFIED|PUBLIC_VERIFIED) ;; *) echo "KEEP $f ($st)"; continue;; esac
+            asset="$PILOT-${f%.mp4}-sha256-$sha.mp4"
+            gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' > "$RUNNER_TEMP/release-assets.txt"
+            if grep -Fxq "$asset" "$RUNNER_TEMP/release-assets.txt"; then
+              gh release delete-asset "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" -y
+            else
+              echo "ALREADY_ABSENT $asset"
+            fi
+          done

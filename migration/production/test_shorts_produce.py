@@ -785,52 +785,81 @@ class ProducerGate(unittest.TestCase):
 
 
 # This literal is the approved card, not a mutable pilot source and not production evidence.
-EDITORIAL_PLAN = {
-    "version": "shorts-editorial-plan-v1",
-    "source_pilot": "pilot-005",
-    "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
-    "source_sha256": {
-        "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a",
-        "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
-        "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831",
-    },
-    "voice": {
-        "asset": "pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac",
-        "sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc",
-    },
-    "music": {
-        "asset": "original-rest-music.lossless.flac",
-        "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
-    },
-    "candidate": {
-        "start": 459.860,
-        "end": 499.672,
-        "hook": "Lord, protect my relationships.",
-        "title": "A Prayer for Peace in Your Relationships",
-        "reference": None,
-    },
-    "tail_seconds": 0.5,
-    "transition": {"type": "fade", "seconds": 0.5, "center_seconds": 22.153},
-    "scenes": [
-        {
-            "image_id": "bg-home-sunrise",
-            "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
-            "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
-            "nominal_start": 0.0,
-            "nominal_end": 22.153,
-            "motion_profile": "phrase_push_in_v1",
-        },
-        {
-            "image_id": "bg-garden",
-            "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
-            "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
-            "nominal_start": 22.153,
-            "nominal_end": 40.312,
-            "motion_profile": "phrase_pan_right_v1",
-        },
-    ],
-    "publish": False,
-}
+EDITORIAL_PLAN = {'version': 'shorts-editorial-plan-v2',
+ 'source_pilot': 'pilot-005',
+ 'source_baseline_sha': '7fb9e9e1fad9396b80c029212f0a3144c1428d51',
+ 'source_sha256': {'script': 'c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a',
+                   'timeline': '53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5',
+                   'inputs': '67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831'},
+ 'voice': {'asset': 'pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac',
+           'sha256': '6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc'},
+ 'music': {'asset': 'original-rest-music.lossless.flac',
+           'sha256': '1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c'},
+ 'candidate': {'start': 459.86,
+               'end': 499.672,
+               'hook': 'Lord, protect my relationships.',
+               'title': 'A Prayer for Peace in Your Relationships',
+               'reference': None},
+ 'tail_seconds': 0.5,
+ 'transition': {'type': 'fade', 'seconds': 0.5},
+ 'scenes': [{'image_id': 'bg-dawn-lake',
+             'asset': 'pilot-003-img-bg-dawn-lake-sha256-74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018.png',
+             'sha256': '74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018',
+             'nominal_start': 0.0,
+             'nominal_end': 5.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-sheltered-valley',
+             'asset': 'pilot-005-img-bg-sheltered-valley-sha256-1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85.png',
+             'sha256': '1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85',
+             'nominal_start': 5.0,
+             'nominal_end': 10.0,
+             'motion_profile': 'phrase_pan_right_v1'},
+            {'image_id': 'bg-sunlit-road',
+             'asset': 'pilot-005-img-bg-sunlit-road-sha256-79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794.png',
+             'sha256': '79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794',
+             'nominal_start': 10.0,
+             'nominal_end': 15.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-fortress-dawn',
+             'asset': 'pilot-005-img-bg-fortress-dawn-sha256-8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba.png',
+             'sha256': '8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba',
+             'nominal_start': 15.0,
+             'nominal_end': 20.0,
+             'motion_profile': 'phrase_pan_right_v1'},
+            {'image_id': 'bg-sunrise-field',
+             'asset': 'pilot-003-img-bg-sunrise-field-sha256-8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0.png',
+             'sha256': '8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0',
+             'nominal_start': 20.0,
+             'nominal_end': 25.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-misty-valley',
+             'asset': 'pilot-003-img-bg-misty-valley-sha256-a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc.png',
+             'sha256': 'a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc',
+             'nominal_start': 25.0,
+             'nominal_end': 30.0,
+             'motion_profile': 'phrase_pan_right_v1'},
+            {'image_id': 'bg-mountain-sunrise',
+             'asset': 'pilot-003-img-bg-mountain-sunrise-sha256-886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5.png',
+             'sha256': '886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5',
+             'nominal_start': 30.0,
+             'nominal_end': 35.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-tower-hill',
+             'asset': 'pilot-005-img-bg-tower-hill-sha256-0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961.png',
+             'sha256': '0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961',
+             'nominal_start': 35.0,
+             'nominal_end': 40.312,
+             'motion_profile': 'phrase_pan_right_v1'}],
+ 'publish': False,
+ 'rhythm_exception': {'id': 'pilot-005-20261020-eight-scenes-r3',
+                      'target_slot': '2026-10-20T20:00:00Z',
+                      'scene_count': 8,
+                      'nominal_seconds': [4.0, 6.0],
+                      'visible_seconds': [4.0, 6.0]},
+ 'hook_animation': {'profile': 'cinematic_hook_v1',
+                    'start_seconds': 0.0,
+                    'end_seconds': 3.0,
+                    'caption_policy': 'single_track_no_duplicate'}}
 
 
 def editorial_source():
@@ -852,14 +881,18 @@ def phrase_boundaries(moment, start, end):
     return sorted(points)
 
 
+SYNTHETIC_COLORS = [(180, 40, 30), (30, 175, 45), (30, 50, 180), (180, 160, 30),
+                    (175, 35, 165), (30, 165, 175), (195, 100, 35), (105, 55, 190)]
+
+
 def synthetic_ppm(path, width, height, scene=0):
-    """Locally invented texture, not a copy of an image or a production asset."""
+    """Locally invented eight-color texture, never a production image or evidence."""
     pixels = bytearray()
+    color = SYNTHETIC_COLORS[scene]
     for y in range(height):
         for x in range(width):
-            texture = (x * 11 + y * 7) % 31
-            green = 40 + int(80 * x / max(1, width - 1))
-            pixels.extend((175 + texture, green, 30) if scene == 0 else (30, green, 175 + texture))
+            texture = (x * 11 + y * 7) % 23
+            pixels.extend(min(255, channel + texture) for channel in color)
     path.write_bytes(f"P6\n{width} {height}\n255\n".encode() + pixels)
 
 
@@ -872,33 +905,53 @@ class EditorialMotion(unittest.TestCase):
         self.assertAlmostEqual(moment["end"] - moment["start"] + sp.TAIL_S, 40.312)
         self.assertEqual(moment["sentences"][-1]["text"],
                          "Let my words carry your peace into every room I enter.")
-        subtitles = sp.ass(moment, moment["hook"], refs, 40.312, timeline["sentences"])
-        self.assertEqual(events(subtitles, "Hook"), [(0.0, 2.5, "Lord, protect my relationships.")])
+        subtitles = sp.ass(moment, moment["hook"], refs, 40.312, timeline["sentences"],
+                           hook_mode="caption_only")
+        self.assertEqual(events(subtitles, "Hook"), [])
         self.assertEqual(events(subtitles, "Ref"), [])
-        self.assertGreater(len(events(subtitles, "Cap")), 10)
+        captions = events(subtitles, "Cap")
+        first = [event for event in captions if event[0] < 2.667]
+        self.assertEqual(" ".join(text for _, _, text in first), "Lord, protect my relationships.")
+        self.assertEqual(first[0][0], 0.0)
+        self.assertAlmostEqual(first[-1][1], 2.667, delta=0.01)
+        self.assertGreater(len(captions), 10)
+        # The new policy is explicit; the positional legacy helper remains an overlay.
+        self.assertEqual(events(sp.ass(moment, moment["hook"], refs, 40.312,
+                                       timeline["sentences"]), "Hook"),
+                         [(0.0, 2.5, "Lord, protect my relationships.")])
+        self.assertEqual(inspect.signature(sp.ass).parameters["hook_mode"].kind,
+                         inspect.Parameter.KEYWORD_ONLY)
 
     def test_frame_plan_has_the_rounded_overlap_without_subtracting_it_twice(self):
         plan = sp.scene_frame_plan(EDITORIAL_PLAN)
         for key, value in {
-                "fps": 30, "output_frames": 1209, "boundary_frame": 665,
-                "fade_start_frame": 657, "fade_end_frame": 672, "fade_frames": 15,
-                "scene_frames": [672, 552], "nominal_scene_frames": [665, 544],
-                "scene_spans": [[0, 672], [657, 1209]]}.items():
+                "fps": 30, "output_frames": 1209,
+                "boundary_frames": [150, 300, 450, 600, 750, 900, 1050],
+                "fade_start_frames": [143, 293, 443, 593, 743, 893, 1043],
+                "fade_end_frames": [158, 308, 458, 608, 758, 908, 1058], "fade_frames": 15,
+                "scene_frames": [158, 165, 165, 165, 165, 165, 165, 166],
+                "nominal_scene_frames": [150, 150, 150, 150, 150, 150, 150, 159],
+                "scene_spans": [[0, 158], [143, 308], [293, 458], [443, 608],
+                                [593, 758], [743, 908], [893, 1058], [1043, 1209]]}.items():
             self.assertEqual(plan[key], value, key)
-        self.assertEqual(sum(plan["scene_frames"]) - plan["fade_frames"], plan["output_frames"])
+        self.assertEqual(sum(plan["scene_frames"]), 1314)
+        self.assertEqual(sum(plan["scene_frames"]) - 7 * plan["fade_frames"], plan["output_frames"])
         self.assertEqual(sum(plan["nominal_scene_frames"]), plan["output_frames"])
         for length in plan["scene_frames"] + plan["nominal_scene_frames"]:
-            self.assertGreaterEqual(length, 18 * sp.FPS)
-            self.assertLessEqual(length, 36 * sp.FPS)
+            self.assertGreaterEqual(length, 4 * sp.FPS)
+            self.assertLessEqual(length, 6 * sp.FPS)
+        for frame in range(plan["output_frames"]):
+            self.assertIn(sum(a <= frame < b for a, b in plan["scene_spans"]), (1, 2))
         self.assertEqual(math.floor(40.312 * 30 + 0.5), plan["output_frames"])
         self.assertLessEqual(abs(plan["output_frames"] / 30 - 40.312), 1 / 30)
         self.assertEqual(sp.TAIL_S, 0.5)
 
     def test_phrase_progress_matches_the_fixed_expression_and_is_monotonic(self):
         _, _, _, moment = editorial_source()
-        for start, end in [(0, 672 / 30), (657 / 30, 1209 / 30)]:
+        for a, b in sp.scene_frame_plan(EDITORIAL_PLAN)["scene_spans"]:
+            start, end = a / 30, b / 30
             bounds = phrase_boundaries(moment, start, end)
-            self.assertGreater(len(bounds), 8)
+            self.assertGreaterEqual(len(bounds), 2)
             samples = [start + (end - start) * i / 4000 for i in range(4001)]
             actual = [sp.motion_progress(t, bounds) for t in samples]
             self.assertTrue(all(math.isfinite(p) and 0 <= p <= 1 for p in actual))
@@ -914,7 +967,8 @@ class EditorialMotion(unittest.TestCase):
 
     def test_position_zoom_and_velocity_are_continuous_at_every_phrase_boundary(self):
         _, _, _, moment = editorial_source()
-        for start, end in [(0, 22.4), (21.9, 40.3)]:
+        for a, b in sp.scene_frame_plan(EDITORIAL_PLAN)["scene_spans"]:
+            start, end = a / 30, b / 30
             bounds = phrase_boundaries(moment, start, end)
             for t in bounds[1:-1]:
                 with self.subTest(span=(start, end), boundary=t):
@@ -941,36 +995,52 @@ class EditorialMotion(unittest.TestCase):
             self.assertEqual(progress[0], 0)
             self.assertEqual(progress[-1], 1)
 
-    def test_editorial_render_has_one_padded_transition_and_preserves_audio_and_codec(self):
+    def test_editorial_render_has_seven_padded_transitions_and_sample_bounded_audio(self):
         _, _, _, moment = editorial_source()
-        paths = [Path("/synthetic/first.ppm"), Path("/synthetic/second.ppm")]
-        args = sp.render_args(paths, Path("/synthetic/voice.wav"), Path("/synthetic/music.wav"),
+        paths = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        args = sp.render_args(paths, Path("/synthetic/voice.flac"), Path("/synthetic/music.flac"),
                               Path("/synthetic/captions.ass"), moment, 40.312, "null",
-                              Path("/synthetic/result.mp4"), edit_plan=EDITORIAL_PLAN)
+                              Path("/synthetic/result.mp4"), edit_plan=EDITORIAL_PLAN,
+                              hook_video=Path("/synthetic/opening.mkv"))
         graph = args[args.index("-filter_complex") + 1]
-        self.assertEqual(graph.count("xfade="), 1)
-        match = re.search(r"xfade=transition=fade:duration=([\d.]+):offset=([\d.]+)", graph)
-        self.assertIsNotNone(match)
-        self.assertEqual(tuple(map(float, match.groups())), (0.5, 21.9))
+        fades = re.findall(r"xfade=transition=fade:duration=([\d.]+):offset=([\d.]+)", graph)
+        self.assertEqual(len(fades), 7)
+        for actual, start in zip(fades, [143, 293, 443, 593, 743, 893, 1043]):
+            self.assertAlmostEqual(float(actual[0]), 0.5)
+            self.assertAlmostEqual(float(actual[1]), start / 30)
         self.assertNotIn("overlay", graph)
         self.assertNotIn("setpts=0.", graph)
+        self.assertNotIn("async=", graph)
+        self.assertNotIn("atempo", graph)
         self.assertIn("loudnorm=I=-14:TP=-2:LRA=9", graph)
         self.assertIn("alimiter=limit=0.75:attack=5:release=50:level=false", graph)
-        self.assertIn("apad=whole_dur=40.312", graph)
+        self.assertIn("aresample=48000,apad=whole_len=1934976,atrim=end_sample=1934976,asetpts=N/SR/TB", graph)
+        self.assertGreaterEqual(graph.count("asetpts=N/SR/TB"), 3)
+        voice = next(part for part in graph.split(";") if part.startswith("[8:a]"))
+        self.assertNotIn("afade", voice, "v2 must not attenuate the final spoken word")
+        # Ignore insignificant decimal formatting, but require the exact intervals and ordering.
+        self.assertRegex(graph, r"afade=t=out:st=38\.3120*:d=2(?:\.0+)?:curve=hsin")
+        self.assertRegex(graph, r"afade=t=out:st=39\.8120*:d=0\.50*:curve=hsin")
+        self.assertLess(graph.index("sidechaincompress="), graph.index("afade=t=out:st=38.312"))
+        self.assertLess(graph.index("atrim=end_sample=1934976"), graph.index("afade=t=out:st=39.812"))
+        self.assertLess(graph.index("alimiter="), graph.index("afade=t=out:st=39.812"))
         for option, value in [("-c:v", "libx264"), ("-r", "30"), ("-c:a", "aac"), ("-ar", "48000")]:
             self.assertEqual(args[args.index(option) + 1], value)
         self.assertIn("format=yuv420p", graph)
-        self.assertEqual(inspect.signature(sp.render_args).parameters["edit_plan"].kind,
-                         inspect.Parameter.KEYWORD_ONLY)
+        for parameter in ("edit_plan", "hook_video"):
+            self.assertEqual(inspect.signature(sp.render_args).parameters[parameter].kind,
+                             inspect.Parameter.KEYWORD_ONLY)
         self.assertEqual((sp.VW, sp.VH, sp.FPS, sp.TAIL_S), (1080, 1920, 30, 0.5))
+        i = args.index("/synthetic/voice.flac")
+        self.assertEqual(args[i - 5:i - 1], ["-ss", "459.860", "-t", "39.812"])
 
     def test_actual_emitted_camera_expressions_reach_the_declared_endpoints_without_clamping(self):
         _, _, _, moment = editorial_source()
-        _, parts = sp.editorial_picture([Path("/synthetic/a.ppm"), Path("/synthetic/b.ppm")],
-                                        moment, EDITORIAL_PLAN)
+        _, parts = sp.editorial_picture([Path(f"/synthetic/scene-{i}.ppm") for i in range(8)],
+                                        moment, EDITORIAL_PLAN, hook_video=Path("/synthetic/opening.mkv"))
         expressions = [re.search(r"zoompan=z='([^']+)':x='([^']+)':y='([^']+)'", part)
                        for part in parts if "zoompan=" in part]
-        self.assertEqual(len(expressions), 2)
+        self.assertEqual(len(expressions), 8)
         frames = sp.scene_frame_plan(EDITORIAL_PLAN)["scene_frames"]
         # Evaluate only the code-owned expression vocabulary, never JSON/caller expressions.
         vocabulary = {"__builtins__": {}, "sin": math.sin, "PI": math.pi,
@@ -992,7 +1062,7 @@ class EditorialMotion(unittest.TestCase):
                 self.assertGreaterEqual(y, -0.5)
                 self.assertLessEqual(y + variables["ih"] / z, variables["ih"] + 0.5)
                 samples.append((z, x, y))
-            if index == 0:
+            if index % 2 == 0:
                 self.assertAlmostEqual(samples[0][0], 1, delta=1e-6)
                 self.assertAlmostEqual(samples[-1][0], 1.08, delta=1e-6)
                 self.assertTrue(all(a[0] <= b[0] for a, b in zip(samples, samples[1:])))
@@ -1023,6 +1093,130 @@ class EditorialMotion(unittest.TestCase):
         for dimensions in [(True, 1920), (1080, False), (0, 1920), (-1, 1920), (1080.0, 1920)]:
             with self.subTest(dimensions=dimensions), self.assertRaises(ValueError):
                 sp.portrait_crop(*dimensions)
+
+
+class EditorialOpeningAtmosphere(unittest.TestCase):
+    """Exercise actual atmosphere pixels with a fixed camera, no grain, and no provider."""
+    @classmethod
+    def setUpClass(cls):
+        import numpy as np
+        cls.np = np
+        cls.base = np.full((192, 108, 3), 0.3, dtype=np.float32)
+
+    @staticmethod
+    def envelope(frame):
+        t = frame / 30
+        if not 0 <= t < 3:
+            return 0.0
+        smooth = lambda u: u * u * (3 - 2 * u)
+        return smooth(min(1, t / 0.35)) * smooth(min(1, (3 - t) / 0.45))
+
+    def test_transparent_endpoints_determinism_seed_and_finite_bounded_composition(self):
+        np = self.np
+        base = self.base.copy()
+        for frame in (-1, 0, 90, 120):
+            output, alpha = sp.opening_atmosphere(base, frame)
+            np.testing.assert_array_equal(output, base)
+            np.testing.assert_array_equal(alpha, np.zeros(base.shape[:2]))
+        for frame in range(91):
+            output, alpha = sp.opening_atmosphere(base, frame, seed=231005)
+            self.assertEqual(output.shape, base.shape)
+            self.assertEqual(alpha.shape, base.shape[:2])
+            self.assertTrue(np.issubdtype(output.dtype, np.floating))
+            self.assertTrue(np.issubdtype(alpha.dtype, np.floating))
+            self.assertTrue(np.isfinite(output).all() and np.isfinite(alpha).all())
+            self.assertGreaterEqual(float(output.min()), 0)
+            self.assertLessEqual(float(output.max()), 1)
+            self.assertGreaterEqual(float(alpha.min()), 0)
+            self.assertLessEqual(float(alpha.max()), 0.18 + 1e-7)
+        a, aa = sp.opening_atmosphere(base, 45, seed=231005)
+        b, ba = sp.opening_atmosphere(base, 45, seed=231005)
+        np.testing.assert_array_equal(a, b)
+        np.testing.assert_array_equal(aa, ba)
+        c, _ = sp.opening_atmosphere(base, 45, seed=231006)
+        self.assertGreater(float(np.abs(a - c).max()), 0)
+        np.testing.assert_array_equal(base, self.base)
+
+    def test_exact_moving_fog_without_camera_particles_grain_or_source_highlights(self):
+        np = self.np
+        h, w = self.base.shape[:2]
+        yy, xx = np.mgrid[0:h, 0:w]
+        with mock.patch.object(sp, "opening_particles", return_value=[]):
+            images = []
+            for frame in (15, 45):
+                t = frame / 30
+                image, alpha = sp.opening_atmosphere(self.base, frame)
+                fog = np.exp(-((yy / h - 0.72) / 0.22) ** 2) * (
+                    0.5 + 0.25 * np.sin(2 * math.pi * (xx / w - 0.035 * t))
+                    + 0.25 * np.sin(2 * math.pi * (1.7 * xx / w + 0.7 * yy / h - 0.05 * t)))
+                np.testing.assert_allclose(alpha, 0.09 * self.envelope(frame) * fog, atol=2e-6, rtol=2e-6)
+                images.append(image)
+            luma_delta = np.abs((images[0] - images[1]) @ np.array([0.2126, 0.7152, 0.0722]))
+            self.assertGreaterEqual(float(np.mean(luma_delta > 1 / 1024)), 0.05)
+
+    def test_full_motion_changes_real_luminance_and_has_no_adjacent_flash(self):
+        np = self.np
+        outputs = [sp.opening_atmosphere(self.base, i)[0] for i in range(91)]
+        luma = [frame @ np.array([0.2126, 0.7152, 0.0722]) for frame in outputs]
+        self.assertGreaterEqual(float(np.mean(np.abs(luma[15] - luma[45]) > 1 / 1024)), 0.05)
+        self.assertLessEqual(max(abs(float(a.mean() - b.mean())) for a, b in zip(luma, luma[1:])), 0.005)
+        with mock.patch.object(sp, "opening_particles", return_value=[]):
+            fog = [sp.opening_atmosphere(self.base, i)[0] for i in (15, 45)]
+        # Difference from a same-frame no-particle baseline isolates particle pixels, not grain.
+        particles = [outputs[i] - background for i, background in zip((15, 45), fog)]
+        self.assertGreater(float(np.abs(particles[0]).max()), 1 / 1024)
+        self.assertGreater(float(np.abs(particles[1]).max()), 1 / 1024)
+        self.assertGreater(float(np.abs(particles[0] - particles[1]).max()), 1 / 1024)
+
+    def test_particle_paths_are_continuous_scaled_bounded_and_outside_caption_area(self):
+        particles = [sp.opening_particles(i, 1080, 1920, seed=231005) for i in range(91)]
+        self.assertTrue(all(len(frame) == 24 for frame in particles))
+        self.assertEqual(particles[45], sp.opening_particles(45, 1080, 1920, seed=231005))
+        self.assertNotEqual(particles[45], sp.opening_particles(45, 1080, 1920, seed=231006))
+        scaled = sp.opening_particles(45, 108, 192, seed=231005)
+        for index in range(24):
+            first = particles[0][index]
+            self.assertTrue(50 <= first["x"] <= 1030)
+            self.assertTrue(100 <= first["y"] <= 900)
+            self.assertTrue(1 <= first["radius"] <= 2.5)
+            vx = (particles[1][index]["x"] - first["x"]) * 30
+            vy = (particles[1][index]["y"] - first["y"]) * 30
+            self.assertTrue(6 - 1e-9 <= vx <= 12 + 1e-9)
+            self.assertTrue(-18 - 1e-9 <= vy <= -10 + 1e-9)
+            for frame_index, frame in enumerate(particles):
+                particle = frame[index]
+                self.assertTrue(all(math.isfinite(particle[key]) for key in ("x", "y", "radius", "alpha")))
+                self.assertAlmostEqual(particle["x"], first["x"] + frame_index / 30 * vx, delta=1e-8)
+                self.assertAlmostEqual(particle["y"], first["y"] + frame_index / 30 * vy, delta=1e-8)
+                self.assertGreaterEqual(particle["alpha"], 0)
+                self.assertLessEqual(particle["alpha"], 0.1 * self.envelope(frame_index) + 1e-8)
+                self.assertGreater(particle["x"] - particle["radius"], 0)
+                self.assertLess(particle["x"] + particle["radius"], 1080)
+                self.assertGreater(particle["y"] - particle["radius"], 0)
+                self.assertLess(particle["y"] + particle["radius"], sp.CAPTION_Y - 150)
+            for key in ("x", "y", "radius"):
+                self.assertAlmostEqual(scaled[index][key], particles[45][index][key] / 10, delta=1e-8)
+            self.assertAlmostEqual(scaled[index]["alpha"], particles[45][index]["alpha"], delta=1e-8)
+
+    def test_highlight_light_is_source_derived_and_uses_bounded_gaussian_scale(self):
+        import cv2
+        np = self.np
+        base = self.base.copy()
+        base[20:45, 45:65] = 0.95
+        with mock.patch.object(cv2, "GaussianBlur", wraps=cv2.GaussianBlur) as blur:
+            output, alpha = sp.opening_atmosphere(base, 45)
+        self.assertTrue(blur.called, "warm light must be smoothed source highlights, not an invented sun")
+        expected_luma = base @ np.array([0.2126, 0.7152, 0.0722])
+        expected_highlights = np.clip((expected_luma - 0.65) / 0.35, 0, 1)
+        matching = [call for call in blur.call_args_list
+                    if getattr(call.args[0], "shape", None) == base.shape[:2]
+                    and np.allclose(call.args[0], expected_highlights, atol=1e-6)]
+        self.assertTrue(matching, "blur input must be the original source's thresholded luminance")
+        for call in matching:
+            sigma = call.kwargs.get("sigmaX", call.args[2] if len(call.args) > 2 else None)
+            self.assertAlmostEqual(sigma, 0.025 * base.shape[1])
+        self.assertLessEqual(float(alpha.max()), 0.18 + 1e-7)
+        self.assertTrue(np.isfinite(output).all())
 
 
 class EditorialProducerMain(unittest.TestCase):
@@ -1122,7 +1316,8 @@ class EditorialProducerMain(unittest.TestCase):
 
     def test_tampered_editorial_plan_never_reaches_produce(self):
         original = json.dumps(self.prepared)
-        for mutation in ("tail", "motion", "source_hash", "extra"):
+        for mutation in ("tail", "motion", "source_hash", "extra", "pilot", "order", "scene_count",
+                         "exception", "exception_target", "bool", "nan", "hook_policy"):
             with self.subTest(mutation=mutation):
                 self.prepared = json.loads(original)
                 plan = self.prepared["edit_plan"]
@@ -1132,6 +1327,22 @@ class EditorialProducerMain(unittest.TestCase):
                     plan["scenes"][0]["motion_profile"] = "arbitrary_expression"
                 elif mutation == "source_hash":
                     plan["source_sha256"]["timeline"] = "0" * 64
+                elif mutation == "pilot":
+                    plan["source_pilot"] = "pilot-006"
+                elif mutation == "order":
+                    plan["scenes"][0], plan["scenes"][1] = plan["scenes"][1], plan["scenes"][0]
+                elif mutation == "scene_count":
+                    plan["scenes"].pop()
+                elif mutation == "exception":
+                    del plan["rhythm_exception"]
+                elif mutation == "exception_target":
+                    plan["rhythm_exception"]["target_slot"] = "2026-10-21T20:00:00Z"
+                elif mutation == "bool":
+                    plan["scenes"][0]["nominal_start"] = False
+                elif mutation == "nan":
+                    plan["tail_seconds"] = float("nan")
+                elif mutation == "hook_policy":
+                    plan["hook_animation"]["caption_policy"] = "duplicate_overlay"
                 else:
                     plan["force_publish"] = True
                 self.write_selection()
@@ -1192,6 +1403,8 @@ class EditorialProducerSources(unittest.TestCase):
                                 stdout='{"streams":[{"width":1344,"height":768}]}')) as probe, \
                             mock.patch.object(sp, "probe_duration", return_value=40.3), \
                             mock.patch.object(sp, "vertical_still") as prepare, \
+                            mock.patch.object(sp, "write_opening_video", return_value=root / "synthetic-opening.mkv") as opening, \
+                            mock.patch.object(sp, "ass", wraps=sp.ass) as captions, \
                             mock.patch.object(sp, "render_args", wraps=sp.render_args) as renderer, \
                             mock.patch.object(sp, "run") as render:
                         record = sp.produce(work, moment, 0, script, images, None, music, out,
@@ -1203,17 +1416,70 @@ class EditorialProducerSources(unittest.TestCase):
                         actual_args = render.call_args.args[0]
                         actual_inputs = [actual_args[i + 1] for i, value in enumerate(actual_args) if value == "-i"]
                         self.assertIn(str(expected_voice), actual_inputs)
-                        self.assertEqual(len(actual_inputs), 4)
-                        self.assertEqual(prepare.call_count, 2)
+                        self.assertEqual(len(actual_inputs), 10 if edit_plan is not None else 4)
+                        self.assertEqual(prepare.call_count, 8 if edit_plan is not None else 2)
                         self.assertEqual(record["sha256"], "f" * 64)
                         if edit_plan is not None:
                             self.assertEqual(hashed.call_args_list[0].args[0], expected_voice)
                             self.assertNotIn(str(legacy_wav), actual_inputs)
-                            self.assertEqual(probe.call_count, 2)
+                            self.assertEqual(probe.call_count, 8)
+                            opening.assert_called_once_with(out / "tmp-00" / "s00.png",
+                                                            out / "tmp-00" / "opening.mkv")
+                            self.assertEqual(renderer.call_args.kwargs["hook_video"], root / "synthetic-opening.mkv")
+                            self.assertEqual(captions.call_args.kwargs["hook_mode"], "caption_only")
+                            self.assertEqual({Path(call.args[0]).stem for call in hashed.call_args_list
+                                              if Path(call.args[0]).suffix == ".png"},
+                                             {scene["image_id"] for scene in EDITORIAL_PLAN["scenes"]})
+                            self.assertEqual(record["hook_mode"], "caption_only")
+                            self.assertTrue(record["hook_shown"])
+                            self.assertEqual(record["scenes"], [s["image_id"] for s in EDITORIAL_PLAN["scenes"]])
                             self.assertIs(record["publish"], False)
                         else:
                             self.assertNotIn(str(original_flac), actual_inputs)
                             probe.assert_not_called()
+                            opening.assert_not_called()
+                            self.assertEqual(captions.call_args.kwargs["hook_mode"], "overlay")
+
+
+    def test_each_approved_image_is_hash_and_mapping_checked_before_any_render(self):
+        timeline, script, refs, moment = editorial_source()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            work, images, out = root / "work", root / "images", root / "output"
+            work.mkdir()
+            images.mkdir()
+            music = root / "music.flac"
+            hashes = {root / "voice.flac": EDITORIAL_PLAN["voice"]["sha256"],
+                      music: EDITORIAL_PLAN["music"]["sha256"],
+                      **{images / (scene["image_id"] + ".png"): scene["sha256"]
+                         for scene in EDITORIAL_PLAN["scenes"]}}
+            for changed in range(8):
+                for mutation in ("bytes", "asset", "license"):
+                    with self.subTest(scene=changed, mutation=mutation):
+                        for index, scene in enumerate(EDITORIAL_PLAN["scenes"]):
+                            meta = {"id": scene["image_id"], "release_asset": scene["asset"],
+                                    "sha256": scene["sha256"], "models": {"synthetic": {"license": "test"}}}
+                            if index == changed and mutation == "asset":
+                                meta["release_asset"] = "wrong-asset.png"
+                            if index == changed and mutation == "license":
+                                meta["models"] = {}
+                            (images / (scene["image_id"] + ".json")).write_text(json.dumps(meta))
+                        altered = images / (EDITORIAL_PLAN["scenes"][changed]["image_id"] + ".png")
+                        digest = lambda path: "0" * 64 if mutation == "bytes" and Path(path) == altered else hashes[Path(path)]
+                        with mock.patch.object(sp, "sha256", side_effect=digest), \
+                                mock.patch.object(sp.subprocess, "run") as process, \
+                                mock.patch.object(sp.subprocess, "Popen") as encoder, \
+                                mock.patch.object(sp, "run") as render, \
+                                mock.patch.object(sp, "vertical_still") as prepare, \
+                                mock.patch.object(sp, "write_opening_video") as opening, \
+                                mock.patch.object(shorts_select, "rubric") as provider:
+                            with self.assertRaisesRegex(ValueError, "IMAGE_(HASH_MISMATCH|MAPPING_MISMATCH|LICENSE_MISSING)"):
+                                sp.produce(work, moment, 0, script, images, None, music, out,
+                                           timeline_sentences=timeline["sentences"], script_refs=refs,
+                                           edit_plan=EDITORIAL_PLAN)
+                        for spy in (process, encoder, render, prepare, opening, provider):
+                            spy.assert_not_called()
+                        self.assertFalse(out.exists())
 
 
 class EditorialSyntheticFFmpeg(unittest.TestCase):
@@ -1224,29 +1490,44 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
         cls.addClassCleanup(cls.tmp.cleanup)
         cls.root = Path(cls.tmp.name)
         cls.width, cls.height = 108, 192
-        cls.stills = [cls.root / "red.ppm", cls.root / "blue.ppm"]
+        cls.stills = [cls.root / f"scene-{i}.ppm" for i in range(8)]
         for index, path in enumerate(cls.stills):
             synthetic_ppm(path, 216, 384, index)
-        # A tiny 8 kHz local test tone, long enough for the renderer's unmodified source seeks.
-        # Production still resamples to 48 kHz and preserves its original narration.
-        cls.audio = cls.root / "synthetic.wav"
+        _, _, _, cls.moment = editorial_source()
+        # Local 8 kHz tones retain the real source-seek interval. A different terminal
+        # frequency guards against padding silently replacing the last spoken material.
+        cls.audio, cls.music = cls.root / "synthetic.wav", cls.root / "silence.wav"
         sample_rate = 8000
         one_second = b"".join(int(900 * math.sin(2 * math.pi * 220 * i / sample_rate))
                               .to_bytes(2, "little", signed=True) for i in range(sample_rate))
-        with wave.open(str(cls.audio), "wb") as sound:
-            sound.setnchannels(1)
-            sound.setsampwidth(2)
-            sound.setframerate(sample_rate)
-            for _ in range(math.ceil(sp.MUSIC_OFFSET + 501)):
-                sound.writeframesraw(one_second)
+        seconds = math.ceil(sp.MUSIC_OFFSET + 501)
+        pcm = bytearray(one_second * seconds)
+        marker_start = round((cls.moment["end"] - 0.16) * sample_rate)
+        marker_end = round(cls.moment["end"] * sample_rate)
+        pcm[marker_start * 2:marker_end * 2] = b"".join(
+            int(900 * math.sin(2 * math.pi * 1100 * i / sample_rate)).to_bytes(2, "little", signed=True)
+            for i in range(marker_end - marker_start))
+        for path, data in ((cls.audio, pcm), (cls.music, bytes(len(pcm)))):
+            with wave.open(str(path), "wb") as sound:
+                sound.setnchannels(1)
+                sound.setsampwidth(2)
+                sound.setframerate(sample_rate)
+                sound.writeframes(data)
         cls.captions = cls.root / "empty.ass"
         cls.captions.write_text(sp.HEAD)
-        _, _, _, cls.moment = editorial_source()
-        cls.output = cls.root / "synthetic-stills.mp4"
+        cls.output, cls.pcm_output = cls.root / "synthetic-stills.mp4", cls.root / "preencoder.wav"
+        cls.hook = cls.root / "synthetic-opening.mkv"
+        sp.write_opening_video(cls.stills[0], cls.hook)
         with mock.patch.multiple(sp, VW=cls.width, VH=cls.height):
-            args = sp.render_args(cls.stills, cls.audio, cls.audio, cls.captions,
-                                  cls.moment, 40.312, "null", cls.output, edit_plan=EDITORIAL_PLAN)
-        # Keep the production graph/codecs/quantized clock; bound CPU use in small CI workers.
+            args = sp.render_args(cls.stills, cls.audio, cls.music, cls.captions,
+                                  cls.moment, 40.312, "null", cls.output, edit_plan=EDITORIAL_PLAN,
+                                  hook_video=cls.hook)
+        # Keep all production processing. An output-only split captures the actual
+        # pre-AAC samples, without changing any media filter or resampling decision.
+        graph_index = args.index("-filter_complex") + 1
+        args[graph_index] = args[graph_index].replace("[aout]", "[preencoder]") + (
+            ";[preencoder]asplit=2[aout][samplecheck]")
+        args += ["-map", "[samplecheck]", "-c:a", "pcm_s16le", str(cls.pcm_output)]
         args[1:1] = ["-filter_complex_threads", "1", "-threads", "1"]
         args[args.index("-preset") + 1] = "ultrafast"
         cls.invoke(args)
@@ -1285,31 +1566,92 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
         for index, frame in enumerate(frames):
             self.assertAlmostEqual(float(frame["best_effort_timestamp_time"]), index / 30, delta=1e-6)
 
-    def test_actual_scene_fingerprints_fade_coverage_and_second_scene_length(self):
-        colors = [(sum(frame[0::3]) / (self.width * self.height),
-                   sum(frame[2::3]) / (self.width * self.height)) for frame in self.frames]
-        # Red and blue dominance is an independent source fingerprint, not copied plan arithmetic.
-        mixed = [i for i, (red, blue) in enumerate(colors) if red > 45 and blue > 45]
-        self.assertGreater(len(mixed), 8)
-        self.assertGreaterEqual(min(mixed), 657)
-        self.assertLess(max(mixed), 672)
-        self.assertTrue(all(red > blue * 3 for red, blue in colors[:657]))
-        self.assertTrue(all(blue > red * 3 for red, blue in colors[672:]))
-        self.assertGreaterEqual(len(colors[665:]), 540)
-        self.assertGreaterEqual(len(colors[657:]), 540)
-        self.assertLessEqual(len(colors[657:]), 1080)
-        self.assertLess(colors[664][0], colors[658][0])
-        self.assertGreater(colors[664][1], colors[658][1])
+    def test_actual_eight_scene_fingerprints_all_seven_fades_and_final_frames(self):
+        import numpy as np
+        images = np.frombuffer(self.rgb, np.uint8).reshape((-1, self.height, self.width, 3))
+        colors = images.mean(axis=(1, 2))
+        references = np.array([colors[index * 150 + 75] for index in range(8)])
+        self.assertEqual(len({tuple(np.rint(color)) for color in references}), 8)
+        for i, expected in enumerate(SYNTHETIC_COLORS):
+            self.assertLess(float(np.linalg.norm(references[i] - np.array(expected) - 11)), 15)
+        nearest = np.linalg.norm(colors[:, None, :] - references[None, :, :], axis=2).argmin(axis=1)
+        starts, ends = [143, 293, 443, 593, 743, 893, 1043], [158, 308, 458, 608, 758, 908, 1058]
+        spans = [(0, starts[0]), *zip(ends[:-1], starts[1:]), (ends[-1], 1209)]
+        self.assertEqual(len(spans), 8)
+        for i, (start, end) in enumerate(spans):
+            self.assertTrue(np.all(nearest[start:end] == i), (i, start, end))
+        for i, (start, end) in enumerate(zip(starts, ends)):
+            a, b = references[i], references[i + 1]
+            direction = b - a
+            progression = ((colors[start:end + 1] - a) @ direction) / (direction @ direction)
+            self.assertLess(abs(float(progression[0])), 0.05)
+            self.assertLess(abs(float(progression[-1] - 1)), 0.05)
+            self.assertGreater(int(np.sum((progression > 0.1) & (progression < 0.9))), 8)
+            self.assertTrue(np.all(np.diff(progression) > -0.03), (i, progression.tolist()))
+            self.assertLess(float(np.max(np.abs(np.diff(progression)))), 0.12,
+                            "a transition must not reset or jump")
         hashes = [hashlib.sha256(frame).hexdigest() for frame in self.frames]
-        self.assertNotEqual(hashes[0], hashes[650])
-        self.assertNotEqual(hashes[672], hashes[-1])
+        self.assertNotEqual(hashes[0], hashes[120])
+        self.assertNotEqual(hashes[1058], hashes[-1])
         self.assertNotEqual(hashes[-61], hashes[-1], "the ending cannot freeze for two seconds")
-        for frame in self.frames:
-            self.assertGreater(max(frame), 100, "a decoded frame has no source coverage")
+        self.assertTrue(np.all(images.max(axis=(1, 2, 3)) > 100))
+        # The atmosphere endpoint must join the unaltered source without a flash/reset.
+        means = images.mean(axis=(1, 2, 3)) / 255
+        self.assertLess(float(np.max(np.abs(np.diff(means[80:101])))), 0.01)
         black = self.invoke([
             "ffmpeg", "-hide_banner", "-i", str(self.output), "-an", "-vf",
             "blackdetect=d=0.0333333333333333:pix_th=0.02:pic_th=0.99", "-f", "null", "-"])
         self.assertNotIn(b"black_start:", black.stderr)
+
+    def test_actual_opening_clip_has_91_lossless_frames_and_transparent_endpoint(self):
+        probe = json.loads(self.invoke([
+            "ffprobe", "-v", "error", "-count_frames", "-select_streams", "v:0",
+            "-show_entries", "stream=codec_name,nb_read_frames", "-of", "json", str(self.hook)
+        ]).stdout)["streams"][0]
+        self.assertEqual(probe["codec_name"], "ffv1")
+        self.assertEqual(int(probe["nb_read_frames"]), 91)
+        raw = self.invoke(["ffmpeg", "-v", "error", "-i", str(self.hook), "-map", "0:v:0",
+                           "-f", "rawvideo", "-pix_fmt", "rgb24", "-"]).stdout
+        source = self.stills[0].read_bytes().split(b"\n", 3)[3]
+        size = 216 * 384 * 3
+        self.assertEqual(len(raw), 91 * size)
+        self.assertEqual(raw[:size], source)
+        self.assertEqual(raw[-size:], source)
+        self.assertNotEqual(raw[15 * size:16 * size], raw[45 * size:46 * size])
+
+    def test_actual_aac_frame_pts_are_sample_contiguous_including_old_gap_location(self):
+        payload = json.loads(self.invoke([
+            "ffprobe", "-v", "error", "-select_streams", "a:0", "-show_frames", "-show_streams",
+            "-show_entries", "stream=codec_name,sample_rate,time_base:frame=pts,nb_samples",
+            "-of", "json", str(self.output)]).stdout)
+        stream, frames = payload["streams"][0], payload["frames"]
+        self.assertEqual((stream["codec_name"], stream["sample_rate"], stream["time_base"]),
+                         ("aac", "48000", "1/48000"))
+        self.assertGreater(len(frames), 1800)
+        self.assertEqual(frames[0]["pts"], 0)
+        for previous, current in zip(frames, frames[1:]):
+            self.assertEqual(current["pts"] - previous["pts"], previous["nb_samples"],
+                             f"AAC timestamp gap after sample {previous['pts']}")
+        around_gap = [frame for frame in frames if 37.35 <= frame["pts"] / 48000 <= 37.5]
+        self.assertGreaterEqual(len(around_gap), 6)
+        self.assertLessEqual(abs(sum(frame["nb_samples"] for frame in frames) - 1934976), 1024)
+
+    def test_actual_preencoder_sample_count_preserves_terminal_source_marker(self):
+        import numpy as np
+        with wave.open(str(self.pcm_output), "rb") as sound:
+            self.assertEqual((sound.getframerate(), sound.getnchannels(), sound.getsampwidth()), (48000, 2, 2))
+            self.assertEqual(sound.getnframes(), 1934976)
+            data = np.frombuffer(sound.readframes(sound.getnframes()), "<i2").reshape((-1, 2)).mean(axis=1)
+        def spectral_power(start, end, frequency):
+            piece = data[round(start * 48000):round(end * 48000)]
+            phase = np.arange(len(piece)) * 2 * np.pi * frequency / 48000
+            return abs(np.dot(piece, np.exp(-1j * phase))) / len(piece)
+        self.assertGreater(spectral_power(39.69, 39.79, 1100), 100,
+                           "the terminal source marker must survive; silence padding is not preservation")
+        self.assertGreater(spectral_power(39.69, 39.79, 1100),
+                           spectral_power(39.69, 39.79, 220) * 10)
+        self.assertGreater(spectral_power(39.3, 39.4, 220), spectral_power(39.3, 39.4, 1100) * 10)
+        self.assertLess(float(np.max(np.abs(data[round(40.2 * 48000):]))), 2)
 
     def test_portrait_preparation_covers_adversarial_source_aspect_ratios(self):
         for width, height in [(16, 384), (384, 16), (64, 64)]:
@@ -1329,17 +1671,20 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
     def test_temporal_source_fingerprints_expose_premature_eof_or_duplicated_ending(self):
         output = self.root / "synthetic-clock.mp4"
         with mock.patch.multiple(sp, VW=self.width, VH=self.height):
-            args = sp.render_args(self.stills, self.audio, self.audio, self.captions,
-                                  self.moment, 40.312, "null", output, edit_plan=EDITORIAL_PLAN)
-        # Only adapt the two source inputs: the exact production filter graph consumes a moving
-        # test clock. Static images can legitimately repeat low-resolution integer-crop samples,
-        # so static hashes alone cannot establish that the graph did not repeat its final frame.
-        for path in reversed(self.stills):
-            end = args.index(str(path)) + 1
+            args = sp.render_args(self.stills, self.audio, self.music, self.captions,
+                                  self.moment, 40.312, "null", output, edit_plan=EDITORIAL_PLAN,
+                                  hook_video=self.hook)
+        # Adapt only the eight source inputs. The unchanged production graph sees
+        # a moving test clock, which exposes duplicated or prematurely ended frames.
+        for index in reversed(range(1, 8)):
+            end = args.index(str(self.stills[index])) + 1
             start = max(i for i in range(end) if args[i] == "-loop")
             duration = args[args.index("-t", start, end) + 1]
             args[start:end] = ["-f", "lavfi", "-i",
                                f"testsrc2=size={self.width}x{self.height}:rate=30:duration={duration}"]
+        end = args.index(str(self.hook)) + 1
+        args[end - 2:end] = ["-f", "lavfi", "-i",
+                            f"testsrc2=size={self.width}x{self.height}:rate=30:duration={158 / 30}"]
         args[1:1] = ["-filter_complex_threads", "1", "-threads", "1"]
         args[args.index("-preset") + 1] = "ultrafast"
         self.invoke(args)

@@ -30,30 +30,83 @@ QA_CHECKS = {"decode_clean", "one_h264_1080x1920", "fps_30", "one_aac_stereo_48k
 HASH = re.compile(r"[0-9a-f]{64}\Z")
 HISTORY_SHA256 = "3e1357fb31d87c5e1b3f6e90fdf86c461b1232a996511a586dce2643e5a58b98"
 HISTORY_FIXTURE = Path(__file__).resolve().parent / "fixtures" / "shorts-pilot-005-20261020" / "shorts" / "shorts.json"
-EXPECTED_PLAN = {
-    "version": "shorts-editorial-plan-v1", "source_pilot": "pilot-005",
-    "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
-    "source_sha256": {
-        "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a",
-        "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
-        "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"},
-    "voice": {"asset": "pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac",
-              "sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc"},
-    "music": {"asset": "original-rest-music.lossless.flac",
-              "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c"},
-    "candidate": {"start": 459.860, "end": 499.672, "hook": "Lord, protect my relationships.",
-                  "title": "A Prayer for Peace in Your Relationships", "reference": None},
-    "tail_seconds": 0.5, "transition": {"type": "fade", "seconds": 0.5, "center_seconds": 22.153},
-    "scenes": [
-        {"image_id": "bg-home-sunrise",
-         "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
-         "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
-         "nominal_start": 0.0, "nominal_end": 22.153, "motion_profile": "phrase_push_in_v1"},
-        {"image_id": "bg-garden",
-         "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
-         "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
-         "nominal_start": 22.153, "nominal_end": 40.312, "motion_profile": "phrase_pan_right_v1"}],
-    "publish": False}
+NEW_REVIEW_CANONICAL_SHA256 = "0d80d5291959b8d718b184f894687caf63862b70bd27fe24461a766cecb6d654"
+NEW_FAILED_OUTPUT_SHA256 = "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7"
+EXPECTED_PLAN = {'version': 'shorts-editorial-plan-v2',
+ 'source_pilot': 'pilot-005',
+ 'source_baseline_sha': '7fb9e9e1fad9396b80c029212f0a3144c1428d51',
+ 'source_sha256': {'script': 'c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a',
+                   'timeline': '53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5',
+                   'inputs': '67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831'},
+ 'voice': {'asset': 'pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac',
+           'sha256': '6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc'},
+ 'music': {'asset': 'original-rest-music.lossless.flac',
+           'sha256': '1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c'},
+ 'candidate': {'start': 459.86,
+               'end': 499.672,
+               'hook': 'Lord, protect my relationships.',
+               'title': 'A Prayer for Peace in Your Relationships',
+               'reference': None},
+ 'tail_seconds': 0.5,
+ 'transition': {'type': 'fade', 'seconds': 0.5},
+ 'scenes': [{'image_id': 'bg-dawn-lake',
+             'asset': 'pilot-003-img-bg-dawn-lake-sha256-74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018.png',
+             'sha256': '74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018',
+             'nominal_start': 0.0,
+             'nominal_end': 5.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-sheltered-valley',
+             'asset': 'pilot-005-img-bg-sheltered-valley-sha256-1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85.png',
+             'sha256': '1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85',
+             'nominal_start': 5.0,
+             'nominal_end': 10.0,
+             'motion_profile': 'phrase_pan_right_v1'},
+            {'image_id': 'bg-sunlit-road',
+             'asset': 'pilot-005-img-bg-sunlit-road-sha256-79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794.png',
+             'sha256': '79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794',
+             'nominal_start': 10.0,
+             'nominal_end': 15.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-fortress-dawn',
+             'asset': 'pilot-005-img-bg-fortress-dawn-sha256-8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba.png',
+             'sha256': '8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba',
+             'nominal_start': 15.0,
+             'nominal_end': 20.0,
+             'motion_profile': 'phrase_pan_right_v1'},
+            {'image_id': 'bg-sunrise-field',
+             'asset': 'pilot-003-img-bg-sunrise-field-sha256-8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0.png',
+             'sha256': '8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0',
+             'nominal_start': 20.0,
+             'nominal_end': 25.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-misty-valley',
+             'asset': 'pilot-003-img-bg-misty-valley-sha256-a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc.png',
+             'sha256': 'a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc',
+             'nominal_start': 25.0,
+             'nominal_end': 30.0,
+             'motion_profile': 'phrase_pan_right_v1'},
+            {'image_id': 'bg-mountain-sunrise',
+             'asset': 'pilot-003-img-bg-mountain-sunrise-sha256-886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5.png',
+             'sha256': '886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5',
+             'nominal_start': 30.0,
+             'nominal_end': 35.0,
+             'motion_profile': 'phrase_push_in_v1'},
+            {'image_id': 'bg-tower-hill',
+             'asset': 'pilot-005-img-bg-tower-hill-sha256-0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961.png',
+             'sha256': '0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961',
+             'nominal_start': 35.0,
+             'nominal_end': 40.312,
+             'motion_profile': 'phrase_pan_right_v1'}],
+ 'publish': False,
+ 'rhythm_exception': {'id': 'pilot-005-20261020-eight-scenes-r3',
+                      'target_slot': '2026-10-20T20:00:00Z',
+                      'scene_count': 8,
+                      'nominal_seconds': [4.0, 6.0],
+                      'visible_seconds': [4.0, 6.0]},
+ 'hook_animation': {'profile': 'cinematic_hook_v1',
+                    'start_seconds': 0.0,
+                    'end_seconds': 3.0,
+                    'caption_policy': 'single_track_no_duplicate'}}
 
 
 class EvidenceError(ValueError):
@@ -175,18 +228,23 @@ def main(plan_path, timeline_path, script_path, inputs_path, out_path):
 
 
 def frame_plan(plan):
-    """Shared renderer allocation, half-up quantized once (end exclusive)."""
+    """Shared eight-scene allocation, half-up quantized once (end exclusive).
+
+    Only the exact owner-scoped v2 plan reaches this helper. The no-plan
+    renderer has no access to its 4..6 second rhythm exception.
+    """
     plan = validate_plan_schema(plan)
     q = lambda s: math.floor(s * 30 + 0.5)
-    end = q(plan["scenes"][-1]["nominal_end"])
-    boundary = q(plan["transition"]["center_seconds"])
-    fade_start = q(plan["transition"]["center_seconds"] - plan["transition"]["seconds"] / 2)
-    fade_end = fade_start + q(plan["transition"]["seconds"])
-    return {"expected_frame_count": end, "fps": 30, "scene_frame_spans": [
-        {"image_id": plan["scenes"][0]["image_id"], "start_frame": 0, "end_frame": fade_end,
-         "nominal_start_frame": 0, "nominal_end_frame": boundary},
-        {"image_id": plan["scenes"][1]["image_id"], "start_frame": fade_start, "end_frame": end,
-         "nominal_start_frame": boundary, "nominal_end_frame": end}]}
+    scenes = plan["scenes"]
+    end = q(scenes[-1]["nominal_end"])
+    fade_frames = q(plan["transition"]["seconds"])
+    starts = [q(s["nominal_end"] - plan["transition"]["seconds"] / 2) for s in scenes[:-1]]
+    ends = [start + fade_frames for start in starts]
+    spans = [{"image_id": scene["image_id"], "start_frame": starts[i - 1] if i else 0,
+              "end_frame": ends[i] if i < len(scenes) - 1 else end,
+              "nominal_start_frame": q(scene["nominal_start"]), "nominal_end_frame": q(scene["nominal_end"])}
+             for i, scene in enumerate(scenes)]
+    return {"expected_frame_count": end, "fps": 30, "scene_frame_spans": spans}
 
 
 def utc_date(value):
@@ -226,6 +284,7 @@ def _bind_record(spec, plan, record, output_hash):
     require(record.get("sha256") == output_hash, "OUTPUT_SHA256_MISMATCH")
     require(number(record.get("source_start")) and record["source_start"] == plan["candidate"]["start"]
             and number(record.get("source_end")) and record["source_end"] == plan["candidate"]["end"], "RECORD_INTERVAL_MISMATCH")
+    require(record.get("hook_mode") == "caption_only", "RECORD_HOOK_MODE_MISMATCH")
     require(record.get("hook") == plan["candidate"]["hook"] and record.get("hook_shown") is True
             and record.get("title") == plan["candidate"]["title"] and record.get("reference") is None,
             "RECORD_EDITORIAL_MISMATCH")
@@ -367,8 +426,8 @@ def _validate_video(video, plan):
     require(exact(video["scene_frame_spans"], expected["scene_frame_spans"]), "VIDEO_SCENE_SPANS_FAIL")
     for scene in video["scene_frame_spans"]:
         require(all(type(scene[k]) is int for k in ("start_frame", "end_frame", "nominal_start_frame", "nominal_end_frame"))
-                and 540 <= scene["nominal_end_frame"] - scene["nominal_start_frame"] <= 1080
-                and 540 <= scene["end_frame"] - scene["start_frame"] <= 1080, "VIDEO_SCENE_DURATION_FAIL")
+                and 120 <= scene["nominal_end_frame"] - scene["nominal_start_frame"] <= 180
+                and 120 <= scene["end_frame"] - scene["start_frame"] <= 180, "VIDEO_SCENE_DURATION_FAIL")
     require(type(video["black_intervals"]) is list, "BLACKDETECT_SCHEMA")
     for interval in video["black_intervals"]:
         require(type(interval) is dict and interval.keys() == {"start", "end", "duration"}
@@ -419,6 +478,24 @@ def historical_failed_hashes(history_path):
                 and type(record.get("sha256")) is str and HASH.fullmatch(record["sha256"]), "HISTORICAL_FIXTURE_MALFORMED")
         if record["review"].get("status") == "FAIL":
             failed.add(record["sha256"])
+    new_reviews = history.get("new_reviews")
+    require(type(new_reviews) is list and len(new_reviews) == 1 and type(new_reviews[0]) is dict,
+            "NEW_REVIEW_HISTORY_MISSING_OR_MALFORMED")
+    try:
+        canonical = json.dumps(new_reviews[0], sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+                               allow_nan=False).encode("utf-8")
+    except (TypeError, ValueError, OverflowError):
+        raise EvidenceError("NEW_REVIEW_HISTORY_MALFORMED") from None
+    require(hashlib.sha256(canonical).hexdigest() == NEW_REVIEW_CANONICAL_SHA256, "NEW_REVIEW_HISTORY_SHA256_MISMATCH")
+    reviewed = new_reviews[0]
+    rec = _manifest_record(reviewed)
+    require(reviewed.get("source_pilot") == "pilot-005" and rec.get("sha256") == NEW_FAILED_OUTPUT_SHA256
+            and rec.get("qa_output_sha256") == NEW_FAILED_OUTPUT_SHA256
+            and type(rec.get("review")) is dict and rec["review"].get("status") == "FAIL"
+            and rec["review"].get("output_sha256") == NEW_FAILED_OUTPUT_SHA256
+            and type(rec.get("media_checks")) is dict and rec["media_checks"].get("output_sha256") == NEW_FAILED_OUTPUT_SHA256
+            and rec.get("publish") is False, "NEW_REVIEW_HISTORY_BINDING_MISMATCH")
+    failed.add(rec["sha256"])
     return frozenset(failed)
 
 
