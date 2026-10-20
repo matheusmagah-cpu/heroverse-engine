@@ -1910,8 +1910,10 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
             # to reinterpret. The lossless 4:2:0 scene round trips are pixel-checked above.
             self.assertTrue(all(frame[0] == "yuv444p" for frame in geometry))
             properties.append((geometry, color))
-        self.assertEqual(properties[0], properties[1],
-                         "actual FFmpeg graph taps must preserve SAR and all reported color properties")
+        mismatches = [(kind, index, left, right)
+                      for kind, (before, after) in zip(("geometry", "color"), zip(properties[0], properties[1]))
+                      for index, (left, right) in enumerate(zip(before, after)) if left != right]
+        self.assertFalse(bool(mismatches), f"actual picture metadata differs: {mismatches[:3]!r}")
 
 
     def test_actual_opening_clip_has_91_lossless_frames_and_transparent_endpoint(self):

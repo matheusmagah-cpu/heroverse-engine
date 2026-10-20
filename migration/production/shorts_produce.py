@@ -499,7 +499,11 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_
         else:
             n = 1
             inputs = ["-threads", "1", "-i", str(picture_video)]
-            graph = [f"[0:v]settb=1/{FPS},setpts=N,fps={FPS},trim=end_frame={scene_frame_plan(edit_plan)['output_frames']}[picture]"]
+            # FFV1 decoding labels limited-range YUV as "tv"; the original
+            # zoompan/xfade output carries unspecified range. Restore that
+            # metadata without converting samples or assuming a color matrix.
+            graph = [f"[0:v]settb=1/{FPS},setpts=N,fps={FPS},"
+                     f"setparams=range=unspecified,trim=end_frame={scene_frame_plan(edit_plan)['output_frames']}[picture]"]
         graph.append(f"[picture]{look},ass={ass_path},format=yuv420p[vout]")
     else:
         inputs = []
