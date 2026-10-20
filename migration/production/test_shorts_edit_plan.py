@@ -713,6 +713,46 @@ class MediaAndCliTests(unittest.TestCase):
                     self.assertAlmostEqual(measured["black_intervals"][0]["duration"], 1 / 30, places=5)
                     self.assertAlmostEqual(measured["black_intervals"][0]["start"], frame / 30, places=5)
 
+    def test_ffmpeg_6_1_six_significant_digit_metadata_uses_integer_frames(self):
+        # FFmpeg 6.1 av_ts2timestr uses %.6g (upstream timestamp.h). These
+        # source-backed log fixtures preserve exact frame counters/PTS and
+        # intentionally reproduce its rounded times. No installed version or
+        # test skip can hide the single-frame middle/EOF regressions.
+        probe = subprocess.CompletedProcess([], 0, json.dumps({
+            "streams": [{"nb_read_frames": "1209", "r_frame_rate": "30/1"}],
+            "format": {"duration": "40.300000"}}).encode(), b"")
+        for frame in (0, 600, 1208):
+            with self.subTest(frame=frame):
+                lines = [f"[Parsed_metadata_1 @ 0x1] frame:{frame} pts:{frame * 512} pts_time:{frame / 30:.6g}",
+                         f"[Parsed_metadata_1 @ 0x1] lavfi.black_start={frame / 30:.6g}"]
+                if frame < 1208:
+                    lines.extend([f"[Parsed_metadata_1 @ 0x1] frame:{frame + 1} pts:{(frame + 1) * 512} pts_time:{(frame + 1) / 30:.6g}",
+                                  f"[Parsed_metadata_1 @ 0x1] lavfi.black_end={(frame + 1) / 30:.6g}"])
+                decoded = subprocess.CompletedProcess([], 0, b"", ("\n".join(lines) + "\n").encode())
+                with patch.object(ep, "_run", side_effect=[probe, decoded]) as run:
+                    measured = ep.measure_video("synthetic.mp4", plan(), ep.frame_plan(plan()))
+                self.assertEqual(measured["status"], "FAIL")
+                self.assertEqual(measured["black_intervals"], [
+                    {"start": frame / 30, "end": (frame + 1) / 30, "duration": 1 / 30}])
+                command = run.call_args_list[1].args[0]
+                self.assertEqual(command[command.index("-vf") + 1],
+                                 "blackdetect=d=0.03333333333333333:pix_th=0.02:pic_th=0.99,metadata=mode=print")
+
+    def test_black_metadata_requires_consistent_integer_frame_identity(self):
+        probe = subprocess.CompletedProcess([], 0, json.dumps({
+            "streams": [{"nb_read_frames": "1209", "r_frame_rate": "30/1"}],
+            "format": {"duration": "40.300000"}}).encode(), b"")
+        logs = ["[Parsed_metadata_1 @ 0x1] lavfi.black_start=40.2667\n",
+                "[Parsed_metadata_1 @ 0x1] frame:1208 pts:618496 pts_time:40.2667\n"
+                "[Parsed_metadata_1 @ 0x1] lavfi.black_start=20\n",
+                "[Parsed_metadata_1 @ 0x1] frame:1209 pts:619008 pts_time:40.3\n"
+                "[Parsed_metadata_1 @ 0x1] lavfi.black_start=40.3\n"]
+        for log in logs:
+            decoded = subprocess.CompletedProcess([], 0, b"", log.encode())
+            with patch.object(ep, "_run", side_effect=[probe, decoded]), \
+                    self.assertRaisesRegex(ep.EvidenceError, "BLACKDETECT_PARSE_FAILED"):
+                ep.measure_video("synthetic.mp4", plan(), ep.frame_plan(plan()))
+
     def test_media_probe_or_decode_failure_is_categorical(self):
         for reply in (subprocess.CompletedProcess([], 1, b"", b"secret path"),
                       subprocess.CompletedProcess([], 0, b"malformed", b"")):

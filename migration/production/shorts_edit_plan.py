@@ -284,9 +284,15 @@ def measure_video(path, plan, renderer_plan):
                     "-i", str(path), "-map", "0:v:0", "-vf",
                     "blackdetect=d=0.03333333333333333:pix_th=0.02:pic_th=0.99,metadata=mode=print", "-an", "-sn", "-dn", "-f", "null", "-"])
     log = decoded.stderr.decode("utf-8", errors="replace")
-    intervals, start = [], None
+    require(type(count) is int and count > 0 and number(fps) and fps > 0, "VIDEO_PROBE_MALFORMED")
+    intervals, start, metadata_frame = [], None, None
     saw_summary = False
     for line in log.splitlines():
+        header = re.search(r"\bframe:(\d+)\s+pts:\s*-?\d+\s+pts_time:", line)
+        if header:
+            frame = int(header.group(1))
+            require(0 <= frame < count and (metadata_frame is None or frame > metadata_frame), "BLACKDETECT_PARSE_FAILED")
+            metadata_frame = frame
         # Validate any blackdetect summaries, but use its frame metadata below.
         # A black final frame has a start tag and no summary/end tag: the normal
         # d=1/30 log alone silently misses it. The decoded frame clock closes it.
@@ -300,18 +306,24 @@ def measure_video(path, plan, renderer_plan):
         if "lavfi.black_start=" in line or "lavfi.black_end=" in line:
             match = re.search(r"lavfi.black_(start|end)=([\d.eE+-]+)\s*$", line)
             require(match is not None, "BLACKDETECT_PARSE_FAILED")
-            kind, value = match.group(1), float(match.group(2))
-            require(number(value) and value >= 0, "BLACKDETECT_PARSE_FAILED")
+            kind, reported = match.group(1), float(match.group(2))
+            require(number(reported) and reported >= 0 and metadata_frame is not None
+                    and math.floor(reported * fps + 0.5) == metadata_frame, "BLACKDETECT_PARSE_FAILED")
+            # FFmpeg 6.1 prints times with %.6g: 40.266667 becomes 40.2667.
+            # Subtraction then makes a genuine one-frame interval only .0333s.
+            # Use the filter's integer frame counter, not rounded prose, for
+            # durations. This changes no pixel/duration acceptance threshold.
             if kind == "start":
                 require(start is None, "BLACKDETECT_PARSE_FAILED")
-                start = value
+                start = metadata_frame
             else:
-                require(start is not None and value >= start, "BLACKDETECT_PARSE_FAILED")
-                intervals.append({"start": start, "end": value, "duration": value - start})
+                require(start is not None and metadata_frame > start, "BLACKDETECT_PARSE_FAILED")
+                intervals.append({"start": start / fps, "end": metadata_frame / fps,
+                                  "duration": (metadata_frame - start) / fps})
                 start = None
     if start is not None:
-        require(number(fps) and fps > 0 and count / fps >= start, "BLACKDETECT_PARSE_FAILED")
-        intervals.append({"start": start, "end": count / fps, "duration": count / fps - start})
+        require(count > start, "BLACKDETECT_PARSE_FAILED")
+        intervals.append({"start": start / fps, "end": count / fps, "duration": (count - start) / fps})
     require(not saw_summary or bool(intervals), "BLACKDETECT_PARSE_FAILED")
     video = {"decoded_frame_count": count, "fps": fps, "seconds": seconds,
              "expected_frame_count": renderer_plan["expected_frame_count"], "black_intervals": intervals,
