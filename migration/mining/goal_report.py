@@ -22,6 +22,7 @@ import urllib.request
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import market_panel as mp  # noqa: E402
+from learning_loop import capture_existing, save_capture
 from packaging_mining import seconds  # noqa: E402
 
 ANALYTICS = "https://youtubeanalytics.googleapis.com/v2/reports"
@@ -68,7 +69,8 @@ def eligible(videos, per365, per90):
             "all_content_watch_hours_365d_top200": round(all_hours, 1)}
 
 
-def pipeline(production, ledger, now):
+def pipeline(production, ledger, now, observed_privacy=None):
+    observed_privacy = observed_privacy or {}
     rows = []
     for d in sorted(Path(production).glob("pilot-[0-9][0-9][0-9]")):
         if not (d / "schedule.json").exists():
@@ -84,7 +86,9 @@ def pipeline(production, ledger, now):
         rows.append({"pilot": d.name, "publish_at": t.strftime("%Y-%m-%d %H:%M UTC"),
                      "rendered": bool(man), "qa": qa.get("status") if qa.get("output_sha256") == sha else None,
                      "review": rev.get("status") if current else None,
-                     "published": "video_id" in ledger.get("entries", {}).get(f"{d.name}:{sha}", {}),
+                     "uploaded": "video_id" in ledger.get("entries", {}).get(f"{d.name}:{sha}", {}),
+                     "published": (observed_privacy[ledger['entries'][f'{d.name}:{sha}']['video_id']]=='public')
+                         if ledger.get('entries',{}).get(f'{d.name}:{sha}',{}).get('video_id') in observed_privacy else None,
                      "title": json.loads((d / "script.json").read_text()).get("working_title") if (d / "script.json").exists() else None})
     ahead = [r for r in rows if datetime.strptime(r["publish_at"], "%Y-%m-%d %H:%M UTC").replace(tzinfo=timezone.utc) > now]
     last = max((datetime.strptime(r["publish_at"], "%Y-%m-%d %H:%M UTC") for r in ahead), default=None)
@@ -108,6 +112,9 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
                "short": seconds(v["contentDetails"]["duration"]) <= 180}
               for v in public]
     a = {"status": "UNAVAILABLE (the credential lacks the yt-analytics.readonly scope)"}
+    captured_per = {}; captured_status = 'UNAVAILABLE'
+    end = now.date().isoformat()
+    range_start = (now.date() - timedelta(days=365)).isoformat()
     try:
         end = now.date().isoformat()
         tot = analytics(token, (now.date() - timedelta(days=365)).isoformat(), end,
@@ -117,11 +124,13 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
              "average_view_percentage": r[3]}
         per, method = per_video(token, (now.date() - timedelta(days=365)).isoformat(), end,
                                 "estimatedMinutesWatched,views,averageViewPercentage,subscribersGained")
+        captured_per = per; captured_status = 'OBSERVED'
         a["per_video"] = {k: {"watch_hours": round(r[1] / 60, 1), "views": r[2], "average_view_percentage": round(r[3], 1),
                               "subscribers_gained": r[4], "content_type": r[0]} for k, r in per.items()}
         per90, _ = per_video(token, (now.date() - timedelta(days=90)).isoformat(), end, "views")
         a["eligible_estimate"] = {**eligible(videos, per, per90), "classification": method}
     except Exception as e:
+        if captured_status != 'OBSERVED': captured_status = 'ERROR'
         a["error"] = type(e).__name__
     subs = int(st.get("subscriberCount", 0))
     day = (now.date() - date.fromisoformat(start)).days + 1
@@ -132,7 +141,7 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
     if est:
         need["watch_hours_per_day"] = round(max(YPP["watch_hours_365d"] - est["public_long_form_watch_hours_365d"], 0) / left, 1)
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
-    rows, runway = pipeline(production, ledger, now)
+    rows, runway = pipeline(production, ledger, now, {v['id']:v['status']['privacyStatus'] for v in vids})
     for v in videos:
         v.update((a.get("per_video") or {}).get(v["id"], {}))
         v["policy_risk_title"] = bool(RISK.search(v["title"]))
@@ -152,6 +161,11 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
               "policy_risk_watch_hours": risk_hours}
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
+    snapshot=capture_existing(vids,captured_per,captured_at=now.isoformat(),start=range_start,end=end,
+                              analytics_status=captured_status)
+    snapshot['data_api_units']=client.units
+    capture_path=save_capture(snapshot,out/'learning')
+    report['learning_capture_path']=str(capture_path)
     (out / f"{now:%Y%m%d}.json").write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n")
     wh = f"{est['public_long_form_watch_hours_365d']} / 4,000" if est else a["status"]
     sv = f"{est['public_shorts_views_90d']:,} / 10,000,000" if est else a["status"]
@@ -169,9 +183,9 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
           f"- Public videos [official]: {len(videos)}; total channel views {int(st.get('viewCount', 0)):,}", "",
           "## Alerts", *(f"- ⚠ {x}" for x in alerts or ["none"]), "",
           f"## Pipeline (script runway {runway} days)",
-          "| pilot | publishes | rendered | QA | review | published | title |", "|---|---|---|---|---|---|---|",
+          "| pilot | publishes | rendered | QA | review | uploaded | public observed | title |", "|---|---|---|---|---|---|---|---|",
           *(f"| {r['pilot']} | {r['publish_at']} | {'yes' if r['rendered'] else 'no'} | {r['qa'] or '-'} | {r['review'] or '-'} | "
-            f"{'yes' if r['published'] else 'no'} | {r['title'] or ''} |" for r in rows), "",
+            f"{'yes' if r['uploaded'] else 'no'} | {'UNKNOWN' if r['published'] is None else ('yes' if r['published'] else 'no')} | {r['title'] or ''} |" for r in rows), "",
           "## Latest public videos", "| published | views | watch h | avg view % | subs gained | title |", "|---|---|---|---|---|---|",
           *(f"| {v['published']} | {v['views']} | {v.get('watch_hours', '-')} | {v.get('average_view_percentage', '-')} | "
             f"{v.get('subscribers_gained', '-')} | {v['title'][:70]} |" for v in report["videos"][:12]), "",
