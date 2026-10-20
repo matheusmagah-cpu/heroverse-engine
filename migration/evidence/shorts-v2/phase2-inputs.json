@@ -1,0 +1,137 @@
+{
+  "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
+  "source_sha256": {
+    "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a",
+    "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
+    "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"
+  },
+  "plan_sha256": "985852b0df6233f4155a1eded16de5c8b9e2605ddc1b7f553cea8a3581c58b2b",
+  "expected_assets": {
+    "voice": {
+      "asset": "pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac",
+      "sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc"
+    },
+    "music": {
+      "asset": "original-rest-music.lossless.flac",
+      "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c"
+    },
+    "images": [
+      {
+        "image_id": "bg-home-sunrise",
+        "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
+        "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+        "nominal_start": 0.0,
+        "nominal_end": 22.153,
+        "motion_profile": "phrase_push_in_v1"
+      },
+      {
+        "image_id": "bg-garden",
+        "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+        "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
+        "nominal_start": 22.153,
+        "nominal_end": 40.312,
+        "motion_profile": "phrase_pan_right_v1"
+      }
+    ]
+  },
+  "downloaded_asset_hashes": null,
+  "downloaded_asset_hashes_reason": "Production workflow has not run yet",
+  "license_sources": [
+    {
+      "model": "FLUX.1-schnell",
+      "license": "Apache-2.0",
+      "url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    },
+    {
+      "model": "SDXL1.0",
+      "license": "CreativeML Open RAIL++-M",
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/462165984030d82259a11f4367a4eed129e94a7b/LICENSE.md"
+    },
+    {
+      "model": "LCM-LoRA-SDXL",
+      "license": "OpenRAIL++",
+      "url": "https://huggingface.co/latent-consistency/lcm-lora-sdxl/blob/a18548dd4956b174ec5b0d78d340c8dae0a129cd/README.md"
+    },
+    {
+      "model": "Real-ESRGAN",
+      "license": "BSD-3-Clause",
+      "url": "https://github.com/xinntao/Real-ESRGAN/blob/master/LICENSE"
+    },
+    {
+      "model": "Kokoro-82M v1.0",
+      "license": "Apache-2.0",
+      "url": "https://huggingface.co/hexgrad/Kokoro-82M"
+    }
+  ],
+  "verified_at": "2026-10-20T17:00:00Z",
+  "image_metadata": {
+    "bg-home-sunrise": {
+      "id": "bg-home-sunrise",
+      "prompt": "cosy family home with warm lit windows at sunrise, garden path and flowers, soft golden morning light, peaceful, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+      "negative": null,
+      "seed": null,
+      "size": [
+        2048,
+        2048
+      ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+      "models": {
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+        }
+      },
+      "seconds": 6.1,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
+      "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6"
+    },
+    "bg-garden": {
+      "id": "bg-garden",
+      "prompt": "quiet garden path with flowers and soft morning light, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+      "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+      "seed": 3005,
+      "steps": 6,
+      "guidance": 1.5,
+      "size": [
+        1344,
+        768
+      ],
+      "models": {
+        "stabilityai/stable-diffusion-xl-base-1.0": {
+          "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+          "license": "openrail++"
+        },
+        "latent-consistency/lcm-lora-sdxl": {
+          "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+          "license": "openrail++"
+        }
+      },
+      "device": "cuda",
+      "seconds": 10.3,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "release_asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+      "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04"
+    }
+  },
+  "source_voice_provenance": {
+    "engine": "Kokoro v1.0",
+    "voice_id": "am_michael",
+    "speed": 0.85,
+    "source": "pilot-005/out/manifest.json",
+    "qualification": "Existing preserved source; no voice cloning or new TTS invoked"
+  },
+  "source_music_provenance": {
+    "engine": "HeroVerse instrumental-v2",
+    "ownership": "Original pipeline-generated instrumental",
+    "source": "pilot-005/out/manifest.json",
+    "qualification": "Existing preserved asset; exact download hash pending"
+  }
+}

@@ -1,0 +1,135 @@
+{
+ "chosen": [
+  {
+   "start": 459.86,
+   "end": 499.672,
+   "hook": "Lord, protect my relationships.",
+   "title": "A Prayer for Peace in Your Relationships",
+   "reference": null,
+   "sentences": [
+    {
+     "segment": "prayer-relationships",
+     "text": "Lord, protect my relationships.",
+     "start": 459.86,
+     "end": 462.527
+    },
+    {
+     "segment": "prayer-relationships",
+     "text": "Guard marriages from coldness and from anything that would divide them.",
+     "start": 462.707,
+     "end": 467.976
+    },
+    {
+     "segment": "prayer-relationships",
+     "text": "Protect friendships from gossip and misunderstanding.",
+     "start": 468.156,
+     "end": 472.316
+    },
+    {
+     "segment": "prayer-relationships",
+     "text": "Where there is tension, bring honest conversations and quick forgiveness.",
+     "start": 472.496,
+     "end": 477.659
+    },
+    {
+     "segment": "prayer-relationships",
+     "text": "Let love win in every home today.",
+     "start": 477.839,
+     "end": 480.633
+    },
+    {
+     "segment": "prayer-words",
+     "text": "Father, set a guard over my mouth today.",
+     "start": 482.013,
+     "end": 485.277
+    },
+    {
+     "segment": "prayer-words",
+     "text": "Protect me from words I would regret:",
+     "start": 485.457,
+     "end": 488.444
+    },
+    {
+     "segment": "prayer-words",
+     "text": "harsh words, careless words, words spoken in anger.",
+     "start": 488.624,
+     "end": 492.955
+    },
+    {
+     "segment": "prayer-words",
+     "text": "Let what I say build people up.",
+     "start": 493.135,
+     "end": 495.503
+    },
+    {
+     "segment": "prayer-words",
+     "text": "Let my words carry your peace into every room I enter.",
+     "start": 495.683,
+     "end": 499.672
+    }
+   ],
+   "segments": [
+    "prayer-relationships",
+    "prayer-words"
+   ],
+   "text": "Lord, protect my relationships. Guard marriages from coldness and from anything that would divide them. Protect friendships from gossip and misunderstanding. Where there is tension, bring honest conversations and quick forgiveness. Let love win in every home today. Father, set a guard over my mouth today. Protect me from words I would regret: harsh words, careless words, words spoken in anger. Let what I say build people up. Let my words carry your peace into every room I enter."
+  }
+ ],
+ "selection_mode": "EDITORIAL_PLAN",
+ "rubric_model": null,
+ "input_sha256": {
+  "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
+  "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a",
+  "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"
+ },
+ "edit_plan": {
+  "version": "shorts-editorial-plan-v1",
+  "source_pilot": "pilot-005",
+  "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
+  "source_sha256": {
+   "script": "c0cf3d5fc0747b5f743d9d0189e9deb4326a124a9769a41d4341b14aa347359a",
+   "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
+   "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"
+  },
+  "voice": {
+   "asset": "pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac",
+   "sha256": "6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc"
+  },
+  "music": {
+   "asset": "original-rest-music.lossless.flac",
+   "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c"
+  },
+  "candidate": {
+   "start": 459.86,
+   "end": 499.672,
+   "hook": "Lord, protect my relationships.",
+   "title": "A Prayer for Peace in Your Relationships",
+   "reference": null
+  },
+  "tail_seconds": 0.5,
+  "transition": {
+   "type": "fade",
+   "seconds": 0.5,
+   "center_seconds": 22.153
+  },
+  "scenes": [
+   {
+    "image_id": "bg-home-sunrise",
+    "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
+    "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+    "nominal_start": 0.0,
+    "nominal_end": 22.153,
+    "motion_profile": "phrase_push_in_v1"
+   },
+   {
+    "image_id": "bg-garden",
+    "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+    "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
+    "nominal_start": 22.153,
+    "nominal_end": 40.312,
+    "motion_profile": "phrase_pan_right_v1"
+   }
+  ],
+  "publish": false
+ }
+}

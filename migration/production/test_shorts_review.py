@@ -203,11 +203,12 @@ class FailureEvidence(OfflineTest):
 
 
 class ReviewIntegration(OfflineTest):
-    def run_main(self, records, *, qa="PASS", review_result=None, review_error=None, key="fake-offline-key", n="3"):
+    def run_main(self, records, *, qa="PASS", qa_effect=None, review_result=None, review_error=None,
+                 key="fake-offline-key", n="3"):
         spec_path = self.root / "shorts.json"
         spec_path.write_text(json.dumps({"shorts": records}))
         with patch.dict(sr.os.environ, {"HERO_GEMINI_API_KEY": key}), \
-                patch.object(sr.shorts_qa, "check", return_value={"status": qa}), \
+                patch.object(sr.shorts_qa, "check", return_value={"status": qa}, side_effect=qa_effect), \
                 patch.object(sr, "review", return_value=review_result, side_effect=review_error) as reviewer, \
                 patch.object(sr, "call", side_effect=AssertionError("PROVIDER_FORBIDDEN")) as provider, \
                 patch.object(sr, "upload", side_effect=AssertionError("UPLOAD_FORBIDDEN")) as upload, \
@@ -230,6 +231,7 @@ class ReviewIntegration(OfflineTest):
         self.assertEqual(record["review"]["status"], "NOT_REVIEWED_ProviderFailure")
         self.assertEqual(record["review"]["error_code"], "HTTP_503_UNAVAILABLE")
         self.assertEqual(record["review"]["output_sha256"], ABC_SHA256)
+        self.assertEqual(record["qa_output_sha256"], ABC_SHA256)
         self.assertEqual(record["review"]["failed_at"], FIXED_TIME.isoformat())
         self.output.write_bytes(b"modified")
         spec, _, _, _ = self.run_main([self.record()], review_error=error)
@@ -269,12 +271,18 @@ class ReviewIntegration(OfflineTest):
 
     def test_missing_output_on_failure_remains_not_reviewed_and_not_publishable(self):
         self.output.unlink()
-        spec, _, _, _ = self.run_main([self.record()], review_error=RuntimeError("file secret-path"))
+        spec, reviewer, provider, upload = self.run_main(
+            [self.record()], qa_effect=AssertionError("QA must not run on unreadable input"),
+            review_error=RuntimeError("file secret-path"))
         record = spec["shorts"][0]
         self.assertFalse(record["publish"])
-        self.assertEqual(record["review"]["status"], "NOT_REVIEWED_RuntimeError")
+        self.assertEqual(record["review"]["status"], "NOT_REVIEWED_FILE_UNREADABLE")
         self.assertIsNone(record["review"]["output_sha256"])
+        self.assertIsNone(record["qa_output_sha256"])
         self.assertEqual(record["review"]["output_hash_error"], "FILE_UNREADABLE")
+        reviewer.assert_not_called()
+        provider.assert_not_called()
+        upload.assert_not_called()
 
     def test_publication_selection_stays_score_ordered_and_capped(self):
         records = [
@@ -285,9 +293,86 @@ class ReviewIntegration(OfflineTest):
         ]
         reviews = [{"status": "PASS", "overall": 9}, {"status": "PASS", "overall": 9},
                    {"status": "FAIL", "overall": 10}, {"status": "PASS", "overall": 8}]
+        for record, verdict in zip(records, reviews):
+            (self.root / record["file"]).write_bytes(b"abc")
+            verdict["output_sha256"] = ABC_SHA256
         spec, reviewer, _, _ = self.run_main(records, review_error=reviews, n="2")
         self.assertEqual(reviewer.call_count, 4)
         self.assertEqual([r["file"] for r in spec["shorts"] if r["publish"]], ["a.mp4", "b.mp4"])
+
+    def test_qa_digest_is_recomputed_instead_of_trusting_record(self):
+        verdict = {"status": "PASS", "overall": 9, "output_sha256": ABC_SHA256}
+        spec, reviewer, _, _ = self.run_main(
+            [self.record(qa_output_sha256="e" * 64)], review_result=verdict)
+        record = spec["shorts"][0]
+        self.assertEqual(record["qa_output_sha256"], ABC_SHA256)
+        self.assertEqual(record["review"]["output_sha256"], ABC_SHA256)
+        self.assertTrue(record["publish"])
+        reviewer.assert_called_once()
+
+    def test_changed_or_unreadable_during_qa_skips_review_and_is_not_bound(self):
+        for unreadable in (False, True):
+            with self.subTest(unreadable=unreadable):
+                self.output.write_bytes(b"abc")
+                def qa(path):
+                    self.output.unlink() if unreadable else self.output.write_bytes(b"changed")
+                    return {"status": "PASS"}
+                spec, reviewer, provider, upload = self.run_main(
+                    [self.record(qa_output_sha256=ABC_SHA256)], qa_effect=qa)
+                record = spec["shorts"][0]
+                self.assertFalse(record["publish"])
+                self.assertIsNone(record["qa_output_sha256"])
+                expected = "FILE_UNREADABLE" if unreadable else "OUTPUT_CHANGED"
+                self.assertEqual(record["review"]["status"], "NOT_REVIEWED_" + expected)
+                self.assertNotIn("overall", record["review"])
+                reviewer.assert_not_called()
+                provider.assert_not_called()
+                upload.assert_not_called()
+
+    def test_change_between_qa_and_review_is_rejected_before_upload(self):
+        original_review = sr.review
+        def changed(path, record, key):
+            self.output.write_bytes(b"changed")
+            return original_review(path, record, key)
+        spec, reviewer, provider, upload = self.run_main([self.record()], review_error=changed)
+        record = spec["shorts"][0]
+        self.assertFalse(record["publish"])
+        self.assertEqual(record["qa_output_sha256"], ABC_SHA256)
+        self.assertEqual(record["review"]["status"], "NOT_REVIEWED_QA_OUTPUT_HASH_MISMATCH")
+        reviewer.assert_called_once()
+        provider.assert_not_called()
+        upload.assert_not_called()
+
+    def test_copied_stale_or_missing_verdict_hash_is_not_rebound(self):
+        for status in ("PASS", "FAIL"):
+            for stale_hash in (None, "e" * 64):
+                with self.subTest(status=status, stale_hash=stale_hash):
+                    copied = {"status": status, "overall": 9}
+                    if stale_hash is not None:
+                        copied["output_sha256"] = stale_hash
+                    before = dict(copied)
+                    spec, reviewer, _, _ = self.run_main([self.record(review=copied)], review_result=copied)
+                    record = spec["shorts"][0]
+                    self.assertFalse(record["publish"])
+                    self.assertEqual(record["review"]["status"], "NOT_REVIEWED_REVIEW_OUTPUT_HASH_MISMATCH")
+                    self.assertEqual(record["qa_output_sha256"], ABC_SHA256)
+                    self.assertEqual(copied, before, "Never stamp a copied verdict with the current digest")
+                    reviewer.assert_called_once()
+
+    def test_output_changed_after_review_does_not_keep_temporary_pass(self):
+        for unreadable in (False, True):
+            with self.subTest(unreadable=unreadable):
+                self.output.write_bytes(b"abc")
+                def changed(path, record, key):
+                    self.output.unlink() if unreadable else self.output.write_bytes(b"changed")
+                    return {"status": "PASS", "overall": 9, "output_sha256": ABC_SHA256}
+                spec, reviewer, _, _ = self.run_main([self.record()], review_error=changed)
+                record = spec["shorts"][0]
+                self.assertFalse(record["publish"])
+                expected = "FILE_UNREADABLE" if unreadable else "QA_OUTPUT_HASH_MISMATCH"
+                self.assertEqual(record["review"]["status"], "NOT_REVIEWED_" + expected)
+                self.assertNotIn("overall", record["review"])
+                reviewer.assert_called_once()
 
     def test_watched_review_calls_only_designated_model_once_and_cleans_up(self):
         uploaded = {"uri": "https://offline.invalid/file", "name": "files/offline"}
@@ -299,6 +384,7 @@ class ReviewIntegration(OfflineTest):
                     patch.object(sr, "request") as cleanup:
                 result = sr.review(self.output, self.record(), "fake-offline-key")
             self.assertEqual(result["status"], expected)
+            self.assertEqual(result["output_sha256"], ABC_SHA256)
             provider.assert_called_once()
             self.assertEqual(provider.call_args.args[2], list(sr.REVIEW_MODELS))
             cleanup.assert_called_once_with(sr.BASE + "/v1beta/files/offline", "fake-offline-key", method="DELETE")
@@ -332,6 +418,102 @@ class ReviewIntegration(OfflineTest):
                                  AST_HASHES[name])
         self.assertEqual((sr.PASS_ITEM, sr.PASS_OVERALL), (7, 8))
         self.assertEqual(sr.REVIEW_MODELS, ("gemini-3.8-flash",))
+
+
+class ReviewBinding(OfflineTest):
+    def verdict(self, score=9):
+        return {**{k: score for k in sr.RUBRIC}, "overall": score, "issues": []}
+
+    def record(self):
+        return {"hook": "You can rest.", "output_sha256": "f" * 64,
+                "review": {"status": "PASS", "output_sha256": "e" * 64, "overall": 10}}
+
+    def exercise_review(self, *, score=9, on_upload=None, on_call=None, on_cleanup=None):
+        def upload(*args):
+            if on_upload:
+                on_upload()
+            return {"uri": "https://offline.invalid/file", "name": "files/offline"}
+
+        def call(*args):
+            if on_call:
+                on_call()
+            return sr.REVIEW_MODELS[0], self.verdict(score)
+
+        with patch.object(sr, "upload", side_effect=upload) as upload_spy, \
+                patch.object(sr, "call", side_effect=call) as provider, \
+                patch.object(sr, "request", side_effect=on_cleanup) as cleanup:
+            result = sr.review(self.output, self.record(), "fake-offline-key")
+        return result, upload_spy, provider, cleanup
+
+    def assert_unbound(self, result, reason, digest):
+        self.assertEqual(result["status"], f"NOT_REVIEWED_{reason}")
+        self.assertFalse(result["publish"])
+        self.assertEqual(result["output_sha256"], digest)
+        self.assertEqual(result["failed_at"], FIXED_TIME.isoformat())
+        self.assertNotIn("overall", result)
+        self.assertNotIn("model", result)
+        self.assertFalse(set(sr.RUBRIC) & set(result))
+
+    def test_fresh_pass_and_fail_bind_actual_bytes_not_record_supplied_hash(self):
+        for score, status in ((9, "PASS"), (6, "FAIL")):
+            with self.subTest(status=status):
+                result, upload, provider, cleanup = self.exercise_review(score=score)
+                self.assertEqual(result["status"], status)
+                self.assertEqual(result["output_sha256"], ABC_SHA256)
+                self.assertEqual(result["model"], sr.REVIEW_MODELS[0])
+                upload.assert_called_once()
+                provider.assert_called_once()
+                cleanup.assert_called_once()
+        self.assertEqual(self.record()["review"]["output_sha256"], "e" * 64)
+
+    def test_altered_during_upload_skips_provider_and_cleans_up(self):
+        result, upload, provider, cleanup = self.exercise_review(on_upload=lambda: self.output.write_bytes(b"changed"))
+        self.assert_unbound(result, "OUTPUT_CHANGED", hashlib.sha256(b"changed").hexdigest())
+        upload.assert_called_once()
+        provider.assert_not_called()
+        cleanup.assert_called_once()
+
+    def test_altered_during_provider_cannot_return_pass_or_fail_and_never_retries(self):
+        for score in (9, 6):
+            with self.subTest(score=score):
+                self.output.write_bytes(b"abc")
+                result, upload, provider, cleanup = self.exercise_review(
+                    score=score, on_call=lambda: self.output.write_bytes(b"changed"))
+                self.assert_unbound(result, "OUTPUT_CHANGED", hashlib.sha256(b"changed").hexdigest())
+                upload.assert_called_once()
+                provider.assert_called_once()
+                cleanup.assert_called_once()
+
+    def test_altered_during_cleanup_cannot_return_editorial_verdict(self):
+        result, _, provider, cleanup = self.exercise_review(
+            on_cleanup=lambda *args, **kwargs: self.output.write_bytes(b"changed"))
+        self.assert_unbound(result, "OUTPUT_CHANGED", hashlib.sha256(b"changed").hexdigest())
+        provider.assert_called_once()
+        cleanup.assert_called_once()
+
+    def test_unreadable_before_upload_skips_all_remote_actions(self):
+        self.output.unlink()
+        result, upload, provider, cleanup = self.exercise_review()
+        self.assert_unbound(result, "FILE_UNREADABLE", None)
+        self.assertEqual(result["output_hash_error"], "FILE_UNREADABLE")
+        upload.assert_not_called()
+        provider.assert_not_called()
+        cleanup.assert_not_called()
+        self.assertNotIn(str(self.root), json.dumps(result))
+
+    def test_unreadable_during_upload_skips_provider_and_cleans_up(self):
+        result, upload, provider, cleanup = self.exercise_review(on_upload=self.output.unlink)
+        self.assert_unbound(result, "FILE_UNREADABLE", None)
+        upload.assert_called_once()
+        provider.assert_not_called()
+        cleanup.assert_called_once()
+
+    def test_unreadable_after_provider_cannot_return_editorial_verdict(self):
+        result, upload, provider, cleanup = self.exercise_review(on_call=self.output.unlink)
+        self.assert_unbound(result, "FILE_UNREADABLE", None)
+        upload.assert_called_once()
+        provider.assert_called_once()
+        cleanup.assert_called_once()
 
 
 if __name__ == "__main__":
