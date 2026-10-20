@@ -136,3 +136,10 @@ predict how fast HeroVerse reaches YPP.
 - **Estimate (vidIQ title score, informative only, never blocks):** pilot-008 87 · pilot-009 82 · pilot-010 84 · pilot-011 80 (`production/pilot-0NN/market/vidiq.json`).
 - **Gates:** pilot-007 approved (watched review 9.0, `gemini-3.8-flash`), uploaded for 2026-10-21 10:00 UTC. pilot-006 GATE FAIL on `authenticity / no_template_image_set` (0.529 vs pilot-012; limit 0.5, not loosened). The same check finds identical background sets in 008 = 010 = 012 and 009 = 011, so all would fail. Data fix #225 and antidote E30 #226 (check moved to `script_check`).
 - **Learning loop:** `learning/latest.json` decision HOLD / INSUFFICIENT (no exact 48 h checkpoint, no matched baseline). No strategy change today; the 90 % rule is not met by any new evidence.
+
+## Cross-platform and the YPP 2027 deadline (2026-10-20)
+- Evidence: `evidence/research/cross-platform-20261020.md`, where each claim is labelled official or third-party.
+- **YouTube changes on 2027-02-01.** The YPP entry bar becomes 8,000 watch hours or 20 M Shorts views, and Shorts-pool revenue then needs ≥ 10 M Shorts views per 90 days. Channels accepted before that date keep their status, so **our 4,000 h goal must be met and applied for before 2027-02-01**.
+- **Facebook Page + Instagram: automatic cross-post of every approved Short ≤ 90 s, plus the long prayers on Facebook.** Facebook monetization is invite-only, but the cost is ≈ 0 through the official Meta APIs. Go/no-go after 30 days on measured reach.
+- **TikTok: not now.** Creator Rewards needs original, ≥ 1 min videos, and AI-generated content may be excluded. The API also needs an audit before any public post.
+- **Snapchat: no.**
