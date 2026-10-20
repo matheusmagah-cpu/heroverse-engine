@@ -1,0 +1,2610 @@
+{
+ "segments": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 8.788
+  },
+  {
+   "id": "invitation",
+   "start": 9.588,
+   "end": 38.176
+  },
+  {
+   "id": "scripture-1",
+   "start": 39.376,
+   "end": 51.424
+  },
+  {
+   "id": "reflection-1",
+   "start": 52.924,
+   "end": 70.196
+  },
+  {
+   "id": "prayer-1",
+   "start": 71.396,
+   "end": 89.491
+  },
+  {
+   "id": "scripture-2",
+   "start": 90.691,
+   "end": 95.543
+  },
+  {
+   "id": "reflection-2",
+   "start": 97.043,
+   "end": 113.092
+  },
+  {
+   "id": "prayer-body",
+   "start": 114.292,
+   "end": 136.705
+  },
+  {
+   "id": "scripture-3",
+   "start": 137.905,
+   "end": 145.455
+  },
+  {
+   "id": "reflection-3",
+   "start": 146.955,
+   "end": 162.404
+  },
+  {
+   "id": "prayer-doctors",
+   "start": 163.604,
+   "end": 186.243
+  },
+  {
+   "id": "prayer-chronic",
+   "start": 187.443,
+   "end": 208.057
+  },
+  {
+   "id": "stillness",
+   "start": 209.257,
+   "end": 218.98
+  },
+  {
+   "id": "transition",
+   "start": 220.98,
+   "end": 228.337
+  },
+  {
+   "id": "prayer-heart",
+   "start": 229.837,
+   "end": 248.965
+  },
+  {
+   "id": "scripture-4",
+   "start": 250.165,
+   "end": 262.225
+  },
+  {
+   "id": "reflection-4",
+   "start": 263.725,
+   "end": 280.851
+  },
+  {
+   "id": "prayer-mind",
+   "start": 282.051,
+   "end": 300.539
+  },
+  {
+   "id": "prayer-mental",
+   "start": 301.739,
+   "end": 327.864
+  },
+  {
+   "id": "scripture-5",
+   "start": 329.064,
+   "end": 331.953
+  },
+  {
+   "id": "reflection-5",
+   "start": 333.453,
+   "end": 347.369
+  },
+  {
+   "id": "scripture-6",
+   "start": 348.569,
+   "end": 357.588
+  },
+  {
+   "id": "prayer-weakness",
+   "start": 359.088,
+   "end": 375.305
+  },
+  {
+   "id": "scripture-7",
+   "start": 376.505,
+   "end": 385.207
+  },
+  {
+   "id": "reflection-6",
+   "start": 386.707,
+   "end": 401.497
+  },
+  {
+   "id": "prayer-family",
+   "start": 402.697,
+   "end": 424.471
+  },
+  {
+   "id": "prayer-children",
+   "start": 425.671,
+   "end": 442.775
+  },
+  {
+   "id": "prayer-others",
+   "start": 443.975,
+   "end": 461.856
+  },
+  {
+   "id": "prayer-forgiveness",
+   "start": 463.056,
+   "end": 479.831
+  },
+  {
+   "id": "scripture-12",
+   "start": 481.031,
+   "end": 485.819
+  },
+  {
+   "id": "scripture-8",
+   "start": 487.319,
+   "end": 497.864
+  },
+  {
+   "id": "prayer-thanks",
+   "start": 499.364,
+   "end": 518.129
+  },
+  {
+   "id": "prayer-hospital",
+   "start": 519.329,
+   "end": 540.06
+  },
+  {
+   "id": "prayer-nightshift",
+   "start": 541.26,
+   "end": 554.963
+  },
+  {
+   "id": "prayer-grief",
+   "start": 556.163,
+   "end": 571.828
+  },
+  {
+   "id": "scripture-9",
+   "start": 573.028,
+   "end": 587.349
+  },
+  {
+   "id": "reflection-7",
+   "start": 588.849,
+   "end": 604.353
+  },
+  {
+   "id": "reflection-cried",
+   "start": 605.553,
+   "end": 621.283
+  },
+  {
+   "id": "scripture-10",
+   "start": 622.483,
+   "end": 631.409
+  },
+  {
+   "id": "prayer-trust",
+   "start": 632.909,
+   "end": 648.02
+  },
+  {
+   "id": "prayer-hope",
+   "start": 649.22,
+   "end": 664.821
+  },
+  {
+   "id": "prayer-sleep",
+   "start": 666.021,
+   "end": 685.673
+  },
+  {
+   "id": "prayer-surrender",
+   "start": 686.873,
+   "end": 700.649
+  },
+  {
+   "id": "stillness-2",
+   "start": 701.849,
+   "end": 710.335
+  },
+  {
+   "id": "declaration",
+   "start": 712.335,
+   "end": 730.737
+  },
+  {
+   "id": "scripture-11",
+   "start": 732.237,
+   "end": 738.665
+  },
+  {
+   "id": "reflection-sustained",
+   "start": 740.165,
+   "end": 758.995
+  },
+  {
+   "id": "payoff",
+   "start": 760.195,
+   "end": 773.971
+  },
+  {
+   "id": "cta",
+   "start": 775.171,
+   "end": 796.447
+  },
+  {
+   "id": "sleep-relax-1",
+   "start": 798.447,
+   "end": 819.601
+  },
+  {
+   "id": "sleep-relax-2",
+   "start": 820.801,
+   "end": 837.967
+  },
+  {
+   "id": "sleep-relax-3",
+   "start": 839.167,
+   "end": 856.271
+  },
+  {
+   "id": "sleep-relax-4",
+   "start": 857.471,
+   "end": 874.925
+  },
+  {
+   "id": "sleep-psalm-103",
+   "start": 876.125,
+   "end": 949.467
+  },
+  {
+   "id": "sleep-reflect-103",
+   "start": 950.667,
+   "end": 963.793
+  },
+  {
+   "id": "sleep-psalm-23",
+   "start": 964.993,
+   "end": 1014.425
+  },
+  {
+   "id": "sleep-reflect-23",
+   "start": 1015.625,
+   "end": 1027.771
+  },
+  {
+   "id": "sleep-psalm-46",
+   "start": 1028.971,
+   "end": 1063.191
+  },
+  {
+   "id": "sleep-reflect-46",
+   "start": 1064.391,
+   "end": 1079.617
+  },
+  {
+   "id": "sleep-stillness-1",
+   "start": 1080.817,
+   "end": 1086.435
+  },
+  {
+   "id": "sleep-isaiah-43",
+   "start": 1088.435,
+   "end": 1119.007
+  },
+  {
+   "id": "sleep-reflect-43",
+   "start": 1120.207,
+   "end": 1136.028
+  },
+  {
+   "id": "sleep-2cor-4",
+   "start": 1137.228,
+   "end": 1167.62
+  },
+  {
+   "id": "sleep-reflect-2cor",
+   "start": 1168.82,
+   "end": 1183.035
+  },
+  {
+   "id": "sleep-psalm-27",
+   "start": 1184.235,
+   "end": 1199.696
+  },
+  {
+   "id": "sleep-reflect-27",
+   "start": 1200.896,
+   "end": 1215.995
+  },
+  {
+   "id": "sleep-psalm-34",
+   "start": 1217.195,
+   "end": 1236.889
+  },
+  {
+   "id": "sleep-reflect-34",
+   "start": 1238.089,
+   "end": 1250.341
+  },
+  {
+   "id": "sleep-stillness-2",
+   "start": 1251.541,
+   "end": 1257.244
+  },
+  {
+   "id": "sleep-psalm-121",
+   "start": 1259.244,
+   "end": 1302.803
+  },
+  {
+   "id": "sleep-reflect-121",
+   "start": 1304.003,
+   "end": 1316.648
+  },
+  {
+   "id": "sleep-philippians-4",
+   "start": 1317.848,
+   "end": 1335.796
+  },
+  {
+   "id": "sleep-reflect-phil",
+   "start": 1336.996,
+   "end": 1348.108
+  },
+  {
+   "id": "sleep-isaiah-26",
+   "start": 1349.308,
+   "end": 1363.639
+  },
+  {
+   "id": "sleep-reflect-26",
+   "start": 1364.839,
+   "end": 1379.724
+  },
+  {
+   "id": "sleep-psalm-147",
+   "start": 1380.924,
+   "end": 1397.696
+  },
+  {
+   "id": "sleep-reflect-147",
+   "start": 1398.896,
+   "end": 1417.548
+  },
+  {
+   "id": "sleep-psalm-3",
+   "start": 1418.748,
+   "end": 1437.897
+  },
+  {
+   "id": "sleep-reflect-3",
+   "start": 1439.097,
+   "end": 1452.084
+  },
+  {
+   "id": "sleep-psalm-91",
+   "start": 1453.284,
+   "end": 1496.397
+  },
+  {
+   "id": "sleep-prayer-final",
+   "start": 1497.597,
+   "end": 1512.867
+  },
+  {
+   "id": "blessing",
+   "start": 1514.067,
+   "end": 1530.467
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Good evening.",
+   "start": 0.3,
+   "end": 1.665
+  },
+  {
+   "segment": "hook",
+   "text": "Bring every pain, of body or heart, to God tonight, and rest in his care while you sleep.",
+   "start": 1.845,
+   "end": 8.608
+  },
+  {
+   "segment": "invitation",
+   "text": "If your body is hurting, or your heart is, stay with me for the next few minutes.",
+   "start": 9.588,
+   "end": 15.561
+  },
+  {
+   "segment": "invitation",
+   "text": "Take one slow breath with me.",
+   "start": 15.741,
+   "end": 18.216
+  },
+  {
+   "segment": "invitation",
+   "text": "Lie down and let the bed hold your weight.",
+   "start": 18.396,
+   "end": 21.703
+  },
+  {
+   "segment": "invitation",
+   "text": "Let your hands rest, your jaw soften, your breathing slow.",
+   "start": 21.883,
+   "end": 26.235
+  },
+  {
+   "segment": "invitation",
+   "text": "You may be tired of being sick, tired of waiting for results, tired of carrying sorrow.",
+   "start": 26.415,
+   "end": 33.156
+  },
+  {
+   "segment": "invitation",
+   "text": "Bring all of it here.",
+   "start": 33.336,
+   "end": 35.149
+  },
+  {
+   "segment": "invitation",
+   "text": "You do not have to be strong tonight.",
+   "start": 35.329,
+   "end": 37.996
+  },
+  {
+   "segment": "scripture-1",
+   "text": "The prophet Jeremiah prayed this simple prayer.",
+   "start": 39.376,
+   "end": 42.789
+  },
+  {
+   "segment": "scripture-1",
+   "text": "Heal me, O LORD, and I shall be healed;",
+   "start": 42.969,
+   "end": 46.191
+  },
+  {
+   "segment": "scripture-1",
+   "text": "save me, and I shall be saved:",
+   "start": 46.371,
+   "end": 48.781
+  },
+  {
+   "segment": "scripture-1",
+   "text": "for thou art my praise.",
+   "start": 48.961,
+   "end": 51.244
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Jeremiah's prayer is short and honest.",
+   "start": 52.924,
+   "end": 56.017
+  },
+  {
+   "segment": "reflection-1",
+   "text": "He does not explain or perform.",
+   "start": 56.197,
+   "end": 58.864
+  },
+  {
+   "segment": "reflection-1",
+   "text": "He simply asks.",
+   "start": 59.044,
+   "end": 60.772
+  },
+  {
+   "segment": "reflection-1",
+   "text": "Tonight you can pray the same way.",
+   "start": 60.952,
+   "end": 63.619
+  },
+  {
+   "segment": "reflection-1",
+   "text": "You do not need the right words.",
+   "start": 63.799,
+   "end": 66.337
+  },
+  {
+   "segment": "reflection-1",
+   "text": "You only need to bring yourself to the One who heals.",
+   "start": 66.517,
+   "end": 70.016
+  },
+  {
+   "segment": "prayer-1",
+   "text": "So let us pray.",
+   "start": 71.396,
+   "end": 73.124
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Lord, here I am at the end of this day, with my body and my heart just as they are.",
+   "start": 73.304,
+   "end": 79.533
+  },
+  {
+   "segment": "prayer-1",
+   "text": "You know every ache, every symptom, every fear I have not said out loud.",
+   "start": 79.713,
+   "end": 85.431
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Heal me, O Lord.",
+   "start": 85.611,
+   "end": 87.552
+  },
+  {
+   "segment": "prayer-1",
+   "text": "Hold me tonight.",
+   "start": 87.732,
+   "end": 89.311
+  },
+  {
+   "segment": "scripture-2",
+   "text": "He healeth the broken in heart, and bindeth up their wounds.",
+   "start": 90.691,
+   "end": 95.363
+  },
+  {
+   "segment": "reflection-2",
+   "text": "The same psalm says God counts the stars and calls them all by name.",
+   "start": 97.043,
+   "end": 102.376
+  },
+  {
+   "segment": "reflection-2",
+   "text": "And yet he bends down to bind up wounds, like a nurse tending a bandage.",
+   "start": 102.556,
+   "end": 108.145
+  },
+  {
+   "segment": "reflection-2",
+   "text": "The God of the galaxies is gentle with your hurt tonight.",
+   "start": 108.325,
+   "end": 112.912
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Father, I bring you my body.",
+   "start": 114.292,
+   "end": 116.745
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Where there is pain, bring relief.",
+   "start": 116.925,
+   "end": 119.443
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Where there is inflammation, bring calm.",
+   "start": 119.623,
+   "end": 122.673
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Where there is sickness, bring your healing touch.",
+   "start": 122.853,
+   "end": 126.224
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Strengthen my immune system, steady my heart, and restore what is worn out.",
+   "start": 126.404,
+   "end": 132.377
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Let my body rest deeply tonight and heal while I sleep.",
+   "start": 132.557,
+   "end": 136.525
+  },
+  {
+   "segment": "scripture-3",
+   "text": "The LORD will strengthen him upon the bed of languishing:",
+   "start": 137.905,
+   "end": 141.767
+  },
+  {
+   "segment": "scripture-3",
+   "text": "thou wilt make all his bed in his sickness.",
+   "start": 141.947,
+   "end": 145.275
+  },
+  {
+   "segment": "reflection-3",
+   "text": "Thou wilt make all his bed in his sickness.",
+   "start": 146.955,
+   "end": 150.283
+  },
+  {
+   "segment": "reflection-3",
+   "text": "What a tender picture:",
+   "start": 150.463,
+   "end": 152.276
+  },
+  {
+   "segment": "reflection-3",
+   "text": "God himself arranging the pillows, smoothing the sheets for the one who is ill.",
+   "start": 152.456,
+   "end": 157.96
+  },
+  {
+   "segment": "reflection-3",
+   "text": "You are not forgotten in that bed.",
+   "start": 158.14,
+   "end": 160.7
+  },
+  {
+   "segment": "reflection-3",
+   "text": "He is there.",
+   "start": 160.88,
+   "end": 162.224
+  },
+  {
+   "segment": "prayer-doctors",
+   "text": "Lord, I thank you for doctors, nurses, medicine and every person whose work helps us heal.",
+   "start": 163.604,
+   "end": 170.729
+  },
+  {
+   "segment": "prayer-doctors",
+   "text": "Give them wisdom, skill and compassion.",
+   "start": 170.909,
+   "end": 174.045
+  },
+  {
+   "segment": "prayer-doctors",
+   "text": "Guide every decision about treatment.",
+   "start": 174.225,
+   "end": 177.255
+  },
+  {
+   "segment": "prayer-doctors",
+   "text": "Let the medicine work as it should.",
+   "start": 177.435,
+   "end": 180.08
+  },
+  {
+   "segment": "prayer-doctors",
+   "text": "And help me to keep following the care I have been given, trusting you through all of it.",
+   "start": 180.26,
+   "end": 186.063
+  },
+  {
+   "segment": "prayer-chronic",
+   "text": "Father, for those living with an illness that does not go away, the chronic pain, the long treatments, the bodies that never quite feel well, give endurance.",
+   "start": 187.443,
+   "end": 199.069
+  },
+  {
+   "segment": "prayer-chronic",
+   "text": "On the days when hope runs thin, renew it.",
+   "start": 199.249,
+   "end": 202.449
+  },
+  {
+   "segment": "prayer-chronic",
+   "text": "Let them know that their worth is not measured by what their body can do.",
+   "start": 202.629,
+   "end": 207.877
+  },
+  {
+   "segment": "stillness",
+   "text": "Let us be still.",
+   "start": 209.257,
+   "end": 210.9
+  },
+  {
+   "segment": "stillness",
+   "text": "Breathe in slowly.",
+   "start": 211.08,
+   "end": 212.851
+  },
+  {
+   "segment": "stillness",
+   "text": "And breathe out.",
+   "start": 213.031,
+   "end": 214.524
+  },
+  {
+   "segment": "stillness",
+   "text": "Once more, breathe in, and let your body grow heavy.",
+   "start": 214.704,
+   "end": 218.8
+  },
+  {
+   "segment": "transition",
+   "text": "Healing is not only for the body.",
+   "start": 220.98,
+   "end": 223.903
+  },
+  {
+   "segment": "transition",
+   "text": "Let us bring the heart and the mind to God as well.",
+   "start": 224.083,
+   "end": 228.157
+  },
+  {
+   "segment": "prayer-heart",
+   "text": "Father, heal the broken places in my heart.",
+   "start": 229.837,
+   "end": 233.464
+  },
+  {
+   "segment": "prayer-heart",
+   "text": "The losses I still grieve.",
+   "start": 233.644,
+   "end": 235.927
+  },
+  {
+   "segment": "prayer-heart",
+   "text": "The words that wounded me.",
+   "start": 236.107,
+   "end": 238.261
+  },
+  {
+   "segment": "prayer-heart",
+   "text": "The disappointments I never got over.",
+   "start": 238.441,
+   "end": 241.684
+  },
+  {
+   "segment": "prayer-heart",
+   "text": "I do not have to hide them from you.",
+   "start": 241.864,
+   "end": 244.573
+  },
+  {
+   "segment": "prayer-heart",
+   "text": "Bind up these wounds, Lord, the way only you can.",
+   "start": 244.753,
+   "end": 248.785
+  },
+  {
+   "segment": "scripture-4",
+   "text": "But he was wounded for our transgressions, he was bruised for our iniquities:",
+   "start": 250.165,
+   "end": 255.584
+  },
+  {
+   "segment": "scripture-4",
+   "text": "the chastisement of our peace was upon him;",
+   "start": 255.764,
+   "end": 259.476
+  },
+  {
+   "segment": "scripture-4",
+   "text": "and with his stripes we are healed.",
+   "start": 259.656,
+   "end": 262.045
+  },
+  {
+   "segment": "reflection-4",
+   "text": "Before Jesus ever healed anyone, he chose to be wounded himself.",
+   "start": 263.725,
+   "end": 268.995
+  },
+  {
+   "segment": "reflection-4",
+   "text": "He knows pain from the inside.",
+   "start": 269.175,
+   "end": 271.628
+  },
+  {
+   "segment": "reflection-4",
+   "text": "So when you bring him your pain tonight, you are not bringing it to someone distant.",
+   "start": 271.808,
+   "end": 277.248
+  },
+  {
+   "segment": "reflection-4",
+   "text": "You are bringing it to someone who understands.",
+   "start": 277.428,
+   "end": 280.671
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Lord, heal my anxious mind.",
+   "start": 282.051,
+   "end": 284.461
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Quiet the questions that run in circles.",
+   "start": 284.641,
+   "end": 287.692
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "What if the results are bad?",
+   "start": 287.872,
+   "end": 290.112
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "What if it does not get better?",
+   "start": 290.292,
+   "end": 292.575
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "I give you every what if.",
+   "start": 292.755,
+   "end": 294.888
+  },
+  {
+   "segment": "prayer-mind",
+   "text": "Replace my fear with your peace, and let my mind rest in you tonight.",
+   "start": 295.068,
+   "end": 300.359
+  },
+  {
+   "segment": "prayer-mental",
+   "text": "Lord, I pray for every mind that is tired and heavy tonight.",
+   "start": 301.739,
+   "end": 306.133
+  },
+  {
+   "segment": "prayer-mental",
+   "text": "For depression that makes mornings hard.",
+   "start": 306.313,
+   "end": 309.385
+  },
+  {
+   "segment": "prayer-mental",
+   "text": "For anxiety that tightens the chest.",
+   "start": 309.565,
+   "end": 312.445
+  },
+  {
+   "segment": "prayer-mental",
+   "text": "For thoughts that feel too dark to say out loud.",
+   "start": 312.625,
+   "end": 316.081
+  },
+  {
+   "segment": "prayer-mental",
+   "text": "Bring light into those places.",
+   "start": 316.261,
+   "end": 318.736
+  },
+  {
+   "segment": "prayer-mental",
+   "text": "Lead each person to the help they need, the friend, the counsellor, the doctor, and let them never feel ashamed to ask.",
+   "start": 318.916,
+   "end": 327.684
+  },
+  {
+   "segment": "scripture-5",
+   "text": "Be still, and know that I am God.",
+   "start": 329.064,
+   "end": 331.773
+  },
+  {
+   "segment": "reflection-5",
+   "text": "Be still.",
+   "start": 333.453,
+   "end": 334.605
+  },
+  {
+   "segment": "reflection-5",
+   "text": "Not because nothing is happening, but because God is still God, even in the dark, even in the hospital, even in the waiting.",
+   "start": 334.785,
+   "end": 343.895
+  },
+  {
+   "segment": "reflection-5",
+   "text": "Your stillness tonight is an act of trust.",
+   "start": 344.075,
+   "end": 347.189
+  },
+  {
+   "segment": "scripture-6",
+   "text": "Have mercy upon me, O LORD;",
+   "start": 348.569,
+   "end": 351.321
+  },
+  {
+   "segment": "scripture-6",
+   "text": "for I am weak:",
+   "start": 351.501,
+   "end": 353.08
+  },
+  {
+   "segment": "scripture-6",
+   "text": "O LORD, heal me;",
+   "start": 353.26,
+   "end": 355.031
+  },
+  {
+   "segment": "scripture-6",
+   "text": "for my bones are vexed.",
+   "start": 355.211,
+   "end": 357.408
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "Father, like David, I admit that I am weak.",
+   "start": 359.088,
+   "end": 362.907
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "I have run out of my own strength.",
+   "start": 363.087,
+   "end": 365.689
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "Have mercy on me.",
+   "start": 365.869,
+   "end": 367.725
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "Meet me in the weakness.",
+   "start": 367.905,
+   "end": 369.889
+  },
+  {
+   "segment": "prayer-weakness",
+   "text": "Carry me where I cannot walk, and give me the strength to face tomorrow.",
+   "start": 370.069,
+   "end": 375.125
+  },
+  {
+   "segment": "scripture-7",
+   "text": "For which cause we faint not;",
+   "start": 376.505,
+   "end": 378.873
+  },
+  {
+   "segment": "scripture-7",
+   "text": "but though our outward man perish, yet the inward man is renewed day by day.",
+   "start": 379.053,
+   "end": 385.027
+  },
+  {
+   "segment": "reflection-6",
+   "text": "Even when the body is struggling, something deeper can be renewed:",
+   "start": 386.707,
+   "end": 391.336
+  },
+  {
+   "segment": "reflection-6",
+   "text": "your hope, your faith, your sense that you are loved.",
+   "start": 391.516,
+   "end": 395.313
+  },
+  {
+   "segment": "reflection-6",
+   "text": "God is at work on the inside of you tonight, whatever the outside feels like.",
+   "start": 395.493,
+   "end": 401.317
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Lord, I pray for everyone who cares for someone who is sick.",
+   "start": 402.697,
+   "end": 406.964
+  },
+  {
+   "segment": "prayer-family",
+   "text": "The parents beside a child's bed.",
+   "start": 407.144,
+   "end": 409.896
+  },
+  {
+   "segment": "prayer-family",
+   "text": "The husband or wife who has not slept well in weeks.",
+   "start": 410.076,
+   "end": 413.98
+  },
+  {
+   "segment": "prayer-family",
+   "text": "The children caring for aging parents.",
+   "start": 414.16,
+   "end": 417.104
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Give them strength, patience and rest.",
+   "start": 417.284,
+   "end": 420.121
+  },
+  {
+   "segment": "prayer-family",
+   "text": "Let them know that what they do is seen and treasured by you.",
+   "start": 420.301,
+   "end": 424.291
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Father, I lift up every sick child tonight, and every parent who is afraid for them.",
+   "start": 425.671,
+   "end": 431.857
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Hold these little ones close.",
+   "start": 432.037,
+   "end": 434.213
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Ease their fever, calm their fear, and bring them back to playing and laughing.",
+   "start": 434.393,
+   "end": 439.897
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Give their parents peace and sleep.",
+   "start": 440.077,
+   "end": 442.595
+  },
+  {
+   "segment": "prayer-others",
+   "text": "Father, I lift up the people I know who are ill tonight.",
+   "start": 443.975,
+   "end": 448.113
+  },
+  {
+   "segment": "prayer-others",
+   "text": "I bring their names to you now, quietly.",
+   "start": 448.293,
+   "end": 451.429
+  },
+  {
+   "segment": "prayer-others",
+   "text": "Heal them.",
+   "start": 451.609,
+   "end": 452.932
+  },
+  {
+   "segment": "prayer-others",
+   "text": "Comfort them.",
+   "start": 453.112,
+   "end": 454.499
+  },
+  {
+   "segment": "prayer-others",
+   "text": "Surround them with people who love them, and let them feel your presence in the long hours of the night.",
+   "start": 454.679,
+   "end": 461.676
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Lord, if bitterness or unforgiveness is weighing on me, I bring it to you as well.",
+   "start": 463.056,
+   "end": 469.051
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Some wounds stay open because I keep holding them.",
+   "start": 469.231,
+   "end": 473.049
+  },
+  {
+   "segment": "prayer-forgiveness",
+   "text": "Help me to forgive, and to receive your forgiveness, so that my heart can heal tonight too.",
+   "start": 473.229,
+   "end": 479.651
+  },
+  {
+   "segment": "scripture-12",
+   "text": "O LORD my God, I cried unto thee, and thou hast healed me.",
+   "start": 481.031,
+   "end": 485.639
+  },
+  {
+   "segment": "scripture-8",
+   "text": "Bless the LORD, O my soul, and forget not all his benefits:",
+   "start": 487.319,
+   "end": 492.012
+  },
+  {
+   "segment": "scripture-8",
+   "text": "Who forgiveth all thine iniquities;",
+   "start": 492.192,
+   "end": 494.816
+  },
+  {
+   "segment": "scripture-8",
+   "text": "who healeth all thy diseases.",
+   "start": 494.996,
+   "end": 497.684
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "Thank you, Lord, for every healing I have already received.",
+   "start": 499.364,
+   "end": 503.865
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "The sicknesses that passed.",
+   "start": 504.045,
+   "end": 506.179
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "The wounds that closed.",
+   "start": 506.359,
+   "end": 508.385
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "The sorrows that lifted.",
+   "start": 508.565,
+   "end": 510.72
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "I will not forget your benefits.",
+   "start": 510.9,
+   "end": 513.396
+  },
+  {
+   "segment": "prayer-thanks",
+   "text": "You have been good to me, and I trust you to be good to me tonight.",
+   "start": 513.576,
+   "end": 517.949
+  },
+  {
+   "segment": "prayer-hospital",
+   "text": "Father, I pray for everyone in a hospital bed tonight.",
+   "start": 519.329,
+   "end": 523.425
+  },
+  {
+   "segment": "prayer-hospital",
+   "text": "For those waiting for surgery, those in pain, those far from home, those afraid of what the doctors will say.",
+   "start": 523.605,
+   "end": 532.181
+  },
+  {
+   "segment": "prayer-hospital",
+   "text": "Sit beside each of them.",
+   "start": 532.361,
+   "end": 534.516
+  },
+  {
+   "segment": "prayer-hospital",
+   "text": "Let the beeping machines and the long corridors be filled with your peace.",
+   "start": 534.696,
+   "end": 539.88
+  },
+  {
+   "segment": "prayer-nightshift",
+   "text": "And Lord, bless the nurses, doctors and carers working through this night.",
+   "start": 541.26,
+   "end": 546.615
+  },
+  {
+   "segment": "prayer-nightshift",
+   "text": "Keep them alert, kind and safe.",
+   "start": 546.795,
+   "end": 549.547
+  },
+  {
+   "segment": "prayer-nightshift",
+   "text": "Let their hands bring comfort, and refresh them when their shift is over.",
+   "start": 549.727,
+   "end": 554.783
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "And Father, for anyone who is grieving tonight, especially for someone they could not save, hold them close.",
+   "start": 556.163,
+   "end": 564.077
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "Heal the ache of loss.",
+   "start": 564.257,
+   "end": 566.177
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "Let them weep without shame, and let them feel that you are weeping with them.",
+   "start": 566.357,
+   "end": 571.648
+  },
+  {
+   "segment": "scripture-9",
+   "text": "And God shall wipe away all tears from their eyes;",
+   "start": 573.028,
+   "end": 576.847
+  },
+  {
+   "segment": "scripture-9",
+   "text": "and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain:",
+   "start": 577.027,
+   "end": 584.195
+  },
+  {
+   "segment": "scripture-9",
+   "text": "for the former things are passed away.",
+   "start": 584.375,
+   "end": 587.169
+  },
+  {
+   "segment": "reflection-7",
+   "text": "This is the promise beneath every other promise.",
+   "start": 588.849,
+   "end": 592.412
+  },
+  {
+   "segment": "reflection-7",
+   "text": "One day God himself will wipe away every tear.",
+   "start": 592.592,
+   "end": 596.347
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Pain will not have the last word.",
+   "start": 596.527,
+   "end": 599.151
+  },
+  {
+   "segment": "reflection-7",
+   "text": "Whatever healing you receive tonight is a small taste of that day.",
+   "start": 599.331,
+   "end": 604.173
+  },
+  {
+   "segment": "reflection-cried",
+   "text": "O Lord my God, I cried unto thee, and thou hast healed me.",
+   "start": 605.553,
+   "end": 610.161
+  },
+  {
+   "segment": "reflection-cried",
+   "text": "David wrote that looking back on a night he thought he would not survive.",
+   "start": 610.341,
+   "end": 615.312
+  },
+  {
+   "segment": "reflection-cried",
+   "text": "One day you may look back on this night too, and see how God carried you through it.",
+   "start": 615.492,
+   "end": 621.103
+  },
+  {
+   "segment": "scripture-10",
+   "text": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+   "start": 622.483,
+   "end": 631.229
+  },
+  {
+   "segment": "prayer-trust",
+   "text": "Lord, I do not understand everything I am going through.",
+   "start": 632.909,
+   "end": 637.005
+  },
+  {
+   "segment": "prayer-trust",
+   "text": "But I choose to trust that you are working, even here, even now.",
+   "start": 637.185,
+   "end": 642.263
+  },
+  {
+   "segment": "prayer-trust",
+   "text": "Help me to wait with hope, and to see your goodness again in the land of the living.",
+   "start": 642.443,
+   "end": 647.84
+  },
+  {
+   "segment": "prayer-hope",
+   "text": "Father, give me hope for tomorrow.",
+   "start": 649.22,
+   "end": 651.887
+  },
+  {
+   "segment": "prayer-hope",
+   "text": "Not a forced cheerfulness, but a quiet confidence that you are with me, whatever the morning brings.",
+   "start": 652.067,
+   "end": 659.192
+  },
+  {
+   "segment": "prayer-hope",
+   "text": "Let me wake with new strength, and see your mercy again when the sun rises.",
+   "start": 659.372,
+   "end": 664.641
+  },
+  {
+   "segment": "prayer-sleep",
+   "text": "And now, Lord, give me sleep.",
+   "start": 666.021,
+   "end": 668.539
+  },
+  {
+   "segment": "prayer-sleep",
+   "text": "Deep, restoring sleep that lets my body do the healing work you designed it to do.",
+   "start": 668.719,
+   "end": 675.161
+  },
+  {
+   "segment": "prayer-sleep",
+   "text": "If pain wakes me, let me feel your nearness.",
+   "start": 675.341,
+   "end": 678.776
+  },
+  {
+   "segment": "prayer-sleep",
+   "text": "If fear wakes me, let me hear your peace.",
+   "start": 678.956,
+   "end": 682.156
+  },
+  {
+   "segment": "prayer-sleep",
+   "text": "And let me fall asleep again in your arms.",
+   "start": 682.336,
+   "end": 685.493
+  },
+  {
+   "segment": "prayer-surrender",
+   "text": "I surrender my body, my heart and my future to you tonight.",
+   "start": 686.873,
+   "end": 691.588
+  },
+  {
+   "segment": "prayer-surrender",
+   "text": "I do not have to hold everything together.",
+   "start": 691.768,
+   "end": 694.84
+  },
+  {
+   "segment": "prayer-surrender",
+   "text": "You hold me.",
+   "start": 695.02,
+   "end": 696.407
+  },
+  {
+   "segment": "prayer-surrender",
+   "text": "Into your hands I commit my spirit, as I rest.",
+   "start": 696.587,
+   "end": 700.469
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Breathe in again, slowly.",
+   "start": 701.849,
+   "end": 704.047
+  },
+  {
+   "segment": "stillness-2",
+   "text": "And let it out.",
+   "start": 704.227,
+   "end": 705.784
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Let every muscle relax.",
+   "start": 705.964,
+   "end": 708.161
+  },
+  {
+   "segment": "stillness-2",
+   "text": "Let God hold you.",
+   "start": 708.341,
+   "end": 710.155
+  },
+  {
+   "segment": "declaration",
+   "text": "Say these words with me quietly, as you rest.",
+   "start": 712.335,
+   "end": 715.919
+  },
+  {
+   "segment": "declaration",
+   "text": "The Lord is my healer.",
+   "start": 716.099,
+   "end": 718.168
+  },
+  {
+   "segment": "declaration",
+   "text": "He binds up my wounds.",
+   "start": 718.348,
+   "end": 720.545
+  },
+  {
+   "segment": "declaration",
+   "text": "I am not alone in this bed.",
+   "start": 720.725,
+   "end": 723.2
+  },
+  {
+   "segment": "declaration",
+   "text": "My body, my heart and my mind are in his hands.",
+   "start": 723.38,
+   "end": 727.305
+  },
+  {
+   "segment": "declaration",
+   "text": "I will rest tonight, and he will renew me.",
+   "start": 727.485,
+   "end": 730.557
+  },
+  {
+   "segment": "scripture-11",
+   "text": "I laid me down and slept;",
+   "start": 732.237,
+   "end": 734.563
+  },
+  {
+   "segment": "scripture-11",
+   "text": "I awaked;",
+   "start": 734.743,
+   "end": 736.108
+  },
+  {
+   "segment": "scripture-11",
+   "text": "for the LORD sustained me.",
+   "start": 736.288,
+   "end": 738.485
+  },
+  {
+   "segment": "reflection-sustained",
+   "text": "I laid me down and slept;",
+   "start": 740.165,
+   "end": 742.491
+  },
+  {
+   "segment": "reflection-sustained",
+   "text": "I awaked;",
+   "start": 742.671,
+   "end": 744.015
+  },
+  {
+   "segment": "reflection-sustained",
+   "text": "for the Lord sustained me.",
+   "start": 744.195,
+   "end": 746.392
+  },
+  {
+   "segment": "reflection-sustained",
+   "text": "Sleep itself is an act of trust.",
+   "start": 746.572,
+   "end": 749.409
+  },
+  {
+   "segment": "reflection-sustained",
+   "text": "You let go of control for hours, and God keeps your heart beating and your lungs breathing.",
+   "start": 749.589,
+   "end": 756.032
+  },
+  {
+   "segment": "reflection-sustained",
+   "text": "Tonight, he will sustain you again.",
+   "start": 756.212,
+   "end": 758.815
+  },
+  {
+   "segment": "payoff",
+   "text": "Here is one thing to do tonight.",
+   "start": 760.195,
+   "end": 762.861
+  },
+  {
+   "segment": "payoff",
+   "text": "Place your hand where it hurts, or over your heart, and pray just three words:",
+   "start": 763.041,
+   "end": 768.567
+  },
+  {
+   "segment": "payoff",
+   "text": "Lord, heal me.",
+   "start": 768.747,
+   "end": 770.304
+  },
+  {
+   "segment": "payoff",
+   "text": "Then leave it with him, and let yourself sleep.",
+   "start": 770.484,
+   "end": 773.791
+  },
+  {
+   "segment": "cta",
+   "text": "If you prayed this prayer, type amen in the comments now, and if you want, share the name of someone who needs healing, so others can pray too.",
+   "start": 775.171,
+   "end": 785.581
+  },
+  {
+   "segment": "cta",
+   "text": "Then stay right where you are.",
+   "start": 785.761,
+   "end": 788.108
+  },
+  {
+   "segment": "cta",
+   "text": "For the rest of this time, I will read healing Scripture over you slowly, so you can fall asleep in God's care.",
+   "start": 788.288,
+   "end": 796.267
+  },
+  {
+   "segment": "sleep-relax-1",
+   "text": "Let us begin by letting your body settle.",
+   "start": 798.447,
+   "end": 801.775
+  },
+  {
+   "segment": "sleep-relax-1",
+   "text": "Breathe in gently, as deeply as is comfortable for you, and let the breath go slowly.",
+   "start": 801.955,
+   "end": 808.611
+  },
+  {
+   "segment": "sleep-relax-1",
+   "text": "If there is pain, do not fight it.",
+   "start": 808.791,
+   "end": 811.5
+  },
+  {
+   "segment": "sleep-relax-1",
+   "text": "Just notice it, and place it in God's hands.",
+   "start": 811.68,
+   "end": 815.2
+  },
+  {
+   "segment": "sleep-relax-1",
+   "text": "Let your face soften.",
+   "start": 815.38,
+   "end": 817.321
+  },
+  {
+   "segment": "sleep-relax-1",
+   "text": "Let your eyes close.",
+   "start": 817.501,
+   "end": 819.421
+  },
+  {
+   "segment": "sleep-relax-2",
+   "text": "Let your shoulders drop.",
+   "start": 820.801,
+   "end": 822.807
+  },
+  {
+   "segment": "sleep-relax-2",
+   "text": "Let your arms rest heavy at your sides.",
+   "start": 822.987,
+   "end": 825.995
+  },
+  {
+   "segment": "sleep-relax-2",
+   "text": "Let your hands open.",
+   "start": 826.175,
+   "end": 828.095
+  },
+  {
+   "segment": "sleep-relax-2",
+   "text": "Feel the mattress holding you, the pillow supporting your head.",
+   "start": 828.275,
+   "end": 832.733
+  },
+  {
+   "segment": "sleep-relax-2",
+   "text": "You do not have to hold yourself up tonight.",
+   "start": 832.913,
+   "end": 836.177
+  },
+  {
+   "segment": "sleep-relax-2",
+   "text": "You are held.",
+   "start": 836.357,
+   "end": 837.787
+  },
+  {
+   "segment": "sleep-relax-3",
+   "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet.",
+   "start": 839.167,
+   "end": 848.041
+  },
+  {
+   "segment": "sleep-relax-3",
+   "text": "Every part of you is known by the God who made you.",
+   "start": 848.221,
+   "end": 852.211
+  },
+  {
+   "segment": "sleep-relax-3",
+   "text": "Every cell is in his care.",
+   "start": 852.391,
+   "end": 854.588
+  },
+  {
+   "segment": "sleep-relax-3",
+   "text": "Rest now.",
+   "start": 854.768,
+   "end": 856.091
+  },
+  {
+   "segment": "sleep-relax-4",
+   "text": "Now let the day itself go.",
+   "start": 857.471,
+   "end": 859.839
+  },
+  {
+   "segment": "sleep-relax-4",
+   "text": "The appointments, the phone calls, the waiting rooms, the worry.",
+   "start": 860.019,
+   "end": 864.264
+  },
+  {
+   "segment": "sleep-relax-4",
+   "text": "Let each one drift away like a leaf on slow water.",
+   "start": 864.444,
+   "end": 868.455
+  },
+  {
+   "segment": "sleep-relax-4",
+   "text": "There is nothing more you need to do today.",
+   "start": 868.635,
+   "end": 871.664
+  },
+  {
+   "segment": "sleep-relax-4",
+   "text": "Tonight, your only task is to rest.",
+   "start": 871.844,
+   "end": 874.745
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "Listen to this psalm of healing and mercy.",
+   "start": 876.125,
+   "end": 879.197
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "Bless the LORD, O my soul:",
+   "start": 879.377,
+   "end": 881.724
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "and all that is within me, bless his holy name.",
+   "start": 881.904,
+   "end": 885.552
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "Bless the LORD, O my soul, and forget not all his benefits:",
+   "start": 885.732,
+   "end": 890.425
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "Who forgiveth all thine iniquities;",
+   "start": 890.605,
+   "end": 893.229
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "who healeth all thy diseases;",
+   "start": 893.409,
+   "end": 896.097
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "Who redeemeth thy life from destruction;",
+   "start": 896.277,
+   "end": 899.349
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "who crowneth thee with lovingkindness and tender mercies;",
+   "start": 899.529,
+   "end": 903.689
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "Who satisfieth thy mouth with good things;",
+   "start": 903.869,
+   "end": 907.069
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "so that thy youth is renewed like the eagle's.",
+   "start": 907.249,
+   "end": 910.727
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "The LORD is merciful and gracious, slow to anger, and plenteous in mercy.",
+   "start": 910.907,
+   "end": 916.944
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "He will not always chide:",
+   "start": 917.124,
+   "end": 919.343
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "neither will he keep his anger for ever.",
+   "start": 919.523,
+   "end": 922.595
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "He hath not dealt with us after our sins;",
+   "start": 922.775,
+   "end": 925.953
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "nor rewarded us according to our iniquities.",
+   "start": 926.133,
+   "end": 929.675
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "For as the heaven is high above the earth, so great is his mercy toward them that fear him.",
+   "start": 929.855,
+   "end": 936.767
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "As far as the east is from the west, so far hath he removed our transgressions from us.",
+   "start": 936.947,
+   "end": 943.368
+  },
+  {
+   "segment": "sleep-psalm-103",
+   "text": "Like as a father pitieth his children, so the LORD pitieth them that fear him.",
+   "start": 943.548,
+   "end": 949.287
+  },
+  {
+   "segment": "sleep-reflect-103",
+   "text": "Like as a father pitieth his children.",
+   "start": 950.667,
+   "end": 953.611
+  },
+  {
+   "segment": "sleep-reflect-103",
+   "text": "Think of a loving father sitting beside a sick child's bed at night, watching, caring, staying.",
+   "start": 953.791,
+   "end": 960.66
+  },
+  {
+   "segment": "sleep-reflect-103",
+   "text": "That is how God is with you tonight.",
+   "start": 960.84,
+   "end": 963.613
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "The LORD is my shepherd;",
+   "start": 964.993,
+   "end": 966.999
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "I shall not want.",
+   "start": 967.179,
+   "end": 968.885
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "He maketh me to lie down in green pastures:",
+   "start": 969.065,
+   "end": 972.543
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "he leadeth me beside the still waters.",
+   "start": 972.723,
+   "end": 975.731
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "He restoreth my soul:",
+   "start": 975.911,
+   "end": 978.044
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "he leadeth me in the paths of righteousness for his name's sake.",
+   "start": 978.224,
+   "end": 983.173
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil:",
+   "start": 983.353,
+   "end": 989.092
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "for thou art with me;",
+   "start": 989.272,
+   "end": 991.363
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "thy rod and thy staff they comfort me.",
+   "start": 991.543,
+   "end": 994.636
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "Thou preparest a table before me in the presence of mine enemies:",
+   "start": 994.816,
+   "end": 1000.0
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "thou anointest my head with oil;",
+   "start": 1000.18,
+   "end": 1002.889
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "my cup runneth over.",
+   "start": 1003.069,
+   "end": 1004.947
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "Surely goodness and mercy shall follow me all the days of my life:",
+   "start": 1005.127,
+   "end": 1010.396
+  },
+  {
+   "segment": "sleep-psalm-23",
+   "text": "and I will dwell in the house of the LORD for ever.",
+   "start": 1010.576,
+   "end": 1014.245
+  },
+  {
+   "segment": "sleep-reflect-23",
+   "text": "He restoreth my soul.",
+   "start": 1015.625,
+   "end": 1017.737
+  },
+  {
+   "segment": "sleep-reflect-23",
+   "text": "Restoring is slow, quiet work, the kind that often happens while we sleep.",
+   "start": 1017.917,
+   "end": 1023.763
+  },
+  {
+   "segment": "sleep-reflect-23",
+   "text": "Let the shepherd do his restoring work in you tonight.",
+   "start": 1023.943,
+   "end": 1027.591
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "text": "God is our refuge and strength, a very present help in trouble.",
+   "start": 1028.971,
+   "end": 1034.048
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "text": "Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea;",
+   "start": 1034.228,
+   "end": 1042.484
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "text": "Though the waters thereof roar and be troubled, though the mountains shake with the swelling thereof.",
+   "start": 1042.664,
+   "end": 1049.128
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "text": "Be still, and know that I am God:",
+   "start": 1049.308,
+   "end": 1051.975
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "text": "I will be exalted among the heathen, I will be exalted in the earth.",
+   "start": 1052.155,
+   "end": 1057.381
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "text": "The LORD of hosts is with us;",
+   "start": 1057.561,
+   "end": 1059.908
+  },
+  {
+   "segment": "sleep-psalm-46",
+   "text": "the God of Jacob is our refuge.",
+   "start": 1060.088,
+   "end": 1063.011
+  },
+  {
+   "segment": "sleep-reflect-46",
+   "text": "The Lord of hosts is with us.",
+   "start": 1064.391,
+   "end": 1066.801
+  },
+  {
+   "segment": "sleep-reflect-46",
+   "text": "Even when the body feels fragile and the future uncertain, the God of angel armies is beside your bed.",
+   "start": 1066.981,
+   "end": 1075.515
+  },
+  {
+   "segment": "sleep-reflect-46",
+   "text": "Be still.",
+   "start": 1075.695,
+   "end": 1076.847
+  },
+  {
+   "segment": "sleep-reflect-46",
+   "text": "He is God, and you can rest.",
+   "start": 1077.027,
+   "end": 1079.437
+  },
+  {
+   "segment": "sleep-stillness-1",
+   "text": "Breathe in slowly.",
+   "start": 1080.817,
+   "end": 1082.588
+  },
+  {
+   "segment": "sleep-stillness-1",
+   "text": "And let it go.",
+   "start": 1082.768,
+   "end": 1084.325
+  },
+  {
+   "segment": "sleep-stillness-1",
+   "text": "Rest in the quiet.",
+   "start": 1084.505,
+   "end": 1086.255
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "text": "But now thus saith the LORD that created thee, O Jacob, and he that formed thee, O Israel, Fear not:",
+   "start": 1088.435,
+   "end": 1096.285
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "text": "for I have redeemed thee, I have called thee by thy name;",
+   "start": 1096.465,
+   "end": 1100.775
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "text": "thou art mine.",
+   "start": 1100.955,
+   "end": 1102.597
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "text": "When thou passest through the waters, I will be with thee;",
+   "start": 1102.777,
+   "end": 1106.895
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "text": "and through the rivers, they shall not overflow thee:",
+   "start": 1107.075,
+   "end": 1110.765
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "text": "when thou walkest through the fire, thou shalt not be burned;",
+   "start": 1110.945,
+   "end": 1115.425
+  },
+  {
+   "segment": "sleep-isaiah-43",
+   "text": "neither shall the flame kindle upon thee.",
+   "start": 1115.605,
+   "end": 1118.827
+  },
+  {
+   "segment": "sleep-reflect-43",
+   "text": "When thou passest through the waters, I will be with thee.",
+   "start": 1120.207,
+   "end": 1124.26
+  },
+  {
+   "segment": "sleep-reflect-43",
+   "text": "Illness can feel like deep water.",
+   "start": 1124.44,
+   "end": 1127.149
+  },
+  {
+   "segment": "sleep-reflect-43",
+   "text": "But God does not watch from the shore.",
+   "start": 1127.329,
+   "end": 1130.188
+  },
+  {
+   "segment": "sleep-reflect-43",
+   "text": "He walks through it with you.",
+   "start": 1130.368,
+   "end": 1132.288
+  },
+  {
+   "segment": "sleep-reflect-43",
+   "text": "You are his.",
+   "start": 1132.468,
+   "end": 1133.919
+  },
+  {
+   "segment": "sleep-reflect-43",
+   "text": "He knows your name.",
+   "start": 1134.099,
+   "end": 1135.848
+  },
+  {
+   "segment": "sleep-2cor-4",
+   "text": "For which cause we faint not;",
+   "start": 1137.228,
+   "end": 1139.596
+  },
+  {
+   "segment": "sleep-2cor-4",
+   "text": "but though our outward man perish, yet the inward man is renewed day by day.",
+   "start": 1139.776,
+   "end": 1145.792
+  },
+  {
+   "segment": "sleep-2cor-4",
+   "text": "For our light affliction, which is but for a moment, worketh for us a far more exceeding and eternal weight of glory;",
+   "start": 1145.972,
+   "end": 1154.783
+  },
+  {
+   "segment": "sleep-2cor-4",
+   "text": "While we look not at the things which are seen, but at the things which are not seen:",
+   "start": 1154.963,
+   "end": 1160.637
+  },
+  {
+   "segment": "sleep-2cor-4",
+   "text": "for the things which are seen are temporal;",
+   "start": 1160.817,
+   "end": 1163.825
+  },
+  {
+   "segment": "sleep-2cor-4",
+   "text": "but the things which are not seen are eternal.",
+   "start": 1164.005,
+   "end": 1167.44
+  },
+  {
+   "segment": "sleep-reflect-2cor",
+   "text": "The things which are seen are temporal.",
+   "start": 1168.82,
+   "end": 1171.657
+  },
+  {
+   "segment": "sleep-reflect-2cor",
+   "text": "The pain you feel tonight is real, but it is not the whole story, and it is not forever.",
+   "start": 1171.837,
+   "end": 1178.621
+  },
+  {
+   "segment": "sleep-reflect-2cor",
+   "text": "Beneath it, God is renewing the part of you that lasts.",
+   "start": 1178.801,
+   "end": 1182.855
+  },
+  {
+   "segment": "sleep-psalm-27",
+   "text": "I had fainted, unless I had believed to see the goodness of the LORD in the land of the living.",
+   "start": 1184.235,
+   "end": 1191.147
+  },
+  {
+   "segment": "sleep-psalm-27",
+   "text": "Wait on the LORD:",
+   "start": 1191.327,
+   "end": 1193.119
+  },
+  {
+   "segment": "sleep-psalm-27",
+   "text": "be of good courage, and he shall strengthen thine heart:",
+   "start": 1193.299,
+   "end": 1197.224
+  },
+  {
+   "segment": "sleep-psalm-27",
+   "text": "wait, I say, on the LORD.",
+   "start": 1197.404,
+   "end": 1199.516
+  },
+  {
+   "segment": "sleep-reflect-27",
+   "text": "To see the goodness of the Lord in the land of the living.",
+   "start": 1200.896,
+   "end": 1204.907
+  },
+  {
+   "segment": "sleep-reflect-27",
+   "text": "Not only someday, but here, in this life, in the days ahead.",
+   "start": 1205.087,
+   "end": 1209.673
+  },
+  {
+   "segment": "sleep-reflect-27",
+   "text": "Wait on the Lord tonight, and be of good courage.",
+   "start": 1209.853,
+   "end": 1213.459
+  },
+  {
+   "segment": "sleep-reflect-27",
+   "text": "He will strengthen your heart.",
+   "start": 1213.639,
+   "end": 1215.815
+  },
+  {
+   "segment": "sleep-psalm-34",
+   "text": "I sought the LORD, and he heard me, and delivered me from all my fears.",
+   "start": 1217.195,
+   "end": 1222.507
+  },
+  {
+   "segment": "sleep-psalm-34",
+   "text": "O taste and see that the LORD is good:",
+   "start": 1222.687,
+   "end": 1225.673
+  },
+  {
+   "segment": "sleep-psalm-34",
+   "text": "blessed is the man that trusteth in him.",
+   "start": 1225.853,
+   "end": 1228.776
+  },
+  {
+   "segment": "sleep-psalm-34",
+   "text": "The LORD is nigh unto them that are of a broken heart;",
+   "start": 1228.956,
+   "end": 1232.967
+  },
+  {
+   "segment": "sleep-psalm-34",
+   "text": "and saveth such as be of a contrite spirit.",
+   "start": 1233.147,
+   "end": 1236.709
+  },
+  {
+   "segment": "sleep-reflect-34",
+   "text": "The Lord is nigh unto them that are of a broken heart.",
+   "start": 1238.089,
+   "end": 1242.185
+  },
+  {
+   "segment": "sleep-reflect-34",
+   "text": "If your heart is broken tonight, you are not far from God.",
+   "start": 1242.365,
+   "end": 1247.037
+  },
+  {
+   "segment": "sleep-reflect-34",
+   "text": "You are exactly where he comes closest.",
+   "start": 1247.217,
+   "end": 1250.161
+  },
+  {
+   "segment": "sleep-stillness-2",
+   "text": "Let your breathing slow even more.",
+   "start": 1251.541,
+   "end": 1254.293
+  },
+  {
+   "segment": "sleep-stillness-2",
+   "text": "You are safe.",
+   "start": 1254.473,
+   "end": 1255.924
+  },
+  {
+   "segment": "sleep-stillness-2",
+   "text": "Rest.",
+   "start": 1256.104,
+   "end": 1257.064
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "I will lift up mine eyes unto the hills, from whence cometh my help.",
+   "start": 1259.244,
+   "end": 1264.407
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "My help cometh from the LORD, which made heaven and earth.",
+   "start": 1264.587,
+   "end": 1268.725
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "He will not suffer thy foot to be moved:",
+   "start": 1268.905,
+   "end": 1271.807
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "he that keepeth thee will not slumber.",
+   "start": 1271.987,
+   "end": 1274.781
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "Behold, he that keepeth Israel shall neither slumber nor sleep.",
+   "start": 1274.961,
+   "end": 1279.335
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "The LORD is thy keeper:",
+   "start": 1279.515,
+   "end": 1281.605
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "the LORD is thy shade upon thy right hand.",
+   "start": 1281.785,
+   "end": 1284.964
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "The sun shall not smite thee by day, nor the moon by night.",
+   "start": 1285.144,
+   "end": 1289.581
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "The LORD shall preserve thee from all evil:",
+   "start": 1289.761,
+   "end": 1292.919
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "he shall preserve thy soul.",
+   "start": 1293.099,
+   "end": 1295.509
+  },
+  {
+   "segment": "sleep-psalm-121",
+   "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "start": 1295.689,
+   "end": 1302.623
+  },
+  {
+   "segment": "sleep-reflect-121",
+   "text": "He that keepeth thee will not slumber.",
+   "start": 1304.003,
+   "end": 1306.797
+  },
+  {
+   "segment": "sleep-reflect-121",
+   "text": "Through every hour of this night, while you rest, God is awake and watching over you.",
+   "start": 1306.977,
+   "end": 1313.057
+  },
+  {
+   "segment": "sleep-reflect-121",
+   "text": "You can let go.",
+   "start": 1313.237,
+   "end": 1314.859
+  },
+  {
+   "segment": "sleep-reflect-121",
+   "text": "He will not.",
+   "start": 1315.039,
+   "end": 1316.468
+  },
+  {
+   "segment": "sleep-philippians-4",
+   "text": "Be careful for nothing;",
+   "start": 1317.848,
+   "end": 1319.811
+  },
+  {
+   "segment": "sleep-philippians-4",
+   "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+   "start": 1319.991,
+   "end": 1327.436
+  },
+  {
+   "segment": "sleep-philippians-4",
+   "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+   "start": 1327.616,
+   "end": 1335.616
+  },
+  {
+   "segment": "sleep-reflect-phil",
+   "text": "The peace of God shall keep your heart and mind, like a guard at the door.",
+   "start": 1336.996,
+   "end": 1342.479
+  },
+  {
+   "segment": "sleep-reflect-phil",
+   "text": "Whatever news tomorrow brings, tonight that peace stands watch over you.",
+   "start": 1342.659,
+   "end": 1347.928
+  },
+  {
+   "segment": "sleep-isaiah-26",
+   "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee:",
+   "start": 1349.308,
+   "end": 1354.449
+  },
+  {
+   "segment": "sleep-isaiah-26",
+   "text": "because he trusteth in thee.",
+   "start": 1354.629,
+   "end": 1356.827
+  },
+  {
+   "segment": "sleep-isaiah-26",
+   "text": "Trust ye in the LORD for ever:",
+   "start": 1357.007,
+   "end": 1359.375
+  },
+  {
+   "segment": "sleep-isaiah-26",
+   "text": "for in the LORD JEHOVAH is everlasting strength.",
+   "start": 1359.555,
+   "end": 1363.459
+  },
+  {
+   "segment": "sleep-reflect-26",
+   "text": "Perfect peace for a mind stayed on him.",
+   "start": 1364.839,
+   "end": 1367.697
+  },
+  {
+   "segment": "sleep-reflect-26",
+   "text": "As you drift toward sleep, let your last thought rest on God, his kindness, his nearness, his strength.",
+   "start": 1367.877,
+   "end": 1375.472
+  },
+  {
+   "segment": "sleep-reflect-26",
+   "text": "Everlasting strength.",
+   "start": 1375.652,
+   "end": 1377.551
+  },
+  {
+   "segment": "sleep-reflect-26",
+   "text": "It does not run out.",
+   "start": 1377.731,
+   "end": 1379.544
+  },
+  {
+   "segment": "sleep-psalm-147",
+   "text": "He healeth the broken in heart, and bindeth up their wounds.",
+   "start": 1380.924,
+   "end": 1385.575
+  },
+  {
+   "segment": "sleep-psalm-147",
+   "text": "He telleth the number of the stars;",
+   "start": 1385.755,
+   "end": 1388.549
+  },
+  {
+   "segment": "sleep-psalm-147",
+   "text": "he calleth them all by their names.",
+   "start": 1388.729,
+   "end": 1391.417
+  },
+  {
+   "segment": "sleep-psalm-147",
+   "text": "Great is our Lord, and of great power:",
+   "start": 1391.597,
+   "end": 1394.733
+  },
+  {
+   "segment": "sleep-psalm-147",
+   "text": "his understanding is infinite.",
+   "start": 1394.913,
+   "end": 1397.516
+  },
+  {
+   "segment": "sleep-reflect-147",
+   "text": "Above your roof tonight there are more stars than anyone can count, and God calls every one of them by name.",
+   "start": 1398.896,
+   "end": 1406.768
+  },
+  {
+   "segment": "sleep-reflect-147",
+   "text": "The same God is binding up your wounds.",
+   "start": 1406.948,
+   "end": 1410.169
+  },
+  {
+   "segment": "sleep-reflect-147",
+   "text": "Nothing about you is too small for his care, and nothing about your pain is too big for his power.",
+   "start": 1410.349,
+   "end": 1417.368
+  },
+  {
+   "segment": "sleep-psalm-3",
+   "text": "But thou, O LORD, art a shield for me;",
+   "start": 1418.748,
+   "end": 1422.097
+  },
+  {
+   "segment": "sleep-psalm-3",
+   "text": "my glory, and the lifter up of mine head.",
+   "start": 1422.277,
+   "end": 1425.392
+  },
+  {
+   "segment": "sleep-psalm-3",
+   "text": "I cried unto the LORD with my voice, and he heard me out of his holy hill.",
+   "start": 1425.572,
+   "end": 1431.311
+  },
+  {
+   "segment": "sleep-psalm-3",
+   "text": "I laid me down and slept;",
+   "start": 1431.491,
+   "end": 1433.816
+  },
+  {
+   "segment": "sleep-psalm-3",
+   "text": "I awaked;",
+   "start": 1433.996,
+   "end": 1435.34
+  },
+  {
+   "segment": "sleep-psalm-3",
+   "text": "for the LORD sustained me.",
+   "start": 1435.52,
+   "end": 1437.717
+  },
+  {
+   "segment": "sleep-reflect-3",
+   "text": "The lifter up of mine head.",
+   "start": 1439.097,
+   "end": 1441.337
+  },
+  {
+   "segment": "sleep-reflect-3",
+   "text": "When illness or sorrow bows your head low, God gently lifts it again.",
+   "start": 1441.517,
+   "end": 1447.085
+  },
+  {
+   "segment": "sleep-reflect-3",
+   "text": "Lay your head down now.",
+   "start": 1447.265,
+   "end": 1449.249
+  },
+  {
+   "segment": "sleep-reflect-3",
+   "text": "He will lift it up in the morning.",
+   "start": 1449.429,
+   "end": 1451.904
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.",
+   "start": 1453.284,
+   "end": 1460.281
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "I will say of the LORD, He is my refuge and my fortress:",
+   "start": 1460.461,
+   "end": 1465.048
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "my God;",
+   "start": 1465.228,
+   "end": 1466.529
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "in him will I trust.",
+   "start": 1466.709,
+   "end": 1468.693
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "He shall cover thee with his feathers, and under his wings shalt thou trust:",
+   "start": 1468.873,
+   "end": 1474.121
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "his truth shall be thy shield and buckler.",
+   "start": 1474.301,
+   "end": 1477.331
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "Because thou hast made the LORD, which is my refuge, even the most High, thy habitation;",
+   "start": 1477.511,
+   "end": 1484.423
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "There shall no evil befall thee, neither shall any plague come nigh thy dwelling.",
+   "start": 1484.603,
+   "end": 1490.405
+  },
+  {
+   "segment": "sleep-psalm-91",
+   "text": "For he shall give his angels charge over thee, to keep thee in all thy ways.",
+   "start": 1490.585,
+   "end": 1496.217
+  },
+  {
+   "segment": "sleep-prayer-final",
+   "text": "Lord, as sleep comes, I give you my body, my heart and my mind.",
+   "start": 1497.597,
+   "end": 1502.739
+  },
+  {
+   "segment": "sleep-prayer-final",
+   "text": "Heal what needs healing.",
+   "start": 1502.919,
+   "end": 1504.967
+  },
+  {
+   "segment": "sleep-prayer-final",
+   "text": "Comfort what needs comfort.",
+   "start": 1505.147,
+   "end": 1507.365
+  },
+  {
+   "segment": "sleep-prayer-final",
+   "text": "Watch over me through the night, and let me wake to your mercy in the morning.",
+   "start": 1507.545,
+   "end": 1512.687
+  },
+  {
+   "segment": "blessing",
+   "text": "And now receive this blessing as you sleep.",
+   "start": 1514.067,
+   "end": 1517.224
+  },
+  {
+   "segment": "blessing",
+   "text": "Beloved, I wish above all things that thou mayest prosper and be in health, even as thy soul prospereth.",
+   "start": 1517.404,
+   "end": 1525.511
+  },
+  {
+   "segment": "blessing",
+   "text": "Rest in his care tonight.",
+   "start": 1525.691,
+   "end": 1527.653
+  },
+  {
+   "segment": "blessing",
+   "text": "In Jesus' name, amen.",
+   "start": 1527.833,
+   "end": 1530.287
+  }
+ ],
+ "voice_seconds": 1531.667,
+ "sample_rate": 24000,
+ "voice_id": "am_michael",
+ "speed": 0.85
+}

@@ -1,13 +1,13 @@
 {
  "version": "goal-report-v2",
- "at": "2026-10-20T01:52:09.083334+00:00",
+ "at": "2026-10-20T08:16:21.410301+00:00",
  "day": 3,
  "target_day": 14,
  "max_day": 30,
  "subscribers": 269,
- "views_total": 2888,
+ "views_total": 2950,
  "public_videos": 28,
- "shorts_views_public_lifetime": 2964,
+ "shorts_views_public_lifetime": 3063,
  "analytics": {
   "status": "OK",
   "watch_hours_365d": 76.9,
@@ -877,7 +877,7 @@
    "id": "1bT9pEROuhI",
    "title": "Night Prayer of Thanksgiving | His Mercies Are New, Rest in His Faithfulness",
    "published": "2026-10-20T00:30",
-   "views": 3,
+   "views": 9,
    "likes": 0,
    "comments": 1,
    "short": false,
@@ -887,8 +887,8 @@
    "id": "SsgCGkM6knQ",
    "title": "Rest for the Part of You Still Awake #shorts",
    "published": "2026-10-19T20:17",
-   "views": 45,
-   "likes": 8,
+   "views": 127,
+   "likes": 9,
    "comments": 0,
    "short": true,
    "policy_risk_title": false
@@ -907,8 +907,8 @@
    "id": "_sUdOLxWy5c",
    "title": "The Ultimate Morning Prayer for Peace #shorts",
    "published": "2026-10-18T14:00",
-   "views": 274,
-   "likes": 29,
+   "views": 287,
+   "likes": 30,
    "comments": 6,
    "short": true,
    "policy_risk_title": false
@@ -917,7 +917,7 @@
    "id": "v4zN53ZiUIs",
    "title": "Morning Prayer | God Has Already Gone Ahead of You Today",
    "published": "2026-10-18T10:00",
-   "views": 9,
+   "views": 11,
    "likes": 0,
    "comments": 0,
    "short": false,
@@ -1180,7 +1180,7 @@
    "publish_at": "2026-10-21 00:00 UTC",
    "rendered": true,
    "qa": "PASS",
-   "review": "ERROR",
+   "review": "PASS",
    "uploaded": false,
    "published": null,
    "title": "Night Prayer for Healing | Rest Your Body and Heart in God's Care"
@@ -1190,9 +1190,9 @@
    "publish_at": "2026-10-21 10:00 UTC",
    "rendered": true,
    "qa": "PASS",
-   "review": "ERROR",
-   "uploaded": false,
-   "published": null,
+   "review": "PASS",
+   "uploaded": true,
+   "published": false,
    "title": "Morning Prayer with Bible Verses for Peace | Start Your Day in God's Word"
   },
   {
@@ -1246,7 +1246,7 @@
    "title": "Night Prayer of Thanksgiving | His Mercies Are New, Rest in His Faithfulness"
   }
  ],
- "script_runway_days": 3.3,
+ "script_runway_days": 3.1,
  "alerts": [],
  "data_api_units": 3,
  "policy_risk_videos": [
@@ -1292,5 +1292,5 @@
   }
  ],
  "policy_risk_watch_hours": 2.9,
- "learning_capture_path": "migration/evidence/daily-report/learning/captures/bc277006f3e5623739b96529b409b0f50f5f4651383b6c471631dd14e539a849.json"
+ "learning_capture_path": "migration/evidence/daily-report/learning/captures/f848bcc1b73f3ae055a1c72ad7008acacc3d4893047d7b0139b4402a75ae667d.json"
 }
