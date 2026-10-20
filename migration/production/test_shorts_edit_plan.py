@@ -678,12 +678,21 @@ class FinalizeTests(unittest.TestCase):
         self.assertEqual(result["shorts"][0]["review"], original["shorts"][0]["review"])
 
     def test_deadline_is_exact_and_never_rolls_target_slot(self):
-        self.assertTrue(finish(spec(), "2026-10-20T19:15:00Z")["shorts"][0]["publish"])
-        r = finish(spec(), "2026-10-20T19:15:01Z")
+        self.assertTrue(finish(spec(), "2026-10-20T19:30:00Z")["shorts"][0]["publish"])
+        self.assertTrue(finish(spec(), "2026-10-20T19:15:01Z")["shorts"][0]["publish"])
+        r = finish(spec(), "2026-10-20T19:30:01Z")
         self.assertFalse(r["shorts"][0]["publish"])
         self.assertEqual(r["release_status"], "TARGET_SLOT_LEAD_MISSED")
         self.assertEqual(r["finalization"]["target_slot"], "2026-10-20T20:00:00Z")
         self.assertEqual(r["finalization"]["status"], "COMPLETE")
+
+    def test_extended_operational_margin_still_requires_real_review(self):
+        missing = spec()
+        del missing["shorts"][0]["review"]
+        result = finish(missing, "2026-10-20T19:20:00Z")
+        self.assertFalse(result["shorts"][0]["publish"])
+        self.assertNotEqual(result["release_status"], "READY_FOR_TARGET_SLOT")
+        self.assertEqual(result["finalization"]["target_slot"], "2026-10-20T20:00:00Z")
 
     def test_invalid_clocks_and_slots_reject(self):
         for now in ("2026-10-20T19:14:59", datetime(2026, 10, 20, 19), None, "not a date", "2026-10-20T20:14:59+01:00"):
