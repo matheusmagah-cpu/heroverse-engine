@@ -327,6 +327,165 @@ class Verification(unittest.TestCase):
             self.assertEqual(json.loads(path.read_text()), {"id": "ID"})
             self.assertEqual([p.name for p in Path(t).iterdir()], ["ledger.json"])
 
+class OwnerException(PublishShorts):
+    def prepare(self, d):
+        import publication_exception as pe
+        spec = json.loads((d / "shorts.json").read_text())
+        spec.update(source_pilot=pe.PILOT, publish=False, release_status="READY_BY_OWNER_TEMPORAL_EXCEPTION")
+        spec["shorts"] = spec["shorts"][:1]
+        spec["finalization"] = {"status": "COMPLETE", "ordinary_release_status": "TARGET_SLOT_LEAD_MISSED",
+                                "target_slot": pe.BINDING["target_slot"], "output_sha256": pe.OUTPUT_SHA256,
+                                "owner_exception": dict(pe.BINDING)}
+        r = spec["shorts"][0]
+        r.update(sha256=pe.OUTPUT_SHA256, qa_output_sha256=pe.OUTPUT_SHA256,
+                 release_status="READY_BY_OWNER_TEMPORAL_EXCEPTION")
+        r["media_checks"] = {"status": "PASS", "output_sha256": pe.OUTPUT_SHA256}
+        r["qa"] = {"status": "PASS", "checks": {k: True for k in (
+            "decode_clean", "one_h264_1080x1920", "fps_30", "one_aac_stereo_48k", "duration", "loudness", "true_peak")}}
+        r["review"].update(output_sha256=pe.OUTPUT_SHA256, overall=8.5)
+        r["review"].update({k: 8 for k in ("hook_in_first_2s", "captions_readable_and_synced", "text_clear_of_shorts_ui",
+            "picture_quality", "edit_rhythm", "audio_clarity", "stands_alone", "ending_and_loop", "policy_safe")})
+        ledger = json.loads((d / "ledger.json").read_text())
+        ledger["version"] = "publish-ledger-v1"
+        ledger = pe.reserve(ledger, pe.BINDING, run_key="123:1")
+        (d / "ledger.json").write_text(json.dumps(ledger))
+        (d / "shorts.json").write_text(json.dumps(spec))
+        pub.utc_now = lambda: datetime(2026, 10, 20, 21, 20, tzinfo=timezone.utc)
+        return pe, spec
+
+    def test_exception_public_pending_then_verified_same_id(self):
+        with tempfile.TemporaryDirectory() as t:
+            d, _ = setup(t, done=())
+            pe, spec = self.prepare(d)
+            short = spec["shorts"][0]
+            stage, calls, bodies = ["processing"], [], []
+            original_get = self.yt.get
+            def get(url, params=None, timeout=None):
+                if params.get("part") != "id,snippet,status,processingDetails":
+                    return original_get(url, params, timeout)
+                calls.append(params["id"])
+                return Resp({"items": [{"id": params["id"], "snippet": {
+                    "channelId": pub.pv.CHANNEL, "title": pub.title_for(short),
+                    "description": pub.description_for(short, "https://youtu.be/LONG", "Long"),
+                    "defaultLanguage": "en", "defaultAudioLanguage": "en"},
+                    "status": {"uploadStatus": "uploaded" if stage[0] == "processing" else "processed",
+                               "privacyStatus": "public", "license": "youtube", "containsSyntheticMedia": True},
+                    "processingDetails": {"processingStatus": stage[0]}}]})
+            self.yt.get = get
+            with patch.dict(pub.os.environ, GITHUB_RUN_ID="123", GITHUB_RUN_ATTEMPT="1"), patch.object(pub, "sha256_file", return_value=pe.OUTPUT_SHA256), patch.object(pub.pv, "upload", side_effect=lambda session, path, body: (bodies.append(body), {"id": "VIDEO123456"})[1]):
+                first = self.run_pub(d, pe.BINDING["target_slot"])
+                self.assertEqual(first["shorts"][0]["verification_status"], "PENDING_PROCESSING")
+                stage[0] = "succeeded"
+                with patch.dict(pub.os.environ, GITHUB_RUN_ID="456", GITHUB_RUN_ATTEMPT="2"):
+                    second = self.run_pub(d, pe.BINDING["target_slot"])
+            self.assertEqual(second["shorts"][0]["verification_status"], "PUBLIC_VERIFIED")
+            self.assertEqual(calls, ["VIDEO123456", "VIDEO123456"])
+            self.assertEqual(len(bodies), 1)
+            self.assertEqual(bodies[0]["status"]["privacyStatus"], "public")
+            self.assertNotIn("publishAt", bodies[0]["status"])
+            ledger = json.loads((d / "ledger.json").read_text())
+            self.assertEqual(ledger["owner_exceptions"][pe.EXCEPTION_ID]["state"], "CONSUMED")
+            self.assertEqual(ledger["owner_exceptions"][pe.EXCEPTION_ID]["video_id"], "VIDEO123456")
+
+    def test_exception_rejects_binding_markers_and_gates(self):
+        with tempfile.TemporaryDirectory() as t:
+            d, _ = setup(t, done=())
+            pe, spec = self.prepare(d)
+            import copy
+            for section, key, value in (("binding", "receipt_sha256", "0" * 64), ("final", "target_slot", "2026-10-20T23:00:00Z"),
+                    ("final", "ordinary_release_status", "REVIEW_FAIL"), ("final", "status", "ERROR"),
+                    ("spec", "release_status", "OTHER"), ("record", "release_status", "OTHER"),
+                    ("record", "sha256", "0" * 64), ("qa", "status", "FAIL"), ("review", "overall", 7)):
+                case = copy.deepcopy(spec)
+                target = {"spec": case, "final": case["finalization"], "binding": case["finalization"]["owner_exception"],
+                          "record": case["shorts"][0], "qa": case["shorts"][0]["qa"], "review": case["shorts"][0]["review"]}[section]
+                target[key] = value
+                with self.subTest(section=section, key=key), self.assertRaises((SystemExit, ValueError)):
+                    pub.exception_binding(case)
+
+    def test_unknown_upload_reservation_blocks_new_run(self):
+        with tempfile.TemporaryDirectory() as t:
+            d, _ = setup(t, done=())
+            pe, _ = self.prepare(d)
+            with patch.dict(pub.os.environ, GITHUB_RUN_ID="123", GITHUB_RUN_ATTEMPT="1"), patch.object(pub, "sha256_file", return_value=pe.OUTPUT_SHA256), patch.object(pub.pv, "upload", side_effect=TimeoutError("unknown")) as upload:
+                with self.assertRaises(TimeoutError):
+                    self.run_pub(d, pe.BINDING["target_slot"])
+                with self.assertRaises(ValueError):
+                    self.run_pub(d, pe.BINDING["target_slot"])
+                with patch.dict(pub.os.environ, GITHUB_RUN_ID="456", GITHUB_RUN_ATTEMPT="1"), self.assertRaises(ValueError):
+                    self.run_pub(d, pe.BINDING["target_slot"])
+                self.assertEqual(upload.call_count, 1)
+            ledger = json.loads((d / "ledger.json").read_text())
+            with self.assertRaises(ValueError):
+                pe.reserve(ledger, pe.BINDING, run_key="123:1")
+
+    def test_reserved_intent_other_run_cannot_upload(self):
+        with tempfile.TemporaryDirectory() as t:
+            d, _ = setup(t, done=())
+            pe, _ = self.prepare(d)
+            with patch.dict(pub.os.environ, GITHUB_RUN_ID="456", GITHUB_RUN_ATTEMPT="1"), patch.object(pub, "sha256_file", return_value=pe.OUTPUT_SHA256), patch.object(pub.pv, "upload") as upload:
+                with self.assertRaises(ValueError):
+                    self.run_pub(d, pe.BINDING["target_slot"])
+                upload.assert_not_called()
+
+    def test_wrong_slot_shell_aborts_before_reservation(self):
+        import subprocess
+        workflow = (Path(__file__).resolve().parents[2] / ".github/workflows/publish-shorts.yml").read_text()
+        block = workflow[workflow.index("            exception_slot="):workflow.index('            run_key="$GITHUB_RUN_ID:$GITHUB_RUN_ATTEMPT"')]
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            (d / "shorts").mkdir()
+            (d / "shorts/shorts.json").write_text(json.dumps({"finalization": {"owner_exception": {"target_slot": "2026-10-20T20:00:00Z"}}}))
+            env = dict(pub.os.environ, d=str(d), SLOTS="2026-10-20T23:00:00Z")
+            result = subprocess.run(["bash", "-c", block + '\necho reserved > "$d/reservation"'], env=env, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("EXCEPTION_SLOT_MISMATCH_BEFORE_RESERVATION", result.stdout)
+            self.assertFalse((d / "reservation").exists())
+
+    def test_remote_head_change_with_identical_ledger_aborts_before_upload(self):
+        import subprocess
+        workflow = (Path(__file__).resolve().parents[2] / ".github/workflows/publish-shorts.yml").read_text()
+        guard = next(line.strip() for line in workflow.splitlines() if "EXCEPTION_REMOTE_HEAD_CHANGED" in line)
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            def git(*args):
+                return subprocess.check_output(["git", *args], cwd=d, text=True).strip()
+            git("init", "-q")
+            git("config", "user.name", "Offline Test")
+            git("config", "user.email", "test@example.invalid")
+            (d / "ledger.json").write_text('{"reserved":true}\n')
+            git("add", ".")
+            git("commit", "-qm", "reserved")
+            reserved = git("rev-parse", "HEAD")
+            (d / "PUBLICATION_HOLD").write_text("hold\n")
+            git("add", ".")
+            git("commit", "-qm", "concurrent hold")
+            remote = git("rev-parse", "HEAD")
+            git("fetch", "-q", ".", remote)
+            git("checkout", "-q", reserved)
+            self.assertEqual(git("show", "HEAD:ledger.json"), git("show", "FETCH_HEAD:ledger.json"))
+            result = subprocess.run(["bash", "-c", guard + "\necho uploaded > uploaded"], cwd=d, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("EXCEPTION_REMOTE_HEAD_CHANGED", result.stdout)
+            self.assertFalse((d / "uploaded").exists())
+            git("fetch", "-q", ".", reserved)
+            result = subprocess.run(["bash", "-c", guard + "\necho allowed > allowed"], cwd=d, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0)
+            self.assertTrue((d / "allowed").exists())
+
+    def test_workflow_reservation_persisted_before_upload(self):
+        workflow = (Path(__file__).resolve().parents[2] / ".github/workflows/publish-shorts.yml").read_text()
+        start = workflow.index("publication_exception.py --reserve")
+        upload = workflow.index('"$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/publish_shorts.py')
+        self.assertLess(start, upload)
+        self.assertLess(workflow.index("EXCEPTION_SLOT_MISMATCH_BEFORE_RESERVATION; exit 1"), start)
+        section = workflow[start:upload]
+        self.assertIn("git push -q origin HEAD:main", section)
+        self.assertIn("git fetch -q origin main", section)
+        self.assertLess(section.index("git fetch -q origin main"), section.index("EXCEPTION_REMOTE_HEAD_CHANGED"))
+        self.assertLess(section.index("EXCEPTION_REMOTE_HEAD_CHANGED"), section.index("git show FETCH_HEAD:"))
+        self.assertIn("EXCEPTION_RESERVATION_PERSISTENCE_UNCONFIRMED; exit 1", section)
+
 
 class States(unittest.TestCase):
     def test_every_short_has_one_state(self):

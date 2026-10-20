@@ -198,7 +198,7 @@
     }
    },
    "hook_mode": "caption_only",
-   "publish": false,
+   "publish": true,
    "media_checks": {
     "version": "shorts-media-checks-v1",
     "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
@@ -332,7 +332,7 @@
     "status": "PASS",
     "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f"
    },
-   "release_status": "TARGET_SLOT_LEAD_MISSED"
+   "release_status": "READY_BY_OWNER_TEMPORAL_EXCEPTION"
   }
  ],
  "edit_plan": {
@@ -452,7 +452,7 @@
   }
  },
  "publish": false,
- "release_status": "TARGET_SLOT_LEAD_MISSED",
+ "release_status": "READY_BY_OWNER_TEMPORAL_EXCEPTION",
  "review_rubric": {
   "items": [
    "hook_in_first_2s",
@@ -471,7 +471,19 @@
  "finalization": {
   "status": "COMPLETE",
   "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
-  "finalized_at": "2026-10-20T19:46:33.059056+00:00",
-  "target_slot": "2026-10-20T20:00:00Z"
+  "finalized_at": "2026-10-20T21:22:18.211167+00:00",
+  "target_slot": "2026-10-20T20:00:00Z",
+  "owner_exception": {
+   "version": "owner-publication-exception-binding-v1",
+   "exception_id": "owner-temporal-pilot005-cb3ce331-20261020",
+   "receipt_sha256": "dd2990b2ecebe3a7a4ed93d842d248f8e9ea9c3a2ecbfb6921d7b91d3f4db5f2",
+   "pilot": "pilot-005",
+   "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+   "scope": "temporal_only",
+   "baseline_cutoff": "2026-10-20T19:30:00Z",
+   "target_slot": "2026-10-20T20:00:00Z",
+   "owner_authorized_at": "2026-10-20T21:08:15.004165+00:00"
+  },
+  "ordinary_release_status": "TARGET_SLOT_LEAD_MISSED"
  }
 }

@@ -648,6 +648,48 @@ def finalize_manifest(spec, *, actual_output_sha256, now_utc, target_slot):
     return guarded
 
 
+def finalize_exception_manifest(spec, receipt, *, actual_output_sha256, now_utc):
+    """Apply an admitted temporal exception only after the ordinary guard passes."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "publish"))
+    import publication_exception
+    guarded = finalize_manifest(spec, actual_output_sha256=actual_output_sha256,
+                                now_utc=now_utc, target_slot=TARGET_SLOT)
+    if guarded.get("release_status") != "TARGET_SLOT_LEAD_MISSED":
+        return guarded
+    try:
+        binding = publication_exception.validate_receipt(
+            receipt, pilot=guarded.get("source_pilot"), output_sha256=actual_output_sha256,
+            now_utc=now_utc)
+        require(binding["baseline_cutoff"] == LEAD_DEADLINE, "EXCEPTION_BASELINE_MISMATCH")
+        require(binding["target_slot"] == TARGET_SLOT, "EXCEPTION_TARGET_MISMATCH")
+        guarded["finalization"]["owner_exception"] = binding
+        guarded["finalization"]["ordinary_release_status"] = "TARGET_SLOT_LEAD_MISSED"
+        guarded["release_status"] = "READY_BY_OWNER_TEMPORAL_EXCEPTION"
+        guarded["shorts"][0]["release_status"] = guarded["release_status"]
+        guarded["shorts"][0]["publish"] = True
+    except (ValueError, KeyError, TypeError):
+        guarded = _disable(guarded)
+        guarded["release_status"] = "OWNER_EXCEPTION_INVALID"
+        guarded["finalization"]["status"] = "ERROR"
+    return guarded
+
+
+def finalize_exception_file(manifest, mp4, receipt_path):
+    """Explicit one-use admission path; never edits or replaces ordinary timing."""
+    spec, _ = read_json(manifest)
+    spec = _disable(spec)
+    atomic_json(manifest, spec)
+    record = _manifest_record(spec)
+    require(Path(mp4).resolve() == (Path(manifest).parent / record["file"]).resolve(), "OUTPUT_PATH_MISMATCH")
+    receipt, _ = read_json(receipt_path)
+    output_hash = hash_file(mp4)
+    guarded = finalize_exception_manifest(spec, receipt, actual_output_sha256=output_hash,
+                                         now_utc=datetime.now(timezone.utc))
+    require(hash_file(mp4) == output_hash, "OUTPUT_CHANGED_DURING_FINALIZATION")
+    atomic_json(manifest, guarded)
+    return guarded
+
+
 def finalize_file(manifest, mp4):
     """Clear inherited reviewer eligibility before any operation that can fail."""
     spec, _ = read_json(manifest)
@@ -669,7 +711,7 @@ def finalize_file(manifest, mp4):
 
 def cli(argv=None):
     args = list(sys.argv[1:] if argv is None else argv)
-    manifest = args[1] if args[:1] == ["--finalize"] and len(args) >= 2 else None
+    manifest = args[1] if args[:1] in (["--finalize"], ["--finalize-exception"]) and len(args) >= 2 else None
     if args[:1] == ["--check-media"] and len(args) >= 4:
         manifest = args[3]
     try:
@@ -682,6 +724,12 @@ def cli(argv=None):
                 return 1
             print(json.dumps({"media_checks": checks}, allow_nan=False))
             return 0
+        if args[:1] == ["--finalize-exception"] and len(args) == 4:
+            spec = finalize_exception_file(*args[1:])
+            print(json.dumps({"output_sha256": spec["finalization"]["output_sha256"],
+                              "release_status": spec["release_status"],
+                              "publish": spec["shorts"][0]["publish"] if spec.get("shorts") else False}))
+            return 0 if spec["finalization"]["status"] == "COMPLETE" else 1
         if args[:1] == ["--finalize"] and len(args) == 3:
             manifest = args[1]
             spec = finalize_file(*args[1:])

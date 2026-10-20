@@ -1,0 +1,31 @@
+{
+  "version": "owner-publication-exception-v1",
+  "exception_id": "owner-temporal-pilot005-cb3ce331-20261020",
+  "owner": "Matheus",
+  "source": "authenticated_owner_dot_conversation",
+  "attested_by": "dot",
+  "trust_model": "operational_dot_attestation_not_cryptographic_signature",
+  "scope": "temporal_only",
+  "pilot": "pilot-005",
+  "output_sha256": "cb3ce331529437f4fadc3b14dec01dfad18909a3e9f024a99cea141e91ae956f",
+  "baseline_cutoff": "2026-10-20T19:30:00Z",
+  "target_slot": "2026-10-20T20:00:00Z",
+  "owner_authorized_at": "2026-10-20T21:08:15.004165+00:00",
+  "owner_messages": [
+    {
+      "message_id": "Sentinel_b40883ebd1d88191bc6cf23c59f08c49",
+      "at": "2026-10-20T21:06:51.416099+00:00",
+      "text": "minha ordem não desfaz nada. minha ordem é só uma exceção que eu tô passando, entendeu? A minha fala sempre vai ser uma exceção. Eu não quero. a não ser quando eu falar muda o processo. Aí se eu falar muda o processo, aí sim, aí eu tô falando pra mudar. caso contrário, é tudo em caráter de exceção. Então faz essa postagem em caráter de exceção. a trava de horário tem que continuar."
+    },
+    {
+      "message_id": "Sentinel_c3a1c9f1e7908191883cbda6ed27e9c1",
+      "at": "2026-10-20T21:07:33.550886+00:00",
+      "text": "E isso tem que ter no projeto, tem que ter uma válvula de exceção, entendeu? Só que essa válvula de exceção só quem pode dar sou eu, entendeu? Então assim, se não existe isso no projeto, cria agora a válvula de exceção."
+    },
+    {
+      "message_id": "Sentinel_1512cc545d6c81919a5535ce6fc9e0e6",
+      "at": "2026-10-20T21:08:15.004165+00:00",
+      "text": "Exatamente. Todas as válvulas do mecanismo foi aprovado? Tudo, tudo, 100%? Qualidade, técnica, operacional, tudo? Tá tudo aprovado? Se tiver tudo aprovado, eu cria essa válvula e já pode aplicar. Já vai lá e já posta."
+    }
+  ]
+}
