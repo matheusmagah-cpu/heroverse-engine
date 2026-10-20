@@ -143,3 +143,15 @@ predict how fast HeroVerse reaches YPP.
 - **Facebook Page + Instagram: automatic cross-post of every approved Short ≤ 90 s, plus the long prayers on Facebook.** Facebook monetization is invite-only, but the cost is ≈ 0 through the official Meta APIs. Go/no-go after 30 days on measured reach.
 - **TikTok: not now.** Creator Rewards needs original, ≥ 1 min videos, and AI-generated content may be excluded. The API also needs an audit before any public post.
 - **Snapchat: no.**
+
+## Owner directive and 14-day pace (2026-10-20 14:10 UTC)
+- **Owner:** "The plan is 14 days, up to 30. The platform's dates do not matter; the project is mine. Analyse daily whether the number of videos and the average views reach the goal in 14 days, and adjust the strategy daily." The YouTube 2027 date is therefore **not** a planning input. The 14-day plan (day 1 = 2026-10-18, day 14 = 2026-10-31, day 30 = 2026-11-16) is.
+- **Pace needed from today (11 days left):** **≈ 66 subscribers a day** (731 to go) and **≈ 363 public long-form watch hours a day** (3,997 to go).
+- **Measured pace now:** new long videos get 1–11 views each (daily report). Recent Shorts get 127–287 views. **The gap is about 100–300×**, so the current format and volume cannot reach day 14 without a breakout.
+- **The biggest measured lever for watch hours: long sleep videos with Scripture**
+  - Evidence: `structures/sleep-scripture-long.json`, `evidence/vidiq/20261020/sleep_scripture_long.json`.
+  - 6 winners from 4 channels of 783–18,000 subscribers, each 2.2–8 h long, with 68,000–311,000 views in under 3 months. There are 3 weak contrasts of the same shape.
+  - Arithmetic: 363 h/day = ~730 views/day at 30 min watched per view (2–3 h video), against ~2,700 views/day at 8 min per view (26-min prayer). This per-view figure is not measured on our channel yet.
+  - **Decision:** the night slot (00:00 UTC) moves to the sleep-scripture-long shape (2–3 h, original prayers and reflections ≥ 35 % of words, KJV readings) as soon as Dot delivers the first one. The morning slot stays at the validated guided prayer.
+- **Subscriber lever:** Shorts v2 (#231) and the bell strategy (#241). 66 subscribers a day needs roughly 2,000–6,000 Shorts views a day, at the 1–3 % subscribe rate seen on our July Shorts.
+- **Daily:** the daily analysis routine computes the needed pace against the measured pace and the projection for day 14 and day 30, and adjusts the next day's plan with this lever list.
