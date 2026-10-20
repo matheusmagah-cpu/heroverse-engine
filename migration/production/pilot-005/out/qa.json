@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-005",
- "output_sha256": "833e46e4c7872ceceddd0605a470f4be15716b1f73418a97b008d4b9576a4e2a",
+ "output_sha256": "c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -16,58 +16,64 @@
   "first_word_onset": true,
   "hook_second_person": true,
   "title_card_seconds": true,
-  "figure_present_after_title": true,
-  "background_hold_median": true,
-  "background_hold_max": true,
-  "no_background_repeated_consecutively": true,
+  "no_figure": true,
+  "every_scene_in_motion": true,
+  "scene_seconds": true,
+  "crossfade_seconds_max": true,
+  "image_repeat_gap": true,
   "caption_coverage_of_speech": true,
   "caption_hold_median": true,
   "caption_chars_max": true,
-  "channel_mark_badge_and_amen_prompt": true,
+  "caption_words_max": true,
+  "caption_no_box": true,
+  "scripture_card_only_while_read": true,
+  "cta_count": true,
+  "cta_short_and_not_early": true,
+  "persistent_overlays_only_brand": true,
   "images_open_licence_with_revision": true,
   "no_third_party_footage": true,
   "music_owned": true,
   "voice_model_pinned": true
  },
- "criteria_version": "pilot-qa-criteria-v2",
+ "criteria_version": "pilot-qa-criteria-v3",
  "measurements": {
-  "duration_seconds": 1462.54,
+  "duration_seconds": 1462.3,
   "loudness": {
    "integrated_lufs": -15.6,
    "loudness_range_lu": 3.1,
    "true_peak_dbtp": -2.7
   },
   "speech_presence": 0.868,
-  "music_presence": 0.396,
-  "wer_vs_script": 0.0418,
-  "accepted_words_per_minute": 129.8,
-  "caption_lines": 648,
-  "holds": 126,
-  "first_word_seconds": 0.08,
+  "music_presence": 0.403,
+  "wer_vs_script": 0.0657,
+  "accepted_words_per_minute": 126.4,
+  "caption_lines": 686,
+  "holds": 59,
+  "first_word_seconds": 0.05,
   "editing": {
-   "picture_changes": 923,
-   "picture_changes_per_minute": 37.87,
-   "median_shot_seconds": 1.5,
-   "longest_shot_seconds": 6.133,
+   "picture_changes": 396,
+   "picture_changes_per_minute": 16.25,
+   "median_shot_seconds": 2.433,
+   "longest_shot_seconds": 25.833,
    "motion_median_top_decile_diff": 1.003
   },
   "colour": {
-   "mean_brightness": 0.3675,
-   "brightness_std_over_time": 0.0572,
-   "mean_saturation": 0.494,
-   "saturation_std_over_time": 0.0847
+   "mean_brightness": 0.3434,
+   "brightness_std_over_time": 0.0961,
+   "mean_saturation": 0.6142,
+   "saturation_std_over_time": 0.1454
   },
   "rhythm": {
-   "audio_onsets": 2236,
-   "audio_onsets_per_minute": 91.73,
+   "audio_onsets": 2251,
+   "audio_onsets_per_minute": 92.36,
    "tempo": {
-    "bpm": 79.04,
-    "confidence": 0.014
+    "bpm": 78.95,
+    "confidence": 0.012
    }
   }
  },
- "transcript_head": "Good morning. Let us place you and those you love under God's protection and walk into today in His peace. Before you step out into today, stay with me for the next few minutes. Take one slow breath with me. Maybe you are carrying something heavy into this day. A hard meeting, a long drive, a child going to school, news you are waiting for. do not have to face any of your alone. Let your shoulders",
- "criteria_sha256": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
+ "transcript_head": "Good morning. Let us place you and those you love under God's protection and walk into today in His peace. Before you step out into today, stay with me for the next few minutes. Take one slow breath with me. Maybe you are carrying something heavy into this day. A hard meeting, a long drive, a child going to school, news you are waiting for. do not have to face any of alone. Let your shoulders drop",
+ "criteria_sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
  "publication_performed": false
