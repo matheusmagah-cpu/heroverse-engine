@@ -1,0 +1,28 @@
+{
+ "id": "bg-armour-clear-river",
+ "prompt": "A clear river flowing around a firm rock beneath open morning sky, sparkling sunlight and fresh green banks, calm strength in nature, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.9,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-009-img-bg-armour-clear-river-sha256-d28959e12273f585c0ed4df418505b3a79e71bc2d1af8c1dc2bca889a9bd5949.png",
+ "sha256": "d28959e12273f585c0ed4df418505b3a79e71bc2d1af8c1dc2bca889a9bd5949"
+}
