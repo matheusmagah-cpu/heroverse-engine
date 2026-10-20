@@ -1,0 +1,265 @@
+{
+  "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
+  "source_sha256": "3e1357fb31d87c5e1b3f6e90fdf86c461b1232a996511a586dce2643e5a58b98",
+  "historical_records": {
+    "version": "shorts-produce-v2-r8",
+    "source_pilot": "pilot-005",
+    "selection_rubric_model": "gemini-3.6-flash",
+    "rejected_r8": [],
+    "shorts": [
+      {
+        "file": "short-00.mp4",
+        "sha256": "eb0646b09bd28a0623dcc32bdfe69aa3959111f522aff1f5797876f66caba74c",
+        "seconds": 42.34,
+        "source_start": 729.251,
+        "source_end": 771.095,
+        "segments": [
+          "reflection-6",
+          "prayer-thanks",
+          "prayer-purpose"
+        ],
+        "hook": "You are protected because you are His",
+        "hook_shown": false,
+        "title": "You Are Protected Not Because You Are Perfect",
+        "reference": null,
+        "scenes": [
+          "bg-sunrise-field",
+          "bg-home-sunrise"
+        ],
+        "parallax": false,
+        "figure": false,
+        "selection": {
+          "final_score": 0.8644,
+          "measured_score": 0.786,
+          "features": {
+            "opening_short": 1.0,
+            "opening_direct": 1.0,
+            "second_person": 0.9574468085106382,
+            "scripture": 0.4,
+            "promise": 0.7978723404255319,
+            "resolution": 0.4,
+            "length_fit": 0.926239999999998
+          },
+          "rubric": {
+            "index": 10,
+            "hook_first_2s": 9.0,
+            "stands_alone": 9.5,
+            "emotional_payoff": 9.5,
+            "shareability": 9.0,
+            "loop_potential": 8.0,
+            "policy_safe": 10.0,
+            "reasons": "Exceptional hook line that removes shame and offers profound comfort. Beautiful prayer of gratitude and intercession.",
+            "hook_line": "You are protected because you are His",
+            "title": "You Are Protected Not Because You Are Perfect"
+          }
+        },
+        "text": "You are not protected because you are perfect. You are protected because you are his. Thank you, Father, for every time you have protected me without my even knowing it. The accidents that did not happen. The dangers I never saw. Thank you for keeping me until this morning. I trust you to keep me today. Lord, make me a shelter for others today. Let me notice the person who feels unsafe, and offer kindness, help and prayer. As you protect me, let me protect the weak and speak up for those who cannot.",
+        "qa": {
+          "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+          "seconds": 42.34,
+          "lufs": -14.8,
+          "true_peak_dbtp": -1.6,
+          "checks": {
+            "decode_clean": true,
+            "one_h264_1080x1920": true,
+            "fps_30": true,
+            "one_aac_stereo_48k": true,
+            "duration": true,
+            "loudness": true,
+            "true_peak": true
+          },
+          "status": "PASS"
+        },
+        "review": {
+          "hook_in_first_2s": 7.5,
+          "captions_readable_and_synced": 9.0,
+          "text_clear_of_shorts_ui": 9.0,
+          "picture_quality": 8.0,
+          "edit_rhythm": 5.0,
+          "audio_clarity": 9.0,
+          "stands_alone": 9.0,
+          "ending_and_loop": 5.5,
+          "policy_safe": 10.0,
+          "overall": 7.2,
+          "issues": [
+            "00:00 - 00:20: The opening visual is held for 20 continuous seconds with minimal motion, which risks viewer drop-off on fast-paced short-form platforms.",
+            "00:41: The video ends mid-thought musically and narratively without a conclusive closing or seamless loop back to the start."
+          ],
+          "strongest_moment": "00:00 - 00:06: The powerful opening contrast ('You are not protected because you are perfect. You are protected because you are His.') delivers an emotionally resonant hook immediately.",
+          "model": "gemini-3.8-flash",
+          "status": "FAIL"
+        },
+        "publish": false
+      },
+      {
+        "file": "short-01.mp4",
+        "sha256": "19b9569e93d53d71e9d22026e4a0384414abcddf538bac1d3aa1b3c01273d8b7",
+        "seconds": 36.57,
+        "source_start": 1404.681,
+        "source_end": 1440.736,
+        "segments": [
+          "day-reflect-121",
+          "payoff",
+          "blessing"
+        ],
+        "hook": "Take this promise into your day",
+        "hook_shown": false,
+        "title": "A Simple Prayer for Every Doorway You Walk Through",
+        "reference": "Psalm 121:8 (KJV)",
+        "scenes": [
+          "bg-sunlit-road",
+          "bg-sky"
+        ],
+        "parallax": false,
+        "figure": false,
+        "selection": {
+          "final_score": 0.861,
+          "measured_score": 0.965,
+          "features": {
+            "opening_short": 1.0,
+            "opening_direct": 1.0,
+            "second_person": 0.8974358974358974,
+            "scripture": 1.0,
+            "promise": 0.9615384615384616,
+            "resolution": 1.0,
+            "length_fit": 0.8422000000000025
+          },
+          "rubric": {
+            "index": 0,
+            "hook_first_2s": 6.5,
+            "stands_alone": 8.5,
+            "emotional_payoff": 8.5,
+            "shareability": 8.0,
+            "loop_potential": 6.0,
+            "policy_safe": 10.0,
+            "reasons": "Starts mid-thought with 'Carry that with you', but transitions quickly into a practical prayer habit and scripture blessing.",
+            "hook_line": "Take this promise into your day",
+            "title": "A Simple Prayer for Every Doorway You Walk Through"
+          }
+        },
+        "text": "Carry that with you. Here is one thing to take into your day. Each time you leave a place today, your home, your car, your office, whisper, The Lord is my refuge. Six words. Let them mark every doorway you walk through. And now receive this blessing. The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore. Go into this day covered by his peace. In Jesus' name, amen.",
+        "qa": {
+          "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+          "seconds": 36.57,
+          "lufs": -14.7,
+          "true_peak_dbtp": -2.2,
+          "checks": {
+            "decode_clean": true,
+            "one_h264_1080x1920": true,
+            "fps_30": true,
+            "one_aac_stereo_48k": true,
+            "duration": true,
+            "loudness": true,
+            "true_peak": true
+          },
+          "status": "PASS"
+        },
+        "review": {
+          "hook_in_first_2s": 5.0,
+          "captions_readable_and_synced": 9.0,
+          "text_clear_of_shorts_ui": 9.0,
+          "picture_quality": 8.5,
+          "edit_rhythm": 5.5,
+          "audio_clarity": 9.0,
+          "stands_alone": 9.0,
+          "ending_and_loop": 6.0,
+          "policy_safe": 10.0,
+          "overall": 7.1,
+          "issues": [
+            "00:00 - Opening with an isolated fragment 'Carry that with you' feels confusing and disorienting before the actual hook starts at 00:02.",
+            "00:00-00:17 - Visual pacing is very slow, relying on only two static/slow-zoom images across 37 seconds, which risks viewer drop-off.",
+            "00:34-00:37 - The ending concludes with 'amen' followed by dead air, making the loop back into 'Carry that with you' feel unnatural."
+          ],
+          "strongest_moment": "00:21-00:29 delivering the scripture blessing over the radiant sunbeam sky background.",
+          "model": "gemini-3.8-flash",
+          "status": "FAIL"
+        },
+        "publish": false
+      },
+      {
+        "file": "short-02.mp4",
+        "sha256": "cdb21f50a4aa431a2d662ebe409846816cee9a109da26bb2bbce3652df369d73",
+        "seconds": 30.51,
+        "source_start": 202.735,
+        "source_end": 232.745,
+        "segments": [
+          "prayer-mind",
+          "scripture-4",
+          "prayer-home"
+        ],
+        "hook": "When worry knocks, let peace answer",
+        "hook_shown": false,
+        "title": "A Prayer to Cover Your Home in Peace Today",
+        "reference": "2 Thessalonians 3:3 (KJV)",
+        "scenes": [
+          "bg-dawn-lake",
+          "bg-tower-hill"
+        ],
+        "parallax": false,
+        "figure": false,
+        "selection": {
+          "final_score": 0.8592,
+          "measured_score": 0.8354,
+          "features": {
+            "opening_short": 1.0,
+            "opening_direct": 1.0,
+            "second_person": 0.7692307692307693,
+            "scripture": 1.0,
+            "promise": 1.0,
+            "resolution": 0.4,
+            "length_fit": 0.6003999999999996
+          },
+          "rubric": {
+            "index": 4,
+            "hook_first_2s": 8.5,
+            "stands_alone": 9.0,
+            "emotional_payoff": 9.0,
+            "shareability": 9.0,
+            "loop_potential": 7.0,
+            "policy_safe": 10.0,
+            "reasons": "Excellent metaphorical opening line about worry and peace that immediately grabs attention. Deeply relatable house prayer.",
+            "hook_line": "When worry knocks, let peace answer",
+            "title": "A Prayer to Cover Your Home in Peace Today"
+          }
+        },
+        "text": "When worry knocks, let your peace answer the door. But the Lord is faithful, who shall stablish you, and keep you from evil. Father, I place my home under your protection. Watch over every door and every room. Keep away harm, accidents and every kind of danger. Let our home be a place of peace, where your presence is felt the moment anyone walks in.",
+        "qa": {
+          "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+          "seconds": 30.51,
+          "lufs": -14.9,
+          "true_peak_dbtp": -2.4,
+          "checks": {
+            "decode_clean": true,
+            "one_h264_1080x1920": true,
+            "fps_30": true,
+            "one_aac_stereo_48k": true,
+            "duration": true,
+            "loudness": true,
+            "true_peak": true
+          },
+          "status": "PASS"
+        },
+        "review": {
+          "status": "NOT_REVIEWED_ProviderFailure"
+        },
+        "publish": false
+      }
+    ],
+    "review_rubric": {
+      "items": [
+        "hook_in_first_2s",
+        "captions_readable_and_synced",
+        "text_clear_of_shorts_ui",
+        "picture_quality",
+        "edit_rhythm",
+        "audio_clarity",
+        "stands_alone",
+        "ending_and_loop",
+        "policy_safe"
+      ],
+      "pass_item": 7,
+      "pass_overall": 8
+    }
+  },
+  "new_reviews": []
+}
