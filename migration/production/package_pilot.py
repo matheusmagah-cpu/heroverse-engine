@@ -3,9 +3,11 @@
 Creative Commons attribution, tags and a 1280x720 thumbnail. Writes files only;
 no upload. Packaging promise must match the opening (archetype rule)."""
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
+import unicodedata
 
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
@@ -14,9 +16,62 @@ def escape(text):
     return text.replace("\\", "\\\\").replace(":", "\\:").replace("'", "’")
 
 
+FIRST_COMMENT_MAX = 300  # owner rule for the channel's first comment (stage 5)
+# content rules (stage 3): no fear-bait, no health or wealth promise; a conservative phrase list, not a critique
+FIRST_COMMENT_BANNED = ("before it's too late", "don't scroll", "do not scroll", "don't ignore", "do not ignore",
+                        "or else", "curse", "bad luck", "warning", "guarantee", "will be healed", "healing is yours",
+                        "money", "wealth", "riches", "breakthrough is coming", "you will receive")
+
+
+def check_first_comment(text):
+    """One plain comment: non-empty, at most 300 characters, no emoji or pictographs."""
+    text = (text or "").strip()
+    if not text or len(text) > FIRST_COMMENT_MAX:
+        raise SystemExit(f"FIRST_COMMENT_INVALID length {len(text)} (1-{FIRST_COMMENT_MAX})")
+    bad = [c for c in text if unicodedata.category(c) == "So" or 0x1F000 <= ord(c) <= 0x1FAFF or c in "\ufe0f\u200d"]
+    if bad:
+        raise SystemExit("FIRST_COMMENT_INVALID emoji or symbol " + repr("".join(bad)))
+    hit = [w for w in FIRST_COMMENT_BANNED if w in text.lower().replace("\u2019", "'")]
+    if hit:
+        raise SystemExit("FIRST_COMMENT_INVALID fear or promise wording " + ", ".join(hit))
+    return text
+
+
+def default_first_comment(title):
+    """From the title's promise (the part after "|", else the whole title): one sentence inviting "Amen" and one
+    mercy from today. No emoji, no fear, no promise beyond the title's own words."""
+    promise = (title.split("|", 1)[1] if "|" in title else title).strip().rstrip(".!?,;: ")
+    generic = 'If this prayer spoke to you, write "Amen" below and share one mercy God showed you today.'
+    if promise:
+        try:  # a title phrase that breaks a comment rule falls back to the plain invitation
+            return check_first_comment(f'If "{promise}" spoke to you, write "Amen" below and share one mercy God showed you today.')
+        except SystemExit:
+            pass
+    return check_first_comment(generic)
+
+
+def first_comment_for(script):
+    """The script's own first_comment wins; otherwise the default built from the title's promise."""
+    if script.get("first_comment"):
+        return check_first_comment(script["first_comment"])
+    return default_first_comment(script["working_title"])
+
+
+def opening_chapter(script):
+    """Use the spoken greeting, never guess a daypart from publication time."""
+    hook = next((s for s in script.get("segments", []) if s.get("id") == "hook"), {})
+    if hook.get("chapter"):
+        return hook["chapter"]
+    text = hook.get("text", "").strip()
+    for greeting in ("Good morning", "Good evening"):
+        if re.match(re.escape(greeting) + r"(?:\b|$)", text, re.IGNORECASE):
+            return greeting
+    return "Opening prayer"
+
+
 def chapters_from_script(script, timeline):
     """Chapters at every scripture anchor plus the opening, prayer and blessing turns."""
-    named = {"hook": "Good morning", "transition": "Let us pray", "declaration": "Declaration for today",
+    named = {"hook": opening_chapter(script), "transition": "Let us pray", "declaration": "Declaration for today",
              "payoff": "One thing to do today", "blessing": "Blessing"}
     named.update({s["id"]: s["chapter"] for s in script["segments"] if s.get("chapter")})  # the script's own chapter names win
     refs = {s["id"]: s["reference"].replace(" (KJV)", "") for s in script["segments"] if s.get("reference")}
@@ -30,7 +85,7 @@ def chapters_from_script(script, timeline):
 
 
 def chapters(timeline):
-    names = {"hook": "Good morning", "scripture-1": "He goes before you (Deuteronomy 31:8)",
+    names = {"hook": "Opening prayer", "scripture-1": "He goes before you (Deuteronomy 31:8)",
              "scripture-2": "New mercy every morning (Lamentations 3:22-23)",
              "scripture-3": "Show me the way (Psalm 143:8)", "transition": "Let us pray",
              "scripture-4": "Fear not (Isaiah 41:10)", "declaration": "Declaration for today",
@@ -101,6 +156,7 @@ def main(work, script_path, out_dir):
                "ai_generated_visuals": v2,
                "altered_or_synthetic_disclosure": ("Stylized devotional illustrations, not realistic footage; review YouTube's "
                                                    "altered-content setting at upload") if v2 else None,
+               "first_comment": first_comment_for(script),
                "promise_matches_opening": script.get("promise") or "Title promise 'God has already gone ahead of you' is spoken at 0-8 s.",
                "upload_performed": False, "publication_performed": False}
     (out / "package.json").write_text(json.dumps(package, indent=1, ensure_ascii=False) + "\n")

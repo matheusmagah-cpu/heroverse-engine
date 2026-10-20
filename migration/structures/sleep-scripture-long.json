@@ -1,0 +1,52 @@
+{
+ "version": "structure-v1",
+ "id": "sleep-scripture-long",
+ "line": "English Christian spoken prayer + KJV Scripture for sleep, 2-3 h",
+ "status": "candidate-validated-shape",
+ "validation": {
+  "rule": "SYSTEM.md 1.5",
+  "winners": 6,
+  "channels": 4,
+  "max_channel_share": "1/3",
+  "weak_contrasts": 3,
+  "weak_channels": 1,
+  "evidence": "evidence/vidiq/20261020/sleep_scripture_long.json",
+  "missing": [
+   "weak contrasts from >= 2 channels",
+   "separating driver between winners and weak of the same shape"
+  ]
+ },
+ "attributes": {
+  "length_hours": {
+   "values": [
+    3.6,
+    3.8,
+    2.6,
+    2.2,
+    2.9,
+    8.0
+   ],
+   "label": "shape (6/6 >= 2.2 h)"
+  },
+  "title": {
+   "label": "candidate: sleep promise + emotional state ('worried', 'overwhelmed', 'stress') + Psalms/Jesus",
+   "values": "see evidence"
+  },
+  "spoken_scripture_throughout": {
+   "label": "shape (6/6)"
+  },
+  "night_scenery_calm_voice": {
+   "label": "shape"
+  }
+ },
+ "house_rules": {
+  "original_share": "three_stage ORIGINAL_SHARE_MIN 0.35 still applies: original prayers and short reflections between Scripture readings; KJV verbatim",
+  "no_template": "all no_template rows apply",
+  "R1_R10": "apply; R10 3D look; no fear-bait"
+ },
+ "conflict_check": {
+  "language_and_line": "same",
+  "policy": "spoken KJV is public domain; original share kept >= 35 %; no reused third-party audio",
+  "coherence": "extends our night prayer (pilot-012 already ends in a sleep section)"
+ }
+}

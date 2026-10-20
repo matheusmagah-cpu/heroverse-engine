@@ -1,0 +1,20 @@
+{
+ "approved": true,
+ "output_sha256": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877",
+ "reviewer": "HeroVerse three-stage approval (owner rule 2026-10-19: mined structure + modeling + authenticity, no person approves)",
+ "reviewed_at": "2026-10-20T15:59:28Z",
+ "qa_status": "PASS",
+ "gates": {
+  "qa": "PASS",
+  "preflight": "PASS",
+  "scorecard_hard": "PASS",
+  "watched_review": {
+   "overall": 9.3,
+   "model": "gemini-3.8-flash"
+  },
+  "prepublish_gate": "PASS",
+  "structure": "PASS",
+  "authenticity": "PASS"
+ },
+ "notes": "Scorecard and watched review in out/review.json; final decision in out/gate.json."
+}

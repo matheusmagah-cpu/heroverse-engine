@@ -1,0 +1,28 @@
+{
+ "id": "bg-cares-stream-pebbles",
+ "prompt": "A slow night stream moving gently over rounded pebbles, moon reflections and soft moss on the banks, quiet natural scenery with open breathing space, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 3.0,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-010-img-bg-cares-stream-pebbles-sha256-1c48ca80b50eee0dcb9fa7e6b67fe9cbb31e20b3d56520313ac1e4f79158bb3f.png",
+ "sha256": "1c48ca80b50eee0dcb9fa7e6b67fe9cbb31e20b3d56520313ac1e4f79158bb3f"
+}

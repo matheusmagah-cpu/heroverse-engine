@@ -42,7 +42,14 @@ jobs:
           python3 -I -B migration/ops/minutes.py "$RUNNER_TEMP/runs30.json" migration/evidence/daily-report/latest.md
       - name: Content runway (every slot of the next 4 days has a pilot at the right stage)
         run: python3 -I -B migration/ops/runway.py migration/production migration/publish/ledger.json migration/evidence/daily-report/latest.md
+      - name: Compose existing evidence into a report-only learning brief
+        id: learning
+        run: |
+          python3 -I -B migration/mining/learning_loop.py migration/evidence/daily-report/learning \
+            migration/publish/ledger.json migration/structures/guided-prayer-scenic.json \
+            migration/evidence/vidiq/20261019/structure_audit.json migration/evidence/vidiq/20261019/thumbnails.json
       - name: Record
+        if: ${{ !cancelled() && (success() || steps.learning.outcome == 'failure') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

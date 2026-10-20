@@ -1,0 +1,1206 @@
+{
+ "version": "long-review-v1",
+ "pilot_id": "pilot-012",
+ "output_sha256": "82276559bdfdb5600e7e0ae13b5e7b337611fdacf0d2c2cc25d3533957e9dbfe",
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 31.07,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 5.47,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {
+  "words_per_minute": {
+   "value": 110.9,
+   "band": [
+    115,
+    165
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
+  },
+  "beats_per_minute": {
+   "value": 1.68,
+   "band": [
+    2.0,
+    2.6
+   ],
+   "inside": false
+  },
+  "shots_per_minute_model_counted": {
+   "value": 1.99,
+   "band": [
+    6,
+    99
+   ],
+   "inside": false
+  },
+  "you_per_100_words": {
+   "value": 5.1,
+   "band": [
+    6,
+    99
+   ],
+   "inside": false
+  },
+  "minutes": {
+   "value": 31.07,
+   "band": [
+    15,
+    45
+   ],
+   "inside": true
+  },
+  "first_spoken_at": {
+   "value": 300,
+   "band": [
+    0,
+    1.5
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
+  },
+  "coverage": {
+   "value": 0.517,
+   "band": [
+    0.9,
+    1.01
+   ],
+   "inside": false,
+   "note": "miner accuracy unproven: reported, not blocking"
+  }
+ },
+ "watched_review": {
+  "opening_and_promise": 9,
+  "picture_quality": 8.5,
+  "figure_and_background_integrity": 9,
+  "captions_readable_and_synced": 9,
+  "audio_clarity_and_mix": 9,
+  "pacing_and_visual_variety": 8,
+  "scripture_on_screen": 9,
+  "policy_safe": 10,
+  "overall": 8.8,
+  "issues": [
+   "00:39 - 1 Thessalonians 5:18 is recited without the dedicated scripture reference overlay card that is utilized for subsequent passages.",
+   "01:00 - A bright red Subscribe button appears briefly during an otherwise tranquil nighttime meditation setting.",
+   "Visual variety relies on cycling roughly 6-7 ambient AI artwork scenes across the full 31-minute runtime, which works well for sleep audio but offers limited visual progression."
+  ],
+  "strongest_moment": "18:41 - The gentle transition into Psalm 63:6-7 with the glowing cottage and quiet landscape, perfectly supporting the contemplative bedtime theme.",
+  "model": "gemini-3.8-flash",
+  "status": "PASS"
+ },
+ "failed_windows": [
+  0,
+  900,
+  1200
+ ],
+ "measured": {
+  "minutes": 31.1,
+  "title_words": 13,
+  "title_chars": 76,
+  "chapters": 0,
+  "likes_per_1k_views": 0.0,
+  "comments_per_1k_views": 0.0,
+  "coverage_fraction": 0.517,
+  "beats": 27,
+  "beat_seconds_median": 34,
+  "beats_per_minute": 1.68,
+  "shots_per_minute_model_counted": 1.99,
+  "first_spoken_beat": {
+   "at": 300,
+   "beat": "prayer"
+  },
+  "beat_mix": {
+   "scripture": 5,
+   "teaching": 4,
+   "application": 5,
+   "prayer": 13
+  },
+  "scripture_references": [
+   "Lamentations 3:22-23",
+   "Numbers 6:24",
+   "Numbers 6:25",
+   "Psalm 103:1-2",
+   "Psalm 34:8",
+   "Psalm 92:1-2"
+  ],
+  "scripture_per_10_min": 3.73,
+  "speech": {
+   "words": 1781,
+   "words_per_minute": 110.9,
+   "sentence_words_median": 14,
+   "you_per_100_words": 5.1,
+   "questions_per_minute": 0.0,
+   "first_15s_words": ""
+  }
+ },
+ "windows": [
+  {
+   "video_id": "pilot-012",
+   "window_start_seconds": 300,
+   "window_end_seconds": 600,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 300,
+     "text": "that has reached me,"
+    },
+    {
+     "start_seconds": 301,
+     "text": "and give me wisdom about what to do next."
+    },
+    {
+     "start_seconds": 304,
+     "text": "Help me recognize trustworthy assistance."
+    },
+    {
+     "start_seconds": 307,
+     "text": "Keep shame from shutting my mouth when I need support."
+    },
+    {
+     "start_seconds": 311,
+     "text": "Teach me to receive generosity with dignity and to offer it responsibly when I have enough to share."
+    },
+    {
+     "start_seconds": 320,
+     "text": "It is of the LORD's mercies that we are not consumed, because his compassions fail not."
+    },
+    {
+     "start_seconds": 328,
+     "text": "They are new every morning: great is thy faithfulness."
+    },
+    {
+     "start_seconds": 335,
+     "text": "These words appear in a book that gives grief a voice."
+    },
+    {
+     "start_seconds": 339,
+     "text": "You can hear their hope without erasing what you have lost."
+    },
+    {
+     "start_seconds": 343,
+     "text": "You are not being asked to appreciate an injury, an injustice, or a frightening experience."
+    },
+    {
+     "start_seconds": 350,
+     "text": "You can thank God for the person who stood beside you, for courage you found, or for help you sought."
+    },
+    {
+     "start_seconds": 358,
+     "text": "You can also say that something hurt."
+    },
+    {
+     "start_seconds": 361,
+     "text": "Let the mercy you remember stand beside that truth, without forcing the two into a tidy explanation."
+    },
+    {
+     "start_seconds": 370,
+     "text": "Merciful God, I entrust the part of today I would rather not revisit."
+    },
+    {
+     "start_seconds": 375,
+     "text": "I will not pretend that cruelty was kindness or that disappointment felt easy."
+    },
+    {
+     "start_seconds": 382,
+     "text": "Accompany me as I face what happened."
+    },
+    {
+     "start_seconds": 385,
+     "text": "Thank you for any protection, clarity, or support I received along the way."
+    },
+    {
+     "start_seconds": 391,
+     "text": "Give me courage to seek safety where it is needed and counsel where I feel unsure."
+    },
+    {
+     "start_seconds": 398,
+     "text": "Let gratitude strengthen my honesty, so that I can receive good without excusing what was wrong."
+    },
+    {
+     "start_seconds": 406,
+     "text": "Father, I bring the absence that shaped my day."
+    },
+    {
+     "start_seconds": 410,
+     "text": "I bring the empty chair, the quiet phone, or the name that stayed with me through ordinary tasks."
+    },
+    {
+     "start_seconds": 418,
+     "text": "Thank you for whatever love remains mine to remember."
+    },
+    {
+     "start_seconds": 422,
+     "text": "I can receive those memories with mixed feelings."
+    },
+    {
+     "start_seconds": 426,
+     "text": "Help me receive them at the pace I can bear."
+    },
+    {
+     "start_seconds": 429,
+     "text": "Where loneliness has narrowed my world, make room for gentle company and patient care."
+    },
+    {
+     "start_seconds": 436,
+     "text": "Receive the affection I still carry when I cannot give it in familiar ways."
+    },
+    {
+     "start_seconds": 443,
+     "text": "For the next few moments, you can hold one genuine kindness in mind."
+    },
+    {
+     "start_seconds": 448,
+     "text": "You might remember its color, its sound, or the person who offered it."
+    },
+    {
+     "start_seconds": 454,
+     "text": "Let your breathing continue naturally."
+    },
+    {
+     "start_seconds": 457,
+     "text": "You can let that small mercy be present while the music carries this quiet space."
+    },
+    {
+     "start_seconds": 469,
+     "text": "Lord, I thank you for this particular mercy I have remembered."
+    },
+    {
+     "start_seconds": 473,
+     "text": "I want to receive its goodness instead of rushing beyond it."
+    },
+    {
+     "start_seconds": 478,
+     "text": "If another person offered it, bless the life behind that gesture, including the concerns I know nothing about."
+    },
+    {
+     "start_seconds": 486,
+     "text": "Help me remember that I also move through the days of others."
+    },
+    {
+     "start_seconds": 491,
+     "text": "Let the care I have received shape how I speak, how I wait, and how I notice the next person before me."
+    },
+    {
+     "start_seconds": 501,
+     "text": "It is a good thing to give thanks unto the LORD, and to sing praises unto thy name, O Most High:"
+    },
+    {
+     "start_seconds": 510,
+     "text": "To shew forth thy lovingkindness in the morning, and thy faithfulness every night,"
+    },
+    {
+     "start_seconds": 518,
+     "text": "Now recall the middle of your day."
+    },
+    {
+     "start_seconds": 521,
+     "text": "Think of where you were when you checked the time, took a break, or changed from one task to another."
+    },
+    {
+     "start_seconds": 528,
+     "text": "You may notice something your hurried mind missed: a problem explained, a mistake caught early, a few minutes of laughter."
+    },
+    {
+     "start_seconds": 537,
+     "text": "You can give thanks for the help inside an imperfect task."
+    },
+    {
+     "start_seconds": 542,
+     "text": "You do not have to call the whole day successful before you acknowledge a useful or generous moment within it."
+    },
+    {
+     "start_seconds": 551,
+     "text": "Lord, I thank you for the opportunities I had to contribute or learn today."
+    },
+    {
+     "start_seconds": 558,
+     "text": "I remember the tools that worked, the instruction that made sense, and the help that arrived when I was stuck."
+    },
+    {
+     "start_seconds": 566,
+     "text": "Where my work was unnoticed, let me value the care it still required."
+    },
+    {
+     "start_seconds": 571,
+     "text": "Where I had no paid work, help me recognize the worth of the responsibilities I carried."
+    },
+    {
+     "start_seconds": 577,
+     "text": "Teach me to honor useful effort without measuring my value by productivity."
+    },
+    {
+     "start_seconds": 585,
+     "text": "Father, I am grateful for the moments when correction was possible."
+    },
+    {
+     "start_seconds": 590,
+     "text": "Thank you for the person who explained rather than humiliated, for the chance to start a task again, or for the clarity to admit a mistake."
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 300,
+     "end_seconds": 319,
+     "beat": "prayer",
+     "opening_words_verbatim": "that has reached me, and give me wisdom",
+     "content": "Petitions God for wisdom, assistance, and freedom from shame in accepting support.",
+     "device": "direct address",
+     "emotion": "humble"
+    },
+    {
+     "start_seconds": 319,
+     "end_seconds": 335,
+     "beat": "scripture",
+     "opening_words_verbatim": "It is of the LORD's mercies that we",
+     "content": "Recites Lamentations 3:22-23 regarding God's daily mercies.",
+     "device": "scripture quote",
+     "emotion": "reassuring"
+    },
+    {
+     "start_seconds": 335,
+     "end_seconds": 370,
+     "beat": "teaching",
+     "opening_words_verbatim": "These words appear in a book that gives",
+     "content": "Explains how biblical lament holds room for both grief and hope.",
+     "device": "perspective shift",
+     "emotion": "comforting"
+    },
+    {
+     "start_seconds": 370,
+     "end_seconds": 406,
+     "beat": "prayer",
+     "opening_words_verbatim": "Merciful God, I entrust the part of today",
+     "content": "Prays about facing painful moments honestly without denying past hurts.",
+     "device": "vulnerability",
+     "emotion": "honest"
+    },
+    {
+     "start_seconds": 406,
+     "end_seconds": 443,
+     "beat": "prayer",
+     "opening_words_verbatim": "Father, I bring the absence that shaped",
+     "content": "Offers prayers for coping with grief, loss, and loneliness.",
+     "device": "empathetic imagery",
+     "emotion": "tender"
+    },
+    {
+     "start_seconds": 443,
+     "end_seconds": 469,
+     "beat": "application",
+     "opening_words_verbatim": "For the next few moments, you can hold",
+     "content": "Guides the listener in a brief silent reflection on a single act of kindness.",
+     "device": "guided reflection",
+     "emotion": "peaceful"
+    },
+    {
+     "start_seconds": 469,
+     "end_seconds": 501,
+     "beat": "prayer",
+     "opening_words_verbatim": "Lord, I thank you for this particular",
+     "content": "Expresses gratitude for remembered mercies and asks to extend kindness to others.",
+     "device": "intercession",
+     "emotion": "grateful"
+    },
+    {
+     "start_seconds": 501,
+     "end_seconds": 518,
+     "beat": "scripture",
+     "opening_words_verbatim": "It is a good thing to give thanks",
+     "content": "Recites Psalm 92:1-2 praising God's lovingkindness and faithfulness.",
+     "device": "scripture quote",
+     "emotion": "reverent"
+    },
+    {
+     "start_seconds": 518,
+     "end_seconds": 551,
+     "beat": "teaching",
+     "opening_words_verbatim": "Now recall the middle of your day.",
+     "content": "Encourages noticing small moments of grace and assistance throughout the day.",
+     "device": "mindful recall",
+     "emotion": "reflective"
+    },
+    {
+     "start_seconds": 551,
+     "end_seconds": 585,
+     "beat": "prayer",
+     "opening_words_verbatim": "Lord, I thank you for the opportunities",
+     "content": "Prays for gratitude regarding daily work, effort, and unpaid responsibilities.",
+     "device": "affirmation",
+     "emotion": "content"
+    },
+    {
+     "start_seconds": 585,
+     "end_seconds": 600,
+     "beat": "prayer",
+     "opening_words_verbatim": "Father, I am grateful for the moments",
+     "content": "Thanks God for gentle corrections and opportunities to learn from mistakes.",
+     "device": "humility",
+     "emotion": "peaceful"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration",
+    "shot_sizes": [
+     "medium shot",
+     "wide shot"
+    ],
+    "shots_counted": 9,
+    "motion": "Static art with gentle slow push-ins and soft particle overlays.",
+    "on_screen_text": "Subtitles centered at bottom; scripture verses presented in dark overlay boxes; 'HeroVerse Prayer' logo in top left.",
+    "figure_or_presenter": "none",
+    "colour_and_light": "Warm candlelight and dark night tones featuring deep blues, gold accents, and soft ambers.",
+    "transitions": "Slow cross-fades between visual scenes."
+   },
+   "sound": {
+    "voice": "Male, calm, deep, measured tone.",
+    "pace": "Very slow and meditative.",
+    "music": "Soft ambient piano and string pads.",
+    "music_changes": "Consistent relaxing instrumental bed without sudden shifts.",
+    "sound_effects": "Subtle ambient room resonance."
+   },
+   "scripture_references": [
+    "Lamentations 3:22-23",
+    "Psalm 92:1-2"
+   ],
+   "limitations": [
+    "Visuals consist solely of static AI artwork with subtle animation effects."
+   ]
+  },
+  {
+   "video_id": "pilot-012",
+   "window_start_seconds": 600,
+   "window_end_seconds": 900,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 600,
+     "text": "God, thank you for companionship in the forms it took today."
+    },
+    {
+     "start_seconds": 603,
+     "text": "I give thanks for people who made room for my words and for those whose quiet presence needed little explanation."
+    },
+    {
+     "start_seconds": 611,
+     "text": "Bless the friend who remembered, the relative who called, and the patient colleague."
+    },
+    {
+     "start_seconds": 617,
+     "text": "Where a relationship is strained, help me recognize any genuine kindness without overlooking needed boundaries."
+    },
+    {
+     "start_seconds": 626,
+     "text": "Let my own gratitude become clear enough to express, so that good care is received and those who offer it are remembered."
+    },
+    {
+     "start_seconds": 636,
+     "text": "Father, I thank you for people whose care made this day more bearable."
+    },
+    {
+     "start_seconds": 641,
+     "text": "Some of their work happened before I noticed a need."
+    },
+    {
+     "start_seconds": 645,
+     "text": "Someone cleaned, prepared, organized, repaired, or stayed available."
+    },
+    {
+     "start_seconds": 650,
+     "text": "I remember professional help and informal kindness alike."
+    },
+    {
+     "start_seconds": 655,
+     "text": "Let them also receive support, respect, and time to rest."
+    },
+    {
+     "start_seconds": 660,
+     "text": "Keep me from treating another person's generosity as an endless supply."
+    },
+    {
+     "start_seconds": 666,
+     "text": "Teach me to recognize their limits and to share responsibility wherever I can carry a fair part."
+    },
+    {
+     "start_seconds": 675,
+     "text": "Bless the LORD, O my soul: and all that is within me, bless his holy name."
+    },
+    {
+     "start_seconds": 683,
+     "text": "Bless the LORD, O my soul, and forget not all his benefits:"
+    },
+    {
+     "start_seconds": 689,
+     "text": "You can notice the ways you cared for your body today, even if your body felt uncomfortable or tired."
+    },
+    {
+     "start_seconds": 697,
+     "text": "You may have eaten, taken prescribed medicine, used a mobility aid, asked for a break, or attended an appointment."
+    },
+    {
+     "start_seconds": 706,
+     "text": "You can give thanks for available care while still naming pain."
+    },
+    {
+     "start_seconds": 711,
+     "text": "You do not have to turn illness into a lesson tonight."
+    },
+    {
+     "start_seconds": 715,
+     "text": "Let your attention include the assistance you received and the small choices through which you treated yourself as someone worth caring for."
+    },
+    {
+     "start_seconds": 726,
+     "text": "Lord, I bring my body into this thanksgiving with all its needs."
+    },
+    {
+     "start_seconds": 731,
+     "text": "Thank you for whatever movement, sensation, strength, or comfort was available today, and for the support that helped me where it was difficult."
+    },
+    {
+     "start_seconds": 741,
+     "text": "Give me patience with limits I did not choose."
+    },
+    {
+     "start_seconds": 745,
+     "text": "Help me use appropriate care and ask questions when I need guidance."
+    },
+    {
+     "start_seconds": 750,
+     "text": "Help me stop scolding myself for being tired."
+    },
+    {
+     "start_seconds": 754,
+     "text": "Let my gratitude include the ordinary permission to sit, eat, receive assistance, and be treated gently."
+    },
+    {
+     "start_seconds": 763,
+     "text": "God, I remember the people whose names were missing from my account of this day."
+    },
+    {
+     "start_seconds": 769,
+     "text": "I benefited from unseen work and systems others maintained."
+    },
+    {
+     "start_seconds": 774,
+     "text": "Thank you for those who collected waste, kept roads usable, answered questions, and did the careful tasks others depend on."
+    },
+    {
+     "start_seconds": 784,
+     "text": "Help me meet such workers with respect when our paths cross."
+    },
+    {
+     "start_seconds": 789,
+     "text": "Let gratitude change my manner at the counter, on the phone, and in the doorway, especially when I am impatient or preoccupied."
+    },
+    {
+     "start_seconds": 800,
+     "text": "You may remember something beautiful that asked nothing from you: light across a wall, a bird on a wire, steam lifting from a cup."
+    },
+    {
+     "start_seconds": 810,
+     "text": "You can choose a detail from your own surroundings instead of borrowing somebody else's peaceful scene."
+    },
+    {
+     "start_seconds": 818,
+     "text": "If beauty was hard to notice, you can receive whatever simple pleasure was available."
+    },
+    {
+     "start_seconds": 824,
+     "text": "Perhaps you enjoyed a familiar sound or the feel of clean fabric."
+    },
+    {
+     "start_seconds": 830,
+     "text": "You are allowed to value an ordinary delight without making it prove that everything else was fine."
+    },
+    {
+     "start_seconds": 839,
+     "text": "Creator, thank you"
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 600,
+     "end_seconds": 635,
+     "beat": "prayer",
+     "opening_words_verbatim": "God, thank you for companionship",
+     "content": "A prayer of thanksgiving for relationships and supportive companionship experienced throughout the day.",
+     "device": "personal prayer",
+     "emotion": "grateful and reflective"
+    },
+    {
+     "start_seconds": 635,
+     "end_seconds": 674,
+     "beat": "prayer",
+     "opening_words_verbatim": "Father, I thank you for people",
+     "content": "Acknowledging unseen acts of care and professional or informal help received during the day.",
+     "device": "listing and reflection",
+     "emotion": "humble and appreciative"
+    },
+    {
+     "start_seconds": 674,
+     "end_seconds": 688,
+     "beat": "scripture",
+     "opening_words_verbatim": "Bless the LORD, O my soul",
+     "content": "Quoting Psalm 103:1-2 to direct praise and remembrance toward God.",
+     "device": "scripture reading",
+     "emotion": "reverent"
+    },
+    {
+     "start_seconds": 688,
+     "end_seconds": 725,
+     "beat": "application",
+     "opening_words_verbatim": "You can notice the ways",
+     "content": "Inviting the listener to acknowledge physical care, bodily needs, and medical assistance without harsh judgment.",
+     "device": "direct address and gentle reminder",
+     "emotion": "compassionate and soothing"
+    },
+    {
+     "start_seconds": 725,
+     "end_seconds": 762,
+     "beat": "prayer",
+     "opening_words_verbatim": "Lord, I bring my body into",
+     "content": "Praying for patience with bodily limitations and physical fatigue.",
+     "device": "personal prayer",
+     "emotion": "vulnerable and weary"
+    },
+    {
+     "start_seconds": 762,
+     "end_seconds": 799,
+     "beat": "application",
+     "opening_words_verbatim": "God, I remember the people whose",
+     "content": "Recognizing the unseen civic workers and societal systems that supported daily life.",
+     "device": "gratitude prompt",
+     "emotion": "respectful and aware"
+    },
+    {
+     "start_seconds": 799,
+     "end_seconds": 900,
+     "beat": "teaching",
+     "opening_words_verbatim": "You may remember something beautiful",
+     "content": "Encouraging appreciation for small everyday beauties and simple pleasures in one's immediate surroundings.",
+     "device": "sensory imagery and contrast",
+     "emotion": "peaceful and comforting"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration and text overlay",
+    "shot_sizes": [
+     "Medium shot",
+     "Close-up"
+    ],
+    "shots_counted": 6,
+    "motion": "Slow zoom and pan",
+    "on_screen_text": "Subtitles matching transcript word by word, and scripture references",
+    "figure_or_presenter": "None",
+    "colour_and_light": "Warm candlelight and dark blue night tones",
+    "transitions": "Dissolve and fade"
+   },
+   "sound": {
+    "voice": "Calm, warm male voice, human",
+    "pace": "Slow and meditative",
+    "music": "Ambient instrumental background music",
+    "music_changes": "Gentle volume shifts matching prayer transitions",
+    "sound_effects": "None"
+   },
+   "scripture_references": [
+    "Psalm 103:1-2"
+   ],
+   "limitations": [
+    "Visual window restricted to seconds 600 to 900"
+   ]
+  },
+  {
+   "video_id": "pilot-012",
+   "window_start_seconds": 1500,
+   "window_end_seconds": 1800,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 1500.0,
+     "text": "without immediately earning another approval."
+    },
+    {
+     "start_seconds": 1503.1,
+     "text": "I am grateful for every person who has reflected patient care toward me."
+    },
+    {
+     "start_seconds": 1509.2,
+     "text": "May the warmth of that care remind me that relationship can include welcome, gentleness, and room to grow."
+    },
+    {
+     "start_seconds": 1519.0,
+     "text": "You can let welcome be a quiet word now."
+    },
+    {
+     "start_seconds": 1522.8,
+     "text": "You need not attach a task to it."
+    },
+    {
+     "start_seconds": 1526.0,
+     "text": "You may remember being offered a seat, being greeted by name, or being allowed to speak at your own pace."
+    },
+    {
+     "start_seconds": 1533.2,
+     "text": "If those memories feel distant, you can still hear the invitation to bring your actual self before God."
+    },
+    {
+     "start_seconds": 1541.2,
+     "text": "You can arrive tired, disappointed, grateful, or unsure."
+    },
+    {
+     "start_seconds": 1546.0,
+     "text": "The prayer has room for what you are experiencing, and you can remain without preparing a better version of yourself."
+    },
+    {
+     "start_seconds": 1556.3,
+     "text": "O taste and see that the LORD is good: Psalm 34:8 (KJV)"
+    },
+    {
+     "start_seconds": 1559.0,
+     "text": "blessed is the man that trusteth in him."
+    },
+    {
+     "start_seconds": 1564.0,
+     "text": "The psalm uses a word you know through ordinary life: taste."
+    },
+    {
+     "start_seconds": 1569.0,
+     "text": "You can recall receiving something good in a small, direct way, before understanding everything about it."
+    },
+    {
+     "start_seconds": 1577.0,
+     "text": "Tonight you have named a few mercies that you actually encountered."
+    },
+    {
+     "start_seconds": 1582.2,
+     "text": "You can let those memories remain modest and real."
+    },
+    {
+     "start_seconds": 1586.0,
+     "text": "You do not have to make them answer every question."
+    },
+    {
+     "start_seconds": 1590.0,
+     "text": "Receive the invitation to trust God with what you know and what you still cannot explain, while the evening grows quieter around you."
+    },
+    {
+     "start_seconds": 1601.8,
+     "text": "Good God, I thank you for the kindness I have encountered, in small portions and familiar places."
+    },
+    {
+     "start_seconds": 1649.0,
+     "text": "I have not understood every part of today, but I can acknowledge the gifts I received."
+    },
+    {
+     "start_seconds": 1656.0,
+     "text": "Help me remain open to goodness without becoming careless about what harms."
+    },
+    {
+     "start_seconds": 1702.0,
+     "text": "Keep my discernment clear and my heart capable of gratitude."
+    },
+    {
+     "start_seconds": 1707.0,
+     "text": "I give thanks for what was good today, and I entrust the unanswered questions to your wisdom."
+    },
+    {
+     "start_seconds": 1715.0,
+     "text": "You can allow the list to end where it is."
+    },
+    {
+     "start_seconds": 1718.0,
+     "text": "A forgotten kindness has not become less real because you cannot recall it tonight."
+    },
+    {
+     "start_seconds": 1725.0,
+     "text": "You have paid attention; now you can stop working at it."
+    },
+    {
+     "start_seconds": 1730.0,
+     "text": "You can receive the remaining Scriptures as words spoken beside your rest."
+    },
+    {
+     "start_seconds": 1735.8,
+     "text": "There is no need to repeat every phrase after the voice or recover anything you missed."
+    },
+    {
+     "start_seconds": 1742.0,
+     "text": "You can listen lightly, let your hands be comfortable, and allow this moment to contain less effort than the day required."
+    },
+    {
+     "start_seconds": 1753.0,
+     "text": "The LORD bless thee, and keep thee: Numbers 6:24 (KJV)"
+    },
+    {
+     "start_seconds": 1757.0,
+     "text": "These words belong to the blessing given for Israel."
+    },
+    {
+     "start_seconds": 1761.0,
+     "text": "You can hear their simple request for God's blessing and keeping as the evening reading draws toward its close."
+    },
+    {
+     "start_seconds": 1770.0,
+     "text": "You need not turn these words into a forecast."
+    },
+    {
+     "start_seconds": 1774.0,
+     "text": "Receive them as a prayer offered with care."
+    },
+    {
+     "start_seconds": 1777.0,
+     "text": "You can be thankful for the support you know and bring the places where you still feel vulnerable."
+    },
+    {
+     "start_seconds": 1784.0,
+     "text": "The blessing gives you language for entrusting yourself to God when your own words have become few."
+    },
+    {
+     "start_seconds": 1792.0,
+     "text": "The LORD make his face shine upon thee, and be gracious unto thee: Numbers 6:25 (KJV)"
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 1500.0,
+     "end_seconds": 1526.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "without immediately earning another approval.",
+     "content": "A reflective prayer of gratitude for patient care and the warmth of relationships.",
+     "device": "contrast",
+     "emotion": "peaceful"
+    },
+    {
+     "start_seconds": 1526.0,
+     "end_seconds": 1556.0,
+     "beat": "teaching",
+     "opening_words_verbatim": "You may remember being offered a seat,",
+     "content": "An invitation to bring one's actual self before God without pretense.",
+     "device": "direct address",
+     "emotion": "reassuring"
+    },
+    {
+     "start_seconds": 1556.0,
+     "end_seconds": 1601.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "O taste and see that the LORD is good:",
+     "content": "Reading Psalm 34:8 and reflecting on tasting goodness in ordinary life.",
+     "device": "scripture integration",
+     "emotion": "contemplative"
+    },
+    {
+     "start_seconds": 1601.0,
+     "end_seconds": 1715.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "Good God, I thank you for the kindness",
+     "content": "A prayer of thanksgiving for daily gifts and entrusting unanswered questions to God.",
+     "device": "repetition",
+     "emotion": "grateful"
+    },
+    {
+     "start_seconds": 1715.0,
+     "end_seconds": 1752.0,
+     "beat": "application",
+     "opening_words_verbatim": "You can allow the list to end where it is.",
+     "content": "Permission to rest and release striving at the end of the day.",
+     "device": "reassurance",
+     "emotion": "calming"
+    },
+    {
+     "start_seconds": 1752.0,
+     "end_seconds": 1800.0,
+     "beat": "scripture",
+     "opening_words_verbatim": "The LORD bless thee, and keep thee:",
+     "content": "Pronouncing the priestly blessing from Numbers 6 over the listener for evening rest.",
+     "device": "blessing",
+     "emotion": "serene"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration",
+    "shot_sizes": [
+     "medium shot",
+     "wide shot",
+     "close-up"
+    ],
+    "shots_counted": 14,
+    "motion": "slow panning and fading transitions between night scenes",
+    "on_screen_text": "subtitles and scripture verses in white serif font",
+    "figure_or_presenter": "none",
+    "colour_and_light": "dark blues, night lighting, warm lamplight, glowing candlelight",
+    "transitions": "dissolve and fade"
+   },
+   "sound": {
+    "voice": "male, warm, calm, soothing, human",
+    "pace": "slow and measured",
+    "music": "ambient peaceful instrumental with soft pads",
+    "music_changes": "subtle shifts matching scene changes",
+    "sound_effects": "none"
+   },
+   "scripture_references": [
+    "Psalm 34:8",
+    "Numbers 6:24",
+    "Numbers 6:25"
+   ],
+   "limitations": []
+  },
+  {
+   "video_id": "pilot-012",
+   "window_start_seconds": 1800,
+   "window_end_seconds": 1864,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 1800.0,
+     "text": "I remembered and honesty about the pain I entrusted."
+    },
+    {
+     "start_seconds": 1804.4,
+     "text": "I ask for rest, for sustaining care, and for wisdom when the morning calls for action."
+    },
+    {
+     "start_seconds": 1811.2,
+     "text": "Receive the people I have remembered throughout this evening."
+    },
+    {
+     "start_seconds": 1815.6,
+     "text": "Bless those who helped me, and guide me in whatever care I can offer others."
+    },
+    {
+     "start_seconds": 1821.1,
+     "text": "I leave these words with you now, grateful that prayer has made room for the whole day, including the parts I could not resolve."
+    },
+    {
+     "start_seconds": 1832.0,
+     "text": "May the Lord's gracious care accompany you through the remaining hours of this night."
+    },
+    {
+     "start_seconds": 1839.0,
+     "text": "May remembered kindness give your heart something gentle to receive, and may you find courage to seek the support you need."
+    },
+    {
+     "start_seconds": 1847.1,
+     "text": "Your thanksgiving has been offered."
+    },
+    {
+     "start_seconds": 1850.1,
+     "text": "The difficult parts have been named before God."
+    },
+    {
+     "start_seconds": 1853.6,
+     "text": "You can let the words grow quiet now, with this day entrusted to his faithfulness."
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 1800.0,
+     "end_seconds": 1811.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "I remembered and honesty about the pain",
+     "content": "The speaker continues the night prayer by asking for rest, sustaining care, and morning wisdom.",
+     "device": "continuation",
+     "emotion": "peaceful"
+    },
+    {
+     "start_seconds": 1811.0,
+     "end_seconds": 1831.0,
+     "beat": "prayer",
+     "opening_words_verbatim": "Receive the people I have remembered throughout",
+     "content": "The prayer shifts to intercession for others and expressing gratitude for the day's closure.",
+     "device": "intercession",
+     "emotion": "reflective"
+    },
+    {
+     "start_seconds": 1831.0,
+     "end_seconds": 1864.0,
+     "beat": "application",
+     "opening_words_verbatim": "May the Lord's gracious care accompany",
+     "content": "A closing blessing and benediction to bring peace and closure for the listener's night.",
+     "device": "benediction",
+     "emotion": "comforting"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration",
+    "shot_sizes": [
+     "medium shot",
+     "wide shot"
+    ],
+    "shots_counted": 3,
+    "motion": "slow zoom and particle effects",
+    "on_screen_text": "subtitles of the spoken prayer",
+    "figure_or_presenter": "none",
+    "colour_and_light": "dark night tones with warm lamp and moonlight accents",
+    "transitions": "dissolve fade"
+   },
+   "sound": {
+    "voice": "calm male voice with soft warm tone",
+    "pace": "slow and meditative",
+    "music": "ambient soft instrumental",
+    "music_changes": "subtle shifts matching scene changes",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": []
+  }
+ ],
+ "miner_rows_blocking": false,
+ "instrument": "structure_mining.py prompt/schema/models via Gemini Files API (same as the reference mining)",
+ "usage": [
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27670,
+   "candidatesTokenCount": 3693,
+   "totalTokenCount": 31363,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 370
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 27674,
+   "candidatesTokenCount": 3391,
+   "totalTokenCount": 34260,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 374
+    }
+   ],
+   "thoughtsTokenCount": 3195,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27674,
+   "candidatesTokenCount": 2491,
+   "totalTokenCount": 30165,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 374
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27676,
+   "candidatesTokenCount": 4835,
+   "totalTokenCount": 32511,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 376
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27678,
+   "candidatesTokenCount": 2911,
+   "totalTokenCount": 30589,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 378
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 27678,
+   "candidatesTokenCount": 2508,
+   "totalTokenCount": 30186,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 378
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 27300
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 6202,
+   "candidatesTokenCount": 1026,
+   "totalTokenCount": 7228,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 5824
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 378
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 108333,
+   "candidatesTokenCount": 269,
+   "totalTokenCount": 109737,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 108112
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 221
+    }
+   ],
+   "thoughtsTokenCount": 1135,
+   "serviceTier": "standard"
+  }
+ ]
+}

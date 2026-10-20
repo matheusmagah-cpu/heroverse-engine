@@ -1,0 +1,612 @@
+{
+ "version": "prepublish-gate-v1",
+ "pilot_id": "pilot-005",
+ "output_sha256": "c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54",
+ "decision": "PASS",
+ "eligible_for_automatic_publication": true,
+ "dimensions": {
+  "binding": "PASS",
+  "technical": "PASS",
+  "audio": "PASS",
+  "transcript": "PASS",
+  "captions": "PASS",
+  "sync": "PASS",
+  "image": "PASS",
+  "rights": "PASS",
+  "content_and_policy": "PASS",
+  "scorecard": "PASS",
+  "full_file_scan": "PASS",
+  "structure": "PASS",
+  "authenticity": "PASS",
+  "preflight": "PASS"
+ },
+ "items": {
+  "binding": [
+   {
+    "source": "binding",
+    "item": "manifest",
+    "state": "PASS",
+    "detail": "c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54"
+   },
+   {
+    "source": "binding",
+    "item": "qa_for_this_file",
+    "state": "PASS",
+    "detail": "c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54"
+   },
+   {
+    "source": "binding",
+    "item": "qa_criteria_frozen",
+    "state": "PASS",
+    "detail": {
+     "version": "pilot-qa-criteria-v3",
+     "recorded": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+     "file": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
+    }
+   },
+   {
+    "source": "binding",
+    "item": "review_for_this_file",
+    "state": "PASS",
+    "detail": "c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54"
+   },
+   {
+    "source": "binding",
+    "item": "video_file_hash",
+    "state": "PASS",
+    "detail": "c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54"
+   }
+  ],
+  "technical": [
+   {
+    "source": "qa",
+    "item": "full_decode_without_errors",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "video_format",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "duration_min",
+    "state": "PASS"
+   }
+  ],
+  "audio": [
+   {
+    "source": "qa",
+    "item": "integrated_lufs",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "true_peak",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "speech_presence",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_singing",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "audio_clarity_and_mix",
+    "state": "PASS",
+    "detail": 9.5
+   }
+  ],
+  "transcript": [
+   {
+    "source": "qa",
+    "item": "wer_vs_script",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "words_per_minute",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "hook_second_person",
+    "state": "PASS"
+   }
+  ],
+  "captions": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_hold_median",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_chars_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_words_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_no_box",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "PASS",
+    "detail": 9.5
+   }
+  ],
+  "sync": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "PASS",
+    "detail": 9.5
+   }
+  ],
+  "image": [
+   {
+    "source": "qa",
+    "item": "title_card_seconds",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_figure",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "every_scene_in_motion",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "scene_seconds",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "crossfade_seconds_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "image_repeat_gap",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "scripture_card_only_while_read",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_count",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_short_and_not_early",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "persistent_overlays_only_brand",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "picture_quality",
+    "state": "PASS",
+    "detail": 9.0
+   },
+   {
+    "source": "review",
+    "item": "figure_and_background_integrity",
+    "state": "PASS",
+    "detail": 9.0
+   }
+  ],
+  "rights": [
+   {
+    "source": "qa",
+    "item": "images_open_licence_with_revision",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_third_party_footage",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "music_owned",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "voice_model_pinned",
+    "state": "PASS"
+   }
+  ],
+  "content_and_policy": [
+   {
+    "source": "review",
+    "item": "opening_and_promise",
+    "state": "PASS",
+    "detail": 9.2
+   },
+   {
+    "source": "review",
+    "item": "pacing_and_visual_variety",
+    "state": "PASS",
+    "detail": 8.0
+   },
+   {
+    "source": "review",
+    "item": "scripture_on_screen",
+    "state": "PASS",
+    "detail": 9.5
+   },
+   {
+    "source": "review",
+    "item": "policy_safe",
+    "state": "PASS",
+    "detail": 10.0
+   },
+   {
+    "source": "review",
+    "item": "overall",
+    "state": "PASS",
+    "detail": 9.1
+   }
+  ],
+  "scorecard": [
+   {
+    "source": "score",
+    "item": "minutes",
+    "state": "PASS",
+    "detail": 24.37
+   },
+   {
+    "source": "score",
+    "item": "scripture_per_10_min",
+    "state": "PASS",
+    "detail": 8.62
+   }
+  ],
+  "full_file_scan": [
+   {
+    "source": "scan",
+    "item": "black_picture",
+    "state": "PASS",
+    "detail": 0.0
+   },
+   {
+    "source": "scan",
+    "item": "digital_silence",
+    "state": "PASS",
+    "detail": 0.0
+   }
+  ],
+  "structure": [
+   {
+    "source": "structure",
+    "item": "driver_continuous_motion",
+    "state": "PASS",
+    "detail": 59
+   },
+   {
+    "source": "structure",
+    "item": "driver_viewer_hook_5s",
+    "state": "PASS",
+    "detail": [
+     "Good morning.",
+     "Let us place you and those you love under God's protection, "
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_speech_within_3s",
+    "state": "PASS",
+    "detail": 0.3
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_spoken_amen_cta",
+    "state": "PASS",
+    "detail": "And now receive this blessing. The LORD shall preserve thy going out and thy coming in from this time forth, and even fo"
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_recurring_refrain",
+    "state": "PASS",
+    "detail": [
+     "the lord is",
+     14
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_gratitude_block",
+    "state": "PASS",
+    "detail": 4
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_voice_and_music",
+    "state": "PASS",
+    "detail": {
+     "voice_model_pinned": true,
+     "music_owned": true
+    }
+   },
+   {
+    "source": "structure",
+    "item": "package_title_promise_pipe_keyword",
+    "state": "PASS",
+    "detail": "Morning Prayer for Protection | Psalm 91 Over You and Your Family"
+   },
+   {
+    "source": "structure",
+    "item": "package_chapters",
+    "state": "PASS",
+    "detail": [
+     "0:00",
+     "0:41",
+     "1:43",
+     "2:14"
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "package_publish_window",
+    "state": "PASS",
+    "detail": "morning 2026-10-20T10:00:00Z"
+   }
+  ],
+  "authenticity": [
+   {
+    "source": "authenticity",
+    "item": "original_words_share",
+    "state": "PASS",
+    "detail": 0.634
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_script_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.028,
+      "pilot-002"
+     ],
+     "visible": [
+      "pilot-002",
+      "pilot-012"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_image_set",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.167,
+      "pilot-002"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_title",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.0,
+      null
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_opening_line",
+    "state": "PASS",
+    "detail": {
+     "opening": "let us place you and those you love",
+     "same_as": []
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "not_reused_reference_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": 0.0003,
+     "ref": "fXhKzleJhxI",
+     "refs": 1
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "critique_policy_and_ypp",
+    "state": "PASS",
+    "detail": []
+   },
+   {
+    "source": "authenticity",
+    "item": "synthetic_media_disclosed",
+    "state": "PASS",
+    "detail": "publish_video.py status"
+   }
+  ],
+  "preflight": [
+   {
+    "source": "preflight",
+    "item": "preflight",
+    "state": "PASS"
+   }
+  ]
+ },
+ "informative_not_deciding": {
+  "scan_frozen_picture": {
+   "longest_s": 3.1,
+   "report_s": 5.0,
+   "blocking": false,
+   "inside": true,
+   "spans": [
+    [
+     2.6,
+     3.77,
+     1.17
+    ],
+    [
+     4.93,
+     6.0,
+     1.07
+    ],
+    [
+     24.7,
+     25.7,
+     1.0
+    ],
+    [
+     26.0,
+     27.0,
+     1.0
+    ],
+    [
+     27.0,
+     28.0,
+     1.0
+    ],
+    [
+     28.6,
+     29.87,
+     1.27
+    ],
+    [
+     44.83,
+     46.0,
+     1.17
+    ],
+    [
+     46.77,
+     48.0,
+     1.23
+    ],
+    [
+     48.0,
+     49.2,
+     1.2
+    ],
+    [
+     49.2,
+     51.03,
+     1.83
+    ],
+    [
+     76.23,
+     77.4,
+     1.17
+    ],
+    [
+     98.6,
+     99.67,
+     1.07
+    ],
+    [
+     149.97,
+     151.57,
+     1.6
+    ],
+    [
+     151.57,
+     154.5,
+     2.93
+    ],
+    [
+     154.5,
+     156.2,
+     1.7
+    ],
+    [
+     156.2,
+     158.63,
+     2.43
+    ],
+    [
+     158.63,
+     160.83,
+     2.2
+    ],
+    [
+     160.83,
+     162.5,
+     1.67
+    ],
+    [
+     162.5,
+     164.13,
+     1.63
+    ],
+    [
+     164.13,
+     165.67,
+     1.53
+    ]
+   ]
+  }
+ },
+ "market_evidence_not_deciding": {
+  "status": "KNOWN",
+  "data_age_days": 1,
+  "opportunity": "'psalm 91': ~261k est. monthly YouTube searches, volume 80.9/100, competition 37.3/100 (low), +19.7% vs 30 days earlier; the only queried topic of our format with high volume, low competition and rising demand.",
+  "recommendation": "Keep pilot-005 as written (Psalm 91 protection, ~23 min). No change to title or format: the vidIQ evidence supports the topic but cannot pass the 90% rule for a change. Next call: comparables for Psalm 91 before its publication (2026-10-20 10:00 UTC).",
+  "validation_status": "informative_only (vidIQ validation FAIL 2026-10-18, rho 0.404 < 0.5)",
+  "credits": 0,
+  "file": "migration/production/pilot-005/market/vidiq.json",
+  "not_claimed": "market evidence only: not technical quality, not a performance forecast, not a guarantee of views, revenue or monetization"
+ },
+ "method_notes": {
+  "review_sampling": "watched review samples pictures at 0.5 frames/s, low resolution",
+  "not_claimed": [
+   "perceived quality by viewers",
+   "retention, CTR or revenue",
+   "originality beyond the rights checks listed"
+  ]
+ }
+}

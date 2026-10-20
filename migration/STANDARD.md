@@ -1,6 +1,6 @@
 # HeroVerse Production Standard v1 (2026-10-19)
 
-> Scope (SYSTEM.md): these are the execution rules of the structure `structures/guided-prayer-scenic.json`, status **candidate** (2 winners, 2 channels). They are widened or changed only by structure mining (SYSTEM.md stage 1).
+> Scope (SYSTEM.md): execution rules of `structures/guided-prayer-scenic.json`, **validated 2026-10-19** (6 winners from 6 channels, 3 weak contrasts; `evidence/vidiq/20261019/structure_audit.json`). Measured **drivers**: continuous camera motion (R2; 6/6 winners vs 0/3 weak), a viewer-directed hook within 5 s (R7; 5/6 vs 0/3), and for night prayers a gratitude topic (2.08x median views, same channel). R1 (no figure), R4 (no caption box) and R6 (no persistent CTA) are **house choices on free attributes**: the market splits on them (3/6, 4/6, 4/6), and the two highest breakouts use the clean grammar. They are kept for a cleaner, more professional look, not claimed as drivers.
 
 One standard. Every rule is measured on breakout videos (vidIQ, read-only) and is checked
 before publication. Evidence: `migration/evidence/vidiq/20261019/`.
@@ -46,7 +46,18 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - starts at a sentence start, with a complete line within the first 3 s, and ends on a completed sentence;
   - phrase captions of 1–5 words;
   - no CTA overlay.
-- **R9.** Thumbnail: to be measured. Dot's card collects the thumbnails of the 20 winners; until then no rule is assumed.
+- **R9.** Thumbnail, measured on the 20 spoken-prayer winners (`evidence/vidiq/20261019/thumbnails.json`, runner audit 2026-10-19; images not stored). Each item is in ≥ 70 % of winners; no weak contrasts were measured, so none is claimed as a driver. They block as our standard:
+  - overlaid text present (20/20), **4–12 words in 2–4 lines** (17/20 each);
+  - white text (20/20) with a **dark outline or shadow** (19/20) and **no box** (19/20); a yellow or gold accent line is a house choice (13/20);
+  - **mean luminance 48–147 of 255** (all 20 inside; none bright, 8/20 dark), measured on the 1280×720 file;
+  - a **visible light source** in the picture: sun, moon, lamp, candle or window light (15/20);
+  - no realistic human face (house choice, consistent with R1; 13/20 winners show no person);
+  - 1280×720 JPG under the Help size limit (stage 5).
+
+- **R10.** Resolution and 3D look (owner, 2026-10-20). It blocks from pilot-008 on; pilot-006 (published 2026-10-21 00:00) keeps its painted set, so one video never mixes two looks.
+  - **Minimum 1080p everywhere.** Every delivered video is at least 1920×1080 (long) or 1080×1920 (Short), at ≥ 24 fps. Every source image is at least 1920×1080 after the 16:9 crop (vertical: 1080×1920), generated at that size, or brought to it by AI super-resolution (Real-ESRGAN 2×, as `cf-images.yml` does for FLUX's 1024 px output); never by a plain resize. Dot's media (DOT_PROTOCOL) follows the same floor.
+  - **3D cinematic look.** Every image and animation reads as a photoreal 3D cinematic render: volumetric light, global illumination, depth of field, real depth for the parallax. No flat illustration and no painting style.
+  - Prompts end with the house suffix: `photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text`.
 
 ## Gate
 

@@ -1,0 +1,28 @@
+{
+ "id": "bg-olive-grove-moon",
+ "prompt": "An old olive grove on a low hillside under a visible full moon, silver leaves in a gentle night breeze, warm distant lamplight along a stone path, peaceful open landscape, no people, no text, soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.8,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-006-img-bg-olive-grove-moon-sha256-78826913bdb573a4ad60ca6a9eec058d686e5c04ce3aec8ec4b51602383cab27.png",
+ "sha256": "78826913bdb573a4ad60ca6a9eec058d686e5c04ce3aec8ec4b51602383cab27"
+}

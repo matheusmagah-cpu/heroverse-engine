@@ -24,8 +24,7 @@ class Heartbeat(unittest.TestCase):
     def test_dropped_crons_are_caught_up(self):
         # 2026-10-18 09:41: nothing ran since midnight -> every passed daily task is dispatched once
         got = hb.decide({}, ALL, t(9, 41))
-        for w in ("mining-accuracy.yml", "nightly-images.yml", "market-panel.yml", "reconcile.yml",
-                  "publish-shorts.yml", "packaging-mining.yml", "channel-privacy.yml", "structure-mining.yml"):
+        for w in ("nightly-images.yml", "market-panel.yml", "reconcile.yml", "publish-shorts.yml", "channel-privacy.yml"):
             self.assertIn(w, got)
         self.assertIn("goal-report.yml", got)          # past wait_max: no longer waits for the panel
 
@@ -43,19 +42,20 @@ class Heartbeat(unittest.TestCase):
         self.assertNotIn("market-panel.yml", hb.decide(twice, ALL, t(10, 11)))    # attempts used up
 
     def test_in_progress_is_not_duplicated(self):
-        runs = {"structure-mining.yml": [run(8, 41, status="in_progress", conclusion=None)]}
-        self.assertNotIn("structure-mining.yml", hb.decide(runs, ALL, t(10, 11)))
+        runs = {"channel-privacy.yml": [run(8, 41, status="in_progress", conclusion=None)]}
+        self.assertNotIn("channel-privacy.yml", hb.decide(runs, ALL, t(10, 11)))
 
     def test_conditions_keep_idle_tasks_quiet(self):
         idle = {"images_missing": False, "reconcile_todo": False, "shorts_pending": False, "production_idle": True}
         got = hb.decide({}, idle, t(9, 41))
         self.assertFalse({"nightly-images.yml", "reconcile.yml", "publish-shorts.yml"} & set(got))
 
-    def test_minings_wait_for_production_and_stay_due(self):
-        busy = dict(ALL, production_idle=False)
-        got = hb.decide({}, busy, t(9, 41))
-        self.assertFalse({"structure-mining.yml", "packaging-mining.yml"} & set(got))
-        self.assertIn("structure-mining.yml", hb.decide({}, ALL, t(15, 11)))      # still due once idle
+    def test_retired_gemini_minings_are_never_dispatched(self):
+        # SYSTEM.md (2026-10-19): structure mining is done with vidIQ; the Gemini/RapidAPI chain failed its holdout
+        retired = {"structure-mining.yml", "packaging-mining.yml", "mining-accuracy.yml"}
+        self.assertFalse(retired & {task["workflow"] for task in hb.TASKS})
+        for hour in range(24):
+            self.assertFalse(retired & set(hb.decide({}, ALL, t(hour, 50))))
 
     def test_each_slot_is_its_own_window(self):
         runs = {"reconcile.yml": [run(7, 25)]}
@@ -67,10 +67,6 @@ class Heartbeat(unittest.TestCase):
         self.assertIn("goal-report.yml", hb.decide({"market-panel.yml": [run(7, 20)]}, ALL, t(7, 50)))
         busy = {"market-panel.yml": [run(7, 20, status="in_progress", conclusion=None)]}
         self.assertNotIn("goal-report.yml", hb.decide(busy, ALL, t(7, 50)))
-
-    def test_weekly_task_only_on_its_day(self):
-        self.assertIn("packaging-mining.yml", hb.decide({}, ALL, t(8, 11)))         # Sunday
-        self.assertNotIn("packaging-mining.yml", hb.decide({}, ALL, t(8, 11, day=19)))
 
     def test_before_the_first_slot_nothing(self):
         self.assertEqual(hb.decide({}, ALL, t(0, 11)), [])

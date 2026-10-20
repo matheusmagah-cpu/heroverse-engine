@@ -1,0 +1,1448 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-012",
+ "rubric_model": "gemini-3.5-flash-lite",
+ "candidates_considered": 1058,
+ "shortlist": [
+  {
+   "start": 118.997,
+   "end": 165.579,
+   "sentences": [
+    {
+     "segment": "prayer-early-hours",
+     "text": "I thank you for whatever helped me enter it:",
+     "start": 118.997,
+     "end": 122.261
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "a familiar voice, a working light, clothing I could put on, or a little food before leaving.",
+     "start": 122.441,
+     "end": 129.14
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I often hurry past these familiar things.",
+     "start": 129.32,
+     "end": 132.499
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Tonight I receive them with attention.",
+     "start": 132.679,
+     "end": 135.537
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Where the morning was difficult, help me remember any kindness that met me there.",
+     "start": 135.717,
+     "end": 141.392
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I offer thanks for the support I actually had, however modest it may have seemed.",
+     "start": 141.572,
+     "end": 147.652
+    },
+    {
+     "segment": "scripture-psalm-mercy",
+     "text": "O give thanks unto the LORD;",
+     "start": 149.032,
+     "end": 151.4
+    },
+    {
+     "segment": "scripture-psalm-mercy",
+     "text": "for he is good:",
+     "start": 151.58,
+     "end": 153.095
+    },
+    {
+     "segment": "scripture-psalm-mercy",
+     "text": "for his mercy endureth for ever.",
+     "start": 153.275,
+     "end": 156.069
+    },
+    {
+     "segment": "reflection-recognize-care",
+     "text": "You may have received help through someone whose name you know well, or through a person you will never meet again.",
+     "start": 157.749,
+     "end": 165.579
+    }
+   ],
+   "segments": [
+    "prayer-early-hours",
+    "scripture-psalm-mercy",
+    "reflection-recognize-care"
+   ],
+   "reference": "Psalm 136:1 (KJV)",
+   "measured_score": 0.8522,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.380952380952381,
+    "scripture": 1.0,
+    "promise": 0.7142857142857143,
+    "resolution": 1.0,
+    "length_fit": 0.7367199999999997
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Gratitude for ordinary daily things creates strong emotional resonance.",
+    "hook_line": "I often hurry past these familiar things.",
+    "title": "An Honest Prayer of Thanks"
+   },
+   "final_score": 0.8509,
+   "hook": "I often hurry past these familiar things.",
+   "title": "An Honest Prayer of Thanks"
+  },
+  {
+   "start": 1084.819,
+   "end": 1126.396,
+   "sentences": [
+    {
+     "segment": "sleep-introduction",
+     "text": "Now you can let the remembering become less deliberate.",
+     "start": 1084.819,
+     "end": 1089.213
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "The prayer has brought your day into God’s presence, and the next part is Scripture for sleep.",
+     "start": 1089.393,
+     "end": 1095.751
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You can listen as you rest, allowing the words to come without testing your concentration.",
+     "start": 1095.931,
+     "end": 1102.651
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You do not need to keep collecting examples or finish a list.",
+     "start": 1102.831,
+     "end": 1107.567
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "If you are comfortable, let your eyes rest.",
+     "start": 1107.747,
+     "end": 1110.947
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You can receive these passages quietly, with the thanks already offered and the difficult parts already named.",
+     "start": 1111.127,
+     "end": 1119.191
+    },
+    {
+     "segment": "sleep-psalm-bed",
+     "text": "When I remember thee upon my bed, and meditate on thee in the night watches.",
+     "start": 1120.871,
+     "end": 1126.396
+    }
+   ],
+   "segments": [
+    "sleep-introduction",
+    "sleep-psalm-bed"
+   ],
+   "reference": "Psalm 63:6 (KJV)",
+   "measured_score": 0.8989,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.9677419354838709,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9369200000000001
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Gentle transition into sleep with Psalm 63, very calming and standalone.",
+    "hook_line": "Let the remembering become less deliberate.",
+    "title": "Nighttime Scripture for Rest"
+   },
+   "final_score": 0.8496,
+   "hook": "Let the remembering become less deliberate.",
+   "title": "Nighttime Scripture for Rest"
+  },
+  {
+   "start": 1128.076,
+   "end": 1166.88,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "The psalm gives you a simple place for remembrance:",
+     "start": 1128.076,
+     "end": 1131.852
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "the bed itself, in the hours of night.",
+     "start": 1132.032,
+     "end": 1134.997
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You can be where you are and let a familiar truth remain nearby.",
+     "start": 1135.177,
+     "end": 1140.255
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You need not search through every memory again.",
+     "start": 1140.435,
+     "end": 1143.869
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "As you listen, you can allow your attention to soften around the words.",
+     "start": 1144.049,
+     "end": 1149.084
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "Even if you are still alert, you can spend these moments without demanding a particular feeling or measuring how well you are resting.",
+     "start": 1149.264,
+     "end": 1159.056
+    },
+    {
+     "segment": "sleep-psalm-help",
+     "text": "Because thou hast been my help, therefore in the shadow of thy wings will I rejoice.",
+     "start": 1160.736,
+     "end": 1166.88
+    }
+   ],
+   "segments": [
+    "sleep-reflection-bed",
+    "sleep-psalm-help"
+   ],
+   "reference": "Psalm 63:7 (KJV)",
+   "measured_score": 0.8952,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.9521600000000034
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Offers a simple place for remembrance in the bed at night.",
+    "hook_line": "A simple place for remembrance tonight.",
+    "title": "Psalm 63 Bedtime Reflection"
+   },
+   "final_score": 0.8481,
+   "hook": "A simple place for remembrance tonight.",
+   "title": "Psalm 63 Bedtime Reflection"
+  },
+  {
+   "start": 1522.512,
+   "end": 1561.785,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You need not attach a task to it.",
+     "start": 1522.512,
+     "end": 1525.307
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You may remember being offered a seat, being greeted by name, or being allowed to speak at your own pace.",
+     "start": 1525.487,
+     "end": 1533.017
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "If those memories feel distant, you can still hear the invitation to bring your actual self before God.",
+     "start": 1533.197,
+     "end": 1540.856
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You can arrive tired, disappointed, grateful, or unsure.",
+     "start": 1541.036,
+     "end": 1545.644
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "The prayer has room for what you are experiencing, and you can remain without preparing a better version of yourself.",
+     "start": 1545.824,
+     "end": 1554.016
+    },
+    {
+     "segment": "sleep-psalm-taste",
+     "text": "O taste and see that the LORD is good:",
+     "start": 1555.696,
+     "end": 1558.683
+    },
+    {
+     "segment": "sleep-psalm-taste",
+     "text": "blessed is the man that trusteth in him.",
+     "start": 1558.863,
+     "end": 1561.785
+    }
+   ],
+   "segments": [
+    "sleep-reflection-welcome",
+    "sleep-psalm-taste"
+   ],
+   "reference": "Psalm 34:8 (KJV)",
+   "measured_score": 0.8054,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.9890109890109889,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.9709200000000056
+   },
+   "rubric": {
+    "index": 11,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Validates feelings of tiredness and uncertainty without pressure.",
+    "hook_line": "You can arrive tired, disappointed, or unsure.",
+    "title": "Bring Your Actual Self Before God"
+   },
+   "final_score": 0.8422
+  },
+  {
+   "start": 1644.847,
+   "end": 1680.927,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-unfinished-list",
+     "text": "You have paid attention;",
+     "start": 1644.847,
+     "end": 1646.724
+    },
+    {
+     "segment": "sleep-reflection-unfinished-list",
+     "text": "now you can stop working at it.",
+     "start": 1646.904,
+     "end": 1649.464
+    },
+    {
+     "segment": "sleep-reflection-unfinished-list",
+     "text": "You can receive the remaining Scriptures as words spoken beside your rest.",
+     "start": 1649.644,
+     "end": 1655.169
+    },
+    {
+     "segment": "sleep-reflection-unfinished-list",
+     "text": "There is no need to repeat every phrase after the voice or recover anything you missed.",
+     "start": 1655.349,
+     "end": 1662.005
+    },
+    {
+     "segment": "sleep-reflection-unfinished-list",
+     "text": "You can listen lightly, let your hands be comfortable, and allow this moment to contain less effort than the day required.",
+     "start": 1662.185,
+     "end": 1670.911
+    },
+    {
+     "segment": "sleep-numbers-keep",
+     "text": "The LORD bless thee, and keep thee:",
+     "start": 1672.591,
+     "end": 1675.279
+    },
+    {
+     "segment": "sleep-reflection-keeping",
+     "text": "These words belong to the blessing given for Israel.",
+     "start": 1676.959,
+     "end": 1680.927
+    }
+   ],
+   "segments": [
+    "sleep-reflection-unfinished-list",
+    "sleep-numbers-keep",
+    "sleep-reflection-keeping"
+   ],
+   "reference": "Numbers 6:24 (KJV)",
+   "measured_score": 0.8154,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.9210526315789472,
+    "scripture": 1.0,
+    "promise": 0.32894736842105265,
+    "resolution": 0.4,
+    "length_fit": 0.8431999999999971
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Encouraging message to stop working and simply receive blessing.",
+    "hook_line": "You have paid attention; now rest.",
+    "title": "The Lord Bless Thee and Keep Thee"
+   },
+   "final_score": 0.8412
+  },
+  {
+   "start": 1107.747,
+   "end": 1149.084,
+   "sentences": [
+    {
+     "segment": "sleep-introduction",
+     "text": "If you are comfortable, let your eyes rest.",
+     "start": 1107.747,
+     "end": 1110.947
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You can receive these passages quietly, with the thanks already offered and the difficult parts already named.",
+     "start": 1111.127,
+     "end": 1119.191
+    },
+    {
+     "segment": "sleep-psalm-bed",
+     "text": "When I remember thee upon my bed, and meditate on thee in the night watches.",
+     "start": 1120.871,
+     "end": 1126.396
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "The psalm gives you a simple place for remembrance:",
+     "start": 1128.076,
+     "end": 1131.852
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "the bed itself, in the hours of night.",
+     "start": 1132.032,
+     "end": 1134.997
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You can be where you are and let a familiar truth remain nearby.",
+     "start": 1135.177,
+     "end": 1140.255
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You need not search through every memory again.",
+     "start": 1140.435,
+     "end": 1143.869
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "As you listen, you can allow your attention to soften around the words.",
+     "start": 1144.049,
+     "end": 1149.084
+    }
+   ],
+   "segments": [
+    "sleep-introduction",
+    "sleep-psalm-bed",
+    "sleep-reflection-bed"
+   ],
+   "reference": "Psalm 63:6 (KJV)",
+   "measured_score": 0.8871,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 0.8241758241758241,
+    "resolution": 0.4,
+    "length_fit": 0.9465200000000005
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.0,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Good flow of relaxing thoughts paired with a comforting verse.",
+    "hook_line": "Let your eyes rest right now.",
+    "title": "Quiet Meditation in the Night"
+   },
+   "final_score": 0.8398
+  },
+  {
+   "start": 1741.736,
+   "end": 1782.659,
+   "sentences": [
+    {
+     "segment": "sleep-prayer-grace",
+     "text": "I leave my gratitude here in your presence, with no need to polish it further.",
+     "start": 1741.736,
+     "end": 1747.624
+    },
+    {
+     "segment": "sleep-prayer-grace",
+     "text": "Let your goodness remain the quiet theme of these last moments of prayer.",
+     "start": 1747.804,
+     "end": 1752.86
+    },
+    {
+     "segment": "sleep-numbers-peace",
+     "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+     "start": 1754.54,
+     "end": 1759.063
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "You can hear the word peace without searching your body for evidence that you have achieved it.",
+     "start": 1760.743,
+     "end": 1767.249
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "This is a blessing you are receiving, a prayer whose words can accompany you.",
+     "start": 1767.429,
+     "end": 1772.976
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "You have brought the day’s mercies and its difficult places into the same conversation with God.",
+     "start": 1773.156,
+     "end": 1779.876
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "You can leave them there as you rest.",
+     "start": 1780.056,
+     "end": 1782.659
+    }
+   ],
+   "segments": [
+    "sleep-prayer-grace",
+    "sleep-numbers-peace",
+    "sleep-reflection-peace"
+   ],
+   "reference": "Numbers 6:26 (KJV)",
+   "measured_score": 0.8253,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 0.7894736842105263,
+    "resolution": 0.4,
+    "length_fit": 0.9630799999999999
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Brings the day's mercies and difficulties to a peaceful conclusion.",
+    "hook_line": "Leave your gratitude here in His presence.",
+    "title": "The Lord Give You Peace"
+   },
+   "final_score": 0.8351
+  },
+  {
+   "start": 1541.036,
+   "end": 1581.584,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You can arrive tired, disappointed, grateful, or unsure.",
+     "start": 1541.036,
+     "end": 1545.644
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "The prayer has room for what you are experiencing, and you can remain without preparing a better version of yourself.",
+     "start": 1545.824,
+     "end": 1554.016
+    },
+    {
+     "segment": "sleep-psalm-taste",
+     "text": "O taste and see that the LORD is good:",
+     "start": 1555.696,
+     "end": 1558.683
+    },
+    {
+     "segment": "sleep-psalm-taste",
+     "text": "blessed is the man that trusteth in him.",
+     "start": 1558.863,
+     "end": 1561.785
+    },
+    {
+     "segment": "sleep-reflection-taste",
+     "text": "The psalm uses a word you know through ordinary life:",
+     "start": 1563.465,
+     "end": 1567.689
+    },
+    {
+     "segment": "sleep-reflection-taste",
+     "text": "taste.",
+     "start": 1567.869,
+     "end": 1568.893
+    },
+    {
+     "segment": "sleep-reflection-taste",
+     "text": "You can recall receiving something good in a small, direct way, before understanding everything about it.",
+     "start": 1569.073,
+     "end": 1576.476
+    },
+    {
+     "segment": "sleep-reflection-taste",
+     "text": "Tonight you have named a few mercies that you actually encountered.",
+     "start": 1576.656,
+     "end": 1581.584
+    }
+   ],
+   "segments": [
+    "sleep-reflection-welcome",
+    "sleep-psalm-taste",
+    "sleep-reflection-taste"
+   ],
+   "reference": "Psalm 34:8 (KJV)",
+   "measured_score": 0.8024,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.963855421686747,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.97808
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Connects ordinary human experiences of taste with spiritual goodness.",
+    "hook_line": "The prayer has room for what you are.",
+    "title": "O Taste and See That the Lord Is Good"
+   },
+   "final_score": 0.831
+  },
+  {
+   "start": 1095.931,
+   "end": 1134.997,
+   "sentences": [
+    {
+     "segment": "sleep-introduction",
+     "text": "You can listen as you rest, allowing the words to come without testing your concentration.",
+     "start": 1095.931,
+     "end": 1102.651
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You do not need to keep collecting examples or finish a list.",
+     "start": 1102.831,
+     "end": 1107.567
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "If you are comfortable, let your eyes rest.",
+     "start": 1107.747,
+     "end": 1110.947
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You can receive these passages quietly, with the thanks already offered and the difficult parts already named.",
+     "start": 1111.127,
+     "end": 1119.191
+    },
+    {
+     "segment": "sleep-psalm-bed",
+     "text": "When I remember thee upon my bed, and meditate on thee in the night watches.",
+     "start": 1120.871,
+     "end": 1126.396
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "The psalm gives you a simple place for remembrance:",
+     "start": 1128.076,
+     "end": 1131.852
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "the bed itself, in the hours of night.",
+     "start": 1132.032,
+     "end": 1134.997
+    }
+   ],
+   "segments": [
+    "sleep-introduction",
+    "sleep-psalm-bed",
+    "sleep-reflection-bed"
+   ],
+   "reference": "Psalm 63:6 (KJV)",
+   "measured_score": 0.8391,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.9523809523809523,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9626400000000013
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Reassuring pacing for listeners trying to wind down.",
+    "hook_line": "Allow the words to come without testing.",
+    "title": "Rest Your Eyes and Listen"
+   },
+   "final_score": 0.8306
+  },
+  {
+   "start": 1519.175,
+   "end": 1561.785,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You can let welcome be a quiet word now.",
+     "start": 1519.175,
+     "end": 1522.332
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You need not attach a task to it.",
+     "start": 1522.512,
+     "end": 1525.307
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You may remember being offered a seat, being greeted by name, or being allowed to speak at your own pace.",
+     "start": 1525.487,
+     "end": 1533.017
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "If those memories feel distant, you can still hear the invitation to bring your actual self before God.",
+     "start": 1533.197,
+     "end": 1540.856
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "You can arrive tired, disappointed, grateful, or unsure.",
+     "start": 1541.036,
+     "end": 1545.644
+    },
+    {
+     "segment": "sleep-reflection-welcome",
+     "text": "The prayer has room for what you are experiencing, and you can remain without preparing a better version of yourself.",
+     "start": 1545.824,
+     "end": 1554.016
+    },
+    {
+     "segment": "sleep-psalm-taste",
+     "text": "O taste and see that the LORD is good:",
+     "start": 1555.696,
+     "end": 1558.683
+    },
+    {
+     "segment": "sleep-psalm-taste",
+     "text": "blessed is the man that trusteth in him.",
+     "start": 1558.863,
+     "end": 1561.785
+    }
+   ],
+   "segments": [
+    "sleep-reflection-welcome",
+    "sleep-psalm-taste"
+   ],
+   "reference": "Psalm 34:8 (KJV)",
+   "measured_score": 0.7996,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.8955999999999948
+   },
+   "rubric": {
+    "index": 13,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Focuses on the quiet welcome of God for weary souls.",
+    "hook_line": "You can let welcome be a quiet word.",
+    "title": "A Quiet Welcome in Prayer"
+   },
+   "final_score": 0.8248
+  },
+  {
+   "start": 1689.671,
+   "end": 1730.295,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-keeping",
+     "text": "You need not turn these words into a forecast.",
+     "start": 1689.671,
+     "end": 1693.212
+    },
+    {
+     "segment": "sleep-reflection-keeping",
+     "text": "Receive them as a prayer offered with care.",
+     "start": 1693.392,
+     "end": 1696.528
+    },
+    {
+     "segment": "sleep-reflection-keeping",
+     "text": "You can be thankful for the support you know and bring the places where you still feel vulnerable.",
+     "start": 1696.708,
+     "end": 1703.172
+    },
+    {
+     "segment": "sleep-reflection-keeping",
+     "text": "The blessing gives you language for entrusting yourself to God when your own words have become few.",
+     "start": 1703.352,
+     "end": 1710.051
+    },
+    {
+     "segment": "sleep-numbers-gracious",
+     "text": "The LORD make his face shine upon thee, and be gracious unto thee:",
+     "start": 1711.731,
+     "end": 1716.509
+    },
+    {
+     "segment": "sleep-prayer-grace",
+     "text": "Father, I receive this prayer for your gracious attention.",
+     "start": 1718.189,
+     "end": 1722.2
+    },
+    {
+     "segment": "sleep-prayer-grace",
+     "text": "Thank you for the kindness that has reached me through the day, and for the invitation to draw near with sincerity.",
+     "start": 1722.38,
+     "end": 1730.295
+    }
+   ],
+   "segments": [
+    "sleep-reflection-keeping",
+    "sleep-numbers-gracious",
+    "sleep-prayer-grace"
+   ],
+   "reference": "Numbers 6:25 (KJV)",
+   "measured_score": 0.7996,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.9473684210526315,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.975039999999999
+   },
+   "rubric": {
+    "index": 14,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Thoughtful closing blessing offering language when words are few.",
+    "hook_line": "You need not turn these words into forecasts.",
+    "title": "The Lord Make His Face Shine"
+   },
+   "final_score": 0.8248
+  },
+  {
+   "start": 1014.621,
+   "end": 1051.641,
+   "sentences": [
+    {
+     "segment": "payoff",
+     "text": "what happened, who helped, or what you received.",
+     "start": 1014.621,
+     "end": 1018.013
+    },
+    {
+     "segment": "payoff",
+     "text": "Then name one hard part and entrust it to God in a single sentence.",
+     "start": 1018.193,
+     "end": 1023.633
+    },
+    {
+     "segment": "payoff",
+     "text": "If you can recall only one mercy, begin there.",
+     "start": 1023.813,
+     "end": 1027.611
+    },
+    {
+     "segment": "payoff",
+     "text": "You will have given your day an honest ending:",
+     "start": 1027.791,
+     "end": 1031.14
+    },
+    {
+     "segment": "payoff",
+     "text": "its goodness acknowledged and its difficulty brought into prayer.",
+     "start": 1031.32,
+     "end": 1035.843
+    },
+    {
+     "segment": "payoff",
+     "text": "You can make that small commitment now.",
+     "start": 1036.023,
+     "end": 1038.903
+    },
+    {
+     "segment": "prayer-commitment",
+     "text": "Father, tonight I will pause before the light goes out and remember the mercies I can name honestly.",
+     "start": 1040.283,
+     "end": 1048.24
+    },
+    {
+     "segment": "prayer-commitment",
+     "text": "I will bring you the difficult part as well.",
+     "start": 1048.42,
+     "end": 1051.641
+    }
+   ],
+   "segments": [
+    "payoff",
+    "prayer-commitment"
+   ],
+   "reference": null,
+   "measured_score": 0.8168,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7228915662650601,
+    "scripture": 0.4,
+    "promise": 0.6024096385542169,
+    "resolution": 1.0,
+    "length_fit": 0.8808000000000038
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Practical guide for an honest, grounded end to the day.",
+    "hook_line": "Name one hard part and entrust it.",
+    "title": "An Honest Ending to Your Day"
+   },
+   "final_score": 0.8167
+  },
+  {
+   "start": 1747.804,
+   "end": 1782.659,
+   "sentences": [
+    {
+     "segment": "sleep-prayer-grace",
+     "text": "Let your goodness remain the quiet theme of these last moments of prayer.",
+     "start": 1747.804,
+     "end": 1752.86
+    },
+    {
+     "segment": "sleep-numbers-peace",
+     "text": "The LORD lift up his countenance upon thee, and give thee peace.",
+     "start": 1754.54,
+     "end": 1759.063
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "You can hear the word peace without searching your body for evidence that you have achieved it.",
+     "start": 1760.743,
+     "end": 1767.249
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "This is a blessing you are receiving, a prayer whose words can accompany you.",
+     "start": 1767.429,
+     "end": 1772.976
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "You have brought the day’s mercies and its difficult places into the same conversation with God.",
+     "start": 1773.156,
+     "end": 1779.876
+    },
+    {
+     "segment": "sleep-reflection-peace",
+     "text": "You can leave them there as you rest.",
+     "start": 1780.056,
+     "end": 1782.659
+    }
+   ],
+   "segments": [
+    "sleep-prayer-grace",
+    "sleep-numbers-peace",
+    "sleep-reflection-peace"
+   ],
+   "reference": "Numbers 6:26 (KJV)",
+   "measured_score": 0.8232,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 0.9375,
+    "resolution": 0.4,
+    "length_fit": 0.7942000000000007
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Direct focus on the Aaronic blessing and finding inner peace.",
+    "hook_line": "Let His goodness remain your quiet theme.",
+    "title": "A Blessing of Peace Before Sleep"
+   },
+   "final_score": 0.8143
+  },
+  {
+   "start": 1102.831,
+   "end": 1143.869,
+   "sentences": [
+    {
+     "segment": "sleep-introduction",
+     "text": "You do not need to keep collecting examples or finish a list.",
+     "start": 1102.831,
+     "end": 1107.567
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "If you are comfortable, let your eyes rest.",
+     "start": 1107.747,
+     "end": 1110.947
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You can receive these passages quietly, with the thanks already offered and the difficult parts already named.",
+     "start": 1111.127,
+     "end": 1119.191
+    },
+    {
+     "segment": "sleep-psalm-bed",
+     "text": "When I remember thee upon my bed, and meditate on thee in the night watches.",
+     "start": 1120.871,
+     "end": 1126.396
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "The psalm gives you a simple place for remembrance:",
+     "start": 1128.076,
+     "end": 1131.852
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "the bed itself, in the hours of night.",
+     "start": 1132.032,
+     "end": 1134.997
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You can be where you are and let a familiar truth remain nearby.",
+     "start": 1135.177,
+     "end": 1140.255
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You need not search through every memory again.",
+     "start": 1140.435,
+     "end": 1143.869
+    }
+   ],
+   "segments": [
+    "sleep-introduction",
+    "sleep-psalm-bed",
+    "sleep-reflection-bed"
+   ],
+   "reference": "Psalm 63:6 (KJV)",
+   "measured_score": 0.8125,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 0.8888888888888888,
+    "scripture": 1.0,
+    "promise": 0.8333333333333334,
+    "resolution": 0.4,
+    "length_fit": 0.9584799999999996
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.0,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Reminds the listener they don't need to finish a mental list.",
+    "hook_line": "You do not need to finish a list.",
+    "title": "Simple Place for Remembrance"
+   },
+   "final_score": 0.81
+  },
+  {
+   "start": 1135.177,
+   "end": 1166.88,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You can be where you are and let a familiar truth remain nearby.",
+     "start": 1135.177,
+     "end": 1140.255
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You need not search through every memory again.",
+     "start": 1140.435,
+     "end": 1143.869
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "As you listen, you can allow your attention to soften around the words.",
+     "start": 1144.049,
+     "end": 1149.084
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "Even if you are still alert, you can spend these moments without demanding a particular feeling or measuring how well you are resting.",
+     "start": 1149.264,
+     "end": 1159.056
+    },
+    {
+     "segment": "sleep-psalm-help",
+     "text": "Because thou hast been my help, therefore in the shadow of thy wings will I rejoice.",
+     "start": 1160.736,
+     "end": 1166.88
+    }
+   ],
+   "segments": [
+    "sleep-reflection-bed",
+    "sleep-psalm-help"
+   ],
+   "reference": "Psalm 63:7 (KJV)",
+   "measured_score": 0.8068,
+   "features": {
+    "opening_short": 0.6,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.668120000000008
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Comforting reminder to let attention soften around familiar truth.",
+    "hook_line": "Let a familiar truth remain nearby.",
+    "title": "In the Shadow of His Wings"
+   },
+   "final_score": 0.8077
+  }
+ ],
+ "chosen": [
+  {
+   "start": 118.997,
+   "end": 165.579,
+   "sentences": [
+    {
+     "segment": "prayer-early-hours",
+     "text": "I thank you for whatever helped me enter it:",
+     "start": 118.997,
+     "end": 122.261
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "a familiar voice, a working light, clothing I could put on, or a little food before leaving.",
+     "start": 122.441,
+     "end": 129.14
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I often hurry past these familiar things.",
+     "start": 129.32,
+     "end": 132.499
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Tonight I receive them with attention.",
+     "start": 132.679,
+     "end": 135.537
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "Where the morning was difficult, help me remember any kindness that met me there.",
+     "start": 135.717,
+     "end": 141.392
+    },
+    {
+     "segment": "prayer-early-hours",
+     "text": "I offer thanks for the support I actually had, however modest it may have seemed.",
+     "start": 141.572,
+     "end": 147.652
+    },
+    {
+     "segment": "scripture-psalm-mercy",
+     "text": "O give thanks unto the LORD;",
+     "start": 149.032,
+     "end": 151.4
+    },
+    {
+     "segment": "scripture-psalm-mercy",
+     "text": "for he is good:",
+     "start": 151.58,
+     "end": 153.095
+    },
+    {
+     "segment": "scripture-psalm-mercy",
+     "text": "for his mercy endureth for ever.",
+     "start": 153.275,
+     "end": 156.069
+    },
+    {
+     "segment": "reflection-recognize-care",
+     "text": "You may have received help through someone whose name you know well, or through a person you will never meet again.",
+     "start": 157.749,
+     "end": 165.579
+    }
+   ],
+   "segments": [
+    "prayer-early-hours",
+    "scripture-psalm-mercy",
+    "reflection-recognize-care"
+   ],
+   "reference": "Psalm 136:1 (KJV)",
+   "measured_score": 0.8522,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.380952380952381,
+    "scripture": 1.0,
+    "promise": 0.7142857142857143,
+    "resolution": 1.0,
+    "length_fit": 0.7367199999999997
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Gratitude for ordinary daily things creates strong emotional resonance.",
+    "hook_line": "I often hurry past these familiar things.",
+    "title": "An Honest Prayer of Thanks"
+   },
+   "final_score": 0.8509,
+   "hook": "I often hurry past these familiar things.",
+   "title": "An Honest Prayer of Thanks"
+  },
+  {
+   "start": 1084.819,
+   "end": 1126.396,
+   "sentences": [
+    {
+     "segment": "sleep-introduction",
+     "text": "Now you can let the remembering become less deliberate.",
+     "start": 1084.819,
+     "end": 1089.213
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "The prayer has brought your day into God’s presence, and the next part is Scripture for sleep.",
+     "start": 1089.393,
+     "end": 1095.751
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You can listen as you rest, allowing the words to come without testing your concentration.",
+     "start": 1095.931,
+     "end": 1102.651
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You do not need to keep collecting examples or finish a list.",
+     "start": 1102.831,
+     "end": 1107.567
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "If you are comfortable, let your eyes rest.",
+     "start": 1107.747,
+     "end": 1110.947
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You can receive these passages quietly, with the thanks already offered and the difficult parts already named.",
+     "start": 1111.127,
+     "end": 1119.191
+    },
+    {
+     "segment": "sleep-psalm-bed",
+     "text": "When I remember thee upon my bed, and meditate on thee in the night watches.",
+     "start": 1120.871,
+     "end": 1126.396
+    }
+   ],
+   "segments": [
+    "sleep-introduction",
+    "sleep-psalm-bed"
+   ],
+   "reference": "Psalm 63:6 (KJV)",
+   "measured_score": 0.8989,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.9677419354838709,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9369200000000001
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Gentle transition into sleep with Psalm 63, very calming and standalone.",
+    "hook_line": "Let the remembering become less deliberate.",
+    "title": "Nighttime Scripture for Rest"
+   },
+   "final_score": 0.8496,
+   "hook": "Let the remembering become less deliberate.",
+   "title": "Nighttime Scripture for Rest"
+  },
+  {
+   "start": 1128.076,
+   "end": 1166.88,
+   "sentences": [
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "The psalm gives you a simple place for remembrance:",
+     "start": 1128.076,
+     "end": 1131.852
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "the bed itself, in the hours of night.",
+     "start": 1132.032,
+     "end": 1134.997
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You can be where you are and let a familiar truth remain nearby.",
+     "start": 1135.177,
+     "end": 1140.255
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "You need not search through every memory again.",
+     "start": 1140.435,
+     "end": 1143.869
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "As you listen, you can allow your attention to soften around the words.",
+     "start": 1144.049,
+     "end": 1149.084
+    },
+    {
+     "segment": "sleep-reflection-bed",
+     "text": "Even if you are still alert, you can spend these moments without demanding a particular feeling or measuring how well you are resting.",
+     "start": 1149.264,
+     "end": 1159.056
+    },
+    {
+     "segment": "sleep-psalm-help",
+     "text": "Because thou hast been my help, therefore in the shadow of thy wings will I rejoice.",
+     "start": 1160.736,
+     "end": 1166.88
+    }
+   ],
+   "segments": [
+    "sleep-reflection-bed",
+    "sleep-psalm-help"
+   ],
+   "reference": "Psalm 63:7 (KJV)",
+   "measured_score": 0.8952,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 1.0,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 1.0,
+    "length_fit": 0.9521600000000034
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Offers a simple place for remembrance in the bed at night.",
+    "hook_line": "A simple place for remembrance tonight.",
+    "title": "Psalm 63 Bedtime Reflection"
+   },
+   "final_score": 0.8481,
+   "hook": "A simple place for remembrance tonight.",
+   "title": "Psalm 63 Bedtime Reflection"
+  }
+ ]
+}

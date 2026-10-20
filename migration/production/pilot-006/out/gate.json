@@ -1,21 +1,23 @@
 {
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-006",
- "output_sha256": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c",
- "decision": "UNKNOWN",
- "eligible_for_automatic_publication": false,
+ "output_sha256": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877",
+ "decision": "PASS",
+ "eligible_for_automatic_publication": true,
  "dimensions": {
   "binding": "PASS",
   "technical": "PASS",
-  "audio": "UNKNOWN",
+  "audio": "PASS",
   "transcript": "PASS",
-  "captions": "UNKNOWN",
-  "sync": "UNKNOWN",
-  "image": "UNKNOWN",
+  "captions": "PASS",
+  "sync": "PASS",
+  "image": "PASS",
   "rights": "PASS",
-  "content_and_policy": "UNKNOWN",
-  "scorecard": "UNKNOWN",
+  "content_and_policy": "PASS",
+  "scorecard": "PASS",
   "full_file_scan": "PASS",
+  "structure": "PASS",
+  "authenticity": "PASS",
   "preflight": "PASS"
  },
  "items": {
@@ -24,35 +26,35 @@
     "source": "binding",
     "item": "manifest",
     "state": "PASS",
-    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    },
    {
     "source": "binding",
     "item": "qa_for_this_file",
     "state": "PASS",
-    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    },
    {
     "source": "binding",
     "item": "qa_criteria_frozen",
     "state": "PASS",
     "detail": {
-     "version": "pilot-qa-criteria-v2",
-     "recorded": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
-     "file": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"
+     "version": "pilot-qa-criteria-v3",
+     "recorded": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+     "file": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
     }
    },
    {
     "source": "binding",
     "item": "review_for_this_file",
     "state": "PASS",
-    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    },
    {
     "source": "binding",
     "item": "video_file_hash",
     "state": "PASS",
-    "detail": "c670b2c747887d1eef72dfb9adac12b74e3df8e783a2fb450ee047ef191f3e4c"
+    "detail": "240d2304608ea61ae084c0285eec3721311b5c7b3d55c7cf8fc6cd6aff1b0877"
    }
   ],
   "technical": [
@@ -96,8 +98,8 @@
    {
     "source": "review",
     "item": "audio_clarity_and_mix",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "transcript": [
@@ -139,10 +141,20 @@
     "state": "PASS"
    },
    {
+    "source": "qa",
+    "item": "caption_words_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_no_box",
+    "state": "PASS"
+   },
+   {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "sync": [
@@ -159,8 +171,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "image": [
@@ -171,40 +183,60 @@
    },
    {
     "source": "qa",
-    "item": "figure_present_after_title",
+    "item": "no_figure",
     "state": "PASS"
    },
    {
     "source": "qa",
-    "item": "background_hold_median",
+    "item": "every_scene_in_motion",
     "state": "PASS"
    },
    {
     "source": "qa",
-    "item": "background_hold_max",
+    "item": "scene_seconds",
     "state": "PASS"
    },
    {
     "source": "qa",
-    "item": "no_background_repeated_consecutively",
+    "item": "crossfade_seconds_max",
     "state": "PASS"
    },
    {
     "source": "qa",
-    "item": "channel_mark_badge_and_amen_prompt",
+    "item": "image_repeat_gap",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "scripture_card_only_while_read",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_count",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_short_and_not_early",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "persistent_overlays_only_brand",
     "state": "PASS"
    },
    {
     "source": "review",
     "item": "picture_quality",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.0
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "rights": [
@@ -233,46 +265,46 @@
    {
     "source": "review",
     "item": "opening_and_promise",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.5
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 8.5
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 9.5
    },
    {
     "source": "review",
     "item": "policy_safe",
-    "state": "UNKNOWN",
-    "detail": "review ERROR: ProviderFailure: HTTP_429_RESOURCE_EXHAUSTED:QUOTA"
+    "state": "PASS",
+    "detail": 10.0
    },
    {
     "source": "review",
     "item": "overall",
-    "state": "UNKNOWN",
-    "detail": "no completed watched review for this file"
+    "state": "PASS",
+    "detail": 9.3
    }
   ],
   "scorecard": [
    {
     "source": "score",
     "item": "minutes",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "state": "PASS",
+    "detail": 25.55
    },
    {
     "source": "score",
     "item": "scripture_per_10_min",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "state": "PASS",
+    "detail": 10.18
    }
   ],
   "full_file_scan": [
@@ -289,6 +321,159 @@
     "detail": 0.0
    }
   ],
+  "structure": [
+   {
+    "source": "structure",
+    "item": "driver_continuous_motion",
+    "state": "PASS",
+    "detail": 62
+   },
+   {
+    "source": "structure",
+    "item": "driver_viewer_hook_5s",
+    "state": "PASS",
+    "detail": [
+     "Bring every pain, of body or heart, to God tonight, and rest"
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_speech_within_3s",
+    "state": "PASS",
+    "detail": 0.3
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_spoken_amen_cta",
+    "state": "PASS",
+    "detail": "If you prayed this prayer, type amen in the comments now, and if you want, share the name of someone who needs healing, "
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_recurring_refrain",
+    "state": "PASS",
+    "detail": [
+     "the lord is",
+     8
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_gratitude_block",
+    "state": "PASS",
+    "detail": 3
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_voice_and_music",
+    "state": "PASS",
+    "detail": {
+     "voice_model_pinned": true,
+     "music_owned": true
+    }
+   },
+   {
+    "source": "structure",
+    "item": "package_title_promise_pipe_keyword",
+    "state": "PASS",
+    "detail": "Night Prayer for Healing | Rest Your Body and Heart in God's Care"
+   },
+   {
+    "source": "structure",
+    "item": "package_chapters",
+    "state": "PASS",
+    "detail": [
+     "0:00",
+     "0:37",
+     "1:29",
+     "2:16"
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "package_publish_window",
+    "state": "PASS",
+    "detail": "night 2026-10-21T00:00:00Z"
+   }
+  ],
+  "authenticity": [
+   {
+    "source": "authenticity",
+    "item": "original_words_share",
+    "state": "PASS",
+    "detail": 0.722
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_script_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.125,
+      "pilot-005"
+     ],
+     "visible": [
+      "pilot-002",
+      "pilot-005",
+      "pilot-007",
+      "pilot-012"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_image_set",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.238,
+      "pilot-012"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_title",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.1,
+      "pilot-012"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_opening_line",
+    "state": "PASS",
+    "detail": {
+     "opening": "bring every pain of body or heart to",
+     "same_as": []
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "not_reused_reference_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": 0.0003,
+     "ref": "fXhKzleJhxI",
+     "refs": 1
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "critique_policy_and_ypp",
+    "state": "PASS",
+    "detail": []
+   },
+   {
+    "source": "authenticity",
+    "item": "synthetic_media_disclosed",
+    "state": "PASS",
+    "detail": "publish_video.py status"
+   }
+  ],
   "preflight": [
    {
     "source": "preflight",
@@ -299,90 +484,110 @@
  },
  "informative_not_deciding": {
   "scan_frozen_picture": {
-   "longest_s": 1.33,
+   "longest_s": 2.83,
    "report_s": 5.0,
    "blocking": false,
    "inside": true,
    "spans": [
     [
-     36.1,
-     37.23,
-     1.13
+     72.3,
+     73.37,
+     1.07
     ],
     [
-     78.3,
-     79.43,
-     1.13
-    ],
-    [
-     326.6,
-     327.93,
-     1.33
-    ],
-    [
-     498.1,
-     499.23,
-     1.13
-    ],
-    [
-     568.33,
-     569.43,
-     1.1
-    ],
-    [
-     652.1,
-     653.1,
+     96.07,
+     97.07,
      1.0
     ],
     [
-     848.3,
-     849.43,
-     1.13
+     146.7,
+     148.8,
+     2.1
     ],
     [
-     886.8,
-     887.83,
-     1.03
+     148.8,
+     150.77,
+     1.97
     ],
     [
-     904.1,
-     905.27,
-     1.17
+     150.77,
+     152.0,
+     1.23
     ],
     [
-     970.67,
-     971.93,
-     1.27
-    ],
-    [
-     998.6,
-     999.73,
-     1.13
-    ],
-    [
-     1114.1,
-     1115.23,
-     1.13
-    ],
-    [
-     1124.6,
-     1125.93,
-     1.33
-    ],
-    [
-     1222.7,
-     1223.9,
+     152.0,
+     153.2,
      1.2
     ],
     [
-     1376.6,
-     1377.73,
-     1.13
+     154.63,
+     156.0,
+     1.37
     ],
     [
-     1432.6,
-     1433.7,
-     1.1
+     156.47,
+     158.0,
+     1.53
+    ],
+    [
+     158.0,
+     159.2,
+     1.2
+    ],
+    [
+     160.9,
+     161.93,
+     1.03
+    ],
+    [
+     161.93,
+     163.2,
+     1.27
+    ],
+    [
+     163.2,
+     164.4,
+     1.2
+    ],
+    [
+     164.97,
+     167.0,
+     2.03
+    ],
+    [
+     167.0,
+     169.23,
+     2.23
+    ],
+    [
+     196.23,
+     197.27,
+     1.03
+    ],
+    [
+     223.17,
+     224.2,
+     1.03
+    ],
+    [
+     224.2,
+     226.83,
+     2.63
+    ],
+    [
+     226.83,
+     228.17,
+     1.33
+    ],
+    [
+     228.77,
+     230.9,
+     2.13
+    ],
+    [
+     230.9,
+     231.93,
+     1.03
     ]
    ]
   }

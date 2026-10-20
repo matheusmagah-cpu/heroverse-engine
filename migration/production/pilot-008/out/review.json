@@ -1,0 +1,12 @@
+{
+ "version": "long-review-v1",
+ "pilot_id": "pilot-008",
+ "output_sha256": "c3bcad71aa142cfac3b91b028726f061bee0ffbd4f90a50953740ca4afa0978b",
+ "status": "ERROR",
+ "error": "ProviderFailure: HTTP_503_UNAVAILABLE",
+ "provider_message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+ "quota_ids": [],
+ "retry_delay": null,
+ "failed_at": "2026-10-20T12:25:32Z",
+ "usage": []
+}

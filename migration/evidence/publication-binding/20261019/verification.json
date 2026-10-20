@@ -1,0 +1,48 @@
+{
+  "new_tests": 17,
+  "ci_suites_locally_passed": 37,
+  "source_integrity": [
+    {
+      "path": "migration/production/pilot-012/out/qa.json",
+      "sha256": "74b1249d5bee2c570d2b0be71d8375870cc0d9ba2617f8e0b4e89c846d8244d4",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/manifest.json",
+      "sha256": "8a81cc7d0c32d2f3e84678d8830d71365e01f781eacd7c4d32297dcdd9a87c34",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/gate.json",
+      "sha256": "1bb3414da32b77470766a4c3aafa66902b4ee8f3b50d975403e3cf509d0fdf8b",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/inspection/APPROVAL.json",
+      "sha256": "836523e3a8d7a815f2b87337219c8d241009a2d59f2c99df2503e1ad9f16ec3f",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/qa_criteria_v3.json",
+      "sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+      "unchanged": true
+    },
+    {
+      "path": ".github/workflows/approve.yml",
+      "sha256": "0c721e02ec317b9df3b0c6debb1befb371e5beb349e7c304ce733b725ea47ee0",
+      "unchanged": true
+    },
+    {
+      "path": "migration/production/pilot-012/out/review.json",
+      "sha256": "19bc4ea8c07502e29fb2ff99234b779187ec857c229c87f5f215a16f900c14a2",
+      "unchanged": true
+    }
+  ],
+  "actual_pilot012_binding": "PASS",
+  "actual_output_sha256": "82276559bdfdb5600e7e0ae13b5e7b337611fdacf0d2c2cc25d3533957e9dbfe",
+  "publication_performed": false,
+  "dispatch_performed": false,
+  "frozen_qa_changed": false,
+  "canonical_dimensions_v3": 14,
+  "independent_review_fix": "Required canonical dimensions/static item identities; optional existing review hash/status binding; unknown QA schema rejected."
+}

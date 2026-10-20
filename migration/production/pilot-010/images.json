@@ -1,8 +1,8 @@
 {
  "version": "pilot-images-v2",
  "pilot_id": "pilot-010",
- "style": "soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
- "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+ "style": "photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon, painting, illustration, cartoon, flat, low resolution",
  "steps": 6,
  "guidance": 1.5,
  "width": 1344,
@@ -24,5 +24,66 @@
    "bg-window"
   ]
  },
- "images": []
+ "images": [
+  {
+   "id": "bg-cares-lantern-bridge",
+   "prompt": "A small empty wooden bridge over a quiet brook at night, a visible amber lantern on the railing, silver water and soft green banks, peaceful release of a long day, no people, no text",
+   "seed": 10000
+  },
+  {
+   "id": "bg-cares-calm-harbour",
+   "prompt": "A sheltered harbour with still dark blue water under a visible moon, a warm shore lamp reflected in small ripples, no boats or people, no text",
+   "seed": 10001
+  },
+  {
+   "id": "bg-cares-rain-window-garden",
+   "prompt": "A warmly glowing cottage window seen from a rain-washed empty garden at night, clear droplets on leaves and soft amber reflections on stone, calm restful scenery, no people, no text",
+   "seed": 10002
+  },
+  {
+   "id": "bg-cares-stream-pebbles",
+   "prompt": "A slow night stream moving gently over rounded pebbles, moon reflections and soft moss on the banks, quiet natural scenery with open breathing space, no people, no text",
+   "seed": 10003
+  },
+  {
+   "id": "bg-cares-willow-pond",
+   "prompt": "A willow tree beside a sheltered pond beneath pale stars, its soft branches reflected in still blue water, quiet uncluttered night scenery, no people, no text",
+   "seed": 10004
+  },
+  {
+   "id": "bg-cares-mist-clearing",
+   "prompt": "Thin mist slowly opening over a peaceful meadow at night, a gentle silver horizon and dark blue sky, no threatening clouds, no people, no text",
+   "seed": 10005
+  },
+  {
+   "id": "bg-cares-hearth-garden",
+   "prompt": "A small outdoor stone hearth with a gentle visible fire beside an empty cottage garden, warm light on smooth paving and blue night beyond, peaceful modest setting, no people, no text",
+   "seed": 10006
+  },
+  {
+   "id": "bg-cares-dawn-estuary",
+   "prompt": "A wide calm estuary at first light with soft pink clouds and gold reflected on shallow water, uncluttered hopeful landscape, no people, no text",
+   "seed": 10007
+  },
+  {
+   "id": "bg-cares-moonlit-inlet",
+   "prompt": "A calm inlet with silver moon reflections and smooth dark pebbles, peaceful uncluttered night scenery, no people, no text",
+   "seed": 10008
+  },
+  {
+   "id": "bg-cares-lamp-alcove",
+   "prompt": "An empty sheltered garden alcove with a visible softly glowing lamp, blue night and green leaves beyond, no people, no text",
+   "seed": 10009
+  },
+  {
+   "id": "bg-cares-gentle-rain",
+   "prompt": "Gentle rain on a quiet stone garden path with warm cottage light reflected in shallow puddles, no people, no text",
+   "seed": 10010
+  },
+  {
+   "id": "bg-cares-still-horizon",
+   "prompt": "A still lakeside horizon beneath pale dawn clouds after a quiet night, peaceful open natural scenery, no people, no text",
+   "seed": 10011
+  }
+ ]
 }

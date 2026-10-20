@@ -1,8 +1,8 @@
 {
   "version": "pilot-images-v2",
   "pilot_id": "pilot-011",
-  "style": "soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
-  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon",
+  "style": "photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+  "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon, painting, illustration, cartoon, flat, low resolution",
   "steps": 6,
   "guidance": 1.5,
   "width": 1344,
@@ -23,5 +23,61 @@
       "bg-orchard"
     ]
   },
-  "images": []
+  "images": [
+    {
+      "id": "bg-waiting-ridge-sunrise",
+      "prompt": "An open mountain ridge at sunrise, a visible golden sun just above distant blue peaks, gentle mist in the valleys, peaceful spacious landscape, no people, no text",
+      "seed": 11000
+    },
+    {
+      "id": "bg-waiting-lantern-path",
+      "prompt": "A small visible lantern beside an empty hillside path as morning light arrives, dew on green grass and a quiet valley beyond, patient hopeful scenery, no people, no text",
+      "seed": 11001
+    },
+    {
+      "id": "bg-waiting-cedar-dawn",
+      "prompt": "A tall cedar on a sheltered slope in soft dawn light, strong roots among mossy stones and a calm pale sky, restful natural scene, no people, no text",
+      "seed": 11002
+    },
+    {
+      "id": "bg-waiting-spring-steps",
+      "prompt": "Old stone steps beside a clear mountain spring in morning sunlight, small ferns growing in the joints, a gentle upward path, no people, no text",
+      "seed": 11003
+    },
+    {
+      "id": "bg-waiting-cloud-break",
+      "prompt": "Soft morning clouds opening above green hills, warm sunlight reaching a quiet valley in broad gentle rays, calm hopeful natural landscape, no people, no text",
+      "seed": 11004
+    },
+    {
+      "id": "bg-waiting-resting-grove",
+      "prompt": "An empty shaded grove beside a bright meadow, morning dew on leaves and warm sun along a simple stone seat, peaceful place to rest, no people, no text",
+      "seed": 11005
+    },
+    {
+      "id": "bg-waiting-highland-stream",
+      "prompt": "A clear highland stream winding through fresh grass in early morning light, distant hills and delicate wildflowers, quiet steady natural movement, no people, no text",
+      "seed": 11006
+    },
+    {
+      "id": "bg-waiting-open-horizon",
+      "prompt": "Wide golden morning horizon above rolling green country, a winding clear path through the foreground and calm blue sky, spacious hopeful scenery, no people, no text",
+      "seed": 11007
+    },
+    {
+      "id": "bg-waiting-sunlit-pass",
+      "prompt": "A gentle mountain pass filled with soft morning sunlight, an open path leading toward a calm horizon, no people, no text",
+      "seed": 11008
+    },
+    {
+      "id": "bg-waiting-morning-rockpool",
+      "prompt": "A clear rock pool beneath a small spring in golden early sunlight, moss and delicate ferns, no people, no text",
+      "seed": 11009
+    },
+    {
+      "id": "bg-waiting-quiet-summit",
+      "prompt": "An empty rounded summit above drifting valley mist, visible sunrise and vast peaceful sky, no people, no text",
+      "seed": 11010
+    }
+  ]
 }

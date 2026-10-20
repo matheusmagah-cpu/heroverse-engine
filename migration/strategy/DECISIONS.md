@@ -129,3 +129,39 @@ predict how fast HeroVerse reaches YPP.
 - **Fix:** `structure_mining.transcript_problems` rejects such windows (re-mined, never used); `accuracy_check` compares only the window's own lines, counts invalid, omitted and conflicting windows as errors, and gives PASS only when ≥ 80% of speech windows agree ≥ 0.85 and openings ≥ 0.80; no speech or no openings → UNKNOWN. Regression tests for each defect.
 - **Honest re-run (tuning set, the 12 windows used to find the bugs):** FAIL — 8 compared, 4 invalid, window pass rate 0.50, openings 0.818. Proof needs the holdout (`evidence/mining-accuracy-holdout.json`, criteria fixed before it is acquired, videos never used before): UNKNOWN until then.
 - **Consequence:** wpm/beats/shots numbers in `measured.json` and MODELING_SPEC section 1 include defective windows. They stay informative only and are recomputed from valid windows after re-mining. Data API durations (D-01, D-04) and the frozen QA criteria do not depend on transcripts and are unaffected.
+
+### Measurement 2026-10-20 — day 3 (daily analysis 08:10 UTC)
+- **Official (YouTube Data API, goal report 01:52 UTC):** 269 subscribers; 28 public videos; 2,888 total channel views.
+- **Own calculation (Analytics rows):** public long-form watch hours 365 d ≈ 3.3; public Shorts views 90 d = 22.
+- **Estimate (vidIQ title score, informative only, never blocks):** pilot-008 87 · pilot-009 82 · pilot-010 84 · pilot-011 80 (`production/pilot-0NN/market/vidiq.json`).
+- **Gates:** pilot-007 approved (watched review 9.0, `gemini-3.8-flash`), uploaded for 2026-10-21 10:00 UTC. pilot-006 GATE FAIL on `authenticity / no_template_image_set` (0.529 vs pilot-012; limit 0.5, not loosened). The same check finds identical background sets in 008 = 010 = 012 and 009 = 011, so all would fail. Data fix #225 and antidote E30 #226 (check moved to `script_check`).
+- **Learning loop:** `learning/latest.json` decision HOLD / INSUFFICIENT (no exact 48 h checkpoint, no matched baseline). No strategy change today; the 90 % rule is not met by any new evidence.
+
+## Cross-platform and the YPP 2027 deadline (2026-10-20)
+- Evidence: `evidence/research/cross-platform-20261020.md`, where each claim is labelled official or third-party.
+- **YouTube changes on 2027-02-01.** The YPP entry bar becomes 8,000 watch hours or 20 M Shorts views, and Shorts-pool revenue then needs ≥ 10 M Shorts views per 90 days. Channels accepted before that date keep their status, so **our 4,000 h goal must be met and applied for before 2027-02-01**.
+- **Facebook Page + Instagram: automatic cross-post of every approved Short ≤ 90 s, plus the long prayers on Facebook.** Facebook monetization is invite-only, but the cost is ≈ 0 through the official Meta APIs. Go/no-go after 30 days on measured reach.
+- **TikTok: not now.** Creator Rewards needs original, ≥ 1 min videos, and AI-generated content may be excluded. The API also needs an audit before any public post.
+- **Snapchat: no.**
+
+## Owner directive and 14-day pace (2026-10-20 14:10 UTC)
+- **Owner:** "The plan is 14 days, up to 30. The platform's dates do not matter; the project is mine. Analyse daily whether the number of videos and the average views reach the goal in 14 days, and adjust the strategy daily." The YouTube 2027 date is therefore **not** a planning input. The 14-day plan (day 1 = 2026-10-18, day 14 = 2026-10-31, day 30 = 2026-11-16) is.
+- **Pace needed from today (11 days left):** **≈ 66 subscribers a day** (731 to go) and **≈ 363 public long-form watch hours a day** (3,997 to go).
+- **Measured pace now:** new long videos get 1–11 views each (daily report). Recent Shorts get 127–287 views. **The gap is about 100–300×**, so the current format and volume cannot reach day 14 without a breakout.
+- **The biggest measured lever for watch hours: long sleep videos with Scripture**
+  - Evidence: `structures/sleep-scripture-long.json`, `evidence/vidiq/20261020/sleep_scripture_long.json`.
+  - 6 winners from 4 channels of 783–18,000 subscribers, each 2.2–8 h long, with 68,000–311,000 views in under 3 months. There are 3 weak contrasts of the same shape.
+  - Arithmetic: 363 h/day = ~730 views/day at 30 min watched per view (2–3 h video), against ~2,700 views/day at 8 min per view (26-min prayer). This per-view figure is not measured on our channel yet.
+  - **Decision:** the night slot (00:00 UTC) moves to the sleep-scripture-long shape (2–3 h, original prayers and reflections ≥ 35 % of words, KJV readings) as soon as Dot delivers the first one. The morning slot stays at the validated guided prayer.
+- **Subscriber lever:** Shorts v2 (#231) and the bell strategy (#241). 66 subscribers a day needs roughly 2,000–6,000 Shorts views a day, at the 1–3 % subscribe rate seen on our July Shorts.
+- **Daily:** the daily analysis routine computes the needed pace against the measured pace and the projection for day 14 and day 30, and adjusts the next day's plan with this lever list.
+
+## Owner directive: 14 days, flexible format (2026-10-20 14:30 UTC)
+- **The goal is to meet the YPP requirements (1,000 subscribers + 4,000 public long-form watch hours) by day 14 (2026-10-31).** Day 30 (2026-11-16) is an exception, not the plan. Monetization itself is then YouTube's decision.
+- **The project is not locked to a format.** Only two things are fixed:
+  - the niche: English Christian prayer;
+  - coherence between posts.
+- Everything else is chosen by what mining, modeling and the daily analysis show, and can change from one day to the next: format, length, slot, cadence, the Shorts mix and packaging.
+- **How a format enters.** It enters production when mining shows it winning in our niche (count rule: winners and weak contrasts), or when our own measured results show it.
+- **Allocation** (which format in which slot, how many videos and Shorts) is adjusted **daily** from the numbers, with no waiting period.
+- **Quality and policy gates never change:** R1–R10, originality, the watched review, and no fear-bait.

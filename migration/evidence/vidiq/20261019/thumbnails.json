@@ -1,0 +1,1166 @@
+{
+ "version": "thumbnail-audit-v1",
+ "source": "migration/evidence/vidiq/20261019/outliers.json",
+ "rows": [
+  {
+   "id": "OuqwfEgNavE",
+   "channel": "Grace & Purpose Prayer Altar",
+   "breakout": 2310.11,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "a0e7049c1a32d3ebcca3b47d05d197e962186f833d8406296ddce6510b2b9cf6",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 67.7,
+   "mean_saturation_0_255": 98.0,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#3c3e3a",
+    "#050809",
+    "#c1a97c",
+    "#212422",
+    "#111617"
+   ],
+   "facts": {
+    "person_or_face": "praying_person",
+    "face_realistic": true,
+    "text_words": 6,
+    "text_lines": 3,
+    "main_text": "PSALM 91 GOD'S COVERING MORNING PRAYER",
+    "text_colours": [
+     "yellow",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "left",
+    "background": "dark stormy clouds with sunset light and mountains",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": true
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "fXhKzleJhxI",
+   "channel": "Bedtime Prayer Moment",
+   "breakout": 1332.76,
+   "status": "measured",
+   "source": "hqdefault",
+   "image_sha256": "e98d4793e6e2db57afb2d055f2b775f77cad9ab17f99c8231c7d9ae00e61d177",
+   "width": 480,
+   "height": 360,
+   "mean_luminance_0_255": 47.9,
+   "mean_saturation_0_255": 87.0,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#000000",
+    "#1c1f1f",
+    "#151310",
+    "#999765",
+    "#0a0908"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 15,
+    "text_lines": 4,
+    "main_text": "A GENTLE BEDTIME PRAYER TO THANK GOD BEFORE YOU SLEEP",
+    "text_colours": [
+     "yellow",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "dark blurred gradient with a warm light glow",
+    "light_source_visible": false,
+    "emoji_or_icon": true,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "mtWtsL5hOLg",
+   "channel": "Evening Mercy Prayer",
+   "breakout": 839.24,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "7f0078985cb9aaf476e8cf4d67182e07777392c3689282240769c07a647ecdeb",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 88.2,
+   "mean_saturation_0_255": 107.9,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#07090d",
+    "#6f6050",
+    "#ded2bd",
+    "#2c221b",
+    "#131f2a"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 4,
+    "text_lines": 2,
+    "main_text": "PUT GOD FIRST TONIGHT",
+    "text_colours": [
+     "white",
+     "gold"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "top",
+    "background": "open bible on a wooden table next to an oil lamp in a dimly lit room",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.6-flash"
+  },
+  {
+   "id": "k3QWu6asmFk",
+   "channel": "Walking With God Almighty",
+   "breakout": 676.42,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "0f7aa71bf94c04ec9ca1ea20d77e1e322f840c88208a21d0d84403897e169764",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 58.9,
+   "mean_saturation_0_255": 183.3,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#caa34e",
+    "#432e27",
+    "#010712",
+    "#00040b",
+    "#120a0b"
+   ],
+   "facts": {
+    "person_or_face": "other_person",
+    "face_realistic": true,
+    "text_words": 6,
+    "text_lines": 4,
+    "main_text": "NOT ALONE PSALM 91 PROTECTION",
+    "text_colours": [
+     "yellow",
+     "gold",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "left",
+    "background": "bedroom at night with moon visible through window",
+    "light_source_visible": true,
+    "emoji_or_icon": true,
+    "scripture_reference_visible": true
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "h5qR3G2I1EU",
+   "channel": "Daily Word of Jesus",
+   "breakout": 643.21,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "ff1b4227c39cbd3f733a6d37c50003d7f76e0c6ccb92232bc145f05792566cb6",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 78.0,
+   "mean_saturation_0_255": 109.4,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#4f3d5e",
+    "#121133",
+    "#322a51",
+    "#b3a9ae",
+    "#21234e"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 10,
+    "text_lines": 5,
+    "main_text": "THANK GOD ! FOR EVERYTHING FAITH, PROTECTION & BLESSINGS MORNING PRAYER",
+    "text_colours": [
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": true,
+    "text_position": "middle",
+    "background": "sunset sky over water with wooden pier",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "UvB-bJLSzwI",
+   "channel": "Walking With God Almighty",
+   "breakout": 440.19,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "26583fcb0979df81f5645191e4e59df5a6ad9eaff8453c9cbb05152e09ae167b",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 54.9,
+   "mean_saturation_0_255": 134.7,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#010103",
+    "#3a271b",
+    "#c49d5a",
+    "#190d09",
+    "#070608"
+   ],
+   "facts": {
+    "person_or_face": "other_person",
+    "face_realistic": true,
+    "text_words": 6,
+    "text_lines": 3,
+    "main_text": "NOT FORGOTTEN - GOD SEES YOU -",
+    "text_colours": [
+     "white",
+     "yellow"
+    ],
+    "text_outline_or_shadow": false,
+    "text_box": false,
+    "text_position": "left",
+    "background": "indoor living room at night with an elderly man sitting in a chair holding a framed photograph, a lamp, and a Bible",
+    "light_source_visible": true,
+    "emoji_or_icon": true,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "1YkQeS5ankw",
+   "channel": "Morning Grace Daily",
+   "breakout": 424.56,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "eb74803b17ade535edf76a792c402f17a602f4e15b5bb5269f9f1ee80001135f",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 144.0,
+   "mean_saturation_0_255": 171.5,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#f3ad19",
+    "#442e0c",
+    "#f6e0a6",
+    "#816940",
+    "#c9840f"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 11,
+    "text_lines": 3,
+    "main_text": "Morning prayer Short but very powerful (SEEK GOD FIRST)",
+    "text_colours": [
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "sunrise sky and mountains",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "TjkOf6Dgwb4",
+   "channel": "Morning Grace Prayers",
+   "breakout": 402.36,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "e7de6254ac706a40d6b885deff718ddd0091e045f0e01209a94d96e6658599bf",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 122.7,
+   "mean_saturation_0_255": 119.7,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#ab855b",
+    "#372c1a",
+    "#815432",
+    "#cdae7a",
+    "#f7f2e2"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 11,
+    "text_lines": 3,
+    "main_text": "Morning prayer Short but very powerful (Fill My Mind With Peace)",
+    "text_colours": [
+     "white",
+     "green"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "sunrise sky, mountains and lake",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "Xc4UT3Jig9o",
+   "channel": "Walking With God Almighty",
+   "breakout": 383.11,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "974479a171e12756fbca840f67139752f1b79e0b6c932e8b6db0fda3e184a8d0",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 62.0,
+   "mean_saturation_0_255": 160.9,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#010204",
+    "#150d08",
+    "#47311e",
+    "#f7dc43",
+    "#ba8838"
+   ],
+   "facts": {
+    "person_or_face": "praying_person",
+    "face_realistic": true,
+    "text_words": 6,
+    "text_lines": 3,
+    "main_text": "GOD FIGHTS PSALM 35 + 91",
+    "text_colours": [
+     "yellow",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "left",
+    "background": "indoor room at night with man praying over a bible by lamp light",
+    "light_source_visible": true,
+    "emoji_or_icon": true,
+    "scripture_reference_visible": true
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "guTmelUNZiU",
+   "channel": "The Grace Hour",
+   "breakout": 314.7,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "3eb5cf601ce8a70b68259bb7cea2afc20dce61ef1263876c2a919aa8b52d605c",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 98.9,
+   "mean_saturation_0_255": 173.2,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#291c12",
+    "#5a3310",
+    "#945e15",
+    "#ebaa17",
+    "#f8e6b6"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 12,
+    "text_lines": 4,
+    "main_text": "SHORT PRAYER TO Invite God To Walk With You Today",
+    "text_colours": [
+     "white",
+     "yellow"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "full",
+    "background": "sunset over ocean",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "zHkHICPKyDo",
+   "channel": "Morning Grace Daily",
+   "breakout": 201.7,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "8e979319dfdbbbe020a44249c7a0a031453606aa7874f38f597320437c25f51f",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 146.5,
+   "mean_saturation_0_255": 164.3,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#f3b120",
+    "#44300d",
+    "#f6e3ad",
+    "#816a44",
+    "#c78716"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 11,
+    "text_lines": 3,
+    "main_text": "Morning prayer\nShort but very powerful\n(GOD WALK WITH ME TODAY)",
+    "text_colours": [
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "sunrise sky over misty mountains",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "VwZqiYqi40o",
+   "channel": "Prayer of Hope",
+   "breakout": 199.02,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "0355b19b8d29f4194683d49ece91e09e5f2a817388a768e3d1b3a9b7f0ea1684",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 109.0,
+   "mean_saturation_0_255": 147.1,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#8b7f5e",
+    "#e0e863",
+    "#271c12",
+    "#654028",
+    "#333546"
+   ],
+   "facts": {
+    "person_or_face": "hands_only",
+    "face_realistic": false,
+    "text_words": 19,
+    "text_lines": 5,
+    "main_text": "WEDNESDAY 16TH SEPTEMBER PRAYER FOR THANK GOD FIRST & WATCH WHAT HAPPENS POWERFUL MORNING PRAYER FOR BREAKTHROUGH",
+    "text_colours": [
+     "yellow",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "full",
+    "background": "sunrise sky over mountains and trees",
+    "light_source_visible": true,
+    "emoji_or_icon": true,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "cyyqnkJwxJw",
+   "channel": "Night Blessing",
+   "breakout": 133.71,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "d3ecdff67148eb5b413b9cd4f865bae28dbd3790dc5cbda5d20d908f3a5d93c1",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 114.5,
+   "mean_saturation_0_255": 88.2,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#5e4f35",
+    "#17140d",
+    "#988258",
+    "#e1c695",
+    "#fdf5dc"
+   ],
+   "facts": {
+    "person_or_face": "jesus",
+    "face_realistic": true,
+    "text_words": 7,
+    "text_lines": 4,
+    "main_text": "HOLY SPIRIT, HELP ME PRAY NIGHT BLESSING",
+    "text_colours": [
+     "white",
+     "yellow"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "left",
+    "background": "sky with clouds and bright sunlight",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "Z8ogwcMKnqY",
+   "channel": "Restful Prayers",
+   "breakout": 120.76,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "5d7309fd096a007d8a9c2b4791b824c89f51f97f6cfbb4107d3500c36f2b4d48",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 72.6,
+   "mean_saturation_0_255": 139.6,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#334561",
+    "#0a0e16",
+    "#c0ba52",
+    "#111723",
+    "#1b283f"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 6,
+    "text_lines": 3,
+    "main_text": "Night Prayer Before You Sleep Tonight",
+    "text_colours": [
+     "yellow",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "full",
+    "background": "blurry night sky over water and landscape",
+    "light_source_visible": false,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "htx4YZVYBVs",
+   "channel": "Morning Grace Prayers",
+   "breakout": 119.99,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "ab89b6f0598f4c1552f9ad09b444f0e7ef97cc73911665ab4fb976cfbb7d11c8",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 129.9,
+   "mean_saturation_0_255": 118.4,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#b68d6c",
+    "#492d15",
+    "#8a5e3b",
+    "#d9b482",
+    "#f8f3e5"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 6,
+    "text_lines": 2,
+    "main_text": "Morning prayer Short but very powerful",
+    "text_colours": [
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "sunrise sky over mountains and lake",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "tYdS0TngzuQ",
+   "channel": "Prayer Before Sleep",
+   "breakout": 116.36,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "4ef5dbe31fa20c8e965c7fc2d1a45fd523ac92b84c403ec81edf2a645a17801b",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 93.7,
+   "mean_saturation_0_255": 142.4,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#0c1938",
+    "#635e71",
+    "#483943",
+    "#ae9385",
+    "#f4d7a1"
+   ],
+   "facts": {
+    "person_or_face": "praying_person",
+    "face_realistic": true,
+    "text_words": 10,
+    "text_lines": 4,
+    "main_text": "NEVER FORGET TO THANK THE LORD BEFORE YOU SLEEP",
+    "text_colours": [
+     "white",
+     "orange",
+     "yellow"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "night sky with stars",
+    "light_source_visible": false,
+    "emoji_or_icon": true,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "y3SsQ7s-VkY",
+   "channel": "Morning Grace Prayers",
+   "breakout": 105.98,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "ab89b6f0598f4c1552f9ad09b444f0e7ef97cc73911665ab4fb976cfbb7d11c8",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 129.9,
+   "mean_saturation_0_255": 118.4,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#b68d6c",
+    "#492d15",
+    "#8a5e3b",
+    "#d9b482",
+    "#f8f3e5"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 6,
+    "text_lines": 2,
+    "main_text": "Morning prayer Short but very powerful",
+    "text_colours": [
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "sunrise sky over mountains and lake",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.6-flash"
+  },
+  {
+   "id": "BHMBdEwqoYE",
+   "channel": "PRAYER LINE ONLINE",
+   "breakout": 82.03,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "f5c8a5cc81eb12c386b92ffefd7474c79a79666fc5bc4af3c1498b457998a7c1",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 86.6,
+   "mean_saturation_0_255": 110.9,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#1e191a",
+    "#ae8657",
+    "#5b2d23",
+    "#7a5a3d",
+    "#dab787"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 8,
+    "text_lines": 5,
+    "main_text": "FATHER, SHOW ME THE WAY THAT I SHOULD GO",
+    "text_colours": [
+     "red",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "left",
+    "background": "bald eagle perched on a rock at sunset",
+    "light_source_visible": true,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "QKI8sGXQ2dU",
+   "channel": "Morning Prayer With God",
+   "breakout": 34.29,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "ed2873db053cac9ae03b93941e84fd6e6880e56cf24680ebe4c37c0b38816acc",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 123.4,
+   "mean_saturation_0_255": 172.2,
+   "brightness": "mid",
+   "dominant_colours": [
+    "#0d4612",
+    "#609b48",
+    "#fef805",
+    "#7c3e53",
+    "#faf8d2"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 9,
+    "text_lines": 3,
+    "main_text": "A Short Prayer Thank God First Before Anything",
+    "text_colours": [
+     "yellow",
+     "white"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "full",
+    "background": "blurry green and pink abstract background",
+    "light_source_visible": false,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  },
+  {
+   "id": "T2N6pPQ-9Ps",
+   "channel": "Peaceful Night Prayers",
+   "breakout": 28.84,
+   "status": "measured",
+   "source": "maxresdefault",
+   "image_sha256": "0a52eccdd0caf72551a650d041aa45e68001ab91c67a0bbbed38f80daa46af83",
+   "width": 1280,
+   "height": 720,
+   "mean_luminance_0_255": 83.8,
+   "mean_saturation_0_255": 121.2,
+   "brightness": "dark",
+   "dominant_colours": [
+    "#19262e",
+    "#4b5756",
+    "#0b141c",
+    "#b6c979",
+    "#4f2b31"
+   ],
+   "facts": {
+    "person_or_face": "none",
+    "face_realistic": false,
+    "text_words": 13,
+    "text_lines": 4,
+    "main_text": "THIS BEDTIME Prayer is short BUT VERY POWERFUL (God Is Fighting Your Battles)",
+    "text_colours": [
+     "yellow",
+     "white",
+     "red",
+     "green"
+    ],
+    "text_outline_or_shadow": true,
+    "text_box": false,
+    "text_position": "middle",
+    "background": "dark mountains and lake landscape",
+    "light_source_visible": false,
+    "emoji_or_icon": false,
+    "scripture_reference_visible": false
+   },
+   "facts_model": "gemini-3.5-flash-lite"
+  }
+ ],
+ "summary": {
+  "with_text": "20/20",
+  "text_words_le_5": "1/20",
+  "text_lines_le_2": "3/20",
+  "person_none": "13/20",
+  "person_jesus": "1/20",
+  "person_praying": "3/20",
+  "text_outline_or_shadow": "19/20",
+  "text_box": "1/20",
+  "light_source_visible": "15/20",
+  "emoji_or_icon": "6/20",
+  "brightness": {
+   "dark": "8/20",
+   "mid": "12/20",
+   "bright": "0/20"
+  }
+ },
+ "unavailable": 0,
+ "usage": [
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 165,
+   "totalTokenCount": 1391,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 1190,
+   "candidatesTokenCount": 25,
+   "totalTokenCount": 2196,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1064
+    }
+   ],
+   "thoughtsTokenCount": 981,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1190,
+   "candidatesTokenCount": 171,
+   "totalTokenCount": 1361,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1064
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 160,
+   "totalTokenCount": 2154,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    }
+   ],
+   "thoughtsTokenCount": 768,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 161,
+   "totalTokenCount": 1387,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 167,
+   "totalTokenCount": 1393,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 183,
+   "totalTokenCount": 1409,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 151,
+   "totalTokenCount": 1377,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 157,
+   "totalTokenCount": 1383,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 175,
+   "totalTokenCount": 1401,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 162,
+   "totalTokenCount": 1388,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 163,
+   "totalTokenCount": 1389,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 186,
+   "totalTokenCount": 1412,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 165,
+   "totalTokenCount": 1391,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 160,
+   "totalTokenCount": 1386,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 153,
+   "totalTokenCount": 1379,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 171,
+   "totalTokenCount": 1397,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 147,
+   "totalTokenCount": 1832,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "thoughtsTokenCount": 459,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 165,
+   "totalTokenCount": 1391,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 161,
+   "totalTokenCount": 1387,
+   "promptTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    }
+   ],
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 1226,
+   "candidatesTokenCount": 178,
+   "totalTokenCount": 1404,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 126
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1100
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ ],
+ "rule": "Facts only. Images are not stored. A count is a fact; the summary is counts, not a rule."
+}

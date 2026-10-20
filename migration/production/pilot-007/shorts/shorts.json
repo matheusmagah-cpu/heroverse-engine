@@ -1,31 +1,31 @@
 {
- "version": "shorts-produce-v1",
+ "version": "shorts-produce-v2-r8",
  "source_pilot": "pilot-007",
- "selection_rubric_model": "gemini-3.6-flash",
+ "selection_rubric_model": "gemini-3.5-flash-lite",
+ "rejected_r8": [],
  "shorts": [
   {
    "file": "short-00.mp4",
-   "sha256": "fd779f98c21252d06b81eb05c9518040f3443a64315c3cf6695413fd0e99621e",
-   "seconds": 35.83,
-   "source_start": 1419.924,
-   "source_end": 1455.147,
+   "sha256": "2a0e1396ccc6d4ef7817c5c1052a7d3652b20715e1503377936f4941189eaa3b",
+   "seconds": 35.74,
+   "source_start": 1419.753,
+   "source_end": 1454.997,
    "segments": [
     "payoff"
    ],
-   "hook": "Pause before answering tense messages",
-   "title": "Do This Before Responding to Stressful Messages",
+   "hook": "Pause before answering that tense message.",
+   "hook_shown": false,
+   "title": "How to Handle a Stressful Message",
    "reference": null,
    "scenes": [
     "bg-meadow",
-    "bg-misty-valley",
-    "bg-garden",
-    "bg-dawn-lake",
-    "bg-meadow"
+    "bg-misty-valley"
    ],
-   "parallax": true,
+   "parallax": false,
+   "figure": false,
    "selection": {
-    "final_score": 0.8758,
-    "measured_score": 0.8896,
+    "final_score": 0.8659,
+    "measured_score": 0.8897,
     "features": {
      "opening_short": 1.0,
      "opening_direct": 1.0,
@@ -33,27 +33,27 @@
      "scripture": 0.4,
      "promise": 0.9868421052631579,
      "resolution": 1.0,
-     "length_fit": 0.8089199999999983
+     "length_fit": 0.8097600000000057
     },
     "rubric": {
      "index": 1,
-     "hook_first_2s": 9.0,
+     "hook_first_2s": 8.5,
      "stands_alone": 9.0,
-     "emotional_payoff": 8.0,
-     "shareability": 8.5,
-     "loop_potential": 7.5,
+     "emotional_payoff": 8.5,
+     "shareability": 8.0,
+     "loop_potential": 7.0,
      "policy_safe": 10.0,
-     "reasons": "Highly actionable practical commitment for managing morning communication stress.",
-     "hook_line": "Pause before answering tense messages",
-     "title": "Do This Before Responding to Stressful Messages"
+     "reasons": "Actionable advice for stressful moments, highly practical and grounded.",
+     "hook_line": "Pause before answering that tense message.",
+     "title": "How to Handle a Stressful Message"
     }
    },
    "text": "Here is your commitment for today: before answering the first message or request that makes you tense, pause. Name the concern to God in one sentence. Thank him for one real gift. Then pray, Jesus, guide my next words in your peace. After that, give the most truthful and considerate response you can. If you need time, say so kindly. You can carry John fourteen, verse twenty-seven with you as you practice this one deliberate response.",
    "qa": {
     "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
-    "seconds": 35.83,
+    "seconds": 35.74,
     "lufs": -14.8,
-    "true_peak_dbtp": -2.3,
+    "true_peak_dbtp": -2.2,
     "checks": {
      "decode_clean": true,
      "one_h264_1080x1920": true,
@@ -66,77 +66,145 @@
     "status": "PASS"
    },
    "review": {
-    "hook_in_first_2s": 8.0,
+    "hook_in_first_2s": 6.5,
     "captions_readable_and_synced": 9.0,
     "text_clear_of_shorts_ui": 9.5,
     "picture_quality": 8.5,
-    "edit_rhythm": 8.0,
+    "edit_rhythm": 6.5,
     "audio_clarity": 9.0,
-    "stands_alone": 9.0,
-    "ending_and_loop": 8.0,
+    "stands_alone": 9.5,
+    "ending_and_loop": 7.0,
     "policy_safe": 10.0,
-    "overall": 8.5,
+    "overall": 7.5,
     "issues": [
-     "00:00 - The foreground Jesus cutout remains static while background scenery shifts, giving a noticeable AI-composite look.",
-     "00:21 - The foreground reeds cutout has slightly harsh dark edge outlines over the changing background."
+     "Opening hook ('Here is your commitment for today') is relatively slow to deliver the core relatable friction point.",
+     "Very slow visual pacing with only one scene transition at 00:18 across the entire 35-second runtime, which may cause viewer fatigue."
     ],
-    "strongest_moment": "00:06 - The transition into the quiet valley background precisely on the word 'pause' reinforces the contemplative message.",
+    "strongest_moment": "00:03 - 00:08 when the specific, practical trigger is revealed: 'before answering the first message or request that makes you tense, pause.'",
     "model": "gemini-3.8-flash",
-    "status": "PASS"
+    "status": "FAIL"
    },
-   "publish": true
+   "publish": false
   },
   {
    "file": "short-01.mp4",
-   "sha256": "e91ca0f8132701d55beafdc10924919cd97a166a33e6c5b2165e0d7e0d69ab3a",
-   "seconds": 35.03,
-   "source_start": 1243.848,
-   "source_end": 1278.249,
+   "sha256": "45c4f024c9257f9b07b92f151197d71be281fff83db7a5c7594738e2a2041873",
+   "seconds": 36.44,
+   "source_start": 286.2,
+   "source_end": 322.137,
    "segments": [
-    "day-scripture-peace-always",
-    "day-reflection-changing-plans"
+    "scripture-christ-peace",
+    "reflection-receive-peace"
    ],
-   "hook": "Peace when your plans get delayed",
-   "title": "How to Stay Peaceful When Plans Change",
-   "reference": "2 Thessalonians 3:16 (KJV)",
+   "hook": "My peace I give unto you.",
+   "hook_shown": false,
+   "title": "Jesus' Promise for an Uncertain Day",
+   "reference": "John 14:27 (KJV)",
    "scenes": [
     "bg-hills",
-    "bg-orchard",
-    "bg-sunrise-field",
-    "bg-meadow",
-    "bg-hills"
+    "bg-orchard"
    ],
-   "parallax": true,
+   "parallax": false,
+   "figure": false,
    "selection": {
-    "final_score": 0.8556,
-    "measured_score": 0.814,
+    "final_score": 0.8535,
+    "measured_score": 0.8337,
     "features": {
      "opening_short": 0.6,
      "opening_direct": 1.0,
-     "second_person": 0.9090909090909091,
+     "second_person": 1.0,
      "scripture": 1.0,
      "promise": 1.0,
      "resolution": 0.4,
-     "length_fit": 0.7760400000000027
+     "length_fit": 0.8374800000000004
     },
     "rubric": {
-     "index": 14,
-     "hook_first_2s": 8.5,
+     "index": 7,
+     "hook_first_2s": 8.0,
      "stands_alone": 9.0,
      "emotional_payoff": 9.0,
      "shareability": 8.5,
-     "loop_potential": 8.0,
+     "loop_potential": 7.5,
      "policy_safe": 10.0,
-     "reasons": "Connects spiritual blessing to practical everyday disruptions like traffic.",
-     "hook_line": "Peace when your plans get delayed",
-     "title": "How to Stay Peaceful When Plans Change"
+     "reasons": "Directly uses Jesus' words of peace for an uncertain morning.",
+     "hook_line": "My peace I give unto you.",
+     "title": "Jesus' Promise for an Uncertain Day"
     }
    },
-   "text": "Now the Lord of peace himself give you peace always by all means. The Lord be with you all. Carry this blessing into a change of plans. Your peaceful morning may soon include traffic, a delayed appointment, or a conversation you did not expect. You can return to prayer within that moment. You do not have to protect these minutes by resenting everything that comes afterward. You can ask for peace in the situation as it is.",
+   "text": "Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid. Jesus speaks these words to disciples facing a difficult farewell. You can hear them in a morning that also feels uncertain. His gift does not depend on every person agreeing with you or every plan working smoothly. You can receive his words while your calendar is full and your feelings are mixed.",
    "qa": {
     "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
-    "seconds": 35.03,
-    "lufs": -14.9,
+    "seconds": 36.44,
+    "lufs": -15.0,
+    "true_peak_dbtp": -2.2,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "892f7e9525c87eda6d4dbe3f882073986ba496015a45647de9f1c7343813896a",
+   "seconds": 47.17,
+   "source_start": 817.877,
+   "source_end": 864.535,
+   "segments": [
+    "stillness-two",
+    "scripture-hope",
+    "reflection-hope"
+   ],
+   "hook": "Hold that person in quiet prayer.",
+   "hook_shown": false,
+   "title": "Praying for Someone Difficult",
+   "reference": "Romans 15:13 (KJV)",
+   "scenes": [
+    "bg-mountain-sunrise",
+    "bg-morning-path",
+    "bg-sky"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8299,
+    "measured_score": 0.8373,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.6930693069306931,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.7336799999999994
+    },
+    "rubric": {
+     "index": 6,
+     "hook_first_2s": 7.5,
+     "stands_alone": 8.5,
+     "emotional_payoff": 8.5,
+     "shareability": 8.0,
+     "loop_potential": 7.0,
+     "policy_safe": 10.0,
+     "reasons": "Encourages holding a specific person in prayer without rehearsal.",
+     "hook_line": "Hold that person in quiet prayer.",
+     "title": "Praying for Someone Difficult"
+    }
+   },
+   "text": "You do not need to rehearse their whole story. Remember their face, or simply their name. Hold that person before God for this brief quiet moment. You can pray, Lord, help me love them well today. Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost. You can bring an unfinished situation into these words. Perhaps you are waiting for a reply, a decision, or a change that has taken longer than expected. Hope can help you remain open to goodness while you wait.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 47.17,
+    "lufs": -14.8,
     "true_peak_dbtp": -2.4,
     "checks": {
      "decode_clean": true,
@@ -150,109 +218,22 @@
     "status": "PASS"
    },
    "review": {
-    "hook_in_first_2s": 7,
-    "captions_readable_and_synced": 9,
-    "text_clear_of_shorts_ui": 9,
-    "picture_quality": 8,
-    "edit_rhythm": 6.5,
-    "audio_clarity": 9,
-    "stands_alone": 9,
-    "ending_and_loop": 7,
-    "policy_safe": 10,
-    "overall": 7.7,
-    "issues": [
-     "00:07-00:34: The foreground portrait of Jesus remains completely static while background landscapes slowly cut/crossfade, which feels repetitive over a 34-second duration.",
-     "00:30-00:34: The call to action ('Full prayer on the channel') appears abruptly at the top right, breaking the meditative aesthetic."
-    ],
-    "strongest_moment": "00:09-00:20 where the script grounds spiritual peace into realistic everyday disruptions like traffic and delayed appointments.",
-    "model": "gemini-3.8-flash",
-    "status": "FAIL"
-   },
-   "publish": false
-  },
-  {
-   "file": "short-02.mp4",
-   "sha256": "b367c6746c04fc05628f9bf8ad8725c3b218d7836370c451e0e5139e1aa3621b",
-   "seconds": 47.27,
-   "source_start": 817.877,
-   "source_end": 864.535,
-   "segments": [
-    "stillness-two",
-    "scripture-hope",
-    "reflection-hope"
-   ],
-   "hook": "Hold a friend in quiet prayer",
-   "title": "How to Pray for Someone Right Now",
-   "reference": "Romans 15:13 (KJV)",
-   "scenes": [
-    "bg-mountain-sunrise",
-    "bg-morning-path",
-    "bg-sky",
-    "bg-hills",
-    "bg-orchard",
-    "bg-sunrise-field",
-    "bg-mountain-sunrise"
-   ],
-   "parallax": true,
-   "selection": {
-    "final_score": 0.8499,
-    "measured_score": 0.8373,
-    "features": {
-     "opening_short": 1.0,
-     "opening_direct": 1.0,
-     "second_person": 0.6930693069306931,
-     "scripture": 1.0,
-     "promise": 1.0,
-     "resolution": 0.4,
-     "length_fit": 0.7336799999999994
-    },
-    "rubric": {
-     "index": 7,
-     "hook_first_2s": 8.5,
-     "stands_alone": 8.5,
-     "emotional_payoff": 9.0,
-     "shareability": 8.5,
-     "loop_potential": 7.0,
-     "policy_safe": 10.0,
-     "reasons": "Very gentle and practical instruction on how to intercede for loved ones.",
-     "hook_line": "Hold a friend in quiet prayer",
-     "title": "How to Pray for Someone Right Now"
-    }
-   },
-   "text": "You do not need to rehearse their whole story. Remember their face, or simply their name. Hold that person before God for this brief quiet moment. You can pray, Lord, help me love them well today. Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost. You can bring an unfinished situation into these words. Perhaps you are waiting for a reply, a decision, or a change that has taken longer than expected. Hope can help you remain open to goodness while you wait.",
-   "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
-    "seconds": 47.27,
-    "lufs": -14.8,
-    "true_peak_dbtp": -2.3,
-    "checks": {
-     "decode_clean": true,
-     "one_h264_1080x1920": true,
-     "fps_30": true,
-     "one_aac_stereo_48k": true,
-     "duration": true,
-     "loudness": true,
-     "true_peak": true
-    },
-    "status": "PASS"
-   },
-   "review": {
-    "hook_in_first_2s": 6.8,
-    "captions_readable_and_synced": 8.8,
+    "hook_in_first_2s": 6.5,
+    "captions_readable_and_synced": 9.0,
     "text_clear_of_shorts_ui": 9.0,
-    "picture_quality": 8.0,
-    "edit_rhythm": 6.2,
+    "picture_quality": 8.5,
+    "edit_rhythm": 6.5,
     "audio_clarity": 9.0,
-    "stands_alone": 8.5,
-    "ending_and_loop": 7.4,
+    "stands_alone": 9.5,
+    "ending_and_loop": 7.0,
     "policy_safe": 10.0,
-    "overall": 7.4,
+    "overall": 7.8,
     "issues": [
-     "Foreground cutout of Jesus remains completely static throughout the entire short, causing visual monotony",
-     "Pacing relies solely on background slide changes rather than dynamic visual storytelling or motion",
-     "00:43 - Call to action overlay 'Full prayer on the channel' breaks the contemplative meditation tone right before the ending"
+     "00:00 - The visual hook lacks immediate tension or intrigue, relying purely on gentle aesthetic sunrise footage that may result in early swipe-aways.",
+     "00:00-00:15 - Shot length is quite long (approx. 15 seconds per static shot), which reduces visual retention.",
+     "00:46 - Ending has an abrupt fade to black without a seamless loop transition back to the opening sentence."
     ],
-    "strongest_moment": "00:07 - 00:13 when the transition to the sunlit forest path pairs smoothly with the gentle, reassuring prayer guidance.",
+    "strongest_moment": "The transition into Romans 15:13 at 00:19 with god rays piercing through the forest path pairs very well with the spoken scripture.",
     "model": "gemini-3.8-flash",
     "status": "FAIL"
    },

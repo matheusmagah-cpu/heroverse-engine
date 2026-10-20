@@ -1,0 +1,260 @@
+{
+ "version": "shorts-produce-v2-r8",
+ "source_pilot": "pilot-012",
+ "selection_rubric_model": "gemini-3.5-flash-lite",
+ "rejected_r8": [],
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "8af50097d9da8c238c614c2da9900f9522440e71e89848d5d72b5ac73b32765a",
+   "seconds": 47.08,
+   "source_start": 118.997,
+   "source_end": 165.579,
+   "segments": [
+    "prayer-early-hours",
+    "scripture-psalm-mercy",
+    "reflection-recognize-care"
+   ],
+   "hook": "I often hurry past these familiar things.",
+   "hook_shown": false,
+   "title": "An Honest Prayer of Thanks",
+   "reference": "Psalm 136:1 (KJV)",
+   "scenes": [
+    "bg-lamp-window",
+    "bg-moonlit-sea",
+    "bg-starry-forest"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8509,
+    "measured_score": 0.8522,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.380952380952381,
+     "scripture": 1.0,
+     "promise": 0.7142857142857143,
+     "resolution": 1.0,
+     "length_fit": 0.7367199999999997
+    },
+    "rubric": {
+     "index": 3,
+     "hook_first_2s": 8.0,
+     "stands_alone": 8.5,
+     "emotional_payoff": 9.0,
+     "shareability": 8.0,
+     "loop_potential": 7.5,
+     "policy_safe": 10.0,
+     "reasons": "Gratitude for ordinary daily things creates strong emotional resonance.",
+     "hook_line": "I often hurry past these familiar things.",
+     "title": "An Honest Prayer of Thanks"
+    }
+   },
+   "text": "I thank you for whatever helped me enter it: a familiar voice, a working light, clothing I could put on, or a little food before leaving. I often hurry past these familiar things. Tonight I receive them with attention. Where the morning was difficult, help me remember any kindness that met me there. I offer thanks for the support I actually had, however modest it may have seemed. O give thanks unto the LORD; for he is good: for his mercy endureth for ever. You may have received help through someone whose name you know well, or through a person you will never meet again.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 47.08,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 6.0,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 9.5,
+    "picture_quality": 8.5,
+    "edit_rhythm": 7.0,
+    "audio_clarity": 9.0,
+    "stands_alone": 7.5,
+    "ending_and_loop": 6.0,
+    "policy_safe": 10.0,
+    "overall": 7.5,
+    "issues": [
+     "00:00 - Opening line ('I thank you for whatever helped me enter it') feels clipped mid-thought, reducing initial viewer intrigue.",
+     "00:15 - Visual transitions are sparse with long static scenes that may cause viewer drop-off on fast-paced feeds.",
+     "00:44 - The ending trails off on an incomplete reflective thought without a clear closing statement or seamless loop."
+    ],
+    "strongest_moment": "00:30 where the Psalm reference appears amidst the dark atmospheric pine forest, matching the serene narration tone perfectly.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "6acca37add47a8e168a312f03dad63ad2c9d034f95ffea8d46002f4ab82b53af",
+   "seconds": 42.08,
+   "source_start": 1084.819,
+   "source_end": 1126.396,
+   "segments": [
+    "sleep-introduction",
+    "sleep-psalm-bed"
+   ],
+   "hook": "Let the remembering become less deliberate.",
+   "hook_shown": false,
+   "title": "Nighttime Scripture for Rest",
+   "reference": "Psalm 63:6 (KJV)",
+   "scenes": [
+    "bg-dusk-field",
+    "bg-candle"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8496,
+    "measured_score": 0.8989,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.9677419354838709,
+     "scripture": 1.0,
+     "promise": 1.0,
+     "resolution": 0.4,
+     "length_fit": 0.9369200000000001
+    },
+    "rubric": {
+     "index": 0,
+     "hook_first_2s": 7.5,
+     "stands_alone": 8.0,
+     "emotional_payoff": 8.5,
+     "shareability": 7.0,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Gentle transition into sleep with Psalm 63, very calming and standalone.",
+     "hook_line": "Let the remembering become less deliberate.",
+     "title": "Nighttime Scripture for Rest"
+    }
+   },
+   "text": "Now you can let the remembering become less deliberate. The prayer has brought your day into God’s presence, and the next part is Scripture for sleep. You can listen as you rest, allowing the words to come without testing your concentration. You do not need to keep collecting examples or finish a list. If you are comfortable, let your eyes rest. You can receive these passages quietly, with the thanks already offered and the difficult parts already named. When I remember thee upon my bed, and meditate on thee in the night watches.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 42.08,
+    "lufs": -14.6,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 4.5,
+    "captions_readable_and_synced": 9.2,
+    "text_clear_of_shorts_ui": 9.5,
+    "picture_quality": 8.5,
+    "edit_rhythm": 4.0,
+    "audio_clarity": 9.5,
+    "stands_alone": 8.0,
+    "ending_and_loop": 5.0,
+    "policy_safe": 10.0,
+    "overall": 6.8,
+    "issues": [
+     "00:00 - 00:20: A single completely static landscape image is held for over 20 seconds, creating significant risk of viewer drop-off on short-form platforms.",
+     "00:00 - 00:02: The opening hook text and calm delivery do little to stop fast scrollers looking for an immediate hook.",
+     "00:39 - 00:41: The video ends abruptly on a fade without structuring a smooth loop back to the beginning."
+    ],
+    "strongest_moment": "00:36 - 00:41: The transition into Psalm 63:6 with intimate Bible close-up cinematography and gentle, warm vocal delivery.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL"
+   },
+   "publish": false
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "0dd389a9fd02bad4e481f7b7d50745c03c5ce7199b1be1307154fd2d885d8379",
+   "seconds": 39.3,
+   "source_start": 1128.076,
+   "source_end": 1166.88,
+   "segments": [
+    "sleep-reflection-bed",
+    "sleep-psalm-help"
+   ],
+   "hook": "A simple place for remembrance tonight.",
+   "hook_shown": false,
+   "title": "Psalm 63 Bedtime Reflection",
+   "reference": "Psalm 63:7 (KJV)",
+   "scenes": [
+    "bg-moon-lake",
+    "bg-lamp-window"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8481,
+    "measured_score": 0.8952,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 1.0,
+     "scripture": 1.0,
+     "promise": 0.0,
+     "resolution": 1.0,
+     "length_fit": 0.9521600000000034
+    },
+    "rubric": {
+     "index": 1,
+     "hook_first_2s": 7.0,
+     "stands_alone": 8.0,
+     "emotional_payoff": 8.5,
+     "shareability": 7.5,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Offers a simple place for remembrance in the bed at night.",
+     "hook_line": "A simple place for remembrance tonight.",
+     "title": "Psalm 63 Bedtime Reflection"
+    }
+   },
+   "text": "The psalm gives you a simple place for remembrance: the bed itself, in the hours of night. You can be where you are and let a familiar truth remain nearby. You need not search through every memory again. As you listen, you can allow your attention to soften around the words. Even if you are still alert, you can spend these moments without demanding a particular feeling or measuring how well you are resting. Because thou hast been my help, therefore in the shadow of thy wings will I rejoice.",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 39.3,
+    "lufs": -15.0,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure"
+   },
+   "publish": false
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}

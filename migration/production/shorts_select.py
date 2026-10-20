@@ -23,7 +23,7 @@ from pathlib import Path
 import re
 import sys
 
-MIN_S, MAX_S, TARGET_S = 25.0, 58.0, 40.0
+MIN_S, MAX_S, TARGET_S = 30.0, 55.0, 40.0  # STANDARD R8 window (shorts_produce.WINDOW_S)
 CONTEXT_START = re.compile(r"(?i)^(and|but|so|this|that|it|he|she|they|notice|then|because|or|yet|these|those|there)\b")
 YOU = re.compile(r"(?i)\b(you|your|you're|yours|yourself)\b")
 PROMISE = re.compile(r"(?i)\b(peace|never|always|already|promise|strength|carry|go before|with you|not alone|fear not|"

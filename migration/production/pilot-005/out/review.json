@@ -1,0 +1,115 @@
+{
+ "version": "long-review-v1",
+ "pilot_id": "pilot-005",
+ "output_sha256": "c98794d71da7ef5ede9d1d79fe50db36cb1e78b1c703a0f371f049951ba36f54",
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 24.37,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 8.62,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.2,
+  "picture_quality": 9.0,
+  "figure_and_background_integrity": 9.0,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 8.0,
+  "scripture_on_screen": 9.5,
+  "policy_safe": 10.0,
+  "overall": 9.1,
+  "issues": [
+   "Over the 24-minute duration, the background video relies on cycling through a limited set of about 7-8 looping visual scenes, which slightly reduces visual variety over extended watching."
+  ],
+  "strongest_moment": "The smooth transition into quiet meditation with the breath cue at 00:14 followed by the elegant scripture display of Psalm 91 at 00:43 creates an instantly peaceful and inviting tone.",
+  "model": "gemini-3.8-flash",
+  "status": "PASS"
+ },
+ "audit": {
+  "first_30s": "00:00 - 00:05 Title card with dawn landscape and castle, text: Protection Over You Today. MORNING PRAYER. Voiceover welcomes viewers to place themselves and loved ones under God's protection. 00:05 - 00:15 Camera holds on fortress view at sunrise with dust particle effects. 00:15 - 00:30 Voiceover asks viewer to take a slow breath and let go of heavy burdens (meetings, long drives, kids, news). Hook establishes emotional resonance and calm tone immediately.",
+  "visuals": "AI-generated illustrated fantasy landscapes (castles, towers, valley, wheat field, eagle, house with children, garden, winding road). Picture changes smoothly every 6 to 10 seconds. Cut rate averages 6 to 8 cuts per minute (Min 2: ~7 cuts, Min 8: ~6 cuts, Min 14: ~8 cuts). Subtle parallax zoom and pan motions on stationary AI artwork. People/faces appear occasionally as silhouettes or stylized small figures (children outside house, eagle).",
+  "on_screen_text": "Captions enabled throughout the video in white bold serif font with subtle drop shadow, centered on screen, no box. Scripture references appear inside dark translucent rounded rectangular boxes with white text. Call to action 'SUBSCRIBE' appears at top right corner from 01:00 to 01:02 and again briefly in later sections. 'LIKE' CTA appears at 10:57 to 11:00.",
+  "audio": "Male narrator with warm, calm, measured baritone voice, estimated age 40s, pace approx 110-120 words per minute. Soft, gentle ambient piano instrumental background music, mixed significantly lower than the voice for high clarity.",
+  "structure": "Segment 1 (00:00 - 02:00) Introduction and Psalm 91 reflection; Segment 2 (02:00 - 07:00) Prayers for mind, home, travel, family, and finances; Segment 3 (07:00 - 12:00) Prayers for body, relationships, speech, heart, and spiritual armor; Segment 4 (12:00 - 17:00) Psalm 23 reflection and prayers for others; Segment 5 (17:00 - 24:22) Armor of God, final blessings, Psalm 121, and closing call to action. Recurring refrains include 'The Lord is my refuge' and breathing prompts.",
+  "ending": "Closing encouragement at 24:02 inviting viewers to type 'amen' in comments and name loved ones to cover in prayer, returning tomorrow morning for another prayer. Final static tower sunrise image fades out at 24:22.",
+  "amateur_elements": [
+   {
+    "timestamp": "00:00",
+    "element": "Watermark or channel name 'HeroVerse Prayer' top left corner throughout",
+    "rule": "R3"
+   },
+   {
+    "timestamp": "01:00",
+    "element": "Generic red YouTube 'SUBSCRIBE' graphic top right",
+    "rule": "R3"
+   },
+   {
+    "timestamp": "01:44",
+    "element": "Scripture reference overlay box overlaps the eagle illustration's head",
+    "rule": "R2"
+   },
+   {
+    "timestamp": "04:38",
+    "element": "AI illustration has slight anatomical blur on flowers near corners",
+    "rule": "R1"
+   },
+   {
+    "timestamp": "10:58",
+    "element": "Generic red 'LIKE' button overlay top right",
+    "rule": "R3"
+   }
+  ],
+  "model": "gemini-3.5-flash-lite"
+ },
+ "usage": [
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 85015,
+   "candidatesTokenCount": 238,
+   "totalTokenCount": 86002,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 219
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 84796
+    }
+   ],
+   "thoughtsTokenCount": 749,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "promptTokenCount": 85030,
+   "candidatesTokenCount": 867,
+   "totalTokenCount": 85897,
+   "promptTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 84796
+    },
+    {
+     "modality": "TEXT",
+     "tokenCount": 234
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ ]
+}

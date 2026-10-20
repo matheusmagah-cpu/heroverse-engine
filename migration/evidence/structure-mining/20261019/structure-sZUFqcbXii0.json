@@ -1,0 +1,312 @@
+{
+ "version": "structure-record-v2",
+ "thumbnail_analysis": {
+  "text_on_thumbnail": "UNKNOWN",
+  "words": 0,
+  "faces": 1,
+  "figure": "Young woman sitting down with her knees raised and hands folded in front, wearing a light blue top and dark trousers.",
+  "emotion": "Slightly defiant or questioning expression, looking directly at the camera with her head tilted.",
+  "colours": "Soft earth tones and beige background, contrasted with the woman's light blue top and black trousers.",
+  "composition": "Medium shot centered on the young woman, with a shallow depth of field blurring the architectural background.",
+  "contrast_with_title": "The title 'Aao Fatafat' implies urgency or quick action, while the thumbnail shows a relaxed, stationary moment with a person posing.",
+  "curiosity_device": "The direct, questioning gaze and posture of the subject invites the viewer to wonder what is happening or what she is about to say."
+ },
+ "status": "MODEL_REPORTED_NOT_VERIFIED",
+ "video": {
+  "video_id": "sZUFqcbXii0",
+  "channel_id": "UCp5rbjYu8EvokDj9XO_8kEA",
+  "channel": "United Prayer",
+  "channel_subscribers": 32300,
+  "title": "Aao Fatafat ",
+  "published_at": "2026-09-25T21:34:22Z",
+  "description": "",
+  "tags": [],
+  "seconds": 1416,
+  "views": 135,
+  "likes": 0,
+  "comments": 0,
+  "thumbnail": "https://i.ytimg.com/vi/sZUFqcbXii0/maxresdefault.jpg",
+  "role": "winner"
+ },
+ "comments": [],
+ "windows": [
+  {
+   "video_id": "sZUFqcbXii0",
+   "window_start_seconds": 0,
+   "window_end_seconds": 300,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 0,
+     "end_seconds": 300,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A puzzle image displayed on a phone screen with ambient audio.",
+     "device": "none",
+     "emotion": "neutral"
+    }
+   ],
+   "picture": {
+    "image_kind": "photo",
+    "shot_sizes": [
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static",
+    "on_screen_text": "Who Is Drinking What? COCA COLA COFFEE MANGO JUICE LEMON",
+    "figure_or_presenter": "none",
+    "colour_and_light": "dim room lighting displaying a brightly lit phone screen",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "UNKNOWN",
+    "pace": "UNKNOWN",
+    "music": "ambient background noise",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [
+    "no spoken transcript in the video segment"
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "sZUFqcbXii0",
+   "window_start_seconds": 300,
+   "window_end_seconds": 600,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 300,
+     "end_seconds": 600,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A puzzle illustration titled Who Is Drinking What showing various people and drink containers with intersecting straws is displayed throughout with background music and ambient sounds.",
+     "device": "curiosity gap",
+     "emotion": "curiosity"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration / photo of a smartphone screen",
+    "shot_sizes": [
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static",
+    "on_screen_text": "Who Is Drinking What?",
+    "figure_or_presenter": "Illustrations of public figures and people with drinks",
+    "colour_and_light": "natural lighting",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "UNKNOWN",
+    "pace": "UNKNOWN",
+    "music": "instrumental background music",
+    "music_changes": "constant background",
+    "sound_effects": "ambient room sounds"
+   },
+   "scripture_references": [],
+   "limitations": [
+    "No spoken transcript in this window",
+    "Video shows a phone screen displaying a puzzle image"
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "sZUFqcbXii0",
+   "window_start_seconds": 600,
+   "window_end_seconds": 900,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 600,
+     "end_seconds": 900,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "A puzzle image of different people and drinks with no spoken words in this window.",
+     "device": "none",
+     "emotion": "neutral"
+    }
+   ],
+   "picture": {
+    "image_kind": "AI illustration / photo of phone screen",
+    "shot_sizes": [
+     "close-up"
+    ],
+    "shots_counted": 1,
+    "motion": "static",
+    "on_screen_text": "Who Is Drinking What?",
+    "figure_or_presenter": "caricatures of famous people",
+    "colour_and_light": "bright and clear screen display",
+    "transitions": "none"
+   },
+   "sound": {
+    "voice": "UNKNOWN",
+    "pace": "UNKNOWN",
+    "music": "UNKNOWN",
+    "music_changes": "UNKNOWN",
+    "sound_effects": "UNKNOWN"
+   },
+   "scripture_references": [],
+   "limitations": [
+    "No speech or audio narration is present in the specified window.",
+    "The video displays a static puzzle image on a phone screen."
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "sZUFqcbXii0",
+   "window_start_seconds": 900,
+   "window_end_seconds": 1200,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [],
+   "beats": [
+    {
+     "start_seconds": 900,
+     "end_seconds": 1200,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "Silent phone screen showing a puzzle image with no narration.",
+     "device": "none",
+     "emotion": "neutral"
+    }
+   ],
+   "picture": {
+    "image_kind": "live phone screen video capture",
+    "shot_sizes": [
+     "close up"
+    ],
+    "shots_counted": 3,
+    "motion": "static smartphone with slight hand jitter",
+    "on_screen_text": "Who Is Drinking What?",
+    "figure_or_presenter": "none",
+    "colour_and_light": "dim indoor lighting showing a phone screen display",
+    "transitions": "sudden jump cuts"
+   },
+   "sound": {
+    "voice": "UNKNOWN",
+    "pace": "UNKNOWN",
+    "music": "faint background noise",
+    "music_changes": "none",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [
+    "No spoken transcript in this window",
+    "Video ends before 1200 seconds"
+   ],
+   "model": "gemini-3.5-flash-lite"
+  },
+  {
+   "video_id": "sZUFqcbXii0",
+   "window_start_seconds": 1200,
+   "window_end_seconds": 1416,
+   "audio_received": true,
+   "visual_received": true,
+   "transcript": [
+    {
+     "start_seconds": 1240.211,
+     "text": "aur aap log iska result dekh sakte hai, kaafi achha result hai."
+    },
+    {
+     "start_seconds": 1244.151,
+     "text": "kaafi saare log bolte hai ki hair transplant se result nahi aata hai aur kaafi late result aata hai."
+    },
+    {
+     "start_seconds": 1248.511,
+     "text": "is tarah se hume 11 mahine ho gaye hai apna hair transplant karaye hue."
+    },
+    {
+     "start_seconds": 1251.351,
+     "text": "toh sir aap apna review dena chahenge ki aapka matlab hair transplant ka result kaisa hai?"
+    },
+    {
+     "start_seconds": 1257.071,
+     "text": "mein..."
+    }
+   ],
+   "beats": [
+    {
+     "start_seconds": 1200,
+     "end_seconds": 1240,
+     "beat": "music_only",
+     "opening_words_verbatim": "UNKNOWN",
+     "content": "B-roll showing a kitchen setting with background ambient music.",
+     "device": "none",
+     "emotion": "neutral"
+    },
+    {
+     "start_seconds": 1240,
+     "end_seconds": 1416,
+     "beat": "evidence",
+     "opening_words_verbatim": "aur aap log iska result dekh sakte hai",
+     "content": "The speaker presents hair transplant results after 11 months, asking for feedback.",
+     "device": "personal story",
+     "emotion": "informative"
+    }
+   ],
+   "picture": {
+    "image_kind": "live presenter and kitchen B-roll",
+    "shot_sizes": [
+     "close up",
+     "medium shot"
+    ],
+    "shots_counted": 1,
+    "motion": "static",
+    "on_screen_text": "UNKNOWN",
+    "figure_or_presenter": "kitchen setting and hands",
+    "colour_and_light": "natural lighting",
+    "transitions": "cut"
+   },
+   "sound": {
+    "voice": "male, conversational, Indian accent, human",
+    "pace": "moderate",
+    "music": "ambient background music",
+    "music_changes": "music plays continuously",
+    "sound_effects": "none"
+   },
+   "scripture_references": [],
+   "limitations": [],
+   "model": "gemini-3.5-flash-lite"
+  }
+ ],
+ "measured": {
+  "minutes": 23.6,
+  "title_words": 2,
+  "title_chars": 12,
+  "chapters": 0,
+  "likes_per_1k_views": 0.0,
+  "comments_per_1k_views": 0.0,
+  "coverage_fraction": 1.0,
+  "beats": 6,
+  "beat_seconds_median": 300.0,
+  "beats_per_minute": 0.25,
+  "shots_per_minute_model_counted": 0.3,
+  "first_spoken_beat": {
+   "at": 1240,
+   "beat": "evidence"
+  },
+  "beat_mix": {
+   "evidence": 1,
+   "music_only": 5
+  },
+  "scripture_references": [],
+  "scripture_per_10_min": 0.0,
+  "speech": {
+   "words": 61,
+   "words_per_minute": 2.6,
+   "sentence_words_median": 14,
+   "you_per_100_words": 0.0,
+   "questions_per_minute": 0.04,
+   "first_15s_words": ""
+  }
+ }
+}
