@@ -1,0 +1,80 @@
+{
+ "version": "pilot-qa-v1",
+ "pilot_id": "pilot-008",
+ "output_sha256": "c3bcad71aa142cfac3b91b028726f061bee0ffbd4f90a50953740ca4afa0978b",
+ "status": "PASS",
+ "checks": {
+  "full_decode_without_errors": true,
+  "video_format": true,
+  "duration_min": true,
+  "integrated_lufs": true,
+  "true_peak": true,
+  "speech_presence": true,
+  "no_singing": true,
+  "wer_vs_script": true,
+  "words_per_minute": true,
+  "first_word_onset": true,
+  "hook_second_person": true,
+  "title_card_seconds": true,
+  "no_figure": true,
+  "every_scene_in_motion": true,
+  "scene_seconds": true,
+  "crossfade_seconds_max": true,
+  "image_repeat_gap": true,
+  "caption_coverage_of_speech": true,
+  "caption_hold_median": true,
+  "caption_chars_max": true,
+  "caption_words_max": true,
+  "caption_no_box": true,
+  "scripture_card_only_while_read": true,
+  "cta_count": true,
+  "cta_short_and_not_early": true,
+  "persistent_overlays_only_brand": true,
+  "images_open_licence_with_revision": true,
+  "no_third_party_footage": true,
+  "music_owned": true,
+  "voice_model_pinned": true
+ },
+ "criteria_version": "pilot-qa-criteria-v3",
+ "measurements": {
+  "duration_seconds": 1693.38,
+  "loudness": {
+   "integrated_lufs": -15.6,
+   "loudness_range_lu": 2.8,
+   "true_peak_dbtp": -2.7
+  },
+  "speech_presence": 0.897,
+  "music_presence": 0.388,
+  "wer_vs_script": 0.0435,
+  "accepted_words_per_minute": 129.8,
+  "caption_lines": 800,
+  "holds": 60,
+  "first_word_seconds": 0.02,
+  "editing": {
+   "picture_changes": 714,
+   "picture_changes_per_minute": 25.3,
+   "median_shot_seconds": 2.133,
+   "longest_shot_seconds": 23.033,
+   "motion_median_top_decile_diff": 1.007
+  },
+  "colour": {
+   "mean_brightness": 0.1546,
+   "brightness_std_over_time": 0.0591,
+   "mean_saturation": 0.7967,
+   "saturation_std_over_time": 0.1705
+  },
+  "rhythm": {
+   "audio_onsets": 2709,
+   "audio_onsets_per_minute": 95.99,
+   "tempo": {
+    "bpm": 90.03,
+    "confidence": 0.007
+   }
+  }
+ },
+ "transcript_head": "Good evening. Tonight, Psalm 23. Release your unfinished day and rest in your shepherd's care. Perhaps you have reached your pillow with a conversation still unfinished or a task still turning in your mind. You can bring that unfinished day here. Let your shoulders settle as comfortably as they can. You do not have to arrange a perfect ending before you pray. will walk through Psalm 23, one verse ",
+ "criteria_sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+ "human_review": "PENDING (D-076 calibration by sampling)",
+ "upload_performed": false,
+ "publication_performed": false
+}
