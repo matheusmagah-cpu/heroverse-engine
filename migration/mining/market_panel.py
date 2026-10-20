@@ -207,7 +207,7 @@ def build(client, now, prior_dir=None):
             "region_code": "US", "relevance_language": "en",
             "channels": sorted(info.values(), key=lambda r: r["channel_id"]),
             "unavailable_channels": sorted(cid for cid, row in info.items()
-                                           if row["uploads_status"] == "UNAVAILABLE_404"),
+                                           if row.get("uploads_status") == "UNAVAILABLE_404"),
             "data_api_units": client.units, "calls": client.calls, "paid_calls": 0,
             "scope": "PUBLIC_STATISTICS_ONLY; CTR, retention, revenue, RPM and monetization status are not public"}
 
