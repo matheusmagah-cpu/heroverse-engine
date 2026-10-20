@@ -1147,6 +1147,62 @@ class EditorialMotion(unittest.TestCase):
 
 
 class EditorialSerialStaging(unittest.TestCase):
+    def test_serial_range_requires_a_measured_allowlisted_value(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        arguments = (stills, Path("/synthetic/voice.flac"), Path("/synthetic/music.flac"),
+                     Path("/synthetic/captions.ass"), moment, 40.312, "null", Path("/synthetic/result.mp4"))
+        options = {"edit_plan": EDITORIAL_PLAN, "hook_video": Path("/synthetic/opening.mkv"),
+                   "picture_video": Path("/synthetic/picture.mkv")}
+        self.assertEqual(inspect.signature(sp.render_args).parameters["picture_range"].kind,
+                         inspect.Parameter.KEYWORD_ONLY)
+        with self.assertRaisesRegex(ValueError, "EDITORIAL_PICTURE_RANGE_REQUIRED"):
+            sp.render_args(*arguments, **options)
+        for value in ("", "limited", "full", "TV", "auto", "unknown,scale=1:1", 1, False):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "EDITORIAL_PICTURE_RANGE_INVALID"):
+                sp.render_args(*arguments, **options, picture_range=value)
+        for value, tag in (("unknown", "unspecified"), ("tv", "tv"), ("pc", "pc")):
+            with self.subTest(value=value):
+                args = sp.render_args(*arguments, **options, picture_range=value)
+                graph = args[args.index("-filter_complex") + 1]
+                self.assertIn(f"fps=30,setparams=range={tag},trim=end_frame=1209[picture]", graph)
+                self.assertEqual(graph.count("setparams="), 1)
+
+    def test_reference_range_probe_uses_the_real_capped_graph_and_one_frame(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        hook = Path("/synthetic/opening.mkv")
+        inputs, graph = sp.editorial_picture(stills, moment, EDITORIAL_PLAN, hook_video=hook)
+        for measured in ("unknown", "tv", "pc"):
+            with self.subTest(measured=measured), mock.patch.object(sp.subprocess, "run", return_value=
+                    SimpleNamespace(stderr=f"[Parsed_showinfo] color_range:{measured} color_space:unknown\n")) as process:
+                self.assertEqual(sp.reference_picture_range(stills, moment, EDITORIAL_PLAN, hook_video=hook), measured)
+            command = process.call_args.args[0]
+            self.assertEqual(process.call_args.kwargs, {"check": True, "capture_output": True, "text": True})
+            self.assertEqual(command[command.index("-filter_complex") + 1],
+                             ";".join([*graph, "[picture]trim=end_frame=1,showinfo[inspection]"]))
+            self.assertEqual(command[command.index("-y") + 1:command.index("-filter_complex")], inputs)
+            self.assertEqual(command[command.index("-frames:v") + 1], "1")
+            self.assertEqual(command.count("-threads"), 8)
+            for flag in ("-filter_complex_threads", "-filter_threads", "-threads:v"):
+                self.assertEqual(command[command.index(flag) + 1], "1")
+            self.assertEqual(command[-3:], ["-f", "null", "-"])
+            self.assertNotIn("scale=108:192", command[command.index("-filter_complex") + 1])
+
+    def test_reference_range_probe_fails_closed_without_unambiguous_metadata(self):
+        _, _, _, moment = editorial_source()
+        stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
+        for stderr in ("", "color_range:invalid", "color_range:tv\ncolor_range:pc", "color_range:unknown\ncolor_range:unknown"):
+            with self.subTest(stderr=stderr), mock.patch.object(sp.subprocess, "run", return_value=
+                    SimpleNamespace(stderr=stderr)):
+                with self.assertRaisesRegex(ValueError, "EDITORIAL_COLOR_RANGE_PROBE_FAILED"):
+                    sp.reference_picture_range(stills, moment, EDITORIAL_PLAN, hook_video=Path("/synthetic/opening.mkv"))
+        error = subprocess.CalledProcessError(7, ["ffmpeg"])
+        with mock.patch.object(sp.subprocess, "run", side_effect=error):
+            with self.assertRaises(subprocess.CalledProcessError) as caught:
+                sp.reference_picture_range(stills, moment, EDITORIAL_PLAN, hook_video=Path("/synthetic/opening.mkv"))
+        self.assertIs(caught.exception, error)
+
     def test_scene_fade_and_final_commands_have_bounded_input_and_output_scopes(self):
         _, _, _, moment = editorial_source()
         stills = [Path(f"/synthetic/scene-{i}.ppm") for i in range(8)]
@@ -1174,7 +1230,7 @@ class EditorialSerialStaging(unittest.TestCase):
         arguments = (stills, Path("/synthetic/voice.flac"), Path("/synthetic/music.flac"),
                      Path("/synthetic/captions.ass"), moment, 40.312, "null", Path("/synthetic/result.mp4"))
         final = sp.render_args(*arguments, edit_plan=EDITORIAL_PLAN, hook_video=hook,
-                               picture_video=Path("/synthetic/picture.mkv"))
+                               picture_video=Path("/synthetic/picture.mkv"), picture_range="unknown")
         commands.append((final, 3, "libx264"))
         graph = final[final.index("-filter_complex") + 1]
         self.assertNotIn("xfade=", graph)
@@ -1556,6 +1612,7 @@ class EditorialProducerSources(unittest.TestCase):
                             mock.patch.object(sp, "vertical_still") as prepare, \
                             mock.patch.object(sp, "write_opening_video", return_value=root / "synthetic-opening.mkv") as opening, \
                             mock.patch.object(sp, "write_editorial_picture", return_value=root / "synthetic-picture.mkv") as picture, \
+                            mock.patch.object(sp, "reference_picture_range", return_value="unknown") as range_probe, \
                             mock.patch.object(sp, "ass", wraps=sp.ass) as captions, \
                             mock.patch.object(sp, "render_args", wraps=sp.render_args) as renderer, \
                             mock.patch.object(sp, "run") as render, \
@@ -1576,7 +1633,7 @@ class EditorialProducerSources(unittest.TestCase):
                             self.assertEqual(phase.call_args_list, [
                                 mock.call(f"SHORTS_PHASE_{name}", flush=True) for name in (
                                     "PREPARE_START", "PREPARE_END", "HOOK_START", "HOOK_END",
-                                    "ENCODE_START", "ENCODE_END")])
+                                    "RANGE_START", "RANGE_END", "ENCODE_START", "ENCODE_END")])
                             self.assertEqual(hashed.call_args_list[0].args[0], expected_voice)
                             self.assertNotIn(str(legacy_wav), actual_inputs)
                             self.assertEqual(probe.call_count, 8)
@@ -1587,6 +1644,10 @@ class EditorialProducerSources(unittest.TestCase):
                                                             moment, edit_plan, out / "tmp-00",
                                                             hook_video=root / "synthetic-opening.mkv")
                             self.assertEqual(renderer.call_args.kwargs["picture_video"], root / "synthetic-picture.mkv")
+                            self.assertEqual(renderer.call_args.kwargs["picture_range"], "unknown")
+                            range_probe.assert_called_once_with(
+                                [out / "tmp-00" / f"s{i:02d}.png" for i in range(8)], moment, edit_plan,
+                                hook_video=root / "synthetic-opening.mkv")
                             self.assertEqual(actual_inputs[0], str(root / "synthetic-picture.mkv"))
                             self.assertEqual(captions.call_args.kwargs["hook_mode"], "caption_only")
                             self.assertEqual({Path(call.args[0]).stem for call in hashed.call_args_list
@@ -1602,6 +1663,7 @@ class EditorialProducerSources(unittest.TestCase):
                             probe.assert_not_called()
                             opening.assert_not_called()
                             picture.assert_not_called()
+                            range_probe.assert_not_called()
                             self.assertEqual(captions.call_args.kwargs["hook_mode"], "overlay")
 
 
@@ -1695,12 +1757,14 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
             return result
         with mock.patch.multiple(sp, VW=cls.width, VH=cls.height), \
                 mock.patch.object(sp, "run", side_effect=run_and_probe) as serial_run:
+            cls.picture_range = sp.reference_picture_range(cls.stills, cls.moment, EDITORIAL_PLAN,
+                                                           hook_video=cls.hook)
             cls.picture = sp.write_editorial_picture(cls.stills, cls.moment, EDITORIAL_PLAN,
                                                      cls.serial_tmp, hook_video=cls.hook)
             cls.serial_commands = [call.args[0] for call in serial_run.call_args_list]
             args = sp.render_args(cls.stills, cls.audio, cls.music, cls.captions,
                                   cls.moment, 40.312, "null", cls.output, edit_plan=EDITORIAL_PLAN,
-                                  hook_video=cls.hook, picture_video=cls.picture)
+                                  hook_video=cls.hook, picture_video=cls.picture, picture_range=cls.picture_range)
         # Keep all production processing. An output-only split captures the actual
         # pre-AAC samples, without changing any media filter or resampling decision.
         graph_index = args.index("-filter_complex") + 1
@@ -1830,7 +1894,7 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
             final_args = sp.render_args(self.stills, self.audio, self.music, self.captions,
                                         self.moment, 40.312, "null", self.root / "serial-reference.mp4",
                                         edit_plan=EDITORIAL_PLAN, hook_video=self.hook,
-                                        picture_video=self.picture)
+                                        picture_video=self.picture, picture_range=self.picture_range)
         final_graph_index = final_args.index("-filter_complex") + 1
         final_parts = final_args[final_graph_index].split(";")
         final_finish = next(index for index, part in enumerate(final_parts) if part.startswith("[picture]"))
@@ -1892,7 +1956,8 @@ class EditorialSyntheticFFmpeg(unittest.TestCase):
             with mock.patch.multiple(sp, VW=self.width, VH=self.height):
                 args = sp.render_args(self.stills, self.audio, self.music, self.captions,
                                       self.moment, 40.312, "null", self.root / "unused.mp4",
-                                      edit_plan=EDITORIAL_PLAN, hook_video=self.hook, picture_video=picture)
+                                      edit_plan=EDITORIAL_PLAN, hook_video=self.hook, picture_video=picture,
+                                      picture_range=self.picture_range if picture is not None else None)
             graph_index = args.index("-filter_complex") + 1
             parts = args[graph_index].split(";")
             finish = next(i for i, part in enumerate(parts) if part.startswith("[picture]"))

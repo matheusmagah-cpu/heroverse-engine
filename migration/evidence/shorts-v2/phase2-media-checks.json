@@ -233,5 +233,84 @@
       "Only full caps were compared with valid baseline; necessity of each individual cap was not isolated."
     ],
     "production_qualification": false
+  },
+  "serial_fullhd_synthetic": {
+    "scope": "Synthetic evidence only; not production qualification. FFmpeg7.1.5 local.",
+    "code_sha": "ebcca245b0d69a2fb365dcb69956d0308756e792",
+    "summary": {
+      "scope": "Corrected finish only; reuses unchanged verified 1209-frame serial accumulator",
+      "seconds": 309.969,
+      "maxrss_kb": 705748,
+      "maxthreads": 11,
+      "stages": [
+        {
+          "stage": "serial-final",
+          "exit": 0,
+          "seconds": 284.781,
+          "maxrss_kb": 705748,
+          "maxthreads": 11,
+          "stopped": null
+        }
+      ]
+    },
+    "validation": {
+      "sha256": "ae9671b7521d3471f90657b7bcaaab0a41170c4add6aa874a63129d040294d55",
+      "bytes": 15602652,
+      "video": {
+        "codec_name": "h264",
+        "width": 1080,
+        "height": 1920,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "duration": "40.300000"
+      },
+      "decoded_video_frames": 1209,
+      "video_pts_gaps": [],
+      "audio": {
+        "codec_name": "aac",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "40.312000",
+        "time_base": "1/48000"
+      },
+      "decoded_audio_frames": 1890,
+      "decoded_audio_samples_including_padding": 1935360,
+      "audio_pts_gaps": [],
+      "black_intervals": []
+    },
+    "decoded_video": {
+      "count": 1209,
+      "framewise_equal": true,
+      "different_count": 0
+    },
+    "decoded_audio": {
+      "audio_graphs_normalized_equal": true,
+      "samples_per_channel_including_padding": 1935360,
+      "different_scalar_samples": 43008,
+      "max_abs_float": 0.0005512136413017288,
+      "rms_float": 1.7025932145580305e-05,
+      "max_abs_in_pcm16_lsb": 18.06216859817505,
+      "first_nonzero_scalar_sample": 3825664
+    },
+    "production_qualification": false,
+    "ci": {
+      "url": "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39481150989/job/118829748735",
+      "state": "FAIL",
+      "reason": "FFmpeg6.1.1 reference range tv versus serial unknown. Strict metadata test failed; no merge or production dispatch."
+    }
+  },
+  "serial_range_probe": {
+    "purpose": "Preserve original effective metadata across FFmpeg builds; not a media approval.",
+    "result": {
+      "seconds": 0.6005646619996696,
+      "exit": 0,
+      "maxrss_kb": 426424,
+      "maxthreads": 19,
+      "measured_range": "unknown"
+    },
+    "finish_command_identical": true,
+    "ci_6_1_result": null,
+    "ci_6_1_reason": "New corrected commit not yet tested remotely."
   }
 }

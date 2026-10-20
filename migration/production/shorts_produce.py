@@ -485,8 +485,27 @@ def write_editorial_picture(stills, moment, edit_plan, tmp, *, hook_video):
     return accumulator
 
 
+def reference_picture_range(stills, moment, edit_plan, *, hook_video):
+    """Measure this FFmpeg build's real reference output, never infer its version.
+
+    The existing inputs and full camera/xfade graph are retained, but only one
+    output frame is requested. Missing or ambiguous metadata fails closed.
+    """
+    inputs, graph = editorial_picture(stills, moment, edit_plan, hook_video=hook_video)
+    graph.append("[picture]trim=end_frame=1,showinfo[inspection]")
+    command = ["ffmpeg", "-filter_complex_threads", "1", "-filter_threads", "1",
+               "-v", "info", "-y", *inputs, "-filter_complex", ";".join(graph),
+               "-map", "[inspection]", "-an", "-threads:v", "1", "-frames:v", "1",
+               "-fps_mode", "passthrough", "-f", "null", "-"]
+    result = subprocess.run(command, check=True, capture_output=True, text=True)
+    ranges = re.findall(r"\bcolor_range:(\S+)", result.stderr)
+    if len(ranges) != 1 or ranges[0] not in {"unknown", "tv", "pc"}:
+        raise ValueError("EDITORIAL_COLOR_RANGE_PROBE_FAILED")
+    return ranges[0]
+
+
 def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_plan=None, hook_video=None,
-                picture_video=None):
+                picture_video=None, picture_range=None):
     """Full-frame backgrounds and legacy zoom or validated editorial cameras/local hook;
     the film look, subtitles, narration of the window and ducked music."""
     n = len(stills)
@@ -497,13 +516,18 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_
         if picture_video is None:
             inputs, graph = editorial_picture(stills, moment, edit_plan, hook_video=hook_video)
         else:
+            if picture_range is None:
+                raise ValueError("EDITORIAL_PICTURE_RANGE_REQUIRED")
+            if picture_range not in {"unknown", "tv", "pc"}:
+                raise ValueError("EDITORIAL_PICTURE_RANGE_INVALID")
+            range_tag = {"unknown": "unspecified", "tv": "tv", "pc": "pc"}[picture_range]
             n = 1
             inputs = ["-threads", "1", "-i", str(picture_video)]
-            # FFV1 decoding labels limited-range YUV as "tv"; the original
-            # zoompan/xfade output carries unspecified range. Restore that
-            # metadata without converting samples or assuming a color matrix.
+            # FFV1 can label decoded YUV differently from the original graph.
+            # Restore the measured tag without converting samples or assuming
+            # a color matrix or a particular FFmpeg version's behavior.
             graph = [f"[0:v]settb=1/{FPS},setpts=N,fps={FPS},"
-                     f"setparams=range=unspecified,trim=end_frame={scene_frame_plan(edit_plan)['output_frames']}[picture]"]
+                     f"setparams=range={range_tag},trim=end_frame={scene_frame_plan(edit_plan)['output_frames']}[picture]"]
         graph.append(f"[picture]{look},ass={ass_path},format=yuv420p[vout]")
     else:
         inputs = []
@@ -618,17 +642,21 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     (tmp / "s.ass").write_text(ass(moment, hook, refs, dur, timeline_sentences, hook_mode=hook_mode))
     hook_video = None
     picture_video = None
+    picture_range = None
     if edit_plan is not None:
         print("SHORTS_PHASE_HOOK_START", flush=True)
         hook_video = write_opening_video(stills[0], tmp / "opening.mkv")
         print("SHORTS_PHASE_HOOK_END", flush=True)
+        print("SHORTS_PHASE_RANGE_START", flush=True)
+        picture_range = reference_picture_range(stills, moment, edit_plan, hook_video=hook_video)
+        print("SHORTS_PHASE_RANGE_END", flush=True)
         picture_video = write_editorial_picture(stills, moment, edit_plan, tmp, hook_video=hook_video)
     mp4 = out / f"short-{index:02d}.mp4"
     source_voice = work.parent / "voice.flac" if edit_plan is not None else work / "voice.wav"
     if edit_plan is not None:
         print("SHORTS_PHASE_ENCODE_START", flush=True)
     run(render_args(stills, source_voice, music, tmp / "s.ass", moment, dur, cinematic.look(VW, VH), mp4,
-                    edit_plan=edit_plan, hook_video=hook_video, picture_video=picture_video))
+                    edit_plan=edit_plan, hook_video=hook_video, picture_video=picture_video, picture_range=picture_range))
     if edit_plan is not None:
         print("SHORTS_PHASE_ENCODE_END", flush=True)
     shutil.rmtree(tmp)
