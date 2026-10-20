@@ -1,4 +1,4 @@
-import copy,sys,unittest
+import copy,sys,unittest,subprocess,inspect
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).parent))
 import refresh_description as r
@@ -57,6 +57,37 @@ class Tests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'VERIFY_STATUS'):r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x)
   v=video();v.pop('status')
   with self.assertRaises(ValueError):r.prepare(v,DESIRED,'Night Prayer')
+ def test_inspect_never_puts(self):
+  for v in (video(),video(DESIRED)):
+   s=Session(v);d={};out=r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x,inspect_only=True,diagnostics=d)
+   self.assertEqual(s.writes,[]);self.assertFalse(out['applied']);self.assertEqual(d['stage'],'INSPECTION_COMPLETE')
+ def test_inspect_requires_public_status(self):
+  v=video();v['status']['privacyStatus']='private';s=Session(v)
+  with self.assertRaisesRegex(ValueError,'PUBLIC_STATUS_NOT_CONFIRMED'):
+   r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x,inspect_only=True)
+  self.assertEqual(s.writes,[])
+ def test_guard_code_and_phase_are_safe(self):
+  s=Session(video('human edited private text'));d={}
+  try:r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x,inspect_only=True,diagnostics=d)
+  except ValueError as exc:out=r.failure(exc,d)
+  self.assertEqual(out['error_code'],'REMOTE_DESCRIPTION_CHANGED');self.assertFalse(d['mutation_attempted'])
+  self.assertNotIn('human edited',str(out));self.assertEqual(d['stage'],'VALIDATE_BEFORE')
+  self.assertEqual(r.failure(ValueError('secret payload'),{})['error_code'],'UNCLASSIFIED_ERROR')
+ def test_after_put_failure_is_not_reported_as_no_mutation(self):
+  s=Session(video());d={}
+  s.put=lambda *a,**kw:s.v
+  try:r.refresh(s,DESIRED,'Night Prayer',lambda x,y:x,diagnostics=d)
+  except ValueError as exc:out=r.failure(exc,d)
+  self.assertTrue(d['mutation_attempted']);self.assertEqual(out['error_code'],'VERIFY_DESCRIPTION')
+  self.assertEqual(d['stage'],'VERIFY_AFTER')
+ def test_cli_default_and_receipt_assignment(self):
+  self.assertEqual(inspect.signature(r.main).parameters['mode'].default,'inspect')
+  root=Path(__file__).resolve().parents[2]
+  workflow=(root/'.github/workflows/description-refresh.yml').read_text()
+  line=next(x.strip() for x in workflow.splitlines() if x.strip().startswith('path='))
+  result=subprocess.run(['bash','-eu','-c',line+'\nprintf "%s" "$path"'],env={'GITHUB_RUN_ID':'42'},text=True,capture_output=True)
+  self.assertEqual(result.returncode,0,result.stderr)
+  self.assertEqual(result.stdout,'migration/evidence/chapter-description/20261020/live-42.json')
  def test_real_inputs_and_bounded_workflow(self):
   root=Path(__file__).resolve().parents[2]
   package=r.inputs(root/'migration/production/pilot-012',root/'migration/publish/receipts/pilot-012-39312563293.json')
@@ -64,7 +95,9 @@ class Tests(unittest.TestCase):
   workflow=(root/'.github/workflows/description-refresh.yml').read_text()
   self.assertNotIn('publish_video.py',workflow)
   self.assertNotIn('publish.yml',workflow)
-  self.assertNotIn('inputs:',workflow)
+  self.assertIn('default: inspect',workflow)
+  self.assertIn('path="migration/evidence/chapter-description/20261020/live-${GITHUB_RUN_ID}.json"\n',workflow)
+  self.assertIn('if: always()',workflow)
   self.assertIn('group: heroverse-publish',workflow)
   self.assertLess(workflow.index('test_refresh_description.py'),workflow.index('HERO_YT_AUTHORIZED_USER_JSON'))
 if __name__=='__main__':unittest.main()

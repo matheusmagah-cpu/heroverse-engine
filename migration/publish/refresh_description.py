@@ -45,17 +45,39 @@ def prepare(video, desired, title):
     return {'id':VIDEO,'snippet':payload}
 
 
-def refresh(session, desired, title, check):
+def refresh(session, desired, title, check, *, inspect_only=False, diagnostics=None):
+    diagnostics = diagnostics if diagnostics is not None else {}
+    diagnostics.update(stage='READ_BEFORE', mutation_attempted=False)
     def read():
         body=check(session.get(API,params={'part':'snippet,status','id':VIDEO}),'READ_VIDEO')
         items=body.get('items',[])
         if len(items)!=1: raise ValueError('VIDEO_NOT_FOUND_OR_AMBIGUOUS')
         return items[0]
-    before=read(); payload=prepare(before,desired,title)
+    before=read()
+    snippet=before.get('snippet') or {}
+    diagnostics.update(stage='VALIDATE_BEFORE',
+        identity_matches=before.get('id')==VIDEO and snippet.get('channelId')==CHANNEL,
+        title_matches=snippet.get('title')==title, etag_present=bool(before.get('etag')),
+        remote_description_sha256=digest(snippet['description']) if isinstance(snippet.get('description'),str) else None,
+        expected_old_description_sha256=digest(old_description(desired)),
+        desired_description_sha256=digest(desired),
+        remote_matches_old=snippet.get('description')==old_description(desired),
+        remote_matches_desired=snippet.get('description')==desired,
+        public_at_read=(before.get('status') or {}).get('privacyStatus')=='public')
+    if not diagnostics['public_at_read']: raise ValueError('PUBLIC_STATUS_NOT_CONFIRMED')
+    payload=prepare(before,desired,title)
+    if inspect_only:
+        diagnostics['stage']='INSPECTION_COMPLETE'
+        return {'video_id':VIDEO,'channel_id':CHANNEL,'status':'PASS','mode':'inspect',
+                'applied':False,'mutation_attempted':False, 'diagnostics':diagnostics}
+
     if payload is not None:
         # One mutation only. An uncertain network result must be reconciled by a fresh read, never blind retry.
+        diagnostics.update(stage='UPDATE_ATTEMPTED', mutation_attempted=True)
         check(session.put(API,params={'part':'snippet'},json=payload,headers={'If-Match':before['etag']}),'UPDATE_DESCRIPTION')
+    diagnostics['stage']='READ_AFTER'
     after=read()
+    diagnostics['stage']='VERIFY_AFTER'
     if after.get('id')!=VIDEO or after.get('snippet',{}).get('channelId')!=CHANNEL: raise ValueError('VERIFY_IDENTITY')
     if after.get('snippet',{}).get('description')!=desired: raise ValueError('VERIFY_DESCRIPTION')
     for key in WRITABLE:
@@ -63,7 +85,7 @@ def refresh(session, desired, title, check):
     if before.get('status')!=after.get('status'): raise ValueError('VERIFY_STATUS_CHANGED')
     return {'video_id':VIDEO,'channel_id':CHANNEL,'status':'PASS','applied':payload is not None,
             'before_description_sha256':digest(before['snippet']['description']),
-            'after_description_sha256':digest(desired),'preserved_status':True}
+            'after_description_sha256':digest(desired),'preserved_status':True,'diagnostics':diagnostics}
 
 
 def inputs(pilot_dir, receipt_path):
@@ -80,14 +102,28 @@ def inputs(pilot_dir, receipt_path):
     return package
 
 
-def main(pilot_dir, receipt_path, output_receipt):
+SAFE_ERRORS = frozenset({
+    'EXPECTED_EXACTLY_ONE_CORRECT_OPENING','WRONG_VIDEO','MISSING_METADATA','WRONG_CHANNEL',
+    'SNIPPET_MISMATCH','REMOTE_DESCRIPTION_CHANGED','MISSING_ETAG','VIDEO_NOT_FOUND_OR_AMBIGUOUS',
+    'VERIFY_IDENTITY','VERIFY_DESCRIPTION','VERIFY_OTHER_SNIPPET_CHANGED','VERIFY_STATUS_CHANGED',
+    'PUBLIC_STATUS_NOT_CONFIRMED','WRONG_PILOT','RECEIPT_IDENTITY','RECEIPT_RENDER_MISMATCH','SCRIPT_CHANGED','TITLE_CHANGED'})
+
+
+def failure(exc, diagnostics):
+    code=str(exc) if type(exc) is ValueError and str(exc) in SAFE_ERRORS else 'UNCLASSIFIED_ERROR'
+    return {'status':'FAIL','error_type':type(exc).__name__,'error_code':code,'diagnostics':diagnostics}
+
+
+def main(pilot_dir, receipt_path, output_receipt, mode='inspect'):
     out=Path(output_receipt)
+    diagnostics={'stage':'INPUTS','mutation_attempted':False}
     try:
+        if mode not in ('apply','inspect'): raise ValueError('INVALID_MODE')
         package=inputs(pilot_dir,receipt_path)
-        result=refresh(pv.session(),package['description'],package['title'],pv.check)
+        result=refresh(pv.session(),package['description'],package['title'],pv.check,inspect_only=mode=='inspect',diagnostics=diagnostics)
     except Exception as exc:
         # No HTTP bodies, headers or credentials in this public workflow's logs.
-        result={'status':'FAIL','error_type':type(exc).__name__}
+        result=failure(exc,diagnostics)
     result['checked_at_utc']=datetime.now(timezone.utc).isoformat()
     out.parent.mkdir(parents=True,exist_ok=True)
     out.write_text(json.dumps(result,indent=2)+'\n')

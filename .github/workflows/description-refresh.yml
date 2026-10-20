@@ -1,6 +1,13 @@
 name: HeroVerse pilot012 opening chapter correction
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only inspection or guarded description correction
+        type: choice
+        default: inspect
+        options: [inspect, apply]
+        required: true
 permissions:
   contents: write
 concurrency:
@@ -26,14 +33,17 @@ jobs:
       - name: Correct only the opening chapter, verify preserved metadata
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+          REFRESH_MODE: ${{ inputs.mode }}
         run: |
           "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/refresh_description.py \
             migration/production/pilot-012 \
             migration/publish/receipts/pilot-012-39312563293.json \
-            "migration/evidence/chapter-description/20261020/live-${GITHUB_RUN_ID}.json"
-      - name: Record verified metadata-only result
+            "migration/evidence/chapter-description/20261020/live-${GITHUB_RUN_ID}.json" "$REFRESH_MODE"
+      - name: Record sanitized metadata-only result
+        if: always()
         run: |
           path="migration/evidence/chapter-description/20261020/live-${GITHUB_RUN_ID}.json"
+          test -f "$path" || exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$path"
