@@ -12,6 +12,8 @@ usage: publish_shorts.py SHORTS_JSON SHORTS_DIR LONG_KEY LEDGER RECEIPT SLOT_ISO
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
+import tempfile
 from pathlib import Path
 import sys
 
@@ -44,6 +46,117 @@ def description_for(short, long_url, long_title):
             "Pray this with me and type AMEN if you receive it.\n\n#prayer #morningprayer #jesus #faith #shorts")
 
 
+def utc_now():
+    return datetime.now(timezone.utc)
+
+
+def utc_instant(value):
+    if not isinstance(value, str):
+        raise ValueError("MISSING_TIMESTAMP")
+    dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if dt.tzinfo is None:
+        raise ValueError("NAIVE_TIMESTAMP")
+    return dt.astimezone(timezone.utc)
+
+
+def atomic_json(path, value):
+    """Durable atomic replacement; never leave partially written JSON."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(prefix="." + path.name + ".", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w") as f:
+            json.dump(value, f, indent=1, ensure_ascii=False)
+            f.write("\n")
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, path)
+        directory = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
+    finally:
+        if os.path.exists(tmp):
+            os.unlink(tmp)
+
+
+def observe_video(session, video_id):
+    """Authenticated GET only; never serialize raw exceptions or responses."""
+    fields = {"video_id": ("id",), "channel_id": ("snippet", "channelId"),
+              "title": ("snippet", "title"), "description": ("snippet", "description"),
+              "default_language": ("snippet", "defaultLanguage"),
+              "default_audio_language": ("snippet", "defaultAudioLanguage"),
+              "upload_status": ("status", "uploadStatus"), "privacy_status": ("status", "privacyStatus"),
+              "publish_at": ("status", "publishAt"), "license": ("status", "license"),
+              "contains_synthetic_media": ("status", "containsSyntheticMedia"),
+              "processing_status": ("processingDetails", "processingStatus")}
+    observation = {k: None for k in fields}
+    observation.update(observed_at=utc_now().isoformat(), unknown_fields={})
+    try:
+        response = session.get(pv.API + "videos", params={
+            "part": "id,snippet,status,processingDetails", "id": video_id}, timeout=30)
+        data = pv.check(response, "VERIFY")
+        items = data.get("items")
+        if not isinstance(items, list) or len(items) != 1 or not isinstance(items[0], dict):
+            raise ValueError("MISSING_VIDEO")
+        for name, path in fields.items():
+            value = items[0]
+            for key in path:
+                value = value.get(key) if isinstance(value, dict) else None
+            expected_type = bool if name == "contains_synthetic_media" else str
+            if type(value) is expected_type:
+                observation[name] = value
+            else:
+                observation["unknown_fields"][name] = "MISSING_OR_INVALID_FIELD"
+        return observation, None
+    except (Exception, SystemExit):
+        observation["unknown_fields"] = {name: "READBACK_UNAVAILABLE" for name in fields}
+        return observation, "READBACK_UNAVAILABLE"
+
+
+def verification(observation, error, video_id, slot, expected, now=None):
+    now = now or utc_now()
+    if error:
+        return "VERIFICATION_UNKNOWN", error
+    required = {"video_id": video_id, "channel_id": pv.CHANNEL,
+                "title": expected["title"], "description": expected["description"],
+                "default_language": "en", "default_audio_language": "en",
+                "license": "youtube", "contains_synthetic_media": True}
+    for key, value in required.items():
+        if observation.get(key) is None:
+            return "VERIFICATION_UNKNOWN", "MISSING_" + key.upper()
+        if observation[key] != value:
+            return "VERIFICATION_FAIL", "MISMATCH_" + key.upper()
+    try:
+        target = utc_instant(slot)
+    except (ValueError, TypeError):
+        return "VERIFICATION_UNKNOWN", "INVALID_INTENDED_SLOT"
+    privacy = observation.get("privacy_status")
+    if privacy is None:
+        return "VERIFICATION_UNKNOWN", "MISSING_PRIVACY_STATUS"
+    if now < target:
+        if privacy != "private":
+            return "VERIFICATION_FAIL", "PRIVACY_BEFORE_SLOT"
+        try:
+            if utc_instant(observation.get("publish_at")) != target:
+                return "VERIFICATION_FAIL", "PUBLISH_AT_MISMATCH"
+        except (ValueError, TypeError):
+            return "VERIFICATION_UNKNOWN", "MISSING_OR_INVALID_PUBLISH_AT"
+    elif privacy != "public":
+        return "VERIFICATION_FAIL", "NOT_PUBLIC_AT_SLOT"
+    upload, processing = observation.get("upload_status"), observation.get("processing_status")
+    if upload in ("failed", "rejected", "deleted") or processing == "failed":
+        return "VERIFICATION_FAIL", "REMOTE_PROCESSING_FAILED"
+    if upload is None or processing is None or processing == "terminated":
+        return "VERIFICATION_UNKNOWN", "PROCESSING_STATUS_UNAVAILABLE"
+    if upload == "uploaded" or processing == "processing":
+        return "PENDING_PROCESSING", "PROCESSING_INCOMPLETE"
+    if upload != "processed" or processing != "succeeded":
+        return "VERIFICATION_UNKNOWN", "UNRECOGNIZED_PROCESSING_STATUS"
+    return ("SCHEDULED_VERIFIED" if now < target else "PUBLIC_VERIFIED"), None
+
+
 def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     spec = json.loads(Path(shorts_json).read_text())
     ledger_path = Path(ledger_path)
@@ -52,6 +165,18 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     if not long_entry or "video_id" not in long_entry:
         raise SystemExit("LONG_VIDEO_NOT_PUBLISHED")
     slots = [s for s in slots.split(",") if s]
+    # Editorial-plan publication is bound to its authorized target, not a stale
+    # ledger slot. Legacy multi-Short inputs still assign slots only to todo.
+    target_slot = None
+    if "edit_plan" in spec or "finalization" in spec:
+        finalization = spec.get("finalization")
+        if not isinstance(finalization, dict):
+            raise SystemExit("MISSING_AUTHORIZED_TARGET_SLOT")
+        target_slot = finalization.get("target_slot")
+        try:
+            target_instant = utc_instant(target_slot)
+        except (ValueError, TypeError):
+            raise SystemExit("INVALID_AUTHORIZED_TARGET_SLOT")
     spec["shorts"] = [r for r in spec["shorts"] if r.get("publish")]  # only the Shorts the watched review approved
     if not spec["shorts"]:
         raise SystemExit("NO_SHORT_APPROVED_BY_REVIEW")
@@ -78,11 +203,21 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     long_id = long_entry["video_id"]
     long = pv.check(s.get(pv.API + "videos", params={"part": "snippet", "id": long_id}), "LONG")["items"][0]
     out = []
+    receipt = {"version": "shorts-receipt-v1", "long_video_id": long_id, "shorts": out}
     for short in spec["shorts"]:
         slot, report = slot_of.get(short["sha256"]), reports.get(short["sha256"])
         key = f"short:{spec['source_pilot']}:{short['sha256']}"
         entry = ledger["entries"].get(key, {"steps": {}})
+        expected = {"title": title_for(short), "description": description_for(
+            short, f"https://youtu.be/{long_id}", long["snippet"]["title"])}
         if "video_id" not in entry:
+            try:
+                if target_slot is not None and utc_instant(slot) != target_instant:
+                    raise SystemExit("UPLOAD_SLOT_DIFFERS_FROM_AUTHORIZED_TARGET")
+                if utc_instant(slot) <= utc_now():
+                    raise ValueError("PAST_SLOT")
+            except (ValueError, TypeError):
+                raise SystemExit("INVALID_OR_PAST_UPLOAD_SLOT")
             body = {"snippet": {"title": title_for(short), "description": description_for(short, f"https://youtu.be/{long_id}", long["snippet"]["title"]),
                                 "tags": ["prayer", "morning prayer", "jesus", "faith", "bible", "shorts"],
                                 "categoryId": "22", "defaultLanguage": "en", "defaultAudioLanguage": "en"},
@@ -90,15 +225,45 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
                                "embeddable": True, "license": "youtube", "publicStatsViewable": True,
                                "containsSyntheticMedia": True}}
             entry.update({"video_id": pv.upload(s, Path(shorts_dir) / short["file"], body)["id"],
-                          "uploaded_at": datetime.now(timezone.utc).isoformat(), "long_video_id": long_id, "slot": slot,
+                          "uploaded_at": utc_now().isoformat(), "long_video_id": long_id, "slot": slot,
+                          "output_sha256": short["sha256"],
                           "qa": report})
             ledger["entries"][key] = entry
-            ledger_path.write_text(json.dumps(ledger, indent=1) + "\n")  # durable before any further step
-        st = pv.check(s.get(pv.API + "videos", params={"part": "status", "id": entry["video_id"]}), "VERIFY")["items"][0]["status"]
-        out.append({"key": key, "file": short["file"], "upload_status": st.get("uploadStatus"), "video_id": entry["video_id"], "url": f"https://youtube.com/shorts/{entry['video_id']}",
-                    "slot": entry["slot"], "title": title_for(short)})
-    Path(receipt_path).write_text(json.dumps({"version": "shorts-receipt-v1", "long_video_id": long_id, "shorts": out,
-                                              "verified_at": datetime.now(timezone.utc).isoformat()}, indent=1) + "\n")
+            atomic_json(ledger_path, ledger)  # durable ID before readback
+        result = {"key": key, "file": short["file"], "output_sha256": entry.get("output_sha256"),
+                  "expected_output_sha256": short["sha256"],
+                  "upload_status": None, "video_id": entry["video_id"],
+                  "url": f"https://youtube.com/shorts/{entry['video_id']}",
+                  "slot": entry["slot"], "title": title_for(short),
+                  "verification_status": "VERIFICATION_UNKNOWN", "verification_reason": "READBACK_PENDING",
+                  "observation": None}
+        out.append(result)
+        atomic_json(receipt_path, receipt)  # accepted ID survives readback failure
+        observation, error = observe_video(s, entry["video_id"])
+        verification_slot = target_slot if target_slot is not None else entry["slot"]
+        status, reason = verification(observation, error, entry["video_id"], verification_slot, expected)
+        if target_slot is not None:
+            try:
+                slot_conflict = (utc_instant(entry["slot"]) != target_instant or
+                                 any(utc_instant(x) != target_instant for x in slots))
+            except (ValueError, TypeError):
+                slot_conflict = True
+            if slot_conflict:
+                status, reason = "VERIFICATION_FAIL", "AUTHORIZED_TARGET_SLOT_MISMATCH"
+            result["authorized_target_slot"] = target_slot
+        bound_hash = entry.get("output_sha256")
+        if bound_hash is not None and bound_hash != short["sha256"]:
+            status, reason = "VERIFICATION_FAIL", "OUTPUT_SHA256_MISMATCH"
+        elif bound_hash is None and status != "VERIFICATION_FAIL":
+            status, reason = "VERIFICATION_UNKNOWN", "OUTPUT_SHA256_UNRECORDED"
+        result.update(upload_status=observation["upload_status"], observation=observation,
+                      verification_status=status, verification_reason=reason)
+        entry["verification"] = {"status": status, "reason": reason, "observation": observation}
+        ledger["entries"][key] = entry
+        atomic_json(ledger_path, ledger)
+        receipt["verified_at"] = utc_now().isoformat()
+        atomic_json(receipt_path, receipt)
+
     print(json.dumps(out))
 
 

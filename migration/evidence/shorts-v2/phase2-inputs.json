@@ -5,7 +5,7 @@
     "timeline": "53496f5a82ed391422974e517b5b895059d0040db790c2044030f06bd06245c5",
     "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"
   },
-  "plan_sha256": "985852b0df6233f4155a1eded16de5c8b9e2605ddc1b7f553cea8a3581c58b2b",
+  "plan_sha256": "d725f27cd86f16447123ae5b68384a42eff6057838cc7a7e0011a4ee11fb4d2c",
   "expected_assets": {
     "voice": {
       "asset": "pilot-005-voice-sha256-6462b7631c540a56ac4dc6ff30a488e68a21e45dae5be077c27f5e43b30f07dc.flac",
@@ -17,25 +17,81 @@
     },
     "images": [
       {
-        "image_id": "bg-home-sunrise",
-        "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
-        "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+        "image_id": "bg-dawn-lake",
+        "asset": "pilot-003-img-bg-dawn-lake-sha256-74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018.png",
+        "sha256": "74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018",
         "nominal_start": 0.0,
-        "nominal_end": 22.153,
+        "nominal_end": 5.0,
         "motion_profile": "phrase_push_in_v1"
       },
       {
-        "image_id": "bg-garden",
-        "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
-        "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
-        "nominal_start": 22.153,
+        "image_id": "bg-sheltered-valley",
+        "asset": "pilot-005-img-bg-sheltered-valley-sha256-1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85.png",
+        "sha256": "1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85",
+        "nominal_start": 5.0,
+        "nominal_end": 10.0,
+        "motion_profile": "phrase_pan_right_v1"
+      },
+      {
+        "image_id": "bg-sunlit-road",
+        "asset": "pilot-005-img-bg-sunlit-road-sha256-79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794.png",
+        "sha256": "79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794",
+        "nominal_start": 10.0,
+        "nominal_end": 15.0,
+        "motion_profile": "phrase_push_in_v1"
+      },
+      {
+        "image_id": "bg-fortress-dawn",
+        "asset": "pilot-005-img-bg-fortress-dawn-sha256-8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba.png",
+        "sha256": "8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba",
+        "nominal_start": 15.0,
+        "nominal_end": 20.0,
+        "motion_profile": "phrase_pan_right_v1"
+      },
+      {
+        "image_id": "bg-sunrise-field",
+        "asset": "pilot-003-img-bg-sunrise-field-sha256-8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0.png",
+        "sha256": "8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0",
+        "nominal_start": 20.0,
+        "nominal_end": 25.0,
+        "motion_profile": "phrase_push_in_v1"
+      },
+      {
+        "image_id": "bg-misty-valley",
+        "asset": "pilot-003-img-bg-misty-valley-sha256-a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc.png",
+        "sha256": "a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc",
+        "nominal_start": 25.0,
+        "nominal_end": 30.0,
+        "motion_profile": "phrase_pan_right_v1"
+      },
+      {
+        "image_id": "bg-mountain-sunrise",
+        "asset": "pilot-003-img-bg-mountain-sunrise-sha256-886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5.png",
+        "sha256": "886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5",
+        "nominal_start": 30.0,
+        "nominal_end": 35.0,
+        "motion_profile": "phrase_push_in_v1"
+      },
+      {
+        "image_id": "bg-tower-hill",
+        "asset": "pilot-005-img-bg-tower-hill-sha256-0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961.png",
+        "sha256": "0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961",
+        "nominal_start": 35.0,
         "nominal_end": 40.312,
         "motion_profile": "phrase_pan_right_v1"
       }
     ]
   },
-  "downloaded_asset_hashes": null,
-  "downloaded_asset_hashes_reason": "Production workflow has not run yet",
+  "downloaded_asset_hashes": {
+    "bg-dawn-lake": "74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018",
+    "bg-sheltered-valley": "1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85",
+    "bg-sunlit-road": "79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794",
+    "bg-fortress-dawn": "8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba",
+    "bg-sunrise-field": "8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0",
+    "bg-misty-valley": "a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc",
+    "bg-mountain-sunrise": "886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5",
+    "bg-tower-hill": "0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961"
+  },
   "license_sources": [
     {
       "model": "FLUX.1-schnell",
@@ -63,11 +119,11 @@
       "url": "https://huggingface.co/hexgrad/Kokoro-82M"
     }
   ],
-  "verified_at": "2026-10-20T17:00:00Z",
+  "verified_at": "2026-10-20T17:52:47Z",
   "image_metadata": {
-    "bg-home-sunrise": {
-      "id": "bg-home-sunrise",
-      "prompt": "cosy family home with warm lit windows at sunrise, garden path and flowers, soft golden morning light, peaceful, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+    "bg-dawn-lake": {
+      "id": "bg-dawn-lake",
+      "prompt": "still lake at first light, mirror reflection of pink and gold clouds, reeds in the foreground, soft mist on the water, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
       "negative": null,
       "seed": null,
       "size": [
@@ -82,7 +138,7 @@
           "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
         }
       },
-      "seconds": 6.1,
+      "seconds": 3.0,
       "generated_by": "HeroVerse pipeline (AI-generated image)",
       "upscaler": {
         "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
@@ -90,35 +146,204 @@
         "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
         "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
       },
-      "release_asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
-      "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6"
+      "release_asset": "pilot-003-img-bg-dawn-lake-sha256-74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018.png",
+      "sha256": "74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018"
     },
-    "bg-garden": {
-      "id": "bg-garden",
-      "prompt": "quiet garden path with flowers and soft morning light, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
-      "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
-      "seed": 3005,
-      "steps": 6,
-      "guidance": 1.5,
+    "bg-sheltered-valley": {
+      "id": "bg-sheltered-valley",
+      "prompt": "green valley sheltered by high mountains on every side, morning sunlight pouring in, a small river and trees, safe and peaceful, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+      "negative": null,
+      "seed": null,
       "size": [
-        1344,
-        768
+        2048,
+        2048
       ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
       "models": {
-        "stabilityai/stable-diffusion-xl-base-1.0": {
-          "revision": "462165984030d82259a11f4367a4eed129e94a7b",
-          "license": "openrail++"
-        },
-        "latent-consistency/lcm-lora-sdxl": {
-          "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
-          "license": "openrail++"
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
         }
       },
-      "device": "cuda",
-      "seconds": 10.3,
+      "seconds": 2.5,
       "generated_by": "HeroVerse pipeline (AI-generated image)",
-      "release_asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
-      "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04"
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-005-img-bg-sheltered-valley-sha256-1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85.png",
+      "sha256": "1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85"
+    },
+    "bg-sunlit-road": {
+      "id": "bg-sunlit-road",
+      "prompt": "quiet country road winding through green fields in early morning sunlight, soft mist, safe and open, no cars, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+      "negative": null,
+      "seed": null,
+      "size": [
+        2048,
+        2048
+      ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+      "models": {
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+        }
+      },
+      "seconds": 2.5,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-005-img-bg-sunlit-road-sha256-79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794.png",
+      "sha256": "79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794"
+    },
+    "bg-fortress-dawn": {
+      "id": "bg-fortress-dawn",
+      "prompt": "ancient stone fortress on a green hill at sunrise, warm golden light on its walls, peaceful sky, sheltering and strong, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+      "negative": null,
+      "seed": null,
+      "size": [
+        2048,
+        2048
+      ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+      "models": {
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+        }
+      },
+      "seconds": 2.8,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-005-img-bg-fortress-dawn-sha256-8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba.png",
+      "sha256": "8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba"
+    },
+    "bg-sunrise-field": {
+      "id": "bg-sunrise-field",
+      "prompt": "wide field of tall grass at sunrise, golden light breaking over the horizon, dew on the grass, a single path leading forward, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+      "negative": null,
+      "seed": null,
+      "size": [
+        2048,
+        2048
+      ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+      "models": {
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+        }
+      },
+      "seconds": 3.2,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-003-img-bg-sunrise-field-sha256-8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0.png",
+      "sha256": "8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0"
+    },
+    "bg-misty-valley": {
+      "id": "bg-misty-valley",
+      "prompt": "misty green valley at sunrise with a winding river, soft golden haze, distant hills, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+      "negative": null,
+      "seed": null,
+      "size": [
+        2048,
+        2048
+      ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+      "models": {
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+        }
+      },
+      "seconds": 3.0,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-003-img-bg-misty-valley-sha256-a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc.png",
+      "sha256": "a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc"
+    },
+    "bg-mountain-sunrise": {
+      "id": "bg-mountain-sunrise",
+      "prompt": "sun rising behind layered mountain ridges, warm rays across a green valley, wide cinematic landscape, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+      "negative": null,
+      "seed": null,
+      "size": [
+        2048,
+        2048
+      ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+      "models": {
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+        }
+      },
+      "seconds": 4.2,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-003-img-bg-mountain-sunrise-sha256-886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5.png",
+      "sha256": "886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5"
+    },
+    "bg-tower-hill": {
+      "id": "bg-tower-hill",
+      "prompt": "tall old stone watchtower on a grassy hill at dawn, soft clouds glowing pink and gold, calm countryside below, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+      "negative": null,
+      "seed": null,
+      "size": [
+        2048,
+        2048
+      ],
+      "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+      "models": {
+        "@cf/black-forest-labs/flux-1-schnell": {
+          "license": "apache-2.0",
+          "revision": "workers-ai-managed",
+          "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+        }
+      },
+      "seconds": 2.7,
+      "generated_by": "HeroVerse pipeline (AI-generated image)",
+      "upscaler": {
+        "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+        "licence": "bsd-3-clause",
+        "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+        "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+      },
+      "release_asset": "pilot-005-img-bg-tower-hill-sha256-0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961.png",
+      "sha256": "0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961"
     }
   },
   "source_voice_provenance": {
@@ -133,5 +358,93 @@
     "ownership": "Original pipeline-generated instrumental",
     "source": "pilot-005/out/manifest.json",
     "qualification": "Existing preserved asset; exact download hash pending"
+  },
+  "historical_v1_plan": {
+    "plan_sha256": "985852b0df6233f4155a1eded16de5c8b9e2605ddc1b7f553cea8a3581c58b2b",
+    "images": [
+      {
+        "image_id": "bg-home-sunrise",
+        "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
+        "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+        "nominal_start": 0.0,
+        "nominal_end": 22.153,
+        "motion_profile": "phrase_push_in_v1"
+      },
+      {
+        "image_id": "bg-garden",
+        "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+        "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
+        "nominal_start": 22.153,
+        "nominal_end": 40.312,
+        "motion_profile": "phrase_pan_right_v1"
+      }
+    ],
+    "image_metadata": {
+      "bg-home-sunrise": {
+        "id": "bg-home-sunrise",
+        "prompt": "cosy family home with warm lit windows at sunrise, garden path and flowers, soft golden morning light, peaceful, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours, clean image with no text, no signature, no watermark, no lettering",
+        "negative": null,
+        "seed": null,
+        "size": [
+          2048,
+          2048
+        ],
+        "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+        "models": {
+          "@cf/black-forest-labs/flux-1-schnell": {
+            "license": "apache-2.0",
+            "revision": "workers-ai-managed",
+            "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+          }
+        },
+        "seconds": 6.1,
+        "generated_by": "HeroVerse pipeline (AI-generated image)",
+        "upscaler": {
+          "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+          "licence": "bsd-3-clause",
+          "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+          "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+        },
+        "release_asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
+        "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6"
+      },
+      "bg-garden": {
+        "id": "bg-garden",
+        "prompt": "quiet garden path with flowers and soft morning light, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours",
+        "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, dark, gloomy, horror, cartoon",
+        "seed": 3005,
+        "steps": 6,
+        "guidance": 1.5,
+        "size": [
+          1344,
+          768
+        ],
+        "models": {
+          "stabilityai/stable-diffusion-xl-base-1.0": {
+            "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+            "license": "openrail++"
+          },
+          "latent-consistency/lcm-lora-sdxl": {
+            "revision": "a18548dd4956b174ec5b0d78d340c8dae0a129cd",
+            "license": "openrail++"
+          }
+        },
+        "device": "cuda",
+        "seconds": 10.3,
+        "generated_by": "HeroVerse pipeline (AI-generated image)",
+        "release_asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
+        "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04"
+      }
+    },
+    "result": "REVIEW_FAIL",
+    "output_sha256": "3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7"
+  },
+  "downloaded_asset_hashes_source": "Local release downloads verified 2026-10-20T17:46:27Z. Voice/music were independently hash-verified by actual run39467256840; this local map covers only eight image files.",
+  "visual_asset_inspection": {
+    "observed_at": "2026-10-20T17:49:50Z",
+    "method": "Contact sheet plus each high-resolution image inspected; no people visible in eight selected images. Not a final video watched review.",
+    "excluded": {
+      "bg-home-sunrise": "Two people embedded in actual image; prompt no people and record.figure=false did not certify R1."
+    }
   }
 }

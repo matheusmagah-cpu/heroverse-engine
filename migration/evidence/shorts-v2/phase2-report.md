@@ -1,14 +1,40 @@
-# Shorts phase 2: one corrected, gated edit
+# Shorts phase 2: actual failure and bounded corrective delivery
+
+## Current status at 2026-10-20 18:04 UTC
+
+PR252 merged normally as bd95c9bf82994c4408eb33f16ee6c2b78579ce6d. Real run39467256840 produced SHA3588afa8468882e7f528d204f41bbb72a8b1b27b4f21b841ab634b20ebbf0dd7 and committed the actual manifest at3905cec7c3b66f6918b353b9b7c2bae254103b1d. QA/media passed, but designated watched review failed: rhythm5.5, ending6.5, overall7.3. Automatic finalizer retained publish=false/REVIEW_FAIL. See phase2-media-checks.json and https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39467256840 . No publication or unchanged re-review occurred.
+
+Actual review identified duplicated hook/caption, overly static presentation and perceived abrupt ending. Source inspection confirms duplicate text. Real motion exists (zoom+6.246%, pan76.69px), so it is not mathematically frozen. Final audio falls near zero; a hard amplitude cutoff is not established. An88ms AAC timestamp gap near37.4s is measured and being corrected. These measurements do not replace editorial acceptance. Actual pixels of home-sunrise contain two people, so it is excluded under R1 despite its no-people prompt.
+
+SPEC v7 consolidated remotely at17:52:03UTC after the owner's explicit17:42:29 approval of4–6s scenes for this Short only. Eight existing hash-verified, individually inspected2048-square scenery images replace the two-scene plan. First3s will use deterministic internal atmosphere, not only zoom; one caption track and sample-continuous original narration remain required. Global QA/reviewer criteria remain byte-identical. Implementation and offline tests are complete; the new production media is not yet rendered or qualified.
+
+SPEC v6 publisher correction passed22 offline tests after fixing three real findings: wrong existing-ID slot compared against itself, cleanup deriving a changed manifest SHA instead of its verified receipt, and contradictory or missing existing-ID output hash being treated as verified. Contradictory hashes now fail and unrecorded legacy bindings stay unknown; neither permits cleanup or reupload. All three corrections passed independent review and22/22 publisher tests. The complete44-file configured loop passed. An earlier loop invocation lacked RUNNER_TEMP and failed before tests by attempting /out; it was corrected explicitly, not concealed. V6 adds factual GET status/processing verification and persistence before cleanup without changing triggers, inputs, permissions or credentials. No real upload has exercised it yet.
 
 Refs #231. SPEC v4 was confirmed remotely at 2026-10-20T16:53:06Z; v5 byte-binding and historical-FAIL amendments were confirmed through 17:09:11Z. Phase 1 merged in fae9879fcf75740ffc7ba7c3f4a6a5ffbb27d7e1. The same executor and prescribed branch continue without a second claim. This is code and synthetic-test evidence, not qualification of a real Short.
 
-## Editorial decision and exact plan
+## Corrective v7 execution evidence, 18:04 UTC
+
+Commands executed personally: `PATH=/tmp/hv228-venv/bin:$PATH RUNNER_TEMP=/tmp/231-v7-test-tmp bash /tmp/231-phase2-all-tests.sh` returned exit 0 and 44 test files PASS. The loop includes 77 producer tests, 48 edit-plan tests, 32 reviewer tests, 22 publisher tests, four no-live-data tests and three error-register tests. `python3 /tmp/231-phase2-verify-hashes.py` returned PASS for six frozen source snapshots, fifteen frozen files, four reviewer AST hashes and the permitted PR test-list-only change. `python3 -I -B migration/ops/card_check.py CARD` returned CARD_OK. Logs preserve real output, not a synthetic assertion of production approval.
+
+New synthetic FFmpeg integration proves eight distinct scene fingerprints, seven fades and 1209 decoded frames. The hook intermediate contains actual internal atmospheric/particle movement, lossless endpoints and deterministic seed behavior. AAC decoded timestamps are continuous, including the previously problematic ending region; 1,934,976 samples exist before encoding and the terminal source marker survives. All 45 legacy producer test methods retain their AST. New adapter regressions fail on previous code (two failures and one error), while three producer regressions expose absent caption-only mode, two-scene unpacking and absent hook intermediate. These are offline known-answer tests, not real watched review.
+
+The eight actual source PNGs were downloaded and their hashes checked, then individually inspected at full available resolution. No people were observed in the chosen scenery. Native generation resolution is not inferred from their 2048-square processed dimensions. Existing FLUX Apache-2.0 and Real-ESRGAN BSD-3-Clause provenance is recorded in phase2-inputs.json. The excluded home image demonstrates why a prompt is not visual evidence.
+
+Read-only reconciliation found issue231 had automatically closed at 17:32:59 despite the earlier code-only result. At 18:04:09 the issue was explicitly reopened, retaining dot-working and the same claim. New PR text uses Refs #231, with no automatic closing instruction. This administrative correction is not media acceptance.
+
+The owner's separate cover request is not embedded into this MP4. A preliminary 941x1672 cover exists but is not qualified 1080p or applied to YouTube. The modeling study distinguishes measured two-image baseline (~2.98 images/min) from eight planned images (~11.91/min); mined 28–36 events/min confound caption/CTA changes and are not a validated scene-cut target. No broader criteria exception follows from these observations.
+
+## Historical first-delivery record, explicitly superseded where v7 differs
+
+The following first-delivery description and test results are retained for audit only. References to two scenes, no production execution and older test counts describe the earlier delivery; they are not current instructions or claims about the corrected v7 output.
+
+## Historical v1 editorial plan (superseded after actual FAIL)
 
 The chosen continuous narration interval is 459.860–499.672 seconds: ten original sentences, opening “Lord, protect my relationships.” and ending “Let my words carry your peace into every room I enter.” The title is “A Prayer for Peace in Your Relationships”. This is an original prayer about relationships and speech, not a healing or wealth promise. No partial KJV quote or spoken CTA is included. The textual editorial assessment is separate from, and cannot replace, a watched review.
 
 Planned output is 40.312 seconds including the unchanged 0.5-second tail. Home-sunrise and garden are existing mapped assets. Source byte hashes, model/license links and metadata are in phase2-inputs.json. Full downloaded asset hashes remain null until the production workflow runs. The home image is recorded as 2048×2048 after its declared upscaler; the garden is 1344×768. Neither is represented as native 1080×1920 detail. The producer records actual probed source dimensions and portrait crop information; output resolution alone never proves source detail. Picture quality must still pass the designated watched review.
 
-## Implementation and fail-closed boundaries
+## Historical v1 implementation and fail-closed boundaries
 
 - A strict, exact editorial-plan adapter reconstructs the candidate from pinned source bytes, not arbitrary strings or expressions.
 - The editorial renderer uses the hash-verified original FLAC directly. The no-plan legacy path still uses voice.wav.

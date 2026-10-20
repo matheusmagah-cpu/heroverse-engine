@@ -83,7 +83,7 @@
   "inputs": "67e393596d74f77e64f5a9de143c99dbc4bc4cb2cb8e898b261900ae69623831"
  },
  "edit_plan": {
-  "version": "shorts-editorial-plan-v1",
+  "version": "shorts-editorial-plan-v2",
   "source_pilot": "pilot-005",
   "source_baseline_sha": "7fb9e9e1fad9396b80c029212f0a3144c1428d51",
   "source_sha256": {
@@ -109,27 +109,93 @@
   "tail_seconds": 0.5,
   "transition": {
    "type": "fade",
-   "seconds": 0.5,
-   "center_seconds": 22.153
+   "seconds": 0.5
   },
   "scenes": [
    {
-    "image_id": "bg-home-sunrise",
-    "asset": "pilot-005-img-bg-home-sunrise-sha256-5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6.png",
-    "sha256": "5ebdbb61901120845c3872f15cdca23d2ff0baac58ae0284f6f52effffd848c6",
+    "image_id": "bg-dawn-lake",
+    "asset": "pilot-003-img-bg-dawn-lake-sha256-74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018.png",
+    "sha256": "74d22480484ff2088b82de7d0dd83170be6171711aaeb198f96fc74f40d26018",
     "nominal_start": 0.0,
-    "nominal_end": 22.153,
+    "nominal_end": 5.0,
     "motion_profile": "phrase_push_in_v1"
    },
    {
-    "image_id": "bg-garden",
-    "asset": "pilot-002-img-bg-garden-sha256-5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04.png",
-    "sha256": "5172945b7bc917143eb1e0d62ed1f66d90b943a9956ddd20b84c73b679dfea04",
-    "nominal_start": 22.153,
+    "image_id": "bg-sheltered-valley",
+    "asset": "pilot-005-img-bg-sheltered-valley-sha256-1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85.png",
+    "sha256": "1d8055fd45c97ae66eead1c19f80dcaf1a9a28644761f31f41f34975bfe34d85",
+    "nominal_start": 5.0,
+    "nominal_end": 10.0,
+    "motion_profile": "phrase_pan_right_v1"
+   },
+   {
+    "image_id": "bg-sunlit-road",
+    "asset": "pilot-005-img-bg-sunlit-road-sha256-79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794.png",
+    "sha256": "79591089b067d1e73cc8cb5ad7c5ebcea6754a1b6eb4e1eff039de3d6abb7794",
+    "nominal_start": 10.0,
+    "nominal_end": 15.0,
+    "motion_profile": "phrase_push_in_v1"
+   },
+   {
+    "image_id": "bg-fortress-dawn",
+    "asset": "pilot-005-img-bg-fortress-dawn-sha256-8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba.png",
+    "sha256": "8fe838ae8d71963474991719861e02aaf83651817031e4af59a73858ba043bba",
+    "nominal_start": 15.0,
+    "nominal_end": 20.0,
+    "motion_profile": "phrase_pan_right_v1"
+   },
+   {
+    "image_id": "bg-sunrise-field",
+    "asset": "pilot-003-img-bg-sunrise-field-sha256-8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0.png",
+    "sha256": "8083ef5de4d2e1bf8b078a4f8ac0af71cc9992a68c9663528149fe8255aed1e0",
+    "nominal_start": 20.0,
+    "nominal_end": 25.0,
+    "motion_profile": "phrase_push_in_v1"
+   },
+   {
+    "image_id": "bg-misty-valley",
+    "asset": "pilot-003-img-bg-misty-valley-sha256-a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc.png",
+    "sha256": "a7e0c31b6a3cd366971a604e648ec0728c1227b45ae71dcfaac0a03679f6acdc",
+    "nominal_start": 25.0,
+    "nominal_end": 30.0,
+    "motion_profile": "phrase_pan_right_v1"
+   },
+   {
+    "image_id": "bg-mountain-sunrise",
+    "asset": "pilot-003-img-bg-mountain-sunrise-sha256-886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5.png",
+    "sha256": "886b55ab2de854099a05358f2a8059cd5ad8b42d1a7af482c40e2dde1b84c6c5",
+    "nominal_start": 30.0,
+    "nominal_end": 35.0,
+    "motion_profile": "phrase_push_in_v1"
+   },
+   {
+    "image_id": "bg-tower-hill",
+    "asset": "pilot-005-img-bg-tower-hill-sha256-0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961.png",
+    "sha256": "0a2619e6dbddc3966d31850f2ab74e2e92738d2787ac0dcdd23ad44b7c92f961",
+    "nominal_start": 35.0,
     "nominal_end": 40.312,
     "motion_profile": "phrase_pan_right_v1"
    }
   ],
-  "publish": false
+  "publish": false,
+  "rhythm_exception": {
+   "id": "pilot-005-20261020-eight-scenes-r3",
+   "target_slot": "2026-10-20T20:00:00Z",
+   "scene_count": 8,
+   "nominal_seconds": [
+    4.0,
+    6.0
+   ],
+   "visible_seconds": [
+    4.0,
+    6.0
+   ]
+  },
+  "hook_animation": {
+   "profile": "cinematic_hook_v1",
+   "start_seconds": 0.0,
+   "end_seconds": 3.0,
+   "caption_policy": "single_track_no_duplicate"
+  }
  }
 }
