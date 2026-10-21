@@ -13,6 +13,7 @@ import math
 import os
 from pathlib import Path
 import re
+import random
 import subprocess
 import sys
 import tempfile
@@ -2222,9 +2223,9 @@ class FrozenEditorialWorkflow(unittest.TestCase):
 def correction_source():
     import shorts_006_plan as adapter
     plan = json.loads(json.dumps(adapter.EXPECTED_PLAN))
-    pilot = HERE / 'pilot-006'
-    timeline = json.loads((pilot / 'out/timeline.json').read_text())
-    script = json.loads((pilot / 'script.json').read_text())
+    from test_shorts_006_plan import sources
+    docs = sources()
+    timeline, script = docs['timeline'], docs['script']
     refs = {s['id']: s.get('reference') for s in script['segments']}
     moment, reason = sp.validate_candidate(timeline['sentences'], refs, plan['candidate'])
     assert reason is None, reason
@@ -2232,6 +2233,14 @@ def correction_source():
 
 
 class CorrectionRenderer(unittest.TestCase):
+    def setUp(self):
+        from test_shorts_006_plan import synthetic_environment
+        root = self.enterContext(tempfile.TemporaryDirectory())
+        self.fixture = self.enterContext(synthetic_environment(root))
+        pilot = self.fixture['pilot']
+        # This test begins before the one permitted persisted correction.
+        (pilot / 'shorts/shorts.json').write_bytes((pilot / 'shorts/correction-history.json').read_bytes())
+
     def test_closed_routing_at_every_entry_and_mixed_pairs(self):
         plan, timeline, script, refs, moment = correction_source()
         self.assertEqual(sp._editorial_adapter(plan).__name__, 'shorts_006_plan')
@@ -2352,8 +2361,8 @@ class CorrectionRenderer(unittest.TestCase):
     def test_changed_canonical_prepared_selection_cannot_invoke_produce(self):
         import shorts_006_plan as adapter
         plan,timeline,script,refs,moment=correction_source()
-        pilot=HERE/'pilot-006'
-        prepared=adapter.validate_plan(plan,timeline,script,json.loads((pilot/'shorts/inputs.json').read_text()),
+        pilot=self.fixture['pilot']
+        prepared=adapter.validate_plan(plan,timeline,script,self.fixture['docs']['inputs'],
                                       raw_sha256={k:plan['source_sha256'][k] for k in ('timeline','script','inputs')})
         original_hash=adapter.hash_file
         canonical=pilot/'shorts/shorts.json'
@@ -2378,8 +2387,8 @@ class CorrectionRenderer(unittest.TestCase):
     def test_main_uses_006_adapter_reconstructs_one_and_rejects_mixed_pair(self):
         import shorts_006_plan as adapter
         plan,timeline,script,refs,moment=correction_source()
-        pilot=HERE/'pilot-006'
-        prepared=adapter.validate_plan(plan,timeline,script,json.loads((pilot/'shorts/inputs.json').read_text()),
+        pilot=self.fixture['pilot']
+        prepared=adapter.validate_plan(plan,timeline,script,self.fixture['docs']['inputs'],
                                       raw_sha256={k:plan['source_sha256'][k] for k in ('timeline','script','inputs')})
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);selection=root/'selection.json';selection.write_text(json.dumps(prepared))
@@ -2394,19 +2403,104 @@ class CorrectionRenderer(unittest.TestCase):
                 make.assert_not_called()
 
 
+# Frozen numerical oracle from baseline 582ff607089f9accb91a8a4d1a8c2fe6f4e47408.
+# Original three-function source SHA256: 5656c706eda6745afc8afc1b3935ea1f3981be30a3d3cfd54577cd3d71e769ca.
+# Independent of production helpers; run with the same NumPy/OpenCV build.
+def frozen_005_opening_envelope(frame_index):
+    """Zero outside the approved three-second hook; smooth entry and exit."""
+    if type(frame_index) is not int:
+        raise ValueError("INVALID_HOOK_FRAME")
+    t = frame_index / 30
+    if not 0 <= t < 3:
+        return 0.0
+    def smooth(u):
+        u = min(1.0, max(0.0, u))
+        return u * u * (3 - 2 * u)
+    return smooth(t / 0.35) * smooth((3 - t) / 0.45)
+
+
+def frozen_005_opening_particles(frame_index, width, height, seed=231005):
+    """Deterministic dust paths in source coordinates, never in the caption zone."""
+    if any(type(x) is not int for x in (width, height, seed)) or min(width, height) <= 0:
+        raise ValueError("INVALID_HOOK_GEOMETRY")
+    envelope = frozen_005_opening_envelope(frame_index)
+    t, rng = frame_index / 30, random.Random(seed)
+    particles = []
+    for _ in range(24):
+        x, y = rng.uniform(50, 1030), rng.uniform(100, 900)
+        radius, vx, vy = rng.uniform(1, 2.5), rng.uniform(6, 12), rng.uniform(-18, -10)
+        particles.append({"x": (x + vx * t) * width / 1080,
+                          "y": (y + vy * t) * height / 1920,
+                          "radius": radius * width / 1080, "alpha": 0.10 * envelope})
+    return particles
+
+
+def frozen_005_opening_atmosphere(base_rgb, frame_index, seed=231005):
+    """Source-bound fog, warm highlights and dust; no camera, grain or generated asset.
+
+    RGB and diagnostic alpha are floats in [0,1]. Input uint8 is also accepted;
+    the caller's source is never mutated. The helper is deterministic and local.
+    """
+    import cv2
+    import numpy as np
+    base = np.asarray(base_rgb)
+    if base.ndim != 3 or base.shape[2] != 3 or min(base.shape[:2]) <= 0:
+        raise ValueError("INVALID_HOOK_IMAGE")
+    base = base.astype(np.float32) / (255 if base.dtype == np.uint8 else 1)
+    if not np.isfinite(base).all() or np.any(base < 0) or np.any(base > 1):
+        raise ValueError("INVALID_HOOK_IMAGE")
+    envelope = frozen_005_opening_envelope(frame_index)
+    h, w = base.shape[:2]
+    particles = frozen_005_opening_particles(frame_index, w, h, seed)
+    if not envelope:
+        return base.copy(), np.zeros((h, w), dtype=np.float32)
+    t = frame_index / 30
+    y, x = np.mgrid[:h, :w].astype(np.float32)
+    fog = (np.exp(-((y / h - 0.72) / 0.22) ** 2) *
+           (0.50 + 0.25 * np.sin(2 * np.pi * (x / w - 0.035 * t)) +
+            0.25 * np.sin(2 * np.pi * (1.7 * x / w + 0.7 * y / h - 0.05 * t))))
+    fog_alpha = 0.09 * envelope * fog
+    luma = base @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
+    highlights = cv2.GaussianBlur(np.clip((luma - 0.65) / 0.35, 0, 1),
+                                  (0, 0), sigmaX=0.025 * w)
+    light_alpha = 0.06 * envelope * highlights
+    dust_alpha = np.zeros((h, w), dtype=np.float32)
+    subsamples = (np.arange(8, dtype=np.float32) + 0.5) / 8 - 0.5
+    for p in particles:
+        # A compact C1 disk has the declared physical radius. Subpixel area
+        # integration avoids blinking when the dust is smaller than one pixel.
+        radius = p["radius"]
+        x0, x1 = max(0, math.floor(p["x"] - radius - 0.5)), min(w, math.ceil(p["x"] + radius + 0.5))
+        y0, y1 = max(0, math.floor(p["y"] - radius - 0.5)), min(h, math.ceil(p["y"] + radius + 0.5))
+        if x0 < x1 and y0 < y1:
+            dx2 = (np.arange(x0, x1)[:, None] + subsamples - p["x"]) ** 2
+            dy2 = (np.arange(y0, y1)[:, None] + subsamples - p["y"]) ** 2
+            disk = np.maximum(0, 1 - (dy2[:, :, None, None] + dx2[None, None, :, :]) / radius ** 2) ** 2
+            dust_alpha[y0:y1, x0:x1] += p["alpha"] * disk.mean(axis=(1, 3))
+    dust_alpha = np.minimum(dust_alpha, 0.10 * envelope)
+    total = fog_alpha + light_alpha + dust_alpha
+    factor = np.minimum(1, 0.18 / np.maximum(total, 1e-20))
+    alpha = total * factor
+    light = (fog_alpha[..., None] * np.array([0.92, 0.94, 1.0], np.float32) +
+             light_alpha[..., None] * np.array([1.0, 0.92, 0.75], np.float32) +
+             dust_alpha[..., None] * np.array([1.0, 0.96, 0.84], np.float32)) * factor[..., None]
+    composed = base * (1 - alpha[..., None]) + light
+    return np.clip(composed, 0, 1).astype(np.float32), alpha.astype(np.float32)
+
+
+
 class CorrectionAtmosphere(unittest.TestCase):
-    def test_existing_005_float_output_is_pinned_to_prechange_bytes(self):
+    def test_existing_005_matches_frozen_oracle_in_the_same_opencv(self):
         import numpy as np
         base=np.arange(54*96*3,dtype=np.uint8).reshape(96,54,3)
-        expected={0:'1adcca65ca466ce0179936a6f5e9e742499f6f9bc9ee4151cb2a7db5facb3959',
-                  1:'13e5d384050e7cb294f13250672d83e956d5d85958a75431528491a359521c4c',
-                  15:'a70d6b8facbbf50442f871c61bdb4606f489d210468634e280a16dec556be1a7',
-                  45:'852e84ca34ad09a6680dce2f6a4f7efe951ff6e1cd2431b7343af5e119db4789',
-                  89:'f80d01477f1d485ac2606a2133b21ac6603c69abe3738d5ab0e91596fb387e4b',
-                  90:'1adcca65ca466ce0179936a6f5e9e742499f6f9bc9ee4151cb2a7db5facb3959'}
-        for frame,digest in expected.items():
+        # Exact float equality against pre-refactor code in this runtime avoids
+        # treating numerical OpenCV build differences as producer regressions.
+        # Every original opening frame is covered, not only six digest probes.
+        for frame in range(91):
+            expected, expected_alpha = frozen_005_opening_atmosphere(base,frame)
             image,alpha=sp.opening_atmosphere(base,frame)
-            self.assertEqual(hashlib.sha256(image.tobytes()+alpha.tobytes()).hexdigest(),digest)
+            np.testing.assert_array_equal(image,expected)
+            np.testing.assert_array_equal(alpha,expected_alpha)
 
     def test_continuous_deterministic_nonmutating_bounded_and_late_motion(self):
         import numpy as np
@@ -2492,18 +2586,6 @@ class CorrectionSyntheticFFmpeg(unittest.TestCase):
             self.assertEqual(len(lines),count)
             self.assertNotEqual(lines[-1].split(b',')[-1],lines[-2].split(b',')[-1])
             self.assertNotEqual(lines[150].split(b',')[-1],lines[151].split(b',')[-1])
-
-
-class CorrectionAdapterCIBridge(unittest.TestCase):
-    def test_closed_adapter_suite_is_in_the_existing_ci_entrypoint(self):
-        # Existing PR CI explicitly enumerates production tests. Keep its
-        # workflow unchanged while making the new closed adapter mandatory.
-        result = subprocess.run([sys.executable, "-I", "-B", str(HERE / "test_shorts_006_plan.py")],
-                                capture_output=True, text=True, timeout=300)
-        output = result.stdout + result.stderr
-        self.assertEqual(result.returncode, 0, output)
-        self.assertRegex(output, r"Ran [1-9][0-9]* tests? in ")
-        self.assertRegex(output, r"(?m)^OK$")
 
 
 if __name__ == "__main__":

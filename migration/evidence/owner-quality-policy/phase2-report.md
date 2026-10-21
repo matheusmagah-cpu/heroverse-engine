@@ -54,3 +54,23 @@ Issue 259 remains open and dot-working. No new claim; this phase PR uses Refs on
 - Test harness failures were preserved and corrected: missing copy import, a branch parser splitting at Python's inline else, and a synthetic path missing the canonical migration/production context. A positive test exposed the path problem, and rejection assertions now require the actual binding failure rather than any earlier exception. No production validator was weakened to pass fixtures.
 - A worker exec session disconnected before a final repeated suite could be observed; its result is UNKNOWN. A fresh exec confirmed files/environment intact, then affected tests were rerun. No production run was active and no retry of provider/upload occurred.
 - CARD_OK and16 frozen-file byte comparisons passed against582ff607, including all qa_criteria files, STANDARD, shorts_qa, ordinary005 adapter and reviewer. An initial audit command used the wrong shorts_qa path and failed; the corrected existing migration/publish/shorts_qa.py path was then checked successfully. No missing check was reported as PASS.
+
+### Phase 3 CI rejection and correction scope — 2026-10-21 01:24 UTC
+
+CI https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39525741977 on SHA 6bdf2a5b331f92349d081859aaab4e9f5a71576a returned FAILURE. The complete local loop also returned exit 1. These are not code acceptance or media PASS.
+
+The three actual failures are retained: (1) a fixed floating-image hash was not portable to the runner's OpenCV 4.6 build; the earlier local baseline comparison does not establish cross-environment equivalence; (2) sixteen references in new producer tests depended on mutable pilot-006 files; (3) test_errors_register correctly rejected the new adapter test because it was absent from the explicit CI loop. A subprocess bridge did not satisfy that register. Neither checker nor thresholds will be weakened.
+
+Temporary technical direction approved only adding migration/production/test_shorts_006_plan.py to the existing pr-checks.yml loop and that exact workflow path to the card. The issue update succeeded at 01:24:15 UTC and exact body readback matched. Removing this single added test token reconstructs all original workflow bytes; triggers, inputs, permissions, concurrency and schedule are untouched. test_errors_register.py then reported 3 tests OK in 0.005 seconds. The remaining fixture/oracle corrections and final full-suite/CI acceptance are still pending at this entry.
+
+The sole task resumed after an interruption. No issue PATCH or CI edit had been attempted before that interruption, so there was no uncertain mutation retried. No new production rendering, provider invocation or publication occurred.
+
+At 01:33 UTC the corrected producer test fixtures use synthetic temporary sources and genuine validators, not mutable pilot files or bypassed scanner rules. The 005 numerical oracle is independently copied from baseline582ff607 and evaluates all91 opening frames with exact array equality in the same OpenCV environment. FPS30 is pinned in the oracle; no expected hash was replaced with an observed value. The redundant bridge was removed because CI now invokes the complete adapter suite directly.
+
+- Corrected focused producer tests:8 PASS0.539s; technical direction independently repeated8 PASS0.540s.
+- Unmodified live-data scanner:4 PASS0.819s, independently4 PASS0.276s.
+- Unmodified error register:3 PASS0.005s, independently3 PASS0.006s.
+- Remaining complete repository loop excluding producer, including directly invoked adapter:47 files PASS, persisted exit0.
+- Two long-running revised producer test sessions lost their process handles and had no terminal summary/exit marker. Their result is UNKNOWN, not PASS. No process remained when checked; the full producer suite is being reconciled separately. Prior100-test results apply to the previous test version only, while producer implementation bytes remain unchanged.
+- Bounded FullHD transition diagnosis remains pending. The six existing FullHD clips prove sampled rendering only, not serial transition equivalence or editorial quality.
+- Card check CARD_OK; scope IN_SCOPE13files; git diff --check PASS. Production remains blocked until all applicable final tests, independent review and exact-SHA CI pass.
