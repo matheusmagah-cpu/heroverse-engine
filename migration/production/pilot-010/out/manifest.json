@@ -1,0 +1,7132 @@
+{
+ "version": "pilot-manifest-v2",
+ "pilot_id": "pilot-010",
+ "grammar": "standard-v1:fullframe-depth-parallax+film-look+captions",
+ "output_sha256": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f",
+ "output_seconds": 1770.695,
+ "script_sha256": "2dfa36df246ac53972bab1e183e11b5e07ea829a3f7a40bc36a8ea2451992cc9",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85,
+  "voice_wav_sha256": "eccd0f6f87558612ada93ef287532a41ea36c72bbaeec540ce1e150f36a95c5f"
+ },
+ "music": {
+  "file": "original-rest-music.lossless.flac",
+  "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+  "offset_seconds": 1200.0,
+  "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
+ },
+ "figure": null,
+ "images": {
+  "bg-moon-lake": {
+   "sha256": "9c3f61b8312bfed76548ab88938470c48d847fc641ae7fad4beee71927c2f600",
+   "release_asset": "pilot-004-img-bg-moon-lake-sha256-9c3f61b8312bfed76548ab88938470c48d847fc641ae7fad4beee71927c2f600.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "full moon reflected on a still lake at night, soft silver light, pine trees silhouetted on the shore, serene, no people, soft cinematic devotional painting, moonlight and warm lamplight, peaceful calm night mood, deep blue and gold tones, rich detail, gentle colours"
+  },
+  "bg-cares-lantern-bridge": {
+   "sha256": "d72c9e1e1b9353809c3ee6d31761295f786a85ec76ae0c7cb680724066b9ebea",
+   "release_asset": "pilot-010-img-bg-cares-lantern-bridge-sha256-d72c9e1e1b9353809c3ee6d31761295f786a85ec76ae0c7cb680724066b9ebea.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A small empty wooden bridge over a quiet brook at night, a visible amber lantern on the railing, silver water and soft green banks, peaceful release of a long day, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-calm-harbour": {
+   "sha256": "f33864b853a3aef4aa431f5527bf4c99dbc01919f018c9a5ca3428c942556393",
+   "release_asset": "pilot-010-img-bg-cares-calm-harbour-sha256-f33864b853a3aef4aa431f5527bf4c99dbc01919f018c9a5ca3428c942556393.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A sheltered harbour with still dark blue water under a visible moon, a warm shore lamp reflected in small ripples, no boats or people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-rain-window-garden": {
+   "sha256": "b33c3cdac36ae1142daee83aaa5a45037cb6d590ef5e6882c23e657e45c77f35",
+   "release_asset": "pilot-010-img-bg-cares-rain-window-garden-sha256-b33c3cdac36ae1142daee83aaa5a45037cb6d590ef5e6882c23e657e45c77f35.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A warmly glowing cottage window seen from a rain-washed empty garden at night, clear droplets on leaves and soft amber reflections on stone, calm restful scenery, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-stream-pebbles": {
+   "sha256": "1c48ca80b50eee0dcb9fa7e6b67fe9cbb31e20b3d56520313ac1e4f79158bb3f",
+   "release_asset": "pilot-010-img-bg-cares-stream-pebbles-sha256-1c48ca80b50eee0dcb9fa7e6b67fe9cbb31e20b3d56520313ac1e4f79158bb3f.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A slow night stream moving gently over rounded pebbles, moon reflections and soft moss on the banks, quiet natural scenery with open breathing space, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-willow-pond": {
+   "sha256": "1ce34c4beab2ec6b4570cabb88a679fff78e9314183c14c752500bfa27a57c4e",
+   "release_asset": "pilot-010-img-bg-cares-willow-pond-sha256-1ce34c4beab2ec6b4570cabb88a679fff78e9314183c14c752500bfa27a57c4e.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A willow tree beside a sheltered pond beneath pale stars, its soft branches reflected in still blue water, quiet uncluttered night scenery, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-mist-clearing": {
+   "sha256": "4a919927ea40aa4c414dadd45380477fd3d66dbfca0814abdce1a0ed253b0be6",
+   "release_asset": "pilot-010-img-bg-cares-mist-clearing-sha256-4a919927ea40aa4c414dadd45380477fd3d66dbfca0814abdce1a0ed253b0be6.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "Thin mist slowly opening over a peaceful meadow at night, a gentle silver horizon and dark blue sky, no threatening clouds, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-hearth-garden": {
+   "sha256": "64f6968881d92bb748b799e3eb22dc8ca1e5884c4e645dc0ce782fd5f7dcb1cf",
+   "release_asset": "pilot-010-img-bg-cares-hearth-garden-sha256-64f6968881d92bb748b799e3eb22dc8ca1e5884c4e645dc0ce782fd5f7dcb1cf.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A small outdoor stone hearth with a gentle visible fire beside an empty cottage garden, warm light on smooth paving and blue night beyond, peaceful modest setting, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-dawn-estuary": {
+   "sha256": "fafc41417067552a4341ea713a468237726c8bdca4ca8225a078d5cea6a3e116",
+   "release_asset": "pilot-010-img-bg-cares-dawn-estuary-sha256-fafc41417067552a4341ea713a468237726c8bdca4ca8225a078d5cea6a3e116.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A wide calm estuary at first light with soft pink clouds and gold reflected on shallow water, uncluttered hopeful landscape, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-moonlit-inlet": {
+   "sha256": "24bb8495037c2f26ba1b383233cce80e46f7589ee4b9d4d16bca7ca2059d97b6",
+   "release_asset": "pilot-010-img-bg-cares-moonlit-inlet-sha256-24bb8495037c2f26ba1b383233cce80e46f7589ee4b9d4d16bca7ca2059d97b6.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A calm inlet with silver moon reflections and smooth dark pebbles, peaceful uncluttered night scenery, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-lamp-alcove": {
+   "sha256": "23afb45182627acd77f6adcd4f2e4ed19f5d4cfb223c46ce03fdb7d477b8062b",
+   "release_asset": "pilot-010-img-bg-cares-lamp-alcove-sha256-23afb45182627acd77f6adcd4f2e4ed19f5d4cfb223c46ce03fdb7d477b8062b.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "An empty sheltered garden alcove with a visible softly glowing lamp, blue night and green leaves beyond, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-gentle-rain": {
+   "sha256": "118332f20959e7c4f0214e821ece05488f58daf824151defc0f7046950e04e4c",
+   "release_asset": "pilot-010-img-bg-cares-gentle-rain-sha256-118332f20959e7c4f0214e821ece05488f58daf824151defc0f7046950e04e4c.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "Gentle rain on a quiet stone garden path with warm cottage light reflected in shallow puddles, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-cares-still-horizon": {
+   "sha256": "e4d26cd1083ac5787dcfaf93f747e886cfa55c84c5787e74fea211283e940400",
+   "release_asset": "pilot-010-img-bg-cares-still-horizon-sha256-e4d26cd1083ac5787dcfaf93f747e886cfa55c84c5787e74fea211283e940400.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A still lakeside horizon beneath pale dawn clouds after a quiet night, peaceful open natural scenery, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  }
+ },
+ "holds": [
+  {
+   "image": "bg-moon-lake",
+   "start": 0.0,
+   "figure": false,
+   "end": 2.0,
+   "motion": "dolly_in",
+   "atmosphere": true
+  },
+  {
+   "image": "bg-cares-lantern-bridge",
+   "start": 2.0,
+   "end": 37.373,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-calm-harbour",
+   "start": 37.373,
+   "end": 65.947,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-rain-window-garden",
+   "start": 65.947,
+   "end": 94.052,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-stream-pebbles",
+   "start": 94.052,
+   "end": 122.52,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-willow-pond",
+   "start": 122.52,
+   "end": 151.905,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-mist-clearing",
+   "start": 151.905,
+   "end": 185.287,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-hearth-garden",
+   "start": 185.287,
+   "end": 213.481,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-dawn-estuary",
+   "start": 213.481,
+   "end": 242.419,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-moonlit-inlet",
+   "start": 242.419,
+   "end": 272.529,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lamp-alcove",
+   "start": 272.529,
+   "end": 300.059,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-gentle-rain",
+   "start": 300.059,
+   "end": 328.469,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-still-horizon",
+   "start": 328.469,
+   "end": 357.983,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lantern-bridge",
+   "start": 357.983,
+   "end": 387.235,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-calm-harbour",
+   "start": 387.235,
+   "end": 415.873,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-rain-window-garden",
+   "start": 415.873,
+   "end": 448.012,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-stream-pebbles",
+   "start": 448.012,
+   "end": 477.759,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-willow-pond",
+   "start": 477.759,
+   "end": 508.957,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-mist-clearing",
+   "start": 508.957,
+   "end": 536.261,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-hearth-garden",
+   "start": 536.261,
+   "end": 567.353,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-dawn-estuary",
+   "start": 567.353,
+   "end": 598.924,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-moonlit-inlet",
+   "start": 598.924,
+   "end": 626.389,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lamp-alcove",
+   "start": 626.389,
+   "end": 656.927,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-gentle-rain",
+   "start": 656.927,
+   "end": 684.073,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-still-horizon",
+   "start": 684.073,
+   "end": 713.075,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lantern-bridge",
+   "start": 713.075,
+   "end": 741.341,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-calm-harbour",
+   "start": 741.341,
+   "end": 770.181,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-rain-window-garden",
+   "start": 770.181,
+   "end": 798.265,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-stream-pebbles",
+   "start": 798.265,
+   "end": 828.675,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-willow-pond",
+   "start": 828.675,
+   "end": 857.196,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-mist-clearing",
+   "start": 857.196,
+   "end": 884.043,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-hearth-garden",
+   "start": 884.043,
+   "end": 913.601,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-dawn-estuary",
+   "start": 913.601,
+   "end": 943.593,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-moonlit-inlet",
+   "start": 943.593,
+   "end": 972.009,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lamp-alcove",
+   "start": 972.009,
+   "end": 1003.516,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-gentle-rain",
+   "start": 1003.516,
+   "end": 1035.547,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-still-horizon",
+   "start": 1035.547,
+   "end": 1066.319,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lantern-bridge",
+   "start": 1066.319,
+   "end": 1094.959,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-calm-harbour",
+   "start": 1094.959,
+   "end": 1121.707,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-rain-window-garden",
+   "start": 1121.707,
+   "end": 1152.373,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-stream-pebbles",
+   "start": 1152.373,
+   "end": 1179.285,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-willow-pond",
+   "start": 1179.285,
+   "end": 1209.056,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-mist-clearing",
+   "start": 1209.056,
+   "end": 1235.115,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-hearth-garden",
+   "start": 1235.115,
+   "end": 1266.763,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-dawn-estuary",
+   "start": 1266.763,
+   "end": 1294.004,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-moonlit-inlet",
+   "start": 1294.004,
+   "end": 1323.34,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lamp-alcove",
+   "start": 1323.34,
+   "end": 1353.483,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-gentle-rain",
+   "start": 1353.483,
+   "end": 1382.071,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-still-horizon",
+   "start": 1382.071,
+   "end": 1413.728,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lantern-bridge",
+   "start": 1413.728,
+   "end": 1444.767,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-calm-harbour",
+   "start": 1444.767,
+   "end": 1474.175,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-rain-window-garden",
+   "start": 1474.175,
+   "end": 1502.236,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-stream-pebbles",
+   "start": 1502.236,
+   "end": 1533.244,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-willow-pond",
+   "start": 1533.244,
+   "end": 1565.425,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-mist-clearing",
+   "start": 1565.425,
+   "end": 1594.961,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-hearth-garden",
+   "start": 1594.961,
+   "end": 1624.647,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-dawn-estuary",
+   "start": 1624.647,
+   "end": 1651.153,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-moonlit-inlet",
+   "start": 1651.153,
+   "end": 1679.111,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lamp-alcove",
+   "start": 1679.111,
+   "end": 1705.148,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-gentle-rain",
+   "start": 1705.148,
+   "end": 1732.837,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-still-horizon",
+   "start": 1732.837,
+   "end": 1751.766,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-cares-lantern-bridge",
+   "start": 1751.766,
+   "end": 1770.695,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  }
+ ],
+ "captions_ass_sha256": "88c1389592002558f4a177f32ace800dd6b8445b9edbf4478b833b857ec07fac",
+ "captions": [
+  {
+   "start": 1.824,
+   "end": 3.421,
+   "text": "Before you check again,"
+  },
+  {
+   "start": 3.421,
+   "end": 5.505,
+   "text": "pray through tonight’s worries"
+  },
+  {
+   "start": 5.505,
+   "end": 8.425,
+   "text": "and place each concern in God’s care."
+  },
+  {
+   "start": 9.055,
+   "end": 11.176,
+   "text": "You may have checked the same"
+  },
+  {
+   "start": 11.176,
+   "end": 12.785,
+   "text": "message several times,"
+  },
+  {
+   "start": 12.785,
+   "end": 14.248,
+   "text": "hoping a reply would"
+  },
+  {
+   "start": 14.248,
+   "end": 15.891,
+   "text": "change how you feel."
+  },
+  {
+   "start": 15.891,
+   "end": 18.018,
+   "text": "You can put the phone within"
+  },
+  {
+   "start": 18.018,
+   "end": 20.401,
+   "text": "reach but turn its face away."
+  },
+  {
+   "start": 20.401,
+   "end": 22.805,
+   "text": "Let the place where you are sitting"
+  },
+  {
+   "start": 22.805,
+   "end": 24.976,
+   "text": "or lying support your weight."
+  },
+  {
+   "start": 24.976,
+   "end": 27.844,
+   "text": "You can arrive with a busy mind."
+  },
+  {
+   "start": 27.844,
+   "end": 28.916,
+   "text": "In this prayer,"
+  },
+  {
+   "start": 28.916,
+   "end": 31.704,
+   "text": "you will name your concerns separately,"
+  },
+  {
+   "start": 31.704,
+   "end": 33.777,
+   "text": "so you do not have to wrestle"
+  },
+  {
+   "start": 33.777,
+   "end": 36.343,
+   "text": "with every uncertainty at once."
+  },
+  {
+   "start": 37.373,
+   "end": 40.135,
+   "text": "Casting all your care upon him;"
+  },
+  {
+   "start": 40.135,
+   "end": 42.554,
+   "text": "for he careth for you."
+  },
+  {
+   "start": 43.884,
+   "end": 44.423,
+   "text": "Father,"
+  },
+  {
+   "start": 44.423,
+   "end": 46.272,
+   "text": "I begin with the concern"
+  },
+  {
+   "start": 46.272,
+   "end": 48.224,
+   "text": "closest to the surface."
+  },
+  {
+   "start": 48.224,
+   "end": 49.576,
+   "text": "I give it a plain"
+  },
+  {
+   "start": 49.576,
+   "end": 51.028,
+   "text": "name before you."
+  },
+  {
+   "start": 51.028,
+   "end": 53.624,
+   "text": "It may be an unanswered message,"
+  },
+  {
+   "start": 53.624,
+   "end": 55.165,
+   "text": "a decision at work,"
+  },
+  {
+   "start": 55.165,
+   "end": 58.589,
+   "text": "or someone whose voice sounded troubled."
+  },
+  {
+   "start": 58.589,
+   "end": 60.44,
+   "text": "I have carried it through"
+  },
+  {
+   "start": 60.44,
+   "end": 62.545,
+   "text": "dinner and into this room."
+  },
+  {
+   "start": 62.545,
+   "end": 65.947,
+   "text": "Now I bring it into our conversation."
+  },
+  {
+   "start": 65.947,
+   "end": 67.422,
+   "text": "Help me entrust this"
+  },
+  {
+   "start": 67.422,
+   "end": 69.117,
+   "text": "particular care to you,"
+  },
+  {
+   "start": 69.117,
+   "end": 71.255,
+   "text": "even before my feelings catch"
+  },
+  {
+   "start": 71.255,
+   "end": 73.891,
+   "text": "up with the words I am praying."
+  },
+  {
+   "start": 74.921,
+   "end": 77.626,
+   "text": "When several worries arrive together,"
+  },
+  {
+   "start": 77.626,
+   "end": 80.039,
+   "text": "you can feel as though your whole"
+  },
+  {
+   "start": 80.039,
+   "end": 82.632,
+   "text": "life needs fixing before bedtime."
+  },
+  {
+   "start": 82.632,
+   "end": 85.543,
+   "text": "You can take a smaller approach here."
+  },
+  {
+   "start": 85.543,
+   "end": 88.135,
+   "text": "You are allowed to name one subject"
+  },
+  {
+   "start": 88.135,
+   "end": 90.907,
+   "text": "and let the others wait their turn."
+  },
+  {
+   "start": 90.907,
+   "end": 94.052,
+   "text": "You do not need a complete explanation."
+  },
+  {
+   "start": 94.052,
+   "end": 95.37,
+   "text": "A person’s name,"
+  },
+  {
+   "start": 95.37,
+   "end": 96.771,
+   "text": "a pending answer,"
+  },
+  {
+   "start": 96.771,
+   "end": 99.078,
+   "text": "or a sentence about tomorrow"
+  },
+  {
+   "start": 99.078,
+   "end": 100.824,
+   "text": "is enough to begin."
+  },
+  {
+   "start": 100.824,
+   "end": 103.345,
+   "text": "You are addressing someone who cares"
+  },
+  {
+   "start": 103.345,
+   "end": 106.145,
+   "text": "about the person doing the praying."
+  },
+  {
+   "start": 107.175,
+   "end": 107.587,
+   "text": "Lord,"
+  },
+  {
+   "start": 107.587,
+   "end": 109.07,
+   "text": "I bring the answer"
+  },
+  {
+   "start": 109.07,
+   "end": 110.981,
+   "text": "I cannot make arrive."
+  },
+  {
+   "start": 110.981,
+   "end": 112.716,
+   "text": "I have imagined reasons"
+  },
+  {
+   "start": 112.716,
+   "end": 114.829,
+   "text": "for the silence and measured"
+  },
+  {
+   "start": 114.829,
+   "end": 117.348,
+   "text": "the hours since I last checked."
+  },
+  {
+   "start": 117.348,
+   "end": 119.729,
+   "text": "Help me stop treating a missing"
+  },
+  {
+   "start": 119.729,
+   "end": 122.52,
+   "text": "reply as a verdict about my worth."
+  },
+  {
+   "start": 122.52,
+   "end": 124.234,
+   "text": "If there is a sensible"
+  },
+  {
+   "start": 124.234,
+   "end": 125.637,
+   "text": "time to follow up,"
+  },
+  {
+   "start": 125.637,
+   "end": 128.076,
+   "text": "let me choose it in daylight."
+  },
+  {
+   "start": 128.076,
+   "end": 129.391,
+   "text": "For this evening,"
+  },
+  {
+   "start": 129.391,
+   "end": 130.939,
+   "text": "receive both my hope"
+  },
+  {
+   "start": 130.939,
+   "end": 132.821,
+   "text": "and my disappointment."
+  },
+  {
+   "start": 132.821,
+   "end": 135.078,
+   "text": "Hold the uncertainty I cannot"
+  },
+  {
+   "start": 135.078,
+   "end": 137.374,
+   "text": "settle by checking again."
+  },
+  {
+   "start": 138.404,
+   "end": 138.94,
+   "text": "Father,"
+  },
+  {
+   "start": 138.94,
+   "end": 141.236,
+   "text": "help me make one kind boundary"
+  },
+  {
+   "start": 141.236,
+   "end": 143.789,
+   "text": "with the stream of information."
+  },
+  {
+   "start": 143.789,
+   "end": 146.346,
+   "text": "Let necessary messages remain"
+  },
+  {
+   "start": 146.346,
+   "end": 148.991,
+   "text": "available without making every"
+  },
+  {
+   "start": 148.991,
+   "end": 151.905,
+   "text": "notification my responsibility."
+  },
+  {
+   "start": 151.905,
+   "end": 154.808,
+   "text": "I ask for wisdom about the difference"
+  },
+  {
+   "start": 154.808,
+   "end": 156.613,
+   "text": "between being reachable"
+  },
+  {
+   "start": 156.613,
+   "end": 159.147,
+   "text": "and being constantly on watch."
+  },
+  {
+   "start": 159.147,
+   "end": 162.49,
+   "text": "If no urgent duty requires my attention,"
+  },
+  {
+   "start": 162.49,
+   "end": 165.428,
+   "text": "help me let the phone grow quiet."
+  },
+  {
+   "start": 165.428,
+   "end": 166.925,
+   "text": "I give you the impulse"
+  },
+  {
+   "start": 166.925,
+   "end": 168.965,
+   "text": "to search for one more update,"
+  },
+  {
+   "start": 168.965,
+   "end": 170.734,
+   "text": "and the fear that stopping"
+  },
+  {
+   "start": 170.734,
+   "end": 172.989,
+   "text": "means I have stopped caring."
+  },
+  {
+   "start": 174.019,
+   "end": 176.161,
+   "text": "Be careful for nothing;"
+  },
+  {
+   "start": 176.161,
+   "end": 178.185,
+   "text": "but in every thing by prayer"
+  },
+  {
+   "start": 178.185,
+   "end": 180.932,
+   "text": "and supplication with thanksgiving let"
+  },
+  {
+   "start": 180.932,
+   "end": 183.957,
+   "text": "your requests be made known unto God."
+  },
+  {
+   "start": 185.287,
+   "end": 187.164,
+   "text": "You hear an invitation"
+  },
+  {
+   "start": 187.164,
+   "end": 189.477,
+   "text": "to bring requests to God."
+  },
+  {
+   "start": 189.477,
+   "end": 191.833,
+   "text": "You can speak about what you need"
+  },
+  {
+   "start": 191.833,
+   "end": 193.903,
+   "text": "without first making yourself"
+  },
+  {
+   "start": 193.903,
+   "end": 195.225,
+   "text": "sound confident."
+  },
+  {
+   "start": 195.225,
+   "end": 198.226,
+   "text": "You can ask for an honest conversation,"
+  },
+  {
+   "start": 198.226,
+   "end": 199.456,
+   "text": "a workable plan,"
+  },
+  {
+   "start": 199.456,
+   "end": 202.637,
+   "text": "or help getting through an appointment."
+  },
+  {
+   "start": 202.637,
+   "end": 205.121,
+   "text": "Your request can be specific."
+  },
+  {
+   "start": 205.121,
+   "end": 206.822,
+   "text": "You can also remember"
+  },
+  {
+   "start": 206.822,
+   "end": 209.269,
+   "text": "a small kindness from today."
+  },
+  {
+   "start": 209.269,
+   "end": 211.087,
+   "text": "Gratitude gives another"
+  },
+  {
+   "start": 211.087,
+   "end": 213.481,
+   "text": "truth room beside the worry;"
+  },
+  {
+   "start": 213.481,
+   "end": 215.358,
+   "text": "you do not have to pretend"
+  },
+  {
+   "start": 215.358,
+   "end": 218.162,
+   "text": "the worry has already disappeared."
+  },
+  {
+   "start": 219.192,
+   "end": 219.567,
+   "text": "Lord,"
+  },
+  {
+   "start": 219.567,
+   "end": 221.295,
+   "text": "I name the work concern"
+  },
+  {
+   "start": 221.295,
+   "end": 223.127,
+   "text": "that followed me home."
+  },
+  {
+   "start": 223.127,
+   "end": 225.192,
+   "text": "There is something I sent,"
+  },
+  {
+   "start": 225.192,
+   "end": 226.701,
+   "text": "something I missed,"
+  },
+  {
+   "start": 226.701,
+   "end": 228.131,
+   "text": "or something I may"
+  },
+  {
+   "start": 228.131,
+   "end": 229.899,
+   "text": "be asked to explain."
+  },
+  {
+   "start": 229.899,
+   "end": 231.904,
+   "text": "Help me separate the actual"
+  },
+  {
+   "start": 231.904,
+   "end": 233.834,
+   "text": "facts from the harsh story"
+  },
+  {
+   "start": 233.834,
+   "end": 235.945,
+   "text": "I am telling about myself."
+  },
+  {
+   "start": 235.945,
+   "end": 237.32,
+   "text": "If I made an error,"
+  },
+  {
+   "start": 237.32,
+   "end": 239.779,
+   "text": "give me the honesty to acknowledge"
+  },
+  {
+   "start": 239.779,
+   "end": 242.419,
+   "text": "it and the patience to correct it."
+  },
+  {
+   "start": 242.419,
+   "end": 245.03,
+   "text": "Tonight I hand over the imagined"
+  },
+  {
+   "start": 245.03,
+   "end": 247.233,
+   "text": "meeting that keeps starting"
+  },
+  {
+   "start": 247.233,
+   "end": 249.297,
+   "text": "again inside my head."
+  },
+  {
+   "start": 250.327,
+   "end": 250.857,
+   "text": "Father,"
+  },
+  {
+   "start": 250.857,
+   "end": 252.751,
+   "text": "make the next useful step"
+  },
+  {
+   "start": 252.751,
+   "end": 254.901,
+   "text": "clear enough to recognize."
+  },
+  {
+   "start": 254.901,
+   "end": 257.507,
+   "text": "Perhaps I need to check a number,"
+  },
+  {
+   "start": 257.507,
+   "end": 258.692,
+   "text": "ask a question,"
+  },
+  {
+   "start": 258.692,
+   "end": 260.372,
+   "text": "or explain a delay."
+  },
+  {
+   "start": 260.372,
+   "end": 262.957,
+   "text": "I do not need to rehearse every"
+  },
+  {
+   "start": 262.957,
+   "end": 266.056,
+   "text": "response another person might give."
+  },
+  {
+   "start": 266.056,
+   "end": 268.205,
+   "text": "Help me prepare what is mine"
+  },
+  {
+   "start": 268.205,
+   "end": 270.2,
+   "text": "to prepare and leave their"
+  },
+  {
+   "start": 270.2,
+   "end": 272.529,
+   "text": "reaction outside my control."
+  },
+  {
+   "start": 272.529,
+   "end": 275.803,
+   "text": "Receive my desire to do good work."
+  },
+  {
+   "start": 275.803,
+   "end": 277.429,
+   "text": "Let that desire become"
+  },
+  {
+   "start": 277.429,
+   "end": 279.351,
+   "text": "steady attention tomorrow,"
+  },
+  {
+   "start": 279.351,
+   "end": 281.124,
+   "text": "rather than another hour"
+  },
+  {
+   "start": 281.124,
+   "end": 283.47,
+   "text": "of self-punishment tonight."
+  },
+  {
+   "start": 284.5,
+   "end": 284.814,
+   "text": "God,"
+  },
+  {
+   "start": 284.814,
+   "end": 287.798,
+   "text": "I remember a moment today when someone"
+  },
+  {
+   "start": 287.798,
+   "end": 290.333,
+   "text": "made a difficult thing easier."
+  },
+  {
+   "start": 290.333,
+   "end": 292.869,
+   "text": "Perhaps they answered patiently,"
+  },
+  {
+   "start": 292.869,
+   "end": 293.82,
+   "text": "held a door,"
+  },
+  {
+   "start": 293.82,
+   "end": 296.615,
+   "text": "or let me start a sentence again."
+  },
+  {
+   "start": 296.615,
+   "end": 300.059,
+   "text": "Thank you for that ordinary generosity."
+  },
+  {
+   "start": 300.059,
+   "end": 301.83,
+   "text": "Thank you for the ability"
+  },
+  {
+   "start": 301.83,
+   "end": 303.955,
+   "text": "to ask for help and for people"
+  },
+  {
+   "start": 303.955,
+   "end": 305.764,
+   "text": "who have helped before."
+  },
+  {
+   "start": 305.764,
+   "end": 308.125,
+   "text": "I bring this memory alongside"
+  },
+  {
+   "start": 308.125,
+   "end": 309.933,
+   "text": "the unfinished work."
+  },
+  {
+   "start": 309.933,
+   "end": 311.9,
+   "text": "My day contained more than"
+  },
+  {
+   "start": 311.9,
+   "end": 314.273,
+   "text": "the moment I keep regretting;"
+  },
+  {
+   "start": 314.273,
+   "end": 315.763,
+   "text": "help me remember it"
+  },
+  {
+   "start": 315.763,
+   "end": 317.759,
+   "text": "with greater honesty."
+  },
+  {
+   "start": 318.789,
+   "end": 320.374,
+   "text": "And the peace of God,"
+  },
+  {
+   "start": 320.374,
+   "end": 322.789,
+   "text": "which passeth all understanding,"
+  },
+  {
+   "start": 322.789,
+   "end": 324.449,
+   "text": "shall keep your hearts"
+  },
+  {
+   "start": 324.449,
+   "end": 327.139,
+   "text": "and minds through Christ Jesus."
+  },
+  {
+   "start": 328.469,
+   "end": 330.155,
+   "text": "You do not have to solve"
+  },
+  {
+   "start": 330.155,
+   "end": 332.724,
+   "text": "the meaning of every word tonight."
+  },
+  {
+   "start": 332.724,
+   "end": 334.436,
+   "text": "Notice that the promise"
+  },
+  {
+   "start": 334.436,
+   "end": 336.446,
+   "text": "speaks of hearts and minds,"
+  },
+  {
+   "start": 336.446,
+   "end": 338.009,
+   "text": "the very places where"
+  },
+  {
+   "start": 338.009,
+   "end": 339.603,
+   "text": "you may feel tired."
+  },
+  {
+   "start": 339.603,
+   "end": 342.048,
+   "text": "You can ask for God’s peace while"
+  },
+  {
+   "start": 342.048,
+   "end": 343.529,
+   "text": "there are unanswered"
+  },
+  {
+   "start": 343.529,
+   "end": 345.265,
+   "text": "questions around you."
+  },
+  {
+   "start": 345.265,
+   "end": 346.947,
+   "text": "You are not being asked"
+  },
+  {
+   "start": 346.947,
+   "end": 349.541,
+   "text": "to explain everything into order."
+  },
+  {
+   "start": 349.541,
+   "end": 351.341,
+   "text": "You can turn toward Christ"
+  },
+  {
+   "start": 351.341,
+   "end": 353.21,
+   "text": "with the thoughts you have,"
+  },
+  {
+   "start": 353.21,
+   "end": 355.08,
+   "text": "including the ones you wish"
+  },
+  {
+   "start": 355.08,
+   "end": 356.953,
+   "text": "would leave you alone."
+  },
+  {
+   "start": 357.983,
+   "end": 358.524,
+   "text": "Father,"
+  },
+  {
+   "start": 358.524,
+   "end": 360.689,
+   "text": "I name the household expense"
+  },
+  {
+   "start": 360.689,
+   "end": 363.112,
+   "text": "that has been pressing on me."
+  },
+  {
+   "start": 363.112,
+   "end": 365.421,
+   "text": "I bring the bill, the estimate,"
+  },
+  {
+   "start": 365.421,
+   "end": 367.985,
+   "text": "or the balance I need to review."
+  },
+  {
+   "start": 367.985,
+   "end": 369.573,
+   "text": "Give me clear judgment"
+  },
+  {
+   "start": 369.573,
+   "end": 371.557,
+   "text": "when I look at the facts."
+  },
+  {
+   "start": 371.557,
+   "end": 373.714,
+   "text": "Help me ask about arrangements"
+  },
+  {
+   "start": 373.714,
+   "end": 374.937,
+   "text": "when I need them,"
+  },
+  {
+   "start": 374.937,
+   "end": 377.094,
+   "text": "and speak honestly with anyone"
+  },
+  {
+   "start": 377.094,
+   "end": 379.503,
+   "text": "who shares this responsibility."
+  },
+  {
+   "start": 379.503,
+   "end": 381.896,
+   "text": "I place these practical concerns"
+  },
+  {
+   "start": 381.896,
+   "end": 384.887,
+   "text": "before you without inventing a certainty"
+  },
+  {
+   "start": 384.887,
+   "end": 387.235,
+   "text": "about how they will turn out."
+  },
+  {
+   "start": 387.235,
+   "end": 390.486,
+   "text": "Guide my next responsible choice."
+  },
+  {
+   "start": 391.516,
+   "end": 391.91,
+   "text": "Lord,"
+  },
+  {
+   "start": 391.91,
+   "end": 393.644,
+   "text": "I release the midnight"
+  },
+  {
+   "start": 393.644,
+   "end": 396.166,
+   "text": "calculations that repeat without"
+  },
+  {
+   "start": 396.166,
+   "end": 398.395,
+   "text": "giving me new information."
+  },
+  {
+   "start": 398.395,
+   "end": 399.127,
+   "text": "Tomorrow,"
+  },
+  {
+   "start": 399.127,
+   "end": 401.406,
+   "text": "help me set aside a definite"
+  },
+  {
+   "start": 401.406,
+   "end": 403.278,
+   "text": "time to look carefully,"
+  },
+  {
+   "start": 403.278,
+   "end": 405.638,
+   "text": "with paper, accurate figures,"
+  },
+  {
+   "start": 405.638,
+   "end": 408.26,
+   "text": "and whatever advice is needed."
+  },
+  {
+   "start": 408.26,
+   "end": 411.085,
+   "text": "Keep shame from isolating me."
+  },
+  {
+   "start": 411.085,
+   "end": 413.038,
+   "text": "Let courage take the form"
+  },
+  {
+   "start": 413.038,
+   "end": 414.131,
+   "text": "of a call made"
+  },
+  {
+   "start": 414.131,
+   "end": 415.873,
+   "text": "or a question asked."
+  },
+  {
+   "start": 415.873,
+   "end": 418.092,
+   "text": "Tonight I give you my fear"
+  },
+  {
+   "start": 418.092,
+   "end": 419.628,
+   "text": "of falling behind,"
+  },
+  {
+   "start": 419.628,
+   "end": 422.7,
+   "text": "and ask for companionship and wisdom"
+  },
+  {
+   "start": 422.7,
+   "end": 425.269,
+   "text": "as I address what is real."
+  },
+  {
+   "start": 426.299,
+   "end": 427.849,
+   "text": "You can pause before"
+  },
+  {
+   "start": 427.849,
+   "end": 429.657,
+   "text": "naming anything else."
+  },
+  {
+   "start": 429.657,
+   "end": 431.116,
+   "text": "Feel where your hands"
+  },
+  {
+   "start": 431.116,
+   "end": 432.547,
+   "text": "have come to rest."
+  },
+  {
+   "start": 432.547,
+   "end": 434.603,
+   "text": "You do not need to move them"
+  },
+  {
+   "start": 434.603,
+   "end": 436.545,
+   "text": "into a special position."
+  },
+  {
+   "start": 436.545,
+   "end": 439.477,
+   "text": "Let an ordinary breath come and go."
+  },
+  {
+   "start": 439.477,
+   "end": 440.874,
+   "text": "For these moments,"
+  },
+  {
+   "start": 440.874,
+   "end": 443.047,
+   "text": "you can leave the unfinished"
+  },
+  {
+   "start": 443.047,
+   "end": 445.182,
+   "text": "calculation unfinished."
+  },
+  {
+   "start": 448.012,
+   "end": 449.254,
+   "text": "Take therefore no"
+  },
+  {
+   "start": 449.254,
+   "end": 451.115,
+   "text": "thought for the morrow:"
+  },
+  {
+   "start": 451.115,
+   "end": 453.166,
+   "text": "for the morrow shall take thought"
+  },
+  {
+   "start": 453.166,
+   "end": 454.9,
+   "text": "for the things of itself."
+  },
+  {
+   "start": 454.9,
+   "end": 456.851,
+   "text": "Sufficient unto the day"
+  },
+  {
+   "start": 456.851,
+   "end": 458.898,
+   "text": "is the evil thereof."
+  },
+  {
+   "start": 460.228,
+   "end": 462.769,
+   "text": "You can prepare for tomorrow without"
+  },
+  {
+   "start": 462.769,
+   "end": 465.208,
+   "text": "trying to live it from your bed."
+  },
+  {
+   "start": 465.208,
+   "end": 466.841,
+   "text": "Perhaps you already know"
+  },
+  {
+   "start": 466.841,
+   "end": 468.747,
+   "text": "the time of your appointment"
+  },
+  {
+   "start": 468.747,
+   "end": 470.764,
+   "text": "and where you put the keys."
+  },
+  {
+   "start": 470.764,
+   "end": 473.205,
+   "text": "You have done something useful."
+  },
+  {
+   "start": 473.205,
+   "end": 474.038,
+   "text": "Beyond that,"
+  },
+  {
+   "start": 474.038,
+   "end": 475.982,
+   "text": "you may be rehearsing events"
+  },
+  {
+   "start": 475.982,
+   "end": 477.759,
+   "text": "that have not happened."
+  },
+  {
+   "start": 477.759,
+   "end": 480.605,
+   "text": "You can notice the difference gently."
+  },
+  {
+   "start": 480.605,
+   "end": 482.974,
+   "text": "This evening has its own limits,"
+  },
+  {
+   "start": 482.974,
+   "end": 484.9,
+   "text": "and you can let tomorrow’s"
+  },
+  {
+   "start": 484.9,
+   "end": 487.269,
+   "text": "conversation belong to tomorrow,"
+  },
+  {
+   "start": 487.269,
+   "end": 489.194,
+   "text": "where you will have actual"
+  },
+  {
+   "start": 489.194,
+   "end": 491.025,
+   "text": "information to meet."
+  },
+  {
+   "start": 492.055,
+   "end": 492.568,
+   "text": "Father,"
+  },
+  {
+   "start": 492.568,
+   "end": 495.605,
+   "text": "I name the appointment on the calendar."
+  },
+  {
+   "start": 495.605,
+   "end": 497.288,
+   "text": "I bring the questions"
+  },
+  {
+   "start": 497.288,
+   "end": 499.613,
+   "text": "I hope to ask and the answers"
+  },
+  {
+   "start": 499.613,
+   "end": 501.396,
+   "text": "I am afraid to hear."
+  },
+  {
+   "start": 501.396,
+   "end": 503.146,
+   "text": "Help me bring any notes"
+  },
+  {
+   "start": 503.146,
+   "end": 504.668,
+   "text": "or documents I need,"
+  },
+  {
+   "start": 504.668,
+   "end": 506.799,
+   "text": "and seek appropriate support"
+  },
+  {
+   "start": 506.799,
+   "end": 508.957,
+   "text": "if I want someone with me."
+  },
+  {
+   "start": 508.957,
+   "end": 512.295,
+   "text": "I place the unknown parts before you."
+  },
+  {
+   "start": 512.295,
+   "end": 514.463,
+   "text": "Give me courage for the actual"
+  },
+  {
+   "start": 514.463,
+   "end": 516.016,
+   "text": "hour when it comes."
+  },
+  {
+   "start": 516.016,
+   "end": 518.828,
+   "text": "I release the demand to experience"
+  },
+  {
+   "start": 518.828,
+   "end": 522.403,
+   "text": "that hour many times before it arrives."
+  },
+  {
+   "start": 523.433,
+   "end": 523.797,
+   "text": "Lord,"
+  },
+  {
+   "start": 523.797,
+   "end": 525.469,
+   "text": "I name the person whose"
+  },
+  {
+   "start": 525.469,
+   "end": 527.176,
+   "text": "trouble weighs on me."
+  },
+  {
+   "start": 527.176,
+   "end": 529.216,
+   "text": "I wish I could know exactly"
+  },
+  {
+   "start": 529.216,
+   "end": 530.954,
+   "text": "what they need and make"
+  },
+  {
+   "start": 530.954,
+   "end": 532.796,
+   "text": "their next day easier."
+  },
+  {
+   "start": 532.796,
+   "end": 534.812,
+   "text": "Help me listen to what they"
+  },
+  {
+   "start": 534.812,
+   "end": 536.261,
+   "text": "actually tell me."
+  },
+  {
+   "start": 536.261,
+   "end": 538.616,
+   "text": "Keep my concern from becoming"
+  },
+  {
+   "start": 538.616,
+   "end": 541.476,
+   "text": "pressure for them to reassure me."
+  },
+  {
+   "start": 541.476,
+   "end": 542.968,
+   "text": "Show me a practical"
+  },
+  {
+   "start": 542.968,
+   "end": 545.112,
+   "text": "kindness within my reach."
+  },
+  {
+   "start": 545.112,
+   "end": 547.338,
+   "text": "As I leave the rest with you,"
+  },
+  {
+   "start": 547.338,
+   "end": 548.489,
+   "text": "teach me a love"
+  },
+  {
+   "start": 548.489,
+   "end": 550.485,
+   "text": "that respects their voice,"
+  },
+  {
+   "start": 550.485,
+   "end": 551.559,
+   "text": "their choices,"
+  },
+  {
+   "start": 551.559,
+   "end": 553.291,
+   "text": "and my own limits."
+  },
+  {
+   "start": 554.321,
+   "end": 556.307,
+   "text": "You can care about someone"
+  },
+  {
+   "start": 556.307,
+   "end": 558.522,
+   "text": "deeply and still need a night"
+  },
+  {
+   "start": 558.522,
+   "end": 560.688,
+   "text": "away from problem solving."
+  },
+  {
+   "start": 560.688,
+   "end": 563.606,
+   "text": "You may have already offered a ride,"
+  },
+  {
+   "start": 563.606,
+   "end": 564.822,
+   "text": "sent a message,"
+  },
+  {
+   "start": 564.822,
+   "end": 567.353,
+   "text": "or agreed on a time to speak."
+  },
+  {
+   "start": 567.353,
+   "end": 570.712,
+   "text": "You can recognize that offering as real."
+  },
+  {
+   "start": 570.712,
+   "end": 572.468,
+   "text": "You do not have to prove"
+  },
+  {
+   "start": 572.468,
+   "end": 574.59,
+   "text": "your love by staying mentally"
+  },
+  {
+   "start": 574.59,
+   "end": 577.185,
+   "text": "beside every possible difficulty."
+  },
+  {
+   "start": 577.185,
+   "end": 579.063,
+   "text": "Where you have a genuine"
+  },
+  {
+   "start": 579.063,
+   "end": 580.862,
+   "text": "responsibility tonight,"
+  },
+  {
+   "start": 580.862,
+   "end": 582.059,
+   "text": "attend to it."
+  },
+  {
+   "start": 582.059,
+   "end": 584.051,
+   "text": "Where you have done your part,"
+  },
+  {
+   "start": 584.051,
+   "end": 585.331,
+   "text": "you may pause."
+  },
+  {
+   "start": 586.361,
+   "end": 586.914,
+   "text": "Father,"
+  },
+  {
+   "start": 586.914,
+   "end": 588.733,
+   "text": "I name the conversation"
+  },
+  {
+   "start": 588.733,
+   "end": 590.573,
+   "text": "that ended awkwardly."
+  },
+  {
+   "start": 590.573,
+   "end": 591.88,
+   "text": "There was a look"
+  },
+  {
+   "start": 591.88,
+   "end": 593.269,
+   "text": "I could not read,"
+  },
+  {
+   "start": 593.269,
+   "end": 595.966,
+   "text": "a sentence I wish I had softened,"
+  },
+  {
+   "start": 595.966,
+   "end": 598.924,
+   "text": "or a silence I did not understand."
+  },
+  {
+   "start": 598.924,
+   "end": 600.618,
+   "text": "Help me resist filling"
+  },
+  {
+   "start": 600.618,
+   "end": 602.852,
+   "text": "that silence with accusations"
+  },
+  {
+   "start": 602.852,
+   "end": 605.419,
+   "text": "against myself or someone else."
+  },
+  {
+   "start": 605.419,
+   "end": 607.336,
+   "text": "Where I owe an apology,"
+  },
+  {
+   "start": 607.336,
+   "end": 610.1,
+   "text": "let it be sincere and specific."
+  },
+  {
+   "start": 610.1,
+   "end": 612.391,
+   "text": "Where I need clarification,"
+  },
+  {
+   "start": 612.391,
+   "end": 614.184,
+   "text": "help me ask kindly."
+  },
+  {
+   "start": 614.184,
+   "end": 616.171,
+   "text": "I surrender the imaginary"
+  },
+  {
+   "start": 616.171,
+   "end": 618.475,
+   "text": "versions of that conversation"
+  },
+  {
+   "start": 618.475,
+   "end": 620.891,
+   "text": "that cannot give me truth."
+  },
+  {
+   "start": 621.921,
+   "end": 622.297,
+   "text": "Lord,"
+  },
+  {
+   "start": 622.297,
+   "end": 624.027,
+   "text": "I accept responsibility"
+  },
+  {
+   "start": 624.027,
+   "end": 626.389,
+   "text": "for the words that were mine."
+  },
+  {
+   "start": 626.389,
+   "end": 629.26,
+   "text": "I ask your forgiveness where I used"
+  },
+  {
+   "start": 629.26,
+   "end": 632.393,
+   "text": "tiredness as an excuse to be unkind."
+  },
+  {
+   "start": 632.393,
+   "end": 635.367,
+   "text": "Help me make repair without demanding"
+  },
+  {
+   "start": 635.367,
+   "end": 638.12,
+   "text": "immediate reassurance in return."
+  },
+  {
+   "start": 638.12,
+   "end": 640.285,
+   "text": "If another person needs time,"
+  },
+  {
+   "start": 640.285,
+   "end": 642.929,
+   "text": "give me patience with their pace."
+  },
+  {
+   "start": 642.929,
+   "end": 643.566,
+   "text": "Tonight,"
+  },
+  {
+   "start": 643.566,
+   "end": 646.272,
+   "text": "let remorse point toward an honest"
+  },
+  {
+   "start": 646.272,
+   "end": 649.317,
+   "text": "action instead of an endless replay."
+  },
+  {
+   "start": 649.317,
+   "end": 651.097,
+   "text": "I place the relationship"
+  },
+  {
+   "start": 651.097,
+   "end": 652.951,
+   "text": "in your care while I wait"
+  },
+  {
+   "start": 652.951,
+   "end": 655.897,
+   "text": "for an appropriate moment to speak."
+  },
+  {
+   "start": 656.927,
+   "end": 659.822,
+   "text": "In the multitude of my thoughts within"
+  },
+  {
+   "start": 659.822,
+   "end": 662.61,
+   "text": "me thy comforts delight my soul."
+  },
+  {
+   "start": 663.94,
+   "end": 665.732,
+   "text": "The psalm gives you words"
+  },
+  {
+   "start": 665.732,
+   "end": 667.704,
+   "text": "for a crowded inner life."
+  },
+  {
+   "start": 667.704,
+   "end": 670.61,
+   "text": "You can hear that multitude of thoughts"
+  },
+  {
+   "start": 670.61,
+   "end": 672.876,
+   "text": "named without embarrassment."
+  },
+  {
+   "start": 672.876,
+   "end": 675.139,
+   "text": "Perhaps your mind moves from"
+  },
+  {
+   "start": 675.139,
+   "end": 677.078,
+   "text": "a bill to a conversation"
+  },
+  {
+   "start": 677.078,
+   "end": 679.925,
+   "text": "to a forgotten errand in seconds."
+  },
+  {
+   "start": 679.925,
+   "end": 682.051,
+   "text": "You do not have to chase every"
+  },
+  {
+   "start": 682.051,
+   "end": 684.073,
+   "text": "thought to its conclusion."
+  },
+  {
+   "start": 684.073,
+   "end": 685.585,
+   "text": "You can receive one"
+  },
+  {
+   "start": 685.585,
+   "end": 687.197,
+   "text": "comfort at a time:"
+  },
+  {
+   "start": 687.197,
+   "end": 688.883,
+   "text": "a remembered kindness,"
+  },
+  {
+   "start": 688.883,
+   "end": 690.186,
+   "text": "a truthful verse,"
+  },
+  {
+   "start": 690.186,
+   "end": 692.638,
+   "text": "the knowledge that you can bring"
+  },
+  {
+   "start": 692.638,
+   "end": 695.057,
+   "text": "your confusion into prayer."
+  },
+  {
+   "start": 696.087,
+   "end": 696.403,
+   "text": "God,"
+  },
+  {
+   "start": 696.403,
+   "end": 699.09,
+   "text": "I name the judgment I keep passing"
+  },
+  {
+   "start": 699.09,
+   "end": 702.432,
+   "text": "on myself when everything becomes quiet."
+  },
+  {
+   "start": 702.432,
+   "end": 703.852,
+   "text": "I hear that I should"
+  },
+  {
+   "start": 703.852,
+   "end": 704.988,
+   "text": "have known more,"
+  },
+  {
+   "start": 704.988,
+   "end": 705.983,
+   "text": "finished more,"
+  },
+  {
+   "start": 705.983,
+   "end": 708.009,
+   "text": "or handled the day better."
+  },
+  {
+   "start": 708.009,
+   "end": 710.243,
+   "text": "Help me learn from what happened"
+  },
+  {
+   "start": 710.243,
+   "end": 713.075,
+   "text": "without treating myself with contempt."
+  },
+  {
+   "start": 713.075,
+   "end": 715.465,
+   "text": "Show me the difference between"
+  },
+  {
+   "start": 715.465,
+   "end": 717.776,
+   "text": "correction that helps me grow"
+  },
+  {
+   "start": 717.776,
+   "end": 721.063,
+   "text": "and accusation that only wears me down."
+  },
+  {
+   "start": 721.063,
+   "end": 722.838,
+   "text": "I ask for the humility"
+  },
+  {
+   "start": 722.838,
+   "end": 724.129,
+   "text": "to be a learner,"
+  },
+  {
+   "start": 724.129,
+   "end": 725.742,
+   "text": "with room to receive"
+  },
+  {
+   "start": 725.742,
+   "end": 727.706,
+   "text": "mercy and try again."
+  },
+  {
+   "start": 728.736,
+   "end": 729.314,
+   "text": "Father,"
+  },
+  {
+   "start": 729.314,
+   "end": 731.046,
+   "text": "I bring my tired body"
+  },
+  {
+   "start": 731.046,
+   "end": 733.289,
+   "text": "into this prayer as well."
+  },
+  {
+   "start": 733.289,
+   "end": 736.222,
+   "text": "I notice the tension I carried through"
+  },
+  {
+   "start": 736.222,
+   "end": 739.154,
+   "text": "the day and the impatience I sometimes"
+  },
+  {
+   "start": 739.154,
+   "end": 741.341,
+   "text": "feel toward my own limits."
+  },
+  {
+   "start": 741.341,
+   "end": 743.633,
+   "text": "Help me respond with care."
+  },
+  {
+   "start": 743.633,
+   "end": 745.766,
+   "text": "Guide me toward appropriate"
+  },
+  {
+   "start": 745.766,
+   "end": 747.347,
+   "text": "help when I need it,"
+  },
+  {
+   "start": 747.347,
+   "end": 748.848,
+   "text": "and toward ordinary"
+  },
+  {
+   "start": 748.848,
+   "end": 751.003,
+   "text": "habits that support rest."
+  },
+  {
+   "start": 751.003,
+   "end": 752.956,
+   "text": "I am not asking my body"
+  },
+  {
+   "start": 752.956,
+   "end": 755.343,
+   "text": "to prove my faith tonight."
+  },
+  {
+   "start": 755.343,
+   "end": 757.583,
+   "text": "I ask to treat it as something"
+  },
+  {
+   "start": 757.583,
+   "end": 760.322,
+   "text": "entrusted to me with tenderness."
+  },
+  {
+   "start": 761.352,
+   "end": 763.38,
+   "text": "A concern may come back after"
+  },
+  {
+   "start": 763.38,
+   "end": 765.308,
+   "text": "you have prayed about it."
+  },
+  {
+   "start": 765.308,
+   "end": 767.385,
+   "text": "You can notice that without"
+  },
+  {
+   "start": 767.385,
+   "end": 770.181,
+   "text": "declaring the prayer unsuccessful."
+  },
+  {
+   "start": 770.181,
+   "end": 772.617,
+   "text": "You are practicing trust with a mind"
+  },
+  {
+   "start": 772.617,
+   "end": 775.097,
+   "text": "that has learned to keep checking."
+  },
+  {
+   "start": 775.097,
+   "end": 777.017,
+   "text": "You can simply recognize"
+  },
+  {
+   "start": 777.017,
+   "end": 779.417,
+   "text": "the familiar concern and bring"
+  },
+  {
+   "start": 779.417,
+   "end": 781.997,
+   "text": "it back to God in fewer words."
+  },
+  {
+   "start": 781.997,
+   "end": 784.014,
+   "text": "You do not need to restart"
+  },
+  {
+   "start": 784.014,
+   "end": 785.591,
+   "text": "the whole evening."
+  },
+  {
+   "start": 785.591,
+   "end": 787.358,
+   "text": "You can return as many"
+  },
+  {
+   "start": 787.358,
+   "end": 788.805,
+   "text": "times as you need,"
+  },
+  {
+   "start": 788.805,
+   "end": 792.127,
+   "text": "with less argument and more kindness."
+  },
+  {
+   "start": 793.157,
+   "end": 793.568,
+   "text": "Lord,"
+  },
+  {
+   "start": 793.568,
+   "end": 796.032,
+   "text": "when the same concern returns,"
+  },
+  {
+   "start": 796.032,
+   "end": 798.265,
+   "text": "help me answer it gently."
+  },
+  {
+   "start": 798.265,
+   "end": 800.664,
+   "text": "I have named it before you."
+  },
+  {
+   "start": 800.664,
+   "end": 802.6,
+   "text": "I have considered whether"
+  },
+  {
+   "start": 802.6,
+   "end": 805.025,
+   "text": "anything requires action now."
+  },
+  {
+   "start": 805.025,
+   "end": 807.356,
+   "text": "If there is no new information"
+  },
+  {
+   "start": 807.356,
+   "end": 809.686,
+   "text": "and no present responsibility,"
+  },
+  {
+   "start": 809.686,
+   "end": 812.352,
+   "text": "help me stop reopening the case."
+  },
+  {
+   "start": 812.352,
+   "end": 815.796,
+   "text": "Receive my repeated turning toward you."
+  },
+  {
+   "start": 815.796,
+   "end": 818.431,
+   "text": "Teach me a patient trust that can"
+  },
+  {
+   "start": 818.431,
+   "end": 820.827,
+   "text": "be practiced in small moments,"
+  },
+  {
+   "start": 820.827,
+   "end": 822.983,
+   "text": "without demanding a perfect"
+  },
+  {
+   "start": 822.983,
+   "end": 825.139,
+   "text": "feeling or an uninterrupted"
+  },
+  {
+   "start": 825.139,
+   "end": 827.645,
+   "text": "silence inside my thoughts."
+  },
+  {
+   "start": 828.675,
+   "end": 831.522,
+   "text": "Thou wilt keep him in perfect peace,"
+  },
+  {
+   "start": 831.522,
+   "end": 833.996,
+   "text": "whose mind is stayed on thee:"
+  },
+  {
+   "start": 833.996,
+   "end": 836.543,
+   "text": "because he trusteth in thee."
+  },
+  {
+   "start": 837.873,
+   "end": 839.886,
+   "text": "You can give your attention"
+  },
+  {
+   "start": 839.886,
+   "end": 842.346,
+   "text": "a place to return without forcing"
+  },
+  {
+   "start": 842.346,
+   "end": 844.539,
+   "text": "it to stay perfectly still."
+  },
+  {
+   "start": 844.539,
+   "end": 846.197,
+   "text": "In Isaiah’s words,"
+  },
+  {
+   "start": 846.197,
+   "end": 848.495,
+   "text": "trust turns toward God."
+  },
+  {
+   "start": 848.495,
+   "end": 850.893,
+   "text": "You can turn that way now."
+  },
+  {
+   "start": 850.893,
+   "end": 851.902,
+   "text": "When you notice"
+  },
+  {
+   "start": 851.902,
+   "end": 853.786,
+   "text": "that you are planning again,"
+  },
+  {
+   "start": 853.786,
+   "end": 855.872,
+   "text": "you can come back to the prayer"
+  },
+  {
+   "start": 855.872,
+   "end": 857.196,
+   "text": "already underway."
+  },
+  {
+   "start": 857.196,
+   "end": 860.235,
+   "text": "You are allowed to begin again quietly."
+  },
+  {
+   "start": 860.235,
+   "end": 862.049,
+   "text": "You do not need to monitor"
+  },
+  {
+   "start": 862.049,
+   "end": 864.492,
+   "text": "your mind as though every wandering"
+  },
+  {
+   "start": 864.492,
+   "end": 866.515,
+   "text": "thought were evidence against"
+  },
+  {
+   "start": 866.515,
+   "end": 868.819,
+   "text": "the sincerity of your faith."
+  },
+  {
+   "start": 869.849,
+   "end": 870.812,
+   "text": "Faithful God,"
+  },
+  {
+   "start": 870.812,
+   "end": 873.331,
+   "text": "I place my trust in your character"
+  },
+  {
+   "start": 873.331,
+   "end": 875.332,
+   "text": "rather than the strength of"
+  },
+  {
+   "start": 875.332,
+   "end": 876.771,
+   "text": "my concentration."
+  },
+  {
+   "start": 876.771,
+   "end": 880.236,
+   "text": "I know how easily my attention wanders."
+  },
+  {
+   "start": 880.236,
+   "end": 882.251,
+   "text": "Help me return to what is true"
+  },
+  {
+   "start": 882.251,
+   "end": 884.043,
+   "text": "about you with patience."
+  },
+  {
+   "start": 884.043,
+   "end": 886.59,
+   "text": "Keep me from using this prayer as"
+  },
+  {
+   "start": 886.59,
+   "end": 889.471,
+   "text": "another task to perform flawlessly."
+  },
+  {
+   "start": 889.471,
+   "end": 891.073,
+   "text": "I want to become more"
+  },
+  {
+   "start": 891.073,
+   "end": 892.904,
+   "text": "honest in your presence,"
+  },
+  {
+   "start": 892.904,
+   "end": 895.117,
+   "text": "more willing to receive help,"
+  },
+  {
+   "start": 895.117,
+   "end": 897.863,
+   "text": "and more able to leave an unanswered"
+  },
+  {
+   "start": 897.863,
+   "end": 900.076,
+   "text": "question without following it"
+  },
+  {
+   "start": 900.076,
+   "end": 902.791,
+   "text": "through every imagined outcome."
+  },
+  {
+   "start": 903.821,
+   "end": 904.35,
+   "text": "Father,"
+  },
+  {
+   "start": 904.35,
+   "end": 907.071,
+   "text": "I have named the unanswered message,"
+  },
+  {
+   "start": 907.071,
+   "end": 908.356,
+   "text": "the work concern,"
+  },
+  {
+   "start": 908.356,
+   "end": 910.019,
+   "text": "the practical expense,"
+  },
+  {
+   "start": 910.019,
+   "end": 911.758,
+   "text": "the coming appointment,"
+  },
+  {
+   "start": 911.758,
+   "end": 913.601,
+   "text": "and the person I love."
+  },
+  {
+   "start": 913.601,
+   "end": 915.6,
+   "text": "Receive whichever of these"
+  },
+  {
+   "start": 915.6,
+   "end": 917.856,
+   "text": "belongs to my life tonight."
+  },
+  {
+   "start": 917.856,
+   "end": 919.684,
+   "text": "Receive also the worry"
+  },
+  {
+   "start": 919.684,
+   "end": 922.025,
+   "text": "I could not explain aloud."
+  },
+  {
+   "start": 922.025,
+   "end": 924.201,
+   "text": "I do not need to make them"
+  },
+  {
+   "start": 924.201,
+   "end": 926.557,
+   "text": "one enormous burden again."
+  },
+  {
+   "start": 926.557,
+   "end": 928.026,
+   "text": "Each has been brought"
+  },
+  {
+   "start": 928.026,
+   "end": 929.745,
+   "text": "before you separately."
+  },
+  {
+   "start": 929.745,
+   "end": 931.804,
+   "text": "Help me remember that I can"
+  },
+  {
+   "start": 931.804,
+   "end": 934.168,
+   "text": "address one real responsibility"
+  },
+  {
+   "start": 934.168,
+   "end": 936.73,
+   "text": "at a time when morning comes."
+  },
+  {
+   "start": 937.76,
+   "end": 939.668,
+   "text": "You may notice that a worry"
+  },
+  {
+   "start": 939.668,
+   "end": 941.434,
+   "text": "becomes less tangled when"
+  },
+  {
+   "start": 941.434,
+   "end": 943.593,
+   "text": "you give it a concrete task."
+  },
+  {
+   "start": 943.593,
+   "end": 945.854,
+   "text": "You cannot schedule certainty,"
+  },
+  {
+   "start": 945.854,
+   "end": 948.445,
+   "text": "but you can schedule a question."
+  },
+  {
+   "start": 948.445,
+   "end": 949.982,
+   "text": "You cannot determine"
+  },
+  {
+   "start": 949.982,
+   "end": 951.903,
+   "text": "a conversation’s outcome,"
+  },
+  {
+   "start": 951.903,
+   "end": 953.287,
+   "text": "but you can choose"
+  },
+  {
+   "start": 953.287,
+   "end": 955.004,
+   "text": "when to ask for one."
+  },
+  {
+   "start": 955.004,
+   "end": 957.651,
+   "text": "You can make that distinction without"
+  },
+  {
+   "start": 957.651,
+   "end": 960.048,
+   "text": "dismissing what matters to you."
+  },
+  {
+   "start": 960.048,
+   "end": 962.655,
+   "text": "Before the quieter readings begin,"
+  },
+  {
+   "start": 962.655,
+   "end": 964.572,
+   "text": "you will give one concern"
+  },
+  {
+   "start": 964.572,
+   "end": 965.952,
+   "text": "a practical place,"
+  },
+  {
+   "start": 965.952,
+   "end": 967.945,
+   "text": "so your mind does not have"
+  },
+  {
+   "start": 967.945,
+   "end": 970.979,
+   "text": "to serve as its reminder all night."
+  },
+  {
+   "start": 972.009,
+   "end": 973.766,
+   "text": "I can be honest about"
+  },
+  {
+   "start": 973.766,
+   "end": 975.368,
+   "text": "what troubles me."
+  },
+  {
+   "start": 975.368,
+   "end": 977.32,
+   "text": "I can ask for help before"
+  },
+  {
+   "start": 977.32,
+   "end": 979.921,
+   "text": "I reach the end of my strength."
+  },
+  {
+   "start": 979.921,
+   "end": 981.967,
+   "text": "I can make a plan without"
+  },
+  {
+   "start": 981.967,
+   "end": 984.112,
+   "text": "predicting every result."
+  },
+  {
+   "start": 984.112,
+   "end": 986.994,
+   "text": "I can care for another person without"
+  },
+  {
+   "start": 986.994,
+   "end": 989.433,
+   "text": "carrying their entire future."
+  },
+  {
+   "start": 989.433,
+   "end": 991.127,
+   "text": "I can leave a message"
+  },
+  {
+   "start": 991.127,
+   "end": 993.224,
+   "text": "unanswered for a time when"
+  },
+  {
+   "start": 993.224,
+   "end": 995.501,
+   "text": "no urgent need is present."
+  },
+  {
+   "start": 995.501,
+   "end": 997.543,
+   "text": "God receives the concern"
+  },
+  {
+   "start": 997.543,
+   "end": 999.754,
+   "text": "I can name and the concern"
+  },
+  {
+   "start": 999.754,
+   "end": 1002.486,
+   "text": "I cannot yet put into words."
+  },
+  {
+   "start": 1003.516,
+   "end": 1005.309,
+   "text": "Make this small commitment"
+  },
+  {
+   "start": 1005.309,
+   "end": 1007.557,
+   "text": "before the readings for sleep:"
+  },
+  {
+   "start": 1007.557,
+   "end": 1009.782,
+   "text": "choose one concern that needs"
+  },
+  {
+   "start": 1009.782,
+   "end": 1011.239,
+   "text": "attention tomorrow,"
+  },
+  {
+   "start": 1011.239,
+   "end": 1013.157,
+   "text": "and give it one practical"
+  },
+  {
+   "start": 1013.157,
+   "end": 1014.948,
+   "text": "next step and a time."
+  },
+  {
+   "start": 1014.948,
+   "end": 1016.308,
+   "text": "You might decide,"
+  },
+  {
+   "start": 1016.308,
+   "end": 1017.668,
+   "text": "“After breakfast,"
+  },
+  {
+   "start": 1017.668,
+   "end": 1019.908,
+   "text": "I will call about the bill.”"
+  },
+  {
+   "start": 1019.908,
+   "end": 1021.748,
+   "text": "If you need a reminder,"
+  },
+  {
+   "start": 1021.748,
+   "end": 1024.088,
+   "text": "write only that short line."
+  },
+  {
+   "start": 1024.088,
+   "end": 1026.039,
+   "text": "Then close the note."
+  },
+  {
+   "start": 1026.039,
+   "end": 1028.381,
+   "text": "You have given your responsibility"
+  },
+  {
+   "start": 1028.381,
+   "end": 1029.759,
+   "text": "a place in tomorrow,"
+  },
+  {
+   "start": 1029.759,
+   "end": 1031.825,
+   "text": "so you can stop trying to keep"
+  },
+  {
+   "start": 1031.825,
+   "end": 1034.517,
+   "text": "it alive by rehearsing it tonight."
+  },
+  {
+   "start": 1035.547,
+   "end": 1036.117,
+   "text": "Father,"
+  },
+  {
+   "start": 1036.117,
+   "end": 1037.908,
+   "text": "I commit this one step"
+  },
+  {
+   "start": 1037.908,
+   "end": 1039.716,
+   "text": "and its time to you."
+  },
+  {
+   "start": 1039.716,
+   "end": 1042.601,
+   "text": "Help me follow through with the strength"
+  },
+  {
+   "start": 1042.601,
+   "end": 1045.016,
+   "text": "and information available then."
+  },
+  {
+   "start": 1045.016,
+   "end": 1046.01,
+   "text": "For tonight,"
+  },
+  {
+   "start": 1046.01,
+   "end": 1048.907,
+   "text": "I will leave the note closed unless"
+  },
+  {
+   "start": 1048.907,
+   "end": 1052.151,
+   "text": "a genuine need changes the situation."
+  },
+  {
+   "start": 1052.151,
+   "end": 1053.934,
+   "text": "When I want to reopen it"
+  },
+  {
+   "start": 1053.934,
+   "end": 1055.643,
+   "text": "merely to feel certain,"
+  },
+  {
+   "start": 1055.643,
+   "end": 1057.204,
+   "text": "remind me of the care"
+  },
+  {
+   "start": 1057.204,
+   "end": 1058.944,
+   "text": "I have already taken."
+  },
+  {
+   "start": 1058.944,
+   "end": 1061.389,
+   "text": "Bless this modest act of trust,"
+  },
+  {
+   "start": 1061.389,
+   "end": 1063.519,
+   "text": "and guide me in the quieter"
+  },
+  {
+   "start": 1063.519,
+   "end": 1065.289,
+   "text": "hours that follow."
+  },
+  {
+   "start": 1066.319,
+   "end": 1068.279,
+   "text": "If you want to affirm this"
+  },
+  {
+   "start": 1068.279,
+   "end": 1070.012,
+   "text": "prayer in the comments,"
+  },
+  {
+   "start": 1070.012,
+   "end": 1071.021,
+   "text": "write amen."
+  },
+  {
+   "start": 1071.021,
+   "end": 1072.544,
+   "text": "Now let the Scripture"
+  },
+  {
+   "start": 1072.544,
+   "end": 1074.998,
+   "text": "readings accompany your rest."
+  },
+  {
+   "start": 1075.828,
+   "end": 1077.795,
+   "text": "You can let your eyes settle"
+  },
+  {
+   "start": 1077.795,
+   "end": 1080.083,
+   "text": "wherever they are comfortable."
+  },
+  {
+   "start": 1080.083,
+   "end": 1080.786,
+   "text": "From here,"
+  },
+  {
+   "start": 1080.786,
+   "end": 1082.332,
+   "text": "the pace stays gentle,"
+  },
+  {
+   "start": 1082.332,
+   "end": 1084.019,
+   "text": "with Scripture and short"
+  },
+  {
+   "start": 1084.019,
+   "end": 1085.745,
+   "text": "prayers for the night."
+  },
+  {
+   "start": 1085.745,
+   "end": 1087.612,
+   "text": "You do not need to keep"
+  },
+  {
+   "start": 1087.612,
+   "end": 1089.659,
+   "text": "a list of the passages."
+  },
+  {
+   "start": 1089.659,
+   "end": 1092.37,
+   "text": "You can receive one sentence and let"
+  },
+  {
+   "start": 1092.37,
+   "end": 1094.959,
+   "text": "the next arrive when it arrives."
+  },
+  {
+   "start": 1094.959,
+   "end": 1096.964,
+   "text": "The concern you set down"
+  },
+  {
+   "start": 1096.964,
+   "end": 1099.149,
+   "text": "has a next step already."
+  },
+  {
+   "start": 1099.149,
+   "end": 1100.686,
+   "text": "You may leave it there"
+  },
+  {
+   "start": 1100.686,
+   "end": 1101.874,
+   "text": "while you listen,"
+  },
+  {
+   "start": 1101.874,
+   "end": 1103.621,
+   "text": "without checking the time"
+  },
+  {
+   "start": 1103.621,
+   "end": 1105.857,
+   "text": "or measuring your progress."
+  },
+  {
+   "start": 1107.187,
+   "end": 1108.979,
+   "text": "When thou liest down,"
+  },
+  {
+   "start": 1108.979,
+   "end": 1111.292,
+   "text": "thou shalt not be afraid:"
+  },
+  {
+   "start": 1111.292,
+   "end": 1113.139,
+   "text": "yea, thou shalt lie down,"
+  },
+  {
+   "start": 1113.139,
+   "end": 1115.631,
+   "text": "and thy sleep shall be sweet."
+  },
+  {
+   "start": 1116.961,
+   "end": 1119.087,
+   "text": "You hear a picture of lying"
+  },
+  {
+   "start": 1119.087,
+   "end": 1121.707,
+   "text": "down within the life of wisdom."
+  },
+  {
+   "start": 1121.707,
+   "end": 1124.175,
+   "text": "You can let that picture be gentle"
+  },
+  {
+   "start": 1124.175,
+   "end": 1126.134,
+   "text": "company rather than another"
+  },
+  {
+   "start": 1126.134,
+   "end": 1128.564,
+   "text": "standard you must meet tonight."
+  },
+  {
+   "start": 1128.564,
+   "end": 1130.207,
+   "text": "If you are still alert,"
+  },
+  {
+   "start": 1130.207,
+   "end": 1131.707,
+   "text": "you can simply remain"
+  },
+  {
+   "start": 1131.707,
+   "end": 1133.459,
+   "text": "here with the reading."
+  },
+  {
+   "start": 1133.459,
+   "end": 1135.946,
+   "text": "You do not have to manufacture"
+  },
+  {
+   "start": 1135.946,
+   "end": 1138.033,
+   "text": "a particular sensation."
+  },
+  {
+   "start": 1138.033,
+   "end": 1139.945,
+   "text": "Your pillow can be a place"
+  },
+  {
+   "start": 1139.945,
+   "end": 1141.122,
+   "text": "to receive care,"
+  },
+  {
+   "start": 1141.122,
+   "end": 1143.549,
+   "text": "and this verse can be a prayerful"
+  },
+  {
+   "start": 1143.549,
+   "end": 1146.106,
+   "text": "hope you hold with open hands."
+  },
+  {
+   "start": 1147.436,
+   "end": 1147.853,
+   "text": "Lord,"
+  },
+  {
+   "start": 1147.853,
+   "end": 1150.274,
+   "text": "I receive this ordinary place"
+  },
+  {
+   "start": 1150.274,
+   "end": 1152.373,
+   "text": "of rest with gratitude."
+  },
+  {
+   "start": 1152.373,
+   "end": 1153.909,
+   "text": "Help me stop treating"
+  },
+  {
+   "start": 1153.909,
+   "end": 1155.884,
+   "text": "the bedside as a desk where"
+  },
+  {
+   "start": 1155.884,
+   "end": 1158.185,
+   "text": "every problem must be solved."
+  },
+  {
+   "start": 1158.185,
+   "end": 1160.23,
+   "text": "Let the blanket be a blanket"
+  },
+  {
+   "start": 1160.23,
+   "end": 1162.163,
+   "text": "and the pillow a pillow."
+  },
+  {
+   "start": 1162.163,
+   "end": 1163.376,
+   "text": "I ask for rest,"
+  },
+  {
+   "start": 1163.376,
+   "end": 1165.155,
+   "text": "and I leave the manner"
+  },
+  {
+   "start": 1165.155,
+   "end": 1167.761,
+   "text": "and timing outside my command."
+  },
+  {
+   "start": 1167.761,
+   "end": 1169.823,
+   "text": "Give me patience with this"
+  },
+  {
+   "start": 1169.823,
+   "end": 1171.589,
+   "text": "night as it unfolds."
+  },
+  {
+   "start": 1171.589,
+   "end": 1173.699,
+   "text": "May I meet my own weariness"
+  },
+  {
+   "start": 1173.699,
+   "end": 1175.652,
+   "text": "with the kindness I would"
+  },
+  {
+   "start": 1175.652,
+   "end": 1177.955,
+   "text": "offer someone dear to me."
+  },
+  {
+   "start": 1179.285,
+   "end": 1180.997,
+   "text": "You can allow the room"
+  },
+  {
+   "start": 1180.997,
+   "end": 1182.345,
+   "text": "to be ordinary."
+  },
+  {
+   "start": 1182.345,
+   "end": 1184.89,
+   "text": "A distant sound, a little light,"
+  },
+  {
+   "start": 1184.89,
+   "end": 1186.878,
+   "text": "or a passing thought does"
+  },
+  {
+   "start": 1186.878,
+   "end": 1189.523,
+   "text": "not require you to begin again."
+  },
+  {
+   "start": 1189.523,
+   "end": 1192.106,
+   "text": "You can stay with what is comfortable"
+  },
+  {
+   "start": 1192.106,
+   "end": 1194.311,
+   "text": "and let the reading continue."
+  },
+  {
+   "start": 1194.311,
+   "end": 1196.246,
+   "text": "You do not need to create"
+  },
+  {
+   "start": 1196.246,
+   "end": 1197.871,
+   "text": "an ideal night before"
+  },
+  {
+   "start": 1197.871,
+   "end": 1199.909,
+   "text": "you are allowed to rest."
+  },
+  {
+   "start": 1199.909,
+   "end": 1200.814,
+   "text": "You are here"
+  },
+  {
+   "start": 1200.814,
+   "end": 1202.473,
+   "text": "in the night you have,"
+  },
+  {
+   "start": 1202.473,
+   "end": 1203.906,
+   "text": "and you can meet it"
+  },
+  {
+   "start": 1203.906,
+   "end": 1205.34,
+   "text": "with less struggle,"
+  },
+  {
+   "start": 1205.34,
+   "end": 1207.726,
+   "text": "one quiet moment at a time."
+  },
+  {
+   "start": 1209.056,
+   "end": 1209.86,
+   "text": "It is vain"
+  },
+  {
+   "start": 1209.86,
+   "end": 1211.87,
+   "text": "for you to rise up early,"
+  },
+  {
+   "start": 1211.87,
+   "end": 1213.077,
+   "text": "to sit up late,"
+  },
+  {
+   "start": 1213.077,
+   "end": 1215.508,
+   "text": "to eat the bread of sorrows:"
+  },
+  {
+   "start": 1215.508,
+   "end": 1218.631,
+   "text": "for so he giveth his beloved sleep."
+  },
+  {
+   "start": 1219.961,
+   "end": 1222.13,
+   "text": "This psalm speaks into the work"
+  },
+  {
+   "start": 1222.13,
+   "end": 1223.64,
+   "text": "of building a life."
+  },
+  {
+   "start": 1223.64,
+   "end": 1226.175,
+   "text": "You may know the feeling of adding"
+  },
+  {
+   "start": 1226.175,
+   "end": 1228.785,
+   "text": "another hour because you are afraid"
+  },
+  {
+   "start": 1228.785,
+   "end": 1231.5,
+   "text": "everything depends on your effort."
+  },
+  {
+   "start": 1231.5,
+   "end": 1232.84,
+   "text": "You can hear its"
+  },
+  {
+   "start": 1232.84,
+   "end": 1235.115,
+   "text": "invitation to dependence."
+  },
+  {
+   "start": 1235.115,
+   "end": 1236.462,
+   "text": "Your work matters,"
+  },
+  {
+   "start": 1236.462,
+   "end": 1238.109,
+   "text": "and you can also reach"
+  },
+  {
+   "start": 1238.109,
+   "end": 1239.561,
+   "text": "a stopping place."
+  },
+  {
+   "start": 1239.561,
+   "end": 1240.833,
+   "text": "You are a person"
+  },
+  {
+   "start": 1240.833,
+   "end": 1242.92,
+   "text": "who needs replenishment."
+  },
+  {
+   "start": 1242.92,
+   "end": 1245.011,
+   "text": "You can let that need belong"
+  },
+  {
+   "start": 1245.011,
+   "end": 1247.549,
+   "text": "within your relationship with God,"
+  },
+  {
+   "start": 1247.549,
+   "end": 1249.416,
+   "text": "without making exhaustion"
+  },
+  {
+   "start": 1249.416,
+   "end": 1251.931,
+   "text": "the measure of your devotion."
+  },
+  {
+   "start": 1253.261,
+   "end": 1253.572,
+   "text": "God,"
+  },
+  {
+   "start": 1253.572,
+   "end": 1255.285,
+   "text": "I leave the extra hour"
+  },
+  {
+   "start": 1255.285,
+   "end": 1256.997,
+   "text": "of effort I was trying"
+  },
+  {
+   "start": 1256.997,
+   "end": 1259.201,
+   "text": "to borrow from this night."
+  },
+  {
+   "start": 1259.201,
+   "end": 1260.823,
+   "text": "If my duties require"
+  },
+  {
+   "start": 1260.823,
+   "end": 1262.04,
+   "text": "me to be awake,"
+  },
+  {
+   "start": 1262.04,
+   "end": 1264.068,
+   "text": "give me practical support"
+  },
+  {
+   "start": 1264.068,
+   "end": 1265.285,
+   "text": "and a chance to"
+  },
+  {
+   "start": 1265.285,
+   "end": 1266.763,
+   "text": "rest when I can."
+  },
+  {
+   "start": 1266.763,
+   "end": 1268.427,
+   "text": "If I am free to stop,"
+  },
+  {
+   "start": 1268.427,
+   "end": 1270.825,
+   "text": "help me accept that freedom."
+  },
+  {
+   "start": 1270.825,
+   "end": 1272.818,
+   "text": "I ask for enough humility"
+  },
+  {
+   "start": 1272.818,
+   "end": 1275.549,
+   "text": "to live as a person with limits."
+  },
+  {
+   "start": 1275.549,
+   "end": 1277.485,
+   "text": "Receive the work I completed"
+  },
+  {
+   "start": 1277.485,
+   "end": 1279.352,
+   "text": "and the work that must wait"
+  },
+  {
+   "start": 1279.352,
+   "end": 1281.638,
+   "text": "for another part of the day."
+  },
+  {
+   "start": 1282.968,
+   "end": 1285.195,
+   "text": "You can let the last sentence"
+  },
+  {
+   "start": 1285.195,
+   "end": 1287.372,
+   "text": "fade without replacing it."
+  },
+  {
+   "start": 1287.372,
+   "end": 1289.402,
+   "text": "Notice the support beneath"
+  },
+  {
+   "start": 1289.402,
+   "end": 1290.987,
+   "text": "your head or back."
+  },
+  {
+   "start": 1290.987,
+   "end": 1294.004,
+   "text": "There is no special rhythm to achieve."
+  },
+  {
+   "start": 1294.004,
+   "end": 1295.225,
+   "text": "You may be quiet"
+  },
+  {
+   "start": 1295.225,
+   "end": 1296.674,
+   "text": "for a little while,"
+  },
+  {
+   "start": 1296.674,
+   "end": 1298.429,
+   "text": "with nothing to explain"
+  },
+  {
+   "start": 1298.429,
+   "end": 1300.839,
+   "text": "and no new concern to name."
+  },
+  {
+   "start": 1303.669,
+   "end": 1305.468,
+   "text": "Peace I leave with you,"
+  },
+  {
+   "start": 1305.468,
+   "end": 1307.604,
+   "text": "my peace I give unto you:"
+  },
+  {
+   "start": 1307.604,
+   "end": 1309.652,
+   "text": "not as the world giveth,"
+  },
+  {
+   "start": 1309.652,
+   "end": 1311.197,
+   "text": "give I unto you."
+  },
+  {
+   "start": 1311.197,
+   "end": 1313.559,
+   "text": "Let not your heart be troubled,"
+  },
+  {
+   "start": 1313.559,
+   "end": 1315.814,
+   "text": "neither let it be afraid."
+  },
+  {
+   "start": 1317.144,
+   "end": 1319.122,
+   "text": "Jesus speaks these words"
+  },
+  {
+   "start": 1319.122,
+   "end": 1321.677,
+   "text": "to his disciples as they face a"
+  },
+  {
+   "start": 1321.677,
+   "end": 1323.34,
+   "text": "difficult parting."
+  },
+  {
+   "start": 1323.34,
+   "end": 1324.803,
+   "text": "You can hear the care"
+  },
+  {
+   "start": 1324.803,
+   "end": 1326.933,
+   "text": "in what he leaves with them."
+  },
+  {
+   "start": 1326.933,
+   "end": 1329.402,
+   "text": "His peace is offered amid a story"
+  },
+  {
+   "start": 1329.402,
+   "end": 1331.347,
+   "text": "that still contains sorrow"
+  },
+  {
+   "start": 1331.347,
+   "end": 1332.724,
+   "text": "and uncertainty."
+  },
+  {
+   "start": 1332.724,
+   "end": 1335.263,
+   "text": "You can bring your own unfinished"
+  },
+  {
+   "start": 1335.263,
+   "end": 1337.213,
+   "text": "story near these words."
+  },
+  {
+   "start": 1337.213,
+   "end": 1338.943,
+   "text": "You do not need to know"
+  },
+  {
+   "start": 1338.943,
+   "end": 1340.401,
+   "text": "its next chapter."
+  },
+  {
+   "start": 1340.401,
+   "end": 1343.003,
+   "text": "You can receive Christ’s invitation"
+  },
+  {
+   "start": 1343.003,
+   "end": 1345.159,
+   "text": "as a gift addressed to people"
+  },
+  {
+   "start": 1345.159,
+   "end": 1347.962,
+   "text": "who need his company and courage."
+  },
+  {
+   "start": 1349.292,
+   "end": 1349.722,
+   "text": "Jesus,"
+  },
+  {
+   "start": 1349.722,
+   "end": 1351.799,
+   "text": "help me receive what you give"
+  },
+  {
+   "start": 1351.799,
+   "end": 1353.483,
+   "text": "with a willing heart."
+  },
+  {
+   "start": 1353.483,
+   "end": 1355.465,
+   "text": "I have searched for peace"
+  },
+  {
+   "start": 1355.465,
+   "end": 1357.05,
+   "text": "in a completed list,"
+  },
+  {
+   "start": 1357.05,
+   "end": 1358.714,
+   "text": "an encouraging reply,"
+  },
+  {
+   "start": 1358.714,
+   "end": 1361.748,
+   "text": "or knowing exactly what will happen."
+  },
+  {
+   "start": 1361.748,
+   "end": 1363.658,
+   "text": "Those things cannot carry"
+  },
+  {
+   "start": 1363.658,
+   "end": 1365.747,
+   "text": "everything I ask of them."
+  },
+  {
+   "start": 1365.747,
+   "end": 1367.996,
+   "text": "I turn toward you now."
+  },
+  {
+   "start": 1367.996,
+   "end": 1370.243,
+   "text": "Stay with me in the uncertainty"
+  },
+  {
+   "start": 1370.243,
+   "end": 1371.185,
+   "text": "that remains,"
+  },
+  {
+   "start": 1371.185,
+   "end": 1372.997,
+   "text": "and teach me to recognize"
+  },
+  {
+   "start": 1372.997,
+   "end": 1375.317,
+   "text": "your kindness through Scripture,"
+  },
+  {
+   "start": 1375.317,
+   "end": 1376.404,
+   "text": "through prayer,"
+  },
+  {
+   "start": 1376.404,
+   "end": 1378.724,
+   "text": "and through the people who offer"
+  },
+  {
+   "start": 1378.724,
+   "end": 1380.741,
+   "text": "steady care in my life."
+  },
+  {
+   "start": 1382.071,
+   "end": 1384.298,
+   "text": "You can leave the unanswered"
+  },
+  {
+   "start": 1384.298,
+   "end": 1386.069,
+   "text": "message where it is."
+  },
+  {
+   "start": 1386.069,
+   "end": 1387.166,
+   "text": "You have brought"
+  },
+  {
+   "start": 1387.166,
+   "end": 1388.812,
+   "text": "the waiting into prayer,"
+  },
+  {
+   "start": 1388.812,
+   "end": 1390.115,
+   "text": "and you do not need"
+  },
+  {
+   "start": 1390.115,
+   "end": 1392.009,
+   "text": "to refresh the story now."
+  },
+  {
+   "start": 1392.009,
+   "end": 1393.991,
+   "text": "Somewhere beyond this room,"
+  },
+  {
+   "start": 1393.991,
+   "end": 1396.046,
+   "text": "another person has their own"
+  },
+  {
+   "start": 1396.046,
+   "end": 1398.355,
+   "text": "evening and their own limits."
+  },
+  {
+   "start": 1398.355,
+   "end": 1400.945,
+   "text": "You can let them have that space."
+  },
+  {
+   "start": 1400.945,
+   "end": 1403.685,
+   "text": "You can let yourself have this one."
+  },
+  {
+   "start": 1403.685,
+   "end": 1404.805,
+   "text": "For the moment,"
+  },
+  {
+   "start": 1404.805,
+   "end": 1406.522,
+   "text": "your attention may rest"
+  },
+  {
+   "start": 1406.522,
+   "end": 1408.389,
+   "text": "with words already given,"
+  },
+  {
+   "start": 1408.389,
+   "end": 1410.629,
+   "text": "instead of words you are still"
+  },
+  {
+   "start": 1410.629,
+   "end": 1412.398,
+   "text": "waiting to receive."
+  },
+  {
+   "start": 1413.728,
+   "end": 1415.445,
+   "text": "The LORD shall preserve"
+  },
+  {
+   "start": 1415.445,
+   "end": 1417.044,
+   "text": "thee from all evil:"
+  },
+  {
+   "start": 1417.044,
+   "end": 1419.805,
+   "text": "he shall preserve thy soul."
+  },
+  {
+   "start": 1421.135,
+   "end": 1423.8,
+   "text": "The pilgrim’s song gives you language"
+  },
+  {
+   "start": 1423.8,
+   "end": 1426.285,
+   "text": "for trusting the Lord as keeper."
+  },
+  {
+   "start": 1426.285,
+   "end": 1429.033,
+   "text": "You can hear its strong confidence"
+  },
+  {
+   "start": 1429.033,
+   "end": 1431.215,
+   "text": "without using it to predict"
+  },
+  {
+   "start": 1431.215,
+   "end": 1433.335,
+   "text": "the details of tomorrow."
+  },
+  {
+   "start": 1433.335,
+   "end": 1435.936,
+   "text": "The psalm turns your attention toward"
+  },
+  {
+   "start": 1435.936,
+   "end": 1438.507,
+   "text": "the One to whom your life matters."
+  },
+  {
+   "start": 1438.507,
+   "end": 1440.585,
+   "text": "You can pray for protection"
+  },
+  {
+   "start": 1440.585,
+   "end": 1442.663,
+   "text": "and still make wise choices"
+  },
+  {
+   "start": 1442.663,
+   "end": 1444.767,
+   "text": "in the world you inhabit."
+  },
+  {
+   "start": 1444.767,
+   "end": 1446.047,
+   "text": "Here in this quiet"
+  },
+  {
+   "start": 1446.047,
+   "end": 1447.54,
+   "text": "portion of the night,"
+  },
+  {
+   "start": 1447.54,
+   "end": 1449.247,
+   "text": "you can place your whole"
+  },
+  {
+   "start": 1449.247,
+   "end": 1451.303,
+   "text": "self within that prayer."
+  },
+  {
+   "start": 1452.633,
+   "end": 1454.097,
+   "text": "Keeper of my life,"
+  },
+  {
+   "start": 1454.097,
+   "end": 1455.805,
+   "text": "I entrust the deepest"
+  },
+  {
+   "start": 1455.805,
+   "end": 1458.019,
+   "text": "parts of me to your care."
+  },
+  {
+   "start": 1458.019,
+   "end": 1460.006,
+   "text": "Preserve what is tender from"
+  },
+  {
+   "start": 1460.006,
+   "end": 1462.103,
+   "text": "becoming hard through fear."
+  },
+  {
+   "start": 1462.103,
+   "end": 1464.569,
+   "text": "Protect my willingness to love,"
+  },
+  {
+   "start": 1464.569,
+   "end": 1466.797,
+   "text": "my desire to tell the truth,"
+  },
+  {
+   "start": 1466.797,
+   "end": 1469.92,
+   "text": "and my readiness to ask for guidance."
+  },
+  {
+   "start": 1469.92,
+   "end": 1472.284,
+   "text": "Where I need a wise boundary,"
+  },
+  {
+   "start": 1472.284,
+   "end": 1474.175,
+   "text": "help me recognize it."
+  },
+  {
+   "start": 1474.175,
+   "end": 1477.083,
+   "text": "Where I need a trustworthy companion,"
+  },
+  {
+   "start": 1477.083,
+   "end": 1478.835,
+   "text": "help me welcome one."
+  },
+  {
+   "start": 1478.835,
+   "end": 1481.089,
+   "text": "I rest my hope in you beyond"
+  },
+  {
+   "start": 1481.089,
+   "end": 1482.376,
+   "text": "the small circle"
+  },
+  {
+   "start": 1482.376,
+   "end": 1484.497,
+   "text": "of what I can oversee."
+  },
+  {
+   "start": 1485.827,
+   "end": 1487.757,
+   "text": "The LORD shall preserve thy"
+  },
+  {
+   "start": 1487.757,
+   "end": 1489.472,
+   "text": "going out and thy coming"
+  },
+  {
+   "start": 1489.472,
+   "end": 1491.188,
+   "text": "in from this time forth,"
+  },
+  {
+   "start": 1491.188,
+   "end": 1493.11,
+   "text": "and even for evermore."
+  },
+  {
+   "start": 1494.44,
+   "end": 1496.761,
+   "text": "You have crossed doorways today,"
+  },
+  {
+   "start": 1496.761,
+   "end": 1499.155,
+   "text": "entering places with things to do"
+  },
+  {
+   "start": 1499.155,
+   "end": 1502.236,
+   "text": "and leaving them with things unfinished."
+  },
+  {
+   "start": 1502.236,
+   "end": 1504.08,
+   "text": "The psalm includes coming"
+  },
+  {
+   "start": 1504.08,
+   "end": 1506.768,
+   "text": "and going in its language of care."
+  },
+  {
+   "start": 1506.768,
+   "end": 1509.572,
+   "text": "You can let that breadth comfort you."
+  },
+  {
+   "start": 1509.572,
+   "end": 1511.96,
+   "text": "Your life is more than the last"
+  },
+  {
+   "start": 1511.96,
+   "end": 1514.296,
+   "text": "difficult moment before bed."
+  },
+  {
+   "start": 1514.296,
+   "end": 1515.721,
+   "text": "You are known across"
+  },
+  {
+   "start": 1515.721,
+   "end": 1518.001,
+   "text": "the ordinary movements of a day,"
+  },
+  {
+   "start": 1518.001,
+   "end": 1520.352,
+   "text": "and you can entrust the movements"
+  },
+  {
+   "start": 1520.352,
+   "end": 1522.846,
+   "text": "still ahead without walking through"
+  },
+  {
+   "start": 1522.846,
+   "end": 1525.547,
+   "text": "them in your imagination tonight."
+  },
+  {
+   "start": 1526.877,
+   "end": 1527.259,
+   "text": "Lord,"
+  },
+  {
+   "start": 1527.259,
+   "end": 1529.78,
+   "text": "receive the journeys of this day,"
+  },
+  {
+   "start": 1529.78,
+   "end": 1531.154,
+   "text": "the familiar roads"
+  },
+  {
+   "start": 1531.154,
+   "end": 1533.244,
+   "text": "and the unexpected turns."
+  },
+  {
+   "start": 1533.244,
+   "end": 1535.243,
+   "text": "I thank you for places where"
+  },
+  {
+   "start": 1535.243,
+   "end": 1537.027,
+   "text": "I was welcomed and people"
+  },
+  {
+   "start": 1537.027,
+   "end": 1538.992,
+   "text": "whose presence helped me."
+  },
+  {
+   "start": 1538.992,
+   "end": 1541.186,
+   "text": "I bring the places that felt"
+  },
+  {
+   "start": 1541.186,
+   "end": 1542.777,
+   "text": "difficult as well."
+  },
+  {
+   "start": 1542.777,
+   "end": 1544.4,
+   "text": "As I remain here now,"
+  },
+  {
+   "start": 1544.4,
+   "end": 1546.486,
+   "text": "I release the need to visit"
+  },
+  {
+   "start": 1546.486,
+   "end": 1548.675,
+   "text": "them all again in thought."
+  },
+  {
+   "start": 1548.675,
+   "end": 1550.378,
+   "text": "When it is time to go"
+  },
+  {
+   "start": 1550.378,
+   "end": 1552.325,
+   "text": "out or come in tomorrow,"
+  },
+  {
+   "start": 1552.325,
+   "end": 1554.596,
+   "text": "guide my choices with wisdom"
+  },
+  {
+   "start": 1554.596,
+   "end": 1556.811,
+   "text": "and my words with care."
+  },
+  {
+   "start": 1558.141,
+   "end": 1560.216,
+   "text": "You may find that you have"
+  },
+  {
+   "start": 1560.216,
+   "end": 1561.493,
+   "text": "fewer words now,"
+  },
+  {
+   "start": 1561.493,
+   "end": 1562.85,
+   "text": "or you may notice"
+  },
+  {
+   "start": 1562.85,
+   "end": 1565.425,
+   "text": "that your mind remains active."
+  },
+  {
+   "start": 1565.425,
+   "end": 1566.235,
+   "text": "Either way,"
+  },
+  {
+   "start": 1566.235,
+   "end": 1569.211,
+   "text": "you can let the prayer become simpler."
+  },
+  {
+   "start": 1569.211,
+   "end": 1572.057,
+   "text": "You have already said much that matters."
+  },
+  {
+   "start": 1572.057,
+   "end": 1574.556,
+   "text": "You do not need to repeat every"
+  },
+  {
+   "start": 1574.556,
+   "end": 1576.57,
+   "text": "concern to keep it within"
+  },
+  {
+   "start": 1576.57,
+   "end": 1578.04,
+   "text": "God’s attention."
+  },
+  {
+   "start": 1578.04,
+   "end": 1580.127,
+   "text": "You can rest beside a single"
+  },
+  {
+   "start": 1580.127,
+   "end": 1582.064,
+   "text": "truth from these readings,"
+  },
+  {
+   "start": 1582.064,
+   "end": 1584.822,
+   "text": "allowing the rest of the conversation"
+  },
+  {
+   "start": 1584.822,
+   "end": 1587.207,
+   "text": "to become quiet without bringing"
+  },
+  {
+   "start": 1587.207,
+   "end": 1589.569,
+   "text": "it to a perfect conclusion."
+  },
+  {
+   "start": 1590.899,
+   "end": 1591.442,
+   "text": "Father,"
+  },
+  {
+   "start": 1591.442,
+   "end": 1593.306,
+   "text": "I bring the urge to keep"
+  },
+  {
+   "start": 1593.306,
+   "end": 1594.961,
+   "text": "counting the hours."
+  },
+  {
+   "start": 1594.961,
+   "end": 1596.902,
+   "text": "Sometimes I turn the clock"
+  },
+  {
+   "start": 1596.902,
+   "end": 1599.292,
+   "text": "into another source of pressure,"
+  },
+  {
+   "start": 1599.292,
+   "end": 1601.861,
+   "text": "measuring how well I am resting."
+  },
+  {
+   "start": 1601.861,
+   "end": 1604.729,
+   "text": "Help me step away from that judgment."
+  },
+  {
+   "start": 1604.729,
+   "end": 1607.597,
+   "text": "Give me patience for the present moment,"
+  },
+  {
+   "start": 1607.597,
+   "end": 1610.072,
+   "text": "whether it is quiet or restless."
+  },
+  {
+   "start": 1610.072,
+   "end": 1611.97,
+   "text": "I ask for the rest I need"
+  },
+  {
+   "start": 1611.97,
+   "end": 1614.732,
+   "text": "without bargaining with the night."
+  },
+  {
+   "start": 1614.732,
+   "end": 1617.526,
+   "text": "Receive my wish for an easier morning,"
+  },
+  {
+   "start": 1617.526,
+   "end": 1620.467,
+   "text": "and help me meet whatever morning brings"
+  },
+  {
+   "start": 1620.467,
+   "end": 1623.317,
+   "text": "with appropriate support and care."
+  },
+  {
+   "start": 1624.647,
+   "end": 1625.596,
+   "text": "Come unto me,"
+  },
+  {
+   "start": 1625.596,
+   "end": 1626.909,
+   "text": "all ye that labour"
+  },
+  {
+   "start": 1626.909,
+   "end": 1628.369,
+   "text": "and are heavy laden,"
+  },
+  {
+   "start": 1628.369,
+   "end": 1630.543,
+   "text": "and I will give you rest."
+  },
+  {
+   "start": 1631.873,
+   "end": 1634.869,
+   "text": "The invitation begins with coming."
+  },
+  {
+   "start": 1634.869,
+   "end": 1636.982,
+   "text": "You can come with the weight"
+  },
+  {
+   "start": 1636.982,
+   "end": 1638.415,
+   "text": "you actually carry,"
+  },
+  {
+   "start": 1638.415,
+   "end": 1640.377,
+   "text": "even if you cannot explain"
+  },
+  {
+   "start": 1640.377,
+   "end": 1642.217,
+   "text": "why it feels so heavy."
+  },
+  {
+   "start": 1642.217,
+   "end": 1644.54,
+   "text": "You can come after a productive"
+  },
+  {
+   "start": 1644.54,
+   "end": 1646.339,
+   "text": "day or a day that seemed"
+  },
+  {
+   "start": 1646.339,
+   "end": 1648.093,
+   "text": "to get away from you."
+  },
+  {
+   "start": 1648.093,
+   "end": 1649.749,
+   "text": "You can come with faith"
+  },
+  {
+   "start": 1649.749,
+   "end": 1651.153,
+   "text": "that feels small."
+  },
+  {
+   "start": 1651.153,
+   "end": 1653.557,
+   "text": "You do not need to sort yourself"
+  },
+  {
+   "start": 1653.557,
+   "end": 1656.667,
+   "text": "into a more acceptable condition first."
+  },
+  {
+   "start": 1656.667,
+   "end": 1659.19,
+   "text": "Let the welcome of Jesus have room"
+  },
+  {
+   "start": 1659.19,
+   "end": 1662.137,
+   "text": "in the place where you are resting."
+  },
+  {
+   "start": 1663.467,
+   "end": 1663.95,
+   "text": "Jesus,"
+  },
+  {
+   "start": 1663.95,
+   "end": 1666.845,
+   "text": "I answer your welcome with the small"
+  },
+  {
+   "start": 1666.845,
+   "end": 1669.599,
+   "text": "amount of attention I have left."
+  },
+  {
+   "start": 1669.599,
+   "end": 1671.651,
+   "text": "I bring the weight of trying"
+  },
+  {
+   "start": 1671.651,
+   "end": 1674.323,
+   "text": "to be ready for every possibility."
+  },
+  {
+   "start": 1674.323,
+   "end": 1676.627,
+   "text": "Teach me a life that receives"
+  },
+  {
+   "start": 1676.627,
+   "end": 1679.111,
+   "text": "help and makes room for rest."
+  },
+  {
+   "start": 1679.111,
+   "end": 1681.275,
+   "text": "I leave the next step in its"
+  },
+  {
+   "start": 1681.275,
+   "end": 1683.387,
+   "text": "appointed place tomorrow."
+  },
+  {
+   "start": 1683.387,
+   "end": 1685.533,
+   "text": "For these remaining moments,"
+  },
+  {
+   "start": 1685.533,
+   "end": 1688.089,
+   "text": "let my prayer be uncomplicated:"
+  },
+  {
+   "start": 1688.089,
+   "end": 1689.74,
+   "text": "I am here before you,"
+  },
+  {
+   "start": 1689.74,
+   "end": 1691.155,
+   "text": "with my weariness,"
+  },
+  {
+   "start": 1691.155,
+   "end": 1693.592,
+   "text": "trusting your invitation enough"
+  },
+  {
+   "start": 1693.592,
+   "end": 1696.93,
+   "text": "to stop preparing another explanation."
+  },
+  {
+   "start": 1698.26,
+   "end": 1699.938,
+   "text": "You can leave tonight"
+  },
+  {
+   "start": 1699.938,
+   "end": 1701.536,
+   "text": "unfinished in small,"
+  },
+  {
+   "start": 1701.536,
+   "end": 1702.835,
+   "text": "ordinary ways."
+  },
+  {
+   "start": 1702.835,
+   "end": 1705.148,
+   "text": "The note can stay folded."
+  },
+  {
+   "start": 1705.148,
+   "end": 1706.779,
+   "text": "The message can remain"
+  },
+  {
+   "start": 1706.779,
+   "end": 1708.293,
+   "text": "where you left it."
+  },
+  {
+   "start": 1708.293,
+   "end": 1709.761,
+   "text": "The question can wait"
+  },
+  {
+   "start": 1709.761,
+   "end": 1712.249,
+   "text": "for the person who can answer it."
+  },
+  {
+   "start": 1712.249,
+   "end": 1713.86,
+   "text": "You have not forgotten"
+  },
+  {
+   "start": 1713.86,
+   "end": 1715.651,
+   "text": "your responsibilities;"
+  },
+  {
+   "start": 1715.651,
+   "end": 1717.479,
+   "text": "you have given one of them"
+  },
+  {
+   "start": 1717.479,
+   "end": 1718.924,
+   "text": "a practical place."
+  },
+  {
+   "start": 1718.924,
+   "end": 1720.97,
+   "text": "Now you can allow the night"
+  },
+  {
+   "start": 1720.97,
+   "end": 1722.485,
+   "text": "to contain something"
+  },
+  {
+   "start": 1722.485,
+   "end": 1724.181,
+   "text": "besides preparation."
+  },
+  {
+   "start": 1724.181,
+   "end": 1726.017,
+   "text": "You can listen, be still,"
+  },
+  {
+   "start": 1726.017,
+   "end": 1728.44,
+   "text": "and receive these moments without"
+  },
+  {
+   "start": 1728.44,
+   "end": 1731.507,
+   "text": "turning them into another assignment."
+  },
+  {
+   "start": 1732.837,
+   "end": 1733.36,
+   "text": "Father,"
+  },
+  {
+   "start": 1733.36,
+   "end": 1735.376,
+   "text": "I place this evening before"
+  },
+  {
+   "start": 1735.376,
+   "end": 1737.348,
+   "text": "you just as it has been."
+  },
+  {
+   "start": 1737.348,
+   "end": 1739.289,
+   "text": "Thank you for hearing each"
+  },
+  {
+   "start": 1739.289,
+   "end": 1741.679,
+   "text": "concern separately and receiving"
+  },
+  {
+   "start": 1741.679,
+   "end": 1744.099,
+   "text": "the words I struggled to find."
+  },
+  {
+   "start": 1744.099,
+   "end": 1746.823,
+   "text": "Help me carry the practical commitment"
+  },
+  {
+   "start": 1746.823,
+   "end": 1749.441,
+   "text": "into tomorrow when its time comes."
+  },
+  {
+   "start": 1749.441,
+   "end": 1750.41,
+   "text": "Until then,"
+  },
+  {
+   "start": 1750.41,
+   "end": 1753.142,
+   "text": "I ask for a gentle heart toward"
+  },
+  {
+   "start": 1753.142,
+   "end": 1755.701,
+   "text": "myself and those around me."
+  },
+  {
+   "start": 1755.701,
+   "end": 1758.237,
+   "text": "Let your care remain the thought"
+  },
+  {
+   "start": 1758.237,
+   "end": 1760.873,
+   "text": "beside my unanswered questions."
+  },
+  {
+   "start": 1760.873,
+   "end": 1763.705,
+   "text": "I leave the conversation here for now,"
+  },
+  {
+   "start": 1763.705,
+   "end": 1766.365,
+   "text": "held within your enduring love."
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Good evening.",
+   "start": 0.3,
+   "end": 1.644
+  },
+  {
+   "segment": "hook",
+   "text": "Before you check again, pray through tonight’s worries and place each concern in God’s care.",
+   "start": 1.824,
+   "end": 8.075
+  },
+  {
+   "segment": "invitation",
+   "text": "You may have checked the same message several times, hoping a reply would change how you feel.",
+   "start": 9.055,
+   "end": 15.711
+  },
+  {
+   "segment": "invitation",
+   "text": "You can put the phone within reach but turn its face away.",
+   "start": 15.891,
+   "end": 20.221
+  },
+  {
+   "segment": "invitation",
+   "text": "Let the place where you are sitting or lying support your weight.",
+   "start": 20.401,
+   "end": 24.796
+  },
+  {
+   "segment": "invitation",
+   "text": "You can arrive with a busy mind.",
+   "start": 24.976,
+   "end": 27.664
+  },
+  {
+   "segment": "invitation",
+   "text": "In this prayer, you will name your concerns separately, so you do not have to wrestle with every uncertainty at once.",
+   "start": 27.844,
+   "end": 35.993
+  },
+  {
+   "segment": "scripture-peter",
+   "text": "Casting all your care upon him;",
+   "start": 37.373,
+   "end": 39.955
+  },
+  {
+   "segment": "scripture-peter",
+   "text": "for he careth for you.",
+   "start": 40.135,
+   "end": 42.204
+  },
+  {
+   "segment": "prayer-first-care",
+   "text": "Father, I begin with the concern closest to the surface.",
+   "start": 43.884,
+   "end": 48.044
+  },
+  {
+   "segment": "prayer-first-care",
+   "text": "I give it a plain name before you.",
+   "start": 48.224,
+   "end": 50.848
+  },
+  {
+   "segment": "prayer-first-care",
+   "text": "It may be an unanswered message, a decision at work, or someone whose voice sounded troubled.",
+   "start": 51.028,
+   "end": 58.409
+  },
+  {
+   "segment": "prayer-first-care",
+   "text": "I have carried it through dinner and into this room.",
+   "start": 58.589,
+   "end": 62.365
+  },
+  {
+   "segment": "prayer-first-care",
+   "text": "Now I bring it into our conversation.",
+   "start": 62.545,
+   "end": 65.767
+  },
+  {
+   "segment": "prayer-first-care",
+   "text": "Help me entrust this particular care to you, even before my feelings catch up with the words I am praying.",
+   "start": 65.947,
+   "end": 73.541
+  },
+  {
+   "segment": "reflection-separate",
+   "text": "When several worries arrive together, you can feel as though your whole life needs fixing before bedtime.",
+   "start": 74.921,
+   "end": 82.452
+  },
+  {
+   "segment": "reflection-separate",
+   "text": "You can take a smaller approach here.",
+   "start": 82.632,
+   "end": 85.363
+  },
+  {
+   "segment": "reflection-separate",
+   "text": "You are allowed to name one subject and let the others wait their turn.",
+   "start": 85.543,
+   "end": 90.727
+  },
+  {
+   "segment": "reflection-separate",
+   "text": "You do not need a complete explanation.",
+   "start": 90.907,
+   "end": 93.872
+  },
+  {
+   "segment": "reflection-separate",
+   "text": "A person’s name, a pending answer, or a sentence about tomorrow is enough to begin.",
+   "start": 94.052,
+   "end": 100.644
+  },
+  {
+   "segment": "reflection-separate",
+   "text": "You are addressing someone who cares about the person doing the praying.",
+   "start": 100.824,
+   "end": 105.795
+  },
+  {
+   "segment": "prayer-awaited-answer",
+   "text": "Lord, I bring the answer I cannot make arrive.",
+   "start": 107.175,
+   "end": 110.801
+  },
+  {
+   "segment": "prayer-awaited-answer",
+   "text": "I have imagined reasons for the silence and measured the hours since I last checked.",
+   "start": 110.981,
+   "end": 117.168
+  },
+  {
+   "segment": "prayer-awaited-answer",
+   "text": "Help me stop treating a missing reply as a verdict about my worth.",
+   "start": 117.348,
+   "end": 122.34
+  },
+  {
+   "segment": "prayer-awaited-answer",
+   "text": "If there is a sensible time to follow up, let me choose it in daylight.",
+   "start": 122.52,
+   "end": 127.896
+  },
+  {
+   "segment": "prayer-awaited-answer",
+   "text": "For this evening, receive both my hope and my disappointment.",
+   "start": 128.076,
+   "end": 132.641
+  },
+  {
+   "segment": "prayer-awaited-answer",
+   "text": "Hold the uncertainty I cannot settle by checking again.",
+   "start": 132.821,
+   "end": 137.024
+  },
+  {
+   "segment": "prayer-phone-boundary",
+   "text": "Father, help me make one kind boundary with the stream of information.",
+   "start": 138.404,
+   "end": 143.609
+  },
+  {
+   "segment": "prayer-phone-boundary",
+   "text": "Let necessary messages remain available without making every notification my responsibility.",
+   "start": 143.789,
+   "end": 151.725
+  },
+  {
+   "segment": "prayer-phone-boundary",
+   "text": "I ask for wisdom about the difference between being reachable and being constantly on watch.",
+   "start": 151.905,
+   "end": 158.967
+  },
+  {
+   "segment": "prayer-phone-boundary",
+   "text": "If no urgent duty requires my attention, help me let the phone grow quiet.",
+   "start": 159.147,
+   "end": 165.248
+  },
+  {
+   "segment": "prayer-phone-boundary",
+   "text": "I give you the impulse to search for one more update, and the fear that stopping means I have stopped caring.",
+   "start": 165.428,
+   "end": 172.639
+  },
+  {
+   "segment": "scripture-philippians-six",
+   "text": "Be careful for nothing;",
+   "start": 174.019,
+   "end": 175.981
+  },
+  {
+   "segment": "scripture-philippians-six",
+   "text": "but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.",
+   "start": 176.161,
+   "end": 183.607
+  },
+  {
+   "segment": "reflection-request",
+   "text": "You hear an invitation to bring requests to God.",
+   "start": 185.287,
+   "end": 189.297
+  },
+  {
+   "segment": "reflection-request",
+   "text": "You can speak about what you need without first making yourself sound confident.",
+   "start": 189.477,
+   "end": 195.045
+  },
+  {
+   "segment": "reflection-request",
+   "text": "You can ask for an honest conversation, a workable plan, or help getting through an appointment.",
+   "start": 195.225,
+   "end": 202.457
+  },
+  {
+   "segment": "reflection-request",
+   "text": "Your request can be specific.",
+   "start": 202.637,
+   "end": 204.941
+  },
+  {
+   "segment": "reflection-request",
+   "text": "You can also remember a small kindness from today.",
+   "start": 205.121,
+   "end": 209.089
+  },
+  {
+   "segment": "reflection-request",
+   "text": "Gratitude gives another truth room beside the worry;",
+   "start": 209.269,
+   "end": 213.301
+  },
+  {
+   "segment": "reflection-request",
+   "text": "you do not have to pretend the worry has already disappeared.",
+   "start": 213.481,
+   "end": 217.812
+  },
+  {
+   "segment": "prayer-work-mistake",
+   "text": "Lord, I name the work concern that followed me home.",
+   "start": 219.192,
+   "end": 222.947
+  },
+  {
+   "segment": "prayer-work-mistake",
+   "text": "There is something I sent, something I missed, or something I may be asked to explain.",
+   "start": 223.127,
+   "end": 229.719
+  },
+  {
+   "segment": "prayer-work-mistake",
+   "text": "Help me separate the actual facts from the harsh story I am telling about myself.",
+   "start": 229.899,
+   "end": 235.765
+  },
+  {
+   "segment": "prayer-work-mistake",
+   "text": "If I made an error, give me the honesty to acknowledge it and the patience to correct it.",
+   "start": 235.945,
+   "end": 242.239
+  },
+  {
+   "segment": "prayer-work-mistake",
+   "text": "Tonight I hand over the imagined meeting that keeps starting again inside my head.",
+   "start": 242.419,
+   "end": 248.947
+  },
+  {
+   "segment": "prayer-next-step",
+   "text": "Father, make the next useful step clear enough to recognize.",
+   "start": 250.327,
+   "end": 254.721
+  },
+  {
+   "segment": "prayer-next-step",
+   "text": "Perhaps I need to check a number, ask a question, or explain a delay.",
+   "start": 254.901,
+   "end": 260.192
+  },
+  {
+   "segment": "prayer-next-step",
+   "text": "I do not need to rehearse every response another person might give.",
+   "start": 260.372,
+   "end": 265.876
+  },
+  {
+   "segment": "prayer-next-step",
+   "text": "Help me prepare what is mine to prepare and leave their reaction outside my control.",
+   "start": 266.056,
+   "end": 272.349
+  },
+  {
+   "segment": "prayer-next-step",
+   "text": "Receive my desire to do good work.",
+   "start": 272.529,
+   "end": 275.623
+  },
+  {
+   "segment": "prayer-next-step",
+   "text": "Let that desire become steady attention tomorrow, rather than another hour of self-punishment tonight.",
+   "start": 275.803,
+   "end": 283.12
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "God, I remember a moment today when someone made a difficult thing easier.",
+   "start": 284.5,
+   "end": 290.153
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "Perhaps they answered patiently, held a door, or let me start a sentence again.",
+   "start": 290.333,
+   "end": 296.435
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "Thank you for that ordinary generosity.",
+   "start": 296.615,
+   "end": 299.879
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "Thank you for the ability to ask for help and for people who have helped before.",
+   "start": 300.059,
+   "end": 305.584
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "I bring this memory alongside the unfinished work.",
+   "start": 305.764,
+   "end": 309.753
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "My day contained more than the moment I keep regretting;",
+   "start": 309.933,
+   "end": 314.093
+  },
+  {
+   "segment": "prayer-thanksgiving",
+   "text": "help me remember it with greater honesty.",
+   "start": 314.273,
+   "end": 317.409
+  },
+  {
+   "segment": "scripture-philippians-seven",
+   "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+   "start": 318.789,
+   "end": 326.789
+  },
+  {
+   "segment": "reflection-guarded",
+   "text": "You do not have to solve the meaning of every word tonight.",
+   "start": 328.469,
+   "end": 332.544
+  },
+  {
+   "segment": "reflection-guarded",
+   "text": "Notice that the promise speaks of hearts and minds, the very places where you may feel tired.",
+   "start": 332.724,
+   "end": 339.423
+  },
+  {
+   "segment": "reflection-guarded",
+   "text": "You can ask for God’s peace while there are unanswered questions around you.",
+   "start": 339.603,
+   "end": 345.085
+  },
+  {
+   "segment": "reflection-guarded",
+   "text": "You are not being asked to explain everything into order.",
+   "start": 345.265,
+   "end": 349.361
+  },
+  {
+   "segment": "reflection-guarded",
+   "text": "You can turn toward Christ with the thoughts you have, including the ones you wish would leave you alone.",
+   "start": 349.541,
+   "end": 356.603
+  },
+  {
+   "segment": "prayer-household-cost",
+   "text": "Father, I name the household expense that has been pressing on me.",
+   "start": 357.983,
+   "end": 362.932
+  },
+  {
+   "segment": "prayer-household-cost",
+   "text": "I bring the bill, the estimate, or the balance I need to review.",
+   "start": 363.112,
+   "end": 367.805
+  },
+  {
+   "segment": "prayer-household-cost",
+   "text": "Give me clear judgment when I look at the facts.",
+   "start": 367.985,
+   "end": 371.377
+  },
+  {
+   "segment": "prayer-household-cost",
+   "text": "Help me ask about arrangements when I need them, and speak honestly with anyone who shares this responsibility.",
+   "start": 371.557,
+   "end": 379.323
+  },
+  {
+   "segment": "prayer-household-cost",
+   "text": "I place these practical concerns before you without inventing a certainty about how they will turn out.",
+   "start": 379.503,
+   "end": 387.055
+  },
+  {
+   "segment": "prayer-household-cost",
+   "text": "Guide my next responsible choice.",
+   "start": 387.235,
+   "end": 390.136
+  },
+  {
+   "segment": "prayer-sufficient-plan",
+   "text": "Lord, I release the midnight calculations that repeat without giving me new information.",
+   "start": 391.516,
+   "end": 398.215
+  },
+  {
+   "segment": "prayer-sufficient-plan",
+   "text": "Tomorrow, help me set aside a definite time to look carefully, with paper, accurate figures, and whatever advice is needed.",
+   "start": 398.395,
+   "end": 408.08
+  },
+  {
+   "segment": "prayer-sufficient-plan",
+   "text": "Keep shame from isolating me.",
+   "start": 408.26,
+   "end": 410.905
+  },
+  {
+   "segment": "prayer-sufficient-plan",
+   "text": "Let courage take the form of a call made or a question asked.",
+   "start": 411.085,
+   "end": 415.693
+  },
+  {
+   "segment": "prayer-sufficient-plan",
+   "text": "Tonight I give you my fear of falling behind, and ask for companionship and wisdom as I address what is real.",
+   "start": 415.873,
+   "end": 424.919
+  },
+  {
+   "segment": "stillness-first",
+   "text": "You can pause before naming anything else.",
+   "start": 426.299,
+   "end": 429.477
+  },
+  {
+   "segment": "stillness-first",
+   "text": "Feel where your hands have come to rest.",
+   "start": 429.657,
+   "end": 432.367
+  },
+  {
+   "segment": "stillness-first",
+   "text": "You do not need to move them into a special position.",
+   "start": 432.547,
+   "end": 436.365
+  },
+  {
+   "segment": "stillness-first",
+   "text": "Let an ordinary breath come and go.",
+   "start": 436.545,
+   "end": 439.297
+  },
+  {
+   "segment": "stillness-first",
+   "text": "For these moments, you can leave the unfinished calculation unfinished.",
+   "start": 439.477,
+   "end": 444.832
+  },
+  {
+   "segment": "scripture-matthew-tomorrow",
+   "text": "Take therefore no thought for the morrow:",
+   "start": 448.012,
+   "end": 450.935
+  },
+  {
+   "segment": "scripture-matthew-tomorrow",
+   "text": "for the morrow shall take thought for the things of itself.",
+   "start": 451.115,
+   "end": 454.72
+  },
+  {
+   "segment": "scripture-matthew-tomorrow",
+   "text": "Sufficient unto the day is the evil thereof.",
+   "start": 454.9,
+   "end": 458.548
+  },
+  {
+   "segment": "reflection-tomorrow",
+   "text": "You can prepare for tomorrow without trying to live it from your bed.",
+   "start": 460.228,
+   "end": 465.028
+  },
+  {
+   "segment": "reflection-tomorrow",
+   "text": "Perhaps you already know the time of your appointment and where you put the keys.",
+   "start": 465.208,
+   "end": 470.584
+  },
+  {
+   "segment": "reflection-tomorrow",
+   "text": "You have done something useful.",
+   "start": 470.764,
+   "end": 473.025
+  },
+  {
+   "segment": "reflection-tomorrow",
+   "text": "Beyond that, you may be rehearsing events that have not happened.",
+   "start": 473.205,
+   "end": 477.579
+  },
+  {
+   "segment": "reflection-tomorrow",
+   "text": "You can notice the difference gently.",
+   "start": 477.759,
+   "end": 480.425
+  },
+  {
+   "segment": "reflection-tomorrow",
+   "text": "This evening has its own limits, and you can let tomorrow’s conversation belong to tomorrow, where you will have actual information to meet.",
+   "start": 480.605,
+   "end": 490.675
+  },
+  {
+   "segment": "prayer-appointment",
+   "text": "Father, I name the appointment on the calendar.",
+   "start": 492.055,
+   "end": 495.425
+  },
+  {
+   "segment": "prayer-appointment",
+   "text": "I bring the questions I hope to ask and the answers I am afraid to hear.",
+   "start": 495.605,
+   "end": 501.216
+  },
+  {
+   "segment": "prayer-appointment",
+   "text": "Help me bring any notes or documents I need, and seek appropriate support if I want someone with me.",
+   "start": 501.396,
+   "end": 508.777
+  },
+  {
+   "segment": "prayer-appointment",
+   "text": "I place the unknown parts before you.",
+   "start": 508.957,
+   "end": 512.115
+  },
+  {
+   "segment": "prayer-appointment",
+   "text": "Give me courage for the actual hour when it comes.",
+   "start": 512.295,
+   "end": 515.836
+  },
+  {
+   "segment": "prayer-appointment",
+   "text": "I release the demand to experience that hour many times before it arrives.",
+   "start": 516.016,
+   "end": 522.053
+  },
+  {
+   "segment": "prayer-loved-person",
+   "text": "Lord, I name the person whose trouble weighs on me.",
+   "start": 523.433,
+   "end": 526.996
+  },
+  {
+   "segment": "prayer-loved-person",
+   "text": "I wish I could know exactly what they need and make their next day easier.",
+   "start": 527.176,
+   "end": 532.616
+  },
+  {
+   "segment": "prayer-loved-person",
+   "text": "Help me listen to what they actually tell me.",
+   "start": 532.796,
+   "end": 536.081
+  },
+  {
+   "segment": "prayer-loved-person",
+   "text": "Keep my concern from becoming pressure for them to reassure me.",
+   "start": 536.261,
+   "end": 541.296
+  },
+  {
+   "segment": "prayer-loved-person",
+   "text": "Show me a practical kindness within my reach.",
+   "start": 541.476,
+   "end": 544.932
+  },
+  {
+   "segment": "prayer-loved-person",
+   "text": "As I leave the rest with you, teach me a love that respects their voice, their choices, and my own limits.",
+   "start": 545.112,
+   "end": 552.941
+  },
+  {
+   "segment": "reflection-loving-limits",
+   "text": "You can care about someone deeply and still need a night away from problem solving.",
+   "start": 554.321,
+   "end": 560.508
+  },
+  {
+   "segment": "reflection-loving-limits",
+   "text": "You may have already offered a ride, sent a message, or agreed on a time to speak.",
+   "start": 560.688,
+   "end": 567.173
+  },
+  {
+   "segment": "reflection-loving-limits",
+   "text": "You can recognize that offering as real.",
+   "start": 567.353,
+   "end": 570.532
+  },
+  {
+   "segment": "reflection-loving-limits",
+   "text": "You do not have to prove your love by staying mentally beside every possible difficulty.",
+   "start": 570.712,
+   "end": 577.005
+  },
+  {
+   "segment": "reflection-loving-limits",
+   "text": "Where you have a genuine responsibility tonight, attend to it.",
+   "start": 577.185,
+   "end": 581.879
+  },
+  {
+   "segment": "reflection-loving-limits",
+   "text": "Where you have done your part, you may pause.",
+   "start": 582.059,
+   "end": 584.981
+  },
+  {
+   "segment": "prayer-unfinished-conversation",
+   "text": "Father, I name the conversation that ended awkwardly.",
+   "start": 586.361,
+   "end": 590.393
+  },
+  {
+   "segment": "prayer-unfinished-conversation",
+   "text": "There was a look I could not read, a sentence I wish I had softened, or a silence I did not understand.",
+   "start": 590.573,
+   "end": 598.744
+  },
+  {
+   "segment": "prayer-unfinished-conversation",
+   "text": "Help me resist filling that silence with accusations against myself or someone else.",
+   "start": 598.924,
+   "end": 605.239
+  },
+  {
+   "segment": "prayer-unfinished-conversation",
+   "text": "Where I owe an apology, let it be sincere and specific.",
+   "start": 605.419,
+   "end": 609.92
+  },
+  {
+   "segment": "prayer-unfinished-conversation",
+   "text": "Where I need clarification, help me ask kindly.",
+   "start": 610.1,
+   "end": 614.004
+  },
+  {
+   "segment": "prayer-unfinished-conversation",
+   "text": "I surrender the imaginary versions of that conversation that cannot give me truth.",
+   "start": 614.184,
+   "end": 620.541
+  },
+  {
+   "segment": "prayer-repair",
+   "text": "Lord, I accept responsibility for the words that were mine.",
+   "start": 621.921,
+   "end": 626.209
+  },
+  {
+   "segment": "prayer-repair",
+   "text": "I ask your forgiveness where I used tiredness as an excuse to be unkind.",
+   "start": 626.389,
+   "end": 632.213
+  },
+  {
+   "segment": "prayer-repair",
+   "text": "Help me make repair without demanding immediate reassurance in return.",
+   "start": 632.393,
+   "end": 637.94
+  },
+  {
+   "segment": "prayer-repair",
+   "text": "If another person needs time, give me patience with their pace.",
+   "start": 638.12,
+   "end": 642.749
+  },
+  {
+   "segment": "prayer-repair",
+   "text": "Tonight, let remorse point toward an honest action instead of an endless replay.",
+   "start": 642.929,
+   "end": 649.137
+  },
+  {
+   "segment": "prayer-repair",
+   "text": "I place the relationship in your care while I wait for an appropriate moment to speak.",
+   "start": 649.317,
+   "end": 655.547
+  },
+  {
+   "segment": "scripture-psalm-thoughts",
+   "text": "In the multitude of my thoughts within me thy comforts delight my soul.",
+   "start": 656.927,
+   "end": 662.26
+  },
+  {
+   "segment": "reflection-multitude",
+   "text": "The psalm gives you words for a crowded inner life.",
+   "start": 663.94,
+   "end": 667.524
+  },
+  {
+   "segment": "reflection-multitude",
+   "text": "You can hear that multitude of thoughts named without embarrassment.",
+   "start": 667.704,
+   "end": 672.696
+  },
+  {
+   "segment": "reflection-multitude",
+   "text": "Perhaps your mind moves from a bill to a conversation to a forgotten errand in seconds.",
+   "start": 672.876,
+   "end": 679.745
+  },
+  {
+   "segment": "reflection-multitude",
+   "text": "You do not have to chase every thought to its conclusion.",
+   "start": 679.925,
+   "end": 683.893
+  },
+  {
+   "segment": "reflection-multitude",
+   "text": "You can receive one comfort at a time:",
+   "start": 684.073,
+   "end": 687.017
+  },
+  {
+   "segment": "reflection-multitude",
+   "text": "a remembered kindness, a truthful verse, the knowledge that you can bring your confusion into prayer.",
+   "start": 687.197,
+   "end": 694.707
+  },
+  {
+   "segment": "prayer-inner-criticism",
+   "text": "God, I name the judgment I keep passing on myself when everything becomes quiet.",
+   "start": 696.087,
+   "end": 702.252
+  },
+  {
+   "segment": "prayer-inner-criticism",
+   "text": "I hear that I should have known more, finished more, or handled the day better.",
+   "start": 702.432,
+   "end": 707.829
+  },
+  {
+   "segment": "prayer-inner-criticism",
+   "text": "Help me learn from what happened without treating myself with contempt.",
+   "start": 708.009,
+   "end": 712.895
+  },
+  {
+   "segment": "prayer-inner-criticism",
+   "text": "Show me the difference between correction that helps me grow and accusation that only wears me down.",
+   "start": 713.075,
+   "end": 720.883
+  },
+  {
+   "segment": "prayer-inner-criticism",
+   "text": "I ask for the humility to be a learner, with room to receive mercy and try again.",
+   "start": 721.063,
+   "end": 727.356
+  },
+  {
+   "segment": "prayer-body-kindness",
+   "text": "Father, I bring my tired body into this prayer as well.",
+   "start": 728.736,
+   "end": 733.109
+  },
+  {
+   "segment": "prayer-body-kindness",
+   "text": "I notice the tension I carried through the day and the impatience I sometimes feel toward my own limits.",
+   "start": 733.289,
+   "end": 741.161
+  },
+  {
+   "segment": "prayer-body-kindness",
+   "text": "Help me respond with care.",
+   "start": 741.341,
+   "end": 743.453
+  },
+  {
+   "segment": "prayer-body-kindness",
+   "text": "Guide me toward appropriate help when I need it, and toward ordinary habits that support rest.",
+   "start": 743.633,
+   "end": 750.823
+  },
+  {
+   "segment": "prayer-body-kindness",
+   "text": "I am not asking my body to prove my faith tonight.",
+   "start": 751.003,
+   "end": 755.163
+  },
+  {
+   "segment": "prayer-body-kindness",
+   "text": "I ask to treat it as something entrusted to me with tenderness.",
+   "start": 755.343,
+   "end": 759.972
+  },
+  {
+   "segment": "reflection-returning-care",
+   "text": "A concern may come back after you have prayed about it.",
+   "start": 761.352,
+   "end": 765.128
+  },
+  {
+   "segment": "reflection-returning-care",
+   "text": "You can notice that without declaring the prayer unsuccessful.",
+   "start": 765.308,
+   "end": 770.001
+  },
+  {
+   "segment": "reflection-returning-care",
+   "text": "You are practicing trust with a mind that has learned to keep checking.",
+   "start": 770.181,
+   "end": 774.917
+  },
+  {
+   "segment": "reflection-returning-care",
+   "text": "You can simply recognize the familiar concern and bring it back to God in fewer words.",
+   "start": 775.097,
+   "end": 781.817
+  },
+  {
+   "segment": "reflection-returning-care",
+   "text": "You do not need to restart the whole evening.",
+   "start": 781.997,
+   "end": 785.411
+  },
+  {
+   "segment": "reflection-returning-care",
+   "text": "You can return as many times as you need, with less argument and more kindness.",
+   "start": 785.591,
+   "end": 791.777
+  },
+  {
+   "segment": "prayer-returning",
+   "text": "Lord, when the same concern returns, help me answer it gently.",
+   "start": 793.157,
+   "end": 798.085
+  },
+  {
+   "segment": "prayer-returning",
+   "text": "I have named it before you.",
+   "start": 798.265,
+   "end": 800.484
+  },
+  {
+   "segment": "prayer-returning",
+   "text": "I have considered whether anything requires action now.",
+   "start": 800.664,
+   "end": 804.845
+  },
+  {
+   "segment": "prayer-returning",
+   "text": "If there is no new information and no present responsibility, help me stop reopening the case.",
+   "start": 805.025,
+   "end": 812.172
+  },
+  {
+   "segment": "prayer-returning",
+   "text": "Receive my repeated turning toward you.",
+   "start": 812.352,
+   "end": 815.616
+  },
+  {
+   "segment": "prayer-returning",
+   "text": "Teach me a patient trust that can be practiced in small moments, without demanding a perfect feeling or an uninterrupted silence inside my thoughts.",
+   "start": 815.796,
+   "end": 827.295
+  },
+  {
+   "segment": "scripture-isaiah-mind",
+   "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee:",
+   "start": 828.675,
+   "end": 833.816
+  },
+  {
+   "segment": "scripture-isaiah-mind",
+   "text": "because he trusteth in thee.",
+   "start": 833.996,
+   "end": 836.193
+  },
+  {
+   "segment": "reflection-attention",
+   "text": "You can give your attention a place to return without forcing it to stay perfectly still.",
+   "start": 837.873,
+   "end": 844.359
+  },
+  {
+   "segment": "reflection-attention",
+   "text": "In Isaiah’s words, trust turns toward God.",
+   "start": 844.539,
+   "end": 848.315
+  },
+  {
+   "segment": "reflection-attention",
+   "text": "You can turn that way now.",
+   "start": 848.495,
+   "end": 850.713
+  },
+  {
+   "segment": "reflection-attention",
+   "text": "When you notice that you are planning again, you can come back to the prayer already underway.",
+   "start": 850.893,
+   "end": 857.016
+  },
+  {
+   "segment": "reflection-attention",
+   "text": "You are allowed to begin again quietly.",
+   "start": 857.196,
+   "end": 860.055
+  },
+  {
+   "segment": "reflection-attention",
+   "text": "You do not need to monitor your mind as though every wandering thought were evidence against the sincerity of your faith.",
+   "start": 860.235,
+   "end": 868.469
+  },
+  {
+   "segment": "prayer-steady-trust",
+   "text": "Faithful God, I place my trust in your character rather than the strength of my concentration.",
+   "start": 869.849,
+   "end": 876.591
+  },
+  {
+   "segment": "prayer-steady-trust",
+   "text": "I know how easily my attention wanders.",
+   "start": 876.771,
+   "end": 880.056
+  },
+  {
+   "segment": "prayer-steady-trust",
+   "text": "Help me return to what is true about you with patience.",
+   "start": 880.236,
+   "end": 883.863
+  },
+  {
+   "segment": "prayer-steady-trust",
+   "text": "Keep me from using this prayer as another task to perform flawlessly.",
+   "start": 884.043,
+   "end": 889.291
+  },
+  {
+   "segment": "prayer-steady-trust",
+   "text": "I want to become more honest in your presence, more willing to receive help, and more able to leave an unanswered question without following it through every imagined outcome.",
+   "start": 889.471,
+   "end": 902.441
+  },
+  {
+   "segment": "prayer-gathering-cares",
+   "text": "Father, I have named the unanswered message, the work concern, the practical expense, the coming appointment, and the person I love.",
+   "start": 903.821,
+   "end": 913.421
+  },
+  {
+   "segment": "prayer-gathering-cares",
+   "text": "Receive whichever of these belongs to my life tonight.",
+   "start": 913.601,
+   "end": 917.676
+  },
+  {
+   "segment": "prayer-gathering-cares",
+   "text": "Receive also the worry I could not explain aloud.",
+   "start": 917.856,
+   "end": 921.845
+  },
+  {
+   "segment": "prayer-gathering-cares",
+   "text": "I do not need to make them one enormous burden again.",
+   "start": 922.025,
+   "end": 926.377
+  },
+  {
+   "segment": "prayer-gathering-cares",
+   "text": "Each has been brought before you separately.",
+   "start": 926.557,
+   "end": 929.565
+  },
+  {
+   "segment": "prayer-gathering-cares",
+   "text": "Help me remember that I can address one real responsibility at a time when morning comes.",
+   "start": 929.745,
+   "end": 936.38
+  },
+  {
+   "segment": "reflection-single-line",
+   "text": "You may notice that a worry becomes less tangled when you give it a concrete task.",
+   "start": 937.76,
+   "end": 943.413
+  },
+  {
+   "segment": "reflection-single-line",
+   "text": "You cannot schedule certainty, but you can schedule a question.",
+   "start": 943.593,
+   "end": 948.265
+  },
+  {
+   "segment": "reflection-single-line",
+   "text": "You cannot determine a conversation’s outcome, but you can choose when to ask for one.",
+   "start": 948.445,
+   "end": 954.824
+  },
+  {
+   "segment": "reflection-single-line",
+   "text": "You can make that distinction without dismissing what matters to you.",
+   "start": 955.004,
+   "end": 959.868
+  },
+  {
+   "segment": "reflection-single-line",
+   "text": "Before the quieter readings begin, you will give one concern a practical place, so your mind does not have to serve as its reminder all night.",
+   "start": 960.048,
+   "end": 970.629
+  },
+  {
+   "segment": "declaration",
+   "text": "I can be honest about what troubles me.",
+   "start": 972.009,
+   "end": 975.188
+  },
+  {
+   "segment": "declaration",
+   "text": "I can ask for help before I reach the end of my strength.",
+   "start": 975.368,
+   "end": 979.741
+  },
+  {
+   "segment": "declaration",
+   "text": "I can make a plan without predicting every result.",
+   "start": 979.921,
+   "end": 983.932
+  },
+  {
+   "segment": "declaration",
+   "text": "I can care for another person without carrying their entire future.",
+   "start": 984.112,
+   "end": 989.253
+  },
+  {
+   "segment": "declaration",
+   "text": "I can leave a message unanswered for a time when no urgent need is present.",
+   "start": 989.433,
+   "end": 995.321
+  },
+  {
+   "segment": "declaration",
+   "text": "God receives the concern I can name and the concern I cannot yet put into words.",
+   "start": 995.501,
+   "end": 1002.136
+  },
+  {
+   "segment": "payoff",
+   "text": "Make this small commitment before the readings for sleep:",
+   "start": 1003.516,
+   "end": 1007.377
+  },
+  {
+   "segment": "payoff",
+   "text": "choose one concern that needs attention tomorrow, and give it one practical next step and a time.",
+   "start": 1007.557,
+   "end": 1014.768
+  },
+  {
+   "segment": "payoff",
+   "text": "You might decide, “After breakfast, I will call about the bill.” If you need a reminder, write only that short line.",
+   "start": 1014.948,
+   "end": 1023.908
+  },
+  {
+   "segment": "payoff",
+   "text": "Then close the note.",
+   "start": 1024.088,
+   "end": 1025.859
+  },
+  {
+   "segment": "payoff",
+   "text": "You have given your responsibility a place in tomorrow, so you can stop trying to keep it alive by rehearsing it tonight.",
+   "start": 1026.039,
+   "end": 1034.167
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Father, I commit this one step and its time to you.",
+   "start": 1035.547,
+   "end": 1039.536
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Help me follow through with the strength and information available then.",
+   "start": 1039.716,
+   "end": 1044.836
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "For tonight, I will leave the note closed unless a genuine need changes the situation.",
+   "start": 1045.016,
+   "end": 1051.971
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "When I want to reopen it merely to feel certain, remind me of the care I have already taken.",
+   "start": 1052.151,
+   "end": 1058.764
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Bless this modest act of trust, and guide me in the quieter hours that follow.",
+   "start": 1058.944,
+   "end": 1064.939
+  },
+  {
+   "segment": "cta",
+   "text": "If you want to affirm this prayer in the comments, write amen.",
+   "start": 1066.319,
+   "end": 1070.841
+  },
+  {
+   "segment": "cta",
+   "text": "Now let the Scripture readings accompany your rest.",
+   "start": 1071.021,
+   "end": 1074.648
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "You can let your eyes settle wherever they are comfortable.",
+   "start": 1075.828,
+   "end": 1079.903
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "From here, the pace stays gentle, with Scripture and short prayers for the night.",
+   "start": 1080.083,
+   "end": 1085.565
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "You do not need to keep a list of the passages.",
+   "start": 1085.745,
+   "end": 1089.479
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "You can receive one sentence and let the next arrive when it arrives.",
+   "start": 1089.659,
+   "end": 1094.779
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "The concern you set down has a next step already.",
+   "start": 1094.959,
+   "end": 1098.969
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "You may leave it there while you listen, without checking the time or measuring your progress.",
+   "start": 1099.149,
+   "end": 1105.507
+  },
+  {
+   "segment": "sleep-proverbs",
+   "text": "When thou liest down, thou shalt not be afraid:",
+   "start": 1107.187,
+   "end": 1111.112
+  },
+  {
+   "segment": "sleep-proverbs",
+   "text": "yea, thou shalt lie down, and thy sleep shall be sweet.",
+   "start": 1111.292,
+   "end": 1115.281
+  },
+  {
+   "segment": "sleep-reflection-lying-down",
+   "text": "You hear a picture of lying down within the life of wisdom.",
+   "start": 1116.961,
+   "end": 1121.527
+  },
+  {
+   "segment": "sleep-reflection-lying-down",
+   "text": "You can let that picture be gentle company rather than another standard you must meet tonight.",
+   "start": 1121.707,
+   "end": 1128.384
+  },
+  {
+   "segment": "sleep-reflection-lying-down",
+   "text": "If you are still alert, you can simply remain here with the reading.",
+   "start": 1128.564,
+   "end": 1133.279
+  },
+  {
+   "segment": "sleep-reflection-lying-down",
+   "text": "You do not have to manufacture a particular sensation.",
+   "start": 1133.459,
+   "end": 1137.853
+  },
+  {
+   "segment": "sleep-reflection-lying-down",
+   "text": "Your pillow can be a place to receive care, and this verse can be a prayerful hope you hold with open hands.",
+   "start": 1138.033,
+   "end": 1145.756
+  },
+  {
+   "segment": "sleep-prayer-bedside",
+   "text": "Lord, I receive this ordinary place of rest with gratitude.",
+   "start": 1147.436,
+   "end": 1152.193
+  },
+  {
+   "segment": "sleep-prayer-bedside",
+   "text": "Help me stop treating the bedside as a desk where every problem must be solved.",
+   "start": 1152.373,
+   "end": 1158.005
+  },
+  {
+   "segment": "sleep-prayer-bedside",
+   "text": "Let the blanket be a blanket and the pillow a pillow.",
+   "start": 1158.185,
+   "end": 1161.983
+  },
+  {
+   "segment": "sleep-prayer-bedside",
+   "text": "I ask for rest, and I leave the manner and timing outside my command.",
+   "start": 1162.163,
+   "end": 1167.581
+  },
+  {
+   "segment": "sleep-prayer-bedside",
+   "text": "Give me patience with this night as it unfolds.",
+   "start": 1167.761,
+   "end": 1171.409
+  },
+  {
+   "segment": "sleep-prayer-bedside",
+   "text": "May I meet my own weariness with the kindness I would offer someone dear to me.",
+   "start": 1171.589,
+   "end": 1177.605
+  },
+  {
+   "segment": "sleep-reflection-simple",
+   "text": "You can allow the room to be ordinary.",
+   "start": 1179.285,
+   "end": 1182.165
+  },
+  {
+   "segment": "sleep-reflection-simple",
+   "text": "A distant sound, a little light, or a passing thought does not require you to begin again.",
+   "start": 1182.345,
+   "end": 1189.343
+  },
+  {
+   "segment": "sleep-reflection-simple",
+   "text": "You can stay with what is comfortable and let the reading continue.",
+   "start": 1189.523,
+   "end": 1194.131
+  },
+  {
+   "segment": "sleep-reflection-simple",
+   "text": "You do not need to create an ideal night before you are allowed to rest.",
+   "start": 1194.311,
+   "end": 1199.729
+  },
+  {
+   "segment": "sleep-reflection-simple",
+   "text": "You are here in the night you have, and you can meet it with less struggle, one quiet moment at a time.",
+   "start": 1199.909,
+   "end": 1207.376
+  },
+  {
+   "segment": "sleep-psalm-labour",
+   "text": "It is vain for you to rise up early, to sit up late, to eat the bread of sorrows:",
+   "start": 1209.056,
+   "end": 1215.328
+  },
+  {
+   "segment": "sleep-psalm-labour",
+   "text": "for so he giveth his beloved sleep.",
+   "start": 1215.508,
+   "end": 1218.281
+  },
+  {
+   "segment": "sleep-reflection-labour",
+   "text": "This psalm speaks into the work of building a life.",
+   "start": 1219.961,
+   "end": 1223.46
+  },
+  {
+   "segment": "sleep-reflection-labour",
+   "text": "You may know the feeling of adding another hour because you are afraid everything depends on your effort.",
+   "start": 1223.64,
+   "end": 1231.32
+  },
+  {
+   "segment": "sleep-reflection-labour",
+   "text": "You can hear its invitation to dependence.",
+   "start": 1231.5,
+   "end": 1234.935
+  },
+  {
+   "segment": "sleep-reflection-labour",
+   "text": "Your work matters, and you can also reach a stopping place.",
+   "start": 1235.115,
+   "end": 1239.381
+  },
+  {
+   "segment": "sleep-reflection-labour",
+   "text": "You are a person who needs replenishment.",
+   "start": 1239.561,
+   "end": 1242.74
+  },
+  {
+   "segment": "sleep-reflection-labour",
+   "text": "You can let that need belong within your relationship with God, without making exhaustion the measure of your devotion.",
+   "start": 1242.92,
+   "end": 1251.581
+  },
+  {
+   "segment": "sleep-prayer-stopping",
+   "text": "God, I leave the extra hour of effort I was trying to borrow from this night.",
+   "start": 1253.261,
+   "end": 1259.021
+  },
+  {
+   "segment": "sleep-prayer-stopping",
+   "text": "If my duties require me to be awake, give me practical support and a chance to rest when I can.",
+   "start": 1259.201,
+   "end": 1266.583
+  },
+  {
+   "segment": "sleep-prayer-stopping",
+   "text": "If I am free to stop, help me accept that freedom.",
+   "start": 1266.763,
+   "end": 1270.645
+  },
+  {
+   "segment": "sleep-prayer-stopping",
+   "text": "I ask for enough humility to live as a person with limits.",
+   "start": 1270.825,
+   "end": 1275.369
+  },
+  {
+   "segment": "sleep-prayer-stopping",
+   "text": "Receive the work I completed and the work that must wait for another part of the day.",
+   "start": 1275.549,
+   "end": 1281.288
+  },
+  {
+   "segment": "sleep-stillness",
+   "text": "You can let the last sentence fade without replacing it.",
+   "start": 1282.968,
+   "end": 1287.192
+  },
+  {
+   "segment": "sleep-stillness",
+   "text": "Notice the support beneath your head or back.",
+   "start": 1287.372,
+   "end": 1290.807
+  },
+  {
+   "segment": "sleep-stillness",
+   "text": "There is no special rhythm to achieve.",
+   "start": 1290.987,
+   "end": 1293.824
+  },
+  {
+   "segment": "sleep-stillness",
+   "text": "You may be quiet for a little while, with nothing to explain and no new concern to name.",
+   "start": 1294.004,
+   "end": 1300.489
+  },
+  {
+   "segment": "sleep-john-peace",
+   "text": "Peace I leave with you, my peace I give unto you:",
+   "start": 1303.669,
+   "end": 1307.424
+  },
+  {
+   "segment": "sleep-john-peace",
+   "text": "not as the world giveth, give I unto you.",
+   "start": 1307.604,
+   "end": 1311.017
+  },
+  {
+   "segment": "sleep-john-peace",
+   "text": "Let not your heart be troubled, neither let it be afraid.",
+   "start": 1311.197,
+   "end": 1315.464
+  },
+  {
+   "segment": "sleep-reflection-gift",
+   "text": "Jesus speaks these words to his disciples as they face a difficult parting.",
+   "start": 1317.144,
+   "end": 1323.16
+  },
+  {
+   "segment": "sleep-reflection-gift",
+   "text": "You can hear the care in what he leaves with them.",
+   "start": 1323.34,
+   "end": 1326.753
+  },
+  {
+   "segment": "sleep-reflection-gift",
+   "text": "His peace is offered amid a story that still contains sorrow and uncertainty.",
+   "start": 1326.933,
+   "end": 1332.544
+  },
+  {
+   "segment": "sleep-reflection-gift",
+   "text": "You can bring your own unfinished story near these words.",
+   "start": 1332.724,
+   "end": 1337.033
+  },
+  {
+   "segment": "sleep-reflection-gift",
+   "text": "You do not need to know its next chapter.",
+   "start": 1337.213,
+   "end": 1340.221
+  },
+  {
+   "segment": "sleep-reflection-gift",
+   "text": "You can receive Christ’s invitation as a gift addressed to people who need his company and courage.",
+   "start": 1340.401,
+   "end": 1347.612
+  },
+  {
+   "segment": "sleep-prayer-receiving",
+   "text": "Jesus, help me receive what you give with a willing heart.",
+   "start": 1349.292,
+   "end": 1353.303
+  },
+  {
+   "segment": "sleep-prayer-receiving",
+   "text": "I have searched for peace in a completed list, an encouraging reply, or knowing exactly what will happen.",
+   "start": 1353.483,
+   "end": 1361.568
+  },
+  {
+   "segment": "sleep-prayer-receiving",
+   "text": "Those things cannot carry everything I ask of them.",
+   "start": 1361.748,
+   "end": 1365.567
+  },
+  {
+   "segment": "sleep-prayer-receiving",
+   "text": "I turn toward you now.",
+   "start": 1365.747,
+   "end": 1367.816
+  },
+  {
+   "segment": "sleep-prayer-receiving",
+   "text": "Stay with me in the uncertainty that remains, and teach me to recognize your kindness through Scripture, through prayer, and through the people who offer steady care in my life.",
+   "start": 1367.996,
+   "end": 1380.391
+  },
+  {
+   "segment": "sleep-reflection-message",
+   "text": "You can leave the unanswered message where it is.",
+   "start": 1382.071,
+   "end": 1385.889
+  },
+  {
+   "segment": "sleep-reflection-message",
+   "text": "You have brought the waiting into prayer, and you do not need to refresh the story now.",
+   "start": 1386.069,
+   "end": 1391.829
+  },
+  {
+   "segment": "sleep-reflection-message",
+   "text": "Somewhere beyond this room, another person has their own evening and their own limits.",
+   "start": 1392.009,
+   "end": 1398.175
+  },
+  {
+   "segment": "sleep-reflection-message",
+   "text": "You can let them have that space.",
+   "start": 1398.355,
+   "end": 1400.765
+  },
+  {
+   "segment": "sleep-reflection-message",
+   "text": "You can let yourself have this one.",
+   "start": 1400.945,
+   "end": 1403.505
+  },
+  {
+   "segment": "sleep-reflection-message",
+   "text": "For the moment, your attention may rest with words already given, instead of words you are still waiting to receive.",
+   "start": 1403.685,
+   "end": 1412.048
+  },
+  {
+   "segment": "sleep-psalm-preserve",
+   "text": "The LORD shall preserve thee from all evil:",
+   "start": 1413.728,
+   "end": 1416.864
+  },
+  {
+   "segment": "sleep-psalm-preserve",
+   "text": "he shall preserve thy soul.",
+   "start": 1417.044,
+   "end": 1419.455
+  },
+  {
+   "segment": "sleep-reflection-preserve",
+   "text": "The pilgrim’s song gives you language for trusting the Lord as keeper.",
+   "start": 1421.135,
+   "end": 1426.105
+  },
+  {
+   "segment": "sleep-reflection-preserve",
+   "text": "You can hear its strong confidence without using it to predict the details of tomorrow.",
+   "start": 1426.285,
+   "end": 1433.155
+  },
+  {
+   "segment": "sleep-reflection-preserve",
+   "text": "The psalm turns your attention toward the One to whom your life matters.",
+   "start": 1433.335,
+   "end": 1438.327
+  },
+  {
+   "segment": "sleep-reflection-preserve",
+   "text": "You can pray for protection and still make wise choices in the world you inhabit.",
+   "start": 1438.507,
+   "end": 1444.587
+  },
+  {
+   "segment": "sleep-reflection-preserve",
+   "text": "Here in this quiet portion of the night, you can place your whole self within that prayer.",
+   "start": 1444.767,
+   "end": 1450.953
+  },
+  {
+   "segment": "sleep-prayer-keeping",
+   "text": "Keeper of my life, I entrust the deepest parts of me to your care.",
+   "start": 1452.633,
+   "end": 1457.839
+  },
+  {
+   "segment": "sleep-prayer-keeping",
+   "text": "Preserve what is tender from becoming hard through fear.",
+   "start": 1458.019,
+   "end": 1461.923
+  },
+  {
+   "segment": "sleep-prayer-keeping",
+   "text": "Protect my willingness to love, my desire to tell the truth, and my readiness to ask for guidance.",
+   "start": 1462.103,
+   "end": 1469.74
+  },
+  {
+   "segment": "sleep-prayer-keeping",
+   "text": "Where I need a wise boundary, help me recognize it.",
+   "start": 1469.92,
+   "end": 1473.995
+  },
+  {
+   "segment": "sleep-prayer-keeping",
+   "text": "Where I need a trustworthy companion, help me welcome one.",
+   "start": 1474.175,
+   "end": 1478.655
+  },
+  {
+   "segment": "sleep-prayer-keeping",
+   "text": "I rest my hope in you beyond the small circle of what I can oversee.",
+   "start": 1478.835,
+   "end": 1484.147
+  },
+  {
+   "segment": "sleep-psalm-coming-going",
+   "text": "The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.",
+   "start": 1485.827,
+   "end": 1492.76
+  },
+  {
+   "segment": "sleep-reflection-doorway",
+   "text": "You have crossed doorways today, entering places with things to do and leaving them with things unfinished.",
+   "start": 1494.44,
+   "end": 1502.056
+  },
+  {
+   "segment": "sleep-reflection-doorway",
+   "text": "The psalm includes coming and going in its language of care.",
+   "start": 1502.236,
+   "end": 1506.588
+  },
+  {
+   "segment": "sleep-reflection-doorway",
+   "text": "You can let that breadth comfort you.",
+   "start": 1506.768,
+   "end": 1509.392
+  },
+  {
+   "segment": "sleep-reflection-doorway",
+   "text": "Your life is more than the last difficult moment before bed.",
+   "start": 1509.572,
+   "end": 1514.116
+  },
+  {
+   "segment": "sleep-reflection-doorway",
+   "text": "You are known across the ordinary movements of a day, and you can entrust the movements still ahead without walking through them in your imagination tonight.",
+   "start": 1514.296,
+   "end": 1525.197
+  },
+  {
+   "segment": "sleep-prayer-threshold",
+   "text": "Lord, receive the journeys of this day, the familiar roads and the unexpected turns.",
+   "start": 1526.877,
+   "end": 1533.064
+  },
+  {
+   "segment": "sleep-prayer-threshold",
+   "text": "I thank you for places where I was welcomed and people whose presence helped me.",
+   "start": 1533.244,
+   "end": 1538.812
+  },
+  {
+   "segment": "sleep-prayer-threshold",
+   "text": "I bring the places that felt difficult as well.",
+   "start": 1538.992,
+   "end": 1542.597
+  },
+  {
+   "segment": "sleep-prayer-threshold",
+   "text": "As I remain here now, I release the need to visit them all again in thought.",
+   "start": 1542.777,
+   "end": 1548.495
+  },
+  {
+   "segment": "sleep-prayer-threshold",
+   "text": "When it is time to go out or come in tomorrow, guide my choices with wisdom and my words with care.",
+   "start": 1548.675,
+   "end": 1556.461
+  },
+  {
+   "segment": "sleep-reflection-fewer-words",
+   "text": "You may find that you have fewer words now, or you may notice that your mind remains active.",
+   "start": 1558.141,
+   "end": 1565.245
+  },
+  {
+   "segment": "sleep-reflection-fewer-words",
+   "text": "Either way, you can let the prayer become simpler.",
+   "start": 1565.425,
+   "end": 1569.031
+  },
+  {
+   "segment": "sleep-reflection-fewer-words",
+   "text": "You have already said much that matters.",
+   "start": 1569.211,
+   "end": 1571.877
+  },
+  {
+   "segment": "sleep-reflection-fewer-words",
+   "text": "You do not need to repeat every concern to keep it within God’s attention.",
+   "start": 1572.057,
+   "end": 1577.86
+  },
+  {
+   "segment": "sleep-reflection-fewer-words",
+   "text": "You can rest beside a single truth from these readings, allowing the rest of the conversation to become quiet without bringing it to a perfect conclusion.",
+   "start": 1578.04,
+   "end": 1589.219
+  },
+  {
+   "segment": "sleep-prayer-hours",
+   "text": "Father, I bring the urge to keep counting the hours.",
+   "start": 1590.899,
+   "end": 1594.781
+  },
+  {
+   "segment": "sleep-prayer-hours",
+   "text": "Sometimes I turn the clock into another source of pressure, measuring how well I am resting.",
+   "start": 1594.961,
+   "end": 1601.681
+  },
+  {
+   "segment": "sleep-prayer-hours",
+   "text": "Help me step away from that judgment.",
+   "start": 1601.861,
+   "end": 1604.549
+  },
+  {
+   "segment": "sleep-prayer-hours",
+   "text": "Give me patience for the present moment, whether it is quiet or restless.",
+   "start": 1604.729,
+   "end": 1609.892
+  },
+  {
+   "segment": "sleep-prayer-hours",
+   "text": "I ask for the rest I need without bargaining with the night.",
+   "start": 1610.072,
+   "end": 1614.552
+  },
+  {
+   "segment": "sleep-prayer-hours",
+   "text": "Receive my wish for an easier morning, and help me meet whatever morning brings with appropriate support and care.",
+   "start": 1614.732,
+   "end": 1622.967
+  },
+  {
+   "segment": "sleep-matthew-rest",
+   "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+   "start": 1624.647,
+   "end": 1630.193
+  },
+  {
+   "segment": "sleep-reflection-coming",
+   "text": "The invitation begins with coming.",
+   "start": 1631.873,
+   "end": 1634.689
+  },
+  {
+   "segment": "sleep-reflection-coming",
+   "text": "You can come with the weight you actually carry, even if you cannot explain why it feels so heavy.",
+   "start": 1634.869,
+   "end": 1642.037
+  },
+  {
+   "segment": "sleep-reflection-coming",
+   "text": "You can come after a productive day or a day that seemed to get away from you.",
+   "start": 1642.217,
+   "end": 1647.913
+  },
+  {
+   "segment": "sleep-reflection-coming",
+   "text": "You can come with faith that feels small.",
+   "start": 1648.093,
+   "end": 1650.973
+  },
+  {
+   "segment": "sleep-reflection-coming",
+   "text": "You do not need to sort yourself into a more acceptable condition first.",
+   "start": 1651.153,
+   "end": 1656.487
+  },
+  {
+   "segment": "sleep-reflection-coming",
+   "text": "Let the welcome of Jesus have room in the place where you are resting.",
+   "start": 1656.667,
+   "end": 1661.787
+  },
+  {
+   "segment": "sleep-prayer-welcome",
+   "text": "Jesus, I answer your welcome with the small amount of attention I have left.",
+   "start": 1663.467,
+   "end": 1669.419
+  },
+  {
+   "segment": "sleep-prayer-welcome",
+   "text": "I bring the weight of trying to be ready for every possibility.",
+   "start": 1669.599,
+   "end": 1674.143
+  },
+  {
+   "segment": "sleep-prayer-welcome",
+   "text": "Teach me a life that receives help and makes room for rest.",
+   "start": 1674.323,
+   "end": 1678.931
+  },
+  {
+   "segment": "sleep-prayer-welcome",
+   "text": "I leave the next step in its appointed place tomorrow.",
+   "start": 1679.111,
+   "end": 1683.207
+  },
+  {
+   "segment": "sleep-prayer-welcome",
+   "text": "For these remaining moments, let my prayer be uncomplicated:",
+   "start": 1683.387,
+   "end": 1687.909
+  },
+  {
+   "segment": "sleep-prayer-welcome",
+   "text": "I am here before you, with my weariness, trusting your invitation enough to stop preparing another explanation.",
+   "start": 1688.089,
+   "end": 1696.58
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "You can leave tonight unfinished in small, ordinary ways.",
+   "start": 1698.26,
+   "end": 1702.655
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "The note can stay folded.",
+   "start": 1702.835,
+   "end": 1704.968
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "The message can remain where you left it.",
+   "start": 1705.148,
+   "end": 1708.113
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "The question can wait for the person who can answer it.",
+   "start": 1708.293,
+   "end": 1712.069
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "You have not forgotten your responsibilities;",
+   "start": 1712.249,
+   "end": 1715.471
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "you have given one of them a practical place.",
+   "start": 1715.651,
+   "end": 1718.744
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "Now you can allow the night to contain something besides preparation.",
+   "start": 1718.924,
+   "end": 1724.001
+  },
+  {
+   "segment": "sleep-reflection-unfinished",
+   "text": "You can listen, be still, and receive these moments without turning them into another assignment.",
+   "start": 1724.181,
+   "end": 1731.157
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Father, I place this evening before you just as it has been.",
+   "start": 1732.837,
+   "end": 1737.168
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Thank you for hearing each concern separately and receiving the words I struggled to find.",
+   "start": 1737.348,
+   "end": 1743.919
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Help me carry the practical commitment into tomorrow when its time comes.",
+   "start": 1744.099,
+   "end": 1749.261
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Until then, I ask for a gentle heart toward myself and those around me.",
+   "start": 1749.441,
+   "end": 1755.521
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Let your care remain the thought beside my unanswered questions.",
+   "start": 1755.701,
+   "end": 1760.693
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "I leave the conversation here for now, held within your enduring love.",
+   "start": 1760.873,
+   "end": 1766.015
+  }
+ ],
+ "overlay": {
+  "brand": "HeroVerse Prayer",
+  "title": "Lay Down Your Cares Tonight",
+  "title_card_seconds": 2.0
+ },
+ "persistent_overlays": [
+  "brand"
+ ],
+ "caption_style": {
+  "box": false,
+  "alignment": "bottom-centre",
+  "outline": 4,
+  "words_max": 7
+ },
+ "cta": [
+  {
+   "text": "SUBSCRIBE",
+   "start": 60.0,
+   "end": 68.0
+  },
+  {
+   "text": "LIKE",
+   "start": 796.813,
+   "end": 804.813
+  }
+ ],
+ "scripture_cards": [
+  {
+   "segment": "scripture-philippians-six",
+   "reference": "Philippians 4:6 (KJV)",
+   "start": 176.161,
+   "end": 183.607
+  },
+  {
+   "segment": "scripture-philippians-seven",
+   "reference": "Philippians 4:7 (KJV)",
+   "start": 318.789,
+   "end": 326.789
+  },
+  {
+   "segment": "scripture-matthew-tomorrow",
+   "reference": "Matthew 6:34 (KJV)",
+   "start": 451.115,
+   "end": 458.548
+  },
+  {
+   "segment": "scripture-psalm-thoughts",
+   "reference": "Psalm 94:19 (KJV)",
+   "start": 656.927,
+   "end": 662.26
+  },
+  {
+   "segment": "scripture-isaiah-mind",
+   "reference": "Isaiah 26:3 (KJV)",
+   "start": 828.675,
+   "end": 836.193
+  },
+  {
+   "segment": "sleep-proverbs",
+   "reference": "Proverbs 3:24 (KJV)",
+   "start": 1107.187,
+   "end": 1115.281
+  },
+  {
+   "segment": "sleep-john-peace",
+   "reference": "John 14:27 (KJV)",
+   "start": 1303.669,
+   "end": 1311.017
+  },
+  {
+   "segment": "sleep-psalm-preserve",
+   "reference": "Psalm 121:7 (KJV)",
+   "start": 1413.728,
+   "end": 1419.455
+  },
+  {
+   "segment": "sleep-psalm-coming-going",
+   "reference": "Psalm 121:8 (KJV)",
+   "start": 1485.827,
+   "end": 1492.76
+  },
+  {
+   "segment": "sleep-matthew-rest",
+   "reference": "Matthew 11:28 (KJV)",
+   "start": 1624.647,
+   "end": 1630.193
+  }
+ ],
+ "scene_target_seconds": 26.0,
+ "crossfade_seconds": 0.6,
+ "cinematic": {
+  "depth_model": {
+   "name": "Depth Anything V2 Small (ONNX)",
+   "licence": "apache-2.0",
+   "sha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c"
+  },
+  "grade": "colorbalance=rs=-0.015:bs=0.02:rh=0.03:gh=0.01:bh=-0.03,eq=contrast=1.04:saturation=1.04",
+  "look": "split[base][glow];[glow]scale=480:270,curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale=1920:1080[halo];[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,vignette=angle=PI/6:mode=forward,noise=c0s=4:c0f=t+u",
+  "atmosphere": [
+   "bg-night-sky",
+   "bg-moon-lake",
+   "bg-starry-hills",
+   "bg-starry-forest",
+   "bg-moonlit-sea"
+  ]
+ },
+ "clips": [],
+ "shots": [],
+ "timeline": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 8.255
+  },
+  {
+   "id": "invitation",
+   "start": 9.055,
+   "end": 36.173
+  },
+  {
+   "id": "scripture-peter",
+   "start": 37.373,
+   "end": 42.384
+  },
+  {
+   "id": "prayer-first-care",
+   "start": 43.884,
+   "end": 73.721
+  },
+  {
+   "id": "reflection-separate",
+   "start": 74.921,
+   "end": 105.975
+  },
+  {
+   "id": "prayer-awaited-answer",
+   "start": 107.175,
+   "end": 137.204
+  },
+  {
+   "id": "prayer-phone-boundary",
+   "start": 138.404,
+   "end": 172.819
+  },
+  {
+   "id": "scripture-philippians-six",
+   "start": 174.019,
+   "end": 183.787
+  },
+  {
+   "id": "reflection-request",
+   "start": 185.287,
+   "end": 217.992
+  },
+  {
+   "id": "prayer-work-mistake",
+   "start": 219.192,
+   "end": 249.127
+  },
+  {
+   "id": "prayer-next-step",
+   "start": 250.327,
+   "end": 283.3
+  },
+  {
+   "id": "prayer-thanksgiving",
+   "start": 284.5,
+   "end": 317.589
+  },
+  {
+   "id": "scripture-philippians-seven",
+   "start": 318.789,
+   "end": 326.969
+  },
+  {
+   "id": "reflection-guarded",
+   "start": 328.469,
+   "end": 356.783
+  },
+  {
+   "id": "prayer-household-cost",
+   "start": 357.983,
+   "end": 390.316
+  },
+  {
+   "id": "prayer-sufficient-plan",
+   "start": 391.516,
+   "end": 425.099
+  },
+  {
+   "id": "stillness-first",
+   "start": 426.299,
+   "end": 445.012
+  },
+  {
+   "id": "scripture-matthew-tomorrow",
+   "start": 448.012,
+   "end": 458.728
+  },
+  {
+   "id": "reflection-tomorrow",
+   "start": 460.228,
+   "end": 490.855
+  },
+  {
+   "id": "prayer-appointment",
+   "start": 492.055,
+   "end": 522.233
+  },
+  {
+   "id": "prayer-loved-person",
+   "start": 523.433,
+   "end": 553.121
+  },
+  {
+   "id": "reflection-loving-limits",
+   "start": 554.321,
+   "end": 585.161
+  },
+  {
+   "id": "prayer-unfinished-conversation",
+   "start": 586.361,
+   "end": 620.721
+  },
+  {
+   "id": "prayer-repair",
+   "start": 621.921,
+   "end": 655.727
+  },
+  {
+   "id": "scripture-psalm-thoughts",
+   "start": 656.927,
+   "end": 662.44
+  },
+  {
+   "id": "reflection-multitude",
+   "start": 663.94,
+   "end": 694.887
+  },
+  {
+   "id": "prayer-inner-criticism",
+   "start": 696.087,
+   "end": 727.536
+  },
+  {
+   "id": "prayer-body-kindness",
+   "start": 728.736,
+   "end": 760.152
+  },
+  {
+   "id": "reflection-returning-care",
+   "start": 761.352,
+   "end": 791.957
+  },
+  {
+   "id": "prayer-returning",
+   "start": 793.157,
+   "end": 827.475
+  },
+  {
+   "id": "scripture-isaiah-mind",
+   "start": 828.675,
+   "end": 836.373
+  },
+  {
+   "id": "reflection-attention",
+   "start": 837.873,
+   "end": 868.649
+  },
+  {
+   "id": "prayer-steady-trust",
+   "start": 869.849,
+   "end": 902.621
+  },
+  {
+   "id": "prayer-gathering-cares",
+   "start": 903.821,
+   "end": 936.56
+  },
+  {
+   "id": "reflection-single-line",
+   "start": 937.76,
+   "end": 970.809
+  },
+  {
+   "id": "declaration",
+   "start": 972.009,
+   "end": 1002.316
+  },
+  {
+   "id": "payoff",
+   "start": 1003.516,
+   "end": 1034.347
+  },
+  {
+   "id": "prayer-commitment",
+   "start": 1035.547,
+   "end": 1065.119
+  },
+  {
+   "id": "cta",
+   "start": 1066.319,
+   "end": 1074.828
+  },
+  {
+   "id": "sleep-introduction",
+   "start": 1075.828,
+   "end": 1105.687
+  },
+  {
+   "id": "sleep-proverbs",
+   "start": 1107.187,
+   "end": 1115.461
+  },
+  {
+   "id": "sleep-reflection-lying-down",
+   "start": 1116.961,
+   "end": 1145.936
+  },
+  {
+   "id": "sleep-prayer-bedside",
+   "start": 1147.436,
+   "end": 1177.785
+  },
+  {
+   "id": "sleep-reflection-simple",
+   "start": 1179.285,
+   "end": 1207.556
+  },
+  {
+   "id": "sleep-psalm-labour",
+   "start": 1209.056,
+   "end": 1218.461
+  },
+  {
+   "id": "sleep-reflection-labour",
+   "start": 1219.961,
+   "end": 1251.761
+  },
+  {
+   "id": "sleep-prayer-stopping",
+   "start": 1253.261,
+   "end": 1281.468
+  },
+  {
+   "id": "sleep-stillness",
+   "start": 1282.968,
+   "end": 1300.669
+  },
+  {
+   "id": "sleep-john-peace",
+   "start": 1303.669,
+   "end": 1315.644
+  },
+  {
+   "id": "sleep-reflection-gift",
+   "start": 1317.144,
+   "end": 1347.792
+  },
+  {
+   "id": "sleep-prayer-receiving",
+   "start": 1349.292,
+   "end": 1380.571
+  },
+  {
+   "id": "sleep-reflection-message",
+   "start": 1382.071,
+   "end": 1412.228
+  },
+  {
+   "id": "sleep-psalm-preserve",
+   "start": 1413.728,
+   "end": 1419.635
+  },
+  {
+   "id": "sleep-reflection-preserve",
+   "start": 1421.135,
+   "end": 1451.133
+  },
+  {
+   "id": "sleep-prayer-keeping",
+   "start": 1452.633,
+   "end": 1484.327
+  },
+  {
+   "id": "sleep-psalm-coming-going",
+   "start": 1485.827,
+   "end": 1492.94
+  },
+  {
+   "id": "sleep-reflection-doorway",
+   "start": 1494.44,
+   "end": 1525.377
+  },
+  {
+   "id": "sleep-prayer-threshold",
+   "start": 1526.877,
+   "end": 1556.641
+  },
+  {
+   "id": "sleep-reflection-fewer-words",
+   "start": 1558.141,
+   "end": 1589.399
+  },
+  {
+   "id": "sleep-prayer-hours",
+   "start": 1590.899,
+   "end": 1623.147
+  },
+  {
+   "id": "sleep-matthew-rest",
+   "start": 1624.647,
+   "end": 1630.373
+  },
+  {
+   "id": "sleep-reflection-coming",
+   "start": 1631.873,
+   "end": 1661.967
+  },
+  {
+   "id": "sleep-prayer-welcome",
+   "start": 1663.467,
+   "end": 1696.76
+  },
+  {
+   "id": "sleep-reflection-unfinished",
+   "start": 1698.26,
+   "end": 1731.337
+  },
+  {
+   "id": "sleep-prayer-closing",
+   "start": 1732.837,
+   "end": 1766.195
+  }
+ ],
+ "upload_performed": false,
+ "publication_performed": false
+}

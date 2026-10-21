@@ -1,0 +1,610 @@
+{
+ "version": "prepublish-gate-v1",
+ "pilot_id": "pilot-010",
+ "output_sha256": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f",
+ "decision": "UNKNOWN",
+ "eligible_for_automatic_publication": false,
+ "dimensions": {
+  "binding": "PASS",
+  "technical": "PASS",
+  "audio": "UNKNOWN",
+  "transcript": "PASS",
+  "captions": "UNKNOWN",
+  "sync": "UNKNOWN",
+  "image": "UNKNOWN",
+  "rights": "PASS",
+  "content_and_policy": "UNKNOWN",
+  "scorecard": "UNKNOWN",
+  "full_file_scan": "PASS",
+  "structure": "PASS",
+  "authenticity": "PASS",
+  "preflight": "PASS"
+ },
+ "items": {
+  "binding": [
+   {
+    "source": "binding",
+    "item": "manifest",
+    "state": "PASS",
+    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+   },
+   {
+    "source": "binding",
+    "item": "qa_for_this_file",
+    "state": "PASS",
+    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+   },
+   {
+    "source": "binding",
+    "item": "qa_criteria_frozen",
+    "state": "PASS",
+    "detail": {
+     "version": "pilot-qa-criteria-v3",
+     "recorded": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+     "file": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
+    }
+   },
+   {
+    "source": "binding",
+    "item": "review_for_this_file",
+    "state": "PASS",
+    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+   },
+   {
+    "source": "binding",
+    "item": "video_file_hash",
+    "state": "PASS",
+    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+   }
+  ],
+  "technical": [
+   {
+    "source": "qa",
+    "item": "full_decode_without_errors",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "video_format",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "duration_min",
+    "state": "PASS"
+   }
+  ],
+  "audio": [
+   {
+    "source": "qa",
+    "item": "integrated_lufs",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "true_peak",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "speech_presence",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_singing",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "audio_clarity_and_mix",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   }
+  ],
+  "transcript": [
+   {
+    "source": "qa",
+    "item": "wer_vs_script",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "words_per_minute",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "hook_second_person",
+    "state": "PASS"
+   }
+  ],
+  "captions": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_hold_median",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_chars_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_words_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_no_box",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   }
+  ],
+  "sync": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   }
+  ],
+  "image": [
+   {
+    "source": "qa",
+    "item": "title_card_seconds",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_figure",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "every_scene_in_motion",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "scene_seconds",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "crossfade_seconds_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "image_repeat_gap",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "scripture_card_only_while_read",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_count",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_short_and_not_early",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "persistent_overlays_only_brand",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "picture_quality",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   },
+   {
+    "source": "review",
+    "item": "figure_and_background_integrity",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   }
+  ],
+  "rights": [
+   {
+    "source": "qa",
+    "item": "images_open_licence_with_revision",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_third_party_footage",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "music_owned",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "voice_model_pinned",
+    "state": "PASS"
+   }
+  ],
+  "content_and_policy": [
+   {
+    "source": "review",
+    "item": "opening_and_promise",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   },
+   {
+    "source": "review",
+    "item": "pacing_and_visual_variety",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   },
+   {
+    "source": "review",
+    "item": "scripture_on_screen",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   },
+   {
+    "source": "review",
+    "item": "policy_safe",
+    "state": "UNKNOWN",
+    "detail": "review ERROR: ProviderFailure: HTTP_503_UNAVAILABLE"
+   },
+   {
+    "source": "review",
+    "item": "overall",
+    "state": "UNKNOWN",
+    "detail": "no completed watched review for this file"
+   }
+  ],
+  "scorecard": [
+   {
+    "source": "score",
+    "item": "minutes",
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
+   },
+   {
+    "source": "score",
+    "item": "scripture_per_10_min",
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
+   }
+  ],
+  "full_file_scan": [
+   {
+    "source": "scan",
+    "item": "black_picture",
+    "state": "PASS",
+    "detail": 0.0
+   },
+   {
+    "source": "scan",
+    "item": "digital_silence",
+    "state": "PASS",
+    "detail": 0.0
+   }
+  ],
+  "structure": [
+   {
+    "source": "structure",
+    "item": "driver_continuous_motion",
+    "state": "PASS",
+    "detail": 62
+   },
+   {
+    "source": "structure",
+    "item": "driver_viewer_hook_5s",
+    "state": "PASS",
+    "detail": [
+     "Good evening.",
+     "Before you check again, pray through tonight’s worries and p"
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_speech_within_3s",
+    "state": "PASS",
+    "detail": 0.3
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_spoken_amen_cta",
+    "state": "PASS",
+    "detail": "If you want to affirm this prayer in the comments, write amen. Now let the Scripture readings accompany your rest."
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_recurring_refrain",
+    "state": "PASS",
+    "detail": [
+     "you do not",
+     16
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_gratitude_block",
+    "state": "PASS",
+    "detail": 7
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_voice_and_music",
+    "state": "PASS",
+    "detail": {
+     "voice_model_pinned": true,
+     "music_owned": true
+    }
+   },
+   {
+    "source": "structure",
+    "item": "package_title_promise_pipe_keyword",
+    "state": "PASS",
+    "detail": "Night Prayer for Anxiety | Cast Your Cares on God and Sleep in Peace"
+   },
+   {
+    "source": "structure",
+    "item": "package_chapters",
+    "state": "PASS",
+    "detail": [
+     "0:00",
+     "0:37",
+     "2:54",
+     "5:18"
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "package_publish_window",
+    "state": "PASS",
+    "detail": "night 2026-10-23T00:00:00Z"
+   }
+  ],
+  "authenticity": [
+   {
+    "source": "authenticity",
+    "item": "original_words_share",
+    "state": "PASS",
+    "detail": 0.953
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_script_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.023,
+      "pilot-007"
+     ],
+     "visible": [
+      "pilot-002",
+      "pilot-005",
+      "pilot-006",
+      "pilot-007",
+      "pilot-012"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_image_set",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.0,
+      null
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_title",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.111,
+      "pilot-007"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_opening_line",
+    "state": "PASS",
+    "detail": {
+     "opening": "before you check again pray through tonight s",
+     "same_as": []
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "not_reused_reference_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": 0.0005,
+     "ref": "fXhKzleJhxI",
+     "refs": 1
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "critique_policy_and_ypp",
+    "state": "PASS",
+    "detail": []
+   },
+   {
+    "source": "authenticity",
+    "item": "synthetic_media_disclosed",
+    "state": "PASS",
+    "detail": "publish_video.py status"
+   }
+  ],
+  "preflight": [
+   {
+    "source": "preflight",
+    "item": "preflight",
+    "state": "PASS"
+   }
+  ]
+ },
+ "informative_not_deciding": {
+  "scan_frozen_picture": {
+   "longest_s": 2.84,
+   "report_s": 5.0,
+   "blocking": false,
+   "inside": true,
+   "spans": [
+    [
+     3.97,
+     5.13,
+     1.17
+    ],
+    [
+     36.37,
+     37.4,
+     1.03
+    ],
+    [
+     37.97,
+     39.2,
+     1.23
+    ],
+    [
+     92.83,
+     93.97,
+     1.13
+    ],
+    [
+     120.73,
+     121.97,
+     1.23
+    ],
+    [
+     152.63,
+     154.83,
+     2.2
+    ],
+    [
+     154.83,
+     156.63,
+     1.8
+    ],
+    [
+     156.63,
+     159.17,
+     2.53
+    ],
+    [
+     159.17,
+     161.2,
+     2.03
+    ],
+    [
+     161.2,
+     162.5,
+     1.3
+    ],
+    [
+     162.5,
+     164.53,
+     2.03
+    ],
+    [
+     165.43,
+     166.93,
+     1.5
+    ],
+    [
+     166.93,
+     168.9,
+     1.97
+    ],
+    [
+     168.97,
+     170.73,
+     1.77
+    ],
+    [
+     170.73,
+     173.0,
+     2.27
+    ],
+    [
+     173.0,
+     174.03,
+     1.03
+    ],
+    [
+     174.03,
+     176.07,
+     2.03
+    ],
+    [
+     176.37,
+     178.03,
+     1.67
+    ],
+    [
+     178.2,
+     180.93,
+     2.73
+    ],
+    [
+     180.93,
+     183.43,
+     2.5
+    ]
+   ]
+  }
+ },
+ "market_evidence_not_deciding": {
+  "status": "INVALID",
+  "detail": "missing fields: generated_at, source, calls, data_as_of, opportunity, comparables, evidence_for, evidence_against, limitations, recommendation, relation_to_content, validation_status",
+  "not_claimed": "market evidence only: not technical quality, not a performance forecast, not a guarantee of views, revenue or monetization"
+ },
+ "method_notes": {
+  "review_sampling": "watched review samples pictures at 0.5 frames/s, low resolution",
+  "not_claimed": [
+   "perceived quality by viewers",
+   "retention, CTR or revenue",
+   "originality beyond the rights checks listed"
+  ]
+ }
+}
