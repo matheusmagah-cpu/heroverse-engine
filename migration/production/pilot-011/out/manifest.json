@@ -1,0 +1,6455 @@
+{
+ "version": "pilot-manifest-v2",
+ "pilot_id": "pilot-011",
+ "grammar": "standard-v1:fullframe-depth-parallax+film-look+captions",
+ "output_sha256": "b3d8aadc2c1fb15d478820152122a4ace25f9dba5eb69a39152773e0a298b203",
+ "output_seconds": 1593.435,
+ "script_sha256": "ceb059d6c1e1b51e44641bd574eda2f90dd60f5b238f6b5144d8b590f7ef9754",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85,
+  "voice_wav_sha256": "82b05dd1987ca59d1bfa3e569e40a462aef52e7f92e3273f875c53df21831317"
+ },
+ "music": {
+  "file": "original-rest-music.lossless.flac",
+  "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+  "offset_seconds": 1200.0,
+  "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
+ },
+ "figure": null,
+ "images": {
+  "bg-morning-path": {
+   "sha256": "7fa78bb87bca5a097c60e22927ae8e373151765dbc90abf1566c6d633a863419",
+   "release_asset": "pilot-003-img-bg-morning-path-sha256-7fa78bb87bca5a097c60e22927ae8e373151765dbc90abf1566c6d633a863419.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "quiet country path through trees in early morning light, soft sun rays through the leaves, gentle mist, no people, soft cinematic devotional painting, warm natural light, hopeful and calm mood, rich detail, gentle colours"
+  },
+  "bg-waiting-ridge-sunrise": {
+   "sha256": "ff48f75302fffd18ce8c5fabbe12ff742f47209ede0fdcd3ded8d6db1fddbf34",
+   "release_asset": "pilot-011-img-bg-waiting-ridge-sunrise-sha256-ff48f75302fffd18ce8c5fabbe12ff742f47209ede0fdcd3ded8d6db1fddbf34.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "An open mountain ridge at sunrise, a visible golden sun just above distant blue peaks, gentle mist in the valleys, peaceful spacious landscape, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-lantern-path": {
+   "sha256": "6f69fd7e46938f0286c53828a171e55291a964a1689e3a8044a10cc4b820f380",
+   "release_asset": "pilot-011-img-bg-waiting-lantern-path-sha256-6f69fd7e46938f0286c53828a171e55291a964a1689e3a8044a10cc4b820f380.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A small visible lantern beside an empty hillside path as morning light arrives, dew on green grass and a quiet valley beyond, patient hopeful scenery, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-cedar-dawn": {
+   "sha256": "d328561739818038c0da37a0837ff0b81ed031ccbaed36db10244181f38fc5f5",
+   "release_asset": "pilot-011-img-bg-waiting-cedar-dawn-sha256-d328561739818038c0da37a0837ff0b81ed031ccbaed36db10244181f38fc5f5.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A tall cedar on a sheltered slope in soft dawn light, strong roots among mossy stones and a calm pale sky, restful natural scene, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-spring-steps": {
+   "sha256": "7c757f18cf7865c4fa225d06554098ae25be5c6753a53e6b9f98037b2eeab681",
+   "release_asset": "pilot-011-img-bg-waiting-spring-steps-sha256-7c757f18cf7865c4fa225d06554098ae25be5c6753a53e6b9f98037b2eeab681.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "Old stone steps beside a clear mountain spring in morning sunlight, small ferns growing in the joints, a gentle upward path, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-cloud-break": {
+   "sha256": "730d00b18c6e8e3c055b74c74e04abc5b0c0500ea5fdc3fcb8b23ba76f4b5826",
+   "release_asset": "pilot-011-img-bg-waiting-cloud-break-sha256-730d00b18c6e8e3c055b74c74e04abc5b0c0500ea5fdc3fcb8b23ba76f4b5826.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "Soft morning clouds opening above green hills, warm sunlight reaching a quiet valley in broad gentle rays, calm hopeful natural landscape, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-resting-grove": {
+   "sha256": "2d6dc6608ce21d9018984c3d7ca0ce972ae36625681b02565ff0d46344f2d871",
+   "release_asset": "pilot-011-img-bg-waiting-resting-grove-sha256-2d6dc6608ce21d9018984c3d7ca0ce972ae36625681b02565ff0d46344f2d871.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "An empty shaded grove beside a bright meadow, morning dew on leaves and warm sun along a simple stone seat, peaceful place to rest, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-highland-stream": {
+   "sha256": "69ce891d11d807aa9893bdbef55407616733a23f9ed991060b0124274cd2c9af",
+   "release_asset": "pilot-011-img-bg-waiting-highland-stream-sha256-69ce891d11d807aa9893bdbef55407616733a23f9ed991060b0124274cd2c9af.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A clear highland stream winding through fresh grass in early morning light, distant hills and delicate wildflowers, quiet steady natural movement, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-open-horizon": {
+   "sha256": "a5d20044e1cd49a788da729fcb2655c5121a9bdf1f64c617a7ef3e6aacec7dd1",
+   "release_asset": "pilot-011-img-bg-waiting-open-horizon-sha256-a5d20044e1cd49a788da729fcb2655c5121a9bdf1f64c617a7ef3e6aacec7dd1.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "Wide golden morning horizon above rolling green country, a winding clear path through the foreground and calm blue sky, spacious hopeful scenery, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-sunlit-pass": {
+   "sha256": "694239973f9fa478025cc9ab6f3ef8fbd1fe708aa631a2381edcd37ac4c21fcf",
+   "release_asset": "pilot-011-img-bg-waiting-sunlit-pass-sha256-694239973f9fa478025cc9ab6f3ef8fbd1fe708aa631a2381edcd37ac4c21fcf.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A gentle mountain pass filled with soft morning sunlight, an open path leading toward a calm horizon, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-morning-rockpool": {
+   "sha256": "f6121f1932280fea65a028e772ed387453b008512fc750ced873992402c199ae",
+   "release_asset": "pilot-011-img-bg-waiting-morning-rockpool-sha256-f6121f1932280fea65a028e772ed387453b008512fc750ced873992402c199ae.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "A clear rock pool beneath a small spring in golden early sunlight, moss and delicate ferns, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  },
+  "bg-waiting-quiet-summit": {
+   "sha256": "666319437a58e4df3cd1e265cff8a6db22a76c11afcce3c9911688417f36cedd",
+   "release_asset": "pilot-011-img-bg-waiting-quiet-summit-sha256-666319437a58e4df3cd1e265cff8a6db22a76c11afcce3c9911688417f36cedd.png",
+   "models": {
+    "@cf/black-forest-labs/flux-1-schnell": {
+     "license": "apache-2.0",
+     "revision": "workers-ai-managed",
+     "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+    }
+   },
+   "seed": null,
+   "prompt": "An empty rounded summit above drifting valley mist, visible sunrise and vast peaceful sky, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text"
+  }
+ },
+ "holds": [
+  {
+   "image": "bg-morning-path",
+   "start": 0.0,
+   "figure": false,
+   "end": 2.0,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-ridge-sunrise",
+   "start": 2.0,
+   "end": 31.941,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-lantern-path",
+   "start": 31.941,
+   "end": 62.556,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cedar-dawn",
+   "start": 62.556,
+   "end": 93.011,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-spring-steps",
+   "start": 93.011,
+   "end": 125.993,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cloud-break",
+   "start": 125.993,
+   "end": 157.031,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-resting-grove",
+   "start": 157.031,
+   "end": 185.457,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-highland-stream",
+   "start": 185.457,
+   "end": 220.007,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-open-horizon",
+   "start": 220.007,
+   "end": 253.148,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-sunlit-pass",
+   "start": 253.148,
+   "end": 283.411,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-morning-rockpool",
+   "start": 283.411,
+   "end": 315.284,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-quiet-summit",
+   "start": 315.284,
+   "end": 345.579,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-ridge-sunrise",
+   "start": 345.579,
+   "end": 374.345,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-lantern-path",
+   "start": 374.345,
+   "end": 406.633,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cedar-dawn",
+   "start": 406.633,
+   "end": 442.377,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-spring-steps",
+   "start": 442.377,
+   "end": 470.9,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cloud-break",
+   "start": 470.9,
+   "end": 504.468,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-resting-grove",
+   "start": 504.468,
+   "end": 533.343,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-highland-stream",
+   "start": 533.343,
+   "end": 567.879,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-open-horizon",
+   "start": 567.879,
+   "end": 600.529,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-sunlit-pass",
+   "start": 600.529,
+   "end": 634.289,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-morning-rockpool",
+   "start": 634.289,
+   "end": 668.433,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-quiet-summit",
+   "start": 668.433,
+   "end": 698.908,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-ridge-sunrise",
+   "start": 698.908,
+   "end": 728.691,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-lantern-path",
+   "start": 728.691,
+   "end": 761.896,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cedar-dawn",
+   "start": 761.896,
+   "end": 791.401,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-spring-steps",
+   "start": 791.401,
+   "end": 822.635,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cloud-break",
+   "start": 822.635,
+   "end": 857.183,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-resting-grove",
+   "start": 857.183,
+   "end": 876.025,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-highland-stream",
+   "start": 876.025,
+   "end": 894.868,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-open-horizon",
+   "start": 894.868,
+   "end": 914.062,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-sunlit-pass",
+   "start": 914.062,
+   "end": 933.257,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-morning-rockpool",
+   "start": 933.257,
+   "end": 964.093,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-quiet-summit",
+   "start": 964.093,
+   "end": 995.028,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-ridge-sunrise",
+   "start": 995.028,
+   "end": 1028.339,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-lantern-path",
+   "start": 1028.339,
+   "end": 1062.163,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cedar-dawn",
+   "start": 1062.163,
+   "end": 1093.917,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-spring-steps",
+   "start": 1093.917,
+   "end": 1122.845,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cloud-break",
+   "start": 1122.845,
+   "end": 1155.496,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-resting-grove",
+   "start": 1155.496,
+   "end": 1185.812,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-highland-stream",
+   "start": 1185.812,
+   "end": 1220.553,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-open-horizon",
+   "start": 1220.553,
+   "end": 1253.492,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-sunlit-pass",
+   "start": 1253.492,
+   "end": 1282.635,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-morning-rockpool",
+   "start": 1282.635,
+   "end": 1312.951,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-quiet-summit",
+   "start": 1312.951,
+   "end": 1343.681,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-ridge-sunrise",
+   "start": 1343.681,
+   "end": 1373.293,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-lantern-path",
+   "start": 1373.293,
+   "end": 1391.624,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cedar-dawn",
+   "start": 1391.624,
+   "end": 1409.955,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-spring-steps",
+   "start": 1409.955,
+   "end": 1438.329,
+   "figure": false,
+   "motion": "dolly_in",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-cloud-break",
+   "start": 1438.329,
+   "end": 1468.105,
+   "figure": false,
+   "motion": "truck_right",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-resting-grove",
+   "start": 1468.105,
+   "end": 1496.381,
+   "figure": false,
+   "motion": "crane_up",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-highland-stream",
+   "start": 1496.381,
+   "end": 1526.087,
+   "figure": false,
+   "motion": "dolly_out",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-open-horizon",
+   "start": 1526.087,
+   "end": 1559.601,
+   "figure": false,
+   "motion": "truck_left",
+   "atmosphere": false
+  },
+  {
+   "image": "bg-waiting-sunlit-pass",
+   "start": 1559.601,
+   "end": 1593.435,
+   "figure": false,
+   "motion": "arc",
+   "atmosphere": false
+  }
+ ],
+ "captions_ass_sha256": "69e4eaaf22054981426030fb12d051b2995729bb6d2c0c48df625bc1a8a8c1b6",
+ "captions": [
+  {
+   "start": 1.845,
+   "end": 3.12,
+   "text": "If you woke tired,"
+  },
+  {
+   "start": 3.12,
+   "end": 4.89,
+   "text": "pray with me for strength"
+  },
+  {
+   "start": 4.89,
+   "end": 7.081,
+   "text": "to meet this day with God."
+  },
+  {
+   "start": 7.611,
+   "end": 9.698,
+   "text": "You may have opened your eyes"
+  },
+  {
+   "start": 9.698,
+   "end": 12.036,
+   "text": "already wishing for more rest."
+  },
+  {
+   "start": 12.036,
+   "end": 14.022,
+   "text": "Let your shoulders settle,"
+  },
+  {
+   "start": 14.022,
+   "end": 15.501,
+   "text": "wherever you are."
+  },
+  {
+   "start": 15.501,
+   "end": 17.636,
+   "text": "You can keep your eyes open"
+  },
+  {
+   "start": 17.636,
+   "end": 19.713,
+   "text": "and your breathing easy."
+  },
+  {
+   "start": 19.713,
+   "end": 21.642,
+   "text": "You can join each prayer"
+  },
+  {
+   "start": 21.642,
+   "end": 24.715,
+   "text": "in your own voice or listen quietly."
+  },
+  {
+   "start": 24.715,
+   "end": 27.796,
+   "text": "Bring the tiredness you actually feel."
+  },
+  {
+   "start": 27.796,
+   "end": 31.111,
+   "text": "You have room here to begin honestly."
+  },
+  {
+   "start": 31.941,
+   "end": 33.434,
+   "text": "Everlasting Father,"
+  },
+  {
+   "start": 33.434,
+   "end": 35.79,
+   "text": "I come to you with the morning"
+  },
+  {
+   "start": 35.79,
+   "end": 36.34,
+   "text": "I have,"
+  },
+  {
+   "start": 36.34,
+   "end": 38.147,
+   "text": "including the heaviness"
+  },
+  {
+   "start": 38.147,
+   "end": 40.527,
+   "text": "I wish I could leave behind."
+  },
+  {
+   "start": 40.527,
+   "end": 43.228,
+   "text": "I need your strength before I begin"
+  },
+  {
+   "start": 43.228,
+   "end": 45.955,
+   "text": "measuring what this day requires."
+  },
+  {
+   "start": 45.955,
+   "end": 48.021,
+   "text": "Receive my scattered thoughts"
+  },
+  {
+   "start": 48.021,
+   "end": 50.551,
+   "text": "and my small willingness to pray."
+  },
+  {
+   "start": 50.551,
+   "end": 51.994,
+   "text": "Meet me in the room"
+  },
+  {
+   "start": 51.994,
+   "end": 52.83,
+   "text": "where I am,"
+  },
+  {
+   "start": 52.83,
+   "end": 55.744,
+   "text": "among the things waiting to be done."
+  },
+  {
+   "start": 55.744,
+   "end": 57.712,
+   "text": "I want to learn how to depend"
+  },
+  {
+   "start": 57.712,
+   "end": 59.34,
+   "text": "on you while taking care"
+  },
+  {
+   "start": 59.34,
+   "end": 61.726,
+   "text": "of the life you have given me."
+  },
+  {
+   "start": 62.556,
+   "end": 64.677,
+   "text": "Hast thou not known?"
+  },
+  {
+   "start": 64.677,
+   "end": 66.331,
+   "text": "hast thou not heard,"
+  },
+  {
+   "start": 66.331,
+   "end": 68.398,
+   "text": "that the everlasting God,"
+  },
+  {
+   "start": 68.398,
+   "end": 69.142,
+   "text": "the LORD,"
+  },
+  {
+   "start": 69.142,
+   "end": 71.044,
+   "text": "the Creator of the ends"
+  },
+  {
+   "start": 71.044,
+   "end": 72.119,
+   "text": "of the earth,"
+  },
+  {
+   "start": 72.119,
+   "end": 74.863,
+   "text": "fainteth not, neither is weary?"
+  },
+  {
+   "start": 74.863,
+   "end": 76.484,
+   "text": "there is no searching"
+  },
+  {
+   "start": 76.484,
+   "end": 78.455,
+   "text": "of his understanding."
+  },
+  {
+   "start": 79.585,
+   "end": 83.115,
+   "text": "Isaiah begins with the everlasting God."
+  },
+  {
+   "start": 83.115,
+   "end": 85.234,
+   "text": "Before you examine your own"
+  },
+  {
+   "start": 85.234,
+   "end": 86.725,
+   "text": "supply of strength,"
+  },
+  {
+   "start": 86.725,
+   "end": 89.417,
+   "text": "you are invited to remember him."
+  },
+  {
+   "start": 89.417,
+   "end": 90.749,
+   "text": "You may see only"
+  },
+  {
+   "start": 90.749,
+   "end": 93.011,
+   "text": "the hours directly ahead."
+  },
+  {
+   "start": 93.011,
+   "end": 94.874,
+   "text": "You may feel that everyone"
+  },
+  {
+   "start": 94.874,
+   "end": 96.988,
+   "text": "expects something from you."
+  },
+  {
+   "start": 96.988,
+   "end": 99.744,
+   "text": "The Creator's understanding reaches"
+  },
+  {
+   "start": 99.744,
+   "end": 102.523,
+   "text": "beyond what you can hold in mind."
+  },
+  {
+   "start": 102.523,
+   "end": 104.231,
+   "text": "As you hear this passage,"
+  },
+  {
+   "start": 104.231,
+   "end": 106.211,
+   "text": "let your attention widen from"
+  },
+  {
+   "start": 106.211,
+   "end": 108.465,
+   "text": "the demands of the morning toward"
+  },
+  {
+   "start": 108.465,
+   "end": 111.001,
+   "text": "the God to whom you are praying."
+  },
+  {
+   "start": 111.831,
+   "end": 112.194,
+   "text": "Lord,"
+  },
+  {
+   "start": 112.194,
+   "end": 114.081,
+   "text": "you know the effort hidden"
+  },
+  {
+   "start": 114.081,
+   "end": 116.512,
+   "text": "beneath my ordinary appearance."
+  },
+  {
+   "start": 116.512,
+   "end": 118.837,
+   "text": "You know the interrupted rest,"
+  },
+  {
+   "start": 118.837,
+   "end": 120.93,
+   "text": "the decisions made quietly,"
+  },
+  {
+   "start": 120.93,
+   "end": 123.178,
+   "text": "and the concern I carry while"
+  },
+  {
+   "start": 123.178,
+   "end": 125.993,
+   "text": "answering that everything is fine."
+  },
+  {
+   "start": 125.993,
+   "end": 128.755,
+   "text": "I can speak more plainly with you."
+  },
+  {
+   "start": 128.755,
+   "end": 130.597,
+   "text": "I am tired of holding"
+  },
+  {
+   "start": 130.597,
+   "end": 132.092,
+   "text": "so much inside."
+  },
+  {
+   "start": 132.092,
+   "end": 133.973,
+   "text": "Give me the wisdom to name"
+  },
+  {
+   "start": 133.973,
+   "end": 136.07,
+   "text": "what is heavy and the courage"
+  },
+  {
+   "start": 136.07,
+   "end": 138.565,
+   "text": "to let someone trustworthy know."
+  },
+  {
+   "start": 138.565,
+   "end": 140.607,
+   "text": "I receive this moment as"
+  },
+  {
+   "start": 140.607,
+   "end": 142.818,
+   "text": "a place to stop pretending"
+  },
+  {
+   "start": 142.818,
+   "end": 145.635,
+   "text": "that I have endless reserves."
+  },
+  {
+   "start": 146.465,
+   "end": 148.864,
+   "text": "He giveth power to the faint;"
+  },
+  {
+   "start": 148.864,
+   "end": 150.583,
+   "text": "and to them that have no"
+  },
+  {
+   "start": 150.583,
+   "end": 153.011,
+   "text": "might he increaseth strength."
+  },
+  {
+   "start": 154.141,
+   "end": 157.031,
+   "text": "Listen to whom this verse addresses:"
+  },
+  {
+   "start": 157.031,
+   "end": 157.772,
+   "text": "the faint,"
+  },
+  {
+   "start": 157.772,
+   "end": 160.027,
+   "text": "and those who have no might."
+  },
+  {
+   "start": 160.027,
+   "end": 161.616,
+   "text": "You can hear it from"
+  },
+  {
+   "start": 161.616,
+   "end": 163.94,
+   "text": "the place you occupy today."
+  },
+  {
+   "start": 163.94,
+   "end": 165.362,
+   "text": "You can acknowledge"
+  },
+  {
+   "start": 165.362,
+   "end": 168.387,
+   "text": "that a responsibility feels too large."
+  },
+  {
+   "start": 168.387,
+   "end": 170.922,
+   "text": "You can admit that your usual"
+  },
+  {
+   "start": 170.922,
+   "end": 173.025,
+   "text": "enthusiasm is missing."
+  },
+  {
+   "start": 173.025,
+   "end": 174.383,
+   "text": "You have something"
+  },
+  {
+   "start": 174.383,
+   "end": 176.299,
+   "text": "honest to bring to God."
+  },
+  {
+   "start": 176.299,
+   "end": 178.743,
+   "text": "Allow yourself to ask for strength"
+  },
+  {
+   "start": 178.743,
+   "end": 181.474,
+   "text": "before you have worked out exactly how"
+  },
+  {
+   "start": 181.474,
+   "end": 184.627,
+   "text": "you will manage the next several hours."
+  },
+  {
+   "start": 185.457,
+   "end": 186.117,
+   "text": "Creator,"
+  },
+  {
+   "start": 186.117,
+   "end": 188.097,
+   "text": "I thank you for my body,"
+  },
+  {
+   "start": 188.097,
+   "end": 189.5,
+   "text": "even on a morning"
+  },
+  {
+   "start": 189.5,
+   "end": 191.248,
+   "text": "when it feels slow."
+  },
+  {
+   "start": 191.248,
+   "end": 193.732,
+   "text": "Teach me to treat it with care."
+  },
+  {
+   "start": 193.732,
+   "end": 196.565,
+   "text": "Help me notice the need for food,"
+  },
+  {
+   "start": 196.565,
+   "end": 198.711,
+   "text": "water, movement, or rest,"
+  },
+  {
+   "start": 198.711,
+   "end": 201.037,
+   "text": "and respond as I am able."
+  },
+  {
+   "start": 201.037,
+   "end": 203.27,
+   "text": "When tiredness needs attention"
+  },
+  {
+   "start": 203.27,
+   "end": 205.132,
+   "text": "beyond what I understand,"
+  },
+  {
+   "start": 205.132,
+   "end": 208.215,
+   "text": "give me sense to seek appropriate care."
+  },
+  {
+   "start": 208.215,
+   "end": 209.752,
+   "text": "Let my plans respect"
+  },
+  {
+   "start": 209.752,
+   "end": 212.085,
+   "text": "the limits I am living with."
+  },
+  {
+   "start": 212.085,
+   "end": 214.465,
+   "text": "I ask for patience with myself"
+  },
+  {
+   "start": 214.465,
+   "end": 216.765,
+   "text": "as I learn a more considerate"
+  },
+  {
+   "start": 216.765,
+   "end": 219.177,
+   "text": "way to move through today."
+  },
+  {
+   "start": 220.007,
+   "end": 220.575,
+   "text": "Father,"
+  },
+  {
+   "start": 220.575,
+   "end": 222.523,
+   "text": "bring order to the first"
+  },
+  {
+   "start": 222.523,
+   "end": 223.92,
+   "text": "hour before me."
+  },
+  {
+   "start": 223.92,
+   "end": 225.781,
+   "text": "I can see several things"
+  },
+  {
+   "start": 225.781,
+   "end": 227.409,
+   "text": "asking for attention,"
+  },
+  {
+   "start": 227.409,
+   "end": 228.882,
+   "text": "and I feel the urge"
+  },
+  {
+   "start": 228.882,
+   "end": 230.457,
+   "text": "to begin them all."
+  },
+  {
+   "start": 230.457,
+   "end": 232.639,
+   "text": "Show me which responsibility"
+  },
+  {
+   "start": 232.639,
+   "end": 234.221,
+   "text": "truly comes first."
+  },
+  {
+   "start": 234.221,
+   "end": 236.254,
+   "text": "Help me gather what I need,"
+  },
+  {
+   "start": 236.254,
+   "end": 237.836,
+   "text": "clear a little space,"
+  },
+  {
+   "start": 237.836,
+   "end": 240.652,
+   "text": "and make a beginning I can sustain."
+  },
+  {
+   "start": 240.652,
+   "end": 241.917,
+   "text": "Let a simple start"
+  },
+  {
+   "start": 241.917,
+   "end": 243.925,
+   "text": "be enough for this moment."
+  },
+  {
+   "start": 243.925,
+   "end": 246.105,
+   "text": "Keep me attentive to the work"
+  },
+  {
+   "start": 246.105,
+   "end": 248.51,
+   "text": "in my hands rather than spending"
+  },
+  {
+   "start": 248.51,
+   "end": 250.54,
+   "text": "my strength imagining every"
+  },
+  {
+   "start": 250.54,
+   "end": 252.318,
+   "text": "task still waiting."
+  },
+  {
+   "start": 253.148,
+   "end": 254.672,
+   "text": "Even the youths shall"
+  },
+  {
+   "start": 254.672,
+   "end": 256.051,
+   "text": "faint and be weary,"
+  },
+  {
+   "start": 256.051,
+   "end": 259.087,
+   "text": "and the young men shall utterly fall:"
+  },
+  {
+   "start": 260.217,
+   "end": 262.173,
+   "text": "You have just heard Scripture"
+  },
+  {
+   "start": 262.173,
+   "end": 264.263,
+   "text": "acknowledge weariness in people"
+  },
+  {
+   "start": 264.263,
+   "end": 266.264,
+   "text": "who might appear strongest."
+  },
+  {
+   "start": 266.264,
+   "end": 268.008,
+   "text": "You may be comparing this"
+  },
+  {
+   "start": 268.008,
+   "end": 269.822,
+   "text": "morning with a season when"
+  },
+  {
+   "start": 269.822,
+   "end": 271.607,
+   "text": "you could do much more."
+  },
+  {
+   "start": 271.607,
+   "end": 273.418,
+   "text": "You may be watching someone"
+  },
+  {
+   "start": 273.418,
+   "end": 275.477,
+   "text": "whose pace looks effortless."
+  },
+  {
+   "start": 275.477,
+   "end": 277.222,
+   "text": "You rarely see the whole"
+  },
+  {
+   "start": 277.222,
+   "end": 279.22,
+   "text": "of another person's life."
+  },
+  {
+   "start": 279.22,
+   "end": 281.261,
+   "text": "Let this verse bring you back"
+  },
+  {
+   "start": 281.261,
+   "end": 283.411,
+   "text": "to an honest starting place."
+  },
+  {
+   "start": 283.411,
+   "end": 285.66,
+   "text": "You can work with the capacity"
+  },
+  {
+   "start": 285.66,
+   "end": 287.309,
+   "text": "you have today and ask"
+  },
+  {
+   "start": 287.309,
+   "end": 288.859,
+   "text": "God to guide it."
+  },
+  {
+   "start": 289.689,
+   "end": 289.988,
+   "text": "God,"
+  },
+  {
+   "start": 289.988,
+   "end": 292.831,
+   "text": "I bring you the comparison that leaves"
+  },
+  {
+   "start": 292.831,
+   "end": 295.779,
+   "text": "me discouraged before I have started."
+  },
+  {
+   "start": 295.779,
+   "end": 297.444,
+   "text": "I remember what I once"
+  },
+  {
+   "start": 297.444,
+   "end": 299.034,
+   "text": "accomplished quickly,"
+  },
+  {
+   "start": 299.034,
+   "end": 300.927,
+   "text": "or I see what others seem"
+  },
+  {
+   "start": 300.927,
+   "end": 302.999,
+   "text": "to finish without effort."
+  },
+  {
+   "start": 302.999,
+   "end": 305.56,
+   "text": "Help me stop using those pictures"
+  },
+  {
+   "start": 305.56,
+   "end": 307.189,
+   "text": "to measure every hour"
+  },
+  {
+   "start": 307.189,
+   "end": 308.533,
+   "text": "of my own life."
+  },
+  {
+   "start": 308.533,
+   "end": 310.216,
+   "text": "Teach me to recognize"
+  },
+  {
+   "start": 310.216,
+   "end": 313.261,
+   "text": "the responsibilities and circumstances"
+  },
+  {
+   "start": 313.261,
+   "end": 315.284,
+   "text": "that are actually mine."
+  },
+  {
+   "start": 315.284,
+   "end": 316.538,
+   "text": "Give me gratitude"
+  },
+  {
+   "start": 316.538,
+   "end": 318.605,
+   "text": "for the good I can do today,"
+  },
+  {
+   "start": 318.605,
+   "end": 321.04,
+   "text": "and generosity toward those whose"
+  },
+  {
+   "start": 321.04,
+   "end": 323.677,
+   "text": "path looks different from mine."
+  },
+  {
+   "start": 324.507,
+   "end": 326.691,
+   "text": "Lord, when I feel worn down,"
+  },
+  {
+   "start": 326.691,
+   "end": 329.444,
+   "text": "my inner voice can become severe."
+  },
+  {
+   "start": 329.444,
+   "end": 331.715,
+   "text": "I turn one unfinished task"
+  },
+  {
+   "start": 331.715,
+   "end": 335.213,
+   "text": "into a long accusation against myself."
+  },
+  {
+   "start": 335.213,
+   "end": 338.073,
+   "text": "Please help me speak truthfully about"
+  },
+  {
+   "start": 338.073,
+   "end": 341.345,
+   "text": "what needs doing without adding cruelty."
+  },
+  {
+   "start": 341.345,
+   "end": 343.777,
+   "text": "Where I have neglected something,"
+  },
+  {
+   "start": 343.777,
+   "end": 345.579,
+   "text": "lead me to address it."
+  },
+  {
+   "start": 345.579,
+   "end": 348.005,
+   "text": "Where I have reached a real limit,"
+  },
+  {
+   "start": 348.005,
+   "end": 350.111,
+   "text": "teach me to acknowledge it."
+  },
+  {
+   "start": 350.111,
+   "end": 352.952,
+   "text": "Make room in my thinking for patience,"
+  },
+  {
+   "start": 352.952,
+   "end": 354.447,
+   "text": "learning, and mercy,"
+  },
+  {
+   "start": 354.447,
+   "end": 356.315,
+   "text": "so I can use the strength"
+  },
+  {
+   "start": 356.315,
+   "end": 359.207,
+   "text": "I have on what will actually help."
+  },
+  {
+   "start": 360.037,
+   "end": 362.247,
+   "text": "But they that wait upon the LORD"
+  },
+  {
+   "start": 362.247,
+   "end": 364.292,
+   "text": "shall renew their strength;"
+  },
+  {
+   "start": 364.292,
+   "end": 365.69,
+   "text": "they shall mount up"
+  },
+  {
+   "start": 365.69,
+   "end": 367.416,
+   "text": "with wings as eagles;"
+  },
+  {
+   "start": 367.416,
+   "end": 368.706,
+   "text": "they shall run,"
+  },
+  {
+   "start": 368.706,
+   "end": 370.348,
+   "text": "and not be weary;"
+  },
+  {
+   "start": 370.348,
+   "end": 371.829,
+   "text": "and they shall walk,"
+  },
+  {
+   "start": 371.829,
+   "end": 373.215,
+   "text": "and not faint."
+  },
+  {
+   "start": 374.345,
+   "end": 377.081,
+   "text": "You can picture the eagle rising,"
+  },
+  {
+   "start": 377.081,
+   "end": 378.988,
+   "text": "then notice that Isaiah"
+  },
+  {
+   "start": 378.988,
+   "end": 381.075,
+   "text": "also speaks of walking."
+  },
+  {
+   "start": 381.075,
+   "end": 383.577,
+   "text": "You may be facing a day made"
+  },
+  {
+   "start": 383.577,
+   "end": 385.991,
+   "text": "mostly of ordinary steps."
+  },
+  {
+   "start": 385.991,
+   "end": 388.232,
+   "text": "You can wait upon the Lord while"
+  },
+  {
+   "start": 388.232,
+   "end": 390.373,
+   "text": "you prepare for those steps:"
+  },
+  {
+   "start": 390.373,
+   "end": 392.16,
+   "text": "listening to Scripture,"
+  },
+  {
+   "start": 392.16,
+   "end": 393.559,
+   "text": "asking for wisdom,"
+  },
+  {
+   "start": 393.559,
+   "end": 394.905,
+   "text": "receiving help."
+  },
+  {
+   "start": 394.905,
+   "end": 396.795,
+   "text": "You do not need to force"
+  },
+  {
+   "start": 396.795,
+   "end": 398.392,
+   "text": "a soaring feeling."
+  },
+  {
+   "start": 398.392,
+   "end": 400.871,
+   "text": "Let this promise direct your hope"
+  },
+  {
+   "start": 400.871,
+   "end": 402.974,
+   "text": "toward God as you decide how"
+  },
+  {
+   "start": 402.974,
+   "end": 405.803,
+   "text": "to live the next hour faithfully."
+  },
+  {
+   "start": 406.633,
+   "end": 407.188,
+   "text": "Father,"
+  },
+  {
+   "start": 407.188,
+   "end": 410.044,
+   "text": "I wait before you with the questions"
+  },
+  {
+   "start": 410.044,
+   "end": 412.445,
+   "text": "I cannot hurry into answers."
+  },
+  {
+   "start": 412.445,
+   "end": 414.277,
+   "text": "I want relief, clarity,"
+  },
+  {
+   "start": 414.277,
+   "end": 416.529,
+   "text": "and a simpler way forward."
+  },
+  {
+   "start": 416.529,
+   "end": 417.972,
+   "text": "Teach me to remain"
+  },
+  {
+   "start": 417.972,
+   "end": 419.995,
+   "text": "attentive while I wait."
+  },
+  {
+   "start": 419.995,
+   "end": 422.388,
+   "text": "Keep me willing to hear advice,"
+  },
+  {
+   "start": 422.388,
+   "end": 424.317,
+   "text": "reconsider an assumption,"
+  },
+  {
+   "start": 424.317,
+   "end": 427.044,
+   "text": "or take a step I have overlooked."
+  },
+  {
+   "start": 427.044,
+   "end": 429.995,
+   "text": "When waiting exposes my impatience,"
+  },
+  {
+   "start": 429.995,
+   "end": 432.536,
+   "text": "receive that confession too."
+  },
+  {
+   "start": 432.536,
+   "end": 434.097,
+   "text": "I entrust the timing"
+  },
+  {
+   "start": 434.097,
+   "end": 435.891,
+   "text": "beyond my reach to you,"
+  },
+  {
+   "start": 435.891,
+   "end": 438.232,
+   "text": "and I ask for grace to respond"
+  },
+  {
+   "start": 438.232,
+   "end": 441.547,
+   "text": "faithfully to what is within my reach."
+  },
+  {
+   "start": 442.377,
+   "end": 444.611,
+   "text": "You can loosen your hands now,"
+  },
+  {
+   "start": 444.611,
+   "end": 446.504,
+   "text": "if that is comfortable."
+  },
+  {
+   "start": 446.504,
+   "end": 448.775,
+   "text": "You may silently name the matter"
+  },
+  {
+   "start": 448.775,
+   "end": 450.801,
+   "text": "you keep trying to settle."
+  },
+  {
+   "start": 450.801,
+   "end": 452.06,
+   "text": "Offer it to God,"
+  },
+  {
+   "start": 452.06,
+   "end": 454.737,
+   "text": "then allow these few quiet seconds"
+  },
+  {
+   "start": 454.737,
+   "end": 457.999,
+   "text": "to pass without rehearsing an answer."
+  },
+  {
+   "start": 463.829,
+   "end": 464.199,
+   "text": "Lord,"
+  },
+  {
+   "start": 464.199,
+   "end": 465.978,
+   "text": "I have sometimes watched"
+  },
+  {
+   "start": 465.978,
+   "end": 467.756,
+   "text": "for an answer so closely"
+  },
+  {
+   "start": 467.756,
+   "end": 470.9,
+   "text": "that the rest of the morning disappears."
+  },
+  {
+   "start": 470.9,
+   "end": 472.743,
+   "text": "Give me discernment about"
+  },
+  {
+   "start": 472.743,
+   "end": 474.806,
+   "text": "when to check again and when"
+  },
+  {
+   "start": 474.806,
+   "end": 476.755,
+   "text": "to put the screen aside."
+  },
+  {
+   "start": 476.755,
+   "end": 479.388,
+   "text": "Help me use the interval well."
+  },
+  {
+   "start": 479.388,
+   "end": 480.761,
+   "text": "There is a person"
+  },
+  {
+   "start": 480.761,
+   "end": 482.054,
+   "text": "I can listen to,"
+  },
+  {
+   "start": 482.054,
+   "end": 483.831,
+   "text": "a room I can care for,"
+  },
+  {
+   "start": 483.831,
+   "end": 485.527,
+   "text": "a small piece of work"
+  },
+  {
+   "start": 485.527,
+   "end": 486.757,
+   "text": "I can finish."
+  },
+  {
+   "start": 486.757,
+   "end": 489.039,
+   "text": "Let patient trust restore some"
+  },
+  {
+   "start": 489.039,
+   "end": 491.625,
+   "text": "space in my attention for the life"
+  },
+  {
+   "start": 491.625,
+   "end": 494.105,
+   "text": "that is happening around me."
+  },
+  {
+   "start": 494.935,
+   "end": 495.251,
+   "text": "God,"
+  },
+  {
+   "start": 495.251,
+   "end": 496.991,
+   "text": "I bring you the prayer"
+  },
+  {
+   "start": 496.991,
+   "end": 499.147,
+   "text": "I have spoken many times."
+  },
+  {
+   "start": 499.147,
+   "end": 500.961,
+   "text": "I still hope for change,"
+  },
+  {
+   "start": 500.961,
+   "end": 502.776,
+   "text": "and I sometimes struggle"
+  },
+  {
+   "start": 502.776,
+   "end": 504.468,
+   "text": "to know what to say."
+  },
+  {
+   "start": 504.468,
+   "end": 507.208,
+   "text": "Receive the words I have today."
+  },
+  {
+   "start": 507.208,
+   "end": 509.27,
+   "text": "Keep me from drawing a harsh"
+  },
+  {
+   "start": 509.27,
+   "end": 511.185,
+   "text": "conclusion about your care"
+  },
+  {
+   "start": 511.185,
+   "end": 513.575,
+   "text": "from the length of my waiting."
+  },
+  {
+   "start": 513.575,
+   "end": 515.904,
+   "text": "Lead me toward wise counsel"
+  },
+  {
+   "start": 515.904,
+   "end": 517.723,
+   "text": "when I am confused."
+  },
+  {
+   "start": 517.723,
+   "end": 519.614,
+   "text": "Hold me close to the truth"
+  },
+  {
+   "start": 519.614,
+   "end": 520.85,
+   "text": "I can understand,"
+  },
+  {
+   "start": 520.85,
+   "end": 523.104,
+   "text": "and help me remain honest about"
+  },
+  {
+   "start": 523.104,
+   "end": 525.067,
+   "text": "the questions that continue"
+  },
+  {
+   "start": 525.067,
+   "end": 526.435,
+   "text": "to trouble me."
+  },
+  {
+   "start": 527.265,
+   "end": 529.237,
+   "text": "Wait on the LORD:"
+  },
+  {
+   "start": 529.237,
+   "end": 530.593,
+   "text": "be of good courage,"
+  },
+  {
+   "start": 530.593,
+   "end": 533.343,
+   "text": "and he shall strengthen thine heart:"
+  },
+  {
+   "start": 533.343,
+   "end": 535.805,
+   "text": "wait, I say, on the LORD."
+  },
+  {
+   "start": 536.935,
+   "end": 539.02,
+   "text": "You hear waiting and courage"
+  },
+  {
+   "start": 539.02,
+   "end": 540.912,
+   "text": "together in this psalm."
+  },
+  {
+   "start": 540.912,
+   "end": 543.132,
+   "text": "You may need courage to stay"
+  },
+  {
+   "start": 543.132,
+   "end": 544.718,
+   "text": "with a slow process,"
+  },
+  {
+   "start": 544.718,
+   "end": 546.959,
+   "text": "or you may need it to act."
+  },
+  {
+   "start": 546.959,
+   "end": 549.677,
+   "text": "Think of one responsibility you have"
+  },
+  {
+   "start": 549.677,
+   "end": 552.877,
+   "text": "been avoiding because you feel depleted."
+  },
+  {
+   "start": 552.877,
+   "end": 554.207,
+   "text": "You can reduce it"
+  },
+  {
+   "start": 554.207,
+   "end": 555.639,
+   "text": "to a first step."
+  },
+  {
+   "start": 555.639,
+   "end": 557.617,
+   "text": "You can ask someone to sit"
+  },
+  {
+   "start": 557.617,
+   "end": 559.851,
+   "text": "beside you while you begin."
+  },
+  {
+   "start": 559.851,
+   "end": 562.227,
+   "text": "Let the psalm accompany that step,"
+  },
+  {
+   "start": 562.227,
+   "end": 564.463,
+   "text": "giving your request for strength"
+  },
+  {
+   "start": 564.463,
+   "end": 567.049,
+   "text": "a clear and practical direction."
+  },
+  {
+   "start": 567.879,
+   "end": 568.263,
+   "text": "Lord,"
+  },
+  {
+   "start": 568.263,
+   "end": 569.878,
+   "text": "I place the difficult"
+  },
+  {
+   "start": 569.878,
+   "end": 571.749,
+   "text": "first step before you."
+  },
+  {
+   "start": 571.749,
+   "end": 573.6,
+   "text": "Perhaps it is the call,"
+  },
+  {
+   "start": 573.6,
+   "end": 574.324,
+   "text": "the form,"
+  },
+  {
+   "start": 574.324,
+   "end": 577.561,
+   "text": "or the conversation I keep postponing."
+  },
+  {
+   "start": 577.561,
+   "end": 579.246,
+   "text": "Help me prepare the few"
+  },
+  {
+   "start": 579.246,
+   "end": 581.112,
+   "text": "things I need to begin."
+  },
+  {
+   "start": 581.112,
+   "end": 582.542,
+   "text": "Give me clear words"
+  },
+  {
+   "start": 582.542,
+   "end": 584.951,
+   "text": "for what I know and the humility"
+  },
+  {
+   "start": 584.951,
+   "end": 585.929,
+   "text": "to say what I"
+  },
+  {
+   "start": 585.929,
+   "end": 587.991,
+   "text": "still need to understand."
+  },
+  {
+   "start": 587.991,
+   "end": 590.259,
+   "text": "I can take this step without"
+  },
+  {
+   "start": 590.259,
+   "end": 593.355,
+   "text": "completing the entire process today."
+  },
+  {
+   "start": 593.355,
+   "end": 595.131,
+   "text": "Be present in my effort,"
+  },
+  {
+   "start": 595.131,
+   "end": 597.129,
+   "text": "and teach me to leave space"
+  },
+  {
+   "start": 597.129,
+   "end": 599.699,
+   "text": "for another person's response."
+  },
+  {
+   "start": 600.529,
+   "end": 601.074,
+   "text": "Father,"
+  },
+  {
+   "start": 601.074,
+   "end": 603.644,
+   "text": "I offer you the work awaiting me,"
+  },
+  {
+   "start": 603.644,
+   "end": 605.28,
+   "text": "whether paid, unpaid,"
+  },
+  {
+   "start": 605.28,
+   "end": 607.173,
+   "text": "or still being sought."
+  },
+  {
+   "start": 607.173,
+   "end": 609.437,
+   "text": "Let me see the people who depend"
+  },
+  {
+   "start": 609.437,
+   "end": 611.385,
+   "text": "on its care and accuracy."
+  },
+  {
+   "start": 611.385,
+   "end": 612.824,
+   "text": "Help me make choices"
+  },
+  {
+   "start": 612.824,
+   "end": 615.235,
+   "text": "that protect what matters most."
+  },
+  {
+   "start": 615.235,
+   "end": 617.077,
+   "text": "If my load is too great,"
+  },
+  {
+   "start": 617.077,
+   "end": 619.686,
+   "text": "give me words to explain it before"
+  },
+  {
+   "start": 619.686,
+   "end": 622.092,
+   "text": "resentment shapes my conduct."
+  },
+  {
+   "start": 622.092,
+   "end": 624.615,
+   "text": "Where I can share responsibility,"
+  },
+  {
+   "start": 624.615,
+   "end": 626.859,
+   "text": "help me do so thoughtfully."
+  },
+  {
+   "start": 626.859,
+   "end": 628.865,
+   "text": "I ask for steady judgment,"
+  },
+  {
+   "start": 628.865,
+   "end": 631.18,
+   "text": "especially when several people"
+  },
+  {
+   "start": 631.18,
+   "end": 633.459,
+   "text": "want an immediate answer."
+  },
+  {
+   "start": 634.289,
+   "end": 634.628,
+   "text": "God,"
+  },
+  {
+   "start": 634.628,
+   "end": 637.861,
+   "text": "teach me to make promises with care."
+  },
+  {
+   "start": 637.861,
+   "end": 640.587,
+   "text": "I sometimes agree too quickly because"
+  },
+  {
+   "start": 640.587,
+   "end": 643.312,
+   "text": "I am afraid of disappointing someone,"
+  },
+  {
+   "start": 643.312,
+   "end": 644.712,
+   "text": "then carry a burden"
+  },
+  {
+   "start": 644.712,
+   "end": 646.66,
+   "text": "I should have discussed."
+  },
+  {
+   "start": 646.66,
+   "end": 648.399,
+   "text": "Help me consider my time"
+  },
+  {
+   "start": 648.399,
+   "end": 650.68,
+   "text": "and strength before I answer."
+  },
+  {
+   "start": 650.68,
+   "end": 652.938,
+   "text": "Give me kindness when I need"
+  },
+  {
+   "start": 652.938,
+   "end": 655.036,
+   "text": "to suggest another date or"
+  },
+  {
+   "start": 655.036,
+   "end": 656.748,
+   "text": "ask for assistance."
+  },
+  {
+   "start": 656.748,
+   "end": 658.747,
+   "text": "Let the commitments I do make"
+  },
+  {
+   "start": 658.747,
+   "end": 660.789,
+   "text": "receive faithful attention."
+  },
+  {
+   "start": 660.789,
+   "end": 662.944,
+   "text": "I want the people around me"
+  },
+  {
+   "start": 662.944,
+   "end": 664.859,
+   "text": "to be able to trust both"
+  },
+  {
+   "start": 664.859,
+   "end": 667.603,
+   "text": "my willingness and my honesty."
+  },
+  {
+   "start": 668.433,
+   "end": 670.541,
+   "text": "It is of the LORD's mercies"
+  },
+  {
+   "start": 670.541,
+   "end": 672.492,
+   "text": "that we are not consumed,"
+  },
+  {
+   "start": 672.492,
+   "end": 675.418,
+   "text": "because his compassions fail not."
+  },
+  {
+   "start": 676.548,
+   "end": 678.968,
+   "text": "They are new every morning:"
+  },
+  {
+   "start": 678.968,
+   "end": 681.558,
+   "text": "great is thy faithfulness."
+  },
+  {
+   "start": 682.688,
+   "end": 685.115,
+   "text": "These words come from Lamentations,"
+  },
+  {
+   "start": 685.115,
+   "end": 686.293,
+   "text": "a book that gives"
+  },
+  {
+   "start": 686.293,
+   "end": 688.137,
+   "text": "suffering room to speak."
+  },
+  {
+   "start": 688.137,
+   "end": 689.827,
+   "text": "You can hear them while"
+  },
+  {
+   "start": 689.827,
+   "end": 691.624,
+   "text": "yesterday still hurts."
+  },
+  {
+   "start": 691.624,
+   "end": 693.799,
+   "text": "You can receive the morning as"
+  },
+  {
+   "start": 693.799,
+   "end": 695.901,
+   "text": "an occasion for mercy even if"
+  },
+  {
+   "start": 695.901,
+   "end": 698.908,
+   "text": "you have something difficult to repair."
+  },
+  {
+   "start": 698.908,
+   "end": 700.558,
+   "text": "You are allowed to tell"
+  },
+  {
+   "start": 700.558,
+   "end": 702.245,
+   "text": "the truth about both."
+  },
+  {
+   "start": 702.245,
+   "end": 703.857,
+   "text": "Let God's faithfulness"
+  },
+  {
+   "start": 703.857,
+   "end": 705.689,
+   "text": "meet you where you stand,"
+  },
+  {
+   "start": 705.689,
+   "end": 707.228,
+   "text": "with room for sorrow,"
+  },
+  {
+   "start": 707.228,
+   "end": 708.107,
+   "text": "forgiveness,"
+  },
+  {
+   "start": 708.107,
+   "end": 710.379,
+   "text": "and whatever faithful beginning"
+  },
+  {
+   "start": 710.379,
+   "end": 712.707,
+   "text": "you are able to make today."
+  },
+  {
+   "start": 713.537,
+   "end": 714.814,
+   "text": "Merciful Father,"
+  },
+  {
+   "start": 714.814,
+   "end": 717.209,
+   "text": "I bring yesterday's impatience"
+  },
+  {
+   "start": 717.209,
+   "end": 719.364,
+   "text": "and the moment I wish I had"
+  },
+  {
+   "start": 719.364,
+   "end": 721.141,
+   "text": "handled differently."
+  },
+  {
+   "start": 721.141,
+   "end": 723.653,
+   "text": "Please forgive what was unkind"
+  },
+  {
+   "start": 723.653,
+   "end": 725.759,
+   "text": "in my words or choices."
+  },
+  {
+   "start": 725.759,
+   "end": 727.098,
+   "text": "Show me the repair"
+  },
+  {
+   "start": 727.098,
+   "end": 728.691,
+   "text": "that belongs to me:"
+  },
+  {
+   "start": 728.691,
+   "end": 730.21,
+   "text": "a direct apology,"
+  },
+  {
+   "start": 730.21,
+   "end": 731.909,
+   "text": "a corrected detail,"
+  },
+  {
+   "start": 731.909,
+   "end": 734.055,
+   "text": "a promise attended to."
+  },
+  {
+   "start": 734.055,
+   "end": 736.598,
+   "text": "Help me approach it without making"
+  },
+  {
+   "start": 736.598,
+   "end": 738.691,
+   "text": "the other person responsible"
+  },
+  {
+   "start": 738.691,
+   "end": 741.04,
+   "text": "for easing all my discomfort."
+  },
+  {
+   "start": 741.04,
+   "end": 742.956,
+   "text": "I receive your mercy as"
+  },
+  {
+   "start": 742.956,
+   "end": 745.551,
+   "text": "I turn toward better conduct."
+  },
+  {
+   "start": 745.551,
+   "end": 747.336,
+   "text": "Give me a teachable heart"
+  },
+  {
+   "start": 747.336,
+   "end": 749.186,
+   "text": "for this new morning."
+  },
+  {
+   "start": 750.016,
+   "end": 750.401,
+   "text": "Lord,"
+  },
+  {
+   "start": 750.401,
+   "end": 751.94,
+   "text": "let mercy be visible"
+  },
+  {
+   "start": 751.94,
+   "end": 754.121,
+   "text": "in the place where I live."
+  },
+  {
+   "start": 754.121,
+   "end": 756.734,
+   "text": "When familiar noises or repeated"
+  },
+  {
+   "start": 756.734,
+   "end": 758.939,
+   "text": "requests meet my tiredness,"
+  },
+  {
+   "start": 758.939,
+   "end": 761.896,
+   "text": "help me answer with consideration."
+  },
+  {
+   "start": 761.896,
+   "end": 764.413,
+   "text": "Remind me to explain what I need"
+  },
+  {
+   "start": 764.413,
+   "end": 767.345,
+   "text": "before irritation does the talking."
+  },
+  {
+   "start": 767.345,
+   "end": 769.297,
+   "text": "Guide us toward a fairer"
+  },
+  {
+   "start": 769.297,
+   "end": 771.835,
+   "text": "sharing of the ordinary jobs."
+  },
+  {
+   "start": 771.835,
+   "end": 773.388,
+   "text": "Let me notice effort"
+  },
+  {
+   "start": 773.388,
+   "end": 775.897,
+   "text": "that usually goes unmentioned."
+  },
+  {
+   "start": 775.897,
+   "end": 778.197,
+   "text": "I pray for a home where tired"
+  },
+  {
+   "start": 778.197,
+   "end": 780.259,
+   "text": "people can speak honestly,"
+  },
+  {
+   "start": 780.259,
+   "end": 782.401,
+   "text": "receive practical kindness,"
+  },
+  {
+   "start": 782.401,
+   "end": 784.383,
+   "text": "and find space to recover"
+  },
+  {
+   "start": 784.383,
+   "end": 786.637,
+   "text": "their patience together."
+  },
+  {
+   "start": 787.467,
+   "end": 788.051,
+   "text": "Father,"
+  },
+  {
+   "start": 788.051,
+   "end": 789.386,
+   "text": "I remember those"
+  },
+  {
+   "start": 789.386,
+   "end": 791.401,
+   "text": "who depend on my care."
+  },
+  {
+   "start": 791.401,
+   "end": 793.572,
+   "text": "Strengthen my tenderness when"
+  },
+  {
+   "start": 793.572,
+   "end": 795.848,
+   "text": "the same need returns again."
+  },
+  {
+   "start": 795.848,
+   "end": 798.428,
+   "text": "Help me pay attention to the person"
+  },
+  {
+   "start": 798.428,
+   "end": 800.124,
+   "text": "before me and recognize"
+  },
+  {
+   "start": 800.124,
+   "end": 802.663,
+   "text": "what they are trying to express."
+  },
+  {
+   "start": 802.663,
+   "end": 804.292,
+   "text": "I also bring my own"
+  },
+  {
+   "start": 804.292,
+   "end": 805.749,
+   "text": "need for company,"
+  },
+  {
+   "start": 805.749,
+   "end": 807.387,
+   "text": "relief, and rest."
+  },
+  {
+   "start": 807.387,
+   "end": 809.73,
+   "text": "Guide me toward people who can"
+  },
+  {
+   "start": 809.73,
+   "end": 811.94,
+   "text": "share this responsibility."
+  },
+  {
+   "start": 811.94,
+   "end": 813.858,
+   "text": "Let asking for help become"
+  },
+  {
+   "start": 813.858,
+   "end": 815.333,
+   "text": "part of caring well,"
+  },
+  {
+   "start": 815.333,
+   "end": 817.619,
+   "text": "so that love has room to remain"
+  },
+  {
+   "start": 817.619,
+   "end": 819.685,
+   "text": "patient through the ordinary"
+  },
+  {
+   "start": 819.685,
+   "end": 821.805,
+   "text": "repetitions of this day."
+  },
+  {
+   "start": 822.635,
+   "end": 825.173,
+   "text": "God is our refuge and strength,"
+  },
+  {
+   "start": 825.173,
+   "end": 828.062,
+   "text": "a very present help in trouble."
+  },
+  {
+   "start": 829.192,
+   "end": 831.41,
+   "text": "You can take this short verse"
+  },
+  {
+   "start": 831.41,
+   "end": 833.398,
+   "text": "into a difficult room or a"
+  },
+  {
+   "start": 833.398,
+   "end": 835.26,
+   "text": "demanding appointment."
+  },
+  {
+   "start": 835.26,
+   "end": 837.01,
+   "text": "You can remember it while"
+  },
+  {
+   "start": 837.01,
+   "end": 839.429,
+   "text": "you wait for your turn to speak."
+  },
+  {
+   "start": 839.429,
+   "end": 841.414,
+   "text": "You can let it help you ask"
+  },
+  {
+   "start": 841.414,
+   "end": 843.065,
+   "text": "for support plainly."
+  },
+  {
+   "start": 843.065,
+   "end": 845.652,
+   "text": "The psalm speaks of help in trouble,"
+  },
+  {
+   "start": 845.652,
+   "end": 847.663,
+   "text": "and you can pray from within"
+  },
+  {
+   "start": 847.663,
+   "end": 849.496,
+   "text": "the situation you face."
+  },
+  {
+   "start": 849.496,
+   "end": 852.171,
+   "text": "Hold these words beside the practical"
+  },
+  {
+   "start": 852.171,
+   "end": 853.906,
+   "text": "help available to you as"
+  },
+  {
+   "start": 853.906,
+   "end": 856.353,
+   "text": "you consider what comes next."
+  },
+  {
+   "start": 857.183,
+   "end": 857.539,
+   "text": "God,"
+  },
+  {
+   "start": 857.539,
+   "end": 861.096,
+   "text": "I place my practical needs before you:"
+  },
+  {
+   "start": 861.096,
+   "end": 861.837,
+   "text": "the bills,"
+  },
+  {
+   "start": 861.837,
+   "end": 863.542,
+   "text": "the household supplies,"
+  },
+  {
+   "start": 863.542,
+   "end": 865.395,
+   "text": "and the uncertainty about"
+  },
+  {
+   "start": 865.395,
+   "end": 867.057,
+   "text": "what will be enough."
+  },
+  {
+   "start": 867.057,
+   "end": 868.915,
+   "text": "Give me steadiness to look"
+  },
+  {
+   "start": 868.915,
+   "end": 871.06,
+   "text": "at the actual numbers and seek"
+  },
+  {
+   "start": 871.06,
+   "end": 872.955,
+   "text": "trustworthy information."
+  },
+  {
+   "start": 872.955,
+   "end": 874.838,
+   "text": "Help me ask about support"
+  },
+  {
+   "start": 874.838,
+   "end": 877.021,
+   "text": "that is available and discuss"
+  },
+  {
+   "start": 877.021,
+   "end": 879.385,
+   "text": "a difficulty before it grows."
+  },
+  {
+   "start": 879.385,
+   "end": 881.48,
+   "text": "Guide my choices toward"
+  },
+  {
+   "start": 881.48,
+   "end": 883.299,
+   "text": "what is necessary."
+  },
+  {
+   "start": 883.299,
+   "end": 885.72,
+   "text": "I pray for honest opportunities"
+  },
+  {
+   "start": 885.72,
+   "end": 887.283,
+   "text": "and wise assistance,"
+  },
+  {
+   "start": 887.283,
+   "end": 889.47,
+   "text": "and for the patience to work"
+  },
+  {
+   "start": 889.47,
+   "end": 891.579,
+   "text": "through one manageable part"
+  },
+  {
+   "start": 891.579,
+   "end": 894.038,
+   "text": "of the situation at a time."
+  },
+  {
+   "start": 894.868,
+   "end": 895.272,
+   "text": "Lord,"
+  },
+  {
+   "start": 895.272,
+   "end": 896.805,
+   "text": "I pray for the part"
+  },
+  {
+   "start": 896.805,
+   "end": 899.065,
+   "text": "of my life affected by pain,"
+  },
+  {
+   "start": 899.065,
+   "end": 901.747,
+   "text": "illness, or persistent fatigue."
+  },
+  {
+   "start": 901.747,
+   "end": 904.096,
+   "text": "I bring my desire for relief"
+  },
+  {
+   "start": 904.096,
+   "end": 906.445,
+   "text": "and my frustration with what"
+  },
+  {
+   "start": 906.445,
+   "end": 908.135,
+   "text": "remains difficult."
+  },
+  {
+   "start": 908.135,
+   "end": 909.788,
+   "text": "Grant wisdom to those"
+  },
+  {
+   "start": 909.788,
+   "end": 911.621,
+   "text": "helping with my care."
+  },
+  {
+   "start": 911.621,
+   "end": 914.596,
+   "text": "Help me describe what I am experiencing"
+  },
+  {
+   "start": 914.596,
+   "end": 917.369,
+   "text": "clearly and follow sound guidance."
+  },
+  {
+   "start": 917.369,
+   "end": 919.923,
+   "text": "Give me courage to ask questions"
+  },
+  {
+   "start": 919.923,
+   "end": 922.179,
+   "text": "when I need understanding."
+  },
+  {
+   "start": 922.179,
+   "end": 923.842,
+   "text": "Let kindness surround"
+  },
+  {
+   "start": 923.842,
+   "end": 925.584,
+   "text": "the work of treatment,"
+  },
+  {
+   "start": 925.584,
+   "end": 927.484,
+   "text": "recovery, or adaptation,"
+  },
+  {
+   "start": 927.484,
+   "end": 929.622,
+   "text": "and sustain my hope through"
+  },
+  {
+   "start": 929.622,
+   "end": 932.427,
+   "text": "the days that require patience."
+  },
+  {
+   "start": 933.257,
+   "end": 936.381,
+   "text": "Let yourself rest in this brief quiet."
+  },
+  {
+   "start": 936.381,
+   "end": 937.83,
+   "text": "You can name the kind"
+  },
+  {
+   "start": 937.83,
+   "end": 939.527,
+   "text": "of help you need most."
+  },
+  {
+   "start": 939.527,
+   "end": 941.26,
+   "text": "You can bring that need"
+  },
+  {
+   "start": 941.26,
+   "end": 942.917,
+   "text": "to God in a few words,"
+  },
+  {
+   "start": 942.917,
+   "end": 945.102,
+   "text": "leaving room to listen before"
+  },
+  {
+   "start": 945.102,
+   "end": 947.109,
+   "text": "this prayer continues."
+  },
+  {
+   "start": 952.939,
+   "end": 953.459,
+   "text": "Father,"
+  },
+  {
+   "start": 953.459,
+   "end": 955.466,
+   "text": "I remember what I have lost"
+  },
+  {
+   "start": 955.466,
+   "end": 957.547,
+   "text": "and the person whose absence"
+  },
+  {
+   "start": 957.547,
+   "end": 960.18,
+   "text": "becomes clear again each morning."
+  },
+  {
+   "start": 960.18,
+   "end": 961.829,
+   "text": "Some ordinary tasks"
+  },
+  {
+   "start": 961.829,
+   "end": 964.093,
+   "text": "carry unexpected sorrow."
+  },
+  {
+   "start": 964.093,
+   "end": 967.239,
+   "text": "Be near as I encounter them today."
+  },
+  {
+   "start": 967.239,
+   "end": 969.12,
+   "text": "Help me accept the kindness"
+  },
+  {
+   "start": 969.12,
+   "end": 971.6,
+   "text": "of someone who remembers with me."
+  },
+  {
+   "start": 971.6,
+   "end": 974.127,
+   "text": "Give me freedom to speak a name,"
+  },
+  {
+   "start": 974.127,
+   "end": 975.075,
+   "text": "shed a tear,"
+  },
+  {
+   "start": 975.075,
+   "end": 977.071,
+   "text": "or take a needed pause."
+  },
+  {
+   "start": 977.071,
+   "end": 978.975,
+   "text": "I ask for strength to care"
+  },
+  {
+   "start": 978.975,
+   "end": 981.758,
+   "text": "for the present while holding the love"
+  },
+  {
+   "start": 981.758,
+   "end": 983.515,
+   "text": "and memories that remain"
+  },
+  {
+   "start": 983.515,
+   "end": 985.037,
+   "text": "part of my life."
+  },
+  {
+   "start": 985.867,
+   "end": 987.533,
+   "text": "Then he said unto them,"
+  },
+  {
+   "start": 987.533,
+   "end": 989.344,
+   "text": "Go your way, eat the fat,"
+  },
+  {
+   "start": 989.344,
+   "end": 990.792,
+   "text": "and drink the sweet,"
+  },
+  {
+   "start": 990.792,
+   "end": 992.748,
+   "text": "and send portions unto them"
+  },
+  {
+   "start": 992.748,
+   "end": 995.028,
+   "text": "for whom nothing is prepared:"
+  },
+  {
+   "start": 995.028,
+   "end": 996.823,
+   "text": "for this day is holy"
+  },
+  {
+   "start": 996.823,
+   "end": 998.259,
+   "text": "unto our Lord:"
+  },
+  {
+   "start": 998.259,
+   "end": 1000.38,
+   "text": "neither be ye sorry;"
+  },
+  {
+   "start": 1000.38,
+   "end": 1002.098,
+   "text": "for the joy of the LORD"
+  },
+  {
+   "start": 1002.098,
+   "end": 1003.717,
+   "text": "is your strength."
+  },
+  {
+   "start": 1004.847,
+   "end": 1007.268,
+   "text": "Notice the food and the portions"
+  },
+  {
+   "start": 1007.268,
+   "end": 1009.037,
+   "text": "being sent to others."
+  },
+  {
+   "start": 1009.037,
+   "end": 1010.689,
+   "text": "You have heard about joy"
+  },
+  {
+   "start": 1010.689,
+   "end": 1012.865,
+   "text": "in the middle of shared life."
+  },
+  {
+   "start": 1012.865,
+   "end": 1014.571,
+   "text": "You can let that detail"
+  },
+  {
+   "start": 1014.571,
+   "end": 1016.16,
+   "text": "shape your morning."
+  },
+  {
+   "start": 1016.16,
+   "end": 1018.853,
+   "text": "You might receive a meal with thanks"
+  },
+  {
+   "start": 1018.853,
+   "end": 1020.574,
+   "text": "or remember someone who"
+  },
+  {
+   "start": 1020.574,
+   "end": 1022.1,
+   "text": "could use company."
+  },
+  {
+   "start": 1022.1,
+   "end": 1024.362,
+   "text": "You can allow a small moment"
+  },
+  {
+   "start": 1024.362,
+   "end": 1026.786,
+   "text": "of gladness without explaining"
+  },
+  {
+   "start": 1026.786,
+   "end": 1028.339,
+   "text": "away your sorrow."
+  },
+  {
+   "start": 1028.339,
+   "end": 1030.994,
+   "text": "You can practice care while you wait,"
+  },
+  {
+   "start": 1030.994,
+   "end": 1032.644,
+   "text": "and leave room for care"
+  },
+  {
+   "start": 1032.644,
+   "end": 1034.214,
+   "text": "to reach you too."
+  },
+  {
+   "start": 1035.044,
+   "end": 1035.397,
+   "text": "Lord,"
+  },
+  {
+   "start": 1035.397,
+   "end": 1037.869,
+   "text": "help me notice who might be missing"
+  },
+  {
+   "start": 1037.869,
+   "end": 1040.451,
+   "text": "from the circle of care around me."
+  },
+  {
+   "start": 1040.451,
+   "end": 1042.655,
+   "text": "Perhaps there is a neighbour"
+  },
+  {
+   "start": 1042.655,
+   "end": 1043.678,
+   "text": "eating alone,"
+  },
+  {
+   "start": 1043.678,
+   "end": 1045.645,
+   "text": "a colleague under strain,"
+  },
+  {
+   "start": 1045.645,
+   "end": 1047.298,
+   "text": "or a friend too tired"
+  },
+  {
+   "start": 1047.298,
+   "end": 1048.737,
+   "text": "to prepare much."
+  },
+  {
+   "start": 1048.737,
+   "end": 1050.863,
+   "text": "Show me a kindness that fits"
+  },
+  {
+   "start": 1050.863,
+   "end": 1053.397,
+   "text": "my means and their actual need."
+  },
+  {
+   "start": 1053.397,
+   "end": 1055.945,
+   "text": "Help me ask rather than assume."
+  },
+  {
+   "start": 1055.945,
+   "end": 1058.09,
+   "text": "Whether I share food, time,"
+  },
+  {
+   "start": 1058.09,
+   "end": 1059.6,
+   "text": "or a useful errand,"
+  },
+  {
+   "start": 1059.6,
+   "end": 1062.163,
+   "text": "let my offering carry respect."
+  },
+  {
+   "start": 1062.163,
+   "end": 1064.909,
+   "text": "Keep me grateful for the people whose"
+  },
+  {
+   "start": 1064.909,
+   "end": 1067.782,
+   "text": "quiet generosity has sustained me."
+  },
+  {
+   "start": 1068.612,
+   "end": 1069.197,
+   "text": "Father,"
+  },
+  {
+   "start": 1069.197,
+   "end": 1071.956,
+   "text": "open my attention to the goodness"
+  },
+  {
+   "start": 1071.956,
+   "end": 1073.891,
+   "text": "already within reach."
+  },
+  {
+   "start": 1073.891,
+   "end": 1076.492,
+   "text": "I thank you for familiar voices,"
+  },
+  {
+   "start": 1076.492,
+   "end": 1078.768,
+   "text": "clean water, a place to sit,"
+  },
+  {
+   "start": 1078.768,
+   "end": 1082.199,
+   "text": "and moments when someone makes me laugh."
+  },
+  {
+   "start": 1082.199,
+   "end": 1083.908,
+   "text": "I want to receive such"
+  },
+  {
+   "start": 1083.908,
+   "end": 1085.408,
+   "text": "gifts more fully."
+  },
+  {
+   "start": 1085.408,
+   "end": 1087.28,
+   "text": "When my heart feels dull,"
+  },
+  {
+   "start": 1087.28,
+   "end": 1089.257,
+   "text": "keep me patient with it."
+  },
+  {
+   "start": 1089.257,
+   "end": 1091.58,
+   "text": "Let gratitude begin with one"
+  },
+  {
+   "start": 1091.58,
+   "end": 1093.917,
+   "text": "thing I can honestly name."
+  },
+  {
+   "start": 1093.917,
+   "end": 1096.522,
+   "text": "As I notice and receive that gift,"
+  },
+  {
+   "start": 1096.522,
+   "end": 1098.207,
+   "text": "teach me to make space"
+  },
+  {
+   "start": 1098.207,
+   "end": 1101.009,
+   "text": "for the joy of belonging to you."
+  },
+  {
+   "start": 1101.839,
+   "end": 1103.381,
+   "text": "And he said unto me,"
+  },
+  {
+   "start": 1103.381,
+   "end": 1106.029,
+   "text": "My grace is sufficient for thee:"
+  },
+  {
+   "start": 1106.029,
+   "end": 1107.821,
+   "text": "for my strength is made"
+  },
+  {
+   "start": 1107.821,
+   "end": 1109.559,
+   "text": "perfect in weakness."
+  },
+  {
+   "start": 1109.559,
+   "end": 1111.589,
+   "text": "Most gladly therefore will"
+  },
+  {
+   "start": 1111.589,
+   "end": 1114.166,
+   "text": "I rather glory in my infirmities,"
+  },
+  {
+   "start": 1114.166,
+   "end": 1116.04,
+   "text": "that the power of Christ"
+  },
+  {
+   "start": 1116.04,
+   "end": 1117.717,
+   "text": "may rest upon me."
+  },
+  {
+   "start": 1118.847,
+   "end": 1120.639,
+   "text": "Paul speaks about grace"
+  },
+  {
+   "start": 1120.639,
+   "end": 1122.845,
+   "text": "while describing weakness."
+  },
+  {
+   "start": 1122.845,
+   "end": 1124.591,
+   "text": "You can bring a lasting"
+  },
+  {
+   "start": 1124.591,
+   "end": 1126.972,
+   "text": "limitation into this reading."
+  },
+  {
+   "start": 1126.972,
+   "end": 1128.916,
+   "text": "You may still need a slower"
+  },
+  {
+   "start": 1128.916,
+   "end": 1130.716,
+   "text": "pace or help from another"
+  },
+  {
+   "start": 1130.716,
+   "end": 1132.912,
+   "text": "person when the prayer ends."
+  },
+  {
+   "start": 1132.912,
+   "end": 1135.865,
+   "text": "You can receive that help with dignity."
+  },
+  {
+   "start": 1135.865,
+   "end": 1138.015,
+   "text": "You can seek Christ's strength"
+  },
+  {
+   "start": 1138.015,
+   "end": 1140.632,
+   "text": "within the life you actually have."
+  },
+  {
+   "start": 1140.632,
+   "end": 1143.271,
+   "text": "Let these words release you from having"
+  },
+  {
+   "start": 1143.271,
+   "end": 1145.503,
+   "text": "to look impressive before you ask"
+  },
+  {
+   "start": 1145.503,
+   "end": 1148.086,
+   "text": "for the grace to remain faithful."
+  },
+  {
+   "start": 1148.916,
+   "end": 1149.408,
+   "text": "Jesus,"
+  },
+  {
+   "start": 1149.408,
+   "end": 1152.116,
+   "text": "I place before you the difficulty"
+  },
+  {
+   "start": 1152.116,
+   "end": 1155.496,
+   "text": "that has lasted longer than I expected."
+  },
+  {
+   "start": 1155.496,
+   "end": 1157.69,
+   "text": "I have learned details about"
+  },
+  {
+   "start": 1157.69,
+   "end": 1159.985,
+   "text": "it I never wanted to learn."
+  },
+  {
+   "start": 1159.985,
+   "end": 1161.948,
+   "text": "Meet me with your grace"
+  },
+  {
+   "start": 1161.948,
+   "end": 1164.517,
+   "text": "in the routines it requires."
+  },
+  {
+   "start": 1164.517,
+   "end": 1166.382,
+   "text": "Keep discouragement from"
+  },
+  {
+   "start": 1166.382,
+   "end": 1168.815,
+   "text": "making every decision for me."
+  },
+  {
+   "start": 1168.815,
+   "end": 1172.002,
+   "text": "Help me recognize a useful adjustment,"
+  },
+  {
+   "start": 1172.002,
+   "end": 1173.428,
+   "text": "a wise companion,"
+  },
+  {
+   "start": 1173.428,
+   "end": 1176.376,
+   "text": "and a good moment when one comes."
+  },
+  {
+   "start": 1176.376,
+   "end": 1179.258,
+   "text": "I ask for endurance that stays tender"
+  },
+  {
+   "start": 1179.258,
+   "end": 1181.517,
+   "text": "toward others and for a faith"
+  },
+  {
+   "start": 1181.517,
+   "end": 1184.982,
+   "text": "that can speak honestly about weariness."
+  },
+  {
+   "start": 1185.812,
+   "end": 1186.197,
+   "text": "Lord,"
+  },
+  {
+   "start": 1186.197,
+   "end": 1188.202,
+   "text": "give me words for the help"
+  },
+  {
+   "start": 1188.202,
+   "end": 1189.384,
+   "text": "I need today."
+  },
+  {
+   "start": 1189.384,
+   "end": 1190.764,
+   "text": "I can ask someone"
+  },
+  {
+   "start": 1190.764,
+   "end": 1192.063,
+   "text": "to cover a task,"
+  },
+  {
+   "start": 1192.063,
+   "end": 1193.28,
+   "text": "explain a step,"
+  },
+  {
+   "start": 1193.28,
+   "end": 1196.22,
+   "text": "or accompany me to an appointment."
+  },
+  {
+   "start": 1196.22,
+   "end": 1198.656,
+   "text": "Help me make that request clearly"
+  },
+  {
+   "start": 1198.656,
+   "end": 1200.576,
+   "text": "and allow the other person"
+  },
+  {
+   "start": 1200.576,
+   "end": 1202.011,
+   "text": "to answer freely."
+  },
+  {
+   "start": 1202.011,
+   "end": 1203.617,
+   "text": "When assistance comes,"
+  },
+  {
+   "start": 1203.617,
+   "end": 1205.988,
+   "text": "let me receive it with thanks."
+  },
+  {
+   "start": 1205.988,
+   "end": 1209.065,
+   "text": "Keep me from apologizing for my whole"
+  },
+  {
+   "start": 1209.065,
+   "end": 1211.907,
+   "text": "existence because I have a need."
+  },
+  {
+   "start": 1211.907,
+   "end": 1214.579,
+   "text": "Teach me the humility of belonging"
+  },
+  {
+   "start": 1214.579,
+   "end": 1217.015,
+   "text": "among people who sometimes give"
+  },
+  {
+   "start": 1217.015,
+   "end": 1219.723,
+   "text": "care and sometimes receive it."
+  },
+  {
+   "start": 1220.553,
+   "end": 1223.208,
+   "text": "My flesh and my heart faileth:"
+  },
+  {
+   "start": 1223.208,
+   "end": 1225.071,
+   "text": "but God is the strength"
+  },
+  {
+   "start": 1225.071,
+   "end": 1226.043,
+   "text": "of my heart,"
+  },
+  {
+   "start": 1226.043,
+   "end": 1228.337,
+   "text": "and my portion for ever."
+  },
+  {
+   "start": 1229.467,
+   "end": 1231.272,
+   "text": "You can hear the honesty"
+  },
+  {
+   "start": 1231.272,
+   "end": 1232.505,
+   "text": "in this psalm."
+  },
+  {
+   "start": 1232.505,
+   "end": 1233.765,
+   "text": "You can also hear"
+  },
+  {
+   "start": 1233.765,
+   "end": 1235.501,
+   "text": "where its hope rests."
+  },
+  {
+   "start": 1235.501,
+   "end": 1237.417,
+   "text": "When your usual abilities"
+  },
+  {
+   "start": 1237.417,
+   "end": 1238.567,
+   "text": "feel uncertain,"
+  },
+  {
+   "start": 1238.567,
+   "end": 1240.636,
+   "text": "you may need a deeper place"
+  },
+  {
+   "start": 1240.636,
+   "end": 1242.553,
+   "text": "to stand than yesterday's"
+  },
+  {
+   "start": 1242.553,
+   "end": 1243.959,
+   "text": "accomplishments."
+  },
+  {
+   "start": 1243.959,
+   "end": 1246.869,
+   "text": "You can bring that desire to God."
+  },
+  {
+   "start": 1246.869,
+   "end": 1249.664,
+   "text": "You can remember that a relationship"
+  },
+  {
+   "start": 1249.664,
+   "end": 1251.915,
+   "text": "with him reaches into seasons"
+  },
+  {
+   "start": 1251.915,
+   "end": 1253.492,
+   "text": "when life changes."
+  },
+  {
+   "start": 1253.492,
+   "end": 1255.708,
+   "text": "Let this verse accompany you as"
+  },
+  {
+   "start": 1255.708,
+   "end": 1258.28,
+   "text": "you ask what faithfulness looks like"
+  },
+  {
+   "start": 1258.28,
+   "end": 1260.989,
+   "text": "in the season you are living now."
+  },
+  {
+   "start": 1261.819,
+   "end": 1262.908,
+   "text": "Faithful God,"
+  },
+  {
+   "start": 1262.908,
+   "end": 1264.417,
+   "text": "I bring the future"
+  },
+  {
+   "start": 1264.417,
+   "end": 1266.692,
+   "text": "I cannot picture clearly."
+  },
+  {
+   "start": 1266.692,
+   "end": 1268.492,
+   "text": "I wonder what will be asked"
+  },
+  {
+   "start": 1268.492,
+   "end": 1270.092,
+   "text": "of me and whether I will"
+  },
+  {
+   "start": 1270.092,
+   "end": 1271.672,
+   "text": "have enough strength."
+  },
+  {
+   "start": 1271.672,
+   "end": 1273.777,
+   "text": "Please guide the decisions"
+  },
+  {
+   "start": 1273.777,
+   "end": 1275.82,
+   "text": "that can be made today."
+  },
+  {
+   "start": 1275.82,
+   "end": 1277.818,
+   "text": "For what remains unknown,"
+  },
+  {
+   "start": 1277.818,
+   "end": 1279.977,
+   "text": "help me resist living every"
+  },
+  {
+   "start": 1279.977,
+   "end": 1282.635,
+   "text": "possible difficulty in advance."
+  },
+  {
+   "start": 1282.635,
+   "end": 1285.673,
+   "text": "Root my hope in your enduring care."
+  },
+  {
+   "start": 1285.673,
+   "end": 1287.453,
+   "text": "Give me people with whom"
+  },
+  {
+   "start": 1287.453,
+   "end": 1289.01,
+   "text": "I can speak honestly,"
+  },
+  {
+   "start": 1289.01,
+   "end": 1290.716,
+   "text": "and teach me to receive"
+  },
+  {
+   "start": 1290.716,
+   "end": 1292.941,
+   "text": "the ordinary provision of this"
+  },
+  {
+   "start": 1292.941,
+   "end": 1295.367,
+   "text": "day with an attentive heart."
+  },
+  {
+   "start": 1296.197,
+   "end": 1297.464,
+   "text": "You have listened"
+  },
+  {
+   "start": 1297.464,
+   "end": 1299.55,
+   "text": "to Scripture about strength,"
+  },
+  {
+   "start": 1299.55,
+   "end": 1301.668,
+   "text": "mercy, courage, and grace."
+  },
+  {
+   "start": 1301.668,
+   "end": 1303.431,
+   "text": "Now choose one reference"
+  },
+  {
+   "start": 1303.431,
+   "end": 1305.667,
+   "text": "you want within reach today."
+  },
+  {
+   "start": 1305.667,
+   "end": 1307.362,
+   "text": "You might keep Isaiah"
+  },
+  {
+   "start": 1307.362,
+   "end": 1308.896,
+   "text": "chapter forty open,"
+  },
+  {
+   "start": 1308.896,
+   "end": 1311.56,
+   "text": "or write down Psalm twenty seven,"
+  },
+  {
+   "start": 1311.56,
+   "end": 1312.951,
+   "text": "verse fourteen."
+  },
+  {
+   "start": 1312.951,
+   "end": 1315.68,
+   "text": "You can return to the actual passage"
+  },
+  {
+   "start": 1315.68,
+   "end": 1318.059,
+   "text": "when you have a quiet minute."
+  },
+  {
+   "start": 1318.059,
+   "end": 1320.019,
+   "text": "You do not need to remember"
+  },
+  {
+   "start": 1320.019,
+   "end": 1322.377,
+   "text": "every sentence of this prayer."
+  },
+  {
+   "start": 1322.377,
+   "end": 1325.217,
+   "text": "Give yourself one clear place to turn"
+  },
+  {
+   "start": 1325.217,
+   "end": 1328.637,
+   "text": "when the morning begins to feel crowded."
+  },
+  {
+   "start": 1329.467,
+   "end": 1332.271,
+   "text": "Return in your mind to Isaiah's"
+  },
+  {
+   "start": 1332.271,
+   "end": 1334.532,
+   "text": "final image of walking."
+  },
+  {
+   "start": 1334.532,
+   "end": 1336.402,
+   "text": "You can carry that image"
+  },
+  {
+   "start": 1336.402,
+   "end": 1338.296,
+   "text": "into something simple:"
+  },
+  {
+   "start": 1338.296,
+   "end": 1340.778,
+   "text": "washing a cup, preparing a bag,"
+  },
+  {
+   "start": 1340.778,
+   "end": 1342.3,
+   "text": "or opening the work"
+  },
+  {
+   "start": 1342.3,
+   "end": 1343.681,
+   "text": "you need to do."
+  },
+  {
+   "start": 1343.681,
+   "end": 1346.166,
+   "text": "You can give the next action enough"
+  },
+  {
+   "start": 1346.166,
+   "end": 1348.405,
+   "text": "attention to do it carefully."
+  },
+  {
+   "start": 1348.405,
+   "end": 1350.674,
+   "text": "If you need to stop and rest,"
+  },
+  {
+   "start": 1350.674,
+   "end": 1353.279,
+   "text": "you can make room for that too."
+  },
+  {
+   "start": 1353.279,
+   "end": 1355.316,
+   "text": "You are asking God to shape"
+  },
+  {
+   "start": 1355.316,
+   "end": 1358.033,
+   "text": "the way you travel through this day,"
+  },
+  {
+   "start": 1358.033,
+   "end": 1360.647,
+   "text": "one actual step after another."
+  },
+  {
+   "start": 1361.477,
+   "end": 1362.007,
+   "text": "Father,"
+  },
+  {
+   "start": 1362.007,
+   "end": 1363.826,
+   "text": "direct whatever strength"
+  },
+  {
+   "start": 1363.826,
+   "end": 1366.052,
+   "text": "I have toward what is good."
+  },
+  {
+   "start": 1366.052,
+   "end": 1367.05,
+   "text": "Let me use it"
+  },
+  {
+   "start": 1367.05,
+   "end": 1368.278,
+   "text": "to keep my word,"
+  },
+  {
+   "start": 1368.278,
+   "end": 1369.889,
+   "text": "treat someone fairly,"
+  },
+  {
+   "start": 1369.889,
+   "end": 1371.348,
+   "text": "and finish the part"
+  },
+  {
+   "start": 1371.348,
+   "end": 1373.293,
+   "text": "of a task that matters."
+  },
+  {
+   "start": 1373.293,
+   "end": 1375.176,
+   "text": "If an easier choice would"
+  },
+  {
+   "start": 1375.176,
+   "end": 1376.683,
+   "text": "harm another person,"
+  },
+  {
+   "start": 1376.683,
+   "end": 1379.575,
+   "text": "give me courage to choose carefully."
+  },
+  {
+   "start": 1379.575,
+   "end": 1382.479,
+   "text": "If pride makes me resist correction,"
+  },
+  {
+   "start": 1382.479,
+   "end": 1384.192,
+   "text": "soften my response."
+  },
+  {
+   "start": 1384.192,
+   "end": 1387.081,
+   "text": "I want endurance that serves love."
+  },
+  {
+   "start": 1387.081,
+   "end": 1389.364,
+   "text": "Help me recognize faithfulness"
+  },
+  {
+   "start": 1389.364,
+   "end": 1390.81,
+   "text": "in small decisions,"
+  },
+  {
+   "start": 1390.81,
+   "end": 1393.398,
+   "text": "including the ones that will never"
+  },
+  {
+   "start": 1393.398,
+   "end": 1395.879,
+   "text": "receive praise or attention."
+  },
+  {
+   "start": 1396.709,
+   "end": 1397.031,
+   "text": "God,"
+  },
+  {
+   "start": 1397.031,
+   "end": 1399.206,
+   "text": "I pray for the tired people"
+  },
+  {
+   "start": 1399.206,
+   "end": 1401.561,
+   "text": "whose work supports my day."
+  },
+  {
+   "start": 1401.561,
+   "end": 1404.632,
+   "text": "Remember those beginning an early shift,"
+  },
+  {
+   "start": 1404.632,
+   "end": 1406.628,
+   "text": "those caring for a family,"
+  },
+  {
+   "start": 1406.628,
+   "end": 1408.086,
+   "text": "and those searching"
+  },
+  {
+   "start": 1408.086,
+   "end": 1409.955,
+   "text": "for steady employment."
+  },
+  {
+   "start": 1409.955,
+   "end": 1412.853,
+   "text": "Give wisdom to people making decisions"
+  },
+  {
+   "start": 1412.853,
+   "end": 1415.703,
+   "text": "that affect their rest and dignity."
+  },
+  {
+   "start": 1415.703,
+   "end": 1418.418,
+   "text": "Make me considerate in the requests"
+  },
+  {
+   "start": 1418.418,
+   "end": 1420.149,
+   "text": "I place upon others."
+  },
+  {
+   "start": 1420.149,
+   "end": 1422.094,
+   "text": "Where I have influence,"
+  },
+  {
+   "start": 1422.094,
+   "end": 1424.895,
+   "text": "teach me to use it responsibly."
+  },
+  {
+   "start": 1424.895,
+   "end": 1426.954,
+   "text": "Let our shared life include"
+  },
+  {
+   "start": 1426.954,
+   "end": 1428.708,
+   "text": "room for honest limits,"
+  },
+  {
+   "start": 1428.708,
+   "end": 1430.31,
+   "text": "practical assistance,"
+  },
+  {
+   "start": 1430.31,
+   "end": 1431.911,
+   "text": "and the encouragement"
+  },
+  {
+   "start": 1431.911,
+   "end": 1433.863,
+   "text": "to continue together."
+  },
+  {
+   "start": 1434.693,
+   "end": 1436.496,
+   "text": "You may make these words"
+  },
+  {
+   "start": 1436.496,
+   "end": 1438.329,
+   "text": "your own as we finish."
+  },
+  {
+   "start": 1438.329,
+   "end": 1438.85,
+   "text": "Father,"
+  },
+  {
+   "start": 1438.85,
+   "end": 1441.709,
+   "text": "I place my strength in your service."
+  },
+  {
+   "start": 1441.709,
+   "end": 1444.705,
+   "text": "I receive your mercy for this morning."
+  },
+  {
+   "start": 1444.705,
+   "end": 1447.616,
+   "text": "I will be truthful about my needs."
+  },
+  {
+   "start": 1447.616,
+   "end": 1450.036,
+   "text": "I will welcome wise help."
+  },
+  {
+   "start": 1450.036,
+   "end": 1451.461,
+   "text": "I will give the next"
+  },
+  {
+   "start": 1451.461,
+   "end": 1453.565,
+   "text": "faithful step my attention."
+  },
+  {
+   "start": 1453.565,
+   "end": 1454.657,
+   "text": "Through Christ,"
+  },
+  {
+   "start": 1454.657,
+   "end": 1456.55,
+   "text": "teach me to wait with hope"
+  },
+  {
+   "start": 1456.55,
+   "end": 1458.502,
+   "text": "and to walk with love."
+  },
+  {
+   "start": 1459.532,
+   "end": 1461.82,
+   "text": "Before you begin your next task,"
+  },
+  {
+   "start": 1461.82,
+   "end": 1463.965,
+   "text": "write one small action you can"
+  },
+  {
+   "start": 1463.965,
+   "end": 1466.219,
+   "text": "take in the next ten minutes."
+  },
+  {
+   "start": 1466.219,
+   "end": 1468.105,
+   "text": "Make it specific:"
+  },
+  {
+   "start": 1468.105,
+   "end": 1470.361,
+   "text": "gather the papers for a call,"
+  },
+  {
+   "start": 1470.361,
+   "end": 1472.929,
+   "text": "wash what you need for breakfast,"
+  },
+  {
+   "start": 1472.929,
+   "end": 1474.718,
+   "text": "or ask someone to share"
+  },
+  {
+   "start": 1474.718,
+   "end": 1476.221,
+   "text": "a responsibility."
+  },
+  {
+   "start": 1476.221,
+   "end": 1477.506,
+   "text": "Choose the action"
+  },
+  {
+   "start": 1477.506,
+   "end": 1479.879,
+   "text": "that belongs to your morning."
+  },
+  {
+   "start": 1479.879,
+   "end": 1482.642,
+   "text": "Beside it, write Isaiah forty,"
+  },
+  {
+   "start": 1482.642,
+   "end": 1483.835,
+   "text": "thirty one."
+  },
+  {
+   "start": 1483.835,
+   "end": 1486.422,
+   "text": "You now have a practical beginning"
+  },
+  {
+   "start": 1486.422,
+   "end": 1489.085,
+   "text": "and a Scripture reference to return"
+  },
+  {
+   "start": 1489.085,
+   "end": 1491.566,
+   "text": "to as you move into the day."
+  },
+  {
+   "start": 1492.596,
+   "end": 1493.015,
+   "text": "Lord,"
+  },
+  {
+   "start": 1493.015,
+   "end": 1496.381,
+   "text": "I place that chosen action before you."
+  },
+  {
+   "start": 1496.381,
+   "end": 1498.239,
+   "text": "I will begin with the time"
+  },
+  {
+   "start": 1498.239,
+   "end": 1499.882,
+   "text": "and strength available,"
+  },
+  {
+   "start": 1499.882,
+   "end": 1502.492,
+   "text": "accepting help where it is needed."
+  },
+  {
+   "start": 1502.492,
+   "end": 1505.296,
+   "text": "Guide my attention as I start."
+  },
+  {
+   "start": 1505.296,
+   "end": 1507.408,
+   "text": "When I notice hurry rising,"
+  },
+  {
+   "start": 1507.408,
+   "end": 1509.935,
+   "text": "bring me back to patient care."
+  },
+  {
+   "start": 1509.935,
+   "end": 1512.465,
+   "text": "When I need to adjust the plan,"
+  },
+  {
+   "start": 1512.465,
+   "end": 1513.869,
+   "text": "give me wisdom."
+  },
+  {
+   "start": 1513.869,
+   "end": 1515.782,
+   "text": "I offer you this morning"
+  },
+  {
+   "start": 1515.782,
+   "end": 1517.455,
+   "text": "through Jesus Christ,"
+  },
+  {
+   "start": 1517.455,
+   "end": 1520.165,
+   "text": "grateful that I can pray honestly,"
+  },
+  {
+   "start": 1520.165,
+   "end": 1521.28,
+   "text": "receive mercy,"
+  },
+  {
+   "start": 1521.28,
+   "end": 1523.033,
+   "text": "and take the next step"
+  },
+  {
+   "start": 1523.033,
+   "end": 1525.057,
+   "text": "in dependence on you."
+  },
+  {
+   "start": 1526.087,
+   "end": 1528.82,
+   "text": "May the everlasting God strengthen"
+  },
+  {
+   "start": 1528.82,
+   "end": 1531.813,
+   "text": "your heart as this morning unfolds."
+  },
+  {
+   "start": 1531.813,
+   "end": 1533.655,
+   "text": "May his compassion meet"
+  },
+  {
+   "start": 1533.655,
+   "end": 1535.818,
+   "text": "you in the places where you"
+  },
+  {
+   "start": 1535.818,
+   "end": 1537.199,
+   "text": "feel worn thin."
+  },
+  {
+   "start": 1537.199,
+   "end": 1538.63,
+   "text": "May you find wisdom"
+  },
+  {
+   "start": 1538.63,
+   "end": 1540.587,
+   "text": "for your responsibilities,"
+  },
+  {
+   "start": 1540.587,
+   "end": 1542.846,
+   "text": "trustworthy help in your need,"
+  },
+  {
+   "start": 1542.846,
+   "end": 1544.804,
+   "text": "and courage for the action"
+  },
+  {
+   "start": 1544.804,
+   "end": 1546.189,
+   "text": "you have chosen."
+  },
+  {
+   "start": 1546.189,
+   "end": 1548.158,
+   "text": "As you return to the sounds"
+  },
+  {
+   "start": 1548.158,
+   "end": 1550.054,
+   "text": "and movements of your day,"
+  },
+  {
+   "start": 1550.054,
+   "end": 1551.658,
+   "text": "may the words you have"
+  },
+  {
+   "start": 1551.658,
+   "end": 1553.044,
+   "text": "heard remain close,"
+  },
+  {
+   "start": 1553.044,
+   "end": 1555.304,
+   "text": "nurturing patience in your work"
+  },
+  {
+   "start": 1555.304,
+   "end": 1558.571,
+   "text": "and kindness toward yourself and others."
+  },
+  {
+   "start": 1559.601,
+   "end": 1561.39,
+   "text": "If this prayer expresses"
+  },
+  {
+   "start": 1561.39,
+   "end": 1563.999,
+   "text": "what you are bringing to God today,"
+  },
+  {
+   "start": 1563.999,
+   "end": 1566.586,
+   "text": "you are welcome to write Amen."
+  },
+  {
+   "start": 1567.416,
+   "end": 1569.858,
+   "text": "Take the small beginning you chose"
+  },
+  {
+   "start": 1569.858,
+   "end": 1571.905,
+   "text": "into the next ten minutes."
+  },
+  {
+   "start": 1571.905,
+   "end": 1573.419,
+   "text": "You can leave the rest"
+  },
+  {
+   "start": 1573.419,
+   "end": 1575.416,
+   "text": "of the day in its place while"
+  },
+  {
+   "start": 1575.416,
+   "end": 1577.248,
+   "text": "you attend to this part."
+  },
+  {
+   "start": 1577.248,
+   "end": 1579.303,
+   "text": "Keep Isaiah's words nearby,"
+  },
+  {
+   "start": 1579.303,
+   "end": 1581.737,
+   "text": "and return to them when you need"
+  },
+  {
+   "start": 1581.737,
+   "end": 1584.809,
+   "text": "to remember whom you are waiting upon."
+  },
+  {
+   "start": 1584.809,
+   "end": 1587.074,
+   "text": "May your morning carry the quiet"
+  },
+  {
+   "start": 1587.074,
+   "end": 1589.405,
+   "text": "courage of walking with God."
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Good morning.",
+   "start": 0.3,
+   "end": 1.665
+  },
+  {
+   "segment": "hook",
+   "text": "If you woke tired, pray with me for strength to meet this day with God.",
+   "start": 1.845,
+   "end": 6.731
+  },
+  {
+   "segment": "invitation",
+   "text": "You may have opened your eyes already wishing for more rest.",
+   "start": 7.611,
+   "end": 11.856
+  },
+  {
+   "segment": "invitation",
+   "text": "Let your shoulders settle, wherever you are.",
+   "start": 12.036,
+   "end": 15.321
+  },
+  {
+   "segment": "invitation",
+   "text": "You can keep your eyes open and your breathing easy.",
+   "start": 15.501,
+   "end": 19.533
+  },
+  {
+   "segment": "invitation",
+   "text": "You can join each prayer in your own voice or listen quietly.",
+   "start": 19.713,
+   "end": 24.535
+  },
+  {
+   "segment": "invitation",
+   "text": "Bring the tiredness you actually feel.",
+   "start": 24.715,
+   "end": 27.616
+  },
+  {
+   "segment": "invitation",
+   "text": "You have room here to begin honestly.",
+   "start": 27.796,
+   "end": 30.761
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Everlasting Father, I come to you with the morning I have, including the heaviness I wish I could leave behind.",
+   "start": 31.941,
+   "end": 40.347
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "I need your strength before I begin measuring what this day requires.",
+   "start": 40.527,
+   "end": 45.775
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Receive my scattered thoughts and my small willingness to pray.",
+   "start": 45.955,
+   "end": 50.371
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Meet me in the room where I am, among the things waiting to be done.",
+   "start": 50.551,
+   "end": 55.564
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "I want to learn how to depend on you while taking care of the life you have given me.",
+   "start": 55.744,
+   "end": 61.376
+  },
+  {
+   "segment": "scripture-everlasting",
+   "text": "Hast thou not known?",
+   "start": 62.556,
+   "end": 64.497
+  },
+  {
+   "segment": "scripture-everlasting",
+   "text": "hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary?",
+   "start": 64.677,
+   "end": 74.683
+  },
+  {
+   "segment": "scripture-everlasting",
+   "text": "there is no searching of his understanding.",
+   "start": 74.863,
+   "end": 78.105
+  },
+  {
+   "segment": "guidance-everlasting",
+   "text": "Isaiah begins with the everlasting God.",
+   "start": 79.585,
+   "end": 82.935
+  },
+  {
+   "segment": "guidance-everlasting",
+   "text": "Before you examine your own supply of strength, you are invited to remember him.",
+   "start": 83.115,
+   "end": 89.237
+  },
+  {
+   "segment": "guidance-everlasting",
+   "text": "You may see only the hours directly ahead.",
+   "start": 89.417,
+   "end": 92.831
+  },
+  {
+   "segment": "guidance-everlasting",
+   "text": "You may feel that everyone expects something from you.",
+   "start": 93.011,
+   "end": 96.808
+  },
+  {
+   "segment": "guidance-everlasting",
+   "text": "The Creator's understanding reaches beyond what you can hold in mind.",
+   "start": 96.988,
+   "end": 102.343
+  },
+  {
+   "segment": "guidance-everlasting",
+   "text": "As you hear this passage, let your attention widen from the demands of the morning toward the God to whom you are praying.",
+   "start": 102.523,
+   "end": 110.651
+  },
+  {
+   "segment": "prayer-hidden-load",
+   "text": "Lord, you know the effort hidden beneath my ordinary appearance.",
+   "start": 111.831,
+   "end": 116.332
+  },
+  {
+   "segment": "prayer-hidden-load",
+   "text": "You know the interrupted rest, the decisions made quietly, and the concern I carry while answering that everything is fine.",
+   "start": 116.512,
+   "end": 125.813
+  },
+  {
+   "segment": "prayer-hidden-load",
+   "text": "I can speak more plainly with you.",
+   "start": 125.993,
+   "end": 128.575
+  },
+  {
+   "segment": "prayer-hidden-load",
+   "text": "I am tired of holding so much inside.",
+   "start": 128.755,
+   "end": 131.912
+  },
+  {
+   "segment": "prayer-hidden-load",
+   "text": "Give me the wisdom to name what is heavy and the courage to let someone trustworthy know.",
+   "start": 132.092,
+   "end": 138.385
+  },
+  {
+   "segment": "prayer-hidden-load",
+   "text": "I receive this moment as a place to stop pretending that I have endless reserves.",
+   "start": 138.565,
+   "end": 145.285
+  },
+  {
+   "segment": "scripture-given-strength",
+   "text": "He giveth power to the faint;",
+   "start": 146.465,
+   "end": 148.684
+  },
+  {
+   "segment": "scripture-given-strength",
+   "text": "and to them that have no might he increaseth strength.",
+   "start": 148.864,
+   "end": 152.661
+  },
+  {
+   "segment": "guidance-receiving",
+   "text": "Listen to whom this verse addresses:",
+   "start": 154.141,
+   "end": 156.851
+  },
+  {
+   "segment": "guidance-receiving",
+   "text": "the faint, and those who have no might.",
+   "start": 157.031,
+   "end": 159.847
+  },
+  {
+   "segment": "guidance-receiving",
+   "text": "You can hear it from the place you occupy today.",
+   "start": 160.027,
+   "end": 163.76
+  },
+  {
+   "segment": "guidance-receiving",
+   "text": "You can acknowledge that a responsibility feels too large.",
+   "start": 163.94,
+   "end": 168.207
+  },
+  {
+   "segment": "guidance-receiving",
+   "text": "You can admit that your usual enthusiasm is missing.",
+   "start": 168.387,
+   "end": 172.845
+  },
+  {
+   "segment": "guidance-receiving",
+   "text": "You have something honest to bring to God.",
+   "start": 173.025,
+   "end": 176.119
+  },
+  {
+   "segment": "guidance-receiving",
+   "text": "Allow yourself to ask for strength before you have worked out exactly how you will manage the next several hours.",
+   "start": 176.299,
+   "end": 184.277
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Creator, I thank you for my body, even on a morning when it feels slow.",
+   "start": 185.457,
+   "end": 191.068
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Teach me to treat it with care.",
+   "start": 191.248,
+   "end": 193.552
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Help me notice the need for food, water, movement, or rest, and respond as I am able.",
+   "start": 193.732,
+   "end": 200.857
+  },
+  {
+   "segment": "prayer-body",
+   "text": "When tiredness needs attention beyond what I understand, give me sense to seek appropriate care.",
+   "start": 201.037,
+   "end": 208.035
+  },
+  {
+   "segment": "prayer-body",
+   "text": "Let my plans respect the limits I am living with.",
+   "start": 208.215,
+   "end": 211.905
+  },
+  {
+   "segment": "prayer-body",
+   "text": "I ask for patience with myself as I learn a more considerate way to move through today.",
+   "start": 212.085,
+   "end": 218.827
+  },
+  {
+   "segment": "prayer-first-hour",
+   "text": "Father, bring order to the first hour before me.",
+   "start": 220.007,
+   "end": 223.74
+  },
+  {
+   "segment": "prayer-first-hour",
+   "text": "I can see several things asking for attention, and I feel the urge to begin them all.",
+   "start": 223.92,
+   "end": 230.277
+  },
+  {
+   "segment": "prayer-first-hour",
+   "text": "Show me which responsibility truly comes first.",
+   "start": 230.457,
+   "end": 234.041
+  },
+  {
+   "segment": "prayer-first-hour",
+   "text": "Help me gather what I need, clear a little space, and make a beginning I can sustain.",
+   "start": 234.221,
+   "end": 240.472
+  },
+  {
+   "segment": "prayer-first-hour",
+   "text": "Let a simple start be enough for this moment.",
+   "start": 240.652,
+   "end": 243.745
+  },
+  {
+   "segment": "prayer-first-hour",
+   "text": "Keep me attentive to the work in my hands rather than spending my strength imagining every task still waiting.",
+   "start": 243.925,
+   "end": 251.968
+  },
+  {
+   "segment": "scripture-human-limits",
+   "text": "Even the youths shall faint and be weary, and the young men shall utterly fall:",
+   "start": 253.148,
+   "end": 258.737
+  },
+  {
+   "segment": "guidance-human-limits",
+   "text": "You have just heard Scripture acknowledge weariness in people who might appear strongest.",
+   "start": 260.217,
+   "end": 266.084
+  },
+  {
+   "segment": "guidance-human-limits",
+   "text": "You may be comparing this morning with a season when you could do much more.",
+   "start": 266.264,
+   "end": 271.427
+  },
+  {
+   "segment": "guidance-human-limits",
+   "text": "You may be watching someone whose pace looks effortless.",
+   "start": 271.607,
+   "end": 275.297
+  },
+  {
+   "segment": "guidance-human-limits",
+   "text": "You rarely see the whole of another person's life.",
+   "start": 275.477,
+   "end": 279.04
+  },
+  {
+   "segment": "guidance-human-limits",
+   "text": "Let this verse bring you back to an honest starting place.",
+   "start": 279.22,
+   "end": 283.231
+  },
+  {
+   "segment": "guidance-human-limits",
+   "text": "You can work with the capacity you have today and ask God to guide it.",
+   "start": 283.411,
+   "end": 288.509
+  },
+  {
+   "segment": "prayer-comparison",
+   "text": "God, I bring you the comparison that leaves me discouraged before I have started.",
+   "start": 289.689,
+   "end": 295.599
+  },
+  {
+   "segment": "prayer-comparison",
+   "text": "I remember what I once accomplished quickly, or I see what others seem to finish without effort.",
+   "start": 295.779,
+   "end": 302.819
+  },
+  {
+   "segment": "prayer-comparison",
+   "text": "Help me stop using those pictures to measure every hour of my own life.",
+   "start": 302.999,
+   "end": 308.353
+  },
+  {
+   "segment": "prayer-comparison",
+   "text": "Teach me to recognize the responsibilities and circumstances that are actually mine.",
+   "start": 308.533,
+   "end": 315.104
+  },
+  {
+   "segment": "prayer-comparison",
+   "text": "Give me gratitude for the good I can do today, and generosity toward those whose path looks different from mine.",
+   "start": 315.284,
+   "end": 323.327
+  },
+  {
+   "segment": "prayer-self-reproach",
+   "text": "Lord, when I feel worn down, my inner voice can become severe.",
+   "start": 324.507,
+   "end": 329.264
+  },
+  {
+   "segment": "prayer-self-reproach",
+   "text": "I turn one unfinished task into a long accusation against myself.",
+   "start": 329.444,
+   "end": 335.033
+  },
+  {
+   "segment": "prayer-self-reproach",
+   "text": "Please help me speak truthfully about what needs doing without adding cruelty.",
+   "start": 335.213,
+   "end": 341.165
+  },
+  {
+   "segment": "prayer-self-reproach",
+   "text": "Where I have neglected something, lead me to address it.",
+   "start": 341.345,
+   "end": 345.399
+  },
+  {
+   "segment": "prayer-self-reproach",
+   "text": "Where I have reached a real limit, teach me to acknowledge it.",
+   "start": 345.579,
+   "end": 349.931
+  },
+  {
+   "segment": "prayer-self-reproach",
+   "text": "Make room in my thinking for patience, learning, and mercy, so I can use the strength I have on what will actually help.",
+   "start": 350.111,
+   "end": 358.857
+  },
+  {
+   "segment": "scripture-waiting-strength",
+   "text": "But they that wait upon the LORD shall renew their strength;",
+   "start": 360.037,
+   "end": 364.112
+  },
+  {
+   "segment": "scripture-waiting-strength",
+   "text": "they shall mount up with wings as eagles;",
+   "start": 364.292,
+   "end": 367.236
+  },
+  {
+   "segment": "scripture-waiting-strength",
+   "text": "they shall run, and not be weary;",
+   "start": 367.416,
+   "end": 370.168
+  },
+  {
+   "segment": "scripture-waiting-strength",
+   "text": "and they shall walk, and not faint.",
+   "start": 370.348,
+   "end": 372.865
+  },
+  {
+   "segment": "guidance-waiting",
+   "text": "You can picture the eagle rising, then notice that Isaiah also speaks of walking.",
+   "start": 374.345,
+   "end": 380.895
+  },
+  {
+   "segment": "guidance-waiting",
+   "text": "You may be facing a day made mostly of ordinary steps.",
+   "start": 381.075,
+   "end": 385.811
+  },
+  {
+   "segment": "guidance-waiting",
+   "text": "You can wait upon the Lord while you prepare for those steps:",
+   "start": 385.991,
+   "end": 390.193
+  },
+  {
+   "segment": "guidance-waiting",
+   "text": "listening to Scripture, asking for wisdom, receiving help.",
+   "start": 390.373,
+   "end": 394.725
+  },
+  {
+   "segment": "guidance-waiting",
+   "text": "You do not need to force a soaring feeling.",
+   "start": 394.905,
+   "end": 398.212
+  },
+  {
+   "segment": "guidance-waiting",
+   "text": "Let this promise direct your hope toward God as you decide how to live the next hour faithfully.",
+   "start": 398.392,
+   "end": 405.453
+  },
+  {
+   "segment": "prayer-open-hands",
+   "text": "Father, I wait before you with the questions I cannot hurry into answers.",
+   "start": 406.633,
+   "end": 412.265
+  },
+  {
+   "segment": "prayer-open-hands",
+   "text": "I want relief, clarity, and a simpler way forward.",
+   "start": 412.445,
+   "end": 416.349
+  },
+  {
+   "segment": "prayer-open-hands",
+   "text": "Teach me to remain attentive while I wait.",
+   "start": 416.529,
+   "end": 419.815
+  },
+  {
+   "segment": "prayer-open-hands",
+   "text": "Keep me willing to hear advice, reconsider an assumption, or take a step I have overlooked.",
+   "start": 419.995,
+   "end": 426.864
+  },
+  {
+   "segment": "prayer-open-hands",
+   "text": "When waiting exposes my impatience, receive that confession too.",
+   "start": 427.044,
+   "end": 432.356
+  },
+  {
+   "segment": "prayer-open-hands",
+   "text": "I entrust the timing beyond my reach to you, and I ask for grace to respond faithfully to what is within my reach.",
+   "start": 432.536,
+   "end": 441.197
+  },
+  {
+   "segment": "stillness-one",
+   "text": "You can loosen your hands now, if that is comfortable.",
+   "start": 442.377,
+   "end": 446.324
+  },
+  {
+   "segment": "stillness-one",
+   "text": "You may silently name the matter you keep trying to settle.",
+   "start": 446.504,
+   "end": 450.621
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Offer it to God, then allow these few quiet seconds to pass without rehearsing an answer.",
+   "start": 450.801,
+   "end": 457.649
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "Lord, I have sometimes watched for an answer so closely that the rest of the morning disappears.",
+   "start": 463.829,
+   "end": 470.72
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "Give me discernment about when to check again and when to put the screen aside.",
+   "start": 470.9,
+   "end": 476.575
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "Help me use the interval well.",
+   "start": 476.755,
+   "end": 479.208
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "There is a person I can listen to, a room I can care for, a small piece of work I can finish.",
+   "start": 479.388,
+   "end": 486.577
+  },
+  {
+   "segment": "prayer-attention",
+   "text": "Let patient trust restore some space in my attention for the life that is happening around me.",
+   "start": 486.757,
+   "end": 493.755
+  },
+  {
+   "segment": "prayer-unanswered",
+   "text": "God, I bring you the prayer I have spoken many times.",
+   "start": 494.935,
+   "end": 498.967
+  },
+  {
+   "segment": "prayer-unanswered",
+   "text": "I still hope for change, and I sometimes struggle to know what to say.",
+   "start": 499.147,
+   "end": 504.288
+  },
+  {
+   "segment": "prayer-unanswered",
+   "text": "Receive the words I have today.",
+   "start": 504.468,
+   "end": 507.028
+  },
+  {
+   "segment": "prayer-unanswered",
+   "text": "Keep me from drawing a harsh conclusion about your care from the length of my waiting.",
+   "start": 507.208,
+   "end": 513.395
+  },
+  {
+   "segment": "prayer-unanswered",
+   "text": "Lead me toward wise counsel when I am confused.",
+   "start": 513.575,
+   "end": 517.543
+  },
+  {
+   "segment": "prayer-unanswered",
+   "text": "Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me.",
+   "start": 517.723,
+   "end": 526.085
+  },
+  {
+   "segment": "scripture-courage",
+   "text": "Wait on the LORD:",
+   "start": 527.265,
+   "end": 529.057
+  },
+  {
+   "segment": "scripture-courage",
+   "text": "be of good courage, and he shall strengthen thine heart:",
+   "start": 529.237,
+   "end": 533.163
+  },
+  {
+   "segment": "scripture-courage",
+   "text": "wait, I say, on the LORD.",
+   "start": 533.343,
+   "end": 535.455
+  },
+  {
+   "segment": "guidance-courage",
+   "text": "You hear waiting and courage together in this psalm.",
+   "start": 536.935,
+   "end": 540.732
+  },
+  {
+   "segment": "guidance-courage",
+   "text": "You may need courage to stay with a slow process, or you may need it to act.",
+   "start": 540.912,
+   "end": 546.779
+  },
+  {
+   "segment": "guidance-courage",
+   "text": "Think of one responsibility you have been avoiding because you feel depleted.",
+   "start": 546.959,
+   "end": 552.697
+  },
+  {
+   "segment": "guidance-courage",
+   "text": "You can reduce it to a first step.",
+   "start": 552.877,
+   "end": 555.459
+  },
+  {
+   "segment": "guidance-courage",
+   "text": "You can ask someone to sit beside you while you begin.",
+   "start": 555.639,
+   "end": 559.671
+  },
+  {
+   "segment": "guidance-courage",
+   "text": "Let the psalm accompany that step, giving your request for strength a clear and practical direction.",
+   "start": 559.851,
+   "end": 566.699
+  },
+  {
+   "segment": "prayer-difficult-step",
+   "text": "Lord, I place the difficult first step before you.",
+   "start": 567.879,
+   "end": 571.569
+  },
+  {
+   "segment": "prayer-difficult-step",
+   "text": "Perhaps it is the call, the form, or the conversation I keep postponing.",
+   "start": 571.749,
+   "end": 577.381
+  },
+  {
+   "segment": "prayer-difficult-step",
+   "text": "Help me prepare the few things I need to begin.",
+   "start": 577.561,
+   "end": 580.932
+  },
+  {
+   "segment": "prayer-difficult-step",
+   "text": "Give me clear words for what I know and the humility to say what I still need to understand.",
+   "start": 581.112,
+   "end": 587.811
+  },
+  {
+   "segment": "prayer-difficult-step",
+   "text": "I can take this step without completing the entire process today.",
+   "start": 587.991,
+   "end": 593.175
+  },
+  {
+   "segment": "prayer-difficult-step",
+   "text": "Be present in my effort, and teach me to leave space for another person's response.",
+   "start": 593.355,
+   "end": 599.349
+  },
+  {
+   "segment": "prayer-workload",
+   "text": "Father, I offer you the work awaiting me, whether paid, unpaid, or still being sought.",
+   "start": 600.529,
+   "end": 606.993
+  },
+  {
+   "segment": "prayer-workload",
+   "text": "Let me see the people who depend on its care and accuracy.",
+   "start": 607.173,
+   "end": 611.205
+  },
+  {
+   "segment": "prayer-workload",
+   "text": "Help me make choices that protect what matters most.",
+   "start": 611.385,
+   "end": 615.055
+  },
+  {
+   "segment": "prayer-workload",
+   "text": "If my load is too great, give me words to explain it before resentment shapes my conduct.",
+   "start": 615.235,
+   "end": 621.912
+  },
+  {
+   "segment": "prayer-workload",
+   "text": "Where I can share responsibility, help me do so thoughtfully.",
+   "start": 622.092,
+   "end": 626.679
+  },
+  {
+   "segment": "prayer-workload",
+   "text": "I ask for steady judgment, especially when several people want an immediate answer.",
+   "start": 626.859,
+   "end": 633.109
+  },
+  {
+   "segment": "prayer-honest-limits",
+   "text": "God, teach me to make promises with care.",
+   "start": 634.289,
+   "end": 637.681
+  },
+  {
+   "segment": "prayer-honest-limits",
+   "text": "I sometimes agree too quickly because I am afraid of disappointing someone, then carry a burden I should have discussed.",
+   "start": 637.861,
+   "end": 646.48
+  },
+  {
+   "segment": "prayer-honest-limits",
+   "text": "Help me consider my time and strength before I answer.",
+   "start": 646.66,
+   "end": 650.5
+  },
+  {
+   "segment": "prayer-honest-limits",
+   "text": "Give me kindness when I need to suggest another date or ask for assistance.",
+   "start": 650.68,
+   "end": 656.568
+  },
+  {
+   "segment": "prayer-honest-limits",
+   "text": "Let the commitments I do make receive faithful attention.",
+   "start": 656.748,
+   "end": 660.609
+  },
+  {
+   "segment": "prayer-honest-limits",
+   "text": "I want the people around me to be able to trust both my willingness and my honesty.",
+   "start": 660.789,
+   "end": 667.253
+  },
+  {
+   "segment": "scripture-mercy",
+   "text": "It is of the LORD's mercies that we are not consumed, because his compassions fail not.",
+   "start": 668.433,
+   "end": 675.068
+  },
+  {
+   "segment": "scripture-morning",
+   "text": "They are new every morning:",
+   "start": 676.548,
+   "end": 678.788
+  },
+  {
+   "segment": "scripture-morning",
+   "text": "great is thy faithfulness.",
+   "start": 678.968,
+   "end": 681.208
+  },
+  {
+   "segment": "guidance-mercy",
+   "text": "These words come from Lamentations, a book that gives suffering room to speak.",
+   "start": 682.688,
+   "end": 687.957
+  },
+  {
+   "segment": "guidance-mercy",
+   "text": "You can hear them while yesterday still hurts.",
+   "start": 688.137,
+   "end": 691.444
+  },
+  {
+   "segment": "guidance-mercy",
+   "text": "You can receive the morning as an occasion for mercy even if you have something difficult to repair.",
+   "start": 691.624,
+   "end": 698.728
+  },
+  {
+   "segment": "guidance-mercy",
+   "text": "You are allowed to tell the truth about both.",
+   "start": 698.908,
+   "end": 702.065
+  },
+  {
+   "segment": "guidance-mercy",
+   "text": "Let God's faithfulness meet you where you stand, with room for sorrow, forgiveness, and whatever faithful beginning you are able to make today.",
+   "start": 702.245,
+   "end": 712.357
+  },
+  {
+   "segment": "prayer-yesterday",
+   "text": "Merciful Father, I bring yesterday's impatience and the moment I wish I had handled differently.",
+   "start": 713.537,
+   "end": 720.961
+  },
+  {
+   "segment": "prayer-yesterday",
+   "text": "Please forgive what was unkind in my words or choices.",
+   "start": 721.141,
+   "end": 725.579
+  },
+  {
+   "segment": "prayer-yesterday",
+   "text": "Show me the repair that belongs to me:",
+   "start": 725.759,
+   "end": 728.511
+  },
+  {
+   "segment": "prayer-yesterday",
+   "text": "a direct apology, a corrected detail, a promise attended to.",
+   "start": 728.691,
+   "end": 733.875
+  },
+  {
+   "segment": "prayer-yesterday",
+   "text": "Help me approach it without making the other person responsible for easing all my discomfort.",
+   "start": 734.055,
+   "end": 740.86
+  },
+  {
+   "segment": "prayer-yesterday",
+   "text": "I receive your mercy as I turn toward better conduct.",
+   "start": 741.04,
+   "end": 745.371
+  },
+  {
+   "segment": "prayer-yesterday",
+   "text": "Give me a teachable heart for this new morning.",
+   "start": 745.551,
+   "end": 748.836
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Lord, let mercy be visible in the place where I live.",
+   "start": 750.016,
+   "end": 753.941
+  },
+  {
+   "segment": "prayer-home",
+   "text": "When familiar noises or repeated requests meet my tiredness, help me answer with consideration.",
+   "start": 754.121,
+   "end": 761.716
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Remind me to explain what I need before irritation does the talking.",
+   "start": 761.896,
+   "end": 767.165
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Guide us toward a fairer sharing of the ordinary jobs.",
+   "start": 767.345,
+   "end": 771.655
+  },
+  {
+   "segment": "prayer-home",
+   "text": "Let me notice effort that usually goes unmentioned.",
+   "start": 771.835,
+   "end": 775.717
+  },
+  {
+   "segment": "prayer-home",
+   "text": "I pray for a home where tired people can speak honestly, receive practical kindness, and find space to recover their patience together.",
+   "start": 775.897,
+   "end": 786.287
+  },
+  {
+   "segment": "prayer-caregiver",
+   "text": "Father, I remember those who depend on my care.",
+   "start": 787.467,
+   "end": 791.221
+  },
+  {
+   "segment": "prayer-caregiver",
+   "text": "Strengthen my tenderness when the same need returns again.",
+   "start": 791.401,
+   "end": 795.668
+  },
+  {
+   "segment": "prayer-caregiver",
+   "text": "Help me pay attention to the person before me and recognize what they are trying to express.",
+   "start": 795.848,
+   "end": 802.483
+  },
+  {
+   "segment": "prayer-caregiver",
+   "text": "I also bring my own need for company, relief, and rest.",
+   "start": 802.663,
+   "end": 807.207
+  },
+  {
+   "segment": "prayer-caregiver",
+   "text": "Guide me toward people who can share this responsibility.",
+   "start": 807.387,
+   "end": 811.76
+  },
+  {
+   "segment": "prayer-caregiver",
+   "text": "Let asking for help become part of caring well, so that love has room to remain patient through the ordinary repetitions of this day.",
+   "start": 811.94,
+   "end": 821.455
+  },
+  {
+   "segment": "scripture-refuge",
+   "text": "God is our refuge and strength, a very present help in trouble.",
+   "start": 822.635,
+   "end": 827.712
+  },
+  {
+   "segment": "guidance-refuge",
+   "text": "You can take this short verse into a difficult room or a demanding appointment.",
+   "start": 829.192,
+   "end": 835.08
+  },
+  {
+   "segment": "guidance-refuge",
+   "text": "You can remember it while you wait for your turn to speak.",
+   "start": 835.26,
+   "end": 839.249
+  },
+  {
+   "segment": "guidance-refuge",
+   "text": "You can let it help you ask for support plainly.",
+   "start": 839.429,
+   "end": 842.885
+  },
+  {
+   "segment": "guidance-refuge",
+   "text": "The psalm speaks of help in trouble, and you can pray from within the situation you face.",
+   "start": 843.065,
+   "end": 849.316
+  },
+  {
+   "segment": "guidance-refuge",
+   "text": "Hold these words beside the practical help available to you as you consider what comes next.",
+   "start": 849.496,
+   "end": 856.003
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "God, I place my practical needs before you:",
+   "start": 857.183,
+   "end": 860.916
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "the bills, the household supplies, and the uncertainty about what will be enough.",
+   "start": 861.096,
+   "end": 866.877
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Give me steadiness to look at the actual numbers and seek trustworthy information.",
+   "start": 867.057,
+   "end": 872.775
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Help me ask about support that is available and discuss a difficulty before it grows.",
+   "start": 872.955,
+   "end": 879.205
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Guide my choices toward what is necessary.",
+   "start": 879.385,
+   "end": 883.119
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "I pray for honest opportunities and wise assistance, and for the patience to work through one manageable part of the situation at a time.",
+   "start": 883.299,
+   "end": 893.688
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Lord, I pray for the part of my life affected by pain, illness, or persistent fatigue.",
+   "start": 894.868,
+   "end": 901.567
+  },
+  {
+   "segment": "prayer-health",
+   "text": "I bring my desire for relief and my frustration with what remains difficult.",
+   "start": 901.747,
+   "end": 907.955
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Grant wisdom to those helping with my care.",
+   "start": 908.135,
+   "end": 911.441
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Help me describe what I am experiencing clearly and follow sound guidance.",
+   "start": 911.621,
+   "end": 917.189
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Give me courage to ask questions when I need understanding.",
+   "start": 917.369,
+   "end": 921.999
+  },
+  {
+   "segment": "prayer-health",
+   "text": "Let kindness surround the work of treatment, recovery, or adaptation, and sustain my hope through the days that require patience.",
+   "start": 922.179,
+   "end": 932.077
+  },
+  {
+   "segment": "stillness-two",
+   "text": "Let yourself rest in this brief quiet.",
+   "start": 933.257,
+   "end": 936.201
+  },
+  {
+   "segment": "stillness-two",
+   "text": "You can name the kind of help you need most.",
+   "start": 936.381,
+   "end": 939.347
+  },
+  {
+   "segment": "stillness-two",
+   "text": "You can bring that need to God in a few words, leaving room to listen before this prayer continues.",
+   "start": 939.527,
+   "end": 946.759
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "Father, I remember what I have lost and the person whose absence becomes clear again each morning.",
+   "start": 952.939,
+   "end": 960.0
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "Some ordinary tasks carry unexpected sorrow.",
+   "start": 960.18,
+   "end": 963.913
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "Be near as I encounter them today.",
+   "start": 964.093,
+   "end": 967.059
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "Help me accept the kindness of someone who remembers with me.",
+   "start": 967.239,
+   "end": 971.42
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "Give me freedom to speak a name, shed a tear, or take a needed pause.",
+   "start": 971.6,
+   "end": 976.891
+  },
+  {
+   "segment": "prayer-grief",
+   "text": "I ask for strength to care for the present while holding the love and memories that remain part of my life.",
+   "start": 977.071,
+   "end": 984.687
+  },
+  {
+   "segment": "scripture-joy",
+   "text": "Then he said unto them, Go your way, eat the fat, and drink the sweet, and send portions unto them for whom nothing is prepared:",
+   "start": 985.867,
+   "end": 994.848
+  },
+  {
+   "segment": "scripture-joy",
+   "text": "for this day is holy unto our Lord:",
+   "start": 995.028,
+   "end": 998.079
+  },
+  {
+   "segment": "scripture-joy",
+   "text": "neither be ye sorry;",
+   "start": 998.259,
+   "end": 1000.2
+  },
+  {
+   "segment": "scripture-joy",
+   "text": "for the joy of the LORD is your strength.",
+   "start": 1000.38,
+   "end": 1003.367
+  },
+  {
+   "segment": "guidance-joy",
+   "text": "Notice the food and the portions being sent to others.",
+   "start": 1004.847,
+   "end": 1008.857
+  },
+  {
+   "segment": "guidance-joy",
+   "text": "You have heard about joy in the middle of shared life.",
+   "start": 1009.037,
+   "end": 1012.685
+  },
+  {
+   "segment": "guidance-joy",
+   "text": "You can let that detail shape your morning.",
+   "start": 1012.865,
+   "end": 1015.98
+  },
+  {
+   "segment": "guidance-joy",
+   "text": "You might receive a meal with thanks or remember someone who could use company.",
+   "start": 1016.16,
+   "end": 1021.92
+  },
+  {
+   "segment": "guidance-joy",
+   "text": "You can allow a small moment of gladness without explaining away your sorrow.",
+   "start": 1022.1,
+   "end": 1028.159
+  },
+  {
+   "segment": "guidance-joy",
+   "text": "You can practice care while you wait, and leave room for care to reach you too.",
+   "start": 1028.339,
+   "end": 1033.864
+  },
+  {
+   "segment": "prayer-share-table",
+   "text": "Lord, help me notice who might be missing from the circle of care around me.",
+   "start": 1035.044,
+   "end": 1040.271
+  },
+  {
+   "segment": "prayer-share-table",
+   "text": "Perhaps there is a neighbour eating alone, a colleague under strain, or a friend too tired to prepare much.",
+   "start": 1040.451,
+   "end": 1048.557
+  },
+  {
+   "segment": "prayer-share-table",
+   "text": "Show me a kindness that fits my means and their actual need.",
+   "start": 1048.737,
+   "end": 1053.217
+  },
+  {
+   "segment": "prayer-share-table",
+   "text": "Help me ask rather than assume.",
+   "start": 1053.397,
+   "end": 1055.765
+  },
+  {
+   "segment": "prayer-share-table",
+   "text": "Whether I share food, time, or a useful errand, let my offering carry respect.",
+   "start": 1055.945,
+   "end": 1061.983
+  },
+  {
+   "segment": "prayer-share-table",
+   "text": "Keep me grateful for the people whose quiet generosity has sustained me.",
+   "start": 1062.163,
+   "end": 1067.432
+  },
+  {
+   "segment": "prayer-receive-gladness",
+   "text": "Father, open my attention to the goodness already within reach.",
+   "start": 1068.612,
+   "end": 1073.711
+  },
+  {
+   "segment": "prayer-receive-gladness",
+   "text": "I thank you for familiar voices, clean water, a place to sit, and moments when someone makes me laugh.",
+   "start": 1073.891,
+   "end": 1082.019
+  },
+  {
+   "segment": "prayer-receive-gladness",
+   "text": "I want to receive such gifts more fully.",
+   "start": 1082.199,
+   "end": 1085.228
+  },
+  {
+   "segment": "prayer-receive-gladness",
+   "text": "When my heart feels dull, keep me patient with it.",
+   "start": 1085.408,
+   "end": 1089.077
+  },
+  {
+   "segment": "prayer-receive-gladness",
+   "text": "Let gratitude begin with one thing I can honestly name.",
+   "start": 1089.257,
+   "end": 1093.737
+  },
+  {
+   "segment": "prayer-receive-gladness",
+   "text": "As I notice and receive that gift, teach me to make space for the joy of belonging to you.",
+   "start": 1093.917,
+   "end": 1100.659
+  },
+  {
+   "segment": "scripture-sufficient-grace",
+   "text": "And he said unto me, My grace is sufficient for thee:",
+   "start": 1101.839,
+   "end": 1105.849
+  },
+  {
+   "segment": "scripture-sufficient-grace",
+   "text": "for my strength is made perfect in weakness.",
+   "start": 1106.029,
+   "end": 1109.379
+  },
+  {
+   "segment": "scripture-sufficient-grace",
+   "text": "Most gladly therefore will I rather glory in my infirmities, that the power of Christ may rest upon me.",
+   "start": 1109.559,
+   "end": 1117.367
+  },
+  {
+   "segment": "guidance-grace",
+   "text": "Paul speaks about grace while describing weakness.",
+   "start": 1118.847,
+   "end": 1122.665
+  },
+  {
+   "segment": "guidance-grace",
+   "text": "You can bring a lasting limitation into this reading.",
+   "start": 1122.845,
+   "end": 1126.792
+  },
+  {
+   "segment": "guidance-grace",
+   "text": "You may still need a slower pace or help from another person when the prayer ends.",
+   "start": 1126.972,
+   "end": 1132.732
+  },
+  {
+   "segment": "guidance-grace",
+   "text": "You can receive that help with dignity.",
+   "start": 1132.912,
+   "end": 1135.685
+  },
+  {
+   "segment": "guidance-grace",
+   "text": "You can seek Christ's strength within the life you actually have.",
+   "start": 1135.865,
+   "end": 1140.452
+  },
+  {
+   "segment": "guidance-grace",
+   "text": "Let these words release you from having to look impressive before you ask for the grace to remain faithful.",
+   "start": 1140.632,
+   "end": 1147.736
+  },
+  {
+   "segment": "prayer-long-weakness",
+   "text": "Jesus, I place before you the difficulty that has lasted longer than I expected.",
+   "start": 1148.916,
+   "end": 1155.316
+  },
+  {
+   "segment": "prayer-long-weakness",
+   "text": "I have learned details about it I never wanted to learn.",
+   "start": 1155.496,
+   "end": 1159.805
+  },
+  {
+   "segment": "prayer-long-weakness",
+   "text": "Meet me with your grace in the routines it requires.",
+   "start": 1159.985,
+   "end": 1164.337
+  },
+  {
+   "segment": "prayer-long-weakness",
+   "text": "Keep discouragement from making every decision for me.",
+   "start": 1164.517,
+   "end": 1168.635
+  },
+  {
+   "segment": "prayer-long-weakness",
+   "text": "Help me recognize a useful adjustment, a wise companion, and a good moment when one comes.",
+   "start": 1168.815,
+   "end": 1176.196
+  },
+  {
+   "segment": "prayer-long-weakness",
+   "text": "I ask for endurance that stays tender toward others and for a faith that can speak honestly about weariness.",
+   "start": 1176.376,
+   "end": 1184.632
+  },
+  {
+   "segment": "prayer-ask-help",
+   "text": "Lord, give me words for the help I need today.",
+   "start": 1185.812,
+   "end": 1189.204
+  },
+  {
+   "segment": "prayer-ask-help",
+   "text": "I can ask someone to cover a task, explain a step, or accompany me to an appointment.",
+   "start": 1189.384,
+   "end": 1196.04
+  },
+  {
+   "segment": "prayer-ask-help",
+   "text": "Help me make that request clearly and allow the other person to answer freely.",
+   "start": 1196.22,
+   "end": 1201.831
+  },
+  {
+   "segment": "prayer-ask-help",
+   "text": "When assistance comes, let me receive it with thanks.",
+   "start": 1202.011,
+   "end": 1205.808
+  },
+  {
+   "segment": "prayer-ask-help",
+   "text": "Keep me from apologizing for my whole existence because I have a need.",
+   "start": 1205.988,
+   "end": 1211.727
+  },
+  {
+   "segment": "prayer-ask-help",
+   "text": "Teach me the humility of belonging among people who sometimes give care and sometimes receive it.",
+   "start": 1211.907,
+   "end": 1219.373
+  },
+  {
+   "segment": "scripture-portion",
+   "text": "My flesh and my heart faileth:",
+   "start": 1220.553,
+   "end": 1223.028
+  },
+  {
+   "segment": "scripture-portion",
+   "text": "but God is the strength of my heart, and my portion for ever.",
+   "start": 1223.208,
+   "end": 1227.987
+  },
+  {
+   "segment": "guidance-portion",
+   "text": "You can hear the honesty in this psalm.",
+   "start": 1229.467,
+   "end": 1232.325
+  },
+  {
+   "segment": "guidance-portion",
+   "text": "You can also hear where its hope rests.",
+   "start": 1232.505,
+   "end": 1235.321
+  },
+  {
+   "segment": "guidance-portion",
+   "text": "When your usual abilities feel uncertain, you may need a deeper place to stand than yesterday's accomplishments.",
+   "start": 1235.501,
+   "end": 1243.779
+  },
+  {
+   "segment": "guidance-portion",
+   "text": "You can bring that desire to God.",
+   "start": 1243.959,
+   "end": 1246.689
+  },
+  {
+   "segment": "guidance-portion",
+   "text": "You can remember that a relationship with him reaches into seasons when life changes.",
+   "start": 1246.869,
+   "end": 1253.312
+  },
+  {
+   "segment": "guidance-portion",
+   "text": "Let this verse accompany you as you ask what faithfulness looks like in the season you are living now.",
+   "start": 1253.492,
+   "end": 1260.639
+  },
+  {
+   "segment": "prayer-uncertain-future",
+   "text": "Faithful God, I bring the future I cannot picture clearly.",
+   "start": 1261.819,
+   "end": 1266.512
+  },
+  {
+   "segment": "prayer-uncertain-future",
+   "text": "I wonder what will be asked of me and whether I will have enough strength.",
+   "start": 1266.692,
+   "end": 1271.492
+  },
+  {
+   "segment": "prayer-uncertain-future",
+   "text": "Please guide the decisions that can be made today.",
+   "start": 1271.672,
+   "end": 1275.64
+  },
+  {
+   "segment": "prayer-uncertain-future",
+   "text": "For what remains unknown, help me resist living every possible difficulty in advance.",
+   "start": 1275.82,
+   "end": 1282.455
+  },
+  {
+   "segment": "prayer-uncertain-future",
+   "text": "Root my hope in your enduring care.",
+   "start": 1282.635,
+   "end": 1285.493
+  },
+  {
+   "segment": "prayer-uncertain-future",
+   "text": "Give me people with whom I can speak honestly, and teach me to receive the ordinary provision of this day with an attentive heart.",
+   "start": 1285.673,
+   "end": 1295.017
+  },
+  {
+   "segment": "day-transition",
+   "text": "You have listened to Scripture about strength, mercy, courage, and grace.",
+   "start": 1296.197,
+   "end": 1301.488
+  },
+  {
+   "segment": "day-transition",
+   "text": "Now choose one reference you want within reach today.",
+   "start": 1301.668,
+   "end": 1305.487
+  },
+  {
+   "segment": "day-transition",
+   "text": "You might keep Isaiah chapter forty open, or write down Psalm twenty seven, verse fourteen.",
+   "start": 1305.667,
+   "end": 1312.771
+  },
+  {
+   "segment": "day-transition",
+   "text": "You can return to the actual passage when you have a quiet minute.",
+   "start": 1312.951,
+   "end": 1317.879
+  },
+  {
+   "segment": "day-transition",
+   "text": "You do not need to remember every sentence of this prayer.",
+   "start": 1318.059,
+   "end": 1322.197
+  },
+  {
+   "segment": "day-transition",
+   "text": "Give yourself one clear place to turn when the morning begins to feel crowded.",
+   "start": 1322.377,
+   "end": 1328.287
+  },
+  {
+   "segment": "day-reflection-walking",
+   "text": "Return in your mind to Isaiah's final image of walking.",
+   "start": 1329.467,
+   "end": 1334.352
+  },
+  {
+   "segment": "day-reflection-walking",
+   "text": "You can carry that image into something simple:",
+   "start": 1334.532,
+   "end": 1338.116
+  },
+  {
+   "segment": "day-reflection-walking",
+   "text": "washing a cup, preparing a bag, or opening the work you need to do.",
+   "start": 1338.296,
+   "end": 1343.501
+  },
+  {
+   "segment": "day-reflection-walking",
+   "text": "You can give the next action enough attention to do it carefully.",
+   "start": 1343.681,
+   "end": 1348.225
+  },
+  {
+   "segment": "day-reflection-walking",
+   "text": "If you need to stop and rest, you can make room for that too.",
+   "start": 1348.405,
+   "end": 1353.099
+  },
+  {
+   "segment": "day-reflection-walking",
+   "text": "You are asking God to shape the way you travel through this day, one actual step after another.",
+   "start": 1353.279,
+   "end": 1360.297
+  },
+  {
+   "segment": "prayer-steady-obedience",
+   "text": "Father, direct whatever strength I have toward what is good.",
+   "start": 1361.477,
+   "end": 1365.872
+  },
+  {
+   "segment": "prayer-steady-obedience",
+   "text": "Let me use it to keep my word, treat someone fairly, and finish the part of a task that matters.",
+   "start": 1366.052,
+   "end": 1373.113
+  },
+  {
+   "segment": "prayer-steady-obedience",
+   "text": "If an easier choice would harm another person, give me courage to choose carefully.",
+   "start": 1373.293,
+   "end": 1379.395
+  },
+  {
+   "segment": "prayer-steady-obedience",
+   "text": "If pride makes me resist correction, soften my response.",
+   "start": 1379.575,
+   "end": 1384.012
+  },
+  {
+   "segment": "prayer-steady-obedience",
+   "text": "I want endurance that serves love.",
+   "start": 1384.192,
+   "end": 1386.901
+  },
+  {
+   "segment": "prayer-steady-obedience",
+   "text": "Help me recognize faithfulness in small decisions, including the ones that will never receive praise or attention.",
+   "start": 1387.081,
+   "end": 1395.529
+  },
+  {
+   "segment": "prayer-community",
+   "text": "God, I pray for the tired people whose work supports my day.",
+   "start": 1396.709,
+   "end": 1401.381
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Remember those beginning an early shift, those caring for a family, and those searching for steady employment.",
+   "start": 1401.561,
+   "end": 1409.775
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Give wisdom to people making decisions that affect their rest and dignity.",
+   "start": 1409.955,
+   "end": 1415.523
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Make me considerate in the requests I place upon others.",
+   "start": 1415.703,
+   "end": 1419.969
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Where I have influence, teach me to use it responsibly.",
+   "start": 1420.149,
+   "end": 1424.715
+  },
+  {
+   "segment": "prayer-community",
+   "text": "Let our shared life include room for honest limits, practical assistance, and the encouragement to continue together.",
+   "start": 1424.895,
+   "end": 1433.513
+  },
+  {
+   "segment": "declaration",
+   "text": "You may make these words your own as we finish.",
+   "start": 1434.693,
+   "end": 1438.149
+  },
+  {
+   "segment": "declaration",
+   "text": "Father, I place my strength in your service.",
+   "start": 1438.329,
+   "end": 1441.529
+  },
+  {
+   "segment": "declaration",
+   "text": "I receive your mercy for this morning.",
+   "start": 1441.709,
+   "end": 1444.525
+  },
+  {
+   "segment": "declaration",
+   "text": "I will be truthful about my needs.",
+   "start": 1444.705,
+   "end": 1447.436
+  },
+  {
+   "segment": "declaration",
+   "text": "I will welcome wise help.",
+   "start": 1447.616,
+   "end": 1449.856
+  },
+  {
+   "segment": "declaration",
+   "text": "I will give the next faithful step my attention.",
+   "start": 1450.036,
+   "end": 1453.385
+  },
+  {
+   "segment": "declaration",
+   "text": "Through Christ, teach me to wait with hope and to walk with love.",
+   "start": 1453.565,
+   "end": 1458.152
+  },
+  {
+   "segment": "commitment",
+   "text": "Before you begin your next task, write one small action you can take in the next ten minutes.",
+   "start": 1459.532,
+   "end": 1466.039
+  },
+  {
+   "segment": "commitment",
+   "text": "Make it specific:",
+   "start": 1466.219,
+   "end": 1467.925
+  },
+  {
+   "segment": "commitment",
+   "text": "gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility.",
+   "start": 1468.105,
+   "end": 1476.041
+  },
+  {
+   "segment": "commitment",
+   "text": "Choose the action that belongs to your morning.",
+   "start": 1476.221,
+   "end": 1479.699
+  },
+  {
+   "segment": "commitment",
+   "text": "Beside it, write Isaiah forty, thirty one.",
+   "start": 1479.879,
+   "end": 1483.655
+  },
+  {
+   "segment": "commitment",
+   "text": "You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+   "start": 1483.835,
+   "end": 1491.216
+  },
+  {
+   "segment": "payoff",
+   "text": "Lord, I place that chosen action before you.",
+   "start": 1492.596,
+   "end": 1496.201
+  },
+  {
+   "segment": "payoff",
+   "text": "I will begin with the time and strength available, accepting help where it is needed.",
+   "start": 1496.381,
+   "end": 1502.312
+  },
+  {
+   "segment": "payoff",
+   "text": "Guide my attention as I start.",
+   "start": 1502.492,
+   "end": 1505.116
+  },
+  {
+   "segment": "payoff",
+   "text": "When I notice hurry rising, bring me back to patient care.",
+   "start": 1505.296,
+   "end": 1509.755
+  },
+  {
+   "segment": "payoff",
+   "text": "When I need to adjust the plan, give me wisdom.",
+   "start": 1509.935,
+   "end": 1513.689
+  },
+  {
+   "segment": "payoff",
+   "text": "I offer you this morning through Jesus Christ, grateful that I can pray honestly, receive mercy, and take the next step in dependence on you.",
+   "start": 1513.869,
+   "end": 1524.707
+  },
+  {
+   "segment": "blessing",
+   "text": "May the everlasting God strengthen your heart as this morning unfolds.",
+   "start": 1526.087,
+   "end": 1531.633
+  },
+  {
+   "segment": "blessing",
+   "text": "May his compassion meet you in the places where you feel worn thin.",
+   "start": 1531.813,
+   "end": 1537.019
+  },
+  {
+   "segment": "blessing",
+   "text": "May you find wisdom for your responsibilities, trustworthy help in your need, and courage for the action you have chosen.",
+   "start": 1537.199,
+   "end": 1546.009
+  },
+  {
+   "segment": "blessing",
+   "text": "As you return to the sounds and movements of your day, may the words you have heard remain close, nurturing patience in your work and kindness toward yourself and others.",
+   "start": 1546.189,
+   "end": 1558.221
+  },
+  {
+   "segment": "cta",
+   "text": "If this prayer expresses what you are bringing to God today, you are welcome to write Amen.",
+   "start": 1559.601,
+   "end": 1566.236
+  },
+  {
+   "segment": "closing",
+   "text": "Take the small beginning you chose into the next ten minutes.",
+   "start": 1567.416,
+   "end": 1571.725
+  },
+  {
+   "segment": "closing",
+   "text": "You can leave the rest of the day in its place while you attend to this part.",
+   "start": 1571.905,
+   "end": 1577.068
+  },
+  {
+   "segment": "closing",
+   "text": "Keep Isaiah's words nearby, and return to them when you need to remember whom you are waiting upon.",
+   "start": 1577.248,
+   "end": 1584.629
+  },
+  {
+   "segment": "closing",
+   "text": "May your morning carry the quiet courage of walking with God.",
+   "start": 1584.809,
+   "end": 1589.055
+  }
+ ],
+ "overlay": {
+  "brand": "HeroVerse Prayer",
+  "title": "Strength for Your Next Step",
+  "title_card_seconds": 2.0
+ },
+ "persistent_overlays": [
+  "brand"
+ ],
+ "caption_style": {
+  "box": false,
+  "alignment": "bottom-centre",
+  "outline": 4,
+  "words_max": 7
+ },
+ "cta": [
+  {
+   "text": "SUBSCRIBE",
+   "start": 60.0,
+   "end": 68.0
+  },
+  {
+   "text": "LIKE",
+   "start": 717.046,
+   "end": 725.046
+  }
+ ],
+ "scripture_cards": [
+  {
+   "segment": "scripture-everlasting",
+   "reference": "Isaiah 40:28 (KJV)",
+   "start": 62.556,
+   "end": 74.683
+  },
+  {
+   "segment": "scripture-human-limits",
+   "reference": "Isaiah 40:30 (KJV)",
+   "start": 253.148,
+   "end": 258.737
+  },
+  {
+   "segment": "scripture-waiting-strength",
+   "reference": "Isaiah 40:31 (KJV)",
+   "start": 360.037,
+   "end": 372.865
+  },
+  {
+   "segment": "scripture-courage",
+   "reference": "Psalm 27:14 (KJV)",
+   "start": 527.265,
+   "end": 535.455
+  },
+  {
+   "segment": "scripture-mercy",
+   "reference": "Lamentations 3:22 (KJV)",
+   "start": 668.433,
+   "end": 675.068
+  },
+  {
+   "segment": "scripture-morning",
+   "reference": "Lamentations 3:23 (KJV)",
+   "start": 678.968,
+   "end": 681.208
+  },
+  {
+   "segment": "scripture-joy",
+   "reference": "Nehemiah 8:10 (KJV)",
+   "start": 985.867,
+   "end": 1003.367
+  },
+  {
+   "segment": "scripture-sufficient-grace",
+   "reference": "2 Corinthians 12:9 (KJV)",
+   "start": 1101.839,
+   "end": 1105.849
+  }
+ ],
+ "scene_target_seconds": 28.272727272727273,
+ "crossfade_seconds": 0.6,
+ "cinematic": {
+  "depth_model": {
+   "name": "Depth Anything V2 Small (ONNX)",
+   "licence": "apache-2.0",
+   "sha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c"
+  },
+  "grade": "colorbalance=rs=-0.015:bs=0.02:rh=0.03:gh=0.01:bh=-0.03,eq=contrast=1.04:saturation=1.04",
+  "look": "split[base][glow];[glow]scale=480:270,curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale=1920:1080[halo];[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,vignette=angle=PI/6:mode=forward,noise=c0s=4:c0f=t+u",
+  "atmosphere": [
+   "bg-dawn-lake",
+   "bg-misty-valley",
+   "bg-sunrise-field",
+   "bg-orchard",
+   "bg-mountain-sunrise"
+  ]
+ },
+ "clips": [],
+ "shots": [],
+ "timeline": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 6.911
+  },
+  {
+   "id": "invitation",
+   "start": 7.611,
+   "end": 30.941
+  },
+  {
+   "id": "prayer-arrival",
+   "start": 31.941,
+   "end": 61.556
+  },
+  {
+   "id": "scripture-everlasting",
+   "start": 62.556,
+   "end": 78.285
+  },
+  {
+   "id": "guidance-everlasting",
+   "start": 79.585,
+   "end": 110.831
+  },
+  {
+   "id": "prayer-hidden-load",
+   "start": 111.831,
+   "end": 145.465
+  },
+  {
+   "id": "scripture-given-strength",
+   "start": 146.465,
+   "end": 152.841
+  },
+  {
+   "id": "guidance-receiving",
+   "start": 154.141,
+   "end": 184.457
+  },
+  {
+   "id": "prayer-body",
+   "start": 185.457,
+   "end": 219.007
+  },
+  {
+   "id": "prayer-first-hour",
+   "start": 220.007,
+   "end": 252.148
+  },
+  {
+   "id": "scripture-human-limits",
+   "start": 253.148,
+   "end": 258.917
+  },
+  {
+   "id": "guidance-human-limits",
+   "start": 260.217,
+   "end": 288.689
+  },
+  {
+   "id": "prayer-comparison",
+   "start": 289.689,
+   "end": 323.507
+  },
+  {
+   "id": "prayer-self-reproach",
+   "start": 324.507,
+   "end": 359.037
+  },
+  {
+   "id": "scripture-waiting-strength",
+   "start": 360.037,
+   "end": 373.045
+  },
+  {
+   "id": "guidance-waiting",
+   "start": 374.345,
+   "end": 405.633
+  },
+  {
+   "id": "prayer-open-hands",
+   "start": 406.633,
+   "end": 441.377
+  },
+  {
+   "id": "stillness-one",
+   "start": 442.377,
+   "end": 457.829
+  },
+  {
+   "id": "prayer-attention",
+   "start": 463.829,
+   "end": 493.935
+  },
+  {
+   "id": "prayer-unanswered",
+   "start": 494.935,
+   "end": 526.265
+  },
+  {
+   "id": "scripture-courage",
+   "start": 527.265,
+   "end": 535.635
+  },
+  {
+   "id": "guidance-courage",
+   "start": 536.935,
+   "end": 566.879
+  },
+  {
+   "id": "prayer-difficult-step",
+   "start": 567.879,
+   "end": 599.529
+  },
+  {
+   "id": "prayer-workload",
+   "start": 600.529,
+   "end": 633.289
+  },
+  {
+   "id": "prayer-honest-limits",
+   "start": 634.289,
+   "end": 667.433
+  },
+  {
+   "id": "scripture-mercy",
+   "start": 668.433,
+   "end": 675.248
+  },
+  {
+   "id": "scripture-morning",
+   "start": 676.548,
+   "end": 681.388
+  },
+  {
+   "id": "guidance-mercy",
+   "start": 682.688,
+   "end": 712.537
+  },
+  {
+   "id": "prayer-yesterday",
+   "start": 713.537,
+   "end": 749.016
+  },
+  {
+   "id": "prayer-home",
+   "start": 750.016,
+   "end": 786.467
+  },
+  {
+   "id": "prayer-caregiver",
+   "start": 787.467,
+   "end": 821.635
+  },
+  {
+   "id": "scripture-refuge",
+   "start": 822.635,
+   "end": 827.892
+  },
+  {
+   "id": "guidance-refuge",
+   "start": 829.192,
+   "end": 856.183
+  },
+  {
+   "id": "prayer-provision",
+   "start": 857.183,
+   "end": 893.868
+  },
+  {
+   "id": "prayer-health",
+   "start": 894.868,
+   "end": 932.257
+  },
+  {
+   "id": "stillness-two",
+   "start": 933.257,
+   "end": 946.939
+  },
+  {
+   "id": "prayer-grief",
+   "start": 952.939,
+   "end": 984.867
+  },
+  {
+   "id": "scripture-joy",
+   "start": 985.867,
+   "end": 1003.547
+  },
+  {
+   "id": "guidance-joy",
+   "start": 1004.847,
+   "end": 1034.044
+  },
+  {
+   "id": "prayer-share-table",
+   "start": 1035.044,
+   "end": 1067.612
+  },
+  {
+   "id": "prayer-receive-gladness",
+   "start": 1068.612,
+   "end": 1100.839
+  },
+  {
+   "id": "scripture-sufficient-grace",
+   "start": 1101.839,
+   "end": 1117.547
+  },
+  {
+   "id": "guidance-grace",
+   "start": 1118.847,
+   "end": 1147.916
+  },
+  {
+   "id": "prayer-long-weakness",
+   "start": 1148.916,
+   "end": 1184.812
+  },
+  {
+   "id": "prayer-ask-help",
+   "start": 1185.812,
+   "end": 1219.553
+  },
+  {
+   "id": "scripture-portion",
+   "start": 1220.553,
+   "end": 1228.167
+  },
+  {
+   "id": "guidance-portion",
+   "start": 1229.467,
+   "end": 1260.819
+  },
+  {
+   "id": "prayer-uncertain-future",
+   "start": 1261.819,
+   "end": 1295.197
+  },
+  {
+   "id": "day-transition",
+   "start": 1296.197,
+   "end": 1328.467
+  },
+  {
+   "id": "day-reflection-walking",
+   "start": 1329.467,
+   "end": 1360.477
+  },
+  {
+   "id": "prayer-steady-obedience",
+   "start": 1361.477,
+   "end": 1395.709
+  },
+  {
+   "id": "prayer-community",
+   "start": 1396.709,
+   "end": 1433.693
+  },
+  {
+   "id": "declaration",
+   "start": 1434.693,
+   "end": 1458.332
+  },
+  {
+   "id": "commitment",
+   "start": 1459.532,
+   "end": 1491.396
+  },
+  {
+   "id": "payoff",
+   "start": 1492.596,
+   "end": 1524.887
+  },
+  {
+   "id": "blessing",
+   "start": 1526.087,
+   "end": 1558.401
+  },
+  {
+   "id": "cta",
+   "start": 1559.601,
+   "end": 1566.416
+  },
+  {
+   "id": "closing",
+   "start": 1567.416,
+   "end": 1589.235
+  }
+ ],
+ "upload_performed": false,
+ "publication_performed": false
+}

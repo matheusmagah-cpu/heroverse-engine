@@ -1,0 +1,80 @@
+{
+ "version": "pilot-qa-v1",
+ "pilot_id": "pilot-011",
+ "output_sha256": "b3d8aadc2c1fb15d478820152122a4ace25f9dba5eb69a39152773e0a298b203",
+ "status": "FAIL",
+ "checks": {
+  "full_decode_without_errors": true,
+  "video_format": true,
+  "duration_min": true,
+  "integrated_lufs": true,
+  "true_peak": true,
+  "speech_presence": true,
+  "no_singing": true,
+  "wer_vs_script": true,
+  "words_per_minute": true,
+  "first_word_onset": true,
+  "hook_second_person": true,
+  "title_card_seconds": true,
+  "no_figure": true,
+  "every_scene_in_motion": true,
+  "scene_seconds": true,
+  "crossfade_seconds_max": true,
+  "image_repeat_gap": false,
+  "caption_coverage_of_speech": true,
+  "caption_hold_median": true,
+  "caption_chars_max": true,
+  "caption_words_max": true,
+  "caption_no_box": true,
+  "scripture_card_only_while_read": true,
+  "cta_count": true,
+  "cta_short_and_not_early": true,
+  "persistent_overlays_only_brand": true,
+  "images_open_licence_with_revision": true,
+  "no_third_party_footage": true,
+  "music_owned": true,
+  "voice_model_pinned": true
+ },
+ "criteria_version": "pilot-qa-criteria-v3",
+ "measurements": {
+  "duration_seconds": 1593.43,
+  "loudness": {
+   "integrated_lufs": -15.6,
+   "loudness_range_lu": 2.6,
+   "true_peak_dbtp": -2.9
+  },
+  "speech_presence": 0.906,
+  "music_presence": 0.39,
+  "wer_vs_script": 0.0326,
+  "accepted_words_per_minute": 130.8,
+  "caption_lines": 745,
+  "holds": 54,
+  "first_word_seconds": 0.08,
+  "editing": {
+   "picture_changes": 524,
+   "picture_changes_per_minute": 19.73,
+   "median_shot_seconds": 2.233,
+   "longest_shot_seconds": 33.6,
+   "motion_median_top_decile_diff": 1.003
+  },
+  "colour": {
+   "mean_brightness": 0.3939,
+   "brightness_std_over_time": 0.1065,
+   "mean_saturation": 0.5033,
+   "saturation_std_over_time": 0.1118
+  },
+  "rhythm": {
+   "audio_onsets": 2659,
+   "audio_onsets_per_minute": 100.12,
+   "tempo": {
+    "bpm": 56.05,
+    "confidence": 0.008
+   }
+  }
+ },
+ "transcript_head": "Good morning! If you woke tired, pray with me for strength to meet this day with God. You may have opened your eyes already wishing for more rest. Let your shoulders settle wherever you are. You can keep your eyes open and your breathing easy. You can join each prayer in your own voice or listen quietly. Bring the tiredness you actually feel. You have room here to begin honestly. Everlasting Fathe",
+ "criteria_sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+ "human_review": "PENDING (D-076 calibration by sampling)",
+ "upload_performed": false,
+ "publication_performed": false
+}
