@@ -22,31 +22,31 @@
   "music": {
     "asset": "original-rest-music.lossless.flac",
     "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
-    "source_start": 2511.607
+    "source_start": 2013.728
   },
   "candidate": {
-    "start": 1311.607,
-    "end": 1346.297,
-    "hook": "You can let go.",
-    "title": "His Peace Stands Watch Over You",
-    "reference": "Philippians 4:6-7 (KJV)"
+    "start": 813.728,
+    "end": 854.417,
+    "hook": "Let your face soften.",
+    "title": "Rest in God's Care",
+    "reference": null
   },
   "audio": {
-    "source_start": 1311.607,
-    "source_end": 1346.477,
+    "source_start": 813.728,
+    "source_end": 854.418,
     "source_sample_rate": 24000,
     "source_channels": 1,
-    "source_samples": 836880,
+    "source_samples": 976560,
     "output_sample_rate": 48000,
-    "resampled_source_samples": 1673760,
-    "padding_samples": 54240,
-    "output_samples": 1728000,
-    "fade_start": 34.87,
-    "fade_seconds": 1.13
+    "resampled_source_samples": 1953120,
+    "padding_samples": 62880,
+    "output_samples": 2016000,
+    "fade_start": 40.69,
+    "fade_seconds": 1.31
   },
-  "tail_seconds": 1.13,
-  "narrative_tail_seconds": 1.31,
-  "output_seconds": 36.0,
+  "tail_seconds": 1.31,
+  "narrative_tail_seconds": 1.311,
+  "output_seconds": 42.0,
   "fps": 30,
   "width": 1080,
   "height": 1920,
@@ -60,7 +60,7 @@
       "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
       "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
       "nominal_start": 0.0,
-      "nominal_end": 18.0,
+      "nominal_end": 20.977,
       "motion_profile": "phrase_push_in_v1",
       "atmosphere": {
         "profile": "source_atmosphere_continuous_v1",
@@ -69,15 +69,16 @@
         "alpha_cap": 0.18,
         "fog_alpha_max": 0.09,
         "light_alpha_max": 0.06,
-        "dust_alpha_max": 0.1
+        "dust_alpha_max": 0.1,
+        "opening_profile": "source_atmosphere_hook_v1"
       }
     },
     {
       "image_id": "bg-healing-garden",
       "asset": "pilot-006-img-bg-healing-garden-sha256-97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070.png",
       "sha256": "97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070",
-      "nominal_start": 18.0,
-      "nominal_end": 36.0,
+      "nominal_start": 20.977,
+      "nominal_end": 42.0,
       "motion_profile": "phrase_push_in_v1",
       "atmosphere": {
         "profile": "source_atmosphere_continuous_v1",

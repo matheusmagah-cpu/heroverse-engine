@@ -99,3 +99,18 @@ Selected narration:813.728–854.417,12 complete sentences, opening “Let your 
 Native extraction813.728–854.418 preserves the complete source and boundary rounding residue:976560 samples at24000Hz. Reference indexing and FFmpeg extraction matched byte-for-byte, PCM SHA256e49a6b29b469a61298508e796b933a6ba87067427512649b28ed4d18fc9008af. Unchanged48kHz acoustic measurement returned leading0.13s/trailing0.29s, PASS against0.3s, without gain or retiming. This is technical evidence, not perceptual audio review.
 
 Output plan42.000s:1953120 source samples plus62880 padding samples,1260 video frames, two nominal scenes20.977/21.023s and the existing0.5s dissolve. Both scenes satisfy the unchanged18–36s rule. Plan3489 bytes including newline, SHA25695624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905. Opening atmosphere adds the explicitly specified smooth light/fog profile only to scene1. No physical water simulation or cinematic quality PASS is claimed. Real preview inspection, code tests/review/CI, new full render, frozen QA and actual watched review>=9 remain pending.
+
+### V6 implementation checks at 08:19 UTC
+
+The adapter and canonical plan now implement the reviewed material, 12 complete source sentences and exact 42-second clocks. The independent source selector accepted exactly one candidate. The native source interval and plan preflight passed against the real pinned files. The source preflight does not qualify the future output.
+
+Commands and actual results:
+- /tmp/hv228-venv/bin/python -I -B migration/production/test_shorts_006_plan.py: 22 tests PASS. Temporary technical direction independently ran 22 tests in 3.876 seconds, exit 0, against these adapter bytes.
+- /tmp/hv228-venv/bin/python -I -B migration/publish/test_pending_shorts.py: 13 tests PASS in 0.479 seconds, exit 0.
+- /tmp/hv228-venv/bin/python -I -B migration/publish/test_publish_shorts.py: 52 tests PASS in 0.491 seconds, exit 0. Printed video IDs and observations are synthetic test fixtures, not external uploads.
+- Existing CI test-file loop excluding the producer suite: 47 files PASS, persisted exit 0. The producer full suite and preview were still running at this entry.
+- card_check against SPEC v6: CARD_OK. dot_scope against the six changed paths: IN_SCOPE 6 files. git diff --check: PASS.
+- Sixteen frozen files compared byte-for-byte against main e0c72367031d4ceadfb39c1577af71d21a55b8e5: PASS, including all existing QA criteria, migration/STANDARD.md, ordinary pilot-005 adapter, shorts_qa.py and reviewer. The first audit looked for STANDARD at the wrong path and reported ABSENT; the corrected actual path was explicitly verified, not counted as a pass by assumption.
+- The actual 42-second synthetic AAC packet probe confirmed 1970 packets, 1024 priming samples and a final packet presenting 768 samples. Decoder padding is accepted only with the same existing packet-clock evidence; no timing tolerance was expanded.
+
+The implementation additionally rejects the logged unpreserved acoustic FAIL hash, without pretending its unavailable bytes were independently measured. Historical manifest bytes remain unchanged. The existing acoustic validator, frozen QA, reviewer rubric, publication policy, deadlines and workflow preservation behavior remain unchanged.
