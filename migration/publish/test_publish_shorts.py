@@ -2,6 +2,8 @@
 """Offline checks of the Shorts publication: slots only for Shorts still to upload, never a duplicate upload,
 and the state of every Short (failed / not selected / approved awaiting slot / scheduled / published)."""
 from datetime import datetime, timezone
+from contextlib import contextmanager, ExitStack, redirect_stdout
+import io
 import hashlib
 import json
 import copy
@@ -692,8 +694,8 @@ class RecoveryPublication(unittest.TestCase):
 
     def test_real_correction_binding_positive_single_upload_then_readback(self):
         sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
-        from test_shorts_006_plan import synthetic_environment, OUTPUT_BYTES
-        with tempfile.TemporaryDirectory() as t, synthetic_environment(Path(t) / "migration") as fixture:
+        from test_shorts_006_plan import synthetic_environment, OUTPUT_BYTES, OUTPUT_HASH
+        with tempfile.TemporaryDirectory() as t, synthetic_environment(Path(t) / "migration") as fixture, patch.object(pub, "REST_OUTPUT_SHA256", OUTPUT_HASH):
             d = fixture["pilot"]; spec = copy.deepcopy(fixture["spec"])
             media = Path(t) / "media"; media.mkdir(); (media / "short-00.mp4").write_bytes(OUTPUT_BYTES)
             ledger = Path(t) / "ledger.json"
@@ -707,6 +709,189 @@ class RecoveryPublication(unittest.TestCase):
             pub.utc_now = lambda: ps.when("2026-10-21T15:00:00Z")
             self.invoke_recovery(path, media, ledger, "")
             self.assertEqual(len(self.yt.uploads), 1)
+
+
+class RestMetadata(unittest.TestCase):
+    setUp = PublishShorts.setUp
+    tearDown = PublishShorts.tearDown
+
+    @staticmethod
+    def expected(long_title='Long'):
+        return {'title': "Rest in God's Care #shorts",
+                'description': "▶ Full prayer: https://youtu.be/LONG\n" + long_title +
+                    "\n\nA quiet moment to rest in God's care.\n\n#prayer #rest #jesus #faith #shorts",
+                'tags': ['prayer', 'rest', 'christian reflection', 'jesus', 'faith', 'shorts']}
+
+    @contextmanager
+    def case(self, root, *, existing=False):
+        # Real correction validators over wholly synthetic files/pins. No live
+        # manifest is loaded and every YouTube operation is an inert fake.
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'production'))
+        from test_shorts_006_plan import synthetic_environment, OUTPUT_BYTES, OUTPUT_HASH
+        with synthetic_environment(Path(root) / 'migration') as f, ExitStack() as stack:
+            stack.enter_context(patch.object(pub, 'REST_OUTPUT_SHA256', OUTPUT_HASH))
+            d = f['pilot']; media = Path(root) / 'media'; media.mkdir()
+            (media / 'short-00.mp4').write_bytes(OUTPUT_BYTES)
+            path = d / 'shorts/shorts.json'
+            (d / 'schedule.json').write_text(json.dumps({'publish_at':'2026-10-21T00:00:00Z',
+                                                       'shorts_slots':['2026-10-21T14:00:00Z']}))
+            key = 'short:pilot-006:' + OUTPUT_HASH
+            ledger = Path(root) / 'ledger.json'
+            entries = {'pilot-006:longsha': {'video_id':'LONG'}}
+            if existing: entries[key] = {'video_id':'VIDEO', 'slot':'2026-10-21T14:00:00Z', 'output_sha256':OUTPUT_HASH}
+            ledger.write_text(json.dumps({'entries':entries}))
+            now = [datetime(2026,10,21,12,30,tzinfo=timezone.utc)]
+            stack.enter_context(patch.object(pub, 'utc_now', side_effect=lambda: now[0]))
+            expected = self.expected()
+            remote = {'id':'VIDEO', 'snippet': {'channelId':pub.pv.CHANNEL, 'title':expected['title'],
+                'description':expected['description'], 'tags':expected['tags'][:],
+                'defaultLanguage':'en', 'defaultAudioLanguage':'en'},
+                'status': {'uploadStatus':'processed', 'privacyStatus':'private',
+                    'publishAt':'2026-10-21T14:00:00Z', 'license':'youtube', 'containsSyntheticMedia':True},
+                'processingDetails':{'processingStatus':'succeeded'}}
+            gets, bodies, long_title = [], [], ['Long']
+            def get(url, params=None, timeout=None):
+                gets.append((url, copy.deepcopy(params)))
+                if url.endswith('channels'): return Resp({'items':[{'id':pub.pv.CHANNEL}]})
+                if params['part'] == 'snippet': return Resp({'items':[{'snippet':{'title':long_title[0]}}]})
+                return Resp({'items':[copy.deepcopy(remote)]})
+            stack.enter_context(patch.object(self.yt, 'get', side_effect=get))
+            def upload(session, output, body):
+                bodies.append(copy.deepcopy(body)); return {'id':'VIDEO'}
+            upload_mock = stack.enter_context(patch.object(pub.pv, 'upload', side_effect=upload))
+            def run(slots='2026-10-21T14:00:00Z'):
+                with redirect_stdout(io.StringIO()):
+                    pub.main(str(path), str(media), 'pilot-006:longsha', str(ledger), str(Path(root)/'receipt.json'), slots)
+                return json.loads((Path(root)/'receipt.json').read_text())
+            yield f | dict(path=path, media=media, ledger=ledger, key=key, now=now, remote=remote,
+                           gets=gets, bodies=bodies, long_title=long_title, run=run, upload=upload_mock)
+
+    def test_exact_metadata_legacy_and_pure_selector(self):
+        short = {'sha256':pub.REST_OUTPUT_SHA256, 'file':'short-00.mp4', 'title':"Rest in God's Care",
+                 'hook':'Let your face soften.', 'reference':None}
+        original = copy.deepcopy(short)
+        self.assertEqual(pub.metadata_for(short, 'https://youtu.be/LONG', 'Long', pilot='pilot-006'), self.expected())
+        self.assertEqual(short, original)
+        self.assertFalse(self.expected()['description'].endswith('\n'))
+        for pilot, digest in [(None,pub.REST_OUTPUT_SHA256),('pilot-005',pub.REST_OUTPUT_SHA256),
+                              ('pilot-009',pub.REST_OUTPUT_SHA256),('pilot-006','a'*64)]:
+            short['sha256'] = digest
+            result = pub.metadata_for(short, 'https://youtu.be/LONG', 'Long', pilot=pilot)
+            self.assertEqual(result, {'title':pub.title_for(short),
+                'description':pub.description_for(short,'https://youtu.be/LONG','Long'),
+                'tags':['prayer','morning prayer','jesus','faith','bible','shorts']})
+        # The fixed rest metadata never reads mutable local editorial fields;
+        # only NEW main validates identity, preserving existing-ID GET access.
+        self.assertEqual(pub.metadata_for({'sha256':pub.REST_OUTPUT_SHA256},'https://youtu.be/LONG','Long',pilot='pilot-006'), self.expected())
+
+    def test_new_body_readback_and_repeat_are_bound_and_no_snapshot(self):
+        with tempfile.TemporaryDirectory() as root, self.case(root) as f:
+            first = f['run'](); row = first['shorts'][0]; body = f['bodies'][0]
+            for key, expected in self.expected().items(): self.assertEqual(body['snippet'][key], expected)
+            self.assertEqual(body['snippet'], self.expected() | {'categoryId':'22','defaultLanguage':'en','defaultAudioLanguage':'en'})
+            self.assertEqual(body['status'], {'privacyStatus':'private','publishAt':'2026-10-21T14:00:00Z',
+                'selfDeclaredMadeForKids':False,'embeddable':True,'license':'youtube','publicStatsViewable':True,'containsSyntheticMedia':True})
+            self.assertEqual(row['title'], self.expected()['title'])
+            self.assertEqual(row['verification_status'], 'SCHEDULED_VERIFIED')
+            self.assertEqual(row['observation']['tags'], self.expected()['tags'])
+            ledger = json.loads(f['ledger'].read_text()); entry = ledger['entries'][f['key']]
+            self.assertEqual(set(entry), {'steps','video_id','uploaded_at','long_video_id','slot','output_sha256','qa','verification'})
+            self.assertEqual(entry['verification']['observation'], row['observation'])
+            # Readback remains independent of source files and new-upload gates.
+            (f['media']/'short-00.mp4').unlink(); spec = json.loads(f['path'].read_text())
+            spec['shorts'][0]['publish'] = False; f['path'].write_text(json.dumps(spec))
+            f['now'][0] = datetime(2026,10,21,15,tzinfo=timezone.utc)
+            f['remote']['status']['privacyStatus'] = 'public'
+            with patch.object(pub, 'recovery_upload_gate', side_effect=AssertionError('no new gate')), \
+                 patch.object(pub.shorts_qa, 'check', side_effect=AssertionError('no fresh QA')):
+                second = f['run']('')
+            self.assertEqual(second['shorts'][0]['verification_status'],'PUBLIC_VERIFIED')
+            self.assertEqual(len(f['bodies']),1)
+            f['long_title'][0] = 'Changed long title'
+            third = f['run']('')
+            self.assertEqual(third['shorts'][0]['verification_reason'],'MISMATCH_DESCRIPTION')
+            self.assertEqual(len(f['bodies']),1)
+
+    def test_new_identity_and_existing_gates_reject_before_session(self):
+        for kind in ('file','title','hook','reference','missing_reference','hash','pilot','path','key','qa','score','review','binding','late','slot'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as root, self.case(root) as f:
+                spec = json.loads(f['path'].read_text()); rec = spec['shorts'][0]
+                if kind in ('file','title','hook','reference'): rec[kind] = 'wrong'
+                elif kind == 'missing_reference': rec.pop('reference')
+                elif kind == 'hash': rec['sha256'] = 'f'*64
+                elif kind == 'pilot': spec['source_pilot'] = 'pilot-005'
+                elif kind == 'qa': rec['qa']['status'] = 'FAIL'
+                elif kind == 'score': rec['review']['overall'] = 8.99
+                elif kind == 'review': rec['review']['status'] = 'FAIL'
+                elif kind == 'binding': spec.pop('finalization')
+                elif kind == 'late': f['now'][0] = datetime(2026,10,21,13,15,1,tzinfo=timezone.utc)
+                f['path'].write_text(json.dumps(spec))
+                path = f['path']
+                if kind == 'path': path = path.with_name('wrong.json'); path.write_text(json.dumps(spec))
+                key = 'pilot-005:longsha' if kind == 'key' else 'pilot-006:longsha'
+                if kind == 'key':
+                    ledger = json.loads(f['ledger'].read_text()); ledger['entries'][key] = {'video_id':'LONG'}; f['ledger'].write_text(json.dumps(ledger))
+                with patch.object(pub.pv,'session') as session, redirect_stdout(io.StringIO()), self.assertRaises(SystemExit):
+                    pub.main(str(path),str(f['media']),key,str(f['ledger']),str(Path(root)/'receipt.json'),
+                             '2026-10-21T20:00:00Z' if kind == 'slot' else '2026-10-21T14:00:00Z')
+                session.assert_not_called(); f['upload'].assert_not_called()
+
+    def test_existing_inconsistent_or_absent_identity_still_gets(self):
+        for field in ('file','title','hook','reference'):
+            for absent in (False,True):
+                with self.subTest(field=field,absent=absent), tempfile.TemporaryDirectory() as root, self.case(root,existing=True) as f:
+                    spec = json.loads(f['path'].read_text()); rec = spec['shorts'][0]; rec['publish'] = False
+                    if absent: rec.pop(field)
+                    else: rec[field] = 'wrong'
+                    f['path'].write_text(json.dumps(spec)); (f['media']/'short-00.mp4').unlink()
+                    f['now'][0] = datetime(2026,10,21,15,tzinfo=timezone.utc); f['remote']['status']['privacyStatus']='public'
+                    result=f['run']('')['shorts'][0]
+                    self.assertEqual(result['verification_status'],'VERIFICATION_UNKNOWN')
+                    self.assertEqual(result['verification_reason'],'LOCAL_METADATA_IDENTITY_MISMATCH')
+                    self.assertEqual(result['title'],self.expected()['title'])
+                    self.assertTrue(any(params.get('part')=='id,snippet,status,processingDetails' for _,params in f['gets']))
+                    f['upload'].assert_not_called()
+                    f['remote']['snippet']['channelId']='wrong'
+                    result=f['run']('')['shorts'][0]
+                    self.assertEqual(result['verification_status'],'VERIFICATION_FAIL')
+                    self.assertEqual(result['verification_reason'],'MISMATCH_CHANNEL_ID')
+                    self.assertEqual(json.loads(f['ledger'].read_text())['entries'][f['key']]['video_id'],'VIDEO')
+
+    def test_tags_missing_invalid_mismatch_and_failure_precedence(self):
+        for tags, reason in [(None,'MISSING_TAGS'),('prayer','MISSING_TAGS'),([False],'MISSING_TAGS'),
+                             (['morning prayer'],'MISMATCH_TAGS'),([], 'MISMATCH_TAGS')]:
+            with self.subTest(tags=tags), tempfile.TemporaryDirectory() as root, self.case(root,existing=True) as f:
+                if tags is None: f['remote']['snippet'].pop('tags')
+                else: f['remote']['snippet']['tags']=tags
+                row=f['run']('')['shorts'][0]
+                self.assertEqual(row['verification_reason'],reason)
+                self.assertEqual(row['verification_status'],'VERIFICATION_UNKNOWN' if reason=='MISSING_TAGS' else 'VERIFICATION_FAIL')
+                if reason=='MISSING_TAGS': self.assertEqual(row['observation']['unknown_fields']['tags'],'MISSING_OR_INVALID_FIELD')
+                f['remote']['status']['processingDetails']={}
+                f['remote']['processingDetails']['processingStatus']='failed'
+                row=f['run']('')['shorts'][0]
+                self.assertEqual(row['verification_reason'],'REMOTE_PROCESSING_FAILED')
+                f['upload'].assert_not_called()
+
+    def test_legacy_observation_omits_tags_and_readback_id_is_durable(self):
+        with tempfile.TemporaryDirectory() as root, self.case(root) as f:
+            original=pub.observe_video
+            def observed(session,video_id,*,include_tags=False):
+                persisted=json.loads(f['ledger'].read_text())['entries'][f['key']]
+                self.assertEqual(persisted['video_id'],video_id)
+                return original(session,video_id,include_tags=include_tags)
+            with patch.object(pub,'observe_video',side_effect=observed): f['run']()
+            without,error=original(self.yt,'VIDEO')
+            self.assertIsNone(error); self.assertNotIn('tags',without); self.assertNotIn('tags',without['unknown_fields'])
+            # Wrong-pilot metadata is not the corrected selector despite a matching hash.
+            for pilot in ('pilot-005','pilot-009'):
+                spec=json.loads(f['path'].read_text()); spec['source_pilot']=pilot; spec['shorts'][0]['publish']=False
+                f['path'].write_text(json.dumps(spec)); ledger=json.loads(f['ledger'].read_text())
+                ledger['entries']['short:'+pilot+':'+spec['shorts'][0]['sha256']]=ledger['entries'].pop(f['key'])
+                f['ledger'].write_text(json.dumps(ledger))
+                row=f['run']('')['shorts'][0]
+                self.assertNotIn('tags',row['observation']); f['key']='short:'+pilot+':'+spec['shorts'][0]['sha256']
+            self.assertEqual(len(f['bodies']),1)
 
 
 if __name__ == "__main__":
