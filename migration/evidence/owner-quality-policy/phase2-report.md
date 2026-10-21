@@ -74,3 +74,43 @@ At 01:33 UTC the corrected producer test fixtures use synthetic temporary source
 - Two long-running revised producer test sessions lost their process handles and had no terminal summary/exit marker. Their result is UNKNOWN, not PASS. No process remained when checked; the full producer suite is being reconciled separately. Prior100-test results apply to the previous test version only, while producer implementation bytes remain unchanged.
 - Bounded FullHD transition diagnosis remains pending. The six existing FullHD clips prove sampled rendering only, not serial transition equivalence or editorial quality.
 - Card check CARD_OK; scope IN_SCOPE13files; git diff --check PASS. Production remains blocked until all applicable final tests, independent review and exact-SHA CI pass.
+
+## Phase 3 actual production attempt — 2026-10-21 02:09 UTC
+
+RESULT BLOCKED. Code merged as 76fb88ce1253ad8adc56743b463fbae1bd31ccd1 after CI 39528158242 and independent technical review. Existing shorts workflow run 39529000826 rendered pilot-006 once, then failed its acoustic pre-review check. Run: https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39529000826 .
+
+Observed MP4 SHA256 in the job log: `126c2e8335f5135e4d2ec2407c67e6eb636d8ce36ea7d0bd489d8ed34ff9c617`. This is **MP4_UNPRESERVED**, not an available or qualified artifact. The Preserve step was skipped; the run returned zero artifacts, and the complete 288-asset release inventory did not contain this hash. No rerender or provider retry was performed.
+
+Actual measurements recorded in the log: duration 36.0 seconds, 1080×1920, 30 fps, 1080 frames, uniform video PTS, no black intervals, 1728000 presentation audio samples with declared AAC padding accounting. These are structural measurements, not frozen-QA or watched-review approval. The acoustic guard failed on source leading/trailing inactive energy of 0.17/0.60 seconds. Frozen QA and designated provider review were not reached; their result is null because they were not executed. No new editorial score exists.
+
+The source FLAC reproduces the same acoustic result. The adapter inherited an explicit pilot-005 energy-edge verdict from issue231 and `shorts_edit_plan.py`, rather than a neutral measurement-only helper. No threshold was changed after seeing the failure. An explicit pilot-006 acceptance amendment is pending, separating source/PCM integrity from perceptual ending review while retaining frozen QA, overall score >=9 and ordinary pilot-005 behavior. Failure preservation is also proposed, strictly hash-bound and publish=false; archive does not mean approval. Implementation and a new render remain blocked until that amendment is authorized and validated.
+
+## 2026-10-21 07:43 UTC owner decision
+The proposed acoustic and failure-preservation exception was explicitly rejected by the owner. It is not applied. The earlier pending statement records historical status only. Current work selects materially different complete narration while preserving the existing acoustic, structural, QA and audiovisual-review acceptance rules, including overall >=9. No new render or provider call has occurred yet.
+
+## Material correction SPEC v6 — 2026-10-21 08:12 UTC
+
+The owner rejected the proposed exception and explicitly requested an animated cinematic hook. The new material contract preserves all acceptance rules, including the existing acoustic limit and overall >=9. No failure-preservation exception is implemented.
+
+The first body replacement was denied and verified not executed. After the owner specifically approved replacing issue259 with the reviewed42-second contract, one same-operation retry succeeded at08:12:20UTC. A fresh GET matched all55924 characters exactly. Contract SHA256:714ce5e14b371b2dd032501bcf02796985c40e54316b539fb78cdb5216c4f4a8. Independent contract review PASS does not qualify code or media.
+
+Selected narration:813.728–854.417,12 complete sentences, opening “Let your face soften.” and ending “Rest now.” Title:“Rest in God's Care”. No spoken Scripture, partial quotation, health promise or CTA is introduced. Unchanged structural selector returned no rejection. A previous nurse-analogy candidate was discarded because the unchanged selector reported UNRESOLVED_SEGMENT_END, despite its acoustic pass.
+
+Native extraction813.728–854.418 preserves the complete source and boundary rounding residue:976560 samples at24000Hz. Reference indexing and FFmpeg extraction matched byte-for-byte, PCM SHA256e49a6b29b469a61298508e796b933a6ba87067427512649b28ed4d18fc9008af. Unchanged48kHz acoustic measurement returned leading0.13s/trailing0.29s, PASS against0.3s, without gain or retiming. This is technical evidence, not perceptual audio review.
+
+Output plan42.000s:1953120 source samples plus62880 padding samples,1260 video frames, two nominal scenes20.977/21.023s and the existing0.5s dissolve. Both scenes satisfy the unchanged18–36s rule. Plan3489 bytes including newline, SHA25695624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905. Opening atmosphere adds the explicitly specified smooth light/fog profile only to scene1. No physical water simulation or cinematic quality PASS is claimed. Real preview inspection, code tests/review/CI, new full render, frozen QA and actual watched review>=9 remain pending.
+
+### V6 implementation checks at 08:19 UTC
+
+The adapter and canonical plan now implement the reviewed material, 12 complete source sentences and exact 42-second clocks. The independent source selector accepted exactly one candidate. The native source interval and plan preflight passed against the real pinned files. The source preflight does not qualify the future output.
+
+Commands and actual results:
+- /tmp/hv228-venv/bin/python -I -B migration/production/test_shorts_006_plan.py: 22 tests PASS. Temporary technical direction independently ran 22 tests in 3.876 seconds, exit 0, against these adapter bytes.
+- /tmp/hv228-venv/bin/python -I -B migration/publish/test_pending_shorts.py: 13 tests PASS in 0.479 seconds, exit 0.
+- /tmp/hv228-venv/bin/python -I -B migration/publish/test_publish_shorts.py: 52 tests PASS in 0.491 seconds, exit 0. Printed video IDs and observations are synthetic test fixtures, not external uploads.
+- Existing CI test-file loop excluding the producer suite: 47 files PASS, persisted exit 0. The producer full suite and preview were still running at this entry.
+- card_check against SPEC v6: CARD_OK. dot_scope against the six changed paths: IN_SCOPE 6 files. git diff --check: PASS.
+- Sixteen frozen files compared byte-for-byte against main e0c72367031d4ceadfb39c1577af71d21a55b8e5: PASS, including all existing QA criteria, migration/STANDARD.md, ordinary pilot-005 adapter, shorts_qa.py and reviewer. The first audit looked for STANDARD at the wrong path and reported ABSENT; the corrected actual path was explicitly verified, not counted as a pass by assumption.
+- The actual 42-second synthetic AAC packet probe confirmed 1970 packets, 1024 priming samples and a final packet presenting 768 samples. Decoder padding is accepted only with the same existing packet-clock evidence; no timing tolerance was expanded.
+
+The implementation additionally rejects the logged unpreserved acoustic FAIL hash, without pretending its unavailable bytes were independently measured. Historical manifest bytes remain unchanged. The existing acoustic validator, frozen QA, reviewer rubric, publication policy, deadlines and workflow preservation behavior remain unchanged.

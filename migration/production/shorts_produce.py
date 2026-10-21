@@ -305,16 +305,34 @@ def opening_atmosphere(base_rgb, frame_index, seed=231005):
                                  particle_factory=opening_particles)
 
 
-def continuous_atmosphere(base_rgb, frame_index, frame_count, seed):
+def continuous_atmosphere(base_rgb, frame_index, frame_count, seed, *, opening_profile=None):
     """006 full source-clip clock. No wrapping, camera movement or source mutation."""
     if type(frame_index) is not int or type(frame_count) is not int or frame_count <= 0 or type(seed) is not int:
         raise ValueError("INVALID_ATMOSPHERE_CLOCK")
     envelope = 1.0 if 0 <= frame_index < frame_count else 0.0
-    return _atmosphere_composite(base_rgb, frame_index, seed, envelope)
+    return _atmosphere_composite(base_rgb, frame_index, seed, envelope, opening_profile=opening_profile)
 
 
-def _atmosphere_composite(base_rgb, frame_index, seed, envelope, *, particle_factory=None):
+def _opening_atmosphere_fields(t, x, y):
+    """Closed 006 hook clock and added light mask in normalized source coordinates."""
+    import numpy as np
+    def smooth(u):
+        u = np.clip(u, 0, 1)
+        return u * u * (3 - 2 * u)
+    progress = smooth(t / 3)
+    fog_time = float(t + 4 * progress)
+    envelope = smooth(t / 0.35) * smooth((3 - t) / 0.75) if 0 <= t < 3 else 0.0
+    center = 0.32 + 0.36 * progress
+    gaussian = np.exp(-((x - center) / 0.22) ** 2 - ((y - 0.30) / 0.20) ** 2)
+    mask = 1 - smooth((y - 0.48) / 0.06)
+    return fog_time, (0.85 * envelope * gaussian * mask).astype(np.float32)
+
+
+def _atmosphere_composite(base_rgb, frame_index, seed, envelope, *, particle_factory=None,
+                          opening_profile=None):
     """Numerical source-bound core shared without changing the 005 envelope."""
+    if opening_profile is not None and opening_profile != "source_atmosphere_hook_v1":
+        raise ValueError("INVALID_OPENING_ATMOSPHERE_PROFILE")
     import cv2
     import numpy as np
     base = np.asarray(base_rgb)
@@ -330,13 +348,18 @@ def _atmosphere_composite(base_rgb, frame_index, seed, envelope, *, particle_fac
         return base.copy(), np.zeros((h, w), dtype=np.float32)
     t = frame_index / FPS
     y, x = np.mgrid[:h, :w].astype(np.float32)
+    fog_time = t
+    if opening_profile is not None:
+        fog_time, opening_light = _opening_atmosphere_fields(t, x / w, y / h)
     fog = (np.exp(-((y / h - 0.72) / 0.22) ** 2) *
-           (0.50 + 0.25 * np.sin(2 * np.pi * (x / w - 0.035 * t)) +
-            0.25 * np.sin(2 * np.pi * (1.7 * x / w + 0.7 * y / h - 0.05 * t))))
+           (0.50 + 0.25 * np.sin(2 * np.pi * (x / w - 0.035 * fog_time)) +
+            0.25 * np.sin(2 * np.pi * (1.7 * x / w + 0.7 * y / h - 0.05 * fog_time))))
     fog_alpha = 0.09 * envelope * fog
     luma = base @ np.array([0.2126, 0.7152, 0.0722], dtype=np.float32)
     highlights = cv2.GaussianBlur(np.clip((luma - 0.65) / 0.35, 0, 1),
                                   (0, 0), sigmaX=0.025 * w)
+    if opening_profile is not None:
+        highlights = np.maximum(highlights, opening_light)
     light_alpha = 0.06 * envelope * highlights
     dust_alpha = np.zeros((h, w), dtype=np.float32)
     subsamples = (np.arange(8, dtype=np.float32) + 0.5) / 8 - 0.5
@@ -367,12 +390,15 @@ def write_opening_video(still_path, out_path):
     return _write_atmosphere_video(still_path, out_path, 91, opening_atmosphere, continuous=False)
 
 
-def write_continuous_video(still_path, out_path, frame_count, seed):
+def write_continuous_video(still_path, out_path, frame_count, seed, *, opening_profile=None):
     """006 lossless animated source for every allocated frame, never a cloned tail."""
     if type(frame_count) is not int or frame_count <= 0 or type(seed) is not int:
         raise ValueError("INVALID_ATMOSPHERE_CLOCK")
+    if opening_profile is not None and opening_profile != "source_atmosphere_hook_v1":
+        raise ValueError("INVALID_OPENING_ATMOSPHERE_PROFILE")
     return _write_atmosphere_video(still_path, out_path, frame_count,
-                                  lambda base, frame: continuous_atmosphere(base, frame, frame_count, seed),
+                                  lambda base, frame: continuous_atmosphere(
+                                      base, frame, frame_count, seed, opening_profile=opening_profile),
                                   continuous=True)
 
 
@@ -732,7 +758,9 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
         if edit_plan["source_pilot"] == "pilot-006":
             counts = scene_frame_plan(edit_plan)["scene_frames"]
             hook_video = [write_continuous_video(path, tmp / f"atmosphere-{i:02d}.mkv", counts[i],
-                                               edit_plan["scenes"][i]["atmosphere"]["seed"])
+                                               edit_plan["scenes"][i]["atmosphere"]["seed"],
+                                               opening_profile=edit_plan["scenes"][0]["atmosphere"].get(
+                                                   "opening_profile") if i == 0 else None)
                           for i, path in enumerate(stills)]
         else:
             hook_video = write_opening_video(stills[0], tmp / "opening.mkv")

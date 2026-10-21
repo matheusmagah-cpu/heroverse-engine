@@ -27,9 +27,12 @@ import shorts_prerequisite
 import owner_quality_policy
 
 CANONICAL_PILOT = Path(__file__).resolve().parent / "pilot-006"
-PLAN_SHA256 = "1c52034ce611b8a30c9d92ce22e9b6ce8f7cbff14b803a44ff8e7d1eb4991c57"
+PLAN_SHA256 = "95624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905"
 HISTORY_SHA256 = "4c4d178392ee1b13b4a5927ba8a6454b895e85119b247aa038215fb9a58b4677"
 REJECTED_SHA256 = "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707"
+# Logged run39529000826 failed; its media was not preserved. This deny pin
+# does not claim the immutable history archive contains that MP4 or review.
+UNPRESERVED_FAIL_SHA256 = "126c2e8335f5135e4d2ec2407c67e6eb636d8ce36ea7d0bd489d8ed34ff9c617"
 TARGET_SLOT = "2026-10-21T14:00:00Z"
 LEAD_DEADLINE = "2026-10-21T13:15:00Z"
 KIND = "pilot-006-correction-v1"
@@ -63,31 +66,31 @@ EXPECTED_PLAN = json.loads(r'''{
   "music": {
     "asset": "original-rest-music.lossless.flac",
     "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
-    "source_start": 2511.607
+    "source_start": 2013.728
   },
   "candidate": {
-    "start": 1311.607,
-    "end": 1346.297,
-    "hook": "You can let go.",
-    "title": "His Peace Stands Watch Over You",
-    "reference": "Philippians 4:6-7 (KJV)"
+    "start": 813.728,
+    "end": 854.417,
+    "hook": "Let your face soften.",
+    "title": "Rest in God's Care",
+    "reference": null
   },
   "audio": {
-    "source_start": 1311.607,
-    "source_end": 1346.477,
+    "source_start": 813.728,
+    "source_end": 854.418,
     "source_sample_rate": 24000,
     "source_channels": 1,
-    "source_samples": 836880,
+    "source_samples": 976560,
     "output_sample_rate": 48000,
-    "resampled_source_samples": 1673760,
-    "padding_samples": 54240,
-    "output_samples": 1728000,
-    "fade_start": 34.87,
-    "fade_seconds": 1.13
+    "resampled_source_samples": 1953120,
+    "padding_samples": 62880,
+    "output_samples": 2016000,
+    "fade_start": 40.69,
+    "fade_seconds": 1.31
   },
-  "tail_seconds": 1.13,
-  "narrative_tail_seconds": 1.31,
-  "output_seconds": 36.0,
+  "tail_seconds": 1.31,
+  "narrative_tail_seconds": 1.311,
+  "output_seconds": 42.0,
   "fps": 30,
   "width": 1080,
   "height": 1920,
@@ -101,7 +104,7 @@ EXPECTED_PLAN = json.loads(r'''{
       "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
       "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
       "nominal_start": 0.0,
-      "nominal_end": 18.0,
+      "nominal_end": 20.977,
       "motion_profile": "phrase_push_in_v1",
       "atmosphere": {
         "profile": "source_atmosphere_continuous_v1",
@@ -110,15 +113,16 @@ EXPECTED_PLAN = json.loads(r'''{
         "alpha_cap": 0.18,
         "fog_alpha_max": 0.09,
         "light_alpha_max": 0.06,
-        "dust_alpha_max": 0.1
+        "dust_alpha_max": 0.1,
+        "opening_profile": "source_atmosphere_hook_v1"
       }
     },
     {
       "image_id": "bg-healing-garden",
       "asset": "pilot-006-img-bg-healing-garden-sha256-97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070.png",
       "sha256": "97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070",
-      "nominal_start": 18.0,
-      "nominal_end": 36.0,
+      "nominal_start": 20.977,
+      "nominal_end": 42.0,
       "motion_profile": "phrase_push_in_v1",
       "atmosphere": {
         "profile": "source_atmosphere_continuous_v1",
@@ -217,13 +221,13 @@ def validate_plan(plan, timeline, script, inputs, *, raw_sha256):
         refs = {s["id"]: s.get("reference") for s in script["segments"]}
         moment, reason = validate_candidate(timeline["sentences"], refs, plan["candidate"])
         require(reason is None, "SOURCE_CANDIDATE_REJECTED")
-        require(len(moment["sentences"]) == 7 and moment["sentences"] == timeline["sentences"][314:321], "SOURCE_SENTENCE_MISMATCH")
-        require(moment["start"] == 1311.607 and moment["end"] == 1346.297
+        require(len(moment["sentences"]) == 12 and moment["sentences"] == timeline["sentences"][191:203], "SOURCE_SENTENCE_MISMATCH")
+        require(moment["start"] == 813.728 and moment["end"] == 854.417
                 and moment["reference"] == plan["candidate"]["reference"], "SOURCE_INTERVAL_MISMATCH")
-        require(moment["sentences"][0]["text"] == "You can let go."
-                and moment["sentences"][0]["end"] == 1313.228
-                and timeline["sentences"][321]["start"] == 1347.677, "SOURCE_BOUNDARY_MISMATCH")
-        require(moment["segments"] == ["sleep-reflect-121", "sleep-philippians-4", "sleep-reflect-phil"], "SOURCE_SEGMENT_MISMATCH")
+        require(moment["sentences"][0]["text"] == "Let your face soften."
+                and moment["sentences"][0]["end"] == 815.669
+                and timeline["sentences"][203]["start"] == 855.797, "SOURCE_BOUNDARY_MISMATCH")
+        require(moment["segments"] == ["sleep-relax-1", "sleep-relax-2", "sleep-relax-3"], "SOURCE_SEGMENT_MISMATCH")
         require(all(s["image_id"] in script["backgrounds"] for s in plan["scenes"]), "IMAGE_MAPPING_MISMATCH")
     except (KeyError, TypeError, IndexError, AttributeError):
         raise EvidenceError("MALFORMED_SOURCE") from None
@@ -244,11 +248,11 @@ def main(plan_path, timeline_path, script_path, inputs_path, out_path):
 
 def frame_plan(plan):
     validate_plan_schema(plan)
-    return {"expected_frame_count": 1080, "fps": 30, "scene_frame_spans": [
-        {"image_id": "bg-still-water-night", "start_frame": 0, "end_frame": 548,
-         "nominal_start_frame": 0, "nominal_end_frame": 540},
-        {"image_id": "bg-healing-garden", "start_frame": 533, "end_frame": 1080,
-         "nominal_start_frame": 540, "nominal_end_frame": 1080}]}
+    return {"expected_frame_count": 1260, "fps": 30, "scene_frame_spans": [
+        {"image_id": "bg-still-water-night", "start_frame": 0, "end_frame": 637,
+         "nominal_start_frame": 0, "nominal_end_frame": 629},
+        {"image_id": "bg-healing-garden", "start_frame": 622, "end_frame": 1260,
+         "nominal_start_frame": 629, "nominal_end_frame": 1260}]}
 
 
 def _record(spec):
@@ -273,8 +277,8 @@ def _bind_record(spec, plan, record, output_hash, docs):
     _no_mixed_authority(spec)
     require(type(output_hash) is str and HASH.fullmatch(output_hash), "INVALID_OUTPUT_SHA256")
     require(spec.get("source_pilot") == "pilot-006" and exact(spec.get("edit_plan"), plan), "PLAN_BINDING_MISMATCH")
-    require(record.get("sha256") == output_hash and output_hash != REJECTED_SHA256, "OUTPUT_SHA256_MISMATCH")
-    for key, expected in (("source_start", 1311.607), ("source_end", 1346.297), ("seconds", 36.0)):
+    require(record.get("sha256") == output_hash and output_hash not in (REJECTED_SHA256, UNPRESERVED_FAIL_SHA256), "OUTPUT_SHA256_MISMATCH")
+    for key, expected in (("source_start", 813.728), ("source_end", 854.417), ("seconds", 42.0)):
         require(number(record.get(key)) and abs(record[key] - expected) <= (0.011 if key == "seconds" else 0), "RECORD_INTERVAL_MISMATCH")
     require(record.get("hook_mode") == "caption_only" and record.get("hook_shown") is True, "HOOK_MODE_MISMATCH")
     for key in ("hook", "title", "reference"):
@@ -302,7 +306,7 @@ def source_durations(voice_flac, music, plan):
     require(int(stream["sample_rate"]) == 24000 and stream["channels"] == 1, "VOICE_FORMAT_MISMATCH")
     vs, ms = float(voice["format"]["duration"]), float(bed["format"]["duration"])
     require(number(vs) and vs >= plan["audio"]["source_end"], "VOICE_SOURCE_TRUNCATED")
-    require(number(ms) and ms >= plan["music"]["source_start"] + 36, "MUSIC_SOURCE_TRUNCATED")
+    require(number(ms) and ms >= plan["music"]["source_start"] + plan["output_seconds"], "MUSIC_SOURCE_TRUNCATED")
     return {"voice_seconds": vs, "music_seconds": ms, "voice_sample_rate": 24000, "voice_channels": 1}
 
 
@@ -343,11 +347,11 @@ def _audio_packets(path, audio_stream):
                    "-show_entries", "packet=pts,duration,side_data_list", "-of", "json", str(path)])
     require(not probed.stderr.strip(), "AUDIO_PACKET_PROBE_FAILED")
     packets = json.loads(probed.stdout)["packets"]
-    require(len(packets) == 1689, "AUDIO_PACKET_COUNT_FAIL")
+    require(len(packets) == 1970, "AUDIO_PACKET_COUNT_FAIL")
     for index, packet in enumerate(packets):
         require(type(packet.get("pts")) is int and packet["pts"] == (index - 1) * 1024
                 and type(packet.get("duration")) is int
-                and packet["duration"] == (512 if index == len(packets) - 1 else 1024), "AUDIO_PACKET_CLOCK_FAIL")
+                and packet["duration"] == (768 if index == len(packets) - 1 else 1024), "AUDIO_PACKET_CLOCK_FAIL")
     side = packets[0].get("side_data_list", [])
     skip = [s for s in side if s.get("side_data_type") == "Skip Samples"]
     require(len(skip) == 1 and type(skip[0].get("skip_samples")) is int and skip[0]["skip_samples"] == 1024
@@ -369,7 +373,7 @@ def measure_video(path, plan, renderer_plan):
                     "frame=best_effort_timestamp_time", "-of", "json", str(path)])
     require(not decoded.stderr.strip(), "FRAME_PROBE_FAILED")
     pts = [float(f["best_effort_timestamp_time"]) for f in json.loads(decoded.stdout)["frames"]]
-    require(len(pts) == 1080 and all(number(p) and abs(p - i / 30) <= 1e-6 for i, p in enumerate(pts)), "VIDEO_PTS_FAIL")
+    require(len(pts) == 1260 and all(number(p) and abs(p - i / 30) <= 1e-6 for i, p in enumerate(pts)), "VIDEO_PTS_FAIL")
     pcm = _run(["ffmpeg", "-v", "error", "-nostdin", "-xerror", "-i", str(path), "-map", "0:a:0",
                 "-vn", "-f", "s16le", "-acodec", "pcm_s16le", "pipe:1"])
     require(not pcm.stderr.strip(), "OUTPUT_AUDIO_DECODE_FAILED")
@@ -392,22 +396,22 @@ def _validate_video(video, plan):
             "audio_sample_rate", "audio_channels", "decoded_audio_samples", "presentation_audio_samples",
             "first_pts", "last_pts", "pts_uniform", "audio_packets", "black_intervals", "render_plan", "status"}
     require(type(video) is dict and video.keys() == keys, "VIDEO_SCHEMA")
-    for key, expected in (("decoded_frame_count", 1080), ("width", 1080), ("height", 1920),
-                          ("audio_sample_rate", 48000), ("audio_channels", 2), ("presentation_audio_samples", 1728000)):
+    for key, expected in (("decoded_frame_count", 1260), ("width", 1080), ("height", 1920),
+                          ("audio_sample_rate", 48000), ("audio_channels", 2), ("presentation_audio_samples", 2016000)):
         require(type(video[key]) is int and video[key] == expected, "VIDEO_FORMAT_FAIL")
     require(video["video_codec"] == "h264" and video["audio_codec"] == "aac", "VIDEO_CODEC_FAIL")
     require(number(video["fps"]) and video["fps"] == 30 and number(video["seconds"])
-            and abs(video["seconds"] - 36) <= .011, "VIDEO_DURATION_FAIL")
+            and abs(video["seconds"] - 42) <= .011, "VIDEO_DURATION_FAIL")
     require(number(video["first_pts"]) and video["first_pts"] == 0
-            and number(video["last_pts"]) and abs(video["last_pts"] - 1079 / 30) <= 1e-6
+            and number(video["last_pts"]) and abs(video["last_pts"] - 1259 / 30) <= 1e-6
             and video["pts_uniform"] is True, "VIDEO_PTS_FAIL")
-    require(exact(video["audio_packets"], {"packet_count": 1689, "first_pts_samples": -1024,
-            "skip_samples": 1024, "last_pts_samples": 1727488, "last_duration_samples": 512,
+    require(exact(video["audio_packets"], {"packet_count": 1970, "first_pts_samples": -1024,
+            "skip_samples": 1024, "last_pts_samples": 2015232, "last_duration_samples": 768,
             "packet_clock_continuous": True, "codec_frame_samples": 1024}), "AUDIO_PACKET_CLOCK_FAIL")
-    # AAC has a 1024-sample coded frame but the final packet presents only512.
-    # Depending on decoder, raw PCM retains or discards that proven final512;
+    # AAC has a 1024-sample coded frame but the final packet presents only 768.
+    # Depending on decoder, raw PCM retains or discards the proven final 256 padding samples;
     # never admit arbitrary extra content or silently trim to manufacture PASS.
-    require(type(video["decoded_audio_samples"]) is int and video["decoded_audio_samples"] in (1728000, 1728512), "OUTPUT_PCM_COUNT_FAIL")
+    require(type(video["decoded_audio_samples"]) is int and video["decoded_audio_samples"] in (2016000, 2016256), "OUTPUT_PCM_COUNT_FAIL")
     require(type(video["black_intervals"]) is list and not video["black_intervals"], "BLACK_FRAME_DETECTED")
     require(exact(video["render_plan"], frame_plan(plan)) and video["status"] == "PASS", "VIDEO_RENDER_PLAN_FAIL")
 
@@ -431,9 +435,9 @@ def _validate_acoustic(acoustic, plan):
 
 def _editorial_metadata(plan, docs):
     # This is source/renderer metadata, not an OCR or motion-quality claim.
-    sentences = docs["timeline"]["sentences"][314:321]
-    return {"caption_source_intervals": [{"text": s["text"], "start": round(s["start"] - 1311.607, 3),
-                                           "end": round(s["end"] - 1311.607, 3)} for s in sentences],
+    sentences = docs["timeline"]["sentences"][191:203]
+    return {"caption_source_intervals": [{"text": s["text"], "start": round(s["start"] - 813.728, 3),
+                                           "end": round(s["end"] - 813.728, 3)} for s in sentences],
             "caption_mode": "caption_only", "reference": plan["candidate"]["reference"],
             "motion_profiles": [s["motion_profile"] for s in plan["scenes"]],
             "atmosphere_profiles": [deepcopy(s["atmosphere"]) for s in plan["scenes"]]}
@@ -451,8 +455,8 @@ def validate_media_checks(checks, plan, output_hash, *, docs, now_utc=None):
             and exact(checks["source_image_sha256"], {s["image_id"]: s["sha256"] for s in plan["scenes"]}), "MEDIA_SOURCE_HASH_MISMATCH")
     durations = checks["source_durations"]
     require(type(durations) is dict and durations.keys() == {"voice_seconds", "music_seconds", "voice_sample_rate", "voice_channels"}, "SOURCE_DURATION_SCHEMA")
-    require(number(durations["voice_seconds"]) and durations["voice_seconds"] >= 1346.477
-            and number(durations["music_seconds"]) and durations["music_seconds"] >= 2547.607
+    require(number(durations["voice_seconds"]) and durations["voice_seconds"] >= 854.418
+            and number(durations["music_seconds"]) and durations["music_seconds"] >= 2055.728
             and type(durations["voice_sample_rate"]) is int and durations["voice_sample_rate"] == 24000
             and type(durations["voice_channels"]) is int and durations["voice_channels"] == 1, "SOURCE_DURATION_FAIL")
     measured = utc_date(checks["measured_at"])
@@ -497,8 +501,8 @@ def check_media(work, plan, manifest, voice_flac, music, images_dir, history_pat
             images[ident] = hash_file(safe_path(Path(images_dir) / (ident + ".png")))
             require(images[ident] == scene["sha256"], "IMAGE_HASH_MISMATCH")
         durations = source_durations(voice_flac, music, contract)
-        pcm = _run(["ffmpeg", "-v", "error", "-nostdin", "-xerror", "-ss", "1311.607", "-i", str(voice_flac),
-                    "-t", "34.870", "-map", "0:a:0", "-vn", "-ac", "1", "-ar", "48000",
+        pcm = _run(["ffmpeg", "-v", "error", "-nostdin", "-xerror", "-ss", "813.728", "-i", str(voice_flac),
+                    "-t", "40.690", "-map", "0:a:0", "-vn", "-ac", "1", "-ar", "48000",
                     "-f", "s16le", "-acodec", "pcm_s16le", "pipe:1"])
         require(not pcm.stderr.strip(), "AUDIO_DECODE_FAILED")
         checks = {"version": "shorts-006-media-checks-v1", "plan_sha256": PLAN_SHA256, "history_sha256": HISTORY_SHA256,
@@ -580,7 +584,7 @@ def _evaluate(spec, actual_output_sha256, now, media, media_hash, contract):
             and record.get("media_checks_sha256") == media_hash and exact(record.get("media_checks"), media), "MEDIA_FILE_BINDING_MISMATCH")
     validate_media_checks(media, plan, actual_output_sha256, docs=docs, now_utc=now)
     require(record.get("qa_output_sha256") == actual_output_sha256, "QA_OUTPUT_HASH_MISMATCH")
-    qa = _qa_verdict(record.get("qa"), 36.0)
+    qa = _qa_verdict(record.get("qa"), 42.0)
     review = _review_verdict(record.get("review"), actual_output_sha256)
     require(exact(spec.get("review_rubric"), {"items": list(RUBRIC), "pass_item": 7, "pass_overall": 8}), "REVIEW_RUBRIC_MISMATCH")
     previous = record.get("previous_editorial_review")

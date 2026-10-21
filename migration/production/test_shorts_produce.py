@@ -2248,7 +2248,7 @@ class CorrectionRenderer(unittest.TestCase):
         calls = [lambda p: sp.scene_frame_plan(p),
                  lambda p: sp.editorial_picture(['a', 'b'], moment, p, hook_video=['c', 'd']),
                  lambda p: sp.scene_clip_args(['a', 'b'], moment, p, 0, 'x', hook_video=['c', 'd']),
-                 lambda p: sp.render_args(['a', 'b'], 'v', 'm', 'a', moment, 36, 'null', 'x', edit_plan=p,
+                 lambda p: sp.render_args(['a', 'b'], 'v', 'm', 'a', moment, 42, 'null', 'x', edit_plan=p,
                                           picture_video='p', picture_range='tv'),
                  lambda p: sp.produce(Path('/unused'), moment, 0, script, Path('/unused'), 'f', 'm', Path('/unused'),
                                      timeline_sentences=timeline['sentences'], script_refs=refs, edit_plan=p)]
@@ -2265,26 +2265,26 @@ class CorrectionRenderer(unittest.TestCase):
     def test_exact_allocation_full_inputs_and_separate_audio_clock(self):
         plan, timeline, script, refs, moment = correction_source()
         frames = sp.scene_frame_plan(plan)
-        self.assertEqual(frames['scene_spans'], [[0,548],[533,1080]])
-        self.assertEqual(frames['scene_frames'], [548,547])
+        self.assertEqual(frames['scene_spans'], [[0,637],[622,1260]])
+        self.assertEqual(frames['scene_frames'], [637,638])
         self.assertEqual(frames['fade_frames'],15)
-        args=sp.render_args(['a','b'],'voice.flac','music.flac','caption.ass',moment,36,'null','out.mp4',
+        args=sp.render_args(['a','b'],'voice.flac','music.flac','caption.ass',moment,42,'null','out.mp4',
                             edit_plan=plan,hook_video=['full-a.mkv','full-b.mkv'])
         graph=args[args.index('-filter_complex')+1]
         self.assertNotIn('tpad', graph); self.assertNotIn('-loop', args)
         self.assertEqual([args[i+1] for i,x in enumerate(args) if x=='-i'],
                          ['full-a.mkv','full-b.mkv','voice.flac','music.flac'])
-        self.assertIn('34.870',args);self.assertIn('2511.607',args)
-        self.assertIn('apad=whole_len=1728000',graph)
-        self.assertIn('atrim=end_sample=1728000',graph)
-        self.assertIn('afade=t=out:st=34.870:d=1.13:curve=hsin',graph)
+        self.assertIn('40.690',args);self.assertIn('2013.728',args)
+        self.assertIn('apad=whole_len=2016000',graph)
+        self.assertIn('atrim=end_sample=2016000',graph)
+        self.assertIn('afade=t=out:st=40.690:d=1.31:curve=hsin',graph)
         self.assertNotIn('d=0.04',graph)
         self.assertEqual(args[args.index('-preset')+1],'medium')
         self.assertEqual(args[args.index('-crf')+1],'19')
         self.assertEqual(args[args.index('-b:a')+1],'160k')
         captions=sp.caption_events(moment)
-        self.assertAlmostEqual(captions[0][1],1.621)
-        self.assertAlmostEqual(max(x[1] for x in captions),34.690)
+        self.assertAlmostEqual(captions[0][1],1.941)
+        self.assertAlmostEqual(max(x[1] for x in captions),40.689)
         for bad in (None,'hook.mkv',['one'],['one','two','three']):
             with self.assertRaises(ValueError):
                 sp.editorial_picture(['a','b'],moment,plan,hook_video=bad)
@@ -2303,8 +2303,8 @@ class CorrectionRenderer(unittest.TestCase):
                 (images/(scene['image_id']+'.json')).write_text(json.dumps({
                     'id':scene['image_id'],'release_asset':scene['asset'],'sha256':scene['sha256'],
                     'models':{'test':{'license':'synthetic'}}}))
-            for durations, expected in [([1346.296,10800],'VOICE_SOURCE_TRUNCATED'),
-                                        ([1529.993333,2547.606],'MUSIC_SOURCE_TRUNCATED'),
+            for durations, expected in [([854.417,10800],'VOICE_SOURCE_TRUNCATED'),
+                                        ([1529.993333,2055.727],'MUSIC_SOURCE_TRUNCATED'),
                                         ([float('nan'),10800],'VOICE_SOURCE_TRUNCATED')]:
                 with mock.patch.object(sp,'sha256',side_effect=lambda p:hashes[Path(p)]), \
                      mock.patch.object(adapter,'_probe',side_effect=[
@@ -2336,19 +2336,21 @@ class CorrectionRenderer(unittest.TestCase):
                  mock.patch.object(sp,'vertical_still'), mock.patch.object(cinematic,'grade'), \
                  mock.patch.object(cinematic,'look',return_value='null'), \
                  mock.patch.object(sp,'write_opening_video') as old, \
-                 mock.patch.object(sp,'write_continuous_video',side_effect=lambda p,out,n,seed:out) as animated, \
+                 mock.patch.object(sp,'write_continuous_video',side_effect=lambda p,out,n,seed,**kw:out) as animated, \
                  mock.patch.object(sp,'reference_picture_range',return_value='tv'), \
                  mock.patch.object(sp,'write_editorial_picture',return_value=root/'picture.mkv') as staging, \
-                 mock.patch.object(sp,'probe_duration',return_value=36), mock.patch.object(sp,'run') as encode:
+                 mock.patch.object(sp,'probe_duration',return_value=42), mock.patch.object(sp,'run') as encode:
                 record=sp.produce(work,moment,0,script,images,'unused',music,out,
                                   timeline_sentences=timeline['sentences'],script_refs=refs,edit_plan=plan)
                 durations.assert_called_once_with(voice,music,plan)
                 old.assert_not_called();self.assertEqual(animated.call_count,2)
-                self.assertEqual([(c.args[2],c.args[3]) for c in animated.call_args_list],[(548,259006),(547,259007)])
+                self.assertEqual([(c.args[2],c.args[3]) for c in animated.call_args_list],[(637,259006),(638,259007)])
+                self.assertEqual([c.kwargs for c in animated.call_args_list],
+                                 [{'opening_profile':'source_atmosphere_hook_v1'}, {'opening_profile':None}])
                 self.assertEqual(len(staging.call_args.kwargs['hook_video']),2)
                 encode.assert_called_once();self.assertIn(str(voice),encode.call_args.args[0])
-                self.assertEqual(record['reference'],'Philippians 4:6-7 (KJV)')
-                self.assertEqual(record['source_end'],1346.297);self.assertEqual(record['seconds'],36)
+                self.assertIsNone(record['reference'])
+                self.assertEqual(record['source_end'],854.417);self.assertEqual(record['seconds'],42)
                 self.assertFalse(record['publish']);self.assertEqual(record['render_plan'],adapter.frame_plan(plan))
             image=images/(plan['scenes'][0]['image_id']+'.png');image.unlink();image.symlink_to(voice)
             with mock.patch.object(sp,'run') as encode:
@@ -2392,7 +2394,7 @@ class CorrectionRenderer(unittest.TestCase):
                                       raw_sha256={k:plan['source_sha256'][k] for k in ('timeline','script','inputs')})
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);selection=root/'selection.json';selection.write_text(json.dumps(prepared))
-            with mock.patch.object(sp,'produce',return_value={'file':'short-00.mp4','seconds':36,'hook':moment['hook']}) as make:
+            with mock.patch.object(sp,'produce',return_value={'file':'short-00.mp4','seconds':42,'hook':moment['hook']}) as make:
                 sp.main(pilot/'out',selection,pilot/'script.json',root,'unused','music',root/'output')
                 make.assert_called_once();self.assertEqual(make.call_args.kwargs['edit_plan'],plan)
                 self.assertEqual(make.call_args.args[1]['sentences'],moment['sentences'])
@@ -2525,6 +2527,85 @@ class CorrectionAtmosphere(unittest.TestCase):
             with self.assertRaises(ValueError):sp.continuous_atmosphere(base,frame,count,seed)
 
 
+    def test_none_profile_matches_frozen_continuous_oracle(self):
+        import numpy as np
+        base=np.arange(54*96*3,dtype=np.uint8).reshape(96,54,3)
+        # Only the independent frozen envelope is replaced with the already
+        # approved continuous envelope; all original pixel arithmetic stays frozen.
+        with mock.patch(__name__+'.frozen_005_opening_envelope',return_value=1.0):
+            for seed in (259006,259007):
+                for frame in (0,10,45,89,90,91,300,636):
+                    expected,expected_alpha=frozen_005_opening_atmosphere(base,frame,seed)
+                    for kwargs in ({},{'opening_profile':None}):
+                        image,alpha=sp.continuous_atmosphere(base,frame,638,seed,**kwargs)
+                        np.testing.assert_array_equal(image,expected)
+                        np.testing.assert_array_equal(alpha,expected_alpha)
+
+    def test_closed_hook_fields_and_continuity(self):
+        import numpy as np
+        y,x=np.mgrid[:192,:108].astype(np.float32);x/=108;y/=192
+        def smooth(u):
+            u=np.clip(u,0,1)
+            return u*u*(3-2*u)
+        for t in (-1,0,.35,1,1.941,2.25,89/30,3,91/30,4,20):
+            phase,light=sp._opening_atmosphere_fields(t,x,y)
+            p=smooth(t/3)
+            self.assertEqual(phase,t+4*p)
+            h=smooth(t/.35)*smooth((3-t)/.75) if 0<=t<3 else 0
+            expected=.85*h*np.exp(-((x-(.32+.36*p))/.22)**2-((y-.30)/.20)**2)*(1-smooth((y-.48)/.06))
+            np.testing.assert_array_equal(light,expected.astype(np.float32))
+            self.assertTrue(np.all(light[y>=.54]==0))
+            if t<=0 or t>=3:self.assertTrue(np.all(light==0))
+        eps=1e-5
+        for t in (0,3):
+            left=sp._opening_atmosphere_fields(t-eps,x,y)[0]
+            middle=sp._opening_atmosphere_fields(t,x,y)[0]
+            right=sp._opening_atmosphere_fields(t+eps,x,y)[0]
+            self.assertAlmostEqual((middle-left)/eps,1,places=4)
+            self.assertAlmostEqual((right-middle)/eps,1,places=4)
+
+    def test_hook_pixels_bounds_endpoint_and_source_immutability(self):
+        import numpy as np
+        base=np.full((192,108,3),.2,np.float32);original=base.copy()
+        profile='source_atmosphere_hook_v1'
+        outputs={}
+        for frame in (0,10,30,58,68,89,90,91,120,636):
+            a,alpha=sp.continuous_atmosphere(base,frame,637,259006,opening_profile=profile)
+            b,beta=sp.continuous_atmosphere(base,frame,637,259006,opening_profile=profile)
+            np.testing.assert_array_equal(a,b);np.testing.assert_array_equal(alpha,beta)
+            self.assertTrue(np.isfinite(a).all());self.assertGreaterEqual(float(a.min()),0)
+            self.assertLessEqual(float(a.max()),1);self.assertLessEqual(float(alpha.max()),.18+1e-7)
+            outputs[frame]=a
+        np.testing.assert_array_equal(outputs[0],sp.continuous_atmosphere(base,0,637,259006)[0])
+        self.assertFalse(np.array_equal(outputs[30],sp.continuous_atmosphere(base,30,637,259006)[0]))
+        # At the endpoint only the original fog with its continuous +4s phase
+        # remains. Dust is suppressed on BOTH sides solely to isolate that clock.
+        with mock.patch.object(sp,'_atmosphere_particles',return_value=[]):
+            for frame in (90,91,120):
+                actual=sp.continuous_atmosphere(base,frame,637,259006,opening_profile=profile)
+                expected=sp.continuous_atmosphere(base,frame+120,637,259006)
+                for a,b in zip(actual,expected):np.testing.assert_array_equal(a,b)
+        # Adjacent-frame transition is bounded analytically by the smooth fields,
+        # not a visual-quality percentage or a substitute for watched review.
+        for a,b in ((89,90),(90,91)):
+            self.assertLess(float(np.max(np.abs(outputs[a]-outputs[b]))),.002)
+        for frame in (-1,637,638):
+            a,alpha=sp.continuous_atmosphere(base,frame,637,259006,opening_profile=profile)
+            np.testing.assert_array_equal(a,base);self.assertEqual(float(alpha.sum()),0)
+        np.testing.assert_array_equal(base,original)
+
+    def test_invalid_profile_fails_before_video_writer(self):
+        import numpy as np
+        base=np.zeros((2,2,3),np.float32)
+        for profile in ('', 'unknown', True, 1, {}, []):
+            with self.subTest(profile=profile),mock.patch.object(sp,'_write_atmosphere_video') as writer:
+                for call in (lambda:sp.continuous_atmosphere(base,0,637,259006,opening_profile=profile),
+                             lambda:sp._atmosphere_composite(base,0,259006,0,opening_profile=profile),
+                             lambda:sp.write_continuous_video('missing','output',637,259006,opening_profile=profile)):
+                    with self.assertRaisesRegex(ValueError,'INVALID_OPENING_ATMOSPHERE_PROFILE'):call()
+                writer.assert_not_called()
+
+
 class CorrectionSyntheticFFmpeg(unittest.TestCase):
     """Offline valid-duration two-source reference, not production qualification."""
     @classmethod
@@ -2533,9 +2614,10 @@ class CorrectionSyntheticFFmpeg(unittest.TestCase):
         cls.root=Path(cls.temp.name);cls.plan,_,_,_,cls.moment=correction_source()
         cls.stills=[cls.root/f'scene{i}.ppm' for i in range(2)]
         cls.clips=[cls.root/f'animated{i}.mkv' for i in range(2)]
-        for i,(still,clip,count) in enumerate(zip(cls.stills,cls.clips,[548,547])):
+        for i,(still,clip,count) in enumerate(zip(cls.stills,cls.clips,[637,638])):
             synthetic_ppm(still,108,192,i)
-            sp.write_continuous_video(still,clip,count,259006+i)
+            sp.write_continuous_video(still,clip,count,259006+i,
+                                      opening_profile=cls.plan["scenes"][i]["atmosphere"].get("opening_profile"))
         cls.ass=cls.root/'empty.ass';cls.ass.write_text(sp.HEAD)
         cls.voice=cls.root/'voice.wav';cls.music=cls.root/'music.wav'
         rate=8000;seconds=2549
@@ -2543,7 +2625,7 @@ class CorrectionSyntheticFFmpeg(unittest.TestCase):
         pcm=bytearray(tone*seconds)
         # Sound after the narrative boundary but before extraction end proves the
         # source clock, while a later marker must never enter the cut.
-        for lo,hi,freq in [(1346.297,1346.477,1100),(1347.677,1348,1900)]:
+        for lo,hi,freq in [(854.417,854.418,1100),(855.728,856,1900)]:
             a,b=round(lo*rate),round(hi*rate)
             pcm[2*a:2*b]=b''.join(int(900*math.sin(2*math.pi*freq*i/rate)).to_bytes(2,'little',signed=True) for i in range(b-a))
         for path,data in [(cls.voice,pcm),(cls.music,bytes(len(pcm)))]:
@@ -2552,14 +2634,14 @@ class CorrectionSyntheticFFmpeg(unittest.TestCase):
         with mock.patch.multiple(sp,VW=108,VH=192):
             cls.range=sp.reference_picture_range(cls.stills,cls.moment,cls.plan,hook_video=cls.clips)
             cls.picture=sp.write_editorial_picture(cls.stills,cls.moment,cls.plan,cls.root,hook_video=cls.clips)
-            cls.reference=sp.render_args(cls.stills,cls.voice,cls.music,cls.ass,cls.moment,36,'null',cls.root/'ref.mp4',edit_plan=cls.plan,hook_video=cls.clips)
-            cls.serial=sp.render_args(cls.stills,cls.voice,cls.music,cls.ass,cls.moment,36,'null',cls.root/'serial.mp4',edit_plan=cls.plan,hook_video=cls.clips,picture_video=cls.picture,picture_range=cls.range)
+            cls.reference=sp.render_args(cls.stills,cls.voice,cls.music,cls.ass,cls.moment,42,'null',cls.root/'ref.mp4',edit_plan=cls.plan,hook_video=cls.clips)
+            cls.serial=sp.render_args(cls.stills,cls.voice,cls.music,cls.ass,cls.moment,42,'null',cls.root/'serial.mp4',edit_plan=cls.plan,hook_video=cls.clips,picture_video=cls.picture,picture_range=cls.range)
 
     def run_part(self,args,label,fmt):
         end=args.index('-map');cmd=args[:end]+['-map',label]
         gi=cmd.index('-filter_complex')+1
         cmd[gi]+=(';[aout]anullsink' if label=='[vout]' else ';[vout]nullsink')
-        if label=='[vout]':cmd+=['-an','-threads:v','1','-pix_fmt','yuv420p','-frames:v','1080','-fps_mode','passthrough']
+        if label=='[vout]':cmd+=['-an','-threads:v','1','-pix_fmt','yuv420p','-frames:v','1260','-fps_mode','passthrough']
         else:cmd+=['-vn','-c:a','pcm_s16le','-ar','48000']
         cmd+=['-f',fmt,'-']
         result=subprocess.run(cmd,capture_output=True,timeout=180)
@@ -2570,17 +2652,17 @@ class CorrectionSyntheticFFmpeg(unittest.TestCase):
         ref=self.run_part(self.reference,'[vout]','framemd5')
         serial=self.run_part(self.serial,'[vout]','framemd5')
         clean=lambda b:[x for x in b.splitlines() if not x.startswith(b'#')]
-        self.assertEqual(len(clean(ref)),1080);self.assertEqual(clean(ref),clean(serial))
+        self.assertEqual(len(clean(ref)),1260);self.assertEqual(clean(ref),clean(serial))
         for i,line in enumerate(clean(serial)):
             self.assertEqual(int(line.split(b',')[2]),i)
 
     def test_every_pcm_sample_matches_reference_and_exact_output_length(self):
         ref=self.run_part(self.reference,'[aout]','s16le')
         serial=self.run_part(self.serial,'[aout]','s16le')
-        self.assertEqual(len(ref),1728000*2*2);self.assertEqual(ref,serial)
+        self.assertEqual(len(ref),2016000*2*2);self.assertEqual(ref,serial)
 
     def test_all_source_frames_are_real_animated_and_exact_length(self):
-        for path,count in zip(self.clips,[548,547]):
+        for path,count in zip(self.clips,[637,638]):
             result=subprocess.run(['ffmpeg','-v','error','-i',str(path),'-map','0:v','-f','framemd5','-'],check=True,capture_output=True)
             lines=[x for x in result.stdout.splitlines() if not x.startswith(b'#')]
             self.assertEqual(len(lines),count)
