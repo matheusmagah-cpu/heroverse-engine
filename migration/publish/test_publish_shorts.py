@@ -40,7 +40,7 @@ def setup(t, done):
         (d / f"short-0{i}.mp4").write_bytes(data)
         files[i] = hashlib.sha256(data).hexdigest()
     shorts = [{"file": f"short-0{i}.mp4", "sha256": files[i], "hook": "Hook.", "title": f"T{i}", "publish": True,
-               "review": {"status": "PASS", "model": "gemini-3.8-flash"}} for i in range(3)]
+               "review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.0, "output_sha256": files[i]}, "qa": {"status": "PASS"}} for i in range(3)]
     (d / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-009", "shorts": shorts}))
     entries = {"pilot-009:L": {"video_id": "LONG"}}
     entries.update({f"short:pilot-009:{files[i]}": {"video_id": f"OLD{i}", "slot": "2026-10-18T14:00:00Z"} for i in done})
@@ -64,6 +64,32 @@ class PublishShorts(unittest.TestCase):
     def run_pub(self, d, slots):
         pub.main(str(d / "shorts.json"), str(d), "pilot-009:L", str(d / "ledger.json"), str(d / "receipt.json"), slots)
         return json.loads((d / "receipt.json").read_text())
+
+    def test_owner_floor_blocks_stale_flags_and_low_score_before_session(self):
+        for score in (8.5, 8.99, True, float("nan"), float("inf"), 11, None):
+            with self.subTest(score=score), tempfile.TemporaryDirectory() as t:
+                d, _ = setup(t, done=())
+                spec = json.loads((d / "shorts.json").read_text())
+                spec["shorts"][0]["review"]["overall"] = score
+                spec["shorts"][0]["owner_quality_policy"] = {"status": "PASS"}
+                (d / "shorts.json").write_text(json.dumps(spec))
+                with patch.object(pub.pv, "session") as session, self.assertRaises(SystemExit):
+                    self.run_pub(d, "2026-10-21T14:00:00Z,2026-10-21T20:00:00Z,2026-10-21T23:00:00Z")
+                session.assert_not_called()
+                self.assertFalse(self.yt.uploads)
+
+    def test_existing_low_score_false_flag_missing_file_still_readback(self):
+        with tempfile.TemporaryDirectory() as t:
+            d, _ = setup(t, done=(0, 1, 2))
+            spec = json.loads((d / "shorts.json").read_text())
+            for rec in spec["shorts"]:
+                rec["publish"] = False
+                rec["review"]["overall"] = 8.5
+                (d / rec["file"]).unlink()
+            (d / "shorts.json").write_text(json.dumps(spec))
+            result = self.run_pub(d, "")
+            self.assertEqual(len(result["shorts"]), 3)
+            self.assertFalse(self.yt.uploads)
 
     def test_partial_earlier_run_needs_slots_only_for_the_rest(self):
         with tempfile.TemporaryDirectory() as t:
@@ -342,7 +368,7 @@ class OwnerException(PublishShorts):
         r["media_checks"] = {"status": "PASS", "output_sha256": pe.OUTPUT_SHA256}
         r["qa"] = {"status": "PASS", "checks": {k: True for k in (
             "decode_clean", "one_h264_1080x1920", "fps_30", "one_aac_stereo_48k", "duration", "loudness", "true_peak")}}
-        r["review"].update(output_sha256=pe.OUTPUT_SHA256, overall=8.5)
+        r["review"].update(output_sha256=pe.OUTPUT_SHA256, overall=9.0)
         r["review"].update({k: 8 for k in ("hook_in_first_2s", "captions_readable_and_synced", "text_clear_of_shorts_ui",
             "picture_quality", "edit_rhythm", "audio_clarity", "stands_alone", "ending_and_loop", "policy_safe")})
         ledger = json.loads((d / "ledger.json").read_text())
@@ -352,6 +378,17 @@ class OwnerException(PublishShorts):
         (d / "shorts.json").write_text(json.dumps(spec))
         pub.utc_now = lambda: datetime(2026, 10, 20, 21, 20, tzinfo=timezone.utc)
         return pe, spec
+
+    def test_new_85_exception_is_not_a_future_score_override(self):
+        with tempfile.TemporaryDirectory() as t:
+            d, _ = setup(t, done=())
+            pe, spec = self.prepare(d)
+            spec["shorts"][0]["review"]["overall"] = 8.5
+            (d / "shorts.json").write_text(json.dumps(spec))
+            with patch.dict(pub.os.environ, GITHUB_RUN_ID="123", GITHUB_RUN_ATTEMPT="1"), patch.object(pub.pv, "session") as session:
+                with self.assertRaises(SystemExit):
+                    self.run_pub(d, pe.BINDING["target_slot"])
+                session.assert_not_called()
 
     def test_exception_public_pending_then_verified_same_id(self):
         with tempfile.TemporaryDirectory() as t:
@@ -376,6 +413,10 @@ class OwnerException(PublishShorts):
                 first = self.run_pub(d, pe.BINDING["target_slot"])
                 self.assertEqual(first["shorts"][0]["verification_status"], "PENDING_PROCESSING")
                 stage[0] = "succeeded"
+                spec["shorts"][0]["review"]["overall"] = 8.5
+                spec["shorts"][0]["publish"] = False
+                (d / "shorts.json").write_text(json.dumps(spec))
+                (d / "short-00.mp4").unlink()
                 with patch.dict(pub.os.environ, GITHUB_RUN_ID="456", GITHUB_RUN_ATTEMPT="2"):
                     second = self.run_pub(d, pe.BINDING["target_slot"])
             self.assertEqual(second["shorts"][0]["verification_status"], "PUBLIC_VERIFIED")
@@ -498,13 +539,16 @@ class States(unittest.TestCase):
                       {"file": "d", "sha256": "d", "publish": True, "review": {"status": "PASS", "model": "gemini-3.8-flash"}},
                       {"file": "e", "sha256": "e", "publish": True, "review": {"status": "PASS", "model": "gemini-3.8-flash"}},
                       {"file": "f", "sha256": "f", "publish": True, "review": {"status": "PASS", "model": "gemini-3.8-flash"}, "qa": {"status": "FAIL"}}]
+            shorts[2]["sha256"] = "c" * 64
+            shorts[2]["qa"] = {"status": "PASS"}
+            shorts[2]["review"].update(overall=9.0, output_sha256="c" * 64)
             (d / "shorts" / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-009", "shorts": shorts}))
             ledger = {"entries": {"short:pilot-009:d": {"video_id": "D", "slot": "2026-10-20T14:00:00Z"},
                                   "short:pilot-009:e": {"video_id": "E", "slot": "2026-10-18T14:00:00Z"}}}
             now = datetime(2026, 10, 19, tzinfo=timezone.utc)
             self.assertEqual([r["state"] for r in ps.states(d, ledger, now)],
                              ["failed", "not_selected", "approved_awaiting_slot", "scheduled", "published", "failed"])
-            self.assertEqual(ps.todo_files(d, ledger), [("c", "c")])
+            self.assertEqual(ps.todo_files(d, ledger), [("c", "c" * 64)])
             shorts[2]["review"]["model"] = "gemini-3.5-flash-lite"  # a fallback model's PASS never publishes
             (d / "shorts" / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-009", "shorts": shorts}))
             self.assertEqual(ps.states(d, ledger, now)[2]["state"], "review_by_undesignated_model")

@@ -184,7 +184,7 @@ def exception_binding(spec):
     checks = ("decode_clean", "one_h264_1080x1920", "fps_30", "one_aac_stereo_48k", "duration", "loudness", "true_peak")
     def score(value, minimum):
         return type(value) in (int, float) and minimum <= value <= 10
-    if not (record.get("publish") is True and final.get("output_sha256") == digest
+    if not (final.get("output_sha256") == digest
             and record.get("qa_output_sha256") == review.get("output_sha256") == media.get("output_sha256") == digest
             and qa.get("status") == media.get("status") == review.get("status") == "PASS"
             and all(qa.get("checks", {}).get(key) is True for key in checks)
@@ -221,7 +221,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
             target_instant = utc_instant(target_slot)
         except (ValueError, TypeError):
             raise SystemExit("INVALID_AUTHORIZED_TARGET_SLOT")
-    spec["shorts"] = [r for r in spec["shorts"] if r.get("publish")]  # only the Shorts the watched review approved
+    spec["shorts"] = [r for r in spec["shorts"] if r.get("publish") or
+                      "video_id" in ledger["entries"].get(f"short:{spec['source_pilot']}:{r['sha256']}", {})]  # only the Shorts the watched review approved
     if not spec["shorts"]:
         raise SystemExit("NO_SHORT_APPROVED_BY_REVIEW")
     # Shorts already in the ledger keep their slot; only the ones still to upload need one (a partial earlier run

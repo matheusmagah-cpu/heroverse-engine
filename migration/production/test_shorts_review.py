@@ -296,12 +296,22 @@ class ReviewIntegration(OfflineTest):
         for record, verdict in zip(records, reviews):
             (self.root / record["file"]).write_bytes(b"abc")
             verdict["output_sha256"] = ABC_SHA256
+            verdict["model"] = "gemini-3.8-flash"
         spec, reviewer, _, _ = self.run_main(records, review_error=reviews, n="2")
         self.assertEqual(reviewer.call_count, 4)
         self.assertEqual([r["file"] for r in spec["shorts"] if r["publish"]], ["a.mp4", "b.mp4"])
 
+    def test_owner_floor_does_not_rewrite_editorial_pass(self):
+        verdict = {"status": "PASS", "overall": 8.5, "model": "gemini-3.8-flash", "output_sha256": ABC_SHA256}
+        spec, _, _, _ = self.run_main([self.record()], review_result=verdict)
+        record = spec["shorts"][0]
+        self.assertEqual(record["review"], verdict)
+        self.assertFalse(record["publish"])
+        self.assertEqual(record["owner_quality_policy"]["status"], "FAIL")
+        self.assertEqual(spec["review_rubric"]["pass_overall"], 8)
+
     def test_qa_digest_is_recomputed_instead_of_trusting_record(self):
-        verdict = {"status": "PASS", "overall": 9, "output_sha256": ABC_SHA256}
+        verdict = {"status": "PASS", "overall": 9, "model": "gemini-3.8-flash", "output_sha256": ABC_SHA256}
         spec, reviewer, _, _ = self.run_main(
             [self.record(qa_output_sha256="e" * 64)], review_result=verdict)
         record = spec["shorts"][0]
