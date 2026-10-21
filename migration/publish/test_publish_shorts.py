@@ -4,6 +4,7 @@ and the state of every Short (failed / not selected / approved awaiting slot / s
 from datetime import datetime, timezone
 import hashlib
 import json
+import copy
 from pathlib import Path
 import sys
 import tempfile
@@ -646,6 +647,66 @@ class RecoveryPublication(unittest.TestCase):
             pub.utc_now = lambda: ps.when("2026-10-22T00:00:00Z")
             self.invoke_recovery(path, media, ledger, "")
             self.assertEqual(self.yt.uploads, [])
+
+
+    def test_correction_markers_with_missing_files_never_start_session(self):
+        with tempfile.TemporaryDirectory() as t:
+            path, media, ledger, spec = self.prepare_recovery(t)
+            spec["finalization"] = {"kind": "pilot-006-correction-v1", "target_slot": "2026-10-21T14:00:00Z"}
+            path.write_text(json.dumps(spec))
+            pub.utc_now = lambda: ps.when("2026-10-21T01:00:00Z")
+            with patch.object(pub.pv, "session") as session:
+                with self.assertRaises(SystemExit): self.invoke_recovery(path, media, ledger)
+                session.assert_not_called()
+            self.assertEqual(self.yt.uploads, [])
+
+
+    def test_real_correction_binding_rejects_tampered_gates_before_session(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+        from test_shorts_006_plan import synthetic_environment, OUTPUT_BYTES
+        variants = ("qa", "score", "media", "plan", "history", "mixed", "extra")
+        for variant in variants:
+            with self.subTest(variant=variant), tempfile.TemporaryDirectory() as t:
+                with synthetic_environment(Path(t) / "migration") as fixture:
+                    d = fixture["pilot"]; spec = copy.deepcopy(fixture["spec"])
+                    media = Path(t) / "media"; media.mkdir(); (media / "short-00.mp4").write_bytes(OUTPUT_BYTES)
+                    ledger = Path(t) / "ledger.json"
+                    ledger.write_text(json.dumps({"entries": {"pilot-006:longsha": {"video_id": "LONG"}}}))
+                    (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-21T00:00:00Z", "shorts_slots": ["2026-10-21T14:00:00Z"]}))
+                    if variant == "qa": spec["shorts"][0]["qa"]["status"] = "FAIL"
+                    if variant == "score": spec["shorts"][0]["review"]["overall"] = 8.99
+                    if variant == "media": spec["shorts"][0]["media_checks"]["output_sha256"] = "f" * 64
+                    if variant == "plan": spec["edit_plan"]["source_pilot"] = "pilot-005"
+                    if variant == "history": (d / "shorts/correction-history.json").write_bytes(b"{}\n")
+                    if variant == "mixed": spec["review_recovery"] = {}
+                    if variant == "extra": spec["shorts"].append(copy.deepcopy(spec["shorts"][0]))
+                    path = d / "shorts/shorts.json"; path.write_text(json.dumps(spec))
+                    pub.utc_now = lambda: ps.when("2026-10-21T01:00:00Z")
+                    with patch.object(pub.pv, "session") as session:
+                        with self.assertRaises(SystemExit) as rejected:
+                            self.invoke_recovery(path, media, ledger)
+                        self.assertEqual(str(rejected.exception), "RECOVERY_BINDING_INVALID")
+                        session.assert_not_called()
+                    self.assertEqual(self.yt.uploads, [])
+
+
+    def test_real_correction_binding_positive_single_upload_then_readback(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+        from test_shorts_006_plan import synthetic_environment, OUTPUT_BYTES
+        with tempfile.TemporaryDirectory() as t, synthetic_environment(Path(t) / "migration") as fixture:
+            d = fixture["pilot"]; spec = copy.deepcopy(fixture["spec"])
+            media = Path(t) / "media"; media.mkdir(); (media / "short-00.mp4").write_bytes(OUTPUT_BYTES)
+            ledger = Path(t) / "ledger.json"
+            ledger.write_text(json.dumps({"entries": {"pilot-006:longsha": {"video_id": "LONG"}}}))
+            (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-21T00:00:00Z", "shorts_slots": ["2026-10-21T14:00:00Z"]}))
+            path = d / "shorts/shorts.json"; path.write_text(json.dumps(spec))
+            pub.utc_now = lambda: ps.when("2026-10-21T12:30:00Z")
+            self.invoke_recovery(path, media, ledger)
+            self.assertEqual(self.yt.uploads, [("short-00.mp4", "2026-10-21T14:00:00Z")])
+            (media / "short-00.mp4").unlink()
+            pub.utc_now = lambda: ps.when("2026-10-21T15:00:00Z")
+            self.invoke_recovery(path, media, ledger, "")
+            self.assertEqual(len(self.yt.uploads), 1)
 
 
 if __name__ == "__main__":

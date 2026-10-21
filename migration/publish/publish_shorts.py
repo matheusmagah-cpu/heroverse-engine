@@ -213,7 +213,7 @@ def recovery_upload_gate(spec, shorts_json, shorts_dir, long_key, slots, now):
         raise SystemExit("RECOVERY_PATH_SYMLINK_OR_INVALID")
     try:
         bound = pending_shorts.recovery_gate(spec, pilot_dir, now)
-    except (ValueError, TypeError, KeyError) as error:
+    except (OSError, ValueError, TypeError, KeyError) as error:
         raise SystemExit("RECOVERY_BINDING_INVALID") from error
     chosen = [r for r in spec["shorts"] if r.get("publish") is True]
     if (len(chosen) != 1 or chosen[0].get("sha256") != bound["output_sha256"]

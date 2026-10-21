@@ -233,9 +233,23 @@ def motion_progress(t, boundaries):
     return 1.0
 
 
+def _editorial_adapter(plan):
+    """Closed routing; neither a pilot nor an edit_plan alone grants an exception."""
+    if not isinstance(plan, dict):
+        raise ValueError("EDITORIAL_PLAN_DISCRIMINATOR")
+    pair = (plan.get("version"), plan.get("source_pilot"))
+    if pair == ("shorts-editorial-plan-v2", "pilot-005"):
+        import shorts_edit_plan as adapter
+    elif pair == ("shorts-006-correction-plan-v1", "pilot-006"):
+        import shorts_006_plan as adapter
+    else:
+        raise ValueError("EDITORIAL_PLAN_DISCRIMINATOR")
+    adapter.validate_plan_schema(plan)
+    return adapter
+
+
 def scene_frame_plan(edit_plan):
-    from shorts_edit_plan import frame_plan
-    canonical = frame_plan(edit_plan)
+    canonical = _editorial_adapter(edit_plan).frame_plan(edit_plan)
     spans = canonical["scene_frame_spans"]
     return {"fps": canonical["fps"], "output_frames": canonical["expected_frame_count"],
             "boundary_frames": [x["nominal_end_frame"] for x in spans[:-1]],
@@ -265,6 +279,10 @@ def opening_particles(frame_index, width, height, seed=231005):
     if any(type(x) is not int for x in (width, height, seed)) or min(width, height) <= 0:
         raise ValueError("INVALID_HOOK_GEOMETRY")
     envelope = opening_envelope(frame_index)
+    return _atmosphere_particles(frame_index, width, height, seed, envelope)
+
+
+def _atmosphere_particles(frame_index, width, height, seed, envelope):
     t, rng = frame_index / FPS, random.Random(seed)
     particles = []
     for _ in range(24):
@@ -282,6 +300,21 @@ def opening_atmosphere(base_rgb, frame_index, seed=231005):
     RGB and diagnostic alpha are floats in [0,1]. Input uint8 is also accepted;
     the caller's source is never mutated. The helper is deterministic and local.
     """
+    envelope = opening_envelope(frame_index)
+    return _atmosphere_composite(base_rgb, frame_index, seed, envelope,
+                                 particle_factory=opening_particles)
+
+
+def continuous_atmosphere(base_rgb, frame_index, frame_count, seed):
+    """006 full source-clip clock. No wrapping, camera movement or source mutation."""
+    if type(frame_index) is not int or type(frame_count) is not int or frame_count <= 0 or type(seed) is not int:
+        raise ValueError("INVALID_ATMOSPHERE_CLOCK")
+    envelope = 1.0 if 0 <= frame_index < frame_count else 0.0
+    return _atmosphere_composite(base_rgb, frame_index, seed, envelope)
+
+
+def _atmosphere_composite(base_rgb, frame_index, seed, envelope, *, particle_factory=None):
+    """Numerical source-bound core shared without changing the 005 envelope."""
     import cv2
     import numpy as np
     base = np.asarray(base_rgb)
@@ -290,9 +323,9 @@ def opening_atmosphere(base_rgb, frame_index, seed=231005):
     base = base.astype(np.float32) / (255 if base.dtype == np.uint8 else 1)
     if not np.isfinite(base).all() or np.any(base < 0) or np.any(base > 1):
         raise ValueError("INVALID_HOOK_IMAGE")
-    envelope = opening_envelope(frame_index)
     h, w = base.shape[:2]
-    particles = opening_particles(frame_index, w, h, seed)
+    particles = (particle_factory(frame_index, w, h, seed) if particle_factory is not None else
+                 _atmosphere_particles(frame_index, w, h, seed, envelope))
     if not envelope:
         return base.copy(), np.zeros((h, w), dtype=np.float32)
     t = frame_index / FPS
@@ -331,20 +364,36 @@ def opening_atmosphere(base_rgb, frame_index, seed=231005):
 
 def write_opening_video(still_path, out_path):
     """Lossless local hook input, including its transparent endpoint frame 90."""
+    return _write_atmosphere_video(still_path, out_path, 91, opening_atmosphere, continuous=False)
+
+
+def write_continuous_video(still_path, out_path, frame_count, seed):
+    """006 lossless animated source for every allocated frame, never a cloned tail."""
+    if type(frame_count) is not int or frame_count <= 0 or type(seed) is not int:
+        raise ValueError("INVALID_ATMOSPHERE_CLOCK")
+    return _write_atmosphere_video(still_path, out_path, frame_count,
+                                  lambda base, frame: continuous_atmosphere(base, frame, frame_count, seed),
+                                  continuous=True)
+
+
+def _write_atmosphere_video(still_path, out_path, frame_count, atmosphere, *, continuous):
+    """Shared raw-frame/FFV1 writer; retain the exact historical 005 command."""
     import cv2
     import numpy as np
     bgr = cv2.imread(str(still_path), cv2.IMREAD_COLOR)
     if bgr is None:
-        raise ValueError("HOOK_SOURCE_UNREADABLE")
+        raise ValueError("ATMOSPHERE_SOURCE_UNREADABLE" if continuous else "HOOK_SOURCE_UNREADABLE")
     base = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
     h, w = base.shape[:2]
-    command = ["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
-               "-s", f"{w}x{h}", "-framerate", str(FPS), "-i", "pipe:0", "-an",
+    input_threads = ["-threads", "1"] if continuous else []
+    output_threads = ["-threads:v", "1"] if continuous else []
+    command = ["ffmpeg", "-v", "error", "-y", *input_threads, "-f", "rawvideo", "-pix_fmt", "rgb24",
+               "-s", f"{w}x{h}", "-framerate", str(FPS), "-i", "pipe:0", "-an", *output_threads,
                "-c:v", "ffv1", "-level", "3", "-pix_fmt", "bgr0", str(out_path)]
     with subprocess.Popen(command, stdin=subprocess.PIPE, stderr=subprocess.PIPE) as process:
         try:
-            for frame in range(91):
-                rgb, _ = opening_atmosphere(base, frame)
+            for frame in range(frame_count):
+                rgb, _ = atmosphere(base, frame)
                 process.stdin.write(np.rint(rgb * 255).astype(np.uint8).tobytes())
             process.stdin.close()
             error = process.stderr.read()
@@ -355,6 +404,19 @@ def write_opening_video(still_path, out_path):
             process.wait()
             raise
     return Path(out_path)
+
+
+def _animated_inputs(edit_plan, hook_video):
+    """Private input convention: 005 hook path; 006 complete source-clip pair."""
+    _editorial_adapter(edit_plan)
+    if edit_plan["source_pilot"] == "pilot-006":
+        if not isinstance(hook_video, (list, tuple)) or len(hook_video) != 2 or any(
+                not isinstance(p, (str, Path)) for p in hook_video):
+            raise ValueError("CORRECTION_ANIMATED_INPUTS_REQUIRED")
+        return list(hook_video)
+    if hook_video is None:
+        raise ValueError("EDITORIAL_HOOK_VIDEO_REQUIRED")
+    return None
 
 
 def motion_boundaries(moment, start, end):
@@ -385,7 +447,7 @@ def portrait_crop(width, height):
             "native_portrait_height": min(height, width * VH / VW)}
 
 
-def editorial_scene_filter(index, frames, span, moment, profile):
+def editorial_scene_filter(index, frames, span, moment, profile, *, full_animation=False):
     """One camera branch, shared by the reference graph and lossless staging."""
     a, b = span[0] / FPS, span[1] / FPS
     boundaries = motion_boundaries(moment, a, b)
@@ -394,7 +456,7 @@ def editorial_scene_filter(index, frames, span, moment, profile):
         zoom, x = f"1+0.08*({progress})", "(iw-iw/zoom)/2"
     else:
         zoom, x = "1.08", f"(iw-iw/zoom)*({progress})"
-    pad = f"tpad=stop_mode=clone:stop={frames - 91}," if span[0] == 0 else ""
+    pad = f"tpad=stop_mode=clone:stop={frames - 91}," if span[0] == 0 and not full_animation else ""
     return (f"[{index}:v]{pad}scale={2 * VW}:{2 * VH},zoompan=z='{zoom}':x='{x}':"
             f"y='(ih-ih/zoom)/2':d=1:s={VW}x{VH}:fps={FPS},trim=end_frame={frames},"
             f"setpts=PTS-STARTPTS,settb=AVTB,fps={FPS},format=yuv420p[scene{index}]")
@@ -402,21 +464,24 @@ def editorial_scene_filter(index, frames, span, moment, profile):
 
 def editorial_picture(stills, moment, edit_plan, *, hook_video=None):
     """Monolithic reference graph; production uses lossless serial staging."""
-    from shorts_edit_plan import validate_plan_schema
-    validate_plan_schema(edit_plan)
+    _editorial_adapter(edit_plan)
     if len(stills) != len(edit_plan["scenes"]):
         raise ValueError("EDITORIAL_PLAN_IMAGE_COUNT")
     if hook_video is None:
         raise ValueError("EDITORIAL_HOOK_VIDEO_REQUIRED")
+    animated = _animated_inputs(edit_plan, hook_video)
     plan = scene_frame_plan(edit_plan)
     inputs, graph = [], []
     for i, (path, frames, span) in enumerate(zip(stills, plan["scene_frames"], plan["scene_spans"])):
-        if i == 0:
+        if animated is not None:
+            inputs += ["-threads", "1", "-i", str(animated[i])]
+        elif i == 0:
             inputs += ["-threads", "1", "-i", str(hook_video)]
         else:
             inputs += ["-threads", "1", "-loop", "1", "-framerate", str(FPS),
                        "-t", f"{frames / FPS:.12f}", "-i", str(path)]
-        graph.append(editorial_scene_filter(i, frames, span, moment, edit_plan["scenes"][i]["motion_profile"]))
+        graph.append(editorial_scene_filter(i, frames, span, moment, edit_plan["scenes"][i]["motion_profile"],
+                                            full_animation=animated is not None))
     last = "scene0"
     for i, offset in enumerate(plan["fade_start_frames"], 1):
         graph.append(f"[{last}][scene{i}]xfade=transition=fade:duration={plan['fade_frames'] / FPS:.12f}:"
@@ -435,18 +500,20 @@ def lossless_args(inputs, graph, label, frames, pixel_format, out):
 
 
 def scene_clip_args(stills, moment, edit_plan, index, out, *, hook_video):
-    from shorts_edit_plan import validate_plan_schema
-    validate_plan_schema(edit_plan)
+    _editorial_adapter(edit_plan)
     if len(stills) != len(edit_plan["scenes"]):
         raise ValueError("EDITORIAL_PLAN_IMAGE_COUNT")
     if hook_video is None:
         raise ValueError("EDITORIAL_HOOK_VIDEO_REQUIRED")
     plan = scene_frame_plan(edit_plan)
     frames, span = plan["scene_frames"][index], plan["scene_spans"][index]
-    inputs = (["-threads", "1", "-i", str(hook_video)] if index == 0 else
+    animated = _animated_inputs(edit_plan, hook_video)
+    inputs = (["-threads", "1", "-i", str(animated[index])] if animated is not None else
+              ["-threads", "1", "-i", str(hook_video)] if index == 0 else
               ["-threads", "1", "-loop", "1", "-framerate", str(FPS),
                "-t", f"{frames / FPS:.12f}", "-i", str(stills[index])])
-    graph = editorial_scene_filter(0, frames, span, moment, edit_plan["scenes"][index]["motion_profile"])
+    graph = editorial_scene_filter(0, frames, span, moment, edit_plan["scenes"][index]["motion_profile"],
+                                   full_animation=animated is not None)
     return lossless_args(inputs, graph, "[scene0]", frames, "yuv420p", out)
 
 
@@ -513,6 +580,11 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_
     voice_s = moment["end"] - moment["start"]
     frames = int(round(dur * FPS))
     if edit_plan is not None:
+        _editorial_adapter(edit_plan)
+        if edit_plan["source_pilot"] == "pilot-006":
+            if dur != edit_plan["output_seconds"] or any(moment[k] != edit_plan["candidate"][k] for k in ("start", "end")):
+                raise ValueError("CORRECTION_RENDER_CLOCK_MISMATCH")
+            voice_s = edit_plan["audio"]["source_end"] - edit_plan["audio"]["source_start"]
         if picture_video is None:
             inputs, graph = editorial_picture(stills, moment, edit_plan, hook_video=hook_video)
         else:
@@ -555,7 +627,7 @@ def render_args(stills, voice, music, ass_path, moment, dur, look, out, *, edit_
         graph.append("[vo][duck]amix=inputs=2:normalize=0:duration=first,loudnorm=I=-14:TP=-2:LRA=9,"
                      "alimiter=limit=0.75:attack=5:release=50:level=false,"
                      f"aresample={RATE_OUT},apad=whole_len={samples},atrim=end_sample={samples},asetpts=N/SR/TB,"
-                     f"afade=t=out:st={voice_s:.3f}:d={TAIL_S}:curve=hsin[aout]")
+                     f"afade=t=out:st={voice_s:.3f}:d={edit_plan.get('tail_seconds', TAIL_S)}:curve=hsin[aout]")
     else:
         graph.append(f"[{a_voice}:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,"
                  f"afade=t=out:st={max(0.0, voice_s - 0.04):.3f}:d=0.04,apad=whole_dur={dur:.3f},asplit=2[vo][key]")
@@ -584,6 +656,8 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     uses one continuous zoom instead of per-scene parallax moves."""
     if timeline_sentences is None or script_refs is None:
         raise ValueError("FULL_SOURCE_REQUIRED")
+    if script.get("pilot_id") == "pilot-006" and edit_plan is None:
+        raise ValueError("CORRECTION_PLAN_MISSING")
     authoritative_refs = {s["id"]: s.get("reference") for s in script["segments"]}
     if script_refs != authoritative_refs:
         raise ValueError("SOURCE_REFS_MISMATCH")
@@ -592,13 +666,20 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
         raise ValueError(reason)
     image_info = None
     if edit_plan is not None:
-        from shorts_edit_plan import validate_plan_schema
-        validate_plan_schema(edit_plan)
+        _editorial_adapter(edit_plan)
         if moment["start"] != edit_plan["candidate"]["start"] or moment["end"] != edit_plan["candidate"]["end"]:
             raise ValueError("EDITORIAL_CUT_MISMATCH")
         if script["pilot_id"] != edit_plan["source_pilot"]:
             raise ValueError("EDITORIAL_PILOT_MISMATCH")
         # All raw-byte and mapping checks precede every rendering/probing subprocess.
+        if edit_plan["source_pilot"] == "pilot-006":
+            adapter = _editorial_adapter(edit_plan)
+            pilot = adapter.CANONICAL_PILOT
+            adapter.preflight(pilot, pilot / "shorts/correction-plan.json", pilot / "shorts/correction-history.json")
+            for source in [work.parent / "voice.flac", Path(music),
+                           *(images / (scene["image_id"] + suffix)
+                             for scene in edit_plan["scenes"] for suffix in (".json", ".png"))]:
+                adapter.safe_path(source)
         if sha256(work.parent / "voice.flac") != edit_plan["voice"]["sha256"]:
             raise ValueError("VOICE_HASH_MISMATCH")
         if sha256(music) != edit_plan["music"]["sha256"]:
@@ -611,6 +692,8 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
                 raise ValueError("IMAGE_LICENSE_MISSING")
             if sha256(images / (scene["image_id"] + ".png")) != scene["sha256"]:
                 raise ValueError("IMAGE_HASH_MISMATCH")
+        if edit_plan["source_pilot"] == "pilot-006":
+            _editorial_adapter(edit_plan).source_durations(work.parent / "voice.flac", music, edit_plan)
         image_info = {}
         for scene in edit_plan["scenes"]:
             data = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
@@ -619,7 +702,8 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
             size = json.loads(data.stdout)["streams"][0]
             image_info[scene["image_id"]] = portrait_crop(size["width"], size["height"])
     import cinematic
-    dur = moment["end"] - moment["start"] + TAIL_S
+    dur = (edit_plan["output_seconds"] if edit_plan is not None and edit_plan["source_pilot"] == "pilot-006"
+           else moment["end"] - moment["start"] + TAIL_S)
     tmp = out / f"tmp-{index:02d}"
     tmp.mkdir(parents=True, exist_ok=True)
     backgrounds = script["backgrounds"]
@@ -645,7 +729,13 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
     picture_range = None
     if edit_plan is not None:
         print("SHORTS_PHASE_HOOK_START", flush=True)
-        hook_video = write_opening_video(stills[0], tmp / "opening.mkv")
+        if edit_plan["source_pilot"] == "pilot-006":
+            counts = scene_frame_plan(edit_plan)["scene_frames"]
+            hook_video = [write_continuous_video(path, tmp / f"atmosphere-{i:02d}.mkv", counts[i],
+                                               edit_plan["scenes"][i]["atmosphere"]["seed"])
+                          for i, path in enumerate(stills)]
+        else:
+            hook_video = write_opening_video(stills[0], tmp / "opening.mkv")
         print("SHORTS_PHASE_HOOK_END", flush=True)
         print("SHORTS_PHASE_RANGE_START", flush=True)
         picture_range = reference_picture_range(stills, moment, edit_plan, hook_video=hook_video)
@@ -669,8 +759,7 @@ def produce(work, moment, index, script, images, figure, music, out, depth_model
             "selection": {k: moment.get(k) for k in ("final_score", "measured_score", "features", "rubric")},
             "text": " ".join(s["text"] for s in moment["sentences"])}
     if edit_plan is not None:
-        from shorts_edit_plan import frame_plan
-        record.update(render_plan=frame_plan(edit_plan), source_image_info=image_info,
+        record.update(render_plan=_editorial_adapter(edit_plan).frame_plan(edit_plan), source_image_info=image_info,
                       hook_mode=hook_mode, publish=False)
     return record
 
@@ -696,12 +785,18 @@ def main(work, selection, script_path, images_dir, figure, music, out_dir, depth
     sel = json.loads(Path(selection).read_text())
     timeline = json.loads((work / "timeline.json").read_text())  # the sentence clock is required (R8)
     edit_plan = sel.get("edit_plan")
+    if script.get("pilot_id") == "pilot-006" and edit_plan is None:
+        raise ValueError("CORRECTION_PLAN_MISSING")
     if sel.get("selection_mode") == "EDITORIAL_PLAN" and edit_plan is None:
         raise ValueError("EDITORIAL_PLAN_MISSING")
     if edit_plan is not None:
-        from shorts_edit_plan import validate_plan, hash_file
+        adapter = _editorial_adapter(edit_plan)
+        if edit_plan["source_pilot"] == "pilot-006":
+            pilot = Path(script_path).parent
+            adapter.preflight(pilot, pilot / "shorts/correction-plan.json", pilot / "shorts/correction-history.json")
+        hash_file = adapter.hash_file
         inputs_path = Path(script_path).parent / "shorts" / "inputs.json"
-        prepared = validate_plan(edit_plan, timeline, script, json.loads(inputs_path.read_text()), raw_sha256={
+        prepared = adapter.validate_plan(edit_plan, timeline, script, json.loads(inputs_path.read_text()), raw_sha256={
             "timeline": hash_file(work / "timeline.json"), "script": hash_file(script_path), "inputs": hash_file(inputs_path)})
         if sel.get("chosen") != prepared["chosen"] or sel.get("selection_mode") != "EDITORIAL_PLAN":
             raise ValueError("EDITORIAL_SELECTION_MISMATCH")

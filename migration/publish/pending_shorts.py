@@ -72,7 +72,18 @@ def recovery_gate(spec, pilot_dir, now):
         raise ValueError("RECOVERY_PILOT_CONTEXT_MISMATCH")
     if ".." in d.parts or any(p.is_symlink() for p in (d, *d.parents)):
         raise ValueError("RECOVERY_PATH_SYMLINK")
-    bound = rr.binding(spec)
+    # A correction must never fall back to the historical recovery validator.
+    if "edit_plan" in spec or "finalization" in spec:
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "production"))
+        import shorts_006_plan as correction
+        final = spec.get("finalization")
+        if not isinstance(final, dict) or final.get("kind") != "pilot-006-correction-v1":
+            raise ValueError("CORRECTION_FINALIZATION_REQUIRED")
+        bound = correction.binding(
+            spec, plan_sha256=correction.hash_file(d / "shorts" / "correction-plan.json"),
+            history_sha256=correction.hash_file(d / "shorts" / "correction-history.json"))
+    else:
+        bound = rr.binding(spec)
     if now > when(bound["release_deadline"]):
         raise ValueError("TARGET_SLOT_LEAD_MISSED")
     return bound
@@ -101,7 +112,7 @@ def pending(production, ledger, now=None):
                         or opens + timedelta(minutes=30) > target
                         or target in taken(production, entries, d.name)):
                     continue
-            except (ValueError, TypeError, KeyError):
+            except (OSError, ValueError, TypeError, KeyError):
                 continue
             return d.name, [bound["target_slot"]]
         return d.name, slots_for(len(todo), schedule, opens, now, taken(production, entries, d.name))
@@ -120,7 +131,7 @@ def states(pilot_dir, ledger, now=None):
     if recovery_context(spec, pilot_dir):
         try:
             recovery_gate(spec, pilot_dir, now)
-        except (ValueError, TypeError, KeyError):
+        except (OSError, ValueError, TypeError, KeyError):
             recovery_blocked = True
     for s in spec["shorts"]:
         entry = entries.get(f"short:{spec['source_pilot']}:{s['sha256']}", {})

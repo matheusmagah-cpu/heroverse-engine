@@ -2081,7 +2081,7 @@ WORKFLOW_MARKER = "__PHASE2_ALLOWED_RUN_BODY__"
 
 
 def workflow_body_and_frozen_bytes(source):
-    """Replace precisely one approved scalar; retain all other raw bytes, including comments."""
+    """Mask only the two phase3 approved run scalars; preserve every other byte."""
     name = b"      - name: " + WORKFLOW_STEP.encode() + b"\n"
     if source.count(name) != 1:
         raise AssertionError("WORKFLOW_STEP_OCCURRENCE_COUNT")
@@ -2094,6 +2094,14 @@ def workflow_body_and_frozen_bytes(source):
     match = matches[0]
     frozen = source[:match.start(2)] + b"          " + WORKFLOW_MARKER.encode() + b"\n" + source[match.end(2):]
     body = "\n".join(line[10:] for line in match.group(2).decode().splitlines()) + "\n"
+    preserve = re.compile(rb"(      - name: Preserve privately and record\n"
+                          rb"(?:        [^\n]*\n)*?        run: \|\n)"
+                          rb"((?:          [^\n]*\n|\n)*)(?=      - name:|\Z)")
+    matches = list(preserve.finditer(frozen))
+    if len(matches) != 1:
+        raise AssertionError("PRESERVE_RUN_SCALAR_SHAPE")
+    match = matches[0]
+    frozen = frozen[:match.start(2)] + b"          __PHASE3_PRESERVE_RUN_BODY__\n" + frozen[match.end(2):]
     return body, frozen
 
 
@@ -2104,14 +2112,14 @@ class FrozenEditorialWorkflow(unittest.TestCase):
     def test_every_unapproved_workflow_byte_including_comments_is_frozen(self):
         _, frozen = workflow_body_and_frozen_bytes(self.source())
         self.assertEqual(hashlib.sha256(frozen).hexdigest(),
-                         "dfd67d011a1b93e2d959369181ceb5be23d83abce4045a8ed1ca6cc9272b1bce")
+                         "2d34c9328b114312839a5df42c5b30e05b201020e057b11de52cad2a7522fb96")
 
     def test_card_baseloader_structural_hashes_or_stricter_stdlib_byte_assertion(self):
         source = self.source()
         # The byte assertion also runs in CI without installing an unpinned YAML dependency.
         _, frozen = workflow_body_and_frozen_bytes(source)
         self.assertEqual(hashlib.sha256(frozen).hexdigest(),
-                         "dfd67d011a1b93e2d959369181ceb5be23d83abce4045a8ed1ca6cc9272b1bce")
+                         "2d34c9328b114312839a5df42c5b30e05b201020e057b11de52cad2a7522fb96")
         try:
             import yaml
         except ImportError:
@@ -2129,7 +2137,11 @@ class FrozenEditorialWorkflow(unittest.TestCase):
                  if step.get("name") == WORKFLOW_STEP]
         self.assertEqual(len(steps), 1)
         steps[0]["run"] = WORKFLOW_MARKER
-        self.assertEqual(digest(document), "92056d8367a1c3b69b314b595679aebedcd73a1dd59d957c4d7e862d49dacaf2")
+        preserves = [step for job in document["jobs"].values() for step in job["steps"]
+                     if step.get("name") == "Preserve privately and record"]
+        self.assertEqual(len(preserves), 1)
+        preserves[0]["run"] = "__PHASE3_PRESERVE_RUN_BODY__"
+        self.assertEqual(digest(document), "62bd73e303e1d1725fbf1c33c4956a604aa4839f725739a9381390a758aff122")
 
     def run_synthetic_workflow(self, has_plan, failing=None):
         body, _ = workflow_body_and_frozen_bytes(self.source())
@@ -2205,6 +2217,293 @@ class FrozenEditorialWorkflow(unittest.TestCase):
         self.assertEqual(sum(history in call for call in calls), 1)
         self.assertFalse(any("migration/production/shorts_review.py" in call for call in calls))
         self.assertFalse(any("--finalize" in call for call in calls))
+
+
+def correction_source():
+    import shorts_006_plan as adapter
+    plan = json.loads(json.dumps(adapter.EXPECTED_PLAN))
+    pilot = HERE / 'pilot-006'
+    timeline = json.loads((pilot / 'out/timeline.json').read_text())
+    script = json.loads((pilot / 'script.json').read_text())
+    refs = {s['id']: s.get('reference') for s in script['segments']}
+    moment, reason = sp.validate_candidate(timeline['sentences'], refs, plan['candidate'])
+    assert reason is None, reason
+    return plan, timeline, script, refs, moment
+
+
+class CorrectionRenderer(unittest.TestCase):
+    def test_closed_routing_at_every_entry_and_mixed_pairs(self):
+        plan, timeline, script, refs, moment = correction_source()
+        self.assertEqual(sp._editorial_adapter(plan).__name__, 'shorts_006_plan')
+        self.assertEqual(sp._editorial_adapter(EDITORIAL_PLAN).__name__, 'shorts_edit_plan')
+        calls = [lambda p: sp.scene_frame_plan(p),
+                 lambda p: sp.editorial_picture(['a', 'b'], moment, p, hook_video=['c', 'd']),
+                 lambda p: sp.scene_clip_args(['a', 'b'], moment, p, 0, 'x', hook_video=['c', 'd']),
+                 lambda p: sp.render_args(['a', 'b'], 'v', 'm', 'a', moment, 36, 'null', 'x', edit_plan=p,
+                                          picture_video='p', picture_range='tv'),
+                 lambda p: sp.produce(Path('/unused'), moment, 0, script, Path('/unused'), 'f', 'm', Path('/unused'),
+                                     timeline_sentences=timeline['sentences'], script_refs=refs, edit_plan=p)]
+        for version, pilot in [('shorts-editorial-plan-v2','pilot-006'),
+                               ('shorts-006-correction-plan-v1','pilot-005'),
+                               ('unknown','pilot-006'), ('shorts-006-correction-plan-v1','unknown')]:
+            bad = dict(plan, version=version, source_pilot=pilot)
+            for call in calls:
+                with self.subTest(pair=(version,pilot),call=call), mock.patch.object(sp,'run') as render:
+                    with self.assertRaisesRegex(ValueError,'EDITORIAL_PLAN_DISCRIMINATOR'): call(bad)
+                    render.assert_not_called()
+        self.assertNotIn('from shorts_edit_plan import', inspect.getsource(sp))
+
+    def test_exact_allocation_full_inputs_and_separate_audio_clock(self):
+        plan, timeline, script, refs, moment = correction_source()
+        frames = sp.scene_frame_plan(plan)
+        self.assertEqual(frames['scene_spans'], [[0,548],[533,1080]])
+        self.assertEqual(frames['scene_frames'], [548,547])
+        self.assertEqual(frames['fade_frames'],15)
+        args=sp.render_args(['a','b'],'voice.flac','music.flac','caption.ass',moment,36,'null','out.mp4',
+                            edit_plan=plan,hook_video=['full-a.mkv','full-b.mkv'])
+        graph=args[args.index('-filter_complex')+1]
+        self.assertNotIn('tpad', graph); self.assertNotIn('-loop', args)
+        self.assertEqual([args[i+1] for i,x in enumerate(args) if x=='-i'],
+                         ['full-a.mkv','full-b.mkv','voice.flac','music.flac'])
+        self.assertIn('34.870',args);self.assertIn('2511.607',args)
+        self.assertIn('apad=whole_len=1728000',graph)
+        self.assertIn('atrim=end_sample=1728000',graph)
+        self.assertIn('afade=t=out:st=34.870:d=1.13:curve=hsin',graph)
+        self.assertNotIn('d=0.04',graph)
+        self.assertEqual(args[args.index('-preset')+1],'medium')
+        self.assertEqual(args[args.index('-crf')+1],'19')
+        self.assertEqual(args[args.index('-b:a')+1],'160k')
+        captions=sp.caption_events(moment)
+        self.assertAlmostEqual(captions[0][1],1.621)
+        self.assertAlmostEqual(max(x[1] for x in captions),34.690)
+        for bad in (None,'hook.mkv',['one'],['one','two','three']):
+            with self.assertRaises(ValueError):
+                sp.editorial_picture(['a','b'],moment,plan,hook_video=bad)
+        with self.assertRaisesRegex(ValueError,'CORRECTION_RENDER_CLOCK_MISMATCH'):
+            sp.render_args(['a','b'],'v','m','a',moment,35.19,'null','x',edit_plan=plan,hook_video=['a','b'])
+
+    def test_source_duration_failures_precede_any_render(self):
+        import shorts_006_plan as adapter
+        plan, timeline, script, refs, moment = correction_source()
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d); work=root/'work';images=root/'images';images.mkdir();work.mkdir()
+            music=root/'music.flac';music.touch();(root/'voice.flac').touch()
+            hashes={root/'voice.flac':plan['voice']['sha256'],music:plan['music']['sha256']}
+            for scene in plan['scenes']:
+                image=images/(scene['image_id']+'.png'); image.touch(); hashes[image]=scene['sha256']
+                (images/(scene['image_id']+'.json')).write_text(json.dumps({
+                    'id':scene['image_id'],'release_asset':scene['asset'],'sha256':scene['sha256'],
+                    'models':{'test':{'license':'synthetic'}}}))
+            for durations, expected in [([1346.296,10800],'VOICE_SOURCE_TRUNCATED'),
+                                        ([1529.993333,2547.606],'MUSIC_SOURCE_TRUNCATED'),
+                                        ([float('nan'),10800],'VOICE_SOURCE_TRUNCATED')]:
+                with mock.patch.object(sp,'sha256',side_effect=lambda p:hashes[Path(p)]), \
+                     mock.patch.object(adapter,'_probe',side_effect=[
+                         {'streams':[{'codec_type':'audio','sample_rate':'24000','channels':1}],
+                          'format':{'duration':str(durations[0])}},
+                         {'streams':[{'codec_type':'audio'}],'format':{'duration':str(durations[1])}}]), \
+                     mock.patch.object(sp,'run') as run, mock.patch.object(sp.subprocess,'run') as probe:
+                    with self.assertRaisesRegex(ValueError,expected):
+                        sp.produce(work,moment,0,script,images,'unused',music,root/'out',
+                                   timeline_sentences=timeline['sentences'],script_refs=refs,edit_plan=plan)
+                    run.assert_not_called();probe.assert_not_called()
+
+    def test_produce_uses_two_complete_clips_and_one_encoder(self):
+        import shorts_006_plan as adapter
+        import cinematic
+        plan,timeline,script,refs,moment=correction_source()
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);work=root/'work';work.mkdir();images=root/'images';images.mkdir();out=root/'out';out.mkdir()
+            voice=root/'voice.flac';voice.touch();music=root/'music.flac';music.touch()
+            hashes={voice:plan['voice']['sha256'],music:plan['music']['sha256'],out/'short-00.mp4':'f'*64}
+            for scene in plan['scenes']:
+                image=images/(scene['image_id']+'.png');image.touch();hashes[image]=scene['sha256']
+                (images/(scene['image_id']+'.json')).write_text(json.dumps({
+                    'id':scene['image_id'],'release_asset':scene['asset'],'sha256':scene['sha256'],
+                    'models':{'test':{'license':'synthetic'}}}))
+            with mock.patch.object(sp,'sha256',side_effect=lambda p:hashes[Path(p)]), \
+                 mock.patch.object(adapter,'source_durations') as durations, \
+                 mock.patch.object(sp.subprocess,'run',return_value=SimpleNamespace(stdout='{"streams":[{"width":1080,"height":1920}]}')), \
+                 mock.patch.object(sp,'vertical_still'), mock.patch.object(cinematic,'grade'), \
+                 mock.patch.object(cinematic,'look',return_value='null'), \
+                 mock.patch.object(sp,'write_opening_video') as old, \
+                 mock.patch.object(sp,'write_continuous_video',side_effect=lambda p,out,n,seed:out) as animated, \
+                 mock.patch.object(sp,'reference_picture_range',return_value='tv'), \
+                 mock.patch.object(sp,'write_editorial_picture',return_value=root/'picture.mkv') as staging, \
+                 mock.patch.object(sp,'probe_duration',return_value=36), mock.patch.object(sp,'run') as encode:
+                record=sp.produce(work,moment,0,script,images,'unused',music,out,
+                                  timeline_sentences=timeline['sentences'],script_refs=refs,edit_plan=plan)
+                durations.assert_called_once_with(voice,music,plan)
+                old.assert_not_called();self.assertEqual(animated.call_count,2)
+                self.assertEqual([(c.args[2],c.args[3]) for c in animated.call_args_list],[(548,259006),(547,259007)])
+                self.assertEqual(len(staging.call_args.kwargs['hook_video']),2)
+                encode.assert_called_once();self.assertIn(str(voice),encode.call_args.args[0])
+                self.assertEqual(record['reference'],'Philippians 4:6-7 (KJV)')
+                self.assertEqual(record['source_end'],1346.297);self.assertEqual(record['seconds'],36)
+                self.assertFalse(record['publish']);self.assertEqual(record['render_plan'],adapter.frame_plan(plan))
+            image=images/(plan['scenes'][0]['image_id']+'.png');image.unlink();image.symlink_to(voice)
+            with mock.patch.object(sp,'run') as encode:
+                with self.assertRaisesRegex(ValueError,'UNSAFE_PATH'):
+                    sp.produce(work,moment,0,script,images,'unused',music,out,
+                               timeline_sentences=timeline['sentences'],script_refs=refs,edit_plan=plan)
+                encode.assert_not_called()
+
+
+    def test_changed_canonical_prepared_selection_cannot_invoke_produce(self):
+        import shorts_006_plan as adapter
+        plan,timeline,script,refs,moment=correction_source()
+        pilot=HERE/'pilot-006'
+        prepared=adapter.validate_plan(plan,timeline,script,json.loads((pilot/'shorts/inputs.json').read_text()),
+                                      raw_sha256={k:plan['source_sha256'][k] for k in ('timeline','script','inputs')})
+        original_hash=adapter.hash_file
+        canonical=pilot/'shorts/shorts.json'
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);selection=root/'selection.json';selection.write_text(json.dumps(prepared))
+            for data in [json.dumps({'shorts':[{'review':{'status':status}}]}).encode()
+                         for status in ('PASS','FAIL','NOT_REVIEWED_ProviderFailure')]+[b'{malformed']:
+                digest=hashlib.sha256(data).hexdigest()
+                with mock.patch.object(adapter,'hash_file',side_effect=lambda p:
+                                       digest if Path(p)==canonical else original_hash(p)), \
+                     mock.patch.object(sp,'produce') as make, mock.patch.object(sp,'run') as render:
+                    with self.assertRaisesRegex(ValueError,'CANONICAL_ATTEMPT_ALREADY_CHANGED'):
+                        sp.main(pilot/'out',selection,pilot/'script.json',root,'unused','music',root/'output')
+                    make.assert_not_called();render.assert_not_called()
+            selection.write_text(json.dumps({'chosen':[moment]}))
+            with mock.patch.object(sp,'produce') as make:
+                with self.assertRaisesRegex(ValueError,'CORRECTION_PLAN_MISSING'):
+                    sp.main(pilot/'out',selection,pilot/'script.json',root,'unused','music',root/'output')
+                make.assert_not_called()
+
+
+    def test_main_uses_006_adapter_reconstructs_one_and_rejects_mixed_pair(self):
+        import shorts_006_plan as adapter
+        plan,timeline,script,refs,moment=correction_source()
+        pilot=HERE/'pilot-006'
+        prepared=adapter.validate_plan(plan,timeline,script,json.loads((pilot/'shorts/inputs.json').read_text()),
+                                      raw_sha256={k:plan['source_sha256'][k] for k in ('timeline','script','inputs')})
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);selection=root/'selection.json';selection.write_text(json.dumps(prepared))
+            with mock.patch.object(sp,'produce',return_value={'file':'short-00.mp4','seconds':36,'hook':moment['hook']}) as make:
+                sp.main(pilot/'out',selection,pilot/'script.json',root,'unused','music',root/'output')
+                make.assert_called_once();self.assertEqual(make.call_args.kwargs['edit_plan'],plan)
+                self.assertEqual(make.call_args.args[1]['sentences'],moment['sentences'])
+            prepared['edit_plan']['source_pilot']='pilot-005';selection.write_text(json.dumps(prepared))
+            with mock.patch.object(sp,'produce') as make:
+                with self.assertRaisesRegex(ValueError,'EDITORIAL_PLAN_DISCRIMINATOR'):
+                    sp.main(pilot/'out',selection,pilot/'script.json',root,'unused','music',root/'output')
+                make.assert_not_called()
+
+
+class CorrectionAtmosphere(unittest.TestCase):
+    def test_existing_005_float_output_is_pinned_to_prechange_bytes(self):
+        import numpy as np
+        base=np.arange(54*96*3,dtype=np.uint8).reshape(96,54,3)
+        expected={0:'1adcca65ca466ce0179936a6f5e9e742499f6f9bc9ee4151cb2a7db5facb3959',
+                  1:'13e5d384050e7cb294f13250672d83e956d5d85958a75431528491a359521c4c',
+                  15:'a70d6b8facbbf50442f871c61bdb4606f489d210468634e280a16dec556be1a7',
+                  45:'852e84ca34ad09a6680dce2f6a4f7efe951ff6e1cd2431b7343af5e119db4789',
+                  89:'f80d01477f1d485ac2606a2133b21ac6603c69abe3738d5ab0e91596fb387e4b',
+                  90:'1adcca65ca466ce0179936a6f5e9e742499f6f9bc9ee4151cb2a7db5facb3959'}
+        for frame,digest in expected.items():
+            image,alpha=sp.opening_atmosphere(base,frame)
+            self.assertEqual(hashlib.sha256(image.tobytes()+alpha.tobytes()).hexdigest(),digest)
+
+    def test_continuous_deterministic_nonmutating_bounded_and_late_motion(self):
+        import numpy as np
+        base=np.full((192,108,3),.2,np.float32);original=base.copy()
+        for count,seed in [(548,259006),(547,259007)]:
+            for frame in (0,91,270,count-2,count-1):
+                a,alpha=sp.continuous_atmosphere(base,frame,count,seed)
+                b,beta=sp.continuous_atmosphere(base,frame,count,seed)
+                np.testing.assert_array_equal(a,b);np.testing.assert_array_equal(alpha,beta)
+                self.assertTrue(np.isfinite(a).all());self.assertGreaterEqual(float(a.min()),0)
+                self.assertLessEqual(float(a.max()),1);self.assertLessEqual(float(alpha.max()),.180001)
+                if frame<count-1:
+                    c,_=sp.continuous_atmosphere(base,frame+1,count,seed)
+                    self.assertGreater(float(np.abs(c-a).sum()),0)
+            for frame in (-1,count,count+10):
+                a,alpha=sp.continuous_atmosphere(base,frame,count,seed)
+                np.testing.assert_array_equal(a,base);self.assertEqual(float(alpha.sum()),0)
+        np.testing.assert_array_equal(base,original)
+        for image in (np.zeros((0,1,3)), np.zeros((3,3)), np.full((2,2,3),np.nan)):
+            with self.assertRaises(ValueError):sp.continuous_atmosphere(image,1,548,259006)
+        for frame,count,seed in [(True,548,259006),(1,0,259006),(1,548,False)]:
+            with self.assertRaises(ValueError):sp.continuous_atmosphere(base,frame,count,seed)
+
+
+class CorrectionSyntheticFFmpeg(unittest.TestCase):
+    """Offline valid-duration two-source reference, not production qualification."""
+    @classmethod
+    def setUpClass(cls):
+        cls.temp=tempfile.TemporaryDirectory();cls.addClassCleanup(cls.temp.cleanup)
+        cls.root=Path(cls.temp.name);cls.plan,_,_,_,cls.moment=correction_source()
+        cls.stills=[cls.root/f'scene{i}.ppm' for i in range(2)]
+        cls.clips=[cls.root/f'animated{i}.mkv' for i in range(2)]
+        for i,(still,clip,count) in enumerate(zip(cls.stills,cls.clips,[548,547])):
+            synthetic_ppm(still,108,192,i)
+            sp.write_continuous_video(still,clip,count,259006+i)
+        cls.ass=cls.root/'empty.ass';cls.ass.write_text(sp.HEAD)
+        cls.voice=cls.root/'voice.wav';cls.music=cls.root/'music.wav'
+        rate=8000;seconds=2549
+        tone=b''.join(int(900*math.sin(2*math.pi*220*i/rate)).to_bytes(2,'little',signed=True) for i in range(rate))
+        pcm=bytearray(tone*seconds)
+        # Sound after the narrative boundary but before extraction end proves the
+        # source clock, while a later marker must never enter the cut.
+        for lo,hi,freq in [(1346.297,1346.477,1100),(1347.677,1348,1900)]:
+            a,b=round(lo*rate),round(hi*rate)
+            pcm[2*a:2*b]=b''.join(int(900*math.sin(2*math.pi*freq*i/rate)).to_bytes(2,'little',signed=True) for i in range(b-a))
+        for path,data in [(cls.voice,pcm),(cls.music,bytes(len(pcm)))]:
+            with wave.open(str(path),'wb') as out:
+                out.setnchannels(1);out.setsampwidth(2);out.setframerate(rate);out.writeframes(data)
+        with mock.patch.multiple(sp,VW=108,VH=192):
+            cls.range=sp.reference_picture_range(cls.stills,cls.moment,cls.plan,hook_video=cls.clips)
+            cls.picture=sp.write_editorial_picture(cls.stills,cls.moment,cls.plan,cls.root,hook_video=cls.clips)
+            cls.reference=sp.render_args(cls.stills,cls.voice,cls.music,cls.ass,cls.moment,36,'null',cls.root/'ref.mp4',edit_plan=cls.plan,hook_video=cls.clips)
+            cls.serial=sp.render_args(cls.stills,cls.voice,cls.music,cls.ass,cls.moment,36,'null',cls.root/'serial.mp4',edit_plan=cls.plan,hook_video=cls.clips,picture_video=cls.picture,picture_range=cls.range)
+
+    def run_part(self,args,label,fmt):
+        end=args.index('-map');cmd=args[:end]+['-map',label]
+        gi=cmd.index('-filter_complex')+1
+        cmd[gi]+=(';[aout]anullsink' if label=='[vout]' else ';[vout]nullsink')
+        if label=='[vout]':cmd+=['-an','-threads:v','1','-pix_fmt','yuv420p','-frames:v','1080','-fps_mode','passthrough']
+        else:cmd+=['-vn','-c:a','pcm_s16le','-ar','48000']
+        cmd+=['-f',fmt,'-']
+        result=subprocess.run(cmd,capture_output=True,timeout=180)
+        self.assertEqual(result.returncode,0,result.stderr.decode(errors='replace')[-4000:])
+        return result.stdout
+
+    def test_every_picture_frame_and_pts_match_reference(self):
+        ref=self.run_part(self.reference,'[vout]','framemd5')
+        serial=self.run_part(self.serial,'[vout]','framemd5')
+        clean=lambda b:[x for x in b.splitlines() if not x.startswith(b'#')]
+        self.assertEqual(len(clean(ref)),1080);self.assertEqual(clean(ref),clean(serial))
+        for i,line in enumerate(clean(serial)):
+            self.assertEqual(int(line.split(b',')[2]),i)
+
+    def test_every_pcm_sample_matches_reference_and_exact_output_length(self):
+        ref=self.run_part(self.reference,'[aout]','s16le')
+        serial=self.run_part(self.serial,'[aout]','s16le')
+        self.assertEqual(len(ref),1728000*2*2);self.assertEqual(ref,serial)
+
+    def test_all_source_frames_are_real_animated_and_exact_length(self):
+        for path,count in zip(self.clips,[548,547]):
+            result=subprocess.run(['ffmpeg','-v','error','-i',str(path),'-map','0:v','-f','framemd5','-'],check=True,capture_output=True)
+            lines=[x for x in result.stdout.splitlines() if not x.startswith(b'#')]
+            self.assertEqual(len(lines),count)
+            self.assertNotEqual(lines[-1].split(b',')[-1],lines[-2].split(b',')[-1])
+            self.assertNotEqual(lines[150].split(b',')[-1],lines[151].split(b',')[-1])
+
+
+class CorrectionAdapterCIBridge(unittest.TestCase):
+    def test_closed_adapter_suite_is_in_the_existing_ci_entrypoint(self):
+        # Existing PR CI explicitly enumerates production tests. Keep its
+        # workflow unchanged while making the new closed adapter mandatory.
+        result = subprocess.run([sys.executable, "-I", "-B", str(HERE / "test_shorts_006_plan.py")],
+                                capture_output=True, text=True, timeout=300)
+        output = result.stdout + result.stderr
+        self.assertEqual(result.returncode, 0, output)
+        self.assertRegex(output, r"Ran [1-9][0-9]* tests? in ")
+        self.assertRegex(output, r"(?m)^OK$")
 
 
 if __name__ == "__main__":
