@@ -6,6 +6,8 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
+import copy
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import pending_shorts as ps  # noqa: E402
@@ -25,6 +27,66 @@ def setup(tmp, approved=2, long_published=True, done=()):
     entries = {"pilot-002:abc": {"video_id": "L"}} if long_published else {}
     entries.update({f"short:pilot-002:{s}": {"video_id": "x"} for s in done})
     return Path(tmp), {"entries": entries}
+
+
+def recovery_setup(tmp):
+    import review_recovery as rr
+    prod = Path(tmp) / "migration" / "production"
+    d = prod / rr.PILOT
+    (d / "shorts").mkdir(parents=True)
+    (d / "out").mkdir()
+    (d / "out/manifest.json").write_text(json.dumps({"output_sha256": "longsha"}))
+    (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-21T00:00:00Z", "shorts_slots": [rr.TARGET_SLOT]}))
+    records = [{"file": f"short-0{i}.mp4", "sha256": rr.OUTPUT_SHA256 if i == 0 else str(i) * 64,
+                "publish": i == 0, "hook": "Prayer", "title": "Peace", "qa": {"status": "PASS"},
+                "review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9,
+                           "output_sha256": rr.OUTPUT_SHA256 if i == 0 else str(i) * 64}}
+               for i in range(3)]
+    records[0]["previous_review"] = {"status": rr.ORIGINAL_STATUS}
+    spec = {"source_pilot": rr.PILOT, "shorts": records, "review_recovery": rr._expected_binding(),
+            "review_recovery_execution": {"reviewed_at": "2026-10-21T01:00:00Z", "github_run_id": "1",
+                                          "github_run_attempt": "1", "output_sha256": rr.OUTPUT_SHA256}}
+    (d / "shorts/shorts.json").write_text(json.dumps(spec))
+    ledger = {"entries": {rr.PILOT + ":longsha": {"video_id": "LONG"}}}
+    return prod, d, spec, ledger
+
+
+class RecoveryPending(unittest.TestCase):
+    def test_exact_boundary_and_no_rollover(self):
+        with tempfile.TemporaryDirectory() as t:
+            prod, d, spec, ledger = recovery_setup(t)
+            boundary = ps.when("2026-10-21T13:15:00Z")
+            self.assertEqual(ps.pending(prod, ledger, boundary), ("pilot-006", ["2026-10-21T14:00:00Z"]))
+            later = ps.when("2026-10-21T13:15:01Z")
+            self.assertIsNone(ps.pending(prod, ledger, later))
+            self.assertEqual(ps.states(d, ledger, later)[0]["state"], "temporal_recovery_blocked")
+            with patch.object(ps, "datetime") as clock:
+                clock.now.return_value = later
+                self.assertEqual(ps.todo_files(d, ledger), [])
+            ledger["entries"]["short:pilot-006:" + spec["shorts"][0]["sha256"]] = {"video_id": "OLD"}
+            self.assertEqual(ps.states(d, ledger, later)[0]["state"], "published")
+
+    def test_missing_binding_wrong_context_other_selected_block(self):
+        for change in (lambda s: s.pop("review_recovery"), lambda s: s.update(source_pilot="pilot-009"),
+                       lambda s: s["shorts"][1].update(publish=True),
+                       lambda s: s["shorts"][0].update(sha256="f" * 64)):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as t:
+                prod, d, spec, ledger = recovery_setup(t)
+                change(spec)
+                (d / "shorts/shorts.json").write_text(json.dumps(spec))
+                now = ps.when("2026-10-21T01:00:00Z")
+                self.assertIsNone(ps.pending(prod, ledger, now))
+                self.assertEqual(ps.states(d, ledger, now)[0]["state"], "temporal_recovery_blocked")
+
+    def test_taken_slot_and_late_long_never_roll(self):
+        for mode in ("taken", "late"):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as t:
+                prod, d, spec, ledger = recovery_setup(t)
+                if mode == "taken":
+                    ledger["entries"]["other"] = {"slot": "2026-10-21T14:00:00Z", "video_id": "OTHER"}
+                else:
+                    (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-21T13:31:00Z"}))
+                self.assertIsNone(ps.pending(prod, ledger, ps.when("2026-10-21T01:00:00Z")))
 
 
 class Pending(unittest.TestCase):

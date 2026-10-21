@@ -59,6 +59,25 @@ def taken(production, entries, pilot):
     return out
 
 
+def recovery_context(spec, pilot_dir):
+    """Identify the bounded recovery from trusted directory OR manifest identity."""
+    return Path(pilot_dir).name == "pilot-006" or spec.get("source_pilot") == "pilot-006"
+
+
+def recovery_gate(spec, pilot_dir, now):
+    """Pure eligibility guard. An uploaded ID is handled before this gate."""
+    import review_recovery as rr
+    d = Path(pilot_dir)
+    if d.name != rr.PILOT or spec.get("source_pilot") != rr.PILOT:
+        raise ValueError("RECOVERY_PILOT_CONTEXT_MISMATCH")
+    if ".." in d.parts or any(p.is_symlink() for p in (d, *d.parents)):
+        raise ValueError("RECOVERY_PATH_SYMLINK")
+    bound = rr.binding(spec)
+    if now > when(bound["release_deadline"]):
+        raise ValueError("TARGET_SLOT_LEAD_MISSED")
+    return bound
+
+
 def pending(production, ledger, now=None):
     now = now or datetime.now(timezone.utc)
     entries = ledger.get("entries", {})
@@ -74,6 +93,17 @@ def pending(production, ledger, now=None):
             continue
         schedule = json.loads((d / "schedule.json").read_text()) if (d / "schedule.json").exists() else {}
         opens = when(schedule["publish_at"]) if schedule.get("publish_at") else now
+        if recovery_context(spec, d):
+            try:
+                bound = recovery_gate(spec, d, now)
+                target = when(bound["target_slot"])
+                if (len(todo) != 1 or todo[0]["sha256"] != bound["output_sha256"]
+                        or opens + timedelta(minutes=30) > target
+                        or target in taken(production, entries, d.name)):
+                    continue
+            except (ValueError, TypeError, KeyError):
+                continue
+            return d.name, [bound["target_slot"]]
         return d.name, slots_for(len(todo), schedule, opens, now, taken(production, entries, d.name))
     return None
 
@@ -86,11 +116,19 @@ def states(pilot_dir, ledger, now=None):
     spec = json.loads((Path(pilot_dir) / "shorts" / "shorts.json").read_text())
     entries = ledger.get("entries", {})
     out = []
+    recovery_blocked = False
+    if recovery_context(spec, pilot_dir):
+        try:
+            recovery_gate(spec, pilot_dir, now)
+        except (ValueError, TypeError, KeyError):
+            recovery_blocked = True
     for s in spec["shorts"]:
         entry = entries.get(f"short:{spec['source_pilot']}:{s['sha256']}", {})
         passed = (s.get("review") or {}).get("status") == "PASS" and (s.get("qa") or {}).get("status", "PASS") == "PASS"
         if "video_id" in entry:
             state = "scheduled" if entry.get("slot") and when(entry["slot"]) > now else "published"
+        elif recovery_blocked:
+            state = "temporal_recovery_blocked"
         elif not passed:
             state = "failed"
         elif not s.get("publish"):

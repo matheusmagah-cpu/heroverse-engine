@@ -194,6 +194,37 @@ def exception_binding(spec):
     return binding
 
 
+def recovery_upload_gate(spec, shorts_json, shorts_dir, long_key, slots, now):
+    """Validate NEW pilot006 uploads; this is not an editorial approval."""
+    import review_recovery as rr
+    path = Path(shorts_json)
+    pilot_dir = path.parent.parent
+    context_pilot = pilot_dir.name
+    key_pilot = long_key.split(":", 1)[0]
+    if rr.PILOT not in (context_pilot, key_pilot, spec.get("source_pilot")):
+        return None
+    if (path.name != "shorts.json" or path.parent.name != "shorts"
+            or tuple(path.parts[-5:]) != ("migration", "production", rr.PILOT, "shorts", "shorts.json")
+            or key_pilot != rr.PILOT or spec.get("source_pilot") != rr.PILOT):
+        raise SystemExit("RECOVERY_PILOT_CONTEXT_MISMATCH")
+    media = Path(shorts_dir)
+    if (".." in path.parts or ".." in media.parts or not media.is_dir() or any(p.is_symlink() for p in (media, *media.parents))
+            or any(p.is_symlink() for p in (path, *path.parents))):
+        raise SystemExit("RECOVERY_PATH_SYMLINK_OR_INVALID")
+    try:
+        bound = pending_shorts.recovery_gate(spec, pilot_dir, now)
+    except (ValueError, TypeError, KeyError) as error:
+        raise SystemExit("RECOVERY_BINDING_INVALID") from error
+    chosen = [r for r in spec["shorts"] if r.get("publish") is True]
+    if (len(chosen) != 1 or chosen[0].get("sha256") != bound["output_sha256"]
+            or chosen[0].get("file") != rr.FILE or slots != [bound["target_slot"]]):
+        raise SystemExit("RECOVERY_SINGLE_TARGET_REQUIRED")
+    media_file = media / rr.FILE
+    if not media_file.is_file() or media_file.is_symlink():
+        raise SystemExit("RECOVERY_MEDIA_INVALID")
+    return bound
+
+
 def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     spec = json.loads(Path(shorts_json).read_text())
     binding = exception_binding(spec)
@@ -221,6 +252,20 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
             target_instant = utc_instant(target_slot)
         except (ValueError, TypeError):
             raise SystemExit("INVALID_AUTHORIZED_TARGET_SLOT")
+    new_records = [r for r in spec["shorts"] if r.get("publish") and
+                   "video_id" not in ledger["entries"].get(f"short:{spec['source_pilot']}:{r['sha256']}", {})]
+    recovery = recovery_upload_gate(spec, shorts_json, shorts_dir, long_key, slots, utc_now()) if new_records else None
+    if recovery is not None:
+        target = utc_instant(recovery["target_slot"])
+        pilot_dir = Path(shorts_json).parent.parent
+        try:
+            if target in pending_shorts.taken(pilot_dir.parent, ledger["entries"], pilot_dir.name):
+                raise SystemExit("RECOVERY_TARGET_ALREADY_TAKEN")
+            schedule = json.loads((pilot_dir / "schedule.json").read_text())
+            if pending_shorts.when(schedule["publish_at"]) + pending_shorts.timedelta(minutes=30) > target:
+                raise SystemExit("RECOVERY_LONG_OPENS_TOO_LATE")
+        except (OSError, ValueError, TypeError, KeyError):
+            raise SystemExit("RECOVERY_SLOT_EVIDENCE_INVALID")
     spec["shorts"] = [r for r in spec["shorts"] if r.get("publish") or
                       "video_id" in ledger["entries"].get(f"short:{spec['source_pilot']}:{r['sha256']}", {})]  # only the Shorts the watched review approved
     if not spec["shorts"]:
@@ -242,6 +287,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
         reports[short["sha256"]] = report
         if report["status"] != "PASS":
             raise SystemExit("SHORT_QA_FAIL " + json.dumps(report))
+    if recovery is not None and utc_now() > utc_instant(recovery["release_deadline"]):
+        raise SystemExit("TARGET_SLOT_LEAD_MISSED")
     s = pv.session()
     if [c["id"] for c in pv.check(s.get(pv.API + "channels", params={"part": "id", "mine": "true"}), "CHANNEL")["items"]] != [pv.CHANNEL]:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
@@ -260,6 +307,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
         expected = {"title": title_for(short), "description": description_for(
             short, f"https://youtu.be/{long_id}", long["snippet"]["title"])}
         if "video_id" not in entry:
+            if recovery is not None and utc_now() > utc_instant(recovery["release_deadline"]):
+                raise SystemExit("TARGET_SLOT_LEAD_MISSED")
             try:
                 if target_slot is not None and utc_instant(slot) != target_instant:
                     raise SystemExit("UPLOAD_SLOT_DIFFERS_FROM_AUTHORIZED_TARGET")
