@@ -11,13 +11,17 @@ import json
 from pathlib import Path
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import owner_quality_policy
+
 DAILY = (14, 20, 23)
 REVIEW_MODELS = ("gemini-3.8-flash",)  # only the designated reviewer's PASS publishes (publish/prepublish_gate.py)
 
 
 def approved(s):
     r = s.get("review") or {}
-    return bool(s.get("publish")) and r.get("status") == "PASS" and r.get("model") in REVIEW_MODELS
+    return (s.get("publish") is True and (s.get("qa") or {}).get("status") == "PASS"
+            and not owner_quality_policy.check(r, s.get("sha256")))
 LEAD = timedelta(minutes=45)
 
 
@@ -91,8 +95,10 @@ def states(pilot_dir, ledger, now=None):
             state = "failed"
         elif not s.get("publish"):
             state = "not_selected"
-        elif not approved(s):
+        elif (s.get("review") or {}).get("model") not in REVIEW_MODELS:
             state = "review_by_undesignated_model"
+        elif not approved(s):
+            state = "owner_quality_policy_blocked"
         else:
             state = "approved_awaiting_slot"
         out.append({"file": s["file"], "sha256": s["sha256"], "state": state, "video_id": entry.get("video_id")})

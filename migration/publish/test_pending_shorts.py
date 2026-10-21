@@ -19,7 +19,7 @@ def setup(tmp, approved=2, long_published=True, done=()):
     (d / "out").mkdir()
     (d / "out" / "manifest.json").write_text(json.dumps({"output_sha256": "abc"}))
     (d / "schedule.json").write_text(json.dumps(SCHED))
-    shorts = [{"file": f"short-0{i}.mp4", "sha256": f"s{i}", "publish": i < approved, "review": {"status": "PASS" if i < approved else "FAIL", "model": "gemini-3.8-flash"}}
+    shorts = [{"file": f"short-0{i}.mp4", "sha256": f"{i:064x}", "publish": i < approved, "review": {"status": "PASS" if i < approved else "FAIL", "model": "gemini-3.8-flash", "overall": 9.0, "output_sha256": f"{i:064x}"}, "qa": {"status": "PASS"}}
               for i in range(4)]
     (d / "shorts" / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-002", "shorts": shorts}))
     entries = {"pilot-002:abc": {"video_id": "L"}} if long_published else {}
@@ -28,6 +28,31 @@ def setup(tmp, approved=2, long_published=True, done=()):
 
 
 class Pending(unittest.TestCase):
+    def test_policy_block_is_distinct_and_false_cache_cannot_override(self):
+        with tempfile.TemporaryDirectory() as t:
+            prod, ledger = setup(t, approved=1)
+            path = prod / "pilot-002/shorts/shorts.json"
+            spec = json.loads(path.read_text())
+            rec = spec["shorts"][0]
+            rec["review"]["overall"] = 8.5
+            rec["owner_quality_policy"] = {"status": "PASS"}
+            path.write_text(json.dumps(spec))
+            self.assertIsNone(ps.pending(prod, ledger))
+            self.assertEqual(ps.states(prod / "pilot-002", ledger)[0]["state"], "owner_quality_policy_blocked")
+            self.assertEqual(ps.todo_files(prod / "pilot-002", ledger), [])
+            ledger["entries"]["short:pilot-002:" + rec["sha256"]] = {"video_id": "EXISTING"}
+            self.assertEqual(ps.states(prod / "pilot-002", ledger)[0]["state"], "published")
+
+    def test_truthy_publish_or_qa_failure_never_qualifies(self):
+        record = {"publish": True, "sha256": "a" * 64, "qa": {"status": "PASS"},
+                  "review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.5, "output_sha256": "a" * 64}}
+        self.assertTrue(ps.approved(record))
+        record["publish"] = 1
+        self.assertFalse(ps.approved(record))
+        record["publish"] = True
+        record["qa"]["status"] = "FAIL"
+        self.assertFalse(ps.approved(record))
+
     def test_uses_schedule_slots_while_ahead(self):
         with tempfile.TemporaryDirectory() as t:
             prod, ledger = setup(t)
@@ -56,7 +81,7 @@ class Pending(unittest.TestCase):
             prod, ledger = setup(t, long_published=False)
             self.assertIsNone(ps.pending(prod, ledger))
         with tempfile.TemporaryDirectory() as t:
-            prod, ledger = setup(t, done=("s0", "s1"))
+            prod, ledger = setup(t, done=(f"{0:064x}", f"{1:064x}"))
             self.assertIsNone(ps.pending(prod, ledger))
 
 

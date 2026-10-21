@@ -29,6 +29,8 @@ from structure_mining import call, FREE_MODELS, S, STR, NUM, arr  # noqa: E402
 BASE = "https://generativelanguage.googleapis.com"
 RUBRIC = ("hook_in_first_2s", "captions_readable_and_synced", "text_clear_of_shorts_ui", "picture_quality",
           "edit_rhythm", "audio_clarity", "stands_alone", "ending_and_loop", "policy_safe")
+import owner_quality_policy
+
 PASS_ITEM, PASS_OVERALL = 7, 8
 REVIEW_MODELS = ("gemini-3.8-flash",)  # same tuple as publish/prepublish_gate.py
 
@@ -200,7 +202,10 @@ def main(shorts_dir, n="3"):
         elif actual != rec["review"].get("output_sha256"):
             # Never certify a copied/stale verdict by stamping it with today's hash.
             rec["review"] = binding_failure("REVIEW_OUTPUT_HASH_MISMATCH", actual)
-    passing = sorted([r for r in spec["shorts"] if r["review"].get("status") == "PASS"],
+    for rec in spec["shorts"]:
+        problems = owner_quality_policy.check(rec.get("review"), rec.get("qa_output_sha256"))
+        rec["owner_quality_policy"] = {"minimum_overall": 9.0, "status": "FAIL" if problems else "PASS", "problems": problems}
+    passing = sorted([r for r in spec["shorts"] if r["owner_quality_policy"]["status"] == "PASS"],
                      key=lambda r: (r["review"]["overall"], r["selection"].get("final_score") or 0), reverse=True)
     keep = {r["file"] for r in passing[:int(n)]}
     for r in spec["shorts"]:

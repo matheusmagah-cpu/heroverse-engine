@@ -15,11 +15,15 @@ pinning is manual, the API cannot pin) -> verify. Writes a receipt.
 usage: publish_video.py PACKAGE_JSON MANIFEST_JSON VIDEO THUMBNAIL LEDGER RECEIPT [PUBLISH_AT_ISO]
 """
 from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
 import sys
 import time
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import owner_quality_policy
 
 CHANNEL = "UCuMF6pJQkyMzaVoAxFL86yA"
 API = "https://www.googleapis.com/youtube/v3/"
@@ -144,16 +148,53 @@ def first_comment(s, vid, text, tries=3):
     return f"PENDING: {reason}"
 
 
+def check_new_upload(manifest_path, manifest, video):
+    """Bind the additional owner floor to the bytes being newly uploaded.
+
+    Canonical QA/approval revalidation remains in publication_binding. Existing
+    ledger video IDs never enter this gate or require local media after cleanup.
+    """
+    try:
+        review = json.loads((Path(manifest_path).parent / "review.json").read_text())
+        digest = hashlib.sha256()
+        with Path(video).open("rb") as handle:
+            for block in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(block)
+        actual_sha256 = digest.hexdigest()
+    except (OSError, ValueError) as exc:
+        raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:EVIDENCE_UNREADABLE:" + type(exc).__name__) from exc
+    if not isinstance(review, dict):
+        raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:REVIEW_NOT_OBJECT")
+    problems = []
+    if manifest.get("output_sha256") != actual_sha256:
+        problems.append("MANIFEST_NOT_FOR_THIS_FILE")
+    if review.get("status") != "PASS":
+        problems.append("TOP_LEVEL_REVIEW_NOT_PASS")
+    if review.get("output_sha256") != actual_sha256:
+        problems.append("TOP_LEVEL_REVIEW_NOT_FOR_THIS_FILE")
+    if problems:
+        raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
+    watched = review.get("watched_review")
+    # Long evidence binds the watched review at the top level. Adapt a new
+    # in-memory copy only, after checking that binding against the actual MP4.
+    bound_review = {**watched, "output_sha256": review["output_sha256"]} if isinstance(watched, dict) else watched
+    problems = owner_quality_policy.check(bound_review, actual_sha256)
+    if problems:
+        raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
+
+
 def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_path, publish_at=None):
     package = json.loads(Path(package_path).read_text())
     manifest = json.loads(Path(manifest_path).read_text())
     ledger_path = Path(ledger_path)
     ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {"version": "publish-ledger-v1", "entries": {}}
     key = f"{package['pilot_id']}:{manifest['output_sha256']}"
+    entry = ledger["entries"].get(key, {"steps": {}})
+    if "video_id" not in entry:
+        check_new_upload(manifest_path, manifest, video)
     s = session()
     if [c["id"] for c in check(s.get(API + "channels", params={"part": "id", "mine": "true"}), "CHANNEL")["items"]] != [CHANNEL]:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
-    entry = ledger["entries"].get(key, {"steps": {}})
     status = {"privacyStatus": "private" if publish_at else "public", "selfDeclaredMadeForKids": False,
               "embeddable": True, "license": "youtube", "publicStatsViewable": True, "containsSyntheticMedia": True}
     if publish_at:

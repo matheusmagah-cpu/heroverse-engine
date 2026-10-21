@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -12,6 +13,8 @@ import package_pilot  # noqa: E402
 import publish_video as pv  # noqa: E402
 
 TEXT = 'If "His Mercies Are New" spoke to you, write "Amen" below and share one mercy God showed you today.'
+VIDEO_BYTES = b"0" * 10
+VIDEO_SHA = hashlib.sha256(VIDEO_BYTES).hexdigest()
 
 
 class R:
@@ -77,8 +80,10 @@ class PublishStep(unittest.TestCase):
         if first_comment:
             package["first_comment"] = first_comment
         pkg.write_text(json.dumps(package))
-        man.write_text(json.dumps({"output_sha256": "abc", "sentences": [{"start": 0.3, "end": 2.0, "text": "Hi."}]}))
-        (d / "v.mp4").write_bytes(b"0" * 10)
+        man.write_text(json.dumps({"output_sha256": VIDEO_SHA, "sentences": [{"start": 0.3, "end": 2.0, "text": "Hi."}]}))
+        (d / "review.json").write_text(json.dumps({"status": "PASS", "output_sha256": VIDEO_SHA,
+            "watched_review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9}}))
+        (d / "v.mp4").write_bytes(VIDEO_BYTES)
         (d / "t.jpg").write_bytes(b"jpg")
         pv.main(pkg, man, d / "v.mp4", d / "t.jpg", d / "ledger.json", d / "r.json", "2026-10-20T00:30:00Z")
         return json.loads((d / "r.json").read_text())
@@ -94,7 +99,7 @@ class PublishStep(unittest.TestCase):
             order = [c[1] for c in first.calls if c[0] == "POST"]
             self.assertLess(order.index("playlists"), order.index("commentThreads"))
             ledger = json.loads((d / "ledger.json").read_text())
-            self.assertEqual(ledger["entries"]["pilot-x:abc"]["steps"]["first_comment"], "Ugz-comment-1")
+            self.assertEqual(ledger["entries"][f"pilot-x:{VIDEO_SHA}"]["steps"]["first_comment"], "Ugz-comment-1")
             second = FakeSession()
             self.run_once(d, second)
             self.assertEqual([c for c in second.calls if c[0] == "POST"], [])  # re-runs repeat nothing

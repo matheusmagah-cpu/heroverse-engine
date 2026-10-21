@@ -1,0 +1,31 @@
+{
+  "version": "pilot-006-review-diagnosis-v1",
+  "observed_at": "2026-10-20T23:53:40Z",
+  "run_id": 39453449948,
+  "run_sha": "5ec6ec0265d20f2d9950e900ea9bf43f1038f462",
+  "http_code": null,
+  "unknown_reason": "Executed reviewer discarded exception code and diagnostic; logs preserve only ProviderFailure class.",
+  "stage": "designated reviewer generateContent call or response handling",
+  "qa": "PASS on all three records",
+  "editorial_status": "NOT_REVIEWED_ProviderFailure",
+  "release_hash_verification": "GitHub asset digest equals manifest; binary local rehash not performed",
+  "shorts": [
+    [
+      "short-00.mp4",
+      "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707"
+    ],
+    [
+      "short-01.mp4",
+      "bea4aa6c83a5648c0b5b4b2b2f8992d3cc5f0991229c05f61e2d1219c3920fb2"
+    ],
+    [
+      "short-02.mp4",
+      "4be1ca67db4748da8c1055f8e2870528fea8e9fb119db1232c6c07a769e7e2e9"
+    ]
+  ],
+  "next_step": "Contract-bound one-candidate review-only recovery; no provider/render in phase 1",
+  "sources": [
+    "https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39453449948",
+    "https://github.com/matheusmagah-cpu/heroverse-engine/blob/5ec6ec0265d20f2d9950e900ea9bf43f1038f462/migration/production/shorts_review.py#L85-L106"
+  ]
+}
