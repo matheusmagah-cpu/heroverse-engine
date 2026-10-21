@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Offline failure-evidence tests. No provider, upload, render or live pilot input."""
 import ast
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import hashlib
+import io
 import json
 from pathlib import Path
 import sys
@@ -14,6 +15,7 @@ import urllib.error
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import shorts_review as sr  # noqa: E402
+import structure_mining as sm
 from structure_mining import ProviderFailure  # noqa: E402
 
 FIXED_TIME = datetime(2026, 10, 20, 16, 0, 1, 234567, tzinfo=timezone.utc)
@@ -524,6 +526,258 @@ class ReviewBinding(OfflineTest):
         upload.assert_called_once()
         provider.assert_called_once()
         cleanup.assert_called_once()
+
+
+class HTTPReviewIntegration(OfflineTest):
+    """Full client integration using synthetic bytes and intercepted HTTP only."""
+    def setUp(self):
+        super().setUp()
+        self.elapsed = 0.0
+        self.utc = datetime(2026, 10, 21, 12, tzinfo=timezone.utc)
+        patch.object(sm.time, "monotonic", side_effect=lambda: self.elapsed).start()
+        patch.object(sm, "review_utc_now", side_effect=lambda: self.utc).start()
+        self.sleeper = patch.object(sm.time, "sleep", side_effect=self.advance).start()
+        patch("socket.create_connection", side_effect=AssertionError("NETWORK_FORBIDDEN")).start()
+        self.events, self.payloads, self.effects = [], [], {}
+        self.initial_state = "ACTIVE"
+        self.polls = 0
+        self.active_on_poll = 1
+        self.generations = []
+        self.urlopen = patch("urllib.request.urlopen", side_effect=self.http).start()
+        self.addCleanup(sm.USAGE.clear)
+
+    def advance(self, seconds, utc_seconds=None):
+        self.elapsed += seconds
+        self.utc += timedelta(seconds=seconds if utc_seconds is None else utc_seconds)
+
+    def verdict(self, overall=9):
+        return {**{name: overall for name in sr.RUBRIC}, "overall": overall, "issues": [], "strongest_moment": "synthetic"}
+
+    def response(self, value=None, headers=None, raw=None):
+        return HTTPResponse(json.dumps(value or {}).encode() if raw is None else raw, headers)
+
+    def generated(self, score=9, extra=None):
+        return self.response({"candidates": [{"content": {"parts": [{"text": json.dumps(self.verdict(score) | (extra or {}))}]}}]})
+
+    def error(self, status=503, after=None):
+        headers = {} if after is None else {"Retry-After": after}
+        return urllib.error.HTTPError("https://offline.invalid/secret", status, "secret", headers,
+                io.BytesIO(json.dumps({"error": {"status": "UNAVAILABLE", "message": "secret https://private.invalid"}}).encode()))
+
+    def http(self, request, timeout):
+        if request.get_method() == "DELETE":
+            stage = "DELETE"
+            result = self.response()
+        elif request.full_url.endswith("/upload/v1beta/files"):
+            stage = "UPLOAD_START"
+            result = self.response(headers={"X-Goog-Upload-URL": "https://offline.invalid/upload-finalize"})
+        elif request.full_url.endswith("/upload-finalize"):
+            stage = "UPLOAD_FINALIZE"
+            result = self.response({"file": {"name": "files/offline", "uri": "https://offline.invalid/fileURI", "state": self.initial_state}})
+        elif request.full_url.endswith(":generateContent"):
+            stage = "GENERATE_CONTENT"
+            self.payloads.append(json.loads(request.data))
+            result = self.generations.pop(0) if self.generations else self.generated()
+        else:
+            self.assertTrue(request.full_url.endswith("/v1beta/files/offline"))
+            stage = "FILE_POLL"
+            self.polls += 1
+            result = self.response({"name": "files/offline", "uri": "https://offline.invalid/fileURI",
+                                    "state": "ACTIVE" if self.polls >= self.active_on_poll else "PROCESSING"})
+        self.events.append((stage, timeout))
+        effect = self.effects.get(stage)
+        if effect:
+            effect()
+        if isinstance(result, BaseException):
+            raise result
+        return result
+
+    def invoke(self, cutoff="2026-10-21T13:15:00Z"):
+        policy = sr.ReviewHTTPPolicy(cutoff_utc=cutoff)
+        error = None
+        try:
+            result = sr.review(self.output, {"hook": "synthetic", "qa_output_sha256": ABC_SHA256},
+                               "fake-key", http_policy=policy)
+        except Exception as caught:
+            error = caught
+            result = sr.failure_record(caught, self.output)
+        return result, policy.audit(), error, policy
+
+    def test_opt_in_payload_matches_legacy_exactly_and_does_not_retry_editorial_fail(self):
+        legacy = sr.review(self.output, {"hook": "synthetic", "qa_output_sha256": ABC_SHA256}, "fake-key")
+        payload = self.payloads[-1]
+        self.events.clear()
+        self.generations = [self.generated(3)]
+        result, audit, error, _ = self.invoke()
+        self.assertIsNone(error)
+        self.assertEqual(legacy["status"], "PASS")
+        self.assertEqual(result["status"], "FAIL")
+        self.assertEqual(payload, self.payloads[-1])
+        self.assertEqual([x[0] for x in self.events], ["UPLOAD_START", "UPLOAD_FINALIZE", "GENERATE_CONTENT", "DELETE"])
+        self.assertEqual(audit["http_completion"], "COMPLETED")
+        self.assertEqual(audit["terminal_stage"], "GENERATE_CONTENT")
+        self.assertEqual(audit["cleanup_status"], "SUCCESS")
+        self.sleeper.assert_not_called()
+        self.assertEqual(self.events[-1][1], 5)
+
+    def test_full_retry_trace_is_client_owned_and_contains_no_secrets(self):
+        self.generations = [self.error(after="180"), self.generated(extra={"transport_attempts": [{"secret": "MODEL_TRACE"}],
+                             "http_completion": "FORGED", "http_elapsed_seconds": -1})]
+        result, audit, error, _ = self.invoke()
+        self.assertIsNone(error)
+        self.assertEqual(result["status"], "PASS")
+        self.assertNotIn("transport_attempts", result)
+        self.assertEqual([r["decision"] for r in audit["transport_attempts"]], ["RETRY", "RETURN"])
+        self.assertEqual(audit["http_elapsed_seconds"], 180)
+        self.assertEqual([x[1] for x in self.events], [300, 300, 300, 300, 5])
+        for forbidden in ("secret", "fake-key", "http://", "https://", "fileURI", "MODEL_TRACE", "FORGED"):
+            self.assertNotIn(forbidden, json.dumps(audit))
+
+    def test_files_failures_keep_factual_status_without_upload_retry(self):
+        for stage in ("UPLOAD_START", "UPLOAD_FINALIZE", "FILE_POLL"):
+            with self.subTest(stage=stage):
+                self.events.clear()
+                self.initial_state = "PROCESSING"
+                self.effects = {stage: lambda: (_ for _ in ()).throw(self.error())}
+                result, audit, error, _ = self.invoke()
+                self.assertIsInstance(error, ProviderFailure)
+                self.assertEqual(result["error_code"], "HTTP_503_UNAVAILABLE")
+                self.assertEqual(result["provider_diagnostic"]["http_status"], 503)
+                self.assertEqual(audit["http_completion"], "UPLOAD_FAILED")
+                self.assertEqual(audit["terminal_stage"], stage)
+                self.assertEqual(audit["transport_attempts"], [])
+                self.assertEqual(sum(s == stage for s, _ in self.events), 1)
+                self.assertNotIn("GENERATE_CONTENT", [s for s, _ in self.events])
+                self.assertEqual(audit["cleanup_status"], "SUCCESS" if stage == "FILE_POLL" else "NOT_ATTEMPTED")
+                self.assertNotIn("secret", json.dumps(result))
+
+    def test_cleanup_is_one_bounded_attempt_and_cannot_replace_primary_failure(self):
+        self.generations = [self.error(), self.error()]
+        self.effects["DELETE"] = lambda: (_ for _ in ()).throw(TimeoutError("secret cleanup"))
+        result, audit, _, _ = self.invoke()
+        self.assertEqual(result["error_code"], "HTTP_503_UNAVAILABLE")
+        self.assertEqual(audit["cleanup_status"], "FAILED")
+        self.assertEqual(audit["terminal_stage"], "GENERATE_CONTENT")
+        self.assertEqual(sum(s == "DELETE" for s, _ in self.events), 1)
+        self.assertEqual(self.events[-1][1], 5)
+        self.sleeper.assert_called_once_with(20)
+
+    def test_after_active_cutoff_blocks_generation_but_still_cleans_up(self):
+        self.effects["UPLOAD_FINALIZE"] = lambda: self.advance(2)
+        result, audit, _, _ = self.invoke("2026-10-21T12:00:01Z")
+        self.assertEqual(result["error_code"], "REVIEW_DEADLINE_EXCEEDED")
+        self.assertEqual(audit["http_completion"], "DEADLINE_EXCEEDED")
+        self.assertEqual(audit["terminal_stage"], "UPLOAD_FINALIZE")
+        self.assertEqual(audit["transport_attempts"], [])
+        self.assertEqual([x[0] for x in self.events], ["UPLOAD_START", "UPLOAD_FINALIZE", "DELETE"])
+        self.assertEqual(self.events[-1][1], 5)
+
+    def test_upload_local_read_and_initial_hash_count_towards_budget(self):
+        real_read = Path.read_bytes
+        def slow_read(path):
+            data = real_read(path)
+            self.advance(601, utc_seconds=-500)
+            return data
+        with patch.object(Path, "read_bytes", slow_read):
+            result, audit, _, _ = self.invoke()
+        self.assertEqual(result["error_code"], "REVIEW_BUDGET_EXHAUSTED")
+        self.assertEqual([x[0] for x in self.events], ["UPLOAD_START"])
+        self.assertEqual(audit["http_elapsed_seconds"], 601)
+        self.events.clear()
+        real_digest = sr.output_digest
+        count = [0]
+        def slow_digest(path):
+            count[0] += 1
+            if count[0] == 1:
+                self.advance(601)
+            return real_digest(path)
+        with patch.object(sr, "output_digest", side_effect=slow_digest):
+            result, audit, _, _ = self.invoke()
+        self.assertEqual(result["error_code"], "REVIEW_BUDGET_EXHAUSTED")
+        self.assertEqual(self.events, [])
+        self.assertEqual(audit["terminal_stage"], "NONE")
+
+    def test_poll_wait_and_processing_time_reduce_next_operation_timeout(self):
+        self.initial_state = "PROCESSING"
+        self.effects["UPLOAD_FINALIZE"] = lambda: self.advance(590)
+        result, audit, error, _ = self.invoke()
+        self.assertIsNone(error)
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(audit["http_elapsed_seconds"], 595)
+        self.assertEqual(dict(self.events)["FILE_POLL"], 5)
+        self.assertEqual(dict(self.events)["GENERATE_CONTENT"], 5)
+
+    def test_active_at_final_poll_is_checked_and_never_discards_success(self):
+        self.initial_state = "PROCESSING"
+        self.active_on_poll = 60
+        result, audit, error, _ = self.invoke()
+        self.assertIsNone(error)
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(self.polls, 60)
+        self.assertEqual(audit["http_elapsed_seconds"], 300)
+
+    def test_late_success_and_cleanup_time_remain_noneligible_without_losing_verdict(self):
+        self.effects["GENERATE_CONTENT"] = lambda: self.advance(599)
+        self.effects["DELETE"] = lambda: self.advance(2)
+        result, audit, error, _ = self.invoke()
+        self.assertIsNone(error)
+        self.assertEqual(result["overall"], 9)
+        self.assertEqual(audit["http_elapsed_seconds"], 601)
+        self.assertEqual(audit["http_completion"], "BUDGET_EXHAUSTED")
+        self.assertEqual(audit["transport_attempts"][-1]["decision"], "STOP_BUDGET")
+        self.assertEqual(audit["transport_attempts"][-1]["elapsed_end_seconds"], 599)
+
+    def test_late_pass_and_editorial_fail_are_retained_without_another_transport(self):
+        for score in (3, 9):
+            for deadline in (False, True):
+                with self.subTest(score=score, deadline=deadline):
+                    self.events.clear()
+                    self.utc = datetime(2026, 10, 21, 12, tzinfo=timezone.utc)
+                    self.generations = [self.generated(score)]
+                    self.effects = {"GENERATE_CONTENT": lambda: self.advance(601 if not deadline else 2)}
+                    result, audit, error, _ = self.invoke("2026-10-21T12:00:01Z" if deadline else "2026-10-21T13:15:00Z")
+                    self.assertIsNone(error)
+                    self.assertEqual(result["overall"], score)
+                    self.assertEqual(result["status"], "PASS" if score == 9 else "FAIL")
+                    self.assertEqual(audit["http_completion"], "DEADLINE_EXCEEDED" if deadline else "BUDGET_EXHAUSTED")
+                    self.assertEqual(audit["transport_attempts"][-1]["outcome"], "SUCCESS")
+                    self.assertEqual(audit["transport_attempts"][-1]["decision"], "STOP_DEADLINE" if deadline else "STOP_BUDGET")
+                    self.assertEqual(sum(stage == "GENERATE_CONTENT" for stage, _ in self.events), 1)
+                    self.assertEqual(audit["cleanup_status"], "SUCCESS")
+                    self.sleeper.assert_not_called()
+
+    def test_change_during_cleanup_cannot_leave_a_bound_verdict(self):
+        self.effects["DELETE"] = lambda: self.output.write_bytes(b"changed")
+        result, audit, error, _ = self.invoke()
+        self.assertIsNone(error)
+        self.assertEqual(result["status"], "NOT_REVIEWED_OUTPUT_CHANGED")
+        self.assertNotIn("overall", result)
+        self.assertEqual(audit["cleanup_status"], "SUCCESS")
+
+    def test_unknown_transport_timeout_is_not_reported_as_http_503(self):
+        self.generations = [TimeoutError("HTTP_503_UNAVAILABLE secret")]
+        result, audit, _, _ = self.invoke()
+        self.assertEqual(result["error_code"], "PROVIDER_CALL_FAILED")
+        self.assertEqual(result["provider_diagnostic"], {})
+        self.assertEqual(audit["transport_attempts"][0]["outcome"], "TRANSPORT_ERROR")
+        self.assertIsNone(audit["transport_attempts"][0]["http_status"])
+        self.sleeper.assert_not_called()
+
+    def test_only_three_new_failure_codes_are_added(self):
+        for code in ("RETRY_HINT_INVALID", "REVIEW_BUDGET_EXHAUSTED", "REVIEW_DEADLINE_EXCEEDED"):
+            self.assertEqual(sr.failure_record(ProviderFailure(code), self.output)["error_code"], code)
+        self.assertEqual(sr.failure_record(ProviderFailure("UPLOAD_FAILED"), self.output)["error_code"], "UNKNOWN")
+
+
+class HTTPResponse:
+    def __init__(self, raw, headers=None):
+        self.raw, self.headers, self.status = raw, headers or {}, 200
+    def __enter__(self):
+        return self
+    def __exit__(self, *args):
+        return False
+    def read(self, count=-1):
+        return self.raw if count < 0 else self.raw[:count]
 
 
 if __name__ == "__main__":

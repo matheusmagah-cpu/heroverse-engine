@@ -22,7 +22,12 @@ Model output is MODEL_REPORTED (useful, not proof). Verification of quotes
 against native audio is a separate step (verify_structure.py).
 usage: structure_mining.py OUT_DIR CHANNEL_ID[,CHANNEL_ID...] [PER_CHANNEL]
 """
+from copy import deepcopy
+from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation, ROUND_CEILING
+from email.utils import format_datetime, parsedate_to_datetime
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -108,8 +113,286 @@ def text_of(response):
     return "".join(p.get("text", "") for p in parts)
 
 
-def transport(payload, key, model):
+# The recovery profile is deliberately opt-in. Existing callers retain the
+# legacy transport below, including its return types and argument conventions.
+class ReviewHTTPPolicy:
+    """One review's bounded client-owned state, never model/provider metadata."""
+    name = "designated-review-http-v1"
+
+    def __init__(self, *, cutoff_utc):
+        cutoff = datetime.fromisoformat(cutoff_utc.replace("Z", "+00:00")) if type(cutoff_utc) is str else cutoff_utc
+        if not isinstance(cutoff, datetime) or cutoff.tzinfo is None or cutoff.utcoffset() != timedelta(0):
+            raise ValueError("UTC_CUTOFF_REQUIRED")
+        self._cutoff = cutoff
+        self._started = None
+        self._elapsed = 0.0
+        self._trace = []
+        self._completion = "COMPLETED"
+        self._stage = "NONE"
+        self._cleanup = "NOT_ATTEMPTED"
+        self._file_name = None  # Transient cleanup target; never included in audit.
+
+    def begin(self):
+        if self._started is not None:
+            raise ProviderFailure("PROVIDER_CALL_FAILED")
+        self._started = time.monotonic()
+        self.check()
+
+    def observe(self):
+        if self._started is None:
+            raise ProviderFailure("PROVIDER_CALL_FAILED")
+        elapsed = time.monotonic() - self._started
+        if not math.isfinite(elapsed) or elapsed < 0:
+            raise ProviderFailure("PROVIDER_CALL_FAILED")
+        self._elapsed = max(self._elapsed, elapsed)
+        utc_remaining = (review_utc_now() - self._cutoff).total_seconds()
+        if utc_remaining >= 0:
+            self._completion = "DEADLINE_EXCEEDED"
+        elif self._elapsed >= 600 and self._completion != "DEADLINE_EXCEEDED":
+            self._completion = "BUDGET_EXHAUSTED"
+        return 600 - self._elapsed, -utc_remaining
+
+    def stop_decision(self):
+        return {"BUDGET_EXHAUSTED": "STOP_BUDGET", "DEADLINE_EXCEEDED": "STOP_DEADLINE"}.get(self._completion)
+
+    def check(self):
+        remaining = self.observe()
+        if self.stop_decision():
+            if self._trace and self._trace[-1]["decision"] in ("RETURN", "RETRY"):
+                self._trace[-1]["decision"] = self.stop_decision()
+            raise ProviderFailure("REVIEW_" + self._completion)
+        return remaining
+
+    def timeout(self):
+        return min(300, *self.check())
+
+    def stage(self, name):
+        self.check()
+        self._stage = name
+
+    def wait(self, delay, entry=None):
+        remaining = self.check()
+        if delay >= min(remaining):
+            self._completion = "DEADLINE_EXCEEDED" if remaining[1] <= remaining[0] else "BUDGET_EXHAUSTED"
+            if entry is not None:
+                entry["decision"] = self.stop_decision()
+            raise ProviderFailure("REVIEW_" + self._completion)
+        start = time.monotonic()
+        try:
+            time.sleep(delay)
+        except Exception:
+            if entry is not None:
+                entry["decision"] = "STOP_NONRETRYABLE"
+            raise ProviderFailure("PROVIDER_CALL_FAILED") from None
+        finally:
+            if entry is not None:
+                entry["slept_seconds"] = max(0.0, time.monotonic() - start)
+            self.observe()
+            if entry is not None:
+                if self.stop_decision():
+                    entry["decision"] = self.stop_decision()
+        self.check()
+        if time.monotonic() - start < delay:
+            if entry is not None:
+                entry["decision"] = "STOP_NONRETRYABLE"
+            raise ProviderFailure("PROVIDER_CALL_FAILED")
+
+    def audit(self):
+        self.observe()
+        if self._trace and self._trace[-1]["decision"] in ("RETURN", "RETRY") and self.stop_decision():
+            self._trace[-1]["decision"] = self.stop_decision()
+        return deepcopy({"transport_attempts": self._trace, "http_completion": self._completion,
+                         "terminal_stage": self._stage, "cleanup_status": self._cleanup,
+                         "http_elapsed_seconds": self._elapsed})
+
+
+def review_utc_now():
+    return datetime.now(timezone.utc)
+
+
+def _strict_json(raw):
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("DUPLICATE_JSON_KEY")
+            result[key] = value
+        return result
+
+    def invalid_constant(value):
+        raise ValueError("INVALID_JSON_CONSTANT")
+
+    return json.loads(raw, object_pairs_hook=unique, parse_constant=invalid_constant)
+
+
+def _retry_hints(headers, raw, received_at):
+    """Parse only original bounded inputs. Never retain headers/body/error prose."""
+    if type(raw) is not bytes or len(raw) > 8192:
+        raise ValueError("RETRY_HINT_INVALID")
+    body = _strict_json(raw)
+    if type(body) is not dict or type(body.get("error")) is not dict:
+        raise ValueError("RETRY_HINT_INVALID")
+    values = [] if headers is None else [value for name, value in headers.items() if name.lower() == "retry-after"]
+    if len(values) > 1:
+        raise ValueError("RETRY_HINT_INVALID")
+    retry_after = None
+    if values:
+        value = values[0]
+        if type(value) is not str or len(value) > 128 or not value.isascii():
+            raise ValueError("RETRY_HINT_INVALID")
+        value = value.strip(" \t")
+        if re.fullmatch(r"[0-9]+", value):
+            retry_after = int(value)
+        else:
+            parsed = parsedate_to_datetime(value)
+            if parsed.tzinfo is None or parsed.utcoffset() != timedelta(0) or format_datetime(parsed, usegmt=True) != value:
+                raise ValueError("RETRY_HINT_INVALID")
+            retry_after = math.ceil(max(0, (parsed - received_at).total_seconds()))
+    details = body["error"].get("details", [])
+    if type(details) is not list:
+        raise ValueError("RETRY_HINT_INVALID")
+    retry_info = None
+    for detail in details:
+        if type(detail) is not dict or detail.get("@type") != "type.googleapis.com/google.rpc.RetryInfo":
+            continue
+        value = detail.get("retryDelay")
+        if type(value) is not str or not re.fullmatch(r"[0-9]+(?:\.[0-9]{1,9})?s", value):
+            raise ValueError("RETRY_HINT_INVALID")
+        seconds = Decimal(value[:-1])
+        if seconds > Decimal("315576000000"):
+            raise ValueError("RETRY_HINT_INVALID")
+        seconds = int(seconds.to_integral_value(rounding=ROUND_CEILING))
+        retry_info = max(retry_info or 0, seconds)
+    return retry_after, retry_info
+
+
+def review_provider_failure(error, key):
+    """Factual HTTP status with the existing bounded diagnostic allowlist."""
+    try:
+        raw = error.read(8193)
+    except Exception:
+        raw = b""
+    diagnostic = sanitized_provider_error(raw, error.code, key)
+    code = f"HTTP_{error.code}_{diagnostic.get('provider_status', '')}"
+    if error.code == 429:
+        code += ":QUOTA"
+    return ProviderFailure(code, diagnostic), raw
+
+
+def _review_transport(payload, key, model, policy):
+    import urllib.error
+    import urllib.request
+    if model != "gemini-3.8-flash" or len(policy._trace) >= 2:
+        raise ProviderFailure("PROVIDER_CALL_FAILED")
+    policy.check()
+    req = urllib.request.Request(
+        "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+        data=canonical(payload), method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": key})
+    policy.stage("GENERATE_CONTENT")
+    timeout = policy.timeout()
+    entry = {"attempt": len(policy._trace) + 1, "started_at": review_utc_now().isoformat(),
+             "elapsed_start_seconds": policy._elapsed, "elapsed_end_seconds": policy._elapsed,
+             "outcome": "TRANSPORT_ERROR", "http_status": None, "provider_status": None,
+             "retry_after_seconds": None, "retry_info_seconds": None, "selected_delay_seconds": None,
+             "slept_seconds": 0.0, "decision": "STOP_NONRETRYABLE"}
+    policy._trace.append(entry)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            entry["http_status"] = response.status
+            # A received late response is evidence, not permission for another
+            # request. Socket timeouts cannot forcibly cancel a running read.
+            policy.observe()
+            raw = response.read(4_000_001)
+        policy.observe()
+        try:
+            if len(raw) > 4_000_000:
+                raise ValueError()
+            result = _strict_json(raw)
+            if type(result) is not dict:
+                raise ValueError()
+        except (ValueError, TypeError, UnicodeError, RecursionError):
+            entry["outcome"] = "UNPARSEABLE_MODEL_OUTPUT"
+            raise ProviderFailure("UNPARSEABLE_MODEL_OUTPUT") from None
+        return result
+    except urllib.error.HTTPError as error:
+        received_at = review_utc_now()
+        entry.update(outcome="HTTP_ERROR", http_status=error.code)
+        failure, raw = review_provider_failure(error, key)
+        entry["provider_status"] = (failure.diagnostic or {}).get("provider_status")
+        if error.code == 503:
+            try:
+                after, info = _retry_hints(error.headers, raw, received_at)
+                entry.update(retry_after_seconds=after, retry_info_seconds=info,
+                             selected_delay_seconds=max(20, after or 0, info or 0))
+            except (ValueError, TypeError, OverflowError, UnicodeError, RecursionError, InvalidOperation):
+                entry["decision"] = "STOP_HINT_INVALID"
+                failure = ProviderFailure("RETRY_HINT_INVALID", failure.diagnostic)
+        raise failure from None
+    except ProviderFailure:
+        raise
+    except Exception:
+        raise ProviderFailure("PROVIDER_CALL_FAILED") from None
+    finally:
+        policy.observe()
+        entry["elapsed_end_seconds"] = policy._elapsed
+
+
+def _review_call(payload, key, models, policy):
+    if tuple(models) != ("gemini-3.8-flash",):
+        raise ProviderFailure("PROVIDER_CALL_FAILED")
+    model = models[0]
+    for attempt in range(2):
+        policy.check()
+        prior_count = len(policy._trace)
+        try:
+            response = transport(payload, key, model, http_policy=policy)
+            try:
+                report = _strict_json(text_of(response))
+                if type(report) is not dict:
+                    raise ValueError()
+            except (ValueError, TypeError, KeyError, AttributeError, IndexError, UnicodeError, RecursionError):
+                if len(policy._trace) > prior_count:
+                    policy._trace[-1]["outcome"] = "UNPARSEABLE_MODEL_OUTPUT"
+                raise ProviderFailure("UNPARSEABLE_MODEL_OUTPUT") from None
+            # Model metadata can never become trusted client evidence, even if
+            # it happens to use the audit field names.
+            for field in ("transport_attempts", "http_completion", "terminal_stage", "cleanup_status",
+                          "http_elapsed_seconds", "http_policy"):
+                report.pop(field, None)
+            USAGE.append({"model": model, **(response.get("usageMetadata") or {})})
+            policy.observe()
+            entry = policy._trace[-1]
+            entry.update(outcome="SUCCESS", elapsed_end_seconds=policy._elapsed,
+                         decision=policy.stop_decision() or "RETURN")
+            return model, report
+        except ProviderFailure as failure:
+            policy.observe()
+            if len(policy._trace) <= prior_count:
+                raise
+            entry = policy._trace[-1]
+            entry["elapsed_end_seconds"] = policy._elapsed
+            if failure.code == "RETRY_HINT_INVALID":
+                entry["decision"] = "STOP_HINT_INVALID"
+                raise
+            if policy.stop_decision():
+                entry["decision"] = policy.stop_decision()
+                raise
+            # Only the transport records HTTP_ERROR from an actual HTTPError.
+            if entry["outcome"] != "HTTP_ERROR" or entry["http_status"] != 503:
+                entry["decision"] = "STOP_NONRETRYABLE"
+                raise
+            if attempt == 1:
+                entry["decision"] = "STOP_FINAL"
+                raise
+            entry["decision"] = "RETRY"
+            policy.wait(entry["selected_delay_seconds"], entry)
+    raise ProviderFailure("PROVIDER_CALL_FAILED")
+
+
+def transport(payload, key, model, *, http_policy=None):
     """One call to a free model; the key travels only in the header; errors are sanitised."""
+    if http_policy is not None:
+        return _review_transport(payload, key, model, http_policy)
     import urllib.error
     import urllib.request
     if model not in FREE_MODELS:
@@ -129,8 +412,10 @@ def transport(payload, key, model):
         raise ProviderFailure("PROVIDER_CALL_FAILED") from None
 
 
-def call(payload, key, models):
+def call(payload, key, models, *, http_policy=None):
     """Free models only, in order; a quota answer moves to the next free model, never to a paid one."""
+    if http_policy is not None:
+        return _review_call(payload, key, models, http_policy)
     last, diagnostic = None, None
     for model in models:
         for attempt in range(2):

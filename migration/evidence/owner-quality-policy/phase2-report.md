@@ -1197,3 +1197,33 @@ The first body-only PATCH was denied at 10:04 UTC because exact replacement-payl
 Independent contract review PASS and card_check CARD_OK apply to that payload, not implementation or media. Current work is phase6; previous execution permissions remain consumed. Full v8 above is historical, not a concurrent rule.
 
 Initial implementation progress: shorts-review.yml changes only --recovery-list to --http-recovery-list and --recover-review to --recover-http-review in the two authorized run bodies. Its historical static integration assertion follows those tokens while retaining the caf36 baseline and all outside-body checks. python3 -I -B migration/publish/test_review_recovery.py: 28 tests, 0.310s, OK, exit0. git diff --check PASS. The new HTTP implementation and its complete acceptance are pending; no provider call is authorized by this partial draft evidence.
+
+### Initial draft CI failure, preserved rather than hidden
+
+Draft SHA0a40215c4638d5a5f32a46612c72ba5ab2e4c5b4 ran CI39587769097/job119180840616 and failed. The fetched real log identifies only test_shorts_006_plan.py test_workflow_recovery_routing: StopIteration at line808 while searching the old --recovery-list token. The draft had changed routing before the adapter test update was delivered. The 33-test adapter suite reported one error; the other47 registered files passed. This is not a provider failure or qualified delivery. The correction updates that routing assertion to the new CLI and retains a reversible full-workflow baseline check; no test or gate is removed. No unchanged CI rerun was requested.
+Source: https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39587769097/job/119180840616
+
+### Phase 6 code acceptance before delivery
+
+The implementation uses the opt-in designated-review-http-v1 policy only in the separately pinned006 recovery. Other callers retain their legacy behavior. The new policy uses at most two generateContent transports, the same designated model and unchanged payload, a600-second monotonic budget, the real UTC deadline, strict original Retry-After/RetryInfo parsing, and no final sleep. It does not claim to repair the provider's internal availability.
+
+Client diagnostics are produced by code, not model output. The new audit preserves the prior v1 dictionary and both previous503 records. It records real timing, stage, HTTP status, cleanup and completion; malformed, late or incomplete results remain ineligible. Actual output bytes and source evidence are revalidated before/after the one invocation. An uncertain or unrecorded outcome is not permission to redispatch.
+
+Implementation review caught and corrected these pre-delivery defects:
+- Sleep duration was initially counted twice between the policy and pure validator.
+- Final503 hints and a partial HTTP200 read-timeout needed factual negative trace handling.
+- An interrupted partial sleep must be preserved as terminal negative, without authorizing a second transport.
+- An integrity failure after provider activity must preserve validated client trace in ERROR where available, never promote eligibility.
+No production request was made while diagnosing these issues.
+
+Known-answer semantic antidote, fully mocked HTTP against baseline d11e195 and corrected opt-in code:
+- Retry-After180: old sleeps20 (FAIL); corrected sleeps180 (PASS).
+- Two503: old sleeps20 and40 (FAIL); corrected sleeps180 once and stops (PASS).
+- 503 followed by invalid200 JSON: old terminal diagnostic retains503 (FAIL); corrected terminal diagnostic has no stale503 (PASS).
+All six observations were asserted; script exited0. These are resilience proofs, not media or service-health evidence.
+
+Worker suites:30 mining tests and46 reviewer tests PASS;47 adapter tests PASS. Executor personally ran the47-test adapter suite:11.540s, OK, exit0. Root technical direction personally ran the frozen bytes at11:02 UTC: mining30tests0.071sOK; reviewer46tests0.124sOK; adapter47tests6.286sOK, all exit0. These are technical tests by dot, not owner/Claude review or watched media review.
+
+Static acceptance: git diff --check PASS; card_check CARD_OK; dot_scope IN_SCOPE10files. Six AST assignments (rubric, thresholds, model tuple, prompt, schema and payload) are unchanged. Sixteen frozen whole files including all12 qa_criteria.json files, STANDARD, shorts_qa,005finalizer and historical recovery are byte-identical including newline. The complete registered48-file test loop and final independent review/remote CI are recorded separately after completion; not presumed PASS here.
+
+Full registered test loop completed at11:03 UTC: all48 files PASS, aggregate exit0. The producer suite within it ran104tests67.303sOK; no synthetic test qualifies actual media. Independent technical review of frozen bytes also PASS: personal suites47adapter,30mining,46reviewer,58publisher,13pending,28historical recovery and3error-register tests. Reviewer confirmed legacy transport/call/request/upload AST after removing only opt-in branches, exact two-token workflow change, unchanged media/quality gates and one exact v8 archive. Final remote bytes, exact-SHA CI and operational preflight remain required before a real recovery.

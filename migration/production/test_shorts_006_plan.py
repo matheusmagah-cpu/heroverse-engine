@@ -2,7 +2,7 @@
 """Offline synthetic contracts, not media qualification or production evidence."""
 from contextlib import contextmanager, ExitStack, redirect_stdout
 from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import hashlib
 import io
 import json
@@ -803,11 +803,14 @@ class RecoveryTests(unittest.TestCase):
                     body.append(lines[i][10:] if lines[i].startswith('          ') else lines[i]); i += 1
                 bodies.append(''.join(body)); retained.append('          <AUTHORIZED_RUN_BODY>\n')
         self.assertEqual(len(bodies), 2)
+        restored = ''.join(lines).replace('--http-recovery-list', '--recovery-list').replace('--recover-http-review', '--recover-review')
+        self.assertEqual(hashlib.sha256(restored.encode()).hexdigest(),
+                         'e5097d90f29312d33e8ce802010fd4c17b1f747c0d59d412efc572baf5b7aade')
         self.assertEqual(hashlib.sha256(''.join(retained).encode()).hexdigest(),
                          'cd02f50ffd4190677b3ff99da555ddd84b90d91fb59708348a42bf7e498d24c2')
-        download = next(body for body in bodies if '--recovery-list' in body)
-        review = next(body for body in bodies if '--recover-review' in body)
-        for body, command in ((download,'--recovery-list'),(review,'--recover-review')):
+        download = next(body for body in bodies if '--http-recovery-list' in body)
+        review = next(body for body in bodies if '--recover-http-review' in body)
+        for body, command in ((download,'--http-recovery-list'),(review,'--recover-http-review')):
             self.assertIn('if [ "$PILOT" = pilot-006 ]; then', body)
             branch = body.split('then',1)[1].split('else',1)[0]
             self.assertIn('shorts_006_plan.py ' + command, branch)
@@ -815,6 +818,486 @@ class RecoveryTests(unittest.TestCase):
             self.assertNotIn('shorts_produce', branch)
         self.assertIn('shorts_review.py "migration/production/$PILOT/shorts" 3', review.split('else',1)[1])
         self.assertIn("json.load(open(sys.argv[1]))['shorts']", download.split('else',1)[1])
+
+def http_trace_fixture(*, retry=False):
+    def entry(attempt, start, end, outcome='SUCCESS', status=200, decision='RETURN'):
+        return {'attempt': attempt, 'started_at': NOW.isoformat(), 'elapsed_start_seconds': start,
+                'elapsed_end_seconds': end, 'outcome': outcome, 'http_status': status,
+                'provider_status': None, 'retry_after_seconds': None, 'retry_info_seconds': None,
+                'selected_delay_seconds': None, 'slept_seconds': 0., 'decision': decision}
+    trace = [entry(1, 1., 2.)]
+    if retry:
+        trace[0].update(outcome='HTTP_ERROR', http_status=503, provider_status='UNAVAILABLE',
+                        retry_after_seconds=20, selected_delay_seconds=20, slept_seconds=20., decision='RETRY')
+        trace.append(entry(2, 22., 23.))
+    return {'transport_attempts': trace, 'http_completion': 'COMPLETED', 'terminal_stage': 'GENERATE_CONTENT',
+            'cleanup_status': 'SUCCESS', 'http_elapsed_seconds': 24. if retry else 3.}
+
+
+@contextmanager
+def http_recovery_environment(tmp, *, retry=False):
+    """Closed synthetic v1 history; no live JSON is imported or used as fixture."""
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+    with recovery_environment(tmp) as f, ExitStack() as stack:
+        previous = deepcopy(ep.HTTP_PREVIOUS_REVIEW); previous['output_sha256'] = OUTPUT_HASH
+        old = ep._attempt_constants() | {'run_id': ep.HTTP_RECOVERY_SOURCE_RUN, 'run_attempt': 1,
+            'started_at': '2026-10-21T11:01:00+00:00', 'completed_at': '2026-10-21T11:02:00+00:00',
+            'state': 'COMPLETE', 'previous_review': deepcopy(ep.RECOVERY_PREVIOUS_REVIEW),
+            'fresh_qa': deepcopy(f['fresh']), 'reason': None}
+        for name, value in [('HTTP_RECOVERY_OUTPUT_SHA256', OUTPUT_HASH), ('HTTP_PREVIOUS_REVIEW', previous),
+                            ('HTTP_PREVIOUS_ATTEMPT', old), ('HTTP_PREVIOUS_ATTEMPT_SHA256', ep._canonical_sha256(old))]:
+            stack.enter_context(patch.object(ep, name, value))
+        spec = deepcopy(f['original'])
+        spec['correction_review_attempt'] = deepcopy(old)
+        spec['shorts'][0]['review'] = deepcopy(previous)
+        spec = ep.finalize_manifest(spec, actual_output_sha256=OUTPUT_HASH, now_utc=NOW,
+            media_checks=f['media'], media_sha256=f['media_hash'], contract=ep._contract())
+        assert spec['finalization']['status'] == 'COMPLETE', spec['release_status']
+        ep.atomic_json(f['path'], spec)
+        stack.enter_context(patch.object(ep, 'HTTP_RECOVERY_MANIFEST_SHA256', ep.hash_file(f['path'])))
+        audit = http_trace_fixture(retry=retry)
+        policy = SimpleNamespace(audit=Mock(side_effect=lambda: deepcopy(audit)))
+        f['reviewer'].ReviewHTTPPolicy = Mock(return_value=policy)
+        f['reviewer'].failure_record.return_value = deepcopy(previous)
+        yield f | {'original': spec, 'raw': f['path'].read_bytes(), 'audit': audit, 'policy': policy}
+
+
+class HTTPRecoveryTests(unittest.TestCase):
+    def test_code_owned_pins_and_unchanged_historical_authority(self):
+        self.assertEqual(ep.HTTP_RECOVERY_OUTPUT_SHA256, ep.RECOVERY_OUTPUT_SHA256)
+        self.assertEqual(ep._canonical_sha256(ep.HTTP_PREVIOUS_ATTEMPT), ep.HTTP_PREVIOUS_ATTEMPT_SHA256)
+        self.assertEqual(ep._canonical_sha256(ep.HTTP_PREVIOUS_REVIEW),
+                         '6da5d959548fe499e0aeb6a0eed52a1a757f0fcf44d7fb39d1db9f659a514457')
+        self.assertEqual(ep.HTTP_PREVIOUS_ATTEMPT['previous_review'], ep.RECOVERY_PREVIOUS_REVIEW)
+        self.assertEqual(ep.HTTP_RECOVERY_MANIFEST_SHA256,
+                         '856f2765f104a1a98a54ec322784302066b545882595290020cf672183ebf9f8')
+        self.assertEqual(ep.RECOVERY_MANIFEST_SHA256,
+                         'a33d46db02ee419c357ae4ecefeee615b3d6ac32af143e85814cfbcb82bd1418')
+
+    def test_list_document_only_closed_cli_and_old_cli_consumed(self):
+        with tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+            (f['path'].parent / 'short-00.mp4').unlink()
+            with redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(ep.cli(['--http-recovery-list', str(f['pilot'])]), 0)
+            self.assertEqual(out.getvalue(), 'short-00.mp4 ' + OUTPUT_HASH + '\n')
+            for args in (['--recover-http-review', str(f['pilot']), '--clock', NOW.isoformat()],
+                         ['--http-recovery-list', str(f['pilot']), OUTPUT_HASH],
+                         ['--recovery-list', str(f['pilot'])], ['--recover-review', str(f['pilot'])]):
+                with self.subTest(args=args), redirect_stdout(io.StringIO()): self.assertEqual(ep.cli(args), 1)
+            self.assertEqual(f['path'].read_bytes(), f['raw'])
+            f['reviewer'].review.assert_not_called(); f['qa_mock'].assert_not_called()
+            f['reviewer'].ReviewHTTPPolicy.assert_not_called()
+
+    def test_pass_one_or_two_transports_preserves_both_503s_and_v1(self):
+        for retry in (False, True):
+            with self.subTest(retry=retry), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp, retry=retry) as f:
+                result = ep.recover_http_review(f['pilot'])
+                self.assertEqual(result['release_status'], 'READY'); self.assertTrue(result['shorts'][0]['publish'])
+                self.assertEqual(result['correction_review_attempt'], f['original']['correction_review_attempt'])
+                audit = result['correction_http_recovery_attempt']
+                self.assertEqual(audit['previous_review'], f['original']['shorts'][0]['review'])
+                self.assertEqual(audit['previous_attempt_sha256'], ep._canonical_sha256(result['correction_review_attempt']))
+                self.assertEqual(audit['fresh_qa'], f['fresh'])
+                self.assertEqual({k: audit[k] for k in ep.HTTP_AUDIT_KEYS}, f['audit'])
+                self.assertEqual(result['shorts'][0]['qa'], f['original']['shorts'][0]['qa'])
+                ep._recovery_whitelist(f['original'], result, attempt_key='correction_http_recovery_attempt')
+                self.assertEqual(ep.binding(result, plan_sha256=f['plan_hash'], history_sha256=f['history_hash'])['output_sha256'], OUTPUT_HASH)
+                f['reviewer'].ReviewHTTPPolicy.assert_called_once_with(cutoff_utc=ep.LEAD_DEADLINE)
+                f['reviewer'].review.assert_called_once_with(f['path'].parent / 'short-00.mp4',
+                    f['original']['shorts'][0], 'synthetic-no-network', http_policy=f['policy'])
+                f['policy'].audit.assert_called_once(); f['reviewer'].main.assert_not_called()
+                with self.assertRaisesRegex(ep.EvidenceError, 'HTTP_RECOVERY_SOURCE_CHANGED'):
+                    ep.recover_http_review(f['pilot'])
+                self.assertEqual(f['reviewer'].review.call_count, 1)
+                self.assertFalse(list(f['path'].parent.glob('.correction-http-review-*')))
+
+    def test_complete_negative_review_and_http_outcomes(self):
+        for kind in ('floor', 'fail', '503', 'exception', 'budget', 'deadline', 'upload', 'elapsed', 'cleanup_failed'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+                if kind == 'floor': f['reviewer'].review.return_value['overall'] = 8.99
+                elif kind == 'fail': f['reviewer'].review.return_value.update(status='FAIL', edit_rhythm=6.5)
+                elif kind in ('503', 'exception'):
+                    f['reviewer'].review.return_value = deepcopy(ep.HTTP_PREVIOUS_REVIEW)
+                    f['audit']['transport_attempts'][0].update(outcome='HTTP_ERROR', http_status=503,
+                        provider_status='UNAVAILABLE', decision='STOP_BUDGET', selected_delay_seconds=600)
+                    # A valid hint too large for the remaining budget: no sleep.
+                    f['audit']['transport_attempts'][0]['retry_after_seconds'] = 600
+                    f['audit']['http_completion'] = 'BUDGET_EXHAUSTED'
+                    if kind == 'exception': f['reviewer'].review.side_effect = RuntimeError('SECRET MUST NOT ESCAPE')
+                elif kind in ('budget', 'deadline'):
+                    f['audit']['http_completion'] = 'BUDGET_EXHAUSTED' if kind == 'budget' else 'DEADLINE_EXCEEDED'
+                    f['audit']['transport_attempts'][0]['decision'] = 'STOP_BUDGET' if kind == 'budget' else 'STOP_DEADLINE'
+                    if kind == 'budget': f['audit']['http_elapsed_seconds'] = 601.
+                elif kind == 'upload':
+                    f['audit'].update(http_completion='UPLOAD_FAILED', terminal_stage='UPLOAD_START', transport_attempts=[], cleanup_status='NOT_ATTEMPTED')
+                    f['reviewer'].review.return_value = deepcopy(ep.HTTP_PREVIOUS_REVIEW)
+                elif kind == 'elapsed': f['audit']['http_elapsed_seconds'] = 601.
+                else: f['audit']['cleanup_status'] = 'FAILED'
+                with redirect_stdout(io.StringIO()) as out:
+                    self.assertEqual(ep.cli(['--recover-http-review', str(f['pilot'])]), 0)
+                result = ep.read_json(f['path'])[0]
+                self.assertEqual(result['finalization']['status'], 'COMPLETE')
+                self.assertEqual(result['correction_http_recovery_attempt']['state'], 'COMPLETE')
+                self.assertEqual(result['shorts'][0]['publish'], kind == 'cleanup_failed')
+                self.assertEqual(result['correction_review_attempt'], f['original']['correction_review_attempt'])
+                self.assertNotIn('SECRET', f['path'].read_text() + out.getvalue())
+                self.assertEqual(f['reviewer'].review.call_count, 1)
+                if kind == 'exception': f['reviewer'].failure_record.assert_called_once()
+
+    def test_no_guard_never_qualifies_current_output_pass_or_fail(self):
+        with tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+            def evaluate(spec):
+                return ep.finalize_manifest(spec, actual_output_sha256=OUTPUT_HASH, now_utc=NOW,
+                    media_checks=f['media'], media_sha256=f['media_hash'], contract=ep._contract())
+            self.assertEqual(evaluate(f['original'])['release_status'], 'REVIEW_NOT_REVIEWED')
+            first = deepcopy(f['original']); first.pop('correction_review_attempt')
+            first['shorts'][0]['review'] = deepcopy(ep.RECOVERY_PREVIOUS_REVIEW)
+            self.assertEqual(evaluate(first)['release_status'], 'REVIEW_NOT_REVIEWED')
+            for version in ('first', 'second'):
+                for verdict in ('PASS', 'FAIL'):
+                    spec = deepcopy(first if version == 'first' else f['original'])
+                    spec['shorts'][0]['review'] = deepcopy(f['reviewer'].review.return_value)
+                    if verdict == 'FAIL': spec['shorts'][0]['review'].update(status='FAIL', edit_rhythm=6.5)
+                    result = evaluate(spec)
+                    with self.subTest(version=version, verdict=verdict):
+                        self.assertEqual(result['finalization']['status'], 'ERROR')
+                        self.assertFalse(result['shorts'][0]['publish'])
+                        self.assertIn(result['release_status'], ('HTTP_ATTEMPT_REQUIRED', 'CORRECTION_ATTEMPT_REQUIRED'))
+
+    def test_precheck_failures_preserve_input_and_make_no_call(self):
+        for kind in ('key', 'attempt2', 'source_run1', 'source_run2', 'run_bool', 'hash', 'size', 'symlink',
+                     'qa_fail', 'qa_error', 'qa_changed_output', 'source_changed', 'media_changed', 'before', 'after'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+                mp4 = f['path'].parent / 'short-00.mp4'
+                if kind == 'key': ep.os.environ['HERO_GEMINI_API_KEY'] = ' '
+                elif kind == 'attempt2': ep.os.environ['GITHUB_RUN_ATTEMPT'] = '2'
+                elif kind == 'source_run1': ep.os.environ['GITHUB_RUN_ID'] = ep.RECOVERY_SOURCE_RUN
+                elif kind == 'source_run2': ep.os.environ['GITHUB_RUN_ID'] = ep.HTTP_RECOVERY_SOURCE_RUN
+                elif kind == 'run_bool': ep.os.environ['GITHUB_RUN_ID'] = 'True'
+                elif kind == 'hash': mp4.write_bytes(b'x' * len(OUTPUT_BYTES))
+                elif kind == 'size': mp4.write_bytes(OUTPUT_BYTES + b'x')
+                elif kind == 'symlink':
+                    other = Path(tmp) / 'alias.mp4'; other.write_bytes(OUTPUT_BYTES); mp4.unlink(); mp4.symlink_to(other)
+                elif kind == 'qa_fail': f['fresh']['status'] = 'FAIL'; f['fresh']['checks']['decode_clean'] = False
+                elif kind == 'qa_error': f['qa_mock'].side_effect = RuntimeError('private diagnostic')
+                elif kind == 'qa_changed_output':
+                    def change(path): path.write_bytes(b'x' * len(OUTPUT_BYTES)); return f['fresh']
+                    f['qa_mock'].side_effect = change
+                elif kind == 'source_changed': (f['pilot'] / 'script.json').write_text('{}')
+                elif kind == 'media_changed': (f['path'].parent / ep.MEDIA_FILE).write_text('{}')
+                elif kind == 'before': f['clock'].now.return_value = ep.utc_date('2026-10-21T09:59:59Z')
+                else: f['clock'].now.return_value = ep.utc_date('2026-10-21T13:15:01Z')
+                with redirect_stdout(io.StringIO()): self.assertEqual(ep.cli(['--recover-http-review', str(f['pilot'])]), 1)
+                self.assertEqual(f['path'].read_bytes(), f['raw'])
+                f['reviewer'].review.assert_not_called(); f['reviewer'].ReviewHTTPPolicy.assert_not_called()
+
+    def test_semantic_preflight_cannot_accept_mutated_histories_even_if_repin(self):
+        for kind in ('first503', 'second503', 'v1', 'v1_missing', 'PASS', 'FAIL', '429', 'audit', 'publish',
+                     'qa', 'file', 'pilot', 'future_media', 'stale_media', 'previous_fail'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+                spec = deepcopy(f['original']); rec = spec['shorts'][0]
+                if kind == 'first503': spec['correction_review_attempt']['previous_review']['failed_at'] = NOW.isoformat()
+                elif kind == 'second503': rec['review']['failed_at'] = NOW.isoformat()
+                elif kind == 'v1': spec['correction_review_attempt']['run_id'] = '999'
+                elif kind == 'v1_missing': spec.pop('correction_review_attempt')
+                elif kind in ('PASS', 'FAIL'): rec['review'] = deepcopy(f['reviewer'].review.return_value); rec['review']['status'] = kind
+                elif kind == '429': rec['review']['provider_diagnostic']['http_status'] = 429
+                elif kind == 'audit': spec['correction_http_recovery_attempt'] = {}
+                elif kind == 'publish': rec['publish'] = True
+                elif kind == 'qa': rec['qa']['status'] = 'FAIL'; rec['qa']['checks']['decode_clean'] = False
+                elif kind == 'file': rec['file'] = 'short-01.mp4'
+                elif kind == 'pilot': spec['source_pilot'] = 'pilot-005'
+                elif kind == 'previous_fail': rec['previous_editorial_review'] = {'status': 'FAIL', 'output_sha256': OUTPUT_HASH}
+                else:
+                    media = deepcopy(f['media']); media['measured_at'] = '2026-10-22T11:00:00Z' if kind == 'future_media' else '2026-10-20T11:00:00Z'
+                    ep.atomic_json(f['path'].parent / ep.MEDIA_FILE, media)
+                    digest = ep.hash_file(f['path'].parent / ep.MEDIA_FILE)
+                    rec.update(media_checks=media, media_checks_sha256=digest)
+                    ep.RECOVERY_MEDIA_SHA256 = digest
+                ep.atomic_json(f['path'], spec); raw = f['path'].read_bytes()
+                with patch.object(ep, 'HTTP_RECOVERY_MANIFEST_SHA256', ep.hash_file(f['path'])):
+                    with self.assertRaises(ep.EvidenceError): ep.recover_http_review(f['pilot'])
+                self.assertEqual(f['path'].read_bytes(), raw); f['reviewer'].review.assert_not_called()
+
+    def test_guard_closed_schema_pins_chronology_and_authority(self):
+        with tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+            result = ep.recover_http_review(f['pilot'])
+            def bind(spec): return ep.binding(spec, plan_sha256=f['plan_hash'], history_sha256=f['history_hash'])
+            for key, value in [('extra', 1), ('run_attempt', True), ('run_attempt', 2), ('run_id', ep.RECOVERY_SOURCE_RUN),
+                              ('run_id', ep.HTTP_RECOVERY_SOURCE_RUN), ('source_manifest_sha256', '0'*64),
+                              ('previous_attempt_sha256', '0'*64), ('previous_review', {}), ('http_policy', 'other'),
+                              ('reason', 'SECRET'), ('fresh_qa', {}), ('started_at', '2026-10-21T12:00:00'),
+                              ('completed_at', '2026-10-21T11:59:59Z'), ('state', 'STARTED'), ('state', 'ERROR'),
+                              ('http_completion', None), ('terminal_stage', 'DELETE'), ('cleanup_status', 'UNKNOWN'),
+                              ('http_elapsed_seconds', True), ('http_elapsed_seconds', float('nan')), ('http_elapsed_seconds', -1)]:
+                forged = deepcopy(result); forged['correction_http_recovery_attempt'][key] = value
+                with self.subTest(key=key, value=value), self.assertRaises(ep.EvidenceError): bind(forged)
+            for location in ('correction_review_attempt', 'correction_http_recovery_attempt'):
+                forged = deepcopy(result); forged[location]['previous_review']['error_code'] = 'CHANGED'
+                with self.subTest(location=location), self.assertRaises(ep.EvidenceError): bind(forged)
+            for key in ('owner_exception', 'review_recovery', 'review_recovery_execution'):
+                forged = deepcopy(result); forged['correction_http_recovery_attempt'][key] = {}
+                with self.assertRaises(ep.EvidenceError): bind(forged)
+            for status in ('PASS', 'FAIL'):
+                forged = deepcopy(result); forged.pop('correction_http_recovery_attempt'); forged['shorts'][0]['review']['status'] = status
+                with self.assertRaisesRegex(ep.EvidenceError, 'HTTP_ATTEMPT_REQUIRED'): bind(forged)
+            for state in ('STARTED', 'ERROR'):
+                forged = deepcopy(result); audit = forged['correction_http_recovery_attempt']
+                audit.update(state=state, reason=None if state == 'STARTED' else 'OPERATION_ERROR',
+                             completed_at=None if state == 'STARTED' else NOW.isoformat())
+                if state == 'STARTED': audit.update(transport_attempts=[], http_completion=None, http_elapsed_seconds=None,
+                                                     terminal_stage='NONE', cleanup_status='NOT_ATTEMPTED')
+                with self.assertRaisesRegex(ep.EvidenceError, 'HTTP_ATTEMPT_NOT_COMPLETE'): bind(forged)
+
+    def test_forged_trace_cannot_qualify(self):
+        changes = [('attempt', True), ('attempt', 2), ('extra', 'SECRET'), ('started_at', '2026-10-21T12:00:00'),
+                   ('started_at', '2026-10-21T11:59:59Z'), ('started_at', '2026-10-21T12:00:01Z'),
+                   ('elapsed_start_seconds', -1), ('elapsed_end_seconds', 4), ('elapsed_end_seconds', float('inf')),
+                   ('http_status', True), ('http_status', 503), ('provider_status', 'SECRET'), ('outcome', 'MODEL_PASS'),
+                   ('selected_delay_seconds', 20), ('retry_after_seconds', 20), ('slept_seconds', 20),
+                   ('decision', 'RETRY'), ('decision', 'STOP_FINAL'), ('decision', 'STOP_HINT_INVALID'),
+                   ('decision', 'STOP_NONRETRYABLE')]
+        with tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+            result = ep.recover_http_review(f['pilot'])
+            for key, value in changes:
+                forged = deepcopy(result); forged['correction_http_recovery_attempt']['transport_attempts'][0][key] = value
+                with self.subTest(key=key, value=value), self.assertRaises(ep.EvidenceError):
+                    ep.binding(forged, plan_sha256=f['plan_hash'], history_sha256=f['history_hash'])
+            for trace in ([], None, [result['correction_http_recovery_attempt']['transport_attempts'][0]] * 3):
+                forged = deepcopy(result); forged['correction_http_recovery_attempt']['transport_attempts'] = trace
+                with self.subTest(trace=trace), self.assertRaises(ep.EvidenceError):
+                    ep.binding(forged, plan_sha256=f['plan_hash'], history_sha256=f['history_hash'])
+        with tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp, retry=True) as f:
+            result = ep.recover_http_review(f['pilot'])
+            for index, key, value in [(0, 'http_status', 429), (0, 'decision', 'STOP_FINAL'), (0, 'slept_seconds', 19),
+                                      (0, 'selected_delay_seconds', 19), (0, 'retry_after_seconds', 21),
+                                      (1, 'elapsed_start_seconds', 21), (1, 'attempt', 1), (1, 'slept_seconds', 1)]:
+                forged = deepcopy(result); forged['correction_http_recovery_attempt']['transport_attempts'][index][key] = value
+                with self.subTest(index=index, key=key), self.assertRaises(ep.EvidenceError):
+                    ep.binding(forged, plan_sha256=f['plan_hash'], history_sha256=f['history_hash'])
+
+    def test_races_and_atomic_failures_never_install_partial_ready(self):
+        for kind in ('manifest', 'mp4', 'media', 'source', 'whitelist', 'v1', 'finalizer', 'atomic', 'last_contract_manifest'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f, ExitStack() as stack:
+                review = deepcopy(f['reviewer'].review.return_value)
+                def act(*args, **kwargs):
+                    if kind == 'manifest': f['path'].write_bytes(b'{"concurrent":"actor"}\n')
+                    elif kind == 'mp4': (f['path'].parent / 'short-00.mp4').write_bytes(b'x'*len(OUTPUT_BYTES))
+                    elif kind == 'media': (f['path'].parent / ep.MEDIA_FILE).write_text('{}')
+                    elif kind == 'source': (f['pilot'] / 'script.json').write_text('{}')
+                    return review
+                f['reviewer'].review.side_effect = act
+                if kind in ('whitelist', 'v1', 'finalizer'):
+                    original_finalize = ep.finalize_file
+                    def damage(path, mp4):
+                        result = original_finalize(path, mp4)
+                        if kind == 'whitelist': result['shorts'][0]['text'] = 'mutated'
+                        elif kind == 'v1': result['correction_review_attempt']['run_id'] = '999'
+                        else: result['finalization']['status'] = 'ERROR'
+                        return result
+                    stack.enter_context(patch.object(ep, 'finalize_file', side_effect=damage))
+                if kind == 'last_contract_manifest':
+                    original_contract, original_stable = ep._contract, ep._recovery_stable
+                    count = [0]
+                    def stable(*args): count[0] += 1; return original_stable(*args)
+                    def contract():
+                        result = original_contract()
+                        if count[0] == 4: f['path'].write_bytes(b'{"concurrent":"actor"}\n')
+                        return result
+                    stack.enter_context(patch.object(ep, '_recovery_stable', side_effect=stable))
+                    stack.enter_context(patch.object(ep, '_contract', side_effect=contract))
+                if kind == 'atomic':
+                    original_atomic = ep.atomic_json
+                    def atomic(path, value):
+                        if Path(path) == f['path'] and value.get('release_status') == 'READY': raise OSError('SECRET')
+                        return original_atomic(path, value)
+                    stack.enter_context(patch.object(ep, 'atomic_json', side_effect=atomic))
+                with redirect_stdout(io.StringIO()): self.assertEqual(ep.cli(['--recover-http-review', str(f['pilot'])]), 1)
+                result = ep.read_json(f['path'])[0]
+                if kind in ('manifest', 'last_contract_manifest'): self.assertEqual(result, {'concurrent': 'actor'})
+                else:
+                    self.assertFalse(result['shorts'][0]['publish'])
+                    self.assertEqual(result['correction_http_recovery_attempt']['state'], 'ERROR')
+                    self.assertIn(result['correction_http_recovery_attempt']['reason'], ep.RECOVERY_ERRORS)
+                    self.assertEqual({key: result['correction_http_recovery_attempt'][key] for key in ep.HTTP_AUDIT_KEYS}, f['audit'])
+                    self.assertEqual(result['correction_review_attempt'], f['original']['correction_review_attempt'])
+                self.assertEqual(f['reviewer'].review.call_count, 1)
+                self.assertFalse(list(f['path'].parent.glob('.correction-http-review-*')))
+
+    def test_started_identity_races_do_not_overwrite_foreign_state(self):
+        for when in ('before', 'after'):
+            with self.subTest(when=when), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+                foreign = b'{"concurrent":"never overwrite"}\n'
+                if when == 'before':
+                    calls = [0]
+                    def clock(*args):
+                        calls[0] += 1
+                        if calls[0] == 3: f['path'].write_bytes(foreign)
+                        return NOW
+                    f['clock'].now.side_effect = clock
+                    with self.assertRaisesRegex(ep.EvidenceError, 'INPUT_CHANGED'): ep.recover_http_review(f['pilot'])
+                else:
+                    original_atomic = ep.atomic_json
+                    def race(path, value):
+                        original_atomic(path, value)
+                        if Path(path) == f['path'] and value.get('correction_http_recovery_attempt', {}).get('state') == 'STARTED':
+                            f['path'].write_bytes(foreign)
+                    with patch.object(ep, 'atomic_json', side_effect=race):
+                        with self.assertRaisesRegex(ep.EvidenceError, 'INPUT_CHANGED'): ep.recover_http_review(f['pilot'])
+                f['reviewer'].review.assert_not_called(); self.assertEqual(f['path'].read_bytes(), foreign)
+
+    def test_finalization_rehash_cutoff_and_slow_preprovider_checks(self):
+        for kind in ('pure_changes_mp4', 'final_rehash_crosses_cutoff', 'preprovider_check_crosses_cutoff', 'finalizer_crosses_cutoff'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f, ExitStack() as stack:
+                count = [0]
+                if kind == 'pure_changes_mp4':
+                    original = ep.finalize_manifest
+                    def finalize(*args, **kwargs):
+                        result = original(*args, **kwargs); count[0] += 1
+                        if count[0] == 2: (f['path'].parent / 'short-00.mp4').write_bytes(b'x' * len(OUTPUT_BYTES))
+                        return result
+                    stack.enter_context(patch.object(ep, 'finalize_manifest', side_effect=finalize))
+                elif kind == 'finalizer_crosses_cutoff':
+                    original = ep.finalize_file
+                    def finalize(*args):
+                        result = original(*args); f['clock'].now.return_value = ep.utc_date('2026-10-21T13:15:01Z'); return result
+                    stack.enter_context(patch.object(ep, 'finalize_file', side_effect=finalize))
+                else:
+                    original = ep._recovery_stable
+                    def stable(*args):
+                        original(*args); count[0] += 1
+                        if count[0] == (1 if kind == 'preprovider_check_crosses_cutoff' else 4):
+                            f['clock'].now.return_value = ep.utc_date('2026-10-21T13:15:01Z')
+                    stack.enter_context(patch.object(ep, '_recovery_stable', side_effect=stable))
+                with redirect_stdout(io.StringIO()): code = ep.cli(['--recover-http-review', str(f['pilot'])])
+                result = ep.read_json(f['path'])[0]
+                self.assertFalse(result['shorts'][0]['publish'])
+                if kind in ('final_rehash_crosses_cutoff', 'finalizer_crosses_cutoff'):
+                    self.assertEqual(code, 0); self.assertEqual(result['release_status'], 'TARGET_SLOT_LEAD_MISSED')
+                    self.assertEqual(result['finalization']['status'], 'COMPLETE')
+                    self.assertEqual(result['finalization']['validated_at'], '2026-10-21T13:15:01+00:00')
+                else:
+                    self.assertEqual(code, 1); self.assertEqual(result['correction_http_recovery_attempt']['state'], 'ERROR')
+                self.assertEqual(f['reviewer'].review.call_count, 0 if kind == 'preprovider_check_crosses_cutoff' else 1)
+
+    def test_policy_audit_not_model_fields_and_bad_audit_is_integrity_error(self):
+        with tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+            f['reviewer'].review.return_value['transport_attempts'] = [{'untrusted': 'not the client trace'}]
+            result = ep.recover_http_review(f['pilot'])
+            self.assertEqual(result['correction_http_recovery_attempt']['transport_attempts'], f['audit']['transport_attempts'])
+        with tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f:
+            f['audit']['extra'] = 'SECRET'
+            with redirect_stdout(io.StringIO()) as out: self.assertEqual(ep.cli(['--recover-http-review', str(f['pilot'])]), 1)
+            result = ep.read_json(f['path'])[0]
+            self.assertFalse(result['shorts'][0]['publish']); self.assertEqual(result['correction_http_recovery_attempt']['state'], 'ERROR')
+            self.assertNotIn('SECRET', f['path'].read_text() + out.getvalue())
+
+    def test_real_policy_review_and_adapter_integrate_without_network(self):
+        import importlib.util
+        import urllib.error
+        from email.message import Message
+        for terminal in ('success', '503', 'malformed503', 'timeout200', 'invalid200', 'invalid_candidate200',
+                         'late_budget', 'late_deadline', 'cleanup_budget', 'partial_sleep', 'interrupted_sleep'):
+            with self.subTest(terminal=terminal), tempfile.TemporaryDirectory() as tmp, http_recovery_environment(tmp) as f, ExitStack() as stack:
+                # Load the real reviewer without leaving a provider import behind
+                # in the legacy no-provider-import test's process state.
+                module_spec = importlib.util.spec_from_file_location('offline_real_short_review', HERE / 'shorts_review.py')
+                sr = importlib.util.module_from_spec(module_spec); module_spec.loader.exec_module(sr)
+                import structure_mining as sm
+                stack.enter_context(patch.dict(sys.modules, {'shorts_review': sr}))
+                clock, calls, sleeps = [0.], [], []
+                def current(): return NOW + timedelta(seconds=clock[0])
+                def sleep(seconds):
+                    sleeps.append(seconds)
+                    clock[0] += 5 if terminal in ('partial_sleep', 'interrupted_sleep') else seconds
+                    if terminal == 'interrupted_sleep': raise RuntimeError('SECRET interrupted wait')
+                stack.enter_context(patch.object(sm.time, 'monotonic', side_effect=lambda: clock[0]))
+                stack.enter_context(patch.object(sm.time, 'sleep', side_effect=sleep))
+                stack.enter_context(patch.object(sm, 'review_utc_now', side_effect=current))
+                f['clock'].now.side_effect = lambda *args: current()
+                sr_clock = stack.enter_context(patch.object(sr, 'datetime')); sr_clock.now.side_effect = lambda *args: current()
+                report = {key: 9. for key in ep.RUBRIC}
+                report.update(overall=9., issues=[], strongest_moment='synthetic complete review',
+                              transport_attempts=[{'forged': 'model trace'}], http_elapsed_seconds=0)
+                body = json.dumps({'candidates': [{'content': {'parts': [{'text': json.dumps(report)}]}}]}).encode()
+                class Response:
+                    status = 200
+                    def __init__(self, data=b'{}', headers=None, error=None): self.data, self.headers, self.error = data, headers or {}, error
+                    def __enter__(self): return self
+                    def __exit__(self, *args): return False
+                    def read(self, *args):
+                        if self.error: raise self.error
+                        return self.data
+                def unavailable(raw=b'{"error":{"status":"UNAVAILABLE"}}'):
+                    return urllib.error.HTTPError('https://example.invalid/private', 503, 'private diagnostic', Message(), io.BytesIO(raw))
+                generation = [0]
+                def open_mock(request, timeout):
+                    calls.append((request.method, request.full_url, timeout)); clock[0] += 1
+                    if request.method == 'DELETE':
+                        if terminal == 'cleanup_budget': clock[0] = 601.
+                        return Response()
+                    if ':generateContent' in request.full_url:
+                        generation[0] += 1
+                        if generation[0] == 1: raise unavailable()
+                        if terminal == '503': raise unavailable()
+                        if terminal == 'malformed503': raise unavailable(b'not JSON')
+                        if terminal == 'timeout200': return Response(error=TimeoutError('SECRET'))
+                        if terminal == 'invalid200': return Response(b'not JSON')
+                        if terminal == 'invalid_candidate200': return Response(b'{"candidates":[{"content":{"parts":[{"text":"not JSON"}]}}]}')
+                        if terminal == 'late_budget': clock[0] = 601.
+                        elif terminal == 'late_deadline': clock[0] = 4501.
+                        return Response(body)
+                    if request.headers.get('X-goog-upload-command') == 'start':
+                        return Response(headers={'X-Goog-Upload-URL': 'https://example.invalid/upload'})
+                    return Response(json.dumps({'file': {'name': 'files/offline', 'state': 'ACTIVE',
+                        'uri': 'https://example.invalid/file'}}).encode())
+                network = stack.enter_context(patch('urllib.request.urlopen', side_effect=open_mock))
+                with redirect_stdout(io.StringIO()) as out:
+                    self.assertEqual(ep.cli(['--recover-http-review', str(f['pilot'])]), 0)
+                result = ep.read_json(f['path'])[0]
+                self.assertEqual(result['finalization']['status'], 'COMPLETE')
+                self.assertEqual(result['shorts'][0]['publish'], terminal == 'success')
+                self.assertEqual(result['correction_review_attempt'], f['original']['correction_review_attempt'])
+                audit = result['correction_http_recovery_attempt']; trace = audit['transport_attempts']
+                interrupted = terminal in ('partial_sleep', 'interrupted_sleep')
+                self.assertEqual(len(trace), 1 if interrupted else 2); self.assertEqual(sleeps, [20])
+                self.assertEqual(generation[0], 1 if interrupted else 2)
+                self.assertEqual(trace[0]['decision'], 'STOP_NONRETRYABLE' if interrupted else 'RETRY')
+                self.assertEqual(trace[0]['slept_seconds'], 5 if interrupted else 20)
+                if not interrupted:
+                    self.assertGreaterEqual(trace[1]['elapsed_start_seconds'], trace[0]['elapsed_end_seconds'] + trace[0]['slept_seconds'])
+                self.assertEqual(audit['cleanup_status'], 'SUCCESS'); self.assertEqual(audit['terminal_stage'], 'GENERATE_CONTENT')
+                self.assertEqual(sum(method == 'DELETE' for method, _, _ in calls), 1)
+                self.assertEqual(network.call_count, 4 if interrupted else 5)
+                self.assertNotIn('SECRET', f['path'].read_text() + out.getvalue())
+                self.assertNotIn('transport_attempts', result['shorts'][0]['review'])
+                if terminal == 'success':
+                    self.assertEqual(trace[-1]['outcome'], 'SUCCESS'); self.assertEqual(trace[-1]['decision'], 'RETURN')
+                    self.assertEqual(result['release_status'], 'READY')
+                elif interrupted:
+                    self.assertEqual(result['shorts'][0]['review']['error_code'], 'PROVIDER_CALL_FAILED')
+                    self.assertEqual(trace[-1]['outcome'], 'HTTP_ERROR'); self.assertEqual(trace[-1]['http_status'], 503)
+                elif terminal in ('late_budget', 'late_deadline', 'cleanup_budget'):
+                    completion = 'DEADLINE_EXCEEDED' if terminal == 'late_deadline' else 'BUDGET_EXHAUSTED'
+                    self.assertEqual(audit['http_completion'], completion)
+                    self.assertEqual(result['release_status'], 'HTTP_' + completion)
+                    self.assertEqual(trace[-1]['outcome'], 'SUCCESS')
+                    self.assertEqual(trace[-1]['decision'], 'STOP_DEADLINE' if terminal == 'late_deadline' else 'STOP_BUDGET')
+                    self.assertEqual(result['shorts'][0]['review']['status'], 'PASS')
+                elif terminal == '503':
+                    self.assertEqual(trace[-1]['decision'], 'STOP_FINAL'); self.assertEqual(trace[-1]['selected_delay_seconds'], 20)
+                elif terminal == 'malformed503':
+                    self.assertEqual(trace[-1]['decision'], 'STOP_HINT_INVALID')
+                    self.assertEqual(result['shorts'][0]['review']['error_code'], 'RETRY_HINT_INVALID')
+                elif terminal == 'timeout200':
+                    self.assertEqual(trace[-1]['outcome'], 'TRANSPORT_ERROR'); self.assertEqual(trace[-1]['http_status'], 200)
+                    self.assertEqual(result['shorts'][0]['review']['error_code'], 'PROVIDER_CALL_FAILED')
+                    self.assertEqual(result['shorts'][0]['review']['provider_diagnostic'], {})
+                else:
+                    self.assertEqual(trace[-1]['outcome'], 'UNPARSEABLE_MODEL_OUTPUT'); self.assertEqual(trace[-1]['http_status'], 200)
+                    self.assertEqual(result['shorts'][0]['review']['error_code'], 'UNPARSEABLE_MODEL_OUTPUT')
+                    self.assertEqual(result['shorts'][0]['review']['provider_diagnostic'], {})
 
 
 if __name__ == '__main__':
