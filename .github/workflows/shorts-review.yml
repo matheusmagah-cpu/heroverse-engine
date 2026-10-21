@@ -34,7 +34,7 @@ jobs:
           sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
           d="migration/production/$PILOT/shorts"
           if [ "$PILOT" = pilot-006 ]; then
-            python3 -I -B migration/production/shorts_006_plan.py --recovery-list "migration/production/$PILOT"
+            python3 -I -B migration/production/shorts_006_plan.py --http-recovery-list "migration/production/$PILOT"
           else
             python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts']]" "$d/shorts.json"
           fi |
@@ -48,7 +48,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$PILOT" = pilot-006 ]; then
-            python3 -I -B migration/production/shorts_006_plan.py --recover-review "migration/production/$PILOT"
+            python3 -I -B migration/production/shorts_006_plan.py --recover-http-review "migration/production/$PILOT"
           else
             python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3
           fi

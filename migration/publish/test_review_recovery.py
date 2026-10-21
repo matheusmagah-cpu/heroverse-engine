@@ -240,12 +240,12 @@ class Recovery(unittest.TestCase):
         text = workflow.read_text()
         old_list = '          python3 -I -c "import json,sys;[print(s[\'file\'],s[\'sha256\']) for s in json.load(open(sys.argv[1]))[\'shorts\']]" "$d/shorts.json" |\n'
         new_list = ('          if [ "$PILOT" = pilot-006 ]; then\n'
-                    '            python3 -I -B migration/production/shorts_006_plan.py --recovery-list "migration/production/$PILOT"\n'
+                    '            python3 -I -B migration/production/shorts_006_plan.py --http-recovery-list "migration/production/$PILOT"\n'
                     '          else\n' + '  ' + old_list.rstrip(' |\n') + '\n'
                     '          fi |\n')
         old_review = '        run: python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3\n'
         new_review = ('        run: |\n          set -euo pipefail\n          if [ "$PILOT" = pilot-006 ]; then\n'
-                      '            python3 -I -B migration/production/shorts_006_plan.py --recover-review "migration/production/$PILOT"\n'
+                      '            python3 -I -B migration/production/shorts_006_plan.py --recover-http-review "migration/production/$PILOT"\n'
                       '          else\n            python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3\n          fi\n')
         self.assertEqual(text.count(new_list), 1)
         self.assertEqual(text.count(new_review), 1)
