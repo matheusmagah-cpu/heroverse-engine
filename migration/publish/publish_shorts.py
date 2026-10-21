@@ -46,6 +46,30 @@ def description_for(short, long_url, long_title):
             "Pray this with me and type AMEN if you receive it.\n\n#prayer #morningprayer #jesus #faith #shorts")
 
 
+REST_OUTPUT_SHA256 = "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e"
+
+
+def _rest_correction(short, pilot):
+    return pilot == "pilot-006" and short.get("sha256") == REST_OUTPUT_SHA256
+
+
+def _rest_identity(short):
+    expected = {"file": "short-00.mp4", "title": "Rest in God's Care",
+                "hook": "Let your face soften.", "reference": None}
+    return all(key in short and short[key] == value for key, value in expected.items())
+
+
+def metadata_for(short, long_url, long_title, *, pilot=None):
+    """Formatting only. New-upload authority remains in the existing gates."""
+    if _rest_correction(short, pilot):
+        return {"title": "Rest in God's Care #shorts",
+                "description": f"▶ Full prayer: {long_url}\n{long_title}\n\n"
+                               "A quiet moment to rest in God's care.\n\n#prayer #rest #jesus #faith #shorts",
+                "tags": ["prayer", "rest", "christian reflection", "jesus", "faith", "shorts"]}
+    return {"title": title_for(short), "description": description_for(short, long_url, long_title),
+            "tags": ["prayer", "morning prayer", "jesus", "faith", "bible", "shorts"]}
+
+
 def utc_now():
     return datetime.now(timezone.utc)
 
@@ -81,7 +105,7 @@ def atomic_json(path, value):
             os.unlink(tmp)
 
 
-def observe_video(session, video_id):
+def observe_video(session, video_id, *, include_tags=False):
     """Authenticated GET only; never serialize raw exceptions or responses."""
     fields = {"video_id": ("id",), "channel_id": ("snippet", "channelId"),
               "title": ("snippet", "title"), "description": ("snippet", "description"),
@@ -91,6 +115,8 @@ def observe_video(session, video_id):
               "publish_at": ("status", "publishAt"), "license": ("status", "license"),
               "contains_synthetic_media": ("status", "containsSyntheticMedia"),
               "processing_status": ("processingDetails", "processingStatus")}
+    if include_tags:
+        fields["tags"] = ("snippet", "tags")
     observation = {k: None for k in fields}
     observation.update(observed_at=utc_now().isoformat(), unknown_fields={})
     try:
@@ -105,7 +131,8 @@ def observe_video(session, video_id):
             for key in path:
                 value = value.get(key) if isinstance(value, dict) else None
             expected_type = bool if name == "contains_synthetic_media" else str
-            if type(value) is expected_type:
+            valid = (type(value) is list and all(type(tag) is str for tag in value)) if name == "tags" else type(value) is expected_type
+            if valid:
                 observation[name] = value
             else:
                 observation["unknown_fields"][name] = "MISSING_OR_INVALID_FIELD"
@@ -115,7 +142,7 @@ def observe_video(session, video_id):
         return observation, "READBACK_UNAVAILABLE"
 
 
-def verification(observation, error, video_id, slot, expected, now=None):
+def _verification(observation, error, video_id, slot, expected, now=None):
     now = now or utc_now()
     if error:
         return "VERIFICATION_UNKNOWN", error
@@ -156,6 +183,19 @@ def verification(observation, error, video_id, slot, expected, now=None):
         return "VERIFICATION_UNKNOWN", "UNRECOGNIZED_PROCESSING_STATUS"
     return ("SCHEDULED_VERIFIED" if now < target else "PUBLIC_VERIFIED"), None
 
+
+
+def verification(observation, error, video_id, slot, expected, now=None):
+    status, reason = _verification(observation, error, video_id, slot, expected, now)
+    # Never mask an established identity/privacy/processing failure with an
+    # unknown optional field. Legacy expected dictionaries do not contain tags.
+    if "tags" in expected and not error and status != "VERIFICATION_FAIL":
+        tags = observation.get("tags")
+        if type(tags) is not list or any(type(tag) is not str for tag in tags):
+            return "VERIFICATION_UNKNOWN", "MISSING_TAGS"
+        if tags != expected["tags"]:
+            return "VERIFICATION_FAIL", "MISMATCH_TAGS"
+    return status, reason
 
 
 def exception_binding(spec):
@@ -276,6 +316,13 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     if len(slots) < len(todo):
         raise SystemExit(f"NOT_ENOUGH_SLOTS {len(slots)} slots for {len(todo)} Shorts to upload")
     slot_of = dict(zip((r["sha256"] for r in todo), slots))
+    # Closed NEW correction identity check before session/credentials. Existing
+    # IDs bypass this check and retain authenticated readback even if local
+    # editorial fields are absent or inconsistent.
+    if spec.get("source_pilot") == "pilot-006" and spec.get("finalization", {}).get("kind") == "pilot-006-correction-v1":
+        for short in todo:
+            if not _rest_correction(short, spec["source_pilot"]) or not _rest_identity(short):
+                raise SystemExit("CORRECTION_METADATA_IDENTITY_MISMATCH")
     reports = {}
     for short in todo:  # files of Shorts already uploaded were deleted from the release; nothing to check there
         if not pending_shorts.approved(short):
@@ -304,8 +351,12 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
             consumption = pe.validate_consumption(ledger, binding, run_key=run_key, video_id=entry.get("video_id"))
             if consumption["mode"] == "readback_only" and not entry.get("video_id"):
                 raise SystemExit("EXCEPTION_ID_REQUIRES_LEDGER_RECONCILIATION")
-        expected = {"title": title_for(short), "description": description_for(
-            short, f"https://youtu.be/{long_id}", long["snippet"]["title"])}
+        rest = _rest_correction(short, spec.get("source_pilot"))
+        local_metadata_mismatch = rest and not _rest_identity(short)
+        metadata = metadata_for(short, f"https://youtu.be/{long_id}", long["snippet"]["title"], pilot=spec.get("source_pilot"))
+        expected = {"title": metadata["title"], "description": metadata["description"]}
+        if rest:
+            expected["tags"] = metadata["tags"]
         if "video_id" not in entry:
             if recovery is not None and utc_now() > utc_instant(recovery["release_deadline"]):
                 raise SystemExit("TARGET_SLOT_LEAD_MISSED")
@@ -316,8 +367,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
                     raise ValueError("PAST_SLOT")
             except (ValueError, TypeError):
                 raise SystemExit("INVALID_OR_PAST_UPLOAD_SLOT")
-            body = {"snippet": {"title": title_for(short), "description": description_for(short, f"https://youtu.be/{long_id}", long["snippet"]["title"]),
-                                "tags": ["prayer", "morning prayer", "jesus", "faith", "bible", "shorts"],
+            body = {"snippet": {"title": metadata["title"], "description": metadata["description"],
+                                "tags": metadata["tags"],
                                 "categoryId": "22", "defaultLanguage": "en", "defaultAudioLanguage": "en"},
                     "status": {"privacyStatus": "private", "publishAt": slot, "selfDeclaredMadeForKids": False,
                                "embeddable": True, "license": "youtube", "publicStatsViewable": True,
@@ -339,18 +390,18 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
                 entry["owner_exception_id"] = binding["exception_id"]
             ledger["entries"][key] = entry
             atomic_json(ledger_path, ledger)  # durable ID before readback
-        result = {"key": key, "file": short["file"], "output_sha256": entry.get("output_sha256"),
+        result = {"key": key, "file": "short-00.mp4" if rest else short["file"], "output_sha256": entry.get("output_sha256"),
                   "expected_output_sha256": short["sha256"],
                   "upload_status": None, "video_id": entry["video_id"],
                   "url": f"https://youtube.com/shorts/{entry['video_id']}",
-                  "slot": entry["slot"], "title": title_for(short),
+                  "slot": entry["slot"], "title": metadata["title"],
                   "verification_status": "VERIFICATION_UNKNOWN", "verification_reason": "READBACK_PENDING",
                   "observation": None}
         if binding is not None:
             result["owner_exception_id"] = binding["exception_id"]
         out.append(result)
         atomic_json(receipt_path, receipt)  # accepted ID survives readback failure
-        observation, error = observe_video(s, entry["video_id"])
+        observation, error = observe_video(s, entry["video_id"], include_tags=True) if rest else observe_video(s, entry["video_id"])
         verification_slot = target_slot if target_slot is not None else entry["slot"]
         status, reason = verification(observation, error, entry["video_id"], verification_slot, expected)
         if target_slot is not None:
@@ -367,6 +418,8 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
             status, reason = "VERIFICATION_FAIL", "OUTPUT_SHA256_MISMATCH"
         elif bound_hash is None and status != "VERIFICATION_FAIL":
             status, reason = "VERIFICATION_UNKNOWN", "OUTPUT_SHA256_UNRECORDED"
+        if local_metadata_mismatch and status != "VERIFICATION_FAIL" and reason != "OUTPUT_SHA256_UNRECORDED":
+            status, reason = "VERIFICATION_UNKNOWN", "LOCAL_METADATA_IDENTITY_MISMATCH"
         result.update(upload_status=observation["upload_status"], observation=observation,
                       verification_status=status, verification_reason=reason)
         entry["verification"] = {"status": status, "reason": reason, "observation": observation}
