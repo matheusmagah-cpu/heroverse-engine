@@ -277,30 +277,34 @@
     "status": "PASS"
    },
    "review": {
-    "status": "NOT_REVIEWED_ProviderFailure",
-    "error_code": "HTTP_503_UNAVAILABLE",
-    "failed_at": "2026-10-21T09:17:47.236719+00:00",
-    "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
-    "provider_diagnostic": {
-     "http_status": 503,
-     "provider_status": "UNAVAILABLE",
-     "body_truncated": false,
-     "raw_body_retained": false,
-     "sanitized": true,
-     "body_parse_status": "JSON_ERROR_OBJECT",
-     "body_bytes_read": 198
-    }
+    "hook_in_first_2s": 7.0,
+    "captions_readable_and_synced": 9.2,
+    "text_clear_of_shorts_ui": 9.5,
+    "picture_quality": 8.5,
+    "edit_rhythm": 6.8,
+    "audio_clarity": 9.2,
+    "stands_alone": 9.5,
+    "ending_and_loop": 8.0,
+    "policy_safe": 10.0,
+    "overall": 8.3,
+    "issues": [
+     "00:00 - 00:20: The first background loop stays on screen for 20 seconds with minimal dynamic camera motion, which can feel static for short-form video.",
+     "00:20: The visual transition between the pond and the fountain is a hard cut rather than a soft dissolve, briefly breaking the gentle, calming flow."
+    ],
+    "strongest_moment": "00:18 - 00:22 where the voiceover delivers 'You do not have to hold yourself up tonight. You are held.' paired with the ambient water visuals, creating an effective feeling of release and calm.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e"
    },
    "owner_quality_policy": {
     "minimum_overall": 9.0,
     "status": "FAIL",
     "problems": [
      "REVIEW_NOT_PASS",
-     "REVIEW_MODEL_NOT_DESIGNATED",
-     "OVERALL_INVALID"
+     "OVERALL_OUTSIDE_OWNER_RANGE"
     ]
    },
-   "release_status": "REVIEW_NOT_REVIEWED"
+   "release_status": "REVIEW_FAIL"
   }
  ],
  "edit_plan": {
@@ -404,7 +408,7 @@
   }
  },
  "publish": false,
- "release_status": "REVIEW_NOT_REVIEWED",
+ "release_status": "REVIEW_FAIL",
  "review_rubric": {
   "items": [
    "hook_in_first_2s",
@@ -429,8 +433,8 @@
   "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
   "target_slot": "2026-10-21T14:00:00Z",
   "release_deadline": "2026-10-21T13:15:00Z",
-  "validated_at": "2026-10-21T09:17:47.377766+00:00",
-  "release_status": "REVIEW_NOT_REVIEWED"
+  "validated_at": "2026-10-21T11:13:13.963838+00:00",
+  "release_status": "REVIEW_FAIL"
  },
  "correction_review_attempt": {
   "version": "shorts-006-review-attempt-v1",
@@ -478,5 +482,74 @@
    "status": "PASS"
   },
   "reason": null
+ },
+ "correction_http_recovery_attempt": {
+  "version": "shorts-006-http-review-attempt-v1",
+  "source_run_id": "39575597092",
+  "source_manifest_sha256": "856f2765f104a1a98a54ec322784302066b545882595290020cf672183ebf9f8",
+  "media_sha256": "6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200",
+  "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+  "not_before": "2026-10-21T10:00:00Z",
+  "cutoff": "2026-10-21T13:15:00Z",
+  "target_slot": "2026-10-21T14:00:00Z",
+  "previous_attempt_sha256": "c9c707beb0b6cfbfd6f8512ec4a705482a267d0be15c12a1e9dbcefed289c3e3",
+  "http_policy": "designated-review-http-v1",
+  "run_id": "39590168285",
+  "run_attempt": 1,
+  "started_at": "2026-10-21T11:12:53.675794+00:00",
+  "completed_at": "2026-10-21T11:13:13.899293+00:00",
+  "state": "COMPLETE",
+  "previous_review": {
+   "status": "NOT_REVIEWED_ProviderFailure",
+   "error_code": "HTTP_503_UNAVAILABLE",
+   "failed_at": "2026-10-21T09:17:47.236719+00:00",
+   "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+   "provider_diagnostic": {
+    "http_status": 503,
+    "provider_status": "UNAVAILABLE",
+    "body_truncated": false,
+    "raw_body_retained": false,
+    "sanitized": true,
+    "body_parse_status": "JSON_ERROR_OBJECT",
+    "body_bytes_read": 198
+   }
+  },
+  "fresh_qa": {
+   "file": "migration/production/pilot-006/shorts/short-00.mp4",
+   "seconds": 42.0,
+   "lufs": -15.0,
+   "true_peak_dbtp": -2.4,
+   "checks": {
+    "decode_clean": true,
+    "one_h264_1080x1920": true,
+    "fps_30": true,
+    "one_aac_stereo_48k": true,
+    "duration": true,
+    "loudness": true,
+    "true_peak": true
+   },
+   "status": "PASS"
+  },
+  "reason": null,
+  "transport_attempts": [
+   {
+    "attempt": 1,
+    "started_at": "2026-10-21T11:13:00.206149+00:00",
+    "elapsed_start_seconds": 6.498335835999995,
+    "elapsed_end_seconds": 19.77918857399999,
+    "outcome": "SUCCESS",
+    "http_status": 200,
+    "provider_status": null,
+    "retry_after_seconds": null,
+    "retry_info_seconds": null,
+    "selected_delay_seconds": null,
+    "slept_seconds": 0.0,
+    "decision": "RETURN"
+   }
+  ],
+  "http_completion": "COMPLETED",
+  "terminal_stage": "GENERATE_CONTENT",
+  "cleanup_status": "SUCCESS",
+  "http_elapsed_seconds": 20.163633543999993
  }
 }
