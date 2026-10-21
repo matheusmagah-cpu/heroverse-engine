@@ -514,5 +514,308 @@ class PlanTests(unittest.TestCase):
         self.assertNotIn('shorts_review', sys.modules)
 
 
+@contextmanager
+def recovery_environment(tmp):
+    """Synthetic files/pins and inert QA/reviewer modules, never live fixtures."""
+    from types import SimpleNamespace
+    from unittest.mock import Mock
+    with synthetic_environment(tmp) as f, ExitStack() as stack:
+        previous = deepcopy(ep.RECOVERY_PREVIOUS_REVIEW)
+        previous['output_sha256'] = OUTPUT_HASH
+        for name, value in [('RECOVERY_OUTPUT_SHA256', OUTPUT_HASH), ('RECOVERY_OUTPUT_BYTES', len(OUTPUT_BYTES)),
+                            ('RECOVERY_PREVIOUS_REVIEW', previous), ('RECOVERY_MEDIA_SHA256', f['media_hash'])]:
+            stack.enter_context(patch.object(ep, name, value))
+        spec = deepcopy(f['spec'])
+        spec['shorts'][0]['review'] = previous
+        spec = ep.finalize_manifest(spec, actual_output_sha256=OUTPUT_HASH, now_utc=NOW,
+            media_checks=f['media'], media_sha256=f['media_hash'], contract=ep._contract())
+        path = f['pilot'] / 'shorts/shorts.json'
+        ep.atomic_json(path, spec)
+        stack.enter_context(patch.object(ep, 'RECOVERY_MANIFEST_SHA256', ep.hash_file(path)))
+        fresh = deepcopy(spec['shorts'][0]['qa']); fresh['file'] = str(path.parent / 'short-00.mp4')
+        reviewer = SimpleNamespace(review=Mock(return_value=deepcopy(f['spec']['shorts'][0]['review'])),
+            failure_record=Mock(return_value=deepcopy(previous)), main=Mock(side_effect=AssertionError('main forbidden')))
+        qa = SimpleNamespace(check=Mock(return_value=fresh))
+        stack.enter_context(patch.dict(sys.modules, {'shorts_review': reviewer, 'shorts_qa': qa}))
+        stack.enter_context(patch.dict(ep.os.environ, {'GITHUB_RUN_ID': '999999', 'GITHUB_RUN_ATTEMPT': '1',
+                                                       'HERO_GEMINI_API_KEY': 'synthetic-no-network'}))
+        clock = stack.enter_context(patch.object(ep, 'datetime'))
+        clock.now.return_value = NOW
+        yield f | {'path': path, 'original': spec, 'raw': path.read_bytes(), 'reviewer': reviewer,
+                   'qa_mock': qa.check, 'clock': clock, 'fresh': fresh}
+
+
+class RecoveryTests(unittest.TestCase):
+    def test_list_document_only_and_closed_cli(self):
+        with tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+            (f['path'].parent / 'short-00.mp4').unlink()
+            out = io.StringIO()
+            with redirect_stdout(out): self.assertEqual(ep.cli(['--recovery-list', str(f['pilot'])]), 0)
+            self.assertEqual(out.getvalue(), 'short-00.mp4 ' + OUTPUT_HASH + '\n')
+            for args in (['--recover-review', str(f['pilot']), '--clock', '2026-10-21T12:00:00Z'],
+                         ['--recovery-list', str(f['pilot']), OUTPUT_HASH]):
+                with redirect_stdout(io.StringIO()): self.assertEqual(ep.cli(args), 1)
+            f['reviewer'].review.assert_not_called(); f['qa_mock'].assert_not_called()
+
+    def test_pass_exact_whitelist_and_consumed_attempt(self):
+        with tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+            result = ep.recover_review(f['pilot'])
+            self.assertTrue(result['shorts'][0]['publish']); self.assertEqual(result['release_status'], 'READY')
+            audit = result['correction_review_attempt']
+            self.assertEqual(audit['previous_review'], ep.RECOVERY_PREVIOUS_REVIEW)
+            self.assertEqual(audit['fresh_qa'], f['fresh'])
+            self.assertEqual(result['shorts'][0]['qa'], f['original']['shorts'][0]['qa'])
+            ep._recovery_whitelist(f['original'], result)
+            self.assertEqual(ep.binding(result, plan_sha256=f['plan_hash'], history_sha256=f['history_hash'])['output_sha256'], OUTPUT_HASH)
+            self.assertEqual(f['reviewer'].review.call_count, 1); f['reviewer'].main.assert_not_called()
+            with self.assertRaisesRegex(ep.EvidenceError, 'RECOVERY_SOURCE_CHANGED'): ep.recover_review(f['pilot'])
+            self.assertEqual(f['reviewer'].review.call_count, 1)
+            self.assertFalse(list(f['path'].parent.glob('.correction-review-*')))
+
+    def test_complete_negatives_exit_zero_and_exception_sanitized(self):
+        for kind in ('floor', 'fail', 'provider', 'exception'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+                if kind == 'floor': f['reviewer'].review.return_value['overall'] = 8.9
+                elif kind == 'fail': f['reviewer'].review.return_value.update(status='FAIL', edit_rhythm=6.5)
+                elif kind == 'provider': f['reviewer'].review.return_value = deepcopy(ep.RECOVERY_PREVIOUS_REVIEW)
+                else: f['reviewer'].review.side_effect = RuntimeError('SECRET MUST NOT ESCAPE')
+                with redirect_stdout(io.StringIO()) as out:
+                    self.assertEqual(ep.cli(['--recover-review', str(f['pilot'])]), 0)
+                result = ep.read_json(f['path'])[0]
+                self.assertEqual(result['finalization']['status'], 'COMPLETE')
+                self.assertFalse(result['shorts'][0]['publish'])
+                self.assertEqual(result['correction_review_attempt']['state'], 'COMPLETE')
+                self.assertEqual(f['reviewer'].review.call_count, 1)
+                self.assertNotIn('SECRET', f['path'].read_text() + out.getvalue())
+                if kind == 'exception': f['reviewer'].failure_record.assert_called_once()
+
+    def test_precheck_failures_no_call_no_manifest_change(self):
+        for kind in ('missing_key', 'attempt2', 'source_run', 'run_bool', 'hash', 'size', 'symlink',
+                     'qa_fail', 'qa_error', 'qa_changed_output', 'source_changed', 'media_changed', 'before', 'late'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+                mp4 = f['path'].parent / 'short-00.mp4'
+                if kind == 'missing_key': ep.os.environ['HERO_GEMINI_API_KEY'] = ''
+                elif kind == 'attempt2': ep.os.environ['GITHUB_RUN_ATTEMPT'] = '2'
+                elif kind == 'source_run': ep.os.environ['GITHUB_RUN_ID'] = ep.RECOVERY_SOURCE_RUN
+                elif kind == 'run_bool': ep.os.environ['GITHUB_RUN_ID'] = 'True'
+                elif kind == 'hash': mp4.write_bytes(b'x' * len(OUTPUT_BYTES))
+                elif kind == 'size': mp4.write_bytes(OUTPUT_BYTES + b'x')
+                elif kind == 'symlink':
+                    other = Path(tmp) / 'alias.mp4'; other.write_bytes(OUTPUT_BYTES); mp4.unlink(); mp4.symlink_to(other)
+                elif kind == 'qa_fail':
+                    f['fresh']['status'] = 'FAIL'; f['fresh']['checks']['decode_clean'] = False
+                elif kind == 'qa_error': f['qa_mock'].side_effect = RuntimeError('private diagnostic')
+                elif kind == 'qa_changed_output':
+                    def qa_change(path): path.write_bytes(b'x' * len(OUTPUT_BYTES)); return f['fresh']
+                    f['qa_mock'].side_effect = qa_change
+                elif kind == 'source_changed': (f['pilot'] / 'script.json').write_text('{}')
+                elif kind == 'media_changed': (f['path'].parent / ep.MEDIA_FILE).write_text('{}')
+                elif kind == 'before': f['clock'].now.return_value = ep.utc_date('2026-10-21T08:51:44Z')
+                else: f['clock'].now.return_value = ep.utc_date('2026-10-21T13:15:01Z')
+                with redirect_stdout(io.StringIO()): self.assertEqual(ep.cli(['--recover-review', str(f['pilot'])]), 1)
+                self.assertEqual(f['path'].read_bytes(), f['raw']); f['reviewer'].review.assert_not_called()
+
+    def test_semantic_source_rejections_even_with_synthetic_repin(self):
+        for kind in ('FAIL', 'PASS', '429', 'unknown', 'audit', 'qa', 'file', 'pilot', 'future', 'stale', 'previous_fail'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+                spec = deepcopy(f['original']); rec = spec['shorts'][0]
+                if kind in ('FAIL','PASS'): rec['review'] = deepcopy(f['reviewer'].review.return_value); rec['review']['status'] = kind
+                elif kind == '429': rec['review']['provider_diagnostic']['http_status'] = 429
+                elif kind == 'unknown': rec['review']['error_code'] = 'UNKNOWN'
+                elif kind == 'audit': spec['correction_review_attempt'] = {}
+                elif kind == 'qa': rec['qa']['status'] = 'FAIL'; rec['qa']['checks']['decode_clean'] = False
+                elif kind == 'file': rec['file'] = 'short-01.mp4'
+                elif kind == 'pilot': spec['source_pilot'] = 'pilot-005'
+                elif kind == 'previous_fail': rec['previous_editorial_review'] = {'status':'FAIL', 'output_sha256':OUTPUT_HASH}
+                else:
+                    media = deepcopy(f['media'])
+                    media['measured_at'] = '2026-10-22T11:00:00Z' if kind == 'future' else '2026-10-20T11:00:00Z'
+                    ep.atomic_json(f['path'].parent / ep.MEDIA_FILE, media)
+                    digest = ep.hash_file(f['path'].parent / ep.MEDIA_FILE)
+                    rec.update(media_checks=media, media_checks_sha256=digest)
+                    ep.RECOVERY_MEDIA_SHA256 = digest  # restored by enclosing patch
+                ep.atomic_json(f['path'], spec); raw = f['path'].read_bytes()
+                with patch.object(ep, 'RECOVERY_MANIFEST_SHA256', ep.hash_file(f['path'])):
+                    with self.assertRaises(ep.EvidenceError): ep.recover_review(f['pilot'])
+                self.assertEqual(f['path'].read_bytes(), raw); f['reviewer'].review.assert_not_called()
+
+    def test_time_boundaries_and_cutoff_crossed_during_finalizer(self):
+        for instant in ('2026-10-21T08:51:45Z','2026-10-21T13:15:00Z'):
+            with tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+                # Synthetic source measurement already predates both endpoints.
+                media = deepcopy(f['media']); media['measured_at'] = '2026-10-21T08:42:00Z'
+                ep.atomic_json(f['path'].parent / ep.MEDIA_FILE, media); mh = ep.hash_file(f['path'].parent / ep.MEDIA_FILE)
+                spec = deepcopy(f['original']); spec['shorts'][0].update(media_checks=media, media_checks_sha256=mh)
+                spec['finalization']['validated_at'] = '2026-10-21T08:42:00Z'
+                ep.atomic_json(f['path'], spec)
+                with patch.object(ep, 'RECOVERY_MEDIA_SHA256', mh), patch.object(ep, 'RECOVERY_MANIFEST_SHA256', ep.hash_file(f['path'])):
+                    self.assertTrue(ep.recovery_preflight(f['pilot'], now_utc=instant))
+        with tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+            original = ep.finalize_file
+            def cross(path, mp4):
+                result = original(path, mp4)
+                f['clock'].now.return_value = ep.utc_date('2026-10-21T13:15:01Z')
+                return result
+            with patch.object(ep, 'finalize_file', side_effect=cross), redirect_stdout(io.StringIO()):
+                self.assertEqual(ep.cli(['--recover-review', str(f['pilot'])]), 0)
+            result = ep.read_json(f['path'])[0]
+            self.assertEqual(result['finalization']['status'], 'COMPLETE')
+            self.assertEqual(result['release_status'], 'TARGET_SLOT_LEAD_MISSED')
+            self.assertFalse(result['shorts'][0]['publish'])
+            self.assertEqual(result['finalization']['validated_at'], '2026-10-21T13:15:01+00:00')
+
+    def test_audit_closed_schema_and_removed_audit_for_pass_fail(self):
+        with tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+            result = ep.recover_review(f['pilot'])
+            def bind(spec): return ep.binding(spec, plan_sha256=f['plan_hash'], history_sha256=f['history_hash'])
+            for key, val in [('extra', 1), ('run_attempt', True), ('run_attempt', 2), ('run_id', ep.RECOVERY_SOURCE_RUN),
+                             ('source_manifest_sha256', '0'*64), ('previous_review', {}), ('reason', 'SECRET'),
+                             ('completed_at', '2026-10-21T11:59:59Z'), ('started_at', '2026-10-21T12:00:00'),
+                             ('fresh_qa', {}), ('state', 'STARTED'), ('state', 'ERROR')]:
+                forged = deepcopy(result); forged['correction_review_attempt'][key] = val
+                with self.subTest(key=key,val=val), self.assertRaises(ep.EvidenceError): bind(forged)
+            for state in ('STARTED','ERROR'):
+                forged = deepcopy(result); audit = forged['correction_review_attempt']
+                audit.update(state=state, completed_at=None if state == 'STARTED' else NOW.isoformat(),
+                             reason=None if state == 'STARTED' else 'OPERATION_ERROR')
+                with self.assertRaisesRegex(ep.EvidenceError, 'CORRECTION_ATTEMPT_NOT_COMPLETE'): bind(forged)
+            for status in ('PASS','FAIL'):
+                forged = deepcopy(result); forged.pop('correction_review_attempt'); forged['shorts'][0]['review']['status'] = status
+                with self.assertRaisesRegex(ep.EvidenceError, 'CORRECTION_ATTEMPT_REQUIRED'): bind(forged)
+            for key in ('owner_exception','review_recovery','review_recovery_execution'):
+                forged = deepcopy(result); forged['correction_review_attempt'][key] = {}
+                with self.assertRaises(ep.EvidenceError): bind(forged)
+
+    def test_races_integrity_errors_never_partial_ready(self):
+        for kind in ('manifest', 'mp4', 'media', 'source', 'whitelist', 'finalizer', 'atomic', 'last_contract_manifest'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f, ExitStack() as stack:
+                review = deepcopy(f['reviewer'].review.return_value)
+                def act(*args):
+                    if kind == 'manifest': f['path'].write_bytes(b'{"concurrent":"actor"}\n')
+                    elif kind == 'mp4': (f['path'].parent / 'short-00.mp4').write_bytes(b'x'*len(OUTPUT_BYTES))
+                    elif kind == 'media': (f['path'].parent / ep.MEDIA_FILE).write_text('{}')
+                    elif kind == 'source': (f['pilot'] / 'script.json').write_text('{}')
+                    return review
+                f['reviewer'].review.side_effect = act
+                if kind in ('whitelist','finalizer'):
+                    original_finalize = ep.finalize_file
+                    def damage(path, mp4):
+                        result = original_finalize(path, mp4)
+                        if kind == 'whitelist': result['shorts'][0]['text'] = 'mutated'
+                        else: result['finalization']['status'] = 'ERROR'
+                        return result
+                    stack.enter_context(patch.object(ep, 'finalize_file', side_effect=damage))
+                if kind == 'last_contract_manifest':
+                    original_contract, original_stable = ep._contract, ep._recovery_stable
+                    stable_count = [0]
+                    def stable(*args):
+                        stable_count[0] += 1
+                        return original_stable(*args)
+                    def contract():
+                        result = original_contract()
+                        if stable_count[0] == 4: f['path'].write_bytes(b'{"concurrent":"actor"}\n')
+                        return result
+                    stack.enter_context(patch.object(ep, '_recovery_stable', side_effect=stable))
+                    stack.enter_context(patch.object(ep, '_contract', side_effect=contract))
+                if kind == 'atomic':
+                    original_atomic = ep.atomic_json
+                    def atomic(path, value):
+                        if Path(path) == f['path'] and value.get('release_status') == 'READY': raise OSError('private failure')
+                        return original_atomic(path, value)
+                    stack.enter_context(patch.object(ep, 'atomic_json', side_effect=atomic))
+                with redirect_stdout(io.StringIO()): self.assertEqual(ep.cli(['--recover-review', str(f['pilot'])]), 1)
+                self.assertEqual(f['reviewer'].review.call_count, 1)
+                result = ep.read_json(f['path'])[0]
+                if kind in ('manifest','last_contract_manifest'): self.assertEqual(result, {'concurrent':'actor'})
+                else:
+                    self.assertFalse(result['shorts'][0]['publish'])
+                    self.assertEqual(result['correction_review_attempt']['state'], 'ERROR')
+                    self.assertIn(result['correction_review_attempt']['reason'], ep.RECOVERY_ERRORS)
+                self.assertFalse(list(f['path'].parent.glob('.correction-review-*')))
+
+    def test_started_identity_races_do_not_adopt_other_actor(self):
+        for when in ('before', 'after'):
+            with self.subTest(when=when), tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f:
+                foreign = b'{"concurrent":"never overwrite"}\n'
+                if when == 'before':
+                    calls = [0]
+                    def clock(*args):
+                        calls[0] += 1
+                        if calls[0] == 3: f['path'].write_bytes(foreign)
+                        return NOW
+                    f['clock'].now.side_effect = clock
+                    with self.assertRaisesRegex(ep.EvidenceError, 'INPUT_CHANGED'): ep.recover_review(f['pilot'])
+                else:
+                    original_atomic = ep.atomic_json
+                    def race(path, value):
+                        original_atomic(path, value)
+                        if Path(path) == f['path'] and value.get('correction_review_attempt',{}).get('state') == 'STARTED':
+                            f['path'].write_bytes(foreign)
+                    with patch.object(ep, 'atomic_json', side_effect=race):
+                        with self.assertRaisesRegex(ep.EvidenceError, 'INPUT_CHANGED'): ep.recover_review(f['pilot'])
+                f['reviewer'].review.assert_not_called()
+                self.assertEqual(f['path'].read_bytes(), foreign)
+
+    def test_final_pure_finalization_rehash_and_slow_check_clock(self):
+        for kind in ('pure_changes_mp4', 'final_rehash_crosses_cutoff', 'preprovider_check_crosses_cutoff'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as tmp, recovery_environment(tmp) as f, ExitStack() as stack:
+                count = [0]
+                if kind == 'pure_changes_mp4':
+                    original = ep.finalize_manifest
+                    def finalize(*args, **kwargs):
+                        result = original(*args, **kwargs); count[0] += 1
+                        if count[0] == 2: (f['path'].parent / 'short-00.mp4').write_bytes(b'x' * len(OUTPUT_BYTES))
+                        return result
+                    stack.enter_context(patch.object(ep, 'finalize_manifest', side_effect=finalize))
+                else:
+                    original = ep._recovery_stable
+                    def stable(*args):
+                        original(*args); count[0] += 1
+                        if count[0] == (1 if kind == 'preprovider_check_crosses_cutoff' else 4):
+                            f['clock'].now.return_value = ep.utc_date('2026-10-21T13:15:01Z')
+                    stack.enter_context(patch.object(ep, '_recovery_stable', side_effect=stable))
+                with redirect_stdout(io.StringIO()):
+                    code = ep.cli(['--recover-review', str(f['pilot'])])
+                result = ep.read_json(f['path'])[0]
+                self.assertFalse(result['shorts'][0]['publish'])
+                if kind == 'final_rehash_crosses_cutoff':
+                    self.assertEqual(code, 0)
+                    self.assertEqual(result['release_status'], 'TARGET_SLOT_LEAD_MISSED')
+                    self.assertEqual(result['finalization']['status'], 'COMPLETE')
+                    self.assertEqual(result['finalization']['validated_at'], '2026-10-21T13:15:01+00:00')
+                else:
+                    self.assertEqual(code, 1)
+                    self.assertEqual(result['correction_review_attempt']['state'], 'ERROR')
+                self.assertEqual(f['reviewer'].review.call_count, 0 if kind == 'preprovider_check_crosses_cutoff' else 1)
+
+    def test_workflow_recovery_routing(self):
+        # Static source file only, never a live manifest, git call or dispatch.
+        lines = (HERE.parents[1] / '.github/workflows/shorts-review.yml').read_text().splitlines(keepends=True)
+        names = {'Shorts from the private release (hash-verified)', 'Watched review (Gemini free tier)'}
+        retained, bodies, name, i = [], [], None, 0
+        while i < len(lines):
+            line = lines[i]
+            if line.startswith('      - name: '): name = line[len('      - name: '):].strip()
+            retained.append(line); i += 1
+            if line == '        run: |\n' and name in names:
+                body = []
+                while i < len(lines) and (lines[i].startswith('          ') or not lines[i].strip()):
+                    body.append(lines[i][10:] if lines[i].startswith('          ') else lines[i]); i += 1
+                bodies.append(''.join(body)); retained.append('          <AUTHORIZED_RUN_BODY>\n')
+        self.assertEqual(len(bodies), 2)
+        self.assertEqual(hashlib.sha256(''.join(retained).encode()).hexdigest(),
+                         'cd02f50ffd4190677b3ff99da555ddd84b90d91fb59708348a42bf7e498d24c2')
+        download = next(body for body in bodies if '--recovery-list' in body)
+        review = next(body for body in bodies if '--recover-review' in body)
+        for body, command in ((download,'--recovery-list'),(review,'--recover-review')):
+            self.assertIn('if [ "$PILOT" = pilot-006 ]; then', body)
+            branch = body.split('then',1)[1].split('else',1)[0]
+            self.assertIn('shorts_006_plan.py ' + command, branch)
+            self.assertNotIn('review_recovery.py', branch)
+            self.assertNotIn('shorts_produce', branch)
+        self.assertIn('shorts_review.py "migration/production/$PILOT/shorts" 3', review.split('else',1)[1])
+        self.assertIn("json.load(open(sys.argv[1]))['shorts']", download.split('else',1)[1])
+
+
 if __name__ == '__main__':
     unittest.main()

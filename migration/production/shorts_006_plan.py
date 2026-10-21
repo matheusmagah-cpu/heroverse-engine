@@ -12,6 +12,8 @@ from fractions import Fraction
 import hashlib
 import json
 import math
+import os
+import tempfile
 from pathlib import Path
 import re
 import sys
@@ -578,6 +580,7 @@ def _review_verdict(review, output_hash):
 def _evaluate(spec, actual_output_sha256, now, media, media_hash, contract):
     plan, failed, docs = contract
     record = _record(spec)
+    _validate_attempt(spec, actual_output_sha256, now)
     _bind_record(spec, plan, record, actual_output_sha256, docs)
     require(actual_output_sha256 not in failed, "HISTORICAL_EDITORIAL_FAIL_BYTES")
     require(type(media_hash) is str and HASH.fullmatch(media_hash)
@@ -688,9 +691,232 @@ def binding(spec, *, plan_sha256, history_sha256):
             "release_deadline": LEAD_DEADLINE, "file": "short-00.mp4"}
 
 
+# Review-only recovery of one preserved, unreviewed correction. These pins do
+# not change production preflight or authorize a second render/provider attempt.
+RECOVERY_SOURCE_RUN = "39569442793"
+RECOVERY_MANIFEST_SHA256 = "a33d46db02ee419c357ae4ecefeee615b3d6ac32af143e85814cfbcb82bd1418"
+RECOVERY_MEDIA_SHA256 = "6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200"
+RECOVERY_OUTPUT_SHA256 = "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e"
+RECOVERY_OUTPUT_BYTES = 20581582
+RECOVERY_NOT_BEFORE = "2026-10-21T08:51:45Z"
+RECOVERY_PREVIOUS_REVIEW = {
+    "status": "NOT_REVIEWED_ProviderFailure", "error_code": "HTTP_503_UNAVAILABLE",
+    "failed_at": "2026-10-21T08:41:45.362893+00:00", "output_sha256": RECOVERY_OUTPUT_SHA256,
+    "provider_diagnostic": {"http_status": 503, "provider_status": "UNAVAILABLE",
+        "body_truncated": False, "raw_body_retained": False, "sanitized": True,
+        "body_parse_status": "JSON_ERROR_OBJECT", "body_bytes_read": 198}}
+RECOVERY_ERRORS = {"INPUT_CHANGED", "OUTPUT_CHANGED", "FINALIZATION_ERROR",
+                   "OUTPUT_WHITELIST_VIOLATION", "OPERATION_ERROR"}
+
+
+def _attempt_constants():
+    return {"version": "shorts-006-review-attempt-v1", "source_run_id": RECOVERY_SOURCE_RUN,
+            "source_manifest_sha256": RECOVERY_MANIFEST_SHA256, "media_sha256": RECOVERY_MEDIA_SHA256,
+            "output_sha256": RECOVERY_OUTPUT_SHA256, "not_before": RECOVERY_NOT_BEFORE,
+            "cutoff": LEAD_DEADLINE, "target_slot": TARGET_SLOT}
+
+
+def _validate_attempt(spec, output_hash, now):
+    audit = spec.get("correction_review_attempt")
+    if audit is None:
+        require("correction_review_attempt" not in spec, "CORRECTION_ATTEMPT_SCHEMA")
+        if output_hash == RECOVERY_OUTPUT_SHA256:
+            require(exact(_record(spec).get("review"), RECOVERY_PREVIOUS_REVIEW), "CORRECTION_ATTEMPT_REQUIRED")
+        return
+    constants = _attempt_constants()
+    keys = set(constants) | {"run_id", "run_attempt", "started_at", "completed_at", "state",
+                             "previous_review", "fresh_qa", "reason"}
+    require(type(audit) is dict and audit.keys() == keys, "CORRECTION_ATTEMPT_SCHEMA")
+    require(output_hash == RECOVERY_OUTPUT_SHA256 and all(exact(audit[k], v) for k, v in constants.items()),
+            "CORRECTION_ATTEMPT_PINS")
+    require(type(audit["run_id"]) is str and re.fullmatch(r"[1-9][0-9]*", audit["run_id"])
+            and audit["run_id"] != RECOVERY_SOURCE_RUN and type(audit["run_attempt"]) is int
+            and audit["run_attempt"] == 1, "CORRECTION_ATTEMPT_RUN")
+    require(exact(audit["previous_review"], RECOVERY_PREVIOUS_REVIEW), "CORRECTION_PREVIOUS_REVIEW")
+    require(_qa_verdict(audit["fresh_qa"], 42.0) == "PASS", "CORRECTION_FRESH_QA_FAIL")
+    require(type(audit["started_at"]) is str, "CORRECTION_ATTEMPT_CLOCK")
+    start = utc_date(audit["started_at"])
+    require(utc_date(RECOVERY_NOT_BEFORE) <= start <= utc_date(LEAD_DEADLINE)
+            and start <= now, "CORRECTION_ATTEMPT_CLOCK")
+    state = audit["state"]
+    require(type(state) is str and state in {"STARTED", "COMPLETE", "ERROR"}, "CORRECTION_ATTEMPT_STATE")
+    if state == "STARTED":
+        require(audit["completed_at"] is None and audit["reason"] is None, "CORRECTION_ATTEMPT_CLOCK")
+    else:
+        require(type(audit["completed_at"]) is str and start <= utc_date(audit["completed_at"]) <= now,
+                "CORRECTION_ATTEMPT_CLOCK")
+        require(audit["reason"] is None if state == "COMPLETE" else
+                type(audit["reason"]) is str and audit["reason"] in RECOVERY_ERRORS, "CORRECTION_ATTEMPT_REASON")
+    require(state == "COMPLETE", "CORRECTION_ATTEMPT_NOT_COMPLETE")
+
+
+def recovery_preflight(pilot_dir, *, now_utc):
+    """Document-only preflight; release download has not necessarily happened."""
+    now = utc_date(now_utc)
+    require(utc_date(RECOVERY_NOT_BEFORE) <= now <= utc_date(LEAD_DEADLINE), "RECOVERY_OUTSIDE_WINDOW")
+    pilot = safe_path(pilot_dir, directory=True)
+    require(pilot.resolve() == CANONICAL_PILOT.resolve(), "PILOT_PATH_MISMATCH")
+    path = safe_path(pilot / "shorts/shorts.json")
+    spec, digest = read_json(path)
+    require(digest == RECOVERY_MANIFEST_SHA256, "RECOVERY_SOURCE_CHANGED")
+    media, mh = read_json(safe_path(path.parent / MEDIA_FILE))
+    require(mh == RECOVERY_MEDIA_SHA256, "RECOVERY_MEDIA_CHANGED")
+    require("correction_review_attempt" not in spec, "RECOVERY_ALREADY_ATTEMPTED")
+    record = _record(spec)
+    require(exact(record.get("review"), RECOVERY_PREVIOUS_REVIEW), "RECOVERY_NOT_ORIGINAL_503")
+    require(record.get("publish") is False and spec.get("publish") is False, "RECOVERY_SOURCE_ELIGIBLE")
+    final = spec.get("finalization")
+    expected = {"kind": KIND, "status": "COMPLETE", "source_pilot": "pilot-006",
+                "plan_sha256": PLAN_SHA256, "history_sha256": HISTORY_SHA256,
+                "output_sha256": RECOVERY_OUTPUT_SHA256, "target_slot": TARGET_SLOT,
+                "release_deadline": LEAD_DEADLINE, "release_status": "REVIEW_NOT_REVIEWED"}
+    require(type(final) is dict and final.keys() == set(expected) | {"validated_at"}
+            and all(exact(final[k], v) for k, v in expected.items()), "RECOVERY_FINALIZATION_INVALID")
+    require(type(final["validated_at"]) is str and utc_date(final["validated_at"]) <= now, "RECOVERY_FINALIZATION_CLOCK")
+    require(spec.get("release_status") == record.get("release_status") == "REVIEW_NOT_REVIEWED",
+            "RECOVERY_SOURCE_STATUS")
+    contract = _contract()
+    require(_qa_verdict(record.get("qa"), 42.0) == "PASS", "RECOVERY_ORIGINAL_QA_FAIL")
+    require(_evaluate(spec, RECOVERY_OUTPUT_SHA256, now, media, mh, contract) == "REVIEW_NOT_REVIEWED",
+            "RECOVERY_NOT_UNREVIEWED")
+    return {"pilot": pilot, "path": path, "spec": spec, "media": media, "media_hash": mh, "contract": contract}
+
+
+def recovery_list(pilot_dir):
+    recovery_preflight(pilot_dir, now_utc=datetime.now(timezone.utc))
+    print("short-00.mp4", RECOVERY_OUTPUT_SHA256)
+
+
+def _recovery_output(path):
+    require(safe_path(path).stat().st_size == RECOVERY_OUTPUT_BYTES
+            and hash_file(path) == RECOVERY_OUTPUT_SHA256, "OUTPUT_CHANGED")
+
+
+def _recovery_stable(data, started_hash, mp4):
+    require(hash_file(safe_path(data["path"])) == started_hash, "INPUT_CHANGED")
+    _recovery_output(mp4)
+    try:
+        _contract()
+        require(hash_file(safe_path(data["path"].parent / MEDIA_FILE)) == RECOVERY_MEDIA_SHA256, "INPUT_CHANGED")
+    except Exception:
+        raise EvidenceError("INPUT_CHANGED") from None
+    _recovery_output(mp4)
+    require(hash_file(safe_path(data["path"])) == started_hash, "INPUT_CHANGED")
+
+
+def _recovery_whitelist(original, result):
+    top = {"correction_review_attempt", "finalization", "release_status", "publish", "shorts"}
+    fields = {"review", "owner_quality_policy", "release_status", "publish"}
+    require(type(result) is dict and exact({k: v for k, v in original.items() if k not in top},
+            {k: v for k, v in result.items() if k not in top}), "OUTPUT_WHITELIST_VIOLATION")
+    before, after = _record(original), _record(result)
+    require(exact({k: v for k, v in before.items() if k not in fields},
+                  {k: v for k, v in after.items() if k not in fields}), "OUTPUT_WHITELIST_VIOLATION")
+
+
+def recover_review(pilot_dir):
+    """One invocation after operational idle reconciliation; no retries here."""
+    data = recovery_preflight(pilot_dir, now_utc=datetime.now(timezone.utc))
+    run_id, attempt = os.environ.get("GITHUB_RUN_ID"), os.environ.get("GITHUB_RUN_ATTEMPT")
+    require(type(run_id) is str and re.fullmatch(r"[1-9][0-9]*", run_id)
+            and run_id != RECOVERY_SOURCE_RUN and attempt == "1", "RECOVERY_RUN_INVALID")
+    key = os.environ.get("HERO_GEMINI_API_KEY", "")
+    require(bool(key.strip()), "RECOVERY_KEY_MISSING")
+    mp4 = data["path"].parent / "short-00.mp4"
+    _recovery_output(mp4)
+    import shorts_qa  # local technical check; no provider initialization
+    fresh = shorts_qa.check(mp4)
+    _recovery_output(mp4)
+    require(_qa_verdict(fresh, 42.0) == "PASS", "RECOVERY_FRESH_QA_FAIL")
+    # Recheck every source and the clock after potentially slow local QA.
+    data = recovery_preflight(pilot_dir, now_utc=datetime.now(timezone.utc))
+    _recovery_output(mp4)
+    import shorts_review  # lazy, only after all prechecks passed
+    start = datetime.now(timezone.utc)
+    require(utc_date(RECOVERY_NOT_BEFORE) <= start <= utc_date(LEAD_DEADLINE), "RECOVERY_OUTSIDE_WINDOW")
+    original = deepcopy(data["spec"])
+    started = _disable(original)
+    started["correction_review_attempt"] = _attempt_constants() | {
+        "run_id": run_id, "run_attempt": 1, "started_at": start.isoformat(), "completed_at": None,
+        "state": "STARTED", "previous_review": deepcopy(RECOVERY_PREVIOUS_REVIEW),
+        "fresh_qa": deepcopy(fresh), "reason": None}
+    started_raw = (json.dumps(started, indent=1, ensure_ascii=False, allow_nan=False) + "\n").encode("utf-8")
+    started_hash = hashlib.sha256(started_raw).hexdigest()
+    require(hash_file(safe_path(data["path"])) == RECOVERY_MANIFEST_SHA256, "INPUT_CHANGED")
+    atomic_json(data["path"], started)
+    require(hash_file(safe_path(data["path"])) == started_hash, "INPUT_CHANGED")
+    candidate = None
+    try:
+        # The second clock/read is immediately before the sole provider call.
+        _recovery_stable(data, started_hash, mp4)
+        require(utc_date(RECOVERY_NOT_BEFORE) <= datetime.now(timezone.utc) <= utc_date(LEAD_DEADLINE), "OPERATION_ERROR")
+        try:
+            review = shorts_review.review(mp4, deepcopy(_record(original)), key)
+        except Exception as error:
+            review = shorts_review.failure_record(error, mp4)
+        _recovery_stable(data, started_hash, mp4)
+        result = deepcopy(started)
+        rec = _record(result)
+        rec["review"] = deepcopy(review)
+        problems = owner_quality_policy.check(review, RECOVERY_OUTPUT_SHA256)
+        rec["owner_quality_policy"] = {"minimum_overall": 9.0, "status": "FAIL" if problems else "PASS", "problems": problems}
+        result["correction_review_attempt"].update(state="COMPLETE", completed_at=datetime.now(timezone.utc).isoformat())
+        fd, name = tempfile.mkstemp(prefix=".correction-review-", suffix=".json", dir=data["path"].parent)
+        os.close(fd)
+        candidate = Path(name)
+        atomic_json(candidate, result)
+        finalized = finalize_file(candidate, mp4)
+        require(finalized.get("finalization", {}).get("status") == "COMPLETE", "FINALIZATION_ERROR")
+        _recovery_whitelist(original, finalized)
+        _recovery_stable(data, started_hash, mp4)
+        # All slow external checks precede this fresh, final clock. Pure
+        # finalization catches cutoff crossing without another provider call.
+        install_at = datetime.now(timezone.utc)
+        while True:
+            finalized = finalize_manifest(finalized, actual_output_sha256=RECOVERY_OUTPUT_SHA256,
+                now_utc=install_at, media_checks=data["media"], media_sha256=data["media_hash"], contract=data["contract"])
+            require(finalized.get("finalization", {}).get("status") == "COMPLETE", "FINALIZATION_ERROR")
+            _recovery_whitelist(original, finalized)
+            _recovery_stable(data, started_hash, mp4)
+            after_checks = datetime.now(timezone.utc)
+            if install_at <= utc_date(LEAD_DEADLINE) < after_checks:
+                # The cutoff crosses only once; repeat pure finalization, never
+                # the provider. Rehash again even after this negative result.
+                install_at = after_checks
+                continue
+            require(after_checks.date() == install_at.date(), "FINALIZATION_ERROR")
+            break
+        atomic_json(data["path"], finalized)
+        return finalized
+    except Exception as error:
+        reason = str(error) if isinstance(error, EvidenceError) and str(error) in RECOVERY_ERRORS else "OPERATION_ERROR"
+        # Never overwrite another actor's bytes, or a possibly successful install.
+        if hash_file(safe_path(data["path"])) == started_hash:
+            failed = _disable(started)
+            failed["correction_review_attempt"].update(state="ERROR", reason=reason,
+                completed_at=datetime.now(timezone.utc).isoformat())
+            failed["release_status"] = reason
+            _record(failed)["release_status"] = reason
+            failed["finalization"].update(status="ERROR", release_status=reason,
+                validated_at=datetime.now(timezone.utc).isoformat())
+            atomic_json(data["path"], failed)
+        raise EvidenceError(reason) from None
+    finally:
+        if candidate is not None:
+            candidate.unlink(missing_ok=True)
+
+
 def cli(argv=None):
     args = list(sys.argv[1:] if argv is None else argv)
     try:
+        if args[:1] == ["--recovery-list"] and len(args) == 2:
+            recovery_list(args[1])
+            return 0
+        if args[:1] == ["--recover-review"] and len(args) == 2:
+            result = recover_review(args[1])
+            print(json.dumps({"status": result["finalization"]["status"], "release_status": result["release_status"],
+                              "publish": _record(result)["publish"]}))
+            return 0 if result["finalization"]["status"] == "COMPLETE" else 1
         if args[:1] == ["--preflight"] and len(args) == 4:
             preflight(*args[1:])
             print(json.dumps({"status": "PREFLIGHT_PASS"}))
