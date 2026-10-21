@@ -6,7 +6,7 @@
  "shorts": [
   {
    "file": "short-00.mp4",
-   "sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+   "sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
    "seconds": 42.0,
    "source_start": 813.728,
    "source_end": 854.417,
@@ -20,8 +20,8 @@
    "title": "Rest in God's Care",
    "reference": null,
    "scenes": [
-    "bg-still-water-night",
-    "bg-healing-garden"
+    "bg-healing-stream-night",
+    "bg-still-water-night"
    ],
    "parallax": false,
    "figure": false,
@@ -37,14 +37,14 @@
     "fps": 30,
     "scene_frame_spans": [
      {
-      "image_id": "bg-still-water-night",
+      "image_id": "bg-healing-stream-night",
       "start_frame": 0,
       "end_frame": 637,
       "nominal_start_frame": 0,
       "nominal_end_frame": 629
      },
      {
-      "image_id": "bg-healing-garden",
+      "image_id": "bg-still-water-night",
       "start_frame": 622,
       "end_frame": 1260,
       "nominal_start_frame": 629,
@@ -53,37 +53,54 @@
     ]
    },
    "source_image_info": {
-    "bg-still-water-night": {
-     "source_width": 2048,
-     "source_height": 2048,
-     "scaled_width": 1920,
-     "scaled_height": 1920,
-     "crop_width": 1080,
-     "crop_height": 1920,
-     "crop_x": 420.0,
-     "crop_y": 0.0,
-     "native_portrait_width": 1152.0,
-     "native_portrait_height": 2048
+    "bg-healing-stream-night": {
+     "width": 2048,
+     "height": 2048,
+     "native_window": {
+      "source_width": 2048,
+      "source_height": 2048,
+      "window_width": 1080,
+      "window_height": 1920,
+      "y": 64,
+      "profile": "two_segment_hermite_v1",
+      "knot_seconds": 3.0,
+      "x": [
+       0.0,
+       40.0,
+       48.0
+      ],
+      "velocity": [
+       20.0,
+       0.5,
+       0.3
+      ],
+      "frames": 637
+     }
     },
-    "bg-healing-garden": {
-     "source_width": 2048,
-     "source_height": 2048,
-     "scaled_width": 1920,
-     "scaled_height": 1920,
-     "crop_width": 1080,
-     "crop_height": 1920,
-     "crop_x": 420.0,
-     "crop_y": 0.0,
-     "native_portrait_width": 1152.0,
-     "native_portrait_height": 2048
+    "bg-still-water-night": {
+     "width": 2048,
+     "height": 2048,
+     "native_window": {
+      "source_width": 2048,
+      "source_height": 2048,
+      "window_width": 1152,
+      "window_height": 2048,
+      "y": 0,
+      "profile": "smoothstep_pan_v1",
+      "x": [
+       448.0,
+       480.0
+      ],
+      "frames": 638
+     }
     }
    },
    "hook_mode": "caption_only",
    "publish": false,
    "media_checks": {
-    "version": "shorts-006-media-checks-v1",
-    "plan_sha256": "95624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905",
-    "history_sha256": "4c4d178392ee1b13b4a5927ba8a6454b895e85119b247aa038215fb9a58b4677",
+    "version": "shorts-006-media-checks-v2",
+    "plan_sha256": "99e0ecbd3a5a0c5736e6ce8eaadc766a346cb789b08203577fa38dde1ade1543",
+    "history_sha256": "5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede",
     "source_sha256": {
      "script": "1006e8bec3bc8c43dffe6e5ad1d26e257ceaea5fbe0eb12fa414b9c059d10cad",
      "timeline": "73357bd61adf13f004967f0a2b2ef3e16569fb2cd344eb419e3d1fcabf1af7a2",
@@ -92,12 +109,12 @@
      "long_manifest": "0d40777f7dd2a84db9615bd148df8c3173e2e46b9f7b32418e7677392e49a2bb",
      "long_review": "e68b0ede86b2837d6070a18f20a17ad097be20d0636c427a4214c0f49324a00f"
     },
-    "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+    "output_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
     "source_voice_sha256": "d417a273a5e694e49c2eba25cb31a4afd175fa9bdf90c756b7e511ea8277861d",
     "source_music_sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
     "source_image_sha256": {
-     "bg-still-water-night": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
-     "bg-healing-garden": "97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070"
+     "bg-healing-stream-night": "a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01",
+     "bg-still-water-night": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2"
     },
     "source_durations": {
      "voice_seconds": 1529.993333,
@@ -105,7 +122,7 @@
      "voice_sample_rate": 24000,
      "voice_channels": 1
     },
-    "measured_at": "2026-10-21T08:39:57.976726+00:00",
+    "measured_at": "2026-10-21T12:24:42.261740+00:00",
     "acoustic": {
      "pcm_sample_rate": 48000,
      "window_samples": 480,
@@ -147,14 +164,14 @@
       "fps": 30,
       "scene_frame_spans": [
        {
-        "image_id": "bg-still-water-night",
+        "image_id": "bg-healing-stream-night",
         "start_frame": 0,
         "end_frame": 637,
         "nominal_start_frame": 0,
         "nominal_end_frame": 629
        },
        {
-        "image_id": "bg-healing-garden",
+        "image_id": "bg-still-water-night",
         "start_frame": 622,
         "end_frame": 1260,
         "nominal_start_frame": 629,
@@ -229,37 +246,168 @@
      ],
      "caption_mode": "caption_only",
      "reference": null,
-     "motion_profiles": [
-      "phrase_push_in_v1",
-      "phrase_push_in_v1"
-     ],
-     "atmosphere_profiles": [
+     "scenes": [
       {
-       "profile": "source_atmosphere_continuous_v1",
-       "seed": 259006,
-       "envelope": 1.0,
-       "alpha_cap": 0.18,
-       "fog_alpha_max": 0.09,
-       "light_alpha_max": 0.06,
-       "dust_alpha_max": 0.1,
-       "opening_profile": "source_atmosphere_hook_v1"
+       "image_id": "bg-healing-stream-night",
+       "asset": "pilot-006-img-bg-healing-stream-night-sha256-a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01.png",
+       "sha256": "a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01",
+       "metadata_sha256": "0289952b8b7464de1fc51eb5462e10f2db8fa3ef1f83fefc9aa7fcaab84fe385",
+       "nominal_start": 0.0,
+       "nominal_end": 20.977,
+       "visual_profile": "native_stream_hook_v2",
+       "camera": {
+        "source_width": 2048,
+        "source_height": 2048,
+        "window_width": 1080,
+        "window_height": 1920,
+        "y": 64,
+        "profile": "two_segment_hermite_v1",
+        "knot_seconds": 3.0,
+        "x": [
+         0.0,
+         40.0,
+         48.0
+        ],
+        "velocity": [
+         20.0,
+         0.5,
+         0.3
+        ],
+        "frames": 637
+       },
+       "water_light": {
+        "profile": "source_texture_flow_v1",
+        "coordinates": "source_x_and_source_y_minus_64",
+        "polygons": [
+         [
+          [
+           620,
+           1530
+          ],
+          [
+           760,
+           1515
+          ],
+          [
+           910,
+           1530
+          ],
+          [
+           1070,
+           1520
+          ],
+          [
+           1070,
+           1650
+          ],
+          [
+           930,
+           1650
+          ],
+          [
+           780,
+           1625
+          ],
+          [
+           620,
+           1635
+          ]
+         ],
+         [
+          [
+           760,
+           1290
+          ],
+          [
+           850,
+           1280
+          ],
+          [
+           950,
+           1300
+          ],
+          [
+           1070,
+           1280
+          ],
+          [
+           1070,
+           1380
+          ],
+          [
+           940,
+           1380
+          ],
+          [
+           850,
+           1405
+          ],
+          [
+           760,
+           1380
+          ]
+         ]
+        ],
+        "inward_feather_pixels": 12,
+        "phase_offsets": [
+         "zero",
+         "pi_over_3"
+        ],
+        "wavelength_pixels": 96,
+        "period_seconds": 4.0,
+        "diagonal": 0.15,
+        "absolute_amplitude_cap": 0.06,
+        "source_amplitude_fraction": 0.16
+       }
       },
       {
-       "profile": "source_atmosphere_continuous_v1",
-       "seed": 259007,
-       "envelope": 1.0,
-       "alpha_cap": 0.18,
-       "fog_alpha_max": 0.09,
-       "light_alpha_max": 0.06,
-       "dust_alpha_max": 0.1
+       "image_id": "bg-still-water-night",
+       "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
+       "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
+       "metadata_sha256": "dfe5d78c4c7727369c4b10f31ffa5c5e11e199d5b70a711328b786e8bad527f9",
+       "nominal_start": 20.977,
+       "nominal_end": 42.0,
+       "visual_profile": "native_pond_rest_v2",
+       "camera": {
+        "source_width": 2048,
+        "source_height": 2048,
+        "window_width": 1152,
+        "window_height": 2048,
+        "y": 0,
+        "profile": "smoothstep_pan_v1",
+        "x": [
+         448.0,
+         480.0
+        ],
+        "frames": 638
+       }
       }
      ]
     },
-    "status": "PASS"
+    "status": "PASS",
+    "audio_preservation": {
+     "version": "aac-remux-proof-v1",
+     "reference_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+     "reference_bytes": 20581582,
+     "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+     "reference": {
+      "aac_packets_sha256": "c4f2bade0301d93a2b1ad03335bfceeedb403cb9faff72f673fc6c15de564555",
+      "packet_manifest_sha256": "06239462e9f5d288f1754c225fd9f0e608ed68fdec2b60d9cc593a694660e5be",
+      "extradata_sha256": "b3108813350006ef07740046fab14af9c374938867d16db02fe1a8baa5e72f10",
+      "pcm_sha256": "dd94d9dba604ccf53ad3a647dd078c752b070da37a8ec8b04b86f17c13ea8893",
+      "pcm_samples": 2016256
+     },
+     "output": {
+      "aac_packets_sha256": "c4f2bade0301d93a2b1ad03335bfceeedb403cb9faff72f673fc6c15de564555",
+      "packet_manifest_sha256": "06239462e9f5d288f1754c225fd9f0e608ed68fdec2b60d9cc593a694660e5be",
+      "extradata_sha256": "b3108813350006ef07740046fab14af9c374938867d16db02fe1a8baa5e72f10",
+      "pcm_sha256": "dd94d9dba604ccf53ad3a647dd078c752b070da37a8ec8b04b86f17c13ea8893",
+      "pcm_samples": 2016256
+     }
+    }
    },
-   "media_checks_sha256": "6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200",
+   "media_checks_sha256": "1427a3e6c691223e7f8684be539ce13684662fe00bcb3c0a42d20decc8ca3c19",
    "media_checks_reason": null,
-   "qa_output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
    "qa": {
     "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
     "seconds": 42.0,
@@ -276,39 +424,36 @@
     },
     "status": "PASS"
    },
+   "qa_output_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
    "review": {
-    "hook_in_first_2s": 7.0,
-    "captions_readable_and_synced": 9.2,
-    "text_clear_of_shorts_ui": 9.5,
-    "picture_quality": 8.5,
-    "edit_rhythm": 6.8,
-    "audio_clarity": 9.2,
-    "stands_alone": 9.5,
-    "ending_and_loop": 8.0,
-    "policy_safe": 10.0,
-    "overall": 8.3,
-    "issues": [
-     "00:00 - 00:20: The first background loop stays on screen for 20 seconds with minimal dynamic camera motion, which can feel static for short-form video.",
-     "00:20: The visual transition between the pond and the fountain is a hard cut rather than a soft dissolve, briefly breaking the gentle, calming flow."
-    ],
-    "strongest_moment": "00:18 - 00:22 where the voiceover delivers 'You do not have to hold yourself up tonight. You are held.' paired with the ambient water visuals, creating an effective feeling of release and calm.",
-    "model": "gemini-3.8-flash",
-    "status": "FAIL",
-    "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e"
+    "status": "NOT_REVIEWED_ProviderFailure",
+    "error_code": "HTTP_503_UNAVAILABLE",
+    "failed_at": "2026-10-21T12:25:38.694387+00:00",
+    "output_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
+    "provider_diagnostic": {
+     "http_status": 503,
+     "provider_status": "UNAVAILABLE",
+     "body_truncated": false,
+     "raw_body_retained": false,
+     "sanitized": true,
+     "body_parse_status": "JSON_ERROR_OBJECT",
+     "body_bytes_read": 198
+    }
    },
    "owner_quality_policy": {
     "minimum_overall": 9.0,
     "status": "FAIL",
     "problems": [
      "REVIEW_NOT_PASS",
-     "OVERALL_OUTSIDE_OWNER_RANGE"
+     "REVIEW_MODEL_NOT_DESIGNATED",
+     "OVERALL_INVALID"
     ]
    },
-   "release_status": "REVIEW_FAIL"
+   "release_status": "REVIEW_NOT_REVIEWED"
   }
  ],
  "edit_plan": {
-  "version": "shorts-006-correction-plan-v1",
+  "version": "shorts-006-correction-plan-v2",
   "source_pilot": "pilot-006",
   "source_baseline_sha": "582ff607089f9accb91a8a4d1a8c2fe6f4e47408",
   "source_sha256": {
@@ -365,38 +510,138 @@
   },
   "scenes": [
    {
-    "image_id": "bg-still-water-night",
-    "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
-    "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
+    "image_id": "bg-healing-stream-night",
+    "asset": "pilot-006-img-bg-healing-stream-night-sha256-a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01.png",
+    "sha256": "a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01",
+    "metadata_sha256": "0289952b8b7464de1fc51eb5462e10f2db8fa3ef1f83fefc9aa7fcaab84fe385",
     "nominal_start": 0.0,
     "nominal_end": 20.977,
-    "motion_profile": "phrase_push_in_v1",
-    "atmosphere": {
-     "profile": "source_atmosphere_continuous_v1",
-     "seed": 259006,
-     "envelope": 1.0,
-     "alpha_cap": 0.18,
-     "fog_alpha_max": 0.09,
-     "light_alpha_max": 0.06,
-     "dust_alpha_max": 0.1,
-     "opening_profile": "source_atmosphere_hook_v1"
+    "visual_profile": "native_stream_hook_v2",
+    "camera": {
+     "source_width": 2048,
+     "source_height": 2048,
+     "window_width": 1080,
+     "window_height": 1920,
+     "y": 64,
+     "profile": "two_segment_hermite_v1",
+     "knot_seconds": 3.0,
+     "x": [
+      0.0,
+      40.0,
+      48.0
+     ],
+     "velocity": [
+      20.0,
+      0.5,
+      0.3
+     ],
+     "frames": 637
+    },
+    "water_light": {
+     "profile": "source_texture_flow_v1",
+     "coordinates": "source_x_and_source_y_minus_64",
+     "polygons": [
+      [
+       [
+        620,
+        1530
+       ],
+       [
+        760,
+        1515
+       ],
+       [
+        910,
+        1530
+       ],
+       [
+        1070,
+        1520
+       ],
+       [
+        1070,
+        1650
+       ],
+       [
+        930,
+        1650
+       ],
+       [
+        780,
+        1625
+       ],
+       [
+        620,
+        1635
+       ]
+      ],
+      [
+       [
+        760,
+        1290
+       ],
+       [
+        850,
+        1280
+       ],
+       [
+        950,
+        1300
+       ],
+       [
+        1070,
+        1280
+       ],
+       [
+        1070,
+        1380
+       ],
+       [
+        940,
+        1380
+       ],
+       [
+        850,
+        1405
+       ],
+       [
+        760,
+        1380
+       ]
+      ]
+     ],
+     "inward_feather_pixels": 12,
+     "phase_offsets": [
+      "zero",
+      "pi_over_3"
+     ],
+     "wavelength_pixels": 96,
+     "period_seconds": 4.0,
+     "diagonal": 0.15,
+     "absolute_amplitude_cap": 0.06,
+     "source_amplitude_fraction": 0.16
     }
    },
    {
-    "image_id": "bg-healing-garden",
-    "asset": "pilot-006-img-bg-healing-garden-sha256-97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070.png",
-    "sha256": "97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070",
+    "image_id": "bg-still-water-night",
+    "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
+    "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
+    "metadata_sha256": "dfe5d78c4c7727369c4b10f31ffa5c5e11e199d5b70a711328b786e8bad527f9",
     "nominal_start": 20.977,
     "nominal_end": 42.0,
-    "motion_profile": "phrase_push_in_v1",
-    "atmosphere": {
-     "profile": "source_atmosphere_continuous_v1",
-     "seed": 259007,
-     "envelope": 1.0,
-     "alpha_cap": 0.18,
-     "fog_alpha_max": 0.09,
-     "light_alpha_max": 0.06,
-     "dust_alpha_max": 0.1
+    "visual_profile": "native_pond_rest_v2",
+    "camera": {
+     "source_width": 2048,
+     "source_height": 2048,
+     "window_width": 1152,
+     "window_height": 2048,
+     "y": 0,
+     "profile": "smoothstep_pan_v1",
+     "x": [
+      448.0,
+      480.0
+     ],
+     "frames": 638
     }
    }
   ],
@@ -405,10 +650,35 @@
    "release_deadline": "2026-10-21T13:15:00Z",
    "minimum_overall": 9.0,
    "file": "short-00.mp4"
+  },
+  "previous_material": {
+   "file": "correction-history-96c8268f.json",
+   "sha256": "5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede",
+   "bytes": 17623,
+   "rejected_output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+   "source_run_id": "39590168285",
+   "previous_plan_sha256": "95624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905"
+  },
+  "audio_preservation": {
+   "mode": "aac_reference_remux_v1",
+   "reference_asset": "pilot-006-short-00-sha256-96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e.mp4",
+   "reference_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+   "reference_bytes": 20581582,
+   "aac_packets_sha256": "c4f2bade0301d93a2b1ad03335bfceeedb403cb9faff72f673fc6c15de564555",
+   "pcm_comparison": "same_ffmpeg_pcm_s32le_exact",
+   "sample_rate": 48000,
+   "channels": 2,
+   "presentation_samples": 2016000,
+   "packet_count": 1970,
+   "first_pts_samples": -1024,
+   "skip_samples": 1024,
+   "last_pts_samples": 2015232,
+   "last_duration_samples": 768,
+   "codec_frame_samples": 1024
   }
  },
  "publish": false,
- "release_status": "REVIEW_FAIL",
+ "release_status": "REVIEW_NOT_REVIEWED",
  "review_rubric": {
   "items": [
    "hook_in_first_2s",
@@ -424,98 +694,24 @@
   "pass_item": 7,
   "pass_overall": 8
  },
- "finalization": {
-  "kind": "pilot-006-correction-v1",
-  "status": "COMPLETE",
-  "source_pilot": "pilot-006",
-  "plan_sha256": "95624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905",
-  "history_sha256": "4c4d178392ee1b13b4a5927ba8a6454b895e85119b247aa038215fb9a58b4677",
-  "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+ "correction_material_review_attempt": {
+  "version": "shorts-006-material-review-attempt-v1",
+  "source_run_id": "39590168285",
+  "source_manifest_sha256": "5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede",
+  "plan_sha256": "99e0ecbd3a5a0c5736e6ce8eaadc766a346cb789b08203577fa38dde1ade1543",
+  "history_sha256": "5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede",
+  "media_sha256": "1427a3e6c691223e7f8684be539ce13684662fe00bcb3c0a42d20decc8ca3c19",
+  "output_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
   "target_slot": "2026-10-21T14:00:00Z",
-  "release_deadline": "2026-10-21T13:15:00Z",
-  "validated_at": "2026-10-21T11:13:13.963838+00:00",
-  "release_status": "REVIEW_FAIL"
- },
- "correction_review_attempt": {
-  "version": "shorts-006-review-attempt-v1",
-  "source_run_id": "39569442793",
-  "source_manifest_sha256": "a33d46db02ee419c357ae4ecefeee615b3d6ac32af143e85814cfbcb82bd1418",
-  "media_sha256": "6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200",
-  "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
-  "not_before": "2026-10-21T08:51:45Z",
   "cutoff": "2026-10-21T13:15:00Z",
-  "target_slot": "2026-10-21T14:00:00Z",
-  "run_id": "39575597092",
-  "run_attempt": 1,
-  "started_at": "2026-10-21T09:16:23.550574+00:00",
-  "completed_at": "2026-10-21T09:17:47.289630+00:00",
-  "state": "COMPLETE",
-  "previous_review": {
-   "status": "NOT_REVIEWED_ProviderFailure",
-   "error_code": "HTTP_503_UNAVAILABLE",
-   "failed_at": "2026-10-21T08:41:45.362893+00:00",
-   "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
-   "provider_diagnostic": {
-    "http_status": 503,
-    "provider_status": "UNAVAILABLE",
-    "body_truncated": false,
-    "raw_body_retained": false,
-    "sanitized": true,
-    "body_parse_status": "JSON_ERROR_OBJECT",
-    "body_bytes_read": 198
-   }
-  },
-  "fresh_qa": {
-   "file": "migration/production/pilot-006/shorts/short-00.mp4",
-   "seconds": 42.0,
-   "lufs": -15.0,
-   "true_peak_dbtp": -2.4,
-   "checks": {
-    "decode_clean": true,
-    "one_h264_1080x1920": true,
-    "fps_30": true,
-    "one_aac_stereo_48k": true,
-    "duration": true,
-    "loudness": true,
-    "true_peak": true
-   },
-   "status": "PASS"
-  },
-  "reason": null
- },
- "correction_http_recovery_attempt": {
-  "version": "shorts-006-http-review-attempt-v1",
-  "source_run_id": "39575597092",
-  "source_manifest_sha256": "856f2765f104a1a98a54ec322784302066b545882595290020cf672183ebf9f8",
-  "media_sha256": "6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200",
-  "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
-  "not_before": "2026-10-21T10:00:00Z",
-  "cutoff": "2026-10-21T13:15:00Z",
-  "target_slot": "2026-10-21T14:00:00Z",
-  "previous_attempt_sha256": "c9c707beb0b6cfbfd6f8512ec4a705482a267d0be15c12a1e9dbcefed289c3e3",
   "http_policy": "designated-review-http-v1",
-  "run_id": "39590168285",
+  "run_id": "39597248682",
   "run_attempt": 1,
-  "started_at": "2026-10-21T11:12:53.675794+00:00",
-  "completed_at": "2026-10-21T11:13:13.899293+00:00",
+  "started_at": "2026-10-21T12:24:59.841065+00:00",
+  "completed_at": "2026-10-21T12:25:38.735925+00:00",
   "state": "COMPLETE",
-  "previous_review": {
-   "status": "NOT_REVIEWED_ProviderFailure",
-   "error_code": "HTTP_503_UNAVAILABLE",
-   "failed_at": "2026-10-21T09:17:47.236719+00:00",
-   "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
-   "provider_diagnostic": {
-    "http_status": 503,
-    "provider_status": "UNAVAILABLE",
-    "body_truncated": false,
-    "raw_body_retained": false,
-    "sanitized": true,
-    "body_parse_status": "JSON_ERROR_OBJECT",
-    "body_bytes_read": 198
-   }
-  },
   "fresh_qa": {
-   "file": "migration/production/pilot-006/shorts/short-00.mp4",
+   "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
    "seconds": 42.0,
    "lufs": -15.0,
    "true_peak_dbtp": -2.4,
@@ -534,22 +730,48 @@
   "transport_attempts": [
    {
     "attempt": 1,
-    "started_at": "2026-10-21T11:13:00.206149+00:00",
-    "elapsed_start_seconds": 6.498335835999995,
-    "elapsed_end_seconds": 19.77918857399999,
-    "outcome": "SUCCESS",
-    "http_status": 200,
-    "provider_status": null,
+    "started_at": "2026-10-21T12:25:06.942901+00:00",
+    "elapsed_start_seconds": 7.028770530999964,
+    "elapsed_end_seconds": 11.184604761999935,
+    "outcome": "HTTP_ERROR",
+    "http_status": 503,
+    "provider_status": "UNAVAILABLE",
     "retry_after_seconds": null,
     "retry_info_seconds": null,
-    "selected_delay_seconds": null,
+    "selected_delay_seconds": 20,
+    "slept_seconds": 20.000123110000004,
+    "decision": "RETRY"
+   },
+   {
+    "attempt": 2,
+    "started_at": "2026-10-21T12:25:31.099051+00:00",
+    "elapsed_start_seconds": 31.18491955899981,
+    "elapsed_end_seconds": 38.271497169999975,
+    "outcome": "HTTP_ERROR",
+    "http_status": 503,
+    "provider_status": "UNAVAILABLE",
+    "retry_after_seconds": null,
+    "retry_info_seconds": null,
+    "selected_delay_seconds": 20,
     "slept_seconds": 0.0,
-    "decision": "RETURN"
+    "decision": "STOP_FINAL"
    }
   ],
   "http_completion": "COMPLETED",
   "terminal_stage": "GENERATE_CONTENT",
   "cleanup_status": "SUCCESS",
-  "http_elapsed_seconds": 20.163633543999993
+  "http_elapsed_seconds": 38.791556464999985
+ },
+ "finalization": {
+  "kind": "pilot-006-correction-v2",
+  "status": "COMPLETE",
+  "source_pilot": "pilot-006",
+  "plan_sha256": "99e0ecbd3a5a0c5736e6ce8eaadc766a346cb789b08203577fa38dde1ade1543",
+  "history_sha256": "5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede",
+  "output_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
+  "target_slot": "2026-10-21T14:00:00Z",
+  "release_deadline": "2026-10-21T13:15:00Z",
+  "validated_at": "2026-10-21T12:25:38.765649+00:00",
+  "release_status": "REVIEW_NOT_REVIEWED"
  }
 }

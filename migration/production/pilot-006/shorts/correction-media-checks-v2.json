@@ -1,0 +1,309 @@
+{
+ "version": "shorts-006-media-checks-v2",
+ "plan_sha256": "99e0ecbd3a5a0c5736e6ce8eaadc766a346cb789b08203577fa38dde1ade1543",
+ "history_sha256": "5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede",
+ "source_sha256": {
+  "script": "1006e8bec3bc8c43dffe6e5ad1d26e257ceaea5fbe0eb12fa414b9c059d10cad",
+  "timeline": "73357bd61adf13f004967f0a2b2ef3e16569fb2cd344eb419e3d1fcabf1af7a2",
+  "inputs": "07a75a6b6849ed7ada9fc621a573b947689effc458693d6889ce3bc8568f514b",
+  "images": "f2e32a9a210ebd3d4f93d1d6fb9254ee2241d416784c9d31343c8f02138bb695",
+  "long_manifest": "0d40777f7dd2a84db9615bd148df8c3173e2e46b9f7b32418e7677392e49a2bb",
+  "long_review": "e68b0ede86b2837d6070a18f20a17ad097be20d0636c427a4214c0f49324a00f"
+ },
+ "output_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
+ "source_voice_sha256": "d417a273a5e694e49c2eba25cb31a4afd175fa9bdf90c756b7e511ea8277861d",
+ "source_music_sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+ "source_image_sha256": {
+  "bg-healing-stream-night": "a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01",
+  "bg-still-water-night": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2"
+ },
+ "source_durations": {
+  "voice_seconds": 1529.993333,
+  "music_seconds": 10800.0,
+  "voice_sample_rate": 24000,
+  "voice_channels": 1
+ },
+ "measured_at": "2026-10-21T12:24:42.261740+00:00",
+ "acoustic": {
+  "pcm_sample_rate": 48000,
+  "window_samples": 480,
+  "active_threshold_dbfs": -40.0,
+  "leading_inactive_seconds": 0.13,
+  "trailing_inactive_seconds": 0.29,
+  "first_active_sample": 6240,
+  "last_active_sample": 1939200,
+  "narration_samples": 1953120,
+  "status": "PASS"
+ },
+ "video": {
+  "decoded_frame_count": 1260,
+  "fps": 30.0,
+  "seconds": 42.0,
+  "width": 1080,
+  "height": 1920,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "audio_sample_rate": 48000,
+  "audio_channels": 2,
+  "decoded_audio_samples": 2016256,
+  "presentation_audio_samples": 2016000,
+  "first_pts": 0.0,
+  "last_pts": 41.966667,
+  "pts_uniform": true,
+  "audio_packets": {
+   "packet_count": 1970,
+   "first_pts_samples": -1024,
+   "skip_samples": 1024,
+   "last_pts_samples": 2015232,
+   "last_duration_samples": 768,
+   "packet_clock_continuous": true,
+   "codec_frame_samples": 1024
+  },
+  "black_intervals": [],
+  "render_plan": {
+   "expected_frame_count": 1260,
+   "fps": 30,
+   "scene_frame_spans": [
+    {
+     "image_id": "bg-healing-stream-night",
+     "start_frame": 0,
+     "end_frame": 637,
+     "nominal_start_frame": 0,
+     "nominal_end_frame": 629
+    },
+    {
+     "image_id": "bg-still-water-night",
+     "start_frame": 622,
+     "end_frame": 1260,
+     "nominal_start_frame": 629,
+     "nominal_end_frame": 1260
+    }
+   ]
+  },
+  "status": "PASS"
+ },
+ "editorial_metadata": {
+  "caption_source_intervals": [
+   {
+    "text": "Let your face soften.",
+    "start": 0.0,
+    "end": 1.941
+   },
+   {
+    "text": "Let your eyes close.",
+    "start": 2.121,
+    "end": 4.063
+   },
+   {
+    "text": "Let your shoulders drop.",
+    "start": 5.443,
+    "end": 7.427
+   },
+   {
+    "text": "Let your arms rest heavy at your sides.",
+    "start": 7.607,
+    "end": 10.615
+   },
+   {
+    "text": "Let your hands open.",
+    "start": 10.795,
+    "end": 12.715
+   },
+   {
+    "text": "Feel the mattress holding you, the pillow supporting your head.",
+    "start": 12.895,
+    "end": 17.353
+   },
+   {
+    "text": "You do not have to hold yourself up tonight.",
+    "start": 17.533,
+    "end": 20.797
+   },
+   {
+    "text": "You are held.",
+    "start": 20.977,
+    "end": 22.407
+   },
+   {
+    "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet.",
+    "start": 23.787,
+    "end": 32.661
+   },
+   {
+    "text": "Every part of you is known by the God who made you.",
+    "start": 32.841,
+    "end": 36.831
+   },
+   {
+    "text": "Every cell is in his care.",
+    "start": 37.011,
+    "end": 39.187
+   },
+   {
+    "text": "Rest now.",
+    "start": 39.367,
+    "end": 40.689
+   }
+  ],
+  "caption_mode": "caption_only",
+  "reference": null,
+  "scenes": [
+   {
+    "image_id": "bg-healing-stream-night",
+    "asset": "pilot-006-img-bg-healing-stream-night-sha256-a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01.png",
+    "sha256": "a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01",
+    "metadata_sha256": "0289952b8b7464de1fc51eb5462e10f2db8fa3ef1f83fefc9aa7fcaab84fe385",
+    "nominal_start": 0.0,
+    "nominal_end": 20.977,
+    "visual_profile": "native_stream_hook_v2",
+    "camera": {
+     "source_width": 2048,
+     "source_height": 2048,
+     "window_width": 1080,
+     "window_height": 1920,
+     "y": 64,
+     "profile": "two_segment_hermite_v1",
+     "knot_seconds": 3.0,
+     "x": [
+      0.0,
+      40.0,
+      48.0
+     ],
+     "velocity": [
+      20.0,
+      0.5,
+      0.3
+     ],
+     "frames": 637
+    },
+    "water_light": {
+     "profile": "source_texture_flow_v1",
+     "coordinates": "source_x_and_source_y_minus_64",
+     "polygons": [
+      [
+       [
+        620,
+        1530
+       ],
+       [
+        760,
+        1515
+       ],
+       [
+        910,
+        1530
+       ],
+       [
+        1070,
+        1520
+       ],
+       [
+        1070,
+        1650
+       ],
+       [
+        930,
+        1650
+       ],
+       [
+        780,
+        1625
+       ],
+       [
+        620,
+        1635
+       ]
+      ],
+      [
+       [
+        760,
+        1290
+       ],
+       [
+        850,
+        1280
+       ],
+       [
+        950,
+        1300
+       ],
+       [
+        1070,
+        1280
+       ],
+       [
+        1070,
+        1380
+       ],
+       [
+        940,
+        1380
+       ],
+       [
+        850,
+        1405
+       ],
+       [
+        760,
+        1380
+       ]
+      ]
+     ],
+     "inward_feather_pixels": 12,
+     "phase_offsets": [
+      "zero",
+      "pi_over_3"
+     ],
+     "wavelength_pixels": 96,
+     "period_seconds": 4.0,
+     "diagonal": 0.15,
+     "absolute_amplitude_cap": 0.06,
+     "source_amplitude_fraction": 0.16
+    }
+   },
+   {
+    "image_id": "bg-still-water-night",
+    "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
+    "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
+    "metadata_sha256": "dfe5d78c4c7727369c4b10f31ffa5c5e11e199d5b70a711328b786e8bad527f9",
+    "nominal_start": 20.977,
+    "nominal_end": 42.0,
+    "visual_profile": "native_pond_rest_v2",
+    "camera": {
+     "source_width": 2048,
+     "source_height": 2048,
+     "window_width": 1152,
+     "window_height": 2048,
+     "y": 0,
+     "profile": "smoothstep_pan_v1",
+     "x": [
+      448.0,
+      480.0
+     ],
+     "frames": 638
+    }
+   }
+  ]
+ },
+ "status": "PASS",
+ "audio_preservation": {
+  "version": "aac-remux-proof-v1",
+  "reference_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+  "reference_bytes": 20581582,
+  "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+  "reference": {
+   "aac_packets_sha256": "c4f2bade0301d93a2b1ad03335bfceeedb403cb9faff72f673fc6c15de564555",
+   "packet_manifest_sha256": "06239462e9f5d288f1754c225fd9f0e608ed68fdec2b60d9cc593a694660e5be",
+   "extradata_sha256": "b3108813350006ef07740046fab14af9c374938867d16db02fe1a8baa5e72f10",
+   "pcm_sha256": "dd94d9dba604ccf53ad3a647dd078c752b070da37a8ec8b04b86f17c13ea8893",
+   "pcm_samples": 2016256
+  },
+  "output": {
+   "aac_packets_sha256": "c4f2bade0301d93a2b1ad03335bfceeedb403cb9faff72f673fc6c15de564555",
+   "packet_manifest_sha256": "06239462e9f5d288f1754c225fd9f0e608ed68fdec2b60d9cc593a694660e5be",
+   "extradata_sha256": "b3108813350006ef07740046fab14af9c374938867d16db02fe1a8baa5e72f10",
+   "pcm_sha256": "dd94d9dba604ccf53ad3a647dd078c752b070da37a8ec8b04b86f17c13ea8893",
+   "pcm_samples": 2016256
+  }
+ }
+}
