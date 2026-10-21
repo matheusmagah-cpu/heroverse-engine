@@ -1,0 +1,177 @@
+{
+ "version": "shorts-006-media-checks-v1",
+ "plan_sha256": "95624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905",
+ "history_sha256": "4c4d178392ee1b13b4a5927ba8a6454b895e85119b247aa038215fb9a58b4677",
+ "source_sha256": {
+  "script": "1006e8bec3bc8c43dffe6e5ad1d26e257ceaea5fbe0eb12fa414b9c059d10cad",
+  "timeline": "73357bd61adf13f004967f0a2b2ef3e16569fb2cd344eb419e3d1fcabf1af7a2",
+  "inputs": "07a75a6b6849ed7ada9fc621a573b947689effc458693d6889ce3bc8568f514b",
+  "images": "f2e32a9a210ebd3d4f93d1d6fb9254ee2241d416784c9d31343c8f02138bb695",
+  "long_manifest": "0d40777f7dd2a84db9615bd148df8c3173e2e46b9f7b32418e7677392e49a2bb",
+  "long_review": "e68b0ede86b2837d6070a18f20a17ad097be20d0636c427a4214c0f49324a00f"
+ },
+ "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+ "source_voice_sha256": "d417a273a5e694e49c2eba25cb31a4afd175fa9bdf90c756b7e511ea8277861d",
+ "source_music_sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+ "source_image_sha256": {
+  "bg-still-water-night": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
+  "bg-healing-garden": "97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070"
+ },
+ "source_durations": {
+  "voice_seconds": 1529.993333,
+  "music_seconds": 10800.0,
+  "voice_sample_rate": 24000,
+  "voice_channels": 1
+ },
+ "measured_at": "2026-10-21T08:39:57.976726+00:00",
+ "acoustic": {
+  "pcm_sample_rate": 48000,
+  "window_samples": 480,
+  "active_threshold_dbfs": -40.0,
+  "leading_inactive_seconds": 0.13,
+  "trailing_inactive_seconds": 0.29,
+  "first_active_sample": 6240,
+  "last_active_sample": 1939200,
+  "narration_samples": 1953120,
+  "status": "PASS"
+ },
+ "video": {
+  "decoded_frame_count": 1260,
+  "fps": 30.0,
+  "seconds": 42.0,
+  "width": 1080,
+  "height": 1920,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "audio_sample_rate": 48000,
+  "audio_channels": 2,
+  "decoded_audio_samples": 2016256,
+  "presentation_audio_samples": 2016000,
+  "first_pts": 0.0,
+  "last_pts": 41.966667,
+  "pts_uniform": true,
+  "audio_packets": {
+   "packet_count": 1970,
+   "first_pts_samples": -1024,
+   "skip_samples": 1024,
+   "last_pts_samples": 2015232,
+   "last_duration_samples": 768,
+   "packet_clock_continuous": true,
+   "codec_frame_samples": 1024
+  },
+  "black_intervals": [],
+  "render_plan": {
+   "expected_frame_count": 1260,
+   "fps": 30,
+   "scene_frame_spans": [
+    {
+     "image_id": "bg-still-water-night",
+     "start_frame": 0,
+     "end_frame": 637,
+     "nominal_start_frame": 0,
+     "nominal_end_frame": 629
+    },
+    {
+     "image_id": "bg-healing-garden",
+     "start_frame": 622,
+     "end_frame": 1260,
+     "nominal_start_frame": 629,
+     "nominal_end_frame": 1260
+    }
+   ]
+  },
+  "status": "PASS"
+ },
+ "editorial_metadata": {
+  "caption_source_intervals": [
+   {
+    "text": "Let your face soften.",
+    "start": 0.0,
+    "end": 1.941
+   },
+   {
+    "text": "Let your eyes close.",
+    "start": 2.121,
+    "end": 4.063
+   },
+   {
+    "text": "Let your shoulders drop.",
+    "start": 5.443,
+    "end": 7.427
+   },
+   {
+    "text": "Let your arms rest heavy at your sides.",
+    "start": 7.607,
+    "end": 10.615
+   },
+   {
+    "text": "Let your hands open.",
+    "start": 10.795,
+    "end": 12.715
+   },
+   {
+    "text": "Feel the mattress holding you, the pillow supporting your head.",
+    "start": 12.895,
+    "end": 17.353
+   },
+   {
+    "text": "You do not have to hold yourself up tonight.",
+    "start": 17.533,
+    "end": 20.797
+   },
+   {
+    "text": "You are held.",
+    "start": 20.977,
+    "end": 22.407
+   },
+   {
+    "text": "Let the warmth of rest spread slowly through your chest, your stomach, your hips, your legs, all the way down to your feet.",
+    "start": 23.787,
+    "end": 32.661
+   },
+   {
+    "text": "Every part of you is known by the God who made you.",
+    "start": 32.841,
+    "end": 36.831
+   },
+   {
+    "text": "Every cell is in his care.",
+    "start": 37.011,
+    "end": 39.187
+   },
+   {
+    "text": "Rest now.",
+    "start": 39.367,
+    "end": 40.689
+   }
+  ],
+  "caption_mode": "caption_only",
+  "reference": null,
+  "motion_profiles": [
+   "phrase_push_in_v1",
+   "phrase_push_in_v1"
+  ],
+  "atmosphere_profiles": [
+   {
+    "profile": "source_atmosphere_continuous_v1",
+    "seed": 259006,
+    "envelope": 1.0,
+    "alpha_cap": 0.18,
+    "fog_alpha_max": 0.09,
+    "light_alpha_max": 0.06,
+    "dust_alpha_max": 0.1,
+    "opening_profile": "source_atmosphere_hook_v1"
+   },
+   {
+    "profile": "source_atmosphere_continuous_v1",
+    "seed": 259007,
+    "envelope": 1.0,
+    "alpha_cap": 0.18,
+    "fog_alpha_max": 0.09,
+    "light_alpha_max": 0.06,
+    "dust_alpha_max": 0.1
+   }
+  ]
+ },
+ "status": "PASS"
+}
