@@ -147,5 +147,83 @@ class Pending(unittest.TestCase):
             self.assertIsNone(ps.pending(prod, ledger))
 
 
+class CorrectionRouting(unittest.TestCase):
+    def test_correction_marker_never_falls_back_to_old_binding(self):
+        import review_recovery as rr
+        with tempfile.TemporaryDirectory() as t:
+            prod, d, spec, ledger = recovery_setup(t)
+            for mutation in ({"edit_plan": {}}, {"finalization": {}},
+                             {"finalization": {"kind": "wrong"}}):
+                bad = copy.deepcopy(spec); bad.update(mutation)
+                with patch.object(rr, "binding") as old:
+                    with self.assertRaises(ValueError):
+                        ps.recovery_gate(bad, d, ps.when("2026-10-21T01:00:00Z"))
+                    old.assert_not_called()
+
+    def test_correction_missing_canonical_files_blocks_pending(self):
+        with tempfile.TemporaryDirectory() as t:
+            prod, d, spec, ledger = recovery_setup(t)
+            spec["finalization"] = {"kind": "pilot-006-correction-v1"}
+            (d / "shorts/shorts.json").write_text(json.dumps(spec))
+            self.assertIsNone(ps.pending(prod, ledger, ps.when("2026-10-21T01:00:00Z")))
+
+
+def normalized_shorts_workflow(text):
+    allowed = {"Select (whole video, Gemini), produce (own edit, STANDARD R8), watched review", "Preserve privately and record"}
+    output, step, skipping = [], None, False
+    for line in text.splitlines(keepends=True):
+        if line.startswith("      - name: "):
+            step = line.strip().split(": ", 1)[1]
+        if skipping and (line.startswith("          ") or not line.strip()):
+            continue
+        skipping = False
+        if step in allowed and line.startswith("        run: |"):
+            output.append("        run: AUTHORIZED_BODY\n")
+            skipping = True
+        else:
+            output.append(line)
+    return "".join(output)
+
+class CorrectionWorkflow(unittest.TestCase):
+    def test_only_two_run_bodies_change_and_history_frames_survive(self):
+        import hashlib
+        workflow = Path(__file__).resolve().parents[2] / ".github/workflows/shorts.yml"
+        text = workflow.read_text()
+        self.assertEqual(hashlib.sha256(normalized_shorts_workflow(text).encode()).hexdigest(), "b8c87b3db99c27d5e7ba8c31f65f6841a8f940bd29c34aca19f9c9a0bb11b6ac")
+        branch = text.split('if [ "$PILOT" = "pilot-006" ]; then', 1)[1].split('elif [ -f', 1)[0]
+        self.assertIn("--preflight", branch)
+        self.assertNotIn("shorts_select.py", branch)
+        self.assertLess(branch.index("--preflight"), branch.index("shorts_produce.py"))
+        self.assertIn('shorts_review.py "$T/work/shorts" 1', branch)
+        preserve = text.split('name: Preserve privately and record', 1)[1]
+        correction = preserve.split('if [ "$PILOT" = "pilot-006" ]; then', 1)[1].split('          else\n', 1)[0]
+        self.assertIn('rm -f "$d/short-00-frame.jpg"', correction)
+        self.assertNotIn('*-frame.jpg', correction)
+        self.assertIn('cp "$T/work/shorts/correction-media-checks.json"', correction)
+
+
+    def test_preserve_mismatch_stops_before_upload_or_canonical_change(self):
+        import os, subprocess
+        workflow = Path(__file__).resolve().parents[2] / ".github/workflows/shorts.yml"
+        body = workflow.read_text().split('name: Preserve privately and record', 1)[1].split('        run: |\n', 1)[1]
+        body = "\n".join(line[10:] if line.startswith("          ") else line for line in body.splitlines())
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t); work = root / "temp/work/shorts"; work.mkdir(parents=True)
+            canonical = root / "migration/production/pilot-006/shorts"; canonical.mkdir(parents=True)
+            (canonical / "shorts.json").write_bytes(b"original")
+            (canonical / "short-00-frame.jpg").write_bytes(b"original frame")
+            (work / "shorts.json").write_text(json.dumps({"shorts": [{"media_checks_sha256": "0" * 64, "media_checks": {}}]}))
+            (work / "correction-media-checks.json").write_bytes(b"{}\n")
+            tools = root / "bin"; tools.mkdir(); marker = root / "upload-called"
+            (tools / "gh").write_text('#!/bin/sh\ntouch "' + str(marker) + '"\n'); (tools / "gh").chmod(0o755)
+            result = subprocess.run(["bash", "-e", "-c", body], cwd=root,
+                env={**os.environ, "PILOT": "pilot-006", "RUNNER_TEMP": str(root / "temp"), "PATH": str(tools) + ":" + os.environ["PATH"]}, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("CORRECTION_MEASUREMENTS_MISMATCH", result.stderr)
+            self.assertFalse(marker.exists())
+            self.assertEqual((canonical / "shorts.json").read_bytes(), b"original")
+            self.assertEqual((canonical / "short-00-frame.jpg").read_bytes(), b"original frame")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -30,3 +30,47 @@ Implementation and acceptance are pending. Issue259 remains open and working; no
 
 ## Persistence limitation
 The wrapper provides local atomic replacement. It does not claim distributed exactly-once after a runner crash before the existing Record push. Any uncertain outcome or failed persistence blocks redispatch until run/log evidence is reconciled. No automatic retry trigger was created.
+
+## Phase 3 correction initiated — 2026-10-21 00:55 UTC
+
+Actual run 39521492371 reviewed hash 9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707: QA PASS, editorial FAIL overall 7.6, rhythm 6.5 and ending 7. All publication flags remain false. The exact recorded manifest is archived byte-identically as correction-history.json, SHA256 4c4d178392ee1b13b4a5927ba8a6454b895e85119b247aa038215fb9a58b4677. No unchanged FAIL re-review.
+
+SPEC v5 contract received independent PASS and CARD_OK. The first issue-body update was denied before execution; after owner specifically confirmed the exact consolidated replacement, one same-operation retry succeeded at 00:54:38UTC. No alternate route or scope expansion was used.
+
+The closed 36-second plan preserves complete narration, 1.310 seconds after the last word and two nominal 18-second scenes. Existing painted assets and FLAC sources were verified by hash. Their use is a plan, not qualified output. Continuous atmosphere and a longer tail do not guarantee a score 9; local visual/auditory smoke, real output QA, watched review >=9 and publication gates remain required. No new MP4, render or provider call yet.
+
+Canonical plan SHA256 1c52034ce611b8a30c9d92ce22e9b6ce8f7cbff14b803a44ff8e7d1eb4991c57, 3460 bytes including newline. Source script/timeline/inputs/images/long manifest/long review hashes all matched the contract. Music of 10800 seconds covers the planned offset; voice source is 24000 Hz mono, 1529.993333 seconds. Output resampling to 48 kHz is not source provenance.
+
+Issue 259 remains open and dot-working. No new claim; this phase PR uses Refs only. The phase 2 accidental auto-closure from a negated closing phrase was corrected; future phase PR bodies must never contain a closing keyword before an issue reference, even negated.
+
+### Phase 3 local evidence at 2026-10-21 01:08 UTC
+
+- The initial “no render” statement above describes the draft initiation. Six local diagnostic MP4 clips now exist, each one second at FullHD, sampling start/middle/end of both real scenes. They are not the complete production Short and have no editorial score. Commands and measurements are preserved in the execution audit. Source composition remains painterly, no persons observed in inspected frames, captions/reference legible in sampled frames.
+- Real source audio was mixed into a 36.000-second diagnostic WAV using the intended audio graph. A native audio-input attempt returned unsupported audio input. Perceptual audio is NOT_REVIEWED; sample counts and energy are technical measurements only. Temporary technical direction approved a single-method clarification, confirmed in issue259 at01:03:41UTC: mandatory audiovisual review is still on the complete real MP4 using the existing designated reviewer, before eligibility/publication. No extra provider call for smoke.
+- Producer baseline89 tests passed, including six numerical005 frame hashes identical to baseline. New tests cover continuous006 atmosphere, fixed spans, voice/padding, closed routing and serial/reference equivalence of every synthetic frame/PTS and all1728000 stereo sample frames. Synthetic equivalence is not real media qualification.
+- Independent review found direct producer and check-media entrances missing canonical-attempt preflight; both were corrected to block stale prepared selections before rendering/provider. It also found Preserve only checked file existence; Preserve now verifies raw SHA and object identity before any canonical deletion/copy or release upload.
+- Current pending suite:13 tests PASS0.074s. Includes execution of the actual Preserve body with altered measurements and proof of zero upload calls plus unchanged canonical manifest/frame.
+- Current publisher suite:52 tests PASS0.446s. Actual correction binding and temporary synthetic source/history/media fixtures are used. Positive9.0 yields one fake upload then readback without MP4; seven forged gates fail before session. Fake video IDs in test output are not external publication evidence.
+- Test harness failures were preserved and corrected: missing copy import, a branch parser splitting at Python's inline else, and a synthetic path missing the canonical migration/production context. A positive test exposed the path problem, and rejection assertions now require the actual binding failure rather than any earlier exception. No production validator was weakened to pass fixtures.
+- A worker exec session disconnected before a final repeated suite could be observed; its result is UNKNOWN. A fresh exec confirmed files/environment intact, then affected tests were rerun. No production run was active and no retry of provider/upload occurred.
+- CARD_OK and16 frozen-file byte comparisons passed against582ff607, including all qa_criteria files, STANDARD, shorts_qa, ordinary005 adapter and reviewer. An initial audit command used the wrong shorts_qa path and failed; the corrected existing migration/publish/shorts_qa.py path was then checked successfully. No missing check was reported as PASS.
+
+### Phase 3 CI rejection and correction scope — 2026-10-21 01:24 UTC
+
+CI https://github.com/matheusmagah-cpu/heroverse-engine/actions/runs/39525741977 on SHA 6bdf2a5b331f92349d081859aaab4e9f5a71576a returned FAILURE. The complete local loop also returned exit 1. These are not code acceptance or media PASS.
+
+The three actual failures are retained: (1) a fixed floating-image hash was not portable to the runner's OpenCV 4.6 build; the earlier local baseline comparison does not establish cross-environment equivalence; (2) sixteen references in new producer tests depended on mutable pilot-006 files; (3) test_errors_register correctly rejected the new adapter test because it was absent from the explicit CI loop. A subprocess bridge did not satisfy that register. Neither checker nor thresholds will be weakened.
+
+Temporary technical direction approved only adding migration/production/test_shorts_006_plan.py to the existing pr-checks.yml loop and that exact workflow path to the card. The issue update succeeded at 01:24:15 UTC and exact body readback matched. Removing this single added test token reconstructs all original workflow bytes; triggers, inputs, permissions, concurrency and schedule are untouched. test_errors_register.py then reported 3 tests OK in 0.005 seconds. The remaining fixture/oracle corrections and final full-suite/CI acceptance are still pending at this entry.
+
+The sole task resumed after an interruption. No issue PATCH or CI edit had been attempted before that interruption, so there was no uncertain mutation retried. No new production rendering, provider invocation or publication occurred.
+
+At 01:33 UTC the corrected producer test fixtures use synthetic temporary sources and genuine validators, not mutable pilot files or bypassed scanner rules. The 005 numerical oracle is independently copied from baseline582ff607 and evaluates all91 opening frames with exact array equality in the same OpenCV environment. FPS30 is pinned in the oracle; no expected hash was replaced with an observed value. The redundant bridge was removed because CI now invokes the complete adapter suite directly.
+
+- Corrected focused producer tests:8 PASS0.539s; technical direction independently repeated8 PASS0.540s.
+- Unmodified live-data scanner:4 PASS0.819s, independently4 PASS0.276s.
+- Unmodified error register:3 PASS0.005s, independently3 PASS0.006s.
+- Remaining complete repository loop excluding producer, including directly invoked adapter:47 files PASS, persisted exit0.
+- Two long-running revised producer test sessions lost their process handles and had no terminal summary/exit marker. Their result is UNKNOWN, not PASS. No process remained when checked; the full producer suite is being reconciled separately. Prior100-test results apply to the previous test version only, while producer implementation bytes remain unchanged.
+- Bounded FullHD transition diagnosis remains pending. The six existing FullHD clips prove sampled rendering only, not serial transition equivalence or editorial quality.
+- Card check CARD_OK; scope IN_SCOPE13files; git diff --check PASS. Production remains blocked until all applicable final tests, independent review and exact-SHA CI pass.
