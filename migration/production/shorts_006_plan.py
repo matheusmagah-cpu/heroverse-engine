@@ -581,6 +581,7 @@ def _evaluate(spec, actual_output_sha256, now, media, media_hash, contract):
     plan, failed, docs = contract
     record = _record(spec)
     _validate_attempt(spec, actual_output_sha256, now)
+    http_release = _validate_http_attempt(spec, actual_output_sha256, now)
     _bind_record(spec, plan, record, actual_output_sha256, docs)
     require(actual_output_sha256 not in failed, "HISTORICAL_EDITORIAL_FAIL_BYTES")
     require(type(media_hash) is str and HASH.fullmatch(media_hash)
@@ -597,6 +598,8 @@ def _evaluate(spec, actual_output_sha256, now, media, media_hash, contract):
         return "QA_FAIL"
     if review != "PASS":
         return "REVIEW_" + review
+    if http_release is not None:
+        return http_release
     if owner_quality_policy.check(record["review"], actual_output_sha256):
         return "OWNER_QUALITY_POLICY_BLOCKED"
     if now > utc_date(LEAD_DEADLINE):
@@ -804,8 +807,8 @@ def _recovery_stable(data, started_hash, mp4):
     require(hash_file(safe_path(data["path"])) == started_hash, "INPUT_CHANGED")
 
 
-def _recovery_whitelist(original, result):
-    top = {"correction_review_attempt", "finalization", "release_status", "publish", "shorts"}
+def _recovery_whitelist(original, result, *, attempt_key="correction_review_attempt"):
+    top = {attempt_key, "finalization", "release_status", "publish", "shorts"}
     fields = {"review", "owner_quality_policy", "release_status", "publish"}
     require(type(result) is dict and exact({k: v for k, v in original.items() if k not in top},
             {k: v for k, v in result.items() if k not in top}), "OUTPUT_WHITELIST_VIOLATION")
@@ -906,9 +909,330 @@ def recover_review(pilot_dir):
             candidate.unlink(missing_ok=True)
 
 
+# Separate execution authority; historical recovery pins/CLI remain consumed.
+# The second alias deliberately scopes the new eligibility guard to these bytes,
+# without retroactively changing unrelated correction/legacy synthetic fixtures.
+HTTP_RECOVERY_SOURCE_RUN = "39575597092"
+HTTP_RECOVERY_MANIFEST_SHA256 = "856f2765f104a1a98a54ec322784302066b545882595290020cf672183ebf9f8"
+HTTP_RECOVERY_OUTPUT_SHA256 = "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e"
+HTTP_RECOVERY_NOT_BEFORE = "2026-10-21T10:00:00Z"
+HTTP_PREVIOUS_ATTEMPT_SHA256 = "c9c707beb0b6cfbfd6f8512ec4a705482a267d0be15c12a1e9dbcefed289c3e3"
+HTTP_PREVIOUS_REVIEW = {
+    "status": "NOT_REVIEWED_ProviderFailure", "error_code": "HTTP_503_UNAVAILABLE",
+    "failed_at": "2026-10-21T09:17:47.236719+00:00", "output_sha256": HTTP_RECOVERY_OUTPUT_SHA256,
+    "provider_diagnostic": {"http_status": 503, "provider_status": "UNAVAILABLE",
+        "body_truncated": False, "raw_body_retained": False, "sanitized": True,
+        "body_parse_status": "JSON_ERROR_OBJECT", "body_bytes_read": 198}}
+HTTP_PREVIOUS_ATTEMPT = {
+    "version": "shorts-006-review-attempt-v1", "source_run_id": "39569442793",
+    "source_manifest_sha256": "a33d46db02ee419c357ae4ecefeee615b3d6ac32af143e85814cfbcb82bd1418",
+    "media_sha256": "6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200",
+    "output_sha256": HTTP_RECOVERY_OUTPUT_SHA256, "not_before": "2026-10-21T08:51:45Z",
+    "cutoff": LEAD_DEADLINE, "target_slot": TARGET_SLOT, "run_id": HTTP_RECOVERY_SOURCE_RUN,
+    "run_attempt": 1, "started_at": "2026-10-21T09:16:23.550574+00:00",
+    "completed_at": "2026-10-21T09:17:47.289630+00:00", "state": "COMPLETE",
+    "previous_review": deepcopy(RECOVERY_PREVIOUS_REVIEW),
+    "fresh_qa": {"file": "migration/production/pilot-006/shorts/short-00.mp4", "seconds": 42.0,
+        "lufs": -15.0, "true_peak_dbtp": -2.4, "checks": {key: True for key in QA_CHECKS}, "status": "PASS"},
+    "reason": None}
+HTTP_AUDIT_KEYS = {"transport_attempts", "http_completion", "terminal_stage", "cleanup_status", "http_elapsed_seconds"}
+HTTP_TRACE_KEYS = {"attempt", "started_at", "elapsed_start_seconds", "elapsed_end_seconds", "outcome",
+                   "http_status", "provider_status", "retry_after_seconds", "retry_info_seconds",
+                   "selected_delay_seconds", "slept_seconds", "decision"}
+HTTP_COMPLETIONS = {"COMPLETED", "BUDGET_EXHAUSTED", "DEADLINE_EXCEEDED", "UPLOAD_FAILED"}
+HTTP_STAGES = {"NONE", "UPLOAD_START", "UPLOAD_FINALIZE", "FILE_POLL", "GENERATE_CONTENT"}
+HTTP_PROVIDER_STATUSES = {"INVALID_ARGUMENT", "UNAUTHENTICATED", "PERMISSION_DENIED",
+                          "NOT_FOUND", "RESOURCE_EXHAUSTED", "UNAVAILABLE"}
+
+
+def _canonical_sha256(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
+                                     ensure_ascii=False, allow_nan=False).encode("utf-8")).hexdigest()
+
+
+def _http_attempt_constants():
+    return {"version": "shorts-006-http-review-attempt-v1", "source_run_id": HTTP_RECOVERY_SOURCE_RUN,
+            "source_manifest_sha256": HTTP_RECOVERY_MANIFEST_SHA256, "media_sha256": RECOVERY_MEDIA_SHA256,
+            "output_sha256": HTTP_RECOVERY_OUTPUT_SHA256, "not_before": HTTP_RECOVERY_NOT_BEFORE,
+            "cutoff": LEAD_DEADLINE, "target_slot": TARGET_SLOT,
+            "previous_attempt_sha256": HTTP_PREVIOUS_ATTEMPT_SHA256, "http_policy": "designated-review-http-v1"}
+
+
+def _http_previous_attempt(spec):
+    previous = spec.get("correction_review_attempt")
+    require(exact(previous, HTTP_PREVIOUS_ATTEMPT)
+            and _canonical_sha256(previous) == HTTP_PREVIOUS_ATTEMPT_SHA256, "HTTP_PREVIOUS_ATTEMPT_CHANGED")
+
+
+def _validate_http_trace(audit):
+    """Pure closed-schema validation, never trusts fields returned by a model."""
+    trace, elapsed = audit["transport_attempts"], audit["http_elapsed_seconds"]
+    require(type(trace) is list and len(trace) <= 2 and number(elapsed) and elapsed >= 0, "HTTP_TRACE_SCHEMA")
+    previous_end = 0.0
+    for index, entry in enumerate(trace):
+        require(type(entry) is dict and entry.keys() == HTTP_TRACE_KEYS, "HTTP_TRACE_SCHEMA")
+        require(type(entry["attempt"]) is int and entry["attempt"] == index + 1, "HTTP_TRACE_ATTEMPT")
+        require(type(entry["started_at"]) is str, "HTTP_TRACE_CLOCK")
+        utc_date(entry["started_at"])
+        start, end, slept = entry["elapsed_start_seconds"], entry["elapsed_end_seconds"], entry["slept_seconds"]
+        require(number(start) and number(end) and number(slept)
+                and previous_end <= start <= end <= elapsed and 0 <= slept <= elapsed - end, "HTTP_TRACE_CLOCK")
+        status = entry["http_status"]
+        require(status is None or type(status) is int and 100 <= status <= 599, "HTTP_TRACE_STATUS")
+        require(entry["provider_status"] is None or type(entry["provider_status"]) is str
+                and entry["provider_status"] in HTTP_PROVIDER_STATUSES, "HTTP_TRACE_STATUS")
+        for field in ("retry_after_seconds", "retry_info_seconds", "selected_delay_seconds"):
+            require(entry[field] is None or type(entry[field]) is int and entry[field] >= 0, "HTTP_TRACE_HINT")
+        outcome, decision = entry["outcome"], entry["decision"]
+        require(type(outcome) is str and outcome in {"HTTP_ERROR", "SUCCESS", "UNPARSEABLE_MODEL_OUTPUT", "TRANSPORT_ERROR"}
+                and type(decision) is str and decision in {"RETURN", "RETRY", "STOP_FINAL", "STOP_NONRETRYABLE",
+                    "STOP_HINT_INVALID", "STOP_BUDGET", "STOP_DEADLINE"}, "HTTP_TRACE_OUTCOME")
+        if outcome in {"SUCCESS", "UNPARSEABLE_MODEL_OUTPUT"}:
+            require(status == 200 and entry["provider_status"] is None, "HTTP_TRACE_STATUS")
+        elif outcome == "TRANSPORT_ERROR":
+            # A response may have supplied a factual status before body reading
+            # failed. Preserve that observation without treating it as success.
+            require(entry["provider_status"] is None, "HTTP_TRACE_STATUS")
+        else:
+            require(status is not None, "HTTP_TRACE_STATUS")
+        if outcome != "HTTP_ERROR":
+            require(all(entry[k] is None for k in ("retry_after_seconds", "retry_info_seconds", "selected_delay_seconds"))
+                    and slept == 0, "HTTP_TRACE_HINT")
+        selected = entry["selected_delay_seconds"]
+        if selected is not None:
+            require(outcome == "HTTP_ERROR" and status == 503
+                    and selected == max(20, entry["retry_after_seconds"] or 0, entry["retry_info_seconds"] or 0),
+                    "HTTP_TRACE_HINT")
+        if slept > 0:
+            require(index == 0 and selected is not None, "HTTP_TRACE_SLEEP")
+        if decision == "RETURN":
+            require(outcome == "SUCCESS" and index == len(trace) - 1, "HTTP_TRACE_DECISION")
+        if decision == "STOP_FINAL":
+            require(index == 1 and outcome == "HTTP_ERROR" and status == 503, "HTTP_TRACE_DECISION")
+        if decision == "STOP_HINT_INVALID":
+            require(outcome == "HTTP_ERROR" and status == 503 and selected is None and slept == 0,
+                    "HTTP_TRACE_DECISION")
+        if index < len(trace) - 1:
+            require(outcome == "HTTP_ERROR" and status == 503 and decision == "RETRY"
+                    and selected is not None and slept >= selected, "HTTP_TRACE_RETRY")
+        else:
+            require(decision != "RETRY", "HTTP_TRACE_RETRY")
+        previous_end = end + slept
+    require(not trace or audit["terminal_stage"] == "GENERATE_CONTENT", "HTTP_TRACE_STAGE")
+    return trace
+
+
+def _validated_http_client_audit(audit):
+    """Only closed, sanitized client evidence may survive an integrity ERROR."""
+    require(type(audit) is dict and audit.keys() == HTTP_AUDIT_KEYS, "HTTP_AUDIT_SCHEMA")
+    require(type(audit["http_completion"]) is str and audit["http_completion"] in HTTP_COMPLETIONS
+            and type(audit["terminal_stage"]) is str and audit["terminal_stage"] in HTTP_STAGES
+            and type(audit["cleanup_status"]) is str and audit["cleanup_status"] in {"NOT_ATTEMPTED", "SUCCESS", "FAILED"},
+            "HTTP_COMPLETION_SCHEMA")
+    _validate_http_trace(audit)
+    return deepcopy(audit)
+
+
+def _validate_http_attempt(spec, output_hash, now):
+    audit = spec.get("correction_http_recovery_attempt")
+    if audit is None:
+        require("correction_http_recovery_attempt" not in spec, "HTTP_ATTEMPT_SCHEMA")
+        if output_hash == HTTP_RECOVERY_OUTPUT_SHA256:
+            if "correction_review_attempt" in spec:
+                _http_previous_attempt(spec)
+                require(exact(_record(spec).get("review"), HTTP_PREVIOUS_REVIEW), "HTTP_ATTEMPT_REQUIRED")
+            else:
+                require(exact(_record(spec).get("review"), RECOVERY_PREVIOUS_REVIEW), "HTTP_ATTEMPT_REQUIRED")
+        return None
+    constants = _http_attempt_constants()
+    keys = set(constants) | HTTP_AUDIT_KEYS | {"run_id", "run_attempt", "started_at", "completed_at", "state",
+                                             "previous_review", "fresh_qa", "reason"}
+    require(type(audit) is dict and audit.keys() == keys, "HTTP_ATTEMPT_SCHEMA")
+    require(output_hash == HTTP_RECOVERY_OUTPUT_SHA256 and all(exact(audit[k], v) for k, v in constants.items()),
+            "HTTP_ATTEMPT_PINS")
+    _http_previous_attempt(spec)
+    require(type(audit["run_id"]) is str and re.fullmatch(r"[1-9][0-9]*", audit["run_id"])
+            and audit["run_id"] not in {RECOVERY_SOURCE_RUN, HTTP_RECOVERY_SOURCE_RUN}
+            and type(audit["run_attempt"]) is int and audit["run_attempt"] == 1, "HTTP_ATTEMPT_RUN")
+    require(exact(audit["previous_review"], HTTP_PREVIOUS_REVIEW), "HTTP_PREVIOUS_REVIEW_CHANGED")
+    require(_qa_verdict(audit["fresh_qa"], 42.0) == "PASS", "HTTP_FRESH_QA_FAIL")
+    require(type(audit["started_at"]) is str, "HTTP_ATTEMPT_CLOCK")
+    start = utc_date(audit["started_at"])
+    require(utc_date(HTTP_RECOVERY_NOT_BEFORE) <= start <= utc_date(LEAD_DEADLINE) and start <= now,
+            "HTTP_ATTEMPT_CLOCK")
+    state = audit["state"]
+    require(type(state) is str and state in {"STARTED", "COMPLETE", "ERROR"}, "HTTP_ATTEMPT_STATE")
+    if state == "STARTED":
+        require(all(audit[k] is None for k in ("completed_at", "reason", "http_completion", "http_elapsed_seconds"))
+                and audit["transport_attempts"] == [] and audit["terminal_stage"] == "NONE"
+                and audit["cleanup_status"] == "NOT_ATTEMPTED", "HTTP_ATTEMPT_STARTED")
+    else:
+        require(type(audit["completed_at"]) is str and start <= utc_date(audit["completed_at"]) <= now,
+                "HTTP_ATTEMPT_CLOCK")
+        require(audit["reason"] is None if state == "COMPLETE" else
+                type(audit["reason"]) is str and audit["reason"] in RECOVERY_ERRORS, "HTTP_ATTEMPT_REASON")
+    require(state == "COMPLETE", "HTTP_ATTEMPT_NOT_COMPLETE")
+    client_audit = _validated_http_client_audit({k: audit[k] for k in HTTP_AUDIT_KEYS})
+    trace = client_audit["transport_attempts"]
+    if audit["http_completion"] != "COMPLETED":
+        return "HTTP_" + audit["http_completion"]
+    if audit["http_elapsed_seconds"] > 600:
+        return "HTTP_BUDGET_EXHAUSTED"
+    if _record(spec)["review"].get("status") in {"PASS", "FAIL"}:
+        require(len(trace) in (1, 2) and trace[-1]["outcome"] == "SUCCESS"
+                and trace[-1]["decision"] == "RETURN" and trace[-1]["http_status"] == 200, "HTTP_SUCCESS_TRACE_REQUIRED")
+        require(all(start <= utc_date(t["started_at"]) <= utc_date(audit["completed_at"])
+                    and utc_date(t["started_at"]) <= utc_date(LEAD_DEADLINE) for t in trace), "HTTP_TRACE_CLOCK")
+    return None
+
+
+def http_recovery_preflight(pilot_dir, *, now_utc):
+    """Document-only check of the consumed v1 evidence; no download/provider."""
+    now = utc_date(now_utc)
+    require(utc_date(HTTP_RECOVERY_NOT_BEFORE) <= now <= utc_date(LEAD_DEADLINE), "HTTP_RECOVERY_OUTSIDE_WINDOW")
+    pilot = safe_path(pilot_dir, directory=True)
+    require(pilot.resolve() == CANONICAL_PILOT.resolve(), "PILOT_PATH_MISMATCH")
+    path = safe_path(pilot / "shorts/shorts.json")
+    spec, digest = read_json(path)
+    require(digest == HTTP_RECOVERY_MANIFEST_SHA256, "HTTP_RECOVERY_SOURCE_CHANGED")
+    media, mh = read_json(safe_path(path.parent / MEDIA_FILE))
+    require(mh == RECOVERY_MEDIA_SHA256, "RECOVERY_MEDIA_CHANGED")
+    require("correction_http_recovery_attempt" not in spec, "HTTP_RECOVERY_ALREADY_ATTEMPTED")
+    _http_previous_attempt(spec)
+    record = _record(spec)
+    require(exact(record.get("review"), HTTP_PREVIOUS_REVIEW), "HTTP_RECOVERY_NOT_SECOND_503")
+    require(record.get("publish") is False and spec.get("publish") is False, "RECOVERY_SOURCE_ELIGIBLE")
+    final = spec.get("finalization")
+    expected = {"kind": KIND, "status": "COMPLETE", "source_pilot": "pilot-006",
+                "plan_sha256": PLAN_SHA256, "history_sha256": HISTORY_SHA256,
+                "output_sha256": HTTP_RECOVERY_OUTPUT_SHA256, "target_slot": TARGET_SLOT,
+                "release_deadline": LEAD_DEADLINE, "release_status": "REVIEW_NOT_REVIEWED"}
+    require(type(final) is dict and final.keys() == set(expected) | {"validated_at"}
+            and all(exact(final[k], v) for k, v in expected.items()), "RECOVERY_FINALIZATION_INVALID")
+    require(type(final["validated_at"]) is str and utc_date(final["validated_at"]) <= now, "RECOVERY_FINALIZATION_CLOCK")
+    require(spec.get("release_status") == record.get("release_status") == "REVIEW_NOT_REVIEWED", "RECOVERY_SOURCE_STATUS")
+    contract = _contract()
+    require(_qa_verdict(record.get("qa"), 42.0) == "PASS", "RECOVERY_ORIGINAL_QA_FAIL")
+    require(_evaluate(spec, HTTP_RECOVERY_OUTPUT_SHA256, now, media, mh, contract) == "REVIEW_NOT_REVIEWED",
+            "RECOVERY_NOT_UNREVIEWED")
+    return {"pilot": pilot, "path": path, "spec": spec, "media": media, "media_hash": mh, "contract": contract}
+
+
+def http_recovery_list(pilot_dir):
+    http_recovery_preflight(pilot_dir, now_utc=datetime.now(timezone.utc))
+    print("short-00.mp4", HTTP_RECOVERY_OUTPUT_SHA256)
+
+
+def recover_http_review(pilot_dir):
+    """One invocation after operational idle reconciliation; no retries here."""
+    data = http_recovery_preflight(pilot_dir, now_utc=datetime.now(timezone.utc))
+    run_id, attempt = os.environ.get("GITHUB_RUN_ID"), os.environ.get("GITHUB_RUN_ATTEMPT")
+    require(type(run_id) is str and re.fullmatch(r"[1-9][0-9]*", run_id)
+            and run_id not in {RECOVERY_SOURCE_RUN, HTTP_RECOVERY_SOURCE_RUN} and attempt == "1", "RECOVERY_RUN_INVALID")
+    key = os.environ.get("HERO_GEMINI_API_KEY", "")
+    require(bool(key.strip()), "RECOVERY_KEY_MISSING")
+    mp4 = data["path"].parent / "short-00.mp4"
+    _recovery_output(mp4)
+    import shorts_qa  # local technical check; no provider initialization
+    fresh = shorts_qa.check(mp4)
+    _recovery_output(mp4)
+    require(_qa_verdict(fresh, 42.0) == "PASS", "RECOVERY_FRESH_QA_FAIL")
+    # Recheck every source and the clock after potentially slow local QA.
+    data = http_recovery_preflight(pilot_dir, now_utc=datetime.now(timezone.utc))
+    _recovery_output(mp4)
+    import shorts_review  # lazy, only after all prechecks passed
+    start = datetime.now(timezone.utc)
+    require(utc_date(HTTP_RECOVERY_NOT_BEFORE) <= start <= utc_date(LEAD_DEADLINE), "RECOVERY_OUTSIDE_WINDOW")
+    original = deepcopy(data["spec"])
+    started = _disable(original)
+    started["correction_http_recovery_attempt"] = _http_attempt_constants() | {
+        "run_id": run_id, "run_attempt": 1, "started_at": start.isoformat(), "completed_at": None,
+        "state": "STARTED", "previous_review": deepcopy(HTTP_PREVIOUS_REVIEW),
+        "fresh_qa": deepcopy(fresh), "reason": None, "transport_attempts": [],
+        "http_completion": None, "terminal_stage": "NONE", "cleanup_status": "NOT_ATTEMPTED", "http_elapsed_seconds": None}
+    started_raw = (json.dumps(started, indent=1, ensure_ascii=False, allow_nan=False) + "\n").encode("utf-8")
+    started_hash = hashlib.sha256(started_raw).hexdigest()
+    require(hash_file(safe_path(data["path"])) == HTTP_RECOVERY_MANIFEST_SHA256, "INPUT_CHANGED")
+    atomic_json(data["path"], started)
+    require(hash_file(safe_path(data["path"])) == started_hash, "INPUT_CHANGED")
+    candidate = None
+    client_audit = None
+    try:
+        # The second clock/read is immediately before the sole provider call.
+        _recovery_stable(data, started_hash, mp4)
+        require(utc_date(HTTP_RECOVERY_NOT_BEFORE) <= datetime.now(timezone.utc) <= utc_date(LEAD_DEADLINE), "OPERATION_ERROR")
+        policy = shorts_review.ReviewHTTPPolicy(cutoff_utc=LEAD_DEADLINE)
+        try:
+            review = shorts_review.review(mp4, deepcopy(_record(original)), key, http_policy=policy)
+        except Exception as error:
+            review = shorts_review.failure_record(error, mp4)
+        client_audit = _validated_http_client_audit(policy.audit())
+        _recovery_stable(data, started_hash, mp4)
+        result = deepcopy(started)
+        rec = _record(result)
+        rec["review"] = deepcopy(review)
+        problems = owner_quality_policy.check(review, RECOVERY_OUTPUT_SHA256)
+        rec["owner_quality_policy"] = {"minimum_overall": 9.0, "status": "FAIL" if problems else "PASS", "problems": problems}
+        result["correction_http_recovery_attempt"].update(deepcopy(client_audit))
+        result["correction_http_recovery_attempt"].update(state="COMPLETE", completed_at=datetime.now(timezone.utc).isoformat())
+        fd, name = tempfile.mkstemp(prefix=".correction-http-review-", suffix=".json", dir=data["path"].parent)
+        os.close(fd)
+        candidate = Path(name)
+        atomic_json(candidate, result)
+        finalized = finalize_file(candidate, mp4)
+        require(finalized.get("finalization", {}).get("status") == "COMPLETE", "FINALIZATION_ERROR")
+        _recovery_whitelist(original, finalized, attempt_key="correction_http_recovery_attempt")
+        _recovery_stable(data, started_hash, mp4)
+        # All slow external checks precede this fresh, final clock. Pure
+        # finalization catches cutoff crossing without another provider call.
+        install_at = datetime.now(timezone.utc)
+        while True:
+            finalized = finalize_manifest(finalized, actual_output_sha256=RECOVERY_OUTPUT_SHA256,
+                now_utc=install_at, media_checks=data["media"], media_sha256=data["media_hash"], contract=data["contract"])
+            require(finalized.get("finalization", {}).get("status") == "COMPLETE", "FINALIZATION_ERROR")
+            _recovery_whitelist(original, finalized, attempt_key="correction_http_recovery_attempt")
+            _recovery_stable(data, started_hash, mp4)
+            after_checks = datetime.now(timezone.utc)
+            if install_at <= utc_date(LEAD_DEADLINE) < after_checks:
+                # The cutoff crosses only once; repeat pure finalization, never
+                # the provider. Rehash again even after this negative result.
+                install_at = after_checks
+                continue
+            require(after_checks.date() == install_at.date(), "FINALIZATION_ERROR")
+            break
+        atomic_json(data["path"], finalized)
+        return finalized
+    except Exception as error:
+        reason = str(error) if isinstance(error, EvidenceError) and str(error) in RECOVERY_ERRORS else "OPERATION_ERROR"
+        # Never overwrite another actor's bytes, or a possibly successful install.
+        if hash_file(safe_path(data["path"])) == started_hash:
+            failed = _disable(started)
+            if client_audit is not None:
+                failed["correction_http_recovery_attempt"].update(deepcopy(client_audit))
+            failed["correction_http_recovery_attempt"].update(state="ERROR", reason=reason,
+                completed_at=datetime.now(timezone.utc).isoformat())
+            failed["release_status"] = reason
+            _record(failed)["release_status"] = reason
+            failed["finalization"].update(status="ERROR", release_status=reason,
+                validated_at=datetime.now(timezone.utc).isoformat())
+            atomic_json(data["path"], failed)
+        raise EvidenceError(reason) from None
+    finally:
+        if candidate is not None:
+            candidate.unlink(missing_ok=True)
+
+
 def cli(argv=None):
     args = list(sys.argv[1:] if argv is None else argv)
     try:
+        if args[:1] == ["--http-recovery-list"] and len(args) == 2:
+            http_recovery_list(args[1])
+            return 0
+        if args[:1] == ["--recover-http-review"] and len(args) == 2:
+            result = recover_http_review(args[1])
+            print(json.dumps({"status": result["finalization"]["status"], "release_status": result["release_status"],
+                              "publish": _record(result)["publish"]}))
+            return 0 if result["finalization"]["status"] == "COMPLETE" else 1
         if args[:1] == ["--recovery-list"] and len(args) == 2:
             recovery_list(args[1])
             return 0

@@ -333,6 +333,16 @@
     "file": "migration/production/shorts_select.py",
     "contains": "def validate_candidate(sentences, refs, moment):"
    }
+  },
+  {
+   "id": "E34",
+   "date": "2026-10-21",
+   "error": "Offline counterexamples showed ignored Retry-After/RetryInfo, a sleep after the terminal HTTP503, and stale503 diagnostics after an invalid HTTP200 response. The cause of the two real provider503 responses remains UNKNOWN.",
+   "fix": "Opt-in designated-review HTTP policy respects complete server waits within a finite600-second budget and fixed deadline, makes at most two same-model transports, never sleeps after the final transport, and records sanitized attempt-local evidence. Existing callers and all media gates remain unchanged.",
+   "antidote": {
+    "file": "migration/mining/test_structure_mining.py",
+    "contains": "def test_http_policy_respects_retry_hints_and_never_sleeps_after_final_attempt"
+   }
   }
  ]
 }
