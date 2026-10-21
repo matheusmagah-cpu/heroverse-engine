@@ -279,7 +279,7 @@
    "review": {
     "status": "NOT_REVIEWED_ProviderFailure",
     "error_code": "HTTP_503_UNAVAILABLE",
-    "failed_at": "2026-10-21T08:41:45.362893+00:00",
+    "failed_at": "2026-10-21T09:17:47.236719+00:00",
     "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
     "provider_diagnostic": {
      "http_status": 503,
@@ -429,7 +429,54 @@
   "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
   "target_slot": "2026-10-21T14:00:00Z",
   "release_deadline": "2026-10-21T13:15:00Z",
-  "validated_at": "2026-10-21T08:41:45.430605+00:00",
+  "validated_at": "2026-10-21T09:17:47.377766+00:00",
   "release_status": "REVIEW_NOT_REVIEWED"
+ },
+ "correction_review_attempt": {
+  "version": "shorts-006-review-attempt-v1",
+  "source_run_id": "39569442793",
+  "source_manifest_sha256": "a33d46db02ee419c357ae4ecefeee615b3d6ac32af143e85814cfbcb82bd1418",
+  "media_sha256": "6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200",
+  "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+  "not_before": "2026-10-21T08:51:45Z",
+  "cutoff": "2026-10-21T13:15:00Z",
+  "target_slot": "2026-10-21T14:00:00Z",
+  "run_id": "39575597092",
+  "run_attempt": 1,
+  "started_at": "2026-10-21T09:16:23.550574+00:00",
+  "completed_at": "2026-10-21T09:17:47.289630+00:00",
+  "state": "COMPLETE",
+  "previous_review": {
+   "status": "NOT_REVIEWED_ProviderFailure",
+   "error_code": "HTTP_503_UNAVAILABLE",
+   "failed_at": "2026-10-21T08:41:45.362893+00:00",
+   "output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+   "provider_diagnostic": {
+    "http_status": 503,
+    "provider_status": "UNAVAILABLE",
+    "body_truncated": false,
+    "raw_body_retained": false,
+    "sanitized": true,
+    "body_parse_status": "JSON_ERROR_OBJECT",
+    "body_bytes_read": 198
+   }
+  },
+  "fresh_qa": {
+   "file": "migration/production/pilot-006/shorts/short-00.mp4",
+   "seconds": 42.0,
+   "lufs": -15.0,
+   "true_peak_dbtp": -2.4,
+   "checks": {
+    "decode_clean": true,
+    "one_h264_1080x1920": true,
+    "fps_30": true,
+    "one_aac_stereo_48k": true,
+    "duration": true,
+    "loudness": true,
+    "true_peak": true
+   },
+   "status": "PASS"
+  },
+  "reason": null
  }
 }
