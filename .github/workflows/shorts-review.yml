@@ -29,11 +29,12 @@ jobs:
           python3 -I -B migration/publish/shorts_prerequisite.py "migration/production/$PILOT"
       - name: Shorts from the private release (hash-verified)
         run: |
+          set -euo pipefail
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
           sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
           d="migration/production/$PILOT/shorts"
           if [ "$PILOT" = pilot-006 ]; then
-            python3 -I -B migration/publish/review_recovery.py --list "migration/production/$PILOT" migration/evidence/owner-quality-policy/pilot-006-selection.json
+            python3 -I -B migration/production/shorts_006_plan.py --recovery-list "migration/production/$PILOT"
           else
             python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts']]" "$d/shorts.json"
           fi |
@@ -45,8 +46,9 @@ jobs:
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: |
+          set -euo pipefail
           if [ "$PILOT" = pilot-006 ]; then
-            python3 -I -B migration/publish/review_recovery.py --review "migration/production/$PILOT" migration/evidence/owner-quality-policy/pilot-006-selection.json
+            python3 -I -B migration/production/shorts_006_plan.py --recover-review "migration/production/$PILOT"
           else
             python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3
           fi

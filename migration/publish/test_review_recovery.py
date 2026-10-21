@@ -238,19 +238,21 @@ class Recovery(unittest.TestCase):
     def test_workflow_only_two_run_bodies_changed(self):
         workflow = Path(__file__).resolve().parents[2] / '.github/workflows/shorts-review.yml'
         text = workflow.read_text()
-        selection = 'migration/evidence/owner-quality-policy/pilot-006-selection.json'
         old_list = '          python3 -I -c "import json,sys;[print(s[\'file\'],s[\'sha256\']) for s in json.load(open(sys.argv[1]))[\'shorts\']]" "$d/shorts.json" |\n'
         new_list = ('          if [ "$PILOT" = pilot-006 ]; then\n'
-                    '            python3 -I -B migration/publish/review_recovery.py --list "migration/production/$PILOT" ' + selection + '\n'
+                    '            python3 -I -B migration/production/shorts_006_plan.py --recovery-list "migration/production/$PILOT"\n'
                     '          else\n' + '  ' + old_list.rstrip(' |\n') + '\n'
                     '          fi |\n')
         old_review = '        run: python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3\n'
-        new_review = ('        run: |\n          if [ "$PILOT" = pilot-006 ]; then\n'
-                      '            python3 -I -B migration/publish/review_recovery.py --review "migration/production/$PILOT" ' + selection + '\n'
+        new_review = ('        run: |\n          set -euo pipefail\n          if [ "$PILOT" = pilot-006 ]; then\n'
+                      '            python3 -I -B migration/production/shorts_006_plan.py --recover-review "migration/production/$PILOT"\n'
                       '          else\n            python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3\n          fi\n')
         self.assertEqual(text.count(new_list), 1)
         self.assertEqual(text.count(new_review), 1)
-        baseline = text.replace(new_list, old_list).replace(new_review, old_review)
+        download_prefix = '        run: |\n          set -euo pipefail\n          case "$PILOT"'
+        original_prefix = '        run: |\n          case "$PILOT"'
+        self.assertEqual(text.count(download_prefix), 1)
+        baseline = text.replace(new_list, old_list).replace(new_review, old_review).replace(download_prefix, original_prefix)
         self.assertEqual(hashlib.sha256(baseline.encode()).hexdigest(),
                          'caf36ac8c64f23eebdf71fe0eb7e2418170b108f102eed532d1c20edc1bb892d')
 

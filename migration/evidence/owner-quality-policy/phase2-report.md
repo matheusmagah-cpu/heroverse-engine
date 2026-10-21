@@ -114,3 +114,27 @@ Commands and actual results:
 - The actual 42-second synthetic AAC packet probe confirmed 1970 packets, 1024 priming samples and a final packet presenting 768 samples. Decoder padding is accepted only with the same existing packet-clock evidence; no timing tolerance was expanded.
 
 The implementation additionally rejects the logged unpreserved acoustic FAIL hash, without pretending its unavailable bytes were independently measured. Historical manifest bytes remain unchanged. The existing acoustic validator, frozen QA, reviewer rubric, publication policy, deadlines and workflow preservation behavior remain unchanged.
+
+## Phase 4: bounded review-only recovery, implementation in progress (2026-10-21)
+
+The new material from PR #263 rendered once in run 39569442793 on main b710b7c64d58052d3d71e1e56630d6875b876826. The actual 42-second MP4 was preserved as release asset 661879452 (20,581,582 bytes), SHA256 96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e. Downloaded bytes were independently rehashed. Acoustic leading 0.13/trailing 0.29 seconds passed the unchanged 0.3 limit. All seven frozen QA checks passed, loudness −15 LUFS and true peak −2.4 dBTP. No editorial verdict exists: the designated reviewer returned NOT_REVIEWED_ProviderFailure / HTTP_503_UNAVAILABLE at 2026-10-21T08:41:45.362893+00:00. Overall remains null, publish=false, release_status REVIEW_NOT_REVIEWED. Workflow SUCCESS established persistence, not media approval.
+
+Canonical main 89541e4cd3232195e8f626d8419b023cc0cd3317 preserved manifest raw SHA256 a33d46db02ee419c357ae4ecefeee615b3d6ac32af143e85814cfbcb82bd1418 and media-checks raw SHA256 6d3f0199f1ea9b0b22a87dbb29b9abfa7a3632f74488d6f1be990a9b46e00200. Previous editorial FAIL 9c0f… and unpreserved acoustic FAIL 126c… remain unchanged; no rerender or re-review of either.
+
+Issue #259 SPEC v7 was independently reviewed, then updated normally at 08:58:06 UTC. A subsequent GET matched every body byte, SHA256 414e44002f295532c627dad8eaa3441d0c881e145e30435496cd8d474e75945a. It permits one recovery invocation on the preserved new hash after code gates, preserving the existing internal reviewer retry policy. No added retry loop, fallback, model/rubric/QA change, trigger, permission, schedule or failed-render archive change is authorized. The owner's rejection of the earlier acoustic/preservation exception remains honored.
+
+The recovery contract requires fresh real QA and pre/post hashing, exact prior 503 preservation, closed audit validation in the eligibility path, one selected record, real clocks including final installation, and unchanged 13:15 UTC cutoff/14:00 UTC slot. A run interrupted before remote Record is uncertain and must be reconciled, not repeated. Local STARTED is not a distributed exactly-once guarantee.
+
+Implementation is complete within five allowed paths. Initial tests exposed two concrete concurrency windows and clock ordering before provider/final installation; regression tests now require foreign manifest bytes to remain intact, MP4 changes to block installation, and a deadline crossed during the last hash to stay ineligible. No criterion was relaxed. A new YAML test initially required unavailable PyYAML in the configured venv; it was replaced by a stronger required standard-library byte invariant, not skipped. The historical workflow test initially failed because it asserted superseded routing. The issue subset was narrowly clarified at 09:06:13 UTC; only that assertion/normalization changed, preserving baseline hash caf36ac8c64f23eebdf71fe0eb7e2418170b108f102eed532d1c20edc1bb892d.
+
+Software acceptance at delivery preparation:
+- Configured Python test_shorts_006_plan.py: 33 tests PASS, 3.248 seconds. Independent review also executed 33 PASS and verified its foreign-writer counterexample now returns INPUT_CHANGED without replacing the foreign bytes.
+- test_review_recovery.py: 28 tests PASS, 0.103 seconds; independent execution also PASS.
+- Temporary technical direction personally executed the same 33 adapter and 28 historical-recovery tests at 09:07 UTC, both PASS. These are dot technical tests, not reviews attributed to Matheus or Claude.
+- Independent pending/publisher tests: 13 and 52 PASS.
+- card_check: CARD_OK. dot_scope: IN_SCOPE 5 files. git diff --check: PASS.
+- Seventeen frozen files compared byte-identically with main89541e4, including all tracked qa_criteria.json, STANDARD, reviewer, unchanged005 adapter, shorts_qa and historical recovery implementation: PASS.
+- Workflow nodes outside the two authorized run bodies are identical; both bodies equal the literal contract. Real read-only --recovery-list returned only short-00.mp4 and the preserved96c826 hash, exit0, no provider.
+- Full48-file suite, exact remote bytes and CI are still pending at this draft's preparation; final results must be recorded before ready/merge.
+
+The ordinary finalizer retains truthful priority for QA/review/policy negatives; a candidate that would otherwise qualify becomes TARGET_SLOT_LEAD_MISSED if the deadline expires. Expiration never promotes a negative. No provider recovery or publication is claimed. The original hook preview showed subtle procedural light/fog beyond camera motion, not established cinematic impact; the full reviewer must still evaluate it and all other dimensions with overall >=9.
