@@ -559,7 +559,15 @@ class States(unittest.TestCase):
 
 
 class RecoveryPublication(unittest.TestCase):
-    setUp = PublishShorts.setUp
+    def setUp(self):
+        PublishShorts.setUp(self)
+        # Historical recovery's real hash is denied for NEW publication now.
+        # Preserve temporal positive coverage using an explicitly synthetic pin.
+        import review_recovery as rr
+        selection = dict(rr.SELECTION, output_sha256="a" * 64)
+        for name, value in (("OUTPUT_SHA256", "a" * 64), ("SELECTION", selection)):
+            fixture = patch.object(rr, name, value); fixture.start(); self.addCleanup(fixture.stop)
+
     tearDown = PublishShorts.tearDown
     def prepare_recovery(self, tmp):
         from test_pending_shorts import recovery_setup
@@ -892,6 +900,187 @@ class RestMetadata(unittest.TestCase):
                 row=f['run']('')['shorts'][0]
                 self.assertNotIn('tags',row['observation']); f['key']='short:'+pilot+':'+spec['shorts'][0]['sha256']
             self.assertEqual(len(f['bodies']),1)
+
+
+class MaterialV2Metadata(unittest.TestCase):
+    setUp = PublishShorts.setUp
+    tearDown = PublishShorts.tearDown
+    expected = staticmethod(RestMetadata.expected)
+    case = RestMetadata.case
+    def test_v2_pure_metadata_selector_exact_pin_and_pilot_only(self):
+        short={'file':'short-00.mp4','sha256':'a'*64,'title':"Rest in God's Care",'hook':'Let your face soften.','reference':None}
+        self.assertEqual(pub.metadata_for(short,'https://youtu.be/LONG','Long',pilot='pilot-006',material_plan_sha256=pub.MATERIAL_PLAN_SHA256),self.expected())
+        for pilot,pin in [('pilot-006',None),('pilot-006','f'*64),('pilot-005',pub.MATERIAL_PLAN_SHA256)]:
+            result=pub.metadata_for(short,'https://youtu.be/LONG','Long',pilot=pilot,material_plan_sha256=pin)
+            self.assertEqual(result['tags'],['prayer','morning prayer','jesus','faith','bible','shorts'])
+
+    @contextmanager
+    def material_case(self, root, *, existing=False):
+        with self.case(root, existing=existing) as f:
+            spec = json.loads(f['path'].read_text())
+            plan = dict(spec['edit_plan'], version='shorts-006-correction-plan-v2')
+            raw = (json.dumps(plan) + "\n").encode()
+            pin = hashlib.sha256(raw).hexdigest()
+            spec['edit_plan'] = plan
+            spec['finalization'].update(kind='pilot-006-correction-v2', plan_sha256=pin)
+            spec['correction_material_review_attempt'] = {'version':'shorts-006-material-review-attempt-v1', 'plan_sha256':pin, 'output_sha256':spec['shorts'][0]['sha256'], 'target_slot':'2026-10-21T14:00:00Z'}
+            (f['path'].parent / 'correction-plan-v2.json').write_bytes(raw)
+            f['path'].write_text(json.dumps(spec))
+            with patch.object(pub, 'MATERIAL_PLAN_SHA256', pin):
+                yield f | {'spec':spec, 'plan_pin':pin}
+
+    def test_v2_existing_missing_context_gets_unknown_without_eligibility(self):
+        for missing in ('file','title','hook','reference','plan','edit_plan','finalization','journal','final_null','final_list'):
+            with self.subTest(missing=missing), tempfile.TemporaryDirectory() as root, self.material_case(root,existing=True) as f:
+                spec = f['spec']; spec['shorts'][0]['publish'] = False
+                if missing in ('file','title','hook','reference'): spec['shorts'][0].pop(missing)
+                elif missing == 'plan': (f['path'].parent/'correction-plan-v2.json').unlink()
+                elif missing == 'journal': spec.pop('correction_material_review_attempt')
+                elif missing == 'final_null': spec['finalization']=None
+                elif missing == 'final_list': spec['finalization']=[]
+                else: spec.pop(missing)
+                f['path'].write_text(json.dumps(spec)); (f['media']/'short-00.mp4').unlink()
+                f['now'][0] = datetime(2026,10,21,15,tzinfo=timezone.utc)
+                f['remote']['status']['privacyStatus'] = 'public'
+                with patch.object(pub,'recovery_upload_gate',side_effect=AssertionError('no eligibility')), patch.object(pub.shorts_qa,'check',side_effect=AssertionError('no QA')):
+                    result = f['run']('')['shorts'][0]
+                self.assertEqual(result['verification_status'],'VERIFICATION_UNKNOWN')
+                self.assertEqual(result['verification_reason'],'LOCAL_METADATA_CONTEXT_MISMATCH')
+                self.assertTrue(any(p.get('part') == 'id,snippet,status,processingDetails' for _,p in f['gets']))
+                f['upload'].assert_not_called()
+
+    def test_v2_existing_valid_context_tags_and_independent_fail(self):
+        with tempfile.TemporaryDirectory() as root, self.material_case(root,existing=True) as f:
+            first = f['run']()['shorts'][0]
+            self.assertEqual(first['verification_status'],'SCHEDULED_VERIFIED')
+            self.assertEqual(first['observation']['tags'],self.expected()['tags'])
+            f['spec']['shorts'][0].pop('title'); f['path'].write_text(json.dumps(f['spec']))
+            f['remote']['snippet']['channelId'] = 'WRONG'
+            result=f['run']()['shorts'][0]
+            self.assertEqual(result['verification_status'],'VERIFICATION_FAIL')
+            self.assertEqual(result['verification_reason'],'MISMATCH_CHANNEL_ID')
+            f['upload'].assert_not_called()
+
+    def test_v2_new_metadata_requires_validated_pin(self):
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'production'))
+        import shorts_006_material as material
+        with tempfile.TemporaryDirectory() as root, self.material_case(root) as f:
+            bound={'output_sha256':f['spec']['shorts'][0]['sha256'], 'target_slot':'2026-10-21T14:00:00Z',
+                   'release_deadline':'2026-10-21T13:15:00Z','file':'short-00.mp4',
+                   'plan_sha256':f['plan_pin'],'metadata_profile':'rest-v1'}
+            with patch.object(material,'binding',return_value=bound) as binding:
+                result=f['run']()['shorts'][0]
+            self.assertEqual(binding.call_count, 2)
+            self.assertEqual(result['verification_status'],'SCHEDULED_VERIFIED')
+            self.assertEqual(f['bodies'][0]['snippet']['tags'],self.expected()['tags'])
+            self.assertEqual(f['bodies'][0]['snippet']['description'],self.expected()['description'])
+
+    def test_v2_discriminators_cannot_rename_whole_package_into_legacy(self):
+        markers={'edit_plan':{'version':'shorts-006-correction-plan-v2'},
+                 'finalization':{'kind':'pilot-006-correction-v2','target_slot':'2026-10-21T14:00:00Z'},
+                 'correction_material_review_attempt':{'version':'shorts-006-material-review-attempt-v1'}}
+        for choice in (*markers,'all'):
+            with self.subTest(choice=choice), tempfile.TemporaryDirectory() as root, self.case(root) as f:
+                spec=json.loads(f['path'].read_text())
+                for key in markers: spec.pop(key,None)
+                spec.update(markers if choice=='all' else {choice:markers[choice]})
+                spec['source_pilot']='pilot-009'
+                oldpilot=f['path'].parents[1]; newpilot=oldpilot.with_name('pilot-009'); oldpilot.rename(newpilot)
+                path=newpilot/'shorts/shorts.json'; path.write_text(json.dumps(spec))
+                f['ledger'].write_text(json.dumps({'entries':{'pilot-009:longsha':{'video_id':'LONG'}}}))
+                with patch.object(pub.pv,'session') as session, patch.object(pub.pv,'upload') as upload:
+                    with self.assertRaises(SystemExit):
+                        pub.main(str(path),str(f['media']),'pilot-009:longsha',str(f['ledger']),str(Path(root)/'receipt.json'),'2026-10-21T14:00:00Z')
+                session.assert_not_called();upload.assert_not_called()
+
+    def test_v2_actual_binding_files_positive_and_tamper_before_session(self):
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'production'))
+        from test_shorts_006_material import synthetic_environment, NOW
+        for mutation in (None,'score','plan','journal'):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as root, synthetic_environment(Path(root)/'migration') as f:
+                d=f['pilot']; path=d/'shorts/shorts.json'; spec=copy.deepcopy(f['spec'])
+                (d/'schedule.json').write_text(json.dumps({'publish_at':'2026-10-21T00:00:00Z','shorts_slots':['2026-10-21T14:00:00Z']}))
+                ledger=Path(root)/'ledger.json';ledger.write_text(json.dumps({'entries':{'pilot-006:longsha':{'video_id':'LONG'}}}))
+                if mutation=='score': spec['shorts'][0]['review']['overall']=8.99
+                if mutation=='journal': spec['correction_material_review_attempt']['state']='STARTED'
+                if mutation=='plan': (d/'shorts/correction-plan-v2.json').write_text('{}')
+                path.write_text(json.dumps(spec))
+                pub.utc_now=lambda:NOW
+                with patch.object(pub,'MATERIAL_PLAN_SHA256',f['plan_hash']):
+                    if mutation:
+                        with patch.object(pub.pv,'session') as session,patch.object(pub.pv,'upload') as upload:
+                            with self.assertRaises(SystemExit):
+                                pub.main(str(path),str(f['output'].parent),'pilot-006:longsha',str(ledger),str(Path(root)/'receipt.json'),'2026-10-21T14:00:00Z')
+                        session.assert_not_called();upload.assert_not_called()
+                    else:
+                        with patch.object(pub.pv,'upload',return_value={'id':'SYNTHETIC'}) as upload:
+                            pub.main(str(path),str(f['output'].parent),'pilot-006:longsha',str(ledger),str(Path(root)/'receipt.json'),'2026-10-21T14:00:00Z')
+                        upload.assert_called_once()
+                        self.assertEqual(upload.call_args.args[2]['snippet']['tags'],self.expected()['tags'])
+
+    def test_v2_slow_qa_cannot_change_output_or_binding_before_session(self):
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'production'))
+        from test_shorts_006_material import synthetic_environment, NOW
+        for mutation in ('output','plan','manifest'):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as root, synthetic_environment(Path(root)/'migration') as f:
+                d=f['pilot'];path=d/'shorts/shorts.json'
+                (d/'schedule.json').write_text(json.dumps({'publish_at':'2026-10-21T00:00:00Z','shorts_slots':['2026-10-21T14:00:00Z']}))
+                ledger=Path(root)/'ledger.json';ledger.write_text(json.dumps({'entries':{'pilot-006:longsha':{'video_id':'LONG'}}}))
+                def qa(path):
+                    target=f['output'] if mutation=='output' else d/'shorts/shorts.json' if mutation=='manifest' else d/'shorts/correction-plan-v2.json'
+                    target.write_bytes(b'changed during QA')
+                    return {'status':'PASS'}
+                pub.utc_now=lambda:NOW
+                with patch.object(pub,'MATERIAL_PLAN_SHA256',f['plan_hash']),patch.object(pub.shorts_qa,'check',side_effect=qa),patch.object(pub.pv,'session') as session,patch.object(pub.pv,'upload') as upload:
+                    with self.assertRaises(SystemExit):
+                        pub.main(str(path),str(f['output'].parent),'pilot-006:longsha',str(ledger),str(Path(root)/'receipt.json'),'2026-10-21T14:00:00Z')
+                session.assert_not_called();upload.assert_not_called()
+
+    def test_v2_final_media_hash_cannot_change_manifest_before_session(self):
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'production'))
+        from test_shorts_006_material import synthetic_environment, NOW
+        with tempfile.TemporaryDirectory() as root, synthetic_environment(Path(root)/'migration') as f:
+            d=f['pilot']; path=d/'shorts/shorts.json'
+            (d/'schedule.json').write_text(json.dumps({'publish_at':'2026-10-21T00:00:00Z','shorts_slots':['2026-10-21T14:00:00Z']}))
+            ledger=Path(root)/'ledger.json';ledger.write_text(json.dumps({'entries':{'pilot-006:longsha':{'video_id':'LONG'}}}))
+            real_hash=pub.sha256_file
+            calls=[]
+            def hash_then_mutate(media):
+                digest=real_hash(media)
+                calls.append(digest)
+                if len(calls)==3:
+                    changed=json.loads(path.read_text())
+                    changed['shorts'][0]['review']['overall']=8.3
+                    path.write_text(json.dumps(changed))
+                return digest
+            pub.utc_now=lambda:NOW
+            with patch.object(pub,'MATERIAL_PLAN_SHA256',f['plan_hash']),patch.object(pub,'sha256_file',side_effect=hash_then_mutate),patch.object(pub.pv,'session') as session,patch.object(pub.pv,'upload') as upload:
+                with self.assertRaisesRegex(SystemExit,'MATERIAL_BINDING_CHANGED_DURING_QA'):
+                    pub.main(str(path),str(f['output'].parent),'pilot-006:longsha',str(ledger),str(Path(root)/'receipt.json'),'2026-10-21T14:00:00Z')
+            self.assertEqual(len(calls),3)
+            self.assertEqual(json.loads(path.read_text())['shorts'][0]['review']['overall'],8.3)
+            session.assert_not_called();upload.assert_not_called()
+
+    def test_denied_hash_cannot_hide_in_renamed_legacy_package(self):
+        with tempfile.TemporaryDirectory() as root:
+            d,files=setup(root,done=())
+            spec=json.loads((d/'shorts.json').read_text())
+            spec['shorts'][0]['sha256']=next(iter(ps.DENIED_NEW_006))
+            (d/'shorts.json').write_text(json.dumps(spec))
+            with patch.object(pub.pv,'session') as session, patch.object(pub.pv,'upload') as upload:
+                with self.assertRaisesRegex(SystemExit,'RECOVERY_PILOT_CONTEXT_MISMATCH'):
+                    pub.main(str(d/'shorts.json'),str(d),'pilot-009:L',str(d/'ledger.json'),str(d/'receipt.json'),'2026-10-21T14:00:00Z,2026-10-21T20:00:00Z,2026-10-21T23:00:00Z')
+            session.assert_not_called();upload.assert_not_called()
+
+    def test_all_denied_hashes_block_forged_v1_before_binding_session(self):
+        for digest in ps.DENIED_NEW_006:
+            with self.subTest(digest=digest), tempfile.TemporaryDirectory() as root, self.case(root) as f:
+                spec=json.loads(f['path'].read_text()); spec['shorts'][0]['sha256']=digest
+                spec['shorts'][0]['review']['output_sha256']=digest; spec['shorts'][0]['publish']=True
+                f['path'].write_text(json.dumps(spec))
+                with patch.object(pub.pv,'session') as session, patch.object(pub.pv,'upload') as upload:
+                    with self.assertRaisesRegex(SystemExit,'RECOVERY_BINDING_INVALID'): f['run']()
+                session.assert_not_called(); upload.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -1736,3 +1736,82 @@ Actual frame diagnosis found a15-frame dissolve at20.733–21.233s, not an absen
 Personal known-answer geometry test: x(0)=0,x(3)=40,x(21.2)=48, monotonic637frames, maximum0.6664561042524006px/frame; last crop pixel1127 before moon at1146. 637+638−15=1260frames. Actual AAC reference probe:48kHz stereo,1970packets, firstPTS−1024/skip1024, lastPTS2015232/duration768, presentation2016000samples. These are technical preparation results only. Remux must prove every packet/clock/extradata/PCM unchanged under the same decoder and must still pass all real QA and review gates.
 
 card_check initially ran from the parent directory and failed INTERFACE_FILE_MISSING five times: INVALID_TEST_ENVIRONMENT, not contract failure. Correct worktree invocation returned CARD_OK, exit0, including final7eaebe42 contract. Remote protocol text matched local bytes SHA2562727f337badc16d0fc5b94c26356ee1c10da5ee5aac8e1dcda34b876286e82bb. Incremental issue/PR reads found only own delivery comments, no external REWORK. No new claim, automation, trigger, credentials, spend, provider or production dispatch occurred during preparation. Implementation and real temporal preview remain pending.
+
+
+## Phase 7 diagnostic preview and implementation checks — 2026-10-21 11:54 UTC
+
+Four short native-asset diagnostic clips cover opening, middle, transition and ending. Static contact-sheet inspection found readable captions and one celestial moon during the dissolve. Pixel differences and contact sheets do not establish temporal artistic quality. The cloud browser had no authenticated Library session; no playback or listening is claimed. The candidate remains subject to the complete designated audiovisual review and overall minimum9.
+
+The isolated motion entrypoint initially failed with ModuleNotFoundError; its import path was corrected without changing assertions, then 8 tests passed under -I -B. A producer suite failed while source changed during source inspection; the stable frozen rerun completed111 tests PASS in71.502s. Failed runs remain recorded and are not counted as PASS.
+
+A deliberately incomplete technical container,121 video frames plus the complete42s reference AAC, verified exact audio packet payload, ordered packet timing manifest, extradata and same-decoder PCM equivalence. AAC payload SHA256 c4f2bade0301d93a2b1ad03335bfceeedb403cb9faff72f673fc6c15de564555; packet manifest06239462e9f5d288f1754c225fd9f0e608ed68fdec2b60d9cc593a694660e5be; PCM dd94d9dba604ccf53ad3a647dd078c752b070da37a8ec8b04b86f17c13ea8893. This is not an eligible Short or final master.
+
+Workflow scope and card checks passed. Frozen QA, v1 plan and history remained byte-identical. PR267 comments/reviews were empty at11:54UTC. No production render or provider call occurred during these diagnostics.
+
+
+## Phase 7 complete offline test loop — 2026-10-21 11:57 UTC
+
+Command: /tmp/hv228-venv/bin/python -I -B followed by each registered test path. All 50 registered files returned exit 0. The material adapter was subsequently corrected for a foreign-write race and is explicitly subject to an additional final targeted rerun; this loop is not misattributed to an untested later snapshot. No provider, production render or upload is performed by this test loop.
+
+- migration/production/test_script_check.py: PASS, exit 0, 0.319 seconds.
+- migration/production/test_render_queue.py: PASS, exit 0, 0.192 seconds.
+- migration/production/test_still_render.py: PASS, exit 0, 0.158 seconds.
+- migration/production/test_long_review.py: PASS, exit 0, 0.22 seconds.
+- migration/production/test_review_calibration.py: PASS, exit 0, 0.164 seconds.
+- migration/production/test_local_review.py: PASS, exit 0, 0.686 seconds.
+- migration/production/test_shorts_produce.py: PASS, exit 0, 64.732 seconds.
+- migration/production/test_shorts_review.py: PASS, exit 0, 0.295 seconds.
+- migration/production/test_shorts_edit_plan.py: PASS, exit 0, 3.804 seconds.
+- migration/production/test_shorts_006_plan.py: PASS, exit 0, 6.717 seconds.
+- migration/production/test_shorts_006_material.py: PASS, exit 0, 1.151 seconds.
+- migration/production/test_shorts_006_motion.py: PASS, exit 0, 4.94 seconds.
+- migration/production/test_no_live_pilot_data.py: PASS, exit 0, 0.547 seconds.
+- migration/production/test_signal_scan.py: PASS, exit 0, 3.778 seconds.
+- migration/production/test_cinematic.py: PASS, exit 0, 1.015 seconds.
+- migration/publish/test_channel_config.py: PASS, exit 0, 0.157 seconds.
+- migration/publish/test_first_comment.py: PASS, exit 0, 0.128 seconds.
+- migration/publish/test_owner_quality_policy.py: PASS, exit 0, 0.1 seconds.
+- migration/publish/test_package_chapters.py: PASS, exit 0, 0.131 seconds.
+- migration/publish/test_pending_shorts.py: PASS, exit 0, 0.266 seconds.
+- migration/publish/test_preflight.py: PASS, exit 0, 0.097 seconds.
+- migration/publish/test_prepublish_gate.py: PASS, exit 0, 0.124 seconds.
+- migration/publish/test_publication_binding.py: PASS, exit 0, 0.733 seconds.
+- migration/publish/test_publication_exception.py: PASS, exit 0, 2.879 seconds.
+- migration/publish/test_publish_shorts.py: PASS, exit 0, 1.488 seconds.
+- migration/publish/test_publish_video.py: PASS, exit 0, 0.212 seconds.
+- migration/publish/test_refresh_description.py: PASS, exit 0, 0.227 seconds.
+- migration/publish/test_review_recovery.py: PASS, exit 0, 0.311 seconds.
+- migration/publish/test_shorts_prerequisite.py: PASS, exit 0, 0.309 seconds.
+- migration/publish/test_three_stage.py: PASS, exit 0, 0.136 seconds.
+- migration/ops/test_heartbeat.py: PASS, exit 0, 0.208 seconds.
+- migration/ops/test_runner_dispatch.py: PASS, exit 0, 0.384 seconds.
+- migration/ops/test_dot_scope.py: PASS, exit 0, 0.105 seconds.
+- migration/ops/test_errors_register.py: PASS, exit 0, 0.171 seconds.
+- migration/ops/test_runway.py: PASS, exit 0, 0.114 seconds.
+- migration/ops/test_card_check.py: PASS, exit 0, 0.194 seconds.
+- migration/ops/test_minutes.py: PASS, exit 0, 0.104 seconds.
+- migration/mining/test_market_evidence.py: PASS, exit 0, 0.191 seconds.
+- migration/mining/test_structure_mining.py: PASS, exit 0, 0.259 seconds.
+- migration/mining/test_video_analysis_card.py: PASS, exit 0, 0.481 seconds.
+- migration/mining/test_owned_feedback.py: PASS, exit 0, 0.453 seconds.
+- migration/mining/test_learning_loop.py: PASS, exit 0, 0.291 seconds.
+- migration/mining/test_accuracy_check.py: PASS, exit 0, 0.152 seconds.
+- migration/mining/test_native_metrics.py: PASS, exit 0, 0.817 seconds.
+- migration/mining/test_native_plan.py: PASS, exit 0, 0.238 seconds.
+- migration/mining/test_goal_report.py: PASS, exit 0, 0.293 seconds.
+- migration/mining/test_market_panel.py: PASS, exit 0, 0.213 seconds.
+- migration/mining/test_opportunity.py: PASS, exit 0, 0.105 seconds.
+- migration/mining/test_packaging_mining.py: PASS, exit 0, 0.134 seconds.
+- migration/mining/test_official_rules.py: PASS, exit 0, 0.144 seconds.
+
+Documentary preflight on the actual pinned plan/history/canonical post-review manifest: {"status": "PREFLIGHT_PASS"}. Canonical was reconciled from existing remote commit 7a3fc991b563a19c12530c0274469e4b2d807902, SHA256 5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede, without editing eligibility flags. Scope checker: IN_SCOPE 15 files. Card checker: CARD_OK. Workflow byte-bound scope: PASS.
+
+
+Final adapter delta: anti-replay rejects prior PASS/FAIL/NOT_REVIEWED evidence even when the journal is removed; foreign writes during check_media are preserved rather than overwritten; integrity failures exit nonzero even when all 15 measurement keys exist. Final isolated adapter suite: 38 tests PASS, exit 0. Publisher 68 tests include post-QA file/document stability and manifest mutation during the last rehash, all blocking before session/upload. Existing-ID readback is unchanged. Root personally executed publisher68 and pending17 with exit0. Final independent review and exact-SHA CI remain required before merge.
+
+
+## Final phase 7 code review — 2026-10-21 12:00 UTC
+
+A final schema-presence correction distinguishes explicit reference:null from an absent field. Final material adapter suite:39 tests PASS under -I -B, superseding the earlier38-test snapshot only for this narrow delta. Adapter SHA2563751a84f4368b7975a18d3b23a7de1d630968101d032fb078c5bf8c8403a8e07; test SHA25635a87c8f7789b735796c1990ca9a27a4e8dee7a9ea00c2c9378a4a130f14b623.
+
+Independent code review PASS with personally executed39 material,68 publisher,17 pending,8 motion and111 producer tests. Root also personally executed39 material,68 publisher,17 pending and111 producer tests, all exit0. These are technical reviews by dot, not a review attributed to Matheus or Claude. Full50-file loop passed before the final narrow adapter delta, which was separately revalidated. Frozen v1/reviewer/HTTP/QA helpers and old histories remained byte-identical to main7a3fc991. Exact remote blobs and CI are still required; no artistic approval or production eligibility is claimed.

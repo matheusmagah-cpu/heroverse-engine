@@ -14,6 +14,11 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import owner_quality_policy
 
+DENIED_NEW_006 = frozenset({
+    "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+    "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707",
+    "126c2e8335f5135e4d2ec2407c67e6eb636d8ce36ea7d0bd489d8ed34ff9c617"})
+
 DAILY = (14, 20, 23)
 REVIEW_MODELS = ("gemini-3.8-flash",)  # only the designated reviewer's PASS publishes (publish/prepublish_gate.py)
 
@@ -59,9 +64,23 @@ def taken(production, entries, pilot):
     return out
 
 
+def material_context(spec):
+    def tag(key, field):
+        value = spec.get(key)
+        return value.get(field) if isinstance(value, dict) else None
+    return (tag("edit_plan", "version") == "shorts-006-correction-plan-v2"
+            or tag("finalization", "kind") == "pilot-006-correction-v2"
+            or tag("correction_material_review_attempt", "version") == "shorts-006-material-review-attempt-v1")
+
+
+def denied_output_context(spec):
+    return any(isinstance(r, dict) and isinstance(r.get("sha256"), str)
+               and r["sha256"] in DENIED_NEW_006 for r in spec.get("shorts", []))
+
+
 def recovery_context(spec, pilot_dir):
     """Identify the bounded recovery from trusted directory OR manifest identity."""
-    return Path(pilot_dir).name == "pilot-006" or spec.get("source_pilot") == "pilot-006"
+    return Path(pilot_dir).name == "pilot-006" or spec.get("source_pilot") == "pilot-006" or material_context(spec) or denied_output_context(spec)
 
 
 def recovery_gate(spec, pilot_dir, now):
@@ -72,16 +91,25 @@ def recovery_gate(spec, pilot_dir, now):
         raise ValueError("RECOVERY_PILOT_CONTEXT_MISMATCH")
     if ".." in d.parts or any(p.is_symlink() for p in (d, *d.parents)):
         raise ValueError("RECOVERY_PATH_SYMLINK")
+    if any(r.get("sha256") in DENIED_NEW_006 and r.get("publish") is True for r in spec.get("shorts", [])):
+        raise ValueError("DENIED_HISTORICAL_OUTPUT")
+    final_context = spec.get("finalization")
+    if material_context(spec) and (not isinstance(final_context, dict) or final_context.get("kind") != "pilot-006-correction-v2"):
+        raise ValueError("MATERIAL_FINALIZATION_REQUIRED")
     # A correction must never fall back to the historical recovery validator.
     if "edit_plan" in spec or "finalization" in spec:
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "production"))
         import shorts_006_plan as correction
         final = spec.get("finalization")
-        if not isinstance(final, dict) or final.get("kind") != "pilot-006-correction-v1":
+        if not isinstance(final, dict) or final.get("kind") not in ("pilot-006-correction-v1", "pilot-006-correction-v2"):
             raise ValueError("CORRECTION_FINALIZATION_REQUIRED")
-        bound = correction.binding(
-            spec, plan_sha256=correction.hash_file(d / "shorts" / "correction-plan.json"),
-            history_sha256=correction.hash_file(d / "shorts" / "correction-history.json"))
+        if final["kind"] == "pilot-006-correction-v2":
+            import shorts_006_material as material
+            bound = material.binding(spec, pilot_dir=d)
+        else:
+            bound = correction.binding(
+                spec, plan_sha256=correction.hash_file(d / "shorts" / "correction-plan.json"),
+                history_sha256=correction.hash_file(d / "shorts" / "correction-history.json"))
     else:
         bound = rr.binding(spec)
     if now > when(bound["release_deadline"]):
@@ -128,7 +156,9 @@ def states(pilot_dir, ledger, now=None):
     entries = ledger.get("entries", {})
     out = []
     recovery_blocked = False
-    if recovery_context(spec, pilot_dir):
+    needs_new_gate = any(s.get("publish") is True and "video_id" not in entries.get(
+        f"short:{spec['source_pilot']}:{s['sha256']}", {}) for s in spec["shorts"])
+    if needs_new_gate and recovery_context(spec, pilot_dir):
         try:
             recovery_gate(spec, pilot_dir, now)
         except (OSError, ValueError, TypeError, KeyError):
@@ -150,7 +180,7 @@ def states(pilot_dir, ledger, now=None):
             state = "owner_quality_policy_blocked"
         else:
             state = "approved_awaiting_slot"
-        out.append({"file": s["file"], "sha256": s["sha256"], "state": state, "video_id": entry.get("video_id")})
+        out.append({"file": s.get("file") if material_context(spec) and "video_id" in entry else s["file"], "sha256": s["sha256"], "state": state, "video_id": entry.get("video_id")})
     return out
 
 

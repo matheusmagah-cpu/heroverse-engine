@@ -69,6 +69,11 @@ jobs:
             echo "$sha  $T/in/img/$id.png" | sha256sum -c -
             cp "$meta" "$T/in/img/$id.json"
           done
+          if [ "$PILOT" = "pilot-006" ]; then
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern pilot-006-short-00-sha256-96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e.mp4 -O "$T/work/reference-audio.mp4"
+            echo "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e  $T/work/reference-audio.mp4" | sha256sum -c -
+            test "$(stat -c %s "$T/work/reference-audio.mp4")" = 20581582
+          fi
       - name: Narration and figure regenerated as in the render (only when the render handed off nothing)
         if: env.SKIP != '1' && hashFiles(format('migration/production/{0}/shorts/inputs.json', env.PILOT)) == ''
         run: |
@@ -87,13 +92,12 @@ jobs:
         run: |
           T="$RUNNER_TEMP"; d="migration/production/$PILOT"; py="$T/cine/bin/python"
           if [ "$PILOT" = "pilot-006" ]; then
-            $py -I -B migration/production/shorts_006_plan.py --preflight "$d" "$d/shorts/correction-plan.json" "$d/shorts/correction-history.json"
-            $py -I -B migration/production/shorts_006_plan.py "$d/shorts/correction-plan.json" "$T/work/timeline.json" "$d/script.json" "$d/shorts/inputs.json" "$T/work/shorts/selection.json"
+            $py -I -B migration/production/shorts_006_material.py --preflight "$d" "$d/shorts/correction-plan-v2.json" "$d/shorts/correction-history-96c8268f.json"
+            $py -I -B migration/production/shorts_006_material.py "$d/shorts/correction-plan-v2.json" "$T/work/timeline.json" "$d/script.json" "$d/shorts/inputs.json" "$T/work/shorts/selection.json"
             $py -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "$d/script.json" "$T/in/img" \
               "$T/in/figure.png" "$T/in/music.flac" "$T/work/shorts"
-            $py -I -B migration/production/shorts_006_plan.py --check-media "$T/work" "$d/shorts/correction-plan.json" "$T/work/shorts/shorts.json" "$T/voice.flac" "$T/in/music.flac" "$T/in/img" "$d/shorts/correction-history.json"
-            $py -I -B migration/production/shorts_review.py "$T/work/shorts" 1
-            $py -I -B migration/production/shorts_006_plan.py --finalize "$T/work/shorts/shorts.json" "$T/work/shorts/short-00.mp4"
+            $py -I -B migration/production/shorts_006_material.py --check-media "$T/work" "$d/shorts/correction-plan-v2.json" "$T/work/shorts/shorts.json" "$T/voice.flac" "$T/in/music.flac" "$T/in/img" "$d/shorts/correction-history-96c8268f.json" "$T/work/reference-audio.mp4"
+            $py -I -B migration/production/shorts_006_material.py --review-material "$T/work/shorts/shorts.json" "$T/work/shorts/short-00.mp4"
           elif [ -f "$d/shorts/edit-plan.json" ]; then
             $py -I -B migration/production/shorts_edit_plan.py "$d/shorts/edit-plan.json" "$T/work/timeline.json" "$d/script.json" "$d/shorts/inputs.json" "$T/work/shorts/selection.json"
             $py -I -B migration/production/shorts_produce.py "$T/work" "$T/work/shorts/selection.json" "$d/script.json" "$T/in/img" \
@@ -112,10 +116,10 @@ jobs:
         run: |
           T="$RUNNER_TEMP"; d="migration/production/$PILOT/shorts"
           if [ "$PILOT" = "pilot-006" ]; then
-            test -f "$T/work/shorts/correction-media-checks.json"
-            python3 -I -c 'import hashlib,json,pathlib,sys; root=pathlib.Path(sys.argv[1]); raw=(root/"correction-media-checks.json").read_bytes(); spec=json.loads((root/"shorts.json").read_bytes()); records=spec.get("shorts"); ok=isinstance(records,list) and len(records)==1 and records[0].get("media_checks_sha256")==hashlib.sha256(raw).hexdigest() and records[0].get("media_checks")==json.loads(raw); sys.exit(0 if ok else "CORRECTION_MEASUREMENTS_MISMATCH")' "$T/work/shorts"
+            test -f "$T/work/shorts/correction-media-checks-v2.json"
+            python3 -I -c 'import hashlib,json,pathlib,sys; root=pathlib.Path(sys.argv[1]); raw=(root/"correction-media-checks-v2.json").read_bytes(); spec=json.loads((root/"shorts.json").read_bytes()); records=spec.get("shorts"); ok=isinstance(records,list) and len(records)==1 and records[0].get("media_checks_sha256")==hashlib.sha256(raw).hexdigest() and records[0].get("media_checks")==json.loads(raw); sys.exit(0 if ok else "CORRECTION_MEASUREMENTS_MISMATCH")' "$T/work/shorts"
             rm -f "$d/short-00-frame.jpg"
-            cp "$T/work/shorts/correction-media-checks.json" "$d/correction-media-checks.json"
+            cp "$T/work/shorts/correction-media-checks-v2.json" "$d/correction-media-checks-v2.json"
           else
             rm -f "$d"/*-frame.jpg
           fi

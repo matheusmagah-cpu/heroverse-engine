@@ -52,6 +52,14 @@ def recovery_setup(tmp):
 
 
 class RecoveryPending(unittest.TestCase):
+    def setUp(self):
+        # Historical recovery's real hash is denied for NEW publication now.
+        # Preserve temporal positive coverage using an explicitly synthetic pin.
+        import review_recovery as rr
+        selection = dict(rr.SELECTION, output_sha256="a" * 64)
+        for name, value in (("OUTPUT_SHA256", "a" * 64), ("SELECTION", selection)):
+            fixture = patch.object(rr, name, value); fixture.start(); self.addCleanup(fixture.stop)
+
     def test_exact_boundary_and_no_rollover(self):
         with tempfile.TemporaryDirectory() as t:
             prod, d, spec, ledger = recovery_setup(t)
@@ -168,8 +176,65 @@ class CorrectionRouting(unittest.TestCase):
             self.assertIsNone(ps.pending(prod, ledger, ps.when("2026-10-21T01:00:00Z")))
 
 
+class MaterialPending(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+
+    def test_denied_hashes_before_any_historical_validator(self):
+        import shorts_006_plan as v1
+        for digest in ps.DENIED_NEW_006:
+            with self.subTest(digest=digest), tempfile.TemporaryDirectory() as tmp:
+                prod,d,spec,ledger=recovery_setup(tmp)
+                spec['shorts'][0]['sha256']=digest
+                spec['finalization']={'kind':'pilot-006-correction-v1'}
+                with patch.object(v1,'binding') as old:
+                    with self.assertRaisesRegex(ValueError,'DENIED_HISTORICAL_OUTPUT'):
+                        ps.recovery_gate(spec,d,ps.when('2026-10-21T12:00:00Z'))
+                old.assert_not_called()
+
+    def test_v2_marker_renamed_pilot_never_falls_back_to_legacy_slots(self):
+        markers={'edit_plan':{'version':'shorts-006-correction-plan-v2'},
+                 'finalization':{'kind':'pilot-006-correction-v2'},
+                 'correction_material_review_attempt':{'version':'shorts-006-material-review-attempt-v1'}}
+        for choice in (*markers,'all'):
+            with self.subTest(choice=choice), tempfile.TemporaryDirectory() as tmp:
+                prod,d,spec,ledger=recovery_setup(tmp)
+                renamed=d.with_name('pilot-009');d.rename(renamed)
+                spec['source_pilot']='pilot-009';spec.update(markers if choice=='all' else {choice:markers[choice]})
+                (renamed/'shorts/shorts.json').write_text(json.dumps(spec))
+                ledger['entries']={'pilot-009:longsha':{'video_id':'LONG'}}
+                self.assertIsNone(ps.pending(prod,ledger,ps.when('2026-10-21T12:00:00Z')))
+                self.assertEqual(ps.states(renamed,ledger,ps.when('2026-10-21T12:00:00Z'))[0]['state'],'temporal_recovery_blocked')
+
+    def test_existing_v2_missing_file_todo_prepass_never_calls_binding(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            prod,d,spec,ledger=recovery_setup(tmp)
+            spec['finalization']={'kind':'pilot-006-correction-v2'}
+            spec['shorts'][0].pop('file')
+            ledger['entries']['short:pilot-006:'+spec['shorts'][0]['sha256']]={'video_id':'OLD'}
+            (d/'shorts/shorts.json').write_text(json.dumps(spec))
+            with patch.object(ps,'recovery_gate',side_effect=AssertionError('no existing gate')):
+                self.assertEqual(ps.todo_files(d,ledger),[])
+                self.assertEqual(ps.states(d,ledger)[0]['video_id'],'OLD')
+
+    def test_v2_routes_binding_with_canonical_pilot_and_no_legacy(self):
+        import shorts_006_material as material
+        import shorts_006_plan as v1
+        with tempfile.TemporaryDirectory() as tmp:
+            prod,d,spec,ledger=recovery_setup(tmp)
+            spec['shorts'][0]['sha256']='a'*64
+            spec['finalization']={'kind':'pilot-006-correction-v2'}
+            bound={'output_sha256':'a'*64,'target_slot':'2026-10-21T14:00:00Z',
+                   'release_deadline':'2026-10-21T13:15:00Z','file':'short-00.mp4',
+                   'plan_sha256':'99e0ecbd3a5a0c5736e6ce8eaadc766a346cb789b08203577fa38dde1ade1543','metadata_profile':'rest-v1'}
+            with patch.object(material,'binding',return_value=bound) as new, patch.object(v1,'binding') as old:
+                self.assertEqual(ps.recovery_gate(spec,d,ps.when('2026-10-21T12:00:00Z')),bound)
+            new.assert_called_once_with(spec,pilot_dir=d);old.assert_not_called()
+
+
 def normalized_shorts_workflow(text):
-    allowed = {"Select (whole video, Gemini), produce (own edit, STANDARD R8), watched review", "Preserve privately and record"}
+    allowed = {"Tools, verified inputs (narration, figure, music, images)", "Select (whole video, Gemini), produce (own edit, STANDARD R8), watched review", "Preserve privately and record"}
     output, step, skipping = [], None, False
     for line in text.splitlines(keepends=True):
         if line.startswith("      - name: "):
@@ -185,21 +250,22 @@ def normalized_shorts_workflow(text):
     return "".join(output)
 
 class CorrectionWorkflow(unittest.TestCase):
-    def test_only_two_run_bodies_change_and_history_frames_survive(self):
+    def test_only_three_run_bodies_change_and_history_frames_survive(self):
         import hashlib
         workflow = Path(__file__).resolve().parents[2] / ".github/workflows/shorts.yml"
         text = workflow.read_text()
-        self.assertEqual(hashlib.sha256(normalized_shorts_workflow(text).encode()).hexdigest(), "b8c87b3db99c27d5e7ba8c31f65f6841a8f940bd29c34aca19f9c9a0bb11b6ac")
-        branch = text.split('if [ "$PILOT" = "pilot-006" ]; then', 1)[1].split('elif [ -f', 1)[0]
+        self.assertEqual(hashlib.sha256(normalized_shorts_workflow(text).encode()).hexdigest(), "c416d6a0b1da6a3b52441e7d571dba2b72b0df08e1b1896537cafcd6443a654a")
+        branch = text.split("name: Select (whole video", 1)[1].split('if [ "$PILOT" = "pilot-006" ]; then', 1)[1].split('elif [ -f', 1)[0]
         self.assertIn("--preflight", branch)
         self.assertNotIn("shorts_select.py", branch)
         self.assertLess(branch.index("--preflight"), branch.index("shorts_produce.py"))
-        self.assertIn('shorts_review.py "$T/work/shorts" 1', branch)
+        self.assertIn('shorts_006_material.py --review-material "$T/work/shorts/shorts.json" "$T/work/shorts/short-00.mp4"', branch)
+        self.assertNotIn("shorts_review.py", branch)
         preserve = text.split('name: Preserve privately and record', 1)[1]
         correction = preserve.split('if [ "$PILOT" = "pilot-006" ]; then', 1)[1].split('          else\n', 1)[0]
         self.assertIn('rm -f "$d/short-00-frame.jpg"', correction)
         self.assertNotIn('*-frame.jpg', correction)
-        self.assertIn('cp "$T/work/shorts/correction-media-checks.json"', correction)
+        self.assertIn('cp "$T/work/shorts/correction-media-checks-v2.json"', correction)
 
 
     def test_preserve_mismatch_stops_before_upload_or_canonical_change(self):
@@ -213,7 +279,7 @@ class CorrectionWorkflow(unittest.TestCase):
             (canonical / "shorts.json").write_bytes(b"original")
             (canonical / "short-00-frame.jpg").write_bytes(b"original frame")
             (work / "shorts.json").write_text(json.dumps({"shorts": [{"media_checks_sha256": "0" * 64, "media_checks": {}}]}))
-            (work / "correction-media-checks.json").write_bytes(b"{}\n")
+            (work / "correction-media-checks-v2.json").write_bytes(b"{}\n")
             tools = root / "bin"; tools.mkdir(); marker = root / "upload-called"
             (tools / "gh").write_text('#!/bin/sh\ntouch "' + str(marker) + '"\n'); (tools / "gh").chmod(0o755)
             result = subprocess.run(["bash", "-e", "-c", body], cwd=root,

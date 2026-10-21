@@ -49,6 +49,40 @@ def description_for(short, long_url, long_title):
 REST_OUTPUT_SHA256 = "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e"
 
 
+MATERIAL_PLAN_SHA256 = "99e0ecbd3a5a0c5736e6ce8eaadc766a346cb789b08203577fa38dde1ade1543"
+
+
+def _material_context(spec):
+    return pending_shorts.material_context(spec)
+
+
+def _readback_material_plan(spec, pilot_dir, short):
+    """Document identity only: no eligibility, QA, media or deadline check."""
+    try:
+        plan_path = Path(pilot_dir) / "shorts/correction-plan-v2.json"
+        if any(p.is_symlink() for p in (plan_path, *plan_path.parents)):
+            return None
+        raw = plan_path.read_bytes()
+        plan = json.loads(raw)
+        final, journal = spec.get("finalization"), spec.get("correction_material_review_attempt")
+        if (not isinstance(plan, dict) or not isinstance(plan.get("release"), dict)
+                or hashlib.sha256(raw).hexdigest() != MATERIAL_PLAN_SHA256 or spec.get("edit_plan") != plan
+                or plan.get("version") != "shorts-006-correction-plan-v2"
+                or spec.get("source_pilot") != "pilot-006" or Path(pilot_dir).name != "pilot-006"
+                or not isinstance(final, dict) or final.get("kind") != "pilot-006-correction-v2"
+                or final.get("plan_sha256") != MATERIAL_PLAN_SHA256
+                or final.get("source_pilot") != "pilot-006" or final.get("output_sha256") != short.get("sha256")
+                or final.get("target_slot") != plan.get("release", {}).get("target_slot")
+                or not isinstance(journal, dict) or journal.get("version") != "shorts-006-material-review-attempt-v1"
+                or journal.get("plan_sha256") != MATERIAL_PLAN_SHA256
+                or journal.get("output_sha256") != short.get("sha256")
+                or journal.get("target_slot") != plan.get("release", {}).get("target_slot") or not _rest_identity(short)):
+            return None
+        return MATERIAL_PLAN_SHA256
+    except (OSError, ValueError, TypeError):
+        return None
+
+
 def _rest_correction(short, pilot):
     return pilot == "pilot-006" and short.get("sha256") == REST_OUTPUT_SHA256
 
@@ -59,9 +93,9 @@ def _rest_identity(short):
     return all(key in short and short[key] == value for key, value in expected.items())
 
 
-def metadata_for(short, long_url, long_title, *, pilot=None):
+def metadata_for(short, long_url, long_title, *, pilot=None, material_plan_sha256=None):
     """Formatting only. New-upload authority remains in the existing gates."""
-    if _rest_correction(short, pilot):
+    if _rest_correction(short, pilot) or (pilot == "pilot-006" and material_plan_sha256 == MATERIAL_PLAN_SHA256):
         return {"title": "Rest in God's Care #shorts",
                 "description": f"▶ Full prayer: {long_url}\n{long_title}\n\n"
                                "A quiet moment to rest in God's care.\n\n#prayer #rest #jesus #faith #shorts",
@@ -147,7 +181,8 @@ def _verification(observation, error, video_id, slot, expected, now=None):
     if error:
         return "VERIFICATION_UNKNOWN", error
     required = {"video_id": video_id, "channel_id": pv.CHANNEL,
-                "title": expected["title"], "description": expected["description"],
+                **({} if expected.get("_local_metadata_context_unknown") is True else
+                   {"title": expected["title"], "description": expected["description"]}),
                 "default_language": "en", "default_audio_language": "en",
                 "license": "youtube", "contains_synthetic_media": True}
     for key, value in required.items():
@@ -241,7 +276,7 @@ def recovery_upload_gate(spec, shorts_json, shorts_dir, long_key, slots, now):
     pilot_dir = path.parent.parent
     context_pilot = pilot_dir.name
     key_pilot = long_key.split(":", 1)[0]
-    if rr.PILOT not in (context_pilot, key_pilot, spec.get("source_pilot")):
+    if rr.PILOT not in (context_pilot, key_pilot, spec.get("source_pilot")) and not _material_context(spec) and not pending_shorts.denied_output_context(spec):
         return None
     if (path.name != "shorts.json" or path.parent.name != "shorts"
             or tuple(path.parts[-5:]) != ("migration", "production", rr.PILOT, "shorts", "shorts.json")
@@ -266,10 +301,14 @@ def recovery_upload_gate(spec, shorts_json, shorts_dir, long_key, slots, now):
 
 
 def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
-    spec = json.loads(Path(shorts_json).read_text())
-    binding = exception_binding(spec)
+    source_manifest_bytes = Path(shorts_json).read_bytes()
+    spec = json.loads(source_manifest_bytes)
     ledger_path = Path(ledger_path)
     ledger = json.loads(ledger_path.read_text())
+    material_context = _material_context(spec)
+    new_records = [r for r in spec["shorts"] if r.get("publish") and
+                   "video_id" not in ledger["entries"].get(f"short:{spec['source_pilot']}:{r['sha256']}", {})]
+    binding = exception_binding(spec) if new_records or not material_context else None
     run_key = None
     if binding is not None:
         import publication_exception as pe
@@ -283,7 +322,7 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     # Editorial-plan publication is bound to its authorized target, not a stale
     # ledger slot. Legacy multi-Short inputs still assign slots only to todo.
     target_slot = None
-    if "edit_plan" in spec or "finalization" in spec:
+    if ("edit_plan" in spec or "finalization" in spec) and (new_records or not material_context):
         finalization = spec.get("finalization")
         if not isinstance(finalization, dict):
             raise SystemExit("MISSING_AUTHORIZED_TARGET_SLOT")
@@ -292,8 +331,6 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
             target_instant = utc_instant(target_slot)
         except (ValueError, TypeError):
             raise SystemExit("INVALID_AUTHORIZED_TARGET_SLOT")
-    new_records = [r for r in spec["shorts"] if r.get("publish") and
-                   "video_id" not in ledger["entries"].get(f"short:{spec['source_pilot']}:{r['sha256']}", {})]
     recovery = recovery_upload_gate(spec, shorts_json, shorts_dir, long_key, slots, utc_now()) if new_records else None
     if recovery is not None:
         target = utc_instant(recovery["target_slot"])
@@ -319,10 +356,14 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
     # Closed NEW correction identity check before session/credentials. Existing
     # IDs bypass this check and retain authenticated readback even if local
     # editorial fields are absent or inconsistent.
-    if spec.get("source_pilot") == "pilot-006" and spec.get("finalization", {}).get("kind") == "pilot-006-correction-v1":
+    if (todo and spec.get("source_pilot") == "pilot-006" and isinstance(spec.get("finalization"), dict)
+            and spec["finalization"].get("kind") == "pilot-006-correction-v1"):
         for short in todo:
             if not _rest_correction(short, spec["source_pilot"]) or not _rest_identity(short):
                 raise SystemExit("CORRECTION_METADATA_IDENTITY_MISMATCH")
+    if recovery is not None and recovery.get("metadata_profile") == "rest-v1":
+        if recovery.get("plan_sha256") != MATERIAL_PLAN_SHA256 or any(not _rest_identity(r) for r in todo):
+            raise SystemExit("CORRECTION_METADATA_IDENTITY_MISMATCH")
     reports = {}
     for short in todo:  # files of Shorts already uploaded were deleted from the release; nothing to check there
         if not pending_shorts.approved(short):
@@ -334,6 +375,20 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
         reports[short["sha256"]] = report
         if report["status"] != "PASS":
             raise SystemExit("SHORT_QA_FAIL " + json.dumps(report))
+    if material_context and todo:
+        # Slow QA must not leave an identity/document race before credentials.
+        for short in todo:
+            if sha256_file(Path(shorts_dir) / short["file"]) != short["sha256"]:
+                raise SystemExit("SHORT_HASH_CHANGED_DURING_QA")
+        refreshed = recovery_upload_gate(spec, shorts_json, shorts_dir, long_key, slots, utc_now())
+        if refreshed != recovery or Path(shorts_json).read_bytes() != source_manifest_bytes:
+            raise SystemExit("MATERIAL_BINDING_CHANGED_DURING_QA")
+        for short in todo:
+            if sha256_file(Path(shorts_dir) / short["file"]) != short["sha256"]:
+                raise SystemExit("SHORT_HASH_CHANGED_DURING_QA")
+        # The final media read may be slow too; compare the canonical document last.
+        if Path(shorts_json).read_bytes() != source_manifest_bytes:
+            raise SystemExit("MATERIAL_BINDING_CHANGED_DURING_QA")
     if recovery is not None and utc_now() > utc_instant(recovery["release_deadline"]):
         raise SystemExit("TARGET_SLOT_LEAD_MISSED")
     s = pv.session()
@@ -351,11 +406,21 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
             consumption = pe.validate_consumption(ledger, binding, run_key=run_key, video_id=entry.get("video_id"))
             if consumption["mode"] == "readback_only" and not entry.get("video_id"):
                 raise SystemExit("EXCEPTION_ID_REQUIRES_LEDGER_RECONCILIATION")
-        rest = _rest_correction(short, spec.get("source_pilot"))
+        material_pin = None
+        local_context_mismatch = False
+        if material_context:
+            if "video_id" in entry:
+                material_pin = _readback_material_plan(spec, Path(shorts_json).parent.parent, short)
+                local_context_mismatch = material_pin is None or long_key.split(":", 1)[0] != "pilot-006"
+            else:
+                material_pin = recovery.get("plan_sha256") if recovery else None
+        rest = _rest_correction(short, spec.get("source_pilot")) or material_pin == MATERIAL_PLAN_SHA256
         local_metadata_mismatch = rest and not _rest_identity(short)
-        metadata = metadata_for(short, f"https://youtu.be/{long_id}", long["snippet"]["title"], pilot=spec.get("source_pilot"))
-        expected = {"title": metadata["title"], "description": metadata["description"]}
-        if rest:
+        metadata = (metadata_for(short, f"https://youtu.be/{long_id}", long["snippet"]["title"],
+                    pilot=spec.get("source_pilot"), material_plan_sha256=material_pin)
+                    if not local_context_mismatch else {"title": None, "description": None, "tags": []})
+        expected = {"_local_metadata_context_unknown": True} if local_context_mismatch else {"title": metadata["title"], "description": metadata["description"]}
+        if rest and not local_context_mismatch:
             expected["tags"] = metadata["tags"]
         if "video_id" not in entry:
             if recovery is not None and utc_now() > utc_instant(recovery["release_deadline"]):
@@ -390,7 +455,7 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
                 entry["owner_exception_id"] = binding["exception_id"]
             ledger["entries"][key] = entry
             atomic_json(ledger_path, ledger)  # durable ID before readback
-        result = {"key": key, "file": "short-00.mp4" if rest else short["file"], "output_sha256": entry.get("output_sha256"),
+        result = {"key": key, "file": "short-00.mp4" if rest else short.get("file"), "output_sha256": entry.get("output_sha256"),
                   "expected_output_sha256": short["sha256"],
                   "upload_status": None, "video_id": entry["video_id"],
                   "url": f"https://youtube.com/shorts/{entry['video_id']}",
@@ -418,7 +483,9 @@ def main(shorts_json, shorts_dir, long_key, ledger_path, receipt_path, slots):
             status, reason = "VERIFICATION_FAIL", "OUTPUT_SHA256_MISMATCH"
         elif bound_hash is None and status != "VERIFICATION_FAIL":
             status, reason = "VERIFICATION_UNKNOWN", "OUTPUT_SHA256_UNRECORDED"
-        if local_metadata_mismatch and status != "VERIFICATION_FAIL" and reason != "OUTPUT_SHA256_UNRECORDED":
+        if local_context_mismatch and status != "VERIFICATION_FAIL":
+            status, reason = "VERIFICATION_UNKNOWN", "LOCAL_METADATA_CONTEXT_MISMATCH"
+        if not local_context_mismatch and local_metadata_mismatch and status != "VERIFICATION_FAIL" and reason != "OUTPUT_SHA256_UNRECORDED":
             status, reason = "VERIFICATION_UNKNOWN", "LOCAL_METADATA_IDENTITY_MISMATCH"
         result.update(upload_status=observation["upload_status"], observation=observation,
                       verification_status=status, verification_reason=reason)
