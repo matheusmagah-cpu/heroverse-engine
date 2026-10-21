@@ -1,0 +1,225 @@
+{
+  "version": "shorts-006-correction-plan-v2",
+  "source_pilot": "pilot-006",
+  "source_baseline_sha": "582ff607089f9accb91a8a4d1a8c2fe6f4e47408",
+  "source_sha256": {
+    "script": "1006e8bec3bc8c43dffe6e5ad1d26e257ceaea5fbe0eb12fa414b9c059d10cad",
+    "timeline": "73357bd61adf13f004967f0a2b2ef3e16569fb2cd344eb419e3d1fcabf1af7a2",
+    "inputs": "07a75a6b6849ed7ada9fc621a573b947689effc458693d6889ce3bc8568f514b",
+    "images": "f2e32a9a210ebd3d4f93d1d6fb9254ee2241d416784c9d31343c8f02138bb695",
+    "long_manifest": "0d40777f7dd2a84db9615bd148df8c3173e2e46b9f7b32418e7677392e49a2bb",
+    "long_review": "e68b0ede86b2837d6070a18f20a17ad097be20d0636c427a4214c0f49324a00f"
+  },
+  "history": {
+    "file": "correction-history.json",
+    "sha256": "4c4d178392ee1b13b4a5927ba8a6454b895e85119b247aa038215fb9a58b4677",
+    "rejected_output_sha256": "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707"
+  },
+  "voice": {
+    "asset": "pilot-006-voice-sha256-d417a273a5e694e49c2eba25cb31a4afd175fa9bdf90c756b7e511ea8277861d.flac",
+    "sha256": "d417a273a5e694e49c2eba25cb31a4afd175fa9bdf90c756b7e511ea8277861d"
+  },
+  "music": {
+    "asset": "original-rest-music.lossless.flac",
+    "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+    "source_start": 2013.728
+  },
+  "candidate": {
+    "start": 813.728,
+    "end": 854.417,
+    "hook": "Let your face soften.",
+    "title": "Rest in God's Care",
+    "reference": null
+  },
+  "audio": {
+    "source_start": 813.728,
+    "source_end": 854.418,
+    "source_sample_rate": 24000,
+    "source_channels": 1,
+    "source_samples": 976560,
+    "output_sample_rate": 48000,
+    "resampled_source_samples": 1953120,
+    "padding_samples": 62880,
+    "output_samples": 2016000,
+    "fade_start": 40.69,
+    "fade_seconds": 1.31
+  },
+  "tail_seconds": 1.31,
+  "narrative_tail_seconds": 1.311,
+  "output_seconds": 42.0,
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "transition": {
+    "type": "fade",
+    "seconds": 0.5
+  },
+  "scenes": [
+    {
+      "image_id": "bg-healing-stream-night",
+      "asset": "pilot-006-img-bg-healing-stream-night-sha256-a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01.png",
+      "sha256": "a7b1f2b1d1e3002f85bbf34250b8db3ff04cba8c5af1d1b3566be33b171e2b01",
+      "metadata_sha256": "0289952b8b7464de1fc51eb5462e10f2db8fa3ef1f83fefc9aa7fcaab84fe385",
+      "nominal_start": 0.0,
+      "nominal_end": 20.977,
+      "visual_profile": "native_stream_hook_v2",
+      "camera": {
+        "source_width": 2048,
+        "source_height": 2048,
+        "window_width": 1080,
+        "window_height": 1920,
+        "y": 64,
+        "profile": "two_segment_hermite_v1",
+        "knot_seconds": 3.0,
+        "x": [
+          0.0,
+          40.0,
+          48.0
+        ],
+        "velocity": [
+          20.0,
+          0.5,
+          0.3
+        ],
+        "frames": 637
+      },
+      "water_light": {
+        "profile": "source_texture_flow_v1",
+        "coordinates": "source_x_and_source_y_minus_64",
+        "polygons": [
+          [
+            [
+              620,
+              1530
+            ],
+            [
+              760,
+              1515
+            ],
+            [
+              910,
+              1530
+            ],
+            [
+              1070,
+              1520
+            ],
+            [
+              1070,
+              1650
+            ],
+            [
+              930,
+              1650
+            ],
+            [
+              780,
+              1625
+            ],
+            [
+              620,
+              1635
+            ]
+          ],
+          [
+            [
+              760,
+              1290
+            ],
+            [
+              850,
+              1280
+            ],
+            [
+              950,
+              1300
+            ],
+            [
+              1070,
+              1280
+            ],
+            [
+              1070,
+              1380
+            ],
+            [
+              940,
+              1380
+            ],
+            [
+              850,
+              1405
+            ],
+            [
+              760,
+              1380
+            ]
+          ]
+        ],
+        "inward_feather_pixels": 12,
+        "phase_offsets": [
+          "zero",
+          "pi_over_3"
+        ],
+        "wavelength_pixels": 96,
+        "period_seconds": 4.0,
+        "diagonal": 0.15,
+        "absolute_amplitude_cap": 0.06,
+        "source_amplitude_fraction": 0.16
+      }
+    },
+    {
+      "image_id": "bg-still-water-night",
+      "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
+      "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
+      "metadata_sha256": "dfe5d78c4c7727369c4b10f31ffa5c5e11e199d5b70a711328b786e8bad527f9",
+      "nominal_start": 20.977,
+      "nominal_end": 42.0,
+      "visual_profile": "native_pond_rest_v2",
+      "camera": {
+        "source_width": 2048,
+        "source_height": 2048,
+        "window_width": 1152,
+        "window_height": 2048,
+        "y": 0,
+        "profile": "smoothstep_pan_v1",
+        "x": [
+          448.0,
+          480.0
+        ],
+        "frames": 638
+      }
+    }
+  ],
+  "release": {
+    "target_slot": "2026-10-21T14:00:00Z",
+    "release_deadline": "2026-10-21T13:15:00Z",
+    "minimum_overall": 9.0,
+    "file": "short-00.mp4"
+  },
+  "previous_material": {
+    "file": "correction-history-96c8268f.json",
+    "sha256": "5b1798377d25f54a813ed8ae1e99fbe17fa7ccab0ea4650454fcb76c5ba1cede",
+    "bytes": 17623,
+    "rejected_output_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+    "source_run_id": "39590168285",
+    "previous_plan_sha256": "95624da1b4e4e4b256faee29fb37c8bc78fdb5c9747a3be86c69d9ec0e319905"
+  },
+  "audio_preservation": {
+    "mode": "aac_reference_remux_v1",
+    "reference_asset": "pilot-006-short-00-sha256-96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e.mp4",
+    "reference_sha256": "96c8268fa8b4cd270d0fbafa74bca579d12ae4a38168534b399a4709d0aa7b6e",
+    "reference_bytes": 20581582,
+    "aac_packets_sha256": "c4f2bade0301d93a2b1ad03335bfceeedb403cb9faff72f673fc6c15de564555",
+    "pcm_comparison": "same_ffmpeg_pcm_s32le_exact",
+    "sample_rate": 48000,
+    "channels": 2,
+    "presentation_samples": 2016000,
+    "packet_count": 1970,
+    "first_pts_samples": -1024,
+    "skip_samples": 1024,
+    "last_pts_samples": 2015232,
+    "last_duration_samples": 768,
+    "codec_frame_samples": 1024
+  }
+}
