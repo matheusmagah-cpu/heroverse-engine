@@ -555,5 +555,98 @@ class States(unittest.TestCase):
             self.assertEqual(ps.todo_files(d, ledger), [])
 
 
+class RecoveryPublication(unittest.TestCase):
+    setUp = PublishShorts.setUp
+    tearDown = PublishShorts.tearDown
+    def prepare_recovery(self, tmp):
+        from test_pending_shorts import recovery_setup
+        prod, d, spec, ledger = recovery_setup(tmp)
+        media = Path(tmp) / "temporary-media"
+        media.mkdir()
+        (media / "short-00.mp4").write_bytes(b"synthetic media")
+        ledger_path = Path(tmp) / "ledger.json"
+        ledger_path.write_text(json.dumps(ledger))
+        return d / "shorts/shorts.json", media, ledger_path, spec
+
+    def invoke_recovery(self, path, media, ledger, slot="2026-10-21T14:00:00Z", long_key="pilot-006:longsha"):
+        pub.main(str(path), str(media), long_key, str(ledger), str(ledger.parent / "receipt.json"), slot)
+
+    def test_recovery_boundary_one_upload_temp_media_dir(self):
+        import review_recovery as rr
+        with tempfile.TemporaryDirectory() as t:
+            path, media, ledger, spec = self.prepare_recovery(t)
+            pub.utc_now = lambda: ps.when("2026-10-21T13:15:00Z")
+            with patch.object(pub, "sha256_file", return_value=rr.OUTPUT_SHA256):
+                self.invoke_recovery(path, media, ledger)
+            self.assertEqual(self.yt.uploads, [("short-00.mp4", rr.TARGET_SLOT)])
+
+    def test_recovery_bad_binding_context_slot_cutoff_before_session(self):
+        changes = ("missing", "source", "hash", "multiple", "slot", "late", "long", "symlink", "taken", "reserved", "opens")
+        for change in changes:
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as t:
+                path, media, ledger, spec = self.prepare_recovery(t)
+                slot = "2026-10-21T14:00:00Z"
+                long_key = "pilot-006:longsha"
+                pub.utc_now = lambda: ps.when("2026-10-21T13:15:00Z")
+                if change == "missing": spec.pop("review_recovery")
+                elif change == "source": spec["source_pilot"] = "pilot-009"
+                elif change == "hash": spec["shorts"][0]["sha256"] = "f" * 64
+                elif change == "multiple": spec["shorts"][1]["publish"] = True
+                elif change == "slot": slot = "2026-10-21T20:00:00Z"
+                elif change == "late": pub.utc_now = lambda: ps.when("2026-10-21T13:15:01Z")
+                elif change == "long":
+                    long_key = "pilot-009:longsha"
+                    data = json.loads(ledger.read_text()); data["entries"][long_key] = {"video_id": "LONG"}; ledger.write_text(json.dumps(data))
+                elif change == "reserved":
+                    other = path.parents[2] / "pilot-007"; other.mkdir()
+                    (other / "schedule.json").write_text(json.dumps({"shorts_slots": ["2026-10-21T14:00:00Z"]}))
+                elif change == "opens":
+                    (path.parents[1] / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-21T13:31:00Z"}))
+                elif change == "taken":
+                    data = json.loads(ledger.read_text()); data["entries"]["other"] = {"video_id": "OTHER", "slot": "2026-10-21T14:00:00Z"}; ledger.write_text(json.dumps(data))
+                elif change == "symlink":
+                    alias = Path(t) / "alias"; alias.symlink_to(media, target_is_directory=True); media = alias
+                path.write_text(json.dumps(spec))
+                with patch.object(pub, "sha256_file", return_value=spec["shorts"][0]["sha256"]), patch.object(pub.pv, "session") as session, patch.object(pub.pv, "upload") as upload:
+                    with self.assertRaises(SystemExit): self.invoke_recovery(path, media, ledger, slot, long_key)
+                session.assert_not_called(); upload.assert_not_called()
+
+    def test_recovery_qa_crosses_deadline_before_session(self):
+        import review_recovery as rr
+        with tempfile.TemporaryDirectory() as t:
+            path, media, ledger, spec = self.prepare_recovery(t)
+            current = [ps.when("2026-10-21T13:15:00Z")]
+            pub.utc_now = lambda: current[0]
+            def qa(path):
+                current[0] = ps.when("2026-10-21T13:15:01Z")
+                return {"status": "PASS"}
+            with patch.object(pub, "sha256_file", return_value=rr.OUTPUT_SHA256), patch.object(pub.shorts_qa, "check", side_effect=qa), patch.object(pub.pv, "session") as session, patch.object(pub.pv, "upload") as upload:
+                with self.assertRaisesRegex(SystemExit, "TARGET_SLOT_LEAD_MISSED"):
+                    self.invoke_recovery(path, media, ledger)
+            session.assert_not_called()
+            upload.assert_not_called()
+
+    def test_recovery_clock_crosses_cutoff_after_qa_never_uploads(self):
+        import review_recovery as rr
+        with tempfile.TemporaryDirectory() as t:
+            path, media, ledger, spec = self.prepare_recovery(t)
+            times = iter([ps.when("2026-10-21T13:15:00Z"), ps.when("2026-10-21T13:15:00Z"), ps.when("2026-10-21T13:15:01Z")])
+            pub.utc_now = lambda: next(times)
+            with patch.object(pub, "sha256_file", return_value=rr.OUTPUT_SHA256), patch.object(pub.pv, "upload") as upload:
+                with self.assertRaises(SystemExit): self.invoke_recovery(path, media, ledger)
+            upload.assert_not_called()
+
+    def test_recovery_existing_id_after_cutoff_without_binding_no_reupload(self):
+        with tempfile.TemporaryDirectory() as t:
+            path, media, ledger, spec = self.prepare_recovery(t)
+            spec.pop("review_recovery"); spec["shorts"][0]["publish"] = False
+            path.write_text(json.dumps(spec))
+            data = json.loads(ledger.read_text()); data["entries"]["short:pilot-006:" + spec["shorts"][0]["sha256"]] = {"video_id": "OLD", "slot": "2026-10-21T14:00:00Z"}; ledger.write_text(json.dumps(data))
+            (media / "short-00.mp4").unlink()
+            pub.utc_now = lambda: ps.when("2026-10-22T00:00:00Z")
+            self.invoke_recovery(path, media, ledger, "")
+            self.assertEqual(self.yt.uploads, [])
+
+
 if __name__ == "__main__":
     unittest.main()

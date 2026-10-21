@@ -32,7 +32,11 @@ jobs:
           case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
           sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
           d="migration/production/$PILOT/shorts"
-          python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts']]" "$d/shorts.json" |
+          if [ "$PILOT" = pilot-006 ]; then
+            python3 -I -B migration/publish/review_recovery.py --list "migration/production/$PILOT" migration/evidence/owner-quality-policy/pilot-006-selection.json
+          else
+            python3 -I -c "import json,sys;[print(s['file'],s['sha256']) for s in json.load(open(sys.argv[1]))['shorts']]" "$d/shorts.json"
+          fi |
           while read -r f sha; do
             gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-${f%.mp4}-sha256-$sha.mp4" -O "$d/$f"
             echo "$sha  $d/$f" | sha256sum -c -
@@ -40,7 +44,12 @@ jobs:
       - name: Watched review (Gemini free tier)
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
-        run: python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3
+        run: |
+          if [ "$PILOT" = pilot-006 ]; then
+            python3 -I -B migration/publish/review_recovery.py --review "migration/production/$PILOT" migration/evidence/owner-quality-policy/pilot-006-selection.json
+          else
+            python3 -I -B migration/production/shorts_review.py "migration/production/$PILOT/shorts" 3
+          fi
       - name: Record
         run: |
           git config user.name "github-actions[bot]"
