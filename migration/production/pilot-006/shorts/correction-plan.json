@@ -1,0 +1,99 @@
+{
+  "version": "shorts-006-correction-plan-v1",
+  "source_pilot": "pilot-006",
+  "source_baseline_sha": "582ff607089f9accb91a8a4d1a8c2fe6f4e47408",
+  "source_sha256": {
+    "script": "1006e8bec3bc8c43dffe6e5ad1d26e257ceaea5fbe0eb12fa414b9c059d10cad",
+    "timeline": "73357bd61adf13f004967f0a2b2ef3e16569fb2cd344eb419e3d1fcabf1af7a2",
+    "inputs": "07a75a6b6849ed7ada9fc621a573b947689effc458693d6889ce3bc8568f514b",
+    "images": "f2e32a9a210ebd3d4f93d1d6fb9254ee2241d416784c9d31343c8f02138bb695",
+    "long_manifest": "0d40777f7dd2a84db9615bd148df8c3173e2e46b9f7b32418e7677392e49a2bb",
+    "long_review": "e68b0ede86b2837d6070a18f20a17ad097be20d0636c427a4214c0f49324a00f"
+  },
+  "history": {
+    "file": "correction-history.json",
+    "sha256": "4c4d178392ee1b13b4a5927ba8a6454b895e85119b247aa038215fb9a58b4677",
+    "rejected_output_sha256": "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707"
+  },
+  "voice": {
+    "asset": "pilot-006-voice-sha256-d417a273a5e694e49c2eba25cb31a4afd175fa9bdf90c756b7e511ea8277861d.flac",
+    "sha256": "d417a273a5e694e49c2eba25cb31a4afd175fa9bdf90c756b7e511ea8277861d"
+  },
+  "music": {
+    "asset": "original-rest-music.lossless.flac",
+    "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+    "source_start": 2511.607
+  },
+  "candidate": {
+    "start": 1311.607,
+    "end": 1346.297,
+    "hook": "You can let go.",
+    "title": "His Peace Stands Watch Over You",
+    "reference": "Philippians 4:6-7 (KJV)"
+  },
+  "audio": {
+    "source_start": 1311.607,
+    "source_end": 1346.477,
+    "source_sample_rate": 24000,
+    "source_channels": 1,
+    "source_samples": 836880,
+    "output_sample_rate": 48000,
+    "resampled_source_samples": 1673760,
+    "padding_samples": 54240,
+    "output_samples": 1728000,
+    "fade_start": 34.87,
+    "fade_seconds": 1.13
+  },
+  "tail_seconds": 1.13,
+  "narrative_tail_seconds": 1.31,
+  "output_seconds": 36.0,
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "transition": {
+    "type": "fade",
+    "seconds": 0.5
+  },
+  "scenes": [
+    {
+      "image_id": "bg-still-water-night",
+      "asset": "pilot-006-img-bg-still-water-night-sha256-7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2.png",
+      "sha256": "7d85453374b1c6920f9312cf19c7719941e594dcbcc96346b67435f1c56084e2",
+      "nominal_start": 0.0,
+      "nominal_end": 18.0,
+      "motion_profile": "phrase_push_in_v1",
+      "atmosphere": {
+        "profile": "source_atmosphere_continuous_v1",
+        "seed": 259006,
+        "envelope": 1.0,
+        "alpha_cap": 0.18,
+        "fog_alpha_max": 0.09,
+        "light_alpha_max": 0.06,
+        "dust_alpha_max": 0.1
+      }
+    },
+    {
+      "image_id": "bg-healing-garden",
+      "asset": "pilot-006-img-bg-healing-garden-sha256-97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070.png",
+      "sha256": "97fc90684ebd51dcf615f1c42ec86ea5f473b3025ea49ef8bb9ecebcfc7a4070",
+      "nominal_start": 18.0,
+      "nominal_end": 36.0,
+      "motion_profile": "phrase_push_in_v1",
+      "atmosphere": {
+        "profile": "source_atmosphere_continuous_v1",
+        "seed": 259007,
+        "envelope": 1.0,
+        "alpha_cap": 0.18,
+        "fog_alpha_max": 0.09,
+        "light_alpha_max": 0.06,
+        "dust_alpha_max": 0.1
+      }
+    }
+  ],
+  "release": {
+    "target_slot": "2026-10-21T14:00:00Z",
+    "release_deadline": "2026-10-21T13:15:00Z",
+    "minimum_overall": 9.0,
+    "file": "short-00.mp4"
+  }
+}

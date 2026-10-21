@@ -52,7 +52,7 @@
    },
    "text": "You can let go. He will not. Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus. The peace of God shall keep your heart and mind, like a guard at the door. Whatever news tomorrow brings, tonight that peace stands watch over you.",
    "qa": {
-    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "file": "/tmp/heroverse-review-h_2dgdaj/short-00.mp4",
     "seconds": 35.2,
     "lufs": -15.2,
     "true_peak_dbtp": -2.2,
@@ -68,9 +68,38 @@
     "status": "PASS"
    },
    "review": {
+    "hook_in_first_2s": 7.0,
+    "captions_readable_and_synced": 8.5,
+    "text_clear_of_shorts_ui": 9.0,
+    "picture_quality": 8.0,
+    "edit_rhythm": 6.5,
+    "audio_clarity": 8.5,
+    "stands_alone": 9.0,
+    "ending_and_loop": 7.0,
+    "policy_safe": 10.0,
+    "overall": 7.6,
+    "issues": [
+     "00:03 - 00:16: A single visual holds for over 13 seconds with minimal motion, which can cause drop-off on fast-scrolling platforms.",
+     "00:33 - 00:36: The video fades out slightly abruptly without a clean seamless loop back to the opening hook."
+    ],
+    "strongest_moment": "The smooth visual transition at 00:16 from the lily pond to the moonlit courtyard fountain paired with the verse delivery of 'the peace of God'.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707"
+   },
+   "publish": false,
+   "previous_review": {
     "status": "NOT_REVIEWED_ProviderFailure"
    },
-   "publish": false
+   "owner_quality_policy": {
+    "minimum_overall": 9.0,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "OVERALL_OUTSIDE_OWNER_RANGE"
+    ]
+   },
+   "qa_output_sha256": "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707"
   },
   {
    "file": "short-01.mp4",
@@ -225,5 +254,22 @@
   ],
   "pass_item": 7,
   "pass_overall": 8
+ },
+ "review_recovery": {
+  "version": "single-short-review-recovery-v1",
+  "pilot": "pilot-006",
+  "file": "short-00.mp4",
+  "output_sha256": "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707",
+  "source_manifest_sha256": "37465008e0b73a51f3d394d283500eab1426fdd679d36b571ed241d20689e402",
+  "target_slot": "2026-10-21T14:00:00Z",
+  "release_deadline": "2026-10-21T13:15:00Z",
+  "previous_review_status": "NOT_REVIEWED_ProviderFailure",
+  "status": "REVIEW_RECORDED"
+ },
+ "review_recovery_execution": {
+  "reviewed_at": "2026-10-21T00:30:22.684613+00:00",
+  "github_run_id": "39521492371",
+  "github_run_attempt": "1",
+  "output_sha256": "9c0f2aed36ab0d1af07bcf1123355c9b44afd1df0911a799aa09cdebb98f9707"
  }
 }
