@@ -343,6 +343,16 @@
     "file": "migration/mining/test_structure_mining.py",
     "contains": "def test_http_policy_respects_retry_hints_and_never_sleeps_after_final_attempt"
    }
+  },
+  {
+   "id": "E45",
+   "date": "2026-10-22",
+   "error": "Superseded cutover collection still had a daily trigger and produced PermissionError incidents (#249); the old archive plan also included live shared dependencies.",
+   "fix": "Retire the obsolete collector and other proven legacy entry points using the complete path/dependency inventory. Preserve its failure evidence without claiming an OAuth/permission repair. Keep current reporting, native QA dependencies and pending qualifications.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_retired_workflows_cannot_reenter_the_scheduler"
+   }
   }
  ]
 }
