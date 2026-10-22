@@ -1,0 +1,79 @@
+{
+  "version": "reviewer-qualification-checkpoint-v1",
+  "recorded_at": "2026-10-22T10:48:08.279Z",
+  "scope": "Only qualify the designated audiovisual review route; no production, publication or general automation resume.",
+  "repository_head_verified": "2716e75e46af2913cf038bdca7a336973ccc7539",
+  "stage_status": "BLOCKED_CURRENT_PROJECT_BILLING_VERIFICATION",
+  "master": {
+    "pilot": "pilot-006",
+    "file": "short-00.mp4",
+    "release_tag": "v0.0.0-cloud-assets-20261013",
+    "asset_id": 662430977,
+    "bytes": 15369406,
+    "actual_downloaded_bytes_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
+    "byte_count_and_sha256_verified": true,
+    "canonical_manifest_sha256": "cc8daa14d106a4e09fd9cede224a8edf2e9c6a903a13e9d5e02f909709a4a701",
+    "canonical_review_status": "NOT_REVIEWED_ProviderFailure",
+    "canonical_error": "HTTP_503_UNAVAILABLE",
+    "prior_review_run": "39597248682",
+    "canonical_publish": false,
+    "approved_technical_checks_not_repeated": true
+  },
+  "candidate_route": {
+    "status": "DOCUMENTED_NOT_RUNTIME_QUALIFIED",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/interactions",
+    "model": "gemini-3.8-flash",
+    "model_change": false,
+    "existing_model_and_rubric_to_preserve": true,
+    "input": "Exact full preserved MP4 with audio, no substitute transcript, frames-only input or remux.",
+    "request_constraints": {
+      "store": false,
+      "background": false,
+      "stream": false,
+      "tools": false,
+      "paid_fallback": false
+    },
+    "documentation": [
+      "https://ai.google.dev/gemini-api/docs/interactions-overview",
+      "https://ai.google.dev/gemini-api/docs/video-understanding",
+      "https://ai.google.dev/api/interactions-api",
+      "https://ai.google.dev/gemini-api/docs/pricing"
+    ],
+    "free_standard_input_output_documented": true,
+    "current_account_configuration_verified": false,
+    "documentation_not_treated_as_live_quality_or_cost_proof": true
+  },
+  "prototype": {
+    "prior_owner_update_reports_50_local_tests": true,
+    "located_on_main_or_open_prs_or_branch_names": false,
+    "personal_context_recovery_located_files_or_commit": false,
+    "tests_claimed_for_this_turn": 0,
+    "limitation": "Prototype may exist in the paused dot workspace; code and test results have not been recovered here. Do not attribute a new implementation or those tests to this turn."
+  },
+  "account_verification": {
+    "historical_project_id": "gen-lang-client-0909161074",
+    "historical_account": "willmarquesfotografia@gmail.com",
+    "current_browser_account": "matheusmagah@gmail.com",
+    "current_projects_table_empty": true,
+    "historical_billing_evidence_date": "2026-10-16",
+    "historical_evidence_not_fresh": true,
+    "secret_read_or_exported": false,
+    "new_key_created": false,
+    "account_switch_action": "Trocar de conta",
+    "action_outcome": "AUTO_REVIEW_REJECTED",
+    "automatic_review_reason": "Authentication/account-switch flow was not specifically authorized and was considered unnecessary while the intended account was already signed in.",
+    "actual_constraint": "Visible Matheus account is different from the historically recorded Will project owner; project cost configuration cannot be verified in the current visible project list.",
+    "circumvention_attempted": false
+  },
+  "effects": {
+    "provider_inference_calls": 0,
+    "files_api_uploads": 0,
+    "workflow_dispatches": 0,
+    "new_renders": 0,
+    "publication_calls": 0,
+    "schedule_changes": 0,
+    "canonical_approval_or_manifest_changes": 0,
+    "production_code_changes": 0
+  },
+  "next_step": "Obtain the specifically required authorization to select the already configured Will account in Google AI Studio, read the existing project's billing/tier/quota without creating or changing credentials, billing or permissions. Recover the dot prototype before rebuilding. Then pin same model/rubric/media and perform one bounded review-only qualification with persistent pre-effect claim and separate receipt; preserve old missed cutoff and no automatic publication. Do not call the expired one-shot recovery."
+}
