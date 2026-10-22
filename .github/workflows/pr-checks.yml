@@ -14,7 +14,17 @@ jobs:
         with:
           fetch-depth: 0
       - name: ffmpeg and OpenCV for the video tests
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg python3-numpy python3-opencv
+        timeout-minutes: 4
+        run: |
+          # Run 39813213979 spent its entire ten-minute job in apt-get update.
+          # Use the hosted image's packages/index; do not refresh unrelated feeds.
+          if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2' 2>/dev/null; then
+            timeout 180s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 \
+              -o Acquire::https::Timeout=20 install -y --no-install-recommends \
+              ffmpeg python3-numpy python3-opencv
+          fi
+          command -v ffmpeg
+          python3 -c 'import numpy, cv2; print("Video test dependencies available")'
       - name: Unit tests (no network, no secrets)
         run: |
           fail=0
