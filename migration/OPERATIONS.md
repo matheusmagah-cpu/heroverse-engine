@@ -69,6 +69,22 @@ a fingerprint match cannot prove the current key/project association, free tier 
 capacity, and the isolated native review route is not yet qualified. Resolve those facts before
 enabling inference; this diagnostic is not a review-only implementation or general activation.
 
+Activation result, 2026-10-22 12:32 UTC: run `39779111955` confirmed **MATCH** for the
+current secret against the historical fingerprint, and for the preserved manifest/recorded QA
+binding. The exact artifact receipt is retained in
+`evidence/reviewer-qualification/20261022-runtime-preflight.json`; its original ZIP artifact is
+`12425811724` (SHA-256 `401fbb196cd73aef489fa71bb5a2441c98256b3571e3c3f6be26ec11bf37d5e0`).
+The job's final failure is the explicit activation block, after both receipt generation and upload
+succeeded. No inference or publication occurred. This completes the fingerprint comparison for
+this activation attempt; it does not prove the current project or billing configuration.
+
+During this activation attempt, AI Studio was signed in as Matheus and showed no imported projects.
+A direct read of the historical project's Google Cloud credentials page returned **Site Unavailable**,
+including after one reload. This is an access limitation of this browser, not evidence that the
+project was deleted or that Matheus lacks permission. No account switch, project import or credential
+change was made. Next: obtain access to the project containing the runtime credential, verify its
+current free tier/billing/recurring capacity, then qualify the isolated native review route.
+
 The runner's workflow is authoritative in **heroverse-runner**, not the archived copy formerly
 at `ci/runner-render.yml`. Its two files remain useful; removing the repository would remove the
 current executor. Consolidation into engine is unfinished work (#242), not part of this cleanup.
