@@ -23,9 +23,11 @@ from structure_mining import _strict_json, ReviewHTTPPolicy, ProviderFailure, ca
 ROOT = Path(__file__).resolve().parents[2]
 MODEL = 'gemini-3.8-flash'
 ENDPOINT = sr.BASE + '/v1beta/interactions'
+STABLE_ENDPOINT = sr.BASE + '/v1/interactions'
 QUALIFICATION = 'short006-20261022-interactions-v1'
 START_ARTIFACT = 'reviewer-qualification-start-' + QUALIFICATION
 INLINE_QUALIFICATION = 'short006-20261022-inline-diagnosis-v1'
+STABLE_QUALIFICATION = 'short006-20261022-stable-inline-v1'
 OBSERVATION = 'migration/evidence/reviewer-qualification/20261022-project-binding.json'
 CREDENTIAL_POLICY = 'migration/evidence/gemini-free-runtime-policy.json'
 MANIFEST = 'migration/production/pilot-006/shorts/shorts.json'
@@ -96,7 +98,7 @@ def require_unused_reservation(token, artifact_name=START_ARTIFACT):
 
 
 def prepare(output, mode, environ=os.environ):
-    require(mode in ('check', 'review', 'inline'), 'INVALID_MODE')
+    require(mode in ('check', 'review', 'inline', 'stable'), 'INVALID_MODE')
     require(environ.get('GITHUB_REPOSITORY') == REPO and environ.get('GITHUB_REF') == 'refs/heads/main', 'MAIN_ONLY')
     require(environ.get('GITHUB_RUN_ATTEMPT') == '1', 'REPLAY_BLOCKED')
     require(re.fullmatch(r'[1-9][0-9]*', environ.get('GITHUB_RUN_ID', '')) is not None, 'RUN_ID_REQUIRED')
@@ -104,20 +106,23 @@ def prepare(output, mode, environ=os.environ):
     observation, record, observation_sha = validate_inputs(ROOT, environ.get('HERO_GEMINI_API_KEY', ''), now())
     output.mkdir(parents=True, exist_ok=True)
     require(not (output / 'receipt.json').exists(), 'LOCAL_REPLAY_BLOCKED')
-    qualification = INLINE_QUALIFICATION if mode == 'inline' else QUALIFICATION
+    qualification = (STABLE_QUALIFICATION if mode == 'stable' else
+                     INLINE_QUALIFICATION if mode == 'inline' else QUALIFICATION)
     receipt = {'qualification_id': qualification, 'state': 'CHECKED', 'mode': mode,
                'started_at': now().isoformat(), 'run_id': environ['GITHUB_RUN_ID'],
                'run_attempt': 1, 'repository_sha': environ['GITHUB_SHA'],
                'project_observation_sha256': observation_sha, 'runtime_fingerprint_match': 'MATCH',
                'output_sha256': MEDIA_SHA, 'expected_bytes': MEDIA_BYTES, 'asset_id': ASSET_ID,
                'recorded_qa_reused': True, 'qa_reexecuted': False, 'renders': 0,
-               'endpoint': ENDPOINT, 'model': MODEL, 'inference_requests': 0,
+               'endpoint': STABLE_ENDPOINT if mode == 'stable' else ENDPOINT, 'model': MODEL, 'inference_requests': 0,
                'canonical_writes': 0, 'publish': False, 'production_route_activated': False}
-    if mode == 'inline':
+    if mode in ('inline', 'stable'):
         receipt.update(maximum_inference_requests=2, media_delivery='INLINE_EXACT_MP4',
                        files_api_uploads=0, cleanup_required=False,
                        diagnostic_hypothesis='Distinguish model-wide inference failure from provider-file resolution; text control must succeed before the changed media delivery is attempted.')
-    if mode in ('review', 'inline'):
+        if mode == 'stable':
+            receipt['diagnostic_hypothesis'] = 'Qualify the officially supported stable v1 route after v1beta accepted text but returned service_unavailable for both Files URI and exact inline video. This does not assume an API-version root cause.'
+    if mode in ('review', 'inline', 'stable'):
         require_unused_reservation(environ.get('GH_TOKEN', ''), 'reviewer-qualification-start-' + qualification)
         asset = github_json('/releases/assets/' + str(ASSET_ID), environ.get('GH_TOKEN', ''))
         require(asset.get('id') == ASSET_ID and asset.get('name') == MEDIA_NAME
@@ -146,7 +151,9 @@ def json_schema(value):
 
 class InteractionInference:
     """Exactly one synchronous call. No fallback, retry, tools or stored interaction."""
-    def __init__(self):
+    def __init__(self, endpoint=ENDPOINT):
+        require(endpoint in (ENDPOINT, STABLE_ENDPOINT), 'UNVERIFIED_ENDPOINT')
+        self.endpoint = endpoint
         self.response_evidence = None
 
     def __call__(self, payload, key, models, *, http_policy):
@@ -178,7 +185,7 @@ class InteractionInference:
         require(len(request_bytes) < 100_000_000, 'REQUEST_TOO_LARGE')
         entry['request_bytes'] = len(request_bytes)
         entry['purpose'] = 'INLINE_VIDEO' if 'data' in video else 'FILES_VIDEO'
-        req = urllib.request.Request(ENDPOINT, data=request_bytes, method='POST',
+        req = urllib.request.Request(self.endpoint, data=request_bytes, method='POST',
               headers={'Content-Type': 'application/json', 'x-goog-api-key': key})
         try:
             with urllib.request.urlopen(req, timeout=policy.timeout()) as response:
@@ -228,8 +235,9 @@ class InteractionInference:
             entry['elapsed_end_seconds'] = policy._elapsed
 
 
-def text_control(key, cutoff):
+def text_control(key, cutoff, endpoint=ENDPOINT):
     """One cheap availability control; never an audiovisual score or approval."""
+    require(endpoint in (ENDPOINT, STABLE_ENDPOINT), 'UNVERIFIED_ENDPOINT')
     policy = ReviewHTTPPolicy(cutoff_utc=cutoff)
     policy.begin()
     body = {'model': MODEL, 'input': 'Reply with exactly READY.',
@@ -238,7 +246,7 @@ def text_control(key, cutoff):
     trace = {'purpose': 'TEXT_CONTROL', 'started_at': now().isoformat(), 'http_status': None,
              'outcome': 'TRANSPORT_ERROR', 'decision': 'STOP_FINAL'}
     result = {'ready': False, 'trace': trace}
-    req = urllib.request.Request(ENDPOINT, data=canonical(body), method='POST',
+    req = urllib.request.Request(endpoint, data=canonical(body), method='POST',
           headers={'Content-Type': 'application/json', 'x-goog-api-key': key})
     try:
         with urllib.request.urlopen(req, timeout=policy.timeout()) as response:
@@ -276,9 +284,13 @@ def infer(output, environ=os.environ):
     require(environ.get('GITHUB_REPOSITORY') == REPO and environ.get('GITHUB_REF') == 'refs/heads/main', 'MAIN_ONLY')
     receipt_path = output / 'receipt.json'
     receipt = _strict_json(receipt_path.read_bytes())
-    inline = receipt.get('mode') == 'inline'
-    require(receipt['state'] == 'STARTED' and receipt['mode'] in ('review', 'inline')
-            and receipt['qualification_id'] == (INLINE_QUALIFICATION if inline else QUALIFICATION)
+    inline = receipt.get('mode') in ('inline', 'stable')
+    stable = receipt.get('mode') == 'stable'
+    endpoint = STABLE_ENDPOINT if stable else ENDPOINT
+    expected_qualification = STABLE_QUALIFICATION if stable else INLINE_QUALIFICATION if inline else QUALIFICATION
+    require(receipt['state'] == 'STARTED' and receipt['mode'] in ('review', 'inline', 'stable')
+            and receipt['qualification_id'] == expected_qualification
+            and receipt.get('endpoint', ENDPOINT) == endpoint
             and receipt['run_id'] == environ.get('GITHUB_RUN_ID')
             and receipt['repository_sha'] == environ.get('GITHUB_SHA')
             and environ.get('GITHUB_RUN_ATTEMPT') == '1', 'ATTEMPT_UNBOUND')
@@ -292,10 +304,10 @@ def infer(output, environ=os.environ):
     media = output / 'short-00.mp4'
     require(media.stat().st_size == MEDIA_BYTES and sr.output_digest(media) == MEDIA_SHA, 'MEDIA_CHANGED')
     policy = ReviewHTTPPolicy(cutoff_utc=min(now() + timedelta(seconds=600), utc(observation['expires_at'])))
-    inference = InteractionInference()
+    inference = InteractionInference(endpoint=endpoint)
     try:
         if inline:
-            receipt['text_control'] = text_control(key, policy._cutoff)
+            receipt['text_control'] = text_control(key, policy._cutoff, endpoint=endpoint)
             receipt['diagnostic_outcome'] = ('TEXT_READY' if receipt['text_control']['ready'] else 'TEXT_CONTROL_FAILED_VIDEO_NOT_ATTEMPTED')
             require(receipt['text_control']['ready'] is True, 'MODEL_TEXT_CONTROL_FAILED')
         review = sr.review(media, deepcopy(record), key, http_policy=policy, inference=inference, inline=inline)

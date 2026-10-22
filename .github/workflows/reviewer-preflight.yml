@@ -8,7 +8,7 @@ on:
         required: true
         default: check
         type: choice
-        options: [check, review, inline]
+        options: [check, review, inline, stable]
 
 permissions:
   contents: read
@@ -34,15 +34,15 @@ jobs:
           MODE: ${{ inputs.mode }}
         run: python3 -I -B migration/production/reviewer_qualification.py prepare "$RUNNER_TEMP/reviewer-qualification" "$MODE"
       - name: Reserve this qualification before the provider effect
-        if: inputs.mode == 'review' || inputs.mode == 'inline'
+        if: inputs.mode == 'review' || inputs.mode == 'inline' || inputs.mode == 'stable'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: reviewer-qualification-start-${{ inputs.mode == 'inline' && 'short006-20261022-inline-diagnosis-v1' || 'short006-20261022-interactions-v1' }}
+          name: reviewer-qualification-start-${{ inputs.mode == 'stable' && 'short006-20261022-stable-inline-v1' || inputs.mode == 'inline' && 'short006-20261022-inline-diagnosis-v1' || 'short006-20261022-interactions-v1' }}
           path: ${{ runner.temp }}/reviewer-qualification/receipt.json
           if-no-files-found: error
           retention-days: 7
       - name: Review the complete preserved MP4 with audio once
-        if: inputs.mode == 'review' || inputs.mode == 'inline'
+        if: inputs.mode == 'review' || inputs.mode == 'inline' || inputs.mode == 'stable'
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
         run: python3 -I -B migration/production/reviewer_qualification.py infer "$RUNNER_TEMP/reviewer-qualification"
