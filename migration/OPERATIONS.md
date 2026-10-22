@@ -2,7 +2,8 @@
 
 ## Authority and boundaries
 
-- `SYSTEM.md`: product direction, structure-based mining and the six-stage loop.
+- `SYSTEM.md`: the canonical four-stage delivery contract: mining → modeling/production →
+  originality, intention and critique → publication, with live intelligence across the cycle.
 - `STANDARD.md`: production quality standard; frozen per-file criteria and bindings remain authoritative.
 - `strategy/DECISIONS.md`: evidence required for strategy/cadence changes.
 - `strategy/MODELING_SPEC.md`: modeling requirements and the reference/format documents it cites.
@@ -38,6 +39,11 @@ existing GitHub schedules and YouTube `publishAt` values have their own state. I
   Do not repeat approved audiovisual checks merely because code has moved.
 
 ## Active execution chain
+
+Use the delivery/acceptance rules in `SYSTEM.md` to coordinate these existing entry points.
+Shorts use the same production and review handoffs after the long prerequisite passes.
+The contract does not add an orchestrator: the gaps listed below still require implementation
+or qualification before the complete cycle can be called autonomous.
 
 | Work | Entry point and current implementation |
 |---|---|
