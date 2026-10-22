@@ -1,7 +1,32 @@
-# HeroVerse System v2: one loop, six stages, few tools (owner, 2026-10-19)
+# HeroVerse: one delivery workflow (owner alignment, 2026-10-22)
 
-The channel is a robot that keeps finding the **structures that win right now** and executes them
-perfectly. The unit of mining is the **structure**, never a channel. A structure is the complete,
+**Mine → model and produce → review originality, intention and quality → publish → mine again.**
+Live intelligence follows the entire process and the market, using the results to improve the next cycle.
+
+## Deliveries between stages
+
+| Stage | Receives | Delivers | Next stage accepts when |
+|---|---|---|---|
+| **1. Mining** | Channel direction, current market and available results from our videos | A versioned structure: winners and weak contrasts, audiovisual evidence, measured attributes, production targets and publication pattern | The evidence supports the targets and the structure meets the validation rule below. A candidate is explicitly limited to a pilot. |
+| **2. Modeling and production** | The accepted structure and its evidence | An original script and direction, sourced assets, the finished master, technical checks and proposed publication package | Required inputs are complete, technical checks pass and the exact files are identified. The material is ready for editorial review. |
+| **3. Originality, intention and critique** | The exact master, script, sources, technical results and package | An approval bound to the file, or a specific rejection with evidence and the correction required | Originality, editorial intention, policy, frozen technical gates and designated audiovisual review all pass, including the owner's overall floor of 9. |
+| **4. Publication** | The approved file and its qualified package | The YouTube identity, verified publication state, completed package and results available for learning | Readback confirms the intended publication and package. Upload alone does not complete this delivery. |
+
+### Handoff rules
+
+- The receiving stage validates the delivery before starting. An issue closed, PR merged or workflow green is not acceptance of a video.
+- Use the existing structure, pilot and Short records, gates, ledger and receipts listed in `OPERATIONS.md`. Carry the content ID, structure/criteria version, exact media hash, evidence and next action through those records; do not create a second ledger or parallel status document.
+- Return a rejected delivery to the stage responsible for its cause, with the failed criterion, evidence and required correction. An unsupported target returns to mining; a script, image, voice or edit defect returns to production; unavailable review remains with review; an upload or package defect remains with publication.
+- Preserve valid work. Reuse approved evidence only while its file, inputs, criteria and validity still match. A changed master needs its own review. A provider outage does not require an unchanged master to be rendered or technically qualified again.
+- Retry transient errors only within the recorded attempt/time/quota budget. After exhaustion, record the blocker and the concrete condition for resuming. Missing evidence, an expired slot or an unavailable reviewer never becomes approval.
+- Work on the current blocking delivery until it is accepted or its external blocker is explicit. Track the next action in the existing work item. A completed correction must name the delivery it unblocked; no new stage or service is added just to move the problem elsewhere.
+
+This is the operating contract. `OPERATIONS.md` maps the existing implementation and its remaining gaps; this document does not certify end-to-end autonomy. In the former v2 numbering, Shorts were stage 4, publication stage 5 and intelligence stage 6. Shorts now use production and review below; intelligence runs across all four stages. Historical records keep their original numbering.
+
+## Product and quality
+
+The goal is a channel that keeps finding the **structures that win right now** and produces original
+videos that meet the full delivery contract. The unit of mining is the **structure**, never a channel. A structure is the complete,
 repeatable shape of a video:
 - format and length;
 - the sequence of beats and their timing;
@@ -19,31 +44,24 @@ Every stage, **from the channel configuration to the pinned comment**, is held t
 - **ultra-professional and measured;**
 - **better than the market's current best.** For every measurable attribute, our target is the **best** value among the validated winners, never their median (`strategy/BEAT_THE_REFERENCE_RULE.md`). Where we can measure quality ourselves (sync, loudness, sharpness, caption accuracy, policy), our bar is stricter than any winner shows.
 
-```
- 0 CHANNEL CONFIGURATION (once, then kept true by stage 6)
- 1 MINE structures ─► 2 MODEL ─► 3 AUTHENTICITY + CRITIQUE ─► 4 SHORTS from the long ─► 5 PUBLISH
-        ▲                                                                                      │
-        └────────────────────────── 6 LIVE INTELLIGENCE (measure, catalogue, decide) ◄─────────┘
-```
-
 ## Tools (only these)
 
 | Tool | Used for | Limits |
 |---|---|---|
-| vidIQ (MCP, read-only, via Claude) | Stages 1 and 6: outliers, watched audits, transcripts, stats, our public videos and analytics | ≤10 calls/day, ≤2,000 credits/cycle (`evidence/vidiq/ledger.json`) |
-| Gemini, free tier | Stages 3 and 5: watched review (designated `gemini-3.8-flash` only), audit and critique (support models) | Free daily quota (E26/E29) |
-| Kokoro voice, FLUX images (Cloudflare), ffmpeg | Stage 2 execution | Free, hash-pinned |
-| YouTube Data API | Stage 5 | Our OAuth |
-| GitHub Actions + Dot | Running and building everything. **Dot also produces any image or video format** (cinematic animation, animated stories, thumbnails, clips) from a precise prompt and destination (owner, 2026-10-20) | Public repo; Dot works only through cards; media passes the same gates |
+| vidIQ (MCP, read-only, authorized research agent) | Mining and live intelligence: outliers, watched audits, transcripts, stats, our public videos and analytics | ≤10 calls/day, ≤2,000 credits/cycle (`evidence/vidiq/ledger.json`) |
+| Gemini, designated `gemini-3.8-flash` reviewer | Stage 3: audiovisual review; support models supply audit and critique, not replacement approval | Additional cost must be zero for the actual key/project and recurring load; current verification remains a blocker in `OPERATIONS.md` |
+| Kokoro voice, FLUX images (Cloudflare), ffmpeg | Stage 2 execution | Preserve existing hashes; verify capacity under the zero-additional-cost rule |
+| YouTube Data API | Stage 4 publication and reconciliation | Our OAuth |
+| GitHub Actions and the authorized execution agent | Execute the existing production, review and publication entry points | Public repositories; account, executor and dispatch boundaries are in `OPERATIONS.md`; media passes the same gates |
 
 Nothing else is added unless a stage cannot meet its bar without it, and that is proven first.
 
-**Format feasibility rule (owner, 2026-10-20).** A structure or format found by mining is never rejected because our render tools cannot make it. If it wins, Dot produces it through a media card (DOT_PROTOCOL, "Dot is the media producer"), and the result is judged by the same gates.
+**Format feasibility rule (owner, 2026-10-20).** A winning structure is not rejected merely because the current renderer cannot make it. Record the required capability and qualify an actual media delivery through the same gates before adopting that production route. A prompt, task assignment or provider claim is not proof that the required format can be produced within the zero-additional-cost limit.
 
-## 0. Channel configuration (once, then audited by stage 6)
+## Channel configuration (setup, then maintained by live intelligence)
 
 The channel is configured as a top Christian prayer channel, and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
-- **the official YouTube Help pages**, quoted verbatim (Dot reads them; this environment cannot reach support.google.com);
+- **the official YouTube Help pages**, with source and verification date;
 - **what the validated winners' channels do**, measured with vidIQ.
 
 | Setting | Set by | Rule |
@@ -54,9 +72,9 @@ The channel is configured as a top Christian prayer channel, and **every setting
 | Upload defaults: category, language, licence, comments, description template | Studio, plus the per-video API fields | Category = the most frequent among the validated winners (measured, not assumed) |
 | Altered/synthetic disclosure | per video (`containsSyntheticMedia`, already on) | Help: realistic synthetic voice narration requires disclosure |
 
-`structures/channel.json` records each setting's value, its source, and when it was last verified. Stage 6 re-verifies it weekly.
+`structures/channel.json` records each setting's value, its source, and when it was last verified. Live intelligence re-verifies it weekly.
 
-## 1. Mine winning structures (Claude + vidIQ)
+## 1. Mine winning structures
 
 1. **Find.** `vidiq_outliers` (long and short, last 3 months, minimum views) for every format in our line, plus
    `vidiq_youtube_search` and `vidiq_similar_videos` around each candidate.
@@ -84,22 +102,24 @@ The channel is configured as a top Christian prayer channel, and **every setting
    - no policy risk;
    - it does not make the channel incoherent.
 
-## 2. Model (Dot builds, Claude reviews)
+The delivery includes how each target was obtained: source, time window, instrument, count and limitations. Metadata or a transcript alone does not prove access to the reference's image and audio. Model estimates remain labelled as estimates; unqualified instruments cannot supply production targets. Missing evidence returns to mining before modeling begins.
+
+## 2. Model and produce
 
 A validated structure becomes three things:
 - **The script.** Every driver and hygiene beat, our own words, KJV Scripture only. `script_check.py` holds the structure's rules.
 - **The execution spec.** Render parameters per structure: scene length, motion, caption style, cards, CTA timing, sound, Shorts windows.
 - **The QA criteria for that structure version**, frozen before its first render. They are deterministic, every row blocks, and nothing is loosened after results.
 
-Execution is judged on technical, professional, cinematographic and policy grounds:
-1. the frozen QA;
-2. the signal scan;
-3. the designated watched review;
-4. the audit against the winners' audits.
+The direction specifies the viewer's need, the original idea and the intended progression: what the opening promises, what each beat adds and how the ending resolves it. Voice delivery, pauses, pictures, motion, captions and music must serve that progression. Resolve known script, source and feasibility problems before rendering.
 
-Approval is decided by the automatic three-stage gate defined below, including the first sample of a structure.
+Produce the master and package, retain provenance, and deliver the frozen technical QA and signal scan with the file identity. Stage 3 judges the actual result through the designated audiovisual review and comparison with the mined references; a production task cannot approve its own output by declaring it complete.
 
-## 3. Authenticity, originality and critique (YouTube monetization)
+### Shorts are a production delivery, with their own review
+
+After the long video's prerequisite gate passes (`publish/shorts_prerequisite.py`), derive the Short from its own narration and pictures. Start and end on full sentences, apply the structure's Shorts rules and link back to the long video. Deliver each Short through stages 2 and 3 with its own hash, technical checks and audiovisual approval. The long video's approval does not approve a Short. An existing preserved Short resumes at its missing check rather than restarting production.
+
+## 3. Originality, intention and critique
 
 YouTube policy (Help Center, YPP monetization policies):
 - **Inauthentic content** (renamed 2025-07-15) is mass-produced or repetitive content: made from a template with little to no variation across videos, or easily replicable at scale. It applies to the **whole channel**. "Image slideshows or scrolling text with little narrative or commentary value" is an official example.
@@ -109,6 +129,7 @@ Every video passes all of these, or it is not published:
 - **Original text.** The script's 8-word shingles overlap < 5 % with every reference transcript mined. Only shingle hashes are stored, never the text.
 - **No template.** Against our last 10 videos: a different opening line, a different Scripture set, a different image set, and a title that differs in more than its keywords. Script shingle overlap < 15 % with any of them. Free attributes vary.
 - **Narrative value.** ≥ 35 % of the spoken words are original reflection or teaching, not Scripture quotation or set formulas. The structure gives it a story or a teaching arc, so it is never a slideshow with narration.
+- **Intention.** Check the result against the direction: the title/opening promise is fulfilled; each beat adds meaning; voice, image, movement and music support the message; the ending resolves it. Motion or decorative effects alone do not establish cinematic quality. Findings identify the affected passage or time and the correction needed, using the existing editorial rubric rather than inventing a substitute score.
 - **Critique.** A support-model pass reads the script and the audit against the two policies above and against our content rules:
   - no fear-bait;
   - no fabricated prophecy;
@@ -118,13 +139,11 @@ Every video passes all of these, or it is not published:
   Any finding blocks until it is fixed.
 - **Disclosure.** Realistic synthetic people or events are disclosed as altered or synthetic content; scenery-only videos say so in the record.
 
-## 4. Shorts from the long video
+The receiving reviewer validates the existing technical evidence and its binding, then evaluates the complete audiovisual file. Base review requires every item ≥ 7 and overall ≥ 8; **new uploads additionally require overall ≥ 9**, under `publish/owner_quality_policy.py`. The designated reviewer remains `gemini-3.8-flash`. No fallback, manual score, provider error or approval for another file satisfies this handoff.
 
-The Short is cut from the long video's own narration and pictures. It starts and ends on full sentences, uses the long video's structure rules for Shorts (#173), and links back to the long video.
+## 4. Publish the complete package
 
-## 5. Publish: the complete package
-
-The long video is published by `approve.yml` → `prepublish_gate.py` → `publish.yml`, and the Shorts by `publish-shorts.yml`. Every hard row blocks, and ERROR is retried, never passed.
+The long video is published by `approve.yml` → `prepublish_gate.py` → `publish.yml`, and the Shorts by `publish-shorts.yml`. Every hard row blocks. Only a file with valid approval and a qualified package can enter upload; a transient ERROR uses bounded recovery and never passes by default.
 
 **The publication package is part of the structure** and is mined like the video itself: the winners' titles, thumbnails, descriptions, hashtags, tags, chapters, first and pinned comments, end screens, publish hour and playlist use.
 
@@ -148,26 +167,27 @@ Each video ships the full package, and `preflight.py` checks every measurable it
 
 Every item and its source are written into the package. An item without evidence is marked `UNMEASURED` and listed for stage 1. It is never guessed.
 
-## 6. Live intelligence: back to stage 1 (Claude + vidIQ)
+After upload, reconcile the existing video ID and the intended visibility/schedule, captions, playlist, disclosure and remaining package items. Record items that require Studio as pending until verified. An incomplete comment, end screen or readback does not justify another upload. An expired slot remains unresolved until a valid scheduling decision is recorded; it does not count as a delivered publication.
 
-- **Our videos.** At 48 h and at 7 days after publication: `vidiq_video_watch` on our public video with `AUDIT_PROMPT`, plus real analytics (views, retention, CTR, subscribers). Each video is catalogued against its structure's expectation as **good**, **bad** or **neutral**, with the attribute that explains it. Every change cites a measured cause.
+## Live intelligence: observe every stage and feed the next mining cycle
+
+- **The process.** Follow the existing deliveries from reference to publication: evidence quality, rejection reasons, rework, waiting time, provider failures, recurring free capacity and approved stock. Correct a proven defect at the stage that caused it. Keep one concrete next action for the current blocker, with evidence and an acceptance condition.
+- **Our videos.** At 48 h and at 7 days after publication: `vidiq_video_watch` on our public video with `AUDIT_PROMPT`, plus real analytics (views, retention, CTR, subscribers). Compare with an appropriate baseline at the same publication age. Catalogue **good**, **bad** or **neutral** only when the evidence permits; insufficient data remains inconclusive. An observed association is a hypothesis about an attribute, not proof of cause.
 - **The market.** Every day, within the vidIQ limits: new outliers, then new or changed structures, then the catalogue (`structures/`). Structures move:
   - `candidate` → `validated` → `active`;
   - `active` → `retired` when our own results or the market turn against them.
 - **Decisions** follow `strategy/DECISIONS.md` (90 % evidence for strategy). Defects and compliance are always fixed.
+- **Return delivery.** Feed mining a specific improvement or opportunity: evidence, affected structure/stage, proposed change and expected measurable result. Evaluate that change in the next cycle. No supported change means keep the current standard; never lower criteria to clear a queue. Market direction stays within the channel's audience and editorial line.
+
+Market research can continue within its budget while existing videos mature; it does not need to wait seven days for every upload. Missing 48-hour/7-day evidence remains pending and is incorporated when available. A report generated without usable evidence is not a completed learning cycle.
 
 ## Approval: automatic qualification (owner, 2026-10-19 23:55 UTC)
 
 The system approves or rejects each video; personal first-sample approval is not required. This is the active governance rule. The historical personal-approval wording in the immutable `production/qa_criteria_v3.json` is not an additional active approval step; its technical, speech, rights and grammar requirements remain unchanged, as do its bytes and SHA256. Automated qualification does not establish owner visual inspection or audience success.
 
-A video publishes when it passes **three stages**, each measured against the mining:
+A video publishes when it passes **three existing gate dimensions**, each measured against the mining. These are checks within the workflow above, not three additional production stages:
 1. **Structure.** It carries the drivers and hygiene of its validated structure and the measured publication package (`publish/three_stage.py` `structure_rows`).
 2. **Modeling.** Execution quality: frozen QA v3, the signal scan, and the designated watched review (`prepublish_gate.py`).
 3. **Authenticity.** Every rule of stage 3 (`three_stage.py` `authenticity_rows`), plus the support-model critique (`out/critique.json`).
 
-`prepublish_gate.py` blocks on every row. FAIL is final until the video is fixed. UNKNOWN (missing evidence) is retried and is never a pass. "Visible on the channel" means uploaded and not made private by a recorded unschedule.
-
-## Loop discipline
-
-- Every stage writes its evidence to the repo. A stage that cannot meet its bar stops the loop **at that stage** and says why. Nothing is skipped and nothing is loosened.
-- The loop never waits on one structure: while one is in production, the next ones are being mined.
+`prepublish_gate.py` blocks on every row. FAIL is final until the defect is fixed. UNKNOWN requires the missing evidence; retrying without changing that condition does not resolve it. Public visibility requires current readback of the existing video, not just an upload receipt or the absence of an unschedule record.
