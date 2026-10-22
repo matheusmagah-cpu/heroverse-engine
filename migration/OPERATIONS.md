@@ -61,13 +61,16 @@ The current Short 006 recovery routes include historical consumed/expired attemp
 as a fresh qualification. The handoff audit found no recovered Interactions implementation.
 Its old “50 tests passed” report is not runnable code or proof of a real provider inference.
 
-The first activation check is `reviewer-preflight.yml`: a manual, read-only job that compares
-the existing runtime secret with the historical fingerprint and checks the preserved Short 006
-record's identity. Its isolated artifact contains no key value. It does not call a provider,
-download media, repeat QA, approve or publish. The final step deliberately reports `BLOCKED`:
-a fingerprint match cannot prove the current key/project association, free tier or recurring
-capacity, and the isolated native review route is not yet qualified. Resolve those facts before
-enabling inference; this diagnostic is not a review-only implementation or general activation.
+`reviewer-preflight.yml` is the manual, isolated qualification entry point. Its default `check`
+mode makes no provider call. The explicit `review` mode is restricted to the preserved Short 006
+and the current qualification in `production/reviewer_qualification.py`. It verifies the runtime
+key against the fresh project observation, the exact release asset and its existing QA binding;
+it does not repeat QA. A durable STARTED artifact reserves the qualification before one synchronous
+Interactions request. Serialized runs, a reservation lookup, run-attempt checking and an atomic
+local claim prevent an unchanged qualification from being replayed. No provider retry or fallback
+is allowed. The result is an isolated artifact, always `publish=false`; canonical records, schedules,
+approvals and publication are untouched. Permissions are contents/actions read, with no YouTube secret.
+Existing production still uses generateContent; this qualification does not switch it automatically.
 
 Activation result, 2026-10-22 12:32 UTC: run `39779111955` confirmed **MATCH** for the
 current secret against the historical fingerprint, and for the preserved manifest/recorded QA
@@ -78,12 +81,24 @@ The job's final failure is the explicit activation block, after both receipt gen
 succeeded. No inference or publication occurred. This completes the fingerprint comparison for
 this activation attempt; it does not prove the current project or billing configuration.
 
-During this activation attempt, AI Studio was signed in as Matheus and showed no imported projects.
+Earlier in this activation attempt, AI Studio was signed in as Matheus and showed no imported projects.
 A direct read of the historical project's Google Cloud credentials page returned **Site Unavailable**,
 including after one reload. This is an access limitation of this browser, not evidence that the
 project was deleted or that Matheus lacks permission. No account switch, project import or credential
-change was made. Next: obtain access to the project containing the runtime credential, verify its
-current free tier/billing/recurring capacity, then qualify the isolated native review route.
+change was made by the agent at that point.
+
+After the owner changed the selected account, direct UI observation at 16:07 UTC confirmed that
+the project containing the existing runtime credential is Free tier with no billing account.
+The credential was matched against the existing policy, closing the association gap for this
+observation. No credential value, fingerprint, account or project identifier is added to the
+public observation receipt: `evidence/reviewer-qualification/20261022-project-binding.json`.
+The designated model's displayed limits are 5 RPM, 250,000 input TPM and 20 RPD. The one-day view
+showed a peak of 4 RPD; it is delayed usage, not a reservation or guaranteed remaining balance.
+The recurring free offer permits a bounded one-call qualification. It does not establish sustained
+pipeline capacity: two longs and three Short candidates per long nominally require 8 decisions/day,
+or 16 with one retry each, before backlog/corrections. The legacy shared retries still lack a proven
+global budget. Next: obtain the isolated real Interactions result for the exact preserved master;
+resolve its actual finding before changing production or publication eligibility.
 
 The runner's workflow is authoritative in **heroverse-runner**, not the archived copy formerly
 at `ci/runner-render.yml`. Its two files remain useful; removing the repository would remove the
