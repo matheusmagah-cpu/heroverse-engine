@@ -14,13 +14,27 @@ jobs:
         with:
           fetch-depth: 0
       - name: ffmpeg and OpenCV for the video tests
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg python3-numpy python3-opencv
+        timeout-minutes: 4
+        run: |
+          # Run 39813213979 hung refreshing all feeds; 39815089810 proved the
+          # image index stale (protobuf package 404). Refresh Ubuntu only, bounded.
+          if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2' 2>/dev/null; then
+            test -f /etc/apt/sources.list.d/ubuntu.sources
+            timeout 120s sudo apt-get -o Dir::Etc::sourcelist=sources.list.d/ubuntu.sources \
+              -o Dir::Etc::sourceparts=- -o APT::Get::List-Cleanup=0 \
+              -o Acquire::Retries=1 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
+            timeout 90s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 \
+              -o Acquire::https::Timeout=20 install -y --no-install-recommends \
+              ffmpeg python3-numpy python3-opencv
+          fi
+          command -v ffmpeg
+          python3 -c 'import numpy, cv2; print("Video test dependencies available")'
       - name: Unit tests (no network, no secrets)
         run: |
           fail=0
           for t in migration/production/test_script_check.py migration/production/test_render_queue.py \
                    migration/production/test_still_render.py migration/production/test_long_review.py migration/production/test_review_calibration.py migration/production/test_local_review.py \
-                   migration/production/test_shorts_produce.py migration/production/test_shorts_review.py migration/production/test_shorts_edit_plan.py migration/production/test_shorts_006_plan.py migration/production/test_shorts_006_material.py migration/production/test_shorts_006_motion.py migration/production/test_no_live_pilot_data.py migration/production/test_signal_scan.py migration/production/test_cinematic.py migration/publish/test_*.py migration/ops/test_heartbeat.py migration/ops/test_runner_dispatch.py migration/ops/test_dot_scope.py migration/ops/test_errors_register.py migration/ops/test_runway.py migration/ops/test_card_check.py migration/ops/test_minutes.py \
+                   migration/production/test_shorts_produce.py migration/production/test_shorts_review.py migration/production/test_reviewer_qualification.py migration/production/test_shorts_edit_plan.py migration/production/test_shorts_006_plan.py migration/production/test_shorts_006_material.py migration/production/test_shorts_006_motion.py migration/production/test_no_live_pilot_data.py migration/production/test_signal_scan.py migration/production/test_cinematic.py migration/publish/test_*.py migration/ops/test_heartbeat.py migration/ops/test_runner_dispatch.py migration/ops/test_dot_scope.py migration/ops/test_errors_register.py migration/ops/test_runway.py migration/ops/test_card_check.py migration/ops/test_minutes.py \
                    migration/mining/test_market_evidence.py migration/mining/test_structure_mining.py migration/mining/test_video_analysis_card.py migration/mining/test_owned_feedback.py migration/mining/test_learning_loop.py \
                    migration/mining/test_accuracy_check.py migration/mining/test_native_metrics.py migration/mining/test_native_plan.py migration/mining/test_goal_report.py migration/mining/test_market_panel.py \
                    migration/mining/test_opportunity.py migration/mining/test_packaging_mining.py migration/mining/test_official_rules.py; do

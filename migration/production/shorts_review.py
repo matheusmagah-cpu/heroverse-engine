@@ -139,7 +139,7 @@ def _http_cleanup(key, policy):
             pass
 
 
-def review(path, record, key, *, http_policy=None):
+def review(path, record, key, *, http_policy=None, inference=None):
     if http_policy is not None:
         http_policy.begin()
     try:
@@ -174,7 +174,7 @@ def review(path, record, key, *, http_policy=None):
             # only the designated reviewer decides (same rule as the long video; fallback models score differently)
             if http_policy is not None:
                 http_policy.check()
-                model, r = call(payload, key, list(REVIEW_MODELS), http_policy=http_policy)
+                model, r = (inference or call)(payload, key, list(REVIEW_MODELS), http_policy=http_policy)
             else:
                 model, r = call(payload, key, list(REVIEW_MODELS))
         finally:
