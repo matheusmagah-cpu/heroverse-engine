@@ -258,6 +258,18 @@ class Qualification(unittest.TestCase):
         self.assertEqual(result['inference_requests'], 1)
         self.assertFalse(result['publish'])
 
+    def test_stable_transport_changes_only_the_verified_endpoint(self):
+        _, _, beta_send = self.call()
+        inference = q.InteractionInference(endpoint=q.STABLE_ENDPOINT)
+        with patch.object(q.urllib.request, 'urlopen', return_value=Response(json.dumps(self.envelope).encode())) as stable_send:
+            inference(self.payload, self.key, [q.MODEL], http_policy=self.policy())
+        self.assertEqual(stable_send.call_args.args[0].full_url, q.STABLE_ENDPOINT)
+        self.assertEqual(stable_send.call_args.args[0].data, beta_send.call_args.args[0].data)
+        with self.assertRaisesRegex(ValueError, 'UNVERIFIED_ENDPOINT'):
+            q.InteractionInference(endpoint='https://unverified.invalid/interactions')
+        with self.assertRaisesRegex(ValueError, 'UNVERIFIED_ENDPOINT'):
+            q.text_control(self.key, q.now() + timedelta(seconds=60), endpoint='https://unverified.invalid')
+
 
 if __name__ == '__main__':
     unittest.main()

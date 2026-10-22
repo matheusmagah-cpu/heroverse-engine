@@ -127,6 +127,22 @@ allows inline video below 100 MB (`https://ai.google.dev/gemini-api/docs/file-in
 `https://ai.google.dev/gemini-api/docs/video-understanding`); the client checks the actual request size.
 Documentation establishes a supported candidate, not evidence that the media was received or reviewed.
 
+Diagnosis result, run `39822372027`: the designated model returned HTTP 200 and READY for text
+(244.8 s), then HTTP 503 with provider code `service_unavailable` for the exact inline video
+(5.5 s; request 20,494,356 bytes). There were two calls, zero Files uploads, no new scores and no
+publication. Receipt: `evidence/reviewer-qualification/20261022-inline-diagnosis-short006.json`,
+artifact `12444883451`, ZIP SHA-256 `95fd559ec95af5f606a23e49a62d09c0c8c537e1e603d8416586542cab0f2256`.
+This rules out a failure limited to resolving the provider-hosted file URI; it does not isolate
+the video-processing backend, structured response handling or service capacity as the root cause.
+
+The next supported candidate is the stable `v1/interactions` route, explicit mode `stable`,
+reservation `short006-20261022-stable-inline-v1`. Official `api-versions` and `interactions-api-v1`
+documentation confirms the same model, static fps, structured output and response schema support.
+It keeps the same text control, exact inline MP4, rubric and two-call/600-second budget. Only the
+endpoint version changes; the earlier beta reservations remain consumed. It is not adopted into
+production until its real result is qualified. A fresh no-cache API read confirmed the preceding
+CI completion when cached summary responses were stale; completed logs also record 51 PASS files.
+
 PR 272 also corrected the validation setup after runs `39813213979` (global package-index refresh
 timed out) and `39815089810` (stale Ubuntu index returned a package 404). The final check's complete
 logs, run `39815812918` / job `119954008799`, record 51 test files passing, no pilot change and successful
