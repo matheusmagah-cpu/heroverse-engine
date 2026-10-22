@@ -16,10 +16,14 @@ jobs:
       - name: ffmpeg and OpenCV for the video tests
         timeout-minutes: 4
         run: |
-          # Run 39813213979 spent its entire ten-minute job in apt-get update.
-          # Use the hosted image's packages/index; do not refresh unrelated feeds.
+          # Run 39813213979 hung refreshing all feeds; 39815089810 proved the
+          # image index stale (protobuf package 404). Refresh Ubuntu only, bounded.
           if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2' 2>/dev/null; then
-            timeout 180s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 \
+            test -f /etc/apt/sources.list.d/ubuntu.sources
+            timeout 120s sudo apt-get -o Dir::Etc::sourcelist=sources.list.d/ubuntu.sources \
+              -o Dir::Etc::sourceparts=- -o APT::Get::List-Cleanup=0 \
+              -o Acquire::Retries=1 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
+            timeout 90s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 \
               -o Acquire::https::Timeout=20 install -y --no-install-recommends \
               ffmpeg python3-numpy python3-opencv
           fi
