@@ -1,213 +1,128 @@
-# HeroVerse operations — rules and operational references
+# HeroVerse operations — current execution map
 
-Read this file first. `SYSTEM.md` is the master direction; `STANDARD.md` defines the production standard.
-The documents that direct the work are:
-- `OPERATIONS.md` (this file): rules, roles, budgets, schedule, pipeline, status.
-- `ops/DOT_PROTOCOL.md`: how Claude gives Dot tasks and accepts its work. `ops/RUNNER_WAKEUP.md`: the runner wake-up.
-- `strategy/DECISIONS.md`: the decision protocol and the decisions in force.
-- `strategy/MODELING_SPEC.md`: what each format must contain (with the rules it cites: `BEAT_THE_REFERENCE_RULE.md`,
-  `FORMAT_OPINION_AND_CRITIQUE.md`, `FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md`).
-- **`SYSTEM.md`: the master direction (owner, 2026-10-19): one loop of six stages, mining by structure (not by channel), few tools. Where anything here conflicts with it, SYSTEM.md wins. Structures are catalogued in `structures/`.**
-- `STANDARD.md`: the production standard (measured on breakout videos with vidIQ). It overrides any visual, caption or CTA rule elsewhere.
-- `strategy/VIDIQ.md`: the vidIQ research plan.
-- `ops/ERRORS.json`: every error made, its fix and the automatic antidote that stops it coming back.
+## Authority and boundaries
 
-Everything else is evidence (`evidence/`, `receipts/`, registered forecasts) or instrument documentation
-(`diagnostics/*/README.md`); it records what happened and directs nothing. The older plans and policies (integration
-plan, operating policy, cutover status, monetization decision and plan, predictability contract, mining directives,
-OAuth recovery, probe reviews) were deleted on 2026-10-18 so no one reads two versions of a rule; they remain in git
-history. When something here changes, this file is edited in the same PR.
+- `SYSTEM.md`: product direction, structure-based mining and the six-stage loop.
+- `STANDARD.md`: production quality standard; frozen per-file criteria and bindings remain authoritative.
+- `strategy/DECISIONS.md`: evidence required for strategy/cadence changes.
+- `strategy/MODELING_SPEC.md`: modeling requirements and the reference/format documents it cites.
+- `strategy/VIDIQ.md`: research budget, recorded validation and the call ledger.
+- `ops/DOT_PROTOCOL.md`: delegated task delivery; `ops/RUNNER_WAKEUP.md`: existing runner-dispatch contract.
+- `ops/ERRORS.json`: regression controls. Historical observations and `archive/` do not direct new execution.
 
-**Accounts (never switched):** channel HeroVerse @heroverse74 (`UCuMF6pJQkyMzaVoAxFL86yA`); repositories
-`matheusmagah-cpu/heroverse-engine` (public) and `matheusmagah-cpu/heroverse-runner` (public). Credentials only in
-GitHub secrets, never in files.
+Matheus owns the project (`matheusmagah@gmail.com`); Will is the YouTube account.
+Channel: HeroVerse `@heroverse74`, `UCuMF6pJQkyMzaVoAxFL86yA`.
+These facts do **not** establish ownership of the Gemini key or its Google Cloud project.
+Both GitHub repositories are public. Credentials remain in configured secrets, never in files or logs.
 
-## Owner rules (Matheus, Brazilian: talk to him in Portuguese; the channel is English-only)
+The owner returned execution to this chat; Dot's execution was interrupted. Do not assume that
+an old Claude/Dot scheduled session is running. An agent pause is not a repository-wide pause:
+existing GitHub schedules and YouTube `publishAt` values have their own state. Inspect before changing them.
 
-**Goal.** YouTube Partner Program (1,000 subscribers + 4,000 public long-form watch hours in 365 d, or 10 M Shorts
-views in 90 d) in 14 days from 2026-10-18; 30 days at most.
+## Non-negotiable rules
 
-**Who does what.**
-- **Claude = direction** (the brain): strategy, decisions, specs, task order, gate rules, statistics, review, merges,
-  scheduled tasks, reports to the owner. Claude does not loosen any rule to make something pass.
-- **Dot = executor** of token-heavy work (full scripts, large code, long reading), only through `dot-task` issues and
-  PRs (`ops/DOT_PROTOCOL.md`). Dot never merges, publishes, approves, edits frozen QA or touches secrets.
-- **GitHub Actions** = the factory (images, renders, gates, publication, panel, mining). **The owner** decides money,
-  accounts, permissions and anything outward that is not already authorised.
+- Additional cost: zero. No new paid service, billing, card or promotional-credit dependency.
+  A historical free-tier observation, model allowlist or public price table is not proof of the
+  current key/project configuration or recurring capacity.
+- Original English Christian content; exact KJV quotations; no copied identity/recording,
+  fear-bait, fabricated prophecy, or health/wealth promises. Retain provenance.
+- Frozen QA, whole-file scan, rights/policy checks and the designated watched review must pass.
+  The designated reviewer is `gemini-3.8-flash`; a fallback is not an approval.
+  Review items require at least 7 and the base overall rubric at least 8; **new uploads also
+  require the owner's additional overall floor of 9**. Historical owner exceptions are not a new default.
+- Missing, errored, stale or hash-mismatched evidence blocks release. Nobody fills
+  `APPROVAL.json` or eligibility flags manually. Preserve artifact identity across review and upload.
+- The monetization deadlines are owner goals, not verified forecasts or promises.
+  Official platform numbers, own estimates and model judgments must remain distinct.
+- A cleanup is not permission to lower quality, bypass authentication or change publication schedules.
+  Do not repeat approved audiovisual checks merely because code has moved.
 
-**Changes.** A change of strategy, format, packaging or cadence needs evidence of ≥ 90 % (one-sided p < 0.10, better
-p < 0.01) of a clear effect toward the goal (`strategy/DECISIONS.md`). Defect fixes, policy compliance and conformance
-to the registered strategy are always done. Nothing is removed to make the system worse; tools are added to improve.
+## Active execution chain
 
-**Errors.** Every error is fixed **and** gets an antidote in the same PR: an automatic check or test that fails if
-the same error comes back, plus one line in `ops/ERRORS.json` (what happened, fix, antidote). PR checks fail a line
-whose antidote does not exist (`ops/test_errors_register.py`). The same error twice is a defect of the antidote and is
-fixed there. This applies to Claude's errors, Dot's and the pipeline's.
+| Work | Entry point and current implementation |
+|---|---|
+| Research and modeling | vidIQ through the authorized agent; `structures/`, `strategy/` and `production/script_check.py` |
+| Images | `nightly-images.yml` → `cf-images.yml`; reused assets retain their provenance |
+| Render | runner's `.github/workflows/render.yml` or engine's manual `pilot-render-stills.yml` → `ci/render_pilot.sh` |
+| Technical checks/package | `production/qa_pilot.py`, shared native instruments and `package_pilot.py` |
+| Long review/gate | `approve.yml` → `long_review.py`, `three_stage.py`, `prepublish_gate.py` |
+| Shorts | `shorts.yml` / `shorts-review.yml`; long prerequisites, exact media binding, technical and watched gates |
+| Upload | `publish.yml` / `publish-shorts.yml`; ledger and receipts prevent blind re-upload |
+| Reporting | `market-panel.yml`, `goal-report.yml`, `owned_feedback.py`, `learning_loop.py` |
 
-**Policy.** No borrowed identities or recordings, fear-bait, fabricated prophecy, reused content, health or wealth
-promises. Original text; KJV Scripture quoted exactly. English only; Portuguese uploads stay hidden (reversible).
+`approve.yml` can dispatch production/publication work. It is **not** an isolated review-only test.
+The current Short 006 recovery routes include historical consumed/expired attempts; do not replay them
+as a fresh qualification. The handoff audit found no recovered Interactions implementation.
+Its old “50 tests passed” report is not runnable code or proof of a real provider inference.
 
-**Format (registered strategy).** Daily original prayer videos: morning ~25 min at 10:00 UTC, night ~28–33 min (prayer
-+ Scripture for sleep) at 00:00 UTC; one Short per long video (D-03), cut from a QA-PASS render and reviewed. Its
-slot (`schedule.json` `shorts_slots`, one entry): night pilot of day D at D 14:00 UTC, morning pilot of day D at D
-20:00 UTC; `script_check.py` fails two pilots with the same Short slot (`SHORTS_SLOT_TAKEN`).
+The runner's workflow is authoritative in **heroverse-runner**, not the archived copy formerly
+at `ci/runner-render.yml`. Its two files remain useful; removing the repository would remove the
+current executor. Consolidation into engine is unfinished work (#242), not part of this cleanup.
+The pinned source ZIP is still extracted and verified by `pilot_render.py` for the original
+Kokoro adapter. The ASR extraction helper and QA instruments also remain live.
 
-**Publication.** Only a final decision **PASS** (`publish/prepublish_gate.py` → `out/gate.json`) publishes: frozen QA,
-preflight, whole-file scan, scorecard rows measured on our own file, watched review by the **designated model only**
-(`gemini-3.8-flash`; a fallback model's answer is UNKNOWN). Missing or errored evidence = UNKNOWN = no publication,
-retried. New uploads also require the owner's additional overall score floor of 9, enforced by
-`publish/owner_quality_policy.py`; this does not replace the frozen per-item and overall rubric.
-**Nobody writes `APPROVAL.json` by hand.** Frozen QA criteria are never edited after a render. After YouTube
-confirms an upload the finished files are deleted from the release.
+## Actual scheduler (UTC; BRT = UTC−3)
 
-**Measurement.** Official numbers (Data API / Analytics API) are separated from own calculations and estimates; YPP
-counters are estimated as YPP counts them (public long-form hours 365 d, public Shorts views 90 d).
+At the cleanup baseline, engine `heartbeat.yml` registers `41 * * * *` (24 opportunities/day);
+runner `render.yml` registers `13,43 * * * *`. These are intended opportunities, not guaranteed starts.
+`ops/heartbeat.py` is the source of truth for dispatched tasks:
 
-## Budgets (owner rules)
-- **Money:** zero. No paid API, plan or card. Paid video engines (Veo, Runway…) only after the
-  channel earns.
-- **Claude (owner's plan):** direction only; token-heavy writing goes to Dot. Claude runs in the main session
-  (it has repository access; fresh routine sessions do not): an hourly clock (dispatch the heartbeat, review Dot's
-  deliveries) and the daily analysis at 08:05 UTC. No polling loops, no full log dumps; extract only needed fields.
-- **Dot:** heavy writing through `dot-task` issues; its own scheduled check of the issue queue at least every 2 h.
-- **Repository visibility:** both repositories are public (verified 2026-10-22). Production workflows use
-  `github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'`.
-  Secrets are never sent to pull requests from forks. Some historical diagnostic workflows retain a
-  private-only guard; inspect each workflow rather than assuming it can run. A future visibility or
-  billing change needs a separate owner decision.
-- **Actions usage:** the engine and runner are public. The daily report's private-repository
-  7,000-minute budget and overage projection are historical monitoring assumptions, not a current
-  payment authorization or an observed bill. The zero-additional-cost rule above remains in force.
-- **GitHub:**
-  - Heavy renders run on the public `heroverse-runner` (owner decision, 2026-10-17). It has 4 cores and no minute cap.
-  - The owner was told that GitHub's Actions terms restrict runners to work related to their own repository, and accepted the risk to the account.
-  - Its logs are quiet (`PUBLIC_LOGS=1`): titles and script text go only to a private log in the release.
-  - Fallback: `pilot-render-stills.yml` in the engine runs the same script.
-  - The engine handles the panel, publication and light jobs.
-- **Cloudflare Workers AI (10k neurons/day, resets 00:00 UTC):** images only (FLUX + 2x upscale on GitHub).
-- **RapidAPI free plan (500 units/day, 14 per native window, floor 100 → ≤ 28 windows a day):** native reference windows for mining — 12 a day for the accuracy holdout, the rest for native measurement.
-- **Gemini free tier (no billing):** mining, Shorts selection/review, watched reviews.
-- **YouTube Data API (10k units/day, resets 07:00 UTC):** panel 2,400 (half of the queries each day, alternating); packaging mining 500 (Sundays); long video ~2,100 (upload 1,600 + captions 400 + thumbnail/playlist); each Short ~1,650. A normal day: panel + 1 long + 3 Shorts = 9,450. Uploads go after the 07:00 UTC reset when the day's units are spent. A second Google Cloud project's API key for the public reads (panel, packaging) would free the whole 10k for uploads.
+| Task | Slots | Condition |
+|---|---|---|
+| Missing images | 00:30, 01:30, 03:30, 12:30 | `images_missing` |
+| Market panel | 07:17 | recorded-run/retry guard |
+| Reconcile | 07:20, 10:20, 13:20, 16:20, 19:20, 22:20 | `reconcile_todo` |
+| Publish Shorts | 07:35, 13:35, 19:35 | `shorts_pending` |
+| Goal report | 07:45 | panel dependency, waiting until 09:30 at most |
+| Channel privacy | 08:05 | currently dispatches the default **plan** mode |
 
-## Daily schedule (UTC; BRT = UTC-3) — the nightly chain runs without Claude
-**Scheduler:** GitHub delays and drops scheduled runs under load (2026-10-17/18: every daily cron of the engine was
-dropped). The engine has one cron, `heartbeat.yml` at minutes 11 and 41 (48 chances a day). Each beat reads the
-real run history and dispatches every task whose slot has passed without a run since it (a failed run is retried
-after 45 min, up to the task's attempts); tasks with a work condition run only when there is work
-(`migration/ops/heartbeat.py`, tested). The daily report lists the health of every task, of the heartbeat and of
-the runner, with alerts (`migration/ops/health.py`). The public runner checks the render queue at :13 and :43.
-**External clock (2026-10-18):** GitHub then fired none of the heartbeat's or the runner's crons for hours, so an
-hourly scheduled task of the Claude platform, bound to the main Claude session (which has repository access;
-fresh routine sessions get GitHub 403), dispatches `heartbeat.yml` every hour at :14. Since engine PR #106
-(Dot) the heartbeat's own `runner-wake` job wakes the runner (`HERO_RUNNER_PAT`, active-run guard, cooldown,
-per-hash attempt bound, `migration/ops/RUNNER_WAKEUP.md`), so the clock no longer dispatches `render.yml` itself.
-First real `runner-wake` run 2026-10-18 13:11 UTC: success, QUEUE_EMPTY (nothing due); first real dispatch pending.
-Both are idempotent, so the GitHub crons that do fire and the clock never double any work. The daily Claude
-analysis (08:05 UTC) is bound to the same session; the two older routines that ran in fresh sessions were disabled
-(no repository access; one still told the session to write APPROVAL.json by hand, bypassing the gate).
+No native/Gemini mining, packaging mining, structure mining or first-comment task is in this table.
+Channel privacy's automatic run is a **plan**, not proof of changed visibility.
+The manual metadata/comment/channel workflows remain available; do not call them completed
+because an upload or a workflow is green.
 
-| Slot (UTC) | What | Where | Runs when |
-|---|---|---|---|
-| 00:20 | native windows of videos never checked, then accuracy.json | mining-accuracy.yml → acquire-reference-window.yml | daily |
-| 00:30, 01:30, 03:30, 12:30 | missing images of pilots publishing in the next 72 h (FLUX + 2x upscale) | nightly-images.yml → cf-images.yml | images missing |
-| :13 and :43 hourly | next pilot of the queue (publishes ≤ 48 h, images complete, no render of this script): long video, QA; Shorts handed off | heroverse-runner render.yml (render_queue.py) | queue not empty |
-| after each render | Shorts (QA-PASS render only): selection, own edit, watched review (gemini-3.8-flash only) | shorts.yml (on shorts/inputs.json) | push |
-| after each render | gates: QA, preflight, scorecard, watched review (gemini-3.8-flash only), whole-file scan → gate.json PASS/FAIL/UNKNOWN; PASS → APPROVAL.json → publish | approve.yml → publish.yml | push |
-| 07:17 | market panel (2,400 units) + model + forecast + daily intel | market-panel.yml | daily |
-| 07:20, 10:20, 13:20, 16:20, 19:20, 22:20 | retry approvals (ERROR/UNKNOWN), Shorts never reviewed, failed publications | reconcile.yml | work waiting |
-| 07:35, 13:35, 19:35 | the approved Short (one per long video) at its slot | publish-shorts.yml (pending_shorts.py) | Short pending |
-| 07:45 | goal report + scheduler health (waits for the panel until 09:30) | goal-report.yml | daily |
-| 07:50 Sun | packaging mining (3 adjacent niches) | packaging-mining.yml | production idle |
-| 08:05 | hide remaining Portuguese uploads | channel-privacy.yml | daily |
-| 08:05 | **daily Claude analysis**: goal report + intel → decisions protocol → next scripts | scheduled Claude session | daily |
-| 08:30 | structure mining, incremental | structure-mining.yml | production idle |
-| schedule.json | long video at publish_at; Shorts at their slots | YouTube publishAt | — |
+Known limitations preserved for the next correction, not silently changed here:
+- `render_queue.py` excludes slots over six hours late; unresolved work may leave the automatic selection.
+- A failed render does not cause unlimited unchanged rerenders; material defects need correction.
+- Historical Short-specific cutoffs do not create a new slot or a current review-only route.
+- The four-day runway is a goal; an existing script, manifest or approval filename is not sufficient
+  evidence of eligible stock. Check the full gate and exact artifact.
+- A successful report can still say `HOLD` / insufficient evidence; that is not a demonstrated learning result.
 
-**Quota claims need the provider's own words (E29).** A quota is called "spent for the day" only when the recorded `quota_ids` say PerDay; any other 429 is retried after 30 min, and nobody (Claude included) tells the owner otherwise.
+## Qualification and budgets
 
-**The engine never stops (content runway).** Every day has two publication slots (night 00:00, morning 10:00 UTC).
-Claude keeps scripts **4 days ahead**: at each daily analysis (08:05) Claude opens the Dot cards for the two slots of
-day D+4 (topic from the decisions protocol + vidIQ), so Dot's cycle, images, render and gate always fit. The daily
-report's **Content runway** (`ops/runway.py`) lists every slot of the next 4 days with its stage and alerts when a slot
-has no script < 72 h before, no render < 36 h before, or no gate PASS < 24 h before (owner 2026-10-19: approve one
-full day ahead, so a provider error or a FAIL has a day to be fixed; quality is never traded for time). An alert is handled the same day. Scheduled workflows of the public runner stop after 60 days without a commit there.
+The native acquisition/ASR/profile tools and regression tests are retained for shared QA and
+pending instrument qualification (#140); mining arithmetic/modeling and authenticity work (#142/#141)
+remain unfinished. Retiring old mining workflows does not approve their measurements or remove these goals.
+The old native-first schedule and duplicate Gemini-mining instructions are superseded by `SYSTEM.md`.
+Unqualified measurements must not become production targets.
 
-## External tools
-- **vidIQ** (connected 2026-10-18, account linked to HeroVerse): research only — demand, rising topics, outliers
-  (comparables), audience comments, title scores, competitor curves, reference transcripts. 30-day plan with caps
-  ≤ 10 research calls a day and ≤ 2,000 credits per cycle (`strategy/VIDIQ.md`, ledger `evidence/vidiq/ledger.json`).
-  Informative until validated (first validation FAIL, ρ 0.40). Its opinion travels in `gate.json` as
-  `market_evidence_not_deciding`. Write tools are denied in `.claude/settings.json`.
+The vidIQ cap remains at most 10 research calls/day and 2,000 credits/cycle, with the ledger and
+`mining/market_evidence.py` enforcement. Provider limits and availability must be checked for the
+actual configuration before a new route is adopted. No calls were made during cleanup.
+The public-repository status does not establish zero cost for every external service.
+The report's historical private-runner minute budget is not a payment authorization.
 
-## How publication starts (automatic)
-1. A render pushes `out/qa.json` → `approve.yml`: QA, preflight, scorecard, watched review, whole-file scan →
-   `out/gate.json`. Only PASS writes `inspection/APPROVAL.json` (bound to the file hash) and dispatches `publish.yml`.
-2. `publish.yml` re-checks the gate for that hash, uploads private + `publishAt` from `schedule.json`, captions,
-   thumbnail, playlist, receipt and ledger; then deletes the finished file from the release.
-3. `publish-shorts.yml` uploads the approved Short of a published long video at its slot (ledger, no duplicates).
-4. ERROR/UNKNOWN (quota, fallback reviewer, missing evidence) is retried by `reconcile.yml`; FAIL stops and is reported.
+## Where current status lives
 
-## Starting any workflow without GitHub API tools
-Commit `migration/requests/<name>.json` with `{"workflow": "file.yml", "inputs": {...}}` to main, through a branch and merge. `requests.yml` dispatches it once and moves the file to `done/`.
+- `evidence/daily-report/latest.md`: last observed snapshot; read its timestamp.
+- `production/<pilot>/out/{manifest,qa,review,gate}.json`: exact long-file state.
+- `production/<pilot>/shorts/shorts.json`: canonical Short state; old correction histories are not replacements.
+- `publish/ledger.json` and `publish/receipts/`: upload identity and reconciliation, not a substitute for public readback.
+- Open issues/PRs: unresolved work. Keep completed/cancelled discussions in history.
+- `evidence/reviewer-qualification/20261022-preflight.json`: current recorded reviewer preflight blocker.
 
-Example: `{"workflow": "pilot-render-stills.yml", "inputs": {"pilot": "pilot-003"}}`.
+Check the repository HEAD before changing anything. Never copy a stale local manifest over newer
+canonical evidence. Upload, approval, workflow success and current public visibility are separate facts.
 
-## Mining: native-first (owner rule 2026-10-19: mining is a strong point, never a weak one)
-- **Weak point found (2026-10-19 audit):**
-  - The structure miner is a free Gemini model watching the video and reporting what it heard.
-  - On 12 native test windows: 4 were invalid (times outside the window, incomplete transcript); one valid-looking window agreed 11 % with the real audio; the pass rate was 50 % against an 80 % criterion.
-  - Its accuracy was never proven on independent (holdout) windows.
-  - The prayer sample had 2 usable winners.
-  - So every modeling number derived from it is informative only.
-- **Rule from now:**
-  - **Numbers:** every modeling number comes from **measurement of the original audio**: our faster-whisper ASR, YAMNet sound classes and the picture-change meter on natively acquired 60 s windows (`mining/native_metrics.py`).
-  - **Validation per video:** a mined video counts only when its own native windows agree ≥ 0.85 with the mined transcript.
-  - **Targets:** a format's numbers become targets only with ≥ 8 validated winners (90 % bootstrap intervals). Otherwise they are INSUFFICIENT and shown, never used.
-  - **What Gemini keeps:** labelling structure on validated transcripts.
-- **First holdout verdict, 2026-10-19 00:44 UTC: FAIL.**
-  - 12 independent native windows, all compared: median agreement 0.909; window pass rate 0.75 against the 0.80 criterion.
-  - Two windows were invented text (agreement 0.075 and 0.226) and one fell short at 0.838.
-  - Evidence: `evidence/structure-mining/20261018/accuracy.json`.
-  - Consequence: the Gemini miner stays informative and never decides. Numbers come only from the native instrument once it is qualified (#140).
-- **Proof:** the miner's holdout check (criteria fixed 2026-10-18: agreement ≥ 0.85, openings ≥ 0.80, window pass rate ≥ 0.80) runs every night. Only PASS lets miner rows decide in the gate.
-- **Sample:** ≥ 10 prayer winners from ≥ 4 policy-clean channels, plus median and weak videos of the same channels, chosen with vidIQ outliers and the panel.
-- **Work:** Dot card #136 (native_metrics + native_plan, tested). Claude wires the nightly measurement windows into the heartbeat and recomputes MODELING_SPEC from MEASURED numbers only.
+## Controlled dispatch and cleanup
 
-## Qualify before use (owner rule 2026-10-19)
-An instrument is a strong point **before** it is used, proven on known answers with criteria frozen before any result
-(SHA-256 asserted in the tests). If it fails, it is fixed and qualified again; it is never used while failing.
-- **Mining:** the native instrument (ASR + YAMNet + picture meter) and Gemini labelling, run on our own renders, whose
-  every word, timing, Scripture and picture change is known (incl. degraded copies) — card #140, workflow
-  `mining-qualification.yml`.
-- **Authenticity and originality:** a detector against our pilots and the mined competitor transcripts and titles
-  (verbatim, close paraphrase, title near-copies; Scripture never counts), qualified on a labelled holdout corpus and
-  enforced in `script_check.py` — card #141.
-- **Modeling:** exact numbers, honest 90 % intervals (simulated coverage 85–95 %) and every acceptance rule proven to
-  accept good scripts and reject each bad mutation — card #142 (after #136).
-Claude reviews each delivery against its card; a stage is called a strong point only with its qualification PASS on file.
+When an authorized task needs the existing request interface, a request under
+`migration/requests/<name>.json` has `{"workflow":"file.yml","inputs":{}}`.
+`requests.yml` dispatches it once and moves it into `done/`. Keep this interface; it is not retired.
+A request can trigger external effects; cleanup does not create any request.
 
-## Pipeline gates (never edited after results)
-1. **Script acceptance** (before images): `production/script_check.py` — PR checks run it on every pilot a PR touches.
-2. **Render QA (frozen criteria v3 for current production; legacy v2 evidence is retained).**
-3. **Final decision** `prepublish_gate.py`: PASS / FAIL / UNKNOWN per dimension (binding, technical, audio, transcript,
-   captions, sync, image, rights, content/policy, scorecard, whole-file scan, preflight).
-4. **Shorts:** `shorts_qa` + watched review by the designated model (items ≥ 7, overall ≥ 8), from QA-PASS renders only.
-   New uploads must also satisfy the additional owner floor of overall ≥ 9.
-
-## Current status: read the dated records
-
-Use `evidence/daily-report/latest.md` for the last observed channel and pipeline snapshot, checking its
-timestamp. For a specific file, read `production/<pilot>/out/{manifest,qa,review,gate}.json`,
-`production/<pilot>/shorts/shorts.json`, and `publish/ledger.json` with the corresponding receipt.
-An upload record, a green workflow and a current public-visibility observation are different facts.
-
-Use the open issues and PRs for unfinished work. The copied October 18/20 status, calendars and deadlines
-were removed here on October 22 because they contradicted newer production records; they remain in Git
-history. Do not rerender or repeat approved checks based on those historical snapshots.
-
-For actual scheduled work, inspect `.github/workflows/heartbeat.yml`, `ops/heartbeat.py` and recent Actions
-runs. A schedule documented above is not proof of a registered or running task. An agent pause does not
-disable existing GitHub schedules or uploads already scheduled on YouTube.
-
-The Kaggle production route is retired (`kaggle/STATUS.md`). Its three workflows and three helpers were
-moved unchanged into `archive/workflows/` and `archive/kaggle/`; the remainder of #177 stays pending.
+`archive/ARCHIVE_PLAN.json` v2 inventories every tracked baseline path and gives exact relocations/hashes.
+It replaces the stale bulk-move plan. Historical code is not runnable from its archived location.
+See `archive/README.md` for recovery. Four generated bytecode caches were removed; evidence,
+media, hashes, approvals and source archives remain recoverable and unchanged.

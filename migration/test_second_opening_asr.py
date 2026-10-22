@@ -137,7 +137,7 @@ class SafetyTests(unittest.TestCase):
         with self.assertRaises(TimeoutError):a.terminate(None,None)
 
     def test_workflow_scope_and_no_media_upload(self):
-        s=(Path(__file__).parents[1]/'.github/workflows/second-opening-asr.yml').read_text()
+        s=(Path(__file__).parent/'archive/workflows/second-opening-asr.yml').read_text()
         self.assertIn('contents: read',s);self.assertNotIn('contents: write',s)
         self.assertIn('timeout-minutes: 10',s);self.assertNotIn('schedule:',s)
         self.assertIn('path: second-opening-asr-receipt.json',s)
