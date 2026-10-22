@@ -11,6 +11,7 @@ marked publish=true. A failing Short is never "fixed" by editing the rubric.
 usage: shorts_review.py SHORTS_DIR [N]
 """
 from datetime import datetime, timezone
+import base64
 import hashlib
 import json
 import os
@@ -139,7 +140,9 @@ def _http_cleanup(key, policy):
             pass
 
 
-def review(path, record, key, *, http_policy=None, inference=None):
+def review(path, record, key, *, http_policy=None, inference=None, inline=False):
+    if inline and (http_policy is None or inference is None):
+        raise ValueError("INLINE_REQUIRES_BOUNDED_INFERENCE")
     if http_policy is not None:
         http_policy.begin()
     try:
@@ -148,13 +151,22 @@ def review(path, record, key, *, http_policy=None, inference=None):
             return binding_failure("FILE_UNREADABLE")
         if "qa_output_sha256" in record and record["qa_output_sha256"] != before:
             return binding_failure("QA_OUTPUT_HASH_MISMATCH", before)
-        if http_policy is not None:
+        if inline:
+            # Exact original MP4 bytes, including its embedded audio; no remux.
+            data = Path(path).read_bytes()
+            if hashlib.sha256(data).hexdigest() != before:
+                return binding_failure("OUTPUT_CHANGED", output_digest(path))
+            video_part = {"inlineData": {"data": base64.b64encode(data).decode("ascii"), "mimeType": "video/mp4"}}
+            http_policy.check()
+        elif http_policy is not None:
             http_policy.check()
             f = upload(path, key, http_policy=http_policy)
             http_policy._file_name = f["name"]
             http_policy.check()
         else:
             f = upload(path, key)
+        if not inline:
+            video_part = {"fileData": {"fileUri": f["uri"], "mimeType": "video/mp4"}}
         try:
             uploaded = output_digest(path)
             if uploaded != before:
@@ -168,7 +180,7 @@ def review(path, record, key, *, http_policy=None, inference=None):
                       "distracting), audio_clarity (voice clear, music under it), stands_alone (fully understood without "
                       "the long video), ending_and_loop (lands, and the end flows back into the start), policy_safe (no "
                       "fear-bait, false promises or impersonation). Then overall, and concrete issues with timestamps.")
-            payload = {"contents": [{"role": "user", "parts": [{"fileData": {"fileUri": f["uri"], "mimeType": "video/mp4"}},
+            payload = {"contents": [{"role": "user", "parts": [video_part,
                                                                 {"text": prompt}]}],
                        "generationConfig": {"maxOutputTokens": 4096, "responseMimeType": "application/json", "responseSchema": schema}}
             # only the designated reviewer decides (same rule as the long video; fallback models score differently)
@@ -178,7 +190,9 @@ def review(path, record, key, *, http_policy=None, inference=None):
             else:
                 model, r = call(payload, key, list(REVIEW_MODELS))
         finally:
-            if http_policy is None:
+            if inline:
+                pass  # No provider file was created; nothing to delete.
+            elif http_policy is None:
                 try:
                     request(BASE + "/v1beta/" + f["name"], key, method="DELETE")
                 except Exception:

@@ -114,6 +114,19 @@ Next: establish a concrete provider-side recovery condition or qualify an altern
 the existing controls before another inference attempt. Native availability and sustained recurring
 capacity remain blocked; the account/project/free-tier verification is complete for this observation.
 
+The next bounded diagnosis is `reviewer-preflight.yml` with explicit mode `inline`, a separate
+reservation `short006-20261022-inline-diagnosis-v1` and at most two inference calls within the same
+600-second deadline. First, a text-only READY control tests the designated model. Failure stops
+before any video call. Only a successful control permits the unchanged full MP4, with its original
+embedded audio, to be sent as base64 bytes in the request. This tests provider-file resolution as
+a hypothesis; it does not assume it is the cause. No Files API upload/deletion is used in inline
+mode. The shared editorial prompt, sampling, score floors, output identity and QA binding are retained.
+The earlier qualification and its consumed reservation remain untouched. The existing fresh free-project
+observation is reused; no new key/project identifiers or fingerprints are published. Provider documentation
+allows inline video below 100 MB (`https://ai.google.dev/gemini-api/docs/file-input-methods` and
+`https://ai.google.dev/gemini-api/docs/video-understanding`); the client checks the actual request size.
+Documentation establishes a supported candidate, not evidence that the media was received or reviewed.
+
 PR 272 also corrected the validation setup after runs `39813213979` (global package-index refresh
 timed out) and `39815089810` (stale Ubuntu index returned a package 404). The final check's complete
 logs, run `39815812918` / job `119954008799`, record 51 test files passing, no pilot change and successful
