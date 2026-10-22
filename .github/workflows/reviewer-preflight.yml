@@ -1,0 +1,111 @@
+name: HeroVerse reviewer activation preflight (no provider calls)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: heroverse-reviewer-qualification
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Compare the runtime secret with the historical fingerprint
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+        run: |
+          python3 -I -B - <<'PY'
+          from datetime import datetime, timezone
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path.cwd()
+          now = datetime.now(timezone.utc)
+          policy_path = root / 'migration/evidence/gemini-free-runtime-policy.json'
+          manifest_path = root / 'migration/production/pilot-006/shorts/shorts.json'
+          policy = json.loads(policy_path.read_bytes())
+          manifest_bytes = manifest_path.read_bytes()
+          manifest = json.loads(manifest_bytes)
+          expected_key_hash = 'dce7edfa7f6515d6da7a53331ea7cfc31b5ad94cc2bfb3cafce3f0f1e08bc811'
+          expected_manifest = 'cc8daa14d106a4e09fd9cede224a8edf2e9c6a903a13e9d5e02f909709a4a701'
+          master_hash = 'd6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4'
+          key = os.environ.get('HERO_GEMINI_API_KEY', '')
+          matches = hashlib.sha256(key.encode()).hexdigest() == expected_key_hash if key else None
+          key_status = 'MISSING' if not key else ('MATCH' if matches else 'MISMATCH')
+          del key
+          manifest_matches = hashlib.sha256(manifest_bytes).hexdigest() == expected_manifest
+          short = next((s for s in manifest['shorts'] if s.get('file') == 'short-00.mp4'), {})
+          qa_binding = (short.get('qa', {}).get('status') == 'PASS'
+                        and short.get('sha256') == master_hash
+                        and short.get('qa_output_sha256') == master_hash)
+          observed = datetime.fromisoformat(policy['verified_at'].replace('Z', '+00:00'))
+          age = (now - observed).total_seconds() if observed.tzinfo else None
+          blockers = ['CURRENT_KEY_PROJECT_BINDING_REQUIRED',
+                      'CURRENT_FREE_TIER_BILLING_AND_RECURRING_CAPACITY_REQUIRED',
+                      'ISOLATED_NATIVE_REVIEW_ROUTE_NOT_QUALIFIED']
+          if key_status != 'MATCH':
+              blockers.insert(0, 'RUNTIME_SECRET_' + key_status)
+          if not manifest_matches or not qa_binding:
+              blockers.insert(0, 'PRESERVED_MASTER_RECORD_CHANGED_OR_UNBOUND')
+          receipt = {
+              'version': 'reviewer-activation-preflight-v1',
+              'recorded_at': now.isoformat(),
+              'repository_sha': os.environ.get('GITHUB_SHA'),
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'status': 'BLOCKED',
+              'runtime_secret': {'name': 'HERO_GEMINI_API_KEY',
+                                 'historical_fingerprint_match': key_status,
+                                 'secret_value_retained': False},
+              'historical_policy': {
+                  'sha256': hashlib.sha256(policy_path.read_bytes()).hexdigest(),
+                  'project_id': policy.get('project_id'), 'model': policy.get('model'),
+                  'verified_at': policy.get('verified_at'),
+                  'within_24_hours': age is not None and 0 <= age <= 86400,
+                  'applies_to_designated_model': policy.get('model') == 'gemini-3.8-flash',
+                  'current_project_binding_verified': False},
+              'master': {'expected_sha256': master_hash,
+                         'canonical_manifest_matches': manifest_matches,
+                         'recorded_qa_binding_valid': qa_binding,
+                         'qa_reexecuted': False, 'media_downloaded': False,
+                         'review_status': short.get('review', {}).get('status')},
+              'blockers': blockers,
+              'ready_for_inference': False, 'publish': False,
+              'effects': {'provider_calls': 0, 'media_uploads': 0, 'renders': 0,
+                          'canonical_writes': 0, 'publication_calls': 0},
+              'next_action': 'Verify the current runtime credential project and its free tier, billing and recurring capacity; a fingerprint match alone does not establish these facts.'}
+          output = Path(os.environ['RUNNER_TEMP']) / 'heroverse-reviewer-preflight'
+          output.mkdir(parents=True, exist_ok=True)
+          (output / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          summary = ('## Reviewer activation: BLOCKED\n\n'
+                     + 'Runtime secret versus historical fingerprint: **' + key_status + '**.\n\n'
+                     + 'Preserved master record and recorded QA binding: **'
+                     + ('MATCH' if manifest_matches and qa_binding else 'BLOCKED') + '**.\n\n'
+                     + 'No provider call, render, repeated QA, approval or publication.\n\n'
+                     + '\n'.join('- ' + reason for reason in blockers) + '\n')
+          Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(summary)
+          print('Reviewer preflight recorded; runtime fingerprint=' + key_status + '; inference=BLOCKED')
+          PY
+      - name: Preserve the isolated receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reviewer-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/heroverse-reviewer-preflight/receipt.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Keep activation blocked until project and review qualification are complete
+        run: |
+          echo '::error::REVIEWER_ACTIVATION_BLOCKED: see the isolated preflight receipt. A matching fingerprint is not project, billing or review approval.'
+          exit 1
