@@ -62,8 +62,9 @@
     "account_switch_action": "Trocar de conta",
     "action_outcome": "AUTO_REVIEW_REJECTED",
     "automatic_review_reason": "Authentication/account-switch flow was not specifically authorized and was considered unnecessary while the intended account was already signed in.",
-    "actual_constraint": "Visible Matheus account is different from the historically recorded Will project owner; project cost configuration cannot be verified in the current visible project list.",
-    "circumvention_attempted": false
+    "actual_constraint": "Owner clarified project account is Matheus and YouTube account is Will. In Matheus AI Studio, the import picker lists direct-beacon-283709 (My First Project); exact historical gen-lang-client-0909161074 search returned no matching project. No import, creation or key change occurred. Current stored secret project binding remains unverified; do not substitute the unrelated visible project or infer the Gemini account from the YouTube account.",
+    "circumvention_attempted": false,
+    "will_account_switch_required": false
   },
   "effects": {
     "provider_inference_calls": 0,
@@ -75,5 +76,12 @@
     "canonical_approval_or_manifest_changes": 0,
     "production_code_changes": 0
   },
-  "next_step": "Obtain the specifically required authorization to select the already configured Will account in Google AI Studio, read the existing project's billing/tier/quota without creating or changing credentials, billing or permissions. Recover the dot prototype before rebuilding. Then pin same model/rubric/media and perform one bounded review-only qualification with persistent pre-effect claim and separate receipt; preserve old missed cutoff and no automatic publication. Do not call the expired one-shot recovery."
+  "next_step": "Resolve the existing Gemini credential's actual project identity within the owner's clarified Matheus project context; do not switch to Will solely because it owns YouTube. Verify current tier/billing and exact secret binding without exporting/creating credentials. Recover the prior prototype before rebuilding. The real review remains blocked pending that verification; all earlier media/criteria approvals remain preserved.",
+  "owner_account_correction": {
+    "recorded_at": "2026-10-22T10:50:32.091Z",
+    "owner_statement": "O projeto está no matheusmagah@gmail.com e o canal do YouTube no Will",
+    "project_account": "matheusmagah@gmail.com",
+    "youtube_account": "Will",
+    "historical_gemini_project_not_assumed_current": true
+  }
 }
