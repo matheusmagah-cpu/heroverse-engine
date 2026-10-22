@@ -14,17 +14,21 @@ jobs:
         with:
           fetch-depth: 0
       - name: ffmpeg and OpenCV for the video tests
-        timeout-minutes: 4
+        timeout-minutes: 6
         run: |
-          # Run 39813213979 hung refreshing all feeds; 39815089810 proved the
-          # image index stale (protobuf package 404). Refresh Ubuntu only, bounded.
+          # Refresh Ubuntu only. Run 39823760082 timed out fetching from the
+          # hosted mirror list; use the official origins with the same signed source.
           if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2' 2>/dev/null; then
             test -f /etc/apt/sources.list.d/ubuntu.sources
-            timeout 120s sudo apt-get -o Dir::Etc::sourcelist=sources.list.d/ubuntu.sources \
-              -o Dir::Etc::sourceparts=- -o APT::Get::List-Cleanup=0 \
-              -o Acquire::Retries=1 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 update
-            timeout 90s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 \
-              -o Acquire::https::Timeout=20 install -y --no-install-recommends \
+            heroverse_ci_sources="$RUNNER_TEMP/heroverse-ubuntu.sources"
+            sed -e 's#mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu/#g' \
+                -e 's#mirror+file:/etc/apt/apt-mirrors-security.txt#https://security.ubuntu.com/ubuntu/#g' \
+                /etc/apt/sources.list.d/ubuntu.sources > "$heroverse_ci_sources"
+            apt_ci_opts=(-o "Dir::Etc::sourcelist=$heroverse_ci_sources" -o Dir::Etc::sourceparts=- \
+              -o APT::Get::List-Cleanup=0 -o Acquire::Retries=1 \
+              -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20)
+            timeout 90s sudo apt-get "${apt_ci_opts[@]}" update
+            timeout 180s sudo apt-get "${apt_ci_opts[@]}" install -y --no-install-recommends \
               ffmpeg python3-numpy python3-opencv
           fi
           command -v ffmpeg
