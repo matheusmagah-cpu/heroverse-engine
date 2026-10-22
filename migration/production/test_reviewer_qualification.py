@@ -3,6 +3,7 @@
 from copy import deepcopy
 from datetime import timedelta
 import hashlib
+import base64
 import io
 import json
 from pathlib import Path
@@ -197,6 +198,65 @@ class Qualification(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'MAIN_ONLY'):
                 q.prepare(self.root / 'out', 'review', env)
         send.assert_not_called()
+
+    def test_inline_request_contains_exact_bytes_and_shared_rubric_without_file_calls(self):
+        media = self.root / 'short-00.mp4'
+        original = b'original video including audio bytes'
+        media.write_bytes(original)
+        record = {'hook': 'Test hook', 'qa_output_sha256': q.sr.output_digest(media)}
+        policy = q.ReviewHTTPPolicy(cutoff_utc=q.now() + timedelta(seconds=600))
+        with patch.object(q.sr, 'upload', side_effect=AssertionError('FILES_API_USED')), \
+             patch.object(q.sr, 'request', side_effect=AssertionError('FILES_API_USED')), \
+             patch.object(q.urllib.request, 'urlopen', return_value=Response(json.dumps(self.envelope).encode())) as send:
+            review = q.sr.review(media, record, self.key, http_policy=policy,
+                                 inference=q.InteractionInference(), inline=True)
+        body = json.loads(send.call_args.args[0].data)
+        self.assertEqual(base64.b64decode(body['input'][0]['data']), original)
+        self.assertNotIn('uri', body['input'][0])
+        self.assertIn('Score 0-10: hook_in_first_2s', body['input'][1]['text'])
+        self.assertEqual(review['status'], 'PASS')
+        self.assertEqual(policy.audit()['cleanup_status'], 'NOT_ATTEMPTED')
+        self.assertEqual(send.call_count, 1)
+
+    def test_text_control_503_is_not_a_video_review_and_ready_needs_completed_exact_model(self):
+        cutoff = q.now() + timedelta(seconds=600)
+        failure = urllib.error.HTTPError(q.ENDPOINT, 503, 'private prose', {},
+                      io.BytesIO(b'{"error":{"code":"service_unavailable","message":"private prose"}}'))
+        with patch.object(q.urllib.request, 'urlopen', side_effect=failure) as send:
+            control = q.text_control(self.key, cutoff)
+        self.assertFalse(control['ready'])
+        self.assertEqual(control['trace']['http_status'], 503)
+        self.assertEqual(control['trace']['provider_error_code'], 'service_unavailable')
+        self.assertNotIn('private prose', json.dumps(control))
+        self.assertEqual(send.call_count, 1)
+        envelope = {'model': q.MODEL, 'status': 'completed', 'steps': [
+            {'type': 'model_output', 'content': [{'type': 'text', 'text': 'READY'}]}]}
+        with patch.object(q.urllib.request, 'urlopen', return_value=Response(json.dumps(envelope).encode())) as send:
+            self.assertTrue(q.text_control(self.key, cutoff)['ready'])
+        body = json.loads(send.call_args.args[0].data)
+        self.assertEqual(body['input'], 'Reply with exactly READY.')
+        self.assertNotIn('video', json.dumps(body))
+
+    def test_failed_text_control_stops_before_media_delivery(self):
+        output = self.root / 'diagnostic'
+        output.mkdir()
+        media = output / 'short-00.mp4'
+        media.write_bytes(b'fixture')
+        digest = q.sr.output_digest(media)
+        env = {'GITHUB_REPOSITORY': q.REPO, 'GITHUB_REF': 'refs/heads/main', 'GITHUB_RUN_ATTEMPT': '1',
+               'GITHUB_RUN_ID': '123', 'GITHUB_SHA': 'a' * 40, 'HERO_GEMINI_API_KEY': self.key}
+        q.write(output / 'receipt.json', {'state': 'STARTED', 'mode': 'inline', 'qualification_id': q.INLINE_QUALIFICATION,
+               'run_id': '123', 'repository_sha': 'a' * 40, 'project_observation_sha256': 'observation'})
+        observation = {'expires_at': (q.now() + timedelta(hours=1)).isoformat()}
+        with patch.object(q, 'validate_inputs', return_value=(observation, {}, 'observation')), \
+             patch.object(q, 'MEDIA_SHA', digest), patch.object(q, 'MEDIA_BYTES', media.stat().st_size), \
+             patch.object(q, 'text_control', return_value={'ready': False, 'trace': {'http_status': 503}}), \
+             patch.object(q.sr, 'review', side_effect=AssertionError('VIDEO_REVIEW_AFTER_FAILED_CONTROL')) as review:
+            result = q.infer(output, env)
+        review.assert_not_called()
+        self.assertEqual(result['state'], 'NOT_REVIEWED')
+        self.assertEqual(result['inference_requests'], 1)
+        self.assertFalse(result['publish'])
 
 
 if __name__ == '__main__':

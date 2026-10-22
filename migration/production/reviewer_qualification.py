@@ -25,6 +25,7 @@ MODEL = 'gemini-3.8-flash'
 ENDPOINT = sr.BASE + '/v1beta/interactions'
 QUALIFICATION = 'short006-20261022-interactions-v1'
 START_ARTIFACT = 'reviewer-qualification-start-' + QUALIFICATION
+INLINE_QUALIFICATION = 'short006-20261022-inline-diagnosis-v1'
 OBSERVATION = 'migration/evidence/reviewer-qualification/20261022-project-binding.json'
 CREDENTIAL_POLICY = 'migration/evidence/gemini-free-runtime-policy.json'
 MANIFEST = 'migration/production/pilot-006/shorts/shorts.json'
@@ -88,14 +89,14 @@ def github_json(path, token):
         return _strict_json(response.read(2_000_001))
 
 
-def require_unused_reservation(token):
-    data = github_json('/actions/artifacts?name=' + START_ARTIFACT + '&per_page=1', token)
+def require_unused_reservation(token, artifact_name=START_ARTIFACT):
+    data = github_json('/actions/artifacts?name=' + artifact_name + '&per_page=1', token)
     require(type(data.get('total_count')) is int and data['total_count'] == 0
             and data.get('artifacts') == [], 'QUALIFICATION_ALREADY_RESERVED')
 
 
 def prepare(output, mode, environ=os.environ):
-    require(mode in ('check', 'review'), 'INVALID_MODE')
+    require(mode in ('check', 'review', 'inline'), 'INVALID_MODE')
     require(environ.get('GITHUB_REPOSITORY') == REPO and environ.get('GITHUB_REF') == 'refs/heads/main', 'MAIN_ONLY')
     require(environ.get('GITHUB_RUN_ATTEMPT') == '1', 'REPLAY_BLOCKED')
     require(re.fullmatch(r'[1-9][0-9]*', environ.get('GITHUB_RUN_ID', '')) is not None, 'RUN_ID_REQUIRED')
@@ -103,7 +104,8 @@ def prepare(output, mode, environ=os.environ):
     observation, record, observation_sha = validate_inputs(ROOT, environ.get('HERO_GEMINI_API_KEY', ''), now())
     output.mkdir(parents=True, exist_ok=True)
     require(not (output / 'receipt.json').exists(), 'LOCAL_REPLAY_BLOCKED')
-    receipt = {'qualification_id': QUALIFICATION, 'state': 'CHECKED', 'mode': mode,
+    qualification = INLINE_QUALIFICATION if mode == 'inline' else QUALIFICATION
+    receipt = {'qualification_id': qualification, 'state': 'CHECKED', 'mode': mode,
                'started_at': now().isoformat(), 'run_id': environ['GITHUB_RUN_ID'],
                'run_attempt': 1, 'repository_sha': environ['GITHUB_SHA'],
                'project_observation_sha256': observation_sha, 'runtime_fingerprint_match': 'MATCH',
@@ -111,8 +113,12 @@ def prepare(output, mode, environ=os.environ):
                'recorded_qa_reused': True, 'qa_reexecuted': False, 'renders': 0,
                'endpoint': ENDPOINT, 'model': MODEL, 'inference_requests': 0,
                'canonical_writes': 0, 'publish': False, 'production_route_activated': False}
-    if mode == 'review':
-        require_unused_reservation(environ.get('GH_TOKEN', ''))
+    if mode == 'inline':
+        receipt.update(maximum_inference_requests=2, media_delivery='INLINE_EXACT_MP4',
+                       files_api_uploads=0, cleanup_required=False,
+                       diagnostic_hypothesis='Distinguish model-wide inference failure from provider-file resolution; text control must succeed before the changed media delivery is attempted.')
+    if mode in ('review', 'inline'):
+        require_unused_reservation(environ.get('GH_TOKEN', ''), 'reviewer-qualification-start-' + qualification)
         asset = github_json('/releases/assets/' + str(ASSET_ID), environ.get('GH_TOKEN', ''))
         require(asset.get('id') == ASSET_ID and asset.get('name') == MEDIA_NAME
                 and asset.get('size') == MEDIA_BYTES and asset.get('state') == 'uploaded'
@@ -147,10 +153,18 @@ class InteractionInference:
         policy = http_policy
         require(tuple(models) == (MODEL,) and not policy._trace, 'INFERENCE_REPLAY_OR_MODEL')
         parts = payload['contents'][0]['parts']
-        require(len(parts) == 2 and parts[0]['fileData']['mimeType'] == 'video/mp4', 'FULL_VIDEO_REQUIRED')
+        require(len(parts) == 2, 'FULL_VIDEO_REQUIRED')
+        if 'inlineData' in parts[0]:
+            media = parts[0]['inlineData']
+            require(media['mimeType'] == 'video/mp4', 'FULL_VIDEO_REQUIRED')
+            video = {'type': 'video', 'data': media['data'], 'mime_type': 'video/mp4',
+                     'processing': {'type': 'static', 'fps': 1}}
+        else:
+            require(parts[0]['fileData']['mimeType'] == 'video/mp4', 'FULL_VIDEO_REQUIRED')
+            video = {'type': 'video', 'uri': parts[0]['fileData']['fileUri'], 'mime_type': 'video/mp4',
+                     'processing': {'type': 'static', 'fps': 1}}
         body = {'model': MODEL, 'input': [
-            {'type': 'video', 'uri': parts[0]['fileData']['fileUri'], 'mime_type': 'video/mp4',
-             'processing': {'type': 'static', 'fps': 1}},
+            video,
             {'type': 'text', 'text': parts[1]['text']}],
             'generation_config': {'max_output_tokens': payload['generationConfig']['maxOutputTokens']},
             'response_format': {'type': 'text', 'mime_type': 'application/json',
@@ -160,7 +174,11 @@ class InteractionInference:
         entry = {'attempt': 1, 'started_at': now().isoformat(), 'http_status': None,
                  'outcome': 'TRANSPORT_ERROR', 'decision': 'STOP_FINAL', 'slept_seconds': 0.0}
         policy._trace.append(entry)
-        req = urllib.request.Request(ENDPOINT, data=canonical(body), method='POST',
+        request_bytes = canonical(body)
+        require(len(request_bytes) < 100_000_000, 'REQUEST_TOO_LARGE')
+        entry['request_bytes'] = len(request_bytes)
+        entry['purpose'] = 'INLINE_VIDEO' if 'data' in video else 'FILES_VIDEO'
+        req = urllib.request.Request(ENDPOINT, data=request_bytes, method='POST',
               headers={'Content-Type': 'application/json', 'x-goog-api-key': key})
         try:
             with urllib.request.urlopen(req, timeout=policy.timeout()) as response:
@@ -191,7 +209,13 @@ class InteractionInference:
             return MODEL, report
         except urllib.error.HTTPError as error:
             entry.update(http_status=error.code, outcome='HTTP_ERROR')
-            failure, _ = sr.review_provider_failure(error, key)
+            failure, raw = sr.review_provider_failure(error, key)
+            try:
+                code = _strict_json(raw).get('error', {}).get('code')
+                if code in ('service_unavailable', 'resource_exhausted', 'invalid_argument', 'unauthenticated', 'permission_denied'):
+                    entry['provider_error_code'] = code
+            except Exception:
+                pass
             raise failure from None
         except ProviderFailure:
             raise
@@ -204,12 +228,57 @@ class InteractionInference:
             entry['elapsed_end_seconds'] = policy._elapsed
 
 
+def text_control(key, cutoff):
+    """One cheap availability control; never an audiovisual score or approval."""
+    policy = ReviewHTTPPolicy(cutoff_utc=cutoff)
+    policy.begin()
+    body = {'model': MODEL, 'input': 'Reply with exactly READY.',
+            'generation_config': {'max_output_tokens': 4096},
+            'store': False, 'background': False, 'stream': False}
+    trace = {'purpose': 'TEXT_CONTROL', 'started_at': now().isoformat(), 'http_status': None,
+             'outcome': 'TRANSPORT_ERROR', 'decision': 'STOP_FINAL'}
+    result = {'ready': False, 'trace': trace}
+    req = urllib.request.Request(ENDPOINT, data=canonical(body), method='POST',
+          headers={'Content-Type': 'application/json', 'x-goog-api-key': key})
+    try:
+        with urllib.request.urlopen(req, timeout=policy.timeout()) as response:
+            trace['http_status'] = response.status
+            raw = response.read(4_000_001)
+        policy.check()
+        require(trace['http_status'] == 200 and len(raw) <= 4_000_000, 'CONTROL_HTTP_INVALID')
+        response = _strict_json(raw)
+        require(response.get('model') == MODEL and response.get('status') == 'completed', 'CONTROL_RESPONSE_INVALID')
+        text = ''.join(b.get('text', '') for s in response.get('steps', []) if s.get('type') == 'model_output'
+                       for b in s.get('content', []) if b.get('type') == 'text')
+        require(text.strip() == 'READY', 'CONTROL_OUTPUT_INVALID')
+        result.update(ready=True, response_sha256=hashlib.sha256(raw).hexdigest())
+        trace.update(outcome='SUCCESS', decision='CONTINUE_TO_INLINE')
+    except urllib.error.HTTPError as error:
+        trace.update(http_status=error.code, outcome='HTTP_ERROR')
+        failure, raw = sr.review_provider_failure(error, key)
+        result['error_code'] = failure.code
+        # Interactions has a string error.code, unlike generateContent.status.
+        try:
+            code = _strict_json(raw).get('error', {}).get('code')
+            if code in ('service_unavailable', 'resource_exhausted', 'invalid_argument', 'unauthenticated', 'permission_denied'):
+                trace['provider_error_code'] = code
+        except Exception:
+            pass
+    except Exception:
+        trace['outcome'] = 'INVALID_OR_INCOMPLETE_CONTROL'
+    finally:
+        policy.observe()
+        trace['elapsed_seconds'] = policy._elapsed
+    return result
+
+
 def infer(output, environ=os.environ):
     require(environ.get('GITHUB_REPOSITORY') == REPO and environ.get('GITHUB_REF') == 'refs/heads/main', 'MAIN_ONLY')
     receipt_path = output / 'receipt.json'
     receipt = _strict_json(receipt_path.read_bytes())
-    require(receipt['state'] == 'STARTED' and receipt['mode'] == 'review'
-            and receipt['qualification_id'] == QUALIFICATION
+    inline = receipt.get('mode') == 'inline'
+    require(receipt['state'] == 'STARTED' and receipt['mode'] in ('review', 'inline')
+            and receipt['qualification_id'] == (INLINE_QUALIFICATION if inline else QUALIFICATION)
             and receipt['run_id'] == environ.get('GITHUB_RUN_ID')
             and receipt['repository_sha'] == environ.get('GITHUB_SHA')
             and environ.get('GITHUB_RUN_ATTEMPT') == '1', 'ATTEMPT_UNBOUND')
@@ -225,7 +294,11 @@ def infer(output, environ=os.environ):
     policy = ReviewHTTPPolicy(cutoff_utc=min(now() + timedelta(seconds=600), utc(observation['expires_at'])))
     inference = InteractionInference()
     try:
-        review = sr.review(media, deepcopy(record), key, http_policy=policy, inference=inference)
+        if inline:
+            receipt['text_control'] = text_control(key, policy._cutoff)
+            receipt['diagnostic_outcome'] = ('TEXT_READY' if receipt['text_control']['ready'] else 'TEXT_CONTROL_FAILED_VIDEO_NOT_ATTEMPTED')
+            require(receipt['text_control']['ready'] is True, 'MODEL_TEXT_CONTROL_FAILED')
+        review = sr.review(media, deepcopy(record), key, http_policy=policy, inference=inference, inline=inline)
         verdict = _review_verdict(review, MEDIA_SHA)
         require(verdict in ('PASS', 'FAIL'), 'REVIEW_INCOMPLETE')
         audit = policy.audit()
@@ -234,16 +307,22 @@ def infer(output, environ=os.environ):
         receipt['review'] = review
         receipt['owner_floor_problems'] = sr.owner_quality_policy.check(review, MEDIA_SHA)
         receipt['state'] = 'REVIEWED'
+        if inline:
+            receipt['diagnostic_outcome'] = 'TEXT_AND_INLINE_VIDEO_REVIEWED'
         receipt['qualification_result'] = ('PASS_FOR_ISOLATED_MASTER' if not receipt['owner_floor_problems']
                                            else 'REJECTED_MASTER')
-        if audit['cleanup_status'] != 'SUCCESS':
+        if audit['cleanup_status'] != ('NOT_ATTEMPTED' if inline else 'SUCCESS'):
             receipt['qualification_result'] = 'CLEANUP_UNCONFIRMED'
     except Exception as error:
         receipt['review'] = sr.failure_record(error, media)
         receipt['state'] = 'NOT_REVIEWED'
+        if inline and receipt.get('diagnostic_outcome') == 'TEXT_READY':
+            receipt['diagnostic_outcome'] = 'TEXT_READY_INLINE_VIDEO_FAILED'
     finally:
         receipt['http'] = policy.audit() if policy._started is not None else None
         receipt['inference_requests'] = len(policy._trace)
+        if inline:
+            receipt['inference_requests'] += int('text_control' in receipt)
         receipt['response_evidence'] = inference.response_evidence
         receipt['completed_at'] = now().isoformat()
         receipt['publish'] = False
