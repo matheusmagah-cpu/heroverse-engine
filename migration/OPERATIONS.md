@@ -61,6 +61,14 @@ The current Short 006 recovery routes include historical consumed/expired attemp
 as a fresh qualification. The handoff audit found no recovered Interactions implementation.
 Its old “50 tests passed” report is not runnable code or proof of a real provider inference.
 
+The first activation check is `reviewer-preflight.yml`: a manual, read-only job that compares
+the existing runtime secret with the historical fingerprint and checks the preserved Short 006
+record's identity. Its isolated artifact contains no key value. It does not call a provider,
+download media, repeat QA, approve or publish. The final step deliberately reports `BLOCKED`:
+a fingerprint match cannot prove the current key/project association, free tier or recurring
+capacity, and the isolated native review route is not yet qualified. Resolve those facts before
+enabling inference; this diagnostic is not a review-only implementation or general activation.
+
 The runner's workflow is authoritative in **heroverse-runner**, not the archived copy formerly
 at `ci/runner-render.yml`. Its two files remain useful; removing the repository would remove the
 current executor. Consolidation into engine is unfinished work (#242), not part of this cleanup.
