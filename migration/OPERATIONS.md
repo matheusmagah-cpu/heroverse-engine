@@ -11,7 +11,7 @@
 - `ops/DOT_PROTOCOL.md`: delegated task delivery; `ops/RUNNER_WAKEUP.md`: existing runner-dispatch contract.
 - `ops/ERRORS.json`: regression controls. Historical observations and `archive/` do not direct new execution.
 
-Matheus owns the project (`matheusmagah@gmail.com`); Will is the YouTube account.
+Matheus owns the project; Will is the YouTube account.
 Channel: HeroVerse `@heroverse74`, `UCuMF6pJQkyMzaVoAxFL86yA`.
 These facts do **not** establish ownership of the Gemini key or its Google Cloud project.
 Both GitHub repositories are public. Credentials remain in configured secrets, never in files or logs.
@@ -135,13 +135,31 @@ artifact `12444883451`, ZIP SHA-256 `95fd559ec95af5f606a23e49a62d09c0c8c537e1e60
 This rules out a failure limited to resolving the provider-hosted file URI; it does not isolate
 the video-processing backend, structured response handling or service capacity as the root cause.
 
-The next supported candidate is the stable `v1/interactions` route, explicit mode `stable`,
+The next supported candidate tested was the stable `v1/interactions` route, explicit mode `stable`,
 reservation `short006-20261022-stable-inline-v1`. Official `api-versions` and `interactions-api-v1`
 documentation confirms the same model, static fps, structured output and response schema support.
 It keeps the same text control, exact inline MP4, rubric and two-call/600-second budget. Only the
 endpoint version changes; the earlier beta reservations remain consumed. It is not adopted into
 production until its real result is qualified. A fresh no-cache API read confirmed the preceding
 CI completion when cached summary responses were stale; completed logs also record 51 PASS files.
+
+Stable-route result at 17:46 UTC, run `39825632213`, code `a3ba3d46b3d57c31a0f430dedbaf8d586592a3a3`:
+the text control itself returned HTTP 503 / `service_unavailable` in 0.45 s. The video call was
+correctly skipped. One call, no Files upload, render, repeated QA, canonical write or publication.
+Exact receipt: `evidence/reviewer-qualification/20261022-stable-diagnosis-short006.json`,
+artifact `12447000483`, ZIP SHA-256 `e5e6dff093db7e53443482561f7d1aa306daa02f26f833ff3d091f35ae139dc4`.
+Reservation `12446885743` is consumed. This failure is not confined to this MP4, but does not
+establish a platform-wide outage or explain the earlier beta video failures. Do not repeat any
+of these three unchanged qualifications. PR 274's complete CI logs (run `39824476302`) record
+51 passing test files; the dependency installation correction passed, independently of provider availability.
+
+The current handoff remains **review blocked**, not production activated. Resume only with a
+concrete recovery condition or a genuinely qualified native audiovisual alternative. A calibration
+review of the existing backup receipts found no qualified replacement: Flash Lite falsely approved
+three defect cases, Flash 3.6 rejected controls and had provider failures, and the local model failed
+ASR prerequisites. These are historical results, not new inference tests. No fallback is enabled.
+After a valid review, apply the unchanged score floors, correct actual material defects if found,
+then qualify a fresh publication package; the expired October 21 slot cannot be reused.
 
 PR 272 also corrected the validation setup after runs `39813213979` (global package-index refresh
 timed out) and `39815089810` (stale Ubuntu index returned a package 404). The final check's complete
