@@ -49,7 +49,7 @@ Every stage, **from the channel configuration to the pinned comment**, is held t
 | Tool | Used for | Limits |
 |---|---|---|
 | vidIQ (MCP, read-only, authorized research agent) | Mining and live intelligence: outliers, watched audits, transcripts, stats, our public videos and analytics | ≤10 calls/day, ≤2,000 credits/cycle (`evidence/vidiq/ledger.json`) |
-| Gemini, designated `gemini-3.8-flash` reviewer | Stage 3: audiovisual review; support models supply audit and critique, not replacement approval | Additional cost must be zero for the actual key/project and recurring load; current verification remains a blocker in `OPERATIONS.md` |
+| Gemini, designated `gemini-3.8-flash` reviewer | Stage 3: audiovisual review; support models supply audit and critique, not replacement approval | Current key/project and Free tier were verified; the real Interactions qualification also returned 503. Native availability and recurring load remain blocked in `OPERATIONS.md` |
 | Kokoro voice, FLUX images (Cloudflare), ffmpeg | Stage 2 execution | Preserve existing hashes; verify capacity under the zero-additional-cost rule |
 | YouTube Data API | Stage 4 publication and reconciliation | Our OAuth |
 | GitHub Actions and the authorized execution agent | Execute the existing production, review and publication entry points | Public repositories; account, executor and dispatch boundaries are in `OPERATIONS.md`; media passes the same gates |

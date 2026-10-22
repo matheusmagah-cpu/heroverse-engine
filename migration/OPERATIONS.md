@@ -97,8 +97,29 @@ showed a peak of 4 RPD; it is delayed usage, not a reservation or guaranteed rem
 The recurring free offer permits a bounded one-call qualification. It does not establish sustained
 pipeline capacity: two longs and three Short candidates per long nominally require 8 decisions/day,
 or 16 with one retry each, before backlog/corrections. The legacy shared retries still lack a proven
-global budget. Next: obtain the isolated real Interactions result for the exact preserved master;
-resolve its actual finding before changing production or publication eligibility.
+global budget.
+
+Real qualification completed at 16:43 UTC: run `39816315756`, code `66b1d772a59a4e4cbe29f9cf9c441049b4ec3ad1`,
+made **one** Interactions inference request for the unchanged `d6a7dc...` master after checking the
+current credential, release bytes and recorded QA. The response was **HTTP 503** at the inference
+stage; no review scores were obtained. Cleanup succeeded. The exact final artifact receipt is
+`evidence/reviewer-qualification/20261022-interactions-short006.json`, artifact `12442217461`
+(ZIP SHA-256 `15f901f1ee5625639159521fb588446c22a040c1a8932dc4145a2cd0e797c8dc`).
+STARTED reservation artifact `12441419008` prevents replay of this consumed qualification.
+The result is `NOT_REVIEWED`, `publish=false`; no render, repeated QA, canonical write or publication.
+The new interface did not remove the 503. This establishes a provider-stage failure for this exact
+request, not a proven root cause, quota exhaustion or platform-wide outage. Do not retry unchanged,
+delete the reservation, rewrite it as approval or rerender the same master to address this failure.
+Next: establish a concrete provider-side recovery condition or qualify an alternative reviewer with
+the existing controls before another inference attempt. Native availability and sustained recurring
+capacity remain blocked; the account/project/free-tier verification is complete for this observation.
+
+PR 272 also corrected the validation setup after runs `39813213979` (global package-index refresh
+timed out) and `39815089810` (stale Ubuntu index returned a package 404). The final check's complete
+logs, run `39815812918` / job `119954008799`, record 51 test files passing, no pilot change and successful
+cleanup. Dependency preparation took about 48 seconds with the bounded Ubuntu-only refresh.
+Run/job summary responses lagged the completed logs during this session; inspect the final logs
+before treating an old `queued`/`in_progress` snapshot as current. These are code tests, not new media QA.
 
 The runner's workflow is authoritative in **heroverse-runner**, not the archived copy formerly
 at `ci/runner-render.yml`. Its two files remain useful; removing the repository would remove the
@@ -155,7 +176,9 @@ The report's historical private-runner minute budget is not a payment authorizat
 - `production/<pilot>/shorts/shorts.json`: canonical Short state; old correction histories are not replacements.
 - `publish/ledger.json` and `publish/receipts/`: upload identity and reconciliation, not a substitute for public readback.
 - Open issues/PRs: unresolved work. Keep completed/cancelled discussions in history.
-- `evidence/reviewer-qualification/20261022-preflight.json`: current recorded reviewer preflight blocker.
+- `evidence/reviewer-qualification/20261022-preflight.json`: earlier account-access checkpoint.
+- `evidence/reviewer-qualification/20261022-project-binding.json`: current bounded free-project observation, without public credential identifiers.
+- `evidence/reviewer-qualification/20261022-interactions-short006.json`: actual isolated request, HTTP 503; no audiovisual approval.
 
 Check the repository HEAD before changing anything. Never copy a stale local manifest over newer
 canonical evidence. Upload, approval, workflow success and current public visibility are separate facts.
