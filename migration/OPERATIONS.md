@@ -1,6 +1,7 @@
-# HeroVerse operations — the single source of truth (rewritten 2026-10-18)
+# HeroVerse operations — rules and operational references
 
-Read this file first. **It wins over every other document.** The only documents that direct the work are:
+Read this file first. `SYSTEM.md` is the master direction; `STANDARD.md` defines the production standard.
+The documents that direct the work are:
 - `OPERATIONS.md` (this file): rules, roles, budgets, schedule, pipeline, status.
 - `ops/DOT_PROTOCOL.md`: how Claude gives Dot tasks and accepts its work. `ops/RUNNER_WAKEUP.md`: the runner wake-up.
 - `strategy/DECISIONS.md`: the decision protocol and the decisions in force.
@@ -18,7 +19,7 @@ OAuth recovery, probe reviews) were deleted on 2026-10-18 so no one reads two ve
 history. When something here changes, this file is edited in the same PR.
 
 **Accounts (never switched):** channel HeroVerse @heroverse74 (`UCuMF6pJQkyMzaVoAxFL86yA`); repositories
-`matheusmagah-cpu/heroverse-engine` (private) and `matheusmagah-cpu/heroverse-runner` (public). Credentials only in
+`matheusmagah-cpu/heroverse-engine` (public) and `matheusmagah-cpu/heroverse-runner` (public). Credentials only in
 GitHub secrets, never in files.
 
 ## Owner rules (Matheus, Brazilian: talk to him in Portuguese; the channel is English-only)
@@ -54,7 +55,9 @@ slot (`schedule.json` `shorts_slots`, one entry): night pilot of day D at D 14:0
 **Publication.** Only a final decision **PASS** (`publish/prepublish_gate.py` → `out/gate.json`) publishes: frozen QA,
 preflight, whole-file scan, scorecard rows measured on our own file, watched review by the **designated model only**
 (`gemini-3.8-flash`; a fallback model's answer is UNKNOWN). Missing or errored evidence = UNKNOWN = no publication,
-retried. **Nobody writes `APPROVAL.json` by hand.** Frozen QA criteria are never edited after a render. After YouTube
+retried. New uploads also require the owner's additional overall score floor of 9, enforced by
+`publish/owner_quality_policy.py`; this does not replace the frozen per-item and overall rubric.
+**Nobody writes `APPROVAL.json` by hand.** Frozen QA criteria are never edited after a render. After YouTube
 confirms an upload the finished files are deleted from the release.
 
 **Measurement.** Official numbers (Data API / Analytics API) are separated from own calculations and estimates; YPP
@@ -67,27 +70,20 @@ counters are estimated as YPP counts them (public long-form hours 365 d, public 
   (it has repository access; fresh routine sessions do not): an hourly clock (dispatch the heartbeat, review Dot's
   deliveries) and the daily analysis at 08:05 UTC. No polling loops, no full log dumps; extract only needed fields.
 - **Dot:** heavy writing through `dot-task` issues; its own scheduled check of the issue queue at least every 2 h.
-- **Repository visibility (owner decision 2026-10-19):** The repository is to be public and otherwise identical, so standard GitHub-hosted Actions minutes are free. Nothing is removed and history is not rewritten. Production workflows use `github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'`. Secrets are never sent to pull requests from forks. Historical diagnostic workflows retain their private-only guard and do not run while the repository is public. The owner may return the repository to private when the channel earns revenue; the private Actions minutes budget then applies again. The owner changes visibility after Claude approves this PR.
-- **GitHub Actions minutes of the private engine (owner decision 2026-10-19: everything stays private; the owner pays
-  the overage):**
-  - **Budget:** 7,000 min per 30 days (2,000 included + paid overage), about 233 min a day.
-  - **Monitoring:** the daily report's "Actions minutes" section (`ops/minutes.py`) shows the last 24 h / 7 d / 30 d, the
-    projection and the top consumers. It alerts at 1.5× the daily target and at a projection ≥ 90 % of the budget.
-  - **Savings applied:**
-    - the heartbeat runs at :41 plus the Claude clock at :14 (was 72 beats a day); its two jobs stay separate so the runner token never shares a job with GH_TOKEN;
-    - no approval retry while the Gemini daily quota is known spent (it resets at 07:00 UTC);
-    - heavy renders run on the public runner (free).
-  - **Cutting order if the projection exceeds the budget:**
-    1. structure mining weekly instead of daily;
-    2. acquisition windows down to 12 a day;
-    3. PR checks only on pilot and code paths.
-    Production (approve, publish, Shorts) is never cut.
+- **Repository visibility:** both repositories are public (verified 2026-10-22). Production workflows use
+  `github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'`.
+  Secrets are never sent to pull requests from forks. Some historical diagnostic workflows retain a
+  private-only guard; inspect each workflow rather than assuming it can run. A future visibility or
+  billing change needs a separate owner decision.
+- **Actions usage:** the engine and runner are public. The daily report's private-repository
+  7,000-minute budget and overage projection are historical monitoring assumptions, not a current
+  payment authorization or an observed bill. The zero-additional-cost rule above remains in force.
 - **GitHub:**
   - Heavy renders run on the public `heroverse-runner` (owner decision, 2026-10-17). It has 4 cores and no minute cap.
   - The owner was told that GitHub's Actions terms restrict runners to work related to their own repository, and accepted the risk to the account.
   - Its logs are quiet (`PUBLIC_LOGS=1`): titles and script text go only to a private log in the release.
-  - Fallback: the private `pilot-render-stills.yml` runs the same script. Keep each render within about 45 min where possible so the fallback fits the 2,000 private minutes.
-  - The private repo handles the panel, publication and light jobs.
+  - Fallback: `pilot-render-stills.yml` in the engine runs the same script.
+  - The engine handles the panel, publication and light jobs.
 - **Cloudflare Workers AI (10k neurons/day, resets 00:00 UTC):** images only (FLUX + 2x upscale on GitHub).
 - **RapidAPI free plan (500 units/day, 14 per native window, floor 100 → ≤ 28 windows a day):** native reference windows for mining — 12 a day for the accuracy holdout, the rest for native measurement.
 - **Gemini free tier (no billing):** mining, Shorts selection/review, watched reviews.
@@ -192,58 +188,26 @@ Claude reviews each delivery against its card; a stage is called a strong point 
 
 ## Pipeline gates (never edited after results)
 1. **Script acceptance** (before images): `production/script_check.py` — PR checks run it on every pilot a PR touches.
-2. **Render QA (frozen criteria v2).**
+2. **Render QA (frozen criteria v3 for current production; legacy v2 evidence is retained).**
 3. **Final decision** `prepublish_gate.py`: PASS / FAIL / UNKNOWN per dimension (binding, technical, audio, transcript,
    captions, sync, image, rights, content/policy, scorecard, whole-file scan, preflight).
 4. **Shorts:** `shorts_qa` + watched review by the designated model (items ≥ 7, overall ≥ 8), from QA-PASS renders only.
+   New uploads must also satisfy the additional owner floor of overall ≥ 9.
 
-## Status (2026-10-20 08:15 UTC) — day 3 of the plan
+## Current status: read the dated records
 
-**Published / scheduled (UTC):** pilot-002 10-18 10:00 ✅ · pilot-004 10-20 00:00 ✅ · pilot-012 10-20 00:30 ✅ `1bT9pEROuhI` (first comment posted) · pilot-005 10-20 10:00 (uploaded, scheduled) · pilot-007 10-21 10:00 (approved 9.0, uploaded).
+Use `evidence/daily-report/latest.md` for the last observed channel and pipeline snapshot, checking its
+timestamp. For a specific file, read `production/<pilot>/out/{manifest,qa,review,gate}.json`,
+`production/<pilot>/shorts/shorts.json`, and `publish/ledger.json` with the corresponding receipt.
+An upload record, a green workflow and a current public-visibility observation are different facts.
 
-**At risk:** pilot-006 (10-21 00:00) GATE FAIL on image-set overlap. Fix #225 is due 12:00, then images, re-render and re-approval. If the reviewer quota is spent, the slot slips and nothing publishes without PASS. Pilots 008–011 have the same defect and are fixed in #225 before their renders. Slot 10-24 00:00 has no script: #224 (automatic script runway) is due 10-21 00:00.
+Use the open issues and PRs for unfinished work. The copied October 18/20 status, calendars and deadlines
+were removed here on October 22 because they contradicted newer production records; they remain in Git
+history. Do not rerender or repeat approved checks based on those historical snapshots.
 
-**Shorts:** none published since 10-18. 012 and 005 Shorts failed the watched review (hook, rhythm, ending); the repair is #203.
+For actual scheduled work, inspect `.github/workflows/heartbeat.yml`, `ops/heartbeat.py` and recent Actions
+runs. A schedule documented above is not proof of a registered or running task. An agent pause does not
+disable existing GitHub schedules or uploads already scheduled on YouTube.
 
-**Dot cards open:** #225 (P0) · #226 (P0, E30) · #222 (P0, self-reliant loop, includes the automatic first comment) · #224 (P0, script runway) · #216 (thumbnail R9) · #223 (full metadata) · #203 (Shorts) · #177 (archive) · #191 / #192 (animation) · #141 (originality).
-
-**Owner rule (2026-10-20):** heavy work is done by Dot and the tools; Claude directs, reviews, unblocks and dispatches the tools. No owner action may block the loop.
-
-**Indicators (official 2026-10-20 01:52):** 269 subscribers; public long-form watch hours 365 d ≈ 3.3 (own calc.).
-
-### Previous status (2026-10-18)
-
-
-
-**Publication calendar (UTC; one Short per long video, D-03):**
-
-| Day | Long video | Short | State |
-|---|---|---|---|
-| 10-18 | pilot-002 10:00 ✅ `v4zN53ZiUIs` | 14:00 ✅ `_sUdOLxWy5c` | published |
-| 10-19 | pilot-003 10:00 | 14:00 | render, QA, scan, preflight PASS; Short approved (gemini-3.8-flash). Watched review waits for the Gemini reset 07:00 → approve → upload before 10:00 |
-| 10-20 | pilot-004 00:00 · pilot-005 10:00 | 14:00 · 20:00 | 004 as 003 (Short approved); 005 images after 00:00 UTC, then render |
-| 10-21 | pilot-006 00:00 · pilot-007 10:00 | 14:00 · 20:00 | scripts on main; images and render in the nights before |
-| 10-22 | pilot-008 00:00 · pilot-009 10:00 | 14:00 · 20:00 | 008: Dot finishing PR #117 (card #114 SPEC v2, due 10-19 06:00); 009: card #119 waits TOPIC CONFIRMED |
-| 10-23 | pilot-010 00:00 · (D+4 card) | 14:00 · 20:00 | 010: card #120 waits TOPIC CONFIRMED; next cards opened at each daily analysis |
-
-**Dot:** contract `ops/DOT_PROTOCOL.md` (8-part cards, ALLOWED PATHS enforced by PR checks). Open: #114 (SPEC v2),
-#119, #120. Dot's own 2-hour polling is not yet confirmed; a card not delivered shows up as a Content runway alert.
-
-**Today's changes (all PR checks green):** #121 superseded documents deleted · #122 one Short slot per pilot ·
-#123 late Shorts never take another pilot's slot; more tests in PR checks · #124 Claude–Dot contract with scope check
-· #125 error register with enforced antidotes (`ops/ERRORS.json`) · #126 content runway in the daily report.
-
-**Scheduler:** heartbeat (GitHub crons unreliable: dropped again 14:41) + runner-wake (Dot, PR #106) + hourly Claude
-clock at :14 (dispatching the heartbeat every hour since 12:14).
-
-**Checkpoints:** 02:15 first real runner-wake dispatch (pilot-005) · 06:00 Dot deadline #114 · 07:25 approval of
-pilot-003 (deadline 10:00) and 004 · 08:05 daily analysis (TOPIC CONFIRMED for #119/#120, cards for D+4).
-
-**Not yet proven:** gate PASS on a real render; runner-wake real dispatch; Short reviewed by the designated model and
-published by the pipeline; review calibration; mining holdout; vidIQ title score vs CTR.
-
-**Indicators (official 2026-10-18):** 263 subscribers; public long-form watch hours 365 d ≈ 3.3 (own calc.); public
-Shorts views 90 d ≈ 40.
-
-**Decisions active:** D-01/D-04 lengths (conformance), D-02 fear-bait hidden (compliance), D-03 one Short per long
-video (p = 0.062, observational). D-05 subscribe ask reverted.
+The Kaggle production route is retired (`kaggle/STATUS.md`). Its three workflows and three helpers were
+moved unchanged into `archive/workflows/` and `archive/kaggle/`; the remainder of #177 stays pending.
