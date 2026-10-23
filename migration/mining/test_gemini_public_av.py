@@ -2,7 +2,10 @@ import base64, copy, hashlib, io, json, unittest
 import urllib.error
 import urllib.parse
 from unittest.mock import Mock, patch
-import gemini_public_av as g
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import gemini_public_av as g  # noqa: E402
 from datetime import datetime, timezone, timedelta
 from gemini_public_av import analyze, build_request,validate_report,normalize_report
 

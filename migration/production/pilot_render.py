@@ -2,7 +2,6 @@
 """Pilot renderer (F5) built on preserved, rights-recorded inputs.
 
   pilot_render.py voice    WORK SCRIPT            (voice venv: original voice_phase5 adapter)
-  pilot_render.py assemble WORK SCRIPT CATALOG MUSIC CLIP...   (ffmpeg)
 
 Voice: original hero_engine.voice_phase5 Kokoro adapter, preserved hash-pinned
 model, voice am_michael, sentence by sentence. Music: the owned instrumental
@@ -23,12 +22,9 @@ RATE_OUT = 48000
 LEAD_IN = 0.3
 TAIL = 3.0
 SENTENCE_GAP = 0.18
-SHOT_RANGE = (1.6, 2.6)
 MUSIC_OFFSET = 1200.0
 SOURCE_SHA256 = "fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-THEMES = {"sunrise": "sunrise", "mountain": "sunrise", "morning light forest": "forest", "clouds": "sky",
-          "ocean": "water", "river": "water", "flower": "flower", "candle": "candle"}
 SEGMENT_THEMES = {"hook": ["sunrise"], "invitation": ["sunrise", "sky"], "scripture": ["sky", "sunrise"],
                   "reflection": ["forest", "water", "sky"], "stillness": ["candle", "water"],
                   "transition": ["candle", "forest"], "prayer": ["forest", "water", "flower", "candle"],
@@ -163,118 +159,11 @@ def voice(work, script_path):
     print(json.dumps({"voice_seconds": round(total, 2), "segments": len(timeline)}))
 
 
-def theme_of(clip):
-    query = clip["query"]
-    return next((t for key, t in THEMES.items() if key in query), "sky")
-
-
-def shot_plan(timeline, clips, total, seed=17):
-    """Assign shots to the narration timeline: themed per segment, durations in
-    SHOT_RANGE, never the same clip twice in a row, each source second once."""
-    rng = random.Random(seed)
-    cursor = {c["file"]: 0.0 for c in clips}
-    by_theme = {}
-    for c in clips:
-        by_theme.setdefault(c["theme"], []).append(c)
-    plan, t, last = [], 0.0, None
-
-    def segment_at(time):
-        for s in timeline:
-            if s["start"] <= time < s["end"]:
-                return s["id"]
-        return "prayer"
-    while t < total - 0.01:
-        seg = segment_at(t)
-        kind = next((k for k in SEGMENT_THEMES if seg.startswith(k)), "prayer")
-        duration = min(round(rng.uniform(*SHOT_RANGE), 2), round(total - t, 2))
-        options = [c for theme in SEGMENT_THEMES[kind] for c in by_theme.get(theme, [])]
-        options = [c for c in options if c["file"] != last and cursor[c["file"]] + duration <= c["duration"] - 0.2]
-        if not options:
-            options = [c for c in clips if c["file"] != last and cursor[c["file"]] + duration <= c["duration"] - 0.2]
-        if not options:
-            raise RuntimeError("FOOTAGE_EXHAUSTED_AT_%.1f" % t)
-        clip = rng.choice(options)
-        plan.append({"file": clip["file"], "video_id": clip["video_id"], "source_start": round(cursor[clip["file"]], 3),
-                     "duration": duration, "timeline_start": round(t, 3), "segment": seg})
-        cursor[clip["file"]] += duration
-        t += duration
-        last = clip["file"]
-    return plan
-
-
-def assemble(work, script_path, catalog_path, music_path, clip_paths):
-    script = json.loads(Path(script_path).read_text())
-    timeline = json.loads((work / "timeline.json").read_text())
-    catalog = {c["video_id"]: c for c in json.loads(Path(catalog_path).read_text())["catalog"]}
-    clips = []
-    for path in clip_paths:
-        name = Path(path).name
-        video_id = re.match(r"native-(.{11})-\d+-\d+s-sha256-", name).group(1)
-        entry = catalog[video_id]
-        clips.append({"file": str(path), "video_id": video_id, "duration": probe_duration(path),
-                      "theme": theme_of(entry), "sha256": sha256(path), "attribution": entry["attribution"],
-                      "license": entry["license"]})
-    total = timeline["voice_seconds"] + TAIL
-    # Audio: voice forward, owned music ducked under it, loudness to -15 LUFS / -1.5 dBTP.
-    mix = work / "mix.wav"
-    run(["ffmpeg", "-v", "error", "-y", "-i", str(work / "voice.wav"),
-         "-ss", str(MUSIC_OFFSET), "-t", str(total), "-i", str(music_path),
-         "-filter_complex",
-         f"[0:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,apad=whole_dur={total},asplit=2[v][key];"
-         f"[1:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,volume=0.04,"
-         f"afade=t=in:d=2,afade=t=out:st={total - 4}:d=4[m];"
-         "[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck];"
-         "[v][duck]amix=inputs=2:normalize=0:duration=first,"
-         "loudnorm=I=-15:TP=-1.5:LRA=11:linear=true[out]",
-         "-map", "[out]", "-ar", str(RATE_OUT), str(mix)])
-    # Picture: themed CC shots, picture only.
-    plan = shot_plan(timeline["segments"], clips, total)
-    shots = work / "shots"
-    shots.mkdir(exist_ok=True)
-    listing = []
-    for index, shot in enumerate(plan):
-        out = shots / f"{index:04d}.mp4"
-        run(["ffmpeg", "-v", "error", "-y", "-ss", str(shot["source_start"]), "-t", str(shot["duration"]),
-             "-i", shot["file"], "-an", "-vf",
-             "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=30,"
-             "eq=saturation=0.95:brightness=0.02,format=yuv420p",
-             "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-r", "30", str(out)])
-        listing.append(f"file '{out}'")
-    (work / "shots.txt").write_text("\n".join(listing) + "\n")
-    texts = [("God has already gone ahead of you.", 0.3, 5.0)]
-    for seg in timeline["segments"]:
-        if seg["id"] in REFERENCES:
-            texts.append((REFERENCES[seg["id"]], seg["start"] + 0.5, seg["end"]))
-    draw = ",".join(
-        f"drawtext=fontfile={FONT}:text='{escape(t)}':fontcolor=white:fontsize=46:borderw=3:bordercolor=black@0.6:"
-        f"x=(w-text_w)/2:y=h-170:enable='between(t,{a:.2f},{b:.2f})'" for t, a, b in texts)
-    final = work / "pilot.mp4"
-    run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(work / "shots.txt"),
-         "-i", str(mix), "-map", "0:v:0", "-map", "1:a:0", "-vf", draw + ",format=yuv420p",
-         "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-r", "30", "-g", "60",
-         "-c:a", "aac", "-b:a", "192k", "-ar", str(RATE_OUT), "-t", str(total), "-movflags", "+faststart", str(final)])
-    used = {c["video_id"]: c for c in clips if any(s["video_id"] == c["video_id"] for s in plan)}
-    manifest = {"version": "pilot-manifest-v1", "pilot_id": script["pilot_id"], "output_sha256": sha256(final),
-                "output_seconds": probe_duration(final), "script_sha256": sha256(script_path),
-                "voice": {"engine": script["voice"]["engine"], "voice_id": timeline["voice_id"],
-                          "speed": timeline["speed"], "voice_wav_sha256": sha256(work / "voice.wav")},
-                "music": {"file": Path(music_path).name, "sha256": sha256(music_path), "offset_seconds": MUSIC_OFFSET,
-                          "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"},
-                "clips": [{"video_id": c["video_id"], "sha256": c["sha256"], "license": c["license"],
-                           "attribution": c["attribution"], "picture_only": True} for c in used.values()],
-                "shots": plan, "on_screen_text": [t for t, _, _ in texts], "timeline": timeline["segments"],
-                "upload_performed": False, "publication_performed": False}
-    (work / "manifest.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
-    print(json.dumps({"seconds": manifest["output_seconds"], "shots": len(plan), "clips_used": len(used)}))
-
-
 if __name__ == "__main__":
     command, work = sys.argv[1], Path(sys.argv[2]).resolve()
     if command == "prepare":
         prepare(work, sys.argv[3])
     elif command == "voice":
         voice(work, sys.argv[3])
-    elif command == "assemble":
-        assemble(work, sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6:])
     else:
         raise SystemExit(__doc__)

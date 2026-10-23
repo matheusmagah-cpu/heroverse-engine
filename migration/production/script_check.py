@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic acceptance of a pilot written by the executor (Dot) before Claude merges it (migration/ops/DOT_PROTOCOL.md).
+"""Deterministic acceptance of a pilot script before it is rendered.
 It replaces reading 4,000 words with checks that never change after results: files and frozen QA criteria, required
 fields, estimated length per format, estimated speech presence (frozen QA floor 0.85, target >= 0.86), Scripture per
 10 min (>= 4, KJV marked), policy wording, originality against every other pilot (no shared 12-word run outside

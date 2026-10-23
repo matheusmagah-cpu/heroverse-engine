@@ -1,7 +1,0 @@
-/workspace/scratch/f2180567de8e/music-reference-runtime/torch/nn/utils/weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
-  WeightNorm.apply(module, name, dim)
-/workspace/scratch/f2180567de8e/music-reference-runtime/torch/nn/functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
-  warnings.warn(
-/workspace/scratch/f2180567de8e/music-reference-runtime/torch/nn/functional.py:6041: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
-  warnings.warn(
-{"status": "MEASURED_MUSIC_AESTHETICS", "full_duration_observed": true, "windows": 20, "axis_mean": {"CE": 5.734871020082247, "CU": 7.7309001218641304, "PC": 2.1589921627629947, "PQ": 7.690813734167448}, "publication_authorized": false}
