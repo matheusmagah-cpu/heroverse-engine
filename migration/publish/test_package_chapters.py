@@ -32,6 +32,12 @@ class Tests(unittest.TestCase):
         rows=pkg.chapters_from_script(script,[{'id':'hook','start':0},{'id':'s1','start':40},{'id':'s2','start':90},{'id':'s3','start':130}])
         self.assertEqual(rows,['0:00 Good evening','1:30 Permission to lie down','2:10 Peace in the house'])
         self.assertFalse(any(pkg.SCRIPTURE_REF.search(r) for r in pkg.chapters([{'id':'scripture-1','start':30}])))
+    def test_night_chapters_speak_of_tonight(self):
+        tl=[{'id':'hook','start':0},{'id':'declaration','start':700},{'id':'payoff','start':740}]
+        night={'working_title':'Before You Sleep 🌙 | Night Prayer for Anxiety','segments':[{'id':'hook','text':'Before you sleep.'}]}
+        morning={'working_title':'Wait on the Lord 🌅 | Morning Prayer','segments':[{'id':'hook','text':'Good morning.'}]}
+        self.assertEqual(pkg.chapters_from_script(night,tl)[1:],['11:40 Declaration for tonight','12:20 One thing to carry into tomorrow'])
+        self.assertEqual(pkg.chapters_from_script(morning,tl)[1:],['11:40 Declaration for today','12:20 One thing to do today'])
     def test_missing_hook_and_legacy(self):
         self.assertEqual(pkg.opening_chapter({'segments':[]}), 'Opening prayer')
         self.assertEqual(pkg.chapters([{'id':'hook','start':0}]),['0:00 Opening prayer'])

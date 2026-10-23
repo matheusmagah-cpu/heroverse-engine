@@ -73,8 +73,10 @@ def chapters_from_script(script, timeline):
     """Chapters at the opening, prayer and blessing turns and at every segment the script names. R15 (algorithm study
     2026-10-23: Bible references in the description lowered the odds of a hit to x0.33, p=0.007): a chapter is never
     a bare reference, and a reference in parentheses is dropped from its name."""
-    named = {"hook": opening_chapter(script), "transition": "Let us pray", "declaration": "Declaration for today",
-             "payoff": "One thing to do today", "blessing": "Blessing"}
+    night = bool(re.search(r"(?i)\b(night|bedtime|evening|sleep|bed)\b", script.get("working_title", "")))
+    named = {"hook": opening_chapter(script), "transition": "Let us pray",
+             "declaration": "Declaration for tonight" if night else "Declaration for today",
+             "payoff": "One thing to carry into tomorrow" if night else "One thing to do today", "blessing": "Blessing"}
     named.update({s["id"]: s["chapter"] for s in script["segments"] if s.get("chapter")})  # the script's own chapter names win
     rows = []
     for seg in timeline:
