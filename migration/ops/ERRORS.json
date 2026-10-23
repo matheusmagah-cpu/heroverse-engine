@@ -393,6 +393,26 @@
     "file": "migration/publish/test_three_stage.py",
     "contains": "def test_v4_footage_grammar_counts_as_continuous_motion"
    }
+  },
+  {
+   "id": "E57",
+   "date": "2026-10-23",
+   "error": "HERO_RUNNER_PAT returned 401 on every heartbeat (runs 39964015145, 40005305507): the runner could not be woken, the runner-wake job failed, and no render started automatically.",
+   "fix": "When the runner wake-up is blocked by a rejected or missing token, the heartbeat renders on the engine itself (engine_fallback.py dispatches pilot-render-stills.yml with the engine's own token): no render waits on that credential. One active engine render at a time, at most 8 dispatches a day.",
+   "antidote": {
+    "file": "migration/ops/test_engine_fallback.py",
+    "contains": "def test_heartbeat_falls_back_to_the_engine_when_the_runner_token_is_rejected"
+   }
+  },
+  {
+   "id": "E58",
+   "date": "2026-10-23",
+   "error": "The designated reviewer answered 503 'high demand' for pilot-010 (run 40017605277); the review gave up after about one minute and the video missed its approval window.",
+   "fix": "long_review.watch_with_patience asks the same reviewer again within the run after 2, 5 and 10 minutes on 503/UNAVAILABLE only (never another model, never on a used-up quota).",
+   "antidote": {
+    "file": "migration/production/test_long_review.py",
+    "contains": "def test_overloaded_reviewer_is_asked_again_and_only_the_reviewer"
+   }
   }
  ]
 }
