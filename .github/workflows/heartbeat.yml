@@ -51,15 +51,29 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: read
+      actions: write   # E57: the engine render fallback dispatches pilot-render-stills.yml
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           ref: main
           persist-credentials: false
       - name: Offline runner wake-up tests
-        run: python3 -I -B migration/ops/test_runner_dispatch.py
-      - name: Wake runner only for eligible work
+        run: |
+          python3 -I -B migration/ops/test_runner_dispatch.py
+          python3 -I -B migration/ops/test_engine_fallback.py
+      - name: Wake runner only for eligible work; render on the engine when the runner cannot be woken (E57)
         env:
           # This credential is never given to the engine scheduler or checkout.
           HERO_RUNNER_PAT: ${{ secrets.HERO_RUNNER_PAT }}
-        run: python3 -I -B migration/ops/runner_dispatch.py migration/production migration/publish/ledger.json
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          if status=$(python3 -I -B migration/ops/runner_dispatch.py migration/production migration/publish/ledger.json); then
+            echo "$status"; exit 0
+          fi
+          echo "$status"
+          case "$status" in
+            BLOCKED_API_HTTP_401|BLOCKED_API_HTTP_403|BLOCKED_MISSING_HERO_RUNNER_PAT)
+              echo "::warning::Runner unavailable ($status); rendering on the engine instead (E57)"
+              python3 -I -B migration/ops/engine_fallback.py migration/production migration/publish/ledger.json ;;
+            *) exit 1 ;;
+          esac

@@ -15,6 +15,7 @@ usage: long_review.py PILOT_DIR VIDEO_MP4
 """
 from datetime import datetime, timezone
 import json
+import time
 import os
 from pathlib import Path
 import sys
@@ -74,6 +75,23 @@ def watch(file, title, key, models=REVIEW_MODELS):
     return r
 
 
+# E58: the designated reviewer answered 503 "high demand" for pilot-010 (run 40017605277) and the run gave up after
+# about one minute (structure_mining.call waits 20 s and 40 s). Spikes last minutes, so the same reviewer is asked again
+# within the run after 2, 5 and 10 minutes: never another model, and at most 8 calls of the free allowance per run.
+OVERLOAD_WAITS = (120, 300, 600)
+
+
+def watch_with_patience(file, title, key, wait=time.sleep):
+    for pause in (*OVERLOAD_WAITS, None):
+        try:
+            return watch(file, title, key)
+        except sm.ProviderFailure as e:
+            if pause is None or not ("503" in e.code or "UNAVAILABLE" in e.code):
+                raise
+            print(json.dumps({"reviewer": "overloaded", "retry_in_seconds": pause}), file=sys.stderr)
+            wait(pause)
+
+
 def own_measures(script, timeline, seconds):
     """Rows measured on our own file and script, no model: length and Scripture read per 10 minutes."""
     spoken = {seg["id"] for seg in timeline.get("segments", [])}
@@ -103,7 +121,7 @@ def main(pilot_dir, video_path):
     try:
         file = sr.upload(video_path, key)
         try:
-            review = watch(file, script["working_title"], key)
+            review = watch_with_patience(file, script["working_title"], key)
             try:  # report-only: an audit failure never changes the review status
                 report = audit(file, key)
             except Exception as e:

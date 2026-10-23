@@ -100,6 +100,30 @@ class Review(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL")                          # 9 minutes: hard row FAIL decides
         self.assertFalse(out["scorecard_hard"]["minutes"]["pass"])
 
+    def test_overloaded_reviewer_is_asked_again_and_only_the_reviewer(self):
+        # E58: pilot-010's review gave up after one minute of 503 "high demand" (run 40017605277)
+        busy = lr.sm.ProviderFailure("HTTP_503_UNAVAILABLE")
+        waits, calls = [], []
+
+        def fake(file, title, key):
+            calls.append(title)
+            if len(calls) < 3:
+                raise busy
+            return {"status": "PASS"}
+        with mock.patch.object(lr, "watch", side_effect=fake):
+            self.assertEqual(lr.watch_with_patience(FILE, "T", "k", wait=waits.append), {"status": "PASS"})
+        self.assertEqual(waits, list(lr.OVERLOAD_WAITS[:2]))
+        with mock.patch.object(lr, "watch", side_effect=busy):
+            with self.assertRaises(lr.sm.ProviderFailure):
+                lr.watch_with_patience(FILE, "T", "k", wait=lambda s: None)
+        quota = lr.sm.ProviderFailure("HTTP_429_RESOURCE_EXHAUSTED:QUOTA")
+        waits = []
+        with mock.patch.object(lr, "watch", side_effect=quota):        # a used-up allowance is never retried
+            with self.assertRaises(lr.sm.ProviderFailure):
+                lr.watch_with_patience(FILE, "T", "k", wait=waits.append)
+        self.assertEqual(waits, [])
+        self.assertLessEqual(sum(lr.OVERLOAD_WAITS) / 60, 60)          # fits the 120-minute approve job
+
     def test_scorecard_hard_has_exactly_the_hard_keys(self):
         with tempfile.TemporaryDirectory() as t:
             out, _ = self.run_main(pilot(t), audit_raises=False)

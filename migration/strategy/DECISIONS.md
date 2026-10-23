@@ -235,3 +235,9 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 - Chatterbox calm: one audible glitch (FAIL). Chatterbox warm: 153 wpm, too fast (FAIL). Both took about 10 CPU s per audio s, which is about 2.7 h for a 16-minute prayer.
 - **Decision.** Kokoro stays. The study's breakout voices all speak at about 60–120 wpm, slower than our 135: a slower Kokoro speed is the next voice test, measured by the same ruler.
 - **Speed test (run 40004867140).** The verified voice engine accepts 0.80–1.25. Kokoro 0.80 measured 124 wpm but had one glitch (FAIL); 0.85 measured 135 wpm and passed. Kokoro stays at 0.85; the narration's pace is not the lever within the frozen QA band.
+
+## Owner pendings resolved (2026-10-23 night)
+- **July off-niche items stay public.** Owner: "keep it as it is unless the analysis shows a real need". The analysis does not: the 11 July Shorts brought 43 of the channel's subscribers and are its best-retained videos (56–692 % average view percentage); making a video private does not remove its subscribers, and the format-hopping finding (K2) is about what a channel keeps uploading, not about its archive. The 5 titles flagged as policy-risk total 2.9 watch hours; none has a strike. No change.
+- **Display name.** Every one of the 23 growing and never-grew channels sampled has "Prayer" in its name (HYPOTHESIS, not measured), and our watermark already reads "HeroVerse Prayer". Renaming the channel title is a YouTube Studio action (the Data API does not change it), so it stays with the owner: Studio → Customization → Basic info → Name: "HeroVerse Prayer". The handle and the subscribers do not change.
+- **E57 (runner token 401).** Renders no longer wait on HERO_RUNNER_PAT: when the runner cannot be woken, the heartbeat renders on the engine.
+- **E58 (reviewer 503).** The designated reviewer is asked again within the run after 2, 5 and 10 minutes when it is overloaded.
