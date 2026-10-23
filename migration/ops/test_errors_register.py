@@ -23,6 +23,15 @@ class Register(unittest.TestCase):
                      'HeroVerse_Linux_Source_Ready_20261013_v2.zip']:
             self.assertTrue((ROOT / path).is_file(), path)
 
+    def test_push_triggers_ignore_deleted_files(self):
+        # E50: deleting pilot-001 (out/qa.json) fired approve.yml, which then looked for the deleted render
+        for name in ('approve.yml', 'publish.yml'):  # shorts.yml is byte-frozen (test_shorts_produce)
+            text = (ROOT / '.github/workflows' / name).read_text()
+            diffs = re.findall(r'git diff [^|]*HEAD~1 HEAD', text)
+            self.assertTrue(diffs, name)
+            for d in diffs:
+                self.assertIn('--diff-filter=AM', d, name)
+
     def test_heartbeat_dispatches_only_existing_workflows(self):
         scheduler = (ROOT / 'migration/ops/heartbeat.py').read_text()
         for name in set(re.findall(r'"workflow":\s*"([a-z0-9-]+\.yml)"', scheduler)):
