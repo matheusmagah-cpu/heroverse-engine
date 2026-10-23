@@ -59,6 +59,12 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - **3D cinematic look.** Every image and animation reads as a photoreal 3D cinematic render: volumetric light, global illumination, depth of field, real depth for the parallax. No flat illustration and no painting style.
   - Prompts end with the house suffix: `photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text`.
 
+- **R11.** Real cinematic motion (owner, 2026-10-23: "no static images, real cinematic animation"). Pilots with a `footage` list are rendered and judged under `production/qa_criteria_v4.json`:
+  - Licensed real footage alternates with the R10 stills, footage first. Scenes last 6–14 s (R3's 18–36 s scored pacing 6.5 on pilot-008), and ≥ 40 % of the picture time is real footage. The 5-minute repeat gap applies to clips and stills alike.
+  - Footage comes only from the shared library (`production/footage/library/`): Pexels License, CC0, public domain or CC BY. Never share-alike, non-commercial or clips from other channels.
+  - Every clip is vetted on its frame sheet (no people, text, logos or watermarks), credited in the description, hash-bound and graded like the stills.
+- **Owner floor.** Every new upload needs the designated watched review's overall ≥ 9.5 (owner, 2026-10-23), on top of the rubric's item ≥ 7 and overall ≥ 8.
+
 ## Gate
 
-`qa_pilot.py` with the frozen criteria `production/qa_criteria_v3.json` (deterministic, from the render manifest and the file) checks R1–R7; `prepublish_gate.py` blocks on every row (`DIMENSIONS_V3`). R8 is checked by the Shorts tests. One miss is a FAIL. It runs before the watched review, so the watched review never has to judge what a rule already decides.
+`qa_pilot.py` with the frozen criteria `production/qa_criteria_v3.json`, or `qa_criteria_v4.json` for R11 pilots (deterministic, from the render manifest and the file), checks R1–R7 and R11; `prepublish_gate.py` blocks on every row (`DIMENSIONS_V3` / `DIMENSIONS_V4`). R8 is checked by the Shorts tests. One miss is a FAIL. It runs before the watched review, so the watched review never has to judge what a rule already decides.

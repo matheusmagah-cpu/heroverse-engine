@@ -71,8 +71,8 @@ class Recovery(unittest.TestCase):
         self.assertEqual(len(value['shorts']),1)
         rec = value['shorts'][0]
         rec.update(qa={'status':'PASS'}, qa_output_sha256=self.hash,
-                   review={'status':'PASS','model':'gemini-3.8-flash','overall':9.1,'output_sha256':self.hash},
-                   publish=True, owner_quality_policy={'status':'PASS','minimum_overall':9,'problems':[]})
+                   review={'status':'PASS','model':'gemini-3.8-flash','overall':9.6,'output_sha256':self.hash},
+                   publish=True, owner_quality_policy={'status':'PASS','minimum_overall':9.5,'problems':[]})
         p.write_text(json.dumps(value))
 
     def run_review(self):
@@ -159,7 +159,7 @@ class Recovery(unittest.TestCase):
         self.now=datetime(2026,10,21,13,15,1,tzinfo=timezone.utc)
         result=self.run_review();self.assertFalse(result['shorts'][0]['publish'])
         self.assertEqual(result['shorts'][0]['release_status'],'TARGET_SLOT_LEAD_MISSED')
-        self.assertEqual(result['shorts'][0]['review']['overall'],9.1)
+        self.assertEqual(result['shorts'][0]['review']['overall'],9.6)
 
     def test_provider_exception_preserves_canonical(self):
         before=self.path.read_bytes();self.provider.side_effect=RuntimeError('synthetic')

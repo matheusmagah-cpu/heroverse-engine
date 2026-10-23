@@ -32,6 +32,8 @@ SCENE_TARGET = 22.0  # STANDARD R3: winners change scene every 20-30 s
 HOLD_MIN = 18.0
 HOLD_MAX = 36.0      # a longer hold is split in equal parts, each >= HOLD_MAX / 2 = HOLD_MIN
 REPEAT_GAP = 300.0   # no image again within 5 minutes
+# pilot-qa-criteria-v4 (owner, 2026-10-23): real licensed footage alternates with the stills, scenes 6-14 s
+FOOTAGE_TARGET, FOOTAGE_HOLD_MIN, FOOTAGE_HOLD_MAX = 9.0, 6.0, 14.0
 CARD = (310, 300, 1610, 700)  # Scripture card (R5), rounded, centred
 CARD_RADIUS = 36
 CTA = (("SUBSCRIBE", 60.0), ("LIKE", 0.45))  # R6: (text, start: seconds, or fraction of the length if < 1)
@@ -236,23 +238,28 @@ def scene_target(backgrounds):
 def holds(script, timeline, total):
     """Title card, then a new scene at the first sentence start at least scene_target() seconds after the
     previous change (and at least HOLD_MIN before the end), cycling through the plan's backgrounds in order.
+    With script["footage"] (v4) scenes are 6-14 s and alternate real footage and stills, footage first.
     No person or figure is drawn (STANDARD R1)."""
     overlay, backgrounds = script["overlay"], script["backgrounds"]
-    target = scene_target(backgrounds)
+    footage = script.get("footage") or []
+    if footage:
+        target, hold_min, hold_max = FOOTAGE_TARGET, FOOTAGE_HOLD_MIN, FOOTAGE_HOLD_MAX
+    else:
+        target, hold_min, hold_max = scene_target(backgrounds), HOLD_MIN, HOLD_MAX
     plan = [{"image": overlay["title_image"], "start": 0.0, "figure": False}]
     last = overlay["title_card_seconds"]
     plan.append({"start": last, "figure": False})
     for s in timeline["sentences"]:
-        if s["start"] - last >= target and total - s["start"] >= HOLD_MIN:
+        if s["start"] - last >= target and total - s["start"] >= hold_min:
             plan.append({"start": s["start"], "figure": False})
             last = s["start"]
     for a, b in zip(plan, plan[1:]):
         a["end"] = b["start"]
     plan[-1]["end"] = total
-    # no background held longer than HOLD_MAX: split long holds evenly
+    # no background held longer than hold_max: split long holds evenly
     out = [plan[0]]
     for h in plan[1:]:
-        parts = max(1, -(-(h["end"] - h["start"]) // HOLD_MAX))
+        parts = max(1, -(-(h["end"] - h["start"]) // hold_max))
         step = (h["end"] - h["start"]) / parts
         for p in range(int(parts)):
             out.append({"image": None, "start": round(h["start"] + p * step, 3),
@@ -260,7 +267,12 @@ def holds(script, timeline, total):
     # images assigned once, in plan order over the final holds: choosing them before the split let a split
     # piece and the next hold get the same background (pilot-004, QA FAIL 2026-10-18)
     for j, h in enumerate(out[1:]):
-        h["image"] = backgrounds[j % len(backgrounds)]
+        if footage and j % 2 == 0:
+            h["image"], h["kind"] = footage[(j // 2) % len(footage)], "footage"
+        elif footage:
+            h["image"], h["kind"] = backgrounds[(j // 2) % len(backgrounds)], "still"
+        else:
+            h["image"] = backgrounds[j % len(backgrounds)]
     # scene_target() only guarantees REPEAT_GAP for unsplit holds; split pieces can be HOLD_MAX / 2 = 18 s, so
     # 11 backgrounds came back after ~260 s and QA failed after a 2 h render (pilot-009, pilot-011; E46).
     # Refuse the plan here, before any encode.
@@ -268,7 +280,8 @@ def holds(script, timeline, total):
     for h in out[1:]:
         if h["image"] in last and h["start"] - last[h["image"]] < REPEAT_GAP - 1e-6:
             raise SystemExit(f"REPEAT_GAP_VIOLATION: {h['image']} back after {h['start'] - last[h['image']]:.1f} s "
-                             f"< {REPEAT_GAP:.0f} s with {len(backgrounds)} backgrounds (need more images)")
+                             f"< {REPEAT_GAP:.0f} s with {len(backgrounds)} backgrounds and {len(footage)} clips "
+                             "(need more images or footage)")
         last[h["image"]] = h["end"]
     return out
 
@@ -279,7 +292,20 @@ def compose(background, out):
     run(["ffmpeg", "-v", "error", "-y", "-i", str(background), "-vf", vf, "-frames:v", "1", str(out)])
 
 
-def assemble(work, script_path, images_dir, figure_path, music_path):
+def footage_raw(clip, out, seconds, start=0.0):
+    """A real footage scene (v4): the vetted clip, slowed only when it is shorter than the scene (never sped up),
+    graded like the stills so footage and stills read as one film."""
+    import cinematic
+    have = probe_duration(clip) - start
+    slow = max(1.0, seconds / max(have, 0.1))
+    run(["ffmpeg", "-v", "error", "-y", "-ss", f"{start:.3f}", "-i", str(clip), "-an", "-vf",
+         f"setpts={slow:.4f}*(PTS-STARTPTS),fps=30,scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,"
+         f"{cinematic.GRADE},trim=duration={seconds:.3f},setpts=PTS-STARTPTS,format=yuv420p",
+         "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-r", "30", str(out)])
+    return slow
+
+
+def assemble(work, script_path, images_dir, figure_path, music_path, footage_dir=None):
     import time
     t0 = time.time()
 
@@ -308,8 +334,17 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
     frames, clips = work / "frames", work / "holds"
     frames.mkdir(exist_ok=True)
     clips.mkdir(exist_ok=True)
-    used = {}
+    used, footage_used = {}, {}
+    footage = Path(footage_dir) if footage_dir else None
     for i, h in enumerate(plan):
+        if h.get("kind") == "footage":
+            meta = json.loads((footage / f"{h['image']}.json").read_text())
+            if sha256(footage / f"{h['image']}.mp4") != meta["sha256"]:
+                raise SystemExit(f"FOOTAGE_HASH_MISMATCH {h['image']}")
+            footage_used[h["image"]] = {k: meta.get(k) for k in ("id", "source", "page", "author", "licence",
+                                                                 "licence_url", "credit", "vetting", "sha256",
+                                                                 "release_asset")}
+            continue
         src = images / f"{h['image']}.png"
         meta = json.loads((images / f"{h['image']}.json").read_text())
         used[h["image"]] = {"sha256": sha256(src), "release_asset": meta.get("release_asset"), "models": meta["models"],
@@ -325,15 +360,19 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
     if cine:
         import cinematic
         model = Path(os.environ.get("HERO_DEPTH_MODEL", cine.get("depth_model", "")))
-        for i in range(len(plan)):
+        stills = [i for i in range(len(plan)) if plan[i].get("kind") != "footage"]
+        for i in stills:
             cinematic.grade(frames / f"{i:03d}.png")
-        cinematic.depth(model, [frames / f"{i:03d}.png" for i in range(len(plan))])
+        cinematic.depth(model, [frames / f"{i:03d}.png" for i in stills])
         mark("depth")
     # 1) each background moves for its hold plus the cross-fade tail: true depth parallax when
     #    cinematic, otherwise a smooth single-plane camera
     def raw(i):
         out, seconds = clips / f"raw-{i:03d}.mp4", length(i) + FADE
-        if cine:
+        if plan[i].get("kind") == "footage":
+            plan[i]["motion"] = "footage"
+            plan[i]["slow"] = round(footage_raw(footage / f"{plan[i]['image']}.mp4", out, seconds), 4)
+        elif cine:
             plan[i]["motion"] = "dolly_in" if i == 0 else cinematic.MOVES[i % len(cinematic.MOVES)]
             plan[i]["atmosphere"] = plan[i]["image"] in cine.get("atmosphere", [])
             cinematic.parallax(frames / f"{i:03d}.png", frames / f"{i:03d}.depth.png", out, seconds,
@@ -378,6 +417,8 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
          str(final)])
     mark("final_encode")
     grammar = "standard-v1:fullframe-depth-parallax+film-look+captions" if cine else "standard-v1:fullframe-moving+captions"
+    if footage_used:
+        grammar = "standard-v4:licensed-footage+depth-parallax+film-look+captions"
     manifest = {"version": "pilot-manifest-v2", "pilot_id": script["pilot_id"], "grammar": grammar,
                 "output_sha256": sha256(final), "output_seconds": probe_duration(final),
                 "script_sha256": sha256(script_path),
@@ -394,12 +435,12 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
                 "caption_style": {"box": False, "alignment": "bottom-centre", "outline": 4, "words_max": CAPTION_WORDS_MAX},
                 "cta": cta_events(total),
                 "scripture_cards": scripture_cards(script, timeline),
-                "scene_target_seconds": scene_target(script["backgrounds"]),
+                "scene_target_seconds": FOOTAGE_TARGET if script.get("footage") else scene_target(script["backgrounds"]),
                 "crossfade_seconds": FADE,
                 "cinematic": ({"depth_model": {"name": "Depth Anything V2 Small (ONNX)", "licence": "apache-2.0",
                                                "sha256": sha256(model)}, "grade": cinematic.GRADE, "look": cinematic.LOOK,
                                "atmosphere": cine.get("atmosphere", [])} if cine else None),
-                "clips": [], "shots": [], "timeline": timeline["segments"],
+                "clips": list(footage_used.values()), "shots": [], "timeline": timeline["segments"],
                 "upload_performed": False, "publication_performed": False}
     (work / "manifest.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False))
     print(json.dumps({"seconds": manifest["output_seconds"], "holds": len(plan), "images": len(used)}))
@@ -408,4 +449,4 @@ def assemble(work, script_path, images_dir, figure_path, music_path):
 if __name__ == "__main__":
     if sys.argv[1] != "assemble":
         raise SystemExit(__doc__)
-    assemble(*sys.argv[2:7])
+    assemble(*sys.argv[2:8])

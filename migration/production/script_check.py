@@ -21,6 +21,8 @@ WPM = 140                    # Kokoro narration measured on pilots 002-004 (QA A
 RESIDUAL_GAP = 0.067         # non-speech share inside spoken time, measured on the 003/004 renders
 SPEECH_MIN = 0.86
 BACKGROUNDS_MIN = 18  # E46/E48
+FOOTAGE_MIN = 20      # v4: 18 clips keep the 300 s gap on the 008/010/011 timelines; 20 leaves a margin
+FOOTAGE_LICENCES = ("Pexels License", "CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0")
 BANDS = {"morning": (22, 32), "night": (25, 38)}  # minutes; DECISIONS D-01/D-04, registered strategy 25-40
 REQUIRED = ("version", "pilot_id", "archetype", "spec", "working_title", "promise", "angle", "authorship", "voice",
             "segments", "figure", "backgrounds", "overlay", "description_intro", "hashtags", "thumbnail", "tags",
@@ -123,6 +125,21 @@ def check(pilot_dir, production=None):
     # images" (pilot-008 review 2026-10-20, E48); 18 also keeps REPEAT_GAP with 18 s split holds (E46)
     if len(set(s.get("backgrounds", []))) < BACKGROUNDS_MIN:
         problems.append(f"TOO_FEW_BACKGROUNDS {len(set(s.get('backgrounds', [])))} < {BACKGROUNDS_MIN}")
+    footage = s.get("footage") or []
+    if footage:  # v4: licensed real footage, only vetted clips of the shared library (owner, 2026-10-23)
+        lib = production / "footage" / "library"
+        if len(set(footage)) != len(footage):
+            problems.append("FOOTAGE_DUPLICATE_ID")
+        if len(set(footage)) < FOOTAGE_MIN:
+            problems.append(f"TOO_FEW_FOOTAGE {len(set(footage))} < {FOOTAGE_MIN}")
+        for c in footage:
+            rec = json.loads((lib / f"{c}.json").read_text()) if (lib / f"{c}.json").exists() else None
+            if rec is None:
+                problems.append(f"FOOTAGE_NOT_IN_LIBRARY {c}")
+            elif rec.get("vetting") != "APPROVED":
+                problems.append(f"FOOTAGE_NOT_VETTED {c} {rec.get('vetting')}")
+            elif rec.get("licence") not in FOOTAGE_LICENCES or not rec.get("release_asset"):
+                problems.append(f"FOOTAGE_RIGHTS {c} {rec.get('licence')}")
     mine = shingles(segs)
     backgrounds = set(s.get("backgrounds", []))
     image_comparisons = []

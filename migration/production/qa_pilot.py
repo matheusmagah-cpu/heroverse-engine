@@ -102,6 +102,27 @@ def grammar_checks_v3(criteria, manifest):
     }
 
 
+def grammar_checks_v4(criteria, manifest):
+    """pilot-qa-criteria-v4 (owner, 2026-10-23): the v3 grammar with 6-14 s scenes, at least a share of the picture
+    time in real footage, and footage rights in place of v3's no-footage rule. Footage holds carry kind "footage"
+    and the clip id in "image"; every clip used is listed in manifest["clips"] with its licence, vetting and credit."""
+    g, r = criteria["grammar"], criteria["rights"]
+    checks = grammar_checks_v3(criteria, manifest)
+    del checks["no_third_party_footage"]
+    scenes = manifest["holds"][1:]
+    span = sum(h["end"] - h["start"] for h in scenes)
+    footage = sum(h["end"] - h["start"] for h in scenes if h.get("kind") == "footage")
+    clips = manifest.get("clips") or []
+    used = {h["image"] for h in scenes if h.get("kind") == "footage"}
+    listed = {c.get("id") for c in clips}
+    allowed = set(r["allowed_footage_licences"])
+    checks["footage_picture_share"] = span > 0 and footage / span >= g["footage_picture_share_min"]
+    checks["footage_licensed_vetted_and_credited"] = bool(clips) and used <= listed and all(
+        c.get("licence") in allowed and c.get("vetting") == r["footage_vetting_required"] and c.get("credit")
+        and c.get("sha256") for c in clips)
+    return checks
+
+
 def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out):
     criteria = json.loads(Path(criteria_path).read_text())
     manifest = json.loads(Path(manifest_path).read_text())
@@ -152,8 +173,8 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
         checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
             c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
     else:
-        checks.update(grammar_checks_v3(criteria, manifest) if criteria["version"] == "pilot-qa-criteria-v3"
-                      else grammar_checks(criteria, manifest))
+        grammar = {"pilot-qa-criteria-v3": grammar_checks_v3, "pilot-qa-criteria-v4": grammar_checks_v4}
+        checks.update(grammar.get(criteria["version"], grammar_checks)(criteria, manifest))
     checks["music_owned"] = manifest["music"]["sha256"] == OWNED_MUSIC_SHA256
     checks["voice_model_pinned"] = manifest["voice"]["voice_id"] == "am_michael"
     checks = {k: bool(v) for k, v in checks.items()}  # numpy bools are not JSON serializable

@@ -21,7 +21,7 @@ def setup(tmp, approved=2, long_published=True, done=()):
     (d / "out").mkdir()
     (d / "out" / "manifest.json").write_text(json.dumps({"output_sha256": "abc"}))
     (d / "schedule.json").write_text(json.dumps(SCHED))
-    shorts = [{"file": f"short-0{i}.mp4", "sha256": f"{i:064x}", "publish": i < approved, "review": {"status": "PASS" if i < approved else "FAIL", "model": "gemini-3.8-flash", "overall": 9.0, "output_sha256": f"{i:064x}"}, "qa": {"status": "PASS"}}
+    shorts = [{"file": f"short-0{i}.mp4", "sha256": f"{i:064x}", "publish": i < approved, "review": {"status": "PASS" if i < approved else "FAIL", "model": "gemini-3.8-flash", "overall": 9.6, "output_sha256": f"{i:064x}"}, "qa": {"status": "PASS"}}
               for i in range(4)]
     (d / "shorts" / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-002", "shorts": shorts}))
     entries = {"pilot-002:abc": {"video_id": "L"}} if long_published else {}
@@ -39,7 +39,7 @@ def recovery_setup(tmp):
     (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-21T00:00:00Z", "shorts_slots": [rr.TARGET_SLOT]}))
     records = [{"file": f"short-0{i}.mp4", "sha256": rr.OUTPUT_SHA256 if i == 0 else str(i) * 64,
                 "publish": i == 0, "hook": "Prayer", "title": "Peace", "qa": {"status": "PASS"},
-                "review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9,
+                "review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.6,
                            "output_sha256": rr.OUTPUT_SHA256 if i == 0 else str(i) * 64}}
                for i in range(3)]
     records[0]["previous_review"] = {"status": rr.ORIGINAL_STATUS}

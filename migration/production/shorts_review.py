@@ -318,7 +318,7 @@ def main(shorts_dir, n="3"):
             rec["review"] = binding_failure("REVIEW_OUTPUT_HASH_MISMATCH", actual)
     for rec in spec["shorts"]:
         problems = owner_quality_policy.check(rec.get("review"), rec.get("qa_output_sha256"))
-        rec["owner_quality_policy"] = {"minimum_overall": 9.0, "status": "FAIL" if problems else "PASS", "problems": problems}
+        rec["owner_quality_policy"] = {"minimum_overall": owner_quality_policy.OWNER_FLOOR, "status": "FAIL" if problems else "PASS", "problems": problems}
     passing = sorted([r for r in spec["shorts"] if r["owner_quality_policy"]["status"] == "PASS"],
                      key=lambda r: (r["review"]["overall"], r["selection"].get("final_score") or 0), reverse=True)
     keep = {r["file"] for r in passing[:int(n)]}

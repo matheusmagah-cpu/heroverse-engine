@@ -35,8 +35,13 @@ import sys
 VERSION = "prepublish-gate-v1"
 FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d",
                           # migration/STANDARD.md v1, frozen 2026-10-19 before the first v3 render; v2 is unchanged
-                          "pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"}
+                          "pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+                          # owner, 2026-10-23: real licensed footage, 8-14 s scenes; v3 stays frozen and unchanged
+                          "pilot-qa-criteria-v4": "6b7c5e4bdb5537d4ecb0cad64ab5a9ceda8a8c6c3fbd970d6425819d04cd27af"}
 CRITERIA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v3.json"
+CRITERIA_FILES = {"pilot-qa-criteria-v3": CRITERIA_V3,
+                  "pilot-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v4.json"}
+STANDARD_VERSIONS = tuple(CRITERIA_FILES)  # STANDARD.md renders: the only ones approved or published
 PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
 # the watched review decides only when the designated model answered. Fallback free models score the same file
 # very differently (pilot-003: gemini-3.8-flash audio 9 / picture 8.5 / policy 10; gemini-3.6-flash on a near-identical
@@ -67,6 +72,13 @@ DIMENSIONS_V3 = {**DIMENSIONS,
                                   "crossfade_seconds_max", "image_repeat_gap", "scripture_card_only_while_read", "cta_count",
                                   "cta_short_and_not_early", "persistent_overlays_only_brand"],
                            "review": ["picture_quality", "figure_and_background_integrity"]}}
+# v4: footage rights replace v3's no-footage rule; the footage share is part of the picture
+DIMENSIONS_V4 = {**DIMENSIONS_V3,
+                 "image": {"qa": DIMENSIONS_V3["image"]["qa"] + ["footage_picture_share"],
+                           "review": DIMENSIONS_V3["image"]["review"]},
+                 "rights": {"qa": ["images_open_licence_with_revision", "footage_licensed_vetted_and_credited",
+                                   "music_owned", "voice_model_pinned"], "review": []}}
+DIMENSIONS_BY_VERSION = {"pilot-qa-criteria-v3": DIMENSIONS_V3, "pilot-qa-criteria-v4": DIMENSIONS_V4}
 # rows measured on our own file and script always block; miner rows block when long_review reports them as hard
 # (only once the miner is proven on the holdout) and are then checked like any other hard row
 SCORE_HARD = ("minutes", "scripture_per_10_min")
@@ -101,7 +113,7 @@ def binding(d, qa, manifest, review, video):
         out.append(item("binding", "qa_for_this_file", "PASS" if qa.get("output_sha256") == sha else "UNKNOWN",
                         qa.get("output_sha256")))
         frozen = FROZEN_CRITERIA_SHA256.get(qa.get("criteria_version"))
-        crit = CRITERIA_V3 if qa.get("criteria_version") == "pilot-qa-criteria-v3" else d / "qa_criteria.json"
+        crit = CRITERIA_FILES.get(qa.get("criteria_version"), d / "qa_criteria.json")
         real = sha256_file(crit) if crit.exists() else None
         ok = frozen is not None and qa.get("criteria_sha256") == frozen == real
         out.append(item("binding", "qa_criteria_frozen", "PASS" if ok else "FAIL",
@@ -160,7 +172,7 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     review = load(d / "out" / "review.json")
     sha = (manifest or {}).get("output_sha256")
     dims = {"binding": binding(d, qa, manifest, review, video)}
-    spec_by_dim = DIMENSIONS_V3 if (qa or {}).get("criteria_version") == "pilot-qa-criteria-v3" else DIMENSIONS
+    spec_by_dim = DIMENSIONS_BY_VERSION.get((qa or {}).get("criteria_version"), DIMENSIONS)
     for name, spec in spec_by_dim.items():
         dims[name] = qa_items(qa, spec["qa"], sha) + review_items(review, spec["review"], sha)
     # whole-video watched review: its overall score is a gate of its own
@@ -187,7 +199,7 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     else:
         dims["full_file_scan"] = [item("scan", n, "PASS" if r["pass"] else "FAIL", r["longest_s"])
                                   for n, r in scan["rows"].items() if r.get("blocking")]
-    if (qa or {}).get("criteria_version") == "pilot-qa-criteria-v3":
+    if (qa or {}).get("criteria_version") in STANDARD_VERSIONS:
         # owner rule 2026-10-19: approved by the system when it passes STRUCTURE (mined), MODELING (above) and
         # AUTHENTICITY; computed from the pilot's own files (three_stage.py), any error is UNKNOWN, never PASS
         try:

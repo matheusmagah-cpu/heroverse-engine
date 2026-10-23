@@ -1,0 +1,88 @@
+{
+ "version": "pilot-qa-criteria-v4",
+ "frozen_at_utc": "2026-10-23T12:00:00Z",
+ "basis": "Owner directive 2026-10-23: real cinematic motion instead of still images, licensed footage allowed. Technical and speech gates copied unchanged from pilot-qa-criteria-v3. Grammar: scenes 6-14 s (v3 18-36 s scored pacing 6.5, pilot-008), at least 40 % of the picture time real footage, same repeat gap, title card, captions and CTA rules. Rights: FLUX/SDXL stills as in v3 plus footage only under an accepted licence, vetted on its frame sheet (no people, text or branding) and credited in the description. pilot-qa-criteria-v3 stays frozen and unchanged.",
+ "technical": {
+  "full_decode_without_errors": true,
+  "video": "1920x1080, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+  "duration_seconds_min": 601,
+  "integrated_lufs": [
+   -16.0,
+   -14.0
+  ],
+  "true_peak_dbtp_max": -1.0
+ },
+ "speech": {
+  "speech_presence_min": 0.85,
+  "singing_presence_max": 0.0,
+  "wer_vs_script_max": 0.1,
+  "accepted_words_per_minute": [
+   115,
+   165
+  ],
+  "first_word_onset_seconds_max": 1.5,
+  "hook_second_person_within_seconds": 8
+ },
+ "rights": {
+  "every_image_generated_by_allowed_open_licence_model_with_revision": true,
+  "allowed_model_licences": [
+   "openrail++",
+   "openrail++-m",
+   "creativeml-openrail-m",
+   "apache-2.0",
+   "mit"
+  ],
+  "music_owned_generator_with_hash": true,
+  "voice_model_hash_pinned": true,
+  "script_original_with_public_domain_scripture_only": true,
+  "footage_licensed_vetted_and_credited": true,
+  "allowed_footage_licences": [
+   "Pexels License",
+   "CC0",
+   "Public domain",
+   "CC BY 2.0",
+   "CC BY 2.5",
+   "CC BY 3.0",
+   "CC BY 4.0"
+  ],
+  "footage_vetting_required": "APPROVED"
+ },
+ "failure_policy": "Any FAIL blocks approval; criteria are not edited after results to pass.",
+ "not_claimed": [
+  "Audience response, CTR, retention or revenue",
+  "Perceptual approval by a human",
+  "Publication authority"
+ ],
+ "grammar": {
+  "title_card_seconds": [
+   1.0,
+   3.0
+  ],
+  "figure_present_fraction_max": 0.0,
+  "every_scene_in_motion": true,
+  "scene_seconds": [
+   6.0,
+   14.0
+  ],
+  "crossfade_seconds_max": 1.0,
+  "image_repeat_gap_seconds_min": 300.0,
+  "caption_coverage_of_speech_min": 0.95,
+  "caption_hold_seconds_median": [
+   1.5,
+   5.0
+  ],
+  "caption_chars_max": 44,
+  "caption_words_max": 7,
+  "caption_box": false,
+  "scripture_card_only_while_read": true,
+  "cta_mid_video_max": 2,
+  "cta_seconds_max": 10.0,
+  "cta_first_start_seconds_min": 45.0,
+  "persistent_overlays_allowed": [
+   "brand"
+  ],
+  "footage_picture_share_min": 0.4
+ },
+ "perceptual_review_required_before_approval": "Watched review (long_review.watch); owner floor: overall >= 9.5 for new uploads.",
+ "frozen_before_first_v4_render": true
+}

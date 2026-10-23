@@ -293,7 +293,7 @@ class ReviewIntegration(OfflineTest):
             self.record(file="c.mp4", selection={"final_score": 999}),
             self.record(file="d.mp4", selection={"final_score": 2}),
         ]
-        reviews = [{"status": "PASS", "overall": 9}, {"status": "PASS", "overall": 9},
+        reviews = [{"status": "PASS", "overall": 9.6}, {"status": "PASS", "overall": 9.6},
                    {"status": "FAIL", "overall": 10}, {"status": "PASS", "overall": 8}]
         for record, verdict in zip(records, reviews):
             (self.root / record["file"]).write_bytes(b"abc")
@@ -313,7 +313,7 @@ class ReviewIntegration(OfflineTest):
         self.assertEqual(spec["review_rubric"]["pass_overall"], 8)
 
     def test_qa_digest_is_recomputed_instead_of_trusting_record(self):
-        verdict = {"status": "PASS", "overall": 9, "model": "gemini-3.8-flash", "output_sha256": ABC_SHA256}
+        verdict = {"status": "PASS", "overall": 9.6, "model": "gemini-3.8-flash", "output_sha256": ABC_SHA256}
         spec, reviewer, _, _ = self.run_main(
             [self.record(qa_output_sha256="e" * 64)], review_result=verdict)
         record = spec["shorts"][0]
@@ -359,7 +359,7 @@ class ReviewIntegration(OfflineTest):
         for status in ("PASS", "FAIL"):
             for stale_hash in (None, "e" * 64):
                 with self.subTest(status=status, stale_hash=stale_hash):
-                    copied = {"status": status, "overall": 9}
+                    copied = {"status": status, "overall": 9.6}
                     if stale_hash is not None:
                         copied["output_sha256"] = stale_hash
                     before = dict(copied)
@@ -377,7 +377,7 @@ class ReviewIntegration(OfflineTest):
                 self.output.write_bytes(b"abc")
                 def changed(path, record, key):
                     self.output.unlink() if unreadable else self.output.write_bytes(b"changed")
-                    return {"status": "PASS", "overall": 9, "output_sha256": ABC_SHA256}
+                    return {"status": "PASS", "overall": 9.6, "output_sha256": ABC_SHA256}
                 spec, reviewer, _, _ = self.run_main([self.record()], review_error=changed)
                 record = spec["shorts"][0]
                 self.assertFalse(record["publish"])
@@ -550,7 +550,7 @@ class HTTPReviewIntegration(OfflineTest):
         self.elapsed += seconds
         self.utc += timedelta(seconds=seconds if utc_seconds is None else utc_seconds)
 
-    def verdict(self, overall=9):
+    def verdict(self, overall=9.6):
         return {**{name: overall for name in sr.RUBRIC}, "overall": overall, "issues": [], "strongest_moment": "synthetic"}
 
     def response(self, value=None, headers=None, raw=None):

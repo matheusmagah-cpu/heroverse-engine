@@ -140,5 +140,33 @@ class StandardV3(unittest.TestCase):
                          g.FROZEN_CRITERIA_SHA256["pilot-qa-criteria-v3"])
 
 
+
+class StandardV4(unittest.TestCase):
+    """Owner, 2026-10-23: licensed real footage (pilot-qa-criteria-v4); v3 stays frozen and judged as before."""
+
+    def test_v4_render_needs_licensed_vetted_footage_and_its_share(self):
+        crit = (PROD / "qa_criteria_v4.json").read_bytes()
+        checks = sorted({c for spec in g.DIMENSIONS_V4.values() for c in spec["qa"]})
+        self.assertIn("footage_licensed_vetted_and_credited", checks)
+        self.assertIn("footage_picture_share", checks)
+        self.assertNotIn("no_third_party_footage", checks)
+        qa, man, rev = good()
+        qa.update({"criteria_version": "pilot-qa-criteria-v4", "criteria_sha256": hashlib.sha256(crit).hexdigest(),
+                   "checks": {c: True for c in checks}})
+        r = run(qa, man, rev, criteria=b"not the v4 file")
+        self.assertEqual(r["dimensions"]["binding"], "PASS")
+        self.assertEqual(r["dimensions"]["rights"], "PASS")
+        unvetted = copy.deepcopy(qa); unvetted["checks"]["footage_licensed_vetted_and_credited"] = False
+        self.assertEqual(run(unvetted, man, rev)["dimensions"]["rights"], "FAIL")
+        stills = copy.deepcopy(qa); stills["checks"]["footage_picture_share"] = False
+        self.assertEqual(run(stills, man, rev)["dimensions"]["image"], "FAIL")
+
+    def test_v4_criteria_frozen_hash_and_v3_untouched(self):
+        self.assertEqual(hashlib.sha256((PROD / "qa_criteria_v4.json").read_bytes()).hexdigest(),
+                         g.FROZEN_CRITERIA_SHA256["pilot-qa-criteria-v4"])
+        self.assertEqual(g.FROZEN_CRITERIA_SHA256["pilot-qa-criteria-v3"],
+                         "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3")
+
+
 if __name__ == "__main__":
     unittest.main()

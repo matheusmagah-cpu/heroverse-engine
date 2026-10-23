@@ -33,14 +33,14 @@ def check(qa, approval, manifest, gate, review=None):
     version = qa.get('criteria_version')
     if version not in canonical_gate.FROZEN_CRITERIA_SHA256:
         problems.append('QA_CRITERIA_VERSION_UNKNOWN')
-    mapping = canonical_gate.DIMENSIONS_V3 if version == 'pilot-qa-criteria-v3' else canonical_gate.DIMENSIONS
+    mapping = canonical_gate.DIMENSIONS_BY_VERSION.get(version, canonical_gate.DIMENSIONS)
     required = {name: {(kind, key) for kind, keys in spec.items() for key in keys}
                 for name, spec in mapping.items()}
     required['content_and_policy'].add(('review', 'overall'))
     required.update({'binding': {('binding', key) for key in ('manifest', 'qa_for_this_file', 'qa_criteria_frozen', 'review_for_this_file')},
                      'scorecard': {('score', key) for key in canonical_gate.SCORE_HARD},
                      'full_file_scan': set(), 'preflight': {('preflight', 'preflight')}})
-    if version == 'pilot-qa-criteria-v3': required.update({'structure': set(), 'authenticity': set()})
+    if version in canonical_gate.STANDARD_VERSIONS: required.update({'structure': set(), 'authenticity': set()})
     if review is not None:
         if not isinstance(review, dict) or review.get('status') != 'PASS' or review.get('output_sha256') != hashes[0]:
             problems.append('REVIEW_NOT_PASS_FOR_THIS_FILE')

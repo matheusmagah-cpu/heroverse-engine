@@ -98,6 +98,9 @@ def chapters(timeline):
     return rows
 
 
+DESCRIPTION_MAX = 4900  # YouTube's limit is 5,000 characters
+
+
 def main(work, script_path, out_dir):
     work, out = Path(work), Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -105,10 +108,12 @@ def main(work, script_path, out_dir):
     manifest = json.loads((work / "manifest.json").read_text())
     title = script["working_title"]
     v2 = manifest.get("version") == "pilot-manifest-v2"
-    credits = "\n".join("• " + c["attribution"] for c in manifest["clips"])
+    credits = "\n".join("• " + c["attribution"] for c in manifest["clips"] if c.get("attribution"))
     visuals = ([script.get("visual_credit") or "Illustrations: original HeroVerse images made with open-licence AI image "
                 "models (FLUX.1 schnell, Apache-2.0; Stable Diffusion XL, CreativeML Open RAIL++-M)."] if v2 else
                ["Footage credits (Creative Commons Attribution, picture only):", credits])
+    if v2 and manifest["clips"]:  # v4: licensed real footage, every clip credited (required for CC BY)
+        visuals += ["Footage credits:", *("• " + c["credit"] for c in manifest["clips"])]
     description = "\n".join([
         script.get("description_intro") or (
             "Before you walk into today, God has already been there. Pray this morning prayer with us for peace, "
@@ -128,11 +133,21 @@ def main(work, script_path, out_dir):
         *visuals,
         *(["", " ".join(script["hashtags"])] if script.get("hashtags") else []),
     ])
+    if len(description) > DESCRIPTION_MAX and manifest["clips"]:
+        # YouTube allows 5,000 characters: keep every credit, in the short form (author, licence, source page)
+        short = ["Footage credits:", *("• " + (f"{c.get('author') or 'unknown'}, {c['licence']}, {c['page']}")
+                                       for c in manifest["clips"])]
+        description = description.replace("\n".join(["Footage credits:", *("• " + c["credit"] for c in manifest["clips"])]),
+                                          "\n".join(short))
+    if len(description) > DESCRIPTION_MAX:
+        raise SystemExit(f"DESCRIPTION_TOO_LONG {len(description)} > {DESCRIPTION_MAX}")
     tags = script.get("tags") or ["morning prayer", "prayer for peace", "prayer for courage", "christian morning prayer",
             "start your day with God", "God goes before you", "Deuteronomy 31:8", "HeroVerse"]
     thumb = out / "thumbnail.jpg"
     if v2:  # figure over its first background, text stacked on the free right side
-        source = ["-i", str(work / "frames" / "001.png")]
+        # first scene's still; in v4 the first scenes may be footage, which has no still frame
+        stills = sorted(f for f in (work / "frames").glob("[0-9][0-9][0-9].png") if f.stem != "000")
+        source = ["-i", str(stills[0] if stills else work / "frames" / "001.png")]
         th = script.get("thumbnail") or {"lines": ["GOD WENT", "FIRST"], "sub": "Morning Prayer"}
         fit = lambda t, top: min(top, int(560 / (0.72 * max(len(t), 1))))  # keep every line inside the 620 px text column
         lines = [(t, fit(t, 100), "white", f"h*0.22+{115 * i}") for i, t in enumerate(th["lines"])]
@@ -155,7 +170,9 @@ def main(work, script_path, out_dir):
                "privacy_on_upload": "private", "thumbnail": thumb.name,
                "ai_generated_visuals": v2,
                "altered_or_synthetic_disclosure": ("Stylized devotional illustrations, not realistic footage; review YouTube's "
-                                                   "altered-content setting at upload") if v2 else None,
+                                                   "altered-content setting at upload") if v2 and not manifest["clips"] else
+                                                  ("Licensed real nature footage plus AI-generated stylized stills; no realistic "
+                                                   "people or events are depicted") if v2 else None,
                "first_comment": first_comment_for(script),
                "promise_matches_opening": script.get("promise") or "Title promise 'God has already gone ahead of you' is spoken at 0-8 s.",
                "upload_performed": False, "publication_performed": False}

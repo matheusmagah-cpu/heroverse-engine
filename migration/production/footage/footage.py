@@ -39,10 +39,27 @@ def get_json(url, headers=None):
         return json.loads(r.read())
 
 
-def licence_ok(source, licence):
+ACCEPTED = ("Pexels License", "CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0")  # = QA v4
+
+
+def canonical(source, licence):
+    """The licence as pilot-qa-criteria-v4 lists it ("CC BY 3.0 de" -> "CC BY 3.0"), or None when not accepted."""
     if source == "pexels":
-        return licence == "Pexels License"
-    return bool(COMMONS_OK.match((licence or "").strip()))
+        return "Pexels License" if licence == "Pexels License" else None
+    raw = (licence or "").strip()
+    if not COMMONS_OK.match(raw):
+        return None
+    if re.match(r"(?i)^(cc0|cc-zero)$", raw):
+        return "CC0"
+    if re.match(r"(?i)^(public domain|pd)$", raw):
+        return "Public domain"
+    m = re.match(r"(?i)^cc by (\d(\.\d)?)", raw)
+    lic = f"CC BY {m.group(1)}" if m else None
+    return lic if lic in ACCEPTED else None
+
+
+def licence_ok(source, licence):
+    return canonical(source, licence) is not None
 
 
 def eligible(c):
@@ -144,7 +161,8 @@ def main(queries_path, out_dir, per_theme="3"):
                 raw.unlink(missing_ok=True)
             sha = hashlib.sha256((out / f"{cid}.mp4").read_bytes()).hexdigest()
             rec = {"id": cid, "theme": theme["theme"], "query": theme["query"], **{k: c[k] for k in (
-                "source", "title", "page", "author", "licence", "licence_url")},
+                "source", "title", "page", "author", "licence_url")},
+                "licence": canonical(c["source"], c["licence"]), "licence_as_published": c["licence"],
                 "source_seconds": c["seconds"], "source_height": c["height"], "start": start, "seconds": keep,
                 "credit": credit(c), "picture": f"{W}x{H} {FPS} fps H.264 crf 18, no audio", "sha256": sha,
                 "vetting": "PENDING"}
