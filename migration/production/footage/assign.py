@@ -28,9 +28,17 @@ def usable(rec):
             and rec.get("frame") == [2560, 1440])   # v4 frame: >= 1440p (1080p clips of the first library are not)
 
 
-def choose(script, library, n=None):
+def choose(script, library, n=None, turn=0):
+    """turn rotates the theme order and each theme's clips, so pilots of the same mood open on different
+    footage and never share a shot order."""
     themes = MOOD_THEMES[mood(script)]
-    by_theme = {t: sorted(r["id"] for r in library if r.get("theme") == t and usable(r)) for t in themes}
+    anchors, rest = themes[:2], themes[2:]   # the hook shot comes from the mood's own themes (candle/night, sunrise/clouds)
+    themes = anchors[turn % 2:] + anchors[:turn % 2] + rest[turn % len(rest):] + rest[:turn % len(rest)]
+    by_theme = {}
+    for t in themes:
+        ids = sorted(r["id"] for r in library if r.get("theme") == t and usable(r))
+        k = turn % len(ids) if ids else 0
+        by_theme[t] = ids[k:] + ids[:k]
     out = []
     while any(by_theme.values()):
         for t in themes:
@@ -48,7 +56,8 @@ def main(pilot_dir, library_dir=None):
     path = d / "script.json"
     raw = path.read_text()
     script = json.loads(raw)
-    script["footage"] = choose(script, library)
+    turn = int(re.sub(r"\D", "", d.name) or 0)
+    script["footage"] = choose(script, library, turn=turn)
     indent = len(raw.split("\n")[1]) - len(raw.split("\n")[1].lstrip())
     path.write_text(json.dumps(script, indent=indent or 1, ensure_ascii=False) + "\n")
     print(json.dumps({"pilot": d.name, "mood": mood(script), "footage": len(script["footage"])}))

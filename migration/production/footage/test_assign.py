@@ -19,6 +19,14 @@ class Assign(unittest.TestCase):
         self.assertTrue(all(not c.startswith("clip-sunrise") for c in out))
         self.assertEqual(out[:4], ["clip-candle-0", "clip-night-0", "clip-candle-1", "clip-night-1"])
 
+    def test_pilots_of_one_mood_get_different_openings_and_orders(self):
+        library = lib(["candle", "night", "ocean", "lake"], 10)
+        a = assign.choose({"working_title": "Night Prayer"}, library, turn=8)
+        b = assign.choose({"working_title": "Night Prayer"}, library, turn=10)
+        self.assertNotEqual(a[0], b[0])
+        self.assertTrue(a[0].startswith(("clip-candle", "clip-night")) and b[0].startswith(("clip-candle", "clip-night")))
+        self.assertEqual(sorted(a), sorted(b))   # the same vetted clips, in another order
+
     def test_only_vetted_licensed_stored_clips(self):
         bad = lib(["sunrise"], 30, vetting="PENDING") + lib(["clouds"], 30, licence="CC BY-SA 4.0")
         with self.assertRaises(SystemExit):
