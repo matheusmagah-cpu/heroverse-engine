@@ -2553,7 +2553,14 @@
   "structure-mining.yml": "retired Gemini mining route: SYSTEM.md, ERRORS E09/E13 and issue 177",
   "packaging-mining.yml": "retired mining route; shared library and regression tests retained",
   "mining-accuracy.yml": "retired scheduled mining route; arithmetic/holdout library and tests retained",
-  "acquire-reference-window.yml": "retired mining workflow which dispatches mining-accuracy; bounded instruments retained"
+  "acquire-reference-window.yml": "retired mining workflow which dispatches mining-accuracy; bounded instruments retained",
+  "animation-preview.yml": "Dot animation prototype, never run; superseded by licensed footage (R11, 2026-10-23)",
+  "animation-render-test.yml": "Dot animation prototype; superseded by licensed footage (R11, 2026-10-23)",
+  "local-review-calibration.yml": "local reviewer calibration did not qualify (SmolVLM2); not in the production chain",
+  "review-calibration.yml": "one-off reviewer calibration; not in the production chain",
+  "reviewer-preflight.yml": "isolated reviewer qualifications consumed (Interactions, inline, stable, stream); history in evidence/reviewer-qualification",
+  "official-rules.yml": "one-off official rules snapshot; not in the production chain",
+  "thumbnail-audit.yml": "one-off R9 thumbnail audit (2026-10-19); result kept in STANDARD.md R9"
  },
  "deletions": {
   "migration/__pycache__/collect_official_evidence.cpython-313.pyc": {
@@ -2627,5 +2634,25 @@
   "No media, approval, receipt, qualification threshold, provider secret or publication slot changed.",
   "No render, review, upload, provider call or replay of passed audiovisual checks.",
   "No Git history rewrite or release-asset deletion. Archived code is historical and must not be run in place."
- ]
+ ],
+ "lean_2026_10_23": {
+  "owner": "Projeto bem enxuto, bem direcionado (2026-10-23)",
+  "workflows": [
+   "animation-preview.yml",
+   "animation-render-test.yml",
+   "local-review-calibration.yml",
+   "official-rules.yml",
+   "review-calibration.yml",
+   "reviewer-preflight.yml",
+   "thumbnail-audit.yml"
+  ],
+  "modules": [
+   "production/local_review.py",
+   "production/review_calibration.py",
+   "production/reviewer_qualification.py",
+   "production/animation/",
+   "mining/official_rules.py",
+   "mining/thumbnail_audit.py"
+  ]
+ }
 }
