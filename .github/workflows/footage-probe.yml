@@ -1,0 +1,15 @@
+name: HeroVerse footage probe (temporary)
+on:
+  pull_request:
+    paths: ['migration/production/footage/probe.py', '.github/workflows/footage-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: python3 -I -B migration/production/footage/probe.py
