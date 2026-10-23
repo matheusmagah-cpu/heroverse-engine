@@ -1,0 +1,28 @@
+{
+ "id": "bg-armour-fortress-doors",
+ "prompt": "Massive ancient wooden fortress doors standing open to a sunlit meadow, warm morning light streaming through the archway, peaceful, no weapons, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 4.6,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-009-img-bg-armour-fortress-doors-sha256-ddcf97c2d93bd03e5711ce08d01ec06c5386b81186c9a21f49298a064ed30474.png",
+ "sha256": "ddcf97c2d93bd03e5711ce08d01ec06c5386b81186c9a21f49298a064ed30474"
+}
