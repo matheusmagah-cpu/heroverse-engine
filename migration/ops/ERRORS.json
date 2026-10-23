@@ -353,6 +353,36 @@
     "file": "migration/ops/test_errors_register.py",
     "contains": "def test_retired_workflows_cannot_reenter_the_scheduler"
    }
+  },
+  {
+   "id": "E46",
+   "date": "2026-10-23",
+   "error": "pilot-009 and pilot-011 failed QA image_repeat_gap after a full render: scene_target() only guaranteed 300 s between repeats for unsplit holds, but holds over HOLD_MAX are split into 18 s pieces, so 11 backgrounds came back after ~260 s.",
+   "fix": "still_render.holds() refuses the plan with REPEAT_GAP_VIOLATION before any encode; script_check requires BACKGROUNDS_MIN = 18, which keeps the gap with 18 s pieces.",
+   "antidote": {
+    "file": "migration/production/test_still_render.py",
+    "contains": "def test_split_holds_with_eleven_backgrounds_refused_before_render"
+   }
+  },
+  {
+   "id": "E47",
+   "date": "2026-10-23",
+   "error": "The voice spelled the KJV all-caps divine name GOD letter by letter ('G-O-D', pilot-008 17:36, Ezekiel 34:11).",
+   "fix": "pilot_render.speech_text() sends LORD/GOD/JEHOVAH/JESUS/CHRIST as capitalized words to the voice only; captions and script keep the KJV text.",
+   "antidote": {
+    "file": "migration/production/test_still_render.py",
+    "contains": "def test_divine_names_in_capitals_are_spoken_as_words"
+   }
+  },
+  {
+   "id": "E48",
+   "date": "2026-10-23",
+   "error": "pilot-008 (12 backgrounds for 28 min) scored pacing_and_visual_variety 6.5, overall 8.0: 'a small loop of recurring AI landscape images'.",
+   "fix": "script_check requires at least 18 distinct backgrounds; 008, 009 and 011 get new R10 backgrounds before re-render.",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_too_few_backgrounds_fail_pilot_008"
+   }
   }
  ]
 }

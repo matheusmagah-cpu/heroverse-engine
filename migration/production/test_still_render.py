@@ -48,6 +48,43 @@ class Holds(unittest.TestCase):
             self.assertTrue(all(a["image"] != b["image"] for a, b in zip(plan[1:], plan[2:])), total)
 
 
+class RepeatGap(unittest.TestCase):
+    """E46: split holds made 11 backgrounds come back after ~260 s (pilot-009, pilot-011 QA FAIL 2026-10-20/21)."""
+
+    @staticmethod
+    def plan(n):
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": [f"bg-{i}" for i in range(n)]}
+        sents = [{"start": 2.5 + 40.0 * k, "end": 2.5 + 40.0 * k + 30.0, "text": "x"} for k in range(40)]
+        return sr.holds(script, {"sentences": sents}, 1610.0)
+
+    def test_split_holds_with_eleven_backgrounds_refused_before_render(self):
+        with self.assertRaises(SystemExit) as e:
+            self.plan(11)
+        self.assertIn("REPEAT_GAP_VIOLATION", str(e.exception))
+
+    def test_eighteen_backgrounds_keep_the_gap(self):
+        plan, seen = self.plan(18), {}
+        for h in plan[1:]:
+            if h["image"] in seen:
+                self.assertGreaterEqual(h["start"] - seen[h["image"]], sr.REPEAT_GAP - 1e-6, h)
+            seen[h["image"]] = h["end"]
+
+
+class SpeechText(unittest.TestCase):
+    """E47: the voice spelled "G-O-D" for the KJV "Lord GOD" (pilot-008 review, 17:36)."""
+
+    def test_divine_names_in_capitals_are_spoken_as_words(self):
+        from pilot_render import speech_text
+        self.assertEqual(speech_text("For thus saith the Lord GOD; Behold, I, even I."),
+                         "For thus saith the Lord God; Behold, I, even I.")
+        self.assertEqual(speech_text("The LORD is my shepherd."), "The Lord is my shepherd.")
+        self.assertEqual(speech_text("GODLY men and LORDS"), "GODLY men and LORDS")  # whole words only
+
+    def test_captions_keep_the_kjv_text(self):
+        line = "For thus saith the Lord GOD"
+        self.assertIn("GOD", " ".join(sr.chunks(line)))
+
+
 class Reference(unittest.TestCase):
     def test_reference_leaves_before_the_closing_words_pilot_003(self):
         timeline = json.loads((HERE / "pilot-003/out/timeline.json").read_text())

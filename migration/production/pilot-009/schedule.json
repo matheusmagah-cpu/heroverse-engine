@@ -1,7 +1,7 @@
 {
- "publish_at": "2026-10-22T10:00:00Z",
+ "publish_at": "2026-10-24T10:00:00Z",
  "shorts_slots": [
-  "2026-10-22T20:00:00Z"
+  "2026-10-24T20:00:00Z"
  ],
- "note": "Morning slot fixed by issue #119 SPEC v3. Existing publication gates remain mandatory."
+ "note": "Rescheduled 2026-10-23 from 2026-10-22T10:00:00Z: the slot passed while the designated reviewer returned 503 / the render failed QA. Existing approval gates remain mandatory."
 }

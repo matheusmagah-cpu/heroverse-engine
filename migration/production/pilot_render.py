@@ -66,6 +66,15 @@ def sentences(text):
     return [s.strip() for s in re.split(r"(?<=[.!?:;])\s+", text) if s.strip()]
 
 
+# KJV prints divine names in capitals ("the Lord GOD"); the voice spelled "GOD" letter by letter (pilot-008, 17:36,
+# review 2026-10-20, E47). Only the text sent to the voice is changed: captions, script and timeline keep the KJV form.
+DIVINE_CAPS = re.compile(r"\b(LORD|GOD|JEHOVAH|JESUS|CHRIST)\b")
+
+
+def speech_text(sentence):
+    return DIVINE_CAPS.sub(lambda m: m.group(1).capitalize(), sentence)
+
+
 def prepare(work, archive):
     """Extract the hash-verified source archive (manifest-checked, no unsafe
     members) and fetch the hash-pinned public Kokoro assets, exactly as the
@@ -126,7 +135,7 @@ def voice(work, script_path):
             path = work / "voice" / f"{segment['id']}-{index:02d}.wav"
             for attempt in range(3):  # the adapter occasionally returns empty audio; the same sentence then succeeds
                 try:
-                    receipt = synthesize_voice_sample(engine, text=sentence, output_path=path,
+                    receipt = synthesize_voice_sample(engine, text=speech_text(sentence), output_path=path,
                                                       voice_id=cfg["voice_id"], speed=cfg["speed"])
                     break
                 except RuntimeError as e:
