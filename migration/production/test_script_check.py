@@ -20,6 +20,10 @@ def make(t, mutate=None, name="pilot-099", at="2099-01-01T10:00:00Z"):
     shutil.copytree(HERE / "pilot-003", prod / "pilot-003", ignore=shutil.ignore_patterns("out", "market", "shorts", "inspection"))
     s = json.loads((prod / name / "script.json").read_text())
     s["pilot_id"] = name
+    # pilot-005 has 14 backgrounds, below BACKGROUNDS_MIN (E48): add hydrated fixture-only records to reach the floor
+    for i in range(sc.BACKGROUNDS_MIN - len(set(s["backgrounds"]))):
+        s["backgrounds"].append(f"bg-fixture-extra-{i}")
+        (prod / name / "images" / f"bg-fixture-extra-{i}.json").write_text("{}")
     if mutate:
         mutate(s, prod / name)
     (prod / name / "script.json").write_text(json.dumps(s))
@@ -48,7 +52,9 @@ class Check(unittest.TestCase):
                 other = Path(t) / name
                 other.mkdir()
                 (other / "script.json").write_text(json.dumps({"backgrounds": backgrounds, "segments": []}))
-            return sc.check(pilot, Path(t))
+            problems, stats = sc.check(pilot, Path(t))
+            # the known-answer sets are deliberately small; the background floor has its own test
+            return [x for x in problems if not x.startswith("TOO_FEW_BACKGROUNDS")], stats
 
     def test_image_set_overlap_identical_008_012(self):
         problems, stats = self.overlap_fixture(["a", "b"], {"pilot-012": ["a", "b"]})
@@ -96,6 +102,12 @@ class Check(unittest.TestCase):
 
     def test_real_pilot_passes(self):
         self.assertEqual(self.run_check(), [])
+
+    def test_too_few_backgrounds_fail_pilot_008(self):
+        # E48: 12 backgrounds for 28 minutes scored pacing 6.5 ("a small loop of recurring images")
+        def twelve(s, d):
+            s["backgrounds"] = s["backgrounds"][:12]
+        self.assertIn("TOO_FEW_BACKGROUNDS 12 < 18", self.run_check(twelve))
 
     def test_copied_prayer_fails(self):
         other = json.loads((HERE / "pilot-003" / "script.json").read_text())["segments"]

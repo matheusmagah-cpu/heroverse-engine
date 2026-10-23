@@ -20,6 +20,7 @@ FROZEN_QA = "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"
 WPM = 140                    # Kokoro narration measured on pilots 002-004 (QA ASR 132.7-141)
 RESIDUAL_GAP = 0.067         # non-speech share inside spoken time, measured on the 003/004 renders
 SPEECH_MIN = 0.86
+BACKGROUNDS_MIN = 18  # E46/E48
 BANDS = {"morning": (22, 32), "night": (25, 38)}  # minutes; DECISIONS D-01/D-04, registered strategy 25-40
 REQUIRED = ("version", "pilot_id", "archetype", "spec", "working_title", "promise", "angle", "authorship", "voice",
             "segments", "figure", "backgrounds", "overlay", "description_intro", "hashtags", "thumbnail", "tags",
@@ -118,6 +119,10 @@ def check(pilot_dir, production=None):
         problems.append(f"POLICY_WORDING {hits}")
     if len(",".join(s.get("tags", []))) > 450:
         problems.append("TAGS_TOO_LONG")
+    # a long video needs enough distinct backgrounds: 12 for 28 min scored pacing 6.5, "a small loop of recurring
+    # images" (pilot-008 review 2026-10-20, E48); 18 also keeps REPEAT_GAP with 18 s split holds (E46)
+    if len(set(s.get("backgrounds", []))) < BACKGROUNDS_MIN:
+        problems.append(f"TOO_FEW_BACKGROUNDS {len(set(s.get('backgrounds', [])))} < {BACKGROUNDS_MIN}")
     mine = shingles(segs)
     backgrounds = set(s.get("backgrounds", []))
     image_comparisons = []

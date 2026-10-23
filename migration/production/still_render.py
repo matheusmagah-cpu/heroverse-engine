@@ -261,6 +261,15 @@ def holds(script, timeline, total):
     # piece and the next hold get the same background (pilot-004, QA FAIL 2026-10-18)
     for j, h in enumerate(out[1:]):
         h["image"] = backgrounds[j % len(backgrounds)]
+    # scene_target() only guarantees REPEAT_GAP for unsplit holds; split pieces can be HOLD_MAX / 2 = 18 s, so
+    # 11 backgrounds came back after ~260 s and QA failed after a 2 h render (pilot-009, pilot-011; E46).
+    # Refuse the plan here, before any encode.
+    last = {}
+    for h in out[1:]:
+        if h["image"] in last and h["start"] - last[h["image"]] < REPEAT_GAP - 1e-6:
+            raise SystemExit(f"REPEAT_GAP_VIOLATION: {h['image']} back after {h['start'] - last[h['image']]:.1f} s "
+                             f"< {REPEAT_GAP:.0f} s with {len(backgrounds)} backgrounds (need more images)")
+        last[h["image"]] = h["end"]
     return out
 
 
