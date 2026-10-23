@@ -25,6 +25,7 @@ UA = {"User-Agent": "HeroVerse/1.0 (https://github.com/matheusmagah-cpu/herovers
 MIN_HEIGHT = 1080
 MIN_SECONDS = 8.0
 CLIP_SECONDS = 20.0          # at most this much of each source is kept
+TRIES_PER_QUERY = 6          # downloads per query at most (accepted or rejected)
 W, H, FPS = 1920, 1080, 30
 # R1 (no people) and no text or branding on screen: titles that announce them are refused before download
 BLOCK = re.compile(r"(?i)\b(people|person|man|men|woman|women|girl|boy|child|children|kid|crowd|tourist|selfie|"
@@ -231,11 +232,14 @@ def main(queries_path, out_dir, per_theme="3"):
         if key:
             cands += pexels_search(theme["query"], key)
         cands += commons_search(theme["query"])
-        picked = 0
+        picked = tried = 0
         for c in sorted((c for c in cands if eligible(c)), key=lambda c: (c["source"] != "pexels", -(c["seconds"]))):
             cid = f"clip-{theme['theme']}-{slug(c['title'])}"
             if cid in have or picked >= int(per_theme) or c["page"] in seen_pages:
                 continue
+            if tried >= TRIES_PER_QUERY:  # bounded run time: rejected candidates never stall the whole library
+                break
+            tried += 1
             raw = out / f"{cid}.src"
             try:
                 req = urllib.request.Request(c["download"], headers=UA)
