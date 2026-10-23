@@ -228,3 +228,9 @@ Owner: "compare everything… structure, every detail, so we only produce what t
 - **Seen.** Breakouts: huge bold text across the frame (search phrase on top, hook below), warm gold light, one template per channel. Dead: dark, cool, desaturated, thin small text (a whole channel of them never broke out), dated thumbnails.
 - **Ours before.** Darkened frame, text in the right half at most 14 % of the height: the dead style.
 - **Decision.** STANDARD R16: breakout layout over the warmest still, and a thumbnail ruler in every render.
+
+## Voice A/B judged by the ruler (2026-10-23, run 39993253146)
+The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85) and Chatterbox (MIT, cloned from our Kokoro), then measured by `voice_judge.py`.
+- Kokoro: WER 0.016, F0 112 Hz, 3.58 semitones, 135 wpm, pauses 0.72 s (max 1.94 s), 0 glitches. PASS.
+- Chatterbox calm: one audible glitch (FAIL). Chatterbox warm: 153 wpm, too fast (FAIL). Both took about 10 CPU s per audio s, which is about 2.7 h for a 16-minute prayer.
+- **Decision.** Kokoro stays. The study's breakout voices all speak at about 60–120 wpm, slower than our 135: a slower Kokoro speed is the next voice test, measured by the same ruler.
