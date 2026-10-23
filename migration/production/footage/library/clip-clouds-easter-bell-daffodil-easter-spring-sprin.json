@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "4cb89e4bf1bdfc20f0272b5bfebb06652f49e8cfbd7824346c06ba73911a715f",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "studio flower on grey backdrop, off-theme"
+ ],
  "vetting_luma": [
   171.4,
   173.3,

@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "6f65617d3474e2df463e47f5b1db20498a9b3f42b7eedd6a6bbea16dd9f2a09c",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "Christmas figurines and lettering"
+ ],
  "vetting_luma": [
   12.2,
   12.4,

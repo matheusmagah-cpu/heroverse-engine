@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "c97e8f3ac02b22adc43d4db5416b8441dc92e2832bc9d487a38dac844c4b6984",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "vehicle behind the field"
+ ],
  "vetting_luma": [
   140.7,
   141.5,

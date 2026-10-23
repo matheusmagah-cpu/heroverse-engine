@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "bda676006d90480820c9b4ad6705aa0b85cda8339eb23b97ec89d188f2c00959",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "farmland and tower"
+ ],
  "vetting_luma": [
   81.3,
   81.3,

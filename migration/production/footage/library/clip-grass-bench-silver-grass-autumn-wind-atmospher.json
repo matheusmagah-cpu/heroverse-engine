@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "cf4b48035414e718107bbd5c9f4dc459a9187437110ec44875ff2ee6fc16c34d",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "park bench and paved path"
+ ],
  "vetting_luma": [
   127.4,
   126.7,

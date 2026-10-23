@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "3c341d602d1c298ed43221ecbbab6fd57285c7b438d3e8992e8d1299bdb5edcc",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "people on the horizon"
+ ],
  "vetting_luma": [
   137.5,
   135.2,
