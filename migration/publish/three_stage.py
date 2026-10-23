@@ -84,6 +84,11 @@ def in_window(t, window):
     return a <= hm <= b if a <= b else (hm >= a or hm <= b)
 
 
+# full-frame grammars in which every hold moves: v1 (moving stills) and v4 (licensed footage). E56: pilot-010, the
+# first v4 render, failed this row with all 178 holds in motion because only "standard-v1" was accepted.
+MOTION_GRAMMARS = ("standard-v1", "standard-v4")
+
+
 def structure_rows(d):
     d = Path(d)
     script = json.loads((d / "script.json").read_text())
@@ -98,7 +103,7 @@ def structure_rows(d):
     # drivers (structure_audit.json: winners vs weak contrasts)
     holds = manifest.get("holds") or []
     rows.append(row("driver_continuous_motion", bool(holds) and all(h.get("motion") for h in holds)
-                    and str(manifest.get("grammar", "")).startswith("standard-v1"), len(holds), "structure"))
+                    and str(manifest.get("grammar", "")).startswith(MOTION_GRAMMARS), len(holds), "structure"))
     early = [s for s in timeline.get("sentences", []) if s["start"] <= 5.0]
     rows.append(row("driver_viewer_hook_5s", any(YOU.search(s["text"]) for s in early),
                     [s["text"][:60] for s in early], "structure"))
