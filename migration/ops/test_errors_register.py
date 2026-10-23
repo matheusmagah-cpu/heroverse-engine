@@ -25,7 +25,7 @@ class Register(unittest.TestCase):
 
     def test_push_triggers_ignore_deleted_files(self):
         # E50: deleting pilot-001 (out/qa.json) fired approve.yml, which then looked for the deleted render
-        for name in ('approve.yml', 'publish.yml', 'shorts.yml'):
+        for name in ('approve.yml', 'publish.yml'):  # shorts.yml is byte-frozen (test_shorts_produce)
             text = (ROOT / '.github/workflows' / name).read_text()
             diffs = re.findall(r'git diff [^|]*HEAD~1 HEAD', text)
             self.assertTrue(diffs, name)

@@ -327,8 +327,8 @@
   {
    "id": "E50",
    "date": "2026-10-23",
-   "error": "Deleting the unused pilot-001 (PR #292) removed its out/qa.json; that push fired approve.yml, whose pilot lookup listed the deleted file and failed on the missing render (run 39949492128). publish.yml and shorts.yml had the same lookup.",
-   "fix": "The push lookups in approve.yml, publish.yml and shorts.yml use git diff --diff-filter=AM (added or modified only); approve and shorts end cleanly with SKIP when a push added nothing.",
+   "error": "Deleting the unused pilot-001 (PR #292) removed its out/qa.json; that push fired approve.yml, whose pilot lookup listed the deleted file and failed on the missing render (run 39949492128). publish.yml had the same lookup.",
+   "fix": "The push lookups in approve.yml and publish.yml use git diff --diff-filter=AM (added or modified only); approve ends cleanly with SKIP when a push added no render. shorts.yml stays byte-frozen by its editorial tests.",
    "antidote": {
     "file": "migration/ops/test_errors_register.py",
     "contains": "def test_push_triggers_ignore_deleted_files"
