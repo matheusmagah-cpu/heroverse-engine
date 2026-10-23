@@ -11,9 +11,9 @@ on:
         required: false
         default: '4'
       kokoro_speeds:
-        description: Kokoro speeds to judge (space separated)
+        description: Kokoro speeds to judge, space separated (the verified engine accepts 0.80-1.25)
         required: false
-        default: '0.85 0.80 0.78 0.75'
+        default: '0.85 0.80'
       chatterbox:
         description: Also narrate with Chatterbox (about 25 min of CPU)
         required: false
