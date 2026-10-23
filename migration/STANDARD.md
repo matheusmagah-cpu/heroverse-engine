@@ -74,6 +74,11 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - A `rehook-N` segment previews the next prayer at least every 3.5 min until the commitment or payoff (promise, deliver, promise the next). Sleep readings after the CTA are exempt: they must not wake the listener.
   - The spoken CTA invites a prayer request in the comments, and the next prayer of the same series prays over the requests shared (themes only, never names): the community ritual is the channel's authenticity layer and the reason to return.
   - Variety against the inauthentic-content policy (YouTube, July 2025: "template with little to no variation"): consecutive pilots of one series alternate archetype (passage walk-through such as 008/009/011, topical guided prayer such as 010/013/014, a retold Bible narrative with prayer), and every script is written for its own topic.
+- **R14.** What the algorithm promotes and kills (study of 811 videos in 23 channels plus 98 niche breakouts, strict within-channel-and-month tests: `evidence/vidiq/20261023/algorithm_study/REPORT.md`). Checked by `script_check.title_problems` for v4 pilots:
+  - Title = hook (time anchor or gratitude) + one emoji `|` an exact search phrase (Morning/Night/Bedtime/Evening Prayer). Never a date, weekday, month or year (×10 odds of a dead video, p = 0.001).
+  - One format per slot, every day, no hopping (every never-grew channel hops; every grower repeats).
+  - Gratitude themes first in the cold start (dead odds ×0.35, p = 0.002); morning 15–25 min; night moves to ≥ 60 min, then ≥ 90 min of guided prayer plus Scripture for sleep (≥ 90 min was never dead, p = 0.008).
+  - Script polish does not unlock a cold channel (dead videos read as well as winners); packaging, format and the channel's audience profile do.
 - **Owner floor.** Every new upload needs the designated watched review's overall ≥ 9.5 (owner, 2026-10-23), on top of the rubric's item ≥ 7 and overall ≥ 8.
 
 ## Gate

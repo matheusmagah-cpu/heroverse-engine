@@ -107,6 +107,29 @@ def continuity_problems(segs):
     return problems
 
 
+TITLE_DATE = re.compile(r"(?i)\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|january|february|march|"
+                        r"april|june|july|august|september|october|november|december|20\d\d)\b")
+SEARCH_PHRASE = re.compile(r"(?i)\b(morning prayer|night prayer|bedtime prayer|evening prayer|prayer before (sleep|bed))\b")
+EMOJI = re.compile(r"[\U0001F300-\U0001FAFF\u2600-\u27BF]")
+
+
+def title_problems(title):
+    """R14 (algorithm study 2026-10-23, evidence/vidiq/20261023/algorithm_study/REPORT.md): a date, weekday, month or
+    year in the title multiplies the odds of a dead video by 10 (p = 0.001); two-part "hook | search phrase" titles and
+    one emoji double the odds of a breakout (p = 0.009, 0.010)."""
+    problems = []
+    if TITLE_DATE.search(title):
+        problems.append("TITLE_HAS_DATE (R14: x10 odds of a dead video)")
+    hook, _, tail = title.partition("|")
+    if not tail.strip():
+        problems.append("TITLE_NOT_HOOK_PIPE_SEARCH_PHRASE (R14)")
+    elif not SEARCH_PHRASE.search(tail):
+        problems.append("TITLE_TAIL_NOT_A_SEARCH_PHRASE (R14: Morning/Night/Bedtime/Evening Prayer)")
+    if not EMOJI.search(title):
+        problems.append("TITLE_NO_EMOJI (R14)")
+    return problems
+
+
 def check(pilot_dir, production=None):
     d = Path(pilot_dir)
     production = Path(production) if production else d.parent
@@ -155,6 +178,7 @@ def check(pilot_dir, production=None):
     if s.get("footage") and segs and ids[0] == "hook":
         problems += hook_problems(segs[0].get("text", ""))
         problems += continuity_problems(segs)
+        problems += title_problems(s.get("working_title", ""))
     t, first_prayer = 0.0, None
     for x in segs:
         if x.get("id", "").startswith("prayer"):

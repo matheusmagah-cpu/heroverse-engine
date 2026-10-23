@@ -119,6 +119,15 @@ class Check(unittest.TestCase):
         self.assertTrue(any(p.startswith("FOOTAGE_NOT_VETTED") for p in self.run_check(footage(20, vetting="PENDING"))))
         self.assertTrue(any(p.startswith("FOOTAGE_RIGHTS") for p in self.run_check(footage(20, licence="CC BY-SA 4.0"))))
 
+    def test_title_rules_r14(self):
+        ok = "Before You Sleep, Thank God for Everything 🙏 | Night Prayer for Gratitude & Rest"
+        self.assertEqual(sc.title_problems(ok), [])
+        self.assertIn("TITLE_HAS_DATE", " ".join(sc.title_problems("Friday July 24 🙏 | Morning Prayer for Breakthrough")))
+        self.assertIn("TITLE_HAS_DATE", " ".join(sc.title_problems("Powerful October Morning Prayer 🙏 | Morning Prayer")))
+        self.assertIn("TITLE_NOT_HOOK_PIPE", " ".join(sc.title_problems("Let God Do The Math Today 🙏")))
+        self.assertIn("TITLE_TAIL_NOT_A_SEARCH_PHRASE", " ".join(sc.title_problems("Rest 🙏 | Let God Do The Math")))
+        self.assertIn("TITLE_NO_EMOJI (R14)", sc.title_problems("Before You Sleep | Night Prayer for Peace"))
+
     def test_speech_presence_counts_the_v4_sentence_gap(self):
         # E53: pilot-010 measured 0.844 with a 0.45 s gap; the estimate must see the gap the renderer really uses
         import re as _re
