@@ -37,7 +37,6 @@ import time
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-sys.path.insert(0, str(HERE.parent / "runtime_bridge"))
 import market_panel as mp  # noqa: E402
 from gemini_public_av import FREE_MODELS, ProviderFailure, canonical, sanitized_provider_error  # noqa: E402
 
