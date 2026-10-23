@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import render_queue as rq  # noqa: E402
 
 rq.HOLD = Path(tempfile.gettempdir()) / "no-such-hold-file"  # the live repo may be on hold; these tests are not
+rq.RENDER_HOLD = Path(tempfile.gettempdir()) / "no-such-render-hold-file"
 
 NOW = datetime(2026, 10, 18, 1, 0, tzinfo=timezone.utc)
 
@@ -136,6 +137,25 @@ class Queue(unittest.TestCase):
             ledger = {"entries": {"pilot-007:" + "b" * 64: {"video_id": "v"}}}
             self.assertEqual([r["pilot"] for r in rq.stale(t, ledger, NOW)], ["pilot-008"])
             self.assertEqual([r["pilot"] for r in rq.due(t, ledger, NOW, 48)], ["pilot-009"])
+
+    def test_render_hold_renders_nothing(self):
+        import contextlib, io
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, "pilot-004", "2026-10-19T23:00:00Z")
+            hold = Path(t) / "RENDER_HOLD"
+            with patch.object(rq, "RENDER_HOLD", hold), patch.object(rq, "datetime") as dt:
+                dt.now.return_value = NOW
+                dt.fromisoformat = datetime.fromisoformat
+                out = io.StringIO()
+                with contextlib.redirect_stdout(out):
+                    rq.main(t, str(Path(t) / "ledger.json"), "render")
+                self.assertEqual(out.getvalue().strip(), "pilot-004")
+                hold.write_text("scripts moving to v4\n")
+                out = io.StringIO()
+                with contextlib.redirect_stdout(out):
+                    rq.main(t, str(Path(t) / "ledger.json"), "render")
+                self.assertEqual(out.getvalue().strip(), "")
 
     def test_rendered_or_published_is_not_queued(self):
         with tempfile.TemporaryDirectory() as t:
