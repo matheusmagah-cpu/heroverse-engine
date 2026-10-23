@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import re
+import signal
 import sys
 import urllib.error
 import urllib.request
@@ -28,6 +29,7 @@ QUALIFICATION = 'short006-20261022-interactions-v1'
 START_ARTIFACT = 'reviewer-qualification-start-' + QUALIFICATION
 INLINE_QUALIFICATION = 'short006-20261022-inline-diagnosis-v1'
 STABLE_QUALIFICATION = 'short006-20261022-stable-inline-v1'
+STREAM_QUALIFICATION = 'short006-20261023-stream-inline-v1'
 OBSERVATION = 'migration/evidence/reviewer-qualification/20261022-project-binding.json'
 CREDENTIAL_POLICY = 'migration/evidence/gemini-free-runtime-policy.json'
 MANIFEST = 'migration/production/pilot-006/shorts/shorts.json'
@@ -98,7 +100,7 @@ def require_unused_reservation(token, artifact_name=START_ARTIFACT):
 
 
 def prepare(output, mode, environ=os.environ):
-    require(mode in ('check', 'review', 'inline', 'stable'), 'INVALID_MODE')
+    require(mode in ('check', 'review', 'inline', 'stable', 'stream'), 'INVALID_MODE')
     require(environ.get('GITHUB_REPOSITORY') == REPO and environ.get('GITHUB_REF') == 'refs/heads/main', 'MAIN_ONLY')
     require(environ.get('GITHUB_RUN_ATTEMPT') == '1', 'REPLAY_BLOCKED')
     require(re.fullmatch(r'[1-9][0-9]*', environ.get('GITHUB_RUN_ID', '')) is not None, 'RUN_ID_REQUIRED')
@@ -106,7 +108,7 @@ def prepare(output, mode, environ=os.environ):
     observation, record, observation_sha = validate_inputs(ROOT, environ.get('HERO_GEMINI_API_KEY', ''), now())
     output.mkdir(parents=True, exist_ok=True)
     require(not (output / 'receipt.json').exists(), 'LOCAL_REPLAY_BLOCKED')
-    qualification = (STABLE_QUALIFICATION if mode == 'stable' else
+    qualification = (STREAM_QUALIFICATION if mode == 'stream' else STABLE_QUALIFICATION if mode == 'stable' else
                      INLINE_QUALIFICATION if mode == 'inline' else QUALIFICATION)
     receipt = {'qualification_id': qualification, 'state': 'CHECKED', 'mode': mode,
                'started_at': now().isoformat(), 'run_id': environ['GITHUB_RUN_ID'],
@@ -116,13 +118,18 @@ def prepare(output, mode, environ=os.environ):
                'recorded_qa_reused': True, 'qa_reexecuted': False, 'renders': 0,
                'endpoint': STABLE_ENDPOINT if mode == 'stable' else ENDPOINT, 'model': MODEL, 'inference_requests': 0,
                'canonical_writes': 0, 'publish': False, 'production_route_activated': False}
-    if mode in ('inline', 'stable'):
+    if mode in ('inline', 'stable', 'stream'):
         receipt.update(maximum_inference_requests=2, media_delivery='INLINE_EXACT_MP4',
                        files_api_uploads=0, cleanup_required=False,
                        diagnostic_hypothesis='Distinguish model-wide inference failure from provider-file resolution; text control must succeed before the changed media delivery is attempted.')
         if mode == 'stable':
             receipt['diagnostic_hypothesis'] = 'Qualify the officially supported stable v1 route after v1beta accepted text but returned service_unavailable for both Files URI and exact inline video. This does not assume an API-version root cause.'
-    if mode in ('review', 'inline', 'stable'):
+        if mode == 'stream':
+            receipt.update(response_transport='SERVER_SENT_EVENTS',
+                diagnostic_hypothesis='Test documented SSE response delivery instead of buffered JSON, after a newly attached full MP4 produced content-grounded UI observations. Neither UI success nor the operational public status proves API recovery.',
+                documentation='https://ai.google.dev/gemini-api/docs/streaming',
+                resume_evidence='migration/evidence/reviewer-qualification/20261023-aistudio-short006-review.json')
+    if mode in ('review', 'inline', 'stable', 'stream'):
         require_unused_reservation(environ.get('GH_TOKEN', ''), 'reviewer-qualification-start-' + qualification)
         asset = github_json('/releases/assets/' + str(ASSET_ID), environ.get('GH_TOKEN', ''))
         require(asset.get('id') == ASSET_ID and asset.get('name') == MEDIA_NAME
@@ -149,11 +156,109 @@ def json_schema(value):
     return value
 
 
+def read_interaction(response, policy, trace, stream=False):
+    """SSE headers/partial text are never completion. Retain no thought content."""
+    if not stream:
+        raw = response.read(4_000_001)
+        policy.check()
+        require(response.status == 200 and len(raw) <= 4_000_000, 'HTTP_RESPONSE_INVALID')
+        return _strict_json(raw), hashlib.sha256(raw).hexdigest()
+    require(response.status == 200 and response.headers.get('Content-Type', '').split(';')[0].strip()
+            == 'text/event-stream', 'STREAM_HTTP_INVALID')
+    trace.update(stream_completed=False, stream_bytes_read=0, stream_events=0)
+    digest, steps, active = hashlib.sha256(), {}, set()
+    created, event_name, data = None, '', []
+    previous_handler = signal.getsignal(signal.SIGALRM)
+
+    def deadline(signum, frame):
+        raise ProviderFailure('REVIEW_DEADLINE_EXCEEDED')
+
+    # A read can block even after headers arrive. Bound it by the shared cutoff,
+    # not a fresh per-event budget; no reconnect or second inference is allowed.
+    remaining = min(policy.check())
+    require(signal.getitimer(signal.ITIMER_REAL)[0] == 0, 'NESTED_STREAM_DEADLINE')
+    signal.signal(signal.SIGALRM, deadline)
+    signal.setitimer(signal.ITIMER_REAL, remaining)
+    try:
+        while True:
+            policy.check()
+            line = response.readline(65_537)
+            require(line and len(line) <= 65_536, 'STREAM_TRUNCATED_OR_OVERSIZED_LINE')
+            digest.update(line)
+            trace['stream_bytes_read'] += len(line)
+            require(trace['stream_bytes_read'] <= 4_000_000, 'STREAM_TOO_LARGE')
+            line = line.rstrip(b'\r\n')
+            if line:
+                if line.startswith(b'data:'):
+                    data.append(line[5:].lstrip(b' '))
+                elif line.startswith(b'event:'):
+                    event_name = line[6:].strip().decode('ascii')
+                elif not line.startswith((b':', b'id:', b'retry:')):
+                    raise ValueError('STREAM_FIELD_INVALID')
+                continue
+            if not data:
+                event_name = ''
+                continue
+            event = _strict_json(b'\n'.join(data))
+            kind = event.get('event_type')
+            require(not event_name or event_name == kind, 'STREAM_EVENT_MISMATCH')
+            event_name, data = '', []
+            trace['stream_events'] += 1
+            if kind == 'interaction.created':
+                require(created is None, 'STREAM_DUPLICATE_CREATED')
+                created = event['interaction']
+                require(created.get('model') == MODEL and type(created.get('id')) is str,
+                        'STREAM_MODEL_OR_ID_MISMATCH')
+            elif kind == 'interaction.status_update':
+                require(created is not None and event.get('interaction_id') == created['id']
+                        and event.get('status') == 'in_progress', 'STREAM_STATUS_INVALID')
+            elif kind in ('step.start', 'step.delta', 'step.stop'):
+                index = event.get('index')
+                require(created is not None and type(index) is int and index >= 0, 'STREAM_INDEX_INVALID')
+                if kind == 'step.start':
+                    step = event['step']
+                    require(index not in steps and step.get('type') in ('thought', 'model_output'), 'STREAM_STEP_INVALID')
+                    steps[index] = {'type': step['type'], 'text': ''}
+                    active.add(index)
+                else:
+                    require(index in active, 'STREAM_STEP_NOT_ACTIVE')
+                    if kind == 'step.stop':
+                        active.remove(index)
+                    elif steps[index]['type'] == 'model_output':
+                        delta = event['delta']
+                        require(delta.get('type') == 'text' and type(delta.get('text')) is str, 'STREAM_TEXT_REQUIRED')
+                        steps[index]['text'] += delta['text']
+            elif kind == 'interaction.completed':
+                final = event['interaction']
+                require(created is not None and final.get('id') == created['id']
+                        and final.get('model', MODEL) == MODEL and final.get('status') == 'completed'
+                        and not active, 'STREAM_INCOMPLETE_OR_MISMATCHED')
+                outputs = [s for s in steps.values() if s['type'] == 'model_output']
+                require(len(outputs) == 1 and outputs[0]['text'], 'STREAM_OUTPUT_REQUIRED')
+                policy.check()
+                trace['stream_completed'] = True
+                return {**final, 'model': created['model'], 'steps': [
+                    {'type': 'model_output', 'content': [{'type': 'text', 'text': outputs[0]['text']}]}]}, digest.hexdigest()
+            elif kind == 'error':
+                trace['outcome'] = 'STREAM_ERROR'
+                code = event.get('error', {}).get('code')
+                if code in ('service_unavailable', 'resource_exhausted', 'gateway_timeout',
+                            'invalid_argument', 'unauthenticated', 'permission_denied'):
+                    trace['provider_error_code'] = code
+                raise ProviderFailure('PROVIDER_CALL_FAILED')
+            else:
+                raise ValueError('STREAM_PROVIDER_ERROR_OR_UNEXPECTED_EVENT')
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous_handler)
+
+
 class InteractionInference:
     """Exactly one synchronous call. No fallback, retry, tools or stored interaction."""
-    def __init__(self, endpoint=ENDPOINT):
+    def __init__(self, endpoint=ENDPOINT, stream=False):
         require(endpoint in (ENDPOINT, STABLE_ENDPOINT), 'UNVERIFIED_ENDPOINT')
         self.endpoint = endpoint
+        self.stream = stream
         self.response_evidence = None
 
     def __call__(self, payload, key, models, *, http_policy):
@@ -176,7 +281,7 @@ class InteractionInference:
             'generation_config': {'max_output_tokens': payload['generationConfig']['maxOutputTokens']},
             'response_format': {'type': 'text', 'mime_type': 'application/json',
                                 'schema': json_schema(payload['generationConfig']['responseSchema'])},
-            'store': False, 'background': False, 'stream': False}
+            'store': False, 'background': False, 'stream': self.stream}
         policy.stage('INTERACTIONS')
         entry = {'attempt': 1, 'started_at': now().isoformat(), 'http_status': None,
                  'outcome': 'TRANSPORT_ERROR', 'decision': 'STOP_FINAL', 'slept_seconds': 0.0}
@@ -190,10 +295,8 @@ class InteractionInference:
         try:
             with urllib.request.urlopen(req, timeout=policy.timeout()) as response:
                 entry['http_status'] = response.status
-                raw = response.read(4_000_001)
+                response, response_sha = read_interaction(response, policy, entry, self.stream)
             policy.check()
-            require(entry['http_status'] == 200 and len(raw) <= 4_000_000, 'HTTP_RESPONSE_INVALID')
-            response = _strict_json(raw)
             require(response.get('model') == MODEL and response.get('status') == 'completed', 'RESPONSE_NOT_COMPLETED_OR_MODEL')
             blocks = [block for step in response.get('steps', []) if step.get('type') == 'model_output'
                       for block in step.get('content', []) if block.get('type') == 'text']
@@ -210,8 +313,11 @@ class InteractionInference:
             safe_usage['input_tokens_by_modality'] = [dict(modality=x['modality'], tokens=x['tokens'])
                 for x in modalities if type(x) is dict and x.get('modality') in ('text', 'audio', 'video', 'image')
                 and type(x.get('tokens')) is int and x['tokens'] >= 0]
-            self.response_evidence = {'response_sha256': hashlib.sha256(raw).hexdigest(),
+            self.response_evidence = {'response_sha256': response_sha,
                                      'status': 'completed', 'model': MODEL, 'usage': safe_usage}
+            if self.stream:
+                observed = {x['modality'] for x in safe_usage['input_tokens_by_modality'] if x['tokens'] > 0}
+                require('audio' in observed and bool(observed & {'video', 'image'}), 'NATIVE_MODALITIES_UNCONFIRMED')
             entry.update(outcome='SUCCESS', decision='RETURN')
             return MODEL, report
         except urllib.error.HTTPError as error:
@@ -235,14 +341,14 @@ class InteractionInference:
             entry['elapsed_end_seconds'] = policy._elapsed
 
 
-def text_control(key, cutoff, endpoint=ENDPOINT):
+def text_control(key, cutoff, endpoint=ENDPOINT, stream=False):
     """One cheap availability control; never an audiovisual score or approval."""
     require(endpoint in (ENDPOINT, STABLE_ENDPOINT), 'UNVERIFIED_ENDPOINT')
     policy = ReviewHTTPPolicy(cutoff_utc=cutoff)
     policy.begin()
     body = {'model': MODEL, 'input': 'Reply with exactly READY.',
             'generation_config': {'max_output_tokens': 4096},
-            'store': False, 'background': False, 'stream': False}
+            'store': False, 'background': False, 'stream': stream}
     trace = {'purpose': 'TEXT_CONTROL', 'started_at': now().isoformat(), 'http_status': None,
              'outcome': 'TRANSPORT_ERROR', 'decision': 'STOP_FINAL'}
     result = {'ready': False, 'trace': trace}
@@ -251,15 +357,13 @@ def text_control(key, cutoff, endpoint=ENDPOINT):
     try:
         with urllib.request.urlopen(req, timeout=policy.timeout()) as response:
             trace['http_status'] = response.status
-            raw = response.read(4_000_001)
+            response, response_sha = read_interaction(response, policy, trace, stream)
         policy.check()
-        require(trace['http_status'] == 200 and len(raw) <= 4_000_000, 'CONTROL_HTTP_INVALID')
-        response = _strict_json(raw)
         require(response.get('model') == MODEL and response.get('status') == 'completed', 'CONTROL_RESPONSE_INVALID')
         text = ''.join(b.get('text', '') for s in response.get('steps', []) if s.get('type') == 'model_output'
                        for b in s.get('content', []) if b.get('type') == 'text')
         require(text.strip() == 'READY', 'CONTROL_OUTPUT_INVALID')
-        result.update(ready=True, response_sha256=hashlib.sha256(raw).hexdigest())
+        result.update(ready=True, response_sha256=response_sha)
         trace.update(outcome='SUCCESS', decision='CONTINUE_TO_INLINE')
     except urllib.error.HTTPError as error:
         trace.update(http_status=error.code, outcome='HTTP_ERROR')
@@ -284,11 +388,12 @@ def infer(output, environ=os.environ):
     require(environ.get('GITHUB_REPOSITORY') == REPO and environ.get('GITHUB_REF') == 'refs/heads/main', 'MAIN_ONLY')
     receipt_path = output / 'receipt.json'
     receipt = _strict_json(receipt_path.read_bytes())
-    inline = receipt.get('mode') in ('inline', 'stable')
+    inline = receipt.get('mode') in ('inline', 'stable', 'stream')
+    stream = receipt.get('mode') == 'stream'
     stable = receipt.get('mode') == 'stable'
     endpoint = STABLE_ENDPOINT if stable else ENDPOINT
-    expected_qualification = STABLE_QUALIFICATION if stable else INLINE_QUALIFICATION if inline else QUALIFICATION
-    require(receipt['state'] == 'STARTED' and receipt['mode'] in ('review', 'inline', 'stable')
+    expected_qualification = STREAM_QUALIFICATION if stream else STABLE_QUALIFICATION if stable else INLINE_QUALIFICATION if inline else QUALIFICATION
+    require(receipt['state'] == 'STARTED' and receipt['mode'] in ('review', 'inline', 'stable', 'stream')
             and receipt['qualification_id'] == expected_qualification
             and receipt.get('endpoint', ENDPOINT) == endpoint
             and receipt['run_id'] == environ.get('GITHUB_RUN_ID')
@@ -304,10 +409,10 @@ def infer(output, environ=os.environ):
     media = output / 'short-00.mp4'
     require(media.stat().st_size == MEDIA_BYTES and sr.output_digest(media) == MEDIA_SHA, 'MEDIA_CHANGED')
     policy = ReviewHTTPPolicy(cutoff_utc=min(now() + timedelta(seconds=600), utc(observation['expires_at'])))
-    inference = InteractionInference(endpoint=endpoint)
+    inference = InteractionInference(endpoint=endpoint, stream=stream)
     try:
         if inline:
-            receipt['text_control'] = text_control(key, policy._cutoff, endpoint=endpoint)
+            receipt['text_control'] = text_control(key, policy._cutoff, endpoint=endpoint, stream=stream)
             receipt['diagnostic_outcome'] = ('TEXT_READY' if receipt['text_control']['ready'] else 'TEXT_CONTROL_FAILED_VIDEO_NOT_ATTEMPTED')
             require(receipt['text_control']['ready'] is True, 'MODEL_TEXT_CONTROL_FAILED')
         review = sr.review(media, deepcopy(record), key, http_policy=policy, inference=inference, inline=inline)

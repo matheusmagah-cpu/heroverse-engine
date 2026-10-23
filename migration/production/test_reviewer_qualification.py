@@ -6,6 +6,7 @@ import hashlib
 import base64
 import io
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -19,6 +20,15 @@ import reviewer_qualification as q
 
 class Response(io.BytesIO):
     status = 200
+
+
+class StreamResponse(Response):
+    headers = {'Content-Type': 'text/event-stream; charset=utf-8'}
+
+
+def sse(events):
+    return b''.join(('event: ' + e['event_type'] + '\r\ndata: ' + json.dumps(e) + '\r\n\r\n').encode()
+                    for e in events)
 
 
 class Qualification(unittest.TestCase):
@@ -237,15 +247,16 @@ class Qualification(unittest.TestCase):
         self.assertEqual(body['input'], 'Reply with exactly READY.')
         self.assertNotIn('video', json.dumps(body))
 
-    def test_failed_text_control_stops_before_media_delivery(self):
-        output = self.root / 'diagnostic'
+    def test_failed_text_control_stops_before_media_delivery(self, mode='inline'):
+        output = self.root / ('diagnostic-' + mode)
         output.mkdir()
         media = output / 'short-00.mp4'
         media.write_bytes(b'fixture')
         digest = q.sr.output_digest(media)
         env = {'GITHUB_REPOSITORY': q.REPO, 'GITHUB_REF': 'refs/heads/main', 'GITHUB_RUN_ATTEMPT': '1',
                'GITHUB_RUN_ID': '123', 'GITHUB_SHA': 'a' * 40, 'HERO_GEMINI_API_KEY': self.key}
-        q.write(output / 'receipt.json', {'state': 'STARTED', 'mode': 'inline', 'qualification_id': q.INLINE_QUALIFICATION,
+        q.write(output / 'receipt.json', {'state': 'STARTED', 'mode': mode,
+               'qualification_id': q.STREAM_QUALIFICATION if mode == 'stream' else q.INLINE_QUALIFICATION,
                'run_id': '123', 'repository_sha': 'a' * 40, 'project_observation_sha256': 'observation'})
         observation = {'expires_at': (q.now() + timedelta(hours=1)).isoformat()}
         with patch.object(q, 'validate_inputs', return_value=(observation, {}, 'observation')), \
@@ -257,6 +268,86 @@ class Qualification(unittest.TestCase):
         self.assertEqual(result['state'], 'NOT_REVIEWED')
         self.assertEqual(result['inference_requests'], 1)
         self.assertFalse(result['publish'])
+
+    def test_stream_failed_control_also_prevents_the_video_call(self):
+        self.test_failed_text_control_stops_before_media_delivery(mode='stream')
+
+    def stream_events(self, text=None):
+        text = json.dumps(self.report) if text is None else text
+        return [
+            {'event_type': 'interaction.created', 'interaction': {'id': 'synthetic', 'model': q.MODEL}},
+            {'event_type': 'step.start', 'index': 0, 'step': {'type': 'thought'}},
+            {'event_type': 'step.delta', 'index': 0, 'delta': {'type': 'thought_summary',
+                'content': {'type': 'text', 'text': 'Not an answer or a score.'}}},
+            {'event_type': 'step.stop', 'index': 0},
+            {'event_type': 'step.start', 'index': 1, 'step': {'type': 'model_output'}},
+            {'event_type': 'step.delta', 'index': 1, 'delta': {'type': 'text', 'text': text[:8]}},
+            {'event_type': 'step.delta', 'index': 1, 'delta': {'type': 'text', 'text': text[8:]}},
+            {'event_type': 'step.stop', 'index': 1},
+            {'event_type': 'interaction.completed', 'interaction': {'id': 'synthetic',
+                'model': q.MODEL, 'status': 'completed', 'usage': self.envelope['usage']}},
+        ]
+
+    def test_stream_changes_only_response_transport_and_requires_native_usage(self):
+        _, _, baseline = self.call()
+        inference, policy = q.InteractionInference(stream=True), self.policy()
+        with patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(self.stream_events()))) as send:
+            result = inference(self.payload, self.key, [q.MODEL], http_policy=policy)
+        body = json.loads(send.call_args.args[0].data)
+        self.assertTrue(body.pop('stream'))
+        original = json.loads(baseline.call_args.args[0].data)
+        original.pop('stream')
+        self.assertEqual(body, original)
+        self.assertEqual(result, (q.MODEL, self.report))
+        self.assertEqual(send.call_count, 1)
+        self.assertTrue(policy._trace[0]['stream_completed'])
+        self.assertNotIn('Not an answer', json.dumps(inference.response_evidence))
+        for modalities in ([], [{'modality': 'video', 'tokens': 10}], [{'modality': 'audio', 'tokens': 10}]):
+            events = self.stream_events()
+            events[-1]['interaction']['usage'] = {'input_tokens_by_modality': modalities}
+            with patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(events))):
+                with self.assertRaises(q.ProviderFailure):
+                    q.InteractionInference(stream=True)(self.payload, self.key, [q.MODEL], http_policy=self.policy())
+
+    def test_partial_stream_wrong_identity_and_error_after_headers_never_become_review(self):
+        events = self.stream_events()
+        wrong_model, wrong_id, incomplete = deepcopy(events), deepcopy(events), deepcopy(events)
+        wrong_model[0]['interaction']['model'] = 'other-model'
+        wrong_id[-1]['interaction']['id'] = 'unrelated'
+        incomplete[-1]['interaction']['status'] = 'incomplete'
+        provider_error = events[:1] + [{'event_type': 'error', 'error': {
+            'code': 'service_unavailable', 'message': 'PRIVATE_PROVIDER_PROSE'}}]
+        for candidate in ([], events[:-1], wrong_model, wrong_id, incomplete, provider_error):
+            policy = self.policy()
+            with patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(candidate))) as send:
+                with self.assertRaises(q.ProviderFailure):
+                    q.InteractionInference(stream=True)(self.payload, self.key, [q.MODEL], http_policy=policy)
+            self.assertEqual(send.call_count, 1)
+            self.assertFalse(policy._trace[0].get('stream_completed'))
+            self.assertNotIn('PRIVATE_PROVIDER_PROSE', json.dumps(policy.audit()))
+
+    def test_stream_ready_requires_the_completed_output_not_a_thought(self):
+        cutoff = q.now() + timedelta(seconds=60)
+        with patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(self.stream_events('READY')))) as send:
+            self.assertTrue(q.text_control(self.key, cutoff, stream=True)['ready'])
+        self.assertTrue(json.loads(send.call_args.args[0].data)['stream'])
+        with patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(self.stream_events('READY')[:-1]))):
+            self.assertFalse(q.text_control(self.key, cutoff, stream=True)['ready'])
+
+    def test_stream_shared_deadline_interrupts_a_stalled_read_without_network(self):
+        read_fd, write_fd = os.pipe()
+        self.addCleanup(os.close, write_fd)
+        class Stalled:
+            status = 200
+            headers = StreamResponse.headers
+            def readline(self, limit):
+                return source.readline(limit)
+        with os.fdopen(read_fd, 'rb') as source:
+            policy = q.ReviewHTTPPolicy(cutoff_utc=q.now() + timedelta(seconds=0.05))
+            policy.begin()
+            with self.assertRaisesRegex(q.ProviderFailure, 'REVIEW_DEADLINE_EXCEEDED'):
+                q.read_interaction(Stalled(), policy, {}, True)
+        self.assertEqual(q.signal.getitimer(q.signal.ITIMER_REAL)[0], 0)
 
     def test_stable_transport_changes_only_the_verified_endpoint(self):
         _, _, beta_send = self.call()
