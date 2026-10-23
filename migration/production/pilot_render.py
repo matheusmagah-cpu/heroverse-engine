@@ -22,6 +22,7 @@ RATE_OUT = 48000
 LEAD_IN = 0.3
 TAIL = 3.0
 SENTENCE_GAP = 0.18
+SENTENCE_GAP_V4 = 0.45
 MUSIC_OFFSET = 1200.0
 SOURCE_SHA256 = "fa5467541b90f1209244acfdde974a3f6a6f114eec5afa8b99e3e288deaebb10"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
@@ -125,6 +126,9 @@ def voice(work, script_path):
     pieces, timeline, cursor, rate = [], [], LEAD_IN, None
     pieces.append(None)  # placeholder for lead-in silence
     spoken = []
+    # v4 (footage) narration breathes between sentences: the measured winners pause ~1-2 s between lines
+    # (evidence/vidiq/20261023/hook_audit.md); 0.45 s keeps the QA words-per-minute band (115-165)
+    gap = SENTENCE_GAP_V4 if script.get("footage") else SENTENCE_GAP
     for segment in script["segments"]:
         start = cursor
         for index, sentence in enumerate(sentences(segment["text"])):
@@ -144,8 +148,8 @@ def voice(work, script_path):
             pieces.append(samples)
             spoken.append({"segment": segment["id"], "text": sentence, "start": round(cursor, 3),
                            "end": round(cursor + len(samples) / rate, 3)})
-            pieces.append(np.zeros(int(SENTENCE_GAP * rate), dtype=np.float32))
-            cursor += len(samples) / rate + SENTENCE_GAP
+            pieces.append(np.zeros(int(gap * rate), dtype=np.float32))
+            cursor += len(samples) / rate + gap
         timeline.append({"id": segment["id"], "start": round(start, 3), "end": round(cursor, 3)})
         pieces.append(np.zeros(int(segment["pause_after"] * rate), dtype=np.float32))
         cursor += segment["pause_after"]
