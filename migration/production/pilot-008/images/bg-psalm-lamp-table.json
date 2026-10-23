@@ -1,0 +1,28 @@
+{
+ "id": "bg-psalm-lamp-table",
+ "prompt": "A simple wooden table in an empty stone room with a lit clay oil lamp, a cup and a loaf of bread, warm glow against a moonlit window, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 3.8,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-008-img-bg-psalm-lamp-table-sha256-9bacff3154fe40a6268795ecac1a7063bdb0d85e699f27c820eac0d156174c46.png",
+ "sha256": "9bacff3154fe40a6268795ecac1a7063bdb0d85e699f27c820eac0d156174c46"
+}
