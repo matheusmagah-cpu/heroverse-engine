@@ -118,7 +118,7 @@ def pexels_search(query, key, limit=40):
 
 def pixabay_search(query, key, limit=50):
     d = get_json(f"https://pixabay.com/api/videos/?key={urllib.parse.quote(key)}&q={urllib.parse.quote(query[:100])}"
-                 f"&per_page={limit}&safesearch=true&video_type=film")
+                 f"&per_page={limit}&safesearch=true&video_type=film&min_height={MIN_HEIGHT}")
     out = []
     for v in d.get("hits", []):
         files = [f for f in (v.get("videos") or {}).values() if (f.get("height") or 0) >= MIN_HEIGHT and f.get("url")]
