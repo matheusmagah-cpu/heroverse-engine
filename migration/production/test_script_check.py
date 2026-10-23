@@ -128,6 +128,16 @@ class Check(unittest.TestCase):
         self.assertIn("TITLE_TAIL_NOT_A_SEARCH_PHRASE", " ".join(sc.title_problems("Rest 🙏 | Let God Do The Math")))
         self.assertIn("TITLE_NO_EMOJI (R14)", sc.title_problems("Before You Sleep | Night Prayer for Peace"))
 
+    def test_description_rules_r15(self):
+        self.assertEqual(sc.description_problems("Bring tonight's worries to God, then rest in KJV Scripture."), [])
+        for bad in ("anchored in Isaiah 40:31", "Pray over your family with Psalm 127", "as 1 John 4:18 says"):
+            self.assertIn("DESCRIPTION_SCRIPTURE_REF", " ".join(sc.description_problems(bad)), bad)
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("package_pilot", Path(sc.__file__).parent / "package_pilot.py")
+        pkg = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(pkg)
+        self.assertEqual(pkg.SCRIPTURE_REF.pattern, sc.SCRIPTURE_REF.pattern)  # one rule in both gates
+
     def test_speech_presence_counts_the_v4_sentence_gap(self):
         # E53: pilot-010 measured 0.844 with a 0.45 s gap; the estimate must see the gap the renderer really uses
         import re as _re

@@ -79,6 +79,10 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - One format per slot, every day, no hopping (every never-grew channel hops; every grower repeats).
   - Gratitude themes first in the cold start (dead odds ×0.35, p = 0.002); morning 15–25 min; night moves to ≥ 60 min, then ≥ 90 min of guided prayer plus Scripture for sleep (≥ 90 min was never dead, p = 0.008).
   - Script polish does not unlock a cold channel (dead videos read as well as winners); packaging, format and the channel's audience profile do.
+- **R15.** Description and picture (the same study: 334 videos' metadata in 62 channel-month strata, and 20 videos watched end to end, `algorithm_study/meta_perm_results.txt` and `visual_watch.md`):
+  - No Bible reference (book + chapter or verse) anywhere in the description, chapter names included: hit odds ×0.33, p = 0.007. Checked by `script_check.description_problems` and refused by `package_pilot` (`DESCRIPTION_SCRIPTURE_REF`). The KJV attribution line stays.
+  - A subscribe ask in the description: hit odds ×3.27, p = 0.014. Written by `package_pilot`.
+  - Production quality does not separate hits from dead videos (watcher score 6.9 vs 6.8; our own two videos scored the highest, 9 and 8.5, with 6–40 views). Picture and sound are table stakes: burned-in captions, music from 0:00 well under the voice, slow narration, calm palette. Further polish is not the lever; title, theme, length and cadence are.
 - **Owner floor.** Every new upload needs the designated watched review's overall ≥ 9.5 (owner, 2026-10-23), on top of the rubric's item ≥ 7 and overall ≥ 8.
 
 ## Gate
