@@ -2,11 +2,123 @@
  "version": "long-review-v1",
  "pilot_id": "pilot-010",
  "output_sha256": "c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80",
- "status": "ERROR",
- "error": "ProviderFailure: HTTP_503_UNAVAILABLE",
- "provider_message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
- "quota_ids": [],
- "retry_delay": null,
- "failed_at": "2026-10-23T21:55:14Z",
- "usage": []
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 16.4,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 6.1,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.5,
+  "picture_quality": 9.0,
+  "figure_and_background_integrity": 9.5,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 9.0,
+  "scripture_on_screen": 10.0,
+  "policy_safe": 10.0,
+  "overall": 9.5,
+  "issues": [
+   "04:44 - The dissolve transition over the church cabin cuts briefly into a close-up flower before transitioning smoothly, creating a slight visual hitch.",
+   "05:39 - The transition between the stony riverbed and sandy shoreline exhibits a momentary harsh texture overlap."
+  ],
+  "strongest_moment": "00:00 - 00:30 effectively hooks bedtime viewers by targeting the exact habitual anxiety of repeatedly checking the phone at night, immediately offering structured peaceful prayer as a calm alternative.",
+  "model": "gemini-3.8-flash",
+  "status": "PASS"
+ },
+ "audit": {
+  "first_30s": "00:00 - 00:05: Candle light image with bold title text reading 'Before you check your phone again tonight, give God the worry you cannot fix.' Narrator speaks this phrase word-for-word. 00:06 - 00:11: Aurora borealis night sky background with top-left 'HeroVerse Prayer' logo and bottom text 'Pray this with me. Tonight we will pray through...'. 00:12 - 00:16: Wooden bridge with glowing lantern in green forest with text detailing worries (message, work, bills, loved ones). 00:17 - 00:20: Fast-flowing mountain stream. 00:21 - 00:27: Misty lake at sunset. 00:28 - 00:30: Dark calm waters with a boat docked at night. The hook effectively targets late-night phone checking and anxiety, inviting the viewer into a guided sleep prayer.",
+  "visuals": "The video mixes AI-rendered landscape artwork (e.g. illuminated cabins, lanterns on bridges, candles) with realistic high-definition nature video clips (rivers, ocean waves, misty mountains, rain on pavement, starry night skies). Cut frequency averages 9 to 10 cuts per minute (roughly every 5 to 7 seconds). Camera movement is mostly subtle, featuring slow pans, gentle zoom-in/zoom-out effects, or natural movement within the footage (flowing water, rain drops, moving clouds). No human faces or full people appear in the video.",
+  "on_screen_text": "Subtitles appear centered at the bottom of the screen in a clean sans-serif white font with a subtle dark drop shadow for contrast. Bible verses are formatted separately inside centered dark semi-transparent rounded boxes in an italic serif font with chapter/verse citations (e.g. 1 Peter 5:7, Philippians 4:6, Matthew 6:34). A 'HeroVerse Prayer' logo is consistently displayed in the top-left corner. A call to action appears from 13:24 to 13:36 asking viewers to comment 'amen' or post a prayer request.",
+  "audio": "Narrated by a mature, warm male voice speaking in a slow, soothing, and meditative pace (~95 words per minute). Background audio features continuous, soft, low-volume ambient piano and acoustic string pad music, keeping the vocal narration prominent and clear throughout.",
+  "structure": "The video follows a structured guided sleep prayer: Intro hook (00:00-00:50); Naming phone/message anxiety with Scripture (00:50-02:48); Releasing work stress & errors with Scripture (02:48-04:44); Surrendering financial worries with Scripture (04:44-06:36); Praying for loved ones with Scripture (07:10-09:05); Overcoming harsh self-judgment with Scripture (09:05-10:56); Easing physical tension and rest commitment (11:06-13:23); Call to action and transition to sleep scriptures (13:24-14:13); Final soothing scripture readings and closing prayer (14:14-16:23). Recurring refrain phrases include 'Father, I name...' and 'Lord, I release...'.",
+  "ending": "From 15:45 to 16:23, the video concludes with a quiet closing prayer ('Father, I place this evening before you... I leave the conversation here for now, held within your enduring love') over a slow-burning candle visual, gradually fading out into silence.",
+  "amateur_elements": [
+   {
+    "timestamp": "00:00",
+    "element": "Intro text uses a basic heavy black-outlined font stacked directly over a static candle image, giving an unpolished slide-presentation look.",
+    "rule": "R2"
+   },
+   {
+    "timestamp": "06:51",
+    "element": "Dissolve transition between winter woods and a stylized willow tree causes a messy double-exposure overlay artifact.",
+    "rule": "R1"
+   },
+   {
+    "timestamp": "08:32",
+    "element": "Long cross-dissolve transition creates an awkward muddy overlay between a sunset field and rain-soaked cobblestones.",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "11:18",
+    "element": "Cross-fade between sea stack rocks and a lantern bridge scene leaves a lingering ghosted image transparency across the screen.",
+    "rule": "R5"
+   },
+   {
+    "timestamp": "13:39",
+    "element": "Transition between dusk lake and misty valley produces a disorienting multi-layered blending effect.",
+    "rule": "R1"
+   }
+  ],
+  "model": "gemini-3.6-flash"
+ },
+ "usage": [
+  {
+   "model": "gemini-3.8-flash",
+   "promptTokenCount": 57297,
+   "candidatesTokenCount": 254,
+   "totalTokenCount": 58242,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 225
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 57072
+    }
+   ],
+   "thoughtsTokenCount": 691,
+   "serviceTier": "standard"
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "promptTokenCount": 57306,
+   "candidatesTokenCount": 1112,
+   "totalTokenCount": 60335,
+   "cachedContentTokenCount": 103,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 234
+    },
+    {
+     "modality": "VIDEO",
+     "tokenCount": 57072
+    }
+   ],
+   "cacheTokensDetails": [
+    {
+     "modality": "VIDEO",
+     "tokenCount": 103
+    }
+   ],
+   "thoughtsTokenCount": 1917,
+   "serviceTier": "standard"
+  }
+ ]
 }
