@@ -164,7 +164,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     add("Title", 0.0, title_end, overlay["title"], 2, (200, 300))
     lines.append(f"Dialogue: 2,{ts(0)},{ts(title_end)},Subtitle,,0,0,0,,{{\\fad(200,300)\\pos(960,700)}}{ass_text(overlay['subtitle'])}")
     add("Brand", title_end, total, overlay["brand"], 1, (300, 0))
-    for c in cta_events(total):
+    for c in cta_events(total, script):
         add("Badge", c["start"], c["end"], c["text"], 1, (200, 200))
     x0, y0, x1, y1 = CARD
     cards = scripture_cards(script, timeline)
@@ -194,8 +194,12 @@ def rounded(x0, y0, x1, y1, r):
             f"l {x0} {y0 + r} b {x0} {y0 + k} {x0 + k} {y0} {x0 + r} {y0}")
 
 
-def cta_events(total):
-    """R6: two short mid-video calls to action, the first not before 0:45; nothing else is persistent."""
+def cta_events(total, script=None):
+    """R6: two short mid-video calls to action, the first not before 0:45; nothing else is persistent.
+    v4 (footage) pilots have none: 3 watched reviews named the Subscribe/Like badges as breaking the immersion
+    (pilot-004, 007, 012); the spoken amen invitation after the payoff stays, and the bell goes in the pinned comment."""
+    if script and script.get("footage"):
+        return []
     out = []
     for text, start in CTA:
         a = start if start >= 1 else round(total * start, 3)
@@ -210,7 +214,7 @@ def scripture_cards(script, timeline):
     cards = []
     for seg in timeline["segments"]:
         if seg["id"] in refs:
-            quoted = [s for s in timeline["sentences"] if s["segment"] == seg["id"] and KJV.search(s["text"])]
+            quoted = quoted_sentences(seg["id"], timeline["sentences"])
             if quoted:
                 cards.append({"segment": seg["id"], "reference": refs[seg["id"]], "start": quoted[0]["start"],
                               "end": reference_end(seg, timeline["sentences"])})
@@ -220,10 +224,18 @@ def scripture_cards(script, timeline):
 KJV = re.compile(r"\b(thee|thou|thy|thine|ye|unto|hath|shalt|shall|art|LORD|saith|doth|cometh)\b")
 
 
+def quoted_sentences(segment_id, sentences):
+    """The KJV sentences of a Scripture segment. A verse without archaic words ("In every thing give thanks...",
+    "There is therefore now no condemnation...") is still the quotation: when none of the segment's sentences
+    matches KJV, all of them are (pilot-012 read 1 Thessalonians 5:18 with no card, review 2026-10-20)."""
+    own = [s for s in sentences if s["segment"] == segment_id]
+    return [s for s in own if KJV.search(s["text"])] or own
+
+
 def reference_end(seg, sentences):
     """The reference stays while the Scripture is read: until the last KJV sentence of the segment, not over
     the words that follow it in the same segment (pilot-003: 'Numbers 6:24-26' stayed over 'In Jesus' name, amen')."""
-    quoted = [s["end"] for s in sentences if s["segment"] == seg["id"] and KJV.search(s["text"])]
+    quoted = [s["end"] for s in quoted_sentences(seg["id"], sentences)]
     return max(quoted) if quoted else seg["end"]
 
 
@@ -433,7 +445,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path, footage_dir
                 "overlay": {k: script["overlay"][k] for k in ("brand", "title", "title_card_seconds")},
                 "persistent_overlays": ["brand"],
                 "caption_style": {"box": False, "alignment": "bottom-centre", "outline": 4, "words_max": CAPTION_WORDS_MAX},
-                "cta": cta_events(total),
+                "cta": cta_events(total, script),
                 "scripture_cards": scripture_cards(script, timeline),
                 "scene_target_seconds": FOOTAGE_TARGET if script.get("footage") else scene_target(script["backgrounds"]),
                 "crossfade_seconds": FADE,
