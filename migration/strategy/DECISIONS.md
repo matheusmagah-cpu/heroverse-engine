@@ -165,3 +165,36 @@ predict how fast HeroVerse reaches YPP.
 - **How a format enters.** It enters production when mining shows it winning in our niche (count rule: winners and weak contrasts), or when our own measured results show it.
 - **Allocation** (which format in which slot, how many videos and Shorts) is adjusted **daily** from the numbers, with no waiting period.
 - **Quality and policy gates never change:** R1–R10, originality, the watched review, and no fear-bait.
+
+## Day 6 measurement and decision (2026-10-23 10:30 UTC)
+Source: `evidence/daily-report/latest.md` of 2026-10-23. YouTube API counts are marked [official]; our calculations from Analytics rows are marked [own].
+
+**Where we stand**
+- Subscribers [official]: 272 of 1,000. That is +0 since 22/10; reaching the goal by day 14 needs 80.9 a day.
+- Public long-form watch hours [own]: 6.7 of 4,000, +1.2 since 22/10. Day 14 needs 444 a day.
+- The gap is about 80× for subscribers and about 370× for hours. **Day 14 cannot be reached at the current reach.** This is arithmetic on measured numbers, not a forecast.
+
+**Measured per format**
+- Long videos: 1–18 views each and 1–26 % average watched.
+  - The long 006 scored 9.3 in the watched review and then got 6 views at 1.6 %.
+  - A high review score does not create distribution on a channel this small.
+- Shorts: 199–299 views and 4–5 subscribers each (the 18/10 and 19/10 Shorts). Almost every new subscriber came from a Short.
+
+**What blocked publication on 21–23/10**
+- The designated reviewer (free tier) returned 503 continuously.
+- pilot-009 and pilot-011 failed QA on the image repeat gap (E46).
+- pilot-008 failed the owner floor of 9 (pacing 6.5, spelled "G-O-D"; E47, E48).
+- All four pilots then left the queue when their slots passed (E49).
+
+**Decision**
+1. **Stock.**
+   - 008–011 are corrected and re-rendered with ≥ 18 R10 backgrounds and moved to 24–25/10 (#278).
+   - New original scripts 013 (night forgiveness) and 014 (morning family) fill 26/10 (#279).
+   - Runway: 3.0 days.
+2. **Allocation.** Two long videos a day stay as long as the reviewer allows it. The free limit is 20 requests a day, and each long video plus up to 3 Short candidates uses 4 or more.
+3. **Shorts first for subscribers.** Once the reviewer answers, Shorts reviews for the already-published 006/007 and the new pilots get the remaining daily requests. Shorts are the only format with measured subscriber yield.
+4. **Unchanged.**
+   - Zero additional cost: billing and paid reviewers stay off.
+   - The owner floor of ≥ 9 and the frozen gates stay.
+   - The night sleep-scripture-long format waits until the publication path works again. Building it now would add a third blocked format.
+5. **Dot.** The owner ended Dot's role on 23/10. Claude writes scripts, code and fixes, and the GitHub workflows do the heavy work (images, render, review, upload).
