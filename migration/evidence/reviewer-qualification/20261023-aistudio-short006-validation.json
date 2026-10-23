@@ -2,7 +2,7 @@
   "version": "aistudio-short006-observation-validation-v2",
   "recorded_at": "2026-10-23T02:34:26.070649+00:00",
   "source": "UI_OBSERVATION_NOT_API_RECEIPT",
-  "status": "CONTENT_GROUNDED_UI_REJECTION_NOT_OPERATIONAL_QUALIFICATION",
+  "status": "UI_REVIEW_NOT_OPERATIONALLY_QUALIFIED_MOTION_EVIDENCE_INCOMPATIBLE",
   "media_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
   "media_bytes": 15369406,
   "canonical_manifest_sha256": "cc8daa14d106a4e09fd9cede224a8edf2e9c6a903a13e9d5e02f909709a4a701",
@@ -36,5 +36,43 @@
   "native_route_operationally_qualified": false,
   "recurring_capacity_qualified": false,
   "publish": false,
-  "next_action": "The isolated SSE attempt is consumed: run 39891051684 returned HTTP 503/service_unavailable on the text control, so video was not attempted. Preserve the rejection and its limitations. Require a concrete provider recovery condition or a qualified native audiovisual route before another API call or production correction; no unchanged retry."
+  "next_action": "Do not repeat inference in the same UI conversation or apply its motion/cutoff descriptions to production. Resume only with a materially changed, evidence-backed review acquisition route; the API 503 failures remain unresolved and the existing reservations remain consumed.",
+  "subsequent_evidence_audit": {
+    "recorded_at": "2026-10-23T09:59:53.603176+00:00",
+    "response": "20261023-aistudio-short006-audit.json",
+    "screenshot": "20261023-aistudio-short006-audit.jpg",
+    "same_existing_attachment": true,
+    "new_uploads": 0,
+    "inference_calls": 1,
+    "new_score_requested": false,
+    "result": "MIXED_GROUNDED_CONTENT_AND_INCOMPATIBLE_MOTION_DESCRIPTIONS",
+    "grounded_content": [
+      "All 12 canonical spoken sentences were reproduced in order, with approximate times.",
+      "The two visible environments and their order agree with the canonical plan."
+    ],
+    "correction_to_previous_claim": "The model now explicitly states that the ending has no abrupt audible truncation; its prior ending criticism mixes replay discontinuity with editorial preference.",
+    "incompatible_motion_claims": [
+      {
+        "claim": "Continuous forward zoom in both scenes",
+        "existing_source": "shorts_006_motion.source_frame uses fixed width/height and camera_x changes only horizontal position."
+      },
+      {
+        "claim": "Lantern flame flicker and plant sway",
+        "existing_source": "The closed motion implementation only changes stream water luminance within two specified polygons; no independent lantern/plant deformation is applied."
+      },
+      {
+        "claim": "Animated water distortions in the pond",
+        "existing_source": "The pond branch uses _base without texture_frame; pond motion is camera-only."
+      }
+    ],
+    "binding_sources": [
+      "migration/production/pilot-006/shorts/shorts.json",
+      "migration/production/shorts_006_motion.py",
+      "migration/production/shorts_produce.py"
+    ],
+    "no_new_master_render_or_qa": true,
+    "production_changes_based_on_this_answer": false,
+    "repeated_inferences_in_this_conversation_stopped": true,
+    "native_access_is_not_complete_review_reliability": true
+  }
 }
