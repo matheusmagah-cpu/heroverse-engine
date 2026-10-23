@@ -70,14 +70,15 @@ def opening_chapter(script):
 
 
 def chapters_from_script(script, timeline):
-    """Chapters at every scripture anchor plus the opening, prayer and blessing turns."""
+    """Chapters at the opening, prayer and blessing turns and at every segment the script names. R15 (algorithm study
+    2026-10-23: Bible references in the description lowered the odds of a hit to x0.33, p=0.007): a chapter is never
+    a bare reference, and a reference in parentheses is dropped from its name."""
     named = {"hook": opening_chapter(script), "transition": "Let us pray", "declaration": "Declaration for today",
              "payoff": "One thing to do today", "blessing": "Blessing"}
     named.update({s["id"]: s["chapter"] for s in script["segments"] if s.get("chapter")})  # the script's own chapter names win
-    refs = {s["id"]: s["reference"].replace(" (KJV)", "") for s in script["segments"] if s.get("reference")}
     rows = []
     for seg in timeline:
-        label = named.get(seg["id"]) or refs.get(seg["id"])
+        label = SCRIPTURE_REF_IN_LABEL.sub("", named.get(seg["id"]) or "").strip()  # R15: no Bible references
         if label:
             start = 0 if seg["id"] == "hook" else int(seg["start"])
             rows.append(f"{start // 60}:{start % 60:02d} {label}")
@@ -94,10 +95,14 @@ def chapters(timeline):
     for seg in timeline:
         if seg["id"] in names:
             start = 0 if seg["id"] == "hook" else int(seg["start"])
-            rows.append(f"{start // 60}:{start % 60:02d} {names[seg['id']]}")
+            rows.append(f"{start // 60}:{start % 60:02d} {SCRIPTURE_REF_IN_LABEL.sub('', names[seg['id']])}")
     return rows
 
 
+# R15: "Psalm 23:1", "1 John 4:18", "Isaiah 40:31", "Psalm 23" in the description lowered the odds of a hit
+SCRIPTURE_REF = re.compile(r"\b(?:[1-3] )?[A-Z][a-z]+ \d+:\d+|\b(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation) \d+", re.UNICODE)
+SCRIPTURE_REF_IN_LABEL = re.compile(r"\s*\((?:[1-3] )?[A-Z][a-z]+ \d+(?::\d+(?:-\d+)?)?(?: \(KJV\))?\)")
+SUBSCRIBE_LINE = "Subscribe and pray with us every morning and every night."  # R15: hit odds x3.27 (p=0.014)
 DESCRIPTION_MAX = 4900  # YouTube's limit is 5,000 characters
 SOURCE_NAMES = {"pixabay": "Pixabay", "pexels": "Pexels", "commons": "Wikimedia Commons"}
 
@@ -135,16 +140,14 @@ def main(work, script_path, out_dir):
     description = "\n".join([
         script.get("description_intro") or (
             "Before you walk into today, God has already been there. Pray this morning prayer with us for peace, "
-            "courage and a clean start, anchored in Deuteronomy 31:8, Lamentations 3:22-23, Psalm 143:8, "
-            "Isaiah 41:10 and Proverbs 3:5-6."),
+            "courage and a clean start, anchored in KJV Scripture."),
+        "",
+        SUBSCRIBE_LINE,
         "",
         "Chapters",
         *(chapters_from_script(script, manifest["timeline"]) if any(s.get("reference") for s in script["segments"])
           else chapters(manifest["timeline"])),
         "",
-        *(["Scripture in this prayer: " + "; ".join(dict.fromkeys(
-            s["reference"].replace(" (KJV)", "") for s in script["segments"] if s.get("reference"))), ""]
-          if script.get("description_intro") else []),
         "Scripture quotations: King James Version (public domain).",
         "Narration and music: original HeroVerse productions.",
         "",
@@ -155,6 +158,9 @@ def main(work, script_path, out_dir):
         # YouTube allows 5,000 characters: drop the optional author names; required attributions stay
         description = description.replace("\n".join(footage_credits(manifest["clips"])),
                                           "\n".join(footage_credits(manifest["clips"], with_authors=False)))
+    refs = SCRIPTURE_REF.findall(description.split("Footage credits")[0])
+    if refs:
+        raise SystemExit(f"DESCRIPTION_SCRIPTURE_REF {refs[:3]} (STANDARD R15)")
     if len(description) > DESCRIPTION_MAX:
         raise SystemExit(f"DESCRIPTION_TOO_LONG {len(description)} > {DESCRIPTION_MAX}")
     tags = script.get("tags") or ["morning prayer", "prayer for peace", "prayer for courage", "christian morning prayer",

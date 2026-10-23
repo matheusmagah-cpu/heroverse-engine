@@ -130,6 +130,16 @@ def title_problems(title):
     return problems
 
 
+# R15 (algorithm study 2026-10-23, meta_perm.py): Bible references in the description lowered the odds of a hit to
+# x0.33 (p = 0.007). Same pattern as package_pilot.SCRIPTURE_REF, which refuses the finished description.
+SCRIPTURE_REF = re.compile(r"\b(?:[1-3] )?[A-Z][a-z]+ \d+:\d+|\b(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation) \d+", re.UNICODE)
+
+
+def description_problems(intro):
+    refs = SCRIPTURE_REF.findall(intro or "")
+    return [f"DESCRIPTION_SCRIPTURE_REF {refs[:3]} (R15)"] if refs else []
+
+
 def check(pilot_dir, production=None):
     d = Path(pilot_dir)
     production = Path(production) if production else d.parent
@@ -179,6 +189,7 @@ def check(pilot_dir, production=None):
         problems += hook_problems(segs[0].get("text", ""))
         problems += continuity_problems(segs)
         problems += title_problems(s.get("working_title", ""))
+        problems += description_problems(s.get("description_intro", ""))
     t, first_prayer = 0.0, None
     for x in segs:
         if x.get("id", "").startswith("prayer"):

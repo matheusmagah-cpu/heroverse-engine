@@ -25,6 +25,13 @@ class Tests(unittest.TestCase):
     def test_explicit_and_other_chapters(self):
         script={'segments':[{'id':'hook','text':'Good evening.','chapter':'Gratitude'}, {'id':'a','chapter':'Mercy'}]}
         self.assertEqual(pkg.chapters_from_script(script,[{'id':'hook','start':0},{'id':'a','start':39.9}]),['0:00 Gratitude','0:39 Mercy'])
+    def test_chapters_never_show_bible_references_r15(self):
+        script={'segments':[{'id':'hook','text':'Good evening.'},{'id':'s1','reference':'Psalm 23:1 (KJV)'},
+                            {'id':'s2','reference':'Psalm 23:2 (KJV)','chapter':'Permission to lie down (Psalm 23:2)'},
+                            {'id':'s3','chapter':'Peace in the house (1 John 4:18 (KJV))'}]}
+        rows=pkg.chapters_from_script(script,[{'id':'hook','start':0},{'id':'s1','start':40},{'id':'s2','start':90},{'id':'s3','start':130}])
+        self.assertEqual(rows,['0:00 Good evening','1:30 Permission to lie down','2:10 Peace in the house'])
+        self.assertFalse(any(pkg.SCRIPTURE_REF.search(r) for r in pkg.chapters([{'id':'scripture-1','start':30}])))
     def test_missing_hook_and_legacy(self):
         self.assertEqual(pkg.opening_chapter({'segments':[]}), 'Opening prayer')
         self.assertEqual(pkg.chapters([{'id':'hook','start':0}]),['0:00 Opening prayer'])

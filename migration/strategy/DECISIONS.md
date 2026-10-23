@@ -215,3 +215,10 @@ Owner: "understand what the winners have in common and what the ones that do not
 - **Unlock.** Growers broke out at upload #12, #12, #18 and #30 (14–64 min, gratitude or protection); 4 of 8 cold channels never did.
 - **Decision.** STANDARD R14 (title gate in `script_check`), and pilots 008–014 retitled. Night videos move to ≥ 60 min, then ≥ 90 min (renderer: a low-cost long sleep section). The first-week themes favour gratitude.
 - **Owner decisions (outward, not taken).** Make the 18 off-niche July Shorts and videos private (prophecy and motivation, tagged #marvel and #theflash), and consider a niche display name.
+
+## Compare everything: metadata, picture and sound (2026-10-23 night)
+Owner: "compare everything… structure, every detail, so we only produce what the algorithm delivers".
+- **Metadata (334 hit or dead videos).** Bible references in the description: hit ×0.33 (p = 0.007). A subscribe ask in the description: hit ×3.27 (p = 0.014). Upload hour, chapters, tags, hashtags and links do not decide.
+- **Picture and sound (20 watched with vidIQ).** Quality does not separate: hits 6.9, dead 6.8. Our two videos scored 9 and 8.5, the best of the sample, with 6–40 views. The same channel with the same template has both outcomes (Grace & Purpose 287K vs 98; Favor for Today 54K vs 73).
+- **Decision.** STANDARD R15: no Bible references in descriptions or chapter names, and a subscribe line in every description. Intros of 008, 009, 011 and 014 are rewritten. Thumbnails are measured by `thumb-study.yml`.
+- **Leaning, not adopted (HYPOTHESIS).** A persistent "Type Amen 🙏" badge (4 of 9 hits, 2 of 8 dead). No female voice among the hits.
