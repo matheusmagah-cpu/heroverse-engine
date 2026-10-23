@@ -1,0 +1,9 @@
+{
+  "source": "AI_STUDIO_UI",
+  "started_at": "2026-10-23T09:25:57.743Z",
+  "observed_completed_at": "2026-10-23T09:29:55.977Z",
+  "model": "gemini-3.8-flash",
+  "prompt": "Inspect only the attached media directly. This is an access diagnostic, not a quality review; do not assign scores. Return JSON describing: full duration in seconds; the ordered visible segments with approximate start/end, shape, color and position; exact words actually heard and their approximate speech interval; each distinct non-speech sound with approximate timing; whether background music is audible; and whether any speech is heard during the final three seconds. Do not infer audio from the picture, filename, captions, or typical examples. State separately if audio or video is inaccessible and use UNKNOWN rather than guessing. No external tools or search.",
+  "attachment_tokens": 928,
+  "raw_answer": "{\n  \"duration_seconds\": 8.66,\n  \"visual_segments\": [\n    {\n      \"start_time\": 0.0,\n      \"end_time\": 2.89,\n      \"shape\": \"circle\",\n      \"color\": \"blue\",\n      \"position\": \"left\"\n    },\n    {\n      \"start_time\": 2.89,\n      \"end_time\": 5.78,\n      \"shape\": \"square\",\n      \"color\": \"orange\",\n      \"position\": \"center\"\n    },\n    {\n      \"start_time\": 5.78,\n      \"end_time\": 8.66,\n      \"shape\": \"triangle\",\n      \"color\": \"green\",\n      \"position\": \"right\"\n    }\n  ],\n  \"speech\": {\n    \"detected\": true,\n    \"transcript\": \"Seven copper lanterns beside the river\",\n    \"start_time\": 0.8,\n    \"end_time\": 3.2\n  },\n  \"non_speech_sounds\": [\n    {\n      \"description\": \"ding / chime\",\n      \"start_time\": 6.0,\n      \"end_time\": 6.5\n    }\n  ],\n  \"background_music\": false,\n  \"speech_in_final_three_seconds\": false\n}"
+}

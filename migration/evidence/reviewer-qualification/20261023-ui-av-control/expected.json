@@ -1,0 +1,49 @@
+{
+  "version": "ui-av-control-v1",
+  "purpose": "Blind independent modality and silence control; not a master quality review",
+  "sha256": "e1ba23ed03ddcf3a60ca811db03dc2b62f6f706718e17f4246e1461395672bd4",
+  "bytes": 25700,
+  "duration_seconds": 9,
+  "video": [
+    {
+      "start": 0,
+      "end": 3,
+      "shape": "blue circle",
+      "position": "left"
+    },
+    {
+      "start": 3,
+      "end": 6,
+      "shape": "orange square",
+      "position": "center"
+    },
+    {
+      "start": 6,
+      "end": 9,
+      "shape": "green triangle",
+      "position": "right"
+    }
+  ],
+  "audio": {
+    "speech": "Seven copper lanterns beside the river.",
+    "speech_start_seconds": 1,
+    "speech_end_seconds": 3.438125,
+    "tone_events": [
+      {
+        "start_seconds": 6.25,
+        "duration_seconds": 0.25,
+        "frequency_hz": 440
+      },
+      {
+        "start_seconds": 7.1,
+        "duration_seconds": 0.25,
+        "frequency_hz": 880
+      }
+    ],
+    "music": false,
+    "speech_after_6_seconds": false
+  },
+  "caption_text": null,
+  "expected_answer_was_not_sent_to_model": true,
+  "acceptance": "Exact sentence, all three shapes/colors/positions in order, two later tones, no invented later speech or music; rounded timing allowed up to 1 s."
+}

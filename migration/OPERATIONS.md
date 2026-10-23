@@ -45,8 +45,6 @@ timings and inaccurate parallax label must not become production instructions. L
 integration, 008/009/011 corrections, 010 review, approved stock and publication remain pending
 behind this reviewer block. Existing GitHub schedules were not globally disabled by this work.
 
-## Authority and boundaries
-
 Execution audit, 2026-10-23: reproduced and corrected a streaming reader defect: text
 already present in `step.start.content` was discarded (`REA` + `DY` became `DY`).
 The provider-error adapter also now recognizes Interactions string codes and propagates
@@ -60,6 +58,25 @@ Google's thinking documentation confirms that omitted thinking level and the UI'
 selection have the same effective default for gemini-3.8-flash. The UI shows `No API key
 selected`; linking a key offers a paid-key/billing flow, which was closed without changes.
 The successful UI response therefore does not establish availability of the credentialed API.
+
+PR #276 merged as `1b27df70806db58699b0d2b896796aec7234dd5f`; CI run `39931031364`
+passed all 51 test files. These checks exercised client behavior without any new provider call.
+
+A blind UI audiovisual control at 09:25–09:33 UTC now demonstrates actual picture and audio
+access: an independent 9-second, caption-free fixture was uploaded once, and the designated
+model identified all three colored shapes and the exact sentence present only in audio.
+The first full-file answer omitted one of two tones, so its completeness check **failed**.
+One focused examination of the final three seconds recovered both tones and their correct
+relative pitch without being told their number, pitch or timestamps. That follow-up does not
+erase the initial omission or qualify a complete single-pass review.
+The preserved MP4, construction source, expected content, raw answers, decoded-AAC check,
+screenshot and validation are in `evidence/reviewer-qualification/20261023-ui-av-control/`.
+This closes the narrow UI media-access uncertainty; automatic pipeline integration and recurring
+capacity remain unqualified. No new credentialed API inference, master correction, repeated
+master QA, canonical score/eligibility write or publication occurred. The 8.9 remains invalid;
+the separate 8.0 UI rejection and its limitations remain preserved.
+
+## Authority and boundaries
 
 - `SYSTEM.md`: the canonical four-stage delivery contract: mining → modeling/production →
   originality, intention and critique → publication, with live intelligence across the cycle.

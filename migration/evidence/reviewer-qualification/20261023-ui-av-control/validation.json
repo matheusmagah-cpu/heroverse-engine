@@ -1,0 +1,121 @@
+{
+  "version": "ui-av-control-observation-v1",
+  "recorded_at": "2026-10-23T09:39:36.239529+00:00",
+  "status": "NATIVE_IMAGE_AND_AUDIO_ACCESS_DEMONSTRATED_FIRST_PASS_INCOMPLETE",
+  "source": "AI_STUDIO_UI_OBSERVATION_NOT_API_RECEIPT",
+  "model_selected": "gemini-3.8-flash",
+  "provider_http_status": null,
+  "provider_runtime_identity_verified": false,
+  "fixture_sha256": "e1ba23ed03ddcf3a60ca811db03dc2b62f6f706718e17f4246e1461395672bd4",
+  "fixture_bytes": 25700,
+  "fixture_duration_seconds": 9,
+  "fixture_was_not_short006": true,
+  "full_file_uploaded_once": true,
+  "upload_tool_wall_seconds": 180.0338,
+  "upload_tool_requested_timeout_seconds": 30,
+  "upload_latency_does_not_identify_provider_or_media_fault": true,
+  "inference_count": 2,
+  "inference_route": "UI_WITH_NO_API_KEY_SELECTED",
+  "account_or_billing_changes": 0,
+  "additional_cost_incurred": false,
+  "first_pass": {
+    "checks": {
+      "speech_words_match": true,
+      "ordered_shapes_colors_positions_match": true,
+      "duration_within_declared_one_second_tolerance": true,
+      "visual_boundaries_within_declared_one_second_tolerance": true,
+      "speech_boundaries_within_declared_one_second_tolerance": true,
+      "all_non_speech_events_reported": false,
+      "no_invented_music_or_late_speech": true
+    },
+    "result": "FAIL_NON_SPEECH_EVENT_OMITTED",
+    "reported_tone_events": 1,
+    "expected_tone_events": 2
+  },
+  "focused_followup": {
+    "result": "PASS_FOR_REQUESTED_AUDIO_INTERVAL",
+    "range_start_seconds": 6,
+    "range_end_seconds": 9,
+    "reported_tone_events": 2,
+    "reported_intervals_seconds": [
+      [
+        6.05,
+        6.4
+      ],
+      [
+        7.05,
+        7.4
+      ]
+    ],
+    "relative_pitch_order_correct": true,
+    "boundaries_within_declared_one_second_tolerance": true,
+    "expected_count_pitch_or_timestamps_given_to_model": false,
+    "does_not_erase_first_pass_failure": true
+  },
+  "access_evidence": [
+    "Exact novel spoken sentence was recovered without captions or text supplied in either prompt.",
+    "All independently constructed visual segments were described in order with correct colors and positions.",
+    "Focused audio-only examination recovered two separated tones with the correct relative pitch, and no invented music or late speech."
+  ],
+  "limits": [
+    "This was an agent-operated UI diagnostic on a 9-second control, not a scored master review.",
+    "The initial whole-file answer omitted one audible event; focused inspection corrected it. One-pass completeness is not qualified.",
+    "The UI provides no captured API transport/modality trace; selected model identity is a UI observation.",
+    "No inference was sent using the credentialed API during this execution audit; prior HTTP 503 failures remain unresolved.",
+    "Recurring workload capacity and unattended pipeline integration are not demonstrated by this control."
+  ],
+  "native_picture_and_audio_access_demonstrated": true,
+  "single_pass_complete_review_qualified": false,
+  "automatic_production_route_qualified": false,
+  "recurring_capacity_qualified": false,
+  "short006_master_unchanged": true,
+  "short006_manifest_unchanged": true,
+  "existing_qa_reused": true,
+  "short006_qa_reexecuted": false,
+  "short006_review_replaced": false,
+  "production_feedback_applied": false,
+  "publish": false,
+  "invalid_8_9_still_invalid": true,
+  "execution_fixes": {
+    "pull_request": 276,
+    "merge_commit": "1b27df70806db58699b0d2b896796aec7234dd5f",
+    "ci_run": 39931031364,
+    "ci_test_files_passed": 51,
+    "new_provider_inferences_in_code_qualification": 0,
+    "defects": [
+      "step.start initial text dropped before streaming deltas",
+      "Interactions error.code and failed control masked as UNKNOWN/ValueError",
+      "remote reservation artifact expiry could permit replay without checked-in guard"
+    ]
+  },
+  "files": {
+    "build_control.py": {
+      "sha256": "70657c845a862b019462aeef58583ea75e326bd78ee7c6f54981e0af901c56ef",
+      "bytes": 3057
+    },
+    "media-control.mp4": {
+      "sha256": "e1ba23ed03ddcf3a60ca811db03dc2b62f6f706718e17f4246e1461395672bd4",
+      "bytes": 25700
+    },
+    "expected.json": {
+      "sha256": "fba2f68eb418fb444796b6727a12959e23786656bab5e4045e569149b0b48e0e",
+      "bytes": 1264
+    },
+    "first-response.json": {
+      "sha256": "65fabfd0beec3222646408f75c06b0070ccb9d32597bfdfb266a4c042ea2fa50",
+      "bytes": 1823
+    },
+    "focused-response.json": {
+      "sha256": "f1afab1f2600198971947e0ee69f89caaaf3ed6f11cd87b6f2a9cd26b33463d7",
+      "bytes": 1189
+    },
+    "encoded-audio-check.json": {
+      "sha256": "56738f53796d446577294472a6f275ec51ad2e3b2cd4a0f27679329dd6e3a54e",
+      "bytes": 459
+    },
+    "proof.jpg": {
+      "sha256": "7c381362eb99ccf10352598abc1eaa51227a2508f2c389513d0216c4cd94d0a1",
+      "bytes": 118543
+    }
+  }
+}
