@@ -383,6 +383,16 @@
     "file": "migration/ops/test_errors_register.py",
     "contains": "def test_apt_installs_cannot_hang"
    }
+  },
+  {
+   "id": "E56",
+   "date": "2026-10-23",
+   "error": "The first v4 render (pilot-010, run 40017605277) failed the gate's driver_continuous_motion with all 178 holds in motion: the row accepted only grammars starting with 'standard-v1', and v4 writes 'standard-v4:licensed-footage...'.",
+   "fix": "three_stage.MOTION_GRAMMARS accepts standard-v1 and standard-v4; every hold must still move.",
+   "antidote": {
+    "file": "migration/publish/test_three_stage.py",
+    "contains": "def test_v4_footage_grammar_counts_as_continuous_motion"
+   }
   }
  ]
 }

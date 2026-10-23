@@ -49,6 +49,20 @@ class Structure(unittest.TestCase):
             self.assertEqual(rows["package_publish_window"], "FAIL")
 
 
+    def test_v4_footage_grammar_counts_as_continuous_motion(self):
+        # E56: the first v4 render (pilot-010, 178 holds all in motion) failed because only standard-v1 was accepted
+        def state(grammar, motions):
+            with tempfile.TemporaryDirectory() as t:
+                d = pilot(t, "pilot-012")
+                (d / "out" / "manifest.json").write_text(json.dumps({"grammar": grammar,
+                                                                     "holds": [{"motion": m} for m in motions]}))
+                return {r["name"]: r["state"] for r in ts.structure_rows(d)}["driver_continuous_motion"]
+        v4 = "standard-v4:licensed-footage+depth-parallax+film-look+captions"
+        self.assertEqual(state(v4, ["footage", "push_in"]), "PASS")
+        self.assertEqual(state(v4, ["footage", None]), "FAIL")
+        self.assertEqual(state("figure-v0:static", ["footage"]), "FAIL")
+
+
 class Authenticity(unittest.TestCase):
     def setup(self, t, **other):
         d = pilot(t, "pilot-012")
