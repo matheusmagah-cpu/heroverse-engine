@@ -91,11 +91,25 @@ class Qualification(unittest.TestCase):
     def test_reservation_replay_or_unavailable_history_fails_closed(self):
         for data in ({'total_count': 1, 'artifacts': [{'name': q.START_ARTIFACT}]}, {},
                      {'total_count': 0, 'artifacts': [{}]}):
-            with patch.object(q, 'github_json', return_value=data):
+            with patch.object(q, 'ROOT', self.root), patch.object(q, 'github_json', return_value=data):
                 with self.assertRaisesRegex(ValueError, 'QUALIFICATION_ALREADY_RESERVED'):
                     q.require_unused_reservation('test-token')
-        with patch.object(q, 'github_json', return_value={'total_count': 0, 'artifacts': []}):
+        with patch.object(q, 'ROOT', self.root), patch.object(q, 'github_json', return_value={'total_count': 0, 'artifacts': []}):
             q.require_unused_reservation('test-token')
+
+    def test_consumed_receipt_blocks_replay_even_after_remote_artifact_expiry(self):
+        folder = self.root / 'migration/evidence/reviewer-qualification'
+        folder.mkdir(parents=True, exist_ok=True)
+        for state in ('STARTED', 'NOT_REVIEWED', 'REVIEWED', 'INTEGRITY_ERROR'):
+            (folder / 'receipt.json').write_text(json.dumps({'qualification_id': q.STREAM_QUALIFICATION, 'state': state}))
+            with self.subTest(state=state), patch.object(q, 'ROOT', self.root), \
+                 patch.object(q, 'github_json', return_value={'total_count': 0, 'artifacts': []}) as remote:
+                with self.assertRaisesRegex(ValueError, 'QUALIFICATION_ALREADY_RESERVED'):
+                    q.require_unused_reservation('test-token', 'reviewer-qualification-start-' + q.STREAM_QUALIFICATION)
+                remote.assert_not_called()
+        (folder / 'receipt.json').write_text(json.dumps({'qualification_id': q.STREAM_QUALIFICATION, 'state': 'CHECKED'}))
+        with patch.object(q, 'ROOT', self.root), patch.object(q, 'github_json', return_value={'total_count': 0, 'artifacts': []}):
+            q.require_unused_reservation('test-token', 'reviewer-qualification-start-' + q.STREAM_QUALIFICATION)
 
     def test_real_request_is_full_video_same_prompt_single_call_and_stateless(self):
         inference, result, send = self.call()
@@ -237,6 +251,8 @@ class Qualification(unittest.TestCase):
         self.assertFalse(control['ready'])
         self.assertEqual(control['trace']['http_status'], 503)
         self.assertEqual(control['trace']['provider_error_code'], 'service_unavailable')
+        self.assertEqual(control['error_code'], 'HTTP_503_UNAVAILABLE')
+        self.assertEqual(control['provider_diagnostic']['provider_status'], 'UNAVAILABLE')
         self.assertNotIn('private prose', json.dumps(control))
         self.assertEqual(send.call_count, 1)
         envelope = {'model': q.MODEL, 'status': 'completed', 'steps': [
@@ -261,13 +277,16 @@ class Qualification(unittest.TestCase):
         observation = {'expires_at': (q.now() + timedelta(hours=1)).isoformat()}
         with patch.object(q, 'validate_inputs', return_value=(observation, {}, 'observation')), \
              patch.object(q, 'MEDIA_SHA', digest), patch.object(q, 'MEDIA_BYTES', media.stat().st_size), \
-             patch.object(q, 'text_control', return_value={'ready': False, 'trace': {'http_status': 503}}), \
+             patch.object(q, 'text_control', return_value={'ready': False, 'trace': {'http_status': 503},
+                 'error_code': 'HTTP_503_UNAVAILABLE', 'provider_diagnostic': {'http_status': 503, 'provider_status': 'UNAVAILABLE'}}), \
              patch.object(q.sr, 'review', side_effect=AssertionError('VIDEO_REVIEW_AFTER_FAILED_CONTROL')) as review:
             result = q.infer(output, env)
         review.assert_not_called()
         self.assertEqual(result['state'], 'NOT_REVIEWED')
         self.assertEqual(result['inference_requests'], 1)
         self.assertFalse(result['publish'])
+        self.assertEqual(result['review']['error_code'], 'HTTP_503_UNAVAILABLE')
+        self.assertEqual(result['review']['provider_diagnostic']['http_status'], 503)
 
     def test_stream_failed_control_also_prevents_the_video_call(self):
         self.test_failed_text_control_stops_before_media_delivery(mode='stream')
@@ -333,6 +352,41 @@ class Qualification(unittest.TestCase):
         self.assertTrue(json.loads(send.call_args.args[0].data)['stream'])
         with patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(self.stream_events('READY')[:-1]))):
             self.assertFalse(q.text_control(self.key, cutoff, stream=True)['ready'])
+
+    def test_stream_keeps_initial_output_content_from_the_documented_event_contract(self):
+        # ai.google.dev/gemini-api/docs/thinking: model_output step.start
+        # may already contain text; subsequent deltas only append the remainder.
+        for prefix in ('REA', 'READY'):
+            events = self.stream_events('READY')
+            events[4]['step']['content'] = [{'type': 'text', 'text': prefix}]
+            events[5:7] = ([{'event_type': 'step.delta', 'index': 1,
+                            'delta': {'type': 'text', 'text': 'READY'[len(prefix):]}}]
+                          if prefix != 'READY' else [])
+            with self.subTest(prefix=prefix), patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(events))):
+                self.assertTrue(q.text_control(self.key, q.now() + timedelta(seconds=5), stream=True)['ready'])
+        events = self.stream_events()
+        text = json.dumps(self.report)
+        events[4]['step']['content'] = [{'type': 'text', 'text': text[:8]}]
+        del events[5]
+        with patch.object(q.urllib.request, 'urlopen', return_value=StreamResponse(sse(events))):
+            self.assertEqual(q.InteractionInference(stream=True)(self.payload, self.key,
+                [q.MODEL], http_policy=self.policy()), (q.MODEL, self.report))
+
+    def test_api_error_category_survives_without_retaining_secret_or_arbitrary_prose(self):
+        for code, status, http in [('service_unavailable', 'UNAVAILABLE', 503),
+                ('quota_exceeded', 'RESOURCE_EXHAUSTED', 429), ('authentication', 'UNAUTHENTICATED', 401)]:
+            raw = json.dumps({'error': {'code': code, 'message': self.key + ' private account details'}}).encode()
+            error = urllib.error.HTTPError(q.ENDPOINT, http, 'private prose', {}, io.BytesIO(raw))
+            trace = {}
+            failure = q.interaction_http_failure(error, self.key, trace)
+            self.assertEqual(failure.code, f'HTTP_{http}_{status}' + (':QUOTA' if http == 429 else ''))
+            self.assertNotIn(self.key, json.dumps(trace))
+            self.assertNotIn('private', json.dumps(trace))
+        raw = json.dumps({'error': {'code': 'service_unavailable', 'message':
+            'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.'}}).encode()
+        trace = {}
+        q.interaction_http_failure(urllib.error.HTTPError(q.ENDPOINT, 503, '', {}, io.BytesIO(raw)), self.key, trace)
+        self.assertEqual(trace['provider_message_category'], 'MODEL_HIGH_DEMAND')
 
     def test_stream_shared_deadline_interrupts_a_stalled_read_without_network(self):
         read_fd, write_fd = os.pipe()

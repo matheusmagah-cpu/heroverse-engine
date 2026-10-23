@@ -47,6 +47,20 @@ behind this reviewer block. Existing GitHub schedules were not globally disabled
 
 ## Authority and boundaries
 
+Execution audit, 2026-10-23: reproduced and corrected a streaming reader defect: text
+already present in `step.start.content` was discarded (`REA` + `DY` became `DY`).
+The provider-error adapter also now recognizes Interactions string codes and propagates
+the failed control as `ProviderFailure`, preserving `HTTP_503_UNAVAILABLE` rather than
+rewriting it as `NOT_REVIEWED_ValueError` / `UNKNOWN`. Public receipts retain categorical
+diagnostics without arbitrary provider prose or account data. Checked-in STARTED/final
+receipts now prevent replay even after the remote Actions artifact expires.
+These are real client fixes; they do not explain or erase the previously received HTTP 503.
+No new inference, reservation identifier, model, rubric or master change is part of this fix.
+Google's thinking documentation confirms that omitted thinking level and the UI's Medium
+selection have the same effective default for gemini-3.8-flash. The UI shows `No API key
+selected`; linking a key offers a paid-key/billing flow, which was closed without changes.
+The successful UI response therefore does not establish availability of the credentialed API.
+
 - `SYSTEM.md`: the canonical four-stage delivery contract: mining → modeling/production →
   originality, intention and critique → publication, with live intelligence across the cycle.
 - `STANDARD.md`: production quality standard; frozen per-file criteria and bindings remain authoritative.
