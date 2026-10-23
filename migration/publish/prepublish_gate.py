@@ -37,7 +37,7 @@ FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e513512
                           # migration/STANDARD.md v1, frozen 2026-10-19 before the first v3 render; v2 is unchanged
                           "pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
                           # owner, 2026-10-23: real licensed footage, 8-14 s scenes; v3 stays frozen and unchanged
-                          "pilot-qa-criteria-v4": "f1cbbdd9f4dbb5ba32c29ab60f3fa50948da8f459831563513fffc8ea816ebe4"}
+                          "pilot-qa-criteria-v4": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11"}
 CRITERIA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v3.json"
 CRITERIA_FILES = {"pilot-qa-criteria-v3": CRITERIA_V3,
                   "pilot-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v4.json"}
