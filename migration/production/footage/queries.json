@@ -1,0 +1,25 @@
+{
+ "version": "footage-queries-v1",
+ "library": "migration/production/footage/library",
+ "note": "Themes that match the prayer scripts (light, water, rest, night, mercy, strength). No people, text or branding (BLOCK in footage.py; every clip is also vetted on its frame sheet before use).",
+ "themes": [
+  {"theme": "sunrise", "query": "sunrise clouds timelapse"},
+  {"theme": "sunrise", "query": "sunrise mountains"},
+  {"theme": "clouds", "query": "clouds timelapse sky"},
+  {"theme": "ocean", "query": "ocean waves sunset"},
+  {"theme": "ocean", "query": "calm sea waves"},
+  {"theme": "river", "query": "river stream forest"},
+  {"theme": "waterfall", "query": "waterfall"},
+  {"theme": "lake", "query": "mountain lake reflection"},
+  {"theme": "rain", "query": "rain drops water surface"},
+  {"theme": "candle", "query": "candle flame"},
+  {"theme": "fire", "query": "fireplace fire burning"},
+  {"theme": "forest", "query": "forest sunlight trees"},
+  {"theme": "night", "query": "night sky stars timelapse"},
+  {"theme": "night", "query": "full moon night"},
+  {"theme": "meadow", "query": "flowers meadow wind"},
+  {"theme": "snow", "query": "snow falling winter landscape"},
+  {"theme": "mist", "query": "fog valley morning"},
+  {"theme": "sunset", "query": "sunset timelapse"}
+ ]
+}

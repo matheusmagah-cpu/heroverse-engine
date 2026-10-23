@@ -1,0 +1,51 @@
+name: HeroVerse footage library (licensed real footage, no paid call)
+on:
+  workflow_dispatch:
+    inputs:
+      per_theme:
+        description: Clips to add per query (default 3)
+        required: false
+        default: '3'
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-footage
+  cancel-in-progress: false
+jobs:
+  library:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Search, download and normalise (1920x1080, 30 fps, no audio)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          python3 -I -B migration/production/footage/footage.py search migration/production/footage/queries.json "$RUNNER_TEMP/clips" "${{ inputs.per_theme }}"
+      - name: Release assets, records and frame sheet for vetting
+        run: |
+          lib=migration/production/footage/library; mkdir -p "$lib/sheets" "$RUNNER_TEMP/frames"
+          shopt -s nullglob; n=0
+          for mp4 in "$RUNNER_TEMP"/clips/*.mp4; do
+            id=$(basename "$mp4" .mp4); sha=$(sha256sum "$mp4" | cut -d' ' -f1)
+            asset="footage-$id-sha256-$sha.mp4"; cp "$mp4" "$RUNNER_TEMP/$asset"
+            gh release upload "$TAG" "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];open(sys.argv[3],'w').write(json.dumps(m,indent=1,ensure_ascii=False)+'\n')" "$RUNNER_TEMP/clips/$id.json" "$asset" "$lib/$id.json"
+            d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$mp4")
+            for k in 1 2 3; do  # start, middle, end of each kept clip, with its id burned in for the reviewer
+              ffmpeg -v error -y -ss "$(python3 -c "print($d*($k*2-1)/6)")" -i "$mp4" -frames:v 1 \
+                -vf "scale=480:270,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='$id':x=6:y=6:fontsize=12:fontcolor=yellow:box=1:boxcolor=black@0.6" \
+                "$RUNNER_TEMP/frames/$id-$k.jpg"
+            done
+            n=$((n+1))
+          done
+          [ "$n" -gt 0 ] || { echo "NO_NEW_CLIPS"; exit 0; }
+          ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/frames/*.jpg" -vf "tile=3x$n" -frames:v 1 -q:v 4 "$lib/sheets/run-$GITHUB_RUN_ID.jpg"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$lib"
+          git commit -q -m "Footage library: $n licensed clips, vetting PENDING (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
