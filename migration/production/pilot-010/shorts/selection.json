@@ -1,0 +1,756 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-010",
+ "rubric_model": "gemini-3.6-flash",
+ "candidates_considered": 6,
+ "shortlist": [
+  {
+   "start": 373.027,
+   "end": 427.951,
+   "sentences": [
+    {
+     "segment": "stillness-first",
+     "text": "Let an ordinary breath come and go.",
+     "start": 373.027,
+     "end": 375.8
+    },
+    {
+     "segment": "stillness-first",
+     "text": "For these moments, you can leave the unfinished calculation unfinished.",
+     "start": 376.1,
+     "end": 381.455
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "Take therefore no thought for the morrow:",
+     "start": 384.755,
+     "end": 387.699
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "for the morrow shall take thought for the things of itself.",
+     "start": 387.999,
+     "end": 391.604
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "Sufficient unto the day is the evil thereof.",
+     "start": 391.904,
+     "end": 395.552
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "Father, I name the appointment on the calendar.",
+     "start": 397.352,
+     "end": 400.723
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "I bring the questions I hope to ask and the answers I am afraid to hear.",
+     "start": 401.023,
+     "end": 406.633
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "Help me bring any notes or documents I need, and seek appropriate support if I want someone with me.",
+     "start": 406.933,
+     "end": 414.315
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "I place the unknown parts before you.",
+     "start": 414.615,
+     "end": 417.772
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "Give me courage for the actual hour when it comes.",
+     "start": 418.072,
+     "end": 421.613
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "I release the demand to experience that hour many times before it arrives.",
+     "start": 421.913,
+     "end": 427.951
+    }
+   ],
+   "segments": [
+    "stillness-first",
+    "scripture-matthew-tomorrow",
+    "prayer-appointment"
+   ],
+   "text": "Let an ordinary breath come and go. For these moments, you can leave the unfinished calculation unfinished. Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof. Father, I name the appointment on the calendar. I bring the questions I hope to ask and the answers I am afraid to hear. Help me bring any notes or documents I need, and seek appropriate support if I want someone with me. I place the unknown parts before you. Give me courage for the actual hour when it comes. I release the demand to experience that hour many times before it arrives.",
+   "reference": "Matthew 6:34 (KJV)",
+   "measured_score": 0.5077,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.17241379310344826,
+    "scripture": 1.0,
+    "promise": 0.21551724137931033,
+    "resolution": 0.4,
+    "length_fit": 0.4030399999999986
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 9.0,
+    "policy_safe": 10.0,
+    "reasons": "Exceptionally strong closing line about not living an hour many times before it arrives. Very relatable focus on upcoming stressful appointments.",
+    "hook_line": "Stop living tomorrow's hard hour tonight",
+    "title": "Anxiety Before a Hard Tomorrow? Pray This First"
+   },
+   "final_score": 0.7581,
+   "hook": "Stop living tomorrow's hard hour tonight",
+   "title": "Anxiety Before a Hard Tomorrow? Pray This First"
+  },
+  {
+   "start": 700.971,
+   "end": 738.892,
+   "sentences": [
+    {
+     "segment": "rehook-5",
+     "text": "We are almost at the place of rest.",
+     "start": 700.971,
+     "end": 703.68
+    },
+    {
+     "segment": "rehook-5",
+     "text": "First, a few words of trust to say with me.",
+     "start": 703.98,
+     "end": 707.223
+    },
+    {
+     "segment": "declaration",
+     "text": "I can be honest about what troubles me.",
+     "start": 708.123,
+     "end": 711.323
+    },
+    {
+     "segment": "declaration",
+     "text": "I can ask for help before I reach the end of my strength.",
+     "start": 711.623,
+     "end": 715.996
+    },
+    {
+     "segment": "declaration",
+     "text": "I can make a plan without predicting every result.",
+     "start": 716.296,
+     "end": 720.307
+    },
+    {
+     "segment": "declaration",
+     "text": "I can care for another person without carrying their entire future.",
+     "start": 720.607,
+     "end": 725.748
+    },
+    {
+     "segment": "declaration",
+     "text": "I can leave a message unanswered for a time when no urgent need is present.",
+     "start": 726.048,
+     "end": 731.957
+    },
+    {
+     "segment": "declaration",
+     "text": "God receives the concern I can name and the concern I cannot yet put into words.",
+     "start": 732.257,
+     "end": 738.892
+    }
+   ],
+   "segments": [
+    "rehook-5",
+    "declaration"
+   ],
+   "text": "We are almost at the place of rest. First, a few words of trust to say with me. I can be honest about what troubles me. I can ask for help before I reach the end of my strength. I can make a plan without predicting every result. I can care for another person without carrying their entire future. I can leave a message unanswered for a time when no urgent need is present. God receives the concern I can name and the concern I cannot yet put into words.",
+   "reference": null,
+   "measured_score": 0.4772,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.0,
+    "scripture": 0.4,
+    "promise": 0.5555555555555556,
+    "resolution": 0.4,
+    "length_fit": 0.916840000000002
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 8.5,
+    "stands_alone": 10.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "A structured series of realistic self-permissions and trust statements. Hits specific quiet burdens like unanswered messages and carrying others.",
+    "hook_line": "You do not have to carry everything",
+    "title": "A Bedtime Prayer for the Overwhelmed Heart"
+   },
+   "final_score": 0.7259,
+   "hook": "You do not have to carry everything",
+   "title": "A Bedtime Prayer for the Overwhelmed Heart"
+  },
+  {
+   "start": 284.672,
+   "end": 325.495,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "Stay with me a little longer.",
+     "start": 284.672,
+     "end": 286.933
+    },
+    {
+     "segment": "rehook-2",
+     "text": "Now we bring the money worry that grows louder after dark.",
+     "start": 287.233,
+     "end": 291.841
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Father, I name the household expense that has been pressing on me.",
+     "start": 292.741,
+     "end": 297.691
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "I bring the bill, the estimate, or the balance I need to review.",
+     "start": 297.991,
+     "end": 302.684
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Give me clear judgment when I look at the facts.",
+     "start": 302.984,
+     "end": 306.376
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Help me ask about arrangements when I need them, and speak honestly with anyone who shares this responsibility.",
+     "start": 306.676,
+     "end": 314.441
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "I place these practical concerns before you without inventing a certainty about how they will turn out.",
+     "start": 314.741,
+     "end": 322.293
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Guide my next responsible choice.",
+     "start": 322.593,
+     "end": 325.495
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "prayer-household-cost"
+   ],
+   "text": "Stay with me a little longer. Now we bring the money worry that grows louder after dark. Father, I name the household expense that has been pressing on me. I bring the bill, the estimate, or the balance I need to review. Give me clear judgment when I look at the facts. Help me ask about arrangements when I need them, and speak honestly with anyone who shares this responsibility. I place these practical concerns before you without inventing a certainty about how they will turn out. Guide my next responsible choice.",
+   "reference": null,
+   "measured_score": 0.443,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.10869565217391304,
+    "scripture": 0.4,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.9670800000000008
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 9.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 8.5,
+    "shareability": 9.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Directly addresses late-night financial anxiety with honesty and practical faith rather than false promises of wealth.",
+    "hook_line": "When money worries keep you awake",
+    "title": "Pray This When Late-Night Financial Worry Hits"
+   },
+   "final_score": 0.7222,
+   "hook": "When money worries keep you awake",
+   "title": "Pray This When Late-Night Financial Worry Hits"
+  },
+  {
+   "start": 344.0,
+   "end": 395.552,
+   "sentences": [
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Keep shame from isolating me.",
+     "start": 344.0,
+     "end": 346.645
+    },
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Let courage take the form of a call made or a question asked.",
+     "start": 346.945,
+     "end": 351.532
+    },
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Tonight I give you my fear of falling behind, and ask for companionship and wisdom as I address what is real.",
+     "start": 351.832,
+     "end": 360.856
+    },
+    {
+     "segment": "stillness-first",
+     "text": "You can pause before naming anything else.",
+     "start": 362.356,
+     "end": 365.556
+    },
+    {
+     "segment": "stillness-first",
+     "text": "Feel where your hands have come to rest.",
+     "start": 365.856,
+     "end": 368.587
+    },
+    {
+     "segment": "stillness-first",
+     "text": "You do not need to move them into a special position.",
+     "start": 368.887,
+     "end": 372.727
+    },
+    {
+     "segment": "stillness-first",
+     "text": "Let an ordinary breath come and go.",
+     "start": 373.027,
+     "end": 375.8
+    },
+    {
+     "segment": "stillness-first",
+     "text": "For these moments, you can leave the unfinished calculation unfinished.",
+     "start": 376.1,
+     "end": 381.455
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "Take therefore no thought for the morrow:",
+     "start": 384.755,
+     "end": 387.699
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "for the morrow shall take thought for the things of itself.",
+     "start": 387.999,
+     "end": 391.604
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "Sufficient unto the day is the evil thereof.",
+     "start": 391.904,
+     "end": 395.552
+    }
+   ],
+   "segments": [
+    "prayer-sufficient-plan",
+    "stillness-first",
+    "scripture-matthew-tomorrow"
+   ],
+   "text": "Keep shame from isolating me. Let courage take the form of a call made or a question asked. Tonight I give you my fear of falling behind, and ask for companionship and wisdom as I address what is real. You can pause before naming anything else. Feel where your hands have come to rest. You do not need to move them into a special position. Let an ordinary breath come and go. For these moments, you can leave the unfinished calculation unfinished. Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.",
+   "reference": "Matthew 6:34 (KJV)",
+   "measured_score": 0.5664,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.4629629629629629,
+    "scripture": 1.0,
+    "promise": 0.23148148148148148,
+    "resolution": 0.4,
+    "length_fit": 0.5379199999999992
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 8.0,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Opens with an emotionally resonant phrase about shame, though scripture at the end shifts tone slightly. Provides calm grounding for night anxiety.",
+    "hook_line": "Keep shame from isolating you tonight",
+    "title": "A Prayer to Stop Fearing Falling Behind | Night Calm"
+   },
+   "final_score": 0.7066
+  },
+  {
+   "start": 322.593,
+   "end": 360.856,
+   "sentences": [
+    {
+     "segment": "prayer-household-cost",
+     "text": "Guide my next responsible choice.",
+     "start": 322.593,
+     "end": 325.495
+    },
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Lord, I release the midnight calculations that repeat without giving me new information.",
+     "start": 326.995,
+     "end": 333.693
+    },
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Tomorrow, help me set aside a definite time to look carefully, with paper, accurate figures, and whatever advice is needed.",
+     "start": 333.993,
+     "end": 343.7
+    },
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Keep shame from isolating me.",
+     "start": 344.0,
+     "end": 346.645
+    },
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Let courage take the form of a call made or a question asked.",
+     "start": 346.945,
+     "end": 351.532
+    },
+    {
+     "segment": "prayer-sufficient-plan",
+     "text": "Tonight I give you my fear of falling behind, and ask for companionship and wisdom as I address what is real.",
+     "start": 351.832,
+     "end": 360.856
+    }
+   ],
+   "segments": [
+    "prayer-household-cost",
+    "prayer-sufficient-plan"
+   ],
+   "text": "Guide my next responsible choice. Lord, I release the midnight calculations that repeat without giving me new information. Tomorrow, help me set aside a definite time to look carefully, with paper, accurate figures, and whatever advice is needed. Keep shame from isolating me. Let courage take the form of a call made or a question asked. Tonight I give you my fear of falling behind, and ask for companionship and wisdom as I address what is real.",
+   "reference": null,
+   "measured_score": 0.4425,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.12987012987012986,
+    "scripture": 0.4,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.9305199999999991
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Phenomenal phrase 'midnight calculations that repeat without giving new information', but opening line is slightly abrupt.",
+    "hook_line": "Release your midnight calculations tonight",
+    "title": "Stop Overthinking at Night: A Prayer for Peace"
+   },
+   "final_score": 0.672
+  }
+ ],
+ "chosen": [
+  {
+   "start": 373.027,
+   "end": 427.951,
+   "sentences": [
+    {
+     "segment": "stillness-first",
+     "text": "Let an ordinary breath come and go.",
+     "start": 373.027,
+     "end": 375.8
+    },
+    {
+     "segment": "stillness-first",
+     "text": "For these moments, you can leave the unfinished calculation unfinished.",
+     "start": 376.1,
+     "end": 381.455
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "Take therefore no thought for the morrow:",
+     "start": 384.755,
+     "end": 387.699
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "for the morrow shall take thought for the things of itself.",
+     "start": 387.999,
+     "end": 391.604
+    },
+    {
+     "segment": "scripture-matthew-tomorrow",
+     "text": "Sufficient unto the day is the evil thereof.",
+     "start": 391.904,
+     "end": 395.552
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "Father, I name the appointment on the calendar.",
+     "start": 397.352,
+     "end": 400.723
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "I bring the questions I hope to ask and the answers I am afraid to hear.",
+     "start": 401.023,
+     "end": 406.633
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "Help me bring any notes or documents I need, and seek appropriate support if I want someone with me.",
+     "start": 406.933,
+     "end": 414.315
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "I place the unknown parts before you.",
+     "start": 414.615,
+     "end": 417.772
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "Give me courage for the actual hour when it comes.",
+     "start": 418.072,
+     "end": 421.613
+    },
+    {
+     "segment": "prayer-appointment",
+     "text": "I release the demand to experience that hour many times before it arrives.",
+     "start": 421.913,
+     "end": 427.951
+    }
+   ],
+   "segments": [
+    "stillness-first",
+    "scripture-matthew-tomorrow",
+    "prayer-appointment"
+   ],
+   "text": "Let an ordinary breath come and go. For these moments, you can leave the unfinished calculation unfinished. Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof. Father, I name the appointment on the calendar. I bring the questions I hope to ask and the answers I am afraid to hear. Help me bring any notes or documents I need, and seek appropriate support if I want someone with me. I place the unknown parts before you. Give me courage for the actual hour when it comes. I release the demand to experience that hour many times before it arrives.",
+   "reference": "Matthew 6:34 (KJV)",
+   "measured_score": 0.5077,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.17241379310344826,
+    "scripture": 1.0,
+    "promise": 0.21551724137931033,
+    "resolution": 0.4,
+    "length_fit": 0.4030399999999986
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 9.0,
+    "policy_safe": 10.0,
+    "reasons": "Exceptionally strong closing line about not living an hour many times before it arrives. Very relatable focus on upcoming stressful appointments.",
+    "hook_line": "Stop living tomorrow's hard hour tonight",
+    "title": "Anxiety Before a Hard Tomorrow? Pray This First"
+   },
+   "final_score": 0.7581,
+   "hook": "Stop living tomorrow's hard hour tonight",
+   "title": "Anxiety Before a Hard Tomorrow? Pray This First"
+  },
+  {
+   "start": 700.971,
+   "end": 738.892,
+   "sentences": [
+    {
+     "segment": "rehook-5",
+     "text": "We are almost at the place of rest.",
+     "start": 700.971,
+     "end": 703.68
+    },
+    {
+     "segment": "rehook-5",
+     "text": "First, a few words of trust to say with me.",
+     "start": 703.98,
+     "end": 707.223
+    },
+    {
+     "segment": "declaration",
+     "text": "I can be honest about what troubles me.",
+     "start": 708.123,
+     "end": 711.323
+    },
+    {
+     "segment": "declaration",
+     "text": "I can ask for help before I reach the end of my strength.",
+     "start": 711.623,
+     "end": 715.996
+    },
+    {
+     "segment": "declaration",
+     "text": "I can make a plan without predicting every result.",
+     "start": 716.296,
+     "end": 720.307
+    },
+    {
+     "segment": "declaration",
+     "text": "I can care for another person without carrying their entire future.",
+     "start": 720.607,
+     "end": 725.748
+    },
+    {
+     "segment": "declaration",
+     "text": "I can leave a message unanswered for a time when no urgent need is present.",
+     "start": 726.048,
+     "end": 731.957
+    },
+    {
+     "segment": "declaration",
+     "text": "God receives the concern I can name and the concern I cannot yet put into words.",
+     "start": 732.257,
+     "end": 738.892
+    }
+   ],
+   "segments": [
+    "rehook-5",
+    "declaration"
+   ],
+   "text": "We are almost at the place of rest. First, a few words of trust to say with me. I can be honest about what troubles me. I can ask for help before I reach the end of my strength. I can make a plan without predicting every result. I can care for another person without carrying their entire future. I can leave a message unanswered for a time when no urgent need is present. God receives the concern I can name and the concern I cannot yet put into words.",
+   "reference": null,
+   "measured_score": 0.4772,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.0,
+    "scripture": 0.4,
+    "promise": 0.5555555555555556,
+    "resolution": 0.4,
+    "length_fit": 0.916840000000002
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 8.5,
+    "stands_alone": 10.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "A structured series of realistic self-permissions and trust statements. Hits specific quiet burdens like unanswered messages and carrying others.",
+    "hook_line": "You do not have to carry everything",
+    "title": "A Bedtime Prayer for the Overwhelmed Heart"
+   },
+   "final_score": 0.7259,
+   "hook": "You do not have to carry everything",
+   "title": "A Bedtime Prayer for the Overwhelmed Heart"
+  },
+  {
+   "start": 284.672,
+   "end": 325.495,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "Stay with me a little longer.",
+     "start": 284.672,
+     "end": 286.933
+    },
+    {
+     "segment": "rehook-2",
+     "text": "Now we bring the money worry that grows louder after dark.",
+     "start": 287.233,
+     "end": 291.841
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Father, I name the household expense that has been pressing on me.",
+     "start": 292.741,
+     "end": 297.691
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "I bring the bill, the estimate, or the balance I need to review.",
+     "start": 297.991,
+     "end": 302.684
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Give me clear judgment when I look at the facts.",
+     "start": 302.984,
+     "end": 306.376
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Help me ask about arrangements when I need them, and speak honestly with anyone who shares this responsibility.",
+     "start": 306.676,
+     "end": 314.441
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "I place these practical concerns before you without inventing a certainty about how they will turn out.",
+     "start": 314.741,
+     "end": 322.293
+    },
+    {
+     "segment": "prayer-household-cost",
+     "text": "Guide my next responsible choice.",
+     "start": 322.593,
+     "end": 325.495
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "prayer-household-cost"
+   ],
+   "text": "Stay with me a little longer. Now we bring the money worry that grows louder after dark. Father, I name the household expense that has been pressing on me. I bring the bill, the estimate, or the balance I need to review. Give me clear judgment when I look at the facts. Help me ask about arrangements when I need them, and speak honestly with anyone who shares this responsibility. I place these practical concerns before you without inventing a certainty about how they will turn out. Guide my next responsible choice.",
+   "reference": null,
+   "measured_score": 0.443,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.10869565217391304,
+    "scripture": 0.4,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.9670800000000008
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 9.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 8.5,
+    "shareability": 9.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Directly addresses late-night financial anxiety with honesty and practical faith rather than false promises of wealth.",
+    "hook_line": "When money worries keep you awake",
+    "title": "Pray This When Late-Night Financial Worry Hits"
+   },
+   "final_score": 0.7222,
+   "hook": "When money worries keep you awake",
+   "title": "Pray This When Late-Night Financial Worry Hits"
+  }
+ ],
+ "selection_mode": "LEGACY",
+ "input_sha256": {
+  "timeline": "bbcb88d836f353a1fc893c3c361c4871c72d90ccb8fe0e150a7376d399bc8777",
+  "script": "4bda77467a6fdd7cae15bf6674b5003c927653922f7034161eec9456d0310403"
+ },
+ "structural_counts": {
+  "opening_starts_total": 173,
+  "opening_starts_accepted": 8,
+  "opening_rejections": {
+   "OPENING_OVER_3S": 119,
+   "DEPENDENT_OPENING_REFERENCE": 22,
+   "CONTEXT_OPENER": 11,
+   "EMPTY_OR_INCOMPLETE_OPENING": 9,
+   "CONTINUATION_OPENING_LINE": 4
+  },
+  "window_pairs_total": 34,
+  "window_pairs_accepted": 6,
+  "window_rejections": {
+   "CTA_OR_TRANSITION_SEGMENT": 5,
+   "UNRESOLVED_SEGMENT_END": 20,
+   "PARTIAL_SCRIPTURE": 2,
+   "INCOMPLETE_ENDING": 1
+  }
+ },
+ "reason": null
+}
