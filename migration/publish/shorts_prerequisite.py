@@ -21,9 +21,9 @@ def problems(pilot_dir):
     errors = binding.check(*docs, review=review)
     qa, _, manifest, _ = docs
     if not isinstance(review, dict): errors.append('LONG_REVIEW_MISSING')
-    if not isinstance(qa, dict) or qa.get('criteria_version') != 'pilot-qa-criteria-v3':
+    if not isinstance(qa, dict) or qa.get('criteria_version') not in binding.canonical_gate.STANDARD_VERSIONS:
         errors.append('LONG_NOT_V3')
-    if not isinstance(qa, dict) or qa.get('criteria_sha256') != binding.canonical_gate.FROZEN_CRITERIA_SHA256['pilot-qa-criteria-v3']:
+    elif qa.get('criteria_sha256') != binding.canonical_gate.FROZEN_CRITERIA_SHA256[qa['criteria_version']]:
         errors.append('LONG_CRITERIA_HASH_CHANGED')
     if not isinstance(manifest, dict) or manifest.get('script_sha256') != script_sha:
         errors.append('LONG_SCRIPT_CHANGED')

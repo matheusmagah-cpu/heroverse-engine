@@ -103,6 +103,21 @@ class Check(unittest.TestCase):
     def test_real_pilot_passes(self):
         self.assertEqual(self.run_check(), [])
 
+    def test_footage_must_be_vetted_licensed_library_clips(self):
+        def footage(n, vetting="APPROVED", licence="CC BY 4.0"):
+            def mutate(s, d):
+                lib = d.parent / "footage" / "library"
+                lib.mkdir(parents=True, exist_ok=True)
+                s["footage"] = [f"clip-x-{i}" for i in range(n)]
+                for c in s["footage"]:
+                    (lib / f"{c}.json").write_text(json.dumps({"id": c, "vetting": vetting, "licence": licence,
+                                                               "release_asset": "a.mp4"}))
+            return mutate
+        self.assertEqual(self.run_check(footage(20)), [])
+        self.assertIn("TOO_FEW_FOOTAGE 12 < 20", self.run_check(footage(12)))
+        self.assertTrue(any(p.startswith("FOOTAGE_NOT_VETTED") for p in self.run_check(footage(20, vetting="PENDING"))))
+        self.assertTrue(any(p.startswith("FOOTAGE_RIGHTS") for p in self.run_check(footage(20, licence="CC BY-SA 4.0"))))
+
     def test_too_few_backgrounds_fail_pilot_008(self):
         # E48: 12 backgrounds for 28 minutes scored pacing 6.5 ("a small loop of recurring images")
         def twelve(s, d):

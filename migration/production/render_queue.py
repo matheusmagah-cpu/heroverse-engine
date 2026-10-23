@@ -37,6 +37,9 @@ def needed_images(d, script):
 
 
 STANDARD_QA = "pilot-qa-criteria-v3"  # migration/STANDARD.md v1: the only renders that may be approved or published
+# v4 (owner, 2026-10-23: licensed real footage) is the same standard with the footage grammar; both may publish
+STANDARD_QAS = {"pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+                "pilot-qa-criteria-v4": "6b7c5e4bdb5537d4ecb0cad64ab5a9ceda8a8c6c3fbd970d6425819d04cd27af"}
 
 STANDARD_QA_SHA256 = "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
 
@@ -57,8 +60,8 @@ def current_render(manifest, qa, script_sha):
     return (isinstance(output, str) and re.fullmatch(r"[0-9a-f]{64}", output) is not None
             and manifest.get("script_sha256") == script_sha
             and qa.get("output_sha256") == output
-            and qa.get("criteria_version") == STANDARD_QA
-            and qa.get("criteria_sha256") == STANDARD_QA_SHA256
+            and qa.get("criteria_version") in STANDARD_QAS
+            and qa.get("criteria_sha256") == STANDARD_QAS[qa.get("criteria_version")]
             and qa.get("status") in ("PASS", "FAIL"))
 
 
@@ -99,7 +102,7 @@ def stale(production, ledger, now, days=STALE_DAYS):
         if any(k.split(":", 1)[0] == d.name and "video_id" in v for k, v in entries.items()):
             continue
         qa = object_or_empty(d / "out" / "qa.json")
-        if qa and qa.get("criteria_version") != STANDARD_QA:
+        if qa and qa.get("criteria_version") not in STANDARD_QAS:
             continue  # rendered before migration/STANDARD.md: retired, never published (pilot-003)
         out.append({"pilot": d.name, "publish_at": t})
     return out
@@ -159,7 +162,7 @@ def main(production, ledger_path, mode, hours="48"):
                 continue
             if not r["rendered"] or qa.get("status") != "PASS":
                 continue
-            if qa.get("criteria_version") != STANDARD_QA:
+            if qa.get("criteria_version") not in STANDARD_QAS:
                 continue  # renders made before migration/STANDARD.md (owner: "amateur") are never approved or published
             ap = json.loads((d / "inspection" / "APPROVAL.json").read_text()) if (d / "inspection" / "APPROVAL.json").exists() else {}
             rev = json.loads((d / "out" / "review.json").read_text()) if (d / "out" / "review.json").exists() else {}

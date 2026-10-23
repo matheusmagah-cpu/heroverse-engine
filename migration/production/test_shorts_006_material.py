@@ -72,7 +72,7 @@ def manifest_fixture(plan, docs, media, media_hash):
     qa = {"file": "short-00.mp4", "seconds": 42., "lufs": -14., "true_peak_dbtp": -2.,
           "checks": {k: True for k in ep.QA_CHECKS}, "status": "PASS"}
     review = {k: 9. for k in ep.RUBRIC}
-    review.update(status="PASS", model="gemini-3.8-flash", overall=9., issues=[], strongest_moment="synthetic", output_sha256=OUTPUT_HASH)
+    review.update(status="PASS", model="gemini-3.8-flash", overall=9.6, issues=[], strongest_moment="synthetic", output_sha256=OUTPUT_HASH)
     record = {"file": "short-00.mp4", "sha256": OUTPUT_HASH, "seconds": 42., "source_start": 813.728, "source_end": 854.417,
         "hook": "Let your face soften.", "title": "Rest in God's Care", "reference": None,
         "hook_mode": "caption_only", "hook_shown": True, "scenes": [s["image_id"] for s in plan["scenes"]],

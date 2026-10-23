@@ -9,7 +9,7 @@ Live intelligence follows the entire process and the market, using the results t
 |---|---|---|---|
 | **1. Mining** | Channel direction, current market and available results from our videos | A versioned structure: winners and weak contrasts, audiovisual evidence, measured attributes, production targets and publication pattern | The evidence supports the targets and the structure meets the validation rule below. A candidate is explicitly limited to a pilot. |
 | **2. Modeling and production** | The accepted structure and its evidence | An original script and direction, sourced assets, the finished master, technical checks and proposed publication package | Required inputs are complete, technical checks pass and the exact files are identified. The material is ready for editorial review. |
-| **3. Originality, intention and critique** | The exact master, script, sources, technical results and package | An approval bound to the file, or a specific rejection with evidence and the correction required | Originality, editorial intention, policy, frozen technical gates and designated audiovisual review all pass, including the owner's overall floor of 9. |
+| **3. Originality, intention and critique** | The exact master, script, sources, technical results and package | An approval bound to the file, or a specific rejection with evidence and the correction required | Originality, editorial intention, policy, frozen technical gates and designated audiovisual review all pass, including the owner's overall floor of 9.5. |
 | **4. Publication** | The approved file and its qualified package | The YouTube identity, verified publication state, completed package and results available for learning | Readback confirms the intended publication and package. Upload alone does not complete this delivery. |
 
 ### Handoff rules
@@ -139,7 +139,7 @@ Every video passes all of these, or it is not published:
   Any finding blocks until it is fixed.
 - **Disclosure.** Realistic synthetic people or events are disclosed as altered or synthetic content; scenery-only videos say so in the record.
 
-The receiving reviewer validates the existing technical evidence and its binding, then evaluates the complete audiovisual file. Base review requires every item ≥ 7 and overall ≥ 8; **new uploads additionally require overall ≥ 9**, under `publish/owner_quality_policy.py`. The designated reviewer remains `gemini-3.8-flash`. No fallback, manual score, provider error or approval for another file satisfies this handoff.
+The receiving reviewer validates the existing technical evidence and its binding, then evaluates the complete audiovisual file. Base review requires every item ≥ 7 and overall ≥ 8; **new uploads additionally require overall ≥ 9.5** (owner, 2026-10-23), under `publish/owner_quality_policy.py`. The designated reviewer remains `gemini-3.8-flash`. No fallback, manual score, provider error or approval for another file satisfies this handoff.
 
 ## 4. Publish the complete package
 

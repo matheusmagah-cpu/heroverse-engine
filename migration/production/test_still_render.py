@@ -70,6 +70,54 @@ class RepeatGap(unittest.TestCase):
             seen[h["image"]] = h["end"]
 
 
+class FootageV4(unittest.TestCase):
+    """Owner, 2026-10-23: real licensed footage alternates with the stills in 6-14 s scenes (pilot-qa-criteria-v4)."""
+    CRIT = json.loads((HERE / "qa_criteria_v4.json").read_text())
+
+    @staticmethod
+    def plan(n_still, n_clip, total=1610.0):
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0},
+                  "backgrounds": [f"bg-{i}" for i in range(n_still)], "footage": [f"clip-{i}" for i in range(n_clip)]}
+        # sentences every 5 s, like the narration (scenes then measure ~10 s, as on the 008/010/011 timelines)
+        sents = [{"start": 2.5 + 5.0 * k, "end": 2.5 + 5.0 * k + 4.0, "text": "x"} for k in range(int(total // 5.0))]
+        return sr.holds(script, {"sentences": sents}, total)
+
+    def manifest(self, plan, vetting="APPROVED", licence="CC BY 4.0"):
+        clips = [{"id": c, "licence": licence, "vetting": vetting, "credit": "Footage: x", "sha256": "a" * 64}
+                 for c in sorted({h["image"] for h in plan if h.get("kind") == "footage"})]
+        for h in plan:
+            h["motion"] = "footage" if h.get("kind") == "footage" else "dolly_in"
+        return {"holds": plan, "clips": clips, "captions": [{"start": 3.0, "end": 6.0, "text": "a b", "segment": "s"}],
+                "sentences": [{"start": 3.0, "end": 6.0, "segment": "s"}], "cta": [], "caption_style": {"box": False},
+                "persistent_overlays": ["brand"], "crossfade_seconds": sr.FADE, "scripture_cards": [],
+                "images": {"bg-0": {"models": {"m": {"license": "apache-2.0", "revision": "r"}}}}}
+
+    def test_scenes_alternate_footage_first_within_bounds_and_gap(self):
+        plan = self.plan(20, 22)
+        self.assertEqual([h.get("kind") for h in plan[1:5]], ["footage", "still", "footage", "still"])
+        for h in plan[1:-1]:
+            self.assertTrue(sr.FOOTAGE_HOLD_MIN - 1e-6 <= h["end"] - h["start"] <= sr.FOOTAGE_HOLD_MAX + 1e-6, h)
+        self.assertEqual(self.CRIT["grammar"]["scene_seconds"], [sr.FOOTAGE_HOLD_MIN, sr.FOOTAGE_HOLD_MAX])
+
+    def test_too_few_clips_refused_before_render(self):
+        with self.assertRaises(SystemExit) as e:
+            self.plan(18, 6)
+        self.assertIn("REPEAT_GAP_VIOLATION", str(e.exception))
+
+    def test_qa_v4_rights_and_share(self):
+        import qa_pilot
+        plan = self.plan(20, 22)
+        ok = qa_pilot.grammar_checks_v4(self.CRIT, self.manifest(plan))
+        self.assertTrue(ok["footage_picture_share"])
+        self.assertTrue(ok["footage_licensed_vetted_and_credited"])
+        self.assertTrue(ok["scene_seconds"])
+        self.assertNotIn("no_third_party_footage", ok)
+        self.assertFalse(qa_pilot.grammar_checks_v4(self.CRIT, self.manifest(plan, vetting="PENDING"))[
+            "footage_licensed_vetted_and_credited"])
+        self.assertFalse(qa_pilot.grammar_checks_v4(self.CRIT, self.manifest(plan, licence="CC BY-SA 4.0"))[
+            "footage_licensed_vetted_and_credited"])
+
+
 class SpeechText(unittest.TestCase):
     """E47: the voice spelled "G-O-D" for the KJV "Lord GOD" (pilot-008 review, 17:36)."""
 

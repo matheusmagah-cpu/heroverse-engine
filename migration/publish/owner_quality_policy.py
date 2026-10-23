@@ -6,6 +6,9 @@ check neither generates a score nor substitutes for the canonical QA gates.
 import math
 import re
 
+# owner, 2026-10-20: "quero 9 pra cima"; owner, 2026-10-23: "9.5 para todos os vídeos em todas as etapas"
+OWNER_FLOOR = 9.5
+
 
 def check(review, output_sha256):
     """Return categorical problems without modifying the review evidence."""
@@ -20,7 +23,7 @@ def check(review, output_sha256):
     if (isinstance(overall, bool) or not isinstance(overall, (int, float))
             or (isinstance(overall, float) and not math.isfinite(overall))):
         problems.append("OVERALL_INVALID")
-    elif not 9.0 <= overall <= 10.0:
+    elif not OWNER_FLOOR <= overall <= 10.0:
         problems.append("OVERALL_OUTSIDE_OWNER_RANGE")
     hashes = (output_sha256, review.get("output_sha256"))
     if any(not isinstance(h, str) or not re.fullmatch("[0-9a-f]{64}", h) for h in hashes):

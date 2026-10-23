@@ -15,7 +15,7 @@ VIDEO_SHA = hashlib.sha256(VIDEO_BYTES).hexdigest()
 
 def synthetic_review():
     return {"status": "PASS", "output_sha256": VIDEO_SHA,
-            "watched_review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9}}
+            "watched_review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.6}}
 
 
 class R:
@@ -111,7 +111,7 @@ class NewUploadOwnerFloor(unittest.TestCase):
         self.assertFalse(args[-1].exists())
 
     def test_low_missing_or_invalid_score_blocks_before_session(self):
-        for score in (8.5, 8.99, 10.1, True, False, None, "9", float("nan"), float("inf")):
+        for score in (8.5, 8.99, 9, 9.49, 10.1, True, False, None, "9", float("nan"), float("inf")):
             with self.subTest(score=score), tempfile.TemporaryDirectory() as t:
                 review = synthetic_review()
                 review["watched_review"]["overall"] = score

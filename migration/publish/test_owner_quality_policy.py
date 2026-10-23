@@ -10,18 +10,18 @@ SHA = "a" * 64
 
 
 def review(**updates):
-    return {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9,
+    return {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.5,
             "output_sha256": SHA, **updates}
 
 
 class OwnerQualityPolicy(unittest.TestCase):
     def test_inclusive_range(self):
-        for value in (9, 9.0, 9.3, 10, 10.0):
+        for value in (9.5, 9.7, 10, 10.0):
             with self.subTest(value=value):
                 self.assertEqual(policy.check(review(overall=value), SHA), [])
 
     def test_below_floor_above_ten_and_invalid_scores_fail_closed(self):
-        for value in (8.5, 8.99, -1, 10.01, 11, 10 ** 400, float("nan"), float("inf"),
+        for value in (8.5, 8.99, 9, 9.0, 9.3, 9.49, -1, 10.01, 11, 10 ** 400, float("nan"), float("inf"),
                       float("-inf"), True, False, None, "9", [], {}):
             with self.subTest(value=value):
                 self.assertTrue(policy.check(review(overall=value), SHA))

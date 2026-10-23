@@ -43,7 +43,7 @@ def setup(t, done):
         (d / f"short-0{i}.mp4").write_bytes(data)
         files[i] = hashlib.sha256(data).hexdigest()
     shorts = [{"file": f"short-0{i}.mp4", "sha256": files[i], "hook": "Hook.", "title": f"T{i}", "publish": True,
-               "review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.0, "output_sha256": files[i]}, "qa": {"status": "PASS"}} for i in range(3)]
+               "review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.6, "output_sha256": files[i]}, "qa": {"status": "PASS"}} for i in range(3)]
     (d / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-009", "shorts": shorts}))
     entries = {"pilot-009:L": {"video_id": "LONG"}}
     entries.update({f"short:pilot-009:{files[i]}": {"video_id": f"OLD{i}", "slot": "2026-10-18T14:00:00Z"} for i in done})
@@ -69,7 +69,7 @@ class PublishShorts(unittest.TestCase):
         return json.loads((d / "receipt.json").read_text())
 
     def test_owner_floor_blocks_stale_flags_and_low_score_before_session(self):
-        for score in (8.5, 8.99, True, float("nan"), float("inf"), 11, None):
+        for score in (8.5, 8.99, 9.0, 9.3, True, float("nan"), float("inf"), 11, None):
             with self.subTest(score=score), tempfile.TemporaryDirectory() as t:
                 d, _ = setup(t, done=())
                 spec = json.loads((d / "shorts.json").read_text())
@@ -371,7 +371,7 @@ class OwnerException(PublishShorts):
         r["media_checks"] = {"status": "PASS", "output_sha256": pe.OUTPUT_SHA256}
         r["qa"] = {"status": "PASS", "checks": {k: True for k in (
             "decode_clean", "one_h264_1080x1920", "fps_30", "one_aac_stereo_48k", "duration", "loudness", "true_peak")}}
-        r["review"].update(output_sha256=pe.OUTPUT_SHA256, overall=9.0)
+        r["review"].update(output_sha256=pe.OUTPUT_SHA256, overall=9.6)
         r["review"].update({k: 8 for k in ("hook_in_first_2s", "captions_readable_and_synced", "text_clear_of_shorts_ui",
             "picture_quality", "edit_rhythm", "audio_clarity", "stands_alone", "ending_and_loop", "policy_safe")})
         ledger = json.loads((d / "ledger.json").read_text())
@@ -544,7 +544,7 @@ class States(unittest.TestCase):
                       {"file": "f", "sha256": "f", "publish": True, "review": {"status": "PASS", "model": "gemini-3.8-flash"}, "qa": {"status": "FAIL"}}]
             shorts[2]["sha256"] = "c" * 64
             shorts[2]["qa"] = {"status": "PASS"}
-            shorts[2]["review"].update(overall=9.0, output_sha256="c" * 64)
+            shorts[2]["review"].update(overall=9.6, output_sha256="c" * 64)
             (d / "shorts" / "shorts.json").write_text(json.dumps({"source_pilot": "pilot-009", "shorts": shorts}))
             ledger = {"entries": {"short:pilot-009:d": {"video_id": "D", "slot": "2026-10-20T14:00:00Z"},
                                   "short:pilot-009:e": {"video_id": "E", "slot": "2026-10-18T14:00:00Z"}}}

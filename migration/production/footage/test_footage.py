@@ -27,6 +27,15 @@ class Selection(unittest.TestCase):
             self.assertFalse(ft.eligible(cand(licence=lic)), lic)
         self.assertFalse(ft.eligible(cand(source="pexels", licence="CC BY 4.0")))
 
+    def test_canonical_licence_matches_qa_v4(self):
+        import json
+        v4 = json.loads((Path(__file__).resolve().parents[1] / "qa_criteria_v4.json").read_text())
+        self.assertEqual(tuple(v4["rights"]["allowed_footage_licences"]), ft.ACCEPTED)
+        self.assertEqual(ft.canonical("commons", "CC BY 3.0 de"), "CC BY 3.0")
+        self.assertEqual(ft.canonical("commons", "cc-zero"), "CC0")
+        self.assertEqual(ft.canonical("commons", "PD"), "Public domain")
+        self.assertIsNone(ft.canonical("commons", "CC BY 1.0"))
+
     def test_resolution_and_length(self):
         self.assertFalse(ft.eligible(cand(height=720)))
         self.assertFalse(ft.eligible(cand(seconds=5.0)))

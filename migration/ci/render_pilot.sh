@@ -52,12 +52,23 @@ for meta in migration/production/$PILOT/images/*.json; do
   echo "$sha  $T/in/img/$id.png" | sha256sum -c -
   cp "$meta" "$T/in/img/$id.json"
 done
+# v4 (owner, 2026-10-23): licensed real footage from the vetted library, verified by hash like the images
+mkdir -p "$T/in/footage"
+for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1])).get('footage') or []))" "migration/production/$PILOT/script.json"); do
+  meta="migration/production/footage/library/$id.json"
+  read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
+  gh release download "$TAG" --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/footage/$id.mp4" --clobber
+  echo "$sha  $T/in/footage/$id.mp4" | sha256sum -c -
+  cp "$meta" "$T/in/footage/$id.json"
+done
+CRITERIA=migration/production/qa_criteria_v3.json
+ls "$T"/in/footage/*.mp4 >/dev/null 2>&1 && CRITERIA=migration/production/qa_criteria_v4.json
 fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "migration/production/$PILOT/script.json")
 q "$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"
 end
 
 stage "Assemble"
-q "$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/work" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac"
+q "$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/work" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/in/footage"
 end
 
 df -h "$T" | tail -1
@@ -81,7 +92,7 @@ stage "QA against frozen criteria"
   echo "78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb  HeroVerse_ASR_base_en_preservado.zip" | sha256sum -c -
   "$T/qa/bin/python" -I -c "import sys; from pathlib import Path; sys.path.insert(0, '$ROOT/migration'); import second_opening_asr as a; a.extract_model(Path('HeroVerse_ASR_base_en_preservado.zip'), Path('whisper'))" )
 q "$T/qa/bin/python" -I -B migration/production/qa_pilot.py "$T/work/pilot.mp4" "$T/work/manifest.json" \
-  "migration/production/$PILOT/script.json" migration/production/qa_criteria_v3.json \
+  "migration/production/$PILOT/script.json" "$CRITERIA" \
   "$T/models/yamnet.tflite" "$T/models/whisper" "$T/work/qa.json" || QA_FAILED=1
 end
 

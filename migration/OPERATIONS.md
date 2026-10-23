@@ -106,7 +106,7 @@ existing GitHub schedules and YouTube `publishAt` values have their own state. I
 - Frozen QA, whole-file scan, rights/policy checks and the designated watched review must pass.
   The designated reviewer is `gemini-3.8-flash`; a fallback is not an approval.
   Review items require at least 7 and the base overall rubric at least 8; **new uploads also
-  require the owner's additional overall floor of 9**. Historical owner exceptions are not a new default.
+  require the owner's additional overall floor of 9.5** (raised from 9 on 2026-10-23). Historical owner exceptions are not a new default.
 - Missing, errored, stale or hash-mismatched evidence blocks release. Nobody fills
   `APPROVAL.json` or eligibility flags manually. Preserve artifact identity across review and upload.
 - The monetization deadlines are owner goals, not verified forecasts or promises.
