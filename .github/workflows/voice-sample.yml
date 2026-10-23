@@ -1,0 +1,44 @@
+name: HeroVerse voice A/B sample (Chatterbox vs Kokoro, no paid call)
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot whose recorded Kokoro narration is the reference and whose opening is narrated
+        required: true
+        default: pilot-010
+permissions:
+  contents: read
+jobs:
+  sample:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          python3 -m venv "$RUNNER_TEMP/cb"
+          "$RUNNER_TEMP/cb/bin/pip" install --disable-pip-version-check -q --extra-index-url https://download.pytorch.org/whl/cpu chatterbox-tts soundfile
+      - name: Reference (our own Kokoro narration of this pilot) and the Kokoro original for comparison
+        run: |
+          asset=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets \
+            --jq "[.assets[] | select(.name | startswith(\"$PILOT-voice-sha256-\"))] | sort_by(.createdAt) | last | .name")
+          test -n "$asset"; echo "reference: $asset"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/voice.flac" --clobber
+          ffmpeg -v error -y -ss 20 -t 12 -i "$RUNNER_TEMP/voice.flac" -ac 1 -ar 24000 "$RUNNER_TEMP/reference.wav"
+          mkdir -p "$RUNNER_TEMP/out"
+          ffmpeg -v error -y -t 75 -i "$RUNNER_TEMP/voice.flac" -b:a 160k "$RUNNER_TEMP/out/kokoro-original.mp3"
+      - name: Chatterbox narration of the opening
+        run: |
+          "$RUNNER_TEMP/cb/bin/python" -I -B migration/production/voice/chatterbox_sample.py \
+            "migration/production/$PILOT/script.json" "$RUNNER_TEMP/reference.wav" "$RUNNER_TEMP/out" 4
+          for f in "$RUNNER_TEMP"/out/chatterbox-*.wav; do ffmpeg -v error -y -i "$f" -b:a 160k "${f%.wav}.mp3" && rm "$f"; done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: voice-sample-${{ inputs.pilot }}
+          path: ${{ runner.temp }}/out
+          retention-days: 7
