@@ -19,6 +19,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
       PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+      PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || 'a6384d28432b16b02970b4ffe92731ce' }}  # account id is an identifier, not a credential
     steps:

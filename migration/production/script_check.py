@@ -22,7 +22,7 @@ RESIDUAL_GAP = 0.067         # non-speech share inside spoken time, measured on 
 SPEECH_MIN = 0.86
 BACKGROUNDS_MIN = 18  # E46/E48
 FOOTAGE_MIN = 20      # v4: 18 clips keep the 300 s gap on the 008/010/011 timelines; 20 leaves a margin
-FOOTAGE_LICENCES = ("Pexels License", "CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0")
+FOOTAGE_LICENCES = ("Pexels License", "Pixabay Content License", "CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0")
 BANDS = {"morning": (22, 32), "night": (25, 38)}  # minutes; DECISIONS D-01/D-04, registered strategy 25-40
 REQUIRED = ("version", "pilot_id", "archetype", "spec", "working_title", "promise", "angle", "authorship", "voice",
             "segments", "figure", "backgrounds", "overlay", "description_intro", "hashtags", "thumbnail", "tags",
