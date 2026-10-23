@@ -1,0 +1,120 @@
+{
+ "strata": 89,
+ "videos": 806,
+ "features": [
+  {
+   "feature": "bright (mean luminance > 0.45)",
+   "n_with": 192,
+   "or_hit": 1.516,
+   "p_hit": 0.1379,
+   "or_dead": 0.977,
+   "p_dead": 0.5217
+  },
+  {
+   "feature": "dark (mean luminance < 0.30)",
+   "n_with": 310,
+   "or_hit": 1.071,
+   "p_hit": 0.4373,
+   "or_dead": 0.661,
+   "p_dead": 0.1619
+  },
+  {
+   "feature": "high contrast (std > 0.25)",
+   "n_with": 637,
+   "or_hit": 1.149,
+   "p_hit": 0.3213,
+   "or_dead": 0.828,
+   "p_dead": 0.3423
+  },
+  {
+   "feature": "saturated (mean sat > 0.45)",
+   "n_with": 646,
+   "or_hit": 1.094,
+   "p_hit": 0.4548,
+   "or_dead": 0.29,
+   "p_dead": 0.003
+  },
+  {
+   "feature": "very colourful (> 0.35)",
+   "n_with": 169,
+   "or_hit": 0.808,
+   "p_hit": 0.3058,
+   "or_dead": 0.939,
+   "p_dead": 0.4718
+  },
+  {
+   "feature": "busy (edge density > 0.12)",
+   "n_with": 753,
+   "or_hit": 3.065,
+   "p_hit": 0.055,
+   "or_dead": 0.511,
+   "p_dead": 0.0985
+  },
+  {
+   "feature": "warm dominant (warm share > 0.5)",
+   "n_with": 248,
+   "or_hit": 1.503,
+   "p_hit": 0.1769,
+   "or_dead": 0.584,
+   "p_dead": 0.088
+  },
+  {
+   "feature": "blue dominant (blue share > 0.4)",
+   "n_with": 133,
+   "or_hit": 0.264,
+   "p_hit": 0.0075,
+   "or_dead": 0.677,
+   "p_dead": 0.2529
+  },
+  {
+   "feature": "yellow text-like pixels (> 2 %)",
+   "n_with": 458,
+   "or_hit": 1.412,
+   "p_hit": 0.1824,
+   "or_dead": 0.835,
+   "p_dead": 0.3103
+  },
+  {
+   "feature": "a face",
+   "n_with": 76,
+   "or_hit": 0.807,
+   "p_hit": 0.3233,
+   "or_dead": 0.952,
+   "p_dead": 0.5177
+  },
+  {
+   "feature": "text, 1-4 words",
+   "n_with": 190,
+   "or_hit": 0.866,
+   "p_hit": 0.2924,
+   "or_dead": 0.911,
+   "p_dead": 0.3853
+  },
+  {
+   "feature": "text, 5+ words",
+   "n_with": 478,
+   "or_hit": 1.247,
+   "p_hit": 0.1839,
+   "or_dead": 1.508,
+   "p_dead": 0.0615
+  },
+  {
+   "feature": "no text",
+   "n_with": 138,
+   "or_hit": 0.87,
+   "p_hit": 0.3668,
+   "or_dead": 0.658,
+   "p_dead": 0.0935
+  }
+ ],
+ "sheets": [
+  "sheet-hit-1.jpg",
+  "sheet-hit-2.jpg",
+  "sheet-hit-3.jpg",
+  "sheet-dead-1.jpg",
+  "sheet-dead-2.jpg",
+  "sheet-dead-3.jpg",
+  "sheet-dead-4.jpg",
+  "sheet-dead-5.jpg"
+ ]
+}
