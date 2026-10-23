@@ -1,6 +1,6 @@
 # HeroVerse operations — current execution map
 
-Current transfer checkpoint: `HANDOFF_NEXT_CHAT_20261023.md`. The AI Studio UI response of 8.9 for Short 006 was **invalidated by content mismatches**; it is not a valid score or production feedback. The native review remains blocked. The last corrective upload ended in a browser-tool timeout, with outcome unknown. See `evidence/reviewer-qualification/20261022-aistudio-short006-validation.json` before resuming.
+Transfer checkpoint: `HANDOFF_NEXT_CHAT_20261023.md`; the observations below supersede its pending upload state. The earlier AI Studio 8.9 remains **invalid**, as recorded in `evidence/reviewer-qualification/20261022-aistudio-short006-validation.json`. The current Short 006 remains unapproved and unpublished in the pipeline. Native automatic review is still blocked.
 
 New observation, 2026-10-23 UTC: one fresh AI Studio upload showed 4,327 media tokens.
 A content-only probe correctly identified the closing words, both scenes, transition, male voice
@@ -16,7 +16,34 @@ is the concrete change from the consumed buffered-JSON attempts. It retains the 
 prompt, schema, existing QA, free-project observation, STARTED reservation and shared two-call/600 s
 budget. Only a fully completed READY control permits video. Partial HTTP 200 or text is not success;
 video also requires positive audio and picture token usage. There is no reconnect, retry or fallback.
-This is a qualification candidate, not an activated production route.
+This is a consumed qualification, not an activated production route.
+
+Actual SSE result, 2026-10-23 at 02:42:54 UTC: run `39891051684`, code
+`8e201caba48de4bc67576f4bf03f07879632f1a6`. The text control returned HTTP 503 /
+`service_unavailable` after 2.54 s. Exactly one inference was attempted; video was correctly
+skipped. There was no render, repeated QA, canonical write or publication. Exact result:
+`evidence/reviewer-qualification/20261023-stream-diagnosis-short006.json`.
+The original result ZIP is artifact `12474851206`, SHA-256
+`765d69638da0ea6df83247c5cbd341c1cbb2b60a9921ac15f679db7f756e03ea`.
+STARTED artifact `12474861170`, SHA-256
+`d505df70de91a591e6644aec1833d010a5a3604add54aa85bc9cee48000ad640`,
+is also preserved verbatim in `20261023-stream-start-short006.json` in that directory.
+Do not delete/reuse this reservation or repeat an unchanged stream attempt.
+
+PR #275 was merged after CI `39890736005` passed all 51 test files, including the existing
+document-register check corrected to recognize the transfer checkpoint. This qualifies the
+tested code, not provider availability. Before the isolated call, the UI still displayed Free tier;
+the model row showed 1/5 RPM, 234/250K TPM and 12/20 RPD for the selected reporting window.
+Those delayed maximum-usage displays are not a reserved balance. The existing binding
+observation remained valid and matched the runtime credential; no credential or billing change
+was made.
+
+Next: obtain a concrete provider recovery condition or qualify a native audiovisual route under
+the existing criteria before another API call or production correction. A public operational
+status page and the grounded UI rejection do not establish API recovery. The UI's approximate
+timings and inaccurate parallax label must not become production instructions. Learning
+integration, 008/009/011 corrections, 010 review, approved stock and publication remain pending
+behind this reviewer block. Existing GitHub schedules were not globally disabled by this work.
 
 ## Authority and boundaries
 

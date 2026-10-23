@@ -36,5 +36,5 @@
   "native_route_operationally_qualified": false,
   "recurring_capacity_qualified": false,
   "publish": false,
-  "next_action": "One isolated SSE qualification using the existing workflow: READY control then unchanged full MP4 only if READY completes; max two calls, shared 600 s deadline, no retries/reconnect/fallback or canonical writes."
+  "next_action": "The isolated SSE attempt is consumed: run 39891051684 returned HTTP 503/service_unavailable on the text control, so video was not attempted. Preserve the rejection and its limitations. Require a concrete provider recovery condition or a qualified native audiovisual route before another API call or production correction; no unchanged retry."
 }
