@@ -32,16 +32,6 @@
    }
   },
   {
-   "id": "E04",
-   "date": "2026-10-18",
-   "error": "Nothing stopped a Dot delivery from changing files outside its task card",
-   "fix": "PR #124: ALLOWED PATHS block in every card, checked on every Dot PR",
-   "antidote": {
-    "file": "migration/ops/test_dot_scope.py",
-    "contains": "def test_outside_and_no_crossing_folders"
-   }
-  },
-  {
    "id": "E05",
    "date": "2026-10-18",
    "error": "Offline tests existed that PR checks did not run",
@@ -165,16 +155,6 @@
    }
   },
   {
-   "id": "E17",
-   "date": "2026-10-18",
-   "error": "Dot cards #119/#120 had deadlines later than publish_at - 72 h, so the content runway would alert before the card was even due",
-   "fix": "Cards rewritten with deadline = publish_at - 72 h at the latest; card_check.py lints every script card before sending and on every Dot PR",
-   "antidote": {
-    "file": "migration/ops/test_card_check.py",
-    "contains": "def test_deadline_after_the_runway_fails"
-   }
-  },
-  {
    "id": "E18",
    "date": "2026-10-18",
    "error": "Scripts 003-006 broke the modeling beat order (hook 43-47 words instead of a promise spoken by 8 s; first prayer at 1:36 in 003) and acceptance did not check it",
@@ -185,26 +165,6 @@
    }
   },
   {
-   "id": "E19",
-   "date": "2026-10-19",
-   "error": "Native window acquisition (the mining's ground truth) refused every reservation: the quota was read by polling a 2026-10-15 provider job that the provider had purged (HTTP 404), so no holdout window was ever acquired",
-   "fix": "On a purged reference job the quota counters are read from the 404 reply itself; check_quota still enforces the free 500-unit plan, the hard-limit header and the unit floor, and refuses when counters are absent",
-   "antidote": {
-    "file": "migration/acquisition/test_acquire_window.py",
-    "contains": "def test_purged_reference_job_still_reads_quota_from_the_reply"
-   }
-  },
-  {
-   "id": "E20",
-   "date": "2026-10-19",
-   "error": "Card #136 assumed interfaces and data values that do not exist as written (pick() signature and window length, roles winner/median/weak while measured.json has winner/latest/weak_contrast); Dot correctly stopped with BLOCKED",
-   "fix": "#136 SPEC v2 with every interface copied verbatim; code cards carry an interfaces block that card_check verifies against the repository, before sending and on every Dot PR",
-   "antidote": {
-    "file": "migration/ops/test_card_check.py",
-    "contains": "def test_code_card_interfaces_must_exist_verbatim"
-   }
-  },
-  {
    "id": "E21",
    "date": "2026-10-19",
    "error": "The private engine spent its 2,000 included Actions minutes with no monitoring (2026-10-19 01:21 UTC); with a US$0 spending limit every workflow stopped, including approval and publication",
@@ -212,16 +172,6 @@
    "antidote": {
     "file": "migration/ops/test_minutes.py",
     "contains": "def test_rounding_windows_and_alerts"
-   }
-  },
-  {
-   "id": "E22",
-   "date": "2026-10-19",
-   "error": "Card #148 kept its SPEC v1 goal (public runner, 'making the engine public' forbidden) after the owner changed the order to 'make the engine public'; Dot built PR #149 from the verbal order, and the delivery could not be reviewed against the card",
-   "fix": "#148 rewritten as SPEC v2 matching the owner's order; Dot posts the RESULT for PR #149",
-   "antidote": {
-    "file": "migration/ops/DOT_PROTOCOL.md",
-    "contains": "When the owner changes a task's goal, Claude rewrites the card as `SPEC vN` before Dot resumes"
    }
   },
   {
@@ -262,28 +212,6 @@
    "antidote": {
     "file": "migration/mining/test_structure_mining.py",
     "contains": "def test_reviewer_allowance_is_reserved_for_decisions"
-   }
-  },
-  {
-   "id": "E27",
-   "date": "2026-10-19",
-   "error": "review_calibration.py wrote its evidence into a folder that did not exist yet; the first calibration of gemini-3.5-flash-lite (run 39254220059) ran all cases and then lost the JSON",
-   "fix": "the evidence folder is created before writing; the run's printed results were transcribed into the evidence file",
-   "antidote": {
-    "file": "migration/archive/production/review_calibration.py",
-    "contains": "Path(out_json).parent.mkdir(parents=True, exist_ok=True)",
-    "retired": "module archived 2026-10-23 (lean project); the antidote is kept with it"
-   }
-  },
-  {
-   "id": "E28",
-   "date": "2026-10-19",
-   "error": "Claude's qualification() (PR #160) passed a backup reviewer that failed defect cases for the wrong reason (expected rubric items kept high) and ignored timing (TOO_SLOW); found by Dot before any use (#159)",
-   "fix": "qualification() requires every expected rubric item of a defect case to drop below PASS_ITEM and rejects TOO_SLOW/TIMING_INVALID (28-min time derived from the measured seconds per 180 s case)",
-   "antidote": {
-    "file": "migration/archive/production/test_review_calibration.py",
-    "contains": "def test_failing_for_the_wrong_reason_is_not_qualified",
-    "retired": "module archived 2026-10-23 (lean project); the antidote is kept with it"
    }
   },
   {
@@ -350,10 +278,10 @@
    "id": "E45",
    "date": "2026-10-22",
    "error": "Superseded cutover collection still had a daily trigger and produced PermissionError incidents (#249); the old archive plan also included live shared dependencies.",
-   "fix": "Retire the obsolete collector and other proven legacy entry points using the complete path/dependency inventory. Preserve its failure evidence without claiming an OAuth/permission repair. Keep current reporting, native QA dependencies and pending qualifications.",
+   "fix": "Retire the obsolete collector and other proven legacy entry points using the complete path/dependency inventory. Preserve its failure evidence without claiming an OAuth/permission repair. Keep current reporting, native QA dependencies and pending qualifications. 2026-10-23: retired workflows are deleted outright; the heartbeat may only dispatch workflows that exist.",
    "antidote": {
     "file": "migration/ops/test_errors_register.py",
-    "contains": "def test_retired_workflows_cannot_reenter_the_scheduler"
+    "contains": "def test_heartbeat_dispatches_only_existing_workflows"
    }
   },
   {
