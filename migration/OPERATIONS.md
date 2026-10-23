@@ -1,5 +1,7 @@
 # HeroVerse operations — current execution map
 
+Current transfer checkpoint: `HANDOFF_NEXT_CHAT_20261023.md`. The AI Studio UI response of 8.9 for Short 006 was **invalidated by content mismatches**; it is not a valid score or production feedback. The native review remains blocked. The last corrective upload ended in a browser-tool timeout, with outcome unknown. See `evidence/reviewer-qualification/20261022-aistudio-short006-validation.json` before resuming.
+
 ## Authority and boundaries
 
 - `SYSTEM.md`: the canonical four-stage delivery contract: mining → modeling/production →
