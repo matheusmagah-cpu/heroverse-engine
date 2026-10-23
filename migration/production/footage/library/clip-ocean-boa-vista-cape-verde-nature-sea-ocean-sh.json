@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-boa-vista-cape-verde-nature-sea-ocean-sh",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "boa vista, cape verde, nature, sea, ocean, shore, seashore, beach, waves, water, surf, outdoors, sand, turquoise, travel, relaxing, meditation",
+ "page": "https://pixabay.com/videos/id-334716/",
+ "author": "JonPauling",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 80.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: JonPauling via Pixabay (https://pixabay.com/videos/id-334716/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0ea083fd7a4fae0c5acf2b5af93a22c1ea91120a3c48c1105fca546f0b12aba1",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  93.5,
+  93.1,
+  94.9,
+  97.6,
+  93.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-boa-vista-cape-verde-nature-sea-ocean-sh-sha256-0ea083fd7a4fae0c5acf2b5af93a22c1ea91120a3c48c1105fca546f0b12aba1.mp4"
+}

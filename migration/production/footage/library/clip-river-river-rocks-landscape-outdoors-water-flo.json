@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-river-rocks-landscape-outdoors-water-flo",
+ "theme": "river",
+ "query": "river rocks water",
+ "source": "pixabay",
+ "title": "river, rocks, landscape, outdoors, water, flowing, stream, nature",
+ "page": "https://pixabay.com/videos/id-276381/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-276381/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6ff83588e3e036ace257e993352345bbd41c3b57cc21e8336f604076cd29ed64",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  102.5,
+  102.2,
+  102.2,
+  101.6,
+  101.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-river-river-rocks-landscape-outdoors-water-flo-sha256-6ff83588e3e036ace257e993352345bbd41c3b57cc21e8336f604076cd29ed64.mp4"
+}

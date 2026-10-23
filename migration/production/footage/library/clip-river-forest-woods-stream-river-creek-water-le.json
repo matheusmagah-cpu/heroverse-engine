@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-forest-woods-stream-river-creek-water-le",
+ "theme": "river",
+ "query": "forest creek",
+ "source": "pixabay",
+ "title": "forest, woods, stream, river, creek, water, leaves, fall, autumn",
+ "page": "https://pixabay.com/videos/id-223707/",
+ "author": "OneGod_TheFather",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 55.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: OneGod_TheFather via Pixabay (https://pixabay.com/videos/id-223707/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eeef6acea4e7d3190c53c6adee3cf07ba8009fbb0b4ea70705cdcf307971f14a",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  34.8,
+  33.7,
+  32.6,
+  31.5,
+  30.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-river-forest-woods-stream-river-creek-water-le-sha256-eeef6acea4e7d3190c53c6adee3cf07ba8009fbb0b4ea70705cdcf307971f14a.mp4"
+}

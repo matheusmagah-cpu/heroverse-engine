@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-river-forest-waterfall-beautiful-wallpap",
+ "theme": "waterfall",
+ "query": "cascade",
+ "source": "pixabay",
+ "title": "river, forest, waterfall, beautiful wallpaper, cascade, that, nature, view, trip, stream, wave, vault, background, daytime, sunny, season, summer, spring, beautiful, great, mountain, climate, trees, green",
+ "page": "https://pixabay.com/videos/id-120254/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-120254/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0e4e2b91a6b1e6f819f0644c77ec038bdb4135edfa2621ef2b6c194966f0b5d5",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  81.4,
+  82.6,
+  81.5,
+  81.7,
+  82.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-waterfall-river-forest-waterfall-beautiful-wallpap-sha256-0e4e2b91a6b1e6f819f0644c77ec038bdb4135edfa2621ef2b6c194966f0b5d5.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-waterfall-river-forest-nature-moss-mount",
+ "theme": "river",
+ "query": "mountain stream",
+ "source": "pixabay",
+ "title": "waterfall, river, forest, nature, moss, mountain, trip, fall, cascade, rocks, paradise, climate, season, sunny, stream",
+ "page": "https://pixabay.com/videos/id-263874/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-263874/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a7b57fdb7888bedcbcba77cfde8f89432e2e852b777554f7f9411dd6b5bfc34c",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  95.9,
+  95.8,
+  98.0,
+  97.8,
+  97.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-river-waterfall-river-forest-nature-moss-mount-sha256-a7b57fdb7888bedcbcba77cfde8f89432e2e852b777554f7f9411dd6b5bfc34c.mp4"
+}

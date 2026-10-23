@@ -1,0 +1,38 @@
+{
+ "id": "clip-field-fields-wheat-agriculture-landscape-farm-",
+ "theme": "field",
+ "query": "wheat field",
+ "source": "pixabay",
+ "title": "fields, wheat, agriculture, landscape, farm, nature, yellow, earth, summer, season, campaign, cultivate, dream, relaxation",
+ "page": "https://pixabay.com/videos/id-41093/",
+ "author": "cla-fumassa",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: cla-fumassa via Pixabay (https://pixabay.com/videos/id-41093/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fb5af58ec5911cc164154e6f27bf1f957a481a12dbbab86c496fc3c2e7338fae",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  117.4,
+  120.2,
+  123.9,
+  130.4,
+  142.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-field-fields-wheat-agriculture-landscape-farm--sha256-fb5af58ec5911cc164154e6f27bf1f957a481a12dbbab86c496fc3c2e7338fae.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-candlelight-candle-flame-light-fire-calm",
+ "theme": "candle",
+ "query": "candles",
+ "source": "pixabay",
+ "title": "candlelight, candle, flame, light, fire, calm, burning, hot",
+ "page": "https://pixabay.com/videos/id-123824/",
+ "author": "jrydertr",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: jrydertr via Pixabay (https://pixabay.com/videos/id-123824/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "edfb9cec8e4e09ba72346af1cd2afa1b259c4d94b48b140337feae2e800be967",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  48.5,
+  49.2,
+  49.1,
+  49.1,
+  48.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-candle-candlelight-candle-flame-light-fire-calm-sha256-edfb9cec8e4e09ba72346af1cd2afa1b259c4d94b48b140337feae2e800be967.mp4"
+}

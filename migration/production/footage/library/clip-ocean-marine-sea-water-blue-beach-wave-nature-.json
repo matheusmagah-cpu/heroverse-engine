@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-marine-sea-water-blue-beach-wave-nature-",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "marine, sea, water, blue, beach, wave, nature, horizon, calm, ocean, perspective, rocks",
+ "page": "https://pixabay.com/videos/id-21639/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-21639/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4cfafbf74f5496983a6ba97fb5c2efa3881e6f21480b2010d81dc38067c4622c",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  99.3,
+  98.7,
+  99.4,
+  97.9,
+  98.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-marine-sea-water-blue-beach-wave-nature--sha256-4cfafbf74f5496983a6ba97fb5c2efa3881e6f21480b2010d81dc38067c4622c.mp4"
+}

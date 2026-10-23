@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-waterfall-river-stream-forest-morning-wa",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "pixabay",
+ "title": "waterfall, river, stream, forest, morning, water, nature, landscape",
+ "page": "https://pixabay.com/videos/id-225000/",
+ "author": "daipham89",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: daipham89 via Pixabay (https://pixabay.com/videos/id-225000/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "141bbaf33091f60c98328092a60f719b817c32ea1aa9aca586914d2b7d8c9b0b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.1,
+  110.2,
+  110.3,
+  110.6,
+  110.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-waterfall-waterfall-river-stream-forest-morning-wa-sha256-141bbaf33091f60c98328092a60f719b817c32ea1aa9aca586914d2b7d8c9b0b.mp4"
+}

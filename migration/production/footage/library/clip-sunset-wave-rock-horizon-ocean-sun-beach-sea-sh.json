@@ -1,0 +1,38 @@
+{
+ "id": "clip-sunset-wave-rock-horizon-ocean-sun-beach-sea-sh",
+ "theme": "sunset",
+ "query": "sunset sea",
+ "source": "pixabay",
+ "title": "wave, rock, horizon, ocean, sun, beach, sea, shore, coast, coastline, stone, seascape, sunset, peaceful, foam, coastal, cliff, shoreline, island, splash, rock texture, crash, remote, textured",
+ "page": "https://pixabay.com/videos/id-348904/",
+ "author": "Mario_Krimer",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Mario_Krimer via Pixabay (https://pixabay.com/videos/id-348904/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "895701c40bb1b49c5519604fd72ebd7e7dbf7dca4f06fa88e5384ce79dcfc346",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  108.9,
+  115.9,
+  120.1,
+  112.3,
+  110.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-sunset-wave-rock-horizon-ocean-sun-beach-sea-sh-sha256-895701c40bb1b49c5519604fd72ebd7e7dbf7dca4f06fa88e5384ce79dcfc346.mp4"
+}

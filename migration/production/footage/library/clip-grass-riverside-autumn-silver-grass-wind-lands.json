@@ -1,0 +1,38 @@
+{
+ "id": "clip-grass-riverside-autumn-silver-grass-wind-lands",
+ "theme": "grass",
+ "query": "grass wind",
+ "source": "pixabay",
+ "title": "riverside, autumn, silver grass, wind, landscape",
+ "page": "https://pixabay.com/videos/id-91392/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 62.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-91392/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "98f24b203051d638ce15f591e4607d3e3cf01e85b991b9e55364ffff99b825ea",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  104.0,
+  104.1,
+  104.2,
+  105.0,
+  104.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-grass-riverside-autumn-silver-grass-wind-lands-sha256-98f24b203051d638ce15f591e4607d3e3cf01e85b991b9e55364ffff99b825ea.mp4"
+}

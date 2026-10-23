@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-waterfall-river-view-nature-that-flow-fo",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "pixabay",
+ "title": "waterfall, river, view, nature, that, flow, forest, trees, meditation, green, summer, tourism, beautiful wallpaper, paradise, tropical, trip, beautiful, background, mountain, goal, pond, reflection, spring, plants, herb",
+ "page": "https://pixabay.com/videos/id-356398/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-356398/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e924628bca6211471010bcbbc68864010e71902c05fdb34a60cc305864cbb0d6",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  98.2,
+  98.3,
+  98.2,
+  98.2,
+  98.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-waterfall-waterfall-river-view-nature-that-flow-fo-sha256-e924628bca6211471010bcbbc68864010e71902c05fdb34a60cc305864cbb0d6.mp4"
+}

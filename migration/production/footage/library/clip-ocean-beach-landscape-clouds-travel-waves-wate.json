@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-beach-landscape-clouds-travel-waves-wate",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "beach, landscape, clouds, travel, waves, water, sky, nature, blue, wave, rocks",
+ "page": "https://pixabay.com/videos/id-19987/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 64.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-19987/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5a1ab3fa7790447fd80d28b2588c6f354a1f77d9c06895880b8f3c838801bef8",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  145.0,
+  142.1,
+  145.4,
+  140.3,
+  142.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-beach-landscape-clouds-travel-waves-wate-sha256-5a1ab3fa7790447fd80d28b2588c6f354a1f77d9c06895880b8f3c838801bef8.mp4"
+}

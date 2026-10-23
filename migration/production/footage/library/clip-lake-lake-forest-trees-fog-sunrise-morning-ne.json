@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-lake-forest-trees-fog-sunrise-morning-ne",
+ "theme": "lake",
+ "query": "lake sunrise",
+ "source": "pixabay",
+ "title": "lake, forest, trees, fog, sunrise, morning, netherlands, drenthe, 4k, drone, aerial, winter, cold, nature, landscape",
+ "page": "https://pixabay.com/videos/id-147629/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-147629/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5afe9f680bc400abeedf9d2c75cc605651e9c827e21f0471b1325778255f6a53",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  132.6,
+  140.4,
+  139.8,
+  139.2,
+  139.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-lake-lake-forest-trees-fog-sunrise-morning-ne-sha256-5afe9f680bc400abeedf9d2c75cc605651e9c827e21f0471b1325778255f6a53.mp4"
+}

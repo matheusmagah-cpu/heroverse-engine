@@ -1,0 +1,38 @@
+{
+ "id": "clip-snow-cloud-formation-fog-mountain-clouds-snow",
+ "theme": "snow",
+ "query": "snow mountains",
+ "source": "pixabay",
+ "title": "cloud formation, fog, mountain, clouds, snow mountain, nature, winter landscape, snow landscape, landscape",
+ "page": "https://pixabay.com/videos/id-207309/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-207309/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "afafb60656764ed7cfc888d3afc0182bdf0b73c72aec30c35d1c8a79d0facdb8",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  100.0,
+  94.4,
+  86.3,
+  84.7,
+  80.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-snow-cloud-formation-fog-mountain-clouds-snow-sha256-afafb60656764ed7cfc888d3afc0182bdf0b73c72aec30c35d1c8a79d0facdb8.mp4"
+}

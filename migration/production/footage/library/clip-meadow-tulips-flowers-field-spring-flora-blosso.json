@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-tulips-flowers-field-spring-flora-blosso",
+ "theme": "meadow",
+ "query": "tulip field",
+ "source": "pixabay",
+ "title": "tulips, flowers, field, spring, flora, blossoms, garden, plants, petals, nature, netherlands, drenthe",
+ "page": "https://pixabay.com/videos/id-210756/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-210756/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "091672e5318ecc548e63e7b9658a4bbe6a68b23ca8d59a52f23048ed49407eef",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  83.6,
+  86.0,
+  91.4,
+  97.1,
+  115.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-meadow-tulips-flowers-field-spring-flora-blosso-sha256-091672e5318ecc548e63e7b9658a4bbe6a68b23ca8d59a52f23048ed49407eef.mp4"
+}

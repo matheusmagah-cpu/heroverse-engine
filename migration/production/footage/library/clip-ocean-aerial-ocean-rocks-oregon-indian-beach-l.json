@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-aerial-ocean-rocks-oregon-indian-beach-l",
+ "theme": "ocean",
+ "query": "sea waves rocks",
+ "source": "pixabay",
+ "title": "aerial, ocean, rocks, oregon, indian beach, landscape, sun flare, waves",
+ "page": "https://pixabay.com/videos/id-28262/",
+ "author": "Rick_Coyle",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 56.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Rick_Coyle via Pixabay (https://pixabay.com/videos/id-28262/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5e352f16b33cd280c39c538dfe920348f4859956ddf736f6ff5b7b39b8412504",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.9,
+  113.6,
+  116.5,
+  124.4,
+  125.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-aerial-ocean-rocks-oregon-indian-beach-l-sha256-5e352f16b33cd280c39c538dfe920348f4859956ddf736f6ff5b7b39b8412504.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-clouds-mountains-desert-arid-dry-clouds-4k-natu",
+ "theme": "clouds",
+ "query": "clouds timelapse mountains",
+ "source": "pixabay",
+ "title": "mountains, desert, arid, dry, clouds, 4k, nature, nevada, landscape, timelapse",
+ "page": "https://pixabay.com/videos/id-91469/",
+ "author": "mdherren",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: mdherren via Pixabay (https://pixabay.com/videos/id-91469/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9891e8ac67833baebe1524cda5418c61df24c904c41fa4a7816a533bfe11ba92",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.0,
+  164.2,
+  166.7,
+  179.4,
+  182.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-clouds-mountains-desert-arid-dry-clouds-4k-natu-sha256-9891e8ac67833baebe1524cda5418c61df24c904c41fa4a7816a533bfe11ba92.mp4"
+}

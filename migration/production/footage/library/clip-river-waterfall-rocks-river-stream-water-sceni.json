@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-waterfall-rocks-river-stream-water-sceni",
+ "theme": "river",
+ "query": "river rocks water",
+ "source": "pixabay",
+ "title": "waterfall, rocks, river, stream, water, scenic, outdoor, nature",
+ "page": "https://pixabay.com/videos/id-169202/",
+ "author": "RaniRamli",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: RaniRamli via Pixabay (https://pixabay.com/videos/id-169202/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ea8921f5f2240b5750657056641673565dff7c5e11ebe38cce189fa600fb50e6",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  85.9,
+  85.6,
+  85.6,
+  86.2,
+  86.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-river-waterfall-rocks-river-stream-water-sceni-sha256-ea8921f5f2240b5750657056641673565dff7c5e11ebe38cce189fa600fb50e6.mp4"
+}

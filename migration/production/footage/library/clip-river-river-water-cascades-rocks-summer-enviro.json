@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-river-water-cascades-rocks-summer-enviro",
+ "theme": "river",
+ "query": "river rocks water",
+ "source": "pixabay",
+ "title": "river, water, cascades, rocks, summer, environment, green",
+ "page": "https://pixabay.com/videos/id-220325/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-220325/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ae85873e3da791ca3f9afd6458196dac0c8de50317463f834a5c9c939bffd05f",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  135.8,
+  135.8,
+  135.9,
+  135.7,
+  135.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-river-river-water-cascades-rocks-summer-enviro-sha256-ae85873e3da791ca3f9afd6458196dac0c8de50317463f834a5c9c939bffd05f.mp4"
+}

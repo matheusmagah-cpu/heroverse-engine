@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-puddle-raindrops-rain-water-reflection-w",
+ "theme": "rain",
+ "query": "raindrops puddle",
+ "source": "pixabay",
+ "title": "puddle, raindrops, rain, water, reflection, wet, closeup, pavement, downpour, beautiful wallpaper, wet ground, atmospheric, dark, melancholic, gloomy, rainy day, dim, background",
+ "page": "https://pixabay.com/videos/id-217710/",
+ "author": "YanaHD",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: YanaHD via Pixabay (https://pixabay.com/videos/id-217710/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6c65bb46c0bb996d876a1aab96c9b8b2cd540765ee85ea340b661e9eef084f19",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  58.0,
+  56.5,
+  54.5,
+  58.3,
+  58.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-rain-puddle-raindrops-rain-water-reflection-w-sha256-6c65bb46c0bb996d876a1aab96c9b8b2cd540765ee85ea340b661e9eef084f19.mp4"
+}

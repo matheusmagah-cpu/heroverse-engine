@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-panto-beach-sandiego-ocean-coast-califor",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "panto, beach, sandiego, ocean, coast, california, waves",
+ "page": "https://pixabay.com/videos/id-247490/",
+ "author": "Rcdrifter900",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 79.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Rcdrifter900 via Pixabay (https://pixabay.com/videos/id-247490/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e129c24b72b2d9a063827bbcd4d0d5b342aa148d4b4d047765246a6582859992",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  130.2,
+  130.1,
+  133.9,
+  135.0,
+  132.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-panto-beach-sandiego-ocean-coast-califor-sha256-e129c24b72b2d9a063827bbcd4d0d5b342aa148d4b4d047765246a6582859992.mp4"
+}

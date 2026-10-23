@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-lake-sunrise-house-trees-netherlands-dre",
+ "theme": "lake",
+ "query": "lake sunrise",
+ "source": "pixabay",
+ "title": "lake, sunrise, house, trees, netherlands, drenthe, hoogeveen, scenery, drone, aerial, fog, morning, nature",
+ "page": "https://pixabay.com/videos/id-164777/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 55.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-164777/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9196c4c679dd6fff21a98cf7435bc5f1fd0afc12ca2fedbe32dd2adf4efa1034",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.3,
+  141.4,
+  153.9,
+  160.9,
+  160.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-lake-lake-sunrise-house-trees-netherlands-dre-sha256-9196c4c679dd6fff21a98cf7435bc5f1fd0afc12ca2fedbe32dd2adf4efa1034.mp4"
+}

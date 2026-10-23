@@ -1,0 +1,38 @@
+{
+ "id": "clip-clouds-clouds-sun-moving-clouds-heaven-landscap",
+ "theme": "clouds",
+ "query": "cumulus clouds timelapse",
+ "source": "pixabay",
+ "title": "clouds, sun, moving clouds, heaven, landscape, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-58475/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 44.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-58475/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "dbf527ec8a39bf282fd1f662e863d2ab0768ff9cf98750e4cc2be6467874aefe",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.5,
+  125.3,
+  125.9,
+  128.5,
+  127.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-clouds-clouds-sun-moving-clouds-heaven-landscap-sha256-dbf527ec8a39bf282fd1f662e863d2ab0768ff9cf98750e4cc2be6467874aefe.mp4"
+}

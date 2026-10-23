@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-flowers-yellow-cosmos-wind-yellow-flower",
+ "theme": "meadow",
+ "query": "flowers wind",
+ "source": "pixabay",
+ "title": "flowers, yellow cosmos, wind, yellow flower, autumn",
+ "page": "https://pixabay.com/videos/id-90090/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-90090/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "feb465313f02424a2ec74641faeced5027eafe63c05d9c11a49bcea02096620e",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  87.0,
+  87.0,
+  87.1,
+  87.3,
+  87.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-meadow-flowers-yellow-cosmos-wind-yellow-flower-sha256-feb465313f02424a2ec74641faeced5027eafe63c05d9c11a49bcea02096620e.mp4"
+}

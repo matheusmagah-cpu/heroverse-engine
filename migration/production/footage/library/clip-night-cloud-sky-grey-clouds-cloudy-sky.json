@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-cloud-sky-grey-clouds-cloudy-sky",
+ "theme": "night",
+ "query": "starry sky",
+ "source": "pixabay",
+ "title": "cloud, sky, grey clouds, cloudy sky",
+ "page": "https://pixabay.com/videos/id-9151/",
+ "author": "Jacques_Barrette",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 50.0,
+ "source_height": 2048,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Jacques_Barrette via Pixabay (https://pixabay.com/videos/id-9151/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "298c3212a251aff56d54259bae70fd2a91ead43f81406f6494969a227d635ec4",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  60.9,
+  63.9,
+  72.8,
+  79.3,
+  90.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-cloud-sky-grey-clouds-cloudy-sky-sha256-298c3212a251aff56d54259bae70fd2a91ead43f81406f6494969a227d635ec4.mp4"
+}

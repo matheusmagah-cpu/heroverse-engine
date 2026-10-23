@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-madeira-portugal-travel-nature-sea-rocks",
+ "theme": "ocean",
+ "query": "sea waves rocks",
+ "source": "pixabay",
+ "title": "madeira, portugal, travel, nature, sea, rocks, rock, water, clouds, waves",
+ "page": "https://pixabay.com/videos/id-376883/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-376883/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "748b9ee3ce8b15f1ef446a2c28c3deb8fef1f0ec4eb52ae9fdb1b47cc740c332",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  152.9,
+  153.6,
+  151.9,
+  149.7,
+  148.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-madeira-portugal-travel-nature-sea-rocks-sha256-748b9ee3ce8b15f1ef446a2c28c3deb8fef1f0ec4eb52ae9fdb1b47cc740c332.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-clouds-sunrise-fog-clouds-landscape-mountain-ra",
+ "theme": "clouds",
+ "query": "clouds timelapse mountains",
+ "source": "pixabay",
+ "title": "sunrise, fog, clouds, landscape, mountain range, alps, wind, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-58480/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-58480/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b9e1b1a7410cd529d60245e4f88947c5fdc58b36b9629af9a74fc8d725569f5f",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  80.3,
+  81.0,
+  82.5,
+  85.6,
+  88.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-clouds-sunrise-fog-clouds-landscape-mountain-ra-sha256-b9e1b1a7410cd529d60245e4f88947c5fdc58b36b9629af9a74fc8d725569f5f.mp4"
+}

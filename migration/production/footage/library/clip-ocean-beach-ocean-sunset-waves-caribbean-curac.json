@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-beach-ocean-sunset-waves-caribbean-curac",
+ "theme": "ocean",
+ "query": "ocean sunset",
+ "source": "pixabay",
+ "title": "beach, ocean, sunset, waves, caribbean, curacao, nature",
+ "page": "https://pixabay.com/videos/id-248729/",
+ "author": "PaulsAdventures",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: PaulsAdventures via Pixabay (https://pixabay.com/videos/id-248729/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ddaaeb89e79f74fe04092a597ec35e871cf70a6f35bdd22bed5f394c4043745a",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  130.4,
+  131.6,
+  129.8,
+  130.5,
+  129.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-beach-ocean-sunset-waves-caribbean-curac-sha256-ddaaeb89e79f74fe04092a597ec35e871cf70a6f35bdd22bed5f394c4043745a.mp4"
+}

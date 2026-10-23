@@ -1,0 +1,38 @@
+{
+ "id": "clip-snow-mountain-village-mountain-jackdaws-corvi",
+ "theme": "snow",
+ "query": "snow mountains",
+ "source": "pixabay",
+ "title": "mountain village, mountain jackdaws, corvids, birds, snowfall, blowing snow, snowflakes, church, snow, snowy",
+ "page": "https://pixabay.com/videos/id-205616/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-205616/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "969c2d9162da313327cae6bea8124af6e3f249529bfdd93b2d626c443137c838",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  105.0,
+  105.1,
+  104.6,
+  102.5,
+  101.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-snow-mountain-village-mountain-jackdaws-corvi-sha256-969c2d9162da313327cae6bea8124af6e3f249529bfdd93b2d626c443137c838.mp4"
+}

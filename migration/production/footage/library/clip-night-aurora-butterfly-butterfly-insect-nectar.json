@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-aurora-butterfly-butterfly-insect-nectar",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "pixabay",
+ "title": "aurora butterfly, butterfly, insect, nectar, biotope, pollination, wing, nature, close up, spring, meadow, grass, outdoors, green",
+ "page": "https://pixabay.com/videos/id-129199/",
+ "author": "fotoblend",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: fotoblend via Pixabay (https://pixabay.com/videos/id-129199/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "cdf8afe9ee341551e5cda43c180d6bc46191f31fe38ff0e1d9cad76b6c9ee2af",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.5,
+  132.9,
+  132.8,
+  128.0,
+  126.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-aurora-butterfly-butterfly-insect-nectar-sha256-cdf8afe9ee341551e5cda43c180d6bc46191f31fe38ff0e1d9cad76b6c9ee2af.mp4"
+}

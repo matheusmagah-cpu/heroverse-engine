@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-candles-light-flame-fire",
+ "theme": "candle",
+ "query": "candle flame",
+ "source": "pixabay",
+ "title": "candles, light, flame, fire",
+ "page": "https://pixabay.com/videos/id-135958/",
+ "author": "Hepner",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Hepner via Pixabay (https://pixabay.com/videos/id-135958/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6d93e9a3cc617c98129dc294942d7e96dbc8acdb48ec0408c6f5c9bc4db9086a",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  30.1,
+  31.1,
+  30.3,
+  28.8,
+  29.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-candle-candles-light-flame-fire-sha256-6d93e9a3cc617c98129dc294942d7e96dbc8acdb48ec0408c6f5c9bc4db9086a.mp4"
+}

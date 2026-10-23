@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-northern-lights-aurora-night-natural-won",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "pixabay",
+ "title": "northern lights, aurora, night, natural wonders, lights, nature",
+ "page": "https://pixabay.com/videos/id-242214/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-242214/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b0fe91af01807d86968bed583779b3a57abd163fa8741d9f917145e87e5a86b8",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  42.2,
+  36.7,
+  39.1,
+  39.9,
+  38.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-northern-lights-aurora-night-natural-won-sha256-b0fe91af01807d86968bed583779b3a57abd163fa8741d9f917145e87e5a86b8.mp4"
+}

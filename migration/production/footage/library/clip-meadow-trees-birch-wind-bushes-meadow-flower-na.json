@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-trees-birch-wind-bushes-meadow-flower-na",
+ "theme": "meadow",
+ "query": "flowers wind",
+ "source": "pixabay",
+ "title": "trees, birch, wind, bushes, meadow, flower, nature, landscape",
+ "page": "https://pixabay.com/videos/id-163991/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-163991/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e246945625e52446c1c5735794483b0e6c7f618947eae48f31b330bbf103dafd",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  105.9,
+  104.5,
+  104.2,
+  104.3,
+  104.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-meadow-trees-birch-wind-bushes-meadow-flower-na-sha256-e246945625e52446c1c5735794483b0e6c7f618947eae48f31b330bbf103dafd.mp4"
+}

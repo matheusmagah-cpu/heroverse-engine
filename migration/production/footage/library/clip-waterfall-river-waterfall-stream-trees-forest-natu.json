@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-river-waterfall-stream-trees-forest-natu",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "pixabay",
+ "title": "river, waterfall, stream, trees, forest, nature",
+ "page": "https://pixabay.com/videos/id-105584/",
+ "author": "box7079",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: box7079 via Pixabay (https://pixabay.com/videos/id-105584/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b015c26ea30ff9cebced7ebec02a3ba54c28383f06118ee1ddc969b2152ea7c8",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  88.2,
+  87.1,
+  84.7,
+  79.7,
+  74.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-waterfall-river-waterfall-stream-trees-forest-natu-sha256-b015c26ea30ff9cebced7ebec02a3ba54c28383f06118ee1ddc969b2152ea7c8.mp4"
+}

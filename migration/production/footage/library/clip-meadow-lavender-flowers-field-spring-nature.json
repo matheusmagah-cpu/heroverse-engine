@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-lavender-flowers-field-spring-nature",
+ "theme": "meadow",
+ "query": "lavender field",
+ "source": "pixabay",
+ "title": "lavender, flowers, field, spring, nature",
+ "page": "https://pixabay.com/videos/id-198807/",
+ "author": "LaDoncella",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: LaDoncella via Pixabay (https://pixabay.com/videos/id-198807/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ec4e1c7749983bb3b91fc0557e2a37d94d5f6c3840d6b33b9e8dffbd622a74c6",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  150.5,
+  150.4,
+  150.4,
+  150.4,
+  150.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-meadow-lavender-flowers-field-spring-nature-sha256-ec4e1c7749983bb3b91fc0557e2a37d94d5f6c3840d6b33b9e8dffbd622a74c6.mp4"
+}

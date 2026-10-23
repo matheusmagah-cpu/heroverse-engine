@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-forest-pond-creek-river-netherlands-dren",
+ "theme": "river",
+ "query": "forest creek",
+ "source": "pixabay",
+ "title": "forest, pond, creek, river, netherlands, drenthe, nature, drone, aerial, winter, cloudy, water",
+ "page": "https://pixabay.com/videos/id-151080/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-151080/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d49eaf09c2d89ea7cc92d0df71d898bd0c96f324ee658b2ba542e522f35a9abb",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  35.5,
+  38.1,
+  40.0,
+  41.3,
+  43.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-river-forest-pond-creek-river-netherlands-dren-sha256-d49eaf09c2d89ea7cc92d0df71d898bd0c96f324ee658b2ba542e522f35a9abb.mp4"
+}

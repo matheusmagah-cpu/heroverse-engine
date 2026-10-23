@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-waterfalls-river-lake-sunset-sunrise-wat",
+ "theme": "lake",
+ "query": "alpine lake",
+ "source": "pixabay",
+ "title": "waterfalls, river, lake, sunset, sunrise, water, alpes, dolomiti, dolomites, alpine, mountains, waves, italy, national park, sky, clouds, forest, woods, flowers, scenic, reflection, nature, landscape, panorama",
+ "page": "https://pixabay.com/videos/id-105675/",
+ "author": "Ambient_Nature_Atmosphere",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 55.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-105675/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "74631cd5d74be40563a9393a27125474316636cb12bd7677ab5cadf101747483",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  92.8,
+  92.1,
+  93.8,
+  95.7,
+  97.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-lake-waterfalls-river-lake-sunset-sunrise-wat-sha256-74631cd5d74be40563a9393a27125474316636cb12bd7677ab5cadf101747483.mp4"
+}

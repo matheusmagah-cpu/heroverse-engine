@@ -1,0 +1,38 @@
+{
+ "id": "clip-sunrise-sunset-clouds-golden-sunset-sun-downfall",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "sunset, clouds, golden sunset, sun, downfall, gold, silhouette, time lapse, timelapse, timewarp",
+ "page": "https://pixabay.com/videos/id-92093/",
+ "author": "Kaffeesüchtig",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-92093/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  141.4,
+  135.7,
+  129.5,
+  123.4,
+  117.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-sunrise-sunset-clouds-golden-sunset-sun-downfall-sha256-48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e.mp4"
+}

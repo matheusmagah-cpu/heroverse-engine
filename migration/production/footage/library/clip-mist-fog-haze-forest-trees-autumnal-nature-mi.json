@@ -1,0 +1,38 @@
+{
+ "id": "clip-mist-fog-haze-forest-trees-autumnal-nature-mi",
+ "theme": "mist",
+ "query": "fog forest",
+ "source": "pixabay",
+ "title": "fog, haze, forest, trees, autumnal, nature, mist",
+ "page": "https://pixabay.com/videos/id-375597/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 44.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-375597/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2d5e0af0989ffc98643655cacb47371e28310903bb994b7a0b2ecc112ed60a42",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  98.4,
+  105.1,
+  108.6,
+  107.0,
+  96.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-mist-fog-haze-forest-trees-autumnal-nature-mi-sha256-2d5e0af0989ffc98643655cacb47371e28310903bb994b7a0b2ecc112ed60a42.mp4"
+}

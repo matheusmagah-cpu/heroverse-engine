@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-raindrops-rain-heavy-rain-puddle-water-w",
+ "theme": "rain",
+ "query": "rain on leaves",
+ "source": "pixabay",
+ "title": "raindrops, rain, heavy rain, puddle, water, wet, grass, greenery, outdoor, rainfall, splash, weather, natural, tranquil, droplets, rainy day, ripples on water, ripples, calm, scenic, raining, hiking, trail, nature",
+ "page": "https://pixabay.com/videos/id-225951/",
+ "author": "YanaHD",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 80.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: YanaHD via Pixabay (https://pixabay.com/videos/id-225951/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b9edd9f82d7bc4a29755c2268d1065d26cabbe65e19a19e9af4033041de07a1c",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  76.6,
+  76.5,
+  76.4,
+  76.2,
+  76.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-rain-raindrops-rain-heavy-rain-puddle-water-w-sha256-b9edd9f82d7bc4a29755c2268d1065d26cabbe65e19a19e9af4033041de07a1c.mp4"
+}
