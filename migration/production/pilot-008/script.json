@@ -17,7 +17,7 @@
       "id": "hook",
       "beat": "0-8 s: evening need and Shepherd-centered rest",
       "pause_after": 0.8,
-      "text": "Good evening. Tonight, pray Psalm twenty three, release your unfinished day, and rest in your Shepherd's care."
+      "text": "Before you sleep tonight, let your Shepherd carry what you could not finish. Pray Psalm twenty-three with me now."
     },
     {
       "id": "invitation",
@@ -53,12 +53,6 @@
       "reference": "John 10:11 (KJV)"
     },
     {
-      "id": "reflection-good-shepherd",
-      "beat": "reflection: care shown in the self-giving of Jesus",
-      "pause_after": 1.2,
-      "text": "These are the words of Jesus. His care has a cost that he willingly bears. When you wonder whether you matter, you can look toward the cross and the love revealed there. You are listening to a Shepherd who gives himself. That is the ground beneath this evening prayer. You do not need to produce a stronger feeling before you come near. You can bring your hesitant trust to him as it is."
-    },
-    {
       "id": "prayer-provision",
       "beat": "guided prayer: daily needs without promises of wealth",
       "pause_after": 1.2,
@@ -77,12 +71,6 @@
       "text": "He maketh me to lie down in green pastures: he leadeth me beside the still waters.",
       "reference": "Psalm 23:2 (KJV)",
       "chapter": "Permission to lie down (Psalm 23:2)"
-    },
-    {
-      "id": "reflection-pasture",
-      "beat": "reflection: rest belongs within the Shepherd's care",
-      "pause_after": 1.2,
-      "text": "The movement of this verse is gentle. You are led somewhere nourishing, and you are allowed to lie down there. In the picture the psalm gives you, rest belongs within the Shepherd's care. You may have learned to treat every quiet moment as an opportunity to catch up. Tonight you can receive a different invitation. Your body has limits. You can honor those limits without making tiredness a verdict on your worth."
     },
     {
       "id": "prayer-work",
@@ -111,12 +99,6 @@
       "chapter": "Restoration and a faithful path (Psalm 23:3)"
     },
     {
-      "id": "reflection-restoration",
-      "beat": "reflection: returning to what is true and good",
-      "pause_after": 1.2,
-      "text": "Restoration reaches deeper than recovering enough energy to be busy again. You can ask God to turn your attention back toward what is true and good. Perhaps you recognize a place where you drifted today, a small compromise or a kindness you withheld. The psalm joins restoration with guidance. You can bring that place to the Shepherd and ask for a faithful next step. You do not have to hide it beneath exhaustion."
-    },
-    {
       "id": "prayer-confession",
       "beat": "guided prayer: honest confession and repair",
       "pause_after": 1.2,
@@ -136,12 +118,6 @@
       "reference": "Isaiah 40:11 (KJV)"
     },
     {
-      "id": "reflection-gentleness",
-      "beat": "reflection: care suited to weakness and responsibility",
-      "pause_after": 1.2,
-      "text": "Isaiah gives you another view of the Shepherd. Some need to be carried; some need to be led gently. You are allowed to acknowledge which kind of help you need tonight. If you have been carrying responsibility for others, this tenderness includes you. You do not have to walk at someone else's pace to be worthy of care. The image makes room for weakness, for dependence, and for a slower journey."
-    },
-    {
       "id": "prayer-receiving-help",
       "beat": "guided prayer: receiving care while caring for others",
       "pause_after": 1.2,
@@ -154,12 +130,6 @@
       "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.",
       "reference": "Psalm 23:4 (KJV)",
       "chapter": "With me in the valley (Psalm 23:4)"
-    },
-    {
-      "id": "reflection-valley",
-      "beat": "reflection: addressing God within trouble",
-      "pause_after": 1.2,
-      "text": "The valley is part of the psalm. You are given words for a place where the way is difficult to see. Notice how the prayer becomes personal here: the speaker addresses God directly. You can do that too. You can speak to him from the middle of what troubles you, before you understand it. The comfort offered is companionship on the path. You do not have to describe the valley as easy to pray with trust."
     },
     {
       "id": "prayer-grief",
@@ -188,12 +158,6 @@
       "chapter": "A place at the table (Psalm 23:5)"
     },
     {
-      "id": "reflection-table",
-      "beat": "reflection: receiving care amid unresolved conflict",
-      "pause_after": 1.2,
-      "text": "The table appears while opposition is still present. You may recognize that kind of unfinished situation: a disagreement, a strained relationship, or a place where you feel misunderstood. The verse lets you picture receiving care within that setting. You can turn your attention toward the Host. You do not have to spend every remaining hour making your case in your imagination. There is nourishment to receive even while a difficult matter remains unresolved."
-    },
-    {
       "id": "prayer-conflict",
       "beat": "guided prayer: releasing rehearsed arguments",
       "pause_after": 1.2,
@@ -218,12 +182,6 @@
       "text": "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.",
       "reference": "Psalm 23:6 (KJV)",
       "chapter": "Goodness and mercy beyond today (Psalm 23:6)"
-    },
-    {
-      "id": "reflection-mercy",
-      "beat": "reflection: the day held within a longer faithfulness",
-      "pause_after": 1.2,
-      "text": "The psalm ends with a horizon wider than this evening. You began with the needs of one day, and now you hear about all your days. You may be able to recognize mercy in places you once overlooked: someone staying, a chance to begin again, help arriving through an ordinary hand. You can hold those memories gently. They give you reasons to trust the Shepherd with a future you cannot yet describe."
     },
     {
       "id": "prayer-future",
@@ -265,12 +223,6 @@
       "chapter": "A gentle invitation (Matthew 11:28-30)"
     },
     {
-      "id": "sleep-reflection-invitation",
-      "beat": "sleep reflection: arriving with weariness",
-      "pause_after": 1.5,
-      "text": "You are included in the invitation while you are weary. You do not need to become less tired before you come. Let the gentleness of Jesus be what you notice in these words. You can rest your attention on his character rather than checking whether you have become calm enough. Even a distracted prayer can be an honest arrival. You are here, and you are welcome to bring your burden."
-    },
-    {
       "id": "sleep-prayer-burden",
       "beat": "sleep prayer: releasing the need to prove enough",
       "pause_after": 1.5,
@@ -285,143 +237,10 @@
       "chapter": "The Shepherd seeks his flock (Ezekiel 34:11-12)"
     },
     {
-      "id": "sleep-reflection-gathered",
-      "beat": "sleep reflection: a promise to scattered Israel",
-      "pause_after": 1.5,
-      "text": "Through Ezekiel, God speaks to his scattered people. The Shepherd himself takes the initiative to seek them. As you listen, you can notice the tenderness of that action. Your thoughts may feel scattered across many unfinished things, but you do not need to gather every one before you pray. You can ask for help in gathering them. You can let your attention settle again on the God who seeks his flock."
-    },
-    {
       "id": "stillness-sleep",
       "beat": "guided stillness: rest the effort of attention",
       "pause_after": 3.0,
       "text": "Allow a little space between one thought and the next. You can feel the pillow beneath you without adjusting anything. Breathe in your ordinary way. For these few moments, let being here be enough."
-    },
-    {
-      "id": "sleep-psalm-100",
-      "beat": "sleep reading: belonging and enduring mercy",
-      "pause_after": 1.5,
-      "text": "Know ye that the LORD he is God: it is he that hath made us, and not we ourselves; we are his people, and the sheep of his pasture. Enter into his gates with thanksgiving, and into his courts with praise: be thankful unto him, and bless his name. For the LORD is good; his mercy is everlasting; and his truth endureth to all generations.",
-      "reference": "Psalm 100:3-5 (KJV)",
-      "chapter": "The sheep of his pasture (Psalm 100:3-5)"
-    },
-    {
-      "id": "sleep-reflection-flock",
-      "beat": "sleep reflection: receiving life as a gift",
-      "pause_after": 1.5,
-      "text": "You did not have to make yourself before you could belong to God. Your life began as a gift. This psalm gives you a way to receive that gift with gratitude, even after a complicated day. You are part of a people who have prayed before you and will pray after you. In this quiet room, your small prayer joins a much larger history of thanksgiving and trust."
-    },
-    {
-      "id": "sleep-prayer-thanks",
-      "beat": "sleep prayer: gratitude for ordinary creaturely life",
-      "pause_after": 1.5,
-      "text": "Creator, thank you for giving me life, and for the ordinary ways it is sustained. Thank you for water, shelter, companionship, and the possibility of beginning again. Help me remain attentive to those who lack what I can easily take for granted. Receive my gratitude without requiring me to deny my sorrow. Both are here before you tonight, and I bring them together into your presence."
-    },
-    {
-      "id": "sleep-isaiah-49",
-      "beat": "sleep reading: mercy leads toward springs of water",
-      "pause_after": 1.5,
-      "text": "That thou mayest say to the prisoners, Go forth; to them that are in darkness, Shew yourselves. They shall feed in the ways, and their pastures shall be in all high places. They shall not hunger nor thirst; neither shall the heat nor sun smite them: for he that hath mercy on them shall lead them, even by the springs of water shall he guide them.",
-      "reference": "Isaiah 49:9-10 (KJV)",
-      "chapter": "Led by mercy (Isaiah 49:9-10)"
-    },
-    {
-      "id": "sleep-reflection-springs",
-      "beat": "sleep reflection: Isaiah's picture of restoration",
-      "pause_after": 1.5,
-      "text": "Isaiah describes a people being brought out and led with mercy. The picture carries you toward pasture and springs, toward care along the journey. You can let that picture rest beside the still waters of the psalm we prayed. You do not have to turn it into a prediction about tomorrow. You can receive its witness to God's compassion and ask to recognize his guidance in your own next step."
-    },
-    {
-      "id": "sleep-prayer-trust",
-      "beat": "sleep prayer: a teachable heart in the waiting",
-      "pause_after": 1.5,
-      "text": "Merciful God, keep my heart teachable while I wait. I sometimes want the whole road explained before I begin. Help me receive the light available for the step in front of me. Lead me through wise counsel, truthful words, and patient attention. As the room grows quieter, I release the demand to understand everything tonight. I ask for trust that can remain honest about what I do not yet know."
-    },
-    {
-      "id": "sleep-psalm-121",
-      "beat": "sleep reading: the Keeper does not slumber",
-      "pause_after": 1.5,
-      "text": "He will not suffer thy foot to be moved: he that keepeth thee will not slumber. Behold, he that keepeth Israel shall neither slumber nor sleep.",
-      "reference": "Psalm 121:3-4 (KJV)",
-      "chapter": "The Keeper who does not sleep (Psalm 121:3-4)"
-    },
-    {
-      "id": "sleep-reflection-keeper",
-      "beat": "sleep reflection: divine care does not depend on attention",
-      "pause_after": 1.5,
-      "text": "You hear the psalm describe a Keeper who does not grow drowsy. Your attention can fade; God's faithfulness is not sustained by your concentration. You can stop checking whether you are holding every concern correctly in prayer. The people you love remain known to him when you are too tired to form another sentence. Let your own need for sleep be something you can acknowledge with tenderness tonight."
-    },
-    {
-      "id": "sleep-prayer-household",
-      "beat": "sleep prayer: the household and those far away",
-      "pause_after": 1.5,
-      "text": "Lord, I entrust this household to your care. I remember each person nearby, and those whose homes are far from mine. Give us patience with one another's needs. Grant rest to those who can sleep and strength to those whose responsibilities keep them awake. Where practical help is needed, guide us toward it. I release the wish to supervise everything from this pillow and rest my love for them before you."
-    },
-    {
-      "id": "sleep-john-10",
-      "beat": "sleep reading: known and held by Jesus",
-      "pause_after": 1.5,
-      "text": "My sheep hear my voice, and I know them, and they follow me: And I give unto them eternal life; and they shall never perish, neither shall any man pluck them out of my hand.",
-      "reference": "John 10:27-28 (KJV)",
-      "chapter": "Known by the Shepherd (John 10:27-28)"
-    },
-    {
-      "id": "sleep-reflection-known",
-      "beat": "sleep reflection: the Shepherd knows his sheep",
-      "pause_after": 1.5,
-      "text": "Jesus speaks of knowing his sheep. You can linger with that personal word. You are more than the story you managed to explain today, more than what someone understood or misunderstood about you. Your prayer can become very simple here. You can rest in being known, and ask to recognize the Shepherd's voice through his words. There is no need to invent a longer speech for this quiet moment."
-    },
-    {
-      "id": "sleep-prayer-known",
-      "beat": "sleep prayer: letting the need to explain become quiet",
-      "pause_after": 1.5,
-      "text": "Jesus, I am grateful that I do not have to explain myself endlessly to you. You know the effort behind this day and the uncertainty beneath my answers. Help me follow you with sincerity. Where my understanding is incomplete, keep me humble. Where my trust is fragile, receive the little I can offer. I place myself before you, known more fully than I can know myself, and held within your love."
-    },
-    {
-      "id": "sleep-psalm-36",
-      "beat": "sleep reading: mercy, shelter, and the fountain of life",
-      "pause_after": 1.5,
-      "text": "Thy mercy, O LORD, is in the heavens; and thy faithfulness reacheth unto the clouds. Thy righteousness is like the great mountains; thy judgments are a great deep: O LORD, thou preservest man and beast. How excellent is thy lovingkindness, O God! therefore the children of men put their trust under the shadow of thy wings. They shall be abundantly satisfied with the fatness of thy house; and thou shalt make them drink of the river of thy pleasures. For with thee is the fountain of life: in thy light shall we see light.",
-      "reference": "Psalm 36:5-9 (KJV)",
-      "chapter": "The fountain of life (Psalm 36:5-9)"
-    },
-    {
-      "id": "sleep-reflection-fountain",
-      "beat": "sleep reflection: receiving rather than producing",
-      "pause_after": 1.5,
-      "text": "The images widen around you: heavens, clouds, mountains, deep water. Then the psalm brings you close beneath a sheltering wing and beside a fountain. You can imagine receiving what you could never produce by effort alone. Tonight, you do not need to generate all your own strength. You can ask, receive, and rest. Let the scale of this picture make a little space around the concerns that have filled your attention."
-    },
-    {
-      "id": "stillness-2",
-      "beat": "guided stillness: return gently to the room",
-      "pause_after": 3.0,
-      "text": "Notice the quietest sound around you. You do not need to follow it. Let your hands remain where they are comfortable, and allow your breathing its own pace. The next words are simple words for the end of a day."
-    },
-    {
-      "id": "sleep-psalm-4",
-      "beat": "sleep reading: lying down in peace",
-      "pause_after": 1.5,
-      "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.",
-      "reference": "Psalm 4:8 (KJV)",
-      "chapter": "A prayer from the pillow (Psalm 4:8)"
-    },
-    {
-      "id": "sleep-reflection-peace",
-      "beat": "sleep reflection: receiving a prayer without forcing a feeling",
-      "pause_after": 1.5,
-      "text": "You can receive these words as a prayer from your own pillow. You do not have to force a particular feeling while you hear them. Some evenings become quiet quickly; others take longer. Either way, you can bring yourself to God without criticism. Let the verse give you language for what you desire: a peaceful lying down, a trusting heart, and rest received with gratitude when it comes."
-    },
-    {
-      "id": "sleep-psalm-3",
-      "beat": "sleep reading: remembering the Lord's sustaining care",
-      "pause_after": 1.5,
-      "text": "I laid me down and slept; I awaked; for the LORD sustained me.",
-      "reference": "Psalm 3:5 (KJV)"
-    },
-    {
-      "id": "sleep-reflection-sustained",
-      "beat": "sleep reflection: remembering ordinary mornings",
-      "pause_after": 1.5,
-      "text": "These words look back with gratitude. You may remember an ordinary morning when you opened your eyes and began again, perhaps without noticing the gift. Now you can receive that memory gently. There have been nights you did not manage perfectly and mornings you still met with help. You can place this night among them, asking for sustaining grace without needing to know every detail of what comes next."
     },
     {
       "id": "sleep-prayer-closing",
