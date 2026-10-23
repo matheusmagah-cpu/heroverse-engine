@@ -206,3 +206,25 @@ Owner: "work the viral format to explode fast, then the authenticity and origina
 - **Where we stood.** R12 hook, 12–18 min, original specific prayers, exact KJV, licensed 1440p footage, no copied content. Missing: roadmap and re-hooks, a community ritual, explicit format variation, a more expressive voice.
 - **Decision (R13, STANDARD).** Roadmap within 30 s, a re-hook at least every 3.5 min until the commitment, a spoken prayer-request invitation answered in the next prayer of the series, and archetype alternation (passage walk-through / topical / retold narrative). Applied to 008–014 (15.6–16.4 min). Shorts become hook clips of the long video with a pointer to it (next). Voice: test Chatterbox (MIT, emotion control) on a 60 s sample against Kokoro on the free CPU runner; switch only if clearly better and the 15-min render fits.
 - **Not claimed.** None of this is measured on our own channel yet; the first renders under R13 are the test.
+
+## Algorithm study: what promotes and what kills (2026-10-23 evening)
+Owner: "understand what the winners have in common and what the ones that do not grow have in common; this is the gold of the operation". Full report and raw data: `evidence/vidiq/20261023/algorithm_study/REPORT.md` (811 videos ≥ 10 days old, 23 channels, 98 niche breakouts, transcripts of 4 winners and 4 dead videos; strict tests inside the same channel and month, permutation p-values).
+- **Kills.** A date, weekday or month in the title (dead ×10, p = 0.001); format hopping (all 4 never-grew channels); short videos on a cold channel; clever titles nobody searches; 10–17 min night videos.
+- **Promotes.** Gratitude themes (dead ×0.35, p = 0.002); ≥ 90 min sleep content (never dead, p = 0.008); "hook | search phrase" titles (hit ×2.0, p = 0.009) with one emoji (×2.3, p = 0.010); morning prayers of 12–35 min; daily cadence in one format (fat-tailed outcomes: growth is the rare 30–400× video).
+- **Does not decide.** Script quality on a cold channel (the dead videos' scripts are as good); copying a surging title (16 % vs 17 % baseline).
+- **Unlock.** Growers broke out at upload #12, #12, #18 and #30 (14–64 min, gratitude or protection); 4 of 8 cold channels never did.
+- **Decision.** STANDARD R14 (title gate in `script_check`), and pilots 008–014 retitled. Night videos move to ≥ 60 min, then ≥ 90 min (renderer: a low-cost long sleep section). The first-week themes favour gratitude.
+- **Owner decisions (outward, not taken).** Make the 18 off-niche July Shorts and videos private (prophecy and motivation, tagged #marvel and #theflash), and consider a niche display name.
+
+## Compare everything: metadata, picture and sound (2026-10-23 night)
+Owner: "compare everything… structure, every detail, so we only produce what the algorithm delivers".
+- **Metadata (334 hit or dead videos).** Bible references in the description: hit ×0.33 (p = 0.007). A subscribe ask in the description: hit ×3.27 (p = 0.014). Upload hour, chapters, tags, hashtags and links do not decide.
+- **Picture and sound (20 watched with vidIQ).** Quality does not separate: hits 6.9, dead 6.8. Our two videos scored 9 and 8.5, the best of the sample, with 6–40 views. The same channel with the same template has both outcomes (Grace & Purpose 287K vs 98; Favor for Today 54K vs 73).
+- **Decision.** STANDARD R15: no Bible references in descriptions or chapter names, and a subscribe line in every description. Intros of 008, 009, 011 and 014 are rewritten. Thumbnails are measured by `thumb-study.yml`.
+- **Leaning, not adopted (HYPOTHESIS).** A persistent "Type Amen 🙏" badge (4 of 9 hits, 2 of 8 dead). No female voice among the hits.
+
+## Thumbnails (2026-10-23 night)
+- **Measured.** 806 thumbnails of the study (`thumb-study.yml`). Saturated: dead ×0.29 (p = 0.003). Blue-dominant: hit ×0.26 (p = 0.008). Faces, brightness, text amount and contrast do not decide.
+- **Seen.** Breakouts: huge bold text across the frame (search phrase on top, hook below), warm gold light, one template per channel. Dead: dark, cool, desaturated, thin small text (a whole channel of them never broke out), dated thumbnails.
+- **Ours before.** Darkened frame, text in the right half at most 14 % of the height: the dead style.
+- **Decision.** STANDARD R16: breakout layout over the warmest still, and a thumbnail ruler in every render.

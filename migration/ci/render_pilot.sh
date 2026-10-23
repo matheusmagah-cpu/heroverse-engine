@@ -101,6 +101,8 @@ end
 
 stage "Package (no upload to YouTube) and inspection sheets"
 q python3 -I -B migration/production/package_pilot.py "$T/work" "migration/production/$PILOT/script.json" "$T/work/package"
+# R16 thumbnail ruler (Pillow and NumPy come with the cut-out venv)
+"$T/cut/bin/python" -I -B migration/production/thumb_check.py "$T/work/package/thumbnail.jpg" "$T/work/package/thumbnail_check.json" || QA_FAILED=1
 mkdir -p "migration/production/$PILOT/inspection"
 d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$T/work/pilot.mp4")
 n=$(python3 -c "import math;print(math.ceil($d/20))")
@@ -119,6 +121,7 @@ cp "$T/work/manifest.json" "$T/work/timeline.json" "$T/work/captions.ass" "migra
 cp "$T/work/qa.json" "migration/production/$PILOT/out/qa.json" || true
 cp "$T/work/package/package.json" "migration/production/$PILOT/out/package.json" || true
 cp "$T/work/package/thumbnail.jpg" "migration/production/$PILOT/inspection/thumbnail.jpg" || true
+cp "$T/work/package/thumbnail_check.json" "migration/production/$PILOT/out/thumbnail_check.json" || true
 if [ -n "$HANDOFF" ]; then
   # stale Shorts of an earlier render must never be published with this one
   rm -f "migration/production/$PILOT/shorts/"*.json "migration/production/$PILOT/shorts/"*-frame.jpg

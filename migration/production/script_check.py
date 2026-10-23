@@ -107,6 +107,39 @@ def continuity_problems(segs):
     return problems
 
 
+TITLE_DATE = re.compile(r"(?i)\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|january|february|march|"
+                        r"april|june|july|august|september|october|november|december|20\d\d)\b")
+SEARCH_PHRASE = re.compile(r"(?i)\b(morning prayer|night prayer|bedtime prayer|evening prayer|prayer before (sleep|bed))\b")
+EMOJI = re.compile(r"[\U0001F300-\U0001FAFF\u2600-\u27BF]")
+
+
+def title_problems(title):
+    """R14 (algorithm study 2026-10-23, evidence/vidiq/20261023/algorithm_study/REPORT.md): a date, weekday, month or
+    year in the title multiplies the odds of a dead video by 10 (p = 0.001); two-part "hook | search phrase" titles and
+    one emoji double the odds of a breakout (p = 0.009, 0.010)."""
+    problems = []
+    if TITLE_DATE.search(title):
+        problems.append("TITLE_HAS_DATE (R14: x10 odds of a dead video)")
+    hook, _, tail = title.partition("|")
+    if not tail.strip():
+        problems.append("TITLE_NOT_HOOK_PIPE_SEARCH_PHRASE (R14)")
+    elif not SEARCH_PHRASE.search(tail):
+        problems.append("TITLE_TAIL_NOT_A_SEARCH_PHRASE (R14: Morning/Night/Bedtime/Evening Prayer)")
+    if not EMOJI.search(title):
+        problems.append("TITLE_NO_EMOJI (R14)")
+    return problems
+
+
+# R15 (algorithm study 2026-10-23, meta_perm.py): Bible references in the description lowered the odds of a hit to
+# x0.33 (p = 0.007). Same pattern as package_pilot.SCRIPTURE_REF, which refuses the finished description.
+SCRIPTURE_REF = re.compile(r"\b(?:[1-3] )?[A-Z][a-z]+ \d+:\d+|\b(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation) \d+", re.UNICODE)
+
+
+def description_problems(intro):
+    refs = SCRIPTURE_REF.findall(intro or "")
+    return [f"DESCRIPTION_SCRIPTURE_REF {refs[:3]} (R15)"] if refs else []
+
+
 def check(pilot_dir, production=None):
     d = Path(pilot_dir)
     production = Path(production) if production else d.parent
@@ -155,6 +188,8 @@ def check(pilot_dir, production=None):
     if s.get("footage") and segs and ids[0] == "hook":
         problems += hook_problems(segs[0].get("text", ""))
         problems += continuity_problems(segs)
+        problems += title_problems(s.get("working_title", ""))
+        problems += description_problems(s.get("description_intro", ""))
     t, first_prayer = 0.0, None
     for x in segs:
         if x.get("id", "").startswith("prayer"):
