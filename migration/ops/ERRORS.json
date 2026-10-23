@@ -323,6 +323,16 @@
     "file": "migration/production/test_render_queue.py",
     "contains": "def test_passed_slot_without_video_is_reported_stale"
    }
+  },
+  {
+   "id": "E50",
+   "date": "2026-10-23",
+   "error": "Deleting the unused pilot-001 (PR #292) removed its out/qa.json; that push fired approve.yml, whose pilot lookup listed the deleted file and failed on the missing render (run 39949492128). publish.yml and shorts.yml had the same lookup.",
+   "fix": "The push lookups in approve.yml, publish.yml and shorts.yml use git diff --diff-filter=AM (added or modified only); approve and shorts end cleanly with SKIP when a push added nothing.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_push_triggers_ignore_deleted_files"
+   }
   }
  ]
 }
