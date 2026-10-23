@@ -94,6 +94,13 @@ def github_json(path, token):
 
 
 def require_unused_reservation(token, artifact_name=START_ARTIFACT):
+    # Actions artifacts expire; a consumed qualification must not become usable
+    # again after retention elapses or the free-project observation is renewed.
+    qualification = artifact_name.removeprefix('reviewer-qualification-start-')
+    for path in (ROOT / 'migration/evidence/reviewer-qualification').glob('*.json'):
+        saved = _strict_json(path.read_bytes())
+        require(not (saved.get('qualification_id') == qualification and saved.get('state') in
+                ('STARTED', 'NOT_REVIEWED', 'REVIEWED', 'INTEGRITY_ERROR')), 'QUALIFICATION_ALREADY_RESERVED')
     data = github_json('/actions/artifacts?name=' + artifact_name + '&per_page=1', token)
     require(type(data.get('total_count')) is int and data['total_count'] == 0
             and data.get('artifacts') == [], 'QUALIFICATION_ALREADY_RESERVED')
@@ -218,7 +225,15 @@ def read_interaction(response, policy, trace, stream=False):
                 if kind == 'step.start':
                     step = event['step']
                     require(index not in steps and step.get('type') in ('thought', 'model_output'), 'STREAM_STEP_INVALID')
-                    steps[index] = {'type': step['type'], 'text': ''}
+                    initial = ''
+                    if step['type'] == 'model_output':
+                        content = step.get('content', [])
+                        require(type(content) is list, 'STREAM_CONTENT_INVALID')
+                        for part in content:
+                            require(type(part) is dict and part.get('type') == 'text'
+                                    and type(part.get('text')) is str, 'STREAM_TEXT_REQUIRED')
+                            initial += part['text']
+                    steps[index] = {'type': step['type'], 'text': initial}
                     active.add(index)
                 else:
                     require(index in active, 'STREAM_STEP_NOT_ACTIVE')
@@ -251,6 +266,34 @@ def read_interaction(response, policy, trace, stream=False):
     finally:
         signal.setitimer(signal.ITIMER_REAL, 0)
         signal.signal(signal.SIGALRM, previous_handler)
+
+
+def interaction_http_failure(error, key, trace):
+    """Keep the real API category without copying arbitrary error prose or secrets."""
+    failure, raw = sr.review_provider_failure(error, key)
+    statuses = {'service_unavailable': 'UNAVAILABLE', 'authentication': 'UNAUTHENTICATED',
+                'unauthenticated': 'UNAUTHENTICATED', 'permission_denied': 'PERMISSION_DENIED',
+                'model_not_found': 'NOT_FOUND', 'not_found': 'NOT_FOUND',
+                'invalid_request': 'INVALID_ARGUMENT', 'invalid_argument': 'INVALID_ARGUMENT',
+                'parameter_unknown': 'INVALID_ARGUMENT', 'rate_limit_exceeded': 'RESOURCE_EXHAUSTED',
+                'quota_exceeded': 'RESOURCE_EXHAUSTED', 'too_many_requests': 'RESOURCE_EXHAUSTED',
+                'resource_exhausted': 'RESOURCE_EXHAUSTED'}
+    try:
+        data = _strict_json(raw)['error']
+        code = data.get('code')
+        if type(code) is str and code in statuses:
+            trace['provider_error_code'] = code
+            diagnostic = {**(failure.diagnostic or {}), 'provider_status': statuses[code]}
+            failure = ProviderFailure('HTTP_' + str(error.code) + '_' + statuses[code]
+                                      + (':QUOTA' if error.code == 429 else ''), diagnostic)
+        # Exact known provider wording is classified, never echoed as free text.
+        if data.get('message') == ('This model is currently experiencing high demand. '
+                'Spikes in demand are usually temporary. Please try again later.'):
+            trace['provider_message_category'] = 'MODEL_HIGH_DEMAND'
+    except (ValueError, KeyError, TypeError, AttributeError):
+        pass
+    trace['provider_diagnostic'] = sr.failure_record(failure)['provider_diagnostic']
+    return failure
 
 
 class InteractionInference:
@@ -322,13 +365,7 @@ class InteractionInference:
             return MODEL, report
         except urllib.error.HTTPError as error:
             entry.update(http_status=error.code, outcome='HTTP_ERROR')
-            failure, raw = sr.review_provider_failure(error, key)
-            try:
-                code = _strict_json(raw).get('error', {}).get('code')
-                if code in ('service_unavailable', 'resource_exhausted', 'invalid_argument', 'unauthenticated', 'permission_denied'):
-                    entry['provider_error_code'] = code
-            except Exception:
-                pass
+            failure = interaction_http_failure(error, key, entry)
             raise failure from None
         except ProviderFailure:
             raise
@@ -367,17 +404,15 @@ def text_control(key, cutoff, endpoint=ENDPOINT, stream=False):
         trace.update(outcome='SUCCESS', decision='CONTINUE_TO_INLINE')
     except urllib.error.HTTPError as error:
         trace.update(http_status=error.code, outcome='HTTP_ERROR')
-        failure, raw = sr.review_provider_failure(error, key)
+        failure = interaction_http_failure(error, key, trace)
         result['error_code'] = failure.code
-        # Interactions has a string error.code, unlike generateContent.status.
-        try:
-            code = _strict_json(raw).get('error', {}).get('code')
-            if code in ('service_unavailable', 'resource_exhausted', 'invalid_argument', 'unauthenticated', 'permission_denied'):
-                trace['provider_error_code'] = code
-        except Exception:
-            pass
+        result['provider_diagnostic'] = trace['provider_diagnostic']
+    except ProviderFailure as error:
+        result['error_code'] = error.code
+        result['provider_diagnostic'] = sr.failure_record(error)['provider_diagnostic']
     except Exception:
         trace['outcome'] = 'INVALID_OR_INCOMPLETE_CONTROL'
+        result['error_code'] = 'UNPARSEABLE_MODEL_OUTPUT' if trace['http_status'] == 200 else 'PROVIDER_CALL_FAILED'
     finally:
         policy.observe()
         trace['elapsed_seconds'] = policy._elapsed
@@ -414,7 +449,9 @@ def infer(output, environ=os.environ):
         if inline:
             receipt['text_control'] = text_control(key, policy._cutoff, endpoint=endpoint, stream=stream)
             receipt['diagnostic_outcome'] = ('TEXT_READY' if receipt['text_control']['ready'] else 'TEXT_CONTROL_FAILED_VIDEO_NOT_ATTEMPTED')
-            require(receipt['text_control']['ready'] is True, 'MODEL_TEXT_CONTROL_FAILED')
+            if receipt['text_control']['ready'] is not True:
+                control = receipt['text_control']
+                raise ProviderFailure(control.get('error_code', 'PROVIDER_CALL_FAILED'), control.get('provider_diagnostic'))
         review = sr.review(media, deepcopy(record), key, http_policy=policy, inference=inference, inline=inline)
         verdict = _review_verdict(review, MEDIA_SHA)
         require(verdict in ('PASS', 'FAIL'), 'REVIEW_INCOMPLETE')
