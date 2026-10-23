@@ -1,11 +1,15 @@
-name: HeroVerse voice A/B sample (Chatterbox vs Kokoro, no paid call)
+name: HeroVerse voice A/B judged (Kokoro vs Chatterbox, objective ruler, no paid call)
 on:
   workflow_dispatch:
     inputs:
       pilot:
-        description: Pilot whose recorded Kokoro narration is the reference and whose opening is narrated
+        description: Pilot whose opening is narrated by every candidate (its recorded Kokoro narration is Chatterbox's reference)
         required: true
         default: pilot-010
+      segments:
+        description: Number of opening segments narrated
+        required: false
+        default: '4'
 permissions:
   contents: read
 jobs:
@@ -16,29 +20,48 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
       PILOT: ${{ inputs.pilot }}
+      SEGMENTS: ${{ inputs.segments }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Tools
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng >/dev/null
+          python3 -m venv "$RUNNER_TEMP/voice"; "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
           python3 -m venv "$RUNNER_TEMP/cb"
-          "$RUNNER_TEMP/cb/bin/pip" install --disable-pip-version-check -q --extra-index-url https://download.pytorch.org/whl/cpu chatterbox-tts soundfile
-      - name: Reference (our own Kokoro narration of this pilot) and the Kokoro original for comparison
+          "$RUNNER_TEMP/cb/bin/pip" install --disable-pip-version-check -q --extra-index-url https://download.pytorch.org/whl/cpu chatterbox-tts soundfile "setuptools<81"
+          "$RUNNER_TEMP/cb/bin/python" -c "import perth; assert perth.PerthImplicitWatermarker is not None, perth.__file__"
+          python3 -m venv "$RUNNER_TEMP/judge"; "$RUNNER_TEMP/judge/bin/pip" install --disable-pip-version-check -q librosa==0.10.2.post1 faster-whisper==1.2.1
+      - name: The same opening text for every candidate
+        run: |
+          mkdir -p "$RUNNER_TEMP/out" "$RUNNER_TEMP/work"
+          python3 -I - "migration/production/$PILOT/script.json" "$SEGMENTS" "$RUNNER_TEMP/trim.json" "$RUNNER_TEMP/text.txt" <<'PY'
+          import json, sys
+          s = json.load(open(sys.argv[1])); n = int(sys.argv[2])
+          s["segments"] = s["segments"][:n]
+          json.dump(s, open(sys.argv[3], "w"))
+          open(sys.argv[4], "w").write(" ".join(x["text"] for x in s["segments"]))
+          PY
+      - name: Kokoro (the production voice, pinned and verified)
+        run: |
+          python3 -I -B migration/production/pilot_render.py prepare "$RUNNER_TEMP/work" HeroVerse_Linux_Source_Ready_20261013_v2.zip
+          "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$RUNNER_TEMP/work" "$RUNNER_TEMP/trim.json"
+          cp "$RUNNER_TEMP/work/voice.wav" "$RUNNER_TEMP/out/kokoro.wav"
+      - name: Chatterbox, cloned from this pilot's recorded Kokoro narration
         run: |
           asset=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets \
             --jq "[.assets[] | select(.name | startswith(\"$PILOT-voice-sha256-\"))] | sort_by(.createdAt) | last | .name")
           test -n "$asset"; echo "reference: $asset"
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/voice.flac" --clobber
           ffmpeg -v error -y -ss 20 -t 12 -i "$RUNNER_TEMP/voice.flac" -ac 1 -ar 24000 "$RUNNER_TEMP/reference.wav"
-          mkdir -p "$RUNNER_TEMP/out"
-          ffmpeg -v error -y -t 75 -i "$RUNNER_TEMP/voice.flac" -b:a 160k "$RUNNER_TEMP/out/kokoro-original.mp3"
-      - name: Chatterbox narration of the opening
-        run: |
           "$RUNNER_TEMP/cb/bin/python" -I -B migration/production/voice/chatterbox_sample.py \
-            "migration/production/$PILOT/script.json" "$RUNNER_TEMP/reference.wav" "$RUNNER_TEMP/out" 4
-          for f in "$RUNNER_TEMP"/out/chatterbox-*.wav; do ffmpeg -v error -y -i "$f" -b:a 160k "${f%.wav}.mp3" && rm "$f"; done
+            "$RUNNER_TEMP/trim.json" "$RUNNER_TEMP/reference.wav" "$RUNNER_TEMP/out" "$SEGMENTS"
+      - name: Judge every candidate with the objective ruler
+        run: |
+          o="$RUNNER_TEMP/out"
+          "$RUNNER_TEMP/judge/bin/python" -I -B migration/production/voice/voice_judge.py "$RUNNER_TEMP/text.txt" \
+            kokoro="$o/kokoro.wav" chatterbox_calm="$o/chatterbox-calm.wav" chatterbox_warm="$o/chatterbox-warm.wav" | tee "$o/judge.jsonl"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: voice-sample-${{ inputs.pilot }}
+          name: voice-judged-${{ inputs.pilot }}
           path: ${{ runner.temp }}/out
           retention-days: 7
