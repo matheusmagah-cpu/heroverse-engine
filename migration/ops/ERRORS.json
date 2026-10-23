@@ -343,6 +343,26 @@
     "file": "migration/production/footage/test_footage.py",
     "contains": "E51: vertical source, would be enlarged"
    }
+  },
+  {
+   "id": "E52",
+   "date": "2026-10-23",
+   "error": "The first v4 render (pilot-010, run 39972041944) stopped at packaging: one credit line per footage clip (85) made a 7,577-character description, over YouTube's 5,000.",
+   "fix": "package_pilot.footage_credits: CC BY clips keep their own attribution line (required); clips whose licence needs no attribution are credited once per source with their authors, dropped to source and licence only when space is short.",
+   "antidote": {
+    "file": "migration/publish/test_package_chapters.py",
+    "contains": "def test_footage_credits_fit_and_keep_required_attributions"
+   }
+  },
+  {
+   "id": "E53",
+   "date": "2026-10-23",
+   "error": "The same render failed QA v4 speech presence (0.844 < 0.85): the 0.45 s v4 sentence gap added ~44 s of silence that script_check's estimate (calibrated on a 0.18 s gap) did not count.",
+   "fix": "v4 sentence gap 0.30 s; script_check counts the extra gap per sentence for v4 pilots (the model reproduces the measured 0.844 at 0.45 s) and keeps its 0.86 margin; pilot-008 stillness pause 3.0 -> 2.0 s.",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_speech_presence_counts_the_v4_sentence_gap"
+   }
   }
  ]
 }

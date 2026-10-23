@@ -4,6 +4,18 @@ import unittest
 spec=importlib.util.spec_from_file_location('package_pilot',Path(__file__).resolve().parents[1]/'production/package_pilot.py')
 pkg=importlib.util.module_from_spec(spec);spec.loader.exec_module(pkg)
 class Tests(unittest.TestCase):
+    def test_footage_credits_fit_and_keep_required_attributions(self):
+        # E52: 85 one-line credits made a 7,577-character description
+        cc = [{"licence": "CC BY 4.0", "credit": f'Footage: "W{i}" by A{i}, CC BY 4.0, via Wikimedia Commons (https://x/{i})',
+               "source": "commons", "author": f"A{i}"} for i in range(6)]
+        pix = [{"licence": "Pixabay Content License", "credit": "Footage: B via Pixabay (https://p)", "source": "pixabay",
+                "author": f"B{i % 30}"} for i in range(80)]
+        lines = pkg.footage_credits(cc + pix)
+        self.assertTrue(all(any(c["credit"] in l for l in lines) for c in cc))
+        self.assertIn("80 clips via Pixabay (Pixabay Content License)", "\n".join(lines))
+        self.assertLess(len("\n".join(lines)), 1500)
+        self.assertNotIn("B1", "\n".join(pkg.footage_credits(cc + pix, with_authors=False)).split("Pixabay")[-1])
+
     def test_greetings(self):
         for text,label in [('Good morning. Let us pray.','Good morning'),('Good evening. Tonight...','Good evening'),
                            (' good EVENING!','Good evening'),('Let us pray tonight.','Opening prayer'),

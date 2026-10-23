@@ -99,6 +99,24 @@ def chapters(timeline):
 
 
 DESCRIPTION_MAX = 4900  # YouTube's limit is 5,000 characters
+SOURCE_NAMES = {"pixabay": "Pixabay", "pexels": "Pexels", "commons": "Wikimedia Commons"}
+
+
+def footage_credits(clips, with_authors=True):
+    """E52: 85 one-line credits made a 7,577-character description. CC BY clips keep their own attribution line
+    (the licence requires it); clips whose licence needs no attribution (Pixabay, Pexels, CC0, public domain) are
+    credited once per source, with their authors when there is room."""
+    lines = ["Footage credits:"]
+    lines += ["• " + c["credit"] for c in clips if (c.get("licence") or "").startswith("CC BY")]
+    groups = {}
+    for c in clips:
+        if not (c.get("licence") or "").startswith("CC BY"):
+            groups.setdefault((SOURCE_NAMES.get(c.get("source"), c.get("source") or "licensed source"), c["licence"]),
+                              []).append(c.get("author") or "")
+    for (source, licence), authors in sorted(groups.items()):
+        names = ", ".join(sorted({a for a in authors if a}))
+        lines.append(f"• {len(authors)} clips via {source} ({licence})" + (f": {names}" if with_authors and names else ""))
+    return lines
 
 
 def main(work, script_path, out_dir):
@@ -113,7 +131,7 @@ def main(work, script_path, out_dir):
                 "models (FLUX.1 schnell, Apache-2.0; Stable Diffusion XL, CreativeML Open RAIL++-M)."] if v2 else
                ["Footage credits (Creative Commons Attribution, picture only):", credits])
     if v2 and manifest["clips"]:  # v4: licensed real footage, every clip credited (required for CC BY)
-        visuals += ["Footage credits:", *("• " + c["credit"] for c in manifest["clips"])]
+        visuals += footage_credits(manifest["clips"])
     description = "\n".join([
         script.get("description_intro") or (
             "Before you walk into today, God has already been there. Pray this morning prayer with us for peace, "
@@ -133,12 +151,10 @@ def main(work, script_path, out_dir):
         *visuals,
         *(["", " ".join(script["hashtags"])] if script.get("hashtags") else []),
     ])
-    if len(description) > DESCRIPTION_MAX and manifest["clips"]:
-        # YouTube allows 5,000 characters: keep every credit, in the short form (author, licence, source page)
-        short = ["Footage credits:", *("• " + (f"{c.get('author') or 'unknown'}, {c['licence']}, {c['page']}")
-                                       for c in manifest["clips"])]
-        description = description.replace("\n".join(["Footage credits:", *("• " + c["credit"] for c in manifest["clips"])]),
-                                          "\n".join(short))
+    if len(description) > DESCRIPTION_MAX and v2 and manifest["clips"]:
+        # YouTube allows 5,000 characters: drop the optional author names; required attributions stay
+        description = description.replace("\n".join(footage_credits(manifest["clips"])),
+                                          "\n".join(footage_credits(manifest["clips"], with_authors=False)))
     if len(description) > DESCRIPTION_MAX:
         raise SystemExit(f"DESCRIPTION_TOO_LONG {len(description)} > {DESCRIPTION_MAX}")
     tags = script.get("tags") or ["morning prayer", "prayer for peace", "prayer for courage", "christian morning prayer",

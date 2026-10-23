@@ -119,6 +119,13 @@ class Check(unittest.TestCase):
         self.assertTrue(any(p.startswith("FOOTAGE_NOT_VETTED") for p in self.run_check(footage(20, vetting="PENDING"))))
         self.assertTrue(any(p.startswith("FOOTAGE_RIGHTS") for p in self.run_check(footage(20, licence="CC BY-SA 4.0"))))
 
+    def test_speech_presence_counts_the_v4_sentence_gap(self):
+        # E53: pilot-010 measured 0.844 with a 0.45 s gap; the estimate must see the gap the renderer really uses
+        import re as _re
+        render = (Path(sc.__file__).parent / "pilot_render.py").read_text()
+        self.assertEqual(float(_re.search(r"^SENTENCE_GAP_V4 = ([0-9.]+)", render, _re.M).group(1)), sc.SENTENCE_GAP_V4)
+        self.assertEqual(float(_re.search(r"^SENTENCE_GAP = ([0-9.]+)", render, _re.M).group(1)), sc.SENTENCE_GAP)
+
     def test_continuity_rules_r13(self):
         def seg(i, n_words, pause=0.5):
             return {"id": i, "text": " ".join(["word"] * n_words), "pause_after": pause}
