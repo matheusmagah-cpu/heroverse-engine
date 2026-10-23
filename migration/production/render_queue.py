@@ -117,6 +117,9 @@ def reviewed_shorts(path):
 
 
 HOLD = Path(__file__).resolve().parents[1] / "ops" / "PUBLICATION_HOLD"
+# while present, the runner renders nothing (e.g. scripts are being moved to a new standard: a render of the old
+# script would only be thrown away and would hold the single runner for ~2 h)
+RENDER_HOLD = Path(__file__).resolve().parents[1] / "ops" / "RENDER_HOLD"
 RETRY_AFTER = timedelta(minutes=30)
 
 
@@ -184,6 +187,8 @@ def main(production, ledger_path, mode, hours="48"):
         elif not long_quota_pending:
             for p in shorts:
                 print("shorts", p)
+    elif RENDER_HOLD.exists():
+        print("RENDER_HOLD", file=sys.stderr)
     else:
         nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"]), None)
         if nxt:
