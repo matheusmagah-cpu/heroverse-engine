@@ -22,7 +22,8 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
           python3 -m venv "$RUNNER_TEMP/cb"
-          "$RUNNER_TEMP/cb/bin/pip" install --disable-pip-version-check -q --extra-index-url https://download.pytorch.org/whl/cpu chatterbox-tts soundfile
+          "$RUNNER_TEMP/cb/bin/pip" install --disable-pip-version-check -q --extra-index-url https://download.pytorch.org/whl/cpu chatterbox-tts soundfile "setuptools<81"
+          "$RUNNER_TEMP/cb/bin/python" -c "import perth; assert perth.PerthImplicitWatermarker is not None, perth.__file__"
       - name: Reference (our own Kokoro narration of this pilot) and the Kokoro original for comparison
         run: |
           asset=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets \
