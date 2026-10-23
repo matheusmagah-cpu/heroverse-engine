@@ -1,0 +1,133 @@
+{
+ "candidate": "gemini-3.6-flash",
+ "rows": [
+  {
+   "pilot": "pilot-004",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 8.8,
+   "source": "youtube:Iegu_RD_wbE",
+   "candidate_model": "gemini-3.6-flash",
+   "candidate_status": "FAIL",
+   "candidate_overall": 6,
+   "candidate_items": {
+    "opening_and_promise": 7,
+    "picture_quality": 7,
+    "figure_and_background_integrity": 5,
+    "captions_readable_and_synced": 7,
+    "audio_clarity_and_mix": 7,
+    "pacing_and_visual_variety": 6,
+    "scripture_on_screen": 7,
+    "policy_safe": 7
+   }
+  },
+  {
+   "pilot": "pilot-005",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.1,
+   "source": "youtube:XDwxi4pvllM",
+   "candidate_model": "gemini-3.6-flash",
+   "candidate_status": "FAIL",
+   "candidate_overall": 6.5,
+   "candidate_items": {
+    "opening_and_promise": 6.8,
+    "picture_quality": 6.5,
+    "figure_and_background_integrity": 6.2,
+    "captions_readable_and_synced": 6.8,
+    "audio_clarity_and_mix": 6.8,
+    "pacing_and_visual_variety": 5.5,
+    "scripture_on_screen": 6.8,
+    "policy_safe": 7.0
+   }
+  },
+  {
+   "pilot": "pilot-006",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.3,
+   "source": "youtube:tri-CUwy_m0",
+   "candidate_model": "gemini-3.6-flash",
+   "candidate_status": "FAIL",
+   "candidate_overall": 7,
+   "candidate_items": {
+    "opening_and_promise": 7,
+    "picture_quality": 7,
+    "figure_and_background_integrity": 7,
+    "captions_readable_and_synced": 7,
+    "audio_clarity_and_mix": 7,
+    "pacing_and_visual_variety": 6.5,
+    "scripture_on_screen": 7,
+    "policy_safe": 7
+   }
+  },
+  {
+   "pilot": "pilot-007",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.0,
+   "source": "youtube:NGfnyTul-K0",
+   "candidate_model": "gemini-3.6-flash",
+   "candidate_status": "FAIL",
+   "candidate_overall": 6.5,
+   "candidate_items": {
+    "opening_and_promise": 6.5,
+    "picture_quality": 6.5,
+    "figure_and_background_integrity": 6.0,
+    "captions_readable_and_synced": 6.5,
+    "audio_clarity_and_mix": 6.5,
+    "pacing_and_visual_variety": 5.5,
+    "scripture_on_screen": 6.5,
+    "policy_safe": 7.0
+   }
+  },
+  {
+   "pilot": "pilot-008",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "FAIL",
+   "designated_overall": 8.0,
+   "source": "release",
+   "candidate_model": "gemini-3.6-flash",
+   "candidate_status": "FAIL",
+   "candidate_overall": 7,
+   "candidate_items": {
+    "opening_and_promise": 7,
+    "picture_quality": 7,
+    "figure_and_background_integrity": 7,
+    "captions_readable_and_synced": 7,
+    "audio_clarity_and_mix": 7,
+    "pacing_and_visual_variety": 6,
+    "scripture_on_screen": 7,
+    "policy_safe": 7
+   }
+  },
+  {
+   "pilot": "pilot-012",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 8.8,
+   "source": "youtube:1bT9pEROuhI",
+   "candidate_model": "gemini-3.6-flash",
+   "candidate_status": "FAIL",
+   "candidate_overall": 6.8,
+   "candidate_items": {
+    "opening_and_promise": 6.8,
+    "picture_quality": 6.7,
+    "figure_and_background_integrity": 6.5,
+    "captions_readable_and_synced": 7.0,
+    "audio_clarity_and_mix": 7.0,
+    "pacing_and_visual_variety": 6.2,
+    "scripture_on_screen": 7.0,
+    "policy_safe": 7.2
+   }
+  }
+ ],
+ "qualified": false,
+ "same_verdict_everywhere": false,
+ "mean_abs_diff": 2.2,
+ "mean_signed_diff": -2.2,
+ "rule": {
+  "max_mean_abs": 0.6,
+  "max_mean_signed": 0.5
+ }
+}
