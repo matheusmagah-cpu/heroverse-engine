@@ -62,7 +62,10 @@ for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.arg
   cp "$meta" "$T/in/footage/$id.json"
 done
 CRITERIA=migration/production/qa_criteria_v3.json
-ls "$T"/in/footage/*.mp4 >/dev/null 2>&1 && CRITERIA=migration/production/qa_criteria_v4.json
+if ls "$T"/in/footage/*.mp4 >/dev/null 2>&1; then
+  CRITERIA=migration/production/qa_criteria_v4.json
+  export HERO_FRAME=2560x1440   # v4: never below 1440p (owner, 2026-10-23)
+fi
 fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "migration/production/$PILOT/script.json")
 q "$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"
 end

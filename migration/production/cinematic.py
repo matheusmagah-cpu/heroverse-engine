@@ -21,7 +21,11 @@ from pathlib import Path
 
 import numpy as np
 
-W, H = 1920, 1080
+import os
+
+# output frame: 1920x1080 by default; HERO_FRAME=2560x1440 for pilot-qa-criteria-v4 (owner, 2026-10-23: >= 1440p)
+W, H = (int(v) for v in os.environ.get("HERO_FRAME", "1920x1080").split("x"))
+SCALE = W / 1920  # camera amplitudes below are in 1080p pixels
 MARGIN = 1.12         # master is 12% larger than the frame, so moves never show an edge
 DEPTH_SIZE = 518      # Depth Anything V2 input
 MOVES = ("dolly_in", "truck_right", "crane_up", "dolly_out", "truck_left", "arc")
@@ -93,7 +97,7 @@ def load(image, depth_png, size=(W, H)):
 
 def camera(move, e):
     """(dx, dy, zoom) at eased progress e in 0..1; dx/dy are near-plane shifts in output pixels."""
-    a, z = AMP[move], ZOOM[move]
+    a, z = AMP[move] * SCALE, ZOOM[move]
     if move == "dolly_in":
         return 0.0, 0.0, 1 + z * e
     if move == "dolly_out":

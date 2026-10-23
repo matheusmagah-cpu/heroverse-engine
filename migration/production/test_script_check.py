@@ -111,12 +111,22 @@ class Check(unittest.TestCase):
                 s["footage"] = [f"clip-x-{i}" for i in range(n)]
                 for c in s["footage"]:
                     (lib / f"{c}.json").write_text(json.dumps({"id": c, "vetting": vetting, "licence": licence,
-                                                               "release_asset": "a.mp4"}))
+                                                               "release_asset": "a.mp4", "frame": [2560, 1440]}))
             return mutate
-        self.assertEqual(self.run_check(footage(20)), [])
+        footage_rows = lambda problems: [p for p in problems if "FOOTAGE" in p]   # v4 hook/length have their own tests
+        self.assertEqual(footage_rows(self.run_check(footage(20))), [])
         self.assertIn("TOO_FEW_FOOTAGE 12 < 20", self.run_check(footage(12)))
         self.assertTrue(any(p.startswith("FOOTAGE_NOT_VETTED") for p in self.run_check(footage(20, vetting="PENDING"))))
         self.assertTrue(any(p.startswith("FOOTAGE_RIGHTS") for p in self.run_check(footage(20, licence="CC BY-SA 4.0"))))
+
+    def test_hook_rules_r12(self):
+        self.assertEqual(sc.hook_problems("Before you sleep tonight, give God the worry you cannot fix. Pray with me now."), [])
+        self.assertEqual(sc.hook_problems("The world tells you to carry it all. But God says rest, so pray this with me."), [])
+        self.assertIn("HOOK_OPENS_ON_GREETING", sc.hook_problems("Good morning. If you woke tired, pray with me for strength."))
+        self.assertIn("HOOK_NO_PRAYER_PROMISE", sc.hook_problems("Before you sleep tonight, let your shoulders drop."))
+        self.assertIn("HOOK_NOT_SECOND_PERSON", sc.hook_problems("Tonight the Lord is near. Pray with me."))
+        self.assertTrue(any(p.startswith("HOOK_FIRST_SENTENCE_LONG") for p in sc.hook_problems(
+            "If you have been carrying the same heavy worry through every single hour of this long day, pray with me.")))
 
     def test_too_few_backgrounds_fail_pilot_008(self):
         # E48: 12 backgrounds for 28 minutes scored pacing 6.5 ("a small loop of recurring images")

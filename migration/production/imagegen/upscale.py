@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""2x super-resolution of generated images on CPU (Real-ESRGAN general x4v3, the
+"""Super-resolution of generated images on CPU (4x by default, UPSCALE_TARGET to change) (Real-ESRGAN general x4v3, the
 compact SRVGG model, BSD-3-Clause, loaded through spandrel, MIT; its 4x output is
 downsampled to 2x with Lanczos, which also supersamples away upscaling grain). A 1024x1024 FLUX image becomes 2048x2048, which
 crops to a full 2048x1152 frame for 16:9 and 1152x2048 for vertical Shorts.
@@ -12,8 +12,12 @@ import json
 from pathlib import Path
 import sys
 
+import os
+
 TILE, PAD = 256, 12
-TARGET = 2
+# FLUX 1024 px -> 4096 px (4x, the model's native scale): a 16:9 crop of 4096x2304 covers 2560x1440 (owner,
+# 2026-10-23: never below 1440p). UPSCALE_TARGET=2 re-processes an existing 2048 px image into 4096 px.
+TARGET = int(os.environ.get("UPSCALE_TARGET", "4"))
 
 
 def sha256(path):
@@ -51,7 +55,7 @@ def main(weights, images):
         if meta.exists():
             m = json.loads(meta.read_text())
             m["size"] = [w * TARGET, h * TARGET]
-            m["upscaler"] = {"model": "Real-ESRGAN general x4v3 (downsampled to 2x)", "licence": "bsd-3-clause",
+            m["upscaler"] = {"model": f"Real-ESRGAN general x4v3 (output {TARGET}x of a {w} px input)", "licence": "bsd-3-clause",
                              "weights_sha256": wsha,
                              "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"}
             meta.write_text(json.dumps(m, indent=1) + "\n")

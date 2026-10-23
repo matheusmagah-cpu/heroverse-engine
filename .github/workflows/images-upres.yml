@@ -1,0 +1,62 @@
+name: HeroVerse images to 1440p+ (AI super-resolution of existing stills, no paid call)
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory (e.g. pilot-010); every recorded image below 4096 px is re-processed
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-upres-${{ inputs.pilot }}
+  cancel-in-progress: false
+jobs:
+  upres:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+      UPSCALE_TARGET: '2'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Download the stills below 4096 px
+        run: |
+          case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) exit 1;; esac
+          mkdir -p "$RUNNER_TEMP/img"
+          for meta in migration/production/$PILOT/images/*.json; do
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));sys.exit(0 if m.get('release_asset') and max(m.get('size') or [0])<4096 else 1)" "$meta" || continue
+            id=$(basename "$meta" .json)
+            read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/img/$id.png" --clobber
+            echo "$sha  $RUNNER_TEMP/img/$id.png" | sha256sum -c -
+            cp "$meta" "$RUNNER_TEMP/img/$id.json"
+          done
+          ls "$RUNNER_TEMP/img" | head -50
+      - name: Real-ESRGAN (x4 model, output 2x of the 2048 px input = 4096 px)
+        run: |
+          ls "$RUNNER_TEMP"/img/*.png >/dev/null 2>&1 || { echo "NOTHING_TO_DO"; exit 0; }
+          python3 -m venv "$RUNNER_TEMP/up"
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check spandrel==0.4.1 pillow==11.0.0 numpy==2.2.6
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/realesr-general-x4v3.pth" https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth
+          echo "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292  $RUNNER_TEMP/realesr-general-x4v3.pth" | sha256sum -c -
+          "$RUNNER_TEMP/up/bin/python" -I -B migration/production/imagegen/upscale.py "$RUNNER_TEMP/realesr-general-x4v3.pth" "$RUNNER_TEMP"/img/*.png
+      - name: Release assets and records
+        run: |
+          ls "$RUNNER_TEMP"/img/*.png >/dev/null 2>&1 || exit 0
+          dest="migration/production/$PILOT/images"
+          cd "$RUNNER_TEMP/img"
+          for png in *.png; do
+            id="${png%.png}"; sha=$(sha256sum "$png" | cut -d' ' -f1)
+            asset="$PILOT-img-$id-4096-sha256-$sha.png"; cp "$png" "$asset"
+            gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" --clobber
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json"
+          done
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dest"
+          git commit -q -m "Record $PILOT stills at 4096 px (Real-ESRGAN, run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main

@@ -9,7 +9,7 @@ import assign  # noqa: E402
 
 
 def lib(themes, n, **kw):
-    return [{"id": f"clip-{t}-{i}", "theme": t, "vetting": "APPROVED", "licence": "CC0", "release_asset": "a.mp4", **kw}
+    return [{"id": f"clip-{t}-{i}", "theme": t, "vetting": "APPROVED", "licence": "CC0", "release_asset": "a.mp4", "frame": [2560, 1440], **kw}
             for t in themes for i in range(n)]
 
 

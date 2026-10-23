@@ -59,10 +59,16 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - **3D cinematic look.** Every image and animation reads as a photoreal 3D cinematic render: volumetric light, global illumination, depth of field, real depth for the parallax. No flat illustration and no painting style.
   - Prompts end with the house suffix: `photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text`.
 
-- **R11.** Real cinematic motion (owner, 2026-10-23: "no static images, real cinematic animation"). Pilots with a `footage` list are rendered and judged under `production/qa_criteria_v4.json`:
-  - Licensed real footage alternates with the R10 stills, footage first. Scenes last 6–14 s (R3's 18–36 s scored pacing 6.5 on pilot-008), and ≥ 40 % of the picture time is real footage. The 5-minute repeat gap applies to clips and stills alike.
-  - Footage comes only from the shared library (`production/footage/library/`): Pexels License, CC0, public domain or CC BY. Never share-alike, non-commercial or clips from other channels.
-  - Every clip is vetted on its frame sheet (no people, text, logos or watermarks), credited in the description, hash-bound and graded like the stills.
+- **R11.** Real cinematic motion and dynamics (owner, 2026-10-23: "no static images", "4 to 7 s shots, bet on dynamics", "never below 1440p"). Pilots with a `footage` list are rendered and judged under `production/qa_criteria_v4.json`:
+  - Frame 2560×1440 (30 fps). Every source is ≥ 1440p before the crop: footage from ≥ 1440p sources, stills through Real-ESRGAN to 4096 px (`images-upres.yml` for older ones). A plain upscale is refused (`IMAGE_BELOW_FRAME`).
+  - Shots of 4–7 s on a varied cadence, cut on a nearby sentence start. Two footage shots for every still, so real footage is ≥ 60 % of the picture. A clip gives up to 3 distinct shots (6.5 s segments). The 5-minute repeat gap applies to every shot.
+  - Footage comes only from the shared library (`production/footage/library/`): Pexels License, CC0, public domain or CC BY. Never share-alike, non-commercial or other channels' videos. Every clip is vetted automatically (no black frames, no readable text, nothing described as people, buildings or vehicles), credited in the description and hash-bound.
+  - No Subscribe/Like badges over the picture (3 reviews named them as breaking the immersion). The spoken amen invitation after the payoff stays.
+- **R12.** The first 3 seconds (owner, 2026-10-23: "they must be devastating"). Measured on breakout winners in `evidence/vidiq/20261023/hook_audit.md`; checked by `script_check.hook_problems` and the renderer:
+  - The voice starts at 0.3 s over moving footage. There is no still title card. The spoken hook line is on screen as large centred text from frame 0 until it has been said. Music starts at 0:00.
+  - The first sentence has ≤ 14 words, speaks to "you" and places the moment ("Before you sleep tonight…") or opens on a contrast ("The world tells you… but God…"). It never opens on a greeting. The hook promises the prayer.
+  - No sound effects: none of the measured winners uses them. Soft piano and pads only, as now.
+  - Length: 12–18 min for v4 prayers (breakouts on small channels cluster at 5–18 min, median ~14 min).
 - **Owner floor.** Every new upload needs the designated watched review's overall ≥ 9.5 (owner, 2026-10-23), on top of the rubric's item ≥ 7 and overall ≥ 8.
 
 ## Gate

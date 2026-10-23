@@ -84,7 +84,7 @@ class FootageV4(unittest.TestCase):
 
     def manifest(self, plan, vetting="APPROVED", licence="CC BY 4.0"):
         clips = [{"id": c, "licence": licence, "vetting": vetting, "credit": "Footage: x", "sha256": "a" * 64}
-                 for c in sorted({h["image"] for h in plan if h.get("kind") == "footage"})]
+                 for c in sorted({h["image"].partition("#")[0] for h in plan if h.get("kind") == "footage"})]
         for h in plan:
             h["motion"] = "footage" if h.get("kind") == "footage" else "dolly_in"
         return {"holds": plan, "clips": clips, "captions": [{"start": 3.0, "end": 6.0, "text": "a b", "segment": "s"}],
@@ -94,10 +94,33 @@ class FootageV4(unittest.TestCase):
 
     def test_scenes_alternate_footage_first_within_bounds_and_gap(self):
         plan = self.plan(20, 22)
-        self.assertEqual([h.get("kind") for h in plan[1:5]], ["footage", "still", "footage", "still"])
-        for h in plan[1:-1]:
+        self.assertEqual([h.get("kind") for h in plan[:6]], ["footage", "footage", "still", "footage", "footage", "still"])
+        for h in plan[:-1]:
             self.assertTrue(sr.FOOTAGE_HOLD_MIN - 1e-6 <= h["end"] - h["start"] <= sr.FOOTAGE_HOLD_MAX + 1e-6, h)
         self.assertEqual(self.CRIT["grammar"]["scene_seconds"], [sr.FOOTAGE_HOLD_MIN, sr.FOOTAGE_HOLD_MAX])
+        self.assertEqual(plan[0]["start"], 0.0)          # no still title card: the hook opens on footage
+        self.assertEqual(plan[0]["kind"], "footage")
+
+    def test_cuts_land_in_4_to_7_s_and_shots_reuse_clip_segments(self):
+        plan = self.plan(20, 22)
+        self.assertTrue(all(4.0 - 1e-6 <= h["end"] - h["start"] <= 7.0 + 1e-6 for h in plan), plan[:5])
+        footage = [h["image"] for h in plan if h.get("kind") == "footage"]
+        self.assertIn("#1", "".join(footage))          # each clip yields several distinct shots
+        self.assertGreater(sum(h["end"] - h["start"] for h in plan if h.get("kind") == "footage") / plan[-1]["end"], 0.6)
+
+    def test_hook_line_is_large_centred_text_from_frame_zero(self):
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0, "title": "T", "subtitle": "S", "brand": "B"},
+                  "footage": ["clip-a"], "segments": []}
+        timeline = {"segments": [], "sentences": [
+            {"segment": "hook", "start": 0.3, "end": 3.4, "text": "Before you sleep tonight, give God the worry you cannot fix."},
+            {"segment": "hook", "start": 3.6, "end": 6.0, "text": "This prayer will help you rest."}]}
+        ass = sr.build_ass(script, timeline, 600.0)
+        hook = [l for l in ass.splitlines() if ",Hook," in l]
+        self.assertEqual(len(hook), 1)
+        self.assertTrue(hook[0].startswith("Dialogue: 2,0:00:00.00,0:00:03.40,Hook"))
+        self.assertIn("Before you sleep tonight,\\Ngive God the worry you\\Ncannot fix.", hook[0])
+        self.assertNotIn(",Title,", ass)
+        self.assertNotIn("Before you sleep", "".join(l for l in ass.splitlines() if ",Caption," in l))
 
     def test_no_cta_badges_over_footage_pilots(self):
         # 3 reviews named the Subscribe/Like badges as breaking the immersion (pilot-004, 007, 012)

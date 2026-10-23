@@ -8,10 +8,11 @@ Motions: push_in, pull_out, pan_left, pan_right, rise, drift (subtle diagonal),
 static. Easing is smoothstep so moves start and stop softly.
 usage (test): motion.py IMAGE OUT.mp4 SECONDS MOTION
 """
+import os
 import subprocess
 import sys
 
-W, H = 1920, 1080
+W, H = (int(v) for v in os.environ.get("HERO_FRAME", "1920x1080").split("x"))  # v4: 2560x1440
 MW, MH = 2 * W, 2 * H
 ZOOM = 0.10       # push/pull amount (fraction of the frame)
 PAN = 0.12        # pan distance (fraction of the master width)

@@ -54,6 +54,33 @@ def shingles(segments):
     return out
 
 
+# R12 hook (evidence/vidiq/20261023/hook_audit.md: 5/5 breakout winners speak to the viewer from 0-2 s, place the
+# moment or open on a contrast, and promise the prayer within ~8 s; none opens on a greeting)
+HOOK_FIRST_MAX_WORDS = 14
+HOOK_ANCHOR = re.compile(r"(?i)\b(tonight|this morning|this evening|today|right now|before you|if you|when you|as you|"
+                         r"wherever you|whatever you)\b")
+HOOK_CONTRAST = re.compile(r"(?i)\b(but|yet|instead)\b")
+HOOK_GREETING = re.compile(r"(?i)^\s*(good (morning|evening|night|afternoon)|hello|hi|welcome|hey)\b")
+HOOK_PROMISE = re.compile(r"(?i)\b(pray|prayer|praying)\b")
+BANDS_V4 = (12, 18)   # minutes for v4 pilots: breakouts on small channels cluster at 5-18 min (median ~14 min)
+
+
+def hook_problems(text):
+    first = re.split(r"(?<=[.!?])\s+", text.strip())[0] if text.strip() else ""
+    problems = []
+    if HOOK_GREETING.search(text):
+        problems.append("HOOK_OPENS_ON_GREETING")
+    if len(words(first)) > HOOK_FIRST_MAX_WORDS:
+        problems.append(f"HOOK_FIRST_SENTENCE_LONG {len(words(first))} > {HOOK_FIRST_MAX_WORDS}")
+    if not re.search(r"(?i)\b(you|your|you're)\b", first):
+        problems.append("HOOK_NOT_SECOND_PERSON")
+    if not (HOOK_ANCHOR.search(first) or HOOK_CONTRAST.search(text)):
+        problems.append("HOOK_NO_MOMENT_OR_CONTRAST")
+    if not HOOK_PROMISE.search(text):
+        problems.append("HOOK_NO_PRAYER_PROMISE")
+    return problems
+
+
 def check(pilot_dir, production=None):
     d = Path(pilot_dir)
     production = Path(production) if production else d.parent
@@ -89,13 +116,15 @@ def check(pilot_dir, production=None):
     speech = spoken * (1 - RESIDUAL_GAP) / (spoken + pauses) if spoken else 0
     title = s.get("working_title", "")
     fmt = "night" if re.search(r"(?i)night|sleep", title) else "morning"
-    lo, hi = BANDS[fmt]
+    lo, hi = BANDS_V4 if s.get("footage") else BANDS[fmt]
     if not lo <= minutes <= hi:
         problems.append(f"LENGTH {minutes:.1f} min outside {fmt} band {lo}-{hi}")
     if speech < SPEECH_MIN:
         problems.append(f"SPEECH_PRESENCE_EST {speech:.3f} < {SPEECH_MIN}")
     if segs and ids[0] == "hook" and len(words(segs[0].get("text", ""))) > HOOK_MAX_WORDS:
         problems.append(f"HOOK_TOO_LONG {len(words(segs[0].get('text', '')))} words > {HOOK_MAX_WORDS} (promise spoken by 8 s)")
+    if s.get("footage") and segs and ids[0] == "hook":
+        problems += hook_problems(segs[0].get("text", ""))
     t, first_prayer = 0.0, None
     for x in segs:
         if x.get("id", "").startswith("prayer"):
@@ -140,6 +169,8 @@ def check(pilot_dir, production=None):
                 problems.append(f"FOOTAGE_NOT_VETTED {c} {rec.get('vetting')}")
             elif rec.get("licence") not in FOOTAGE_LICENCES or not rec.get("release_asset"):
                 problems.append(f"FOOTAGE_RIGHTS {c} {rec.get('licence')}")
+            elif rec.get("frame") != [2560, 1440]:
+                problems.append(f"FOOTAGE_BELOW_1440P {c} {rec.get('frame')}")
     mine = shingles(segs)
     backgrounds = set(s.get("backgrounds", []))
     image_comparisons = []

@@ -6,7 +6,7 @@ Sources, no paid call:
              only when PEXELS_API_KEY is set
   commons -> commons.wikimedia.org, only CC0, public domain or CC BY (attribution goes into the description);
              share-alike (CC BY-SA) and non-commercial licences are refused
-Every clip is cut to a clean 1920x1080 30 fps picture without audio and recorded with its source page, author,
+Every clip is cut to a clean 2560x1440 30 fps picture without audio and recorded with its source page, author,
 licence, licence URL and SHA-256 in library/<id>.json. Nothing here uploads or publishes.
 
 usage:
@@ -22,11 +22,11 @@ import urllib.parse
 import urllib.request
 
 UA = {"User-Agent": "HeroVerse/1.0 (https://github.com/matheusmagah-cpu/heroverse-engine; footage library)"}
-MIN_HEIGHT = 1080
+MIN_HEIGHT = 1440          # owner, 2026-10-23: never below 1440p (no plain upscale)
 MIN_SECONDS = 8.0
 CLIP_SECONDS = 20.0          # at most this much of each source is kept
 TRIES_PER_QUERY = 6          # downloads per query at most (accepted or rejected)
-W, H, FPS = 1920, 1080, 30
+W, H, FPS = 2560, 1440, 30
 # R1 (no people) and no text or branding on screen: titles that announce them are refused before download
 BLOCK = re.compile(r"(?i)\b(people|person|man|men|woman|women|girl|boy|child|children|kid|crowd|tourist|selfie|"
                    r"interview|portrait|face|wedding|festival|concert|protest|logo|text|title|intro|news|"
@@ -86,7 +86,7 @@ def commons_search(query, limit=50):
         info = (p.get("videoinfo") or [{}])[0]
         meta = info.get("extmetadata") or {}
         derivs = [d for d in info.get("derivatives") or [] if (d.get("height") or 0) >= MIN_HEIGHT]
-        best = min(derivs, key=lambda d: d.get("height") or 0) if derivs else None  # 1080p rather than 4K: smaller
+        best = min(derivs, key=lambda d: d.get("height") or 0) if derivs else None  # the smallest >= 1440p
         out.append({"source": "commons", "title": p["title"].removeprefix("File:"),
                     "page": info.get("descriptionurl"), "width": info.get("width"), "height": info.get("height"),
                     "seconds": float(info.get("duration") or 0),
@@ -256,7 +256,7 @@ def main(queries_path, out_dir, per_theme="3"):
                 "source", "title", "page", "author", "licence_url")},
                 "licence": canonical(c["source"], c["licence"]), "licence_as_published": c["licence"],
                 "source_seconds": c["seconds"], "source_height": c["height"], "start": start, "seconds": keep,
-                "credit": credit(c), "picture": f"{W}x{H} {FPS} fps H.264 crf 18, no audio", "sha256": sha,
+                "credit": credit(c), "picture": f"{W}x{H} {FPS} fps H.264 crf 18, no audio", "frame": [W, H], "sha256": sha,
                 **vet(out / f"{cid}.mp4", out)}
             (out / f"{cid}.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n")
             have.add(cid)
