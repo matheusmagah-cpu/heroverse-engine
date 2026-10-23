@@ -20,6 +20,7 @@ FROZEN_QA = "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"
 WPM = 140                    # Kokoro narration measured on pilots 002-004 (QA ASR 132.7-141)
 RESIDUAL_GAP = 0.067         # non-speech share inside spoken time, measured on the 003/004 renders
 SPEECH_MIN = 0.86
+SENTENCE_GAP, SENTENCE_GAP_V4 = 0.18, 0.30  # = pilot_render; RESIDUAL_GAP was measured with the 0.18 s gap (E53)
 BACKGROUNDS_MIN = 18  # E46/E48
 FOOTAGE_MIN = 20      # v4: 18 clips keep the 300 s gap on the 008/010/011 timelines; 20 leaves a margin
 FOOTAGE_LICENCES = ("Pexels License", "Pixabay Content License", "CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0")
@@ -137,6 +138,9 @@ def check(pilot_dir, production=None):
     n_words = sum(len(words(x.get("text", ""))) for x in segs)
     pauses = sum(float(x.get("pause_after", 0)) for x in segs)
     spoken = n_words / WPM * 60
+    if s.get("footage"):  # v4 narration breathes longer between sentences than the gap RESIDUAL_GAP was measured on
+        sentences = sum(len([t for t in re.split(r"(?<=[.!?:;])\s+", x.get("text", "")) if t.strip()]) for x in segs)
+        pauses += (SENTENCE_GAP_V4 - SENTENCE_GAP) * sentences
     minutes = (spoken + pauses) / 60
     speech = spoken * (1 - RESIDUAL_GAP) / (spoken + pauses) if spoken else 0
     title = s.get("working_title", "")
