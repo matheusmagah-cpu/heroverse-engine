@@ -17,7 +17,7 @@ jobs:
         run: |
           # Refresh Ubuntu only. Run 39823760082 timed out fetching from the
           # hosted mirror list; use the official origins with the same signed source.
-          if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2' 2>/dev/null; then
+          if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2, PIL' 2>/dev/null; then
             test -f /etc/apt/sources.list.d/ubuntu.sources
             heroverse_ci_sources="$RUNNER_TEMP/heroverse-ubuntu.sources"
             sed -e 's#mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu/#g' \
@@ -28,10 +28,10 @@ jobs:
               -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20)
             timeout 90s sudo apt-get "${apt_ci_opts[@]}" update
             timeout 180s sudo apt-get "${apt_ci_opts[@]}" install -y --no-install-recommends \
-              ffmpeg python3-numpy python3-opencv
+              ffmpeg python3-numpy python3-opencv python3-pil
           fi
           command -v ffmpeg
-          python3 -c 'import numpy, cv2; print("Video test dependencies available")'
+          python3 -c 'import numpy, cv2, PIL; print("Video test dependencies available")'
       - name: Unit tests (no network, no secrets)
         run: |
           fail=0
@@ -40,7 +40,7 @@ jobs:
                    migration/production/test_shorts_produce.py migration/production/test_shorts_review.py migration/production/test_shorts_edit_plan.py migration/production/test_shorts_006_plan.py migration/production/test_shorts_006_material.py migration/production/test_shorts_006_motion.py migration/production/test_no_live_pilot_data.py migration/production/test_signal_scan.py migration/production/test_cinematic.py migration/production/footage/test_footage.py migration/production/footage/test_assign.py migration/publish/test_*.py migration/ops/test_heartbeat.py migration/ops/test_runner_dispatch.py migration/ops/test_errors_register.py migration/ops/test_runway.py migration/ops/test_minutes.py \
                    migration/mining/test_market_evidence.py migration/mining/test_gemini_public_av.py migration/mining/test_structure_mining.py migration/mining/test_video_analysis_card.py migration/mining/test_owned_feedback.py migration/mining/test_learning_loop.py \
                    migration/mining/test_accuracy_check.py migration/mining/test_native_metrics.py migration/mining/test_native_plan.py migration/mining/test_goal_report.py migration/mining/test_market_panel.py \
-                   migration/mining/test_opportunity.py migration/mining/test_packaging_mining.py; do
+                   migration/mining/test_opportunity.py migration/mining/test_packaging_mining.py migration/mining/test_thumb_study.py; do
             python3 -I -B "$t" > "$RUNNER_TEMP/out" 2>&1 && echo "PASS $t" || { echo "FAIL $t"; tail -20 "$RUNNER_TEMP/out"; fail=1; }
           done
           exit $fail
