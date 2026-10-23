@@ -4,8 +4,8 @@
  "negative": null,
  "seed": null,
  "size": [
-  2048,
-  2048
+  4096,
+  4096
  ],
  "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
  "models": {
@@ -18,11 +18,11 @@
  "seconds": 3.3,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
  "upscaler": {
-  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "model": "Real-ESRGAN general x4v3 (output 2x of a 2048 px input)",
   "licence": "bsd-3-clause",
   "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "pilot-011-img-bg-waiting-spring-steps-sha256-7c757f18cf7865c4fa225d06554098ae25be5c6753a53e6b9f98037b2eeab681.png",
- "sha256": "7c757f18cf7865c4fa225d06554098ae25be5c6753a53e6b9f98037b2eeab681"
+ "release_asset": "pilot-011-img-bg-waiting-spring-steps-4096-sha256-3fdbbfd1279f69b4d208f4ed419b31df2a2925c929b4c4999b9e9c8bb01168dc.png",
+ "sha256": "3fdbbfd1279f69b4d208f4ed419b31df2a2925c929b4c4999b9e9c8bb01168dc"
 }
