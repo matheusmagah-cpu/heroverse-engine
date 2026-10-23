@@ -270,8 +270,9 @@
    "error": "review_calibration.py wrote its evidence into a folder that did not exist yet; the first calibration of gemini-3.5-flash-lite (run 39254220059) ran all cases and then lost the JSON",
    "fix": "the evidence folder is created before writing; the run's printed results were transcribed into the evidence file",
    "antidote": {
-    "file": "migration/production/review_calibration.py",
-    "contains": "Path(out_json).parent.mkdir(parents=True, exist_ok=True)"
+    "file": "migration/archive/production/review_calibration.py",
+    "contains": "Path(out_json).parent.mkdir(parents=True, exist_ok=True)",
+    "retired": "module archived 2026-10-23 (lean project); the antidote is kept with it"
    }
   },
   {
@@ -280,8 +281,9 @@
    "error": "Claude's qualification() (PR #160) passed a backup reviewer that failed defect cases for the wrong reason (expected rubric items kept high) and ignored timing (TOO_SLOW); found by Dot before any use (#159)",
    "fix": "qualification() requires every expected rubric item of a defect case to drop below PASS_ITEM and rejects TOO_SLOW/TIMING_INVALID (28-min time derived from the measured seconds per 180 s case)",
    "antidote": {
-    "file": "migration/production/test_review_calibration.py",
-    "contains": "def test_failing_for_the_wrong_reason_is_not_qualified"
+    "file": "migration/archive/production/test_review_calibration.py",
+    "contains": "def test_failing_for_the_wrong_reason_is_not_qualified",
+    "retired": "module archived 2026-10-23 (lean project); the antidote is kept with it"
    }
   },
   {
