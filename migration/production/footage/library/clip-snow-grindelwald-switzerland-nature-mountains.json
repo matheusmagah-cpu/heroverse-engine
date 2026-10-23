@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "c2431663c4ca206b9352dd411db151cda68d5d2aa82126382ddbe4bfd9123144",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "road in the valley"
+ ],
  "vetting_luma": [
   93.9,
   94.3,

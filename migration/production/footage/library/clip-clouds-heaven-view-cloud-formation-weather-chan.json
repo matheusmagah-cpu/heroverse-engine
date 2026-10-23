@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "51537a76049d762b4993804dfe9e170054c5ff6db2bd32ea1136e13da2cb1eed",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "town below"
+ ],
  "vetting_luma": [
   115.3,
   115.6,

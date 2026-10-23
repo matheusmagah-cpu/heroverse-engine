@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "c0cf0d66e27ae2064408bb98bbc084816125969b44c912e8eee0d84ad8699e41",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "farm buildings and tracks"
+ ],
  "vetting_luma": [
   87.9,
   88.2,

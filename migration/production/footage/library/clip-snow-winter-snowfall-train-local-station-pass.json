@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "32eed6125a1c1e388d6f9cb40e7aa19e919986d1e02d49007ba26cf60fb13490",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "train station"
+ ],
  "vetting_luma": [
   175.0,
   173.6,

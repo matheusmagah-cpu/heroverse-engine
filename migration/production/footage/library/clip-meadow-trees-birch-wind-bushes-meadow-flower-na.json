@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "e246945625e52446c1c5735794483b0e6c7f618947eae48f31b330bbf103dafd",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "village in the valley"
+ ],
  "vetting_luma": [
   105.9,
   104.5,

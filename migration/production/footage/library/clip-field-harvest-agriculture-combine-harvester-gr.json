@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "3d26d9e086270c076bb3d2792e98cdf6273bbfbc325392cb307cc9b273bd4d92",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "combine harvester and farm buildings"
+ ],
  "vetting_luma": [
   68.8,
   67.1,

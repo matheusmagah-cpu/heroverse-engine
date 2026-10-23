@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "d80341f76dcc886ba22b8018dcc847b4592f4790a43642faaca6d5dc966e8e65",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "village in the last segment"
+ ],
  "vetting_luma": [
   173.6,
   164.9,
