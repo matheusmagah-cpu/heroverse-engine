@@ -10,6 +10,14 @@ on:
         description: Number of opening segments narrated
         required: false
         default: '4'
+      kokoro_speeds:
+        description: Kokoro speeds to judge (space separated)
+        required: false
+        default: '0.85 0.80 0.78 0.75'
+      chatterbox:
+        description: Also narrate with Chatterbox (about 25 min of CPU)
+        required: false
+        default: 'false'
 permissions:
   contents: read
 jobs:
@@ -27,9 +35,11 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng >/dev/null
           python3 -m venv "$RUNNER_TEMP/voice"; "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
-          python3 -m venv "$RUNNER_TEMP/cb"
-          "$RUNNER_TEMP/cb/bin/pip" install --disable-pip-version-check -q --extra-index-url https://download.pytorch.org/whl/cpu chatterbox-tts soundfile "setuptools<81"
-          "$RUNNER_TEMP/cb/bin/python" -c "import perth; assert perth.PerthImplicitWatermarker is not None, perth.__file__"
+          if [ "${{ inputs.chatterbox }}" = true ]; then
+            python3 -m venv "$RUNNER_TEMP/cb"
+            "$RUNNER_TEMP/cb/bin/pip" install --disable-pip-version-check -q --extra-index-url https://download.pytorch.org/whl/cpu chatterbox-tts soundfile "setuptools<81"
+            "$RUNNER_TEMP/cb/bin/python" -c "import perth; assert perth.PerthImplicitWatermarker is not None, perth.__file__"
+          fi
           python3 -m venv "$RUNNER_TEMP/judge"; "$RUNNER_TEMP/judge/bin/pip" install --disable-pip-version-check -q librosa==0.10.2.post1 faster-whisper==1.2.1
       - name: The same opening text for every candidate
         run: |
@@ -41,12 +51,20 @@ jobs:
           json.dump(s, open(sys.argv[3], "w"))
           open(sys.argv[4], "w").write(" ".join(x["text"] for x in s["segments"]))
           PY
-      - name: Kokoro (the production voice, pinned and verified)
+      - name: Kokoro (the production voice, pinned and verified) at every speed asked
+        env:
+          SPEEDS: ${{ inputs.kokoro_speeds }}
         run: |
           python3 -I -B migration/production/pilot_render.py prepare "$RUNNER_TEMP/work" HeroVerse_Linux_Source_Ready_20261013_v2.zip
-          "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$RUNNER_TEMP/work" "$RUNNER_TEMP/trim.json"
-          cp "$RUNNER_TEMP/work/voice.wav" "$RUNNER_TEMP/out/kokoro.wav"
+          for sp in $SPEEDS; do
+            python3 -I -c "import json,sys; s=json.load(open(sys.argv[1])); s['voice']['speed']=float(sys.argv[2]); json.dump(s, open(sys.argv[3],'w'))" \
+              "$RUNNER_TEMP/trim.json" "$sp" "$RUNNER_TEMP/trim-$sp.json"
+            "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$RUNNER_TEMP/work" "$RUNNER_TEMP/trim-$sp.json"
+            cp "$RUNNER_TEMP/work/voice.wav" "$RUNNER_TEMP/out/kokoro-$sp.wav"
+            echo "kokoro_$sp=$RUNNER_TEMP/out/kokoro-$sp.wav" >> "$RUNNER_TEMP/candidates.txt"
+          done
       - name: Chatterbox, cloned from this pilot's recorded Kokoro narration
+        if: inputs.chatterbox == 'true'
         run: |
           asset=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets \
             --jq "[.assets[] | select(.name | startswith(\"$PILOT-voice-sha256-\"))] | sort_by(.createdAt) | last | .name")
@@ -55,12 +73,14 @@ jobs:
           ffmpeg -v error -y -ss 20 -t 12 -i "$RUNNER_TEMP/voice.flac" -ac 1 -ar 24000 "$RUNNER_TEMP/reference.wav"
           "$RUNNER_TEMP/cb/bin/python" -I -B migration/production/voice/chatterbox_sample.py \
             "$RUNNER_TEMP/trim.json" "$RUNNER_TEMP/reference.wav" "$RUNNER_TEMP/out" "$SEGMENTS"
+          for v in calm warm; do echo "chatterbox_$v=$RUNNER_TEMP/out/chatterbox-$v.wav" >> "$RUNNER_TEMP/candidates.txt"; done
       - name: Judge every candidate with the objective ruler
         run: |
           o="$RUNNER_TEMP/out"
           set -o pipefail   # a crashed judge must fail the run, not hide behind tee (run 39989082891)
+          mapfile -t candidates < "$RUNNER_TEMP/candidates.txt"
           "$RUNNER_TEMP/judge/bin/python" -I -B migration/production/voice/voice_judge.py "$RUNNER_TEMP/text.txt" \
-            kokoro="$o/kokoro.wav" chatterbox_calm="$o/chatterbox-calm.wav" chatterbox_warm="$o/chatterbox-warm.wav" | tee "$o/judge.jsonl"
+            "${candidates[@]}" | tee "$o/judge.jsonl"
       - if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
