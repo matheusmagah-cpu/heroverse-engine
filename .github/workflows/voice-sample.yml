@@ -32,8 +32,17 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Tools
+        timeout-minutes: 25
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng >/dev/null
+          # E55: run 40000227373 hung 30 min on the hosted apt mirror; use the official origins (as pr-checks.yml) with timeouts
+          src="$RUNNER_TEMP/heroverse-ubuntu.sources"
+          sed -e 's#mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu/#g' \
+              -e 's#mirror+file:/etc/apt/apt-mirrors-security.txt#https://security.ubuntu.com/ubuntu/#g' \
+              /etc/apt/sources.list.d/ubuntu.sources > "$src"
+          apt_opts=(-o "Dir::Etc::sourcelist=$src" -o Dir::Etc::sourceparts=- -o APT::Get::List-Cleanup=0 -o Acquire::Retries=2 \
+            -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20)
+          timeout 180s sudo apt-get "${apt_opts[@]}" update -qq
+          timeout 300s sudo apt-get "${apt_opts[@]}" install -y -qq --no-install-recommends ffmpeg espeak-ng >/dev/null
           python3 -m venv "$RUNNER_TEMP/voice"; "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
           if [ "${{ inputs.chatterbox }}" = true ]; then
             python3 -m venv "$RUNNER_TEMP/cb"

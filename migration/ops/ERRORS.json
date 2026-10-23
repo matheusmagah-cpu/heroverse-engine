@@ -373,6 +373,16 @@
     "file": "migration/ops/test_errors_register.py",
     "contains": "def test_a_piped_step_fails_when_its_command_fails"
    }
+  },
+  {
+   "id": "E55",
+   "date": "2026-10-23",
+   "error": "The voice A/B run 40000227373 hung 30 min in 'apt-get update' on the hosted Ubuntu mirror (the same mirror stall as pr-checks run 39823760082), with no step timeout.",
+   "fix": "voice-sample.yml installs from the official Ubuntu origins with request timeouts, command timeouts and a 25-minute step timeout, as pr-checks.yml does.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_apt_installs_cannot_hang"
+   }
   }
  ]
 }
