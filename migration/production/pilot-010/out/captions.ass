@@ -15,853 +15,475 @@ Style: Subtitle,DejaVu Sans,58,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,0,0
 Style: Ref,DejaVu Serif,44,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,3,1,5,0,0,0,1
 Style: Brand,DejaVu Sans,36,&H20FFFFFF,&H00FFFFFF,&H64000000,&H00000000,1,0,0,0,100,100,2,0,1,3,1,7,50,0,40,1
 Style: Badge,DejaVu Sans,34,&H00FFFFFF,&H00FFFFFF,&H001A1AD0,&H00000000,1,0,0,0,100,100,1,0,3,10,0,9,0,50,46,1
+Style: Hook,DejaVu Serif,84,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,1,0,1,5,4,5,160,160,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 2,0:00:00.00,0:00:02.00,Title,,0,0,0,,{\fad(200,300)}Lay Down Your Cares Tonight
-Dialogue: 2,0:00:00.00,0:00:02.00,Subtitle,,0,0,0,,{\fad(200,300)\pos(960,700)}NIGHT PRAYER
-Dialogue: 1,0:00:02.00,0:29:30.70,Brand,,0,0,0,,{\fad(300,0)}HeroVerse Prayer
-Dialogue: 1,0:01:00.00,0:01:08.00,Badge,,0,0,0,,{\fad(200,200)}SUBSCRIBE
-Dialogue: 1,0:13:16.81,0:13:24.81,Badge,,0,0,0,,{\fad(200,200)}LIKE
-Dialogue: 3,0:02:56.16,0:03:03.61,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:02:56.16,0:03:03.61,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Philippians 4:6 (KJV)
-Dialogue: 3,0:05:18.79,0:05:26.79,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:05:18.79,0:05:26.79,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Philippians 4:7 (KJV)
-Dialogue: 3,0:07:31.12,0:07:38.55,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:07:31.12,0:07:38.55,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Matthew 6:34 (KJV)
-Dialogue: 3,0:10:56.93,0:11:02.26,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:10:56.93,0:11:02.26,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 94:19 (KJV)
-Dialogue: 3,0:13:48.68,0:13:56.19,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:13:48.68,0:13:56.19,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 26:3 (KJV)
-Dialogue: 3,0:18:27.19,0:18:35.28,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:18:27.19,0:18:35.28,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Proverbs 3:24 (KJV)
-Dialogue: 3,0:21:43.67,0:21:51.02,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:21:43.67,0:21:51.02,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}John 14:27 (KJV)
-Dialogue: 3,0:23:33.73,0:23:39.46,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:23:33.73,0:23:39.46,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 121:7 (KJV)
-Dialogue: 3,0:24:45.83,0:24:52.76,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:24:45.83,0:24:52.76,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 121:8 (KJV)
-Dialogue: 3,0:27:04.65,0:27:10.19,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
-Dialogue: 4,0:27:04.65,0:27:10.19,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Matthew 11:28 (KJV)
-Dialogue: 4,0:00:02.00,0:00:03.42,Caption,,0,0,0,,Before you check again,
-Dialogue: 4,0:00:03.42,0:00:05.50,Caption,,0,0,0,,pray through tonight’s worries
-Dialogue: 4,0:00:05.50,0:00:08.43,Caption,,0,0,0,,and place each concern in God’s care.
-Dialogue: 4,0:00:09.06,0:00:11.18,Caption,,0,0,0,,You may have checked the same
-Dialogue: 4,0:00:11.18,0:00:12.78,Caption,,0,0,0,,message several times,
-Dialogue: 4,0:00:12.78,0:00:14.25,Caption,,0,0,0,,hoping a reply would
-Dialogue: 4,0:00:14.25,0:00:15.89,Caption,,0,0,0,,change how you feel.
-Dialogue: 4,0:00:15.89,0:00:18.02,Caption,,0,0,0,,You can put the phone within
-Dialogue: 4,0:00:18.02,0:00:20.40,Caption,,0,0,0,,reach but turn its face away.
-Dialogue: 4,0:00:20.40,0:00:22.80,Caption,,0,0,0,,Let the place where you are sitting
-Dialogue: 4,0:00:22.80,0:00:24.98,Caption,,0,0,0,,or lying support your weight.
-Dialogue: 4,0:00:24.98,0:00:27.84,Caption,,0,0,0,,You can arrive with a busy mind.
-Dialogue: 4,0:00:27.84,0:00:28.92,Caption,,0,0,0,,In this prayer,
-Dialogue: 4,0:00:28.92,0:00:31.70,Caption,,0,0,0,,you will name your concerns separately,
-Dialogue: 4,0:00:31.70,0:00:33.78,Caption,,0,0,0,,so you do not have to wrestle
-Dialogue: 4,0:00:33.78,0:00:36.34,Caption,,0,0,0,,with every uncertainty at once.
-Dialogue: 4,0:00:37.37,0:00:40.14,Caption,,0,0,0,,Casting all your care upon him;
-Dialogue: 4,0:00:40.14,0:00:42.55,Caption,,0,0,0,,for he careth for you.
-Dialogue: 4,0:00:43.88,0:00:44.42,Caption,,0,0,0,,Father,
-Dialogue: 4,0:00:44.42,0:00:46.27,Caption,,0,0,0,,I begin with the concern
-Dialogue: 4,0:00:46.27,0:00:48.22,Caption,,0,0,0,,closest to the surface.
-Dialogue: 4,0:00:48.22,0:00:49.58,Caption,,0,0,0,,I give it a plain
-Dialogue: 4,0:00:49.58,0:00:51.03,Caption,,0,0,0,,name before you.
-Dialogue: 4,0:00:51.03,0:00:53.62,Caption,,0,0,0,,It may be an unanswered message,
-Dialogue: 4,0:00:53.62,0:00:55.16,Caption,,0,0,0,,a decision at work,
-Dialogue: 4,0:00:55.16,0:00:58.59,Caption,,0,0,0,,or someone whose voice sounded troubled.
-Dialogue: 4,0:00:58.59,0:01:00.44,Caption,,0,0,0,,I have carried it through
-Dialogue: 4,0:01:00.44,0:01:02.54,Caption,,0,0,0,,dinner and into this room.
-Dialogue: 4,0:01:02.54,0:01:05.95,Caption,,0,0,0,,Now I bring it into our conversation.
-Dialogue: 4,0:01:05.95,0:01:07.42,Caption,,0,0,0,,Help me entrust this
-Dialogue: 4,0:01:07.42,0:01:09.12,Caption,,0,0,0,,particular care to you,
-Dialogue: 4,0:01:09.12,0:01:11.26,Caption,,0,0,0,,even before my feelings catch
-Dialogue: 4,0:01:11.26,0:01:13.89,Caption,,0,0,0,,up with the words I am praying.
-Dialogue: 4,0:01:14.92,0:01:17.63,Caption,,0,0,0,,When several worries arrive together,
-Dialogue: 4,0:01:17.63,0:01:20.04,Caption,,0,0,0,,you can feel as though your whole
-Dialogue: 4,0:01:20.04,0:01:22.63,Caption,,0,0,0,,life needs fixing before bedtime.
-Dialogue: 4,0:01:22.63,0:01:25.54,Caption,,0,0,0,,You can take a smaller approach here.
-Dialogue: 4,0:01:25.54,0:01:28.14,Caption,,0,0,0,,You are allowed to name one subject
-Dialogue: 4,0:01:28.14,0:01:30.91,Caption,,0,0,0,,and let the others wait their turn.
-Dialogue: 4,0:01:30.91,0:01:34.05,Caption,,0,0,0,,You do not need a complete explanation.
-Dialogue: 4,0:01:34.05,0:01:35.37,Caption,,0,0,0,,A person’s name,
-Dialogue: 4,0:01:35.37,0:01:36.77,Caption,,0,0,0,,a pending answer,
-Dialogue: 4,0:01:36.77,0:01:39.08,Caption,,0,0,0,,or a sentence about tomorrow
-Dialogue: 4,0:01:39.08,0:01:40.82,Caption,,0,0,0,,is enough to begin.
-Dialogue: 4,0:01:40.82,0:01:43.34,Caption,,0,0,0,,You are addressing someone who cares
-Dialogue: 4,0:01:43.34,0:01:46.14,Caption,,0,0,0,,about the person doing the praying.
-Dialogue: 4,0:01:47.18,0:01:47.59,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:01:47.59,0:01:49.07,Caption,,0,0,0,,I bring the answer
-Dialogue: 4,0:01:49.07,0:01:50.98,Caption,,0,0,0,,I cannot make arrive.
-Dialogue: 4,0:01:50.98,0:01:52.72,Caption,,0,0,0,,I have imagined reasons
-Dialogue: 4,0:01:52.72,0:01:54.83,Caption,,0,0,0,,for the silence and measured
-Dialogue: 4,0:01:54.83,0:01:57.35,Caption,,0,0,0,,the hours since I last checked.
-Dialogue: 4,0:01:57.35,0:01:59.73,Caption,,0,0,0,,Help me stop treating a missing
-Dialogue: 4,0:01:59.73,0:02:02.52,Caption,,0,0,0,,reply as a verdict about my worth.
-Dialogue: 4,0:02:02.52,0:02:04.23,Caption,,0,0,0,,If there is a sensible
-Dialogue: 4,0:02:04.23,0:02:05.64,Caption,,0,0,0,,time to follow up,
-Dialogue: 4,0:02:05.64,0:02:08.08,Caption,,0,0,0,,let me choose it in daylight.
-Dialogue: 4,0:02:08.08,0:02:09.39,Caption,,0,0,0,,For this evening,
-Dialogue: 4,0:02:09.39,0:02:10.94,Caption,,0,0,0,,receive both my hope
-Dialogue: 4,0:02:10.94,0:02:12.82,Caption,,0,0,0,,and my disappointment.
-Dialogue: 4,0:02:12.82,0:02:15.08,Caption,,0,0,0,,Hold the uncertainty I cannot
-Dialogue: 4,0:02:15.08,0:02:17.37,Caption,,0,0,0,,settle by checking again.
-Dialogue: 4,0:02:18.40,0:02:18.94,Caption,,0,0,0,,Father,
-Dialogue: 4,0:02:18.94,0:02:21.24,Caption,,0,0,0,,help me make one kind boundary
-Dialogue: 4,0:02:21.24,0:02:23.79,Caption,,0,0,0,,with the stream of information.
-Dialogue: 4,0:02:23.79,0:02:26.35,Caption,,0,0,0,,Let necessary messages remain
-Dialogue: 4,0:02:26.35,0:02:28.99,Caption,,0,0,0,,available without making every
-Dialogue: 4,0:02:28.99,0:02:31.90,Caption,,0,0,0,,notification my responsibility.
-Dialogue: 4,0:02:31.90,0:02:34.81,Caption,,0,0,0,,I ask for wisdom about the difference
-Dialogue: 4,0:02:34.81,0:02:36.61,Caption,,0,0,0,,between being reachable
-Dialogue: 4,0:02:36.61,0:02:39.15,Caption,,0,0,0,,and being constantly on watch.
-Dialogue: 4,0:02:39.15,0:02:42.49,Caption,,0,0,0,,If no urgent duty requires my attention,
-Dialogue: 4,0:02:42.49,0:02:45.43,Caption,,0,0,0,,help me let the phone grow quiet.
-Dialogue: 4,0:02:45.43,0:02:46.92,Caption,,0,0,0,,I give you the impulse
-Dialogue: 4,0:02:46.92,0:02:48.96,Caption,,0,0,0,,to search for one more update,
-Dialogue: 4,0:02:48.96,0:02:50.73,Caption,,0,0,0,,and the fear that stopping
-Dialogue: 4,0:02:50.73,0:02:52.99,Caption,,0,0,0,,means I have stopped caring.
-Dialogue: 4,0:02:54.02,0:02:56.16,Caption,,0,0,0,,Be careful for nothing;
-Dialogue: 5,0:02:56.16,0:02:58.18,Verse,,0,0,0,,{\pos(960,470)}but in every thing by prayer
-Dialogue: 5,0:02:58.18,0:03:00.93,Verse,,0,0,0,,{\pos(960,470)}and supplication with thanksgiving let
-Dialogue: 5,0:03:00.93,0:03:03.96,Verse,,0,0,0,,{\pos(960,470)}your requests be made known unto God.
-Dialogue: 4,0:03:05.29,0:03:07.16,Caption,,0,0,0,,You hear an invitation
-Dialogue: 4,0:03:07.16,0:03:09.48,Caption,,0,0,0,,to bring requests to God.
-Dialogue: 4,0:03:09.48,0:03:11.83,Caption,,0,0,0,,You can speak about what you need
-Dialogue: 4,0:03:11.83,0:03:13.90,Caption,,0,0,0,,without first making yourself
-Dialogue: 4,0:03:13.90,0:03:15.22,Caption,,0,0,0,,sound confident.
-Dialogue: 4,0:03:15.22,0:03:18.23,Caption,,0,0,0,,You can ask for an honest conversation,
-Dialogue: 4,0:03:18.23,0:03:19.46,Caption,,0,0,0,,a workable plan,
-Dialogue: 4,0:03:19.46,0:03:22.64,Caption,,0,0,0,,or help getting through an appointment.
-Dialogue: 4,0:03:22.64,0:03:25.12,Caption,,0,0,0,,Your request can be specific.
-Dialogue: 4,0:03:25.12,0:03:26.82,Caption,,0,0,0,,You can also remember
-Dialogue: 4,0:03:26.82,0:03:29.27,Caption,,0,0,0,,a small kindness from today.
-Dialogue: 4,0:03:29.27,0:03:31.09,Caption,,0,0,0,,Gratitude gives another
-Dialogue: 4,0:03:31.09,0:03:33.48,Caption,,0,0,0,,truth room beside the worry;
-Dialogue: 4,0:03:33.48,0:03:35.36,Caption,,0,0,0,,you do not have to pretend
-Dialogue: 4,0:03:35.36,0:03:38.16,Caption,,0,0,0,,the worry has already disappeared.
-Dialogue: 4,0:03:39.19,0:03:39.57,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:03:39.57,0:03:41.30,Caption,,0,0,0,,I name the work concern
-Dialogue: 4,0:03:41.30,0:03:43.13,Caption,,0,0,0,,that followed me home.
-Dialogue: 4,0:03:43.13,0:03:45.19,Caption,,0,0,0,,There is something I sent,
-Dialogue: 4,0:03:45.19,0:03:46.70,Caption,,0,0,0,,something I missed,
-Dialogue: 4,0:03:46.70,0:03:48.13,Caption,,0,0,0,,or something I may
-Dialogue: 4,0:03:48.13,0:03:49.90,Caption,,0,0,0,,be asked to explain.
-Dialogue: 4,0:03:49.90,0:03:51.90,Caption,,0,0,0,,Help me separate the actual
-Dialogue: 4,0:03:51.90,0:03:53.83,Caption,,0,0,0,,facts from the harsh story
-Dialogue: 4,0:03:53.83,0:03:55.94,Caption,,0,0,0,,I am telling about myself.
-Dialogue: 4,0:03:55.94,0:03:57.32,Caption,,0,0,0,,If I made an error,
-Dialogue: 4,0:03:57.32,0:03:59.78,Caption,,0,0,0,,give me the honesty to acknowledge
-Dialogue: 4,0:03:59.78,0:04:02.42,Caption,,0,0,0,,it and the patience to correct it.
-Dialogue: 4,0:04:02.42,0:04:05.03,Caption,,0,0,0,,Tonight I hand over the imagined
-Dialogue: 4,0:04:05.03,0:04:07.23,Caption,,0,0,0,,meeting that keeps starting
-Dialogue: 4,0:04:07.23,0:04:09.30,Caption,,0,0,0,,again inside my head.
-Dialogue: 4,0:04:10.33,0:04:10.86,Caption,,0,0,0,,Father,
-Dialogue: 4,0:04:10.86,0:04:12.75,Caption,,0,0,0,,make the next useful step
-Dialogue: 4,0:04:12.75,0:04:14.90,Caption,,0,0,0,,clear enough to recognize.
-Dialogue: 4,0:04:14.90,0:04:17.51,Caption,,0,0,0,,Perhaps I need to check a number,
-Dialogue: 4,0:04:17.51,0:04:18.69,Caption,,0,0,0,,ask a question,
-Dialogue: 4,0:04:18.69,0:04:20.37,Caption,,0,0,0,,or explain a delay.
-Dialogue: 4,0:04:20.37,0:04:22.96,Caption,,0,0,0,,I do not need to rehearse every
-Dialogue: 4,0:04:22.96,0:04:26.06,Caption,,0,0,0,,response another person might give.
-Dialogue: 4,0:04:26.06,0:04:28.20,Caption,,0,0,0,,Help me prepare what is mine
-Dialogue: 4,0:04:28.20,0:04:30.20,Caption,,0,0,0,,to prepare and leave their
-Dialogue: 4,0:04:30.20,0:04:32.53,Caption,,0,0,0,,reaction outside my control.
-Dialogue: 4,0:04:32.53,0:04:35.80,Caption,,0,0,0,,Receive my desire to do good work.
-Dialogue: 4,0:04:35.80,0:04:37.43,Caption,,0,0,0,,Let that desire become
-Dialogue: 4,0:04:37.43,0:04:39.35,Caption,,0,0,0,,steady attention tomorrow,
-Dialogue: 4,0:04:39.35,0:04:41.12,Caption,,0,0,0,,rather than another hour
-Dialogue: 4,0:04:41.12,0:04:43.47,Caption,,0,0,0,,of self-punishment tonight.
-Dialogue: 4,0:04:44.50,0:04:44.81,Caption,,0,0,0,,God,
-Dialogue: 4,0:04:44.81,0:04:47.80,Caption,,0,0,0,,I remember a moment today when someone
-Dialogue: 4,0:04:47.80,0:04:50.33,Caption,,0,0,0,,made a difficult thing easier.
-Dialogue: 4,0:04:50.33,0:04:52.87,Caption,,0,0,0,,Perhaps they answered patiently,
-Dialogue: 4,0:04:52.87,0:04:53.82,Caption,,0,0,0,,held a door,
-Dialogue: 4,0:04:53.82,0:04:56.62,Caption,,0,0,0,,or let me start a sentence again.
-Dialogue: 4,0:04:56.62,0:05:00.06,Caption,,0,0,0,,Thank you for that ordinary generosity.
-Dialogue: 4,0:05:00.06,0:05:01.83,Caption,,0,0,0,,Thank you for the ability
-Dialogue: 4,0:05:01.83,0:05:03.96,Caption,,0,0,0,,to ask for help and for people
-Dialogue: 4,0:05:03.96,0:05:05.76,Caption,,0,0,0,,who have helped before.
-Dialogue: 4,0:05:05.76,0:05:08.12,Caption,,0,0,0,,I bring this memory alongside
-Dialogue: 4,0:05:08.12,0:05:09.93,Caption,,0,0,0,,the unfinished work.
-Dialogue: 4,0:05:09.93,0:05:11.90,Caption,,0,0,0,,My day contained more than
-Dialogue: 4,0:05:11.90,0:05:14.27,Caption,,0,0,0,,the moment I keep regretting;
-Dialogue: 4,0:05:14.27,0:05:15.76,Caption,,0,0,0,,help me remember it
-Dialogue: 4,0:05:15.76,0:05:17.76,Caption,,0,0,0,,with greater honesty.
-Dialogue: 5,0:05:18.79,0:05:20.37,Verse,,0,0,0,,{\pos(960,470)}And the peace of God,
-Dialogue: 5,0:05:20.37,0:05:22.79,Verse,,0,0,0,,{\pos(960,470)}which passeth all understanding,
-Dialogue: 5,0:05:22.79,0:05:24.45,Verse,,0,0,0,,{\pos(960,470)}shall keep your hearts
-Dialogue: 5,0:05:24.45,0:05:27.14,Verse,,0,0,0,,{\pos(960,470)}and minds through Christ Jesus.
-Dialogue: 4,0:05:28.47,0:05:30.16,Caption,,0,0,0,,You do not have to solve
-Dialogue: 4,0:05:30.16,0:05:32.72,Caption,,0,0,0,,the meaning of every word tonight.
-Dialogue: 4,0:05:32.72,0:05:34.44,Caption,,0,0,0,,Notice that the promise
-Dialogue: 4,0:05:34.44,0:05:36.45,Caption,,0,0,0,,speaks of hearts and minds,
-Dialogue: 4,0:05:36.45,0:05:38.01,Caption,,0,0,0,,the very places where
-Dialogue: 4,0:05:38.01,0:05:39.60,Caption,,0,0,0,,you may feel tired.
-Dialogue: 4,0:05:39.60,0:05:42.05,Caption,,0,0,0,,You can ask for God’s peace while
-Dialogue: 4,0:05:42.05,0:05:43.53,Caption,,0,0,0,,there are unanswered
-Dialogue: 4,0:05:43.53,0:05:45.26,Caption,,0,0,0,,questions around you.
-Dialogue: 4,0:05:45.26,0:05:46.95,Caption,,0,0,0,,You are not being asked
-Dialogue: 4,0:05:46.95,0:05:49.54,Caption,,0,0,0,,to explain everything into order.
-Dialogue: 4,0:05:49.54,0:05:51.34,Caption,,0,0,0,,You can turn toward Christ
-Dialogue: 4,0:05:51.34,0:05:53.21,Caption,,0,0,0,,with the thoughts you have,
-Dialogue: 4,0:05:53.21,0:05:55.08,Caption,,0,0,0,,including the ones you wish
-Dialogue: 4,0:05:55.08,0:05:56.95,Caption,,0,0,0,,would leave you alone.
-Dialogue: 4,0:05:57.98,0:05:58.52,Caption,,0,0,0,,Father,
-Dialogue: 4,0:05:58.52,0:06:00.69,Caption,,0,0,0,,I name the household expense
-Dialogue: 4,0:06:00.69,0:06:03.11,Caption,,0,0,0,,that has been pressing on me.
-Dialogue: 4,0:06:03.11,0:06:05.42,Caption,,0,0,0,,I bring the bill, the estimate,
-Dialogue: 4,0:06:05.42,0:06:07.98,Caption,,0,0,0,,or the balance I need to review.
-Dialogue: 4,0:06:07.98,0:06:09.57,Caption,,0,0,0,,Give me clear judgment
-Dialogue: 4,0:06:09.57,0:06:11.56,Caption,,0,0,0,,when I look at the facts.
-Dialogue: 4,0:06:11.56,0:06:13.71,Caption,,0,0,0,,Help me ask about arrangements
-Dialogue: 4,0:06:13.71,0:06:14.94,Caption,,0,0,0,,when I need them,
-Dialogue: 4,0:06:14.94,0:06:17.09,Caption,,0,0,0,,and speak honestly with anyone
-Dialogue: 4,0:06:17.09,0:06:19.50,Caption,,0,0,0,,who shares this responsibility.
-Dialogue: 4,0:06:19.50,0:06:21.90,Caption,,0,0,0,,I place these practical concerns
-Dialogue: 4,0:06:21.90,0:06:24.89,Caption,,0,0,0,,before you without inventing a certainty
-Dialogue: 4,0:06:24.89,0:06:27.24,Caption,,0,0,0,,about how they will turn out.
-Dialogue: 4,0:06:27.24,0:06:30.49,Caption,,0,0,0,,Guide my next responsible choice.
-Dialogue: 4,0:06:31.52,0:06:31.91,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:06:31.91,0:06:33.64,Caption,,0,0,0,,I release the midnight
-Dialogue: 4,0:06:33.64,0:06:36.17,Caption,,0,0,0,,calculations that repeat without
-Dialogue: 4,0:06:36.17,0:06:38.40,Caption,,0,0,0,,giving me new information.
-Dialogue: 4,0:06:38.40,0:06:39.13,Caption,,0,0,0,,Tomorrow,
-Dialogue: 4,0:06:39.13,0:06:41.41,Caption,,0,0,0,,help me set aside a definite
-Dialogue: 4,0:06:41.41,0:06:43.28,Caption,,0,0,0,,time to look carefully,
-Dialogue: 4,0:06:43.28,0:06:45.64,Caption,,0,0,0,,with paper, accurate figures,
-Dialogue: 4,0:06:45.64,0:06:48.26,Caption,,0,0,0,,and whatever advice is needed.
-Dialogue: 4,0:06:48.26,0:06:51.08,Caption,,0,0,0,,Keep shame from isolating me.
-Dialogue: 4,0:06:51.08,0:06:53.04,Caption,,0,0,0,,Let courage take the form
-Dialogue: 4,0:06:53.04,0:06:54.13,Caption,,0,0,0,,of a call made
-Dialogue: 4,0:06:54.13,0:06:55.87,Caption,,0,0,0,,or a question asked.
-Dialogue: 4,0:06:55.87,0:06:58.09,Caption,,0,0,0,,Tonight I give you my fear
-Dialogue: 4,0:06:58.09,0:06:59.63,Caption,,0,0,0,,of falling behind,
-Dialogue: 4,0:06:59.63,0:07:02.70,Caption,,0,0,0,,and ask for companionship and wisdom
-Dialogue: 4,0:07:02.70,0:07:05.27,Caption,,0,0,0,,as I address what is real.
-Dialogue: 4,0:07:06.30,0:07:07.85,Caption,,0,0,0,,You can pause before
-Dialogue: 4,0:07:07.85,0:07:09.66,Caption,,0,0,0,,naming anything else.
-Dialogue: 4,0:07:09.66,0:07:11.12,Caption,,0,0,0,,Feel where your hands
-Dialogue: 4,0:07:11.12,0:07:12.55,Caption,,0,0,0,,have come to rest.
-Dialogue: 4,0:07:12.55,0:07:14.60,Caption,,0,0,0,,You do not need to move them
-Dialogue: 4,0:07:14.60,0:07:16.54,Caption,,0,0,0,,into a special position.
-Dialogue: 4,0:07:16.54,0:07:19.48,Caption,,0,0,0,,Let an ordinary breath come and go.
-Dialogue: 4,0:07:19.48,0:07:20.87,Caption,,0,0,0,,For these moments,
-Dialogue: 4,0:07:20.87,0:07:23.05,Caption,,0,0,0,,you can leave the unfinished
-Dialogue: 4,0:07:23.05,0:07:25.18,Caption,,0,0,0,,calculation unfinished.
-Dialogue: 4,0:07:28.01,0:07:29.25,Caption,,0,0,0,,Take therefore no
-Dialogue: 4,0:07:29.25,0:07:31.12,Caption,,0,0,0,,thought for the morrow:
-Dialogue: 5,0:07:31.12,0:07:33.17,Verse,,0,0,0,,{\pos(960,470)}for the morrow shall take thought
-Dialogue: 5,0:07:33.17,0:07:34.90,Verse,,0,0,0,,{\pos(960,470)}for the things of itself.
-Dialogue: 5,0:07:34.90,0:07:36.85,Verse,,0,0,0,,{\pos(960,470)}Sufficient unto the day
-Dialogue: 5,0:07:36.85,0:07:38.90,Verse,,0,0,0,,{\pos(960,470)}is the evil thereof.
-Dialogue: 4,0:07:40.23,0:07:42.77,Caption,,0,0,0,,You can prepare for tomorrow without
-Dialogue: 4,0:07:42.77,0:07:45.21,Caption,,0,0,0,,trying to live it from your bed.
-Dialogue: 4,0:07:45.21,0:07:46.84,Caption,,0,0,0,,Perhaps you already know
-Dialogue: 4,0:07:46.84,0:07:48.75,Caption,,0,0,0,,the time of your appointment
-Dialogue: 4,0:07:48.75,0:07:50.76,Caption,,0,0,0,,and where you put the keys.
-Dialogue: 4,0:07:50.76,0:07:53.20,Caption,,0,0,0,,You have done something useful.
-Dialogue: 4,0:07:53.20,0:07:54.04,Caption,,0,0,0,,Beyond that,
-Dialogue: 4,0:07:54.04,0:07:55.98,Caption,,0,0,0,,you may be rehearsing events
-Dialogue: 4,0:07:55.98,0:07:57.76,Caption,,0,0,0,,that have not happened.
-Dialogue: 4,0:07:57.76,0:08:00.60,Caption,,0,0,0,,You can notice the difference gently.
-Dialogue: 4,0:08:00.60,0:08:02.97,Caption,,0,0,0,,This evening has its own limits,
-Dialogue: 4,0:08:02.97,0:08:04.90,Caption,,0,0,0,,and you can let tomorrow’s
-Dialogue: 4,0:08:04.90,0:08:07.27,Caption,,0,0,0,,conversation belong to tomorrow,
-Dialogue: 4,0:08:07.27,0:08:09.19,Caption,,0,0,0,,where you will have actual
-Dialogue: 4,0:08:09.19,0:08:11.02,Caption,,0,0,0,,information to meet.
-Dialogue: 4,0:08:12.06,0:08:12.57,Caption,,0,0,0,,Father,
-Dialogue: 4,0:08:12.57,0:08:15.60,Caption,,0,0,0,,I name the appointment on the calendar.
-Dialogue: 4,0:08:15.60,0:08:17.29,Caption,,0,0,0,,I bring the questions
-Dialogue: 4,0:08:17.29,0:08:19.61,Caption,,0,0,0,,I hope to ask and the answers
-Dialogue: 4,0:08:19.61,0:08:21.40,Caption,,0,0,0,,I am afraid to hear.
-Dialogue: 4,0:08:21.40,0:08:23.15,Caption,,0,0,0,,Help me bring any notes
-Dialogue: 4,0:08:23.15,0:08:24.67,Caption,,0,0,0,,or documents I need,
-Dialogue: 4,0:08:24.67,0:08:26.80,Caption,,0,0,0,,and seek appropriate support
-Dialogue: 4,0:08:26.80,0:08:28.96,Caption,,0,0,0,,if I want someone with me.
-Dialogue: 4,0:08:28.96,0:08:32.29,Caption,,0,0,0,,I place the unknown parts before you.
-Dialogue: 4,0:08:32.29,0:08:34.46,Caption,,0,0,0,,Give me courage for the actual
-Dialogue: 4,0:08:34.46,0:08:36.02,Caption,,0,0,0,,hour when it comes.
-Dialogue: 4,0:08:36.02,0:08:38.83,Caption,,0,0,0,,I release the demand to experience
-Dialogue: 4,0:08:38.83,0:08:42.40,Caption,,0,0,0,,that hour many times before it arrives.
-Dialogue: 4,0:08:43.43,0:08:43.80,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:08:43.80,0:08:45.47,Caption,,0,0,0,,I name the person whose
-Dialogue: 4,0:08:45.47,0:08:47.18,Caption,,0,0,0,,trouble weighs on me.
-Dialogue: 4,0:08:47.18,0:08:49.22,Caption,,0,0,0,,I wish I could know exactly
-Dialogue: 4,0:08:49.22,0:08:50.95,Caption,,0,0,0,,what they need and make
-Dialogue: 4,0:08:50.95,0:08:52.80,Caption,,0,0,0,,their next day easier.
-Dialogue: 4,0:08:52.80,0:08:54.81,Caption,,0,0,0,,Help me listen to what they
-Dialogue: 4,0:08:54.81,0:08:56.26,Caption,,0,0,0,,actually tell me.
-Dialogue: 4,0:08:56.26,0:08:58.62,Caption,,0,0,0,,Keep my concern from becoming
-Dialogue: 4,0:08:58.62,0:09:01.48,Caption,,0,0,0,,pressure for them to reassure me.
-Dialogue: 4,0:09:01.48,0:09:02.97,Caption,,0,0,0,,Show me a practical
-Dialogue: 4,0:09:02.97,0:09:05.11,Caption,,0,0,0,,kindness within my reach.
-Dialogue: 4,0:09:05.11,0:09:07.34,Caption,,0,0,0,,As I leave the rest with you,
-Dialogue: 4,0:09:07.34,0:09:08.49,Caption,,0,0,0,,teach me a love
-Dialogue: 4,0:09:08.49,0:09:10.48,Caption,,0,0,0,,that respects their voice,
-Dialogue: 4,0:09:10.48,0:09:11.56,Caption,,0,0,0,,their choices,
-Dialogue: 4,0:09:11.56,0:09:13.29,Caption,,0,0,0,,and my own limits.
-Dialogue: 4,0:09:14.32,0:09:16.31,Caption,,0,0,0,,You can care about someone
-Dialogue: 4,0:09:16.31,0:09:18.52,Caption,,0,0,0,,deeply and still need a night
-Dialogue: 4,0:09:18.52,0:09:20.69,Caption,,0,0,0,,away from problem solving.
-Dialogue: 4,0:09:20.69,0:09:23.61,Caption,,0,0,0,,You may have already offered a ride,
-Dialogue: 4,0:09:23.61,0:09:24.82,Caption,,0,0,0,,sent a message,
-Dialogue: 4,0:09:24.82,0:09:27.35,Caption,,0,0,0,,or agreed on a time to speak.
-Dialogue: 4,0:09:27.35,0:09:30.71,Caption,,0,0,0,,You can recognize that offering as real.
-Dialogue: 4,0:09:30.71,0:09:32.47,Caption,,0,0,0,,You do not have to prove
-Dialogue: 4,0:09:32.47,0:09:34.59,Caption,,0,0,0,,your love by staying mentally
-Dialogue: 4,0:09:34.59,0:09:37.18,Caption,,0,0,0,,beside every possible difficulty.
-Dialogue: 4,0:09:37.18,0:09:39.06,Caption,,0,0,0,,Where you have a genuine
-Dialogue: 4,0:09:39.06,0:09:40.86,Caption,,0,0,0,,responsibility tonight,
-Dialogue: 4,0:09:40.86,0:09:42.06,Caption,,0,0,0,,attend to it.
-Dialogue: 4,0:09:42.06,0:09:44.05,Caption,,0,0,0,,Where you have done your part,
-Dialogue: 4,0:09:44.05,0:09:45.33,Caption,,0,0,0,,you may pause.
-Dialogue: 4,0:09:46.36,0:09:46.91,Caption,,0,0,0,,Father,
-Dialogue: 4,0:09:46.91,0:09:48.73,Caption,,0,0,0,,I name the conversation
-Dialogue: 4,0:09:48.73,0:09:50.57,Caption,,0,0,0,,that ended awkwardly.
-Dialogue: 4,0:09:50.57,0:09:51.88,Caption,,0,0,0,,There was a look
-Dialogue: 4,0:09:51.88,0:09:53.27,Caption,,0,0,0,,I could not read,
-Dialogue: 4,0:09:53.27,0:09:55.97,Caption,,0,0,0,,a sentence I wish I had softened,
-Dialogue: 4,0:09:55.97,0:09:58.92,Caption,,0,0,0,,or a silence I did not understand.
-Dialogue: 4,0:09:58.92,0:10:00.62,Caption,,0,0,0,,Help me resist filling
-Dialogue: 4,0:10:00.62,0:10:02.85,Caption,,0,0,0,,that silence with accusations
-Dialogue: 4,0:10:02.85,0:10:05.42,Caption,,0,0,0,,against myself or someone else.
-Dialogue: 4,0:10:05.42,0:10:07.34,Caption,,0,0,0,,Where I owe an apology,
-Dialogue: 4,0:10:07.34,0:10:10.10,Caption,,0,0,0,,let it be sincere and specific.
-Dialogue: 4,0:10:10.10,0:10:12.39,Caption,,0,0,0,,Where I need clarification,
-Dialogue: 4,0:10:12.39,0:10:14.18,Caption,,0,0,0,,help me ask kindly.
-Dialogue: 4,0:10:14.18,0:10:16.17,Caption,,0,0,0,,I surrender the imaginary
-Dialogue: 4,0:10:16.17,0:10:18.48,Caption,,0,0,0,,versions of that conversation
-Dialogue: 4,0:10:18.48,0:10:20.89,Caption,,0,0,0,,that cannot give me truth.
-Dialogue: 4,0:10:21.92,0:10:22.30,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:10:22.30,0:10:24.03,Caption,,0,0,0,,I accept responsibility
-Dialogue: 4,0:10:24.03,0:10:26.39,Caption,,0,0,0,,for the words that were mine.
-Dialogue: 4,0:10:26.39,0:10:29.26,Caption,,0,0,0,,I ask your forgiveness where I used
-Dialogue: 4,0:10:29.26,0:10:32.39,Caption,,0,0,0,,tiredness as an excuse to be unkind.
-Dialogue: 4,0:10:32.39,0:10:35.37,Caption,,0,0,0,,Help me make repair without demanding
-Dialogue: 4,0:10:35.37,0:10:38.12,Caption,,0,0,0,,immediate reassurance in return.
-Dialogue: 4,0:10:38.12,0:10:40.28,Caption,,0,0,0,,If another person needs time,
-Dialogue: 4,0:10:40.28,0:10:42.93,Caption,,0,0,0,,give me patience with their pace.
-Dialogue: 4,0:10:42.93,0:10:43.57,Caption,,0,0,0,,Tonight,
-Dialogue: 4,0:10:43.57,0:10:46.27,Caption,,0,0,0,,let remorse point toward an honest
-Dialogue: 4,0:10:46.27,0:10:49.32,Caption,,0,0,0,,action instead of an endless replay.
-Dialogue: 4,0:10:49.32,0:10:51.10,Caption,,0,0,0,,I place the relationship
-Dialogue: 4,0:10:51.10,0:10:52.95,Caption,,0,0,0,,in your care while I wait
-Dialogue: 4,0:10:52.95,0:10:55.90,Caption,,0,0,0,,for an appropriate moment to speak.
-Dialogue: 5,0:10:56.93,0:10:59.82,Verse,,0,0,0,,{\pos(960,470)}In the multitude of my thoughts within
-Dialogue: 5,0:10:59.82,0:11:02.61,Verse,,0,0,0,,{\pos(960,470)}me thy comforts delight my soul.
-Dialogue: 4,0:11:03.94,0:11:05.73,Caption,,0,0,0,,The psalm gives you words
-Dialogue: 4,0:11:05.73,0:11:07.70,Caption,,0,0,0,,for a crowded inner life.
-Dialogue: 4,0:11:07.70,0:11:10.61,Caption,,0,0,0,,You can hear that multitude of thoughts
-Dialogue: 4,0:11:10.61,0:11:12.88,Caption,,0,0,0,,named without embarrassment.
-Dialogue: 4,0:11:12.88,0:11:15.14,Caption,,0,0,0,,Perhaps your mind moves from
-Dialogue: 4,0:11:15.14,0:11:17.08,Caption,,0,0,0,,a bill to a conversation
-Dialogue: 4,0:11:17.08,0:11:19.92,Caption,,0,0,0,,to a forgotten errand in seconds.
-Dialogue: 4,0:11:19.92,0:11:22.05,Caption,,0,0,0,,You do not have to chase every
-Dialogue: 4,0:11:22.05,0:11:24.07,Caption,,0,0,0,,thought to its conclusion.
-Dialogue: 4,0:11:24.07,0:11:25.58,Caption,,0,0,0,,You can receive one
-Dialogue: 4,0:11:25.58,0:11:27.20,Caption,,0,0,0,,comfort at a time:
-Dialogue: 4,0:11:27.20,0:11:28.88,Caption,,0,0,0,,a remembered kindness,
-Dialogue: 4,0:11:28.88,0:11:30.19,Caption,,0,0,0,,a truthful verse,
-Dialogue: 4,0:11:30.19,0:11:32.64,Caption,,0,0,0,,the knowledge that you can bring
-Dialogue: 4,0:11:32.64,0:11:35.06,Caption,,0,0,0,,your confusion into prayer.
-Dialogue: 4,0:11:36.09,0:11:36.40,Caption,,0,0,0,,God,
-Dialogue: 4,0:11:36.40,0:11:39.09,Caption,,0,0,0,,I name the judgment I keep passing
-Dialogue: 4,0:11:39.09,0:11:42.43,Caption,,0,0,0,,on myself when everything becomes quiet.
-Dialogue: 4,0:11:42.43,0:11:43.85,Caption,,0,0,0,,I hear that I should
-Dialogue: 4,0:11:43.85,0:11:44.99,Caption,,0,0,0,,have known more,
-Dialogue: 4,0:11:44.99,0:11:45.98,Caption,,0,0,0,,finished more,
-Dialogue: 4,0:11:45.98,0:11:48.01,Caption,,0,0,0,,or handled the day better.
-Dialogue: 4,0:11:48.01,0:11:50.24,Caption,,0,0,0,,Help me learn from what happened
-Dialogue: 4,0:11:50.24,0:11:53.08,Caption,,0,0,0,,without treating myself with contempt.
-Dialogue: 4,0:11:53.08,0:11:55.46,Caption,,0,0,0,,Show me the difference between
-Dialogue: 4,0:11:55.46,0:11:57.78,Caption,,0,0,0,,correction that helps me grow
-Dialogue: 4,0:11:57.78,0:12:01.06,Caption,,0,0,0,,and accusation that only wears me down.
-Dialogue: 4,0:12:01.06,0:12:02.84,Caption,,0,0,0,,I ask for the humility
-Dialogue: 4,0:12:02.84,0:12:04.13,Caption,,0,0,0,,to be a learner,
-Dialogue: 4,0:12:04.13,0:12:05.74,Caption,,0,0,0,,with room to receive
-Dialogue: 4,0:12:05.74,0:12:07.71,Caption,,0,0,0,,mercy and try again.
-Dialogue: 4,0:12:08.74,0:12:09.31,Caption,,0,0,0,,Father,
-Dialogue: 4,0:12:09.31,0:12:11.05,Caption,,0,0,0,,I bring my tired body
-Dialogue: 4,0:12:11.05,0:12:13.29,Caption,,0,0,0,,into this prayer as well.
-Dialogue: 4,0:12:13.29,0:12:16.22,Caption,,0,0,0,,I notice the tension I carried through
-Dialogue: 4,0:12:16.22,0:12:19.15,Caption,,0,0,0,,the day and the impatience I sometimes
-Dialogue: 4,0:12:19.15,0:12:21.34,Caption,,0,0,0,,feel toward my own limits.
-Dialogue: 4,0:12:21.34,0:12:23.63,Caption,,0,0,0,,Help me respond with care.
-Dialogue: 4,0:12:23.63,0:12:25.77,Caption,,0,0,0,,Guide me toward appropriate
-Dialogue: 4,0:12:25.77,0:12:27.35,Caption,,0,0,0,,help when I need it,
-Dialogue: 4,0:12:27.35,0:12:28.85,Caption,,0,0,0,,and toward ordinary
-Dialogue: 4,0:12:28.85,0:12:31.00,Caption,,0,0,0,,habits that support rest.
-Dialogue: 4,0:12:31.00,0:12:32.96,Caption,,0,0,0,,I am not asking my body
-Dialogue: 4,0:12:32.96,0:12:35.34,Caption,,0,0,0,,to prove my faith tonight.
-Dialogue: 4,0:12:35.34,0:12:37.58,Caption,,0,0,0,,I ask to treat it as something
-Dialogue: 4,0:12:37.58,0:12:40.32,Caption,,0,0,0,,entrusted to me with tenderness.
-Dialogue: 4,0:12:41.35,0:12:43.38,Caption,,0,0,0,,A concern may come back after
-Dialogue: 4,0:12:43.38,0:12:45.31,Caption,,0,0,0,,you have prayed about it.
-Dialogue: 4,0:12:45.31,0:12:47.38,Caption,,0,0,0,,You can notice that without
-Dialogue: 4,0:12:47.38,0:12:50.18,Caption,,0,0,0,,declaring the prayer unsuccessful.
-Dialogue: 4,0:12:50.18,0:12:52.62,Caption,,0,0,0,,You are practicing trust with a mind
-Dialogue: 4,0:12:52.62,0:12:55.10,Caption,,0,0,0,,that has learned to keep checking.
-Dialogue: 4,0:12:55.10,0:12:57.02,Caption,,0,0,0,,You can simply recognize
-Dialogue: 4,0:12:57.02,0:12:59.42,Caption,,0,0,0,,the familiar concern and bring
-Dialogue: 4,0:12:59.42,0:13:02.00,Caption,,0,0,0,,it back to God in fewer words.
-Dialogue: 4,0:13:02.00,0:13:04.01,Caption,,0,0,0,,You do not need to restart
-Dialogue: 4,0:13:04.01,0:13:05.59,Caption,,0,0,0,,the whole evening.
-Dialogue: 4,0:13:05.59,0:13:07.36,Caption,,0,0,0,,You can return as many
-Dialogue: 4,0:13:07.36,0:13:08.80,Caption,,0,0,0,,times as you need,
-Dialogue: 4,0:13:08.80,0:13:12.13,Caption,,0,0,0,,with less argument and more kindness.
-Dialogue: 4,0:13:13.16,0:13:13.57,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:13:13.57,0:13:16.03,Caption,,0,0,0,,when the same concern returns,
-Dialogue: 4,0:13:16.03,0:13:18.26,Caption,,0,0,0,,help me answer it gently.
-Dialogue: 4,0:13:18.26,0:13:20.66,Caption,,0,0,0,,I have named it before you.
-Dialogue: 4,0:13:20.66,0:13:22.60,Caption,,0,0,0,,I have considered whether
-Dialogue: 4,0:13:22.60,0:13:25.02,Caption,,0,0,0,,anything requires action now.
-Dialogue: 4,0:13:25.02,0:13:27.36,Caption,,0,0,0,,If there is no new information
-Dialogue: 4,0:13:27.36,0:13:29.69,Caption,,0,0,0,,and no present responsibility,
-Dialogue: 4,0:13:29.69,0:13:32.35,Caption,,0,0,0,,help me stop reopening the case.
-Dialogue: 4,0:13:32.35,0:13:35.80,Caption,,0,0,0,,Receive my repeated turning toward you.
-Dialogue: 4,0:13:35.80,0:13:38.43,Caption,,0,0,0,,Teach me a patient trust that can
-Dialogue: 4,0:13:38.43,0:13:40.83,Caption,,0,0,0,,be practiced in small moments,
-Dialogue: 4,0:13:40.83,0:13:42.98,Caption,,0,0,0,,without demanding a perfect
-Dialogue: 4,0:13:42.98,0:13:45.14,Caption,,0,0,0,,feeling or an uninterrupted
-Dialogue: 4,0:13:45.14,0:13:47.64,Caption,,0,0,0,,silence inside my thoughts.
-Dialogue: 5,0:13:48.68,0:13:51.52,Verse,,0,0,0,,{\pos(960,470)}Thou wilt keep him in perfect peace,
-Dialogue: 5,0:13:51.52,0:13:54.00,Verse,,0,0,0,,{\pos(960,470)}whose mind is stayed on thee:
-Dialogue: 5,0:13:54.00,0:13:56.54,Verse,,0,0,0,,{\pos(960,470)}because he trusteth in thee.
-Dialogue: 4,0:13:57.87,0:13:59.89,Caption,,0,0,0,,You can give your attention
-Dialogue: 4,0:13:59.89,0:14:02.35,Caption,,0,0,0,,a place to return without forcing
-Dialogue: 4,0:14:02.35,0:14:04.54,Caption,,0,0,0,,it to stay perfectly still.
-Dialogue: 4,0:14:04.54,0:14:06.20,Caption,,0,0,0,,In Isaiah’s words,
-Dialogue: 4,0:14:06.20,0:14:08.50,Caption,,0,0,0,,trust turns toward God.
-Dialogue: 4,0:14:08.50,0:14:10.89,Caption,,0,0,0,,You can turn that way now.
-Dialogue: 4,0:14:10.89,0:14:11.90,Caption,,0,0,0,,When you notice
-Dialogue: 4,0:14:11.90,0:14:13.79,Caption,,0,0,0,,that you are planning again,
-Dialogue: 4,0:14:13.79,0:14:15.87,Caption,,0,0,0,,you can come back to the prayer
-Dialogue: 4,0:14:15.87,0:14:17.20,Caption,,0,0,0,,already underway.
-Dialogue: 4,0:14:17.20,0:14:20.24,Caption,,0,0,0,,You are allowed to begin again quietly.
-Dialogue: 4,0:14:20.24,0:14:22.05,Caption,,0,0,0,,You do not need to monitor
-Dialogue: 4,0:14:22.05,0:14:24.49,Caption,,0,0,0,,your mind as though every wandering
-Dialogue: 4,0:14:24.49,0:14:26.52,Caption,,0,0,0,,thought were evidence against
-Dialogue: 4,0:14:26.52,0:14:28.82,Caption,,0,0,0,,the sincerity of your faith.
-Dialogue: 4,0:14:29.85,0:14:30.81,Caption,,0,0,0,,Faithful God,
-Dialogue: 4,0:14:30.81,0:14:33.33,Caption,,0,0,0,,I place my trust in your character
-Dialogue: 4,0:14:33.33,0:14:35.33,Caption,,0,0,0,,rather than the strength of
-Dialogue: 4,0:14:35.33,0:14:36.77,Caption,,0,0,0,,my concentration.
-Dialogue: 4,0:14:36.77,0:14:40.24,Caption,,0,0,0,,I know how easily my attention wanders.
-Dialogue: 4,0:14:40.24,0:14:42.25,Caption,,0,0,0,,Help me return to what is true
-Dialogue: 4,0:14:42.25,0:14:44.04,Caption,,0,0,0,,about you with patience.
-Dialogue: 4,0:14:44.04,0:14:46.59,Caption,,0,0,0,,Keep me from using this prayer as
-Dialogue: 4,0:14:46.59,0:14:49.47,Caption,,0,0,0,,another task to perform flawlessly.
-Dialogue: 4,0:14:49.47,0:14:51.07,Caption,,0,0,0,,I want to become more
-Dialogue: 4,0:14:51.07,0:14:52.90,Caption,,0,0,0,,honest in your presence,
-Dialogue: 4,0:14:52.90,0:14:55.12,Caption,,0,0,0,,more willing to receive help,
-Dialogue: 4,0:14:55.12,0:14:57.86,Caption,,0,0,0,,and more able to leave an unanswered
-Dialogue: 4,0:14:57.86,0:15:00.08,Caption,,0,0,0,,question without following it
-Dialogue: 4,0:15:00.08,0:15:02.79,Caption,,0,0,0,,through every imagined outcome.
-Dialogue: 4,0:15:03.82,0:15:04.35,Caption,,0,0,0,,Father,
-Dialogue: 4,0:15:04.35,0:15:07.07,Caption,,0,0,0,,I have named the unanswered message,
-Dialogue: 4,0:15:07.07,0:15:08.36,Caption,,0,0,0,,the work concern,
-Dialogue: 4,0:15:08.36,0:15:10.02,Caption,,0,0,0,,the practical expense,
-Dialogue: 4,0:15:10.02,0:15:11.76,Caption,,0,0,0,,the coming appointment,
-Dialogue: 4,0:15:11.76,0:15:13.60,Caption,,0,0,0,,and the person I love.
-Dialogue: 4,0:15:13.60,0:15:15.60,Caption,,0,0,0,,Receive whichever of these
-Dialogue: 4,0:15:15.60,0:15:17.86,Caption,,0,0,0,,belongs to my life tonight.
-Dialogue: 4,0:15:17.86,0:15:19.68,Caption,,0,0,0,,Receive also the worry
-Dialogue: 4,0:15:19.68,0:15:22.02,Caption,,0,0,0,,I could not explain aloud.
-Dialogue: 4,0:15:22.02,0:15:24.20,Caption,,0,0,0,,I do not need to make them
-Dialogue: 4,0:15:24.20,0:15:26.56,Caption,,0,0,0,,one enormous burden again.
-Dialogue: 4,0:15:26.56,0:15:28.03,Caption,,0,0,0,,Each has been brought
-Dialogue: 4,0:15:28.03,0:15:29.74,Caption,,0,0,0,,before you separately.
-Dialogue: 4,0:15:29.74,0:15:31.80,Caption,,0,0,0,,Help me remember that I can
-Dialogue: 4,0:15:31.80,0:15:34.17,Caption,,0,0,0,,address one real responsibility
-Dialogue: 4,0:15:34.17,0:15:36.73,Caption,,0,0,0,,at a time when morning comes.
-Dialogue: 4,0:15:37.76,0:15:39.67,Caption,,0,0,0,,You may notice that a worry
-Dialogue: 4,0:15:39.67,0:15:41.43,Caption,,0,0,0,,becomes less tangled when
-Dialogue: 4,0:15:41.43,0:15:43.59,Caption,,0,0,0,,you give it a concrete task.
-Dialogue: 4,0:15:43.59,0:15:45.85,Caption,,0,0,0,,You cannot schedule certainty,
-Dialogue: 4,0:15:45.85,0:15:48.44,Caption,,0,0,0,,but you can schedule a question.
-Dialogue: 4,0:15:48.44,0:15:49.98,Caption,,0,0,0,,You cannot determine
-Dialogue: 4,0:15:49.98,0:15:51.90,Caption,,0,0,0,,a conversation’s outcome,
-Dialogue: 4,0:15:51.90,0:15:53.29,Caption,,0,0,0,,but you can choose
-Dialogue: 4,0:15:53.29,0:15:55.00,Caption,,0,0,0,,when to ask for one.
-Dialogue: 4,0:15:55.00,0:15:57.65,Caption,,0,0,0,,You can make that distinction without
-Dialogue: 4,0:15:57.65,0:16:00.05,Caption,,0,0,0,,dismissing what matters to you.
-Dialogue: 4,0:16:00.05,0:16:02.66,Caption,,0,0,0,,Before the quieter readings begin,
-Dialogue: 4,0:16:02.66,0:16:04.57,Caption,,0,0,0,,you will give one concern
-Dialogue: 4,0:16:04.57,0:16:05.95,Caption,,0,0,0,,a practical place,
-Dialogue: 4,0:16:05.95,0:16:07.94,Caption,,0,0,0,,so your mind does not have
-Dialogue: 4,0:16:07.94,0:16:10.98,Caption,,0,0,0,,to serve as its reminder all night.
-Dialogue: 4,0:16:12.01,0:16:13.77,Caption,,0,0,0,,I can be honest about
-Dialogue: 4,0:16:13.77,0:16:15.37,Caption,,0,0,0,,what troubles me.
-Dialogue: 4,0:16:15.37,0:16:17.32,Caption,,0,0,0,,I can ask for help before
-Dialogue: 4,0:16:17.32,0:16:19.92,Caption,,0,0,0,,I reach the end of my strength.
-Dialogue: 4,0:16:19.92,0:16:21.97,Caption,,0,0,0,,I can make a plan without
-Dialogue: 4,0:16:21.97,0:16:24.11,Caption,,0,0,0,,predicting every result.
-Dialogue: 4,0:16:24.11,0:16:26.99,Caption,,0,0,0,,I can care for another person without
-Dialogue: 4,0:16:26.99,0:16:29.43,Caption,,0,0,0,,carrying their entire future.
-Dialogue: 4,0:16:29.43,0:16:31.13,Caption,,0,0,0,,I can leave a message
-Dialogue: 4,0:16:31.13,0:16:33.22,Caption,,0,0,0,,unanswered for a time when
-Dialogue: 4,0:16:33.22,0:16:35.50,Caption,,0,0,0,,no urgent need is present.
-Dialogue: 4,0:16:35.50,0:16:37.54,Caption,,0,0,0,,God receives the concern
-Dialogue: 4,0:16:37.54,0:16:39.75,Caption,,0,0,0,,I can name and the concern
-Dialogue: 4,0:16:39.75,0:16:42.49,Caption,,0,0,0,,I cannot yet put into words.
-Dialogue: 4,0:16:43.52,0:16:45.31,Caption,,0,0,0,,Make this small commitment
-Dialogue: 4,0:16:45.31,0:16:47.56,Caption,,0,0,0,,before the readings for sleep:
-Dialogue: 4,0:16:47.56,0:16:49.78,Caption,,0,0,0,,choose one concern that needs
-Dialogue: 4,0:16:49.78,0:16:51.24,Caption,,0,0,0,,attention tomorrow,
-Dialogue: 4,0:16:51.24,0:16:53.16,Caption,,0,0,0,,and give it one practical
-Dialogue: 4,0:16:53.16,0:16:54.95,Caption,,0,0,0,,next step and a time.
-Dialogue: 4,0:16:54.95,0:16:56.31,Caption,,0,0,0,,You might decide,
-Dialogue: 4,0:16:56.31,0:16:57.67,Caption,,0,0,0,,“After breakfast,
-Dialogue: 4,0:16:57.67,0:16:59.91,Caption,,0,0,0,,I will call about the bill.”
-Dialogue: 4,0:16:59.91,0:17:01.75,Caption,,0,0,0,,If you need a reminder,
-Dialogue: 4,0:17:01.75,0:17:04.09,Caption,,0,0,0,,write only that short line.
-Dialogue: 4,0:17:04.09,0:17:06.04,Caption,,0,0,0,,Then close the note.
-Dialogue: 4,0:17:06.04,0:17:08.38,Caption,,0,0,0,,You have given your responsibility
-Dialogue: 4,0:17:08.38,0:17:09.76,Caption,,0,0,0,,a place in tomorrow,
-Dialogue: 4,0:17:09.76,0:17:11.82,Caption,,0,0,0,,so you can stop trying to keep
-Dialogue: 4,0:17:11.82,0:17:14.52,Caption,,0,0,0,,it alive by rehearsing it tonight.
-Dialogue: 4,0:17:15.55,0:17:16.12,Caption,,0,0,0,,Father,
-Dialogue: 4,0:17:16.12,0:17:17.91,Caption,,0,0,0,,I commit this one step
-Dialogue: 4,0:17:17.91,0:17:19.72,Caption,,0,0,0,,and its time to you.
-Dialogue: 4,0:17:19.72,0:17:22.60,Caption,,0,0,0,,Help me follow through with the strength
-Dialogue: 4,0:17:22.60,0:17:25.02,Caption,,0,0,0,,and information available then.
-Dialogue: 4,0:17:25.02,0:17:26.01,Caption,,0,0,0,,For tonight,
-Dialogue: 4,0:17:26.01,0:17:28.91,Caption,,0,0,0,,I will leave the note closed unless
-Dialogue: 4,0:17:28.91,0:17:32.15,Caption,,0,0,0,,a genuine need changes the situation.
-Dialogue: 4,0:17:32.15,0:17:33.93,Caption,,0,0,0,,When I want to reopen it
-Dialogue: 4,0:17:33.93,0:17:35.64,Caption,,0,0,0,,merely to feel certain,
-Dialogue: 4,0:17:35.64,0:17:37.20,Caption,,0,0,0,,remind me of the care
-Dialogue: 4,0:17:37.20,0:17:38.94,Caption,,0,0,0,,I have already taken.
-Dialogue: 4,0:17:38.94,0:17:41.39,Caption,,0,0,0,,Bless this modest act of trust,
-Dialogue: 4,0:17:41.39,0:17:43.52,Caption,,0,0,0,,and guide me in the quieter
-Dialogue: 4,0:17:43.52,0:17:45.29,Caption,,0,0,0,,hours that follow.
-Dialogue: 4,0:17:46.32,0:17:48.28,Caption,,0,0,0,,If you want to affirm this
-Dialogue: 4,0:17:48.28,0:17:50.01,Caption,,0,0,0,,prayer in the comments,
-Dialogue: 4,0:17:50.01,0:17:51.02,Caption,,0,0,0,,write amen.
-Dialogue: 4,0:17:51.02,0:17:52.54,Caption,,0,0,0,,Now let the Scripture
-Dialogue: 4,0:17:52.54,0:17:55.00,Caption,,0,0,0,,readings accompany your rest.
-Dialogue: 4,0:17:55.83,0:17:57.80,Caption,,0,0,0,,You can let your eyes settle
-Dialogue: 4,0:17:57.80,0:18:00.08,Caption,,0,0,0,,wherever they are comfortable.
-Dialogue: 4,0:18:00.08,0:18:00.79,Caption,,0,0,0,,From here,
-Dialogue: 4,0:18:00.79,0:18:02.33,Caption,,0,0,0,,the pace stays gentle,
-Dialogue: 4,0:18:02.33,0:18:04.02,Caption,,0,0,0,,with Scripture and short
-Dialogue: 4,0:18:04.02,0:18:05.74,Caption,,0,0,0,,prayers for the night.
-Dialogue: 4,0:18:05.74,0:18:07.61,Caption,,0,0,0,,You do not need to keep
-Dialogue: 4,0:18:07.61,0:18:09.66,Caption,,0,0,0,,a list of the passages.
-Dialogue: 4,0:18:09.66,0:18:12.37,Caption,,0,0,0,,You can receive one sentence and let
-Dialogue: 4,0:18:12.37,0:18:14.96,Caption,,0,0,0,,the next arrive when it arrives.
-Dialogue: 4,0:18:14.96,0:18:16.96,Caption,,0,0,0,,The concern you set down
-Dialogue: 4,0:18:16.96,0:18:19.15,Caption,,0,0,0,,has a next step already.
-Dialogue: 4,0:18:19.15,0:18:20.69,Caption,,0,0,0,,You may leave it there
-Dialogue: 4,0:18:20.69,0:18:21.87,Caption,,0,0,0,,while you listen,
-Dialogue: 4,0:18:21.87,0:18:23.62,Caption,,0,0,0,,without checking the time
-Dialogue: 4,0:18:23.62,0:18:25.86,Caption,,0,0,0,,or measuring your progress.
-Dialogue: 5,0:18:27.19,0:18:28.98,Verse,,0,0,0,,{\pos(960,470)}When thou liest down,
-Dialogue: 5,0:18:28.98,0:18:31.29,Verse,,0,0,0,,{\pos(960,470)}thou shalt not be afraid:
-Dialogue: 5,0:18:31.29,0:18:33.14,Verse,,0,0,0,,{\pos(960,470)}yea, thou shalt lie down,
-Dialogue: 5,0:18:33.14,0:18:35.63,Verse,,0,0,0,,{\pos(960,470)}and thy sleep shall be sweet.
-Dialogue: 4,0:18:36.96,0:18:39.09,Caption,,0,0,0,,You hear a picture of lying
-Dialogue: 4,0:18:39.09,0:18:41.71,Caption,,0,0,0,,down within the life of wisdom.
-Dialogue: 4,0:18:41.71,0:18:44.18,Caption,,0,0,0,,You can let that picture be gentle
-Dialogue: 4,0:18:44.18,0:18:46.13,Caption,,0,0,0,,company rather than another
-Dialogue: 4,0:18:46.13,0:18:48.56,Caption,,0,0,0,,standard you must meet tonight.
-Dialogue: 4,0:18:48.56,0:18:50.21,Caption,,0,0,0,,If you are still alert,
-Dialogue: 4,0:18:50.21,0:18:51.71,Caption,,0,0,0,,you can simply remain
-Dialogue: 4,0:18:51.71,0:18:53.46,Caption,,0,0,0,,here with the reading.
-Dialogue: 4,0:18:53.46,0:18:55.95,Caption,,0,0,0,,You do not have to manufacture
-Dialogue: 4,0:18:55.95,0:18:58.03,Caption,,0,0,0,,a particular sensation.
-Dialogue: 4,0:18:58.03,0:18:59.94,Caption,,0,0,0,,Your pillow can be a place
-Dialogue: 4,0:18:59.94,0:19:01.12,Caption,,0,0,0,,to receive care,
-Dialogue: 4,0:19:01.12,0:19:03.55,Caption,,0,0,0,,and this verse can be a prayerful
-Dialogue: 4,0:19:03.55,0:19:06.11,Caption,,0,0,0,,hope you hold with open hands.
-Dialogue: 4,0:19:07.44,0:19:07.85,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:19:07.85,0:19:10.27,Caption,,0,0,0,,I receive this ordinary place
-Dialogue: 4,0:19:10.27,0:19:12.37,Caption,,0,0,0,,of rest with gratitude.
-Dialogue: 4,0:19:12.37,0:19:13.91,Caption,,0,0,0,,Help me stop treating
-Dialogue: 4,0:19:13.91,0:19:15.88,Caption,,0,0,0,,the bedside as a desk where
-Dialogue: 4,0:19:15.88,0:19:18.18,Caption,,0,0,0,,every problem must be solved.
-Dialogue: 4,0:19:18.18,0:19:20.23,Caption,,0,0,0,,Let the blanket be a blanket
-Dialogue: 4,0:19:20.23,0:19:22.16,Caption,,0,0,0,,and the pillow a pillow.
-Dialogue: 4,0:19:22.16,0:19:23.38,Caption,,0,0,0,,I ask for rest,
-Dialogue: 4,0:19:23.38,0:19:25.16,Caption,,0,0,0,,and I leave the manner
-Dialogue: 4,0:19:25.16,0:19:27.76,Caption,,0,0,0,,and timing outside my command.
-Dialogue: 4,0:19:27.76,0:19:29.82,Caption,,0,0,0,,Give me patience with this
-Dialogue: 4,0:19:29.82,0:19:31.59,Caption,,0,0,0,,night as it unfolds.
-Dialogue: 4,0:19:31.59,0:19:33.70,Caption,,0,0,0,,May I meet my own weariness
-Dialogue: 4,0:19:33.70,0:19:35.65,Caption,,0,0,0,,with the kindness I would
-Dialogue: 4,0:19:35.65,0:19:37.96,Caption,,0,0,0,,offer someone dear to me.
-Dialogue: 4,0:19:39.29,0:19:41.00,Caption,,0,0,0,,You can allow the room
-Dialogue: 4,0:19:41.00,0:19:42.34,Caption,,0,0,0,,to be ordinary.
-Dialogue: 4,0:19:42.34,0:19:44.89,Caption,,0,0,0,,A distant sound, a little light,
-Dialogue: 4,0:19:44.89,0:19:46.88,Caption,,0,0,0,,or a passing thought does
-Dialogue: 4,0:19:46.88,0:19:49.52,Caption,,0,0,0,,not require you to begin again.
-Dialogue: 4,0:19:49.52,0:19:52.11,Caption,,0,0,0,,You can stay with what is comfortable
-Dialogue: 4,0:19:52.11,0:19:54.31,Caption,,0,0,0,,and let the reading continue.
-Dialogue: 4,0:19:54.31,0:19:56.25,Caption,,0,0,0,,You do not need to create
-Dialogue: 4,0:19:56.25,0:19:57.87,Caption,,0,0,0,,an ideal night before
-Dialogue: 4,0:19:57.87,0:19:59.91,Caption,,0,0,0,,you are allowed to rest.
-Dialogue: 4,0:19:59.91,0:20:00.81,Caption,,0,0,0,,You are here
-Dialogue: 4,0:20:00.81,0:20:02.47,Caption,,0,0,0,,in the night you have,
-Dialogue: 4,0:20:02.47,0:20:03.91,Caption,,0,0,0,,and you can meet it
-Dialogue: 4,0:20:03.91,0:20:05.34,Caption,,0,0,0,,with less struggle,
-Dialogue: 4,0:20:05.34,0:20:07.73,Caption,,0,0,0,,one quiet moment at a time.
-Dialogue: 4,0:20:09.06,0:20:09.86,Caption,,0,0,0,,It is vain
-Dialogue: 4,0:20:09.86,0:20:11.87,Caption,,0,0,0,,for you to rise up early,
-Dialogue: 4,0:20:11.87,0:20:13.08,Caption,,0,0,0,,to sit up late,
-Dialogue: 4,0:20:13.08,0:20:15.51,Caption,,0,0,0,,to eat the bread of sorrows:
-Dialogue: 4,0:20:15.51,0:20:18.63,Caption,,0,0,0,,for so he giveth his beloved sleep.
-Dialogue: 4,0:20:19.96,0:20:22.13,Caption,,0,0,0,,This psalm speaks into the work
-Dialogue: 4,0:20:22.13,0:20:23.64,Caption,,0,0,0,,of building a life.
-Dialogue: 4,0:20:23.64,0:20:26.18,Caption,,0,0,0,,You may know the feeling of adding
-Dialogue: 4,0:20:26.18,0:20:28.79,Caption,,0,0,0,,another hour because you are afraid
-Dialogue: 4,0:20:28.79,0:20:31.50,Caption,,0,0,0,,everything depends on your effort.
-Dialogue: 4,0:20:31.50,0:20:32.84,Caption,,0,0,0,,You can hear its
-Dialogue: 4,0:20:32.84,0:20:35.12,Caption,,0,0,0,,invitation to dependence.
-Dialogue: 4,0:20:35.12,0:20:36.46,Caption,,0,0,0,,Your work matters,
-Dialogue: 4,0:20:36.46,0:20:38.11,Caption,,0,0,0,,and you can also reach
-Dialogue: 4,0:20:38.11,0:20:39.56,Caption,,0,0,0,,a stopping place.
-Dialogue: 4,0:20:39.56,0:20:40.83,Caption,,0,0,0,,You are a person
-Dialogue: 4,0:20:40.83,0:20:42.92,Caption,,0,0,0,,who needs replenishment.
-Dialogue: 4,0:20:42.92,0:20:45.01,Caption,,0,0,0,,You can let that need belong
-Dialogue: 4,0:20:45.01,0:20:47.55,Caption,,0,0,0,,within your relationship with God,
-Dialogue: 4,0:20:47.55,0:20:49.42,Caption,,0,0,0,,without making exhaustion
-Dialogue: 4,0:20:49.42,0:20:51.93,Caption,,0,0,0,,the measure of your devotion.
-Dialogue: 4,0:20:53.26,0:20:53.57,Caption,,0,0,0,,God,
-Dialogue: 4,0:20:53.57,0:20:55.29,Caption,,0,0,0,,I leave the extra hour
-Dialogue: 4,0:20:55.29,0:20:57.00,Caption,,0,0,0,,of effort I was trying
-Dialogue: 4,0:20:57.00,0:20:59.20,Caption,,0,0,0,,to borrow from this night.
-Dialogue: 4,0:20:59.20,0:21:00.82,Caption,,0,0,0,,If my duties require
-Dialogue: 4,0:21:00.82,0:21:02.04,Caption,,0,0,0,,me to be awake,
-Dialogue: 4,0:21:02.04,0:21:04.07,Caption,,0,0,0,,give me practical support
-Dialogue: 4,0:21:04.07,0:21:05.29,Caption,,0,0,0,,and a chance to
-Dialogue: 4,0:21:05.29,0:21:06.76,Caption,,0,0,0,,rest when I can.
-Dialogue: 4,0:21:06.76,0:21:08.43,Caption,,0,0,0,,If I am free to stop,
-Dialogue: 4,0:21:08.43,0:21:10.82,Caption,,0,0,0,,help me accept that freedom.
-Dialogue: 4,0:21:10.82,0:21:12.82,Caption,,0,0,0,,I ask for enough humility
-Dialogue: 4,0:21:12.82,0:21:15.55,Caption,,0,0,0,,to live as a person with limits.
-Dialogue: 4,0:21:15.55,0:21:17.48,Caption,,0,0,0,,Receive the work I completed
-Dialogue: 4,0:21:17.48,0:21:19.35,Caption,,0,0,0,,and the work that must wait
-Dialogue: 4,0:21:19.35,0:21:21.64,Caption,,0,0,0,,for another part of the day.
-Dialogue: 4,0:21:22.97,0:21:25.20,Caption,,0,0,0,,You can let the last sentence
-Dialogue: 4,0:21:25.20,0:21:27.37,Caption,,0,0,0,,fade without replacing it.
-Dialogue: 4,0:21:27.37,0:21:29.40,Caption,,0,0,0,,Notice the support beneath
-Dialogue: 4,0:21:29.40,0:21:30.99,Caption,,0,0,0,,your head or back.
-Dialogue: 4,0:21:30.99,0:21:34.00,Caption,,0,0,0,,There is no special rhythm to achieve.
-Dialogue: 4,0:21:34.00,0:21:35.22,Caption,,0,0,0,,You may be quiet
-Dialogue: 4,0:21:35.22,0:21:36.67,Caption,,0,0,0,,for a little while,
-Dialogue: 4,0:21:36.67,0:21:38.43,Caption,,0,0,0,,with nothing to explain
-Dialogue: 4,0:21:38.43,0:21:40.84,Caption,,0,0,0,,and no new concern to name.
-Dialogue: 5,0:21:43.67,0:21:45.47,Verse,,0,0,0,,{\pos(960,470)}Peace I leave with you,
-Dialogue: 5,0:21:45.47,0:21:47.60,Verse,,0,0,0,,{\pos(960,470)}my peace I give unto you:
-Dialogue: 5,0:21:47.60,0:21:49.65,Verse,,0,0,0,,{\pos(960,470)}not as the world giveth,
-Dialogue: 5,0:21:49.65,0:21:51.20,Verse,,0,0,0,,{\pos(960,470)}give I unto you.
-Dialogue: 4,0:21:51.20,0:21:53.56,Caption,,0,0,0,,Let not your heart be troubled,
-Dialogue: 4,0:21:53.56,0:21:55.81,Caption,,0,0,0,,neither let it be afraid.
-Dialogue: 4,0:21:57.14,0:21:59.12,Caption,,0,0,0,,Jesus speaks these words
-Dialogue: 4,0:21:59.12,0:22:01.68,Caption,,0,0,0,,to his disciples as they face a
-Dialogue: 4,0:22:01.68,0:22:03.34,Caption,,0,0,0,,difficult parting.
-Dialogue: 4,0:22:03.34,0:22:04.80,Caption,,0,0,0,,You can hear the care
-Dialogue: 4,0:22:04.80,0:22:06.93,Caption,,0,0,0,,in what he leaves with them.
-Dialogue: 4,0:22:06.93,0:22:09.40,Caption,,0,0,0,,His peace is offered amid a story
-Dialogue: 4,0:22:09.40,0:22:11.35,Caption,,0,0,0,,that still contains sorrow
-Dialogue: 4,0:22:11.35,0:22:12.72,Caption,,0,0,0,,and uncertainty.
-Dialogue: 4,0:22:12.72,0:22:15.26,Caption,,0,0,0,,You can bring your own unfinished
-Dialogue: 4,0:22:15.26,0:22:17.21,Caption,,0,0,0,,story near these words.
-Dialogue: 4,0:22:17.21,0:22:18.94,Caption,,0,0,0,,You do not need to know
-Dialogue: 4,0:22:18.94,0:22:20.40,Caption,,0,0,0,,its next chapter.
-Dialogue: 4,0:22:20.40,0:22:23.00,Caption,,0,0,0,,You can receive Christ’s invitation
-Dialogue: 4,0:22:23.00,0:22:25.16,Caption,,0,0,0,,as a gift addressed to people
-Dialogue: 4,0:22:25.16,0:22:27.96,Caption,,0,0,0,,who need his company and courage.
-Dialogue: 4,0:22:29.29,0:22:29.72,Caption,,0,0,0,,Jesus,
-Dialogue: 4,0:22:29.72,0:22:31.80,Caption,,0,0,0,,help me receive what you give
-Dialogue: 4,0:22:31.80,0:22:33.48,Caption,,0,0,0,,with a willing heart.
-Dialogue: 4,0:22:33.48,0:22:35.46,Caption,,0,0,0,,I have searched for peace
-Dialogue: 4,0:22:35.46,0:22:37.05,Caption,,0,0,0,,in a completed list,
-Dialogue: 4,0:22:37.05,0:22:38.71,Caption,,0,0,0,,an encouraging reply,
-Dialogue: 4,0:22:38.71,0:22:41.75,Caption,,0,0,0,,or knowing exactly what will happen.
-Dialogue: 4,0:22:41.75,0:22:43.66,Caption,,0,0,0,,Those things cannot carry
-Dialogue: 4,0:22:43.66,0:22:45.75,Caption,,0,0,0,,everything I ask of them.
-Dialogue: 4,0:22:45.75,0:22:48.00,Caption,,0,0,0,,I turn toward you now.
-Dialogue: 4,0:22:48.00,0:22:50.24,Caption,,0,0,0,,Stay with me in the uncertainty
-Dialogue: 4,0:22:50.24,0:22:51.18,Caption,,0,0,0,,that remains,
-Dialogue: 4,0:22:51.18,0:22:53.00,Caption,,0,0,0,,and teach me to recognize
-Dialogue: 4,0:22:53.00,0:22:55.32,Caption,,0,0,0,,your kindness through Scripture,
-Dialogue: 4,0:22:55.32,0:22:56.40,Caption,,0,0,0,,through prayer,
-Dialogue: 4,0:22:56.40,0:22:58.72,Caption,,0,0,0,,and through the people who offer
-Dialogue: 4,0:22:58.72,0:23:00.74,Caption,,0,0,0,,steady care in my life.
-Dialogue: 4,0:23:02.07,0:23:04.30,Caption,,0,0,0,,You can leave the unanswered
-Dialogue: 4,0:23:04.30,0:23:06.07,Caption,,0,0,0,,message where it is.
-Dialogue: 4,0:23:06.07,0:23:07.17,Caption,,0,0,0,,You have brought
-Dialogue: 4,0:23:07.17,0:23:08.81,Caption,,0,0,0,,the waiting into prayer,
-Dialogue: 4,0:23:08.81,0:23:10.12,Caption,,0,0,0,,and you do not need
-Dialogue: 4,0:23:10.12,0:23:12.01,Caption,,0,0,0,,to refresh the story now.
-Dialogue: 4,0:23:12.01,0:23:13.99,Caption,,0,0,0,,Somewhere beyond this room,
-Dialogue: 4,0:23:13.99,0:23:16.05,Caption,,0,0,0,,another person has their own
-Dialogue: 4,0:23:16.05,0:23:18.36,Caption,,0,0,0,,evening and their own limits.
-Dialogue: 4,0:23:18.36,0:23:20.94,Caption,,0,0,0,,You can let them have that space.
-Dialogue: 4,0:23:20.94,0:23:23.68,Caption,,0,0,0,,You can let yourself have this one.
-Dialogue: 4,0:23:23.68,0:23:24.80,Caption,,0,0,0,,For the moment,
-Dialogue: 4,0:23:24.80,0:23:26.52,Caption,,0,0,0,,your attention may rest
-Dialogue: 4,0:23:26.52,0:23:28.39,Caption,,0,0,0,,with words already given,
-Dialogue: 4,0:23:28.39,0:23:30.63,Caption,,0,0,0,,instead of words you are still
-Dialogue: 4,0:23:30.63,0:23:32.40,Caption,,0,0,0,,waiting to receive.
-Dialogue: 5,0:23:33.73,0:23:35.44,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve
-Dialogue: 5,0:23:35.44,0:23:37.04,Verse,,0,0,0,,{\pos(960,470)}thee from all evil:
-Dialogue: 5,0:23:37.04,0:23:39.80,Verse,,0,0,0,,{\pos(960,470)}he shall preserve thy soul.
-Dialogue: 4,0:23:41.14,0:23:43.80,Caption,,0,0,0,,The pilgrim’s song gives you language
-Dialogue: 4,0:23:43.80,0:23:46.28,Caption,,0,0,0,,for trusting the Lord as keeper.
-Dialogue: 4,0:23:46.28,0:23:49.03,Caption,,0,0,0,,You can hear its strong confidence
-Dialogue: 4,0:23:49.03,0:23:51.22,Caption,,0,0,0,,without using it to predict
-Dialogue: 4,0:23:51.22,0:23:53.34,Caption,,0,0,0,,the details of tomorrow.
-Dialogue: 4,0:23:53.34,0:23:55.94,Caption,,0,0,0,,The psalm turns your attention toward
-Dialogue: 4,0:23:55.94,0:23:58.51,Caption,,0,0,0,,the One to whom your life matters.
-Dialogue: 4,0:23:58.51,0:24:00.58,Caption,,0,0,0,,You can pray for protection
-Dialogue: 4,0:24:00.58,0:24:02.66,Caption,,0,0,0,,and still make wise choices
-Dialogue: 4,0:24:02.66,0:24:04.77,Caption,,0,0,0,,in the world you inhabit.
-Dialogue: 4,0:24:04.77,0:24:06.05,Caption,,0,0,0,,Here in this quiet
-Dialogue: 4,0:24:06.05,0:24:07.54,Caption,,0,0,0,,portion of the night,
-Dialogue: 4,0:24:07.54,0:24:09.25,Caption,,0,0,0,,you can place your whole
-Dialogue: 4,0:24:09.25,0:24:11.30,Caption,,0,0,0,,self within that prayer.
-Dialogue: 4,0:24:12.63,0:24:14.10,Caption,,0,0,0,,Keeper of my life,
-Dialogue: 4,0:24:14.10,0:24:15.80,Caption,,0,0,0,,I entrust the deepest
-Dialogue: 4,0:24:15.80,0:24:18.02,Caption,,0,0,0,,parts of me to your care.
-Dialogue: 4,0:24:18.02,0:24:20.01,Caption,,0,0,0,,Preserve what is tender from
-Dialogue: 4,0:24:20.01,0:24:22.10,Caption,,0,0,0,,becoming hard through fear.
-Dialogue: 4,0:24:22.10,0:24:24.57,Caption,,0,0,0,,Protect my willingness to love,
-Dialogue: 4,0:24:24.57,0:24:26.80,Caption,,0,0,0,,my desire to tell the truth,
-Dialogue: 4,0:24:26.80,0:24:29.92,Caption,,0,0,0,,and my readiness to ask for guidance.
-Dialogue: 4,0:24:29.92,0:24:32.28,Caption,,0,0,0,,Where I need a wise boundary,
-Dialogue: 4,0:24:32.28,0:24:34.18,Caption,,0,0,0,,help me recognize it.
-Dialogue: 4,0:24:34.18,0:24:37.08,Caption,,0,0,0,,Where I need a trustworthy companion,
-Dialogue: 4,0:24:37.08,0:24:38.84,Caption,,0,0,0,,help me welcome one.
-Dialogue: 4,0:24:38.84,0:24:41.09,Caption,,0,0,0,,I rest my hope in you beyond
-Dialogue: 4,0:24:41.09,0:24:42.38,Caption,,0,0,0,,the small circle
-Dialogue: 4,0:24:42.38,0:24:44.50,Caption,,0,0,0,,of what I can oversee.
-Dialogue: 5,0:24:45.83,0:24:47.76,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve thy
-Dialogue: 5,0:24:47.76,0:24:49.47,Verse,,0,0,0,,{\pos(960,470)}going out and thy coming
-Dialogue: 5,0:24:49.47,0:24:51.19,Verse,,0,0,0,,{\pos(960,470)}in from this time forth,
-Dialogue: 5,0:24:51.19,0:24:53.11,Verse,,0,0,0,,{\pos(960,470)}and even for evermore.
-Dialogue: 4,0:24:54.44,0:24:56.76,Caption,,0,0,0,,You have crossed doorways today,
-Dialogue: 4,0:24:56.76,0:24:59.16,Caption,,0,0,0,,entering places with things to do
-Dialogue: 4,0:24:59.16,0:25:02.24,Caption,,0,0,0,,and leaving them with things unfinished.
-Dialogue: 4,0:25:02.24,0:25:04.08,Caption,,0,0,0,,The psalm includes coming
-Dialogue: 4,0:25:04.08,0:25:06.77,Caption,,0,0,0,,and going in its language of care.
-Dialogue: 4,0:25:06.77,0:25:09.57,Caption,,0,0,0,,You can let that breadth comfort you.
-Dialogue: 4,0:25:09.57,0:25:11.96,Caption,,0,0,0,,Your life is more than the last
-Dialogue: 4,0:25:11.96,0:25:14.30,Caption,,0,0,0,,difficult moment before bed.
-Dialogue: 4,0:25:14.30,0:25:15.72,Caption,,0,0,0,,You are known across
-Dialogue: 4,0:25:15.72,0:25:18.00,Caption,,0,0,0,,the ordinary movements of a day,
-Dialogue: 4,0:25:18.00,0:25:20.35,Caption,,0,0,0,,and you can entrust the movements
-Dialogue: 4,0:25:20.35,0:25:22.85,Caption,,0,0,0,,still ahead without walking through
-Dialogue: 4,0:25:22.85,0:25:25.55,Caption,,0,0,0,,them in your imagination tonight.
-Dialogue: 4,0:25:26.88,0:25:27.26,Caption,,0,0,0,,Lord,
-Dialogue: 4,0:25:27.26,0:25:29.78,Caption,,0,0,0,,receive the journeys of this day,
-Dialogue: 4,0:25:29.78,0:25:31.15,Caption,,0,0,0,,the familiar roads
-Dialogue: 4,0:25:31.15,0:25:33.24,Caption,,0,0,0,,and the unexpected turns.
-Dialogue: 4,0:25:33.24,0:25:35.24,Caption,,0,0,0,,I thank you for places where
-Dialogue: 4,0:25:35.24,0:25:37.03,Caption,,0,0,0,,I was welcomed and people
-Dialogue: 4,0:25:37.03,0:25:38.99,Caption,,0,0,0,,whose presence helped me.
-Dialogue: 4,0:25:38.99,0:25:41.19,Caption,,0,0,0,,I bring the places that felt
-Dialogue: 4,0:25:41.19,0:25:42.78,Caption,,0,0,0,,difficult as well.
-Dialogue: 4,0:25:42.78,0:25:44.40,Caption,,0,0,0,,As I remain here now,
-Dialogue: 4,0:25:44.40,0:25:46.49,Caption,,0,0,0,,I release the need to visit
-Dialogue: 4,0:25:46.49,0:25:48.68,Caption,,0,0,0,,them all again in thought.
-Dialogue: 4,0:25:48.68,0:25:50.38,Caption,,0,0,0,,When it is time to go
-Dialogue: 4,0:25:50.38,0:25:52.32,Caption,,0,0,0,,out or come in tomorrow,
-Dialogue: 4,0:25:52.32,0:25:54.60,Caption,,0,0,0,,guide my choices with wisdom
-Dialogue: 4,0:25:54.60,0:25:56.81,Caption,,0,0,0,,and my words with care.
-Dialogue: 4,0:25:58.14,0:26:00.22,Caption,,0,0,0,,You may find that you have
-Dialogue: 4,0:26:00.22,0:26:01.49,Caption,,0,0,0,,fewer words now,
-Dialogue: 4,0:26:01.49,0:26:02.85,Caption,,0,0,0,,or you may notice
-Dialogue: 4,0:26:02.85,0:26:05.42,Caption,,0,0,0,,that your mind remains active.
-Dialogue: 4,0:26:05.42,0:26:06.24,Caption,,0,0,0,,Either way,
-Dialogue: 4,0:26:06.24,0:26:09.21,Caption,,0,0,0,,you can let the prayer become simpler.
-Dialogue: 4,0:26:09.21,0:26:12.06,Caption,,0,0,0,,You have already said much that matters.
-Dialogue: 4,0:26:12.06,0:26:14.56,Caption,,0,0,0,,You do not need to repeat every
-Dialogue: 4,0:26:14.56,0:26:16.57,Caption,,0,0,0,,concern to keep it within
-Dialogue: 4,0:26:16.57,0:26:18.04,Caption,,0,0,0,,God’s attention.
-Dialogue: 4,0:26:18.04,0:26:20.13,Caption,,0,0,0,,You can rest beside a single
-Dialogue: 4,0:26:20.13,0:26:22.06,Caption,,0,0,0,,truth from these readings,
-Dialogue: 4,0:26:22.06,0:26:24.82,Caption,,0,0,0,,allowing the rest of the conversation
-Dialogue: 4,0:26:24.82,0:26:27.21,Caption,,0,0,0,,to become quiet without bringing
-Dialogue: 4,0:26:27.21,0:26:29.57,Caption,,0,0,0,,it to a perfect conclusion.
-Dialogue: 4,0:26:30.90,0:26:31.44,Caption,,0,0,0,,Father,
-Dialogue: 4,0:26:31.44,0:26:33.31,Caption,,0,0,0,,I bring the urge to keep
-Dialogue: 4,0:26:33.31,0:26:34.96,Caption,,0,0,0,,counting the hours.
-Dialogue: 4,0:26:34.96,0:26:36.90,Caption,,0,0,0,,Sometimes I turn the clock
-Dialogue: 4,0:26:36.90,0:26:39.29,Caption,,0,0,0,,into another source of pressure,
-Dialogue: 4,0:26:39.29,0:26:41.86,Caption,,0,0,0,,measuring how well I am resting.
-Dialogue: 4,0:26:41.86,0:26:44.73,Caption,,0,0,0,,Help me step away from that judgment.
-Dialogue: 4,0:26:44.73,0:26:47.60,Caption,,0,0,0,,Give me patience for the present moment,
-Dialogue: 4,0:26:47.60,0:26:50.07,Caption,,0,0,0,,whether it is quiet or restless.
-Dialogue: 4,0:26:50.07,0:26:51.97,Caption,,0,0,0,,I ask for the rest I need
-Dialogue: 4,0:26:51.97,0:26:54.73,Caption,,0,0,0,,without bargaining with the night.
-Dialogue: 4,0:26:54.73,0:26:57.53,Caption,,0,0,0,,Receive my wish for an easier morning,
-Dialogue: 4,0:26:57.53,0:27:00.47,Caption,,0,0,0,,and help me meet whatever morning brings
-Dialogue: 4,0:27:00.47,0:27:03.32,Caption,,0,0,0,,with appropriate support and care.
-Dialogue: 5,0:27:04.65,0:27:05.60,Verse,,0,0,0,,{\pos(960,470)}Come unto me,
-Dialogue: 5,0:27:05.60,0:27:06.91,Verse,,0,0,0,,{\pos(960,470)}all ye that labour
-Dialogue: 5,0:27:06.91,0:27:08.37,Verse,,0,0,0,,{\pos(960,470)}and are heavy laden,
-Dialogue: 5,0:27:08.37,0:27:10.54,Verse,,0,0,0,,{\pos(960,470)}and I will give you rest.
-Dialogue: 4,0:27:11.87,0:27:14.87,Caption,,0,0,0,,The invitation begins with coming.
-Dialogue: 4,0:27:14.87,0:27:16.98,Caption,,0,0,0,,You can come with the weight
-Dialogue: 4,0:27:16.98,0:27:18.42,Caption,,0,0,0,,you actually carry,
-Dialogue: 4,0:27:18.42,0:27:20.38,Caption,,0,0,0,,even if you cannot explain
-Dialogue: 4,0:27:20.38,0:27:22.22,Caption,,0,0,0,,why it feels so heavy.
-Dialogue: 4,0:27:22.22,0:27:24.54,Caption,,0,0,0,,You can come after a productive
-Dialogue: 4,0:27:24.54,0:27:26.34,Caption,,0,0,0,,day or a day that seemed
-Dialogue: 4,0:27:26.34,0:27:28.09,Caption,,0,0,0,,to get away from you.
-Dialogue: 4,0:27:28.09,0:27:29.75,Caption,,0,0,0,,You can come with faith
-Dialogue: 4,0:27:29.75,0:27:31.15,Caption,,0,0,0,,that feels small.
-Dialogue: 4,0:27:31.15,0:27:33.56,Caption,,0,0,0,,You do not need to sort yourself
-Dialogue: 4,0:27:33.56,0:27:36.67,Caption,,0,0,0,,into a more acceptable condition first.
-Dialogue: 4,0:27:36.67,0:27:39.19,Caption,,0,0,0,,Let the welcome of Jesus have room
-Dialogue: 4,0:27:39.19,0:27:42.14,Caption,,0,0,0,,in the place where you are resting.
-Dialogue: 4,0:27:43.47,0:27:43.95,Caption,,0,0,0,,Jesus,
-Dialogue: 4,0:27:43.95,0:27:46.84,Caption,,0,0,0,,I answer your welcome with the small
-Dialogue: 4,0:27:46.84,0:27:49.60,Caption,,0,0,0,,amount of attention I have left.
-Dialogue: 4,0:27:49.60,0:27:51.65,Caption,,0,0,0,,I bring the weight of trying
-Dialogue: 4,0:27:51.65,0:27:54.32,Caption,,0,0,0,,to be ready for every possibility.
-Dialogue: 4,0:27:54.32,0:27:56.63,Caption,,0,0,0,,Teach me a life that receives
-Dialogue: 4,0:27:56.63,0:27:59.11,Caption,,0,0,0,,help and makes room for rest.
-Dialogue: 4,0:27:59.11,0:28:01.28,Caption,,0,0,0,,I leave the next step in its
-Dialogue: 4,0:28:01.28,0:28:03.39,Caption,,0,0,0,,appointed place tomorrow.
-Dialogue: 4,0:28:03.39,0:28:05.53,Caption,,0,0,0,,For these remaining moments,
-Dialogue: 4,0:28:05.53,0:28:08.09,Caption,,0,0,0,,let my prayer be uncomplicated:
-Dialogue: 4,0:28:08.09,0:28:09.74,Caption,,0,0,0,,I am here before you,
-Dialogue: 4,0:28:09.74,0:28:11.16,Caption,,0,0,0,,with my weariness,
-Dialogue: 4,0:28:11.16,0:28:13.59,Caption,,0,0,0,,trusting your invitation enough
-Dialogue: 4,0:28:13.59,0:28:16.93,Caption,,0,0,0,,to stop preparing another explanation.
-Dialogue: 4,0:28:18.26,0:28:19.94,Caption,,0,0,0,,You can leave tonight
-Dialogue: 4,0:28:19.94,0:28:21.54,Caption,,0,0,0,,unfinished in small,
-Dialogue: 4,0:28:21.54,0:28:22.84,Caption,,0,0,0,,ordinary ways.
-Dialogue: 4,0:28:22.84,0:28:25.15,Caption,,0,0,0,,The note can stay folded.
-Dialogue: 4,0:28:25.15,0:28:26.78,Caption,,0,0,0,,The message can remain
-Dialogue: 4,0:28:26.78,0:28:28.29,Caption,,0,0,0,,where you left it.
-Dialogue: 4,0:28:28.29,0:28:29.76,Caption,,0,0,0,,The question can wait
-Dialogue: 4,0:28:29.76,0:28:32.25,Caption,,0,0,0,,for the person who can answer it.
-Dialogue: 4,0:28:32.25,0:28:33.86,Caption,,0,0,0,,You have not forgotten
-Dialogue: 4,0:28:33.86,0:28:35.65,Caption,,0,0,0,,your responsibilities;
-Dialogue: 4,0:28:35.65,0:28:37.48,Caption,,0,0,0,,you have given one of them
-Dialogue: 4,0:28:37.48,0:28:38.92,Caption,,0,0,0,,a practical place.
-Dialogue: 4,0:28:38.92,0:28:40.97,Caption,,0,0,0,,Now you can allow the night
-Dialogue: 4,0:28:40.97,0:28:42.48,Caption,,0,0,0,,to contain something
-Dialogue: 4,0:28:42.48,0:28:44.18,Caption,,0,0,0,,besides preparation.
-Dialogue: 4,0:28:44.18,0:28:46.02,Caption,,0,0,0,,You can listen, be still,
-Dialogue: 4,0:28:46.02,0:28:48.44,Caption,,0,0,0,,and receive these moments without
-Dialogue: 4,0:28:48.44,0:28:51.51,Caption,,0,0,0,,turning them into another assignment.
-Dialogue: 4,0:28:52.84,0:28:53.36,Caption,,0,0,0,,Father,
-Dialogue: 4,0:28:53.36,0:28:55.38,Caption,,0,0,0,,I place this evening before
-Dialogue: 4,0:28:55.38,0:28:57.35,Caption,,0,0,0,,you just as it has been.
-Dialogue: 4,0:28:57.35,0:28:59.29,Caption,,0,0,0,,Thank you for hearing each
-Dialogue: 4,0:28:59.29,0:29:01.68,Caption,,0,0,0,,concern separately and receiving
-Dialogue: 4,0:29:01.68,0:29:04.10,Caption,,0,0,0,,the words I struggled to find.
-Dialogue: 4,0:29:04.10,0:29:06.82,Caption,,0,0,0,,Help me carry the practical commitment
-Dialogue: 4,0:29:06.82,0:29:09.44,Caption,,0,0,0,,into tomorrow when its time comes.
-Dialogue: 4,0:29:09.44,0:29:10.41,Caption,,0,0,0,,Until then,
-Dialogue: 4,0:29:10.41,0:29:13.14,Caption,,0,0,0,,I ask for a gentle heart toward
-Dialogue: 4,0:29:13.14,0:29:15.70,Caption,,0,0,0,,myself and those around me.
-Dialogue: 4,0:29:15.70,0:29:18.24,Caption,,0,0,0,,Let your care remain the thought
-Dialogue: 4,0:29:18.24,0:29:20.87,Caption,,0,0,0,,beside my unanswered questions.
-Dialogue: 4,0:29:20.87,0:29:23.70,Caption,,0,0,0,,I leave the conversation here for now,
-Dialogue: 4,0:29:23.70,0:29:26.36,Caption,,0,0,0,,held within your enduring love.
+Dialogue: 2,0:00:00.00,0:00:05.66,Hook,,0,0,0,,{\fad(0,250)}Before you check your\Nphone again tonight, give\NGod the worry you cannot\Nfix.
+Dialogue: 1,0:00:05.66,0:16:24.16,Brand,,0,0,0,,{\fad(300,0)}HeroVerse Prayer
+Dialogue: 3,0:00:50.28,0:00:55.23,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:00:50.28,0:00:55.23,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}1 Peter 5:7 (KJV)
+Dialogue: 3,0:02:39.28,0:02:46.72,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:02:39.28,0:02:46.72,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Philippians 4:6 (KJV)
+Dialogue: 3,0:04:34.87,0:04:42.87,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:04:34.87,0:04:42.87,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Philippians 4:7 (KJV)
+Dialogue: 3,0:06:28.00,0:06:35.55,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:06:28.00,0:06:35.55,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Matthew 6:34 (KJV)
+Dialogue: 3,0:08:59.04,0:09:04.38,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:08:59.04,0:09:04.38,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 94:19 (KJV)
+Dialogue: 3,0:10:56.96,0:11:04.60,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:10:56.96,0:11:04.60,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 26:3 (KJV)
+Dialogue: 3,0:14:14.31,0:14:22.50,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:14:14.31,0:14:22.50,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Proverbs 3:24 (KJV)
+Dialogue: 3,0:14:56.89,0:15:06.24,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:14:56.89,0:15:06.24,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 127:2 (KJV)
+Dialogue: 3,0:15:29.22,0:15:35.09,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:15:29.22,0:15:35.09,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 121:7 (KJV)
+Dialogue: 3,0:15:36.89,0:15:43.80,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:15:36.89,0:15:43.80,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 121:8 (KJV)
+Dialogue: 4,0:00:05.66,0:00:05.96,Caption,,0,0,0,,give God the worry you cannot fix.
+Dialogue: 4,0:00:05.96,0:00:07.93,Caption,,0,0,0,,Pray this with me.
+Dialogue: 4,0:00:08.68,0:00:10.62,Caption,,0,0,0,,Tonight we will pray through
+Dialogue: 4,0:00:10.62,0:00:12.77,Caption,,0,0,0,,the message you are waiting on,
+Dialogue: 4,0:00:12.77,0:00:14.57,Caption,,0,0,0,,the work you carried home,
+Dialogue: 4,0:00:14.57,0:00:15.27,Caption,,0,0,0,,the bills,
+Dialogue: 4,0:00:15.27,0:00:17.23,Caption,,0,0,0,,and the people you love.
+Dialogue: 4,0:00:17.23,0:00:18.60,Caption,,0,0,0,,Then Scripture will
+Dialogue: 4,0:00:18.60,0:00:20.61,Caption,,0,0,0,,carry you toward sleep.
+Dialogue: 4,0:00:21.36,0:00:23.48,Caption,,0,0,0,,You may have checked the same
+Dialogue: 4,0:00:23.48,0:00:25.09,Caption,,0,0,0,,message several times,
+Dialogue: 4,0:00:25.09,0:00:26.55,Caption,,0,0,0,,hoping a reply would
+Dialogue: 4,0:00:26.55,0:00:28.32,Caption,,0,0,0,,change how you feel.
+Dialogue: 4,0:00:28.32,0:00:30.44,Caption,,0,0,0,,You can put the phone within
+Dialogue: 4,0:00:30.44,0:00:32.95,Caption,,0,0,0,,reach but turn its face away.
+Dialogue: 4,0:00:32.95,0:00:35.35,Caption,,0,0,0,,Let the place where you are sitting
+Dialogue: 4,0:00:35.35,0:00:37.64,Caption,,0,0,0,,or lying support your weight.
+Dialogue: 4,0:00:37.64,0:00:40.63,Caption,,0,0,0,,You can arrive with a busy mind.
+Dialogue: 4,0:00:40.63,0:00:41.70,Caption,,0,0,0,,In this prayer,
+Dialogue: 4,0:00:41.70,0:00:44.49,Caption,,0,0,0,,you will name your concerns separately,
+Dialogue: 4,0:00:44.49,0:00:46.56,Caption,,0,0,0,,so you do not have to wrestle
+Dialogue: 4,0:00:46.56,0:00:49.13,Caption,,0,0,0,,with every uncertainty at once.
+Dialogue: 5,0:00:50.28,0:00:53.16,Verse,,0,0,0,,{\pos(960,470)}Casting all your care upon him;
+Dialogue: 5,0:00:53.16,0:00:55.58,Verse,,0,0,0,,{\pos(960,470)}for he careth for you.
+Dialogue: 4,0:00:57.03,0:00:57.57,Caption,,0,0,0,,Father,
+Dialogue: 4,0:00:57.57,0:00:59.42,Caption,,0,0,0,,I begin with the concern
+Dialogue: 4,0:00:59.42,0:01:01.49,Caption,,0,0,0,,closest to the surface.
+Dialogue: 4,0:01:01.49,0:01:02.84,Caption,,0,0,0,,I give it a plain
+Dialogue: 4,0:01:02.84,0:01:04.42,Caption,,0,0,0,,name before you.
+Dialogue: 4,0:01:04.42,0:01:07.01,Caption,,0,0,0,,It may be an unanswered message,
+Dialogue: 4,0:01:07.01,0:01:08.55,Caption,,0,0,0,,a decision at work,
+Dialogue: 4,0:01:08.55,0:01:12.10,Caption,,0,0,0,,or someone whose voice sounded troubled.
+Dialogue: 4,0:01:12.10,0:01:13.95,Caption,,0,0,0,,I have carried it through
+Dialogue: 4,0:01:13.95,0:01:16.17,Caption,,0,0,0,,dinner and into this room.
+Dialogue: 4,0:01:16.17,0:01:19.69,Caption,,0,0,0,,Now I bring it into our conversation.
+Dialogue: 4,0:01:19.69,0:01:21.17,Caption,,0,0,0,,Help me entrust this
+Dialogue: 4,0:01:21.17,0:01:22.86,Caption,,0,0,0,,particular care to you,
+Dialogue: 4,0:01:22.86,0:01:25.00,Caption,,0,0,0,,even before my feelings catch
+Dialogue: 4,0:01:25.00,0:01:27.64,Caption,,0,0,0,,up with the words I am praying.
+Dialogue: 4,0:01:28.79,0:01:29.20,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:01:29.20,0:01:30.68,Caption,,0,0,0,,I bring the answer
+Dialogue: 4,0:01:30.68,0:01:32.72,Caption,,0,0,0,,I cannot make arrive.
+Dialogue: 4,0:01:32.72,0:01:34.45,Caption,,0,0,0,,I have imagined reasons
+Dialogue: 4,0:01:34.45,0:01:36.56,Caption,,0,0,0,,for the silence and measured
+Dialogue: 4,0:01:36.56,0:01:39.20,Caption,,0,0,0,,the hours since I last checked.
+Dialogue: 4,0:01:39.20,0:01:41.58,Caption,,0,0,0,,Help me stop treating a missing
+Dialogue: 4,0:01:41.58,0:01:44.49,Caption,,0,0,0,,reply as a verdict about my worth.
+Dialogue: 4,0:01:44.49,0:01:46.21,Caption,,0,0,0,,If there is a sensible
+Dialogue: 4,0:01:46.21,0:01:47.61,Caption,,0,0,0,,time to follow up,
+Dialogue: 4,0:01:47.61,0:01:50.17,Caption,,0,0,0,,let me choose it in daylight.
+Dialogue: 4,0:01:50.17,0:01:51.48,Caption,,0,0,0,,For this evening,
+Dialogue: 4,0:01:51.48,0:01:53.03,Caption,,0,0,0,,receive both my hope
+Dialogue: 4,0:01:53.03,0:01:55.04,Caption,,0,0,0,,and my disappointment.
+Dialogue: 4,0:01:55.04,0:01:57.29,Caption,,0,0,0,,Hold the uncertainty I cannot
+Dialogue: 4,0:01:57.29,0:01:59.59,Caption,,0,0,0,,settle by checking again.
+Dialogue: 4,0:02:00.74,0:02:01.27,Caption,,0,0,0,,Father,
+Dialogue: 4,0:02:01.27,0:02:03.57,Caption,,0,0,0,,help me make one kind boundary
+Dialogue: 4,0:02:03.57,0:02:06.24,Caption,,0,0,0,,with the stream of information.
+Dialogue: 4,0:02:06.24,0:02:08.80,Caption,,0,0,0,,Let necessary messages remain
+Dialogue: 4,0:02:08.80,0:02:11.44,Caption,,0,0,0,,available without making every
+Dialogue: 4,0:02:11.44,0:02:14.48,Caption,,0,0,0,,notification my responsibility.
+Dialogue: 4,0:02:14.48,0:02:17.38,Caption,,0,0,0,,I ask for wisdom about the difference
+Dialogue: 4,0:02:17.38,0:02:19.19,Caption,,0,0,0,,between being reachable
+Dialogue: 4,0:02:19.19,0:02:21.84,Caption,,0,0,0,,and being constantly on watch.
+Dialogue: 4,0:02:21.84,0:02:25.18,Caption,,0,0,0,,If no urgent duty requires my attention,
+Dialogue: 4,0:02:25.18,0:02:28.24,Caption,,0,0,0,,help me let the phone grow quiet.
+Dialogue: 4,0:02:28.24,0:02:29.75,Caption,,0,0,0,,I give you the impulse
+Dialogue: 4,0:02:29.75,0:02:31.81,Caption,,0,0,0,,to search for one more update,
+Dialogue: 4,0:02:31.81,0:02:33.59,Caption,,0,0,0,,and the fear that stopping
+Dialogue: 4,0:02:33.59,0:02:35.87,Caption,,0,0,0,,means I have stopped caring.
+Dialogue: 4,0:02:37.02,0:02:39.28,Caption,,0,0,0,,Be careful for nothing;
+Dialogue: 5,0:02:39.28,0:02:41.30,Verse,,0,0,0,,{\pos(960,470)}but in every thing by prayer
+Dialogue: 5,0:02:41.30,0:02:44.05,Verse,,0,0,0,,{\pos(960,470)}and supplication with thanksgiving let
+Dialogue: 5,0:02:44.05,0:02:47.07,Verse,,0,0,0,,{\pos(960,470)}your requests be made known unto God.
+Dialogue: 4,0:02:48.52,0:02:48.91,Caption,,0,0,0,,Next,
+Dialogue: 4,0:02:48.91,0:02:50.44,Caption,,0,0,0,,we set down the work
+Dialogue: 4,0:02:50.44,0:02:52.54,Caption,,0,0,0,,that followed you home.
+Dialogue: 4,0:02:53.09,0:02:53.47,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:02:53.47,0:02:55.20,Caption,,0,0,0,,I name the work concern
+Dialogue: 4,0:02:55.20,0:02:57.15,Caption,,0,0,0,,that followed me home.
+Dialogue: 4,0:02:57.15,0:02:59.22,Caption,,0,0,0,,There is something I sent,
+Dialogue: 4,0:02:59.22,0:03:00.73,Caption,,0,0,0,,something I missed,
+Dialogue: 4,0:03:00.73,0:03:02.17,Caption,,0,0,0,,or something I may
+Dialogue: 4,0:03:02.17,0:03:04.06,Caption,,0,0,0,,be asked to explain.
+Dialogue: 4,0:03:04.06,0:03:06.07,Caption,,0,0,0,,Help me separate the actual
+Dialogue: 4,0:03:06.07,0:03:08.00,Caption,,0,0,0,,facts from the harsh story
+Dialogue: 4,0:03:08.00,0:03:10.23,Caption,,0,0,0,,I am telling about myself.
+Dialogue: 4,0:03:10.23,0:03:11.60,Caption,,0,0,0,,If I made an error,
+Dialogue: 4,0:03:11.60,0:03:14.06,Caption,,0,0,0,,give me the honesty to acknowledge
+Dialogue: 4,0:03:14.06,0:03:16.82,Caption,,0,0,0,,it and the patience to correct it.
+Dialogue: 4,0:03:16.82,0:03:19.43,Caption,,0,0,0,,Tonight I hand over the imagined
+Dialogue: 4,0:03:19.43,0:03:21.64,Caption,,0,0,0,,meeting that keeps starting
+Dialogue: 4,0:03:21.64,0:03:23.70,Caption,,0,0,0,,again inside my head.
+Dialogue: 4,0:03:24.85,0:03:25.38,Caption,,0,0,0,,Father,
+Dialogue: 4,0:03:25.38,0:03:27.27,Caption,,0,0,0,,make the next useful step
+Dialogue: 4,0:03:27.27,0:03:29.54,Caption,,0,0,0,,clear enough to recognize.
+Dialogue: 4,0:03:29.54,0:03:32.16,Caption,,0,0,0,,Perhaps I need to check a number,
+Dialogue: 4,0:03:32.16,0:03:33.35,Caption,,0,0,0,,ask a question,
+Dialogue: 4,0:03:33.35,0:03:35.16,Caption,,0,0,0,,or explain a delay.
+Dialogue: 4,0:03:35.16,0:03:37.74,Caption,,0,0,0,,I do not need to rehearse every
+Dialogue: 4,0:03:37.74,0:03:40.96,Caption,,0,0,0,,response another person might give.
+Dialogue: 4,0:03:40.96,0:03:43.11,Caption,,0,0,0,,Help me prepare what is mine
+Dialogue: 4,0:03:43.11,0:03:45.10,Caption,,0,0,0,,to prepare and leave their
+Dialogue: 4,0:03:45.10,0:03:47.55,Caption,,0,0,0,,reaction outside my control.
+Dialogue: 4,0:03:47.55,0:03:50.95,Caption,,0,0,0,,Receive my desire to do good work.
+Dialogue: 4,0:03:50.95,0:03:52.57,Caption,,0,0,0,,Let that desire become
+Dialogue: 4,0:03:52.57,0:03:54.50,Caption,,0,0,0,,steady attention tomorrow,
+Dialogue: 4,0:03:54.50,0:03:56.27,Caption,,0,0,0,,rather than another hour
+Dialogue: 4,0:03:56.27,0:03:58.61,Caption,,0,0,0,,of self-punishment tonight.
+Dialogue: 4,0:03:59.76,0:04:00.08,Caption,,0,0,0,,God,
+Dialogue: 4,0:04:00.08,0:04:03.05,Caption,,0,0,0,,I remember a moment today when someone
+Dialogue: 4,0:04:03.05,0:04:05.70,Caption,,0,0,0,,made a difficult thing easier.
+Dialogue: 4,0:04:05.70,0:04:08.23,Caption,,0,0,0,,Perhaps they answered patiently,
+Dialogue: 4,0:04:08.23,0:04:09.18,Caption,,0,0,0,,held a door,
+Dialogue: 4,0:04:09.18,0:04:12.10,Caption,,0,0,0,,or let me start a sentence again.
+Dialogue: 4,0:04:12.10,0:04:15.66,Caption,,0,0,0,,Thank you for that ordinary generosity.
+Dialogue: 4,0:04:15.66,0:04:17.43,Caption,,0,0,0,,Thank you for the ability
+Dialogue: 4,0:04:17.43,0:04:19.56,Caption,,0,0,0,,to ask for help and for people
+Dialogue: 4,0:04:19.56,0:04:21.49,Caption,,0,0,0,,who have helped before.
+Dialogue: 4,0:04:21.49,0:04:23.85,Caption,,0,0,0,,I bring this memory alongside
+Dialogue: 4,0:04:23.85,0:04:25.78,Caption,,0,0,0,,the unfinished work.
+Dialogue: 4,0:04:25.78,0:04:27.74,Caption,,0,0,0,,My day contained more than
+Dialogue: 4,0:04:27.74,0:04:30.24,Caption,,0,0,0,,the moment I keep regretting;
+Dialogue: 4,0:04:30.24,0:04:31.73,Caption,,0,0,0,,help me remember it
+Dialogue: 4,0:04:31.73,0:04:33.72,Caption,,0,0,0,,with greater honesty.
+Dialogue: 5,0:04:34.87,0:04:36.46,Verse,,0,0,0,,{\pos(960,470)}And the peace of God,
+Dialogue: 5,0:04:36.46,0:04:38.87,Verse,,0,0,0,,{\pos(960,470)}which passeth all understanding,
+Dialogue: 5,0:04:38.87,0:04:40.53,Verse,,0,0,0,,{\pos(960,470)}shall keep your hearts
+Dialogue: 5,0:04:40.53,0:04:43.22,Verse,,0,0,0,,{\pos(960,470)}and minds through Christ Jesus.
+Dialogue: 4,0:04:44.67,0:04:47.23,Caption,,0,0,0,,Stay with me a little longer.
+Dialogue: 4,0:04:47.23,0:04:49.50,Caption,,0,0,0,,Now we bring the money worry
+Dialogue: 4,0:04:49.50,0:04:52.19,Caption,,0,0,0,,that grows louder after dark.
+Dialogue: 4,0:04:52.74,0:04:53.28,Caption,,0,0,0,,Father,
+Dialogue: 4,0:04:53.28,0:04:55.45,Caption,,0,0,0,,I name the household expense
+Dialogue: 4,0:04:55.45,0:04:57.99,Caption,,0,0,0,,that has been pressing on me.
+Dialogue: 4,0:04:57.99,0:05:00.30,Caption,,0,0,0,,I bring the bill, the estimate,
+Dialogue: 4,0:05:00.30,0:05:02.98,Caption,,0,0,0,,or the balance I need to review.
+Dialogue: 4,0:05:02.98,0:05:04.57,Caption,,0,0,0,,Give me clear judgment
+Dialogue: 4,0:05:04.57,0:05:06.68,Caption,,0,0,0,,when I look at the facts.
+Dialogue: 4,0:05:06.68,0:05:08.83,Caption,,0,0,0,,Help me ask about arrangements
+Dialogue: 4,0:05:08.83,0:05:10.06,Caption,,0,0,0,,when I need them,
+Dialogue: 4,0:05:10.06,0:05:12.21,Caption,,0,0,0,,and speak honestly with anyone
+Dialogue: 4,0:05:12.21,0:05:14.74,Caption,,0,0,0,,who shares this responsibility.
+Dialogue: 4,0:05:14.74,0:05:17.13,Caption,,0,0,0,,I place these practical concerns
+Dialogue: 4,0:05:17.13,0:05:20.12,Caption,,0,0,0,,before you without inventing a certainty
+Dialogue: 4,0:05:20.12,0:05:22.59,Caption,,0,0,0,,about how they will turn out.
+Dialogue: 4,0:05:22.59,0:05:25.85,Caption,,0,0,0,,Guide my next responsible choice.
+Dialogue: 4,0:05:27.00,0:05:27.39,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:05:27.39,0:05:29.12,Caption,,0,0,0,,I release the midnight
+Dialogue: 4,0:05:29.12,0:05:31.64,Caption,,0,0,0,,calculations that repeat without
+Dialogue: 4,0:05:31.64,0:05:33.99,Caption,,0,0,0,,giving me new information.
+Dialogue: 4,0:05:33.99,0:05:34.73,Caption,,0,0,0,,Tomorrow,
+Dialogue: 4,0:05:34.73,0:05:37.01,Caption,,0,0,0,,help me set aside a definite
+Dialogue: 4,0:05:37.01,0:05:38.89,Caption,,0,0,0,,time to look carefully,
+Dialogue: 4,0:05:38.89,0:05:41.25,Caption,,0,0,0,,with paper, accurate figures,
+Dialogue: 4,0:05:41.25,0:05:44.00,Caption,,0,0,0,,and whatever advice is needed.
+Dialogue: 4,0:05:44.00,0:05:46.94,Caption,,0,0,0,,Keep shame from isolating me.
+Dialogue: 4,0:05:46.94,0:05:48.89,Caption,,0,0,0,,Let courage take the form
+Dialogue: 4,0:05:48.89,0:05:49.98,Caption,,0,0,0,,of a call made
+Dialogue: 4,0:05:49.98,0:05:51.83,Caption,,0,0,0,,or a question asked.
+Dialogue: 4,0:05:51.83,0:05:54.04,Caption,,0,0,0,,Tonight I give you my fear
+Dialogue: 4,0:05:54.04,0:05:55.58,Caption,,0,0,0,,of falling behind,
+Dialogue: 4,0:05:55.58,0:05:58.64,Caption,,0,0,0,,and ask for companionship and wisdom
+Dialogue: 4,0:05:58.64,0:06:01.21,Caption,,0,0,0,,as I address what is real.
+Dialogue: 4,0:06:02.36,0:06:03.92,Caption,,0,0,0,,You can pause before
+Dialogue: 4,0:06:03.92,0:06:05.86,Caption,,0,0,0,,naming anything else.
+Dialogue: 4,0:06:05.86,0:06:07.33,Caption,,0,0,0,,Feel where your hands
+Dialogue: 4,0:06:07.33,0:06:08.89,Caption,,0,0,0,,have come to rest.
+Dialogue: 4,0:06:08.89,0:06:10.96,Caption,,0,0,0,,You do not need to move them
+Dialogue: 4,0:06:10.96,0:06:13.03,Caption,,0,0,0,,into a special position.
+Dialogue: 4,0:06:13.03,0:06:16.10,Caption,,0,0,0,,Let an ordinary breath come and go.
+Dialogue: 4,0:06:16.10,0:06:17.50,Caption,,0,0,0,,For these moments,
+Dialogue: 4,0:06:17.50,0:06:19.67,Caption,,0,0,0,,you can leave the unfinished
+Dialogue: 4,0:06:19.67,0:06:21.80,Caption,,0,0,0,,calculation unfinished.
+Dialogue: 4,0:06:24.76,0:06:26.01,Caption,,0,0,0,,Take therefore no
+Dialogue: 4,0:06:26.01,0:06:28.00,Caption,,0,0,0,,thought for the morrow:
+Dialogue: 5,0:06:28.00,0:06:30.05,Verse,,0,0,0,,{\pos(960,470)}for the morrow shall take thought
+Dialogue: 5,0:06:30.05,0:06:31.90,Verse,,0,0,0,,{\pos(960,470)}for the things of itself.
+Dialogue: 5,0:06:31.90,0:06:33.86,Verse,,0,0,0,,{\pos(960,470)}Sufficient unto the day
+Dialogue: 5,0:06:33.86,0:06:35.90,Verse,,0,0,0,,{\pos(960,470)}is the evil thereof.
+Dialogue: 4,0:06:37.35,0:06:37.86,Caption,,0,0,0,,Father,
+Dialogue: 4,0:06:37.86,0:06:41.02,Caption,,0,0,0,,I name the appointment on the calendar.
+Dialogue: 4,0:06:41.02,0:06:42.71,Caption,,0,0,0,,I bring the questions
+Dialogue: 4,0:06:42.71,0:06:45.03,Caption,,0,0,0,,I hope to ask and the answers
+Dialogue: 4,0:06:45.03,0:06:46.93,Caption,,0,0,0,,I am afraid to hear.
+Dialogue: 4,0:06:46.93,0:06:48.68,Caption,,0,0,0,,Help me bring any notes
+Dialogue: 4,0:06:48.68,0:06:50.20,Caption,,0,0,0,,or documents I need,
+Dialogue: 4,0:06:50.20,0:06:52.34,Caption,,0,0,0,,and seek appropriate support
+Dialogue: 4,0:06:52.34,0:06:54.62,Caption,,0,0,0,,if I want someone with me.
+Dialogue: 4,0:06:54.62,0:06:58.07,Caption,,0,0,0,,I place the unknown parts before you.
+Dialogue: 4,0:06:58.07,0:07:00.24,Caption,,0,0,0,,Give me courage for the actual
+Dialogue: 4,0:07:00.24,0:07:01.91,Caption,,0,0,0,,hour when it comes.
+Dialogue: 4,0:07:01.91,0:07:04.72,Caption,,0,0,0,,I release the demand to experience
+Dialogue: 4,0:07:04.72,0:07:08.30,Caption,,0,0,0,,that hour many times before it arrives.
+Dialogue: 4,0:07:09.45,0:07:10.28,Caption,,0,0,0,,In a moment,
+Dialogue: 4,0:07:10.28,0:07:12.21,Caption,,0,0,0,,we pray for the person whose
+Dialogue: 4,0:07:12.21,0:07:14.84,Caption,,0,0,0,,trouble you are carrying tonight.
+Dialogue: 4,0:07:15.38,0:07:15.75,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:07:15.75,0:07:17.42,Caption,,0,0,0,,I name the person whose
+Dialogue: 4,0:07:17.42,0:07:19.25,Caption,,0,0,0,,trouble weighs on me.
+Dialogue: 4,0:07:19.25,0:07:21.29,Caption,,0,0,0,,I wish I could know exactly
+Dialogue: 4,0:07:21.29,0:07:23.03,Caption,,0,0,0,,what they need and make
+Dialogue: 4,0:07:23.03,0:07:24.99,Caption,,0,0,0,,their next day easier.
+Dialogue: 4,0:07:24.99,0:07:27.00,Caption,,0,0,0,,Help me listen to what they
+Dialogue: 4,0:07:27.00,0:07:28.57,Caption,,0,0,0,,actually tell me.
+Dialogue: 4,0:07:28.57,0:07:30.93,Caption,,0,0,0,,Keep my concern from becoming
+Dialogue: 4,0:07:30.93,0:07:33.91,Caption,,0,0,0,,pressure for them to reassure me.
+Dialogue: 4,0:07:33.91,0:07:35.40,Caption,,0,0,0,,Show me a practical
+Dialogue: 4,0:07:35.40,0:07:37.66,Caption,,0,0,0,,kindness within my reach.
+Dialogue: 4,0:07:37.66,0:07:39.89,Caption,,0,0,0,,As I leave the rest with you,
+Dialogue: 4,0:07:39.89,0:07:41.04,Caption,,0,0,0,,teach me a love
+Dialogue: 4,0:07:41.04,0:07:43.04,Caption,,0,0,0,,that respects their voice,
+Dialogue: 4,0:07:43.04,0:07:44.11,Caption,,0,0,0,,their choices,
+Dialogue: 4,0:07:44.11,0:07:45.84,Caption,,0,0,0,,and my own limits.
+Dialogue: 4,0:07:46.99,0:07:47.55,Caption,,0,0,0,,Father,
+Dialogue: 4,0:07:47.55,0:07:49.36,Caption,,0,0,0,,I name the conversation
+Dialogue: 4,0:07:49.36,0:07:51.32,Caption,,0,0,0,,that ended awkwardly.
+Dialogue: 4,0:07:51.32,0:07:52.63,Caption,,0,0,0,,There was a look
+Dialogue: 4,0:07:52.63,0:07:54.02,Caption,,0,0,0,,I could not read,
+Dialogue: 4,0:07:54.02,0:07:56.72,Caption,,0,0,0,,a sentence I wish I had softened,
+Dialogue: 4,0:07:56.72,0:07:59.80,Caption,,0,0,0,,or a silence I did not understand.
+Dialogue: 4,0:07:59.80,0:08:01.49,Caption,,0,0,0,,Help me resist filling
+Dialogue: 4,0:08:01.49,0:08:03.72,Caption,,0,0,0,,that silence with accusations
+Dialogue: 4,0:08:03.72,0:08:06.41,Caption,,0,0,0,,against myself or someone else.
+Dialogue: 4,0:08:06.41,0:08:08.33,Caption,,0,0,0,,Where I owe an apology,
+Dialogue: 4,0:08:08.33,0:08:11.21,Caption,,0,0,0,,let it be sincere and specific.
+Dialogue: 4,0:08:11.21,0:08:13.52,Caption,,0,0,0,,Where I need clarification,
+Dialogue: 4,0:08:13.52,0:08:15.44,Caption,,0,0,0,,help me ask kindly.
+Dialogue: 4,0:08:15.44,0:08:17.42,Caption,,0,0,0,,I surrender the imaginary
+Dialogue: 4,0:08:17.42,0:08:19.73,Caption,,0,0,0,,versions of that conversation
+Dialogue: 4,0:08:19.73,0:08:22.14,Caption,,0,0,0,,that cannot give me truth.
+Dialogue: 4,0:08:23.30,0:08:23.67,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:08:23.67,0:08:25.40,Caption,,0,0,0,,I accept responsibility
+Dialogue: 4,0:08:25.40,0:08:27.88,Caption,,0,0,0,,for the words that were mine.
+Dialogue: 4,0:08:27.88,0:08:30.76,Caption,,0,0,0,,I ask your forgiveness where I used
+Dialogue: 4,0:08:30.76,0:08:34.03,Caption,,0,0,0,,tiredness as an excuse to be unkind.
+Dialogue: 4,0:08:34.03,0:08:37.00,Caption,,0,0,0,,Help me make repair without demanding
+Dialogue: 4,0:08:37.00,0:08:39.88,Caption,,0,0,0,,immediate reassurance in return.
+Dialogue: 4,0:08:39.88,0:08:42.04,Caption,,0,0,0,,If another person needs time,
+Dialogue: 4,0:08:42.04,0:08:44.80,Caption,,0,0,0,,give me patience with their pace.
+Dialogue: 4,0:08:44.80,0:08:45.44,Caption,,0,0,0,,Tonight,
+Dialogue: 4,0:08:45.44,0:08:48.15,Caption,,0,0,0,,let remorse point toward an honest
+Dialogue: 4,0:08:48.15,0:08:51.31,Caption,,0,0,0,,action instead of an endless replay.
+Dialogue: 4,0:08:51.31,0:08:53.09,Caption,,0,0,0,,I place the relationship
+Dialogue: 4,0:08:53.09,0:08:54.95,Caption,,0,0,0,,in your care while I wait
+Dialogue: 4,0:08:54.95,0:08:57.89,Caption,,0,0,0,,for an appropriate moment to speak.
+Dialogue: 5,0:08:59.04,0:09:01.94,Verse,,0,0,0,,{\pos(960,470)}In the multitude of my thoughts within
+Dialogue: 5,0:09:01.94,0:09:04.72,Verse,,0,0,0,,{\pos(960,470)}me thy comforts delight my soul.
+Dialogue: 4,0:09:06.17,0:09:08.55,Caption,,0,0,0,,Next comes the voice that judges
+Dialogue: 4,0:09:08.55,0:09:10.93,Caption,,0,0,0,,you when the house is quiet.
+Dialogue: 4,0:09:10.93,0:09:13.63,Caption,,0,0,0,,We will bring that to God too.
+Dialogue: 4,0:09:14.18,0:09:14.50,Caption,,0,0,0,,God,
+Dialogue: 4,0:09:14.50,0:09:17.18,Caption,,0,0,0,,I name the judgment I keep passing
+Dialogue: 4,0:09:17.18,0:09:20.64,Caption,,0,0,0,,on myself when everything becomes quiet.
+Dialogue: 4,0:09:20.64,0:09:22.07,Caption,,0,0,0,,I hear that I should
+Dialogue: 4,0:09:22.07,0:09:23.20,Caption,,0,0,0,,have known more,
+Dialogue: 4,0:09:23.20,0:09:24.20,Caption,,0,0,0,,finished more,
+Dialogue: 4,0:09:24.20,0:09:26.34,Caption,,0,0,0,,or handled the day better.
+Dialogue: 4,0:09:26.34,0:09:28.57,Caption,,0,0,0,,Help me learn from what happened
+Dialogue: 4,0:09:28.57,0:09:31.51,Caption,,0,0,0,,without treating myself with contempt.
+Dialogue: 4,0:09:31.51,0:09:33.90,Caption,,0,0,0,,Show me the difference between
+Dialogue: 4,0:09:33.90,0:09:36.21,Caption,,0,0,0,,correction that helps me grow
+Dialogue: 4,0:09:36.21,0:09:39.62,Caption,,0,0,0,,and accusation that only wears me down.
+Dialogue: 4,0:09:39.62,0:09:41.39,Caption,,0,0,0,,I ask for the humility
+Dialogue: 4,0:09:41.39,0:09:42.68,Caption,,0,0,0,,to be a learner,
+Dialogue: 4,0:09:42.68,0:09:44.29,Caption,,0,0,0,,with room to receive
+Dialogue: 4,0:09:44.29,0:09:46.26,Caption,,0,0,0,,mercy and try again.
+Dialogue: 4,0:09:47.41,0:09:47.98,Caption,,0,0,0,,Father,
+Dialogue: 4,0:09:47.98,0:09:49.71,Caption,,0,0,0,,I bring my tired body
+Dialogue: 4,0:09:49.71,0:09:52.06,Caption,,0,0,0,,into this prayer as well.
+Dialogue: 4,0:09:52.06,0:09:54.99,Caption,,0,0,0,,I notice the tension I carried through
+Dialogue: 4,0:09:54.99,0:09:57.92,Caption,,0,0,0,,the day and the impatience I sometimes
+Dialogue: 4,0:09:57.92,0:10:00.23,Caption,,0,0,0,,feel toward my own limits.
+Dialogue: 4,0:10:00.23,0:10:02.64,Caption,,0,0,0,,Help me respond with care.
+Dialogue: 4,0:10:02.64,0:10:04.78,Caption,,0,0,0,,Guide me toward appropriate
+Dialogue: 4,0:10:04.78,0:10:06.36,Caption,,0,0,0,,help when I need it,
+Dialogue: 4,0:10:06.36,0:10:07.86,Caption,,0,0,0,,and toward ordinary
+Dialogue: 4,0:10:07.86,0:10:10.13,Caption,,0,0,0,,habits that support rest.
+Dialogue: 4,0:10:10.13,0:10:12.09,Caption,,0,0,0,,I am not asking my body
+Dialogue: 4,0:10:12.09,0:10:14.59,Caption,,0,0,0,,to prove my faith tonight.
+Dialogue: 4,0:10:14.59,0:10:16.83,Caption,,0,0,0,,I ask to treat it as something
+Dialogue: 4,0:10:16.83,0:10:19.57,Caption,,0,0,0,,entrusted to me with tenderness.
+Dialogue: 4,0:10:20.72,0:10:21.13,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:10:21.13,0:10:23.60,Caption,,0,0,0,,when the same concern returns,
+Dialogue: 4,0:10:23.60,0:10:25.95,Caption,,0,0,0,,help me answer it gently.
+Dialogue: 4,0:10:25.95,0:10:28.47,Caption,,0,0,0,,I have named it before you.
+Dialogue: 4,0:10:28.47,0:10:30.40,Caption,,0,0,0,,I have considered whether
+Dialogue: 4,0:10:30.40,0:10:32.93,Caption,,0,0,0,,anything requires action now.
+Dialogue: 4,0:10:32.93,0:10:35.26,Caption,,0,0,0,,If there is no new information
+Dialogue: 4,0:10:35.26,0:10:37.59,Caption,,0,0,0,,and no present responsibility,
+Dialogue: 4,0:10:37.59,0:10:40.38,Caption,,0,0,0,,help me stop reopening the case.
+Dialogue: 4,0:10:40.38,0:10:43.94,Caption,,0,0,0,,Receive my repeated turning toward you.
+Dialogue: 4,0:10:43.94,0:10:46.58,Caption,,0,0,0,,Teach me a patient trust that can
+Dialogue: 4,0:10:46.58,0:10:48.98,Caption,,0,0,0,,be practiced in small moments,
+Dialogue: 4,0:10:48.98,0:10:51.14,Caption,,0,0,0,,without demanding a perfect
+Dialogue: 4,0:10:51.14,0:10:53.30,Caption,,0,0,0,,feeling or an uninterrupted
+Dialogue: 4,0:10:53.30,0:10:55.81,Caption,,0,0,0,,silence inside my thoughts.
+Dialogue: 5,0:10:56.96,0:10:59.81,Verse,,0,0,0,,{\pos(960,470)}Thou wilt keep him in perfect peace,
+Dialogue: 5,0:10:59.81,0:11:02.40,Verse,,0,0,0,,{\pos(960,470)}whose mind is stayed on thee:
+Dialogue: 5,0:11:02.40,0:11:04.95,Verse,,0,0,0,,{\pos(960,470)}because he trusteth in thee.
+Dialogue: 4,0:11:06.40,0:11:07.36,Caption,,0,0,0,,Faithful God,
+Dialogue: 4,0:11:07.36,0:11:09.87,Caption,,0,0,0,,I place my trust in your character
+Dialogue: 4,0:11:09.87,0:11:11.86,Caption,,0,0,0,,rather than the strength of
+Dialogue: 4,0:11:11.86,0:11:13.42,Caption,,0,0,0,,my concentration.
+Dialogue: 4,0:11:13.42,0:11:17.00,Caption,,0,0,0,,I know how easily my attention wanders.
+Dialogue: 4,0:11:17.00,0:11:19.02,Caption,,0,0,0,,Help me return to what is true
+Dialogue: 4,0:11:19.02,0:11:20.93,Caption,,0,0,0,,about you with patience.
+Dialogue: 4,0:11:20.93,0:11:23.49,Caption,,0,0,0,,Keep me from using this prayer as
+Dialogue: 4,0:11:23.49,0:11:26.50,Caption,,0,0,0,,another task to perform flawlessly.
+Dialogue: 4,0:11:26.50,0:11:28.10,Caption,,0,0,0,,I want to become more
+Dialogue: 4,0:11:28.10,0:11:29.93,Caption,,0,0,0,,honest in your presence,
+Dialogue: 4,0:11:29.93,0:11:32.15,Caption,,0,0,0,,more willing to receive help,
+Dialogue: 4,0:11:32.15,0:11:34.89,Caption,,0,0,0,,and more able to leave an unanswered
+Dialogue: 4,0:11:34.89,0:11:37.11,Caption,,0,0,0,,question without following it
+Dialogue: 4,0:11:37.11,0:11:39.82,Caption,,0,0,0,,through every imagined outcome.
+Dialogue: 4,0:11:40.97,0:11:42.01,Caption,,0,0,0,,We are almost
+Dialogue: 4,0:11:42.01,0:11:43.98,Caption,,0,0,0,,at the place of rest.
+Dialogue: 4,0:11:43.98,0:11:44.46,Caption,,0,0,0,,First,
+Dialogue: 4,0:11:44.46,0:11:46.04,Caption,,0,0,0,,a few words of trust
+Dialogue: 4,0:11:46.04,0:11:47.57,Caption,,0,0,0,,to say with me.
+Dialogue: 4,0:11:48.12,0:11:49.89,Caption,,0,0,0,,I can be honest about
+Dialogue: 4,0:11:49.89,0:11:51.62,Caption,,0,0,0,,what troubles me.
+Dialogue: 4,0:11:51.62,0:11:53.58,Caption,,0,0,0,,I can ask for help before
+Dialogue: 4,0:11:53.58,0:11:56.30,Caption,,0,0,0,,I reach the end of my strength.
+Dialogue: 4,0:11:56.30,0:11:58.34,Caption,,0,0,0,,I can make a plan without
+Dialogue: 4,0:11:58.34,0:12:00.61,Caption,,0,0,0,,predicting every result.
+Dialogue: 4,0:12:00.61,0:12:03.49,Caption,,0,0,0,,I can care for another person without
+Dialogue: 4,0:12:03.49,0:12:06.05,Caption,,0,0,0,,carrying their entire future.
+Dialogue: 4,0:12:06.05,0:12:07.75,Caption,,0,0,0,,I can leave a message
+Dialogue: 4,0:12:07.75,0:12:09.85,Caption,,0,0,0,,unanswered for a time when
+Dialogue: 4,0:12:09.85,0:12:12.26,Caption,,0,0,0,,no urgent need is present.
+Dialogue: 4,0:12:12.26,0:12:14.30,Caption,,0,0,0,,God receives the concern
+Dialogue: 4,0:12:14.30,0:12:16.51,Caption,,0,0,0,,I can name and the concern
+Dialogue: 4,0:12:16.51,0:12:19.24,Caption,,0,0,0,,I cannot yet put into words.
+Dialogue: 4,0:12:20.39,0:12:22.18,Caption,,0,0,0,,Make this small commitment
+Dialogue: 4,0:12:22.18,0:12:24.55,Caption,,0,0,0,,before the readings for sleep:
+Dialogue: 4,0:12:24.55,0:12:26.78,Caption,,0,0,0,,choose one concern that needs
+Dialogue: 4,0:12:26.78,0:12:28.25,Caption,,0,0,0,,attention tomorrow,
+Dialogue: 4,0:12:28.25,0:12:30.17,Caption,,0,0,0,,and give it one practical
+Dialogue: 4,0:12:30.17,0:12:32.08,Caption,,0,0,0,,next step and a time.
+Dialogue: 4,0:12:32.08,0:12:33.45,Caption,,0,0,0,,You might decide,
+Dialogue: 4,0:12:33.45,0:12:34.81,Caption,,0,0,0,,“After breakfast,
+Dialogue: 4,0:12:34.81,0:12:37.06,Caption,,0,0,0,,I will call about the bill.”
+Dialogue: 4,0:12:37.06,0:12:38.90,Caption,,0,0,0,,If you need a reminder,
+Dialogue: 4,0:12:38.90,0:12:41.37,Caption,,0,0,0,,write only that short line.
+Dialogue: 4,0:12:41.37,0:12:43.44,Caption,,0,0,0,,Then close the note.
+Dialogue: 4,0:12:43.44,0:12:45.78,Caption,,0,0,0,,You have given your responsibility
+Dialogue: 4,0:12:45.78,0:12:47.16,Caption,,0,0,0,,a place in tomorrow,
+Dialogue: 4,0:12:47.16,0:12:49.22,Caption,,0,0,0,,so you can stop trying to keep
+Dialogue: 4,0:12:49.22,0:12:51.92,Caption,,0,0,0,,it alive by rehearsing it tonight.
+Dialogue: 4,0:12:53.06,0:12:53.64,Caption,,0,0,0,,Father,
+Dialogue: 4,0:12:53.64,0:12:55.43,Caption,,0,0,0,,I commit this one step
+Dialogue: 4,0:12:55.43,0:12:57.36,Caption,,0,0,0,,and its time to you.
+Dialogue: 4,0:12:57.36,0:13:00.25,Caption,,0,0,0,,Help me follow through with the strength
+Dialogue: 4,0:13:00.25,0:13:02.80,Caption,,0,0,0,,and information available then.
+Dialogue: 4,0:13:02.80,0:13:03.79,Caption,,0,0,0,,For tonight,
+Dialogue: 4,0:13:03.79,0:13:06.70,Caption,,0,0,0,,I will leave the note closed unless
+Dialogue: 4,0:13:06.70,0:13:10.07,Caption,,0,0,0,,a genuine need changes the situation.
+Dialogue: 4,0:13:10.07,0:13:11.86,Caption,,0,0,0,,When I want to reopen it
+Dialogue: 4,0:13:11.86,0:13:13.56,Caption,,0,0,0,,merely to feel certain,
+Dialogue: 4,0:13:13.56,0:13:15.12,Caption,,0,0,0,,remind me of the care
+Dialogue: 4,0:13:15.12,0:13:16.98,Caption,,0,0,0,,I have already taken.
+Dialogue: 4,0:13:16.98,0:13:19.43,Caption,,0,0,0,,Bless this modest act of trust,
+Dialogue: 4,0:13:19.43,0:13:21.56,Caption,,0,0,0,,and guide me in the quieter
+Dialogue: 4,0:13:21.56,0:13:23.33,Caption,,0,0,0,,hours that follow.
+Dialogue: 4,0:13:24.48,0:13:26.45,Caption,,0,0,0,,If you want to affirm this
+Dialogue: 4,0:13:26.45,0:13:28.19,Caption,,0,0,0,,prayer in the comments,
+Dialogue: 4,0:13:28.19,0:13:29.32,Caption,,0,0,0,,write amen.
+Dialogue: 4,0:13:29.32,0:13:30.58,Caption,,0,0,0,,You can also leave
+Dialogue: 4,0:13:30.58,0:13:32.19,Caption,,0,0,0,,a prayer request there,
+Dialogue: 4,0:13:32.19,0:13:34.35,Caption,,0,0,0,,and in our next night prayer we
+Dialogue: 4,0:13:34.35,0:13:37.30,Caption,,0,0,0,,will pray over the requests you share.
+Dialogue: 4,0:13:37.30,0:13:38.83,Caption,,0,0,0,,Now let the Scripture
+Dialogue: 4,0:13:38.83,0:13:41.28,Caption,,0,0,0,,readings accompany your rest.
+Dialogue: 4,0:13:42.23,0:13:44.20,Caption,,0,0,0,,You can let your eyes settle
+Dialogue: 4,0:13:44.20,0:13:46.60,Caption,,0,0,0,,wherever they are comfortable.
+Dialogue: 4,0:13:46.60,0:13:47.31,Caption,,0,0,0,,From here,
+Dialogue: 4,0:13:47.31,0:13:48.85,Caption,,0,0,0,,the pace stays gentle,
+Dialogue: 4,0:13:48.85,0:13:50.54,Caption,,0,0,0,,with Scripture and short
+Dialogue: 4,0:13:50.54,0:13:52.39,Caption,,0,0,0,,prayers for the night.
+Dialogue: 4,0:13:52.39,0:13:54.26,Caption,,0,0,0,,You do not need to keep
+Dialogue: 4,0:13:54.26,0:13:56.42,Caption,,0,0,0,,a list of the passages.
+Dialogue: 4,0:13:56.42,0:13:59.13,Caption,,0,0,0,,You can receive one sentence and let
+Dialogue: 4,0:13:59.13,0:14:01.84,Caption,,0,0,0,,the next arrive when it arrives.
+Dialogue: 4,0:14:01.84,0:14:03.85,Caption,,0,0,0,,The concern you set down
+Dialogue: 4,0:14:03.85,0:14:06.15,Caption,,0,0,0,,has a next step already.
+Dialogue: 4,0:14:06.15,0:14:07.69,Caption,,0,0,0,,You may leave it there
+Dialogue: 4,0:14:07.69,0:14:08.88,Caption,,0,0,0,,while you listen,
+Dialogue: 4,0:14:08.88,0:14:10.62,Caption,,0,0,0,,without checking the time
+Dialogue: 4,0:14:10.62,0:14:12.86,Caption,,0,0,0,,or measuring your progress.
+Dialogue: 5,0:14:14.31,0:14:16.09,Verse,,0,0,0,,{\pos(960,470)}When thou liest down,
+Dialogue: 5,0:14:16.09,0:14:18.51,Verse,,0,0,0,,{\pos(960,470)}thou shalt not be afraid:
+Dialogue: 5,0:14:18.51,0:14:20.36,Verse,,0,0,0,,{\pos(960,470)}yea, thou shalt lie down,
+Dialogue: 5,0:14:20.36,0:14:22.85,Verse,,0,0,0,,{\pos(960,470)}and thy sleep shall be sweet.
+Dialogue: 4,0:14:24.30,0:14:24.72,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:14:24.72,0:14:27.14,Caption,,0,0,0,,I receive this ordinary place
+Dialogue: 4,0:14:27.14,0:14:29.36,Caption,,0,0,0,,of rest with gratitude.
+Dialogue: 4,0:14:29.36,0:14:30.90,Caption,,0,0,0,,Help me stop treating
+Dialogue: 4,0:14:30.90,0:14:32.87,Caption,,0,0,0,,the bedside as a desk where
+Dialogue: 4,0:14:32.87,0:14:35.29,Caption,,0,0,0,,every problem must be solved.
+Dialogue: 4,0:14:35.29,0:14:37.34,Caption,,0,0,0,,Let the blanket be a blanket
+Dialogue: 4,0:14:37.34,0:14:39.39,Caption,,0,0,0,,and the pillow a pillow.
+Dialogue: 4,0:14:39.39,0:14:40.60,Caption,,0,0,0,,I ask for rest,
+Dialogue: 4,0:14:40.60,0:14:42.38,Caption,,0,0,0,,and I leave the manner
+Dialogue: 4,0:14:42.38,0:14:45.11,Caption,,0,0,0,,and timing outside my command.
+Dialogue: 4,0:14:45.11,0:14:47.18,Caption,,0,0,0,,Give me patience with this
+Dialogue: 4,0:14:47.18,0:14:49.08,Caption,,0,0,0,,night as it unfolds.
+Dialogue: 4,0:14:49.08,0:14:51.19,Caption,,0,0,0,,May I meet my own weariness
+Dialogue: 4,0:14:51.19,0:14:53.14,Caption,,0,0,0,,with the kindness I would
+Dialogue: 4,0:14:53.14,0:14:55.44,Caption,,0,0,0,,offer someone dear to me.
+Dialogue: 5,0:14:56.89,0:14:57.70,Verse,,0,0,0,,{\pos(960,470)}It is vain
+Dialogue: 5,0:14:57.70,0:14:59.71,Verse,,0,0,0,,{\pos(960,470)}for you to rise up early,
+Dialogue: 5,0:14:59.71,0:15:00.91,Verse,,0,0,0,,{\pos(960,470)}to sit up late,
+Dialogue: 5,0:15:00.91,0:15:03.46,Verse,,0,0,0,,{\pos(960,470)}to eat the bread of sorrows:
+Dialogue: 5,0:15:03.46,0:15:06.59,Verse,,0,0,0,,{\pos(960,470)}for so he giveth his beloved sleep.
+Dialogue: 4,0:15:08.04,0:15:10.27,Caption,,0,0,0,,You can let the last sentence
+Dialogue: 4,0:15:10.27,0:15:12.56,Caption,,0,0,0,,fade without replacing it.
+Dialogue: 4,0:15:12.56,0:15:14.59,Caption,,0,0,0,,Notice the support beneath
+Dialogue: 4,0:15:14.59,0:15:16.30,Caption,,0,0,0,,your head or back.
+Dialogue: 4,0:15:16.30,0:15:19.44,Caption,,0,0,0,,There is no special rhythm to achieve.
+Dialogue: 4,0:15:19.44,0:15:20.66,Caption,,0,0,0,,You may be quiet
+Dialogue: 4,0:15:20.66,0:15:22.10,Caption,,0,0,0,,for a little while,
+Dialogue: 4,0:15:22.10,0:15:23.86,Caption,,0,0,0,,with nothing to explain
+Dialogue: 4,0:15:23.86,0:15:26.27,Caption,,0,0,0,,and no new concern to name.
+Dialogue: 5,0:15:29.22,0:15:30.95,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve
+Dialogue: 5,0:15:30.95,0:15:32.68,Verse,,0,0,0,,{\pos(960,470)}thee from all evil:
+Dialogue: 5,0:15:32.68,0:15:35.44,Verse,,0,0,0,,{\pos(960,470)}he shall preserve thy soul.
+Dialogue: 5,0:15:36.89,0:15:38.81,Verse,,0,0,0,,{\pos(960,470)}The LORD shall preserve thy
+Dialogue: 5,0:15:38.81,0:15:40.52,Verse,,0,0,0,,{\pos(960,470)}going out and thy coming
+Dialogue: 5,0:15:40.52,0:15:42.23,Verse,,0,0,0,,{\pos(960,470)}in from this time forth,
+Dialogue: 5,0:15:42.23,0:15:44.15,Verse,,0,0,0,,{\pos(960,470)}and even for evermore.
+Dialogue: 4,0:15:45.60,0:15:46.12,Caption,,0,0,0,,Father,
+Dialogue: 4,0:15:46.12,0:15:48.15,Caption,,0,0,0,,I place this evening before
+Dialogue: 4,0:15:48.15,0:15:50.25,Caption,,0,0,0,,you just as it has been.
+Dialogue: 4,0:15:50.25,0:15:52.19,Caption,,0,0,0,,Thank you for hearing each
+Dialogue: 4,0:15:52.19,0:15:54.58,Caption,,0,0,0,,concern separately and receiving
+Dialogue: 4,0:15:54.58,0:15:57.12,Caption,,0,0,0,,the words I struggled to find.
+Dialogue: 4,0:15:57.12,0:15:59.84,Caption,,0,0,0,,Help me carry the practical commitment
+Dialogue: 4,0:15:59.84,0:16:02.56,Caption,,0,0,0,,into tomorrow when its time comes.
+Dialogue: 4,0:16:02.56,0:16:03.53,Caption,,0,0,0,,Until then,
+Dialogue: 4,0:16:03.53,0:16:06.25,Caption,,0,0,0,,I ask for a gentle heart toward
+Dialogue: 4,0:16:06.25,0:16:08.92,Caption,,0,0,0,,myself and those around me.
+Dialogue: 4,0:16:08.92,0:16:11.46,Caption,,0,0,0,,Let your care remain the thought
+Dialogue: 4,0:16:11.46,0:16:14.22,Caption,,0,0,0,,beside my unanswered questions.
+Dialogue: 4,0:16:14.22,0:16:17.05,Caption,,0,0,0,,I leave the conversation here for now,
+Dialogue: 4,0:16:17.05,0:16:19.71,Caption,,0,0,0,,held within your enduring love.

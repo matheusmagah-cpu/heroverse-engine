@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-010",
- "output_sha256": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f",
+ "output_sha256": "c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -31,49 +31,50 @@
   "cta_short_and_not_early": true,
   "persistent_overlays_only_brand": true,
   "images_open_licence_with_revision": true,
-  "no_third_party_footage": true,
+  "footage_picture_share": true,
+  "footage_licensed_vetted_and_credited": true,
   "music_owned": true,
   "voice_model_pinned": true
  },
- "criteria_version": "pilot-qa-criteria-v3",
+ "criteria_version": "pilot-qa-criteria-v4",
  "measurements": {
-  "duration_seconds": 1770.69,
+  "duration_seconds": 984.16,
   "loudness": {
    "integrated_lufs": -15.6,
-   "loudness_range_lu": 2.8,
-   "true_peak_dbtp": -2.8
+   "loudness_range_lu": 3.0,
+   "true_peak_dbtp": -2.6
   },
-  "speech_presence": 0.899,
-  "music_presence": 0.378,
-  "wer_vs_script": 0.0318,
-  "accepted_words_per_minute": 131.0,
-  "caption_lines": 822,
-  "holds": 62,
-  "first_word_seconds": 0.02,
+  "speech_presence": 0.863,
+  "music_presence": 0.399,
+  "wer_vs_script": 0.025,
+  "accepted_words_per_minute": 127.0,
+  "caption_lines": 447,
+  "holds": 178,
+  "first_word_seconds": 0.14,
   "editing": {
-   "picture_changes": 670,
-   "picture_changes_per_minute": 22.7,
-   "median_shot_seconds": 2.2,
-   "longest_shot_seconds": 30.0,
-   "motion_median_top_decile_diff": 1.007
+   "picture_changes": 421,
+   "picture_changes_per_minute": 25.67,
+   "median_shot_seconds": 1.817,
+   "longest_shot_seconds": 13.7,
+   "motion_median_top_decile_diff": 1.603
   },
   "colour": {
-   "mean_brightness": 0.1929,
-   "brightness_std_over_time": 0.1106,
-   "mean_saturation": 0.6129,
-   "saturation_std_over_time": 0.1579
+   "mean_brightness": 0.2659,
+   "brightness_std_over_time": 0.122,
+   "mean_saturation": 0.4674,
+   "saturation_std_over_time": 0.2011
   },
   "rhythm": {
-   "audio_onsets": 2922,
-   "audio_onsets_per_minute": 99.01,
+   "audio_onsets": 1545,
+   "audio_onsets_per_minute": 94.19,
    "tempo": {
-    "bpm": 50.52,
-    "confidence": 0.012
+    "bpm": 91.08,
+    "confidence": 0.016
    }
   }
  },
- "transcript_head": "Good evening. Before you check again, pray through tonight's worries and place each concern in God's care. You may have checked the same message several times, hoping a reply would change how you feel. You can put the foam within reach, but turn its face away. Let the place where you are sitting or lying support your weight. You can arrive with a busy mind. In this prayer, you will your concerns s",
- "criteria_sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+ "transcript_head": "Before you check your phone again tonight, give God the worry you cannot fix. Pray this with me. Tonight we will pray through the message you are waiting on, the work you carried home, the bills, and the people you love. Then scripture will carry you towards sleep. You may have checked the same message several times, hoping a reply would change how you feel. can put the foam within reach, but turn",
+ "criteria_sha256": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
  "publication_performed": false
