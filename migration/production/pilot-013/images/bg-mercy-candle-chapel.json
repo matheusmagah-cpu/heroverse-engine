@@ -1,0 +1,28 @@
+{
+ "id": "bg-mercy-candle-chapel",
+ "prompt": "A quiet empty chapel interior with rows of softly glowing candles and moonlight falling through tall arched windows, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.9,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-013-img-bg-mercy-candle-chapel-sha256-08f12191405fedd395b23362c2389f316b3ebc1198f5a3251b4d2497578b28f4.png",
+ "sha256": "08f12191405fedd395b23362c2389f316b3ebc1198f5a3251b4d2497578b28f4"
+}

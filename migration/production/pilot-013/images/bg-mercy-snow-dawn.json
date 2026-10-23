@@ -1,0 +1,28 @@
+{
+ "id": "bg-mercy-snow-dawn",
+ "prompt": "Fresh white snow covering a quiet valley at first light, soft pink sky and a calm frozen stream, pure and peaceful, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.9,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-013-img-bg-mercy-snow-dawn-sha256-7eacea8b84122840f7868100336b016101b50f5b178d42b881edf20f910af67a.png",
+ "sha256": "7eacea8b84122840f7868100336b016101b50f5b178d42b881edf20f910af67a"
+}

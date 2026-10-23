@@ -1,0 +1,28 @@
+{
+ "id": "bg-mercy-east-west-horizon",
+ "prompt": "A vast open plain at twilight, the last golden light fading in the west and the first stars rising in the east, an endless calm horizon, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 3.2,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-013-img-bg-mercy-east-west-horizon-sha256-9409239aa2b9a4206f3dfcbd7a54bb3231563008e4bbbc0dc0668616b43a51dc.png",
+ "sha256": "9409239aa2b9a4206f3dfcbd7a54bb3231563008e4bbbc0dc0668616b43a51dc"
+}
