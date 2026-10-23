@@ -1,0 +1,28 @@
+{
+ "id": "bg-waiting-alpine-lake",
+ "prompt": "A still alpine lake reflecting snow-capped mountains at dawn, soft pink and gold sky, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  2048,
+  2048
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.8,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (downsampled to 2x)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-011-img-bg-waiting-alpine-lake-sha256-4de3da2b9e1b4d20c264f8527f92127953cd25f4ebdb477ccf816b7a308bc9c9.png",
+ "sha256": "4de3da2b9e1b4d20c264f8527f92127953cd25f4ebdb477ccf816b7a308bc9c9"
+}
