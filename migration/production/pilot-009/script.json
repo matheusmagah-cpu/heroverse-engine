@@ -22,6 +22,12 @@
    "text": "Before you walk out the door this morning, put on God's whole armor. Pray it with me now."
   },
   {
+   "id": "roadmap",
+   "beat": "roadmap: name what we will pray for, then where it ends (R13)",
+   "pause_after": 0.8,
+   "text": "We will put on each piece of the armor, truth, peace, faith, and salvation, and pray it over the conversations and the work ahead of you today."
+  },
+  {
    "id": "invitation",
    "beat": "settle into the coming day",
    "pause_after": 1.0,
@@ -67,6 +73,12 @@
    "text": "God of mercy, guard the way I look at people today. When I disagree with someone, keep me from reducing that person to an obstacle or a threat. Help me resist cruelty, deception, and injustice without cultivating hatred. Give me discernment to recognize harmful behavior and courage to establish a needed boundary. Teach me to protect what is good while remembering the humanity of those involved. Where anger has narrowed my vision, make room for wise counsel, fair questions, and the possibility that I have more to learn."
   },
   {
+   "id": "rehook-1",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Next, what standing firm looks like in an ordinary day."
+  },
+  {
    "id": "scripture-stand",
    "beat": "anchor: stand faithfully",
    "pause_after": 1.3,
@@ -105,6 +117,12 @@
    "beat": "prayer: a concrete change of direction",
    "pause_after": 1.0,
    "text": "God, I place before you the habit that keeps drawing me away from honesty and love. I will not rename it to make it harmless. Help me recognize the moment when I usually surrender to it: the idle minute, the injured pride, the private screen, the wish to escape discomfort. Give me wisdom to change what I can change around that moment. Help me seek appropriate support instead of relying on secrecy. Let this new morning become an opportunity to turn toward the light through one real and manageable act of obedience."
+  },
+  {
+   "id": "rehook-2",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Stay with me. Next, peace for every doorway you will walk through today."
   },
   {
    "id": "scripture-peace",
@@ -154,6 +172,12 @@
    "text": "God, help me receive courage with a thoughtful mind and a loving heart. When I feel afraid, let me bring that feeling to you without shame. Guide me toward the information, preparation, and support the situation requires. Help me read the instructions, ask the useful question, and allow enough time for the journey. Keep me from confusing confidence with carelessness. If I need assistance, let me request it plainly. Shape a courage that can admit uncertainty, learn from others, and still take the next responsible step in your presence."
   },
   {
+   "id": "rehook-3",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Next, the helmet and the sword, for the thoughts that try to tell you who you are."
+  },
+  {
    "id": "scripture-salvation-word",
    "beat": "anchor: helmet of salvation and sword of the Spirit",
    "pause_after": 1.3,
@@ -179,6 +203,12 @@
    "beat": "prayer: widen attention to other believers",
    "pause_after": 1.0,
    "text": "Father, widen this prayer beyond my own schedule. I remember those who begin today carrying grief, those responsible for difficult decisions, and those whose labor is easily overlooked. Strengthen believers who face hostility, loneliness, or discouragement. Give wisdom to the people serving their communities and caring for those in need. Bring trustworthy support to people who feel isolated. Show me whether I can become part of an answer through a practical act of care. Keep me watchful for needs that are close enough for me to notice and respond to today."
+  },
+  {
+   "id": "rehook-4",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Before you go, hear the words of courage God spoke to Joshua. They are for you too."
   },
   {
    "id": "scripture-courage",
@@ -236,7 +266,7 @@
    "id": "cta",
    "beat": "one optional amen-only response after prayer payoff",
    "pause_after": 1.0,
-   "text": "If you would like to join this prayer, you can write Amen."
+   "text": "If you would like to join this prayer, you can write Amen. You can also leave a prayer request in the comments, and in our next morning prayer we will pray over the requests you share."
   },
   {
    "id": "closing",

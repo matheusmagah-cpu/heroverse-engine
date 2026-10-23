@@ -21,6 +21,12 @@
       "pause_after": 0.7
     },
     {
+      "id": "roadmap",
+      "beat": "roadmap: name what we will pray for, then where it ends (R13)",
+      "pause_after": 0.8,
+      "text": "We will pray through Isaiah forty for your tired body, your first hour, the answer you are waiting for, and the strength to take one real step."
+    },
+    {
       "id": "invitation",
       "beat": "invitation: arrive as you are and settle the body",
       "text": "You may have opened your eyes already wishing for more rest. Let your shoulders settle, wherever you are. You can keep your eyes open and your breathing easy. You can join each prayer in your own voice or listen quietly. Bring the tiredness you actually feel. You have room here to begin honestly.",
@@ -65,6 +71,12 @@
       "pause_after": 1.0
     },
     {
+      "id": "rehook-1",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Next, a verse that admits even the strongest grow tired."
+    },
+    {
       "id": "scripture-human-limits",
       "beat": "anchor: Isaiah 40:30, ordinary human strength has limits",
       "text": "Even the youths shall faint and be weary, and the young men shall utterly fall:",
@@ -107,6 +119,12 @@
       "beat": "prayer: return attention from checking to present responsibilities",
       "text": "Lord, I have sometimes watched for an answer so closely that the rest of the morning disappears. Give me discernment about when to check again and when to put the screen aside. Help me use the interval well. There is a person I can listen to, a room I can care for, a small piece of work I can finish. Let patient trust restore some space in my attention for the life that is happening around me.",
       "pause_after": 1.0
+    },
+    {
+      "id": "rehook-2",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Stay with me. Next, the prayer you have prayed many times."
     },
     {
       "id": "prayer-unanswered",
@@ -154,6 +172,12 @@
       "pause_after": 1.0
     },
     {
+      "id": "rehook-3",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Next, help for the practical needs this day will bring."
+    },
+    {
       "id": "scripture-refuge",
       "beat": "anchor: Psalm 46:1, present help in trouble",
       "text": "God is our refuge and strength, a very present help in trouble.",
@@ -191,6 +215,12 @@
       "beat": "prayer: seek faithfulness through a prolonged difficulty",
       "text": "Jesus, I place before you the difficulty that has lasted longer than I expected. I have learned details about it I never wanted to learn. Meet me with your grace in the routines it requires. Keep discouragement from making every decision for me. Help me recognize a useful adjustment, a wise companion, and a good moment when one comes. I ask for endurance that stays tender toward others and for a faith that can speak honestly about weariness.",
       "pause_after": 1.0
+    },
+    {
+      "id": "rehook-4",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "We are near the end. One more promise about strength before you choose your step."
     },
     {
       "id": "scripture-portion",
@@ -238,7 +268,7 @@
     {
       "id": "cta",
       "beat": "single optional amen-only response after the payoff",
-      "text": "If this prayer expresses what you are bringing to God today, you are welcome to write Amen.",
+      "text": "If this prayer expresses what you are bringing to God today, you are welcome to write Amen. You can also leave a prayer request in the comments, and in our next morning prayer we will pray over the requests you share.",
       "pause_after": 1.0
     },
     {

@@ -81,6 +81,31 @@ def hook_problems(text):
     return problems
 
 
+ROADMAP_MAX_S = 30      # R13: say what we will pray for within the first 30 s (promise, then commitment)
+REHOOK_MAX_GAP_S = 210  # R13: preview the next prayer at least every 3.5 min until the commitment
+REQUEST_INVITE = re.compile(r"(?i)prayer request")
+
+
+def continuity_problems(segs):
+    """R13 (research 2026-10-23): a roadmap within 30 s, a re-hook at least every 3.5 min until the commitment or
+    payoff, and a spoken invitation to leave a prayer request that the next prayer of the same series answers."""
+    problems, starts, t = [], {}, 0.0
+    for x in segs:
+        starts.setdefault(x.get("id", ""), t)
+        t += len(words(x.get("text", ""))) / WPM * 60 + float(x.get("pause_after", 0))
+    if "roadmap" not in starts or starts["roadmap"] > ROADMAP_MAX_S:
+        problems.append(f"ROADMAP_MISSING_OR_LATE (R13: within {ROADMAP_MAX_S} s)")
+    end = min((starts[k] for k in ("commitment", "payoff") if k in starts), default=t)
+    marks = sorted([starts.get("roadmap", 0.0)] + [v for k, v in starts.items() if k.startswith("rehook")] + [end])
+    gaps = [b - a for a, b in zip(marks, marks[1:]) if b <= end]
+    if gaps and max(gaps) > REHOOK_MAX_GAP_S:
+        problems.append(f"REHOOK_GAP {max(gaps):.0f} s > {REHOOK_MAX_GAP_S} s (R13)")
+    cta = " ".join(x.get("text", "") for x in segs if x.get("id") == "cta")
+    if not REQUEST_INVITE.search(cta):
+        problems.append("PRAYER_REQUEST_INVITE_MISSING (R13)")
+    return problems
+
+
 def check(pilot_dir, production=None):
     d = Path(pilot_dir)
     production = Path(production) if production else d.parent
@@ -125,6 +150,7 @@ def check(pilot_dir, production=None):
         problems.append(f"HOOK_TOO_LONG {len(words(segs[0].get('text', '')))} words > {HOOK_MAX_WORDS} (promise spoken by 8 s)")
     if s.get("footage") and segs and ids[0] == "hook":
         problems += hook_problems(segs[0].get("text", ""))
+        problems += continuity_problems(segs)
     t, first_prayer = 0.0, None
     for x in segs:
         if x.get("id", "").startswith("prayer"):

@@ -21,6 +21,12 @@
    "text": "Before you sleep tonight, let God's mercy wash away today's regrets. Pray this with me now."
   },
   {
+   "id": "roadmap",
+   "beat": "roadmap: name what we will pray for, then where it ends (R13)",
+   "pause_after": 0.8,
+   "text": "Tonight we will name today's regrets honestly, receive God's pardon, take one step of repair, and forgive what was done to you. Then Scripture will carry you toward sleep."
+  },
+  {
    "id": "invitation",
    "beat": "invitation",
    "pause_after": 1.2,
@@ -58,6 +64,12 @@
    "text": "Father, I also bring what I avoided. There was a task I postponed because it felt uncomfortable, and a conversation I steered away from because I was afraid of how it might go. Sometimes my failures are quiet ones, a kindness I withheld or a duty I left for someone else. Forgive me for the good I could have done and did not. Make me braver in small and honest ways."
   },
   {
+   "id": "rehook-1",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Next, a psalm that shows what happens when we stop hiding."
+  },
+  {
    "id": "scripture-psalm-acknowledged",
    "beat": "scripture psalm acknowledged",
    "pause_after": 1.5,
@@ -81,6 +93,12 @@
    "beat": "prayer receiving pardon",
    "pause_after": 1.2,
    "text": "Father, help me actually receive what I have asked for. I tend to ask for forgiveness and then keep punishing myself anyway, as though your answer were not enough. If you have forgiven me, I do not need to keep the sentence running in my head. Teach me to trust your word more than my lingering shame. Let this pardon settle into the places where I usually hold my breath."
+  },
+  {
+   "id": "rehook-2",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "If you have confessed this before, stay with me. The next words are for you."
   },
   {
    "id": "reflection-same-again",
@@ -115,6 +133,12 @@
    "text": "Let that sentence stay with you for a moment. God is greater than your heart. You do not need to add anything to it or argue with it. Simply breathe at your own pace, and notice that you are still here, still loved, still being spoken to with kindness."
   },
   {
+   "id": "rehook-3",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "In a moment, we pray for the person you may need to make things right with."
+  },
+  {
    "id": "prayer-repair-person",
    "beat": "prayer repair person",
    "pause_after": 1.2,
@@ -140,6 +164,12 @@
    "reference": "Ephesians 4:32 (KJV)"
   },
   {
+   "id": "rehook-4",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Next comes the harder prayer: the person who hurt you."
+  },
+  {
    "id": "prayer-someone-hurt-me",
    "beat": "prayer someone hurt me",
    "pause_after": 1.2,
@@ -163,6 +193,12 @@
    "beat": "prayer self compassion",
    "pause_after": 1.2,
    "text": "Father, teach me to speak to myself the way you speak to me. I can be honest about my failure without despising the person who failed. Help me learn the lesson this day offers and then lay down the weight. When I wake tomorrow, let me begin as someone forgiven, not as someone on probation. Thank you that your mercy is not a reluctant pardon but a welcome home."
+  },
+  {
+   "id": "rehook-5",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "We are close to rest now. Hear how God feels about showing mercy."
   },
   {
    "id": "scripture-micah-delight",
@@ -212,7 +248,7 @@
    "id": "cta",
    "beat": "cta",
    "pause_after": 1.0,
-   "text": "If you have received God's forgiveness tonight, you can type amen in the comments. Now let Scripture carry you toward sleep."
+   "text": "If you have received God's forgiveness tonight, you can type amen in the comments. You can also leave a prayer request there, and in our next night prayer we will pray over the requests you share. Now let Scripture carry you toward sleep."
   },
   {
    "id": "sleep-introduction",

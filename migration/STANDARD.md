@@ -69,6 +69,11 @@ Across the 20 spoken-prayer outliers, the median channel has 5.2k subscribers. N
   - The first sentence has ≤ 14 words, speaks to "you" and places the moment ("Before you sleep tonight…") or opens on a contrast ("The world tells you… but God…"). It never opens on a greeting. The hook promises the prayer.
   - No sound effects: none of the measured winners uses them. Soft piano and pads only, as now.
   - Length: 12–18 min for v4 prayers (breakouts on small channels cluster at 5–18 min, median ~14 min).
+- **R13.** Continuity and authenticity (owner, 2026-10-23: "viral to explode fast, then authenticity and originality for continuity"; research in `strategy/DECISIONS.md`, day 6 evening). Checked by `script_check.continuity_problems` for v4 pilots:
+  - A `roadmap` segment within 30 s names what we will pray for and where the video ends (promise, then commitment).
+  - A `rehook-N` segment previews the next prayer at least every 3.5 min until the commitment or payoff (promise, deliver, promise the next). Sleep readings after the CTA are exempt: they must not wake the listener.
+  - The spoken CTA invites a prayer request in the comments, and the next prayer of the same series prays over the requests shared (themes only, never names): the community ritual is the channel's authenticity layer and the reason to return.
+  - Variety against the inauthentic-content policy (YouTube, July 2025: "template with little to no variation"): consecutive pilots of one series alternate archetype (passage walk-through such as 008/009/011, topical guided prayer such as 010/013/014, a retold Bible narrative with prayer), and every script is written for its own topic.
 - **Owner floor.** Every new upload needs the designated watched review's overall ≥ 9.5 (owner, 2026-10-23), on top of the rubric's item ≥ 7 and overall ≥ 8.
 
 ## Gate
