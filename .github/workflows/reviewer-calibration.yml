@@ -1,0 +1,56 @@
+name: HeroVerse reviewer calibration (a candidate reviewer against renders the designated reviewer judged)
+on:
+  workflow_dispatch:
+    inputs:
+      candidate:
+        description: Free model to qualify
+        required: true
+        default: gemini-3.6-flash
+      pilots:
+        description: Rendered pilots with a designated watched review (space separated)
+        required: true
+        default: pilot-004 pilot-005 pilot-006 pilot-007 pilot-008 pilot-012
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-approve
+  cancel-in-progress: false
+jobs:
+  calibrate:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: v0.0.0-cloud-assets-20261013
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Unit tests
+        run: python3 -I -B migration/production/test_reviewer_calibration.py
+      - name: Renders from the private release (hash-verified)
+        env:
+          PILOTS: ${{ inputs.pilots }}
+        run: |
+          : > "$RUNNER_TEMP/pairs"
+          for p in $PILOTS; do
+            sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "migration/production/$p/out/manifest.json")
+            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$p-sha256-$sha.mp4" -O "$RUNNER_TEMP/$p.mp4"
+            echo "$sha  $RUNNER_TEMP/$p.mp4" | sha256sum -c -
+            echo "$p=$RUNNER_TEMP/$p.mp4" >> "$RUNNER_TEMP/pairs"
+          done
+      - name: Candidate reviews every render once
+        env:
+          HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+          CANDIDATE: ${{ inputs.candidate }}
+        run: |
+          mkdir -p migration/evidence/reviewer-calibration
+          mapfile -t pairs < "$RUNNER_TEMP/pairs"
+          python3 -I -B migration/production/reviewer_calibration.py "$CANDIDATE" \
+            "migration/evidence/reviewer-calibration/$CANDIDATE-$(date -u +%Y%m%dT%H%M).json" "${pairs[@]}"
+      - name: Commit evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/evidence/reviewer-calibration
+          git commit -q -m "Record reviewer calibration (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
