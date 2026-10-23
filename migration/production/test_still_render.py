@@ -99,6 +99,11 @@ class FootageV4(unittest.TestCase):
             self.assertTrue(sr.FOOTAGE_HOLD_MIN - 1e-6 <= h["end"] - h["start"] <= sr.FOOTAGE_HOLD_MAX + 1e-6, h)
         self.assertEqual(self.CRIT["grammar"]["scene_seconds"], [sr.FOOTAGE_HOLD_MIN, sr.FOOTAGE_HOLD_MAX])
 
+    def test_no_cta_badges_over_footage_pilots(self):
+        # 3 reviews named the Subscribe/Like badges as breaking the immersion (pilot-004, 007, 012)
+        self.assertEqual(sr.cta_events(1600.0, {"footage": ["clip-a"]}), [])
+        self.assertEqual(len(sr.cta_events(1600.0, {})), 2)
+
     def test_too_few_clips_refused_before_render(self):
         with self.assertRaises(SystemExit) as e:
             self.plan(18, 6)
@@ -143,9 +148,19 @@ class Reference(unittest.TestCase):
         peace = next(s for s in timeline["sentences"] if s["segment"] == "blessing" and "give thee peace" in s["text"])
         self.assertAlmostEqual(end, peace["end"], places=3)        # end of "...and give thee peace.", from the timeline
 
+    def test_card_for_a_verse_without_archaic_words_pilot_012(self):
+        script = {"segments": [{"id": "scripture-thanks", "reference": "1 Thessalonians 5:18 (KJV)"}]}
+        timeline = {"segments": [{"id": "scripture-thanks", "start": 30.0, "end": 40.0}],
+                    "sentences": [{"segment": "scripture-thanks", "start": 30.5, "end": 38.0,
+                                   "text": "In every thing give thanks: for this is the will of God in Christ Jesus concerning you."}]}
+        self.assertEqual(sr.scripture_cards(script, timeline),
+                         [{"segment": "scripture-thanks", "reference": "1 Thessalonians 5:18 (KJV)", "start": 30.5, "end": 38.0}])
+
     def test_whole_segment_when_no_kjv_sentence(self):
         seg = {"id": "s", "start": 1.0, "end": 9.0}
-        self.assertEqual(sr.reference_end(seg, [{"segment": "s", "text": "Be still and know.", "end": 4.0}]), 9.0)
+        # R5: the card leaves when the verse ends (its last sentence), not at the end of the pause after it
+        self.assertEqual(sr.reference_end(seg, [{"segment": "s", "text": "Be still and know.", "end": 4.0}]), 4.0)
+        self.assertEqual(sr.reference_end(seg, []), 9.0)
 
 
 class StandardV1(unittest.TestCase):
