@@ -39,6 +39,13 @@ class Register(unittest.TestCase):
                 if re.search(r'\|\s*tee\b', step):
                     self.assertIn('pipefail', step, wf.name)
 
+    def test_apt_installs_cannot_hang(self):
+        # E55: voice-sample.yml hung 30 min on the hosted apt mirror; these workflows bound apt with timeouts
+        for name in ('pr-checks.yml', 'voice-sample.yml'):
+            text = (ROOT / '.github/workflows' / name).read_text()
+            for line in re.findall(r'.*apt-get .*(?:update|install).*', text):
+                self.assertIn('timeout ', line, f'{name}: {line.strip()}')
+
     def test_heartbeat_dispatches_only_existing_workflows(self):
         scheduler = (ROOT / 'migration/ops/heartbeat.py').read_text()
         for name in set(re.findall(r'"workflow":\s*"([a-z0-9-]+\.yml)"', scheduler)):

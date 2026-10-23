@@ -234,3 +234,4 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 - Kokoro: WER 0.016, F0 112 Hz, 3.58 semitones, 135 wpm, pauses 0.72 s (max 1.94 s), 0 glitches. PASS.
 - Chatterbox calm: one audible glitch (FAIL). Chatterbox warm: 153 wpm, too fast (FAIL). Both took about 10 CPU s per audio s, which is about 2.7 h for a 16-minute prayer.
 - **Decision.** Kokoro stays. The study's breakout voices all speak at about 60–120 wpm, slower than our 135: a slower Kokoro speed is the next voice test, measured by the same ruler.
+- **Speed test (run 40004867140).** The verified voice engine accepts 0.80–1.25. Kokoro 0.80 measured 124 wpm but had one glitch (FAIL); 0.85 measured 135 wpm and passed. Kokoro stays at 0.85; the narration's pace is not the lever within the frozen QA band.
