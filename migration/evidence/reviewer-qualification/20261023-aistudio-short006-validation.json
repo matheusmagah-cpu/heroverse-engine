@@ -1,0 +1,40 @@
+{
+  "version": "aistudio-short006-observation-validation-v2",
+  "recorded_at": "2026-10-23T02:34:26.070649+00:00",
+  "source": "UI_OBSERVATION_NOT_API_RECEIPT",
+  "status": "CONTENT_GROUNDED_UI_REJECTION_NOT_OPERATIONAL_QUALIFICATION",
+  "media_sha256": "d6a7dc7024f6660c87a93d87db6a55d4073048e05f4728c043b1fc70229566b4",
+  "media_bytes": 15369406,
+  "canonical_manifest_sha256": "cc8daa14d106a4e09fd9cede224a8edf2e9c6a903a13e9d5e02f909709a4a701",
+  "observed_change": "Fresh full-file attachment showed 4327 tokens; prior failed upload had no confirmed attachment and prior ungrounded review showed Token count failed.",
+  "upload_tool_wall_seconds": 3122.9722,
+  "upload_tool_requested_timeout_seconds": 45,
+  "upload_attempts_this_session": 1,
+  "probe": "20261023-aistudio-short006-probe.json",
+  "review": "20261023-aistudio-short006-review.json",
+  "content_comparison": {
+    "last_three_sentences": "Exact words match the canonical narration; final Rest now is located at about 39–40 s.",
+    "picture": "Stream, stones and lantern followed by moonlit pond and lilies match the source plan and image provenance.",
+    "transition": "Observed around 20–21 s; canonical overlap is frames 622–636 (20.733–21.2 s).",
+    "audio": "Male narration and soft piano/pads are consistent with am_michael and the existing original-music recipe. No audio-only negative control or captured modality trace was obtained in the UI.",
+    "timing_limitation": "Model estimated 41 s rather than exact 42 s and rounded sentence timestamps. Canonical timing remains authoritative.",
+    "motion_label_limitation": "Response calls the movement 2.5D parallax. Canonical parallax=false; actual motion is camera pan plus local source texture modulation. Do not teach a false renderer diagnosis."
+  },
+  "reported_scores": {
+    "overall": 8.0,
+    "edit_rhythm": 6.5,
+    "ending_and_loop": 6.5
+  },
+  "base_rubric_result": "FAIL",
+  "owner_floor_result": "FAIL",
+  "review_prompt_changed": false,
+  "review_schema_changed": false,
+  "previous_8_9_still_invalid": true,
+  "scores_written_to_canonical_manifest": false,
+  "production_mutated": false,
+  "qa_reexecuted": false,
+  "native_route_operationally_qualified": false,
+  "recurring_capacity_qualified": false,
+  "publish": false,
+  "next_action": "One isolated SSE qualification using the existing workflow: READY control then unchanged full MP4 only if READY completes; max two calls, shared 600 s deadline, no retries/reconnect/fallback or canonical writes."
+}

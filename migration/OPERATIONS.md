@@ -2,6 +2,22 @@
 
 Current transfer checkpoint: `HANDOFF_NEXT_CHAT_20261023.md`. The AI Studio UI response of 8.9 for Short 006 was **invalidated by content mismatches**; it is not a valid score or production feedback. The native review remains blocked. The last corrective upload ended in a browser-tool timeout, with outcome unknown. See `evidence/reviewer-qualification/20261022-aistudio-short006-validation.json` before resuming.
 
+New observation, 2026-10-23 UTC: one fresh AI Studio upload showed 4,327 media tokens.
+A content-only probe correctly identified the closing words, both scenes, transition, male voice
+and piano/pads, with approximate timings. The unchanged review prompt/schema then returned overall
+8.0, rhythm 6.5 and ending 6.5: a rejection. The UI has no captured transport/modality trace,
+estimates 41 rather than 42 seconds and calls camera motion parallax; those limitations are
+explicit in `evidence/reviewer-qualification/20261023-aistudio-short006-validation.json`.
+No canonical review, production change or publication follows from this observation. The previous
+8.9 remains invalid. Native automatic review and recurring capacity remain unqualified.
+
+The isolated workflow now offers explicit `stream` mode: the documented SSE response transport
+is the concrete change from the consumed buffered-JSON attempts. It retains the exact file, model,
+prompt, schema, existing QA, free-project observation, STARTED reservation and shared two-call/600 s
+budget. Only a fully completed READY control permits video. Partial HTTP 200 or text is not success;
+video also requires positive audio and picture token usage. There is no reconnect, retry or fallback.
+This is a qualification candidate, not an activated production route.
+
 ## Authority and boundaries
 
 - `SYSTEM.md`: the canonical four-stage delivery contract: mining → modeling/production →
