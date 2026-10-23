@@ -1,0 +1,20 @@
+videos 334 strata 62 hits 140 dead 194
+feature                               n %hits_with %dead_with  OR_hit      p
+desc_len>1000                       283       0.91       0.80    2.63  0.052
+desc_len<300                          1       0.00       0.01    0.00  0.803
+chapters (0:00 timestamps)           34       0.12       0.09    2.08  0.397
+hashtags>=3 in desc                 306       0.94       0.90    2.20  0.121
+external link in desc                64       0.21       0.18    1.20  0.599
+scripture refs in desc              187       0.51       0.60    0.33  0.007
+prayer request ask in desc           59       0.19       0.17    1.35  0.357
+subscribe ask in desc               239       0.79       0.66    3.27  0.014
+AI/synthetic disclosure in desc       4       0.01       0.01     inf  1.000
+tags>=15                            235       0.72       0.69    0.53  0.290
+no tags                              84       0.25       0.25    6.93  0.115
+topic=Christian_music               101       0.33       0.28    3.76  0.029
+upload 00-06 UTC                    172       0.55       0.49    1.72  0.208
+upload 06-12 UTC                     77       0.20       0.25    0.60  0.197
+upload 12-18 UTC                     16       0.04       0.06    2.87  0.107
+upload 18-24 UTC                     69       0.21       0.20    0.55  0.277
+weekend upload                      108       0.37       0.29    1.53  0.086
+done

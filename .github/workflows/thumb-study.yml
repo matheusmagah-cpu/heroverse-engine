@@ -1,0 +1,33 @@
+name: HeroVerse thumbnail study (public thumbnails of the algorithm study, read-only)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-official-evidence
+  cancel-in-progress: false
+jobs:
+  study:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      STUDY: migration/evidence/vidiq/20261023/algorithm_study
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Tools (Tesseract for text; a failed install leaves text unmeasured, never wrong)
+        run: |
+          for i in 1 2 3; do sudo apt-get update -q -o Acquire::Retries=3 && sudo apt-get install -y -q tesseract-ocr && break; sleep 10; done || true
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q numpy==2.1.3 pillow==11.0.0 opencv-python-headless==4.10.0.84 pytesseract==0.3.13
+      - name: Unit tests
+        run: '"$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/test_thumb_study.py'
+      - name: Measure, test within channel and month, draw contact sheets
+        run: '"$RUNNER_TEMP/venv/bin/python" -I -B migration/mining/thumb_study.py "$STUDY/rows.json" "$STUDY/thumbs"'
+      - name: Commit evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$STUDY/thumbs"
+          git commit -q -m "Record thumbnail study (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main

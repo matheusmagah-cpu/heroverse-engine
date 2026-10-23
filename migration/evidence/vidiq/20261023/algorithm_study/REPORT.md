@@ -83,7 +83,29 @@ The 4 channels that never unlocked hopped formats or made short night videos.
    - make the 18 off-niche July Shorts and videos private;
    - consider a niche display name (e.g. "HeroVerse Prayer").
 
+## Metadata (334 hit or dead videos, full Data API metadata, 62 channel-month strata; `meta_perm.py`, `meta_perm_results.txt`)
+| # | Finding | Evidence | Grade |
+|---|---|---|---|
+| M1 | Bible references listed in the description | Hit odds ×0.33 (p = 0.007). | PROVEN (negative) |
+| M2 | A subscribe ask in the description | Hit odds ×3.27 (p = 0.014). | STRONG |
+| M3 | Description longer than 1,000 characters | Hit odds ×2.63 (p = 0.052). | HYPOTHESIS (borderline) |
+| M4 | Weekend upload | Hit odds ×1.53 (p = 0.086). | HYPOTHESIS |
+| — | Upload hour, chapters, tags, hashtags, external links, a prayer-request line | Not significant (p ≥ 0.1). | does not decide |
+
+## Picture and sound (20 videos watched end to end; `visual_watch.md`)
+- **V1. Production quality does not separate:** watcher score 6.9 for hits and 6.8 for dead videos. HeroVerse's own two
+  videos scored 9 and 8.5, the highest of the sample, with 6–40 views. PROVEN for this sample.
+- **V2. Table stakes seen in every video:** burned-in captions, music from 0:00 well under the voice, slow male or
+  female narration at about 80–120 wpm, a calm palette. HeroVerse already meets all of them.
+- **V3. The same channel with the same template has both outcomes** (Grace & Purpose 287K and 98; Favor for Today 54K
+  and 73; Peaceful Night Prayers 137K and 379). The template is not the cause; the title, theme and length are.
+- **V4. Leaning signals (HYPOTHESIS, small n):** no female voice among the hits; animated Subscribe pop-ups are more
+  common on dead videos; a persistent "Type Amen 🙏" badge is more common on hits.
+
+## Thumbnails
+Measured on GitHub Actions by `migration/mining/thumb_study.py` (brightness, colour, text, faces, within
+channel-month test, contact sheets). Results are written to `thumbs/` by `thumb-study.yml`.
+
 ## Not measured
-- Thumbnails: images could not be fetched from this environment.
 - Click-through rate and retention curves: only the channel owner's analytics hold them.
 - Audience country.
