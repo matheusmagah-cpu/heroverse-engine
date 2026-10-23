@@ -1,0 +1,40 @@
+{
+ "id": "clip-sunset-three-must-visit-landscape-photography-l",
+ "theme": "sunset",
+ "query": "sunset sea",
+ "source": "commons",
+ "title": "Three MUST VISIT landscape photography locations on Madeira.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Three_MUST_VISIT_landscape_photography_locations_on_Madeira.webm",
+ "author": "Tony J Hughes",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 921.181,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Three MUST VISIT landscape photography locations on Madeira.webm\" by Tony J Hughes, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Three_MUST_VISIT_landscape_photography_locations_on_Madeira.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0e349a867ccb41fb371120ad625753286b209c4400c9a85956073471717264d5",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN JHUGHES"
+ ],
+ "vetting_luma": [
+  100.0,
+  98.7,
+  107.9,
+  114.0,
+  98.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-morning-mist-fog-nature-morning-hour-sou",
+ "theme": "night",
+ "query": "milky way timelapse",
+ "source": "pixabay",
+ "title": "morning mist, fog, nature, morning hour, south-tirol, italy, hill, mountains, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-27111/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-27111/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d80341f76dcc886ba22b8018dcc847b4592f4790a43642faaca6d5dc966e8e65",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "village in the last segment"
+ ],
+ "vetting_luma": [
+  173.6,
+  164.9,
+  161.6,
+  157.9,
+  155.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-morning-mist-fog-nature-morning-hour-sou-sha256-d80341f76dcc886ba22b8018dcc847b4592f4790a43642faaca6d5dc966e8e65.mp4"
+}

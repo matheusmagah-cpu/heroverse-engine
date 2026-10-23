@@ -4,6 +4,8 @@
 Sources, no paid call:
   pexels  -> api.pexels.com, Pexels License (free commercial use and modification, no attribution required),
              only when PEXELS_API_KEY is set
+  pixabay -> pixabay.com/api/videos, Pixabay Content License (free commercial use and modification, no attribution
+             required; Pexels stopped issuing API keys in October 2026), only when PIXABAY_API_KEY is set
   commons -> commons.wikimedia.org, only CC0, public domain or CC BY (attribution goes into the description);
              share-alike (CC BY-SA) and non-commercial licences are refused
 Every clip is cut to a clean 2560x1440 30 fps picture without audio and recorded with its source page, author,
@@ -42,13 +44,15 @@ def get_json(url, headers=None):
         return json.loads(r.read())
 
 
-ACCEPTED = ("Pexels License", "CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0")  # = QA v4
+ACCEPTED = ("Pexels License", "Pixabay Content License", "CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0")  # = QA v4
 
 
 def canonical(source, licence):
     """The licence as pilot-qa-criteria-v4 lists it ("CC BY 3.0 de" -> "CC BY 3.0"), or None when not accepted."""
     if source == "pexels":
         return "Pexels License" if licence == "Pexels License" else None
+    if source == "pixabay":
+        return "Pixabay Content License" if licence == "Pixabay Content License" else None
     raw = (licence or "").strip()
     if not COMMONS_OK.match(raw):
         return None
@@ -68,7 +72,9 @@ def licence_ok(source, licence):
 def eligible(c):
     """A candidate is usable when its licence is accepted, it is at least 1080p and 8 s, and its title does not
     announce people, text or branding."""
+    # E51: a vertical 1080x1920 source passed the height check and was blown up 2.4x to fill the frame
     return (licence_ok(c["source"], c["licence"]) and (c.get("height") or 0) >= MIN_HEIGHT
+            and (c.get("width") or 0) >= W
             and (c.get("seconds") or 0) >= MIN_SECONDS and not BLOCK.search(c.get("title", "")))
 
 
@@ -112,10 +118,26 @@ def pexels_search(query, key, limit=40):
     return out
 
 
+def pixabay_search(query, key, limit=50):
+    d = get_json(f"https://pixabay.com/api/videos/?key={urllib.parse.quote(key)}&q={urllib.parse.quote(query[:100])}"
+                 f"&per_page={limit}&safesearch=true&video_type=film&min_height={MIN_HEIGHT}")
+    out = []
+    for v in d.get("hits", []):
+        files = [f for f in (v.get("videos") or {}).values() if (f.get("height") or 0) >= MIN_HEIGHT and f.get("url")]
+        best = min(files, key=lambda f: f["height"]) if files else {}
+        out.append({"source": "pixabay", "title": v.get("tags", ""), "page": v.get("pageURL"),
+                    "width": best.get("width"), "height": best.get("height"), "seconds": float(v.get("duration") or 0),
+                    "licence": "Pixabay Content License", "licence_url": "https://pixabay.com/service/license-summary/",
+                    "author": v.get("user", ""), "download": best.get("url")})
+    return out
+
+
 def credit(c):
     """One description line per clip; required for CC BY, kept for every source as provenance."""
     if c["source"] == "pexels":
         return f"Footage: {c['author']} via Pexels ({c['page']})"
+    if c["source"] == "pixabay":
+        return f"Footage: {c['author']} via Pixabay ({c['page']})"
     return f"Footage: \"{c['title']}\" by {c['author'] or 'unknown author'}, {c['licence']}, via Wikimedia Commons ({c['page']})"
 
 
@@ -123,7 +145,17 @@ def slug(text):
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:40]
 
 
+def source_size(path):
+    out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+                          "-of", "csv=p=0", str(path)], capture_output=True, text=True, check=True).stdout
+    w, h = (int(x) for x in out.strip().split(",")[:2])
+    return w, h
+
+
 def transcode(src, dst, seconds):
+    w, h = source_size(src)
+    if w < W or h < H:  # never enlarge: the picture must come from a source at least as large as the frame
+        raise ValueError(f"SOURCE_BELOW_FRAME {w}x{h}")
     keep = max(MIN_SECONDS, min(CLIP_SECONDS, seconds - 2.0))
     start = 1.0 if seconds - keep >= 1.0 else 0.0   # skip the first second: fades, slates and camera shake
     vf = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},format=yuv420p"
@@ -223,6 +255,7 @@ def main(queries_path, out_dir, per_theme="3"):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     key = os.environ.get("PEXELS_API_KEY", "")
+    pixabay_key = os.environ.get("PIXABAY_API_KEY", "")
     lib = Path(spec.get("library", "migration/production/footage/library"))
     have = {p.stem for p in lib.glob("*.json")}
     seen_pages = {json.loads(p.read_text()).get("page") for p in lib.glob("*.json")}
@@ -231,9 +264,14 @@ def main(queries_path, out_dir, per_theme="3"):
         cands = []
         if key:
             cands += pexels_search(theme["query"], key)
+        if pixabay_key:
+            try:
+                cands += pixabay_search(theme["query"], pixabay_key)
+            except Exception as e:  # noqa: BLE001  (the key is in the URL: report only the error type)
+                print(json.dumps({"pixabay_unavailable": theme["theme"], "reason": type(e).__name__}))
         cands += commons_search(theme["query"])
         picked = tried = 0
-        for c in sorted((c for c in cands if eligible(c)), key=lambda c: (c["source"] != "pexels", -(c["seconds"]))):
+        for c in sorted((c for c in cands if eligible(c)), key=lambda c: (c["source"] == "commons", -(c["seconds"]))):
             cid = f"clip-{theme['theme']}-{slug(c['title'])}"
             if cid in have or picked >= int(per_theme) or c["page"] in seen_pages:
                 continue

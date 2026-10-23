@@ -1,0 +1,40 @@
+{
+ "id": "clip-candle-new-year-2023-beautiful-wallpaper-celebr",
+ "theme": "candle",
+ "query": "candles",
+ "source": "pixabay",
+ "title": "new year, 2023, beautiful wallpaper, celebration, christmas, december, candle, decor, light, flame, christianity, traditional, religion, belief, oil lamp, cake, decorative, background",
+ "page": "https://pixabay.com/videos/id-139153/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-139153/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "adc09f7856a09b167d0c5ff52b621fa1af8a1967ac7d4e9ff8267743ab1339cd",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  10.5,
+  10.7,
+  11.6,
+  11.4,
+  11.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

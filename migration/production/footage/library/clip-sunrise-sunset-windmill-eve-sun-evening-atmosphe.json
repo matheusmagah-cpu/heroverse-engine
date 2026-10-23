@@ -1,0 +1,40 @@
+{
+ "id": "clip-sunrise-sunset-windmill-eve-sun-evening-atmosphe",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "sunset, windmill, eve, sun, evening atmosphere, afterglow, clouds, mont soleil, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-49933/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-49933/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "045898db886106645082bb5eaedb0c0928b4a3737f7fb14491472f4dee82da9c",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "wind turbine"
+ ],
+ "vetting_luma": [
+  69.6,
+  70.8,
+  73.6,
+  77.1,
+  87.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-sunrise-sunset-windmill-eve-sun-evening-atmosphe-sha256-045898db886106645082bb5eaedb0c0928b4a3737f7fb14491472f4dee82da9c.mp4"
+}

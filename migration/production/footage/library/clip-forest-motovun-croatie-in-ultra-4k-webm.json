@@ -1,0 +1,41 @@
+{
+ "id": "clip-forest-motovun-croatie-in-ultra-4k-webm",
+ "theme": "forest",
+ "query": "autumn forest",
+ "source": "commons",
+ "title": "Motovun , Croatie in Ultra 4k.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Motovun_,_Croatie_in_Ultra_4k.webm",
+ "author": "Le Monde en Vidéo",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 260.961,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Motovun , Croatie in Ultra 4k.webm\" by Le Monde en Vidéo, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Motovun_,_Croatie_in_Ultra_4k.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "505cee71a6591e06c99fe8511e99fa637b88ab9e4b208b75e394dc00ea3b82e3",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "TEXT_ON_SCREEN Monde Charms Adriatic Part"
+ ],
+ "vetting_luma": [
+  9.8,
+  76.8,
+  3.4,
+  1.5,
+  1.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

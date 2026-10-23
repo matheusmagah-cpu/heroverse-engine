@@ -1,0 +1,40 @@
+{
+ "id": "clip-meadow-tulips-flowers-field-farm-scenic-nature-",
+ "theme": "meadow",
+ "query": "tulip field",
+ "source": "pixabay",
+ "title": "tulips, flowers, field, farm, scenic, nature, landscape, spring, netherlands, drenthe",
+ "page": "https://pixabay.com/videos/id-161812/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-161812/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c97e8f3ac02b22adc43d4db5416b8441dc92e2832bc9d487a38dac844c4b6984",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "vehicle behind the field"
+ ],
+ "vetting_luma": [
+  140.7,
+  141.5,
+  143.0,
+  142.9,
+  142.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-meadow-tulips-flowers-field-farm-scenic-nature--sha256-c97e8f3ac02b22adc43d4db5416b8441dc92e2832bc9d487a38dac844c4b6984.mp4"
+}

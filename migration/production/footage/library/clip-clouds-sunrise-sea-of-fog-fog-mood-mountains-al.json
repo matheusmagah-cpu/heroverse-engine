@@ -1,0 +1,40 @@
+{
+ "id": "clip-clouds-sunrise-sea-of-fog-fog-mood-mountains-al",
+ "theme": "clouds",
+ "query": "clouds timelapse mountains",
+ "source": "pixabay",
+ "title": "sunrise, sea of fog, fog, mood, mountains, alps, sea of clouds, foggy landscape, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-30848/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-30848/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3c341d602d1c298ed43221ecbbab6fd57285c7b438d3e8992e8d1299bdb5edcc",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "people on the horizon"
+ ],
+ "vetting_luma": [
+  137.5,
+  135.2,
+  134.2,
+  134.7,
+  132.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-clouds-sunrise-sea-of-fog-fog-mood-mountains-al-sha256-3c341d602d1c298ed43221ecbbab6fd57285c7b438d3e8992e8d1299bdb5edcc.mp4"
+}

@@ -16,7 +16,7 @@ scripts, code and fixes; the GitHub workflows do the heavy work. Credentials liv
 | Step | Entry point |
 |---|---|
 | Script | Claude writes `production/pilot-NNN/script.json` (+ `images.json`, `schedule.json`); `production/script_check.py` gates it (R12 hook, length, originality, rights) |
-| Footage | `footage.yml` → `production/footage/footage.py` (Pexels when `PEXELS_API_KEY` is set, Wikimedia Commons CC0/PD/CC BY), automatic vetting; `footage/assign.py` picks a pilot's clips by mood |
+| Footage | `footage.yml` → `production/footage/footage.py` (Pixabay when `PIXABAY_API_KEY` is set, Pexels when `PEXELS_API_KEY` is set, Wikimedia Commons CC0/PD/CC BY), automatic vetting; `footage/assign.py` picks a pilot's clips by mood |
 | Images | `cf-images.yml` (FLUX on the Workers AI free allocation, Real-ESRGAN 4×), `nightly-images.yml`; `images-upres.yml` brings older stills to 4096 px |
 | Render | runner `heroverse-runner/.github/workflows/render.yml` (every 30 min) or `pilot-render-stills.yml` in parallel → `ci/render_pilot.sh` → `still_render.py`; `ops/RENDER_HOLD` pauses the queue |
 | QA + package | `production/qa_pilot.py` (frozen criteria), `package_pilot.py` (title, description with footage credits, chapters, thumbnail) |
@@ -29,7 +29,7 @@ scripts, code and fixes; the GitHub workflows do the heavy work. Credentials liv
 - The designated reviewer on the free tier returned HTTP 503 from 2026-10-21 to at least 2026-10-23; with it down
   nothing publishes. 20 requests/day when it answers.
 - Workers AI free allocation: about 44 FLUX images a day (resets 00:00 UTC).
-- 1440p footage needs `PEXELS_API_KEY`: Wikimedia Commons has little ≥ 1440p nature footage.
+- 1440p footage needs `PIXABAY_API_KEY` (Pexels stopped issuing keys in October 2026): Wikimedia Commons has little ≥ 1440p nature footage. Pinterest is not a source: its pins carry no licence (copyright and reused-content risk).
 
 ## Documents
 `SYSTEM.md` (the four-stage delivery contract), `STANDARD.md` (production standard), `strategy/DECISIONS.md`

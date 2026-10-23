@@ -6,8 +6,8 @@
  "steps": 6,
  "guidance": 1.5,
  "size": [
-  1344,
-  768
+  2688,
+  1536
  ],
  "models": {
   "stabilityai/stable-diffusion-xl-base-1.0": {
@@ -22,7 +22,12 @@
  "device": "cuda",
  "seconds": 10.5,
  "generated_by": "HeroVerse pipeline (AI-generated image)",
- "release_asset": "pilot-002-img-figure-a-sha256-0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b.png",
- "sha256": "0caa0dcf93cbbf317319065ae14e13e358ec81913ef62a088f53a6a4e4d0fc0b"
+ "release_asset": "pilot-009-img-figure-a-4096-sha256-9831b87a9d357f281eaa4bbc012a2b09eed291d0ec921875b73a27a48de207e3.png",
+ "sha256": "9831b87a9d357f281eaa4bbc012a2b09eed291d0ec921875b73a27a48de207e3",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 2x of a 1344 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ }
 }
-

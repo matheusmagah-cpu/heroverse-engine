@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-a-starry-night-in-another-galaxy-potw263",
+ "theme": "night",
+ "query": "starry sky",
+ "source": "commons",
+ "title": "A starry night, in another galaxy (potw2637a).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:A_starry_night,_in_another_galaxy_(potw2637a).webm",
+ "author": "ESO/M.-R. Cioni et al.",
+ "licence_url": "https://creativecommons.org/licenses/by/4.0",
+ "licence": "CC BY 4.0",
+ "licence_as_published": "CC BY 4.0",
+ "source_seconds": 65.01,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"A starry night, in another galaxy (potw2637a).webm\" by ESO/M.-R. Cioni et al., CC BY 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:A_starry_night,_in_another_galaxy_(potw2637a).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b886e3bd1bbb8346ec3f43de37118e44d3baa525f5de12d0b080dba63b8d6bc2",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN cores Magellanic Clouds VISTA Survey Telescope"
+ ],
+ "vetting_luma": [
+  80.8,
+  41.8,
+  31.2,
+  43.8,
+  51.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

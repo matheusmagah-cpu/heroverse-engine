@@ -1,0 +1,40 @@
+{
+ "id": "clip-snow-landschaftsschutzgebiet-volkspark-rehber",
+ "theme": "snow",
+ "query": "snowfall forest",
+ "source": "commons",
+ "title": "Landschaftsschutzgebiet Volkspark Rehberge lub 2026-01-03 snowing.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Landschaftsschutzgebiet_Volkspark_Rehberge_lub_2026-01-03_snowing.webm",
+ "author": "Lukas Beck",
+ "licence_url": "https://creativecommons.org/licenses/by/4.0",
+ "licence": "CC BY 4.0",
+ "licence_as_published": "CC BY 4.0",
+ "source_seconds": 10.323,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 8.323,
+ "credit": "Footage: \"Landschaftsschutzgebiet Volkspark Rehberge lub 2026-01-03 snowing.webm\" by Lukas Beck, CC BY 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Landschaftsschutzgebiet_Volkspark_Rehberge_lub_2026-01-03_snowing.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5d46e9852b021845aa83d2e9dfcac7b1973368865216e67c93315356f3f507b2",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "park bench, lamp post and bin"
+ ],
+ "vetting_luma": [
+  142.7,
+  144.8,
+  147.6,
+  147.9,
+  145.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-snow-landschaftsschutzgebiet-volkspark-rehber-sha256-5d46e9852b021845aa83d2e9dfcac7b1973368865216e67c93315356f3f507b2.mp4"
+}

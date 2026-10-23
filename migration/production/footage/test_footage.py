@@ -40,6 +40,7 @@ class Selection(unittest.TestCase):
         self.assertFalse(ft.eligible(cand(height=720)))
         self.assertFalse(ft.eligible(cand(height=1080)))   # owner, 2026-10-23: never below 1440p
         self.assertFalse(ft.eligible(cand(seconds=5.0)))
+        self.assertFalse(ft.eligible(cand(width=1080, height=1920)))  # E51: vertical source, would be enlarged
 
     def test_titles_announcing_people_or_text_refused(self):
         for t in ("Tourists at the waterfall", "A man walking at sunrise", "Festival lights", "Logo intro",
@@ -52,6 +53,22 @@ class Selection(unittest.TestCase):
                                             'Commons (https://commons.wikimedia.org/wiki/File:X.webm)')
         self.assertTrue(ft.credit(cand(source="pexels", page="https://www.pexels.com/video/x-1/")).endswith(
             "via Pexels (https://www.pexels.com/video/x-1/)"))
+
+    def test_pixabay_hits_keep_the_smallest_file_at_or_above_1440p(self):
+        hit = {"pageURL": "https://pixabay.com/videos/waterfall-1/", "tags": "waterfall, forest, nature", "duration": 24,
+               "user": "Author", "videos": {"large": {"url": "https://cdn.pixabay.com/l.mp4", "width": 3840, "height": 2160},
+                                            "medium": {"url": "https://cdn.pixabay.com/m.mp4", "width": 1920, "height": 1080}}}
+        old, ft.get_json = ft.get_json, lambda url, headers=None: {"hits": [hit]}
+        try:
+            (c,) = ft.pixabay_search("waterfall", "k")
+        finally:
+            ft.get_json = old
+        self.assertEqual((c["height"], c["download"]), (2160, "https://cdn.pixabay.com/l.mp4"))
+        self.assertTrue(ft.eligible(c))
+        self.assertEqual(ft.canonical("pixabay", c["licence"]), "Pixabay Content License")
+        self.assertEqual(ft.credit(c), "Footage: Author via Pixabay (https://pixabay.com/videos/waterfall-1/)")
+        self.assertFalse(ft.eligible({**c, "licence": "CC BY 4.0"}))
+        self.assertFalse(ft.eligible({**c, "title": "woman, waterfall"}))
 
 
 class Vetting(unittest.TestCase):

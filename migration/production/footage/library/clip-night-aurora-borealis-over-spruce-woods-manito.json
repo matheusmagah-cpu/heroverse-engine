@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-aurora-borealis-over-spruce-woods-manito",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "commons",
+ "title": "Aurora Borealis over Spruce Woods, Manitoba.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Aurora_Borealis_over_Spruce_Woods,_Manitoba.webm",
+ "author": "HachiBoy",
+ "licence_url": "https://creativecommons.org/licenses/by/4.0",
+ "licence": "CC BY 4.0",
+ "licence_as_published": "CC BY 4.0",
+ "source_seconds": 19.8,
+ "source_height": 3264,
+ "start": 1.0,
+ "seconds": 17.8,
+ "credit": "Footage: \"Aurora Borealis over Spruce Woods, Manitoba.webm\" by HachiBoy, CC BY 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Aurora_Borealis_over_Spruce_Woods,_Manitoba.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "07481625f787756da49616bba741d4f7cbedacbdb4a8b12309d092dd6cca7a1d",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "lit tents in the third segment"
+ ],
+ "vetting_luma": [
+  98.1,
+  47.8,
+  53.0,
+  90.1,
+  108.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-aurora-borealis-over-spruce-woods-manito-sha256-07481625f787756da49616bba741d4f7cbedacbdb4a8b12309d092dd6cca7a1d.mp4"
+}

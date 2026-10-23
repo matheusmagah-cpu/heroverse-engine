@@ -1,0 +1,40 @@
+{
+ "id": "clip-forest-veo-3-demo-owl-and-badger-webm",
+ "theme": "forest",
+ "query": "autumn forest",
+ "source": "commons",
+ "title": "Veo 3 demo Owl and Badger.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Veo_3_demo_Owl_and_Badger.webm",
+ "author": "Google DeepMind",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 22.708000000000002,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Veo 3 demo Owl and Badger.webm\" by Google DeepMind, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Veo_3_demo_Owl_and_Badger.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "168dfcad0427d3f74e701449c8a5a5ce7a34ea600936c0bb9a8a5e2266e82bc2",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "generated cartoon animals, off-standard"
+ ],
+ "vetting_luma": [
+  46.9,
+  45.5,
+  42.3,
+  41.0,
+  52.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-forest-veo-3-demo-owl-and-badger-webm-sha256-168dfcad0427d3f74e701449c8a5a5ce7a34ea600936c0bb9a8a5e2266e82bc2.mp4"
+}

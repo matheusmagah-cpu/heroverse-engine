@@ -1,0 +1,40 @@
+{
+ "id": "clip-waterfall-whitewater-falls-nantahala-national-fore",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "commons",
+ "title": "Whitewater Falls - Nantahala National Forest, North Carolina --4K Drone -- DJI Mavic Pro 2. Footage.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Whitewater_Falls_-_Nantahala_National_Forest,_North_Carolina_--4K_Drone_--_DJI_Mavic_Pro_2._Footage.webm",
+ "author": "Nature In 4K By: Paul King",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 305.839,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Whitewater Falls - Nantahala National Forest, North Carolina --4K Drone -- DJI Mavic Pro 2. Footage.webm\" by Nature In 4K By: Paul King, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Whitewater_Falls_-_Nantahala_National_Forest,_North_Carolina_--4K_Drone_--_DJI_Mavic_Pro_2._Footage.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a9edef8af7ce0f77d7a0c48fc619294232e8cc990a52ef67e77f343a753b0850",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN WHITEWATER FALLS NANTAHALA FOREST, ATER FALLS"
+ ],
+ "vetting_luma": [
+  54.6,
+  56.1,
+  48.7,
+  47.6,
+  34.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

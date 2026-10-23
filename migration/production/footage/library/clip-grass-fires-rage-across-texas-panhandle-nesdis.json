@@ -1,0 +1,40 @@
+{
+ "id": "clip-grass-fires-rage-across-texas-panhandle-nesdis",
+ "theme": "grass",
+ "query": "grass wind",
+ "source": "commons",
+ "title": "Fires Rage Across Texas Panhandle (NESDIS 2024-03-07 2024 03 07 Fires Rage AcrossTX Panhandle).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Fires_Rage_Across_Texas_Panhandle_(NESDIS_2024-03-07_2024_03_07_Fires_Rage_AcrossTX_Panhandle).webm",
+ "author": "NOAA",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 138.461,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Fires Rage Across Texas Panhandle (NESDIS 2024-03-07 2024 03 07 Fires Rage AcrossTX Panhandle).webm\" by NOAA, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Fires_Rage_Across_Texas_Panhandle_(NESDIS_2024-03-07_2024_03_07_Fires_Rage_AcrossTX_Panhandle).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c7eb7675dd3a0b167071f44d9c3d1d783fe0044a14504a45fc3488f44d96c817",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN late February NOAA satellites have tracking"
+ ],
+ "vetting_luma": [
+  107.5,
+  109.9,
+  79.4,
+  135.2,
+  96.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

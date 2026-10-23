@@ -1,0 +1,40 @@
+{
+ "id": "clip-lake-tasman-glacier-360-digital-elevation-mod",
+ "theme": "lake",
+ "query": "alpine lake",
+ "source": "commons",
+ "title": "Tasman Glacier 360 digital elevation model topography.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Tasman_Glacier_360_digital_elevation_model_topography.webm",
+ "author": "TierraMagica (solast.io)",
+ "licence_url": "https://creativecommons.org/licenses/by/4.0",
+ "licence": "CC BY 4.0",
+ "licence_as_published": "CC BY 4.0",
+ "source_seconds": 11.966000000000001,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 9.966000000000001,
+ "credit": "Footage: \"Tasman Glacier 360 digital elevation model topography.webm\" by TierraMagica (solast.io), CC BY 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Tasman_Glacier_360_digital_elevation_model_topography.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "659e206db7e8152a8c847620550f42f89f720e6dc6e34cb4e3129b095a84b856",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "3D elevation model on black"
+ ],
+ "vetting_luma": [
+  38.4,
+  46.8,
+  43.4,
+  38.1,
+  39.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-lake-tasman-glacier-360-digital-elevation-mod-sha256-659e206db7e8152a8c847620550f42f89f720e6dc6e34cb4e3129b095a84b856.mp4"
+}

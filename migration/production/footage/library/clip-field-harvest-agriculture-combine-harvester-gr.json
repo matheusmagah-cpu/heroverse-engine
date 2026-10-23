@@ -1,0 +1,40 @@
+{
+ "id": "clip-field-harvest-agriculture-combine-harvester-gr",
+ "theme": "field",
+ "query": "wheat field",
+ "source": "pixabay",
+ "title": "harvest, agriculture, combine harvester, grain harvest, agricultural machine, grain, wheat field, cornfield, wheat, food, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-45635/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-45635/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3d26d9e086270c076bb3d2792e98cdf6273bbfbc325392cb307cc9b273bd4d92",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "combine harvester and farm buildings"
+ ],
+ "vetting_luma": [
+  68.8,
+  67.1,
+  66.4,
+  65.6,
+  63.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-field-harvest-agriculture-combine-harvester-gr-sha256-3d26d9e086270c076bb3d2792e98cdf6273bbfbc325392cb307cc9b273bd4d92.mp4"
+}

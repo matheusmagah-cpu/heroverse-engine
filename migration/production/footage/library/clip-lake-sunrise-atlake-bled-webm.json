@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-sunrise-atlake-bled-webm",
+ "theme": "lake",
+ "query": "lake sunrise",
+ "source": "commons",
+ "title": "Sunrise atLake Bled.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Sunrise_atLake_Bled.webm",
+ "author": "Klemen Smolej",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 82.503,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Sunrise atLake Bled.webm\" by Klemen Smolej, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Sunrise_atLake_Bled.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a2751e09a61a9a47267a04fea8025cd7c63ea4c21751cf2e859d789d78666a6d",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23: no people, text, logos or watermarks; landscape source; on-theme",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  65.4,
+  74.6,
+  82.4,
+  90.7,
+  99.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-lake-sunrise-atlake-bled-webm-sha256-a2751e09a61a9a47267a04fea8025cd7c63ea4c21751cf2e859d789d78666a6d.mp4"
+}

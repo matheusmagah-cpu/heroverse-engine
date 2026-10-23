@@ -1,0 +1,41 @@
+{
+ "id": "clip-sunset-size-comparison-of-the-universe-2021-mus",
+ "theme": "sunset",
+ "query": "sunset sea",
+ "source": "commons",
+ "title": "Size Comparison of the Universe 2021 - Musik - Quellen.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Size_Comparison_of_the_Universe_2021_-_Musik_-_Quellen.webm",
+ "author": "Times Infinity",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 1712.209,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Size Comparison of the Universe 2021 - Musik - Quellen.webm\" by Times Infinity, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Size_Comparison_of_the_Universe_2021_-_Musik_-_Quellen.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "1421d50694df56fb4bb527419034170bc3a2588f5520882929ba95654a9a882a",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "TEXT_ON_SCREEN description image, video, song, information thumbnail"
+ ],
+ "vetting_luma": [
+  11.1,
+  1.0,
+  118.3,
+  68.6,
+  76.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

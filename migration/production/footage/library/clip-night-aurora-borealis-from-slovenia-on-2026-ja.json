@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-aurora-borealis-from-slovenia-on-2026-ja",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "commons",
+ "title": "Aurora borealis from Slovenia on 2026 January 20-21 - Polarni sij iz Slovenije 2026-01-20-21.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_from_Slovenia_on_2026_January_20-21_-_Polarni_sij_iz_Slovenije_2026-01-20-21.webm",
+ "author": "Skies of Slovenia",
+ "licence_url": "https://creativecommons.org/licenses/by/4.0",
+ "licence": "CC BY 4.0",
+ "licence_as_published": "CC BY 4.0",
+ "source_seconds": 249.74800000000002,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Aurora borealis from Slovenia on 2026 January 20-21 - Polarni sij iz Slovenije 2026-01-20-21.webm\" by Skies of Slovenia, CC BY 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Aurora_borealis_from_Slovenia_on_2026_January_20-21_-_Polarni_sij_iz_Slovenije_2026-01-20-21.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "101150baffcaf1d9b6f4395464ce3baa3043bfbb43ac79b7efca1a380e6359c8",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN Aurora This video Covers Aurora borealis"
+ ],
+ "vetting_luma": [
+  69.3,
+  67.7,
+  71.0,
+  62.3,
+  63.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

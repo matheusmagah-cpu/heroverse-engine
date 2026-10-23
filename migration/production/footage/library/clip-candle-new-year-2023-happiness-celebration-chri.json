@@ -1,0 +1,40 @@
+{
+ "id": "clip-candle-new-year-2023-happiness-celebration-chri",
+ "theme": "candle",
+ "query": "candle flame",
+ "source": "pixabay",
+ "title": "new year, 2023, happiness, celebration, christmas, december, new, candle, decor, romantic, background, beautiful wallpaper, beautiful, light, flame, christianity, traditional, religion, belief, oil lamp, hot, romance, decorative",
+ "page": "https://pixabay.com/videos/id-139149/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-139149/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "bb5ae66bd02486af908882e13af71d5427f340f52d1bd1645327be326fb341a2",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  11.7,
+  8.6,
+  8.7,
+  11.7,
+  11.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

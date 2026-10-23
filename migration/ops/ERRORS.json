@@ -323,6 +323,26 @@
     "file": "migration/production/test_render_queue.py",
     "contains": "def test_passed_slot_without_video_is_reported_stale"
    }
+  },
+  {
+   "id": "E50",
+   "date": "2026-10-23",
+   "error": "Deleting the unused pilot-001 (PR #292) removed its out/qa.json; that push fired approve.yml, whose pilot lookup listed the deleted file and failed on the missing render (run 39949492128). publish.yml had the same lookup.",
+   "fix": "The push lookups in approve.yml and publish.yml use git diff --diff-filter=AM (added or modified only); approve ends cleanly with SKIP when a push added no render. shorts.yml stays byte-frozen by its editorial tests.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_push_triggers_ignore_deleted_files"
+   }
+  },
+  {
+   "id": "E51",
+   "date": "2026-10-23",
+   "error": "Footage run 39948463303 took vertical 1080x1920 Commons sources as 1440p (only the height was checked) and enlarged them 2.4x to fill 2560x1440; a pillarboxed source passed the same way.",
+   "fix": "eligible() requires width >= 2560 as well as height >= 1440; transcode() probes the downloaded file and refuses any source smaller than the frame (SOURCE_BELOW_FRAME). The six affected clips were rejected.",
+   "antidote": {
+    "file": "migration/production/footage/test_footage.py",
+    "contains": "E51: vertical source, would be enlarged"
+   }
   }
  ]
 }

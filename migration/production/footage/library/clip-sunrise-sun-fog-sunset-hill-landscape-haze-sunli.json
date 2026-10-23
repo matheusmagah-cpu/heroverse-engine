@@ -1,0 +1,38 @@
+{
+ "id": "clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "sun, fog, sunset, hill, landscape, haze, sunlight, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-19409/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 50.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-19409/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "bd4d5157c1d82eb02c4235cce0f2c4bfe5a11d4df0a670c5a74772c4b924b3fa",
+ "vetting": "APPROVED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  83.8,
+  84.5,
+  83.1,
+  78.3,
+  71.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli-sha256-bd4d5157c1d82eb02c4235cce0f2c4bfe5a11d4df0a670c5a74772c4b924b3fa.mp4"
+}

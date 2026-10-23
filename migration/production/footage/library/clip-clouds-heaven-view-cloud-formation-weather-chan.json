@@ -1,0 +1,40 @@
+{
+ "id": "clip-clouds-heaven-view-cloud-formation-weather-chan",
+ "theme": "clouds",
+ "query": "cumulus clouds timelapse",
+ "source": "pixabay",
+ "title": "heaven, view, cloud formation, weather changes, changeable, rain, rain clouds, switzerland, gelterkinden, sleet, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-52170/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-52170/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "51537a76049d762b4993804dfe9e170054c5ff6db2bd32ea1136e13da2cb1eed",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "town below"
+ ],
+ "vetting_luma": [
+  115.3,
+  115.6,
+  115.4,
+  113.1,
+  104.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-clouds-heaven-view-cloud-formation-weather-chan-sha256-51537a76049d762b4993804dfe9e170054c5ff6db2bd32ea1136e13da2cb1eed.mp4"
+}

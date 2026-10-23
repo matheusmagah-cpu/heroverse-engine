@@ -1,0 +1,40 @@
+{
+ "id": "clip-candle-candle-flame-fire-light-candlelight-pray",
+ "theme": "candle",
+ "query": "candles",
+ "source": "pixabay",
+ "title": "candle, flame, fire, light, candlelight, prayer, meditation, burn, wax, hope, spiritual, enlightenment, pray, mystical, faith, angel",
+ "page": "https://pixabay.com/videos/id-71431/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-71431/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8b06a0f45639b9d713e2ab6d56020846458d3d5761496e154c7c7935664e9119",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  9.5,
+  9.5,
+  9.5,
+  9.6,
+  9.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

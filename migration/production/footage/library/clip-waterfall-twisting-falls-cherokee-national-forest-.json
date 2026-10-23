@@ -1,0 +1,40 @@
+{
+ "id": "clip-waterfall-twisting-falls-cherokee-national-forest-",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "commons",
+ "title": "Twisting Falls - Cherokee National Forest, Tennessee -- 4K - Drone -- DJI Mavic Pro 2 footage.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Twisting_Falls_-_Cherokee_National_Forest,_Tennessee_--_4K_-_Drone_--_DJI_Mavic_Pro_2_footage.webm",
+ "author": "Nature In 4K By: Paul King",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 399.865,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Twisting Falls - Cherokee National Forest, Tennessee -- 4K - Drone -- DJI Mavic Pro 2 footage.webm\" by Nature In 4K By: Paul King, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Twisting_Falls_-_Cherokee_National_Forest,_Tennessee_--_4K_-_Drone_--_DJI_Mavic_Pro_2_footage.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "031d8a5a95f3d0947c65e8267b0af897ef3123f5c77fe13987372c24c0cb9798",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN COMPRESSION FALLS CHER JONAL FOREST, TENNESSEE"
+ ],
+ "vetting_luma": [
+  92.2,
+  90.6,
+  81.7,
+  78.7,
+  73.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

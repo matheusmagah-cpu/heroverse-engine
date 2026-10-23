@@ -39,7 +39,7 @@ def needed_images(d, script):
 STANDARD_QA = "pilot-qa-criteria-v3"  # migration/STANDARD.md v1: the only renders that may be approved or published
 # v4 (owner, 2026-10-23: licensed real footage) is the same standard with the footage grammar; both may publish
 STANDARD_QAS = {"pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
-                "pilot-qa-criteria-v4": "f1cbbdd9f4dbb5ba32c29ab60f3fa50948da8f459831563513fffc8ea816ebe4"}
+                "pilot-qa-criteria-v4": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11"}
 
 STANDARD_QA_SHA256 = "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
 

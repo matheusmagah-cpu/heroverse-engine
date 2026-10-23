@@ -1,0 +1,40 @@
+{
+ "id": "clip-snow-winter-snowfall-train-local-station-pass",
+ "theme": "snow",
+ "query": "snowfall forest",
+ "source": "pixabay",
+ "title": "winter, snowfall, train, local station, passengers, japan",
+ "page": "https://pixabay.com/videos/id-268537/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-268537/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "32eed6125a1c1e388d6f9cb40e7aa19e919986d1e02d49007ba26cf60fb13490",
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "train station"
+ ],
+ "vetting_luma": [
+  175.0,
+  173.6,
+  170.1,
+  171.0,
+  172.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-snow-winter-snowfall-train-local-station-pass-sha256-32eed6125a1c1e388d6f9cb40e7aa19e919986d1e02d49007ba26cf60fb13490.mp4"
+}
