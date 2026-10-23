@@ -1,0 +1,98 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-014",
+ "style": "photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon, painting, illustration, cartoon, flat, low resolution",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused": {
+  "pilot-007": [
+   "figure-a",
+   "bg-coffee-window",
+   "bg-sunrise-field",
+   "bg-mountain-sunrise",
+   "bg-meadow",
+   "bg-morning-path",
+   "bg-misty-valley",
+   "bg-sky",
+   "bg-garden",
+   "bg-hills",
+   "bg-dawn-lake",
+   "bg-orchard"
+  ],
+  "pilot-011": [
+   "bg-waiting-resting-grove",
+   "bg-waiting-cloud-break",
+   "bg-waiting-open-horizon"
+  ],
+  "pilot-009": [
+   "bg-armour-sheltered-courtyard",
+   "bg-armour-olive-path",
+   "bg-armour-wheat-wall"
+  ]
+ },
+ "images": [
+  {
+   "id": "bg-home-kitchen-sunrise",
+   "prompt": "A warm empty farmhouse kitchen at sunrise, steam rising from a kettle and golden light streaming across a wooden table set for breakfast, no people, no text",
+   "seed": 14000
+  },
+  {
+   "id": "bg-home-porch-morning",
+   "prompt": "A welcoming front porch of a family home in soft morning light, two rocking chairs and potted flowers, a garden path leading to a quiet street, no people, no text",
+   "seed": 14001
+  },
+  {
+   "id": "bg-home-table-bread",
+   "prompt": "A long wooden family table with fresh bread, fruit and cups, bright morning sunlight pouring through a large window, no people, no text",
+   "seed": 14002
+  },
+  {
+   "id": "bg-home-garden-swing",
+   "prompt": "A wooden swing hanging from an old oak tree in a family garden at dawn, dew sparkling on the grass, no people, no text",
+   "seed": 14003
+  },
+  {
+   "id": "bg-home-hearth-morning",
+   "prompt": "A cozy empty living room with a stone fireplace, soft blankets on a sofa and gentle early morning light through the curtains, no people, no text",
+   "seed": 14004
+  },
+  {
+   "id": "bg-home-open-door",
+   "prompt": "A bright hallway with the front door open, morning sun streaming in across the floor, small boots and coats neatly by the door, no people, no text",
+   "seed": 14005
+  },
+  {
+   "id": "bg-home-village-roofs",
+   "prompt": "Rooftops of a peaceful village at sunrise with soft smoke rising from chimneys and golden light over the surrounding hills, no people, no text",
+   "seed": 14006
+  },
+  {
+   "id": "bg-home-apple-trees",
+   "prompt": "A family apple orchard at sunrise with a wooden ladder against a tree and woven baskets resting in the grass, no people, no text",
+   "seed": 14007
+  },
+  {
+   "id": "bg-home-lake-cabin",
+   "prompt": "A family cabin beside a calm lake at dawn, a small rowing boat tied at the wooden dock and mist drifting on the water, no people, no text",
+   "seed": 14008
+  },
+  {
+   "id": "bg-home-flower-window",
+   "prompt": "A sunny window box full of colorful flowers on a white cottage wall, morning light and a clear blue sky, no people, no text",
+   "seed": 14009
+  },
+  {
+   "id": "bg-home-country-lane",
+   "prompt": "A country lane lined with tall trees leading to a family farmhouse at sunrise, warm light on the fields, no people, no text",
+   "seed": 14010
+  },
+  {
+   "id": "bg-home-rose-bench",
+   "prompt": "A garden bench beside blooming roses in soft morning sun, a watering can resting on the stone path, no people, no text",
+   "seed": 14011
+  }
+ ]
+}

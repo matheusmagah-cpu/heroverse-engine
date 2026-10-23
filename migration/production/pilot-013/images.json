@@ -1,0 +1,97 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-013",
+ "style": "photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": "text, letters, watermark, logo, signature, frame, blurry, low quality, deformed hands, extra fingers, distorted face, disfigured, horror, cartoon, painting, illustration, cartoon, flat, low resolution",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused": {
+  "pilot-008": [
+   "figure-a",
+   "bg-night-sky",
+   "bg-moon-lake",
+   "bg-starry-hills",
+   "bg-lamp-window",
+   "bg-night-garden",
+   "bg-moonlit-sea",
+   "bg-quiet-chapel",
+   "bg-starry-forest",
+   "bg-dusk-field",
+   "bg-night-village",
+   "bg-candle",
+   "bg-window",
+   "bg-psalm-sheltered-cove",
+   "bg-psalm-hills-moonrise",
+   "bg-shepherd-lamp-gate"
+  ],
+  "pilot-010": [
+   "bg-cares-starlit-dock",
+   "bg-cares-clouds-moonlight",
+   "bg-cares-river-reeds-night"
+  ]
+ },
+ "images": [
+  {
+   "id": "bg-mercy-snow-dawn",
+   "prompt": "Fresh white snow covering a quiet valley at first light, soft pink sky and a calm frozen stream, pure and peaceful, no people, no text",
+   "seed": 13000
+  },
+  {
+   "id": "bg-mercy-east-west-horizon",
+   "prompt": "A vast open plain at twilight, the last golden light fading in the west and the first stars rising in the east, an endless calm horizon, no people, no text",
+   "seed": 13001
+  },
+  {
+   "id": "bg-mercy-road-home",
+   "prompt": "A long country road leading to a small farmhouse with warm lit windows at dusk, an open gate and welcoming light on the path, no people, no text",
+   "seed": 13002
+  },
+  {
+   "id": "bg-mercy-deep-sea-moon",
+   "prompt": "A calm deep ocean under a bright full moon, gentle swells and a path of silver light stretching to the horizon, no people, no text",
+   "seed": 13003
+  },
+  {
+   "id": "bg-mercy-washed-stones",
+   "prompt": "Clean smooth river stones washed by gentle clear water under soft moonlight, tiny ripples catching silver light, no people, no text",
+   "seed": 13004
+  },
+  {
+   "id": "bg-mercy-open-door-light",
+   "prompt": "An old wooden door standing open in a stone cottage at night, warm golden light spilling out onto a garden path, no people, no text",
+   "seed": 13005
+  },
+  {
+   "id": "bg-mercy-rain-cleared-sky",
+   "prompt": "A night sky clearing after rain over a quiet meadow, stars appearing between parting clouds and wet grass shining in moonlight, no people, no text",
+   "seed": 13006
+  },
+  {
+   "id": "bg-mercy-mist-hills-moon",
+   "prompt": "Snow-white mist resting softly over rolling green hills under a full moon, calm deep blue sky, no people, no text",
+   "seed": 13007
+  },
+  {
+   "id": "bg-mercy-candle-chapel",
+   "prompt": "A quiet empty chapel interior with rows of softly glowing candles and moonlight falling through tall arched windows, no people, no text",
+   "seed": 13008
+  },
+  {
+   "id": "bg-mercy-still-pond-stars",
+   "prompt": "A perfectly still mountain pond reflecting a starry sky, a single small lantern glowing on a flat rock at its edge, no people, no text",
+   "seed": 13009
+  },
+  {
+   "id": "bg-mercy-garden-dawn",
+   "prompt": "A quiet garden at the first light of dawn, dew on white flowers and a stone path leading to an open wooden gate, no people, no text",
+   "seed": 13010
+  },
+  {
+   "id": "bg-mercy-moonlit-waterfall",
+   "prompt": "A small gentle waterfall flowing into a moonlit pool surrounded by ferns and smooth stones, soft mist over the water, no people, no text",
+   "seed": 13011
+  }
+ ]
+}

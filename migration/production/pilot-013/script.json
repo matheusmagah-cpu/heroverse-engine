@@ -1,0 +1,503 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-013",
+ "archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md",
+ "spec": "migration/strategy/MODELING_SPEC.md#1-prayer-morning-night-protection",
+ "format_note": "Original night prayer of confession and forgiveness, then a distinct Scripture-for-sleep section on God's mercy. Same validated guided-prayer-scenic structure as pilot-010; 18 backgrounds (E48); one amen-only CTA after the concrete payoff.",
+ "working_title": "Night Prayer for Forgiveness | Let God's Mercy Wash Away Today Before You Sleep",
+ "promise": "Name today's regrets honestly, receive God's forgiveness, choose one act of repair, and rest with Scripture about his mercy.",
+ "angle": "Confession made concrete (spoken words, avoided duties, hidden motives), conviction versus condemnation, forgiving others and oneself, one practical repair with a time, then sleep readings on mercy (Luke 15, Micah 7, Isaiah 43, Psalm 86, 116, 131, 4). No medical or outcome promises.",
+ "authorship": "Original English prayer written for HeroVerse by Claude (Anthropic AI assistant), 2026-10-23. Scripture quotations are verbatim public-domain KJV.",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "beat": "hook",
+   "pause_after": 1.2,
+   "text": "Before you sleep tonight, bring today's regrets to God and let his mercy meet you right where you are."
+  },
+  {
+   "id": "invitation",
+   "beat": "invitation",
+   "pause_after": 1.2,
+   "text": "You may be replaying a sharp word, a promise you did not keep, or something you hoped nobody noticed. You do not have to tidy it before you come. Let your shoulders lower a little. You can listen with your eyes closed or open. In this prayer you will name what happened plainly, receive forgiveness, consider one act of repair, and then rest with Scripture about God's mercy."
+  },
+  {
+   "id": "scripture-isaiah-reason",
+   "beat": "scripture isaiah reason",
+   "pause_after": 1.5,
+   "text": "Come now, and let us reason together, saith the LORD: though your sins be as scarlet, they shall be as white as snow; though they be red like crimson, they shall be as wool.",
+   "reference": "Isaiah 1:18 (KJV)"
+  },
+  {
+   "id": "prayer-first-honesty",
+   "beat": "prayer first honesty",
+   "pause_after": 1.2,
+   "text": "Father, I come to you at the end of this day without pretending it went better than it did. You already know the moment I keep returning to. I would rather tell you about it than keep defending myself in my thoughts. Thank you that you invite me to reason with you instead of hiding from you. Give me courage to be truthful, and gentleness to remember that you are the one listening."
+  },
+  {
+   "id": "reflection-name-it",
+   "beat": "reflection name it",
+   "pause_after": 1.2,
+   "text": "Regret often stays vague because a vague feeling is easier to carry than a clear sentence. Yet a clear sentence is easier to bring to God. Try naming it in ordinary words: I was impatient with my child. I exaggerated to look better. I ignored a call I should have answered. You are not writing a confession for anyone else. You are simply letting the truth have a shape, so that mercy has something specific to meet."
+  },
+  {
+   "id": "prayer-specific-word",
+   "beat": "prayer specific word",
+   "pause_after": 1.2,
+   "text": "Lord, I name the words I spoke today that were harsher than they needed to be. I remember the tone as well as the sentence, and I remember the face of the person who heard it. I cannot take those words back into my mouth. I ask you to forgive me for them, and to soften whatever they hurt. Show me tomorrow whether an apology is needed, and help me offer it simply."
+  },
+  {
+   "id": "prayer-what-i-avoided",
+   "beat": "prayer what i avoided",
+   "pause_after": 1.2,
+   "text": "Father, I also bring what I avoided. There was a task I postponed because it felt uncomfortable, and a conversation I steered away from because I was afraid of how it might go. Sometimes my failures are quiet ones, a kindness I withheld or a duty I left for someone else. Forgive me for the good I could have done and did not. Make me braver in small and honest ways."
+  },
+  {
+   "id": "scripture-psalm-acknowledged",
+   "beat": "scripture psalm acknowledged",
+   "pause_after": 1.5,
+   "text": "I acknowledged my sin unto thee, and mine iniquity have I not hid. I said, I will confess my transgressions unto the LORD; and thou forgavest the iniquity of my sin. Selah.",
+   "reference": "Psalm 32:5 (KJV)"
+  },
+  {
+   "id": "reflection-hiding",
+   "beat": "reflection hiding",
+   "pause_after": 1.2,
+   "text": "Notice the order in that psalm. The writer stops hiding, says it out loud to God, and forgiveness follows. Hiding takes a surprising amount of energy. You rehearse explanations, you watch for anyone who might bring it up, you feel slightly tense around certain people. Confession is not meant to crush you. It is the moment you can stop guarding the secret, because the One who hears it has already chosen mercy."
+  },
+  {
+   "id": "prayer-confession-plain",
+   "beat": "prayer confession plain",
+   "pause_after": 1.2,
+   "text": "Lord, here is the part I have been reluctant to admit, even to myself. I did it because I wanted to protect my image, to win the argument, or to avoid feeling small. I do not want to dress it up as something nobler. I confess it as sin, and I ask you to forgive me. Thank you that your patience with me is deeper than my embarrassment tonight."
+  },
+  {
+   "id": "prayer-receiving-pardon",
+   "beat": "prayer receiving pardon",
+   "pause_after": 1.2,
+   "text": "Father, help me actually receive what I have asked for. I tend to ask for forgiveness and then keep punishing myself anyway, as though your answer were not enough. If you have forgiven me, I do not need to keep the sentence running in my head. Teach me to trust your word more than my lingering shame. Let this pardon settle into the places where I usually hold my breath."
+  },
+  {
+   "id": "reflection-same-again",
+   "beat": "reflection same again",
+   "pause_after": 1.2,
+   "text": "Perhaps what troubles you most is that this is not the first time. You have confessed this same weakness before, and here it is again. That can make forgiveness feel almost dishonest, as if you were taking advantage of God. Yet Scripture never puts a limit on returning. Each honest return is part of how change happens. God is not tired of hearing from you. He is patiently forming something new in you."
+  },
+  {
+   "id": "scripture-romans-condemnation",
+   "beat": "scripture romans condemnation",
+   "pause_after": 1.5,
+   "text": "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+   "reference": "Romans 8:1 (KJV)"
+  },
+  {
+   "id": "reflection-conviction",
+   "beat": "reflection conviction",
+   "pause_after": 1.2,
+   "text": "There is a difference between conviction and condemnation. Conviction is specific and it points somewhere: this was wrong, here is what to do next. Condemnation is general and it points nowhere: you always ruin things, you will never change. The first one leads you toward God and toward repair. The second one only leads you in circles. Tonight you can thank God for conviction and refuse the voice of condemnation."
+  },
+  {
+   "id": "prayer-heart-accuses",
+   "beat": "prayer heart accuses",
+   "pause_after": 1.2,
+   "text": "Lord, my heart is good at accusing me. It brings up old mistakes alongside today's, and it speaks as if they define me. When those thoughts come back in the dark, remind me that you know me more completely than my worst memory does. Quiet the voice that keeps the record open. I place the whole list in your hands, the recent pages and the old ones too."
+  },
+  {
+   "id": "scripture-john-greater",
+   "beat": "scripture john greater",
+   "pause_after": 1.5,
+   "text": "For if our heart condemn us, God is greater than our heart, and knoweth all things.",
+   "reference": "1 John 3:20 (KJV)"
+  },
+  {
+   "id": "stillness-first",
+   "beat": "stillness first",
+   "pause_after": 3.0,
+   "text": "Let that sentence stay with you for a moment. God is greater than your heart. You do not need to add anything to it or argue with it. Simply breathe at your own pace, and notice that you are still here, still loved, still being spoken to with kindness."
+  },
+  {
+   "id": "reflection-repair",
+   "beat": "reflection repair",
+   "pause_after": 1.2,
+   "text": "Forgiveness from God does not mean the people around you were not affected. Sometimes mercy received at night becomes repair offered in the morning. Repair can be very small: a direct apology without excuses, a returned item, an honest correction of something you said. You do not need to plan a grand gesture. Ask only, is there one person who deserves a simple word from me, and what would that word be?"
+  },
+  {
+   "id": "prayer-repair-person",
+   "beat": "prayer repair person",
+   "pause_after": 1.2,
+   "text": "Father, bring to mind the person who may need to hear from me. If I owe an apology, help me say it without explaining it away. If I need to correct something I said, give me the humility to do it plainly. If the situation is complicated, give me wisdom about timing and words. I do not want to repair things in order to look good. I want to love this person well."
+  },
+  {
+   "id": "prayer-humility",
+   "beat": "prayer humility",
+   "pause_after": 1.2,
+   "text": "Lord, I confess that I would sometimes rather feel guilty than apologize, because guilt stays private and an apology does not. Free me from that kind of pride. Let my repentance be honest enough to change how I act. When I speak to the person tomorrow, keep me from demanding that they respond in a particular way. Their response belongs to them. My part is truthfulness and kindness."
+  },
+  {
+   "id": "prayer-household",
+   "beat": "prayer household",
+   "pause_after": 1.2,
+   "text": "Father, I think of the people under my own roof, or the people I speak with most often. Familiarity makes it easy to be careless with them. Forgive me for the impatience I would never show a stranger. Forgive me for the assumptions I make about what they meant. Help me notice their tiredness and their efforts. Let my home be a place where forgiveness is spoken out loud and received without keeping score."
+  },
+  {
+   "id": "scripture-ephesians-kind",
+   "beat": "scripture ephesians kind",
+   "pause_after": 1.5,
+   "text": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake hath forgiven you.",
+   "reference": "Ephesians 4:32 (KJV)"
+  },
+  {
+   "id": "reflection-forgiving-others",
+   "beat": "reflection forgiving others",
+   "pause_after": 1.2,
+   "text": "Mercy rarely flows in only one direction. As you receive forgiveness tonight, someone else's failure may come to mind, a person whose words or actions hurt you. Forgiving them does not mean saying it did not matter, and it does not always mean trusting them again immediately. It means handing over your right to repay them, and asking God to deal with what you cannot fix yourself."
+  },
+  {
+   "id": "prayer-someone-hurt-me",
+   "beat": "prayer someone hurt me",
+   "pause_after": 1.2,
+   "text": "Father, I bring the person who hurt me. You saw what happened, and you know how deeply it landed. I do not want to carry resentment into my sleep again. Help me release my wish to see them suffer for it. Where boundaries are wise, give me clarity to keep them. Where reconciliation is possible, prepare both of our hearts. Tonight, I choose to leave the judgment with you."
+  },
+  {
+   "id": "prayer-not-pretending",
+   "beat": "prayer not pretending",
+   "pause_after": 1.2,
+   "text": "Lord, if forgiving them still feels impossible, I will not pretend otherwise with you. Let this prayer be a beginning rather than a performance. I may need to forgive again tomorrow, and the day after. Give me the willingness I do not yet feel. Remind me how patiently you have forgiven me, again and again, so that my heart can slowly learn the same tender patience toward others."
+  },
+  {
+   "id": "scripture-colossians-forbearing",
+   "beat": "scripture colossians forbearing",
+   "pause_after": 1.5,
+   "text": "Forbearing one another, and forgiving one another, if any man have a quarrel against any: even as Christ forgave you, so also do ye.",
+   "reference": "Colossians 3:13 (KJV)"
+  },
+  {
+   "id": "reflection-forgiving-self",
+   "beat": "reflection forgiving self",
+   "pause_after": 1.2,
+   "text": "Some people find it easier to forgive others than to accept forgiveness for themselves. You might hold yourself to a standard you would never demand of a friend. If God has forgiven you, refusing to let it go is not humility. It quietly suggests that your judgment outweighs his. You can still learn from what happened. You can still make repair. But you do not need to keep paying for what has already been forgiven."
+  },
+  {
+   "id": "prayer-self-compassion",
+   "beat": "prayer self compassion",
+   "pause_after": 1.2,
+   "text": "Father, teach me to speak to myself the way you speak to me. I can be honest about my failure without despising the person who failed. Help me learn the lesson this day offers and then lay down the weight. When I wake tomorrow, let me begin as someone forgiven, not as someone on probation. Thank you that your mercy is not a reluctant pardon but a welcome home."
+  },
+  {
+   "id": "scripture-micah-delight",
+   "beat": "scripture micah delight",
+   "pause_after": 1.5,
+   "text": "Who is a God like unto thee, that pardoneth iniquity, and passeth by the transgression of the remnant of his heritage? he retaineth not his anger for ever, because he delighteth in mercy.",
+   "reference": "Micah 7:18 (KJV)"
+  },
+  {
+   "id": "reflection-delight",
+   "beat": "reflection delight",
+   "pause_after": 1.2,
+   "text": "Consider the last words of that verse: he delighteth in mercy. God is not forgiving you with a sigh, as if you were one more burden. Mercy is something he enjoys giving. You may have grown up imagining God as mostly disappointed. Tonight you can let a different picture settle in, a Father who is glad when you return, and who takes pleasure in making things new."
+  },
+  {
+   "id": "prayer-gratitude-mercy",
+   "beat": "prayer gratitude mercy",
+   "pause_after": 1.2,
+   "text": "Lord, thank you that you enjoy showing mercy. Thank you for every time you have forgiven me without reminding me of my failures. Thank you for the people who have shown me grace when I did not deserve it, because their kindness was a reflection of yours. Let gratitude grow in me tonight until it is larger than my regret. I want to fall asleep thankful, not ashamed."
+  },
+  {
+   "id": "prayer-clean-heart",
+   "beat": "prayer clean heart",
+   "pause_after": 1.2,
+   "text": "Lord, I do not only want my record cleared. I want my heart changed. Where impatience has become a habit, grow patience in me. Where I have learned to shade the truth, make me honest. Where I keep reaching for control, teach me trust. Do this work slowly and deeply, the way a garden changes through many quiet nights. I give you permission to keep shaping me."
+  },
+  {
+   "id": "reflection-habits",
+   "beat": "reflection habits",
+   "pause_after": 1.2,
+   "text": "Many of the things we regret come from habits rather than single choices. A habit of rushing, of checking the phone during conversations, of answering sharply when tired. God's forgiveness covers the moment, and his patience covers the slow work of changing the habit. You do not have to transform everything tomorrow. You can ask for help with one pattern, and let God grow something better in its place, one ordinary day at a time."
+  },
+  {
+   "id": "scripture-psalm-clean",
+   "beat": "scripture psalm clean",
+   "pause_after": 1.5,
+   "text": "Create in me a clean heart, O God; and renew a right spirit within me.",
+   "reference": "Psalm 51:10 (KJV)"
+  },
+  {
+   "id": "declaration",
+   "beat": "declaration",
+   "pause_after": 1.2,
+   "text": "I am honest with God about what I did today. I am forgiven because God delights in mercy, not because I have earned it. I am free to make repair without being ruled by shame. I release the person who hurt me into God's hands. I can learn from this day without being defined by it. Tomorrow I begin again, as someone welcomed and held by the Father."
+  },
+  {
+   "id": "payoff",
+   "beat": "payoff",
+   "pause_after": 1.2,
+   "text": "Before the readings for sleep, make one small decision. Think of the one act of repair that would honor what you prayed, and give it a time. It might be, at lunch tomorrow I will send a short apology to my brother. If it helps, write just that sentence somewhere you will see it. Then set it down. The repair has a place in tomorrow, so tonight can be given to rest."
+  },
+  {
+   "id": "prayer-commitment",
+   "beat": "prayer commitment",
+   "pause_after": 1.2,
+   "text": "Father, I place that one step into your care. When the time comes, give me clear and gentle words. If you show me that a different step would be wiser, help me listen. For now, I do not need to rehearse the conversation over and over. I have confessed, I have been forgiven, and I have a next step. Let that be enough for tonight."
+  },
+  {
+   "id": "cta",
+   "beat": "cta",
+   "pause_after": 1.0,
+   "text": "If you have received God's forgiveness tonight, you can type amen in the comments. Now let Scripture carry you toward sleep."
+  },
+  {
+   "id": "sleep-introduction",
+   "beat": "sleep introduction",
+   "pause_after": 1.5,
+   "text": "From here the words slow down. There will be short readings and quiet prayers about the mercy of God. You do not need to follow each one closely. If your mind drifts, that is all right. Let your body be heavy where it rests, and let the sound of the voice be a gentle companion. The work of this evening is finished. What remains is to receive."
+  },
+  {
+   "id": "sleep-luke-father",
+   "beat": "sleep luke father",
+   "pause_after": 1.5,
+   "text": "And he arose, and came to his father. But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him.",
+   "reference": "Luke 15:20 (KJV)"
+  },
+  {
+   "id": "sleep-reflection-running",
+   "beat": "sleep reflection running",
+   "pause_after": 1.2,
+   "text": "In this story the son has rehearsed a speech, but the father runs to him before he can finish it. The welcome comes first. You may have spent this evening preparing your words for God. Picture instead that you were seen from a long way off, and that compassion moved toward you before you arrived. You are not waiting outside the house tonight. You have been welcomed in."
+  },
+  {
+   "id": "sleep-prayer-homecoming",
+   "beat": "sleep prayer homecoming",
+   "pause_after": 1.2,
+   "text": "Father, thank you for running toward me when I turn back. Thank you for the embrace that comes before my explanation is complete. As I lie down, let me rest like someone who has come home, not like someone still standing at the gate. Let the quiet of this room feel like the quiet of your house, where I am known and wanted."
+  },
+  {
+   "id": "sleep-reflection-welcome",
+   "beat": "sleep reflection welcome",
+   "pause_after": 1.2,
+   "text": "The father in the story did not send his son to sleep in the field. He brought him inside, prepared a celebration, and restored his place in the family. Forgiveness in God's house is not grudging. It brings you back to the table. As you lie here, you can let yourself feel like a welcomed child rather than a hired servant. You belong in the Father's house tonight."
+  },
+  {
+   "id": "sleep-isaiah-blot",
+   "beat": "sleep isaiah blot",
+   "pause_after": 1.5,
+   "text": "I, even I, am he that blotteth out thy transgressions for mine own sake, and will not remember thy sins.",
+   "reference": "Isaiah 43:25 (KJV)"
+  },
+  {
+   "id": "sleep-reflection-not-remember",
+   "beat": "sleep reflection not remember",
+   "pause_after": 1.2,
+   "text": "God chooses not to hold your sins against you. He blots them out, the way ink disappears when the page is washed clean. You may still remember what you did, and that memory can keep you humble and wise. But the record that once stood against you has been cleared. Your mind can rest on that, slowly, the way a boat rests on calm water."
+  },
+  {
+   "id": "sleep-prayer-letting-go",
+   "beat": "sleep prayer letting go",
+   "pause_after": 1.2,
+   "text": "Lord, I let go of the memory I keep picking up. I do not need to hold it in front of me tonight. You have chosen not to keep it against me, so I choose to set it down as well. Fill the space it leaves with your peace. Let my last thoughts before sleep be about your goodness, not my failure."
+  },
+  {
+   "id": "sleep-stillness",
+   "beat": "sleep stillness",
+   "pause_after": 3.0,
+   "text": "You can rest in the silence for a little while. Nothing needs to be solved. Let your breathing find its own unhurried rhythm, and let your hands lie open, as if they had just released something heavy."
+  },
+  {
+   "id": "sleep-micah-depths",
+   "beat": "sleep micah depths",
+   "pause_after": 1.5,
+   "text": "He will turn again, he will have compassion upon us; he will subdue our iniquities; and thou wilt cast all their sins into the depths of the sea.",
+   "reference": "Micah 7:19 (KJV)"
+  },
+  {
+   "id": "sleep-reflection-sea",
+   "beat": "sleep reflection sea",
+   "pause_after": 1.2,
+   "text": "Imagine the deep sea at night, far from any shore. Whatever falls there is not brought back up. That is the picture Scripture gives of your forgiven sin. It is not floating near you, waiting to resurface. It has gone into the depths, beneath the quiet surface of God's compassion. You can let your thoughts drift down, slow and calm, into that same deep peace."
+  },
+  {
+   "id": "sleep-prayer-depths",
+   "beat": "sleep prayer depths",
+   "pause_after": 1.2,
+   "text": "Father, thank you for casting my sins where I cannot reach them. When I am tempted to go searching for them again, remind me that you have placed them out of sight. Let me sleep above that calm water without fear. Let your compassion be the tide that carries me gently through the hours of this night."
+  },
+  {
+   "id": "sleep-reflection-tomorrow",
+   "beat": "sleep reflection tomorrow",
+   "pause_after": 1.2,
+   "text": "When morning comes, you will not need to start by digging up tonight's confession. You can begin with the step you planned, and with gratitude for mercy already given. The day ahead may bring new mistakes, and there will be mercy for those as well. For now, there is nothing to carry into the dark. You can leave tomorrow in tomorrow, and simply rest in tonight."
+  },
+  {
+   "id": "sleep-psalm-ready",
+   "beat": "sleep psalm ready",
+   "pause_after": 1.5,
+   "text": "For thou, Lord, art good, and ready to forgive; and plenteous in mercy unto all them that call upon thee.",
+   "reference": "Psalm 86:5 (KJV)"
+  },
+  {
+   "id": "sleep-reflection-ready",
+   "beat": "sleep reflection ready",
+   "pause_after": 1.2,
+   "text": "Ready to forgive. Not reluctant, not slow, not keeping a careful count. The mercy of God is plentiful, more than you will ever use up. Whatever you bring to him tomorrow, there will be enough. Whatever you remember in the night, there is still enough. You can lean back into that plenty the way you lean back into a pillow."
+  },
+  {
+   "id": "sleep-prayer-calling",
+   "beat": "sleep prayer calling",
+   "pause_after": 1.2,
+   "text": "Lord, I call upon you as I settle into sleep. Thank you for being good to me today, even in the places where I was not good. Thank you that your mercy is plenteous and fresh. Watch over the people I love and the people I hurt. Watch over the one who hurt me. Hold all of us in the same patient kindness."
+  },
+  {
+   "id": "sleep-prayer-loved-ones",
+   "beat": "sleep prayer loved ones",
+   "pause_after": 1.2,
+   "text": "Father, I pray for those I love as they sleep or prepare for sleep. Where they carry guilt, let them know your forgiveness. Where they carry hurt from me, heal what I could not heal. Where they feel far from you, draw them near. Guard their rest and their homes. Let your mercy reach every person connected to my day, even those I will never think to name."
+  },
+  {
+   "id": "sleep-isaiah-rest",
+   "beat": "sleep isaiah rest",
+   "pause_after": 1.5,
+   "text": "For thus saith the Lord GOD, the Holy One of Israel; In returning and rest shall ye be saved; in quietness and in confidence shall be your strength: and ye would not.",
+   "reference": "Isaiah 30:15 (KJV)"
+  },
+  {
+   "id": "sleep-reflection-quietness",
+   "beat": "sleep reflection quietness",
+   "pause_after": 1.2,
+   "text": "In returning and rest. You returned tonight by being honest with God, and now you can rest. Your strength does not come from replaying the day or planning every word for tomorrow. It comes from quietness and confidence in him. Let the quiet grow around you. Let confidence replace the tight feeling of self-defense. There is nothing more you need to prove before you sleep."
+  },
+  {
+   "id": "sleep-prayer-quiet",
+   "beat": "sleep prayer quiet",
+   "pause_after": 1.2,
+   "text": "Father, I accept the rest you offer. I do not want to be like those who would not. Teach my restless mind to be quiet in your presence. Let my confidence be in your faithfulness rather than my performance. As sleep comes, let it come as a gift received from your hand, and let me wake with that same quiet strength."
+  },
+  {
+   "id": "sleep-reflection-breath",
+   "beat": "sleep reflection breath",
+   "pause_after": 1.2,
+   "text": "Notice how your breathing has changed since this prayer began. It may be slower now, a little deeper. You did not have to force that. Rest often arrives when we stop defending ourselves. Let each breath out feel like setting something down, and each breath in feel like receiving a quiet gift. There is no need to count or control it. Simply let it be gentle."
+  },
+  {
+   "id": "sleep-psalm-return",
+   "beat": "sleep psalm return",
+   "pause_after": 1.5,
+   "text": "Return unto thy rest, O my soul; for the LORD hath dealt bountifully with thee.",
+   "reference": "Psalm 116:7 (KJV)"
+  },
+  {
+   "id": "sleep-reflection-bountiful",
+   "beat": "sleep reflection bountiful",
+   "pause_after": 1.2,
+   "text": "The psalmist speaks to his own soul and tells it to come back to rest. You can do the same. You can say quietly, return to your rest, because God has been generous with you. Think of one kindness from today that you did not deserve, a meal, a message, a moment of laughter. Let that small evidence of God's generosity be the last picture in your mind."
+  },
+  {
+   "id": "sleep-psalm-weaned",
+   "beat": "sleep psalm weaned",
+   "pause_after": 1.5,
+   "text": "Surely I have behaved and quieted myself, as a child that is weaned of his mother: my soul is even as a weaned child.",
+   "reference": "Psalm 131:2 (KJV)"
+  },
+  {
+   "id": "sleep-prayer-child",
+   "beat": "sleep prayer child",
+   "pause_after": 1.2,
+   "text": "Lord, quiet my soul like a child resting against a parent, no longer anxious or demanding, simply content to be near. I lay down my need to understand everything about today. I lay down my fear about tomorrow. I am your child, forgiven and safe. Let me rest in that nearness until morning comes."
+  },
+  {
+   "id": "sleep-reflection-morning",
+   "beat": "sleep reflection morning",
+   "pause_after": 1.2,
+   "text": "Morning will come with its own light. When it does, the mercy of God will still be there, as fresh as it was tonight. You do not have to hold on to forgiveness through the night as if it might slip away. It is held for you. You can let go of everything, even the effort of staying aware, and allow sleep to take you gently."
+  },
+  {
+   "id": "sleep-psalm-bed",
+   "beat": "sleep psalm bed",
+   "pause_after": 1.5,
+   "text": "Stand in awe, and sin not: commune with your own heart upon your bed, and be still. Selah.",
+   "reference": "Psalm 4:4 (KJV)"
+  },
+  {
+   "id": "sleep-reflection-still",
+   "beat": "sleep reflection still",
+   "pause_after": 1.2,
+   "text": "Commune with your heart upon your bed, and be still. You have already spoken honestly tonight. Now there is room just to be still. You may hear the faint sounds of the house or the street, and you can let them pass. There is no more to confess, no more to arrange. Only stillness, and the mercy that surrounds you in it."
+  },
+  {
+   "id": "sleep-prayer-closing",
+   "beat": "sleep prayer closing",
+   "pause_after": 1.5,
+   "text": "Father, I end this day in your mercy. Thank you for hearing my confession and answering it with forgiveness. Thank you for the person I will speak to tomorrow, and for the courage you will give me then. Watch over me through the night. Let me rest as one who is clean, welcomed, and deeply loved. I place my sleep and my waking in your hands. Amen."
+  }
+ ],
+ "figure": "figure-a",
+ "backgrounds": [
+  "bg-mercy-snow-dawn",
+  "bg-mercy-east-west-horizon",
+  "bg-cares-starlit-dock",
+  "bg-mercy-road-home",
+  "bg-mercy-deep-sea-moon",
+  "bg-cares-clouds-moonlight",
+  "bg-mercy-washed-stones",
+  "bg-mercy-open-door-light",
+  "bg-cares-river-reeds-night",
+  "bg-mercy-rain-cleared-sky",
+  "bg-mercy-mist-hills-moon",
+  "bg-psalm-sheltered-cove",
+  "bg-mercy-candle-chapel",
+  "bg-mercy-still-pond-stars",
+  "bg-psalm-hills-moonrise",
+  "bg-mercy-garden-dawn",
+  "bg-mercy-moonlit-waterfall",
+  "bg-shepherd-lamp-gate"
+ ],
+ "overlay": {
+  "title": "Rest in His Mercy Tonight",
+  "subtitle": "NIGHT PRAYER",
+  "title_image": "bg-moon-lake",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse Prayer",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "Bring today's regrets to God in an honest night prayer for forgiveness, then rest with gentle KJV Scripture about his mercy as you fall asleep.",
+ "hashtags": [
+  "#prayer",
+  "#nightprayer",
+  "#forgiveness"
+ ],
+ "thumbnail": {
+  "lines": [
+   "HIS MERCY",
+   "IS ENOUGH"
+  ],
+  "sub": "Night Prayer"
+ },
+ "tags": [
+  "night prayer",
+  "prayer for forgiveness",
+  "God's mercy",
+  "bedtime prayer",
+  "scripture for sleep",
+  "KJV night prayer",
+  "Christian guided prayer",
+  "repentance prayer"
+ ],
+ "figure_choice": "figure-a: HeroVerse's own generated praying illustration, reused from pilot-004 for brand continuity; no real-person likeness or borrowed identity.",
+ "playlist": {
+  "title": "Night Prayer",
+  "description": "Calm night prayers with Scripture to end the day with God: peace, forgiveness, protection and restful sleep."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": [
+   "bg-night-sky",
+   "bg-moon-lake",
+   "bg-starry-hills",
+   "bg-starry-forest",
+   "bg-moonlit-sea"
+  ]
+ }
+}
