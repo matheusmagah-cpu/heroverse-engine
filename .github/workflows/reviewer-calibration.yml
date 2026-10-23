@@ -34,9 +34,14 @@ jobs:
           : > "$RUNNER_TEMP/pairs"
           for p in $PILOTS; do
             sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "migration/production/$p/out/manifest.json")
-            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$p-sha256-$sha.mp4" -O "$RUNNER_TEMP/$p.mp4"
-            echo "$sha  $RUNNER_TEMP/$p.mp4" | sha256sum -c -
-            echo "$p=$RUNNER_TEMP/$p.mp4" >> "$RUNNER_TEMP/pairs"
+            if gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$p-sha256-$sha.mp4" -O "$RUNNER_TEMP/$p.mp4"; then
+              echo "$sha  $RUNNER_TEMP/$p.mp4" | sha256sum -c -
+              echo "$p=$RUNNER_TEMP/$p.mp4" >> "$RUNNER_TEMP/pairs"
+            else
+              # published renders leave the release: judge their public YouTube copy (ledger video_id of this exact render)
+              vid=$(python3 -I -c "import json,sys;print(json.load(open('migration/publish/ledger.json'))['entries'][sys.argv[1]+':'+sys.argv[2]]['video_id'])" "$p" "$sha")
+              echo "$p=youtube:$vid" >> "$RUNNER_TEMP/pairs"
+            fi
           done
       - name: Candidate reviews every render once
         env:

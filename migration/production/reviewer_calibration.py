@@ -6,7 +6,7 @@ A candidate reviewer is qualified only if, on renders the designated reviewer al
 - the same PASS/FAIL on every render,
 - a mean absolute difference of the overall score <= 0.6, and
 - a mean signed difference <= +0.5 (never more lenient than the reviewer it replaces).
-The rule is fixed before the run. Usage: reviewer_calibration.py CANDIDATE OUT_JSON PILOT=VIDEO [PILOT=VIDEO ...]
+The rule is fixed before the run. Usage: reviewer_calibration.py CANDIDATE OUT_JSON PILOT=VIDEO|youtube:ID [...]
 """
 import json
 import os
@@ -42,14 +42,20 @@ def main(candidate, out, *pairs):
         row = {"pilot": pilot, "designated_model": old["model"], "designated_status": old["status"],
                "designated_overall": old["overall"]}
         try:
-            file = lr.sr.upload(video, key)
-            try:
-                new = lr.watch(file, script["working_title"], key, models=(candidate,))
-            finally:
+            if video.startswith("youtube:"):  # a published render: its public YouTube copy, no upload
+                row["source"] = video
+                new = lr.watch({"uri": "https://www.youtube.com/watch?v=" + video.split(":", 1)[1]},
+                               script["working_title"], key, models=(candidate,))
+            else:
+                row["source"] = "release"
+                file = lr.sr.upload(video, key)
                 try:
-                    lr.sr.request(lr.sr.BASE + "/v1beta/" + file["name"], key, method="DELETE")
-                except Exception:  # noqa: BLE001
-                    pass
+                    new = lr.watch(file, script["working_title"], key, models=(candidate,))
+                finally:
+                    try:
+                        lr.sr.request(lr.sr.BASE + "/v1beta/" + file["name"], key, method="DELETE")
+                    except Exception:  # noqa: BLE001
+                        pass
             row.update(candidate_model=new["model"], candidate_status=new["status"], candidate_overall=new["overall"],
                        candidate_items={k: new.get(k) for k in lr.RUBRIC})
         except Exception as e:  # noqa: BLE001
