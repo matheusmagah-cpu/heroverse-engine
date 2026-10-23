@@ -119,6 +119,19 @@ class Check(unittest.TestCase):
         self.assertTrue(any(p.startswith("FOOTAGE_NOT_VETTED") for p in self.run_check(footage(20, vetting="PENDING"))))
         self.assertTrue(any(p.startswith("FOOTAGE_RIGHTS") for p in self.run_check(footage(20, licence="CC BY-SA 4.0"))))
 
+    def test_continuity_rules_r13(self):
+        def seg(i, n_words, pause=0.5):
+            return {"id": i, "text": " ".join(["word"] * n_words), "pause_after": pause}
+        good = [seg("hook", 15), seg("roadmap", 25), seg("prayer-1", 300), seg("rehook-1", 10), seg("prayer-2", 300),
+                seg("payoff", 40), {"id": "cta", "text": "Write amen, or leave a prayer request in the comments.", "pause_after": 1}]
+        self.assertEqual(sc.continuity_problems(good), [])
+        late = [good[0], seg("invitation", 80), good[1]] + good[2:]
+        self.assertIn("ROADMAP_MISSING", " ".join(sc.continuity_problems(late)))
+        gap = [s for s in good if s["id"] != "rehook-1"]   # 600 words = 257 s without a preview
+        self.assertTrue(any(p.startswith("REHOOK_GAP") for p in sc.continuity_problems(gap)))
+        amen_only = good[:-1] + [{"id": "cta", "text": "Write amen.", "pause_after": 1}]
+        self.assertIn("PRAYER_REQUEST_INVITE_MISSING (R13)", sc.continuity_problems(amen_only))
+
     def test_hook_rules_r12(self):
         self.assertEqual(sc.hook_problems("Before you sleep tonight, give God the worry you cannot fix. Pray with me now."), [])
         self.assertEqual(sc.hook_problems("The world tells you to carry it all. But God says rest, so pray this with me."), [])

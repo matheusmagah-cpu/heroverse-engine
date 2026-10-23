@@ -20,6 +20,12 @@
       "text": "Before you check your phone again tonight, give God the worry you cannot fix. Pray this with me."
     },
     {
+      "id": "roadmap",
+      "beat": "roadmap: name what we will pray for, then where it ends (R13)",
+      "pause_after": 0.8,
+      "text": "Tonight we will pray through the message you are waiting on, the work you carried home, the bills, and the people you love. Then Scripture will carry you toward sleep."
+    },
+    {
       "id": "invitation",
       "beat": "invitation",
       "pause_after": 1.2,
@@ -58,6 +64,12 @@
       "reference": "Philippians 4:6 (KJV)"
     },
     {
+      "id": "rehook-1",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Next, we set down the work that followed you home."
+    },
+    {
       "id": "prayer-work-mistake",
       "beat": "prayer work mistake",
       "pause_after": 1.2,
@@ -81,6 +93,12 @@
       "pause_after": 1.5,
       "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
       "reference": "Philippians 4:7 (KJV)"
+    },
+    {
+      "id": "rehook-2",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Stay with me a little longer. Now we bring the money worry that grows louder after dark."
     },
     {
       "id": "prayer-household-cost",
@@ -114,6 +132,12 @@
       "text": "Father, I name the appointment on the calendar. I bring the questions I hope to ask and the answers I am afraid to hear. Help me bring any notes or documents I need, and seek appropriate support if I want someone with me. I place the unknown parts before you. Give me courage for the actual hour when it comes. I release the demand to experience that hour many times before it arrives."
     },
     {
+      "id": "rehook-3",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "In a moment, we pray for the person whose trouble you are carrying tonight."
+    },
+    {
       "id": "prayer-loved-person",
       "beat": "prayer loved person",
       "pause_after": 1.2,
@@ -137,6 +161,12 @@
       "pause_after": 1.5,
       "text": "In the multitude of my thoughts within me thy comforts delight my soul.",
       "reference": "Psalm 94:19 (KJV)"
+    },
+    {
+      "id": "rehook-4",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Next comes the voice that judges you when the house is quiet. We will bring that to God too."
     },
     {
       "id": "prayer-inner-criticism",
@@ -170,6 +200,12 @@
       "text": "Faithful God, I place my trust in your character rather than the strength of my concentration. I know how easily my attention wanders. Help me return to what is true about you with patience. Keep me from using this prayer as another task to perform flawlessly. I want to become more honest in your presence, more willing to receive help, and more able to leave an unanswered question without following it through every imagined outcome."
     },
     {
+      "id": "rehook-5",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "We are almost at the place of rest. First, a few words of trust to say with me."
+    },
+    {
       "id": "declaration",
       "beat": "declaration",
       "pause_after": 1.2,
@@ -191,7 +227,7 @@
       "id": "cta",
       "beat": "cta",
       "pause_after": 1.0,
-      "text": "If you want to affirm this prayer in the comments, write amen. Now let the Scripture readings accompany your rest."
+      "text": "If you want to affirm this prayer in the comments, write amen. You can also leave a prayer request there, and in our next night prayer we will pray over the requests you share. Now let the Scripture readings accompany your rest."
     },
     {
       "id": "sleep-introduction",

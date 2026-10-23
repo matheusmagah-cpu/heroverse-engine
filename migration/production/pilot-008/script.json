@@ -20,6 +20,12 @@
       "text": "Before you sleep tonight, let your Shepherd carry what you could not finish. Pray Psalm twenty-three with me now."
     },
     {
+      "id": "roadmap",
+      "beat": "roadmap: name what we will pray for, then where it ends (R13)",
+      "pause_after": 0.8,
+      "text": "We will walk through Psalm twenty-three line by line, praying over your needs, your regrets, your grief, and tomorrow. Then gentle readings will carry you toward sleep."
+    },
+    {
       "id": "invitation",
       "beat": "8-30 s: settle and introduce the first verse",
       "pause_after": 1.2,
@@ -63,6 +69,12 @@
       "beat": "guided prayer: releasing comparison at bedtime",
       "pause_after": 1.2,
       "text": "Lord, when I compare my life with someone else's, I lose sight of the gifts already beside me. Tonight I lay down that comparison. I do not know their whole story, and I cannot live their calling. Help me recognize the portion entrusted to me today. Let gratitude grow without denying anything difficult. Where I have enough, make me generous. Where I am lacking, help me speak honestly and seek wise support."
+    },
+    {
+      "id": "rehook-1",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Next comes the line about still waters, and the work you are ready to put down."
     },
     {
       "id": "scripture-psalm-23-2",
@@ -111,6 +123,12 @@
       "text": "Guide my next step, Lord. If an apology is needed, help me offer it plainly. If a boundary is needed, help me speak it with steadiness. If I need to finish something I have avoided, give me courage to begin. Keep me from making grand promises tonight that I have not considered. Teach me the quiet faithfulness of doing one right thing at a time, following the path you place before me."
     },
     {
+      "id": "rehook-2",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Stay with me. Soon we reach the valley, and you will not walk it alone."
+    },
+    {
       "id": "scripture-isaiah-40-11",
       "beat": "anchor: the Shepherd carries and gently leads",
       "pause_after": 1.5,
@@ -148,6 +166,12 @@
       "beat": "guided prayer: loved ones walking difficult paths",
       "pause_after": 1.2,
       "text": "Shepherd, I remember those I love who are walking through their own valleys. I cannot choose their steps or remove every difficulty. I can bring their names before you with love. Give them faithful companions and the help their circumstances require. Teach me to listen before I advise. Show me a kindness I can offer when the day begins. As I rest now, I entrust them to your compassion, with all that remains beyond my reach."
+    },
+    {
+      "id": "rehook-3",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "Next, the table prepared for you, and the argument you keep having in your head."
     },
     {
       "id": "scripture-psalm-23-5",
@@ -190,6 +214,12 @@
       "text": "Faithful Lord, I place tomorrow within your care. I cannot prepare for every possibility, and I do not need to finish tomorrow's prayers tonight. When morning comes, guide the work and the relationships waiting there. Help me recognize goodness, receive mercy, and offer both to others. I entrust the remaining hours of this night to you. Let my life become a place where I learn, day by day, to dwell with you."
     },
     {
+      "id": "rehook-4",
+      "beat": "re-hook: preview the next prayer (R13)",
+      "pause_after": 0.6,
+      "text": "We are near the end of the psalm. Say these words of trust with me."
+    },
+    {
       "id": "declaration",
       "beat": "declaration: personal trust after the complete psalm",
       "pause_after": 1.2,
@@ -205,7 +235,7 @@
       "id": "cta",
       "beat": "one amen-only invitation after the payoff and before sleep",
       "pause_after": 1.0,
-      "text": "If you would like to mark that prayer, you can type amen in the comments. We now move into Scripture for sleep, with gentle readings about the Shepherd's care."
+      "text": "If you would like to mark that prayer, you can type amen in the comments. You can also leave a prayer request there, and in our next night prayer we will pray over the requests you share. We now move into Scripture for sleep, with gentle readings about the Shepherd's care."
     },
     {
       "id": "sleep-introduction",

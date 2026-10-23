@@ -21,6 +21,12 @@
    "text": "This morning, before your family's day begins, cover everyone you love in prayer. Pray with me."
   },
   {
+   "id": "roadmap",
+   "beat": "roadmap: name what we will pray for, then where it ends (R13)",
+   "pause_after": 0.8,
+   "text": "We will pray for your spouse, your children, the tensions at home, and the needs of your household, one by one."
+  },
+  {
    "id": "invitation",
    "beat": "invitation",
    "pause_after": 1.0,
@@ -63,6 +69,12 @@
    "beat": "prayer spouse",
    "pause_after": 1.0,
    "text": "Lord, I pray for the person I share my life with, or for the relationship closest to my heart. Give them strength for whatever today asks of them. Where there has been distance between us, bring us back toward each other. Help me notice their efforts instead of only their faults. Let my words today build them up, and let our partnership reflect your faithfulness."
+  },
+  {
+   "id": "rehook-1",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Next, the children you love, whatever their age."
   },
   {
    "id": "scripture-isaiah-children",
@@ -109,6 +121,12 @@
    "text": "Father, make our home a refuge. When someone walks through the door discouraged, let them find comfort here. When someone fails, let them find mercy here before they find consequences. Give me a steady heart so that my own fears do not fill the house. Let the confidence I have in you settle the atmosphere, so that each person feels safe to rest and to speak."
   },
   {
+   "id": "rehook-2",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Stay with me. In a moment, picture each face as we pray."
+  },
+  {
    "id": "stillness-one",
    "beat": "stillness one",
    "pause_after": 6.0,
@@ -152,6 +170,12 @@
    "beat": "prayer listening",
    "pause_after": 1.0,
    "text": "Lord, make me swift to hear the people I love. Slow my tongue when I want to correct, interrupt, or win. Help me hear the worry behind a sharp comment and the tiredness behind a short answer. When anger rises in me today, let it slow down long enough for wisdom to catch up. Teach me to listen the way you listen to me."
+  },
+  {
+   "id": "rehook-3",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Next, love that covers the small irritations of family life."
   },
   {
    "id": "scripture-peter-charity",
@@ -204,6 +228,12 @@
    "beat": "prayer work and home",
    "pause_after": 1.0,
    "text": "Lord, I bring the balance between work and home. Some days my job demands more than I want to give, and my family receives what is left of me. Help me use my time wisely. Give me energy for my responsibilities and enough left over for the people I love. When I come home today, let me arrive with patience and warmth, not only with exhaustion."
+  },
+  {
+   "id": "rehook-4",
+   "beat": "re-hook: preview the next prayer (R13)",
+   "pause_after": 0.6,
+   "text": "Before we finish, we bring the practical needs of your home."
   },
   {
    "id": "scripture-romans-affection",
@@ -265,7 +295,7 @@
    "id": "cta",
    "beat": "cta",
    "pause_after": 1.0,
-   "text": "If you are praying this over your family today, you are welcome to write Amen."
+   "text": "If you are praying this over your family today, you are welcome to write Amen. You can also leave a prayer request in the comments, and in our next morning prayer we will pray over the requests you share."
   },
   {
    "id": "closing",
