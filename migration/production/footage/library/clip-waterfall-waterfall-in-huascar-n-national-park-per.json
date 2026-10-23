@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-waterfall-in-huascar-n-national-park-per",
+ "theme": "waterfall",
+ "query": "cascade",
+ "source": "commons",
+ "title": "Waterfall in Huascarán National Park - Peru.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Waterfall_in_Huascar%C3%A1n_National_Park_-_Peru.webm",
+ "author": "CorraleH",
+ "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+ "licence": "CC0",
+ "licence_as_published": "CC0",
+ "source_seconds": 31.8,
+ "source_height": 1920,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Waterfall in Huascarán National Park - Peru.webm\" by CorraleH, CC0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Waterfall_in_Huascar%C3%A1n_National_Park_-_Peru.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "dc232bcc74a349527254439fab7e2a1d2a4a0ae74f7e99a1d901537064bebcfc",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  119.6,
+  120.2,
+  106.9,
+  97.4,
+  97.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-waterfall-waterfall-in-huascar-n-national-park-per-sha256-dc232bcc74a349527254439fab7e2a1d2a4a0ae74f7e99a1d901537064bebcfc.mp4"
+}

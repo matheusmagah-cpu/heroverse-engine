@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-webm",
+ "theme": "rain",
+ "query": "rain on leaves",
+ "source": "commons",
+ "title": "မိုးရွာနေသည့် မိုးရာသီ.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:%E1%80%99%E1%80%AD%E1%80%AF%E1%80%B8%E1%80%9B%E1%80%BD%E1%80%AC%E1%80%94%E1%80%B1%E1%80%9E%E1%80%8A%E1%80%B7%E1%80%BA_%E1%80%99%E1%80%AD%E1%80%AF%E1%80%B8%E1%80%9B%E1%80%AC%E1%80%9E%E1%80%AE.webm",
+ "author": "စာကလေး",
+ "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+ "licence": "CC0",
+ "licence_as_published": "CC0",
+ "source_seconds": 106.033,
+ "source_height": 1920,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"မိုးရွာနေသည့် မိုးရာသီ.webm\" by စာကလေး, CC0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:%E1%80%99%E1%80%AD%E1%80%AF%E1%80%B8%E1%80%9B%E1%80%BD%E1%80%AC%E1%80%94%E1%80%B1%E1%80%9E%E1%80%8A%E1%80%B7%E1%80%BA_%E1%80%99%E1%80%AD%E1%80%AF%E1%80%B8%E1%80%9B%E1%80%AC%E1%80%9E%E1%80%AE.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "381e752af4a333887d5f8ae8c4d3f73dcb3259f6ec373994114aa5af45e8d860",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  87.0,
+  86.0,
+  86.0,
+  85.6,
+  85.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-rain-webm-sha256-381e752af4a333887d5f8ae8c4d3f73dcb3259f6ec373994114aa5af45e8d860.mp4"
+}

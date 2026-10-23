@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-black-holes-vertical-video-svs14793-bhw2",
+ "theme": "night",
+ "query": "starry sky",
+ "source": "commons",
+ "title": "Black Holes Vertical Video (SVS14793 - BHW2024 Plunge Reel Final minus10).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Black_Holes_Vertical_Video_(SVS14793_-_BHW2024_Plunge_Reel_Final_minus10).webm",
+ "author": "NASA's Scientific Visualization Studio - University of Maryland College Park/Sara Mitchell, University of Maryland Colle",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 51.464,
+ "source_height": 1920,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Black Holes Vertical Video (SVS14793 - BHW2024 Plunge Reel Final minus10).webm\" by NASA's Scientific Visualization Studio - University of Maryland College Park/Sara Mitchell, University of Maryland Colle, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Black_Holes_Vertical_Video_(SVS14793_-_BHW2024_Plunge_Reel_Final_minus10).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "004de96f7d7fd2a5ea96efac7d27e4a77530f0c911afd4b9f80697f485c93444",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  22.2,
+  75.1,
+  85.1,
+  49.3,
+  57.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-black-holes-vertical-video-svs14793-bhw2-sha256-004de96f7d7fd2a5ea96efac7d27e4a77530f0c911afd4b9f80697f485c93444.mp4"
+}

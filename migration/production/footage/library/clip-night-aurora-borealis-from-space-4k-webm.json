@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-aurora-borealis-from-space-4k-webm",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "commons",
+ "title": "Aurora Borealis from Space (4K).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Aurora_Borealis_from_Space_(4K).webm",
+ "author": "NASA",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 310.241,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Aurora Borealis from Space (4K).webm\" by NASA, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Aurora_Borealis_from_Space_(4K).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fa5d82acb7564ed8c25eb1a0df61e2e36eaaa43457e1540ee8cca5a3eb3797a2",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  201.8,
+  202.6,
+  202.2,
+  59.5,
+  11.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-aurora-borealis-from-space-4k-webm-sha256-fa5d82acb7564ed8c25eb1a0df61e2e36eaaa43457e1540ee8cca5a3eb3797a2.mp4"
+}

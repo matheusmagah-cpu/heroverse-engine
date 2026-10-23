@@ -1,0 +1,40 @@
+{
+ "id": "clip-forest-4k-drone-flight-over-ephraim-harbor-to-s",
+ "theme": "forest",
+ "query": "autumn forest",
+ "source": "commons",
+ "title": "4K Drone Flight over Ephraim Harbor to see the Fall Colors - Door County, WI Oct 2024.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:4K_Drone_Flight_over_Ephraim_Harbor_to_see_the_Fall_Colors_-_Door_County,_WI_Oct_2024.webm",
+ "author": "Travel Smart Seniors",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 267.907,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"4K Drone Flight over Ephraim Harbor to see the Fall Colors - Door County, WI Oct 2024.webm\" by Travel Smart Seniors, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:4K_Drone_Flight_over_Ephraim_Harbor_to_see_the_Fall_Colors_-_Door_County,_WI_Oct_2024.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "bf49f5a3cf9fe87d7f6bc8b2a2375109abf22b2c3a422a2ba7fc78f08b4edec7",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN Ephriam Harbor Ephriam Ephriam Harbor"
+ ],
+ "vetting_luma": [
+  160.9,
+  165.1,
+  168.2,
+  169.3,
+  165.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

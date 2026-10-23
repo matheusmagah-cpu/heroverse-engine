@@ -1,0 +1,41 @@
+{
+ "id": "clip-sunrise-artemis-ii-full-moon-and-sunrise-at-lc-3",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "commons",
+ "title": "Artemis II Full Moon and Sunrise at LC 39B - Timelapse (KSC-20260201-MH-JBS01-0001-Artemis II Full Moon Sunrise Timelapse-M18703).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Artemis_II_Full_Moon_and_Sunrise_at_LC_39B_-_Timelapse_(KSC-20260201-MH-JBS01-0001-Artemis_II_Full_Moon_Sunrise_Timelapse-M18703).webm",
+ "author": "NASA Kennedy Space Center",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 40.093,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Artemis II Full Moon and Sunrise at LC 39B - Timelapse (KSC-20260201-MH-JBS01-0001-Artemis II Full Moon Sunrise Timelapse-M18703).webm\" by NASA Kennedy Space Center, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Artemis_II_Full_Moon_and_Sunrise_at_LC_39B_-_Timelapse_(KSC-20260201-MH-JBS01-0001-Artemis_II_Full_Moon_Sunrise_Timelapse-M18703).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8fb7a7be8a5bb242fc253a9101b12bdb264a9ffb5f0fda93dec37ebea7185ba5",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "TEXT_ON_SCREEN Artemi Antonia Jaramillo Botero"
+ ],
+ "vetting_luma": [
+  36.6,
+  2.8,
+  2.8,
+  2.8,
+  2.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

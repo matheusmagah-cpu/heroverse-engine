@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-southern-wallabi-beach-surf-conditions-a",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "commons",
+ "title": "Southern Wallabi Beach surf conditions and recreational surfing, Saltwater National Park, New South Wales.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Southern_Wallabi_Beach_surf_conditions_and_recreational_surfing,_Saltwater_National_Park,_New_South_Wales.webm",
+ "author": "JaredMcKenzie",
+ "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+ "licence": "CC0",
+ "licence_as_published": "CC0",
+ "source_seconds": 12.068,
+ "source_height": 1920,
+ "start": 1.0,
+ "seconds": 10.068,
+ "credit": "Footage: \"Southern Wallabi Beach surf conditions and recreational surfing, Saltwater National Park, New South Wales.webm\" by JaredMcKenzie, CC0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Southern_Wallabi_Beach_surf_conditions_and_recreational_surfing,_Saltwater_National_Park,_New_South_Wales.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "120c30f502d5d3214be5e47e4c7352d8674ac37dce0336d7b66b479edd6f7d8d",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  165.1,
+  151.0,
+  157.5,
+  151.9,
+  145.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-southern-wallabi-beach-surf-conditions-a-sha256-120c30f502d5d3214be5e47e4c7352d8674ac37dce0336d7b66b479edd6f7d8d.mp4"
+}

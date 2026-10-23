@@ -1,0 +1,40 @@
+{
+ "id": "clip-field-impact-of-climate-change-on-global-agric",
+ "theme": "field",
+ "query": "wheat field",
+ "source": "commons",
+ "title": "Impact of Climate Change on Global Agricultural Yields (SVS4974 - AgMapMaize).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Impact_of_Climate_Change_on_Global_Agricultural_Yields_(SVS4974_-_AgMapMaize).webm",
+ "author": "NASA's Scientific Visualization Studio - NASA/GSFC/Mark SubbaRao, ADNET Systems, Inc./Laurence Schuler, ADNET Systems, I",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 35.058,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Impact of Climate Change on Global Agricultural Yields (SVS4974 - AgMapMaize).webm\" by NASA's Scientific Visualization Studio - NASA/GSFC/Mark SubbaRao, ADNET Systems, Inc./Laurence Schuler, ADNET Systems, I, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Impact_of_Climate_Change_on_Global_Agricultural_Yields_(SVS4974_-_AgMapMaize).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "15940141e080ea68dd1ba25666a5d52d3d8b9d7efdbf728680ada4e888585b7a",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN Wheat Yield Maize Yield Yield Projections"
+ ],
+ "vetting_luma": [
+  65.4,
+  65.5,
+  65.1,
+  64.7,
+  64.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

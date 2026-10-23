@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-aurora-borealis-from-slovenia-on-2024-oc",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "commons",
+ "title": "Aurora borealis from Slovenia on 2024 October 10-11 - Polarni sij iz Slovenije (2).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_from_Slovenia_on_2024_October_10-11_-_Polarni_sij_iz_Slovenije_(2).webm",
+ "author": "Skies of Slovenia",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 87.288,
+ "source_height": 1824,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Aurora borealis from Slovenia on 2024 October 10-11 - Polarni sij iz Slovenije (2).webm\" by Skies of Slovenia, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Aurora_borealis_from_Slovenia_on_2024_October_10-11_-_Polarni_sij_iz_Slovenije_(2).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a08e2f637815f9d3675d4beb3e8ae28127a1a6c913857227f29cdf0d2342ef49",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN Aurora borealis through Aurora borealis rough"
+ ],
+ "vetting_luma": [
+  62.0,
+  63.5,
+  62.7,
+  58.7,
+  58.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

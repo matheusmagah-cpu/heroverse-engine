@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-sahalie-falls-during-winter-jm1101-webm",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "commons",
+ "title": "Sahalie Falls during Winter jm1101.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Sahalie_Falls_during_Winter_jm1101.webm",
+ "author": "CubanMojitoCrisis69",
+ "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+ "licence": "CC0",
+ "licence_as_published": "CC0",
+ "source_seconds": 19.025000000000002,
+ "source_height": 1920,
+ "start": 1.0,
+ "seconds": 17.025000000000002,
+ "credit": "Footage: \"Sahalie Falls during Winter jm1101.webm\" by CubanMojitoCrisis69, CC0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Sahalie_Falls_during_Winter_jm1101.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "39b7ce758f4c8b57869273b9ebd1ba3ca9711ef8704d7fb00438fb9512c61472",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  169.9,
+  107.8,
+  96.7,
+  103.9,
+  108.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-waterfall-sahalie-falls-during-winter-jm1101-webm-sha256-39b7ce758f4c8b57869273b9ebd1ba3ca9711ef8704d7fb00438fb9512c61472.mp4"
+}

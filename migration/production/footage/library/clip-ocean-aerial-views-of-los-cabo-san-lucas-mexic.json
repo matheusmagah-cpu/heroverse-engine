@@ -1,0 +1,40 @@
+{
+ "id": "clip-ocean-aerial-views-of-los-cabo-san-lucas-mexic",
+ "theme": "ocean",
+ "query": "ocean sunset",
+ "source": "commons",
+ "title": "Aerial views of Los Cabo, San Lucas, Mexico at sunset including El Arco, Lands End and ocean views.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Aerial_views_of_Los_Cabo,_San_Lucas,_Mexico_at_sunset_including_El_Arco,_Lands_End_and_ocean_views.webm",
+ "author": "the Dronalist",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 575.066,
+ "source_height": 2158,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Aerial views of Los Cabo, San Lucas, Mexico at sunset including El Arco, Lands End and ocean views.webm\" by the Dronalist, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Aerial_views_of_Los_Cabo,_San_Lucas,_Mexico_at_sunset_including_El_Arco,_Lands_End_and_ocean_views.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "942aa642660226d958c3be5505b91979c0f896d9f6bf01b1c761f79c252ca29c",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN Cabo Mexico Cabo Mexico"
+ ],
+ "vetting_luma": [
+  101.0,
+  111.0,
+  108.3,
+  98.8,
+  99.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-aurora-borealis-and-perseids-above-germa",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "commons",
+ "title": "Aurora Borealis and Perseids above Germany 12.08.2024.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Aurora_Borealis_and_Perseids_above_Germany_12.08.2024.webm",
+ "author": "Mindfl0w",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 35.288000000000004,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Aurora Borealis and Perseids above Germany 12.08.2024.webm\" by Mindfl0w, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Aurora_Borealis_and_Perseids_above_Germany_12.08.2024.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a8d992ea6529bc65abcfb784b36337453c625ea4a0b3314728da03e17ae0ec7e",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  19.2,
+  19.2,
+  18.8,
+  18.1,
+  17.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-night-aurora-borealis-and-perseids-above-germa-sha256-a8d992ea6529bc65abcfb784b36337453c625ea4a0b3314728da03e17ae0ec7e.mp4"
+}

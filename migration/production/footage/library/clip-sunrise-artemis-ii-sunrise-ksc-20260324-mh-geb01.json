@@ -1,0 +1,40 @@
+{
+ "id": "clip-sunrise-artemis-ii-sunrise-ksc-20260324-mh-geb01",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "commons",
+ "title": "Artemis II - Sunrise (KSC-20260324-MH-GEB01-0001-Artemis II Sunrise Timelapse-M18703).webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Artemis_II_-_Sunrise_(KSC-20260324-MH-GEB01-0001-Artemis_II_Sunrise_Timelapse-M18703).webm",
+ "author": "NASA Kennedy Space Center",
+ "licence_url": "",
+ "licence": "Public domain",
+ "licence_as_published": "Public domain",
+ "source_seconds": 34.461,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"Artemis II - Sunrise (KSC-20260324-MH-GEB01-0001-Artemis II Sunrise Timelapse-M18703).webm\" by NASA Kennedy Space Center, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Artemis_II_-_Sunrise_(KSC-20260324-MH-GEB01-0001-Artemis_II_Sunrise_Timelapse-M18703).webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6954eac77ba8c4fc6707cc2bdcb5bd53b288f5fced2f652989ae1697efe5cca0",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN Date Contact Antonia Jaramillo Botero info"
+ ],
+ "vetting_luma": [
+  36.0,
+  36.0,
+  1.0,
+  41.8,
+  68.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": null
+}

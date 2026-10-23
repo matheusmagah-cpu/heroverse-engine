@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-sonoma-creek-december-2022-sarah-stierch",
+ "theme": "river",
+ "query": "forest creek",
+ "source": "commons",
+ "title": "Sonoma Creek - December 2022 - Sarah Stierch.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:Sonoma_Creek_-_December_2022_-_Sarah_Stierch.webm",
+ "author": "Missvain",
+ "licence_url": "https://creativecommons.org/licenses/by/4.0",
+ "licence": "CC BY 4.0",
+ "licence_as_published": "CC BY 4.0",
+ "source_seconds": 10.483,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 8.483,
+ "credit": "Footage: \"Sonoma Creek - December 2022 - Sarah Stierch.webm\" by Missvain, CC BY 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Sonoma_Creek_-_December_2022_-_Sarah_Stierch.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "04d06cf0a63ac08b14b2c17b79737bc6789a02d83a6bc2d098c1aea3a73992a7",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  137.2,
+  136.8,
+  137.3,
+  137.6,
+  137.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-river-sonoma-creek-december-2022-sarah-stierch-sha256-04d06cf0a63ac08b14b2c17b79737bc6789a02d83a6bc2d098c1aea3a73992a7.mp4"
+}

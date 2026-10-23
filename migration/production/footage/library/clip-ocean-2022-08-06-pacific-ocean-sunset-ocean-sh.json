@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-2022-08-06-pacific-ocean-sunset-ocean-sh",
+ "theme": "ocean",
+ "query": "ocean sunset",
+ "source": "commons",
+ "title": "2022-08-06, Pacific Ocean sunset (Ocean Shores, Washington), 03.webm",
+ "page": "https://commons.wikimedia.org/wiki/File:2022-08-06,_Pacific_Ocean_sunset_(Ocean_Shores,_Washington),_03.webm",
+ "author": "Steven Pavlov",
+ "licence_url": "https://creativecommons.org/licenses/by/3.0",
+ "licence": "CC BY 3.0",
+ "licence_as_published": "CC BY 3.0",
+ "source_seconds": 32.601,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: \"2022-08-06, Pacific Ocean sunset (Ocean Shores, Washington), 03.webm\" by Steven Pavlov, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:2022-08-06,_Pacific_Ocean_sunset_(Ocean_Shores,_Washington),_03.webm)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "befb7bc20f2fa91c7f9526c82e404b81205cf93c696b8e0c4e6c669b3cc8d5c2",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  112.9,
+  105.3,
+  94.7,
+  97.7,
+  110.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "release_asset": "footage-clip-ocean-2022-08-06-pacific-ocean-sunset-ocean-sh-sha256-befb7bc20f2fa91c7f9526c82e404b81205cf93c696b8e0c4e6c669b3cc8d5c2.mp4"
+}
