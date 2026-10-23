@@ -24,7 +24,8 @@ def mood(script):
 
 
 def usable(rec):
-    return rec.get("vetting") == "APPROVED" and rec.get("licence") in FOOTAGE_LICENCES and rec.get("release_asset")
+    return (rec.get("vetting") == "APPROVED" and rec.get("licence") in FOOTAGE_LICENCES and rec.get("release_asset")
+            and rec.get("frame") == [2560, 1440])   # v4 frame: >= 1440p (1080p clips of the first library are not)
 
 
 def choose(script, library, n=None):

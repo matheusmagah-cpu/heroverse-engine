@@ -17,6 +17,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -32,8 +33,14 @@ SCENE_TARGET = 22.0  # STANDARD R3: winners change scene every 20-30 s
 HOLD_MIN = 18.0
 HOLD_MAX = 36.0      # a longer hold is split in equal parts, each >= HOLD_MAX / 2 = HOLD_MIN
 REPEAT_GAP = 300.0   # no image again within 5 minutes
-# pilot-qa-criteria-v4 (owner, 2026-10-23): real licensed footage alternates with the stills, scenes 6-14 s
-FOOTAGE_TARGET, FOOTAGE_HOLD_MIN, FOOTAGE_HOLD_MAX = 9.0, 6.0, 14.0
+# pilot-qa-criteria-v4 (owner, 2026-10-23: "4 to 7 s, bet on dynamics"): real licensed footage alternates with the
+# stills in 4-7 s shots, cut on a varied cadence (the fast-cutting breakout winners hold ~3.3-5 s per scene,
+# evidence/vidiq/20261023/hook_audit.md); each clip gives up to FOOTAGE_SEGMENTS distinct shots
+FOOTAGE_TARGET, FOOTAGE_HOLD_MIN, FOOTAGE_HOLD_MAX = 5.5, 4.0, 7.0
+FOOTAGE_CADENCE = (4.5, 6.0, 5.0, 6.5, 5.5, 4.8, 6.2)
+FOOTAGE_SNAP = 0.7       # a cut moves to a sentence start this close, so cuts land on breath
+FOOTAGE_SEGMENTS = 3     # shots per 20 s clip, at FOOTAGE_SEGMENT_STEP apart
+FOOTAGE_SEGMENT_STEP = 6.5
 CARD = (310, 300, 1610, 700)  # Scripture card (R5), rounded, centred
 CARD_RADIUS = 36
 CTA = (("SUBSCRIBE", 60.0), ("LIKE", 0.45))  # R6: (text, start: seconds, or fraction of the length if < 1)
@@ -129,6 +136,19 @@ def ts(seconds):
     return f"{cs // 360000}:{cs // 6000 % 60:02d}:{cs // 100 % 60:02d}.{cs % 100:02d}"
 
 
+def hook_lines(text, chars=26):
+    """The hook sentence in centred lines of at most ~26 characters (ASS hard breaks), clean of override braces."""
+    lines, cur = [], ""
+    for w in ass_text(text).split():
+        if cur and len(cur) + 1 + len(w) > chars:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = f"{cur} {w}".strip()
+    lines.append(cur)
+    return "\\N".join(lines)
+
+
 def ass_text(text):
     return text.replace("\\", "").replace("{", "(").replace("}", ")").replace("\n", " ")
 
@@ -152,6 +172,7 @@ Style: Subtitle,DejaVu Sans,58,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,0,0
 Style: Ref,DejaVu Serif,44,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,3,1,5,0,0,0,1
 Style: Brand,DejaVu Sans,36,&H20FFFFFF,&H00FFFFFF,&H64000000,&H00000000,1,0,0,0,100,100,2,0,1,3,1,7,50,0,40,1
 Style: Badge,DejaVu Sans,34,&H00FFFFFF,&H00FFFFFF,&H001A1AD0,&H00000000,1,0,0,0,100,100,1,0,3,10,0,9,0,50,46,1
+Style: Hook,DejaVu Serif,84,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,1,0,1,5,4,5,160,160,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -161,8 +182,15 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     def add(style, a, b, text, layer=0, fade=(250, 250)):
         lines.append(f"Dialogue: {layer},{ts(a)},{ts(b)},{style},,0,0,0,,{{\\fad({fade[0]},{fade[1]})}}{ass_text(text)}")
     title_end = overlay["title_card_seconds"]
-    add("Title", 0.0, title_end, overlay["title"], 2, (200, 300))
-    lines.append(f"Dialogue: 2,{ts(0)},{ts(title_end)},Subtitle,,0,0,0,,{{\\fad(200,300)\\pos(960,700)}}{ass_text(overlay['subtitle'])}")
+    if script.get("footage") and timeline["sentences"]:
+        # v4 hook (evidence/vidiq/20261023/hook_audit.md, 4/5 winners): the spoken hook line itself, large and
+        # centred from the first frame over moving footage, until it has been said; no separate title card
+        first = timeline["sentences"][0]
+        title_end = first["end"]
+        lines.append(f"Dialogue: 2,{ts(0)},{ts(title_end)},Hook,,0,0,0,,{{\\fad(0,250)}}{hook_lines(first['text'])}")
+    else:
+        add("Title", 0.0, title_end, overlay["title"], 2, (200, 300))
+        lines.append(f"Dialogue: 2,{ts(0)},{ts(title_end)},Subtitle,,0,0,0,,{{\\fad(200,300)\\pos(960,700)}}{ass_text(overlay['subtitle'])}")
     add("Brand", title_end, total, overlay["brand"], 1, (300, 0))
     for c in cta_events(total, script):
         add("Badge", c["start"], c["end"], c["text"], 1, (200, 200))
@@ -255,6 +283,8 @@ def holds(script, timeline, total):
     overlay, backgrounds = script["overlay"], script["backgrounds"]
     footage = script.get("footage") or []
     if footage:
+        return footage_holds(script, timeline, total)
+    if footage:
         target, hold_min, hold_max = FOOTAGE_TARGET, FOOTAGE_HOLD_MIN, FOOTAGE_HOLD_MAX
     else:
         target, hold_min, hold_max = scene_target(backgrounds), HOLD_MIN, HOLD_MAX
@@ -298,9 +328,75 @@ def holds(script, timeline, total):
     return out
 
 
+def frame_size():
+    """Output frame: 1920x1080, or HERO_FRAME (2560x1440 for pilot-qa-criteria-v4, owner 2026-10-23: >= 1440p)."""
+    return tuple(int(v) for v in os.environ.get("HERO_FRAME", "1920x1080").split("x"))
+
+
+def footage_cuts(timeline, total):
+    """v4 cut times: a varied 4-7 s cadence from 0, each cut moved to a nearby sentence start, the last shot kept
+    >= FOOTAGE_HOLD_MIN. The first cut waits for the hook sentence to end when that stays within 7 s."""
+    starts = [s["start"] for s in timeline["sentences"]]
+    first_end = timeline["sentences"][0]["end"] if timeline["sentences"] else 0.0
+    cuts, t, k = [0.0], 0.0, 0
+    while True:
+        want = t + FOOTAGE_CADENCE[k % len(FOOTAGE_CADENCE)]
+        k += 1
+        if len(cuts) == 1 and FOOTAGE_HOLD_MIN <= first_end + 0.3 <= FOOTAGE_HOLD_MAX:
+            want = max(want, first_end + 0.3)   # the hook line stays on its opening shot
+        near = [x for x in starts if abs(x - want) <= FOOTAGE_SNAP and FOOTAGE_HOLD_MIN <= x - t <= FOOTAGE_HOLD_MAX]
+        cut = min(near, key=lambda x: abs(x - want)) if near else want
+        if total - cut < FOOTAGE_HOLD_MIN:
+            break
+        cuts.append(round(cut, 3))
+        t = cut
+    if total - cuts[-1] > FOOTAGE_HOLD_MAX:   # stretch the tail evenly over the last two shots
+        mid = round((cuts[-1] + total) / 2, 3)
+        cuts.append(mid)
+    return cuts
+
+
+def footage_holds(script, timeline, total):
+    """v4 plan: footage first (the hook opens on real motion, never on a still title card), then two footage shots
+    for every still. Footage shot ids are "clip#k" (k-th 6.5 s segment of the clip); every shot id obeys REPEAT_GAP."""
+    backgrounds, footage = script["backgrounds"], script["footage"]
+    cuts = footage_cuts(timeline, total)
+    shots = [f"{c}#{k}" for k in range(FOOTAGE_SEGMENTS) for c in footage]
+    out, nf, ns = [], 0, 0
+    for j, (a, b) in enumerate(zip(cuts, cuts[1:] + [total])):
+        h = {"start": a, "end": round(b, 3), "figure": False}
+        if j % 3 < 2:   # footage, footage, still: real motion is ~2/3 of the picture
+            h["image"], h["kind"] = shots[nf % len(shots)], "footage"
+            nf += 1
+        else:
+            h["image"], h["kind"] = backgrounds[ns % len(backgrounds)], "still"
+            ns += 1
+        out.append(h)
+    last = {}
+    for h in out:
+        if h["image"] in last and h["start"] - last[h["image"]] < REPEAT_GAP - 1e-6:
+            raise SystemExit(f"REPEAT_GAP_VIOLATION: {h['image']} back after {h['start'] - last[h['image']]:.1f} s "
+                             f"< {REPEAT_GAP:.0f} s with {len(backgrounds)} backgrounds and {len(footage)} clips "
+                             "(need more images or footage)")
+        last[h["image"]] = h["end"]
+    return out
+
+
+def clip_of(shot):
+    """'clip-x#2' -> ('clip-x', 2)."""
+    clip, _, k = shot.partition("#")
+    return clip, int(k or 0)
+
+
 def compose(background, out):
-    """Background filled to 1920x1080 and slightly darkened (full frame, no figure: STANDARD R1)."""
-    vf = "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,eq=brightness=-0.04:saturation=1.05"
+    """Background filled to the output frame and slightly darkened (full frame, no figure: STANDARD R1)."""
+    w, h = frame_size()
+    sw, sh = (int(v) for v in subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                                               "stream=width,height", "-of", "csv=p=0", str(background)],
+                                              capture_output=True, text=True, check=True).stdout.strip().split(","))
+    if min(sw / w, sh / h) < 1.0:   # R10: never a plain upscale; re-run the AI super-resolution instead
+        raise SystemExit(f"IMAGE_BELOW_FRAME {Path(background).name} {sw}x{sh} < {w}x{h} cover")
+    vf = f"scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},eq=brightness=-0.04:saturation=1.05"
     run(["ffmpeg", "-v", "error", "-y", "-i", str(background), "-vf", vf, "-frames:v", "1", str(out)])
 
 
@@ -311,7 +407,8 @@ def footage_raw(clip, out, seconds, start=0.0):
     have = probe_duration(clip) - start
     slow = max(1.0, seconds / max(have, 0.1))
     run(["ffmpeg", "-v", "error", "-y", "-ss", f"{start:.3f}", "-i", str(clip), "-an", "-vf",
-         f"setpts={slow:.4f}*(PTS-STARTPTS),fps=30,scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,"
+         f"setpts={slow:.4f}*(PTS-STARTPTS),fps=30,scale={frame_size()[0]}:{frame_size()[1]}:force_original_aspect_ratio=increase,"
+         f"crop={frame_size()[0]}:{frame_size()[1]},"
          f"{cinematic.GRADE},trim=duration={seconds:.3f},setpts=PTS-STARTPTS,format=yuv420p",
          "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-r", "30", str(out)])
     return slow
@@ -333,7 +430,7 @@ def assemble(work, script_path, images_dir, figure_path, music_path, footage_dir
          "-filter_complex",
          f"[0:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,apad=whole_dur={total},asplit=2[v][key];"
          f"[1:a]aresample={RATE_OUT},aformat=channel_layouts=stereo,volume=0.04,"
-         f"afade=t=in:d=2,afade=t=out:st={total - 4}:d=4[m];"
+         f"afade=t=in:d={0.3 if script.get('footage') else 2},afade=t=out:st={total - 4}:d=4[m];"
          "[m][key]sidechaincompress=threshold=0.02:ratio=10:attack=20:release=600[duck];"
          "[v][duck]amix=inputs=2:normalize=0:duration=first,"
          "loudnorm=I=-15:TP=-2:LRA=11:linear=true,alimiter=limit=0.75:attack=5:release=50:level=false,"
@@ -350,10 +447,13 @@ def assemble(work, script_path, images_dir, figure_path, music_path, footage_dir
     footage = Path(footage_dir) if footage_dir else None
     for i, h in enumerate(plan):
         if h.get("kind") == "footage":
-            meta = json.loads((footage / f"{h['image']}.json").read_text())
-            if sha256(footage / f"{h['image']}.mp4") != meta["sha256"]:
-                raise SystemExit(f"FOOTAGE_HASH_MISMATCH {h['image']}")
-            footage_used[h["image"]] = {k: meta.get(k) for k in ("id", "source", "page", "author", "licence",
+            clip = clip_of(h["image"])[0]
+            if clip in footage_used:
+                continue
+            meta = json.loads((footage / f"{clip}.json").read_text())
+            if sha256(footage / f"{clip}.mp4") != meta["sha256"]:
+                raise SystemExit(f"FOOTAGE_HASH_MISMATCH {clip}")
+            footage_used[clip] = {k: meta.get(k) for k in ("id", "source", "page", "author", "licence",
                                                                  "licence_url", "credit", "vetting", "sha256",
                                                                  "release_asset")}
             continue
@@ -382,8 +482,11 @@ def assemble(work, script_path, images_dir, figure_path, music_path, footage_dir
     def raw(i):
         out, seconds = clips / f"raw-{i:03d}.mp4", length(i) + FADE
         if plan[i].get("kind") == "footage":
-            plan[i]["motion"] = "footage"
-            plan[i]["slow"] = round(footage_raw(footage / f"{plan[i]['image']}.mp4", out, seconds), 4)
+            clip, k = clip_of(plan[i]["image"])
+            src = footage / f"{clip}.mp4"
+            start = max(0.0, min(k * FOOTAGE_SEGMENT_STEP, probe_duration(src) - seconds))
+            plan[i]["motion"], plan[i]["source_start"] = "footage", round(start, 3)
+            plan[i]["slow"] = round(footage_raw(src, out, seconds, start), 4)
         elif cine:
             plan[i]["motion"] = "dolly_in" if i == 0 else cinematic.MOVES[i % len(cinematic.MOVES)]
             plan[i]["atmosphere"] = plan[i]["image"] in cine.get("atmosphere", [])

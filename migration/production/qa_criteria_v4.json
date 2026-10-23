@@ -1,16 +1,20 @@
 {
  "version": "pilot-qa-criteria-v4",
- "frozen_at_utc": "2026-10-23T12:00:00Z",
- "basis": "Owner directive 2026-10-23: real cinematic motion instead of still images, licensed footage allowed. Technical and speech gates copied unchanged from pilot-qa-criteria-v3. Grammar: scenes 6-14 s (v3 18-36 s scored pacing 6.5, pilot-008), at least 40 % of the picture time real footage, same repeat gap, title card, captions and CTA rules. Rights: FLUX/SDXL stills as in v3 plus footage only under an accepted licence, vetted on its frame sheet (no people, text or branding) and credited in the description. pilot-qa-criteria-v3 stays frozen and unchanged.",
+ "frozen_at_utc": "2026-10-23T12:30:00Z",
+ "basis": "Owner directives 2026-10-23: real cinematic motion instead of still images (licensed footage allowed), '4 to 7 s shots, bet on dynamics', 'the first 3 seconds must be devastating', 'never below 1440p'. Technical and speech gates copied from pilot-qa-criteria-v3 except the frame (2560x1440). Grammar: 4-7 s shots; the opening shot is real footage carrying the spoken hook line (no still title card; evidence/vidiq/20261023/hook_audit.md), so title_card_seconds measures that opening shot; >= 60 % of the picture time real footage; same repeat gap, captions and CTA rules. Rights: FLUX/SDXL stills as in v3 plus footage only under an accepted licence, vetted (no people, text or branding) and credited. Amended before any v4 render; pilot-qa-criteria-v3 stays frozen and unchanged.",
  "technical": {
   "full_decode_without_errors": true,
-  "video": "1920x1080, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+  "video": "2560x1440, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
   "duration_seconds_min": 601,
   "integrated_lufs": [
    -16.0,
    -14.0
   ],
-  "true_peak_dbtp_max": -1.0
+  "true_peak_dbtp_max": -1.0,
+  "frame": [
+   2560,
+   1440
+  ]
  },
  "speech": {
   "speech_presence_min": 0.85,
@@ -55,14 +59,14 @@
  ],
  "grammar": {
   "title_card_seconds": [
-   1.0,
-   3.0
+   4.0,
+   7.0
   ],
   "figure_present_fraction_max": 0.0,
   "every_scene_in_motion": true,
   "scene_seconds": [
-   6.0,
-   14.0
+   4.0,
+   7.0
   ],
   "crossfade_seconds_max": 1.0,
   "image_repeat_gap_seconds_min": 300.0,
@@ -81,7 +85,7 @@
   "persistent_overlays_allowed": [
    "brand"
   ],
-  "footage_picture_share_min": 0.4
+  "footage_picture_share_min": 0.6
  },
  "perceptual_review_required_before_approval": "Watched review (long_review.watch); owner floor: overall >= 9.5 for new uploads.",
  "frozen_before_first_v4_render": true

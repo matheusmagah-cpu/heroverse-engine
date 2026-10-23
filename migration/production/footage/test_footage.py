@@ -10,7 +10,7 @@ import footage as ft  # noqa: E402
 
 def cand(**kw):
     c = {"source": "commons", "title": "Sunrise over the hills", "page": "https://commons.wikimedia.org/wiki/File:X.webm",
-         "width": 1920, "height": 1080, "seconds": 30.0, "licence": "CC BY 4.0", "author": "A. Author",
+         "width": 2560, "height": 1440, "seconds": 30.0, "licence": "CC BY 4.0", "author": "A. Author",
          "licence_url": "https://creativecommons.org/licenses/by/4.0", "download": "https://upload.wikimedia.org/x.webm"}
     c.update(kw)
     return c
@@ -38,6 +38,7 @@ class Selection(unittest.TestCase):
 
     def test_resolution_and_length(self):
         self.assertFalse(ft.eligible(cand(height=720)))
+        self.assertFalse(ft.eligible(cand(height=1080)))   # owner, 2026-10-23: never below 1440p
         self.assertFalse(ft.eligible(cand(seconds=5.0)))
 
     def test_titles_announcing_people_or_text_refused(self):
