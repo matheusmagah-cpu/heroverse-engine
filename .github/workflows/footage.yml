@@ -14,7 +14,7 @@ concurrency:
 jobs:
   library:
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: 300
     env:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
