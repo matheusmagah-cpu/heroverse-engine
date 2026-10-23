@@ -15,6 +15,7 @@
  "credit": "Footage: \"Mount Bromo HD Timelapse Movie by Justin Ng.webm\" by Justin Ng, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Mount_Bromo_HD_Timelapse_Movie_by_Justin_Ng.webm)",
  "picture": "1920x1080 30 fps H.264 crf 18, no audio",
  "sha256": "912d8832a560548fabe592e5cdf44b851c714c154e6b388e523c65adaea71131",
- "vetting": "PENDING",
- "release_asset": "footage-clip-sunrise-mount-bromo-hd-timelapse-movie-by-justin-sha256-912d8832a560548fabe592e5cdf44b851c714c154e6b388e523c65adaea71131.mp4"
+ "vetting": "REJECTED",
+ "release_asset": "footage-clip-sunrise-mount-bromo-hd-timelapse-movie-by-justin-sha256-912d8832a560548fabe592e5cdf44b851c714c154e6b388e523c65adaea71131.mp4",
+ "vetting_note": "frame sheet run-39942306894, Claude 2026-10-23: opens on black frames"
 }

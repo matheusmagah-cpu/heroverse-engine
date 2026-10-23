@@ -1,25 +1,135 @@
 {
- "version": "footage-queries-v1",
+ "version": "footage-queries-v2",
  "library": "migration/production/footage/library",
  "note": "Themes that match the prayer scripts (light, water, rest, night, mercy, strength). No people, text or branding (BLOCK in footage.py; every clip is also vetted on its frame sheet before use).",
  "themes": [
-  {"theme": "sunrise", "query": "sunrise clouds timelapse"},
-  {"theme": "sunrise", "query": "sunrise mountains"},
-  {"theme": "clouds", "query": "clouds timelapse sky"},
-  {"theme": "ocean", "query": "ocean waves sunset"},
-  {"theme": "ocean", "query": "calm sea waves"},
-  {"theme": "river", "query": "river stream forest"},
-  {"theme": "waterfall", "query": "waterfall"},
-  {"theme": "lake", "query": "mountain lake reflection"},
-  {"theme": "rain", "query": "rain drops water surface"},
-  {"theme": "candle", "query": "candle flame"},
-  {"theme": "fire", "query": "fireplace fire burning"},
-  {"theme": "forest", "query": "forest sunlight trees"},
-  {"theme": "night", "query": "night sky stars timelapse"},
-  {"theme": "night", "query": "full moon night"},
-  {"theme": "meadow", "query": "flowers meadow wind"},
-  {"theme": "snow", "query": "snow falling winter landscape"},
-  {"theme": "mist", "query": "fog valley morning"},
-  {"theme": "sunset", "query": "sunset timelapse"}
+  {
+   "theme": "ocean",
+   "query": "waves beach"
+  },
+  {
+   "theme": "ocean",
+   "query": "sea waves rocks"
+  },
+  {
+   "theme": "ocean",
+   "query": "ocean sunset"
+  },
+  {
+   "theme": "river",
+   "query": "mountain stream"
+  },
+  {
+   "theme": "river",
+   "query": "forest creek"
+  },
+  {
+   "theme": "river",
+   "query": "river rocks water"
+  },
+  {
+   "theme": "waterfall",
+   "query": "waterfall forest"
+  },
+  {
+   "theme": "waterfall",
+   "query": "cascade"
+  },
+  {
+   "theme": "lake",
+   "query": "alpine lake"
+  },
+  {
+   "theme": "lake",
+   "query": "lake sunrise"
+  },
+  {
+   "theme": "clouds",
+   "query": "clouds timelapse mountains"
+  },
+  {
+   "theme": "clouds",
+   "query": "cumulus clouds timelapse"
+  },
+  {
+   "theme": "sunrise",
+   "query": "sunrise timelapse"
+  },
+  {
+   "theme": "sunset",
+   "query": "sunset sea"
+  },
+  {
+   "theme": "night",
+   "query": "milky way timelapse"
+  },
+  {
+   "theme": "night",
+   "query": "aurora borealis"
+  },
+  {
+   "theme": "night",
+   "query": "starry sky"
+  },
+  {
+   "theme": "candle",
+   "query": "candles"
+  },
+  {
+   "theme": "candle",
+   "query": "candle flame"
+  },
+  {
+   "theme": "rain",
+   "query": "rain on leaves"
+  },
+  {
+   "theme": "rain",
+   "query": "raindrops puddle"
+  },
+  {
+   "theme": "snow",
+   "query": "snowfall forest"
+  },
+  {
+   "theme": "snow",
+   "query": "snow mountains"
+  },
+  {
+   "theme": "meadow",
+   "query": "flowers wind"
+  },
+  {
+   "theme": "meadow",
+   "query": "lavender field"
+  },
+  {
+   "theme": "meadow",
+   "query": "tulip field"
+  },
+  {
+   "theme": "forest",
+   "query": "sunbeams forest"
+  },
+  {
+   "theme": "forest",
+   "query": "autumn forest"
+  },
+  {
+   "theme": "mist",
+   "query": "fog forest"
+  },
+  {
+   "theme": "mist",
+   "query": "mist lake"
+  },
+  {
+   "theme": "field",
+   "query": "wheat field"
+  },
+  {
+   "theme": "grass",
+   "query": "grass wind"
+  }
  ]
 }

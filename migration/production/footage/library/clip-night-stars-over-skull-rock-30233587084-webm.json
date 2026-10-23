@@ -15,6 +15,7 @@
  "credit": "Footage: \"Stars over Skull Rock (30233587084).webm\" by Joshua Tree National Park, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Stars_over_Skull_Rock_(30233587084).webm)",
  "picture": "1920x1080 30 fps H.264 crf 18, no audio",
  "sha256": "9fe6b0fb66bdc2032310c3b411f3893ec8510c27da880fcb21b82ea9f6fb0933",
- "vetting": "PENDING",
- "release_asset": "footage-clip-night-stars-over-skull-rock-30233587084-webm-sha256-9fe6b0fb66bdc2032310c3b411f3893ec8510c27da880fcb21b82ea9f6fb0933.mp4"
+ "vetting": "REJECTED",
+ "release_asset": "footage-clip-night-stars-over-skull-rock-30233587084-webm-sha256-9fe6b0fb66bdc2032310c3b411f3893ec8510c27da880fcb21b82ea9f6fb0933.mp4",
+ "vetting_note": "frame sheet run-39942306894, Claude 2026-10-23: fisheye, very dark"
 }

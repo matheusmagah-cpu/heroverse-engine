@@ -15,6 +15,7 @@
  "credit": "Footage: \"Moon Phases 2014 - Southern Hemisphere - 1080.webm\" by NASA/Goddard Space Flight Center, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Moon_Phases_2014_-_Southern_Hemisphere_-_1080.webm)",
  "picture": "1920x1080 30 fps H.264 crf 18, no audio",
  "sha256": "347fd52b4f25ad29d521b987635d5b7f33ed529954d7692be9dce8cd2add99b2",
- "vetting": "PENDING",
- "release_asset": "footage-clip-night-moon-phases-2014-southern-hemisphere-108-sha256-347fd52b4f25ad29d521b987635d5b7f33ed529954d7692be9dce8cd2add99b2.mp4"
+ "vetting": "REJECTED",
+ "release_asset": "footage-clip-night-moon-phases-2014-southern-hemisphere-108-sha256-347fd52b4f25ad29d521b987635d5b7f33ed529954d7692be9dce8cd2add99b2.mp4",
+ "vetting_note": "frame sheet run-39942306894, Claude 2026-10-23: data labels on screen"
 }
