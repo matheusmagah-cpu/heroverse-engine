@@ -1,8 +1,8 @@
 {
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-010",
- "output_sha256": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f",
- "decision": "UNKNOWN",
+ "output_sha256": "c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80",
+ "decision": "FAIL",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
@@ -16,7 +16,7 @@
   "content_and_policy": "UNKNOWN",
   "scorecard": "UNKNOWN",
   "full_file_scan": "PASS",
-  "structure": "PASS",
+  "structure": "FAIL",
   "authenticity": "PASS",
   "preflight": "PASS"
  },
@@ -26,35 +26,35 @@
     "source": "binding",
     "item": "manifest",
     "state": "PASS",
-    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+    "detail": "c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80"
    },
    {
     "source": "binding",
     "item": "qa_for_this_file",
     "state": "PASS",
-    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+    "detail": "c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80"
    },
    {
     "source": "binding",
     "item": "qa_criteria_frozen",
     "state": "PASS",
     "detail": {
-     "version": "pilot-qa-criteria-v3",
-     "recorded": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
-     "file": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3"
+     "version": "pilot-qa-criteria-v4",
+     "recorded": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
+     "file": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11"
     }
    },
    {
     "source": "binding",
     "item": "review_for_this_file",
     "state": "PASS",
-    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+    "detail": "c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80"
    },
    {
     "source": "binding",
     "item": "video_file_hash",
     "state": "PASS",
-    "detail": "c1808243f6696255bf2a0d0442facace33bd041c14209a12a9a283893841f23f"
+    "detail": "c4ee3276eb1df2256bf59d8543efa83ebbfb79745584af22a10a09b83e7ede80"
    }
   ],
   "technical": [
@@ -227,6 +227,11 @@
     "state": "PASS"
    },
    {
+    "source": "qa",
+    "item": "footage_picture_share",
+    "state": "PASS"
+   },
+   {
     "source": "review",
     "item": "picture_quality",
     "state": "UNKNOWN",
@@ -247,7 +252,7 @@
    },
    {
     "source": "qa",
-    "item": "no_third_party_footage",
+    "item": "footage_licensed_vetted_and_credited",
     "state": "PASS"
    },
    {
@@ -312,7 +317,7 @@
     "source": "scan",
     "item": "black_picture",
     "state": "PASS",
-    "detail": 0.0
+    "detail": 0.23
    },
    {
     "source": "scan",
@@ -325,16 +330,15 @@
    {
     "source": "structure",
     "item": "driver_continuous_motion",
-    "state": "PASS",
-    "detail": 62
+    "state": "FAIL",
+    "detail": 178
    },
    {
     "source": "structure",
     "item": "driver_viewer_hook_5s",
     "state": "PASS",
     "detail": [
-     "Good evening.",
-     "Before you check again, pray through tonight’s worries and p"
+     "Before you check your phone again tonight, give God the worr"
     ]
    },
    {
@@ -347,22 +351,22 @@
     "source": "structure",
     "item": "hygiene_spoken_amen_cta",
     "state": "PASS",
-    "detail": "If you want to affirm this prayer in the comments, write amen. Now let the Scripture readings accompany your rest."
+    "detail": "If you want to affirm this prayer in the comments, write amen. You can also leave a prayer request there, and in our nex"
    },
    {
     "source": "structure",
     "item": "hygiene_recurring_refrain",
     "state": "PASS",
     "detail": [
-     "you do not",
-     16
+     "i name the",
+     6
     ]
    },
    {
     "source": "structure",
     "item": "hygiene_gratitude_block",
     "state": "PASS",
-    "detail": 7
+    "detail": 5
    },
    {
     "source": "structure",
@@ -377,7 +381,7 @@
     "source": "structure",
     "item": "package_title_promise_pipe_keyword",
     "state": "PASS",
-    "detail": "Night Prayer for Anxiety | Cast Your Cares on God and Sleep in Peace"
+    "detail": "Before You Sleep, Give God the Worry You Can't Fix 🌙 | Night Prayer for Anxiety"
    },
    {
     "source": "structure",
@@ -385,16 +389,15 @@
     "state": "PASS",
     "detail": [
      "0:00",
-     "0:37",
-     "2:54",
-     "5:18"
+     "11:48",
+     "12:20"
     ]
    },
    {
     "source": "structure",
     "item": "package_publish_window",
     "state": "PASS",
-    "detail": "night 2026-10-23T00:00:00Z"
+    "detail": "night 2026-10-24T00:00:00Z"
    }
   ],
   "authenticity": [
@@ -402,7 +405,7 @@
     "source": "authenticity",
     "item": "original_words_share",
     "state": "PASS",
-    "detail": 0.953
+    "detail": 0.93
    },
    {
     "source": "authenticity",
@@ -410,8 +413,8 @@
     "state": "PASS",
     "detail": {
      "max": [
-      0.023,
-      "pilot-007"
+      0.033,
+      "pilot-002"
      ],
      "visible": [
       "pilot-002",
@@ -439,8 +442,8 @@
     "state": "PASS",
     "detail": {
      "max": [
-      0.111,
-      "pilot-007"
+      0.0,
+      null
      ]
     }
    },
@@ -449,7 +452,7 @@
     "item": "no_template_opening_line",
     "state": "PASS",
     "detail": {
-     "opening": "before you check again pray through tonight s",
+     "opening": "before you check your phone again tonight give",
      "same_as": []
     }
    },
@@ -458,7 +461,7 @@
     "item": "not_reused_reference_overlap",
     "state": "PASS",
     "detail": {
-     "max": 0.0005,
+     "max": 0.0,
      "ref": "fXhKzleJhxI",
      "refs": 1
     }
@@ -486,110 +489,20 @@
  },
  "informative_not_deciding": {
   "scan_frozen_picture": {
-   "longest_s": 2.84,
+   "longest_s": 1.37,
    "report_s": 5.0,
    "blocking": false,
    "inside": true,
    "spans": [
     [
-     3.97,
-     5.13,
-     1.17
+     329.17,
+     330.53,
+     1.37
     ],
     [
-     36.37,
-     37.4,
-     1.03
-    ],
-    [
-     37.97,
-     39.2,
-     1.23
-    ],
-    [
-     92.83,
-     93.97,
-     1.13
-    ],
-    [
-     120.73,
-     121.97,
-     1.23
-    ],
-    [
-     152.63,
-     154.83,
-     2.2
-    ],
-    [
-     154.83,
-     156.63,
-     1.8
-    ],
-    [
-     156.63,
-     159.17,
-     2.53
-    ],
-    [
-     159.17,
-     161.2,
-     2.03
-    ],
-    [
-     161.2,
-     162.5,
-     1.3
-    ],
-    [
-     162.5,
-     164.53,
-     2.03
-    ],
-    [
-     165.43,
-     166.93,
-     1.5
-    ],
-    [
-     166.93,
-     168.9,
-     1.97
-    ],
-    [
-     168.97,
-     170.73,
-     1.77
-    ],
-    [
-     170.73,
-     173.0,
-     2.27
-    ],
-    [
-     173.0,
-     174.03,
-     1.03
-    ],
-    [
-     174.03,
-     176.07,
-     2.03
-    ],
-    [
-     176.37,
-     178.03,
-     1.67
-    ],
-    [
-     178.2,
-     180.93,
-     2.73
-    ],
-    [
-     180.93,
-     183.43,
-     2.5
+     762.47,
+     763.47,
+     1.0
     ]
    ]
   }
