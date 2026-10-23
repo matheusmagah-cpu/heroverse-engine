@@ -72,7 +72,9 @@ def licence_ok(source, licence):
 def eligible(c):
     """A candidate is usable when its licence is accepted, it is at least 1080p and 8 s, and its title does not
     announce people, text or branding."""
+    # E51: a vertical 1080x1920 source passed the height check and was blown up 2.4x to fill the frame
     return (licence_ok(c["source"], c["licence"]) and (c.get("height") or 0) >= MIN_HEIGHT
+            and (c.get("width") or 0) >= W
             and (c.get("seconds") or 0) >= MIN_SECONDS and not BLOCK.search(c.get("title", "")))
 
 
@@ -143,7 +145,17 @@ def slug(text):
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:40]
 
 
+def source_size(path):
+    out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+                          "-of", "csv=p=0", str(path)], capture_output=True, text=True, check=True).stdout
+    w, h = (int(x) for x in out.strip().split(",")[:2])
+    return w, h
+
+
 def transcode(src, dst, seconds):
+    w, h = source_size(src)
+    if w < W or h < H:  # never enlarge: the picture must come from a source at least as large as the frame
+        raise ValueError(f"SOURCE_BELOW_FRAME {w}x{h}")
     keep = max(MIN_SECONDS, min(CLIP_SECONDS, seconds - 2.0))
     start = 1.0 if seconds - keep >= 1.0 else 0.0   # skip the first second: fades, slates and camera shake
     vf = f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},format=yuv420p"

@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "fa5d82acb7564ed8c25eb1a0df61e2e36eaaa43457e1540ee8cca5a3eb3797a2",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "NASA logos and station hardware"
+ ],
  "vetting_luma": [
   201.8,
   202.6,

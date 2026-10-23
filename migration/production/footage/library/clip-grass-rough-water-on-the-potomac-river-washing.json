@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "1d458ddc9a22f37498af864dc19d33e9bb26f03ea58f5e4eb6aa36d9d7436c32",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "city skyline, fence and bench"
+ ],
  "vetting_luma": [
   110.9,
   111.1,

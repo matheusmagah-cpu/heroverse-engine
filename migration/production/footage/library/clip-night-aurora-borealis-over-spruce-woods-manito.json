@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "07481625f787756da49616bba741d4f7cbedacbdb4a8b12309d092dd6cca7a1d",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "lit tents in the third segment"
+ ],
  "vetting_luma": [
   98.1,
   47.8,
