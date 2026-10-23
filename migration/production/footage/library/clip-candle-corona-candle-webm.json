@@ -15,6 +15,7 @@
  "credit": "Footage: \"Corona.Candle.webm\" by Bautsch, CC0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Corona.Candle.webm)",
  "picture": "1920x1080 30 fps H.264 crf 18, no audio",
  "sha256": "74c942399b2deeff31133becf9562df6b95ca86d7d727e9d42e6aecd5d764d87",
- "vetting": "PENDING",
- "release_asset": "footage-clip-candle-corona-candle-webm-sha256-74c942399b2deeff31133becf9562df6b95ca86d7d727e9d42e6aecd5d764d87.mp4"
+ "vetting": "REJECTED",
+ "release_asset": "footage-clip-candle-corona-candle-webm-sha256-74c942399b2deeff31133becf9562df6b95ca86d7d727e9d42e6aecd5d764d87.mp4",
+ "vetting_note": "frame sheet run-39942306894, Claude 2026-10-23: ends on black frames"
 }

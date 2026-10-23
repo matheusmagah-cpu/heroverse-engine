@@ -15,6 +15,7 @@
  "credit": "Footage: \"Moon Phase and Libration, 2023 (SVS5048 - labels 2023 2160p30).webm\" by NASA's Scientific Visualization Studio - USRA/Ernie Wright, USRA/David Ladd, NASA/GSFC/Noah Petro, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Moon_Phase_and_Libration,_2023_(SVS5048_-_labels_2023_2160p30).webm)",
  "picture": "1920x1080 30 fps H.264 crf 18, no audio",
  "sha256": "484ea5f26de7c44b2132749a7469e17bcee04fbef5aa4f2218e073217f7aed6f",
- "vetting": "PENDING",
- "release_asset": "footage-clip-night-moon-phase-and-libration-2023-svs5048-la-sha256-484ea5f26de7c44b2132749a7469e17bcee04fbef5aa4f2218e073217f7aed6f.mp4"
+ "vetting": "REJECTED",
+ "release_asset": "footage-clip-night-moon-phase-and-libration-2023-svs5048-la-sha256-484ea5f26de7c44b2132749a7469e17bcee04fbef5aa4f2218e073217f7aed6f.mp4",
+ "vetting_note": "frame sheet run-39942306894, Claude 2026-10-23: data labels on screen"
 }

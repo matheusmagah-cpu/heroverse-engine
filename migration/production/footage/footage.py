@@ -29,7 +29,9 @@ W, H, FPS = 1920, 1080, 30
 # R1 (no people) and no text or branding on screen: titles that announce them are refused before download
 BLOCK = re.compile(r"(?i)\b(people|person|man|men|woman|women|girl|boy|child|children|kid|crowd|tourist|selfie|"
                    r"interview|portrait|face|wedding|festival|concert|protest|logo|text|title|intro|news|"
-                   r"advert|commercial|drone pilot|vlog|car|traffic|city|street|police|military|war)s?\b")
+                   r"advert|commercial|drone pilot|vlog|car|traffic|city|street|police|military|war|skyline|building|"
+                   r"rocket|launch|satellite|map|trailer|documentary|presents|rafting|kayak|boat|hurricane|storm|"
+                   r"vigil|memorial|movie|film)s?\b|\b(18|19)\d\d\b")
 COMMONS_OK = re.compile(r"(?i)^(cc0|cc-zero|public domain|pd|cc by \d(\.\d)?( \w+)?)$")
 
 
@@ -130,13 +132,99 @@ def transcode(src, dst, seconds):
     return start, keep
 
 
+VET_WORDS = re.compile(r"(?i)\b(person|people|man|men|woman|women|girl|boy|child|children|face|hand|crowd|text|"
+                       r"words|letters|logo|sign|caption|title|watermark|city|building|buildings|skyscraper|car|cars|"
+                       r"truck|boat|kayak|raft|rocket|satellite|map|chart|diagram|screen|poster)\b")
+
+
+def frame_luma(path):
+    from PIL import Image, ImageStat
+    return ImageStat.Stat(Image.open(path).convert("L")).mean[0]
+
+
+def ocr_words(path):
+    """Words tesseract reads on the frame with confidence >= 70 and >= 4 letters (titles, captions, labels)."""
+    try:
+        out = subprocess.run(["tesseract", str(path), "-", "--psm", "11", "tsv"], capture_output=True, text=True,
+                             timeout=60).stdout
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    words = []
+    for line in out.splitlines()[1:]:
+        cols = line.split("\t")
+        if len(cols) == 12 and cols[11].strip() and float(cols[10]) >= 70 and len(re.sub(r"[^A-Za-z]", "", cols[11])) >= 4:
+            words.append(cols[11].strip())
+    return words
+
+
+def describe(path):
+    """A short description from an open vision model on Cloudflare Workers AI (free allocation), or None."""
+    token, account = os.environ.get("CLOUDFLARE_API_TOKEN"), os.environ.get("CLOUDFLARE_ACCOUNT_ID")
+    if not token or not account:
+        return None
+    body = json.dumps({"image": list(Path(path).read_bytes()), "max_tokens": 80,
+                       "prompt": "Describe everything visible in this image in one sentence. Mention any people, "
+                                 "text, logos, buildings or vehicles."}).encode()
+    req = urllib.request.Request(f"https://api.cloudflare.com/client/v4/accounts/{account}/ai/run/@cf/llava-hf/llava-1.5-7b-hf",
+                                 data=body, method="POST", headers={"Authorization": "Bearer " + token,
+                                                                    "Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            return (json.loads(r.read()).get("result") or {}).get("description", "").strip() or None
+    except Exception:  # noqa: BLE001  (quota or outage: the clip stays PENDING, never approved blind)
+        return None
+
+
+def vet(clip, work):
+    """Automatic vetting on five frames: no black frames, no readable text, nothing the description names as
+    people, text, buildings or vehicles. Every check must actually run: a missing check leaves the clip PENDING."""
+    d = probe_seconds(clip)
+    frames = []
+    for k in range(5):
+        f = work / f"{clip.stem}-vet-{k}.jpg"   # small JPEG: the vision model receives the bytes as a JSON array
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{d * (k + 0.5) / 5:.2f}", "-i", str(clip),
+                        "-frames:v", "1", "-vf", "scale=672:378", "-q:v", "4", str(f)], check=True)
+        frames.append(f)
+    luma = [round(frame_luma(f), 1) for f in frames]
+    ocr = [ocr_words(f) for f in frames]
+    descriptions = [describe(frames[0]), describe(frames[2])]
+    for f in frames:
+        f.unlink(missing_ok=True)
+    return decide(luma, ocr, descriptions)
+
+
+def decide(luma, ocr, descriptions):
+    """The vetting verdict from the measured frames (pure, so it is tested offline)."""
+    words = [w for found in ocr if found for w in found]
+    ocr_ran = all(found is not None for found in ocr)
+    reasons = []
+    if sum(1 for x in luma if x < 12) >= 2:
+        reasons.append("BLACK_FRAMES")
+    if words:
+        reasons.append("TEXT_ON_SCREEN " + " ".join(words[:6]))
+    named = sorted({m.group(1).lower() for t in descriptions if t for m in VET_WORDS.finditer(t)})
+    if named:
+        reasons.append("DESCRIBED " + ",".join(named))
+    status = "REJECTED" if reasons else ("APPROVED" if ocr_ran and all(descriptions) else "PENDING")
+    return {"vetting": status, "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+            "vetting_reasons": reasons, "vetting_luma": luma, "vetting_descriptions": descriptions}
+
+
+def probe_seconds(path):
+    out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)],
+                         capture_output=True, text=True, check=True).stdout
+    return float(out.strip())
+
+
 def main(queries_path, out_dir, per_theme="3"):
     import hashlib
     spec = json.loads(Path(queries_path).read_text())
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     key = os.environ.get("PEXELS_API_KEY", "")
-    have = {p.stem for p in Path(spec.get("library", "migration/production/footage/library")).glob("*.json")}
+    lib = Path(spec.get("library", "migration/production/footage/library"))
+    have = {p.stem for p in lib.glob("*.json")}
+    seen_pages = {json.loads(p.read_text()).get("page") for p in lib.glob("*.json")}
     made = []
     for theme in spec["themes"]:
         cands = []
@@ -146,7 +234,7 @@ def main(queries_path, out_dir, per_theme="3"):
         picked = 0
         for c in sorted((c for c in cands if eligible(c)), key=lambda c: (c["source"] != "pexels", -(c["seconds"]))):
             cid = f"clip-{theme['theme']}-{slug(c['title'])}"
-            if cid in have or picked >= int(per_theme):
+            if cid in have or picked >= int(per_theme) or c["page"] in seen_pages:
                 continue
             raw = out / f"{cid}.src"
             try:
@@ -165,11 +253,12 @@ def main(queries_path, out_dir, per_theme="3"):
                 "licence": canonical(c["source"], c["licence"]), "licence_as_published": c["licence"],
                 "source_seconds": c["seconds"], "source_height": c["height"], "start": start, "seconds": keep,
                 "credit": credit(c), "picture": f"{W}x{H} {FPS} fps H.264 crf 18, no audio", "sha256": sha,
-                "vetting": "PENDING"}
+                **vet(out / f"{cid}.mp4", out)}
             (out / f"{cid}.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n")
             have.add(cid)
+            seen_pages.add(c["page"])
             made.append(cid)
-            picked += 1
+            picked += 1 if rec["vetting"] != "REJECTED" else 0  # a rejected clip does not use the theme's quota
     print(json.dumps({"made": made}))
 
 

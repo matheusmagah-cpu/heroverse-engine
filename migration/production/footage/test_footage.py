@@ -53,5 +53,31 @@ class Selection(unittest.TestCase):
             "via Pexels (https://www.pexels.com/video/x-1/)"))
 
 
+class Vetting(unittest.TestCase):
+    OK_DESC = ["A waterfall pours over mossy rocks into a green pool.", "White water rushes between rocks and ferns."]
+
+    def test_clean_clip_is_approved(self):
+        self.assertEqual(ft.decide([80, 90, 85, 88, 70], [[], [], [], [], []], self.OK_DESC)["vetting"], "APPROVED")
+
+    def test_black_frames_text_and_named_objects_rejected(self):
+        self.assertIn("BLACK_FRAMES", ft.decide([5, 4, 80, 90, 85], [[]] * 5, self.OK_DESC)["vetting_reasons"])
+        r = ft.decide([80] * 5, [["POLICE", "WEEK"], [], [], [], []], self.OK_DESC)
+        self.assertEqual(r["vetting"], "REJECTED")
+        self.assertTrue(r["vetting_reasons"][0].startswith("TEXT_ON_SCREEN"))
+        r = ft.decide([80] * 5, [[]] * 5, ["A city skyline with tall buildings at sunset.", "Clouds over the city."])
+        self.assertEqual(r["vetting_reasons"], ["DESCRIBED buildings,city"])
+        r = ft.decide([80] * 5, [[]] * 5, ["A man in a kayak on a river.", "A river."])
+        self.assertEqual(r["vetting"], "REJECTED")
+
+    def test_a_check_that_did_not_run_leaves_it_pending(self):
+        self.assertEqual(ft.decide([80] * 5, [None, [], [], [], []], self.OK_DESC)["vetting"], "PENDING")
+        self.assertEqual(ft.decide([80] * 5, [[]] * 5, [None, self.OK_DESC[1]])["vetting"], "PENDING")
+
+    def test_title_filter_catches_the_first_library_rejects(self):
+        for t in ("Half Shot at Sunrise (1930) by Paul Sloane", "Artemis II SLS rocket rollout", "Silom sunset timelapse city",
+                  "Rogue River rafting", "Candle light vigil 2015", "Ernesto brings dangerous seas, satellite view"):
+            self.assertFalse(ft.eligible(cand(title=t)), t)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -15,6 +15,7 @@
  "credit": "Footage: \"Crooked River (37288875152).webm\" by BLM Oregon &amp; Washington, Public domain, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Crooked_River_(37288875152).webm)",
  "picture": "1920x1080 30 fps H.264 crf 18, no audio",
  "sha256": "d51f4a15d1c8a258cac66e355ff9a172ebb306eada54b28de3ee2445e3ae65f2",
- "vetting": "PENDING",
- "release_asset": "footage-clip-river-crooked-river-37288875152-webm-sha256-d51f4a15d1c8a258cac66e355ff9a172ebb306eada54b28de3ee2445e3ae65f2.mp4"
+ "vetting": "REJECTED",
+ "release_asset": "footage-clip-river-crooked-river-37288875152-webm-sha256-d51f4a15d1c8a258cac66e355ff9a172ebb306eada54b28de3ee2445e3ae65f2.mp4",
+ "vetting_note": "frame sheet run-39942306894, Claude 2026-10-23: shaky handheld bushes"
 }
