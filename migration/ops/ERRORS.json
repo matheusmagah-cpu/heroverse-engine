@@ -383,6 +383,16 @@
     "file": "migration/production/test_script_check.py",
     "contains": "def test_too_few_backgrounds_fail_pilot_008"
    }
+  },
+  {
+   "id": "E49",
+   "date": "2026-10-23",
+   "error": "pilot-008..011 silently left the render/approval queue once their slots were more than 6 h old (reviewer 503 and QA FAILs), so reconcile stopped retrying pilot-010 and nothing reported it for a day.",
+   "fix": "render_queue.py stale lists passed slots with no video on YouTube (pre-standard renders excluded); the hourly clock reschedules them to the next free slot.",
+   "antidote": {
+    "file": "migration/production/test_render_queue.py",
+    "contains": "def test_passed_slot_without_video_is_reported_stale"
+   }
   }
  ]
 }

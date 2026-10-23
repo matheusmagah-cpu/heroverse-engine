@@ -123,6 +123,20 @@ class Queue(unittest.TestCase):
             nxt = next(r for r in rows if not r["missing_images"] and not r["rendered"])
             self.assertEqual(nxt["pilot"], "pilot-004")
 
+    def test_passed_slot_without_video_is_reported_stale(self):
+        # E49: pilot-008..011 dropped out of due() after their slots passed and nothing reported it
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, "pilot-008", "2026-10-17T10:00:00Z", rendered=True)   # 15 h ago, not on YouTube
+            pilot(t, "pilot-007", "2026-10-17T00:00:00Z", rendered=True)   # 25 h ago, published (older render)
+            pilot(t, "pilot-009", "2026-10-17T22:00:00Z")                  # 3 h ago: still due, not stale
+            pilot(t, "pilot-002", "2026-10-01T10:00:00Z")                  # older than STALE_DAYS
+            pilot(t, "pilot-003", "2026-10-17T09:00:00Z", rendered=True)   # pre-standard render: retired
+            qa = Path(t) / "pilot-003" / "out" / "qa.json"
+            qa.write_text(json.dumps(dict(json.loads(qa.read_text()), criteria_version="pilot-qa-criteria-v2")))
+            ledger = {"entries": {"pilot-007:" + "b" * 64: {"video_id": "v"}}}
+            self.assertEqual([r["pilot"] for r in rq.stale(t, ledger, NOW)], ["pilot-008"])
+            self.assertEqual([r["pilot"] for r in rq.due(t, ledger, NOW, 48)], ["pilot-009"])
+
     def test_rendered_or_published_is_not_queued(self):
         with tempfile.TemporaryDirectory() as t:
             pilot(t, "pilot-003", "2026-10-19T10:00:00Z", rendered=True)

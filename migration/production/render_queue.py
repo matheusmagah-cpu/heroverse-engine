@@ -9,6 +9,8 @@ A completed v3 QA FAIL is not rerendered repeatedly; it awaits an input correcti
 usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
   images: prints "PILOT id,id,..." for every pilot with images still missing
   render: prints the next pilot to render (earliest publish time) or nothing
+  stale: prints "STALE PILOT PUBLISH_AT" for pilots whose slot passed more than 6 h ago (within STALE_DAYS) and that
+         have no video on YouTube: due() no longer sees them, so they must be rescheduled (E49)
   reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR, or final decision UNKNOWN),
   "shorts PILOT" (Shorts inputs handed off, Shorts never made) and
              "publish PILOT" (approved for this file, not on YouTube) so failed steps are retried
@@ -79,6 +81,30 @@ def due(production, ledger, now, hours):
     return sorted(out, key=lambda x: x["publish_at"])
 
 
+STALE_DAYS = 7
+
+
+def stale(production, ledger, now, days=STALE_DAYS):
+    """E49: pilot-008..011 left the queue silently once their slot was more than 6 h old (the reviewer returned 503
+    and two renders failed QA), and nothing reported it for a day. Any ledger entry with a video_id for the pilot
+    counts as published, whichever render it came from."""
+    entries = ledger.get("entries", {})
+    out = []
+    for d in sorted(Path(production).glob("pilot-[0-9][0-9][0-9]")):
+        if not (d / "schedule.json").exists() or not (d / "script.json").exists():
+            continue
+        t = when(json.loads((d / "schedule.json").read_text())["publish_at"])
+        if not now - timedelta(days=days) <= t < now - timedelta(hours=6):
+            continue
+        if any(k.split(":", 1)[0] == d.name and "video_id" in v for k, v in entries.items()):
+            continue
+        qa = object_or_empty(d / "out" / "qa.json")
+        if qa and qa.get("criteria_version") != STANDARD_QA:
+            continue  # rendered before migration/STANDARD.md: retired, never published (pilot-003)
+        out.append({"pilot": d.name, "publish_at": t})
+    return out
+
+
 def reviewed_shorts(path):
     """True when Shorts exist and at least one got a verdict (PASS or FAIL) from the watched review; Shorts left
     unreviewed (provider quota or error, NOT_REVIEWED_*) are made again."""
@@ -110,7 +136,10 @@ def main(production, ledger_path, mode, hours="48"):
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
     now = datetime.now(timezone.utc)
     rows = due(production, ledger, now, int(hours))
-    if mode == "images":  # "PILOT id,id": only the images still missing (never regenerate a recorded one)
+    if mode == "stale":
+        for r in stale(production, ledger, now):
+            print("STALE", r["pilot"], r["publish_at"].strftime("%Y-%m-%dT%H:%M:%SZ"))
+    elif mode == "images":  # "PILOT id,id": only the images still missing (never regenerate a recorded one)
         for r in rows:
             if r["missing_images"]:
                 print(r["pilot"], ",".join(r["missing_images"]))
