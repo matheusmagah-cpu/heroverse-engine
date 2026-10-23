@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "659e206db7e8152a8c847620550f42f89f720e6dc6e34cb4e3129b095a84b856",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "3D elevation model on black"
+ ],
  "vetting_luma": [
   38.4,
   46.8,

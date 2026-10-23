@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "39b7ce758f4c8b57869273b9ebd1ba3ca9711ef8704d7fb00438fb9512c61472",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "vertical source enlarged (E51)"
+ ],
  "vetting_luma": [
   169.9,
   107.8,

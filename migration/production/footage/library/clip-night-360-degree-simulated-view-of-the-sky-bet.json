@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "6491fd92b4b68140f02fe340fdae85ea9f5747aeb6694b13f42f212bcae1bdfd",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "360 black-hole simulation"
+ ],
  "vetting_luma": [
   46.2,
   46.2,

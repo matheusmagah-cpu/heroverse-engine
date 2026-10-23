@@ -40,6 +40,7 @@ class Selection(unittest.TestCase):
         self.assertFalse(ft.eligible(cand(height=720)))
         self.assertFalse(ft.eligible(cand(height=1080)))   # owner, 2026-10-23: never below 1440p
         self.assertFalse(ft.eligible(cand(seconds=5.0)))
+        self.assertFalse(ft.eligible(cand(width=1080, height=1920)))  # E51: vertical source, would be enlarged
 
     def test_titles_announcing_people_or_text_refused(self):
         for t in ("Tourists at the waterfall", "A man walking at sunrise", "Festival lights", "Logo intro",

@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "120c30f502d5d3214be5e47e4c7352d8674ac37dce0336d7b66b479edd6f7d8d",
- "vetting": "PENDING",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23",
+ "vetting_reasons": [
+  "people in the water; vertical source (E51)"
+ ],
  "vetting_luma": [
   165.1,
   151.0,
