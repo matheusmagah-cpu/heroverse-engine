@@ -363,6 +363,16 @@
     "file": "migration/production/test_script_check.py",
     "contains": "def test_speech_presence_counts_the_v4_sentence_gap"
    }
+  },
+  {
+   "id": "E54",
+   "date": "2026-10-23",
+   "error": "The voice judge crashed (faster-whisper's PyAV decoder: open() got an unexpected keyword 'metadata_errors') inside 'judge | tee', and the run showed success with no verdict (run 39989082891).",
+   "fix": "The judge hands Whisper the 16 kHz array it already loaded (no PyAV decoding); the judge step sets pipefail; the artifact uploads even on failure.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_a_piped_step_fails_when_its_command_fails"
+   }
   }
  ]
 }

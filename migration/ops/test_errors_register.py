@@ -32,6 +32,13 @@ class Register(unittest.TestCase):
             for d in diffs:
                 self.assertIn('--diff-filter=AM', d, name)
 
+    def test_a_piped_step_fails_when_its_command_fails(self):
+        # E54: the voice judge crashed inside "judge | tee" and the run still showed success
+        for wf in sorted((ROOT / '.github/workflows').glob('*.yml')):
+            for step in re.split(r'\n      - ', wf.read_text()):
+                if re.search(r'\|\s*tee\b', step):
+                    self.assertIn('pipefail', step, wf.name)
+
     def test_heartbeat_dispatches_only_existing_workflows(self):
         scheduler = (ROOT / 'migration/ops/heartbeat.py').read_text()
         for name in set(re.findall(r'"workflow":\s*"([a-z0-9-]+\.yml)"', scheduler)):

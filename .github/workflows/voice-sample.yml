@@ -58,9 +58,11 @@ jobs:
       - name: Judge every candidate with the objective ruler
         run: |
           o="$RUNNER_TEMP/out"
+          set -o pipefail   # a crashed judge must fail the run, not hide behind tee (run 39989082891)
           "$RUNNER_TEMP/judge/bin/python" -I -B migration/production/voice/voice_judge.py "$RUNNER_TEMP/text.txt" \
             kokoro="$o/kokoro.wav" chatterbox_calm="$o/chatterbox-calm.wav" chatterbox_warm="$o/chatterbox-warm.wav" | tee "$o/judge.jsonl"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: voice-judged-${{ inputs.pilot }}
           path: ${{ runner.temp }}/out

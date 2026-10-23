@@ -72,7 +72,8 @@ def measure(path, text, asr):
             cur = []
     jumps = np.abs(np.diff(db))
     glitch = int(np.sum((jumps > 24) & speech[1:] & speech[:-1]))
-    segments, _ = asr.transcribe(path, language="en", beam_size=5)
+    # the 16 kHz array, not the path: faster-whisper's PyAV decoder broke on the runner's PyAV (run 39989082891)
+    segments, _ = asr.transcribe(y.astype(np.float32), language="en", beam_size=5)
     hyp = " ".join(s.text for s in segments)
     n = len(words(text))
     return {"duration_s": round(dur, 1), "wer": round(wer(text, hyp), 3),
