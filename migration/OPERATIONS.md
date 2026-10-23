@@ -23,6 +23,7 @@ scripts, code and fixes; the GitHub workflows do the heavy work. Credentials liv
 | Review + approval | `approve.yml` → `long_review.py`, `three_stage.py`, `publish/prepublish_gate.py`, `owner_quality_policy.py` |
 | Publish | `publish.yml` (long), `shorts.yml` / `shorts-review.yml` / `publish-shorts.yml` (Shorts), `first-comment.yml`, `description-refresh.yml` |
 | Keep it moving | `heartbeat.yml` dispatches the scheduled work; `reconcile.yml` retries errors; `render_queue.py stale` reports passed slots |
+| Voice A/B | `voice-sample.yml` → `production/voice/chatterbox_sample.py` (Chatterbox, MIT, cloned from our own Kokoro narration; samples as a run artifact, nothing published) |
 | Measure | `goal-report.yml` (daily YPP report in `evidence/daily-report/`), `market-panel.yml`, vidIQ research (≤ 10 calls/day, ledger in `evidence/vidiq/`) |
 
 ## Known limits (measured)
