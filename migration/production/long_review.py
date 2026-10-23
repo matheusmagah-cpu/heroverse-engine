@@ -15,7 +15,6 @@ usage: long_review.py PILOT_DIR VIDEO_MP4
 """
 from datetime import datetime, timezone
 import json
-import time
 import os
 from pathlib import Path
 import sys
@@ -75,21 +74,24 @@ def watch(file, title, key, models=REVIEW_MODELS):
     return r
 
 
-# E58: the designated reviewer answered 503 "high demand" for pilot-010 (run 40017605277) and the run gave up after
-# about one minute (structure_mining.call waits 20 s and 40 s). Spikes last minutes, so the same reviewer is asked again
-# within the run after 2, 5 and 10 minutes: never another model, and at most 8 calls of the free allowance per run.
-OVERLOAD_WAITS = (120, 300, 600)
+# E58 (root cause, 2026-10-23): the designated reviewer does not answer our free key at all, even a 5-token text call
+# (reviewer probe run 40036837734; Google forum reports the same for free-tier gemini-3.8-flash), and 503 answers may
+# count against the daily allowance. Retrying a down reviewer only burns that allowance, so the review first asks one
+# tiny health question; when it is not answered, no video call is made and the review is recorded as ERROR.
+HEALTH_TIMEOUT_S = 60
 
 
-def watch_with_patience(file, title, key, wait=time.sleep):
-    for pause in (*OVERLOAD_WAITS, None):
-        try:
-            return watch(file, title, key)
-        except sm.ProviderFailure as e:
-            if pause is None or not ("503" in e.code or "UNAVAILABLE" in e.code):
-                raise
-            print(json.dumps({"reviewer": "overloaded", "retry_in_seconds": pause}), file=sys.stderr)
-            wait(pause)
+def reviewer_healthy(key, model=REVIEW_MODELS[0], opener=None):
+    import urllib.request
+    body = json.dumps({"contents": [{"role": "user", "parts": [{"text": "Reply OK"}]}],
+                       "generationConfig": {"maxOutputTokens": 5}}).encode()
+    req = urllib.request.Request("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+                                 data=body, method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": key})
+    try:
+        with (opener or urllib.request.urlopen)(req, timeout=HEALTH_TIMEOUT_S) as r:
+            return r.status == 200
+    except Exception:  # noqa: BLE001 - any failure means the reviewer cannot take a video now
+        return False
 
 
 def own_measures(script, timeline, seconds):
@@ -119,9 +121,11 @@ def main(pilot_dir, video_path):
     script = json.loads((d / "script.json").read_text())
     manifest = json.loads((d / "out" / "manifest.json").read_text())
     try:
+        if not reviewer_healthy(key):
+            raise sm.ProviderFailure("REVIEWER_UNAVAILABLE_HEALTH_CHECK")
         file = sr.upload(video_path, key)
         try:
-            review = watch_with_patience(file, script["working_title"], key)
+            review = watch(file, script["working_title"], key)
             try:  # report-only: an audit failure never changes the review status
                 report = audit(file, key)
             except Exception as e:

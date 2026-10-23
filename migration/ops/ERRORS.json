@@ -407,11 +407,21 @@
   {
    "id": "E58",
    "date": "2026-10-23",
-   "error": "The designated reviewer answered 503 'high demand' for pilot-010 (run 40017605277); the review gave up after about one minute and the video missed its approval window.",
-   "fix": "long_review.watch_with_patience asks the same reviewer again within the run after 2, 5 and 10 minutes on 503/UNAVAILABLE only (never another model, never on a used-up quota).",
+   "error": "The designated reviewer gemini-3.8-flash answered 503 for pilot-010 (runs 40017605277, 40025860740). Root cause: it does not answer our free key at all, even a 5-token text call (reviewer probe run 40036837734: timeout on 3.8-flash, 200 in < 1 s on 3.6-flash and 3.5-flash-lite; Google forum reports the same for free-tier 3.8-flash). A first fix retried within the run after 2, 5 and 10 minutes: wrong, because a down reviewer never answers and 503s may count against the daily allowance.",
+   "fix": "long_review asks one tiny health question first; when the reviewer does not answer, no video call is made and the review is ERROR (REVIEWER_UNAVAILABLE_HEALTH_CHECK). No in-run retries. A replacement reviewer must pass reviewer_calibration (gemini-3.6-flash did not: it failed 5 of the 5 renders 3.8 passed, mean -2.2).",
    "antidote": {
     "file": "migration/production/test_long_review.py",
-    "contains": "def test_overloaded_reviewer_is_asked_again_and_only_the_reviewer"
+    "contains": "def test_down_reviewer_costs_one_tiny_call_and_no_video_call"
+   }
+  },
+  {
+   "id": "E59",
+   "date": "2026-10-23",
+   "error": "Reviewer calibration run 40037346616 stopped at 'no assets match': renders that were published (004-007, 012) are no longer in the private release.",
+   "fix": "reviewer-calibration.yml falls back to the ledger video_id of the exact render hash and the candidate watches the public YouTube copy.",
+   "antidote": {
+    "file": "migration/production/test_reviewer_calibration.py",
+    "contains": "def test_published_renders_fall_back_to_youtube"
    }
   }
  ]

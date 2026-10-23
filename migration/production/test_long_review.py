@@ -73,6 +73,7 @@ class Review(unittest.TestCase):
                 raise RuntimeError("quota exhausted")
             return models[0], {"first_30s": "a", "amateur_elements": []}
         with mock.patch.object(lr.sm, "call", call), mock.patch.object(lr.sr, "upload", lambda p, k: FILE), \
+                mock.patch.object(lr, "reviewer_healthy", lambda key: True), \
                 mock.patch.object(lr.sr, "request", lambda *a, **k: None), \
                 mock.patch.dict(lr.os.environ, {"HERO_GEMINI_API_KEY": "k"}), mock.patch("builtins.print"):
             lr.main(str(d), "video.mp4")
@@ -100,29 +101,28 @@ class Review(unittest.TestCase):
         self.assertEqual(out["status"], "FAIL")                          # 9 minutes: hard row FAIL decides
         self.assertFalse(out["scorecard_hard"]["minutes"]["pass"])
 
-    def test_overloaded_reviewer_is_asked_again_and_only_the_reviewer(self):
-        # E58: pilot-010's review gave up after one minute of 503 "high demand" (run 40017605277)
-        busy = lr.sm.ProviderFailure("HTTP_503_UNAVAILABLE")
-        waits, calls = [], []
-
-        def fake(file, title, key):
-            calls.append(title)
-            if len(calls) < 3:
-                raise busy
-            return {"status": "PASS"}
-        with mock.patch.object(lr, "watch", side_effect=fake):
-            self.assertEqual(lr.watch_with_patience(FILE, "T", "k", wait=waits.append), {"status": "PASS"})
-        self.assertEqual(waits, list(lr.OVERLOAD_WAITS[:2]))
-        with mock.patch.object(lr, "watch", side_effect=busy):
-            with self.assertRaises(lr.sm.ProviderFailure):
-                lr.watch_with_patience(FILE, "T", "k", wait=lambda s: None)
-        quota = lr.sm.ProviderFailure("HTTP_429_RESOURCE_EXHAUSTED:QUOTA")
-        waits = []
-        with mock.patch.object(lr, "watch", side_effect=quota):        # a used-up allowance is never retried
-            with self.assertRaises(lr.sm.ProviderFailure):
-                lr.watch_with_patience(FILE, "T", "k", wait=waits.append)
-        self.assertEqual(waits, [])
-        self.assertLessEqual(sum(lr.OVERLOAD_WAITS) / 60, 60)          # fits the 120-minute approve job
+    def test_down_reviewer_costs_one_tiny_call_and_no_video_call(self):
+        # E58: the designated reviewer did not answer even a 5-token text call; video retries only burned the allowance
+        class Ok:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+        self.assertTrue(lr.reviewer_healthy("k", opener=lambda req, timeout: Ok()))
+        def down(req, timeout):
+            raise TimeoutError()
+        self.assertFalse(lr.reviewer_healthy("k", opener=down))
+        with tempfile.TemporaryDirectory() as t:
+            d = pilot(t)
+            with mock.patch.dict(lr.os.environ, {"HERO_GEMINI_API_KEY": "k"}), \
+                 mock.patch.object(lr, "reviewer_healthy", return_value=False), \
+                 mock.patch.object(lr.sr, "upload") as upload, mock.patch.object(lr, "watch") as watch:
+                lr.main(str(d), "video.mp4")
+            out = json.loads((d / "out" / "review.json").read_text())
+        upload.assert_not_called()
+        watch.assert_not_called()
+        self.assertEqual(out["status"], "ERROR")
+        self.assertIn("REVIEWER_UNAVAILABLE", out["error"])
+        self.assertFalse(hasattr(lr, "watch_with_patience"))   # no in-run retries of a down reviewer
 
     def test_scorecard_hard_has_exactly_the_hard_keys(self):
         with tempfile.TemporaryDirectory() as t:
