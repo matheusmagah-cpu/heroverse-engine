@@ -102,9 +102,16 @@ The 4 channels that never unlocked hopped formats or made short night videos.
 - **V4. Leaning signals (HYPOTHESIS, small n):** no female voice among the hits; animated Subscribe pop-ups are more
   common on dead videos; a persistent "Type Amen 🙏" badge is more common on hits.
 
-## Thumbnails
-Measured on GitHub Actions by `migration/mining/thumb_study.py` (brightness, colour, text, faces, within
-channel-month test, contact sheets). Results are written to `thumbs/` by `thumb-study.yml`.
+## Thumbnails (806 measured on GitHub Actions; `thumbs/thumb_perm.json`, contact sheets `thumbs/sheet-*.jpg`)
+| # | Finding | Evidence | Grade |
+|---|---|---|---|
+| T1 | A saturated thumbnail (mean saturation > 0.45) | Dead odds ×0.29 (p = 0.003). | PROVEN |
+| T2 | A blue-dominant thumbnail (blue share > 0.4) | Hit odds ×0.26 (p = 0.008). | PROVEN (negative) |
+| T3 | A busy picture (edge density > 0.12) | Hit odds ×3.1 (p = 0.055). | HYPOTHESIS |
+| — | Faces, brightness, darkness, contrast, amount of text | Not significant. | does not decide |
+
+Looked at: the breakouts share huge bold text across the frame (the search phrase on top, the hook below), warm gold
+light and one template per channel; the dead ones are dark, cool and desaturated with thin small text, or dated.
 
 ## Not measured
 - Click-through rate and retention curves: only the channel owner's analytics hold them.

@@ -222,3 +222,9 @@ Owner: "compare everything… structure, every detail, so we only produce what t
 - **Picture and sound (20 watched with vidIQ).** Quality does not separate: hits 6.9, dead 6.8. Our two videos scored 9 and 8.5, the best of the sample, with 6–40 views. The same channel with the same template has both outcomes (Grace & Purpose 287K vs 98; Favor for Today 54K vs 73).
 - **Decision.** STANDARD R15: no Bible references in descriptions or chapter names, and a subscribe line in every description. Intros of 008, 009, 011 and 014 are rewritten. Thumbnails are measured by `thumb-study.yml`.
 - **Leaning, not adopted (HYPOTHESIS).** A persistent "Type Amen 🙏" badge (4 of 9 hits, 2 of 8 dead). No female voice among the hits.
+
+## Thumbnails (2026-10-23 night)
+- **Measured.** 806 thumbnails of the study (`thumb-study.yml`). Saturated: dead ×0.29 (p = 0.003). Blue-dominant: hit ×0.26 (p = 0.008). Faces, brightness, text amount and contrast do not decide.
+- **Seen.** Breakouts: huge bold text across the frame (search phrase on top, hook below), warm gold light, one template per channel. Dead: dark, cool, desaturated, thin small text (a whole channel of them never broke out), dated thumbnails.
+- **Ours before.** Darkened frame, text in the right half at most 14 % of the height: the dead style.
+- **Decision.** STANDARD R16: breakout layout over the warmest still, and a thumbnail ruler in every render.
