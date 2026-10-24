@@ -1,0 +1,53 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-03-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 3,
+ "passage": "Genesis 3:1-7 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "9b10e1a0bedc00577d43021e52ecfe0c568230110b9a92b2f3aad231f6cf40bf",
+ "seconds": 46.6,
+ "frame": [
+  1080,
+  1920
+ ],
+ "slot": "2026-10-25T13:30:00Z",
+ "review": {
+  "overall": 9.5,
+  "process": "every clip previewed by frame before compose; v1 (9.3) had a dim lightning shot under 'Ye shall not surely die' (mostly dark blue, tiny bolt) - replaced by the AI serpent and re-composed; frame sheet of v2 reviewed; -16.0 LUFS",
+  "issues": [
+   "the sky clip at 37-43 s shows slight colour banding in the clouds",
+   "~32.5 s: dip to black into the forest shot (intended, 0.4 s)"
+  ]
+ },
+ "title": "Did God Really Say That? 🐍 | The Serpent in Eden, Bible Story (KJV) #shorts",
+ "description": "Genesis 3, the serpent in the garden, read from the King James Version. Part 3 of a journey through the whole Bible, one story at a time.\n\nLord, let your word be louder than every lie I hear today. Type Amen if you prayed this with me 🙏\n\nPart 2: God breathed into the dust. Next: Part 4, driven out of the garden.\n\nScripture: King James Version (public domain).\nVisuals: licensed stock footage from Pexels (Pexels License) and AI-generated scenes. Narration: AI voice. Music: original, AI-generated.\n\n#bible #genesis #biblestory",
+ "tags": [
+  "the serpent",
+  "genesis 3",
+  "adam and eve",
+  "forbidden fruit",
+  "bible story",
+  "kjv bible",
+  "genesis",
+  "christian shorts"
+ ],
+ "category_id": "29",
+ "first_comment": "Part 3 of the whole Bible, one story at a time. Part 4 tomorrow: driven out of the garden 🌿",
+ "sources": {
+  "voice": "vidIQ voiceover (ElevenLabs 'George'), job_8c46a6af",
+  "music": "vidIQ generate_music, job_84bf3f8f (series theme)",
+  "ai_video": [
+   "the serpent and the fruit (veo-3.1-lite, 4 s)"
+  ],
+  "stock": "Pexels videos 6218882, 10343262, 5527320, 17040829, 19752304, 12222644, 19806006",
+  "compose": "vidIQ compose job_6555da22 (v1, rejected), job_11567ee2 (v2)"
+ },
+ "credits": {
+  "ai_video": 60,
+  "voice": 14,
+  "stock_search": 4,
+  "compose": 24,
+  "wasted": 12
+ }
+}
