@@ -1,7 +1,7 @@
 {
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-011",
- "output_sha256": "e50bf41c5b3d43d4614128aeeefd3e6ec576063a58c585f58904001378c8b2de",
+ "output_sha256": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da",
  "decision": "UNKNOWN",
  "eligible_for_automatic_publication": false,
  "dimensions": {
@@ -26,13 +26,13 @@
     "source": "binding",
     "item": "manifest",
     "state": "PASS",
-    "detail": "e50bf41c5b3d43d4614128aeeefd3e6ec576063a58c585f58904001378c8b2de"
+    "detail": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da"
    },
    {
     "source": "binding",
     "item": "qa_for_this_file",
     "state": "PASS",
-    "detail": "e50bf41c5b3d43d4614128aeeefd3e6ec576063a58c585f58904001378c8b2de"
+    "detail": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da"
    },
    {
     "source": "binding",
@@ -48,13 +48,13 @@
     "source": "binding",
     "item": "review_for_this_file",
     "state": "PASS",
-    "detail": "e50bf41c5b3d43d4614128aeeefd3e6ec576063a58c585f58904001378c8b2de"
+    "detail": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da"
    },
    {
     "source": "binding",
     "item": "video_file_hash",
     "state": "PASS",
-    "detail": "e50bf41c5b3d43d4614128aeeefd3e6ec576063a58c585f58904001378c8b2de"
+    "detail": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da"
    }
   ],
   "technical": [
