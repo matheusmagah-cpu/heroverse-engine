@@ -163,6 +163,23 @@ class Queue(unittest.TestCase):
             self.assertTrue(rq.due(t, {}, NOW, 48)[0]["rendered"])
             self.assertEqual(rq.due(t, {"entries": {"pilot-003:"+"a"*64: {"video_id": "v"}}}, NOW, 48), [])
 
+    def test_pending_first_comments_are_retried_once_the_video_is_public(self):
+        # E61: 006, 007 and 010 kept "PENDING: HTTP_403" first comments for days; nothing dispatched the retry
+        with tempfile.TemporaryDirectory() as t:
+            for name, at in (("pilot-006", "2026-10-17T08:00:00Z"), ("pilot-007", "2026-10-18T00:55:00Z"),
+                             ("pilot-008", "2026-10-17T08:00:00Z"), ("pilot-009", "2026-10-05T08:00:00Z")):
+                pilot(t, name, at)
+            pending = {"first_comment": "PENDING: HTTP_403 forbidden"}
+            ledger = {"entries": {
+                "pilot-006:" + "a" * 64: {"video_id": "v6", "steps": pending},          # public: retried
+                "pilot-007:" + "a" * 64: {"video_id": "v7", "steps": pending},          # still scheduled: not yet
+                "pilot-008:" + "a" * 64: {"video_id": "v8", "steps": {"first_comment": "Ugz1"}},  # posted: never again
+                "pilot-009:" + "a" * 64: {"video_id": "v9", "steps": pending},          # older than a week: left
+                "short:pilot-006:" + "b" * 64: {"video_id": "s6", "steps": pending}}}   # Shorts have no first comment
+            self.assertEqual(rq.pending_comments(t, ledger, NOW), ["pilot-006"])
+        wf = (Path(rq.__file__).resolve().parents[2] / ".github/workflows/reconcile.yml").read_text()
+        self.assertIn("comment) gh workflow run first-comment.yml", wf)
+
     def test_reconcile_retries_errors_and_failed_publications(self):
         import contextlib, io
         with tempfile.TemporaryDirectory() as t:

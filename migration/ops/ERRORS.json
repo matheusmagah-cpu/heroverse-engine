@@ -433,6 +433,16 @@
     "file": "migration/ops/test_release_video.py",
     "contains": "def test_large_render_is_split_rejoined_verified_and_deleted"
    }
+  },
+  {
+   "id": "E61",
+   "date": "2026-10-24",
+   "error": "The channel's first comment is refused while a video is still scheduled (HTTP 403), and first-comment.yml, which retries it once the video is public, was never dispatched by anything: pilots 006, 007 and 010 kept 'PENDING' first comments for up to four days.",
+   "fix": "render_queue reconcile prints 'comment PILOT' for the earliest public video (slot passed by 10 min, at most 7 days) with a PENDING first comment, and reconcile.yml dispatches first-comment.yml for it, one at a time (shared publish concurrency group).",
+   "antidote": {
+    "file": "migration/production/test_render_queue.py",
+    "contains": "def test_pending_first_comments_are_retried_once_the_video_is_public"
+   }
   }
  ]
 }
