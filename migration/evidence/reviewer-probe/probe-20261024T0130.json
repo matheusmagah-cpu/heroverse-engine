@@ -1,0 +1,85 @@
+{
+ "at": "2026-10-24T01:30:14Z",
+ "probes": [
+  {
+   "model": "gemini-omni-1.1-flash",
+   "http": 429,
+   "provider_status": "RESOURCE_EXHAUSTED",
+   "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: [REDACTED_URL] To monitor your current",
+   "seconds": 0.18
+  },
+  {
+   "model": "gemini-omni-flash-preview",
+   "http": 429,
+   "provider_status": "RESOURCE_EXHAUSTED",
+   "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: [REDACTED_URL] To monitor your current",
+   "seconds": 0.16
+  },
+  {
+   "model": "gemini-3.7-flash",
+   "http": null,
+   "error": "TimeoutError",
+   "seconds": 60.07
+  },
+  {
+   "model": "gemini-flash-latest",
+   "http": null,
+   "error": "TimeoutError",
+   "seconds": 60.07
+  },
+  {
+   "model": "gemini-3-flash-preview",
+   "http": 200,
+   "seconds": 0.7
+  },
+  {
+   "model": "gemini-3.5-flash",
+   "http": 200,
+   "seconds": 0.89
+  },
+  {
+   "model": "gemini-2.5-flash",
+   "http": 200,
+   "seconds": 0.62
+  },
+  {
+   "model": "gemini-3.5-flash-lite",
+   "http": 200,
+   "seconds": 2.41
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "http": 200,
+   "seconds": 0.67
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "http": 200,
+   "seconds": 22.93
+  }
+ ],
+ "listed_flash_models": [
+  "gemini-2.5-flash",
+  "gemini-2.5-flash-image",
+  "gemini-2.5-flash-lite",
+  "gemini-2.5-flash-preview-tts",
+  "gemini-3-flash-preview",
+  "gemini-3.1-flash-image",
+  "gemini-3.1-flash-image-preview",
+  "gemini-3.1-flash-lite",
+  "gemini-3.1-flash-lite-image",
+  "gemini-3.1-flash-lite-preview",
+  "gemini-3.1-flash-tts-preview",
+  "gemini-3.5-flash",
+  "gemini-3.5-flash-lite",
+  "gemini-3.6-flash",
+  "gemini-3.7-flash",
+  "gemini-3.8-flash",
+  "gemini-3.8-flash-lite-tts",
+  "gemini-3.8-flash-tts",
+  "gemini-flash-latest",
+  "gemini-flash-lite-latest",
+  "gemini-omni-1.1-flash",
+  "gemini-omni-flash-preview"
+ ]
+}
