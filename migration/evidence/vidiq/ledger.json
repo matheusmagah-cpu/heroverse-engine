@@ -475,6 +475,15 @@
    "credits": 5,
    "purpose": "exact counts 3acset3y_Aw (counts only)",
    "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "generation",
+   "tool": "vidiq_generate_video",
+   "credits": 140,
+   "purpose": "owner-approved test (24/10): 6 s 2K minimax-h3 dawn-eagle hook for pilot-011 (job_757c6775-4dd7-4eb3-ba4e-8cc1ee16dc9c); quoted 140 at submit",
+   "saved_to": "evidence/vidiq/20261024/ai_hook_test.json",
+   "approved_by_owner": true
   }
  ]
 }
