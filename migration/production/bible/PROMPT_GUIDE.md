@@ -20,6 +20,9 @@ Then: duration and aspect come from the tool fields, not the text.
 - **Say what IS there; avoid listing what is not.** Veo 3.1 has no reliable negative field; naming "fire, smoke,
   explosion" can prime them. Write the positive version ("natural sunlight only, soft mist"). Keep only the short
   standard tail: "No people, no text, no logos."
+- **Particles in a light shaft read as fire.** "Fine reddish dust swirls upward into a shaft of morning sunlight"
+  produced a glowing orange column like flames (job_8a50c757, 60 credits). Veo Lite turns glowing particles, beams and
+  embers into fire; a dust or light moment starts from a checked still (image-to-video) or from real footage.
 - **One action, one camera move per clip.** Two moves or two events give unstable, jittery output.
 - **Name the motion.** A prompt about stillness returns a frozen-looking clip; say what moves (mist gliding, ripples,
   clouds parting).
@@ -46,6 +49,8 @@ Then: duration and aspect come from the tool fields, not the text.
 | job_4a79d62e first light (metaphor prompt) | veo-3.1-lite 1080p | 4 | 60 | MISS: laser and fire |
 | job_ebf7f7b2 first light (physics prompt) | veo-3.1-lite 1080p | 4 | 60 | good |
 | job_02862131 Spirit over the waters | veo-3.1-lite 1080p | 4 | 60 | good |
+| job_de8873e3 the first man at dawn, from behind | veo-3.1-lite 1080p | 4 | 60 | good |
+| job_8a50c757 dust rising into sunlight | veo-3.1-lite 1080p | 4 | 60 | MISS: read as fire |
 
 ## Built for 9.5 before compose (owner, 2026-10-24: "a 9.5 needs a structure made for 9.5")
 Genesis 1 (part 1) scored ~8 because nothing checked the clips before the compose. Every episode now passes, in

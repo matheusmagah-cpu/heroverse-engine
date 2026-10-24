@@ -1,0 +1,54 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-02-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 2,
+ "passage": "Genesis 2:7-22 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "48ce69512a8562373b98b623eb21e1b8627ee797bce550b178cdce4f7bf737dd",
+ "seconds": 51.9,
+ "frame": [
+  1080,
+  1920
+ ],
+ "slot": "2026-10-24T23:30:00Z",
+ "review": {
+  "overall": 9.5,
+  "process": "every clip previewed by frame before compose (PROMPT_GUIDE 'Built for 9.5'); 7 candidates rejected (CGI tree, denim sleeve, grey rock, concrete flowers, AI dust that read as fire); frame sheet of the composed file reviewed",
+  "issues": [
+   "the garden clip is 16 fps (slightly stepped motion, 14-21 s)",
+   "~4.0 s: a brief dark frame in the transition into the desert shot (about 0.3 s)"
+  ]
+ },
+ "title": "God Breathed Into the Dust 🌿 | Garden of Eden Bible Story (KJV) #shorts",
+ "description": "Genesis 2, the garden of Eden, read from the King James Version. Part 2 of a journey through the whole Bible, one story at a time.\n\nLord, breathe new life into me today. Type Amen if you prayed this with me 🙏\n\nPart 1: In the beginning. Next: Part 3, the serpent.\n\nScripture: King James Version (public domain).\nVisuals: licensed stock footage from Pexels (Pexels License) and AI-generated scenes. Narration: AI voice. Music: original, AI-generated.\n\n#bible #genesis #biblestory",
+ "tags": [
+  "garden of eden",
+  "genesis 2",
+  "adam and eve",
+  "bible story",
+  "kjv bible",
+  "bible stories",
+  "genesis",
+  "christian shorts"
+ ],
+ "category_id": "29",
+ "first_comment": "Part 2 of the whole Bible, one story at a time. Part 3 tomorrow: the serpent 🍎",
+ "sources": {
+  "voice": "vidIQ voiceover (ElevenLabs 'George'), job_1069c9bb",
+  "music": "vidIQ generate_music, job_84bf3f8f (series theme)",
+  "ai_video": [
+   "job_de8873e3 the first man at dawn (veo-3.1-lite)",
+   "job_757c6775 eagle at dawn (minimax-h3)"
+  ],
+  "stock": "Pexels videos 8865368, 18897114, 17416249, 6218882, 16911889, 19806006, 11455219, 7311794, 12222644, 5527320",
+  "compose": "vidIQ compose job_8a8f0219"
+ },
+ "credits": {
+  "ai_video": 60,
+  "voice": 14,
+  "stock_search": 13,
+  "compose": 26,
+  "wasted": 60
+ }
+}
