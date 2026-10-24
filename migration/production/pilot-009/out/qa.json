@@ -1,8 +1,8 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-009",
- "output_sha256": "f340ec3fcf755be99c6a494e3287c2f625296579999f750140bb810410070ed3",
- "status": "FAIL",
+ "output_sha256": "a1fb148b4bf9d58a260928aa5cd846a6de7f40729be152fdacdaf2716513199a",
+ "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
   "video_format": true,
@@ -20,7 +20,7 @@
   "every_scene_in_motion": true,
   "scene_seconds": true,
   "crossfade_seconds_max": true,
-  "image_repeat_gap": false,
+  "image_repeat_gap": true,
   "caption_coverage_of_speech": true,
   "caption_hold_median": true,
   "caption_chars_max": true,
@@ -31,49 +31,50 @@
   "cta_short_and_not_early": true,
   "persistent_overlays_only_brand": true,
   "images_open_licence_with_revision": true,
-  "no_third_party_footage": true,
+  "footage_picture_share": true,
+  "footage_licensed_vetted_and_credited": true,
   "music_owned": true,
   "voice_model_pinned": true
  },
- "criteria_version": "pilot-qa-criteria-v3",
+ "criteria_version": "pilot-qa-criteria-v4",
  "measurements": {
-  "duration_seconds": 1629.04,
+  "duration_seconds": 970.15,
   "loudness": {
    "integrated_lufs": -15.6,
-   "loudness_range_lu": 2.6,
-   "true_peak_dbtp": -2.7
+   "loudness_range_lu": 2.9,
+   "true_peak_dbtp": -2.8
   },
-  "speech_presence": 0.91,
-  "music_presence": 0.366,
-  "wer_vs_script": 0.0352,
-  "accepted_words_per_minute": 126.0,
-  "caption_lines": 765,
-  "holds": 60,
+  "speech_presence": 0.881,
+  "music_presence": 0.402,
+  "wer_vs_script": 0.0313,
+  "accepted_words_per_minute": 125.4,
+  "caption_lines": 453,
+  "holds": 177,
   "first_word_seconds": 0.14,
   "editing": {
-   "picture_changes": 592,
-   "picture_changes_per_minute": 21.8,
-   "median_shot_seconds": 2.3,
-   "longest_shot_seconds": 18.267,
-   "motion_median_top_decile_diff": 1.003
+   "picture_changes": 370,
+   "picture_changes_per_minute": 22.88,
+   "median_shot_seconds": 2.133,
+   "longest_shot_seconds": 15.433,
+   "motion_median_top_decile_diff": 1.697
   },
   "colour": {
-   "mean_brightness": 0.3279,
-   "brightness_std_over_time": 0.0605,
-   "mean_saturation": 0.503,
-   "saturation_std_over_time": 0.1017
+   "mean_brightness": 0.3342,
+   "brightness_std_over_time": 0.0805,
+   "mean_saturation": 0.4307,
+   "saturation_std_over_time": 0.1507
   },
   "rhythm": {
-   "audio_onsets": 2652,
-   "audio_onsets_per_minute": 97.68,
+   "audio_onsets": 1519,
+   "audio_onsets_per_minute": 93.94,
    "tempo": {
-    "bpm": 93.02,
-    "confidence": 0.012
+    "bpm": 119.72,
+    "confidence": 0.013
    }
   }
  },
- "transcript_head": "Before you pick up your keys this morning, let's pray God's whole armor over the day you face. You may have your shoes beside the door or breakfast still on the table. Wherever this morning finds you, bring the day as it is. You may have worked to finish, someone to care for, or a difficult conversation ahead. If you can, let your shoulders settle as you listen. will pray through the armor named i",
- "criteria_sha256": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
+ "transcript_head": "Before you walk out the door this morning, put on God's whole armor. Pray it with me now. We will put on each piece of the armor, truth, peace, faith, and salvation, and pray it over the conversations and the work ahead of you today. You may have your shoes beside the door or breakfast still on the table. this morning finds you, bring the day as it is, you may have worked to finish, someone to car",
+ "criteria_sha256": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
  "publication_performed": false
