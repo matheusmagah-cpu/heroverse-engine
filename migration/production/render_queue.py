@@ -13,7 +13,8 @@ usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
          have no video on YouTube: due() no longer sees them, so they must be rescheduled (E49)
   reconcile: prints "approve PILOT" (QA PASS, no approval, review missing or ERROR, or final decision UNKNOWN),
   "shorts PILOT" (Shorts inputs handed off, Shorts never made) and
-             "publish PILOT" (approved for this file, not on YouTube) so failed steps are retried
+             "publish PILOT" (approved for this file, not on YouTube) so failed steps are retried, and
+             "comment PILOT" (on YouTube, public by its schedule, first comment still PENDING: E61)
 """
 from datetime import datetime, timedelta, timezone
 import hashlib
@@ -85,6 +86,29 @@ def due(production, ledger, now, hours):
 
 
 STALE_DAYS = 7
+COMMENT_DAYS = 7  # a first comment is retried for a week after the video goes public
+
+
+def pending_comments(production, ledger, now):
+    """E61: the first comment is refused while a video is still scheduled (HTTP 403), and nothing retried it once the
+    video was public: 006, 007 and 010 kept "PENDING" for days. Pilots on YouTube whose slot passed (and is at most
+    COMMENT_DAYS old) with a PENDING first comment are retried by first-comment.yml."""
+    out = []
+    for key, entry in sorted(ledger.get("entries", {}).items()):
+        pilot = key.split(":", 1)[0]
+        comment = (entry.get("steps") or {}).get("first_comment")
+        if not re.fullmatch(r"pilot-\d{3}", pilot) or not entry.get("video_id"):
+            continue
+        if not (isinstance(comment, str) and comment.startswith("PENDING")):
+            continue
+        sched = Path(production) / pilot / "schedule.json"
+        try:
+            public = when(json.loads(sched.read_text())["publish_at"])
+        except (FileNotFoundError, ValueError, KeyError):
+            continue
+        if public + timedelta(minutes=10) <= now <= public + timedelta(days=COMMENT_DAYS) and pilot not in out:
+            out.append(pilot)
+    return out
 
 
 def stale(production, ledger, now, days=STALE_DAYS):
@@ -182,6 +206,9 @@ def main(production, ledger_path, mode, hours="48"):
                 shorts.append(r["pilot"])
         for p in publish:
             print("publish", p)
+        comments = pending_comments(production, ledger, now)
+        if comments:  # first-comment.yml shares the publish concurrency group: one at a time, like approvals (E25)
+            print("comment", comments[0])
         if approve:
             print("approve", approve[0])  # rows are sorted by publish time: the earliest slot first
         elif not long_quota_pending:
