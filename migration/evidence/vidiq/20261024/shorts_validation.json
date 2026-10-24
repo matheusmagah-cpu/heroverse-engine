@@ -1,0 +1,189 @@
+{
+ "version": "shorts-structure-audit-v1",
+ "date": "2026-10-24",
+ "structure": "spoken-prayer-short",
+ "queries": [
+  {
+   "tool": "vidiq_outliers",
+   "keyword": "prayer",
+   "contentType": "short",
+   "publishedWithin": "threeMonths",
+   "minViews": 50000,
+   "maxSubscribers": 200000,
+   "limit": 40
+  },
+  {
+   "tool": "vidiq_channel_videos",
+   "channel": "UCUi2Z1wjRCjvSo71Faw1Wkw",
+   "videoFormat": "short",
+   "popular": false,
+   "purpose": "weak contrasts of the same shape from the same channel as a winner"
+  }
+ ],
+ "prompt": "production audit (first 3 s, visuals, captions, audio, beats, ending/CTA, length) - same fields as evidence/vidiq/20261020/shorts_structure_audit.json; vidiq_watch_shortform_content",
+ "selection": "spoken English Christian prayer Shorts only (Islamic, sermon clips, skits and song excerpts in the outlier list are other lines); new channels only",
+ "winners": [
+  {
+   "video": "3acset3y_Aw",
+   "channel": "Biblical Way Network",
+   "channel_id": "UCUi2Z1wjRCjvSo71Faw1Wkw",
+   "subs": 3070,
+   "views": 59131,
+   "breakout": 46.41,
+   "seconds": 126,
+   "first_line_complete_sentence": false,
+   "hook": "vocative 'Heavenly Father, as the night settles around me...' (clause completes at 0:07)",
+   "picture": "AI 2.5D animated stills, 3 framings cycled, 26 cuts, slow push-in",
+   "person": true,
+   "captions": "white title case, soft shadow, lower third, 2-8 words, synced",
+   "voice": "male synthetic (British)",
+   "music": "soft ambient pad/piano ~-18 dB under voice",
+   "scripture_quoted": [
+    "Psalm 4:8",
+    "Philippians 4:7",
+    "Psalm 23:1-4",
+    "Psalm 91:2-4",
+    "1 Peter 5:7",
+    "Romans 8:38-39",
+    "Numbers 6:24-26"
+   ],
+   "cta": "none",
+   "ending": "Aaronic blessing then 'In the name of Jesus, the Prince of Peace, I pray. Amen.'",
+   "transcript_counts": {
+    "words": 346,
+    "seconds": 126,
+    "wpm_over_duration": 164.8,
+    "sentences": 30,
+    "word_peace": 7
+   },
+   "model_pace_estimate": "90-100 wpm (refuted by the count: 165)"
+  },
+  {
+   "video": "DKBkPbJ73xU",
+   "channel": "Cri d'Epaphras Worship",
+   "channel_id": "UCMVDSOWhGeAbsbhJz32C46A",
+   "subs": 41100,
+   "views": 540738,
+   "breakout": 13.34,
+   "seconds": 179,
+   "first_line_complete_sentence": false,
+   "hook": "title card 'PRAY BEFORE YOU START YOUR DAY' 0:00-0:02, then 'Heavenly Father, as the dawn breaks...'",
+   "picture": "stock aerial drone footage, 2 cuts, smooth forward flight",
+   "person": false,
+   "captions": "yellow, thin black outline, centre, 3-7 words, synced",
+   "voice": "male synthetic, deep, dramatic",
+   "music": "cinematic orchestral, prominent, swells",
+   "scripture_quoted": [
+    "Psalm 5:3",
+    "Psalm 5:12",
+    "Isaiah 54:17"
+   ],
+   "cta": "none on screen or spoken",
+   "ending": "cut off mid-phrase at 2:58, no Amen"
+  }
+ ],
+ "weak_contrasts": [
+  {
+   "video": "on694NkL2jU",
+   "channel_id": "UCUi2Z1wjRCjvSo71Faw1Wkw",
+   "views": 466,
+   "breakout": null,
+   "seconds": 117,
+   "first_line_complete_sentence": true,
+   "picture": "AI animated stills of Jesus, 23 cuts",
+   "person": true,
+   "captions": "beige/gold, lower third, 3-8 words",
+   "voice": "male synthetic",
+   "scripture_quoted": [
+    "Psalm 91:1-4",
+    "Isaiah 54:17",
+    "1 Peter 5:7"
+   ],
+   "cta": "spoken subscribe/share + 'AMEN - Subscribe for Daily Prayers' banner and buttons 1:48-1:56",
+   "ending": "Amen 1:47, then CTA"
+  },
+  {
+   "video": "C-K8ilvouiA",
+   "channel_id": "UCUi2Z1wjRCjvSo71Faw1Wkw",
+   "views": 806,
+   "breakout": null,
+   "seconds": 113,
+   "first_line_complete_sentence": true,
+   "picture": "AI animated stills of Jesus, 18 cuts",
+   "person": true,
+   "captions": "white serif, lower third, 4-9 words",
+   "voice": "male synthetic",
+   "scripture_quoted": [
+    "Psalm 91",
+    "Isaiah 54:17",
+    "Psalm 34:7",
+    "Psalm 121:4",
+    "Numbers 6:24-26"
+   ],
+   "cta": "spoken subscribe/share + subscribe/like/share graphics 1:44-1:53",
+   "ending": "Amen 1:43, then CTA"
+  },
+  {
+   "video": "K6F5aQ7SKX0",
+   "channel_id": "UCUi2Z1wjRCjvSo71Faw1Wkw",
+   "views": 94,
+   "breakout": null,
+   "seconds": 133,
+   "first_line_complete_sentence": false,
+   "picture": "AI animated stills of Jesus, 23 cuts",
+   "person": true,
+   "captions": "bold uppercase, 1-2 words, word-by-word",
+   "voice": "female synthetic",
+   "scripture_quoted": [
+    "Psalm 121:4",
+    "Lamentations 3:22-23",
+    "Psalm 91:4"
+   ],
+   "cta": "none",
+   "ending": "'...we pray, Amen.'"
+  }
+ ],
+ "package": {
+  "DKBkPbJ73xU": {
+   "title": "hook in caps | 'Powerful Prayer'",
+   "description": "first line repeats the hook; 1 line naming the Psalm; 'Watch our full Morning Prayer video'; 'Like, Subscribe & Share'; 10 hashtags; a tag list pasted in the description",
+   "published_utc": "09:15",
+   "category_topics": [
+    "Christian_music",
+    "Religion"
+   ]
+  },
+  "3acset3y_Aw": {
+   "title": "phrase + 5 hashtags in the title",
+   "description": "title repeated with hashtags only",
+   "tags": [
+    "Jesus",
+    "prayer",
+    "night prayer",
+    "praybeforeyousleep",
+    "worship"
+   ],
+   "published_utc": "19:24"
+  },
+  "weak_same_channel": "same title/description template as the winner (title + hashtags); so the package does not separate winner from weak inside this channel"
+ },
+ "channels": {
+  "UCUi2Z1wjRCjvSo71Faw1Wkw": {
+   "subs": 3070,
+   "videos": 149,
+   "description": "Christ-centred daily prayer community; daily devotionals, prayer, Bible stories; 'Join us every day'",
+   "keywords": null
+  },
+  "UCMVDSOWhGeAbsbhJz32C46A": {
+   "subs": 41100,
+   "videos": 452,
+   "description": "worship, prayer and presence of God; list of what you will find; Colossians 4:12; subscribe line; ministry support links",
+   "keywords": null
+  }
+ },
+ "not_measured": [
+  "first/pinned comments (daily call limit reached)",
+  "transcript counts for the 5 other videos",
+  "playlists of the two channels"
+ ]
+}

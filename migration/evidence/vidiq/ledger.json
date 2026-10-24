@@ -387,6 +387,94 @@
    "credits": 25,
    "purpose": "hook audit 3KGnfsmheGY",
    "saved_to": "evidence/vidiq/20261023/hook_audit.md"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "account",
+   "tool": "vidiq_balance",
+   "credits": 0,
+   "purpose": "credit check: 4,755 left (renewable 4,635/6,000, resets 2026-11-18)",
+   "saved_to": "-"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "short outliers: prayer, 3 months",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_channel_videos",
+   "credits": 5,
+   "purpose": "weak contrasts: Biblical Way Network Shorts",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_watch_shortform_content",
+   "credits": 10,
+   "purpose": "audit 3acset3y_Aw",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_watch_shortform_content",
+   "credits": 10,
+   "purpose": "audit DKBkPbJ73xU",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_watch_shortform_content",
+   "credits": 10,
+   "purpose": "audit on694NkL2jU",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_watch_shortform_content",
+   "credits": 10,
+   "purpose": "audit C-K8ilvouiA",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_watch_shortform_content",
+   "credits": 10,
+   "purpose": "audit K6F5aQ7SKX0",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_get_videos_by_ids",
+   "credits": 5,
+   "purpose": "package of the 5 audited Shorts",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_get_channels_by_ids",
+   "credits": 5,
+   "purpose": "channel settings of the 2 new winners",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "research",
+   "tool": "vidiq_video_transcript",
+   "credits": 5,
+   "purpose": "exact counts 3acset3y_Aw (counts only)",
+   "saved_to": "evidence/vidiq/20261024/shorts_validation.json"
   }
  ]
 }

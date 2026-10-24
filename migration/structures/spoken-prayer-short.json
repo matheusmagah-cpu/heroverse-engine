@@ -2,64 +2,142 @@
  "version": "structure-v1",
  "id": "spoken-prayer-short",
  "line": "English Christian spoken prayer, Shorts",
- "status": "candidate",
+ "status": "validated",
  "validation": {
   "rule": "SYSTEM.md 1.5",
-  "winners": 4,
-  "channels": 4,
-  "weak_contrasts": 0,
+  "winners": 6,
+  "channels": 6,
+  "max_channel_share": "1/6",
+  "weak_contrasts": 3,
+  "weak_channels": 1,
+  "validated_on": "2026-10-24",
   "evidence": [
    "evidence/vidiq/20261019/watch-DigF0F0LrfY.md",
-   "evidence/vidiq/20261020/shorts_structure_audit.json"
+   "evidence/vidiq/20261020/shorts_structure_audit.json",
+   "evidence/vidiq/20261024/shorts_validation.json"
   ],
+  "caveat": "all 3 weak contrasts come from one channel (the same channel as winner 3acset3y_Aw); good for a same-template contrast, weak for generality",
   "missing": [
-   "2 more winners from new channels",
-   "3 weak contrasts of the same shape",
-   "transcript word counts"
+   "weak contrasts from a second channel",
+   "transcript counts for more than one Short"
   ]
  },
  "attributes": {
   "length_seconds": {
-   "values": [
-    114,
-    163,
-    130,
-    178
-   ],
-   "label": "candidate driver (4/4 winners >= 110 s; weak contrasts not measured)"
+   "values": {
+    "winners": [
+     114,
+     163,
+     130,
+     178,
+     126,
+     179
+    ],
+    "weak": [
+     117,
+     113,
+     133
+    ]
+   },
+   "label": "hygiene (6/6 winners and 3/3 weak >= 110 s); no longer a driver candidate"
   },
-  "ends_on_amen_or_blessing": {
-   "value": "3/3",
-   "label": "candidate hygiene"
+  "spoken_or_on_screen_subscribe_cta": {
+   "value": "winners 1/6, weak 2/3",
+   "label": "anti (>= 50 % weak, <= 20 % winners)",
+   "rule": "R8 'no CTA overlay' already matches; never add a subscribe end card to a Short"
   },
   "first_line_complete_sentence": {
-   "value": "1/3",
-   "label": "free (our R8 keeps it as a house rule)"
+   "value": "winners 1/6, weak 2/3",
+   "label": "anti-candidate, CONFOUNDED: the same 2 weak videos carry the CTA end card; not enough to change R8 (house rule kept)"
   },
-  "picture_cuts": {
-   "values": [
-    0,
-    6,
-    0
-   ],
-   "label": "free"
+  "ends_on_amen_or_blessing": {
+   "value": "winners 5/6, weak 3/3",
+   "label": "hygiene"
   },
   "captions": {
-   "value": "2/3",
-   "label": "free"
-  },
-  "explicit_cta": {
-   "value": "1/3",
-   "label": "free (R8: no CTA overlay)"
+   "value": "winners 5/6, weak 3/3",
+   "label": "hygiene; group size free (1-2 to 8 words)"
   },
   "scripture_quoted": {
-   "value": "2/3",
+   "value": "winners >= 4/6, weak 3/3",
+   "label": "hygiene"
+  },
+  "music_under_voice": {
+   "value": "6/6, 3/3",
+   "label": "hygiene"
+  },
+  "male_voice": {
+   "value": "winners 5/6, weak 2/3",
+   "label": "free (female 1/6 vs 1/3)"
+  },
+  "person_or_figure": {
+   "value": "winners 3/6, weak 3/3",
+   "label": "free; house choice none (R1)"
+  },
+  "picture_cuts": {
+   "values": {
+    "winners": [
+     0,
+     6,
+     0,
+     0,
+     26,
+     2
+    ],
+    "weak": [
+     23,
+     18,
+     23
+    ]
+   },
    "label": "free"
+  },
+  "narration_pace": {
+   "value": "one count: 165 wpm over the whole Short (3acset3y_Aw); model estimates of 80-120 wpm are refuted",
+   "label": "hygiene, unconfirmed beyond one count"
   }
  },
  "conflict_check": {
   "language_and_line": "same",
   "policy": "no risk found",
   "coherence": "Shorts of our own long prayers"
- }
+ },
+ "evidence": [
+  {
+   "video": "9XacNi2bD0M",
+   "role": "winner"
+  },
+  {
+   "video": "6k1MsIah6nQ",
+   "role": "winner"
+  },
+  {
+   "video": "_-7JaTduni4",
+   "role": "winner"
+  },
+  {
+   "video": "DigF0F0LrfY",
+   "role": "winner"
+  },
+  {
+   "video": "3acset3y_Aw",
+   "role": "winner"
+  },
+  {
+   "video": "DKBkPbJ73xU",
+   "role": "winner"
+  },
+  {
+   "video": "on694NkL2jU",
+   "role": "weak"
+  },
+  {
+   "video": "C-K8ilvouiA",
+   "role": "weak"
+  },
+  {
+   "video": "K6F5aQ7SKX0",
+   "role": "weak"
+  }
+ ]
 }
