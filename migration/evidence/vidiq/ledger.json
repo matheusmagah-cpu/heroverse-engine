@@ -484,6 +484,51 @@
    "purpose": "owner-approved test (24/10): 6 s 2K minimax-h3 dawn-eagle hook for pilot-011 (job_757c6775-4dd7-4eb3-ba4e-8cc1ee16dc9c); quoted 140 at submit",
    "saved_to": "evidence/vidiq/20261024/ai_hook_test.json",
    "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 12,
+   "purpose": "genesis-03-short v2 (replaced the dim lightning shot)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "generation",
+   "tool": "vidiq_voiceover_generate",
+   "credits": 14,
+   "purpose": "genesis-04-short narration",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "generation",
+   "tool": "vidiq_generate_video",
+   "credits": 60,
+   "purpose": "genesis-04-short AI hook, flaming sword (veo-3.1-lite 4 s)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "generation",
+   "tool": "vidiq_generate_broll",
+   "credits": 7,
+   "purpose": "genesis-04-short stock search (7 calls)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 13,
+   "purpose": "genesis-04-short",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
   }
  ]
 }
