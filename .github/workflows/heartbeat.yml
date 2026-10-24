@@ -23,6 +23,12 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Tests of the scheduler
         run: python3 -I -B migration/ops/test_heartbeat.py
+      - name: Preview the next script before its full render (preview_gate.py; one preview at a time)
+        run: |
+          pilot=$(python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json preview 72)
+          [ -n "$pilot" ] || { echo "NO_PREVIEW_DUE"; exit 0; }
+          active=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow pilot-preview.yml --limit 5 --json status --jq '[.[]|select(.status!="completed")]|length')
+          if [ "$active" = 0 ]; then echo "DISPATCH preview $pilot"; gh workflow run pilot-preview.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot"; else echo "PREVIEW_ACTIVE"; fi
       - name: Work waiting, run history, dispatch what is due
         run: |
           T="$RUNNER_TEMP"

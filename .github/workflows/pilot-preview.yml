@@ -1,0 +1,32 @@
+name: HeroVerse pilot preview (opening + every footage clip + thumbnail, before the full render)
+# Owner, 2026-10-24: "the structure must already produce only 9.5 and up". A ~15 min preview of the current script is
+# reviewed by Claude (ops/CLAUDE_REVIEW.md); the full render (pilot-render-stills.yml) refuses to start without that
+# review at the floor (preview_gate.py). Dispatched by the heartbeat from render_queue.py preview.
+on:
+  workflow_dispatch:
+    inputs:
+      pilot:
+        description: Pilot directory under migration/production (e.g. pilot-008)
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-pilot-preview
+  cancel-in-progress: false
+jobs:
+  preview:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ENGINE_REPO: ${{ github.repository }}
+      TAG: v0.0.0-cloud-assets-20261013
+      PILOT: ${{ inputs.pilot }}
+      PREVIEW: '1'
+      RUN_LABEL: preview ${{ github.run_id }}
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Render the opening, sheet every footage clip, thumbnail; commit for review
+        run: bash migration/ci/render_pilot.sh

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline tests. No credentials, network, render, or dispatch required."""
 from datetime import timedelta
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -46,6 +47,9 @@ class Dispatch(unittest.TestCase):
             self.assertIsNone(d.candidate(t, {}, NOW))
             p = Path(t) / 'pilot-002' / 'script.json'
             p.write_text(p.read_text() + '\n')
+            self.assertIsNone(d.candidate(t, {}, NOW))  # a changed script needs its own preview at the floor first
+            sha = hashlib.sha256(p.read_bytes()).hexdigest()
+            (p.parent / 'inspection' / 'preview_review.json').write_text(json.dumps({'script_sha256': sha, 'overall': 9.5}))
             key = d.candidate(t, {}, NOW)
             self.assertEqual(len(key), 64)
             self.assertNotIn('pilot', key)

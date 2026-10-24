@@ -60,3 +60,10 @@ order, before any paid compose:
 2. Each clip matches the exact words over it (the moon on "the moon", not a black frame).
 3. Captions large for Shorts (about 7 % of the frame height), loudness about -14 LUFS.
 4. The frame sheet of the composed file is reviewed before publication; any frame below 9.5 is fixed first.
+5. Every downloaded candidate passes `clip_check.py CLIP...` (no black start or end, short side >= 720, >= 24 fps)
+   before it goes into a compose.
+6. Scene changes use `"transitionIn": {"kind": "cut"}`. Tested 2026-10-24: vidIQ's "fade" and "wipe" start the
+   incoming scene from black, which flashed 1-2 black frames at every faded change of Genesis 2-4; "dip_to_black" only
+   where the black is meant (into the prayer, the close).
+7. The composed file passes `clip_check.py --composed FILE <intended dip seconds>` (no black anywhere else) before the
+   review; its result goes into the episode record (`review.black_check`).
