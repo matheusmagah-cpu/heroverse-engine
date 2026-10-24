@@ -47,5 +47,11 @@ class Assign(unittest.TestCase):
         self.assertIn("FOOTAGE_SHORTAGE", str(e.exception))
 
 
+    def test_night_never_takes_day_themes(self):
+        # E71: dark-mean snow, waterfall and mist clips still showed a daytime sky in the 008 night prayer
+        library = lib(["candle", "night", "rain", "river"], 6, vetting_luma=[30]) + lib(["snow", "waterfall", "mist", "clouds"], 6, vetting_luma=[40])
+        out = assign.choose({"working_title": "Night Prayer"}, library)
+        self.assertFalse([c for c in out if c.split("-")[1] in ("snow", "waterfall", "mist", "clouds")])
+
 if __name__ == "__main__":
     unittest.main()
