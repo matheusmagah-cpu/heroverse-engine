@@ -45,11 +45,28 @@ class Fallback(unittest.TestCase):
             ledger = Path(t) / 'ledger.json'
             ledger.write_text('{"entries": {}}')
             api = FakeAPI('x')
-            self.assertEqual(f.execute(t, ledger, 'x', NOW, lambda _: api), 'ENGINE_DISPATCH_ACCEPTED pilot-003')
+            self.assertEqual(f.execute(t, ledger, 'x', NOW, lambda _: api, runner_runs=lambda: []), 'ENGINE_DISPATCH_ACCEPTED pilot-003')
             self.assertEqual(api.sent, ['pilot-003'])
             busy = FakeAPI('x', [run('queued')])
-            self.assertEqual(f.execute(t, ledger, 'x', NOW, lambda _: busy), 'ENGINE_RENDER_ACTIVE')
+            self.assertEqual(f.execute(t, ledger, 'x', NOW, lambda _: busy, runner_runs=lambda: []), 'ENGINE_RENDER_ACTIVE')
             self.assertEqual(busy.sent, [])
+
+    def test_never_renders_beside_a_live_runner(self):
+        # E63: the runner rendered pilot-009 on its own cron (run 40042851661) while the fallback started a second
+        # render of the same pilot on the engine (run 40047808539)
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, 'pilot-003', '2026-10-19T14:00:00Z')
+            ledger = Path(t) / 'ledger.json'
+            ledger.write_text('{"entries": {}}')
+            for runner, verdict in (([{'status': 'in_progress', 'created_at': (NOW - timedelta(hours=3)).isoformat()}], 'RUNNER_ALIVE_RENDERS_IT'),
+                                    ([run('completed', 30)], 'RUNNER_ALIVE_RENDERS_IT'),
+                                    (None, 'RUNNER_STATE_UNKNOWN')):
+                api = FakeAPI('x')
+                self.assertEqual(f.execute(t, ledger, 'x', NOW, lambda _: api, runner_runs=lambda r=runner: r), verdict)
+                self.assertEqual(api.sent, [])
+            api = FakeAPI('x')
+            self.assertTrue(f.execute(t, ledger, 'x', NOW, lambda _: api, runner_runs=lambda: [run('completed', 600)])
+                            .startswith('ENGINE_DISPATCH_ACCEPTED'))
 
     def test_heartbeat_falls_back_to_the_engine_when_the_runner_token_is_rejected(self):
         # E57: HERO_RUNNER_PAT returned 401 on every heartbeat (runs 39964015145, 40005305507) and nothing rendered

@@ -83,7 +83,15 @@ def main(prompts_path, out_dir, engine="flux"):
             payload = {"prompt": prompt[:2000], "seed": item["seed"], "width": spec["width"], "height": spec["height"],
                        "negative_prompt": spec["negative"], "num_steps": 8}
         t0 = time.time()
-        raw = run(eng["model"], payload)
+        try:
+            raw = run(eng["model"], payload)
+        except SystemExit as e:
+            if not str(e).startswith("CF_DAILY_ALLOCATION_EXHAUSTED"):
+                raise
+            # E62: the images made before the allocation ran out are kept (saved by the workflow); the rest wait for
+            # the next nightly slot. A used-up free allocation is a deferral, not a failure.
+            print("CF_ALLOCATION_EXHAUSTED_DEFERRED", str(e)[:200], flush=True)
+            return "DEFERRED"
         image = Image.open(io.BytesIO(raw)).convert("RGB")
         image.save(out / f"{item['id']}.png")
         (out / f"{item['id']}.json").write_text(json.dumps({
@@ -93,6 +101,7 @@ def main(prompts_path, out_dir, engine="flux"):
             "models": {eng["model"]: {"license": eng["license"], "revision": "workers-ai-managed", "source": eng["licence_source"]}},
             "seconds": round(time.time() - t0, 1), "generated_by": "HeroVerse pipeline (AI-generated image)"}, indent=1) + "\n")
         print(item["id"], image.size, round(time.time() - t0, 1), flush=True)
+    return "DONE"
 
 
 if __name__ == "__main__":

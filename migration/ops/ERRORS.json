@@ -443,6 +443,26 @@
     "file": "migration/production/test_render_queue.py",
     "contains": "def test_pending_first_comments_are_retried_once_the_video_is_public"
    }
+  },
+  {
+   "id": "E62",
+   "date": "2026-10-24",
+   "error": "cf-images run 40047828009 failed on Cloudflare's 'used up your daily free allocation': the generator exits at the first refused image, the step fails, and any image already made in the run was never saved.",
+   "fix": "cf_images keeps every image made before the allocation runs out and returns DEFERRED; the workflow saves them, and a run that made none ends with a warning (the next nightly slot retries). Any other error still fails; the piped step sets pipefail (E54).",
+   "antidote": {
+    "file": "migration/production/imagegen/test_cf_images.py",
+    "contains": "def test_images_before_the_allocation_ran_out_are_kept"
+   }
+  },
+  {
+   "id": "E63",
+   "date": "2026-10-24",
+   "error": "The E57 engine fallback started a second render of pilot-009 (run 40047808539) while the runner was already rendering it on its own cron (run 40042851661): the runner never needed the rejected token, only the wake-up did.",
+   "fix": "engine_fallback reads the runner's public run history (no token) and renders on the engine only when the runner is neither active nor seen in the last 75 minutes; an unreadable history means no engine render.",
+   "antidote": {
+    "file": "migration/ops/test_engine_fallback.py",
+    "contains": "def test_never_renders_beside_a_live_runner"
+   }
   }
  ]
 }

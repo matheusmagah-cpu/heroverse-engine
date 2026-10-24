@@ -247,3 +247,8 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 - **Wrong first fix, undone.** Retrying within the run (E58, first version) only spent the allowance on a reviewer that does not answer. Owner: "do not keep trying; fix the problem, then try again".
 - **Replacement measured, refused.** `gemini-3.6-flash` was calibrated on six renders the designated reviewer judged (five PASS, one FAIL). It failed all six (overall 6.0–7.0, mean −2.2) and scored the FAIL render (008, 7.0) as high as the best one: it does not reproduce the designated judgement, so it does not replace it. The bar is not lowered.
 - **Now.** Every review asks the reviewer one tiny health question first; while it is down, no video call is made. The review runs again only when the health question is answered.
+
+## Corrections (2026-10-24 early)
+- **The reviewer is intermittent, not dead.** At 22:35 UTC reconcile's retry reached `gemini-3.8-flash`: pilot-010 PASS, overall 9.5; approved, uploaded and public at 00:00 UTC (`9g2MeIit9ys`). The probe at 22:57 then timed out again. The health check (E58) stays: a down reviewer costs one tiny call; an answering one reviews.
+- **The runner never stopped.** It renders on its own cron (:13 and :43); only the engine→runner wake-up needed HERO_RUNNER_PAT. E63 keeps the engine fallback from rendering beside a live runner.
+- **Fixed tonight:** E60 (render > 2 GiB lost), E61 (first comments left PENDING), E62 (images lost when the Cloudflare allocation ran out), E63 (duplicate render).

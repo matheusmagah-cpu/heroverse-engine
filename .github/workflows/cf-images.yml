@@ -36,9 +36,16 @@ jobs:
           case "$ENGINE" in flux|sdxl) ;; *) exit 1;; esac
           test -n "$CLOUDFLARE_API_TOKEN" || { echo CLOUDFLARE_API_TOKEN_MISSING; exit 1; }  # account id: secret, else resolved from the token
           python3 -m venv "$RUNNER_TEMP/v" && "$RUNNER_TEMP/v/bin/pip" install -q --disable-pip-version-check pillow==11.0.0
-          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/imagegen/cf_images.py "migration/production/$PILOT/images.json" "$RUNNER_TEMP/img" "$ENGINE"
+          set -o pipefail   # E54: a crashed generator must fail the step, not hide behind tee
+          "$RUNNER_TEMP/v/bin/python" -I -B migration/production/imagegen/cf_images.py "migration/production/$PILOT/images.json" "$RUNNER_TEMP/img" "$ENGINE" | tee "$RUNNER_TEMP/gen.log"
+          if ! ls "$RUNNER_TEMP"/img/*.png >/dev/null 2>&1; then
+            # E62: no image made (the free allocation is used up): nothing to save; the next nightly slot retries
+            grep -q CF_ALLOCATION_EXHAUSTED_DEFERRED "$RUNNER_TEMP/gen.log" || { echo "NO_IMAGE_MADE"; exit 1; }
+            echo "::warning::Cloudflare free allocation used up; images deferred to the next nightly slot (E62)"
+            echo "NO_IMAGES=1" >> "$GITHUB_ENV"
+          fi
       - name: 2x super-resolution on CPU (Real-ESRGAN general x4v3 compact, BSD-3; FLUX outputs are 1024 square)
-        if: inputs.engine == 'flux'
+        if: inputs.engine == 'flux' && env.NO_IMAGES != '1'
         run: |
           python3 -m venv "$RUNNER_TEMP/up"
           "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1
@@ -47,6 +54,7 @@ jobs:
           echo "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292  $RUNNER_TEMP/realesr-general-x4v3.pth" | sha256sum -c -
           "$RUNNER_TEMP/up/bin/python" -I -B migration/production/imagegen/upscale.py "$RUNNER_TEMP/realesr-general-x4v3.pth" "$RUNNER_TEMP"/img/*.png
       - name: Release assets, metadata and review sheet
+        if: env.NO_IMAGES != '1'
         run: |
           sudo apt-get install -y -qq ffmpeg >/dev/null
           dest="migration/production/$PILOT/images"; mkdir -p "$dest" "$RUNNER_TEMP/sheet"
