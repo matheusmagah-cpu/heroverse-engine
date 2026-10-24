@@ -49,7 +49,7 @@ Every stage, **from the channel configuration to the pinned comment**, is held t
 | Tool | Used for | Limits |
 |---|---|---|
 | vidIQ (MCP, read-only, authorized research agent) | Mining and live intelligence: outliers, watched audits, transcripts, stats, our public videos and analytics | ≤10 calls/day, ≤2,000 credits/cycle (`evidence/vidiq/ledger.json`) |
-| Gemini, designated `gemini-3.8-flash` reviewer | Stage 3: audiovisual review; support models supply audit and critique, not replacement approval | Current key/project and Free tier were verified; the real Interactions qualification also returned 503. Native availability and recurring load remain blocked in `OPERATIONS.md` |
+| Claude, designated reviewer of long videos (since 2026-10-24) | Stage 3: review of the inspection sheets, transcript, thumbnail and QA audio measures, bound to the render hash (`ops/CLAUDE_REVIEW.md`) | `gemini-3.8-flash` was replaced (intermittent on the free tier, E58); free Gemini candidates failed calibration |
 | Kokoro voice, FLUX images (Cloudflare), ffmpeg | Stage 2 execution | Preserve existing hashes; verify capacity under the zero-additional-cost rule |
 | YouTube Data API | Stage 4 publication and reconciliation | Our OAuth |
 | GitHub Actions and the authorized execution agent | Execute the existing production, review and publication entry points | Public repositories; account, executor and dispatch boundaries are in `OPERATIONS.md`; media passes the same gates |
@@ -139,7 +139,7 @@ Every video passes all of these, or it is not published:
   Any finding blocks until it is fixed.
 - **Disclosure.** Realistic synthetic people or events are disclosed as altered or synthetic content; scenery-only videos say so in the record.
 
-The receiving reviewer validates the existing technical evidence and its binding, then evaluates the complete audiovisual file. Base review requires every item ≥ 7 and overall ≥ 8; **new uploads additionally require overall ≥ 9.5** (owner, 2026-10-23), under `publish/owner_quality_policy.py`. The designated reviewer remains `gemini-3.8-flash`. No fallback, manual score, provider error or approval for another file satisfies this handoff.
+The receiving reviewer validates the existing technical evidence and its binding, then evaluates the complete audiovisual file. Base review requires every item ≥ 7 and overall ≥ 8; **new uploads additionally require overall ≥ 9.5** (owner, 2026-10-23), under `publish/owner_quality_policy.py`. The designated reviewer of long videos is Claude (`ops/CLAUDE_REVIEW.md`). No fallback, manual score, provider error or approval for another file satisfies this handoff.
 
 ## 4. Publish the complete package
 

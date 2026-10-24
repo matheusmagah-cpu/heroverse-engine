@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline checks of the long-video review: own rows and the watched review decide; the production audit only reports."""
+"""Offline checks of the long-video review: own rows and the designated reviewer's (Claude) review decide."""
 import hashlib
 import json
 from pathlib import Path
@@ -27,6 +27,14 @@ def pilot(root, seconds=868.26):
     return d
 
 
+def claude(sha="abc", **over):
+    r = {"version": "claude-review-v1", "model": lr.REVIEW_MODELS[0], "output_sha256": sha,
+         **{k: 9.6 for k in lr.RUBRIC}, "overall": 9.6, "issues": ["0:12 one caption a little early"],
+         "strongest_moment": "0:00 hook", "evidence": ["inspection/review-sheet.jpg", "out/timeline.json"]}
+    r.update(over)
+    return r
+
+
 class Review(unittest.TestCase):
     def test_pilot_003_own_rows(self):
         script = json.loads((HERE / "pilot-003/script.json").read_text())
@@ -39,97 +47,59 @@ class Review(unittest.TestCase):
         sys.path.insert(0, str(HERE.parent / "publish"))
         import prepublish_gate
         self.assertEqual(lr.REVIEW_MODELS, prepublish_gate.REVIEW_MODELS)
-        self.assertEqual(lr.sr.REVIEW_MODELS, prepublish_gate.REVIEW_MODELS)    # Shorts review: same reviewer
+        self.assertEqual(lr.REVIEW_MODELS, ("claude-session-reviewer",))   # owner 2026-10-24: gemini-3.8-flash replaced
 
     def test_review_prompt_unchanged(self):
         self.assertEqual(hashlib.sha256(lr.review_prompt("X").encode()).hexdigest(), REVIEW_PROMPT_X_SHA256)
 
-    def test_audit_uses_support_models_never_the_reviewer(self):
-        seen = []
+    def write(self, d, review):
+        (d / "inspection").mkdir(exist_ok=True)
+        (d / lr.CLAUDE_REVIEW).write_text(json.dumps(review))
 
-        def call(payload, key, models):
-            seen.append((payload, models))
-            return models[0], {"first_30s": "a", "amateur_elements": []}
-        with mock.patch.object(lr.sm, "call", call):
-            r = lr.audit(FILE, "k")
-        payload, models = seen[0]
-        self.assertEqual(models, list(lr.sm.SUPPORT_MODELS))
-        self.assertFalse(set(models) & set(lr.REVIEW_MODELS))
-        self.assertEqual(r["model"], lr.sm.SUPPORT_MODELS[0])
-        parts = payload["contents"][0]["parts"]
-        self.assertEqual(parts[0]["fileData"], {"fileUri": FILE["uri"], "mimeType": "video/mp4"})
-        self.assertEqual(parts[0]["videoMetadata"], {"fps": lr.WATCH_FPS})
-        self.assertEqual(parts[1]["text"], lr.AUDIT_PROMPT)
-        self.assertEqual(payload["generationConfig"]["mediaResolution"], "MEDIA_RESOLUTION_LOW")
-
-    def run_main(self, d, audit_raises, scores=9):
-        calls = []
-
-        def call(payload, key, models):
-            calls.append(models)
-            if models == list(lr.REVIEW_MODELS):
-                return models[0], {**{k: scores for k in lr.RUBRIC}, "overall": scores, "issues": []}
-            if audit_raises:
-                raise RuntimeError("quota exhausted")
-            return models[0], {"first_30s": "a", "amateur_elements": []}
-        with mock.patch.object(lr.sm, "call", call), mock.patch.object(lr.sr, "upload", lambda p, k: FILE), \
-                mock.patch.object(lr, "reviewer_healthy", lambda key: True), \
-                mock.patch.object(lr.sr, "request", lambda *a, **k: None), \
-                mock.patch.dict(lr.os.environ, {"HERO_GEMINI_API_KEY": "k"}), mock.patch("builtins.print"):
-            lr.main(str(d), "video.mp4")
-        return json.loads((d / "out" / "review.json").read_text()), calls
-
-    def test_raising_audit_never_changes_the_status(self):
-        with tempfile.TemporaryDirectory() as t:
-            out, calls = self.run_main(pilot(t), audit_raises=True)
-        self.assertEqual(calls[0], list(lr.REVIEW_MODELS))               # audit runs after watch()
-        self.assertEqual(calls[1], list(lr.sm.SUPPORT_MODELS))
-        self.assertEqual(out["status"], "PASS")
-        self.assertEqual(out["watched_review"]["status"], "PASS")
-        self.assertEqual(out["audit"], {"status": "ERROR", "error": "RuntimeError: quota exhausted"})
-        self.assertEqual(out["scorecard_reported"], {})
-        for k in ("version", "pilot_id", "output_sha256", "usage"):
-            self.assertIn(k, out)
-
-    def test_status_still_from_watch_and_hard_rows(self):
-        with tempfile.TemporaryDirectory() as t:
-            out, _ = self.run_main(pilot(t), audit_raises=False, scores=6)
-        self.assertEqual(out["status"], "FAIL")                          # watched review FAIL decides
-        self.assertEqual(out["audit"]["model"], lr.sm.SUPPORT_MODELS[0])
-        with tempfile.TemporaryDirectory() as t:
-            out, _ = self.run_main(pilot(t, seconds=540), audit_raises=False)
-        self.assertEqual(out["status"], "FAIL")                          # 9 minutes: hard row FAIL decides
-        self.assertFalse(out["scorecard_hard"]["minutes"]["pass"])
-
-    def test_down_reviewer_costs_one_tiny_call_and_no_video_call(self):
-        # E58: the designated reviewer did not answer even a 5-token text call; video retries only burned the allowance
-        class Ok:
-            status = 200
-            def __enter__(self): return self
-            def __exit__(self, *a): return False
-        self.assertTrue(lr.reviewer_healthy("k", opener=lambda req, timeout: Ok()))
-        def down(req, timeout):
-            raise TimeoutError()
-        self.assertFalse(lr.reviewer_healthy("k", opener=down))
+    def test_claude_review_decides_with_the_hard_rows(self):
         with tempfile.TemporaryDirectory() as t:
             d = pilot(t)
-            with mock.patch.dict(lr.os.environ, {"HERO_GEMINI_API_KEY": "k"}), \
-                 mock.patch.object(lr, "reviewer_healthy", return_value=False), \
-                 mock.patch.object(lr.sr, "upload") as upload, mock.patch.object(lr, "watch") as watch:
-                lr.main(str(d), "video.mp4")
+            self.write(d, claude())
+            with mock.patch("builtins.print"):
+                lr.main(str(d))
             out = json.loads((d / "out" / "review.json").read_text())
-        upload.assert_not_called()
-        watch.assert_not_called()
-        self.assertEqual(out["status"], "ERROR")
-        self.assertIn("REVIEWER_UNAVAILABLE", out["error"])
-        self.assertFalse(hasattr(lr, "watch_with_patience"))   # no in-run retries of a down reviewer
-
-    def test_scorecard_hard_has_exactly_the_hard_keys(self):
-        with tempfile.TemporaryDirectory() as t:
-            out, _ = self.run_main(pilot(t), audit_raises=False)
+        self.assertEqual(out["status"], "PASS")
+        self.assertEqual(out["watched_review"]["model"], "claude-session-reviewer")
+        self.assertEqual(out["watched_review"]["overall"], 9.6)
         self.assertEqual(set(out["scorecard_hard"]), set(lr.HARD))
-        row = out["scorecard_hard"]["minutes"]
-        self.assertEqual(row, {"value": 14.47, "band": list(lr.HARD["minutes"]), "pass": True})
+        self.assertEqual(out["scorecard_hard"]["minutes"], {"value": 14.47, "band": list(lr.HARD["minutes"]), "pass": True})
+        with tempfile.TemporaryDirectory() as t:
+            d = pilot(t)
+            self.write(d, claude(pacing_and_visual_variety=6.5))           # one item under 7 fails
+            with mock.patch("builtins.print"):
+                lr.main(str(d))
+            self.assertEqual(json.loads((d / "out" / "review.json").read_text())["status"], "FAIL")
+        with tempfile.TemporaryDirectory() as t:
+            d = pilot(t, seconds=540)                                    # 9 minutes: the hard row fails
+            self.write(d, claude())
+            with mock.patch("builtins.print"):
+                lr.main(str(d))
+            self.assertEqual(json.loads((d / "out" / "review.json").read_text())["status"], "FAIL")
+
+    def test_no_valid_review_for_this_file_is_awaiting_never_a_verdict(self):
+        for bad in (None, claude(sha="other"), claude(model="gemini-3.8-flash"), claude(overall=11),
+                    claude(evidence=[]), claude(opening_and_promise="9")):
+            with tempfile.TemporaryDirectory() as t:
+                d = pilot(t)
+                if bad is not None:
+                    self.write(d, bad)
+                with mock.patch("builtins.print"):
+                    lr.main(str(d))
+                out = json.loads((d / "out" / "review.json").read_text())
+            self.assertEqual(out["status"], "AWAITING_REVIEW", bad)
+            self.assertNotIn("watched_review", out)
+
+    def test_down_reviewer_costs_one_tiny_call_and_no_video_call(self):
+        # E58: the old reviewer did not answer even a 5-token call; the review now never calls a provider at all
+        src = (HERE / "long_review.py").read_text()
+        main_src = src[src.index("def main("):]
+        for call in ("sr.upload", "sm.call", "urlopen", "HERO_GEMINI_API_KEY", "watch("):
+            self.assertNotIn(call, main_src)
 
 
 if __name__ == "__main__":

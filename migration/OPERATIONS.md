@@ -7,7 +7,7 @@ scripts, code and fixes; the GitHub workflows do the heavy work. Credentials liv
 - Zero additional cost: no billing, paid service or promotional credit.
 - Niche: original English Christian prayer, exact KJV quotations, no fear-bait, prophecy or health/wealth promises.
 - Quality: `STANDARD.md` R1–R12, frozen QA (`production/qa_criteria_v3.json`, `qa_criteria_v4.json`), the designated
-  watched review (`gemini-3.8-flash`, items ≥ 7, overall ≥ 8) and the owner floor overall ≥ 9.5 for every new upload.
+  watched review by Claude (`ops/CLAUDE_REVIEW.md`; items ≥ 7, overall ≥ 8) and the owner floor overall ≥ 9.5 for every new upload.
   Missing, errored or hash-mismatched evidence blocks; nobody writes approvals by hand.
 - Every failure: root cause, fix, an antidote test and an entry in `ops/ERRORS.json`.
 - Plan: 14 days (day 1 = 2026-10-18, day 14 = 2026-10-31); 21 days only as an extraordinary extension.
@@ -27,8 +27,9 @@ scripts, code and fixes; the GitHub workflows do the heavy work. Credentials liv
 | Measure | `goal-report.yml` (daily YPP report in `evidence/daily-report/`), `market-panel.yml`, vidIQ research (≤ 10 calls/day, ledger in `evidence/vidiq/`) |
 
 ## Known limits (measured)
-- The designated reviewer on the free tier returned HTTP 503 from 2026-10-21 to at least 2026-10-23; with it down
-  nothing publishes. 20 requests/day when it answers.
+- Long videos are reviewed by Claude (`ops/CLAUDE_REVIEW.md`) since 2026-10-24: `gemini-3.8-flash` answered only
+  intermittently on the free tier and every free Gemini candidate failed calibration. Shorts still use it until they
+  move to the same reviewer.
 - Workers AI free allocation: about 44 FLUX images a day (resets 00:00 UTC).
 - 1440p footage needs `PIXABAY_API_KEY` (Pexels stopped issuing keys in October 2026): Wikimedia Commons has little ≥ 1440p nature footage. Pinterest is not a source: its pins carry no licence (copyright and reused-content risk).
 

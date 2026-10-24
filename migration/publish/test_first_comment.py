@@ -82,7 +82,7 @@ class PublishStep(unittest.TestCase):
         pkg.write_text(json.dumps(package))
         man.write_text(json.dumps({"output_sha256": VIDEO_SHA, "sentences": [{"start": 0.3, "end": 2.0, "text": "Hi."}]}))
         (d / "review.json").write_text(json.dumps({"status": "PASS", "output_sha256": VIDEO_SHA,
-            "watched_review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.6}}))
+            "watched_review": {"status": "PASS", "model": "claude-session-reviewer", "overall": 9.6}}))
         (d / "v.mp4").write_bytes(VIDEO_BYTES)
         (d / "t.jpg").write_bytes(b"jpg")
         pv.main(pkg, man, d / "v.mp4", d / "t.jpg", d / "ledger.json", d / "r.json", "2026-10-20T00:30:00Z")

@@ -252,3 +252,8 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 - **The reviewer is intermittent, not dead.** At 22:35 UTC reconcile's retry reached `gemini-3.8-flash`: pilot-010 PASS, overall 9.5; approved, uploaded and public at 00:00 UTC (`9g2MeIit9ys`). The probe at 22:57 then timed out again. The health check (E58) stays: a down reviewer costs one tiny call; an answering one reviews.
 - **The runner never stopped.** It renders on its own cron (:13 and :43); only the engine→runner wake-up needed HERO_RUNNER_PAT. E63 keeps the engine fallback from rendering beside a live runner.
 - **Fixed tonight:** E60 (render > 2 GiB lost), E61 (first comments left PENDING), E62 (images lost when the Cloudflare allocation ran out), E63 (duplicate render).
+
+## The reviewer is replaced: Claude reviews long videos (2026-10-24)
+- **Owner.** "I need to replace it; I cannot have this in the system; find another AI." Then "Ok" to Claude.
+- **Candidates measured** (`evidence/reviewer-probe/`, `evidence/reviewer-calibration/`): the omni models have no free quota; 3.7-flash and flash-latest hang like 3.8; 2.5-flash approves everything (9–10, the FAIL render included); 3.5-flash runs out of daily quota after four reviews; 3.6-flash and 3-flash-preview score about 7 on every item and cannot tell a good render from a bad one (3-flash-preview also 503s). None passed.
+- **Decision.** Claude is the designated reviewer of long videos (`ops/CLAUDE_REVIEW.md`): sheets, transcript, thumbnail, QA audio measures; same rubric, gate and owner floor 9.5; every score below 9.5 names its issue. `long_review.py` makes no provider call; without a valid Claude review for the render's hash the status is AWAITING_REVIEW. Shorts move to the same reviewer next.

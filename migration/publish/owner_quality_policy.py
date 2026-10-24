@@ -10,14 +10,18 @@ import re
 OWNER_FLOOR = 9.5
 
 
-def check(review, output_sha256):
-    """Return categorical problems without modifying the review evidence."""
+LONG_REVIEWER = "claude-session-reviewer"  # owner 2026-10-24: replaces gemini-3.8-flash for long videos
+SHORTS_REVIEWER = "gemini-3.8-flash"        # Shorts move to the Claude reviewer next (their pipeline is separate)
+
+
+def check(review, output_sha256, reviewer=SHORTS_REVIEWER):
+    """Return categorical problems without modifying the review evidence. Long videos pass LONG_REVIEWER."""
     if not isinstance(review, dict):
         return ["REVIEW_NOT_OBJECT"]
     problems = []
     if review.get("status") != "PASS":
         problems.append("REVIEW_NOT_PASS")
-    if review.get("model") != "gemini-3.8-flash":
+    if review.get("model") != reviewer:
         problems.append("REVIEW_MODEL_NOT_DESIGNATED")
     overall = review.get("overall")
     if (isinstance(overall, bool) or not isinstance(overall, (int, float))
