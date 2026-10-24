@@ -44,6 +44,18 @@ class ThumbCheck(unittest.TestCase):
                            check=True)
             self.assertEqual(thumb_check.main(thumb, Path(d, "c.json")), 0)
 
+    def test_footage_only_render_takes_the_warmest_clip_frame(self):
+        # E68: the 008 footage-only render had no stills and the thumbnail step looked for frames/001.png
+        with tempfile.TemporaryDirectory() as d:
+            clips = []
+            for cid, colour in (("clip-blue", "0x1a3a8a"), ("clip-gold", "0xd9902b")):
+                subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", f"color=c={colour}:s=640x360:d=3",
+                                str(Path(d, f"{cid}.mp4"))], check=True)
+                clips.append({"id": cid})
+            frames = pkg.footage_frames(d, d, clips + [{"id": "clip-missing"}])
+            self.assertEqual(len(frames), 2)
+            self.assertEqual(pkg.warmest(frames).stem, "clip-gold")
+
 
 if __name__ == "__main__":
     unittest.main()

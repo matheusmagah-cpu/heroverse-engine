@@ -503,6 +503,16 @@
     "file": "migration/production/test_script_check.py",
     "contains": "def test_thumbnail_repeats_the_title_promise"
    }
+  },
+  {
+   "id": "E68",
+   "date": "2026-10-24",
+   "error": "The first footage-only render (pilot-008, run 40077994179, after E66) failed after 2.5 h: QA marked images_open_licence_with_revision false because no generated image meant an empty model list, and the thumbnail step opened frames/001.png, which a footage-only render never writes. The QA test fixture always carried a generated image, so no test met a real footage-only manifest.",
+   "fix": "qa_pilot: 'every image' holds when no still is on screen (with any still the models must be recorded, as before; the frozen criteria are unchanged). package_pilot: without stills the thumbnail is drawn over the warmest first-second frame of the clips used (render_pilot.sh passes the footage folder); no source at all stops with THUMBNAIL_NO_SOURCE. Second antidote: test_thumb_check.py test_footage_only_render_takes_the_warmest_clip_frame.",
+   "antidote": {
+    "file": "migration/production/test_still_render.py",
+    "contains": "def test_footage_only_render_has_no_image_to_license"
+   }
   }
  ]
 }

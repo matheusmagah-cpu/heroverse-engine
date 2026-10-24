@@ -143,6 +143,21 @@ def warmest(stills):
     return max(stills, key=warmth)
 
 
+def footage_frames(work, footage_dir, clips):
+    """E68: a footage-only render (E66) has no stills; the thumbnail candidates are one frame of each clip used."""
+    out = Path(work) / "thumb-candidates"
+    out.mkdir(exist_ok=True)
+    frames = []
+    for c in clips:
+        src = Path(footage_dir) / f"{c['id']}.mp4"
+        if src.exists():
+            png = out / f"{c['id']}.png"
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "1", "-i", str(src), "-frames:v", "1", str(png)],
+                           check=True, capture_output=True)
+            frames.append(png)
+    return frames
+
+
 def thumbnail_filter(th):
     draw = ",".join(f"drawtext=fontfile={FONT}:text='{escape(t)}':fontsize={sz}:fontcolor={c}:"
                     f"borderw={max(6, sz // 14)}:bordercolor=black:shadowx=4:shadowy=4:shadowcolor=black@0.6:"
@@ -171,7 +186,7 @@ def footage_credits(clips, with_authors=True):
     return lines
 
 
-def main(work, script_path, out_dir):
+def main(work, script_path, out_dir, footage_dir=None):
     work, out = Path(work), Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     script = json.loads(Path(script_path).read_text())
@@ -215,7 +230,11 @@ def main(work, script_path, out_dir):
     thumb = out / "thumbnail.jpg"
     if v2 and manifest["clips"]:  # v4 footage: R16 breakout style over the warmest, most saturated still
         stills = sorted(f for f in (work / "frames").glob("[0-9][0-9][0-9].png") if f.stem != "000")
-        source = ["-i", str(warmest(stills) if stills else work / "frames" / "001.png")]
+        if not stills and footage_dir:
+            stills = footage_frames(work, footage_dir, manifest["clips"])
+        if not stills:
+            raise SystemExit("THUMBNAIL_NO_SOURCE: no still and no footage frame (E68)")
+        source = ["-i", str(warmest(stills))]
         vf = thumbnail_filter(script.get("thumbnail") or {"lines": ["GOD WENT", "FIRST"], "sub": "Morning Prayer"})
     elif v2:  # figure over its first background, text stacked on the free right side
         # first scene's still; in v4 the first scenes may be footage, which has no still frame
@@ -255,4 +274,4 @@ def main(work, script_path, out_dir):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:4])
+    main(*sys.argv[1:5])

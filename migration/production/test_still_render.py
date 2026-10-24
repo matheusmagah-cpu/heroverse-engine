@@ -153,6 +153,17 @@ class FootageV4(unittest.TestCase):
         self.assertFalse(qa_pilot.grammar_checks_v4(self.CRIT, self.manifest(plan, licence="CC BY-SA 4.0"))[
             "footage_licensed_vetted_and_credited"])
 
+    def test_footage_only_render_has_no_image_to_license(self):
+        # E68: the fixture always carried a generated image, so QA never met a real footage-only manifest (008 FAIL)
+        import qa_pilot
+        plan = self.plan(20, 22)
+        m = self.manifest(plan)
+        m["images"] = {}
+        self.assertTrue(qa_pilot.grammar_checks_v4(self.CRIT, m)["images_open_licence_with_revision"])
+        mixed = self.manifest(self.plan(80, 4))         # a still on screen: its model must be recorded
+        mixed["images"] = {}
+        self.assertFalse(qa_pilot.grammar_checks_v4(self.CRIT, mixed)["images_open_licence_with_revision"])
+
 
 class SpeechText(unittest.TestCase):
     """E47: the voice spelled "G-O-D" for the KJV "Lord GOD" (pilot-008 review, 17:36)."""

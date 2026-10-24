@@ -97,7 +97,10 @@ def grammar_checks_v3(criteria, manifest):
         "cta_short_and_not_early": all(c["end"] - c["start"] <= g["cta_seconds_max"] and c["start"] >= g["cta_first_start_seconds_min"]
                                        for c in cta),
         "persistent_overlays_only_brand": manifest.get("persistent_overlays") == g["persistent_overlays_allowed"],
-        "images_open_licence_with_revision": bool(models) and all(str(m.get("license")).lower() in allowed and m.get("revision") for m in models),
+        # "every image": a footage-only render (E66) shows no generated image, so there is none to license (E68);
+        # with any still on screen the models must be recorded
+        "images_open_licence_with_revision": (bool(models) or all(h.get("kind") == "footage" for h in holds))
+                                             and all(str(m.get("license")).lower() in allowed and m.get("revision") for m in models),
         "no_third_party_footage": not manifest["clips"] and not manifest["shots"],
     }
 
