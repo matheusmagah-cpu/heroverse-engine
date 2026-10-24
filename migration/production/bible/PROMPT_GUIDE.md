@@ -33,7 +33,7 @@ Then: duration and aspect come from the tool fields, not the text.
 
 ## Cheap preview before paid video
 1. Write the prompt with the five parts.
-2. Make the first frame as a still first (free: Cloudflare FLUX or Runway's free image credits) and look at it.
+2. Make the first frame as a still first (free: Cloudflare FLUX; the Runway connector is not used, CLAUDE.md) and look at it.
 3. If the still is right, send it as `startFrameB64` and prompt only the motion and the camera (do not re-describe the
    picture: two descriptions of one subject drift).
 4. One generation per shot. A miss is diagnosed against this guide before any retry, and the lesson is added here.

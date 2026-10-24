@@ -96,11 +96,12 @@ The plugin's skills call the same tools as the connector (`mcp__vidIQ__vidiq_*`)
 (`mcp.vidiq.com`) gets 403 from the cloud proxy, so the connector runs them. They change nothing above: every call
 goes in the ledger, research ≤ 10 calls a day, generation ≤ 200 credits a day, write tools stay denied (also under
 the plugin's server name, `.claude/settings.json`). A skill's recommendation is a hypothesis for the daily loop
-(SYSTEM.md, one at a time), never evidence that passes a gate. The story order of SERIES.md is not a topic choice.
+(SYSTEM.md, one at a time), never evidence that passes a gate. The daily cap of 10 research calls wins: weekly skills run on different days, never
+all on one. The story order of SERIES.md is not a topic choice.
 
 | Skill | When it runs here | Calls |
 |---|---|---|
-| `vidiq-new-upload-review` | daily loop step 2: an episode `live_intel.py` rates weak at 48 h, to decide wait or packaging | 1-2 |
+| `vidiq-new-upload-review` | daily loop step 2: an episode `live_intel.py` rates weak at 48 h, to decide wait or packaging (the daily analysis' one call) | 1 |
 | `vidiq-retention-analysis` | 7-day review of each long video: where viewers leave, mapped to the script's beats | 1-2 |
 | `vidiq-channel-audit` | weekly, 30 days: which format and slot carry the channel (feeds SERIES.md cadence) | 2-3 |
 | `vidiq-packaging-studio`, `vidiq-packaging-comparison` | before a long video's package: title and thumbnail variants we write; `score_title` stays informative | 1-2 |

@@ -113,6 +113,13 @@ ALLOW = [
 ]
 
 
+VIDIQ_DENIED = ("vidiq_update_video", "vidiq_update_video_thumbnail", "vidiq_video_upload", "vidiq_reply_to_comment",
+                "vidiq_generate_comment_replies", "vidiq_comment_reply_permission", "vidiq_instagram_publish_reel",
+                "vidiq_connect_youtube_channel", "vidiq_authorize_with_youtube", "vidiq_update_competitors",
+                "vidiq_generate_video", "vidiq_generate_clips", "vidiq_generate_broll", "vidiq_generate_music",
+                "vidiq_voiceover_generate", "vidiq_edit_media", "vidiq_motion_graphics", "vidiq_compose")
+
+
 class HookifyRules(unittest.TestCase):
     def test_the_three_owner_rules_exist_and_block(self):
         names = {parse(p)["name"] for p in RULES if parse(p).get("action") == "block"}
@@ -153,10 +160,9 @@ class PluginSetup(unittest.TestCase):
         perms = json.loads((ROOT / ".claude/settings.json").read_text())["permissions"]
         self.assertIn("mcp__Runway", perms["deny"])
         self.assertFalse([a for a in perms["allow"] if "Runway" in a])
-        vidiq = [d for d in perms["deny"] if d.startswith("mcp__vidIQ__")]
-        self.assertIn("mcp__vidIQ__vidiq_compose", vidiq)
-        for d in vidiq:
-            self.assertIn("mcp__plugin_vidiq_vidiq__" + d.split("__", 2)[2], perms["deny"])
+        for tool in VIDIQ_DENIED:
+            for server in ("mcp__vidIQ__", "mcp__plugin_vidiq_vidiq__"):
+                self.assertIn(server + tool, perms["deny"])
 
 
 if __name__ == "__main__":
