@@ -100,7 +100,7 @@ q "$T/qa/bin/python" -I -B migration/production/qa_pilot.py "$T/work/pilot.mp4" 
 end
 
 stage "Package (no upload to YouTube) and inspection sheets"
-q python3 -I -B migration/production/package_pilot.py "$T/work" "migration/production/$PILOT/script.json" "$T/work/package"
+q python3 -I -B migration/production/package_pilot.py "$T/work" "migration/production/$PILOT/script.json" "$T/work/package" "$T/in/footage"
 # R16 thumbnail ruler (Pillow and NumPy come with the cut-out venv)
 "$T/cut/bin/python" -I -B migration/production/thumb_check.py "$T/work/package/thumbnail.jpg" "$T/work/package/thumbnail_check.json" || QA_FAILED=1
 mkdir -p "migration/production/$PILOT/inspection"
