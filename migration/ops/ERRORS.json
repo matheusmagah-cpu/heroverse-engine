@@ -553,6 +553,16 @@
     "file": "migration/ci/render_pilot.sh",
     "contains": "PER_SHEET=12"
    }
+  },
+  {
+   "id": "E73",
+   "date": "2026-10-24",
+   "error": "After the preview gate (#340) heartbeat run 40120253555 failed: render_queue.py imports preview_gate, but heartbeat.yml and the public runner run it as 'python3 -I -B', which leaves the script's own directory off sys.path (ModuleNotFoundError). The unit tests imported the module without -I and passed, so every scheduled preview and render dispatch would have stopped.",
+   "fix": "render_queue.py puts its own directory on sys.path before importing preview_gate; a test runs render_queue.py in every mode exactly as the scheduler does (python3 -I -B).",
+   "antidote": {
+    "file": "migration/production/test_preview_gate.py",
+    "contains": "def test_render_queue_runs_isolated_like_the_heartbeat_and_runner"
+   }
   }
  ]
 }

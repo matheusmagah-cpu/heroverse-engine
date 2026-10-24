@@ -37,6 +37,17 @@ def review(d, overall, sha=None):
 
 
 class Gate(unittest.TestCase):
+    def test_render_queue_runs_isolated_like_the_heartbeat_and_runner(self):
+        # E73: heartbeat.yml and the runner call "python3 -I -B render_queue.py"; -I leaves the script's directory off
+        # sys.path, so a sibling import that worked in these tests broke every scheduled render and preview
+        import subprocess
+        with tempfile.TemporaryDirectory() as t:
+            (Path(t) / "ledger.json").write_text("{}")
+            for mode in ("preview", "preview-review", "render", "review"):
+                r = subprocess.run([sys.executable, "-I", "-B", str(Path(rq.__file__)), t, str(Path(t) / "ledger.json"), mode, "72"],
+                                   capture_output=True, text=True)
+                self.assertEqual(r.returncode, 0, r.stderr)
+
     def test_cut_keeps_the_opening_a_scripture_and_every_clip(self):
         script = {"pilot_id": "pilot-008", "footage": ["a", "b", "c"],
                   "segments": [{"id": "hook"}, {"id": "roadmap"}, {"id": "invitation"}, {"id": "prayer"},
