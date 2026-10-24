@@ -130,7 +130,7 @@ class PluginSetup(unittest.TestCase):
             subprocess.run(["bash", str(ROOT / "migration/ops/link_session_guards.sh"), root], check=True, capture_output=True)
             linked = {p.name for p in (Path(root) / ".claude").iterdir()}
             self.assertEqual({p.name for p in RULES} - linked, set())
-            self.assertIn("settings.json", linked)
+            self.assertNotIn("settings.json", linked)
 
 
 if __name__ == "__main__":
