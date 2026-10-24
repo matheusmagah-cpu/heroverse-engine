@@ -1,8 +1,8 @@
 {
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-009",
- "output_sha256": "a1fb148b4bf9d58a260928aa5cd846a6de7f40729be152fdacdaf2716513199a",
- "decision": "FAIL",
+ "output_sha256": "2fcd897eca1b9ac1f7e07641ecacec72b18cbdd976aabfd6b00bb0fe49f1feb5",
+ "decision": "UNKNOWN",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
@@ -16,7 +16,7 @@
   "content_and_policy": "UNKNOWN",
   "scorecard": "UNKNOWN",
   "full_file_scan": "PASS",
-  "structure": "FAIL",
+  "structure": "PASS",
   "authenticity": "PASS",
   "preflight": "PASS"
  },
@@ -26,13 +26,13 @@
     "source": "binding",
     "item": "manifest",
     "state": "PASS",
-    "detail": "a1fb148b4bf9d58a260928aa5cd846a6de7f40729be152fdacdaf2716513199a"
+    "detail": "2fcd897eca1b9ac1f7e07641ecacec72b18cbdd976aabfd6b00bb0fe49f1feb5"
    },
    {
     "source": "binding",
     "item": "qa_for_this_file",
     "state": "PASS",
-    "detail": "a1fb148b4bf9d58a260928aa5cd846a6de7f40729be152fdacdaf2716513199a"
+    "detail": "2fcd897eca1b9ac1f7e07641ecacec72b18cbdd976aabfd6b00bb0fe49f1feb5"
    },
    {
     "source": "binding",
@@ -48,13 +48,13 @@
     "source": "binding",
     "item": "review_for_this_file",
     "state": "PASS",
-    "detail": "a1fb148b4bf9d58a260928aa5cd846a6de7f40729be152fdacdaf2716513199a"
+    "detail": "2fcd897eca1b9ac1f7e07641ecacec72b18cbdd976aabfd6b00bb0fe49f1feb5"
    },
    {
     "source": "binding",
     "item": "video_file_hash",
     "state": "PASS",
-    "detail": "a1fb148b4bf9d58a260928aa5cd846a6de7f40729be152fdacdaf2716513199a"
+    "detail": "2fcd897eca1b9ac1f7e07641ecacec72b18cbdd976aabfd6b00bb0fe49f1feb5"
    }
   ],
   "technical": [
@@ -331,7 +331,7 @@
     "source": "structure",
     "item": "driver_continuous_motion",
     "state": "PASS",
-    "detail": 177
+    "detail": 179
    },
    {
     "source": "structure",
@@ -365,8 +365,8 @@
    {
     "source": "structure",
     "item": "hygiene_gratitude_block",
-    "state": "FAIL",
-    "detail": 2
+    "state": "PASS",
+    "detail": 4
    },
    {
     "source": "structure",
@@ -389,9 +389,9 @@
     "state": "PASS",
     "detail": [
      "0:00",
-     "4:32",
-     "6:20",
-     "7:29"
+     "4:36",
+     "6:24",
+     "7:33"
     ]
    },
    {
@@ -406,7 +406,7 @@
     "source": "authenticity",
     "item": "original_words_share",
     "state": "PASS",
-    "detail": 0.925
+    "detail": 0.926
    },
    {
     "source": "authenticity",
