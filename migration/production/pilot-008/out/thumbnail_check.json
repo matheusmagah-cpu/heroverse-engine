@@ -2,15 +2,15 @@
  "status": "PASS",
  "fails": [],
  "metrics": {
-  "brightness": 0.41,
-  "contrast": 0.257,
+  "brightness": 0.294,
+  "contrast": 0.315,
   "saturation": 0.805,
-  "colourfulness": 0.435,
-  "edge_density": 0.26,
-  "warm_share": 0.784,
+  "colourfulness": 0.432,
+  "edge_density": 0.214,
+  "warm_share": 0.598,
   "blue_share": 0.0,
-  "dark_share": 0.115,
-  "bright_share": 0.1,
-  "yellow_text_like": 0.051
+  "dark_share": 0.542,
+  "bright_share": 0.093,
+  "yellow_text_like": 0.029
  }
 }
