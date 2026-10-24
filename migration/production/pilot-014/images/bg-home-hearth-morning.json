@@ -1,0 +1,28 @@
+{
+ "id": "bg-home-hearth-morning",
+ "prompt": "A cozy empty living room with a stone fireplace, soft blankets on a sofa and gentle early morning light through the curtains, no people, no text, photorealistic cinematic 3D render, volumetric light rays, global illumination, shallow depth of field, rich depth and atmosphere, ultra-detailed, no people, no text",
+ "negative": null,
+ "seed": null,
+ "size": [
+  4096,
+  4096
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 3.0,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-014-img-bg-home-hearth-morning-sha256-26196b5645ab9c80f3cc22713cce7f888f53ce1e952d0db140578d0651831f8c.png",
+ "sha256": "26196b5645ab9c80f3cc22713cce7f888f53ce1e952d0db140578d0651831f8c"
+}
