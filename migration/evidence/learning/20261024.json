@@ -1,0 +1,45 @@
+{
+ "version": "owned-learning-v1",
+ "captured_at": "2026-10-24T16:30:00Z",
+ "sources": {
+  "analytics": "vidiq_channel_analytics UCuMF6pJQkyMzaVoAxFL86yA, 2026-10-10..2026-10-24, by video and by traffic source (Analytics lags ~48 h)",
+  "live": "vidiq_get_videos_by_ids at 16:20 UTC (views, likes, comments, vph)"
+ },
+ "channel": {"subscribers": 274, "public_long_watch_hours_365d": 9.3, "public_shorts_views_90d": 559},
+ "traffic_14d": {
+  "SHORTS": {"views": 492, "avg_view_pct": 243.4},
+  "RELATED_VIDEO": {"views": 71, "avg_view_duration_s": 442, "avg_view_pct": 18.7},
+  "SUBSCRIBER": {"views": 36},
+  "YT_SEARCH": {"views": 30, "avg_view_duration_s": 37},
+  "BROWSE_or_HOME": {"views": 0}
+ },
+ "videos": [
+  {"id": "_sUdOLxWy5c", "kind": "short", "published": "2026-10-18", "views": 295, "avg_view_pct": 260.5, "subs": 5, "likes": 31, "verdict": "good"},
+  {"id": "SsgCGkM6knQ", "kind": "short", "published": "2026-10-19", "views": 217, "avg_view_pct": 178.4, "subs": 4, "likes": 15, "verdict": "good"},
+  {"id": "VEbS6pvirTA", "kind": "short", "published": "2026-10-20", "views": 25, "avg_view_pct": 94.9, "subs": 1, "verdict": "weak"},
+  {"id": "v4zN53ZiUIs", "kind": "long", "published": "2026-10-18", "views": 38, "avg_view_pct": 5.5, "verdict": "bad"},
+  {"id": "NGfnyTul-K0", "kind": "long 26 min", "published": "2026-10-21", "views": 21, "avg_view_pct": 26.4, "avg_view_s": 413, "verdict": "neutral"},
+  {"id": "Iegu_RD_wbE", "kind": "long", "published": "2026-10-19", "views": 27, "avg_view_pct": 20.4, "verdict": "neutral"},
+  {"id": "1bT9pEROuhI", "kind": "long", "published": "2026-10-20", "views": 19, "avg_view_pct": 25.6, "verdict": "neutral"},
+  {"id": "tri-CUwy_m0", "kind": "long", "published": "2026-10-21", "views": 9, "avg_view_pct": 1.4, "verdict": "bad"},
+  {"id": "XDwxi4pvllM", "kind": "long", "published": "2026-10-20", "views": 4, "avg_view_pct": 0.2, "verdict": "bad"},
+  {"id": "ku2MTQKmXaU", "kind": "short, Bible series part 1", "published": "2026-10-24T14:44", "age_h": 1.6, "views": 35, "likes": 6, "comments": 1, "vph": 35, "verdict": "inconclusive (first hours); best first-hours start of the channel"}
+ ],
+ "findings": [
+  "Shorts carry the channel: 76 % of 14-day views come from the Shorts feed, with loops (avg view 243 %). The two good Shorts (Oct 18-19) brought 9 of the ~10 subscribers gained.",
+  "Long videos get almost no distribution: 4-38 views each, no Browse/Home traffic at all; their few viewers come from Related and stay ~7 min (442 s).",
+  "Long videos 'Morning Prayer for Protection' (0.2 %) and 'Night Prayer for Healing' (1.4 %) lose viewers in the first seconds: the opening does not hold.",
+  "Bible series part 1 had the strongest first hours of any video (35 views, 17 % likes) - early, needs the 48 h check.",
+  "The Shorts-to-long funnel is weak: the prayer Shorts link to full prayers, yet those long videos sit at 4-38 views."
+ ],
+ "loop_defects": [
+  "The market panel and daily_intel still mine the Christian-prayer niche, not Bible stories; their directives are written daily and nobody reads them.",
+  "No 48 h / 7 d verdict was ever recorded for our videos (SYSTEM.md 'Our videos'), and the daily report does not list the Bible episodes.",
+  "No step turns findings into a change in the next episode."
+ ],
+ "next_changes": [
+  {"change": "Every Bible Short ends with a pointer to the long compilation once it exists (pinned comment + description link), and the long opens with the strongest Short's hook", "stage": "production/publication", "measure": "Related + Shorts-to-long views on the first Bible long vs 4-38 baseline"},
+  {"change": "48 h check on each Bible Short: views, avg view %, likes, subs vs the series median; the top title/hook pattern is reused for the next 2 episodes", "stage": "live intelligence", "measure": "series median views at 48 h rising episode over episode"},
+  {"change": "Point the market panel at Bible-story Shorts/longs (KJV story channels) so its daily directives apply to the niche", "stage": "mining", "measure": "directives cite Bible-story winners"}
+ ]
+}
