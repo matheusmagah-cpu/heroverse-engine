@@ -1,0 +1,33 @@
+# Claude review (designated reviewer of long videos since 2026-10-24)
+
+Owner, 2026-10-24: "replace gemini-3.8-flash; I cannot have this in the system; find another AI". Every free Gemini
+candidate failed the calibration (`evidence/reviewer-calibration/`), so Claude reviews.
+
+## When
+Every clock run: `render_queue.py migration/production migration/publish/ledger.json review 72` lists due renders
+with QA PASS and no Claude review for their hash. Each one is reviewed in the same run.
+
+## What is looked at (evidence)
+- `inspection/review-sheet.jpg`: 16 frames evenly across the video at 640×360 (picture, captions, cards).
+- `inspection/opening-sheet.jpg`: the first 40 s, every 2.5 s (hook and promise).
+- `inspection/pilot-contact-sheet.jpg`: a frame every 20 s (pacing, variety, repetition).
+- `inspection/thumbnail.jpg` and `out/thumbnail_check.json` (R16).
+- `out/timeline.json` and `script.json`: the full spoken text, the hook within 8 s, roadmap, re-hooks, CTA (R12, R13).
+- `out/qa.json`: the objective audio and speech measures (loudness, true peak, speech presence, WER, wpm, music
+  under the voice). Claude does not hear the file; the frozen QA measures it and already failed anything outside
+  its bands.
+- `out/package.json`: title (R14), description (R15), chapters.
+
+## Rubric (0–10 each; the same items as before)
+opening_and_promise, picture_quality, figure_and_background_integrity, captions_readable_and_synced,
+audio_clarity_and_mix, pacing_and_visual_variety, scripture_on_screen, policy_safe; then overall.
+Anchors: 10 = nothing to improve; 9.5 = one tiny issue; 9 = minor issues a viewer would not mention; 8 = issues a
+viewer notices; 7 = clearly amateur in places; below 7 = fails. audio_clarity_and_mix is scored from the QA
+measures (each band met with margin = 9.5+). Every score below 9.5 names its issue with a timestamp.
+Gate: items ≥ 7 and overall ≥ 8; publication needs overall ≥ 9.5 (owner floor).
+
+## Output
+`inspection/claude_review.json`: `version` claude-review-v1, `model` claude-session-reviewer, `pilot_id`,
+`output_sha256` (the render's hash), `reviewed_at`, the eight scores, `overall`, `issues` (list, timestamps),
+`strongest_moment`, `evidence` (the files read). Committed through a branch, PR and squash merge; the push starts
+`approve.yml`, which binds it to the file and runs every other gate.

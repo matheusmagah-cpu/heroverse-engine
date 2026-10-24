@@ -15,7 +15,7 @@ VIDEO_SHA = hashlib.sha256(VIDEO_BYTES).hexdigest()
 
 def synthetic_review():
     return {"status": "PASS", "output_sha256": VIDEO_SHA,
-            "watched_review": {"status": "PASS", "model": "gemini-3.8-flash", "overall": 9.6}}
+            "watched_review": {"status": "PASS", "model": "claude-session-reviewer", "overall": 9.6}}
 
 
 class R:
@@ -188,7 +188,8 @@ class NewUploadOwnerFloor(unittest.TestCase):
             with patch.object(Path, "read_bytes", side_effect=AssertionError("must stream VIDEO")), \
                     patch.object(pv.owner_quality_policy, "check", wraps=pv.owner_quality_policy.check) as check:
                 pv.check_new_upload(d / "m.json", {"output_sha256": sha}, d / "v.mp4")
-            bound, actual = check.call_args.args
+            bound, actual, reviewer = check.call_args.args
+            self.assertEqual(reviewer, "claude-session-reviewer")   # long videos: the Claude reviewer
             self.assertEqual(actual, sha)
             self.assertEqual(bound, {**review["watched_review"], "output_sha256": sha})
             self.assertNotIn("output_sha256", review["watched_review"])

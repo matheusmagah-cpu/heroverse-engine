@@ -21,7 +21,7 @@ RUBRIC = sorted({c for spec in g.DIMENSIONS.values() for c in spec["review"]})
 def good():
     qa = {"output_sha256": SHA, "status": "PASS", "criteria_version": "pilot-qa-criteria-v2",
           "criteria_sha256": hashlib.sha256(CRITERIA).hexdigest(), "checks": {c: True for c in CHECKS}}
-    review = {"output_sha256": SHA, "status": "PASS", "watched_review": {**{c: 9 for c in RUBRIC}, "overall": 9, "model": "gemini-3.8-flash"},
+    review = {"output_sha256": SHA, "status": "PASS", "watched_review": {**{c: 9 for c in RUBRIC}, "overall": 9, "model": "claude-session-reviewer"},
               "scorecard_hard": {n: {"pass": True, "value": 1} for n in g.SCORE_HARD},
               "scorecard_reported": {"beats_per_minute": {"value": 1.0, "inside": False}}}
     return qa, {"output_sha256": SHA}, review

@@ -37,6 +37,7 @@ class StructureMining(unittest.TestCase):
         reviewers = set()
         for f in ("migration/production/long_review.py", "migration/production/shorts_review.py"):
             reviewers |= set(re.findall(r'REVIEW_MODELS = \(([^)]*)\)', (root / f).read_text())[0].replace('"', "").replace(",", " ").split())
+        reviewers = {m for m in reviewers if m.startswith("gemini")}  # long videos: Claude, no Gemini allowance (2026-10-24)
         self.assertEqual(set(sm.DECISION_MODELS), reviewers)
         self.assertFalse(set(sm.SUPPORT_MODELS) & reviewers)
         self.assertTrue(sm.SUPPORT_MODELS)

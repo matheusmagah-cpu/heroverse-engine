@@ -108,6 +108,8 @@ d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$T/work/pilot.mp
 n=$(python3 -c "import math;print(math.ceil($d/20))")
 ffmpeg -v error -y -i "$T/work/pilot.mp4" -vf "fps=1/20,scale=480:270,tile=4x$(( (n + 3) / 4 ))" -frames:v 1 -q:v 4 "migration/production/$PILOT/inspection/pilot-contact-sheet.jpg"
 ffmpeg -v error -y -ss 0 -t 40 -i "$T/work/pilot.mp4" -vf "fps=1/2.5,scale=480:270,tile=4x4" -frames:v 1 -q:v 4 "migration/production/$PILOT/inspection/opening-sheet.jpg"
+# the Claude reviewer's sheet: 16 frames evenly across the whole video at 640x360 (picture, captions, cards)
+ffmpeg -v error -y -i "$T/work/pilot.mp4" -vf "fps=16/$d,scale=640:360,tile=4x4" -frames:v 1 -q:v 3 "migration/production/$PILOT/inspection/review-sheet.jpg"
 ffmpeg -v error -y -i "$T/in/figure.png" -vf "scale=-1:540,pad=iw+40:ih+40:20:20:color=0x808080" "migration/production/$PILOT/inspection/figure-cutout.jpg"
 end
 

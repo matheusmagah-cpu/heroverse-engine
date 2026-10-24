@@ -163,6 +163,30 @@ class Queue(unittest.TestCase):
             self.assertTrue(rq.due(t, {}, NOW, 48)[0]["rendered"])
             self.assertEqual(rq.due(t, {"entries": {"pilot-003:"+"a"*64: {"video_id": "v"}}}, NOW, 48), [])
 
+    def test_review_lists_qa_passed_renders_without_a_claude_review_for_their_hash(self):
+        import contextlib, io
+        with tempfile.TemporaryDirectory() as t:
+            for name in ("pilot-003", "pilot-004", "pilot-005"):
+                pilot(t, name, "2026-10-19T10:00:00Z", rendered=True)
+                d = Path(t) / name
+                (d / "out" / "qa.json").write_text(json.dumps({"status": "FAIL" if name == "pilot-005" else "PASS", "output_sha256": "a" * 64,
+                                                              "criteria_version": rq.STANDARD_QA, "criteria_sha256": rq.STANDARD_QA_SHA256}))
+            (Path(t) / "pilot-004" / "inspection").mkdir(exist_ok=True)
+            (Path(t) / "pilot-004" / "inspection" / "claude_review.json").write_text(json.dumps({"output_sha256": "a" * 64}))
+            buf = io.StringIO()
+            real = rq.datetime
+            class Fixed(real):
+                @classmethod
+                def now(cls, tz=None):
+                    return NOW
+            rq.datetime = Fixed
+            try:
+                with contextlib.redirect_stdout(buf):
+                    rq.main(t, str(Path(t) / "none.json"), "review")
+            finally:
+                rq.datetime = real
+            self.assertEqual(buf.getvalue().split(), ["pilot-003", "a" * 64])
+
     def test_pending_first_comments_are_retried_once_the_video_is_public(self):
         # E61: 006, 007 and 010 kept "PENDING: HTTP_403" first comments for days; nothing dispatched the retry
         with tempfile.TemporaryDirectory() as t:

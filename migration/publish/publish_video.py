@@ -178,7 +178,7 @@ def check_new_upload(manifest_path, manifest, video):
     # Long evidence binds the watched review at the top level. Adapt a new
     # in-memory copy only, after checking that binding against the actual MP4.
     bound_review = {**watched, "output_sha256": review["output_sha256"]} if isinstance(watched, dict) else watched
-    problems = owner_quality_policy.check(bound_review, actual_sha256)
+    problems = owner_quality_policy.check(bound_review, actual_sha256, owner_quality_policy.LONG_REVIEWER)
     if problems:
         raise SystemExit("OWNER_QUALITY_POLICY_BLOCKED:" + ",".join(problems))
 

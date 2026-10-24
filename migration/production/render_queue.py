@@ -6,7 +6,8 @@ yet on YouTube. It needs images while any image its script uses has no
 images/<id>.json record; it needs a render when its images are complete and no
 completed frozen-v3 render exists for the current script and matching output hash.
 A completed v3 QA FAIL is not rerendered repeatedly; it awaits an input correction.
-usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile} [HOURS]
+usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile|review} [HOURS]
+  review: prints "PILOT SHA256" for every due render with QA PASS and no Claude review for that hash
   images: prints "PILOT id,id,..." for every pilot with images still missing
   render: prints the next pilot to render (earliest publish time) or nothing
   stale: prints "STALE PILOT PUBLISH_AT" for pilots whose slot passed more than 6 h ago (within STALE_DAYS) and that
@@ -173,6 +174,14 @@ def main(production, ledger_path, mode, hours="48"):
         for r in rows:
             if r["missing_images"]:
                 print(r["pilot"], ",".join(r["missing_images"]))
+    elif mode == "review":
+        # the designated reviewer (Claude) reviews every due render that passed QA and has no review for its hash
+        for r in rows:
+            d = Path(production) / r["pilot"]
+            qa = object_or_empty(d / "out" / "qa.json")
+            cr = object_or_empty(d / "inspection" / "claude_review.json")
+            if r["rendered"] and qa.get("status") == "PASS" and cr.get("output_sha256") != qa.get("output_sha256"):
+                print(r["pilot"], qa.get("output_sha256"))
     elif mode == "reconcile" and HOLD.exists():
         print("PUBLICATION_HOLD", file=sys.stderr)  # owner pause: no approval, publication or Shorts is dispatched
     elif mode == "reconcile":
@@ -197,6 +206,8 @@ def main(production, ledger_path, mode, hours="48"):
             unknown = gate.get("output_sha256") == qa["output_sha256"] and gate.get("decision") == "UNKNOWN"
             if ap.get("approved") and ap.get("output_sha256") == qa["output_sha256"]:
                 publish.append(r["pilot"])  # due rows are never already on YouTube
+            elif rev.get("status") == "AWAITING_REVIEW" and rev.get("output_sha256") == qa["output_sha256"]:
+                pass  # waits for the Claude review (render_queue.py review lists it); approve.yml starts when it lands
             elif quota_spent(rev, now):
                 long_quota_pending = True  # reserve shared review quota for the waiting long
             elif rev.get("output_sha256") != qa["output_sha256"] or rev.get("status") == "ERROR" or unknown:

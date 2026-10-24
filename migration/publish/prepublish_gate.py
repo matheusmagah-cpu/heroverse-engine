@@ -46,7 +46,7 @@ PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
 # the watched review decides only when the designated model answered. Fallback free models score the same file
 # very differently (pilot-003: gemini-3.8-flash audio 9 / picture 8.5 / policy 10; gemini-3.6-flash on a near-identical
 # render 6.8 / 6.7 / 7.0; flash-lite gave 8-10 to four of five pilot-002 Shorts): their answer is UNKNOWN, retried
-REVIEW_MODELS = ("gemini-3.8-flash",)
+REVIEW_MODELS = ("claude-session-reviewer",)  # owner 2026-10-24: gemini-3.8-flash replaced (unstable, E58)
 
 # dimension -> qa checks (whole file, deterministic) and review rubric items (sampled, model)
 DIMENSIONS = {
