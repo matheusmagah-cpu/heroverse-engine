@@ -1,0 +1,36 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-01-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 1,
+ "passage": "Genesis 1:1-31 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "de79d9a703f86754222c209d42b31ca2882bd6a49abee34b2e4d1d8e9d8666c8",
+ "seconds": 62.8,
+ "frame": [1080, 1920],
+ "owner_decision": "2026-10-24: 'Monta do jeito que está e posta. No próximo você aprimora.' Claude review ~8.0 (below the 9.5 floor) recorded; published by the owner's explicit order as the series pilot.",
+ "review": {
+  "overall": 8.0,
+  "issues": [
+   "28.1 s: the moon clip is center-cropped to a black frame with the moon cut at the edge",
+   "29.6 s: the star time-lapse shows a parked car and a person at the bottom",
+   "32.7 s: the fish are in an aquarium",
+   "41.6 s: 'in his own image' shows a modern skier in a yellow jacket",
+   "captions small for a Short; integrated loudness -19.5 LUFS (target -14)"
+  ],
+  "root_cause": "stock clips were chosen from text descriptions without looking at a preview frame; no pre-compose check existed"
+ },
+ "title": "Before There Was Light, God Spoke ✨ | Genesis 1 Bible Story (KJV) #shorts",
+ "description": "Genesis 1, the first story of the Bible, read from the King James Version. Part 1 of a journey through the whole Bible, one story at a time.\n\nLord, speak light into my darkness today. Type Amen if you prayed this with me 🙏\n\nNext: Part 2, the garden.\n\nScripture: King James Version (public domain).\nVisuals: licensed stock footage from Pexels (Pexels License) and AI-generated scenes. Narration: AI voice. Music: original, AI-generated.\n\n#bible #genesis #biblestory",
+ "tags": ["genesis 1", "bible story", "in the beginning", "creation story", "kjv bible", "bible stories", "genesis", "christian shorts"],
+ "category_id": "29",
+ "first_comment": "Part 1 of the whole Bible, one story at a time. What story should we tell next? 🙏",
+ "sources": {
+  "voice": "vidIQ voiceover (ElevenLabs 'George'), job_954806cd",
+  "music": "vidIQ generate_music, job_84bf3f8f",
+  "ai_video": ["job_ebf7f7b2 first light (veo-3.1-lite)", "job_02862131 Spirit over the waters (veo-3.1-lite)", "job_757c6775 eagle at dawn (minimax-h3)"],
+  "stock": "Pexels videos 11493314, 12222644, 12160331, 15499822, 12172194, 16998437, 20683460, 17352382, 20142860, 6183937, 7165551, 12598728, 8552253",
+  "compose": "vidIQ compose job_61de3376"
+ },
+ "credits": {"ai_video": 260, "voice": 14, "music": 25, "stock_search": 14, "compose": 16, "wasted": 60}
+}
