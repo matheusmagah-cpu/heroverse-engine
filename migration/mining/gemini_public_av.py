@@ -14,7 +14,10 @@ import urllib.parse
 from datetime import datetime, timezone
 
 MODEL = 'gemini-3.8-flash'
-FREE_MODELS = ('gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash-lite')
+# Answered on the free project (billing disabled) in the reviewer probe of 2026-10-24T01:30 (evidence/reviewer-probe);
+# the omni models answered 429 with no free quota and are not listed.
+FREE_MODELS = ('gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash-lite',
+               'gemini-3.5-flash', 'gemini-3-flash-preview', 'gemini-2.5-flash')
 PROJECT = 'gen-lang-client-0909161074'
 ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/' + MODEL + ':generateContent'
 MAX_BYTES = 2_000_000
