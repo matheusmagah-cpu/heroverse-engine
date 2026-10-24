@@ -9,8 +9,10 @@ import json
 import sys
 from pathlib import Path
 
-# the cut is short by design: only the rules about the full length may fail
-LENGTH_ONLY = {"duration_min"}
+# the cut is short by design: only the rules about the full length may fail. speech_presence is one: the opening and
+# closing music tails are a fixed few seconds, a large share of a 1-minute cut (0.79 on the first smoke) and a small
+# share of a 16-minute render (0.857 on 008); the real render still needs 0.85
+LENGTH_ONLY = {"duration_min", "speech_presence"}
 
 
 def cut(script):
