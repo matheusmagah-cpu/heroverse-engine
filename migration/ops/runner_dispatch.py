@@ -57,7 +57,7 @@ def validate_run(row):
 
 def candidate(production, ledger, now):
     rows = render_queue.due(production, ledger, now, 48)
-    row = next((r for r in rows if not r['missing_images'] and not r['rendered']), None)
+    row = next((r for r in rows if not r['missing_images'] and not r['rendered'] and r['preview_ok']), None)
     if row is None:
         return None
     script = (Path(production) / row['pilot'] / 'script.json').read_bytes()

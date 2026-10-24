@@ -12,6 +12,10 @@ T="${T:-${RUNNER_TEMP:-/tmp}}"; ROOT="$(pwd)"; QA_FAILED=""
 # SMOKE=1 (PR check, E68): a ~1 minute cut of the pilot through the whole path; nothing is uploaded or committed
 SCRIPT="migration/production/$PILOT/script.json"
 if [ "${SMOKE:-0}" = 1 ]; then SCRIPT="$T/smoke-script.json"; python3 -I -B migration/ci/smoke.py script "migration/production/$PILOT/script.json" "$SCRIPT"; fi
+# PREVIEW=1 (owner, 2026-10-24: built for 9.5 before the 2.5 h render): the opening rendered for real, every footage
+# clip on one sheet and the thumbnail, committed for Claude's preview review; the full render needs that review >= 9.5
+if [ "${PREVIEW:-0}" = 1 ]; then SCRIPT="$T/preview-script.json"; python3 -I -B migration/production/preview_gate.py cut "migration/production/$PILOT/script.json" "$SCRIPT"
+elif [ "${SMOKE:-0}" != 1 ]; then python3 -I -B migration/production/preview_gate.py gate "migration/production/$PILOT"; fi
 stage() { echo "::group::$1"; date -u +%H:%M:%S; }
 end() { echo "::endgroup::"; }
 # On the public runner (PUBLIC_LOGS=1) command output (titles, script text, hooks) goes to a private log
@@ -85,7 +89,7 @@ HANDOFF=1
 ffmpeg -v error -y -i "$T/work/voice.wav" -c:a flac "$T/voice.flac"
 vsha=$(sha256sum "$T/voice.flac" | cut -d' ' -f1); fsha=$(sha256sum "$T/in/figure.png" | cut -d' ' -f1)
 cp "$T/voice.flac" "$T/$PILOT-voice-sha256-$vsha.flac"; cp "$T/in/figure.png" "$T/$PILOT-figure-sha256-$fsha.png"
-[ "${SMOKE:-0}" = 1 ] || gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
+[ "${SMOKE:-0}" = 1 ] || [ "${PREVIEW:-0}" = 1 ] || gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
 printf '{"voice_asset": "%s", "voice_sha256": "%s", "figure_asset": "%s", "figure_sha256": "%s", "render": "%s"}\n' \
   "$PILOT-voice-sha256-$vsha.flac" "$vsha" "$PILOT-figure-sha256-$fsha.png" "$fsha" "${RUN_LABEL:-run}" > "$T/shorts-inputs.json"
 end
@@ -115,6 +119,33 @@ ffmpeg -v error -y -ss 0 -t 40 -i "$T/work/pilot.mp4" -vf "fps=1/2.5,scale=480:2
 ffmpeg -v error -y -i "$T/work/pilot.mp4" -vf "fps=16/$d,scale=640:360,tile=4x4" -frames:v 1 -q:v 3 "migration/production/$PILOT/inspection/review-sheet.jpg"
 ffmpeg -v error -y -i "$T/in/figure.png" -vf "scale=-1:540,pad=iw+40:ih+40:20:20:color=0x808080" "migration/production/$PILOT/inspection/figure-cutout.jpg"
 end
+
+if [ "${PREVIEW:-0}" = 1 ]; then
+  stage "Preview sheets for Claude's review (nothing is uploaded or published)"
+  P="migration/production/$PILOT/inspection/preview"; mkdir -p "$P" "$T/pf"; rm -f "$P"/*.jpg
+  ffmpeg -v error -y -t 60 -i "$T/work/pilot.mp4" -vf "fps=1/2.5,scale=480:270,tile=4x6" -frames:v 1 -q:v 3 "$P/opening-sheet.jpg"
+  n=0
+  for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1])).get('footage') or []))" "$SCRIPT"); do
+    f="$T/in/footage/$id.mp4"; [ -f "$f" ] || continue
+    d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f"); n=$((n+1))
+    for k in 1 2 3; do
+      ffmpeg -v error -y -ss "$(python3 -c "print($d*($k*2-1)/6)")" -i "$f" -frames:v 1 \
+        -vf "scale=320:180,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='$(printf %02d $n) $id':x=4:y=4:fontsize=9:fontcolor=yellow:box=1:boxcolor=black@0.6" \
+        "$T/pf/$(printf %03d $n)-$k.jpg"
+    done
+  done
+  [ "$n" -eq 0 ] || ffmpeg -v error -y -pattern_type glob -i "$T/pf/*.jpg" -vf "tile=3x$n" -frames:v 1 -q:v 3 "$P/footage-sheet.jpg"
+  cp "$T/work/package/thumbnail.jpg" "$P/thumbnail.jpg" || true
+  python3 -I -B migration/production/preview_gate.py record "migration/production/$PILOT" "${RUN_LABEL:-run}"
+  git config user.name "github-actions[bot]"
+  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  git add -A "$P"
+  git commit -q -m "Preview of $PILOT for Claude's review (${RUN_LABEL:-run}; no full render yet)"
+  git stash -q -u || true   # the cut's own inspection/out files are not evidence of the full render: never committed
+  git pull --rebase -q origin main && git push -q origin HEAD:main
+  end
+  exit 0
+fi
 
 if [ "${SMOKE:-0}" = 1 ]; then
   stage "Smoke verdict (only the full-length rules may fail on a short cut)"
