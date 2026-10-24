@@ -89,6 +89,23 @@ def in_window(t, window):
 MOTION_GRAMMARS = ("standard-v1", "standard-v4")
 
 
+def script_hygiene(script):
+    """The structure rows decided by the script alone. E64: pilot-009 failed hygiene_gratitude_block (2 < 3) at the
+    gate after a 2.5-hour render; script_check now runs these same rows before any render."""
+    text = script_text(script)
+    cta = " ".join(seg["text"] for seg in script["segments"] if seg["id"] == "cta" or "amen" in seg["text"].lower())
+    ws = words(text)
+    grams = {}
+    for i in range(len(ws) - 2):
+        g = " ".join(ws[i:i + 3])
+        grams[g] = grams.get(g, 0) + 1
+    top = max(grams.items(), key=lambda kv: kv[1]) if grams else ("", 0)
+    thanks = len(GRATITUDE.findall(text))
+    return [("hygiene_spoken_amen_cta", "amen" in cta.lower(), cta[:120]),
+            ("hygiene_recurring_refrain", top[1] >= 3, list(top)),
+            ("hygiene_gratitude_block", thanks >= 3, thanks)]
+
+
 def structure_rows(d):
     d = Path(d)
     script = json.loads((d / "script.json").read_text())
@@ -110,16 +127,8 @@ def structure_rows(d):
     # hygiene (every winner and every weak contrast)
     first = min((s["start"] for s in timeline.get("sentences", [])), default=None)
     rows.append(row("hygiene_speech_within_3s", first is not None and first <= 3.0, first, "structure"))
-    cta = " ".join(seg["text"] for seg in script["segments"] if seg["id"] == "cta" or "amen" in seg["text"].lower())
-    rows.append(row("hygiene_spoken_amen_cta", "amen" in cta.lower(), cta[:120], "structure"))
-    ws = words(text)
-    grams = {}
-    for i in range(len(ws) - 2):
-        g = " ".join(ws[i:i + 3])
-        grams[g] = grams.get(g, 0) + 1
-    top = max(grams.items(), key=lambda kv: kv[1]) if grams else ("", 0)
-    rows.append(row("hygiene_recurring_refrain", top[1] >= 3, list(top), "structure"))
-    rows.append(row("hygiene_gratitude_block", len(GRATITUDE.findall(text)) >= 3, len(GRATITUDE.findall(text)), "structure"))
+    for name, ok, detail in script_hygiene(script):
+        rows.append(row(name, ok, detail, "structure"))
     checks = qa.get("checks", {})
     rows.append(row("hygiene_voice_and_music", checks.get("voice_model_pinned") is True and checks.get("music_owned") is True,
                     {k: checks.get(k) for k in ("voice_model_pinned", "music_owned")}, "structure"))

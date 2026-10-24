@@ -138,6 +138,15 @@ class Check(unittest.TestCase):
         spec.loader.exec_module(pkg)
         self.assertEqual(pkg.SCRIPTURE_REF.pattern, sc.SCRIPTURE_REF.pattern)  # one rule in both gates
 
+    def test_gate_structure_rows_run_before_the_render(self):
+        # E64: pilot-009 failed hygiene_gratitude_block (2 < 3) at the gate after a 2.5-hour render
+        rows = {n: ok for n, ok, _ in sc.three_stage.script_hygiene(
+            {"segments": [{"id": "hook", "text": "Thank you, Lord."}, {"id": "cta", "text": "Write amen below."}]})}
+        self.assertFalse(rows["hygiene_gratitude_block"])
+        self.assertTrue(rows["hygiene_spoken_amen_cta"])
+        src = (Path(sc.__file__).parent / "script_check.py").read_text()
+        self.assertIn("three_stage.script_hygiene(s)", src)
+
     def test_speech_presence_counts_the_v4_sentence_gap(self):
         # E53: pilot-010 measured 0.844 with a 0.45 s gap; the estimate must see the gap the renderer really uses
         import re as _re
