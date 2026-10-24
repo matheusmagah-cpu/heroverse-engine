@@ -3,11 +3,16 @@
  "model": "gemini-3.5-flash-lite",
  "findings": [
   {
-   "category": "misquoted_scripture",
+   "category": "misquoting_scripture",
    "quote": "I am the good shepherd: the good shepherd giveth his life for the sheep.",
-   "why": "This is quoted from John 10:11, but in the context of the script, it is introduced abruptly without proper integration as a spoken verse by Jesus within a Psalm 23 sequence, though the verse text itself is accurate to the King James Version."
+   "why": "This verse is quoted as part of the flow of Psalm 23, but it is actually from John 10:11, not Psalm 23."
+  },
+  {
+   "category": "misquoting_scripture",
+   "quote": "He shall feed his flock like a shepherd: he shall gather the lambs with his arm, and carry them in his bosom, and shall gently lead those that are with young.",
+   "why": "This verse is inserted into the walking of Psalm 23, but it is actually from Isaiah 40:11, not Psalm 23."
   }
  ],
- "narrative_value": "The script functions as a calm, reflective, and pastoral bedtime meditation. It follows a structured, contemplative format moving through Psalm 23 verse by verse, grounding its themes in realistic human emotions such as fatigue, regret, and sorrow without relying on sensationalism or mass-produced filler templates.",
+ "narrative_value": "The script is a deeply reflective, pastoral, and well-structured night prayer and meditation centered primarily on Psalm 23 and other comforting passages. It avoids manipulative fear-bait, false prophecies, and financial guarantees. While two verses from other books of the Bible are seamlessly woven into the reading of Psalm 23 without explicitly stating the book change, the overall narrative and teaching value is high, acting as a genuine devotional rather than mass-produced template filler.",
  "status": "FAIL"
 }

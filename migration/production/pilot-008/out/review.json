@@ -1,57 +1,8 @@
 {
  "version": "long-review-v2",
  "pilot_id": "pilot-008",
- "output_sha256": "ccc63f798328e8bdbc89b1c6db6cc0a9e5c2120fe55d642faabfdb88e880d556",
- "status": "PASS",
- "scorecard_hard": {
-  "minutes": {
-   "value": 16.08,
-   "band": [
-    10.02,
-    50.0
-   ],
-   "pass": true
-  },
-  "scripture_per_10_min": {
-   "value": 6.22,
-   "band": [
-    4,
-    99
-   ],
-   "pass": true
-  }
- },
- "scorecard_reported": {},
- "watched_review": {
-  "opening_and_promise": 9.5,
-  "picture_quality": 9.0,
-  "figure_and_background_integrity": 9.5,
-  "captions_readable_and_synced": 9.5,
-  "audio_clarity_and_mix": 9.5,
-  "pacing_and_visual_variety": 8.5,
-  "scripture_on_screen": 9.5,
-  "policy_safe": 10.0,
-  "overall": 9.0,
-  "issues": [
-   "~0:15-0:22 (opening sheet): a desert under a midday blue sky while the voice says 'praying over your needs' in a night prayer; the opening breaks the night mood it just set with the candle (opening 9.5)",
-   "~0:40, 1:40, 2:40, 3:40, 6:00, 9:40, 10:40, 11:40, 13:20-14:20, 15:20 (contact sheet): about a third of the picture is bright daylight (sunlit pools, waterfalls, snowy peaks under blue sky, sunny rivers) in a 'Before You Sleep' night prayer; night winners keep a dark, calm palette (table stakes, evidence/vidiq/20261023/algorithm_study/visual_watch.md). Root cause: night footage is chosen by theme (snow, waterfall, river, ocean, lake), not by how dark the clip is (pacing_and_visual_variety 8.5)",
-   "picture: real licensed footage at 1440p, no AI stills (E66 works); a few soft or noisy night clips (aurora, 6:40) keep picture_quality at 9.0",
-   "captions: some fragments end mid-thought ('For now,', 'turning in your mind.') (9.5)",
-   "audio from QA measures: -15.6 LUFS, -2.6 dBTP, speech 0.857, WER 0.036, 129 wpm, first word 0.08 s: every band met (9.5)"
-  ],
-  "strongest_moment": "0:00-0:09: the promise over a candle in the dark, then 'Pray Psalm twenty-three with me now' over a moonlit tree",
-  "model": "claude-session-reviewer",
-  "reviewed_at": "2026-10-24T15:20:00Z",
-  "evidence": [
-   "inspection/review-sheet.jpg",
-   "inspection/opening-sheet.jpg",
-   "inspection/pilot-contact-sheet.jpg",
-   "inspection/thumbnail.jpg",
-   "out/thumbnail_check.json",
-   "out/qa.json",
-   "out/package.json",
-   "script.json"
-  ],
-  "status": "PASS"
- }
+ "output_sha256": "70bb39633e1841f5b368db83d95dee109c089f0090fef1235a6fa719b06ad7ea",
+ "status": "AWAITING_REVIEW",
+ "error": "CLAUDE_REVIEW_NOT_FOR_THIS_FILE",
+ "checked_at": "2026-10-24T16:44:42Z"
 }
