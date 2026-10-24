@@ -90,3 +90,22 @@ pass the owner's 90% rule; transcripts are compared with our own ASR like any in
 3. Pre-publication package: `gate.json` carries `market_evidence_not_deciding` (KNOWN / STALE > 14 days /
    INVALID / UNKNOWN when absent). It never changes PASS/FAIL/UNKNOWN; technical quality, the watched review,
    rights and QA stay the only gates; no forecast of views, revenue or monetization is implied.
+
+## Plugin skills (owner installed the vidIQ plugin, 2026-10-24)
+The plugin's skills call the same tools as the connector (`mcp__vidIQ__vidiq_*`); its own server
+(`mcp.vidiq.com`) gets 403 from the cloud proxy, so the connector runs them. They change nothing above: every call
+goes in the ledger, research ≤ 10 calls a day, generation ≤ 200 credits a day, write tools stay denied (also under
+the plugin's server name, `.claude/settings.json`). A skill's recommendation is a hypothesis for the daily loop
+(SYSTEM.md, one at a time), never evidence that passes a gate. The story order of SERIES.md is not a topic choice.
+
+| Skill | When it runs here | Calls |
+|---|---|---|
+| `vidiq-new-upload-review` | daily loop step 2: an episode `live_intel.py` rates weak at 48 h, to decide wait or packaging | 1-2 |
+| `vidiq-retention-analysis` | 7-day review of each long video: where viewers leave, mapped to the script's beats | 1-2 |
+| `vidiq-channel-audit` | weekly, 30 days: which format and slot carry the channel (feeds SERIES.md cadence) | 2-3 |
+| `vidiq-packaging-studio`, `vidiq-packaging-comparison` | before a long video's package: title and thumbnail variants we write; `score_title` stays informative | 1-2 |
+| `vidiq-comment-insights` | once a week: viewers' questions and words for hooks and reflections (deidentified, counts and phrases only) | 1 |
+| `vidiq-trend-radar`, `vidiq-video-ideas`, `vidiq-next-video-planner` | weekly: seasonal moments and hook angles inside the series (the next story is fixed) | 1-3 |
+| `vidiq-shorts-inspiration` | weekly: hook and pacing mechanics from Reels/TikTok outliers for the Shorts | 1-2 |
+| `vidiq-competitor-watchlist` | monthly, read-only (`vidiq_update_competitors` is denied) | 1 |
+| `vidiq-get-started` | credit balance and recovery of an interrupted compose job (`vidiq_job_poll`) | 1 |
