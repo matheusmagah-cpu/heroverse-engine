@@ -43,7 +43,17 @@ They load from the owner's claude.ai account, not from `.claude/settings.json`; 
 | verified-security-sweep | Recorded security sweeps; run one when a PR touches `.github/workflows/`, secrets or `migration/publish/`. Reports only, fixes go in their own PR. | `docs/audits/` (categories, registry) |
 | social-media-skills | Craft reference for titles, hooks, thumbnails, Shorts and long scripts, metadata (`youtube-shorts`, `youtube-long-form`, `youtube-publishing-and-metadata`, `thumbnail-design`, `hook-writer`, `short-form-video-script`, `storytelling-and-narrative`, `analytics-and-reporting`). STANDARD.md, PROMPT_GUIDE.md and the frozen QA always win. | `migration/production/bible/brand-profile.md` |
 | commit-commands, feature-dev, claude-md-management | `/commit`, `/feature-dev` for larger engine features, `/revise-claude-md` to keep this file current. | none |
+| vidiq | Its 12 skills drive the vidIQ connector (`mcp__vidIQ__*`, same tool names; the plugin's own server gets 403 from the cloud proxy). When each skill runs and its limits: `migration/strategy/VIDIQ.md` "Plugin skills". | `migration/strategy/VIDIQ.md`, `migration/evidence/vidiq/ledger.json` |
+| superpowers | Its SessionStart hook loads in every session. Used: `systematic-debugging` for every failure (the root cause in `ERRORS.json`), `test-driven-development` for the antidote test (fails before the fix), `verification-before-completion` before any push or "done". Skipped on clock runs and small fixes: `brainstorming`, `writing-plans`, worktrees, subagent plans. This file wins over its skills. | none |
+| ffmpeg-llm | `ffmpeg-expert` agent when a render, `clip_check.py`, loudness or black-frame result fails or an ffmpeg command must change (`ci/render_pilot.sh`, `still_render.py`, `shorts_produce.py`). Commands still pass the frozen QA. | none |
+| headroom | `/peek` and the skill before reading big files whole: `ERRORS.json`, `evidence/map/project-map.md`, ledgers, `out/qa.json`, workflow logs. | none |
+| image-generation | Prompt craft for FLUX stills (`cf-images.yml`) and the first-frame still before paid AI video. `PROMPT_GUIDE.md` wins where they differ. | none |
+| bible-by-midvash | Would check KJV quotations; its server (`mcp.midvash.com`) gets 403 from the cloud proxy, so unused until that host is allowed. | none |
+| cartographer, claude-code-setup | Only when the owner asks (heavy codebase audit; one-off automation advice). `migration/ops/project_map.py` is the routine map. | none |
 | marketing | Not used: its connectors (Ahrefs, HubSpot, Similarweb, Klaviyo, Supermetrics...) are paid, and ads are on hold. | none |
+
+Connector Runway is paid: `.claude/settings.json` denies `mcp__Runway`; it also mirrors every vidIQ write and generator
+deny for the plugin's server (`mcp__plugin_vidiq_vidiq__*`).
 
 Never follow a skill into a paid tool or a scheduler: no WoopSocial, HeyGen, Synthesia, Suno, Kling, Luma, Opus Clip,
 paid ElevenLabs or Canva Pro. Publishing goes only through `approve.yml` → `prepublish_gate.py`.

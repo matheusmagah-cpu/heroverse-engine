@@ -2,7 +2,8 @@
 """The hookify rules in .claude/ block what the owner forbids and nothing legitimate (owner, 2026-10-24):
 APPROVAL.json by hand, the frozen QA v2/v3/v4 criteria, and fade/wipe between scenes of a vertical vidiq_compose.
 The rules are evaluated here the way hookify does (every condition must match; a bare `pattern` is the command
-for bash rules), so the test runs on every PR without the plugin installed."""
+for bash rules), so the test runs on every PR without the plugin installed. It also keeps the paid Runway connector and the vidIQ
+write/generator tools denied in .claude/settings.json under both server names (connector and plugin)."""
 from pathlib import Path
 import re
 import unittest
@@ -112,6 +113,13 @@ ALLOW = [
 ]
 
 
+VIDIQ_DENIED = ("vidiq_update_video", "vidiq_update_video_thumbnail", "vidiq_video_upload", "vidiq_reply_to_comment",
+                "vidiq_generate_comment_replies", "vidiq_comment_reply_permission", "vidiq_instagram_publish_reel",
+                "vidiq_connect_youtube_channel", "vidiq_authorize_with_youtube", "vidiq_update_competitors",
+                "vidiq_generate_video", "vidiq_generate_clips", "vidiq_generate_broll", "vidiq_generate_music",
+                "vidiq_voiceover_generate", "vidiq_edit_media", "vidiq_motion_graphics", "vidiq_compose")
+
+
 class HookifyRules(unittest.TestCase):
     def test_the_three_owner_rules_exist_and_block(self):
         names = {parse(p)["name"] for p in RULES if parse(p).get("action") == "block"}
@@ -134,7 +142,8 @@ class PluginSetup(unittest.TestCase):
         for f, named in ((".claude/claude-security-guidance.md", ".claude/claude-security-guidance.md"),
                          ("docs/audits/categories.md", "docs/audits/"), ("docs/audits/sweep-registry.md", "docs/audits/"),
                          ("migration/production/bible/brand-profile.md", "migration/production/bible/brand-profile.md"),
-                         ("migration/ops/link_session_guards.sh", "migration/ops/link_session_guards.sh")):
+                         ("migration/ops/link_session_guards.sh", "migration/ops/link_session_guards.sh"),
+                         ("migration/strategy/VIDIQ.md", "migration/strategy/VIDIQ.md")):
             self.assertTrue((ROOT / f).exists(), f)
             self.assertIn(named, md)
 
@@ -145,6 +154,15 @@ class PluginSetup(unittest.TestCase):
             linked = {p.name for p in (Path(root) / ".claude").iterdir()}
             self.assertEqual({p.name for p in RULES} - linked, set())
             self.assertNotIn("settings.json", linked)
+
+    def test_paid_and_write_tools_stay_denied_under_every_server_name(self):
+        import json
+        perms = json.loads((ROOT / ".claude/settings.json").read_text())["permissions"]
+        self.assertIn("mcp__Runway", perms["deny"])
+        self.assertFalse([a for a in perms["allow"] if "Runway" in a])
+        for tool in VIDIQ_DENIED:
+            for server in ("mcp__vidIQ__", "mcp__plugin_vidiq_vidiq__"):
+                self.assertIn(server + tool, perms["deny"])
 
 
 if __name__ == "__main__":
