@@ -3,7 +3,7 @@ name: block-frozen-qa-criteria-by-shell
 enabled: true
 event: bash
 action: block
-pattern: (>>?|\btee\b[^|;&]*|\bsed\s+-i[^|;&]*|\b(mv|truncate|rm)\b[^|;&]*|\bopen\([^)]*)\s*['"]?[^\s'"|;&]*(qa_criteria_v[0-9]+\.json|pilot-[0-9]{3}/qa_criteria\.json)
+pattern: (>>?|\btee\b[^|;&\n]*|\bsed\s+-i[^|;&\n]*|\b(mv|truncate|rm)\b[^|;&\n]*|\bgit\s+(checkout|restore)\b[^|;&\n]*|\bopen\([^)]*)\s*['"]?[^\s'"|;&]*(qa_criteria_v[0-9]+\.json|pilot-[0-9]{3}/qa_criteria\.json)|\b(cp|install)\b[^|;&\n]*\s['"]?[^\s'"|;&]*(qa_criteria_v[0-9]+\.json|pilot-[0-9]{3}/qa_criteria\.json)['"]?\s*($|[|;&\n])
 ---
 
 **Bloqueado: os critérios de QA congelados (v2/v3/v4) nunca são alterados**, nem pelo shell (regra do dono).

@@ -37,6 +37,9 @@ def field(tool, inp, name):
         return inp[name] if isinstance(inp[name], str) else str(inp[name])
     if tool == "Bash" and name == "command":
         return inp.get("command", "")
+    if tool == "MultiEdit":
+        joined = " ".join(e.get("new_string", "") for e in inp.get("edits", []))
+        return {"new_text": joined, "content": joined, "file_path": inp.get("file_path", "")}.get(name)
     if tool in ("Write", "Edit"):
         return {"new_text": inp.get("new_string", ""), "content": inp.get("content") or inp.get("new_string", ""),
                 "file_path": inp.get("file_path", "")}.get(name)
@@ -44,7 +47,7 @@ def field(tool, inp, name):
 
 
 def blocked(tool, inp):
-    event = "bash" if tool == "Bash" else "file" if tool in ("Write", "Edit") else None
+    event = "bash" if tool == "Bash" else "file" if tool in ("Write", "Edit", "MultiEdit") else None
     for rule in map(parse, RULES):
         if rule.get("enabled") != "true" or rule.get("action") != "block":
             continue
@@ -55,7 +58,7 @@ def blocked(tool, inp):
         ok = bool(rule["conditions"])
         for c in rule["conditions"]:
             v = field(tool, inp, c["field"])
-            ok = ok and v is not None and (re.search(c["pattern"], v) if c["operator"] == "regex_match"
+            ok = ok and v is not None and (re.search(c["pattern"], v, re.I) if c["operator"] == "regex_match"
                                            else v == c["pattern"] if c["operator"] == "equals" else False)
         if ok:
             return True
@@ -80,6 +83,13 @@ BLOCK = [
     ("Edit", {"file_path": "migration/production/pilot-008/qa_criteria.json", "old_string": "a", "new_string": "b"}),
     ("Bash", {"command": "sed -i 's/0.95/0.80/' migration/production/qa_criteria_v4.json"}),
     ("Bash", {"command": "echo x >> migration/production/pilot-013/qa_criteria.json"}),
+    ("MultiEdit", {"file_path": APPROVAL, "edits": [{"old_string": "a", "new_string": "b"}]}),
+    ("MultiEdit", {"file_path": "migration/production/qa_criteria_v4.json", "edits": [{"old_string": "a", "new_string": "b"}]}),
+    ("Bash", {"command": f"cp /tmp/x.json {APPROVAL}"}),
+    ("Bash", {"command": f"install -m 644 /tmp/x.json {APPROVAL} && ls"}),
+    ("Bash", {"command": f"git checkout other-branch -- {APPROVAL}"}),
+    ("Bash", {"command": "cp /tmp/loose.json migration/production/qa_criteria_v4.json"}),
+    ("Bash", {"command": "git restore --source=HEAD~3 migration/production/qa_criteria_v3.json"}),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", None, "fade")),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", "wipe")),
 ]
@@ -93,6 +103,10 @@ ALLOW = [
     ("Edit", {"file_path": "migration/production/pilot-008/script.json", "old_string": "a", "new_string": "b"}),
     ("Bash", {"command": "cp migration/production/pilot-008/qa_criteria.json migration/production/pilot-015/"}),
     ("Bash", {"command": "sha256sum migration/production/qa_criteria_v3.json"}),
+    ("Bash", {"command": f"cp {APPROVAL} /tmp/approval-copy.json"}),
+    ("Bash", {"command": f"python3 x.py > /tmp/out.txt\ncat {APPROVAL}"}),
+    ("Bash", {"command": "sed -i 's/a/b/' notes.md\nsha256sum migration/production/qa_criteria_v4.json"}),
+    ("Bash", {"command": "cp migration/production/qa_criteria_v4.json /tmp/v4.json"}),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", "cut", "dip_to_black", overlay={"kind": "text", "text": "fade"})),
     ("mcp__vidIQ__vidiq_compose", compose("landscape", "fade")),
 ]
