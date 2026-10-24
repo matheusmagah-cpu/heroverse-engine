@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       candidate:
-        description: Free model to qualify
+        description: Free models to qualify, space separated (each is judged on the same renders)
         required: true
-        default: gemini-3.6-flash
+        default: gemini-3.5-flash gemini-3-flash-preview gemini-2.5-flash
       pilots:
         description: Rendered pilots with a designated watched review (space separated)
         required: true
@@ -49,8 +49,10 @@ jobs:
         run: |
           mkdir -p migration/evidence/reviewer-calibration
           mapfile -t pairs < "$RUNNER_TEMP/pairs"
-          python3 -I -B migration/production/reviewer_calibration.py "$CANDIDATE" \
-            "migration/evidence/reviewer-calibration/$CANDIDATE-$(date -u +%Y%m%dT%H%M).json" "${pairs[@]}"
+          for c in $CANDIDATE; do
+            python3 -I -B migration/production/reviewer_calibration.py "$c" \
+              "migration/evidence/reviewer-calibration/$c-$(date -u +%Y%m%dT%H%M).json" "${pairs[@]}" || echo "CALIBRATION_ERROR $c"
+          done
       - name: Commit evidence
         run: |
           git config user.name "github-actions[bot]"
