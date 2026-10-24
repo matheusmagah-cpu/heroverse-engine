@@ -179,6 +179,19 @@ After upload, reconcile the existing video ID and the intended visibility/schedu
 - **Decisions** follow `strategy/DECISIONS.md` (90 % evidence for strategy). Defects and compliance are always fixed.
 - **Return delivery.** Feed mining a specific improvement or opportunity: evidence, affected structure/stage, proposed change and expected measurable result. Evaluate that change in the next cycle. No supported change means keep the current standard; never lower criteria to clear a queue. Market direction stays within the channel's audience and editorial line.
 
+### Daily loop (owner, 2026-10-24: "a inteligência viva precisa começar a trabalhar")
+
+Runs once a day from the hourly clock (first run after 16:00 UTC), at most 20 vidIQ credits, every spend in the ledger.
+
+1. **Measure our videos.** `vidiq_channel_analytics` by video (last 14 d) and by traffic source; `vidiq_get_videos_by_ids`
+   for anything published in the last 48 h (Analytics lags about 48 h).
+2. **Verdict at 48 h and 7 d.** Each video is good, weak/bad or neutral against the series median at the same age;
+   under 48 h it stays inconclusive. Record it in `evidence/learning/<YYYYMMDD>.json` (same schema as 20261024).
+3. **Turn it into one change.** Name the single change the next episodes make (hook, title pattern, length, visual,
+   end card, slot), the stage it touches and how it will be measured. Write it into `production/bible/SERIES.md` or
+   `PROMPT_GUIDE.md` so production uses it; the next day's run checks whether it worked.
+4. **Tell the owner only when there is a verdict or a change.** Two lines: what the numbers show, what changes.
+
 Market research can continue within its budget while existing videos mature; it does not need to wait seven days for every upload. Missing 48-hour/7-day evidence remains pending and is incorporated when available. A report generated without usable evidence is not a completed learning cycle.
 
 ## Approval: automatic qualification (owner, 2026-10-19 23:55 UTC)
