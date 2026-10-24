@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-011",
- "output_sha256": "e50bf41c5b3d43d4614128aeeefd3e6ec576063a58c585f58904001378c8b2de",
+ "output_sha256": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -38,42 +38,42 @@
  },
  "criteria_version": "pilot-qa-criteria-v4",
  "measurements": {
-  "duration_seconds": 978.98,
+  "duration_seconds": 979.02,
   "loudness": {
    "integrated_lufs": -15.6,
    "loudness_range_lu": 2.8,
-   "true_peak_dbtp": -2.8
+   "true_peak_dbtp": -2.7
   },
-  "speech_presence": 0.868,
-  "music_presence": 0.403,
-  "wer_vs_script": 0.0459,
-  "accepted_words_per_minute": 126.1,
+  "speech_presence": 0.867,
+  "music_presence": 0.387,
+  "wer_vs_script": 0.0501,
+  "accepted_words_per_minute": 125.5,
   "caption_lines": 448,
   "holds": 178,
   "first_word_seconds": 0.11,
   "editing": {
-   "picture_changes": 59,
-   "picture_changes_per_minute": 3.62,
-   "median_shot_seconds": 6.4,
-   "longest_shot_seconds": 120.9,
-   "motion_median_top_decile_diff": 2.98
+   "picture_changes": 58,
+   "picture_changes_per_minute": 3.55,
+   "median_shot_seconds": 5.533,
+   "longest_shot_seconds": 106.567,
+   "motion_median_top_decile_diff": 3.075
   },
   "colour": {
-   "mean_brightness": 0.3362,
-   "brightness_std_over_time": 0.0861,
-   "mean_saturation": 0.3979,
-   "saturation_std_over_time": 0.143
+   "mean_brightness": 0.3332,
+   "brightness_std_over_time": 0.0833,
+   "mean_saturation": 0.392,
+   "saturation_std_over_time": 0.1436
   },
   "rhythm": {
-   "audio_onsets": 1552,
-   "audio_onsets_per_minute": 95.12,
+   "audio_onsets": 1568,
+   "audio_onsets_per_minute": 96.1,
    "tempo": {
-    "bpm": 119.17,
-    "confidence": 0.011
+    "bpm": 94.09,
+    "confidence": 0.013
    }
   }
  },
- "transcript_head": "The world says push harder when you're tired, but God says wait on me, pray with me. will pray through Isaiah 40 for your tired body, your first hour, the answer you are waiting for, and the strength to take one real step. You may have opened your eyes already wishing for more rest. Let your shoulders settle wherever you are. You can keep your eyes open and your breathing easy. You can join each p",
+ "transcript_head": "The world says harder when you're tired, but God says wait on me, pray with me. We will pray through Isaiah 40 for your tired body, your first hour, the answer you are waiting for, and the strength to take one real step. You may have opened your eyes already wishing for more rest. Let your shoulders settle wherever you are. can keep your eyes open and your breathing easy. can join each prayer in y",
  "criteria_sha256": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
