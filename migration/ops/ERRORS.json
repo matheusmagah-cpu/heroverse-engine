@@ -225,26 +225,6 @@
    }
   },
   {
-   "id": "E31",
-   "date": "2026-10-20",
-   "error": "Shorts tests read live pilot-006 production inputs; a re-render removed selection.json and broke main CI",
-   "fix": "Freeze byte-identical historical fixtures from 4ca2b3b and point the test at them without changing assertions",
-   "antidote": {
-    "file": "migration/production/test_no_live_pilot_data.py",
-    "contains": "def test_no_live_pilot_data"
-   }
-  },
-  {
-   "id": "E33",
-   "date": "2026-10-20",
-   "error": "market panel aborted on one dead playlist (404)",
-   "fix": "Record isolated uploads 404 per channel and preserve budget accounting; retain evidence and exit 1 when more than 25% of the panel is unavailable",
-   "antidote": {
-    "file": "migration/mining/test_market_panel.py",
-    "contains": "def test_one_404_channel_is_recorded_and_other_channels_continue"
-   }
-  },
-  {
    "id": "E30",
    "date": "2026-10-20",
    "error": "script_check.py accepted repeated background sets: 006 at 0.529 vs 012; 008 and 010 identical to 012; 009 identical to 011. Failure surfaced only at approval after a full render and reviewer call (run 39385175032).",
@@ -255,6 +235,16 @@
    }
   },
   {
+   "id": "E31",
+   "date": "2026-10-20",
+   "error": "Shorts tests read live pilot-006 production inputs; a re-render removed selection.json and broke main CI",
+   "fix": "Freeze byte-identical historical fixtures from 4ca2b3b and point the test at them without changing assertions",
+   "antidote": {
+    "file": "migration/production/test_no_live_pilot_data.py",
+    "contains": "def test_no_live_pilot_data"
+   }
+  },
+  {
    "id": "E32",
    "date": "2026-10-20",
    "error": "Shorts passed technical QA but failed watched review for dependent openings, weak visual rhythm and unresolved endings; provider failure diagnostics were discarded.",
@@ -262,6 +252,16 @@
    "antidote": {
     "file": "migration/production/shorts_select.py",
     "contains": "def validate_candidate(sentences, refs, moment):"
+   }
+  },
+  {
+   "id": "E33",
+   "date": "2026-10-20",
+   "error": "market panel aborted on one dead playlist (404)",
+   "fix": "Record isolated uploads 404 per channel and preserve budget accounting; retain evidence and exit 1 when more than 25% of the panel is unavailable",
+   "antidote": {
+    "file": "migration/mining/test_market_panel.py",
+    "contains": "def test_one_404_channel_is_recorded_and_other_channels_continue"
    }
   },
   {
@@ -562,6 +562,16 @@
    "antidote": {
     "file": "migration/production/test_preview_gate.py",
     "contains": "def test_render_queue_runs_isolated_like_the_heartbeat_and_runner"
+   }
+  },
+  {
+   "id": "E74",
+   "date": "2026-10-24",
+   "error": "pilot-011's preview never converged: each reassignment after rejecting modern clips (3, then 4, then 7) brought clips nobody had seen into the next preview, some of them modern again (ski huts, a village with a church, wind turbines).",
+   "fix": "Every clip kept on a preview review is marked claude_seen in the library; assign.choose uses only seen clips once the mood has FOOTAGE_MIN of them, so the next preview of a reassigned script shows no unseen clip.",
+   "antidote": {
+    "file": "migration/production/footage/test_assign.py",
+    "contains": "def test_seen_clips_first_once_there_are_enough"
    }
   }
  ]

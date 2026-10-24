@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "3de7bc7948cabd8eeaea2e7774fbdac1a2fe7b587af4bd785b1b9dbd2f1d0de0",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-011 preview review 3: a rusted metal pipe in the river",
+ "vetting_reasons": [
+  "a rusted metal pipe in the river"
+ ],
  "vetting_luma": [
   124.1,
   124.8,

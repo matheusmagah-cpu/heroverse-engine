@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "0cc0cac397256d18ca5d30107dfbea53bd02b57303890b2e8eb97b289ef99bf3",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-011 preview review 3: farm houses across the hills",
+ "vetting_reasons": [
+  "farm houses across the hills"
+ ],
  "vetting_luma": [
   95.9,
   95.5,

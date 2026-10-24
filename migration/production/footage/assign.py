@@ -39,7 +39,22 @@ def usable(rec):
             and rec.get("frame") == [2560, 1440])   # v4 frame: >= 1440p (1080p clips of the first library are not)
 
 
+def seen(rec):
+    """E74: a clip Claude has looked at on a preview footage sheet (all three frames) and kept."""
+    return bool(rec.get("claude_seen"))
+
+
 def choose(script, library, n=None, turn=0):
+    """Clips Claude has already seen first: once the seen clips of the mood reach FOOTAGE_MIN, only they are used, so a
+    reassignment never brings unseen clips into a preview again (E74: every reassignment of 011 added new modern clips)."""
+    seen_lib = [r for r in library if seen(r)]
+    try:
+        return _choose(script, seen_lib, n, turn)
+    except SystemExit:
+        return _choose(script, library, n, turn)
+
+
+def _choose(script, library, n=None, turn=0):
     """turn rotates the theme order and each theme's clips, so pilots of the same mood open on different
     footage and never share a shot order."""
     night = mood(script) == "night"

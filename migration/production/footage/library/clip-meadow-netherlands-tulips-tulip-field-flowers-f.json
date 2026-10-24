@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "82812d8a336f6271ef75243b0f1d7cb17c3ae1969a17980b64073456936861ea",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-011 preview review 3: wind turbines, roads and greenhouses",
+ "vetting_reasons": [
+  "wind turbines, roads and greenhouses"
+ ],
  "vetting_luma": [
   141.5,
   144.3,

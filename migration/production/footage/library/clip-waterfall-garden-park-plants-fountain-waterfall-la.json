@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "7b5c794ccb7d9d1c7412d8861f7d7040b1307476b5b805f86d4998b3af9cf94c",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-011 preview review 3: a park garden with a railed bridge",
+ "vetting_reasons": [
+  "a park garden with a railed bridge"
+ ],
  "vetting_luma": [
   94.1,
   93.6,

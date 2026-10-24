@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "be2b4ffce7268abe4cc5bdd04d5f5b0371394ddd173834ad72006e9eea61f99c",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-011 preview review 3: machine-made round hay bales",
+ "vetting_reasons": [
+  "machine-made round hay bales"
+ ],
  "vetting_luma": [
   118.1,
   118.2,
