@@ -6,8 +6,8 @@ on:
         description: Episode id under migration/production/bible/episodes (e.g. genesis-01-short)
         required: true
       source_url:
-        description: Download URL of the composed file (its sha256 must equal the episode record)
-        required: true
+        description: Download URL of the composed file (its sha256 must equal the episode record); empty = from the release
+        required: false
       publish_at:
         description: RFC3339 UTC go-public time; empty = public now
         required: false

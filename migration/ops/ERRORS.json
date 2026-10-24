@@ -523,6 +523,16 @@
     "file": "migration/production/footage/test_assign.py",
     "contains": "def test_night_takes_only_dark_clips"
    }
+  },
+  {
+   "id": "E70",
+   "date": "2026-10-24",
+   "error": "The Genesis 2 Short was published scheduled (private until 23:30 UTC) and its first comment came back PENDING (HTTP 403, like E61 for pilots); the E61 retry only looked at pilot-NNN ledger keys, so Bible-series episodes would have kept the comment pending forever.",
+   "fix": "render_queue.pending_episode_comments lists bible:<id> entries whose slot (or upload) passed 10 min to 7 days ago with a PENDING comment; reconcile.yml re-runs publish-episode.yml for them (idempotent: only the missing comment step runs; the file comes from the private release).",
+   "antidote": {
+    "file": "migration/production/test_render_queue.py",
+    "contains": "def test_pending_episode_comments_are_retried_once_public"
+   }
   }
  ]
 }
