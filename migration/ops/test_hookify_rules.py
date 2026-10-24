@@ -114,5 +114,24 @@ class HookifyRules(unittest.TestCase):
             self.assertFalse(blocked(tool, inp), (tool, inp))
 
 
+class PluginSetup(unittest.TestCase):
+    def test_project_files_named_in_claude_md_exist(self):
+        md = (ROOT / "CLAUDE.md").read_text()
+        for f, named in ((".claude/claude-security-guidance.md", ".claude/claude-security-guidance.md"),
+                         ("docs/audits/categories.md", "docs/audits/"), ("docs/audits/sweep-registry.md", "docs/audits/"),
+                         ("migration/production/bible/brand-profile.md", "migration/production/bible/brand-profile.md"),
+                         ("migration/ops/link_session_guards.sh", "migration/ops/link_session_guards.sh")):
+            self.assertTrue((ROOT / f).exists(), f)
+            self.assertIn(named, md)
+
+    def test_guards_link_into_a_parent_session_root(self):
+        import subprocess, tempfile
+        with tempfile.TemporaryDirectory() as root:
+            subprocess.run(["bash", str(ROOT / "migration/ops/link_session_guards.sh"), root], check=True, capture_output=True)
+            linked = {p.name for p in (Path(root) / ".claude").iterdir()}
+            self.assertEqual({p.name for p in RULES} - linked, set())
+            self.assertIn("settings.json", linked)
+
+
 if __name__ == "__main__":
     unittest.main()

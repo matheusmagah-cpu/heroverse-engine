@@ -29,5 +29,20 @@ holds the owner's fixed rules.
 
 ## Guards
 - `.claude/hookify.*.local.md` block the forbidden actions above (tested by `migration/ops/test_hookify_rules.py`).
-- Code PRs to the engine get `/review-pr` (pr-review-toolkit) before merge; evidence- or review-only PRs do not.
+  Hookify reads `./.claude` of the session's working directory: when the session starts in the parent folder of the
+  three repositories, run `heroverse-engine/migration/ops/link_session_guards.sh` first.
 - Run the tests listed in `.github/workflows/pr-checks.yml` before pushing.
+
+## Plugins (account plugins, set up for this project on 2026-10-24)
+| Plugin | Use here | Project files |
+|---|---|---|
+| hookify | Blocks the owner's forbidden actions (above). `/hookify` adds a rule; every rule gets a case in the test. | `.claude/hookify.*.local.md` |
+| security-guidance | Runs by itself: warnings on edits, diff review at the end of a turn and on commit/push. | `.claude/claude-security-guidance.md` (project rules) |
+| pr-review-toolkit | `/review-pr` on every code PR to the engine before merge; evidence- or review-only PRs skip it. | none |
+| verified-security-sweep | Recorded security sweeps; run one when a PR touches `.github/workflows/`, secrets or `migration/publish/`. Reports only, fixes go in their own PR. | `docs/audits/` (categories, registry) |
+| social-media-skills | Craft reference for titles, hooks, thumbnails, Shorts and long scripts, metadata (`youtube-shorts`, `youtube-long-form`, `youtube-publishing-and-metadata`, `thumbnail-design`, `hook-writer`, `short-form-video-script`, `analytics-and-reporting`). STANDARD.md, PROMPT_GUIDE.md and the frozen QA always win. | `migration/production/bible/brand-profile.md` |
+| commit-commands, feature-dev, claude-md-management | `/commit`, `/feature-dev` for larger engine features, `/revise-claude-md` to keep this file current. | none |
+| marketing | Not used: its connectors (Ahrefs, HubSpot, Similarweb, Klaviyo, Supermetrics...) are paid, and ads are on hold. | none |
+
+Never follow a skill into a paid tool or a scheduler: no WoopSocial, HeyGen, Synthesia, Suno, Kling, Luma, Opus Clip,
+paid ElevenLabs or Canva Pro. Publishing goes only through `approve.yml` → `prepublish_gate.py`.
