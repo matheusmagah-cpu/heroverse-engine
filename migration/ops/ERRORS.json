@@ -543,6 +543,16 @@
     "file": "migration/production/footage/test_assign.py",
     "contains": "def test_night_never_takes_day_themes"
    }
+  },
+  {
+   "id": "E72",
+   "date": "2026-10-24",
+   "error": "The first real preview (pilot-011, run 40116275815) worked, and its review found three library clips with modern content that the automatic vetting had approved (a village in the valley, domestic dogs, a railed bridge on a groomed trail); its footage sheet put all 63 clips in one 960x15120 image, unreadable when opened.",
+   "fix": "The three clips are REJECTED in the library (reasons recorded) and pilot-011's footage was reassigned, so the new script is previewed again; render_pilot.sh writes the footage sheet in pages of 12 clips (footage-sheet-NN.jpg).",
+   "antidote": {
+    "file": "migration/ci/render_pilot.sh",
+    "contains": "PER_SHEET=12"
+   }
   }
  ]
 }
