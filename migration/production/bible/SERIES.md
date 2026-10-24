@@ -38,6 +38,6 @@ video only at the hook and the story's peak, finishing with a short reflection a
 (continues through Genesis 50, then Exodus.)
 
 ## Each episode before compose (PROMPT_GUIDE.md "Built for 9.5")
-script from the KJV + one original line of reflection + one-line prayer -> voice -> word timings -> every clip
+script from the KJV + one original line of reflection + one-line prayer -> `kjv_check.py` -> voice -> word timings -> every clip
 previewed against the words over it -> AI prompt by the five-part guide -> compose -> frame-sheet review >= 9.5 ->
 episode record -> publish-episode.yml.

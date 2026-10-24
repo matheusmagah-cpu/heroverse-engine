@@ -10,6 +10,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import script_check as sc  # noqa: E402
+import kjv_check  # noqa: E402  (script_check put production/bible on the path)
 
 HERE = Path(__file__).resolve().parent
 
@@ -246,6 +247,51 @@ class Check(unittest.TestCase):
             sch["shorts_slots"] = json.loads((HERE / "pilot-003" / "schedule.json").read_text())["shorts_slots"][:1]
             (d / "schedule.json").write_text(json.dumps(sch))
         self.assertTrue(any(p.startswith("SHORTS_SLOT_TAKEN") for p in self.run_check(same)))
+
+
+class KjvQuotation(unittest.TestCase):
+    """Narrated Scripture is the KJV word for word; our own lead-ins and reflection are left alone."""
+    PASS = [("Psalm 23:1 (KJV)", "The LORD is my shepherd; I shall not want."),
+            ("Psalm 23:1 (KJV)", "The LORD is my shepherd; I shall not"),
+            ("Psalm 5:3 (KJV)", "David prayed like this. My voice shalt thou hear in the morning, O LORD."),
+            ("Matthew 11:28 (KJV)", "Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest."),
+            ("Genesis 1:1-3 (KJV, public domain)", "In the beginning God created the heaven and the earth. ... "
+             "And God said, Let there be light: and there was light."),
+            ("Psalm 23 (KJV)", "He maketh me to lie down in green pastures."),
+            ("John 3:16-4:1 (KJV)", "For God so loved the world, that he gave his only begotten Son.")]
+    FAIL = [("Psalm 23:1 (KJV)", "The Lord is my shepherd, I will not want."),          # changed words
+            ("Psalm 23:1 (KJV)", "The LORD is shepherd; I shall not want."),             # dropped word
+            ("Psalm 23:1 (KJV)", "A LORD is my shepherd; I shall not want."),            # changed first word
+            ("Matthew 11:28 (KJV)", "Come unto me, all ye that labour and are heavy laden, and I will give you peace."),
+            ("Matthew 11:28 (KJV)", "Come unto me, all ye that labor and are heavy laden, and I will give you rest."),
+            ("Genesis 1:1-2 (KJV)", "In the beginning God created the heaven and the earth. "
+             "God created the earth and the heaven in the beginning."),                  # words reordered
+            ("Psalm 23:1 (KJV)", "God cares for you today."),                             # no quotation at all
+            ("Psalm 151:1 (KJV)", "The LORD is my shepherd."),                            # not in the KJV
+            ("Psalm twenty-three (KJV)", "The LORD is my shepherd.")]
+
+    def test_quotations(self):
+        for ref, text in self.PASS:
+            self.assertIsNone(kjv_check.problem(ref, text), (ref, text))
+        for ref, text in self.FAIL:
+            self.assertIsNotNone(kjv_check.problem(ref, text), (ref, text))
+
+    def test_every_pilot_script_quotes_the_kjv(self):
+        for script in sorted(HERE.glob("pilot-*/script.json")):
+            self.assertEqual(kjv_check.script_problems(json.loads(script.read_text())), [], script)
+
+    def test_episode_scripture_items_are_checked(self):
+        ep = {"scripture": [{"reference": "Genesis 4:9 (KJV)", "text": "Am I my brother's keeper?"}]}
+        self.assertEqual(kjv_check.script_problems(ep), [])
+        ep["scripture"][0]["text"] = "Am I my brother's guardian?"
+        self.assertTrue(kjv_check.script_problems(ep)[0].startswith("KJV_TEXT_MISMATCH"))
+
+    def test_a_misquoted_pilot_fails_acceptance(self):
+        def misquote(s, d):
+            seg = next(x for x in s["segments"] if x.get("reference") == "Psalm 91:1-2 (KJV)")
+            self.assertIn("shadow", seg["text"])
+            seg["text"] = seg["text"].replace("shadow", "shade")
+        self.assertTrue(any(p.startswith("KJV_TEXT_MISMATCH") for p in Check.run_check(self, misquote)))
 
 
 if __name__ == "__main__":

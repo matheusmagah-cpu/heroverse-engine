@@ -67,3 +67,6 @@ order, before any paid compose:
    where the black is meant (into the prayer, the close).
 7. The composed file passes `clip_check.py --composed FILE <intended dip seconds>` (no black anywhere else) before the
    review; its result goes into the episode record (`review.black_check`).
+8. Before the voiceover, every Scripture line of the narration goes into the episode record as
+   `"scripture": [{"reference": "Genesis 4:9 (KJV)", "text": "..."}]` and passes `kjv_check.py EPISODE.json`: the
+   KJV word for word (`kjv/kjv.tsv.gz`, 1769 text). A misquote is paid for in voice and compose credits.
