@@ -49,9 +49,9 @@ class Panel(unittest.TestCase):
         self.assertEqual(rows["UCyoung"]["uploads"][0]["duration_seconds"], 605)
         self.assertEqual(rows["UCold"]["uploads_status"], "FETCHED")  # short history, old account
         self.assertIsNone(rows["UCold"]["subscribers"])
-        # half of the 38 queries by date (19) + 12 cross-niche + 6 by views
-        self.assertEqual(record["data_api_units"], 37 * 100 + 1 + 2 + 2)
-        self.assertEqual(rows["UCyoung"]["niche"], "christian")
+        # Bible first: 8 by views + 4 by date; then half of the 38 Christian by date (19) + 12 cross-niche + 6 by views
+        self.assertEqual(record["data_api_units"], 49 * 100 + 1 + 2 + 2)
+        self.assertEqual(rows["UCyoung"]["niche"], "bible")  # found by a Bible query: the channel's own niche
 
     def test_budget_stops_discovery_without_overspending(self):
         record = mp.build(Fake(450), NOW)

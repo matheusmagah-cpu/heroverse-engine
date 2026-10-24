@@ -5,7 +5,8 @@ daily panel (market_panel.py). Run once a day after the panel.
 1. Fast channels today: activity age <= 45 days and >= 1,000 subscribers (or the
    top subscriber pace), per niche (christian / cross), with their profile.
 2. Winning videos: uploads of the last 14 days ranked by views per day since
-   publication, Christian niche, with title features, duration and publish hour.
+   publication, Christian niche, with title features, duration and publish hour; and the Bible-story niche (the
+   channel's own since 2026-10-24), Shorts and longs apart, under "bible".
 3. Directives: duration band, publish hour, title features and topic terms that
    separate the top quartile from the rest (lift, with counts), derived only
    from today's data and written with their evidence.
@@ -52,7 +53,7 @@ def lift(top, rest, key):
 def main(raw_path, out):
     panel = json.loads(Path(raw_path).read_text())
     now = parse(panel["captured_at"])
-    fast, videos = [], []
+    fast, videos, bible = [], [], []
     for c in panel["channels"]:
         ups = c.get("uploads") or []
         if not ups or c.get("uploads_truncated") or c.get("subscribers") is None:
@@ -66,6 +67,14 @@ def main(raw_path, out):
                    "median_long_minutes": round(statistics.median(u["duration_seconds"] for u in longs) / 60, 1) if longs else None}
         if activity <= 45 and c["subscribers"] >= 1000:
             fast.append(profile)
+        if c.get("niche") == "bible":  # the channel's niche since 2026-10-24: Shorts and longs, kept apart
+            for u in ups:
+                age_days = (now - parse(u["published_at"])).total_seconds() / 86400
+                if 0.5 <= age_days <= 14:
+                    bible.append({"video_id": u["video_id"], "channel_id": c["channel_id"], "channel": c["title"],
+                                  "title": u["title"], "seconds": u["duration_seconds"] or 0, "views": u["views"],
+                                  "views_per_day": round(u["views"] / age_days, 1),
+                                  "publish_hour_utc": parse(u["published_at"]).hour, "features": features(u["title"])})
         if c.get("niche", "christian") != "christian":
             continue
         for u in ups:
@@ -92,12 +101,24 @@ def main(raw_path, out):
         "commentary_videos_in_top_quartile": [{k: v[k] for k in ("video_id", "channel", "title", "minutes", "views_per_day")}
                                               for v in top if v["features"]["commentary_structure"]][:25],
     }
+    bible.sort(key=lambda v: v["views_per_day"], reverse=True)
+    bible_out = {}
+    for fmt, keep in (("shorts", lambda v: v["seconds"] <= 180), ("longs", lambda v: v["seconds"] > 180)):
+        vs = [v for v in bible if keep(v)]
+        bq = max(1, len(vs) // 4)
+        btop, brest = vs[:bq], vs[bq:]
+        bible_out[fmt] = {
+            "videos_considered": len(vs),
+            "seconds_top_quartile_median": round(statistics.median(v["seconds"] for v in btop)) if btop else None,
+            "publish_hour_utc_top_quartile": Counter(v["publish_hour_utc"] for v in btop).most_common(4),
+            "title_feature_lift": {k: lift(btop, brest, k) for k in features("x")} if brest else None,
+            "winners": [{k: v[k] for k in v if k != "features"} for v in vs[:15]]}
     fast.sort(key=lambda r: r["subs_per_day"], reverse=True)
     result = {"version": "daily-intel-v1", "panel_captured_at": panel["captured_at"],
               "fast_channels": {"christian": [f for f in fast if f["niche"] == "christian"][:25],
                                 "cross_niche": [f for f in fast if f["niche"] != "christian"][:25]},
               "winning_videos_christian_14d": [{k: v[k] for k in v if k != "features"} for v in videos[:30]],
-              "videos_considered": len(videos), "directives": directives,
+              "videos_considered": len(videos), "directives": directives, "bible": bible_out,
               "scope": "Public data of today's panel. Associations, not causal effects; applied as hypotheses one variable at a time."}
     Path(out).write_text(json.dumps(result, indent=1, ensure_ascii=False) + "\n")
     print(json.dumps({"fast_christian": len(result["fast_channels"]["christian"]),

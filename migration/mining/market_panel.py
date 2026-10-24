@@ -36,6 +36,12 @@ QUERIES = (
     "should christians", "bible explained", "christian apologetics", "christian commentary",
     "the truth about christianity",
 )
+# The channel's niche since 2026-10-24 (owner): the Bible story by story. Searched FIRST, so the daily budget always
+# covers it: all of them by views (the winners of the last 14 days), half of them by date (the whole field).
+BIBLE_QUERIES = (
+    "bible story", "bible stories for adults", "genesis bible story", "bible story shorts",
+    "old testament stories", "kjv bible story", "story of noah", "story of moses",
+)
 # Other faceless niches, only to find structures that grow very fast (mechanism
 # references, kept apart from Christian demand comparators by the "niche" field).
 CROSS_NICHE_QUERIES = (
@@ -97,7 +103,9 @@ def discover(client, now):
     after_cross = (now - timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
     # half of the queries each day (all of them every 2 days): the 10k unit day must also carry the uploads
     today = QUERIES[now.toordinal() % 2::2]
-    plan = ([("christian", "date", q, after) for q in today]
+    plan = ([("bible", "viewCount", q, after_cross) for q in BIBLE_QUERIES]
+            + [("bible", "date", q, after) for q in BIBLE_QUERIES[now.toordinal() % 2::2]]
+            + [("christian", "date", q, after) for q in today]
             + [("cross", "viewCount", q, after_cross) for q in CROSS_NICHE_QUERIES]
             + [("christian", "viewCount", q, after) for q in today[:VIEWCOUNT_CHRISTIAN // 2]])
     found = {}
@@ -178,7 +186,8 @@ def build(client, now, prior_dir=None):
     for cid, row in info.items():
         row["discovery_queries"] = sorted(found[cid]["queries"])
         row["discovery_orders"] = sorted(found[cid]["orders"])
-        row["niche"] = "christian" if "christian" in found[cid]["niches"] else sorted(found[cid]["niches"])[0]
+        niches = found[cid]["niches"]
+        row["niche"] = "bible" if "bible" in niches else "christian" if "christian" in niches else sorted(niches)[0]
         age = (now - datetime.fromisoformat(row["published_at"].replace("Z", "+00:00"))).days if row["published_at"] else None
         row["age_days"] = age
     # Upload histories: channels created within YOUNG_DAYS first, then any channel
@@ -203,7 +212,7 @@ def build(client, now, prior_dir=None):
         else:
             row["uploads_status"] = "FETCHED"
     return {"version": "market-panel-v3", "captured_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "queries": list(QUERIES), "cross_niche_queries": list(CROSS_NICHE_QUERIES), "discovery_window_days": DISCOVERY_DAYS, "young_days": YOUNG_DAYS,
+            "queries": list(QUERIES), "bible_queries": list(BIBLE_QUERIES), "cross_niche_queries": list(CROSS_NICHE_QUERIES), "discovery_window_days": DISCOVERY_DAYS, "young_days": YOUNG_DAYS,
             "region_code": "US", "relevance_language": "en",
             "channels": sorted(info.values(), key=lambda r: r["channel_id"]),
             "unavailable_channels": sorted(cid for cid, row in info.items()
