@@ -11,6 +11,7 @@ on:
       - migration/ci/**
       - .github/workflows/pilot-render-stills.yml
       - .github/workflows/render-smoke.yml
+      - .github/workflows/pilot-preview.yml
   workflow_dispatch:
 permissions:
   contents: read

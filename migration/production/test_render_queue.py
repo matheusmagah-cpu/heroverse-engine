@@ -17,7 +17,7 @@ rq.RENDER_HOLD = Path(tempfile.gettempdir()) / "no-such-render-hold-file"
 NOW = datetime(2026, 10, 18, 1, 0, tzinfo=timezone.utc)
 
 
-def pilot(root, name, publish_at, images_done=True, rendered=False):
+def pilot(root, name, publish_at, images_done=True, rendered=False, previewed=True):
     d = Path(root) / name
     (d / "images").mkdir(parents=True)
     script = {"backgrounds": ["bg-a", "bg-b"], "figure": "figure-a", "overlay": {"title_image": "bg-a"}}
@@ -26,6 +26,10 @@ def pilot(root, name, publish_at, images_done=True, rendered=False):
     (d / "images.json").write_text(json.dumps({"images": [{"id": "bg-b"}]}))
     for i in (("figure-a", "bg-a", "bg-b") if images_done else ("figure-a", "bg-a")):
         (d / "images" / f"{i}.json").write_text("{}")
+    if previewed:  # the preview of this script reached the floor (preview_gate.py)
+        (d / "inspection").mkdir(exist_ok=True)
+        sha0 = hashlib.sha256((d / "script.json").read_bytes()).hexdigest()
+        (d / "inspection" / "preview_review.json").write_text(json.dumps({"script_sha256": sha0, "overall": 9.5}))
     if rendered:
         (d / "out").mkdir()
         sha = hashlib.sha256((d / "script.json").read_bytes()).hexdigest()
@@ -240,7 +244,7 @@ class Queue(unittest.TestCase):
                 if name == "pilot-006":
                     (d / "shorts" / "shorts.json").write_text(json.dumps({"shorts": [{"review": {"status": "NOT_REVIEWED_ProviderFailure"}}]}))
                 if approved:
-                    (d / "inspection").mkdir()
+                    (d / "inspection").mkdir(exist_ok=True)
                     (d / "inspection" / "APPROVAL.json").write_text(json.dumps({"approved": True, "output_sha256": "a"*64}))
             buf = io.StringIO()
             real = rq.datetime
@@ -316,7 +320,7 @@ class Queue(unittest.TestCase):
             d = Path(t) / "pilot-005"
             (d / "out" / "qa.json").write_text(json.dumps({"status": "PASS", "output_sha256": "a"*64,
                                                            "criteria_version": "pilot-qa-criteria-v2"}))
-            (d / "inspection").mkdir()
+            (d / "inspection").mkdir(exist_ok=True)
             (d / "inspection" / "APPROVAL.json").write_text(json.dumps({"approved": True, "output_sha256": "a"*64}))
             buf = io.StringIO()
             real = rq.datetime

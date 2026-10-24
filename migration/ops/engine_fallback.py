@@ -26,7 +26,7 @@ WINDOW = timedelta(hours=24)
 
 def candidate(production, ledger, now):
     row = next((r for r in render_queue.due(production, ledger, now, 48)
-                if not r['missing_images'] and not r['rendered']), None)
+                if not r['missing_images'] and not r['rendered'] and r['preview_ok']), None)
     return row['pilot'] if row else None
 
 

@@ -26,6 +26,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "publish"))
 from shorts_prerequisite import ready as shorts_ready
+import preview_gate  # noqa: E402
 
 
 def when(s):
@@ -82,7 +83,8 @@ def due(production, ledger, now, hours):
             continue  # already on YouTube
         script_sha = hashlib.sha256((d / "script.json").read_bytes()).hexdigest()
         out.append({"pilot": d.name, "publish_at": t, "missing_images": needed_images(d, json.loads((d / "script.json").read_text())),
-                    "rendered": current_render(m, object_or_empty(d / "out" / "qa.json"), script_sha)})
+                    "rendered": current_render(m, object_or_empty(d / "out" / "qa.json"), script_sha),
+                    "preview_ok": preview_gate.approved(d)})
     return sorted(out, key=lambda x: x["publish_at"])
 
 
@@ -195,6 +197,18 @@ def main(production, ledger_path, mode, hours="48"):
         for r in rows:
             if r["missing_images"]:
                 print(r["pilot"], ",".join(r["missing_images"]))
+    elif mode == "preview":
+        # a script with no current render and no preview of itself gets the ~15 min preview first (one at a time)
+        nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"] and not r["preview_ok"]
+                    and not preview_gate.previewed(Path(production) / r["pilot"])), None)
+        if nxt:
+            print(nxt["pilot"])
+    elif mode == "preview-review":
+        # Claude reviews every preview of a current script that has no review for that script yet
+        for r in rows:
+            d = Path(production) / r["pilot"]
+            if not r["rendered"] and preview_gate.previewed(d) and not preview_gate.review(d):
+                print(r["pilot"], preview_gate.script_sha(d))
     elif mode == "review":
         # the designated reviewer (Claude) reviews every due render that passed QA and has no review for its hash
         for r in rows:
@@ -252,7 +266,8 @@ def main(production, ledger_path, mode, hours="48"):
     elif RENDER_HOLD.exists():
         print("RENDER_HOLD", file=sys.stderr)
     else:
-        nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"]), None)
+        # owner, 2026-10-24: only a script whose preview reached 9.5 is rendered in full (preview_gate.py)
+        nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"] and r["preview_ok"]), None)
         if nxt:
             print(nxt["pilot"])
 
