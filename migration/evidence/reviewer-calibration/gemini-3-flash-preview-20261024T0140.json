@@ -1,0 +1,91 @@
+{
+ "candidate": "gemini-3-flash-preview",
+ "rows": [
+  {
+   "pilot": "pilot-004",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 8.8,
+   "source": "youtube:Iegu_RD_wbE",
+   "error": "ProviderFailure: HTTP_503_UNAVAILABLE"
+  },
+  {
+   "pilot": "pilot-005",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.1,
+   "source": "youtube:XDwxi4pvllM",
+   "error": "ProviderFailure: HTTP_503_UNAVAILABLE"
+  },
+  {
+   "pilot": "pilot-006",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.3,
+   "source": "youtube:tri-CUwy_m0",
+   "error": "ProviderFailure: HTTP_503_UNAVAILABLE"
+  },
+  {
+   "pilot": "pilot-007",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.0,
+   "source": "youtube:NGfnyTul-K0",
+   "candidate_model": "gemini-3-flash-preview",
+   "candidate_status": "FAIL",
+   "candidate_overall": 6.0,
+   "candidate_items": {
+    "opening_and_promise": 7.0,
+    "picture_quality": 5.0,
+    "figure_and_background_integrity": 5.0,
+    "captions_readable_and_synced": 63.0,
+    "audio_clarity_and_mix": 7.0,
+    "pacing_and_visual_variety": 6.0,
+    "scripture_on_screen": 7.0,
+    "policy_safe": 7.0
+   }
+  },
+  {
+   "pilot": "pilot-008",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "FAIL",
+   "designated_overall": 8.0,
+   "source": "release",
+   "candidate_model": "gemini-3-flash-preview",
+   "candidate_status": "FAIL",
+   "candidate_overall": 6.8,
+   "candidate_items": {
+    "opening_and_promise": 7.0,
+    "picture_quality": 6.5,
+    "figure_and_background_integrity": 6.0,
+    "captions_readable_and_synced": 7.0,
+    "audio_clarity_and_mix": 7.0,
+    "pacing_and_visual_variety": 6.5,
+    "scripture_on_screen": 7.0,
+    "policy_safe": 70
+   }
+  },
+  {
+   "pilot": "pilot-012",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 8.8,
+   "source": "youtube:1bT9pEROuhI",
+   "candidate_model": "gemini-3-flash-preview",
+   "candidate_status": "FAIL",
+   "candidate_overall": 6.6,
+   "candidate_items": {
+    "opening_and_promise": 6.5,
+    "picture_quality": 5.9,
+    "figure_and_background_integrity": 6.3,
+    "captions_readable_and_synced": 7.0,
+    "audio_clarity_and_mix": 72,
+    "pacing_and_visual_variety": 6.2,
+    "scripture_on_screen": 7.0,
+    "policy_safe": 7.0
+   }
+  }
+ ],
+ "qualified": false,
+ "reason": "INCOMPLETE"
+}

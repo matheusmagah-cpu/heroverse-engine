@@ -1,0 +1,115 @@
+{
+ "candidate": "gemini-2.5-flash",
+ "rows": [
+  {
+   "pilot": "pilot-004",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 8.8,
+   "source": "youtube:Iegu_RD_wbE",
+   "error": "ProviderFailure: UNPARSEABLE_MODEL_OUTPUT"
+  },
+  {
+   "pilot": "pilot-005",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.1,
+   "source": "youtube:XDwxi4pvllM",
+   "candidate_model": "gemini-2.5-flash",
+   "candidate_status": "PASS",
+   "candidate_overall": 9,
+   "candidate_items": {
+    "opening_and_promise": 10,
+    "picture_quality": 9,
+    "figure_and_background_integrity": 9,
+    "captions_readable_and_synced": 10,
+    "audio_clarity_and_mix": 10,
+    "pacing_and_visual_variety": 8,
+    "scripture_on_screen": 10,
+    "policy_safe": 10
+   }
+  },
+  {
+   "pilot": "pilot-006",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.3,
+   "source": "youtube:tri-CUwy_m0",
+   "candidate_model": "gemini-2.5-flash",
+   "candidate_status": "PASS",
+   "candidate_overall": 10,
+   "candidate_items": {
+    "opening_and_promise": 10,
+    "picture_quality": 9,
+    "figure_and_background_integrity": 10,
+    "captions_readable_and_synced": 9,
+    "audio_clarity_and_mix": 10,
+    "pacing_and_visual_variety": 10,
+    "scripture_on_screen": 9,
+    "policy_safe": 10
+   }
+  },
+  {
+   "pilot": "pilot-007",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 9.0,
+   "source": "youtube:NGfnyTul-K0",
+   "candidate_model": "gemini-2.5-flash",
+   "candidate_status": "PASS",
+   "candidate_overall": 10,
+   "candidate_items": {
+    "opening_and_promise": 10,
+    "picture_quality": 10,
+    "figure_and_background_integrity": 10,
+    "captions_readable_and_synced": 10,
+    "audio_clarity_and_mix": 10,
+    "pacing_and_visual_variety": 10,
+    "scripture_on_screen": 10,
+    "policy_safe": 10
+   }
+  },
+  {
+   "pilot": "pilot-008",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "FAIL",
+   "designated_overall": 8.0,
+   "source": "release",
+   "candidate_model": "gemini-2.5-flash",
+   "candidate_status": "PASS",
+   "candidate_overall": 9,
+   "candidate_items": {
+    "opening_and_promise": 10,
+    "picture_quality": 8,
+    "figure_and_background_integrity": 8,
+    "captions_readable_and_synced": 10,
+    "audio_clarity_and_mix": 10,
+    "pacing_and_visual_variety": 9,
+    "scripture_on_screen": 10,
+    "policy_safe": 10
+   }
+  },
+  {
+   "pilot": "pilot-012",
+   "designated_model": "gemini-3.8-flash",
+   "designated_status": "PASS",
+   "designated_overall": 8.8,
+   "source": "youtube:1bT9pEROuhI",
+   "candidate_model": "gemini-2.5-flash",
+   "candidate_status": "PASS",
+   "candidate_overall": 10.0,
+   "candidate_items": {
+    "opening_and_promise": 10.0,
+    "picture_quality": 9.0,
+    "figure_and_background_integrity": 9.0,
+    "captions_readable_and_synced": 10.0,
+    "audio_clarity_and_mix": 10.0,
+    "pacing_and_visual_variety": 9.0,
+    "scripture_on_screen": 10.0,
+    "policy_safe": 10.0
+   }
+  }
+ ],
+ "qualified": false,
+ "reason": "INCOMPLETE"
+}
