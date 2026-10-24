@@ -1,0 +1,53 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-04-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 4,
+ "passage": "Genesis 3:8-24 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "c3784ad58400989feca750772c53ac2b97c0e5a86c412c94b3dc625ae913707b",
+ "seconds": 48.0,
+ "frame": [
+  1080,
+  1920
+ ],
+ "slot": "2026-10-25T23:30:00Z",
+ "review": {
+  "overall": 9.5,
+  "process": "every clip previewed by frame before compose; 1 candidate rejected (goats on a hillside with a paved road); AI hook previewed before use; frame sheet of the composed file reviewed; -16.0 LUFS",
+  "issues": [
+   "~8.4 s: the fade into the forest passes through black for about 0.3 s",
+   "AI hook (0-4 s, 29.4-33.4 s): the wall lamps by the gate look slightly modern; the sword hangs above the guardian rather than in his hand (reads as the turning sword of the text)"
+  ]
+ },
+ "title": "Where Art Thou? 🔥 | Driven Out of Eden, Bible Story (KJV) #shorts",
+ "description": "Genesis 3, Adam and Eve driven out of the garden of Eden, read from the King James Version. Part 4 of a journey through the whole Bible, one story at a time.\n\nLord, when I hide from you, call my name again. Type Amen if you prayed this with me 🙏\n\nPart 3: the serpent. Next: Part 5, Cain and Abel.\n\nScripture: King James Version (public domain).\nVisuals: licensed stock footage from Pexels (Pexels License) and AI-generated scenes. Narration: AI voice. Music: original, AI-generated.\n\n#bible #genesis #biblestory",
+ "tags": [
+  "garden of eden",
+  "genesis 3",
+  "adam and eve",
+  "flaming sword",
+  "bible story",
+  "kjv bible",
+  "genesis",
+  "christian shorts"
+ ],
+ "category_id": "29",
+ "first_comment": "Part 4 of the whole Bible, one story at a time. Part 5 tomorrow: Cain and Abel 🐑",
+ "sources": {
+  "voice": "vidIQ voiceover (ElevenLabs 'George'), job_4db7c825",
+  "music": "vidIQ generate_music, job_84bf3f8f (series theme)",
+  "ai_video": [
+   "job_bc3a8402 the flaming sword at the garden gate (veo-3.1-lite, 4 s)"
+  ],
+  "stock": "Pexels videos 16911889, 19032275, 4996363, 8487051, 18897114, 19806006, 12222644, 19752304",
+  "compose": "vidIQ compose job_0b115aae"
+ },
+ "credits": {
+  "ai_video": 60,
+  "voice": 14,
+  "stock_search": 7,
+  "compose": 13,
+  "wasted": 0
+ }
+}
