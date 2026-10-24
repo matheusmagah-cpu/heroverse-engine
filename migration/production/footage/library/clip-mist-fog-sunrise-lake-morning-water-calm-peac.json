@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "8101859e70c4ec8e11cbcb236e9f7771db80ecddcccfb5413bdbca5f0c65c77f",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme; REJECTED 2026-10-24 by Claude's pilot-011 preview review 2: a radio tower / chimney on the horizon",
+ "vetting_reasons": [
+  "a radio tower / chimney on the horizon"
+ ],
  "vetting_luma": [
   153.3,
   153.3,

@@ -2,8 +2,8 @@
  "version": "preview-review-v1",
  "model": "claude-session-reviewer",
  "pilot_id": "pilot-011",
- "script_sha256": "3dbe6f2479bae628be65545c8c59c4249b3151ae92dd6c4ed85bdd8998987841",
- "reviewed_at": "2026-10-24T18:05:00Z",
+ "script_sha256": "f01039583b1b6ca0c687e9799b115a95c5c1b9d3223e945c7da25966c47b5749",
+ "reviewed_at": "2026-10-24T19:20:00Z",
  "opening_and_promise": 9.5,
  "picture_quality": 9.0,
  "figure_and_background_integrity": 9.5,
@@ -11,18 +11,25 @@
  "audio_clarity_and_mix": 9.5,
  "pacing_and_visual_variety": 9.0,
  "scripture_on_screen": 9.5,
- "policy_safe": 9.0,
- "overall": 9.0,
+ "policy_safe": 9.5,
+ "overall": 9.2,
  "issues": [
-  "footage clip 25 (clouds-sun-moving): houses and a village in the valley",
-  "footage clip 32 (pacific ocean sunset): domestic dogs on the rocks at the end",
-  "footage clip 38 (fife creek): wooden bridge with railings and a groomed trail (modern)",
-  "fix: the three clips are REJECTED in the library and the footage is reassigned; the new script is previewed again"
+  "footage clip 37: a sign post on a trail and a mown lawn (managed park)",
+  "footage clip 54: farm houses and white buildings in the valley",
+  "footage clip 59: a radio tower / chimney on the horizon",
+  "footage clip 62: a concrete culvert or weir and a metal pole",
+  "the other 77 clips: natural, no people, text or brands; fix: the four are REJECTED in the library and the footage reassigned"
  ],
  "strongest_moment": "0:00-0:10: 'The world says push harder when you're tired. But God says wait on Me.' over moving clouds, then the sunrise",
  "evidence": [
+  "inspection/preview/footage-sheet-01.jpg",
+  "inspection/preview/footage-sheet-02.jpg",
+  "inspection/preview/footage-sheet-03.jpg",
+  "inspection/preview/footage-sheet-04.jpg",
+  "inspection/preview/footage-sheet-05.jpg",
+  "inspection/preview/footage-sheet-06.jpg",
+  "inspection/preview/footage-sheet-07.jpg",
   "inspection/preview/opening-sheet.jpg",
-  "inspection/preview/footage-sheet.jpg",
   "inspection/preview/thumbnail.jpg",
   "script.json"
  ]

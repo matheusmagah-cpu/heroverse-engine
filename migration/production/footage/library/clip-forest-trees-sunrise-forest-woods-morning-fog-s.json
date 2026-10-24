@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "c98413eb0bba8550565d4832414df6828a870b8af69c0cc2b8d86ecf6a9aad9b",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme; REJECTED 2026-10-24 by Claude's pilot-011 preview review 2: a sign post on a trail and a mown lawn (managed park)",
+ "vetting_reasons": [
+  "a sign post on a trail and a mown lawn (managed park)"
+ ],
  "vetting_luma": [
   40.2,
   40.0,

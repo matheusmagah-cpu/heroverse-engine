@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "04d06cf0a63ac08b14b2c17b79737bc6789a02d83a6bc2d098c1aea3a73992a7",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23: no people, text, logos or watermarks; landscape source; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23: no people, text, logos or watermarks; landscape source; on-theme; REJECTED 2026-10-24 by Claude's pilot-011 preview review 2: a concrete culvert or weir and a metal pole",
+ "vetting_reasons": [
+  "a concrete culvert or weir and a metal pole"
+ ],
  "vetting_luma": [
   137.2,
   136.8,
