@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "1d2cdbaee3077d2570bbff9e4c3ffba95fbf61a93f751bfa1efe7811a722f1ea",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23: no people, text, logos or watermarks; landscape source; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23: no people, text, logos or watermarks; landscape source; on-theme; REJECTED 2026-10-24 by Claude's pilot-011 preview review (all three frames seen): modern trail: wooden bridge with railings and a groomed path",
+ "vetting_reasons": [
+  "modern trail: wooden bridge with railings and a groomed path"
+ ],
  "vetting_luma": [
   125.6,
   125.1,

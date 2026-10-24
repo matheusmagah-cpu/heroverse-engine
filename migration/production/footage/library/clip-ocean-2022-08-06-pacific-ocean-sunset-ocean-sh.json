@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "befb7bc20f2fa91c7f9526c82e404b81205cf93c696b8e0c4e6c669b3cc8d5c2",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23: no people, text, logos or watermarks; landscape source; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39948463303 checked by Claude 2026-10-23: no people, text, logos or watermarks; landscape source; on-theme; REJECTED 2026-10-24 by Claude's pilot-011 preview review (all three frames seen): domestic dogs on the rocks at the end of the clip",
+ "vetting_reasons": [
+  "domestic dogs on the rocks at the end of the clip"
+ ],
  "vetting_luma": [
   112.9,
   105.3,

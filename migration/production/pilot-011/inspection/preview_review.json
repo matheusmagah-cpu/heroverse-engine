@@ -1,0 +1,29 @@
+{
+ "version": "preview-review-v1",
+ "model": "claude-session-reviewer",
+ "pilot_id": "pilot-011",
+ "script_sha256": "3dbe6f2479bae628be65545c8c59c4249b3151ae92dd6c4ed85bdd8998987841",
+ "reviewed_at": "2026-10-24T18:05:00Z",
+ "opening_and_promise": 9.5,
+ "picture_quality": 9.0,
+ "figure_and_background_integrity": 9.5,
+ "captions_readable_and_synced": 9.5,
+ "audio_clarity_and_mix": 9.5,
+ "pacing_and_visual_variety": 9.0,
+ "scripture_on_screen": 9.5,
+ "policy_safe": 9.0,
+ "overall": 9.0,
+ "issues": [
+  "footage clip 25 (clouds-sun-moving): houses and a village in the valley",
+  "footage clip 32 (pacific ocean sunset): domestic dogs on the rocks at the end",
+  "footage clip 38 (fife creek): wooden bridge with railings and a groomed trail (modern)",
+  "fix: the three clips are REJECTED in the library and the footage is reassigned; the new script is previewed again"
+ ],
+ "strongest_moment": "0:00-0:10: 'The world says push harder when you're tired. But God says wait on Me.' over moving clouds, then the sunrise",
+ "evidence": [
+  "inspection/preview/opening-sheet.jpg",
+  "inspection/preview/footage-sheet.jpg",
+  "inspection/preview/thumbnail.jpg",
+  "script.json"
+ ]
+}

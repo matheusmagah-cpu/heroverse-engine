@@ -76,7 +76,7 @@ def main(argv):
         (out / "preview.json").write_text(json.dumps(
             {"version": "preview-v1", "pilot_id": d.name, "script_sha256": script_sha(d), "run": argv[2],
              "footage": script.get("footage") or [],
-             "sheets": ["opening-sheet.jpg", "footage-sheet.jpg", "thumbnail.jpg"]}, indent=1) + "\n")
+             "sheets": sorted(f.name for f in out.glob("*.jpg"))}, indent=1) + "\n")
     return 0
 
 

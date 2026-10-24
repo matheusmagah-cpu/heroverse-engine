@@ -122,19 +122,24 @@ end
 
 if [ "${PREVIEW:-0}" = 1 ]; then
   stage "Preview sheets for Claude's review (nothing is uploaded or published)"
-  P="migration/production/$PILOT/inspection/preview"; mkdir -p "$P" "$T/pf"; rm -f "$P"/*.jpg
+  P="migration/production/$PILOT/inspection/preview"; mkdir -p "$P" "$T/pf"; rm -f "$P"/*.jpg; PER_SHEET=12
   ffmpeg -v error -y -t 60 -i "$T/work/pilot.mp4" -vf "fps=1/2.5,scale=480:270,tile=4x6" -frames:v 1 -q:v 3 "$P/opening-sheet.jpg"
   n=0
   for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1])).get('footage') or []))" "$SCRIPT"); do
     f="$T/in/footage/$id.mp4"; [ -f "$f" ] || continue
     d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f"); n=$((n+1))
+    pg=$(printf %02d $(( (n - 1) / PER_SHEET + 1 ))); mkdir -p "$T/pf/$pg"
     for k in 1 2 3; do
       ffmpeg -v error -y -ss "$(python3 -c "print($d*($k*2-1)/6)")" -i "$f" -frames:v 1 \
         -vf "scale=320:180,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='$(printf %02d $n) $id':x=4:y=4:fontsize=9:fontcolor=yellow:box=1:boxcolor=black@0.6" \
-        "$T/pf/$(printf %03d $n)-$k.jpg"
+        "$T/pf/$pg/$(printf %03d $n)-$k.jpg"
     done
   done
-  [ "$n" -eq 0 ] || ffmpeg -v error -y -pattern_type glob -i "$T/pf/*.jpg" -vf "tile=3x$n" -frames:v 1 -q:v 3 "$P/footage-sheet.jpg"
+  # pages of PER_SHEET clips (E72: one sheet of 63 clips was 960x15120 and unreadable when opened)
+  for dir in "$T"/pf/*/; do
+    rows=$(( $(ls "$dir" | wc -l) / 3 ))
+    ffmpeg -v error -y -pattern_type glob -i "$dir*.jpg" -vf "tile=3x$rows" -frames:v 1 -q:v 3 "$P/footage-sheet-$(basename "$dir").jpg"
+  done
   cp "$T/work/package/thumbnail.jpg" "$P/thumbnail.jpg" || true
   python3 -I -B migration/production/preview_gate.py record "migration/production/$PILOT" "${RUN_LABEL:-run}"
   git config user.name "github-actions[bot]"
