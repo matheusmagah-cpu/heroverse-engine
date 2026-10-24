@@ -423,6 +423,16 @@
     "file": "migration/production/test_reviewer_calibration.py",
     "contains": "def test_published_renders_fall_back_to_youtube"
    }
+  },
+  {
+   "id": "E60",
+   "date": "2026-10-24",
+   "error": "pilot-009's render (run 40025088313) passed QA and the thumbnail ruler but could not be stored: the 16-minute 1440p file was over the 2 GiB release-asset limit (HTTP 422 'size must be less than 2147483648'), so the run failed and the render was lost.",
+   "fix": "migration/ci/release_video.sh stores a render larger than 1.9 GiB as parts and rejoins them, hash-verified, on download; render_pilot.sh, approve.yml, publish.yml and reviewer-calibration.yml use it. The picture is not re-encoded or reduced.",
+   "antidote": {
+    "file": "migration/ops/test_release_video.py",
+    "contains": "def test_large_render_is_split_rejoined_verified_and_deleted"
+   }
   }
  ]
 }

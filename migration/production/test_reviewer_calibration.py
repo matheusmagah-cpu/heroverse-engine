@@ -26,7 +26,7 @@ class Sources(unittest.TestCase):
     def test_published_renders_fall_back_to_youtube(self):
         # E59: published renders leave the private release; calibration stopped at "no assets match"
         wf = (Path(__file__).resolve().parents[2] / ".github/workflows/reviewer-calibration.yml").read_text()
-        self.assertIn("if gh release download", wf)
+        self.assertIn("if bash migration/ci/release_video.sh get", wf)
         self.assertIn("youtube:$vid", wf)
         src = (Path(__file__).resolve().parent / "reviewer_calibration.py").read_text()
         self.assertIn('video.startswith("youtube:")', src)
