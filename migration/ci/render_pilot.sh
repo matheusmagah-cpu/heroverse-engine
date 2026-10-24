@@ -113,8 +113,7 @@ end
 
 stage "Preserve render privately and record evidence"
 sha=$(sha256sum "$T/work/pilot.mp4" | cut -d' ' -f1)
-cp "$T/work/pilot.mp4" "$T/$PILOT-sha256-$sha.mp4"
-gh release upload "$TAG" "$T/$PILOT-sha256-$sha.mp4" --repo "$ENGINE_REPO" --clobber
+REPO="$ENGINE_REPO" bash migration/ci/release_video.sh put "$T/work/pilot.mp4" "$PILOT-sha256-$sha.mp4"  # parts when > 1.9 GiB (E60)
 if [ -f "$T/work/package/thumbnail.jpg" ]; then cp "$T/work/package/thumbnail.jpg" "$T/$PILOT-thumbnail.jpg"; gh release upload "$TAG" "$T/$PILOT-thumbnail.jpg" --repo "$ENGINE_REPO" --clobber; fi
 mkdir -p "migration/production/$PILOT/out" "migration/production/$PILOT/shorts"
 cp "$T/work/manifest.json" "$T/work/timeline.json" "$T/work/captions.ass" "migration/production/$PILOT/out/"

@@ -66,8 +66,7 @@ jobs:
         if: env.SKIP != '1'
         run: |
           sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "migration/production/$PILOT/out/qa.json")
-          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-sha256-$sha.mp4" -O "$RUNNER_TEMP/video.mp4"
-          echo "$sha  $RUNNER_TEMP/video.mp4" | sha256sum -c -
+          bash migration/ci/release_video.sh get "$PILOT-sha256-$sha.mp4" "$sha" "$RUNNER_TEMP/video.mp4"  # E60: parts rejoined
       - name: Same-instrument scorecard and watched review (free Gemini)
         if: env.SKIP != '1'
         env:

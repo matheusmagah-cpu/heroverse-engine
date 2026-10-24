@@ -68,8 +68,7 @@ jobs:
         run: |
           d="migration/production/$PILOT"
           sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/qa.json")
-          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-sha256-$sha.mp4" -O "$RUNNER_TEMP/video.mp4"
-          echo "$sha  $RUNNER_TEMP/video.mp4" | sha256sum -c -
+          bash migration/ci/release_video.sh get "$PILOT-sha256-$sha.mp4" "$sha" "$RUNNER_TEMP/video.mp4"  # E60: parts rejoined
           cp "$d/inspection/thumbnail.jpg" "$RUNNER_TEMP/thumbnail.jpg"
       - name: Publish (resumable upload, thumbnail, captions, playlist, first comment, verify)
         id: upload
@@ -117,7 +116,7 @@ jobs:
           st=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1])).get('upload_status'))" "$r")
           case "$st" in uploaded|processed) ;; *) echo "UPLOAD_NOT_CONFIRMED ($st): file kept"; exit 0;; esac
           sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "migration/production/$PILOT/out/qa.json")
-          gh release delete-asset "$TAG" "$PILOT-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" -y
+          bash migration/ci/release_video.sh del "$PILOT-sha256-$sha.mp4"  # the file and any parts (E60)
       - name: Record ledger and receipt
         if: always()
         run: |

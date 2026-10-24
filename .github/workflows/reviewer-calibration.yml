@@ -34,8 +34,7 @@ jobs:
           : > "$RUNNER_TEMP/pairs"
           for p in $PILOTS; do
             sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "migration/production/$p/out/manifest.json")
-            if gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$p-sha256-$sha.mp4" -O "$RUNNER_TEMP/$p.mp4"; then
-              echo "$sha  $RUNNER_TEMP/$p.mp4" | sha256sum -c -
+            if bash migration/ci/release_video.sh get "$p-sha256-$sha.mp4" "$sha" "$RUNNER_TEMP/$p.mp4"; then
               echo "$p=$RUNNER_TEMP/$p.mp4" >> "$RUNNER_TEMP/pairs"
             else
               # published renders leave the release: judge their public YouTube copy (ledger video_id of this exact render)
