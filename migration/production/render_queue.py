@@ -26,6 +26,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "publish"))
 from shorts_prerequisite import ready as shorts_ready
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # E73: python3 -I does not add the script's own directory
 import preview_gate  # noqa: E402
 
 
