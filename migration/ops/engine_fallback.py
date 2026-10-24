@@ -30,6 +30,29 @@ def candidate(production, ledger, now):
     return row['pilot'] if row else None
 
 
+RUNNER_RUNS = 'https://api.github.com/repos/matheusmagah-cpu/heroverse-runner/actions/workflows/render.yml/runs?per_page=10'
+RUNNER_ALIVE = timedelta(minutes=75)  # the runner's own cron fires at :13 and :43; two missed slots = not alive
+
+
+def runner_alive(runs, now):
+    """E63: the runner renders on its own cron (no token needed); only the engine->runner wake-up needed the token.
+    While the runner is active or ran recently, the engine must not render the same pilot a second time."""
+    for r in runs:
+        if r.get('status') != 'completed':
+            return True
+        if now - datetime.fromisoformat(r['created_at'].replace('Z', '+00:00')) <= RUNNER_ALIVE:
+            return True
+    return False
+
+
+def public_runner_runs():
+    try:
+        with urlopen(Request(RUNNER_RUNS, headers={'Accept': 'application/vnd.github+json'}), timeout=20) as r:
+            return json.load(r).get('workflow_runs', [])
+    except (HTTPError, URLError, TimeoutError, OSError, ValueError):
+        return None  # unknown: the caller does not render on the engine blind
+
+
 def decision(runs, now):
     if any(r.get('status') in ACTIVE for r in runs):
         return 'ENGINE_RENDER_ACTIVE'
@@ -66,12 +89,17 @@ class GitHub:
         self.request('/actions/workflows/' + WORKFLOW + '/dispatches', {'ref': 'main', 'inputs': {'pilot': pilot}})
 
 
-def execute(production, ledger_path, token, now=None, api_factory=GitHub):
+def execute(production, ledger_path, token, now=None, api_factory=GitHub, runner_runs=public_runner_runs):
     now = now or datetime.now(timezone.utc)
     api = api_factory(token)
     pilot = candidate(production, json.loads(Path(ledger_path).read_text()), now)
     if pilot is None:
         return 'QUEUE_EMPTY'
+    runner = runner_runs()
+    if runner is None:
+        return 'RUNNER_STATE_UNKNOWN'
+    if runner_alive(runner, now):
+        return 'RUNNER_ALIVE_RENDERS_IT'
     verdict = decision(api.runs(), now)
     if verdict != 'DISPATCH':
         return verdict
