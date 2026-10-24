@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "f318c5ac63f1a0266547fd441d61830127ac1951a2e72416440e66dbc1ddc596",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme; REJECTED 2026-10-24 by Claude's pilot-011 preview review 2: farm houses and white buildings in the valley",
+ "vetting_reasons": [
+  "farm houses and white buildings in the valley"
+ ],
  "vetting_luma": [
   107.5,
   110.6,
