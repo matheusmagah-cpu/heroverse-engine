@@ -463,6 +463,16 @@
     "file": "migration/ops/test_engine_fallback.py",
     "contains": "def test_never_renders_beside_a_live_runner"
    }
+  },
+  {
+   "id": "E64",
+   "date": "2026-10-24",
+   "error": "pilot-009's render (run 40057606889) failed the gate row hygiene_gratitude_block (2 gratitude words < 3) after a 2.5-hour render: the row depends only on the script but ran only at the gate.",
+   "fix": "three_stage.script_hygiene holds the script-only structure rows (amen CTA, recurring refrain, gratitude block); the gate and script_check both use it, so a script that would fail them never renders. pilot-009 gets two short thanksgiving lines.",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_gate_structure_rows_run_before_the_render"
+   }
   }
  ]
 }

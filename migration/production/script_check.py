@@ -190,6 +190,8 @@ def check(pilot_dir, production=None):
         problems += continuity_problems(segs)
         problems += title_problems(s.get("working_title", ""))
         problems += description_problems(s.get("description_intro", ""))
+        # E64: the gate's script-only structure rows, before the render instead of after it
+        problems += [f"GATE_ROW_{name.upper()} {detail} (E64)" for name, ok, detail in three_stage.script_hygiene(s) if not ok]
     t, first_prayer = 0.0, None
     for x in segs:
         if x.get("id", "").startswith("prayer"):
