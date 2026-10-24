@@ -9,6 +9,9 @@
 set -euo pipefail
 case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) echo "INVALID_PILOT"; exit 1;; esac
 T="${T:-${RUNNER_TEMP:-/tmp}}"; ROOT="$(pwd)"; QA_FAILED=""
+# SMOKE=1 (PR check, E68): a ~1 minute cut of the pilot through the whole path; nothing is uploaded or committed
+SCRIPT="migration/production/$PILOT/script.json"
+if [ "${SMOKE:-0}" = 1 ]; then SCRIPT="$T/smoke-script.json"; python3 -I -B migration/ci/smoke.py script "migration/production/$PILOT/script.json" "$SCRIPT"; fi
 stage() { echo "::group::$1"; date -u +%H:%M:%S; }
 end() { echo "::endgroup::"; }
 # On the public runner (PUBLIC_LOGS=1) command output (titles, script text, hooks) goes to a private log
@@ -38,7 +41,7 @@ end
 
 stage "Verified source, pinned voice model, narration"
 q python3 -I -B migration/production/pilot_render.py prepare "$T/work" HeroVerse_Linux_Source_Ready_20261013_v2.zip
-q "$T/voice/bin/python" -I -B migration/production/pilot_render.py voice "$T/work" "migration/production/$PILOT/script.json"
+q "$T/voice/bin/python" -I -B migration/production/pilot_render.py voice "$T/work" "$SCRIPT"
 end
 
 stage "Owned music and generated images from the private release"
@@ -54,7 +57,7 @@ for meta in migration/production/$PILOT/images/*.json; do
 done
 # v4 (owner, 2026-10-23): licensed real footage from the vetted library, verified by hash like the images
 mkdir -p "$T/in/footage"
-for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1])).get('footage') or []))" "migration/production/$PILOT/script.json"); do
+for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1])).get('footage') or []))" "$SCRIPT"); do
   meta="migration/production/footage/library/$id.json"
   read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
   gh release download "$TAG" --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/footage/$id.mp4" --clobber
@@ -66,12 +69,12 @@ if ls "$T"/in/footage/*.mp4 >/dev/null 2>&1; then
   CRITERIA=migration/production/qa_criteria_v4.json
   export HERO_FRAME=2560x1440   # v4: never below 1440p (owner, 2026-10-23)
 fi
-fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "migration/production/$PILOT/script.json")
+fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "$SCRIPT")
 q "$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"
 end
 
 stage "Assemble"
-q "$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/work" "migration/production/$PILOT/script.json" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/in/footage"
+q "$T/cine/bin/python" -I -B migration/production/still_render.py assemble "$T/work" "$SCRIPT" "$T/in/img" "$T/in/figure.png" "$T/in/original-rest-music.lossless.flac" "$T/in/footage"
 end
 
 df -h "$T" | tail -1
@@ -82,7 +85,7 @@ HANDOFF=1
 ffmpeg -v error -y -i "$T/work/voice.wav" -c:a flac "$T/voice.flac"
 vsha=$(sha256sum "$T/voice.flac" | cut -d' ' -f1); fsha=$(sha256sum "$T/in/figure.png" | cut -d' ' -f1)
 cp "$T/voice.flac" "$T/$PILOT-voice-sha256-$vsha.flac"; cp "$T/in/figure.png" "$T/$PILOT-figure-sha256-$fsha.png"
-gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
+[ "${SMOKE:-0}" = 1 ] || gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
 printf '{"voice_asset": "%s", "voice_sha256": "%s", "figure_asset": "%s", "figure_sha256": "%s", "render": "%s"}\n' \
   "$PILOT-voice-sha256-$vsha.flac" "$vsha" "$PILOT-figure-sha256-$fsha.png" "$fsha" "${RUN_LABEL:-run}" > "$T/shorts-inputs.json"
 end
@@ -95,12 +98,12 @@ stage "QA against frozen criteria"
   echo "78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb  HeroVerse_ASR_base_en_preservado.zip" | sha256sum -c -
   "$T/qa/bin/python" -I -c "import sys; from pathlib import Path; sys.path.insert(0, '$ROOT/migration'); import second_opening_asr as a; a.extract_model(Path('HeroVerse_ASR_base_en_preservado.zip'), Path('whisper'))" )
 q "$T/qa/bin/python" -I -B migration/production/qa_pilot.py "$T/work/pilot.mp4" "$T/work/manifest.json" \
-  "migration/production/$PILOT/script.json" "$CRITERIA" \
+  "$SCRIPT" "$CRITERIA" \
   "$T/models/yamnet.tflite" "$T/models/whisper" "$T/work/qa.json" || QA_FAILED=1
 end
 
 stage "Package (no upload to YouTube) and inspection sheets"
-q python3 -I -B migration/production/package_pilot.py "$T/work" "migration/production/$PILOT/script.json" "$T/work/package" "$T/in/footage"
+q python3 -I -B migration/production/package_pilot.py "$T/work" "$SCRIPT" "$T/work/package" "$T/in/footage"
 # R16 thumbnail ruler (Pillow and NumPy come with the cut-out venv)
 "$T/cut/bin/python" -I -B migration/production/thumb_check.py "$T/work/package/thumbnail.jpg" "$T/work/package/thumbnail_check.json" || QA_FAILED=1
 mkdir -p "migration/production/$PILOT/inspection"
@@ -112,6 +115,13 @@ ffmpeg -v error -y -ss 0 -t 40 -i "$T/work/pilot.mp4" -vf "fps=1/2.5,scale=480:2
 ffmpeg -v error -y -i "$T/work/pilot.mp4" -vf "fps=16/$d,scale=640:360,tile=4x4" -frames:v 1 -q:v 3 "migration/production/$PILOT/inspection/review-sheet.jpg"
 ffmpeg -v error -y -i "$T/in/figure.png" -vf "scale=-1:540,pad=iw+40:ih+40:20:20:color=0x808080" "migration/production/$PILOT/inspection/figure-cutout.jpg"
 end
+
+if [ "${SMOKE:-0}" = 1 ]; then
+  stage "Smoke verdict (only the full-length rules may fail on a short cut)"
+  python3 -I -B migration/ci/smoke.py verdict "$T/work"
+  end
+  exit 0
+fi
 
 stage "Preserve render privately and record evidence"
 sha=$(sha256sum "$T/work/pilot.mp4" | cut -d' ' -f1)
