@@ -1,0 +1,2640 @@
+{
+ "version": "project-map-v1",
+ "workflows": {
+  "approve.yml": {
+   "name": "HeroVerse approval (automatic gates before publication)",
+   "triggers": [
+    "push",
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/release_video.sh",
+    "migration/production/long_review.py",
+    "migration/production/signal_scan.py",
+    "migration/publish/preflight.py",
+    "migration/publish/prepublish_gate.py",
+    "migration/publish/shorts_prerequisite.py",
+    "migration/publish/three_stage.py"
+   ],
+   "dispatches": [
+    "publish.yml",
+    "shorts.yml"
+   ]
+  },
+  "cf-images.yml": {
+   "name": "HeroVerse images on Cloudflare Workers AI (free allocation)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/production/imagegen/cf_images.py",
+    "migration/production/imagegen/upscale.py"
+   ],
+   "dispatches": []
+  },
+  "channel-config.yml": {
+   "name": "HeroVerse channel configuration (diff structures/channel.json against the channel; apply on request)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/publish/channel_config.py"
+   ],
+   "dispatches": []
+  },
+  "channel-privacy.yml": {
+   "name": "HeroVerse channel cleanup (hide Portuguese uploads, reversible)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/channel/channel_privacy.py",
+    "migration/ops/heartbeat.py"
+   ],
+   "dispatches": []
+  },
+  "description-refresh.yml": {
+   "name": "HeroVerse pilot012 opening chapter correction",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/publish/refresh_description.py",
+    "migration/publish/test_package_chapters.py",
+    "migration/publish/test_refresh_description.py"
+   ],
+   "dispatches": []
+  },
+  "first-comment.yml": {
+   "name": "HeroVerse first comment (retry a PENDING channel comment once the video is public)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/publish/first_comment.py"
+   ],
+   "dispatches": []
+  },
+  "footage.yml": {
+   "name": "HeroVerse footage library (licensed real footage, no paid call)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/production/footage/footage.py"
+   ],
+   "dispatches": []
+  },
+  "goal-report.yml": {
+   "name": "HeroVerse daily goal report (YPP progress, video performance, pipeline health)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/mining/goal_report.py",
+    "migration/mining/learning_loop.py",
+    "migration/ops/health.py",
+    "migration/ops/heartbeat.py",
+    "migration/ops/minutes.py",
+    "migration/ops/runway.py"
+   ],
+   "dispatches": []
+  },
+  "heartbeat.yml": {
+   "name": "HeroVerse heartbeat (the engine's scheduler)",
+   "triggers": [
+    "schedule",
+    "workflow_dispatch"
+   ],
+   "cron": [
+    "41 * * * *"
+   ],
+   "calls": [
+    "migration/ops/engine_fallback.py",
+    "migration/ops/heartbeat.py",
+    "migration/ops/runner_dispatch.py",
+    "migration/ops/test_engine_fallback.py",
+    "migration/ops/test_heartbeat.py",
+    "migration/ops/test_runner_dispatch.py",
+    "migration/production/render_queue.py",
+    "migration/publish/pending_shorts.py"
+   ],
+   "dispatches": [
+    "pilot-preview.yml"
+   ]
+  },
+  "images-upres.yml": {
+   "name": "HeroVerse images to 1440p+ (AI super-resolution of existing stills, no paid call)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/production/imagegen/upscale.py"
+   ],
+   "dispatches": []
+  },
+  "market-panel.yml": {
+   "name": "HeroVerse market panel (English Christian niche, read-only Data API)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/mining/daily_intel.py",
+    "migration/mining/market_forecast.py",
+    "migration/mining/market_panel.py",
+    "migration/mining/test_market_panel.py",
+    "migration/mining/ypp_market_model.py",
+    "migration/ops/heartbeat.py"
+   ],
+   "dispatches": []
+  },
+  "nightly-images.yml": {
+   "name": "HeroVerse nightly images (pilots publishing in the next 72 h)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ops/heartbeat.py",
+    "migration/production/render_queue.py"
+   ],
+   "dispatches": [
+    "cf-images.yml"
+   ]
+  },
+  "pilot-preview.yml": {
+   "name": "HeroVerse pilot preview (opening + every footage clip + thumbnail, before the full render)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/render_pilot.sh"
+   ],
+   "dispatches": []
+  },
+  "pilot-render-stills.yml": {
+   "name": "HeroVerse pilot render (figure + backgrounds + captions) and QA",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/render_pilot.sh"
+   ],
+   "dispatches": [
+    "approve.yml"
+   ]
+  },
+  "pr-checks.yml": {
+   "name": "HeroVerse PR checks (unit tests + pilot acceptance)",
+   "triggers": [
+    "pull_request"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/test_smoke.py",
+    "migration/mining/test_accuracy_check.py",
+    "migration/mining/test_daily_intel.py",
+    "migration/mining/test_gemini_public_av.py",
+    "migration/mining/test_goal_report.py",
+    "migration/mining/test_learning_loop.py",
+    "migration/mining/test_live_intel.py",
+    "migration/mining/test_market_evidence.py",
+    "migration/mining/test_market_panel.py",
+    "migration/mining/test_native_metrics.py",
+    "migration/mining/test_native_plan.py",
+    "migration/mining/test_opportunity.py",
+    "migration/mining/test_owned_feedback.py",
+    "migration/mining/test_packaging_mining.py",
+    "migration/mining/test_structure_mining.py",
+    "migration/mining/test_thumb_study.py",
+    "migration/mining/test_video_analysis_card.py",
+    "migration/ops/test_engine_fallback.py",
+    "migration/ops/test_errors_register.py",
+    "migration/ops/test_heartbeat.py",
+    "migration/ops/test_minutes.py",
+    "migration/ops/test_project_map.py",
+    "migration/ops/test_release_video.py",
+    "migration/ops/test_runner_dispatch.py",
+    "migration/ops/test_runway.py",
+    "migration/production/bible/test_clip_check.py",
+    "migration/production/footage/test_assign.py",
+    "migration/production/footage/test_footage.py",
+    "migration/production/imagegen/test_cf_images.py",
+    "migration/production/script_check.py",
+    "migration/production/test_cinematic.py",
+    "migration/production/test_long_review.py",
+    "migration/production/test_no_live_pilot_data.py",
+    "migration/production/test_preview_gate.py",
+    "migration/production/test_render_queue.py",
+    "migration/production/test_reviewer_calibration.py",
+    "migration/production/test_script_check.py",
+    "migration/production/test_shorts_006_material.py",
+    "migration/production/test_shorts_006_motion.py",
+    "migration/production/test_shorts_006_plan.py",
+    "migration/production/test_shorts_edit_plan.py",
+    "migration/production/test_shorts_produce.py",
+    "migration/production/test_shorts_review.py",
+    "migration/production/test_signal_scan.py",
+    "migration/production/test_still_render.py",
+    "migration/production/test_thumb_check.py",
+    "migration/strategy/test_ads_model.py"
+   ],
+   "dispatches": []
+  },
+  "publish-episode.yml": {
+   "name": "HeroVerse publish a Bible-series episode (hash-verified, idempotent)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/publish/publish_episode.py"
+   ],
+   "dispatches": []
+  },
+  "publish-shorts.yml": {
+   "name": "HeroVerse publish Shorts (cut from a published long video, scheduled slots)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ops/heartbeat.py",
+    "migration/publish/pending_shorts.py",
+    "migration/publish/publication_exception.py",
+    "migration/publish/publish_shorts.py",
+    "migration/publish/shorts_prerequisite.py"
+   ],
+   "dispatches": []
+  },
+  "publish.yml": {
+   "name": "HeroVerse publish (validated video to the exact channel)",
+   "triggers": [
+    "push",
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/release_video.sh",
+    "migration/publish/pending_shorts.py",
+    "migration/publish/preflight.py",
+    "migration/publish/publication_binding.py",
+    "migration/publish/publish_shorts.py",
+    "migration/publish/publish_video.py"
+   ],
+   "dispatches": []
+  },
+  "reconcile.yml": {
+   "name": "HeroVerse reconcile (retry approvals that errored, Shorts never made and publications that failed)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ops/heartbeat.py",
+    "migration/production/render_queue.py"
+   ],
+   "dispatches": [
+    "approve.yml",
+    "first-comment.yml",
+    "publish-episode.yml",
+    "publish.yml",
+    "shorts.yml"
+   ]
+  },
+  "render-smoke.yml": {
+   "name": "HeroVerse render smoke (a ~1 minute cut through the whole render path)",
+   "triggers": [
+    "pull_request",
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/render_pilot.sh"
+   ],
+   "dispatches": []
+  },
+  "requests.yml": {
+   "name": "HeroVerse requests (start a workflow by committing a request file)",
+   "triggers": [
+    "push"
+   ],
+   "cron": [],
+   "calls": [],
+   "dispatches": []
+  },
+  "reviewer-calibration.yml": {
+   "name": "HeroVerse reviewer calibration (a candidate reviewer against renders the designated reviewer judged)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ci/release_video.sh",
+    "migration/production/reviewer_calibration.py",
+    "migration/production/test_reviewer_calibration.py"
+   ],
+   "dispatches": []
+  },
+  "reviewer-probe.yml": {
+   "name": "HeroVerse reviewer probe (one tiny text call per free model; diagnosis only)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/ops/reviewer_probe.py"
+   ],
+   "dispatches": []
+  },
+  "shorts-review.yml": {
+   "name": "HeroVerse Shorts watched review (private, engine Gemini key)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_review.py",
+    "migration/publish/shorts_prerequisite.py"
+   ],
+   "dispatches": []
+  },
+  "shorts.yml": {
+   "name": "\"HeroVerse Shorts (private): Gemini selection, own edit per Short, watched review\"",
+   "triggers": [
+    "push",
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/production/imagegen/cutout.py",
+    "migration/production/pilot_render.py",
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_edit_plan.py",
+    "migration/production/shorts_produce.py",
+    "migration/production/shorts_review.py",
+    "migration/production/shorts_select.py",
+    "migration/publish/shorts_prerequisite.py"
+   ],
+   "dispatches": []
+  },
+  "thumb-study.yml": {
+   "name": "HeroVerse thumbnail study (public thumbnails of the algorithm study, read-only)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/mining/test_thumb_study.py",
+    "migration/mining/thumb_study.py"
+   ],
+   "dispatches": []
+  },
+  "voice-sample.yml": {
+   "name": "HeroVerse voice A/B judged (Kokoro vs Chatterbox, objective ruler, no paid call)",
+   "triggers": [
+    "workflow_dispatch"
+   ],
+   "cron": [],
+   "calls": [
+    "migration/production/pilot_render.py",
+    "migration/production/voice/chatterbox_sample.py",
+    "migration/production/voice/voice_judge.py"
+   ],
+   "dispatches": []
+  }
+ },
+ "shell": {
+  "migration/ci/release_video.sh": [],
+  "migration/ci/render_pilot.sh": [
+   "migration/ci/release_video.sh",
+   "migration/ci/smoke.py",
+   "migration/production/imagegen/cutout.py",
+   "migration/production/package_pilot.py",
+   "migration/production/pilot_render.py",
+   "migration/production/preview_gate.py",
+   "migration/production/qa_pilot.py",
+   "migration/production/still_render.py",
+   "migration/production/thumb_check.py"
+  ]
+ },
+ "modules": {
+  "migration/channel/channel_privacy.py": {
+   "purpose": "Hide the Portuguese uploads of HeroVerse (owner instruction 2026-10-17:",
+   "dir": "migration/channel",
+   "local_imports": [],
+   "called_by_workflows": [
+    "channel-privacy.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/ci/smoke.py": {
+   "purpose": "Render smoke test (E68): a ~1 minute cut of a real pilot through the whole render path (voice, footage, assembly,",
+   "dir": "migration/ci",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml"
+   ],
+   "imported_by": [
+    "migration/ci/test_smoke.py"
+   ],
+   "test": "migration/ci/test_smoke.py",
+   "is_test": false
+  },
+  "migration/ci/test_smoke.py": {
+   "purpose": "Offline: the smoke cut keeps a real shape and the verdict only forgives the length rule.",
+   "dir": "migration/ci",
+   "local_imports": [
+    "migration/ci/smoke.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/diagnostics/av-event-meter/av_event_meter.py": {
+   "purpose": "Blind deterministic AV event meter. Python + numpy + local ffmpeg/ffprobe only.",
+   "dir": "migration/diagnostics/av-event-meter",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/diagnostics/av-event-meter/test_av_event_meter.py",
+    "migration/diagnostics/av-profile/av_profile.py"
+   ],
+   "test": "migration/diagnostics/av-event-meter/test_av_event_meter.py",
+   "is_test": false
+  },
+  "migration/diagnostics/av-event-meter/test_av_event_meter.py": {
+   "purpose": "Generalization tests: synthetic media unlike the five controls. Offline only.",
+   "dir": "migration/diagnostics/av-event-meter",
+   "local_imports": [
+    "migration/diagnostics/av-event-meter/av_event_meter.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/diagnostics/av-profile/test_av_profile.py"
+   ],
+   "test": null,
+   "is_test": true
+  },
+  "migration/diagnostics/av-profile/av_profile.py": {
+   "purpose": "Reference AV profile for mining: rhythm, editing, motion, loudness, colour",
+   "dir": "migration/diagnostics/av-profile",
+   "local_imports": [
+    "migration/diagnostics/av-event-meter/av_event_meter.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/diagnostics/av-profile/profile_openings.py",
+    "migration/diagnostics/av-profile/test_av_profile.py",
+    "migration/production/qa_pilot.py"
+   ],
+   "test": "migration/diagnostics/av-profile/test_av_profile.py",
+   "is_test": false
+  },
+  "migration/diagnostics/av-profile/profile_openings.py": {
+   "purpose": "Profile each given media file (event meter + semantic layer + loudness/colour)",
+   "dir": "migration/diagnostics/av-profile",
+   "local_imports": [
+    "migration/diagnostics/av-profile/av_profile.py",
+    "migration/diagnostics/av-semantic/av_semantic.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/diagnostics/av-profile/test_av_profile.py": {
+   "purpose": "Known-truth tests for av_profile: tempo, cut rate, cut-on-onset, loudness, colour.",
+   "dir": "migration/diagnostics/av-profile",
+   "local_imports": [
+    "migration/diagnostics/av-event-meter/test_av_event_meter.py",
+    "migration/diagnostics/av-profile/av_profile.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/diagnostics/av-semantic/av_semantic.py": {
+   "purpose": "Free offline semantic audio layer. No network, provider or paid call.",
+   "dir": "migration/diagnostics/av-semantic",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/diagnostics/av-profile/profile_openings.py",
+    "migration/diagnostics/av-semantic/qualify_semantic.py",
+    "migration/production/qa_pilot.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/diagnostics/av-semantic/qualify_semantic.py": {
+   "purpose": "Qualify av_semantic against criteria.json with ground truth by construction.",
+   "dir": "migration/diagnostics/av-semantic",
+   "local_imports": [
+    "migration/diagnostics/av-semantic/av_semantic.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/qa_pilot.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/diagnostics/rapidapi-mcp/connection_probe.py": {
+   "purpose": "Bounded MCP transport probe. No video downloads or tools/call are implemented.",
+   "dir": "migration/diagnostics/rapidapi-mcp",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/diagnostics/rapidapi-native-av/native_probe.py",
+    "migration/diagnostics/rapidapi-native-av/preflight.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/diagnostics/rapidapi-native-av/native_probe.py": {
+   "purpose": "One fixed cloud media request; never retries a start or approves production.",
+   "dir": "migration/diagnostics/rapidapi-native-av",
+   "local_imports": [
+    "migration/diagnostics/rapidapi-mcp/connection_probe.py",
+    "migration/diagnostics/rapidapi-native-av/preflight.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/diagnostics/rapidapi-native-av/preflight.py": {
+   "purpose": "Read public tool contracts and bounded quota metadata. Never starts a media job.",
+   "dir": "migration/diagnostics/rapidapi-native-av",
+   "local_imports": [
+    "migration/diagnostics/rapidapi-mcp/connection_probe.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/diagnostics/rapidapi-native-av/native_probe.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/diagnostics/rapidapi-native-av/run_audio_reviewer.py": {
+   "purpose": "Bounded blind native-audio inference; a candidate reviewer, not a QA bypass.",
+   "dir": "migration/diagnostics/rapidapi-native-av",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/evidence/vidiq/20261023/algorithm_study/analyze.py": {
+   "purpose": "",
+   "dir": "migration/evidence/vidiq/20261023/algorithm_study",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/evidence/vidiq/20261023/algorithm_study/meta_perm.py": {
+   "purpose": "",
+   "dir": "migration/evidence/vidiq/20261023/algorithm_study",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/evidence/vidiq/20261023/algorithm_study/perm.py": {
+   "purpose": "",
+   "dir": "migration/evidence/vidiq/20261023/algorithm_study",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/mining/accuracy_check.py": {
+   "purpose": "Accuracy of the model-reported structure mining against native audio.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/blueprint_stats.py",
+    "migration/mining/structure_mining.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/native_metrics.py",
+    "migration/mining/test_accuracy_check.py"
+   ],
+   "test": "migration/mining/test_accuracy_check.py",
+   "is_test": false
+  },
+  "migration/mining/blueprint_stats.py": {
+   "purpose": "Measured blueprint from structure records (code, not model opinion).",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/accuracy_check.py",
+    "migration/mining/packaging_mining.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/mining/daily_intel.py": {
+   "purpose": "Living intelligence, market side: today's production directives from the raw",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [
+    "market-panel.yml"
+   ],
+   "imported_by": [
+    "migration/mining/test_daily_intel.py"
+   ],
+   "test": "migration/mining/test_daily_intel.py",
+   "is_test": false
+  },
+  "migration/mining/gemini_public_av.py": {
+   "purpose": "Bounded public-AV producer for the existing manager, not a new scheduler.",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/structure_mining.py",
+    "migration/mining/test_gemini_public_av.py",
+    "migration/ops/reviewer_probe.py"
+   ],
+   "test": "migration/mining/test_gemini_public_av.py",
+   "is_test": false
+  },
+  "migration/mining/goal_report.py": {
+   "purpose": "Daily goal report: where the channel stands against the YouTube Partner",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/learning_loop.py",
+    "migration/mining/market_panel.py",
+    "migration/mining/packaging_mining.py"
+   ],
+   "called_by_workflows": [
+    "goal-report.yml"
+   ],
+   "imported_by": [
+    "migration/mining/test_goal_report.py"
+   ],
+   "test": "migration/mining/test_goal_report.py",
+   "is_test": false
+  },
+  "migration/mining/learning_loop.py": {
+   "purpose": "Proposed offline composition; no network, approval or production mutation.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/owned_feedback.py",
+    "migration/mining/video_analysis_card.py"
+   ],
+   "called_by_workflows": [
+    "goal-report.yml"
+   ],
+   "imported_by": [
+    "migration/mining/goal_report.py",
+    "migration/mining/test_goal_report.py",
+    "migration/mining/test_learning_loop.py"
+   ],
+   "test": "migration/mining/test_learning_loop.py",
+   "is_test": false
+  },
+  "migration/mining/live_intel.py": {
+   "purpose": "Live intelligence for the Bible series (owner, 2026-10-24: \"we cannot get the live intelligence wrong\").",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/test_live_intel.py"
+   ],
+   "test": "migration/mining/test_live_intel.py",
+   "is_test": false
+  },
+  "migration/mining/market_evidence.py": {
+   "purpose": "Market evidence from vidIQ (strategy/VIDIQ.md): a short opinion per pilot, a ledger of every vidIQ call, and the",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/test_market_evidence.py",
+    "migration/publish/prepublish_gate.py"
+   ],
+   "test": "migration/mining/test_market_evidence.py",
+   "is_test": false
+  },
+  "migration/mining/market_forecast.py": {
+   "purpose": "Pre-registered, falsifiable market forecasts (predictability contract).",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/ypp_market_model.py"
+   ],
+   "called_by_workflows": [
+    "market-panel.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/mining/market_panel.py": {
+   "purpose": "Market panel for the English Christian niche (read-only Data API, no media).",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [
+    "market-panel.yml"
+   ],
+   "imported_by": [
+    "migration/mining/goal_report.py",
+    "migration/mining/packaging_mining.py",
+    "migration/mining/structure_mining.py",
+    "migration/mining/test_market_panel.py"
+   ],
+   "test": "migration/mining/test_market_panel.py",
+   "is_test": false
+  },
+  "migration/mining/native_metrics.py": {
+   "purpose": "Native window measurements; descriptive estimates are not instrument qualification.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/accuracy_check.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/test_native_metrics.py"
+   ],
+   "test": "migration/mining/test_native_metrics.py",
+   "is_test": false
+  },
+  "migration/mining/native_plan.py": {
+   "purpose": "Plan native acquisitions without changing the ledger or making provider calls.",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/test_native_plan.py"
+   ],
+   "test": "migration/mining/test_native_plan.py",
+   "is_test": false
+  },
+  "migration/mining/opportunity.py": {
+   "purpose": "Market opportunity report from the preserved official observer snapshots.",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/test_opportunity.py"
+   ],
+   "test": "migration/mining/test_opportunity.py",
+   "is_test": false
+  },
+  "migration/mining/owned_feedback.py": {
+   "purpose": "Offline descriptive owned-video feedback. Never approves or predicts performance.",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/learning_loop.py",
+    "migration/mining/test_learning_loop.py",
+    "migration/mining/test_owned_feedback.py"
+   ],
+   "test": "migration/mining/test_owned_feedback.py",
+   "is_test": false
+  },
+  "migration/mining/packaging_mining.py": {
+   "purpose": "Packaging and channel-setup mining (titles, descriptions, tags, hashtags,",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/blueprint_stats.py",
+    "migration/mining/market_panel.py",
+    "migration/mining/structure_mining.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/goal_report.py",
+    "migration/mining/test_packaging_mining.py"
+   ],
+   "test": "migration/mining/test_packaging_mining.py",
+   "is_test": false
+  },
+  "migration/mining/structure_mining.py": {
+   "purpose": "Full-structure mining of winning videos (the whole video, not an opening).",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/gemini_public_av.py",
+    "migration/mining/market_panel.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/accuracy_check.py",
+    "migration/mining/packaging_mining.py",
+    "migration/mining/test_structure_mining.py",
+    "migration/production/long_review.py",
+    "migration/production/shorts_review.py",
+    "migration/production/shorts_select.py",
+    "migration/production/test_shorts_006_material.py",
+    "migration/production/test_shorts_006_plan.py",
+    "migration/production/test_shorts_review.py",
+    "migration/publish/three_stage.py"
+   ],
+   "test": "migration/mining/test_structure_mining.py",
+   "is_test": false
+  },
+  "migration/mining/test_accuracy_check.py": {
+   "purpose": "Regression tests of the mining-accuracy comparator (2026-10-18 audit defects).",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/accuracy_check.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_daily_intel.py": {
+   "purpose": "Offline: the daily directives cover the Bible-story niche, Shorts and longs apart.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/daily_intel.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_gemini_public_av.py": {
+   "purpose": "",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/gemini_public_av.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_goal_report.py": {
+   "purpose": "Offline checks of the YPP counters estimate: only public long-form hours (365 d) and public Shorts views (90 d).",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/goal_report.py",
+    "migration/mining/learning_loop.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_learning_loop.py": {
+   "purpose": "",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/learning_loop.py",
+    "migration/mining/owned_feedback.py",
+    "migration/mining/video_analysis_card.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_live_intel.py": {
+   "purpose": "Offline: live intelligence decides only on comparable evidence, one change at a time, never on the fixed layer.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/live_intel.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_market_evidence.py": {
+   "purpose": "Offline checks: missing opinion is UNKNOWN, malformed INVALID, old STALE; the daily research budget.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/market_evidence.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_market_panel.py": {
+   "purpose": "",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/market_panel.py"
+   ],
+   "called_by_workflows": [
+    "market-panel.yml",
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_native_metrics.py": {
+   "purpose": "Known-answer arithmetic and boundary tests; not native-instrument qualification.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/native_metrics.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_native_plan.py": {
+   "purpose": "Known-answer native planner tests; no network or provider effects.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/native_plan.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_opportunity.py": {
+   "purpose": "Known-answer tests for interval growth and within-channel cohorts.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/opportunity.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_owned_feedback.py": {
+   "purpose": "",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/owned_feedback.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_packaging_mining.py": {
+   "purpose": "Offline checks of the packaging measurements (no network).",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/packaging_mining.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_structure_mining.py": {
+   "purpose": "",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/structure_mining.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_thumb_study.py": {
+   "purpose": "Offline: thumbnail measures and the within channel-month test behave.",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/thumb_study.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml",
+    "thumb-study.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/test_video_analysis_card.py": {
+   "purpose": "",
+   "dir": "migration/mining",
+   "local_imports": [
+    "migration/mining/video_analysis_card.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/mining/thumb_study.py": {
+   "purpose": "Thumbnail study: what the thumbnails of breakout videos share that the dead ones do not (2026-10-23).",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [
+    "thumb-study.yml"
+   ],
+   "imported_by": [
+    "migration/mining/test_thumb_study.py",
+    "migration/production/thumb_check.py"
+   ],
+   "test": "migration/mining/test_thumb_study.py",
+   "is_test": false
+  },
+  "migration/mining/video_analysis_card.py": {
+   "purpose": "Offline, report-only normalization of preserved audiovisual evidence.",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/mining/learning_loop.py",
+    "migration/mining/test_learning_loop.py",
+    "migration/mining/test_video_analysis_card.py"
+   ],
+   "test": "migration/mining/test_video_analysis_card.py",
+   "is_test": false
+  },
+  "migration/mining/ypp_market_model.py": {
+   "purpose": "Market-only model of time-to-YPP for English Christian channels.",
+   "dir": "migration/mining",
+   "local_imports": [],
+   "called_by_workflows": [
+    "market-panel.yml"
+   ],
+   "imported_by": [
+    "migration/mining/market_forecast.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/ops/engine_fallback.py": {
+   "purpose": "E57: when the runner cannot be woken (HERO_RUNNER_PAT rejected or missing), render on the engine itself.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/production/render_queue.py"
+   ],
+   "called_by_workflows": [
+    "heartbeat.yml"
+   ],
+   "imported_by": [
+    "migration/ops/test_engine_fallback.py"
+   ],
+   "test": "migration/ops/test_engine_fallback.py",
+   "is_test": false
+  },
+  "migration/ops/health.py": {
+   "purpose": "Scheduler health for the daily report: for every task of heartbeat.TASKS, the last run and whether a slot",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/heartbeat.py"
+   ],
+   "called_by_workflows": [
+    "goal-report.yml"
+   ],
+   "imported_by": [
+    "migration/ops/test_heartbeat.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/ops/heartbeat.py": {
+   "purpose": "The engine's only scheduler. GitHub drops scheduled runs under load (2026-10-17/18: every daily cron of this",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [
+    "channel-privacy.yml",
+    "goal-report.yml",
+    "heartbeat.yml",
+    "market-panel.yml",
+    "nightly-images.yml",
+    "publish-shorts.yml",
+    "reconcile.yml"
+   ],
+   "imported_by": [
+    "migration/ops/health.py",
+    "migration/ops/test_heartbeat.py"
+   ],
+   "test": "migration/ops/test_heartbeat.py",
+   "is_test": false
+  },
+  "migration/ops/minutes.py": {
+   "purpose": "GitHub Actions minutes of the private engine, for the daily report: billable minutes per workflow (each run rounded",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [
+    "goal-report.yml"
+   ],
+   "imported_by": [
+    "migration/ops/test_minutes.py"
+   ],
+   "test": "migration/ops/test_minutes.py",
+   "is_test": false
+  },
+  "migration/ops/project_map.py": {
+   "purpose": "Project map (owner, 2026-10-24: \"create the project map; repeat it when it needs updating\").",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/ops/test_project_map.py"
+   ],
+   "test": "migration/ops/test_project_map.py",
+   "is_test": false
+  },
+  "migration/ops/reviewer_probe.py": {
+   "purpose": "E58 root cause: is the designated reviewer down for any request, or only for our video requests?",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/mining/gemini_public_av.py"
+   ],
+   "called_by_workflows": [
+    "reviewer-probe.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/ops/runner_dispatch.py": {
+   "purpose": "Bounded, fail-closed engine -> runner wake-up. No rendering/publication gates changed.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/production/render_queue.py"
+   ],
+   "called_by_workflows": [
+    "heartbeat.yml"
+   ],
+   "imported_by": [
+    "migration/ops/test_runner_dispatch.py"
+   ],
+   "test": "migration/ops/test_runner_dispatch.py",
+   "is_test": false
+  },
+  "migration/ops/runway.py": {
+   "purpose": "Content runway: the engine must never run out of videos. For every publication slot of the next DAYS days",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [
+    "goal-report.yml"
+   ],
+   "imported_by": [
+    "migration/ops/test_runway.py"
+   ],
+   "test": "migration/ops/test_runway.py",
+   "is_test": false
+  },
+  "migration/ops/test_engine_fallback.py": {
+   "purpose": "Offline: E57 engine render fallback when the runner cannot be woken.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/engine_fallback.py",
+    "migration/production/test_render_queue.py"
+   ],
+   "called_by_workflows": [
+    "heartbeat.yml",
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/ops/test_errors_register.py": {
+   "purpose": "The error register is real: every error names an antidote that exists, every active test runs on every PR,",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/ops/test_heartbeat.py": {
+   "purpose": "Offline checks of the scheduler's decisions.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/health.py",
+    "migration/ops/heartbeat.py"
+   ],
+   "called_by_workflows": [
+    "heartbeat.yml",
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/ops/test_minutes.py": {
+   "purpose": "Offline checks of the Actions minutes report.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/minutes.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/ops/test_project_map.py": {
+   "purpose": "Offline: the project map finds what really runs what in this repository.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/project_map.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/ops/test_release_video.py": {
+   "purpose": "Offline: E60 long renders larger than a release asset are stored in parts and rejoined, hash-verified.",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/ops/test_runner_dispatch.py": {
+   "purpose": "Offline tests. No credentials, network, render, or dispatch required.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/runner_dispatch.py",
+    "migration/production/test_render_queue.py"
+   ],
+   "called_by_workflows": [
+    "heartbeat.yml",
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/ops/test_runway.py": {
+   "purpose": "Offline checks of the content runway.",
+   "dir": "migration/ops",
+   "local_imports": [
+    "migration/ops/runway.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/bible/clip_check.py": {
+   "purpose": "Check every clip before a Short is composed (PROMPT_GUIDE \"Built for 9.5\"): a clip that starts or ends on black",
+   "dir": "migration/production/bible",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/bible/test_clip_check.py"
+   ],
+   "test": "migration/production/bible/test_clip_check.py",
+   "is_test": false
+  },
+  "migration/production/bible/test_clip_check.py": {
+   "purpose": "Offline: a clip that opens on black, or is low resolution or low frame rate, is flagged before the compose.",
+   "dir": "migration/production/bible",
+   "local_imports": [
+    "migration/production/bible/clip_check.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/cinematic.py": {
+   "purpose": "Cinematic layer for stills, at zero cost (CPU only, open weights).",
+   "dir": "migration/production",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/shorts_produce.py",
+    "migration/production/still_render.py",
+    "migration/production/test_cinematic.py",
+    "migration/production/test_shorts_produce.py"
+   ],
+   "test": "migration/production/test_cinematic.py",
+   "is_test": false
+  },
+  "migration/production/footage/assign.py": {
+   "purpose": "Choose a pilot's footage from the vetted library (pilot-qa-criteria-v4), so new pilots need no hand picking.",
+   "dir": "migration/production/footage",
+   "local_imports": [
+    "migration/production/script_check.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/footage/test_assign.py"
+   ],
+   "test": "migration/production/footage/test_assign.py",
+   "is_test": false
+  },
+  "migration/production/footage/footage.py": {
+   "purpose": "Licensed real footage for the cinematic picture (owner, 2026-10-23: \"no static images, real cinematic animation\").",
+   "dir": "migration/production/footage",
+   "local_imports": [],
+   "called_by_workflows": [
+    "footage.yml"
+   ],
+   "imported_by": [
+    "migration/production/footage/test_footage.py"
+   ],
+   "test": "migration/production/footage/test_footage.py",
+   "is_test": false
+  },
+  "migration/production/footage/test_assign.py": {
+   "purpose": "Offline: footage is chosen by mood from vetted, licensed clips only, interleaved by theme.",
+   "dir": "migration/production/footage",
+   "local_imports": [
+    "migration/production/footage/assign.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/footage/test_footage.py": {
+   "purpose": "Offline checks of the footage selection: licence, size, length and title filters, and the credit line.",
+   "dir": "migration/production/footage",
+   "local_imports": [
+    "migration/production/footage/footage.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/imagegen/cf_images.py": {
+   "purpose": "Image generation on Cloudflare Workers AI (free daily allocation; the free",
+   "dir": "migration/production/imagegen",
+   "local_imports": [],
+   "called_by_workflows": [
+    "cf-images.yml"
+   ],
+   "imported_by": [
+    "migration/production/imagegen/test_cf_images.py"
+   ],
+   "test": "migration/production/imagegen/test_cf_images.py",
+   "is_test": false
+  },
+  "migration/production/imagegen/cutout.py": {
+   "purpose": "Cut the chosen figure out of its generated image (rembg, ISNet general-use",
+   "dir": "migration/production/imagegen",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml",
+    "shorts.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/imagegen/hydrate_reused.py": {
+   "purpose": "Copy the image records a pilot reuses (images.json \"reused\": {source_pilot: [ids]}) into its own images/ folder,",
+   "dir": "migration/production/imagegen",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/imagegen/test_cf_images.py": {
+   "purpose": "Offline: E62 images made before the free allocation runs out are kept; the rest are deferred.",
+   "dir": "migration/production/imagegen",
+   "local_imports": [
+    "migration/production/imagegen/cf_images.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/imagegen/upscale.py": {
+   "purpose": "Super-resolution of generated images on CPU (4x by default, UPSCALE_TARGET to change) (Real-ESRGAN general x4v3, the",
+   "dir": "migration/production/imagegen",
+   "local_imports": [],
+   "called_by_workflows": [
+    "cf-images.yml",
+    "images-upres.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/long_review.py": {
+   "purpose": "Approval gates of a rendered long video that need eyes, run before any publication",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/mining/structure_mining.py",
+    "migration/production/shorts_review.py"
+   ],
+   "called_by_workflows": [
+    "approve.yml"
+   ],
+   "imported_by": [
+    "migration/production/reviewer_calibration.py",
+    "migration/production/test_long_review.py"
+   ],
+   "test": "migration/production/test_long_review.py",
+   "is_test": false
+  },
+  "migration/production/motion.py": {
+   "purpose": "Camera motion for a still (the shared building block of every visual recipe).",
+   "dir": "migration/production",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/still_render.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/package_pilot.py": {
+   "purpose": "Publication package for a QA-passed pilot: title, description with every",
+   "dir": "migration/production",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml"
+   ],
+   "imported_by": [
+    "migration/publish/test_first_comment.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/pilot_render.py": {
+   "purpose": "Pilot renderer (F5) built on preserved, rights-recorded inputs.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/verify_public_voice_asset.py"
+   ],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml",
+    "shorts.yml",
+    "voice-sample.yml"
+   ],
+   "imported_by": [
+    "migration/production/shorts_produce.py",
+    "migration/production/still_render.py",
+    "migration/production/test_still_render.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/preview_gate.py": {
+   "purpose": "Preview before the full render (owner, 2026-10-24: \"the structure must already produce only 9.5 and up\").",
+   "dir": "migration/production",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml"
+   ],
+   "imported_by": [
+    "migration/production/render_queue.py",
+    "migration/production/test_preview_gate.py"
+   ],
+   "test": "migration/production/test_preview_gate.py",
+   "is_test": false
+  },
+  "migration/production/qa_pilot.py": {
+   "purpose": "QA of a rendered pilot against the frozen qa_criteria.json (F5 gates).",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/diagnostics/av-profile/av_profile.py",
+    "migration/diagnostics/av-semantic/av_semantic.py",
+    "migration/diagnostics/av-semantic/qualify_semantic.py"
+   ],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_still_render.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/render_queue.py": {
+   "purpose": "The nightly queue: which pilots need images, and which one to render next.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/preview_gate.py",
+    "migration/publish/shorts_prerequisite.py"
+   ],
+   "called_by_workflows": [
+    "heartbeat.yml",
+    "nightly-images.yml",
+    "reconcile.yml"
+   ],
+   "imported_by": [
+    "migration/ops/engine_fallback.py",
+    "migration/ops/runner_dispatch.py",
+    "migration/production/test_preview_gate.py",
+    "migration/production/test_render_queue.py"
+   ],
+   "test": "migration/production/test_render_queue.py",
+   "is_test": false
+  },
+  "migration/production/reviewer_calibration.py": {
+   "purpose": "E58 root cause: the designated reviewer does not answer our free key at all (reviewer probe 2026-10-23T22:57:",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/long_review.py"
+   ],
+   "called_by_workflows": [
+    "reviewer-calibration.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_reviewer_calibration.py"
+   ],
+   "test": "migration/production/test_reviewer_calibration.py",
+   "is_test": false
+  },
+  "migration/production/script_check.py": {
+   "purpose": "Deterministic acceptance of a pilot script before it is rendered.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/publish/three_stage.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [
+    "migration/production/footage/assign.py",
+    "migration/production/test_script_check.py"
+   ],
+   "test": "migration/production/test_script_check.py",
+   "is_test": false
+  },
+  "migration/production/shorts_006_material.py": {
+   "purpose": "Closed pilot-006 correction: source pins, real measurements and release barrier.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_edit_plan.py",
+    "migration/production/shorts_review.py",
+    "migration/production/shorts_select.py",
+    "migration/publish/owner_quality_policy.py",
+    "migration/publish/shorts_prerequisite.py",
+    "migration/publish/shorts_qa.py"
+   ],
+   "called_by_workflows": [
+    "shorts.yml"
+   ],
+   "imported_by": [
+    "migration/production/shorts_produce.py",
+    "migration/production/test_shorts_006_material.py",
+    "migration/production/test_shorts_produce.py",
+    "migration/publish/pending_shorts.py",
+    "migration/publish/test_pending_shorts.py",
+    "migration/publish/test_publish_shorts.py"
+   ],
+   "test": "migration/production/test_shorts_006_material.py",
+   "is_test": false
+  },
+  "migration/production/shorts_006_motion.py": {
+   "purpose": "Closed v2 native-camera and source-texture treatment; no provider or grading.",
+   "dir": "migration/production",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/shorts_produce.py",
+    "migration/production/test_shorts_006_motion.py",
+    "migration/production/test_shorts_produce.py"
+   ],
+   "test": "migration/production/test_shorts_006_motion.py",
+   "is_test": false
+  },
+  "migration/production/shorts_006_plan.py": {
+   "purpose": "Closed pilot-006 correction: source pins, real measurements and release barrier.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/shorts_edit_plan.py",
+    "migration/production/shorts_review.py",
+    "migration/production/shorts_select.py",
+    "migration/publish/owner_quality_policy.py",
+    "migration/publish/shorts_prerequisite.py",
+    "migration/publish/shorts_qa.py"
+   ],
+   "called_by_workflows": [
+    "shorts-review.yml"
+   ],
+   "imported_by": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_produce.py",
+    "migration/production/test_shorts_006_material.py",
+    "migration/production/test_shorts_006_plan.py",
+    "migration/production/test_shorts_produce.py",
+    "migration/publish/pending_shorts.py",
+    "migration/publish/test_pending_shorts.py"
+   ],
+   "test": "migration/production/test_shorts_006_plan.py",
+   "is_test": false
+  },
+  "migration/production/shorts_edit_plan.py": {
+   "purpose": "One frozen editorial plan and its fail-closed, hash-bound readiness barrier.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/shorts_select.py",
+    "migration/publish/publication_exception.py"
+   ],
+   "called_by_workflows": [
+    "shorts.yml"
+   ],
+   "imported_by": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_produce.py",
+    "migration/production/test_shorts_edit_plan.py",
+    "migration/production/test_shorts_produce.py"
+   ],
+   "test": "migration/production/test_shorts_edit_plan.py",
+   "is_test": false
+  },
+  "migration/production/shorts_produce.py": {
+   "purpose": "Produce each chosen Short as its own edit (not a crop of the long video), to STANDARD R8.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/cinematic.py",
+    "migration/production/pilot_render.py",
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_motion.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_edit_plan.py",
+    "migration/production/shorts_select.py",
+    "migration/production/still_render.py"
+   ],
+   "called_by_workflows": [
+    "shorts.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_shorts_produce.py"
+   ],
+   "test": "migration/production/test_shorts_produce.py",
+   "is_test": false
+  },
+  "migration/production/shorts_review.py": {
+   "purpose": "Review each finished Short as a viewer would, before it can be published.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/mining/structure_mining.py",
+    "migration/publish/owner_quality_policy.py",
+    "migration/publish/shorts_qa.py"
+   ],
+   "called_by_workflows": [
+    "shorts-review.yml",
+    "shorts.yml"
+   ],
+   "imported_by": [
+    "migration/production/long_review.py",
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/test_shorts_006_material.py",
+    "migration/production/test_shorts_review.py",
+    "migration/publish/review_recovery.py"
+   ],
+   "test": "migration/production/test_shorts_review.py",
+   "is_test": false
+  },
+  "migration/production/shorts_select.py": {
+   "purpose": "Choose the best Shorts moments of a long video (analysis, not a blind cut).",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/mining/structure_mining.py"
+   ],
+   "called_by_workflows": [
+    "shorts.yml"
+   ],
+   "imported_by": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_edit_plan.py",
+    "migration/production/shorts_produce.py",
+    "migration/production/test_shorts_edit_plan.py",
+    "migration/production/test_shorts_produce.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/signal_scan.py": {
+   "purpose": "Whole-file signal scan of a render, every frame and every audio sample (ffmpeg detectors). It complements",
+   "dir": "migration/production",
+   "local_imports": [],
+   "called_by_workflows": [
+    "approve.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_signal_scan.py"
+   ],
+   "test": "migration/production/test_signal_scan.py",
+   "is_test": false
+  },
+  "migration/production/still_render.py": {
+   "purpose": "Production renderer (migration/STANDARD.md v1): generated stills + synchronized captions.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/cinematic.py",
+    "migration/production/motion.py",
+    "migration/production/pilot_render.py"
+   ],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml"
+   ],
+   "imported_by": [
+    "migration/production/shorts_produce.py",
+    "migration/production/test_still_render.py"
+   ],
+   "test": "migration/production/test_still_render.py",
+   "is_test": false
+  },
+  "migration/production/test_cinematic.py": {
+   "purpose": "",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/cinematic.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_long_review.py": {
+   "purpose": "Offline checks of the long-video review: own rows and the designated reviewer's (Claude) review decide.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/long_review.py",
+    "migration/publish/prepublish_gate.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_no_live_pilot_data.py": {
+   "purpose": "E31: production tests use frozen fixtures, not mutable live pilot inputs.",
+   "dir": "migration/production",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_preview_gate.py": {
+   "purpose": "Offline: the full render waits for a preview of the current script reviewed at the owner's floor.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/preview_gate.py",
+    "migration/production/render_queue.py",
+    "migration/production/test_render_queue.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_render_queue.py": {
+   "purpose": "Offline checks of the nightly queue (images, then renders).",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/render_queue.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [
+    "migration/ops/test_engine_fallback.py",
+    "migration/ops/test_runner_dispatch.py",
+    "migration/production/test_preview_gate.py"
+   ],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_reviewer_calibration.py": {
+   "purpose": "Offline: the reviewer qualification rule is strict and fixed.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/reviewer_calibration.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml",
+    "reviewer-calibration.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_script_check.py": {
+   "purpose": "Offline checks of the pilot acceptance used on the executor's work: a real pilot passes; copies, fear-bait",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/script_check.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_shorts_006_material.py": {
+   "purpose": "Offline synthetic contracts, not media qualification or production evidence.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/mining/structure_mining.py",
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_review.py",
+    "migration/publish/shorts_qa.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [
+    "migration/publish/test_publish_shorts.py"
+   ],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_shorts_006_motion.py": {
+   "purpose": "Independent numerical oracles for the closed native v2 treatment.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/shorts_006_motion.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_shorts_006_plan.py": {
+   "purpose": "Offline synthetic contracts, not media qualification or production evidence.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/mining/structure_mining.py",
+    "migration/production/shorts_006_plan.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_shorts_produce.py",
+    "migration/publish/test_publish_shorts.py"
+   ],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_shorts_edit_plan.py": {
+   "purpose": "Offline contract tests: frozen bytes, synthetic signals, no live pilot reads.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/shorts_edit_plan.py",
+    "migration/production/shorts_select.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_shorts_produce.py"
+   ],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_shorts_produce.py": {
+   "purpose": "Offline structural gates and unchanged media helpers against frozen input snapshots.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/cinematic.py",
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_motion.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_edit_plan.py",
+    "migration/production/shorts_produce.py",
+    "migration/production/shorts_select.py",
+    "migration/production/test_shorts_006_plan.py",
+    "migration/production/test_shorts_edit_plan.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_shorts_review.py": {
+   "purpose": "Offline failure-evidence tests. No provider, upload, render or live pilot input.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/mining/structure_mining.py",
+    "migration/production/shorts_review.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_signal_scan.py": {
+   "purpose": "Synthetic files with known defects: the whole-file scan finds a 1 s black gap and a 4 s silence that a",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/signal_scan.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_still_render.py": {
+   "purpose": "",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/pilot_render.py",
+    "migration/production/qa_pilot.py",
+    "migration/production/still_render.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/test_thumb_check.py": {
+   "purpose": "Offline: R16 thumbnail style (breakout layout, warmest still) and its ruler.",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/production/thumb_check.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/production/thumb_check.py": {
+   "purpose": "R16 ruler for the finished thumbnail (thumbnail study 2026-10-23, 806 thumbnails in 89 channel-month strata).",
+   "dir": "migration/production",
+   "local_imports": [
+    "migration/mining/thumb_study.py"
+   ],
+   "called_by_workflows": [
+    "pilot-preview.yml",
+    "pilot-render-stills.yml",
+    "render-smoke.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_thumb_check.py"
+   ],
+   "test": "migration/production/test_thumb_check.py",
+   "is_test": false
+  },
+  "migration/production/voice/chatterbox_sample.py": {
+   "purpose": "A/B voice sample (owner, 2026-10-23: \"the voice must be perfect\"): the opening of a pilot narrated by Chatterbox",
+   "dir": "migration/production/voice",
+   "local_imports": [],
+   "called_by_workflows": [
+    "voice-sample.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/production/voice/voice_judge.py": {
+   "purpose": "Objective voice ruler (owner, 2026-10-23: \"the voice must be perfect\"; \"you define the ruler and judge it yourself\").",
+   "dir": "migration/production/voice",
+   "local_imports": [],
+   "called_by_workflows": [
+    "voice-sample.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": false
+  },
+  "migration/publish/channel_config.py": {
+   "purpose": "Keep the channel's configuration true to structures/channel.json (SYSTEM.md stage 0).",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [
+    "channel-config.yml"
+   ],
+   "imported_by": [
+    "migration/publish/test_channel_config.py"
+   ],
+   "test": "migration/publish/test_channel_config.py",
+   "is_test": false
+  },
+  "migration/publish/first_comment.py": {
+   "purpose": "Retry the channel's first comment on a published video (SYSTEM.md stage 5).",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [
+    "first-comment.yml"
+   ],
+   "imported_by": [
+    "migration/publish/test_first_comment.py"
+   ],
+   "test": "migration/publish/test_first_comment.py",
+   "is_test": false
+  },
+  "migration/publish/owner_quality_policy.py": {
+   "purpose": "Additional owner eligibility floor for new uploads, not an editorial review.",
+   "dir": "migration/publish",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_review.py",
+    "migration/publish/pending_shorts.py",
+    "migration/publish/publish_video.py",
+    "migration/publish/review_recovery.py",
+    "migration/publish/test_owner_quality_policy.py"
+   ],
+   "test": "migration/publish/test_owner_quality_policy.py",
+   "is_test": false
+  },
+  "migration/publish/pending_shorts.py": {
+   "purpose": "Which pilot has Shorts the watched review approved that are not on YouTube",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/publish/owner_quality_policy.py",
+    "migration/publish/review_recovery.py"
+   ],
+   "called_by_workflows": [
+    "heartbeat.yml",
+    "publish-shorts.yml",
+    "publish.yml"
+   ],
+   "imported_by": [
+    "migration/publish/publish_shorts.py",
+    "migration/publish/test_pending_shorts.py",
+    "migration/publish/test_publish_shorts.py"
+   ],
+   "test": "migration/publish/test_pending_shorts.py",
+   "is_test": false
+  },
+  "migration/publish/preflight.py": {
+   "purpose": "Pre-upload checks of everything YouTube would reject or silently degrade, so a",
+   "dir": "migration/publish",
+   "local_imports": [],
+   "called_by_workflows": [
+    "approve.yml",
+    "publish.yml"
+   ],
+   "imported_by": [
+    "migration/publish/prepublish_gate.py",
+    "migration/publish/test_preflight.py"
+   ],
+   "test": "migration/publish/test_preflight.py",
+   "is_test": false
+  },
+  "migration/publish/prepublish_gate.py": {
+   "purpose": "Final pre-publication decision of a rendered long video: PASS, FAIL or UNKNOWN.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/mining/market_evidence.py",
+    "migration/publish/preflight.py",
+    "migration/publish/three_stage.py"
+   ],
+   "called_by_workflows": [
+    "approve.yml"
+   ],
+   "imported_by": [
+    "migration/production/test_long_review.py",
+    "migration/publish/publication_binding.py",
+    "migration/publish/test_prepublish_gate.py"
+   ],
+   "test": "migration/publish/test_prepublish_gate.py",
+   "is_test": false
+  },
+  "migration/publish/publication_binding.py": {
+   "purpose": "Fail-closed revalidation of recorded publication evidence; no side effects.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/prepublish_gate.py"
+   ],
+   "called_by_workflows": [
+    "publish.yml"
+   ],
+   "imported_by": [
+    "migration/publish/shorts_prerequisite.py",
+    "migration/publish/test_publication_binding.py"
+   ],
+   "test": "migration/publish/test_publication_binding.py",
+   "is_test": false
+  },
+  "migration/publish/publication_exception.py": {
+   "purpose": "One owner-attested temporal exception, not a quality or identity bypass.",
+   "dir": "migration/publish",
+   "local_imports": [],
+   "called_by_workflows": [
+    "publish-shorts.yml"
+   ],
+   "imported_by": [
+    "migration/production/shorts_edit_plan.py",
+    "migration/publish/publish_shorts.py",
+    "migration/publish/test_publication_exception.py",
+    "migration/publish/test_publish_shorts.py"
+   ],
+   "test": "migration/publish/test_publication_exception.py",
+   "is_test": false
+  },
+  "migration/publish/publish_episode.py": {
+   "purpose": "Publish one Bible-series episode (owner, 2026-10-24: Bible stories from Genesis, one at a time; Shorts first).",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [
+    "publish-episode.yml"
+   ],
+   "imported_by": [
+    "migration/publish/test_publish_episode.py"
+   ],
+   "test": "migration/publish/test_publish_episode.py",
+   "is_test": false
+  },
+  "migration/publish/publish_shorts.py": {
+   "purpose": "Publish the Shorts cut from a published long video, each scheduled at its slot.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/pending_shorts.py",
+    "migration/publish/publication_exception.py",
+    "migration/publish/publish_video.py",
+    "migration/publish/review_recovery.py",
+    "migration/publish/shorts_qa.py"
+   ],
+   "called_by_workflows": [
+    "publish-shorts.yml",
+    "publish.yml"
+   ],
+   "imported_by": [
+    "migration/publish/test_publish_shorts.py"
+   ],
+   "test": "migration/publish/test_publish_shorts.py",
+   "is_test": false
+  },
+  "migration/publish/publish_video.py": {
+   "purpose": "Publish one rendered HeroVerse video to the exact channel.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/owner_quality_policy.py"
+   ],
+   "called_by_workflows": [
+    "publish.yml"
+   ],
+   "imported_by": [
+    "migration/publish/channel_config.py",
+    "migration/publish/first_comment.py",
+    "migration/publish/publish_episode.py",
+    "migration/publish/publish_shorts.py",
+    "migration/publish/refresh_description.py",
+    "migration/publish/test_channel_config.py",
+    "migration/publish/test_first_comment.py",
+    "migration/publish/test_publish_video.py"
+   ],
+   "test": "migration/publish/test_publish_video.py",
+   "is_test": false
+  },
+  "migration/publish/refresh_description.py": {
+   "purpose": "Bounded pilot012 opening chapter repair. No upload or status write.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [
+    "description-refresh.yml"
+   ],
+   "imported_by": [
+    "migration/publish/test_refresh_description.py"
+   ],
+   "test": "migration/publish/test_refresh_description.py",
+   "is_test": false
+  },
+  "migration/publish/review_recovery.py": {
+   "purpose": "One pinned, previously unreviewed Short; no general retry or approval API.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/production/shorts_review.py",
+    "migration/publish/owner_quality_policy.py",
+    "migration/publish/shorts_prerequisite.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/publish/pending_shorts.py",
+    "migration/publish/publish_shorts.py",
+    "migration/publish/test_pending_shorts.py",
+    "migration/publish/test_publish_shorts.py",
+    "migration/publish/test_review_recovery.py"
+   ],
+   "test": "migration/publish/test_review_recovery.py",
+   "is_test": false
+  },
+  "migration/publish/shorts_prerequisite.py": {
+   "purpose": "Read-only prerequisite: Shorts may spend quota only after their long qualifies.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publication_binding.py"
+   ],
+   "called_by_workflows": [
+    "approve.yml",
+    "publish-shorts.yml",
+    "shorts-review.yml",
+    "shorts.yml"
+   ],
+   "imported_by": [
+    "migration/production/render_queue.py",
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/publish/review_recovery.py",
+    "migration/publish/test_shorts_prerequisite.py"
+   ],
+   "test": "migration/publish/test_shorts_prerequisite.py",
+   "is_test": false
+  },
+  "migration/publish/shorts_qa.py": {
+   "purpose": "Technical gate for one Short before upload (frozen; never edited to pass a file).",
+   "dir": "migration/publish",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/production/shorts_review.py",
+    "migration/production/test_shorts_006_material.py",
+    "migration/publish/publish_shorts.py"
+   ],
+   "test": null,
+   "is_test": false
+  },
+  "migration/publish/test_channel_config.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/channel_config.py",
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_first_comment.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/production/package_pilot.py",
+    "migration/publish/first_comment.py",
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_owner_quality_policy.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/owner_quality_policy.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_package_chapters.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [],
+   "called_by_workflows": [
+    "description-refresh.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_pending_shorts.py": {
+   "purpose": "Offline checks: which approved Shorts are still to publish, and when.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/shorts_006_plan.py",
+    "migration/publish/pending_shorts.py",
+    "migration/publish/review_recovery.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/publish/test_publish_shorts.py"
+   ],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_preflight.py": {
+   "purpose": "Offline checks of the pre-upload preflight.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/preflight.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_prepublish_gate.py": {
+   "purpose": "Offline checks of the final pre-publication decision: good, bad and missing-evidence cases.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/prepublish_gate.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_publication_binding.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publication_binding.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_publication_exception.py": {
+   "purpose": "Offline owner-exception registry and single-attempt reservation contract.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publication_exception.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_publish_episode.py": {
+   "purpose": "Offline: an episode is refused unless the file matches its hash and the KJV and AI disclosures are stated.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publish_episode.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_publish_shorts.py": {
+   "purpose": "Offline checks of the Shorts publication: slots only for Shorts still to upload, never a duplicate upload,",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/production/shorts_006_material.py",
+    "migration/production/test_shorts_006_material.py",
+    "migration/production/test_shorts_006_plan.py",
+    "migration/publish/pending_shorts.py",
+    "migration/publish/publication_exception.py",
+    "migration/publish/publish_shorts.py",
+    "migration/publish/review_recovery.py",
+    "migration/publish/test_pending_shorts.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_publish_video.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/publish_video.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_refresh_description.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/refresh_description.py"
+   ],
+   "called_by_workflows": [
+    "description-refresh.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_review_recovery.py": {
+   "purpose": "Synthetic known answers; no provider, credentials or live media operations.",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/review_recovery.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_shorts_prerequisite.py": {
+   "purpose": "",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/shorts_prerequisite.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/test_three_stage.py": {
+   "purpose": "Offline checks of the three-stage approval rows (structure, authenticity).",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/publish/three_stage.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/publish/three_stage.py": {
+   "purpose": "Owner rule (2026-10-19): a video is approved by the system, not by a person, when it passes three stages:",
+   "dir": "migration/publish",
+   "local_imports": [
+    "migration/mining/structure_mining.py"
+   ],
+   "called_by_workflows": [
+    "approve.yml"
+   ],
+   "imported_by": [
+    "migration/production/script_check.py",
+    "migration/publish/prepublish_gate.py",
+    "migration/publish/test_three_stage.py"
+   ],
+   "test": "migration/publish/test_three_stage.py",
+   "is_test": false
+  },
+  "migration/second_opening_asr.py": {
+   "purpose": "One scoped offline ASR measurement of preserved BeFOHnncaeQ; never approval.",
+   "dir": "migration",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/test_second_opening_asr.py"
+   ],
+   "test": "migration/test_second_opening_asr.py",
+   "is_test": false
+  },
+  "migration/strategy/ads_model.py": {
+   "purpose": "Ads stage (owner, 2026-10-24: \"real predictability of monetization for an investment\").",
+   "dir": "migration/strategy",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/strategy/test_ads_model.py"
+   ],
+   "test": "migration/strategy/test_ads_model.py",
+   "is_test": false
+  },
+  "migration/strategy/test_ads_model.py": {
+   "purpose": "Offline: the ads model keeps paid results out of the YPP counter and states the real break-even.",
+   "dir": "migration/strategy",
+   "local_imports": [
+    "migration/strategy/ads_model.py"
+   ],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/test_second_opening_asr.py": {
+   "purpose": "",
+   "dir": "migration",
+   "local_imports": [
+    "migration/second_opening_asr.py"
+   ],
+   "called_by_workflows": [],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
+  "migration/verify_public_voice_asset.py": {
+   "purpose": "Restore exact public upstream model bytes without private repository authority.",
+   "dir": "migration",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/pilot_render.py"
+   ],
+   "test": null,
+   "is_test": false
+  }
+ },
+ "unreached_by_any_workflow": [
+  "migration/diagnostics/av-profile/profile_openings.py",
+  "migration/diagnostics/rapidapi-native-av/native_probe.py",
+  "migration/diagnostics/rapidapi-native-av/run_audio_reviewer.py",
+  "migration/evidence/vidiq/20261023/algorithm_study/analyze.py",
+  "migration/evidence/vidiq/20261023/algorithm_study/meta_perm.py",
+  "migration/evidence/vidiq/20261023/algorithm_study/perm.py",
+  "migration/production/imagegen/hydrate_reused.py"
+ ]
+}
