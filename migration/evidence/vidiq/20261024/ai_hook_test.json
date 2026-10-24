@@ -1,0 +1,15 @@
+{
+ "version": "ai-hook-test-v1",
+ "date": "2026-10-24",
+ "approved_by_owner": "2026-10-24 (chat: 'Eu libero tudo aí')",
+ "tool": "vidiq_generate_video",
+ "job": "job_757c6775-4dd7-4eb3-ba4e-8cc1ee16dc9c",
+ "model": "minimax-h3",
+ "resolution": "2k",
+ "seconds": 6,
+ "credits": 140,
+ "credits_per_second": 23.3,
+ "for": "pilot-011 hook (Isaiah 40:31: dawn, mountains, an eagle rising)",
+ "status": "generated; not yet inspected (the session network cannot reach videogen.vidiq.com) and not used in any render",
+ "rule": "AI footage enters a render only after a Claude frame inspection and the same 9.5 owner floor"
+}
