@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "60f70ffe1ffa6dbc3b7300b62516673b8f3f37a66fa700126f5815af6036252a",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-011 preview review 3: a church and a modern village",
+ "vetting_reasons": [
+  "a church and a modern village"
+ ],
  "vetting_luma": [
   97.5,
   98.4,

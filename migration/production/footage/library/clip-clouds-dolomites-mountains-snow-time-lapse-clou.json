@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "4c5c82d7881cd10784955e4cd5998571c293e914275c355f7f42a11dc76a2ca0",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-011 preview review 3: wooden huts of a ski area in the snow",
+ "vetting_reasons": [
+  "wooden huts of a ski area in the snow"
+ ],
  "vetting_luma": [
   167.3,
   168.6,

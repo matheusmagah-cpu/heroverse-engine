@@ -53,5 +53,14 @@ class Assign(unittest.TestCase):
         out = assign.choose({"working_title": "Night Prayer"}, library)
         self.assertFalse([c for c in out if c.split("-")[1] in ("snow", "waterfall", "mist", "clouds")])
 
+    def test_seen_clips_first_once_there_are_enough(self):
+        # E74: each reassignment of 011 brought unseen clips (and new modern ones) into the next preview
+        unseen = lib(["sunrise", "clouds"], 15, vetting_luma=[120])
+        seen = [dict(r, id=r["id"].replace("clip-", "clip-seen-"), claude_seen="pilot-011 preview") for r in lib(["sunrise", "clouds"], 12, vetting_luma=[120])]
+        out = assign.choose({"working_title": "Morning Prayer"}, unseen + seen)
+        self.assertTrue(out and all("seen" in c for c in out))
+        few = seen[:4]
+        self.assertTrue(any("seen" not in c for c in assign.choose({"working_title": "Morning Prayer"}, unseen + few)))
+
 if __name__ == "__main__":
     unittest.main()

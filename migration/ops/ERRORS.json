@@ -553,6 +553,16 @@
     "file": "migration/ci/render_pilot.sh",
     "contains": "PER_SHEET=12"
    }
+  },
+  {
+   "id": "E74",
+   "date": "2026-10-24",
+   "error": "pilot-011's preview never converged: each reassignment after rejecting modern clips (3, then 4, then 7) brought clips nobody had seen into the next preview, some of them modern again (ski huts, a village with a church, wind turbines).",
+   "fix": "Every clip kept on a preview review is marked claude_seen in the library; assign.choose uses only seen clips once the mood has FOOTAGE_MIN of them, so the next preview of a reassigned script shows no unseen clip.",
+   "antidote": {
+    "file": "migration/production/footage/test_assign.py",
+    "contains": "def test_seen_clips_first_once_there_are_enough"
+   }
   }
  ]
 }
