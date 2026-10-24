@@ -1,0 +1,38 @@
+{
+ "id": "clip-snow-waterfall-scotland-water-snow-nature-lan",
+ "theme": "snow",
+ "query": "snow mountains",
+ "source": "pixabay",
+ "title": "waterfall, scotland, water, snow, nature, landscape, rock, cliff, highlands, mountain, atmospheric, mystical, relaxation",
+ "page": "https://pixabay.com/videos/id-35615/",
+ "author": "CLEARSTREAMFILM",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 23.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: CLEARSTREAMFILM via Pixabay (https://pixabay.com/videos/id-35615/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d289af342194ca2cc4cdf36b7aa2c98d7020e5186565e25ed9dc320bd134cdd2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  39.3,
+  39.4,
+  39.0,
+  39.4,
+  38.8
+ ],
+ "vetting_descriptions": [
+  "A waterfall is seen in a mountainous area, with a tree in the foreground.",
+  "A waterfall is visible in the image, surrounded by trees and mountains."
+ ],
+ "release_asset": "footage-clip-snow-waterfall-scotland-water-snow-nature-lan-sha256-d289af342194ca2cc4cdf36b7aa2c98d7020e5186565e25ed9dc320bd134cdd2.mp4"
+}

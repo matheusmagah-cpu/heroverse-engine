@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-rain-glass-window-glass-water-raindrop-r",
+ "theme": "rain",
+ "query": "rain window night",
+ "source": "pixabay",
+ "title": "rain, glass, window glass, water, raindrop, rainy weather, wet, drops, drips, rainy",
+ "page": "https://pixabay.com/videos/id-94680/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-94680/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "cd0d2914bba701b9b9b1ae3d3d36a8de7e92ea8561a0e0f18b7b7a3349f9bb70",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  71.4,
+  69.8,
+  68.2,
+  68.3,
+  66.9
+ ],
+ "vetting_descriptions": [
+  "A rainy day with a view of trees and rain drops.",
+  "A rainy day outside with a view of trees and rain drops."
+ ],
+ "release_asset": "footage-clip-rain-rain-glass-window-glass-water-raindrop-r-sha256-cd0d2914bba701b9b9b1ae3d3d36a8de7e92ea8561a0e0f18b7b7a3349f9bb70.mp4"
+}

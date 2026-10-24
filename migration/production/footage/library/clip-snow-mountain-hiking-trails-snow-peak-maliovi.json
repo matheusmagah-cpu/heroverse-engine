@@ -1,0 +1,40 @@
+{
+ "id": "clip-snow-mountain-hiking-trails-snow-peak-maliovi",
+ "theme": "snow",
+ "query": "snow mountains",
+ "source": "pixabay",
+ "title": "mountain, hiking trails, snow, peak, maliovitsa, tourism, mountain peaks, skiing, snowy landscapes, natural beauty, bulgaria, nature, winter",
+ "page": "https://pixabay.com/videos/id-200449/",
+ "author": "Frabull",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Frabull via Pixabay (https://pixabay.com/videos/id-200449/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6168afc208a99fe5378c33f03075e29cdc0af57f56c9b71e01a32015e486ca40",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "TEXT_ON_SCREEN fers"
+ ],
+ "vetting_luma": [
+  147.0,
+  151.5,
+  150.4,
+  149.9,
+  148.5
+ ],
+ "vetting_descriptions": [
+  "A mountain range with snow on the ground and a mountain peak in the distance.",
+  "A snowy mountain with a mountain peak in the background."
+ ],
+ "release_asset": null
+}

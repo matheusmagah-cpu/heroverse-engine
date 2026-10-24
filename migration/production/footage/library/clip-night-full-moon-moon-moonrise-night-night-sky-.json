@@ -1,0 +1,41 @@
+{
+ "id": "clip-night-full-moon-moon-moonrise-night-night-sky-",
+ "theme": "night",
+ "query": "moonlight night sky",
+ "source": "pixabay",
+ "title": "full moon, moon, moonrise, night, night sky, ache, moonlight",
+ "page": "https://pixabay.com/videos/id-128118/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-128118/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5c3d930c30b02a5b68051eaa09af50b6f46bae149c1616cec269aa5bc026a8a7",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "DESCRIBED people"
+ ],
+ "vetting_luma": [
+  4.2,
+  4.3,
+  4.4,
+  4.5,
+  4.5
+ ],
+ "vetting_descriptions": [
+  "A moon is visible in the sky, and a mountain can be seen in the distance.",
+  "A full moon is seen in the sky, with a dark background and no other objects or people visible."
+ ],
+ "release_asset": null
+}

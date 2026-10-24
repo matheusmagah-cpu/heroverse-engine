@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-nature-tree-night-scary-full-moon-moon-s",
+ "theme": "night",
+ "query": "moonlight night sky",
+ "source": "pixabay",
+ "title": "nature, tree, night, scary, full moon, moon, sky, dark, leaves, breeze, moonlight, halloween, scenery",
+ "page": "https://pixabay.com/videos/id-350738/",
+ "author": "comfy_VZ",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: comfy_VZ via Pixabay (https://pixabay.com/videos/id-350738/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "17840a985b7c2b3b5fb33021477f2f8d59ae6b0c1a348132ce40f9cc12e794bb",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  18.1,
+  17.0,
+  16.8,
+  16.7,
+  16.7
+ ],
+ "vetting_descriptions": [
+  "A full moon is seen through the branches of a tree, and the sky is dark.",
+  "A full moon is seen through the branches of a tree, with a bird perched on a branch."
+ ],
+ "release_asset": "footage-clip-night-nature-tree-night-scary-full-moon-moon-s-sha256-17840a985b7c2b3b5fb33021477f2f8d59ae6b0c1a348132ce40f9cc12e794bb.mp4"
+}

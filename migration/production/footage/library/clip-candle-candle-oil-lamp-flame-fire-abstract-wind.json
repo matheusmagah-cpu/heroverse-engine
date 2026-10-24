@@ -1,0 +1,40 @@
+{
+ "id": "clip-candle-candle-oil-lamp-flame-fire-abstract-wind",
+ "theme": "candle",
+ "query": "oil lamp flame",
+ "source": "pixabay",
+ "title": "candle, oil lamp, flame, fire, abstract, wind, decor, light, night",
+ "page": "https://pixabay.com/videos/id-88193/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 51.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-88193/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "db8db4fdeb333b49dfb00445c4986a34bcbe4e4b91eb996b58221382993f169f",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  4.6,
+  4.0,
+  3.9,
+  4.6,
+  5.7
+ ],
+ "vetting_descriptions": [
+  "A flame is visible in a dark room, and there is a lit candle in a black container.",
+  "A lit candle is in a dark room, and there are bright lights in the background."
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-weather-rain-water-maple-leaf-wind-natur",
+ "theme": "rain",
+ "query": "rain on leaves",
+ "source": "pixabay",
+ "title": "weather, rain, water, maple leaf, wind, natural",
+ "page": "https://pixabay.com/videos/id-360321/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-360321/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5f2c562081e9faf0bc8cba1203d6b28839ff90ee09322fb473d439e06741ab13",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  141.4,
+  141.7,
+  141.7,
+  141.8,
+  140.7
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves and a rainy day.",
+  "A tree with green leaves and a branch with a bird sitting on it."
+ ],
+ "release_asset": "footage-clip-rain-weather-rain-water-maple-leaf-wind-natur-sha256-5f2c562081e9faf0bc8cba1203d6b28839ff90ee09322fb473d439e06741ab13.mp4"
+}

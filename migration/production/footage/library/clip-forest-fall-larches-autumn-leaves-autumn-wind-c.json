@@ -1,0 +1,38 @@
+{
+ "id": "clip-forest-fall-larches-autumn-leaves-autumn-wind-c",
+ "theme": "forest",
+ "query": "autumn forest",
+ "source": "pixabay",
+ "title": "fall, larches, autumn leaves, autumn wind, coniferous forest, nature, landscape, mountains",
+ "page": "https://pixabay.com/videos/id-311440/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-311440/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d9f3d46834cf4655faf0180f37a79bcd86c36823fe0abd03c21b5e01ba570180",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  126.5,
+  129.8,
+  131.3,
+  129.5,
+  129.7
+ ],
+ "vetting_descriptions": [
+  "A mountain with a cloudy sky above it, with trees in the foreground and mountains in the background.",
+  "A mountain with a cloudy sky and trees with yellow leaves."
+ ],
+ "release_asset": "footage-clip-forest-fall-larches-autumn-leaves-autumn-wind-c-sha256-d9f3d46834cf4655faf0180f37a79bcd86c36823fe0abd03c21b5e01ba570180.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-river-whitewater-rapids-rocks-streams-wa",
+ "theme": "river",
+ "query": "river rocks water",
+ "source": "pixabay",
+ "title": "river, whitewater, rapids, rocks, streams, waterfall, water, landscape",
+ "page": "https://pixabay.com/videos/id-370920/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-370920/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5a5f275644ab141a49586c39d66cdc04bae30129497ec40eea63c2a1a5e95d29",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  113.4,
+  113.1,
+  112.6,
+  114.4,
+  113.5
+ ],
+ "vetting_descriptions": [
+  "A river with rocks and a waterfall, with a log in the water.",
+  "A river with a waterfall and rocks, with a log on the shore."
+ ],
+ "release_asset": "footage-clip-river-river-whitewater-rapids-rocks-streams-wa-sha256-5a5f275644ab141a49586c39d66cdc04bae30129497ec40eea63c2a1a5e95d29.mp4"
+}

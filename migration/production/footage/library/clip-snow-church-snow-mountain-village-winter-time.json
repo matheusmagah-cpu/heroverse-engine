@@ -1,0 +1,38 @@
+{
+ "id": "clip-snow-church-snow-mountain-village-winter-time",
+ "theme": "snow",
+ "query": "snow mountains",
+ "source": "pixabay",
+ "title": "church, snow, mountain village, winter, time lapse",
+ "page": "https://pixabay.com/videos/id-205423/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-205423/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "60f70ffe1ffa6dbc3b7300b62516673b8f3f37a66fa700126f5815af6036252a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  97.5,
+  98.4,
+  96.7,
+  96.2,
+  95.8
+ ],
+ "vetting_descriptions": [
+  "A snowy mountain town with a church and a mountain in the background.",
+  "A snowy mountain is visible in the background, with a church and a mountain village in the foreground."
+ ],
+ "release_asset": "footage-clip-snow-church-snow-mountain-village-winter-time-sha256-60f70ffe1ffa6dbc3b7300b62516673b8f3f37a66fa700126f5815af6036252a.mp4"
+}

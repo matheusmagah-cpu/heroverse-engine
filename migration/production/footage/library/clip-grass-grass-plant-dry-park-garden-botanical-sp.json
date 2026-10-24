@@ -1,0 +1,38 @@
+{
+ "id": "clip-grass-grass-plant-dry-park-garden-botanical-sp",
+ "theme": "grass",
+ "query": "grass wind",
+ "source": "pixabay",
+ "title": "grass, plant, dry, park, garden, botanical, spring, summer, leaves, wind, close up, green, forest, nature",
+ "page": "https://pixabay.com/videos/id-197946/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 55.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-197946/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "dd41c0132157d2b205bda30993478e666841352d115d9d63bf8d1498941194a2",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  144.1,
+  144.2,
+  144.5,
+  146.0,
+  145.0
+ ],
+ "vetting_descriptions": [
+  "A field of tall brown grass with a few green leaves.",
+  "A field of tall brown grass with a green plant in the middle."
+ ],
+ "release_asset": "footage-clip-grass-grass-plant-dry-park-garden-botanical-sp-sha256-dd41c0132157d2b205bda30993478e666841352d115d9d63bf8d1498941194a2.mp4"
+}

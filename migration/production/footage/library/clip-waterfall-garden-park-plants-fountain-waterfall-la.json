@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-garden-park-plants-fountain-waterfall-la",
+ "theme": "waterfall",
+ "query": "cascade",
+ "source": "pixabay",
+ "title": "garden, park, plants, fountain, waterfall, landscape, water, forest, rocks, cascade, trees, stream, outdoors, travel, scenery",
+ "page": "https://pixabay.com/videos/id-237909/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 46.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-237909/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7b5c794ccb7d9d1c7412d8861f7d7040b1307476b5b805f86d4998b3af9cf94c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  94.1,
+  93.6,
+  93.3,
+  93.2,
+  93.0
+ ],
+ "vetting_descriptions": [
+  "A waterfall is flowing over rocks, and there is a bridge over the water.",
+  "A waterfall is flowing over rocks in a pond, with a bridge crossing over the water."
+ ],
+ "release_asset": "footage-clip-waterfall-garden-park-plants-fountain-waterfall-la-sha256-7b5c794ccb7d9d1c7412d8861f7d7040b1307476b5b805f86d4998b3af9cf94c.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-candle-candlelight-flame-burn-fire-light",
+ "theme": "candle",
+ "query": "candles",
+ "source": "pixabay",
+ "title": "candle, candlelight, flame, burn, fire, light, candle holder",
+ "page": "https://pixabay.com/videos/id-128121/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-128121/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "de89f5e6204f078a3d44850b23e1523d027e7053fdbd7042e9a23c4a72021e25",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  11.4,
+  12.4,
+  13.3,
+  12.3,
+  13.0
+ ],
+ "vetting_descriptions": [
+  "A lit candle in a blue bowl on a black background.",
+  "A blue and green glass candle holder with a lit candle inside."
+ ],
+ "release_asset": "footage-clip-candle-candle-candlelight-flame-burn-fire-light-sha256-de89f5e6204f078a3d44850b23e1523d027e7053fdbd7042e9a23c4a72021e25.mp4"
+}

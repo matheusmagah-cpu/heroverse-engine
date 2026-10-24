@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-candle-light-flame-burn-match-candleligh",
+ "theme": "candle",
+ "query": "candle dark background",
+ "source": "pixabay",
+ "title": "candle, light, flame, burn, match, candlelight, christmas, advent",
+ "page": "https://pixabay.com/videos/id-143419/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-143419/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "503ee14db068caa78bb551fdf209822c8e66a3aae6aa8facaa75d5bfb94c0ea3",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  25.4,
+  25.3,
+  25.3,
+  25.4,
+  25.5
+ ],
+ "vetting_descriptions": [
+  "A lit candle is in a candle holder, and the flame is yellow.",
+  "A lit candle in a glass candle holder."
+ ],
+ "release_asset": "footage-clip-candle-candle-light-flame-burn-match-candleligh-sha256-503ee14db068caa78bb551fdf209822c8e66a3aae6aa8facaa75d5bfb94c0ea3.mp4"
+}

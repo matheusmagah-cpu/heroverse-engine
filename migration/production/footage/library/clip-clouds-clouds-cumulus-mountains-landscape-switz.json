@@ -1,0 +1,38 @@
+{
+ "id": "clip-clouds-clouds-cumulus-mountains-landscape-switz",
+ "theme": "clouds",
+ "query": "clouds timelapse mountains",
+ "source": "pixabay",
+ "title": "clouds, cumulus, mountains, landscape, switzerland, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-81925/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 19.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 17.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-81925/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ea2a35780becf5fd8ba91a8bdb59722d93e592091bb1bed550b653123143d347",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  137.6,
+  137.5,
+  141.9,
+  142.1,
+  138.6
+ ],
+ "vetting_descriptions": [
+  "A beautiful landscape with a mountain in the background and a road in the foreground.",
+  "A beautiful landscape with a mountain, a valley, and a cloudy sky."
+ ],
+ "release_asset": "footage-clip-clouds-clouds-cumulus-mountains-landscape-switz-sha256-ea2a35780becf5fd8ba91a8bdb59722d93e592091bb1bed550b653123143d347.mp4"
+}

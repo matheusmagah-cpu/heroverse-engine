@@ -1,0 +1,40 @@
+{
+ "id": "clip-lake-lake-water-sunrise-coot-water-bird-dive-",
+ "theme": "lake",
+ "query": "lake sunrise",
+ "source": "pixabay",
+ "title": "lake, water, sunrise, coot, water bird, dive, water surface, landscape, nature",
+ "page": "https://pixabay.com/videos/id-285736/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 46.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-285736/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f2badf00b2faa64f22165f537a204627ed6896060733afc4d5df24f4a7a8c5ba",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  107.8,
+  103.2,
+  107.2,
+  103.8,
+  107.8
+ ],
+ "vetting_descriptions": [
+  "A duck swims in the water near a mountain range, with a beautiful sunset in the background.",
+  "A person is paddling a canoe in a lake with mountains in the background."
+ ],
+ "release_asset": null
+}

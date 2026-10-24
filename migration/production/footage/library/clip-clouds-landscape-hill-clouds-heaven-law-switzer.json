@@ -1,0 +1,38 @@
+{
+ "id": "clip-clouds-landscape-hill-clouds-heaven-law-switzer",
+ "theme": "clouds",
+ "query": "cumulus clouds timelapse",
+ "source": "pixabay",
+ "title": "landscape, hill, clouds, heaven, law, switzerland, the shade, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-90492/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-90492/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0cc0cac397256d18ca5d30107dfbea53bd02b57303890b2e8eb97b289ef99bf3",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  95.9,
+  95.5,
+  91.6,
+  87.1,
+  94.0
+ ],
+ "vetting_descriptions": [
+  "A beautiful green valley with a mountain range in the background and a road running through it.",
+  "A beautiful mountain valley with a road and houses in the valley."
+ ],
+ "release_asset": "footage-clip-clouds-landscape-hill-clouds-heaven-law-switzer-sha256-0cc0cac397256d18ca5d30107dfbea53bd02b57303890b2e8eb97b289ef99bf3.mp4"
+}

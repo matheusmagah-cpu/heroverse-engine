@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-lake-outlook-alpine-flowers-fogging-lake",
+ "theme": "lake",
+ "query": "alpine lake",
+ "source": "pixabay",
+ "title": "lake, outlook, alpine flowers, fogging, lake brienz, weather, clouds, wind, valley wind, updraft, landscape",
+ "page": "https://pixabay.com/videos/id-226710/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-226710/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8570f7b3853cff970dbedf3b46272f939fe39b045574c42f6212c0744069eb49",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.2,
+  132.7,
+  129.8,
+  139.9,
+  128.0
+ ],
+ "vetting_descriptions": [
+  "A beautiful mountain scene with a lake, green grass, and a rocky hillside.",
+  "A beautiful mountain overlooks a lake, with a rocky hillside and a green valley below."
+ ],
+ "release_asset": "footage-clip-lake-lake-outlook-alpine-flowers-fogging-lake-sha256-8570f7b3853cff970dbedf3b46272f939fe39b045574c42f6212c0744069eb49.mp4"
+}

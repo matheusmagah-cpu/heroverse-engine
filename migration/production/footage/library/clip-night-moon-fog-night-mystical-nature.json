@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-moon-fog-night-mystical-nature",
+ "theme": "night",
+ "query": "full moon clouds night",
+ "source": "pixabay",
+ "title": "moon, fog, night, mystical, nature",
+ "page": "https://pixabay.com/videos/id-319666/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-319666/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8559243cc4a3b9317fa8ac51903d7be1443558e1e35419c91bb0798e38a6ee7b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  4.5,
+  9.2,
+  10.7,
+  7.9,
+  7.8
+ ],
+ "vetting_descriptions": [
+  "A moon is visible in the sky, and it is the only object in the image.",
+  "A moon is visible in the night sky, with a dark background and a bright moon."
+ ],
+ "release_asset": null
+}

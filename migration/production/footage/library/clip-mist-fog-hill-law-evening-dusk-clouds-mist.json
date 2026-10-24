@@ -1,0 +1,38 @@
+{
+ "id": "clip-mist-fog-hill-law-evening-dusk-clouds-mist",
+ "theme": "mist",
+ "query": "mist lake",
+ "source": "pixabay",
+ "title": "fog, hill, law, evening, dusk, clouds, mist",
+ "page": "https://pixabay.com/videos/id-320769/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-320769/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "313e2e9b0db77b3608b57b19cd785c1a82d90c15519a3015d8095d7507f55936",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  48.9,
+  49.0,
+  49.0,
+  48.9,
+  48.8
+ ],
+ "vetting_descriptions": [
+  "A beautiful sunset over a mountain range with a cloudy sky.",
+  "A beautiful sunset with mountains in the background."
+ ],
+ "release_asset": "footage-clip-mist-fog-hill-law-evening-dusk-clouds-mist-sha256-313e2e9b0db77b3608b57b19cd785c1a82d90c15519a3015d8095d7507f55936.mp4"
+}

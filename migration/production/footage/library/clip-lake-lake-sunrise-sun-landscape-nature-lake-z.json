@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-lake-sunrise-sun-landscape-nature-lake-z",
+ "theme": "lake",
+ "query": "lake sunrise",
+ "source": "pixabay",
+ "title": "lake, sunrise, sun, landscape, nature, lake zurich, morning mood",
+ "page": "https://pixabay.com/videos/id-267172/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 50.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-267172/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2f97976f707e6ae6ee69bea6255107113f75448b5217b484016b6a88576bb981",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  129.2,
+  128.7,
+  128.0,
+  127.1,
+  124.0
+ ],
+ "vetting_descriptions": [
+  "A beautiful sunset over a lake with mountains in the background.",
+  "A beautiful sunset over a lake with mountains in the background."
+ ],
+ "release_asset": "footage-clip-lake-lake-sunrise-sun-landscape-nature-lake-z-sha256-2f97976f707e6ae6ee69bea6255107113f75448b5217b484016b6a88576bb981.mp4"
+}

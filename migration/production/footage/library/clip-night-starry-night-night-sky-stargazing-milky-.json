@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-starry-night-night-sky-stargazing-milky-",
+ "theme": "night",
+ "query": "starry sky",
+ "source": "pixabay",
+ "title": "starry, night, night sky, stargazing, milky way, cosmic, celestial beauty, night landscape, cosmic scenery, astronomy, sky gazing, ethereal night, cosmic wonders, nature",
+ "page": "https://pixabay.com/videos/id-225587/",
+ "author": "fgcreative83",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: fgcreative83 via Pixabay (https://pixabay.com/videos/id-225587/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "85df87890c5d82459a7ec870c87f131f0730085a1346225699a2f3ff0c335fea",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED rocket"
+ ],
+ "vetting_luma": [
+  47.2,
+  44.6,
+  48.1,
+  50.1,
+  50.5
+ ],
+ "vetting_descriptions": [
+  "A tree with a rocket launching in the sky.",
+  "A tree with a starry night sky above it, a lighthouse in the distance, and a mountain in the background."
+ ],
+ "release_asset": null
+}

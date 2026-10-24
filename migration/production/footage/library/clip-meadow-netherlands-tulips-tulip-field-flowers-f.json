@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-netherlands-tulips-tulip-field-flowers-f",
+ "theme": "meadow",
+ "query": "tulip field",
+ "source": "pixabay",
+ "title": "netherlands, tulips, tulip field, flowers, field of flowers, nature, landscape, spring, blossom, farm, agriculture, holland, amsterdam, europe, tourism",
+ "page": "https://pixabay.com/videos/id-277189/",
+ "author": "Quankawa",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 22.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Quankawa via Pixabay (https://pixabay.com/videos/id-277189/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "82812d8a336f6271ef75243b0f1d7cb17c3ae1969a17980b64073456936861ea",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  141.5,
+  144.3,
+  143.9,
+  149.2,
+  148.2
+ ],
+ "vetting_descriptions": [
+  "A large body of water with a road running alongside it, and a field of flowers on the side.",
+  "A large field of crops is seen from above, with a river running through the middle."
+ ],
+ "release_asset": "footage-clip-meadow-netherlands-tulips-tulip-field-flowers-f-sha256-82812d8a336f6271ef75243b0f1d7cb17c3ae1969a17980b64073456936861ea.mp4"
+}

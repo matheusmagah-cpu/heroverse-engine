@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-cosmos-flowers-wind-field-meadow-autumn-",
+ "theme": "meadow",
+ "query": "lavender field",
+ "source": "pixabay",
+ "title": "cosmos, flowers, wind, field, meadow, autumn, spring",
+ "page": "https://pixabay.com/videos/id-182517/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-182517/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f420ad8b04b6765dcf3e16dfd21145bd83b4856677a7cf92dd5bddc953b9f37e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  127.3,
+  128.2,
+  127.5,
+  127.9,
+  127.3
+ ],
+ "vetting_descriptions": [
+  "A field of pink flowers with yellow centers and green leaves.",
+  "A field of pink flowers with yellow centers and green stems."
+ ],
+ "release_asset": "footage-clip-meadow-cosmos-flowers-wind-field-meadow-autumn--sha256-f420ad8b04b6765dcf3e16dfd21145bd83b4856677a7cf92dd5bddc953b9f37e.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-moon-full-moon-lunar-night-moonlight-sky",
+ "theme": "night",
+ "query": "full moon clouds night",
+ "source": "pixabay",
+ "title": "moon, full moon, lunar, night, moonlight, sky, universe, clouds",
+ "page": "https://pixabay.com/videos/id-241450/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-241450/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "506ceade4a2feae1f742c3fbba50677815d57acc0b9f59264e26ae96e0e1c147",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  109.2,
+  104.0,
+  88.2,
+  85.3,
+  85.4
+ ],
+ "vetting_descriptions": [
+  "A full moon is visible in the sky, with a cloudy blue background.",
+  "A full moon is visible in the sky, with a cloudy blue background."
+ ],
+ "release_asset": "footage-clip-night-moon-full-moon-lunar-night-moonlight-sky-sha256-506ceade4a2feae1f742c3fbba50677815d57acc0b9f59264e26ae96e0e1c147.mp4"
+}

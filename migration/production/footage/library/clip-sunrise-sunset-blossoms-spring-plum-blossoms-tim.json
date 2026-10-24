@@ -1,0 +1,38 @@
+{
+ "id": "clip-sunrise-sunset-blossoms-spring-plum-blossoms-tim",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "sunset, blossoms, spring, plum blossoms, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-112178/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-112178/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d1cd541816dc75bbb7d1a6d0ea8ba66a687e7074ab522b68c1a2d68fdf979045",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  124.7,
+  127.7,
+  126.3,
+  122.0,
+  117.4
+ ],
+ "vetting_descriptions": [
+  "A beautiful sunset with a tree in the foreground and a mountain in the background.",
+  "A beautiful sunset with a tree filled with blossoms and a mountain in the background."
+ ],
+ "release_asset": "footage-clip-sunrise-sunset-blossoms-spring-plum-blossoms-tim-sha256-d1cd541816dc75bbb7d1a6d0ea8ba66a687e7074ab522b68c1a2d68fdf979045.mp4"
+}

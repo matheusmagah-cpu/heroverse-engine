@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-sunset-sea-ocean-beach",
+ "theme": "ocean",
+ "query": "ocean sunset",
+ "source": "pixabay",
+ "title": "sunset, sea, ocean, beach",
+ "page": "https://pixabay.com/videos/id-264939/",
+ "author": "conghuynh8",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 50.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: conghuynh8 via Pixabay (https://pixabay.com/videos/id-264939/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5f4cfe5aec054df0146013e490b28cdfaca5295ea9a491914ba45a872a1c45f9",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.2,
+  135.3,
+  134.0,
+  133.7,
+  133.5
+ ],
+ "vetting_descriptions": [
+  "The image shows a beautiful sunset over the ocean with a mountain in the background.",
+  "The image shows a beautiful sunset over a large body of water, with a mountain in the background."
+ ],
+ "release_asset": "footage-clip-ocean-sunset-sea-ocean-beach-sha256-5f4cfe5aec054df0146013e490b28cdfaca5295ea9a491914ba45a872a1c45f9.mp4"
+}

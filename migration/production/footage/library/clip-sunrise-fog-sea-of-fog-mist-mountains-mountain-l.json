@@ -1,0 +1,38 @@
+{
+ "id": "clip-sunrise-fog-sea-of-fog-mist-mountains-mountain-l",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "fog, sea of fog, mist, mountains, mountain landscape, sun, heaven, mystical, mood, switzerland, sunrise, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-93284/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-93284/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "31fe27f8f4df67ad13755d9b55590d70962546d23da67b2cdf3efe4076460fb7",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  107.2,
+  108.6,
+  110.7,
+  112.6,
+  112.5
+ ],
+ "vetting_descriptions": [
+  "A mountain with fog and clouds surrounding it.",
+  "A mountain is covered in fog and clouds, and the sky is blue."
+ ],
+ "release_asset": "footage-clip-sunrise-fog-sea-of-fog-mist-mountains-mountain-l-sha256-31fe27f8f4df67ad13755d9b55590d70962546d23da67b2cdf3efe4076460fb7.mp4"
+}

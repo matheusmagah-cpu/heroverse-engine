@@ -1,0 +1,40 @@
+{
+ "id": "clip-sunrise-lake-gambarogno-ticino-chestnut-forests-",
+ "theme": "sunrise",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "lake, gambarogno, ticino, chestnut forests, dusk, evening atmosphere, clouds, hill, landscape, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-118777/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-118777/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "585c6a2a54ab3b678aa078e9324cb112ac8be644397169bd7a29637b8eb8e194",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED city"
+ ],
+ "vetting_luma": [
+  101.2,
+  102.7,
+  100.4,
+  97.0,
+  94.5
+ ],
+ "vetting_descriptions": [
+  "A mountain range with a cloudy sky above it, with a city below the mountains.",
+  "A mountain overlooks a city with a large body of water in the foreground."
+ ],
+ "release_asset": null
+}

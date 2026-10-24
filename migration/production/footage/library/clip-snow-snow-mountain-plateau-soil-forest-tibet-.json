@@ -1,0 +1,40 @@
+{
+ "id": "clip-snow-snow-mountain-plateau-soil-forest-tibet-",
+ "theme": "snow",
+ "query": "snow mountains",
+ "source": "pixabay",
+ "title": "snow mountain, plateau, soil forest, tibet, aerial",
+ "page": "https://pixabay.com/videos/id-214949/",
+ "author": "jiangzihao",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: jiangzihao via Pixabay (https://pixabay.com/videos/id-214949/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "dd7b2b019485667c21baabf1b45a27d7da521fa311b43d2dcc901f694438646f",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED man,person"
+ ],
+ "vetting_luma": [
+  96.2,
+  100.0,
+  106.0,
+  111.9,
+  116.2
+ ],
+ "vetting_descriptions": [
+  "A person is standing on a rocky cliff overlooking a valley with mountains in the background.",
+  "A man is standing on a rocky hill overlooking a valley with mountains in the background."
+ ],
+ "release_asset": null
+}

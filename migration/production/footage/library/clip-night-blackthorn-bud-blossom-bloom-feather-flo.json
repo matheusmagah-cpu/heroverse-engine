@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-blackthorn-bud-blossom-bloom-feather-flo",
+ "theme": "night",
+ "query": "night sky stars timelapse",
+ "source": "pixabay",
+ "title": "blackthorn, bud, blossom, bloom, feather, flowered, time lapse, timelapse, live wallpaper",
+ "page": "https://pixabay.com/videos/id-71457/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-71457/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "935ee4c1b47914ad2e105b56e81606cc74566c300fb738d6d862ad491bef5b59",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  34.1,
+  37.1,
+  41.5,
+  46.6,
+  50.2
+ ],
+ "vetting_descriptions": [
+  "A tree with white flowers on it.",
+  "A close up of a tree with white flowers on a black background."
+ ],
+ "release_asset": "footage-clip-night-blackthorn-bud-blossom-bloom-feather-flo-sha256-935ee4c1b47914ad2e105b56e81606cc74566c300fb738d6d862ad491bef5b59.mp4"
+}

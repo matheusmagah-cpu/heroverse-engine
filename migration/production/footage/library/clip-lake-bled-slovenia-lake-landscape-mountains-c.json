@@ -1,0 +1,40 @@
+{
+ "id": "clip-lake-bled-slovenia-lake-landscape-mountains-c",
+ "theme": "lake",
+ "query": "alpine lake",
+ "source": "pixabay",
+ "title": "bled, slovenia, lake, landscape, mountains, church, water, castle, outdoors, alpine, reflection, alps, travel, blue, nature, summer, drone, 4k",
+ "page": "https://pixabay.com/videos/id-306680/",
+ "author": "LynX_BGW",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: LynX_BGW via Pixabay (https://pixabay.com/videos/id-306680/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "35e82f9bf14dc7a009f0a4067795fee4306205aad370028bdda2453733b66386",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat,city"
+ ],
+ "vetting_luma": [
+  110.2,
+  109.9,
+  110.0,
+  110.1,
+  110.4
+ ],
+ "vetting_descriptions": [
+  "A large body of water with a boat in it, mountains in the background, and a city in the distance.",
+  "A large body of water with a boat in it, surrounded by mountains and a city."
+ ],
+ "release_asset": null
+}

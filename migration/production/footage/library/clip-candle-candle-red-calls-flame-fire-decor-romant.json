@@ -1,0 +1,40 @@
+{
+ "id": "clip-candle-candle-red-calls-flame-fire-decor-romant",
+ "theme": "candle",
+ "query": "candle flame",
+ "source": "pixabay",
+ "title": "candle, red, calls, flame, fire, decor, romantic, light, bright, illumination, christmas, night, festive, december, evening",
+ "page": "https://pixabay.com/videos/id-19621/",
+ "author": "ElenLackner",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ElenLackner via Pixabay (https://pixabay.com/videos/id-19621/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4932337a329223e1df8d8a988b4c939a100e73ea6cad631439d871cae57fa242",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  12.3,
+  12.0,
+  12.2,
+  10.9,
+  8.9
+ ],
+ "vetting_descriptions": [
+  "A lit candle with a blue flame is in a dark room.",
+  "A lit candle with a flame in the middle of a red wax candle."
+ ],
+ "release_asset": null
+}

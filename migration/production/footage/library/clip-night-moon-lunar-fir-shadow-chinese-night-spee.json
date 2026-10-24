@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-moon-lunar-fir-shadow-chinese-night-spee",
+ "theme": "night",
+ "query": "night forest moon",
+ "source": "pixabay",
+ "title": "moon, lunar, fir, shadow, chinese, night, speed accelerated, quick, eclipse",
+ "page": "https://pixabay.com/videos/id-30155/",
+ "author": "Guyjass",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Guyjass via Pixabay (https://pixabay.com/videos/id-30155/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f27e3996e79b4dd68dd7256dd67b43b1590c23c441d8eef9b53066cb59fb5cf9",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  3.6,
+  3.4,
+  3.2,
+  3.0,
+  3.1
+ ],
+ "vetting_descriptions": [
+  "A moon is visible in the sky, and a tree is in the foreground.",
+  "A full moon is seen in the sky with a tree in the foreground."
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,41 @@
+{
+ "id": "clip-night-moon-full-moon-rising-moon-night-mountai",
+ "theme": "night",
+ "query": "full moon clouds night",
+ "source": "pixabay",
+ "title": "moon, full moon, rising moon, night, mountains, landscape",
+ "page": "https://pixabay.com/videos/id-124291/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-124291/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4a3d1ae85231b86813a4e7dff51e99ea33132ea68cb5eda2978af818ffa0037a",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  6.0,
+  6.0,
+  6.1,
+  6.1,
+  6.1
+ ],
+ "vetting_descriptions": [
+  "A moonlit night with a mountain range in the background and a lone person standing on the side of a mountain.",
+  "A moonlit night with a full moon in the sky and a mountain range in the background."
+ ],
+ "release_asset": null
+}

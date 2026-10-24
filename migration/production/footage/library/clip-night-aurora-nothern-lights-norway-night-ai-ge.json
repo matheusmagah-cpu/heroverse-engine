@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-aurora-nothern-lights-norway-night-ai-ge",
+ "theme": "night",
+ "query": "aurora borealis",
+ "source": "pixabay",
+ "title": "aurora, nothern lights, norway, night, ai generated",
+ "page": "https://pixabay.com/videos/id-369027/",
+ "author": "rolvskjaerpe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: rolvskjaerpe via Pixabay (https://pixabay.com/videos/id-369027/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "582fb8ddbdef3a23dc2bfee12196c36dd9c852ab8ca97981ae311a12c60dafe9",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  51.8,
+  46.0,
+  53.1,
+  45.9,
+  55.8
+ ],
+ "vetting_descriptions": [
+  "The image shows a night sky with a purple hue, a few clouds, and a green glowing light. The green light is a result of the Aurora Borealis, which is a natural light display in the sky.",
+  "The image shows a night sky with a few stars and a cloudy sky."
+ ],
+ "release_asset": "footage-clip-night-aurora-nothern-lights-norway-night-ai-ge-sha256-582fb8ddbdef3a23dc2bfee12196c36dd9c852ab8ca97981ae311a12c60dafe9.mp4"
+}

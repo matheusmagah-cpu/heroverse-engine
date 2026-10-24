@@ -1,0 +1,38 @@
+{
+ "id": "clip-forest-trees-sunset-forest-sun-light-golden-hou",
+ "theme": "forest",
+ "query": "sunbeams forest",
+ "source": "pixabay",
+ "title": "trees, sunset, forest, sun, light, golden hour, aerial, drone, nature, landscape, field, woods, sunbeams",
+ "page": "https://pixabay.com/videos/id-123204/",
+ "author": "Borobstacle",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Borobstacle via Pixabay (https://pixabay.com/videos/id-123204/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b03c91e0c734aab7c979d1e869b2a901961ec8a1b8573aaa3488ec86987b2353",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  119.8,
+  106.3,
+  115.0,
+  115.2,
+  110.6
+ ],
+ "vetting_descriptions": [
+  "A sunny day in the woods with a bright sun shining through the trees.",
+  "A sunny day in a forest with green trees and a sun shining through."
+ ],
+ "release_asset": "footage-clip-forest-trees-sunset-forest-sun-light-golden-hou-sha256-b03c91e0c734aab7c979d1e869b2a901961ec8a1b8573aaa3488ec86987b2353.mp4"
+}

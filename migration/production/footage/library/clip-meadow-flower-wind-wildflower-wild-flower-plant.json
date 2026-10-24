@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-flower-wind-wildflower-wild-flower-plant",
+ "theme": "meadow",
+ "query": "flowers wind",
+ "source": "pixabay",
+ "title": "flower, wind, wildflower, wild flower, plant, macro, affix",
+ "page": "https://pixabay.com/videos/id-166051/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-166051/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d50ac049a6167c75fbac4da124f19ccf63eab040a7adb21c4702bdf3e19aacd4",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  76.0,
+  75.7,
+  76.1,
+  76.5,
+  76.8
+ ],
+ "vetting_descriptions": [
+  "A red flower with orange petals is in the foreground, with green leaves in the background.",
+  "A red flower with a yellow stalk is in the foreground, with a green plant in the background."
+ ],
+ "release_asset": "footage-clip-meadow-flower-wind-wildflower-wild-flower-plant-sha256-d50ac049a6167c75fbac4da124f19ccf63eab040a7adb21c4702bdf3e19aacd4.mp4"
+}

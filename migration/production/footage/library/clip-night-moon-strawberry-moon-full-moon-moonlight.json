@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-moon-strawberry-moon-full-moon-moonlight",
+ "theme": "night",
+ "query": "full moon clouds night",
+ "source": "pixabay",
+ "title": "moon, strawberry moon, full moon, moonlight, night, nature, heaven, night sky, seem to be",
+ "page": "https://pixabay.com/videos/id-285511/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-285511/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e5bbcbfe7366329db9052ad2f6b71982dd4a27e96f6ed973bd001daca63e2aa3",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  9.9,
+  9.7,
+  10.0,
+  10.0,
+  9.7
+ ],
+ "vetting_descriptions": [
+  "A black sky with trees in the background.",
+  "A red moon is seen in the sky above a forest, with a few trees visible in the foreground."
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-flowers-field-meadow-lake-water-dolomite",
+ "theme": "lake",
+ "query": "alpine lake",
+ "source": "pixabay",
+ "title": "flowers, field, meadow, lake, water, dolomites, alpine, mountains, panorama, national park, sky, clouds, scenic, reflection, sunrise, sunset, italy, nature, landscape",
+ "page": "https://pixabay.com/videos/id-130473/",
+ "author": "Ambient_Nature_Atmosphere",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-130473/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0ce508da5241a2dee3009a9e37c458a5d1885ba6b5d98963f930551cd6b798dd",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  113.6,
+  114.0,
+  114.6,
+  115.1,
+  114.6
+ ],
+ "vetting_descriptions": [
+  "A field of sunflowers with a blue sky above.",
+  "A field of sunflowers with a yellow sunflower in the foreground."
+ ],
+ "release_asset": "footage-clip-lake-flowers-field-meadow-lake-water-dolomite-sha256-0ce508da5241a2dee3009a9e37c458a5d1885ba6b5d98963f930551cd6b798dd.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-ink-bubbles-drops-abstract-colours-patte",
+ "theme": "candle",
+ "query": "oil lamp flame",
+ "source": "pixabay",
+ "title": "ink, bubbles, drops, abstract, colours, pattern, food colouring, vintage, macro, water, close-up, visuals, experimental, colorful, oil, modern, multicolor, universe, planets, psychedelic",
+ "page": "https://pixabay.com/videos/id-183136/",
+ "author": "StefWithAnF",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: StefWithAnF via Pixabay (https://pixabay.com/videos/id-183136/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0725336fcc15bc60448e775771c73586f3b20848c9b9e5623bcd0c73c8cbdedb",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  60.2,
+  68.5,
+  62.5,
+  57.3,
+  66.6
+ ],
+ "vetting_descriptions": [
+  "A close up of a green and red swirling liquid with silver stars and a green background.",
+  "A colorful painting of stars and triangles is displayed on a red background."
+ ],
+ "release_asset": "footage-clip-candle-ink-bubbles-drops-abstract-colours-patte-sha256-0725336fcc15bc60448e775771c73586f3b20848c9b9e5623bcd0c73c8cbdedb.mp4"
+}

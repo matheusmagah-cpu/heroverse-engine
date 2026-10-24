@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-waterfowl-swan-coot-water-at-sea-lake-la",
+ "theme": "rain",
+ "query": "rain at night",
+ "source": "pixabay",
+ "title": "waterfowl, swan, coot, water, at sea, lake, landscape, nature",
+ "page": "https://pixabay.com/videos/id-328741/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-328741/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "92e35d0b72576be6e7fac18c7f8dea9c1e356f9e09d7ca5799a21358b1a73baf",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  125.2,
+  124.9,
+  125.1,
+  124.3,
+  124.0
+ ],
+ "vetting_descriptions": [
+  "A beautiful scene of a lake with a mountain in the background, with a bird flying over the water and a lone pole sticking out of the water.",
+  "A white swan swims in the water with a mountain in the background."
+ ],
+ "release_asset": "footage-clip-rain-waterfowl-swan-coot-water-at-sea-lake-la-sha256-92e35d0b72576be6e7fac18c7f8dea9c1e356f9e09d7ca5799a21358b1a73baf.mp4"
+}

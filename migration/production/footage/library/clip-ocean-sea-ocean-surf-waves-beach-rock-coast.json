@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-sea-ocean-surf-waves-beach-rock-coast",
+ "theme": "ocean",
+ "query": "sea waves rocks",
+ "source": "pixabay",
+ "title": "sea, ocean, surf, waves, beach, rock, coast",
+ "page": "https://pixabay.com/videos/id-137001/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-137001/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6ea901ec5a12039c9c918330b69b8e637094dacd85c0b632c58d727da9586005",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  93.5,
+  93.4,
+  93.6,
+  93.9,
+  93.9
+ ],
+ "vetting_descriptions": [
+  "A rocky cliff overlooking the ocean with a few rocks in the water.",
+  "A rocky cliff overlooking the ocean with a few rocks and a tree."
+ ],
+ "release_asset": "footage-clip-ocean-sea-ocean-surf-waves-beach-rock-coast-sha256-6ea901ec5a12039c9c918330b69b8e637094dacd85c0b632c58d727da9586005.mp4"
+}

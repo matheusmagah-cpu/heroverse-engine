@@ -1,0 +1,40 @@
+{
+ "id": "clip-candle-candle-candlelight-burning-flames-light-",
+ "theme": "candle",
+ "query": "candlelight night",
+ "source": "pixabay",
+ "title": "candle, candlelight, burning, flames, light, night, christmas",
+ "page": "https://pixabay.com/videos/id-192011/",
+ "author": "Yulia_Repnikova",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Yulia_Repnikova via Pixabay (https://pixabay.com/videos/id-192011/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d938c5f1a052483d0f2c39205196d89b8b8dc1dfebf9f17460f012835a640145",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  1.7,
+  1.9,
+  1.9,
+  1.9,
+  1.9
+ ],
+ "vetting_descriptions": [
+  "A single lit candle is in the middle of a black background.",
+  "A single lit candle is in a dark room, and the flame is yellow."
+ ],
+ "release_asset": null
+}

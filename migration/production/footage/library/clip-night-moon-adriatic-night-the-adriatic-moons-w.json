@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-moon-adriatic-night-the-adriatic-moons-w",
+ "theme": "night",
+ "query": "night forest moon",
+ "source": "pixabay",
+ "title": "moon, adriatic, night, the adriatic, moons, water, sea",
+ "page": "https://pixabay.com/videos/id-32635/",
+ "author": "crimea13",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: crimea13 via Pixabay (https://pixabay.com/videos/id-32635/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8c590076d42d16b6450c90230325b0401f3e566e7baf698e1e04f21fd8264799",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED city"
+ ],
+ "vetting_luma": [
+  8.4,
+  13.6,
+  14.1,
+  14.5,
+  14.8
+ ],
+ "vetting_descriptions": [
+  "A cityscape at night with a moon in the sky, a lit-up city, and a lit-up beach.",
+  "A city at night with a moon in the sky and a lit up cityscape."
+ ],
+ "release_asset": null
+}

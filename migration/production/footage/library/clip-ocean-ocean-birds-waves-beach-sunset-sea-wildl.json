@@ -1,0 +1,40 @@
+{
+ "id": "clip-ocean-ocean-birds-waves-beach-sunset-sea-wildl",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "ocean, birds, waves, beach, sunset, sea, wildlife, horizon, seagulls, nature, sky, coast, relax, sunrise, reflection, australia, landscape, live wallpaper",
+ "page": "https://pixabay.com/videos/id-74888/",
+ "author": "daniloriba",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: daniloriba via Pixabay (https://pixabay.com/videos/id-74888/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9220fb4348225ae00d5004b6fa2e557f3d78588d5321400cbd553aed77bac49c",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat"
+ ],
+ "vetting_luma": [
+  151.1,
+  150.3,
+  149.5,
+  145.0,
+  136.5
+ ],
+ "vetting_descriptions": [
+  "A large body of water with a few ripples and a cloudy sky.",
+  "A large body of water with a boat in the distance."
+ ],
+ "release_asset": null
+}

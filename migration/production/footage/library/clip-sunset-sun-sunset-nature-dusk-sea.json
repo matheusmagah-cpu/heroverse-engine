@@ -1,0 +1,38 @@
+{
+ "id": "clip-sunset-sun-sunset-nature-dusk-sea",
+ "theme": "sunset",
+ "query": "sunset sea",
+ "source": "pixabay",
+ "title": "sun, sunset, nature, dusk, sea",
+ "page": "https://pixabay.com/videos/id-263209/",
+ "author": "conghuynh8",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: conghuynh8 via Pixabay (https://pixabay.com/videos/id-263209/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "de8f36894f64b7146851b3b7f5ea3afad9e3a9beb6790da8444d0387efa467bf",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  115.6,
+  115.7,
+  117.8,
+  114.4,
+  113.6
+ ],
+ "vetting_descriptions": [
+  "A beautiful sunset over the ocean with clouds in the sky.",
+  "The sun is setting over the ocean, creating a beautiful scene with clouds and a blue sky."
+ ],
+ "release_asset": "footage-clip-sunset-sun-sunset-nature-dusk-sea-sha256-de8f36894f64b7146851b3b7f5ea3afad9e3a9beb6790da8444d0387efa467bf.mp4"
+}

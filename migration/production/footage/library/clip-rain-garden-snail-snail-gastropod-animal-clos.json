@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-garden-snail-snail-gastropod-animal-clos",
+ "theme": "rain",
+ "query": "rain at night",
+ "source": "pixabay",
+ "title": "garden snail, snail, gastropod, animal, close up, macro, speed, slow, dark, wood, wet, rain, night",
+ "page": "https://pixabay.com/videos/id-24342/",
+ "author": "attilaolah",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: attilaolah via Pixabay (https://pixabay.com/videos/id-24342/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "873edf0a62431d7a9783be6249ef744cfd27aceef6f355d50314e79ca4d6c06c",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  10.6,
+  12.3,
+  12.9,
+  16.7,
+  17.0
+ ],
+ "vetting_descriptions": [
+  "A black and white photo of a wooden table with a black background.",
+  "A slug is sitting on a log, and the log is on a tree."
+ ],
+ "release_asset": "footage-clip-rain-garden-snail-snail-gastropod-animal-clos-sha256-873edf0a62431d7a9783be6249ef744cfd27aceef6f355d50314e79ca4d6c06c.mp4"
+}

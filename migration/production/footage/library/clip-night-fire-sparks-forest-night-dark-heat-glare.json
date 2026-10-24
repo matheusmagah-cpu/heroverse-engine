@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-fire-sparks-forest-night-dark-heat-glare",
+ "theme": "night",
+ "query": "night forest moon",
+ "source": "pixabay",
+ "title": "fire, sparks, forest, night, dark, heat, glare, flame, camp, mountain, trip, holiday, spark, beautiful wallpaper, wood, coal, nature, background",
+ "page": "https://pixabay.com/videos/id-236711/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-236711/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6d238a8584111edfe70e8d211bf699a54d92757e31534773afde698c8603913c",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED person"
+ ],
+ "vetting_luma": [
+  26.3,
+  27.0,
+  24.1,
+  18.5,
+  20.5
+ ],
+ "vetting_descriptions": [
+  "A fire is burning in a fire pit, and there is a person standing nearby.",
+  "A fire pit with a fire burning in it, with a smoke stack in the background."
+ ],
+ "release_asset": null
+}

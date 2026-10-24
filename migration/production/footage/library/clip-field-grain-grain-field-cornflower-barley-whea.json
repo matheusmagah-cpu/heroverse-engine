@@ -1,0 +1,38 @@
+{
+ "id": "clip-field-grain-grain-field-cornflower-barley-whea",
+ "theme": "field",
+ "query": "wheat field",
+ "source": "pixabay",
+ "title": "grain, grain field, cornflower, barley, wheat",
+ "page": "https://pixabay.com/videos/id-132781/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-132781/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e7b97532f29e2c10ae2e1adf177fc88f8e76b565436ce96f4b44b22b5998372e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  82.9,
+  82.8,
+  82.5,
+  82.8,
+  82.4
+ ],
+ "vetting_descriptions": [
+  "A field of blue flowers with a blue sky above.",
+  "A field of blue flowers with a yellow background."
+ ],
+ "release_asset": "footage-clip-field-grain-grain-field-cornflower-barley-whea-sha256-e7b97532f29e2c10ae2e1adf177fc88f8e76b565436ce96f4b44b22b5998372e.mp4"
+}

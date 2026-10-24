@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-blood-moon-moon-night-nature-moonlight-s",
+ "theme": "night",
+ "query": "moonlight night sky",
+ "source": "pixabay",
+ "title": "blood moon, moon, night, nature, moonlight, sky, lunar, space, luna, dark, astronomy, craters, eclipse, darkness, solar, universe, sunlight",
+ "page": "https://pixabay.com/videos/id-338887/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-338887/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4d41588f82651dd7c60d3a4ee24703cd0895abd0f52e88c0beca81fc98238ceb",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  6.0,
+  6.1,
+  6.1,
+  6.2,
+  6.2
+ ],
+ "vetting_descriptions": [
+  "A red moon is visible in the night sky, with a red hue.",
+  "A red moon is visible in the night sky, with a red hue."
+ ],
+ "release_asset": null
+}

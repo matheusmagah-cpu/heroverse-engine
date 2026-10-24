@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-rain-rainy-day-rain-clouds-rainy-precipi",
+ "theme": "rain",
+ "query": "rain window night",
+ "source": "pixabay",
+ "title": "rain, rainy day, rain clouds, rainy, precipitation, weather, rainy weather, raindrops, nature, landscape, timelapse",
+ "page": "https://pixabay.com/videos/id-215347/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 23.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-215347/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "cc81c522309d950d9ff2710722885f5505123f30ca2f8bb82dd25e3f3e747c73",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  60.6,
+  75.2,
+  90.1,
+  103.7,
+  123.9
+ ],
+ "vetting_descriptions": [
+  "A dark cloudy sky is over a green field with a house and a tree in the foreground.",
+  "A view of a cloudy sky with a green field and a palm tree in the foreground."
+ ],
+ "release_asset": "footage-clip-rain-rain-rainy-day-rain-clouds-rainy-precipi-sha256-cc81c522309d950d9ff2710722885f5505123f30ca2f8bb82dd25e3f3e747c73.mp4"
+}

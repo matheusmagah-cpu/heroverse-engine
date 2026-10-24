@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-pine-santa-claus-christmas-new-year-cele",
+ "theme": "candle",
+ "query": "oil lamp flame",
+ "source": "pixabay",
+ "title": "pine, santa claus, christmas, new year, celebration, traditional, religion, december, decor, ornament, decoration, candle, flame, oil lamp, light, prayer, faith, tradition",
+ "page": "https://pixabay.com/videos/id-59520/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-59520/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "87eb2fb0b5ce45485049ecd96dfae73ecc6b46e637b04d5d43cd60bef880ec51",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  15.7,
+  15.1,
+  17.5,
+  14.0,
+  13.8
+ ],
+ "vetting_descriptions": [
+  "A Christmas tree, a snow globe, and a lit candle are displayed on a table.",
+  "A Christmas tree with ornaments and a red ball on top, a glass ball with a Santa Claus figurine inside, and a lit candle."
+ ],
+ "release_asset": "footage-clip-candle-pine-santa-claus-christmas-new-year-cele-sha256-87eb2fb0b5ce45485049ecd96dfae73ecc6b46e637b04d5d43cd60bef880ec51.mp4"
+}

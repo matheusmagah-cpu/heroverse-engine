@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-starry-sky-stars-night-sky-milky-way-tim",
+ "theme": "night",
+ "query": "starry sky",
+ "source": "pixabay",
+ "title": "starry sky, stars, night sky, milky way, time lapse",
+ "page": "https://pixabay.com/videos/id-135425/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-135425/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2e17564e867c52b4a47684a2167108f3ec60f96f1838d68cf6835b4f5391a468",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED car,person"
+ ],
+ "vetting_luma": [
+  14.3,
+  14.6,
+  28.0,
+  36.2,
+  37.9
+ ],
+ "vetting_descriptions": [
+  "A nighttime view of the sky with a few stars and a light on the horizon.",
+  "A nighttime scene with a house, a car, and a person in front of a dark sky."
+ ],
+ "release_asset": null
+}

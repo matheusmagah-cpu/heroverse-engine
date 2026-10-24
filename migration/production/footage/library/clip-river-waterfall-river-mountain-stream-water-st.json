@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-waterfall-river-mountain-stream-water-st",
+ "theme": "river",
+ "query": "mountain stream",
+ "source": "pixabay",
+ "title": "waterfall, river, mountain, stream, water stream, bulut selalesi, turkey, flow, flowing, grass, water, 4k resolution, meditation, relaxation, scenic, scenic view, scenic landscape, nature",
+ "page": "https://pixabay.com/videos/id-122895/",
+ "author": "RYajlan",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: RYajlan via Pixabay (https://pixabay.com/videos/id-122895/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "42dd0d72d931e6a6109892c4f04571a050620d69d5227b81c86f1c811e6db809",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  87.0,
+  87.8,
+  87.8,
+  86.8,
+  87.3
+ ],
+ "vetting_descriptions": [
+  "A waterfall is visible in the image, surrounded by trees and rocks.",
+  "A waterfall is visible in the image, surrounded by trees and rocks."
+ ],
+ "release_asset": "footage-clip-river-waterfall-river-mountain-stream-water-st-sha256-42dd0d72d931e6a6109892c4f04571a050620d69d5227b81c86f1c811e6db809.mp4"
+}

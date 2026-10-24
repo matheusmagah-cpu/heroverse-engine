@@ -1,0 +1,38 @@
+{
+ "id": "clip-meadow-tulips-flowers-tulip-field-field-of-flow",
+ "theme": "meadow",
+ "query": "tulip field",
+ "source": "pixabay",
+ "title": "tulips, flowers, tulip field, field of flowers, nature, flora, spring, summer, amsterdam, netherlands, holland",
+ "page": "https://pixabay.com/videos/id-114984/",
+ "author": "Quankawa",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 24.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Quankawa via Pixabay (https://pixabay.com/videos/id-114984/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "73198955d6bf183aef64cae81ac675027a9ea8bf49f98a66846c8b5b101c0d31",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.0,
+  119.6,
+  126.9,
+  123.6,
+  122.9
+ ],
+ "vetting_descriptions": [
+  "A field of flowers with a rainbow of colors, including pink, white, and yellow, with a clear blue sky above.",
+  "A large field of flowers with a variety of colors, including pink, purple, and white, is visible in the image."
+ ],
+ "release_asset": "footage-clip-meadow-tulips-flowers-tulip-field-field-of-flow-sha256-73198955d6bf183aef64cae81ac675027a9ea8bf49f98a66846c8b5b101c0d31.mp4"
+}

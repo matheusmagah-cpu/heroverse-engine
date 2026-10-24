@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-river-stream-creek-flowing-forest-logs-t",
+ "theme": "river",
+ "query": "forest creek",
+ "source": "pixabay",
+ "title": "river, stream, creek, flowing, forest, logs, trees, leaves, green",
+ "page": "https://pixabay.com/videos/id-224044/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-224044/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c5120146f0fbdfa0322463b101ff6ca0419b936375fec579a2e7a175e34d582a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  127.4,
+  127.5,
+  127.4,
+  127.5,
+  127.9
+ ],
+ "vetting_descriptions": [
+  "A river with a tree branch in it, and a tree branch with green leaves.",
+  "A river with a tree branch in it, and a log in the water."
+ ],
+ "release_asset": "footage-clip-river-river-stream-creek-flowing-forest-logs-t-sha256-c5120146f0fbdfa0322463b101ff6ca0419b936375fec579a2e7a175e34d582a.mp4"
+}

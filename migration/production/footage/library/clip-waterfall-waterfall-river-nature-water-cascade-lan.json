@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-waterfall-river-nature-water-cascade-lan",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "pixabay",
+ "title": "waterfall, river, nature, water, cascade, landscape, flow, fresh, forest, move, green",
+ "page": "https://pixabay.com/videos/id-22589/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-22589/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8771757f4b9e005485fd1279210d9af046904bb760db2f85c74740d9c5dfbdf8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  73.3,
+  73.4,
+  72.9,
+  72.7,
+  73.3
+ ],
+ "vetting_descriptions": [
+  "A waterfall is surrounded by trees and rocks, and the waterfall is surrounded by a forest.",
+  "A waterfall is surrounded by trees and rocks, and there is a blue river below."
+ ],
+ "release_asset": "footage-clip-waterfall-waterfall-river-nature-water-cascade-lan-sha256-8771757f4b9e005485fd1279210d9af046904bb760db2f85c74740d9c5dfbdf8.mp4"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-night-night-moon-night-sky-lights-village-land",
+ "theme": "night",
+ "query": "full moon clouds night",
+ "source": "pixabay",
+ "title": "night, moon, night sky, lights, village, landscape",
+ "page": "https://pixabay.com/videos/id-249590/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-249590/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9043c8f226534c4465ad5a7ebb60ce30d20152f493483a43c64b030df466227b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED car,person"
+ ],
+ "vetting_luma": [
+  37.2,
+  33.7,
+  31.8,
+  29.5,
+  25.6
+ ],
+ "vetting_descriptions": [
+  "The image shows a night scene with a moon in the sky, a house with lights on, and a forest with trees.",
+  "A night scene with a moon in the sky, a house, a car, and a person."
+ ],
+ "release_asset": null
+}

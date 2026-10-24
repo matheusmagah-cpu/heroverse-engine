@@ -1,0 +1,40 @@
+{
+ "id": "clip-candle-lantern-candle-flame-fire-burn-candlelig",
+ "theme": "candle",
+ "query": "candles",
+ "source": "pixabay",
+ "title": "lantern, candle, flame, fire, burn, candlelight",
+ "page": "https://pixabay.com/videos/id-125071/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-125071/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "56462dae6ee9d2fbd843f3ba50c3aaa535a0c0edde7ee22308460d5bd4cf9153",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  6.0,
+  5.6,
+  5.4,
+  5.3,
+  5.5
+ ],
+ "vetting_descriptions": [
+  "A lit candle in a black and gold metal container.",
+  "A lit candle in a metal container with a design on it."
+ ],
+ "release_asset": null
+}

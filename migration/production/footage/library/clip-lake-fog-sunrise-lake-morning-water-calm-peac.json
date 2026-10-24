@@ -1,0 +1,38 @@
+{
+ "id": "clip-lake-fog-sunrise-lake-morning-water-calm-peac",
+ "theme": "lake",
+ "query": "lake sunrise",
+ "source": "pixabay",
+ "title": "fog, sunrise, lake, morning, water, calm, peaceful, netherlands, drenthe, mist, drone, 4k, aerial, nature",
+ "page": "https://pixabay.com/videos/id-127995/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-127995/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c40879d157e5fb35a5b213593945ed7f99708490d0fcd52030b174b6f6fe4ae0",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  110.8,
+  114.9,
+  120.4,
+  126.8,
+  137.0
+ ],
+ "vetting_descriptions": [
+  "The sun is setting over a body of water, with trees in the background.",
+  "A beautiful sunset over a lake with a forest in the background."
+ ],
+ "release_asset": "footage-clip-lake-fog-sunrise-lake-morning-water-calm-peac-sha256-c40879d157e5fb35a5b213593945ed7f99708490d0fcd52030b174b6f6fe4ae0.mp4"
+}

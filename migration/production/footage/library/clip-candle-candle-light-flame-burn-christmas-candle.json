@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-candle-light-flame-burn-christmas-candle",
+ "theme": "candle",
+ "query": "candlelight night",
+ "source": "pixabay",
+ "title": "candle, light, flame, burn, christmas, candlelight, bokeh, advent, festive season",
+ "page": "https://pixabay.com/videos/id-141824/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-141824/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3779c19355b99a7d261ea353bb72dc5930378e4dbd15ba02bacd9d26bb28b87a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  102.8,
+  102.9,
+  103.0,
+  102.8,
+  102.7
+ ],
+ "vetting_descriptions": [
+  "A lit red candle in a red holder with a yellow background of lights.",
+  "A lit candle in a red wax holder is surrounded by a brightly lit environment."
+ ],
+ "release_asset": "footage-clip-candle-candle-light-flame-burn-christmas-candle-sha256-3779c19355b99a7d261ea353bb72dc5930378e4dbd15ba02bacd9d26bb28b87a.mp4"
+}

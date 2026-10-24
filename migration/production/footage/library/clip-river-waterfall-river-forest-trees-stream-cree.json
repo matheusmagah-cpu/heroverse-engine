@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-waterfall-river-forest-trees-stream-cree",
+ "theme": "river",
+ "query": "forest creek",
+ "source": "pixabay",
+ "title": "waterfall, river, forest, trees, stream, creek, nature, landscape",
+ "page": "https://pixabay.com/videos/id-239348/",
+ "author": "McPix22",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-239348/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "fefdb1ec3fc09bfe9c990ceada34799fcebed489ae200c59d5afe3ff8c870c14",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  108.1,
+  108.1,
+  108.2,
+  108.0,
+  108.1
+ ],
+ "vetting_descriptions": [
+  "A waterfall is surrounded by trees and rocks, and there is a log in the foreground.",
+  "A waterfall is surrounded by trees and rocks, and there is a large boulder in front of it."
+ ],
+ "release_asset": "footage-clip-river-waterfall-river-forest-trees-stream-cree-sha256-fefdb1ec3fc09bfe9c990ceada34799fcebed489ae200c59d5afe3ff8c870c14.mp4"
+}

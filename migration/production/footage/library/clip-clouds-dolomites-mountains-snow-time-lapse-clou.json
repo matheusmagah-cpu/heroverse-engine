@@ -1,0 +1,38 @@
+{
+ "id": "clip-clouds-dolomites-mountains-snow-time-lapse-clou",
+ "theme": "clouds",
+ "query": "clouds timelapse mountains",
+ "source": "pixabay",
+ "title": "dolomites, mountains, snow, time lapse, clouds, winter, italy, heaven, mountain landscape, timelapse",
+ "page": "https://pixabay.com/videos/id-22633/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-22633/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4c5c82d7881cd10784955e4cd5998571c293e914275c355f7f42a11dc76a2ca0",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  167.3,
+  168.6,
+  168.3,
+  171.4,
+  175.3
+ ],
+ "vetting_descriptions": [
+  "A snowy mountain with a cloudy sky above it.",
+  "A snowy mountain with a valley below and a cloudy sky above."
+ ],
+ "release_asset": "footage-clip-clouds-dolomites-mountains-snow-time-lapse-clou-sha256-4c5c82d7881cd10784955e4cd5998571c293e914275c355f7f42a11dc76a2ca0.mp4"
+}

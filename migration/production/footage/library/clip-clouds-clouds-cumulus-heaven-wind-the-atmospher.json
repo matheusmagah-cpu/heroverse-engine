@@ -1,0 +1,38 @@
+{
+ "id": "clip-clouds-clouds-cumulus-heaven-wind-the-atmospher",
+ "theme": "clouds",
+ "query": "cumulus clouds timelapse",
+ "source": "pixabay",
+ "title": "clouds, cumulus, heaven, wind, the atmosphere, time lapse, sunny, timewarp, beautiful, blue, sky, cloud",
+ "page": "https://pixabay.com/videos/id-90906/",
+ "author": "Kaffeesüchtig",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-90906/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "da5dcdd65fc2f20abb6a19477cf91c392fa68edf15e72251def4835ae0c0f219",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  131.1,
+  130.5,
+  133.0,
+  132.4,
+  128.6
+ ],
+ "vetting_descriptions": [
+  "A cloudy blue sky with a few clouds and a white fluffy cloud in the middle of the sky.",
+  "A cloudy blue sky with a few clouds and a white fluffy cloud in the middle."
+ ],
+ "release_asset": "footage-clip-clouds-clouds-cumulus-heaven-wind-the-atmospher-sha256-da5dcdd65fc2f20abb6a19477cf91c392fa68edf15e72251def4835ae0c0f219.mp4"
+}

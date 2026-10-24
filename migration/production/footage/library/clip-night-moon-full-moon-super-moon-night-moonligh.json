@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-moon-full-moon-super-moon-night-moonligh",
+ "theme": "night",
+ "query": "moonlight night sky",
+ "source": "pixabay",
+ "title": "moon, full moon, super moon, night, moonlight, dark, sky, mystical, luna, lunar, halloween, mysterious, pink moon, night time, gloomy, atmosphere, happyhalloween, horror, gothic",
+ "page": "https://pixabay.com/videos/id-35455/",
+ "author": "Elynde",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Elynde via Pixabay (https://pixabay.com/videos/id-35455/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ac7622066c15e055af98b6b4275fb258b4c5d7f8a3a9d16c6822aed7f9ad93d8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  62.0,
+  62.5,
+  60.4,
+  58.3,
+  59.2
+ ],
+ "vetting_descriptions": [
+  "The moon is full and shining brightly in the sky, with clouds surrounding it.",
+  "A full moon is visible in the sky, with clouds surrounding it."
+ ],
+ "release_asset": "footage-clip-night-moon-full-moon-super-moon-night-moonligh-sha256-ac7622066c15e055af98b6b4275fb258b4c5d7f8a3a9d16c6822aed7f9ad93d8.mp4"
+}

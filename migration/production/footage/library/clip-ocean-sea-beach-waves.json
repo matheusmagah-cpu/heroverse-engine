@@ -1,0 +1,40 @@
+{
+ "id": "clip-ocean-sea-beach-waves",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "sea, beach, waves",
+ "page": "https://pixabay.com/videos/id-263305/",
+ "author": "conghuynh8",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: conghuynh8 via Pixabay (https://pixabay.com/videos/id-263305/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "cf76c29588d9bd559008efe2072b76a989680c32c9538fc61f8909f31b97bcc7",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED people"
+ ],
+ "vetting_luma": [
+  113.8,
+  116.2,
+  117.1,
+  117.0,
+  116.2
+ ],
+ "vetting_descriptions": [
+  "A beach scene with people, umbrellas, and a surfer in the water.",
+  "A beach scene with people and umbrellas, and a surfer in the water."
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-mist-clouds-sunset-fog-sun-forest-fir-forest",
+ "theme": "mist",
+ "query": "fog forest",
+ "source": "pixabay",
+ "title": "clouds, sunset, fog, sun, forest, fir forest",
+ "page": "https://pixabay.com/videos/id-143485/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-143485/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eaca5172f81a129353ddbf4406d64d041fb9860296c22443f07fd1a85af50746",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  101.6,
+  61.9,
+  62.7,
+  56.9,
+  60.4
+ ],
+ "vetting_descriptions": [
+  "A cloudy sky with a sun shining through it.",
+  "A dark cloudy sky with a tree in the foreground and a forest in the background."
+ ],
+ "release_asset": "footage-clip-mist-clouds-sunset-fog-sun-forest-fir-forest-sha256-eaca5172f81a129353ddbf4406d64d041fb9860296c22443f07fd1a85af50746.mp4"
+}

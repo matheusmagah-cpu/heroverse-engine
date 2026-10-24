@@ -1,0 +1,38 @@
+{
+ "id": "clip-river-mountain-tree-flying-sky-water-travel-st",
+ "theme": "river",
+ "query": "mountain stream",
+ "source": "pixabay",
+ "title": "mountain, tree, flying, sky, water, travel, stream, strong, air, clouds, grass, nature, road, forest, landscape, mountain river, river, spring, summer, strong stream, aerial view, dusk, ecosystem, horizontal, journey",
+ "page": "https://pixabay.com/videos/id-85522/",
+ "author": "urban24",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: urban24 via Pixabay (https://pixabay.com/videos/id-85522/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5dba72d458d217742bc7f5d93f68e6328198bb465be9ca51429edc56290113df",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  85.4,
+  84.2,
+  85.4,
+  85.7,
+  86.2
+ ],
+ "vetting_descriptions": [
+  "A large body of water with a forest surrounding it.",
+  "A large body of water with a blue color and surrounded by trees."
+ ],
+ "release_asset": "footage-clip-river-mountain-tree-flying-sky-water-travel-st-sha256-5dba72d458d217742bc7f5d93f68e6328198bb465be9ca51429edc56290113df.mp4"
+}

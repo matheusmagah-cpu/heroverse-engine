@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-cliff-sea-waves-ocean-view-coast-beach-b",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "cliff, sea, waves, ocean, view, coast, beach, background, trip, holiday, beautiful wallpaper, calm, island, kennedy, sky, nature, black and white",
+ "page": "https://pixabay.com/videos/id-192066/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 55.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-192066/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "52cfaba8f11744bb80013c8855475c5ab8207d26812a749de4375453489bd2fa",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  147.2,
+  147.7,
+  146.8,
+  147.3,
+  146.8
+ ],
+ "vetting_descriptions": [
+  "A rock is in the water, and the water is calm.",
+  "A rock is floating in the water, and the water is calm."
+ ],
+ "release_asset": "footage-clip-ocean-cliff-sea-waves-ocean-view-coast-beach-b-sha256-52cfaba8f11744bb80013c8855475c5ab8207d26812a749de4375453489bd2fa.mp4"
+}

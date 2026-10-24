@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-candles-flame-light-candlelight-party-to",
+ "theme": "candle",
+ "query": "candlelight night",
+ "source": "pixabay",
+ "title": "candles, flame, light, candlelight, party, to celebrate",
+ "page": "https://pixabay.com/videos/id-112565/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 25.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-112565/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9530b835db076d3198ecbd7bdea5729b5b5781020fa5cff1515a95fbca2d627d",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  159.2,
+  159.1,
+  159.9,
+  160.2,
+  160.1
+ ],
+ "vetting_descriptions": [
+  "A birthday cake with candles and balloons is lit up by a group of candles.",
+  "A birthday cake with candles and balloons."
+ ],
+ "release_asset": "footage-clip-candle-candles-flame-light-candlelight-party-to-sha256-9530b835db076d3198ecbd7bdea5729b5b5781020fa5cff1515a95fbca2d627d.mp4"
+}

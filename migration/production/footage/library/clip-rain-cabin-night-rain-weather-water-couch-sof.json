@@ -1,0 +1,40 @@
+{
+ "id": "clip-rain-cabin-night-rain-weather-water-couch-sof",
+ "theme": "rain",
+ "query": "rain window night",
+ "source": "pixabay",
+ "title": "cabin, night, rain, weather, water, couch, sofa, furniture, chair, interior, window, cozy, cushion, bedroom, indoors, white noise",
+ "page": "https://pixabay.com/videos/id-373338/",
+ "author": "Gypsy-Spirit",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 55.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Gypsy-Spirit via Pixabay (https://pixabay.com/videos/id-373338/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a7b8e2ab0e16f71bf9f87bd23322bf956379cc4688331b48aadcd50b6bdbba39",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED woman"
+ ],
+ "vetting_luma": [
+  44.8,
+  44.8,
+  44.7,
+  44.6,
+  44.7
+ ],
+ "vetting_descriptions": [
+  "A view of a house with a garden and a window with a view of the house and garden.",
+  "A view of a house with a garden and a woman standing in front of it."
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos",
+ "theme": "night",
+ "query": "milky way timelapse",
+ "source": "pixabay",
+ "title": "pea, blossom, bloom, to flourish, bloom, blossomed, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-24310/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-24310/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8535529395274327871cfff9181ab08855d1a010dbc426cba4babc38b589d9b8",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  64.8,
+  65.6,
+  64.3,
+  64.1,
+  63.6
+ ],
+ "vetting_descriptions": [
+  "A close up of two purple flowers with green stems.",
+  "A bunch of purple flowers with green leaves are hanging down."
+ ],
+ "release_asset": "footage-clip-night-pea-blossom-bloom-to-flourish-bloom-blos-sha256-8535529395274327871cfff9181ab08855d1a010dbc426cba4babc38b589d9b8.mp4"
+}

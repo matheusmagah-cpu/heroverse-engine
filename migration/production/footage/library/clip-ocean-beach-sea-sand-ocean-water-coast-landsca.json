@@ -1,0 +1,40 @@
+{
+ "id": "clip-ocean-beach-sea-sand-ocean-water-coast-landsca",
+ "theme": "ocean",
+ "query": "waves beach",
+ "source": "pixabay",
+ "title": "beach, sea, sand, ocean, water, coast, landscape, seascape, joy, waves, surfer, rescue, lifesaver, lifeguard, safety, swimming, equipment",
+ "page": "https://pixabay.com/videos/id-345377/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-345377/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "de365ae773301fe2203bc7002d5d9bac41453f17d2fbda39f37b5b17252178bf",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED people"
+ ],
+ "vetting_luma": [
+  127.9,
+  110.2,
+  126.7,
+  124.9,
+  111.5
+ ],
+ "vetting_descriptions": [
+  "A group of people are swimming in the ocean, and there are surfers and paddle boarders in the water as well.",
+  "A group of people are swimming in the ocean, and there are several surfers in the water as well."
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-snow-snow-winter-mountain-village-traditional",
+ "theme": "snow",
+ "query": "snowfall forest",
+ "source": "pixabay",
+ "title": "snow, winter, mountain village, traditional old houses, shirakawa-go, japan, snowfall, heavy snowfall area, evening",
+ "page": "https://pixabay.com/videos/id-266006/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 34.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-266006/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "db024728d9c06f4c72da4a066a4e7d7b8ac35c54593f74b44fa23d6abd4d4b8e",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED people"
+ ],
+ "vetting_luma": [
+  148.0,
+  146.2,
+  144.2,
+  142.3,
+  140.2
+ ],
+ "vetting_descriptions": [
+  "A snowy village with a foggy atmosphere, houses covered in snow, and a few people walking around.",
+  "A snowy village with houses and a street light."
+ ],
+ "release_asset": null
+}

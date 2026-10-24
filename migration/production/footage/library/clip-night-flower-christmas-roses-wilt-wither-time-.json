@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-flower-christmas-roses-wilt-wither-time-",
+ "theme": "night",
+ "query": "milky way timelapse",
+ "source": "pixabay",
+ "title": "flower, christmas roses, wilt, wither, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-109365/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-109365/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2c963ebc7f73d299e8cc2745227b0391587b40a7435335dd622f6c1ecce10a53",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  43.1,
+  39.1,
+  38.3,
+  36.1,
+  37.3
+ ],
+ "vetting_descriptions": [
+  "A bouquet of white flowers is displayed in a vase, with a total of 12 flowers visible.",
+  "A flower arrangement with white flowers and green leaves is displayed in a vase."
+ ],
+ "release_asset": "footage-clip-night-flower-christmas-roses-wilt-wither-time--sha256-2c963ebc7f73d299e8cc2745227b0391587b40a7435335dd622f6c1ecce10a53.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-birds-puddle-sand-water-animal",
+ "theme": "rain",
+ "query": "raindrops puddle",
+ "source": "pixabay",
+ "title": "birds, puddle, sand, water, animal",
+ "page": "https://pixabay.com/videos/id-107854/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-107854/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "58082f473ca7b078d170987f8dfc7de4373b4fd15f71f11e804b7816b74f2776",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  146.7,
+  146.5,
+  146.5,
+  146.1,
+  146.3
+ ],
+ "vetting_descriptions": [
+  "A group of birds are standing in a puddle on a dirt field.",
+  "A group of black and white birds are standing in a puddle of water."
+ ],
+ "release_asset": "footage-clip-rain-birds-puddle-sand-water-animal-sha256-58082f473ca7b078d170987f8dfc7de4373b4fd15f71f11e804b7816b74f2776.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-grass-silver-grass-reed-autumn-autumn-wind",
+ "theme": "grass",
+ "query": "grass wind",
+ "source": "pixabay",
+ "title": "silver grass, reed, autumn, autumn wind",
+ "page": "https://pixabay.com/videos/id-91388/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 54.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-91388/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "32a4db3aaeff48e3d8a1af719abbad1a1057ecf0cc4051c7b75735a2440fc07f",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  97.5,
+  97.3,
+  96.5,
+  97.7,
+  100.1
+ ],
+ "vetting_descriptions": [
+  "A field of tall grass with a body of water in the background.",
+  "A field of tall grass with a river in the background."
+ ],
+ "release_asset": "footage-clip-grass-silver-grass-reed-autumn-autumn-wind-sha256-32a4db3aaeff48e3d8a1af719abbad1a1057ecf0cc4051c7b75735a2440fc07f.mp4"
+}

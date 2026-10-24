@@ -1,0 +1,40 @@
+{
+ "id": "clip-clouds-fjord-scenery-4k-timelapse-mountain-land",
+ "theme": "clouds",
+ "query": "clouds timelapse mountains",
+ "source": "pixabay",
+ "title": "fjord scenery, 4k timelapse, mountain landscape, scenic fjord, nature timelapse, cinematic nature, travel inspiration, stunning fjord, dramatic clouds, glacial water, peaceful view, majestic nature, northern beauty, norway fjord, epic timelapse, remote landscape, time-lapse mountains, coastal cliffs, ocean and mountain, sunrise fjord, wilderness view, crisp air, nature lovers, breathtaking view, outdoor cinematics",
+ "page": "https://pixabay.com/videos/id-292806/",
+ "author": "RainMeditateHub",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: RainMeditateHub via Pixabay (https://pixabay.com/videos/id-292806/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d853c458e06ca890987f00032fcb5eea1320aeecea137b751fcb4cfe35e55d17",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED city"
+ ],
+ "vetting_luma": [
+  61.1,
+  95.4,
+  113.9,
+  71.8,
+  72.3
+ ],
+ "vetting_descriptions": [
+  "A beautiful sunset over a large body of water with a city in the background.",
+  "A beautiful view of a city with a large body of water and a mountain in the background."
+ ],
+ "release_asset": null
+}

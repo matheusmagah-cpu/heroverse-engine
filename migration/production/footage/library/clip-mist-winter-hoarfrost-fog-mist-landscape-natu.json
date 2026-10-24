@@ -1,0 +1,38 @@
+{
+ "id": "clip-mist-winter-hoarfrost-fog-mist-landscape-natu",
+ "theme": "mist",
+ "query": "fog forest",
+ "source": "pixabay",
+ "title": "winter, hoarfrost, fog, mist, landscape, nature, forest, sea of fog",
+ "page": "https://pixabay.com/videos/id-247945/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-247945/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e61f5acee3b1da65f61c09fbc0baea6a6bfc231fe576160fb477b1136154cab3",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  121.4,
+  125.5,
+  126.5,
+  129.1,
+  130.6
+ ],
+ "vetting_descriptions": [
+  "A snowy mountain top with a cloudy sky and a forest of trees.",
+  "A snowy mountain with a cloudy sky above it."
+ ],
+ "release_asset": "footage-clip-mist-winter-hoarfrost-fog-mist-landscape-natu-sha256-e61f5acee3b1da65f61c09fbc0baea6a6bfc231fe576160fb477b1136154cab3.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-forest-netherlands-sun-rays-misty-forest-sunlig",
+ "theme": "forest",
+ "query": "sunbeams forest",
+ "source": "pixabay",
+ "title": "netherlands, sun rays, misty forest, sunlight, fog, woodland, nature, sunbeams, trees, morning light, atmospheric, forest",
+ "page": "https://pixabay.com/videos/id-382584/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-382584/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4ad6ebd0eee5ee79d0d3cb7259af8ba5417a7c5d89c549a9285f4a7b3dbea7d6",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  71.3,
+  75.1,
+  93.2,
+  121.1,
+  97.0
+ ],
+ "vetting_descriptions": [
+  "A forest with trees and grass, and a sunlight shining through the trees.",
+  "A forest with trees and grass, and a sun shining through the trees."
+ ],
+ "release_asset": "footage-clip-forest-netherlands-sun-rays-misty-forest-sunlig-sha256-4ad6ebd0eee5ee79d0d3cb7259af8ba5417a7c5d89c549a9285f4a7b3dbea7d6.mp4"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-wendland-gohlau-lower-saxony-germany-mil",
+ "theme": "night",
+ "query": "starry sky",
+ "source": "pixabay",
+ "title": "wendland, gohlau, lower saxony, germany, milky way, stars, starry sky",
+ "page": "https://pixabay.com/videos/id-104602/",
+ "author": "Grugeschu",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 26.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Grugeschu via Pixabay (https://pixabay.com/videos/id-104602/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "17acc95cdc1ebd9e9aadf978402fd11d825b4d40ba1e9f8b7a933764e0b4da77",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  31.1,
+  13.9,
+  12.3,
+  13.8,
+  32.8
+ ],
+ "vetting_descriptions": [
+  "A red and white tower is lit up at night, surrounded by trees.",
+  "A red light on a tower is visible in the night sky."
+ ],
+ "release_asset": "footage-clip-night-wendland-gohlau-lower-saxony-germany-mil-sha256-17acc95cdc1ebd9e9aadf978402fd11d825b4d40ba1e9f8b7a933764e0b4da77.mp4"
+}

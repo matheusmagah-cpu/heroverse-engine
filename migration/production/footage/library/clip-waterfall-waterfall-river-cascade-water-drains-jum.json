@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-waterfall-river-cascade-water-drains-jum",
+ "theme": "waterfall",
+ "query": "waterfall forest",
+ "source": "pixabay",
+ "title": "waterfall, river, cascade, water, drains, jump, nature, clean, landscape, travel, forest, tree, green, park, autumn",
+ "page": "https://pixabay.com/videos/id-48898/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 44.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-48898/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "61a335cbac25259c95b5607b1016fccdfae5087dca9591f4e6ab8fd7f2a2c037",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  95.0,
+  95.1,
+  95.7,
+  95.0,
+  95.2
+ ],
+ "vetting_descriptions": [
+  "A beautiful waterfall with a green river flowing underneath it.",
+  "A beautiful waterfall with a forest in the background, surrounded by greenery and a river."
+ ],
+ "release_asset": "footage-clip-waterfall-waterfall-river-cascade-water-drains-jum-sha256-61a335cbac25259c95b5607b1016fccdfae5087dca9591f4e6ab8fd7f2a2c037.mp4"
+}

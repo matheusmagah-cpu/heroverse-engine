@@ -1,0 +1,38 @@
+{
+ "id": "clip-night-sky-nature-clouds-cosmos-landscape-stars",
+ "theme": "night",
+ "query": "starry sky",
+ "source": "pixabay",
+ "title": "sky, nature, clouds, cosmos, landscape, stars, universe, starry, galaxy",
+ "page": "https://pixabay.com/videos/id-326167/",
+ "author": "MuslimahVibes",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: MuslimahVibes via Pixabay (https://pixabay.com/videos/id-326167/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b666f3367f8a7b6352318bca30ca3500933047c0abf053302ebdbf411cdad59e",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  135.1,
+  129.6,
+  129.6,
+  123.3,
+  123.4
+ ],
+ "vetting_descriptions": [
+  "A cloudy blue sky with a white cloud in the middle of the sky.",
+  "A cloudy blue sky with a few clouds and a blue background."
+ ],
+ "release_asset": "footage-clip-night-sky-nature-clouds-cosmos-landscape-stars-sha256-b666f3367f8a7b6352318bca30ca3500933047c0abf053302ebdbf411cdad59e.mp4"
+}

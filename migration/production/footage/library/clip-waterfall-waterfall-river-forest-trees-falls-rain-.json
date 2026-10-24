@@ -1,0 +1,38 @@
+{
+ "id": "clip-waterfall-waterfall-river-forest-trees-falls-rain-",
+ "theme": "waterfall",
+ "query": "cascade",
+ "source": "pixabay",
+ "title": "waterfall, river, forest, trees, falls, rain, nature, scotland, brazil, iceland, landscape, stream, cascade, outdoors, scenic, relaxing, countryside, sunset, mountains, rock",
+ "page": "https://pixabay.com/videos/id-69786/",
+ "author": "zameenaasman172",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: zameenaasman172 via Pixabay (https://pixabay.com/videos/id-69786/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "80fde08d40761fb129491738a420610ca54338ba51a3288fd28c0fd6334d8982",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  66.8,
+  67.0,
+  67.4,
+  67.5,
+  67.5
+ ],
+ "vetting_descriptions": [
+  "A waterfall with a green mossy background and a rock with a red flower on it.",
+  "A waterfall with a green mossy wall and a rock with a mossy wall."
+ ],
+ "release_asset": "footage-clip-waterfall-waterfall-river-forest-trees-falls-rain--sha256-80fde08d40761fb129491738a420610ca54338ba51a3288fd28c0fd6334d8982.mp4"
+}

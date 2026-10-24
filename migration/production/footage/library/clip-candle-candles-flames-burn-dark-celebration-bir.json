@@ -1,0 +1,38 @@
+{
+ "id": "clip-candle-candles-flames-burn-dark-celebration-bir",
+ "theme": "candle",
+ "query": "candle dark background",
+ "source": "pixabay",
+ "title": "candles, flames, burn, dark, celebration, birthday, prayer, worship, traditional, wind, meditation, religion, halloween, glow, shiny, lights",
+ "page": "https://pixabay.com/videos/id-65150/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-65150/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9fa856000564150b75bc09be6d1f821657cabf14782a4593c43c445f900add3a",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  15.6,
+  16.4,
+  14.0,
+  15.5,
+  15.9
+ ],
+ "vetting_descriptions": [
+  "A group of lit candles are on a black background.",
+  "A group of lit candles are on a black background."
+ ],
+ "release_asset": "footage-clip-candle-candles-flames-burn-dark-celebration-bir-sha256-9fa856000564150b75bc09be6d1f821657cabf14782a4593c43c445f900add3a.mp4"
+}

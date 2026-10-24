@@ -1,0 +1,38 @@
+{
+ "id": "clip-ocean-sea-ocean-waves-sunset-horizon-sky-cloud",
+ "theme": "ocean",
+ "query": "ocean sunset",
+ "source": "pixabay",
+ "title": "sea, ocean, waves, sunset, horizon, sky, clouds",
+ "page": "https://pixabay.com/videos/id-175955/",
+ "author": "u_fteh2wfg76",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: u_fteh2wfg76 via Pixabay (https://pixabay.com/videos/id-175955/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2b595ba47b4b6d889266fd9f3a2554775ae07bc723fbf39c9c89c61e7d9601bf",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  126.8,
+  127.8,
+  128.2,
+  128.0,
+  127.6
+ ],
+ "vetting_descriptions": [
+  "The sun is setting over the ocean, creating a beautiful pink and purple sky.",
+  "The sun is setting over the ocean, creating a beautiful pink and purple sky."
+ ],
+ "release_asset": "footage-clip-ocean-sea-ocean-waves-sunset-horizon-sky-cloud-sha256-2b595ba47b4b6d889266fd9f3a2554775ae07bc723fbf39c9c89c61e7d9601bf.mp4"
+}

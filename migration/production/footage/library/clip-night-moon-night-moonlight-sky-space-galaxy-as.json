@@ -1,0 +1,41 @@
+{
+ "id": "clip-night-moon-night-moonlight-sky-space-galaxy-as",
+ "theme": "night",
+ "query": "moonlight night sky",
+ "source": "pixabay",
+ "title": "moon, night, moonlight, sky, space, galaxy, astronomy",
+ "page": "https://pixabay.com/videos/id-38462/",
+ "author": "rootedkernel",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 34.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: rootedkernel via Pixabay (https://pixabay.com/videos/id-38462/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "aa4bbbad3cab8c131c3ab66b358704dd2ded5db24f5974e57211b14f01c89f19",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "DESCRIBED buildings,people,text"
+ ],
+ "vetting_luma": [
+  8.2,
+  8.1,
+  8.1,
+  8.0,
+  8.0
+ ],
+ "vetting_descriptions": [
+  "A yellow moon is visible in the night sky, with no people, text, logos, buildings or vehicles visible in the image.",
+  "A yellow moon is seen in the sky, with no other objects or people visible in the image."
+ ],
+ "release_asset": null
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-lake-lake-river-trees-forest-sunset-sunrise-r",
+ "theme": "lake",
+ "query": "lake sunrise",
+ "source": "pixabay",
+ "title": "lake, river, trees, forest, sunset, sunrise, reflecting, water, field, clouds, rural, winter, nature, fields, waterside, landscape",
+ "page": "https://pixabay.com/videos/id-85411/",
+ "author": "edcangri",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: edcangri via Pixabay (https://pixabay.com/videos/id-85411/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "41bd7b89d02c91a5692628536a2b3c4e6a0627db0e30ca344bfbb27358066ea3",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "DESCRIBED boat"
+ ],
+ "vetting_luma": [
+  84.4,
+  88.5,
+  87.3,
+  86.1,
+  85.0
+ ],
+ "vetting_descriptions": [
+  "A large body of water with a few trees in the background.",
+  "A large body of water with a dock in the middle and a boat on the water."
+ ],
+ "release_asset": null
+}

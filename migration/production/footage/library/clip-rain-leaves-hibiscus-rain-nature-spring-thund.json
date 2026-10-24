@@ -1,0 +1,38 @@
+{
+ "id": "clip-rain-leaves-hibiscus-rain-nature-spring-thund",
+ "theme": "rain",
+ "query": "raindrops puddle",
+ "source": "pixabay",
+ "title": "leaves, hibiscus, rain, nature, spring, thunderstorm, weather, raindrop, wet, flora, plant, garden",
+ "page": "https://pixabay.com/videos/id-75012/",
+ "author": "KlausHausmann",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KlausHausmann via Pixabay (https://pixabay.com/videos/id-75012/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "32e2c222738b78f144a16b1fdb2f77fb980de0f0355f2377e098a88ed07e963d",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  105.0,
+  103.9,
+  105.8,
+  105.2,
+  106.3
+ ],
+ "vetting_descriptions": [
+  "A tree with green leaves and a few yellow leaves in the rain.",
+  "A tree with green leaves and water droplets on them."
+ ],
+ "release_asset": "footage-clip-rain-leaves-hibiscus-rain-nature-spring-thund-sha256-32e2c222738b78f144a16b1fdb2f77fb980de0f0355f2377e098a88ed07e963d.mp4"
+}

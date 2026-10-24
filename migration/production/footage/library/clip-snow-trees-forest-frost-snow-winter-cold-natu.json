@@ -1,0 +1,38 @@
+{
+ "id": "clip-snow-trees-forest-frost-snow-winter-cold-natu",
+ "theme": "snow",
+ "query": "snowfall forest",
+ "source": "pixabay",
+ "title": "trees, forest, frost, snow, winter, cold, nature, sun, daylight, landscape, snowfall, outdoors, frozen",
+ "page": "https://pixabay.com/videos/id-66308/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 34.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-66308/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ae5514d809f2146e6910ac5801584351adbf63469293096d1d0926cee544162f",
+ "vetting": "APPROVED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  121.0,
+  118.2,
+  115.6,
+  117.6,
+  126.7
+ ],
+ "vetting_descriptions": [
+  "A snowy pathway in a forest with a sun shining through the trees.",
+  "A snowy pathway in a forest with a sun shining through the trees."
+ ],
+ "release_asset": "footage-clip-snow-trees-forest-frost-snow-winter-cold-natu-sha256-ae5514d809f2146e6910ac5801584351adbf63469293096d1d0926cee544162f.mp4"
+}
