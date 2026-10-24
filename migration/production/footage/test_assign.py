@@ -15,12 +15,12 @@ def lib(themes, n, **kw):
 
 class Assign(unittest.TestCase):
     def test_night_takes_night_themes_interleaved(self):
-        out = assign.choose({"working_title": "Night Prayer for Peace"}, lib(["candle", "night", "sunrise"], 10))
+        out = assign.choose({"working_title": "Night Prayer for Peace"}, lib(["candle", "night", "sunrise"], 10, vetting_luma=[30]))
         self.assertTrue(all(not c.startswith("clip-sunrise") for c in out))
         self.assertEqual(out[:4], ["clip-candle-0", "clip-night-0", "clip-candle-1", "clip-night-1"])
 
     def test_pilots_of_one_mood_get_different_openings_and_orders(self):
-        library = lib(["candle", "night", "ocean", "lake"], 10)
+        library = lib(["candle", "night", "ocean", "lake"], 10, vetting_luma=[30])
         a = assign.choose({"working_title": "Night Prayer"}, library, turn=8)
         b = assign.choose({"working_title": "Night Prayer"}, library, turn=10)
         self.assertNotEqual(a[0], b[0])
@@ -31,6 +31,15 @@ class Assign(unittest.TestCase):
         bad = lib(["sunrise"], 30, vetting="PENDING") + lib(["clouds"], 30, licence="CC BY-SA 4.0")
         with self.assertRaises(SystemExit):
             assign.choose({"working_title": "Morning Prayer"}, bad)
+
+    def test_night_takes_only_dark_clips(self):
+        # E69: the 008 night prayer showed sunlit waterfalls and snowy peaks chosen by theme alone
+        library = lib(["candle", "night"], 12, vetting_luma=[40, 42]) + lib(["waterfall"], 12, vetting_luma=[120, 125])
+        library += [{**lib(["river"], 1)[0], "id": "clip-river-unmeasured"}]
+        out = assign.choose({"working_title": "Before You Sleep, Night Prayer"}, library)
+        self.assertFalse([c for c in out if c.startswith(("clip-waterfall", "clip-river"))])
+        day = assign.choose({"working_title": "Morning Prayer"}, lib(["waterfall", "river"], 12, vetting_luma=[120]))
+        self.assertEqual(len(day), 24)                        # morning keeps bright clips
 
     def test_shortage_refused(self):
         with self.assertRaises(SystemExit) as e:

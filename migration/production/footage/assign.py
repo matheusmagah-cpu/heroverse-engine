@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Choose a pilot's footage from the vetted library (pilot-qa-criteria-v4), so new pilots need no hand picking.
 
-Night scripts take night themes and morning scripts take daylight themes (water and clouds fit both). Clips are
+Night scripts take night themes and morning scripts take daylight themes (water and clouds fit both); a night clip must
+also be dark (E69: themes alone let sunlit waterfalls and snowy peaks into the 008 night prayer). Clips are
 interleaved theme by theme, so consecutive footage scenes change subject; at least script_check.FOOTAGE_MIN.
 usage: assign.py PILOT_DIR [LIBRARY_DIR]      (writes script.json["footage"]; prints the choice)
 """
@@ -19,6 +20,14 @@ MOOD_THEMES = {
 }
 
 
+NIGHT_LUMA_MAX = 80   # mean luma (0-255) of the vetting frames; the 008 daylight clips measured 82-166
+
+
+def luma(rec):
+    vals = rec.get("vetting_luma") or []
+    return sum(vals) / len(vals) if vals else None
+
+
 def mood(script):
     return "night" if re.search(r"(?i)night|sleep|bedtime", script.get("working_title", "")) else "morning"
 
@@ -31,12 +40,14 @@ def usable(rec):
 def choose(script, library, n=None, turn=0):
     """turn rotates the theme order and each theme's clips, so pilots of the same mood open on different
     footage and never share a shot order."""
+    night = mood(script) == "night"
     themes = MOOD_THEMES[mood(script)]
     anchors, rest = themes[:2], themes[2:]   # the hook shot comes from the mood's own themes (candle/night, sunrise/clouds)
     themes = anchors[turn % 2:] + anchors[:turn % 2] + rest[turn % len(rest):] + rest[:turn % len(rest)]
     by_theme = {}
     for t in themes:
-        ids = sorted(r["id"] for r in library if r.get("theme") == t and usable(r))
+        ids = sorted(r["id"] for r in library if r.get("theme") == t and usable(r)
+                     and (not night or (luma(r) is not None and luma(r) <= NIGHT_LUMA_MAX)))
         k = turn % len(ids) if ids else 0
         by_theme[t] = ids[k:] + ids[:k]
     out = []
