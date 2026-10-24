@@ -187,9 +187,15 @@ Runs once a day from the hourly clock (first run after 16:00 UTC), at most 20 vi
    for anything published in the last 48 h (Analytics lags about 48 h).
 2. **Verdict at 48 h and 7 d.** Each video is good, weak/bad or neutral against the series median at the same age;
    under 48 h it stays inconclusive. Record it in `evidence/learning/<YYYYMMDD>.json` (same schema as 20261024).
+   The verdicts come from `mining/live_intel.py` (tested): each episode against the series median at a similar age
+   (0.75-1.33x), inconclusive under 48 h or 100 views; snapshots accumulate in `evidence/learning/state.json`.
 3. **Turn it into one change.** Name the single change the next episodes make (hook, title pattern, length, visual,
    end card, slot), the stage it touches and how it will be measured. Write it into `production/bible/SERIES.md` or
    `PROMPT_GUIDE.md` so production uses it; the next day's run checks whether it worked.
+   A change is a hypothesis in `state.json` (one attribute of the episode record's `attributes`, its new value,
+   expected effect): KEPT after 2 consecutive good episodes carrying it, REVERTED after 2 bad, otherwise RUNNING; only
+   one runs at a time, and the authenticity layer (KJV text, references, reflection, prayer, AI disclosure, own script)
+   is never a hypothesis.
 4. **Tell the owner only when there is a verdict or a change.** Two lines: what the numbers show, what changes.
 
 Market research can continue within its budget while existing videos mature; it does not need to wait seven days for every upload. Missing 48-hour/7-day evidence remains pending and is incorporated when available. A report generated without usable evidence is not a completed learning cycle.
