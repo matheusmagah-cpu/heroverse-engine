@@ -1,0 +1,18 @@
+{
+ "version": "ads-research-v1",
+ "captured_at": "2026-10-24T20:40:00Z",
+ "facts": [
+  {"fact": "Watch hours and subscribers gained through ad campaigns do not count toward the YPP eligibility thresholds", "source": "https://support.google.com/youtube/answer/12199105", "kind": "official (YouTube Promote help, quoted in search results; the page itself is not reachable from the session network)"},
+  {"fact": "Watch hours of ad campaigns, private/unlisted/deleted videos and Shorts-feed views do not count toward the 4,000 public watch hours", "source": "https://support.google.com/youtube/thread/677111?hl=en", "kind": "Google Help community FAQ"},
+  {"fact": "From 2027-02-01 new YPP applicants need 8,000 public watch hours in 365 days or 20M Shorts views in 90 days (with 1,000 subscribers); channels already in YPP keep their status", "source": "https://vidiq.com/blog/post/youtube-partner-program-changes-2027/", "kind": "secondary (several outlets citing a YouTube announcement of 2026-08); to verify on YouTube's own page"},
+  {"fact": "Cost per view of YouTube video ads about $0.02-0.10 (up to $0.30 in competitive verticals)", "source": "https://iqfluence.io/public/blog/youtube-ads-cost", "kind": "third-party benchmark 2026"},
+  {"fact": "YouTube's Promote experiment: subscriptions at about $4-6 each", "source": "https://blog.youtube/news-and-events/in-youtube-lab-promotion-works/", "kind": "official, undated"},
+  {"fact": "Estimated ad revenue, Religion / US / English: long-form $198-528 per 100,000 monthly views (mid $330); Shorts $3.96-10.56", "source": "vidiq_earnings_calculate (2 calls, 10 credits)", "kind": "vidIQ model estimate"}
+ ],
+ "consequences": [
+  "Ads cannot buy the YPP counter: the 4,000 hours and 1,000 subscribers must come from organic viewing.",
+  "Before 2027-02-01 the bar is 4,000 h; after it, 8,000 h for a channel not yet in YPP: reaching YPP before February halves the work.",
+  "After YPP, a paid long-form view costs ~$0.05 and earns ~$0.0033: ad revenue alone repays the spend only if each paid view causes ~14 organic views (break-even k, mid case).",
+  "The unknown that decides everything is k (organic views caused per paid view); it is measured by a small test, not assumed."
+ ]
+}

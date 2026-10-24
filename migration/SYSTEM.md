@@ -200,6 +200,19 @@ Runs once a day from the hourly clock (first run after 16:00 UTC), at most 20 vi
 
 Market research can continue within its budget while existing videos mature; it does not need to wait seven days for every upload. Missing 48-hour/7-day evidence remains pending and is incorporated when available. A report generated without usable evidence is not a completed learning cycle.
 
+## 5. Ads: paid promotion measured for real predictability (owner, 2026-10-24)
+
+Facts and sources: `evidence/ads/20261024-research.json`; model: `strategy/ads_model.py` (tested).
+- **Paid results never count for YPP.** Watch hours and subscribers from ad campaigns are excluded from the YPP
+  thresholds (YouTube Promote help); the counter only moves with organic viewing. Reports keep paid and organic apart.
+- **What a budget buys is measured, not assumed.** Each campaign has one video, one budget, one window, and records
+  cost per view, cost per subscriber, CTR and retention of the paid audience, and k = organic views caused per paid
+  view (organic views of the channel during and 7 days after the campaign minus the series baseline at the same age).
+  The model is recalibrated with each measured value; the forecast for a budget is always the model with our own data.
+- **Gate.** No campaign runs without the owner's written approval of the budget; campaigns are run from the owner's
+  account (YouTube Studio Promote or Google Ads), never by the engine. Only a video already at the 9.5 floor and with an
+  organic baseline of at least 48 h is promoted.
+
 ## Approval: automatic qualification (owner, 2026-10-19 23:55 UTC)
 
 The system approves or rejects each video; personal first-sample approval is not required. This is the active governance rule. The historical personal-approval wording in the immutable `production/qa_criteria_v3.json` is not an additional active approval step; its technical, speech, rights and grammar requirements remain unchanged, as do its bytes and SHA256. Automated qualification does not establish owner visual inspection or audience success.
