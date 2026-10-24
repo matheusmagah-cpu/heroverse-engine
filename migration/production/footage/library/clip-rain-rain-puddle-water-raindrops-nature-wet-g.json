@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "4ef4ff18c82bb58edd7c42f9171c0e1a62a8fc03c4f093aca71d066a2b6c8b04",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme; REJECTED 2026-10-24 by Claude's pilot-008 preview review: a green forest path by day (daylight, E71)",
+ "vetting_reasons": [
+  "a green forest path by day (daylight, E71)"
+ ],
  "vetting_luma": [
   78.1,
   77.9,

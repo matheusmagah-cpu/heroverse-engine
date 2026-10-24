@@ -1,0 +1,39 @@
+{
+ "version": "preview-review-v1",
+ "model": "claude-session-reviewer",
+ "pilot_id": "pilot-008",
+ "script_sha256": "59e45941ac05faded14756a8b1e5952ad0c04e74e141dfba1a43c3b8ec5a95aa",
+ "reviewed_at": "2026-10-24T20:10:00Z",
+ "opening_and_promise": 9.0,
+ "picture_quality": 9.0,
+ "figure_and_background_integrity": 9.5,
+ "captions_readable_and_synced": 9.5,
+ "audio_clarity_and_mix": 9.5,
+ "pacing_and_visual_variety": 9.0,
+ "scripture_on_screen": 9.5,
+ "policy_safe": 9.5,
+ "overall": 9.1,
+ "issues": [
+  "footage clip 5: abstract ink and glitter, off the night-prayer mood",
+  "footage clip 8: Christmas ornament with Santa Claus",
+  "footage clip 10: a green forest path by day (daylight, E71)",
+  "footage clip 11: Christmas tree and Santa ornaments",
+  "footage clip 13: a green forest path by day (daylight, E71)",
+  "footage clip 28: birthday-cake candles",
+  "footage clip 29: a radio tower with a red beacon",
+  "footage clip 30: candles with an artificial cut-out glow",
+  "footage clip 34: town lights on the horizon",
+  "opening ~0:20-0:35 shows clip 5 (abstract glitter) and clip 8 (Santa ornament) right after the promise",
+  "every clip is now a night picture (E71 holds); the 29 kept clips are marked claude_seen and the footage reassigned from seen clips only (E74)"
+ ],
+ "strongest_moment": "0:00-0:08: the promise over a single candle flame in the dark",
+ "evidence": [
+  "inspection/preview/footage-sheet-01.jpg",
+  "inspection/preview/footage-sheet-02.jpg",
+  "inspection/preview/footage-sheet-03.jpg",
+  "inspection/preview/footage-sheet-04.jpg",
+  "inspection/preview/opening-sheet.jpg",
+  "inspection/preview/thumbnail.jpg",
+  "script.json"
+ ]
+}

@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "0725336fcc15bc60448e775771c73586f3b20848c9b9e5623bcd0c73c8cbdedb",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-008 preview review: abstract ink and glitter, off the night-prayer mood",
+ "vetting_reasons": [
+  "abstract ink and glitter, off the night-prayer mood"
+ ],
  "vetting_luma": [
   60.2,
   68.5,
