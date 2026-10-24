@@ -2,25 +2,25 @@
  "version": "claude-review-v1",
  "model": "claude-session-reviewer",
  "pilot_id": "pilot-008",
- "output_sha256": "ccc63f798328e8bdbc89b1c6db6cc0a9e5c2120fe55d642faabfdb88e880d556",
- "reviewed_at": "2026-10-24T15:20:00Z",
- "opening_and_promise": 9.5,
+ "output_sha256": "70bb39633e1841f5b368db83d95dee109c089f0090fef1235a6fa719b06ad7ea",
+ "reviewed_at": "2026-10-24T17:00:00Z",
+ "opening_and_promise": 9.0,
  "picture_quality": 9.0,
  "figure_and_background_integrity": 9.5,
  "captions_readable_and_synced": 9.5,
  "audio_clarity_and_mix": 9.5,
- "pacing_and_visual_variety": 8.5,
+ "pacing_and_visual_variety": 9.0,
  "scripture_on_screen": 9.5,
  "policy_safe": 10.0,
- "overall": 9.0,
+ "overall": 9.2,
  "issues": [
-  "~0:15-0:22 (opening sheet): a desert under a midday blue sky while the voice says 'praying over your needs' in a night prayer; the opening breaks the night mood it just set with the candle (opening 9.5)",
-  "~0:40, 1:40, 2:40, 3:40, 6:00, 9:40, 10:40, 11:40, 13:20-14:20, 15:20 (contact sheet): about a third of the picture is bright daylight (sunlit pools, waterfalls, snowy peaks under blue sky, sunny rivers) in a 'Before You Sleep' night prayer; night winners keep a dark, calm palette (table stakes, evidence/vidiq/20261023/algorithm_study/visual_watch.md). Root cause: night footage is chosen by theme (snow, waterfall, river, ocean, lake), not by how dark the clip is (pacing_and_visual_variety 8.5)",
-  "picture: real licensed footage at 1440p, no AI stills (E66 works); a few soft or noisy night clips (aurora, 6:40) keep picture_quality at 9.0",
-  "captions: some fragments end mid-thought ('For now,', 'turning in your mind.') (9.5)",
-  "audio from QA measures: -15.6 LUFS, -2.6 dBTP, speech 0.857, WER 0.036, 129 wpm, first word 0.08 s: every band met (9.5)"
+  "~0:30-0:40 (opening sheet): a snowy valley under a white daytime sky, then a sunlit autumn waterfall for about 8 s, while 'You can bring that unfinished day here' sets up the night prayer; still daylight inside the first 40 s (opening 9.0)",
+  "~0:10-0:15: blue-sky clouds read as day rather than moonlit; ~0:17-0:20 an autumn hillside in daylight mist",
+  "~0:20, 1:20, 2:20, 17:00, 17:20 (contact sheet): snowy valley, a green daylight path, autumn mist and the waterfall return; E69's mean-luma limit (<= 80) cut the daylight from a third to about 8 % of the picture, but a clip whose mean is dark can still show a bright daytime sky (snow 71, waterfall 58, mist 54, grey-cloud sky 73). Root cause: night footage still comes from day themes (snow, waterfall, mist, clouds) (pacing_and_visual_variety 9.0)",
+  "picture: licensed footage at 1440p; a few soft or noisy aurora clips keep picture_quality at 9.0",
+  "audio from QA measures: -15.7 LUFS, -2.7 dBTP, speech 0.865, WER 0.027, 130 wpm, first word 0.11 s: every band met (9.5)"
  ],
- "strongest_moment": "0:00-0:09: the promise over a candle in the dark, then 'Pray Psalm twenty-three with me now' over a moonlit tree",
+ "strongest_moment": "0:00-0:09: the promise over candles in the dark, then 'Pray Psalm twenty-three with me now' over the moonlit tree; the middle (candles, aurora, night flowers) now holds the night mood",
  "evidence": [
   "inspection/review-sheet.jpg",
   "inspection/opening-sheet.jpg",
@@ -30,6 +30,5 @@
   "out/qa.json",
   "out/package.json",
   "script.json"
- ],
- "verdict_note": "Gate items >= 7 and overall >= 8 pass; overall 9.0 is below the owner floor 9.5, so this render is not published. Fix: night pilots take only dark footage, then re-render."
+ ]
 }

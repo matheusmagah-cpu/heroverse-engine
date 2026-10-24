@@ -15,7 +15,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from script_check import FOOTAGE_LICENCES, FOOTAGE_MIN  # noqa: E402
 
 MOOD_THEMES = {
-    "night": ["candle", "night", "ocean", "lake", "mist", "rain", "snow", "waterfall", "river", "sunset", "clouds"],
+    # E71: snow, waterfall, mist, clouds, ocean, lake and sunset clips are shot by day; even with a dark mean their sky
+    # reads as daylight in a night prayer, so night takes only themes that are night by nature (and dark, E69)
+    "night": ["candle", "night", "rain", "river"],
     "morning": ["sunrise", "clouds", "meadow", "forest", "field", "grass", "river", "waterfall", "lake", "ocean", "mist", "snow"],
 }
 

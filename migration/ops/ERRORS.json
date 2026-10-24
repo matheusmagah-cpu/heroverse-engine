@@ -533,6 +533,16 @@
     "file": "migration/production/test_render_queue.py",
     "contains": "def test_pending_episode_comments_are_retried_once_public"
    }
+  },
+  {
+   "id": "E71",
+   "date": "2026-10-24",
+   "error": "pilot-008 render v2 (after E69's luma filter) still opened on a snowy valley and a sunlit waterfall and showed daylight snow, mist and a green path at 0:20-2:20 and 17:00 (Claude review 9.2, below the 9.5 floor): a clip with a dark mean luma can still show a bright daytime sky, and the night mood still drew from day themes.",
+   "fix": "assign.MOOD_THEMES night takes only themes that are night by nature (candle, night, rain, river) on top of the luma limit; queries.json gets night-specific searches (moon, night sky, candlelight, oil lamp, rain at night) so the night library clears FOOTAGE_MIN.",
+   "antidote": {
+    "file": "migration/production/footage/test_assign.py",
+    "contains": "def test_night_never_takes_day_themes"
+   }
   }
  ]
 }
