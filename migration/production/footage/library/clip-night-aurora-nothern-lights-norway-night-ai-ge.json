@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "582fb8ddbdef3a23dc2bfee12196c36dd9c852ab8ca97981ae311a12c60dafe9",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-008 preview review: town lights on the horizon",
+ "vetting_reasons": [
+  "town lights on the horizon"
+ ],
  "vetting_luma": [
   51.8,
   46.0,

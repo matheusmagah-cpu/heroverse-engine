@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "9fa856000564150b75bc09be6d1f821657cabf14782a4593c43c445f900add3a",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-008 preview review: birthday-cake candles",
+ "vetting_reasons": [
+  "birthday-cake candles"
+ ],
  "vetting_luma": [
   15.6,
   16.4,

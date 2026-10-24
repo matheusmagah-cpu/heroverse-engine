@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "dffb984e7d84e33ba60cce9a3b6beece637edb4f998e07f128cb41231e9581ab",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-008 preview review: Christmas ornament with Santa Claus",
+ "vetting_reasons": [
+  "Christmas ornament with Santa Claus"
+ ],
  "vetting_luma": [
   20.7,
   20.4,

@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "17acc95cdc1ebd9e9aadf978402fd11d825b4d40ba1e9f8b7a933764e0b4da77",
- "vetting": "APPROVED",
- "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description); REJECTED 2026-10-24 by Claude's pilot-008 preview review: a radio tower with a red beacon",
+ "vetting_reasons": [
+  "a radio tower with a red beacon"
+ ],
  "vetting_luma": [
   31.1,
   13.9,

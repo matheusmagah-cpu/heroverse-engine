@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "6d93e9a3cc617c98129dc294942d7e96dbc8acdb48ec0408c6f5c9bc4db9086a",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme; REJECTED 2026-10-24 by Claude's pilot-008 preview review: candles with an artificial cut-out glow",
+ "vetting_reasons": [
+  "candles with an artificial cut-out glow"
+ ],
  "vetting_luma": [
   30.1,
   31.1,
