@@ -86,6 +86,21 @@ jobs:
           decision=$(python3 -I -B migration/publish/prepublish_gate.py "$d" "$RUNNER_TEMP/video.mp4" | python3 -I -c "import json,sys;print(json.loads(sys.stdin.read())['decision'])" || true)
           echo "GATE=$decision"
           [ "$status" = ERROR ] || [ "$decision" = PASS ] || status="GATE_$decision"
+          # E65: the owner floor (9.5) is checked here too; an approval the publication would refuse is never recorded
+          if [ "$status" = PASS ] && [ "$decision" = PASS ]; then
+            floor=$(python3 -I - "$d" <<'PY'
+          import json, sys
+          sys.path.insert(0, "migration/publish")
+          import owner_quality_policy as oq
+          d = sys.argv[1]
+          r = json.load(open(f"{d}/out/review.json"))
+          w = {**r["watched_review"], "output_sha256": r["output_sha256"]}
+          print(",".join(oq.check(w, r["output_sha256"], oq.LONG_REVIEWER)) or "OK")
+          PY
+          )
+            echo "OWNER_FLOOR=$floor"
+            [ "$floor" = OK ] || status="BELOW_OWNER_FLOOR"
+          fi
           if [ "$status" = PASS ] && [ "$decision" = PASS ]; then
             python3 -I - "$d" <<'PY'
           import json, sys
