@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-009",
- "output_sha256": "a1fb148b4bf9d58a260928aa5cd846a6de7f40729be152fdacdaf2716513199a",
+ "output_sha256": "2fcd897eca1b9ac1f7e07641ecacec72b18cbdd976aabfd6b00bb0fe49f1feb5",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -38,42 +38,42 @@
  },
  "criteria_version": "pilot-qa-criteria-v4",
  "measurements": {
-  "duration_seconds": 970.15,
+  "duration_seconds": 977.66,
   "loudness": {
    "integrated_lufs": -15.6,
    "loudness_range_lu": 2.9,
    "true_peak_dbtp": -2.8
   },
-  "speech_presence": 0.881,
-  "music_presence": 0.402,
-  "wer_vs_script": 0.0313,
-  "accepted_words_per_minute": 125.4,
-  "caption_lines": 453,
-  "holds": 177,
+  "speech_presence": 0.884,
+  "music_presence": 0.381,
+  "wer_vs_script": 0.0282,
+  "accepted_words_per_minute": 126.1,
+  "caption_lines": 457,
+  "holds": 179,
   "first_word_seconds": 0.14,
   "editing": {
-   "picture_changes": 370,
-   "picture_changes_per_minute": 22.88,
-   "median_shot_seconds": 2.133,
-   "longest_shot_seconds": 15.433,
-   "motion_median_top_decile_diff": 1.697
+   "picture_changes": 381,
+   "picture_changes_per_minute": 23.38,
+   "median_shot_seconds": 2.117,
+   "longest_shot_seconds": 11.633,
+   "motion_median_top_decile_diff": 1.684
   },
   "colour": {
-   "mean_brightness": 0.3342,
-   "brightness_std_over_time": 0.0805,
-   "mean_saturation": 0.4307,
-   "saturation_std_over_time": 0.1507
+   "mean_brightness": 0.3348,
+   "brightness_std_over_time": 0.0801,
+   "mean_saturation": 0.4301,
+   "saturation_std_over_time": 0.1503
   },
   "rhythm": {
-   "audio_onsets": 1519,
-   "audio_onsets_per_minute": 93.94,
+   "audio_onsets": 1526,
+   "audio_onsets_per_minute": 93.65,
    "tempo": {
-    "bpm": 119.72,
+    "bpm": 120.6,
     "confidence": 0.013
    }
   }
  },
- "transcript_head": "Before you walk out the door this morning, put on God's whole armor. Pray it with me now. We will put on each piece of the armor, truth, peace, faith, and salvation, and pray it over the conversations and the work ahead of you today. You may have your shoes beside the door or breakfast still on the table. this morning finds you, bring the day as it is, you may have worked to finish, someone to car",
+ "transcript_head": "Before you walk out the door this morning, put on God's whole armor. Pray it with me now. We will put on each piece of the armor, truth, peace, faith, and salvation, and pray it over the conversations and the work ahead of you today. You may have your shoes beside the door or breakfast still on the table. this morning finds you, bring the day as it is. You may have worked to finish, someone to car",
  "criteria_sha256": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
