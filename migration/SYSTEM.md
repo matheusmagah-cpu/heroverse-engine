@@ -202,6 +202,9 @@ Market research can continue within its budget while existing videos mature; it 
 
 ## 5. Ads: paid promotion measured for real predictability (owner, 2026-10-24)
 
+**ON HOLD (owner, 2026-10-24: "vamos deixar essa etapa para depois, vamos tentar concluir aí")**: no campaign, test or
+product work until the owner reopens this stage; the facts and the model stay for when it does.
+
 Facts and sources: `evidence/ads/20261024-research.json`; model: `strategy/ads_model.py` (tested).
 - **Paid results never count for YPP.** Watch hours and subscribers from ad campaigns are excluded from the YPP
   thresholds (YouTube Promote help); the counter only moves with organic viewing. Reports keep paid and organic apart.
