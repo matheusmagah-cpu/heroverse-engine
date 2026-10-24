@@ -1,7 +1,7 @@
 {
- "publish_at": "2026-10-24T10:00:00Z",
+ "publish_at": "2026-10-27T10:00:00Z",
  "shorts_slots": [
-  "2026-10-24T20:00:00Z"
+  "2026-10-27T20:00:00Z"
  ],
- "note": "Rescheduled 2026-10-23 from 2026-10-22T10:00:00Z: the slot passed while the designated reviewer returned 503 / the render failed QA. Existing approval gates remain mandatory."
+ "note": "Rescheduled 2026-10-24 from 2026-10-24T10:00:00Z: the Claude review scored the render 9.0 (below the owner floor 9.5: AI stills among real footage, thumbnail promise split); re-rendered with footage only (E66) and the title's thumbnail (E67). Existing approval gates remain mandatory."
 }

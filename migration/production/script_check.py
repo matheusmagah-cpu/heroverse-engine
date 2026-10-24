@@ -135,6 +135,31 @@ def title_problems(title):
 SCRIPTURE_REF = re.compile(r"\b(?:[1-3] )?[A-Z][a-z]+ \d+:\d+|\b(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation) \d+", re.UNICODE)
 
 
+THUMB_STOP = {"the", "a", "an", "and", "of", "to", "in", "for", "your", "you", "with", "on", "his", "her", "my", "is",
+              "it", "be", "before", "when", "let", "this", "that", "into", "over", "up", "all", "every"}
+
+
+def thumb_words(text):
+    out = set()
+    for w in re.findall(r"[a-z']+", text.lower()):
+        w = re.sub(r"'s$", "", w).strip("'")
+        if w and w not in THUMB_STOP:
+            out.add(w[:-1] if w.endswith("s") and len(w) > 4 else w)
+    return out
+
+
+def thumbnail_problems(script):
+    """E67 (Claude review of pilot-009): the thumbnail said "STEADY FOR TODAY" while the title promised "Put On God's
+    Armor". The thumbnail's hook lines repeat at least one content word of the title's hook (before the "|")."""
+    th = script.get("thumbnail") or {}
+    hook = script.get("working_title", "").split("|")[0]
+    if not th.get("lines"):
+        return ["THUMBNAIL_LINES_MISSING (E67)"]
+    if not thumb_words(" ".join(th["lines"])) & thumb_words(hook):
+        return [f"THUMBNAIL_NOT_THE_TITLE_PROMISE {th['lines']} vs '{hook.strip()}' (E67)"]
+    return []
+
+
 def description_problems(intro):
     refs = SCRIPTURE_REF.findall(intro or "")
     return [f"DESCRIPTION_SCRIPTURE_REF {refs[:3]} (R15)"] if refs else []
@@ -190,6 +215,7 @@ def check(pilot_dir, production=None):
         problems += continuity_problems(segs)
         problems += title_problems(s.get("working_title", ""))
         problems += description_problems(s.get("description_intro", ""))
+        problems += thumbnail_problems(s)
         # E64: the gate's script-only structure rows, before the render instead of after it
         problems += [f"GATE_ROW_{name.upper()} {detail} (E64)" for name, ok, detail in three_stage.script_hygiene(s) if not ok]
     t, first_prayer = 0.0, None

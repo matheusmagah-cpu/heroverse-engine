@@ -483,6 +483,26 @@
     "file": "migration/ops/test_errors_register.py",
     "contains": "def test_approval_checks_the_owner_floor"
    }
+  },
+  {
+   "id": "E66",
+   "date": "2026-10-24",
+   "error": "The Claude review of pilot-009 scored picture_quality 8.5 (overall 9.0, below the 9.5 floor): the v4 plan alternated footage, footage, AI still, so a third of the picture (59 of 179 scenes) was painterly AI stills cut between real footage, against the owner's real-footage standard.",
+   "fix": "still_render.footage_holds plans real footage only; a still is used only where the next footage shot would come back within the 5-minute repeat gap (009: 179 of 179 scenes footage). QA v4 (footage share >= 0.6) is unchanged.",
+   "antidote": {
+    "file": "migration/production/test_still_render.py",
+    "contains": "def test_scenes_are_real_footage_within_bounds_and_gap"
+   }
+  },
+  {
+   "id": "E67",
+   "date": "2026-10-24",
+   "error": "The Claude review of pilot-009 found the thumbnail's hook 'STEADY FOR TODAY' unrelated to the title's promise 'Put On God's Armor': thumbnail lines were written separately and nothing compared them with the title.",
+   "fix": "script_check.thumbnail_problems requires the thumbnail's hook lines to repeat a content word of the title's hook; 008, 009 and 011 get thumbnail lines from their titles.",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_thumbnail_repeats_the_title_promise"
+   }
   }
  ]
 }

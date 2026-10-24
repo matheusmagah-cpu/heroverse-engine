@@ -357,20 +357,23 @@ def footage_cuts(timeline, total):
 
 
 def footage_holds(script, timeline, total):
-    """v4 plan: footage first (the hook opens on real motion, never on a still title card), then two footage shots
-    for every still. Footage shot ids are "clip#k" (k-th 6.5 s segment of the clip); every shot id obeys REPEAT_GAP."""
+    """v4 plan: real footage only (E66: the Claude review of pilot-009 found the AI stills, a third of the picture,
+    visibly painterly between real footage). A still is used only where the next footage shot would come back
+    within REPEAT_GAP. Footage shot ids are "clip#k" (k-th 6.5 s segment of the clip); every id obeys REPEAT_GAP."""
     backgrounds, footage = script["backgrounds"], script["footage"]
     cuts = footage_cuts(timeline, total)
     shots = [f"{c}#{k}" for k in range(FOOTAGE_SEGMENTS) for c in footage]
-    out, nf, ns = [], 0, 0
-    for j, (a, b) in enumerate(zip(cuts, cuts[1:] + [total])):
+    out, nf, ns, seen = [], 0, 0, {}
+    for a, b in zip(cuts, cuts[1:] + [total]):
         h = {"start": a, "end": round(b, 3), "figure": False}
-        if j % 3 < 2:   # footage, footage, still: real motion is ~2/3 of the picture
-            h["image"], h["kind"] = shots[nf % len(shots)], "footage"
+        shot = shots[nf % len(shots)] if shots else None
+        if shot and (shot not in seen or a - seen[shot] >= REPEAT_GAP - 1e-6):
+            h["image"], h["kind"] = shot, "footage"
             nf += 1
         else:
             h["image"], h["kind"] = backgrounds[ns % len(backgrounds)], "still"
             ns += 1
+        seen[h["image"]] = h["end"]
         out.append(h)
     last = {}
     for h in out:

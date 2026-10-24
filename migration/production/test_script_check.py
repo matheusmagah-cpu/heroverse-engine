@@ -138,6 +138,13 @@ class Check(unittest.TestCase):
         spec.loader.exec_module(pkg)
         self.assertEqual(pkg.SCRIPTURE_REF.pattern, sc.SCRIPTURE_REF.pattern)  # one rule in both gates
 
+    def test_thumbnail_repeats_the_title_promise(self):
+        # E67: 009's thumbnail said "STEADY FOR TODAY" under the title "Put On God's Armor"
+        t = "Before You Walk Out the Door, Put On God's Armor 🙏 | Morning Prayer (Ephesians 6)"
+        self.assertTrue(sc.thumbnail_problems({"working_title": t, "thumbnail": {"lines": ["STEADY FOR", "TODAY"]}}))
+        self.assertEqual(sc.thumbnail_problems({"working_title": t, "thumbnail": {"lines": ["PUT ON", "GOD'S ARMOR"]}}), [])
+        self.assertTrue(sc.thumbnail_problems({"working_title": t}))
+
     def test_gate_structure_rows_run_before_the_render(self):
         # E64: pilot-009 failed hygiene_gratitude_block (2 < 3) at the gate after a 2.5-hour render
         rows = {n: ok for n, ok, _ in sc.three_stage.script_hygiene(

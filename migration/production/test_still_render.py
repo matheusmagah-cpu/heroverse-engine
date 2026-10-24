@@ -92,9 +92,17 @@ class FootageV4(unittest.TestCase):
                 "persistent_overlays": ["brand"], "crossfade_seconds": sr.FADE, "scripture_cards": [],
                 "images": {"bg-0": {"models": {"m": {"license": "apache-2.0", "revision": "r"}}}}}
 
-    def test_scenes_alternate_footage_first_within_bounds_and_gap(self):
+    def test_scenes_are_real_footage_within_bounds_and_gap(self):
+        # E66: the 009 review found the AI stills (a third of the picture) visibly painterly between real footage
         plan = self.plan(20, 22)
-        self.assertEqual([h.get("kind") for h in plan[:6]], ["footage", "footage", "still", "footage", "footage", "still"])
+        self.assertEqual({h.get("kind") for h in plan}, {"footage"})
+        few = self.plan(80, 4)                          # too few clips for the repeat gap: stills fill, never a repeat
+        self.assertIn("still", {h.get("kind") for h in few})
+        last = {}
+        for h in few:
+            if h["image"] in last:
+                self.assertGreaterEqual(h["start"] - last[h["image"]], sr.REPEAT_GAP - 1e-6, h)
+            last[h["image"]] = h["end"]
         for h in plan[:-1]:
             self.assertTrue(sr.FOOTAGE_HOLD_MIN - 1e-6 <= h["end"] - h["start"] <= sr.FOOTAGE_HOLD_MAX + 1e-6, h)
         self.assertEqual(self.CRIT["grammar"]["scene_seconds"], [sr.FOOTAGE_HOLD_MIN, sr.FOOTAGE_HOLD_MAX])
