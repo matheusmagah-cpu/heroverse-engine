@@ -1,0 +1,35 @@
+{
+ "version": "claude-review-v1",
+ "model": "claude-session-reviewer",
+ "pilot_id": "pilot-009",
+ "output_sha256": "2fcd897eca1b9ac1f7e07641ecacec72b18cbdd976aabfd6b00bb0fe49f1feb5",
+ "reviewed_at": "2026-10-24T08:30:00Z",
+ "opening_and_promise": 9.5,
+ "picture_quality": 8.5,
+ "figure_and_background_integrity": 9.0,
+ "captions_readable_and_synced": 9.5,
+ "audio_clarity_and_mix": 9.5,
+ "pacing_and_visual_variety": 9.0,
+ "scripture_on_screen": 9.5,
+ "policy_safe": 10.0,
+ "overall": 9.0,
+ "issues": [
+  "~0:00, ~3:00, ~7:05, ~10:10, ~14:15 (review sheet frames 1, 4, 8, 11, 15): AI-illustrated stills (painted archways, a stone arch with olive trees, a castle hilltop, a wooden hall) cut between real footage; the painterly look breaks the real-footage standard and is visible (picture_quality 8.5)",
+  "~0:22-0:30: a butterfly macro shot while the voice says 'your shoes beside the door or breakfast still on the table': picture unrelated to the words (pacing_and_visual_variety 9.0)",
+  "thumbnail: 'STEADY FOR TODAY' does not repeat the title's promise 'Put On God's Armor'; R16 style and ruler PASS, but the promise is split (not a rubric item, reported)",
+  "captions: a few fragments end mid-thought ('for never comes.', 'and the possibility') (9.5)",
+  "audio from QA measures: -15.6 LUFS, -2.8 dBTP, speech 0.884, WER 0.028, 126 wpm, first word 0.14 s: every band met (9.5)"
+ ],
+ "strongest_moment": "0:00-0:12: the armor promise on screen and the roadmap spoken by 0:10 ('We will put on each piece of the armor...')",
+ "evidence": [
+  "inspection/review-sheet.jpg",
+  "inspection/opening-sheet.jpg",
+  "inspection/pilot-contact-sheet.jpg",
+  "inspection/thumbnail.jpg",
+  "out/thumbnail_check.json",
+  "out/qa.json",
+  "out/package.json",
+  "script.json"
+ ],
+ "verdict_note": "Gate items >= 7 and overall >= 8 pass; overall 9.0 is below the owner floor 9.5, so this render is not published."
+}

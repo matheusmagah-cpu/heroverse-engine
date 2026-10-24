@@ -46,6 +46,13 @@ class Register(unittest.TestCase):
             for line in re.findall(r'.*apt-get .*(?:update|install).*', text):
                 self.assertIn('timeout ', line, f'{name}: {line.strip()}')
 
+    def test_approval_checks_the_owner_floor(self):
+        # E65: a 9.0 review would be approved and then refused at publication, again and again
+        wf = (ROOT / '.github/workflows/approve.yml').read_text()
+        i, j = wf.index('oq.check(w, r["output_sha256"], oq.LONG_REVIEWER)'), wf.index('"approved": True')
+        self.assertLess(i, j)
+        self.assertIn('status="BELOW_OWNER_FLOOR"', wf)
+
     def test_heartbeat_dispatches_only_existing_workflows(self):
         scheduler = (ROOT / 'migration/ops/heartbeat.py').read_text()
         for name in set(re.findall(r'"workflow":\s*"([a-z0-9-]+\.yml)"', scheduler)):

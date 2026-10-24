@@ -473,6 +473,16 @@
     "file": "migration/production/test_script_check.py",
     "contains": "def test_gate_structure_rows_run_before_the_render"
    }
+  },
+  {
+   "id": "E65",
+   "date": "2026-10-24",
+   "error": "approve.yml recorded an approval for any review with items >= 7 and overall >= 8, while the owner floor (overall >= 9.5) was checked only at publication: a 9.0 review would be approved, publish.yml would fail on OWNER_QUALITY_POLICY_BLOCKED, and reconcile would dispatch that failing publication several times a day (found before it happened, on pilot-009's 9.0 review).",
+   "fix": "approve.yml runs owner_quality_policy.check (long reviewer) before writing APPROVAL.json; below the floor the status is BELOW_OWNER_FLOOR and nothing is approved or published.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_approval_checks_the_owner_floor"
+   }
   }
  ]
 }
