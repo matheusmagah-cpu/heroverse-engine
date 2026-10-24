@@ -1,6 +1,11 @@
 name: HeroVerse reviewer probe (one tiny text call per free model; diagnosis only)
 on:
   workflow_dispatch:
+    inputs:
+      models:
+        description: Models to probe, space separated (empty = the free models)
+        required: false
+        default: ''
 permissions:
   contents: write
 concurrency:
@@ -16,9 +21,10 @@ jobs:
       - name: Probe
         env:
           HERO_GEMINI_API_KEY: ${{ secrets.HERO_GEMINI_API_KEY }}
+          MODELS: ${{ inputs.models }}
         run: |
           mkdir -p migration/evidence/reviewer-probe
-          python3 -I -B migration/ops/reviewer_probe.py "migration/evidence/reviewer-probe/probe-$(date -u +%Y%m%dT%H%M).json"
+          python3 -I -B migration/ops/reviewer_probe.py "migration/evidence/reviewer-probe/probe-$(date -u +%Y%m%dT%H%M).json" $MODELS
       - name: Commit evidence
         run: |
           git config user.name "github-actions[bot]"
