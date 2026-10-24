@@ -513,6 +513,16 @@
     "file": "migration/production/test_still_render.py",
     "contains": "def test_footage_only_render_has_no_image_to_license"
    }
+  },
+  {
+   "id": "E69",
+   "date": "2026-10-24",
+   "error": "The Claude review of pilot-008 (9.0) found about a third of the picture in bright daylight (sunlit waterfalls, snowy peaks under blue sky, sunny rivers) in a 'Before You Sleep' night prayer. footage/assign.py chose night footage by theme (snow, waterfall, river, ocean, lake), and a theme says nothing about the time of day.",
+   "fix": "assign.py: a night pilot takes only clips whose vetting frames average luma <= 80 (the 008 daylight clips measured 82-166; 22 dark clips remain, above FOOTAGE_MIN 20); morning pilots are unchanged. 008 and 013 reassigned; 008 re-rendered.",
+   "antidote": {
+    "file": "migration/production/footage/test_assign.py",
+    "contains": "def test_night_takes_only_dark_clips"
+   }
   }
  ]
 }
