@@ -1,0 +1,14 @@
+{
+ "version": "ads-approval-v1",
+ "approved_at": "2026-10-24",
+ "owner_words": "Eu aprovo sim",
+ "approved": "one test campaign as proposed in chat on 2026-10-24: US$50-100 in total, once, run by the owner in YouTube Studio Promote (the engine never spends)",
+ "campaign_plan": {
+  "video": "the first long-form video published at the 9.5 floor with at least 48 h of organic baseline (candidates: pilot-011, then the first Bible long)",
+  "goal": "views of that video (not subscribers): the test measures how a paid audience watches and what it causes organically",
+  "audience": "English-speaking: US, CA, GB, AU",
+  "budget": "US$10-15 per day for 7 days (cap US$100)",
+  "measured": ["cost per view", "cost per subscriber (ad-attributed, not counted for YPP)", "paid audience retention and average view duration", "k = organic views of the channel during and 7 days after minus the series baseline at the same age, per paid view"],
+  "decision_after": "the ads model (strategy/ads_model.py) is recalibrated with the measured values; a larger budget is proposed only with a forecast from our own numbers"
+ }
+}
