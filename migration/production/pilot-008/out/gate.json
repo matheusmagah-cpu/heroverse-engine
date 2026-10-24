@@ -2,22 +2,22 @@
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-008",
  "output_sha256": "ccc63f798328e8bdbc89b1c6db6cc0a9e5c2120fe55d642faabfdb88e880d556",
- "decision": "UNKNOWN",
+ "decision": "FAIL",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
   "technical": "PASS",
-  "audio": "UNKNOWN",
+  "audio": "PASS",
   "transcript": "PASS",
-  "captions": "UNKNOWN",
-  "sync": "UNKNOWN",
-  "image": "UNKNOWN",
+  "captions": "PASS",
+  "sync": "PASS",
+  "image": "PASS",
   "rights": "PASS",
-  "content_and_policy": "UNKNOWN",
-  "scorecard": "UNKNOWN",
+  "content_and_policy": "PASS",
+  "scorecard": "PASS",
   "full_file_scan": "PASS",
   "structure": "PASS",
-  "authenticity": "PASS",
+  "authenticity": "FAIL",
   "preflight": "PASS"
  },
  "items": {
@@ -98,8 +98,8 @@
    {
     "source": "review",
     "item": "audio_clarity_and_mix",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "transcript": [
@@ -153,8 +153,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "sync": [
@@ -171,8 +171,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "image": [
@@ -234,14 +234,14 @@
    {
     "source": "review",
     "item": "picture_quality",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 9.0
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 9.5
    }
   ],
   "rights": [
@@ -270,46 +270,46 @@
    {
     "source": "review",
     "item": "opening_and_promise",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 9.5
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 8.5
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 9.5
    },
    {
     "source": "review",
     "item": "policy_safe",
-    "state": "UNKNOWN",
-    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+    "state": "PASS",
+    "detail": 10.0
    },
    {
     "source": "review",
     "item": "overall",
-    "state": "UNKNOWN",
-    "detail": "no completed watched review for this file"
+    "state": "PASS",
+    "detail": 9.0
    }
   ],
   "scorecard": [
    {
     "source": "score",
     "item": "minutes",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "state": "PASS",
+    "detail": 16.08
    },
    {
     "source": "score",
     "item": "scripture_per_10_min",
-    "state": "UNKNOWN",
-    "detail": "no scorecard for this file"
+    "state": "PASS",
+    "detail": 6.22
    }
   ],
   "full_file_scan": [
@@ -471,8 +471,14 @@
    {
     "source": "authenticity",
     "item": "critique_policy_and_ypp",
-    "state": "PASS",
-    "detail": []
+    "state": "FAIL",
+    "detail": [
+     {
+      "category": "misquoted_scripture",
+      "quote": "I am the good shepherd: the good shepherd giveth his life for the sheep.",
+      "why": "This is quoted from John 10:11, but in the context of the script, it is introduced abruptly without proper integration as a spoken verse by Jesus within a Psalm 23 sequence, though the verse text itself is accurate to the King James Version."
+     }
+    ]
    },
    {
     "source": "authenticity",

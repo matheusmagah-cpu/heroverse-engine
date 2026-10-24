@@ -1,7 +1,13 @@
 {
  "version": "critique-v1",
- "model": "gemini-3.6-flash",
- "findings": [],
- "narrative_value": "The script exhibits strong narrative and educational quality. It provides original, nuanced, line-by-line reflections on Psalm 23 and related shepherd passages, thoughtfully addressing realistic daily struggles such as work exhaustion, overthinking, comparison, and grief without relying on repetitive template filler.",
- "status": "PASS"
+ "model": "gemini-3.5-flash-lite",
+ "findings": [
+  {
+   "category": "misquoted_scripture",
+   "quote": "I am the good shepherd: the good shepherd giveth his life for the sheep.",
+   "why": "This is quoted from John 10:11, but in the context of the script, it is introduced abruptly without proper integration as a spoken verse by Jesus within a Psalm 23 sequence, though the verse text itself is accurate to the King James Version."
+  }
+ ],
+ "narrative_value": "The script functions as a calm, reflective, and pastoral bedtime meditation. It follows a structured, contemplative format moving through Psalm 23 verse by verse, grounding its themes in realistic human emotions such as fatigue, regret, and sorrow without relying on sensationalism or mass-produced filler templates.",
+ "status": "FAIL"
 }
