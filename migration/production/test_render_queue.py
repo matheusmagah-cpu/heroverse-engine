@@ -204,6 +204,23 @@ class Queue(unittest.TestCase):
         wf = (Path(rq.__file__).resolve().parents[2] / ".github/workflows/reconcile.yml").read_text()
         self.assertIn("comment) gh workflow run first-comment.yml", wf)
 
+    def test_pending_episode_comments_are_retried_once_public(self):
+        # E70: the Genesis 2 Short was scheduled and its first comment came back PENDING (HTTP 403)
+        with tempfile.TemporaryDirectory() as t:
+            eps = Path(t, "bible", "episodes")
+            eps.mkdir(parents=True)
+            (eps / "g1.json").write_text(json.dumps({"id": "g1"}))
+            (eps / "g2.json").write_text(json.dumps({"id": "g2", "slot": "2026-10-17T23:30:00Z"}))
+            (eps / "g3.json").write_text(json.dumps({"id": "g3", "slot": "2026-10-18T05:00:00Z"}))
+            pending = {"first_comment": "PENDING: HTTP_403 forbidden"}
+            ledger = {"entries": {
+                "bible:g1:" + "a" * 64: {"video_id": "v1", "uploaded_at": "2026-10-17T08:00:00+00:00", "steps": {"first_comment": "Ugw"}},
+                "bible:g2:" + "a" * 64: {"video_id": "v2", "steps": pending},
+                "bible:g3:" + "a" * 64: {"video_id": "v3", "steps": pending}}}
+            self.assertEqual(rq.pending_episode_comments(t, ledger, NOW), ["g2"])
+        wf = (Path(rq.__file__).resolve().parents[2] / ".github/workflows/reconcile.yml").read_text()
+        self.assertIn("episode) gh workflow run publish-episode.yml", wf)
+
     def test_reconcile_retries_errors_and_failed_publications(self):
         import contextlib, io
         with tempfile.TemporaryDirectory() as t:

@@ -27,5 +27,6 @@ jobs:
               publish) gh workflow run publish.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" -f publish_at="" ;;
               shorts) gh workflow run shorts.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" ;;
               comment) gh workflow run first-comment.yml --repo "$GITHUB_REPOSITORY" --ref main -f pilot="$pilot" ;;  # E61
+              episode) gh workflow run publish-episode.yml --repo "$GITHUB_REPOSITORY" --ref main -f episode="$pilot" ;;  # E70
             esac
           done < "$RUNNER_TEMP/todo"

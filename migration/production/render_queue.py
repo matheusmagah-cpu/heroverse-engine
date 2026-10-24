@@ -112,6 +112,27 @@ def pending_comments(production, ledger, now):
     return out
 
 
+def pending_episode_comments(production, ledger, now):
+    """E70: Bible-series episodes publish through publish-episode.yml; a scheduled one refuses its first comment (HTTP 403)
+    like the pilots did (E61), and nothing retried it. Episodes whose slot (or upload, when published at once) passed
+    10 minutes to COMMENT_DAYS ago with a PENDING first comment are re-run; the publisher is idempotent."""
+    out = []
+    for key, entry in sorted(ledger.get("entries", {}).items()):
+        kind, _, rest = key.partition(":")
+        comment = (entry.get("steps") or {}).get("first_comment")
+        if kind != "bible" or not entry.get("video_id") or not (isinstance(comment, str) and comment.startswith("PENDING")):
+            continue
+        episode = rest.split(":", 1)[0]
+        try:
+            ep = json.loads((Path(production) / "bible" / "episodes" / f"{episode}.json").read_text())
+            public = when(ep.get("slot") or entry["uploaded_at"])
+        except (FileNotFoundError, ValueError, KeyError):
+            continue
+        if public + timedelta(minutes=10) <= now <= public + timedelta(days=COMMENT_DAYS) and episode not in out:
+            out.append(episode)
+    return out
+
+
 def stale(production, ledger, now, days=STALE_DAYS):
     """E49: pilot-008..011 left the queue silently once their slot was more than 6 h old (the reviewer returned 503
     and two renders failed QA), and nothing reported it for a day. Any ledger entry with a video_id for the pilot
@@ -220,6 +241,9 @@ def main(production, ledger_path, mode, hours="48"):
         comments = pending_comments(production, ledger, now)
         if comments:  # first-comment.yml shares the publish concurrency group: one at a time, like approvals (E25)
             print("comment", comments[0])
+        episodes = pending_episode_comments(production, ledger, now)
+        if episodes and not comments:
+            print("episode", episodes[0])
         if approve:
             print("approve", approve[0])  # rows are sorted by publish time: the earliest slot first
         elif not long_quota_pending:
