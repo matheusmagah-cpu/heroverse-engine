@@ -2,30 +2,31 @@
  "version": "preview-review-v1",
  "model": "claude-session-reviewer",
  "pilot_id": "pilot-008",
- "script_sha256": "cfb0bc8ab670a19bd7d82c1b7542abaed985526275d956547e958f73a5a3db45",
- "reviewed_at": "2026-10-24T22:30:00Z",
- "opening_and_promise": 9.0,
+ "script_sha256": "8954fdf88641cc7de08795d5669628a141d06212af3caff4fbb54f74654f2597",
+ "reviewed_at": "2026-10-25T01:10:00Z",
+ "opening_and_promise": 9.5,
  "picture_quality": 9.5,
  "figure_and_background_integrity": 9.5,
  "captions_readable_and_synced": 9.5,
  "audio_clarity_and_mix": 9.5,
- "pacing_and_visual_variety": 9.0,
- "scripture_on_screen": 9.5,
+ "pacing_and_visual_variety": 9.5,
+ "scripture_on_screen": 9.0,
  "policy_safe": 10.0,
- "overall": 9.2,
+ "overall": 9.5,
  "issues": [
-  "clip 03 (rain-glass-window), ~0:12-0:17 'praying over your needs, your regrets': a bright daylight window with a yellow blur, off the night mood right at the roadmap (E69/E71)",
-  "clip 04 (river-forest-woods), ~0:17-0:25 'Then gentle readings will carry you toward sleep': autumn woods in full daylight under the promise of sleep",
-  "clip 07 (hibiscus-marshmallow), ~0:40 'You can bring that unfinished day here': daylight garden flowers, off the night mood",
-  "fix: the three clips are removed from pilot-008 footage (28 -> 25, FOOTAGE_MIN 20); the unused Claude-seen clips (clouds, grey sky, butterfly) are all daylight, so none is added; the changed script is previewed again"
+  "footage: all 25 clips are night by nature (candles, moon, moonrise, aurora, rain on a puddle, night flowers on black); no daylight, modern object, person, text or brand; the black-opening snail clip of the last preview is gone",
+  "~0:58 (opening sheet, 'I shall not want.' card over the pea blossom, clip 11): the card box barely shows over the grey-beige backdrop, so the verse reads with less contrast than the card over the candle at 0:55 (scripture_on_screen 9.0)",
+  "candles carry 7 of 25 clips; they alternate with moon, aurora and flowers, so no two candles follow each other in the opening minute",
+  "thumbnail: 'NIGHT PRAYER / YOUR SHEPHERD CARRIES TODAY' over warm candles, readable at small size"
  ],
- "strongest_moment": "0:00-0:08: 'Before you sleep tonight, let your Shepherd carry what you could not finish' over candles, then the rising moon",
+ "strongest_moment": "0:00-0:06: 'Before you sleep tonight, let your Shepherd carry what you could not finish.' over the candles, then 'Pray Psalm twenty-three with me now.' as the full moon rises",
  "evidence": [
+  "inspection/preview/opening-sheet.jpg",
   "inspection/preview/footage-sheet-01.jpg",
   "inspection/preview/footage-sheet-02.jpg",
   "inspection/preview/footage-sheet-03.jpg",
-  "inspection/preview/opening-sheet.jpg",
   "inspection/preview/thumbnail.jpg",
+  "inspection/preview/preview.json",
   "script.json"
  ]
 }

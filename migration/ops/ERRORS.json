@@ -583,6 +583,16 @@
     "file": "migration/production/test_thumb_check.py",
     "contains": "def test_footage_only_package_credits_no_ai_stills"
    }
+  },
+  {
+   "id": "E76",
+   "date": "2026-10-25",
+   "error": "The pilot-013 night-prayer preview opened (0:12-0:20) on an autumn forest creek filmed by day: its mean luma (33) passed the E69 limit and its theme 'river' was still a night theme after E71.",
+   "fix": "assign.py: night takes only candle, night and rain (river is shot by day like waterfall). A window-pane rain clip with a daytime sky was rejected in the library. pilot-013's footage was reassigned from Claude-seen night clips.",
+   "antidote": {
+    "file": "migration/production/footage/test_assign.py",
+    "contains": "def test_night_takes_no_river"
+   }
   }
  ]
 }
