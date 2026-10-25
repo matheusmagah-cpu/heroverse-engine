@@ -2,7 +2,58 @@
  "version": "long-review-v2",
  "pilot_id": "pilot-011",
  "output_sha256": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da",
- "status": "AWAITING_REVIEW",
- "error": "CLAUDE_REVIEW_MISSING",
- "checked_at": "2026-10-24T23:40:47Z"
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 16.32,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 6.74,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.5,
+  "picture_quality": 9.5,
+  "figure_and_background_integrity": 9.5,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 9.5,
+  "scripture_on_screen": 9.0,
+  "policy_safe": 9.5,
+  "overall": 9.5,
+  "issues": [
+   "2:10-2:16 (contact sheet, Isaiah 40:29 card): the card's dark box almost vanishes over the bright tulip field and the small reference line 'Isaiah 40:29 (KJV)' is hard to read; the verse line itself stays readable and is spoken. The other 10 cards sit on darker footage and read clearly (scripture_on_screen 9.0)",
+   "description (fixed before publication, E75): it credited AI illustrations this footage-only render does not use; package text regenerated, title, tags and thumbnail unchanged (policy_safe 9.5)",
+   "package: the script names no chapters, so the description has 4 (0:00 Opening prayer, then 13:27, 14:27, 15:01); valid under Help rules but coarse for a 16-minute prayer",
+   "picture: 117 licensed clips, all seen on the preview reviews; cultivated tulip and crop rows (2:10, 12:10) are the only man-made shapes, no modern object, person, text or brand",
+   "audio from QA measures: -15.6 LUFS, -2.7 dBTP, speech 0.867, WER 0.050, 125.5 wpm, first word 0.11 s: every band met (9.5)",
+   "pacing: 58 picture changes, median shot 5.5 s, longest footage hold 6.9 s; morning light throughout (sunrise, forest, water, fields)"
+  ],
+  "strongest_moment": "0:00-0:08: 'The world says push harder when you're tired. But God says wait on Me.' over the sunrise behind the branches, then the roadmap over the dawn ridge",
+  "model": "claude-session-reviewer",
+  "reviewed_at": "2026-10-25T00:40:00Z",
+  "evidence": [
+   "inspection/review-sheet.jpg",
+   "inspection/opening-sheet.jpg",
+   "inspection/pilot-contact-sheet.jpg",
+   "inspection/thumbnail.jpg",
+   "out/thumbnail_check.json",
+   "out/qa.json",
+   "out/package.json",
+   "out/manifest.json",
+   "script.json"
+  ],
+  "status": "PASS"
+ }
 }
