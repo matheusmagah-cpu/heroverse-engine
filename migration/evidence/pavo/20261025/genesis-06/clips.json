@@ -75,6 +75,14 @@
    "conversation_id": "372879243392923392",
    "for_words": "narration 8 close",
    "verdict": "APPROVED"
+  },
+  {
+   "name": "timelapse",
+   "file": "migration/evidence/pavo/20261025/genesis-06/timelapse.mp4",
+   "sha256": "ff922d9a1a8068eb34caba5f07899632361dc81add1b04619e551c6d5403257e",
+   "conversation_id": "372882592317608192",
+   "for_words": "narration 4 'for three hundred years, one ordinary day at a time'",
+   "verdict": "APPROVED (small lens-flare dot in the first second; trim the head 1 s)"
   }
  ],
  "rejected": [
@@ -87,6 +95,11 @@
    "name": "footprints-pair",
    "conversation_id": "372879099217840768",
    "why": "bare prints with round toe dots read as animal tracks; not an adult and a child side by side"
+  },
+  {
+   "name": "footprints-pair (2nd)",
+   "conversation_id": "372882695011514112",
+   "why": "one trail of blob-shaped prints, no adult and child side by side; narration 4 is covered by tents + timelapse instead"
   }
  ]
 }
