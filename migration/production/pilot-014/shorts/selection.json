@@ -1,0 +1,1379 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-014",
+ "rubric_model": "gemini-3.6-flash",
+ "candidates_considered": 17,
+ "shortlist": [
+  {
+   "start": 95.403,
+   "end": 132.997,
+   "sentences": [
+    {
+     "segment": "prayer-my-yes",
+     "text": "Lord, I choose you again today.",
+     "start": 95.403,
+     "end": 97.899
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "I want my words, my reactions, and my plans to reflect that choice.",
+     "start": 98.199,
+     "end": 103.468
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "When I am tempted to bring stress into every room, remind me whose house this really is.",
+     "start": 103.768,
+     "end": 110.424
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "Help me lead by example rather than lecture.",
+     "start": 110.724,
+     "end": 113.967
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "Let the people around me notice something of your kindness in the way I listen and the way I respond.",
+     "start": 114.267,
+     "end": 121.733
+    },
+    {
+     "segment": "scripture-psalm-build",
+     "text": "Except the LORD build the house, they labour in vain that build it:",
+     "start": 123.033,
+     "end": 127.876
+    },
+    {
+     "segment": "scripture-psalm-build",
+     "text": "except the LORD keep the city, the watchman waketh but in vain.",
+     "start": 128.176,
+     "end": 132.997
+    }
+   ],
+   "segments": [
+    "prayer-my-yes",
+    "scripture-psalm-build"
+   ],
+   "text": "Lord, I choose you again today. I want my words, my reactions, and my plans to reflect that choice. When I am tempted to bring stress into every room, remind me whose house this really is. Help me lead by example rather than lecture. Let the people around me notice something of your kindness in the way I listen and the way I respond. Except the LORD build the house, they labour in vain that build it: except the LORD keep the city, the watchman waketh but in vain.",
+   "reference": "Psalm 127:1 (KJV)",
+   "measured_score": 0.6841,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.2247191011235955,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.9037600000000003
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Strongly addresses the common struggle of bringing stress home and choosing kindness.",
+    "hook_line": "When you feel stressed at home",
+    "title": "A Prayer When Stress Takes Over Your Home"
+   },
+   "final_score": 0.7736,
+   "hook": "When you feel stressed at home",
+   "title": "A Prayer When Stress Takes Over Your Home"
+  },
+  {
+   "start": 210.901,
+   "end": 264.521,
+   "sentences": [
+    {
+     "segment": "prayer-children",
+     "text": "Teach them yourself.",
+     "start": 210.901,
+     "end": 212.693
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Guard their minds from what would harm them, and their hearts from believing they are unloved.",
+     "start": 212.993,
+     "end": 219.479
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Give them friends who are kind and teachers who are wise.",
+     "start": 219.779,
+     "end": 223.619
+    },
+    {
+     "segment": "prayer-children",
+     "text": "When they make mistakes today, let them find grace rather than shame.",
+     "start": 223.919,
+     "end": 228.953
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Let your peace be great within them, deeper than the pressures they face at school or online.",
+     "start": 229.253,
+     "end": 235.589
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Lord, some of the children I love are carrying fears they cannot explain.",
+     "start": 236.889,
+     "end": 242.393
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "A test, a friendship that has changed, a worry about home, or something they saw on a screen.",
+     "start": 242.693,
+     "end": 249.904
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Give them courage that is bigger than their fear.",
+     "start": 250.204,
+     "end": 253.575
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Help me notice when something is wrong, and give me gentle words to ask about it.",
+     "start": 253.875,
+     "end": 259.571
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Let them know they can always come to me, and always come to you.",
+     "start": 259.871,
+     "end": 264.521
+    }
+   ],
+   "segments": [
+    "prayer-children",
+    "prayer-children-fears"
+   ],
+   "text": "Teach them yourself. Guard their minds from what would harm them, and their hearts from believing they are unloved. Give them friends who are kind and teachers who are wise. When they make mistakes today, let them find grace rather than shame. Let your peace be great within them, deeper than the pressures they face at school or online. Lord, some of the children I love are carrying fears they cannot explain. A test, a friendship that has changed, a worry about home, or something they saw on a screen. Give them courage that is bigger than their fear. Help me notice when something is wrong, and give me gentle words to ask about it. Let them know they can always come to me, and always come to you.",
+   "reference": null,
+   "measured_score": 0.6473,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.23255813953488372,
+    "scripture": 0.4,
+    "promise": 0.9689922480620154,
+    "resolution": 0.4,
+    "length_fit": 0.4551999999999998
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Deeply emotional prayer for children dealing with school and online stress.",
+    "hook_line": "Pray this over your children today",
+    "title": "A Prayer for Your Children's Peace"
+   },
+   "final_score": 0.7639,
+   "hook": "Pray this over your children today",
+   "title": "A Prayer for Your Children's Peace"
+  },
+  {
+   "start": 560.579,
+   "end": 594.245,
+   "sentences": [
+    {
+     "segment": "prayer-gratitude",
+     "text": "Lord, thank you for my family.",
+     "start": 560.579,
+     "end": 563.011
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Thank you for the laughter we have shared, the meals we have eaten together, and the ordinary moments that will one day be precious memories.",
+     "start": 563.311,
+     "end": 572.953
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Thank you for the person who made coffee, fixed something, or sent a kind message.",
+     "start": 573.253,
+     "end": 579.291
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Help me say thank you out loud today, so that gratitude is not only in my heart but in our home.",
+     "start": 579.591,
+     "end": 586.887
+    },
+    {
+     "segment": "scripture-psalm-unity",
+     "text": "Behold, how good and how pleasant it is for brethren to dwell together in unity!",
+     "start": 588.187,
+     "end": 594.245
+    }
+   ],
+   "segments": [
+    "prayer-gratitude",
+    "scripture-psalm-unity"
+   ],
+   "text": "Lord, thank you for my family. Thank you for the laughter we have shared, the meals we have eaten together, and the ordinary moments that will one day be precious memories. Thank you for the person who made coffee, fixed something, or sent a kind message. Help me say thank you out loud today, so that gratitude is not only in my heart but in our home. Behold, how good and how pleasant it is for brethren to dwell together in unity!",
+   "reference": "Psalm 133:1 (KJV)",
+   "measured_score": 0.7078,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.4878048780487805,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.7466400000000022
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 6.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Warm prayer of gratitude for everyday family moments with strong biblical conclusion.",
+    "hook_line": "Thank God for your family today",
+    "title": "A Prayer of Gratitude for Your Family"
+   },
+   "final_score": 0.7631,
+   "hook": "Thank God for your family today",
+   "title": "A Prayer of Gratitude for Your Family"
+  },
+  {
+   "start": 793.256,
+   "end": 835.361,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can say thank you out loud.",
+     "start": 793.256,
+     "end": 795.709
+    },
+    {
+     "segment": "declaration",
+     "text": "I can honor the people I love with simple acts of kindness.",
+     "start": 796.009,
+     "end": 800.767
+    },
+    {
+     "segment": "declaration",
+     "text": "God's mercy reaches my family today and the generations that come after us.",
+     "start": 801.067,
+     "end": 807.296
+    },
+    {
+     "segment": "commitment",
+     "text": "Choose one person from your home or your family right now.",
+     "start": 808.796,
+     "end": 813.319
+    },
+    {
+     "segment": "commitment",
+     "text": "Decide on one simple act of love for them today, and when you will do it.",
+     "start": 813.619,
+     "end": 819.251
+    },
+    {
+     "segment": "commitment",
+     "text": "It might be, when my daughter gets home from school, I will put my phone away and ask about her day.",
+     "start": 819.551,
+     "end": 826.911
+    },
+    {
+     "segment": "commitment",
+     "text": "Or, at lunch I will send my mother a message of thanks.",
+     "start": 827.211,
+     "end": 831.477
+    },
+    {
+     "segment": "commitment",
+     "text": "Keep it small and specific enough to actually do.",
+     "start": 831.777,
+     "end": 835.361
+    }
+   ],
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "text": "I can say thank you out loud. I can honor the people I love with simple acts of kindness. God's mercy reaches my family today and the generations that come after us. Choose one person from your home or your family right now. Decide on one simple act of love for them today, and when you will do it. It might be, when my daughter gets home from school, I will put my phone away and ask about her day. Or, at lunch I will send my mother a message of thanks. Keep it small and specific enough to actually do.",
+   "reference": null,
+   "measured_score": 0.6952,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.396039603960396,
+    "scripture": 0.4,
+    "promise": 0.7425742574257426,
+    "resolution": 0.4,
+    "length_fit": 0.9157999999999993
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Offers actionable and specific steps for expressing love to family members.",
+    "hook_line": "One simple act of love today",
+    "title": "Show Love to Your Family Today"
+   },
+   "final_score": 0.7581
+  },
+  {
+   "start": 367.816,
+   "end": 405.481,
+   "sentences": [
+    {
+     "segment": "stillness-one",
+     "text": "Take a quiet moment now.",
+     "start": 367.816,
+     "end": 370.035
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Picture the faces of the people you live with or love most.",
+     "start": 370.335,
+     "end": 374.729
+    },
+    {
+     "segment": "stillness-one",
+     "text": "You do not need to say anything about them yet.",
+     "start": 375.029,
+     "end": 378.571
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Simply hold them in your mind, and let God see them with you.",
+     "start": 378.871,
+     "end": 383.201
+    },
+    {
+     "segment": "scripture-psalm-mercy-generations",
+     "text": "But the mercy of the LORD is from everlasting to everlasting upon them that fear him, and his righteousness unto children's children;",
+     "start": 389.501,
+     "end": 399.379
+    },
+    {
+     "segment": "scripture-psalm-mercy-generations",
+     "text": "to such as keep his covenant, and to those that remember his commandments to do them.",
+     "start": 399.679,
+     "end": 405.481
+    }
+   ],
+   "segments": [
+    "stillness-one",
+    "scripture-psalm-mercy-generations"
+   ],
+   "text": "Take a quiet moment now. Picture the faces of the people you live with or love most. You do not need to say anything about them yet. Simply hold them in your mind, and let God see them with you. But the mercy of the LORD is from everlasting to everlasting upon them that fear him, and his righteousness unto children's children; to such as keep his covenant, and to those that remember his commandments to do them.",
+   "reference": "Psalm 103:17-18 (KJV)",
+   "measured_score": 0.6837,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.5128205128205128,
+    "scripture": 1.0,
+    "promise": 0.9615384615384616,
+    "resolution": 0.4,
+    "length_fit": 0.9066000000000008
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.0,
+    "shareability": 7.0,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Creates an immediate peaceful pause that invites viewers to pray for loved ones.",
+    "hook_line": "Take a quiet moment right now",
+    "title": "Pause and Pray for Those You Love"
+   },
+   "final_score": 0.7535
+  },
+  {
+   "start": 463.88,
+   "end": 510.585,
+   "sentences": [
+    {
+     "segment": "prayer-disagreement",
+     "text": "Where I have been stubborn, soften me.",
+     "start": 463.88,
+     "end": 466.589
+    },
+    {
+     "segment": "prayer-disagreement",
+     "text": "Where I need to speak up, give me words seasoned with grace.",
+     "start": 466.889,
+     "end": 471.305
+    },
+    {
+     "segment": "prayer-disagreement",
+     "text": "Help us keep the bond of peace, even when we see things differently.",
+     "start": 471.605,
+     "end": 476.512
+    },
+    {
+     "segment": "scripture-james-swift",
+     "text": "Wherefore, my beloved brethren, let every man be swift to hear, slow to speak, slow to wrath:",
+     "start": 477.812,
+     "end": 484.831
+    },
+    {
+     "segment": "prayer-listening",
+     "text": "Lord, make me swift to hear the people I love.",
+     "start": 486.431,
+     "end": 489.652
+    },
+    {
+     "segment": "prayer-listening",
+     "text": "Slow my tongue when I want to correct, interrupt, or win.",
+     "start": 489.952,
+     "end": 494.048
+    },
+    {
+     "segment": "prayer-listening",
+     "text": "Help me hear the worry behind a sharp comment and the tiredness behind a short answer.",
+     "start": 494.348,
+     "end": 500.3
+    },
+    {
+     "segment": "prayer-listening",
+     "text": "When anger rises in me today, let it slow down long enough for wisdom to catch up.",
+     "start": 500.6,
+     "end": 506.893
+    },
+    {
+     "segment": "prayer-listening",
+     "text": "Teach me to listen the way you listen to me.",
+     "start": 507.193,
+     "end": 510.585
+    }
+   ],
+   "segments": [
+    "prayer-disagreement",
+    "scripture-james-swift",
+    "prayer-listening"
+   ],
+   "text": "Where I have been stubborn, soften me. Where I need to speak up, give me words seasoned with grace. Help us keep the bond of peace, even when we see things differently. Wherefore, my beloved brethren, let every man be swift to hear, slow to speak, slow to wrath: Lord, make me swift to hear the people I love. Slow my tongue when I want to correct, interrupt, or win. Help me hear the worry behind a sharp comment and the tiredness behind a short answer. When anger rises in me today, let it slow down long enough for wisdom to catch up. Teach me to listen the way you listen to me.",
+   "reference": "James 1:19 (KJV)",
+   "measured_score": 0.5728,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.08849557522123894,
+    "scripture": 1.0,
+    "promise": 0.6637168141592921,
+    "resolution": 0.4,
+    "length_fit": 0.7318000000000007
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Vulnerable prayer about listening before reacting and slowing down anger.",
+    "hook_line": "Slow down long enough for wisdom",
+    "title": "A Prayer for Patience in Relationships"
+   },
+   "final_score": 0.7491
+  },
+  {
+   "start": 292.492,
+   "end": 331.732,
+   "sentences": [
+    {
+     "segment": "prayer-every-kind-of-family",
+     "text": "Father, families come in many shapes.",
+     "start": 292.492,
+     "end": 295.393
+    },
+    {
+     "segment": "prayer-every-kind-of-family",
+     "text": "Some of us are raising children who are not biologically ours.",
+     "start": 295.693,
+     "end": 300.664
+    },
+    {
+     "segment": "prayer-every-kind-of-family",
+     "text": "Some are blending two households into one.",
+     "start": 300.964,
+     "end": 304.121
+    },
+    {
+     "segment": "prayer-every-kind-of-family",
+     "text": "Some are caring for a relative alone.",
+     "start": 304.421,
+     "end": 307.216
+    },
+    {
+     "segment": "prayer-every-kind-of-family",
+     "text": "Some are waiting and hoping for children.",
+     "start": 307.516,
+     "end": 310.673
+    },
+    {
+     "segment": "prayer-every-kind-of-family",
+     "text": "Meet each of us in our particular situation.",
+     "start": 310.973,
+     "end": 314.963
+    },
+    {
+     "segment": "prayer-every-kind-of-family",
+     "text": "Give wisdom to every parent, guardian, and caregiver, and let every child feel wanted, chosen, and safe.",
+     "start": 315.263,
+     "end": 323.241
+    },
+    {
+     "segment": "scripture-proverbs-refuge",
+     "text": "In the fear of the LORD is strong confidence:",
+     "start": 324.541,
+     "end": 327.976
+    },
+    {
+     "segment": "scripture-proverbs-refuge",
+     "text": "and his children shall have a place of refuge.",
+     "start": 328.276,
+     "end": 331.732
+    }
+   ],
+   "segments": [
+    "prayer-every-kind-of-family",
+    "scripture-proverbs-refuge"
+   ],
+   "text": "Father, families come in many shapes. Some of us are raising children who are not biologically ours. Some are blending two households into one. Some are caring for a relative alone. Some are waiting and hoping for children. Meet each of us in our particular situation. Give wisdom to every parent, guardian, and caregiver, and let every child feel wanted, chosen, and safe. In the fear of the LORD is strong confidence: and his children shall have a place of refuge.",
+   "reference": "Proverbs 14:26 (KJV)",
+   "measured_score": 0.517,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.0,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.9696000000000004
+   },
+   "rubric": {
+    "index": 11,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Extremely comforting, inclusive prayer covering single parents, stepfamilies, and caregivers.",
+    "hook_line": "A prayer for every modern family",
+    "title": "A Prayer for Every Type of Family"
+   },
+   "final_score": 0.7418
+  },
+  {
+   "start": 361.965,
+   "end": 405.481,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "Stay with me.",
+     "start": 361.965,
+     "end": 363.331
+    },
+    {
+     "segment": "rehook-2",
+     "text": "In a moment, picture each face as we pray.",
+     "start": 363.631,
+     "end": 366.916
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Take a quiet moment now.",
+     "start": 367.816,
+     "end": 370.035
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Picture the faces of the people you live with or love most.",
+     "start": 370.335,
+     "end": 374.729
+    },
+    {
+     "segment": "stillness-one",
+     "text": "You do not need to say anything about them yet.",
+     "start": 375.029,
+     "end": 378.571
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Simply hold them in your mind, and let God see them with you.",
+     "start": 378.871,
+     "end": 383.201
+    },
+    {
+     "segment": "scripture-psalm-mercy-generations",
+     "text": "But the mercy of the LORD is from everlasting to everlasting upon them that fear him, and his righteousness unto children's children;",
+     "start": 389.501,
+     "end": 399.379
+    },
+    {
+     "segment": "scripture-psalm-mercy-generations",
+     "text": "to such as keep his covenant, and to those that remember his commandments to do them.",
+     "start": 399.679,
+     "end": 405.481
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "stillness-one",
+    "scripture-psalm-mercy-generations"
+   ],
+   "text": "Stay with me. In a moment, picture each face as we pray. Take a quiet moment now. Picture the faces of the people you live with or love most. You do not need to say anything about them yet. Simply hold them in your mind, and let God see them with you. But the mercy of the LORD is from everlasting to everlasting upon them that fear him, and his righteousness unto children's children; to such as keep his covenant, and to those that remember his commandments to do them.",
+   "reference": "Psalm 103:17-18 (KJV)",
+   "measured_score": 0.6559,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.4444444444444444,
+    "scripture": 1.0,
+    "promise": 0.8333333333333334,
+    "resolution": 0.4,
+    "length_fit": 0.8593599999999992
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 6.5,
+    "loop_potential": 5.5,
+    "policy_safe": 10.0,
+    "reasons": "Engaging call to quiet contemplation, though the retention intro feels slightly meta.",
+    "hook_line": "Picture the faces of your family",
+    "title": "Hold Your Loved Ones in Prayer"
+   },
+   "final_score": 0.7174
+  },
+  {
+   "start": 608.947,
+   "end": 645.088,
+   "sentences": [
+    {
+     "segment": "prayer-siblings",
+     "text": "Bring healing where there has been silence.",
+     "start": 608.947,
+     "end": 611.891
+    },
+    {
+     "segment": "prayer-siblings",
+     "text": "Give us opportunities to reach out with kindness.",
+     "start": 612.191,
+     "end": 615.476
+    },
+    {
+     "segment": "prayer-siblings",
+     "text": "Let our gatherings, whether large or small, be good and pleasant, marked by grace rather than tension.",
+     "start": 615.776,
+     "end": 623.712
+    },
+    {
+     "segment": "scripture-deuteronomy-teach",
+     "text": "And these words, which I command thee this day, shall be in thine heart:",
+     "start": 625.012,
+     "end": 629.983
+    },
+    {
+     "segment": "scripture-deuteronomy-teach",
+     "text": "and thou shalt teach them diligently unto thy children, and shalt talk of them when thou sittest in thine house, and when thou walkest by the way, and when thou liest down, and when thou risest up.",
+     "start": 630.283,
+     "end": 645.088
+    }
+   ],
+   "segments": [
+    "prayer-siblings",
+    "scripture-deuteronomy-teach"
+   ],
+   "text": "Bring healing where there has been silence. Give us opportunities to reach out with kindness. Let our gatherings, whether large or small, be good and pleasant, marked by grace rather than tension. And these words, which I command thee this day, shall be in thine heart: and thou shalt teach them diligently unto thy children, and shalt talk of them when thou sittest in thine house, and when thou walkest by the way, and when thou liest down, and when thou risest up.",
+   "reference": "Deuteronomy 6:6-7 (KJV)",
+   "measured_score": 0.5347,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.0,
+    "scripture": 1.0,
+    "promise": 0.30120481927710846,
+    "resolution": 0.4,
+    "length_fit": 0.8456399999999985
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Directly addresses family silence and tension with a comforting biblical mandate.",
+    "hook_line": "Bring healing where silence has been",
+    "title": "A Prayer for Healing Family Tension"
+   },
+   "final_score": 0.7089
+  },
+  {
+   "start": 790.311,
+   "end": 835.361,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can let small offenses go.",
+     "start": 790.311,
+     "end": 792.956
+    },
+    {
+     "segment": "declaration",
+     "text": "I can say thank you out loud.",
+     "start": 793.256,
+     "end": 795.709
+    },
+    {
+     "segment": "declaration",
+     "text": "I can honor the people I love with simple acts of kindness.",
+     "start": 796.009,
+     "end": 800.767
+    },
+    {
+     "segment": "declaration",
+     "text": "God's mercy reaches my family today and the generations that come after us.",
+     "start": 801.067,
+     "end": 807.296
+    },
+    {
+     "segment": "commitment",
+     "text": "Choose one person from your home or your family right now.",
+     "start": 808.796,
+     "end": 813.319
+    },
+    {
+     "segment": "commitment",
+     "text": "Decide on one simple act of love for them today, and when you will do it.",
+     "start": 813.619,
+     "end": 819.251
+    },
+    {
+     "segment": "commitment",
+     "text": "It might be, when my daughter gets home from school, I will put my phone away and ask about her day.",
+     "start": 819.551,
+     "end": 826.911
+    },
+    {
+     "segment": "commitment",
+     "text": "Or, at lunch I will send my mother a message of thanks.",
+     "start": 827.211,
+     "end": 831.477
+    },
+    {
+     "segment": "commitment",
+     "text": "Keep it small and specific enough to actually do.",
+     "start": 831.777,
+     "end": 835.361
+    }
+   ],
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "text": "I can let small offenses go. I can say thank you out loud. I can honor the people I love with simple acts of kindness. God's mercy reaches my family today and the generations that come after us. Choose one person from your home or your family right now. Decide on one simple act of love for them today, and when you will do it. It might be, when my daughter gets home from school, I will put my phone away and ask about her day. Or, at lunch I will send my mother a message of thanks. Keep it small and specific enough to actually do.",
+   "reference": null,
+   "measured_score": 0.536,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.3738317757009345,
+    "scripture": 0.4,
+    "promise": 0.7009345794392523,
+    "resolution": 0.4,
+    "length_fit": 0.7980000000000018
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Encouraging daily affirmations and concrete actions to strengthen family bonds.",
+    "hook_line": "Let small offenses go today",
+    "title": "Practical Ways to Love Your Family Today"
+   },
+   "final_score": 0.6994
+  },
+  {
+   "start": 787.515,
+   "end": 835.361,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can listen before I speak.",
+     "start": 787.515,
+     "end": 790.011
+    },
+    {
+     "segment": "declaration",
+     "text": "I can let small offenses go.",
+     "start": 790.311,
+     "end": 792.956
+    },
+    {
+     "segment": "declaration",
+     "text": "I can say thank you out loud.",
+     "start": 793.256,
+     "end": 795.709
+    },
+    {
+     "segment": "declaration",
+     "text": "I can honor the people I love with simple acts of kindness.",
+     "start": 796.009,
+     "end": 800.767
+    },
+    {
+     "segment": "declaration",
+     "text": "God's mercy reaches my family today and the generations that come after us.",
+     "start": 801.067,
+     "end": 807.296
+    },
+    {
+     "segment": "commitment",
+     "text": "Choose one person from your home or your family right now.",
+     "start": 808.796,
+     "end": 813.319
+    },
+    {
+     "segment": "commitment",
+     "text": "Decide on one simple act of love for them today, and when you will do it.",
+     "start": 813.619,
+     "end": 819.251
+    },
+    {
+     "segment": "commitment",
+     "text": "It might be, when my daughter gets home from school, I will put my phone away and ask about her day.",
+     "start": 819.551,
+     "end": 826.911
+    },
+    {
+     "segment": "commitment",
+     "text": "Or, at lunch I will send my mother a message of thanks.",
+     "start": 827.211,
+     "end": 831.477
+    },
+    {
+     "segment": "commitment",
+     "text": "Keep it small and specific enough to actually do.",
+     "start": 831.777,
+     "end": 835.361
+    }
+   ],
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "text": "I can listen before I speak. I can let small offenses go. I can say thank you out loud. I can honor the people I love with simple acts of kindness. God's mercy reaches my family today and the generations that come after us. Choose one person from your home or your family right now. Decide on one simple act of love for them today, and when you will do it. It might be, when my daughter gets home from school, I will put my phone away and ask about her day. Or, at lunch I will send my mother a message of thanks. Keep it small and specific enough to actually do.",
+   "reference": null,
+   "measured_score": 0.5181,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.35398230088495575,
+    "scripture": 0.4,
+    "promise": 0.6637168141592921,
+    "resolution": 0.4,
+    "length_fit": 0.6861599999999999
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.0,
+    "shareability": 7.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Builds practical habits like listening before speaking and practical family love.",
+    "hook_line": "Listen before you speak today",
+    "title": "Simple Steps to Honor Your Family"
+   },
+   "final_score": 0.6922
+  },
+  {
+   "start": 333.332,
+   "end": 383.201,
+   "sentences": [
+    {
+     "segment": "prayer-refuge",
+     "text": "Father, make our home a refuge.",
+     "start": 333.332,
+     "end": 335.956
+    },
+    {
+     "segment": "prayer-refuge",
+     "text": "When someone walks through the door discouraged, let them find comfort here.",
+     "start": 336.256,
+     "end": 341.504
+    },
+    {
+     "segment": "prayer-refuge",
+     "text": "When someone fails, let them find mercy here before they find consequences.",
+     "start": 341.804,
+     "end": 347.436
+    },
+    {
+     "segment": "prayer-refuge",
+     "text": "Give me a steady heart so that my own fears do not fill the house.",
+     "start": 347.736,
+     "end": 352.6
+    },
+    {
+     "segment": "prayer-refuge",
+     "text": "Let the confidence I have in you settle the atmosphere, so that each person feels safe to rest and to speak.",
+     "start": 352.9,
+     "end": 360.665
+    },
+    {
+     "segment": "rehook-2",
+     "text": "Stay with me.",
+     "start": 361.965,
+     "end": 363.331
+    },
+    {
+     "segment": "rehook-2",
+     "text": "In a moment, picture each face as we pray.",
+     "start": 363.631,
+     "end": 366.916
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Take a quiet moment now.",
+     "start": 367.816,
+     "end": 370.035
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Picture the faces of the people you live with or love most.",
+     "start": 370.335,
+     "end": 374.729
+    },
+    {
+     "segment": "stillness-one",
+     "text": "You do not need to say anything about them yet.",
+     "start": 375.029,
+     "end": 378.571
+    },
+    {
+     "segment": "stillness-one",
+     "text": "Simply hold them in your mind, and let God see them with you.",
+     "start": 378.871,
+     "end": 383.201
+    }
+   ],
+   "segments": [
+    "prayer-refuge",
+    "rehook-2",
+    "stillness-one"
+   ],
+   "text": "Father, make our home a refuge. When someone walks through the door discouraged, let them find comfort here. When someone fails, let them find mercy here before they find consequences. Give me a steady heart so that my own fears do not fill the house. Let the confidence I have in you settle the atmosphere, so that each person feels safe to rest and to speak. Stay with me. In a moment, picture each face as we pray. Take a quiet moment now. Picture the faces of the people you live with or love most. You do not need to say anything about them yet. Simply hold them in your mind, and let God see them with you.",
+   "reference": null,
+   "measured_score": 0.6288,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.423728813559322,
+    "scripture": 0.4,
+    "promise": 0.847457627118644,
+    "resolution": 1.0,
+    "length_fit": 0.6052399999999989
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 8.0,
+    "stands_alone": 7.0,
+    "emotional_payoff": 7.5,
+    "shareability": 7.0,
+    "loop_potential": 4.0,
+    "policy_safe": 10.0,
+    "reasons": "Beautiful message about making home a refuge, but interrupted by trailing audio cues at the end.",
+    "hook_line": "Make your home a peaceful refuge",
+    "title": "A Prayer to Make Your Home a Refuge"
+   },
+   "final_score": 0.6865
+  },
+  {
+   "start": 150.793,
+   "end": 198.372,
+   "sentences": [
+    {
+     "segment": "prayer-build",
+     "text": "Be the one who watches over us.",
+     "start": 150.793,
+     "end": 153.289
+    },
+    {
+     "segment": "prayer-build",
+     "text": "Where we have built on hurry or fear, rebuild us on trust.",
+     "start": 153.589,
+     "end": 158.069
+    },
+    {
+     "segment": "prayer-build",
+     "text": "Where our foundations feel cracked, strengthen them with your faithfulness and patient love.",
+     "start": 158.369,
+     "end": 164.513
+    },
+    {
+     "segment": "prayer-spouse",
+     "text": "Lord, I pray for the person I share my life with, or for the relationship closest to my heart.",
+     "start": 165.813,
+     "end": 173.28
+    },
+    {
+     "segment": "prayer-spouse",
+     "text": "Give them strength for whatever today asks of them.",
+     "start": 173.58,
+     "end": 177.356
+    },
+    {
+     "segment": "prayer-spouse",
+     "text": "Where there has been distance between us, bring us back toward each other.",
+     "start": 177.656,
+     "end": 182.797
+    },
+    {
+     "segment": "prayer-spouse",
+     "text": "Help me notice their efforts instead of only their faults.",
+     "start": 183.097,
+     "end": 187.364
+    },
+    {
+     "segment": "prayer-spouse",
+     "text": "Let my words today build them up, and let our partnership reflect your faithfulness.",
+     "start": 187.664,
+     "end": 193.403
+    },
+    {
+     "segment": "rehook-1",
+     "text": "Next, the children you love, whatever their age.",
+     "start": 194.703,
+     "end": 198.372
+    }
+   ],
+   "segments": [
+    "prayer-build",
+    "prayer-spouse",
+    "rehook-1"
+   ],
+   "text": "Be the one who watches over us. Where we have built on hurry or fear, rebuild us on trust. Where our foundations feel cracked, strengthen them with your faithfulness and patient love. Lord, I pray for the person I share my life with, or for the relationship closest to my heart. Give them strength for whatever today asks of them. Where there has been distance between us, bring us back toward each other. Help me notice their efforts instead of only their faults. Let my words today build them up, and let our partnership reflect your faithfulness. Next, the children you love, whatever their age.",
+   "reference": null,
+   "measured_score": 0.514,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.2857142857142857,
+    "scripture": 0.4,
+    "promise": 0.7142857142857143,
+    "resolution": 0.4,
+    "length_fit": 0.6968399999999997
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 7.0,
+    "stands_alone": 7.0,
+    "emotional_payoff": 7.5,
+    "shareability": 7.0,
+    "loop_potential": 4.5,
+    "policy_safe": 10.0,
+    "reasons": "Heartfelt prayer for marriage/partnerships, but cut off abruptly by transition words at the end.",
+    "hook_line": "Rebuild your relationship on trust",
+    "title": "A Prayer for Strength in Marriage"
+   },
+   "final_score": 0.6356
+  }
+ ],
+ "chosen": [
+  {
+   "start": 95.403,
+   "end": 132.997,
+   "sentences": [
+    {
+     "segment": "prayer-my-yes",
+     "text": "Lord, I choose you again today.",
+     "start": 95.403,
+     "end": 97.899
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "I want my words, my reactions, and my plans to reflect that choice.",
+     "start": 98.199,
+     "end": 103.468
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "When I am tempted to bring stress into every room, remind me whose house this really is.",
+     "start": 103.768,
+     "end": 110.424
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "Help me lead by example rather than lecture.",
+     "start": 110.724,
+     "end": 113.967
+    },
+    {
+     "segment": "prayer-my-yes",
+     "text": "Let the people around me notice something of your kindness in the way I listen and the way I respond.",
+     "start": 114.267,
+     "end": 121.733
+    },
+    {
+     "segment": "scripture-psalm-build",
+     "text": "Except the LORD build the house, they labour in vain that build it:",
+     "start": 123.033,
+     "end": 127.876
+    },
+    {
+     "segment": "scripture-psalm-build",
+     "text": "except the LORD keep the city, the watchman waketh but in vain.",
+     "start": 128.176,
+     "end": 132.997
+    }
+   ],
+   "segments": [
+    "prayer-my-yes",
+    "scripture-psalm-build"
+   ],
+   "text": "Lord, I choose you again today. I want my words, my reactions, and my plans to reflect that choice. When I am tempted to bring stress into every room, remind me whose house this really is. Help me lead by example rather than lecture. Let the people around me notice something of your kindness in the way I listen and the way I respond. Except the LORD build the house, they labour in vain that build it: except the LORD keep the city, the watchman waketh but in vain.",
+   "reference": "Psalm 127:1 (KJV)",
+   "measured_score": 0.6841,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.2247191011235955,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.9037600000000003
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Strongly addresses the common struggle of bringing stress home and choosing kindness.",
+    "hook_line": "When you feel stressed at home",
+    "title": "A Prayer When Stress Takes Over Your Home"
+   },
+   "final_score": 0.7736,
+   "hook": "When you feel stressed at home",
+   "title": "A Prayer When Stress Takes Over Your Home"
+  },
+  {
+   "start": 210.901,
+   "end": 264.521,
+   "sentences": [
+    {
+     "segment": "prayer-children",
+     "text": "Teach them yourself.",
+     "start": 210.901,
+     "end": 212.693
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Guard their minds from what would harm them, and their hearts from believing they are unloved.",
+     "start": 212.993,
+     "end": 219.479
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Give them friends who are kind and teachers who are wise.",
+     "start": 219.779,
+     "end": 223.619
+    },
+    {
+     "segment": "prayer-children",
+     "text": "When they make mistakes today, let them find grace rather than shame.",
+     "start": 223.919,
+     "end": 228.953
+    },
+    {
+     "segment": "prayer-children",
+     "text": "Let your peace be great within them, deeper than the pressures they face at school or online.",
+     "start": 229.253,
+     "end": 235.589
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Lord, some of the children I love are carrying fears they cannot explain.",
+     "start": 236.889,
+     "end": 242.393
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "A test, a friendship that has changed, a worry about home, or something they saw on a screen.",
+     "start": 242.693,
+     "end": 249.904
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Give them courage that is bigger than their fear.",
+     "start": 250.204,
+     "end": 253.575
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Help me notice when something is wrong, and give me gentle words to ask about it.",
+     "start": 253.875,
+     "end": 259.571
+    },
+    {
+     "segment": "prayer-children-fears",
+     "text": "Let them know they can always come to me, and always come to you.",
+     "start": 259.871,
+     "end": 264.521
+    }
+   ],
+   "segments": [
+    "prayer-children",
+    "prayer-children-fears"
+   ],
+   "text": "Teach them yourself. Guard their minds from what would harm them, and their hearts from believing they are unloved. Give them friends who are kind and teachers who are wise. When they make mistakes today, let them find grace rather than shame. Let your peace be great within them, deeper than the pressures they face at school or online. Lord, some of the children I love are carrying fears they cannot explain. A test, a friendship that has changed, a worry about home, or something they saw on a screen. Give them courage that is bigger than their fear. Help me notice when something is wrong, and give me gentle words to ask about it. Let them know they can always come to me, and always come to you.",
+   "reference": null,
+   "measured_score": 0.6473,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.23255813953488372,
+    "scripture": 0.4,
+    "promise": 0.9689922480620154,
+    "resolution": 0.4,
+    "length_fit": 0.4551999999999998
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.5,
+    "shareability": 9.0,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Deeply emotional prayer for children dealing with school and online stress.",
+    "hook_line": "Pray this over your children today",
+    "title": "A Prayer for Your Children's Peace"
+   },
+   "final_score": 0.7639,
+   "hook": "Pray this over your children today",
+   "title": "A Prayer for Your Children's Peace"
+  },
+  {
+   "start": 560.579,
+   "end": 594.245,
+   "sentences": [
+    {
+     "segment": "prayer-gratitude",
+     "text": "Lord, thank you for my family.",
+     "start": 560.579,
+     "end": 563.011
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Thank you for the laughter we have shared, the meals we have eaten together, and the ordinary moments that will one day be precious memories.",
+     "start": 563.311,
+     "end": 572.953
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Thank you for the person who made coffee, fixed something, or sent a kind message.",
+     "start": 573.253,
+     "end": 579.291
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Help me say thank you out loud today, so that gratitude is not only in my heart but in our home.",
+     "start": 579.591,
+     "end": 586.887
+    },
+    {
+     "segment": "scripture-psalm-unity",
+     "text": "Behold, how good and how pleasant it is for brethren to dwell together in unity!",
+     "start": 588.187,
+     "end": 594.245
+    }
+   ],
+   "segments": [
+    "prayer-gratitude",
+    "scripture-psalm-unity"
+   ],
+   "text": "Lord, thank you for my family. Thank you for the laughter we have shared, the meals we have eaten together, and the ordinary moments that will one day be precious memories. Thank you for the person who made coffee, fixed something, or sent a kind message. Help me say thank you out loud today, so that gratitude is not only in my heart but in our home. Behold, how good and how pleasant it is for brethren to dwell together in unity!",
+   "reference": "Psalm 133:1 (KJV)",
+   "measured_score": 0.7078,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.4878048780487805,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.7466400000000022
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 6.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Warm prayer of gratitude for everyday family moments with strong biblical conclusion.",
+    "hook_line": "Thank God for your family today",
+    "title": "A Prayer of Gratitude for Your Family"
+   },
+   "final_score": 0.7631,
+   "hook": "Thank God for your family today",
+   "title": "A Prayer of Gratitude for Your Family"
+  }
+ ],
+ "selection_mode": "LEGACY",
+ "input_sha256": {
+  "timeline": "3d47fecd3c5cde6c33209977f248d7d675defdaea0dc8222c6a7064feed35674",
+  "script": "61be5ea20efcf3c2392615919cfbec41711f4db348c7fdb9428ac3f70ea44069"
+ },
+ "structural_counts": {
+  "opening_starts_total": 169,
+  "opening_starts_accepted": 19,
+  "opening_rejections": {
+   "CONTEXT_OPENER": 11,
+   "OPENING_OVER_3S": 108,
+   "EMPTY_OR_INCOMPLETE_OPENING": 14,
+   "CONTINUATION_OPENING_LINE": 5,
+   "DEPENDENT_OPENING_REFERENCE": 12
+  },
+  "window_pairs_total": 88,
+  "window_pairs_accepted": 17,
+  "window_rejections": {
+   "CTA_OR_TRANSITION_SEGMENT": 5,
+   "PARTIAL_SCRIPTURE": 5,
+   "UNRESOLVED_SEGMENT_END": 60,
+   "INCOMPLETE_ENDING": 1
+  }
+ },
+ "reason": null
+}
