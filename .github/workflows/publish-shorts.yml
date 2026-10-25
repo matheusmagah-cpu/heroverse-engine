@@ -21,7 +21,6 @@ jobs:
     timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       INPUT_PILOT: ${{ inputs.pilot }}
       INPUT_SLOTS: ${{ inputs.slots }}
     steps:
@@ -50,7 +49,7 @@ jobs:
           python3 -I -B migration/publish/pending_shorts.py --todo "$d" migration/publish/ledger.json |
           while read -r f sha; do
             n="${f%.mp4}"
-            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-$n-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
+            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" download --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-$n-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
             echo "$sha  $RUNNER_TEMP/shorts/$f" | sha256sum -c -
           done
       - name: QA gate and publish (each Short private until its slot, then public automatically)
@@ -110,9 +109,9 @@ jobs:
           while read -r f st sha; do
             case "$st" in SCHEDULED_VERIFIED|PUBLIC_VERIFIED) ;; *) echo "KEEP $f ($st)"; continue;; esac
             asset="$PILOT-${f%.mp4}-sha256-$sha.mp4"
-            gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' > "$RUNNER_TEMP/release-assets.txt"
+            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" names > "$RUNNER_TEMP/release-assets.txt"
             if grep -Fxq "$asset" "$RUNNER_TEMP/release-assets.txt"; then
-              gh release delete-asset "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" -y
+              bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" delete "$asset"
             else
               echo "ALREADY_ABSENT $asset"
             fi

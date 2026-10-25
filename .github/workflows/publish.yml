@@ -25,7 +25,6 @@ jobs:
     timeout-minutes: 40
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       INPUT_PILOT: ${{ inputs.pilot }}
       INPUT_PUBLISH_AT: ${{ inputs.publish_at }}
       EVENT: ${{ github.event_name }}
@@ -97,7 +96,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/shorts"
           python3 -I -B migration/publish/pending_shorts.py --todo "$d" migration/publish/ledger.json |
           while read -r f sha; do
-            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-${f%.mp4}-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
+            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" download --repo "$GITHUB_REPOSITORY" --pattern "$PILOT-${f%.mp4}-sha256-$sha.mp4" -O "$RUNNER_TEMP/shorts/$f"
             echo "$sha  $RUNNER_TEMP/shorts/$f" | sha256sum -c -
           done
           key="$PILOT:$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$d/out/manifest.json")"
@@ -107,7 +106,7 @@ jobs:
           while read -r f st; do
             case "$st" in uploaded|processed) ;; *) continue;; esac
             sha=$(python3 -I -c "import json,sys;print(next(s['sha256'] for s in json.load(open(sys.argv[1]))['shorts'] if s['file']==sys.argv[2]))" "$d/shorts/shorts.json" "$f")
-            gh release delete-asset "$TAG" "$PILOT-${f%.mp4}-sha256-$sha.mp4" --repo "$GITHUB_REPOSITORY" -y || true
+            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" delete "$PILOT-${f%.mp4}-sha256-$sha.mp4" || true
           done
       - name: Delete the finished video from the private release (owner rule; YouTube now holds it)
         if: always() && steps.upload.outcome == 'success'

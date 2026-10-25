@@ -673,6 +673,16 @@
     "file": "migration/integrations/pavo/test_video.py",
     "contains": "def test_stream_deadline_interrupts_chunk_metadata_and_preserves_job"
    }
+  },
+  {
+   "id": "E85",
+   "date": "2026-10-25",
+   "error": "Footage run 40218507819 (pilot-015 beats-1) failed at its upload: v0.0.0-cloud-assets-20261013 reached GitHub's limit of 1000 assets per release (HTTP 422 file_count). Every workflow wrote to that one release, so every new asset (footage, stills, renders, Shorts, episodes) would fail from then on.",
+   "fix": "migration/ci/assets.sh keeps the engine's assets in several releases, newest first: uploads go to the newest (v0.0.0-cloud-assets-20261025, created on first use), downloads try newest first and fall back, names/which/delete cover every release, and a warning fires past 950 assets so a new tag is added before the next one fills. Every workflow and CI script goes through it; records (cf-images, footage) carry release_tag and tiktok.yml/agnes-clip.yml/characters.py build public URLs from the release that holds the file. No asset was deleted or moved.",
+   "antidote": {
+    "file": "migration/ops/test_release_assets.py",
+    "contains": "def test_full_release_upload_goes_to_the_newest_release_created_once"
+   }
   }
  ]
 }

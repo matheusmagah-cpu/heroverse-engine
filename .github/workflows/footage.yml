@@ -21,7 +21,6 @@ jobs:
     timeout-minutes: 300
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
       PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -47,9 +46,9 @@ jobs:
             asset=""
             if [ "$v" != "REJECTED" ]; then  # a rejected clip is recorded (audit) but not stored
               asset="footage-$id-sha256-$sha.mp4"; cp "$mp4" "$RUNNER_TEMP/$asset"
-              gh release upload "$TAG" "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
+              bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" upload "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
             fi
-            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2] or None;open(sys.argv[3],'w').write(json.dumps(m,indent=1,ensure_ascii=False)+'\n')" "$RUNNER_TEMP/clips/$id.json" "$asset" "$lib/$id.json"
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2] or None;m['release_tag']=(sys.argv[4] if sys.argv[2] else None);open(sys.argv[3],'w').write(json.dumps(m,indent=1,ensure_ascii=False)+'\n')" "$RUNNER_TEMP/clips/$id.json" "$asset" "$lib/$id.json" "$(bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" newest)"
             d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$mp4")
             for k in 1 2 3; do  # start, middle, end of each kept clip, with its id burned in for the reviewer
               ffmpeg -v error -y -ss "$(python3 -c "print($d*($k*2-1)/6)")" -i "$mp4" -frames:v 1 \

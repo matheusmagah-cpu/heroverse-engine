@@ -26,7 +26,6 @@ jobs:
     timeout-minutes: 180
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       PILOT: ${{ inputs.pilot }}
       SEGMENTS: ${{ inputs.segments }}
     steps:
@@ -75,10 +74,14 @@ jobs:
       - name: Chatterbox, cloned from this pilot's recorded Kokoro narration
         if: inputs.chatterbox == 'true'
         run: |
-          asset=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets \
-            --jq "[.assets[] | select(.name | startswith(\"$PILOT-voice-sha256-\"))] | sort_by(.createdAt) | last | .name")
+          asset=""
+          for t in $(bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" tags); do   # newest release first (E85)
+            asset=$(gh release view "$t" --repo "$GITHUB_REPOSITORY" --json assets \
+              --jq "[.assets[] | select(.name | startswith(\"$PILOT-voice-sha256-\"))] | sort_by(.createdAt) | last | .name // empty" 2>/dev/null || true)
+            [ -n "$asset" ] && break
+          done
           test -n "$asset"; echo "reference: $asset"
-          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/voice.flac" --clobber
+          bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" download --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/voice.flac" --clobber
           ffmpeg -v error -y -ss 20 -t 12 -i "$RUNNER_TEMP/voice.flac" -ac 1 -ar 24000 "$RUNNER_TEMP/reference.wav"
           "$RUNNER_TEMP/cb/bin/python" -I -B migration/production/voice/chatterbox_sample.py \
             "$RUNNER_TEMP/trim.json" "$RUNNER_TEMP/reference.wav" "$RUNNER_TEMP/out" "$SEGMENTS"

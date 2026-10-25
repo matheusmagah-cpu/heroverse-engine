@@ -16,7 +16,6 @@ jobs:
     timeout-minutes: 240
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       PILOT: ${{ inputs.pilot }}
       UPSCALE_TARGET: '2'
     steps:
@@ -29,7 +28,7 @@ jobs:
             python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));sys.exit(0 if m.get('release_asset') and max(m.get('size') or [0])<4096 else 1)" "$meta" || continue
             id=$(basename "$meta" .json)
             read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
-            gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/img/$id.png" --clobber
+            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" download --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/img/$id.png" --clobber
             echo "$sha  $RUNNER_TEMP/img/$id.png" | sha256sum -c -
             cp "$meta" "$RUNNER_TEMP/img/$id.json"
           done
@@ -51,7 +50,7 @@ jobs:
           for png in *.png; do
             id="${png%.png}"; sha=$(sha256sum "$png" | cut -d' ' -f1)
             asset="$PILOT-img-$id-4096-sha256-$sha.png"; cp "$png" "$asset"
-            gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" --clobber
+            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" upload "$asset" --repo "$GITHUB_REPOSITORY" --clobber
             python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json"
           done
           cd "$GITHUB_WORKSPACE"

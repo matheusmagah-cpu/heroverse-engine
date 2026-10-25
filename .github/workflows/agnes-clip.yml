@@ -40,6 +40,14 @@ jobs:
       CHARACTERS: ${{ inputs.characters }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: The release holding the first frame (E85)
+        if: inputs.first_frame != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [[ "$FIRST_FRAME" =~ ^[A-Za-z0-9._-]+\.(png|jpg|jpeg)$ ]] || { echo "FIRST_FRAME_REFUSED"; exit 1; }
+          tag=$(bash migration/ci/assets.sh which "$FIRST_FRAME")
+          echo "FRAME_TAG=$tag" >> "$GITHUB_ENV"
       - name: Generate, download and check the clip
         run: |
           set -o pipefail
@@ -51,7 +59,8 @@ jobs:
           frame_url=""
           if [ -n "$FIRST_FRAME" ]; then
             [[ "$FIRST_FRAME" =~ ^[A-Za-z0-9._-]+\.(png|jpg|jpeg)$ ]] || { echo "FIRST_FRAME_REFUSED"; exit 1; }
-            frame_url="https://github.com/$GITHUB_REPOSITORY/releases/download/v0.0.0-cloud-assets-20261013/$FIRST_FRAME"
+            [[ "$FRAME_TAG" =~ ^v0\.0\.0-cloud-assets-[0-9]{8}$ ]] || { echo "FRAME_TAG_MISSING"; exit 1; }
+            frame_url="https://github.com/$GITHUB_REPOSITORY/releases/download/$FRAME_TAG/$FIRST_FRAME"
           fi
           mkdir -p "$RUNNER_TEMP/out"
           printf '%s' "$PROMPT" > "$RUNNER_TEMP/out/prompt.txt"

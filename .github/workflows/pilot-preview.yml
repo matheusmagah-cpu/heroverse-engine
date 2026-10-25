@@ -21,7 +21,6 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       ENGINE_REPO: ${{ github.repository }}
-      TAG: v0.0.0-cloud-assets-20261013
       PILOT: ${{ inputs.pilot }}
       PREVIEW: '1'
       RUN_LABEL: preview ${{ github.run_id }}
