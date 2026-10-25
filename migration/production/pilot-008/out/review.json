@@ -2,7 +2,59 @@
  "version": "long-review-v2",
  "pilot_id": "pilot-008",
  "output_sha256": "a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458",
- "status": "AWAITING_REVIEW",
- "error": "CLAUDE_REVIEW_NOT_FOR_THIS_FILE",
- "checked_at": "2026-10-25T14:12:11Z"
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 16.07,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 6.22,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.5,
+  "picture_quality": 9.5,
+  "figure_and_background_integrity": 9.5,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 9.5,
+  "scripture_on_screen": 9.0,
+  "policy_safe": 9.5,
+  "overall": 9.5,
+  "issues": [
+   "~9:01-9:10 (contact sheet row 7, 'thou anointest my head with oil.' card over the red flower): the card box barely shows over the saturated flower, so the verse line has less contrast than the other cards; it is spoken and stays readable (scripture_on_screen 9.0)",
+   "picture: the 25 night clips seen on the preview reviews (E77); candles, moon, rain, aurora and night flowers alternate; no person, text, brand or modern object in the 16 review frames or the contact sheet",
+   "chapters: 13 named from the script (Psalm 23 line by line), the strongest set of the prayer pilots",
+   "audio from QA measures: -15.6 LUFS, LRA 2.9, -2.6 dBTP, speech 0.862, music 0.395, WER 0.036, first word 0.11 s: every band met",
+   "signal scan PASS: no black picture (E77 fixed the 0.57 s run), no digital silence; longest still picture 1.13 s",
+   "thumbnail PASS (R16)"
+  ],
+  "strongest_moment": "0:00-0:08: 'Before you sleep tonight, let your Shepherd carry what you could not finish.' over the candles, then 'Pray Psalm twenty-three with me now.' as the full moon rises",
+  "model": "claude-session-reviewer",
+  "reviewed_at": "2026-10-25T14:30:00Z",
+  "evidence": [
+   "inspection/review-sheet.jpg",
+   "inspection/opening-sheet.jpg",
+   "inspection/pilot-contact-sheet.jpg",
+   "inspection/thumbnail.jpg",
+   "out/thumbnail_check.json",
+   "out/qa.json",
+   "out/scan.json",
+   "out/package.json",
+   "out/manifest.json",
+   "script.json"
+  ],
+  "status": "PASS"
+ }
 }
