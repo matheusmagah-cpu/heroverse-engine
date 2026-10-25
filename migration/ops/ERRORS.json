@@ -573,6 +573,26 @@
     "file": "migration/production/footage/test_assign.py",
     "contains": "def test_seen_clips_first_once_there_are_enough"
    }
+  },
+  {
+   "id": "E75",
+   "date": "2026-10-25",
+   "error": "The Claude review of pilot-011 found its description crediting 'original HeroVerse images made with open-licence AI image models' and the package marking ai_generated_visuals, while the footage-only render (E68) uses no AI still: package_pilot.py added the illustration credit to every v2 package.",
+   "fix": "package_pilot credits and discloses AI stills only when the manifest has images; a footage-only package credits the footage and says the narration voice is AI. pilot-011's package text was regenerated with the fix (title, tags and thumbnail unchanged).",
+   "antidote": {
+    "file": "migration/production/test_thumb_check.py",
+    "contains": "def test_footage_only_package_credits_no_ai_stills"
+   }
+  },
+  {
+   "id": "E76",
+   "date": "2026-10-25",
+   "error": "The pilot-013 night-prayer preview opened (0:12-0:20) on an autumn forest creek filmed by day: its mean luma (33) passed the E69 limit and its theme 'river' was still a night theme after E71.",
+   "fix": "assign.py: night takes only candle, night and rain (river is shot by day like waterfall). A window-pane rain clip with a daytime sky was rejected in the library. pilot-013's footage was reassigned from Claude-seen night clips.",
+   "antidote": {
+    "file": "migration/production/footage/test_assign.py",
+    "contains": "def test_night_takes_no_river"
+   }
   }
  ]
 }

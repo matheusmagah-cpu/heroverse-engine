@@ -16,8 +16,9 @@ from script_check import FOOTAGE_LICENCES, FOOTAGE_MIN  # noqa: E402
 
 MOOD_THEMES = {
     # E71: snow, waterfall, mist, clouds, ocean, lake and sunset clips are shot by day; even with a dark mean their sky
-    # reads as daylight in a night prayer, so night takes only themes that are night by nature (and dark, E69)
-    "night": ["candle", "night", "rain", "river"],
+    # reads as daylight in a night prayer, so night takes only themes that are night by nature (and dark, E69);
+    # E76: river too (a dark autumn creek filmed by day reached the 013 night preview)
+    "night": ["candle", "night", "rain"],
     "morning": ["sunrise", "clouds", "meadow", "forest", "field", "grass", "river", "waterfall", "lake", "ocean", "mist", "snow"],
 }
 
