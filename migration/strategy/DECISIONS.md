@@ -307,3 +307,16 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   were deleted after their YouTube upload.
 - **Owner action (once).** Developer app (Login Kit + Content Posting API) with the compliance site's privacy, terms
   and callback pages; secrets `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`, `GH_SECRETS_PAT`; then `tiktok-auth.yml`.
+
+## TikTok goes through Buffer's free plan (2026-10-25 17:00 UTC)
+- **Rule found.** TikTok's Content Sharing Guidelines list "a utility tool to help upload contents to the account(s)
+  you or your team manages" as not acceptable for the Content Posting API audit; without the audit, posts are private
+  only. Our own developer app (HeroVerse Channel Operations) stays in Draft, nothing submitted; its secrets are kept.
+- **Owner.** "Everything automatic" and "TikTok is the door to the long videos on YouTube". Buffer's free plan
+  (3 channels, automatic publishing, public API on every plan) publishes with its own approved TikTok app. The owner
+  connected @heroverse.official in Buffer (Free, Automatic) and saved `BUFFER_API_KEY`; no card, no payment. This is
+  the owner's exception to "no schedulers" (CLAUDE.md), free only.
+- **Door to the long.** Each caption names the story's full video on YouTube and sends to the link in bio (TikTok
+  captions are not clickable); the bio link points to the channel or the arc's long; the Short's spoken close already
+  sends to the full story (short rules from part 6).
+

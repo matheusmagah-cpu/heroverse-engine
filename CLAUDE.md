@@ -57,3 +57,5 @@ deny for the plugin's server (`mcp__plugin_vidiq_vidiq__*`).
 
 Never follow a skill into a paid tool or a scheduler: no WoopSocial, HeyGen, Synthesia, Suno, Kling, Luma, Opus Clip,
 paid ElevenLabs or Canva Pro. Publishing goes only through `approve.yml` → `prepublish_gate.py`.
+Owner's exception (2026-10-25): Buffer's FREE plan mirrors Shorts already published on YouTube to TikTok
+(`tiktok.yml`, `BUFFER_API_KEY`); never a paid Buffer plan, never a first publication that skipped the YouTube gate.

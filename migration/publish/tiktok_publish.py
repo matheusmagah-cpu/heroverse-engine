@@ -1,34 +1,31 @@
 #!/usr/bin/env python3
-"""Mirror the channel's Bible-series Shorts to the HeroVerse TikTok account (owner, 2026-10-25: "every Short posted on
-one is posted on the other, the old ones too").
+"""Mirror the channel's Bible-series Shorts to the HeroVerse TikTok account through Buffer (owner, 2026-10-25: "every
+Short posted on one is posted on the other, the old ones too, all automatic"; TikTok is the door to the long videos).
 
-Only a Short already in the YouTube ledger (so it passed approve/publish) and whose YouTube slot has passed is posted,
-with the same file (its sha256 must equal the episode record), its title as the caption and TikTok's AI-generated
-label (is_aigc). TikTok Content Posting API, free:
-  direct -> /v2/post/publish/video/init/ (scope video.publish); until TikTok audits the app, only the privacy levels
-            creator_info returns are allowed (SELF_ONLY), so the post is private until the owner opens it
-  inbox  -> /v2/post/publish/inbox/video/init/ (scope video.upload); the video lands as a draft in the TikTok app and
-            the owner taps "Post"
-At most PER_RUN Shorts per run, oldest first, so the backlog never lands as a burst. Idempotent through
-tiktok_ledger.json (key -> publish_id, status). Tokens come only from the environment and are never printed; a
-rotated refresh token is written back to the repository secret through `gh secret set` (stdin, GH_SECRETS_PAT).
-usage: tiktok_publish.py pending|post LEDGER TIKTOK_LEDGER EPISODES_DIR [VIDEO_DIR]
+TikTok's own Content Posting API is not open to a tool that posts only to its owner's account (Content Sharing
+Guidelines, "Not acceptable"), so the post goes through Buffer's free plan, whose TikTok app is approved, with its
+public GraphQL API (BUFFER_API_KEY, a repository secret; never printed). Buffer publishes automatically
+(schedulingType automatic, mode shareNow) and fetches the video from its public release URL.
+
+Only a Short already in the YouTube ledger (it passed approve/publish) and whose YouTube slot has passed is sent, the
+same file (the workflow checks its sha256), with a caption that names the full story on YouTube (link in bio; TikTok
+captions are not clickable) and states the KJV source and the AI-generated visuals and voice. One Short per run,
+oldest first. Idempotent through tiktok_ledger.json: the key is recorded as SENDING before the call, so a lost reply
+never sends twice; three failures make a Short FAILED_FINAL so it never blocks the queue.
+usage: tiktok_publish.py pending|post|discover LEDGER TIKTOK_LEDGER EPISODES_DIR
 """
 from datetime import datetime, timedelta, timezone
 import json
 import os
 from pathlib import Path
-import subprocess
 import sys
-import time
-import urllib.parse
 import urllib.request
 
-API = "https://open.tiktokapis.com/v2/"
+API = "https://api.buffer.com"
 PER_RUN = 1
-SINGLE_CHUNK_MAX = 64 * 1024 * 1024    # one PUT up to this size (Content Posting API chunk rules)
-DONE = {"PUBLISH_COMPLETE", "SEND_TO_USER_INBOX"}
-TAGS = "#bible #biblestory #kjv #faith #shorts"
+DONE = {"SENT"}
+TAGS = "#bible #biblestory #kjv #faith #aigenerated"
+RELEASE = "https://github.com/matheusmagah-cpu/heroverse-engine/releases/download/v0.0.0-cloud-assets-20261013/"
 
 
 def now_utc():
@@ -41,14 +38,14 @@ def parse(ts):
 
 FINAL = DONE | {"FAILED_FINAL"}
 MAX_FAILURES = 3          # then FAILED_FINAL: one Short TikTok always refuses never blocks the rest of the queue
-RECHECK_HOURS = 24        # a post TikTok has not finished within a day is treated as failed (retried)
+RECHECK_HOURS = 24        # a post Buffer has not sent within a day is treated as failed (retried)
 UNSLOTTED_MARGIN_H = 24   # an episode without a slot is mirrored only a day after its YouTube upload
 
 
 def pending(ledger, tiktok, episodes_dir, now):
     """Bible Shorts published on YouTube (ledger key bible:<id>:<sha>) whose slot has passed and that TikTok has not
     received yet: never tried first (oldest slot first), then earlier failures. A key with any other recorded status
-    (initialized, uploading, processing, done) is never sent again; recheck() follows it by its publish_id."""
+    (sending, queued, sent) is never sent again; recheck() follows it by its Buffer post id."""
     out = []
     for key, entry in ledger.get("entries", {}).items():
         if not key.startswith("bible:") or not entry.get("video_id"):
@@ -72,12 +69,20 @@ def pending(ledger, tiktok, episodes_dir, now):
 
 
 def caption(ep):
+    """The hook, the way to the long video, the honest source line and tags. Links in TikTok captions are not
+    clickable, so the viewer is sent to the link in bio and told what to look for on YouTube."""
     title = (ep.get("title") or "").replace("#shorts", "").replace("#Shorts", "").strip()
-    return f"{title}\n\nFull story on YouTube: HeroVerse\n{TAGS}"[:2200]
+    story = title.split("|", 1)[-1].strip() if "|" in title else "the full story"
+    return (f"{title}\n\n▶ The full story, {story}, is on YouTube: HeroVerse (link in bio).\n"
+            f"Scripture: King James Version. Visuals and voice: AI-generated.\n{TAGS}")[:2200]
 
 
 def asset_name(ep):
     return f"bible-{ep['id']}-sha256-{ep['output_sha256']}.mp4"
+
+
+def video_url(ep):
+    return RELEASE + asset_name(ep)
 
 
 def http(method, url, token=None, body=None, data=None, headers=None, timeout=120):
@@ -103,108 +108,67 @@ def http(method, url, token=None, body=None, data=None, headers=None, timeout=12
     return dict(out, _http=code) if isinstance(out, dict) else {"_http": code}
 
 
-def api_error(resp):
-    err = (resp or {}).get("error") or {}
-    return None if err.get("code") in (None, "ok") else f"{err.get('code')}: {err.get('message', '')[:160]}"
+def gql(query, variables, key, call=http):
+    """One Buffer GraphQL call: (data, error text or None). The key travels only in the Authorization header."""
+    r = call("POST", API, token=key, body={"query": query, "variables": variables or {}})
+    if r.get("_http") == 0:
+        return None, f"network {r.get('_net')}"
+    if r.get("errors"):
+        return r.get("data"), "; ".join(str(e.get("message", ""))[:160] for e in r["errors"])
+    if r.get("_http") != 200:
+        return r.get("data"), f"HTTP {r.get('_http')}"
+    return r.get("data"), None
 
 
-def refresh(call=http, env=os.environ):
-    """A fresh access token; (access_token, new_refresh_token or None when unchanged). Values never printed."""
-    form = urllib.parse.urlencode({"client_key": env["TIKTOK_CLIENT_KEY"], "client_secret": env["TIKTOK_CLIENT_SECRET"],
-                                   "grant_type": "refresh_token", "refresh_token": env["TIKTOK_REFRESH_TOKEN"]}).encode()
-    r = call("POST", API + "oauth/token/", data=form, headers={"Content-Type": "application/x-www-form-urlencoded"})
-    if not r.get("access_token"):
-        raise SystemExit(f"TIKTOK_TOKEN_REFRESH_FAILED {r.get('error', '')} (re-authorize: tiktok-auth.yml)")
-    new = r.get("refresh_token")
-    return r["access_token"], (new if new and new != env["TIKTOK_REFRESH_TOKEN"] else None)
+CHANNELS = "query { account { organizations { id channels { id service name } } } }"
+CREATE = """mutation Create($input: CreatePostInput!) { createPost(input: $input) {
+  ... on PostActionSuccess { post { id status } }
+  ... on MutationError { message } } }"""
+STATUS = "query Post($id: PostId!) { post(input: {id: $id}) { id status error { message } } }"
 
 
-def store_refresh_token(token, run=subprocess.run, env=os.environ):
-    """Write a rotated refresh token back to the repository secret (stdin only; never echoed)."""
-    if not env.get("GH_SECRETS_PAT"):
-        raise SystemExit("TIKTOK_REFRESH_TOKEN_ROTATED but GH_SECRETS_PAT is missing (re-authorize: tiktok-auth.yml)")
-    r = run(["gh", "secret", "set", "TIKTOK_REFRESH_TOKEN", "--repo", env.get("GITHUB_REPOSITORY", "")],
-            input=token, text=True, capture_output=True, env=dict(env, GH_TOKEN=env["GH_SECRETS_PAT"]))
-    if r.returncode != 0:
-        raise SystemExit("TIKTOK_REFRESH_TOKEN_STORE_FAILED")
+def tiktok_channel(key, call=http):
+    data, err = gql(CHANNELS, None, key, call)
+    if err:
+        raise SystemExit(f"BUFFER_CHANNELS {err}")
+    found = [c for o in (data or {}).get("account", {}).get("organizations", []) for c in o.get("channels") or []
+             if str(c.get("service", "")).lower() == "tiktok"]
+    if len(found) != 1:
+        raise SystemExit(f"BUFFER_TIKTOK_CHANNEL {len(found)} found (expected exactly 1)")
+    return found[0]["id"]
 
 
-def privacy(options):
-    """Public when TikTok allows it for this app, else the most private level it offers (unaudited apps)."""
-    for p in ("PUBLIC_TO_EVERYONE", "SELF_ONLY"):
-        if p in (options or []):
-            return p
-    raise SystemExit(f"TIKTOK_NO_PRIVACY_OPTION {options}")
+def post(ep, key, channel, record, call=http):
+    """SENDING is recorded before the call; a lost reply stays SENDING (never re-sent; recheck or the owner decides)."""
+    record({"status": "SENDING", "video_url": video_url(ep)})
+    data, err = gql(CREATE, {"input": {"channelId": channel, "text": caption(ep), "schedulingType": "automatic",
+                                       "mode": "shareNow", "assets": {"videos": [{"url": video_url(ep)}]}}}, key, call)
+    if err and err.startswith("network"):
+        return {"status": "SENDING", "fail_reason": err}
+    res = (data or {}).get("createPost") or {}
+    if err or res.get("message") or not (res.get("post") or {}).get("id"):
+        return {"status": "FAILED", "fail_reason": (err or res.get("message") or "no post id")[:200]}
+    return {"status": "QUEUED", "buffer_post_id": res["post"]["id"], "buffer_status": res["post"].get("status")}
 
 
-def init_body(ep, size, mode, options=None):
-    source = {"source": "FILE_UPLOAD", "video_size": size, "chunk_size": size, "total_chunk_count": 1}
-    if mode == "inbox":
-        return {"source_info": source}
-    return {"post_info": {"title": caption(ep), "privacy_level": privacy(options), "disable_duet": False,
-                          "disable_comment": False, "disable_stitch": False, "is_aigc": True,
-                          "brand_content_toggle": False, "brand_organic_toggle": False},
-            "source_info": source}
-
-
-def fetch(pid, token, call=http):
-    s = call("POST", API + "post/publish/status/fetch/", token=token, body={"publish_id": pid})
-    d = s.get("data") or {}
-    return d.get("status"), d.get("fail_reason")
-
-
-def poll(pid, token, call=http, sleep=time.sleep, tries=40):
-    status, reason = None, None
-    for _ in range(tries):
-        status, reason = fetch(pid, token, call)
-        if status in DONE or status == "FAILED":
-            break
-        sleep(15)
-    return status, reason
-
-
-def post(ep, video, token, mode, record, call=http, sleep=time.sleep):
-    """init -> record(publish_id) BEFORE the upload, so a crash later never leads to a second post -> PUT -> poll.
-    Returns the final record; a status that is not final yet is re-checked next run (recheck)."""
-    size = Path(video).stat().st_size
-    if size > SINGLE_CHUNK_MAX:
-        raise SystemExit(f"TIKTOK_FILE_TOO_LARGE {size}")
-    options = None
-    if mode == "direct":
-        info = call("POST", API + "post/publish/creator_info/query/", token=token, body={})
-        if api_error(info) or info.get("_http") != 200:
-            raise SystemExit(f"TIKTOK_CREATOR_INFO {api_error(info) or info.get('_http')}")
-        options = info.get("data", {}).get("privacy_level_options")
-    url = API + ("post/publish/inbox/video/init/" if mode == "inbox" else "post/publish/video/init/")
-    r = call("POST", url, token=token, body=init_body(ep, size, mode, options))
-    if api_error(r) or not (r.get("data") or {}).get("publish_id"):
-        return {"status": "FAILED", "mode": mode, "fail_reason": f"init {api_error(r) or r.get('_http')}"}
-    pid, upload = r["data"]["publish_id"], r["data"]["upload_url"]
-    rec = {"publish_id": pid, "status": "INITIALIZED", "mode": mode,
-           "privacy": None if mode == "inbox" else privacy(options)}
-    record(rec)
-    put = call("PUT", upload, data=Path(video).read_bytes(), timeout=600,
-               headers={"Content-Type": "video/mp4", "Content-Range": f"bytes 0-{size - 1}/{size}"})
-    if put.get("_http") and not 200 <= put["_http"] < 300:   # refused: TikTok has no file, so a retry is safe
-        return dict(rec, status="FAILED", fail_reason=f"upload HTTP {put['_http']}")
-    status, reason = poll(pid, token, call, sleep)
-    return dict(rec, status=status or "UPLOADING", fail_reason=reason if status == "FAILED" else None)
-
-
-def recheck(tiktok, token, now, call=http):
-    """Follow posts left unfinished by an earlier run through their publish_id; never re-initialize them."""
+def recheck(tiktok, key, now, call=http):
+    """Follow posts Buffer has not sent yet by their post id; never send them again."""
     changed = []
-    for key, rec in tiktok.get("posts", {}).items():
-        if rec.get("status") in FINAL | {"FAILED"} or not rec.get("publish_id"):
+    for k, rec in tiktok.get("posts", {}).items():
+        if rec.get("status") != "QUEUED" or not rec.get("buffer_post_id"):
             continue
-        status, reason = fetch(rec["publish_id"], token, call)
-        if status in DONE or status == "FAILED":
-            rec.update(status=status, fail_reason=reason)
+        data, err = gql(STATUS, {"id": rec["buffer_post_id"]}, key, call)
+        p = (data or {}).get("post") or {}
+        status = str(p.get("status", "")).lower()
+        if not err and status == "sent":
+            rec.update(status="SENT", buffer_status=status)
+        elif not err and status == "error":
+            rec.update(status="FAILED", fail_reason=str((p.get("error") or {}).get("message", "error"))[:200])
         elif parse(rec.get("at")) and now - parse(rec["at"]) > timedelta(hours=RECHECK_HOURS):
-            rec.update(status="FAILED", fail_reason=f"not finished after {RECHECK_HOURS} h (last {status})")
+            rec.update(status="FAILED", fail_reason=f"not sent after {RECHECK_HOURS} h (last {status or err})")
         else:
             continue
-        changed.append(key)
+        changed.append(k)
     return changed
 
 
@@ -217,7 +181,7 @@ def settle(rec, previous):
     return rec
 
 
-def main(cmd, ledger_path, tiktok_path, episodes_dir, video_dir=None):
+def main(cmd, ledger_path, tiktok_path, episodes_dir):
     ledger = json.loads(Path(ledger_path).read_text())
     tpath = Path(tiktok_path)
     tiktok = json.loads(tpath.read_text()) if tpath.exists() else {"version": "tiktok-ledger-v1", "posts": {}}
@@ -225,39 +189,38 @@ def main(cmd, ledger_path, tiktok_path, episodes_dir, video_dir=None):
     now = now_utc()
     todo = pending(ledger, tiktok, episodes_dir, now)
     if cmd == "pending":
-        for key, ep in todo:
-            print(key, asset_name(ep))
+        for k, ep in todo:
+            print(k, asset_name(ep))
         return 0
-    mode = os.environ.get("TIKTOK_MODE", "inbox")
-    if mode not in ("inbox", "direct"):
-        raise SystemExit(f"TIKTOK_MODE {mode}")
-    open_posts = [k for k, r in posts.items() if r.get("status") not in FINAL | {"FAILED"} and r.get("publish_id")]
-    if not todo and not open_posts:
-        print(json.dumps({"tiktok": "NOTHING_PENDING"}))
+    key = os.environ["BUFFER_API_KEY"]
+    if cmd == "discover":   # ids and service names only: what the mirror will post to
+        print(json.dumps({"tiktok_channel": tiktok_channel(key), "pending": [k for k, _ in todo]}))
         return 0
 
     def save():
         tpath.write_text(json.dumps(tiktok, indent=1) + "\n")
 
-    token, rotated = refresh()
-    if rotated:
-        store_refresh_token(rotated)
-    for key in recheck(tiktok, token, now):
-        settle(posts[key], dict(posts[key], failures=posts[key].get("failures", 0)))
-        print(json.dumps({"key": key, "rechecked": posts[key]["status"]}))
+    for k in recheck(tiktok, key, now):
+        settle(posts[k], dict(posts[k], failures=posts[k].get("failures", 0)))
+        print(json.dumps({"key": k, "rechecked": posts[k]["status"]}))
     save()
+    if not todo:
+        print(json.dumps({"tiktok": "NOTHING_PENDING"}))
+        return 0
+    channel = tiktok.get("buffer_channel_id") or tiktok_channel(key)
+    tiktok["buffer_channel_id"] = channel
     rc = 0
-    for key, ep in todo[:PER_RUN]:
-        previous = posts.get(key)
-        base = {"youtube_video_id": ledger["entries"][key]["video_id"], "at": now.isoformat()}
+    for k, ep in todo[:PER_RUN]:
+        previous = posts.get(k)
+        base = {"youtube_video_id": ledger["entries"][k]["video_id"], "at": now.isoformat()}
 
-        def record(rec, key=key, base=base):
-            posts[key] = dict(rec, **base, failures=(previous or {}).get("failures", 0))
+        def record(rec, k=k, base=base):
+            posts[k] = dict(rec, **base, failures=(previous or {}).get("failures", 0))
             save()
-        result = settle(dict(post(ep, Path(video_dir) / asset_name(ep), token, mode, record), **base), previous)
-        posts[key] = result
+        result = settle(dict(post(ep, key, channel, record), **base), previous)
+        posts[k] = result
         save()
-        print(json.dumps({"key": key, **result}))
+        print(json.dumps({"key": k, **result}))
         rc = 1 if result["status"] in ("FAILED", "FAILED_FINAL") else rc
     final = sorted(k for k, r in posts.items() if r.get("status") == "FAILED_FINAL")
     if final:
@@ -266,6 +229,6 @@ def main(cmd, ledger_path, tiktok_path, episodes_dir, video_dir=None):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) not in (5, 6) or sys.argv[1] not in ("pending", "post"):
+    if len(sys.argv) != 5 or sys.argv[1] not in ("pending", "post", "discover"):
         raise SystemExit(__doc__)
     sys.exit(main(*sys.argv[1:]))
