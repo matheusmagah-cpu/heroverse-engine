@@ -573,6 +573,16 @@
     "file": "migration/production/footage/test_assign.py",
     "contains": "def test_seen_clips_first_once_there_are_enough"
    }
+  },
+  {
+   "id": "E75",
+   "date": "2026-10-25",
+   "error": "The Claude review of pilot-011 found its description crediting 'original HeroVerse images made with open-licence AI image models' and the package marking ai_generated_visuals, while the footage-only render (E68) uses no AI still: package_pilot.py added the illustration credit to every v2 package.",
+   "fix": "package_pilot credits and discloses AI stills only when the manifest has images; a footage-only package credits the footage and says the narration voice is AI. pilot-011's package text was regenerated with the fix (title, tags and thumbnail unchanged).",
+   "antidote": {
+    "file": "migration/production/test_thumb_check.py",
+    "contains": "def test_footage_only_package_credits_no_ai_stills"
+   }
   }
  ]
 }

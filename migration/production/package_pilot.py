@@ -194,9 +194,10 @@ def main(work, script_path, out_dir, footage_dir=None):
     title = script["working_title"]
     v2 = manifest.get("version") == "pilot-manifest-v2"
     credits = "\n".join("• " + c["attribution"] for c in manifest["clips"] if c.get("attribution"))
+    ai_stills = v2 and bool(manifest.get("images"))  # a footage-only render (E68) has no AI still to credit or disclose
     visuals = ([script.get("visual_credit") or "Illustrations: original HeroVerse images made with open-licence AI image "
-                "models (FLUX.1 schnell, Apache-2.0; Stable Diffusion XL, CreativeML Open RAIL++-M)."] if v2 else
-               ["Footage credits (Creative Commons Attribution, picture only):", credits])
+                "models (FLUX.1 schnell, Apache-2.0; Stable Diffusion XL, CreativeML Open RAIL++-M)."] if ai_stills else
+               [] if v2 else ["Footage credits (Creative Commons Attribution, picture only):", credits])
     if v2 and manifest["clips"]:  # v4: licensed real footage, every clip credited (required for CC BY)
         visuals += footage_credits(manifest["clips"])
     description = "\n".join([
@@ -261,11 +262,13 @@ def main(work, script_path, out_dir, footage_dir=None):
                "title_length": len(title), "description": description, "tags": tags,
                "category_id": "29", "playlist": script.get("playlist"), "default_language": "en", "made_for_kids": False,
                "privacy_on_upload": "private", "thumbnail": thumb.name,
-               "ai_generated_visuals": v2,
+               "ai_generated_visuals": ai_stills,
                "altered_or_synthetic_disclosure": ("Stylized devotional illustrations, not realistic footage; review YouTube's "
-                                                   "altered-content setting at upload") if v2 and not manifest["clips"] else
+                                                   "altered-content setting at upload") if ai_stills and not manifest["clips"] else
                                                   ("Licensed real nature footage plus AI-generated stylized stills; no realistic "
-                                                   "people or events are depicted") if v2 else None,
+                                                   "people or events are depicted") if ai_stills else
+                                                  ("Licensed real nature footage only; the narration voice is AI-generated")
+                                                  if v2 else None,
                "first_comment": first_comment_for(script),
                "promise_matches_opening": script.get("promise") or "Title promise 'God has already gone ahead of you' is spoken at 0-8 s.",
                "upload_performed": False, "publication_performed": False}
