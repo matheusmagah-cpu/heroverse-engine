@@ -637,6 +637,30 @@
    "purpose": "genesis-05-short final compose with the normalized mix, job_3e5cf0cb",
    "saved_to": "production/bible/episodes",
    "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "research",
+   "tool": "vidiq_channel_videos",
+   "credits": 5,
+   "purpose": "daily analysis day 8: our own recent long uploads (views, vph, breakout)",
+   "saved_to": "strategy/DECISIONS.md"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "research",
+   "tool": "vidiq_channel_videos",
+   "credits": 5,
+   "purpose": "daily analysis day 8: our own recent short uploads (views, vph, breakout)",
+   "saved_to": "strategy/DECISIONS.md"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "account",
+   "tool": "vidiq_user_channels",
+   "credits": 0,
+   "purpose": "subscriber count 280",
+   "saved_to": "strategy/DECISIONS.md"
   }
  ]
 }

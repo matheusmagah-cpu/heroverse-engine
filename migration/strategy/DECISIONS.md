@@ -263,3 +263,18 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 - **Per video.** 010 (first R14–R16 video, public 00:00): 6 views, 1 comment, in 8 h. 007 (`NGfnyTul-K0`): 76 views, outlier ×4.1 (from 1 view on 23/10). Shorts keep bringing the subscribers (299 views and 5 subs, 199 and 4).
 - **Decision.** (1) Keep one format per slot, morning and night daily (K2). (2) The lever for watch hours is length: night videos move to ≥ 60 min with a low-cost Scripture-for-sleep section (P2: ≥ 90 min never dead); this is the next renderer work. (3) Shorts move to the Claude reviewer so they publish daily again (subscribers). (4) Script runway: scripts exist to 014 (26/10 10:00); 015+ are written before 26/10.
 - **Why.** The study's unlock pattern is many tickets in one format plus long night content; nothing measured on our channel contradicts it yet (010 is 8 h old).
+
+## Daily analysis, day 8 (2026-10-25 08:06 UTC)
+- **Measured [official, vidIQ].** Subscribers 280 (+6 since 24/10 11:33). Long-form public watch hours about 9 / 4,000
+  [own, report of 24/10]. Needed by day 14 (31/10): about 120 subscribers and 665 watch hours a day; distance factor
+  about 20× (subscribers) and far beyond (hours). Day 14 is out of reach at this pace.
+- **Per video.** Bible Shorts lead from day one: Genesis 2 (`hwq4qgjreh0`) 192 views in 8.5 h (24 vph, breakout 48,
+  27 likes); Genesis 1 (`ku2MTQKmXaU`) 107 views (breakout 14). The best prayer Short of October took 7 days to reach
+  292. Prayer long videos: 007 96 views (breakout 5.2), 010 15 views in 32 h; the others 8–41.
+- **Decision.** (1) Shorts stay at 2 a day in story order (Genesis 3 at 13:30, Genesis 4 at 23:30 are scheduled;
+  Genesis 5 on 26/10 13:30; Genesis 6 is made after the credit day resets). (2) The first long Bible compilation
+  (Genesis 1–6, SERIES.md "Long: every 3 days") is built as soon as Genesis 6 exists. (3) Open question to the owner:
+  SERIES.md says the prayer long videos stop after 011 (format hopping, K2), while 013, 014, 008 and 009 are still
+  rendering for 26–27/10 under the "a long video every other day" clock rule; they keep going until the owner chooses.
+- **Why.** Two of two Bible Shorts beat every prayer Short of the series in their first day; nothing measured favours
+  the prayer long format (best 96 views in 4 days).
