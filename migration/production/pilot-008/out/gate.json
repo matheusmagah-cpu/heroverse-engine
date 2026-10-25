@@ -1,23 +1,23 @@
 {
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-008",
- "output_sha256": "70bb39633e1841f5b368db83d95dee109c089f0090fef1235a6fa719b06ad7ea",
+ "output_sha256": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f",
  "decision": "FAIL",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
   "technical": "PASS",
-  "audio": "PASS",
+  "audio": "UNKNOWN",
   "transcript": "PASS",
-  "captions": "PASS",
-  "sync": "PASS",
-  "image": "PASS",
+  "captions": "UNKNOWN",
+  "sync": "UNKNOWN",
+  "image": "UNKNOWN",
   "rights": "PASS",
-  "content_and_policy": "PASS",
-  "scorecard": "PASS",
+  "content_and_policy": "UNKNOWN",
+  "scorecard": "UNKNOWN",
   "full_file_scan": "FAIL",
   "structure": "PASS",
-  "authenticity": "FAIL",
+  "authenticity": "PASS",
   "preflight": "PASS"
  },
  "items": {
@@ -26,13 +26,13 @@
     "source": "binding",
     "item": "manifest",
     "state": "PASS",
-    "detail": "70bb39633e1841f5b368db83d95dee109c089f0090fef1235a6fa719b06ad7ea"
+    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
    },
    {
     "source": "binding",
     "item": "qa_for_this_file",
     "state": "PASS",
-    "detail": "70bb39633e1841f5b368db83d95dee109c089f0090fef1235a6fa719b06ad7ea"
+    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
    },
    {
     "source": "binding",
@@ -48,13 +48,13 @@
     "source": "binding",
     "item": "review_for_this_file",
     "state": "PASS",
-    "detail": "70bb39633e1841f5b368db83d95dee109c089f0090fef1235a6fa719b06ad7ea"
+    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
    },
    {
     "source": "binding",
     "item": "video_file_hash",
     "state": "PASS",
-    "detail": "70bb39633e1841f5b368db83d95dee109c089f0090fef1235a6fa719b06ad7ea"
+    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
    }
   ],
   "technical": [
@@ -98,8 +98,8 @@
    {
     "source": "review",
     "item": "audio_clarity_and_mix",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    }
   ],
   "transcript": [
@@ -153,8 +153,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    }
   ],
   "sync": [
@@ -171,8 +171,8 @@
    {
     "source": "review",
     "item": "captions_readable_and_synced",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    }
   ],
   "image": [
@@ -234,14 +234,14 @@
    {
     "source": "review",
     "item": "picture_quality",
-    "state": "PASS",
-    "detail": 9.0
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    },
    {
     "source": "review",
     "item": "figure_and_background_integrity",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    }
   ],
   "rights": [
@@ -270,46 +270,46 @@
    {
     "source": "review",
     "item": "opening_and_promise",
-    "state": "PASS",
-    "detail": 9.0
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    },
    {
     "source": "review",
     "item": "pacing_and_visual_variety",
-    "state": "PASS",
-    "detail": 9.0
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    },
    {
     "source": "review",
     "item": "scripture_on_screen",
-    "state": "PASS",
-    "detail": 9.5
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    },
    {
     "source": "review",
     "item": "policy_safe",
-    "state": "PASS",
-    "detail": 10.0
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_NOT_FOR_THIS_FILE"
    },
    {
     "source": "review",
     "item": "overall",
-    "state": "PASS",
-    "detail": 9.2
+    "state": "UNKNOWN",
+    "detail": "no completed watched review for this file"
    }
   ],
   "scorecard": [
    {
     "source": "score",
     "item": "minutes",
-    "state": "PASS",
-    "detail": 16.08
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
    },
    {
     "source": "score",
     "item": "scripture_per_10_min",
-    "state": "PASS",
-    "detail": 6.22
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
    }
   ],
   "full_file_scan": [
@@ -317,7 +317,7 @@
     "source": "scan",
     "item": "black_picture",
     "state": "FAIL",
-    "detail": 0.73
+    "detail": 0.57
    },
    {
     "source": "scan",
@@ -398,7 +398,7 @@
     "source": "structure",
     "item": "package_publish_window",
     "state": "PASS",
-    "detail": "night 2026-10-25T00:00:00Z"
+    "detail": "night 2026-10-27T00:00:00Z"
    }
   ],
   "authenticity": [
@@ -423,6 +423,7 @@
       "pilot-006",
       "pilot-007",
       "pilot-010",
+      "pilot-011",
       "pilot-012"
      ]
     }
@@ -471,19 +472,8 @@
    {
     "source": "authenticity",
     "item": "critique_policy_and_ypp",
-    "state": "FAIL",
-    "detail": [
-     {
-      "category": "misattributed_scripture",
-      "quote": "I am the good shepherd: the good shepherd giveth his life for the sheep.",
-      "why": "This verse is inserted into the middle of Psalm 23 exposition, but it is quoted from John 10:11, not Psalm 23, without explicitly identifying the shift in biblical books."
-     },
-     {
-      "category": "misattributed_scripture",
-      "quote": "He shall feed his flock like a shepherd: he shall gather the lambs with his arm, and carry them in his bosom, and shall gently lead those that are with young.",
-      "why": "This verse is integrated into the walking through of Psalm 23, but it originates from Isaiah 40:11 rather than Psalm 23."
-     }
-    ]
+    "state": "PASS",
+    "detail": []
    },
    {
     "source": "authenticity",
@@ -502,30 +492,15 @@
  },
  "informative_not_deciding": {
   "scan_frozen_picture": {
-   "longest_s": 2.3,
+   "longest_s": 1.07,
    "report_s": 5.0,
    "blocking": false,
    "inside": true,
    "spans": [
     [
-     428.73,
-     429.87,
-     1.13
-    ],
-    [
-     548.43,
-     549.6,
-     1.17
-    ],
-    [
-     652.13,
-     654.43,
-     2.3
-    ],
-    [
-     654.43,
-     655.83,
-     1.4
+     730.07,
+     731.13,
+     1.07
     ]
    ]
   }

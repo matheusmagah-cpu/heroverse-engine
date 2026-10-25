@@ -1,18 +1,7 @@
 {
  "version": "critique-v1",
- "model": "gemini-3.5-flash-lite",
- "findings": [
-  {
-   "category": "misattributed_scripture",
-   "quote": "I am the good shepherd: the good shepherd giveth his life for the sheep.",
-   "why": "This verse is inserted into the middle of Psalm 23 exposition, but it is quoted from John 10:11, not Psalm 23, without explicitly identifying the shift in biblical books."
-  },
-  {
-   "category": "misattributed_scripture",
-   "quote": "He shall feed his flock like a shepherd: he shall gather the lambs with his arm, and carry them in his bosom, and shall gently lead those that are with young.",
-   "why": "This verse is integrated into the walking through of Psalm 23, but it originates from Isaiah 40:11 rather than Psalm 23."
-  }
- ],
- "narrative_value": "The script functions as a calm, reflective, and pastoral evening prayer meditation. It carefully walks through Psalm 23 line by line, addressing universal human struggles such as anxiety, regret, weariness, and grief without resorting to manipulation or toxic positivity.",
- "status": "FAIL"
+ "model": "gemini-3.6-flash",
+ "findings": [],
+ "narrative_value": "High narrative and devotional value. The script is highly original, deeply reflective, and provides nuanced pastoral reflection rather than generic template filler.",
+ "status": "PASS"
 }
