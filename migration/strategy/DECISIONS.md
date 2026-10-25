@@ -350,4 +350,8 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   the long can take Pavo only through the story format's own QA (SERIES.md, `production/bible/long/`), written and
   frozen before pilot-015's first render, with the v4 technical floors unchanged (2560x1440 output, loudness, speech,
   black scan) and each Pavo clip brought to 1440p by Real-ESRGAN (the stills' upscaler, not a plain resize) and
-  checked frame by frame. No frozen v2/v3/v4 file is edited. Until that QA exists, the long stays on footage and stills.
+  checked frame by frame. No frozen v2/v3/v4 file is edited. Owner, 2026-10-25 23:20 UTC: "todos os OKs ... eu dou
+  autorização": `production/qa_criteria_story_v1.json` (story-qa-criteria-v1) is frozen before pilot-015's first
+  render: v4's technical, speech and grammar rows unchanged, real licensed footage >= 40 % of the picture, Pavo <= 55 %,
+  Pavo clips only as library records (source pavo, Real-ESRGAN to 2560x1440, vetting APPROVED). `render_pilot.sh` uses it
+  for `archetype: bible-story-long`; the gate, the queue and hookify know its hash.

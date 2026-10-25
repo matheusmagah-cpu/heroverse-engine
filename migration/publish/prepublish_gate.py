@@ -37,10 +37,13 @@ FROZEN_CRITERIA_SHA256 = {"pilot-qa-criteria-v2": "49fedd2e5ebf525e38dab1e513512
                           # migration/STANDARD.md v1, frozen 2026-10-19 before the first v3 render; v2 is unchanged
                           "pilot-qa-criteria-v3": "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3",
                           # owner, 2026-10-23: real licensed footage, 8-14 s scenes; v3 stays frozen and unchanged
-                          "pilot-qa-criteria-v4": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11"}
+                          "pilot-qa-criteria-v4": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
+                          # owner, 2026-10-25: Bible-story longs, v4 floors plus Pavo AI video (<= 55 %, >= 40 % real footage)
+                          "story-qa-criteria-v1": "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360"}
 CRITERIA_V3 = Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v3.json"
 CRITERIA_FILES = {"pilot-qa-criteria-v3": CRITERIA_V3,
-                  "pilot-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v4.json"}
+                  "pilot-qa-criteria-v4": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_v4.json",
+                  "story-qa-criteria-v1": Path(__file__).resolve().parents[1] / "production" / "qa_criteria_story_v1.json"}
 STANDARD_VERSIONS = tuple(CRITERIA_FILES)  # STANDARD.md renders: the only ones approved or published
 PASS_ITEM, PASS_OVERALL = 7, 8  # long_review.py rubric
 # the watched review decides only when the designated model answered. Fallback free models score the same file
@@ -78,7 +81,13 @@ DIMENSIONS_V4 = {**DIMENSIONS_V3,
                            "review": DIMENSIONS_V3["image"]["review"]},
                  "rights": {"qa": ["images_open_licence_with_revision", "footage_licensed_vetted_and_credited",
                                    "music_owned", "voice_model_pinned"], "review": []}}
-DIMENSIONS_BY_VERSION = {"pilot-qa-criteria-v3": DIMENSIONS_V3, "pilot-qa-criteria-v4": DIMENSIONS_V4}
+# story v1: the v4 rows plus the Pavo share and its source/licence
+DIMENSIONS_STORY_V1 = {**DIMENSIONS_V4,
+                       "image": {"qa": DIMENSIONS_V4["image"]["qa"] + ["ai_video_picture_share"],
+                                 "review": DIMENSIONS_V4["image"]["review"]},
+                       "rights": {"qa": DIMENSIONS_V4["rights"]["qa"] + ["ai_video_source_and_licence"], "review": []}}
+DIMENSIONS_BY_VERSION = {"pilot-qa-criteria-v3": DIMENSIONS_V3, "pilot-qa-criteria-v4": DIMENSIONS_V4,
+                         "story-qa-criteria-v1": DIMENSIONS_STORY_V1}
 # rows measured on our own file and script always block; miner rows block when long_review reports them as hard
 # (only once the miner is proven on the holdout) and are then checked like any other hard row
 SCORE_HARD = ("minutes", "scripture_per_10_min")

@@ -73,6 +73,10 @@ CRITERIA=migration/production/qa_criteria_v3.json
 if ls "$T"/in/footage/*.mp4 >/dev/null 2>&1; then
   CRITERIA=migration/production/qa_criteria_v4.json
   export HERO_FRAME=2560x1440   # v4: never below 1440p (owner, 2026-10-23)
+  # Bible-story longs (owner, 2026-10-25): v4 floors plus Pavo AI video upscaled to 1440p
+  if [ "$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1])).get('archetype',''))" "$SCRIPT")" = "bible-story-long" ]; then
+    CRITERIA=migration/production/qa_criteria_story_v1.json
+  fi
 fi
 fig=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['figure'])" "$SCRIPT")
 q "$T/cut/bin/python" -I -B migration/production/imagegen/cutout.py "$T/in/img/$fig.png" "$T/in/img/$fig.json" "$T/in/figure.png"

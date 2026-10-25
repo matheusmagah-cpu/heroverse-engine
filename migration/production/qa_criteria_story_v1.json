@@ -1,0 +1,105 @@
+{
+ "version": "story-qa-criteria-v1",
+ "frozen_at_utc": "2026-10-25T23:45:00Z",
+ "basis": "Bible-story long format (SERIES.md 'One format, two lengths', owner 2026-10-25), frozen before the first story render (pilot-015). Technical, speech, caption and grammar gates are copied from pilot-qa-criteria-v4 unchanged (2560x1440 output, loudness, true peak, speech presence, WER, 4-7 s scenes, captions, repeat gap). Owner, 2026-10-25: 'pode mesclar clipes do Pavo e de fora: 50 % de um e 50 % de outro' and commercial use of Pavo confirmed (Pavo terms §42 ownership, §44 commercial use). So Pavo AI video (agnes-video-new-flash, 1280x720) enters the picture only after Real-ESRGAN general x4v3 super-resolution to 2560x1440 (not a plain resize), audio removed, Claude frame review (vetting APPROVED) and a library record like licensed footage; real licensed footage keeps at least 40 % of the picture time and Pavo at most 55 %. v4 stays frozen and unchanged.",
+ "technical": {
+  "full_decode_without_errors": true,
+  "video": "2560x1440, H.264, 30 fps, one audio stream (AAC 48 kHz stereo)",
+  "duration_seconds_min": 601,
+  "integrated_lufs": [
+   -16.0,
+   -14.0
+  ],
+  "true_peak_dbtp_max": -1.0,
+  "frame": [
+   2560,
+   1440
+  ]
+ },
+ "speech": {
+  "speech_presence_min": 0.85,
+  "singing_presence_max": 0.0,
+  "wer_vs_script_max": 0.1,
+  "accepted_words_per_minute": [
+   115,
+   165
+  ],
+  "first_word_onset_seconds_max": 1.5,
+  "hook_second_person_within_seconds": 8
+ },
+ "rights": {
+  "every_image_generated_by_allowed_open_licence_model_with_revision": true,
+  "allowed_model_licences": [
+   "openrail++",
+   "openrail++-m",
+   "creativeml-openrail-m",
+   "apache-2.0",
+   "mit"
+  ],
+  "music_owned_generator_with_hash": true,
+  "voice_model_hash_pinned": true,
+  "script_original_with_public_domain_scripture_only": true,
+  "footage_licensed_vetted_and_credited": true,
+  "allowed_footage_licences": [
+   "Pexels License",
+   "Pixabay Content License",
+   "CC0",
+   "Public domain",
+   "CC BY 2.0",
+   "CC BY 2.5",
+   "CC BY 3.0",
+   "CC BY 4.0",
+   "Pavo generated (owner-owned)"
+  ],
+  "footage_vetting_required": "APPROVED",
+  "ai_video": {
+   "source": "pavo",
+   "licence": "Pavo generated (owner-owned)",
+   "model": "agnes-video-new-flash",
+   "upscaler": "Real-ESRGAN general x4v3 (bsd-3-clause) to 2560x1440",
+   "audio": "removed",
+   "vetting_required": "APPROVED",
+   "disclosure": "altered or synthetic content on, AI visuals named in the description"
+  }
+ },
+ "failure_policy": "Any FAIL blocks approval; criteria are not edited after results to pass.",
+ "not_claimed": [
+  "Audience response, CTR, retention or revenue",
+  "Perceptual approval by a human",
+  "Publication authority"
+ ],
+ "grammar": {
+  "title_card_seconds": [
+   4.0,
+   7.0
+  ],
+  "figure_present_fraction_max": 0.0,
+  "every_scene_in_motion": true,
+  "scene_seconds": [
+   4.0,
+   7.0
+  ],
+  "crossfade_seconds_max": 1.0,
+  "image_repeat_gap_seconds_min": 300.0,
+  "caption_coverage_of_speech_min": 0.95,
+  "caption_hold_seconds_median": [
+   1.5,
+   5.0
+  ],
+  "caption_chars_max": 44,
+  "caption_words_max": 7,
+  "caption_box": false,
+  "scripture_card_only_while_read": true,
+  "cta_mid_video_max": 2,
+  "cta_seconds_max": 10.0,
+  "cta_first_start_seconds_min": 45.0,
+  "persistent_overlays_allowed": [
+   "brand"
+  ],
+  "footage_picture_share_min": 0.4,
+  "footage_picture_share_counts": "real licensed footage only (clips whose source is not pavo)",
+  "ai_video_picture_share_max": 0.55
+ },
+ "perceptual_review_required_before_approval": "Watched review (long_review.watch); owner floor: overall >= 9.5 for new uploads.",
+ "frozen_before_first_story_render": true
+}

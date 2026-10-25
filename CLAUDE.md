@@ -14,8 +14,9 @@ holds the owner's fixed rules.
 
 ## Owner's fixed rules
 - Reply to the owner in Portuguese, short.
-- Floor 9.5 overall for anything published. Never loosen a gate or edit frozen QA v2/v3/v4
-  (`migration/production/qa_criteria_v3.json`, `qa_criteria_v4.json`, `pilot-NNN/qa_criteria.json`).
+- Floor 9.5 overall for anything published. Never loosen a gate or edit frozen QA v2/v3/v4/story v1
+  (`migration/production/qa_criteria_v3.json`, `qa_criteria_v4.json`, `qa_criteria_story_v1.json`,
+  `pilot-NNN/qa_criteria.json`).
 - Never write `APPROVAL.json` by hand: approvals come only from `approve.yml` → `prepublish_gate.py`.
 - Never expose secrets (keys stay in repository secrets; never in files, logs or messages).
 - No new spending or paid services. vidIQ generation up to 200 credits a day, every spend recorded in
