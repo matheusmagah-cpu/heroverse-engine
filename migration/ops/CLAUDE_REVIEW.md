@@ -47,3 +47,5 @@ the eight scores, `overall`, `issues` (each with the clip number or the second),
 branch, PR and squash merge. Below 9.5, fix the cause in the script (e.g. reassign footage, rewrite the hook): the
 changed script is previewed again automatically. `render_pilot.sh` refuses a full render unless this review of the
 current script is at 9.5 or more (`preview_gate.py gate`), on the engine and on the public runner alike.
+Every clock run also runs `render_queue.py ... reassign 168`: a pilot listed there still names clips the library no
+longer approves, so preview and render skip it (E78) until `footage/assign.py PILOT_DIR` reassigns it (PR as above).

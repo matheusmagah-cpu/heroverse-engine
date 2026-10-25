@@ -43,7 +43,7 @@ class Gate(unittest.TestCase):
         import subprocess
         with tempfile.TemporaryDirectory() as t:
             (Path(t) / "ledger.json").write_text("{}")
-            for mode in ("preview", "preview-review", "render", "review"):
+            for mode in ("preview", "preview-review", "render", "review", "reassign"):
                 r = subprocess.run([sys.executable, "-I", "-B", str(Path(rq.__file__)), t, str(Path(t) / "ledger.json"), mode, "72"],
                                    capture_output=True, text=True)
                 self.assertEqual(r.returncode, 0, r.stderr)
@@ -74,6 +74,34 @@ class Gate(unittest.TestCase):
             review(d, 9.5)
             self.assertEqual(queue(t, "render"), ["pilot-008"])
             self.assertEqual(pg.main(["gate", str(d)]), 0)
+
+    def test_footage_rejected_in_the_library_stops_preview_and_render(self):
+        # E78: pilot-009's preview showed 7 clips the library had REJECTED (a railed boardwalk, a concrete weir, a
+        # village); pilot-014's did too. The queue never read the library, so stale footage reached a preview.
+        with tempfile.TemporaryDirectory() as t:
+            (Path(t) / "ledger.json").write_text("{}")
+            lib = Path(t) / "footage" / "library"
+            lib.mkdir(parents=True)
+            (lib / "clip-ok.json").write_text(json.dumps({"vetting": "APPROVED"}))
+            (lib / "clip-bad.json").write_text(json.dumps({"vetting": "REJECTED"}))
+            pilot(t, "pilot-009", "2026-10-19T00:00:00Z", previewed=False)
+            pilot(t, "pilot-014", "2026-10-19T10:00:00Z")      # preview already at 9.5
+            for p in ("pilot-009", "pilot-014"):
+                d = Path(t) / p
+                s = json.loads((d / "script.json").read_text())
+                (d / "script.json").write_text(json.dumps(dict(s, footage=["clip-ok", "clip-bad", "clip-gone"])))
+            review(Path(t) / "pilot-014", 9.5)
+            self.assertEqual(queue(t, "preview", "72"), [])
+            self.assertEqual(queue(t, "render"), [])
+            self.assertEqual(queue(t, "reassign"), ["pilot-009", "clip-bad,clip-gone", "pilot-014", "clip-bad,clip-gone"])
+            for p in ("pilot-009", "pilot-014"):
+                d = Path(t) / p
+                s = json.loads((d / "script.json").read_text())
+                (d / "script.json").write_text(json.dumps(dict(s, footage=["clip-ok"])))
+            review(Path(t) / "pilot-014", 9.5)
+            self.assertEqual(queue(t, "preview", "72"), ["pilot-009"])
+            self.assertEqual(queue(t, "render"), ["pilot-014"])
+            self.assertEqual(queue(t, "reassign"), [])
 
     def test_a_changed_script_needs_a_new_preview(self):
         with tempfile.TemporaryDirectory() as t:
