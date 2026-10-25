@@ -1,0 +1,58 @@
+{
+ "version": "signal-scan-v1",
+ "criteria": {
+  "black_max_s": 0.5,
+  "black_pic_th": 0.98,
+  "silence_max_s": 3.0,
+  "silence_db": -60,
+  "freeze_report_s": 5.0,
+  "freeze_noise": 0.003
+ },
+ "edge_excluded_s": 2.0,
+ "duration_s": 963.75,
+ "status": "PASS",
+ "rows": {
+  "black_picture": {
+   "longest_s": 0.0,
+   "max_s": 0.5,
+   "blocking": true,
+   "pass": true,
+   "spans": []
+  },
+  "digital_silence": {
+   "longest_s": 0.0,
+   "max_s": 3.0,
+   "blocking": true,
+   "pass": true,
+   "spans": []
+  },
+  "frozen_picture": {
+   "longest_s": 2.63,
+   "report_s": 5.0,
+   "blocking": false,
+   "inside": true,
+   "spans": [
+    [
+     350.4,
+     353.03,
+     2.63
+    ],
+    [
+     721.13,
+     722.17,
+     1.03
+    ],
+    [
+     763.07,
+     764.73,
+     1.67
+    ],
+    [
+     765.5,
+     766.73,
+     1.23
+    ]
+   ]
+  }
+ }
+}

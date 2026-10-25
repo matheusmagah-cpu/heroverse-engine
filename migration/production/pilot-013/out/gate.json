@@ -1,0 +1,536 @@
+{
+ "version": "prepublish-gate-v1",
+ "pilot_id": "pilot-013",
+ "output_sha256": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f",
+ "decision": "UNKNOWN",
+ "eligible_for_automatic_publication": false,
+ "dimensions": {
+  "binding": "PASS",
+  "technical": "PASS",
+  "audio": "UNKNOWN",
+  "transcript": "PASS",
+  "captions": "UNKNOWN",
+  "sync": "UNKNOWN",
+  "image": "UNKNOWN",
+  "rights": "PASS",
+  "content_and_policy": "UNKNOWN",
+  "scorecard": "UNKNOWN",
+  "full_file_scan": "PASS",
+  "structure": "PASS",
+  "authenticity": "PASS",
+  "preflight": "PASS"
+ },
+ "items": {
+  "binding": [
+   {
+    "source": "binding",
+    "item": "manifest",
+    "state": "PASS",
+    "detail": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f"
+   },
+   {
+    "source": "binding",
+    "item": "qa_for_this_file",
+    "state": "PASS",
+    "detail": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f"
+   },
+   {
+    "source": "binding",
+    "item": "qa_criteria_frozen",
+    "state": "PASS",
+    "detail": {
+     "version": "pilot-qa-criteria-v4",
+     "recorded": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
+     "file": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11"
+    }
+   },
+   {
+    "source": "binding",
+    "item": "review_for_this_file",
+    "state": "PASS",
+    "detail": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f"
+   },
+   {
+    "source": "binding",
+    "item": "video_file_hash",
+    "state": "PASS",
+    "detail": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f"
+   }
+  ],
+  "technical": [
+   {
+    "source": "qa",
+    "item": "full_decode_without_errors",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "video_format",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "duration_min",
+    "state": "PASS"
+   }
+  ],
+  "audio": [
+   {
+    "source": "qa",
+    "item": "integrated_lufs",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "true_peak",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "speech_presence",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_singing",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "audio_clarity_and_mix",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   }
+  ],
+  "transcript": [
+   {
+    "source": "qa",
+    "item": "wer_vs_script",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "words_per_minute",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "hook_second_person",
+    "state": "PASS"
+   }
+  ],
+  "captions": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_hold_median",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_chars_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_words_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "caption_no_box",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   }
+  ],
+  "sync": [
+   {
+    "source": "qa",
+    "item": "caption_coverage_of_speech",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "first_word_onset",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "captions_readable_and_synced",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   }
+  ],
+  "image": [
+   {
+    "source": "qa",
+    "item": "title_card_seconds",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "no_figure",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "every_scene_in_motion",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "scene_seconds",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "crossfade_seconds_max",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "image_repeat_gap",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "scripture_card_only_while_read",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_count",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "cta_short_and_not_early",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "persistent_overlays_only_brand",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "footage_picture_share",
+    "state": "PASS"
+   },
+   {
+    "source": "review",
+    "item": "picture_quality",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   },
+   {
+    "source": "review",
+    "item": "figure_and_background_integrity",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   }
+  ],
+  "rights": [
+   {
+    "source": "qa",
+    "item": "images_open_licence_with_revision",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "footage_licensed_vetted_and_credited",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "music_owned",
+    "state": "PASS"
+   },
+   {
+    "source": "qa",
+    "item": "voice_model_pinned",
+    "state": "PASS"
+   }
+  ],
+  "content_and_policy": [
+   {
+    "source": "review",
+    "item": "opening_and_promise",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   },
+   {
+    "source": "review",
+    "item": "pacing_and_visual_variety",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   },
+   {
+    "source": "review",
+    "item": "scripture_on_screen",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   },
+   {
+    "source": "review",
+    "item": "policy_safe",
+    "state": "UNKNOWN",
+    "detail": "review AWAITING_REVIEW: CLAUDE_REVIEW_MISSING"
+   },
+   {
+    "source": "review",
+    "item": "overall",
+    "state": "UNKNOWN",
+    "detail": "no completed watched review for this file"
+   }
+  ],
+  "scorecard": [
+   {
+    "source": "score",
+    "item": "minutes",
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
+   },
+   {
+    "source": "score",
+    "item": "scripture_per_10_min",
+    "state": "UNKNOWN",
+    "detail": "no scorecard for this file"
+   }
+  ],
+  "full_file_scan": [
+   {
+    "source": "scan",
+    "item": "black_picture",
+    "state": "PASS",
+    "detail": 0.0
+   },
+   {
+    "source": "scan",
+    "item": "digital_silence",
+    "state": "PASS",
+    "detail": 0.0
+   }
+  ],
+  "structure": [
+   {
+    "source": "structure",
+    "item": "driver_continuous_motion",
+    "state": "PASS",
+    "detail": 175
+   },
+   {
+    "source": "structure",
+    "item": "driver_viewer_hook_5s",
+    "state": "PASS",
+    "detail": [
+     "Before you sleep tonight, let God's mercy wash away today's "
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_speech_within_3s",
+    "state": "PASS",
+    "detail": 0.3
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_spoken_amen_cta",
+    "state": "PASS",
+    "detail": "If you have received God's forgiveness tonight, you can type amen in the comments. You can also leave a prayer request t"
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_recurring_refrain",
+    "state": "PASS",
+    "detail": [
+     "i do not",
+     7
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_gratitude_block",
+    "state": "PASS",
+    "detail": 12
+   },
+   {
+    "source": "structure",
+    "item": "hygiene_voice_and_music",
+    "state": "PASS",
+    "detail": {
+     "voice_model_pinned": true,
+     "music_owned": true
+    }
+   },
+   {
+    "source": "structure",
+    "item": "package_title_promise_pipe_keyword",
+    "state": "PASS",
+    "detail": "Before You Sleep, Let God's Mercy Wash Today Away 🌙 | Night Prayer for Forgiveness"
+   },
+   {
+    "source": "structure",
+    "item": "package_chapters",
+    "state": "PASS",
+    "detail": [
+     "0:00",
+     "12:08",
+     "12:38"
+    ]
+   },
+   {
+    "source": "structure",
+    "item": "package_publish_window",
+    "state": "PASS",
+    "detail": "night 2026-10-26T00:00:00Z"
+   }
+  ],
+  "authenticity": [
+   {
+    "source": "authenticity",
+    "item": "original_words_share",
+    "state": "PASS",
+    "detail": 0.931
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_script_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.009,
+      "pilot-010"
+     ],
+     "visible": [
+      "pilot-002",
+      "pilot-005",
+      "pilot-006",
+      "pilot-007",
+      "pilot-010",
+      "pilot-011",
+      "pilot-012",
+      "pilot-014"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_image_set",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.086,
+      "pilot-010"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_title",
+    "state": "PASS",
+    "detail": {
+     "max": [
+      0.1,
+      "pilot-002"
+     ]
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "no_template_opening_line",
+    "state": "PASS",
+    "detail": {
+     "opening": "before you sleep tonight let god's mercy wash",
+     "same_as": []
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "not_reused_reference_overlap",
+    "state": "PASS",
+    "detail": {
+     "max": 0.0,
+     "ref": "fXhKzleJhxI",
+     "refs": 1
+    }
+   },
+   {
+    "source": "authenticity",
+    "item": "critique_policy_and_ypp",
+    "state": "PASS",
+    "detail": []
+   },
+   {
+    "source": "authenticity",
+    "item": "synthetic_media_disclosed",
+    "state": "PASS",
+    "detail": "publish_video.py status"
+   }
+  ],
+  "preflight": [
+   {
+    "source": "preflight",
+    "item": "preflight",
+    "state": "PASS"
+   }
+  ]
+ },
+ "informative_not_deciding": {
+  "scan_frozen_picture": {
+   "longest_s": 2.63,
+   "report_s": 5.0,
+   "blocking": false,
+   "inside": true,
+   "spans": [
+    [
+     350.4,
+     353.03,
+     2.63
+    ],
+    [
+     721.13,
+     722.17,
+     1.03
+    ],
+    [
+     763.07,
+     764.73,
+     1.67
+    ],
+    [
+     765.5,
+     766.73,
+     1.23
+    ]
+   ]
+  }
+ },
+ "market_evidence_not_deciding": {
+  "status": "UNKNOWN",
+  "detail": "no vidIQ market opinion for this pilot",
+  "not_claimed": "market evidence only: not technical quality, not a performance forecast, not a guarantee of views, revenue or monetization"
+ },
+ "method_notes": {
+  "review_sampling": "watched review samples pictures at 0.5 frames/s, low resolution",
+  "not_claimed": [
+   "perceived quality by viewers",
+   "retention, CTR or revenue",
+   "originality beyond the rights checks listed"
+  ]
+ }
+}
