@@ -15,6 +15,7 @@ from urllib.request import Request
 from urllib.parse import urlsplit
 
 from client import MAX_BYTES, ORIGIN, PavoClient, PavoError, number
+import images
 
 MODEL = "agnes-video-new-flash"
 STREAM_SECONDS = 30
@@ -23,7 +24,10 @@ PATHS = {
     "create": "/v1/chat/conversation",
     "stream": "/v1/chat/stream",
     "history": "/v1/chat/conversation/history?conversation_id=",
+    "upload": "/v1/file/presigned-url",
+    "inspect": "/v1/file/inspect",
 }
+UPLOAD_HEADERS = re.compile(r"[A-Za-z0-9-]{1,64}")
 
 
 def conversation_id(value):
@@ -81,7 +85,7 @@ class PavoVideoClient(PavoClient):
             raise PavoError("INVALID_PAVO_REQUEST")
         headers = {
             "Authorization": "Bearer " + self._token,
-            "User-Agent": "HeroVerse-Pavo-MCP/0.2",
+            "User-Agent": "HeroVerse-Pavo-MCP/0.3",
             "Accept": "text/event-stream" if route == "stream" else "application/json",
             "Content-Type": "application/json",
             "X-Platform": "1",
@@ -120,28 +124,79 @@ class PavoVideoClient(PavoClient):
             raise PavoError("PAVO_REQUEST_REFUSED")
         return payload.get("data")
 
-    def quote_video(self, seconds=5, aspect_ratio="9:16"):
+    def quote_video(self, seconds=5, aspect_ratio="9:16", first_frame="", last_frame="", references=None):
         # Reuse the local brief's strict duration/ratio validation without any write.
         self.prepare_video("Price check", seconds, aspect_ratio)
+        mode, inputs = images.plan(first_frame, last_frame, references)
+        return self._quote(seconds, aspect_ratio, mode, len(inputs))
+
+    def _quote(self, seconds, aspect_ratio, mode, input_images):
+        # Input images are priced too (the web client sends them as `inputs`).
         body = {"model_code": MODEL, "outputs": [{"count": 1, "media_type": "video",
                 "resolution": "hd", "duration_seconds": seconds, "gen_audio": False}]}
+        if input_images:
+            body["inputs"] = [{"count": 1, "media_type": "image"} for _ in range(input_images)]
         data = self._video_json("quote", body)
         if not isinstance(data, dict) or type(data.get("is_estimate")) is not bool:
             raise PavoError("PAVO_QUOTE_SCHEMA_CHANGED")
         exact_credits, credits = price(data.get("required_credits"))
         final_points, _ = price(data.get("final_points"))
-        return {"model": MODEL, "seconds": seconds, "aspect_ratio": aspect_ratio,
-                "resolution": "720p", "audio": False, "count": 1,
+        return {"model": MODEL, "seconds": seconds, "aspect_ratio": aspect_ratio, "mode": mode,
+                "input_images": input_images, "resolution": "720p", "audio": False, "count": 1,
                 "required_credits": credits, "is_estimate": data["is_estimate"],
                 "zero_cost_confirmed": exact_credits == 0 and final_points == 0 and not data["is_estimate"],
                 "permanent_free_access_verified": False}
 
-    def _start_stream(self, job, prompt, seconds, aspect_ratio):
-        request = self._video_request("stream", {
-            "conversation_id": int(job), "prompt": prompt, "mode": "frames_to_video",
+    def _upload(self, item):
+        """One image into Pavo's attachment storage (presigned PUT, then inspect). Never generates."""
+        data = self._video_json("upload", {"purpose": "chat_attachment", "content_type": item["mime"],
+                                           "filename": item["filename"]})
+        if not isinstance(data, dict):
+            raise PavoError("PAVO_UPLOAD_SCHEMA_CHANGED")
+        public, target, headers, meta = (data.get("public_url"), data.get("upload_url"),
+                                         data.get("required_headers") or {}, data.get("meta_data"))
+        for url in (public, target):
+            if not isinstance(url, str) or len(url) > 4096 or (self._token and self._token in url):
+                raise PavoError("PAVO_UPLOAD_SCHEMA_CHANGED")
+            parsed = urlsplit(url)
+            if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+                raise PavoError("PAVO_UPLOAD_SCHEMA_CHANGED")
+        if urlsplit(public).query or not isinstance(headers, dict) or not all(
+                isinstance(k, str) and UPLOAD_HEADERS.fullmatch(k) and k.lower() != "authorization"
+                and isinstance(v, str) and len(v) <= 1024 for k, v in headers.items()):
+            raise PavoError("PAVO_UPLOAD_SCHEMA_CHANGED")
+        if meta is not None and (not isinstance(meta, dict) or len(json.dumps(meta)) > 4096):
+            raise PavoError("PAVO_UPLOAD_SCHEMA_CHANGED")
+        # The presigned PUT goes to storage, never with the Pavo credential.
+        put = Request(target, data=item["data"], headers=dict(headers), method="PUT")
+        try:
+            with self._opener.open(put, timeout=60) as response:
+                if not 200 <= response.status < 300:
+                    raise PavoError("PAVO_UPLOAD_REFUSED")
+        except PavoError:
+            raise
+        except HTTPError as exc:
+            exc.close()
+            raise PavoError("PAVO_UPLOAD_REFUSED") from None
+        except (URLError, TimeoutError, OSError, ValueError):
+            raise PavoError("PAVO_UPLOAD_HOST_UNREACHABLE") from None
+        self._video_json("inspect", {"content_type": item["mime"], "url": public})
+        return {"url": public, **({"meta_data": meta} if meta else {})}
+
+    def _start_stream(self, job, prompt, seconds, aspect_ratio, mode="frames_to_video", uploaded=()):
+        body = {
+            "conversation_id": int(job), "prompt": prompt, "mode": mode,
             "model": MODEL, "ratio": aspect_ratio, "duration": seconds,
             "resolution": "hd", "sound": False, "count": 1,
-        })
+        }
+        if uploaded:
+            # frames_to_video: [first, last]; omni_to_video: references, also named in the prompt blocks
+            body["images"] = list(uploaded)
+        if mode == "omni_to_video":
+            blocks = [{"type": "text", "content": prompt}]
+            blocks += [{"type": "image", "url": u["url"], "source_index": i} for i, u in enumerate(uploaded, 1)]
+            body["creative_prompt_json"] = json.dumps(blocks)
+        request = self._video_request("stream", body)
         # Closing after GenerationStart leaves the job running on Pavo. Read its
         # history afterwards; never create a replacement just because a read timed out.
         with self._opener.open(request, timeout=15) as response, self._stream_timeout(response):
@@ -208,11 +263,14 @@ class PavoVideoClient(PavoClient):
             if len(buffer) > 16384:
                 raise PavoError("PAVO_SUBMISSION_STATE_UNKNOWN")
 
-    def generate_video(self, prompt, seconds=5, aspect_ratio="9:16"):
+    def generate_video(self, prompt, seconds=5, aspect_ratio="9:16", first_frame="", last_frame="", references=None):
         prompt = self.prepare_video(prompt, seconds, aspect_ratio)["brief"]["prompt"]
-        quote = self.quote_video(seconds, aspect_ratio)
+        mode, inputs = images.plan(first_frame, last_frame, references)
+        quote = self._quote(seconds, aspect_ratio, mode, len(inputs))
         if not quote["zero_cost_confirmed"]:
             raise PavoError("PAVO_ZERO_CREDIT_QUOTE_REQUIRED")
+        # Uploads happen after the free quote and before any conversation: a failed upload creates no job.
+        uploaded = [self._upload(item) for item in inputs]
         data = self._video_json("create", {
             "title": json.dumps([{"type": "text", "content": "HeroVerse MCP preview"}]),
             "folder_id": "", "kb_strict": False,
@@ -220,10 +278,10 @@ class PavoVideoClient(PavoClient):
         if not isinstance(data, dict):
             raise PavoError("PAVO_CONVERSATION_SCHEMA_CHANGED")
         job = conversation_id(data.get("conversation_id"))
-        result = {"conversation_id": job, "model": MODEL, "quoted_credits": 0,
-                  "retry_submission": False, "published": False}
+        result = {"conversation_id": job, "model": MODEL, "mode": mode, "input_images": len(inputs),
+                  "quoted_credits": 0, "retry_submission": False, "published": False}
         try:
-            accepted = self._start_stream(job, prompt, seconds, aspect_ratio)
+            accepted = self._start_stream(job, prompt, seconds, aspect_ratio, mode, uploaded)
         except Exception as exc:
             if isinstance(exc, HTTPError):
                 exc.close()

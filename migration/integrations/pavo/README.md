@@ -14,12 +14,12 @@ The private stdio server uses the official Python MCP SDK, pinned to 2.3.0 via `
 | `pavo_account` | Authenticated plan and credit balance read. |
 | `pavo_models` | Public video catalog; a Free label is not a price quote. |
 | `pavo_prepare_video` | Local brief only, `submitted: false`. |
-| `pavo_quote_video` | Authenticated, read-only price calculation for one Flash video. |
-| `pavo_generate_video` | One private Flash video, only after a fresh, exact zero-credit quote. |
+| `pavo_quote_video` | Authenticated, read-only price calculation for one Flash video, input images counted. |
+| `pavo_generate_video` | One private Flash video, only after a fresh, exact zero-credit quote: text only, first frame (+ optional last frame), or up to 5 reference images. |
 | `pavo_job` | Read the original job and its completed media; never resubmit it. |
 
-Generation is limited to `agnes-video-new-flash`, one output, 720p, no audio, 4–12 seconds,
-and the supported local brief ratios (9:16, 16:9, 1:1). Each call obtains a new quote and refuses
+Generation is limited to `agnes-video-new-flash`, one output, 720p, no audio, 4–12 seconds, and the
+ratios of its public capability spec (9:16, 3:4, 1:1, 4:3, 16:9, 21:9). Each call obtains a new quote and refuses
 nonzero, estimated, missing or malformed prices before creating a conversation. It sends the same
 model, duration, resolution, audio and count to the quote and generation endpoints. There is no
 purchase, upgrade, scheduler or publishing endpoint. The quote is not a guarantee of permanent
@@ -33,6 +33,30 @@ single deadline for the full quote/create/stream operation. A finished conversat
 accepted media URL is `incomplete`.
 Only HTTPS `.mp4` URLs on the observed Pavo CDN, without query credentials, are returned.
 The adapter does not fetch or validate the media content.
+
+### Input images (v0.3, 2026-10-25)
+
+What Flash accepts (`model-capability-spec`, checked 2026-10-25): modes text_to_video, first_frame,
+first_last_frame and reference_image; up to 5 images (JPEG/PNG/WebP, 15 MiB, side 256–5760 px, aspect 0.4–2.5);
+up to 3 input audios (MP3/WAV, 2–12 s in total; not used here). The adapter takes repository-relative PNG/JPEG
+paths only (our approved stills and character sheets), validates them locally against that spec before any
+request, and refuses paths outside the repository.
+
+- `first_frame` (+ optional `last_frame`): Pavo's `frames_to_video`, `images` = [first, last], like the web client.
+  A last frame alone is refused (the web client refuses it too).
+- `references` (1–5): Pavo's `omni_to_video`, `images` plus `creative_prompt_json` blocks naming each image by
+  `source_index`: the same character every time (`production/characters/`).
+- Frames and references are exclusive. The quote sends the images as `inputs`, so it prices them; only an exact
+  zero-credit quote lets the call upload anything. Each image then goes through Pavo's presigned upload
+  (`/v1/file/presigned-url`, a PUT to the storage URL **without** the Pavo credential, `/v1/file/inspect`). A
+  failed upload creates no conversation. Uploading is not a generation and costs nothing.
+- The storage host of the presigned PUT is not yet observed live; if the network policy denies it, the call fails
+  with `PAVO_UPLOAD_HOST_UNREACHABLE` before any job exists.
+
+### Audio
+
+The request sends `sound: false` / `gen_audio: false`, as the web client does for "no audio", but the first live
+Flash clip (2026-10-25) came with an audible AAC track (mean −15.7 dB). Strip it (`ffmpeg -an`) before using a clip.
 MCP account/media responses are private; do not copy them into public logs or receipts.
 
 ## Credentials and running
@@ -69,6 +93,13 @@ The stdlib `client.py --probe` and `client.py --models` commands remain read-onl
   generation turn or credit-balance change. Adding the verified headers succeeded. The regression is
   guarded by `test_video.py` and recorded as E82 in `migration/ops/ERRORS.json`.
 - Commercial rights, watermark behavior and normal media QA/publication gates have not been waived.
+- 2026-10-25, through this MCP: one 6-second 9:16 Flash clip after a fresh exact zero-credit quote completed
+  (720×1280, 24 fps, 6.59 s, no visible watermark, clip_check clean, audible audio despite `sound: false`):
+  `migration/evidence/pavo/20261025/` on branch `claude/pavo-test-20261025`. 12 s 9:16, 10 s 16:9 and 4 s 1:1
+  quoted exactly 0 the same evening.
+- The frames/reference request shape comes from the public web client (chunks 9821, 4321, 5334, 9570 of
+  2026-10-25: `function A` send params, worker stream body, `inputs` pricing, presigned upload); it is covered
+  offline by `test_video.py` and not yet verified live.
 
 ## Protocol sources
 

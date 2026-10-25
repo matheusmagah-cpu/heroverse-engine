@@ -10,7 +10,7 @@ from mcp.types import ToolAnnotations
 from client import PavoError
 from video import PavoVideoClient
 
-mcp = MCPServer("heroverse-pavo", version="0.2.0", log_level="CRITICAL",
+mcp = MCPServer("heroverse-pavo", version="0.3.0", log_level="CRITICAL",
                 instructions="Unofficial Pavo connection. Generate only with a fresh exact zero-credit quote. "
                              "Never retry an uncertain submission; check its conversation_id with pavo_job.")
 client = PavoVideoClient()
@@ -53,15 +53,21 @@ def pavo_prepare_video(prompt: str, seconds: int = 5, aspect_ratio: str = "9:16"
 
 
 @mcp.tool(annotations=read)
-def pavo_quote_video(seconds: int = 5, aspect_ratio: str = "9:16") -> dict:
-    """Quote one Flash video, 720p, no audio. Never generate or treat the quote as permanent pricing."""
-    return safe_call(client.quote_video, seconds, aspect_ratio)
+def pavo_quote_video(seconds: int = 5, aspect_ratio: str = "9:16", first_frame: str = "", last_frame: str = "",
+                     references: list[str] | None = None) -> dict:
+    """Quote one Flash video, 720p, no audio, with its input images counted. Never generate or treat the quote
+    as permanent pricing. Images are repository paths (PNG/JPEG): first_frame (+ optional last_frame), or up to
+    5 references (same characters every time); frames and references are exclusive."""
+    return safe_call(client.quote_video, seconds, aspect_ratio, first_frame, last_frame, references)
 
 
 @mcp.tool(annotations=write)
-def pavo_generate_video(prompt: str, seconds: int = 5, aspect_ratio: str = "9:16") -> dict:
-    """Start one private Flash video only at a fresh exact zero-credit quote. Never retry automatically."""
-    return safe_call(client.generate_video, prompt, seconds, aspect_ratio)
+def pavo_generate_video(prompt: str, seconds: int = 5, aspect_ratio: str = "9:16", first_frame: str = "",
+                        last_frame: str = "", references: list[str] | None = None) -> dict:
+    """Start one private Flash video only at a fresh exact zero-credit quote (input images counted). Text only,
+    first_frame (+ optional last_frame) or up to 5 references, as repository image paths. Never retry
+    automatically."""
+    return safe_call(client.generate_video, prompt, seconds, aspect_ratio, first_frame, last_frame, references)
 
 
 @mcp.tool(annotations=read)
