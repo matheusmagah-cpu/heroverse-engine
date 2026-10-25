@@ -39,10 +39,12 @@ def problems(shots, chars=None):
     return out
 
 
-def reference_urls(ids, images_dir=HERE / "images"):
+def reference_urls(ids, images_dir=HERE / "images", chars=None):
+    """Only the shots Claude kept (`refs`): one face per character, never a rejected look-alike."""
+    chars = chars if chars is not None else registry()
     urls = []
     for cid in ids:
-        for shot in REF_ORDER:
+        for shot in chars.get(cid, {}).get("refs", REF_ORDER):
             rec = Path(images_dir) / f"ch-{cid}-{shot}.json"
             if rec.exists() and json.loads(rec.read_text()).get("release_asset"):
                 urls.append(RELEASE + json.loads(rec.read_text())["release_asset"])
