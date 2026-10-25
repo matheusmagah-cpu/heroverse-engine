@@ -643,6 +643,36 @@
     "file": "migration/production/footage/test_footage.py",
     "contains": "def test_the_library_workflow_installs_what_vetting_imports"
    }
+  },
+  {
+   "id": "E82",
+   "date": "2026-10-25",
+   "error": "The unofficial Pavo stream returned error 009999 when the request omitted the platform and client-time metadata used by the official web client. The request created no generation turn and did not change the credit balance.",
+   "fix": "The Pavo video adapter sends the official platform, timezone, client time and language headers, keeps its own HeroVerse User-Agent, and only submits after an exact zero-credit quote. One live 5-second Flash generation then succeeded.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_video.py",
+    "contains": "def test_exact_free_quote_and_submission_bind_the_same_model_and_output"
+   }
+  },
+  {
+   "id": "E83",
+   "date": "2026-10-25",
+   "error": "Pre-merge tests found that float conversion could round an extremely small positive Pavo price to zero and allow generation. No affected code was deployed.",
+   "fix": "Parse JSON decimals without float loss and compare exact Decimal values; reject negative, nonfinite, malformed and unrepresentable prices before creating a conversation.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_video.py",
+    "contains": "def test_positive_prices_cannot_round_or_underflow_to_free"
+   }
+  },
+  {
+   "id": "E84",
+   "date": "2026-10-25",
+   "error": "Pre-merge tests found that a late GenerationStart could be accepted and a trickling SSE line or HTTP chunk header could outlive the stream budget. read1 alone did not interrupt HTTPResponse's internal readline. No affected code was deployed.",
+   "fix": "Read bounded chunks, check the deadline before interpreting events, and cancel the stream-body socket after 30 seconds. A local socket-pair regression reproduces incomplete chunk metadata. Return unknown with the original conversation ID instead of resubmitting.",
+   "antidote": {
+    "file": "migration/integrations/pavo/test_video.py",
+    "contains": "def test_stream_deadline_interrupts_chunk_metadata_and_preserves_job"
+   }
   }
  ]
 }

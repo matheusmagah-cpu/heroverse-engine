@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "heroverse-pavo": {
+      "command": "uv",
+      "args": ["run", "--script", "migration/integrations/pavo/server.py"],
+      "env": {"PAVO_TOKEN": "${PAVO_TOKEN:-}"}
+    }
+  }
+}
