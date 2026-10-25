@@ -25,7 +25,6 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       ENGINE_REPO: ${{ github.repository }}
-      TAG: v0.0.0-cloud-assets-20261013
       PILOT: pilot-011          # a footage-only (v4) pilot: the current production shape
       SMOKE: '1'
       RUN_LABEL: smoke ${{ github.run_id }}

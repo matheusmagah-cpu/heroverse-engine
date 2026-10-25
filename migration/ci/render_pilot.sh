@@ -7,6 +7,7 @@
 # env: PILOT, TAG, ENGINE_REPO (owner/repo of the private engine), GH_TOKEN,
 #      RUN_LABEL, T (scratch dir); no Shorts model calls in this renderer
 set -euo pipefail
+ASSETS="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/assets.sh"  # E85: release assets across several releases
 case "$PILOT" in pilot-[0-9][0-9][0-9]) ;; *) echo "INVALID_PILOT"; exit 1;; esac
 T="${T:-${RUNNER_TEMP:-/tmp}}"; ROOT="$(pwd)"; QA_FAILED=""
 # SMOKE=1 (PR check, E68): a ~1 minute cut of the pilot through the whole path; nothing is uploaded or committed
@@ -22,7 +23,7 @@ end() { echo "::endgroup::"; }
 # that is uploaded to the private release; the public log shows only stage names, times and pass/fail.
 LOG="$T/render-private.log"; : > "$LOG"
 q() { if [ "${PUBLIC_LOGS:-0}" = 1 ]; then "$@" >>"$LOG" 2>&1 || { for a in "$@"; do case "$a" in *.py) echo "FAILED: $(basename "$a")";; esac; done; return 1; }; else "$@"; fi; }
-upload_log() { [ "${PUBLIC_LOGS:-0}" = 1 ] && gh release upload "$TAG" "$LOG#$PILOT-render-log-${RUN_LABEL// /-}.txt" --repo "$ENGINE_REPO" --clobber >/dev/null 2>&1 || true; }
+upload_log() { [ "${PUBLIC_LOGS:-0}" = 1 ] && bash "$ASSETS" upload "$LOG#$PILOT-render-log-${RUN_LABEL// /-}.txt" --repo "$ENGINE_REPO" --clobber >/dev/null 2>&1 || true; }
 trap upload_log EXIT
 
 stage "Free runner disk (unused preinstalled SDKs) and record space"
@@ -50,12 +51,12 @@ end
 
 stage "Owned music and generated images from the private release"
 mkdir -p "$T/in/img"
-gh release download "$TAG" --repo "$ENGINE_REPO" --pattern original-rest-music.lossless.flac -O "$T/in/original-rest-music.lossless.flac" --clobber
+bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern original-rest-music.lossless.flac -O "$T/in/original-rest-music.lossless.flac" --clobber
 echo "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c  $T/in/original-rest-music.lossless.flac" | sha256sum -c -
 for meta in migration/production/$PILOT/images/*.json; do
   id=$(basename "$meta" .json)
   read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
-  gh release download "$TAG" --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/img/$id.png" --clobber
+  bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/img/$id.png" --clobber
   echo "$sha  $T/in/img/$id.png" | sha256sum -c -
   cp "$meta" "$T/in/img/$id.json"
 done
@@ -64,7 +65,7 @@ mkdir -p "$T/in/footage"
 for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1])).get('footage') or []))" "$SCRIPT"); do
   meta="migration/production/footage/library/$id.json"
   read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
-  gh release download "$TAG" --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/footage/$id.mp4" --clobber
+  bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/footage/$id.mp4" --clobber
   echo "$sha  $T/in/footage/$id.mp4" | sha256sum -c -
   cp "$meta" "$T/in/footage/$id.json"
 done
@@ -89,16 +90,16 @@ HANDOFF=1
 ffmpeg -v error -y -i "$T/work/voice.wav" -c:a flac "$T/voice.flac"
 vsha=$(sha256sum "$T/voice.flac" | cut -d' ' -f1); fsha=$(sha256sum "$T/in/figure.png" | cut -d' ' -f1)
 cp "$T/voice.flac" "$T/$PILOT-voice-sha256-$vsha.flac"; cp "$T/in/figure.png" "$T/$PILOT-figure-sha256-$fsha.png"
-[ "${SMOKE:-0}" = 1 ] || [ "${PREVIEW:-0}" = 1 ] || gh release upload "$TAG" "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
+[ "${SMOKE:-0}" = 1 ] || [ "${PREVIEW:-0}" = 1 ] || bash "$ASSETS" upload "$T/$PILOT-voice-sha256-$vsha.flac" "$T/$PILOT-figure-sha256-$fsha.png" --repo "$ENGINE_REPO" --clobber
 printf '{"voice_asset": "%s", "voice_sha256": "%s", "figure_asset": "%s", "figure_sha256": "%s", "render": "%s"}\n' \
   "$PILOT-voice-sha256-$vsha.flac" "$vsha" "$PILOT-figure-sha256-$fsha.png" "$fsha" "${RUN_LABEL:-run}" > "$T/shorts-inputs.json"
 end
 
 stage "QA against frozen criteria"
 ( cd "$T/models"
-  gh release download "$TAG" --repo "$ENGINE_REPO" --pattern 'yamnet-classification-tflite-v1-sha256-*.tflite' -O yamnet.tflite --clobber
+  bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern 'yamnet-classification-tflite-v1-sha256-*.tflite' -O yamnet.tflite --clobber
   echo "10c95ea3eb9a7bb4cb8bddf6feb023250381008177ac162ce169694d05c317de  yamnet.tflite" | sha256sum -c -
-  gh release download "$TAG" --repo "$ENGINE_REPO" --pattern HeroVerse_ASR_base_en_preservado.zip --clobber
+  bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern HeroVerse_ASR_base_en_preservado.zip --clobber
   echo "78634f845a29c523d117a29a1a14b293220787f5ede2c6c0f33a9b06c2f805cb  HeroVerse_ASR_base_en_preservado.zip" | sha256sum -c -
   "$T/qa/bin/python" -I -c "import sys; from pathlib import Path; sys.path.insert(0, '$ROOT/migration'); import second_opening_asr as a; a.extract_model(Path('HeroVerse_ASR_base_en_preservado.zip'), Path('whisper'))" )
 q "$T/qa/bin/python" -I -B migration/production/qa_pilot.py "$T/work/pilot.mp4" "$T/work/manifest.json" \
@@ -162,7 +163,7 @@ fi
 stage "Preserve render privately and record evidence"
 sha=$(sha256sum "$T/work/pilot.mp4" | cut -d' ' -f1)
 REPO="$ENGINE_REPO" bash migration/ci/release_video.sh put "$T/work/pilot.mp4" "$PILOT-sha256-$sha.mp4"  # parts when > 1.9 GiB (E60)
-if [ -f "$T/work/package/thumbnail.jpg" ]; then cp "$T/work/package/thumbnail.jpg" "$T/$PILOT-thumbnail.jpg"; gh release upload "$TAG" "$T/$PILOT-thumbnail.jpg" --repo "$ENGINE_REPO" --clobber; fi
+if [ -f "$T/work/package/thumbnail.jpg" ]; then cp "$T/work/package/thumbnail.jpg" "$T/$PILOT-thumbnail.jpg"; bash "$ASSETS" upload "$T/$PILOT-thumbnail.jpg" --repo "$ENGINE_REPO" --clobber; fi
 mkdir -p "migration/production/$PILOT/out" "migration/production/$PILOT/shorts"
 cp "$T/work/manifest.json" "$T/work/timeline.json" "$T/work/captions.ass" "migration/production/$PILOT/out/"
 cp "$T/work/qa.json" "migration/production/$PILOT/out/qa.json" || true
@@ -179,7 +180,7 @@ for s in "$T"/work/shorts/short-*.mp4; do
   [ -f "$s" ] || continue
   ssha=$(sha256sum "$s" | cut -d' ' -f1); b=$(basename "$s" .mp4)
   cp "$s" "$T/$PILOT-$b-sha256-$ssha.mp4"
-  gh release upload "$TAG" "$T/$PILOT-$b-sha256-$ssha.mp4" --repo "$ENGINE_REPO" --clobber
+  bash "$ASSETS" upload "$T/$PILOT-$b-sha256-$ssha.mp4" --repo "$ENGINE_REPO" --clobber
   ffmpeg -v error -y -ss 3 -i "$s" -frames:v 1 -vf scale=360:-1 "migration/production/$PILOT/shorts/$b-frame.jpg" || true
 done
 git config user.name "github-actions[bot]"

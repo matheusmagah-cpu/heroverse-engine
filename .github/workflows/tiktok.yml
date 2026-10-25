@@ -23,7 +23,6 @@ jobs:
     timeout-minutes: 20
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       MODE: ${{ inputs.mode || 'post' }}
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
     steps:
@@ -40,7 +39,9 @@ jobs:
           python3 -I -B migration/publish/tiktok_publish.py pending migration/publish/ledger.json \
             migration/publish/tiktok_ledger.json migration/production/bible/episodes > "$RUNNER_TEMP/pending.txt"
           read -r key asset < "$RUNNER_TEMP/pending.txt" || { echo "NOTHING_TO_CHECK"; exit 0; }
-          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -D "$RUNNER_TEMP"
+          bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" download --repo "$GITHUB_REPOSITORY" --pattern "$asset" -D "$RUNNER_TEMP"
+          tag=$(bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" which "$asset")   # E85: the release Buffer fetches from
+          echo "ASSET_RELEASE_TAG=$tag" >> "$GITHUB_ENV"
           sha="${asset##*-sha256-}"; sha="${sha%.mp4}"
           echo "$sha  $RUNNER_TEMP/$asset" | sha256sum -c -
       - name: Send to TikTok through Buffer and record

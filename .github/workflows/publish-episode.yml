@@ -23,7 +23,6 @@ jobs:
     timeout-minutes: 20
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       EPISODE: ${{ inputs.episode }}
       SOURCE_URL: ${{ inputs.source_url }}
       PUBLISH_AT: ${{ inputs.publish_at }}
@@ -38,14 +37,14 @@ jobs:
           ep="migration/production/bible/episodes/$EPISODE.json"
           sha=$(python3 -I -c "import json,sys;print(json.load(open(sys.argv[1]))['output_sha256'])" "$ep")
           asset="bible-$EPISODE-sha256-$sha.mp4"
-          if gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/episode.mp4" 2>/dev/null; then
+          if bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" download --repo "$GITHUB_REPOSITORY" --pattern "$asset" -O "$RUNNER_TEMP/episode.mp4" 2>/dev/null; then
             echo "FROM_RELEASE $asset"
           else
             curl -sfL --retry 3 -m 600 -o "$RUNNER_TEMP/episode.mp4" "$SOURCE_URL"
           fi
           echo "$sha  $RUNNER_TEMP/episode.mp4" | sha256sum -c -
           cp "$RUNNER_TEMP/episode.mp4" "$RUNNER_TEMP/$asset"
-          gh release upload "$TAG" "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
+          bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" upload "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
       - name: Publish
         env:
           HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}

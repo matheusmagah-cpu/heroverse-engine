@@ -22,7 +22,6 @@ jobs:
     timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       PILOT: ${{ inputs.pilot }}
       ENGINE: ${{ inputs.engine }}
       ONLY: ${{ inputs.only }}
@@ -62,8 +61,8 @@ jobs:
           for png in *.png; do
             id="${png%.png}"; sha=$(sha256sum "$png" | cut -d' ' -f1)
             asset="$PILOT-img-$id-sha256-$sha.png"; cp "$png" "$RUNNER_TEMP/sheet/$png"; cp "$png" "$asset"
-            gh release upload "$TAG" "$asset" --repo "$GITHUB_REPOSITORY" --clobber
-            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json"
+            bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" upload "$asset" --repo "$GITHUB_REPOSITORY" --clobber
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));m['release_asset']=sys.argv[2];m['sha256']=sys.argv[3];m['release_tag']=sys.argv[5];open(sys.argv[4],'w').write(json.dumps(m,indent=1)+'\n')" "$id.json" "$asset" "$sha" "$GITHUB_WORKSPACE/$dest/$id.json" "$(bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" newest)"
           done
           n=$(ls "$RUNNER_TEMP"/sheet/*.png | wc -l)
           ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/sheet/*.png" -vf "scale=448:256:force_original_aspect_ratio=decrease,pad=448:256:(ow-iw)/2:(oh-ih)/2,tile=4x$(( (n + 3) / 4 ))" -frames:v 1 -q:v 4 "$GITHUB_WORKSPACE/$dest/review-sheet-cf.jpg"

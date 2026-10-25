@@ -19,6 +19,7 @@ from datetime import datetime, timedelta, timezone
 import json
 import os
 from pathlib import Path
+import re
 import sys
 import urllib.request
 
@@ -27,6 +28,8 @@ PER_RUN = 1
 DONE = {"SENT"}
 TAGS = "#bible #biblestory #kjv #faith #aigenerated"
 RELEASE = "https://github.com/matheusmagah-cpu/heroverse-engine/releases/download/v0.0.0-cloud-assets-20261013/"
+# E85: assets live in several releases; tiktok.yml sets ASSET_RELEASE_TAG to the one holding this episode's file
+RELEASE_TAG = re.compile(r"v0\.0\.0-cloud-assets-[0-9]{8}")
 
 
 def now_utc():
@@ -83,7 +86,12 @@ def asset_name(ep):
 
 
 def video_url(ep):
-    return RELEASE + asset_name(ep)
+    tag = os.environ.get("ASSET_RELEASE_TAG", "")
+    if not tag:
+        return RELEASE + asset_name(ep)
+    if not RELEASE_TAG.fullmatch(tag):
+        raise SystemExit("ASSET_RELEASE_TAG_INVALID")
+    return RELEASE.rsplit("/", 2)[0] + f"/{tag}/" + asset_name(ep)
 
 
 def http(method, url, token=None, body=None, data=None, headers=None, timeout=120):

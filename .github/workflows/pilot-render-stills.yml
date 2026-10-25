@@ -18,7 +18,6 @@ jobs:
     timeout-minutes: 200
     env:
       GH_TOKEN: ${{ github.token }}
-      TAG: v0.0.0-cloud-assets-20261013
       PILOT: ${{ inputs.pilot }}
       OMP_NUM_THREADS: '2'
     steps:
