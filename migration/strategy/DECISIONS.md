@@ -320,3 +320,11 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   captions are not clickable); the bio link points to the channel or the arc's long; the Short's spoken close already
   sends to the full story (short rules from part 6).
 
+## Agnes Video (Pavo) on trial (2026-10-25)
+- **Owner.** "This video AI is very good; integrate it." No MCP or connector exists; Agnes AI has an API (free Flash
+  tier: 720p, 4-12 s, daily credits). `AGNES_API_KEY` saved by the owner.
+- **Status: test only.** Its terms page shows template placeholders and the consumer app says watermark removal may need
+  a paid plan, so commercial use and a clean free output are not confirmed. `agnes-clip.yml` makes one clip as a run
+  artifact for review; nothing goes into a Short until the terms are read and a clip is seen clean. If it passes, it
+  replaces vidIQ's 60-credit hook clip in the Shorts (720p meets clip_check's 720 floor); the long keeps QA v4's 1440p.
+
