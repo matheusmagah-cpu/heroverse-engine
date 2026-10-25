@@ -10,6 +10,7 @@ by the skill's `scripts/sweep_status.py`; the other columns are written by hand.
 | `workflows-secrets` | `.github/workflows/*.yml`: 18 of 27 workflows read secrets; dispatch inputs and the runner PAT. Not covered: the runner repository itself. | - | - |
 | `publish-gate` | `migration/publish/` (`prepublish_gate.py`, `publication_binding.py`, `publish_*.py`): the owner's floor, money-equivalent. | - | - |
 | `fresh-code` | Code shipped in the last 3 days; highest churn. | - | - |
+| `pavo-mcp` | Private stdio Pavo client, video adapter, server, workflow and registration; excludes provider internals and other publishers. | 2026-10-25 | 0/5 |
 
 ## Proposed, not yet run
 
