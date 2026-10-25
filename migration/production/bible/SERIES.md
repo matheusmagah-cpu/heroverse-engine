@@ -44,8 +44,8 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
   about 100 each run over that, so each Short is held to about 75 (no wasted previews; music theme reused), and the
   long costs no vidIQ credits.
 - Voice: the Shorts use ElevenLabs "George" through vidIQ (about 14 credits a minute: about 220 for a 16-minute long,
-  which the budget cannot carry every other day). The long uses the free local Kokoro voice closest to it
-  (`bm_george`, British male), checked side by side against a Short before the first long.
+  which the budget cannot carry every other day). The long uses the engine's free Kokoro voice `am_michael`, the
+  voice the frozen gate pins (`qa_pilot.voice_model_pinned`); a different Kokoro voice would mean changing a gate.
 - Long: the engine's free render path (GitHub Actions, Kokoro voice, licensed footage plus free FLUX stills from
   `cf-images.yml`, Scripture cards, captions), with its own script spec and frozen QA for the story format
   (`production/bible/long/`): technical floors equal to v4 (loudness, true peak, speech, WER, black and silence

@@ -249,6 +249,99 @@ class Check(unittest.TestCase):
         self.assertTrue(any(p.startswith("SHORTS_SLOT_TAKEN") for p in self.run_check(same)))
 
 
+def story_script(**over):
+    segs = [{"id": "hook", "text": "Before you judge Eve, hear what the serpent really said in the garden.", "pause_after": 1.0},
+            {"id": "peak", "text": "So he drove out the man.", "reference": "Genesis 3:24 (KJV)", "pause_after": 1.0},
+            {"id": "roadmap", "text": "Today you will hear creation, the garden, the serpent and the gate.", "pause_after": 1.0}]
+    for k in range(1, 4):
+        segs += [{"id": f"rehook-{k}", "text": "Keep listening, the next part changes everything.", "pause_after": 1.0},
+                 {"id": f"chapter-{k}", "text": "word " * 380, "pause_after": 1.0, "stills": [f"st-{k}"]}]
+    segs += [{"id": "reflection", "text": "What does this mean for you today?", "pause_after": 1.0},
+             {"id": "prayer-close", "text": "Lord, thank you. Amen.", "pause_after": 1.0},
+             {"id": "cta", "text": "The next story is Cain and Abel. Amen.", "pause_after": 1.0}]
+    s = {"archetype": sc.STORY, "segments": segs, "backgrounds": ["st-1", "st-2", "st-3"], "footage": ["clip-a"],
+         "working_title": "Creation, Eden and the Fall: How It All Began | Genesis 1-3 Bible Story (KJV)"}
+    s.update(over)
+    return s
+
+
+def story_check(s):
+    starts, t = {}, 0.0
+    for x in s["segments"]:
+        starts.setdefault(x["id"], t)
+        t += len(sc.words(x["text"])) / sc.WPM * 60 + x["pause_after"]
+    return sc.story_problems(s, starts, t / 60)
+
+
+class StoryRules(unittest.TestCase):
+    """SERIES.md (owner 2026-10-25): Bible-story longs keep frozen QA v4 and the gate; only the prayer-specific script
+    rules are replaced. Each replacement fails when broken."""
+    def segs(self, fn):
+        return [fn(dict(x)) for x in story_script()["segments"]]
+
+    def test_a_well_formed_story_passes(self):
+        self.assertEqual(story_check(story_script()), [])
+
+    def test_prayer_title_fails_the_story_formula(self):
+        out = story_check(story_script(working_title="Morning Prayer for Peace | Start Your Day"))
+        self.assertIn("STORY_TITLE_FORMULA (<Story>: <angle> | Genesis N-M Bible Story (KJV))", out)
+
+    def test_missing_chapters_fail(self):
+        segs = [x for x in story_script()["segments"] if x["id"] not in ("chapter-2", "chapter-3")]
+        self.assertTrue(any(p.startswith("STORY_CHAPTERS") for p in story_check(story_script(segments=segs))))
+
+    def test_cta_without_the_next_story_fails(self):
+        segs = self.segs(lambda x: dict(x, text="Subscribe for more.") if x["id"] == "cta" else x)
+        self.assertIn("STORY_NEXT_STORY_MISSING (the CTA names the next story)", story_check(story_script(segments=segs)))
+
+    def test_close_out_of_order_fails(self):
+        segs = story_script()["segments"]
+        segs[-1], segs[-2] = segs[-2], segs[-1]
+        self.assertTrue(any(p.startswith("STORY_CLOSE_ORDER") for p in story_check(story_script(segments=segs))))
+
+    def test_peak_verse_late_fails(self):
+        segs = self.segs(lambda x: {k: v for k, v in x.items() if k != "reference"} if x["id"] == "peak" else x)
+        self.assertTrue(any(p.startswith("STORY_PEAK_VERSE_LATE") for p in story_check(story_script(segments=segs))))
+
+    def test_opening_still_fails(self):
+        segs = self.segs(lambda x: dict(x, stills=["st-1"]) if x["id"] == "hook" else x)
+        self.assertIn("STORY_OPENING_STILL (QA v4: the hook opens on real footage)", story_check(story_script(segments=segs)))
+
+    def test_too_many_stills_for_the_footage_share_fails(self):
+        many = [f"st-{k}" for k in range(60)]
+        segs = self.segs(lambda x: dict(x, stills=many) if x["id"] == "chapter-1" else x)
+        out = story_check(story_script(segments=segs, backgrounds=many))
+        self.assertTrue(any(p.startswith("STORY_STILL_SHARE_EST") for p in out), out)
+
+    def test_repeated_still_fails_before_the_render(self):
+        # review of 36ff9b5: a still shown twice passed the check and aborted the render with REPEAT_GAP_VIOLATION
+        segs = self.segs(lambda x: dict(x, stills=["st-1"]) if x["id"].startswith("chapter-") else x)
+        self.assertIn("STORY_STILL_REPEATED ['st-1']", story_check(story_script(segments=segs)))
+
+    def test_story_without_footage_fails(self):
+        # review of 36ff9b5: without footage the stills-only path ignores 'stills' and QA v4 fails after the render
+        out = story_check(story_script(footage=[]))
+        self.assertTrue(any(p.startswith("STORY_NEEDS_FOOTAGE") for p in out), out)
+
+    def test_check_routes_a_story_pilot_to_the_story_rules(self):
+        # review of 36ff9b5: check() itself must skip the prayer-only rules and run the story ones
+        def to_story(s, d):
+            s.update(story_script(footage=[]))
+        with tempfile.TemporaryDirectory() as t:
+            problems = sc.check(make(t, to_story))[0]
+        prayer_only = ("FIRST_PRAYER_LATE", "PAYOFF_OR_CTA_MISSING", "CTA_BEFORE_PAYOFF", "HOOK_NO_PRAYER_PROMISE",
+                       "PRAYER_REQUEST_INVITE_MISSING", "TITLE_TAIL_NOT_A_SEARCH_PHRASE")
+        self.assertFalse([p for p in problems if p.startswith(prayer_only)], problems)
+        self.assertTrue(any(p.startswith("STORY_NEEDS_FOOTAGE") for p in problems), problems)
+        with tempfile.TemporaryDirectory() as t:   # and a prayer pilot still gets them
+            prayer = sc.check(make(t, lambda s, d: s["segments"].__setitem__(slice(None), [x for x in s["segments"] if not x["id"].startswith("prayer")])))[0]
+        self.assertTrue(any(p.startswith("FIRST_PRAYER_LATE") for p in prayer), prayer)
+
+    def test_prayer_rules_do_not_apply_to_a_story(self):
+        out = story_check(story_script())
+        self.assertFalse([p for p in out if "PRAYER" in p], out)
+
+
 class KjvQuotation(unittest.TestCase):
     """Narrated Scripture is the KJV word for word; our own lead-ins and reflection are left alone."""
     PASS = [  # exact, partial, lead-ins, our own words after, ellipsis, chapters, ranges, lists
