@@ -223,6 +223,7 @@
     "migration/ops/test_engine_fallback.py",
     "migration/ops/test_errors_register.py",
     "migration/ops/test_heartbeat.py",
+    "migration/ops/test_hookify_rules.py",
     "migration/ops/test_minutes.py",
     "migration/ops/test_project_map.py",
     "migration/ops/test_release_video.py",
@@ -418,6 +419,7 @@
   }
  },
  "shell": {
+  "migration/ops/link_session_guards.sh": [],
   "migration/ci/release_video.sh": [],
   "migration/ci/render_pilot.sh": [
    "migration/ci/release_video.sh",
@@ -1270,6 +1272,17 @@
    "test": null,
    "is_test": true
   },
+  "migration/ops/test_hookify_rules.py": {
+   "purpose": "The hookify rules in .claude/ block what the owner forbids and nothing legitimate (owner, 2026-10-24):",
+   "dir": "migration/ops",
+   "local_imports": [],
+   "called_by_workflows": [
+    "pr-checks.yml"
+   ],
+   "imported_by": [],
+   "test": null,
+   "is_test": true
+  },
   "migration/ops/test_minutes.py": {
    "purpose": "Offline checks of the Actions minutes report.",
    "dir": "migration/ops",
@@ -1344,6 +1357,18 @@
     "migration/production/bible/test_clip_check.py"
    ],
    "test": "migration/production/bible/test_clip_check.py",
+   "is_test": false
+  },
+  "migration/production/bible/kjv_check.py": {
+   "purpose": "Every quotation narrated as Scripture must be the KJV word for word (owner, 2026-10-24). Nothing checked it: a",
+   "dir": "migration/production/bible",
+   "local_imports": [],
+   "called_by_workflows": [],
+   "imported_by": [
+    "migration/production/script_check.py",
+    "migration/production/test_script_check.py"
+   ],
+   "test": null,
    "is_test": false
   },
   "migration/production/bible/test_clip_check.py": {
@@ -1625,6 +1650,7 @@
    "purpose": "Deterministic acceptance of a pilot script before it is rendered.",
    "dir": "migration/production",
    "local_imports": [
+    "migration/production/bible/kjv_check.py",
     "migration/publish/three_stage.py"
    ],
    "called_by_workflows": [
@@ -1908,6 +1934,7 @@
    "purpose": "Offline checks of the pilot acceptance used on the executor's work: a real pilot passes; copies, fear-bait",
    "dir": "migration/production",
    "local_imports": [
+    "migration/production/bible/kjv_check.py",
     "migration/production/script_check.py"
    ],
    "called_by_workflows": [

@@ -2,7 +2,7 @@
 """Deterministic acceptance of a pilot script before it is rendered.
 It replaces reading 4,000 words with checks that never change after results: files and frozen QA criteria, required
 fields, estimated length per format, estimated speech presence (frozen QA floor 0.85, target >= 0.86), Scripture per
-10 min (>= 4, KJV marked), policy wording, originality against every other pilot (no shared 12-word run outside
+10 min (>= 4, KJV marked and quoted word for word), policy wording, originality against every other pilot (no shared 12-word run outside
 Scripture), schedule slot, and images. Prints PASS or FAIL with every problem; exit 0 only on PASS.
 usage: script_check.py PILOT_DIR [PRODUCTION_DIR]
 """
@@ -15,6 +15,8 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "publish"))
 import three_stage  # noqa: E402; approval owns the shared image-overlap limit
+sys.path.insert(0, str(Path(__file__).resolve().parent / "bible"))
+import kjv_check  # noqa: E402; quotations must be the KJV word for word
 
 FROZEN_QA = "49fedd2e5ebf525e38dab1e5135124d31f8ce822f71f3a02c61c702d2da8790d"
 WPM = 140                    # Kokoro narration measured on pilots 002-004 (QA ASR 132.7-141)
@@ -193,6 +195,7 @@ def check(pilot_dir, production=None):
             problems.append(f"PAUSE_OUT_OF_RANGE {x.get('id')} {x.get('pause_after')}")
         if x.get("reference") and not x["reference"].endswith("(KJV)"):
             problems.append(f"REFERENCE_NOT_KJV {x.get('id')}")
+    problems += kjv_check.script_problems(s)
     n_words = sum(len(words(x.get("text", ""))) for x in segs)
     pauses = sum(float(x.get("pause_after", 0)) for x in segs)
     spoken = n_words / WPM * 60

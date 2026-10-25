@@ -48,7 +48,7 @@ They load from the owner's claude.ai account, not from `.claude/settings.json`; 
 | ffmpeg-llm | `ffmpeg-expert` agent when a render, `clip_check.py`, loudness or black-frame result fails or an ffmpeg command must change (`ci/render_pilot.sh`, `still_render.py`, `shorts_produce.py`). Commands still pass the frozen QA. | none |
 | headroom | `/peek` and the skill before reading big files whole: `ERRORS.json`, `evidence/map/project-map.md`, ledgers, `out/qa.json`, workflow logs. | none |
 | image-generation | Prompt craft for FLUX stills (`cf-images.yml`) and the first-frame still before paid AI video. `PROMPT_GUIDE.md` wins where they differ. | none |
-| bible-by-midvash | Would check KJV quotations; its server (`mcp.midvash.com`) gets 403 from the cloud proxy, so unused until that host is allowed. | none |
+| bible-by-midvash | Comparing translations and finding verses by keyword; its server (`mcp.midvash.com`) gets 403 from the cloud proxy, so unused until that host is allowed. Exact KJV quotation is checked offline by `migration/production/bible/kjv_check.py` (in `script_check.py`). | none |
 | cartographer, claude-code-setup | Only when the owner asks (heavy codebase audit; one-off automation advice). `migration/ops/project_map.py` is the routine map. | none |
 | marketing | Not used: its connectors (Ahrefs, HubSpot, Similarweb, Klaviyo, Supermetrics...) are paid, and ads are on hold. | none |
 

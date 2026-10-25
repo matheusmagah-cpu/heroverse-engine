@@ -10,6 +10,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import script_check as sc  # noqa: E402
+import kjv_check  # noqa: E402  (script_check put production/bible on the path)
 
 HERE = Path(__file__).resolve().parent
 
@@ -246,6 +247,73 @@ class Check(unittest.TestCase):
             sch["shorts_slots"] = json.loads((HERE / "pilot-003" / "schedule.json").read_text())["shorts_slots"][:1]
             (d / "schedule.json").write_text(json.dumps(sch))
         self.assertTrue(any(p.startswith("SHORTS_SLOT_TAKEN") for p in self.run_check(same)))
+
+
+class KjvQuotation(unittest.TestCase):
+    """Narrated Scripture is the KJV word for word; our own lead-ins and reflection are left alone."""
+    PASS = [  # exact, partial, lead-ins, our own words after, ellipsis, chapters, ranges, lists
+            ('Psalm 23:1 (KJV)', 'The LORD is my shepherd; I shall not want.'),
+            ('Psalm 23:1 (KJV)', 'The LORD is my shepherd; I shall not'),
+            ('Psalm 5:3 (KJV)', 'David prayed like this. My voice shalt thou hear in the morning, O LORD.'),
+            ('Matthew 11:28 (KJV)', 'Jesus said, Come unto me, all ye that labour and are heavy laden, and I will give you rest.'),
+            ('Genesis 1:1-3 (KJV, public domain)', 'In the beginning God created the heaven and the earth. ... And God said, Let there be light: and there was light.'),
+            ('Psalm 23 (KJV)', 'He maketh me to lie down in green pastures.'),
+            ('John 3:16 (KJV)', 'For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.'),
+            ('Genesis 1:1 (KJV)', 'In the beginning God created the heaven and the earth. In the beginning, God was already there.'),
+            ('Psalm 23:1 (KJV)', 'The LORD is my shepherd; I shall not want. The LORD is your shepherd too.'),
+            ('Psalm 119 (KJV)', 'Blessed are the undefiled in the way, who walk in the law of the LORD. And that is a word for all of us today.'),
+            ('Psalm 23:1 (KJV)', '“The LORD is my shepherd; I shall not want.” These words carry hope.'),
+            ('Psalm 23:1–2 (KJV)', 'The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters.'),
+            ('Genesis 2:25, 3:1 (KJV)', 'And they were both naked, the man and his wife, and were not ashamed. Now the serpent was more subtil than any beast of the field which the LORD God had made.'),
+            ('Isaiah 53:5; 1 Peter 2:24 (KJV)', 'But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed. Who his own self bare our sins in his own body on the tree, that we, being dead to sins, should live unto righteousness: by whose stripes ye were healed.'),
+            ('Jude 3 (KJV)', 'Beloved, when I gave all diligence to write unto you of the common salvation, it was needful for me to write unto you, and exhort you that ye should earnestly contend for the faith which was once delivered unto the saints.'),
+            ('Psalm 46:10 (KJV)', 'Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth.'),
+            ('Romans 8:28 (KJV)', 'Paul wrote: And we know that all things work together for good to them that love God, to them who are the called according to his purpose.'),
+            ('1 John 4:8 (KJV)', 'He that loveth not knoweth not God; for God is love.'),
+            ('Psalm 46:1-2 (KJV)', 'God is our refuge and strength, a very present help in trouble. Therefore will not we fear, though the earth be removed, and though the mountains be carried into the midst of the sea.'),
+    ]
+    FAIL = [  # changed, dropped or reordered words, US spelling, paraphrase, unknown references
+            ('Psalm 23:1 (KJV)', 'The Lord is my shepherd, I will not want.'),
+            ('Psalm 23:1 (KJV)', 'The LORD is my shepherd; I will not want.'),
+            ('Psalm 23:1 (KJV)', 'The LORD is my shepherd; I shall never want.'),
+            ('Psalm 23:1 (KJV)', 'The LORD is shepherd; I shall not want.'),
+            ('Psalm 23:1 (KJV)', 'A LORD is my shepherd; I shall not want.'),
+            ('Psalm 23:4 (KJV)', 'Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; your rod and your staff will comfort me.'),
+            ('Psalm 23:4 (KJV)', 'Yes, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.'),
+            ('Matthew 11:28 (KJV)', 'Come here, all ye that labour and are heavy laden, and I will give you rest.'),
+            ('Matthew 11:28 (KJV)', 'Come unto me, all ye that labour and are heavy laden, and I will give you peace.'),
+            ('Matthew 11:28 (KJV)', 'Come unto me, all ye that labor and are heavy laden, and I will give you rest.'),
+            ('Psalm 46:10 (KJV)', 'Be quiet, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth.'),
+            ('Psalm 23:1-2 (KJV)', 'The LORD my shepherd, I lack nothing. He maketh me to lie down in green pastures: he leadeth me beside the still waters.'),
+            ('Genesis 1:1 (KJV)', 'In the beginning God created the earth and the heaven.'),
+            ('Genesis 1:1-3 (KJV)', 'In the beginning God created the heaven and the earth. And God said, Let there be light: and there was light.'),
+            ('Psalm 23:1 (KJV)', 'God cares for you today.'),
+            ('Psalm 151:1 (KJV)', 'The LORD is my shepherd.'),
+            ('Psalm twenty-three (KJV)', 'The LORD is my shepherd.'),
+    ]
+
+    def test_quotations(self):
+        for ref, text in self.PASS:
+            self.assertIsNone(kjv_check.problem(ref, text), (ref, text))
+        for ref, text in self.FAIL:
+            self.assertIsNotNone(kjv_check.problem(ref, text), (ref, text))
+
+    def test_every_pilot_script_quotes_the_kjv(self):
+        for script in sorted(HERE.glob("pilot-*/script.json")):
+            self.assertEqual(kjv_check.script_problems(json.loads(script.read_text())), [], script)
+
+    def test_episode_scripture_items_are_checked(self):
+        ep = {"scripture": [{"reference": "Genesis 4:9 (KJV)", "text": "Am I my brother's keeper?"}]}
+        self.assertEqual(kjv_check.script_problems(ep), [])
+        ep["scripture"][0]["text"] = "Am I my brother's guardian?"
+        self.assertTrue(kjv_check.script_problems(ep)[0].startswith("KJV_TEXT_MISMATCH"))
+
+    def test_a_misquoted_pilot_fails_acceptance(self):
+        def misquote(s, d):
+            seg = next(x for x in s["segments"] if x.get("reference") == "Psalm 91:1-2 (KJV)")
+            self.assertIn("shadow", seg["text"])
+            seg["text"] = seg["text"].replace("shadow", "shade")
+        self.assertTrue(any(p.startswith("KJV_TEXT_MISMATCH") for p in Check.run_check(self, misquote)))
 
 
 if __name__ == "__main__":
