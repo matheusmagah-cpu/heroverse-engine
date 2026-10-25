@@ -1,0 +1,1610 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-013",
+ "rubric_model": "gemini-3.5-flash-lite",
+ "candidates_considered": 20,
+ "shortlist": [
+  {
+   "start": 310.659,
+   "end": 356.864,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "The next words are for you.",
+     "start": 310.659,
+     "end": 312.877
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "Perhaps what troubles you most is that this is not the first time.",
+     "start": 313.777,
+     "end": 318.919
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "You have confessed this same weakness before, and here it is again.",
+     "start": 319.219,
+     "end": 323.784
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "That can make forgiveness feel almost dishonest, as if you were taking advantage of God.",
+     "start": 324.084,
+     "end": 330.719
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "Yet Scripture never puts a limit on returning.",
+     "start": 331.019,
+     "end": 334.816
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "Each honest return is part of how change happens.",
+     "start": 335.116,
+     "end": 339.255
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "God is not tired of hearing from you.",
+     "start": 339.555,
+     "end": 342.435
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "He is patiently forming something new in you.",
+     "start": 342.735,
+     "end": 345.956
+    },
+    {
+     "segment": "scripture-romans-condemnation",
+     "text": "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+     "start": 347.456,
+     "end": 356.864
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "reflection-same-again",
+    "scripture-romans-condemnation"
+   ],
+   "text": "The next words are for you. Perhaps what troubles you most is that this is not the first time. You have confessed this same weakness before, and here it is again. That can make forgiveness feel almost dishonest, as if you were taking advantage of God. Yet Scripture never puts a limit on returning. Each honest return is part of how change happens. God is not tired of hearing from you. He is patiently forming something new in you. There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+   "reference": "Romans 8:1 (KJV)",
+   "measured_score": 0.7479,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.588235294117647,
+    "scripture": 1.0,
+    "promise": 0.24509803921568626,
+    "resolution": 0.4,
+    "length_fit": 0.7518000000000007
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 9.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 8.0,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Starts with an incredibly empathetic and direct hook. Fully addresses the recurring guilt cycle without being manipulative, ending on a strong verse.",
+    "hook_line": "The next words are for you.",
+    "title": "When forgiveness feels too easy"
+   },
+   "final_score": 0.8442,
+   "hook": "The next words are for you.",
+   "title": "When forgiveness feels too easy"
+  },
+  {
+   "start": 915.724,
+   "end": 958.948,
+   "sentences": [
+    {
+     "segment": "sleep-stillness",
+     "text": "Nothing needs to be solved.",
+     "start": 915.724,
+     "end": 917.964
+    },
+    {
+     "segment": "sleep-stillness",
+     "text": "Let your breathing find its own unhurried rhythm, and let your hands lie open, as if they had just released something heavy.",
+     "start": 918.264,
+     "end": 927.629
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Father, I end this day in your mercy.",
+     "start": 930.929,
+     "end": 933.873
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Thank you for hearing my confession and answering it with forgiveness.",
+     "start": 934.173,
+     "end": 939.101
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Thank you for the person I will speak to tomorrow, and for the courage you will give me then.",
+     "start": 939.401,
+     "end": 945.737
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Watch over me through the night.",
+     "start": 946.037,
+     "end": 948.363
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Let me rest as one who is clean, welcomed, and deeply loved.",
+     "start": 948.663,
+     "end": 953.377
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I place my sleep and my waking in your hands.",
+     "start": 953.677,
+     "end": 957.453
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Amen.",
+     "start": 957.753,
+     "end": 958.948
+    }
+   ],
+   "segments": [
+    "sleep-stillness",
+    "sleep-prayer-closing"
+   ],
+   "text": "Nothing needs to be solved. Let your breathing find its own unhurried rhythm, and let your hands lie open, as if they had just released something heavy. Father, I end this day in your mercy. Thank you for hearing my confession and answering it with forgiveness. Thank you for the person I will speak to tomorrow, and for the courage you will give me then. Watch over me through the night. Let me rest as one who is clean, welcomed, and deeply loved. I place my sleep and my waking in your hands. Amen.",
+   "reference": null,
+   "measured_score": 0.6986,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.7446808510638298,
+    "scripture": 0.4,
+    "promise": 0.7978723404255319,
+    "resolution": 1.0,
+    "length_fit": 0.8710400000000027
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.5,
+    "shareability": 8.0,
+    "loop_potential": 9.0,
+    "policy_safe": 10.0,
+    "reasons": "Extremely calming tone from the first second. Ideal bedtime short for anxiety relief.",
+    "hook_line": "Nothing needs to be solved tonight.",
+    "title": "End your day in quiet mercy"
+   },
+   "final_score": 0.8194,
+   "hook": "Nothing needs to be solved tonight.",
+   "title": "End your day in quiet mercy"
+  },
+  {
+   "start": 237.089,
+   "end": 276.271,
+   "sentences": [
+    {
+     "segment": "reflection-hiding",
+     "text": "Confession is not meant to crush you.",
+     "start": 237.089,
+     "end": 240.012
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "It is the moment you can stop guarding the secret, because the One who hears it has already chosen mercy.",
+     "start": 240.312,
+     "end": 247.885
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "Lord, here is the part I have been reluctant to admit, even to myself.",
+     "start": 249.385,
+     "end": 254.633
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "I did it because I wanted to protect my image, to win the argument, or to avoid feeling small.",
+     "start": 254.933,
+     "end": 262.549
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "I do not want to dress it up as something nobler.",
+     "start": 262.849,
+     "end": 266.391
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "I confess it as sin, and I ask you to forgive me.",
+     "start": 266.691,
+     "end": 270.744
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "Thank you that your patience with me is deeper than my embarrassment tonight.",
+     "start": 271.044,
+     "end": 276.271
+    }
+   ],
+   "segments": [
+    "reflection-hiding",
+    "prayer-confession-plain"
+   ],
+   "text": "Confession is not meant to crush you. It is the moment you can stop guarding the secret, because the One who hears it has already chosen mercy. Lord, here is the part I have been reluctant to admit, even to myself. I did it because I wanted to protect my image, to win the argument, or to avoid feeling small. I do not want to dress it up as something nobler. I confess it as sin, and I ask you to forgive me. Thank you that your patience with me is deeper than my embarrassment tonight.",
+   "reference": null,
+   "measured_score": 0.723,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5208333333333334,
+    "scripture": 0.4,
+    "promise": 0.78125,
+    "resolution": 0.4,
+    "length_fit": 0.9672800000000007
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Reframes confession away from shame very effectively. Great pacing and relatable honesty.",
+    "hook_line": "Confession is not meant to crush you.",
+    "title": "A gentle prayer for honest confession"
+   },
+   "final_score": 0.8042,
+   "hook": "Confession is not meant to crush you.",
+   "title": "A gentle prayer for honest confession"
+  },
+  {
+   "start": 339.555,
+   "end": 385.997,
+   "sentences": [
+    {
+     "segment": "reflection-same-again",
+     "text": "God is not tired of hearing from you.",
+     "start": 339.555,
+     "end": 342.435
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "He is patiently forming something new in you.",
+     "start": 342.735,
+     "end": 345.956
+    },
+    {
+     "segment": "scripture-romans-condemnation",
+     "text": "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+     "start": 347.456,
+     "end": 356.864
+    },
+    {
+     "segment": "prayer-heart-accuses",
+     "text": "Lord, my heart is good at accusing me.",
+     "start": 358.664,
+     "end": 361.757
+    },
+    {
+     "segment": "prayer-heart-accuses",
+     "text": "It brings up old mistakes alongside today's, and it speaks as if they define me.",
+     "start": 362.057,
+     "end": 368.329
+    },
+    {
+     "segment": "prayer-heart-accuses",
+     "text": "When those thoughts come back in the dark, remind me that you know me more completely than my worst memory does.",
+     "start": 368.629,
+     "end": 376.395
+    },
+    {
+     "segment": "prayer-heart-accuses",
+     "text": "Quiet the voice that keeps the record open.",
+     "start": 376.695,
+     "end": 379.873
+    },
+    {
+     "segment": "prayer-heart-accuses",
+     "text": "I place the whole list in your hands, the recent pages and the old ones too.",
+     "start": 380.173,
+     "end": 385.997
+    }
+   ],
+   "segments": [
+    "reflection-same-again",
+    "scripture-romans-condemnation",
+    "prayer-heart-accuses"
+   ],
+   "text": "God is not tired of hearing from you. He is patiently forming something new in you. There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit. Lord, my heart is good at accusing me. It brings up old mistakes alongside today's, and it speaks as if they define me. When those thoughts come back in the dark, remind me that you know me more completely than my worst memory does. Quiet the voice that keeps the record open. I place the whole list in your hands, the recent pages and the old ones too.",
+   "reference": "Romans 8:1 (KJV)",
+   "measured_score": 0.6903,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.3738317757009345,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.7423199999999996
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Directly addresses the self-accusing voice in the dark. Very comforting and grounded.",
+    "hook_line": "God is not tired of you.",
+    "title": "When your heart accuses you in the dark"
+   },
+   "final_score": 0.7911
+  },
+  {
+   "start": 715.899,
+   "end": 756.753,
+   "sentences": [
+    {
+     "segment": "prayer-clean-heart",
+     "text": "I give you permission to keep shaping me.",
+     "start": 715.899,
+     "end": 718.779
+    },
+    {
+     "segment": "scripture-psalm-clean",
+     "text": "Create in me a clean heart, O God;",
+     "start": 720.279,
+     "end": 723.265
+    },
+    {
+     "segment": "scripture-psalm-clean",
+     "text": "and renew a right spirit within me.",
+     "start": 723.565,
+     "end": 726.36
+    },
+    {
+     "segment": "declaration",
+     "text": "I am honest with God about what I did today.",
+     "start": 728.16,
+     "end": 731.744
+    },
+    {
+     "segment": "declaration",
+     "text": "I am forgiven because God delights in mercy, not because I have earned it.",
+     "start": 732.044,
+     "end": 737.633
+    },
+    {
+     "segment": "declaration",
+     "text": "I am free to make repair without being ruled by shame.",
+     "start": 737.933,
+     "end": 742.285
+    },
+    {
+     "segment": "declaration",
+     "text": "I release the person who hurt me into God's hands.",
+     "start": 742.585,
+     "end": 746.297
+    },
+    {
+     "segment": "declaration",
+     "text": "I can learn from this day without being defined by it.",
+     "start": 746.597,
+     "end": 750.971
+    },
+    {
+     "segment": "declaration",
+     "text": "Tomorrow I begin again, as someone welcomed and held by the Father.",
+     "start": 751.271,
+     "end": 756.753
+    }
+   ],
+   "segments": [
+    "prayer-clean-heart",
+    "scripture-psalm-clean",
+    "declaration"
+   ],
+   "text": "I give you permission to keep shaping me. Create in me a clean heart, O God; and renew a right spirit within me. I am honest with God about what I did today. I am forgiven because God delights in mercy, not because I have earned it. I am free to make repair without being ruled by shame. I release the person who hurt me into God's hands. I can learn from this day without being defined by it. Tomorrow I begin again, as someone welcomed and held by the Father.",
+   "reference": "Psalm 51:10 (KJV)",
+   "measured_score": 0.7005,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.10989010989010989,
+    "scripture": 1.0,
+    "promise": 0.27472527472527475,
+    "resolution": 0.4,
+    "length_fit": 0.9658399999999984
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Practical application of grace. Good transition from personal regret to releasing others.",
+    "hook_line": "I give you permission to shape me.",
+    "title": "Create in me a clean heart tonight"
+   },
+   "final_score": 0.7802
+  },
+  {
+   "start": 858.855,
+   "end": 910.317,
+   "sentences": [
+    {
+     "segment": "sleep-introduction",
+     "text": "What remains is to receive.",
+     "start": 858.855,
+     "end": 861.009
+    },
+    {
+     "segment": "sleep-luke-father",
+     "text": "And he arose, and came to his father.",
+     "start": 862.809,
+     "end": 865.711
+    },
+    {
+     "segment": "sleep-luke-father",
+     "text": "But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him.",
+     "start": 866.011,
+     "end": 874.608
+    },
+    {
+     "segment": "sleep-prayer-homecoming",
+     "text": "Father, thank you for running toward me when I turn back.",
+     "start": 876.408,
+     "end": 880.312
+    },
+    {
+     "segment": "sleep-prayer-homecoming",
+     "text": "Thank you for the embrace that comes before my explanation is complete.",
+     "start": 880.612,
+     "end": 885.796
+    },
+    {
+     "segment": "sleep-prayer-homecoming",
+     "text": "As I lie down, let me rest like someone who has come home, not like someone still standing at the gate.",
+     "start": 886.096,
+     "end": 893.627
+    },
+    {
+     "segment": "sleep-prayer-homecoming",
+     "text": "Let the quiet of this room feel like the quiet of your house, where I am known and wanted.",
+     "start": 893.927,
+     "end": 900.092
+    },
+    {
+     "segment": "sleep-isaiah-blot",
+     "text": "I, even I, am he that blotteth out thy transgressions for mine own sake, and will not remember thy sins.",
+     "start": 901.592,
+     "end": 910.317
+    }
+   ],
+   "segments": [
+    "sleep-introduction",
+    "sleep-luke-father",
+    "sleep-prayer-homecoming",
+    "sleep-isaiah-blot"
+   ],
+   "text": "What remains is to receive. And he arose, and came to his father. But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him. Father, thank you for running toward me when I turn back. Thank you for the embrace that comes before my explanation is complete. As I lie down, let me rest like someone who has come home, not like someone still standing at the gate. Let the quiet of this room feel like the quiet of your house, where I am known and wanted. I, even I, am he that blotteth out thy transgressions for mine own sake, and will not remember thy sins.",
+   "reference": "Luke 15:20 (KJV)",
+   "measured_score": 0.6215,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.2459016393442623,
+    "scripture": 1.0,
+    "promise": 0.20491803278688525,
+    "resolution": 1.0,
+    "length_fit": 0.5415200000000004
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Uses the Prodigal Son imagery powerfully for nighttime peace. High emotional resonance.",
+    "hook_line": "What remains is simply to receive.",
+    "title": "Rest like someone who has come home"
+   },
+   "final_score": 0.7786
+  },
+  {
+   "start": 637.997,
+   "end": 688.599,
+   "sentences": [
+    {
+     "segment": "rehook-5",
+     "text": "We are close to rest now.",
+     "start": 637.997,
+     "end": 640.195
+    },
+    {
+     "segment": "rehook-5",
+     "text": "Hear how God feels about showing mercy.",
+     "start": 640.495,
+     "end": 643.695
+    },
+    {
+     "segment": "scripture-micah-delight",
+     "text": "Who is a God like unto thee, that pardoneth iniquity, and passeth by the transgression of the remnant of his heritage?",
+     "start": 644.595,
+     "end": 653.576
+    },
+    {
+     "segment": "scripture-micah-delight",
+     "text": "he retaineth not his anger for ever, because he delighteth in mercy.",
+     "start": 653.876,
+     "end": 659.231
+    },
+    {
+     "segment": "prayer-gratitude-mercy",
+     "text": "Lord, thank you that you enjoy showing mercy.",
+     "start": 661.031,
+     "end": 664.273
+    },
+    {
+     "segment": "prayer-gratitude-mercy",
+     "text": "Thank you for every time you have forgiven me without reminding me of my failures.",
+     "start": 664.573,
+     "end": 670.653
+    },
+    {
+     "segment": "prayer-gratitude-mercy",
+     "text": "Thank you for the people who have shown me grace when I did not deserve it, because their kindness was a reflection of yours.",
+     "start": 670.953,
+     "end": 679.124
+    },
+    {
+     "segment": "prayer-gratitude-mercy",
+     "text": "Let gratitude grow in me tonight until it is larger than my regret.",
+     "start": 679.424,
+     "end": 684.587
+    },
+    {
+     "segment": "prayer-gratitude-mercy",
+     "text": "I want to fall asleep thankful, not ashamed.",
+     "start": 684.887,
+     "end": 688.599
+    }
+   ],
+   "segments": [
+    "rehook-5",
+    "scripture-micah-delight",
+    "prayer-gratitude-mercy"
+   ],
+   "text": "We are close to rest now. Hear how God feels about showing mercy. Who is a God like unto thee, that pardoneth iniquity, and passeth by the transgression of the remnant of his heritage? he retaineth not his anger for ever, because he delighteth in mercy. Lord, thank you that you enjoy showing mercy. Thank you for every time you have forgiven me without reminding me of my failures. Thank you for the people who have shown me grace when I did not deserve it, because their kindness was a reflection of yours. Let gratitude grow in me tonight until it is larger than my regret. I want to fall asleep thankful, not ashamed.",
+   "reference": "Micah 7:18 (KJV)",
+   "measured_score": 0.6565,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.5263157894736842,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.5759199999999964
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Focuses on the delight of God in showing mercy. Uplifting and peaceful conclusion.",
+    "hook_line": "We are close to rest now.",
+    "title": "Hear how God feels about mercy"
+   },
+   "final_score": 0.7576
+  },
+  {
+   "start": 398.6,
+   "end": 452.473,
+   "sentences": [
+    {
+     "segment": "stillness-first",
+     "text": "God is greater than your heart.",
+     "start": 398.6,
+     "end": 401.011
+    },
+    {
+     "segment": "stillness-first",
+     "text": "You do not need to add anything to it or argue with it.",
+     "start": 401.311,
+     "end": 405.513
+    },
+    {
+     "segment": "stillness-first",
+     "text": "Simply breathe at your own pace, and notice that you are still here, still loved, still being spoken to with kindness.",
+     "start": 405.813,
+     "end": 414.709
+    },
+    {
+     "segment": "rehook-3",
+     "text": "In a moment, we pray for the person you may need to make things right with.",
+     "start": 418.009,
+     "end": 422.809
+    },
+    {
+     "segment": "prayer-repair-person",
+     "text": "Father, bring to mind the person who may need to hear from me.",
+     "start": 423.709,
+     "end": 427.869
+    },
+    {
+     "segment": "prayer-repair-person",
+     "text": "If I owe an apology, help me say it without explaining it away.",
+     "start": 428.169,
+     "end": 433.396
+    },
+    {
+     "segment": "prayer-repair-person",
+     "text": "If I need to correct something I said, give me the humility to do it plainly.",
+     "start": 433.696,
+     "end": 439.2
+    },
+    {
+     "segment": "prayer-repair-person",
+     "text": "If the situation is complicated, give me wisdom about timing and words.",
+     "start": 439.5,
+     "end": 445.431
+    },
+    {
+     "segment": "prayer-repair-person",
+     "text": "I do not want to repair things in order to look good.",
+     "start": 445.731,
+     "end": 449.656
+    },
+    {
+     "segment": "prayer-repair-person",
+     "text": "I want to love this person well.",
+     "start": 449.956,
+     "end": 452.473
+    }
+   ],
+   "segments": [
+    "stillness-first",
+    "rehook-3",
+    "prayer-repair-person"
+   ],
+   "text": "God is greater than your heart. You do not need to add anything to it or argue with it. Simply breathe at your own pace, and notice that you are still here, still loved, still being spoken to with kindness. In a moment, we pray for the person you may need to make things right with. Father, bring to mind the person who may need to hear from me. If I owe an apology, help me say it without explaining it away. If I need to correct something I said, give me the humility to do it plainly. If the situation is complicated, give me wisdom about timing and words. I do not want to repair things in order to look good. I want to love this person well.",
+   "reference": null,
+   "measured_score": 0.6114,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.38759689922480617,
+    "scripture": 0.4,
+    "promise": 0.3875968992248062,
+    "resolution": 0.4,
+    "length_fit": 0.44508000000000036
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Grounds the listener in their physical body before moving into relational reconciliation.",
+    "hook_line": "God is greater than your heart.",
+    "title": "A prayer for making things right"
+   },
+   "final_score": 0.7496
+  },
+  {
+   "start": 478.811,
+   "end": 527.472,
+   "sentences": [
+    {
+     "segment": "prayer-humility",
+     "text": "Their response belongs to them.",
+     "start": 478.811,
+     "end": 481.285
+    },
+    {
+     "segment": "prayer-humility",
+     "text": "My part is truthfulness and kindness.",
+     "start": 481.585,
+     "end": 484.593
+    },
+    {
+     "segment": "prayer-household",
+     "text": "Father, I think of the people under my own roof, or the people I speak with most often.",
+     "start": 486.093,
+     "end": 492.557
+    },
+    {
+     "segment": "prayer-household",
+     "text": "Familiarity makes it easy to be careless with them.",
+     "start": 492.857,
+     "end": 496.868
+    },
+    {
+     "segment": "prayer-household",
+     "text": "Forgive me for the impatience I would never show a stranger.",
+     "start": 497.168,
+     "end": 501.456
+    },
+    {
+     "segment": "prayer-household",
+     "text": "Forgive me for the assumptions I make about what they meant.",
+     "start": 501.756,
+     "end": 506.065
+    },
+    {
+     "segment": "prayer-household",
+     "text": "Help me notice their tiredness and their efforts.",
+     "start": 506.365,
+     "end": 509.843
+    },
+    {
+     "segment": "prayer-household",
+     "text": "Let my home be a place where forgiveness is spoken out loud and received without keeping score.",
+     "start": 510.143,
+     "end": 517.119
+    },
+    {
+     "segment": "scripture-ephesians-kind",
+     "text": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake hath forgiven you.",
+     "start": 518.619,
+     "end": 527.472
+    }
+   ],
+   "segments": [
+    "prayer-humility",
+    "prayer-household",
+    "scripture-ephesians-kind"
+   ],
+   "text": "Their response belongs to them. My part is truthfulness and kindness. Father, I think of the people under my own roof, or the people I speak with most often. Familiarity makes it easy to be careless with them. Forgive me for the impatience I would never show a stranger. Forgive me for the assumptions I make about what they meant. Help me notice their tiredness and their efforts. Let my home be a place where forgiveness is spoken out loud and received without keeping score. And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake hath forgiven you.",
+   "reference": "Ephesians 4:32 (KJV)",
+   "measured_score": 0.5235,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.09523809523809525,
+    "scripture": 1.0,
+    "promise": 0.23809523809523808,
+    "resolution": 0.4,
+    "length_fit": 0.6535599999999999
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Focuses on patience with those under our own roof. Highly relatable for families.",
+    "hook_line": "Familiarity makes us careless sometimes.",
+    "title": "A prayer for grace in the home"
+   },
+   "final_score": 0.7344
+  },
+  {
+   "start": 833.609,
+   "end": 874.608,
+   "sentences": [
+    {
+     "segment": "sleep-introduction",
+     "text": "From here the words slow down.",
+     "start": 833.609,
+     "end": 836.084
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "There will be short readings and quiet prayers about the mercy of God.",
+     "start": 836.384,
+     "end": 841.717
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "You do not need to follow each one closely.",
+     "start": 842.017,
+     "end": 845.367
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "If your mind drifts, that is all right.",
+     "start": 845.667,
+     "end": 848.696
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "Let your body be heavy where it rests, and let the sound of the voice be a gentle companion.",
+     "start": 848.996,
+     "end": 855.695
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "The work of this evening is finished.",
+     "start": 855.995,
+     "end": 858.555
+    },
+    {
+     "segment": "sleep-introduction",
+     "text": "What remains is to receive.",
+     "start": 858.855,
+     "end": 861.009
+    },
+    {
+     "segment": "sleep-luke-father",
+     "text": "And he arose, and came to his father.",
+     "start": 862.809,
+     "end": 865.711
+    },
+    {
+     "segment": "sleep-luke-father",
+     "text": "But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him.",
+     "start": 866.011,
+     "end": 874.608
+    }
+   ],
+   "segments": [
+    "sleep-introduction",
+    "sleep-luke-father"
+   ],
+   "text": "From here the words slow down. There will be short readings and quiet prayers about the mercy of God. You do not need to follow each one closely. If your mind drifts, that is all right. Let your body be heavy where it rests, and let the sound of the voice be a gentle companion. The work of this evening is finished. What remains is to receive. And he arose, and came to his father. But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him.",
+   "reference": "Luke 15:20 (KJV)",
+   "measured_score": 0.5853,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.297029702970297,
+    "scripture": 1.0,
+    "promise": 0.24752475247524752,
+    "resolution": 0.4,
+    "length_fit": 0.9600400000000036
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Very gentle introductory tone that sets expectations for rest. Good loop potential.",
+    "hook_line": "From here the words slow down.",
+    "title": "A gentle companion for rest"
+   },
+   "final_score": 0.7291
+  },
+  {
+   "start": 693.769,
+   "end": 726.36,
+   "sentences": [
+    {
+     "segment": "prayer-clean-heart",
+     "text": "I want my heart changed.",
+     "start": 693.769,
+     "end": 695.988
+    },
+    {
+     "segment": "prayer-clean-heart",
+     "text": "Where impatience has become a habit, grow patience in me.",
+     "start": 696.288,
+     "end": 700.533
+    },
+    {
+     "segment": "prayer-clean-heart",
+     "text": "Where I have learned to shade the truth, make me honest.",
+     "start": 700.833,
+     "end": 704.716
+    },
+    {
+     "segment": "prayer-clean-heart",
+     "text": "Where I keep reaching for control, teach me trust.",
+     "start": 705.016,
+     "end": 708.835
+    },
+    {
+     "segment": "prayer-clean-heart",
+     "text": "Do this work slowly and deeply, the way a garden changes through many quiet nights.",
+     "start": 709.135,
+     "end": 715.599
+    },
+    {
+     "segment": "prayer-clean-heart",
+     "text": "I give you permission to keep shaping me.",
+     "start": 715.899,
+     "end": 718.779
+    },
+    {
+     "segment": "scripture-psalm-clean",
+     "text": "Create in me a clean heart, O God;",
+     "start": 720.279,
+     "end": 723.265
+    },
+    {
+     "segment": "scripture-psalm-clean",
+     "text": "and renew a right spirit within me.",
+     "start": 723.565,
+     "end": 726.36
+    }
+   ],
+   "segments": [
+    "prayer-clean-heart",
+    "scripture-psalm-clean"
+   ],
+   "text": "I want my heart changed. Where impatience has become a habit, grow patience in me. Where I have learned to shade the truth, make me honest. Where I keep reaching for control, teach me trust. Do this work slowly and deeply, the way a garden changes through many quiet nights. I give you permission to keep shaping me. Create in me a clean heart, O God; and renew a right spirit within me.",
+   "reference": "Psalm 51:10 (KJV)",
+   "measured_score": 0.5109,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.136986301369863,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.7036400000000003
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Short, punchy, and focused on inner transformation. Excellent pacing.",
+    "hook_line": "I want my heart to change.",
+    "title": "Do this work slowly in me"
+   },
+   "final_score": 0.7144
+  },
+  {
+   "start": 118.72,
+   "end": 160.783,
+   "sentences": [
+    {
+     "segment": "reflection-name-it",
+     "text": "I ignored a call I should have answered.",
+     "start": 118.72,
+     "end": 121.685
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "You are not writing a confession for anyone else.",
+     "start": 121.985,
+     "end": 125.633
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "You are simply letting the truth have a shape, so that mercy has something specific to meet.",
+     "start": 125.933,
+     "end": 132.163
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "Lord, I name the words I spoke today that were harsher than they needed to be.",
+     "start": 133.663,
+     "end": 138.975
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I remember the tone as well as the sentence, and I remember the face of the person who heard it.",
+     "start": 139.275,
+     "end": 146.059
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I cannot take those words back into my mouth.",
+     "start": 146.359,
+     "end": 149.9
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I ask you to forgive me for them, and to soften whatever they hurt.",
+     "start": 150.2,
+     "end": 154.957
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "Show me tomorrow whether an apology is needed, and help me offer it simply.",
+     "start": 155.257,
+     "end": 160.783
+    }
+   ],
+   "segments": [
+    "reflection-name-it",
+    "prayer-specific-word"
+   ],
+   "text": "I ignored a call I should have answered. You are not writing a confession for anyone else. You are simply letting the truth have a shape, so that mercy has something specific to meet. Lord, I name the words I spoke today that were harsher than they needed to be. I remember the tone as well as the sentence, and I remember the face of the person who heard it. I cannot take those words back into my mouth. I ask you to forgive me for them, and to soften whatever they hurt. Show me tomorrow whether an apology is needed, and help me offer it simply.",
+   "reference": null,
+   "measured_score": 0.4872,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.2803738317757009,
+    "scripture": 0.4,
+    "promise": 0.2336448598130841,
+    "resolution": 0.4,
+    "length_fit": 0.9174800000000005
+   },
+   "rubric": {
+    "index": 11,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Immediately hooks the listener with a specific, honest regret. Very human and grounded.",
+    "hook_line": "I ignored a call I should have answered.",
+    "title": "Naming the words we wish we could take back"
+   },
+   "final_score": 0.6949
+  },
+  {
+   "start": 449.956,
+   "end": 484.593,
+   "sentences": [
+    {
+     "segment": "prayer-repair-person",
+     "text": "I want to love this person well.",
+     "start": 449.956,
+     "end": 452.473
+    },
+    {
+     "segment": "prayer-humility",
+     "text": "Lord, I confess that I would sometimes rather feel guilty than apologize, because guilt stays private and an apology does not.",
+     "start": 453.973,
+     "end": 464.107
+    },
+    {
+     "segment": "prayer-humility",
+     "text": "Free me from that kind of pride.",
+     "start": 464.407,
+     "end": 466.924
+    },
+    {
+     "segment": "prayer-humility",
+     "text": "Let my repentance be honest enough to change how I act.",
+     "start": 467.224,
+     "end": 471.235
+    },
+    {
+     "segment": "prayer-humility",
+     "text": "When I speak to the person tomorrow, keep me from demanding that they respond in a particular way.",
+     "start": 471.535,
+     "end": 478.511
+    },
+    {
+     "segment": "prayer-humility",
+     "text": "Their response belongs to them.",
+     "start": 478.811,
+     "end": 481.285
+    },
+    {
+     "segment": "prayer-humility",
+     "text": "My part is truthfulness and kindness.",
+     "start": 481.585,
+     "end": 484.593
+    }
+   ],
+   "segments": [
+    "prayer-repair-person",
+    "prayer-humility"
+   ],
+   "text": "I want to love this person well. Lord, I confess that I would sometimes rather feel guilty than apologize, because guilt stays private and an apology does not. Free me from that kind of pride. Let my repentance be honest enough to change how I act. When I speak to the person tomorrow, keep me from demanding that they respond in a particular way. Their response belongs to them. My part is truthfulness and kindness.",
+   "reference": null,
+   "measured_score": 0.4419,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.0,
+    "scripture": 0.4,
+    "promise": 0.3333333333333333,
+    "resolution": 0.4,
+    "length_fit": 0.78548
+   },
+   "rubric": {
+    "index": 14,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Deconstructs the ego around guilt and apologies. Very wise and spiritually mature.",
+    "hook_line": "I would rather feel guilty than apologize.",
+    "title": "Freeing ourselves from pride"
+   },
+   "final_score": 0.6918
+  },
+  {
+   "start": 113.043,
+   "end": 160.783,
+   "sentences": [
+    {
+     "segment": "reflection-name-it",
+     "text": "I was impatient with my child.",
+     "start": 113.043,
+     "end": 115.56
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "I exaggerated to look better.",
+     "start": 115.86,
+     "end": 118.42
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "I ignored a call I should have answered.",
+     "start": 118.72,
+     "end": 121.685
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "You are not writing a confession for anyone else.",
+     "start": 121.985,
+     "end": 125.633
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "You are simply letting the truth have a shape, so that mercy has something specific to meet.",
+     "start": 125.933,
+     "end": 132.163
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "Lord, I name the words I spoke today that were harsher than they needed to be.",
+     "start": 133.663,
+     "end": 138.975
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I remember the tone as well as the sentence, and I remember the face of the person who heard it.",
+     "start": 139.275,
+     "end": 146.059
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I cannot take those words back into my mouth.",
+     "start": 146.359,
+     "end": 149.9
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I ask you to forgive me for them, and to soften whatever they hurt.",
+     "start": 150.2,
+     "end": 154.957
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "Show me tomorrow whether an apology is needed, and help me offer it simply.",
+     "start": 155.257,
+     "end": 160.783
+    }
+   ],
+   "segments": [
+    "reflection-name-it",
+    "prayer-specific-word"
+   ],
+   "text": "I was impatient with my child. I exaggerated to look better. I ignored a call I should have answered. You are not writing a confession for anyone else. You are simply letting the truth have a shape, so that mercy has something specific to meet. Lord, I name the words I spoke today that were harsher than they needed to be. I remember the tone as well as the sentence, and I remember the face of the person who heard it. I cannot take those words back into my mouth. I ask you to forgive me for them, and to soften whatever they hurt. Show me tomorrow whether an apology is needed, and help me offer it simply.",
+   "reference": null,
+   "measured_score": 0.4584,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.2542372881355932,
+    "scripture": 0.4,
+    "promise": 0.211864406779661,
+    "resolution": 0.4,
+    "length_fit": 0.6904000000000008
+   },
+   "rubric": {
+    "index": 13,
+    "hook_first_2s": 8.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Raw vulnerability about everyday parenting struggles and relational failures.",
+    "hook_line": "I was impatient with my child.",
+    "title": "A prayer of honest confession"
+   },
+   "final_score": 0.6884
+  },
+  {
+   "start": 115.86,
+   "end": 160.783,
+   "sentences": [
+    {
+     "segment": "reflection-name-it",
+     "text": "I exaggerated to look better.",
+     "start": 115.86,
+     "end": 118.42
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "I ignored a call I should have answered.",
+     "start": 118.72,
+     "end": 121.685
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "You are not writing a confession for anyone else.",
+     "start": 121.985,
+     "end": 125.633
+    },
+    {
+     "segment": "reflection-name-it",
+     "text": "You are simply letting the truth have a shape, so that mercy has something specific to meet.",
+     "start": 125.933,
+     "end": 132.163
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "Lord, I name the words I spoke today that were harsher than they needed to be.",
+     "start": 133.663,
+     "end": 138.975
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I remember the tone as well as the sentence, and I remember the face of the person who heard it.",
+     "start": 139.275,
+     "end": 146.059
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I cannot take those words back into my mouth.",
+     "start": 146.359,
+     "end": 149.9
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "I ask you to forgive me for them, and to soften whatever they hurt.",
+     "start": 150.2,
+     "end": 154.957
+    },
+    {
+     "segment": "prayer-specific-word",
+     "text": "Show me tomorrow whether an apology is needed, and help me offer it simply.",
+     "start": 155.257,
+     "end": 160.783
+    }
+   ],
+   "segments": [
+    "reflection-name-it",
+    "prayer-specific-word"
+   ],
+   "text": "I exaggerated to look better. I ignored a call I should have answered. You are not writing a confession for anyone else. You are simply letting the truth have a shape, so that mercy has something specific to meet. Lord, I name the words I spoke today that were harsher than they needed to be. I remember the tone as well as the sentence, and I remember the face of the person who heard it. I cannot take those words back into my mouth. I ask you to forgive me for them, and to soften whatever they hurt. Show me tomorrow whether an apology is needed, and help me offer it simply.",
+   "reference": null,
+   "measured_score": 0.4728,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.26785714285714285,
+    "scripture": 0.4,
+    "promise": 0.22321428571428573,
+    "resolution": 0.4,
+    "length_fit": 0.8030800000000005
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Builds on specific confessions to lead into receiving mercy. Honest self-awareness.",
+    "hook_line": "I exaggerated to look better.",
+    "title": "Letting truth have a shape"
+   },
+   "final_score": 0.6841
+  }
+ ],
+ "chosen": [
+  {
+   "start": 310.659,
+   "end": 356.864,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "The next words are for you.",
+     "start": 310.659,
+     "end": 312.877
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "Perhaps what troubles you most is that this is not the first time.",
+     "start": 313.777,
+     "end": 318.919
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "You have confessed this same weakness before, and here it is again.",
+     "start": 319.219,
+     "end": 323.784
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "That can make forgiveness feel almost dishonest, as if you were taking advantage of God.",
+     "start": 324.084,
+     "end": 330.719
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "Yet Scripture never puts a limit on returning.",
+     "start": 331.019,
+     "end": 334.816
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "Each honest return is part of how change happens.",
+     "start": 335.116,
+     "end": 339.255
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "God is not tired of hearing from you.",
+     "start": 339.555,
+     "end": 342.435
+    },
+    {
+     "segment": "reflection-same-again",
+     "text": "He is patiently forming something new in you.",
+     "start": 342.735,
+     "end": 345.956
+    },
+    {
+     "segment": "scripture-romans-condemnation",
+     "text": "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+     "start": 347.456,
+     "end": 356.864
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "reflection-same-again",
+    "scripture-romans-condemnation"
+   ],
+   "text": "The next words are for you. Perhaps what troubles you most is that this is not the first time. You have confessed this same weakness before, and here it is again. That can make forgiveness feel almost dishonest, as if you were taking advantage of God. Yet Scripture never puts a limit on returning. Each honest return is part of how change happens. God is not tired of hearing from you. He is patiently forming something new in you. There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+   "reference": "Romans 8:1 (KJV)",
+   "measured_score": 0.7479,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.588235294117647,
+    "scripture": 1.0,
+    "promise": 0.24509803921568626,
+    "resolution": 0.4,
+    "length_fit": 0.7518000000000007
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 9.0,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 8.0,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Starts with an incredibly empathetic and direct hook. Fully addresses the recurring guilt cycle without being manipulative, ending on a strong verse.",
+    "hook_line": "The next words are for you.",
+    "title": "When forgiveness feels too easy"
+   },
+   "final_score": 0.8442,
+   "hook": "The next words are for you.",
+   "title": "When forgiveness feels too easy"
+  },
+  {
+   "start": 915.724,
+   "end": 958.948,
+   "sentences": [
+    {
+     "segment": "sleep-stillness",
+     "text": "Nothing needs to be solved.",
+     "start": 915.724,
+     "end": 917.964
+    },
+    {
+     "segment": "sleep-stillness",
+     "text": "Let your breathing find its own unhurried rhythm, and let your hands lie open, as if they had just released something heavy.",
+     "start": 918.264,
+     "end": 927.629
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Father, I end this day in your mercy.",
+     "start": 930.929,
+     "end": 933.873
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Thank you for hearing my confession and answering it with forgiveness.",
+     "start": 934.173,
+     "end": 939.101
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Thank you for the person I will speak to tomorrow, and for the courage you will give me then.",
+     "start": 939.401,
+     "end": 945.737
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Watch over me through the night.",
+     "start": 946.037,
+     "end": 948.363
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Let me rest as one who is clean, welcomed, and deeply loved.",
+     "start": 948.663,
+     "end": 953.377
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I place my sleep and my waking in your hands.",
+     "start": 953.677,
+     "end": 957.453
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Amen.",
+     "start": 957.753,
+     "end": 958.948
+    }
+   ],
+   "segments": [
+    "sleep-stillness",
+    "sleep-prayer-closing"
+   ],
+   "text": "Nothing needs to be solved. Let your breathing find its own unhurried rhythm, and let your hands lie open, as if they had just released something heavy. Father, I end this day in your mercy. Thank you for hearing my confession and answering it with forgiveness. Thank you for the person I will speak to tomorrow, and for the courage you will give me then. Watch over me through the night. Let me rest as one who is clean, welcomed, and deeply loved. I place my sleep and my waking in your hands. Amen.",
+   "reference": null,
+   "measured_score": 0.6986,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.7446808510638298,
+    "scripture": 0.4,
+    "promise": 0.7978723404255319,
+    "resolution": 1.0,
+    "length_fit": 0.8710400000000027
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.5,
+    "shareability": 8.0,
+    "loop_potential": 9.0,
+    "policy_safe": 10.0,
+    "reasons": "Extremely calming tone from the first second. Ideal bedtime short for anxiety relief.",
+    "hook_line": "Nothing needs to be solved tonight.",
+    "title": "End your day in quiet mercy"
+   },
+   "final_score": 0.8194,
+   "hook": "Nothing needs to be solved tonight.",
+   "title": "End your day in quiet mercy"
+  },
+  {
+   "start": 237.089,
+   "end": 276.271,
+   "sentences": [
+    {
+     "segment": "reflection-hiding",
+     "text": "Confession is not meant to crush you.",
+     "start": 237.089,
+     "end": 240.012
+    },
+    {
+     "segment": "reflection-hiding",
+     "text": "It is the moment you can stop guarding the secret, because the One who hears it has already chosen mercy.",
+     "start": 240.312,
+     "end": 247.885
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "Lord, here is the part I have been reluctant to admit, even to myself.",
+     "start": 249.385,
+     "end": 254.633
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "I did it because I wanted to protect my image, to win the argument, or to avoid feeling small.",
+     "start": 254.933,
+     "end": 262.549
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "I do not want to dress it up as something nobler.",
+     "start": 262.849,
+     "end": 266.391
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "I confess it as sin, and I ask you to forgive me.",
+     "start": 266.691,
+     "end": 270.744
+    },
+    {
+     "segment": "prayer-confession-plain",
+     "text": "Thank you that your patience with me is deeper than my embarrassment tonight.",
+     "start": 271.044,
+     "end": 276.271
+    }
+   ],
+   "segments": [
+    "reflection-hiding",
+    "prayer-confession-plain"
+   ],
+   "text": "Confession is not meant to crush you. It is the moment you can stop guarding the secret, because the One who hears it has already chosen mercy. Lord, here is the part I have been reluctant to admit, even to myself. I did it because I wanted to protect my image, to win the argument, or to avoid feeling small. I do not want to dress it up as something nobler. I confess it as sin, and I ask you to forgive me. Thank you that your patience with me is deeper than my embarrassment tonight.",
+   "reference": null,
+   "measured_score": 0.723,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.5208333333333334,
+    "scripture": 0.4,
+    "promise": 0.78125,
+    "resolution": 0.4,
+    "length_fit": 0.9672800000000007
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Reframes confession away from shame very effectively. Great pacing and relatable honesty.",
+    "hook_line": "Confession is not meant to crush you.",
+    "title": "A gentle prayer for honest confession"
+   },
+   "final_score": 0.8042,
+   "hook": "Confession is not meant to crush you.",
+   "title": "A gentle prayer for honest confession"
+  }
+ ],
+ "selection_mode": "LEGACY",
+ "input_sha256": {
+  "timeline": "59ab9c75c9b9abecbd4ed43ed7fe7107eaf36641ccba6d593c3db35bf7505c9e",
+  "script": "c04e2d1414ea4949c3967eb7b113b3540c29dbb18572811f2c2821359d3aed91"
+ },
+ "structural_counts": {
+  "opening_starts_total": 180,
+  "opening_starts_accepted": 19,
+  "opening_rejections": {
+   "OPENING_OVER_3S": 107,
+   "DEPENDENT_OPENING_REFERENCE": 25,
+   "CONTEXT_OPENER": 19,
+   "EMPTY_OR_INCOMPLETE_OPENING": 7,
+   "CONTINUATION_OPENING_LINE": 3
+  },
+  "window_pairs_total": 75,
+  "window_pairs_accepted": 20,
+  "window_rejections": {
+   "CTA_OR_TRANSITION_SEGMENT": 4,
+   "UNRESOLVED_SEGMENT_END": 45,
+   "PARTIAL_SCRIPTURE": 5,
+   "INCOMPLETE_ENDING": 1
+  }
+ },
+ "reason": null
+}

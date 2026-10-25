@@ -1,0 +1,292 @@
+{
+ "version": "shorts-produce-v2-r8",
+ "source_pilot": "pilot-013",
+ "selection_rubric_model": "gemini-3.5-flash-lite",
+ "rejected_r8": [],
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "c780e41ca7b8412459b2aa461eaf64e113a11a9cbdea3c998be7797d0c29ea82",
+   "seconds": 46.7,
+   "source_start": 310.659,
+   "source_end": 356.864,
+   "segments": [
+    "rehook-2",
+    "reflection-same-again",
+    "scripture-romans-condemnation"
+   ],
+   "hook": "The next words are for you.",
+   "hook_shown": true,
+   "title": "When forgiveness feels too easy",
+   "reference": "Romans 8:1 (KJV)",
+   "scenes": [
+    "bg-mercy-road-home",
+    "bg-cares-clouds-moonlight",
+    "bg-mercy-open-door-light"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8442,
+    "measured_score": 0.7479,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.588235294117647,
+     "scripture": 1.0,
+     "promise": 0.24509803921568626,
+     "resolution": 0.4,
+     "length_fit": 0.7518000000000007
+    },
+    "rubric": {
+     "index": 0,
+     "hook_first_2s": 9.0,
+     "stands_alone": 9.5,
+     "emotional_payoff": 9.5,
+     "shareability": 8.0,
+     "loop_potential": 8.5,
+     "policy_safe": 10.0,
+     "reasons": "Starts with an incredibly empathetic and direct hook. Fully addresses the recurring guilt cycle without being manipulative, ending on a strong verse.",
+     "hook_line": "The next words are for you.",
+     "title": "When forgiveness feels too easy"
+    }
+   },
+   "text": "The next words are for you. Perhaps what troubles you most is that this is not the first time. You have confessed this same weakness before, and here it is again. That can make forgiveness feel almost dishonest, as if you were taking advantage of God. Yet Scripture never puts a limit on returning. Each honest return is part of how change happens. God is not tired of hearing from you. He is patiently forming something new in you. There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+   "publish": false,
+   "qa_output_sha256": "c780e41ca7b8412459b2aa461eaf64e113a11a9cbdea3c998be7797d0c29ea82",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 46.7,
+    "lufs": -14.8,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 5.5,
+    "captions_readable_and_synced": 7.5,
+    "text_clear_of_shorts_ui": 8.5,
+    "picture_quality": 8.5,
+    "edit_rhythm": 6.0,
+    "audio_clarity": 9.0,
+    "stands_alone": 9.0,
+    "ending_and_loop": 6.5,
+    "policy_safe": 10.0,
+    "overall": 7.3,
+    "issues": [
+     "00:00 - 00:02: The hook caption appears twice simultaneously (once near the upper-middle and once animated in the center), creating visual clutter.",
+     "00:46 - 00:47: Dead air and no captions at the very end before the video loops."
+    ],
+    "strongest_moment": "00:36 - 00:45: The transition to Romans 8:1 with the warm, open-door visual creates an uplifting and comforting resolution.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "c780e41ca7b8412459b2aa461eaf64e113a11a9cbdea3c998be7797d0c29ea82"
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "OVERALL_OUTSIDE_OWNER_RANGE"
+    ]
+   }
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "f8692f444c67585f1530bf773bf39a721f9d78fc676b1f69de2343a7c7e80335",
+   "seconds": 43.73,
+   "source_start": 915.724,
+   "source_end": 958.948,
+   "segments": [
+    "sleep-stillness",
+    "sleep-prayer-closing"
+   ],
+   "hook": "Nothing needs to be solved tonight.",
+   "hook_shown": false,
+   "title": "End your day in quiet mercy",
+   "reference": null,
+   "scenes": [
+    "bg-cares-river-reeds-night",
+    "bg-mercy-mist-hills-moon"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8194,
+    "measured_score": 0.6986,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 0.3,
+     "second_person": 0.7446808510638298,
+     "scripture": 0.4,
+     "promise": 0.7978723404255319,
+     "resolution": 1.0,
+     "length_fit": 0.8710400000000027
+    },
+    "rubric": {
+     "index": 3,
+     "hook_first_2s": 8.5,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.5,
+     "shareability": 8.0,
+     "loop_potential": 9.0,
+     "policy_safe": 10.0,
+     "reasons": "Extremely calming tone from the first second. Ideal bedtime short for anxiety relief.",
+     "hook_line": "Nothing needs to be solved tonight.",
+     "title": "End your day in quiet mercy"
+    }
+   },
+   "text": "Nothing needs to be solved. Let your breathing find its own unhurried rhythm, and let your hands lie open, as if they had just released something heavy. Father, I end this day in your mercy. Thank you for hearing my confession and answering it with forgiveness. Thank you for the person I will speak to tomorrow, and for the courage you will give me then. Watch over me through the night. Let me rest as one who is clean, welcomed, and deeply loved. I place my sleep and my waking in your hands. Amen.",
+   "publish": false,
+   "qa_output_sha256": "f8692f444c67585f1530bf773bf39a721f9d78fc676b1f69de2343a7c7e80335",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 43.73,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure",
+    "error_code": "PROVIDER_CALL_FAILED",
+    "failed_at": "2026-10-25T12:39:38.785005+00:00",
+    "output_sha256": "f8692f444c67585f1530bf773bf39a721f9d78fc676b1f69de2343a7c7e80335",
+    "provider_diagnostic": {}
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "REVIEW_MODEL_NOT_DESIGNATED",
+     "OVERALL_INVALID"
+    ]
+   }
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "02d358dc90369c8e6b64ed768b94d7baf36e874b89394bff6d2bc138341de092",
+   "seconds": 39.68,
+   "source_start": 237.089,
+   "source_end": 276.271,
+   "segments": [
+    "reflection-hiding",
+    "prayer-confession-plain"
+   ],
+   "hook": "Confession is not meant to crush you.",
+   "hook_shown": true,
+   "title": "A gentle prayer for honest confession",
+   "reference": null,
+   "scenes": [
+    "bg-mercy-still-pond-stars",
+    "bg-mercy-garden-dawn"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8042,
+    "measured_score": 0.723,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.5208333333333334,
+     "scripture": 0.4,
+     "promise": 0.78125,
+     "resolution": 0.4,
+     "length_fit": 0.9672800000000007
+    },
+    "rubric": {
+     "index": 1,
+     "hook_first_2s": 8.0,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.0,
+     "shareability": 7.5,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Reframes confession away from shame very effectively. Great pacing and relatable honesty.",
+     "hook_line": "Confession is not meant to crush you.",
+     "title": "A gentle prayer for honest confession"
+    }
+   },
+   "text": "Confession is not meant to crush you. It is the moment you can stop guarding the secret, because the One who hears it has already chosen mercy. Lord, here is the part I have been reluctant to admit, even to myself. I did it because I wanted to protect my image, to win the argument, or to avoid feeling small. I do not want to dress it up as something nobler. I confess it as sin, and I ask you to forgive me. Thank you that your patience with me is deeper than my embarrassment tonight.",
+   "publish": false,
+   "qa_output_sha256": "02d358dc90369c8e6b64ed768b94d7baf36e874b89394bff6d2bc138341de092",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 39.68,
+    "lufs": -14.9,
+    "true_peak_dbtp": -1.8,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 7.0,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 9.5,
+    "picture_quality": 8.5,
+    "edit_rhythm": 4.5,
+    "audio_clarity": 9.0,
+    "stands_alone": 9.0,
+    "ending_and_loop": 6.0,
+    "policy_safe": 10.0,
+    "overall": 7.0,
+    "issues": [
+     "00:00 - Redundant title text in the top half overlaps visually with the subtitle line below.",
+     "00:00-00:19 - Pacing is very static; relying on only two motionless AI images across a 40-second video risks losing viewer retention."
+    ],
+    "strongest_moment": "00:06-00:10 with the transition into heartfelt prayer and clear, resonant vocal delivery.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "02d358dc90369c8e6b64ed768b94d7baf36e874b89394bff6d2bc138341de092"
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "OVERALL_OUTSIDE_OWNER_RANGE"
+    ]
+   }
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}
