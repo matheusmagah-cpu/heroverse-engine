@@ -1,0 +1,93 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-05-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 5,
+ "passage": "Genesis 4:2-9 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "d3b092a48f077869fa364b62e753ba660f494596f4b0837f51cc5887a0088b3d",
+ "seconds": 62.6,
+ "frame": [
+  1080,
+  1920
+ ],
+ "slot": "2026-10-26T13:30:00Z",
+ "scripture": [
+  {
+   "reference": "Genesis 4:2 (KJV)",
+   "text": "And Abel was a keeper of sheep, but Cain was a tiller of the ground."
+  },
+  {
+   "reference": "Genesis 4:4-5 (KJV)",
+   "text": "And the LORD had respect unto Abel and to his offering: But unto Cain and to his offering he had not respect. And Cain was very wroth, and his countenance fell."
+  },
+  {
+   "reference": "Genesis 4:7 (KJV)",
+   "text": "If thou doest well, shalt thou not be accepted? and if thou doest not well, sin lieth at the door."
+  },
+  {
+   "reference": "Genesis 4:8 (KJV)",
+   "text": "Cain rose up against Abel his brother, and slew him."
+  },
+  {
+   "reference": "Genesis 4:9 (KJV)",
+   "text": "And the LORD said unto Cain, Where is Abel thy brother? And he said, I know not: Am I my brother's keeper?"
+  }
+ ],
+ "review": {
+  "overall": 9.5,
+  "process": "narration passed kjv_check.py before the voiceover; every stock clip seen in preview composes (Pexels is blocked from the cloud) and 360p links refused (clip_check short side >= 720): 9 candidates rejected (a person under a tree, a town and road, power lines, sheep on a paved road, a bonfire with lamps, a pylon, a near-black storm, a desert with a person's shadow); first compose reviewed by frame sheet and redone (too many skies in a row, captions ~3 % high, -19.7 LUFS); final -15.1 LUFS, peak -1.7 dBFS",
+  "black_check": {
+   "black_starts": [
+    62.5
+   ],
+   "unexpected": []
+  },
+  "issues": [
+   "0-4 s and 15.8-19.6 s (AI hook): two stone fire pits read as two offerings, but the smoke contrast asked for (one rising, one falling) is not visible",
+   "the eroded badlands return at 41.9-46.1 s (first at 4.0-7.4 s)"
+  ]
+ },
+ "title": "Am I My Brother's Keeper? 🐑 | Cain and Abel, Bible Story (KJV) #shorts",
+ "description": "Genesis 4, Cain and Abel, read from the King James Version. Part 5 of a journey through the whole Bible, one story at a time.\n\nLord, when anger waits at my door, help me master it. Type Amen if you prayed this with me 🙏\n\nPart 4: driven out of the garden. Next: Part 6, Enoch walked with God.\n\nScripture: King James Version (public domain).\nVisuals: licensed stock footage from Pexels (Pexels License) and AI-generated scenes. Narration: AI voice. Music: original, AI-generated.\n\n#bible #genesis #biblestory",
+ "tags": [
+  "cain and abel",
+  "genesis 4",
+  "am i my brother's keeper",
+  "bible story",
+  "kjv bible",
+  "genesis",
+  "christian shorts",
+  "bible stories"
+ ],
+ "category_id": "29",
+ "first_comment": "Part 5 of the whole Bible, one story at a time. Part 6 tomorrow: Enoch, the man who walked with God ☁️",
+ "sources": {
+  "voice": "vidIQ voiceover (ElevenLabs 'George'), job_144ae5c3",
+  "music": "vidIQ generate_music, job_84bf3f8f (series theme), mix normalized job_019c31d1",
+  "ai_video": [
+   "job_e5471989 two stone altars with smoke at golden hour (veo-3.1-lite, 4 s)"
+  ],
+  "stock": "Pexels videos 3059046, 13563078, 12196984, 8487051, 6707366, 12222644, 12598728, 6486016, 20584301, 13928593, 12476172, 19061693",
+  "compose": "vidIQ compose job_3e5cf0cb"
+ },
+ "credits": {
+  "ai_video": 60,
+  "voice": 14,
+  "stock_search": 16,
+  "previews": 19,
+  "compose": 48,
+  "loudness": 1,
+  "wasted": 16
+ },
+ "attributes": {
+  "hook_type": "contrast_statement",
+  "hook_line": "Two brothers brought God an offering. Only one walked away angry.",
+  "title_pattern": "question_emoji_pipe_story_kjv",
+  "first_visual": "ai_two_altars",
+  "ai_scenes": 2,
+  "seconds": 62.6,
+  "slot_utc": "13:30",
+  "transition": "cut"
+ }
+}

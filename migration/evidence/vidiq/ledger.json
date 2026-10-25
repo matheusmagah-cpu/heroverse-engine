@@ -529,6 +529,114 @@
    "purpose": "genesis-04-short",
    "saved_to": "production/bible/episodes",
    "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_voiceover_generate",
+   "credits": 14,
+   "purpose": "genesis-05-short narration (George, 62 s), job_144ae5c3",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_generate_broll",
+   "credits": 16,
+   "purpose": "genesis-05-short stock search (16 calls)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 9,
+   "purpose": "genesis-05-short candidate preview (17 clips x 2 s, job_4ca73b5b): every clip seen before use",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 4,
+   "purpose": "genesis-05-short candidate preview 2 (HD clips, job_26d8f479)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_generate_video",
+   "credits": 60,
+   "purpose": "genesis-05-short AI hook, two altars and their smoke (veo-3.1-lite 4 s), job_e5471989",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 2,
+   "purpose": "genesis-05-short candidate preview 3 (HD sheep, job_1ff7e2f6)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 2,
+   "purpose": "genesis-05-short candidate preview 4 (HD skies and fields, job_5ad2d37b)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 2,
+   "purpose": "genesis-05-short AI hook preview (videogen host blocked from the cloud; job_af89cc20)",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 16,
+   "purpose": "genesis-05-short final compose (62.6 s, cut only), job_0faf8ba4",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 16,
+   "purpose": "genesis-05-short recompose after frame review (more varied picture, captions ~7 % high), job_6d95966a",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_edit_media",
+   "credits": 1,
+   "purpose": "genesis-05-short loudness normalize to -15 LUFS (was -19.7), job_019c31d1",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "generation",
+   "tool": "vidiq_compose",
+   "credits": 16,
+   "purpose": "genesis-05-short final compose with the normalized mix, job_3e5cf0cb",
+   "saved_to": "production/bible/episodes",
+   "approved_by_owner": true
   }
  ]
 }
