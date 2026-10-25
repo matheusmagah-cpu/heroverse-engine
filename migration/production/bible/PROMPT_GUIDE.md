@@ -75,3 +75,18 @@ order, before any paid compose:
    the words ours, one insight of at least 20 words of our own reading of the passage, a close that names the full
    story. A Short under a minute does not count for TikTok Creator Rewards; a Short that only reads the verse over
    stock footage reads as reused content on both platforms.
+
+## Characters stay the same in every video (owner, 2026-10-25)
+"If Moses appears once, he is the same Moses a hundred videos later." `production/characters/characters.json` is the
+character bible: each person or creature has a fixed `look` (exact words), `wardrobe` variants for the story phase, a
+FLUX `seed` and a `status`. Before a character's first scene:
+1. Its reference sheet (front, three-quarter, full figure) is generated with `cf-images.yml` (pilot `characters`) from
+   `characters/images.json`, and Claude reviews it (same face in all three, period-true clothing, no modern object).
+   Only then is its status set to APPROVED, by PR.
+2. Every still prompt that shows it carries its `look` word for word plus one `wardrobe` variant, and reuses its seed.
+3. Every AI clip that shows it uses Agnes reference mode (`agnes-clip.yml`, input `characters`): the approved reference
+   images go in `images` (at most 5) and the prompt carries the look; `characters.py` refuses an unapproved character
+   or a changed look before any call.
+4. A new character joins the bible the first time a story needs it, never improvised inside one episode.
+God the Father is never shown as a person: light, wind and voice carry Him, and the KJV text speaks.
+

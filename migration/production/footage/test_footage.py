@@ -87,6 +87,13 @@ class Vetting(unittest.TestCase):
         r = ft.decide([80] * 5, [[]] * 5, ["A man in a kayak on a river.", "A river."])
         self.assertEqual(r["vetting"], "REJECTED")
 
+    def test_the_library_workflow_installs_what_vetting_imports(self):
+        # E81: E77's graded black check imports cinematic (numpy); footage.yml installed only PIL, so both pilot-015
+        # beat runs died on their first clip (ModuleNotFoundError: numpy)
+        wf = (Path(__file__).resolve().parents[3] / ".github/workflows/footage.yml").read_text()
+        for pkg in ("ffmpeg", "tesseract-ocr", "python3-pil", "python3-numpy"):
+            self.assertIn(pkg, wf)
+
     def test_black_run_after_the_render_grade_is_rejected(self):
         # E77: the starry-sky clip passed the luma check but went near-black for 1.2 s once graded
         r = ft.decide([30, 24, 34, 26, 22], [[]] * 5, self.OK_DESC, 1.2)
