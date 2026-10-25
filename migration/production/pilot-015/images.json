@@ -1,0 +1,229 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "pilot-015",
+ "style": "photorealistic cinematic nature documentary, ancient world, natural light, wide 16:9 composition with the subject in the centre, film grain, no text, no signature, no watermark, no lettering",
+ "negative": "text, letters, watermark, logo, signature, frame, cartoon, modern objects, buildings, cars, deformed hands, extra fingers, distorted face",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1344,
+ "height": 768,
+ "reused": {},
+ "images": [
+  {
+   "id": "st-gate-sword",
+   "prompt": "wide shot of an ancient stone gateway at the edge of a lush garden at dusk, a long sword of living flame turning slowly in the air before the gate, its fire lighting the stones orange, dark hills beyond",
+   "seed": 2000,
+   "chapter": "cold-open"
+  },
+  {
+   "id": "st-deep-dark",
+   "prompt": "vast dark ocean under heavy black storm clouds at night, no land, low waves, a faint silver sheen on the water",
+   "seed": 2001,
+   "chapter": "1"
+  },
+  {
+   "id": "st-spirit-waters",
+   "prompt": "mist gliding low over a calm dark sea before dawn, faint first light on the horizon, still water",
+   "seed": 2002,
+   "chapter": "1"
+  },
+  {
+   "id": "st-light-breaks",
+   "prompt": "wide sunbeams pouring down through a break in heavy clouds onto a dark sea, golden light spreading across the water",
+   "seed": 2003,
+   "chapter": "1"
+  },
+  {
+   "id": "st-firmament",
+   "prompt": "wide sky at sunrise with a layer of clouds above and the sea below, a clear band of blue air between them",
+   "seed": 2004,
+   "chapter": "1"
+  },
+  {
+   "id": "st-dry-land",
+   "prompt": "green land and black rocks rising out of the sea at sunrise, waves draining off wet stone, wide aerial view",
+   "seed": 2005,
+   "chapter": "1"
+  },
+  {
+   "id": "st-grass-herbs",
+   "prompt": "a wild valley covered in fresh green grass and flowering herbs in morning light, dew on the leaves",
+   "seed": 2006,
+   "chapter": "1"
+  },
+  {
+   "id": "st-fruit-trees",
+   "prompt": "an ancient grove of fruit trees heavy with ripe fruit, golden morning light between the trunks",
+   "seed": 2007,
+   "chapter": "1"
+  },
+  {
+   "id": "st-sun-moon",
+   "prompt": "a full moon setting over the sea while the sun rises on the opposite horizon, soft pink and blue sky",
+   "seed": 2008,
+   "chapter": "1"
+  },
+  {
+   "id": "st-stars",
+   "prompt": "a night sky full of stars and the Milky Way over a dark wilderness of hills, no lights on the land",
+   "seed": 2009,
+   "chapter": "1"
+  },
+  {
+   "id": "st-sea-life",
+   "prompt": "a great whale breaching from a calm blue sea, spray in the sunlight, open ocean",
+   "seed": 2010,
+   "chapter": "1"
+  },
+  {
+   "id": "st-birds",
+   "prompt": "a large flock of birds flying low over the sea at sunrise, wings lit by the sun",
+   "seed": 2011,
+   "chapter": "1"
+  },
+  {
+   "id": "st-beasts",
+   "prompt": "wild horses and cattle grazing on a wide grassy plain under a big sky, no fences, golden light",
+   "seed": 2012,
+   "chapter": "1"
+  },
+  {
+   "id": "st-lion",
+   "prompt": "a lion resting on a rock above a green valley at sunrise, calm, wide shot",
+   "seed": 2013,
+   "chapter": "1"
+  },
+  {
+   "id": "st-seventh-day",
+   "prompt": "a quiet meadow at golden hour, still air, long shadows, soft light over hills, peaceful",
+   "seed": 2014,
+   "chapter": "1"
+  },
+  {
+   "id": "st-dust-hand",
+   "prompt": "close-up of a man's hand resting on red earth at dawn, dust on the fingers, warm side light",
+   "seed": 2015,
+   "chapter": "2"
+  },
+  {
+   "id": "st-man-dawn",
+   "prompt": "a young man in a plain linen cloth standing on a hill at dawn seen from behind, looking over a green valley",
+   "seed": 2016,
+   "chapter": "2"
+  },
+  {
+   "id": "st-four-rivers",
+   "prompt": "aerial view of a great river parting into four streams across a green valley in morning mist",
+   "seed": 2017,
+   "chapter": "2"
+  },
+  {
+   "id": "st-garden-east",
+   "prompt": "a vast lush garden with ancient trees, flowing water and flowers in the east at sunrise, wide view",
+   "seed": 2018,
+   "chapter": "2"
+  },
+  {
+   "id": "st-tree-of-life",
+   "prompt": "one immense ancient tree in the middle of a garden, wide spreading branches, sunlight through the leaves",
+   "seed": 2019,
+   "chapter": "2"
+  },
+  {
+   "id": "st-tree-knowledge",
+   "prompt": "a single tree with dark leaves and round red fruit standing apart in a garden clearing, afternoon light",
+   "seed": 2020,
+   "chapter": "2"
+  },
+  {
+   "id": "st-animals-named",
+   "prompt": "deer, sheep and a lion standing calmly in a green clearing in front of a man seen from behind",
+   "seed": 2021,
+   "chapter": "2"
+  },
+  {
+   "id": "st-deep-sleep",
+   "prompt": "a man asleep in the shade of a large tree in long grass, seen from a distance, soft afternoon light",
+   "seed": 2022,
+   "chapter": "2"
+  },
+  {
+   "id": "st-two-hands",
+   "prompt": "close-up of a man's hand and a woman's hand meeting, soft morning light, green leaves behind",
+   "seed": 2023,
+   "chapter": "2"
+  },
+  {
+   "id": "st-serpent",
+   "prompt": "a long patterned serpent coiled along a branch of a fruit tree, its head raised, late afternoon light",
+   "seed": 2024,
+   "chapter": "3"
+  },
+  {
+   "id": "st-one-fruit",
+   "prompt": "a single round red fruit hanging on a dark branch, lit by a shaft of warm light, dark leaves behind",
+   "seed": 2025,
+   "chapter": "3"
+  },
+  {
+   "id": "st-hand-reach",
+   "prompt": "a woman's hand reaching toward a red fruit on a branch, close-up, warm light",
+   "seed": 2026,
+   "chapter": "3"
+  },
+  {
+   "id": "st-bitten-fruit",
+   "prompt": "a bitten red fruit lying in the grass at the foot of a tree, long evening shadows",
+   "seed": 2027,
+   "chapter": "3"
+  },
+  {
+   "id": "st-fig-leaves",
+   "prompt": "large fig leaves on a branch in close-up, light shining through them, veins visible",
+   "seed": 2028,
+   "chapter": "3"
+  },
+  {
+   "id": "st-cool-of-day",
+   "prompt": "wind moving through the trees of a garden in the cool of the evening, leaves stirring, low golden light",
+   "seed": 2029,
+   "chapter": "4"
+  },
+  {
+   "id": "st-hiding",
+   "prompt": "two figures hiding among dense trees at dusk, seen from far away in silhouette, garden shadows",
+   "seed": 2030,
+   "chapter": "4"
+  },
+  {
+   "id": "st-thorns",
+   "prompt": "thorns and thistles growing in dry cracked ground under a hard sun",
+   "seed": 2031,
+   "chapter": "4"
+  },
+  {
+   "id": "st-skin-coats",
+   "prompt": "simple garments of animal skin lying folded on a flat rock in a garden, soft light",
+   "seed": 2032,
+   "chapter": "4"
+  },
+  {
+   "id": "st-leaving",
+   "prompt": "a man and a woman in simple animal-skin garments walking away from a garden at dusk, seen from behind, small in the frame",
+   "seed": 2033,
+   "chapter": "4"
+  },
+  {
+   "id": "st-east-of-eden",
+   "prompt": "dry stony land east of a garden at dawn, a narrow path leading away into the hills",
+   "seed": 2034,
+   "chapter": "4"
+  },
+  {
+   "id": "st-path-light",
+   "prompt": "a narrow path through a wilderness valley lit by the first sunlight, long shadows, hopeful",
+   "seed": 2035,
+   "chapter": "close"
+  }
+ ]
+}
