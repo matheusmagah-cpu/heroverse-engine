@@ -1,0 +1,1782 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-008",
+ "rubric_model": "gemini-3.5-flash-lite",
+ "candidates_considered": 19,
+ "shortlist": [
+  {
+   "start": 898.023,
+   "end": 937.728,
+   "sentences": [
+    {
+     "segment": "stillness-sleep",
+     "text": "Breathe in your ordinary way.",
+     "start": 898.023,
+     "end": 900.476
+    },
+    {
+     "segment": "stillness-sleep",
+     "text": "For these few moments, let being here be enough.",
+     "start": 900.776,
+     "end": 904.36
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "My Shepherd, I leave this day with you now.",
+     "start": 907.66,
+     "end": 910.924
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Receive the gratitude, the confession, the sorrow, and the hope I have brought.",
+     "start": 911.224,
+     "end": 916.365
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Grant me rest, and meet me with patience if I am still awake.",
+     "start": 916.665,
+     "end": 921.188
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Help me receive the care available to me.",
+     "start": 921.488,
+     "end": 924.475
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I entrust the next breath and the coming morning to your mercy.",
+     "start": 924.775,
+     "end": 929.361
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I have no further words I need to add.",
+     "start": 929.661,
+     "end": 932.776
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I rest before you in the name of Jesus.",
+     "start": 933.076,
+     "end": 936.233
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Amen.",
+     "start": 936.533,
+     "end": 937.728
+    }
+   ],
+   "segments": [
+    "stillness-sleep",
+    "sleep-prayer-closing"
+   ],
+   "text": "Breathe in your ordinary way. For these few moments, let being here be enough. My Shepherd, I leave this day with you now. Receive the gratitude, the confession, the sorrow, and the hope I have brought. Grant me rest, and meet me with patience if I am still awake. Help me receive the care available to me. I entrust the next breath and the coming morning to your mercy. I have no further words I need to add. I rest before you in the name of Jesus. Amen.",
+   "reference": null,
+   "measured_score": 0.827,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.45454545454545453,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.9881999999999971
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Starts with a calming breathing exercise that stops the scroll, concluding in a natural evening prayer.",
+    "hook_line": "Let being here be enough.",
+    "title": "A Gentle Evening Prayer for Rest"
+   },
+   "final_score": 0.8208,
+   "hook": "Let being here be enough.",
+   "title": "A Gentle Evening Prayer for Rest"
+  },
+  {
+   "start": 921.488,
+   "end": 959.629,
+   "sentences": [
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Help me receive the care available to me.",
+     "start": 921.488,
+     "end": 924.475
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I entrust the next breath and the coming morning to your mercy.",
+     "start": 924.775,
+     "end": 929.361
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I have no further words I need to add.",
+     "start": 929.661,
+     "end": 932.776
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I rest before you in the name of Jesus.",
+     "start": 933.076,
+     "end": 936.233
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Amen.",
+     "start": 936.533,
+     "end": 937.728
+    },
+    {
+     "segment": "blessing",
+     "text": "May the gentleness of the good Shepherd accompany your rest.",
+     "start": 939.528,
+     "end": 943.944
+    },
+    {
+     "segment": "blessing",
+     "text": "May his mercy quiet the harsh words you have spoken against yourself.",
+     "start": 944.244,
+     "end": 949.449
+    },
+    {
+     "segment": "blessing",
+     "text": "May his presence be your comfort in the hours ahead.",
+     "start": 949.749,
+     "end": 953.568
+    },
+    {
+     "segment": "blessing",
+     "text": "The prayer is complete.",
+     "start": 953.868,
+     "end": 955.788
+    },
+    {
+     "segment": "blessing",
+     "text": "Rest here, with this day entrusted to his care.",
+     "start": 956.088,
+     "end": 959.629
+    }
+   ],
+   "segments": [
+    "sleep-prayer-closing",
+    "blessing"
+   ],
+   "text": "Help me receive the care available to me. I entrust the next breath and the coming morning to your mercy. I have no further words I need to add. I rest before you in the name of Jesus. Amen. May the gentleness of the good Shepherd accompany your rest. May his mercy quiet the harsh words you have spoken against yourself. May his presence be your comfort in the hours ahead. The prayer is complete. Rest here, with this day entrusted to his care.",
+   "reference": null,
+   "measured_score": 0.6297,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.7142857142857142,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.9256399999999985
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 7.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Focuses heavily on self-forgiveness and quiet comfort, making it very comforting before sleep.",
+    "hook_line": "Quiet the harsh words against yourself.",
+    "title": "Release Self-Criticism Before You Sleep"
+   },
+   "final_score": 0.7419
+  },
+  {
+   "start": 252.131,
+   "end": 303.536,
+   "sentences": [
+    {
+     "segment": "prayer-evening",
+     "text": "I bring the evening I actually have.",
+     "start": 252.131,
+     "end": 254.947
+    },
+    {
+     "segment": "prayer-evening",
+     "text": "Meet me among the ordinary sounds around me, the light beneath the door, and the things still out of place.",
+     "start": 255.247,
+     "end": 263.289
+    },
+    {
+     "segment": "prayer-evening",
+     "text": "I ask for a little room inside my thoughts to remember your presence.",
+     "start": 263.589,
+     "end": 268.837
+    },
+    {
+     "segment": "prayer-evening",
+     "text": "Help me receive this moment without demanding that it be perfect.",
+     "start": 269.137,
+     "end": 273.831
+    },
+    {
+     "segment": "stillness-1",
+     "text": "For a moment, leave the list alone.",
+     "start": 275.331,
+     "end": 278.083
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Breathe naturally, without trying to reach a particular rhythm.",
+     "start": 278.383,
+     "end": 282.991
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Notice where you are supported.",
+     "start": 283.291,
+     "end": 285.851
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Let your next breath arrive in its own time, while this simple prayer settles:",
+     "start": 286.151,
+     "end": 291.356
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Shepherd, lead me into rest.",
+     "start": 291.656,
+     "end": 293.853
+    },
+    {
+     "segment": "scripture-psalm-23-3",
+     "text": "He restoreth my soul:",
+     "start": 296.153,
+     "end": 298.287
+    },
+    {
+     "segment": "scripture-psalm-23-3",
+     "text": "he leadeth me in the paths of righteousness for his name's sake.",
+     "start": 298.587,
+     "end": 303.536
+    }
+   ],
+   "segments": [
+    "prayer-evening",
+    "stillness-1",
+    "scripture-psalm-23-3"
+   ],
+   "text": "I bring the evening I actually have. Meet me among the ordinary sounds around me, the light beneath the door, and the things still out of place. I ask for a little room inside my thoughts to remember your presence. Help me receive this moment without demanding that it be perfect. For a moment, leave the list alone. Breathe naturally, without trying to reach a particular rhythm. Notice where you are supported. Let your next breath arrive in its own time, while this simple prayer settles: Shepherd, lead me into rest. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.",
+   "reference": "Psalm 23:3 (KJV)",
+   "measured_score": 0.5632,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.2803738317757009,
+    "scripture": 1.0,
+    "promise": 0.4672897196261682,
+    "resolution": 0.4,
+    "length_fit": 0.5438
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 9.0,
+    "policy_safe": 10.0,
+    "reasons": "Great invitation to drop the mental to-do list and focus on the present breath.",
+    "hook_line": "For a moment, leave the list alone.",
+    "title": "Leave Your To-Do List Alone"
+   },
+   "final_score": 0.7403,
+   "hook": "For a moment, leave the list alone.",
+   "title": "Leave Your To-Do List Alone"
+  },
+  {
+   "start": 715.368,
+   "end": 761.509,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can speak to him in the valley.",
+     "start": 715.368,
+     "end": 717.885
+    },
+    {
+     "segment": "declaration",
+     "text": "I can receive kindness while questions remain.",
+     "start": 718.185,
+     "end": 722.004
+    },
+    {
+     "segment": "declaration",
+     "text": "I place the day behind me and the day before me within his care.",
+     "start": 722.304,
+     "end": 727.147
+    },
+    {
+     "segment": "declaration",
+     "text": "Tonight, I am learning to trust him with what I cannot carry.",
+     "start": 727.447,
+     "end": 731.799
+    },
+    {
+     "segment": "payoff",
+     "text": "Choose one unfinished concern from today.",
+     "start": 733.299,
+     "end": 736.584
+    },
+    {
+     "segment": "payoff",
+     "text": "Name it simply, without opening the whole story again.",
+     "start": 736.884,
+     "end": 741.129
+    },
+    {
+     "segment": "payoff",
+     "text": "Then pray:",
+     "start": 741.429,
+     "end": 742.731
+    },
+    {
+     "segment": "payoff",
+     "text": "Shepherd, I place this in your care for tonight.",
+     "start": 743.031,
+     "end": 746.316
+    },
+    {
+     "segment": "payoff",
+     "text": "If a practical step belongs to tomorrow, you can take it when tomorrow arrives.",
+     "start": 746.616,
+     "end": 752.717
+    },
+    {
+     "segment": "payoff",
+     "text": "For now, let that one concern rest beside this one prayer.",
+     "start": 753.017,
+     "end": 757.455
+    },
+    {
+     "segment": "payoff",
+     "text": "You have given it a name, and you have brought it to God.",
+     "start": 757.755,
+     "end": 761.509
+    }
+   ],
+   "segments": [
+    "declaration",
+    "payoff"
+   ],
+   "text": "I can speak to him in the valley. I can receive kindness while questions remain. I place the day behind me and the day before me within his care. Tonight, I am learning to trust him with what I cannot carry. Choose one unfinished concern from today. Name it simply, without opening the whole story again. Then pray: Shepherd, I place this in your care for tonight. If a practical step belongs to tomorrow, you can take it when tomorrow arrives. For now, let that one concern rest beside this one prayer. You have given it a name, and you have brought it to God.",
+   "reference": null,
+   "measured_score": 0.5102,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.380952380952381,
+    "scripture": 0.4,
+    "promise": 0.47619047619047616,
+    "resolution": 0.4,
+    "length_fit": 0.7543600000000015
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Very actionable exercise for dealing with a single unfinished concern before bed.",
+    "hook_line": "Choose one unfinished concern.",
+    "title": "Put Down One Worry Before You Sleep"
+   },
+   "final_score": 0.7341,
+   "hook": "Choose one unfinished concern.",
+   "title": "Put Down One Worry Before You Sleep"
+  },
+  {
+   "start": 712.423,
+   "end": 761.509,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can return when I have wandered.",
+     "start": 712.423,
+     "end": 715.068
+    },
+    {
+     "segment": "declaration",
+     "text": "I can speak to him in the valley.",
+     "start": 715.368,
+     "end": 717.885
+    },
+    {
+     "segment": "declaration",
+     "text": "I can receive kindness while questions remain.",
+     "start": 718.185,
+     "end": 722.004
+    },
+    {
+     "segment": "declaration",
+     "text": "I place the day behind me and the day before me within his care.",
+     "start": 722.304,
+     "end": 727.147
+    },
+    {
+     "segment": "declaration",
+     "text": "Tonight, I am learning to trust him with what I cannot carry.",
+     "start": 727.447,
+     "end": 731.799
+    },
+    {
+     "segment": "payoff",
+     "text": "Choose one unfinished concern from today.",
+     "start": 733.299,
+     "end": 736.584
+    },
+    {
+     "segment": "payoff",
+     "text": "Name it simply, without opening the whole story again.",
+     "start": 736.884,
+     "end": 741.129
+    },
+    {
+     "segment": "payoff",
+     "text": "Then pray:",
+     "start": 741.429,
+     "end": 742.731
+    },
+    {
+     "segment": "payoff",
+     "text": "Shepherd, I place this in your care for tonight.",
+     "start": 743.031,
+     "end": 746.316
+    },
+    {
+     "segment": "payoff",
+     "text": "If a practical step belongs to tomorrow, you can take it when tomorrow arrives.",
+     "start": 746.616,
+     "end": 752.717
+    },
+    {
+     "segment": "payoff",
+     "text": "For now, let that one concern rest beside this one prayer.",
+     "start": 753.017,
+     "end": 757.455
+    },
+    {
+     "segment": "payoff",
+     "text": "You have given it a name, and you have brought it to God.",
+     "start": 757.755,
+     "end": 761.509
+    }
+   ],
+   "segments": [
+    "declaration",
+    "payoff"
+   ],
+   "text": "I can return when I have wandered. I can speak to him in the valley. I can receive kindness while questions remain. I place the day behind me and the day before me within his care. Tonight, I am learning to trust him with what I cannot carry. Choose one unfinished concern from today. Name it simply, without opening the whole story again. Then pray: Shepherd, I place this in your care for tonight. If a practical step belongs to tomorrow, you can take it when tomorrow arrives. For now, let that one concern rest beside this one prayer. You have given it a name, and you have brought it to God.",
+   "reference": null,
+   "measured_score": 0.4919,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.3571428571428571,
+    "scripture": 0.4,
+    "promise": 0.44642857142857145,
+    "resolution": 0.4,
+    "length_fit": 0.6365599999999996
+   },
+   "rubric": {
+    "index": 10,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Identical powerful practical framework as [9], well-structured for anxiety relief.",
+    "hook_line": "Name your worry simply tonight.",
+    "title": "Handing Over What You Cannot Carry"
+   },
+   "final_score": 0.7268
+  },
+  {
+   "start": 370.665,
+   "end": 420.84,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "Stay with me.",
+     "start": 370.665,
+     "end": 372.031
+    },
+    {
+     "segment": "rehook-2",
+     "text": "Soon we reach the valley, and you will not walk it alone.",
+     "start": 372.331,
+     "end": 376.469
+    },
+    {
+     "segment": "scripture-isaiah-40-11",
+     "text": "He shall feed his flock like a shepherd:",
+     "start": 377.369,
+     "end": 380.185
+    },
+    {
+     "segment": "scripture-isaiah-40-11",
+     "text": "he shall gather the lambs with his arm, and carry them in his bosom, and shall gently lead those that are with young.",
+     "start": 380.485,
+     "end": 388.741
+    },
+    {
+     "segment": "prayer-receiving-help",
+     "text": "Gentle Shepherd, I bring the people who depend on me and the weariness I sometimes hide from them.",
+     "start": 390.541,
+     "end": 397.688
+    },
+    {
+     "segment": "prayer-receiving-help",
+     "text": "Help me love them without pretending my strength is endless.",
+     "start": 397.988,
+     "end": 402.191
+    },
+    {
+     "segment": "prayer-receiving-help",
+     "text": "Show me where I can share a task, ask a friend, or accept another person's kindness.",
+     "start": 402.491,
+     "end": 408.997
+    },
+    {
+     "segment": "prayer-receiving-help",
+     "text": "When I feel guilty for resting, remind me that I am also a creature in need of care.",
+     "start": 409.297,
+     "end": 415.911
+    },
+    {
+     "segment": "prayer-receiving-help",
+     "text": "Let me receive tenderness as readily as I try to offer it.",
+     "start": 416.211,
+     "end": 420.84
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "scripture-isaiah-40-11",
+    "prayer-receiving-help"
+   ],
+   "text": "Stay with me. Soon we reach the valley, and you will not walk it alone. He shall feed his flock like a shepherd: he shall gather the lambs with his arm, and carry them in his bosom, and shall gently lead those that are with young. Gentle Shepherd, I bring the people who depend on me and the weariness I sometimes hide from them. Help me love them without pretending my strength is endless. Show me where I can share a task, ask a friend, or accept another person's kindness. When I feel guilty for resting, remind me that I am also a creature in need of care. Let me receive tenderness as readily as I try to offer it.",
+   "reference": "Isaiah 40:11 (KJV)",
+   "measured_score": 0.5543,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.08333333333333333,
+    "scripture": 1.0,
+    "promise": 0.625,
+    "resolution": 0.4,
+    "length_fit": 0.5930000000000017
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Deeply comforting for caregivers and those hiding their weariness.",
+    "hook_line": "You are not supposed to be endless.",
+    "title": "Permission to Rest When You Are Weary"
+   },
+   "final_score": 0.7267
+  },
+  {
+   "start": 601.967,
+   "end": 650.197,
+   "sentences": [
+    {
+     "segment": "prayer-gratitude",
+     "text": "Thank you for the person through whom it came.",
+     "start": 601.967,
+     "end": 604.889
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Help me notice ordinary provision while I still live among unanswered questions.",
+     "start": 605.189,
+     "end": 611.312
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "I receive this small mercy with gratitude.",
+     "start": 611.612,
+     "end": 615.068
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Let it occupy a little more space in my memory than it did before.",
+     "start": 615.368,
+     "end": 620.552
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "Lord, let what I receive become kindness in my hands.",
+     "start": 622.052,
+     "end": 625.913
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "When I have patience to spare, help me offer it.",
+     "start": 626.213,
+     "end": 629.84
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "When I have enough to share, help me notice a real need.",
+     "start": 630.14,
+     "end": 634.215
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "When I have been forgiven, soften the way I speak to someone who has failed.",
+     "start": 634.515,
+     "end": 639.72
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "I do not want abundance to mean only gathering more for myself.",
+     "start": 640.02,
+     "end": 644.735
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "Form in me a generous life, with room for my neighbor at the table.",
+     "start": 645.035,
+     "end": 650.197
+    }
+   ],
+   "segments": [
+    "prayer-gratitude",
+    "prayer-generosity"
+   ],
+   "text": "Thank you for the person through whom it came. Help me notice ordinary provision while I still live among unanswered questions. I receive this small mercy with gratitude. Let it occupy a little more space in my memory than it did before. Lord, let what I receive become kindness in my hands. When I have patience to spare, help me offer it. When I have enough to share, help me notice a real need. When I have been forgiven, soften the way I speak to someone who has failed. I do not want abundance to mean only gathering more for myself. Form in me a generous life, with room for my neighbor at the table.",
+   "reference": null,
+   "measured_score": 0.5719,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.08695652173913043,
+    "scripture": 0.4,
+    "promise": 0.21739130434782608,
+    "resolution": 0.4,
+    "length_fit": 0.6707999999999993
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Strong focus on gratitude and turning provision into kindness for others.",
+    "hook_line": "Notice ordinary provision today.",
+    "title": "A Prayer for Gratitude and Generosity"
+   },
+   "final_score": 0.7238
+  },
+  {
+   "start": 338.759,
+   "end": 388.741,
+   "sentences": [
+    {
+     "segment": "prayer-right-paths",
+     "text": "Guide my next step, Lord.",
+     "start": 338.759,
+     "end": 341.063
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "If an apology is needed, help me offer it plainly.",
+     "start": 341.363,
+     "end": 345.565
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "If a boundary is needed, help me speak it with steadiness.",
+     "start": 345.865,
+     "end": 350.111
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "If I need to finish something I have avoided, give me courage to begin.",
+     "start": 350.411,
+     "end": 355.659
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "Keep me from making grand promises tonight that I have not considered.",
+     "start": 355.959,
+     "end": 361.292
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "Teach me the quiet faithfulness of doing one right thing at a time, following the path you place before me.",
+     "start": 361.592,
+     "end": 369.165
+    },
+    {
+     "segment": "rehook-2",
+     "text": "Stay with me.",
+     "start": 370.665,
+     "end": 372.031
+    },
+    {
+     "segment": "rehook-2",
+     "text": "Soon we reach the valley, and you will not walk it alone.",
+     "start": 372.331,
+     "end": 376.469
+    },
+    {
+     "segment": "scripture-isaiah-40-11",
+     "text": "He shall feed his flock like a shepherd:",
+     "start": 377.369,
+     "end": 380.185
+    },
+    {
+     "segment": "scripture-isaiah-40-11",
+     "text": "he shall gather the lambs with his arm, and carry them in his bosom, and shall gently lead those that are with young.",
+     "start": 380.485,
+     "end": 388.741
+    }
+   ],
+   "segments": [
+    "prayer-right-paths",
+    "rehook-2",
+    "scripture-isaiah-40-11"
+   ],
+   "text": "Guide my next step, Lord. If an apology is needed, help me offer it plainly. If a boundary is needed, help me speak it with steadiness. If I need to finish something I have avoided, give me courage to begin. Keep me from making grand promises tonight that I have not considered. Teach me the quiet faithfulness of doing one right thing at a time, following the path you place before me. Stay with me. Soon we reach the valley, and you will not walk it alone. He shall feed his flock like a shepherd: he shall gather the lambs with his arm, and carry them in his bosom, and shall gently lead those that are with young.",
+   "reference": "Isaiah 40:11 (KJV)",
+   "measured_score": 0.6167,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.1694915254237288,
+    "scripture": 1.0,
+    "promise": 0.211864406779661,
+    "resolution": 1.0,
+    "length_fit": 0.6007200000000011
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 6.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Good practical guidance for boundaries and steps, grounded with Isaiah scripture.",
+    "hook_line": "Guide my next step, Lord.",
+    "title": "Guidance for Your Next Step Tonight"
+   },
+   "final_score": 0.7217
+  },
+  {
+   "start": 291.656,
+   "end": 337.259,
+   "sentences": [
+    {
+     "segment": "stillness-1",
+     "text": "Shepherd, lead me into rest.",
+     "start": 291.656,
+     "end": 293.853
+    },
+    {
+     "segment": "scripture-psalm-23-3",
+     "text": "He restoreth my soul:",
+     "start": 296.153,
+     "end": 298.287
+    },
+    {
+     "segment": "scripture-psalm-23-3",
+     "text": "he leadeth me in the paths of righteousness for his name's sake.",
+     "start": 298.587,
+     "end": 303.536
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "Lord, I name what needs forgiveness in me.",
+     "start": 305.336,
+     "end": 308.621
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I remember the sharp answer, the selfish choice, and the truth I avoided.",
+     "start": 308.921,
+     "end": 314.447
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I am sorry for the hurt I caused.",
+     "start": 314.747,
+     "end": 317.499
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "Forgive me, and make me willing to repair what I can.",
+     "start": 317.799,
+     "end": 321.447
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "Help me distinguish honest responsibility from endless self-accusation.",
+     "start": 321.747,
+     "end": 327.251
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I cannot undo this day by replaying it.",
+     "start": 327.551,
+     "end": 330.793
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I can bring it to your mercy and ask you to shape a more faithful response tomorrow.",
+     "start": 331.093,
+     "end": 337.259
+    }
+   ],
+   "segments": [
+    "stillness-1",
+    "scripture-psalm-23-3",
+    "prayer-confession"
+   ],
+   "text": "Shepherd, lead me into rest. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake. Lord, I name what needs forgiveness in me. I remember the sharp answer, the selfish choice, and the truth I avoided. I am sorry for the hurt I caused. Forgive me, and make me willing to repair what I can. Help me distinguish honest responsibility from endless self-accusation. I cannot undo this day by replaying it. I can bring it to your mercy and ask you to shape a more faithful response tomorrow.",
+   "reference": "Psalm 23:3 (KJV)",
+   "measured_score": 0.6093,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.21276595744680848,
+    "scripture": 1.0,
+    "promise": 0.7978723404255319,
+    "resolution": 0.4,
+    "length_fit": 0.7758799999999997
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.0,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Direct and honest reflection on personal responsibility and repentance.",
+    "hook_line": "Shepherd, lead me into rest.",
+    "title": "A Prayer to Release Regret and Rest"
+   },
+   "final_score": 0.7187
+  },
+  {
+   "start": 519.129,
+   "end": 551.913,
+   "sentences": [
+    {
+     "segment": "prayer-companions",
+     "text": "Teach me to listen before I advise.",
+     "start": 519.129,
+     "end": 522.116
+    },
+    {
+     "segment": "prayer-companions",
+     "text": "Show me a kindness I can offer when the day begins.",
+     "start": 522.416,
+     "end": 526.192
+    },
+    {
+     "segment": "prayer-companions",
+     "text": "As I rest now, I entrust them to your compassion, with all that remains beyond my reach.",
+     "start": 526.492,
+     "end": 533.553
+    },
+    {
+     "segment": "rehook-3",
+     "text": "Next, the table prepared for you, and the argument you keep having in your head.",
+     "start": 535.053,
+     "end": 540.643
+    },
+    {
+     "segment": "scripture-psalm-23-5",
+     "text": "Thou preparest a table before me in the presence of mine enemies:",
+     "start": 541.543,
+     "end": 546.727
+    },
+    {
+     "segment": "scripture-psalm-23-5",
+     "text": "thou anointest my head with oil;",
+     "start": 547.027,
+     "end": 549.736
+    },
+    {
+     "segment": "scripture-psalm-23-5",
+     "text": "my cup runneth over.",
+     "start": 550.036,
+     "end": 551.913
+    }
+   ],
+   "segments": [
+    "prayer-companions",
+    "rehook-3",
+    "scripture-psalm-23-5"
+   ],
+   "text": "Teach me to listen before I advise. Show me a kindness I can offer when the day begins. As I rest now, I entrust them to your compassion, with all that remains beyond my reach. Next, the table prepared for you, and the argument you keep having in your head. Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.",
+   "reference": "Psalm 23:5 (KJV)",
+   "measured_score": 0.6092,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.5555555555555555,
+    "scripture": 1.0,
+    "promise": 0.3472222222222222,
+    "resolution": 0.4,
+    "length_fit": 0.7113599999999997
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 6.5,
+    "stands_alone": 7.5,
+    "emotional_payoff": 8.0,
+    "shareability": 6.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Addresses the mental chatter and arguments kept in mind, concluding with Psalm 23.",
+    "hook_line": "Teach me to listen first.",
+    "title": "Quieting Mental Chatter with Psalm 23"
+   },
+   "final_score": 0.6987
+  },
+  {
+   "start": 166.285,
+   "end": 206.731,
+   "sentences": [
+    {
+     "segment": "prayer-enough",
+     "text": "Tonight I lay down that comparison.",
+     "start": 166.285,
+     "end": 169.229
+    },
+    {
+     "segment": "prayer-enough",
+     "text": "I do not know their whole story, and I cannot live their calling.",
+     "start": 169.529,
+     "end": 174.351
+    },
+    {
+     "segment": "prayer-enough",
+     "text": "Help me recognize the portion entrusted to me today.",
+     "start": 174.651,
+     "end": 178.725
+    },
+    {
+     "segment": "prayer-enough",
+     "text": "Let gratitude grow without denying anything difficult.",
+     "start": 179.025,
+     "end": 183.441
+    },
+    {
+     "segment": "prayer-enough",
+     "text": "Where I have enough, make me generous.",
+     "start": 183.741,
+     "end": 186.429
+    },
+    {
+     "segment": "prayer-enough",
+     "text": "Where I am lacking, help me speak honestly and seek wise support.",
+     "start": 186.729,
+     "end": 191.636
+    },
+    {
+     "segment": "rehook-1",
+     "text": "Next comes the line about still waters, and the work you are ready to put down.",
+     "start": 193.136,
+     "end": 199.024
+    },
+    {
+     "segment": "scripture-psalm-23-2",
+     "text": "He maketh me to lie down in green pastures:",
+     "start": 199.924,
+     "end": 203.401
+    },
+    {
+     "segment": "scripture-psalm-23-2",
+     "text": "he leadeth me beside the still waters.",
+     "start": 203.701,
+     "end": 206.731
+    }
+   ],
+   "segments": [
+    "prayer-enough",
+    "rehook-1",
+    "scripture-psalm-23-2"
+   ],
+   "text": "Tonight I lay down that comparison. I do not know their whole story, and I cannot live their calling. Help me recognize the portion entrusted to me today. Let gratitude grow without denying anything difficult. Where I have enough, make me generous. Where I am lacking, help me speak honestly and seek wise support. Next comes the line about still waters, and the work you are ready to put down. He maketh me to lie down in green pastures: he leadeth me beside the still waters.",
+   "reference": "Psalm 23:2 (KJV)",
+   "measured_score": 0.5357,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.11627906976744186,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.98216
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.0,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Directly targets the trap of comparison and transitions smoothly into still waters.",
+    "hook_line": "Tonight I lay down that comparison.",
+    "title": "Stopping the Comparison Trap"
+   },
+   "final_score": 0.6943
+  },
+  {
+   "start": 696.179,
+   "end": 731.799,
+   "sentences": [
+    {
+     "segment": "rehook-4",
+     "text": "We are near the end of the psalm.",
+     "start": 696.179,
+     "end": 698.675
+    },
+    {
+     "segment": "rehook-4",
+     "text": "Say these words of trust with me.",
+     "start": 698.975,
+     "end": 701.513
+    },
+    {
+     "segment": "declaration",
+     "text": "I belong to the good Shepherd.",
+     "start": 702.413,
+     "end": 704.653
+    },
+    {
+     "segment": "declaration",
+     "text": "I can bring him a genuine need.",
+     "start": 704.953,
+     "end": 707.705
+    },
+    {
+     "segment": "declaration",
+     "text": "I can receive rest without earning it through exhaustion.",
+     "start": 708.005,
+     "end": 712.123
+    },
+    {
+     "segment": "declaration",
+     "text": "I can return when I have wandered.",
+     "start": 712.423,
+     "end": 715.068
+    },
+    {
+     "segment": "declaration",
+     "text": "I can speak to him in the valley.",
+     "start": 715.368,
+     "end": 717.885
+    },
+    {
+     "segment": "declaration",
+     "text": "I can receive kindness while questions remain.",
+     "start": 718.185,
+     "end": 722.004
+    },
+    {
+     "segment": "declaration",
+     "text": "I place the day behind me and the day before me within his care.",
+     "start": 722.304,
+     "end": 727.147
+    },
+    {
+     "segment": "declaration",
+     "text": "Tonight, I am learning to trust him with what I cannot carry.",
+     "start": 727.447,
+     "end": 731.799
+    }
+   ],
+   "segments": [
+    "rehook-4",
+    "declaration"
+   ],
+   "text": "We are near the end of the psalm. Say these words of trust with me. I belong to the good Shepherd. I can bring him a genuine need. I can receive rest without earning it through exhaustion. I can return when I have wandered. I can speak to him in the valley. I can receive kindness while questions remain. I place the day behind me and the day before me within his care. Tonight, I am learning to trust him with what I cannot carry.",
+   "reference": null,
+   "measured_score": 0.4713,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.0,
+    "scripture": 0.4,
+    "promise": 0.5882352941176471,
+    "resolution": 0.4,
+    "length_fit": 0.8248000000000002
+   },
+   "rubric": {
+    "index": 11,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 8.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Reassuring declarations of belonging and receiving rest without earning it.",
+    "hook_line": "Say these words of trust with me.",
+    "title": "Declarations of Rest and Trust"
+   },
+   "final_score": 0.6935
+  },
+  {
+   "start": 448.807,
+   "end": 498.147,
+   "sentences": [
+    {
+     "segment": "prayer-grief",
+     "text": "Stay near as I grieve.",
+     "start": 448.807,
+     "end": 450.855
+    },
+    {
+     "segment": "prayer-grief",
+     "text": "I will not force a cheerful ending onto a painful day.",
+     "start": 451.155,
+     "end": 455.485
+    },
+    {
+     "segment": "prayer-grief",
+     "text": "Receive the tears I have, and the words I cannot find.",
+     "start": 455.785,
+     "end": 460.265
+    },
+    {
+     "segment": "prayer-grief",
+     "text": "Help me accept companionship from people who can sit with me without rushing my sorrow.",
+     "start": 460.565,
+     "end": 466.709
+    },
+    {
+     "segment": "prayer-unknown",
+     "text": "Father, I bring the unknown that follows me into bed.",
+     "start": 468.209,
+     "end": 472.369
+    },
+    {
+     "segment": "prayer-unknown",
+     "text": "I cannot see how the conversation will go or what the next season will require.",
+     "start": 472.669,
+     "end": 478.813
+    },
+    {
+     "segment": "prayer-unknown",
+     "text": "Give me courage for the part that belongs to me, and patience with what remains unclear.",
+     "start": 479.113,
+     "end": 485.257
+    },
+    {
+     "segment": "prayer-unknown",
+     "text": "Keep me attentive to wise counsel and practical help.",
+     "start": 485.557,
+     "end": 489.675
+    },
+    {
+     "segment": "prayer-unknown",
+     "text": "For tonight, I ask you to meet me in the uncertainty itself.",
+     "start": 489.975,
+     "end": 494.455
+    },
+    {
+     "segment": "prayer-unknown",
+     "text": "Let me remember that I can speak to you from here.",
+     "start": 494.755,
+     "end": 498.147
+    }
+   ],
+   "segments": [
+    "prayer-grief",
+    "prayer-unknown"
+   ],
+   "text": "Stay near as I grieve. I will not force a cheerful ending onto a painful day. Receive the tears I have, and the words I cannot find. Help me accept companionship from people who can sit with me without rushing my sorrow. Father, I bring the unknown that follows me into bed. I cannot see how the conversation will go or what the next season will require. Give me courage for the part that belongs to me, and patience with what remains unclear. Keep me attentive to wise counsel and practical help. For tonight, I ask you to meet me in the uncertainty itself. Let me remember that I can speak to you from here.",
+   "reference": null,
+   "measured_score": 0.4187,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.17391304347826086,
+    "scripture": 0.4,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.626400000000001
+   },
+   "rubric": {
+    "index": 14,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 7.0,
+    "policy_safe": 10.0,
+    "reasons": "Extremely validating for grief, refusing forced positivity and meeting the user in uncertainty.",
+    "hook_line": "Stay near as I grieve.",
+    "title": "A Prayer for Painful and Heavy Days"
+   },
+   "final_score": 0.6925
+  },
+  {
+   "start": 314.747,
+   "end": 369.165,
+   "sentences": [
+    {
+     "segment": "prayer-confession",
+     "text": "I am sorry for the hurt I caused.",
+     "start": 314.747,
+     "end": 317.499
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "Forgive me, and make me willing to repair what I can.",
+     "start": 317.799,
+     "end": 321.447
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "Help me distinguish honest responsibility from endless self-accusation.",
+     "start": 321.747,
+     "end": 327.251
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I cannot undo this day by replaying it.",
+     "start": 327.551,
+     "end": 330.793
+    },
+    {
+     "segment": "prayer-confession",
+     "text": "I can bring it to your mercy and ask you to shape a more faithful response tomorrow.",
+     "start": 331.093,
+     "end": 337.259
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "Guide my next step, Lord.",
+     "start": 338.759,
+     "end": 341.063
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "If an apology is needed, help me offer it plainly.",
+     "start": 341.363,
+     "end": 345.565
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "If a boundary is needed, help me speak it with steadiness.",
+     "start": 345.865,
+     "end": 350.111
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "If I need to finish something I have avoided, give me courage to begin.",
+     "start": 350.411,
+     "end": 355.659
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "Keep me from making grand promises tonight that I have not considered.",
+     "start": 355.959,
+     "end": 361.292
+    },
+    {
+     "segment": "prayer-right-paths",
+     "text": "Teach me the quiet faithfulness of doing one right thing at a time, following the path you place before me.",
+     "start": 361.592,
+     "end": 369.165
+    }
+   ],
+   "segments": [
+    "prayer-confession",
+    "prayer-right-paths"
+   ],
+   "text": "I am sorry for the hurt I caused. Forgive me, and make me willing to repair what I can. Help me distinguish honest responsibility from endless self-accusation. I cannot undo this day by replaying it. I can bring it to your mercy and ask you to shape a more faithful response tomorrow. Guide my next step, Lord. If an apology is needed, help me offer it plainly. If a boundary is needed, help me speak it with steadiness. If I need to finish something I have avoided, give me courage to begin. Keep me from making grand promises tonight that I have not considered. Teach me the quiet faithfulness of doing one right thing at a time, following the path you place before me.",
+   "reference": null,
+   "measured_score": 0.4489,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.24193548387096772,
+    "scripture": 0.4,
+    "promise": 0.4032258064516129,
+    "resolution": 0.4,
+    "length_fit": 0.42327999999999977
+   },
+   "rubric": {
+    "index": 12,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Combines repentance with practical next steps for clarity and courage.",
+    "hook_line": "I cannot undo this day.",
+    "title": "Moving Past Regret Into Tomorrow"
+   },
+   "final_score": 0.6596
+  },
+  {
+   "start": 599.277,
+   "end": 650.197,
+   "sentences": [
+    {
+     "segment": "prayer-gratitude",
+     "text": "I name the gift I remember.",
+     "start": 599.277,
+     "end": 601.667
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Thank you for the person through whom it came.",
+     "start": 601.967,
+     "end": 604.889
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Help me notice ordinary provision while I still live among unanswered questions.",
+     "start": 605.189,
+     "end": 611.312
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "I receive this small mercy with gratitude.",
+     "start": 611.612,
+     "end": 615.068
+    },
+    {
+     "segment": "prayer-gratitude",
+     "text": "Let it occupy a little more space in my memory than it did before.",
+     "start": 615.368,
+     "end": 620.552
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "Lord, let what I receive become kindness in my hands.",
+     "start": 622.052,
+     "end": 625.913
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "When I have patience to spare, help me offer it.",
+     "start": 626.213,
+     "end": 629.84
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "When I have enough to share, help me notice a real need.",
+     "start": 630.14,
+     "end": 634.215
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "When I have been forgiven, soften the way I speak to someone who has failed.",
+     "start": 634.515,
+     "end": 639.72
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "I do not want abundance to mean only gathering more for myself.",
+     "start": 640.02,
+     "end": 644.735
+    },
+    {
+     "segment": "prayer-generosity",
+     "text": "Form in me a generous life, with room for my neighbor at the table.",
+     "start": 645.035,
+     "end": 650.197
+    }
+   ],
+   "segments": [
+    "prayer-gratitude",
+    "prayer-generosity"
+   ],
+   "text": "I name the gift I remember. Thank you for the person through whom it came. Help me notice ordinary provision while I still live among unanswered questions. I receive this small mercy with gratitude. Let it occupy a little more space in my memory than it did before. Lord, let what I receive become kindness in my hands. When I have patience to spare, help me offer it. When I have enough to share, help me notice a real need. When I have been forgiven, soften the way I speak to someone who has failed. I do not want abundance to mean only gathering more for myself. Form in me a generous life, with room for my neighbor at the table.",
+   "reference": null,
+   "measured_score": 0.4194,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.08264462809917356,
+    "scripture": 0.4,
+    "promise": 0.2066115702479339,
+    "resolution": 0.4,
+    "length_fit": 0.5632000000000017
+   },
+   "rubric": {
+    "index": 13,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Focuses on remembering small mercies and turning them into practical kindness.",
+    "hook_line": "I name the gift I remember.",
+    "title": "Turning Small Mercies Into Kindness"
+   },
+   "final_score": 0.6578
+  }
+ ],
+ "chosen": [
+  {
+   "start": 898.023,
+   "end": 937.728,
+   "sentences": [
+    {
+     "segment": "stillness-sleep",
+     "text": "Breathe in your ordinary way.",
+     "start": 898.023,
+     "end": 900.476
+    },
+    {
+     "segment": "stillness-sleep",
+     "text": "For these few moments, let being here be enough.",
+     "start": 900.776,
+     "end": 904.36
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "My Shepherd, I leave this day with you now.",
+     "start": 907.66,
+     "end": 910.924
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Receive the gratitude, the confession, the sorrow, and the hope I have brought.",
+     "start": 911.224,
+     "end": 916.365
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Grant me rest, and meet me with patience if I am still awake.",
+     "start": 916.665,
+     "end": 921.188
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Help me receive the care available to me.",
+     "start": 921.488,
+     "end": 924.475
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I entrust the next breath and the coming morning to your mercy.",
+     "start": 924.775,
+     "end": 929.361
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I have no further words I need to add.",
+     "start": 929.661,
+     "end": 932.776
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "I rest before you in the name of Jesus.",
+     "start": 933.076,
+     "end": 936.233
+    },
+    {
+     "segment": "sleep-prayer-closing",
+     "text": "Amen.",
+     "start": 936.533,
+     "end": 937.728
+    }
+   ],
+   "segments": [
+    "stillness-sleep",
+    "sleep-prayer-closing"
+   ],
+   "text": "Breathe in your ordinary way. For these few moments, let being here be enough. My Shepherd, I leave this day with you now. Receive the gratitude, the confession, the sorrow, and the hope I have brought. Grant me rest, and meet me with patience if I am still awake. Help me receive the care available to me. I entrust the next breath and the coming morning to your mercy. I have no further words I need to add. I rest before you in the name of Jesus. Amen.",
+   "reference": null,
+   "measured_score": 0.827,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.45454545454545453,
+    "scripture": 0.4,
+    "promise": 1.0,
+    "resolution": 1.0,
+    "length_fit": 0.9881999999999971
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 7.5,
+    "stands_alone": 8.0,
+    "emotional_payoff": 8.5,
+    "shareability": 7.0,
+    "loop_potential": 8.0,
+    "policy_safe": 10.0,
+    "reasons": "Starts with a calming breathing exercise that stops the scroll, concluding in a natural evening prayer.",
+    "hook_line": "Let being here be enough.",
+    "title": "A Gentle Evening Prayer for Rest"
+   },
+   "final_score": 0.8208,
+   "hook": "Let being here be enough.",
+   "title": "A Gentle Evening Prayer for Rest"
+  },
+  {
+   "start": 252.131,
+   "end": 303.536,
+   "sentences": [
+    {
+     "segment": "prayer-evening",
+     "text": "I bring the evening I actually have.",
+     "start": 252.131,
+     "end": 254.947
+    },
+    {
+     "segment": "prayer-evening",
+     "text": "Meet me among the ordinary sounds around me, the light beneath the door, and the things still out of place.",
+     "start": 255.247,
+     "end": 263.289
+    },
+    {
+     "segment": "prayer-evening",
+     "text": "I ask for a little room inside my thoughts to remember your presence.",
+     "start": 263.589,
+     "end": 268.837
+    },
+    {
+     "segment": "prayer-evening",
+     "text": "Help me receive this moment without demanding that it be perfect.",
+     "start": 269.137,
+     "end": 273.831
+    },
+    {
+     "segment": "stillness-1",
+     "text": "For a moment, leave the list alone.",
+     "start": 275.331,
+     "end": 278.083
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Breathe naturally, without trying to reach a particular rhythm.",
+     "start": 278.383,
+     "end": 282.991
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Notice where you are supported.",
+     "start": 283.291,
+     "end": 285.851
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Let your next breath arrive in its own time, while this simple prayer settles:",
+     "start": 286.151,
+     "end": 291.356
+    },
+    {
+     "segment": "stillness-1",
+     "text": "Shepherd, lead me into rest.",
+     "start": 291.656,
+     "end": 293.853
+    },
+    {
+     "segment": "scripture-psalm-23-3",
+     "text": "He restoreth my soul:",
+     "start": 296.153,
+     "end": 298.287
+    },
+    {
+     "segment": "scripture-psalm-23-3",
+     "text": "he leadeth me in the paths of righteousness for his name's sake.",
+     "start": 298.587,
+     "end": 303.536
+    }
+   ],
+   "segments": [
+    "prayer-evening",
+    "stillness-1",
+    "scripture-psalm-23-3"
+   ],
+   "text": "I bring the evening I actually have. Meet me among the ordinary sounds around me, the light beneath the door, and the things still out of place. I ask for a little room inside my thoughts to remember your presence. Help me receive this moment without demanding that it be perfect. For a moment, leave the list alone. Breathe naturally, without trying to reach a particular rhythm. Notice where you are supported. Let your next breath arrive in its own time, while this simple prayer settles: Shepherd, lead me into rest. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.",
+   "reference": "Psalm 23:3 (KJV)",
+   "measured_score": 0.5632,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.2803738317757009,
+    "scripture": 1.0,
+    "promise": 0.4672897196261682,
+    "resolution": 0.4,
+    "length_fit": 0.5438
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 8.0,
+    "stands_alone": 8.5,
+    "emotional_payoff": 8.5,
+    "shareability": 7.5,
+    "loop_potential": 9.0,
+    "policy_safe": 10.0,
+    "reasons": "Great invitation to drop the mental to-do list and focus on the present breath.",
+    "hook_line": "For a moment, leave the list alone.",
+    "title": "Leave Your To-Do List Alone"
+   },
+   "final_score": 0.7403,
+   "hook": "For a moment, leave the list alone.",
+   "title": "Leave Your To-Do List Alone"
+  },
+  {
+   "start": 715.368,
+   "end": 761.509,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I can speak to him in the valley.",
+     "start": 715.368,
+     "end": 717.885
+    },
+    {
+     "segment": "declaration",
+     "text": "I can receive kindness while questions remain.",
+     "start": 718.185,
+     "end": 722.004
+    },
+    {
+     "segment": "declaration",
+     "text": "I place the day behind me and the day before me within his care.",
+     "start": 722.304,
+     "end": 727.147
+    },
+    {
+     "segment": "declaration",
+     "text": "Tonight, I am learning to trust him with what I cannot carry.",
+     "start": 727.447,
+     "end": 731.799
+    },
+    {
+     "segment": "payoff",
+     "text": "Choose one unfinished concern from today.",
+     "start": 733.299,
+     "end": 736.584
+    },
+    {
+     "segment": "payoff",
+     "text": "Name it simply, without opening the whole story again.",
+     "start": 736.884,
+     "end": 741.129
+    },
+    {
+     "segment": "payoff",
+     "text": "Then pray:",
+     "start": 741.429,
+     "end": 742.731
+    },
+    {
+     "segment": "payoff",
+     "text": "Shepherd, I place this in your care for tonight.",
+     "start": 743.031,
+     "end": 746.316
+    },
+    {
+     "segment": "payoff",
+     "text": "If a practical step belongs to tomorrow, you can take it when tomorrow arrives.",
+     "start": 746.616,
+     "end": 752.717
+    },
+    {
+     "segment": "payoff",
+     "text": "For now, let that one concern rest beside this one prayer.",
+     "start": 753.017,
+     "end": 757.455
+    },
+    {
+     "segment": "payoff",
+     "text": "You have given it a name, and you have brought it to God.",
+     "start": 757.755,
+     "end": 761.509
+    }
+   ],
+   "segments": [
+    "declaration",
+    "payoff"
+   ],
+   "text": "I can speak to him in the valley. I can receive kindness while questions remain. I place the day behind me and the day before me within his care. Tonight, I am learning to trust him with what I cannot carry. Choose one unfinished concern from today. Name it simply, without opening the whole story again. Then pray: Shepherd, I place this in your care for tonight. If a practical step belongs to tomorrow, you can take it when tomorrow arrives. For now, let that one concern rest beside this one prayer. You have given it a name, and you have brought it to God.",
+   "reference": null,
+   "measured_score": 0.5102,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.380952380952381,
+    "scripture": 0.4,
+    "promise": 0.47619047619047616,
+    "resolution": 0.4,
+    "length_fit": 0.7543600000000015
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 8.0,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.5,
+    "loop_potential": 8.5,
+    "policy_safe": 10.0,
+    "reasons": "Very actionable exercise for dealing with a single unfinished concern before bed.",
+    "hook_line": "Choose one unfinished concern.",
+    "title": "Put Down One Worry Before You Sleep"
+   },
+   "final_score": 0.7341,
+   "hook": "Choose one unfinished concern.",
+   "title": "Put Down One Worry Before You Sleep"
+  }
+ ],
+ "selection_mode": "LEGACY",
+ "input_sha256": {
+  "timeline": "15c26f7e8f5a0bd3b14cfe9836c8d61bbf515c0bf336978708812b50e5989b62",
+  "script": "d9ac04e08ba351db3d55b29d8f7fac7cb4478f32d36600870aeff76eabb0338a"
+ },
+ "structural_counts": {
+  "opening_starts_total": 193,
+  "opening_starts_accepted": 24,
+  "opening_rejections": {
+   "OPENING_OVER_3S": 122,
+   "CONTEXT_OPENER": 11,
+   "DEPENDENT_OPENING_REFERENCE": 17,
+   "EMPTY_OR_INCOMPLETE_OPENING": 16,
+   "CONTINUATION_OPENING_LINE": 3
+  },
+  "window_pairs_total": 110,
+  "window_pairs_accepted": 19,
+  "window_rejections": {
+   "CTA_OR_TRANSITION_SEGMENT": 6,
+   "PARTIAL_SCRIPTURE": 11,
+   "UNRESOLVED_SEGMENT_END": 69,
+   "INCOMPLETE_ENDING": 5
+  }
+ },
+ "reason": null
+}

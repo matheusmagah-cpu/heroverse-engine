@@ -1,0 +1,293 @@
+{
+ "version": "shorts-produce-v2-r8",
+ "source_pilot": "pilot-008",
+ "selection_rubric_model": "gemini-3.5-flash-lite",
+ "rejected_r8": [],
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "94475b780f855230502ebbe61d8a93370746439f862e0f2d0cf7a0da92c28429",
+   "seconds": 40.2,
+   "source_start": 898.023,
+   "source_end": 937.728,
+   "segments": [
+    "stillness-sleep",
+    "sleep-prayer-closing"
+   ],
+   "hook": "Let being here be enough.",
+   "hook_shown": false,
+   "title": "A Gentle Evening Prayer for Rest",
+   "reference": null,
+   "scenes": [
+    "bg-psalm-resting-meadow",
+    "bg-psalm-hill-path"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8208,
+    "measured_score": 0.827,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.45454545454545453,
+     "scripture": 0.4,
+     "promise": 1.0,
+     "resolution": 1.0,
+     "length_fit": 0.9881999999999971
+    },
+    "rubric": {
+     "index": 0,
+     "hook_first_2s": 7.5,
+     "stands_alone": 8.0,
+     "emotional_payoff": 8.5,
+     "shareability": 7.0,
+     "loop_potential": 8.0,
+     "policy_safe": 10.0,
+     "reasons": "Starts with a calming breathing exercise that stops the scroll, concluding in a natural evening prayer.",
+     "hook_line": "Let being here be enough.",
+     "title": "A Gentle Evening Prayer for Rest"
+    }
+   },
+   "text": "Breathe in your ordinary way. For these few moments, let being here be enough. My Shepherd, I leave this day with you now. Receive the gratitude, the confession, the sorrow, and the hope I have brought. Grant me rest, and meet me with patience if I am still awake. Help me receive the care available to me. I entrust the next breath and the coming morning to your mercy. I have no further words I need to add. I rest before you in the name of Jesus. Amen.",
+   "publish": false,
+   "qa_output_sha256": "94475b780f855230502ebbe61d8a93370746439f862e0f2d0cf7a0da92c28429",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 40.2,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure",
+    "error_code": "HTTP_503_UNAVAILABLE",
+    "failed_at": "2026-10-25T14:48:54.681330+00:00",
+    "output_sha256": "94475b780f855230502ebbe61d8a93370746439f862e0f2d0cf7a0da92c28429",
+    "provider_diagnostic": {
+     "http_status": 503,
+     "provider_status": "UNAVAILABLE",
+     "body_truncated": false,
+     "raw_body_retained": false,
+     "sanitized": true,
+     "body_parse_status": "JSON_ERROR_OBJECT",
+     "body_bytes_read": 198
+    }
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "REVIEW_MODEL_NOT_DESIGNATED",
+     "OVERALL_INVALID"
+    ]
+   }
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "473056b47e94c0dc5c8a8975043fb9dbc4eda1adfa9d4f65a5776c215fea463a",
+   "seconds": 51.91,
+   "source_start": 252.131,
+   "source_end": 303.536,
+   "segments": [
+    "prayer-evening",
+    "stillness-1",
+    "scripture-psalm-23-3"
+   ],
+   "hook": "For a moment, leave the list alone.",
+   "hook_shown": false,
+   "title": "Leave Your To-Do List Alone",
+   "reference": "Psalm 23:3 (KJV)",
+   "scenes": [
+    "bg-shepherd-grass-dew",
+    "bg-shepherd-lamp-gate",
+    "bg-shepherd-fold-stars"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.7403,
+    "measured_score": 0.5632,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 0.3,
+     "second_person": 0.2803738317757009,
+     "scripture": 1.0,
+     "promise": 0.4672897196261682,
+     "resolution": 0.4,
+     "length_fit": 0.5438
+    },
+    "rubric": {
+     "index": 6,
+     "hook_first_2s": 8.0,
+     "stands_alone": 8.5,
+     "emotional_payoff": 8.5,
+     "shareability": 7.5,
+     "loop_potential": 9.0,
+     "policy_safe": 10.0,
+     "reasons": "Great invitation to drop the mental to-do list and focus on the present breath.",
+     "hook_line": "For a moment, leave the list alone.",
+     "title": "Leave Your To-Do List Alone"
+    }
+   },
+   "text": "I bring the evening I actually have. Meet me among the ordinary sounds around me, the light beneath the door, and the things still out of place. I ask for a little room inside my thoughts to remember your presence. Help me receive this moment without demanding that it be perfect. For a moment, leave the list alone. Breathe naturally, without trying to reach a particular rhythm. Notice where you are supported. Let your next breath arrive in its own time, while this simple prayer settles: Shepherd, lead me into rest. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.",
+   "publish": false,
+   "qa_output_sha256": "473056b47e94c0dc5c8a8975043fb9dbc4eda1adfa9d4f65a5776c215fea463a",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 51.91,
+    "lufs": -14.6,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure",
+    "error_code": "HTTP_503_UNAVAILABLE",
+    "failed_at": "2026-10-25T14:50:22.796669+00:00",
+    "output_sha256": "473056b47e94c0dc5c8a8975043fb9dbc4eda1adfa9d4f65a5776c215fea463a",
+    "provider_diagnostic": {
+     "http_status": 503,
+     "provider_status": "UNAVAILABLE",
+     "body_truncated": false,
+     "raw_body_retained": false,
+     "sanitized": true,
+     "body_parse_status": "JSON_ERROR_OBJECT",
+     "body_bytes_read": 198
+    }
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "REVIEW_MODEL_NOT_DESIGNATED",
+     "OVERALL_INVALID"
+    ]
+   }
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "b8e87b00827a705f5273ccb6c740f915658775c3045af364fc4bc9ed09e4d4cd",
+   "seconds": 46.64,
+   "source_start": 715.368,
+   "source_end": 761.509,
+   "segments": [
+    "declaration",
+    "payoff"
+   ],
+   "hook": "Choose one unfinished concern.",
+   "hook_shown": false,
+   "title": "Put Down One Worry Before You Sleep",
+   "reference": null,
+   "scenes": [
+    "bg-psalm-lamp-table",
+    "bg-shepherd-staff-wall",
+    "bg-shepherd-olive-moon"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.7341,
+    "measured_score": 0.5102,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 0.3,
+     "second_person": 0.380952380952381,
+     "scripture": 0.4,
+     "promise": 0.47619047619047616,
+     "resolution": 0.4,
+     "length_fit": 0.7543600000000015
+    },
+    "rubric": {
+     "index": 9,
+     "hook_first_2s": 8.0,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.0,
+     "shareability": 8.5,
+     "loop_potential": 8.5,
+     "policy_safe": 10.0,
+     "reasons": "Very actionable exercise for dealing with a single unfinished concern before bed.",
+     "hook_line": "Choose one unfinished concern.",
+     "title": "Put Down One Worry Before You Sleep"
+    }
+   },
+   "text": "I can speak to him in the valley. I can receive kindness while questions remain. I place the day behind me and the day before me within his care. Tonight, I am learning to trust him with what I cannot carry. Choose one unfinished concern from today. Name it simply, without opening the whole story again. Then pray: Shepherd, I place this in your care for tonight. If a practical step belongs to tomorrow, you can take it when tomorrow arrives. For now, let that one concern rest beside this one prayer. You have given it a name, and you have brought it to God.",
+   "publish": false,
+   "qa_output_sha256": "b8e87b00827a705f5273ccb6c740f915658775c3045af364fc4bc9ed09e4d4cd",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 46.64,
+    "lufs": -14.9,
+    "true_peak_dbtp": -2.4,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "status": "NOT_REVIEWED_ProviderFailure",
+    "error_code": "HTTP_503_UNAVAILABLE",
+    "failed_at": "2026-10-25T14:51:58.603927+00:00",
+    "output_sha256": "b8e87b00827a705f5273ccb6c740f915658775c3045af364fc4bc9ed09e4d4cd",
+    "provider_diagnostic": {
+     "http_status": 503,
+     "provider_status": "UNAVAILABLE",
+     "body_truncated": false,
+     "raw_body_retained": false,
+     "sanitized": true,
+     "body_parse_status": "JSON_ERROR_OBJECT",
+     "body_bytes_read": 198
+    }
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "REVIEW_MODEL_NOT_DESIGNATED",
+     "OVERALL_INVALID"
+    ]
+   }
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}
