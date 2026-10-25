@@ -70,3 +70,8 @@ order, before any paid compose:
 8. Before the voiceover, every Scripture line of the narration goes into the episode record as
    `"scripture": [{"reference": "Genesis 4:9 (KJV)", "text": "..."}]` and passes `kjv_check.py EPISODE.json`: the
    KJV word for word (`kjv/kjv.tsv.gz`, 1769 text). A misquote is paid for in voice and compose credits.
+9. From part 6 on (owner, 2026-10-25), the whole narration goes into the record as `narration` (kind scripture,
+   story, insight, cta) and `publish_episode.short_problems` passes before the voiceover: 62-90 s, at least 40 % of
+   the words ours, one insight of at least 20 words of our own reading of the passage, a close that names the full
+   story. A Short under a minute does not count for TikTok Creator Rewards; a Short that only reads the verse over
+   stock footage reads as reused content on both platforms.

@@ -9,6 +9,7 @@ usage: script_check.py PILOT_DIR [PRODUCTION_DIR]
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -217,6 +218,7 @@ def story_problems(script, starts, minutes):
             problems.append(f"STILL_NOT_A_BACKGROUND {i}")
     if segs and segs[0].get("stills"):
         problems.append("STORY_OPENING_STILL (QA v4: the hook opens on real footage)")
+    problems += picture_problems(script, starts, minutes)
     est = len(planned) * FOOTAGE_SCENE_EST / max(minutes * 60, 1e-6)
     if est > STORY_STILL_SHARE_MAX:
         problems.append(f"STORY_STILL_SHARE_EST {est:.2f} > {STORY_STILL_SHARE_MAX} (QA v4 footage >= 0.6)")
@@ -224,6 +226,33 @@ def story_problems(script, starts, minutes):
 
 
 FOOTAGE_SCENE_EST = 5.5   # s; v4 cuts every 4-7 s (still_render.FOOTAGE_CADENCE)
+SCENE_MIN_EST = 4.5       # s; the shortest cut of still_render.FOOTAGE_CADENCE, so the count never runs short
+SHOTS_PER_CLIP = 3        # still_render.FOOTAGE_SEGMENTS: distinct 6.5 s parts of one 20 s clip
+
+
+def picture_problems(script, starts, minutes):
+    """Owner, 2026-10-25: "the videos must talk with the story and with what is being said; not any landscape".
+    Every spoken segment names the clips mined for its words ("shots") and/or its moment stills, enough for all its
+    cuts, and the long carries no clip that no segment asked for (no filler landscape)."""
+    segs = script.get("segments", [])
+    footage = set(script.get("footage", []))
+    order = sorted((starts[x["id"]], x["id"]) for x in segs if x.get("id") in starts)
+    ends = {i: b for (_, i), (b, _) in zip(order, order[1:] + [(minutes * 60, None)])}
+    problems, named = [], set()
+    for x in segs:
+        shots = x.get("shots", [])
+        named.update(shots)
+        problems += [f"SHOT_NOT_IN_FOOTAGE {x['id']}:{c}" for c in shots if c not in footage]
+        if not x.get("text", "").strip() or x.get("id") not in starts:
+            continue
+        need = math.ceil(max(ends[x["id"]] - starts[x["id"]], 0.0) / SCENE_MIN_EST)
+        have = len(x.get("stills", [])) + SHOTS_PER_CLIP * len(shots)
+        if have < need:
+            problems.append(f"PICTURE_UNMATCHED {x['id']} {have} matched shots < {need} cuts (mine clips for its words)")
+    filler = sorted(footage - named)
+    if filler:
+        problems.append(f"FOOTAGE_NOT_MATCHED_TO_WORDS {filler[:5]}{' ...' if len(filler) > 5 else ''}")
+    return problems
 
 
 def description_problems(intro):

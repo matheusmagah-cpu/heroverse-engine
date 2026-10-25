@@ -39,7 +39,9 @@ heartbeat from `render_queue.py ... preview 72`). Every clock run lists the prev
 - `inspection/preview/opening-sheet.jpg`: the opening rendered for real, every 2.5 s for 60 s (hook, captions, mood).
 - `inspection/preview/footage-sheet-NN.jpg`: every footage clip of the FULL video in pages of 12, three frames each
   (start, middle, end), numbered with its id: each clip must fit the script's mood (night prayer = night picture, E69/E71), show no modern
-  object, person, text or brand, and be sharp.
+  object, person, text or brand, and be sharp. In a story long each clip must also show what its segment says
+  (`segments[].shots`: the serpent on the serpent's words, the river on the river); a clip that only fits the mood is
+  an issue (owner, 2026-10-25).
 - `inspection/preview/thumbnail.jpg`, `script.json` (hook within 8 s, promise, roadmap, title, description).
 Same rubric and anchors as above; footage counts once for the whole video. Output: `inspection/preview_review.json`
 with `version` preview-review-v1, `pilot_id`, `script_sha256` (from `inspection/preview/preview.json`), `reviewed_at`,

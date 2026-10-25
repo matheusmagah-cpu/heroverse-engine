@@ -6,6 +6,10 @@ on:
         description: Clips to add per query (default 3)
         required: false
         default: '3'
+      queries:
+        description: Queries file (default the library themes; a story pilot's beats.json mines clips for its words)
+        required: false
+        default: migration/production/footage/queries.json
 permissions:
   contents: write
 concurrency:
@@ -27,7 +31,12 @@ jobs:
       - name: Search, download and normalise (1920x1080, 30 fps, no audio)
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg tesseract-ocr python3-pil >/dev/null
-          python3 -I -B migration/production/footage/footage.py search migration/production/footage/queries.json "$RUNNER_TEMP/clips" "${{ inputs.per_theme }}"
+          [[ "$QUERIES" =~ ^migration/production/(footage/queries|pilot-[0-9]{3}/beats(-[0-9])?)\.json$ ]] || { echo "QUERIES_PATH_REFUSED"; exit 1; }
+          [[ "$PER_THEME" =~ ^[0-9]{1,2}$ ]] || { echo "PER_THEME_REFUSED"; exit 1; }
+          python3 -I -B migration/production/footage/footage.py search "$QUERIES" "$RUNNER_TEMP/clips" "$PER_THEME"
+        env:
+          QUERIES: ${{ inputs.queries || 'migration/production/footage/queries.json' }}
+          PER_THEME: ${{ inputs.per_theme || '3' }}
       - name: Release assets, records and frame sheet for vetting
         run: |
           lib=migration/production/footage/library; mkdir -p "$lib/sheets" "$RUNNER_TEMP/frames"

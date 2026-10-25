@@ -259,7 +259,10 @@ def story_script(**over):
     segs += [{"id": "reflection", "text": "What does this mean for you today?", "pause_after": 1.0},
              {"id": "prayer-close", "text": "Lord, thank you. Amen.", "pause_after": 1.0},
              {"id": "cta", "text": "The next story is Cain and Abel. Amen.", "pause_after": 1.0}]
-    s = {"archetype": sc.STORY, "segments": segs, "backgrounds": ["st-1", "st-2", "st-3"], "footage": ["clip-a"],
+    for x in segs:   # clips mined for each segment's words, enough for all its cuts
+        x["shots"] = [f"clip-{x['id']}-{j}" for j in range(12 if x["id"].startswith("chapter") else 2)]
+    s = {"archetype": sc.STORY, "segments": segs, "backgrounds": ["st-1", "st-2", "st-3"],
+         "footage": [c for x in segs for c in x["shots"]],
          "working_title": "Creation, Eden and the Fall: How It All Began | Genesis 1-3 Bible Story (KJV)"}
     s.update(over)
     return s
@@ -302,6 +305,19 @@ class StoryRules(unittest.TestCase):
     def test_peak_verse_late_fails(self):
         segs = self.segs(lambda x: {k: v for k, v in x.items() if k != "reference"} if x["id"] == "peak" else x)
         self.assertTrue(any(p.startswith("STORY_PEAK_VERSE_LATE") for p in story_check(story_script(segments=segs))))
+
+    def test_a_segment_without_clips_for_its_words_fails(self):
+        # owner, 2026-10-25: "not any landscape: the videos must talk with what is being said"
+        segs = self.segs(lambda x: dict(x, shots=x["shots"][:1]) if x["id"] == "chapter-2" else x)
+        out = story_check(story_script(segments=segs))
+        self.assertTrue(any(p.startswith("PICTURE_UNMATCHED chapter-2 ") for p in out), out)
+
+    def test_filler_footage_and_unknown_shots_fail(self):
+        s = story_script()
+        out = story_check(story_script(footage=s["footage"] + ["clip-any-landscape"]))
+        self.assertIn("FOOTAGE_NOT_MATCHED_TO_WORDS ['clip-any-landscape']", out)
+        out = story_check(story_script(footage=[c for c in s["footage"] if c != "clip-hook-0"]))
+        self.assertIn("SHOT_NOT_IN_FOOTAGE hook:clip-hook-0", out)
 
     def test_opening_still_fails(self):
         segs = self.segs(lambda x: dict(x, stills=["st-1"]) if x["id"] == "hook" else x)

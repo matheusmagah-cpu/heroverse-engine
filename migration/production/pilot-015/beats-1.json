@@ -1,0 +1,219 @@
+{
+ "version": "footage-beats-v1",
+ "library": "migration/production/footage/library",
+ "note": "pilot-015 (Genesis 1-3): one theme per script segment, queried for what that segment says (owner, 2026-10-25: the picture follows the words). No people, text or branding (footage.py BLOCK); every clip is vetted on its frame sheet and checked against its words before script.json names it in the segment's shots.",
+ "themes": [
+  {
+   "theme": "g13-hook",
+   "query": "garden tree sunlight"
+  },
+  {
+   "theme": "g13-peak",
+   "query": "fire flames dark"
+  },
+  {
+   "theme": "g13-peak",
+   "query": "torch fire night"
+  },
+  {
+   "theme": "g13-roadmap",
+   "query": "lush green garden"
+  },
+  {
+   "theme": "g13-roadmap",
+   "query": "fruit tree branch"
+  },
+  {
+   "theme": "g13-rehook-1",
+   "query": "dark clouds night sky"
+  },
+  {
+   "theme": "g13-chapter-1",
+   "query": "dark ocean waves night"
+  },
+  {
+   "theme": "g13-c1-light",
+   "query": "light rays through clouds"
+  },
+  {
+   "theme": "g13-c1-light",
+   "query": "deep dark water"
+  },
+  {
+   "theme": "g13-c1-day",
+   "query": "sunrise timelapse"
+  },
+  {
+   "theme": "g13-c1-day",
+   "query": "day to night timelapse"
+  },
+  {
+   "theme": "g13-c1-note",
+   "query": "sunlight through trees"
+  },
+  {
+   "theme": "g13-c1-land",
+   "query": "waves receding shore"
+  },
+  {
+   "theme": "g13-c1-land",
+   "query": "green hills aerial"
+  },
+  {
+   "theme": "g13-c1-land",
+   "query": "grass growing timelapse"
+  },
+  {
+   "theme": "g13-c1-lights",
+   "query": "full moon clouds"
+  },
+  {
+   "theme": "g13-c1-lights",
+   "query": "starry sky timelapse"
+  },
+  {
+   "theme": "g13-c1-lights",
+   "query": "sun rays sky"
+  },
+  {
+   "theme": "g13-rehook-1b",
+   "query": "sun rays clouds timelapse"
+  },
+  {
+   "theme": "g13-c1-image",
+   "query": "fish underwater school"
+  },
+  {
+   "theme": "g13-c1-image",
+   "query": "birds flying sky"
+  },
+  {
+   "theme": "g13-c1-image",
+   "query": "cattle grazing field"
+  },
+  {
+   "theme": "g13-c1-blessing",
+   "query": "flowers blooming timelapse"
+  },
+  {
+   "theme": "g13-c1-blessing",
+   "query": "wheat field wind"
+  },
+  {
+   "theme": "g13-c1-verygood",
+   "query": "valley aerial sunrise"
+  },
+  {
+   "theme": "g13-c1-rest",
+   "query": "calm lake sunset"
+  },
+  {
+   "theme": "g13-c1-rest",
+   "query": "still water reflection"
+  },
+  {
+   "theme": "g13-c1-rest",
+   "query": "quiet meadow evening"
+  },
+  {
+   "theme": "g13-c1-close",
+   "query": "lone tree hill"
+  },
+  {
+   "theme": "g13-rehook-2",
+   "query": "morning mist forest"
+  },
+  {
+   "theme": "g13-chapter-2",
+   "query": "dry soil dust"
+  },
+  {
+   "theme": "g13-chapter-2",
+   "query": "red clay earth"
+  },
+  {
+   "theme": "g13-c2-breath",
+   "query": "wind blowing grass"
+  },
+  {
+   "theme": "g13-c2-garden",
+   "query": "orchard fruit trees"
+  },
+  {
+   "theme": "g13-c2-garden",
+   "query": "garden paradise flowers"
+  },
+  {
+   "theme": "g13-c2-garden",
+   "query": "tropical garden"
+  },
+  {
+   "theme": "g13-c2-river",
+   "query": "river valley aerial"
+  },
+  {
+   "theme": "g13-c2-river",
+   "query": "gold nugget"
+  },
+  {
+   "theme": "g13-c2-work",
+   "query": "green leaves garden"
+  },
+  {
+   "theme": "g13-c2-work",
+   "query": "vineyard"
+  },
+  {
+   "theme": "g13-c2-command",
+   "query": "apple tree fruit"
+  },
+  {
+   "theme": "g13-c2-command",
+   "query": "fruit hanging branch"
+  },
+  {
+   "theme": "g13-c2-note",
+   "query": "tree in field"
+  },
+  {
+   "theme": "g13-rehook-2b",
+   "query": "lone tree meadow"
+  },
+  {
+   "theme": "g13-c2-alone",
+   "query": "lion"
+  },
+  {
+   "theme": "g13-c2-alone",
+   "query": "deer forest"
+  },
+  {
+   "theme": "g13-c2-alone",
+   "query": "eagle flying"
+  },
+  {
+   "theme": "g13-c2-woman",
+   "query": "moonlight trees night"
+  },
+  {
+   "theme": "g13-c2-woman",
+   "query": "sleeping lion"
+  },
+  {
+   "theme": "g13-c2-poem",
+   "query": "two swans"
+  },
+  {
+   "theme": "g13-c2-poem",
+   "query": "pair of birds"
+  },
+  {
+   "theme": "g13-c2-unashamed",
+   "query": "peaceful meadow sunshine"
+  },
+  {
+   "theme": "g13-c2-close",
+   "query": "snake grass"
+  }
+ ]
+}

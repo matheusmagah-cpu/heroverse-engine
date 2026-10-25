@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -28,8 +29,41 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-def problems(episode, video):
+SHORT_RULES_FROM_PART = 6      # owner, 2026-10-25: from Genesis 6 on (what is published stays as it is)
+SHORT_MIN_S, SHORT_MAX_S = 62.0, 90.0   # TikTok Creator Rewards counts videos of 1 min or more; 2 s of margin
+ORIGINAL_MIN = 0.40            # share of narration words that are ours (not the KJV quotation)
+INSIGHT_MIN_WORDS = 20
+CTA_TO_LONG = re.compile(r"(?i)\b(full|whole|complete) (story|video)\b|\blong video\b")
+
+
+def short_problems(episode):
+    """Owner, 2026-10-25: Shorts of 1 minute or more with a strong layer of originality, authenticity, critique and a
+    clear direction to the long video, so neither TikTok nor YouTube can read them as reused or unoriginal content.
+    The narration is recorded line by line: kind scripture (KJV, checked by kjv_check), story (our retelling),
+    insight (our own observation or critique of the passage), cta (where to go next)."""
+    if episode.get("format") != "short" or episode.get("part", 0) < SHORT_RULES_FROM_PART:
+        return []
     out = []
+    if not SHORT_MIN_S <= episode.get("seconds", 0) <= SHORT_MAX_S:
+        out.append(f"SHORT_LENGTH {episode.get('seconds')} s (need {SHORT_MIN_S:.0f}-{SHORT_MAX_S:.0f})")
+    lines = episode.get("narration") or []
+    if not lines:
+        return out + ["NARRATION_MISSING (kind scripture/story/insight/cta, line by line)"]
+    words = {k: sum(len(x.get("text", "").split()) for x in lines if x.get("kind") == k)
+             for k in ("scripture", "story", "insight", "cta")}
+    total = sum(words.values())
+    if total and (total - words["scripture"]) / total < ORIGINAL_MIN:
+        out.append(f"ORIGINAL_SHARE {(total - words['scripture']) / total:.2f} < {ORIGINAL_MIN}")
+    if not any(x.get("kind") == "insight" and len(x.get("text", "").split()) >= INSIGHT_MIN_WORDS for x in lines):
+        out.append(f"INSIGHT_MISSING (one line of our own observation or critique, >= {INSIGHT_MIN_WORDS} words)")
+    cta = " ".join(x.get("text", "") for x in lines if x.get("kind") == "cta")
+    if not CTA_TO_LONG.search(cta):
+        out.append("CTA_NOT_TO_THE_LONG (the close sends the viewer to the full story)")
+    return out
+
+
+def problems(episode, video):
+    out = short_problems(episode)
     if sha256_file(video) != episode["output_sha256"]:
         out.append("OUTPUT_SHA256_MISMATCH")
     if not 0 < len(episode["title"]) <= TITLE_MAX:
