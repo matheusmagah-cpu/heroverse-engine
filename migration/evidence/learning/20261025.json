@@ -1,0 +1,75 @@
+{
+ "version": "live-intel-v1",
+ "captured_at": "2026-10-25T16:18:00Z",
+ "episodes": [
+  {
+   "id": "genesis-01-short",
+   "part": 1,
+   "video_id": "ku2MTQKmXaU",
+   "age_h": 25.6,
+   "bucket": "24h",
+   "views": 123,
+   "like_rate": 0.073,
+   "attributes": {
+    "hook_type": "mystery_statement",
+    "hook_line": "Before there was light, God spoke.",
+    "title_pattern": "hook_emoji_pipe_story_kjv",
+    "first_visual": "ai_first_light",
+    "ai_scenes": 3,
+    "seconds": 62.8,
+    "slot_utc": "14:44",
+    "transition": "fade"
+   },
+   "verdict": {
+    "verdict": "inconclusive",
+    "reason": "age 25.6 h / views 123"
+   }
+  },
+  {
+   "id": "genesis-02-short",
+   "part": 2,
+   "video_id": "hwq4qgjreh0",
+   "age_h": 16.8,
+   "bucket": "2h",
+   "views": 256,
+   "like_rate": 0.121,
+   "attributes": {
+    "hook_type": "statement",
+    "title_pattern": "hook_emoji_pipe_story_kjv",
+    "first_visual": "ai_first_man",
+    "ai_scenes": 2,
+    "seconds": 51.9,
+    "slot_utc": "23:30",
+    "transition": "fade"
+   },
+   "verdict": {
+    "verdict": "inconclusive",
+    "reason": "age 16.8 h / views 256"
+   }
+  },
+  {
+   "id": "genesis-03-short",
+   "part": 3,
+   "video_id": "K_ZwsCt-Wg4",
+   "age_h": 2.8,
+   "bucket": "2h",
+   "views": 40,
+   "like_rate": 0.1,
+   "attributes": {
+    "hook_type": "question_teaser",
+    "hook_line": "One question. That's all it took.",
+    "title_pattern": "question_emoji_pipe_story_kjv",
+    "first_visual": "ai_serpent",
+    "ai_scenes": 1,
+    "seconds": 46.6,
+    "slot_utc": "13:30",
+    "transition": "fade"
+   },
+   "verdict": {
+    "verdict": "inconclusive",
+    "reason": "age 2.8 h / views 40"
+   }
+  }
+ ],
+ "hypotheses": []
+}
