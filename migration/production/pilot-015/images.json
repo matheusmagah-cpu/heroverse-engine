@@ -119,7 +119,7 @@
   },
   {
    "id": "st-garden-east",
-   "prompt": "a vast lush garden with ancient trees, flowing water and flowers in the east at sunrise, wide view",
+   "prompt": "a vast wild garden of ancient trees and a natural spring among mossy rocks and wildflowers at sunrise, untouched forest all around, wide view",
    "seed": 2018,
    "chapter": "2"
   },
@@ -203,19 +203,19 @@
   },
   {
    "id": "st-skin-coats",
-   "prompt": "simple garments of animal skin lying folded on a flat rock in a garden, soft light",
+   "prompt": "two rough tanned animal hides with fur, lying on a flat natural rock in a garden, soft morning light",
    "seed": 2032,
    "chapter": "4"
   },
   {
    "id": "st-leaving",
-   "prompt": "a man and a woman in simple animal-skin garments walking barefoot away from a lush garden at dusk along a bare dirt track into empty wild hills, seen from behind, small in the frame, nothing but wilderness around them",
+   "prompt": "a man and a woman wrapped in rough fur animal hides walking barefoot away along a faint trail through open wild grassland at dusk, seen from behind, small in the frame, endless untouched hills",
    "seed": 2033,
    "chapter": "4"
   },
   {
    "id": "st-east-of-eden",
-   "prompt": "dry stony land east of a garden at dawn, a narrow path leading away into the hills",
+   "prompt": "barren stony wilderness at dawn, a faint trail of bare earth winding between boulders into empty hills, only rocks and wild grass",
    "seed": 2034,
    "chapter": "4"
   },
@@ -231,6 +231,12 @@
    "st-leaving": "a white van and houses behind the figures",
    "st-tree-of-life": "a gazebo and a lamp post behind the tree",
    "st-tree-knowledge": "a pole at the left edge"
+  },
+  "2026-10-25 batch 2": {
+   "st-east-of-eden": "a wooden fence and a built stone wall beside the path",
+   "st-garden-east": "a lamp post with a lantern among the trees",
+   "st-leaving": "fence posts by the track; the garments read as modern wrap dresses, not skins",
+   "st-skin-coats": "folded cloth, not animal skins"
   }
  }
 }
