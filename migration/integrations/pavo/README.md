@@ -59,6 +59,12 @@ The request sends `sound: false` / `gen_audio: false`, as the web client does fo
 Flash clip (2026-10-25) came with an audible AAC track (mean −15.7 dB). Strip it (`ffmpeg -an`) before using a clip.
 MCP account/media responses are private; do not copy them into public logs or receipts.
 
+## Authorization
+
+Standing owner authorization (2026-10-25): generations need no per-clip approval in the chat; every limit above
+stays. Pavo is the first source of AI video for the project (`strategy/DECISIONS.md`). `PAVO_RATE_LIMITED` is refused
+before any job exists; send that call again later.
+
 ## Credentials and running
 
 `PAVO_TOKEN` was saved and its name confirmed in the repository secrets on 2026-10-25 after

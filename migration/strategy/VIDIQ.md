@@ -110,3 +110,6 @@ all on one. The story order of SERIES.md is not a topic choice.
 | `vidiq-shorts-inspiration` | weekly: hook and pacing mechanics from Reels/TikTok outliers for the Shorts | 1-2 |
 | `vidiq-competitor-watchlist` | monthly, read-only (`vidiq_update_competitors` is denied) | 1 |
 | `vidiq-get-started` | credit balance and recovery of an interrupted compose job (`vidiq_job_poll`) | 1 |
+
+AI video generation (`vidiq_generate_video`) is the last fallback since 2026-10-25: Pavo first, Agnes direct second
+(DECISIONS.md "Pavo is the first source of AI video"). vidIQ credits go to voice, stock search and compose.
