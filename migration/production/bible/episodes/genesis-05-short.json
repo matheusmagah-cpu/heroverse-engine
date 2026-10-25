@@ -36,7 +36,7 @@
  ],
  "review": {
   "overall": 9.5,
-  "process": "narration passed kjv_check.py before the voiceover; every stock clip seen in preview composes (Pexels is blocked from the cloud) and 360p links refused (clip_check short side >= 720): 9 candidates rejected (a person under a tree, a town and road, power lines, sheep on a paved road, a bonfire with lamps, a pylon, a near-black storm, a desert with a person's shadow); first compose reviewed by frame sheet and redone (too many skies in a row, captions ~3 % high, -19.7 LUFS); final -15.1 LUFS, peak -1.7 dBFS",
+  "process": "narration passed kjv_check.py before the voiceover; every stock clip seen in preview composes (Pexels is blocked from the cloud) and 360p links refused (clip_check short side >= 720): 9 candidates rejected (sheep with paint marks, a person under a tree, a town and road, power lines, sheep on a paved road, a bonfire with lamps, a pylon, a near-black storm, a desert with a person's shadow); first compose reviewed by frame sheet and redone (too many skies in a row, captions ~3 % high, -19.7 LUFS); final -15.1 LUFS, peak -1.7 dBFS",
   "black_check": {
    "black_starts": [
     62.5
