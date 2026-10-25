@@ -259,7 +259,7 @@ flowchart LR
 | module | purpose | run by | imports | test |
 |---|---|---|---|---|
 | `assign.py` | Choose a pilot's footage from the vetted library (pilot-qa-criteria-v4), so new pilots need no hand picking. | - | script_check | yes |
-| `footage.py` | Licensed real footage for the cinematic picture (owner, 2026-10-23: "no static images, real cinematic animatio | footage.yml | - | yes |
+| `footage.py` | Licensed real footage for the cinematic picture (owner, 2026-10-23: "no static images, real cinematic animatio | footage.yml | cinematic | yes |
 
 ### `migration/production/imagegen`
 
