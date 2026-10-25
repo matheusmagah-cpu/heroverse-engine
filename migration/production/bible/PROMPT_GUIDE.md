@@ -1,8 +1,9 @@
 # AI video prompts for the Bible-story series (owner, 2026-10-24: "the secret is the prompt; no credit wasted")
 
-AI video costs ~15 credits/s (veo-3.1-lite 1080p) to ~23 credits/s (minimax-h3 2k). It is used only for the hook and
-the story's peak moments; everything else is licensed footage or animated stills. A clip that misses is paid anyway,
-so every prompt passes this guide before it is sent.
+AI video comes from Pavo first (Agnes Flash, 720p, 4-12 s, exact zero-credit quote; owner 2026-10-25), then Agnes
+direct, then vidIQ (~15 credits/s veo-3.1-lite 1080p to ~23 credits/s minimax-h3 2k) only when both fail. Shorts are
+almost all AI; every scene still shows its words. A Pavo clip costs no credits but a miss costs a slot, so every
+prompt passes this guide before it is sent. Pavo clips carry an audio track even with no audio asked: strip it (`-an`).
 
 ## Structure (Google's Veo formula, five parts, in this order)
 1. **Cinematography**: shot size, lens feel, ONE camera move ("slow push-in", "static wide", "low tracking shot").
@@ -34,8 +35,9 @@ Then: duration and aspect come from the tool fields, not the text.
 ## Cheap preview before paid video
 1. Write the prompt with the five parts.
 2. Make the first frame as a still first (free: Cloudflare FLUX; the Runway connector is not used, CLAUDE.md) and look at it.
-3. If the still is right, send it as `startFrameB64` and prompt only the motion and the camera (do not re-describe the
-   picture: two descriptions of one subject drift).
+3. If the still is right, send it as Pavo's `first_frame` (vidIQ: `startFrameB64`) and prompt only the motion and the
+   camera (do not re-describe the picture: two descriptions of one subject drift). Light, dust and particle moments
+   always start from a checked still.
 4. One generation per shot. A miss is diagnosed against this guide before any retry, and the lesson is added here.
 
 ## Template
@@ -84,8 +86,8 @@ FLUX `seed` and a `status`. Before a character's first scene:
    `characters/images.json`, and Claude reviews it (same face in all three, period-true clothing, no modern object).
    Only then is its status set to APPROVED, by PR.
 2. Every still prompt that shows it carries its `look` word for word plus one `wardrobe` variant, and reuses its seed.
-3. Every AI clip that shows it uses Agnes reference mode (`agnes-clip.yml`, input `characters`): the approved reference
-   images go in `images` (at most 5) and the prompt carries the look; `characters.py` refuses an unapproved character
+3. Every AI clip that shows it uses reference mode (Pavo `references`, else `agnes-clip.yml` input `characters`): the
+   approved reference images go in (at most 5) and the prompt carries the look; `characters.py` refuses an unapproved character
    or a changed look before any call.
 4. A new character joins the bible the first time a story needs it, never improvised inside one episode.
 God the Father is never shown as a person: light, wind and voice carry Him, and the KJV text speaks.

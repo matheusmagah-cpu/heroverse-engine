@@ -15,7 +15,8 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 **The funnel.**
 - The Bible is told in **arcs**: one arc = one complete story = 4 Short episodes = 1 long video.
 - **Shorts (the door, 2 a day, 13:30 and 23:30 UTC):** one moment of the arc each, in order, 62-90 s (owner,
-  2026-10-25: TikTok Creator Rewards counts only videos of 1 minute or more), AI video only at the hook. Built in four
+  2026-10-25: TikTok Creator Rewards counts only videos of 1 minute or more), almost all AI video from Pavo (owner,
+  2026-10-25; each scene matches its words). Built in four
   beats, recorded line by line in the episode's `narration` (kind scripture / story / insight / cta): the hook; the
   moment told in the KJV with our own retelling around it; one **insight** of our own (what most readers miss, a
   tension in the text, a critique of a common reading; never a paraphrase of the verse); and a close that sends the
@@ -44,7 +45,10 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 (then every 2 days: 4 Shorts, 1 long; the episode table below is cut into arcs of 4 in order.)
 
 **Production.**
-- Shorts: vidIQ compose as today (about 100 credits each, ceiling 200 a day).
+- AI video comes from Pavo first (free, exact zero-credit quote; DECISIONS.md 2026-10-25 "Pavo is the first source"),
+  then Agnes direct, and vidIQ's generator only when both fail. Shorts are almost all AI (owner, 2026-10-25), each scene
+  still matching its words; this replaces "AI video only at the hook and the peak".
+- Shorts: vidIQ voice, stock search and compose (about 45 credits each with Pavo clips, ceiling 200 a day).
 - Credit budget: 3,811 credits on 25/10 must last to the renewal on 18/11 (about 159 a day). Two Shorts a day at
   about 100 each run over that, so each Short is held to about 75 (no wasted previews; music theme reused), and the
   long costs no vidIQ credits.
@@ -64,8 +68,8 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 - Measured each day by the live intelligence: views of each long from Shorts, long retention, subscribers per arc.
 
 ## Credits (vidIQ: ~4,200 on 2026-10-24; renewal of 6,000 on 2026-11-18)
-- Per Short: 1 AI clip at the hook (veo-3.1-lite 4 s, 60) + voice (~14 a minute, ~20 for 62-90 s) + stock search (~8)
-  + compose (~16) ≈ 105; held near 75 by reusing an approved hook clip of the arc when it fits the words.
+- Per Short: AI clips from Pavo (0) + voice (~14 a minute, ~20 for 62-90 s) + stock search (~8) + compose (~16) ≈ 45;
+  a vidIQ AI clip (veo-3.1-lite 4 s, 60) only when Pavo and Agnes both fail.
 - Ceiling 200 credits a day; the ledger records every call (owner authorization 2026-10-24: "libero tudo").
 
 ## Episodes (Genesis; KJV ranges)

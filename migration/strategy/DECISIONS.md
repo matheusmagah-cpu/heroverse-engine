@@ -328,3 +328,26 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   artifact for review; nothing goes into a Short until the terms are read and a clip is seen clean. If it passes, it
   replaces vidIQ's 60-credit hook clip in the Shorts (720p meets clip_check's 720 floor); the long keeps QA v4's 1440p.
 
+
+## Pavo is the first source of AI video (owner, 2026-10-25 22:40 UTC)
+- **Owner.** "Encaixe o Pavo em todos os lugares que ele conseguir estar ... o vidIQ não precisa gastar o crédito
+  dele para gerar tendo o Pavo; fica só como segunda opção ... não precisa esperar ele para continuar as produções."
+  Commercial use confirmed by the owner; Pavo's terms (app.pavo-ai.work/terms, read 2026-10-25) say the same: the user
+  keeps ownership of generated content (§42) and is responsible for reviewing public and commercial use (§44); Pavo's
+  own AI-content marks are never removed (§54, the channel discloses AI on every video anyway).
+- **Standing authorization (owner, 2026-10-25).** Pavo generations no longer wait for a "yes" in the chat. The adapter's
+  limits stay: a fresh exact zero-credit quote per call, one video per call, an uncertain submission is only read back
+  with `pavo_job`, never resubmitted. `PAVO_RATE_LIMITED` refuses before any job exists, so that call is sent again later.
+- **Order for every AI clip:** Pavo (`heroverse-pavo` MCP) → Agnes direct (`agnes-clip.yml`) → vidIQ `generate_video`
+  (credits) only when both fail. vidIQ credits now go to voice, stock search and compose (~45 a Short instead of ~105).
+- **Shorts: almost all AI (owner, 2026-10-25: "quase tudo IA").** This replaces "AI video only at the hook and the
+  peak" (24/10, set to save credits). Every scene still follows its words (the moon on "the moon"), passes
+  `clip_check.py` with its audio stripped (Pavo returns an AAC track even with `sound: false`), and the frame sheet
+  review at 9.5; real footage is used where it shows the words better. People only from the character bible
+  (reference mode); a person not yet in the bible is not shown (footprints, objects, landscape instead).
+- **Long: 50 % Pavo, 50 % licensed footage (owner, 2026-10-25).** Frozen QA v4 asks >= 60 % real footage, sources
+  only under its listed licences and >= 1440p, and the owner's "never below 1440p (no plain upscale)"; Pavo is 720p. So
+  the long can take Pavo only through the story format's own QA (SERIES.md, `production/bible/long/`), written and
+  frozen before pilot-015's first render, with the v4 technical floors unchanged (2560x1440 output, loudness, speech,
+  black scan) and each Pavo clip brought to 1440p by Real-ESRGAN (the stills' upscaler, not a plain resize) and
+  checked frame by frame. No frozen v2/v3/v4 file is edited. Until that QA exists, the long stays on footage and stills.
