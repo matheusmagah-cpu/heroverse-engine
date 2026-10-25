@@ -1,0 +1,28 @@
+{
+ "id": "ch-eve-three-quarter",
+ "prompt": "character reference portrait, three-quarter view, head and shoulders: a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "negative": null,
+ "seed": null,
+ "size": [
+  4096,
+  4096
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.5,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "characters-img-ch-eve-three-quarter-sha256-2c7788115b55d817d7b928976225a279297b76dda498734d5b47d7e89625c9c7.png",
+ "sha256": "2c7788115b55d817d7b928976225a279297b76dda498734d5b47d7e89625c9c7"
+}

@@ -1,0 +1,28 @@
+{
+ "id": "ch-adam-three-quarter",
+ "prompt": "character reference portrait, three-quarter view, head and shoulders: a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, plain softly lit warm dark background, photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "negative": null,
+ "seed": null,
+ "size": [
+  4096,
+  4096
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.8,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "characters-img-ch-adam-three-quarter-sha256-e21b608555e0fdef10f45f4ce6de181e24d7b328f715531c7da3ca7294fe1b0f.png",
+ "sha256": "e21b608555e0fdef10f45f4ce6de181e24d7b328f715531c7da3ca7294fe1b0f"
+}
