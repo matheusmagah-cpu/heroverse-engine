@@ -1,0 +1,81 @@
+{
+ "version": "pilot-qa-v1",
+ "pilot_id": "pilot-013",
+ "output_sha256": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f",
+ "status": "PASS",
+ "checks": {
+  "full_decode_without_errors": true,
+  "video_format": true,
+  "duration_min": true,
+  "integrated_lufs": true,
+  "true_peak": true,
+  "speech_presence": true,
+  "no_singing": true,
+  "wer_vs_script": true,
+  "words_per_minute": true,
+  "first_word_onset": true,
+  "hook_second_person": true,
+  "title_card_seconds": true,
+  "no_figure": true,
+  "every_scene_in_motion": true,
+  "scene_seconds": true,
+  "crossfade_seconds_max": true,
+  "image_repeat_gap": true,
+  "caption_coverage_of_speech": true,
+  "caption_hold_median": true,
+  "caption_chars_max": true,
+  "caption_words_max": true,
+  "caption_no_box": true,
+  "scripture_card_only_while_read": true,
+  "cta_count": true,
+  "cta_short_and_not_early": true,
+  "persistent_overlays_only_brand": true,
+  "images_open_licence_with_revision": true,
+  "footage_picture_share": true,
+  "footage_licensed_vetted_and_credited": true,
+  "music_owned": true,
+  "voice_model_pinned": true
+ },
+ "criteria_version": "pilot-qa-criteria-v4",
+ "measurements": {
+  "duration_seconds": 963.75,
+  "loudness": {
+   "integrated_lufs": -15.6,
+   "loudness_range_lu": 3.0,
+   "true_peak_dbtp": -2.7
+  },
+  "speech_presence": 0.868,
+  "music_presence": 0.39,
+  "wer_vs_script": 0.0444,
+  "accepted_words_per_minute": 129.5,
+  "caption_lines": 457,
+  "holds": 175,
+  "first_word_seconds": 0.68,
+  "editing": {
+   "picture_changes": 484,
+   "picture_changes_per_minute": 30.13,
+   "median_shot_seconds": 1.633,
+   "longest_shot_seconds": 11.733,
+   "motion_median_top_decile_diff": 1.723
+  },
+  "colour": {
+   "mean_brightness": 0.1099,
+   "brightness_std_over_time": 0.0545,
+   "mean_saturation": 0.4793,
+   "saturation_std_over_time": 0.2148
+  },
+  "rhythm": {
+   "audio_onsets": 1484,
+   "audio_onsets_per_minute": 92.39,
+   "tempo": {
+    "bpm": 198.68,
+    "confidence": 0.011
+   }
+  }
+ },
+ "transcript_head": "you sleep tonight, let God's mercy wash away today's regrets. Pray this with me now. Tonight we will name today's regrets honestly. Receive God's pardon, take one step of repair, and forgive what was done to you. Then scripture will carry you towards sleep. You may be replaying a sharp word, a promise you did not keep, something you hoped nobody noticed. do not have to tidy it before you come. Let",
+ "criteria_sha256": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
+ "human_review": "PENDING (D-076 calibration by sampling)",
+ "upload_performed": false,
+ "publication_performed": false
+}

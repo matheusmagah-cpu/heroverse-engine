@@ -1,0 +1,498 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,DejaVu Sans,64,&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,1,0,0,0,100,100,0,0,1,4,2,2,120,120,90,1
+Style: Card,DejaVu Sans,20,&H50140F0A,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
+Style: Verse,DejaVu Serif,60,&H00FFFFFF,&H00FFFFFF,&H00000000,&H78000000,0,0,0,0,100,100,0,0,1,3,1,5,0,0,0,1
+Style: Title,DejaVu Serif,112,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,1,0,1,5,4,5,120,120,0,1
+Style: Subtitle,DejaVu Sans,58,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,2,0,1,4,3,5,120,120,0,1
+Style: Ref,DejaVu Serif,44,&H00A3E7FF,&H00FFFFFF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,3,1,5,0,0,0,1
+Style: Brand,DejaVu Sans,36,&H20FFFFFF,&H00FFFFFF,&H64000000,&H00000000,1,0,0,0,100,100,2,0,1,3,1,7,50,0,40,1
+Style: Badge,DejaVu Sans,34,&H00FFFFFF,&H00FFFFFF,&H001A1AD0,&H00000000,1,0,0,0,100,100,1,0,3,10,0,9,0,50,46,1
+Style: Hook,DejaVu Serif,84,&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,1,0,0,0,100,100,1,0,1,5,4,5,160,160,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:05.55,Hook,,0,0,0,,{\fad(0,250)}Before you sleep tonight,\Nlet God's mercy wash away\Ntoday's regrets.
+Dialogue: 1,0:00:05.55,0:16:03.75,Brand,,0,0,0,,{\fad(300,0)}HeroVerse Prayer
+Dialogue: 3,0:00:54.69,0:01:07.77,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:00:54.69,0:01:07.77,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 1:18 (KJV)
+Dialogue: 3,0:03:19.12,0:03:32.71,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:03:19.12,0:03:32.71,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 32:5 (KJV)
+Dialogue: 3,0:05:47.46,0:05:56.86,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:05:47.46,0:05:56.86,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Romans 8:1 (KJV)
+Dialogue: 3,0:06:27.50,0:06:33.56,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:06:27.50,0:06:33.56,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}1 John 3:20 (KJV)
+Dialogue: 3,0:08:38.62,0:08:47.47,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:08:38.62,0:08:47.47,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Ephesians 4:32 (KJV)
+Dialogue: 3,0:10:02.74,0:10:06.40,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:10:02.74,0:10:06.40,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Colossians 3:13 (KJV)
+Dialogue: 3,0:10:44.60,0:10:53.58,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:10:44.60,0:10:53.58,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Micah 7:18 (KJV)
+Dialogue: 3,0:12:00.28,0:12:06.36,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:12:00.28,0:12:06.36,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Psalm 51:10 (KJV)
+Dialogue: 3,0:14:22.81,0:14:34.61,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:14:22.81,0:14:34.61,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Luke 15:20 (KJV)
+Dialogue: 3,0:15:01.59,0:15:10.32,Card,,0,0,0,,{\fad(250,250)\pos(0,0)\p1}m 346 300 l 1574 300 b 1593.8 300 1610 316.2 1610 336 l 1610 664 b 1610 683.8 1593.8 700 1574 700 l 346 700 b 326.2 700 310 683.8 310 664 l 310 336 b 310 316.2 326.2 300 346 300{\p0}
+Dialogue: 4,0:15:01.59,0:15:10.32,Ref,,0,0,0,,{\fad(250,250)\pos(960,650)}Isaiah 43:25 (KJV)
+Dialogue: 4,0:00:05.55,0:00:05.85,Caption,,0,0,0,,away today's regrets.
+Dialogue: 4,0:00:05.85,0:00:08.14,Caption,,0,0,0,,Pray this with me now.
+Dialogue: 4,0:00:09.29,0:00:10.89,Caption,,0,0,0,,Tonight we will name
+Dialogue: 4,0:00:10.89,0:00:12.89,Caption,,0,0,0,,today's regrets honestly,
+Dialogue: 4,0:00:12.89,0:00:14.57,Caption,,0,0,0,,receive God's pardon,
+Dialogue: 4,0:00:14.57,0:00:16.48,Caption,,0,0,0,,take one step of repair,
+Dialogue: 4,0:00:16.48,0:00:19.42,Caption,,0,0,0,,and forgive what was done to you.
+Dialogue: 4,0:00:19.42,0:00:20.79,Caption,,0,0,0,,Then Scripture will
+Dialogue: 4,0:00:20.79,0:00:22.80,Caption,,0,0,0,,carry you toward sleep.
+Dialogue: 4,0:00:23.55,0:00:26.28,Caption,,0,0,0,,You may be replaying a sharp word,
+Dialogue: 4,0:00:26.28,0:00:28.44,Caption,,0,0,0,,a promise you did not keep,
+Dialogue: 4,0:00:28.44,0:00:31.79,Caption,,0,0,0,,or something you hoped nobody noticed.
+Dialogue: 4,0:00:31.79,0:00:33.60,Caption,,0,0,0,,You do not have to tidy
+Dialogue: 4,0:00:33.60,0:00:35.40,Caption,,0,0,0,,it before you come.
+Dialogue: 4,0:00:35.40,0:00:38.08,Caption,,0,0,0,,Let your shoulders lower a little.
+Dialogue: 4,0:00:38.08,0:00:40.43,Caption,,0,0,0,,You can listen with your eyes
+Dialogue: 4,0:00:40.43,0:00:41.95,Caption,,0,0,0,,closed or open.
+Dialogue: 4,0:00:41.95,0:00:43.76,Caption,,0,0,0,,In this prayer you will
+Dialogue: 4,0:00:43.76,0:00:45.88,Caption,,0,0,0,,name what happened plainly,
+Dialogue: 4,0:00:45.88,0:00:47.45,Caption,,0,0,0,,receive forgiveness,
+Dialogue: 4,0:00:47.45,0:00:49.57,Caption,,0,0,0,,consider one act of repair,
+Dialogue: 4,0:00:49.57,0:00:51.78,Caption,,0,0,0,,and then rest with Scripture
+Dialogue: 4,0:00:51.78,0:00:53.54,Caption,,0,0,0,,about God's mercy.
+Dialogue: 5,0:00:54.69,0:00:55.40,Verse,,0,0,0,,{\pos(960,470)}Come now,
+Dialogue: 5,0:00:55.40,0:00:57.51,Verse,,0,0,0,,{\pos(960,470)}and let us reason together,
+Dialogue: 5,0:00:57.51,0:00:58.98,Verse,,0,0,0,,{\pos(960,470)}saith the LORD:
+Dialogue: 5,0:00:58.98,0:01:01.25,Verse,,0,0,0,,{\pos(960,470)}though your sins be as scarlet,
+Dialogue: 5,0:01:01.25,0:01:03.82,Verse,,0,0,0,,{\pos(960,470)}they shall be as white as snow;
+Dialogue: 5,0:01:03.82,0:01:06.16,Verse,,0,0,0,,{\pos(960,470)}though they be red like crimson,
+Dialogue: 5,0:01:06.16,0:01:08.12,Verse,,0,0,0,,{\pos(960,470)}they shall be as wool.
+Dialogue: 4,0:01:09.57,0:01:10.07,Caption,,0,0,0,,Father,
+Dialogue: 4,0:01:10.07,0:01:11.79,Caption,,0,0,0,,I come to you at the end
+Dialogue: 4,0:01:11.79,0:01:13.93,Caption,,0,0,0,,of this day without pretending
+Dialogue: 4,0:01:13.93,0:01:16.16,Caption,,0,0,0,,it went better than it did.
+Dialogue: 4,0:01:16.16,0:01:18.25,Caption,,0,0,0,,You already know the moment
+Dialogue: 4,0:01:18.25,0:01:20.09,Caption,,0,0,0,,I keep returning to.
+Dialogue: 4,0:01:20.09,0:01:22.34,Caption,,0,0,0,,I would rather tell you about it
+Dialogue: 4,0:01:22.34,0:01:24.16,Caption,,0,0,0,,than keep defending myself
+Dialogue: 4,0:01:24.16,0:01:25.51,Caption,,0,0,0,,in my thoughts.
+Dialogue: 4,0:01:25.51,0:01:27.30,Caption,,0,0,0,,Thank you that you invite
+Dialogue: 4,0:01:27.30,0:01:29.38,Caption,,0,0,0,,me to reason with you instead
+Dialogue: 4,0:01:29.38,0:01:31.04,Caption,,0,0,0,,of hiding from you.
+Dialogue: 4,0:01:31.04,0:01:33.29,Caption,,0,0,0,,Give me courage to be truthful,
+Dialogue: 4,0:01:33.29,0:01:35.18,Caption,,0,0,0,,and gentleness to remember
+Dialogue: 4,0:01:35.18,0:01:37.79,Caption,,0,0,0,,that you are the one listening.
+Dialogue: 4,0:01:38.94,0:01:41.40,Caption,,0,0,0,,Regret often stays vague because
+Dialogue: 4,0:01:41.40,0:01:43.33,Caption,,0,0,0,,a vague feeling is easier
+Dialogue: 4,0:01:43.33,0:01:46.02,Caption,,0,0,0,,to carry than a clear sentence.
+Dialogue: 4,0:01:46.02,0:01:47.56,Caption,,0,0,0,,Yet a clear sentence
+Dialogue: 4,0:01:47.56,0:01:49.86,Caption,,0,0,0,,is easier to bring to God.
+Dialogue: 4,0:01:49.86,0:01:53.04,Caption,,0,0,0,,Try naming it in ordinary words:
+Dialogue: 4,0:01:53.04,0:01:55.86,Caption,,0,0,0,,I was impatient with my child.
+Dialogue: 4,0:01:55.86,0:01:58.72,Caption,,0,0,0,,I exaggerated to look better.
+Dialogue: 4,0:01:58.72,0:01:59.94,Caption,,0,0,0,,I ignored a call
+Dialogue: 4,0:01:59.94,0:02:01.98,Caption,,0,0,0,,I should have answered.
+Dialogue: 4,0:02:01.98,0:02:03.43,Caption,,0,0,0,,You are not writing
+Dialogue: 4,0:02:03.43,0:02:05.93,Caption,,0,0,0,,a confession for anyone else.
+Dialogue: 4,0:02:05.93,0:02:07.47,Caption,,0,0,0,,You are simply letting
+Dialogue: 4,0:02:07.47,0:02:09.08,Caption,,0,0,0,,the truth have a shape,
+Dialogue: 4,0:02:09.08,0:02:10.97,Caption,,0,0,0,,so that mercy has something
+Dialogue: 4,0:02:10.97,0:02:12.51,Caption,,0,0,0,,specific to meet.
+Dialogue: 4,0:02:13.66,0:02:14.02,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:02:14.02,0:02:15.72,Caption,,0,0,0,,I name the words I spoke
+Dialogue: 4,0:02:15.72,0:02:17.35,Caption,,0,0,0,,today that were harsher
+Dialogue: 4,0:02:17.35,0:02:19.28,Caption,,0,0,0,,than they needed to be.
+Dialogue: 4,0:02:19.28,0:02:20.88,Caption,,0,0,0,,I remember the tone as
+Dialogue: 4,0:02:20.88,0:02:22.41,Caption,,0,0,0,,well as the sentence,
+Dialogue: 4,0:02:22.41,0:02:24.09,Caption,,0,0,0,,and I remember the face
+Dialogue: 4,0:02:24.09,0:02:26.36,Caption,,0,0,0,,of the person who heard it.
+Dialogue: 4,0:02:26.36,0:02:28.37,Caption,,0,0,0,,I cannot take those words
+Dialogue: 4,0:02:28.37,0:02:30.20,Caption,,0,0,0,,back into my mouth.
+Dialogue: 4,0:02:30.20,0:02:31.66,Caption,,0,0,0,,I ask you to forgive
+Dialogue: 4,0:02:31.66,0:02:32.54,Caption,,0,0,0,,me for them,
+Dialogue: 4,0:02:32.54,0:02:35.26,Caption,,0,0,0,,and to soften whatever they hurt.
+Dialogue: 4,0:02:35.26,0:02:37.07,Caption,,0,0,0,,Show me tomorrow whether
+Dialogue: 4,0:02:37.07,0:02:38.66,Caption,,0,0,0,,an apology is needed,
+Dialogue: 4,0:02:38.66,0:02:41.13,Caption,,0,0,0,,and help me offer it simply.
+Dialogue: 4,0:02:42.28,0:02:42.91,Caption,,0,0,0,,Father,
+Dialogue: 4,0:02:42.91,0:02:45.70,Caption,,0,0,0,,I also bring what I avoided.
+Dialogue: 4,0:02:45.70,0:02:47.94,Caption,,0,0,0,,There was a task I postponed
+Dialogue: 4,0:02:47.94,0:02:50.35,Caption,,0,0,0,,because it felt uncomfortable,
+Dialogue: 4,0:02:50.35,0:02:52.60,Caption,,0,0,0,,and a conversation I steered
+Dialogue: 4,0:02:52.60,0:02:54.45,Caption,,0,0,0,,away from because I was
+Dialogue: 4,0:02:54.45,0:02:56.84,Caption,,0,0,0,,afraid of how it might go.
+Dialogue: 4,0:02:56.84,0:03:00.01,Caption,,0,0,0,,Sometimes my failures are quiet ones,
+Dialogue: 4,0:03:00.01,0:03:02.67,Caption,,0,0,0,,a kindness I withheld or a duty
+Dialogue: 4,0:03:02.67,0:03:05.03,Caption,,0,0,0,,I left for someone else.
+Dialogue: 4,0:03:05.03,0:03:06.63,Caption,,0,0,0,,Forgive me for the good
+Dialogue: 4,0:03:06.63,0:03:09.02,Caption,,0,0,0,,I could have done and did not.
+Dialogue: 4,0:03:09.02,0:03:10.97,Caption,,0,0,0,,Make me braver in small
+Dialogue: 4,0:03:10.97,0:03:12.68,Caption,,0,0,0,,and honest ways.
+Dialogue: 4,0:03:13.82,0:03:14.22,Caption,,0,0,0,,Next,
+Dialogue: 4,0:03:14.22,0:03:16.65,Caption,,0,0,0,,a psalm that shows what happens
+Dialogue: 4,0:03:16.65,0:03:18.57,Caption,,0,0,0,,when we stop hiding.
+Dialogue: 5,0:03:19.12,0:03:21.78,Verse,,0,0,0,,{\pos(960,470)}I acknowledged my sin unto thee,
+Dialogue: 5,0:03:21.78,0:03:24.82,Verse,,0,0,0,,{\pos(960,470)}and mine iniquity have I not hid.
+Dialogue: 5,0:03:24.82,0:03:25.39,Verse,,0,0,0,,{\pos(960,470)}I said,
+Dialogue: 5,0:03:25.39,0:03:27.99,Verse,,0,0,0,,{\pos(960,470)}I will confess my transgressions
+Dialogue: 5,0:03:27.99,0:03:29.43,Verse,,0,0,0,,{\pos(960,470)}unto the LORD;
+Dialogue: 5,0:03:29.43,0:03:30.87,Verse,,0,0,0,,{\pos(960,470)}and thou forgavest
+Dialogue: 5,0:03:30.87,0:03:33.01,Verse,,0,0,0,,{\pos(960,470)}the iniquity of my sin.
+Dialogue: 4,0:03:33.01,0:03:34.32,Caption,,0,0,0,,Selah.
+Dialogue: 4,0:03:35.77,0:03:38.55,Caption,,0,0,0,,Notice the order in that psalm.
+Dialogue: 4,0:03:38.55,0:03:40.38,Caption,,0,0,0,,The writer stops hiding,
+Dialogue: 4,0:03:40.38,0:03:42.22,Caption,,0,0,0,,says it out loud to God,
+Dialogue: 4,0:03:42.22,0:03:44.35,Caption,,0,0,0,,and forgiveness follows.
+Dialogue: 4,0:03:44.35,0:03:46.46,Caption,,0,0,0,,Hiding takes a surprising
+Dialogue: 4,0:03:46.46,0:03:48.19,Caption,,0,0,0,,amount of energy.
+Dialogue: 4,0:03:48.19,0:03:50.17,Caption,,0,0,0,,You rehearse explanations,
+Dialogue: 4,0:03:50.17,0:03:51.69,Caption,,0,0,0,,you watch for anyone
+Dialogue: 4,0:03:51.69,0:03:53.36,Caption,,0,0,0,,who might bring it up,
+Dialogue: 4,0:03:53.36,0:03:55.12,Caption,,0,0,0,,you feel slightly tense
+Dialogue: 4,0:03:55.12,0:03:57.09,Caption,,0,0,0,,around certain people.
+Dialogue: 4,0:03:57.09,0:04:00.31,Caption,,0,0,0,,Confession is not meant to crush you.
+Dialogue: 4,0:04:00.31,0:04:02.09,Caption,,0,0,0,,It is the moment you can
+Dialogue: 4,0:04:02.09,0:04:03.95,Caption,,0,0,0,,stop guarding the secret,
+Dialogue: 4,0:04:03.95,0:04:06.03,Caption,,0,0,0,,because the One who hears it
+Dialogue: 4,0:04:06.03,0:04:08.24,Caption,,0,0,0,,has already chosen mercy.
+Dialogue: 4,0:04:09.38,0:04:09.78,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:04:09.78,0:04:11.58,Caption,,0,0,0,,here is the part I have
+Dialogue: 4,0:04:11.58,0:04:13.46,Caption,,0,0,0,,been reluctant to admit,
+Dialogue: 4,0:04:13.46,0:04:14.93,Caption,,0,0,0,,even to myself.
+Dialogue: 4,0:04:14.93,0:04:17.02,Caption,,0,0,0,,I did it because I wanted
+Dialogue: 4,0:04:17.02,0:04:18.70,Caption,,0,0,0,,to protect my image,
+Dialogue: 4,0:04:18.70,0:04:20.37,Caption,,0,0,0,,to win the argument,
+Dialogue: 4,0:04:20.37,0:04:22.85,Caption,,0,0,0,,or to avoid feeling small.
+Dialogue: 4,0:04:22.85,0:04:24.69,Caption,,0,0,0,,I do not want to dress it
+Dialogue: 4,0:04:24.69,0:04:26.69,Caption,,0,0,0,,up as something nobler.
+Dialogue: 4,0:04:26.69,0:04:28.38,Caption,,0,0,0,,I confess it as sin,
+Dialogue: 4,0:04:28.38,0:04:31.04,Caption,,0,0,0,,and I ask you to forgive me.
+Dialogue: 4,0:04:31.04,0:04:33.52,Caption,,0,0,0,,Thank you that your patience with me
+Dialogue: 4,0:04:33.52,0:04:36.62,Caption,,0,0,0,,is deeper than my embarrassment tonight.
+Dialogue: 4,0:04:37.77,0:04:38.29,Caption,,0,0,0,,Father,
+Dialogue: 4,0:04:38.29,0:04:40.08,Caption,,0,0,0,,help me actually receive
+Dialogue: 4,0:04:40.08,0:04:42.02,Caption,,0,0,0,,what I have asked for.
+Dialogue: 4,0:04:42.02,0:04:44.13,Caption,,0,0,0,,I tend to ask for forgiveness
+Dialogue: 4,0:04:44.13,0:04:46.90,Caption,,0,0,0,,and then keep punishing myself anyway,
+Dialogue: 4,0:04:46.90,0:04:49.98,Caption,,0,0,0,,as though your answer were not enough.
+Dialogue: 4,0:04:49.98,0:04:51.71,Caption,,0,0,0,,If you have forgiven me,
+Dialogue: 4,0:04:51.71,0:04:53.23,Caption,,0,0,0,,I do not need to keep
+Dialogue: 4,0:04:53.23,0:04:55.84,Caption,,0,0,0,,the sentence running in my head.
+Dialogue: 4,0:04:55.84,0:04:57.83,Caption,,0,0,0,,Teach me to trust your word
+Dialogue: 4,0:04:57.83,0:05:00.26,Caption,,0,0,0,,more than my lingering shame.
+Dialogue: 4,0:05:00.26,0:05:03.18,Caption,,0,0,0,,Let this pardon settle into the places
+Dialogue: 4,0:05:03.18,0:05:05.90,Caption,,0,0,0,,where I usually hold my breath.
+Dialogue: 4,0:05:07.05,0:05:09.44,Caption,,0,0,0,,If you have confessed this before,
+Dialogue: 4,0:05:09.44,0:05:10.66,Caption,,0,0,0,,stay with me.
+Dialogue: 4,0:05:10.66,0:05:13.23,Caption,,0,0,0,,The next words are for you.
+Dialogue: 4,0:05:13.78,0:05:16.19,Caption,,0,0,0,,Perhaps what troubles you most
+Dialogue: 4,0:05:16.19,0:05:17.39,Caption,,0,0,0,,is that this is
+Dialogue: 4,0:05:17.39,0:05:19.22,Caption,,0,0,0,,not the first time.
+Dialogue: 4,0:05:19.22,0:05:20.83,Caption,,0,0,0,,You have confessed this
+Dialogue: 4,0:05:20.83,0:05:22.31,Caption,,0,0,0,,same weakness before,
+Dialogue: 4,0:05:22.31,0:05:24.08,Caption,,0,0,0,,and here it is again.
+Dialogue: 4,0:05:24.08,0:05:26.04,Caption,,0,0,0,,That can make forgiveness
+Dialogue: 4,0:05:26.04,0:05:27.75,Caption,,0,0,0,,feel almost dishonest,
+Dialogue: 4,0:05:27.75,0:05:29.39,Caption,,0,0,0,,as if you were taking
+Dialogue: 4,0:05:29.39,0:05:31.02,Caption,,0,0,0,,advantage of God.
+Dialogue: 4,0:05:31.02,0:05:33.04,Caption,,0,0,0,,Yet Scripture never puts
+Dialogue: 4,0:05:33.04,0:05:35.12,Caption,,0,0,0,,a limit on returning.
+Dialogue: 4,0:05:35.12,0:05:37.36,Caption,,0,0,0,,Each honest return is part
+Dialogue: 4,0:05:37.36,0:05:39.56,Caption,,0,0,0,,of how change happens.
+Dialogue: 4,0:05:39.56,0:05:40.84,Caption,,0,0,0,,God is not tired
+Dialogue: 4,0:05:40.84,0:05:42.74,Caption,,0,0,0,,of hearing from you.
+Dialogue: 4,0:05:42.74,0:05:44.42,Caption,,0,0,0,,He is patiently forming
+Dialogue: 4,0:05:44.42,0:05:46.31,Caption,,0,0,0,,something new in you.
+Dialogue: 5,0:05:47.46,0:05:50.39,Verse,,0,0,0,,{\pos(960,470)}There is therefore now no condemnation
+Dialogue: 5,0:05:50.39,0:05:53.01,Verse,,0,0,0,,{\pos(960,470)}to them which are in Christ Jesus,
+Dialogue: 5,0:05:53.01,0:05:55.24,Verse,,0,0,0,,{\pos(960,470)}who walk not after the flesh,
+Dialogue: 5,0:05:55.24,0:05:57.21,Verse,,0,0,0,,{\pos(960,470)}but after the Spirit.
+Dialogue: 4,0:05:58.66,0:05:59.08,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:05:59.08,0:06:02.06,Caption,,0,0,0,,my heart is good at accusing me.
+Dialogue: 4,0:06:02.06,0:06:04.09,Caption,,0,0,0,,It brings up old mistakes
+Dialogue: 4,0:06:04.09,0:06:05.56,Caption,,0,0,0,,alongside today's,
+Dialogue: 4,0:06:05.56,0:06:06.86,Caption,,0,0,0,,and it speaks as
+Dialogue: 4,0:06:06.86,0:06:08.63,Caption,,0,0,0,,if they define me.
+Dialogue: 4,0:06:08.63,0:06:09.98,Caption,,0,0,0,,When those thoughts
+Dialogue: 4,0:06:09.98,0:06:11.55,Caption,,0,0,0,,come back in the dark,
+Dialogue: 4,0:06:11.55,0:06:13.76,Caption,,0,0,0,,remind me that you know me more
+Dialogue: 4,0:06:13.76,0:06:16.70,Caption,,0,0,0,,completely than my worst memory does.
+Dialogue: 4,0:06:16.70,0:06:18.66,Caption,,0,0,0,,Quiet the voice that keeps
+Dialogue: 4,0:06:18.66,0:06:20.17,Caption,,0,0,0,,the record open.
+Dialogue: 4,0:06:20.17,0:06:21.53,Caption,,0,0,0,,I place the whole
+Dialogue: 4,0:06:21.53,0:06:23.04,Caption,,0,0,0,,list in your hands,
+Dialogue: 4,0:06:23.04,0:06:24.32,Caption,,0,0,0,,the recent pages
+Dialogue: 4,0:06:24.32,0:06:26.35,Caption,,0,0,0,,and the old ones too.
+Dialogue: 5,0:06:27.50,0:06:29.59,Verse,,0,0,0,,{\pos(960,470)}For if our heart condemn us,
+Dialogue: 5,0:06:29.59,0:06:31.84,Verse,,0,0,0,,{\pos(960,470)}God is greater than our heart,
+Dialogue: 5,0:06:31.84,0:06:33.91,Verse,,0,0,0,,{\pos(960,470)}and knoweth all things.
+Dialogue: 4,0:06:35.36,0:06:36.83,Caption,,0,0,0,,Let that sentence stay
+Dialogue: 4,0:06:36.83,0:06:38.60,Caption,,0,0,0,,with you for a moment.
+Dialogue: 4,0:06:38.60,0:06:41.31,Caption,,0,0,0,,God is greater than your heart.
+Dialogue: 4,0:06:41.31,0:06:43.72,Caption,,0,0,0,,You do not need to add anything
+Dialogue: 4,0:06:43.72,0:06:45.81,Caption,,0,0,0,,to it or argue with it.
+Dialogue: 4,0:06:45.81,0:06:48.29,Caption,,0,0,0,,Simply breathe at your own pace,
+Dialogue: 4,0:06:48.29,0:06:51.00,Caption,,0,0,0,,and notice that you are still here,
+Dialogue: 4,0:06:51.00,0:06:51.92,Caption,,0,0,0,,still loved,
+Dialogue: 4,0:06:51.92,0:06:55.06,Caption,,0,0,0,,still being spoken to with kindness.
+Dialogue: 4,0:06:58.01,0:06:58.80,Caption,,0,0,0,,In a moment,
+Dialogue: 4,0:06:58.80,0:07:00.77,Caption,,0,0,0,,we pray for the person you may
+Dialogue: 4,0:07:00.77,0:07:03.16,Caption,,0,0,0,,need to make things right with.
+Dialogue: 4,0:07:03.71,0:07:04.19,Caption,,0,0,0,,Father,
+Dialogue: 4,0:07:04.19,0:07:05.86,Caption,,0,0,0,,bring to mind the person
+Dialogue: 4,0:07:05.86,0:07:08.17,Caption,,0,0,0,,who may need to hear from me.
+Dialogue: 4,0:07:08.17,0:07:09.88,Caption,,0,0,0,,If I owe an apology,
+Dialogue: 4,0:07:09.88,0:07:11.77,Caption,,0,0,0,,help me say it without
+Dialogue: 4,0:07:11.77,0:07:13.70,Caption,,0,0,0,,explaining it away.
+Dialogue: 4,0:07:13.70,0:07:15.18,Caption,,0,0,0,,If I need to correct
+Dialogue: 4,0:07:15.18,0:07:16.45,Caption,,0,0,0,,something I said,
+Dialogue: 4,0:07:16.45,0:07:17.94,Caption,,0,0,0,,give me the humility
+Dialogue: 4,0:07:17.94,0:07:19.50,Caption,,0,0,0,,to do it plainly.
+Dialogue: 4,0:07:19.50,0:07:22.21,Caption,,0,0,0,,If the situation is complicated,
+Dialogue: 4,0:07:22.21,0:07:25.73,Caption,,0,0,0,,give me wisdom about timing and words.
+Dialogue: 4,0:07:25.73,0:07:27.47,Caption,,0,0,0,,I do not want to repair
+Dialogue: 4,0:07:27.47,0:07:29.96,Caption,,0,0,0,,things in order to look good.
+Dialogue: 4,0:07:29.96,0:07:32.82,Caption,,0,0,0,,I want to love this person well.
+Dialogue: 4,0:07:33.97,0:07:34.39,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:07:34.39,0:07:37.05,Caption,,0,0,0,,I confess that I would sometimes
+Dialogue: 4,0:07:37.05,0:07:39.87,Caption,,0,0,0,,rather feel guilty than apologize,
+Dialogue: 4,0:07:39.87,0:07:42.11,Caption,,0,0,0,,because guilt stays private
+Dialogue: 4,0:07:42.11,0:07:44.41,Caption,,0,0,0,,and an apology does not.
+Dialogue: 4,0:07:44.41,0:07:47.22,Caption,,0,0,0,,Free me from that kind of pride.
+Dialogue: 4,0:07:47.22,0:07:49.23,Caption,,0,0,0,,Let my repentance be honest
+Dialogue: 4,0:07:49.23,0:07:51.54,Caption,,0,0,0,,enough to change how I act.
+Dialogue: 4,0:07:51.54,0:07:54.15,Caption,,0,0,0,,When I speak to the person tomorrow,
+Dialogue: 4,0:07:54.15,0:07:56.48,Caption,,0,0,0,,keep me from demanding that they
+Dialogue: 4,0:07:56.48,0:07:58.81,Caption,,0,0,0,,respond in a particular way.
+Dialogue: 4,0:07:58.81,0:08:01.58,Caption,,0,0,0,,Their response belongs to them.
+Dialogue: 4,0:08:01.58,0:08:04.94,Caption,,0,0,0,,My part is truthfulness and kindness.
+Dialogue: 4,0:08:06.09,0:08:06.64,Caption,,0,0,0,,Father,
+Dialogue: 4,0:08:06.64,0:08:08.27,Caption,,0,0,0,,I think of the people
+Dialogue: 4,0:08:08.27,0:08:09.68,Caption,,0,0,0,,under my own roof,
+Dialogue: 4,0:08:09.68,0:08:11.31,Caption,,0,0,0,,or the people I speak
+Dialogue: 4,0:08:11.31,0:08:12.86,Caption,,0,0,0,,with most often.
+Dialogue: 4,0:08:12.86,0:08:14.86,Caption,,0,0,0,,Familiarity makes it easy
+Dialogue: 4,0:08:14.86,0:08:17.17,Caption,,0,0,0,,to be careless with them.
+Dialogue: 4,0:08:17.17,0:08:19.28,Caption,,0,0,0,,Forgive me for the impatience
+Dialogue: 4,0:08:19.28,0:08:21.76,Caption,,0,0,0,,I would never show a stranger.
+Dialogue: 4,0:08:21.76,0:08:23.95,Caption,,0,0,0,,Forgive me for the assumptions
+Dialogue: 4,0:08:23.95,0:08:26.36,Caption,,0,0,0,,I make about what they meant.
+Dialogue: 4,0:08:26.36,0:08:27.81,Caption,,0,0,0,,Help me notice their
+Dialogue: 4,0:08:27.81,0:08:30.14,Caption,,0,0,0,,tiredness and their efforts.
+Dialogue: 4,0:08:30.14,0:08:32.24,Caption,,0,0,0,,Let my home be a place where
+Dialogue: 4,0:08:32.24,0:08:34.49,Caption,,0,0,0,,forgiveness is spoken out loud
+Dialogue: 4,0:08:34.49,0:08:37.47,Caption,,0,0,0,,and received without keeping score.
+Dialogue: 5,0:08:38.62,0:08:40.97,Verse,,0,0,0,,{\pos(960,470)}And be ye kind one to another,
+Dialogue: 5,0:08:40.97,0:08:42.07,Verse,,0,0,0,,{\pos(960,470)}tenderhearted,
+Dialogue: 5,0:08:42.07,0:08:43.79,Verse,,0,0,0,,{\pos(960,470)}forgiving one another,
+Dialogue: 5,0:08:43.79,0:08:45.67,Verse,,0,0,0,,{\pos(960,470)}even as God for Christ's
+Dialogue: 5,0:08:45.67,0:08:47.82,Verse,,0,0,0,,{\pos(960,470)}sake hath forgiven you.
+Dialogue: 4,0:08:49.27,0:08:51.81,Caption,,0,0,0,,Next comes the harder prayer:
+Dialogue: 4,0:08:51.81,0:08:54.10,Caption,,0,0,0,,the person who hurt you.
+Dialogue: 4,0:08:54.65,0:08:55.22,Caption,,0,0,0,,Father,
+Dialogue: 4,0:08:55.22,0:08:58.00,Caption,,0,0,0,,I bring the person who hurt me.
+Dialogue: 4,0:08:58.00,0:08:59.61,Caption,,0,0,0,,You saw what happened,
+Dialogue: 4,0:08:59.61,0:09:02.40,Caption,,0,0,0,,and you know how deeply it landed.
+Dialogue: 4,0:09:02.40,0:09:04.07,Caption,,0,0,0,,I do not want to carry
+Dialogue: 4,0:09:04.07,0:09:06.73,Caption,,0,0,0,,resentment into my sleep again.
+Dialogue: 4,0:09:06.73,0:09:08.40,Caption,,0,0,0,,Help me release my wish
+Dialogue: 4,0:09:08.40,0:09:10.60,Caption,,0,0,0,,to see them suffer for it.
+Dialogue: 4,0:09:10.60,0:09:12.56,Caption,,0,0,0,,Where boundaries are wise,
+Dialogue: 4,0:09:12.56,0:09:15.05,Caption,,0,0,0,,give me clarity to keep them.
+Dialogue: 4,0:09:15.05,0:09:17.66,Caption,,0,0,0,,Where reconciliation is possible,
+Dialogue: 4,0:09:17.66,0:09:20.09,Caption,,0,0,0,,prepare both of our hearts.
+Dialogue: 4,0:09:20.09,0:09:20.65,Caption,,0,0,0,,Tonight,
+Dialogue: 4,0:09:20.65,0:09:21.85,Caption,,0,0,0,,I choose to leave
+Dialogue: 4,0:09:21.85,0:09:23.75,Caption,,0,0,0,,the judgment with you.
+Dialogue: 4,0:09:24.90,0:09:25.28,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:09:25.28,0:09:27.07,Caption,,0,0,0,,if forgiving them still
+Dialogue: 4,0:09:27.07,0:09:28.39,Caption,,0,0,0,,feels impossible,
+Dialogue: 4,0:09:28.39,0:09:31.64,Caption,,0,0,0,,I will not pretend otherwise with you.
+Dialogue: 4,0:09:31.64,0:09:33.74,Caption,,0,0,0,,Let this prayer be a beginning
+Dialogue: 4,0:09:33.74,0:09:35.86,Caption,,0,0,0,,rather than a performance.
+Dialogue: 4,0:09:35.86,0:09:38.76,Caption,,0,0,0,,I may need to forgive again tomorrow,
+Dialogue: 4,0:09:38.76,0:09:40.48,Caption,,0,0,0,,and the day after.
+Dialogue: 4,0:09:40.48,0:09:42.32,Caption,,0,0,0,,Give me the willingness
+Dialogue: 4,0:09:42.32,0:09:44.06,Caption,,0,0,0,,I do not yet feel.
+Dialogue: 4,0:09:44.06,0:09:45.88,Caption,,0,0,0,,Remind me how patiently
+Dialogue: 4,0:09:45.88,0:09:47.55,Caption,,0,0,0,,you have forgiven me,
+Dialogue: 4,0:09:47.55,0:09:48.82,Caption,,0,0,0,,again and again,
+Dialogue: 4,0:09:48.82,0:09:51.44,Caption,,0,0,0,,so that my heart can slowly learn
+Dialogue: 4,0:09:51.44,0:09:54.88,Caption,,0,0,0,,the same tender patience toward others.
+Dialogue: 4,0:09:56.04,0:09:57.75,Caption,,0,0,0,,Forbearing one another,
+Dialogue: 4,0:09:57.75,0:09:59.68,Caption,,0,0,0,,and forgiving one another,
+Dialogue: 4,0:09:59.68,0:10:00.80,Caption,,0,0,0,,if any man have
+Dialogue: 4,0:10:00.80,0:10:02.74,Caption,,0,0,0,,a quarrel against any:
+Dialogue: 5,0:10:02.74,0:10:05.15,Verse,,0,0,0,,{\pos(960,470)}even as Christ forgave you,
+Dialogue: 5,0:10:05.15,0:10:06.75,Verse,,0,0,0,,{\pos(960,470)}so also do ye.
+Dialogue: 4,0:10:08.20,0:10:08.73,Caption,,0,0,0,,Father,
+Dialogue: 4,0:10:08.73,0:10:10.76,Caption,,0,0,0,,teach me to speak to myself
+Dialogue: 4,0:10:10.76,0:10:12.86,Caption,,0,0,0,,the way you speak to me.
+Dialogue: 4,0:10:12.86,0:10:15.43,Caption,,0,0,0,,I can be honest about my failure
+Dialogue: 4,0:10:15.43,0:10:18.96,Caption,,0,0,0,,without despising the person who failed.
+Dialogue: 4,0:10:18.96,0:10:21.22,Caption,,0,0,0,,Help me learn the lesson this day
+Dialogue: 4,0:10:21.22,0:10:24.00,Caption,,0,0,0,,offers and then lay down the weight.
+Dialogue: 4,0:10:24.00,0:10:25.71,Caption,,0,0,0,,When I wake tomorrow,
+Dialogue: 4,0:10:25.71,0:10:28.41,Caption,,0,0,0,,let me begin as someone forgiven,
+Dialogue: 4,0:10:28.41,0:10:30.99,Caption,,0,0,0,,not as someone on probation.
+Dialogue: 4,0:10:30.99,0:10:32.99,Caption,,0,0,0,,Thank you that your mercy
+Dialogue: 4,0:10:32.99,0:10:35.30,Caption,,0,0,0,,is not a reluctant pardon but
+Dialogue: 4,0:10:35.30,0:10:36.85,Caption,,0,0,0,,a welcome home.
+Dialogue: 4,0:10:38.00,0:10:40.50,Caption,,0,0,0,,We are close to rest now.
+Dialogue: 4,0:10:40.50,0:10:44.04,Caption,,0,0,0,,Hear how God feels about showing mercy.
+Dialogue: 5,0:10:44.60,0:10:46.78,Verse,,0,0,0,,{\pos(960,470)}Who is a God like unto thee,
+Dialogue: 5,0:10:46.78,0:10:48.66,Verse,,0,0,0,,{\pos(960,470)}that pardoneth iniquity,
+Dialogue: 5,0:10:48.66,0:10:51.16,Verse,,0,0,0,,{\pos(960,470)}and passeth by the transgression
+Dialogue: 5,0:10:51.16,0:10:53.88,Verse,,0,0,0,,{\pos(960,470)}of the remnant of his heritage?
+Dialogue: 4,0:10:53.88,0:10:56.75,Caption,,0,0,0,,he retaineth not his anger for ever,
+Dialogue: 4,0:10:56.75,0:10:59.58,Caption,,0,0,0,,because he delighteth in mercy.
+Dialogue: 4,0:11:01.03,0:11:01.40,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:11:01.40,0:11:04.57,Caption,,0,0,0,,thank you that you enjoy showing mercy.
+Dialogue: 4,0:11:04.57,0:11:06.40,Caption,,0,0,0,,Thank you for every time
+Dialogue: 4,0:11:06.40,0:11:08.52,Caption,,0,0,0,,you have forgiven me without
+Dialogue: 4,0:11:08.52,0:11:10.95,Caption,,0,0,0,,reminding me of my failures.
+Dialogue: 4,0:11:10.95,0:11:12.57,Caption,,0,0,0,,Thank you for the people
+Dialogue: 4,0:11:12.57,0:11:14.13,Caption,,0,0,0,,who have shown me grace
+Dialogue: 4,0:11:14.13,0:11:15.88,Caption,,0,0,0,,when I did not deserve it,
+Dialogue: 4,0:11:15.88,0:11:17.64,Caption,,0,0,0,,because their kindness was
+Dialogue: 4,0:11:17.64,0:11:19.42,Caption,,0,0,0,,a reflection of yours.
+Dialogue: 4,0:11:19.42,0:11:21.93,Caption,,0,0,0,,Let gratitude grow in me tonight
+Dialogue: 4,0:11:21.93,0:11:24.89,Caption,,0,0,0,,until it is larger than my regret.
+Dialogue: 4,0:11:24.89,0:11:27.56,Caption,,0,0,0,,I want to fall asleep thankful,
+Dialogue: 4,0:11:27.56,0:11:28.95,Caption,,0,0,0,,not ashamed.
+Dialogue: 4,0:11:30.10,0:11:30.51,Caption,,0,0,0,,Lord,
+Dialogue: 4,0:11:30.51,0:11:31.99,Caption,,0,0,0,,I do not only want
+Dialogue: 4,0:11:31.99,0:11:33.77,Caption,,0,0,0,,my record cleared.
+Dialogue: 4,0:11:33.77,0:11:36.29,Caption,,0,0,0,,I want my heart changed.
+Dialogue: 4,0:11:36.29,0:11:39.02,Caption,,0,0,0,,Where impatience has become a habit,
+Dialogue: 4,0:11:39.02,0:11:40.83,Caption,,0,0,0,,grow patience in me.
+Dialogue: 4,0:11:40.83,0:11:42.27,Caption,,0,0,0,,Where I have learned
+Dialogue: 4,0:11:42.27,0:11:43.64,Caption,,0,0,0,,to shade the truth,
+Dialogue: 4,0:11:43.64,0:11:45.02,Caption,,0,0,0,,make me honest.
+Dialogue: 4,0:11:45.02,0:11:47.67,Caption,,0,0,0,,Where I keep reaching for control,
+Dialogue: 4,0:11:47.67,0:11:49.14,Caption,,0,0,0,,teach me trust.
+Dialogue: 4,0:11:49.14,0:11:51.61,Caption,,0,0,0,,Do this work slowly and deeply,
+Dialogue: 4,0:11:51.61,0:11:53.52,Caption,,0,0,0,,the way a garden changes
+Dialogue: 4,0:11:53.52,0:11:55.90,Caption,,0,0,0,,through many quiet nights.
+Dialogue: 4,0:11:55.90,0:11:57.41,Caption,,0,0,0,,I give you permission
+Dialogue: 4,0:11:57.41,0:11:59.13,Caption,,0,0,0,,to keep shaping me.
+Dialogue: 5,0:12:00.28,0:12:02.72,Verse,,0,0,0,,{\pos(960,470)}Create in me a clean heart,
+Dialogue: 5,0:12:02.72,0:12:03.56,Verse,,0,0,0,,{\pos(960,470)}O God;
+Dialogue: 5,0:12:03.56,0:12:06.71,Verse,,0,0,0,,{\pos(960,470)}and renew a right spirit within me.
+Dialogue: 4,0:12:08.16,0:12:09.83,Caption,,0,0,0,,I am honest with God
+Dialogue: 4,0:12:09.83,0:12:12.04,Caption,,0,0,0,,about what I did today.
+Dialogue: 4,0:12:12.04,0:12:13.67,Caption,,0,0,0,,I am forgiven because
+Dialogue: 4,0:12:13.67,0:12:15.38,Caption,,0,0,0,,God delights in mercy,
+Dialogue: 4,0:12:15.38,0:12:17.93,Caption,,0,0,0,,not because I have earned it.
+Dialogue: 4,0:12:17.93,0:12:19.90,Caption,,0,0,0,,I am free to make repair
+Dialogue: 4,0:12:19.90,0:12:22.58,Caption,,0,0,0,,without being ruled by shame.
+Dialogue: 4,0:12:22.58,0:12:24.78,Caption,,0,0,0,,I release the person who hurt
+Dialogue: 4,0:12:24.78,0:12:26.60,Caption,,0,0,0,,me into God's hands.
+Dialogue: 4,0:12:26.60,0:12:28.66,Caption,,0,0,0,,I can learn from this day
+Dialogue: 4,0:12:28.66,0:12:31.27,Caption,,0,0,0,,without being defined by it.
+Dialogue: 4,0:12:31.27,0:12:33.21,Caption,,0,0,0,,Tomorrow I begin again,
+Dialogue: 4,0:12:33.21,0:12:34.81,Caption,,0,0,0,,as someone welcomed
+Dialogue: 4,0:12:34.81,0:12:37.10,Caption,,0,0,0,,and held by the Father.
+Dialogue: 4,0:12:38.25,0:12:40.56,Caption,,0,0,0,,Before the readings for sleep,
+Dialogue: 4,0:12:40.56,0:12:42.71,Caption,,0,0,0,,make one small decision.
+Dialogue: 4,0:12:42.71,0:12:44.84,Caption,,0,0,0,,Think of the one act of repair
+Dialogue: 4,0:12:44.84,0:12:47.19,Caption,,0,0,0,,that would honor what you prayed,
+Dialogue: 4,0:12:47.19,0:12:48.84,Caption,,0,0,0,,and give it a time.
+Dialogue: 4,0:12:48.84,0:12:49.84,Caption,,0,0,0,,It might be,
+Dialogue: 4,0:12:49.84,0:12:52.25,Caption,,0,0,0,,at lunch tomorrow I will send
+Dialogue: 4,0:12:52.25,0:12:55.05,Caption,,0,0,0,,a short apology to my brother.
+Dialogue: 4,0:12:55.05,0:12:55.85,Caption,,0,0,0,,If it helps,
+Dialogue: 4,0:12:55.85,0:12:57.45,Caption,,0,0,0,,write just that sentence
+Dialogue: 4,0:12:57.45,0:12:59.48,Caption,,0,0,0,,somewhere you will see it.
+Dialogue: 4,0:12:59.48,0:13:01.54,Caption,,0,0,0,,Then set it down.
+Dialogue: 4,0:13:01.54,0:13:04.23,Caption,,0,0,0,,The repair has a place in tomorrow,
+Dialogue: 4,0:13:04.23,0:13:07.05,Caption,,0,0,0,,so tonight can be given to rest.
+Dialogue: 4,0:13:08.20,0:13:08.73,Caption,,0,0,0,,Father,
+Dialogue: 4,0:13:08.73,0:13:09.96,Caption,,0,0,0,,I place that one
+Dialogue: 4,0:13:09.96,0:13:11.78,Caption,,0,0,0,,step into your care.
+Dialogue: 4,0:13:11.78,0:13:13.40,Caption,,0,0,0,,When the time comes,
+Dialogue: 4,0:13:13.40,0:13:16.20,Caption,,0,0,0,,give me clear and gentle words.
+Dialogue: 4,0:13:16.20,0:13:18.48,Caption,,0,0,0,,If you show me that a different
+Dialogue: 4,0:13:18.48,0:13:19.94,Caption,,0,0,0,,step would be wiser,
+Dialogue: 4,0:13:19.94,0:13:21.34,Caption,,0,0,0,,help me listen.
+Dialogue: 4,0:13:21.34,0:13:21.98,Caption,,0,0,0,,For now,
+Dialogue: 4,0:13:21.98,0:13:23.96,Caption,,0,0,0,,I do not need to rehearse
+Dialogue: 4,0:13:23.96,0:13:26.72,Caption,,0,0,0,,the conversation over and over.
+Dialogue: 4,0:13:26.72,0:13:27.94,Caption,,0,0,0,,I have confessed,
+Dialogue: 4,0:13:27.94,0:13:29.44,Caption,,0,0,0,,I have been forgiven,
+Dialogue: 4,0:13:29.44,0:13:31.39,Caption,,0,0,0,,and I have a next step.
+Dialogue: 4,0:13:31.39,0:13:33.90,Caption,,0,0,0,,Let that be enough for tonight.
+Dialogue: 4,0:13:35.05,0:13:36.97,Caption,,0,0,0,,If you have received God's
+Dialogue: 4,0:13:36.97,0:13:38.45,Caption,,0,0,0,,forgiveness tonight,
+Dialogue: 4,0:13:38.45,0:13:41.26,Caption,,0,0,0,,you can type amen in the comments.
+Dialogue: 4,0:13:41.26,0:13:42.51,Caption,,0,0,0,,You can also leave
+Dialogue: 4,0:13:42.51,0:13:44.12,Caption,,0,0,0,,a prayer request there,
+Dialogue: 4,0:13:44.12,0:13:46.28,Caption,,0,0,0,,and in our next night prayer we
+Dialogue: 4,0:13:46.28,0:13:49.24,Caption,,0,0,0,,will pray over the requests you share.
+Dialogue: 4,0:13:49.24,0:13:51.00,Caption,,0,0,0,,Now let Scripture carry
+Dialogue: 4,0:13:51.00,0:13:52.66,Caption,,0,0,0,,you toward sleep.
+Dialogue: 4,0:13:53.61,0:13:56.38,Caption,,0,0,0,,From here the words slow down.
+Dialogue: 4,0:13:56.38,0:13:59.32,Caption,,0,0,0,,There will be short readings and quiet
+Dialogue: 4,0:13:59.32,0:14:02.02,Caption,,0,0,0,,prayers about the mercy of God.
+Dialogue: 4,0:14:02.02,0:14:04.01,Caption,,0,0,0,,You do not need to follow
+Dialogue: 4,0:14:04.01,0:14:05.67,Caption,,0,0,0,,each one closely.
+Dialogue: 4,0:14:05.67,0:14:07.26,Caption,,0,0,0,,If your mind drifts,
+Dialogue: 4,0:14:07.26,0:14:09.00,Caption,,0,0,0,,that is all right.
+Dialogue: 4,0:14:09.00,0:14:10.65,Caption,,0,0,0,,Let your body be heavy
+Dialogue: 4,0:14:10.65,0:14:11.78,Caption,,0,0,0,,where it rests,
+Dialogue: 4,0:14:11.78,0:14:14.04,Caption,,0,0,0,,and let the sound of the voice
+Dialogue: 4,0:14:14.04,0:14:16.00,Caption,,0,0,0,,be a gentle companion.
+Dialogue: 4,0:14:16.00,0:14:18.86,Caption,,0,0,0,,The work of this evening is finished.
+Dialogue: 4,0:14:18.86,0:14:21.36,Caption,,0,0,0,,What remains is to receive.
+Dialogue: 5,0:14:22.81,0:14:23.86,Verse,,0,0,0,,{\pos(960,470)}And he arose,
+Dialogue: 5,0:14:23.86,0:14:26.01,Verse,,0,0,0,,{\pos(960,470)}and came to his father.
+Dialogue: 5,0:14:26.01,0:14:27.40,Verse,,0,0,0,,{\pos(960,470)}But when he was yet
+Dialogue: 5,0:14:27.40,0:14:28.56,Verse,,0,0,0,,{\pos(960,470)}a great way off,
+Dialogue: 5,0:14:28.56,0:14:29.94,Verse,,0,0,0,,{\pos(960,470)}his father saw him,
+Dialogue: 5,0:14:29.94,0:14:31.98,Verse,,0,0,0,,{\pos(960,470)}and had compassion, and ran,
+Dialogue: 5,0:14:31.98,0:14:33.52,Verse,,0,0,0,,{\pos(960,470)}and fell on his neck,
+Dialogue: 5,0:14:33.52,0:14:34.96,Verse,,0,0,0,,{\pos(960,470)}and kissed him.
+Dialogue: 4,0:14:36.41,0:14:36.90,Caption,,0,0,0,,Father,
+Dialogue: 4,0:14:36.90,0:14:38.40,Caption,,0,0,0,,thank you for running
+Dialogue: 4,0:14:38.40,0:14:40.61,Caption,,0,0,0,,toward me when I turn back.
+Dialogue: 4,0:14:40.61,0:14:43.28,Caption,,0,0,0,,Thank you for the embrace that comes
+Dialogue: 4,0:14:43.28,0:14:46.10,Caption,,0,0,0,,before my explanation is complete.
+Dialogue: 4,0:14:46.10,0:14:47.16,Caption,,0,0,0,,As I lie down,
+Dialogue: 4,0:14:47.16,0:14:48.99,Caption,,0,0,0,,let me rest like someone
+Dialogue: 4,0:14:48.99,0:14:50.36,Caption,,0,0,0,,who has come home,
+Dialogue: 4,0:14:50.36,0:14:52.03,Caption,,0,0,0,,not like someone still
+Dialogue: 4,0:14:52.03,0:14:53.93,Caption,,0,0,0,,standing at the gate.
+Dialogue: 4,0:14:53.93,0:14:56.10,Caption,,0,0,0,,Let the quiet of this room feel
+Dialogue: 4,0:14:56.10,0:14:58.13,Caption,,0,0,0,,like the quiet of your house,
+Dialogue: 4,0:14:58.13,0:15:00.44,Caption,,0,0,0,,where I am known and wanted.
+Dialogue: 5,0:15:01.59,0:15:02.46,Verse,,0,0,0,,{\pos(960,470)}I, even I,
+Dialogue: 5,0:15:02.46,0:15:04.79,Verse,,0,0,0,,{\pos(960,470)}am he that blotteth out thy
+Dialogue: 5,0:15:04.79,0:15:07.64,Verse,,0,0,0,,{\pos(960,470)}transgressions for mine own sake,
+Dialogue: 5,0:15:07.64,0:15:10.67,Verse,,0,0,0,,{\pos(960,470)}and will not remember thy sins.
+Dialogue: 4,0:15:12.12,0:15:14.06,Caption,,0,0,0,,You can rest in the silence
+Dialogue: 4,0:15:14.06,0:15:15.72,Caption,,0,0,0,,for a little while.
+Dialogue: 4,0:15:15.72,0:15:18.26,Caption,,0,0,0,,Nothing needs to be solved.
+Dialogue: 4,0:15:18.26,0:15:20.06,Caption,,0,0,0,,Let your breathing find
+Dialogue: 4,0:15:20.06,0:15:22.01,Caption,,0,0,0,,its own unhurried rhythm,
+Dialogue: 4,0:15:22.01,0:15:24.20,Caption,,0,0,0,,and let your hands lie open,
+Dialogue: 4,0:15:24.20,0:15:25.68,Caption,,0,0,0,,as if they had just
+Dialogue: 4,0:15:25.68,0:15:27.98,Caption,,0,0,0,,released something heavy.
+Dialogue: 4,0:15:30.93,0:15:31.50,Caption,,0,0,0,,Father,
+Dialogue: 4,0:15:31.50,0:15:34.17,Caption,,0,0,0,,I end this day in your mercy.
+Dialogue: 4,0:15:34.17,0:15:36.67,Caption,,0,0,0,,Thank you for hearing my confession
+Dialogue: 4,0:15:36.67,0:15:39.40,Caption,,0,0,0,,and answering it with forgiveness.
+Dialogue: 4,0:15:39.40,0:15:41.09,Caption,,0,0,0,,Thank you for the person
+Dialogue: 4,0:15:41.09,0:15:42.85,Caption,,0,0,0,,I will speak to tomorrow,
+Dialogue: 4,0:15:42.85,0:15:44.19,Caption,,0,0,0,,and for the courage
+Dialogue: 4,0:15:44.19,0:15:46.04,Caption,,0,0,0,,you will give me then.
+Dialogue: 4,0:15:46.04,0:15:48.66,Caption,,0,0,0,,Watch over me through the night.
+Dialogue: 4,0:15:48.66,0:15:49.80,Caption,,0,0,0,,Let me rest as
+Dialogue: 4,0:15:49.80,0:15:51.18,Caption,,0,0,0,,one who is clean,
+Dialogue: 4,0:15:51.18,0:15:53.68,Caption,,0,0,0,,welcomed, and deeply loved.
+Dialogue: 4,0:15:53.68,0:15:55.05,Caption,,0,0,0,,I place my sleep
+Dialogue: 4,0:15:55.05,0:15:57.75,Caption,,0,0,0,,and my waking in your hands.
+Dialogue: 4,0:15:57.75,0:15:59.30,Caption,,0,0,0,,Amen.

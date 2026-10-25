@@ -1,0 +1,5766 @@
+{
+ "version": "pilot-manifest-v2",
+ "pilot_id": "pilot-013",
+ "grammar": "standard-v4:licensed-footage+depth-parallax+film-look+captions",
+ "output_sha256": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f",
+ "output_seconds": 963.748,
+ "script_sha256": "c04e2d1414ea4949c3967eb7b113b3540c29dbb18572811f2c2821359d3aed91",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85,
+  "voice_wav_sha256": "037eb495025aefc805e38e813e39fa230600c48589e2e2945d75841266bd7e15"
+ },
+ "music": {
+  "file": "original-rest-music.lossless.flac",
+  "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+  "offset_seconds": 1200.0,
+  "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
+ },
+ "figure": null,
+ "images": {},
+ "holds": [
+  {
+   "start": 0.0,
+   "end": 5.848,
+   "figure": false,
+   "image": "clip-night-solar-eclipse-sun-moon-celestial-event-n#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 5.848,
+   "end": 11.848,
+   "figure": false,
+   "image": "clip-candle-flame-candle-fire-light#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 11.848,
+   "end": 16.848,
+   "figure": false,
+   "image": "clip-rain-puddle-raindrops-rain-water-reflection-w#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 16.848,
+   "end": 23.553,
+   "figure": false,
+   "image": "clip-night-starry-sky-night-sky-moon-moonrise-moonl#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 23.553,
+   "end": 29.053,
+   "figure": false,
+   "image": "clip-candle-candle-candlelight-flame-burn-fire-light#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 29.053,
+   "end": 33.853,
+   "figure": false,
+   "image": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 33.853,
+   "end": 40.053,
+   "figure": false,
+   "image": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 40.053,
+   "end": 44.553,
+   "figure": false,
+   "image": "clip-candle-candle-flame-bokeh-burning-candle-candle#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 44.553,
+   "end": 50.553,
+   "figure": false,
+   "image": "clip-clouds-clouds-stars-full-moon-night-sky-light-m#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 50.553,
+   "end": 55.553,
+   "figure": false,
+   "image": "clip-candle-candle-flame-burn-light-candlelight-wick#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 55.553,
+   "end": 62.053,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-atmosphe#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 62.053,
+   "end": 67.553,
+   "figure": false,
+   "image": "clip-candle-candle-light-flame-burn-match-candleligh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 67.553,
+   "end": 72.353,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-lights-s#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 72.353,
+   "end": 78.553,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-flame-light-fire-calm#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 78.553,
+   "end": 83.053,
+   "figure": false,
+   "image": "clip-night-blackthorn-bud-blossom-bloom-feather-flo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 83.053,
+   "end": 89.053,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-light-fire-flame-burn#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 89.053,
+   "end": 94.053,
+   "figure": false,
+   "image": "clip-night-daffodils-easter-bells-spring-easter-to-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 94.053,
+   "end": 100.553,
+   "figure": false,
+   "image": "clip-night-dandelion-faded-seeds-pointed-flower-fly#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 100.553,
+   "end": 106.021,
+   "figure": false,
+   "image": "clip-night-flower-christmas-roses-wilt-wither-time-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 106.021,
+   "end": 110.821,
+   "figure": false,
+   "image": "clip-night-flower-mednille-to-flourish-blossom-bloo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 110.821,
+   "end": 117.021,
+   "figure": false,
+   "image": "clip-night-moon-full-moon-super-moon-night-moonligh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 117.021,
+   "end": 121.985,
+   "figure": false,
+   "image": "clip-night-nature-tree-night-scary-full-moon-moon-s#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 121.985,
+   "end": 127.985,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-borealis-sky-nigh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 127.985,
+   "end": 133.663,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-night-natural-won#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 133.663,
+   "end": 140.163,
+   "figure": false,
+   "image": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 140.163,
+   "end": 146.359,
+   "figure": false,
+   "image": "clip-night-solar-eclipse-sun-moon-celestial-event-n#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 146.359,
+   "end": 151.159,
+   "figure": false,
+   "image": "clip-candle-flame-candle-fire-light#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 151.159,
+   "end": 157.359,
+   "figure": false,
+   "image": "clip-rain-puddle-raindrops-rain-water-reflection-w#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 157.359,
+   "end": 162.283,
+   "figure": false,
+   "image": "clip-night-starry-sky-night-sky-moon-moonrise-moonl#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 162.283,
+   "end": 168.283,
+   "figure": false,
+   "image": "clip-candle-candle-candlelight-flame-burn-fire-light#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 168.283,
+   "end": 173.283,
+   "figure": false,
+   "image": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 173.283,
+   "end": 179.783,
+   "figure": false,
+   "image": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 179.783,
+   "end": 185.028,
+   "figure": false,
+   "image": "clip-candle-candle-flame-bokeh-burning-candle-candle#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 185.028,
+   "end": 189.828,
+   "figure": false,
+   "image": "clip-clouds-clouds-stars-full-moon-night-sky-light-m#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 189.828,
+   "end": 196.028,
+   "figure": false,
+   "image": "clip-candle-candle-flame-burn-light-candlelight-wick#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 196.028,
+   "end": 200.528,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-atmosphe#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 200.528,
+   "end": 206.528,
+   "figure": false,
+   "image": "clip-candle-candle-light-flame-burn-match-candleligh#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 206.528,
+   "end": 211.528,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-lights-s#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 211.528,
+   "end": 218.028,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-flame-light-fire-calm#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 218.028,
+   "end": 223.528,
+   "figure": false,
+   "image": "clip-night-blackthorn-bud-blossom-bloom-feather-flo#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 223.528,
+   "end": 228.192,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-light-fire-flame-burn#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 228.192,
+   "end": 234.392,
+   "figure": false,
+   "image": "clip-night-daffodils-easter-bells-spring-easter-to-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 234.392,
+   "end": 238.892,
+   "figure": false,
+   "image": "clip-night-dandelion-faded-seeds-pointed-flower-fly#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 238.892,
+   "end": 244.892,
+   "figure": false,
+   "image": "clip-night-flower-christmas-roses-wilt-wither-time-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 244.892,
+   "end": 249.385,
+   "figure": false,
+   "image": "clip-night-flower-mednille-to-flourish-blossom-bloo#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 249.385,
+   "end": 255.885,
+   "figure": false,
+   "image": "clip-night-moon-full-moon-super-moon-night-moonligh#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 255.885,
+   "end": 261.385,
+   "figure": false,
+   "image": "clip-night-nature-tree-night-scary-full-moon-moon-s#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 261.385,
+   "end": 266.691,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-borealis-sky-nigh#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 266.691,
+   "end": 272.891,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-night-natural-won#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 272.891,
+   "end": 277.771,
+   "figure": false,
+   "image": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 277.771,
+   "end": 283.771,
+   "figure": false,
+   "image": "clip-night-solar-eclipse-sun-moon-celestial-event-n#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 283.771,
+   "end": 288.771,
+   "figure": false,
+   "image": "clip-candle-flame-candle-fire-light#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 288.771,
+   "end": 295.271,
+   "figure": false,
+   "image": "clip-rain-puddle-raindrops-rain-water-reflection-w#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.933,
+   "slow": 1.0
+  },
+  {
+   "start": 295.271,
+   "end": 300.261,
+   "figure": false,
+   "image": "clip-night-starry-sky-night-sky-moon-moonrise-moonl#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 300.261,
+   "end": 305.061,
+   "figure": false,
+   "image": "clip-candle-candle-candlelight-flame-burn-fire-light#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 305.061,
+   "end": 310.659,
+   "figure": false,
+   "image": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 310.659,
+   "end": 315.159,
+   "figure": false,
+   "image": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 315.159,
+   "end": 321.159,
+   "figure": false,
+   "image": "clip-candle-candle-flame-bokeh-burning-candle-candle#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 321.159,
+   "end": 326.159,
+   "figure": false,
+   "image": "clip-clouds-clouds-stars-full-moon-night-sky-light-m#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 326.159,
+   "end": 332.659,
+   "figure": false,
+   "image": "clip-candle-candle-flame-burn-light-candlelight-wick#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.933,
+   "slow": 1.0
+  },
+  {
+   "start": 332.659,
+   "end": 338.159,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-atmosphe#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 338.159,
+   "end": 342.735,
+   "figure": false,
+   "image": "clip-candle-candle-light-flame-burn-match-candleligh#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 342.735,
+   "end": 348.935,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-lights-s#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 348.935,
+   "end": 353.435,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-flame-light-fire-calm#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 353.435,
+   "end": 359.435,
+   "figure": false,
+   "image": "clip-night-blackthorn-bud-blossom-bloom-feather-flo#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 359.435,
+   "end": 364.435,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-light-fire-flame-burn#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 364.435,
+   "end": 370.935,
+   "figure": false,
+   "image": "clip-night-daffodils-easter-bells-spring-easter-to-#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.933,
+   "slow": 1.0
+  },
+  {
+   "start": 370.935,
+   "end": 376.695,
+   "figure": false,
+   "image": "clip-night-dandelion-faded-seeds-pointed-flower-fly#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 376.695,
+   "end": 381.495,
+   "figure": false,
+   "image": "clip-night-flower-christmas-roses-wilt-wither-time-#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 381.495,
+   "end": 387.497,
+   "figure": false,
+   "image": "clip-night-flower-mednille-to-flourish-blossom-bloo#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 387.497,
+   "end": 391.997,
+   "figure": false,
+   "image": "clip-night-moon-full-moon-super-moon-night-moonligh#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 391.997,
+   "end": 398.6,
+   "figure": false,
+   "image": "clip-night-nature-tree-night-scary-full-moon-moon-s#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.797,
+   "slow": 1.0
+  },
+  {
+   "start": 398.6,
+   "end": 403.6,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-borealis-sky-nigh#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 403.6,
+   "end": 410.1,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-night-natural-won#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.9,
+   "slow": 1.0
+  },
+  {
+   "start": 410.1,
+   "end": 415.6,
+   "figure": false,
+   "image": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 415.6,
+   "end": 420.4,
+   "figure": false,
+   "image": "clip-night-solar-eclipse-sun-moon-celestial-event-n#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 420.4,
+   "end": 426.6,
+   "figure": false,
+   "image": "clip-candle-flame-candle-fire-light#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 426.6,
+   "end": 431.1,
+   "figure": false,
+   "image": "clip-rain-puddle-raindrops-rain-water-reflection-w#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 431.1,
+   "end": 437.1,
+   "figure": false,
+   "image": "clip-night-starry-sky-night-sky-moon-moonrise-moonl#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 437.1,
+   "end": 442.1,
+   "figure": false,
+   "image": "clip-candle-candle-candlelight-flame-burn-fire-light#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 442.1,
+   "end": 448.6,
+   "figure": false,
+   "image": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 448.6,
+   "end": 453.973,
+   "figure": false,
+   "image": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 453.973,
+   "end": 458.773,
+   "figure": false,
+   "image": "clip-candle-candle-flame-bokeh-burning-candle-candle#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 458.773,
+   "end": 464.407,
+   "figure": false,
+   "image": "clip-clouds-clouds-stars-full-moon-night-sky-light-m#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 464.407,
+   "end": 468.907,
+   "figure": false,
+   "image": "clip-candle-candle-flame-burn-light-candlelight-wick#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 468.907,
+   "end": 474.907,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-atmosphe#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 474.907,
+   "end": 479.907,
+   "figure": false,
+   "image": "clip-candle-candle-light-flame-burn-match-candleligh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 479.907,
+   "end": 486.093,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-lights-s#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 486.093,
+   "end": 491.593,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-flame-light-fire-calm#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 491.593,
+   "end": 496.393,
+   "figure": false,
+   "image": "clip-night-blackthorn-bud-blossom-bloom-feather-flo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 496.393,
+   "end": 502.593,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-light-fire-flame-burn#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 502.593,
+   "end": 507.093,
+   "figure": false,
+   "image": "clip-night-daffodils-easter-bells-spring-easter-to-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 507.093,
+   "end": 513.093,
+   "figure": false,
+   "image": "clip-night-dandelion-faded-seeds-pointed-flower-fly#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 513.093,
+   "end": 518.619,
+   "figure": false,
+   "image": "clip-night-flower-christmas-roses-wilt-wither-time-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 518.619,
+   "end": 525.119,
+   "figure": false,
+   "image": "clip-night-flower-mednille-to-flourish-blossom-bloo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 525.119,
+   "end": 530.619,
+   "figure": false,
+   "image": "clip-night-moon-full-moon-super-moon-night-moonligh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 530.619,
+   "end": 535.419,
+   "figure": false,
+   "image": "clip-night-nature-tree-night-scary-full-moon-moon-s#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 535.419,
+   "end": 541.619,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-borealis-sky-nigh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 541.619,
+   "end": 546.732,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-night-natural-won#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 546.732,
+   "end": 552.732,
+   "figure": false,
+   "image": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 552.732,
+   "end": 557.732,
+   "figure": false,
+   "image": "clip-night-solar-eclipse-sun-moon-celestial-event-n#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 557.732,
+   "end": 564.232,
+   "figure": false,
+   "image": "clip-candle-flame-candle-fire-light#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 564.232,
+   "end": 569.732,
+   "figure": false,
+   "image": "clip-rain-puddle-raindrops-rain-water-reflection-w#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 569.732,
+   "end": 574.532,
+   "figure": false,
+   "image": "clip-night-starry-sky-night-sky-moon-moonrise-moonl#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 574.532,
+   "end": 580.475,
+   "figure": false,
+   "image": "clip-candle-candle-candlelight-flame-burn-fire-light#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 580.475,
+   "end": 584.975,
+   "figure": false,
+   "image": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 584.975,
+   "end": 590.975,
+   "figure": false,
+   "image": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 590.975,
+   "end": 596.035,
+   "figure": false,
+   "image": "clip-candle-candle-flame-bokeh-burning-candle-candle#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 596.035,
+   "end": 602.735,
+   "figure": false,
+   "image": "clip-clouds-clouds-stars-full-moon-night-sky-light-m#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 602.735,
+   "end": 608.204,
+   "figure": false,
+   "image": "clip-candle-candle-flame-burn-light-candlelight-wick#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 608.204,
+   "end": 612.856,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-atmosphe#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 612.856,
+   "end": 618.959,
+   "figure": false,
+   "image": "clip-candle-candle-light-flame-burn-match-candleligh#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 618.959,
+   "end": 623.995,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-lights-s#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 623.995,
+   "end": 629.995,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-flame-light-fire-calm#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 629.995,
+   "end": 634.995,
+   "figure": false,
+   "image": "clip-night-blackthorn-bud-blossom-bloom-feather-flo#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 634.995,
+   "end": 641.495,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-light-fire-flame-burn#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 641.495,
+   "end": 646.995,
+   "figure": false,
+   "image": "clip-night-daffodils-easter-bells-spring-easter-to-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 646.995,
+   "end": 651.795,
+   "figure": false,
+   "image": "clip-night-dandelion-faded-seeds-pointed-flower-fly#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 651.795,
+   "end": 657.995,
+   "figure": false,
+   "image": "clip-night-flower-christmas-roses-wilt-wither-time-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 657.995,
+   "end": 662.495,
+   "figure": false,
+   "image": "clip-night-flower-mednille-to-flourish-blossom-bloo#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 662.495,
+   "end": 668.495,
+   "figure": false,
+   "image": "clip-night-moon-full-moon-super-moon-night-moonligh#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 668.495,
+   "end": 673.495,
+   "figure": false,
+   "image": "clip-night-nature-tree-night-scary-full-moon-moon-s#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 673.495,
+   "end": 679.424,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-borealis-sky-nigh#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 679.424,
+   "end": 684.887,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-night-natural-won#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 684.887,
+   "end": 690.099,
+   "figure": false,
+   "image": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 690.099,
+   "end": 696.288,
+   "figure": false,
+   "image": "clip-night-solar-eclipse-sun-moon-celestial-event-n#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 696.288,
+   "end": 700.833,
+   "figure": false,
+   "image": "clip-candle-flame-candle-fire-light#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 700.833,
+   "end": 706.833,
+   "figure": false,
+   "image": "clip-rain-puddle-raindrops-rain-water-reflection-w#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 706.833,
+   "end": 711.833,
+   "figure": false,
+   "image": "clip-night-starry-sky-night-sky-moon-moonrise-moonl#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 711.833,
+   "end": 718.333,
+   "figure": false,
+   "image": "clip-candle-candle-candlelight-flame-burn-fire-light#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.933,
+   "slow": 1.0
+  },
+  {
+   "start": 718.333,
+   "end": 723.565,
+   "figure": false,
+   "image": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 723.565,
+   "end": 728.16,
+   "figure": false,
+   "image": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 728.16,
+   "end": 734.36,
+   "figure": false,
+   "image": "clip-candle-candle-flame-bokeh-burning-candle-candle#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 734.36,
+   "end": 738.86,
+   "figure": false,
+   "image": "clip-clouds-clouds-stars-full-moon-night-sky-light-m#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 738.86,
+   "end": 744.86,
+   "figure": false,
+   "image": "clip-candle-candle-flame-burn-light-candlelight-wick#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 744.86,
+   "end": 749.86,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-atmosphe#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 749.86,
+   "end": 756.36,
+   "figure": false,
+   "image": "clip-candle-candle-light-flame-burn-match-candleligh#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.933,
+   "slow": 1.0
+  },
+  {
+   "start": 756.36,
+   "end": 761.86,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-lights-s#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 761.86,
+   "end": 766.66,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-flame-light-fire-calm#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 766.66,
+   "end": 772.86,
+   "figure": false,
+   "image": "clip-night-blackthorn-bud-blossom-bloom-feather-flo#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 772.86,
+   "end": 777.36,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-light-fire-flame-burn#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 777.36,
+   "end": 783.36,
+   "figure": false,
+   "image": "clip-night-daffodils-easter-bells-spring-easter-to-#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 783.36,
+   "end": 788.197,
+   "figure": false,
+   "image": "clip-night-dandelion-faded-seeds-pointed-flower-fly#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 788.197,
+   "end": 794.697,
+   "figure": false,
+   "image": "clip-night-flower-christmas-roses-wilt-wither-time-#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 12.933,
+   "slow": 1.0
+  },
+  {
+   "start": 794.697,
+   "end": 800.197,
+   "figure": false,
+   "image": "clip-night-flower-mednille-to-flourish-blossom-bloo#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 800.197,
+   "end": 804.997,
+   "figure": false,
+   "image": "clip-night-moon-full-moon-super-moon-night-moonligh#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 804.997,
+   "end": 811.393,
+   "figure": false,
+   "image": "clip-night-nature-tree-night-scary-full-moon-moon-s#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 811.393,
+   "end": 815.893,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-borealis-sky-nigh#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 815.893,
+   "end": 821.257,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-night-natural-won#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 821.257,
+   "end": 826.257,
+   "figure": false,
+   "image": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos#2",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 13.0,
+   "slow": 1.0
+  },
+  {
+   "start": 826.257,
+   "end": 832.757,
+   "figure": false,
+   "image": "clip-night-solar-eclipse-sun-moon-celestial-event-n#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 832.757,
+   "end": 838.257,
+   "figure": false,
+   "image": "clip-candle-flame-candle-fire-light#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 838.257,
+   "end": 843.057,
+   "figure": false,
+   "image": "clip-rain-puddle-raindrops-rain-water-reflection-w#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 843.057,
+   "end": 848.996,
+   "figure": false,
+   "image": "clip-night-starry-sky-night-sky-moon-moonrise-moonl#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 848.996,
+   "end": 853.496,
+   "figure": false,
+   "image": "clip-candle-candle-candlelight-flame-burn-fire-light#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 853.496,
+   "end": 858.855,
+   "figure": false,
+   "image": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 858.855,
+   "end": 863.855,
+   "figure": false,
+   "image": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 863.855,
+   "end": 870.355,
+   "figure": false,
+   "image": "clip-candle-candle-flame-bokeh-burning-candle-candle#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 870.355,
+   "end": 876.408,
+   "figure": false,
+   "image": "clip-clouds-clouds-stars-full-moon-night-sky-light-m#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 876.408,
+   "end": 880.612,
+   "figure": false,
+   "image": "clip-candle-candle-flame-burn-light-candlelight-wick#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 880.612,
+   "end": 886.812,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-atmosphe#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 886.812,
+   "end": 891.312,
+   "figure": false,
+   "image": "clip-candle-candle-light-flame-burn-match-candleligh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 891.312,
+   "end": 897.312,
+   "figure": false,
+   "image": "clip-night-aurora-borealis-northern-lights-lights-s#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 897.312,
+   "end": 902.312,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-flame-light-fire-calm#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 902.312,
+   "end": 908.812,
+   "figure": false,
+   "image": "clip-night-blackthorn-bud-blossom-bloom-feather-flo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 908.812,
+   "end": 914.312,
+   "figure": false,
+   "image": "clip-candle-candlelight-candle-light-fire-flame-burn#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 914.312,
+   "end": 919.112,
+   "figure": false,
+   "image": "clip-night-daffodils-easter-bells-spring-easter-to-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 919.112,
+   "end": 925.312,
+   "figure": false,
+   "image": "clip-night-dandelion-faded-seeds-pointed-flower-fly#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 925.312,
+   "end": 929.812,
+   "figure": false,
+   "image": "clip-night-flower-christmas-roses-wilt-wither-time-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 929.812,
+   "end": 935.812,
+   "figure": false,
+   "image": "clip-night-flower-mednille-to-flourish-blossom-bloo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 935.812,
+   "end": 940.812,
+   "figure": false,
+   "image": "clip-night-moon-full-moon-super-moon-night-moonligh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 940.812,
+   "end": 947.312,
+   "figure": false,
+   "image": "clip-night-nature-tree-night-scary-full-moon-moon-s#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 947.312,
+   "end": 952.812,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-borealis-sky-nigh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 952.812,
+   "end": 957.753,
+   "figure": false,
+   "image": "clip-night-northern-lights-aurora-night-natural-won#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 957.753,
+   "end": 963.748,
+   "figure": false,
+   "image": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  }
+ ],
+ "captions_ass_sha256": "920280cfff4d9a29547fe71cd5d241bbe81c9a4fc35292a21d91c8b6a3da97dd",
+ "captions": [
+  {
+   "start": 0.3,
+   "end": 2.288,
+   "text": "Before you sleep tonight,"
+  },
+  {
+   "start": 2.288,
+   "end": 3.878,
+   "text": "let God's mercy wash"
+  },
+  {
+   "start": 3.878,
+   "end": 5.848,
+   "text": "away today's regrets."
+  },
+  {
+   "start": 5.848,
+   "end": 8.139,
+   "text": "Pray this with me now."
+  },
+  {
+   "start": 9.289,
+   "end": 10.888,
+   "text": "Tonight we will name"
+  },
+  {
+   "start": 10.888,
+   "end": 12.887,
+   "text": "today's regrets honestly,"
+  },
+  {
+   "start": 12.887,
+   "end": 14.566,
+   "text": "receive God's pardon,"
+  },
+  {
+   "start": 14.566,
+   "end": 16.485,
+   "text": "take one step of repair,"
+  },
+  {
+   "start": 16.485,
+   "end": 19.424,
+   "text": "and forgive what was done to you."
+  },
+  {
+   "start": 19.424,
+   "end": 20.794,
+   "text": "Then Scripture will"
+  },
+  {
+   "start": 20.794,
+   "end": 22.803,
+   "text": "carry you toward sleep."
+  },
+  {
+   "start": 23.553,
+   "end": 26.278,
+   "text": "You may be replaying a sharp word,"
+  },
+  {
+   "start": 26.278,
+   "end": 28.443,
+   "text": "a promise you did not keep,"
+  },
+  {
+   "start": 28.443,
+   "end": 31.789,
+   "text": "or something you hoped nobody noticed."
+  },
+  {
+   "start": 31.789,
+   "end": 33.6,
+   "text": "You do not have to tidy"
+  },
+  {
+   "start": 33.6,
+   "end": 35.396,
+   "text": "it before you come."
+  },
+  {
+   "start": 35.396,
+   "end": 38.085,
+   "text": "Let your shoulders lower a little."
+  },
+  {
+   "start": 38.085,
+   "end": 40.433,
+   "text": "You can listen with your eyes"
+  },
+  {
+   "start": 40.433,
+   "end": 41.948,
+   "text": "closed or open."
+  },
+  {
+   "start": 41.948,
+   "end": 43.756,
+   "text": "In this prayer you will"
+  },
+  {
+   "start": 43.756,
+   "end": 45.879,
+   "text": "name what happened plainly,"
+  },
+  {
+   "start": 45.879,
+   "end": 47.452,
+   "text": "receive forgiveness,"
+  },
+  {
+   "start": 47.452,
+   "end": 49.574,
+   "text": "consider one act of repair,"
+  },
+  {
+   "start": 49.574,
+   "end": 51.776,
+   "text": "and then rest with Scripture"
+  },
+  {
+   "start": 51.776,
+   "end": 53.541,
+   "text": "about God's mercy."
+  },
+  {
+   "start": 54.691,
+   "end": 55.395,
+   "text": "Come now,"
+  },
+  {
+   "start": 55.395,
+   "end": 57.507,
+   "text": "and let us reason together,"
+  },
+  {
+   "start": 57.507,
+   "end": 58.98,
+   "text": "saith the LORD:"
+  },
+  {
+   "start": 58.98,
+   "end": 61.252,
+   "text": "though your sins be as scarlet,"
+  },
+  {
+   "start": 61.252,
+   "end": 63.824,
+   "text": "they shall be as white as snow;"
+  },
+  {
+   "start": 63.824,
+   "end": 66.163,
+   "text": "though they be red like crimson,"
+  },
+  {
+   "start": 66.163,
+   "end": 68.121,
+   "text": "they shall be as wool."
+  },
+  {
+   "start": 69.571,
+   "end": 70.072,
+   "text": "Father,"
+  },
+  {
+   "start": 70.072,
+   "end": 71.788,
+   "text": "I come to you at the end"
+  },
+  {
+   "start": 71.788,
+   "end": 73.933,
+   "text": "of this day without pretending"
+  },
+  {
+   "start": 73.933,
+   "end": 76.164,
+   "text": "it went better than it did."
+  },
+  {
+   "start": 76.164,
+   "end": 78.248,
+   "text": "You already know the moment"
+  },
+  {
+   "start": 78.248,
+   "end": 80.091,
+   "text": "I keep returning to."
+  },
+  {
+   "start": 80.091,
+   "end": 82.335,
+   "text": "I would rather tell you about it"
+  },
+  {
+   "start": 82.335,
+   "end": 84.159,
+   "text": "than keep defending myself"
+  },
+  {
+   "start": 84.159,
+   "end": 85.511,
+   "text": "in my thoughts."
+  },
+  {
+   "start": 85.511,
+   "end": 87.301,
+   "text": "Thank you that you invite"
+  },
+  {
+   "start": 87.301,
+   "end": 89.377,
+   "text": "me to reason with you instead"
+  },
+  {
+   "start": 89.377,
+   "end": 91.037,
+   "text": "of hiding from you."
+  },
+  {
+   "start": 91.037,
+   "end": 93.292,
+   "text": "Give me courage to be truthful,"
+  },
+  {
+   "start": 93.292,
+   "end": 95.182,
+   "text": "and gentleness to remember"
+  },
+  {
+   "start": 95.182,
+   "end": 97.787,
+   "text": "that you are the one listening."
+  },
+  {
+   "start": 98.937,
+   "end": 101.404,
+   "text": "Regret often stays vague because"
+  },
+  {
+   "start": 101.404,
+   "end": 103.331,
+   "text": "a vague feeling is easier"
+  },
+  {
+   "start": 103.331,
+   "end": 106.021,
+   "text": "to carry than a clear sentence."
+  },
+  {
+   "start": 106.021,
+   "end": 107.561,
+   "text": "Yet a clear sentence"
+  },
+  {
+   "start": 107.561,
+   "end": 109.863,
+   "text": "is easier to bring to God."
+  },
+  {
+   "start": 109.863,
+   "end": 113.043,
+   "text": "Try naming it in ordinary words:"
+  },
+  {
+   "start": 113.043,
+   "end": 115.86,
+   "text": "I was impatient with my child."
+  },
+  {
+   "start": 115.86,
+   "end": 118.72,
+   "text": "I exaggerated to look better."
+  },
+  {
+   "start": 118.72,
+   "end": 119.936,
+   "text": "I ignored a call"
+  },
+  {
+   "start": 119.936,
+   "end": 121.985,
+   "text": "I should have answered."
+  },
+  {
+   "start": 121.985,
+   "end": 123.429,
+   "text": "You are not writing"
+  },
+  {
+   "start": 123.429,
+   "end": 125.933,
+   "text": "a confession for anyone else."
+  },
+  {
+   "start": 125.933,
+   "end": 127.473,
+   "text": "You are simply letting"
+  },
+  {
+   "start": 127.473,
+   "end": 129.083,
+   "text": "the truth have a shape,"
+  },
+  {
+   "start": 129.083,
+   "end": 130.973,
+   "text": "so that mercy has something"
+  },
+  {
+   "start": 130.973,
+   "end": 132.513,
+   "text": "specific to meet."
+  },
+  {
+   "start": 133.663,
+   "end": 134.017,
+   "text": "Lord,"
+  },
+  {
+   "start": 134.017,
+   "end": 135.717,
+   "text": "I name the words I spoke"
+  },
+  {
+   "start": 135.717,
+   "end": 137.346,
+   "text": "today that were harsher"
+  },
+  {
+   "start": 137.346,
+   "end": 139.275,
+   "text": "than they needed to be."
+  },
+  {
+   "start": 139.275,
+   "end": 140.88,
+   "text": "I remember the tone as"
+  },
+  {
+   "start": 140.88,
+   "end": 142.412,
+   "text": "well as the sentence,"
+  },
+  {
+   "start": 142.412,
+   "end": 144.089,
+   "text": "and I remember the face"
+  },
+  {
+   "start": 144.089,
+   "end": 146.359,
+   "text": "of the person who heard it."
+  },
+  {
+   "start": 146.359,
+   "end": 148.371,
+   "text": "I cannot take those words"
+  },
+  {
+   "start": 148.371,
+   "end": 150.2,
+   "text": "back into my mouth."
+  },
+  {
+   "start": 150.2,
+   "end": 151.664,
+   "text": "I ask you to forgive"
+  },
+  {
+   "start": 151.664,
+   "end": 152.542,
+   "text": "me for them,"
+  },
+  {
+   "start": 152.542,
+   "end": 155.257,
+   "text": "and to soften whatever they hurt."
+  },
+  {
+   "start": 155.257,
+   "end": 157.074,
+   "text": "Show me tomorrow whether"
+  },
+  {
+   "start": 157.074,
+   "end": 158.663,
+   "text": "an apology is needed,"
+  },
+  {
+   "start": 158.663,
+   "end": 161.133,
+   "text": "and help me offer it simply."
+  },
+  {
+   "start": 162.283,
+   "end": 162.906,
+   "text": "Father,"
+  },
+  {
+   "start": 162.906,
+   "end": 165.697,
+   "text": "I also bring what I avoided."
+  },
+  {
+   "start": 165.697,
+   "end": 167.945,
+   "text": "There was a task I postponed"
+  },
+  {
+   "start": 167.945,
+   "end": 170.353,
+   "text": "because it felt uncomfortable,"
+  },
+  {
+   "start": 170.353,
+   "end": 172.601,
+   "text": "and a conversation I steered"
+  },
+  {
+   "start": 172.601,
+   "end": 174.448,
+   "text": "away from because I was"
+  },
+  {
+   "start": 174.448,
+   "end": 176.835,
+   "text": "afraid of how it might go."
+  },
+  {
+   "start": 176.835,
+   "end": 180.009,
+   "text": "Sometimes my failures are quiet ones,"
+  },
+  {
+   "start": 180.009,
+   "end": 182.669,
+   "text": "a kindness I withheld or a duty"
+  },
+  {
+   "start": 182.669,
+   "end": 185.028,
+   "text": "I left for someone else."
+  },
+  {
+   "start": 185.028,
+   "end": 186.63,
+   "text": "Forgive me for the good"
+  },
+  {
+   "start": 186.63,
+   "end": 189.019,
+   "text": "I could have done and did not."
+  },
+  {
+   "start": 189.019,
+   "end": 190.969,
+   "text": "Make me braver in small"
+  },
+  {
+   "start": 190.969,
+   "end": 192.675,
+   "text": "and honest ways."
+  },
+  {
+   "start": 193.825,
+   "end": 194.217,
+   "text": "Next,"
+  },
+  {
+   "start": 194.217,
+   "end": 196.65,
+   "text": "a psalm that shows what happens"
+  },
+  {
+   "start": 196.65,
+   "end": 198.57,
+   "text": "when we stop hiding."
+  },
+  {
+   "start": 199.12,
+   "end": 201.777,
+   "text": "I acknowledged my sin unto thee,"
+  },
+  {
+   "start": 201.777,
+   "end": 204.817,
+   "text": "and mine iniquity have I not hid."
+  },
+  {
+   "start": 204.817,
+   "end": 205.386,
+   "text": "I said,"
+  },
+  {
+   "start": 205.386,
+   "end": 207.989,
+   "text": "I will confess my transgressions"
+  },
+  {
+   "start": 207.989,
+   "end": 209.427,
+   "text": "unto the LORD;"
+  },
+  {
+   "start": 209.427,
+   "end": 210.869,
+   "text": "and thou forgavest"
+  },
+  {
+   "start": 210.869,
+   "end": 213.012,
+   "text": "the iniquity of my sin."
+  },
+  {
+   "start": 213.012,
+   "end": 214.322,
+   "text": "Selah."
+  },
+  {
+   "start": 215.772,
+   "end": 218.547,
+   "text": "Notice the order in that psalm."
+  },
+  {
+   "start": 218.547,
+   "end": 220.382,
+   "text": "The writer stops hiding,"
+  },
+  {
+   "start": 220.382,
+   "end": 222.216,
+   "text": "says it out loud to God,"
+  },
+  {
+   "start": 222.216,
+   "end": 224.351,
+   "text": "and forgiveness follows."
+  },
+  {
+   "start": 224.351,
+   "end": 226.459,
+   "text": "Hiding takes a surprising"
+  },
+  {
+   "start": 226.459,
+   "end": 228.192,
+   "text": "amount of energy."
+  },
+  {
+   "start": 228.192,
+   "end": 230.17,
+   "text": "You rehearse explanations,"
+  },
+  {
+   "start": 230.17,
+   "end": 231.692,
+   "text": "you watch for anyone"
+  },
+  {
+   "start": 231.692,
+   "end": 233.365,
+   "text": "who might bring it up,"
+  },
+  {
+   "start": 233.365,
+   "end": 235.115,
+   "text": "you feel slightly tense"
+  },
+  {
+   "start": 235.115,
+   "end": 237.089,
+   "text": "around certain people."
+  },
+  {
+   "start": 237.089,
+   "end": 240.312,
+   "text": "Confession is not meant to crush you."
+  },
+  {
+   "start": 240.312,
+   "end": 242.094,
+   "text": "It is the moment you can"
+  },
+  {
+   "start": 242.094,
+   "end": 243.95,
+   "text": "stop guarding the secret,"
+  },
+  {
+   "start": 243.95,
+   "end": 246.029,
+   "text": "because the One who hears it"
+  },
+  {
+   "start": 246.029,
+   "end": 248.235,
+   "text": "has already chosen mercy."
+  },
+  {
+   "start": 249.385,
+   "end": 249.777,
+   "text": "Lord,"
+  },
+  {
+   "start": 249.777,
+   "end": 251.578,
+   "text": "here is the part I have"
+  },
+  {
+   "start": 251.578,
+   "end": 253.458,
+   "text": "been reluctant to admit,"
+  },
+  {
+   "start": 253.458,
+   "end": 254.933,
+   "text": "even to myself."
+  },
+  {
+   "start": 254.933,
+   "end": 257.025,
+   "text": "I did it because I wanted"
+  },
+  {
+   "start": 257.025,
+   "end": 258.699,
+   "text": "to protect my image,"
+  },
+  {
+   "start": 258.699,
+   "end": 260.373,
+   "text": "to win the argument,"
+  },
+  {
+   "start": 260.373,
+   "end": 262.849,
+   "text": "or to avoid feeling small."
+  },
+  {
+   "start": 262.849,
+   "end": 264.694,
+   "text": "I do not want to dress it"
+  },
+  {
+   "start": 264.694,
+   "end": 266.691,
+   "text": "up as something nobler."
+  },
+  {
+   "start": 266.691,
+   "end": 268.38,
+   "text": "I confess it as sin,"
+  },
+  {
+   "start": 268.38,
+   "end": 271.044,
+   "text": "and I ask you to forgive me."
+  },
+  {
+   "start": 271.044,
+   "end": 273.52,
+   "text": "Thank you that your patience with me"
+  },
+  {
+   "start": 273.52,
+   "end": 276.621,
+   "text": "is deeper than my embarrassment tonight."
+  },
+  {
+   "start": 277.771,
+   "end": 278.292,
+   "text": "Father,"
+  },
+  {
+   "start": 278.292,
+   "end": 280.079,
+   "text": "help me actually receive"
+  },
+  {
+   "start": 280.079,
+   "end": 282.017,
+   "text": "what I have asked for."
+  },
+  {
+   "start": 282.017,
+   "end": 284.132,
+   "text": "I tend to ask for forgiveness"
+  },
+  {
+   "start": 284.132,
+   "end": 286.904,
+   "text": "and then keep punishing myself anyway,"
+  },
+  {
+   "start": 286.904,
+   "end": 289.976,
+   "text": "as though your answer were not enough."
+  },
+  {
+   "start": 289.976,
+   "end": 291.711,
+   "text": "If you have forgiven me,"
+  },
+  {
+   "start": 291.711,
+   "end": 293.23,
+   "text": "I do not need to keep"
+  },
+  {
+   "start": 293.23,
+   "end": 295.844,
+   "text": "the sentence running in my head."
+  },
+  {
+   "start": 295.844,
+   "end": 297.829,
+   "text": "Teach me to trust your word"
+  },
+  {
+   "start": 297.829,
+   "end": 300.261,
+   "text": "more than my lingering shame."
+  },
+  {
+   "start": 300.261,
+   "end": 303.175,
+   "text": "Let this pardon settle into the places"
+  },
+  {
+   "start": 303.175,
+   "end": 305.902,
+   "text": "where I usually hold my breath."
+  },
+  {
+   "start": 307.052,
+   "end": 309.444,
+   "text": "If you have confessed this before,"
+  },
+  {
+   "start": 309.444,
+   "end": 310.659,
+   "text": "stay with me."
+  },
+  {
+   "start": 310.659,
+   "end": 313.227,
+   "text": "The next words are for you."
+  },
+  {
+   "start": 313.777,
+   "end": 316.187,
+   "text": "Perhaps what troubles you most"
+  },
+  {
+   "start": 316.187,
+   "end": 317.392,
+   "text": "is that this is"
+  },
+  {
+   "start": 317.392,
+   "end": 319.219,
+   "text": "not the first time."
+  },
+  {
+   "start": 319.219,
+   "end": 320.834,
+   "text": "You have confessed this"
+  },
+  {
+   "start": 320.834,
+   "end": 322.309,
+   "text": "same weakness before,"
+  },
+  {
+   "start": 322.309,
+   "end": 324.084,
+   "text": "and here it is again."
+  },
+  {
+   "start": 324.084,
+   "end": 326.035,
+   "text": "That can make forgiveness"
+  },
+  {
+   "start": 326.035,
+   "end": 327.753,
+   "text": "feel almost dishonest,"
+  },
+  {
+   "start": 327.753,
+   "end": 329.392,
+   "text": "as if you were taking"
+  },
+  {
+   "start": 329.392,
+   "end": 331.019,
+   "text": "advantage of God."
+  },
+  {
+   "start": 331.019,
+   "end": 333.044,
+   "text": "Yet Scripture never puts"
+  },
+  {
+   "start": 333.044,
+   "end": 335.116,
+   "text": "a limit on returning."
+  },
+  {
+   "start": 335.116,
+   "end": 337.358,
+   "text": "Each honest return is part"
+  },
+  {
+   "start": 337.358,
+   "end": 339.555,
+   "text": "of how change happens."
+  },
+  {
+   "start": 339.555,
+   "end": 340.835,
+   "text": "God is not tired"
+  },
+  {
+   "start": 340.835,
+   "end": 342.735,
+   "text": "of hearing from you."
+  },
+  {
+   "start": 342.735,
+   "end": 344.419,
+   "text": "He is patiently forming"
+  },
+  {
+   "start": 344.419,
+   "end": 346.306,
+   "text": "something new in you."
+  },
+  {
+   "start": 347.456,
+   "end": 350.386,
+   "text": "There is therefore now no condemnation"
+  },
+  {
+   "start": 350.386,
+   "end": 353.008,
+   "text": "to them which are in Christ Jesus,"
+  },
+  {
+   "start": 353.008,
+   "end": 355.245,
+   "text": "who walk not after the flesh,"
+  },
+  {
+   "start": 355.245,
+   "end": 357.214,
+   "text": "but after the Spirit."
+  },
+  {
+   "start": 358.664,
+   "end": 359.082,
+   "text": "Lord,"
+  },
+  {
+   "start": 359.082,
+   "end": 362.057,
+   "text": "my heart is good at accusing me."
+  },
+  {
+   "start": 362.057,
+   "end": 364.093,
+   "text": "It brings up old mistakes"
+  },
+  {
+   "start": 364.093,
+   "end": 365.56,
+   "text": "alongside today's,"
+  },
+  {
+   "start": 365.56,
+   "end": 366.863,
+   "text": "and it speaks as"
+  },
+  {
+   "start": 366.863,
+   "end": 368.629,
+   "text": "if they define me."
+  },
+  {
+   "start": 368.629,
+   "end": 369.983,
+   "text": "When those thoughts"
+  },
+  {
+   "start": 369.983,
+   "end": 371.55,
+   "text": "come back in the dark,"
+  },
+  {
+   "start": 371.55,
+   "end": 373.759,
+   "text": "remind me that you know me more"
+  },
+  {
+   "start": 373.759,
+   "end": 376.695,
+   "text": "completely than my worst memory does."
+  },
+  {
+   "start": 376.695,
+   "end": 378.662,
+   "text": "Quiet the voice that keeps"
+  },
+  {
+   "start": 378.662,
+   "end": 380.173,
+   "text": "the record open."
+  },
+  {
+   "start": 380.173,
+   "end": 381.529,
+   "text": "I place the whole"
+  },
+  {
+   "start": 381.529,
+   "end": 383.045,
+   "text": "list in your hands,"
+  },
+  {
+   "start": 383.045,
+   "end": 384.322,
+   "text": "the recent pages"
+  },
+  {
+   "start": 384.322,
+   "end": 386.347,
+   "text": "and the old ones too."
+  },
+  {
+   "start": 387.497,
+   "end": 389.591,
+   "text": "For if our heart condemn us,"
+  },
+  {
+   "start": 389.591,
+   "end": 391.836,
+   "text": "God is greater than our heart,"
+  },
+  {
+   "start": 391.836,
+   "end": 393.906,
+   "text": "and knoweth all things."
+  },
+  {
+   "start": 395.356,
+   "end": 396.828,
+   "text": "Let that sentence stay"
+  },
+  {
+   "start": 396.828,
+   "end": 398.6,
+   "text": "with you for a moment."
+  },
+  {
+   "start": 398.6,
+   "end": 401.311,
+   "text": "God is greater than your heart."
+  },
+  {
+   "start": 401.311,
+   "end": 403.723,
+   "text": "You do not need to add anything"
+  },
+  {
+   "start": 403.723,
+   "end": 405.813,
+   "text": "to it or argue with it."
+  },
+  {
+   "start": 405.813,
+   "end": 408.288,
+   "text": "Simply breathe at your own pace,"
+  },
+  {
+   "start": 408.288,
+   "end": 410.996,
+   "text": "and notice that you are still here,"
+  },
+  {
+   "start": 410.996,
+   "end": 411.924,
+   "text": "still loved,"
+  },
+  {
+   "start": 411.924,
+   "end": 415.059,
+   "text": "still being spoken to with kindness."
+  },
+  {
+   "start": 418.009,
+   "end": 418.798,
+   "text": "In a moment,"
+  },
+  {
+   "start": 418.798,
+   "end": 420.771,
+   "text": "we pray for the person you may"
+  },
+  {
+   "start": 420.771,
+   "end": 423.159,
+   "text": "need to make things right with."
+  },
+  {
+   "start": 423.709,
+   "end": 424.194,
+   "text": "Father,"
+  },
+  {
+   "start": 424.194,
+   "end": 425.858,
+   "text": "bring to mind the person"
+  },
+  {
+   "start": 425.858,
+   "end": 428.169,
+   "text": "who may need to hear from me."
+  },
+  {
+   "start": 428.169,
+   "end": 429.883,
+   "text": "If I owe an apology,"
+  },
+  {
+   "start": 429.883,
+   "end": 431.768,
+   "text": "help me say it without"
+  },
+  {
+   "start": 431.768,
+   "end": 433.696,
+   "text": "explaining it away."
+  },
+  {
+   "start": 433.696,
+   "end": 435.184,
+   "text": "If I need to correct"
+  },
+  {
+   "start": 435.184,
+   "end": 436.448,
+   "text": "something I said,"
+  },
+  {
+   "start": 436.448,
+   "end": 437.936,
+   "text": "give me the humility"
+  },
+  {
+   "start": 437.936,
+   "end": 439.5,
+   "text": "to do it plainly."
+  },
+  {
+   "start": 439.5,
+   "end": 442.211,
+   "text": "If the situation is complicated,"
+  },
+  {
+   "start": 442.211,
+   "end": 445.731,
+   "text": "give me wisdom about timing and words."
+  },
+  {
+   "start": 445.731,
+   "end": 447.467,
+   "text": "I do not want to repair"
+  },
+  {
+   "start": 447.467,
+   "end": 449.956,
+   "text": "things in order to look good."
+  },
+  {
+   "start": 449.956,
+   "end": 452.823,
+   "text": "I want to love this person well."
+  },
+  {
+   "start": 453.973,
+   "end": 454.388,
+   "text": "Lord,"
+  },
+  {
+   "start": 454.388,
+   "end": 457.046,
+   "text": "I confess that I would sometimes"
+  },
+  {
+   "start": 457.046,
+   "end": 459.871,
+   "text": "rather feel guilty than apologize,"
+  },
+  {
+   "start": 459.871,
+   "end": 462.113,
+   "text": "because guilt stays private"
+  },
+  {
+   "start": 462.113,
+   "end": 464.407,
+   "text": "and an apology does not."
+  },
+  {
+   "start": 464.407,
+   "end": 467.224,
+   "text": "Free me from that kind of pride."
+  },
+  {
+   "start": 467.224,
+   "end": 469.23,
+   "text": "Let my repentance be honest"
+  },
+  {
+   "start": 469.23,
+   "end": 471.535,
+   "text": "enough to change how I act."
+  },
+  {
+   "start": 471.535,
+   "end": 474.151,
+   "text": "When I speak to the person tomorrow,"
+  },
+  {
+   "start": 474.151,
+   "end": 476.476,
+   "text": "keep me from demanding that they"
+  },
+  {
+   "start": 476.476,
+   "end": 478.811,
+   "text": "respond in a particular way."
+  },
+  {
+   "start": 478.811,
+   "end": 481.585,
+   "text": "Their response belongs to them."
+  },
+  {
+   "start": 481.585,
+   "end": 484.943,
+   "text": "My part is truthfulness and kindness."
+  },
+  {
+   "start": 486.093,
+   "end": 486.638,
+   "text": "Father,"
+  },
+  {
+   "start": 486.638,
+   "end": 488.274,
+   "text": "I think of the people"
+  },
+  {
+   "start": 488.274,
+   "end": 489.675,
+   "text": "under my own roof,"
+  },
+  {
+   "start": 489.675,
+   "end": 491.311,
+   "text": "or the people I speak"
+  },
+  {
+   "start": 491.311,
+   "end": 492.857,
+   "text": "with most often."
+  },
+  {
+   "start": 492.857,
+   "end": 494.863,
+   "text": "Familiarity makes it easy"
+  },
+  {
+   "start": 494.863,
+   "end": 497.168,
+   "text": "to be careless with them."
+  },
+  {
+   "start": 497.168,
+   "end": 499.276,
+   "text": "Forgive me for the impatience"
+  },
+  {
+   "start": 499.276,
+   "end": 501.756,
+   "text": "I would never show a stranger."
+  },
+  {
+   "start": 501.756,
+   "end": 503.947,
+   "text": "Forgive me for the assumptions"
+  },
+  {
+   "start": 503.947,
+   "end": 506.365,
+   "text": "I make about what they meant."
+  },
+  {
+   "start": 506.365,
+   "end": 507.814,
+   "text": "Help me notice their"
+  },
+  {
+   "start": 507.814,
+   "end": 510.143,
+   "text": "tiredness and their efforts."
+  },
+  {
+   "start": 510.143,
+   "end": 512.243,
+   "text": "Let my home be a place where"
+  },
+  {
+   "start": 512.243,
+   "end": 514.494,
+   "text": "forgiveness is spoken out loud"
+  },
+  {
+   "start": 514.494,
+   "end": 517.469,
+   "text": "and received without keeping score."
+  },
+  {
+   "start": 518.619,
+   "end": 520.969,
+   "text": "And be ye kind one to another,"
+  },
+  {
+   "start": 520.969,
+   "end": 522.066,
+   "text": "tenderhearted,"
+  },
+  {
+   "start": 522.066,
+   "end": 523.79,
+   "text": "forgiving one another,"
+  },
+  {
+   "start": 523.79,
+   "end": 525.67,
+   "text": "even as God for Christ's"
+  },
+  {
+   "start": 525.67,
+   "end": 527.822,
+   "text": "sake hath forgiven you."
+  },
+  {
+   "start": 529.272,
+   "end": 531.812,
+   "text": "Next comes the harder prayer:"
+  },
+  {
+   "start": 531.812,
+   "end": 534.103,
+   "text": "the person who hurt you."
+  },
+  {
+   "start": 534.653,
+   "end": 535.215,
+   "text": "Father,"
+  },
+  {
+   "start": 535.215,
+   "end": 538.004,
+   "text": "I bring the person who hurt me."
+  },
+  {
+   "start": 538.004,
+   "end": 539.613,
+   "text": "You saw what happened,"
+  },
+  {
+   "start": 539.613,
+   "end": 542.4,
+   "text": "and you know how deeply it landed."
+  },
+  {
+   "start": 542.4,
+   "end": 544.074,
+   "text": "I do not want to carry"
+  },
+  {
+   "start": 544.074,
+   "end": 546.732,
+   "text": "resentment into my sleep again."
+  },
+  {
+   "start": 546.732,
+   "end": 548.404,
+   "text": "Help me release my wish"
+  },
+  {
+   "start": 548.404,
+   "end": 550.595,
+   "text": "to see them suffer for it."
+  },
+  {
+   "start": 550.595,
+   "end": 552.562,
+   "text": "Where boundaries are wise,"
+  },
+  {
+   "start": 552.562,
+   "end": 555.055,
+   "text": "give me clarity to keep them."
+  },
+  {
+   "start": 555.055,
+   "end": 557.66,
+   "text": "Where reconciliation is possible,"
+  },
+  {
+   "start": 557.66,
+   "end": 560.091,
+   "text": "prepare both of our hearts."
+  },
+  {
+   "start": 560.091,
+   "end": 560.654,
+   "text": "Tonight,"
+  },
+  {
+   "start": 560.654,
+   "end": 561.85,
+   "text": "I choose to leave"
+  },
+  {
+   "start": 561.85,
+   "end": 563.747,
+   "text": "the judgment with you."
+  },
+  {
+   "start": 564.897,
+   "end": 565.285,
+   "text": "Lord,"
+  },
+  {
+   "start": 565.285,
+   "end": 567.071,
+   "text": "if forgiving them still"
+  },
+  {
+   "start": 567.071,
+   "end": 568.39,
+   "text": "feels impossible,"
+  },
+  {
+   "start": 568.39,
+   "end": 571.64,
+   "text": "I will not pretend otherwise with you."
+  },
+  {
+   "start": 571.64,
+   "end": 573.743,
+   "text": "Let this prayer be a beginning"
+  },
+  {
+   "start": 573.743,
+   "end": 575.865,
+   "text": "rather than a performance."
+  },
+  {
+   "start": 575.865,
+   "end": 578.764,
+   "text": "I may need to forgive again tomorrow,"
+  },
+  {
+   "start": 578.764,
+   "end": 580.475,
+   "text": "and the day after."
+  },
+  {
+   "start": 580.475,
+   "end": 582.318,
+   "text": "Give me the willingness"
+  },
+  {
+   "start": 582.318,
+   "end": 584.06,
+   "text": "I do not yet feel."
+  },
+  {
+   "start": 584.06,
+   "end": 585.885,
+   "text": "Remind me how patiently"
+  },
+  {
+   "start": 585.885,
+   "end": 587.552,
+   "text": "you have forgiven me,"
+  },
+  {
+   "start": 587.552,
+   "end": 588.821,
+   "text": "again and again,"
+  },
+  {
+   "start": 588.821,
+   "end": 591.44,
+   "text": "so that my heart can slowly learn"
+  },
+  {
+   "start": 591.44,
+   "end": 594.885,
+   "text": "the same tender patience toward others."
+  },
+  {
+   "start": 596.035,
+   "end": 597.747,
+   "text": "Forbearing one another,"
+  },
+  {
+   "start": 597.747,
+   "end": 599.682,
+   "text": "and forgiving one another,"
+  },
+  {
+   "start": 599.682,
+   "end": 600.798,
+   "text": "if any man have"
+  },
+  {
+   "start": 600.798,
+   "end": 602.735,
+   "text": "a quarrel against any:"
+  },
+  {
+   "start": 602.735,
+   "end": 605.151,
+   "text": "even as Christ forgave you,"
+  },
+  {
+   "start": 605.151,
+   "end": 606.754,
+   "text": "so also do ye."
+  },
+  {
+   "start": 608.204,
+   "end": 608.729,
+   "text": "Father,"
+  },
+  {
+   "start": 608.729,
+   "end": 610.755,
+   "text": "teach me to speak to myself"
+  },
+  {
+   "start": 610.755,
+   "end": 612.856,
+   "text": "the way you speak to me."
+  },
+  {
+   "start": 612.856,
+   "end": 615.435,
+   "text": "I can be honest about my failure"
+  },
+  {
+   "start": 615.435,
+   "end": 618.959,
+   "text": "without despising the person who failed."
+  },
+  {
+   "start": 618.959,
+   "end": 621.224,
+   "text": "Help me learn the lesson this day"
+  },
+  {
+   "start": 621.224,
+   "end": 623.995,
+   "text": "offers and then lay down the weight."
+  },
+  {
+   "start": 623.995,
+   "end": 625.71,
+   "text": "When I wake tomorrow,"
+  },
+  {
+   "start": 625.71,
+   "end": 628.406,
+   "text": "let me begin as someone forgiven,"
+  },
+  {
+   "start": 628.406,
+   "end": 630.993,
+   "text": "not as someone on probation."
+  },
+  {
+   "start": 630.993,
+   "end": 632.987,
+   "text": "Thank you that your mercy"
+  },
+  {
+   "start": 632.987,
+   "end": 635.3,
+   "text": "is not a reluctant pardon but"
+  },
+  {
+   "start": 635.3,
+   "end": 636.847,
+   "text": "a welcome home."
+  },
+  {
+   "start": 637.997,
+   "end": 640.495,
+   "text": "We are close to rest now."
+  },
+  {
+   "start": 640.495,
+   "end": 644.045,
+   "text": "Hear how God feels about showing mercy."
+  },
+  {
+   "start": 644.595,
+   "end": 646.782,
+   "text": "Who is a God like unto thee,"
+  },
+  {
+   "start": 646.782,
+   "end": 648.656,
+   "text": "that pardoneth iniquity,"
+  },
+  {
+   "start": 648.656,
+   "end": 651.155,
+   "text": "and passeth by the transgression"
+  },
+  {
+   "start": 651.155,
+   "end": 653.876,
+   "text": "of the remnant of his heritage?"
+  },
+  {
+   "start": 653.876,
+   "end": 656.753,
+   "text": "he retaineth not his anger for ever,"
+  },
+  {
+   "start": 656.753,
+   "end": 659.581,
+   "text": "because he delighteth in mercy."
+  },
+  {
+   "start": 661.031,
+   "end": 661.399,
+   "text": "Lord,"
+  },
+  {
+   "start": 661.399,
+   "end": 664.573,
+   "text": "thank you that you enjoy showing mercy."
+  },
+  {
+   "start": 664.573,
+   "end": 666.397,
+   "text": "Thank you for every time"
+  },
+  {
+   "start": 666.397,
+   "end": 668.525,
+   "text": "you have forgiven me without"
+  },
+  {
+   "start": 668.525,
+   "end": 670.953,
+   "text": "reminding me of my failures."
+  },
+  {
+   "start": 670.953,
+   "end": 672.574,
+   "text": "Thank you for the people"
+  },
+  {
+   "start": 672.574,
+   "end": 674.127,
+   "text": "who have shown me grace"
+  },
+  {
+   "start": 674.127,
+   "end": 675.883,
+   "text": "when I did not deserve it,"
+  },
+  {
+   "start": 675.883,
+   "end": 677.638,
+   "text": "because their kindness was"
+  },
+  {
+   "start": 677.638,
+   "end": 679.424,
+   "text": "a reflection of yours."
+  },
+  {
+   "start": 679.424,
+   "end": 681.927,
+   "text": "Let gratitude grow in me tonight"
+  },
+  {
+   "start": 681.927,
+   "end": 684.887,
+   "text": "until it is larger than my regret."
+  },
+  {
+   "start": 684.887,
+   "end": 687.563,
+   "text": "I want to fall asleep thankful,"
+  },
+  {
+   "start": 687.563,
+   "end": 688.949,
+   "text": "not ashamed."
+  },
+  {
+   "start": 690.099,
+   "end": 690.51,
+   "text": "Lord,"
+  },
+  {
+   "start": 690.51,
+   "end": 691.989,
+   "text": "I do not only want"
+  },
+  {
+   "start": 691.989,
+   "end": 693.769,
+   "text": "my record cleared."
+  },
+  {
+   "start": 693.769,
+   "end": 696.288,
+   "text": "I want my heart changed."
+  },
+  {
+   "start": 696.288,
+   "end": 699.017,
+   "text": "Where impatience has become a habit,"
+  },
+  {
+   "start": 699.017,
+   "end": 700.833,
+   "text": "grow patience in me."
+  },
+  {
+   "start": 700.833,
+   "end": 702.271,
+   "text": "Where I have learned"
+  },
+  {
+   "start": 702.271,
+   "end": 703.637,
+   "text": "to shade the truth,"
+  },
+  {
+   "start": 703.637,
+   "end": 705.016,
+   "text": "make me honest."
+  },
+  {
+   "start": 705.016,
+   "end": 707.666,
+   "text": "Where I keep reaching for control,"
+  },
+  {
+   "start": 707.666,
+   "end": 709.135,
+   "text": "teach me trust."
+  },
+  {
+   "start": 709.135,
+   "end": 711.609,
+   "text": "Do this work slowly and deeply,"
+  },
+  {
+   "start": 711.609,
+   "end": 713.524,
+   "text": "the way a garden changes"
+  },
+  {
+   "start": 713.524,
+   "end": 715.899,
+   "text": "through many quiet nights."
+  },
+  {
+   "start": 715.899,
+   "end": 717.411,
+   "text": "I give you permission"
+  },
+  {
+   "start": 717.411,
+   "end": 719.129,
+   "text": "to keep shaping me."
+  },
+  {
+   "start": 720.279,
+   "end": 722.722,
+   "text": "Create in me a clean heart,"
+  },
+  {
+   "start": 722.722,
+   "end": 723.565,
+   "text": "O God;"
+  },
+  {
+   "start": 723.565,
+   "end": 726.71,
+   "text": "and renew a right spirit within me."
+  },
+  {
+   "start": 728.16,
+   "end": 729.827,
+   "text": "I am honest with God"
+  },
+  {
+   "start": 729.827,
+   "end": 732.044,
+   "text": "about what I did today."
+  },
+  {
+   "start": 732.044,
+   "end": 733.674,
+   "text": "I am forgiven because"
+  },
+  {
+   "start": 733.674,
+   "end": 735.382,
+   "text": "God delights in mercy,"
+  },
+  {
+   "start": 735.382,
+   "end": 737.933,
+   "text": "not because I have earned it."
+  },
+  {
+   "start": 737.933,
+   "end": 739.904,
+   "text": "I am free to make repair"
+  },
+  {
+   "start": 739.904,
+   "end": 742.585,
+   "text": "without being ruled by shame."
+  },
+  {
+   "start": 742.585,
+   "end": 744.782,
+   "text": "I release the person who hurt"
+  },
+  {
+   "start": 744.782,
+   "end": 746.597,
+   "text": "me into God's hands."
+  },
+  {
+   "start": 746.597,
+   "end": 748.66,
+   "text": "I can learn from this day"
+  },
+  {
+   "start": 748.66,
+   "end": 751.271,
+   "text": "without being defined by it."
+  },
+  {
+   "start": 751.271,
+   "end": 753.211,
+   "text": "Tomorrow I begin again,"
+  },
+  {
+   "start": 753.211,
+   "end": 754.813,
+   "text": "as someone welcomed"
+  },
+  {
+   "start": 754.813,
+   "end": 757.103,
+   "text": "and held by the Father."
+  },
+  {
+   "start": 758.253,
+   "end": 760.564,
+   "text": "Before the readings for sleep,"
+  },
+  {
+   "start": 760.564,
+   "end": 762.713,
+   "text": "make one small decision."
+  },
+  {
+   "start": 762.713,
+   "end": 764.844,
+   "text": "Think of the one act of repair"
+  },
+  {
+   "start": 764.844,
+   "end": 767.188,
+   "text": "that would honor what you prayed,"
+  },
+  {
+   "start": 767.188,
+   "end": 768.837,
+   "text": "and give it a time."
+  },
+  {
+   "start": 768.837,
+   "end": 769.836,
+   "text": "It might be,"
+  },
+  {
+   "start": 769.836,
+   "end": 772.25,
+   "text": "at lunch tomorrow I will send"
+  },
+  {
+   "start": 772.25,
+   "end": 775.047,
+   "text": "a short apology to my brother."
+  },
+  {
+   "start": 775.047,
+   "end": 775.848,
+   "text": "If it helps,"
+  },
+  {
+   "start": 775.848,
+   "end": 777.45,
+   "text": "write just that sentence"
+  },
+  {
+   "start": 777.45,
+   "end": 779.485,
+   "text": "somewhere you will see it."
+  },
+  {
+   "start": 779.485,
+   "end": 781.535,
+   "text": "Then set it down."
+  },
+  {
+   "start": 781.535,
+   "end": 784.232,
+   "text": "The repair has a place in tomorrow,"
+  },
+  {
+   "start": 784.232,
+   "end": 787.047,
+   "text": "so tonight can be given to rest."
+  },
+  {
+   "start": 788.197,
+   "end": 788.732,
+   "text": "Father,"
+  },
+  {
+   "start": 788.732,
+   "end": 789.955,
+   "text": "I place that one"
+  },
+  {
+   "start": 789.955,
+   "end": 791.783,
+   "text": "step into your care."
+  },
+  {
+   "start": 791.783,
+   "end": 793.398,
+   "text": "When the time comes,"
+  },
+  {
+   "start": 793.398,
+   "end": 796.2,
+   "text": "give me clear and gentle words."
+  },
+  {
+   "start": 796.2,
+   "end": 798.475,
+   "text": "If you show me that a different"
+  },
+  {
+   "start": 798.475,
+   "end": 799.942,
+   "text": "step would be wiser,"
+  },
+  {
+   "start": 799.942,
+   "end": 801.343,
+   "text": "help me listen."
+  },
+  {
+   "start": 801.343,
+   "end": 801.978,
+   "text": "For now,"
+  },
+  {
+   "start": 801.978,
+   "end": 803.961,
+   "text": "I do not need to rehearse"
+  },
+  {
+   "start": 803.961,
+   "end": 806.72,
+   "text": "the conversation over and over."
+  },
+  {
+   "start": 806.72,
+   "end": 807.939,
+   "text": "I have confessed,"
+  },
+  {
+   "start": 807.939,
+   "end": 809.444,
+   "text": "I have been forgiven,"
+  },
+  {
+   "start": 809.444,
+   "end": 811.393,
+   "text": "and I have a next step."
+  },
+  {
+   "start": 811.393,
+   "end": 813.898,
+   "text": "Let that be enough for tonight."
+  },
+  {
+   "start": 815.048,
+   "end": 816.968,
+   "text": "If you have received God's"
+  },
+  {
+   "start": 816.968,
+   "end": 818.446,
+   "text": "forgiveness tonight,"
+  },
+  {
+   "start": 818.446,
+   "end": 821.257,
+   "text": "you can type amen in the comments."
+  },
+  {
+   "start": 821.257,
+   "end": 822.514,
+   "text": "You can also leave"
+  },
+  {
+   "start": 822.514,
+   "end": 824.12,
+   "text": "a prayer request there,"
+  },
+  {
+   "start": 824.12,
+   "end": 826.284,
+   "text": "and in our next night prayer we"
+  },
+  {
+   "start": 826.284,
+   "end": 829.237,
+   "text": "will pray over the requests you share."
+  },
+  {
+   "start": 829.237,
+   "end": 831.003,
+   "text": "Now let Scripture carry"
+  },
+  {
+   "start": 831.003,
+   "end": 832.659,
+   "text": "you toward sleep."
+  },
+  {
+   "start": 833.609,
+   "end": 836.384,
+   "text": "From here the words slow down."
+  },
+  {
+   "start": 836.384,
+   "end": 839.321,
+   "text": "There will be short readings and quiet"
+  },
+  {
+   "start": 839.321,
+   "end": 842.017,
+   "text": "prayers about the mercy of God."
+  },
+  {
+   "start": 842.017,
+   "end": 844.011,
+   "text": "You do not need to follow"
+  },
+  {
+   "start": 844.011,
+   "end": 845.667,
+   "text": "each one closely."
+  },
+  {
+   "start": 845.667,
+   "end": 847.261,
+   "text": "If your mind drifts,"
+  },
+  {
+   "start": 847.261,
+   "end": 848.996,
+   "text": "that is all right."
+  },
+  {
+   "start": 848.996,
+   "end": 850.652,
+   "text": "Let your body be heavy"
+  },
+  {
+   "start": 850.652,
+   "end": 851.781,
+   "text": "where it rests,"
+  },
+  {
+   "start": 851.781,
+   "end": 854.039,
+   "text": "and let the sound of the voice"
+  },
+  {
+   "start": 854.039,
+   "end": 855.995,
+   "text": "be a gentle companion."
+  },
+  {
+   "start": 855.995,
+   "end": 858.855,
+   "text": "The work of this evening is finished."
+  },
+  {
+   "start": 858.855,
+   "end": 861.359,
+   "text": "What remains is to receive."
+  },
+  {
+   "start": 862.809,
+   "end": 863.857,
+   "text": "And he arose,"
+  },
+  {
+   "start": 863.857,
+   "end": 866.011,
+   "text": "and came to his father."
+  },
+  {
+   "start": 866.011,
+   "end": 867.395,
+   "text": "But when he was yet"
+  },
+  {
+   "start": 867.395,
+   "end": 868.561,
+   "text": "a great way off,"
+  },
+  {
+   "start": 868.561,
+   "end": 869.945,
+   "text": "his father saw him,"
+  },
+  {
+   "start": 869.945,
+   "end": 871.985,
+   "text": "and had compassion, and ran,"
+  },
+  {
+   "start": 871.985,
+   "end": 873.515,
+   "text": "and fell on his neck,"
+  },
+  {
+   "start": 873.515,
+   "end": 874.958,
+   "text": "and kissed him."
+  },
+  {
+   "start": 876.408,
+   "end": 876.905,
+   "text": "Father,"
+  },
+  {
+   "start": 876.905,
+   "end": 878.395,
+   "text": "thank you for running"
+  },
+  {
+   "start": 878.395,
+   "end": 880.612,
+   "text": "toward me when I turn back."
+  },
+  {
+   "start": 880.612,
+   "end": 883.278,
+   "text": "Thank you for the embrace that comes"
+  },
+  {
+   "start": 883.278,
+   "end": 886.096,
+   "text": "before my explanation is complete."
+  },
+  {
+   "start": 886.096,
+   "end": 887.161,
+   "text": "As I lie down,"
+  },
+  {
+   "start": 887.161,
+   "end": 888.987,
+   "text": "let me rest like someone"
+  },
+  {
+   "start": 888.987,
+   "end": 890.356,
+   "text": "who has come home,"
+  },
+  {
+   "start": 890.356,
+   "end": 892.03,
+   "text": "not like someone still"
+  },
+  {
+   "start": 892.03,
+   "end": 893.927,
+   "text": "standing at the gate."
+  },
+  {
+   "start": 893.927,
+   "end": 896.099,
+   "text": "Let the quiet of this room feel"
+  },
+  {
+   "start": 896.099,
+   "end": 898.13,
+   "text": "like the quiet of your house,"
+  },
+  {
+   "start": 898.13,
+   "end": 900.442,
+   "text": "where I am known and wanted."
+  },
+  {
+   "start": 901.592,
+   "end": 902.456,
+   "text": "I, even I,"
+  },
+  {
+   "start": 902.456,
+   "end": 904.788,
+   "text": "am he that blotteth out thy"
+  },
+  {
+   "start": 904.788,
+   "end": 907.639,
+   "text": "transgressions for mine own sake,"
+  },
+  {
+   "start": 907.639,
+   "end": 910.667,
+   "text": "and will not remember thy sins."
+  },
+  {
+   "start": 912.117,
+   "end": 914.058,
+   "text": "You can rest in the silence"
+  },
+  {
+   "start": 914.058,
+   "end": 915.724,
+   "text": "for a little while."
+  },
+  {
+   "start": 915.724,
+   "end": 918.264,
+   "text": "Nothing needs to be solved."
+  },
+  {
+   "start": 918.264,
+   "end": 920.059,
+   "text": "Let your breathing find"
+  },
+  {
+   "start": 920.059,
+   "end": 922.01,
+   "text": "its own unhurried rhythm,"
+  },
+  {
+   "start": 922.01,
+   "end": 924.195,
+   "text": "and let your hands lie open,"
+  },
+  {
+   "start": 924.195,
+   "end": 925.678,
+   "text": "as if they had just"
+  },
+  {
+   "start": 925.678,
+   "end": 927.979,
+   "text": "released something heavy."
+  },
+  {
+   "start": 930.929,
+   "end": 931.501,
+   "text": "Father,"
+  },
+  {
+   "start": 931.501,
+   "end": 934.173,
+   "text": "I end this day in your mercy."
+  },
+  {
+   "start": 934.173,
+   "end": 936.673,
+   "text": "Thank you for hearing my confession"
+  },
+  {
+   "start": 936.673,
+   "end": 939.401,
+   "text": "and answering it with forgiveness."
+  },
+  {
+   "start": 939.401,
+   "end": 941.091,
+   "text": "Thank you for the person"
+  },
+  {
+   "start": 941.091,
+   "end": 942.851,
+   "text": "I will speak to tomorrow,"
+  },
+  {
+   "start": 942.851,
+   "end": 944.188,
+   "text": "and for the courage"
+  },
+  {
+   "start": 944.188,
+   "end": 946.037,
+   "text": "you will give me then."
+  },
+  {
+   "start": 946.037,
+   "end": 948.663,
+   "text": "Watch over me through the night."
+  },
+  {
+   "start": 948.663,
+   "end": 949.801,
+   "text": "Let me rest as"
+  },
+  {
+   "start": 949.801,
+   "end": 951.183,
+   "text": "one who is clean,"
+  },
+  {
+   "start": 951.183,
+   "end": 953.677,
+   "text": "welcomed, and deeply loved."
+  },
+  {
+   "start": 953.677,
+   "end": 955.05,
+   "text": "I place my sleep"
+  },
+  {
+   "start": 955.05,
+   "end": 957.753,
+   "text": "and my waking in your hands."
+  },
+  {
+   "start": 957.753,
+   "end": 959.298,
+   "text": "Amen."
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "Before you sleep tonight, let God's mercy wash away today's regrets.",
+   "start": 0.3,
+   "end": 5.548
+  },
+  {
+   "segment": "hook",
+   "text": "Pray this with me now.",
+   "start": 5.848,
+   "end": 7.789
+  },
+  {
+   "segment": "roadmap",
+   "text": "Tonight we will name today's regrets honestly, receive God's pardon, take one step of repair, and forgive what was done to you.",
+   "start": 9.289,
+   "end": 19.124
+  },
+  {
+   "segment": "roadmap",
+   "text": "Then Scripture will carry you toward sleep.",
+   "start": 19.424,
+   "end": 22.453
+  },
+  {
+   "segment": "invitation",
+   "text": "You may be replaying a sharp word, a promise you did not keep, or something you hoped nobody noticed.",
+   "start": 23.553,
+   "end": 31.489
+  },
+  {
+   "segment": "invitation",
+   "text": "You do not have to tidy it before you come.",
+   "start": 31.789,
+   "end": 35.096
+  },
+  {
+   "segment": "invitation",
+   "text": "Let your shoulders lower a little.",
+   "start": 35.396,
+   "end": 37.785
+  },
+  {
+   "segment": "invitation",
+   "text": "You can listen with your eyes closed or open.",
+   "start": 38.085,
+   "end": 41.648
+  },
+  {
+   "segment": "invitation",
+   "text": "In this prayer you will name what happened plainly, receive forgiveness, consider one act of repair, and then rest with Scripture about God's mercy.",
+   "start": 41.948,
+   "end": 53.191
+  },
+  {
+   "segment": "scripture-isaiah-reason",
+   "text": "Come now, and let us reason together, saith the LORD:",
+   "start": 54.691,
+   "end": 58.68
+  },
+  {
+   "segment": "scripture-isaiah-reason",
+   "text": "though your sins be as scarlet, they shall be as white as snow;",
+   "start": 58.98,
+   "end": 63.524
+  },
+  {
+   "segment": "scripture-isaiah-reason",
+   "text": "though they be red like crimson, they shall be as wool.",
+   "start": 63.824,
+   "end": 67.771
+  },
+  {
+   "segment": "prayer-first-honesty",
+   "text": "Father, I come to you at the end of this day without pretending it went better than it did.",
+   "start": 69.571,
+   "end": 75.864
+  },
+  {
+   "segment": "prayer-first-honesty",
+   "text": "You already know the moment I keep returning to.",
+   "start": 76.164,
+   "end": 79.791
+  },
+  {
+   "segment": "prayer-first-honesty",
+   "text": "I would rather tell you about it than keep defending myself in my thoughts.",
+   "start": 80.091,
+   "end": 85.211
+  },
+  {
+   "segment": "prayer-first-honesty",
+   "text": "Thank you that you invite me to reason with you instead of hiding from you.",
+   "start": 85.511,
+   "end": 90.737
+  },
+  {
+   "segment": "prayer-first-honesty",
+   "text": "Give me courage to be truthful, and gentleness to remember that you are the one listening.",
+   "start": 91.037,
+   "end": 97.437
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "Regret often stays vague because a vague feeling is easier to carry than a clear sentence.",
+   "start": 98.937,
+   "end": 105.721
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "Yet a clear sentence is easier to bring to God.",
+   "start": 106.021,
+   "end": 109.563
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "Try naming it in ordinary words:",
+   "start": 109.863,
+   "end": 112.743
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "I was impatient with my child.",
+   "start": 113.043,
+   "end": 115.56
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "I exaggerated to look better.",
+   "start": 115.86,
+   "end": 118.42
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "I ignored a call I should have answered.",
+   "start": 118.72,
+   "end": 121.685
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "You are not writing a confession for anyone else.",
+   "start": 121.985,
+   "end": 125.633
+  },
+  {
+   "segment": "reflection-name-it",
+   "text": "You are simply letting the truth have a shape, so that mercy has something specific to meet.",
+   "start": 125.933,
+   "end": 132.163
+  },
+  {
+   "segment": "prayer-specific-word",
+   "text": "Lord, I name the words I spoke today that were harsher than they needed to be.",
+   "start": 133.663,
+   "end": 138.975
+  },
+  {
+   "segment": "prayer-specific-word",
+   "text": "I remember the tone as well as the sentence, and I remember the face of the person who heard it.",
+   "start": 139.275,
+   "end": 146.059
+  },
+  {
+   "segment": "prayer-specific-word",
+   "text": "I cannot take those words back into my mouth.",
+   "start": 146.359,
+   "end": 149.9
+  },
+  {
+   "segment": "prayer-specific-word",
+   "text": "I ask you to forgive me for them, and to soften whatever they hurt.",
+   "start": 150.2,
+   "end": 154.957
+  },
+  {
+   "segment": "prayer-specific-word",
+   "text": "Show me tomorrow whether an apology is needed, and help me offer it simply.",
+   "start": 155.257,
+   "end": 160.783
+  },
+  {
+   "segment": "prayer-what-i-avoided",
+   "text": "Father, I also bring what I avoided.",
+   "start": 162.283,
+   "end": 165.397
+  },
+  {
+   "segment": "prayer-what-i-avoided",
+   "text": "There was a task I postponed because it felt uncomfortable, and a conversation I steered away from because I was afraid of how it might go.",
+   "start": 165.697,
+   "end": 176.535
+  },
+  {
+   "segment": "prayer-what-i-avoided",
+   "text": "Sometimes my failures are quiet ones, a kindness I withheld or a duty I left for someone else.",
+   "start": 176.835,
+   "end": 184.728
+  },
+  {
+   "segment": "prayer-what-i-avoided",
+   "text": "Forgive me for the good I could have done and did not.",
+   "start": 185.028,
+   "end": 188.719
+  },
+  {
+   "segment": "prayer-what-i-avoided",
+   "text": "Make me braver in small and honest ways.",
+   "start": 189.019,
+   "end": 192.325
+  },
+  {
+   "segment": "rehook-1",
+   "text": "Next, a psalm that shows what happens when we stop hiding.",
+   "start": 193.825,
+   "end": 198.22
+  },
+  {
+   "segment": "scripture-psalm-acknowledged",
+   "text": "I acknowledged my sin unto thee, and mine iniquity have I not hid.",
+   "start": 199.12,
+   "end": 204.517
+  },
+  {
+   "segment": "scripture-psalm-acknowledged",
+   "text": "I said, I will confess my transgressions unto the LORD;",
+   "start": 204.817,
+   "end": 209.127
+  },
+  {
+   "segment": "scripture-psalm-acknowledged",
+   "text": "and thou forgavest the iniquity of my sin.",
+   "start": 209.427,
+   "end": 212.712
+  },
+  {
+   "segment": "scripture-psalm-acknowledged",
+   "text": "Selah.",
+   "start": 213.012,
+   "end": 213.972
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "Notice the order in that psalm.",
+   "start": 215.772,
+   "end": 218.247
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "The writer stops hiding, says it out loud to God, and forgiveness follows.",
+   "start": 218.547,
+   "end": 224.051
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "Hiding takes a surprising amount of energy.",
+   "start": 224.351,
+   "end": 227.892
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "You rehearse explanations, you watch for anyone who might bring it up, you feel slightly tense around certain people.",
+   "start": 228.192,
+   "end": 236.789
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "Confession is not meant to crush you.",
+   "start": 237.089,
+   "end": 240.012
+  },
+  {
+   "segment": "reflection-hiding",
+   "text": "It is the moment you can stop guarding the secret, because the One who hears it has already chosen mercy.",
+   "start": 240.312,
+   "end": 247.885
+  },
+  {
+   "segment": "prayer-confession-plain",
+   "text": "Lord, here is the part I have been reluctant to admit, even to myself.",
+   "start": 249.385,
+   "end": 254.633
+  },
+  {
+   "segment": "prayer-confession-plain",
+   "text": "I did it because I wanted to protect my image, to win the argument, or to avoid feeling small.",
+   "start": 254.933,
+   "end": 262.549
+  },
+  {
+   "segment": "prayer-confession-plain",
+   "text": "I do not want to dress it up as something nobler.",
+   "start": 262.849,
+   "end": 266.391
+  },
+  {
+   "segment": "prayer-confession-plain",
+   "text": "I confess it as sin, and I ask you to forgive me.",
+   "start": 266.691,
+   "end": 270.744
+  },
+  {
+   "segment": "prayer-confession-plain",
+   "text": "Thank you that your patience with me is deeper than my embarrassment tonight.",
+   "start": 271.044,
+   "end": 276.271
+  },
+  {
+   "segment": "prayer-receiving-pardon",
+   "text": "Father, help me actually receive what I have asked for.",
+   "start": 277.771,
+   "end": 281.717
+  },
+  {
+   "segment": "prayer-receiving-pardon",
+   "text": "I tend to ask for forgiveness and then keep punishing myself anyway, as though your answer were not enough.",
+   "start": 282.017,
+   "end": 289.676
+  },
+  {
+   "segment": "prayer-receiving-pardon",
+   "text": "If you have forgiven me, I do not need to keep the sentence running in my head.",
+   "start": 289.976,
+   "end": 295.544
+  },
+  {
+   "segment": "prayer-receiving-pardon",
+   "text": "Teach me to trust your word more than my lingering shame.",
+   "start": 295.844,
+   "end": 299.961
+  },
+  {
+   "segment": "prayer-receiving-pardon",
+   "text": "Let this pardon settle into the places where I usually hold my breath.",
+   "start": 300.261,
+   "end": 305.552
+  },
+  {
+   "segment": "rehook-2",
+   "text": "If you have confessed this before, stay with me.",
+   "start": 307.052,
+   "end": 310.359
+  },
+  {
+   "segment": "rehook-2",
+   "text": "The next words are for you.",
+   "start": 310.659,
+   "end": 312.877
+  },
+  {
+   "segment": "reflection-same-again",
+   "text": "Perhaps what troubles you most is that this is not the first time.",
+   "start": 313.777,
+   "end": 318.919
+  },
+  {
+   "segment": "reflection-same-again",
+   "text": "You have confessed this same weakness before, and here it is again.",
+   "start": 319.219,
+   "end": 323.784
+  },
+  {
+   "segment": "reflection-same-again",
+   "text": "That can make forgiveness feel almost dishonest, as if you were taking advantage of God.",
+   "start": 324.084,
+   "end": 330.719
+  },
+  {
+   "segment": "reflection-same-again",
+   "text": "Yet Scripture never puts a limit on returning.",
+   "start": 331.019,
+   "end": 334.816
+  },
+  {
+   "segment": "reflection-same-again",
+   "text": "Each honest return is part of how change happens.",
+   "start": 335.116,
+   "end": 339.255
+  },
+  {
+   "segment": "reflection-same-again",
+   "text": "God is not tired of hearing from you.",
+   "start": 339.555,
+   "end": 342.435
+  },
+  {
+   "segment": "reflection-same-again",
+   "text": "He is patiently forming something new in you.",
+   "start": 342.735,
+   "end": 345.956
+  },
+  {
+   "segment": "scripture-romans-condemnation",
+   "text": "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+   "start": 347.456,
+   "end": 356.864
+  },
+  {
+   "segment": "prayer-heart-accuses",
+   "text": "Lord, my heart is good at accusing me.",
+   "start": 358.664,
+   "end": 361.757
+  },
+  {
+   "segment": "prayer-heart-accuses",
+   "text": "It brings up old mistakes alongside today's, and it speaks as if they define me.",
+   "start": 362.057,
+   "end": 368.329
+  },
+  {
+   "segment": "prayer-heart-accuses",
+   "text": "When those thoughts come back in the dark, remind me that you know me more completely than my worst memory does.",
+   "start": 368.629,
+   "end": 376.395
+  },
+  {
+   "segment": "prayer-heart-accuses",
+   "text": "Quiet the voice that keeps the record open.",
+   "start": 376.695,
+   "end": 379.873
+  },
+  {
+   "segment": "prayer-heart-accuses",
+   "text": "I place the whole list in your hands, the recent pages and the old ones too.",
+   "start": 380.173,
+   "end": 385.997
+  },
+  {
+   "segment": "scripture-john-greater",
+   "text": "For if our heart condemn us, God is greater than our heart, and knoweth all things.",
+   "start": 387.497,
+   "end": 393.556
+  },
+  {
+   "segment": "stillness-first",
+   "text": "Let that sentence stay with you for a moment.",
+   "start": 395.356,
+   "end": 398.3
+  },
+  {
+   "segment": "stillness-first",
+   "text": "God is greater than your heart.",
+   "start": 398.6,
+   "end": 401.011
+  },
+  {
+   "segment": "stillness-first",
+   "text": "You do not need to add anything to it or argue with it.",
+   "start": 401.311,
+   "end": 405.513
+  },
+  {
+   "segment": "stillness-first",
+   "text": "Simply breathe at your own pace, and notice that you are still here, still loved, still being spoken to with kindness.",
+   "start": 405.813,
+   "end": 414.709
+  },
+  {
+   "segment": "rehook-3",
+   "text": "In a moment, we pray for the person you may need to make things right with.",
+   "start": 418.009,
+   "end": 422.809
+  },
+  {
+   "segment": "prayer-repair-person",
+   "text": "Father, bring to mind the person who may need to hear from me.",
+   "start": 423.709,
+   "end": 427.869
+  },
+  {
+   "segment": "prayer-repair-person",
+   "text": "If I owe an apology, help me say it without explaining it away.",
+   "start": 428.169,
+   "end": 433.396
+  },
+  {
+   "segment": "prayer-repair-person",
+   "text": "If I need to correct something I said, give me the humility to do it plainly.",
+   "start": 433.696,
+   "end": 439.2
+  },
+  {
+   "segment": "prayer-repair-person",
+   "text": "If the situation is complicated, give me wisdom about timing and words.",
+   "start": 439.5,
+   "end": 445.431
+  },
+  {
+   "segment": "prayer-repair-person",
+   "text": "I do not want to repair things in order to look good.",
+   "start": 445.731,
+   "end": 449.656
+  },
+  {
+   "segment": "prayer-repair-person",
+   "text": "I want to love this person well.",
+   "start": 449.956,
+   "end": 452.473
+  },
+  {
+   "segment": "prayer-humility",
+   "text": "Lord, I confess that I would sometimes rather feel guilty than apologize, because guilt stays private and an apology does not.",
+   "start": 453.973,
+   "end": 464.107
+  },
+  {
+   "segment": "prayer-humility",
+   "text": "Free me from that kind of pride.",
+   "start": 464.407,
+   "end": 466.924
+  },
+  {
+   "segment": "prayer-humility",
+   "text": "Let my repentance be honest enough to change how I act.",
+   "start": 467.224,
+   "end": 471.235
+  },
+  {
+   "segment": "prayer-humility",
+   "text": "When I speak to the person tomorrow, keep me from demanding that they respond in a particular way.",
+   "start": 471.535,
+   "end": 478.511
+  },
+  {
+   "segment": "prayer-humility",
+   "text": "Their response belongs to them.",
+   "start": 478.811,
+   "end": 481.285
+  },
+  {
+   "segment": "prayer-humility",
+   "text": "My part is truthfulness and kindness.",
+   "start": 481.585,
+   "end": 484.593
+  },
+  {
+   "segment": "prayer-household",
+   "text": "Father, I think of the people under my own roof, or the people I speak with most often.",
+   "start": 486.093,
+   "end": 492.557
+  },
+  {
+   "segment": "prayer-household",
+   "text": "Familiarity makes it easy to be careless with them.",
+   "start": 492.857,
+   "end": 496.868
+  },
+  {
+   "segment": "prayer-household",
+   "text": "Forgive me for the impatience I would never show a stranger.",
+   "start": 497.168,
+   "end": 501.456
+  },
+  {
+   "segment": "prayer-household",
+   "text": "Forgive me for the assumptions I make about what they meant.",
+   "start": 501.756,
+   "end": 506.065
+  },
+  {
+   "segment": "prayer-household",
+   "text": "Help me notice their tiredness and their efforts.",
+   "start": 506.365,
+   "end": 509.843
+  },
+  {
+   "segment": "prayer-household",
+   "text": "Let my home be a place where forgiveness is spoken out loud and received without keeping score.",
+   "start": 510.143,
+   "end": 517.119
+  },
+  {
+   "segment": "scripture-ephesians-kind",
+   "text": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake hath forgiven you.",
+   "start": 518.619,
+   "end": 527.472
+  },
+  {
+   "segment": "rehook-4",
+   "text": "Next comes the harder prayer:",
+   "start": 529.272,
+   "end": 531.512
+  },
+  {
+   "segment": "rehook-4",
+   "text": "the person who hurt you.",
+   "start": 531.812,
+   "end": 533.753
+  },
+  {
+   "segment": "prayer-someone-hurt-me",
+   "text": "Father, I bring the person who hurt me.",
+   "start": 534.653,
+   "end": 537.704
+  },
+  {
+   "segment": "prayer-someone-hurt-me",
+   "text": "You saw what happened, and you know how deeply it landed.",
+   "start": 538.004,
+   "end": 542.1
+  },
+  {
+   "segment": "prayer-someone-hurt-me",
+   "text": "I do not want to carry resentment into my sleep again.",
+   "start": 542.4,
+   "end": 546.432
+  },
+  {
+   "segment": "prayer-someone-hurt-me",
+   "text": "Help me release my wish to see them suffer for it.",
+   "start": 546.732,
+   "end": 550.295
+  },
+  {
+   "segment": "prayer-someone-hurt-me",
+   "text": "Where boundaries are wise, give me clarity to keep them.",
+   "start": 550.595,
+   "end": 554.755
+  },
+  {
+   "segment": "prayer-someone-hurt-me",
+   "text": "Where reconciliation is possible, prepare both of our hearts.",
+   "start": 555.055,
+   "end": 559.791
+  },
+  {
+   "segment": "prayer-someone-hurt-me",
+   "text": "Tonight, I choose to leave the judgment with you.",
+   "start": 560.091,
+   "end": 563.397
+  },
+  {
+   "segment": "prayer-not-pretending",
+   "text": "Lord, if forgiving them still feels impossible, I will not pretend otherwise with you.",
+   "start": 564.897,
+   "end": 571.34
+  },
+  {
+   "segment": "prayer-not-pretending",
+   "text": "Let this prayer be a beginning rather than a performance.",
+   "start": 571.64,
+   "end": 575.565
+  },
+  {
+   "segment": "prayer-not-pretending",
+   "text": "I may need to forgive again tomorrow, and the day after.",
+   "start": 575.865,
+   "end": 580.175
+  },
+  {
+   "segment": "prayer-not-pretending",
+   "text": "Give me the willingness I do not yet feel.",
+   "start": 580.475,
+   "end": 583.76
+  },
+  {
+   "segment": "prayer-not-pretending",
+   "text": "Remind me how patiently you have forgiven me, again and again, so that my heart can slowly learn the same tender patience toward others.",
+   "start": 584.06,
+   "end": 594.535
+  },
+  {
+   "segment": "scripture-colossians-forbearing",
+   "text": "Forbearing one another, and forgiving one another, if any man have a quarrel against any:",
+   "start": 596.035,
+   "end": 602.435
+  },
+  {
+   "segment": "scripture-colossians-forbearing",
+   "text": "even as Christ forgave you, so also do ye.",
+   "start": 602.735,
+   "end": 606.404
+  },
+  {
+   "segment": "prayer-self-compassion",
+   "text": "Father, teach me to speak to myself the way you speak to me.",
+   "start": 608.204,
+   "end": 612.556
+  },
+  {
+   "segment": "prayer-self-compassion",
+   "text": "I can be honest about my failure without despising the person who failed.",
+   "start": 612.856,
+   "end": 618.659
+  },
+  {
+   "segment": "prayer-self-compassion",
+   "text": "Help me learn the lesson this day offers and then lay down the weight.",
+   "start": 618.959,
+   "end": 623.695
+  },
+  {
+   "segment": "prayer-self-compassion",
+   "text": "When I wake tomorrow, let me begin as someone forgiven, not as someone on probation.",
+   "start": 623.995,
+   "end": 630.693
+  },
+  {
+   "segment": "prayer-self-compassion",
+   "text": "Thank you that your mercy is not a reluctant pardon but a welcome home.",
+   "start": 630.993,
+   "end": 636.497
+  },
+  {
+   "segment": "rehook-5",
+   "text": "We are close to rest now.",
+   "start": 637.997,
+   "end": 640.195
+  },
+  {
+   "segment": "rehook-5",
+   "text": "Hear how God feels about showing mercy.",
+   "start": 640.495,
+   "end": 643.695
+  },
+  {
+   "segment": "scripture-micah-delight",
+   "text": "Who is a God like unto thee, that pardoneth iniquity, and passeth by the transgression of the remnant of his heritage?",
+   "start": 644.595,
+   "end": 653.576
+  },
+  {
+   "segment": "scripture-micah-delight",
+   "text": "he retaineth not his anger for ever, because he delighteth in mercy.",
+   "start": 653.876,
+   "end": 659.231
+  },
+  {
+   "segment": "prayer-gratitude-mercy",
+   "text": "Lord, thank you that you enjoy showing mercy.",
+   "start": 661.031,
+   "end": 664.273
+  },
+  {
+   "segment": "prayer-gratitude-mercy",
+   "text": "Thank you for every time you have forgiven me without reminding me of my failures.",
+   "start": 664.573,
+   "end": 670.653
+  },
+  {
+   "segment": "prayer-gratitude-mercy",
+   "text": "Thank you for the people who have shown me grace when I did not deserve it, because their kindness was a reflection of yours.",
+   "start": 670.953,
+   "end": 679.124
+  },
+  {
+   "segment": "prayer-gratitude-mercy",
+   "text": "Let gratitude grow in me tonight until it is larger than my regret.",
+   "start": 679.424,
+   "end": 684.587
+  },
+  {
+   "segment": "prayer-gratitude-mercy",
+   "text": "I want to fall asleep thankful, not ashamed.",
+   "start": 684.887,
+   "end": 688.599
+  },
+  {
+   "segment": "prayer-clean-heart",
+   "text": "Lord, I do not only want my record cleared.",
+   "start": 690.099,
+   "end": 693.469
+  },
+  {
+   "segment": "prayer-clean-heart",
+   "text": "I want my heart changed.",
+   "start": 693.769,
+   "end": 695.988
+  },
+  {
+   "segment": "prayer-clean-heart",
+   "text": "Where impatience has become a habit, grow patience in me.",
+   "start": 696.288,
+   "end": 700.533
+  },
+  {
+   "segment": "prayer-clean-heart",
+   "text": "Where I have learned to shade the truth, make me honest.",
+   "start": 700.833,
+   "end": 704.716
+  },
+  {
+   "segment": "prayer-clean-heart",
+   "text": "Where I keep reaching for control, teach me trust.",
+   "start": 705.016,
+   "end": 708.835
+  },
+  {
+   "segment": "prayer-clean-heart",
+   "text": "Do this work slowly and deeply, the way a garden changes through many quiet nights.",
+   "start": 709.135,
+   "end": 715.599
+  },
+  {
+   "segment": "prayer-clean-heart",
+   "text": "I give you permission to keep shaping me.",
+   "start": 715.899,
+   "end": 718.779
+  },
+  {
+   "segment": "scripture-psalm-clean",
+   "text": "Create in me a clean heart, O God;",
+   "start": 720.279,
+   "end": 723.265
+  },
+  {
+   "segment": "scripture-psalm-clean",
+   "text": "and renew a right spirit within me.",
+   "start": 723.565,
+   "end": 726.36
+  },
+  {
+   "segment": "declaration",
+   "text": "I am honest with God about what I did today.",
+   "start": 728.16,
+   "end": 731.744
+  },
+  {
+   "segment": "declaration",
+   "text": "I am forgiven because God delights in mercy, not because I have earned it.",
+   "start": 732.044,
+   "end": 737.633
+  },
+  {
+   "segment": "declaration",
+   "text": "I am free to make repair without being ruled by shame.",
+   "start": 737.933,
+   "end": 742.285
+  },
+  {
+   "segment": "declaration",
+   "text": "I release the person who hurt me into God's hands.",
+   "start": 742.585,
+   "end": 746.297
+  },
+  {
+   "segment": "declaration",
+   "text": "I can learn from this day without being defined by it.",
+   "start": 746.597,
+   "end": 750.971
+  },
+  {
+   "segment": "declaration",
+   "text": "Tomorrow I begin again, as someone welcomed and held by the Father.",
+   "start": 751.271,
+   "end": 756.753
+  },
+  {
+   "segment": "payoff",
+   "text": "Before the readings for sleep, make one small decision.",
+   "start": 758.253,
+   "end": 762.413
+  },
+  {
+   "segment": "payoff",
+   "text": "Think of the one act of repair that would honor what you prayed, and give it a time.",
+   "start": 762.713,
+   "end": 768.537
+  },
+  {
+   "segment": "payoff",
+   "text": "It might be, at lunch tomorrow I will send a short apology to my brother.",
+   "start": 768.837,
+   "end": 774.747
+  },
+  {
+   "segment": "payoff",
+   "text": "If it helps, write just that sentence somewhere you will see it.",
+   "start": 775.047,
+   "end": 779.185
+  },
+  {
+   "segment": "payoff",
+   "text": "Then set it down.",
+   "start": 779.485,
+   "end": 781.235
+  },
+  {
+   "segment": "payoff",
+   "text": "The repair has a place in tomorrow, so tonight can be given to rest.",
+   "start": 781.535,
+   "end": 786.697
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Father, I place that one step into your care.",
+   "start": 788.197,
+   "end": 791.483
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "When the time comes, give me clear and gentle words.",
+   "start": 791.783,
+   "end": 795.9
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "If you show me that a different step would be wiser, help me listen.",
+   "start": 796.2,
+   "end": 801.043
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "For now, I do not need to rehearse the conversation over and over.",
+   "start": 801.343,
+   "end": 806.42
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "I have confessed, I have been forgiven, and I have a next step.",
+   "start": 806.72,
+   "end": 811.093
+  },
+  {
+   "segment": "prayer-commitment",
+   "text": "Let that be enough for tonight.",
+   "start": 811.393,
+   "end": 813.548
+  },
+  {
+   "segment": "cta",
+   "text": "If you have received God's forgiveness tonight, you can type amen in the comments.",
+   "start": 815.048,
+   "end": 820.957
+  },
+  {
+   "segment": "cta",
+   "text": "You can also leave a prayer request there, and in our next night prayer we will pray over the requests you share.",
+   "start": 821.257,
+   "end": 828.937
+  },
+  {
+   "segment": "cta",
+   "text": "Now let Scripture carry you toward sleep.",
+   "start": 829.237,
+   "end": 832.309
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "From here the words slow down.",
+   "start": 833.609,
+   "end": 836.084
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "There will be short readings and quiet prayers about the mercy of God.",
+   "start": 836.384,
+   "end": 841.717
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "You do not need to follow each one closely.",
+   "start": 842.017,
+   "end": 845.367
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "If your mind drifts, that is all right.",
+   "start": 845.667,
+   "end": 848.696
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "Let your body be heavy where it rests, and let the sound of the voice be a gentle companion.",
+   "start": 848.996,
+   "end": 855.695
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "The work of this evening is finished.",
+   "start": 855.995,
+   "end": 858.555
+  },
+  {
+   "segment": "sleep-introduction",
+   "text": "What remains is to receive.",
+   "start": 858.855,
+   "end": 861.009
+  },
+  {
+   "segment": "sleep-luke-father",
+   "text": "And he arose, and came to his father.",
+   "start": 862.809,
+   "end": 865.711
+  },
+  {
+   "segment": "sleep-luke-father",
+   "text": "But when he was yet a great way off, his father saw him, and had compassion, and ran, and fell on his neck, and kissed him.",
+   "start": 866.011,
+   "end": 874.608
+  },
+  {
+   "segment": "sleep-prayer-homecoming",
+   "text": "Father, thank you for running toward me when I turn back.",
+   "start": 876.408,
+   "end": 880.312
+  },
+  {
+   "segment": "sleep-prayer-homecoming",
+   "text": "Thank you for the embrace that comes before my explanation is complete.",
+   "start": 880.612,
+   "end": 885.796
+  },
+  {
+   "segment": "sleep-prayer-homecoming",
+   "text": "As I lie down, let me rest like someone who has come home, not like someone still standing at the gate.",
+   "start": 886.096,
+   "end": 893.627
+  },
+  {
+   "segment": "sleep-prayer-homecoming",
+   "text": "Let the quiet of this room feel like the quiet of your house, where I am known and wanted.",
+   "start": 893.927,
+   "end": 900.092
+  },
+  {
+   "segment": "sleep-isaiah-blot",
+   "text": "I, even I, am he that blotteth out thy transgressions for mine own sake, and will not remember thy sins.",
+   "start": 901.592,
+   "end": 910.317
+  },
+  {
+   "segment": "sleep-stillness",
+   "text": "You can rest in the silence for a little while.",
+   "start": 912.117,
+   "end": 915.424
+  },
+  {
+   "segment": "sleep-stillness",
+   "text": "Nothing needs to be solved.",
+   "start": 915.724,
+   "end": 917.964
+  },
+  {
+   "segment": "sleep-stillness",
+   "text": "Let your breathing find its own unhurried rhythm, and let your hands lie open, as if they had just released something heavy.",
+   "start": 918.264,
+   "end": 927.629
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Father, I end this day in your mercy.",
+   "start": 930.929,
+   "end": 933.873
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Thank you for hearing my confession and answering it with forgiveness.",
+   "start": 934.173,
+   "end": 939.101
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Thank you for the person I will speak to tomorrow, and for the courage you will give me then.",
+   "start": 939.401,
+   "end": 945.737
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Watch over me through the night.",
+   "start": 946.037,
+   "end": 948.363
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Let me rest as one who is clean, welcomed, and deeply loved.",
+   "start": 948.663,
+   "end": 953.377
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "I place my sleep and my waking in your hands.",
+   "start": 953.677,
+   "end": 957.453
+  },
+  {
+   "segment": "sleep-prayer-closing",
+   "text": "Amen.",
+   "start": 957.753,
+   "end": 958.948
+  }
+ ],
+ "overlay": {
+  "brand": "HeroVerse Prayer",
+  "title": "Rest in His Mercy Tonight",
+  "title_card_seconds": 2.0
+ },
+ "persistent_overlays": [
+  "brand"
+ ],
+ "caption_style": {
+  "box": false,
+  "alignment": "bottom-centre",
+  "outline": 4,
+  "words_max": 7
+ },
+ "cta": [],
+ "scripture_cards": [
+  {
+   "segment": "scripture-isaiah-reason",
+   "reference": "Isaiah 1:18 (KJV)",
+   "start": 54.691,
+   "end": 67.771
+  },
+  {
+   "segment": "scripture-psalm-acknowledged",
+   "reference": "Psalm 32:5 (KJV)",
+   "start": 199.12,
+   "end": 212.712
+  },
+  {
+   "segment": "scripture-romans-condemnation",
+   "reference": "Romans 8:1 (KJV)",
+   "start": 347.456,
+   "end": 356.864
+  },
+  {
+   "segment": "scripture-john-greater",
+   "reference": "1 John 3:20 (KJV)",
+   "start": 387.497,
+   "end": 393.556
+  },
+  {
+   "segment": "scripture-ephesians-kind",
+   "reference": "Ephesians 4:32 (KJV)",
+   "start": 518.619,
+   "end": 527.472
+  },
+  {
+   "segment": "scripture-colossians-forbearing",
+   "reference": "Colossians 3:13 (KJV)",
+   "start": 602.735,
+   "end": 606.404
+  },
+  {
+   "segment": "scripture-micah-delight",
+   "reference": "Micah 7:18 (KJV)",
+   "start": 644.595,
+   "end": 653.576
+  },
+  {
+   "segment": "scripture-psalm-clean",
+   "reference": "Psalm 51:10 (KJV)",
+   "start": 720.279,
+   "end": 726.36
+  },
+  {
+   "segment": "sleep-luke-father",
+   "reference": "Luke 15:20 (KJV)",
+   "start": 862.809,
+   "end": 874.608
+  },
+  {
+   "segment": "sleep-isaiah-blot",
+   "reference": "Isaiah 43:25 (KJV)",
+   "start": 901.592,
+   "end": 910.317
+  }
+ ],
+ "scene_target_seconds": 5.5,
+ "crossfade_seconds": 0.6,
+ "cinematic": {
+  "depth_model": {
+   "name": "Depth Anything V2 Small (ONNX)",
+   "licence": "apache-2.0",
+   "sha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c"
+  },
+  "grade": "colorbalance=rs=-0.015:bs=0.02:rh=0.03:gh=0.01:bh=-0.03,eq=contrast=1.04:saturation=1.04",
+  "look": "split[base][glow];[glow]scale=640:360,curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale=2560:1440[halo];[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,vignette=angle=PI/6:mode=forward,noise=c0s=4:c0f=t+u",
+  "atmosphere": [
+   "bg-night-sky",
+   "bg-moon-lake",
+   "bg-starry-hills",
+   "bg-starry-forest",
+   "bg-moonlit-sea"
+  ]
+ },
+ "clips": [
+  {
+   "id": "clip-night-solar-eclipse-sun-moon-celestial-event-n",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-370344/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-370344/)",
+   "vetting": "APPROVED",
+   "sha256": "49659df1b7915602601eb3cc198889c481ce9a6316da19e8a68612fe74f623b3",
+   "release_asset": "footage-clip-night-solar-eclipse-sun-moon-celestial-event-n-sha256-49659df1b7915602601eb3cc198889c481ce9a6316da19e8a68612fe74f623b3.mp4"
+  },
+  {
+   "id": "clip-candle-flame-candle-fire-light",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-141440/",
+   "author": "Hepner",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Hepner via Pixabay (https://pixabay.com/videos/id-141440/)",
+   "vetting": "APPROVED",
+   "sha256": "4c68cafc220449696e48b1119eaef42835f3a6027decd67bfe6cfba80eaae5a1",
+   "release_asset": "footage-clip-candle-flame-candle-fire-light-sha256-4c68cafc220449696e48b1119eaef42835f3a6027decd67bfe6cfba80eaae5a1.mp4"
+  },
+  {
+   "id": "clip-rain-puddle-raindrops-rain-water-reflection-w",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-217710/",
+   "author": "YanaHD",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: YanaHD via Pixabay (https://pixabay.com/videos/id-217710/)",
+   "vetting": "APPROVED",
+   "sha256": "6c65bb46c0bb996d876a1aab96c9b8b2cd540765ee85ea340b661e9eef084f19",
+   "release_asset": "footage-clip-rain-puddle-raindrops-rain-water-reflection-w-sha256-6c65bb46c0bb996d876a1aab96c9b8b2cd540765ee85ea340b661e9eef084f19.mp4"
+  },
+  {
+   "id": "clip-night-starry-sky-night-sky-moon-moonrise-moonl",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-219754/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-219754/)",
+   "vetting": "APPROVED",
+   "sha256": "ccdcf68104a600e62a4a5ac4ca13c9c3527cc646a622674d146e9d91f3a4397d",
+   "release_asset": "footage-clip-night-starry-sky-night-sky-moon-moonrise-moonl-sha256-ccdcf68104a600e62a4a5ac4ca13c9c3527cc646a622674d146e9d91f3a4397d.mp4"
+  },
+  {
+   "id": "clip-candle-candle-candlelight-flame-burn-fire-light",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-128121/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-128121/)",
+   "vetting": "APPROVED",
+   "sha256": "de89f5e6204f078a3d44850b23e1523d027e7053fdbd7042e9a23c4a72021e25",
+   "release_asset": "footage-clip-candle-candle-candlelight-flame-burn-fire-light-sha256-de89f5e6204f078a3d44850b23e1523d027e7053fdbd7042e9a23c4a72021e25.mp4"
+  },
+  {
+   "id": "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-295209/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-295209/)",
+   "vetting": "APPROVED",
+   "sha256": "97a85e79545dfba5f5b8757501fde192018608a9ebca388fda7ec498d424e65f",
+   "release_asset": "footage-clip-rain-hibiscus-marshmallow-blossoms-raindrop-p-sha256-97a85e79545dfba5f5b8757501fde192018608a9ebca388fda7ec498d424e65f.mp4"
+  },
+  {
+   "id": "clip-night-tree-bare-tree-stars-fog-mist-forest-bra",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-134913/",
+   "author": "ChristianBodhi",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-134913/)",
+   "vetting": "APPROVED",
+   "sha256": "6b027fb9baea3de213da7282aa6520572ac7bfb077b81e238991502c8ac24e46",
+   "release_asset": "footage-clip-night-tree-bare-tree-stars-fog-mist-forest-bra-sha256-6b027fb9baea3de213da7282aa6520572ac7bfb077b81e238991502c8ac24e46.mp4"
+  },
+  {
+   "id": "clip-candle-candle-flame-bokeh-burning-candle-candle",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-93480/",
+   "author": "jrydertr",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: jrydertr via Pixabay (https://pixabay.com/videos/id-93480/)",
+   "vetting": "APPROVED",
+   "sha256": "4308b69c4df7b01a8a16dc70585853be95d15a1c2ac971cfba8709fe3fff5c57",
+   "release_asset": "footage-clip-candle-candle-flame-bokeh-burning-candle-candle-sha256-4308b69c4df7b01a8a16dc70585853be95d15a1c2ac971cfba8709fe3fff5c57.mp4"
+  },
+  {
+   "id": "clip-clouds-clouds-stars-full-moon-night-sky-light-m",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-23567/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-23567/)",
+   "vetting": "APPROVED",
+   "sha256": "04e2e39dffd6fed44290dd39817cd33fdce9303e224636690828030786d0460e",
+   "release_asset": "footage-clip-clouds-clouds-stars-full-moon-night-sky-light-m-sha256-04e2e39dffd6fed44290dd39817cd33fdce9303e224636690828030786d0460e.mp4"
+  },
+  {
+   "id": "clip-candle-candle-flame-burn-light-candlelight-wick",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-132766/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-132766/)",
+   "vetting": "APPROVED",
+   "sha256": "e96984e6c142a87a18b6a53f420743300f9646e49dd72b72f9c7bb808794885c",
+   "release_asset": "footage-clip-candle-candle-flame-burn-light-candlelight-wick-sha256-e96984e6c142a87a18b6a53f420743300f9646e49dd72b72f9c7bb808794885c.mp4"
+  },
+  {
+   "id": "clip-night-aurora-borealis-northern-lights-atmosphe",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-90877/",
+   "author": "6696758",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: 6696758 via Pixabay (https://pixabay.com/videos/id-90877/)",
+   "vetting": "APPROVED",
+   "sha256": "684665a1ea5b9d2ad979794ce09aca6061c0afa95edc20e1de4047bc5a133eaa",
+   "release_asset": "footage-clip-night-aurora-borealis-northern-lights-atmosphe-sha256-684665a1ea5b9d2ad979794ce09aca6061c0afa95edc20e1de4047bc5a133eaa.mp4"
+  },
+  {
+   "id": "clip-candle-candle-light-flame-burn-match-candleligh",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-143419/",
+   "author": "NickyPe",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-143419/)",
+   "vetting": "APPROVED",
+   "sha256": "503ee14db068caa78bb551fdf209822c8e66a3aae6aa8facaa75d5bfb94c0ea3",
+   "release_asset": "footage-clip-candle-candle-light-flame-burn-match-candleligh-sha256-503ee14db068caa78bb551fdf209822c8e66a3aae6aa8facaa75d5bfb94c0ea3.mp4"
+  },
+  {
+   "id": "clip-night-aurora-borealis-northern-lights-lights-s",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-166292/",
+   "author": "6696758",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: 6696758 via Pixabay (https://pixabay.com/videos/id-166292/)",
+   "vetting": "APPROVED",
+   "sha256": "357ac72d40b28ee5bbfe851bc292adecc74768b242da4e020c50f3996184a83d",
+   "release_asset": "footage-clip-night-aurora-borealis-northern-lights-lights-s-sha256-357ac72d40b28ee5bbfe851bc292adecc74768b242da4e020c50f3996184a83d.mp4"
+  },
+  {
+   "id": "clip-candle-candlelight-candle-flame-light-fire-calm",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-123824/",
+   "author": "jrydertr",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: jrydertr via Pixabay (https://pixabay.com/videos/id-123824/)",
+   "vetting": "APPROVED",
+   "sha256": "edfb9cec8e4e09ba72346af1cd2afa1b259c4d94b48b140337feae2e800be967",
+   "release_asset": "footage-clip-candle-candlelight-candle-flame-light-fire-calm-sha256-edfb9cec8e4e09ba72346af1cd2afa1b259c4d94b48b140337feae2e800be967.mp4"
+  },
+  {
+   "id": "clip-night-blackthorn-bud-blossom-bloom-feather-flo",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-71457/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-71457/)",
+   "vetting": "APPROVED",
+   "sha256": "935ee4c1b47914ad2e105b56e81606cc74566c300fb738d6d862ad491bef5b59",
+   "release_asset": "footage-clip-night-blackthorn-bud-blossom-bloom-feather-flo-sha256-935ee4c1b47914ad2e105b56e81606cc74566c300fb738d6d862ad491bef5b59.mp4"
+  },
+  {
+   "id": "clip-candle-candlelight-candle-light-fire-flame-burn",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-123891/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-123891/)",
+   "vetting": "APPROVED",
+   "sha256": "2e523818799bbbf7e3a27763b42bb84c63dc0675e7c6a1be4f863d2f89b9f84d",
+   "release_asset": "footage-clip-candle-candlelight-candle-light-fire-flame-burn-sha256-2e523818799bbbf7e3a27763b42bb84c63dc0675e7c6a1be4f863d2f89b9f84d.mp4"
+  },
+  {
+   "id": "clip-night-daffodils-easter-bells-spring-easter-to-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-112389/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-112389/)",
+   "vetting": "APPROVED",
+   "sha256": "feaf857621908e8df5e7425ac28cb2825c2c440e96c09f3933dc11e730ea4ff8",
+   "release_asset": "footage-clip-night-daffodils-easter-bells-spring-easter-to--sha256-feaf857621908e8df5e7425ac28cb2825c2c440e96c09f3933dc11e730ea4ff8.mp4"
+  },
+  {
+   "id": "clip-night-dandelion-faded-seeds-pointed-flower-fly",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-23263/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-23263/)",
+   "vetting": "APPROVED",
+   "sha256": "898dfea0498c01328c6d3153328b35696d2d4c46f6b219848695627ad584edad",
+   "release_asset": "footage-clip-night-dandelion-faded-seeds-pointed-flower-fly-sha256-898dfea0498c01328c6d3153328b35696d2d4c46f6b219848695627ad584edad.mp4"
+  },
+  {
+   "id": "clip-night-flower-christmas-roses-wilt-wither-time-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-109365/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-109365/)",
+   "vetting": "APPROVED",
+   "sha256": "2c963ebc7f73d299e8cc2745227b0391587b40a7435335dd622f6c1ecce10a53",
+   "release_asset": "footage-clip-night-flower-christmas-roses-wilt-wither-time--sha256-2c963ebc7f73d299e8cc2745227b0391587b40a7435335dd622f6c1ecce10a53.mp4"
+  },
+  {
+   "id": "clip-night-flower-mednille-to-flourish-blossom-bloo",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-107914/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-107914/)",
+   "vetting": "APPROVED",
+   "sha256": "79bf707a1d55a4fcd29b95ef58cc01f993e3056c50c9afbe078b553d3b4cc807",
+   "release_asset": "footage-clip-night-flower-mednille-to-flourish-blossom-bloo-sha256-79bf707a1d55a4fcd29b95ef58cc01f993e3056c50c9afbe078b553d3b4cc807.mp4"
+  },
+  {
+   "id": "clip-night-moon-full-moon-super-moon-night-moonligh",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-35455/",
+   "author": "Elynde",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Elynde via Pixabay (https://pixabay.com/videos/id-35455/)",
+   "vetting": "APPROVED",
+   "sha256": "ac7622066c15e055af98b6b4275fb258b4c5d7f8a3a9d16c6822aed7f9ad93d8",
+   "release_asset": "footage-clip-night-moon-full-moon-super-moon-night-moonligh-sha256-ac7622066c15e055af98b6b4275fb258b4c5d7f8a3a9d16c6822aed7f9ad93d8.mp4"
+  },
+  {
+   "id": "clip-night-nature-tree-night-scary-full-moon-moon-s",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-350738/",
+   "author": "comfy_VZ",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: comfy_VZ via Pixabay (https://pixabay.com/videos/id-350738/)",
+   "vetting": "APPROVED",
+   "sha256": "17840a985b7c2b3b5fb33021477f2f8d59ae6b0c1a348132ce40f9cc12e794bb",
+   "release_asset": "footage-clip-night-nature-tree-night-scary-full-moon-moon-s-sha256-17840a985b7c2b3b5fb33021477f2f8d59ae6b0c1a348132ce40f9cc12e794bb.mp4"
+  },
+  {
+   "id": "clip-night-northern-lights-aurora-borealis-sky-nigh",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-236537/",
+   "author": "BlenderTimer",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: BlenderTimer via Pixabay (https://pixabay.com/videos/id-236537/)",
+   "vetting": "APPROVED",
+   "sha256": "c6f47ff023dab0490ee1da932ae7add58e4f10653ecde2b3c6f617feb88947c0",
+   "release_asset": "footage-clip-night-northern-lights-aurora-borealis-sky-nigh-sha256-c6f47ff023dab0490ee1da932ae7add58e4f10653ecde2b3c6f617feb88947c0.mp4"
+  },
+  {
+   "id": "clip-night-northern-lights-aurora-night-natural-won",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-242214/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-242214/)",
+   "vetting": "APPROVED",
+   "sha256": "b0fe91af01807d86968bed583779b3a57abd163fa8741d9f917145e87e5a86b8",
+   "release_asset": "footage-clip-night-northern-lights-aurora-night-natural-won-sha256-b0fe91af01807d86968bed583779b3a57abd163fa8741d9f917145e87e5a86b8.mp4"
+  },
+  {
+   "id": "clip-night-pea-blossom-bloom-to-flourish-bloom-blos",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-24310/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-24310/)",
+   "vetting": "APPROVED",
+   "sha256": "8535529395274327871cfff9181ab08855d1a010dbc426cba4babc38b589d9b8",
+   "release_asset": "footage-clip-night-pea-blossom-bloom-to-flourish-bloom-blos-sha256-8535529395274327871cfff9181ab08855d1a010dbc426cba4babc38b589d9b8.mp4"
+  }
+ ],
+ "shots": [],
+ "timeline": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 8.089
+  },
+  {
+   "id": "roadmap",
+   "start": 9.289,
+   "end": 22.753
+  },
+  {
+   "id": "invitation",
+   "start": 23.553,
+   "end": 53.491
+  },
+  {
+   "id": "scripture-isaiah-reason",
+   "start": 54.691,
+   "end": 68.071
+  },
+  {
+   "id": "prayer-first-honesty",
+   "start": 69.571,
+   "end": 97.737
+  },
+  {
+   "id": "reflection-name-it",
+   "start": 98.937,
+   "end": 132.463
+  },
+  {
+   "id": "prayer-specific-word",
+   "start": 133.663,
+   "end": 161.083
+  },
+  {
+   "id": "prayer-what-i-avoided",
+   "start": 162.283,
+   "end": 192.625
+  },
+  {
+   "id": "rehook-1",
+   "start": 193.825,
+   "end": 198.52
+  },
+  {
+   "id": "scripture-psalm-acknowledged",
+   "start": 199.12,
+   "end": 214.272
+  },
+  {
+   "id": "reflection-hiding",
+   "start": 215.772,
+   "end": 248.185
+  },
+  {
+   "id": "prayer-confession-plain",
+   "start": 249.385,
+   "end": 276.571
+  },
+  {
+   "id": "prayer-receiving-pardon",
+   "start": 277.771,
+   "end": 305.852
+  },
+  {
+   "id": "rehook-2",
+   "start": 307.052,
+   "end": 313.177
+  },
+  {
+   "id": "reflection-same-again",
+   "start": 313.777,
+   "end": 346.256
+  },
+  {
+   "id": "scripture-romans-condemnation",
+   "start": 347.456,
+   "end": 357.164
+  },
+  {
+   "id": "prayer-heart-accuses",
+   "start": 358.664,
+   "end": 386.297
+  },
+  {
+   "id": "scripture-john-greater",
+   "start": 387.497,
+   "end": 393.856
+  },
+  {
+   "id": "stillness-first",
+   "start": 395.356,
+   "end": 415.009
+  },
+  {
+   "id": "rehook-3",
+   "start": 418.009,
+   "end": 423.109
+  },
+  {
+   "id": "prayer-repair-person",
+   "start": 423.709,
+   "end": 452.773
+  },
+  {
+   "id": "prayer-humility",
+   "start": 453.973,
+   "end": 484.893
+  },
+  {
+   "id": "prayer-household",
+   "start": 486.093,
+   "end": 517.419
+  },
+  {
+   "id": "scripture-ephesians-kind",
+   "start": 518.619,
+   "end": 527.772
+  },
+  {
+   "id": "rehook-4",
+   "start": 529.272,
+   "end": 534.053
+  },
+  {
+   "id": "prayer-someone-hurt-me",
+   "start": 534.653,
+   "end": 563.697
+  },
+  {
+   "id": "prayer-not-pretending",
+   "start": 564.897,
+   "end": 594.835
+  },
+  {
+   "id": "scripture-colossians-forbearing",
+   "start": 596.035,
+   "end": 606.704
+  },
+  {
+   "id": "prayer-self-compassion",
+   "start": 608.204,
+   "end": 636.797
+  },
+  {
+   "id": "rehook-5",
+   "start": 637.997,
+   "end": 643.995
+  },
+  {
+   "id": "scripture-micah-delight",
+   "start": 644.595,
+   "end": 659.531
+  },
+  {
+   "id": "prayer-gratitude-mercy",
+   "start": 661.031,
+   "end": 688.899
+  },
+  {
+   "id": "prayer-clean-heart",
+   "start": 690.099,
+   "end": 719.079
+  },
+  {
+   "id": "scripture-psalm-clean",
+   "start": 720.279,
+   "end": 726.66
+  },
+  {
+   "id": "declaration",
+   "start": 728.16,
+   "end": 757.053
+  },
+  {
+   "id": "payoff",
+   "start": 758.253,
+   "end": 786.997
+  },
+  {
+   "id": "prayer-commitment",
+   "start": 788.197,
+   "end": 813.848
+  },
+  {
+   "id": "cta",
+   "start": 815.048,
+   "end": 832.609
+  },
+  {
+   "id": "sleep-introduction",
+   "start": 833.609,
+   "end": 861.309
+  },
+  {
+   "id": "sleep-luke-father",
+   "start": 862.809,
+   "end": 874.908
+  },
+  {
+   "id": "sleep-prayer-homecoming",
+   "start": 876.408,
+   "end": 900.392
+  },
+  {
+   "id": "sleep-isaiah-blot",
+   "start": 901.592,
+   "end": 910.617
+  },
+  {
+   "id": "sleep-stillness",
+   "start": 912.117,
+   "end": 927.929
+  },
+  {
+   "id": "sleep-prayer-closing",
+   "start": 930.929,
+   "end": 959.248
+  }
+ ],
+ "upload_performed": false,
+ "publication_performed": false
+}
