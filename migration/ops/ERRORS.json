@@ -613,6 +613,16 @@
     "file": "migration/production/test_preview_gate.py",
     "contains": "def test_footage_rejected_in_the_library_stops_preview_and_render"
    }
+  },
+  {
+   "id": "E79",
+   "date": "2026-10-25",
+   "error": "The owner saw that the long's footage was landscapes unrelated to the narration. still_render.footage_holds cycled script['footage'] in list order across the whole video, and footage/assign.py chose clips by mood (night or morning themes) only, so a story long would show a waterfall over the serpent's words; nothing in the gate tied a clip to what is being said (the Shorts already search a clip per line).",
+   "fix": "Story segments name the clips mined for their words (segments[].shots, queried per segment from pilot-NNN/beats-N.json through footage.yml's new queries input); footage_holds fills each segment's cuts with its own clips first and never puts one segment's clip over another's words; script_check.picture_problems refuses a spoken segment with fewer matched shots than its cuts (PICTURE_UNMATCHED), a shot missing from footage and any clip no segment named (FOOTAGE_NOT_MATCHED_TO_WORDS); the preview review checks each clip against its segment's words.",
+   "antidote": {
+    "file": "migration/production/test_still_render.py",
+    "contains": "def test_each_segment_shows_the_clips_mined_for_its_words"
+   }
   }
  ]
 }

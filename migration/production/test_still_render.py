@@ -200,6 +200,27 @@ class StoryStills(unittest.TestCase):
         self.assertTrue(all(b - a >= sr.REPEAT_GAP - 1e-6 for a, b in zip(starts, starts[1:])), starts)
 
 
+class StoryShots(unittest.TestCase):
+    """Owner, 2026-10-25: "the videos must talk with the story and what is being said". A segment's own clips (mined
+    for its words) fill its cuts; the library cycle never puts an unrelated landscape over them."""
+    def test_each_segment_shows_the_clips_mined_for_its_words(self):
+        total = 120.0
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": ["st-a"],
+                  "footage": [f"clip-landscape-{i}" for i in range(8)] + ["clip-serpent", "clip-serpent-b", "clip-river",
+                                                                    "clip-river-b", "clip-fruit", "clip-fruit-b"],
+                  "segments": [{"id": "hook", "text": "x", "shots": ["clip-serpent", "clip-serpent-b"]},
+                               {"id": "river", "text": "x", "shots": ["clip-river", "clip-river-b"]},
+                               {"id": "fruit", "text": "x", "shots": ["clip-fruit", "clip-fruit-b"]}]}
+        sents = [{"start": 0.3 + 5.0 * k, "end": 0.3 + 5.0 * k + 4.0, "text": "x"} for k in range(int(total // 5.0))]
+        segs = [{"id": "hook", "start": 0.3, "end": 18.0}, {"id": "river", "start": 18.0, "end": 36.0},
+                {"id": "fruit", "start": 36.0, "end": 54.0}, {"id": "rest", "start": 54.0, "end": total}]
+        plan = sr.holds(script, {"sentences": sents, "segments": segs}, total)
+        for lo, hi, clip in ((0.0, 18.0, "clip-serpent"), (18.0, 36.0, "clip-river"), (36.0, 54.0, "clip-fruit")):
+            inside = [h["image"] for h in plan if lo <= (h["start"] + h["end"]) / 2 < hi]
+            self.assertTrue(inside and all(i.startswith(clip) for i in inside), (clip, inside))
+        self.assertTrue(all(b - a >= 0 for a, b in zip([h["start"] for h in plan], [h["start"] for h in plan][1:])))
+
+
 class SpeechText(unittest.TestCase):
     """E47: the voice spelled "G-O-D" for the KJV "Lord GOD" (pilot-008 review, 17:36)."""
 

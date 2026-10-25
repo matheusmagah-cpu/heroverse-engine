@@ -51,6 +51,11 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
   (`production/bible/long/`): technical floors equal to v4 (loudness, true peak, speech, WER, black and silence
   scan), Claude review at 9.5, AI visuals disclosed. Prayer-only rules (prayer hook, "prayer request" CTA, morning or
   night titles) do not apply to the story format; no frozen v2/v3/v4 file is edited.
+- Picture follows the words (owner, 2026-10-25: "not any landscape"). Every segment of a story long names the
+  clips mined for what it says (`shots`), from `pilot-NNN/beats-N.json` (one query per segment, run through
+  `footage.yml` with `queries`), and the moment stills of what footage cannot show (people, the cherubim). The gate
+  (`script_check.picture_problems`) refuses a segment without enough matched shots for its cuts and any clip no
+  segment asked for. vidIQ AI clips stay at the Shorts' hooks: they are below the long's 1440p floor (QA v4).
 - Measured each day by the live intelligence: views of each long from Shorts, long retention, subscribers per arc.
 
 ## Credits (vidIQ: ~4,200 on 2026-10-24; renewal of 6,000 on 2026-11-18)

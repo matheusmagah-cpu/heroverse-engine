@@ -1,0 +1,187 @@
+{
+ "version": "footage-beats-v1",
+ "library": "migration/production/footage/library",
+ "note": "pilot-015 (Genesis 1-3): one theme per script segment, queried for what that segment says (owner, 2026-10-25: the picture follows the words). No people, text or branding (footage.py BLOCK); every clip is vetted on its frame sheet and checked against its words before script.json names it in the segment's shots.",
+ "themes": [
+  {
+   "theme": "g13-rehook-3",
+   "query": "dark clouds timelapse"
+  },
+  {
+   "theme": "g13-chapter-3",
+   "query": "snake slithering"
+  },
+  {
+   "theme": "g13-c3-question",
+   "query": "snake tree branch"
+  },
+  {
+   "theme": "g13-c3-question",
+   "query": "python snake"
+  },
+  {
+   "theme": "g13-c3-answer",
+   "query": "fruit tree garden"
+  },
+  {
+   "theme": "g13-c3-answer",
+   "query": "pomegranate tree"
+  },
+  {
+   "theme": "g13-c3-answer",
+   "query": "fig tree"
+  },
+  {
+   "theme": "g13-c3-lie",
+   "query": "snake tongue"
+  },
+  {
+   "theme": "g13-c3-lie",
+   "query": "snake close up"
+  },
+  {
+   "theme": "g13-c3-note",
+   "query": "snake eyes"
+  },
+  {
+   "theme": "g13-c3-take",
+   "query": "red apple tree"
+  },
+  {
+   "theme": "g13-c3-take",
+   "query": "apple falling"
+  },
+  {
+   "theme": "g13-c3-eyes",
+   "query": "fig leaves"
+  },
+  {
+   "theme": "g13-c3-eyes",
+   "query": "withered leaves"
+  },
+  {
+   "theme": "g13-c3-close",
+   "query": "dark forest shadows"
+  },
+  {
+   "theme": "g13-rehook-4",
+   "query": "forest shadows sunlight"
+  },
+  {
+   "theme": "g13-chapter-4",
+   "query": "wind trees evening"
+  },
+  {
+   "theme": "g13-c4-walk",
+   "query": "leaves wind sunset"
+  },
+  {
+   "theme": "g13-c4-walk",
+   "query": "garden evening breeze"
+  },
+  {
+   "theme": "g13-c4-note",
+   "query": "forest light rays"
+  },
+  {
+   "theme": "g13-c4-afraid",
+   "query": "dense bushes"
+  },
+  {
+   "theme": "g13-c4-afraid",
+   "query": "dark forest"
+  },
+  {
+   "theme": "g13-c4-afraid",
+   "query": "thick undergrowth"
+  },
+  {
+   "theme": "g13-c4-afraid",
+   "query": "ferns forest"
+  },
+  {
+   "theme": "g13-c4-blame",
+   "query": "cracked dry earth"
+  },
+  {
+   "theme": "g13-c4-promise",
+   "query": "snake head"
+  },
+  {
+   "theme": "g13-c4-promise",
+   "query": "snake dust"
+  },
+  {
+   "theme": "g13-c4-promise",
+   "query": "viper"
+  },
+  {
+   "theme": "g13-rehook-4b",
+   "query": "dawn horizon light"
+  },
+  {
+   "theme": "g13-c4-cost",
+   "query": "thorns thistles"
+  },
+  {
+   "theme": "g13-c4-cost",
+   "query": "thorny bush"
+  },
+  {
+   "theme": "g13-c4-cost",
+   "query": "dry desert ground"
+  },
+  {
+   "theme": "g13-c4-cost",
+   "query": "wheat harvest field"
+  },
+  {
+   "theme": "g13-c4-coats",
+   "query": "lamb sheep"
+  },
+  {
+   "theme": "g13-c4-out",
+   "query": "desert sunset"
+  },
+  {
+   "theme": "g13-c4-out",
+   "query": "desert dunes wind"
+  },
+  {
+   "theme": "g13-c4-out",
+   "query": "barren land"
+  },
+  {
+   "theme": "g13-c4-close",
+   "query": "fire flames night"
+  },
+  {
+   "theme": "g13-reflection",
+   "query": "light through clouds"
+  },
+  {
+   "theme": "g13-reflection",
+   "query": "sun rays forest"
+  },
+  {
+   "theme": "g13-reflection",
+   "query": "sunrise over hills"
+  },
+  {
+   "theme": "g13-prayer-close",
+   "query": "calm lake sunrise"
+  },
+  {
+   "theme": "g13-prayer-close",
+   "query": "sunrise clouds"
+  },
+  {
+   "theme": "g13-cta",
+   "query": "sheep flock field"
+  },
+  {
+   "theme": "g13-cta",
+   "query": "wheat field"
+  }
+ ]
+}

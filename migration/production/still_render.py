@@ -368,14 +368,32 @@ def footage_holds(script, timeline, total):
     wanted = {x["id"]: list(x.get("stills", [])) for x in script.get("segments", []) if x.get("stills")}
     spans = [(g["start"], g["end"], g["id"]) for g in timeline.get("segments", []) if g.get("id") in wanted]
     moments = {i for ids in wanted.values() for i in ids}
+    # owner, 2026-10-25: the picture follows the words. A segment may also name the clips mined for what it says
+    # ("shots": [...]); its cuts show those clips (each of their 6.5 s parts once) before any other footage.
+    matched = {x["id"]: [f"{c}#{k}" for k in range(FOOTAGE_SEGMENTS) for c in x["shots"]]
+               for x in script.get("segments", []) if x.get("shots")}
+    where = [(g["start"], g["end"], g["id"]) for g in timeline.get("segments", []) if g.get("id") in matched]
+    owned = {i for ids in matched.values() for i in ids}
+    shots = [i for i in shots if i not in owned] or shots   # a serpent clip never fills the river's words
     out, nf, ns, seen = [], 0, 0, {}
+
+    def free(i, a):
+        return i not in seen or a - seen[i] >= REPEAT_GAP - 1e-6
+
     for a, b in zip(cuts, cuts[1:] + [total]):
         h = {"start": a, "end": round(b, 3), "figure": False}
         moment = next((wanted[i] for lo, hi, i in spans if lo - 1e-6 <= a < hi and wanted[i]), None)
+        mid = (a + b) / 2   # the words under most of the cut (the opening cut starts before the first word)
+        own = next((matched[i] for lo, hi, i in where if lo - 1e-6 <= mid < hi), [])
+        mine = next((i for i in own if free(i, a)), None)
         shot = shots[nf % len(shots)] if shots else None
-        if moment and a > 0 and (moment[0] not in seen or a - seen[moment[0]] >= REPEAT_GAP - 1e-6):
+        if moment and a > 0 and free(moment[0], a):
             h["image"], h["kind"] = moment.pop(0), "still"
-        elif shot and (shot not in seen or a - seen[shot] >= REPEAT_GAP - 1e-6):
+        elif mine:
+            h["image"], h["kind"] = mine, "footage"
+            own.remove(mine)
+            own.append(mine)
+        elif shot and free(shot, a):
             h["image"], h["kind"] = shot, "footage"
             nf += 1
         else:   # fallback stills never reuse a story moment's still (its own time is in its segment)
