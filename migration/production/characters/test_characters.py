@@ -28,7 +28,7 @@ class Characters(unittest.TestCase):
                 for shot in ch.REF_ORDER:
                     Path(d, f"ch-{cid}-{shot}.json").write_text(json.dumps(
                         {"release_asset": f"characters-img-ch-{cid}-{shot}-sha256-x.png"}))
-            urls = ch.reference_urls(["adam", "eve"], d)
+            urls = ch.reference_urls(["adam", "eve"], d, chars={})
             self.assertEqual(len(urls), ch.MAX_REFS)
             self.assertTrue(all(u.startswith(ch.RELEASE) for u in urls))
             self.assertEqual([u.split("ch-")[1].split("-sha")[0] for u in urls[:2]], ["adam-front", "eve-front"])
@@ -40,6 +40,20 @@ class Characters(unittest.TestCase):
             c = chars[img["character"]]
             self.assertIn(c["look"], img["prompt"], img["id"])
             self.assertEqual(img["seed"], c["seed"], img["id"])
+
+    def test_only_the_kept_shots_are_references(self):
+        with tempfile.TemporaryDirectory() as d:
+            for shot in ch.REF_ORDER:
+                Path(d, f"ch-eve-{shot}.json").write_text(json.dumps({"release_asset": f"ch-eve-{shot}-sha256-x.png"}))
+            urls = ch.reference_urls(["eve"], d, chars={"eve": {"refs": ["full"]}})
+            self.assertEqual([u.rsplit("/", 1)[1] for u in urls], ["ch-eve-full-sha256-x.png"])
+
+    def test_every_approved_character_has_its_kept_references_recorded(self):
+        for cid, c in ch.registry().items():
+            if c["status"] == "APPROVED":
+                self.assertTrue(c.get("refs"), cid)
+                for shot in c["refs"]:
+                    self.assertTrue((ch.HERE / "images" / f"ch-{cid}-{shot}.json").exists(), (cid, shot))
 
 
 if __name__ == "__main__":

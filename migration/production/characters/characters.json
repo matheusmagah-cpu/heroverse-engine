@@ -5,35 +5,48 @@
   "adam": {
    "name": "Adam",
    "first_story": "Genesis 2",
-   "status": "DRAFT",
+   "status": "APPROVED",
    "seed": 7101,
    "look": "a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build",
    "wardrobe": {
     "eden": "seen from the chest up among tall green leaves",
     "after-fall": "a rough tan animal-hide garment over one shoulder, tied with a leather cord"
-   }
+   },
+   "refs": [
+    "front"
+   ],
+   "reviewed": "2026-10-25 (run 40218516955): front kept as the one face of Adam; three-quarter and full rejected (a different face, a strap with a metal buckle, not a full figure)"
   },
   "eve": {
    "name": "Eve",
    "first_story": "Genesis 2",
-   "status": "DRAFT",
+   "status": "APPROVED",
    "seed": 7201,
    "look": "a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build",
    "wardrobe": {
     "eden": "seen from the shoulders up among tall green leaves, her long hair over her shoulders",
     "after-fall": "a rough tan animal-hide garment tied at the shoulder with a leather cord"
-   }
+   },
+   "refs": [
+    "full"
+   ],
+   "reviewed": "2026-10-25 (run 40218516955): the 'full' portrait kept as the one face of Eve (olive skin, natural); front rejected (jewellery, earring, glamour make-up), three-quarter rejected (lighter skin, a second face)"
   },
   "serpent": {
    "name": "The serpent",
    "first_story": "Genesis 3",
-   "status": "DRAFT",
+   "status": "APPROVED",
    "seed": 7301,
    "look": "a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue",
    "wardrobe": {
     "garden": "coiled along a low branch of a fruit tree",
     "cursed": "moving low through dust and dry grass"
-   }
+   },
+   "refs": [
+    "three-quarter",
+    "full"
+   ],
+   "reviewed": "2026-10-25 (run 40218516955): three-quarter and full kept (same scales and head); front rejected (a split, doubled tongue)"
   }
  }
 }
