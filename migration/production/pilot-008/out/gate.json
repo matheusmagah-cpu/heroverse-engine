@@ -1,8 +1,8 @@
 {
  "version": "prepublish-gate-v1",
  "pilot_id": "pilot-008",
- "output_sha256": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f",
- "decision": "FAIL",
+ "output_sha256": "a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458",
+ "decision": "UNKNOWN",
  "eligible_for_automatic_publication": false,
  "dimensions": {
   "binding": "PASS",
@@ -15,7 +15,7 @@
   "rights": "PASS",
   "content_and_policy": "UNKNOWN",
   "scorecard": "UNKNOWN",
-  "full_file_scan": "FAIL",
+  "full_file_scan": "PASS",
   "structure": "PASS",
   "authenticity": "PASS",
   "preflight": "PASS"
@@ -26,13 +26,13 @@
     "source": "binding",
     "item": "manifest",
     "state": "PASS",
-    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
+    "detail": "a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458"
    },
    {
     "source": "binding",
     "item": "qa_for_this_file",
     "state": "PASS",
-    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
+    "detail": "a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458"
    },
    {
     "source": "binding",
@@ -48,13 +48,13 @@
     "source": "binding",
     "item": "review_for_this_file",
     "state": "PASS",
-    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
+    "detail": "a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458"
    },
    {
     "source": "binding",
     "item": "video_file_hash",
     "state": "PASS",
-    "detail": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f"
+    "detail": "a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458"
    }
   ],
   "technical": [
@@ -316,8 +316,8 @@
    {
     "source": "scan",
     "item": "black_picture",
-    "state": "FAIL",
-    "detail": 0.57
+    "state": "PASS",
+    "detail": 0.0
    },
    {
     "source": "scan",
@@ -424,7 +424,9 @@
       "pilot-007",
       "pilot-010",
       "pilot-011",
-      "pilot-012"
+      "pilot-012",
+      "pilot-013",
+      "pilot-014"
      ]
     }
    },
@@ -434,8 +436,8 @@
     "state": "PASS",
     "detail": {
      "max": [
-      0.0,
-      null
+      0.086,
+      "pilot-013"
      ]
     }
    },
@@ -445,8 +447,8 @@
     "state": "PASS",
     "detail": {
      "max": [
-      0.125,
-      "pilot-005"
+      0.222,
+      "pilot-013"
      ]
     }
    },
@@ -492,15 +494,15 @@
  },
  "informative_not_deciding": {
   "scan_frozen_picture": {
-   "longest_s": 1.07,
+   "longest_s": 1.13,
    "report_s": 5.0,
    "blocking": false,
    "inside": true,
    "spans": [
     [
-     730.07,
-     731.13,
-     1.07
+     735.77,
+     736.9,
+     1.13
     ]
    ]
   }

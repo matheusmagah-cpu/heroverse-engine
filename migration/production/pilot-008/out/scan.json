@@ -9,61 +9,15 @@
   "freeze_noise": 0.003
  },
  "edge_excluded_s": 2.0,
- "duration_s": 964.71,
- "status": "FAIL",
+ "duration_s": 964.43,
+ "status": "PASS",
  "rows": {
   "black_picture": {
-   "longest_s": 0.57,
+   "longest_s": 0.0,
    "max_s": 0.5,
    "blocking": true,
-   "pass": false,
-   "spans": [
-    [
-     85.9,
-     86.13,
-     0.23
-    ],
-    [
-     86.2,
-     86.53,
-     0.33
-    ],
-    [
-     362.77,
-     363.33,
-     0.57
-    ],
-    [
-     501.57,
-     501.77,
-     0.2
-    ],
-    [
-     501.83,
-     502.17,
-     0.33
-    ],
-    [
-     776.97,
-     777.3,
-     0.33
-    ],
-    [
-     915.83,
-     916.03,
-     0.2
-    ],
-    [
-     916.13,
-     916.43,
-     0.3
-    ],
-    [
-     916.97,
-     917.13,
-     0.17
-    ]
-   ]
+   "pass": true,
+   "spans": []
   },
   "digital_silence": {
    "longest_s": 0.0,
@@ -73,15 +27,15 @@
    "spans": []
   },
   "frozen_picture": {
-   "longest_s": 1.07,
+   "longest_s": 1.13,
    "report_s": 5.0,
    "blocking": false,
    "inside": true,
    "spans": [
     [
-     730.07,
-     731.13,
-     1.07
+     735.77,
+     736.9,
+     1.13
     ]
    ]
   }
