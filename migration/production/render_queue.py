@@ -83,6 +83,13 @@ def unvetted_footage(production, script):
     return out
 
 
+def next_render(rows):
+    """The one rule for the next full render, shared by the queue, the runner wake and the engine fallback (E78: two
+    copies of it missed the footage check): images complete, footage vetted, not rendered, preview at the floor."""
+    return next((r for r in rows if not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
+                 and r["preview_ok"]), None)
+
+
 def due(production, ledger, now, hours):
     entries = ledger.get("entries", {})
     out = []
@@ -288,8 +295,7 @@ def main(production, ledger_path, mode, hours="48"):
         print("RENDER_HOLD", file=sys.stderr)
     else:
         # owner, 2026-10-24: only a script whose preview reached 9.5 is rendered in full (preview_gate.py)
-        nxt = next((r for r in rows if not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
-                    and r["preview_ok"]), None)
+        nxt = next_render(rows)
         if nxt:
             print(nxt["pilot"])
 
