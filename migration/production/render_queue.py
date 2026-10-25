@@ -9,6 +9,8 @@ A completed v3 QA FAIL is not rerendered repeatedly; it awaits an input correcti
 usage: render_queue.py PRODUCTION_DIR LEDGER {images|render|reconcile|review} [HOURS]
   review: prints "PILOT SHA256" for every due render with QA PASS and no Claude review for that hash
   images: prints "PILOT id,id,..." for every pilot with images still missing
+  reassign: prints "PILOT clip,clip,..." for every unrendered pilot whose footage the library no longer approves (E78);
+            preview and render skip such a pilot until assign.py reassigns it
   render: prints the next pilot to render (earliest publish time) or nothing
   stale: prints "STALE PILOT PUBLISH_AT" for pilots whose slot passed more than 6 h ago (within STALE_DAYS) and that
          have no video on YouTube: due() no longer sees them, so they must be rescheduled (E49)
@@ -69,6 +71,25 @@ def current_render(manifest, qa, script_sha):
             and qa.get("status") in ("PASS", "FAIL"))
 
 
+def unvetted_footage(production, script):
+    """E78: footage the script still lists but the shared library no longer approves (rejected after assignment, or
+    gone), so a preview or render never shows a clip Claude already turned down."""
+    lib = Path(production) / "footage" / "library"
+    out = []
+    for c in script.get("footage") or []:
+        rec = object_or_empty(lib / f"{c}.json")
+        if rec.get("vetting") != "APPROVED":
+            out.append(c)
+    return out
+
+
+def next_render(rows):
+    """The one rule for the next full render, shared by the queue, the runner wake and the engine fallback (E78: two
+    copies of it missed the footage check): images complete, footage vetted, not rendered, preview at the floor."""
+    return next((r for r in rows if not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
+                 and r["preview_ok"]), None)
+
+
 def due(production, ledger, now, hours):
     entries = ledger.get("entries", {})
     out = []
@@ -83,7 +104,9 @@ def due(production, ledger, now, hours):
         if m and "video_id" in entries.get(f"{d.name}:{m.get('output_sha256')}", {}):
             continue  # already on YouTube
         script_sha = hashlib.sha256((d / "script.json").read_bytes()).hexdigest()
-        out.append({"pilot": d.name, "publish_at": t, "missing_images": needed_images(d, json.loads((d / "script.json").read_text())),
+        script = json.loads((d / "script.json").read_text())
+        out.append({"pilot": d.name, "publish_at": t, "missing_images": needed_images(d, script),
+                    "unvetted_footage": unvetted_footage(production, script),
                     "rendered": current_render(m, object_or_empty(d / "out" / "qa.json"), script_sha),
                     "preview_ok": preview_gate.approved(d)})
     return sorted(out, key=lambda x: x["publish_at"])
@@ -200,10 +223,14 @@ def main(production, ledger_path, mode, hours="48"):
                 print(r["pilot"], ",".join(r["missing_images"]))
     elif mode == "preview":
         # a script with no current render and no preview of itself gets the ~15 min preview first (one at a time)
-        nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"] and not r["preview_ok"]
-                    and not preview_gate.previewed(Path(production) / r["pilot"])), None)
+        nxt = next((r for r in rows if not r["missing_images"] and not r["unvetted_footage"] and not r["rendered"]
+                    and not r["preview_ok"] and not preview_gate.previewed(Path(production) / r["pilot"])), None)
         if nxt:
             print(nxt["pilot"])
+    elif mode == "reassign":
+        for r in rows:
+            if r["unvetted_footage"] and not r["rendered"]:
+                print(r["pilot"], ",".join(r["unvetted_footage"]))
     elif mode == "preview-review":
         # Claude reviews every preview of a current script that has no review for that script yet
         for r in rows:
@@ -268,7 +295,7 @@ def main(production, ledger_path, mode, hours="48"):
         print("RENDER_HOLD", file=sys.stderr)
     else:
         # owner, 2026-10-24: only a script whose preview reached 9.5 is rendered in full (preview_gate.py)
-        nxt = next((r for r in rows if not r["missing_images"] and not r["rendered"] and r["preview_ok"]), None)
+        nxt = next_render(rows)
         if nxt:
             print(nxt["pilot"])
 

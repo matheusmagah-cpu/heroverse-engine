@@ -603,6 +603,16 @@
     "file": "migration/production/footage/test_footage.py",
     "contains": "def test_black_run_after_the_render_grade_is_rejected"
    }
+  },
+  {
+   "id": "E78",
+   "date": "2026-10-25",
+   "error": "pilot-009's preview (run 40170360356) showed 7 clips the footage library had already REJECTED (Fife Creek boardwalk with railings, Sonoma Creek concrete weir, village houses in the valley, and 4 more); pilot-014's earlier preview did too. script_check flagged them (FOOTAGE_NOT_VETTED), but render_queue picked pilots for preview and render without reading the library, so a stale assignment reached a preview and could reach a 2.5 h render.",
+   "fix": "render_queue.unvetted_footage lists a script's clips the library does not approve; preview and render skip such a pilot (one shared next_render rule, now also used by the runner wake and the engine fallback, which had their own copies) and the new 'reassign' mode lists it for the clock (CLAUDE_REVIEW.md), which reassigns with footage/assign.py. pilot-009 is reassigned from seen morning clips (script_check PASS).",
+   "antidote": {
+    "file": "migration/production/test_preview_gate.py",
+    "contains": "def test_footage_rejected_in_the_library_stops_preview_and_render"
+   }
   }
  ]
 }

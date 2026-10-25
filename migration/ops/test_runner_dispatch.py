@@ -54,6 +54,21 @@ class Dispatch(unittest.TestCase):
             self.assertEqual(len(key), 64)
             self.assertNotIn('pilot', key)
 
+    def test_no_wake_for_footage_the_library_rejected(self):
+        # E78: the runner was woken by its own copy of the queue's rule, which missed rejected footage
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, 'pilot-014', '2026-10-19T10:00:00Z')
+            lib = Path(t) / 'footage' / 'library'
+            lib.mkdir(parents=True)
+            (lib / 'clip-bad.json').write_text('{"vetting": "REJECTED"}')
+            p = Path(t) / 'pilot-014' / 'script.json'
+            p.write_text(json.dumps(dict(json.loads(p.read_text()), footage=['clip-bad'])))
+            sha = hashlib.sha256(p.read_bytes()).hexdigest()
+            (p.parent / 'inspection' / 'preview_review.json').write_text(json.dumps({'script_sha256': sha, 'overall': 9.5}))
+            self.assertIsNone(d.candidate(t, {}, NOW))
+            (lib / 'clip-bad.json').write_text('{"vetting": "APPROVED"}')
+            self.assertEqual(len(d.candidate(t, {}, NOW)), 64)
+
     def test_missing_token_fails_even_when_empty(self):
         with self.assertRaisesRegex(d.Blocked, 'MISSING_HERO_RUNNER_PAT'):
             d.execute('unused', 'unused', '', NOW)

@@ -51,6 +51,22 @@ class Fallback(unittest.TestCase):
             self.assertEqual(f.execute(t, ledger, 'x', NOW, lambda _: busy, runner_runs=lambda: []), 'ENGINE_RENDER_ACTIVE')
             self.assertEqual(busy.sent, [])
 
+    def test_never_renders_footage_the_library_rejected(self):
+        # E78: the fallback picked its render with its own copy of the queue's rule and missed rejected footage
+        with tempfile.TemporaryDirectory() as t:
+            pilot(t, 'pilot-014', '2026-10-19T14:00:00Z')
+            lib = Path(t) / 'footage' / 'library'
+            lib.mkdir(parents=True)
+            (lib / 'clip-bad.json').write_text('{"vetting": "REJECTED"}')
+            p = Path(t) / 'pilot-014' / 'script.json'
+            import hashlib, json
+            p.write_text(json.dumps(dict(json.loads(p.read_text()), footage=['clip-bad'])))
+            sha = hashlib.sha256(p.read_bytes()).hexdigest()
+            (p.parent / 'inspection' / 'preview_review.json').write_text(json.dumps({'script_sha256': sha, 'overall': 9.5}))
+            self.assertIsNone(f.candidate(t, {}, NOW))
+            (lib / 'clip-bad.json').write_text('{"vetting": "APPROVED"}')
+            self.assertEqual(f.candidate(t, {}, NOW), 'pilot-014')
+
     def test_never_renders_beside_a_live_runner(self):
         # E63: the runner rendered pilot-009 on its own cron (run 40042851661) while the fallback started a second
         # render of the same pilot on the engine (run 40047808539)
