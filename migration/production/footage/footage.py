@@ -208,6 +208,20 @@ def describe(path):
         return None
 
 
+BLACK_PIC_TH, BLACK_RUN_MAX = 0.98, 0.5   # = signal_scan criteria (black_pic_th, black_max_s)
+
+
+def graded_black_run(clip):
+    """Longest near-black run (s) of the clip after the render's footage grade (E77: a starry-sky clip passed the
+    5-frame luma check but went 98 % black for 1.2 s once graded, and the 008 render failed the full-file scan)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    import cinematic
+    log = subprocess.run(["ffmpeg", "-nostdin", "-hide_banner", "-i", str(clip), "-an", "-vf",
+                          f"fps=30,{cinematic.GRADE},blackdetect=d=0.1:pic_th={BLACK_PIC_TH}", "-f", "null", "-"],
+                         capture_output=True, text=True).stderr
+    return max((float(x) for x in re.findall(r"black_duration:([0-9.]+)", log)), default=0.0)
+
+
 def vet(clip, work):
     """Automatic vetting on five frames: no black frames, no readable text, nothing the description names as
     people, text, buildings or vehicles. Every check must actually run: a missing check leaves the clip PENDING."""
@@ -223,16 +237,18 @@ def vet(clip, work):
     descriptions = [describe(frames[0]), describe(frames[2])]
     for f in frames:
         f.unlink(missing_ok=True)
-    return decide(luma, ocr, descriptions)
+    return decide(luma, ocr, descriptions, graded_black_run(clip))
 
 
-def decide(luma, ocr, descriptions):
+def decide(luma, ocr, descriptions, black_run=0.0):
     """The vetting verdict from the measured frames (pure, so it is tested offline)."""
     words = [w for found in ocr if found for w in found]
     ocr_ran = all(found is not None for found in ocr)
     reasons = []
     if sum(1 for x in luma if x < 12) >= 2:
         reasons.append("BLACK_FRAMES")
+    if black_run >= BLACK_RUN_MAX:
+        reasons.append(f"BLACK_RUN_AFTER_GRADE {black_run:.2f}s")
     if words:
         reasons.append("TEXT_ON_SCREEN " + " ".join(words[:6]))
     named = sorted({m.group(1).lower() for t in descriptions if t for m in VET_WORDS.finditer(t)})
@@ -240,7 +256,8 @@ def decide(luma, ocr, descriptions):
         reasons.append("DESCRIBED " + ",".join(named))
     status = "REJECTED" if reasons else ("APPROVED" if ocr_ran and all(descriptions) else "PENDING")
     return {"vetting": status, "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
-            "vetting_reasons": reasons, "vetting_luma": luma, "vetting_descriptions": descriptions}
+            "vetting_reasons": reasons, "vetting_luma": luma, "vetting_descriptions": descriptions,
+            "vetting_black_run_s": round(black_run, 2)}
 
 
 def probe_seconds(path):
