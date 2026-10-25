@@ -278,3 +278,20 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   rendering for 26–27/10 under the "a long video every other day" clock rule; they keep going until the owner chooses.
 - **Why.** Two of two Bible Shorts beat every prayer Short of the series in their first day; nothing measured favours
   the prayer long format (best 96 views in 4 days).
+
+## Owner decision: the long videos join the Bible series; Shorts lead to the long (2026-10-25 13:30 UTC)
+- **Owner.** "Mantém [o que está pronto], mas depois passa para a mesma ideia do short ... o short tem que seguir o
+  padrão do longo e o longo do short ... o short direcionar pro vídeo longo; monta uma estratégia efetiva."
+- **What stays.** The prayer long videos already rendered or rendering keep their slots: 013 (26/10 00:00), 014
+  (26/10 10:00), 008 (27/10 00:00, rendering). pilot-009 (not rendered for its current script) leaves the queue
+  (`schedule.retired.json`).
+- **Strategy (SERIES.md "One format, two lengths").** Arcs of 4 Short episodes = 1 long video telling the whole
+  story (14-18 min) every other day at 10:00 UTC from 28/10; Shorts point to their arc's long (CTA, first comment,
+  Studio related video); the long's chapters are the Shorts' titles, its cold open is the arc's hook shot, and it
+  ends on the next arc. Same title formula, voice family and picture style in both.
+- **Why.** Bible Shorts 107 and 192 views in their first day vs 8-96 for prayer longs; mined long winners in this
+  line tell one Bible story per video (evidence/vidiq/20261025, structure `bible-story-long`, candidate).
+- **Budget found.** 3,811 vidIQ credits must last to 18/11 (about 159 a day), less than two 100-credit Shorts a day:
+  Shorts are held to about 75 credits and the long is rendered free on the engine (Kokoro `bm_george`).
+- **Next.** The engine gets a story-format spec and its own frozen QA (`production/bible/long/`), technical floors
+  equal to v4; first long (Gen 1-3) rendered and reviewed before 28/10 10:00.
