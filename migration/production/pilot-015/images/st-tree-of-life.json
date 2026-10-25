@@ -1,0 +1,28 @@
+{
+ "id": "st-tree-of-life",
+ "prompt": "one immense ancient tree in the middle of a garden, wide spreading branches, sunlight through the leaves, photorealistic cinematic nature documentary, ancient world, natural light, wide 16:9 composition with the subject in the centre, film grain, no text, no signature, no watermark, no lettering",
+ "negative": null,
+ "seed": null,
+ "size": [
+  4096,
+  4096
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.8,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-015-img-st-tree-of-life-sha256-3f3d046dca118fec3d52d7a86fe438a71ac40b3b41695ef8ce2d047ee1900d27.png",
+ "sha256": "3f3d046dca118fec3d52d7a86fe438a71ac40b3b41695ef8ce2d047ee1900d27"
+}
