@@ -1,0 +1,34 @@
+name: Pavo MCP checks and connection
+on:
+  pull_request:
+    paths:
+      - '.mcp.json'
+      - 'migration/integrations/pavo/**'
+      - '.github/workflows/pavo-mcp.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Unit tests (no credentials, no upstream calls)
+        run: python3 -I -B migration/integrations/pavo/test_client.py
+      - name: MCP transport smoke test (no upstream calls)
+        run: |
+          python3 -m venv "$RUNNER_TEMP/pavo-venv"
+          "$RUNNER_TEMP/pavo-venv/bin/python" -m pip install --quiet 'mcp==2.3.0'
+          "$RUNNER_TEMP/pavo-venv/bin/python" migration/integrations/pavo/test_stdio.py
+  connection:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    needs: offline
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Read-only account probe (no generation, no private account data in logs)
+        env:
+          PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
+        run: python3 -I -B migration/integrations/pavo/client.py --probe
