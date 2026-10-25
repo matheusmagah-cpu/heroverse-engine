@@ -1,0 +1,28 @@
+{
+ "id": "st-skin-coats",
+ "prompt": "simple garments of animal skin lying folded on a flat rock in a garden, soft light, photorealistic cinematic nature documentary, the untouched ancient world with only nature in sight, natural light, wide 16:9 composition with the subject in the centre, film grain, no text, no signature, no watermark, no lettering",
+ "negative": null,
+ "seed": null,
+ "size": [
+  4096,
+  4096
+ ],
+ "engine": "cloudflare-workers-ai:@cf/black-forest-labs/flux-1-schnell",
+ "models": {
+  "@cf/black-forest-labs/flux-1-schnell": {
+   "license": "apache-2.0",
+   "revision": "workers-ai-managed",
+   "source": "https://huggingface.co/black-forest-labs/FLUX.1-schnell"
+  }
+ },
+ "seconds": 2.9,
+ "generated_by": "HeroVerse pipeline (AI-generated image)",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (output 4x of a 1024 px input)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "release_asset": "pilot-015-img-st-skin-coats-sha256-d64c888f9a6111e0339a808d497094d444257398ba1ef8663cc3703cff649d23.png",
+ "sha256": "d64c888f9a6111e0339a808d497094d444257398ba1ef8663cc3703cff649d23"
+}

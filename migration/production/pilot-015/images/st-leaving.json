@@ -1,6 +1,6 @@
 {
  "id": "st-leaving",
- "prompt": "a man and a woman in simple animal-skin garments walking away from a garden at dusk, seen from behind, small in the frame, photorealistic cinematic nature documentary, ancient world, natural light, wide 16:9 composition with the subject in the centre, film grain, no text, no signature, no watermark, no lettering",
+ "prompt": "a man and a woman in simple animal-skin garments walking barefoot away from a lush garden at dusk along a bare dirt track into empty wild hills, seen from behind, small in the frame, nothing but wilderness around them, photorealistic cinematic nature documentary, the untouched ancient world with only nature in sight, natural light, wide 16:9 composition with the subject in the centre, film grain, no text, no signature, no watermark, no lettering",
  "negative": null,
  "seed": null,
  "size": [
@@ -23,6 +23,6 @@
   "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "release_asset": "pilot-015-img-st-leaving-sha256-aa4ab7f65bb2351df26b0a748b6c3f14674ee6b3227d7c68025ad7fb6df28b85.png",
- "sha256": "aa4ab7f65bb2351df26b0a748b6c3f14674ee6b3227d7c68025ad7fb6df28b85"
+ "release_asset": "pilot-015-img-st-leaving-sha256-a04c86e39f65fe32bff0c40ee19d37fa158c463002f5d10e1e44ecf3e26c25f3.png",
+ "sha256": "a04c86e39f65fe32bff0c40ee19d37fa158c463002f5d10e1e44ecf3e26c25f3"
 }
