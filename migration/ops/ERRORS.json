@@ -623,6 +623,16 @@
     "file": "migration/production/test_still_render.py",
     "contains": "def test_each_segment_shows_the_clips_mined_for_its_words"
    }
+  },
+  {
+   "id": "E80",
+   "date": "2026-10-25",
+   "error": "The first TikTok mirror post through Buffer (run 40213060551, Genesis 2) was refused by Buffer's GraphQL validation: the createPost input was written from third-party notes (assets as {videos: [{url}]}) without reading the schema. Nothing was created; the ledger recorded FAILED (1 of 3).",
+   "fix": "discover mode now prints the input types createPost accepts (introspection of CreatePostInput and the input types it references), and the post input is set from that evidence before the next post; the refusal message is kept long enough to read.",
+   "antidote": {
+    "file": "migration/publish/test_tiktok_publish.py",
+    "contains": "def test_discover_lists_the_input_types_createpost_accepts"
+   }
   }
  ]
 }
