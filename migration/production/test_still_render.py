@@ -220,6 +220,21 @@ class StoryShots(unittest.TestCase):
             self.assertTrue(inside and all(i.startswith(clip) for i in inside), (clip, inside))
         self.assertTrue(all(b - a >= 0 for a, b in zip([h["start"] for h in plan], [h["start"] for h in plan][1:])))
 
+    def test_a_segment_longer_than_its_clips_never_borrows_another_segments_clip(self):
+        # review of 0bef573: with every clip owned (script_check refuses filler), an exhausted segment fell back to the
+        # whole footage list and showed the hook's serpent over the river's words
+        total = 400.0   # past REPEAT_GAP, so the hook's clips are free again while the river is still being told
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0},
+                  "backgrounds": [f"st-{i}" for i in range(90)], "footage": ["clip-serpent", "clip-river"],
+                  "segments": [{"id": "hook", "text": "x", "shots": ["clip-serpent"]},
+                               {"id": "river", "text": "x", "shots": ["clip-river"]}]}
+        sents = [{"start": 0.3 + 5.0 * k, "end": 0.3 + 5.0 * k + 4.0, "text": "x"} for k in range(int(total // 5.0))]
+        segs = [{"id": "hook", "start": 0.3, "end": 18.0}, {"id": "river", "start": 18.0, "end": total}]
+        plan = sr.holds(script, {"sentences": sents, "segments": segs}, total)
+        river = [h["image"] for h in plan if (h["start"] + h["end"]) / 2 >= 18.0]
+        self.assertFalse([i for i in river if i.startswith("clip-serpent")], river)
+        self.assertGreaterEqual(sum(i.startswith("clip-river") for i in river), 3)
+
 
 class SpeechText(unittest.TestCase):
     """E47: the voice spelled "G-O-D" for the KJV "Lord GOD" (pilot-008 review, 17:36)."""

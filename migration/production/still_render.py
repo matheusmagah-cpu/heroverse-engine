@@ -374,7 +374,7 @@ def footage_holds(script, timeline, total):
                for x in script.get("segments", []) if x.get("shots")}
     where = [(g["start"], g["end"], g["id"]) for g in timeline.get("segments", []) if g.get("id") in matched]
     owned = {i for ids in matched.values() for i in ids}
-    shots = [i for i in shots if i not in owned] or shots   # a serpent clip never fills the river's words
+    shots = [i for i in shots if i not in owned]   # a serpent clip never fills the river's words
     out, nf, ns, seen = [], 0, 0, {}
 
     def free(i, a):
@@ -393,7 +393,7 @@ def footage_holds(script, timeline, total):
             h["image"], h["kind"] = mine, "footage"
             own.remove(mine)
             own.append(mine)
-        elif shot and free(shot, a):
+        elif shot and not own and free(shot, a):   # a segment with its own clips never takes another's
             h["image"], h["kind"] = shot, "footage"
             nf += 1
         else:   # fallback stills never reuse a story moment's still (its own time is in its segment)
