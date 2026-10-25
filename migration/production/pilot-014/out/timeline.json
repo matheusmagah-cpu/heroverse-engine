@@ -1,0 +1,1254 @@
+{
+ "segments": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 8.367
+  },
+  {
+   "id": "roadmap",
+   "start": 9.067,
+   "end": 17.239
+  },
+  {
+   "id": "invitation",
+   "start": 18.039,
+   "end": 43.687
+  },
+  {
+   "id": "prayer-arrival",
+   "start": 44.687,
+   "end": 72.149
+  },
+  {
+   "id": "scripture-joshua-house",
+   "start": 73.149,
+   "end": 94.103
+  },
+  {
+   "id": "prayer-my-yes",
+   "start": 95.403,
+   "end": 122.033
+  },
+  {
+   "id": "scripture-psalm-build",
+   "start": 123.033,
+   "end": 133.297
+  },
+  {
+   "id": "prayer-build",
+   "start": 134.597,
+   "end": 164.813
+  },
+  {
+   "id": "prayer-spouse",
+   "start": 165.813,
+   "end": 193.703
+  },
+  {
+   "id": "rehook-1",
+   "start": 194.703,
+   "end": 198.672
+  },
+  {
+   "id": "scripture-isaiah-children",
+   "start": 199.272,
+   "end": 206.229
+  },
+  {
+   "id": "prayer-children",
+   "start": 207.529,
+   "end": 235.889
+  },
+  {
+   "id": "prayer-children-fears",
+   "start": 236.889,
+   "end": 264.821
+  },
+  {
+   "id": "prayer-older-children",
+   "start": 265.821,
+   "end": 291.492
+  },
+  {
+   "id": "prayer-every-kind-of-family",
+   "start": 292.492,
+   "end": 323.541
+  },
+  {
+   "id": "scripture-proverbs-refuge",
+   "start": 324.541,
+   "end": 332.032
+  },
+  {
+   "id": "prayer-refuge",
+   "start": 333.332,
+   "end": 360.965
+  },
+  {
+   "id": "rehook-2",
+   "start": 361.965,
+   "end": 367.216
+  },
+  {
+   "id": "stillness-one",
+   "start": 367.816,
+   "end": 383.501
+  },
+  {
+   "id": "scripture-psalm-mercy-generations",
+   "start": 389.501,
+   "end": 405.781
+  },
+  {
+   "id": "prayer-generations",
+   "start": 407.081,
+   "end": 434.267
+  },
+  {
+   "id": "scripture-ephesians-unity",
+   "start": 435.267,
+   "end": 446.832
+  },
+  {
+   "id": "prayer-disagreement",
+   "start": 448.132,
+   "end": 476.812
+  },
+  {
+   "id": "scripture-james-swift",
+   "start": 477.812,
+   "end": 485.131
+  },
+  {
+   "id": "prayer-listening",
+   "start": 486.431,
+   "end": 510.885
+  },
+  {
+   "id": "rehook-3",
+   "start": 511.885,
+   "end": 516.9
+  },
+  {
+   "id": "scripture-peter-charity",
+   "start": 517.5,
+   "end": 526.1
+  },
+  {
+   "id": "prayer-cover",
+   "start": 527.4,
+   "end": 554.267
+  },
+  {
+   "id": "scripture-philippians-remembrance",
+   "start": 555.267,
+   "end": 559.279
+  },
+  {
+   "id": "prayer-gratitude",
+   "start": 560.579,
+   "end": 587.187
+  },
+  {
+   "id": "scripture-psalm-unity",
+   "start": 588.187,
+   "end": 594.545
+  },
+  {
+   "id": "prayer-siblings",
+   "start": 595.845,
+   "end": 624.012
+  },
+  {
+   "id": "scripture-deuteronomy-teach",
+   "start": 625.012,
+   "end": 645.388
+  },
+  {
+   "id": "prayer-work-and-home",
+   "start": 646.688,
+   "end": 674.364
+  },
+  {
+   "id": "rehook-4",
+   "start": 675.364,
+   "end": 680.208
+  },
+  {
+   "id": "scripture-romans-affection",
+   "start": 680.808,
+   "end": 687.979
+  },
+  {
+   "id": "prayer-provision",
+   "start": 689.279,
+   "end": 716.039
+  },
+  {
+   "id": "scripture-acts-house",
+   "start": 717.039,
+   "end": 723.995
+  },
+  {
+   "id": "prayer-faith-household",
+   "start": 725.295,
+   "end": 752.14
+  },
+  {
+   "id": "day-transition",
+   "start": 753.14,
+   "end": 779.173
+  },
+  {
+   "id": "declaration",
+   "start": 780.173,
+   "end": 807.596
+  },
+  {
+   "id": "commitment",
+   "start": 808.796,
+   "end": 835.661
+  },
+  {
+   "id": "payoff",
+   "start": 836.861,
+   "end": 865.135
+  },
+  {
+   "id": "blessing",
+   "start": 866.335,
+   "end": 893.755
+  },
+  {
+   "id": "cta",
+   "start": 894.955,
+   "end": 909.997
+  },
+  {
+   "id": "closing",
+   "start": 910.997,
+   "end": 933.232
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "This morning, before your family's day begins, cover everyone you love in prayer.",
+   "start": 0.3,
+   "end": 6.359
+  },
+  {
+   "segment": "hook",
+   "text": "Pray with me.",
+   "start": 6.659,
+   "end": 8.067
+  },
+  {
+   "segment": "roadmap",
+   "text": "We will pray for your spouse, your children, the tensions at home, and the needs of your household, one by one.",
+   "start": 9.067,
+   "end": 16.939
+  },
+  {
+   "segment": "invitation",
+   "text": "Maybe the house is still quiet, or maybe someone is already looking for shoes and asking about breakfast.",
+   "start": 18.039,
+   "end": 25.847
+  },
+  {
+   "segment": "invitation",
+   "text": "Either way, you can pause here for a few minutes.",
+   "start": 26.147,
+   "end": 29.496
+  },
+  {
+   "segment": "invitation",
+   "text": "You will pray for each person by name, for the conversations ahead, and for the atmosphere of your home.",
+   "start": 29.796,
+   "end": 37.668
+  },
+  {
+   "segment": "invitation",
+   "text": "At the end, you will choose one simple act of love to offer someone today.",
+   "start": 37.968,
+   "end": 43.387
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Father, thank you for this new morning and for the people you have placed around me.",
+   "start": 44.687,
+   "end": 50.297
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Before I speak to any of them, I want to speak with you.",
+   "start": 50.597,
+   "end": 54.565
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "You know each one more deeply than I do.",
+   "start": 54.865,
+   "end": 57.937
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "You know who slept badly, who is anxious about today, and who is carrying something they have not told anyone.",
+   "start": 58.237,
+   "end": 66.387
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Make me attentive to them, and make our home a place where you are welcome.",
+   "start": 66.687,
+   "end": 71.849
+  },
+  {
+   "segment": "scripture-joshua-house",
+   "text": "And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve;",
+   "start": 73.149,
+   "end": 79.229
+  },
+  {
+   "segment": "scripture-joshua-house",
+   "text": "whether the gods which your fathers served that were on the other side of the flood, or the gods of the Amorites, in whose land ye dwell:",
+   "start": 79.529,
+   "end": 89.385
+  },
+  {
+   "segment": "scripture-joshua-house",
+   "text": "but as for me and my house, we will serve the LORD.",
+   "start": 89.685,
+   "end": 93.803
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "Lord, I choose you again today.",
+   "start": 95.403,
+   "end": 97.899
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "I want my words, my reactions, and my plans to reflect that choice.",
+   "start": 98.199,
+   "end": 103.468
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "When I am tempted to bring stress into every room, remind me whose house this really is.",
+   "start": 103.768,
+   "end": 110.424
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "Help me lead by example rather than lecture.",
+   "start": 110.724,
+   "end": 113.967
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "Let the people around me notice something of your kindness in the way I listen and the way I respond.",
+   "start": 114.267,
+   "end": 121.733
+  },
+  {
+   "segment": "scripture-psalm-build",
+   "text": "Except the LORD build the house, they labour in vain that build it:",
+   "start": 123.033,
+   "end": 127.876
+  },
+  {
+   "segment": "scripture-psalm-build",
+   "text": "except the LORD keep the city, the watchman waketh but in vain.",
+   "start": 128.176,
+   "end": 132.997
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Father, build our home.",
+   "start": 134.597,
+   "end": 136.688
+  },
+  {
+   "segment": "prayer-build",
+   "text": "I bring you our routines, our finances, our calendars, and the unfinished projects that crowd our evenings.",
+   "start": 136.988,
+   "end": 145.863
+  },
+  {
+   "segment": "prayer-build",
+   "text": "I cannot guard every part of our life by staying vigilant.",
+   "start": 146.163,
+   "end": 150.493
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Be the one who watches over us.",
+   "start": 150.793,
+   "end": 153.289
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Where we have built on hurry or fear, rebuild us on trust.",
+   "start": 153.589,
+   "end": 158.069
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Where our foundations feel cracked, strengthen them with your faithfulness and patient love.",
+   "start": 158.369,
+   "end": 164.513
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Lord, I pray for the person I share my life with, or for the relationship closest to my heart.",
+   "start": 165.813,
+   "end": 173.28
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Give them strength for whatever today asks of them.",
+   "start": 173.58,
+   "end": 177.356
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Where there has been distance between us, bring us back toward each other.",
+   "start": 177.656,
+   "end": 182.797
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Help me notice their efforts instead of only their faults.",
+   "start": 183.097,
+   "end": 187.364
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Let my words today build them up, and let our partnership reflect your faithfulness.",
+   "start": 187.664,
+   "end": 193.403
+  },
+  {
+   "segment": "rehook-1",
+   "text": "Next, the children you love, whatever their age.",
+   "start": 194.703,
+   "end": 198.372
+  },
+  {
+   "segment": "scripture-isaiah-children",
+   "text": "And all thy children shall be taught of the LORD;",
+   "start": 199.272,
+   "end": 202.664
+  },
+  {
+   "segment": "scripture-isaiah-children",
+   "text": "and great shall be the peace of thy children.",
+   "start": 202.964,
+   "end": 205.929
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Father, I lift up the children I love.",
+   "start": 207.529,
+   "end": 210.601
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Teach them yourself.",
+   "start": 210.901,
+   "end": 212.693
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Guard their minds from what would harm them, and their hearts from believing they are unloved.",
+   "start": 212.993,
+   "end": 219.479
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Give them friends who are kind and teachers who are wise.",
+   "start": 219.779,
+   "end": 223.619
+  },
+  {
+   "segment": "prayer-children",
+   "text": "When they make mistakes today, let them find grace rather than shame.",
+   "start": 223.919,
+   "end": 228.953
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Let your peace be great within them, deeper than the pressures they face at school or online.",
+   "start": 229.253,
+   "end": 235.589
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Lord, some of the children I love are carrying fears they cannot explain.",
+   "start": 236.889,
+   "end": 242.393
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "A test, a friendship that has changed, a worry about home, or something they saw on a screen.",
+   "start": 242.693,
+   "end": 249.904
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Give them courage that is bigger than their fear.",
+   "start": 250.204,
+   "end": 253.575
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Help me notice when something is wrong, and give me gentle words to ask about it.",
+   "start": 253.875,
+   "end": 259.571
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Let them know they can always come to me, and always come to you.",
+   "start": 259.871,
+   "end": 264.521
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Lord, I also pray for those who have grown up and moved into lives of their own.",
+   "start": 265.821,
+   "end": 271.688
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "I cannot manage their choices, and some of them may feel far from me or from you.",
+   "start": 271.988,
+   "end": 278.153
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Keep them safe on the roads they travel.",
+   "start": 278.453,
+   "end": 281.547
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Meet them in their work, their relationships, and their doubts.",
+   "start": 281.847,
+   "end": 286.22
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Draw them close to you, and keep the door of my heart open to them.",
+   "start": 286.52,
+   "end": 291.192
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Father, families come in many shapes.",
+   "start": 292.492,
+   "end": 295.393
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some of us are raising children who are not biologically ours.",
+   "start": 295.693,
+   "end": 300.664
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some are blending two households into one.",
+   "start": 300.964,
+   "end": 304.121
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some are caring for a relative alone.",
+   "start": 304.421,
+   "end": 307.216
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some are waiting and hoping for children.",
+   "start": 307.516,
+   "end": 310.673
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Meet each of us in our particular situation.",
+   "start": 310.973,
+   "end": 314.963
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Give wisdom to every parent, guardian, and caregiver, and let every child feel wanted, chosen, and safe.",
+   "start": 315.263,
+   "end": 323.241
+  },
+  {
+   "segment": "scripture-proverbs-refuge",
+   "text": "In the fear of the LORD is strong confidence:",
+   "start": 324.541,
+   "end": 327.976
+  },
+  {
+   "segment": "scripture-proverbs-refuge",
+   "text": "and his children shall have a place of refuge.",
+   "start": 328.276,
+   "end": 331.732
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "Father, make our home a refuge.",
+   "start": 333.332,
+   "end": 335.956
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "When someone walks through the door discouraged, let them find comfort here.",
+   "start": 336.256,
+   "end": 341.504
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "When someone fails, let them find mercy here before they find consequences.",
+   "start": 341.804,
+   "end": 347.436
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "Give me a steady heart so that my own fears do not fill the house.",
+   "start": 347.736,
+   "end": 352.6
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "Let the confidence I have in you settle the atmosphere, so that each person feels safe to rest and to speak.",
+   "start": 352.9,
+   "end": 360.665
+  },
+  {
+   "segment": "rehook-2",
+   "text": "Stay with me.",
+   "start": 361.965,
+   "end": 363.331
+  },
+  {
+   "segment": "rehook-2",
+   "text": "In a moment, picture each face as we pray.",
+   "start": 363.631,
+   "end": 366.916
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Take a quiet moment now.",
+   "start": 367.816,
+   "end": 370.035
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Picture the faces of the people you live with or love most.",
+   "start": 370.335,
+   "end": 374.729
+  },
+  {
+   "segment": "stillness-one",
+   "text": "You do not need to say anything about them yet.",
+   "start": 375.029,
+   "end": 378.571
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Simply hold them in your mind, and let God see them with you.",
+   "start": 378.871,
+   "end": 383.201
+  },
+  {
+   "segment": "scripture-psalm-mercy-generations",
+   "text": "But the mercy of the LORD is from everlasting to everlasting upon them that fear him, and his righteousness unto children's children;",
+   "start": 389.501,
+   "end": 399.379
+  },
+  {
+   "segment": "scripture-psalm-mercy-generations",
+   "text": "to such as keep his covenant, and to those that remember his commandments to do them.",
+   "start": 399.679,
+   "end": 405.481
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Father, thank you for those who prayed for me before I knew how to pray.",
+   "start": 407.081,
+   "end": 411.988
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Thank you for every person who passed faith on, even imperfectly.",
+   "start": 412.288,
+   "end": 417.259
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Where my family history carries pain or broken patterns, let your mercy begin something new through us.",
+   "start": 417.559,
+   "end": 425.281
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Let the next generation inherit more peace than we did.",
+   "start": 425.581,
+   "end": 429.933
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Let them remember not only our words, but our love.",
+   "start": 430.233,
+   "end": 433.967
+  },
+  {
+   "segment": "scripture-ephesians-unity",
+   "text": "With all lowliness and meekness, with longsuffering, forbearing one another in love;",
+   "start": 435.267,
+   "end": 441.667
+  },
+  {
+   "segment": "scripture-ephesians-unity",
+   "text": "endeavouring to keep the unity of the Spirit in the bond of peace.",
+   "start": 441.967,
+   "end": 446.532
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Father, I bring the tensions in our home.",
+   "start": 448.132,
+   "end": 451.353
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "You know the conversation that keeps turning into an argument, and the topic we avoid because it hurts.",
+   "start": 451.653,
+   "end": 459.099
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Give us humility to listen and patience to understand.",
+   "start": 459.399,
+   "end": 463.58
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Where I have been stubborn, soften me.",
+   "start": 463.88,
+   "end": 466.589
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Where I need to speak up, give me words seasoned with grace.",
+   "start": 466.889,
+   "end": 471.305
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Help us keep the bond of peace, even when we see things differently.",
+   "start": 471.605,
+   "end": 476.512
+  },
+  {
+   "segment": "scripture-james-swift",
+   "text": "Wherefore, my beloved brethren, let every man be swift to hear, slow to speak, slow to wrath:",
+   "start": 477.812,
+   "end": 484.831
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Lord, make me swift to hear the people I love.",
+   "start": 486.431,
+   "end": 489.652
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Slow my tongue when I want to correct, interrupt, or win.",
+   "start": 489.952,
+   "end": 494.048
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Help me hear the worry behind a sharp comment and the tiredness behind a short answer.",
+   "start": 494.348,
+   "end": 500.3
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "When anger rises in me today, let it slow down long enough for wisdom to catch up.",
+   "start": 500.6,
+   "end": 506.893
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Teach me to listen the way you listen to me.",
+   "start": 507.193,
+   "end": 510.585
+  },
+  {
+   "segment": "rehook-3",
+   "text": "Next, love that covers the small irritations of family life.",
+   "start": 511.885,
+   "end": 516.6
+  },
+  {
+   "segment": "scripture-peter-charity",
+   "text": "And above all things have fervent charity among yourselves:",
+   "start": 517.5,
+   "end": 521.809
+  },
+  {
+   "segment": "scripture-peter-charity",
+   "text": "for charity shall cover the multitude of sins.",
+   "start": 522.109,
+   "end": 525.8
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Father, give me fervent love for my family.",
+   "start": 527.4,
+   "end": 530.856
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Help me let small irritations pass without comment.",
+   "start": 531.156,
+   "end": 534.953
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Keep me from storing up offenses to use later.",
+   "start": 535.253,
+   "end": 538.944
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Where I have been keeping score, help me release the tally.",
+   "start": 539.244,
+   "end": 543.276
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Where someone needs my patience today, let my love be larger than the inconvenience.",
+   "start": 543.576,
+   "end": 550.147
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Thank you that your love has covered so much in me.",
+   "start": 550.447,
+   "end": 553.967
+  },
+  {
+   "segment": "scripture-philippians-remembrance",
+   "text": "I thank my God upon every remembrance of you,",
+   "start": 555.267,
+   "end": 558.979
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Lord, thank you for my family.",
+   "start": 560.579,
+   "end": 563.011
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Thank you for the laughter we have shared, the meals we have eaten together, and the ordinary moments that will one day be precious memories.",
+   "start": 563.311,
+   "end": 572.953
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Thank you for the person who made coffee, fixed something, or sent a kind message.",
+   "start": 573.253,
+   "end": 579.291
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Help me say thank you out loud today, so that gratitude is not only in my heart but in our home.",
+   "start": 579.591,
+   "end": 586.887
+  },
+  {
+   "segment": "scripture-psalm-unity",
+   "text": "Behold, how good and how pleasant it is for brethren to dwell together in unity!",
+   "start": 588.187,
+   "end": 594.245
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Father, I pray for brothers and sisters, cousins, and the wider family.",
+   "start": 595.845,
+   "end": 601.456
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Some relationships are close and easy, and others are strained by distance or old hurts.",
+   "start": 601.756,
+   "end": 608.647
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Bring healing where there has been silence.",
+   "start": 608.947,
+   "end": 611.891
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Give us opportunities to reach out with kindness.",
+   "start": 612.191,
+   "end": 615.476
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Let our gatherings, whether large or small, be good and pleasant, marked by grace rather than tension.",
+   "start": 615.776,
+   "end": 623.712
+  },
+  {
+   "segment": "scripture-deuteronomy-teach",
+   "text": "And these words, which I command thee this day, shall be in thine heart:",
+   "start": 625.012,
+   "end": 629.983
+  },
+  {
+   "segment": "scripture-deuteronomy-teach",
+   "text": "and thou shalt teach them diligently unto thy children, and shalt talk of them when thou sittest in thine house, and when thou walkest by the way, and when thou liest down, and when thou risest up.",
+   "start": 630.283,
+   "end": 645.088
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Lord, I bring the balance between work and home.",
+   "start": 646.688,
+   "end": 650.4
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Some days my job demands more than I want to give, and my family receives what is left of me.",
+   "start": 650.7,
+   "end": 657.676
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Help me use my time wisely.",
+   "start": 657.976,
+   "end": 660.237
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Give me energy for my responsibilities and enough left over for the people I love.",
+   "start": 660.537,
+   "end": 666.809
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "When I come home today, let me arrive with patience and warmth, not only with exhaustion.",
+   "start": 667.109,
+   "end": 674.064
+  },
+  {
+   "segment": "rehook-4",
+   "text": "Before we finish, we bring the practical needs of your home.",
+   "start": 675.364,
+   "end": 679.908
+  },
+  {
+   "segment": "scripture-romans-affection",
+   "text": "Be kindly affectioned one to another with brotherly love;",
+   "start": 680.808,
+   "end": 684.925
+  },
+  {
+   "segment": "scripture-romans-affection",
+   "text": "in honour preferring one another;",
+   "start": 685.225,
+   "end": 687.679
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Lord, I bring the practical needs of our home:",
+   "start": 689.279,
+   "end": 692.671
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "work, money, health, transportation, and time.",
+   "start": 692.971,
+   "end": 696.405
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "You know what we lack and what we fear losing.",
+   "start": 696.705,
+   "end": 700.097
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Provide what we need for today, and give us wisdom with what we have.",
+   "start": 700.397,
+   "end": 705.539
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Keep us generous even when things are tight.",
+   "start": 705.839,
+   "end": 709.423
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Let our trust in you be visible in how calmly we face these concerns together.",
+   "start": 709.723,
+   "end": 715.739
+  },
+  {
+   "segment": "scripture-acts-house",
+   "text": "And they said, Believe on the Lord Jesus Christ, and thou shalt be saved, and thy house.",
+   "start": 717.039,
+   "end": 723.695
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "Father, I pray for the faith of every person in my household.",
+   "start": 725.295,
+   "end": 729.839
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "For those who believe, deepen their trust.",
+   "start": 730.139,
+   "end": 733.168
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "For those who doubt, be patient with their questions.",
+   "start": 733.468,
+   "end": 737.137
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "For those who feel far from you, draw them near in your own time and way.",
+   "start": 737.437,
+   "end": 742.6
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "I cannot make anyone believe, but I can love them faithfully and pray for them daily.",
+   "start": 742.9,
+   "end": 749.449
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "Let me do both today.",
+   "start": 749.749,
+   "end": 751.84
+  },
+  {
+   "segment": "day-transition",
+   "text": "In a moment you will step back into the movement of your morning.",
+   "start": 753.14,
+   "end": 757.428
+  },
+  {
+   "segment": "day-transition",
+   "text": "The dishes, the messages, the schedule will still be there.",
+   "start": 757.728,
+   "end": 761.845
+  },
+  {
+   "segment": "day-transition",
+   "text": "Yet you can carry this prayer with you.",
+   "start": 762.145,
+   "end": 764.791
+  },
+  {
+   "segment": "day-transition",
+   "text": "Every time you see a family member today, you can quietly say their name to God.",
+   "start": 765.091,
+   "end": 771.171
+  },
+  {
+   "segment": "day-transition",
+   "text": "A short breath of prayer in the hallway or the car can keep your heart turned toward them and toward him.",
+   "start": 771.471,
+   "end": 778.873
+  },
+  {
+   "segment": "declaration",
+   "text": "My home belongs to God.",
+   "start": 780.173,
+   "end": 782.499
+  },
+  {
+   "segment": "declaration",
+   "text": "He builds what I cannot build and keeps what I cannot keep.",
+   "start": 782.799,
+   "end": 787.215
+  },
+  {
+   "segment": "declaration",
+   "text": "I can listen before I speak.",
+   "start": 787.515,
+   "end": 790.011
+  },
+  {
+   "segment": "declaration",
+   "text": "I can let small offenses go.",
+   "start": 790.311,
+   "end": 792.956
+  },
+  {
+   "segment": "declaration",
+   "text": "I can say thank you out loud.",
+   "start": 793.256,
+   "end": 795.709
+  },
+  {
+   "segment": "declaration",
+   "text": "I can honor the people I love with simple acts of kindness.",
+   "start": 796.009,
+   "end": 800.767
+  },
+  {
+   "segment": "declaration",
+   "text": "God's mercy reaches my family today and the generations that come after us.",
+   "start": 801.067,
+   "end": 807.296
+  },
+  {
+   "segment": "commitment",
+   "text": "Choose one person from your home or your family right now.",
+   "start": 808.796,
+   "end": 813.319
+  },
+  {
+   "segment": "commitment",
+   "text": "Decide on one simple act of love for them today, and when you will do it.",
+   "start": 813.619,
+   "end": 819.251
+  },
+  {
+   "segment": "commitment",
+   "text": "It might be, when my daughter gets home from school, I will put my phone away and ask about her day.",
+   "start": 819.551,
+   "end": 826.911
+  },
+  {
+   "segment": "commitment",
+   "text": "Or, at lunch I will send my mother a message of thanks.",
+   "start": 827.211,
+   "end": 831.477
+  },
+  {
+   "segment": "commitment",
+   "text": "Keep it small and specific enough to actually do.",
+   "start": 831.777,
+   "end": 835.361
+  },
+  {
+   "segment": "payoff",
+   "text": "Father, I place that act of love before you.",
+   "start": 836.861,
+   "end": 840.381
+  },
+  {
+   "segment": "payoff",
+   "text": "Help me follow through when the moment comes, even if I feel tired or distracted.",
+   "start": 840.681,
+   "end": 846.74
+  },
+  {
+   "segment": "payoff",
+   "text": "Let it be offered freely, without expecting anything back.",
+   "start": 847.04,
+   "end": 851.435
+  },
+  {
+   "segment": "payoff",
+   "text": "Use it to bring a little more of your kindness into our home.",
+   "start": 851.735,
+   "end": 856.321
+  },
+  {
+   "segment": "payoff",
+   "text": "And as the day unfolds, keep my heart soft toward everyone I meet, starting with those closest to me.",
+   "start": 856.621,
+   "end": 864.835
+  },
+  {
+   "segment": "blessing",
+   "text": "May the Lord build your house and keep your family in his care.",
+   "start": 866.335,
+   "end": 870.879
+  },
+  {
+   "segment": "blessing",
+   "text": "May your children be taught of him and their peace be great.",
+   "start": 871.179,
+   "end": 875.445
+  },
+  {
+   "segment": "blessing",
+   "text": "May your conversations be patient, your home be a refuge, and your love cover many small offenses.",
+   "start": 875.745,
+   "end": 883.617
+  },
+  {
+   "segment": "blessing",
+   "text": "May you notice the good in the people around you, and may they notice his kindness in you.",
+   "start": 883.917,
+   "end": 889.891
+  },
+  {
+   "segment": "blessing",
+   "text": "Go into this day held by his faithful love.",
+   "start": 890.191,
+   "end": 893.455
+  },
+  {
+   "segment": "cta",
+   "text": "If you are praying this over your family today, you are welcome to write Amen.",
+   "start": 894.955,
+   "end": 900.8
+  },
+  {
+   "segment": "cta",
+   "text": "You can also leave a prayer request in the comments, and in our next morning prayer we will pray over the requests you share.",
+   "start": 901.1,
+   "end": 909.697
+  },
+  {
+   "segment": "closing",
+   "text": "Thank you for praying with me this morning.",
+   "start": 910.997,
+   "end": 914.005
+  },
+  {
+   "segment": "closing",
+   "text": "Carry the names of your loved ones with you as you go.",
+   "start": 914.305,
+   "end": 918.38
+  },
+  {
+   "segment": "closing",
+   "text": "Whatever this day brings to your home, God is already present in it, building, keeping, and loving.",
+   "start": 918.68,
+   "end": 926.019
+  },
+  {
+   "segment": "closing",
+   "text": "Go gently, listen well, and let your one act of love be a small sign of his grace.",
+   "start": 926.319,
+   "end": 932.932
+  }
+ ],
+ "voice_seconds": 934.432,
+ "sample_rate": 24000,
+ "voice_id": "am_michael",
+ "speed": 0.85
+}

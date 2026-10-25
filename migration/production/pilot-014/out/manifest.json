@@ -1,0 +1,6722 @@
+{
+ "version": "pilot-manifest-v2",
+ "pilot_id": "pilot-014",
+ "grammar": "standard-v4:licensed-footage+depth-parallax+film-look+captions",
+ "output_sha256": "f4567d73e791e83b367a416b05344664eacb3665faf134759321f198c2450e1f",
+ "output_seconds": 937.432,
+ "script_sha256": "61be5ea20efcf3c2392615919cfbec41711f4db348c7fdb9428ac3f70ea44069",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85,
+  "voice_wav_sha256": "222b553cfb0160a27ea226fcc1121cb8f4a5009e16f586d5b8273a2c20cd1fbb"
+ },
+ "music": {
+  "file": "original-rest-music.lossless.flac",
+  "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+  "offset_seconds": 1200.0,
+  "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
+ },
+ "figure": null,
+ "images": {},
+ "holds": [
+  {
+   "start": 0.0,
+   "end": 6.659,
+   "figure": false,
+   "image": "clip-sunrise-sunset-clouds-golden-sunset-sun-downfall#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 6.659,
+   "end": 12.659,
+   "figure": false,
+   "image": "clip-clouds-clouds-cumulus-heaven-sun-air-the-atmosp#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 12.659,
+   "end": 18.039,
+   "figure": false,
+   "image": "clip-river-waterfall-rocks-river-stream-water-sceni#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 18.039,
+   "end": 24.539,
+   "figure": false,
+   "image": "clip-waterfall-river-forest-waterfall-beautiful-wallpap#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 24.539,
+   "end": 29.796,
+   "figure": false,
+   "image": "clip-lake-lake-forest-trees-fog-sunrise-morning-ne#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 29.796,
+   "end": 34.596,
+   "figure": false,
+   "image": "clip-ocean-sunrise-sea-ocean-waves-beach-lanzarote-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 34.596,
+   "end": 40.796,
+   "figure": false,
+   "image": "clip-mist-fog-morning-mist-nature-haze-tomorrow-mo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 40.796,
+   "end": 45.296,
+   "figure": false,
+   "image": "clip-snow-trees-forest-snowfall-snow-showers-winte#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 45.296,
+   "end": 50.597,
+   "figure": false,
+   "image": "clip-night-aurora-butterfly-butterfly-insect-nectar#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 50.597,
+   "end": 55.597,
+   "figure": false,
+   "image": "clip-forest-trees-forest-moss-scenic-autumn-4k#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 55.597,
+   "end": 62.097,
+   "figure": false,
+   "image": "clip-field-grain-grain-field-cornflower-barley-whea#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 62.097,
+   "end": 67.597,
+   "figure": false,
+   "image": "clip-grass-silver-grass-reed-autumn-autumn-wind#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 67.597,
+   "end": 72.397,
+   "figure": false,
+   "image": "clip-sunrise-fog-sea-of-fog-mist-mountains-mountain-l#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 72.397,
+   "end": 78.597,
+   "figure": false,
+   "image": "clip-clouds-clouds-cumulus-heaven-wind-the-atmospher#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 78.597,
+   "end": 83.097,
+   "figure": false,
+   "image": "clip-river-bach-larch-forest-forest-autumn-colors-f#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 83.097,
+   "end": 89.685,
+   "figure": false,
+   "image": "clip-waterfall-rocks-stones-water-nature-waterfalls-cas#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 89.685,
+   "end": 94.685,
+   "figure": false,
+   "image": "clip-lake-lake-mountains-sunset-sunrise-relaxing-c#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 94.685,
+   "end": 101.185,
+   "figure": false,
+   "image": "clip-ocean-sunset-sea-ocean-beach#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 101.185,
+   "end": 106.685,
+   "figure": false,
+   "image": "clip-mist-fog-sun-fog-ceiling-sunshine-mist-ripe-h#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 106.685,
+   "end": 111.485,
+   "figure": false,
+   "image": "clip-snow-waterfall-scotland-water-snow-nature-lan#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 111.485,
+   "end": 117.685,
+   "figure": false,
+   "image": "clip-meadow-cosmos-flowers-wind-field-meadow-autumn-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 117.685,
+   "end": 122.185,
+   "figure": false,
+   "image": "clip-forest-trees-forest-sunrise-woods-fog-trail-sun#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 122.185,
+   "end": 128.176,
+   "figure": false,
+   "image": "clip-field-green-wheat-field-agriculture-nature-pla#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 128.176,
+   "end": 133.176,
+   "figure": false,
+   "image": "clip-grass-silver-grass-wind-reed-autumn-landscape-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 133.176,
+   "end": 139.676,
+   "figure": false,
+   "image": "clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 139.676,
+   "end": 145.176,
+   "figure": false,
+   "image": "clip-clouds-clouds-cumulus-mountains-landscape-switz#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 145.176,
+   "end": 149.976,
+   "figure": false,
+   "image": "clip-river-fall-flow-mountain-stream-larch-forest-n#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 149.976,
+   "end": 156.176,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-cascade-that-nature-moun#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 156.176,
+   "end": 160.676,
+   "figure": false,
+   "image": "clip-lake-lake-outlook-alpine-flowers-fogging-lake#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 160.676,
+   "end": 166.676,
+   "figure": false,
+   "image": "clip-ocean-wave-rocks-coast-sea-that-ocean-holiday-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 166.676,
+   "end": 171.676,
+   "figure": false,
+   "image": "clip-mist-loch-lake-water-blue-scotland-highlands-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 171.676,
+   "end": 177.656,
+   "figure": false,
+   "image": "clip-snow-cloud-formation-fog-mountain-clouds-snow#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 177.656,
+   "end": 183.097,
+   "figure": false,
+   "image": "clip-meadow-flower-convolvulus-wind-wildflower-wild-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 183.097,
+   "end": 187.664,
+   "figure": false,
+   "image": "clip-forest-trees-forest-sunset-sun-light-field-aeri#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 187.664,
+   "end": 193.864,
+   "figure": false,
+   "image": "clip-field-field-prairie-wheat-sun-agriculture-dusk#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 193.864,
+   "end": 198.364,
+   "figure": false,
+   "image": "clip-grass-grass-plant-dry-park-garden-botanical-sp#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 198.364,
+   "end": 204.364,
+   "figure": false,
+   "image": "clip-sunrise-sunrise-fog-sea-of-fog-switzerland-sun-c#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 204.364,
+   "end": 209.364,
+   "figure": false,
+   "image": "clip-clouds-mountains-desert-arid-dry-clouds-4k-natu#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 209.364,
+   "end": 215.864,
+   "figure": false,
+   "image": "clip-river-forest-woods-stream-river-creek-water-le#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 215.864,
+   "end": 221.364,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-cascade-water-drains-jum#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 221.364,
+   "end": 226.164,
+   "figure": false,
+   "image": "clip-lake-lake-sunrise-sun-landscape-nature-lake-z#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 226.164,
+   "end": 232.364,
+   "figure": false,
+   "image": "clip-ocean-aerial-ocean-rocks-oregon-indian-beach-l#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 232.364,
+   "end": 236.889,
+   "figure": false,
+   "image": "clip-mist-winter-hoarfrost-fog-mist-landscape-natu#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 236.889,
+   "end": 242.693,
+   "figure": false,
+   "image": "clip-snow-forest-snow-blizzard-river-snowfall-snow#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 242.693,
+   "end": 247.693,
+   "figure": false,
+   "image": "clip-meadow-flower-garden-autumn-wind-plant-landscap#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 247.693,
+   "end": 253.875,
+   "figure": false,
+   "image": "clip-forest-trees-forest-woods-autumn-landscape-natu#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 253.875,
+   "end": 259.871,
+   "figure": false,
+   "image": "clip-field-fields-wheat-agriculture-landscape-farm-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 259.871,
+   "end": 264.671,
+   "figure": false,
+   "image": "clip-grass-riverside-autumn-silver-grass-wind-lands#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 264.671,
+   "end": 270.871,
+   "figure": false,
+   "image": "clip-sunrise-sunset-blossoms-spring-plum-blossoms-tim#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 270.871,
+   "end": 275.371,
+   "figure": false,
+   "image": "clip-clouds-sunrise-fog-clouds-landscape-mountain-ra#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 275.371,
+   "end": 281.847,
+   "figure": false,
+   "image": "clip-river-mountain-tree-flying-sky-water-travel-st#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 281.847,
+   "end": 286.52,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-forest-mountain-cascade-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 286.52,
+   "end": 292.492,
+   "figure": false,
+   "image": "clip-lake-river-lake-water-alpes-dolomiti-dolomite#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 292.492,
+   "end": 297.992,
+   "figure": false,
+   "image": "clip-ocean-beach-landscape-clouds-travel-waves-wate#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 297.992,
+   "end": 302.792,
+   "figure": false,
+   "image": "clip-mist-clouds-sunset-fog-sun-forest-fir-forest#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 302.792,
+   "end": 308.992,
+   "figure": false,
+   "image": "clip-snow-ice-snowfall-snow-christmas-sky-trees-wi#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 308.992,
+   "end": 313.492,
+   "figure": false,
+   "image": "clip-meadow-flower-wind-wildflower-wild-flower-plant#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 313.492,
+   "end": 319.492,
+   "figure": false,
+   "image": "clip-forest-trees-sunset-forest-sun-light-golden-hou#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 319.492,
+   "end": 324.541,
+   "figure": false,
+   "image": "clip-night-cloud-sky-grey-clouds-cloudy-sky#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 324.541,
+   "end": 331.041,
+   "figure": false,
+   "image": "clip-river-river-rocks-landscape-outdoors-water-flo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 331.041,
+   "end": 336.256,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-forest-trees-falls-rain-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 336.256,
+   "end": 341.056,
+   "figure": false,
+   "image": "clip-lake-sunrise-atlake-bled-webm#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 341.056,
+   "end": 347.736,
+   "figure": false,
+   "image": "clip-ocean-beach-ocean-sunset-sea-nature-sky-sun-su#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 347.736,
+   "end": 352.9,
+   "figure": false,
+   "image": "clip-mist-fog-haze-forest-trees-autumnal-nature-mi#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 352.9,
+   "end": 358.9,
+   "figure": false,
+   "image": "clip-snow-mountains-alps-fog-snow-clouds-winter-sk#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 358.9,
+   "end": 363.631,
+   "figure": false,
+   "image": "clip-meadow-flowers-field-meadow-cosmos-autumn#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 363.631,
+   "end": 370.335,
+   "figure": false,
+   "image": "clip-forest-turtle-forest-woods-autumn-fall-nature#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 370.335,
+   "end": 375.835,
+   "figure": false,
+   "image": "clip-night-cloud-sky-grey-clouds-cloudy-sky-grey-sk#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 375.835,
+   "end": 380.635,
+   "figure": false,
+   "image": "clip-river-river-stream-creek-flowing-forest-logs-t#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 380.635,
+   "end": 386.835,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-nature-water-cascade-lan#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 386.835,
+   "end": 391.335,
+   "figure": false,
+   "image": "clip-lake-sunrise-lake-clouds-dawn-landscape-natur#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 391.335,
+   "end": 397.335,
+   "figure": false,
+   "image": "clip-ocean-beach-ocean-sunset-waves-caribbean-curac#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 397.335,
+   "end": 402.335,
+   "figure": false,
+   "image": "clip-mist-fog-hill-law-evening-dusk-clouds-mist#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 402.335,
+   "end": 408.835,
+   "figure": false,
+   "image": "clip-snow-road-path-snow-snowfall-winter-forest-wa#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 408.835,
+   "end": 414.335,
+   "figure": false,
+   "image": "clip-meadow-flowers-yellow-cosmos-wind-yellow-flower#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 414.335,
+   "end": 419.135,
+   "figure": false,
+   "image": "clip-forest-fall-larches-autumn-leaves-autumn-wind-c#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 419.135,
+   "end": 425.581,
+   "figure": false,
+   "image": "clip-river-river-trees-rocks-water-nature#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 425.581,
+   "end": 430.233,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-stream-forest-morning-wa#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 430.233,
+   "end": 436.233,
+   "figure": false,
+   "image": "clip-lake-waterfalls-river-lake-sunset-sunrise-wat#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 436.233,
+   "end": 441.233,
+   "figure": false,
+   "image": "clip-ocean-bird-cormorant-beak-plumage-feathers-win#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 441.233,
+   "end": 448.132,
+   "figure": false,
+   "image": "clip-mist-fog-mist-fogging-forest-trees-nature-lan#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 448.132,
+   "end": 453.632,
+   "figure": false,
+   "image": "clip-snow-trees-forest-frost-snow-winter-cold-natu#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 453.632,
+   "end": 458.432,
+   "figure": false,
+   "image": "clip-meadow-grass-dew-field-fog-morning-nature-sunsh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 458.432,
+   "end": 464.632,
+   "figure": false,
+   "image": "clip-forest-netherlands-sun-rays-misty-forest-sunlig#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 464.632,
+   "end": 469.132,
+   "figure": false,
+   "image": "clip-river-river-water-cascades-rocks-summer-enviro#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 469.132,
+   "end": 475.132,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-trees-forest#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 475.132,
+   "end": 480.132,
+   "figure": false,
+   "image": "clip-lake-aerial-drone-lake-waterfall-rocks-waves-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 480.132,
+   "end": 486.431,
+   "figure": false,
+   "image": "clip-ocean-boa-vista-cape-verde-nature-sea-ocean-sh#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 486.431,
+   "end": 491.931,
+   "figure": false,
+   "image": "clip-mist-fog-mist-forest-autumnal-fall-landscape-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 491.931,
+   "end": 496.731,
+   "figure": false,
+   "image": "clip-meadow-lavender-flowers-field-spring-farming-na#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 496.731,
+   "end": 502.931,
+   "figure": false,
+   "image": "clip-forest-sunrise-sunlight-sun-forest-fog-clouds-s#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 502.931,
+   "end": 507.193,
+   "figure": false,
+   "image": "clip-river-river-whitewater-rapids-rocks-streams-wa#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 507.193,
+   "end": 513.193,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-view-nature-that-flow-fo#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 513.193,
+   "end": 517.5,
+   "figure": false,
+   "image": "clip-lake-flowers-field-meadow-lake-water-dolomite#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 517.5,
+   "end": 524.0,
+   "figure": false,
+   "image": "clip-ocean-cliff-sea-waves-ocean-view-coast-beach-b#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 524.0,
+   "end": 529.5,
+   "figure": false,
+   "image": "clip-meadow-lavender-flowers-field-spring-nature#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 529.5,
+   "end": 534.3,
+   "figure": false,
+   "image": "clip-forest-trees-forest-autumn-scenic-4k-netherland#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 534.3,
+   "end": 540.5,
+   "figure": false,
+   "image": "clip-river-water-wild-water-mountain-stream-rock-na#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 540.5,
+   "end": 545.0,
+   "figure": false,
+   "image": "clip-waterfall-dark-hollow-upper-falls-shenandoah-np-va#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 545.0,
+   "end": 550.447,
+   "figure": false,
+   "image": "clip-lake-fog-sunrise-lake-morning-water-calm-peac#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 550.447,
+   "end": 555.267,
+   "figure": false,
+   "image": "clip-ocean-madeira-portugal-travel-nature-sea-rocks#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 555.267,
+   "end": 561.767,
+   "figure": false,
+   "image": "clip-meadow-rye-grain-spike-wind-rye-field-field-nat#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 561.767,
+   "end": 567.267,
+   "figure": false,
+   "image": "clip-river-waterfall-forest-river-stream-creek-moss#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 567.267,
+   "end": 572.067,
+   "figure": false,
+   "image": "clip-waterfall-delaneys-falls-webm#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 572.067,
+   "end": 578.267,
+   "figure": false,
+   "image": "clip-ocean-marine-sea-water-blue-beach-wave-nature-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 578.267,
+   "end": 582.767,
+   "figure": false,
+   "image": "clip-meadow-tulips-flowers-field-clouds-spring-nethe#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 582.767,
+   "end": 588.187,
+   "figure": false,
+   "image": "clip-river-waterfall-river-forest-nature-moss-mount#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 588.187,
+   "end": 593.187,
+   "figure": false,
+   "image": "clip-ocean-ocean-rocks-waves-oregon-guanos-landscap#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 593.187,
+   "end": 599.687,
+   "figure": false,
+   "image": "clip-meadow-tulips-flowers-field-spring-flora-blosso#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 599.687,
+   "end": 605.187,
+   "figure": false,
+   "image": "clip-river-waterfall-river-forest-trees-stream-cree#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 605.187,
+   "end": 609.987,
+   "figure": false,
+   "image": "clip-ocean-ocean-sunset-dark-clouds-waves-romantic-#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 609.987,
+   "end": 615.776,
+   "figure": false,
+   "image": "clip-meadow-tulips-flowers-tulip-field-field-of-flow#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 615.776,
+   "end": 620.276,
+   "figure": false,
+   "image": "clip-river-waterfall-river-mountain-stream-water-st#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 620.276,
+   "end": 626.276,
+   "figure": false,
+   "image": "clip-ocean-panto-beach-sandiego-ocean-coast-califor#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 626.276,
+   "end": 631.276,
+   "figure": false,
+   "image": "clip-meadow-yellow-flower-cosmos-wind-autumn-landsca#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 631.276,
+   "end": 637.776,
+   "figure": false,
+   "image": "clip-ocean-sea-ocean-surf-waves-beach-rock-coast#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 637.776,
+   "end": 643.276,
+   "figure": false,
+   "image": "clip-ocean-sea-ocean-waves-sunset-horizon-sky-cloud#0",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 0.0,
+   "slow": 1.0
+  },
+  {
+   "start": 643.276,
+   "end": 648.076,
+   "figure": false,
+   "image": "clip-sunrise-sunset-clouds-golden-sunset-sun-downfall#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 648.076,
+   "end": 654.276,
+   "figure": false,
+   "image": "clip-clouds-clouds-cumulus-heaven-sun-air-the-atmosp#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 654.276,
+   "end": 658.776,
+   "figure": false,
+   "image": "clip-river-waterfall-rocks-river-stream-water-sceni#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 658.776,
+   "end": 664.776,
+   "figure": false,
+   "image": "clip-waterfall-river-forest-waterfall-beautiful-wallpap#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 664.776,
+   "end": 669.776,
+   "figure": false,
+   "image": "clip-lake-lake-forest-trees-fog-sunrise-morning-ne#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 669.776,
+   "end": 676.276,
+   "figure": false,
+   "image": "clip-ocean-sunrise-sea-ocean-waves-beach-lanzarote-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 676.276,
+   "end": 681.776,
+   "figure": false,
+   "image": "clip-mist-fog-morning-mist-nature-haze-tomorrow-mo#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 681.776,
+   "end": 686.576,
+   "figure": false,
+   "image": "clip-snow-trees-forest-snowfall-snow-showers-winte#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 686.576,
+   "end": 692.971,
+   "figure": false,
+   "image": "clip-night-aurora-butterfly-butterfly-insect-nectar#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 692.971,
+   "end": 697.471,
+   "figure": false,
+   "image": "clip-forest-trees-forest-moss-scenic-autumn-4k#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 697.471,
+   "end": 703.471,
+   "figure": false,
+   "image": "clip-field-grain-grain-field-cornflower-barley-whea#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 703.471,
+   "end": 708.471,
+   "figure": false,
+   "image": "clip-grass-silver-grass-reed-autumn-autumn-wind#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 708.471,
+   "end": 714.971,
+   "figure": false,
+   "image": "clip-sunrise-fog-sea-of-fog-mist-mountains-mountain-l#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 714.971,
+   "end": 720.471,
+   "figure": false,
+   "image": "clip-clouds-clouds-cumulus-heaven-wind-the-atmospher#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 720.471,
+   "end": 725.295,
+   "figure": false,
+   "image": "clip-river-bach-larch-forest-forest-autumn-colors-f#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 725.295,
+   "end": 731.495,
+   "figure": false,
+   "image": "clip-waterfall-rocks-stones-water-nature-waterfalls-cas#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 731.495,
+   "end": 735.995,
+   "figure": false,
+   "image": "clip-lake-lake-mountains-sunset-sunrise-relaxing-c#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 735.995,
+   "end": 741.995,
+   "figure": false,
+   "image": "clip-ocean-sunset-sea-ocean-beach#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 741.995,
+   "end": 746.995,
+   "figure": false,
+   "image": "clip-mist-fog-sun-fog-ceiling-sunshine-mist-ripe-h#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 746.995,
+   "end": 753.14,
+   "figure": false,
+   "image": "clip-snow-waterfall-scotland-water-snow-nature-lan#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 753.14,
+   "end": 758.64,
+   "figure": false,
+   "image": "clip-meadow-cosmos-flowers-wind-field-meadow-autumn-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 758.64,
+   "end": 763.44,
+   "figure": false,
+   "image": "clip-forest-trees-forest-sunrise-woods-fog-trail-sun#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 763.44,
+   "end": 769.64,
+   "figure": false,
+   "image": "clip-field-green-wheat-field-agriculture-nature-pla#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 769.64,
+   "end": 774.14,
+   "figure": false,
+   "image": "clip-grass-silver-grass-wind-reed-autumn-landscape-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 774.14,
+   "end": 780.173,
+   "figure": false,
+   "image": "clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 780.173,
+   "end": 785.173,
+   "figure": false,
+   "image": "clip-clouds-clouds-cumulus-mountains-landscape-switz#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 785.173,
+   "end": 791.673,
+   "figure": false,
+   "image": "clip-river-fall-flow-mountain-stream-larch-forest-n#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 791.673,
+   "end": 797.173,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-cascade-that-nature-moun#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 797.173,
+   "end": 801.973,
+   "figure": false,
+   "image": "clip-lake-lake-outlook-alpine-flowers-fogging-lake#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 801.973,
+   "end": 808.796,
+   "figure": false,
+   "image": "clip-ocean-wave-rocks-coast-sea-that-ocean-holiday-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 808.796,
+   "end": 813.619,
+   "figure": false,
+   "image": "clip-mist-loch-lake-water-blue-scotland-highlands-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 813.619,
+   "end": 819.551,
+   "figure": false,
+   "image": "clip-snow-cloud-formation-fog-mountain-clouds-snow#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 819.551,
+   "end": 824.551,
+   "figure": false,
+   "image": "clip-meadow-flower-convolvulus-wind-wildflower-wild-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 824.551,
+   "end": 831.051,
+   "figure": false,
+   "image": "clip-forest-trees-forest-sunset-sun-light-field-aeri#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 831.051,
+   "end": 836.861,
+   "figure": false,
+   "image": "clip-field-field-prairie-wheat-sun-agriculture-dusk#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 836.861,
+   "end": 841.661,
+   "figure": false,
+   "image": "clip-grass-grass-plant-dry-park-garden-botanical-sp#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 841.661,
+   "end": 847.861,
+   "figure": false,
+   "image": "clip-sunrise-sunrise-fog-sea-of-fog-switzerland-sun-c#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 847.861,
+   "end": 852.361,
+   "figure": false,
+   "image": "clip-clouds-mountains-desert-arid-dry-clouds-4k-natu#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 852.361,
+   "end": 858.361,
+   "figure": false,
+   "image": "clip-river-forest-woods-stream-river-creek-water-le#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 858.361,
+   "end": 863.361,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-cascade-water-drains-jum#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 863.361,
+   "end": 869.861,
+   "figure": false,
+   "image": "clip-lake-lake-sunrise-sun-landscape-nature-lake-z#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 869.861,
+   "end": 875.745,
+   "figure": false,
+   "image": "clip-ocean-aerial-ocean-rocks-oregon-indian-beach-l#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 875.745,
+   "end": 880.545,
+   "figure": false,
+   "image": "clip-mist-winter-hoarfrost-fog-mist-landscape-natu#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 880.545,
+   "end": 886.745,
+   "figure": false,
+   "image": "clip-snow-forest-snow-blizzard-river-snowfall-snow#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 886.745,
+   "end": 891.245,
+   "figure": false,
+   "image": "clip-meadow-flower-garden-autumn-wind-plant-landscap#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 891.245,
+   "end": 897.245,
+   "figure": false,
+   "image": "clip-forest-trees-forest-woods-autumn-landscape-natu#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 897.245,
+   "end": 902.245,
+   "figure": false,
+   "image": "clip-field-fields-wheat-agriculture-landscape-farm-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 902.245,
+   "end": 908.745,
+   "figure": false,
+   "image": "clip-grass-riverside-autumn-silver-grass-wind-lands#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 908.745,
+   "end": 914.305,
+   "figure": false,
+   "image": "clip-sunrise-sunset-blossoms-spring-plum-blossoms-tim#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 914.305,
+   "end": 918.68,
+   "figure": false,
+   "image": "clip-clouds-sunrise-fog-clouds-landscape-mountain-ra#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 918.68,
+   "end": 924.88,
+   "figure": false,
+   "image": "clip-river-mountain-tree-flying-sky-water-travel-st#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 924.88,
+   "end": 929.38,
+   "figure": false,
+   "image": "clip-waterfall-waterfall-river-forest-mountain-cascade-#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 929.38,
+   "end": 933.406,
+   "figure": false,
+   "image": "clip-lake-river-lake-water-alpes-dolomiti-dolomite#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  },
+  {
+   "start": 933.406,
+   "end": 937.432,
+   "figure": false,
+   "image": "clip-ocean-beach-landscape-clouds-travel-waves-wate#1",
+   "kind": "footage",
+   "motion": "footage",
+   "source_start": 6.5,
+   "slow": 1.0
+  }
+ ],
+ "captions_ass_sha256": "12bd83172e04af1d83a269171f22f18dd1a3ec8b88222743db9ea9cd58a94128",
+ "captions": [
+  {
+   "start": 1.297,
+   "end": 3.751,
+   "text": "before your family's day begins,"
+  },
+  {
+   "start": 3.751,
+   "end": 6.659,
+   "text": "cover everyone you love in prayer."
+  },
+  {
+   "start": 6.659,
+   "end": 8.417,
+   "text": "Pray with me."
+  },
+  {
+   "start": 9.067,
+   "end": 11.201,
+   "text": "We will pray for your spouse,"
+  },
+  {
+   "start": 11.201,
+   "end": 12.231,
+   "text": "your children,"
+  },
+  {
+   "start": 12.231,
+   "end": 13.775,
+   "text": "the tensions at home,"
+  },
+  {
+   "start": 13.775,
+   "end": 16.13,
+   "text": "and the needs of your household,"
+  },
+  {
+   "start": 16.13,
+   "end": 17.289,
+   "text": "one by one."
+  },
+  {
+   "start": 18.039,
+   "end": 20.389,
+   "text": "Maybe the house is still quiet,"
+  },
+  {
+   "start": 20.389,
+   "end": 23.042,
+   "text": "or maybe someone is already looking"
+  },
+  {
+   "start": 23.042,
+   "end": 26.147,
+   "text": "for shoes and asking about breakfast."
+  },
+  {
+   "start": 26.147,
+   "end": 26.931,
+   "text": "Either way,"
+  },
+  {
+   "start": 26.931,
+   "end": 28.213,
+   "text": "you can pause here"
+  },
+  {
+   "start": 28.213,
+   "end": 29.796,
+   "text": "for a few minutes."
+  },
+  {
+   "start": 29.796,
+   "end": 31.511,
+   "text": "You will pray for each"
+  },
+  {
+   "start": 31.511,
+   "end": 32.68,
+   "text": "person by name,"
+  },
+  {
+   "start": 32.68,
+   "end": 34.862,
+   "text": "for the conversations ahead,"
+  },
+  {
+   "start": 34.862,
+   "end": 37.968,
+   "text": "and for the atmosphere of your home."
+  },
+  {
+   "start": 37.968,
+   "end": 38.796,
+   "text": "At the end,"
+  },
+  {
+   "start": 38.796,
+   "end": 41.054,
+   "text": "you will choose one simple act"
+  },
+  {
+   "start": 41.054,
+   "end": 43.737,
+   "text": "of love to offer someone today."
+  },
+  {
+   "start": 44.687,
+   "end": 45.172,
+   "text": "Father,"
+  },
+  {
+   "start": 45.172,
+   "end": 46.696,
+   "text": "thank you for this new"
+  },
+  {
+   "start": 46.696,
+   "end": 48.496,
+   "text": "morning and for the people"
+  },
+  {
+   "start": 48.496,
+   "end": 50.597,
+   "text": "you have placed around me."
+  },
+  {
+   "start": 50.597,
+   "end": 52.761,
+   "text": "Before I speak to any of them,"
+  },
+  {
+   "start": 52.761,
+   "end": 54.865,
+   "text": "I want to speak with you."
+  },
+  {
+   "start": 54.865,
+   "end": 56.598,
+   "text": "You know each one more"
+  },
+  {
+   "start": 56.598,
+   "end": 58.237,
+   "text": "deeply than I do."
+  },
+  {
+   "start": 58.237,
+   "end": 60.141,
+   "text": "You know who slept badly,"
+  },
+  {
+   "start": 60.141,
+   "end": 62.198,
+   "text": "who is anxious about today,"
+  },
+  {
+   "start": 62.198,
+   "end": 64.407,
+   "text": "and who is carrying something"
+  },
+  {
+   "start": 64.407,
+   "end": 66.687,
+   "text": "they have not told anyone."
+  },
+  {
+   "start": 66.687,
+   "end": 68.526,
+   "text": "Make me attentive to them,"
+  },
+  {
+   "start": 68.526,
+   "end": 70.293,
+   "text": "and make our home a place"
+  },
+  {
+   "start": 70.293,
+   "end": 72.199,
+   "text": "where you are welcome."
+  },
+  {
+   "start": 73.149,
+   "end": 74.886,
+   "text": "And if it seem evil unto"
+  },
+  {
+   "start": 74.886,
+   "end": 76.479,
+   "text": "you to serve the LORD,"
+  },
+  {
+   "start": 76.479,
+   "end": 77.854,
+   "text": "choose you this day"
+  },
+  {
+   "start": 77.854,
+   "end": 79.529,
+   "text": "whom ye will serve;"
+  },
+  {
+   "start": 79.529,
+   "end": 81.159,
+   "text": "whether the gods which"
+  },
+  {
+   "start": 81.159,
+   "end": 83.308,
+   "text": "your fathers served that were"
+  },
+  {
+   "start": 83.308,
+   "end": 85.606,
+   "text": "on the other side of the flood,"
+  },
+  {
+   "start": 85.606,
+   "end": 87.681,
+   "text": "or the gods of the Amorites,"
+  },
+  {
+   "start": 87.681,
+   "end": 89.685,
+   "text": "in whose land ye dwell:"
+  },
+  {
+   "start": 89.685,
+   "end": 91.909,
+   "text": "but as for me and my house,"
+  },
+  {
+   "start": 91.909,
+   "end": 94.153,
+   "text": "we will serve the LORD."
+  },
+  {
+   "start": 95.403,
+   "end": 98.199,
+   "text": "Lord, I choose you again today."
+  },
+  {
+   "start": 98.199,
+   "end": 100.594,
+   "text": "I want my words, my reactions,"
+  },
+  {
+   "start": 100.594,
+   "end": 103.768,
+   "text": "and my plans to reflect that choice."
+  },
+  {
+   "start": 103.768,
+   "end": 105.78,
+   "text": "When I am tempted to bring"
+  },
+  {
+   "start": 105.78,
+   "end": 107.56,
+   "text": "stress into every room,"
+  },
+  {
+   "start": 107.56,
+   "end": 110.724,
+   "text": "remind me whose house this really is."
+  },
+  {
+   "start": 110.724,
+   "end": 112.459,
+   "text": "Help me lead by example"
+  },
+  {
+   "start": 112.459,
+   "end": 114.267,
+   "text": "rather than lecture."
+  },
+  {
+   "start": 114.267,
+   "end": 116.605,
+   "text": "Let the people around me notice"
+  },
+  {
+   "start": 116.605,
+   "end": 119.395,
+   "text": "something of your kindness in the way"
+  },
+  {
+   "start": 119.395,
+   "end": 122.083,
+   "text": "I listen and the way I respond."
+  },
+  {
+   "start": 123.033,
+   "end": 125.381,
+   "text": "Except the LORD build the house,"
+  },
+  {
+   "start": 125.381,
+   "end": 128.176,
+   "text": "they labour in vain that build it:"
+  },
+  {
+   "start": 128.176,
+   "end": 130.509,
+   "text": "except the LORD keep the city,"
+  },
+  {
+   "start": 130.509,
+   "end": 133.347,
+   "text": "the watchman waketh but in vain."
+  },
+  {
+   "start": 134.597,
+   "end": 136.988,
+   "text": "Father, build our home."
+  },
+  {
+   "start": 136.988,
+   "end": 139.121,
+   "text": "I bring you our routines,"
+  },
+  {
+   "start": 139.121,
+   "end": 141.511,
+   "text": "our finances, our calendars,"
+  },
+  {
+   "start": 141.511,
+   "end": 143.815,
+   "text": "and the unfinished projects"
+  },
+  {
+   "start": 143.815,
+   "end": 146.163,
+   "text": "that crowd our evenings."
+  },
+  {
+   "start": 146.163,
+   "end": 148.594,
+   "text": "I cannot guard every part of our"
+  },
+  {
+   "start": 148.594,
+   "end": 150.793,
+   "text": "life by staying vigilant."
+  },
+  {
+   "start": 150.793,
+   "end": 153.589,
+   "text": "Be the one who watches over us."
+  },
+  {
+   "start": 153.589,
+   "end": 155.109,
+   "text": "Where we have built"
+  },
+  {
+   "start": 155.109,
+   "end": 156.469,
+   "text": "on hurry or fear,"
+  },
+  {
+   "start": 156.469,
+   "end": 158.369,
+   "text": "rebuild us on trust."
+  },
+  {
+   "start": 158.369,
+   "end": 160.758,
+   "text": "Where our foundations feel cracked,"
+  },
+  {
+   "start": 160.758,
+   "end": 163.352,
+   "text": "strengthen them with your faithfulness"
+  },
+  {
+   "start": 163.352,
+   "end": 164.863,
+   "text": "and patient love."
+  },
+  {
+   "start": 165.813,
+   "end": 166.228,
+   "text": "Lord,"
+  },
+  {
+   "start": 166.228,
+   "end": 167.97,
+   "text": "I pray for the person"
+  },
+  {
+   "start": 167.97,
+   "end": 169.712,
+   "text": "I share my life with,"
+  },
+  {
+   "start": 169.712,
+   "end": 171.621,
+   "text": "or for the relationship"
+  },
+  {
+   "start": 171.621,
+   "end": 173.58,
+   "text": "closest to my heart."
+  },
+  {
+   "start": 173.58,
+   "end": 175.921,
+   "text": "Give them strength for whatever"
+  },
+  {
+   "start": 175.921,
+   "end": 177.656,
+   "text": "today asks of them."
+  },
+  {
+   "start": 177.656,
+   "end": 179.084,
+   "text": "Where there has been"
+  },
+  {
+   "start": 179.084,
+   "end": 180.512,
+   "text": "distance between us,"
+  },
+  {
+   "start": 180.512,
+   "end": 183.097,
+   "text": "bring us back toward each other."
+  },
+  {
+   "start": 183.097,
+   "end": 185.193,
+   "text": "Help me notice their efforts"
+  },
+  {
+   "start": 185.193,
+   "end": 187.664,
+   "text": "instead of only their faults."
+  },
+  {
+   "start": 187.664,
+   "end": 189.974,
+   "text": "Let my words today build them up,"
+  },
+  {
+   "start": 189.974,
+   "end": 191.583,
+   "text": "and let our partnership"
+  },
+  {
+   "start": 191.583,
+   "end": 193.753,
+   "text": "reflect your faithfulness."
+  },
+  {
+   "start": 194.703,
+   "end": 196.889,
+   "text": "Next, the children you love,"
+  },
+  {
+   "start": 196.889,
+   "end": 198.722,
+   "text": "whatever their age."
+  },
+  {
+   "start": 199.272,
+   "end": 201.109,
+   "text": "And all thy children shall"
+  },
+  {
+   "start": 201.109,
+   "end": 202.964,
+   "text": "be taught of the LORD;"
+  },
+  {
+   "start": 202.964,
+   "end": 204.851,
+   "text": "and great shall be the peace"
+  },
+  {
+   "start": 204.851,
+   "end": 206.279,
+   "text": "of thy children."
+  },
+  {
+   "start": 207.529,
+   "end": 208.11,
+   "text": "Father,"
+  },
+  {
+   "start": 208.11,
+   "end": 210.901,
+   "text": "I lift up the children I love."
+  },
+  {
+   "start": 210.901,
+   "end": 212.993,
+   "text": "Teach them yourself."
+  },
+  {
+   "start": 212.993,
+   "end": 214.561,
+   "text": "Guard their minds from"
+  },
+  {
+   "start": 214.561,
+   "end": 216.058,
+   "text": "what would harm them,"
+  },
+  {
+   "start": 216.058,
+   "end": 217.555,
+   "text": "and their hearts from"
+  },
+  {
+   "start": 217.555,
+   "end": 219.779,
+   "text": "believing they are unloved."
+  },
+  {
+   "start": 219.779,
+   "end": 221.836,
+   "text": "Give them friends who are kind"
+  },
+  {
+   "start": 221.836,
+   "end": 223.919,
+   "text": "and teachers who are wise."
+  },
+  {
+   "start": 223.919,
+   "end": 226.14,
+   "text": "When they make mistakes today,"
+  },
+  {
+   "start": 226.14,
+   "end": 229.253,
+   "text": "let them find grace rather than shame."
+  },
+  {
+   "start": 229.253,
+   "end": 231.76,
+   "text": "Let your peace be great within them,"
+  },
+  {
+   "start": 231.76,
+   "end": 233.848,
+   "text": "deeper than the pressures they"
+  },
+  {
+   "start": 233.848,
+   "end": 235.939,
+   "text": "face at school or online."
+  },
+  {
+   "start": 236.889,
+   "end": 237.277,
+   "text": "Lord,"
+  },
+  {
+   "start": 237.277,
+   "end": 239.37,
+   "text": "some of the children I love"
+  },
+  {
+   "start": 239.37,
+   "end": 242.693,
+   "text": "are carrying fears they cannot explain."
+  },
+  {
+   "start": 242.693,
+   "end": 243.254,
+   "text": "A test,"
+  },
+  {
+   "start": 243.254,
+   "end": 245.658,
+   "text": "a friendship that has changed,"
+  },
+  {
+   "start": 245.658,
+   "end": 247.18,
+   "text": "a worry about home,"
+  },
+  {
+   "start": 247.18,
+   "end": 250.204,
+   "text": "or something they saw on a screen."
+  },
+  {
+   "start": 250.204,
+   "end": 251.398,
+   "text": "Give them courage"
+  },
+  {
+   "start": 251.398,
+   "end": 253.875,
+   "text": "that is bigger than their fear."
+  },
+  {
+   "start": 253.875,
+   "end": 256.687,
+   "text": "Help me notice when something is wrong,"
+  },
+  {
+   "start": 256.687,
+   "end": 257.985,
+   "text": "and give me gentle"
+  },
+  {
+   "start": 257.985,
+   "end": 259.871,
+   "text": "words to ask about it."
+  },
+  {
+   "start": 259.871,
+   "end": 261.495,
+   "text": "Let them know they can"
+  },
+  {
+   "start": 261.495,
+   "end": 262.823,
+   "text": "always come to me,"
+  },
+  {
+   "start": 262.823,
+   "end": 264.871,
+   "text": "and always come to you."
+  },
+  {
+   "start": 265.821,
+   "end": 266.202,
+   "text": "Lord,"
+  },
+  {
+   "start": 266.202,
+   "end": 267.802,
+   "text": "I also pray for those"
+  },
+  {
+   "start": 267.802,
+   "end": 269.859,
+   "text": "who have grown up and moved"
+  },
+  {
+   "start": 269.859,
+   "end": 271.988,
+   "text": "into lives of their own."
+  },
+  {
+   "start": 271.988,
+   "end": 274.329,
+   "text": "I cannot manage their choices,"
+  },
+  {
+   "start": 274.329,
+   "end": 276.28,
+   "text": "and some of them may feel"
+  },
+  {
+   "start": 276.28,
+   "end": 278.453,
+   "text": "far from me or from you."
+  },
+  {
+   "start": 278.453,
+   "end": 279.564,
+   "text": "Keep them safe"
+  },
+  {
+   "start": 279.564,
+   "end": 281.847,
+   "text": "on the roads they travel."
+  },
+  {
+   "start": 281.847,
+   "end": 283.568,
+   "text": "Meet them in their work,"
+  },
+  {
+   "start": 283.568,
+   "end": 285.001,
+   "text": "their relationships,"
+  },
+  {
+   "start": 285.001,
+   "end": 286.52,
+   "text": "and their doubts."
+  },
+  {
+   "start": 286.52,
+   "end": 288.173,
+   "text": "Draw them close to you,"
+  },
+  {
+   "start": 288.173,
+   "end": 289.395,
+   "text": "and keep the door"
+  },
+  {
+   "start": 289.395,
+   "end": 291.542,
+   "text": "of my heart open to them."
+  },
+  {
+   "start": 292.492,
+   "end": 293.056,
+   "text": "Father,"
+  },
+  {
+   "start": 293.056,
+   "end": 295.693,
+   "text": "families come in many shapes."
+  },
+  {
+   "start": 295.693,
+   "end": 298.219,
+   "text": "Some of us are raising children"
+  },
+  {
+   "start": 298.219,
+   "end": 300.964,
+   "text": "who are not biologically ours."
+  },
+  {
+   "start": 300.964,
+   "end": 302.581,
+   "text": "Some are blending two"
+  },
+  {
+   "start": 302.581,
+   "end": 304.421,
+   "text": "households into one."
+  },
+  {
+   "start": 304.421,
+   "end": 307.516,
+   "text": "Some are caring for a relative alone."
+  },
+  {
+   "start": 307.516,
+   "end": 308.779,
+   "text": "Some are waiting"
+  },
+  {
+   "start": 308.779,
+   "end": 310.973,
+   "text": "and hoping for children."
+  },
+  {
+   "start": 310.973,
+   "end": 313.014,
+   "text": "Meet each of us in our"
+  },
+  {
+   "start": 313.014,
+   "end": 315.263,
+   "text": "particular situation."
+  },
+  {
+   "start": 315.263,
+   "end": 317.475,
+   "text": "Give wisdom to every parent,"
+  },
+  {
+   "start": 317.475,
+   "end": 319.37,
+   "text": "guardian, and caregiver,"
+  },
+  {
+   "start": 319.37,
+   "end": 321.898,
+   "text": "and let every child feel wanted,"
+  },
+  {
+   "start": 321.898,
+   "end": 323.591,
+   "text": "chosen, and safe."
+  },
+  {
+   "start": 324.541,
+   "end": 326.337,
+   "text": "In the fear of the LORD"
+  },
+  {
+   "start": 326.337,
+   "end": 328.276,
+   "text": "is strong confidence:"
+  },
+  {
+   "start": 328.276,
+   "end": 329.966,
+   "text": "and his children shall"
+  },
+  {
+   "start": 329.966,
+   "end": 332.082,
+   "text": "have a place of refuge."
+  },
+  {
+   "start": 333.332,
+   "end": 336.256,
+   "text": "Father, make our home a refuge."
+  },
+  {
+   "start": 336.256,
+   "end": 338.1,
+   "text": "When someone walks through"
+  },
+  {
+   "start": 338.1,
+   "end": 339.589,
+   "text": "the door discouraged,"
+  },
+  {
+   "start": 339.589,
+   "end": 341.804,
+   "text": "let them find comfort here."
+  },
+  {
+   "start": 341.804,
+   "end": 343.27,
+   "text": "When someone fails,"
+  },
+  {
+   "start": 343.27,
+   "end": 345.121,
+   "text": "let them find mercy here"
+  },
+  {
+   "start": 345.121,
+   "end": 347.736,
+   "text": "before they find consequences."
+  },
+  {
+   "start": 347.736,
+   "end": 349.408,
+   "text": "Give me a steady heart"
+  },
+  {
+   "start": 349.408,
+   "end": 350.928,
+   "text": "so that my own fears"
+  },
+  {
+   "start": 350.928,
+   "end": 352.9,
+   "text": "do not fill the house."
+  },
+  {
+   "start": 352.9,
+   "end": 354.749,
+   "text": "Let the confidence I have"
+  },
+  {
+   "start": 354.749,
+   "end": 356.893,
+   "text": "in you settle the atmosphere,"
+  },
+  {
+   "start": 356.893,
+   "end": 358.742,
+   "text": "so that each person feels"
+  },
+  {
+   "start": 358.742,
+   "end": 361.015,
+   "text": "safe to rest and to speak."
+  },
+  {
+   "start": 361.965,
+   "end": 363.631,
+   "text": "Stay with me."
+  },
+  {
+   "start": 363.631,
+   "end": 364.592,
+   "text": "In a moment,"
+  },
+  {
+   "start": 364.592,
+   "end": 367.266,
+   "text": "picture each face as we pray."
+  },
+  {
+   "start": 367.816,
+   "end": 370.335,
+   "text": "Take a quiet moment now."
+  },
+  {
+   "start": 370.335,
+   "end": 372.684,
+   "text": "Picture the faces of the people"
+  },
+  {
+   "start": 372.684,
+   "end": 375.029,
+   "text": "you live with or love most."
+  },
+  {
+   "start": 375.029,
+   "end": 376.723,
+   "text": "You do not need to say"
+  },
+  {
+   "start": 376.723,
+   "end": 378.871,
+   "text": "anything about them yet."
+  },
+  {
+   "start": 378.871,
+   "end": 381.036,
+   "text": "Simply hold them in your mind,"
+  },
+  {
+   "start": 381.036,
+   "end": 383.551,
+   "text": "and let God see them with you."
+  },
+  {
+   "start": 389.501,
+   "end": 391.415,
+   "text": "But the mercy of the LORD"
+  },
+  {
+   "start": 391.415,
+   "end": 394.019,
+   "text": "is from everlasting to everlasting"
+  },
+  {
+   "start": 394.019,
+   "end": 395.857,
+   "text": "upon them that fear him,"
+  },
+  {
+   "start": 395.857,
+   "end": 397.465,
+   "text": "and his righteousness"
+  },
+  {
+   "start": 397.465,
+   "end": 399.679,
+   "text": "unto children's children;"
+  },
+  {
+   "start": 399.679,
+   "end": 401.706,
+   "text": "to such as keep his covenant,"
+  },
+  {
+   "start": 401.706,
+   "end": 403.524,
+   "text": "and to those that remember"
+  },
+  {
+   "start": 403.524,
+   "end": 405.831,
+   "text": "his commandments to do them."
+  },
+  {
+   "start": 407.081,
+   "end": 407.579,
+   "text": "Father,"
+  },
+  {
+   "start": 407.579,
+   "end": 409.712,
+   "text": "thank you for those who prayed"
+  },
+  {
+   "start": 409.712,
+   "end": 410.779,
+   "text": "for me before I"
+  },
+  {
+   "start": 410.779,
+   "end": 412.288,
+   "text": "knew how to pray."
+  },
+  {
+   "start": 412.288,
+   "end": 414.34,
+   "text": "Thank you for every person"
+  },
+  {
+   "start": 414.34,
+   "end": 415.918,
+   "text": "who passed faith on,"
+  },
+  {
+   "start": 415.918,
+   "end": 417.559,
+   "text": "even imperfectly."
+  },
+  {
+   "start": 417.559,
+   "end": 419.953,
+   "text": "Where my family history carries"
+  },
+  {
+   "start": 419.953,
+   "end": 421.806,
+   "text": "pain or broken patterns,"
+  },
+  {
+   "start": 421.806,
+   "end": 423.351,
+   "text": "let your mercy begin"
+  },
+  {
+   "start": 423.351,
+   "end": 425.581,
+   "text": "something new through us."
+  },
+  {
+   "start": 425.581,
+   "end": 428.079,
+   "text": "Let the next generation inherit"
+  },
+  {
+   "start": 428.079,
+   "end": 430.233,
+   "text": "more peace than we did."
+  },
+  {
+   "start": 430.233,
+   "end": 432.996,
+   "text": "Let them remember not only our words,"
+  },
+  {
+   "start": 432.996,
+   "end": 434.317,
+   "text": "but our love."
+  },
+  {
+   "start": 435.267,
+   "end": 437.765,
+   "text": "With all lowliness and meekness,"
+  },
+  {
+   "start": 437.765,
+   "end": 439.247,
+   "text": "with longsuffering,"
+  },
+  {
+   "start": 439.247,
+   "end": 441.967,
+   "text": "forbearing one another in love;"
+  },
+  {
+   "start": 441.967,
+   "end": 444.107,
+   "text": "endeavouring to keep the unity"
+  },
+  {
+   "start": 444.107,
+   "end": 445.248,
+   "text": "of the Spirit in"
+  },
+  {
+   "start": 445.248,
+   "end": 446.882,
+   "text": "the bond of peace."
+  },
+  {
+   "start": 448.132,
+   "end": 448.696,
+   "text": "Father,"
+  },
+  {
+   "start": 448.696,
+   "end": 451.653,
+   "text": "I bring the tensions in our home."
+  },
+  {
+   "start": 451.653,
+   "end": 454.334,
+   "text": "You know the conversation that keeps"
+  },
+  {
+   "start": 454.334,
+   "end": 456.195,
+   "text": "turning into an argument,"
+  },
+  {
+   "start": 456.195,
+   "end": 457.833,
+   "text": "and the topic we avoid"
+  },
+  {
+   "start": 457.833,
+   "end": 459.399,
+   "text": "because it hurts."
+  },
+  {
+   "start": 459.399,
+   "end": 461.45,
+   "text": "Give us humility to listen"
+  },
+  {
+   "start": 461.45,
+   "end": 463.88,
+   "text": "and patience to understand."
+  },
+  {
+   "start": 463.88,
+   "end": 465.857,
+   "text": "Where I have been stubborn,"
+  },
+  {
+   "start": 465.857,
+   "end": 466.889,
+   "text": "soften me."
+  },
+  {
+   "start": 466.889,
+   "end": 468.76,
+   "text": "Where I need to speak up,"
+  },
+  {
+   "start": 468.76,
+   "end": 471.605,
+   "text": "give me words seasoned with grace."
+  },
+  {
+   "start": 471.605,
+   "end": 473.875,
+   "text": "Help us keep the bond of peace,"
+  },
+  {
+   "start": 473.875,
+   "end": 476.862,
+   "text": "even when we see things differently."
+  },
+  {
+   "start": 477.812,
+   "end": 480.203,
+   "text": "Wherefore, my beloved brethren,"
+  },
+  {
+   "start": 480.203,
+   "end": 482.594,
+   "text": "let every man be swift to hear,"
+  },
+  {
+   "start": 482.594,
+   "end": 485.181,
+   "text": "slow to speak, slow to wrath:"
+  },
+  {
+   "start": 486.431,
+   "end": 486.797,
+   "text": "Lord,"
+  },
+  {
+   "start": 486.797,
+   "end": 488.334,
+   "text": "make me swift to hear"
+  },
+  {
+   "start": 488.334,
+   "end": 489.952,
+   "text": "the people I love."
+  },
+  {
+   "start": 489.952,
+   "end": 491.367,
+   "text": "Slow my tongue when"
+  },
+  {
+   "start": 491.367,
+   "end": 492.707,
+   "text": "I want to correct,"
+  },
+  {
+   "start": 492.707,
+   "end": 494.348,
+   "text": "interrupt, or win."
+  },
+  {
+   "start": 494.348,
+   "end": 496.403,
+   "text": "Help me hear the worry behind"
+  },
+  {
+   "start": 496.403,
+   "end": 498.741,
+   "text": "a sharp comment and the tiredness"
+  },
+  {
+   "start": 498.741,
+   "end": 500.6,
+   "text": "behind a short answer."
+  },
+  {
+   "start": 500.6,
+   "end": 502.881,
+   "text": "When anger rises in me today,"
+  },
+  {
+   "start": 502.881,
+   "end": 505.084,
+   "text": "let it slow down long enough"
+  },
+  {
+   "start": 505.084,
+   "end": 507.193,
+   "text": "for wisdom to catch up."
+  },
+  {
+   "start": 507.193,
+   "end": 508.613,
+   "text": "Teach me to listen"
+  },
+  {
+   "start": 508.613,
+   "end": 510.935,
+   "text": "the way you listen to me."
+  },
+  {
+   "start": 511.885,
+   "end": 512.291,
+   "text": "Next,"
+  },
+  {
+   "start": 512.291,
+   "end": 514.405,
+   "text": "love that covers the small"
+  },
+  {
+   "start": 514.405,
+   "end": 516.95,
+   "text": "irritations of family life."
+  },
+  {
+   "start": 517.5,
+   "end": 519.952,
+   "text": "And above all things have fervent"
+  },
+  {
+   "start": 519.952,
+   "end": 522.109,
+   "text": "charity among yourselves:"
+  },
+  {
+   "start": 522.109,
+   "end": 523.996,
+   "text": "for charity shall cover"
+  },
+  {
+   "start": 523.996,
+   "end": 526.15,
+   "text": "the multitude of sins."
+  },
+  {
+   "start": 527.4,
+   "end": 527.976,
+   "text": "Father,"
+  },
+  {
+   "start": 527.976,
+   "end": 531.156,
+   "text": "give me fervent love for my family."
+  },
+  {
+   "start": 531.156,
+   "end": 533.358,
+   "text": "Help me let small irritations"
+  },
+  {
+   "start": 533.358,
+   "end": 535.253,
+   "text": "pass without comment."
+  },
+  {
+   "start": 535.253,
+   "end": 537.14,
+   "text": "Keep me from storing up"
+  },
+  {
+   "start": 537.14,
+   "end": 539.244,
+   "text": "offenses to use later."
+  },
+  {
+   "start": 539.244,
+   "end": 541.469,
+   "text": "Where I have been keeping score,"
+  },
+  {
+   "start": 541.469,
+   "end": 543.576,
+   "text": "help me release the tally."
+  },
+  {
+   "start": 543.576,
+   "end": 546.621,
+   "text": "Where someone needs my patience today,"
+  },
+  {
+   "start": 546.621,
+   "end": 548.304,
+   "text": "let my love be larger"
+  },
+  {
+   "start": 548.304,
+   "end": 550.447,
+   "text": "than the inconvenience."
+  },
+  {
+   "start": 550.447,
+   "end": 552.137,
+   "text": "Thank you that your love"
+  },
+  {
+   "start": 552.137,
+   "end": 554.317,
+   "text": "has covered so much in me."
+  },
+  {
+   "start": 555.267,
+   "end": 557.376,
+   "text": "I thank my God upon every"
+  },
+  {
+   "start": 557.376,
+   "end": 559.329,
+   "text": "remembrance of you,"
+  },
+  {
+   "start": 560.579,
+   "end": 563.311,
+   "text": "Lord, thank you for my family."
+  },
+  {
+   "start": 563.311,
+   "end": 565.141,
+   "text": "Thank you for the laughter"
+  },
+  {
+   "start": 565.141,
+   "end": 566.197,
+   "text": "we have shared,"
+  },
+  {
+   "start": 566.197,
+   "end": 568.519,
+   "text": "the meals we have eaten together,"
+  },
+  {
+   "start": 568.519,
+   "end": 570.912,
+   "text": "and the ordinary moments that will"
+  },
+  {
+   "start": 570.912,
+   "end": 573.253,
+   "text": "one day be precious memories."
+  },
+  {
+   "start": 573.253,
+   "end": 575.087,
+   "text": "Thank you for the person"
+  },
+  {
+   "start": 575.087,
+   "end": 576.31,
+   "text": "who made coffee,"
+  },
+  {
+   "start": 576.31,
+   "end": 577.533,
+   "text": "fixed something,"
+  },
+  {
+   "start": 577.533,
+   "end": 579.591,
+   "text": "or sent a kind message."
+  },
+  {
+   "start": 579.591,
+   "end": 580.925,
+   "text": "Help me say thank"
+  },
+  {
+   "start": 580.925,
+   "end": 582.415,
+   "text": "you out loud today,"
+  },
+  {
+   "start": 582.415,
+   "end": 584.69,
+   "text": "so that gratitude is not only"
+  },
+  {
+   "start": 584.69,
+   "end": 587.237,
+   "text": "in my heart but in our home."
+  },
+  {
+   "start": 588.187,
+   "end": 588.738,
+   "text": "Behold,"
+  },
+  {
+   "start": 588.738,
+   "end": 590.941,
+   "text": "how good and how pleasant it"
+  },
+  {
+   "start": 590.941,
+   "end": 592.829,
+   "text": "is for brethren to dwell"
+  },
+  {
+   "start": 592.829,
+   "end": 594.595,
+   "text": "together in unity!"
+  },
+  {
+   "start": 595.845,
+   "end": 596.414,
+   "text": "Father,"
+  },
+  {
+   "start": 596.414,
+   "end": 599.016,
+   "text": "I pray for brothers and sisters,"
+  },
+  {
+   "start": 599.016,
+   "end": 601.756,
+   "text": "cousins, and the wider family."
+  },
+  {
+   "start": 601.756,
+   "end": 604.801,
+   "text": "Some relationships are close and easy,"
+  },
+  {
+   "start": 604.801,
+   "end": 606.644,
+   "text": "and others are strained"
+  },
+  {
+   "start": 606.644,
+   "end": 608.947,
+   "text": "by distance or old hurts."
+  },
+  {
+   "start": 608.947,
+   "end": 610.279,
+   "text": "Bring healing where"
+  },
+  {
+   "start": 610.279,
+   "end": 612.191,
+   "text": "there has been silence."
+  },
+  {
+   "start": 612.191,
+   "end": 613.628,
+   "text": "Give us opportunities"
+  },
+  {
+   "start": 613.628,
+   "end": 615.776,
+   "text": "to reach out with kindness."
+  },
+  {
+   "start": 615.776,
+   "end": 617.299,
+   "text": "Let our gatherings,"
+  },
+  {
+   "start": 617.299,
+   "end": 619.143,
+   "text": "whether large or small,"
+  },
+  {
+   "start": 619.143,
+   "end": 620.826,
+   "text": "be good and pleasant,"
+  },
+  {
+   "start": 620.826,
+   "end": 624.062,
+   "text": "marked by grace rather than tension."
+  },
+  {
+   "start": 625.012,
+   "end": 626.148,
+   "text": "And these words,"
+  },
+  {
+   "start": 626.148,
+   "end": 628.279,
+   "text": "which I command thee this day,"
+  },
+  {
+   "start": 628.279,
+   "end": 630.283,
+   "text": "shall be in thine heart:"
+  },
+  {
+   "start": 630.283,
+   "end": 632.221,
+   "text": "and thou shalt teach them"
+  },
+  {
+   "start": 632.221,
+   "end": 634.469,
+   "text": "diligently unto thy children,"
+  },
+  {
+   "start": 634.469,
+   "end": 636.562,
+   "text": "and shalt talk of them when"
+  },
+  {
+   "start": 636.562,
+   "end": 638.732,
+   "text": "thou sittest in thine house,"
+  },
+  {
+   "start": 638.732,
+   "end": 641.29,
+   "text": "and when thou walkest by the way,"
+  },
+  {
+   "start": 641.29,
+   "end": 643.228,
+   "text": "and when thou liest down,"
+  },
+  {
+   "start": 643.228,
+   "end": 645.438,
+   "text": "and when thou risest up."
+  },
+  {
+   "start": 646.688,
+   "end": 647.091,
+   "text": "Lord,"
+  },
+  {
+   "start": 647.091,
+   "end": 648.625,
+   "text": "I bring the balance"
+  },
+  {
+   "start": 648.625,
+   "end": 650.7,
+   "text": "between work and home."
+  },
+  {
+   "start": 650.7,
+   "end": 652.56,
+   "text": "Some days my job demands"
+  },
+  {
+   "start": 652.56,
+   "end": 654.498,
+   "text": "more than I want to give,"
+  },
+  {
+   "start": 654.498,
+   "end": 656.203,
+   "text": "and my family receives"
+  },
+  {
+   "start": 656.203,
+   "end": 657.976,
+   "text": "what is left of me."
+  },
+  {
+   "start": 657.976,
+   "end": 660.537,
+   "text": "Help me use my time wisely."
+  },
+  {
+   "start": 660.537,
+   "end": 663.516,
+   "text": "Give me energy for my responsibilities"
+  },
+  {
+   "start": 663.516,
+   "end": 665.084,
+   "text": "and enough left over"
+  },
+  {
+   "start": 665.084,
+   "end": 667.109,
+   "text": "for the people I love."
+  },
+  {
+   "start": 667.109,
+   "end": 668.948,
+   "text": "When I come home today,"
+  },
+  {
+   "start": 668.948,
+   "end": 672.065,
+   "text": "let me arrive with patience and warmth,"
+  },
+  {
+   "start": 672.065,
+   "end": 674.414,
+   "text": "not only with exhaustion."
+  },
+  {
+   "start": 675.364,
+   "end": 676.696,
+   "text": "Before we finish,"
+  },
+  {
+   "start": 676.696,
+   "end": 678.419,
+   "text": "we bring the practical"
+  },
+  {
+   "start": 678.419,
+   "end": 680.258,
+   "text": "needs of your home."
+  },
+  {
+   "start": 680.808,
+   "end": 682.646,
+   "text": "Be kindly affectioned one"
+  },
+  {
+   "start": 682.646,
+   "end": 685.225,
+   "text": "to another with brotherly love;"
+  },
+  {
+   "start": 685.225,
+   "end": 688.029,
+   "text": "in honour preferring one another;"
+  },
+  {
+   "start": 689.279,
+   "end": 689.664,
+   "text": "Lord,"
+  },
+  {
+   "start": 689.664,
+   "end": 691.283,
+   "text": "I bring the practical"
+  },
+  {
+   "start": 691.283,
+   "end": 692.971,
+   "text": "needs of our home:"
+  },
+  {
+   "start": 692.971,
+   "end": 694.497,
+   "text": "work, money, health,"
+  },
+  {
+   "start": 694.497,
+   "end": 696.705,
+   "text": "transportation, and time."
+  },
+  {
+   "start": 696.705,
+   "end": 698.288,
+   "text": "You know what we lack"
+  },
+  {
+   "start": 698.288,
+   "end": 700.397,
+   "text": "and what we fear losing."
+  },
+  {
+   "start": 700.397,
+   "end": 702.776,
+   "text": "Provide what we need for today,"
+  },
+  {
+   "start": 702.776,
+   "end": 704.158,
+   "text": "and give us wisdom"
+  },
+  {
+   "start": 704.158,
+   "end": 705.839,
+   "text": "with what we have."
+  },
+  {
+   "start": 705.839,
+   "end": 707.589,
+   "text": "Keep us generous even"
+  },
+  {
+   "start": 707.589,
+   "end": 709.723,
+   "text": "when things are tight."
+  },
+  {
+   "start": 709.723,
+   "end": 712.177,
+   "text": "Let our trust in you be visible"
+  },
+  {
+   "start": 712.177,
+   "end": 713.839,
+   "text": "in how calmly we face"
+  },
+  {
+   "start": 713.839,
+   "end": 716.089,
+   "text": "these concerns together."
+  },
+  {
+   "start": 717.039,
+   "end": 718.135,
+   "text": "And they said,"
+  },
+  {
+   "start": 718.135,
+   "end": 720.719,
+   "text": "Believe on the Lord Jesus Christ,"
+  },
+  {
+   "start": 720.719,
+   "end": 722.599,
+   "text": "and thou shalt be saved,"
+  },
+  {
+   "start": 722.599,
+   "end": 724.045,
+   "text": "and thy house."
+  },
+  {
+   "start": 725.295,
+   "end": 725.834,
+   "text": "Father,"
+  },
+  {
+   "start": 725.834,
+   "end": 728.068,
+   "text": "I pray for the faith of every"
+  },
+  {
+   "start": 728.068,
+   "end": 730.139,
+   "text": "person in my household."
+  },
+  {
+   "start": 730.139,
+   "end": 731.764,
+   "text": "For those who believe,"
+  },
+  {
+   "start": 731.764,
+   "end": 733.468,
+   "text": "deepen their trust."
+  },
+  {
+   "start": 733.468,
+   "end": 734.879,
+   "text": "For those who doubt,"
+  },
+  {
+   "start": 734.879,
+   "end": 737.437,
+   "text": "be patient with their questions."
+  },
+  {
+   "start": 737.437,
+   "end": 739.764,
+   "text": "For those who feel far from you,"
+  },
+  {
+   "start": 739.764,
+   "end": 740.782,
+   "text": "draw them near"
+  },
+  {
+   "start": 740.782,
+   "end": 742.9,
+   "text": "in your own time and way."
+  },
+  {
+   "start": 742.9,
+   "end": 745.188,
+   "text": "I cannot make anyone believe,"
+  },
+  {
+   "start": 745.188,
+   "end": 747.555,
+   "text": "but I can love them faithfully"
+  },
+  {
+   "start": 747.555,
+   "end": 749.749,
+   "text": "and pray for them daily."
+  },
+  {
+   "start": 749.749,
+   "end": 752.19,
+   "text": "Let me do both today."
+  },
+  {
+   "start": 753.14,
+   "end": 755.15,
+   "text": "In a moment you will step back"
+  },
+  {
+   "start": 755.15,
+   "end": 757.728,
+   "text": "into the movement of your morning."
+  },
+  {
+   "start": 757.728,
+   "end": 759.503,
+   "text": "The dishes, the messages,"
+  },
+  {
+   "start": 759.503,
+   "end": 762.145,
+   "text": "the schedule will still be there."
+  },
+  {
+   "start": 762.145,
+   "end": 763.329,
+   "text": "Yet you can carry"
+  },
+  {
+   "start": 763.329,
+   "end": 765.091,
+   "text": "this prayer with you."
+  },
+  {
+   "start": 765.091,
+   "end": 766.512,
+   "text": "Every time you see"
+  },
+  {
+   "start": 766.512,
+   "end": 768.249,
+   "text": "a family member today,"
+  },
+  {
+   "start": 768.249,
+   "end": 769.75,
+   "text": "you can quietly say"
+  },
+  {
+   "start": 769.75,
+   "end": 771.471,
+   "text": "their name to God."
+  },
+  {
+   "start": 771.471,
+   "end": 773.213,
+   "text": "A short breath of prayer"
+  },
+  {
+   "start": 773.213,
+   "end": 775.317,
+   "text": "in the hallway or the car can"
+  },
+  {
+   "start": 775.317,
+   "end": 777.422,
+   "text": "keep your heart turned toward"
+  },
+  {
+   "start": 777.422,
+   "end": 779.223,
+   "text": "them and toward him."
+  },
+  {
+   "start": 780.173,
+   "end": 782.799,
+   "text": "My home belongs to God."
+  },
+  {
+   "start": 782.799,
+   "end": 785.007,
+   "text": "He builds what I cannot build"
+  },
+  {
+   "start": 785.007,
+   "end": 787.515,
+   "text": "and keeps what I cannot keep."
+  },
+  {
+   "start": 787.515,
+   "end": 790.311,
+   "text": "I can listen before I speak."
+  },
+  {
+   "start": 790.311,
+   "end": 793.256,
+   "text": "I can let small offenses go."
+  },
+  {
+   "start": 793.256,
+   "end": 796.009,
+   "text": "I can say thank you out loud."
+  },
+  {
+   "start": 796.009,
+   "end": 798.388,
+   "text": "I can honor the people I love"
+  },
+  {
+   "start": 798.388,
+   "end": 801.067,
+   "text": "with simple acts of kindness."
+  },
+  {
+   "start": 801.067,
+   "end": 804.013,
+   "text": "God's mercy reaches my family today"
+  },
+  {
+   "start": 804.013,
+   "end": 807.646,
+   "text": "and the generations that come after us."
+  },
+  {
+   "start": 808.796,
+   "end": 811.335,
+   "text": "Choose one person from your home"
+  },
+  {
+   "start": 811.335,
+   "end": 813.619,
+   "text": "or your family right now."
+  },
+  {
+   "start": 813.619,
+   "end": 815.523,
+   "text": "Decide on one simple act"
+  },
+  {
+   "start": 815.523,
+   "end": 817.347,
+   "text": "of love for them today,"
+  },
+  {
+   "start": 817.347,
+   "end": 819.551,
+   "text": "and when you will do it."
+  },
+  {
+   "start": 819.551,
+   "end": 820.462,
+   "text": "It might be,"
+  },
+  {
+   "start": 820.462,
+   "end": 823.421,
+   "text": "when my daughter gets home from school,"
+  },
+  {
+   "start": 823.421,
+   "end": 825.242,
+   "text": "I will put my phone away"
+  },
+  {
+   "start": 825.242,
+   "end": 827.211,
+   "text": "and ask about her day."
+  },
+  {
+   "start": 827.211,
+   "end": 827.452,
+   "text": "Or,"
+  },
+  {
+   "start": 827.452,
+   "end": 829.867,
+   "text": "at lunch I will send my mother"
+  },
+  {
+   "start": 829.867,
+   "end": 831.777,
+   "text": "a message of thanks."
+  },
+  {
+   "start": 831.777,
+   "end": 833.718,
+   "text": "Keep it small and specific"
+  },
+  {
+   "start": 833.718,
+   "end": 835.711,
+   "text": "enough to actually do."
+  },
+  {
+   "start": 836.861,
+   "end": 837.448,
+   "text": "Father,"
+  },
+  {
+   "start": 837.448,
+   "end": 838.789,
+   "text": "I place that act"
+  },
+  {
+   "start": 838.789,
+   "end": 840.681,
+   "text": "of love before you."
+  },
+  {
+   "start": 840.681,
+   "end": 842.368,
+   "text": "Help me follow through"
+  },
+  {
+   "start": 842.368,
+   "end": 844.056,
+   "text": "when the moment comes,"
+  },
+  {
+   "start": 844.056,
+   "end": 847.04,
+   "text": "even if I feel tired or distracted."
+  },
+  {
+   "start": 847.04,
+   "end": 848.968,
+   "text": "Let it be offered freely,"
+  },
+  {
+   "start": 848.968,
+   "end": 851.735,
+   "text": "without expecting anything back."
+  },
+  {
+   "start": 851.735,
+   "end": 853.952,
+   "text": "Use it to bring a little more"
+  },
+  {
+   "start": 853.952,
+   "end": 856.621,
+   "text": "of your kindness into our home."
+  },
+  {
+   "start": 856.621,
+   "end": 858.549,
+   "text": "And as the day unfolds,"
+  },
+  {
+   "start": 858.549,
+   "end": 860.057,
+   "text": "keep my heart soft"
+  },
+  {
+   "start": 860.057,
+   "end": 861.985,
+   "text": "toward everyone I meet,"
+  },
+  {
+   "start": 861.985,
+   "end": 865.185,
+   "text": "starting with those closest to me."
+  },
+  {
+   "start": 866.335,
+   "end": 868.46,
+   "text": "May the Lord build your house"
+  },
+  {
+   "start": 868.46,
+   "end": 871.179,
+   "text": "and keep your family in his care."
+  },
+  {
+   "start": 871.179,
+   "end": 873.131,
+   "text": "May your children be taught"
+  },
+  {
+   "start": 873.131,
+   "end": 875.745,
+   "text": "of him and their peace be great."
+  },
+  {
+   "start": 875.745,
+   "end": 878.533,
+   "text": "May your conversations be patient,"
+  },
+  {
+   "start": 878.533,
+   "end": 880.337,
+   "text": "your home be a refuge,"
+  },
+  {
+   "start": 880.337,
+   "end": 883.917,
+   "text": "and your love cover many small offenses."
+  },
+  {
+   "start": 883.917,
+   "end": 885.496,
+   "text": "May you notice the good"
+  },
+  {
+   "start": 885.496,
+   "end": 887.213,
+   "text": "in the people around you,"
+  },
+  {
+   "start": 887.213,
+   "end": 888.518,
+   "text": "and may they notice"
+  },
+  {
+   "start": 888.518,
+   "end": 890.191,
+   "text": "his kindness in you."
+  },
+  {
+   "start": 890.191,
+   "end": 891.823,
+   "text": "Go into this day held"
+  },
+  {
+   "start": 891.823,
+   "end": 893.805,
+   "text": "by his faithful love."
+  },
+  {
+   "start": 894.955,
+   "end": 896.724,
+   "text": "If you are praying this"
+  },
+  {
+   "start": 896.724,
+   "end": 898.493,
+   "text": "over your family today,"
+  },
+  {
+   "start": 898.493,
+   "end": 901.1,
+   "text": "you are welcome to write Amen."
+  },
+  {
+   "start": 901.1,
+   "end": 903.003,
+   "text": "You can also leave a prayer"
+  },
+  {
+   "start": 903.003,
+   "end": 904.694,
+   "text": "request in the comments,"
+  },
+  {
+   "start": 904.694,
+   "end": 907.019,
+   "text": "and in our next morning prayer we"
+  },
+  {
+   "start": 907.019,
+   "end": 910.047,
+   "text": "will pray over the requests you share."
+  },
+  {
+   "start": 910.997,
+   "end": 912.501,
+   "text": "Thank you for praying"
+  },
+  {
+   "start": 912.501,
+   "end": 914.305,
+   "text": "with me this morning."
+  },
+  {
+   "start": 914.305,
+   "end": 916.535,
+   "text": "Carry the names of your loved"
+  },
+  {
+   "start": 916.535,
+   "end": 918.68,
+   "text": "ones with you as you go."
+  },
+  {
+   "start": 918.68,
+   "end": 921.555,
+   "text": "Whatever this day brings to your home,"
+  },
+  {
+   "start": 921.555,
+   "end": 923.749,
+   "text": "God is already present in it,"
+  },
+  {
+   "start": 923.749,
+   "end": 926.319,
+   "text": "building, keeping, and loving."
+  },
+  {
+   "start": 926.319,
+   "end": 928.22,
+   "text": "Go gently, listen well,"
+  },
+  {
+   "start": 928.22,
+   "end": 930.535,
+   "text": "and let your one act of love"
+  },
+  {
+   "start": 930.535,
+   "end": 933.282,
+   "text": "be a small sign of his grace."
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "hook",
+   "text": "This morning, before your family's day begins, cover everyone you love in prayer.",
+   "start": 0.3,
+   "end": 6.359
+  },
+  {
+   "segment": "hook",
+   "text": "Pray with me.",
+   "start": 6.659,
+   "end": 8.067
+  },
+  {
+   "segment": "roadmap",
+   "text": "We will pray for your spouse, your children, the tensions at home, and the needs of your household, one by one.",
+   "start": 9.067,
+   "end": 16.939
+  },
+  {
+   "segment": "invitation",
+   "text": "Maybe the house is still quiet, or maybe someone is already looking for shoes and asking about breakfast.",
+   "start": 18.039,
+   "end": 25.847
+  },
+  {
+   "segment": "invitation",
+   "text": "Either way, you can pause here for a few minutes.",
+   "start": 26.147,
+   "end": 29.496
+  },
+  {
+   "segment": "invitation",
+   "text": "You will pray for each person by name, for the conversations ahead, and for the atmosphere of your home.",
+   "start": 29.796,
+   "end": 37.668
+  },
+  {
+   "segment": "invitation",
+   "text": "At the end, you will choose one simple act of love to offer someone today.",
+   "start": 37.968,
+   "end": 43.387
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Father, thank you for this new morning and for the people you have placed around me.",
+   "start": 44.687,
+   "end": 50.297
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Before I speak to any of them, I want to speak with you.",
+   "start": 50.597,
+   "end": 54.565
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "You know each one more deeply than I do.",
+   "start": 54.865,
+   "end": 57.937
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "You know who slept badly, who is anxious about today, and who is carrying something they have not told anyone.",
+   "start": 58.237,
+   "end": 66.387
+  },
+  {
+   "segment": "prayer-arrival",
+   "text": "Make me attentive to them, and make our home a place where you are welcome.",
+   "start": 66.687,
+   "end": 71.849
+  },
+  {
+   "segment": "scripture-joshua-house",
+   "text": "And if it seem evil unto you to serve the LORD, choose you this day whom ye will serve;",
+   "start": 73.149,
+   "end": 79.229
+  },
+  {
+   "segment": "scripture-joshua-house",
+   "text": "whether the gods which your fathers served that were on the other side of the flood, or the gods of the Amorites, in whose land ye dwell:",
+   "start": 79.529,
+   "end": 89.385
+  },
+  {
+   "segment": "scripture-joshua-house",
+   "text": "but as for me and my house, we will serve the LORD.",
+   "start": 89.685,
+   "end": 93.803
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "Lord, I choose you again today.",
+   "start": 95.403,
+   "end": 97.899
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "I want my words, my reactions, and my plans to reflect that choice.",
+   "start": 98.199,
+   "end": 103.468
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "When I am tempted to bring stress into every room, remind me whose house this really is.",
+   "start": 103.768,
+   "end": 110.424
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "Help me lead by example rather than lecture.",
+   "start": 110.724,
+   "end": 113.967
+  },
+  {
+   "segment": "prayer-my-yes",
+   "text": "Let the people around me notice something of your kindness in the way I listen and the way I respond.",
+   "start": 114.267,
+   "end": 121.733
+  },
+  {
+   "segment": "scripture-psalm-build",
+   "text": "Except the LORD build the house, they labour in vain that build it:",
+   "start": 123.033,
+   "end": 127.876
+  },
+  {
+   "segment": "scripture-psalm-build",
+   "text": "except the LORD keep the city, the watchman waketh but in vain.",
+   "start": 128.176,
+   "end": 132.997
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Father, build our home.",
+   "start": 134.597,
+   "end": 136.688
+  },
+  {
+   "segment": "prayer-build",
+   "text": "I bring you our routines, our finances, our calendars, and the unfinished projects that crowd our evenings.",
+   "start": 136.988,
+   "end": 145.863
+  },
+  {
+   "segment": "prayer-build",
+   "text": "I cannot guard every part of our life by staying vigilant.",
+   "start": 146.163,
+   "end": 150.493
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Be the one who watches over us.",
+   "start": 150.793,
+   "end": 153.289
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Where we have built on hurry or fear, rebuild us on trust.",
+   "start": 153.589,
+   "end": 158.069
+  },
+  {
+   "segment": "prayer-build",
+   "text": "Where our foundations feel cracked, strengthen them with your faithfulness and patient love.",
+   "start": 158.369,
+   "end": 164.513
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Lord, I pray for the person I share my life with, or for the relationship closest to my heart.",
+   "start": 165.813,
+   "end": 173.28
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Give them strength for whatever today asks of them.",
+   "start": 173.58,
+   "end": 177.356
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Where there has been distance between us, bring us back toward each other.",
+   "start": 177.656,
+   "end": 182.797
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Help me notice their efforts instead of only their faults.",
+   "start": 183.097,
+   "end": 187.364
+  },
+  {
+   "segment": "prayer-spouse",
+   "text": "Let my words today build them up, and let our partnership reflect your faithfulness.",
+   "start": 187.664,
+   "end": 193.403
+  },
+  {
+   "segment": "rehook-1",
+   "text": "Next, the children you love, whatever their age.",
+   "start": 194.703,
+   "end": 198.372
+  },
+  {
+   "segment": "scripture-isaiah-children",
+   "text": "And all thy children shall be taught of the LORD;",
+   "start": 199.272,
+   "end": 202.664
+  },
+  {
+   "segment": "scripture-isaiah-children",
+   "text": "and great shall be the peace of thy children.",
+   "start": 202.964,
+   "end": 205.929
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Father, I lift up the children I love.",
+   "start": 207.529,
+   "end": 210.601
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Teach them yourself.",
+   "start": 210.901,
+   "end": 212.693
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Guard their minds from what would harm them, and their hearts from believing they are unloved.",
+   "start": 212.993,
+   "end": 219.479
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Give them friends who are kind and teachers who are wise.",
+   "start": 219.779,
+   "end": 223.619
+  },
+  {
+   "segment": "prayer-children",
+   "text": "When they make mistakes today, let them find grace rather than shame.",
+   "start": 223.919,
+   "end": 228.953
+  },
+  {
+   "segment": "prayer-children",
+   "text": "Let your peace be great within them, deeper than the pressures they face at school or online.",
+   "start": 229.253,
+   "end": 235.589
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Lord, some of the children I love are carrying fears they cannot explain.",
+   "start": 236.889,
+   "end": 242.393
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "A test, a friendship that has changed, a worry about home, or something they saw on a screen.",
+   "start": 242.693,
+   "end": 249.904
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Give them courage that is bigger than their fear.",
+   "start": 250.204,
+   "end": 253.575
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Help me notice when something is wrong, and give me gentle words to ask about it.",
+   "start": 253.875,
+   "end": 259.571
+  },
+  {
+   "segment": "prayer-children-fears",
+   "text": "Let them know they can always come to me, and always come to you.",
+   "start": 259.871,
+   "end": 264.521
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Lord, I also pray for those who have grown up and moved into lives of their own.",
+   "start": 265.821,
+   "end": 271.688
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "I cannot manage their choices, and some of them may feel far from me or from you.",
+   "start": 271.988,
+   "end": 278.153
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Keep them safe on the roads they travel.",
+   "start": 278.453,
+   "end": 281.547
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Meet them in their work, their relationships, and their doubts.",
+   "start": 281.847,
+   "end": 286.22
+  },
+  {
+   "segment": "prayer-older-children",
+   "text": "Draw them close to you, and keep the door of my heart open to them.",
+   "start": 286.52,
+   "end": 291.192
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Father, families come in many shapes.",
+   "start": 292.492,
+   "end": 295.393
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some of us are raising children who are not biologically ours.",
+   "start": 295.693,
+   "end": 300.664
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some are blending two households into one.",
+   "start": 300.964,
+   "end": 304.121
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some are caring for a relative alone.",
+   "start": 304.421,
+   "end": 307.216
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Some are waiting and hoping for children.",
+   "start": 307.516,
+   "end": 310.673
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Meet each of us in our particular situation.",
+   "start": 310.973,
+   "end": 314.963
+  },
+  {
+   "segment": "prayer-every-kind-of-family",
+   "text": "Give wisdom to every parent, guardian, and caregiver, and let every child feel wanted, chosen, and safe.",
+   "start": 315.263,
+   "end": 323.241
+  },
+  {
+   "segment": "scripture-proverbs-refuge",
+   "text": "In the fear of the LORD is strong confidence:",
+   "start": 324.541,
+   "end": 327.976
+  },
+  {
+   "segment": "scripture-proverbs-refuge",
+   "text": "and his children shall have a place of refuge.",
+   "start": 328.276,
+   "end": 331.732
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "Father, make our home a refuge.",
+   "start": 333.332,
+   "end": 335.956
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "When someone walks through the door discouraged, let them find comfort here.",
+   "start": 336.256,
+   "end": 341.504
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "When someone fails, let them find mercy here before they find consequences.",
+   "start": 341.804,
+   "end": 347.436
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "Give me a steady heart so that my own fears do not fill the house.",
+   "start": 347.736,
+   "end": 352.6
+  },
+  {
+   "segment": "prayer-refuge",
+   "text": "Let the confidence I have in you settle the atmosphere, so that each person feels safe to rest and to speak.",
+   "start": 352.9,
+   "end": 360.665
+  },
+  {
+   "segment": "rehook-2",
+   "text": "Stay with me.",
+   "start": 361.965,
+   "end": 363.331
+  },
+  {
+   "segment": "rehook-2",
+   "text": "In a moment, picture each face as we pray.",
+   "start": 363.631,
+   "end": 366.916
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Take a quiet moment now.",
+   "start": 367.816,
+   "end": 370.035
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Picture the faces of the people you live with or love most.",
+   "start": 370.335,
+   "end": 374.729
+  },
+  {
+   "segment": "stillness-one",
+   "text": "You do not need to say anything about them yet.",
+   "start": 375.029,
+   "end": 378.571
+  },
+  {
+   "segment": "stillness-one",
+   "text": "Simply hold them in your mind, and let God see them with you.",
+   "start": 378.871,
+   "end": 383.201
+  },
+  {
+   "segment": "scripture-psalm-mercy-generations",
+   "text": "But the mercy of the LORD is from everlasting to everlasting upon them that fear him, and his righteousness unto children's children;",
+   "start": 389.501,
+   "end": 399.379
+  },
+  {
+   "segment": "scripture-psalm-mercy-generations",
+   "text": "to such as keep his covenant, and to those that remember his commandments to do them.",
+   "start": 399.679,
+   "end": 405.481
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Father, thank you for those who prayed for me before I knew how to pray.",
+   "start": 407.081,
+   "end": 411.988
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Thank you for every person who passed faith on, even imperfectly.",
+   "start": 412.288,
+   "end": 417.259
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Where my family history carries pain or broken patterns, let your mercy begin something new through us.",
+   "start": 417.559,
+   "end": 425.281
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Let the next generation inherit more peace than we did.",
+   "start": 425.581,
+   "end": 429.933
+  },
+  {
+   "segment": "prayer-generations",
+   "text": "Let them remember not only our words, but our love.",
+   "start": 430.233,
+   "end": 433.967
+  },
+  {
+   "segment": "scripture-ephesians-unity",
+   "text": "With all lowliness and meekness, with longsuffering, forbearing one another in love;",
+   "start": 435.267,
+   "end": 441.667
+  },
+  {
+   "segment": "scripture-ephesians-unity",
+   "text": "endeavouring to keep the unity of the Spirit in the bond of peace.",
+   "start": 441.967,
+   "end": 446.532
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Father, I bring the tensions in our home.",
+   "start": 448.132,
+   "end": 451.353
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "You know the conversation that keeps turning into an argument, and the topic we avoid because it hurts.",
+   "start": 451.653,
+   "end": 459.099
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Give us humility to listen and patience to understand.",
+   "start": 459.399,
+   "end": 463.58
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Where I have been stubborn, soften me.",
+   "start": 463.88,
+   "end": 466.589
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Where I need to speak up, give me words seasoned with grace.",
+   "start": 466.889,
+   "end": 471.305
+  },
+  {
+   "segment": "prayer-disagreement",
+   "text": "Help us keep the bond of peace, even when we see things differently.",
+   "start": 471.605,
+   "end": 476.512
+  },
+  {
+   "segment": "scripture-james-swift",
+   "text": "Wherefore, my beloved brethren, let every man be swift to hear, slow to speak, slow to wrath:",
+   "start": 477.812,
+   "end": 484.831
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Lord, make me swift to hear the people I love.",
+   "start": 486.431,
+   "end": 489.652
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Slow my tongue when I want to correct, interrupt, or win.",
+   "start": 489.952,
+   "end": 494.048
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Help me hear the worry behind a sharp comment and the tiredness behind a short answer.",
+   "start": 494.348,
+   "end": 500.3
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "When anger rises in me today, let it slow down long enough for wisdom to catch up.",
+   "start": 500.6,
+   "end": 506.893
+  },
+  {
+   "segment": "prayer-listening",
+   "text": "Teach me to listen the way you listen to me.",
+   "start": 507.193,
+   "end": 510.585
+  },
+  {
+   "segment": "rehook-3",
+   "text": "Next, love that covers the small irritations of family life.",
+   "start": 511.885,
+   "end": 516.6
+  },
+  {
+   "segment": "scripture-peter-charity",
+   "text": "And above all things have fervent charity among yourselves:",
+   "start": 517.5,
+   "end": 521.809
+  },
+  {
+   "segment": "scripture-peter-charity",
+   "text": "for charity shall cover the multitude of sins.",
+   "start": 522.109,
+   "end": 525.8
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Father, give me fervent love for my family.",
+   "start": 527.4,
+   "end": 530.856
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Help me let small irritations pass without comment.",
+   "start": 531.156,
+   "end": 534.953
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Keep me from storing up offenses to use later.",
+   "start": 535.253,
+   "end": 538.944
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Where I have been keeping score, help me release the tally.",
+   "start": 539.244,
+   "end": 543.276
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Where someone needs my patience today, let my love be larger than the inconvenience.",
+   "start": 543.576,
+   "end": 550.147
+  },
+  {
+   "segment": "prayer-cover",
+   "text": "Thank you that your love has covered so much in me.",
+   "start": 550.447,
+   "end": 553.967
+  },
+  {
+   "segment": "scripture-philippians-remembrance",
+   "text": "I thank my God upon every remembrance of you,",
+   "start": 555.267,
+   "end": 558.979
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Lord, thank you for my family.",
+   "start": 560.579,
+   "end": 563.011
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Thank you for the laughter we have shared, the meals we have eaten together, and the ordinary moments that will one day be precious memories.",
+   "start": 563.311,
+   "end": 572.953
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Thank you for the person who made coffee, fixed something, or sent a kind message.",
+   "start": 573.253,
+   "end": 579.291
+  },
+  {
+   "segment": "prayer-gratitude",
+   "text": "Help me say thank you out loud today, so that gratitude is not only in my heart but in our home.",
+   "start": 579.591,
+   "end": 586.887
+  },
+  {
+   "segment": "scripture-psalm-unity",
+   "text": "Behold, how good and how pleasant it is for brethren to dwell together in unity!",
+   "start": 588.187,
+   "end": 594.245
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Father, I pray for brothers and sisters, cousins, and the wider family.",
+   "start": 595.845,
+   "end": 601.456
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Some relationships are close and easy, and others are strained by distance or old hurts.",
+   "start": 601.756,
+   "end": 608.647
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Bring healing where there has been silence.",
+   "start": 608.947,
+   "end": 611.891
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Give us opportunities to reach out with kindness.",
+   "start": 612.191,
+   "end": 615.476
+  },
+  {
+   "segment": "prayer-siblings",
+   "text": "Let our gatherings, whether large or small, be good and pleasant, marked by grace rather than tension.",
+   "start": 615.776,
+   "end": 623.712
+  },
+  {
+   "segment": "scripture-deuteronomy-teach",
+   "text": "And these words, which I command thee this day, shall be in thine heart:",
+   "start": 625.012,
+   "end": 629.983
+  },
+  {
+   "segment": "scripture-deuteronomy-teach",
+   "text": "and thou shalt teach them diligently unto thy children, and shalt talk of them when thou sittest in thine house, and when thou walkest by the way, and when thou liest down, and when thou risest up.",
+   "start": 630.283,
+   "end": 645.088
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Lord, I bring the balance between work and home.",
+   "start": 646.688,
+   "end": 650.4
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Some days my job demands more than I want to give, and my family receives what is left of me.",
+   "start": 650.7,
+   "end": 657.676
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Help me use my time wisely.",
+   "start": 657.976,
+   "end": 660.237
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "Give me energy for my responsibilities and enough left over for the people I love.",
+   "start": 660.537,
+   "end": 666.809
+  },
+  {
+   "segment": "prayer-work-and-home",
+   "text": "When I come home today, let me arrive with patience and warmth, not only with exhaustion.",
+   "start": 667.109,
+   "end": 674.064
+  },
+  {
+   "segment": "rehook-4",
+   "text": "Before we finish, we bring the practical needs of your home.",
+   "start": 675.364,
+   "end": 679.908
+  },
+  {
+   "segment": "scripture-romans-affection",
+   "text": "Be kindly affectioned one to another with brotherly love;",
+   "start": 680.808,
+   "end": 684.925
+  },
+  {
+   "segment": "scripture-romans-affection",
+   "text": "in honour preferring one another;",
+   "start": 685.225,
+   "end": 687.679
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Lord, I bring the practical needs of our home:",
+   "start": 689.279,
+   "end": 692.671
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "work, money, health, transportation, and time.",
+   "start": 692.971,
+   "end": 696.405
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "You know what we lack and what we fear losing.",
+   "start": 696.705,
+   "end": 700.097
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Provide what we need for today, and give us wisdom with what we have.",
+   "start": 700.397,
+   "end": 705.539
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Keep us generous even when things are tight.",
+   "start": 705.839,
+   "end": 709.423
+  },
+  {
+   "segment": "prayer-provision",
+   "text": "Let our trust in you be visible in how calmly we face these concerns together.",
+   "start": 709.723,
+   "end": 715.739
+  },
+  {
+   "segment": "scripture-acts-house",
+   "text": "And they said, Believe on the Lord Jesus Christ, and thou shalt be saved, and thy house.",
+   "start": 717.039,
+   "end": 723.695
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "Father, I pray for the faith of every person in my household.",
+   "start": 725.295,
+   "end": 729.839
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "For those who believe, deepen their trust.",
+   "start": 730.139,
+   "end": 733.168
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "For those who doubt, be patient with their questions.",
+   "start": 733.468,
+   "end": 737.137
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "For those who feel far from you, draw them near in your own time and way.",
+   "start": 737.437,
+   "end": 742.6
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "I cannot make anyone believe, but I can love them faithfully and pray for them daily.",
+   "start": 742.9,
+   "end": 749.449
+  },
+  {
+   "segment": "prayer-faith-household",
+   "text": "Let me do both today.",
+   "start": 749.749,
+   "end": 751.84
+  },
+  {
+   "segment": "day-transition",
+   "text": "In a moment you will step back into the movement of your morning.",
+   "start": 753.14,
+   "end": 757.428
+  },
+  {
+   "segment": "day-transition",
+   "text": "The dishes, the messages, the schedule will still be there.",
+   "start": 757.728,
+   "end": 761.845
+  },
+  {
+   "segment": "day-transition",
+   "text": "Yet you can carry this prayer with you.",
+   "start": 762.145,
+   "end": 764.791
+  },
+  {
+   "segment": "day-transition",
+   "text": "Every time you see a family member today, you can quietly say their name to God.",
+   "start": 765.091,
+   "end": 771.171
+  },
+  {
+   "segment": "day-transition",
+   "text": "A short breath of prayer in the hallway or the car can keep your heart turned toward them and toward him.",
+   "start": 771.471,
+   "end": 778.873
+  },
+  {
+   "segment": "declaration",
+   "text": "My home belongs to God.",
+   "start": 780.173,
+   "end": 782.499
+  },
+  {
+   "segment": "declaration",
+   "text": "He builds what I cannot build and keeps what I cannot keep.",
+   "start": 782.799,
+   "end": 787.215
+  },
+  {
+   "segment": "declaration",
+   "text": "I can listen before I speak.",
+   "start": 787.515,
+   "end": 790.011
+  },
+  {
+   "segment": "declaration",
+   "text": "I can let small offenses go.",
+   "start": 790.311,
+   "end": 792.956
+  },
+  {
+   "segment": "declaration",
+   "text": "I can say thank you out loud.",
+   "start": 793.256,
+   "end": 795.709
+  },
+  {
+   "segment": "declaration",
+   "text": "I can honor the people I love with simple acts of kindness.",
+   "start": 796.009,
+   "end": 800.767
+  },
+  {
+   "segment": "declaration",
+   "text": "God's mercy reaches my family today and the generations that come after us.",
+   "start": 801.067,
+   "end": 807.296
+  },
+  {
+   "segment": "commitment",
+   "text": "Choose one person from your home or your family right now.",
+   "start": 808.796,
+   "end": 813.319
+  },
+  {
+   "segment": "commitment",
+   "text": "Decide on one simple act of love for them today, and when you will do it.",
+   "start": 813.619,
+   "end": 819.251
+  },
+  {
+   "segment": "commitment",
+   "text": "It might be, when my daughter gets home from school, I will put my phone away and ask about her day.",
+   "start": 819.551,
+   "end": 826.911
+  },
+  {
+   "segment": "commitment",
+   "text": "Or, at lunch I will send my mother a message of thanks.",
+   "start": 827.211,
+   "end": 831.477
+  },
+  {
+   "segment": "commitment",
+   "text": "Keep it small and specific enough to actually do.",
+   "start": 831.777,
+   "end": 835.361
+  },
+  {
+   "segment": "payoff",
+   "text": "Father, I place that act of love before you.",
+   "start": 836.861,
+   "end": 840.381
+  },
+  {
+   "segment": "payoff",
+   "text": "Help me follow through when the moment comes, even if I feel tired or distracted.",
+   "start": 840.681,
+   "end": 846.74
+  },
+  {
+   "segment": "payoff",
+   "text": "Let it be offered freely, without expecting anything back.",
+   "start": 847.04,
+   "end": 851.435
+  },
+  {
+   "segment": "payoff",
+   "text": "Use it to bring a little more of your kindness into our home.",
+   "start": 851.735,
+   "end": 856.321
+  },
+  {
+   "segment": "payoff",
+   "text": "And as the day unfolds, keep my heart soft toward everyone I meet, starting with those closest to me.",
+   "start": 856.621,
+   "end": 864.835
+  },
+  {
+   "segment": "blessing",
+   "text": "May the Lord build your house and keep your family in his care.",
+   "start": 866.335,
+   "end": 870.879
+  },
+  {
+   "segment": "blessing",
+   "text": "May your children be taught of him and their peace be great.",
+   "start": 871.179,
+   "end": 875.445
+  },
+  {
+   "segment": "blessing",
+   "text": "May your conversations be patient, your home be a refuge, and your love cover many small offenses.",
+   "start": 875.745,
+   "end": 883.617
+  },
+  {
+   "segment": "blessing",
+   "text": "May you notice the good in the people around you, and may they notice his kindness in you.",
+   "start": 883.917,
+   "end": 889.891
+  },
+  {
+   "segment": "blessing",
+   "text": "Go into this day held by his faithful love.",
+   "start": 890.191,
+   "end": 893.455
+  },
+  {
+   "segment": "cta",
+   "text": "If you are praying this over your family today, you are welcome to write Amen.",
+   "start": 894.955,
+   "end": 900.8
+  },
+  {
+   "segment": "cta",
+   "text": "You can also leave a prayer request in the comments, and in our next morning prayer we will pray over the requests you share.",
+   "start": 901.1,
+   "end": 909.697
+  },
+  {
+   "segment": "closing",
+   "text": "Thank you for praying with me this morning.",
+   "start": 910.997,
+   "end": 914.005
+  },
+  {
+   "segment": "closing",
+   "text": "Carry the names of your loved ones with you as you go.",
+   "start": 914.305,
+   "end": 918.38
+  },
+  {
+   "segment": "closing",
+   "text": "Whatever this day brings to your home, God is already present in it, building, keeping, and loving.",
+   "start": 918.68,
+   "end": 926.019
+  },
+  {
+   "segment": "closing",
+   "text": "Go gently, listen well, and let your one act of love be a small sign of his grace.",
+   "start": 926.319,
+   "end": 932.932
+  }
+ ],
+ "overlay": {
+  "brand": "HeroVerse Prayer",
+  "title": "Pray Over Your Family",
+  "title_card_seconds": 2.0
+ },
+ "persistent_overlays": [
+  "brand"
+ ],
+ "caption_style": {
+  "box": false,
+  "alignment": "bottom-centre",
+  "outline": 4,
+  "words_max": 7
+ },
+ "cta": [],
+ "scripture_cards": [
+  {
+   "segment": "scripture-joshua-house",
+   "reference": "Joshua 24:15 (KJV)",
+   "start": 73.149,
+   "end": 93.803
+  },
+  {
+   "segment": "scripture-psalm-build",
+   "reference": "Psalm 127:1 (KJV)",
+   "start": 123.033,
+   "end": 132.997
+  },
+  {
+   "segment": "scripture-isaiah-children",
+   "reference": "Isaiah 54:13 (KJV)",
+   "start": 199.272,
+   "end": 205.929
+  },
+  {
+   "segment": "scripture-proverbs-refuge",
+   "reference": "Proverbs 14:26 (KJV)",
+   "start": 324.541,
+   "end": 331.732
+  },
+  {
+   "segment": "scripture-psalm-mercy-generations",
+   "reference": "Psalm 103:17-18 (KJV)",
+   "start": 389.501,
+   "end": 399.379
+  },
+  {
+   "segment": "scripture-ephesians-unity",
+   "reference": "Ephesians 4:2-3 (KJV)",
+   "start": 435.267,
+   "end": 446.532
+  },
+  {
+   "segment": "scripture-james-swift",
+   "reference": "James 1:19 (KJV)",
+   "start": 477.812,
+   "end": 484.831
+  },
+  {
+   "segment": "scripture-peter-charity",
+   "reference": "1 Peter 4:8 (KJV)",
+   "start": 522.109,
+   "end": 525.8
+  },
+  {
+   "segment": "scripture-philippians-remembrance",
+   "reference": "Philippians 1:3 (KJV)",
+   "start": 555.267,
+   "end": 558.979
+  },
+  {
+   "segment": "scripture-psalm-unity",
+   "reference": "Psalm 133:1 (KJV)",
+   "start": 588.187,
+   "end": 594.245
+  },
+  {
+   "segment": "scripture-deuteronomy-teach",
+   "reference": "Deuteronomy 6:6-7 (KJV)",
+   "start": 625.012,
+   "end": 645.088
+  },
+  {
+   "segment": "scripture-romans-affection",
+   "reference": "Romans 12:10 (KJV)",
+   "start": 680.808,
+   "end": 687.679
+  },
+  {
+   "segment": "scripture-acts-house",
+   "reference": "Acts 16:31 (KJV)",
+   "start": 717.039,
+   "end": 723.695
+  }
+ ],
+ "scene_target_seconds": 5.5,
+ "crossfade_seconds": 0.6,
+ "cinematic": {
+  "depth_model": {
+   "name": "Depth Anything V2 Small (ONNX)",
+   "licence": "apache-2.0",
+   "sha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c"
+  },
+  "grade": "colorbalance=rs=-0.015:bs=0.02:rh=0.03:gh=0.01:bh=-0.03,eq=contrast=1.04:saturation=1.04",
+  "look": "split[base][glow];[glow]scale=640:360,curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale=2560:1440[halo];[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,vignette=angle=PI/6:mode=forward,noise=c0s=4:c0f=t+u",
+  "atmosphere": [
+   "bg-dawn-lake",
+   "bg-misty-valley",
+   "bg-sunrise-field",
+   "bg-orchard",
+   "bg-mountain-sunrise"
+  ]
+ },
+ "clips": [
+  {
+   "id": "clip-sunrise-sunset-clouds-golden-sunset-sun-downfall",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-92093/",
+   "author": "Kaffeesüchtig",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-92093/)",
+   "vetting": "APPROVED",
+   "sha256": "48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e",
+   "release_asset": "footage-clip-sunrise-sunset-clouds-golden-sunset-sun-downfall-sha256-48652b49de8eb8d5f8d3592bc38882b101e4f176e0289548ac9e9436acc39c6e.mp4"
+  },
+  {
+   "id": "clip-clouds-clouds-cumulus-heaven-sun-air-the-atmosp",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-91162/",
+   "author": "Kaffeesüchtig",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-91162/)",
+   "vetting": "APPROVED",
+   "sha256": "aff36bc5975f41674b340581b8de2a8891c4b77698992c12403981e3157f0b1a",
+   "release_asset": "footage-clip-clouds-clouds-cumulus-heaven-sun-air-the-atmosp-sha256-aff36bc5975f41674b340581b8de2a8891c4b77698992c12403981e3157f0b1a.mp4"
+  },
+  {
+   "id": "clip-river-waterfall-rocks-river-stream-water-sceni",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-169202/",
+   "author": "RaniRamli",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: RaniRamli via Pixabay (https://pixabay.com/videos/id-169202/)",
+   "vetting": "APPROVED",
+   "sha256": "ea8921f5f2240b5750657056641673565dff7c5e11ebe38cce189fa600fb50e6",
+   "release_asset": "footage-clip-river-waterfall-rocks-river-stream-water-sceni-sha256-ea8921f5f2240b5750657056641673565dff7c5e11ebe38cce189fa600fb50e6.mp4"
+  },
+  {
+   "id": "clip-waterfall-river-forest-waterfall-beautiful-wallpap",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-120254/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-120254/)",
+   "vetting": "APPROVED",
+   "sha256": "0e4e2b91a6b1e6f819f0644c77ec038bdb4135edfa2621ef2b6c194966f0b5d5",
+   "release_asset": "footage-clip-waterfall-river-forest-waterfall-beautiful-wallpap-sha256-0e4e2b91a6b1e6f819f0644c77ec038bdb4135edfa2621ef2b6c194966f0b5d5.mp4"
+  },
+  {
+   "id": "clip-lake-lake-forest-trees-fog-sunrise-morning-ne",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-147629/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-147629/)",
+   "vetting": "APPROVED",
+   "sha256": "5afe9f680bc400abeedf9d2c75cc605651e9c827e21f0471b1325778255f6a53",
+   "release_asset": "footage-clip-lake-lake-forest-trees-fog-sunrise-morning-ne-sha256-5afe9f680bc400abeedf9d2c75cc605651e9c827e21f0471b1325778255f6a53.mp4"
+  },
+  {
+   "id": "clip-ocean-sunrise-sea-ocean-waves-beach-lanzarote-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-199001/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-199001/)",
+   "vetting": "APPROVED",
+   "sha256": "3a51d774cfa4c961850c3f41c8aab42ba0718c0a64425ca0c761842603cfa7c3",
+   "release_asset": "footage-clip-ocean-sunrise-sea-ocean-waves-beach-lanzarote--sha256-3a51d774cfa4c961850c3f41c8aab42ba0718c0a64425ca0c761842603cfa7c3.mp4"
+  },
+  {
+   "id": "clip-mist-fog-morning-mist-nature-haze-tomorrow-mo",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-242905/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-242905/)",
+   "vetting": "APPROVED",
+   "sha256": "842c9f7d99b30e57651b2ad28f4b9b49a69cf529d59f26a7ca3ab84c187f6b4b",
+   "release_asset": "footage-clip-mist-fog-morning-mist-nature-haze-tomorrow-mo-sha256-842c9f7d99b30e57651b2ad28f4b9b49a69cf529d59f26a7ca3ab84c187f6b4b.mp4"
+  },
+  {
+   "id": "clip-snow-trees-forest-snowfall-snow-showers-winte",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-106248/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-106248/)",
+   "vetting": "APPROVED",
+   "sha256": "2f43680ec2ed98706fe8612211f22dc428d62c2dcbe4c94bce2f55bcb642d0ac",
+   "release_asset": "footage-clip-snow-trees-forest-snowfall-snow-showers-winte-sha256-2f43680ec2ed98706fe8612211f22dc428d62c2dcbe4c94bce2f55bcb642d0ac.mp4"
+  },
+  {
+   "id": "clip-night-aurora-butterfly-butterfly-insect-nectar",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-129199/",
+   "author": "fotoblend",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: fotoblend via Pixabay (https://pixabay.com/videos/id-129199/)",
+   "vetting": "APPROVED",
+   "sha256": "cdf8afe9ee341551e5cda43c180d6bc46191f31fe38ff0e1d9cad76b6c9ee2af",
+   "release_asset": "footage-clip-night-aurora-butterfly-butterfly-insect-nectar-sha256-cdf8afe9ee341551e5cda43c180d6bc46191f31fe38ff0e1d9cad76b6c9ee2af.mp4"
+  },
+  {
+   "id": "clip-forest-trees-forest-moss-scenic-autumn-4k",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-185727/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-185727/)",
+   "vetting": "APPROVED",
+   "sha256": "ac6daa8887a5c951fc52e4603d9794eccf6d64ebef4dd4857372b78814c4d030",
+   "release_asset": "footage-clip-forest-trees-forest-moss-scenic-autumn-4k-sha256-ac6daa8887a5c951fc52e4603d9794eccf6d64ebef4dd4857372b78814c4d030.mp4"
+  },
+  {
+   "id": "clip-field-grain-grain-field-cornflower-barley-whea",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-132781/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-132781/)",
+   "vetting": "APPROVED",
+   "sha256": "e7b97532f29e2c10ae2e1adf177fc88f8e76b565436ce96f4b44b22b5998372e",
+   "release_asset": "footage-clip-field-grain-grain-field-cornflower-barley-whea-sha256-e7b97532f29e2c10ae2e1adf177fc88f8e76b565436ce96f4b44b22b5998372e.mp4"
+  },
+  {
+   "id": "clip-grass-silver-grass-reed-autumn-autumn-wind",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-91388/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-91388/)",
+   "vetting": "APPROVED",
+   "sha256": "32a4db3aaeff48e3d8a1af719abbad1a1057ecf0cc4051c7b75735a2440fc07f",
+   "release_asset": "footage-clip-grass-silver-grass-reed-autumn-autumn-wind-sha256-32a4db3aaeff48e3d8a1af719abbad1a1057ecf0cc4051c7b75735a2440fc07f.mp4"
+  },
+  {
+   "id": "clip-sunrise-fog-sea-of-fog-mist-mountains-mountain-l",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-93284/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-93284/)",
+   "vetting": "APPROVED",
+   "sha256": "31fe27f8f4df67ad13755d9b55590d70962546d23da67b2cdf3efe4076460fb7",
+   "release_asset": "footage-clip-sunrise-fog-sea-of-fog-mist-mountains-mountain-l-sha256-31fe27f8f4df67ad13755d9b55590d70962546d23da67b2cdf3efe4076460fb7.mp4"
+  },
+  {
+   "id": "clip-clouds-clouds-cumulus-heaven-wind-the-atmospher",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-90906/",
+   "author": "Kaffeesüchtig",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Kaffeesüchtig via Pixabay (https://pixabay.com/videos/id-90906/)",
+   "vetting": "APPROVED",
+   "sha256": "da5dcdd65fc2f20abb6a19477cf91c392fa68edf15e72251def4835ae0c0f219",
+   "release_asset": "footage-clip-clouds-clouds-cumulus-heaven-wind-the-atmospher-sha256-da5dcdd65fc2f20abb6a19477cf91c392fa68edf15e72251def4835ae0c0f219.mp4"
+  },
+  {
+   "id": "clip-river-bach-larch-forest-forest-autumn-colors-f",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-311556/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-311556/)",
+   "vetting": "APPROVED",
+   "sha256": "07097ae11feed279579afc925f4b426cfb6a304805af80318666b12317103769",
+   "release_asset": "footage-clip-river-bach-larch-forest-forest-autumn-colors-f-sha256-07097ae11feed279579afc925f4b426cfb6a304805af80318666b12317103769.mp4"
+  },
+  {
+   "id": "clip-waterfall-rocks-stones-water-nature-waterfalls-cas",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-168438/",
+   "author": "RaniRamli",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: RaniRamli via Pixabay (https://pixabay.com/videos/id-168438/)",
+   "vetting": "APPROVED",
+   "sha256": "c872ba56c1eae3a09e0031c26b50f21e6dcf12c46dd5bdfe98d1378920188b1b",
+   "release_asset": "footage-clip-waterfall-rocks-stones-water-nature-waterfalls-cas-sha256-c872ba56c1eae3a09e0031c26b50f21e6dcf12c46dd5bdfe98d1378920188b1b.mp4"
+  },
+  {
+   "id": "clip-lake-lake-mountains-sunset-sunrise-relaxing-c",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-119242/",
+   "author": "nadlasi",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: nadlasi via Pixabay (https://pixabay.com/videos/id-119242/)",
+   "vetting": "APPROVED",
+   "sha256": "8c0aef1ac725456a088e92c9db36682182ec03b63a7267dd5fdb85cad152cb0f",
+   "release_asset": "footage-clip-lake-lake-mountains-sunset-sunrise-relaxing-c-sha256-8c0aef1ac725456a088e92c9db36682182ec03b63a7267dd5fdb85cad152cb0f.mp4"
+  },
+  {
+   "id": "clip-ocean-sunset-sea-ocean-beach",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-264939/",
+   "author": "conghuynh8",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: conghuynh8 via Pixabay (https://pixabay.com/videos/id-264939/)",
+   "vetting": "APPROVED",
+   "sha256": "5f4cfe5aec054df0146013e490b28cdfaca5295ea9a491914ba45a872a1c45f9",
+   "release_asset": "footage-clip-ocean-sunset-sea-ocean-beach-sha256-5f4cfe5aec054df0146013e490b28cdfaca5295ea9a491914ba45a872a1c45f9.mp4"
+  },
+  {
+   "id": "clip-mist-fog-sun-fog-ceiling-sunshine-mist-ripe-h",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-260397/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-260397/)",
+   "vetting": "APPROVED",
+   "sha256": "2de0538f577a258032b064d073365da0593a6118efb888c51b4712f023b06e67",
+   "release_asset": "footage-clip-mist-fog-sun-fog-ceiling-sunshine-mist-ripe-h-sha256-2de0538f577a258032b064d073365da0593a6118efb888c51b4712f023b06e67.mp4"
+  },
+  {
+   "id": "clip-snow-waterfall-scotland-water-snow-nature-lan",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-35615/",
+   "author": "CLEARSTREAMFILM",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: CLEARSTREAMFILM via Pixabay (https://pixabay.com/videos/id-35615/)",
+   "vetting": "APPROVED",
+   "sha256": "d289af342194ca2cc4cdf36b7aa2c98d7020e5186565e25ed9dc320bd134cdd2",
+   "release_asset": "footage-clip-snow-waterfall-scotland-water-snow-nature-lan-sha256-d289af342194ca2cc4cdf36b7aa2c98d7020e5186565e25ed9dc320bd134cdd2.mp4"
+  },
+  {
+   "id": "clip-meadow-cosmos-flowers-wind-field-meadow-autumn-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-182517/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-182517/)",
+   "vetting": "APPROVED",
+   "sha256": "f420ad8b04b6765dcf3e16dfd21145bd83b4856677a7cf92dd5bddc953b9f37e",
+   "release_asset": "footage-clip-meadow-cosmos-flowers-wind-field-meadow-autumn--sha256-f420ad8b04b6765dcf3e16dfd21145bd83b4856677a7cf92dd5bddc953b9f37e.mp4"
+  },
+  {
+   "id": "clip-forest-trees-forest-sunrise-woods-fog-trail-sun",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-220362/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-220362/)",
+   "vetting": "APPROVED",
+   "sha256": "cf9c3bb100031ce803e8384e7ac24beadcd6571b7def74a6e4bf01c5f554893a",
+   "release_asset": "footage-clip-forest-trees-forest-sunrise-woods-fog-trail-sun-sha256-cf9c3bb100031ce803e8384e7ac24beadcd6571b7def74a6e4bf01c5f554893a.mp4"
+  },
+  {
+   "id": "clip-field-green-wheat-field-agriculture-nature-pla",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-40724/",
+   "author": "ha11ok",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: ha11ok via Pixabay (https://pixabay.com/videos/id-40724/)",
+   "vetting": "APPROVED",
+   "sha256": "c628533987805d0a0aa46eab687eb0f118b7f0f0743366f933c79d4d14f9a8b1",
+   "release_asset": "footage-clip-field-green-wheat-field-agriculture-nature-pla-sha256-c628533987805d0a0aa46eab687eb0f118b7f0f0743366f933c79d4d14f9a8b1.mp4"
+  },
+  {
+   "id": "clip-grass-silver-grass-wind-reed-autumn-landscape-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-90748/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-90748/)",
+   "vetting": "APPROVED",
+   "sha256": "812dfd3f9a482bd39f18e513f0d2fdbd6a92ddcadd508942bd61f57ebbedc950",
+   "release_asset": "footage-clip-grass-silver-grass-wind-reed-autumn-landscape--sha256-812dfd3f9a482bd39f18e513f0d2fdbd6a92ddcadd508942bd61f57ebbedc950.mp4"
+  },
+  {
+   "id": "clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-19409/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-19409/)",
+   "vetting": "APPROVED",
+   "sha256": "bd4d5157c1d82eb02c4235cce0f2c4bfe5a11d4df0a670c5a74772c4b924b3fa",
+   "release_asset": "footage-clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli-sha256-bd4d5157c1d82eb02c4235cce0f2c4bfe5a11d4df0a670c5a74772c4b924b3fa.mp4"
+  },
+  {
+   "id": "clip-clouds-clouds-cumulus-mountains-landscape-switz",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-81925/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-81925/)",
+   "vetting": "APPROVED",
+   "sha256": "ea2a35780becf5fd8ba91a8bdb59722d93e592091bb1bed550b653123143d347",
+   "release_asset": "footage-clip-clouds-clouds-cumulus-mountains-landscape-switz-sha256-ea2a35780becf5fd8ba91a8bdb59722d93e592091bb1bed550b653123143d347.mp4"
+  },
+  {
+   "id": "clip-river-fall-flow-mountain-stream-larch-forest-n",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-378036/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-378036/)",
+   "vetting": "APPROVED",
+   "sha256": "8614d15e664ad9c4c93f5c80b25632d28a3dbccc0aac76d98f59589dd879f17f",
+   "release_asset": "footage-clip-river-fall-flow-mountain-stream-larch-forest-n-sha256-8614d15e664ad9c4c93f5c80b25632d28a3dbccc0aac76d98f59589dd879f17f.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-cascade-that-nature-moun",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-126442/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-126442/)",
+   "vetting": "APPROVED",
+   "sha256": "d78a43008fa4be98477d77b2d70e891aca396258d590b773fd9c8af962a37fe4",
+   "release_asset": "footage-clip-waterfall-waterfall-river-cascade-that-nature-moun-sha256-d78a43008fa4be98477d77b2d70e891aca396258d590b773fd9c8af962a37fe4.mp4"
+  },
+  {
+   "id": "clip-lake-lake-outlook-alpine-flowers-fogging-lake",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-226710/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-226710/)",
+   "vetting": "APPROVED",
+   "sha256": "8570f7b3853cff970dbedf3b46272f939fe39b045574c42f6212c0744069eb49",
+   "release_asset": "footage-clip-lake-lake-outlook-alpine-flowers-fogging-lake-sha256-8570f7b3853cff970dbedf3b46272f939fe39b045574c42f6212c0744069eb49.mp4"
+  },
+  {
+   "id": "clip-ocean-wave-rocks-coast-sea-that-ocean-holiday-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-19998/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-19998/)",
+   "vetting": "APPROVED",
+   "sha256": "fca37851d5b5b6e15e4893559569de36cab7b22280dc6c6d7eef42ff24507fe8",
+   "release_asset": "footage-clip-ocean-wave-rocks-coast-sea-that-ocean-holiday--sha256-fca37851d5b5b6e15e4893559569de36cab7b22280dc6c6d7eef42ff24507fe8.mp4"
+  },
+  {
+   "id": "clip-mist-loch-lake-water-blue-scotland-highlands-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-116018/",
+   "author": "D-GM",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: D-GM via Pixabay (https://pixabay.com/videos/id-116018/)",
+   "vetting": "APPROVED",
+   "sha256": "039e07cf37bf636947b1b1fcb439b52010ac6701bf16bbca90e733eacba42995",
+   "release_asset": "footage-clip-mist-loch-lake-water-blue-scotland-highlands--sha256-039e07cf37bf636947b1b1fcb439b52010ac6701bf16bbca90e733eacba42995.mp4"
+  },
+  {
+   "id": "clip-snow-cloud-formation-fog-mountain-clouds-snow",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-207309/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-207309/)",
+   "vetting": "APPROVED",
+   "sha256": "afafb60656764ed7cfc888d3afc0182bdf0b73c72aec30c35d1c8a79d0facdb8",
+   "release_asset": "footage-clip-snow-cloud-formation-fog-mountain-clouds-snow-sha256-afafb60656764ed7cfc888d3afc0182bdf0b73c72aec30c35d1c8a79d0facdb8.mp4"
+  },
+  {
+   "id": "clip-meadow-flower-convolvulus-wind-wildflower-wild-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-166052/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-166052/)",
+   "vetting": "APPROVED",
+   "sha256": "e1f90ce09fc71725af83c28b18b7ce45a7f45bbabb5fd28f4fb579e32ffcd2c6",
+   "release_asset": "footage-clip-meadow-flower-convolvulus-wind-wildflower-wild--sha256-e1f90ce09fc71725af83c28b18b7ce45a7f45bbabb5fd28f4fb579e32ffcd2c6.mp4"
+  },
+  {
+   "id": "clip-forest-trees-forest-sunset-sun-light-field-aeri",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-123207/",
+   "author": "Borobstacle",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Borobstacle via Pixabay (https://pixabay.com/videos/id-123207/)",
+   "vetting": "APPROVED",
+   "sha256": "606d68ce1d90577f17ee6e262a1196c93074866a08222df5c968d3cfa1d8bd2c",
+   "release_asset": "footage-clip-forest-trees-forest-sunset-sun-light-field-aeri-sha256-606d68ce1d90577f17ee6e262a1196c93074866a08222df5c968d3cfa1d8bd2c.mp4"
+  },
+  {
+   "id": "clip-field-field-prairie-wheat-sun-agriculture-dusk",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-175750/",
+   "author": "DamienCharbonier",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: DamienCharbonier via Pixabay (https://pixabay.com/videos/id-175750/)",
+   "vetting": "APPROVED",
+   "sha256": "16913a0da51be9878e5473ce6a5e6fbe0f6b84f4d29175dca5391b49462374d6",
+   "release_asset": "footage-clip-field-field-prairie-wheat-sun-agriculture-dusk-sha256-16913a0da51be9878e5473ce6a5e6fbe0f6b84f4d29175dca5391b49462374d6.mp4"
+  },
+  {
+   "id": "clip-grass-grass-plant-dry-park-garden-botanical-sp",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-197946/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-197946/)",
+   "vetting": "APPROVED",
+   "sha256": "dd41c0132157d2b205bda30993478e666841352d115d9d63bf8d1498941194a2",
+   "release_asset": "footage-clip-grass-grass-plant-dry-park-garden-botanical-sp-sha256-dd41c0132157d2b205bda30993478e666841352d115d9d63bf8d1498941194a2.mp4"
+  },
+  {
+   "id": "clip-sunrise-sunrise-fog-sea-of-fog-switzerland-sun-c",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-93914/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-93914/)",
+   "vetting": "APPROVED",
+   "sha256": "a84700576aa418cad02597b9383e17a597e2d333d9a89bcd37a24965f2b35d50",
+   "release_asset": "footage-clip-sunrise-sunrise-fog-sea-of-fog-switzerland-sun-c-sha256-a84700576aa418cad02597b9383e17a597e2d333d9a89bcd37a24965f2b35d50.mp4"
+  },
+  {
+   "id": "clip-clouds-mountains-desert-arid-dry-clouds-4k-natu",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-91469/",
+   "author": "mdherren",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: mdherren via Pixabay (https://pixabay.com/videos/id-91469/)",
+   "vetting": "APPROVED",
+   "sha256": "9891e8ac67833baebe1524cda5418c61df24c904c41fa4a7816a533bfe11ba92",
+   "release_asset": "footage-clip-clouds-mountains-desert-arid-dry-clouds-4k-natu-sha256-9891e8ac67833baebe1524cda5418c61df24c904c41fa4a7816a533bfe11ba92.mp4"
+  },
+  {
+   "id": "clip-river-forest-woods-stream-river-creek-water-le",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-223707/",
+   "author": "OneGod_TheFather",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: OneGod_TheFather via Pixabay (https://pixabay.com/videos/id-223707/)",
+   "vetting": "APPROVED",
+   "sha256": "eeef6acea4e7d3190c53c6adee3cf07ba8009fbb0b4ea70705cdcf307971f14a",
+   "release_asset": "footage-clip-river-forest-woods-stream-river-creek-water-le-sha256-eeef6acea4e7d3190c53c6adee3cf07ba8009fbb0b4ea70705cdcf307971f14a.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-cascade-water-drains-jum",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-48898/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-48898/)",
+   "vetting": "APPROVED",
+   "sha256": "61a335cbac25259c95b5607b1016fccdfae5087dca9591f4e6ab8fd7f2a2c037",
+   "release_asset": "footage-clip-waterfall-waterfall-river-cascade-water-drains-jum-sha256-61a335cbac25259c95b5607b1016fccdfae5087dca9591f4e6ab8fd7f2a2c037.mp4"
+  },
+  {
+   "id": "clip-lake-lake-sunrise-sun-landscape-nature-lake-z",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-267172/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-267172/)",
+   "vetting": "APPROVED",
+   "sha256": "2f97976f707e6ae6ee69bea6255107113f75448b5217b484016b6a88576bb981",
+   "release_asset": "footage-clip-lake-lake-sunrise-sun-landscape-nature-lake-z-sha256-2f97976f707e6ae6ee69bea6255107113f75448b5217b484016b6a88576bb981.mp4"
+  },
+  {
+   "id": "clip-ocean-aerial-ocean-rocks-oregon-indian-beach-l",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-28262/",
+   "author": "Rick_Coyle",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Rick_Coyle via Pixabay (https://pixabay.com/videos/id-28262/)",
+   "vetting": "APPROVED",
+   "sha256": "5e352f16b33cd280c39c538dfe920348f4859956ddf736f6ff5b7b39b8412504",
+   "release_asset": "footage-clip-ocean-aerial-ocean-rocks-oregon-indian-beach-l-sha256-5e352f16b33cd280c39c538dfe920348f4859956ddf736f6ff5b7b39b8412504.mp4"
+  },
+  {
+   "id": "clip-mist-winter-hoarfrost-fog-mist-landscape-natu",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-247945/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-247945/)",
+   "vetting": "APPROVED",
+   "sha256": "e61f5acee3b1da65f61c09fbc0baea6a6bfc231fe576160fb477b1136154cab3",
+   "release_asset": "footage-clip-mist-winter-hoarfrost-fog-mist-landscape-natu-sha256-e61f5acee3b1da65f61c09fbc0baea6a6bfc231fe576160fb477b1136154cab3.mp4"
+  },
+  {
+   "id": "clip-snow-forest-snow-blizzard-river-snowfall-snow",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-154331/",
+   "author": "Nils_Vega",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Nils_Vega via Pixabay (https://pixabay.com/videos/id-154331/)",
+   "vetting": "APPROVED",
+   "sha256": "39004cfc5ba715026e3afe3dd64c5444599213705736352e1f4b81d89e9ad1c8",
+   "release_asset": "footage-clip-snow-forest-snow-blizzard-river-snowfall-snow-sha256-39004cfc5ba715026e3afe3dd64c5444599213705736352e1f4b81d89e9ad1c8.mp4"
+  },
+  {
+   "id": "clip-meadow-flower-garden-autumn-wind-plant-landscap",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-90085/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-90085/)",
+   "vetting": "APPROVED",
+   "sha256": "0d858005db3cc86cf13e434945d1a4ce874d3fb73fa89abbcc579a4bb47336d2",
+   "release_asset": "footage-clip-meadow-flower-garden-autumn-wind-plant-landscap-sha256-0d858005db3cc86cf13e434945d1a4ce874d3fb73fa89abbcc579a4bb47336d2.mp4"
+  },
+  {
+   "id": "clip-forest-trees-forest-woods-autumn-landscape-natu",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-134384/",
+   "author": "OneGod_TheFather",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: OneGod_TheFather via Pixabay (https://pixabay.com/videos/id-134384/)",
+   "vetting": "APPROVED",
+   "sha256": "179997a4096d216c2819c9e5bac32658be4e36817aaa84452ce56b5144547660",
+   "release_asset": "footage-clip-forest-trees-forest-woods-autumn-landscape-natu-sha256-179997a4096d216c2819c9e5bac32658be4e36817aaa84452ce56b5144547660.mp4"
+  },
+  {
+   "id": "clip-field-fields-wheat-agriculture-landscape-farm-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-41093/",
+   "author": "cla-fumassa",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: cla-fumassa via Pixabay (https://pixabay.com/videos/id-41093/)",
+   "vetting": "APPROVED",
+   "sha256": "fb5af58ec5911cc164154e6f27bf1f957a481a12dbbab86c496fc3c2e7338fae",
+   "release_asset": "footage-clip-field-fields-wheat-agriculture-landscape-farm--sha256-fb5af58ec5911cc164154e6f27bf1f957a481a12dbbab86c496fc3c2e7338fae.mp4"
+  },
+  {
+   "id": "clip-grass-riverside-autumn-silver-grass-wind-lands",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-91392/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-91392/)",
+   "vetting": "APPROVED",
+   "sha256": "98f24b203051d638ce15f591e4607d3e3cf01e85b991b9e55364ffff99b825ea",
+   "release_asset": "footage-clip-grass-riverside-autumn-silver-grass-wind-lands-sha256-98f24b203051d638ce15f591e4607d3e3cf01e85b991b9e55364ffff99b825ea.mp4"
+  },
+  {
+   "id": "clip-sunrise-sunset-blossoms-spring-plum-blossoms-tim",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-112178/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-112178/)",
+   "vetting": "APPROVED",
+   "sha256": "d1cd541816dc75bbb7d1a6d0ea8ba66a687e7074ab522b68c1a2d68fdf979045",
+   "release_asset": "footage-clip-sunrise-sunset-blossoms-spring-plum-blossoms-tim-sha256-d1cd541816dc75bbb7d1a6d0ea8ba66a687e7074ab522b68c1a2d68fdf979045.mp4"
+  },
+  {
+   "id": "clip-clouds-sunrise-fog-clouds-landscape-mountain-ra",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-58480/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-58480/)",
+   "vetting": "APPROVED",
+   "sha256": "b9e1b1a7410cd529d60245e4f88947c5fdc58b36b9629af9a74fc8d725569f5f",
+   "release_asset": "footage-clip-clouds-sunrise-fog-clouds-landscape-mountain-ra-sha256-b9e1b1a7410cd529d60245e4f88947c5fdc58b36b9629af9a74fc8d725569f5f.mp4"
+  },
+  {
+   "id": "clip-river-mountain-tree-flying-sky-water-travel-st",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-85522/",
+   "author": "urban24",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: urban24 via Pixabay (https://pixabay.com/videos/id-85522/)",
+   "vetting": "APPROVED",
+   "sha256": "5dba72d458d217742bc7f5d93f68e6328198bb465be9ca51429edc56290113df",
+   "release_asset": "footage-clip-river-mountain-tree-flying-sky-water-travel-st-sha256-5dba72d458d217742bc7f5d93f68e6328198bb465be9ca51429edc56290113df.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-forest-mountain-cascade-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-213979/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-213979/)",
+   "vetting": "APPROVED",
+   "sha256": "fc6b4a518ac421ef26204ea463237d8df6231c2ef601405bbed30ff87bf098dd",
+   "release_asset": "footage-clip-waterfall-waterfall-river-forest-mountain-cascade--sha256-fc6b4a518ac421ef26204ea463237d8df6231c2ef601405bbed30ff87bf098dd.mp4"
+  },
+  {
+   "id": "clip-lake-river-lake-water-alpes-dolomiti-dolomite",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-88415/",
+   "author": "Ambient_Nature_Atmosphere",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-88415/)",
+   "vetting": "APPROVED",
+   "sha256": "5e930e0a82558e0b493fa96f3d548c24657125ad704326679fa81e1059b34fd4",
+   "release_asset": "footage-clip-lake-river-lake-water-alpes-dolomiti-dolomite-sha256-5e930e0a82558e0b493fa96f3d548c24657125ad704326679fa81e1059b34fd4.mp4"
+  },
+  {
+   "id": "clip-ocean-beach-landscape-clouds-travel-waves-wate",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-19987/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-19987/)",
+   "vetting": "APPROVED",
+   "sha256": "5a1ab3fa7790447fd80d28b2588c6f354a1f77d9c06895880b8f3c838801bef8",
+   "release_asset": "footage-clip-ocean-beach-landscape-clouds-travel-waves-wate-sha256-5a1ab3fa7790447fd80d28b2588c6f354a1f77d9c06895880b8f3c838801bef8.mp4"
+  },
+  {
+   "id": "clip-mist-clouds-sunset-fog-sun-forest-fir-forest",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-143485/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-143485/)",
+   "vetting": "APPROVED",
+   "sha256": "eaca5172f81a129353ddbf4406d64d041fb9860296c22443f07fd1a85af50746",
+   "release_asset": "footage-clip-mist-clouds-sunset-fog-sun-forest-fir-forest-sha256-eaca5172f81a129353ddbf4406d64d041fb9860296c22443f07fd1a85af50746.mp4"
+  },
+  {
+   "id": "clip-snow-ice-snowfall-snow-christmas-sky-trees-wi",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-142795/",
+   "author": "jrydertr",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: jrydertr via Pixabay (https://pixabay.com/videos/id-142795/)",
+   "vetting": "APPROVED",
+   "sha256": "148a0bae12bf1c077280cc24396ec50d0460c60e9162fed4d272eb0869c884ea",
+   "release_asset": "footage-clip-snow-ice-snowfall-snow-christmas-sky-trees-wi-sha256-148a0bae12bf1c077280cc24396ec50d0460c60e9162fed4d272eb0869c884ea.mp4"
+  },
+  {
+   "id": "clip-meadow-flower-wind-wildflower-wild-flower-plant",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-166051/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-166051/)",
+   "vetting": "APPROVED",
+   "sha256": "d50ac049a6167c75fbac4da124f19ccf63eab040a7adb21c4702bdf3e19aacd4",
+   "release_asset": "footage-clip-meadow-flower-wind-wildflower-wild-flower-plant-sha256-d50ac049a6167c75fbac4da124f19ccf63eab040a7adb21c4702bdf3e19aacd4.mp4"
+  },
+  {
+   "id": "clip-forest-trees-sunset-forest-sun-light-golden-hou",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-123204/",
+   "author": "Borobstacle",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Borobstacle via Pixabay (https://pixabay.com/videos/id-123204/)",
+   "vetting": "APPROVED",
+   "sha256": "b03c91e0c734aab7c979d1e869b2a901961ec8a1b8573aaa3488ec86987b2353",
+   "release_asset": "footage-clip-forest-trees-sunset-forest-sun-light-golden-hou-sha256-b03c91e0c734aab7c979d1e869b2a901961ec8a1b8573aaa3488ec86987b2353.mp4"
+  },
+  {
+   "id": "clip-night-cloud-sky-grey-clouds-cloudy-sky",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-9151/",
+   "author": "Jacques_Barrette",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Jacques_Barrette via Pixabay (https://pixabay.com/videos/id-9151/)",
+   "vetting": "APPROVED",
+   "sha256": "298c3212a251aff56d54259bae70fd2a91ead43f81406f6494969a227d635ec4",
+   "release_asset": "footage-clip-night-cloud-sky-grey-clouds-cloudy-sky-sha256-298c3212a251aff56d54259bae70fd2a91ead43f81406f6494969a227d635ec4.mp4"
+  },
+  {
+   "id": "clip-river-river-rocks-landscape-outdoors-water-flo",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-276381/",
+   "author": "McPix22",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-276381/)",
+   "vetting": "APPROVED",
+   "sha256": "6ff83588e3e036ace257e993352345bbd41c3b57cc21e8336f604076cd29ed64",
+   "release_asset": "footage-clip-river-river-rocks-landscape-outdoors-water-flo-sha256-6ff83588e3e036ace257e993352345bbd41c3b57cc21e8336f604076cd29ed64.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-forest-trees-falls-rain-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-69786/",
+   "author": "zameenaasman172",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: zameenaasman172 via Pixabay (https://pixabay.com/videos/id-69786/)",
+   "vetting": "APPROVED",
+   "sha256": "80fde08d40761fb129491738a420610ca54338ba51a3288fd28c0fd6334d8982",
+   "release_asset": "footage-clip-waterfall-waterfall-river-forest-trees-falls-rain--sha256-80fde08d40761fb129491738a420610ca54338ba51a3288fd28c0fd6334d8982.mp4"
+  },
+  {
+   "id": "clip-lake-sunrise-atlake-bled-webm",
+   "source": "commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Sunrise_atLake_Bled.webm",
+   "author": "Klemen Smolej",
+   "licence": "CC BY 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0",
+   "credit": "Footage: \"Sunrise atLake Bled.webm\" by Klemen Smolej, CC BY 3.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Sunrise_atLake_Bled.webm)",
+   "vetting": "APPROVED",
+   "sha256": "a2751e09a61a9a47267a04fea8025cd7c63ea4c21751cf2e859d789d78666a6d",
+   "release_asset": "footage-clip-lake-sunrise-atlake-bled-webm-sha256-a2751e09a61a9a47267a04fea8025cd7c63ea4c21751cf2e859d789d78666a6d.mp4"
+  },
+  {
+   "id": "clip-ocean-beach-ocean-sunset-sea-nature-sky-sun-su",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-201308/",
+   "author": "SerajKaram",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: SerajKaram via Pixabay (https://pixabay.com/videos/id-201308/)",
+   "vetting": "APPROVED",
+   "sha256": "491db2a0e5a67dda10d2536374f41436c665528e8cf43a8c0d18495ab441c3c6",
+   "release_asset": "footage-clip-ocean-beach-ocean-sunset-sea-nature-sky-sun-su-sha256-491db2a0e5a67dda10d2536374f41436c665528e8cf43a8c0d18495ab441c3c6.mp4"
+  },
+  {
+   "id": "clip-mist-fog-haze-forest-trees-autumnal-nature-mi",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-375597/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-375597/)",
+   "vetting": "APPROVED",
+   "sha256": "2d5e0af0989ffc98643655cacb47371e28310903bb994b7a0b2ecc112ed60a42",
+   "release_asset": "footage-clip-mist-fog-haze-forest-trees-autumnal-nature-mi-sha256-2d5e0af0989ffc98643655cacb47371e28310903bb994b7a0b2ecc112ed60a42.mp4"
+  },
+  {
+   "id": "clip-snow-mountains-alps-fog-snow-clouds-winter-sk",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-91545/",
+   "author": "Felix-Mittermeier",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Felix-Mittermeier via Pixabay (https://pixabay.com/videos/id-91545/)",
+   "vetting": "APPROVED",
+   "sha256": "1ed3735cc20a32427dfc28895604379be125a6ea89abef09ace065925cbdf47e",
+   "release_asset": "footage-clip-snow-mountains-alps-fog-snow-clouds-winter-sk-sha256-1ed3735cc20a32427dfc28895604379be125a6ea89abef09ace065925cbdf47e.mp4"
+  },
+  {
+   "id": "clip-meadow-flowers-field-meadow-cosmos-autumn",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-60539/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-60539/)",
+   "vetting": "APPROVED",
+   "sha256": "a73c35833be6e70830c976e64371df460526c4601dac668e68aa3d7c1eab8357",
+   "release_asset": "footage-clip-meadow-flowers-field-meadow-cosmos-autumn-sha256-a73c35833be6e70830c976e64371df460526c4601dac668e68aa3d7c1eab8357.mp4"
+  },
+  {
+   "id": "clip-forest-turtle-forest-woods-autumn-fall-nature",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-186188/",
+   "author": "OneGod_TheFather",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: OneGod_TheFather via Pixabay (https://pixabay.com/videos/id-186188/)",
+   "vetting": "APPROVED",
+   "sha256": "ee6a6fc935f342674acd1906b122e48d0155edfd0fe3f3652fea7c33e57f43f8",
+   "release_asset": "footage-clip-forest-turtle-forest-woods-autumn-fall-nature-sha256-ee6a6fc935f342674acd1906b122e48d0155edfd0fe3f3652fea7c33e57f43f8.mp4"
+  },
+  {
+   "id": "clip-night-cloud-sky-grey-clouds-cloudy-sky-grey-sk",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-9153/",
+   "author": "Jacques_Barrette",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Jacques_Barrette via Pixabay (https://pixabay.com/videos/id-9153/)",
+   "vetting": "APPROVED",
+   "sha256": "be1b575aadcfc80291bbc6dc0bbd4c64e66a95d6a5164e663a159ddee6e6358d",
+   "release_asset": "footage-clip-night-cloud-sky-grey-clouds-cloudy-sky-grey-sk-sha256-be1b575aadcfc80291bbc6dc0bbd4c64e66a95d6a5164e663a159ddee6e6358d.mp4"
+  },
+  {
+   "id": "clip-river-river-stream-creek-flowing-forest-logs-t",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-224044/",
+   "author": "McPix22",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-224044/)",
+   "vetting": "APPROVED",
+   "sha256": "c5120146f0fbdfa0322463b101ff6ca0419b936375fec579a2e7a175e34d582a",
+   "release_asset": "footage-clip-river-river-stream-creek-flowing-forest-logs-t-sha256-c5120146f0fbdfa0322463b101ff6ca0419b936375fec579a2e7a175e34d582a.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-nature-water-cascade-lan",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-22589/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-22589/)",
+   "vetting": "APPROVED",
+   "sha256": "8771757f4b9e005485fd1279210d9af046904bb760db2f85c74740d9c5dfbdf8",
+   "release_asset": "footage-clip-waterfall-waterfall-river-nature-water-cascade-lan-sha256-8771757f4b9e005485fd1279210d9af046904bb760db2f85c74740d9c5dfbdf8.mp4"
+  },
+  {
+   "id": "clip-lake-sunrise-lake-clouds-dawn-landscape-natur",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-269567/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-269567/)",
+   "vetting": "APPROVED",
+   "sha256": "4052c873b6c3625456f669683e4392df07e9ddb0525a54f9af03d1355b7d38cd",
+   "release_asset": "footage-clip-lake-sunrise-lake-clouds-dawn-landscape-natur-sha256-4052c873b6c3625456f669683e4392df07e9ddb0525a54f9af03d1355b7d38cd.mp4"
+  },
+  {
+   "id": "clip-ocean-beach-ocean-sunset-waves-caribbean-curac",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-248729/",
+   "author": "PaulsAdventures",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: PaulsAdventures via Pixabay (https://pixabay.com/videos/id-248729/)",
+   "vetting": "APPROVED",
+   "sha256": "ddaaeb89e79f74fe04092a597ec35e871cf70a6f35bdd22bed5f394c4043745a",
+   "release_asset": "footage-clip-ocean-beach-ocean-sunset-waves-caribbean-curac-sha256-ddaaeb89e79f74fe04092a597ec35e871cf70a6f35bdd22bed5f394c4043745a.mp4"
+  },
+  {
+   "id": "clip-mist-fog-hill-law-evening-dusk-clouds-mist",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-320769/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-320769/)",
+   "vetting": "APPROVED",
+   "sha256": "313e2e9b0db77b3608b57b19cd785c1a82d90c15519a3015d8095d7507f55936",
+   "release_asset": "footage-clip-mist-fog-hill-law-evening-dusk-clouds-mist-sha256-313e2e9b0db77b3608b57b19cd785c1a82d90c15519a3015d8095d7507f55936.mp4"
+  },
+  {
+   "id": "clip-snow-road-path-snow-snowfall-winter-forest-wa",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-146903/",
+   "author": "Nils_Vega",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Nils_Vega via Pixabay (https://pixabay.com/videos/id-146903/)",
+   "vetting": "APPROVED",
+   "sha256": "adc0b63b4c34695ef041bbe17d3e330842e7a925bf7bd037126d1ae30a597a96",
+   "release_asset": "footage-clip-snow-road-path-snow-snowfall-winter-forest-wa-sha256-adc0b63b4c34695ef041bbe17d3e330842e7a925bf7bd037126d1ae30a597a96.mp4"
+  },
+  {
+   "id": "clip-meadow-flowers-yellow-cosmos-wind-yellow-flower",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-90090/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-90090/)",
+   "vetting": "APPROVED",
+   "sha256": "feb465313f02424a2ec74641faeced5027eafe63c05d9c11a49bcea02096620e",
+   "release_asset": "footage-clip-meadow-flowers-yellow-cosmos-wind-yellow-flower-sha256-feb465313f02424a2ec74641faeced5027eafe63c05d9c11a49bcea02096620e.mp4"
+  },
+  {
+   "id": "clip-forest-fall-larches-autumn-leaves-autumn-wind-c",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-311440/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-311440/)",
+   "vetting": "APPROVED",
+   "sha256": "d9f3d46834cf4655faf0180f37a79bcd86c36823fe0abd03c21b5e01ba570180",
+   "release_asset": "footage-clip-forest-fall-larches-autumn-leaves-autumn-wind-c-sha256-d9f3d46834cf4655faf0180f37a79bcd86c36823fe0abd03c21b5e01ba570180.mp4"
+  },
+  {
+   "id": "clip-river-river-trees-rocks-water-nature",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-210173/",
+   "author": "McPix22",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-210173/)",
+   "vetting": "APPROVED",
+   "sha256": "dfd5b7c28de992d8e5a9013efe7807f8ad297d983aa65ea0269a249a3534c5ba",
+   "release_asset": "footage-clip-river-river-trees-rocks-water-nature-sha256-dfd5b7c28de992d8e5a9013efe7807f8ad297d983aa65ea0269a249a3534c5ba.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-stream-forest-morning-wa",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-225000/",
+   "author": "daipham89",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: daipham89 via Pixabay (https://pixabay.com/videos/id-225000/)",
+   "vetting": "APPROVED",
+   "sha256": "141bbaf33091f60c98328092a60f719b817c32ea1aa9aca586914d2b7d8c9b0b",
+   "release_asset": "footage-clip-waterfall-waterfall-river-stream-forest-morning-wa-sha256-141bbaf33091f60c98328092a60f719b817c32ea1aa9aca586914d2b7d8c9b0b.mp4"
+  },
+  {
+   "id": "clip-lake-waterfalls-river-lake-sunset-sunrise-wat",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-105675/",
+   "author": "Ambient_Nature_Atmosphere",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-105675/)",
+   "vetting": "APPROVED",
+   "sha256": "74631cd5d74be40563a9393a27125474316636cb12bd7677ab5cadf101747483",
+   "release_asset": "footage-clip-lake-waterfalls-river-lake-sunset-sunrise-wat-sha256-74631cd5d74be40563a9393a27125474316636cb12bd7677ab5cadf101747483.mp4"
+  },
+  {
+   "id": "clip-ocean-bird-cormorant-beak-plumage-feathers-win",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-198358/",
+   "author": "TonyDias7",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-198358/)",
+   "vetting": "APPROVED",
+   "sha256": "e6655aa3a3f4e279d87abc21a8171df66c4ebd4f8aab6b656045dc2e9c149043",
+   "release_asset": "footage-clip-ocean-bird-cormorant-beak-plumage-feathers-win-sha256-e6655aa3a3f4e279d87abc21a8171df66c4ebd4f8aab6b656045dc2e9c149043.mp4"
+  },
+  {
+   "id": "clip-mist-fog-mist-fogging-forest-trees-nature-lan",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-317874/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-317874/)",
+   "vetting": "APPROVED",
+   "sha256": "0151dee857fa437adc47f65842847153c73529a020316bad87799c8c7ea2392c",
+   "release_asset": "footage-clip-mist-fog-mist-fogging-forest-trees-nature-lan-sha256-0151dee857fa437adc47f65842847153c73529a020316bad87799c8c7ea2392c.mp4"
+  },
+  {
+   "id": "clip-snow-trees-forest-frost-snow-winter-cold-natu",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-66308/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-66308/)",
+   "vetting": "APPROVED",
+   "sha256": "ae5514d809f2146e6910ac5801584351adbf63469293096d1d0926cee544162f",
+   "release_asset": "footage-clip-snow-trees-forest-frost-snow-winter-cold-natu-sha256-ae5514d809f2146e6910ac5801584351adbf63469293096d1d0926cee544162f.mp4"
+  },
+  {
+   "id": "clip-meadow-grass-dew-field-fog-morning-nature-sunsh",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-66810/",
+   "author": "JustYøu",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: JustYøu via Pixabay (https://pixabay.com/videos/id-66810/)",
+   "vetting": "APPROVED",
+   "sha256": "9d09ee1dd9e67959008f1032a4af48b8bb9fee9718e9c83eca29341ae04cb37b",
+   "release_asset": "footage-clip-meadow-grass-dew-field-fog-morning-nature-sunsh-sha256-9d09ee1dd9e67959008f1032a4af48b8bb9fee9718e9c83eca29341ae04cb37b.mp4"
+  },
+  {
+   "id": "clip-forest-netherlands-sun-rays-misty-forest-sunlig",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-382584/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-382584/)",
+   "vetting": "APPROVED",
+   "sha256": "4ad6ebd0eee5ee79d0d3cb7259af8ba5417a7c5d89c549a9285f4a7b3dbea7d6",
+   "release_asset": "footage-clip-forest-netherlands-sun-rays-misty-forest-sunlig-sha256-4ad6ebd0eee5ee79d0d3cb7259af8ba5417a7c5d89c549a9285f4a7b3dbea7d6.mp4"
+  },
+  {
+   "id": "clip-river-river-water-cascades-rocks-summer-enviro",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-220325/",
+   "author": "McPix22",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-220325/)",
+   "vetting": "APPROVED",
+   "sha256": "ae85873e3da791ca3f9afd6458196dac0c8de50317463f834a5c9c939bffd05f",
+   "release_asset": "footage-clip-river-river-water-cascades-rocks-summer-enviro-sha256-ae85873e3da791ca3f9afd6458196dac0c8de50317463f834a5c9c939bffd05f.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-trees-forest",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-148939/",
+   "author": "Nijjar",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Nijjar via Pixabay (https://pixabay.com/videos/id-148939/)",
+   "vetting": "APPROVED",
+   "sha256": "88dd49a69c30afca886a0302ab96e7dc8bc18d875b770814c24652c49344adfc",
+   "release_asset": "footage-clip-waterfall-waterfall-river-trees-forest-sha256-88dd49a69c30afca886a0302ab96e7dc8bc18d875b770814c24652c49344adfc.mp4"
+  },
+  {
+   "id": "clip-lake-aerial-drone-lake-waterfall-rocks-waves-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-85373/",
+   "author": "Ambient_Nature_Atmosphere",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-85373/)",
+   "vetting": "APPROVED",
+   "sha256": "4f6b9b9b663846bafd248510f0821510c93eb3e67ac558bd33010c6afc79cd1d",
+   "release_asset": "footage-clip-lake-aerial-drone-lake-waterfall-rocks-waves--sha256-4f6b9b9b663846bafd248510f0821510c93eb3e67ac558bd33010c6afc79cd1d.mp4"
+  },
+  {
+   "id": "clip-ocean-boa-vista-cape-verde-nature-sea-ocean-sh",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-334716/",
+   "author": "JonPauling",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: JonPauling via Pixabay (https://pixabay.com/videos/id-334716/)",
+   "vetting": "APPROVED",
+   "sha256": "0ea083fd7a4fae0c5acf2b5af93a22c1ea91120a3c48c1105fca546f0b12aba1",
+   "release_asset": "footage-clip-ocean-boa-vista-cape-verde-nature-sea-ocean-sh-sha256-0ea083fd7a4fae0c5acf2b5af93a22c1ea91120a3c48c1105fca546f0b12aba1.mp4"
+  },
+  {
+   "id": "clip-mist-fog-mist-forest-autumnal-fall-landscape-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-347075/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-347075/)",
+   "vetting": "APPROVED",
+   "sha256": "ad796972a8d868b58b2eb88fbc6e4ea6d6ab771e10075936fc0f6b094c030e98",
+   "release_asset": "footage-clip-mist-fog-mist-forest-autumnal-fall-landscape--sha256-ad796972a8d868b58b2eb88fbc6e4ea6d6ab771e10075936fc0f6b094c030e98.mp4"
+  },
+  {
+   "id": "clip-meadow-lavender-flowers-field-spring-farming-na",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-198806/",
+   "author": "LaDoncella",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: LaDoncella via Pixabay (https://pixabay.com/videos/id-198806/)",
+   "vetting": "APPROVED",
+   "sha256": "db0824f37555fbe6fdd9a9c16931d9bcd5e91c4e1f818165c7fab1e93d015499",
+   "release_asset": "footage-clip-meadow-lavender-flowers-field-spring-farming-na-sha256-db0824f37555fbe6fdd9a9c16931d9bcd5e91c4e1f818165c7fab1e93d015499.mp4"
+  },
+  {
+   "id": "clip-forest-sunrise-sunlight-sun-forest-fog-clouds-s",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-244379/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-244379/)",
+   "vetting": "APPROVED",
+   "sha256": "a798ad21c78be9dd9304d54a6eee98fc65208516619409a71a241e8fcd5179e5",
+   "release_asset": "footage-clip-forest-sunrise-sunlight-sun-forest-fog-clouds-s-sha256-a798ad21c78be9dd9304d54a6eee98fc65208516619409a71a241e8fcd5179e5.mp4"
+  },
+  {
+   "id": "clip-river-river-whitewater-rapids-rocks-streams-wa",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-370920/",
+   "author": "McPix22",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-370920/)",
+   "vetting": "APPROVED",
+   "sha256": "5a5f275644ab141a49586c39d66cdc04bae30129497ec40eea63c2a1a5e95d29",
+   "release_asset": "footage-clip-river-river-whitewater-rapids-rocks-streams-wa-sha256-5a5f275644ab141a49586c39d66cdc04bae30129497ec40eea63c2a1a5e95d29.mp4"
+  },
+  {
+   "id": "clip-waterfall-waterfall-river-view-nature-that-flow-fo",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-356398/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-356398/)",
+   "vetting": "APPROVED",
+   "sha256": "e924628bca6211471010bcbbc68864010e71902c05fdb34a60cc305864cbb0d6",
+   "release_asset": "footage-clip-waterfall-waterfall-river-view-nature-that-flow-fo-sha256-e924628bca6211471010bcbbc68864010e71902c05fdb34a60cc305864cbb0d6.mp4"
+  },
+  {
+   "id": "clip-lake-flowers-field-meadow-lake-water-dolomite",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-130473/",
+   "author": "Ambient_Nature_Atmosphere",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Ambient_Nature_Atmosphere via Pixabay (https://pixabay.com/videos/id-130473/)",
+   "vetting": "APPROVED",
+   "sha256": "0ce508da5241a2dee3009a9e37c458a5d1885ba6b5d98963f930551cd6b798dd",
+   "release_asset": "footage-clip-lake-flowers-field-meadow-lake-water-dolomite-sha256-0ce508da5241a2dee3009a9e37c458a5d1885ba6b5d98963f930551cd6b798dd.mp4"
+  },
+  {
+   "id": "clip-ocean-cliff-sea-waves-ocean-view-coast-beach-b",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-192066/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-192066/)",
+   "vetting": "APPROVED",
+   "sha256": "52cfaba8f11744bb80013c8855475c5ab8207d26812a749de4375453489bd2fa",
+   "release_asset": "footage-clip-ocean-cliff-sea-waves-ocean-view-coast-beach-b-sha256-52cfaba8f11744bb80013c8855475c5ab8207d26812a749de4375453489bd2fa.mp4"
+  },
+  {
+   "id": "clip-meadow-lavender-flowers-field-spring-nature",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-198807/",
+   "author": "LaDoncella",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: LaDoncella via Pixabay (https://pixabay.com/videos/id-198807/)",
+   "vetting": "APPROVED",
+   "sha256": "ec4e1c7749983bb3b91fc0557e2a37d94d5f6c3840d6b33b9e8dffbd622a74c6",
+   "release_asset": "footage-clip-meadow-lavender-flowers-field-spring-nature-sha256-ec4e1c7749983bb3b91fc0557e2a37d94d5f6c3840d6b33b9e8dffbd622a74c6.mp4"
+  },
+  {
+   "id": "clip-forest-trees-forest-autumn-scenic-4k-netherland",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-185726/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-185726/)",
+   "vetting": "APPROVED",
+   "sha256": "709964b5c7cf8980852b9354bd2f57805e4228d17dddd9ea23545124c6c69d2e",
+   "release_asset": "footage-clip-forest-trees-forest-autumn-scenic-4k-netherland-sha256-709964b5c7cf8980852b9354bd2f57805e4228d17dddd9ea23545124c6c69d2e.mp4"
+  },
+  {
+   "id": "clip-river-water-wild-water-mountain-stream-rock-na",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-318222/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-318222/)",
+   "vetting": "APPROVED",
+   "sha256": "23e4aa30ee61b8bbfca4d78a5436bdb010db4353d5de95d518921fd484d213e8",
+   "release_asset": "footage-clip-river-water-wild-water-mountain-stream-rock-na-sha256-23e4aa30ee61b8bbfca4d78a5436bdb010db4353d5de95d518921fd484d213e8.mp4"
+  },
+  {
+   "id": "clip-waterfall-dark-hollow-upper-falls-shenandoah-np-va",
+   "source": "commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Dark_Hollow_upper_falls_Shenandoah_NP_VA_2024-10-11_08-33-31_1.webm",
+   "author": "G. Edward Johnson",
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "credit": "Footage: \"Dark Hollow upper falls Shenandoah NP VA 2024-10-11 08-33-31 1.webm\" by G. Edward Johnson, CC BY 4.0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Dark_Hollow_upper_falls_Shenandoah_NP_VA_2024-10-11_08-33-31_1.webm)",
+   "vetting": "APPROVED",
+   "sha256": "3c124d94a88f3b3be52f91d7b3e51cd02c7f832546909f802f12fb64f54b87e8",
+   "release_asset": "footage-clip-waterfall-dark-hollow-upper-falls-shenandoah-np-va-sha256-3c124d94a88f3b3be52f91d7b3e51cd02c7f832546909f802f12fb64f54b87e8.mp4"
+  },
+  {
+   "id": "clip-lake-fog-sunrise-lake-morning-water-calm-peac",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-127995/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-127995/)",
+   "vetting": "APPROVED",
+   "sha256": "c40879d157e5fb35a5b213593945ed7f99708490d0fcd52030b174b6f6fe4ae0",
+   "release_asset": "footage-clip-lake-fog-sunrise-lake-morning-water-calm-peac-sha256-c40879d157e5fb35a5b213593945ed7f99708490d0fcd52030b174b6f6fe4ae0.mp4"
+  },
+  {
+   "id": "clip-ocean-madeira-portugal-travel-nature-sea-rocks",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-376883/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-376883/)",
+   "vetting": "APPROVED",
+   "sha256": "748b9ee3ce8b15f1ef446a2c28c3deb8fef1f0ec4eb52ae9fdb1b47cc740c332",
+   "release_asset": "footage-clip-ocean-madeira-portugal-travel-nature-sea-rocks-sha256-748b9ee3ce8b15f1ef446a2c28c3deb8fef1f0ec4eb52ae9fdb1b47cc740c332.mp4"
+  },
+  {
+   "id": "clip-meadow-rye-grain-spike-wind-rye-field-field-nat",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-167841/",
+   "author": "NickyPe",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-167841/)",
+   "vetting": "APPROVED",
+   "sha256": "b414545e57efee44f4408a60fa8113a6dc6817ce31fc12ab5dcf4670ee804a4d",
+   "release_asset": "footage-clip-meadow-rye-grain-spike-wind-rye-field-field-nat-sha256-b414545e57efee44f4408a60fa8113a6dc6817ce31fc12ab5dcf4670ee804a4d.mp4"
+  },
+  {
+   "id": "clip-river-waterfall-forest-river-stream-creek-moss",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-355471/",
+   "author": "McPix22",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-355471/)",
+   "vetting": "APPROVED",
+   "sha256": "c8ac623ca58001c2d70b25e81b0c253e4805f182040f613a1cdff72d02baa618",
+   "release_asset": "footage-clip-river-waterfall-forest-river-stream-creek-moss-sha256-c8ac623ca58001c2d70b25e81b0c253e4805f182040f613a1cdff72d02baa618.mp4"
+  },
+  {
+   "id": "clip-waterfall-delaneys-falls-webm",
+   "source": "commons",
+   "page": "https://commons.wikimedia.org/wiki/File:Delaneys_Falls.webm",
+   "author": "Psypherium",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "credit": "Footage: \"Delaneys Falls.webm\" by Psypherium, CC0, via Wikimedia Commons (https://commons.wikimedia.org/wiki/File:Delaneys_Falls.webm)",
+   "vetting": "APPROVED",
+   "sha256": "342aff8dfa101072d7dc0846b85cd0bf98889fa3e88bc125361b294788c9ec49",
+   "release_asset": "footage-clip-waterfall-delaneys-falls-webm-sha256-342aff8dfa101072d7dc0846b85cd0bf98889fa3e88bc125361b294788c9ec49.mp4"
+  },
+  {
+   "id": "clip-ocean-marine-sea-water-blue-beach-wave-nature-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-21639/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-21639/)",
+   "vetting": "APPROVED",
+   "sha256": "4cfafbf74f5496983a6ba97fb5c2efa3881e6f21480b2010d81dc38067c4622c",
+   "release_asset": "footage-clip-ocean-marine-sea-water-blue-beach-wave-nature--sha256-4cfafbf74f5496983a6ba97fb5c2efa3881e6f21480b2010d81dc38067c4622c.mp4"
+  },
+  {
+   "id": "clip-meadow-tulips-flowers-field-clouds-spring-nethe",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-209522/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-209522/)",
+   "vetting": "APPROVED",
+   "sha256": "7860afcc95718966dc482561f7c1431b0fa8c5bb02e45016ed9108d98ed9d5aa",
+   "release_asset": "footage-clip-meadow-tulips-flowers-field-clouds-spring-nethe-sha256-7860afcc95718966dc482561f7c1431b0fa8c5bb02e45016ed9108d98ed9d5aa.mp4"
+  },
+  {
+   "id": "clip-river-waterfall-river-forest-nature-moss-mount",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-263874/",
+   "author": "Engin_Akyurt",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-263874/)",
+   "vetting": "APPROVED",
+   "sha256": "a7b57fdb7888bedcbcba77cfde8f89432e2e852b777554f7f9411dd6b5bfc34c",
+   "release_asset": "footage-clip-river-waterfall-river-forest-nature-moss-mount-sha256-a7b57fdb7888bedcbcba77cfde8f89432e2e852b777554f7f9411dd6b5bfc34c.mp4"
+  },
+  {
+   "id": "clip-ocean-ocean-rocks-waves-oregon-guanos-landscap",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-28837/",
+   "author": "Rick_Coyle",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Rick_Coyle via Pixabay (https://pixabay.com/videos/id-28837/)",
+   "vetting": "APPROVED",
+   "sha256": "03679c5c529cb0123c4866b06c162e7998f4550ab76bd32147fae98acbb256af",
+   "release_asset": "footage-clip-ocean-ocean-rocks-waves-oregon-guanos-landscap-sha256-03679c5c529cb0123c4866b06c162e7998f4550ab76bd32147fae98acbb256af.mp4"
+  },
+  {
+   "id": "clip-meadow-tulips-flowers-field-spring-flora-blosso",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-210756/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-210756/)",
+   "vetting": "APPROVED",
+   "sha256": "091672e5318ecc548e63e7b9658a4bbe6a68b23ca8d59a52f23048ed49407eef",
+   "release_asset": "footage-clip-meadow-tulips-flowers-field-spring-flora-blosso-sha256-091672e5318ecc548e63e7b9658a4bbe6a68b23ca8d59a52f23048ed49407eef.mp4"
+  },
+  {
+   "id": "clip-river-waterfall-river-forest-trees-stream-cree",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-239348/",
+   "author": "McPix22",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: McPix22 via Pixabay (https://pixabay.com/videos/id-239348/)",
+   "vetting": "APPROVED",
+   "sha256": "fefdb1ec3fc09bfe9c990ceada34799fcebed489ae200c59d5afe3ff8c870c14",
+   "release_asset": "footage-clip-river-waterfall-river-forest-trees-stream-cree-sha256-fefdb1ec3fc09bfe9c990ceada34799fcebed489ae200c59d5afe3ff8c870c14.mp4"
+  },
+  {
+   "id": "clip-ocean-ocean-sunset-dark-clouds-waves-romantic-",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-21174/",
+   "author": "ChristianBodhi",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-21174/)",
+   "vetting": "APPROVED",
+   "sha256": "78d1f8d5706634b20c398314b819318915be17eda9658d0e3fc13f80e9242335",
+   "release_asset": "footage-clip-ocean-ocean-sunset-dark-clouds-waves-romantic--sha256-78d1f8d5706634b20c398314b819318915be17eda9658d0e3fc13f80e9242335.mp4"
+  },
+  {
+   "id": "clip-meadow-tulips-flowers-tulip-field-field-of-flow",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-114984/",
+   "author": "Quankawa",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Quankawa via Pixabay (https://pixabay.com/videos/id-114984/)",
+   "vetting": "APPROVED",
+   "sha256": "73198955d6bf183aef64cae81ac675027a9ea8bf49f98a66846c8b5b101c0d31",
+   "release_asset": "footage-clip-meadow-tulips-flowers-tulip-field-field-of-flow-sha256-73198955d6bf183aef64cae81ac675027a9ea8bf49f98a66846c8b5b101c0d31.mp4"
+  },
+  {
+   "id": "clip-river-waterfall-river-mountain-stream-water-st",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-122895/",
+   "author": "RYajlan",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: RYajlan via Pixabay (https://pixabay.com/videos/id-122895/)",
+   "vetting": "APPROVED",
+   "sha256": "42dd0d72d931e6a6109892c4f04571a050620d69d5227b81c86f1c811e6db809",
+   "release_asset": "footage-clip-river-waterfall-river-mountain-stream-water-st-sha256-42dd0d72d931e6a6109892c4f04571a050620d69d5227b81c86f1c811e6db809.mp4"
+  },
+  {
+   "id": "clip-ocean-panto-beach-sandiego-ocean-coast-califor",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-247490/",
+   "author": "Rcdrifter900",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Rcdrifter900 via Pixabay (https://pixabay.com/videos/id-247490/)",
+   "vetting": "APPROVED",
+   "sha256": "e129c24b72b2d9a063827bbcd4d0d5b342aa148d4b4d047765246a6582859992",
+   "release_asset": "footage-clip-ocean-panto-beach-sandiego-ocean-coast-califor-sha256-e129c24b72b2d9a063827bbcd4d0d5b342aa148d4b4d047765246a6582859992.mp4"
+  },
+  {
+   "id": "clip-meadow-yellow-flower-cosmos-wind-autumn-landsca",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-90084/",
+   "author": "KIMDAEJEUNG",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-90084/)",
+   "vetting": "APPROVED",
+   "sha256": "0f931a919b431f8d5665e7a8b853909ae8f3c91f31b3b685ea4446c266a52109",
+   "release_asset": "footage-clip-meadow-yellow-flower-cosmos-wind-autumn-landsca-sha256-0f931a919b431f8d5665e7a8b853909ae8f3c91f31b3b685ea4446c266a52109.mp4"
+  },
+  {
+   "id": "clip-ocean-sea-ocean-surf-waves-beach-rock-coast",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-137001/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-137001/)",
+   "vetting": "APPROVED",
+   "sha256": "6ea901ec5a12039c9c918330b69b8e637094dacd85c0b632c58d727da9586005",
+   "release_asset": "footage-clip-ocean-sea-ocean-surf-waves-beach-rock-coast-sha256-6ea901ec5a12039c9c918330b69b8e637094dacd85c0b632c58d727da9586005.mp4"
+  },
+  {
+   "id": "clip-ocean-sea-ocean-waves-sunset-horizon-sky-cloud",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-175955/",
+   "author": "u_fteh2wfg76",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: u_fteh2wfg76 via Pixabay (https://pixabay.com/videos/id-175955/)",
+   "vetting": "APPROVED",
+   "sha256": "2b595ba47b4b6d889266fd9f3a2554775ae07bc723fbf39c9c89c61e7d9601bf",
+   "release_asset": "footage-clip-ocean-sea-ocean-waves-sunset-horizon-sky-cloud-sha256-2b595ba47b4b6d889266fd9f3a2554775ae07bc723fbf39c9c89c61e7d9601bf.mp4"
+  }
+ ],
+ "shots": [],
+ "timeline": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 8.367
+  },
+  {
+   "id": "roadmap",
+   "start": 9.067,
+   "end": 17.239
+  },
+  {
+   "id": "invitation",
+   "start": 18.039,
+   "end": 43.687
+  },
+  {
+   "id": "prayer-arrival",
+   "start": 44.687,
+   "end": 72.149
+  },
+  {
+   "id": "scripture-joshua-house",
+   "start": 73.149,
+   "end": 94.103
+  },
+  {
+   "id": "prayer-my-yes",
+   "start": 95.403,
+   "end": 122.033
+  },
+  {
+   "id": "scripture-psalm-build",
+   "start": 123.033,
+   "end": 133.297
+  },
+  {
+   "id": "prayer-build",
+   "start": 134.597,
+   "end": 164.813
+  },
+  {
+   "id": "prayer-spouse",
+   "start": 165.813,
+   "end": 193.703
+  },
+  {
+   "id": "rehook-1",
+   "start": 194.703,
+   "end": 198.672
+  },
+  {
+   "id": "scripture-isaiah-children",
+   "start": 199.272,
+   "end": 206.229
+  },
+  {
+   "id": "prayer-children",
+   "start": 207.529,
+   "end": 235.889
+  },
+  {
+   "id": "prayer-children-fears",
+   "start": 236.889,
+   "end": 264.821
+  },
+  {
+   "id": "prayer-older-children",
+   "start": 265.821,
+   "end": 291.492
+  },
+  {
+   "id": "prayer-every-kind-of-family",
+   "start": 292.492,
+   "end": 323.541
+  },
+  {
+   "id": "scripture-proverbs-refuge",
+   "start": 324.541,
+   "end": 332.032
+  },
+  {
+   "id": "prayer-refuge",
+   "start": 333.332,
+   "end": 360.965
+  },
+  {
+   "id": "rehook-2",
+   "start": 361.965,
+   "end": 367.216
+  },
+  {
+   "id": "stillness-one",
+   "start": 367.816,
+   "end": 383.501
+  },
+  {
+   "id": "scripture-psalm-mercy-generations",
+   "start": 389.501,
+   "end": 405.781
+  },
+  {
+   "id": "prayer-generations",
+   "start": 407.081,
+   "end": 434.267
+  },
+  {
+   "id": "scripture-ephesians-unity",
+   "start": 435.267,
+   "end": 446.832
+  },
+  {
+   "id": "prayer-disagreement",
+   "start": 448.132,
+   "end": 476.812
+  },
+  {
+   "id": "scripture-james-swift",
+   "start": 477.812,
+   "end": 485.131
+  },
+  {
+   "id": "prayer-listening",
+   "start": 486.431,
+   "end": 510.885
+  },
+  {
+   "id": "rehook-3",
+   "start": 511.885,
+   "end": 516.9
+  },
+  {
+   "id": "scripture-peter-charity",
+   "start": 517.5,
+   "end": 526.1
+  },
+  {
+   "id": "prayer-cover",
+   "start": 527.4,
+   "end": 554.267
+  },
+  {
+   "id": "scripture-philippians-remembrance",
+   "start": 555.267,
+   "end": 559.279
+  },
+  {
+   "id": "prayer-gratitude",
+   "start": 560.579,
+   "end": 587.187
+  },
+  {
+   "id": "scripture-psalm-unity",
+   "start": 588.187,
+   "end": 594.545
+  },
+  {
+   "id": "prayer-siblings",
+   "start": 595.845,
+   "end": 624.012
+  },
+  {
+   "id": "scripture-deuteronomy-teach",
+   "start": 625.012,
+   "end": 645.388
+  },
+  {
+   "id": "prayer-work-and-home",
+   "start": 646.688,
+   "end": 674.364
+  },
+  {
+   "id": "rehook-4",
+   "start": 675.364,
+   "end": 680.208
+  },
+  {
+   "id": "scripture-romans-affection",
+   "start": 680.808,
+   "end": 687.979
+  },
+  {
+   "id": "prayer-provision",
+   "start": 689.279,
+   "end": 716.039
+  },
+  {
+   "id": "scripture-acts-house",
+   "start": 717.039,
+   "end": 723.995
+  },
+  {
+   "id": "prayer-faith-household",
+   "start": 725.295,
+   "end": 752.14
+  },
+  {
+   "id": "day-transition",
+   "start": 753.14,
+   "end": 779.173
+  },
+  {
+   "id": "declaration",
+   "start": 780.173,
+   "end": 807.596
+  },
+  {
+   "id": "commitment",
+   "start": 808.796,
+   "end": 835.661
+  },
+  {
+   "id": "payoff",
+   "start": 836.861,
+   "end": 865.135
+  },
+  {
+   "id": "blessing",
+   "start": 866.335,
+   "end": 893.755
+  },
+  {
+   "id": "cta",
+   "start": 894.955,
+   "end": 909.997
+  },
+  {
+   "id": "closing",
+   "start": 910.997,
+   "end": 933.232
+  }
+ ],
+ "upload_performed": false,
+ "publication_performed": false
+}
