@@ -14,8 +14,13 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 
 **The funnel.**
 - The Bible is told in **arcs**: one arc = one complete story = 4 Short episodes = 1 long video.
-- **Shorts (the door, 2 a day, 13:30 and 23:30 UTC):** one moment of the arc each, in order, 50-65 s, KJV narration,
-  AI video only at the hook. Each ends with the next part ("Part N+1 tomorrow: ...") and, once the arc's long exists,
+- **Shorts (the door, 2 a day, 13:30 and 23:30 UTC):** one moment of the arc each, in order, 62-90 s (owner,
+  2026-10-25: TikTok Creator Rewards counts only videos of 1 minute or more), AI video only at the hook. Built in four
+  beats, recorded line by line in the episode's `narration` (kind scripture / story / insight / cta): the hook; the
+  moment told in the KJV with our own retelling around it; one **insight** of our own (what most readers miss, a
+  tension in the text, a critique of a common reading; never a paraphrase of the verse); and a close that sends the
+  viewer to the full story. At least 40 % of the narration words are ours, not the quotation. `publish_episode.py`
+  refuses a Short from part 6 on that breaks any of this (`short_problems`); parts 1-5 stay as published. Each ends with the next part ("Part N+1 tomorrow: ...") and, once the arc's long exists,
   points to it ("The full story is on the channel"); its first comment links the long, and the Studio "related video"
   of every Short in the arc is set to the long.
 - **Long (the room, every other day):** the whole arc in 14-18 min (render limit 200 min; winners 11-47 min), the same
@@ -59,7 +64,8 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 - Measured each day by the live intelligence: views of each long from Shorts, long retention, subscribers per arc.
 
 ## Credits (vidIQ: ~4,200 on 2026-10-24; renewal of 6,000 on 2026-11-18)
-- Per Short: 1 AI clip at the hook (veo-3.1-lite 4 s, 60) + voice (~14) + stock search (~8) + compose (~16) ≈ 100.
+- Per Short: 1 AI clip at the hook (veo-3.1-lite 4 s, 60) + voice (~14 a minute, ~20 for 62-90 s) + stock search (~8)
+  + compose (~16) ≈ 105; held near 75 by reusing an approved hook clip of the arc when it fits the words.
 - Ceiling 200 credits a day; the ledger records every call (owner authorization 2026-10-24: "libero tudo").
 
 ## Episodes (Genesis; KJV ranges)
