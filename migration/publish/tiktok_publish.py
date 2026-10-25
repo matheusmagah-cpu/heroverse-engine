@@ -183,7 +183,8 @@ def post(ep, key, channel, record, call=http):
     say what happened stays SENDING, is never sent again, and is reported until the owner checks Buffer."""
     record({"status": "SENDING", "video_url": video_url(ep)})
     data, err, refused = gql(CREATE, {"input": {"channelId": channel, "text": caption(ep), "schedulingType": "automatic",
-                                                "mode": "shareNow", "assets": [{"video": {"url": video_url(ep)}}]}},
+                                                "mode": "shareNow", "needsApproval": False, "aiAssisted": True,
+                                                "assets": [{"video": {"url": video_url(ep)}}]}},
                              key, call)
     res = (data or {}).get("createPost") or {}
     if (res.get("post") or {}).get("id"):
