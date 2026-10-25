@@ -3,12 +3,55 @@
 Owner: one micro-story at a time from Genesis, narrated from the KJV (public domain), cinematic and never still, AI
 video only at the hook and the story's peak, finishing with a short reflection and a prayer. Shorts feed long videos.
 
-## Cadence (from the YPP goal: 274 subscribers and ~7 public watch hours on 2026-10-24)
-- **Shorts: 2 a day**, 13:30 and 23:30 UTC, in story order; each ends with "Part N+1 tomorrow: <next story>".
-- **Long: every 3 days**, 10-15 min: the last 6 episodes composed together, a reflection and a closing prayer
-  (watch hours; compose costs ~1 credit per 4 s).
-- The prayer videos already scheduled (008 on 25/10 00:00 UTC, 011 on 25/10 10:00 UTC) go out; after them the channel
-  runs this one format only (format hopping kills: algorithm study K2).
+## One format, two lengths: the Shorts lead to the long (owner, 2026-10-25)
+Owner: "o que está pronto, mantém; a partir desse momento passa para a ideia do short ... o short tem que seguir o
+padrão do longo e o longo do short ... o short direcionar pro vídeo longo; monta uma estratégia efetiva".
+
+**Why (measured 2026-10-25, DECISIONS.md day 8 and evidence/vidiq/20261025):** Genesis 1 and 2 Shorts reached 107
+and 192 views in their first day (breakout 14 and 48); the prayer long videos 8-96 views each. The long-form winners
+of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video in 11-47 min, titled
+"<story>: <human angle> | Genesis N Bible Story".
+
+**The funnel.**
+- The Bible is told in **arcs**: one arc = one complete story = 4 Short episodes = 1 long video.
+- **Shorts (the door, 2 a day, 13:30 and 23:30 UTC):** one moment of the arc each, in order, 50-65 s, KJV narration,
+  AI video only at the hook. Each ends with the next part ("Part N+1 tomorrow: ...") and, once the arc's long exists,
+  points to it ("The full story is on the channel"); its first comment links the long, and the Studio "related video"
+  of every Short in the arc is set to the long.
+- **Long (the room, every other day):** the whole arc in 14-18 min (render limit 200 min; winners 11-47 min), the same
+  voice, picture style, title formula and thumbnail look as its Shorts, so a viewer who liked the Short recognises
+  it. Structure: cold open on the arc's peak moment (0:00-0:30, the Short's hook shot), the story narrated from the
+  KJV with plain connecting narration, one chapter per Short episode (chapters = the Short titles), a re-hook
+  before each chapter, a short reflection, a closing prayer, and "next story: ..." (the next arc's first Short).
+- **Back link:** the long's description lists its Shorts and the next arc; the next arc's Shorts link back to it.
+- **Same pattern both ways:** title formula `<story or question> <emoji> | <Story>, Bible Story (KJV)` (Short) and
+  `<Story>: <human angle> | Genesis N-M Bible Story (KJV)` (long); same narrator voice; same visual anchors
+  (PROMPT_GUIDE.md); the long's chapters reuse the Shorts' hook lines.
+
+**Calendar (long slots at 10:00 UTC; prayer longs already made keep their slots).**
+| Arc | Shorts (episodes) | Shorts dates | Long | Long slot |
+|---|---|---|---|---|
+| prayer (done) | - | - | 013 night, 014 morning, 008 night | 26/10 00:00, 26/10 10:00, 27/10 00:00 |
+| 1 In the beginning | 1-4 (Gen 1-3) | 24-25/10 | Creation, Eden and the Fall | 28/10 10:00 |
+| 2 Brothers and the walk with God | 5-8 (Gen 4-6) | 26-27/10 | Cain, Abel and the days before the Flood | 30/10 10:00 |
+| 3 The Flood | 9-12 (Gen 7-11) | 28-29/10 | Noah, the Flood and the rainbow | 01/11 10:00 |
+| 4 Abram | 13-16 (Gen 12-19) | 30-31/10 | The call of Abraham | 03/11 10:00 |
+(then every 2 days: 4 Shorts, 1 long; the episode table below is cut into arcs of 4 in order.)
+
+**Production.**
+- Shorts: vidIQ compose as today (about 100 credits each, ceiling 200 a day).
+- Credit budget: 3,811 credits on 25/10 must last to the renewal on 18/11 (about 159 a day). Two Shorts a day at
+  about 100 each run over that, so each Short is held to about 75 (no wasted previews; music theme reused), and the
+  long costs no vidIQ credits.
+- Voice: the Shorts use ElevenLabs "George" through vidIQ (about 14 credits a minute: about 220 for a 16-minute long,
+  which the budget cannot carry every other day). The long uses the free local Kokoro voice closest to it
+  (`bm_george`, British male), checked side by side against a Short before the first long.
+- Long: the engine's free render path (GitHub Actions, Kokoro voice, licensed footage plus free FLUX stills from
+  `cf-images.yml`, Scripture cards, captions), with its own script spec and frozen QA for the story format
+  (`production/bible/long/`): technical floors equal to v4 (loudness, true peak, speech, WER, black and silence
+  scan), Claude review at 9.5, AI visuals disclosed. Prayer-only rules (prayer hook, "prayer request" CTA, morning or
+  night titles) do not apply to the story format; no frozen v2/v3/v4 file is edited.
+- Measured each day by the live intelligence: views of each long from Shorts, long retention, subscribers per arc.
 
 ## Credits (vidIQ: ~4,200 on 2026-10-24; renewal of 6,000 on 2026-11-18)
 - Per Short: 1 AI clip at the hook (veo-3.1-lite 4 s, 60) + voice (~14) + stock search (~8) + compose (~16) ≈ 100.
