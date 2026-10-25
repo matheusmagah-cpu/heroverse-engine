@@ -1,7 +1,7 @@
 {
  "version": "pilot-images-v2",
  "pilot_id": "pilot-015",
- "style": "photorealistic cinematic nature documentary, ancient world, natural light, wide 16:9 composition with the subject in the centre, film grain, no text, no signature, no watermark, no lettering",
+ "style": "photorealistic cinematic nature documentary, the untouched ancient world with only nature in sight, natural light, wide 16:9 composition with the subject in the centre, film grain, no text, no signature, no watermark, no lettering",
  "negative": "text, letters, watermark, logo, signature, frame, cartoon, modern objects, buildings, cars, deformed hands, extra fingers, distorted face",
  "steps": 6,
  "guidance": 1.5,
@@ -125,13 +125,13 @@
   },
   {
    "id": "st-tree-of-life",
-   "prompt": "one immense ancient tree in the middle of a garden, wide spreading branches, sunlight through the leaves",
+   "prompt": "one immense ancient tree standing alone in the middle of a wild garden of grass and flowers, wide spreading branches, sunlight through the leaves, only wild nature all around",
    "seed": 2019,
    "chapter": "2"
   },
   {
    "id": "st-tree-knowledge",
-   "prompt": "a single tree with dark leaves and round red fruit standing apart in a garden clearing, afternoon light",
+   "prompt": "a single tree with dark leaves and round red fruit standing alone in a wild garden clearing of tall grass, afternoon light, only wild trees in the distance",
    "seed": 2020,
    "chapter": "2"
   },
@@ -209,7 +209,7 @@
   },
   {
    "id": "st-leaving",
-   "prompt": "a man and a woman in simple animal-skin garments walking away from a garden at dusk, seen from behind, small in the frame",
+   "prompt": "a man and a woman in simple animal-skin garments walking barefoot away from a lush garden at dusk along a bare dirt track into empty wild hills, seen from behind, small in the frame, nothing but wilderness around them",
    "seed": 2033,
    "chapter": "4"
   },
@@ -225,5 +225,12 @@
    "seed": 2035,
    "chapter": "close"
   }
- ]
+ ],
+ "rejected": {
+  "2026-10-25": {
+   "st-leaving": "a white van and houses behind the figures",
+   "st-tree-of-life": "a gazebo and a lamp post behind the tree",
+   "st-tree-knowledge": "a pole at the left edge"
+  }
+ }
 }
