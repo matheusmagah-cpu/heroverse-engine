@@ -13,6 +13,10 @@ on:
         description: 9:16 (Short) or 16:9
         required: false
         default: '9:16'
+      first_frame:
+        description: Optional keyframe mode - the release asset name of an approved still (e.g. pilot-015-img-st-serpent-sha256-....png)
+        required: false
+        default: ''
 permissions:
   contents: read
 concurrency:
@@ -28,6 +32,7 @@ jobs:
       PROMPT: ${{ inputs.prompt }}
       SECONDS_IN: ${{ inputs.seconds }}
       ASPECT: ${{ inputs.aspect }}
+      FIRST_FRAME: ${{ inputs.first_frame }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Generate, download and check the clip
@@ -37,9 +42,14 @@ jobs:
           [[ "$SECONDS_IN" =~ ^([4-9]|1[0-2])$ ]] || { echo "SECONDS_REFUSED"; exit 1; }
           [[ "$ASPECT" == "9:16" || "$ASPECT" == "16:9" ]] || { echo "ASPECT_REFUSED"; exit 1; }
           [ "${#PROMPT}" -le 1500 ] || { echo "PROMPT_TOO_LONG"; exit 1; }
+          frame_url=""
+          if [ -n "$FIRST_FRAME" ]; then
+            [[ "$FIRST_FRAME" =~ ^[A-Za-z0-9._-]+\.(png|jpg|jpeg)$ ]] || { echo "FIRST_FRAME_REFUSED"; exit 1; }
+            frame_url="https://github.com/$GITHUB_REPOSITORY/releases/download/v0.0.0-cloud-assets-20261013/$FIRST_FRAME"
+          fi
           mkdir -p "$RUNNER_TEMP/out"
           printf '%s' "$PROMPT" > "$RUNNER_TEMP/out/prompt.txt"
-          python3 -I -B migration/production/agnes_clip.py "$RUNNER_TEMP/out/prompt.txt" "$RUNNER_TEMP/out/clip.mp4" "$SECONDS_IN" "$ASPECT"
+          python3 -I -B migration/production/agnes_clip.py "$RUNNER_TEMP/out/prompt.txt" "$RUNNER_TEMP/out/clip.mp4" "$SECONDS_IN" "$ASPECT" "$frame_url"
           ffprobe -v error -show_entries stream=codec_type,width,height,r_frame_rate:format=duration -of json "$RUNNER_TEMP/out/clip.mp4" | tee "$RUNNER_TEMP/out/probe.json"
           python3 -I -B migration/production/bible/clip_check.py "$RUNNER_TEMP/out/clip.mp4" | tee "$RUNNER_TEMP/out/clip_check.json" || true
           d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$RUNNER_TEMP/out/clip.mp4")

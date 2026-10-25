@@ -6,7 +6,9 @@ Agnes AI API (free Flash tier, 720p, 4-12 s): POST {API}/videos creates a task, 
 &model_name=... is polled until completed or failed, then the MP4 is downloaded. The key comes only from AGNES_API_KEY
 (a repository secret) and is never printed. A full free queue (HTTP 503 video_queue_full) is retried with backoff.
 Nothing here publishes: the workflow keeps the clip as a run artifact for Claude's review (clip_check.py + frames).
-usage: agnes_clip.py PROMPT_FILE OUT.mp4 [SECONDS] [ASPECT]
+Modes: text (prompt only) or keyframe (a first frame, e.g. an approved FLUX still from our public release, put in
+motion by the prompt; Flash takes first_frame/last_frame URLs, 720P only).
+usage: agnes_clip.py PROMPT_FILE OUT.mp4 [SECONDS] [ASPECT] [FIRST_FRAME_URL]
 """
 import json
 import os
@@ -77,9 +79,16 @@ def mp4_url(reply):
                 (".mp4" in v or k in ("video_url", "url", "download_url", "output")))
 
 
-def create(prompt, key, seconds="6", aspect="9:16", call=http, sleep=time.sleep):
+OWN_FRAMES = "https://github.com/matheusmagah-cpu/heroverse-engine/releases/download/"
+
+
+def create(prompt, key, seconds="6", aspect="9:16", first_frame=None, call=http, sleep=time.sleep):
     body = {"model": MODEL, "mode": "text", "prompt": prompt, "size": "720P", "aspect_ratio": aspect,
             "seconds": str(seconds), "n": 1}
+    if first_frame:
+        if not first_frame.startswith(OWN_FRAMES):   # only our own approved stills are put in motion
+            raise SystemExit("FIRST_FRAME_NOT_OURS")
+        body.update(mode="keyframe", first_frame=first_frame)
     for i in range(QUEUE_TRIES):
         r = call("POST", API + "/videos", key, body)
         vid = task_id(r)
@@ -108,12 +117,12 @@ def wait(vid, key, call=http, sleep=time.sleep):
     raise SystemExit("AGNES_TIMEOUT")
 
 
-def main(prompt_file, out, seconds="6", aspect="9:16"):
+def main(prompt_file, out, seconds="6", aspect="9:16", first_frame=None):
     key = os.environ.get("AGNES_API_KEY")
     if not key:
         raise SystemExit("AGNES_API_KEY_MISSING")
     prompt = Path(prompt_file).read_text().strip()
-    vid = create(prompt, key, seconds, aspect)
+    vid = create(prompt, key, seconds, aspect, first_frame or None)
     url, reply = wait(vid, key)
     with urllib.request.urlopen(urllib.request.Request(url), timeout=300) as r:
         Path(out).write_bytes(r.read())
@@ -123,6 +132,6 @@ def main(prompt_file, out, seconds="6", aspect="9:16"):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) not in (3, 4, 5):
+    if len(sys.argv) not in (3, 4, 5, 6):
         raise SystemExit(__doc__)
     sys.exit(main(*sys.argv[1:]))

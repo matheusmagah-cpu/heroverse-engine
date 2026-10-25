@@ -35,6 +35,15 @@ class Agnes(unittest.TestCase):
         with self.assertRaises(SystemExit):
             ac.create("x", "k", call=lambda *a, **k: {"_http": 401, "error": "bad key"}, sleep=lambda s: None)
 
+    def test_keyframe_puts_only_our_own_still_in_motion(self):
+        sent = []
+        call = lambda m, u, k, b=None: (sent.append(b), {"_http": 200, "data": {"video_id": "v2"}})[1]
+        still = ac.OWN_FRAMES + "v0.0.0-cloud-assets-20261013/pilot-015-img-st-serpent.png"
+        ac.create("the serpent turns its head", "sk", first_frame=still, call=call, sleep=lambda s: None)
+        self.assertEqual((sent[0]["mode"], sent[0]["first_frame"]), ("keyframe", still))
+        with self.assertRaises(SystemExit):
+            ac.create("x", "sk", first_frame="https://example.com/any.png", call=call, sleep=lambda s: None)
+
 
 if __name__ == "__main__":
     unittest.main()
