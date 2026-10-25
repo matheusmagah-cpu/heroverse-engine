@@ -1,0 +1,20 @@
+{
+ "test": "Pavo MCP live test: Genesis 6 hook clip (Genesis 5:24, Enoch walked with God)",
+ "date": "2026-10-25",
+ "model": "agnes-video-new-flash",
+ "aspect_ratio": "9:16",
+ "seconds_requested": 6,
+ "resolution_requested": "720p",
+ "audio_requested": false,
+ "count": 1,
+ "quote": {"required_credits": 0, "is_estimate": false, "zero_cost_confirmed": true, "fresh_before_generation": true},
+ "generations_submitted": 1,
+ "job_status": "completed",
+ "timings_utc": {"first_attempt_blocked_by_permission_classifier": "2026-10-25T21:1x", "owner_authorized_and_submitted": "~2026-10-25T21:26", "completed_by": "~2026-10-25T21:36", "downloaded": "2026-10-25T21:42"},
+ "download_note": "CDN host was first denied by the environment network policy; the owner allowed it and the same job's file was downloaded (no second generation)",
+ "file": {"name": "genesis-06-hook.mp4", "bytes": 2852144, "width": 720, "height": 1280, "fps": 24, "seconds": 6.592, "video_codec": "h264"},
+ "audio": {"present": true, "codec": "aac", "mean_volume_db": -15.7, "max_volume_db": -1.2, "note": "requested without audio, but the file carries an audible AAC track; strip it (-an) before use"},
+ "clip_check": {"flags": [], "head_min_luma": 93.6, "tail_min_luma": 115.7},
+ "visual_review": "6-frame sheet and full-resolution corners: stone path up a green hill into glowing clouds at dawn, slow push forward, no people, no modern objects, no visible watermark or logo",
+ "published": false
+}
