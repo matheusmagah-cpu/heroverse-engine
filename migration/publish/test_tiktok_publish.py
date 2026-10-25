@@ -104,6 +104,8 @@ class Post(unittest.TestCase):
         r = tp.post(self.EP, "key", "ch-tt", rec.append, call=fake)
         inp = fake.calls[0]["body"]["variables"]["input"]
         self.assertEqual((inp["channelId"], inp["schedulingType"], inp["mode"]), ("ch-tt", "automatic", "shareNow"))
+        # discover (run 40213381990): needsApproval is required; aiAssisted declares the AI visuals and voice
+        self.assertEqual((inp["needsApproval"], inp["aiAssisted"]), (False, True))
         self.assertEqual(inp["assets"][0]["video"]["url"],
                          tp.RELEASE + "bible-genesis-06-short-sha256-" + "f" * 64 + ".mp4")
         self.assertEqual(rec[0]["status"], "SENDING")              # recorded before the call
