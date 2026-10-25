@@ -1,4 +1,13 @@
 {
  "version": "tiktok-ledger-v1",
- "posts": {}
+ "posts": {
+  "bible:genesis-02-short:48ce69512a8562373b98b623eb21e1b8627ee797bce550b178cdce4f7bf737dd": {
+   "status": "FAILED",
+   "fail_reason": "Variable \"$input\" got invalid value { videos: [{ url: \"https://github.com/matheusmagah-cpu/heroverse-engine/releases/download/v0.0.0-cloud-assets-20261013/bible; Variable \"$input\" got invalid value { ",
+   "youtube_video_id": "hwq4qgjreh0",
+   "at": "2026-10-25T16:43:55.451697+00:00",
+   "failures": 1
+  }
+ },
+ "buffer_channel_id": "6ade2e0f2f1f5ed648cab8f0"
 }
