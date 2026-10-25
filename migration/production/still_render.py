@@ -363,11 +363,18 @@ def footage_holds(script, timeline, total):
     backgrounds, footage = script["backgrounds"], script["footage"]
     cuts = footage_cuts(timeline, total)
     shots = [f"{c}#{k}" for k in range(FOOTAGE_SEGMENTS) for c in footage]
+    # Bible-story longs (SERIES.md): a segment may name the stills of its story moments ("stills": [...]); the
+    # first cuts that start inside that segment show them, in order. Everything else stays real footage.
+    wanted = {x["id"]: list(x.get("stills", [])) for x in script.get("segments", []) if x.get("stills")}
+    spans = [(g["start"], g["end"], g["id"]) for g in timeline.get("segments", []) if g.get("id") in wanted]
     out, nf, ns, seen = [], 0, 0, {}
     for a, b in zip(cuts, cuts[1:] + [total]):
         h = {"start": a, "end": round(b, 3), "figure": False}
+        moment = next((wanted[i] for lo, hi, i in spans if lo - 1e-6 <= a < hi and wanted[i]), None)
         shot = shots[nf % len(shots)] if shots else None
-        if shot and (shot not in seen or a - seen[shot] >= REPEAT_GAP - 1e-6):
+        if moment and a > 0:
+            h["image"], h["kind"] = moment.pop(0), "still"
+        elif shot and (shot not in seen or a - seen[shot] >= REPEAT_GAP - 1e-6):
             h["image"], h["kind"] = shot, "footage"
             nf += 1
         else:

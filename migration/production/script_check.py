@@ -162,6 +162,66 @@ def thumbnail_problems(script):
     return []
 
 
+# Bible-story long videos (SERIES.md "One format, two lengths", owner 2026-10-25): the same frozen QA v4 and the same
+# gate; only the prayer-specific script rules are replaced by the story's own. A story opens cold on the arc's peak,
+# names what the story will cover within 30 s, re-hooks before every chapter (one chapter per Short of the arc), and
+# ends on a reflection, a closing prayer and the next story.
+STORY = "bible-story-long"
+STORY_TITLE = re.compile(r"^[^|]+: [^|]+ \| Genesis \d+(?:[-\u2013]\d+)? Bible Story \(KJV\)$")
+STORY_NEXT = re.compile(r"(?i)\bnext (story|part|episode)\b")
+STORY_CHAPTERS_MIN = 3
+STORY_STILL_SHARE_MAX = 0.35   # QA v4 needs >= 60 % real footage; stills are planned for at most 35 % of the time
+
+
+def story_problems(script, starts, minutes):
+    """The story replacements of HOOK_NO_PRAYER_PROMISE, PRAYER_REQUEST_INVITE, R14's prayer search phrase,
+    FIRST_PRAYER_LATE and PAYOFF/CTA. `starts` maps segment id -> estimated start (s)."""
+    segs = script.get("segments", [])
+    ids = [x.get("id", "") for x in segs]
+    problems = [p for p in hook_problems(segs[0].get("text", "") if segs else "") if p != "HOOK_NO_PRAYER_PROMISE"]
+    chapters = [i for i in ids if re.fullmatch(r"chapter-\d+", i)]
+    if len(chapters) < STORY_CHAPTERS_MIN:
+        problems.append(f"STORY_CHAPTERS {len(chapters)} < {STORY_CHAPTERS_MIN} (one per Short of the arc)")
+    elif chapters != [f"chapter-{k}" for k in range(1, len(chapters) + 1)]:
+        problems.append(f"STORY_CHAPTERS_OUT_OF_ORDER {chapters}")
+    if "roadmap" not in starts or starts["roadmap"] > ROADMAP_MAX_S:
+        problems.append(f"ROADMAP_MISSING_OR_LATE (R13: within {ROADMAP_MAX_S} s)")
+    if not any(x.get("reference") and starts.get(x.get("id"), 1e9) <= ROADMAP_MAX_S for x in segs):
+        problems.append(f"STORY_PEAK_VERSE_LATE (the arc's peak verse within {ROADMAP_MAX_S} s)")
+    marks = sorted([starts.get("roadmap", 0.0)] + [v for k, v in starts.items() if k.startswith("rehook")]
+                   + [starts.get("reflection", minutes * 60)])
+    gaps = [b - a for a, b in zip(marks, marks[1:])]
+    if gaps and max(gaps) > REHOOK_MAX_GAP_S:
+        problems.append(f"REHOOK_GAP {max(gaps):.0f} s > {REHOOK_MAX_GAP_S} s (R13)")
+    tail = [i for i in ids if i in ("reflection", "prayer-close", "cta")]
+    if tail != ["reflection", "prayer-close", "cta"] or ids[-1] != "cta":
+        problems.append(f"STORY_CLOSE_ORDER {tail} (reflection, prayer-close, cta last)")
+    elif chapters and ids.index("reflection") < ids.index(chapters[-1]):
+        problems.append("STORY_REFLECTION_BEFORE_LAST_CHAPTER")
+    cta = " ".join(x.get("text", "") for x in segs if x.get("id") == "cta")
+    if not STORY_NEXT.search(cta):
+        problems.append("STORY_NEXT_STORY_MISSING (the CTA names the next story)")
+    title = script.get("working_title", "")
+    if TITLE_DATE.search(title):
+        problems.append("TITLE_HAS_DATE (R14: x10 odds of a dead video)")
+    if not STORY_TITLE.match(title):
+        problems.append("STORY_TITLE_FORMULA (<Story>: <angle> | Genesis N-M Bible Story (KJV))")
+    backgrounds = set(script.get("backgrounds", []))
+    planned = [i for x in segs for i in x.get("stills", [])]
+    for i in planned:
+        if i not in backgrounds:
+            problems.append(f"STILL_NOT_A_BACKGROUND {i}")
+    if segs and segs[0].get("stills"):
+        problems.append("STORY_OPENING_STILL (QA v4: the hook opens on real footage)")
+    est = len(planned) * FOOTAGE_SCENE_EST / max(minutes * 60, 1e-6)
+    if est > STORY_STILL_SHARE_MAX:
+        problems.append(f"STORY_STILL_SHARE_EST {est:.2f} > {STORY_STILL_SHARE_MAX} (QA v4 footage >= 0.6)")
+    return problems
+
+
+FOOTAGE_SCENE_EST = 5.5   # s; v4 cuts every 4-7 s (still_render.FOOTAGE_CADENCE)
+
+
 def description_problems(intro):
     refs = SCRIPTURE_REF.findall(intro or "")
     return [f"DESCRIPTION_SCRIPTURE_REF {refs[:3]} (R15)"] if refs else []
@@ -213,7 +273,17 @@ def check(pilot_dir, production=None):
         problems.append(f"SPEECH_PRESENCE_EST {speech:.3f} < {SPEECH_MIN}")
     if segs and ids[0] == "hook" and len(words(segs[0].get("text", ""))) > HOOK_MAX_WORDS:
         problems.append(f"HOOK_TOO_LONG {len(words(segs[0].get('text', '')))} words > {HOOK_MAX_WORDS} (promise spoken by 8 s)")
-    if s.get("footage") and segs and ids[0] == "hook":
+    story = s.get("archetype") == STORY
+    if story:
+        starts, t = {}, 0.0
+        for x in segs:
+            starts.setdefault(x.get("id", ""), t)
+            t += len(words(x.get("text", ""))) / WPM * 60 + float(x.get("pause_after", 0))
+        problems += story_problems(s, starts, minutes)
+        problems += description_problems(s.get("description_intro", ""))
+        problems += thumbnail_problems(s)
+        problems += [f"GATE_ROW_{name.upper()} {detail} (E64)" for name, ok, detail in three_stage.script_hygiene(s) if not ok]
+    elif s.get("footage") and segs and ids[0] == "hook":
         problems += hook_problems(segs[0].get("text", ""))
         problems += continuity_problems(segs)
         problems += title_problems(s.get("working_title", ""))
@@ -227,9 +297,13 @@ def check(pilot_dir, production=None):
             first_prayer = t
             break
         t += len(words(x.get("text", ""))) / WPM * 60 + float(x.get("pause_after", 0))
-    if first_prayer is None or first_prayer > FIRST_PRAYER_MAX_S:
+    if story:
+        pass   # a story's prayer closes it (story_problems: reflection, prayer-close, cta)
+    elif first_prayer is None or first_prayer > FIRST_PRAYER_MAX_S:
         problems.append(f"FIRST_PRAYER_LATE {'none' if first_prayer is None else f'{first_prayer:.0f} s'} > {FIRST_PRAYER_MAX_S} s")
-    if "payoff" not in ids or "cta" not in ids:
+    if story:
+        pass
+    elif "payoff" not in ids or "cta" not in ids:
         problems.append("PAYOFF_OR_CTA_MISSING")
     elif ids.index("cta") < ids.index("payoff"):
         problems.append("CTA_BEFORE_PAYOFF")

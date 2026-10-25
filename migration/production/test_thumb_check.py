@@ -74,6 +74,23 @@ class ThumbCheck(unittest.TestCase):
             self.assertFalse(package["ai_generated_visuals"])
             self.assertNotIn("stills", package["altered_or_synthetic_disclosure"])
 
+    def test_story_package_names_the_series_not_the_prayer_slots(self):
+        # SERIES.md (owner 2026-10-25): a Bible-story long's description invites to the series, not to daily prayers
+        import json
+        with tempfile.TemporaryDirectory() as d:
+            fixture = HERE / "fixtures" / "package-footage-only"
+            manifest = json.loads((fixture / "manifest.json").read_text())
+            Path(d, "manifest.json").write_text(json.dumps(manifest))
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=0xd9902b:s=640x360:d=3",
+                            str(Path(d, f"{manifest['clips'][0]['id']}.mp4"))], check=True)
+            script = json.loads((fixture / "script.json").read_text())
+            script["subscribe_line"] = "Subscribe to hear the Bible story by story, from the beginning."
+            Path(d, "script.json").write_text(json.dumps(script))
+            pkg.main(d, Path(d, "script.json"), Path(d, "out"), d)
+            description = json.loads(Path(d, "out/package.json").read_text())["description"]
+            self.assertIn("Subscribe to hear the Bible story by story", description)
+            self.assertNotIn(pkg.SUBSCRIBE_LINE, description)
+
 
 if __name__ == "__main__":
     unittest.main()

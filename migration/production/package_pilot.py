@@ -205,7 +205,7 @@ def main(work, script_path, out_dir, footage_dir=None):
             "Before you walk into today, God has already been there. Pray this morning prayer with us for peace, "
             "courage and a clean start, anchored in KJV Scripture."),
         "",
-        SUBSCRIBE_LINE,
+        script.get("subscribe_line") or SUBSCRIBE_LINE,   # a Bible-story long names the series, not the prayer slots
         "",
         "Chapters",
         *(chapters_from_script(script, manifest["timeline"]) if any(s.get("reference") for s in script["segments"])
