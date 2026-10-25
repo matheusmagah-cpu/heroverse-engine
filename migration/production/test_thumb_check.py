@@ -60,13 +60,14 @@ class ThumbCheck(unittest.TestCase):
         # pilot-011 review (2026-10-25): a footage-only render's description credited AI illustrations it does not use
         import json
         with tempfile.TemporaryDirectory() as d:
-            manifest = json.loads((HERE / "pilot-011/out/manifest.json").read_text())
+            fixture = HERE / "fixtures" / "package-footage-only"  # pilot-011's manifest (3 clips) and script, frozen
+            manifest = json.loads((fixture / "manifest.json").read_text())
             self.assertEqual(manifest["images"], {})
             Path(d, "manifest.json").write_text(json.dumps(manifest))
             first = manifest["clips"][0]["id"]
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=0xd9902b:s=640x360:d=3",
                             str(Path(d, f"{first}.mp4"))], check=True)
-            pkg.main(d, HERE / "pilot-011/script.json", Path(d, "out"), d)
+            pkg.main(d, fixture / "script.json", Path(d, "out"), d)
             package = json.loads(Path(d, "out/package.json").read_text())
             self.assertNotIn("Illustrations", package["description"])
             self.assertIn("Footage credits", package["description"])

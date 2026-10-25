@@ -1,0 +1,377 @@
+{
+ "version": "pilot-manifest-v2",
+ "pilot_id": "pilot-011",
+ "grammar": "standard-v4:licensed-footage+depth-parallax+film-look+captions",
+ "output_sha256": "072f99b828de628fd562ba8d521cdb98a8f741a4dee81419c0cbe171813f31da",
+ "output_seconds": 979.025,
+ "script_sha256": "76969ad3bfcf5ca5848989bc11847fae467b6060420d8b79b9cc22e981a3a363",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85,
+  "voice_wav_sha256": "6d682c1c78f432b87e2e4fa7fa141d4c3152ddd8df80b7cbc2b3c8669461fe84"
+ },
+ "music": {
+  "file": "original-rest-music.lossless.flac",
+  "sha256": "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c",
+  "offset_seconds": 1200.0,
+  "rights": "Owned instrumental generator output (HeroVerse instrumental-v2 recipe)"
+ },
+ "figure": null,
+ "images": {},
+ "captions_ass_sha256": "4f2c65e9ead987a5401516250e522c17eee5a950b3157e43ac2ec3ddac3a8006",
+ "overlay": {
+  "brand": "HeroVerse Prayer",
+  "title": "Strength for Your Next Step",
+  "title_card_seconds": 2.0
+ },
+ "persistent_overlays": [
+  "brand"
+ ],
+ "caption_style": {
+  "box": false,
+  "alignment": "bottom-centre",
+  "outline": 4,
+  "words_max": 7
+ },
+ "cta": [],
+ "scripture_cards": [
+  {
+   "segment": "scripture-everlasting",
+   "reference": "Isaiah 40:28 (KJV)",
+   "start": 77.121,
+   "end": 89.389
+  },
+  {
+   "segment": "scripture-given-strength",
+   "reference": "Isaiah 40:29 (KJV)",
+   "start": 129.887,
+   "end": 136.203
+  },
+  {
+   "segment": "scripture-human-limits",
+   "reference": "Isaiah 40:30 (KJV)",
+   "start": 212.1,
+   "end": 217.689
+  },
+  {
+   "segment": "scripture-waiting-strength",
+   "reference": "Isaiah 40:31 (KJV)",
+   "start": 290.936,
+   "end": 304.124
+  },
+  {
+   "segment": "scripture-courage",
+   "reference": "Psalm 27:14 (KJV)",
+   "start": 434.244,
+   "end": 442.673
+  },
+  {
+   "segment": "scripture-mercy",
+   "reference": "Lamentations 3:22 (KJV)",
+   "start": 512.06,
+   "end": 518.737
+  },
+  {
+   "segment": "scripture-morning",
+   "reference": "Lamentations 3:23 (KJV)",
+   "start": 522.899,
+   "end": 525.139
+  },
+  {
+   "segment": "scripture-refuge",
+   "reference": "Psalm 46:1 (KJV)",
+   "start": 568.669,
+   "end": 573.747
+  },
+  {
+   "segment": "scripture-joy",
+   "reference": "Nehemiah 8:10 (KJV)",
+   "start": 613.752,
+   "end": 631.612
+  },
+  {
+   "segment": "scripture-sufficient-grace",
+   "reference": "2 Corinthians 12:9 (KJV)",
+   "start": 667.479,
+   "end": 671.489
+  },
+  {
+   "segment": "scripture-portion",
+   "reference": "Psalm 73:26 (KJV)",
+   "start": 729.679,
+   "end": 737.232
+  }
+ ],
+ "scene_target_seconds": 5.5,
+ "crossfade_seconds": 0.6,
+ "cinematic": {
+  "depth_model": {
+   "name": "Depth Anything V2 Small (ONNX)",
+   "licence": "apache-2.0",
+   "sha256": "afb6a5c28f3b6bf1618c6e43f02073ef9dfdc70e937502d51603e57b0a1df10c"
+  },
+  "grade": "colorbalance=rs=-0.015:bs=0.02:rh=0.03:gh=0.01:bh=-0.03,eq=contrast=1.04:saturation=1.04",
+  "look": "split[base][glow];[glow]scale=640:360,curves=all='0/0 0.72/0 1/1',gblur=sigma=6,scale=2560:1440[halo];[base][halo]blend=c0_mode=screen:c0_opacity=0.16:c1_mode=normal:c1_opacity=1:c2_mode=normal:c2_opacity=1,vignette=angle=PI/6:mode=forward,noise=c0s=4:c0f=t+u",
+  "atmosphere": [
+   "bg-dawn-lake",
+   "bg-misty-valley",
+   "bg-sunrise-field",
+   "bg-orchard",
+   "bg-mountain-sunrise"
+  ]
+ },
+ "clips": [
+  {
+   "id": "clip-clouds-sunrise-fog-clouds-landscape-mountain-ra",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-58480/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-58480/)",
+   "vetting": "APPROVED",
+   "sha256": "b9e1b1a7410cd529d60245e4f88947c5fdc58b36b9629af9a74fc8d725569f5f",
+   "release_asset": "footage-clip-clouds-sunrise-fog-clouds-landscape-mountain-ra-sha256-b9e1b1a7410cd529d60245e4f88947c5fdc58b36b9629af9a74fc8d725569f5f.mp4"
+  },
+  {
+   "id": "clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-19409/",
+   "author": "adege",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-19409/)",
+   "vetting": "APPROVED",
+   "sha256": "bd4d5157c1d82eb02c4235cce0f2c4bfe5a11d4df0a670c5a74772c4b924b3fa",
+   "release_asset": "footage-clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli-sha256-bd4d5157c1d82eb02c4235cce0f2c4bfe5a11d4df0a670c5a74772c4b924b3fa.mp4"
+  },
+  {
+   "id": "clip-forest-netherlands-sun-rays-misty-forest-sunlig",
+   "source": "pixabay",
+   "page": "https://pixabay.com/videos/id-382584/",
+   "author": "Matthias_Groeneveld",
+   "licence": "Pixabay Content License",
+   "licence_url": "https://pixabay.com/service/license-summary/",
+   "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-382584/)",
+   "vetting": "APPROVED",
+   "sha256": "4ad6ebd0eee5ee79d0d3cb7259af8ba5417a7c5d89c549a9285f4a7b3dbea7d6",
+   "release_asset": "footage-clip-forest-netherlands-sun-rays-misty-forest-sunlig-sha256-4ad6ebd0eee5ee79d0d3cb7259af8ba5417a7c5d89c549a9285f4a7b3dbea7d6.mp4"
+  }
+ ],
+ "shots": [],
+ "timeline": [
+  {
+   "id": "hook",
+   "start": 0.3,
+   "end": 7.92
+  },
+  {
+   "id": "roadmap",
+   "start": 8.62,
+   "end": 20.013
+  },
+  {
+   "id": "invitation",
+   "start": 20.813,
+   "end": 44.864
+  },
+  {
+   "id": "prayer-arrival",
+   "start": 45.864,
+   "end": 76.121
+  },
+  {
+   "id": "scripture-everlasting",
+   "start": 77.121,
+   "end": 93.232
+  },
+  {
+   "id": "prayer-hidden-load",
+   "start": 94.532,
+   "end": 128.887
+  },
+  {
+   "id": "scripture-given-strength",
+   "start": 129.887,
+   "end": 136.503
+  },
+  {
+   "id": "prayer-body",
+   "start": 137.803,
+   "end": 172.051
+  },
+  {
+   "id": "prayer-first-hour",
+   "start": 173.051,
+   "end": 205.869
+  },
+  {
+   "id": "rehook-1",
+   "start": 206.869,
+   "end": 211.5
+  },
+  {
+   "id": "scripture-human-limits",
+   "start": 212.1,
+   "end": 217.989
+  },
+  {
+   "id": "prayer-comparison",
+   "start": 219.289,
+   "end": 253.685
+  },
+  {
+   "id": "prayer-self-reproach",
+   "start": 254.685,
+   "end": 289.936
+  },
+  {
+   "id": "scripture-waiting-strength",
+   "start": 290.936,
+   "end": 304.424
+  },
+  {
+   "id": "prayer-open-hands",
+   "start": 305.724,
+   "end": 341.167
+  },
+  {
+   "id": "stillness-one",
+   "start": 342.167,
+   "end": 357.979
+  },
+  {
+   "id": "prayer-attention",
+   "start": 363.979,
+   "end": 394.641
+  },
+  {
+   "id": "rehook-2",
+   "start": 395.641,
+   "end": 400.593
+  },
+  {
+   "id": "prayer-unanswered",
+   "start": 401.193,
+   "end": 433.244
+  },
+  {
+   "id": "scripture-courage",
+   "start": 434.244,
+   "end": 442.973
+  },
+  {
+   "id": "prayer-difficult-step",
+   "start": 444.273,
+   "end": 476.58
+  },
+  {
+   "id": "prayer-workload",
+   "start": 477.58,
+   "end": 511.06
+  },
+  {
+   "id": "scripture-mercy",
+   "start": 512.06,
+   "end": 519.037
+  },
+  {
+   "id": "scripture-morning",
+   "start": 520.337,
+   "end": 525.439
+  },
+  {
+   "id": "prayer-yesterday",
+   "start": 526.739,
+   "end": 563.057
+  },
+  {
+   "id": "rehook-3",
+   "start": 564.057,
+   "end": 568.069
+  },
+  {
+   "id": "scripture-refuge",
+   "start": 568.669,
+   "end": 574.047
+  },
+  {
+   "id": "prayer-provision",
+   "start": 575.347,
+   "end": 612.752
+  },
+  {
+   "id": "scripture-joy",
+   "start": 613.752,
+   "end": 631.912
+  },
+  {
+   "id": "prayer-share-table",
+   "start": 633.212,
+   "end": 666.479
+  },
+  {
+   "id": "scripture-sufficient-grace",
+   "start": 667.479,
+   "end": 683.653
+  },
+  {
+   "id": "prayer-long-weakness",
+   "start": 684.953,
+   "end": 721.527
+  },
+  {
+   "id": "rehook-4",
+   "start": 722.527,
+   "end": 729.079
+  },
+  {
+   "id": "scripture-portion",
+   "start": 729.679,
+   "end": 737.532
+  },
+  {
+   "id": "prayer-uncertain-future",
+   "start": 738.832,
+   "end": 772.931
+  },
+  {
+   "id": "day-transition",
+   "start": 773.931,
+   "end": 806.92
+  },
+  {
+   "id": "declaration",
+   "start": 807.92,
+   "end": 832.399
+  },
+  {
+   "id": "commitment",
+   "start": 833.599,
+   "end": 866.204
+  },
+  {
+   "id": "payoff",
+   "start": 867.404,
+   "end": 900.436
+  },
+  {
+   "id": "blessing",
+   "start": 901.636,
+   "end": 934.473
+  },
+  {
+   "id": "cta",
+   "start": 935.673,
+   "end": 951.505
+  },
+  {
+   "id": "closing",
+   "start": 952.505,
+   "end": 974.825
+  }
+ ],
+ "upload_performed": false,
+ "publication_performed": false
+}
