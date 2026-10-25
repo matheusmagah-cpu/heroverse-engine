@@ -1,0 +1,1212 @@
+{
+ "version": "shorts-select-v1",
+ "pilot_id": "pilot-011",
+ "rubric_model": "gemini-3.6-flash",
+ "candidates_considered": 12,
+ "shortlist": [
+  {
+   "start": 77.121,
+   "end": 128.587,
+   "sentences": [
+    {
+     "segment": "scripture-everlasting",
+     "text": "Hast thou not known?",
+     "start": 77.121,
+     "end": 79.063
+    },
+    {
+     "segment": "scripture-everlasting",
+     "text": "hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary?",
+     "start": 79.363,
+     "end": 89.389
+    },
+    {
+     "segment": "scripture-everlasting",
+     "text": "there is no searching of his understanding.",
+     "start": 89.689,
+     "end": 92.932
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "Lord, you know the effort hidden beneath my ordinary appearance.",
+     "start": 94.532,
+     "end": 99.033
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "You know the interrupted rest, the decisions made quietly, and the concern I carry while answering that everything is fine.",
+     "start": 99.333,
+     "end": 108.635
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "I can speak more plainly with you.",
+     "start": 108.935,
+     "end": 111.516
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "I am tired of holding so much inside.",
+     "start": 111.816,
+     "end": 114.973
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "Give me the wisdom to name what is heavy and the courage to let someone trustworthy know.",
+     "start": 115.273,
+     "end": 121.567
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "I receive this moment as a place to stop pretending that I have endless reserves.",
+     "start": 121.867,
+     "end": 128.587
+    }
+   ],
+   "segments": [
+    "scripture-everlasting",
+    "prayer-hidden-load"
+   ],
+   "text": "Hast thou not known? hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary? there is no searching of his understanding. Lord, you know the effort hidden beneath my ordinary appearance. You know the interrupted rest, the decisions made quietly, and the concern I carry while answering that everything is fine. I can speak more plainly with you. I am tired of holding so much inside. Give me the wisdom to name what is heavy and the courage to let someone trustworthy know. I receive this moment as a place to stop pretending that I have endless reserves.",
+   "reference": "Isaiah 40:28 (KJV)",
+   "measured_score": 0.7222,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.2702702702702703,
+    "scripture": 1.0,
+    "promise": 0.6756756756756757,
+    "resolution": 0.4,
+    "length_fit": 0.5413600000000003
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Strong Scripture opening and deeply relatable prayer about hidden exhaustion and honesty with God. Excellent standalone clip.",
+    "hook_line": "Tired of pretending you are fine?",
+    "title": "A Prayer for When You're Tired of Pretending You're Fine"
+   },
+   "final_score": 0.8239,
+   "hook": "Tired of pretending you are fine?",
+   "title": "A Prayer for When You're Tired of Pretending You're Fine"
+  },
+  {
+   "start": 815.176,
+   "end": 865.904,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I receive your mercy for this morning.",
+     "start": 815.176,
+     "end": 817.992
+    },
+    {
+     "segment": "declaration",
+     "text": "I will be truthful about my needs.",
+     "start": 818.292,
+     "end": 821.023
+    },
+    {
+     "segment": "declaration",
+     "text": "I will welcome wise help.",
+     "start": 821.323,
+     "end": 823.563
+    },
+    {
+     "segment": "declaration",
+     "text": "I will give the next faithful step my attention.",
+     "start": 823.863,
+     "end": 827.212
+    },
+    {
+     "segment": "declaration",
+     "text": "Through Christ, teach me to wait with hope and to walk with love.",
+     "start": 827.512,
+     "end": 832.099
+    },
+    {
+     "segment": "commitment",
+     "text": "Before you begin your next task, write one small action you can take in the next ten minutes.",
+     "start": 833.599,
+     "end": 840.105
+    },
+    {
+     "segment": "commitment",
+     "text": "Make it specific:",
+     "start": 840.405,
+     "end": 842.112
+    },
+    {
+     "segment": "commitment",
+     "text": "gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility.",
+     "start": 842.412,
+     "end": 850.348
+    },
+    {
+     "segment": "commitment",
+     "text": "Choose the action that belongs to your morning.",
+     "start": 850.648,
+     "end": 854.125
+    },
+    {
+     "segment": "commitment",
+     "text": "Beside it, write Isaiah forty, thirty one.",
+     "start": 854.425,
+     "end": 858.201
+    },
+    {
+     "segment": "commitment",
+     "text": "You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+     "start": 858.501,
+     "end": 865.904
+    }
+   ],
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "text": "I receive your mercy for this morning. I will be truthful about my needs. I will welcome wise help. I will give the next faithful step my attention. Through Christ, teach me to wait with hope and to walk with love. Before you begin your next task, write one small action you can take in the next ten minutes. Make it specific: gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility. Choose the action that belongs to your morning. Beside it, write Isaiah forty, thirty one. You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+   "reference": null,
+   "measured_score": 0.7184,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6956521739130435,
+    "scripture": 0.4,
+    "promise": 0.8695652173913043,
+    "resolution": 0.4,
+    "length_fit": 0.5708800000000019
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 7.5,
+    "shareability": 6.5,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Grounded, action-oriented morning prayer with concrete steps and Scripture reference.",
+    "hook_line": "Take one small step with God",
+    "title": "A Practical Morning Prayer to Start Your Day"
+   },
+   "final_score": 0.7424,
+   "hook": "Take one small step with God",
+   "title": "A Practical Morning Prayer to Start Your Day"
+  },
+  {
+   "start": 410.967,
+   "end": 442.673,
+   "sentences": [
+    {
+     "segment": "prayer-unanswered",
+     "text": "Receive the words I have today.",
+     "start": 410.967,
+     "end": 413.527
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Keep me from drawing a harsh conclusion about your care from the length of my waiting.",
+     "start": 413.827,
+     "end": 420.013
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Lead me toward wise counsel when I am confused.",
+     "start": 420.313,
+     "end": 424.281
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me.",
+     "start": 424.581,
+     "end": 432.944
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "Wait on the LORD:",
+     "start": 434.244,
+     "end": 436.036
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "be of good courage, and he shall strengthen thine heart:",
+     "start": 436.336,
+     "end": 440.261
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "wait, I say, on the LORD.",
+     "start": 440.561,
+     "end": 442.673
+    }
+   ],
+   "segments": [
+    "prayer-unanswered",
+    "scripture-courage"
+   ],
+   "text": "Receive the words I have today. Keep me from drawing a harsh conclusion about your care from the length of my waiting. Lead me toward wise counsel when I am confused. Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me. Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.",
+   "reference": "Psalm 27:14 (KJV)",
+   "measured_score": 0.5074,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.136986301369863,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.6682400000000006
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 7.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Concise, potent message addressing the struggle of waiting without judging God's care. Clean opening and ending.",
+    "hook_line": "Don't judge God's heart by waiting",
+    "title": "A Prayer When God Takes Longer Than Expected"
+   },
+   "final_score": 0.713,
+   "hook": "Don't judge God's heart by waiting",
+   "title": "A Prayer When God Takes Longer Than Expected"
+  },
+  {
+   "start": 818.292,
+   "end": 865.904,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I will be truthful about my needs.",
+     "start": 818.292,
+     "end": 821.023
+    },
+    {
+     "segment": "declaration",
+     "text": "I will welcome wise help.",
+     "start": 821.323,
+     "end": 823.563
+    },
+    {
+     "segment": "declaration",
+     "text": "I will give the next faithful step my attention.",
+     "start": 823.863,
+     "end": 827.212
+    },
+    {
+     "segment": "declaration",
+     "text": "Through Christ, teach me to wait with hope and to walk with love.",
+     "start": 827.512,
+     "end": 832.099
+    },
+    {
+     "segment": "commitment",
+     "text": "Before you begin your next task, write one small action you can take in the next ten minutes.",
+     "start": 833.599,
+     "end": 840.105
+    },
+    {
+     "segment": "commitment",
+     "text": "Make it specific:",
+     "start": 840.405,
+     "end": 842.112
+    },
+    {
+     "segment": "commitment",
+     "text": "gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility.",
+     "start": 842.412,
+     "end": 850.348
+    },
+    {
+     "segment": "commitment",
+     "text": "Choose the action that belongs to your morning.",
+     "start": 850.648,
+     "end": 854.125
+    },
+    {
+     "segment": "commitment",
+     "text": "Beside it, write Isaiah forty, thirty one.",
+     "start": 854.425,
+     "end": 858.201
+    },
+    {
+     "segment": "commitment",
+     "text": "You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+     "start": 858.501,
+     "end": 865.904
+    }
+   ],
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "text": "I will be truthful about my needs. I will welcome wise help. I will give the next faithful step my attention. Through Christ, teach me to wait with hope and to walk with love. Before you begin your next task, write one small action you can take in the next ten minutes. Make it specific: gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility. Choose the action that belongs to your morning. Beside it, write Isaiah forty, thirty one. You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+   "reference": null,
+   "measured_score": 0.5662,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.648148148148148,
+    "scripture": 0.4,
+    "promise": 0.6944444444444444,
+    "resolution": 0.4,
+    "length_fit": 0.6955200000000014
+   },
+   "rubric": {
+    "index": 7,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 7.5,
+    "shareability": 6.5,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Strong affirmative opening that moves smoothly into practical reflection and Scripture.",
+    "hook_line": "Be honest about your needs today",
+    "title": "A Prayer to Focus on Your Next Step"
+   },
+   "final_score": 0.6765
+  },
+  {
+   "start": 821.323,
+   "end": 865.904,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I will welcome wise help.",
+     "start": 821.323,
+     "end": 823.563
+    },
+    {
+     "segment": "declaration",
+     "text": "I will give the next faithful step my attention.",
+     "start": 823.863,
+     "end": 827.212
+    },
+    {
+     "segment": "declaration",
+     "text": "Through Christ, teach me to wait with hope and to walk with love.",
+     "start": 827.512,
+     "end": 832.099
+    },
+    {
+     "segment": "commitment",
+     "text": "Before you begin your next task, write one small action you can take in the next ten minutes.",
+     "start": 833.599,
+     "end": 840.105
+    },
+    {
+     "segment": "commitment",
+     "text": "Make it specific:",
+     "start": 840.405,
+     "end": 842.112
+    },
+    {
+     "segment": "commitment",
+     "text": "gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility.",
+     "start": 842.412,
+     "end": 850.348
+    },
+    {
+     "segment": "commitment",
+     "text": "Choose the action that belongs to your morning.",
+     "start": 850.648,
+     "end": 854.125
+    },
+    {
+     "segment": "commitment",
+     "text": "Beside it, write Isaiah forty, thirty one.",
+     "start": 854.425,
+     "end": 858.201
+    },
+    {
+     "segment": "commitment",
+     "text": "You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+     "start": 858.501,
+     "end": 865.904
+    }
+   ],
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "text": "I will welcome wise help. I will give the next faithful step my attention. Through Christ, teach me to wait with hope and to walk with love. Before you begin your next task, write one small action you can take in the next ten minutes. Make it specific: gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility. Choose the action that belongs to your morning. Beside it, write Isaiah forty, thirty one. You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+   "reference": null,
+   "measured_score": 0.5899,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.6930693069306931,
+    "scripture": 0.4,
+    "promise": 0.7425742574257426,
+    "resolution": 0.4,
+    "length_fit": 0.8167599999999993
+   },
+   "rubric": {
+    "index": 5,
+    "hook_first_2s": 5.0,
+    "stands_alone": 7.0,
+    "emotional_payoff": 7.0,
+    "shareability": 6.0,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Starts mid-declaration without setup, but delivers good practical application.",
+    "hook_line": "One small faithful step for today",
+    "title": "A Quick Prayer and Practical Step for Today"
+   },
+   "final_score": 0.646
+  },
+  {
+   "start": 760.128,
+   "end": 806.62,
+   "sentences": [
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "Root my hope in your enduring care.",
+     "start": 760.128,
+     "end": 762.987
+    },
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "Give me people with whom I can speak honestly, and teach me to receive the ordinary provision of this day with an attentive heart.",
+     "start": 763.287,
+     "end": 772.631
+    },
+    {
+     "segment": "day-transition",
+     "text": "You have listened to Scripture about strength, mercy, courage, and grace.",
+     "start": 773.931,
+     "end": 779.221
+    },
+    {
+     "segment": "day-transition",
+     "text": "Now choose one reference you want within reach today.",
+     "start": 779.521,
+     "end": 783.34
+    },
+    {
+     "segment": "day-transition",
+     "text": "You might keep Isaiah chapter forty open, or write down Psalm twenty seven, verse fourteen.",
+     "start": 783.64,
+     "end": 790.744
+    },
+    {
+     "segment": "day-transition",
+     "text": "You can return to the actual passage when you have a quiet minute.",
+     "start": 791.044,
+     "end": 795.972
+    },
+    {
+     "segment": "day-transition",
+     "text": "You do not need to remember every sentence of this prayer.",
+     "start": 796.272,
+     "end": 800.411
+    },
+    {
+     "segment": "day-transition",
+     "text": "Give yourself one clear place to turn when the morning begins to feel crowded.",
+     "start": 800.711,
+     "end": 806.62
+    }
+   ],
+   "segments": [
+    "prayer-uncertain-future",
+    "day-transition"
+   ],
+   "text": "Root my hope in your enduring care. Give me people with whom I can speak honestly, and teach me to receive the ordinary provision of this day with an attentive heart. You have listened to Scripture about strength, mercy, courage, and grace. Now choose one reference you want within reach today. You might keep Isaiah chapter forty open, or write down Psalm twenty seven, verse fourteen. You can return to the actual passage when you have a quiet minute. You do not need to remember every sentence of this prayer. Give yourself one clear place to turn when the morning begins to feel crowded.",
+   "reference": null,
+   "measured_score": 0.7556,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.7692307692307693,
+    "scripture": 0.4,
+    "promise": 0.9615384615384616,
+    "resolution": 0.4,
+    "length_fit": 0.7403200000000015
+   },
+   "rubric": {
+    "index": 0,
+    "hook_first_2s": 6.0,
+    "stands_alone": 6.0,
+    "emotional_payoff": 7.0,
+    "shareability": 6.0,
+    "loop_potential": 6.0,
+    "policy_safe": 10.0,
+    "reasons": "Refers to having listened to Scripture earlier in the full video, which slightly breaks standalone context.",
+    "hook_line": "Find peace when morning feels crowded",
+    "title": "A Simple Morning Prayer for When Life Feels Crowded"
+   },
+   "final_score": 0.0
+  },
+  {
+   "start": 397.307,
+   "end": 442.673,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "Next, the prayer you have prayed many times.",
+     "start": 397.307,
+     "end": 400.293
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "God, I bring you the prayer I have spoken many times.",
+     "start": 401.193,
+     "end": 405.225
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "I still hope for change, and I sometimes struggle to know what to say.",
+     "start": 405.525,
+     "end": 410.667
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Receive the words I have today.",
+     "start": 410.967,
+     "end": 413.527
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Keep me from drawing a harsh conclusion about your care from the length of my waiting.",
+     "start": 413.827,
+     "end": 420.013
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Lead me toward wise counsel when I am confused.",
+     "start": 420.313,
+     "end": 424.281
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me.",
+     "start": 424.581,
+     "end": 432.944
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "Wait on the LORD:",
+     "start": 434.244,
+     "end": 436.036
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "be of good courage, and he shall strengthen thine heart:",
+     "start": 436.336,
+     "end": 440.261
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "wait, I say, on the LORD.",
+     "start": 440.561,
+     "end": 442.673
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "prayer-unanswered",
+    "scripture-courage"
+   ],
+   "text": "Next, the prayer you have prayed many times. God, I bring you the prayer I have spoken many times. I still hope for change, and I sometimes struggle to know what to say. Receive the words I have today. Keep me from drawing a harsh conclusion about your care from the length of my waiting. Lead me toward wise counsel when I am confused. Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me. Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.",
+   "reference": "Psalm 27:14 (KJV)",
+   "measured_score": 0.7046,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.2830188679245283,
+    "scripture": 1.0,
+    "promise": 0.2358490566037736,
+    "resolution": 0.4,
+    "length_fit": 0.7853600000000006
+   },
+   "rubric": {
+    "index": 3,
+    "hook_first_2s": 4.0,
+    "stands_alone": 5.0,
+    "emotional_payoff": 8.0,
+    "shareability": 6.0,
+    "loop_potential": 5.0,
+    "policy_safe": 10.0,
+    "reasons": "Starts with 'Next, the prayer...', signaling mid-video placement and reducing standalone appeal despite strong content.",
+    "hook_line": "When you feel weary from waiting",
+    "title": "When You've Prayed the Same Prayer Many Times"
+   },
+   "final_score": 0.0
+  },
+  {
+   "start": 722.527,
+   "end": 772.631,
+   "sentences": [
+    {
+     "segment": "rehook-4",
+     "text": "We are near the end.",
+     "start": 722.527,
+     "end": 724.319
+    },
+    {
+     "segment": "rehook-4",
+     "text": "One more promise about strength before you choose your step.",
+     "start": 724.619,
+     "end": 728.779
+    },
+    {
+     "segment": "scripture-portion",
+     "text": "My flesh and my heart faileth:",
+     "start": 729.679,
+     "end": 732.153
+    },
+    {
+     "segment": "scripture-portion",
+     "text": "but God is the strength of my heart, and my portion for ever.",
+     "start": 732.453,
+     "end": 737.232
+    },
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "Faithful God, I bring the future I cannot picture clearly.",
+     "start": 738.832,
+     "end": 743.525
+    },
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "I wonder what will be asked of me and whether I will have enough strength.",
+     "start": 743.825,
+     "end": 748.625
+    },
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "Please guide the decisions that can be made today.",
+     "start": 748.925,
+     "end": 752.893
+    },
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "For what remains unknown, help me resist living every possible difficulty in advance.",
+     "start": 753.193,
+     "end": 759.828
+    },
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "Root my hope in your enduring care.",
+     "start": 760.128,
+     "end": 762.987
+    },
+    {
+     "segment": "prayer-uncertain-future",
+     "text": "Give me people with whom I can speak honestly, and teach me to receive the ordinary provision of this day with an attentive heart.",
+     "start": 763.287,
+     "end": 772.631
+    }
+   ],
+   "segments": [
+    "rehook-4",
+    "scripture-portion",
+    "prayer-uncertain-future"
+   ],
+   "text": "We are near the end. One more promise about strength before you choose your step. My flesh and my heart faileth: but God is the strength of my heart, and my portion for ever. Faithful God, I bring the future I cannot picture clearly. I wonder what will be asked of me and whether I will have enough strength. Please guide the decisions that can be made today. For what remains unknown, help me resist living every possible difficulty in advance. Root my hope in your enduring care. Give me people with whom I can speak honestly, and teach me to receive the ordinary provision of this day with an attentive heart.",
+   "reference": "Psalm 73:26 (KJV)",
+   "measured_score": 0.6198,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.26785714285714285,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.5958400000000028
+   },
+   "rubric": {
+    "index": 4,
+    "hook_first_2s": 3.0,
+    "stands_alone": 4.0,
+    "emotional_payoff": 8.0,
+    "shareability": 6.0,
+    "loop_potential": 4.0,
+    "policy_safe": 10.0,
+    "reasons": "Opens with meta commentary 'We are near the end', which hurts engagement for a Short.",
+    "hook_line": "God is the strength of heart",
+    "title": "A Prayer When You Can't Picture the Future"
+   },
+   "final_score": 0.0
+  },
+  {
+   "start": 651.883,
+   "end": 683.353,
+   "sentences": [
+    {
+     "segment": "prayer-share-table",
+     "text": "Help me ask rather than assume.",
+     "start": 651.883,
+     "end": 654.272
+    },
+    {
+     "segment": "prayer-share-table",
+     "text": "Whether I share food, time, or a useful errand, let my offering carry respect.",
+     "start": 654.572,
+     "end": 660.609
+    },
+    {
+     "segment": "prayer-share-table",
+     "text": "Keep me grateful for the people whose quiet generosity has sustained me.",
+     "start": 660.909,
+     "end": 666.179
+    },
+    {
+     "segment": "scripture-sufficient-grace",
+     "text": "And he said unto me, My grace is sufficient for thee:",
+     "start": 667.479,
+     "end": 671.489
+    },
+    {
+     "segment": "scripture-sufficient-grace",
+     "text": "for my strength is made perfect in weakness.",
+     "start": 671.789,
+     "end": 675.139
+    },
+    {
+     "segment": "scripture-sufficient-grace",
+     "text": "Most gladly therefore will I rather glory in my infirmities, that the power of Christ may rest upon me.",
+     "start": 675.439,
+     "end": 683.353
+    }
+   ],
+   "segments": [
+    "prayer-share-table",
+    "scripture-sufficient-grace"
+   ],
+   "text": "Help me ask rather than assume. Whether I share food, time, or a useful errand, let my offering carry respect. Keep me grateful for the people whose quiet generosity has sustained me. And he said unto me, My grace is sufficient for thee: for my strength is made perfect in weakness. Most gladly therefore will I rather glory in my infirmities, that the power of Christ may rest upon me.",
+   "reference": "2 Corinthians 12:9 (KJV)",
+   "measured_score": 0.5859,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.0,
+    "scripture": 1.0,
+    "promise": 1.0,
+    "resolution": 0.4,
+    "length_fit": 0.6587999999999965
+   },
+   "rubric": {
+    "index": 6,
+    "hook_first_2s": 6.0,
+    "stands_alone": 6.0,
+    "emotional_payoff": 7.0,
+    "shareability": 6.0,
+    "loop_potential": 5.0,
+    "policy_safe": 10.0,
+    "reasons": "Short clip that abruptly shifts from reflection into scripture reading without full narrative resolution.",
+    "hook_line": "God's grace is sufficient for you",
+    "title": "God's Power Resting on Your Weakness"
+   },
+   "final_score": 0.0
+  },
+  {
+   "start": 395.641,
+   "end": 442.673,
+   "sentences": [
+    {
+     "segment": "rehook-2",
+     "text": "Stay with me.",
+     "start": 395.641,
+     "end": 397.007
+    },
+    {
+     "segment": "rehook-2",
+     "text": "Next, the prayer you have prayed many times.",
+     "start": 397.307,
+     "end": 400.293
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "God, I bring you the prayer I have spoken many times.",
+     "start": 401.193,
+     "end": 405.225
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "I still hope for change, and I sometimes struggle to know what to say.",
+     "start": 405.525,
+     "end": 410.667
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Receive the words I have today.",
+     "start": 410.967,
+     "end": 413.527
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Keep me from drawing a harsh conclusion about your care from the length of my waiting.",
+     "start": 413.827,
+     "end": 420.013
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Lead me toward wise counsel when I am confused.",
+     "start": 420.313,
+     "end": 424.281
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me.",
+     "start": 424.581,
+     "end": 432.944
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "Wait on the LORD:",
+     "start": 434.244,
+     "end": 436.036
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "be of good courage, and he shall strengthen thine heart:",
+     "start": 436.336,
+     "end": 440.261
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "wait, I say, on the LORD.",
+     "start": 440.561,
+     "end": 442.673
+    }
+   ],
+   "segments": [
+    "rehook-2",
+    "prayer-unanswered",
+    "scripture-courage"
+   ],
+   "text": "Stay with me. Next, the prayer you have prayed many times. God, I bring you the prayer I have spoken many times. I still hope for change, and I sometimes struggle to know what to say. Receive the words I have today. Keep me from drawing a harsh conclusion about your care from the length of my waiting. Lead me toward wise counsel when I am confused. Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me. Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.",
+   "reference": "Psalm 27:14 (KJV)",
+   "measured_score": 0.5561,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.27522935779816515,
+    "scripture": 1.0,
+    "promise": 0.22935779816513763,
+    "resolution": 0.4,
+    "length_fit": 0.7187200000000007
+   },
+   "rubric": {
+    "index": 8,
+    "hook_first_2s": 5.0,
+    "stands_alone": 5.0,
+    "emotional_payoff": 8.0,
+    "shareability": 6.0,
+    "loop_potential": 5.0,
+    "policy_safe": 10.0,
+    "reasons": "Opening line 'Stay with me. Next...' feels like a retention prompt from a longer video rather than an organic prayer start.",
+    "hook_line": "When God's answer takes long",
+    "title": "How to Pray When You Are Tired of Waiting"
+   },
+   "final_score": 0.0
+  }
+ ],
+ "chosen": [
+  {
+   "start": 77.121,
+   "end": 128.587,
+   "sentences": [
+    {
+     "segment": "scripture-everlasting",
+     "text": "Hast thou not known?",
+     "start": 77.121,
+     "end": 79.063
+    },
+    {
+     "segment": "scripture-everlasting",
+     "text": "hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary?",
+     "start": 79.363,
+     "end": 89.389
+    },
+    {
+     "segment": "scripture-everlasting",
+     "text": "there is no searching of his understanding.",
+     "start": 89.689,
+     "end": 92.932
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "Lord, you know the effort hidden beneath my ordinary appearance.",
+     "start": 94.532,
+     "end": 99.033
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "You know the interrupted rest, the decisions made quietly, and the concern I carry while answering that everything is fine.",
+     "start": 99.333,
+     "end": 108.635
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "I can speak more plainly with you.",
+     "start": 108.935,
+     "end": 111.516
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "I am tired of holding so much inside.",
+     "start": 111.816,
+     "end": 114.973
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "Give me the wisdom to name what is heavy and the courage to let someone trustworthy know.",
+     "start": 115.273,
+     "end": 121.567
+    },
+    {
+     "segment": "prayer-hidden-load",
+     "text": "I receive this moment as a place to stop pretending that I have endless reserves.",
+     "start": 121.867,
+     "end": 128.587
+    }
+   ],
+   "segments": [
+    "scripture-everlasting",
+    "prayer-hidden-load"
+   ],
+   "text": "Hast thou not known? hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary? there is no searching of his understanding. Lord, you know the effort hidden beneath my ordinary appearance. You know the interrupted rest, the decisions made quietly, and the concern I carry while answering that everything is fine. I can speak more plainly with you. I am tired of holding so much inside. Give me the wisdom to name what is heavy and the courage to let someone trustworthy know. I receive this moment as a place to stop pretending that I have endless reserves.",
+   "reference": "Isaiah 40:28 (KJV)",
+   "measured_score": 0.7222,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.2702702702702703,
+    "scripture": 1.0,
+    "promise": 0.6756756756756757,
+    "resolution": 0.4,
+    "length_fit": 0.5413600000000003
+   },
+   "rubric": {
+    "index": 1,
+    "hook_first_2s": 8.5,
+    "stands_alone": 9.5,
+    "emotional_payoff": 9.5,
+    "shareability": 8.5,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Strong Scripture opening and deeply relatable prayer about hidden exhaustion and honesty with God. Excellent standalone clip.",
+    "hook_line": "Tired of pretending you are fine?",
+    "title": "A Prayer for When You're Tired of Pretending You're Fine"
+   },
+   "final_score": 0.8239,
+   "hook": "Tired of pretending you are fine?",
+   "title": "A Prayer for When You're Tired of Pretending You're Fine"
+  },
+  {
+   "start": 815.176,
+   "end": 865.904,
+   "sentences": [
+    {
+     "segment": "declaration",
+     "text": "I receive your mercy for this morning.",
+     "start": 815.176,
+     "end": 817.992
+    },
+    {
+     "segment": "declaration",
+     "text": "I will be truthful about my needs.",
+     "start": 818.292,
+     "end": 821.023
+    },
+    {
+     "segment": "declaration",
+     "text": "I will welcome wise help.",
+     "start": 821.323,
+     "end": 823.563
+    },
+    {
+     "segment": "declaration",
+     "text": "I will give the next faithful step my attention.",
+     "start": 823.863,
+     "end": 827.212
+    },
+    {
+     "segment": "declaration",
+     "text": "Through Christ, teach me to wait with hope and to walk with love.",
+     "start": 827.512,
+     "end": 832.099
+    },
+    {
+     "segment": "commitment",
+     "text": "Before you begin your next task, write one small action you can take in the next ten minutes.",
+     "start": 833.599,
+     "end": 840.105
+    },
+    {
+     "segment": "commitment",
+     "text": "Make it specific:",
+     "start": 840.405,
+     "end": 842.112
+    },
+    {
+     "segment": "commitment",
+     "text": "gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility.",
+     "start": 842.412,
+     "end": 850.348
+    },
+    {
+     "segment": "commitment",
+     "text": "Choose the action that belongs to your morning.",
+     "start": 850.648,
+     "end": 854.125
+    },
+    {
+     "segment": "commitment",
+     "text": "Beside it, write Isaiah forty, thirty one.",
+     "start": 854.425,
+     "end": 858.201
+    },
+    {
+     "segment": "commitment",
+     "text": "You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+     "start": 858.501,
+     "end": 865.904
+    }
+   ],
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "text": "I receive your mercy for this morning. I will be truthful about my needs. I will welcome wise help. I will give the next faithful step my attention. Through Christ, teach me to wait with hope and to walk with love. Before you begin your next task, write one small action you can take in the next ten minutes. Make it specific: gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility. Choose the action that belongs to your morning. Beside it, write Isaiah forty, thirty one. You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+   "reference": null,
+   "measured_score": 0.7184,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 1.0,
+    "second_person": 0.6956521739130435,
+    "scripture": 0.4,
+    "promise": 0.8695652173913043,
+    "resolution": 0.4,
+    "length_fit": 0.5708800000000019
+   },
+   "rubric": {
+    "index": 2,
+    "hook_first_2s": 7.0,
+    "stands_alone": 8.0,
+    "emotional_payoff": 7.5,
+    "shareability": 6.5,
+    "loop_potential": 6.5,
+    "policy_safe": 10.0,
+    "reasons": "Grounded, action-oriented morning prayer with concrete steps and Scripture reference.",
+    "hook_line": "Take one small step with God",
+    "title": "A Practical Morning Prayer to Start Your Day"
+   },
+   "final_score": 0.7424,
+   "hook": "Take one small step with God",
+   "title": "A Practical Morning Prayer to Start Your Day"
+  },
+  {
+   "start": 410.967,
+   "end": 442.673,
+   "sentences": [
+    {
+     "segment": "prayer-unanswered",
+     "text": "Receive the words I have today.",
+     "start": 410.967,
+     "end": 413.527
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Keep me from drawing a harsh conclusion about your care from the length of my waiting.",
+     "start": 413.827,
+     "end": 420.013
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Lead me toward wise counsel when I am confused.",
+     "start": 420.313,
+     "end": 424.281
+    },
+    {
+     "segment": "prayer-unanswered",
+     "text": "Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me.",
+     "start": 424.581,
+     "end": 432.944
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "Wait on the LORD:",
+     "start": 434.244,
+     "end": 436.036
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "be of good courage, and he shall strengthen thine heart:",
+     "start": 436.336,
+     "end": 440.261
+    },
+    {
+     "segment": "scripture-courage",
+     "text": "wait, I say, on the LORD.",
+     "start": 440.561,
+     "end": 442.673
+    }
+   ],
+   "segments": [
+    "prayer-unanswered",
+    "scripture-courage"
+   ],
+   "text": "Receive the words I have today. Keep me from drawing a harsh conclusion about your care from the length of my waiting. Lead me toward wise counsel when I am confused. Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me. Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.",
+   "reference": "Psalm 27:14 (KJV)",
+   "measured_score": 0.5074,
+   "features": {
+    "opening_short": 1.0,
+    "opening_direct": 0.3,
+    "second_person": 0.136986301369863,
+    "scripture": 1.0,
+    "promise": 0.0,
+    "resolution": 0.4,
+    "length_fit": 0.6682400000000006
+   },
+   "rubric": {
+    "index": 9,
+    "hook_first_2s": 7.5,
+    "stands_alone": 9.0,
+    "emotional_payoff": 9.0,
+    "shareability": 8.0,
+    "loop_potential": 7.5,
+    "policy_safe": 10.0,
+    "reasons": "Concise, potent message addressing the struggle of waiting without judging God's care. Clean opening and ending.",
+    "hook_line": "Don't judge God's heart by waiting",
+    "title": "A Prayer When God Takes Longer Than Expected"
+   },
+   "final_score": 0.713,
+   "hook": "Don't judge God's heart by waiting",
+   "title": "A Prayer When God Takes Longer Than Expected"
+  }
+ ],
+ "selection_mode": "LEGACY",
+ "input_sha256": {
+  "timeline": "adb45bb82c6e6678f92503cec98893d9a82ba5b11b2808e62a2903c95f36309b",
+  "script": "76969ad3bfcf5ca5848989bc11847fae467b6060420d8b79b9cc22e981a3a363"
+ },
+ "structural_counts": {
+  "opening_starts_total": 174,
+  "opening_starts_accepted": 17,
+  "opening_rejections": {
+   "OPENING_OVER_3S": 114,
+   "CONTEXT_OPENER": 7,
+   "CONTINUATION_OPENING_LINE": 8,
+   "DEPENDENT_OPENING_REFERENCE": 12,
+   "EMPTY_OR_INCOMPLETE_OPENING": 16
+  },
+  "window_pairs_total": 78,
+  "window_pairs_accepted": 12,
+  "window_rejections": {
+   "CTA_OR_TRANSITION_SEGMENT": 14,
+   "UNRESOLVED_SEGMENT_END": 47,
+   "PARTIAL_SCRIPTURE": 5
+  }
+ },
+ "reason": null
+}

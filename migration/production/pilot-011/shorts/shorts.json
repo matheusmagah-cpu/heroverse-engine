@@ -1,0 +1,306 @@
+{
+ "version": "shorts-produce-v2-r8",
+ "source_pilot": "pilot-011",
+ "selection_rubric_model": "gemini-3.6-flash",
+ "rejected_r8": [],
+ "shorts": [
+  {
+   "file": "short-00.mp4",
+   "sha256": "84610490a5efeeab363a25cfbd39bc0344cffeb5f940fc5fabb28c419fe97040",
+   "seconds": 51.97,
+   "source_start": 77.121,
+   "source_end": 128.587,
+   "segments": [
+    "scripture-everlasting",
+    "prayer-hidden-load"
+   ],
+   "hook": "Tired of pretending you are fine?",
+   "hook_shown": false,
+   "title": "A Prayer for When You're Tired of Pretending You're Fine",
+   "reference": "Isaiah 40:28 (KJV)",
+   "scenes": [
+    "bg-waiting-spring-steps",
+    "bg-waiting-resting-grove",
+    "bg-waiting-open-horizon"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.8239,
+    "measured_score": 0.7222,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.2702702702702703,
+     "scripture": 1.0,
+     "promise": 0.6756756756756757,
+     "resolution": 0.4,
+     "length_fit": 0.5413600000000003
+    },
+    "rubric": {
+     "index": 1,
+     "hook_first_2s": 8.5,
+     "stands_alone": 9.5,
+     "emotional_payoff": 9.5,
+     "shareability": 8.5,
+     "loop_potential": 7.5,
+     "policy_safe": 10.0,
+     "reasons": "Strong Scripture opening and deeply relatable prayer about hidden exhaustion and honesty with God. Excellent standalone clip.",
+     "hook_line": "Tired of pretending you are fine?",
+     "title": "A Prayer for When You're Tired of Pretending You're Fine"
+    }
+   },
+   "text": "Hast thou not known? hast thou not heard, that the everlasting God, the LORD, the Creator of the ends of the earth, fainteth not, neither is weary? there is no searching of his understanding. Lord, you know the effort hidden beneath my ordinary appearance. You know the interrupted rest, the decisions made quietly, and the concern I carry while answering that everything is fine. I can speak more plainly with you. I am tired of holding so much inside. Give me the wisdom to name what is heavy and the courage to let someone trustworthy know. I receive this moment as a place to stop pretending that I have endless reserves.",
+   "publish": false,
+   "qa_output_sha256": "84610490a5efeeab363a25cfbd39bc0344cffeb5f940fc5fabb28c419fe97040",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-00.mp4",
+    "seconds": 51.97,
+    "lufs": -14.6,
+    "true_peak_dbtp": -2.3,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 4.5,
+    "captions_readable_and_synced": 7.5,
+    "text_clear_of_shorts_ui": 6.5,
+    "picture_quality": 8.5,
+    "edit_rhythm": 4.5,
+    "audio_clarity": 9.0,
+    "stands_alone": 8.5,
+    "ending_and_loop": 5.5,
+    "policy_safe": 10.0,
+    "overall": 6.4,
+    "issues": [
+     "The stated hook 'Tired of pretending you are fine?' does not appear on screen in the first 2 seconds, leading with slow traditional scripture text instead.",
+     "Very slow pacing with each visual lingering for 16-18 seconds without significant motion or cutaways.",
+     "At 00:50-00:52, the final subtitle 'endless reserves.' drops into the lower 15% UI safe zone, loses contrast against the dark grass, and gets obscured."
+    ],
+    "strongest_moment": "00:17-00:30 where the voiceover transitions into an intimate, relatable prayer under the sunlit tree canopy.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "84610490a5efeeab363a25cfbd39bc0344cffeb5f940fc5fabb28c419fe97040"
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "OVERALL_OUTSIDE_OWNER_RANGE"
+    ]
+   }
+  },
+  {
+   "file": "short-01.mp4",
+   "sha256": "92974c52b48d98c4d0aab9f05d3c8581065cb05978c4beb2feffa7b67e9d8d10",
+   "seconds": 51.23,
+   "source_start": 815.176,
+   "source_end": 865.904,
+   "segments": [
+    "declaration",
+    "commitment"
+   ],
+   "hook": "Take one small step with God",
+   "hook_shown": false,
+   "title": "A Practical Morning Prayer to Start Your Day",
+   "reference": null,
+   "scenes": [
+    "bg-waiting-sunlit-pass",
+    "bg-waiting-quiet-summit",
+    "bg-waiting-alpine-lake"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.7424,
+    "measured_score": 0.7184,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 1.0,
+     "second_person": 0.6956521739130435,
+     "scripture": 0.4,
+     "promise": 0.8695652173913043,
+     "resolution": 0.4,
+     "length_fit": 0.5708800000000019
+    },
+    "rubric": {
+     "index": 2,
+     "hook_first_2s": 7.0,
+     "stands_alone": 8.0,
+     "emotional_payoff": 7.5,
+     "shareability": 6.5,
+     "loop_potential": 6.5,
+     "policy_safe": 10.0,
+     "reasons": "Grounded, action-oriented morning prayer with concrete steps and Scripture reference.",
+     "hook_line": "Take one small step with God",
+     "title": "A Practical Morning Prayer to Start Your Day"
+    }
+   },
+   "text": "I receive your mercy for this morning. I will be truthful about my needs. I will welcome wise help. I will give the next faithful step my attention. Through Christ, teach me to wait with hope and to walk with love. Before you begin your next task, write one small action you can take in the next ten minutes. Make it specific: gather the papers for a call, wash what you need for breakfast, or ask someone to share a responsibility. Choose the action that belongs to your morning. Beside it, write Isaiah forty, thirty one. You now have a practical beginning and a Scripture reference to return to as you move into the day.",
+   "publish": false,
+   "qa_output_sha256": "92974c52b48d98c4d0aab9f05d3c8581065cb05978c4beb2feffa7b67e9d8d10",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-01.mp4",
+    "seconds": 51.23,
+    "lufs": -14.7,
+    "true_peak_dbtp": -2.2,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 4,
+    "captions_readable_and_synced": 9,
+    "text_clear_of_shorts_ui": 9,
+    "picture_quality": 8,
+    "edit_rhythm": 5,
+    "audio_clarity": 8.5,
+    "stands_alone": 9,
+    "ending_and_loop": 6,
+    "policy_safe": 10,
+    "overall": 6.5,
+    "issues": [
+     "No bold visual hook or title card in the first 2 seconds to stop viewers from scrolling past.",
+     "Very slow editing rhythm with each static image lingering for approximately 16 to 17 seconds without dynamic camera movement or B-roll variety.",
+     "Ending does not loop smoothly back into the opening sentence."
+    ],
+    "strongest_moment": "00:18 when the narrative shifts from abstract prayer into a concrete, practical prompt ('Before you begin your next task, write one small action you can take in the next ten minutes').",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "92974c52b48d98c4d0aab9f05d3c8581065cb05978c4beb2feffa7b67e9d8d10"
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "OVERALL_OUTSIDE_OWNER_RANGE"
+    ]
+   }
+  },
+  {
+   "file": "short-02.mp4",
+   "sha256": "5fd275eb0fcc2cc695a47a41da123379e17a2c25931eda58f4863eea9ce051d8",
+   "seconds": 32.21,
+   "source_start": 410.967,
+   "source_end": 442.673,
+   "segments": [
+    "prayer-unanswered",
+    "scripture-courage"
+   ],
+   "hook": "Don't judge God's heart by waiting",
+   "hook_shown": false,
+   "title": "A Prayer When God Takes Longer Than Expected",
+   "reference": "Psalm 27:14 (KJV)",
+   "scenes": [
+    "bg-waiting-forest-beams",
+    "bg-waiting-above-clouds"
+   ],
+   "parallax": false,
+   "figure": false,
+   "selection": {
+    "final_score": 0.713,
+    "measured_score": 0.5074,
+    "features": {
+     "opening_short": 1.0,
+     "opening_direct": 0.3,
+     "second_person": 0.136986301369863,
+     "scripture": 1.0,
+     "promise": 0.0,
+     "resolution": 0.4,
+     "length_fit": 0.6682400000000006
+    },
+    "rubric": {
+     "index": 9,
+     "hook_first_2s": 7.5,
+     "stands_alone": 9.0,
+     "emotional_payoff": 9.0,
+     "shareability": 8.0,
+     "loop_potential": 7.5,
+     "policy_safe": 10.0,
+     "reasons": "Concise, potent message addressing the struggle of waiting without judging God's care. Clean opening and ending.",
+     "hook_line": "Don't judge God's heart by waiting",
+     "title": "A Prayer When God Takes Longer Than Expected"
+    }
+   },
+   "text": "Receive the words I have today. Keep me from drawing a harsh conclusion about your care from the length of my waiting. Lead me toward wise counsel when I am confused. Hold me close to the truth I can understand, and help me remain honest about the questions that continue to trouble me. Wait on the LORD: be of good courage, and he shall strengthen thine heart: wait, I say, on the LORD.",
+   "publish": false,
+   "qa_output_sha256": "5fd275eb0fcc2cc695a47a41da123379e17a2c25931eda58f4863eea9ce051d8",
+   "qa": {
+    "file": "/home/runner/work/_temp/work/shorts/short-02.mp4",
+    "seconds": 32.21,
+    "lufs": -14.5,
+    "true_peak_dbtp": -2.2,
+    "checks": {
+     "decode_clean": true,
+     "one_h264_1080x1920": true,
+     "fps_30": true,
+     "one_aac_stereo_48k": true,
+     "duration": true,
+     "loudness": true,
+     "true_peak": true
+    },
+    "status": "PASS"
+   },
+   "review": {
+    "hook_in_first_2s": 4.5,
+    "captions_readable_and_synced": 9.0,
+    "text_clear_of_shorts_ui": 9.0,
+    "picture_quality": 8.5,
+    "edit_rhythm": 5.0,
+    "audio_clarity": 8.5,
+    "stands_alone": 8.5,
+    "ending_and_loop": 7.0,
+    "policy_safe": 10.0,
+    "overall": 6.8,
+    "issues": [
+     "00:00 - The stated on-screen hook ('Don't judge God's heart by waiting') is missing entirely, opening instead on weak generic text 'Receive the words I have today'.",
+     "00:00-00:15 - Visual pacing is excessively slow, holding on a single AI nature image with subtle motion for 16 seconds before the first cut."
+    ],
+    "strongest_moment": "00:23 - The transition into Psalm 27:14 with the eagle soaring over sunset clouds provides an uplifting thematic climax.",
+    "model": "gemini-3.8-flash",
+    "status": "FAIL",
+    "output_sha256": "5fd275eb0fcc2cc695a47a41da123379e17a2c25931eda58f4863eea9ce051d8"
+   },
+   "owner_quality_policy": {
+    "minimum_overall": 9.5,
+    "status": "FAIL",
+    "problems": [
+     "REVIEW_NOT_PASS",
+     "OVERALL_OUTSIDE_OWNER_RANGE"
+    ]
+   }
+  }
+ ],
+ "review_rubric": {
+  "items": [
+   "hook_in_first_2s",
+   "captions_readable_and_synced",
+   "text_clear_of_shorts_ui",
+   "picture_quality",
+   "edit_rhythm",
+   "audio_clarity",
+   "stands_alone",
+   "ending_and_loop",
+   "policy_safe"
+  ],
+  "pass_item": 7,
+  "pass_overall": 8
+ }
+}
