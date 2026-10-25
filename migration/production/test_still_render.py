@@ -185,6 +185,20 @@ class StoryStills(unittest.TestCase):
         share = sum(h["end"] - h["start"] for h in plan if h.get("kind") == "footage") / total
         self.assertGreater(share, 0.6)
 
+    def test_a_repeated_moment_still_never_breaks_the_gap(self):
+        # review of 36ff9b5: the same still in two segments 160 s apart aborted the render (REPEAT_GAP_VIOLATION)
+        total = 900.0
+        script = {"overlay": {"title_image": "t", "title_card_seconds": 2.0}, "backgrounds": ["st-a"],
+                  "footage": [f"clip-{i}" for i in range(24)],
+                  "segments": [{"id": "hook", "text": "x"}, {"id": "chapter-1", "text": "x", "stills": ["st-a"]},
+                               {"id": "chapter-2", "text": "x", "stills": ["st-a"]}]}
+        sents = [{"start": 2.5 + 5.0 * k, "end": 2.5 + 5.0 * k + 4.0, "text": "x"} for k in range(int(total // 5.0))]
+        segs = [{"id": "hook", "start": 0.3, "end": 30.0}, {"id": "chapter-1", "start": 30.0, "end": 190.0},
+                {"id": "chapter-2", "start": 190.0, "end": total}]
+        plan = sr.holds(script, {"sentences": sents, "segments": segs}, total)   # no SystemExit
+        starts = [h["start"] for h in plan if h["image"] == "st-a"]
+        self.assertTrue(all(b - a >= sr.REPEAT_GAP - 1e-6 for a, b in zip(starts, starts[1:])), starts)
+
 
 class SpeechText(unittest.TestCase):
     """E47: the voice spelled "G-O-D" for the KJV "Lord GOD" (pilot-008 review, 17:36)."""

@@ -206,8 +206,12 @@ def story_problems(script, starts, minutes):
         problems.append("TITLE_HAS_DATE (R14: x10 odds of a dead video)")
     if not STORY_TITLE.match(title):
         problems.append("STORY_TITLE_FORMULA (<Story>: <angle> | Genesis N-M Bible Story (KJV))")
+    if not script.get("footage"):
+        problems.append("STORY_NEEDS_FOOTAGE (QA v4: >= 60 % real footage; without it the stills-only path ignores 'stills')")
     backgrounds = set(script.get("backgrounds", []))
     planned = [i for x in segs for i in x.get("stills", [])]
+    if len(set(planned)) != len(planned):   # a moment still shown twice breaks REPEAT_GAP mid-render (E46/E64)
+        problems.append(f"STORY_STILL_REPEATED {sorted({i for i in planned if planned.count(i) > 1})}")
     for i in planned:
         if i not in backgrounds:
             problems.append(f"STILL_NOT_A_BACKGROUND {i}")

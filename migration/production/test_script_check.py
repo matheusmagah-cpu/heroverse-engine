@@ -259,7 +259,7 @@ def story_script(**over):
     segs += [{"id": "reflection", "text": "What does this mean for you today?", "pause_after": 1.0},
              {"id": "prayer-close", "text": "Lord, thank you. Amen.", "pause_after": 1.0},
              {"id": "cta", "text": "The next story is Cain and Abel. Amen.", "pause_after": 1.0}]
-    s = {"archetype": sc.STORY, "segments": segs, "backgrounds": ["st-1", "st-2", "st-3"],
+    s = {"archetype": sc.STORY, "segments": segs, "backgrounds": ["st-1", "st-2", "st-3"], "footage": ["clip-a"],
          "working_title": "Creation, Eden and the Fall: How It All Began | Genesis 1-3 Bible Story (KJV)"}
     s.update(over)
     return s
@@ -312,6 +312,30 @@ class StoryRules(unittest.TestCase):
         segs = self.segs(lambda x: dict(x, stills=many) if x["id"] == "chapter-1" else x)
         out = story_check(story_script(segments=segs, backgrounds=many))
         self.assertTrue(any(p.startswith("STORY_STILL_SHARE_EST") for p in out), out)
+
+    def test_repeated_still_fails_before_the_render(self):
+        # review of 36ff9b5: a still shown twice passed the check and aborted the render with REPEAT_GAP_VIOLATION
+        segs = self.segs(lambda x: dict(x, stills=["st-1"]) if x["id"].startswith("chapter-") else x)
+        self.assertIn("STORY_STILL_REPEATED ['st-1']", story_check(story_script(segments=segs)))
+
+    def test_story_without_footage_fails(self):
+        # review of 36ff9b5: without footage the stills-only path ignores 'stills' and QA v4 fails after the render
+        out = story_check(story_script(footage=[]))
+        self.assertTrue(any(p.startswith("STORY_NEEDS_FOOTAGE") for p in out), out)
+
+    def test_check_routes_a_story_pilot_to_the_story_rules(self):
+        # review of 36ff9b5: check() itself must skip the prayer-only rules and run the story ones
+        def to_story(s, d):
+            s.update(story_script(footage=[]))
+        with tempfile.TemporaryDirectory() as t:
+            problems = sc.check(make(t, to_story))[0]
+        prayer_only = ("FIRST_PRAYER_LATE", "PAYOFF_OR_CTA_MISSING", "CTA_BEFORE_PAYOFF", "HOOK_NO_PRAYER_PROMISE",
+                       "PRAYER_REQUEST_INVITE_MISSING", "TITLE_TAIL_NOT_A_SEARCH_PHRASE")
+        self.assertFalse([p for p in problems if p.startswith(prayer_only)], problems)
+        self.assertTrue(any(p.startswith("STORY_NEEDS_FOOTAGE") for p in problems), problems)
+        with tempfile.TemporaryDirectory() as t:   # and a prayer pilot still gets them
+            prayer = sc.check(make(t, lambda s, d: s["segments"].__setitem__(slice(None), [x for x in s["segments"] if not x["id"].startswith("prayer")])))[0]
+        self.assertTrue(any(p.startswith("FIRST_PRAYER_LATE") for p in prayer), prayer)
 
     def test_prayer_rules_do_not_apply_to_a_story(self):
         out = story_check(story_script())
