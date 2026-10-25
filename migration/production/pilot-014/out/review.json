@@ -2,7 +2,59 @@
  "version": "long-review-v2",
  "pilot_id": "pilot-014",
  "output_sha256": "f4567d73e791e83b367a416b05344664eacb3665faf134759321f198c2450e1f",
- "status": "AWAITING_REVIEW",
- "error": "CLAUDE_REVIEW_MISSING",
- "checked_at": "2026-10-25T07:28:39Z"
+ "status": "PASS",
+ "scorecard_hard": {
+  "minutes": {
+   "value": 15.62,
+   "band": [
+    10.02,
+    50.0
+   ],
+   "pass": true
+  },
+  "scripture_per_10_min": {
+   "value": 8.32,
+   "band": [
+    4,
+    99
+   ],
+   "pass": true
+  }
+ },
+ "scorecard_reported": {},
+ "watched_review": {
+  "opening_and_promise": 9.5,
+  "picture_quality": 9.5,
+  "figure_and_background_integrity": 9.0,
+  "captions_readable_and_synced": 9.5,
+  "audio_clarity_and_mix": 9.5,
+  "pacing_and_visual_variety": 9.5,
+  "scripture_on_screen": 9.5,
+  "policy_safe": 9.5,
+  "overall": 9.5,
+  "issues": [
+   "~10:00 (review sheet frame 11, aerial tulip field): tiny farm buildings and a tree line sit on the far horizon; with the cultivated rows they are the only man-made shapes in 15:37 of morning nature (figure_and_background_integrity 9.0)",
+   "picture: footage from the 117 clips seen on the preview reviews (E74/E78); no person, text, brand or modern object in the 16 review frames or the 47 contact-sheet frames; every Scripture card (Joshua 24:15, Psalm 127:1, Proverbs 14:26, Psalm 103:17-18, Psalm 133:1, Deuteronomy 6:6-7, Isaiah 54:13, Ephesians 4:2-3, Philippians 1:3) sits on mid or dark footage and reads",
+   "package: chapters are coarse (0:00, 13:00, 13:56, 14:26) because the script names none; valid but thin for a 15-minute prayer (same as 011)",
+   "audio from QA measures: -15.6 LUFS, LRA 3.1, -2.8 dBTP, speech 0.869, music 0.402, WER 0.029, first word 0.08 s: every band met (9.5)",
+   "signal scan PASS: no black picture, no digital silence, no frozen picture (937.4 s)",
+   "thumbnail PASS (R16): 'MORNING PRAYER / PRAY OVER YOUR FAMILY' over the autumn river, readable at small size"
+  ],
+  "strongest_moment": "0:00-0:08: 'This morning, before your family's day begins, cover everyone you love in prayer.' over the sunrise, then the roadmap over moving clouds",
+  "model": "claude-session-reviewer",
+  "reviewed_at": "2026-10-25T08:25:00Z",
+  "evidence": [
+   "inspection/review-sheet.jpg",
+   "inspection/opening-sheet.jpg",
+   "inspection/pilot-contact-sheet.jpg",
+   "inspection/thumbnail.jpg",
+   "out/thumbnail_check.json",
+   "out/qa.json",
+   "out/scan.json",
+   "out/package.json",
+   "out/manifest.json",
+   "script.json"
+  ],
+  "status": "PASS"
+ }
 }
