@@ -22,7 +22,7 @@ scripts, code and fixes; the GitHub workflows do the heavy work. Credentials liv
 | QA + package | `production/qa_pilot.py` (frozen criteria), `package_pilot.py` (title, description with footage credits, chapters, thumbnail) |
 | Review + approval | `approve.yml` → `long_review.py`, `three_stage.py`, `publish/prepublish_gate.py`, `owner_quality_policy.py` |
 | Publish | `publish.yml` (long), `shorts.yml` / `shorts-review.yml` / `publish-shorts.yml` (Shorts), `first-comment.yml`, `description-refresh.yml` |
-| TikTok mirror | `tiktok.yml` (13:41 and 23:41 UTC) → `publish/tiktok_publish.py`: every Bible Short already on YouTube, same file, one per run, AI label, `publish/tiktok_ledger.json`; `TIKTOK_MODE` inbox (draft in the app) until TikTok audits the app, then direct; one-time `tiktok-auth.yml` |
+| TikTok mirror | `tiktok.yml` (13:41 and 23:41 UTC; `discover` to check the channel) → `publish/tiktok_publish.py`: every Bible Short already on YouTube goes to TikTok through Buffer's free plan (GraphQL API, `BUFFER_API_KEY`, automatic publishing), same file by its public release URL (sha256 checked), caption pointing to the long on YouTube and stating the AI visuals and voice; one per run; `publish/tiktok_ledger.json` |
 | Keep it moving | `heartbeat.yml` dispatches the scheduled work; `reconcile.yml` retries errors; `render_queue.py stale` reports passed slots |
 | Voice A/B | `voice-sample.yml` → `production/voice/chatterbox_sample.py` (Chatterbox, MIT, cloned from our own Kokoro narration; samples as a run artifact, nothing published) |
 | Measure | `goal-report.yml` (daily YPP report in `evidence/daily-report/`), `market-panel.yml`, vidIQ research (≤ 10 calls/day, ledger in `evidence/vidiq/`) |

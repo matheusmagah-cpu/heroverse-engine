@@ -1,9 +1,16 @@
-name: HeroVerse TikTok mirror (Bible Shorts already on YouTube, free Content Posting API)
+name: HeroVerse TikTok mirror (Bible Shorts already on YouTube, through Buffer's free plan)
 on:
   schedule:
     - cron: '41 13 * * *'   # after the 13:30 UTC Short slot
     - cron: '41 23 * * *'   # after the 23:30 UTC Short slot
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "post = mirror the next Short; discover = only find the Buffer TikTok channel and list what is pending"
+        required: true
+        default: post
+        type: choice
+        options: [post, discover]
 permissions:
   contents: write
 concurrency:
@@ -13,45 +20,44 @@ jobs:
   mirror:
     if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 20
     env:
       GH_TOKEN: ${{ github.token }}
       TAG: v0.0.0-cloud-assets-20261013
-      TIKTOK_MODE: ${{ vars.TIKTOK_MODE || 'inbox' }}
-      TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
-      TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
-      TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
-      GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
+      MODE: ${{ inputs.mode || 'post' }}
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Publication hold and configuration
         id: cfg
         run: |
           if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
-          if [ -z "$TIKTOK_CLIENT_KEY" ] || [ -z "$TIKTOK_CLIENT_SECRET" ] || [ -z "$TIKTOK_REFRESH_TOKEN" ] || [ -z "$GH_SECRETS_PAT" ]; then
-            echo "TIKTOK_NOT_CONFIGURED (owner: developer app + tiktok-auth.yml)"; echo "skip=1" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Fetch the next Short and verify its hash
-        if: steps.cfg.outputs.skip != '1'
+          case "$MODE" in post|discover) ;; *) echo INVALID_MODE; exit 1;; esac
+          if [ -z "$BUFFER_API_KEY" ]; then echo "BUFFER_NOT_CONFIGURED"; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
+      - name: The public file Buffer will fetch is the approved one
+        if: steps.cfg.outputs.skip != '1' && env.MODE == 'post'
         run: |
-          mkdir -p "$RUNNER_TEMP/videos"
           python3 -I -B migration/publish/tiktok_publish.py pending migration/publish/ledger.json \
             migration/publish/tiktok_ledger.json migration/production/bible/episodes > "$RUNNER_TEMP/pending.txt"
-          read -r key asset < "$RUNNER_TEMP/pending.txt" || { echo "NOTHING_TO_FETCH"; exit 0; }
-          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -D "$RUNNER_TEMP/videos"
+          read -r key asset < "$RUNNER_TEMP/pending.txt" || { echo "NOTHING_TO_CHECK"; exit 0; }
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "$asset" -D "$RUNNER_TEMP"
           sha="${asset##*-sha256-}"; sha="${sha%.mp4}"
-          echo "$sha  $RUNNER_TEMP/videos/$asset" | sha256sum -c -
-      - name: Post to TikTok and record
+          echo "$sha  $RUNNER_TEMP/$asset" | sha256sum -c -
+      - name: Send to TikTok through Buffer and record
         if: steps.cfg.outputs.skip != '1'
         run: |
-          python3 -I -B migration/publish/tiktok_publish.py post migration/publish/ledger.json \
-            migration/publish/tiktok_ledger.json migration/production/bible/episodes "$RUNNER_TEMP/videos"
+          python3 -I -B migration/publish/tiktok_publish.py "$MODE" migration/publish/ledger.json \
+            migration/publish/tiktok_ledger.json migration/production/bible/episodes
       - name: Commit the TikTok ledger
-        if: always() && steps.cfg.outputs.skip != '1'
+        if: always() && steps.cfg.outputs.skip != '1' && env.MODE == 'post'
         run: |
           [ -z "$(git status --porcelain migration/publish/tiktok_ledger.json)" ] && exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add migration/publish/tiktok_ledger.json
           git commit -q -m "TikTok mirror: record (run $GITHUB_RUN_ID)"
-          git pull --rebase -q origin main && git push -q origin HEAD:main
+          for i in 1 2 3 4 5; do   # the ledger is what stops a second post: it must land
+            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          echo "TIKTOK_LEDGER_NOT_PUSHED (check Buffer before the next run)"; exit 1
