@@ -1,0 +1,67 @@
+{
+ "version": "pilot-images-v2",
+ "pilot_id": "characters",
+ "style": "photorealistic cinematic film still, ancient world, natural soft light, sharp focus on the face, film grain, no text, no signature, no watermark, no lettering",
+ "negative": "text, letters, watermark, logo, cartoon, modern clothing, modern objects, deformed hands, extra fingers, distorted face",
+ "steps": 6,
+ "guidance": 1.5,
+ "width": 1024,
+ "height": 1024,
+ "reused": {},
+ "images": [
+  {
+   "id": "ch-adam-front",
+   "character": "adam",
+   "prompt": "character reference portrait, front view, head and shoulders, calm expression, looking at the camera: a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, plain softly lit warm dark background",
+   "seed": 7101
+  },
+  {
+   "id": "ch-adam-three-quarter",
+   "character": "adam",
+   "prompt": "character reference portrait, three-quarter view, head and shoulders: a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, plain softly lit warm dark background",
+   "seed": 7101
+  },
+  {
+   "id": "ch-adam-full",
+   "character": "adam",
+   "prompt": "character reference, full figure standing, front view: a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, plain softly lit warm dark background",
+   "seed": 7101
+  },
+  {
+   "id": "ch-eve-front",
+   "character": "eve",
+   "prompt": "character reference portrait, front view, head and shoulders, calm expression, looking at the camera: a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, plain softly lit warm dark background",
+   "seed": 7201
+  },
+  {
+   "id": "ch-eve-three-quarter",
+   "character": "eve",
+   "prompt": "character reference portrait, three-quarter view, head and shoulders: a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, plain softly lit warm dark background",
+   "seed": 7201
+  },
+  {
+   "id": "ch-eve-full",
+   "character": "eve",
+   "prompt": "character reference, full figure standing, front view: a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, plain softly lit warm dark background",
+   "seed": 7201
+  },
+  {
+   "id": "ch-serpent-front",
+   "character": "serpent",
+   "prompt": "character reference, close-up of the head, front view: a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, moving low through dust and dry grass, plain softly lit warm dark background",
+   "seed": 7301
+  },
+  {
+   "id": "ch-serpent-three-quarter",
+   "character": "serpent",
+   "prompt": "character reference, three-quarter view of the head and upper body: a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, moving low through dust and dry grass, plain softly lit warm dark background",
+   "seed": 7301
+  },
+  {
+   "id": "ch-serpent-full",
+   "character": "serpent",
+   "prompt": "character reference, the whole serpent coiled on a branch, side view: a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, moving low through dust and dry grass, plain softly lit warm dark background",
+   "seed": 7301
+  }
+ ]
+}

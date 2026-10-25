@@ -134,7 +134,7 @@ class PavoClient:
             tags = row.get("tags")
             free = isinstance(tags, list) and any(t == "free" or
                    (isinstance(t, dict) and t.get("code") == "free") for t in tags)
-            result.append({"code": code, "name": self._text(row.get("alias", row.get("model_alias"))),
+            result.append({"code": code, "name": self._text(row.get("name", row.get("alias", row.get("model_alias")))),
                            "free_label": free,
                            "verified_price_credits": None})
         if rows and not result:

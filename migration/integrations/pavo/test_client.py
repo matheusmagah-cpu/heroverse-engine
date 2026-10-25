@@ -77,6 +77,10 @@ class Boundaries(unittest.TestCase):
         self.assertEqual(result["models"][0]["code"], "agnes-video-new-flash")
         self.assertTrue(result["models"][0]["free_label"])
 
+    def test_current_catalog_name_field_is_preserved(self):
+        fake = FakeOpener([{"code": "agnes-video-new-flash", "name": "Agnes Video 2.5 Flash"}])
+        self.assertEqual(PavoClient("", fake).models()["models"][0]["name"], "Agnes Video 2.5 Flash")
+
     def test_no_arbitrary_url_purchase_or_generation_route(self):
         fake = FakeOpener()
         client = PavoClient("synthetic-credential", fake)

@@ -1,5 +1,9 @@
 # Pavo MCP preparation: manual review, 2026-10-25
 
+Historical preparation snapshot, before the owner authorized the account connection and before video
+generation was implemented. Later validation is recorded in `migration/integrations/pavo/README.md`
+and the subsequent Pavo review reports. The pending items below describe that earlier snapshot.
+
 Scope: `.mcp.json`, `.github/workflows/pavo-mcp.yml`, `migration/integrations/pavo/` and the operations entry.
 This is a manual code review, not a verified-security-sweep or pr-review-toolkit report. Those plugins are
 not available in this execution environment; their required pre-merge reviews remain pending.

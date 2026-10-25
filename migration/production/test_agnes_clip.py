@@ -44,6 +44,15 @@ class Agnes(unittest.TestCase):
         with self.assertRaises(SystemExit):
             ac.create("x", "sk", first_frame="https://example.com/any.png", call=call, sleep=lambda s: None)
 
+    def test_reference_mode_sends_only_our_own_character_images(self):
+        sent = []
+        call = lambda m, u, k, b=None: (sent.append(b), {"_http": 200, "data": {"video_id": "v3"}})[1]
+        refs = [ac.OWN_FRAMES + "v0.0.0-cloud-assets-20261013/characters-img-ch-eve-front-sha256-x.png"]
+        ac.create("Eve walks", "sk", references=refs, call=call, sleep=lambda s: None)
+        self.assertEqual((sent[0]["mode"], sent[0]["images"]), ("reference", refs))
+        with self.assertRaises(SystemExit):
+            ac.create("x", "sk", references=["https://example.com/eve.png"], call=call, sleep=lambda s: None)
+
 
 if __name__ == "__main__":
     unittest.main()

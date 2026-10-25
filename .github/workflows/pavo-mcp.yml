@@ -15,7 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Unit tests (no credentials, no upstream calls)
-        run: python3 -I -B migration/integrations/pavo/test_client.py
+        run: |
+          python3 -I -B migration/integrations/pavo/test_client.py
+          python3 -I -B migration/integrations/pavo/test_video.py
       - name: MCP transport smoke test (no upstream calls)
         run: |
           python3 -m venv "$RUNNER_TEMP/pavo-venv"

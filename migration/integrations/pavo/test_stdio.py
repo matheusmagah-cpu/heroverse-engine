@@ -17,8 +17,12 @@ class Stdio(unittest.TestCase):
             async with Client(params) as session:
                 listed = await session.list_tools()
                 self.assertEqual({t.name for t in listed.tools},
-                                 {"pavo_status", "pavo_account", "pavo_models", "pavo_prepare_video"})
-                self.assertTrue(all(t.annotations.read_only_hint for t in listed.tools))
+                                 {"pavo_status", "pavo_account", "pavo_models", "pavo_prepare_video",
+                                  "pavo_quote_video", "pavo_generate_video", "pavo_job"})
+                for tool in listed.tools:
+                    self.assertEqual(tool.annotations.read_only_hint, tool.name != "pavo_generate_video")
+                generator = next(t for t in listed.tools if t.name == "pavo_generate_video")
+                self.assertFalse(generator.annotations.idempotent_hint)
                 status = await session.call_tool("pavo_status", {})
                 self.assertFalse(status.is_error)
                 status_data = json.loads(status.content[0].text)
@@ -27,6 +31,9 @@ class Stdio(unittest.TestCase):
                 account = await session.call_tool("pavo_account", {})
                 self.assertTrue(account.is_error)
                 self.assertIn("PAVO_CREDENTIAL_REQUIRED", account.content[0].text)
+                quote = await session.call_tool("pavo_quote_video", {})
+                self.assertTrue(quote.is_error)
+                self.assertIn("PAVO_CREDENTIAL_REQUIRED", quote.content[0].text)
                 brief = await session.call_tool("pavo_prepare_video", {"prompt": "Sunlight over a river."})
                 brief_data = json.loads(brief.content[0].text)
                 self.assertTrue(brief_data["prepared"])

@@ -27,8 +27,12 @@ free access, nor an atomic provider-side price lock.
 
 A submission timeout returns `status: unknown` with the original `conversation_id` and
 `retry_submission: false`. Call `pavo_job` for that ID. Never repeat a generation just because
-acknowledgement was lost. A finished conversation without verified media is `incomplete`, not success.
-Only HTTPS MP4 media on the observed Pavo CDN, without query credentials, is returned.
+acknowledgement was lost. A socket watchdog cancels stream-body reads after 30 seconds, including
+incomplete HTTP chunk metadata. Connection setup uses a 15-second socket timeout; there is no
+single deadline for the full quote/create/stream operation. A finished conversation without an
+accepted media URL is `incomplete`.
+Only HTTPS `.mp4` URLs on the observed Pavo CDN, without query credentials, are returned.
+The adapter does not fetch or validate the media content.
 MCP account/media responses are private; do not copy them into public logs or receipts.
 
 ## Credentials and running
