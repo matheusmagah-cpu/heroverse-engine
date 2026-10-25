@@ -1390,6 +1390,7 @@
    "local_imports": [],
    "called_by_workflows": [],
    "imported_by": [
+    "migration/production/footage/footage.py",
     "migration/production/shorts_produce.py",
     "migration/production/still_render.py",
     "migration/production/test_cinematic.py",
@@ -1414,7 +1415,9 @@
   "migration/production/footage/footage.py": {
    "purpose": "Licensed real footage for the cinematic picture (owner, 2026-10-23: \"no static images, real cinematic animation\").",
    "dir": "migration/production/footage",
-   "local_imports": [],
+   "local_imports": [
+    "migration/production/cinematic.py"
+   ],
    "called_by_workflows": [
     "footage.yml"
    ],

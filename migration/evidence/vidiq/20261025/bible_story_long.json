@@ -1,0 +1,102 @@
+{
+ "date": "2026-10-25",
+ "source": "vidiq_outliers long (threeMonths, Genesis stories) and short (thisMonth); vidiq_get_videos_by_ids; vidiq_video_transcript x2",
+ "winners": [
+  {
+   "video_id": "Xm3Y9Fns0T8",
+   "channel_id": "UCqB0pz-E59VDFcLI0HONFFw",
+   "channel": "Bible Stories",
+   "title": "Adam and Eve: The Beginning of Humanity | Garden of Eden & The Fall | Genesis Bible Story #jesus",
+   "duration_s": 857,
+   "views": 85655,
+   "outlier_score": 589.4,
+   "scripture": "Genesis 2-3"
+  },
+  {
+   "video_id": "FaYEXkK6RsA",
+   "channel_id": "UCUrlXR8_1DnJC5i2Z8f-oZQ",
+   "channel": "Bible Stories TV 247",
+   "title": "NOAH AND THE GREAT FLOOD | The Full Bible Story of Noah's Ark | Genesis 6–9",
+   "duration_s": 1674,
+   "views": 274039,
+   "outlier_score": 211.6,
+   "scripture": "Genesis 6-9 (KJV)"
+  },
+  {
+   "video_id": "lkILbdmOqS8",
+   "channel_id": "UCIvXfevsxa1kguSTldyC3_w",
+   "channel": "Bible Wonders",
+   "title": "Cain and Abel: How Jealousy Led to the First Murder | Genesis 4 Bible Story",
+   "duration_s": 886,
+   "views": 89732,
+   "outlier_score": 46.3,
+   "scripture": "Genesis 4"
+  },
+  {
+   "video_id": "VPvHkwObUOk",
+   "channel_id": "UCAlR-O7MM3JZEsqUc2gbd-A",
+   "channel": "OmaiOmo Studio",
+   "title": "The Day a Great Flood Destroyed the World | Noah’s Ark",
+   "duration_s": 643,
+   "views": 18631,
+   "outlier_score": 106.8,
+   "scripture": "Genesis 6-9"
+  },
+  {
+   "video_id": "id7jAyYqJD0",
+   "channel_id": "UCGYqCeck8k4Flw9QzauvqSg",
+   "channel": "Hope Bible stories",
+   "title": "The Outcast Who Became a Mighty Warrior | Old Testament Bible Movie ( 2026 )",
+   "duration_s": 970,
+   "views": 137485,
+   "outlier_score": 96.9,
+   "scripture": "Judges 10-12"
+  },
+  {
+   "video_id": "E7yN2c5AWNw",
+   "channel_id": "UCkdquD50tjgNjy9pA-xP1mQ",
+   "channel": "Echoes of Faith",
+   "title": "Shadrach, Meshach and Abednego: Inside the Fiery Furnace",
+   "duration_s": 2796,
+   "views": 782135,
+   "outlier_score": 576.4,
+   "scripture": "Daniel 3"
+  },
+  {
+   "video_id": "kKriMIcCbGY",
+   "channel_id": "UCovdgFGl0p8Cav9ACn0yqQQ",
+   "channel": "Bible Story Films",
+   "title": "Adam and Eve: The Full Story | Creation, Garden of Eden & The Fall",
+   "duration_s": 1352,
+   "views": 173785,
+   "outlier_score": 8.4,
+   "scripture": "Genesis 1-3"
+  }
+ ],
+ "transcript_counts": {
+  "lkILbdmOqS8": {
+   "narrator": false,
+   "form": "dramatized dialogue between AI-voiced characters, paraphrased KJV lines (\"sin is crouching at the door\", \"Am I my brother's keeper?\")",
+   "first_spoken_s": 2,
+   "moral_close_s": 866,
+   "approx_words": 2050,
+   "approx_wpm": 139
+  },
+  "Xm3Y9Fns0T8": {
+   "captions": "only an end card (subscribe, next story); no spoken-narration captions available",
+   "narration_counted": false
+  }
+ },
+ "package": {
+  "title_shape": "<Story name>: <human angle> | Genesis N Bible Story (5 of 7 name the story first; 4 of 7 carry the chapter reference)",
+  "description": "story summary, a bullet list of beats, a Bible reference line (2 of 7 say KJV), a subscribe/share CTA, 'Coming next' (1 of 7), an AI disclaimer (3 of 7), 3-20 hashtags",
+  "ai_labeled": "5 of 7 carry YouTube's AI label",
+  "duration_s": {
+   "min": 643,
+   "max": 2796,
+   "single_story": true
+  }
+ },
+ "shorts_note": "Short outliers this month are mostly off-structure (worship clips, memes) or single-story retellings 1-3 min (Daniel, Jonah, Red Sea, Jericho); not counted here",
+ "weak_contrasts": "none found yet (outliers return only over-performers)"
+}

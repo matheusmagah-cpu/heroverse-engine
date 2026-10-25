@@ -1,0 +1,58 @@
+{
+ "version": "structure-v1",
+ "id": "bible-story-long",
+ "line": "English KJV Bible story, one story per long video, cinematic and narrated (the channel's series, SERIES.md)",
+ "status": "candidate",
+ "validation": {
+  "rule": "SYSTEM.md 1.5",
+  "winners": 7,
+  "channels": 7,
+  "max_channel_share": "1/7",
+  "weak_contrasts": 0,
+  "evidence": "evidence/vidiq/20261025/bible_story_long.json",
+  "missing": [
+   "3 weak contrasts of the same shape",
+   "video_watch audits with AUDIT_PROMPT (drivers counted, not inferred)",
+   "a separating driver between winners and weak"
+  ]
+ },
+ "attributes": {
+  "one_story_per_video": {
+   "values": "7/7 tell one story or one chapter range",
+   "label": "shape"
+  },
+  "length_min": {
+   "values": [
+    14.3,
+    27.9,
+    14.8,
+    10.7,
+    16.2,
+    46.6,
+    22.5
+   ],
+   "label": "shape (7/7 >= 10.7 min; SERIES.md plans 10-15 min compilations of 6 Shorts: a hypothesis to test, not a match)"
+  },
+  "title": {
+   "values": "story name first + human angle + 'Genesis N Bible Story'",
+   "label": "candidate driver"
+  },
+  "scripture_reference_in_description": {
+   "values": "5/7",
+   "label": "hygiene"
+  },
+  "ai_visuals_disclosed": {
+   "values": "5/7 AI-labeled",
+   "label": "hygiene (YouTube altered-content disclosure)"
+  },
+  "dialogue_vs_narration": {
+   "values": "1 counted transcript is dramatized dialogue; others not counted",
+   "label": "free until counted"
+  }
+ },
+ "conflict_check": {
+  "language_and_line": "same (English, KJV, Bible stories)",
+  "policy": "KJV public domain; our narration and footage original or licensed; AI visuals disclosed",
+  "coherence": "is the series of SERIES.md; the long video becomes one story, not only a compilation, if validated"
+ }
+}

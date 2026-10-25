@@ -661,6 +661,54 @@
    "credits": 0,
    "purpose": "subscriber count 280",
    "saved_to": "strategy/DECISIONS.md"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "account",
+   "tool": "vidiq_balance",
+   "credits": 0,
+   "purpose": "balance 3,811 before mining",
+   "saved_to": "evidence/vidiq/20261025/bible_story_long.json"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "short outliers: Bible story retold (thisMonth)",
+   "saved_to": "evidence/vidiq/20261025/bible_story_long.json"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "research",
+   "tool": "vidiq_outliers",
+   "credits": 5,
+   "purpose": "long outliers: Genesis stories (threeMonths)",
+   "saved_to": "evidence/vidiq/20261025/bible_story_long.json"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "research",
+   "tool": "vidiq_video_transcript",
+   "credits": 5,
+   "purpose": "counts: Xm3Y9Fns0T8",
+   "saved_to": "evidence/vidiq/20261025/bible_story_long.json"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "research",
+   "tool": "vidiq_video_transcript",
+   "credits": 5,
+   "purpose": "counts: lkILbdmOqS8",
+   "saved_to": "evidence/vidiq/20261025/bible_story_long.json"
+  },
+  {
+   "date": "2026-10-25",
+   "kind": "research",
+   "tool": "vidiq_get_videos_by_ids",
+   "credits": 5,
+   "purpose": "publication package of 8 winners",
+   "saved_to": "evidence/vidiq/20261025/bible_story_long.json"
   }
  ]
 }
