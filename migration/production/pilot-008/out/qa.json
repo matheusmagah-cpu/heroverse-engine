@@ -1,7 +1,7 @@
 {
  "version": "pilot-qa-v1",
  "pilot_id": "pilot-008",
- "output_sha256": "0b9eb80d53f591b30bd8d8db493e543af0c5a2ced71e43abc9d7ba81ebf7142f",
+ "output_sha256": "a8bda8b5fb38f8187d48d7a404786e5b2e73a882581b6107f6bfb0c5274f9458",
  "status": "PASS",
  "checks": {
   "full_decode_without_errors": true,
@@ -38,42 +38,42 @@
  },
  "criteria_version": "pilot-qa-criteria-v4",
  "measurements": {
-  "duration_seconds": 964.71,
+  "duration_seconds": 964.43,
   "loudness": {
    "integrated_lufs": -15.6,
    "loudness_range_lu": 2.9,
-   "true_peak_dbtp": -2.8
+   "true_peak_dbtp": -2.6
   },
-  "speech_presence": 0.863,
-  "music_presence": 0.398,
-  "wer_vs_script": 0.0327,
-  "accepted_words_per_minute": 129.5,
+  "speech_presence": 0.862,
+  "music_presence": 0.395,
+  "wer_vs_script": 0.036,
+  "accepted_words_per_minute": 129.3,
   "caption_lines": 455,
   "holds": 175,
   "first_word_seconds": 0.11,
   "editing": {
-   "picture_changes": 406,
-   "picture_changes_per_minute": 25.25,
-   "median_shot_seconds": 1.833,
-   "longest_shot_seconds": 13.3,
-   "motion_median_top_decile_diff": 1.925
+   "picture_changes": 477,
+   "picture_changes_per_minute": 29.68,
+   "median_shot_seconds": 1.633,
+   "longest_shot_seconds": 11.8,
+   "motion_median_top_decile_diff": 1.756
   },
   "colour": {
-   "mean_brightness": 0.1071,
-   "brightness_std_over_time": 0.0543,
-   "mean_saturation": 0.4687,
-   "saturation_std_over_time": 0.2066
+   "mean_brightness": 0.1109,
+   "brightness_std_over_time": 0.0553,
+   "mean_saturation": 0.4775,
+   "saturation_std_over_time": 0.2152
   },
   "rhythm": {
-   "audio_onsets": 1475,
-   "audio_onsets_per_minute": 91.74,
+   "audio_onsets": 1485,
+   "audio_onsets_per_minute": 92.39,
    "tempo": {
-    "bpm": 187.5,
-    "confidence": 0.008
+    "bpm": 91.16,
+    "confidence": 0.009
    }
   }
  },
- "transcript_head": "Before you sleep tonight, let your shepherd carry what you could not finish. Pray Psalm 23 with me now. will walk through Psalm 23 line by line, praying over your needs, your regrets, your grief, and tomorrow. Then gentle readings will carry you towards sleep. Perhaps you have reached your pillow with a conversation still unfinished, or a task still turning in your mind. You can bring that unfinis",
+ "transcript_head": "Before you sleep tonight, let your shepherd carry what you could not finish. Pray Psalm 23 with me now. will walk through Psalm 23 line by line, praying over your needs, your regrets, your grief tomorrow. Then gentle readings will carry you towards sleep. Perhaps you have reached your pillow with a conversation still unfinished, or a task still turning in your mind. You can bring that unfinished d",
  "criteria_sha256": "36f2d648d2f37f44781d4ccbee0cd775fd01a5010357cc3bb3478daaafe86b11",
  "human_review": "PENDING (D-076 calibration by sampling)",
  "upload_performed": false,
