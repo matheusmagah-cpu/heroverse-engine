@@ -1,0 +1,524 @@
+{
+ "version": "pilot-script-v3",
+ "pilot_id": "pilot-015",
+ "archetype": "bible-story-long",
+ "spec": "migration/production/bible/SERIES.md#one-format-two-lengths-the-shorts-lead-to-the-long-owner-2026-10-25",
+ "format_note": "Bible series arc 1 (Shorts Genesis 1-4): the whole story of Genesis 1-3 in one long. Cold open on the arc's peak (Genesis 3:24), roadmap, one chapter per Short (chapter names = the Shorts' titles), re-hooks under 3.5 min, reflection, closing prayer, next story (Cain and Abel). Frozen QA v4, footage >= 60 %, stills only at the story moments.",
+ "working_title": "Creation, Eden and the Fall: The First Story of the Bible | Genesis 1-3 Bible Story (KJV)",
+ "promise": "Hear the first story of the Bible from the KJV, from the first words of creation to the gate of Eden, and what it means for you.",
+ "angle": "Story first: Genesis 1-3 read from the KJV with plain connecting narration; the serpent's question, God's question 'where art thou', and the first promise (Genesis 3:15).",
+ "authorship": "Original English narration written for HeroVerse by Claude (Anthropic AI assistant), 2026-10-25. Scripture quotations are verbatim public-domain KJV.",
+ "voice": {
+  "engine": "Kokoro v1.0 (preserved, hash-pinned)",
+  "voice_id": "am_michael",
+  "speed": 0.85
+ },
+ "segments": [
+  {
+   "id": "hook",
+   "text": "Before you hear how it ended, see how it began. One garden, one tree, one choice that reaches you.",
+   "pause_after": 0.6,
+   "chapter": "The gate at the east of Eden"
+  },
+  {
+   "id": "peak",
+   "text": "It ends at a gate. So he drove out the man; and he placed at the east of the garden of Eden Cherubims, and a flaming sword which turned every way, to keep the way of the tree of life.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:24 (KJV)",
+   "stills": [
+    "st-gate-sword"
+   ]
+  },
+  {
+   "id": "roadmap",
+   "text": "Today you will hear the whole story from the first words of the Bible: how God made the world, how he formed the first man and woman, the question that broke their trust, and why that gate was closed.",
+   "pause_after": 0.8
+  },
+  {
+   "id": "rehook-1",
+   "text": "It starts in total darkness, with no light, no land and no life. Then God speaks.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "chapter-1",
+   "text": "Here is how the Bible opens, in the words of the King James Version.",
+   "pause_after": 0.6,
+   "chapter": "Before there was light, God spoke"
+  },
+  {
+   "id": "c1-light",
+   "text": "In the beginning God created the heaven and the earth. And the earth was without form and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters. And God said, Let there be light: and there was light.",
+   "pause_after": 0.7,
+   "reference": "Genesis 1:1-3 (KJV)"
+  },
+  {
+   "id": "c1-day",
+   "text": "Light is the first thing God makes, and he names it. And God saw the light, that it was good: and God divided the light from the darkness. And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.",
+   "pause_after": 0.7,
+   "reference": "Genesis 1:4-5 (KJV)"
+  },
+  {
+   "id": "c1-note",
+   "text": "Notice the rhythm. God speaks, it happens, and he calls it good. Every day of creation follows that pattern, and it tells you something about him: nothing he makes is an accident.",
+   "pause_after": 0.7
+  },
+  {
+   "id": "c1-land",
+   "text": "On the third day the waters pull back and the dry land appears. And God said, Let the waters under the heaven be gathered together unto one place, and let the dry land appear: and it was so. And God called the dry land Earth; and the gathering together of the waters called he Seas: and God saw that it was good.",
+   "pause_after": 0.7,
+   "reference": "Genesis 1:9-10 (KJV)"
+  },
+  {
+   "id": "c1-lights",
+   "text": "On the fourth day God hangs the lights in the sky, to rule the day and the night and to mark the seasons. And God made two great lights; the greater light to rule the day, and the lesser light to rule the night: he made the stars also. And God set them in the firmament of the heaven to give light upon the earth, And to rule over the day and over the night, and to divide the light from the darkness: and God saw that it was good.",
+   "pause_after": 0.7,
+   "reference": "Genesis 1:16-18 (KJV)"
+  },
+  {
+   "id": "rehook-1b",
+   "text": "Now comes the moment the whole chapter has been building toward. For the first time, God says \"us\".",
+   "pause_after": 0.6
+  },
+  {
+   "id": "c1-image",
+   "text": "And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth. So God created man in his own image, in the image of God created he him; male and female created he them.",
+   "pause_after": 0.7,
+   "reference": "Genesis 1:26-27 (KJV)",
+   "stills": [
+    "st-man-dawn"
+   ]
+  },
+  {
+   "id": "c1-blessing",
+   "text": "And the first words God speaks to people are a blessing. And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it: and have dominion over the fish of the sea, and over the fowl of the air, and over every living thing that moveth upon the earth.",
+   "pause_after": 0.7,
+   "reference": "Genesis 1:28 (KJV)"
+  },
+  {
+   "id": "c1-verygood",
+   "text": "When he looks at everything together, the verdict changes. And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day.",
+   "pause_after": 0.7,
+   "reference": "Genesis 1:31 (KJV)"
+  },
+  {
+   "id": "c1-rest",
+   "text": "And then God rests. Thus the heavens and the earth were finished, and all the host of them. And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made. And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:1-3 (KJV)"
+  },
+  {
+   "id": "c1-close",
+   "text": "Seven days, and a world that is very good. But the Bible is about to slow down and zoom in, to one man, one garden and one command.",
+   "pause_after": 0.8
+  },
+  {
+   "id": "rehook-2",
+   "text": "The second chapter tells the making of man up close. It is gentler than you might expect.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "chapter-2",
+   "text": "God does not build the first man from a distance. He kneels in the dust.",
+   "pause_after": 0.6,
+   "stills": [
+    "st-dust-hand"
+   ],
+   "chapter": "God breathed into the dust"
+  },
+  {
+   "id": "c2-breath",
+   "text": "And the Lord God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:7 (KJV)"
+  },
+  {
+   "id": "c2-garden",
+   "text": "Then God plants a garden for him, in a place called Eden. And the Lord God planted a garden eastward in Eden; and there he put the man whom he had formed. And out of the ground made the Lord God to grow every tree that is pleasant to the sight and good for food; the tree of life also in the midst of the garden, and the tree of knowledge of good and evil.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:8-9 (KJV)",
+   "stills": [
+    "st-tree-of-life"
+   ]
+  },
+  {
+   "id": "c2-river",
+   "text": "Out of Eden a river flows, and it parts into four. And a river went out of Eden to water the garden; and from thence it was parted, and became into four heads.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:10 (KJV)",
+   "stills": [
+    "st-four-rivers"
+   ]
+  },
+  {
+   "id": "c2-work",
+   "text": "Before any rule, there is work and there is care. And the Lord God took the man, and put him into the garden of Eden to dress it and to keep it.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:15 (KJV)"
+  },
+  {
+   "id": "c2-command",
+   "text": "And then there is one command, only one. And the Lord God commanded the man, saying, Of every tree of the garden thou mayest freely eat: But of the tree of the knowledge of good and evil, thou shalt not eat of it: for in the day that thou eatest thereof thou shalt surely die.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:16-17 (KJV)",
+   "stills": [
+    "st-tree-knowledge"
+   ]
+  },
+  {
+   "id": "c2-note",
+   "text": "Everything is a yes, except one tree. The command is not a trap. It is a single place where trust in God can be chosen, freely, every day.",
+   "pause_after": 0.7
+  },
+  {
+   "id": "rehook-2b",
+   "text": "But something in the garden is still missing, and God is the one who says it.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "c2-alone",
+   "text": "And the Lord God said, It is not good that the man should be alone; I will make him an help meet for him. And out of the ground the Lord God formed every beast of the field, and every fowl of the air; and brought them unto Adam to see what he would call them: and whatsoever Adam called every living creature, that was the name thereof.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:18-19 (KJV)",
+   "stills": [
+    "st-animals-named"
+   ]
+  },
+  {
+   "id": "c2-woman",
+   "text": "So God does something no animal could do. And the Lord God caused a deep sleep to fall upon Adam, and he slept: and he took one of his ribs, and closed up the flesh instead thereof; And the rib, which the Lord God had taken from man, made he a woman, and brought her unto the man.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:21-22 (KJV)",
+   "stills": [
+    "st-two-hands"
+   ]
+  },
+  {
+   "id": "c2-poem",
+   "text": "And the first words a man ever speaks in the Bible are a poem. And Adam said, This is now bone of my bones, and flesh of my flesh: she shall be called Woman, because she was taken out of Man.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:23 (KJV)"
+  },
+  {
+   "id": "c2-unashamed",
+   "text": "The chapter ends in peace. And they were both naked, the man and his wife, and were not ashamed.",
+   "pause_after": 0.7,
+   "reference": "Genesis 2:25 (KJV)"
+  },
+  {
+   "id": "c2-close",
+   "text": "No fear, no shame, nothing hidden. Hold on to that picture, because in the very next verse, a voice enters the garden.",
+   "pause_after": 0.8
+  },
+  {
+   "id": "rehook-3",
+   "text": "One question. That was all it took to begin the unravelling of everything you just heard.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "chapter-3",
+   "text": "The serpent does not start with a lie. He starts with a question.",
+   "pause_after": 0.6,
+   "stills": [
+    "st-serpent"
+   ],
+   "chapter": "Did God really say that?"
+  },
+  {
+   "id": "c3-question",
+   "text": "Now the serpent was more subtil than any beast of the field which the Lord God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:1 (KJV)"
+  },
+  {
+   "id": "c3-answer",
+   "text": "The woman answers him, and she adds a little to the command. And the woman said unto the serpent, We may eat of the fruit of the trees of the garden: But of the fruit of the tree which is in the midst of the garden, God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:2-3 (KJV)"
+  },
+  {
+   "id": "c3-lie",
+   "text": "Now the serpent says the opposite of what God said. And the serpent said unto the woman, Ye shall not surely die: For God doth know that in the day ye eat thereof, then your eyes shall be opened, and ye shall be as gods, knowing good and evil.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:4-5 (KJV)"
+  },
+  {
+   "id": "c3-note",
+   "text": "Look at the order. First God's word is questioned, then it is contradicted, and then his heart is questioned too: maybe he is keeping something good from you. That is still how temptation sounds.",
+   "pause_after": 0.7
+  },
+  {
+   "id": "c3-take",
+   "text": "And when the woman saw that the tree was good for food, and that it was pleasant to the eyes, and a tree to be desired to make one wise, she took of the fruit thereof, and did eat, and gave also unto her husband with her; and he did eat.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:6 (KJV)",
+   "stills": [
+    "st-one-fruit",
+    "st-hand-reach"
+   ]
+  },
+  {
+   "id": "c3-eyes",
+   "text": "Their eyes are opened, but not to what they hoped. And the eyes of them both were opened, and they knew that they were naked; and they sewed fig leaves together, and made themselves aprons.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:7 (KJV)"
+  },
+  {
+   "id": "c3-close",
+   "text": "They wanted to be like God. Instead, the first thing they do is hide.",
+   "pause_after": 0.8
+  },
+  {
+   "id": "rehook-4",
+   "text": "They hid from God. And he came looking for them anyway.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "chapter-4",
+   "text": "Listen for the first question God asks in the whole Bible.",
+   "pause_after": 0.6,
+   "chapter": "Where art thou?"
+  },
+  {
+   "id": "c4-walk",
+   "text": "And they heard the voice of the Lord God walking in the garden in the cool of the day: and Adam and his wife hid themselves from the presence of the Lord God amongst the trees of the garden. And the Lord God called unto Adam, and said unto him, Where art thou?",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:8-9 (KJV)"
+  },
+  {
+   "id": "c4-note",
+   "text": "God knows where they are. The question is an invitation to come out and tell the truth.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "c4-afraid",
+   "text": "And he said, I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself. And he said, Who told thee that thou wast naked? Hast thou eaten of the tree, whereof I commanded thee that thou shouldest not eat? And the man said, The woman whom thou gavest to be with me, she gave me of the tree, and I did eat. And the Lord God said unto the woman, What is this that thou hast done? And the woman said, The serpent beguiled me, and I did eat.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:10-13 (KJV)"
+  },
+  {
+   "id": "c4-blame",
+   "text": "The man blames the woman, and even God for giving her. The woman blames the serpent. Nobody says sorry.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "c4-promise",
+   "text": "Then God speaks to the serpent, and inside the curse there is a promise. And the Lord God said unto the serpent, Because thou hast done this, thou art cursed above all cattle, and above every beast of the field; upon thy belly shalt thou go, and dust shalt thou eat all the days of thy life: And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:14-15 (KJV)"
+  },
+  {
+   "id": "rehook-4b",
+   "text": "Keep that promise in mind: one day a descendant of the woman will crush the serpent's head. The whole Bible is the story of that promise.",
+   "pause_after": 0.6
+  },
+  {
+   "id": "c4-cost",
+   "text": "The man and the woman now hear what their choice will cost. And unto Adam he said, Because thou hast hearkened unto the voice of thy wife, and hast eaten of the tree, of which I commanded thee, saying, Thou shalt not eat of it: cursed is the ground for thy sake; in sorrow shalt thou eat of it all the days of thy life; Thorns also and thistles shall it bring forth to thee; and thou shalt eat the herb of the field; In the sweat of thy face shalt thou eat bread, till thou return unto the ground; for out of it wast thou taken: for dust thou art, and unto dust shalt thou return.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:17-19 (KJV)"
+  },
+  {
+   "id": "c4-coats",
+   "text": "And yet the next thing God does is an act of kindness. Unto Adam also and to his wife did the Lord God make coats of skins, and clothed them.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:21 (KJV)",
+   "stills": [
+    "st-leaving"
+   ]
+  },
+  {
+   "id": "c4-out",
+   "text": "And the Lord God said, Behold, the man is become as one of us, to know good and evil: and now, lest he put forth his hand, and take also of the tree of life, and eat, and live for ever: Therefore the Lord God sent him forth from the garden of Eden, to till the ground from whence he was taken.",
+   "pause_after": 0.7,
+   "reference": "Genesis 3:22-23 (KJV)"
+  },
+  {
+   "id": "c4-close",
+   "text": "And that is where we began: the gate, the cherubims, and the flaming sword that turns every way to keep the way of the tree of life.",
+   "pause_after": 0.8
+  },
+  {
+   "id": "reflection",
+   "text": "Here is what this story leaves you with. Sin did not begin with a monster, but with a doubt about whether God is good. And God's first answer to sin was not to walk away, but to come looking, to ask where you are, to cover, and to promise a rescuer. If you have been hiding from him, his question is still an invitation. Thank him tonight that he came looking first.",
+   "pause_after": 0.8
+  },
+  {
+   "id": "prayer-close",
+   "text": "Pray with me. Father, thank you for making a world that was very good, and for making us in your image. Forgive us for the times we doubted your goodness and hid from you. Thank you that you came looking for us, and that you kept your promise. Help us to trust your word today. In Jesus' name, amen.",
+   "pause_after": 0.9
+  },
+  {
+   "id": "cta",
+   "text": "The next story is Cain and Abel: two brothers, two offerings, and the first time anger wins. Subscribe so you don't miss it, and type amen if you prayed with me.",
+   "pause_after": 0.8
+  }
+ ],
+ "figure": null,
+ "backgrounds": [
+  "st-gate-sword",
+  "st-deep-dark",
+  "st-spirit-waters",
+  "st-light-breaks",
+  "st-firmament",
+  "st-dry-land",
+  "st-grass-herbs",
+  "st-fruit-trees",
+  "st-sun-moon",
+  "st-stars",
+  "st-sea-life",
+  "st-birds",
+  "st-beasts",
+  "st-lion",
+  "st-seventh-day",
+  "st-dust-hand",
+  "st-man-dawn",
+  "st-four-rivers",
+  "st-garden-east",
+  "st-tree-of-life",
+  "st-tree-knowledge",
+  "st-animals-named",
+  "st-deep-sleep",
+  "st-two-hands",
+  "st-serpent",
+  "st-one-fruit",
+  "st-hand-reach",
+  "st-bitten-fruit",
+  "st-fig-leaves",
+  "st-cool-of-day",
+  "st-hiding",
+  "st-thorns",
+  "st-skin-coats",
+  "st-leaving",
+  "st-east-of-eden",
+  "st-path-light"
+ ],
+ "overlay": {
+  "title": "Creation, Eden and the Fall",
+  "subtitle": "GENESIS 1-3",
+  "title_image": "st-gate-sword",
+  "title_card_seconds": 2.0,
+  "brand": "HeroVerse",
+  "amen": "Type AMEN"
+ },
+ "description_intro": "The first story of the Bible, word for word from the King James Version: how God made the world, the garden, the serpent's question, and why the way to Eden was closed. Watch the Shorts of this story on the channel, and the next one: Cain and Abel.",
+ "subscribe_line": "Subscribe to hear the Bible story by story, from the beginning.",
+ "hashtags": [
+  "#Bible",
+  "#BibleStory",
+  "#Genesis"
+ ],
+ "thumbnail": {
+  "lines": [
+   "CREATION",
+   "EDEN AND THE FALL"
+  ],
+  "sub": "BIBLE STORY"
+ },
+ "tags": [
+  "Genesis",
+  "Bible story",
+  "Adam and Eve",
+  "creation story",
+  "Garden of Eden",
+  "the fall of man",
+  "KJV Bible",
+  "Bible stories for adults",
+  "Genesis 1-3",
+  "HeroVerse"
+ ],
+ "figure_choice": "none: the story is told in footage and stills; no figure overlay (v4 grammar).",
+ "playlist": {
+  "title": "The Bible, Story by Story (KJV)",
+  "description": "The Bible told story by story from the King James Version, in Shorts and full-length videos."
+ },
+ "motion": true,
+ "cinematic": {
+  "atmosphere": []
+ },
+ "footage": [
+  "clip-night-aurora-borealis-northern-lights-atmosphe",
+  "clip-night-aurora-borealis-northern-lights-lights-s",
+  "clip-night-blackthorn-bud-blossom-bloom-feather-flo",
+  "clip-night-cloud-sky-grey-clouds-cloudy-sky",
+  "clip-night-cloud-sky-grey-clouds-cloudy-sky-grey-sk",
+  "clip-night-daffodils-easter-bells-spring-easter-to-",
+  "clip-night-dandelion-faded-seeds-pointed-flower-fly",
+  "clip-night-flower-mednille-to-flourish-blossom-bloo",
+  "clip-night-moon-full-moon-super-moon-night-moonligh",
+  "clip-night-nature-tree-night-scary-full-moon-moon-s",
+  "clip-night-northern-lights-aurora-borealis-sky-nigh",
+  "clip-night-northern-lights-aurora-night-natural-won",
+  "clip-night-pea-blossom-bloom-to-flourish-bloom-blos",
+  "clip-night-solar-eclipse-sun-moon-celestial-event-n",
+  "clip-night-starry-sky-night-sky-moon-moonrise-moonl",
+  "clip-night-tree-bare-tree-stars-fog-mist-forest-bra",
+  "clip-mist-clouds-sunset-fog-sun-forest-fir-forest",
+  "clip-mist-fog-haze-forest-trees-autumnal-nature-mi",
+  "clip-mist-fog-hill-law-evening-dusk-clouds-mist",
+  "clip-mist-fog-mist-fogging-forest-trees-nature-lan",
+  "clip-mist-fog-mist-forest-autumnal-fall-landscape-",
+  "clip-mist-fog-morning-mist-nature-haze-tomorrow-mo",
+  "clip-mist-fog-sun-fog-ceiling-sunshine-mist-ripe-h",
+  "clip-sunrise-fog-sea-of-fog-mist-mountains-mountain-l",
+  "clip-sunrise-sun-fog-sunset-hill-landscape-haze-sunli",
+  "clip-sunrise-sunset-blossoms-spring-plum-blossoms-tim",
+  "clip-sunrise-sunset-clouds-golden-sunset-sun-downfall",
+  "clip-clouds-clouds-cumulus-heaven-sun-air-the-atmosp",
+  "clip-clouds-clouds-cumulus-heaven-wind-the-atmospher",
+  "clip-clouds-clouds-cumulus-mountains-landscape-switz",
+  "clip-clouds-clouds-stars-full-moon-night-sky-light-m",
+  "clip-clouds-sunrise-fog-clouds-landscape-mountain-ra",
+  "clip-ocean-beach-ocean-sunset-sea-nature-sky-sun-su",
+  "clip-ocean-cliff-sea-waves-ocean-view-coast-beach-b",
+  "clip-ocean-marine-sea-water-blue-beach-wave-nature-",
+  "clip-ocean-ocean-sunset-dark-clouds-waves-romantic-",
+  "clip-ocean-sea-ocean-surf-waves-beach-rock-coast",
+  "clip-ocean-sea-ocean-waves-sunset-horizon-sky-cloud",
+  "clip-ocean-sunset-sea-ocean-beach",
+  "clip-grass-riverside-autumn-silver-grass-wind-lands",
+  "clip-grass-silver-grass-reed-autumn-autumn-wind",
+  "clip-grass-silver-grass-wind-reed-autumn-landscape-",
+  "clip-meadow-flower-convolvulus-wind-wildflower-wild-",
+  "clip-meadow-flower-garden-autumn-wind-plant-landscap",
+  "clip-meadow-flower-wind-wildflower-wild-flower-plant",
+  "clip-river-fall-flow-mountain-stream-larch-forest-n",
+  "clip-river-forest-woods-stream-river-creek-water-le",
+  "clip-river-river-rocks-landscape-outdoors-water-flo",
+  "clip-river-river-stream-creek-flowing-forest-logs-t",
+  "clip-river-river-trees-rocks-water-nature",
+  "clip-river-river-water-cascades-rocks-summer-enviro",
+  "clip-river-river-whitewater-rapids-rocks-streams-wa",
+  "clip-river-water-wild-water-mountain-stream-rock-na",
+  "clip-river-waterfall-forest-river-stream-creek-moss",
+  "clip-river-waterfall-river-forest-nature-moss-mount",
+  "clip-river-waterfall-river-forest-trees-stream-cree",
+  "clip-river-waterfall-river-mountain-stream-water-st",
+  "clip-river-waterfall-rocks-river-stream-water-sceni",
+  "clip-waterfall-river-forest-waterfall-beautiful-wallpap",
+  "clip-waterfall-rocks-stones-water-nature-waterfalls-cas",
+  "clip-waterfall-waterfall-river-cascade-that-nature-moun",
+  "clip-waterfall-waterfall-river-cascade-water-drains-jum",
+  "clip-waterfall-waterfall-river-forest-mountain-cascade-",
+  "clip-waterfall-waterfall-river-forest-trees-falls-rain-",
+  "clip-waterfall-waterfall-river-nature-water-cascade-lan",
+  "clip-waterfall-waterfall-river-stream-forest-morning-wa",
+  "clip-waterfall-waterfall-river-trees-forest",
+  "clip-waterfall-waterfall-river-view-nature-that-flow-fo",
+  "clip-lake-aerial-drone-lake-waterfall-rocks-waves-",
+  "clip-lake-fog-sunrise-lake-morning-water-calm-peac",
+  "clip-lake-lake-forest-trees-fog-sunrise-morning-ne",
+  "clip-lake-lake-mountains-sunset-sunrise-relaxing-c",
+  "clip-lake-lake-outlook-alpine-flowers-fogging-lake",
+  "clip-lake-lake-sunrise-sun-landscape-nature-lake-z",
+  "clip-lake-sunrise-lake-clouds-dawn-landscape-natur",
+  "clip-lake-waterfalls-river-lake-sunset-sunrise-wat",
+  "clip-forest-fall-larches-autumn-leaves-autumn-wind-c",
+  "clip-forest-sunrise-sunlight-sun-forest-fog-clouds-s",
+  "clip-forest-trees-forest-moss-scenic-autumn-4k",
+  "clip-forest-trees-forest-sunrise-woods-fog-trail-sun",
+  "clip-forest-trees-forest-woods-autumn-landscape-natu",
+  "clip-forest-trees-sunset-forest-sun-light-golden-hou",
+  "clip-rain-hibiscus-marshmallow-blossoms-raindrop-p",
+  "clip-rain-puddle-raindrops-rain-water-reflection-w"
+ ]
+}
