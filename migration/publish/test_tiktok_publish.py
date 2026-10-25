@@ -104,7 +104,7 @@ class Post(unittest.TestCase):
         r = tp.post(self.EP, "key", "ch-tt", rec.append, call=fake)
         inp = fake.calls[0]["body"]["variables"]["input"]
         self.assertEqual((inp["channelId"], inp["schedulingType"], inp["mode"]), ("ch-tt", "automatic", "shareNow"))
-        self.assertEqual(inp["assets"]["videos"][0]["url"],
+        self.assertEqual(inp["assets"][0]["video"]["url"],
                          tp.RELEASE + "bible-genesis-06-short-sha256-" + "f" * 64 + ".mp4")
         self.assertEqual(rec[0]["status"], "SENDING")              # recorded before the call
         self.assertEqual((r["status"], r["buffer_post_id"]), ("QUEUED", "bp1"))
@@ -150,6 +150,24 @@ class Post(unittest.TestCase):
         self.assertEqual(tp.tiktok_channel("key", call=fake), "ch-tt")
         self.assertEqual(fake.calls[0]["token"], "key")
         self.assertNotIn("key", json.dumps(fake.calls[0]["body"]))
+
+
+class Describe(unittest.TestCase):
+    def test_discover_lists_the_input_types_createpost_accepts(self):
+        types = {"CreatePostInput": [{"name": "assets", "type": {"kind": "LIST", "name": None, "ofType": {
+                     "kind": "NON_NULL", "name": None, "ofType": {"kind": "INPUT_OBJECT", "name": "AssetInput",
+                                                                  "ofType": None}}}}],
+                 "AssetInput": [{"name": "video", "type": {"kind": "INPUT_OBJECT", "name": "VideoAssetInput",
+                                                           "ofType": None}}],
+                 "VideoAssetInput": [{"name": "url", "type": {"kind": "NON_NULL", "name": None,
+                                                              "ofType": {"kind": "SCALAR", "name": "String"}}}]}
+
+        def call(method, url, token=None, body=None, **kw):
+            name = json.loads(body["query"].split("name: ")[1].split(")")[0])
+            return {"_http": 200, "data": {"__type": {"name": name, "inputFields": types.get(name, [])}}}
+        out = tp.describe("key", call=call)
+        self.assertEqual(out["CreatePostInput"]["assets"], "LIST / NON_NULL / AssetInput")
+        self.assertEqual(out["VideoAssetInput"]["url"], "NON_NULL / String")
 
 
 if __name__ == "__main__":

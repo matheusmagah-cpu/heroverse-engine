@@ -116,7 +116,7 @@ def gql(query, variables, key, call=http):
     code = r.get("_http")
     if code == 0:
         return None, f"network {r.get('_net')}", False
-    msg = "; ".join(str(e.get("message", ""))[:160] for e in r.get("errors") or [])
+    msg = "; ".join(str(e.get("message", ""))[:400] for e in r.get("errors") or [])
     if code != 200:
         return r.get("data"), f"HTTP {code} {msg}".strip(), 400 <= (code or 0) < 500
     if msg:
@@ -136,6 +136,31 @@ def channels_query(org):
 
 def status_query(post_id):
     return "query { post(input: {id: %s}) { id status } }" % json.dumps(post_id)
+
+
+INPUT_TYPE = "query { __type(name: %s) { name inputFields { name type { kind name ofType { kind name ofType { kind name ofType { name } } } } } } }"
+
+
+def describe(key, root="CreatePostInput", call=http, depth=3):
+    """The input types createPost accepts (names only), so a schema change is fixed from evidence, not guessed."""
+    out, todo = {}, [root]
+    while todo and depth:
+        nxt = []
+        for name in todo:
+            data, err, _ = gql(INPUT_TYPE % json.dumps(name), None, key, call)
+            fields = ((data or {}).get("__type") or {}).get("inputFields") or []
+            out[name] = err or {}
+            for f in fields:
+                t, chain = f["type"], []
+                while t:
+                    chain.append(t.get("name") or t.get("kind"))
+                    t = t.get("ofType")
+                out[name][f["name"]] = " / ".join(c for c in chain if c)
+                base = [c for c in chain if c and c not in ("NON_NULL", "LIST")]
+                if base and base[-1].endswith("Input") and base[-1] not in out:
+                    nxt.append(base[-1])
+        todo, depth = nxt, depth - 1
+    return out
 
 
 def tiktok_channel(key, call=http):
@@ -158,7 +183,7 @@ def post(ep, key, channel, record, call=http):
     say what happened stays SENDING, is never sent again, and is reported until the owner checks Buffer."""
     record({"status": "SENDING", "video_url": video_url(ep)})
     data, err, refused = gql(CREATE, {"input": {"channelId": channel, "text": caption(ep), "schedulingType": "automatic",
-                                                "mode": "shareNow", "assets": {"videos": [{"url": video_url(ep)}]}}},
+                                                "mode": "shareNow", "assets": [{"video": {"url": video_url(ep)}}]}},
                              key, call)
     res = (data or {}).get("createPost") or {}
     if (res.get("post") or {}).get("id"):
@@ -166,7 +191,7 @@ def post(ep, key, channel, record, call=http):
     if res.get("message"):
         return {"status": "FAILED", "fail_reason": str(res["message"])[:200]}
     if refused:
-        return {"status": "FAILED", "fail_reason": (err or "refused")[:200]}
+        return {"status": "FAILED", "fail_reason": (err or "refused")[:600]}
     return {"status": "SENDING", "fail_reason": (err or "no post id in the reply")[:200]}
 
 
@@ -213,7 +238,8 @@ def main(cmd, ledger_path, tiktok_path, episodes_dir):
         return 0
     key = os.environ["BUFFER_API_KEY"]
     if cmd == "discover":   # ids and service names only: what the mirror will post to
-        print(json.dumps({"tiktok_channel": tiktok_channel(key), "pending": [k for k, _ in todo]}))
+        print(json.dumps({"tiktok_channel": tiktok_channel(key), "pending": [k for k, _ in todo],
+                          "create_post_input": describe(key)}, indent=1))
         return 0
 
     def save():
