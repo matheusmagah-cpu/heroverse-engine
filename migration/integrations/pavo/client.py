@@ -16,6 +16,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 ORIGIN = "https://api.pixa-ai.work/api"
 WEBSITE = "https://app.pavo-ai.work/"
 MAX_BYTES = 256 * 1024
+RATIOS = ("9:16", "3:4", "1:1", "4:3", "16:9", "21:9")  # agnes-video-new-flash capability spec
 ROUTES = {
     "credits": "/v3/subscription/credits-balance",
     "models": "/v1/pixa/mode_support_models?mode_code=generate_video",
@@ -149,7 +150,7 @@ class PavoClient:
             raise PavoError("CREDENTIAL_IN_PROMPT_REFUSED")
         if type(seconds) is not int or seconds not in range(4, 13):
             raise PavoError("INVALID_DURATION")
-        if aspect_ratio not in ("9:16", "16:9", "1:1"):
+        if aspect_ratio not in RATIOS:
             raise PavoError("INVALID_ASPECT_RATIO")
         # A local creative brief, NOT a guessed upstream generation payload.
         # No POST, quote, credit debit or publication is attempted.

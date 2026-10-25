@@ -233,5 +233,109 @@ class Video(unittest.TestCase):
         self.assertEqual(PavoVideoClient(self.token, Responses(envelope(payload))).job("12345")["status"], "incomplete")
 
 
+def png(width=720, height=1280):
+    import struct, zlib
+    head = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
+    chunk = struct.pack(">I", 13) + b"IHDR" + head + struct.pack(">I", zlib.crc32(b"IHDR" + head))
+    return b"\x89PNG\r\n\x1a\n" + chunk
+
+
+def presigned(n=1):
+    return envelope({"public_url": f"https://files.example.test/u/{n}.png", "upload_url": f"https://store.example.test/put/{n}?sig=x",
+                     "required_headers": {"Content-Type": "image/png"}, "meta_data": {"w": 720}})
+
+
+class Inputs(unittest.TestCase):
+    """First/last frame and reference images (capability spec 2026-10-25); no network or real secrets."""
+    token = "synthetic-offline-pavo-credential"
+
+    def setUp(self):
+        import tempfile
+        self.repo = Path(tempfile.mkdtemp())
+        (self.repo / "img").mkdir()
+        for name in ("a.png", "b.png", "c.png"):
+            (self.repo / "img" / name).write_bytes(png())
+        (self.repo / "img" / "tiny.png").write_bytes(png(100, 100))
+        (self.repo / "img" / "wide.png").write_bytes(png(3000, 600))
+        (self.repo / "img" / "x.gif").write_bytes(b"GIF89a")
+        self.patch = patch("images.REPO", self.repo)
+        self.patch.start()
+        self.addCleanup(self.patch.stop)
+
+    def test_first_and_last_frame_are_priced_uploaded_without_the_credential_then_sent_in_order(self):
+        fake = Responses(quote(), presigned(1), b"", envelope({}), presigned(2), b"", envelope({}),
+                         envelope({"conversation_id": "777"}), started())
+        result = PavoVideoClient(self.token, fake).generate_video("The path rises into light.", 6, "9:16",
+                                                                  "img/a.png", "img/b.png")
+        self.assertEqual((result["status"], result["mode"], result["input_images"]), ("submitted", "frames_to_video", 2))
+        requests = [r for r, _ in fake.calls]
+        self.assertEqual(json.loads(requests[0].data)["inputs"], [{"count": 1, "media_type": "image"}] * 2)
+        for put in (requests[2], requests[5]):
+            self.assertEqual(put.get_method(), "PUT")
+            self.assertTrue(put.full_url.startswith("https://store.example.test/put/"))
+            self.assertIsNone(put.get_header("Authorization"))
+            self.assertEqual(put.data, png())
+        body = json.loads(requests[8].data)
+        self.assertEqual(body["mode"], "frames_to_video")
+        self.assertEqual([i["url"] for i in body["images"]], ["https://files.example.test/u/1.png",
+                                                              "https://files.example.test/u/2.png"])
+        self.assertNotIn("creative_prompt_json", body)
+
+    def test_references_use_omni_mode_with_indexed_prompt_blocks(self):
+        fake = Responses(quote(), presigned(1), b"", envelope({}), presigned(2), b"", envelope({}),
+                         envelope({"conversation_id": "778"}), started())
+        result = PavoVideoClient(self.token, fake).generate_video("Eve walks in the garden.", 5, "9:16",
+                                                                  references=["img/a.png", "img/c.png"])
+        self.assertEqual(result["mode"], "omni_to_video")
+        body = json.loads(fake.calls[-1][0].data)
+        self.assertEqual(body["mode"], "omni_to_video")
+        self.assertEqual(len(body["images"]), 2)
+        blocks = json.loads(body["creative_prompt_json"])
+        self.assertEqual(blocks[0], {"type": "text", "content": "Eve walks in the garden."})
+        self.assertEqual([b["source_index"] for b in blocks[1:]], [1, 2])
+
+    def test_nonzero_quote_with_images_uploads_nothing(self):
+        fake = Responses(quote(credits=5))
+        with self.assertRaises(PavoError):
+            PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", "img/a.png")
+        self.assertEqual(len(fake.calls), 1)
+
+    def test_failed_upload_creates_no_conversation(self):
+        fake = Responses(quote(), presigned(1), URLError("down"))
+        with self.assertRaises(PavoError):
+            PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", "img/a.png")
+        self.assertEqual(len(fake.calls), 3)     # quote, presign, PUT: no create, no stream
+
+    def test_bad_inputs_never_touch_network(self):
+        cases = [dict(first_frame="../../etc/passwd"), dict(first_frame="/etc/hosts"), dict(first_frame="img/x.gif"),
+                 dict(first_frame="img/tiny.png"), dict(first_frame="img/wide.png"), dict(last_frame="img/a.png"),
+                 dict(first_frame="img/a.png", references=["img/b.png"]), dict(references=["img/a.png"] * 6),
+                 dict(references="img/a.png"), dict(first_frame="img/missing.png")]
+        for kwargs in cases:
+            fake = Responses()
+            with self.assertRaises(PavoError, msg=kwargs):
+                PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", **kwargs)
+            with self.assertRaises(PavoError, msg=kwargs):
+                PavoVideoClient(self.token, fake).quote_video(5, "9:16", **kwargs)
+            self.assertEqual(fake.calls, [], kwargs)
+
+    def test_upload_reply_cannot_redirect_the_credential_or_inject_headers(self):
+        for data in ({"public_url": "http://files.example.test/a.png", "upload_url": "https://s/p"},
+                     {"public_url": "https://f/a.png", "upload_url": "https://s/p", "required_headers": {"Authorization": "x"}},
+                     {"public_url": "https://f/a.png?t=1", "upload_url": "https://s/p"},
+                     {"public_url": "https://f/a.png", "upload_url": "https://s/p", "required_headers": {"X\nY": "1"}}):
+            fake = Responses(quote(), envelope(data))
+            with self.assertRaises(PavoError):
+                PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", "img/a.png")
+            self.assertEqual(len(fake.calls), 2)
+
+    def test_quote_counts_inputs_and_every_spec_ratio_is_accepted(self):
+        for ratio in ("9:16", "3:4", "1:1", "4:3", "16:9", "21:9"):
+            fake = Responses(quote())
+            q = PavoVideoClient(self.token, fake).quote_video(12, ratio, references=["img/a.png", "img/b.png", "img/c.png"])
+            self.assertEqual((q["mode"], q["input_images"], q["zero_cost_confirmed"]), ("omni_to_video", 3, True))
+            self.assertEqual(len(json.loads(fake.calls[0][0].data)["inputs"]), 3)
+
+
 if __name__ == "__main__":
     unittest.main()
