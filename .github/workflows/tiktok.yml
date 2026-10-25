@@ -56,4 +56,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add migration/publish/tiktok_ledger.json
           git commit -q -m "TikTok mirror: record (run $GITHUB_RUN_ID)"
-          git pull --rebase -q origin main && git push -q origin HEAD:main
+          for i in 1 2 3 4 5; do   # the ledger is what stops a second post: it must land
+            git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          echo "TIKTOK_LEDGER_NOT_PUSHED (check Buffer before the next run)"; exit 1

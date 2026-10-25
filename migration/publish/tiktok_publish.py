@@ -10,8 +10,9 @@ public GraphQL API (BUFFER_API_KEY, a repository secret; never printed). Buffer 
 Only a Short already in the YouTube ledger (it passed approve/publish) and whose YouTube slot has passed is sent, the
 same file (the workflow checks its sha256), with a caption that names the full story on YouTube (link in bio; TikTok
 captions are not clickable) and states the KJV source and the AI-generated visuals and voice. One Short per run,
-oldest first. Idempotent through tiktok_ledger.json: the key is recorded as SENDING before the call, so a lost reply
-never sends twice; three failures make a Short FAILED_FINAL so it never blocks the queue.
+oldest first. Idempotent through tiktok_ledger.json: the key is recorded as SENDING before the call, so a lost or
+unclear reply never sends twice (it is reported); only an explicit refusal or Buffer's "error" is retried, and three
+failures make a Short FAILED_FINAL so it never blocks the queue.
 usage: tiktok_publish.py pending|post|discover LEDGER TIKTOK_LEDGER EPISODES_DIR
 """
 from datetime import datetime, timedelta, timezone
@@ -36,7 +37,7 @@ def parse(ts):
     return datetime.fromisoformat(ts.replace("Z", "+00:00")) if ts else None
 
 
-FINAL = DONE | {"FAILED_FINAL"}
+FINAL = DONE | {"FAILED_FINAL", "STUCK"}
 MAX_FAILURES = 3          # then FAILED_FINAL: one Short TikTok always refuses never blocks the rest of the queue
 RECHECK_HOURS = 24        # a post Buffer has not sent within a day is treated as failed (retried)
 UNSLOTTED_MARGIN_H = 24   # an episode without a slot is mirrored only a day after its YouTube upload
@@ -109,63 +110,81 @@ def http(method, url, token=None, body=None, data=None, headers=None, timeout=12
 
 
 def gql(query, variables, key, call=http):
-    """One Buffer GraphQL call: (data, error text or None). The key travels only in the Authorization header."""
+    """One Buffer GraphQL call: (data, error text or None, refused). `refused` is True only when the reply says
+    nothing was done (a 4xx, or GraphQL errors without data); a 5xx, an unreadable body or a lost reply is unknown."""
     r = call("POST", API, token=key, body={"query": query, "variables": variables or {}})
-    if r.get("_http") == 0:
-        return None, f"network {r.get('_net')}"
-    if r.get("errors"):
-        return r.get("data"), "; ".join(str(e.get("message", ""))[:160] for e in r["errors"])
-    if r.get("_http") != 200:
-        return r.get("data"), f"HTTP {r.get('_http')}"
-    return r.get("data"), None
+    code = r.get("_http")
+    if code == 0:
+        return None, f"network {r.get('_net')}", False
+    msg = "; ".join(str(e.get("message", ""))[:160] for e in r.get("errors") or [])
+    if code != 200:
+        return r.get("data"), f"HTTP {code} {msg}".strip(), 400 <= (code or 0) < 500
+    if msg:
+        return r.get("data"), msg, not r.get("data")
+    return r.get("data"), None, False
 
 
-CHANNELS = "query { account { organizations { id channels { id service name } } } }"
+ORGS = "query { account { organizations { id } } }"
 CREATE = """mutation Create($input: CreatePostInput!) { createPost(input: $input) {
   ... on PostActionSuccess { post { id status } }
   ... on MutationError { message } } }"""
-STATUS = "query Post($id: PostId!) { post(input: {id: $id}) { id status error { message } } }"
+
+
+def channels_query(org):
+    return "query { channels(input: {organizationId: %s}) { id service name } }" % json.dumps(org)
+
+
+def status_query(post_id):
+    return "query { post(input: {id: %s}) { id status } }" % json.dumps(post_id)
 
 
 def tiktok_channel(key, call=http):
-    data, err = gql(CHANNELS, None, key, call)
+    data, err, _ = gql(ORGS, None, key, call)
     if err:
-        raise SystemExit(f"BUFFER_CHANNELS {err}")
-    found = [c for o in (data or {}).get("account", {}).get("organizations", []) for c in o.get("channels") or []
-             if str(c.get("service", "")).lower() == "tiktok"]
+        raise SystemExit(f"BUFFER_ORGANIZATIONS {err}")
+    found = []
+    for org in (data or {}).get("account", {}).get("organizations", []):
+        data, err, _ = gql(channels_query(org["id"]), None, key, call)
+        if err:
+            raise SystemExit(f"BUFFER_CHANNELS {err}")
+        found += [c for c in (data or {}).get("channels") or [] if str(c.get("service", "")).lower() == "tiktok"]
     if len(found) != 1:
         raise SystemExit(f"BUFFER_TIKTOK_CHANNEL {len(found)} found (expected exactly 1)")
     return found[0]["id"]
 
 
 def post(ep, key, channel, record, call=http):
-    """SENDING is recorded before the call; a lost reply stays SENDING (never re-sent; recheck or the owner decides)."""
+    """SENDING is recorded before the call. Only an explicit refusal is FAILED (retried later); any reply that does not
+    say what happened stays SENDING, is never sent again, and is reported until the owner checks Buffer."""
     record({"status": "SENDING", "video_url": video_url(ep)})
-    data, err = gql(CREATE, {"input": {"channelId": channel, "text": caption(ep), "schedulingType": "automatic",
-                                       "mode": "shareNow", "assets": {"videos": [{"url": video_url(ep)}]}}}, key, call)
-    if err and err.startswith("network"):
-        return {"status": "SENDING", "fail_reason": err}
+    data, err, refused = gql(CREATE, {"input": {"channelId": channel, "text": caption(ep), "schedulingType": "automatic",
+                                                "mode": "shareNow", "assets": {"videos": [{"url": video_url(ep)}]}}},
+                             key, call)
     res = (data or {}).get("createPost") or {}
-    if err or res.get("message") or not (res.get("post") or {}).get("id"):
-        return {"status": "FAILED", "fail_reason": (err or res.get("message") or "no post id")[:200]}
-    return {"status": "QUEUED", "buffer_post_id": res["post"]["id"], "buffer_status": res["post"].get("status")}
+    if (res.get("post") or {}).get("id"):
+        return {"status": "QUEUED", "buffer_post_id": res["post"]["id"], "buffer_status": res["post"].get("status")}
+    if res.get("message"):
+        return {"status": "FAILED", "fail_reason": str(res["message"])[:200]}
+    if refused:
+        return {"status": "FAILED", "fail_reason": (err or "refused")[:200]}
+    return {"status": "SENDING", "fail_reason": (err or "no post id in the reply")[:200]}
 
 
 def recheck(tiktok, key, now, call=http):
-    """Follow posts Buffer has not sent yet by their post id; never send them again."""
+    """Follow posts Buffer has not sent yet by their post id; never send them again. Only Buffer's own "error" allows
+    a retry; a post that cannot be confirmed within a day becomes STUCK (reported, never re-sent)."""
     changed = []
     for k, rec in tiktok.get("posts", {}).items():
         if rec.get("status") != "QUEUED" or not rec.get("buffer_post_id"):
             continue
-        data, err = gql(STATUS, {"id": rec["buffer_post_id"]}, key, call)
-        p = (data or {}).get("post") or {}
-        status = str(p.get("status", "")).lower()
+        data, err, _ = gql(status_query(rec["buffer_post_id"]), None, key, call)
+        status = str(((data or {}).get("post") or {}).get("status", "")).lower()
         if not err and status == "sent":
             rec.update(status="SENT", buffer_status=status)
         elif not err and status == "error":
-            rec.update(status="FAILED", fail_reason=str((p.get("error") or {}).get("message", "error"))[:200])
+            rec.update(status="FAILED", fail_reason="Buffer reported an error sending to TikTok")
         elif parse(rec.get("at")) and now - parse(rec["at"]) > timedelta(hours=RECHECK_HOURS):
-            rec.update(status="FAILED", fail_reason=f"not sent after {RECHECK_HOURS} h (last {status or err})")
+            rec.update(status="STUCK", fail_reason=f"not confirmed after {RECHECK_HOURS} h (last {status or err})")
         else:
             continue
         changed.append(k)
@@ -222,9 +241,10 @@ def main(cmd, ledger_path, tiktok_path, episodes_dir):
         save()
         print(json.dumps({"key": k, **result}))
         rc = 1 if result["status"] in ("FAILED", "FAILED_FINAL") else rc
-    final = sorted(k for k, r in posts.items() if r.get("status") == "FAILED_FINAL")
-    if final:
-        print(json.dumps({"tiktok_failed_final": final}))   # the owner decides; the queue moves on
+    attention = {k: r["status"] for k, r in posts.items() if r.get("status") in ("FAILED_FINAL", "STUCK", "SENDING")}
+    if attention:   # the owner checks these in Buffer; the queue moves on, the run turns red until they are settled
+        print(json.dumps({"tiktok_needs_owner": attention}))
+        rc = 1
     return rc
 
 

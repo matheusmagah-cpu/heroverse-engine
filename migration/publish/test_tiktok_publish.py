@@ -35,12 +35,18 @@ class Fake:
         q = body["query"]
         if self.net:
             return {"_http": 0, "_net": "TimeoutError"}
-        if "channels" in q:
-            return {"_http": 200, "data": {"account": {"organizations": [{"id": "o", "channels": [
-                {"id": "ch-yt", "service": "youtube"}, {"id": "ch-tt", "service": "tiktok"}]}]}}}
+        if "organizations" in q:
+            return {"_http": 200, "data": {"account": {"organizations": [{"id": "o"}]}}}
+        if "channels(input" in q:
+            return {"_http": 200, "data": {"channels": [{"id": "ch-yt", "service": "youtube"},
+                                                        {"id": "ch-tt", "service": "tiktok"}]}}
         if "createPost" in q:
+            if isinstance(self.create, int):
+                return {"_http": self.create}
             return {"_http": 200, "data": {"createPost": self.create or {"post": {"id": "bp1", "status": "sending"}}}}
         if "post(input" in q:
+            if self.status is None:
+                return {"_http": 200, "errors": [{"message": "Cannot query field"}]}
             return {"_http": 200, "data": {"post": {"id": "bp1", "status": self.status}}}
         return {"_http": 200, "data": {}}
 
@@ -112,6 +118,26 @@ class Post(unittest.TestCase):
             key = "bible:genesis-06-short:" + "f" * 64
             episodes(d, [("genesis-06-short", "f" * 64, "2026-10-24T13:30:00Z")])
             self.assertEqual(tp.pending(ledger(key), {"posts": {key: r}}, d, NOW), [])
+
+    def test_an_unclear_reply_is_never_sent_again(self):
+        # review of e8f9c3b: a 504 after Buffer created the post used to be FAILED, and the next run posted it again
+        for create in (504, 502):
+            r = tp.post(self.EP, "key", "ch-tt", lambda x: None, call=Fake(create=create))
+            self.assertEqual(r["status"], "SENDING", create)
+        r = tp.post(self.EP, "key", "ch-tt", lambda x: None, call=Fake(create=401))
+        self.assertEqual(r["status"], "FAILED")
+
+    def test_a_post_that_cannot_be_confirmed_is_stuck_not_resent(self):
+        # review of e8f9c3b: a status query that keeps failing used to turn into FAILED after 24 h and a second post
+        tiktok = {"posts": {"k": {"status": "QUEUED", "buffer_post_id": "bp1", "at": "2026-10-24T10:00:00+00:00"}}}
+        self.assertEqual(tp.recheck(tiktok, "key", NOW, call=Fake(status=None)), ["k"])
+        self.assertEqual(tiktok["posts"]["k"]["status"], "STUCK")
+        tiktok["posts"]["k"].update(status="QUEUED")
+        tp.recheck(tiktok, "key", NOW, call=Fake(status="sending"))
+        self.assertEqual(tiktok["posts"]["k"]["status"], "STUCK")
+        tiktok["posts"]["k"].update(status="QUEUED")
+        tp.recheck(tiktok, "key", NOW, call=Fake(status="error"))
+        self.assertEqual(tiktok["posts"]["k"]["status"], "FAILED")     # only Buffer's own error is retried
 
     def test_queued_posts_are_followed_until_sent(self):
         tiktok = {"posts": {"k": {"status": "QUEUED", "buffer_post_id": "bp1", "at": "2026-10-25T14:00:00+00:00"}}}
