@@ -1,0 +1,38 @@
+{
+ "version": "claude-review-v1",
+ "model": "claude-session-reviewer",
+ "pilot_id": "pilot-013",
+ "output_sha256": "71d618a484f1ae6d809c6a2df62a35076ba2b65ba2d844e48c4f2f7ad1f3fe3f",
+ "reviewed_at": "2026-10-25T12:30:00Z",
+ "opening_and_promise": 9.5,
+ "picture_quality": 9.5,
+ "figure_and_background_integrity": 9.5,
+ "captions_readable_and_synced": 9.5,
+ "audio_clarity_and_mix": 9.5,
+ "pacing_and_visual_variety": 9.0,
+ "scripture_on_screen": 9.5,
+ "policy_safe": 9.5,
+ "overall": 9.5,
+ "issues": [
+  "~0:24-0:34 (opening sheet, moonrise clip): very dark before the moon appears; reads as night sky over hills, the signal scan finds no black picture (pacing_and_visual_variety 9.0)",
+  "picture: the 25 night clips seen on the preview reviews (E77/E78); candles, moon, rain, aurora and night flowers alternate; no person, text, brand or modern object in the 16 review frames or the contact sheet",
+  "Scripture cards (Psalm 32:5, Romans 8:1, 1 John 3:20, Micah 7:18, Luke 15:20, Isaiah 43:25) all read; the Romans 8:1 and Isaiah 43:25 boxes sit over bright candle flames but keep their contrast",
+  "package: 3 chapters (0:00, 12:08, 12:38) because the script names none; coarse for a 16-minute prayer (same as 011/014)",
+  "audio from QA measures: -15.6 LUFS, LRA 3.0, -2.7 dBTP, speech 0.868, music 0.39, WER 0.044, first word 0.68 s: every band met",
+  "signal scan PASS: no black picture, no digital silence; longest still picture 2.63 s (under the 5 s report line)",
+  "thumbnail PASS (R16): 'NIGHT PRAYER / HIS MERCY IS ENOUGH' over warm candles"
+ ],
+ "strongest_moment": "0:00-0:08: 'Before you sleep tonight, let God's mercy wash away today's regrets.' over the orange moon on black, then 'Pray this with me now.' as the single candle rises",
+ "evidence": [
+  "inspection/review-sheet.jpg",
+  "inspection/opening-sheet.jpg",
+  "inspection/pilot-contact-sheet.jpg",
+  "inspection/thumbnail.jpg",
+  "out/thumbnail_check.json",
+  "out/qa.json",
+  "out/scan.json",
+  "out/package.json",
+  "out/manifest.json",
+  "script.json"
+ ]
+}
