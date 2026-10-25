@@ -295,3 +295,15 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   Shorts are held to about 75 credits and the long is rendered free on the engine (Kokoro `bm_george`).
 - **Next.** The engine gets a story-format spec and its own frozen QA (`production/bible/long/`), technical floors
   equal to v4; first long (Gen 1-3) rendered and reviewed before 28/10 10:00.
+
+## Owner decision: TikTok mirrors the Shorts (2026-10-25 15:20 UTC)
+- **Owner.** "Every Short on HeroVerse also on TikTok (@heroverse.official), the old ones too; whenever one posts, the
+  other posts." This reverses "TikTok: not now" (day-6 cross-platform note), which was about Creator Rewards income;
+  reach for the long videos is the goal here.
+- **How.** The free Content Posting API, no scheduler service (no MCP posts organically to TikTok; the registry has
+  only ads and shop connectors). `tiktok.yml` posts one Short per run after each Short slot, oldest first, with the
+  same file and TikTok's AI-generated label. Until TikTok audits the app (2-6 weeks), posts arrive as drafts in the
+  TikTok app (inbox) and the owner taps "Post". Only Bible Shorts kept in the release can go; the prayer Shorts' files
+  were deleted after their YouTube upload.
+- **Owner action (once).** Developer app (Login Kit + Content Posting API) with the compliance site's privacy, terms
+  and callback pages; secrets `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`, `GH_SECRETS_PAT`; then `tiktok-auth.yml`.
