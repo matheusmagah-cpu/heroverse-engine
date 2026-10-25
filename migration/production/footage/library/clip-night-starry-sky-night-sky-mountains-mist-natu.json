@@ -20,9 +20,11 @@
   1440
  ],
  "sha256": "23243035791b21fb17d11e1cacf89aff9dac39296fbe4bf9cb604a9263c3b5d8",
- "vetting": "APPROVED",
- "vetting_note": "frame sheet run-39957614723 checked by Claude 2026-10-23: no people, text, logos or watermarks; on-theme",
- "vetting_reasons": [],
+ "vetting": "REJECTED",
+ "vetting_note": "graded black-run check 2026-10-25 (E77): pilot-008 render 40151353875 failed the full-file scan on this clip",
+ "vetting_reasons": [
+  "BLACK_RUN_AFTER_GRADE 1.20s"
+ ],
  "vetting_luma": [
   32.0,
   24.3,
@@ -35,5 +37,5 @@
   null
  ],
  "release_asset": "footage-clip-night-starry-sky-night-sky-mountains-mist-natu-sha256-23243035791b21fb17d11e1cacf89aff9dac39296fbe4bf9cb604a9263c3b5d8.mp4",
- "claude_seen": "2026-10-24 pilot-008 preview (3 frames, kept)"
+ "vetting_black_run_s": 1.2
 }

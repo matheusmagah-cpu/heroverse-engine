@@ -593,6 +593,16 @@
     "file": "migration/production/footage/test_assign.py",
     "contains": "def test_night_takes_no_river"
    }
+  },
+  {
+   "id": "E77",
+   "date": "2026-10-25",
+   "error": "pilot-008's render (run 40151353875) failed the full-file scan (black_picture 0.57 s > 0.5 s at 6:03; also 1:26, 8:22, 12:57, 15:16): the 'starry sky, mountains, mist' night clip goes 98 % black for up to 1.2 s once the render's footage grade is applied. Library vetting measured only the mean luma of 5 frames (32, 24, 34, 26, 22), so the clip was approved, kept on two previews and assigned to pilot-008 and pilot-013.",
+   "fix": "footage.vet measures the longest near-black run after cinematic.GRADE with the scan's own blackdetect criteria (pic_th 0.98) and rejects a clip at >= 0.5 s (BLACK_RUN_AFTER_GRADE). The 26 usable night clips were measured: only this one fails; it is REJECTED and pilot-008 and pilot-013 are reassigned (new previews follow).",
+   "antidote": {
+    "file": "migration/production/footage/test_footage.py",
+    "contains": "def test_black_run_after_the_render_grade_is_rejected"
+   }
   }
  ]
 }

@@ -87,6 +87,20 @@ class Vetting(unittest.TestCase):
         r = ft.decide([80] * 5, [[]] * 5, ["A man in a kayak on a river.", "A river."])
         self.assertEqual(r["vetting"], "REJECTED")
 
+    def test_black_run_after_the_render_grade_is_rejected(self):
+        # E77: the starry-sky clip passed the luma check but went near-black for 1.2 s once graded
+        r = ft.decide([30, 24, 34, 26, 22], [[]] * 5, self.OK_DESC, 1.2)
+        self.assertEqual(r["vetting"], "REJECTED")
+        self.assertIn("BLACK_RUN_AFTER_GRADE 1.20s", r["vetting_reasons"])
+        self.assertEqual(ft.decide([30] * 5, [[]] * 5, self.OK_DESC, 0.3)["vetting"], "APPROVED")
+        import subprocess, tempfile
+        with tempfile.TemporaryDirectory() as d:   # a dark night sky (luma ~20) is black for the full-file scan
+            dark, lit = Path(d, "dark.mp4"), Path(d, "lit.mp4")
+            for out, c in ((dark, "0x101010"), (lit, "0x606060")):
+                subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", f"color=c={c}:s=320x180:d=2", str(out)], check=True)
+            self.assertGreaterEqual(ft.graded_black_run(dark), 1.5)
+            self.assertEqual(ft.graded_black_run(lit), 0.0)
+
     def test_a_check_that_did_not_run_leaves_it_pending(self):
         self.assertEqual(ft.decide([80] * 5, [None, [], [], [], []], self.OK_DESC)["vetting"], "PENDING")
         self.assertEqual(ft.decide([80] * 5, [[]] * 5, [None, self.OK_DESC[1]])["vetting"], "PENDING")
