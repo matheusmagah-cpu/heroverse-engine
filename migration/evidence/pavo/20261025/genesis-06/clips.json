@@ -1,0 +1,92 @@
+{
+ "episode": "genesis-06-short",
+ "source": "Pavo agnes-video-new-flash, 9:16, 720p, exact zero-credit quote each, audio stripped (-an)",
+ "reviewed_by": "Claude, frame sheets of 6 frames each, 2026-10-25 23:05 UTC",
+ "clip_check": "all pass (no flags)",
+ "clips": [
+  {
+   "name": "hook-path",
+   "file": "migration/evidence/pavo/20261025/genesis-06/hook-path.mp4",
+   "sha256": "abffb86a5eac67419ca1e5f4d1702450ae03f391fa8e8343829ec4dce775baab",
+   "conversation_id": "see ../result.json (live test)",
+   "for_words": "narration 2 'Then one line breaks the pattern' (hook visual of the draft)",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "cairns",
+   "file": "migration/evidence/pavo/20261025/genesis-06/cairns.mp4",
+   "sha256": "378dc72908a0f045765b4927ab753557ecdb64f7e57d7aec31bfe4cae222f526",
+   "conversation_id": "372878510769328768",
+   "for_words": "narration 0 'a list of funerals'",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "staff",
+   "file": "migration/evidence/pavo/20261025/genesis-06/staff.mp4",
+   "sha256": "a5e9b7efd6de37711fffa55590383a883e4c1a20f07e68dbca7b5a51e787f0c1",
+   "conversation_id": "372878613898606336",
+   "for_words": "narration 1 'Adam lived ... and he died'",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "tents",
+   "file": "migration/evidence/pavo/20261025/genesis-06/tents.mp4",
+   "sha256": "824869539bb1703c3b712e296e1bc4b7f997d6cec561a489bb1cb8fe5c7513af",
+   "conversation_id": "372878635516038208",
+   "for_words": "narration 3 'Enoch lived ... begat sons and daughters'",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "wheat-path",
+   "file": "migration/evidence/pavo/20261025/genesis-06/wheat-path.mp4",
+   "sha256": "b8b55cbb568200f556a86f603b76ebf1f9f9081a101fa229bd5871181851c3b6",
+   "conversation_id": "372878681637128832",
+   "for_words": "narration 6 'Only a walk ... keeping their pace'",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "storm",
+   "file": "migration/evidence/pavo/20261025/genesis-06/storm.mp4",
+   "sha256": "aab8cdaa01d7076d2f345e106527103335c5e934e14b2e8a209e8652549e1c71",
+   "conversation_id": "372878704303195648",
+   "for_words": "narration 7 'his great-grandson is Noah' (the flood ahead)",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "footprints-stop",
+   "file": "migration/evidence/pavo/20261025/genesis-06/footprints-stop.mp4",
+   "sha256": "ec557f77f62b47fbd83482ad81c2340dcb079e7c9c64f8f15de92f63c212d849",
+   "conversation_id": "372879162216286848",
+   "for_words": "narration 5 'and he was not; for God took him'",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "olive",
+   "file": "migration/evidence/pavo/20261025/genesis-06/olive.mp4",
+   "sha256": "f094fe170ffcd4a629a320acc0d549fe303f8a2f9d292cb4b1dc6426b185605a",
+   "conversation_id": "372879207061261376",
+   "for_words": "narration 7 'Methuselah outlives everyone'",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "river",
+   "file": "migration/evidence/pavo/20261025/genesis-06/river.mp4",
+   "sha256": "1559595653644dda85b31b8d9e03650890e9e81bb76e98068111973558f84f24",
+   "conversation_id": "372879243392923392",
+   "for_words": "narration 8 close",
+   "verdict": "APPROVED"
+  }
+ ],
+ "rejected": [
+  {
+   "name": "timelapse",
+   "conversation_id": "372878658857620096",
+   "why": "modern white canvas bell tents (glamping), not period-true"
+  },
+  {
+   "name": "footprints-pair",
+   "conversation_id": "372879099217840768",
+   "why": "bare prints with round toe dots read as animal tracks; not an adult and a child side by side"
+  }
+ ]
+}
