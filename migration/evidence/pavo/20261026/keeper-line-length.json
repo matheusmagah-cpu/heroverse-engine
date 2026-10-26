@@ -1,0 +1,463 @@
+{
+ "date": "2026-10-26",
+ "question": "does Pavo's audio binding and lip sync degrade with line or clip length (~>= 8-9 s)? (failed build run 40307414749, k-insight 8.42 s line in a 9 s clip, 0 of 6)",
+ "method": "direct Pavo calls (0 credits, fresh exact quote each) with episode_build.request()'s exact prompt for each shot, reference storyteller-ref.jpg (ch-keeper-talk, the build's talking reference), seconds = ceil(line); the WAVs rebuilt locally with pilot_render.py voice + episode_build.py lines on plans/genesis-07-short.json (Kokoro v1.0 fp16, pinned sha256); halves cut at the sentence boundary from the same voice.wav and retimed by plan_check.talk_retime/episode_build.retime; every clip judged by lipsync_check.py (thresholds unchanged: audio >= 0.85, mouth >= 0.45, speak/pause >= 1.5, face >= 0.8; face_landmarker sha pinned). 16 generations.",
+ "lines": {
+  "a-insight": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight.wav",
+   "text": "Notice the order. Grief comes before judgment. The flood is not the story of a cold God, but of a wounded heart.",
+   "wav_s": 8.445,
+   "atempo": 1.0,
+   "clip_s": 9,
+   "lead_s": 0.1,
+   "tail_s": 0.21,
+   "prompt": "k-insight"
+  },
+  "b-insight-a": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight-a.wav",
+   "text": "Notice the order. Grief comes before judgment.",
+   "words": 7,
+   "speech_s": 3.849,
+   "wav_s": 3.55,
+   "atempo": 1.0842,
+   "clip_s": 4,
+   "lead_s": 0.09,
+   "tail_s": 0.36,
+   "prompt": "k-insight",
+   "plan_check": "KEEPER_LINE_TOO_SHORT (7 words, under the 12-word rule; ~2.5-3.1 s estimated) and, as a narration line, SHORT INSIGHT_MISSING (no insight line of >= 20 words is left)"
+  },
+  "b-insight-b": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight-b.wav",
+   "text": "The flood is not the story of a cold God, but of a wounded heart.",
+   "words": 15,
+   "wav_s": 4.416,
+   "atempo": 1.0,
+   "clip_s": 5,
+   "lead_s": 0.1,
+   "tail_s": 0.21,
+   "prompt": "k-insight"
+  },
+  "c-question": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-question.wav",
+   "speech_s": 4.34,
+   "wav_s": 4.55,
+   "atempo": 0.9538,
+   "clip_s": 5,
+   "lead_s": 0.14,
+   "tail_s": 0.33,
+   "prompt": "k-question"
+  },
+  "c-close": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-close.wav",
+   "speech_s": 6.334,
+   "wav_s": 6.55,
+   "atempo": 0.967,
+   "clip_s": 7,
+   "lead_s": 0.12,
+   "tail_s": 0.32,
+   "prompt": "k-close"
+  },
+  "ctl-line01": {
+   "wav": "migration/evidence/pavo/20261026/keeper/line-01.wav",
+   "wav_s": 6.385,
+   "atempo": 1.0,
+   "clip_s": 7,
+   "lead_s": 0.4,
+   "tail_s": 0.75,
+   "prompt": "k-insight (control: the E95/E98 tests' WAV under genesis-07's k-insight prompt)"
+  }
+ },
+ "generations": [
+  {
+   "arm": "a-insight",
+   "conversation_id": "373070160690678848",
+   "quoted_credits": 0,
+   "audio": 0.591,
+   "audio_lag_ms": 0,
+   "mouth": 0.238,
+   "mouth_lag_ms": 250,
+   "speak_to_pause": 1.28,
+   "face": 0.92,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "b-insight-a",
+   "conversation_id": "373070275183195904",
+   "quoted_credits": 0,
+   "audio": 0.246,
+   "audio_lag_ms": -160,
+   "mouth": 0.564,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.57,
+   "face": 0.96,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "AUDIO_OFFSET"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "b-insight-b",
+   "conversation_id": "373070465100960384",
+   "quoted_credits": 0,
+   "audio": 0.823,
+   "audio_lag_ms": 0,
+   "mouth": 0.099,
+   "mouth_lag_ms": 42,
+   "speak_to_pause": 1.06,
+   "face": 0.92,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "c-question",
+   "conversation_id": "373070517257422336",
+   "quoted_credits": 0,
+   "audio": 0.606,
+   "audio_lag_ms": 0,
+   "mouth": 0.334,
+   "mouth_lag_ms": -83,
+   "speak_to_pause": 1.56,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "c-close",
+   "conversation_id": "373070576904116800",
+   "quoted_credits": 0,
+   "audio": 0.321,
+   "audio_lag_ms": 0,
+   "mouth": 0.383,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.52,
+   "face": 0.9,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "a-insight",
+   "conversation_id": "373073532260977728",
+   "quoted_credits": 0,
+   "audio": 0.867,
+   "audio_lag_ms": 0,
+   "mouth": 0.335,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.44,
+   "face": 0.89,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.96
+  },
+  {
+   "arm": "b-insight-a",
+   "conversation_id": "373073590847016000",
+   "quoted_credits": 0,
+   "audio": 0.656,
+   "audio_lag_ms": 0,
+   "mouth": 0.437,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.48,
+   "face": 0.92,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "b-insight-b",
+   "conversation_id": "373073653086327040",
+   "quoted_credits": 0,
+   "audio": 0.845,
+   "audio_lag_ms": 0,
+   "mouth": 0.287,
+   "mouth_lag_ms": 250,
+   "speak_to_pause": 1.31,
+   "face": 0.94,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "c-question",
+   "conversation_id": "373073709282178816",
+   "quoted_credits": 0,
+   "audio": 0.777,
+   "audio_lag_ms": 0,
+   "mouth": 0.359,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.62,
+   "face": 0.98,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.64
+  },
+  {
+   "arm": "c-close",
+   "conversation_id": "373073787320832256",
+   "quoted_credits": 0,
+   "audio": 0.953,
+   "audio_lag_ms": 0,
+   "mouth": 0.468,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.85,
+   "face": 0.98,
+   "flags": [],
+   "pass": true,
+   "pavo_sound_after_our_line_s": 0.52
+  },
+  {
+   "arm": "a-insight",
+   "conversation_id": "373076337466542720",
+   "quoted_credits": 0,
+   "audio": 0.275,
+   "audio_lag_ms": 0,
+   "mouth": 0.331,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.58,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "b-insight-a",
+   "conversation_id": "373076404273493760",
+   "quoted_credits": 0,
+   "audio": 0.068,
+   "audio_lag_ms": -40,
+   "mouth": 0.337,
+   "mouth_lag_ms": -83,
+   "speak_to_pause": 1.18,
+   "face": 0.94,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "b-insight-b",
+   "conversation_id": "373076495855554816",
+   "quoted_credits": 0,
+   "audio": 0.55,
+   "audio_lag_ms": 0,
+   "mouth": 0.152,
+   "mouth_lag_ms": 250,
+   "speak_to_pause": 0.93,
+   "face": 0.98,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "c-question",
+   "conversation_id": "373076549463521024",
+   "quoted_credits": 0,
+   "audio": 0.984,
+   "audio_lag_ms": 0,
+   "mouth": 0.246,
+   "mouth_lag_ms": 208,
+   "speak_to_pause": 1.23,
+   "face": 0.95,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.88
+  },
+  {
+   "arm": "c-close",
+   "conversation_id": "373076616940893952",
+   "quoted_credits": 0,
+   "audio": 0.369,
+   "audio_lag_ms": 0,
+   "mouth": 0.329,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.52,
+   "face": 0.96,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.6
+  },
+  {
+   "arm": "ctl-line01",
+   "conversation_id": "373076751750579712",
+   "quoted_credits": 0,
+   "audio": 0.992,
+   "audio_lag_ms": 0,
+   "mouth": 0.685,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 3.24,
+   "face": 0.95,
+   "flags": [],
+   "pass": true,
+   "pavo_sound_after_our_line_s": 0.04
+  }
+ ],
+ "summary": {
+  "a-insight": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.591,
+    0.867,
+    0.275
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.238,
+    0.335,
+    0.331
+   ]
+  },
+  "b-insight-a": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.246,
+    0.656,
+    0.068
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.564,
+    0.437,
+    0.337
+   ]
+  },
+  "b-insight-b": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.823,
+    0.845,
+    0.55
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.099,
+    0.287,
+    0.152
+   ]
+  },
+  "c-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.606,
+    0.777,
+    0.984
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.334,
+    0.359,
+    0.246
+   ]
+  },
+  "c-close": {
+   "generations": 3,
+   "passed": 1,
+   "audio": [
+    0.321,
+    0.953,
+    0.369
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.383,
+    0.468,
+    0.329
+   ]
+  },
+  "ctl-line01": {
+   "generations": 1,
+   "passed": 1,
+   "audio": [
+    0.992
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.685
+   ]
+  }
+ },
+ "failed_build_40307414749": {
+  "line_s": 8.42,
+  "clip_s": 9,
+  "audio": [
+   0.731,
+   0.486,
+   0.813,
+   0.884,
+   0.68,
+   0.458
+  ],
+  "mouth": [
+   0.417,
+   0.377,
+   0.272,
+   0.271,
+   0.306,
+   0.359
+  ],
+  "passed": 0
+ },
+ "conclusions": [
+  "length is NOT the cause: the built genesis-07 lines failed at every length, 1 pass in 15 (k-close 6.55 s once); 3.55 s, 4.42 s and 4.55 s lines did no better than the 8.45 s one (audio 0.07-0.98, mouth 0.10-0.47); the halves of the split were the worst (0 of 6)",
+  "the same prompt, reference and a 7 s clip with line-01.wav passed at once with the best measures yet (audio 0.992, mouth 0.685, speak/pause 3.24): the service, the prompt (E98 pose) and the reference are fine today; what differs is the input WAV",
+  "line-01.wav (the WAV of every passing direct test, E95/E98) has 0.40 s of silence before the first word and 0.75 s after the last (5.24 s of speech in 6.385 s); every WAV episode_build lines writes is cut at the first and last word of its sentences, 0.09-0.14 s of lead and 0.21-0.36 s of tail",
+  "in every failing clip Pavo's soundtrack goes on 0.5-1.0 s after our last word up to the end of the clip (the control 0.04 s, but the passing calibration clip keeper-lipsync.mp4 0.96 s too, so that alone does not separate pass from fail); in several failing clips the line is also shifted or stretched (best fit x0.81-0.94 or 0.8-1.0 s off), which never happened with line-01.wav",
+  "retiming is not the cause either: the unretimed k-insight and k-insight-b failed like the retimed k-question, k-close and k-insight-a",
+  "E95's pad window (0.25-0.65 s from the end of the WAV to the end of the clip) was measured only on line-01.wav, whose own 0.75 s tail and 0.40 s lead were part of what passed: the rule holds on the WAV length, but the words inside it need their silence too (hypothesis H2, not yet tested)"
+ ],
+ "next_test": "H2, about 9-12 generations, on k-question (4.08 s of speech) and k-insight (8.14 s): (d) the built WAV with 0.40 s of silence added before the first word and the tail made 0.75 s (line-01's structure), clip = ceil(WAV) with the pad in 0.25-0.65 s; (e) lead silence only; (f) tail silence only; 3 generations each on k-question, then (d) on k-insight (9.3 s WAV, 10 s clip) to see whether length matters once the structure is right. If (d) passes like the control, the fix is in episode_build lines (each talking WAV gets the lead and tail silence, the compose offsets the clip by the lead) with an antidote test, as E103",
+ "changed": "nothing in the engine or the plan: the cause the task asked to test is refuted"
+}
