@@ -1,7 +1,7 @@
 {
  "date": "2026-10-26",
  "question": "does Pavo's audio binding and lip sync degrade with line or clip length (~>= 8-9 s)? (failed build run 40307414749, k-insight 8.42 s line in a 9 s clip, 0 of 6)",
- "method": "direct Pavo calls (0 credits, fresh exact quote each) with episode_build.request()'s exact prompt for each shot, reference storyteller-ref.jpg (ch-keeper-talk, the build's talking reference), seconds = ceil(line); the WAVs rebuilt locally with pilot_render.py voice + episode_build.py lines on plans/genesis-07-short.json (Kokoro v1.0 fp16, pinned sha256); halves cut at the sentence boundary from the same voice.wav and retimed by plan_check.talk_retime/episode_build.retime; every clip judged by lipsync_check.py (thresholds unchanged: audio >= 0.85, mouth >= 0.45, speak/pause >= 1.5, face >= 0.8; face_landmarker sha pinned). 28 generations (16 for length, 12 for H2).",
+ "method": "direct Pavo calls (0 credits, fresh exact quote each) with episode_build.request()'s exact prompt for each shot, reference storyteller-ref.jpg (ch-keeper-talk, the build's talking reference), seconds = ceil(line); the WAVs rebuilt locally with pilot_render.py voice + episode_build.py lines on plans/genesis-07-short.json (Kokoro v1.0 fp16, pinned sha256); halves cut at the sentence boundary from the same voice.wav and retimed by plan_check.talk_retime/episode_build.retime; every clip judged by lipsync_check.py (thresholds unchanged: audio >= 0.85, mouth >= 0.45, speak/pause >= 1.5, face >= 0.8; face_landmarker sha pinned). 34 generations (16 for length, 12 for H2, 6 for H3).",
  "lines": {
   "a-insight": {
    "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight.wav",
@@ -113,6 +113,20 @@
    "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight-d.wav",
    "arm": "k-insight, 0.40 s lead + 0.75 s tail, words retimed x1.03 to 9.55 s, 10 s clip",
    "prompt": "k-insight"
+  },
+  "g-question": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/h3-g.wav",
+   "arm": "k-question voiced again by pilot_render at Kokoro speed 0.95 with line-01's layout (LEAD_IN 0.3 s, sentence gap, pause_after 0.2 s), tail extended to line-01's 0.615 s pad; k-question prompt",
+   "wav_s": 5.385,
+   "clip_s": 6,
+   "pad_s": 0.615
+  },
+  "h-line01-speed1": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/h3-h.wav",
+   "arm": "line-01's own text (genesis-06's Keeper line) voiced again by today's pilot_render at speed 1.0 with the same layout, tail extended to the 0.615 s pad; k-insight prompt (as the control)",
+   "wav_s": 6.385,
+   "clip_s": 7,
+   "pad_s": 0.615
   }
  },
  "generations": [
@@ -578,6 +592,99 @@
     "MOUTH_NOT_IN_SYNC"
    ],
    "pass": false
+  },
+  {
+   "arm": "g-question",
+   "conversation_id": "373088576818664064",
+   "quoted_credits": 0,
+   "audio": 0.771,
+   "audio_lag_ms": 0,
+   "mouth": 0.355,
+   "mouth_lag_ms": 208,
+   "speak_to_pause": 1.36,
+   "face": 0.96,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "g-question",
+   "conversation_id": "373088634494859008",
+   "quoted_credits": 0,
+   "audio": 0.728,
+   "audio_lag_ms": 0,
+   "mouth": 0.341,
+   "mouth_lag_ms": 208,
+   "speak_to_pause": 1.49,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "g-question",
+   "conversation_id": "373088699250719424",
+   "quoted_credits": 0,
+   "audio": 0.777,
+   "audio_lag_ms": 0,
+   "mouth": 0.351,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.36,
+   "face": 0.88,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "h-line01-speed1",
+   "conversation_id": "373088760189160512",
+   "quoted_credits": 0,
+   "audio": 0.851,
+   "audio_lag_ms": 0,
+   "mouth": 0.488,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 2.12,
+   "face": 0.97,
+   "flags": [],
+   "pass": true
+  },
+  {
+   "arm": "h-line01-speed1",
+   "conversation_id": "373088817366495296",
+   "quoted_credits": 0,
+   "audio": 0.82,
+   "audio_lag_ms": 0,
+   "mouth": 0.413,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.75,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "h-line01-speed1",
+   "conversation_id": "373088880058746368",
+   "quoted_credits": 0,
+   "audio": 0.909,
+   "audio_lag_ms": 0,
+   "mouth": 0.524,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.91,
+   "face": 0.91,
+   "flags": [],
+   "pass": true
   }
  ],
  "summary": {
@@ -726,6 +833,36 @@
     0.392,
     0.386
    ]
+  },
+  "g-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.771,
+    0.728,
+    0.777
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.355,
+    0.341,
+    0.351
+   ]
+  },
+  "h-line01-speed1": {
+   "generations": 3,
+   "passed": 2,
+   "audio": [
+    0.851,
+    0.82,
+    0.909
+   ],
+   "audio_ok": 2,
+   "mouth": [
+    0.488,
+    0.413,
+    0.524
+   ]
   }
  },
  "failed_build_40307414749": {
@@ -757,8 +894,8 @@
   "retiming is not the cause either: the unretimed k-insight and k-insight-b failed like the retimed k-question, k-close and k-insight-a",
   "E95's pad window (0.25-0.65 s from the end of the WAV to the end of the clip) was measured only on line-01.wav, whose own 0.75 s tail and 0.40 s lead were part of what passed: the rule holds on the WAV length, but the words inside it need their silence too (hypothesis H2: tested below, it fails)"
  ],
- "next_test": "H3, line-01.wav against the genesis-07 lines with everything else equal: (g) k-question voiced at speed 0.95 with line-01's silences; (h) line-01's own text voiced again by today's pilot_render path at speed 1.0 with its silences; 3 generations each, against the control's 2 of 2. If (g) passes, the fix is the Keeper voice speed (characters.json voice / VOICE) with the silences; if (h) fails, the voice path itself changed since #393",
- "changed": "nothing in the engine or the plan: length is refuted (the first 16 generations) and H2 fails its rule (12 more)",
+ "next_test": "H4 (proposal): find the property of the words. First offline, no generation: syllable rate, the share of open vowels, and the lip-closing consonants (b, m, p) per second of each line, against each line's pass rate so far (line-01 4 of 5 today and 4 of 10 on E98; genesis-07's Keeper lines 1 of 27). Then 3 generations each on 2 rewrites of k-question chosen by that property, against line-01 as the control",
+ "changed": "nothing in the engine or the plan: length refuted (16 generations), H2 fails (12), H3 shows the speed is not the cause (6); 34 generations in all, 0 credits",
  "h2": {
   "question": "do the words need silence around them, as in line-01.wav (0.40 s before, 0.75 s after)? Built from the native line trimmed to its words (-35 dB), silence added, the words retimed by talk_retime(words, gaps=lead+tail) so the WAV is N - 0.45 s (the E95 pad); rule set beforehand: the fix only if (d) passes at least 2 of 3 on each line",
   "verdict": "H2 FAILS: 0 of 12 passed; (d) 0 of 3 on k-question and 0 of 3 on k-insight. Nothing changed in the engine or the plan",
@@ -768,5 +905,56 @@
    "together with the control (line-01.wav: audio 0.992, lips 0.685 under the same prompt and reference, and 10 of 11 audio >= 0.85 in the E95/E98 tests), something else in line-01.wav makes the lips follow: probably the line itself (genesis-06's Keeper line voiced at Kokoro speed 0.95, where the build voices at 1.0) or its words"
   ],
   "next_test": "H3, line-01.wav against the genesis-07 lines with everything else equal: (g) k-question voiced at speed 0.95 with line-01's silences; (h) line-01's own text voiced again by today's pilot_render path at speed 1.0 with its silences; 3 generations each, against the control's 2 of 2. If (g) passes, the fix is the Keeper voice speed (characters.json voice / VOICE) with the silences; if (h) fails, the voice path itself changed since #393"
+ },
+ "h3": {
+  "question": "is it the Keeper's voice speed (line-01 was voiced at 0.95, the build voices at 1.0) or the line itself? Rule set beforehand: the speed fix only if (g) passes at least 2 of 3",
+  "rebuild_check": "pilot_render voice on line-01's text at 0.95 rebuilds line-01.wav (6.385 s, sample correlation 0.989): it is genesis-06's Keeper line \"Genesis five reads like a list of funerals. But one name breaks the pattern.\"",
+  "verdict": "the speed is not the cause: (g) 0 of 3 (audio 0.73-0.78, lips 0.34-0.36). The voice path is fine: (h), line-01's text at speed 1.0, passed 2 of 3. What separates pass from fail is the line itself (its words), not its length, its silences, its retime or its voice speed. Nothing changed",
+  "next_test": "H4 (proposal): find the property of the words. First offline, no generation: syllable rate, the share of open vowels, and the lip-closing consonants (b, m, p) per second of each line, against each line's pass rate so far (line-01 4 of 5 today and 4 of 10 on E98; genesis-07's Keeper lines 1 of 27). Then 3 generations each on 2 rewrites of k-question chosen by that property, against line-01 as the control"
+ },
+ "measurement": {
+  "question": "k-insight with the silences (d): audio 0.99 three times, mouth 0.39 three times. Lips really out of sync (a generation problem) or a landmark misreading of a bearded, hooded face (a measurement problem)?",
+  "method": "lipsync_check's own functions (audio_match, lip_opening, mouth_sync), unchanged: the per-frame lip opening plotted against the clip's speech envelope; mouth crops every 4th frame with the measured inner-lip points 13/14 drawn on them; full frames at 4 fps; the control and calibration clips for comparison",
+  "numbers": {
+   "d-insight 373081196097720960": {
+    "mouth": 0.387,
+    "inside_speech": 0.283,
+    "smoothed_3_frames": 0.394,
+    "speak_to_pause": 1.62,
+    "face": 0.91
+   },
+   "d-insight 373081567361054464": {
+    "mouth": 0.392,
+    "inside_speech": 0.256,
+    "smoothed_3_frames": 0.394,
+    "speak_to_pause": 1.73,
+    "face": 0.94
+   },
+   "d-insight 373084801999892544": {
+    "mouth": 0.386,
+    "inside_speech": 0.224,
+    "smoothed_3_frames": 0.376,
+    "speak_to_pause": 1.6,
+    "face": 0.87
+   },
+   "control line-01 373076751750579712": {
+    "mouth": 0.685,
+    "inside_speech": 0.625,
+    "smoothed_3_frames": 0.694,
+    "speak_to_pause": 3.24,
+    "face": 0.95
+   },
+   "calibration keeper-lipsync.mp4": {
+    "mouth": 0.541,
+    "inside_speech": 0.522,
+    "smoothed_3_frames": 0.551,
+    "speak_to_pause": 2.06,
+    "face": 0.93
+   }
+  },
+  "verdict": "a generation problem, not a measurement one. The landmarks sit on the inner lips in every crop where a face is found (the beard and hood do not move them), and smoothing changes nothing (0.376-0.394). The lips really move off the words: open, teeth showing, through the 0.4 s of silence before the first word; the widest openings of the clip (~6.8 s and ~8.4 s) fall where the voice is quiet; inside the speech the lips correlate 0.22-0.28 with it, against 0.63 for the control, whose mouth closes in every pause and opens on the syllables. Same medium shot in all of them, no cut",
+  "measurement_part": "small: frames with no face found (3-13 %, filled with the mean opening) and a smile baseline with the teeth showing; neither explains 0.39 against 0.69",
+  "if_the_owner_wants_a_measurement_change_anyway": "each option is a gate change for the owner, not proposed here as the fix: (1) judge the mouth only inside the speech and interpolate frames with no face instead of the mean; (2) a learned audio-visual sync score (SyncNet-style confidence and offset, open source, CPU, no spending) beside the landmark correlation, calibrated on the clips already judged here; (3) per-word windows, the lips opening within +-2 frames of each word onset. On these three clips (1) gives 0.22-0.28, lower than today's 0.39, so it would not pass them; (2) and (3) are untested. None of them justifies lowering MOUTH_CORR_MIN without new calibration evidence",
+  "files": "migration/evidence/pavo/20261026/keeper/genesis07/mouth/ (plots, mouth sheets, full-frame sheets of the d-insight clips and the control)"
  }
 }
