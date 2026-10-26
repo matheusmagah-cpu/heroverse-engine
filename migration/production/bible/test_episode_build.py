@@ -176,6 +176,20 @@ class Generation(unittest.TestCase):
         self.assertIn("PAVO_ZERO_CREDIT_QUOTE_REQUIRED", str(err.exception))
         self.assertEqual(len(c.calls), 1)
 
+    def test_pavo_unreachable_before_any_job_is_waited_out_then_the_run_stops(self):
+        # E93: generate_video raises PAVO_UNREACHABLE only before a generation starts, so it is sent again
+        waits = []
+        ok = {"conversation_id": "1", "status": "submitted"}
+        c = FakeClient([PavoError("PAVO_UNREACHABLE"), PavoError("PAVO_RATE_LIMITED"), PavoError("PAVO_UNREACHABLE"), ok])
+        self.assertEqual(eb.submit(c, {"prompt": "x"}, sleep=waits.append, log=lambda *_: None), ok)
+        self.assertEqual(waits, [eb.OUTAGE_WAITS[0], eb.RATE_LIMIT_WAITS[0], eb.OUTAGE_WAITS[1]])
+        c = FakeClient([PavoError("PAVO_UNREACHABLE")] * (len(eb.OUTAGE_WAITS) + 1))
+        with self.assertRaises(eb.ShotFailed) as err:
+            eb.submit(c, {"prompt": "x"}, sleep=lambda s: None, log=lambda *_: None)
+        self.assertIn("PAVO_REFUSED PAVO_UNREACHABLE", str(err.exception))
+        self.assertEqual(len(c.calls), len(eb.OUTAGE_WAITS) + 1)
+        self.assertGreaterEqual(sum(eb.OUTAGE_WAITS), 30 * 60)
+
     def test_an_uncertain_submission_is_read_back_never_resubmitted(self):
         c = FakeClient([{"conversation_id": "7", "status": "unknown"}],
                        {"7": [PavoError("PAVO_UNREACHABLE"), {"status": "incomplete"}, {"status": "running"},
@@ -318,6 +332,22 @@ class Gating(unittest.TestCase):
         report = eb.generate_step(self.plan, self.work, "py", "model", client=client,
                                   download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
         return client, report
+
+    def test_a_rerun_keeps_the_clips_already_made_and_regenerates_only_the_rest(self):
+        # E93: run 40263488773 lost 25 good clips when Pavo went unreachable at shot 26; a resumed run starts there
+        first, report = self.generate()
+        kept = self.plan["shots"][0]["id"]
+        report["shots"].pop(self.plan["shots"][-1]["id"])                       # the shot the outage stopped
+        (self.work / "clips" / f"{self.plan['shots'][-1]['id']}.mp4").unlink()
+        (self.work / "report.json").write_text(json.dumps(report))
+        client, again = self.generate()
+        self.assertEqual(len(client.calls), 1)                                   # only the missing shot
+        self.assertEqual(again["shots"][kept], report["shots"][kept])
+        changed = json.loads((self.work / "report.json").read_text())
+        changed["shots"][kept]["request"]["prompt"] = "an older prompt"         # a changed request is regenerated
+        (self.work / "report.json").write_text(json.dumps(changed))
+        client, _ = self.generate()
+        self.assertEqual(len(client.calls), 1)
 
     def test_lipsync_runs_on_each_talking_clip_with_its_own_line(self):
         client, report = self.generate()

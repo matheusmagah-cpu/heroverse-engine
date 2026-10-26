@@ -753,6 +753,16 @@
     "file": "migration/production/bible/test_plan_check.py",
     "contains": "def test_the_climax_is_acted_never_a_god_voice_over_sky"
    }
+  },
+  {
+   "id": "E93",
+   "date": "2026-10-26",
+   "error": "episode.yml run 40263488773 (genesis-07-short) made 25 of 33 Pavo clips in 2 h 15, then stopped with PAVO_REFUSED PAVO_UNREACHABLE: Pavo was unreachable for some minutes (this session's Pavo connection dropped at the same time). submit() waited out only PAVO_RATE_LIMITED and treated an unreachable Pavo as final, although generate_video raises it only before any generation starts; and a new run could not reuse the 25 clips, so it would start from zero.",
+   "fix": "submit() waits out PAVO_UNREACHABLE and PAVO_UPLOAD_HOST_UNREACHABLE (60, 120, 300, 600, 900 s, about 33 min) before giving up; an uncertain submission is still never resubmitted. episode.yml takes resume_run: the failed run's artifact clips and report are restored, generate_step keeps a clip whose request is unchanged after the same checks again, and generates only the rest.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_pavo_unreachable_before_any_job_is_waited_out_then_the_run_stops"
+   }
   }
  ]
 }
