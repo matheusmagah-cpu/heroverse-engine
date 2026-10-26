@@ -1,0 +1,98 @@
+{
+ "version": "structure-v1",
+ "id": "bible-story-short",
+ "line": "Bible stories (KJV), Shorts",
+ "status": "candidate",
+ "validation": {
+  "rule": "SYSTEM.md 1.5: >=6 winners from >=4 channels, no channel > 1/3, >=3 weak contrasts, drivers counted",
+  "winners": 5,
+  "channels": 5,
+  "max_channel_share": "1/5",
+  "weak_contrasts": 2,
+  "evidence": "evidence/vidiq/20261026/bible_story_shorts.json",
+  "missing": [
+   "1 more winner (>= 6)",
+   "1 more weak contrast (>= 3)"
+  ]
+ },
+ "attributes": {
+  "conflict_hook": {
+   "label": "driver",
+   "winners": "5/5",
+   "weak": "0/2",
+   "target": "the first 2 s are a character's challenge or a shock statement of the story's conflict (Goliath's 'Who will fight me?!', Satan's 'Look at you...'), never atmosphere or narration"
+  },
+  "antagonist_or_spectacle": {
+   "label": "driver",
+   "winners": "5/5",
+   "weak": "0/2",
+   "target": "the story is told through its conflict: a giant, a tempter, a judgment, a flood; the moment with the most at stake is the one shown"
+  },
+  "acted_dialogue": {
+   "label": "hygiene",
+   "winners": "4/5",
+   "weak": "2/2",
+   "target": "characters act and speak their lines, lip-synced, faces visible"
+  },
+  "full_motion": {
+   "label": "free (winners 5/5, weak 1/2)",
+   "target": "cinematic motion in every shot; no 2.5D animated stills"
+  },
+  "host_on_screen": {
+   "label": "absent",
+   "winners": "0/5",
+   "weak": "0/2",
+   "note": "no winner has a narrator on screen: the Keeper is our own hypothesis, not a measured driver"
+  },
+  "length_s": {
+   "winners": [
+    97,
+    100,
+    170,
+    172,
+    178
+   ],
+   "weak": [
+    139,
+    147
+   ],
+   "note": "every measured Short is longer than our 62-90 s rule"
+  },
+  "lesson_share": {
+   "winners": [
+    0,
+    0,
+    0.06,
+    0.11,
+    0.28
+   ],
+   "weak": [
+    0.03,
+    0.41
+   ],
+   "note": "a lesson of at most about a quarter; the weak Noah Short spent 41 % preaching"
+  },
+  "shot_seconds": {
+   "winners": [
+    2.0,
+    3.4,
+    5.2,
+    6.1,
+    7.5
+   ]
+  },
+  "sound": {
+   "label": "hygiene",
+   "note": "orchestral score with choir swells and foley (armor, stone, wind) in every video"
+  },
+  "burned_captions": {
+   "label": "free",
+   "winners": "2/5"
+  }
+ },
+ "conflict_check": {
+  "language": "en",
+  "faith_line": "same (Bible stories)",
+  "policy": "AI label normal in the niche; no fabricated prophecy; Scripture paraphrased by winners, KJV exact here"
+ }
+}

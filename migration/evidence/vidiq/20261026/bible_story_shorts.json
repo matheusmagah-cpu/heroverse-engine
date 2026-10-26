@@ -1,0 +1,205 @@
+{
+ "date": "2026-10-26",
+ "source": "vidIQ (vidiq_outliers short 'Bible story told as a short cinematic AI animation with a narrator', vidiq_channel_videos x2 for weak contrasts, vidiq_watch_shortform_content x7 with one structure prompt)",
+ "winners": [
+  {
+   "videoId": "ltB8Lx0IZWI",
+   "channel": "Passover Connect",
+   "title": "THE LITTLE BOY WITH A BIG GOD | David vs Goliath",
+   "views": 2602763,
+   "breakout": 1206.75,
+   "seconds": 170,
+   "conflict_hook": true,
+   "host": false,
+   "acted_dialogue": true,
+   "full_motion": true,
+   "antagonist": true,
+   "cuts": 32,
+   "avg_shot_s": 5.2,
+   "wpm": 135,
+   "burned_captions": false,
+   "lesson_share": 0.28,
+   "cta": true
+  },
+  {
+   "videoId": "dVq-Un3LqoQ",
+   "channel": "Lusi Achampong",
+   "title": "The Prayers of Daniel which the Angels tried to stop",
+   "views": 690400,
+   "breakout": 209,
+   "seconds": 178,
+   "conflict_hook": true,
+   "host": false,
+   "acted_dialogue": true,
+   "full_motion": true,
+   "antagonist": true,
+   "cuts": 45,
+   "avg_shot_s": 2.0,
+   "wpm": 110,
+   "burned_captions": true,
+   "lesson_share": 0.11,
+   "cta": true
+  },
+  {
+   "videoId": "JGbu9802o9o",
+   "channel": "Apostles And Prophet Tv",
+   "title": "The Moment Jesus Responded To Satan | Cinematic Bible Story",
+   "views": 428317,
+   "breakout": 167.87,
+   "seconds": 172,
+   "conflict_hook": true,
+   "host": false,
+   "acted_dialogue": true,
+   "full_motion": true,
+   "antagonist": true,
+   "cuts": 28,
+   "avg_shot_s": 6.1,
+   "wpm": 88,
+   "burned_captions": false,
+   "lesson_share": 0.0,
+   "cta": false
+  },
+  {
+   "videoId": "hnQUUbd0wDI",
+   "channel": "Eternal Story Light",
+   "title": "Why Would God Let Satan Rebel One Last Time?",
+   "views": 61900,
+   "breakout": 364,
+   "seconds": 97,
+   "conflict_hook": true,
+   "host": false,
+   "acted_dialogue": false,
+   "full_motion": true,
+   "antagonist": true,
+   "cuts": 12,
+   "avg_shot_s": 7.5,
+   "wpm": 135,
+   "burned_captions": false,
+   "lesson_share": 0.06,
+   "cta": true
+  },
+  {
+   "videoId": "llt4eFDWx34",
+   "channel": "Steelshort",
+   "title": "Poor Boy Faces Off Against A Giant... But The Battle Is With The Lord",
+   "views": 511200,
+   "breakout": 6.2,
+   "seconds": 100,
+   "conflict_hook": true,
+   "host": false,
+   "acted_dialogue": true,
+   "full_motion": true,
+   "antagonist": true,
+   "cuts": 29,
+   "avg_shot_s": 3.4,
+   "wpm": 135,
+   "burned_captions": true,
+   "lesson_share": 0.0,
+   "cta": false
+  }
+ ],
+ "weak_contrasts": [
+  {
+   "videoId": "bx1ywMc9uKY",
+   "channel": "Apostles And Prophet Tv",
+   "title": "Jonah And The Fish | Cinematic Bible Story",
+   "views": 1851,
+   "breakout": 2.5,
+   "seconds": 139,
+   "conflict_hook": false,
+   "host": false,
+   "acted_dialogue": true,
+   "full_motion": true,
+   "antagonist": false,
+   "cuts": 34,
+   "avg_shot_s": 4.0,
+   "wpm": 105,
+   "burned_captions": false,
+   "lesson_share": 0.03,
+   "cta": false
+  },
+  {
+   "videoId": "XoX3F4HsE-I",
+   "channel": "Passover Connect",
+   "title": "NOAH'S WEATHER REPORT | Noah's Story",
+   "views": 2885,
+   "breakout": 1.57,
+   "seconds": 147,
+   "conflict_hook": false,
+   "host": false,
+   "acted_dialogue": true,
+   "full_motion": false,
+   "antagonist": false,
+   "cuts": 22,
+   "avg_shot_s": 6.6,
+   "wpm": 110,
+   "burned_captions": true,
+   "lesson_share": 0.41,
+   "cta": true
+  }
+ ],
+ "note": "Weak contrasts are same-shape Shorts of two winners' own channels (1.8K-2.9K views against 0.4-2.6M): the format is the same, so what separates is per video. Only counts and short descriptions are stored, never third-party text.",
+ "attribute_labels": {
+  "conflict_hook": {
+   "winners": 1.0,
+   "weak": 0.0,
+   "label": "driver"
+  },
+  "host": {
+   "winners": 0.0,
+   "weak": 0.0,
+   "label": "free"
+  },
+  "acted_dialogue": {
+   "winners": 0.8,
+   "weak": 1.0,
+   "label": "hygiene"
+  },
+  "full_motion": {
+   "winners": 1.0,
+   "weak": 0.5,
+   "label": "free"
+  },
+  "antagonist": {
+   "winners": 1.0,
+   "weak": 0.0,
+   "label": "driver"
+  },
+  "burned_captions": {
+   "winners": 0.4,
+   "weak": 0.5,
+   "label": "free"
+  },
+  "cta": {
+   "winners": 0.6,
+   "weak": 0.5,
+   "label": "free"
+  },
+  "seconds": {
+   "winners": [
+    170,
+    178,
+    172,
+    97,
+    100
+   ],
+   "weak": [
+    139,
+    147
+   ]
+  },
+  "lesson_share": {
+   "winners": [
+    0.28,
+    0.11,
+    0.0,
+    0.06,
+    0.0
+   ],
+   "weak": [
+    0.03,
+    0.41
+   ]
+  }
+ }
+}
