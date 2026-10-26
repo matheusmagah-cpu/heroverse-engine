@@ -13,7 +13,13 @@
    "measured_seconds": 876.1, "measured_minutes": 14.6, "words": 2322, "words_per_minute": 159.0,
    "plan_estimate": "874.1 s with long_plan_check's measured pace by voice and 0.6 s gap: within 0.3 %",
    "climax_at": 0.78, "keeper_share": 0.086,
-   "talking_holds_outside_4_7_s": []}
+   "talking_holds_outside_4_7_s": []},
+  {"name": "after the review of #418: cold open <= 30 s on its own (its last frame held until the Keeper at 30 s, 3 s at most)",
+   "measured_seconds": 875.4, "measured_minutes": 14.59, "words": 2313, "words_per_minute": 158.5,
+   "plan_estimate": "871.1 s (within 0.5 %); the cold open's words estimated to end at 29.8 s",
+   "cold_open_voice_s": 27.12, "cold_open_hold_s": 2.88, "climax_at": 0.78, "keeper_share": 0.086,
+   "talking_holds_outside_4_7_s": [],
+   "reading": "the estimate puts the cold open 2.7 s longer than the voice (its lines are short and Eve speaks fast): the 27-30 s window holds, narrowly, so the build re-checks the held frame on the measured voice"}
  ],
  "pace_by_voice_words_per_s": {
   "first_run": {"keeper (am_michael)": {"lines": 108, "pace": 2.874, "line_min": 2.207, "line_max": 3.65},

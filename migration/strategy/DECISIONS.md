@@ -480,6 +480,18 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   cold-open conflict replaces the 4-7 s title card. Everything else is v2's, unchanged: audio, loudness, pace, the
   4-7 s holds, the .srt track, the 9.5 floor and the Claude review. Frozen before any render; v1 and v2 stay
   byte-identical (`bible/test_long_plan_check.py` asserts all three).
+- **The exact rows (v2 -> v3, `grammar` only; v3's `basis` points to this entry).** This relaxes three v2 rows, by the
+  owner's explicit decision of 2026-10-26 ("Sim, régua nova", relayed and recorded by the coordinator):
+  | v2 row | v3 row |
+  |---|---|
+  | `title_card_seconds` [4.0, 7.0] | `first_shot`: the acted cold-open conflict, spoken from 0 s, never the Keeper |
+  | `figure_present_fraction_max` 0.0 | `figures_allowed`: characters.json APPROVED only (look word for word, approved references), the Keeper only in his shots, anonymous figures from behind |
+  | `footage_picture_share_min` 0.4, `footage_picture_share_counts`, `ai_video_picture_share_max` 0.55 | `ai_video_picture_share_max` 1.0 and `ai_video_clip_checks`: clip_check on every Pavo clip, lipsync_check on every talking clip, the face check on God's voice-over clips |
+
+  Every other key of v3 equals v2's (version, frozen_at_utc and basis aside); the test refuses any other difference.
+- **Not yet readable (build blocker).** `qa_pilot.py` and `prepublish_gate.py` index v1's keys directly and the gate
+  knows only `story-qa-criteria-v1`; no renderer or gate may point at v2/v3 until they read the new keys (slice 3,
+  guarded by `bible/test_long_plan_check.py` NoRendererReadsTheNewQaYet).
 - **Done.** `long_plan_check.py` checks the plan against v3 (sha256 pinned): the QA_CONFLICT_* owner rows of v2 became
   checks (the cold open, approved characters only with DRAFT ones pending, every talking speaker a human face:
   TALKING_WITHOUT_A_FACE, so the serpent stays silent and the Keeper narrates its words).
