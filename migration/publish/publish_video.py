@@ -46,8 +46,10 @@ def check(response, what):
     return response.json() if response.content else {}
 
 
-def srt(sentences):
-    return captions.srt(sentences)
+def srt_problems(manifest):
+    """The strict problems of the SRT this manifest would upload, measured against the video's length (E107)."""
+    text = captions.srt(manifest.get("sentences") or [])
+    return captions.problems(text.encode("utf-8"), manifest.get("output_seconds"))
 
 
 def caption_tracks(s, vid):
@@ -75,6 +77,7 @@ def verify_captions(s, vid, steps):
     seen = captions.wait(lambda: caption_tracks(s, vid), steps.get("captions_track"))
     status = seen["status"] if seen else "not_listed"
     steps["captions_status"] = status
+    steps.pop("captions_failure_reason", None)
     if seen:
         steps["captions_track"] = seen["id"]
         if seen.get("failure_reason"):
@@ -85,6 +88,32 @@ def verify_captions(s, vid, steps):
         print(f"::warning::CAPTIONS_NOT_YET_SERVING {vid}: track {steps.get('captions_track')} is {status} after "
               f"{captions.WAIT_CALLS} checks; recorded, verified again by a re-run or channel-privacy.yml captions-audit")
     return None
+
+
+def srt_invalid_warning(vid, steps, bad):
+    """A resumed upload whose manifest fails the strict SRT check: nothing invalid is uploaded, the rest of the
+    publication goes on, and the step is left for channel-privacy.yml captions-repair (review of #424)."""
+    steps["captions_srt_invalid"] = "; ".join(bad[:5])
+    print(f"::warning::CAPTIONS_SRT_INVALID {vid}: {steps['captions_srt_invalid']}; no track uploaded, the captions "
+          f"step is left for captions-repair")
+
+
+def replace_captions(s, vid, steps, manifest, bad):
+    """Delete our recorded track (when it is listed and not serving; never the automatic ASR one) and insert a new
+    one from the same validated SRT. Returns False, with a warning, when the SRT is invalid."""
+    if bad:
+        srt_invalid_warning(vid, steps, bad)
+        return False
+    old = captions.ours(caption_tracks(s, vid), steps.get("captions_track"))
+    if old and old["status"] == "serving":   # served since the failure was recorded: nothing to replace
+        return True
+    if old and old["track_kind"] in ("standard", "STANDARD"):
+        check(s.delete(API + "captions", params={"id": old["id"]}), "CAPTIONS_DELETE")
+    steps["captions_track"] = insert_captions(s, vid, manifest["sentences"], manifest.get("output_seconds"))
+    steps["captions"] = True
+    for k in ("captions_status", "captions_failure_reason", "captions_srt_invalid"):
+        steps.pop(k, None)
+    return True
 
 
 def upload(s, path, body):
@@ -228,6 +257,9 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
     entry = ledger["entries"].get(key, {"steps": {}})
     if "video_id" not in entry:
         check_new_upload(manifest_path, manifest, video)
+    bad_srt = srt_problems(manifest) if manifest.get("sentences") else []
+    if "video_id" not in entry and bad_srt:  # a new upload never goes up with captions it cannot carry (E107)
+        raise SystemExit("CAPTIONS_SRT_INVALID: " + "; ".join(bad_srt[:5]))
     s = session()
     if [c["id"] for c in check(s.get(API + "channels", params={"part": "id", "mine": "true"}), "CHANNEL")["items"]] != [CHANNEL]:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
@@ -252,18 +284,34 @@ def main(package_path, manifest_path, video, thumbnail, ledger_path, receipt_pat
                      headers={"Content-Type": "image/jpeg"}), "THUMBNAIL")
         entry["steps"]["thumbnail"] = True
         save()
-    if not entry["steps"].get("captions") and manifest.get("sentences"):
+    steps, inserted = entry["steps"], False   # at most one captions.insert a run (E107)
+    if not steps.get("captions") and manifest.get("sentences"):
         found = captions.ours(caption_tracks(s, vid))   # our standard English track, never the automatic ASR one
         if found:  # inserted by an earlier run that stopped before recording it
-            entry["steps"]["captions_track"] = found["id"]
+            steps.update({"captions": True, "captions_track": found["id"]})
+        elif bad_srt:  # a resumed upload of a legacy manifest: a warning, never an invalid track or a blocked chain
+            srt_invalid_warning(vid, steps, bad_srt)
         else:
-            entry["steps"]["captions_track"] = insert_captions(s, vid, manifest["sentences"], manifest.get("output_seconds"))
-        entry["steps"]["captions"] = True
+            steps["captions_track"] = insert_captions(s, vid, manifest["sentences"], manifest.get("output_seconds"))
+            steps["captions"], inserted = True, True
         save()
     captions_failed = None
-    if entry["steps"].get("captions") and entry["steps"].get("captions_status") != "serving":
-        captions_failed = verify_captions(s, vid, entry["steps"])
-        save()
+    if steps.get("captions") and steps.get("captions_status") != "serving":
+        go_on = True
+        if steps.get("captions_status") in ("failed", "not_listed", "deleted") and manifest.get("sentences"):
+            # a failure recorded by an earlier run: re-insert once instead of failing every re-run forever
+            go_on = inserted = replace_captions(s, vid, steps, manifest, bad_srt)
+            save()
+        if go_on:
+            captions_failed = verify_captions(s, vid, steps)
+            save()
+            if captions_failed and not inserted and manifest.get("sentences"):
+                inserted = True
+                if replace_captions(s, vid, steps, manifest, bad_srt):
+                    captions_failed = verify_captions(s, vid, steps)
+                else:
+                    captions_failed = None   # recorded with a warning; the repair path takes it
+                save()
     if not entry["steps"].get("playlist") and package.get("playlist"):
         # the playlist is a convenience: a failure is recorded in the receipt and never blocks verification
         try:

@@ -12,6 +12,7 @@ by the skill's `scripts/sweep_status.py`; the other columns are written by hand.
 | `fresh-code` | Code shipped in the last 3 days; highest churn. | - | - |
 | `pavo-mcp` | Private stdio Pavo client, video adapter, server, workflow and registration; excludes provider internals and other publishers. | 2026-10-25 | 0/5 |
 | `actions-ci` | PR #417 CI changes: pr-checks, render smoke/preview/render, pavo-footage and voice-sample workflows; `render_pilot.sh`, `fetch_assets.sh`, `apt_install.sh`, `minutes.py`. Pre-existing P1-P3 recorded (depth model hash only printed, pip pins without hashes, render-smoke cancel grouped by `github.ref`). | 2026-10-26 | 0/5 security (none ≥ 8); 7 review fixes |
+| `captions-e107` | PR #424: `channel-privacy.yml` captions-audit/captions-repair modes, `channel/captions_audit.py`, `publish/captions.py`, `publish_video.py` caption verification, `preflight.py`. Hardening H1 recorded (repair's `item["manifest"]` has no repository containment check). | 2026-10-26 | 0/5 security (none ≥ 8); 8 review fixes |
 
 ## Proposed, not yet run
 

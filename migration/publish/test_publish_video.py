@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import captions  # noqa: E402
 import publish_video as pv  # noqa: E402
 
 VIDEO_BYTES = b"0" * 10
@@ -96,7 +97,7 @@ class Publish(unittest.TestCase):
                 self.run_once(Path(t), FakeSession(channel="UCother"))
 
     def test_srt(self):
-        self.assertEqual(pv.srt([{"start": 61.5, "end": 62.25, "text": "x"}]), "1\n00:01:01,500 --> 00:01:02,250\nx\n")
+        self.assertEqual(captions.srt([{"start": 61.5, "end": 62.25, "text": "x"}]), "1\n00:01:01,500 --> 00:01:02,250\nx\n")
 
 
 class NewUploadOwnerFloor(unittest.TestCase):

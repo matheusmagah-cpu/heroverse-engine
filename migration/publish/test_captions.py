@@ -21,6 +21,7 @@ import captions  # noqa: E402
 import publish_video as pv  # noqa: E402
 import preflight as pf  # noqa: E402
 import captions_audit as ca  # noqa: E402
+import channel_privacy as cp  # noqa: E402
 
 VIDEO_BYTES = b"0" * 10
 VIDEO_SHA = hashlib.sha256(VIDEO_BYTES).hexdigest()
@@ -81,13 +82,16 @@ class FakeYouTube:
     def video(self, vid):
         v = self.videos.get(vid, {})
         return {"id": vid, "snippet": {"channelId": pv.CHANNEL, "title": v.get("title", "T"),
-                                       "publishedAt": "2026-10-25T00:00:00Z", "defaultAudioLanguage": v.get("lang", "en")},
+                                       "publishedAt": "2026-10-25T00:00:00Z", "defaultAudioLanguage": v.get("lang", "en"),
+                                       "description": ""},
                 "status": {"privacyStatus": v.get("privacy", "private"), "uploadStatus": "processed"},
                 "contentDetails": {"duration": "PT16M4S"}}
 
     def post(self, url, params=None, data=None, **kw):
         what = url.split("/")[-1]
         self.calls.append(("POST", what))
+        if what == "captions" and getattr(self, "insert_raises", None):
+            raise self.insert_raises
         if params and params.get("uploadType") == "resumable":
             return R(200, {}, {"Location": "https://upload/session"})
         if what == "playlists":
@@ -130,7 +134,8 @@ def publish(d, fake, sentences=SENTENCES, ledger=None, duration=None):
             pv.main(pkg, man, d / "v.mp4", d / "t.jpg", d / "ledger.json", d / "r.json")
         except SystemExit as e:
             error = str(e)
-    steps = json.loads((d / "ledger.json").read_text())["entries"][f"pilot-x:{VIDEO_SHA}"]["steps"]
+    steps = json.loads((d / "ledger.json").read_text())["entries"][f"pilot-x:{VIDEO_SHA}"]["steps"] \
+        if (d / "ledger.json").exists() else None
     receipt = json.loads((d / "r.json").read_text()) if (d / "r.json").exists() else None
     return error, steps, receipt, out.getvalue()
 
@@ -155,7 +160,8 @@ class Srt(unittest.TestCase):
         self.assertGreaterEqual(checked, 11)
 
     def test_builder_output_and_shape(self):
-        self.assertEqual(pv.srt([{"start": 61.5, "end": 62.25, "text": "x"}]), "1\n00:01:01,500 --> 00:01:02,250\nx\n")
+        self.assertEqual(captions.srt([{"start": 61.5, "end": 62.25, "text": "x"}]), "1\n00:01:01,500 --> 00:01:02,250\nx\n")
+        self.assertFalse(hasattr(pv, "srt"))                         # one builder: captions.srt (review of #424)
         text = captions.srt([{"start": 0, "end": 1, "text": "a\n\nb"}, {"start": 1, "end": 2, "text": "  "},
                              {"start": 2, "end": 3, "text": "c"}])
         self.assertEqual(text, "1\n00:00:00,000 --> 00:00:01,000\na b\n\n2\n00:00:02,000 --> 00:00:03,000\nc\n")
@@ -183,6 +189,13 @@ class Srt(unittest.TestCase):
                 self.assertIn(code, found)
         self.assertIn("SRT_NOT_UTF8", " ".join(captions.problems(good.encode() + b"\xff\n")))
         self.assertIn("SRT_BOM", " ".join(captions.problems(b"\xef\xbb\xbf" + good.encode())))
+
+    def test_the_last_cue_may_end_on_the_videos_rounded_end(self):
+        # review of #424: the stamp is rounded to the millisecond, the duration was not
+        text = captions.srt([{"start": 0.0, "end": 3.9996, "text": "End."}])
+        self.assertEqual(text.splitlines()[1], "00:00:00,000 --> 00:00:04,000")
+        self.assertEqual(captions.problems(text, 3.9996), [])
+        self.assertIn("PAST_VIDEO_END", " ".join(captions.problems(text, 3.9984)))
 
     def test_multipart_media_part_is_exactly_the_srt(self):
         text = captions.srt(SENTENCES)
@@ -247,15 +260,38 @@ class PublishVerifiesTheTrack(unittest.TestCase):
             self.assertIn("::warning::CAPTIONS_NOT_YET_SERVING", log)
             self.assertLessEqual(pf.LONG_UNITS, pf.DAY_UNITS)
 
-    def test_a_legacy_entry_is_verified_on_rerun(self):
-        # every long published before E107 has captions: true and no status; a re-run reads it
+    def legacy(self, d, states, status=None):
+        steps = {"thumbnail": True, "captions": True}
+        if status:
+            steps.update({"captions_track": "OLD", "captions_status": status, "captions_failure_reason": "unknownFormat"})
+        ledger = {"entries": {f"pilot-x:{VIDEO_SHA}": {"video_id": "VID123", "steps": steps}}}
+        fake = FakeYouTube(states=states, before=[track("OLD", "failed", reason="unknownFormat"),
+                                                  track("ASR", kind="asr")], reason="processingFailed")
+        return fake, publish(d, fake, ledger=ledger)
+
+    def test_a_legacy_failed_track_is_replaced_once_and_verified(self):
+        # every long published before E107 has captions: true and no status; a re-run reads it and, failed, re-inserts
         with tempfile.TemporaryDirectory() as t:
-            ledger = {"entries": {f"pilot-x:{VIDEO_SHA}": {"video_id": "VID123", "steps": {
-                "thumbnail": True, "captions": True}}}}
-            fake = FakeYouTube(videos={"VID123": {"tracks": [track("OLD", "failed", reason="unknownFormat")]}})
-            error, steps, _, _ = publish(Path(t), fake, ledger=ledger)
+            fake, (error, steps, receipt, _) = self.legacy(Path(t), ("serving",))
+            self.assertIsNone(error)
+            self.assertEqual(fake.deleted, ["OLD"])                               # ours only, never the ASR track
+            self.assertEqual((steps["captions_track"], steps["captions_status"]), ("CAP-NEW", "serving"))
+            self.assertNotIn("captions_failure_reason", steps)
+            self.assertEqual(fake.calls.count(("POST", "captions")), 1)
+
+    def test_a_recorded_failure_is_retried_once_per_run_and_never_blocks_forever(self):
+        # review of #424: a recorded failed status used to fail every re-run with no way out
+        with tempfile.TemporaryDirectory() as t:
+            fake, (error, steps, _, _) = self.legacy(Path(t), ("serving",), status="failed")
+            self.assertIsNone(error)
+            self.assertEqual((steps["captions_track"], steps["captions_status"]), ("CAP-NEW", "serving"))
+            self.assertEqual(fake.calls.count(("POST", "captions")), 1)
+        with tempfile.TemporaryDirectory() as t:
+            fake, (error, steps, receipt, _) = self.legacy(Path(t), ("failed",), status="failed")
             self.assertIn("CAPTIONS_FAILED", error)
-            self.assertEqual((steps["captions_track"], steps["captions_failure_reason"]), ("OLD", "unknownFormat"))
+            self.assertEqual(fake.calls.count(("POST", "captions")), 1)           # at most one insert a run
+            self.assertEqual((steps["captions_track"], steps["captions_status"]), ("CAP-NEW", "failed"))
+            self.assertEqual(receipt["steps"]["captions_status"], "failed")
 
     def test_the_automatic_track_is_never_taken_for_ours(self):
         with tempfile.TemporaryDirectory() as t:
@@ -265,13 +301,35 @@ class PublishVerifiesTheTrack(unittest.TestCase):
             self.assertIn(("POST", "captions"), fake.calls)               # before E107 the ASR track skipped this
             self.assertEqual(steps["captions_track"], "CAP-NEW")
 
-    def test_an_invalid_srt_is_refused_before_any_caption_call(self):
+    def test_an_invalid_srt_refuses_a_new_upload_before_the_session(self):
         with tempfile.TemporaryDirectory() as t:
             fake = FakeYouTube()
             error, steps, _, _ = publish(Path(t), fake, duration=3.0)    # the second cue ends at 4.0 s
             self.assertIn("CAPTIONS_SRT_INVALID", error)
+            self.assertEqual(fake.calls, [])                              # no upload, no call at all
+            self.assertIsNone(steps)
+
+    def test_an_invalid_srt_on_a_resumed_upload_is_a_warning_and_the_chain_goes_on(self):
+        # review of #424: a legacy manifest that fails the strict check must not block the run forever
+        with tempfile.TemporaryDirectory() as t:
+            ledger = {"entries": {f"pilot-x:{VIDEO_SHA}": {"video_id": "VID123", "steps": {"thumbnail": True}}}}
+            fake = FakeYouTube()
+            error, steps, receipt, log = publish(Path(t), fake, ledger=ledger, duration=3.0)
+            self.assertIsNone(error)
+            self.assertNotIn(("POST", "captions"), fake.calls)            # never an invalid track
+            self.assertNotIn("captions", steps)                            # left for the repair path
+            self.assertIn("PAST_VIDEO_END", steps["captions_srt_invalid"])
+            self.assertIn("::warning::CAPTIONS_SRT_INVALID", log)
+            self.assertEqual(receipt["video_id"], "VID123")
+        with tempfile.TemporaryDirectory() as t:                           # a recorded failure, SRT invalid
+            ledger = {"entries": {f"pilot-x:{VIDEO_SHA}": {"video_id": "VID123", "steps": {
+                "thumbnail": True, "captions": True, "captions_track": "OLD", "captions_status": "failed"}}}}
+            fake = FakeYouTube(before=[track("OLD", "failed")])
+            error, steps, _, log = publish(Path(t), fake, ledger=ledger, duration=3.0)
+            self.assertIsNone(error)
+            self.assertEqual(fake.deleted, [])
             self.assertNotIn(("POST", "captions"), fake.calls)
-            self.assertNotIn("captions", steps)
+            self.assertIn("::warning::CAPTIONS_SRT_INVALID", log)
 
     def test_the_body_sent_is_the_framed_srt(self):
         with tempfile.TemporaryDirectory() as t:
@@ -286,9 +344,9 @@ class PublishVerifiesTheTrack(unittest.TestCase):
             d = Path(t)
             (d / "out").mkdir()
             (d / "out" / "manifest.json").write_text(json.dumps({"sentences": SENTENCES, "output_seconds": 3.0}))
-            self.assertTrue(any(p.startswith("CAPTIONS_SRT") for p in pf.caption_problems(d)))
-            (d / "out" / "manifest.json").write_text(json.dumps({"sentences": SENTENCES, "output_seconds": 9.0}))
-            self.assertEqual(pf.caption_problems(d), [])
+            self.assertTrue(any(p.startswith("CAPTIONS_SRT") for p in pf.caption_problems({"sentences": SENTENCES,
+                                                                                            "output_seconds": 3.0})))
+            self.assertEqual(pf.caption_problems({"sentences": SENTENCES, "output_seconds": 9.0}), [])
 
 
 class Audit(unittest.TestCase):
@@ -297,17 +355,20 @@ class Audit(unittest.TestCase):
                                                             track("A1", kind="asr")]},
                 "BBB": {"title": "Genesis", "tracks": [track("A2", kind="asr")]},
                 "CCC": {"title": "Morning", "privacy": "public", "tracks": [track("C3")]},
-                "PTX": {"title": "Você é amado", "lang": "pt", "tracks": []}}
+                "PTX": {"title": "Você é amado", "lang": "pt", "tracks": []},
+                "PTN": {"title": "Você não está sozinha, Deus está com você", "lang": None, "tracks": []}}
 
     def run_audit(self, scope="all", units_max=10000):
-        fake = FakeYouTube(uploads=["AAA", "BBB", "CCC", "PTX"], videos=self.videos())
+        fake = FakeYouTube(uploads=["AAA", "BBB", "CCC", "PTX", "PTN"], videos=self.videos())
         with tempfile.TemporaryDirectory() as t:
             out = Path(t) / "audit.json"
             ledger = Path(t) / "ledger.json"
             ledger.write_text(json.dumps({"entries": {"pilot-008:abc": {"video_id": "AAA"},
                                                       "bible:genesis-01-short:def": {"video_id": "BBB"}}}))
-            with patch.object(ca, "session", return_value=fake), contextlib.redirect_stdout(io.StringIO()):
+            with patch.object(ca, "session", return_value=fake), contextlib.redirect_stdout(io.StringIO()), \
+                    patch.object(cp, "channel_uploads", wraps=cp.channel_uploads) as shared:
                 ca.audit(out, ledger, scope, units_max, run_id="123")
+            self.assertEqual(shared.call_count, 1)                              # one paging helper (review of #424)
             return json.loads(out.read_text()), fake
 
     def test_lists_every_track_and_its_status_read_only(self):
@@ -329,10 +390,10 @@ class Audit(unittest.TestCase):
         record, _ = self.run_audit(scope="engine")
         self.assertEqual(sorted(v["video_id"] for v in record["videos"]), ["AAA", "BBB"])
         record, _ = self.run_audit(scope="english")
-        self.assertNotIn("PTX", [v["video_id"] for v in record["videos"]])
+        self.assertEqual(sorted(v["video_id"] for v in record["videos"]), ["AAA", "BBB", "CCC"])   # cp.language's rule
         record, fake = self.run_audit(scope="all", units_max=2 * ca.LIST_UNITS + 2)
         self.assertEqual(fake.listings, 1)                                      # 3 units to list the uploads, then one 50-unit captions.list
-        self.assertEqual(len(record["not_audited_unit_cap"]), 3)
+        self.assertEqual(len(record["not_audited_unit_cap"]), 4)
 
 
 class Repair(unittest.TestCase):
@@ -340,7 +401,9 @@ class Repair(unittest.TestCase):
         man = d / "manifest.json"
         man.write_text(json.dumps({"output_sha256": manifest_sha, "output_seconds": 9.0, "sentences": SENTENCES}))
         ledger = d / "ledger.json"
-        ledger.write_text(json.dumps({"entries": {"pilot-008:abc": {"video_id": "VID008"}}}))
+        ledger.write_text(json.dumps({"entries": {"pilot-008:abc": {"video_id": "VID008", "steps": {
+            "thumbnail": True, "captions": True, "captions_track": "BAD", "captions_status": "failed",
+            "captions_failure_reason": "processingFailed"}}}}))
         plan = d / "plan.json"
         plan.write_text(json.dumps({"channel_id": pv.CHANNEL, "reason": "audit run 1: failed",
                                     "to_repair": [{"video_id": v, "pilot": "pilot-008", "manifest": str(man)}
@@ -350,6 +413,7 @@ class Repair(unittest.TestCase):
     def run_repair(self, d, plan, ledger, fake):
         out = d / "receipt.json"
         error = None
+        self.out = out
         with patch.object(ca, "session", return_value=fake), patch.object(captions.time, "sleep", lambda s: None), \
                 contextlib.redirect_stdout(io.StringIO()):
             try:
@@ -368,6 +432,36 @@ class Repair(unittest.TestCase):
             self.assertEqual(changes[0]["before"]["status"], "failed")
             self.assertEqual(fake.deleted, ["BAD"])                              # never the ASR track
             self.assertEqual(captions.parts(fake.bodies[0][1])[1][1], captions.srt(SENTENCES).encode())
+            # review of #424: the ledger follows the repair, so publish_video never polls the deleted track
+            steps = json.loads(ledger.read_text())["entries"]["pilot-008:abc"]["steps"]
+            self.assertEqual((steps["captions_track"], steps["captions_status"]), ("CAP-NEW", "serving"))
+            self.assertNotIn("captions_failure_reason", steps)
+
+    def test_the_receipt_is_written_after_each_delete_and_insert(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            plan, ledger, fake = self.setup(d, [track("BAD", "failed")])
+            fake.insert_raises = RuntimeError("CAPTIONS_HTTP_500")
+            with patch.object(ca, "session", return_value=fake), contextlib.redirect_stdout(io.StringIO()):
+                with self.assertRaises(RuntimeError):
+                    ca.repair(plan, d / "receipt.json", ledger, root=Path("/"))
+            row = json.loads((d / "receipt.json").read_text())["changes"][0]
+            self.assertEqual((row["video_id"], row["result"], row["deleted"]), ("VID008", "DELETED_NOT_REINSERTED", "BAD"))
+            steps = json.loads(ledger.read_text())["entries"]["pilot-008:abc"]["steps"]
+            self.assertEqual(steps["captions_status"], "deleted")              # the ledger knows the track is gone
+
+    def test_a_plan_longer_than_the_job_can_wait_is_refused(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            plan, ledger, fake = self.setup(d, [], plan_ids=["V%d" % i for i in range(ca.MAX_PLAN + 1)])
+            with patch.object(ca, "session", return_value=fake), self.assertRaisesRegex(SystemExit, "PLAN_TOO_LONG"):
+                ca.repair(plan, d / "receipt.json", ledger, root=Path("/"))
+            self.assertEqual(fake.calls, [])
+        wf = (ROOT / ".github/workflows/channel-privacy.yml").read_text()
+        minutes = int(wf.split("timeout-minutes:")[1].split()[0])
+        self.assertEqual(ca.JOB_SECONDS, minutes * 60)
+        self.assertGreaterEqual(ca.MAX_PLAN, 1)
+        self.assertLessEqual(ca.MAX_PLAN * ca.SECONDS_PER_TRACK + ca.MARGIN_SECONDS, ca.JOB_SECONDS)
 
     def test_a_serving_track_is_left_alone(self):
         with tempfile.TemporaryDirectory() as t:
@@ -397,6 +491,34 @@ class Workflow(unittest.TestCase):
         hb = (ROOT / "migration/ops/heartbeat.py").read_text()
         self.assertNotIn("captions-", hb)
         self.assertNotIn("captions-repair-plan.json", [p.name for p in (ROOT / "migration/channel").iterdir()])
+        self.assertIn("git add migration/channel migration/publish/ledger.json", wf)   # the repair's ledger update
+
+
+class SharedUploads(unittest.TestCase):
+    def test_plan_and_audit_page_the_uploads_through_one_helper(self):
+        pages = {None: {"items": [{"contentDetails": {"videoId": "A"}}], "nextPageToken": "p2"},
+                 "p2": {"items": [{"contentDetails": {"videoId": "B"}}]}}
+        seen = []
+
+        def get(endpoint, params):
+            seen.append(endpoint)
+            if endpoint == "channels":
+                return {"items": [{"id": cp.CHANNEL, "contentDetails": {"relatedPlaylists": {"uploads": "UU1"}}}]}
+            if endpoint == "playlistItems":
+                return pages[params.get("pageToken")]
+            return {"items": [{"id": i, "snippet": {"title": "t", "publishedAt": "x"}, "status": {"privacyStatus": "public"},
+                               "contentDetails": {}} for i in params["id"].split(",")]}
+        videos, calls = cp.channel_uploads(get, "snippet,status")
+        self.assertEqual(([v["id"] for v in videos], calls), (["A", "B"], 4))
+        with self.assertRaisesRegex(SystemExit, "CHANNEL_IDENTITY_MISMATCH"):
+            cp.channel_uploads(lambda e, p: {"items": [{"id": "UCother"}]}, "snippet")
+        with tempfile.TemporaryDirectory() as t, patch.object(cp, "token", return_value="x"), \
+                patch.object(cp, "call", lambda tok, method, endpoint, params, body=None: get(endpoint, params)), \
+                patch.object(cp, "channel_uploads", wraps=cp.channel_uploads) as shared, \
+                contextlib.redirect_stdout(io.StringIO()):
+            cp.plan(Path(t) / "plan.json")
+            self.assertEqual(shared.call_count, 1)
+            self.assertEqual(json.loads((Path(t) / "plan.json").read_text())["uploads"], 2)
 
 
 if __name__ == "__main__":

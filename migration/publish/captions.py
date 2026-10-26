@@ -99,7 +99,7 @@ def problems(data, duration=None):
             out.append(f"SRT_CUE_{n}_NOT_POSITIVE {lines[1]}")
         if start < prev_end - 1e-9:
             out.append(f"SRT_CUE_{n}_OVERLAPS_PREVIOUS {lines[1]}")
-        if duration is not None and end > duration + 1e-9:
+        if duration is not None and end > round(duration, 3) + 1e-9:   # the stamp is rounded to the ms; so is the end
             out.append(f"SRT_CUE_{n}_PAST_VIDEO_END {end:.3f} > {duration:.3f}")
         if "-->" in "\n".join(lines[2:]):
             out.append(f"SRT_CUE_{n}_ARROW_IN_TEXT")
