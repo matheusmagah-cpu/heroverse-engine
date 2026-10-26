@@ -170,6 +170,10 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
     if plan.get("burned_captions") is not g["burned_captions"]:
         problems.append("BURNED_CAPTIONS (the long carries an uploaded .srt track, none burned in: burned_captions "
                         "false, story QA v2/v3)")
+    # E108 (review of #426): the period rule of the Short, the same shared helper: every scene prompt states its
+    # story's period word for word and names nothing it excludes
+    if isinstance(plan.get("shots"), list):
+        problems += pc.plan_period_problems(plan, plan["shots"])
     arc = arc_map.get(plan.get("arc"))
     chapters = plan.get("chapters")
     if not arc:

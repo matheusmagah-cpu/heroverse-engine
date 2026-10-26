@@ -4,6 +4,8 @@ twice, an uncertain submission only read back, and the compose timeline keeps th
 import copy
 import hashlib
 import json
+import os
+import re
 from pathlib import Path
 import shutil
 import struct
@@ -35,9 +37,29 @@ def talking_genesis_07():
     return json.loads(out)
 
 
+# E108: every scene prompt states its period word for word (plan_check.period_problems; request() refuses one that
+# does not). The older plans and the stubs here get it the way genesis-07's unchanged scenes got it: the period
+# inserted before the standard tail
+PERIOD = f"{eb.plan_check.PERIOD_SETTING} {eb.plan_check.PERIOD_EXCLUDE}"
+TAIL = re.compile(r"\s*(No people, no text, no logos\.|No text, no logos\.)$")
+
+
+def with_period(plan):
+    plan.setdefault("period", "before-the-flood")
+    for s in plan["shots"]:
+        if s["kind"] == "scene" and PERIOD not in s["prompt"]:
+            m = TAIL.search(s["prompt"])
+            s["prompt"] = f"{s['prompt'][:m.start()]} {PERIOD} {m.group(1)}" if m else f"{s['prompt']} {PERIOD}"
+    return plan
+
+
 # the default mode (a talking, lip-synced Keeper) is tested on the plan main had before plan B; genesis-07 itself is
 # now the voice-over plan (VO_EXAMPLE)
-EXAMPLE = talking_genesis_07()
+EXAMPLE = with_period(talking_genesis_07())
+# its scene prompts asked for "the road out of the city", "a lane", "the city of tents", "a quiet room": refused now
+# (SCENE_PERIOD_CONFLICT, E108), so every scene takes genesis-07's own prompt; the talking Keeper stays the test's
+_NOW = {v["id"]: v["prompt"] for v in json.loads((HERE / "plans" / "genesis-07-short.json").read_text())["shots"]}
+EXAMPLE["shots"] = [dict(s, prompt=_NOW[s["id"]]) if s["kind"] == "scene" else s for s in EXAMPLE["shots"]]
 
 
 def layout_for(plan, durations):
@@ -70,7 +92,7 @@ STUB_CHARS = {"eve": {"status": "APPROVED", "look": EVE, "refs": ["full"], "voic
               "keeper": {"status": "APPROVED", "look": "x", "refs": ["front"], "voice": "am_michael"}}
 
 
-def dialogue_plan():
+def _dialogue_plan():
     """Eve challenges at 0 s (her own voice, lip-synced), narration over a scene, God's voice-over, the Keeper closes."""
     style = "Painterly cinematic realism, cinema camera."
     return {"episode": "t", "part": 0, "narration": [{"kind": "story", "text": "a b c"},
@@ -82,6 +104,10 @@ def dialogue_plan():
                       {"id": "s-god", "kind": "scene", "speaker": "god", "line": "I will destroy man.",
                        "reference": "Genesis 6:7 (KJV)", "seconds": 8, "characters": [], "prompt": "storm"},
                       {"id": "k-close", "kind": "keeper", "lines": [1], "prompt": "k"}]}
+
+
+def dialogue_plan():
+    return with_period(_dialogue_plan())
 
 
 class Requests(unittest.TestCase):
@@ -504,6 +530,70 @@ class Gating(unittest.TestCase):
         client, _ = self.generate()
         self.assertEqual(len(client.calls), 1)
 
+    def test_regenerate_forces_only_the_named_shots_of_a_resume_and_records_them(self):
+        # review of #426: after Claude's frame review rejects a clip, a resume redoes only that shot, its prompt
+        # unchanged (episode.yml `regenerate`), instead of editing prompts to force it
+        first, report = self.generate()
+        forced = self.plan["shots"][1]["id"]
+        n = len(self.plan["shots"])
+        client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
+                            {str(i): [done(str(i))] for i in range(n)})
+        again = eb.generate_step(self.plan, self.work, "py", "model", client=client, regenerate=[forced],
+                                 download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
+        self.assertEqual(len(client.calls), 1)                                   # only the forced shot
+        self.assertEqual(again["regenerated"], [forced])
+        self.assertTrue(again["shots"][forced]["regenerated"])
+        self.assertEqual(again["shots"][forced]["attempts"][0]["conversation_id"], "0")
+        self.assertFalse(any(v.get("regenerated") for k, v in again["shots"].items() if k != forced))
+        saved = json.loads((self.work / "report.json").read_text())
+        self.assertEqual(saved["regenerated"], [forced])
+        # the same through the env, as episode.yml passes it
+        old = {k: os.environ.get(k) for k in ("REGENERATE", "RESUME_RUN")}
+        os.environ.update(REGENERATE=f" {forced} ", RESUME_RUN="40341856955")
+        try:
+            client, _ = self.generate()
+        finally:
+            for k, v in old.items():
+                os.environ.pop(k, None) if v is None else os.environ.__setitem__(k, v)
+        self.assertEqual(len(client.calls), 1)
+        client, last = self.generate()                                           # no input: every clip kept
+        self.assertEqual(client.calls, [])
+        self.assertNotIn("regenerated", last)
+
+    def test_regenerate_names_shots_of_this_plan_and_only_on_a_resume(self):
+        plan = dialogue_plan()
+        self.assertEqual(eb.regenerate_ids(plan, "", ""), [])
+        self.assertEqual(eb.regenerate_ids(plan, "s-a, s-god,s-a", "123456789"), ["s-a", "s-god"])
+        for text, code in (("s-a;rm -rf", "REGENERATE_REFUSED"), ("S-A", "REGENERATE_REFUSED"), ("s-a,", "REGENERATE_REFUSED"),
+                           ("$(id)", "REGENERATE_REFUSED"), ("s-zzz", "REGENERATE_UNKNOWN_SHOT")):
+            with self.assertRaises(SystemExit) as err:
+                eb.regenerate_ids(plan, text, "123456789")
+            self.assertTrue(str(err.exception).startswith(code), (text, err.exception))
+        with self.assertRaises(SystemExit) as err:
+            eb.regenerate_ids(plan, "s-a", "")
+        self.assertTrue(str(err.exception).startswith("REGENERATE_WITHOUT_RESUME"))
+        # the CLI step episode.yml runs before any secret
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "plan.json"
+            path.write_text(json.dumps(plan))
+            env = dict(os.environ, REGENERATE="s-zzz", RESUME_RUN="123456789")
+            r = subprocess.run([sys.executable, "-I", "-B", str(HERE / "episode_build.py"), "check-regenerate", str(path)],
+                               capture_output=True, text=True, env=env)
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn("REGENERATE_UNKNOWN_SHOT", r.stderr)
+
+    def test_episode_yml_passes_regenerate_through_the_env_and_checks_it_first(self):
+        wf = (HERE.parents[2] / ".github" / "workflows" / "episode.yml").read_text()
+        self.assertIn("      regenerate:\n", wf)
+        self.assertIn("      REGENERATE: ${{ inputs.regenerate }}\n", wf)
+        self.assertIn("      RESUME_RUN: ${{ inputs.resume_run }}\n", wf)
+        for line in wf.splitlines():   # never expanded inline in a script
+            if "inputs.regenerate" in line:
+                self.assertTrue(line.strip().startswith("REGENERATE: ${{"), line)
+        plan_step = wf.split("- id: plan", 1)[1].split("\n      - ", 1)[0]
+        self.assertLess(plan_step.index("verify-preflight"), plan_step.index("episode_build.py check-regenerate"))
+        self.assertNotIn("secrets.", plan_step)
+
     def test_the_shots_that_can_fail_are_generated_first(self):
         # E99: genesis-07 builds failed on the Keeper's talking shots only after ~30 scene shots (hours, minutes of
         # Actions each time); the talking shots, then God's voice-over shots, are generated first
@@ -521,7 +611,7 @@ class Gating(unittest.TestCase):
         # E99: s-eve and k-close (talking, with our line as input audio), then s-god (voice-over), then s-a
         client, report = self.generate()
         self.assertEqual([bool(c.get("audios")) for c in client.calls], [True, True, False, False])
-        self.assertEqual(client.calls[2]["prompt"], "storm")
+        self.assertEqual(client.calls[2]["prompt"], f"storm {PERIOD}")
         self.assertEqual(list(report["shots"]), ["s-eve", "s-a", "s-god", "k-close"])   # the report keeps plan order
 
     def test_a_failed_shot_keeps_each_refused_generation_and_its_measures_in_the_report(self):
@@ -959,7 +1049,9 @@ class KeeperVoiceover(unittest.TestCase):
         self.assertAlmostEqual(vo["end"], lay["total"], places=3)
         self.assertEqual(vo["speed"], 1.0)
 
-    def test_every_scene_and_god_request_is_the_same_as_the_talking_plans_so_a_resume_keeps_them(self):
+    def test_every_scene_and_god_request_keeps_the_talking_plans_seconds_and_references(self):
+        # E108: every scene prompt of genesis-07 changed (the period, and the rewritten shots); with the same prompt
+        # the voice-over plan's request is the talking plan's, byte for byte: seconds, references and audio unchanged
         refs = {"keeper": ["k.jpg"], "keeper:talk": ["k-talk.jpg"]}
         base, vo = layout_for(EXAMPLE, DURATIONS), layout_for(VO_EXAMPLE, DURATIONS)
         same = 0

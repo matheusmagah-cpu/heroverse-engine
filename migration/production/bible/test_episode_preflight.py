@@ -252,8 +252,8 @@ class Messages(unittest.TestCase):
 
         layout = {"keeper": {}, "speakers": {}}
         for client, word in ((Broken(), "RuntimeError"), (Empty(), "PavoError")):
-            out = pf.eb.request_problems({"shots": plan["shots"][:1], "aspect_ratio": "9:16"}, layout,
-                                         {"keeper:talk": ["x.jpg"]}, client)
+            one = {"shots": plan["shots"][:1], "aspect_ratio": "9:16", "period": plan["period"]}   # E108: its period
+            out = pf.eb.request_problems(one, layout, {"keeper:talk": ["x.jpg"]}, client)
             self.assertEqual(len(out), 1)
             self.assertTrue(out[0].startswith("PAVO_REQUEST_INVALID") and word in out[0], out)
 

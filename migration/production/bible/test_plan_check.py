@@ -4,6 +4,7 @@
 close, 170-179 s, the lesson at most a quarter) or the part-6 Short rules."""
 import copy
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -25,8 +26,13 @@ CHARS = {
     "mute": {"status": "APPROVED", "look": "a quiet shepherd boy", "refs": ["front"]},
 }
 STYLE = "Painterly cinematic realism, cinema camera."
+# E108: every scene prompt of a Genesis story states its period and the exclusions, word for word (plan_check
+# PERIOD_SETTING / PERIOD_EXCLUDE); written out here so the test fails while plan_check has no such rule
+SETTING = "The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain."
+EXCLUDE = "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+PERIOD = f"{SETTING} {EXCLUDE}"
 STORM = (f"{STYLE} Extreme wide shot, slow push-in. Black storm clouds roll over the plain, lightning inside them. "
-         "Dusk, a hard wind. Ominous. No people, no text, no logos.")
+         f"Dusk, a hard wind. Ominous. {PERIOD} No people, no text, no logos.")
 GOD_LINE = "The end of all flesh is come before me; for the earth is filled with violence through them."
 STORY = "Ten generations after Eden the earth is full of people and noise, and nobody looks up at the sky."   # 20
 
@@ -42,7 +48,7 @@ def scene(sid, lines, chars=(), seconds=12, look=None, **extra):
     who = look if look is not None else ", ".join({"eve": EVE_LOOK}.get(c, c) for c in chars) or "a crowd seen from behind"
     s = {"id": sid, "kind": "scene", "lines": lines, "seconds": seconds, "characters": list(chars),
          "prompt": f"{STYLE} Wide shot, slow tracking shot. {who} walks through the tents. Dusk, torchlight ({sid}). "
-                   "Restless."}
+                   f"Restless. {PERIOD}"}
     if not chars and "establishing" not in extra:
         s["figures"] = "anonymous"
     s.update(extra)
@@ -66,7 +72,7 @@ EVE_SLOWEST = pc.VOICE_PACE["eve"] * pc.SLOW_RATIO
 def speaker(sid, who="eve", line=SPEAKER_LINE, look=EVE_LOOK, **extra):
     s = {"id": sid, "kind": "scene", "speaker": who, "line": line, "characters": [who],
          "prompt": f"{STYLE} Medium close-up, slow push-in. {who.title()}, {look}, turns and speaks to him, her lips "
-                   "moving clearly with every word. A garden at dusk, low gold light. Tense."}
+                   f"moving clearly with every word. A garden at dusk, low gold light. Tense. {PERIOD}"}
     s.update(extra)
     return s
 
@@ -90,7 +96,7 @@ def plan(shots=None, narration=None):
                       scene("s-h", [3]), scene("s-i", [3]), scene("s-j", [3]), scene("s-k", [3]),
                       keeper("k-insight", [4]), keeper("k-close", [5])]
     return {"version": "bible-plan-v2", "episode": "genesis-07-short", "part": 7, "aspect_ratio": "9:16",
-            "narration": narration, "shots": shots}
+            "passage": "Genesis 6:5-13 (KJV)", "narration": narration, "shots": shots}
 
 
 def codes(result):
@@ -843,19 +849,190 @@ class KeeperVoiceover(unittest.TestCase):
         r = pc.check(vo)
         self.assertEqual((r["problems"], r["pending"]), ([], []))
         self.assertEqual(vo["narration"], base["narration"])
-        self.assertEqual({k: v for k, v in vo.items() if k != "shots"}, {k: v for k, v in base.items() if k != "shots"})
+        self.assertEqual({k: v for k, v in vo.items() if k not in ("shots", "period")},
+                         {k: v for k, v in base.items() if k != "shots"})
         self.assertEqual(len(vo["shots"]), len(base["shots"]))
         for a, b in zip(base["shots"], vo["shots"]):
             if a["kind"] == "keeper":
                 self.assertEqual((b["id"], b["lines"], b.get("voiceover")), (a["id"], a["lines"], True))
-            else:
-                self.assertEqual(json.dumps(b, sort_keys=True), json.dumps(a, sort_keys=True))
+            else:   # E108: the scene prompts now carry the period (ScenePeriod); every other field is the same
+                self.assertEqual({k: v for k, v in b.items() if k != "prompt"},
+                                 {k: v for k, v in a.items() if k != "prompt"})
         self.assertEqual(sum(1 for s in vo["shots"] if s["kind"] == "scene"), 30)
-        text = EXAMPLE.read_text()
         self.assertFalse((HERE / "plans" / "genesis-07-short-vo.json").exists())   # one genesis-07 plan, dispatchable
-        for a in base["shots"]:
-            if a["kind"] == "scene":    # byte for byte, as the file is written
-                self.assertIn(json.dumps(a, indent=1, ensure_ascii=False).replace("\n", "\n  "), text)
+
+
+# the plan run 40341856955 built genesis-07 from (main at #422): its review found a man in a modern long coat with a
+# glass kerosene lantern on a cobbled European street (s-walker) and a European town with church towers (s-family)
+PERIOD_BASE_COMMIT = "04d6923"
+# the shots whose clips showed an anachronism in that run's composed file (evidence/pavo/20261026/period/review.json)
+ANACHRONISTIC = {"s-walker", "s-family", "s-wind", "s-theft", "s-quarrel", "s-ruins", "s-children", "s-knife"}
+# review of #426: the root-cause words (city of tents, lane, room, table) reworded in these, nothing else changed
+REWORDED = {"s-tents", "s-market", "s-plain", "s-mother", "s-scroll", "s-storm", "s-jar", "s-gathering", "s-flee",
+            "s-still", "s-terror", "s-lamp", "s-noah"}
+
+
+class ScenePeriod(unittest.TestCase):
+    """E108 (review of genesis-07 run 40341856955): no scene prompt stated its period, and no gate checked it, so Pavo
+    filled a lane or a horizon with a European street, a town of stone with church towers, a glass lantern, a modern
+    coat or cap. Every scene prompt now states its story's period word for word and carries the exclusions."""
+
+    def test_the_wording_is_one_shared_constant(self):
+        self.assertEqual(pc.PERIOD_SETTING, SETTING)
+        self.assertEqual(pc.PERIOD_EXCLUDE, EXCLUDE)
+        self.assertEqual(pc.period(plan()), pc.PERIODS["before-the-flood"])
+
+    def test_a_scene_without_the_setting_or_the_exclusions_is_refused(self):
+        for drop in (SETTING, EXCLUDE):
+            p = plan()
+            p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace(drop, "")
+            self.assertIn("SCENE_PERIOD_MISSING", codes(pc.check(p, CHARS)), drop)
+        p = plan()   # God's voice-over shot and a speaking character are scenes too
+        p["shots"][0]["prompt"] = p["shots"][0]["prompt"].replace(SETTING, "")
+        p["shots"][3]["prompt"] = p["shots"][3]["prompt"].replace(EXCLUDE, "")
+        self.assertEqual([x.split()[:4] for x in pc.check(p, CHARS)["problems"]],
+                         [["SCENE_PERIOD_MISSING", "shot", "0", "g-open"], ["SCENE_PERIOD_MISSING", "shot", "3", "s-eve"]])
+
+    def test_the_keeper_is_not_a_scene(self):
+        p = plan()
+        self.assertNotIn("ancient Near East", p["shots"][-1]["prompt"])
+        self.assertEqual(pc.check(p, CHARS)["problems"], [])
+
+    def test_a_scene_naming_what_the_period_excludes_is_refused(self):
+        # review of #426: the root-cause words of run 40341856955 too (city of tents, lane, room...)
+        for word in ("on the road out of the city", "carrying a glass lantern", "toward a church on the horizon",
+                     "in a long coat", "down a cobbled street", "past a stone tower", "in a peaked cap",
+                     "through the city of tents", "down a narrow lane", "into a quiet room", "past the buildings",
+                     "along a mud-brick wall", "past brick houses", "under a dome", "into the village",
+                     "to a wooden table", "past a glass jar", "past the town walls"):
+            p = plan()
+            p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("walks through the tents", f"walks {word}")
+            self.assertIn("SCENE_PERIOD_CONFLICT", codes(pc.check(p, CHARS)), word)
+        # period-true words stay allowed: a stone well or altar, a tent's wall, water still as glass, snow caps
+        for words in ("pulls at a stone well", "leans on the goat-hair tent wall", "walks past the goat-hair wall",
+                      "walks by water still as glass", "walks toward the snow caps of far mountains"):
+            p = plan()
+            p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("walks through the tents", words)
+            self.assertEqual(pc.check(p, CHARS)["problems"], [], words)
+
+    def test_the_scan_takes_out_both_period_sentences(self):
+        # a setting that names an excluded word itself (here "city") is not a conflict of every prompt
+        p = plan()
+        own = {"setting": "Enoch's city of tents on the plain.", "exclude": "No stone buildings or roads."}
+        p["period"] = own
+        for s in p["shots"]:
+            s["prompt"] = s["prompt"].replace(PERIOD, f"{own['setting']} {own['exclude']}")
+        self.assertEqual(pc.check(p, CHARS)["problems"], [])
+        p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("walks through the tents", "walks to the city")
+        self.assertIn("SCENE_PERIOD_CONFLICT", codes(pc.check(p, CHARS)))
+
+    def test_a_custom_period_with_no_avoid_uses_the_shared_list(self):
+        per, problem = pc.resolve_period({"period": {"setting": "S.", "exclude": "E."}})
+        self.assertIsNone(problem)
+        self.assertEqual(per["avoid"], list(pc.PERIOD_AVOID))
+        self.assertTrue(per["avoid"])
+        self.assertEqual(pc.resolve_period({"period": {"setting": "S.", "exclude": "E.", "avoid": []}})[1].split()[0],
+                         "PERIOD_INVALID")
+
+    def test_an_invalid_period_is_refused_by_name_never_a_crash_nor_the_passage(self):
+        p = plan()   # a passage that has a period: a malformed `period` is still refused, not passed over
+        for bad in ("the stone age", {"setting": "x"}, {"setting": "", "exclude": "No roads."}, 7, None,
+                    {"setting": "S.", "exclude": "E.", "avoid": ["(unclosed"]},
+                    {"setting": "S.", "exclude": "E.", "avoid": "roads?"}):
+            p["period"] = bad
+            r = pc.check(p, CHARS)
+            self.assertEqual(codes(r).count("PERIOD_INVALID"), 1, bad)
+            self.assertNotIn("SCENE_PERIOD_MISSING", codes(r), bad)
+        p["period"] = {"setting": "S.", "exclude": "E.", "avoid": ["(unclosed"]}
+        self.assertIn("is not a regular expression", pc.check(p, CHARS)["problems"][0])
+
+    def test_a_story_with_no_period_is_refused_once_until_the_plan_states_one(self):
+        p = plan()
+        p["passage"] = "Exodus 2:1-10 (KJV)"
+        self.assertEqual(pc.check(p, CHARS)["problems"], [pc.missing_period(p)])   # one message, not one a shot
+        del p["passage"]
+        self.assertEqual(codes(pc.check(p, CHARS)), ["SCENE_PERIOD_MISSING"])
+        nile = {"setting": "Ancient Egypt on the Nile: reed boats, reeds and the river.",
+                "exclude": "No glass, modern clothing or roads."}
+        p["period"] = nile
+        self.assertIn("SCENE_PERIOD_MISSING", codes(pc.check(p, CHARS)))
+        for s in p["shots"]:
+            s["prompt"] = s["prompt"].replace(PERIOD, f"{nile['setting']} {nile['exclude']}")
+        self.assertEqual(pc.check(p, CHARS)["problems"], [])
+
+    def test_the_whole_passage_decides_and_one_across_the_flood_is_ambiguous(self):
+        self.assertEqual(pc.passage_chapters("Genesis 6:5-13 (KJV)"), ("Genesis", 6, 6))
+        self.assertEqual(pc.passage_chapters("Genesis 6:14-7:5"), ("Genesis", 6, 7))
+        self.assertEqual(pc.passage_chapters("Genesis 6-8"), ("Genesis", 6, 8))
+        self.assertEqual(pc.passage_chapters("Genesis 7"), ("Genesis", 7, 7))
+        self.assertEqual(pc.period({"passage": "Genesis 6:14-22 (KJV)"}), pc.PERIODS["before-the-flood"])  # G8
+        self.assertEqual(pc.period({"passage": "Genesis 7:11-24 (KJV)"}), pc.PERIODS["the-flood"])          # G9
+        self.assertEqual(pc.period({"passage": "Genesis 8:1-9:17 (KJV)"}), pc.PERIODS["the-flood"])         # G10
+        self.assertIn("Ararat", pc.PERIODS["the-flood"]["setting"])
+        for passage in ("Genesis 6:9-7:24 (KJV)", "Genesis 6-8", "Genesis 3:1-4:8"):
+            p = plan()
+            p["passage"] = passage
+            self.assertEqual(codes(pc.check(p, CHARS)), ["PERIOD_AMBIGUOUS"], passage)
+            p["period"] = "before-the-flood"   # the plan settles it
+            self.assertEqual(pc.check(p, CHARS)["problems"], [], passage)
+
+    def test_the_build_refuses_a_scene_without_its_period_by_the_same_function(self):
+        import episode_build as eb
+        p = plan()
+        self.assertIsNone(eb.period_refusal(p, p["shots"][1]))
+        self.assertIsNone(eb.period_refusal(p, p["shots"][-1]))      # the Keeper
+        p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace(SETTING, "")
+        self.assertTrue(eb.period_refusal(p, p["shots"][1]).startswith("SCENE_PERIOD_MISSING s-a"))
+        p = plan()
+        p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("through the tents", "down a cobbled street")
+        self.assertTrue(eb.period_refusal(p, p["shots"][1]).startswith("SCENE_PERIOD_CONFLICT s-a"))
+        p = plan()
+        p["passage"] = "Exodus 2"
+        self.assertEqual(eb.period_refusal(p, p["shots"][1]), f"{pc.missing_period(p)} (shot s-a)")
+        p["period"] = "nowhere"
+        self.assertTrue(eb.period_refusal(p, p["shots"][1]).startswith("PERIOD_INVALID"))
+
+    def test_the_long_plan_runs_the_same_helper(self):
+        import long_plan_check as lc
+        self.assertIs(lc.pc.plan_period_problems, pc.plan_period_problems)
+        text = (HERE / "long_plan_check.py").read_text()
+        self.assertIn("pc.plan_period_problems(plan, plan[\"shots\"])", text)
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        self.assertEqual(pc.plan_period_problems(arc, arc["shots"]), [])
+        arc["shots"][0]["prompt"] = arc["shots"][0]["prompt"].replace(pc.PERIODS["eden"]["setting"], "")
+        self.assertIn("SCENE_PERIOD_MISSING", [x.split()[0] for x in lc.check(arc)["problems"]])
+
+    def test_genesis_7_states_its_period_in_every_scene_and_rewrites_only_the_anachronistic_shots(self):
+        base = json.loads(subprocess.run(["git", "-C", str(HERE), "show",
+                                          f"{PERIOD_BASE_COMMIT}:migration/production/bible/plans/genesis-07-short.json"],
+                                         capture_output=True, text=True, check=True).stdout)
+        now = json.loads(EXAMPLE.read_text())
+        self.assertEqual(now["period"], "before-the-flood")
+        r = pc.check(now)
+        self.assertEqual((r["problems"], r["pending"]), ([], []))
+        self.assertEqual({k: v for k, v in now.items() if k not in ("shots", "period")},
+                         {k: v for k, v in base.items() if k != "shots"})
+        tail = re.compile(r"\s*(No people, no text, no logos\.|No text, no logos\.)$")
+        for a, b in zip(base["shots"], now["shots"]):
+            self.assertEqual({k: v for k, v in b.items() if k != "prompt"}, {k: v for k, v in a.items() if k != "prompt"})
+            if a["kind"] == "keeper":     # his three voice-over clips are kept by the resume (E93: the same request)
+                self.assertEqual(b["prompt"], a["prompt"])
+                continue
+            self.assertIn(PERIOD, b["prompt"], b["id"])
+            m = tail.search(a["prompt"])
+            if b["id"] not in ANACHRONISTIC | REWORDED:   # the period inserted before the standard tail, nothing else
+                self.assertEqual(b["prompt"], f"{a['prompt'][:m.start()]} {PERIOD} {m.group(1)}", b["id"])
+            else:
+                self.assertNotEqual(b["prompt"].replace(f" {PERIOD}", ""), a["prompt"], b["id"])
+        shots = {s["id"]: s["prompt"] for s in now["shots"]}
+        self.assertIn("small clay oil lamp", shots["s-walker"])
+        self.assertIn("tents of the camp", shots["s-walker"])
+        self.assertIn("hillside path above the camp of tents", shots["s-family"])
+        self.assertIn("above the camp of dark goat-hair tents", shots["s-noah"])
+        self.assertIn("Inside a quiet goat-hair tent at night", shots["s-scroll"])
+        for sid, prompt in shots.items():
+            for word in ("city", "lane", "room", "table", "road"):
+                self.assertNotRegex(prompt.replace(EXCLUDE, ""), rf"\b{word}s?\b", sid)
 
 
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
