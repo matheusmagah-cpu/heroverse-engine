@@ -7,6 +7,7 @@ Scripture), schedule slot, and images. Prints PASS or FAIL with every problem; e
 usage: script_check.py PILOT_DIR [PRODUCTION_DIR]
 """
 from datetime import datetime, timezone
+import functools
 import hashlib
 import json
 import math
@@ -228,9 +229,22 @@ def story_problems(script, starts, minutes):
 STRUCTURE = Path(__file__).resolve().parents[1] / "structures" / "bible-story-long.json"
 
 
+CHARACTERS = Path(__file__).resolve().parent / "characters" / "characters.json"
+
+
+@functools.lru_cache(maxsize=None)
 def story_gate():
-    """The registered structure's machine-readable targets (structures/bible-story-long.json script.gate)."""
+    """The registered structure's machine-readable targets (structures/bible-story-long.json script.gate), read once
+    per process. Callers must not mutate the returned dict."""
     return json.loads(STRUCTURE.read_text())["script"]["gate"]
+
+
+@functools.lru_cache(maxsize=None)
+def conflict_speakers():
+    """Who may speak the cold-open conflict: an APPROVED character of production/characters (the same rule as the
+    Shorts' spoken lines) or God's voice; never the Keeper, a narrator or an unknown name."""
+    chars = json.loads(CHARACTERS.read_text())["characters"]
+    return frozenset({cid for cid, c in chars.items() if c.get("status") == "APPROVED" and cid != "keeper"} | {"god"})
 
 
 def timeline(script):
@@ -246,14 +260,15 @@ def timeline(script):
     return starts, t
 
 
-def structure_problems(script, gate=None):
+def structure_problems(script, gate=None, starts=None, total=None):
     """Owner, 2026-10-26: the Bible-story long stands on its own and follows its registered structure
     (structures/bible-story-long.json): 14-18 min, the conflict spoken by a character in the cold open, at least 6
     re-hooks, one climax at 0.6-0.85 of the runtime, the Keeper in every long but never in the cold open and at most
     25 % of it, and no captions burned into the picture. Prayer longs are stopped; this is the only long format."""
     g = gate or story_gate()
     segs = script.get("segments", [])
-    starts, total = timeline(script)
+    if starts is None or total is None:
+        starts, total = timeline(script)
     order = sorted((starts[x["id"]], x["id"]) for x in segs if x.get("id") in starts)
     ends = {i: b for (_, i), (b, _) in zip(order, order[1:] + [(total, None)])}
     dur = {i: ends[i] - starts[i] for i in ends}
@@ -263,8 +278,10 @@ def structure_problems(script, gate=None):
         problems.append(f"STORY_LENGTH {total / 60:.1f} min outside {lo}-{hi} (bible-story-long)")
     cold = g["cold_open_s"]
     conflict = [x for x in segs if x.get("conflict") and starts.get(x.get("id"), 1e9) < cold]
-    if not conflict or not all(x.get("speaker") and x.get("speaker") != "keeper" and not x.get("keeper") for x in conflict):
-        problems.append(f"STORY_COLD_OPEN_CONFLICT (a character speaks the conflict within {cold} s: conflict + speaker)")
+    speakers = conflict_speakers()
+    if not conflict or not all(x.get("speaker") in speakers and not x.get("keeper") for x in conflict):
+        problems.append(f"STORY_COLD_OPEN_CONFLICT (an APPROVED character of production/characters or god speaks the "
+                        f"conflict within {cold} s: conflict + speaker)")
     keeper = [x for x in segs if x.get("keeper") or x.get("speaker") == "keeper"]
     if not keeper:
         problems.append("STORY_KEEPER_MISSING (the Keeper appears in every long)")
@@ -373,12 +390,10 @@ def check(pilot_dir, production=None):
         problems.append(f"HOOK_TOO_LONG {len(words(segs[0].get('text', '')))} words > {HOOK_MAX_WORDS} (promise spoken by 8 s)")
     story = s.get("archetype") == STORY
     if story:
-        starts, t = {}, 0.0
-        for x in segs:
-            starts.setdefault(x.get("id", ""), t)
-            t += len(words(x.get("text", ""))) / WPM * 60 + float(x.get("pause_after", 0))
-        problems += story_problems(s, starts, minutes)
-        problems += structure_problems(s)
+        # one timeline (with the v4 sentence breath) for the length and every story rule (review of #415)
+        starts, total = timeline(s)
+        problems += story_problems(s, starts, total / 60)
+        problems += structure_problems(s, starts=starts, total=total)
         problems += description_problems(s.get("description_intro", ""))
         problems += thumbnail_problems(s)
         problems += [f"GATE_ROW_{name.upper()} {detail} (E64)" for name, ok, detail in three_stage.script_hygiene(s) if not ok]

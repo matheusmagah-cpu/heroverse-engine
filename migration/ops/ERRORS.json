@@ -813,6 +813,36 @@
     "file": "migration/production/bible/test_episode_build.py",
     "contains": "def test_a_talking_shot_gets_six_generations_a_scene_three"
    }
+  },
+  {
+   "id": "E99",
+   "date": "2026-10-26",
+   "error": "Rework: genesis-07 needed four episode builds on 26/10 (40263488773 Pavo outage E93, 40278642295 and 40285879529 k-insight audio E94/E95, 40297987571 k-insight lips E98). Each build generated the scene shots in plan order and met the Keeper's talking shots, the only new and failure-prone kind, last: every new failure surfaced after ~30 scene shots and 1-2 h of Actions minutes (2346 min in 24 h against a 233/day target), and each fix needed another run to learn the next failure.",
+   "fix": "generate_step walks the shots in risk_order: talking shots first (lipsync_check), then God's voice-over shots (face check), then scenes; each keeps its plan index, so requests, the resume and the composition are unchanged. A failure now costs minutes. The clock routine also requires a direct 0-credit Pavo test of any new talking setup before a build (rule 6), and never a repeated build without new evidence (rule 11).",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_the_shots_that_can_fail_are_generated_first"
+   }
+  },
+  {
+   "id": "E100",
+   "date": "2026-10-26",
+   "error": "script_check.check() timed a Bible-story long twice: the length used the v4 sentence breath (SENTENCE_GAP_V4) but the starts it gave story_problems did not, so the roadmap, peak-verse and re-hook rules saw every segment earlier than the render will play it (about 0.12 s more per sentence; ~6 s by 30 s in a short-sentence opening) and could pass a late roadmap (found in the review of #415).",
+   "fix": "check() calls timeline() once and feeds the same starts and total to story_problems and structure_problems; the length, the story rules and the structure gate read one estimate.",
+   "antidote": {
+    "file": "migration/production/test_script_check.py",
+    "contains": "def test_check_feeds_the_same_timeline_to_every_story_rule"
+   }
+  },
+  {
+   "id": "E101",
+   "date": "2026-10-26",
+   "error": "goal_report.pipeline parsed every pilot's schedule.json and script.json with a strict json.loads (script.json up to three times), so one malformed file raised and stopped the whole daily report, YPP section included (found in the review of #415).",
+   "fix": "pipeline reads schedule, manifest, QA and review with render_queue.object_or_empty, parses script.json once and tolerantly: a broken schedule skips that pilot, a broken script is listed as 'script.json unreadable' with an alert; the stage comes from runway.long_stage, which never raises.",
+   "antidote": {
+    "file": "migration/mining/test_goal_report.py",
+    "contains": "def test_a_malformed_file_does_not_crash_the_report"
+   }
   }
  ]
 }

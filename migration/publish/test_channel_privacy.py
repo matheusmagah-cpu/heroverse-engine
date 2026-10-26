@@ -34,14 +34,15 @@ def run(plan, videos):
     with tempfile.TemporaryDirectory() as t:
         p, out = Path(t) / "hold-plan.json", Path(t) / "receipt.json"
         p.write_text(json.dumps(plan))
-        error = None
+        error, log = None, io.StringIO()
         with patch.object(cp, "token", return_value="fixture"), patch.object(cp, "call", yt), \
-                contextlib.redirect_stdout(io.StringIO()):
+                contextlib.redirect_stdout(log):
             try:
                 cp.unschedule(p, out)
             except SystemExit as e:
                 error = str(e)
-        return json.loads(out.read_text())["changes"], yt, error
+        run.receipt, run.log = json.loads(out.read_text()), log.getvalue()
+        return run.receipt["changes"], yt, error
 
 
 class Unschedule(unittest.TestCase):
@@ -60,6 +61,17 @@ class Unschedule(unittest.TestCase):
         self.assertEqual([w["id"] for w in yt.writes], ["sched"])          # one write; the public video untouched
         self.assertEqual(yt.writes[0]["status"]["privacyStatus"], "private")
         self.assertNotIn("publishAt", yt.writes[0]["status"])
+
+    def test_a_held_video_already_public_is_reported_plainly_and_never_hidden(self):
+        # review of #415: pilot-014's slot (26/10 10:00) may pass before the hold runs; the skip must be visible
+        changes, yt, error = run({"channel_id": cp.CHANNEL, "to_unschedule": ["53Xysf9x46c", "sched"]}, {
+            "53Xysf9x46c": {"privacyStatus": "public"},
+            "sched": {"privacyStatus": "private", "publishAt": "2026-10-27T00:00:00Z"}})
+        self.assertIsNone(error)                                              # a skip, not a failure
+        self.assertEqual([w["id"] for w in yt.writes], ["sched"])             # never hidden here
+        self.assertEqual(run.receipt["already_public_not_changed"], ["53Xysf9x46c"])
+        self.assertIn("HELD_VIDEO_ALREADY_PUBLIC 53Xysf9x46c", run.log)
+        self.assertIn("::warning::", run.log)                                 # shown on the Actions run page
 
     def test_a_missing_video_fails_the_run(self):
         changes, yt, error = run({"channel_id": cp.CHANNEL, "to_unschedule": ["gone"]}, {})

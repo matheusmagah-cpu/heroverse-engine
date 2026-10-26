@@ -441,6 +441,26 @@ class Gating(unittest.TestCase):
         client, _ = self.generate()
         self.assertEqual(len(client.calls), 1)
 
+    def test_the_shots_that_can_fail_are_generated_first(self):
+        # E99: genesis-07 builds failed on the Keeper's talking shots only after ~30 scene shots (hours, minutes of
+        # Actions each time); the talking shots, then God's voice-over shots, are generated first
+        shots = [{"id": "s-a", "kind": "scene", "lines": [0]},
+                 {"id": "g-a", "kind": "scene", "speaker": eb.plan_check.ch.GOD, "line": "x", "lines": None},
+                 {"id": "s-eve", "kind": "scene", "speaker": "eve", "line": "y", "characters": ["eve"]},
+                 {"id": "s-b", "kind": "scene", "lines": [1]},
+                 {"id": "k-a", "kind": "keeper", "lines": [2]}]
+        order = [s["id"] for _, s in eb.risk_order(shots)]
+        self.assertEqual(order, ["s-eve", "k-a", "g-a", "s-a", "s-b"])
+        self.assertEqual([i for i, _ in eb.risk_order(shots)], [2, 4, 1, 0, 3])   # each keeps its plan index
+        # generate_step's own Pavo submissions follow it: the Gating test below
+
+    def test_generate_step_submits_the_talking_shots_then_gods_voice_over_then_the_scenes(self):
+        # E99: s-eve and k-close (talking, with our line as input audio), then s-god (voice-over), then s-a
+        client, report = self.generate()
+        self.assertEqual([bool(c.get("audios")) for c in client.calls], [True, True, False, False])
+        self.assertEqual(client.calls[2]["prompt"], "storm")
+        self.assertEqual(list(report["shots"]), ["s-eve", "s-a", "s-god", "k-close"])   # the report keeps plan order
+
     def test_a_failed_shot_keeps_each_refused_generation_and_its_measures_in_the_report(self):
         # E94: run 40278642295 refused k-insight three times; only the flags reached the log, no clip, no measures
         eb.lipsync_flags = lambda py, model, clip, wav: (["AUDIO_NOT_OUR_LINE"], {"audio": {"corr": 0.2}, "mouth": {}})
