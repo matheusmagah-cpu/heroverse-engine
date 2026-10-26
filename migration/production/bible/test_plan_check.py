@@ -349,9 +349,9 @@ class Plan(unittest.TestCase):
         p["shots"][3] = speaker("s-eve", line=old)
         self.assertIn("SPEAKER_LINE_TOO_SHORT", codes(pc.check(p, CHARS)))
         # a talking voice nobody measured is refused before its first line is voiced
-        chars = dict(CHARS, serpent={"status": "APPROVED", "look": "a serpent", "refs": ["full"], "voice": "bm_fable"})
+        chars = dict(CHARS, raven={"status": "APPROVED", "look": "a black raven", "refs": ["full"], "voice": "bm_lewis"})
         p = plan()
-        p["shots"][3] = speaker("s-eve", who="serpent", look="a serpent")
+        p["shots"][3] = speaker("s-eve", who="raven", look="a black raven")
         self.assertIn("VOICE_PACE_UNMEASURED", codes(pc.check(p, chars)))
 
     def test_each_measured_pace_is_of_the_voice_the_speaker_still_has(self):
@@ -363,7 +363,7 @@ class Plan(unittest.TestCase):
             have = (god["voice"], god["speed"]) if who == pc.ch.GOD else (reg[who]["voice"], 1.0)
             self.assertEqual(have, voice, who)
         self.assertEqual(set(voice_pace.MEASURED_WITH), set(voice_pace.VOICE_PACE))
-        for who in ("noah", "scoffer"):
+        for who in ("noah", "scoffer", "serpent"):
             self.assertIn(who, voice_pace.VOICE_PACE)
 
     def test_a_talking_line_no_clip_reaches_within_the_retime_is_refused_at_plan_time(self):

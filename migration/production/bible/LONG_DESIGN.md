@@ -164,7 +164,8 @@ The long then needs about a working day of wall-clock time, not several days.
   | Adam (am_fenrir) | 3.975 |
   | Eve (af_heart) | 3.732 |
   | Noah (bm_george) | 2.970 (evidence/long/20261026/noah-scoffer-voice.json) |
-  | The scoffer (am_puck) | 3.425 (same) |
+  | The scoffer (am_puck) | 3.55 (evidence/voice/20261026/kokoro-pace.json; 3.425 in the six lines above) |
+  | The serpent (bm_fable) | 2.728 (kokoro-pace.json) |
 
   The table is `voice_pace.py`, shared with the Shorts' plan_check. At a single 2.75 words/s the first arc-1 voicing
   had five talking lines under the 4 s a talking clip fills. Both checks use each voice's measured pace, slowed by
