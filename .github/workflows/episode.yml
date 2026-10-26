@@ -1,0 +1,135 @@
+name: HeroVerse episode build (plan -> Keeper + Pavo scenes -> composed Short, checked; nothing published)
+# Owner, 2026-10-26 (DECISIONS.md "The Keeper narrates every video"): a Short is built from its plan with no chat
+# session. The Keeper speaks our Kokoro narration (Pavo input audio, lips checked by lipsync_check), the story is acted
+# out in Pavo scenes (reference mode, approved characters only), every clip at a fresh exact 0-credit quote. The build
+# job holds PAVO_TOKEN with read-only repository access; the record job (no secret) uploads the composed file to the
+# release and pushes the frame sheet and report to a claude/episode-* branch. Claude reviews the sheet (>= 9.5), writes
+# the episode record and dispatches publish-episode.yml; nothing here publishes.
+on:
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: Plan path (migration/production/bible/plans/<episode-id>.json, bible-plan-v1, plan_check clean)
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-episode
+  cancel-in-progress: false
+jobs:
+  build:
+    # the Pavo secret only on a manual run of main
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    permissions:
+      contents: read   # checkout and the release's reference images and music
+    outputs:
+      episode: ${{ steps.plan.outputs.episode }}
+    env:
+      PLAN: ${{ inputs.plan }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - id: plan
+        name: The plan (path checked, plan_check strict)
+        run: |
+          [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
+          ep="${BASH_REMATCH[1]}"
+          test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
+          python3 -I -B migration/production/bible/plan_check.py "$PLAN" --strict
+          echo "episode=$ep" >> "$GITHUB_OUTPUT"
+          echo "EP=$ep" >> "$GITHUB_ENV"
+          echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout: Pavo reads repo paths only
+          echo "OUT=$RUNNER_TEMP/out" >> "$GITHUB_ENV"
+      - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256)
+        run: |
+          timeout 300s sudo apt-get update -qq
+          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core >/dev/null
+          python3 -m venv "$RUNNER_TEMP/voice"
+          "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
+          python3 -m venv "$RUNNER_TEMP/lip"
+          "$RUNNER_TEMP/lip/bin/pip" install --disable-pip-version-check -q 'mediapipe==0.10.35'
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+          sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
+          echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
+          mkdir -p "$WORK" "$OUT"
+      - name: Narration (Kokoro am_michael, line by line) and the Keeper's input audio
+        run: |
+          python3 -I -B migration/production/bible/episode_build.py voice-script "$PLAN" "$WORK"
+          python3 -I -B migration/production/pilot_render.py prepare "$WORK" HeroVerse_Linux_Source_Ready_20261013_v2.zip
+          # espeakng-loader's compiled default data path may not exist on the runner; point it at the wheel's own data
+          ESPEAK_DATA_PATH=$("$RUNNER_TEMP/voice/bin/python" -I -c "import espeakng_loader as e;print(e.get_data_path())")
+          test -d "$ESPEAK_DATA_PATH" || { echo "ESPEAK_DATA_MISSING"; exit 1; }
+          export ESPEAK_DATA_PATH
+          "$RUNNER_TEMP/voice/bin/python" -I -B migration/production/pilot_render.py voice "$WORK" "$WORK/voice-script.json"
+          python3 -I -B migration/production/bible/episode_build.py lines "$PLAN" "$WORK"
+      - name: Approved reference images (sha256 checked, <= 1536 px JPEG)
+        run: python3 -I -B migration/production/bible/episode_build.py refs "$PLAN" "$WORK"
+      - name: Pavo shots in order (0-credit quote each), clip_check and lipsync_check, at most 2 regenerations
+        env:
+          PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
+        run: python3 -I -B migration/production/bible/episode_build.py generate "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task"
+      - name: Compose (cuts, captions, owned music, -14 LUFS), clip_check --composed, 20-frame sheet
+        run: |
+          bash migration/ci/assets.sh download --pattern original-rest-music.lossless.flac -O "$RUNNER_TEMP/music.flac" --clobber
+          echo "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c  $RUNNER_TEMP/music.flac" | sha256sum -c -
+          python3 -I -B migration/production/bible/episode_build.py compose "$PLAN" "$WORK" "$RUNNER_TEMP/music.flac" "$OUT/$EP.mp4"
+          python3 -I -B migration/production/bible/episode_build.py sheet "$OUT/$EP.mp4" "$OUT/sheet.jpg"
+      - name: Collect the run's files (also on failure, when the report names the failed shot)
+        if: always() && steps.plan.outputs.episode != ''
+        run: |
+          mkdir -p "$OUT/clips"
+          for f in report.json layout.json compose-plan.json compose-timeline.json; do
+            [ -f "$WORK/$f" ] && cp "$WORK/$f" "$OUT/" || true
+          done
+          cp "$WORK"/clips/*.mp4 "$OUT/clips/" 2>/dev/null || true
+          cp "$WORK"/keeper/*.wav "$OUT/clips/" 2>/dev/null || true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.plan.outputs.episode != ''
+        with:
+          name: episode-${{ steps.plan.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+          retention-days: 14
+
+  record:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write   # release asset (assets.sh) and the evidence branch; no secret in this job
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EP: ${{ needs.build.outputs.episode }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: episode-${{ needs.build.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+      - name: Composed file into the release; sheet and report on claude/episode-<id>-<run>
+        run: |
+          [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
+          out="$RUNNER_TEMP/out"; mp4="$out/$EP.mp4"
+          sha=$(sha256sum "$mp4" | cut -d' ' -f1)
+          python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1]))['composed']['output_sha256']==sys.argv[2] else 'REPORT_SHA256_MISMATCH')" "$out/report.json" "$sha"
+          asset="bible-$EP-sha256-$sha.mp4"   # the name publish-episode.yml downloads
+          cp "$mp4" "$RUNNER_TEMP/$asset"
+          bash migration/ci/assets.sh upload "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
+          tag=$(bash migration/ci/assets.sh which "$asset" --repo "$GITHUB_REPOSITORY")
+          d="migration/evidence/episodes/$EP"; mkdir -p "$d"
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));r['composed'].update(release_asset=sys.argv[2],release_tag=sys.argv[3],run_id=sys.argv[4]);open(sys.argv[5],'w').write(json.dumps(r,indent=1,ensure_ascii=False)+'\n')" \
+            "$out/report.json" "$asset" "$tag" "$GITHUB_RUN_ID" "$d/report-$GITHUB_RUN_ID.json"
+          cp "$out/sheet.jpg" "$d/sheet-$GITHUB_RUN_ID.jpg"
+          branch="claude/episode-$EP-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d"
+          git commit -q -m "Episode $EP built from its plan (run $GITHUB_RUN_ID): frame sheet and per-shot report for review"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"
+          echo "ASSET $asset"

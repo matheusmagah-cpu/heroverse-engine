@@ -48,7 +48,10 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 - AI video comes from Pavo first (free, exact zero-credit quote; DECISIONS.md 2026-10-25 "Pavo is the first source"),
   then Agnes direct, and vidIQ's generator only when both fail. Shorts are almost all AI (owner, 2026-10-25), each scene
   still matching its words; this replaces "AI video only at the hook and the peak".
-- Shorts: vidIQ voice, stock search and compose (about 45 credits each with Pavo clips, ceiling 200 a day).
+- Shorts (from part 7, owner 2026-10-26): produced by `episode.yml` from a plan (`plans/<episode-id>.json`, PROMPT_GUIDE
+  "Keeper + acted scenes"): the Keeper on screen speaking our Kokoro narration in sync, the story acted out in Pavo
+  scenes, composed by the engine, no vidIQ credits; Claude writes the plan and reviews the sheet before
+  `publish-episode.yml`. (Parts 1-5 used vidIQ voice, stock search and compose, about 45 credits each.)
 - Credit budget: 3,811 credits on 25/10 must last to the renewal on 18/11 (about 159 a day). Two Shorts a day at
   about 100 each run over that, so each Short is held to about 75 (no wasted previews; music theme reused), and the
   long costs no vidIQ credits.

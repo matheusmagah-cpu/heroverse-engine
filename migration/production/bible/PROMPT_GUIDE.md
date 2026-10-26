@@ -92,3 +92,38 @@ FLUX `seed` and a `status`. Before a character's first scene:
 4. A new character joins the bible the first time a story needs it, never improvised inside one episode.
 God the Father is never shown as a person: light, wind and voice carry Him, and the KJV text speaks.
 
+
+## Keeper + acted scenes (2026-10-26)
+Owner, 2026-10-26 (DECISIONS.md "The Keeper narrates every video"): every Short is told on screen by the Keeper
+(`characters.json` `keeper`, an invented storyteller) speaking OUR narration with his lips in sync, and the story is
+acted out by the character bible's people in cinematic shots, not landscapes. Claude writes only the plan;
+`episode.yml` does the rest and nothing is published before Claude's review.
+
+**The plan** (`plans/<episode-id>.json`, `bible-plan-v1`): the episode's `narration` records (the same ones
+`publish_episode.short_problems` reads) and the `shots` in order, each carrying consecutive narration lines.
+- `keeper` shot: the Keeper speaks the line(s) it carries. His prompt carries his `look` and one `wardrobe` variant
+  word for word and says he speaks to the camera ("his lips moving clearly with every word"); his approved reference
+  goes in with our line as Pavo input audio (v0.4). He opens (the first shot, the hook from 0 s), returns for the
+  insight and closes (the last shot); at most ~25 % of the Short; each Keeper clip's audio 2-12 s (the closing one
+  <= 10.2 s, it also holds the tail).
+- `scene` shot: `seconds` 4-12 of Pavo video, the five-part prompt above, `characters` (APPROVED, look word for word,
+  <= 5 references). No character yet for the moment? Anonymous people seen only from behind or in silhouette
+  (`figures: "anonymous"`, the prompt says "seen from behind" / "in silhouette"; never a face of a person who is
+  not in the bible) or an `establishing: true` landscape held <= 2 s, all establishing shots together <= 15 %.
+  Consecutive scene shots may carry the same line: the composer splits its time between them.
+- God the Father is never a figure: a prompt that names Him shows only light, wind, fire or a voice, never a body,
+  face, hands, robe or throne (best: do not name Him in a prompt at all; show what He does).
+
+**Shot grammar.** Hook: the Keeper, medium close-up, slow push-in, first word at 0 s. Story: a cut every 2-4 s (the
+composer cuts a 6-8 s clip into 2-3 shots, windows spread over the clip, never looped, slowed at most 1.3x), one VFX
+moment (storm, light, fire) every 15-20 s, the picture follows the words. Insight: the Keeper again, closer. Close:
+the Keeper, the CTA to the full story and the next part. Cuts only; the only black is the last 0.8 s fade.
+
+**The checks, in order** (each stops the run): `plan_check.py --strict` (KJV word for word, the part-6 Short rules
+on the estimated length, every rule above; a character not yet APPROVED is one pending row) → Kokoro `am_michael`
+line by line; the measured Short 62-90 s, Keeper <= 25 %, each Keeper clip's audio 2-12 s → references sha256-checked
+→ every shot one Pavo generation at a fresh exact 0-credit quote; `clip_check.py` on every clip, `lipsync_check.py`
+(our line in the clip's audio, lips in sync) on every Keeper clip; a failed shot is a NEW generation at most 2 times,
+then the run fails naming the shot → compose (the Keeper's picture spans exactly his line's audio, from the start of
+his clip at normal speed) → `clip_check.py --composed`, loudness -14 +-1 LUFS → 20-frame sheet and per-shot report for
+Claude's review at 9.5.
