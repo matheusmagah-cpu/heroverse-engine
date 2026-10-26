@@ -18,9 +18,10 @@ Steps (each one is the build's own code, not a copy):
      the build measures them, and the compose predicted on that layout. Each line's measured pace is reported.
   5. requests (--refs, after the voice): refs_step fetches and checks the reference images, and every shot's Pavo
      request goes through the adapter's own offline checks (episode_build.request_problems).
-  6. talking setups: each talking shot's setup (speaker, the reference images it sends, the prompt binding) must have
-     a direct 0-credit Pavo probe recorded in evidence/pavo/setups.json (generations and lips-check passes); one
-     missing is PROBE_REQUIRED. From the recorded pass rate: each shot's and the run's chance at TALK_ATTEMPTS.
+  6. talking lines: each talking shot's line, with its speaker, the reference images it sends and the prompt binding,
+     must have a direct 0-credit Pavo probe in evidence/pavo/setups.json (lips-check passes over generations on that
+     line: #419 showed the rate belongs to the line, not to the setup). None is PROBE_REQUIRED; a rate whose chance
+     within TALK_ATTEMPTS is under MIN_SHOT_CHANCE is PROBE_RATE_LOW. The run's chance is reported.
 The report is PASS only when every step ran and found nothing. --write saves it to
 evidence/preflight/<episode>.json (bound to the plan's and characters.json's sha256); episode.yml runs
 verify-preflight on main before any secret is used, so a build without a PASS preflight of that exact plan stops in
@@ -99,44 +100,64 @@ def cf_images_today(today=None, run=subprocess.run):
     return sum(1 for line in done.stdout.splitlines() if line.endswith(".json") and "/images/" in line)
 
 
-def setup_key(shot, chars, images_dir=ch.HERE / "images"):
-    """A talking shot's setup: who speaks, the reference images its request sends for the speaker (record id and
-    sha256) and the prompt binding. A new speaker, a new speaking frame or a new binding is a new setup (SYSTEM.md
-    "No rework": probed with direct 0-credit Pavo calls before a build)."""
+MIN_SHOT_CHANCE = 0.9         # a talking shot must pass its lips check within TALK_ATTEMPTS at least this often
+MIN_PROBE_GENERATIONS = 6     # a line's rate is read from at least this many direct generations (TALK_ATTEMPTS)
+
+
+def line_words(text):
+    """A line's words, case and punctuation ignored: what a probe is matched on (#419: the rate is the line's)."""
+    return " ".join(plan_check._plain(text))
+
+
+def setup_key(shot, chars, line, images_dir=ch.HERE / "images"):
+    """A talking shot's probe key: who speaks, the reference images its request sends for the speaker (record id
+    and sha256), the prompt binding and the line itself. PR #419 measured that the lips pass rate belongs to the line
+    (line-01 7 of 14, genesis-07's Keeper lines 1 of 39 with the same speaker, reference, pose and binding), so a
+    probe on one line never vouches for another."""
     who = eb.speaker_of(shot)
     try:
         records = (eb.reference_records(who, chars, images_dir, "talk_refs")
                    or eb.reference_records(who, chars, images_dir))
     except SystemExit:
         records = []
-    return {"kind": "talk", "speaker": who, "references": {rid: m.get("sha256") for rid, m in records},
-            "binding": eb.BOUND_AUDIO}
+    return {"speaker": who, "references": {rid: m.get("sha256") for rid, m in records}, "binding": eb.BOUND_AUDIO,
+            "line": line_words(line)}
 
 
-def probe_rows(plan, chars, setups=None):
-    """Each talking shot with its recorded probe, or PROBE_REQUIRED; the expected pass rates at TALK_ATTEMPTS."""
-    if setups is None:
-        setups = json.loads(SETUPS.read_text())["setups"] if SETUPS.exists() else []
-    rows, missing, run_chance = [], [], 1.0
-    for s in plan["shots"]:
+def load_probes():
+    return json.loads(SETUPS.read_text())["probes"] if SETUPS.exists() else []
+
+
+def probe_rows(plan, chars, probes=None):
+    """Each talking shot with the recorded probes of its own line (speaker, references and binding equal), or
+    PROBE_REQUIRED; a recorded rate whose chance within TALK_ATTEMPTS is under MIN_SHOT_CHANCE is PROBE_RATE_LOW.
+    Returns (rows, required, low, run chance or None while a line is unprobed)."""
+    probes = load_probes() if probes is None else probes
+    items, carried = plan_check.sequence(plan)
+    rows, missing, low, run_chance = [], [], [], 1.0
+    for i, s in enumerate(plan["shots"]):
         if plan_check.talking(s):
-            key = setup_key(s, chars)
-            found = next((x for x in setups if all(x.get(k) == v for k, v in key.items())), None)
-            row = dict(key, shot=s["id"])
-            if not found or not found.get("generations"):
-                row["probe"] = "PROBE_REQUIRED"
+            key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]))
+            found = [x for x in probes if all(
+                (line_words(x.get("line", "")) if k == "line" else x.get(k)) == v for k, v in key.items())]
+            generations = sum(x.get("generations") or 0 for x in found)
+            row = dict(key, shot=s["id"], kind="talk")
+            if generations < MIN_PROBE_GENERATIONS:   # none, or too few to be a rate (1 of 3 is not evidence)
+                row.update(probe="PROBE_REQUIRED", generations=generations)
                 missing.append(s["id"])
             else:
-                rate = found["passed"] / found["generations"]
-                shot_chance = 1 - (1 - rate) ** eb.TALK_ATTEMPTS
+                passed = sum(x.get("passed") or 0 for x in found)
+                shot_chance = 1 - (1 - passed / generations) ** eb.TALK_ATTEMPTS
                 run_chance *= shot_chance
-                row.update(probe=found.get("evidence"), pass_rate=round(rate, 3),
+                row.update(probe=sorted({x.get("evidence") for x in found}), passed=f"{passed} of {generations}",
                            shot_chance=round(shot_chance, 3))
+                if shot_chance < MIN_SHOT_CHANCE:
+                    low.append(s["id"])
             rows.append(row)
         elif plan_check.speaking(s):
             rows.append({"kind": "god_voice_over", "shot": s["id"],
                          "probe": "none needed: generated right after the talking shots (risk_order), face check"})
-    return rows, missing, round(run_chance, 3)
+    return rows, missing, low, (round(run_chance, 3) if not missing else None)
 
 
 def measured_pace(plan, work):
@@ -239,11 +260,15 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
                               "why": "needs --refs, a clean plan and a clean measured voice" if refs else "no --refs given"}
         blockers.append("REQUESTS_NOT_CHECKED (run with --refs once the plan and the voice are clean)")
     if sound:
-        probes, missing, chance = probe_rows(plan, chars, setups)
-        report["setups"] = {"shots": probes, "probes_required": missing, "talk_attempts": eb.TALK_ATTEMPTS,
+        rows, missing, low, chance = probe_rows(plan, chars, setups)
+        report["setups"] = {"shots": rows, "probes_required": missing, "rate_low": low,
+                            "talk_attempts": eb.TALK_ATTEMPTS, "min_shot_chance": MIN_SHOT_CHANCE,
                             "run_chance_all_talking_shots": chance}
-        blockers += [f"PROBE_REQUIRED {sid} (a direct 0-credit Pavo test of this setup with lipsync_check, recorded in "
-                     "evidence/pavo/setups.json)" for sid in missing]
+        blockers += [f"PROBE_REQUIRED {r['shot']} ({r['generations']} of the >= {MIN_PROBE_GENERATIONS} direct 0-credit "
+                     "Pavo generations of this line with its speaker, reference and binding, lipsync_check, recorded in "
+                     "evidence/pavo/setups.json)" for r in rows if r.get("shot") in missing]
+        blockers += [f"PROBE_RATE_LOW {r['shot']} (lips passed {r['passed']}: {r['shot_chance']} within "
+                     f"{eb.TALK_ATTEMPTS} attempts < {MIN_SHOT_CHANCE})" for r in rows if r.get("shot") in low]
     report["blockers"] = blockers
     report["status"] = "PASS" if not blockers else "BLOCKED"
     return report

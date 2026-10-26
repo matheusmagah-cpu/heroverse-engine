@@ -46,11 +46,11 @@
   },
   "AUDIO_NOT_OUR_LINE": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "AUDIO_OFFSET": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "AUTH_FAILED": {
    "class": "D",
@@ -275,7 +275,7 @@
   },
   "FACE_NOT_FOUND": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "FACE_TOOL_BROKEN": {
    "class": "I",
@@ -680,11 +680,11 @@
   },
   "MOUTH_NOT_IN_SYNC": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "MOUTH_OPEN_IN_PAUSES": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "NARRATION_MISSING": {
    "class": "A",
@@ -729,7 +729,7 @@
   },
   "NO_FRAMES": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "NO_IMAGES": {
    "class": "N",
@@ -761,7 +761,7 @@
   },
   "NO_VIDEO": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "ORIGINAL_SHARE": {
    "class": "A",
@@ -1086,7 +1086,7 @@
   },
   "SHOT_FAILED": {
    "class": "C",
-   "probe": "evidence/pavo/setups.json via episode_preflight (PROBE_REQUIRED): a direct 0-credit Pavo test of each new talking setup with lipsync_check before any build; risk_order generates talking shots first (E99)"
+   "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
   },
   "SHOT_GAP_OR_OVERLAP": {
    "class": "A",

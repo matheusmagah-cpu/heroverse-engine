@@ -17,22 +17,39 @@ EXAMPLE = HERE / "plans" / "genesis-07-short.json"
 
 
 class Probes(unittest.TestCase):
-    def test_a_talking_setup_without_a_recorded_probe_blocks(self):
+    def test_the_lips_rate_is_the_lines_own_and_genesis_07_is_blocked(self):
+        # PR #419: line-01 passed 7 of 14, genesis-07's own Keeper lines 1 of 33 with the same speaker, reference,
+        # pose and binding. A probe on one line never vouches for another, and genesis-07 reads its real rates
         plan = json.loads(EXAMPLE.read_text())
         chars = pf.ch.registry()
-        rows, missing, chance = pf.probe_rows(plan, chars, setups=[])
+        probes = pf.load_probes()
         talking = [s["id"] for s in plan["shots"] if pf.plan_check.talking(s)]
-        self.assertEqual(missing, talking)
-        # the Keeper's recorded setup (evidence/pavo/setups.json) covers his three shots, with the run's chance
-        recorded = json.loads(pf.SETUPS.read_text())["setups"]
-        rows, missing, chance = pf.probe_rows(plan, chars, setups=recorded)
-        self.assertEqual(missing, [])
-        rate = recorded[0]["passed"] / recorded[0]["generations"]
-        self.assertAlmostEqual(chance, round((1 - (1 - rate) ** pf.eb.TALK_ATTEMPTS) ** len(talking), 3))
-        # a new speaking frame is a new setup: the old probe no longer covers it
-        changed = copy.deepcopy(recorded)
-        changed[0]["references"] = {"ch-keeper-talk": "0" * 64}
-        self.assertEqual(pf.probe_rows(plan, chars, setups=changed)[1], talking)
+        self.assertEqual(pf.probe_rows(plan, chars, probes=[])[1], talking)
+        only_line01 = [p for p in probes if pf.line_words(p["line"]).startswith("genesis five")]
+        self.assertEqual(pf.probe_rows(plan, chars, probes=only_line01)[1], talking)   # same setup, other line
+        rows, missing, low, chance = pf.probe_rows(plan, chars, probes=probes)
+        self.assertEqual(low, ["k-insight", "k-question"])                             # 0 of 15 each
+        self.assertEqual(missing, ["k-close"])                                         # 1 of 3: too few to be a rate
+        self.assertEqual({r["shot"]: r.get("passed") for r in rows if r.get("kind") == "talk"},
+                         {"k-insight": "0 of 15", "k-question": "0 of 15", "k-close": None})
+        self.assertIsNone(chance)
+        # a new speaking frame is not covered by the old frame's probes
+        changed = copy.deepcopy(probes)
+        for p in changed:
+            p["references"] = {"ch-keeper-talk": "0" * 64}
+        self.assertEqual(pf.probe_rows(plan, chars, probes=changed)[1], talking)
+        # a line that passes like line-01 is not blocked
+        good = [dict(p, passed=7, generations=14) for p in probes]
+        _, missing, low, chance = pf.probe_rows(plan, chars, probes=good)
+        self.assertEqual((missing, low), ([], []))
+        self.assertGreater(chance, 0.9)
+
+    def test_the_committed_genesis_07_report_is_blocked_by_its_lines(self):
+        report = json.loads((pf.REPORTS / "genesis-07-short.json").read_text())
+        self.assertEqual(report["status"], "BLOCKED")
+        self.assertEqual(report["setups"]["rate_low"], ["k-insight", "k-question"])
+        self.assertEqual(report["setups"]["probes_required"], ["k-close"])
+        self.assertTrue(pf.verify(EXAMPLE).startswith("PREFLIGHT_NOT_PASS"))
 
 
 class Report(unittest.TestCase):
@@ -70,12 +87,11 @@ class Report(unittest.TestCase):
         self.assertLess(verify, wf.index("secrets.PAVO_TOKEN"))
         self.assertLess(verify, wf.index("pilot_render.py voice"))
 
-    def test_committed_reports_are_pass_for_the_plans_they_name(self):
+    def test_a_committed_report_says_pass_only_with_no_blocker(self):
         for path in sorted(pf.REPORTS.glob("*.json")):
             report = json.loads(path.read_text())
-            plan = pf.REPO / report["plan"]
-            if plan.exists() and report["plan_sha256"] == pf.sha256(plan):
-                self.assertEqual(report["status"], "PASS", path.name)
+            self.assertIn(report["status"], ("PASS", "BLOCKED"), path.name)
+            self.assertEqual(report["status"] == "PASS", report["blockers"] == [], path.name)
 
 
 class Allocation(unittest.TestCase):
