@@ -186,20 +186,33 @@ An explicit, opt-in plan mode; a Keeper shot without the flag still talks, lip-s
   `VOICEOVER_FIELD`). It is not a talking shot: no input audio, no `TALK_*` retime, no `KEEPER_POSE`. Its prompt says
   his mouth stays closed ("his lips closed, silent") and names no speech (speaks, talking, says, lips moving, words,
   audio...), else `KEEPER_VO_PROMPT`; he faces the lens on a static camera ("static camera", "looks straight into the
-  camera"; no looking down into the fire, lowered eyes, push-in or lean), else `KEEPER_VO_POSE`. His `look` and one
-  `wardrobe` variant stay word for word; Keeper <= 25 %, lesson <= 25 %, only after the climax, never opens, closes:
-  all count these shots. His line is narration in am_michael carried by the voice track; the clip is ceil(line + the
-  0.35 s gap, or the 1.2 s closing tail) seconds, 4-12 (`plan_check.vo_clip_seconds`), the line + gap/tail <= 15.6 s.
+  camera"; nothing that turns his eyes or head off the lens: looking or glancing down, into or at the fire, flames,
+  embers or scroll, eyes on the flames, eyes raised from the fire, head bowed, lowered eyes, profile, reading the
+  scroll, push-in or lean), else `KEEPER_VO_POSE`. His character entry needs a `talk_refs` frame, else
+  `KEEPER_VO_NO_TALK_REF` (also refused by `episode_build refs` and the request: never the front view in its place).
+  His `look` and one `wardrobe` variant stay word for word; Keeper <= 25 %, lesson <= 25 %, only after the climax,
+  never opens, closes: all count these shots. His line is narration in am_michael carried by the voice track, at
+  least 2.0 s (`VO_LINE_MIN`, the floor `episode_build lines` holds a Keeper line to). One helper,
+  `plan_check.vo_cover`, gives what his clip covers besides the line, by the compose's own run logic: the 0.35 s gap
+  before it when a talking shot comes first, and the 0.35 s gap or the 1.2 s closing tail after it. plan_check (at
+  the slowest pace), `episode_build lines` (measured) and the compose all cap that whole time at 15.6 s (one 12 s clip
+  slowed 1.3), and the clip is ceil(it) seconds, 4-12 (`vo_clip_seconds`). The long has no voice-over path yet:
+  `LONG_VOICEOVER_UNSUPPORTED`.
 - **The build:** the request sends his `talk_refs` frame alone (else his approved refs), no audio, no speech clause;
   Pavo's audio is stripped. `lipsync_check.py --still-mouth` (the same pinned landmarker and inner-lip opening as the
-  lips check) flags `MOUTH_TALKING` when the opening is both wide (p95 - p5 > 0.016 of the face height) and fast
-  (mean frame-to-frame change > 0.0032), and `FACE_NOT_FOUND` under 80 % of the frames, as for the lips; 6
+  lips check) flags `MOUTH_TALKING` when any 1 s of the clip moves fast (mean frame-to-frame change > 0.0063 of the
+  face height; or the whole clip is wide and fast, the first rule), `MOUTH_NOT_CLOSED` when any 1 s after the first
+  2.5 s is open (median > 0.013; the talking frame's open mouth may settle closed within those 2.5 s, no longer), and
+  `FACE_NOT_FOUND` under 80 % of the frames, as for the lips; every measure goes into report.json; 6
   generations like a talking shot (`attempts_for`: Pavo is free and 1 in 6 passed before the prompts were settled),
   generated right after the talking shots (E99). The compose plays his clip unbroken from its 0 s over
   his line (slowed at most 1.3, never cut or held); his words and captions come from the voice track.
-- **Why these rules** (`evidence/pavo/20261026/keeper-vo/calibration.json`, 6 direct 0-credit Pavo clips + 42 talking
-  clips): 42 talking clips (the Keeper's, passing and failing the lips alike, and the genesis-06 narrator) spread
-  0.056-0.125, motion 0.0041-0.018, all `MOUTH_TALKING`. With the mouth-closed front reference his face was found in
+- **Why these rules** (`evidence/pavo/20261026/keeper-vo/calibration.json`, 14 direct 0-credit closed-mouth Pavo clips
+  and 42 talking clips, their per-frame series in `opening-series.json`, replayed by test_lipsync_check): 42 talking
+  clips (the Keeper's, passing and failing the lips alike, and the genesis-06 narrator) move 0.0091-0.026 in their
+  fastest second and open 0.039-0.084 in their most open second after 2.5 s, all `MOUTH_TALKING`; the closed clips
+  0.0005-0.0043 and 0.0011-0.0046. A whole-clip mean (the first rule) would let 2.5 s of talking in a 12 s clip pass,
+  and a still open mouth passed it (review of #423). With the mouth-closed front reference his face was found in
   2-27 % of the frames (4 of 4 `FACE_NOT_FOUND`, whatever the gaze or light); with his talking frame facing the lens,
   100 %, the mouth settling closed within 2.5 s from the reference's open mouth and staying closed (spread 0.041,
   motion 0.0006: passes); looking down into the fire, 17 % (`FACE_NOT_FOUND`). So the owner's "into the fire" and

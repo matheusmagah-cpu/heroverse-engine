@@ -241,9 +241,17 @@ def lines_step(plan, work):
             into = speakers if talks else voice_over
         # one talking ceiling (plan_check.TALK_LINE_MAX: the retime brings every talking line under it; 1 ms is the
         # layout's rounding); God's voice-over fills one scene clip
-        limit = (plan_check.TALK_LINE_MAX if talks else plan_check.VO_LINE_MAX if plan_check.voiceover(s)
-                 else plan_check.SPEAKER_AUDIO[1])
-        if not low <= seconds <= limit + (1e-3 if talks else 0.0):
+        limit = plan_check.TALK_LINE_MAX if talks else plan_check.SPEAKER_AUDIO[1]
+        if plan_check.voiceover(s):
+            # review of #423: his clip covers the gap before (after a talking shot), the line and the gap or tail
+            # after (plan_check.vo_cover, the compose's own run logic): that whole time is capped, the line floored
+            covered = plan_check.vo_covered(seconds, shots, i)
+            if not plan_check.VO_LINE_MIN <= seconds or covered > plan_check.VO_LINE_MAX + 1e-9:
+                problems.append(f"{code} {s['id']} {seconds:.2f} s, {covered:.2f} s with the gap before and the gap or "
+                                f"tail after (line >= {plan_check.VO_LINE_MIN:.1f} s, all <= "
+                                f"{plan_check.VO_LINE_MAX:.1f} s)")
+                continue
+        elif not low <= seconds <= limit + (1e-3 if talks else 0.0):
             problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.2f} s)")
             continue
         if talks:
@@ -336,8 +344,12 @@ def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
             talkers.append(speaker_of(s))
     out = {}
     wanted = [(cid, cid, "refs") for cid in needed] + [(f"{cid}:talk", cid, "talk_refs") for cid in talkers]
+    silent = {speaker_of(s) for s in plan["shots"] if plan_check.voiceover(s)}
     for key, cid, field in wanted:
         records = reference_records(cid, chars, field=field)
+        if not records and field == "talk_refs" and cid in silent:
+            # review of #423: the front view lost his face 4 of 4 (keeper-vo/calibration.json); never in its place
+            raise SystemExit(f"KEEPER_VO_NO_TALK_REF {cid} (a voice-over Keeper is generated from his `talk_refs` frame)")
         if not records:
             continue
         out[key] = []
@@ -390,14 +402,10 @@ def retime(piece, params, factor, stem):
     return frames[:want] + b"\x00" * max(0, want - len(frames))
 
 
-def vo_after(index, plan):
-    """The time a voice-over Keeper clip covers after his line: the gap before the next line, or the closing tail."""
-    return TAIL if index == len(plan["shots"]) - 1 else LINE_GAP
-
-
 def shot_seconds(shot, index, plan, layout):
-    if plan_check.voiceover(shot):
-        return plan_check.vo_clip_seconds(layout["keeper"][shot["id"]]["seconds"], vo_after(index, plan))
+    if plan_check.voiceover(shot):   # the gap before, his line, the gap or tail after (plan_check.vo_cover)
+        covered = plan_check.vo_covered(layout["keeper"][shot["id"]]["seconds"], plan["shots"], index)
+        return plan_check.vo_clip_seconds(covered)
     if not plan_check.talking(shot):
         return shot["seconds"]
     return min(plan_check.TALK_CLIP[1], talk_need(talk_record(layout, shot)["seconds"]))
@@ -449,7 +457,10 @@ def request(shot, index, plan, layout, refs, chars=None):
         references = list(refs.get(f"{who}:talk") or refs[who]) + [p for cid in ids[1:] for p in refs[cid]]
         prompt = bind_prompt(prompt, who, chars)
     elif plan_check.voiceover(shot):
-        references = list(refs.get(f"{ch.NARRATOR}:talk") or refs[ch.NARRATOR])
+        if not refs.get(f"{ch.NARRATOR}:talk"):
+            raise SystemExit(f"KEEPER_VO_NO_TALK_REF {shot['id']} (no talking frame in refs.json; the front view lost "
+                             "his face 4 of 4)")
+        references = list(refs[f"{ch.NARRATOR}:talk"])
     else:
         references = [p for cid in ids for p in refs[cid]]
     if len(references) > ch.MAX_REFS:
@@ -587,7 +598,8 @@ def still_mouth_flags(lip_python, face_model, clip):
     except (ValueError, IndexError, KeyError, TypeError):
         tail = " | ".join(done.stderr.strip().splitlines()[-3:])
         raise SystemExit(f"STILL_MOUTH_TOOL_BROKEN exit {done.returncode}: {tail[-600:]}")
-    return flags, {"still_mouth": {k: result.get(k) for k in ("opening_range", "face_frames", "frames")}}
+    return flags, {"still_mouth": {k: result.get(k) for k in ("opening_range", "opening_motion", "window_motion",
+                                                               "closed_opening", "face_frames", "frames")}}
 
 
 def risk_order(shots):
@@ -745,7 +757,12 @@ def compose_shots(plan, layout, clips, clip_seconds):
             # narration in the voice track (captions from the timeline). A clip shorter than that is slowed at most
             # MAX_SLOW, never cut or held
             s = shots[a]
-            end = total if last else lines[runs[r + 1][2][0]]["start"]
+            before, after = plan_check.vo_cover(shots, a)   # the one rule plan_check and lines_step cap by
+            start = lines[ln[0]]["start"] - before
+            end = total if last else lines[ln[-1]]["end"] + after
+            if abs(start - cursor) > 1e-3 or (not last and abs(end - lines[runs[r + 1][2][0]]["start"]) > 1e-3):
+                raise SystemExit(f"KEEPER_VO_NOT_ON_HIS_LINE {s['id']} (cover {before}/{after} s off the run's "
+                                 f"{cursor:.3f} s start or the next line)")
             span = end - cursor
             factor = max(1.0, span / clip_seconds[s["id"]])
             if factor > MAX_SLOW + 1e-9:

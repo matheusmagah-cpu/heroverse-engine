@@ -20,9 +20,9 @@ usage: lipsync_check.py CLIP.mp4 LINE.wav FACE_LANDMARKER.task   prints one JSON
                                                                   flags GOD_SHOT_FACE (exit 1)
        lipsync_check.py --still-mouth CLIP.mp4 FACE_LANDMARKER.task
                                                  a voice-over Keeper clip (plan B): the same lip opening on every
-                                                 frame; MOUTH_TALKING when it varies over STILL_MOUTH_RANGE_MAX
-                                                 and moves over STILL_MOUTH_MOTION_MAX a frame,
-                                                 FACE_NOT_FOUND under 80 % of frames (exit 1)
+                                                 frame; MOUTH_TALKING when any ~1 s moves fast, MOUTH_NOT_CLOSED
+                                                 when any ~1 s after the settle is open, FACE_NOT_FOUND under 80 %
+                                                 of frames (exit 1)
 (model: https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task)
 """
 import json
@@ -38,18 +38,27 @@ SPEAK_TO_PAUSE_MIN = 1.5
 FACE_FRAMES_MIN = 0.8
 LAG_MAX_MS = 84            # two frames at 24 fps
 FACE_SAMPLE_EVERY = 4      # --faces: every 4th frame (6 a second at 24 fps)
-# Plan B (owner, 2026-10-26): a voice-over Keeper clip shows no talking mouth. Two measures of the inner-lip opening
-# over the face height on the frames where the face is found: its spread (95th minus 5th percentile) and its motion
-# (the mean change between consecutive frames that both have the face). Talking opens and closes the lips several
-# times a second, so it is both wide and fast; a mouth that settles once (the clip's first frames copying an open
-# reference, then closed) is wide but slow. Calibration 2026-10-26 (mediapipe 0.10.35, this model,
-# evidence/pavo/20261026/keeper-vo/calibration.json): 42 talking clips (the Keeper's 40 direct clips of PR #419 and his
-# calibration clip, passing and failing the lips alike, and the genesis-06 narrator): spread 0.056-0.125, motion
-# 0.0041-0.0183 (the Keeper's >= 0.0087); 6 closed-mouth Keeper clips: motion <= 0.0025, spread <= 0.0045 or
-# 0.041-0.066 for the two that settle from the open talking reference. Each threshold sits near the geometric middle
-# of the two groups (0.0045 / 0.056 and 0.0025 / 0.0041): MOUTH_TALKING when both are over.
+# Plan B (owner, 2026-10-26): a voice-over Keeper clip shows no talking mouth and a mouth confirmed closed. Measures
+# of the inner-lip opening over the face height on the frames where the face is found (calibration 2026-10-26,
+# mediapipe 0.10.35, this model, evidence/pavo/20261026/keeper-vo/calibration.json; the per-frame series of the 42
+# talking clips - the Keeper's 40 direct clips of PR #419 and his calibration clip, passing and failing the lips alike,
+# and the genesis-06 narrator - and the 14 closed-mouth Keeper clips are kept in opening-series.json and replayed by
+# test_lipsync_check):
+# - window motion: the largest mean frame-to-frame change over any STILL_MOUTH_WINDOW_S (at least half of it with the
+#   face), so a few seconds of talking inside a long clip are not averaged away. Talking 0.0091-0.026, closed
+#   0.0005-0.0043 (the highest in the first seconds, while a mouth settles): MOUTH_TALKING over 0.0063, near the
+#   geometric middle. The whole-clip rule stays as well (spread > 0.016 and mean motion > 0.0032; talking spread
+#   0.056-0.125, mean 0.0041-0.018; closed mean <= 0.0025).
+# - closed opening: the most open STILL_MOUTH_WINDOW_S (its median) after STILL_MOUTH_SETTLE_S. The talking reference
+#   starts with an open mouth that closes within ~2.5 s (clip 5, conversation 373100393016087168), so the settle is
+#   allowed explicitly and no longer. Talking 0.039-0.084, closed 0.0011-0.0046: MOUTH_NOT_CLOSED over 0.013, near the
+#   geometric middle; nothing measurable after the settle is never a confirmed closed mouth.
 STILL_MOUTH_RANGE_MAX = 0.016
 STILL_MOUTH_MOTION_MAX = 0.0032
+STILL_MOUTH_WINDOW_S = 1.0
+STILL_MOUTH_WINDOW_MOTION_MAX = 0.0063
+STILL_MOUTH_SETTLE_S = 2.5
+STILL_MOUTH_CLOSED_MAX = 0.013
 MODEL_SHA256 = "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
 
 
@@ -181,32 +190,55 @@ def face_verdict(clip, sampled, found, at):
     return {"clip": clip, "frames_sampled": sampled, "faces_found": found, "face_frames": at[:20], "flags": flags}
 
 
-def still_mouth_verdict(opening, share):
-    """A voice-over Keeper clip's mouth (plan B): MOUTH_TALKING when the lip opening's p95 - p5 over the frames with a
-    face exceeds STILL_MOUTH_RANGE_MAX and its mean frame-to-frame change exceeds STILL_MOUTH_MOTION_MAX (talking: wide
-    and fast); FACE_NOT_FOUND under FACE_FRAMES_MIN of the frames (as for the lips check); NO_FRAMES for an empty
-    clip. Frames without a face are left out, never counted as a closed mouth."""
+def _windows(values, width):
+    """Each run of `width` values with at least half of them measured (not NaN): the measured values."""
+    for k in range(0, len(values) - width + 1):
+        seg = values[k:k + width]
+        ok = seg[~np.isnan(seg)]
+        if len(ok) >= width / 2:
+            yield ok
+
+
+def still_mouth_verdict(opening, share, fps=24.0):
+    """A voice-over Keeper clip's mouth (plan B):
+    MOUTH_TALKING when the mean lip motion over any STILL_MOUTH_WINDOW_S exceeds STILL_MOUTH_WINDOW_MOTION_MAX, or the
+    whole clip is wide and fast (p95 - p5 > STILL_MOUTH_RANGE_MAX and mean motion > STILL_MOUTH_MOTION_MAX);
+    MOUTH_NOT_CLOSED when the median opening of any STILL_MOUTH_WINDOW_S after STILL_MOUTH_SETTLE_S exceeds
+    STILL_MOUTH_CLOSED_MAX, or nothing after the settle can be measured; MOUTH_UNMEASURED when no window of motion can;
+    FACE_NOT_FOUND under FACE_FRAMES_MIN of the frames (as for the lips check); NO_FRAMES for an empty clip. Frames
+    without a face are left out, never counted as a closed mouth."""
     opening = np.asarray(opening, dtype=float)
+    width = max(2, int(round(STILL_MOUTH_WINDOW_S * fps)))
     seen = opening[~np.isnan(opening)] if len(opening) else opening
     spread = float(np.percentile(seen, 95) - np.percentile(seen, 5)) if len(seen) else None
-    both = ~np.isnan(opening[1:]) & ~np.isnan(opening[:-1]) if len(opening) > 1 else np.zeros(0, dtype=bool)
-    motion = float(np.abs(np.diff(opening))[both].mean()) if both.any() else None
+    diff = np.abs(np.diff(opening)) if len(opening) > 1 else np.zeros(0)
+    measured = diff[~np.isnan(diff)]
+    motion = float(measured.mean()) if len(measured) else None
+    window_motion = max((float(w.mean()) for w in _windows(diff, width)), default=None)
+    after = opening[int(round(STILL_MOUTH_SETTLE_S * fps)):]
+    closed_opening = max((float(np.median(w)) for w in _windows(after, width)), default=None)
     flags = []
     if not len(opening):
         flags.append("NO_FRAMES")
     if share < FACE_FRAMES_MIN:
         flags.append("FACE_NOT_FOUND")
-    if (spread is not None and spread > STILL_MOUTH_RANGE_MAX and motion is not None
-            and motion > STILL_MOUTH_MOTION_MAX):
+    whole = (spread is not None and spread > STILL_MOUTH_RANGE_MAX and motion is not None
+             and motion > STILL_MOUTH_MOTION_MAX)
+    if whole or (window_motion is not None and window_motion > STILL_MOUTH_WINDOW_MOTION_MAX):
         flags.append("MOUTH_TALKING")
-    return {"opening_range": None if spread is None else round(spread, 4),
-            "opening_motion": None if motion is None else round(motion, 5), "face_frames": round(float(share), 2),
+    elif window_motion is None:
+        flags.append("MOUTH_UNMEASURED")
+    if closed_opening is None or closed_opening > STILL_MOUTH_CLOSED_MAX:
+        flags.append("MOUTH_NOT_CLOSED")
+    r4 = lambda x, n: None if x is None else round(x, n)  # noqa: E731
+    return {"opening_range": r4(spread, 4), "opening_motion": r4(motion, 5), "window_motion": r4(window_motion, 5),
+            "closed_opening": r4(closed_opening, 5), "face_frames": round(float(share), 2),
             "frames": int(len(opening)), "flags": flags}
 
 
 def still_mouth(clip, model):
-    opening, _, share = lip_opening(clip, model)
-    return dict({"clip": clip}, **still_mouth_verdict(opening, share))
+    opening, fps, share = lip_opening(clip, model)
+    return dict({"clip": clip}, **still_mouth_verdict(opening, share, fps))
 
 
 def verdict(audio, mouth):

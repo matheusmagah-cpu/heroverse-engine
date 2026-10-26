@@ -19,7 +19,7 @@ KEEPER_LOOK = "an elderly storyteller with a silver beard"
 EVE_LOOK = "a woman of about twenty-five with long black hair"
 CHARS = {
     "keeper": {"status": "APPROVED", "look": KEEPER_LOOK, "refs": ["front"], "voice": "am_michael",
-               "wardrobe": {"fire": "seated by a small campfire"}},
+               "wardrobe": {"fire": "seated by a small campfire"}, "talk_refs": ["talk"]},
     "eve": {"status": "APPROVED", "look": EVE_LOOK, "refs": ["full"], "voice": "af_heart"},
     "adam": {"status": "DRAFT", "look": "a man of about thirty", "refs": [], "voice": "am_fenrir"},
     "mute": {"status": "APPROVED", "look": "a quiet shepherd boy", "refs": ["front"]},
@@ -664,6 +664,64 @@ class KeeperVoiceover(unittest.TestCase):
         self.assertNotIn("KEEPER_NOT_SPEAKING", found)
         self.assertNotIn("KEEPER_POSE", found)
 
+    def test_every_phrasing_that_lost_his_face_is_refused(self):
+        # review of #423: the calibration prompts that lost the face, and the usual ways of saying the same
+        for phrase in ("looking down at the scroll", "gazing into the flames", "glances down", "his eyes on the flames",
+                       "eyes on the fire", "raises his eyes from the fire", "his head bowed", "his eyes lowered",
+                       "stares into the embers", "looks at the scroll", "reads the scroll", "turns his head away",
+                       "in profile", "seen from the side", "glancing at the fire", "lowering his gaze"):
+            p = vo_plan()
+            p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(
+                "his lips closed, silent", f"{phrase}, his lips closed, silent")
+            self.assertIn("KEEPER_VO_POSE", codes(pc.check(p, CHARS)), phrase)
+        # what passed stays allowed: rolling the scroll closed while facing the lens, the fire beside him
+        p = vo_plan()
+        p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(
+            "his lips closed, silent", "slowly rolls the old scroll closed in his hands, the fire beside him, his lips "
+            "closed, silent")
+        self.assertNotIn("KEEPER_VO_POSE", codes(pc.check(p, CHARS)))
+
+    def test_a_voiceover_keeper_needs_his_talking_reference(self):
+        # the front view failed the face 4 of 4 (keeper-vo/calibration.json): no silent fallback to it
+        chars = copy.deepcopy(CHARS)
+        del chars["keeper"]["talk_refs"]
+        self.assertIn("KEEPER_VO_NO_TALK_REF", codes(pc.check(vo_plan(), chars)))
+        self.assertNotIn("KEEPER_VO_NO_TALK_REF", codes(pc.check(plan(), chars)))   # a talking plan does not need it
+
+    def test_the_cover_before_and_after_his_line_is_compose_s_own(self):
+        p = vo_plan()
+        n = len(p["shots"])
+        self.assertEqual(pc.vo_cover(p["shots"], n - 1), (0.0, pc.TAIL))        # the closing tail, after a VO shot
+        self.assertEqual(pc.vo_cover(p["shots"], n - 2), (0.0, pc.LINE_GAP))    # after scenes: the gap after it
+        p["shots"][-2] = keeper("k-insight", [4])                                # a talking Keeper before it
+        self.assertEqual(pc.vo_cover(p["shots"], n - 1), (pc.LINE_GAP, pc.TAIL))
+        self.assertEqual(pc.vo_covered(6.0, p["shots"], n - 1), 6.0 + pc.LINE_GAP + pc.TAIL)
+
+    def test_the_line_cap_counts_the_gap_before_and_the_tail_after(self):
+        """Review of #423: the cap was the line + after only; a talking Keeper before a voice-over one leaves the gap
+        before it on the voice-over clip too."""
+        found = None
+        for n in range(10, 60):
+            text = " ".join(["the full story is in the long video"] * 8).split()[:n]
+            text = " ".join(text) + " part eight tomorrow."
+            vo = vo_plan()
+            vo["narration"][5]["text"] = text
+            mixed = copy.deepcopy(vo)
+            mixed["shots"][-2] = keeper("k-insight", [4])
+            a = [x for x in pc.check(vo, CHARS)["problems"] if x.startswith("KEEPER_LINE_TOO_LONG shot 14")]
+            b = [x for x in pc.check(mixed, CHARS)["problems"] if x.startswith("KEEPER_LINE_TOO_LONG shot 14")]
+            if not a and b:
+                found = n
+                break
+        self.assertIsNotNone(found)   # some line fits after a voice-over shot but not after a talking one
+
+    def test_a_voiceover_line_under_the_input_floor_is_refused_as_in_the_build(self):
+        # lines_step refuses a Keeper line under KEEPER_AUDIO[0] (2.0 s); the plan refuses it first
+        p = vo_plan()
+        p["narration"][5]["text"] = "Part eight tomorrow."
+        self.assertIn("KEEPER_LINE_TOO_SHORT", codes(pc.check(p, CHARS)))
+        self.assertEqual(pc.VO_LINE_MIN, pc.KEEPER_AUDIO[0])
+
     def test_he_faces_the_lens_so_the_still_mouth_check_finds_his_face(self):
         # direct closed-mouth clips, 26/10: looking down into the fire the landmarker found his face in 2 % and 17 % of
         # the frames (FACE_NOT_FOUND); facing the lens with the talking reference, 100 %
@@ -719,9 +777,9 @@ class KeeperVoiceover(unittest.TestCase):
         p = vo_plan()
         p["narration"][5]["text"] = short
         self.assertNotIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
-        self.assertEqual(pc.vo_clip_seconds(8.42, pc.TAIL), 10)        # ceil(line + tail), 4-12 s
-        self.assertEqual(pc.vo_clip_seconds(2.1, pc.LINE_GAP), 4)
-        self.assertEqual(pc.vo_clip_seconds(14.0, pc.TAIL), 12)        # the compose slows it at most 1.3
+        self.assertEqual(pc.vo_clip_seconds(8.42 + pc.TAIL), 10)       # ceil(line + tail), 4-12 s
+        self.assertEqual(pc.vo_clip_seconds(2.1 + pc.LINE_GAP), 4)
+        self.assertEqual(pc.vo_clip_seconds(14.0 + pc.TAIL), 12)       # the compose slows it at most 1.3
 
     def test_a_voiceover_line_too_long_for_one_clip_is_refused(self):
         p = vo_plan()

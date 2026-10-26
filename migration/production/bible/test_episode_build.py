@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """episode_build.py offline (stubbed Pavo client and voice): shot -> Pavo request, a failed shot regenerated at most
 twice, an uncertain submission only read back, and the compose timeline keeps the Keeper's picture on his line."""
+import copy
 import hashlib
 import json
 from pathlib import Path
@@ -806,6 +807,15 @@ class Refs(unittest.TestCase):
             # plan B: a voice-over Keeper shot also gets his talking frame (the still-mouth check needs his face)
             vo = eb.refs_step({"shots": [{"id": "k", "kind": "keeper", "voiceover": True, "lines": [0]}]}, work)
             self.assertEqual(sorted(vo), ["keeper", "keeper:talk"])
+            # review of #423: without a talking frame it is refused, never generated from the front view
+            chars = copy.deepcopy(eb.ch.registry())
+            chars["keeper"].pop("talk_refs")
+            with self.assertRaises(SystemExit) as err:
+                eb.refs_step({"shots": [{"id": "k", "kind": "keeper", "voiceover": True, "lines": [0]}]}, work,
+                             chars=chars)
+            self.assertIn("KEEPER_VO_NO_TALK_REF", str(err.exception))
+            self.assertEqual(sorted(eb.refs_step({"shots": [{"id": "k", "kind": "keeper", "lines": [0]}]}, work,
+                                                 chars=chars)), ["keeper"])   # a talking Keeper: his kept refs
         finally:
             shutil.rmtree(work)
 
@@ -863,10 +873,12 @@ class KeeperVoiceover(unittest.TestCase):
 
     def test_the_request_sends_the_reference_whose_clips_show_his_face_and_no_audio_or_speech(self):
         # keeper-vo/calibration.json: with the mouth-closed front view the face was found in 2-27 % of the frames (4 of
-        # 4 FACE_NOT_FOUND); with the talking frame, facing the lens, in 100 %. No talking frame: his approved refs
-        lone = eb.request(VO_EXAMPLE["shots"][-1], len(VO_EXAMPLE["shots"]) - 1, VO_EXAMPLE,
-                          layout_for(VO_EXAMPLE, DURATIONS), {"keeper": ["front.jpg"]})
-        self.assertEqual(lone["references"], ["front.jpg"])
+        # 4 FACE_NOT_FOUND); with the talking frame, facing the lens, in 100 %. No talking frame: refused, never the
+        # front view in its place (review of #423)
+        with self.assertRaises(SystemExit) as err:
+            eb.request(VO_EXAMPLE["shots"][-1], len(VO_EXAMPLE["shots"]) - 1, VO_EXAMPLE,
+                       layout_for(VO_EXAMPLE, DURATIONS), {"keeper": ["front.jpg"]})
+        self.assertIn("KEEPER_VO_NO_TALK_REF", str(err.exception))
         layout = layout_for(VO_EXAMPLE, DURATIONS)
         refs = {"keeper": [".episode/x/refs/ch-keeper-front.jpg"], "keeper:talk": [".episode/x/refs/ch-keeper-talk.jpg"]}
         shots = VO_EXAMPLE["shots"]
@@ -878,9 +890,30 @@ class KeeperVoiceover(unittest.TestCase):
             self.assertIsNone(r["audios"], s["id"])
             self.assertEqual(r["prompt"], s["prompt"], s["id"])             # no "Image 1 is", no "speaks the words"
             self.assertFalse(r["sound"])
-            after = eb.TAIL if i == len(shots) - 1 else eb.LINE_GAP
-            self.assertEqual(r["seconds"], eb.plan_check.vo_clip_seconds(layout["keeper"][s["id"]]["seconds"], after))
+            covered = eb.plan_check.vo_covered(layout["keeper"][s["id"]]["seconds"], shots, i)
+            self.assertEqual(r["seconds"], eb.plan_check.vo_clip_seconds(covered))
         self.assertEqual(eb.request(shots[-1], len(shots) - 1, VO_EXAMPLE, layout, refs)["seconds"], 8)   # 6.54 + 1.2
+
+    def test_after_a_talking_shot_the_clip_also_covers_the_gap_before_his_line(self):
+        """Review of #423: plan_check, lines_step, shot_seconds and compose_shots share plan_check.vo_cover."""
+        p = vo_dialogue_plan()
+        p["narration"].insert(1, {"kind": "insight", "text": "x y z"})
+        p["shots"].insert(3, {"id": "k-talk", "kind": "keeper", "lines": [1], "prompt": "k"})
+        p["shots"][-1]["lines"] = [2]
+        lay = layout_for(p, [2.4, 3.0, 4.55, 2.5, 6.6])
+        refs = {"keeper": ["k.jpg"], "keeper:talk": ["k-talk.jpg"], "eve": ["eve.jpg"]}
+        self.assertEqual(eb.plan_check.vo_cover(p["shots"], 4), (eb.LINE_GAP, eb.TAIL))
+        r = eb.request(p["shots"][4], 4, p, lay, refs)
+        self.assertEqual(r["seconds"], 9)          # ceil(0.35 + 6.6 + 1.2 = 8.15): 8 s would miss the gap before
+        clips = {s["id"]: f"{s['id']}.mp4" for s in p["shots"]}
+        seconds = {"s-eve": 4.59, "s-a": 6.59, "s-god": 8.59, "k-talk": 5.0, "k-close": float(r["seconds"])}
+        shots = eb.compose_shots(p, lay, clips, seconds)
+        self.assertEqual(short_engine.check_shots(shots, lay["total"]), [])
+        vo = [c for c in shots if c["shot"] == "k-close"][0]
+        line = lay["keeper"]["k-close"]
+        self.assertAlmostEqual(vo["start"], line["start"] - eb.LINE_GAP, places=3)
+        self.assertAlmostEqual(vo["end"], lay["total"], places=3)
+        self.assertEqual(vo["speed"], 1.0)
 
     def test_every_scene_and_god_request_is_the_same_as_the_talking_plans_so_a_resume_keeps_them(self):
         refs = {"keeper": ["k.jpg"], "keeper:talk": ["k-talk.jpg"]}
@@ -913,8 +946,8 @@ class KeeperVoiceover(unittest.TestCase):
         seconds = {s["id"]: (s.get("seconds") or 12) + 0.59 for s in VO_EXAMPLE["shots"]}
         for i, s in enumerate(VO_EXAMPLE["shots"]):
             if s["kind"] == "keeper":
-                after = eb.TAIL if i == len(VO_EXAMPLE["shots"]) - 1 else eb.LINE_GAP
-                seconds[s["id"]] = float(eb.plan_check.vo_clip_seconds(layout["keeper"][s["id"]]["seconds"], after))
+                covered = eb.plan_check.vo_covered(layout["keeper"][s["id"]]["seconds"], VO_EXAMPLE["shots"], i)
+                seconds[s["id"]] = float(eb.plan_check.vo_clip_seconds(covered))
         shots = eb.compose_shots(VO_EXAMPLE, layout, clips, seconds)
         self.assertEqual(short_engine.check_shots(shots, layout["total"]), [])
         sentences = [{"start": x["start"], "end": x["end"]} for x in layout["lines"]]
@@ -940,6 +973,27 @@ class KeeperVoiceover(unittest.TestCase):
         with self.assertRaises(SystemExit) as err:
             eb.compose_shots(VO_EXAMPLE, layout, clips, dict(seconds, **{"k-close": 4.0}))
         self.assertIn("KEEPER_CLIP_SHORT k-close", str(err.exception))
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_lines_step_caps_the_gap_before_his_line_and_the_tail_after_it(self):
+        """Review of #423: the line alone was held to VO_LINE_MAX (15.6 s); after a talking shot the clip also covers
+        the 0.35 s gap before it and the 1.2 s tail after it (14.5 + 1.55 = 16.05 s)."""
+        work = Path(tempfile.mkdtemp(dir=eb.REPO / ".episode" if (eb.REPO / ".episode").is_dir() else eb.REPO,
+                                     prefix="test-vo-cap-"))
+        try:
+            plan = {"shots": [{"id": "s-a", "kind": "scene", "lines": [0]},
+                              {"id": "k-talk", "kind": "keeper", "lines": [1]},
+                              {"id": "k-close", "kind": "keeper", "voiceover": True, "lines": [2]}],
+                    "narration": [{"text": "a"}, {"text": "b"}, {"text": "c"}]}
+            tone_wav(work / "voice.wav", 90.0)
+            spans = [(0.3, 60.0), (60.18, 66.73), (66.91, 81.41)]
+            (work / "timeline.json").write_text(json.dumps({"sentences": [
+                {"segment": f"n{k:02d}", "text": "x.", "start": a, "end": b} for k, (a, b) in enumerate(spans)]}))
+            with self.assertRaises(SystemExit) as err:
+                eb.lines_step(plan, work)
+            self.assertIn("KEEPER_AUDIO k-close", str(err.exception))
+        finally:
+            shutil.rmtree(work)
 
     @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
     def test_lines_step_neither_retimes_nor_cuts_input_audio_for_his_line_and_captions_follow(self):
@@ -1047,7 +1101,8 @@ class StillMouthGate(unittest.TestCase):
         orig = eb.subprocess.run
 
         class Done:
-            stdout = json.dumps({"flags": [], "opening_range": 0.012, "face_frames": 0.97, "frames": 200}) + "\n"
+            stdout = json.dumps({"flags": [], "opening_range": 0.012, "opening_motion": 0.0006, "window_motion": 0.0021,
+                                 "closed_opening": 0.0024, "face_frames": 0.97, "frames": 200}) + "\n"
             stderr, returncode = "", 0
         eb.subprocess.run = lambda args, **kw: (seen.append(args), Done())[1]
         try:
@@ -1057,6 +1112,10 @@ class StillMouthGate(unittest.TestCase):
         self.assertEqual(seen[0][1:4], ["-I", "-B", str(eb.HERE / "lipsync_check.py")])
         self.assertEqual(seen[0][4:], ["--still-mouth", "clip.mp4", "model.task"])
         self.assertEqual((flags, measures["still_mouth"]["opening_range"]), ([], 0.012))
+        # review of #423: every measure the verdict uses reaches report.json
+        self.assertEqual(measures["still_mouth"], {"opening_range": 0.012, "opening_motion": 0.0006,
+                                                   "window_motion": 0.0021, "closed_opening": 0.0024,
+                                                   "face_frames": 0.97, "frames": 200})
 
 
 class Workflow(unittest.TestCase):

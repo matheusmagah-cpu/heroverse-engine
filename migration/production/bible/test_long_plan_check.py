@@ -245,6 +245,13 @@ class Grammar(unittest.TestCase):
             p["narration"][k]["text"] = "It was quiet."
         self.assertIn("COLD_OPEN_SHORT", codes(check(p)))
 
+    def test_a_voiceover_keeper_is_refused_in_the_long_until_it_has_its_own_path(self):
+        p = plan()
+        k = next(s for s in p["shots"] if s["kind"] == "keeper")
+        k["voiceover"] = True
+        self.assertIn("LONG_VOICEOVER_UNSUPPORTED", codes(check(p)))
+        self.assertNotIn("LONG_VOICEOVER_UNSUPPORTED", codes(check(plan())))
+
     def test_review_2_keeper_prompts_pass_the_prompt_rules_too(self):
         p = plan()
         s = shot(p, "k-insight-1")

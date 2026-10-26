@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """lipsync_check.py: thresholds calibrated on the 2026-10-26 Keeper test (no model needed for these cases)."""
+import json
 from pathlib import Path
 import sys
 import unittest
@@ -58,53 +59,94 @@ class GodShotFaces(unittest.TestCase):
         self.assertGreaterEqual(lc.FACE_SAMPLE_EVERY, 1)
 
 
+SERIES = Path(__file__).resolve().parents[2] / "evidence/pavo/20261026/keeper-vo/opening-series.json"
+FPS = 24.0
+
+
+def closed(seconds, level=0.002, noise=0.0004, seed=1):
+    return level + np.random.default_rng(seed).normal(0, noise, int(seconds * FPS))
+
+
+def talk(seconds, amplitude=0.11):
+    return np.abs(np.sin(np.linspace(0, 1.5 * np.pi * seconds, int(seconds * FPS)))) * amplitude + 0.002
+
+
 class StillMouth(unittest.TestCase):
-    """Plan B (owner, 2026-10-26): a voice-over Keeper clip shows no talking mouth. The inner-lip opening over the
-    face height is wide and fast over a talking clip (42 clips of 26/10: spread 0.056-0.125, motion 0.0041-0.0183 a
-    frame) and slow with the lips closed (the direct closed-mouth Keeper clips: motion <= 0.0025; spread <= 0.0045, or
-    0.041-0.066 when the clip settles once from the open talking reference): MOUTH_TALKING needs both."""
-    TALKING = {"spread": 0.056, "motion": 0.0041}          # the lowest of the 42 talking clips (genesis-06 narrator)
-    STILL = {"spread": 0.0045, "motion": 0.00252}          # the highest closed ones (settling: spread 0.041-0.066)
+    """Plan B (owner, 2026-10-26): a voice-over Keeper clip shows no talking mouth (MOUTH_TALKING: the fastest ~1 s of
+    lip motion anywhere in the clip, or the old whole-clip rule) and a mouth confirmed closed after a settle window
+    (MOUTH_NOT_CLOSED: the most open ~1 s after STILL_MOUTH_SETTLE_S). Calibrated on the 42 talking and 14 closed
+    clips of 26/10, whose per-frame series are kept and replayed here."""
 
     def test_the_thresholds_sit_between_the_closed_and_the_talking_clips(self):
-        self.assertTrue(self.STILL["spread"] * 2 < lc.STILL_MOUTH_RANGE_MAX < self.TALKING["spread"] / 2)
-        self.assertTrue(self.STILL["motion"] * 1.2 < lc.STILL_MOUTH_MOTION_MAX < self.TALKING["motion"] / 1.2)
+        # calibration.json: window motion talking >= 0.0091, closed <= 0.0043; open after the settle talking >= 0.0389,
+        # closed <= 0.0046
+        self.assertTrue(0.0043 * 1.3 < lc.STILL_MOUTH_WINDOW_MOTION_MAX < 0.0091 / 1.3)
+        self.assertTrue(0.0046 * 2 < lc.STILL_MOUTH_CLOSED_MAX < 0.0389 / 2)
+        self.assertEqual(lc.STILL_MOUTH_SETTLE_S, 2.5)          # clip 5 settles closed within ~2.5 s
+        self.assertEqual(lc.STILL_MOUTH_WINDOW_S, 1.0)
+
+    def test_every_recorded_talking_clip_is_flagged_every_closed_clip_with_a_face_passes(self):
+        data = json.loads(SERIES.read_text())
+        self.assertEqual((len(data["talking"]), len(data["closed"])), (42, 14))
+        for name, s in data["talking"].items():
+            o = np.array([np.nan if x is None else x for x in s["opening"]])
+            self.assertIn("MOUTH_TALKING", lc.still_mouth_verdict(o, s["share"], s["fps"])["flags"], name)
+        passed = []
+        for name, s in data["closed"].items():
+            o = np.array([np.nan if x is None else x for x in s["opening"]])
+            r = lc.still_mouth_verdict(o, s["share"], s["fps"])
+            self.assertNotIn("MOUTH_TALKING", r["flags"], name)
+            if s["share"] >= lc.FACE_FRAMES_MIN:
+                self.assertEqual(r["flags"], [], (name, r))
+                passed.append(name)
+        # clip 5 and the 6 build probes of genesis-07's own prompts (k-insight revised, k-question, k-close)
+        self.assertEqual(len(passed), 7, passed)
 
     def test_a_talking_mouth_is_flagged_a_closed_one_passes(self):
-        talking = np.abs(np.sin(np.linspace(0, 30, 200))) * 0.11     # opens and closes like the Keeper's lips
-        closed = 0.003 + np.random.default_rng(1).normal(0, 0.0005, 200)
-        self.assertEqual(lc.still_mouth_verdict(closed, 0.95)["flags"], [])
-        self.assertEqual(lc.still_mouth_verdict(talking, 0.95)["flags"], ["MOUTH_TALKING"])
-        r = lc.still_mouth_verdict(closed, 0.95)
-        self.assertLess(r["opening_range"], lc.STILL_MOUTH_RANGE_MAX)
-        self.assertLess(r["opening_motion"], lc.STILL_MOUTH_MOTION_MAX)
-        self.assertEqual((r["face_frames"], r["frames"]), (0.95, 200))
-
-    def test_a_mouth_that_settles_once_is_not_talking(self):
-        # vo-close-talkref (conversation 373100393016087168): the open reference's mouth closes over 2.5 s, then stays
-        settle = np.concatenate([np.linspace(0.061, 0.002, 60), np.full(132, 0.002)])
-        r = lc.still_mouth_verdict(settle, 1.0)
-        self.assertGreater(r["opening_range"], lc.STILL_MOUTH_RANGE_MAX)
+        r = lc.still_mouth_verdict(closed(8), 0.95, FPS)
         self.assertEqual(r["flags"], [])
-        # a slow mouth that keeps opening and closing like speech is flagged
-        chatter = np.abs(np.sin(np.linspace(0, 60, 192))) * 0.06
-        self.assertEqual(lc.still_mouth_verdict(chatter, 1.0)["flags"], ["MOUTH_TALKING"])
+        self.assertLess(r["window_motion"], lc.STILL_MOUTH_WINDOW_MOTION_MAX)
+        self.assertLess(r["closed_opening"], lc.STILL_MOUTH_CLOSED_MAX)
+        self.assertEqual((r["face_frames"], r["frames"]), (0.95, 192))
+        self.assertIn("MOUTH_TALKING", lc.still_mouth_verdict(talk(8), 0.95, FPS)["flags"])
+
+    def test_two_and_a_half_seconds_of_talking_inside_twelve_is_not_averaged_away(self):
+        o = np.concatenate([closed(5, noise=0.0002), talk(2.5), closed(4.5, noise=0.0002, seed=2)])
+        r = lc.still_mouth_verdict(o, 1.0, FPS)
+        self.assertLess(r["opening_motion"], lc.STILL_MOUTH_MOTION_MAX)   # the whole-clip mean would pass it
+        self.assertIn("MOUTH_TALKING", r["flags"])
+
+    def test_an_open_still_mouth_is_not_confirmed_closed(self):
+        r = lc.still_mouth_verdict(closed(8, level=0.05), 1.0, FPS)
+        self.assertNotIn("MOUTH_TALKING", r["flags"])
+        self.assertEqual(r["flags"], ["MOUTH_NOT_CLOSED"])
+        # open for 1.5 s at the end, after it had closed: refused too
+        late = np.concatenate([closed(6), closed(1.5, level=0.05)])
+        self.assertEqual(lc.still_mouth_verdict(late, 1.0, FPS)["flags"], ["MOUTH_NOT_CLOSED"])
+
+    def test_the_mouth_may_settle_closed_within_the_settle_window_not_later(self):
+        # clip 5 (conversation 373100393016087168): the talking reference's open mouth closes over ~2.5 s, then stays
+        settle = np.concatenate([np.linspace(0.061, 0.002, int(2.4 * FPS)), closed(5.6)])
+        self.assertEqual(lc.still_mouth_verdict(settle, 1.0, FPS)["flags"], [])
+        slow = np.concatenate([np.linspace(0.061, 0.002, int(5 * FPS)), closed(3)])
+        self.assertIn("MOUTH_NOT_CLOSED", lc.still_mouth_verdict(slow, 1.0, FPS)["flags"])
 
     def test_the_face_must_be_found_in_80_percent_of_frames_as_for_the_lips(self):
-        closed = np.full(100, 0.003)
-        self.assertEqual(lc.still_mouth_verdict(closed, 0.79)["flags"], ["FACE_NOT_FOUND"])
+        self.assertEqual(lc.still_mouth_verdict(closed(5), 0.79, FPS)["flags"], ["FACE_NOT_FOUND"])
         self.assertEqual(lc.FACE_FRAMES_MIN, 0.8)
-        empty = lc.still_mouth_verdict(np.array([np.nan] * 10), 0.0)
+        empty = lc.still_mouth_verdict(np.array([np.nan] * 100), 0.0, FPS)
         self.assertIn("FACE_NOT_FOUND", empty["flags"])
+        self.assertIn("MOUTH_NOT_CLOSED", empty["flags"])     # nothing measured is never a confirmed closed mouth
+        self.assertIn("MOUTH_UNMEASURED", empty["flags"])
         self.assertIsNone(empty["opening_range"])
-        self.assertIn("NO_FRAMES", lc.still_mouth_verdict(np.array([]), 0.0)["flags"])
+        self.assertIn("NO_FRAMES", lc.still_mouth_verdict(np.array([]), 0.0, FPS)["flags"])
 
     def test_frames_without_a_face_are_left_out_not_counted_as_closed(self):
-        o = np.abs(np.sin(np.linspace(0, 30, 200))) * 0.11
+        o = talk(8)
         o[40:80] = np.nan                                            # the face lost for a while: still talking
-        r = lc.still_mouth_verdict(o, 0.8)
+        r = lc.still_mouth_verdict(o, 0.8, FPS)
         self.assertIn("MOUTH_TALKING", r["flags"])
-        self.assertEqual(r["frames"], 200)
+        self.assertEqual(r["frames"], 192)
 
     def test_the_cli_has_a_still_mouth_mode(self):
         self.assertIn('sys.argv[1] == "--still-mouth"', Path(lc.__file__).read_text())

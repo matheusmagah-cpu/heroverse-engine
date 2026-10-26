@@ -10,446 +10,579 @@
     "clip": "keeper-lipsync.mp4",
     "opening_range": 0.1041,
     "opening_motion": 0.01078,
+    "window_motion": 0.02159,
+    "closed_opening": 0.07183,
     "face_frames": 0.93,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "narrator.mp4",
     "opening_range": 0.0559,
     "opening_motion": 0.0041,
+    "window_motion": 0.01164,
+    "closed_opening": 0.0389,
     "face_frames": 0.99,
     "frames": 158,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "serpent.mp4",
     "opening_range": null,
     "opening_motion": null,
+    "window_motion": null,
+    "closed_opening": null,
     "face_frames": 0.0,
     "frames": 192,
     "flags": [
-     "FACE_NOT_FOUND"
+     "FACE_NOT_FOUND",
+     "MOUTH_UNMEASURED",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "adam-eve-ref.mp4",
     "opening_range": 0.0123,
     "opening_motion": 0.00081,
+    "window_motion": 0.00157,
+    "closed_opening": 0.01343,
     "face_frames": 0.52,
     "frames": 192,
     "flags": [
-     "FACE_NOT_FOUND"
+     "FACE_NOT_FOUND",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "a-insight-373070160690678848.mp4",
     "opening_range": 0.1026,
     "opening_motion": 0.0101,
+    "window_motion": 0.01838,
+    "closed_opening": 0.06987,
     "face_frames": 0.92,
     "frames": 226,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "a-insight-373073532260977728.mp4",
     "opening_range": 0.0936,
     "opening_motion": 0.00977,
+    "window_motion": 0.0174,
+    "closed_opening": 0.06846,
     "face_frames": 0.89,
     "frames": 226,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "a-insight-373076337466542720.mp4",
     "opening_range": 0.0985,
     "opening_motion": 0.01094,
+    "window_motion": 0.02045,
+    "closed_opening": 0.06901,
     "face_frames": 0.95,
     "frames": 226,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "b-insight-a-373070275183195904.mp4",
     "opening_range": 0.0867,
     "opening_motion": 0.01068,
+    "window_motion": 0.01594,
+    "closed_opening": 0.05248,
     "face_frames": 0.96,
     "frames": 107,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "b-insight-a-373073590847016000.mp4",
     "opening_range": 0.0941,
     "opening_motion": 0.01091,
+    "window_motion": 0.01452,
+    "closed_opening": 0.04343,
     "face_frames": 0.92,
     "frames": 107,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "b-insight-a-373076404273493760.mp4",
     "opening_range": 0.0912,
     "opening_motion": 0.01017,
+    "window_motion": 0.01925,
+    "closed_opening": 0.04051,
     "face_frames": 0.94,
     "frames": 107,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "b-insight-b-373070465100960384.mp4",
     "opening_range": 0.1078,
     "opening_motion": 0.01137,
+    "window_motion": 0.01674,
+    "closed_opening": 0.06159,
     "face_frames": 0.92,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "b-insight-b-373073653086327040.mp4",
     "opening_range": 0.114,
     "opening_motion": 0.01075,
+    "window_motion": 0.01492,
+    "closed_opening": 0.07252,
     "face_frames": 0.94,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "b-insight-b-373076495855554816.mp4",
     "opening_range": 0.1159,
     "opening_motion": 0.00931,
+    "window_motion": 0.01451,
+    "closed_opening": 0.05673,
     "face_frames": 0.98,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "c-close-373070576904116800.mp4",
     "opening_range": 0.1081,
     "opening_motion": 0.00886,
+    "window_motion": 0.01766,
+    "closed_opening": 0.07384,
     "face_frames": 0.9,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "c-close-373073787320832256.mp4",
     "opening_range": 0.1142,
     "opening_motion": 0.01078,
+    "window_motion": 0.018,
+    "closed_opening": 0.07967,
     "face_frames": 0.98,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "c-close-373076616940893952.mp4",
     "opening_range": 0.1091,
     "opening_motion": 0.00939,
+    "window_motion": 0.016,
+    "closed_opening": 0.07389,
     "face_frames": 0.96,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "c-question-373070517257422336.mp4",
     "opening_range": 0.1017,
     "opening_motion": 0.01182,
+    "window_motion": 0.01813,
+    "closed_opening": 0.06163,
     "face_frames": 0.95,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "c-question-373073709282178816.mp4",
     "opening_range": 0.1177,
     "opening_motion": 0.01126,
+    "window_motion": 0.01802,
+    "closed_opening": 0.06923,
     "face_frames": 0.98,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "c-question-373076549463521024.mp4",
     "opening_range": 0.1028,
     "opening_motion": 0.01083,
+    "window_motion": 0.01656,
+    "closed_opening": 0.07055,
     "face_frames": 0.95,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "ctl-line01-373076751750579712.mp4",
     "opening_range": 0.1017,
     "opening_motion": 0.0089,
+    "window_motion": 0.01973,
+    "closed_opening": 0.07177,
     "face_frames": 0.95,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "d-insight-373081196097720960.mp4",
     "opening_range": 0.1077,
     "opening_motion": 0.0088,
+    "window_motion": 0.01703,
+    "closed_opening": 0.06505,
     "face_frames": 0.91,
     "frames": 243,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "d-insight-373081567361054464.mp4",
     "opening_range": 0.1087,
     "opening_motion": 0.00987,
+    "window_motion": 0.01892,
+    "closed_opening": 0.06872,
     "face_frames": 0.94,
     "frames": 243,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "d-insight-373084801999892544.mp4",
     "opening_range": 0.1093,
     "opening_motion": 0.00927,
+    "window_motion": 0.02033,
+    "closed_opening": 0.08005,
     "face_frames": 0.87,
     "frames": 243,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "d-question-373080917365569280.mp4",
     "opening_range": 0.1004,
     "opening_motion": 0.00867,
+    "window_motion": 0.01317,
+    "closed_opening": 0.07546,
     "face_frames": 0.9,
     "frames": 158,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "d-question-373081384639828224.mp4",
     "opening_range": 0.1076,
     "opening_motion": 0.00993,
+    "window_motion": 0.01523,
+    "closed_opening": 0.07704,
     "face_frames": 0.92,
     "frames": 158,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "d-question-373084604548826624.mp4",
     "opening_range": 0.0982,
     "opening_motion": 0.01134,
+    "window_motion": 0.01956,
+    "closed_opening": 0.058,
     "face_frames": 0.93,
     "frames": 158,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "e-question-373081024962049792.mp4",
     "opening_range": 0.0951,
     "opening_motion": 0.01248,
+    "window_motion": 0.0193,
+    "closed_opening": 0.06082,
     "face_frames": 0.95,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "e-question-373081450138628160.mp4",
     "opening_range": 0.0913,
     "opening_motion": 0.01207,
+    "window_motion": 0.01928,
+    "closed_opening": 0.06587,
     "face_frames": 0.98,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "e-question-373084677227755264.mp4",
     "opening_range": 0.1037,
     "opening_motion": 0.0117,
+    "window_motion": 0.01831,
+    "closed_opening": 0.07402,
     "face_frames": 0.99,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "f-question-373081128011904768.mp4",
     "opening_range": 0.1099,
     "opening_motion": 0.01326,
+    "window_motion": 0.02013,
+    "closed_opening": 0.06562,
     "face_frames": 0.99,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "f-question-373081505461497920.mp4",
     "opening_range": 0.1014,
     "opening_motion": 0.01199,
+    "window_motion": 0.01881,
+    "closed_opening": 0.06813,
     "face_frames": 1.0,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "f-question-373084738435204608.mp4",
     "opening_range": 0.1005,
     "opening_motion": 0.01212,
+    "window_motion": 0.01942,
+    "closed_opening": 0.08383,
     "face_frames": 0.96,
     "frames": 124,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "g-question-373088576818664064.mp4",
     "opening_range": 0.1028,
     "opening_motion": 0.01135,
+    "window_motion": 0.02133,
+    "closed_opening": 0.07455,
     "face_frames": 0.96,
     "frames": 158,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "g-question-373088634494859008.mp4",
     "opening_range": 0.1124,
     "opening_motion": 0.01047,
+    "window_motion": 0.0173,
+    "closed_opening": 0.07975,
     "face_frames": 0.95,
     "frames": 158,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "g-question-373088699250719424.mp4",
     "opening_range": 0.1008,
     "opening_motion": 0.01121,
+    "window_motion": 0.02581,
+    "closed_opening": 0.07472,
     "face_frames": 0.88,
     "frames": 158,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "h-line01-speed1-373088760189160512.mp4",
     "opening_range": 0.1114,
     "opening_motion": 0.01031,
+    "window_motion": 0.02184,
+    "closed_opening": 0.07481,
     "face_frames": 0.97,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "h-line01-speed1-373088817366495296.mp4",
     "opening_range": 0.1043,
     "opening_motion": 0.01054,
+    "window_motion": 0.02012,
+    "closed_opening": 0.06192,
     "face_frames": 0.95,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "h-line01-speed1-373088880058746368.mp4",
     "opening_range": 0.106,
     "opening_motion": 0.00976,
+    "window_motion": 0.02133,
+    "closed_opening": 0.08021,
     "face_frames": 0.91,
     "frames": 175,
     "flags": [
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "r1-question-373093862497585792.mp4",
     "opening_range": 0.1253,
     "opening_motion": 0.0129,
+    "window_motion": 0.01537,
+    "closed_opening": 0.07889,
     "face_frames": 0.45,
     "frames": 124,
     "flags": [
      "FACE_NOT_FOUND",
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "r1-question-373093922048361984.mp4",
     "opening_range": 0.1019,
     "opening_motion": 0.01102,
+    "window_motion": 0.01056,
+    "closed_opening": 0.05161,
     "face_frames": 0.43,
     "frames": 124,
     "flags": [
      "FACE_NOT_FOUND",
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "r1-question-373093995402573568.mp4",
     "opening_range": 0.1232,
     "opening_motion": 0.01831,
+    "window_motion": 0.0235,
+    "closed_opening": 0.0781,
     "face_frames": 0.59,
     "frames": 124,
     "flags": [
      "FACE_NOT_FOUND",
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "r2-question-373096447199754944.mp4",
     "opening_range": 0.0718,
     "opening_motion": 0.01126,
+    "window_motion": 0.00911,
+    "closed_opening": 0.0455,
     "face_frames": 0.49,
     "frames": 124,
     "flags": [
      "FACE_NOT_FOUND",
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "r2-question-373096510865017472.mp4",
     "opening_range": 0.0957,
     "opening_motion": 0.01142,
+    "window_motion": 0.01615,
+    "closed_opening": 0.06111,
     "face_frames": 0.69,
     "frames": 124,
     "flags": [
      "FACE_NOT_FOUND",
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    },
    {
     "clip": "r2-question-373096585455995968.mp4",
     "opening_range": 0.061,
     "opening_motion": 0.00919,
+    "window_motion": 0.01266,
+    "closed_opening": 0.04381,
     "face_frames": 0.57,
     "frames": 124,
     "flags": [
      "FACE_NOT_FOUND",
-     "MOUTH_TALKING"
+     "MOUTH_TALKING",
+     "MOUTH_NOT_CLOSED"
     ]
    }
   ],
@@ -478,10 +611,14 @@
     "still_mouth": {
      "opening_range": 0.0037,
      "opening_motion": null,
+     "window_motion": null,
+     "closed_opening": null,
      "face_frames": 0.02,
      "frames": 226,
      "flags": [
-      "FACE_NOT_FOUND"
+      "FACE_NOT_FOUND",
+      "MOUTH_UNMEASURED",
+      "MOUTH_NOT_CLOSED"
      ]
     },
     "pass": false
@@ -497,6 +634,8 @@
     "still_mouth": {
      "opening_range": 0.0044,
      "opening_motion": 0.00079,
+     "window_motion": 0.00129,
+     "closed_opening": 0.00462,
      "face_frames": 0.27,
      "frames": 158,
      "flags": [
@@ -516,6 +655,8 @@
     "still_mouth": {
      "opening_range": 0.0045,
      "opening_motion": 0.00123,
+     "window_motion": 0.00129,
+     "closed_opening": 0.00406,
      "face_frames": 0.18,
      "frames": 192,
      "flags": [
@@ -535,10 +676,13 @@
     "still_mouth": {
      "opening_range": 0.0025,
      "opening_motion": 0.00076,
+     "window_motion": 0.00052,
+     "closed_opening": null,
      "face_frames": 0.12,
      "frames": 192,
      "flags": [
-      "FACE_NOT_FOUND"
+      "FACE_NOT_FOUND",
+      "MOUTH_NOT_CLOSED"
      ]
     },
     "pass": false
@@ -554,6 +698,8 @@
     "still_mouth": {
      "opening_range": 0.0408,
      "opening_motion": 0.00063,
+     "window_motion": 0.00215,
+     "closed_opening": 0.00259,
      "face_frames": 1.0,
      "frames": 192,
      "flags": []
@@ -572,6 +718,8 @@
     "still_mouth": {
      "opening_range": 0.0657,
      "opening_motion": 0.00252,
+     "window_motion": 0.00428,
+     "closed_opening": 0.00296,
      "face_frames": 0.17,
      "frames": 226,
      "flags": [
@@ -583,10 +731,15 @@
   ]
  },
  "thresholds": {
+  "rule": "MOUTH_TALKING when the mean frame-to-frame lip motion over any 1 s window (half of it with the face) exceeds 0.0063, or the whole clip is wide and fast (spread > 0.016 and mean motion > 0.0032); MOUTH_NOT_CLOSED when the median opening of any 1 s window after the first 2.5 s exceeds 0.013, or nothing after 2.5 s can be measured; MOUTH_UNMEASURED when no window of motion can; FACE_NOT_FOUND under 80 % of the frames (unchanged from the lips check)",
+  "STILL_MOUTH_WINDOW_S": 1.0,
+  "STILL_MOUTH_WINDOW_MOTION_MAX": 0.0063,
+  "STILL_MOUTH_SETTLE_S": 2.5,
+  "STILL_MOUTH_CLOSED_MAX": 0.013,
   "STILL_MOUTH_RANGE_MAX": 0.016,
   "STILL_MOUTH_MOTION_MAX": 0.0032,
-  "rule": "MOUTH_TALKING when spread > 0.016 AND motion > 0.0032; FACE_NOT_FOUND when the face is in < 80 % of the frames (unchanged from the lips check)",
-  "why": "spread: closed 0.0025-0.0045 vs talking >= 0.056 (geometric middle 0.016); motion: closed <= 0.0025 vs talking >= 0.0041 (the Keeper's >= 0.0087; middle 0.0032). The spread alone would flag a mouth that settles once from the open talking reference (0.041-0.066, motion 0.0006-0.0025): talking is wide and fast"
+  "why": "review of #423: the whole-clip mean let 2.5 s of talking inside a 12 s clip pass, and an open still mouth passed. 1 s window motion: talking 0.0091-0.026, closed 0.0005-0.0043 (the highest while a mouth settles; geometric middle 0.0063). Most open 1 s after the settle: talking 0.039-0.084, closed 0.0011-0.0046 (middle 0.013). The settle is 2.5 s because clip 5's mouth, copied open from the talking reference, closes within ~2.5 s. The per-frame series are in opening-series.json; test_lipsync_check replays all 56",
+  "history": "first rule (spread > 0.016 and whole-clip mean motion > 0.0032) kept as an extra MOUTH_TALKING condition"
  },
  "findings": [
   "with the approved mouth-closed front reference the face landmarker found his face in 2-27 % of the frames: 4 of 4 FACE_NOT_FOUND, whatever the gaze or the light (dark hood, side firelight, the beard over a closed mouth); a voice-over shot built that way would fail the run",
@@ -608,6 +761,8 @@
     "still_mouth": {
      "opening_range": 0.0545,
      "opening_motion": 0.00086,
+     "window_motion": 0.00245,
+     "closed_opening": 0.00139,
      "face_frames": 0.68,
      "frames": 226,
      "flags": [
@@ -626,6 +781,8 @@
     "still_mouth": {
      "opening_range": 0.0604,
      "opening_motion": 0.00129,
+     "window_motion": 0.0029,
+     "closed_opening": 0.00109,
      "face_frames": 0.6,
      "frames": 226,
      "flags": [
@@ -644,6 +801,8 @@
     "still_mouth": {
      "opening_range": 0.0423,
      "opening_motion": 0.00115,
+     "window_motion": 0.00382,
+     "closed_opening": 0.00197,
      "face_frames": 0.81,
      "frames": 124,
      "flags": []
@@ -660,6 +819,8 @@
     "still_mouth": {
      "opening_range": 0.0505,
      "opening_motion": 0.00119,
+     "window_motion": 0.00266,
+     "closed_opening": 0.00157,
      "face_frames": 0.88,
      "frames": 124,
      "flags": []
@@ -676,6 +837,8 @@
     "still_mouth": {
      "opening_range": 0.0397,
      "opening_motion": 0.00051,
+     "window_motion": 0.00275,
+     "closed_opening": 0.0027,
      "face_frames": 1.0,
      "frames": 192,
      "flags": []
@@ -692,6 +855,8 @@
     "still_mouth": {
      "opening_range": 0.0479,
      "opening_motion": 0.00061,
+     "window_motion": 0.00214,
+     "closed_opening": 0.00351,
      "face_frames": 1.0,
      "frames": 192,
      "flags": []
@@ -708,6 +873,8 @@
     "still_mouth": {
      "opening_range": 0.0486,
      "opening_motion": 0.00076,
+     "window_motion": 0.00315,
+     "closed_opening": 0.00149,
      "face_frames": 0.85,
      "frames": 226,
      "flags": []
@@ -724,6 +891,8 @@
     "still_mouth": {
      "opening_range": 0.042,
      "opening_motion": 0.00047,
+     "window_motion": 0.0026,
+     "closed_opening": 0.00201,
      "face_frames": 0.99,
      "frames": 226,
      "flags": []
