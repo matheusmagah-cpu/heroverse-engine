@@ -92,6 +92,22 @@
    "note": "Genesis 7:6 makes him six hundred years old at the flood; shown as a strong elderly man of about seventy (owner, 2026-10-26). A bare head, a grey (not silver-white) beard and a belted plain robe keep him apart from the Keeper's hood and silver beard.",
    "reviewed": "DRAFT (2026-10-26): reference sheet ch-noah-front / three-quarter / full to be made by cf-images.yml (ONLY=ch-noah-front,ch-noah-three-quarter,ch-noah-full) and reviewed by Claude before APPROVED",
    "pronoun": "his"
+  },
+  "scoffer": {
+   "name": "The scoffer",
+   "first_story": "Genesis 6 (Noah builds the ark)",
+   "status": "DRAFT",
+   "seed": 7601,
+   "look": "a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands",
+   "wardrobe": {
+    "valley": "standing at the front of a jeering crowd in a dry valley, one arm flung toward a vast wooden hull",
+    "torches": "holding a burning torch high at night, the firelight on his face"
+   },
+   "refs": [],
+   "voice": "am_puck",
+   "role": "antagonist only: an invented ringleader of the valley's mockers in the days of Noah, never a named biblical person; his lines are our own words, never Scripture",
+   "note": "Genesis records no word of the mockers: the scoffer's taunts are dramatization (kind story, no reference). The crimson tunic, striped headcloth and pointed black beard keep him apart from Noah's plain belted robe and grey beard and the Keeper's hood and silver beard.",
+   "reviewed": "DRAFT (2026-10-26): reference sheet ch-scoffer-front / three-quarter / full to be made by cf-images.yml (pilot=characters, ONLY=ch-scoffer-front,ch-scoffer-three-quarter,ch-scoffer-full) and reviewed by Claude before APPROVED"
   }
  },
  "god": {
@@ -103,6 +119,6 @@
  "voices": {
   "model": "Kokoro v1.0 voices-v1.0.bin (sha256 bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d, verify_public_voice_asset.ASSETS)",
   "narrator": "am_michael (the Keeper; the voice pinned for the long)",
-  "chosen": "2026-10-26 (owner: characters speak their lines in their own voice): one distinct English voice per speaker, the better-graded Kokoro voices first: Adam am_fenrir (younger American male), Eve af_heart (warm female, the model's best-graded voice), the serpent bm_fable (smooth British male), Noah bm_george (grave older British male), God am_onyx at 0.9 speed (the deepest male voice; voice-over only)"
+  "chosen": "2026-10-26 (owner: characters speak their lines in their own voice): one distinct English voice per speaker, the better-graded Kokoro voices first: Adam am_fenrir (younger American male), Eve af_heart (warm female, the model's best-graded voice), the serpent bm_fable (smooth British male), Noah bm_george (grave older British male), God am_onyx at 0.9 speed (the deepest male voice; voice-over only); the scoffer am_puck (a lighter, mocking American male, unlike every other speaker)"
  }
 }
