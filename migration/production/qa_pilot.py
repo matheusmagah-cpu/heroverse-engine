@@ -126,6 +126,27 @@ def grammar_checks_v4(criteria, manifest):
     return checks
 
 
+def grammar_checks_story_v1(criteria, manifest):
+    """story-qa-criteria-v1 (owner, 2026-10-25): the v4 grammar and rights, with Pavo AI video allowed as footage after
+    Real-ESRGAN super-resolution and Claude's vetting. The footage share counts real licensed footage only; Pavo clips
+    (manifest clip source "pavo", the criteria's ai_video licence) have their own maximum share."""
+    g, r = criteria["grammar"], criteria["rights"]
+    checks = grammar_checks_v4(criteria, manifest)
+    ai = r["ai_video"]
+    clips = {c.get("id"): c for c in manifest.get("clips") or []}
+    is_ai = {i for i, c in clips.items() if c.get("source") == ai["source"] or c.get("licence") == ai["licence"]}
+    scenes = manifest["holds"]
+    span = sum(h["end"] - h["start"] for h in scenes)
+    shown = [(h["end"] - h["start"], h["image"].partition("#")[0]) for h in scenes if h.get("kind") == "footage"]
+    real = sum(t for t, i in shown if i not in is_ai)
+    synthetic = sum(t for t, i in shown if i in is_ai)
+    checks["footage_picture_share"] = span > 0 and real / span >= g["footage_picture_share_min"]
+    checks["ai_video_picture_share"] = span > 0 and synthetic / span <= g["ai_video_picture_share_max"]
+    checks["ai_video_source_and_licence"] = all(clips[i].get("source") == ai["source"]
+                                                and clips[i].get("licence") == ai["licence"] for i in is_ai)
+    return checks
+
+
 def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out):
     criteria = json.loads(Path(criteria_path).read_text())
     manifest = json.loads(Path(manifest_path).read_text())
@@ -177,7 +198,8 @@ def main(video, manifest_path, script_path, criteria_path, yamnet, whisper, out)
         checks["clips_creative_commons_with_attribution"] = bool(clips) and all(
             c["license"] == "creativeCommon" and c["attribution"] and c["picture_only"] for c in clips)
     else:
-        grammar = {"pilot-qa-criteria-v3": grammar_checks_v3, "pilot-qa-criteria-v4": grammar_checks_v4}
+        grammar = {"pilot-qa-criteria-v3": grammar_checks_v3, "pilot-qa-criteria-v4": grammar_checks_v4,
+                   "story-qa-criteria-v1": grammar_checks_story_v1}
         checks.update(grammar.get(criteria["version"], grammar_checks)(criteria, manifest))
     checks["music_owned"] = manifest["music"]["sha256"] == OWNED_MUSIC_SHA256
     checks["voice_model_pinned"] = manifest["voice"]["voice_id"] == "am_michael"

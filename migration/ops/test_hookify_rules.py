@@ -91,6 +91,8 @@ BLOCK = [
     ("Bash", {"command": f"git checkout other-branch -- {APPROVAL}"}),
     ("Bash", {"command": "cp /tmp/loose.json migration/production/qa_criteria_v4.json"}),
     ("Bash", {"command": "git restore --source=HEAD~3 migration/production/qa_criteria_v3.json"}),
+    ("Edit", {"file_path": "migration/production/qa_criteria_story_v1.json", "old_string": "a", "new_string": "b"}),
+    ("Bash", {"command": "sed -i 's/0.4/0.2/' migration/production/qa_criteria_story_v1.json"}),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", None, "fade")),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", "wipe")),
 ]
@@ -108,6 +110,7 @@ ALLOW = [
     ("Bash", {"command": f"python3 x.py > /tmp/out.txt\ncat {APPROVAL}"}),
     ("Bash", {"command": "sed -i 's/a/b/' notes.md\nsha256sum migration/production/qa_criteria_v4.json"}),
     ("Bash", {"command": "cp migration/production/qa_criteria_v4.json /tmp/v4.json"}),
+    ("Bash", {"command": "sha256sum migration/production/qa_criteria_story_v1.json"}),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", "cut", "dip_to_black", overlay={"kind": "text", "text": "fade"})),
     ("mcp__vidIQ__vidiq_compose", compose("landscape", "fade")),
 ]

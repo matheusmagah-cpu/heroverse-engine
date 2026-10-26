@@ -165,6 +165,46 @@ class FootageV4(unittest.TestCase):
         self.assertFalse(qa_pilot.grammar_checks_v4(self.CRIT, mixed)["images_open_licence_with_revision"])
 
 
+class StoryV1Pavo(unittest.TestCase):
+    """story-qa-criteria-v1 (owner, 2026-10-25): Pavo clips count as footage for rights and motion, but the footage
+    share counts real licensed footage only (>= 40 %) and Pavo has its own maximum (<= 55 %)."""
+    CRIT = json.loads((HERE / "qa_criteria_story_v1.json").read_text())
+
+    def manifest(self, n_ai, n_real, ai_licence="Pavo generated (owner-owned)", ai_source="pavo"):
+        plan = FootageV4.plan(0, n_ai + n_real)
+        m = FootageV4().manifest(plan)
+        ids = sorted(c["id"] for c in m["clips"])
+        ai = set(ids[:n_ai])
+        for c in m["clips"]:
+            c["source"] = ai_source if c["id"] in ai else "pixabay"
+            if c["id"] in ai:
+                c["licence"] = ai_licence
+        return m
+
+    def test_half_pavo_half_footage_passes(self):
+        import qa_pilot
+        ok = qa_pilot.grammar_checks_story_v1(self.CRIT, self.manifest(11, 11))
+        for k in ("footage_picture_share", "ai_video_picture_share", "ai_video_source_and_licence",
+                  "footage_licensed_vetted_and_credited"):
+            self.assertTrue(ok[k], k)
+
+    def test_mostly_pavo_fails_both_shares(self):
+        import qa_pilot
+        ok = qa_pilot.grammar_checks_story_v1(self.CRIT, self.manifest(18, 4))
+        self.assertFalse(ok["footage_picture_share"])
+        self.assertFalse(ok["ai_video_picture_share"])
+
+    def test_pavo_clip_with_another_licence_fails(self):
+        import qa_pilot
+        m = self.manifest(11, 11, ai_licence="CC BY 4.0")
+        self.assertFalse(qa_pilot.grammar_checks_story_v1(self.CRIT, m)["ai_video_source_and_licence"])
+
+    def test_v4_still_counts_pavo_as_unlicensed(self):
+        import qa_pilot
+        crit = json.loads((HERE / "qa_criteria_v4.json").read_text())
+        self.assertFalse(qa_pilot.grammar_checks_v4(crit, self.manifest(11, 11))["footage_licensed_vetted_and_credited"])
+
+
 class StoryStills(unittest.TestCase):
     """SERIES.md (owner 2026-10-25): a Bible-story long shows each story moment's still inside its own segment and
     real footage everywhere else, so QA v4's footage share (>= 0.6) still holds."""

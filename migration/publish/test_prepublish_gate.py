@@ -168,5 +168,36 @@ class StandardV4(unittest.TestCase):
                          "4851878674101c7a64816815e9514786a2a7e0576d35b8bdf670ab7053c2e2b3")
 
 
+class StoryV1(unittest.TestCase):
+    """Owner, 2026-10-25: Bible-story longs mix Pavo AI video (upscaled to 1440p) with licensed footage."""
+
+    def test_story_criteria_frozen_and_v4_floors_unchanged(self):
+        crit = PROD / "qa_criteria_story_v1.json"
+        self.assertEqual(hashlib.sha256(crit.read_bytes()).hexdigest(), g.FROZEN_CRITERIA_SHA256["story-qa-criteria-v1"])
+        story, v4 = json.loads(crit.read_text()), json.loads((PROD / "qa_criteria_v4.json").read_text())
+        self.assertEqual(story["technical"], v4["technical"])
+        self.assertEqual(story["speech"], v4["speech"])
+        for k, v in v4["grammar"].items():
+            if k != "footage_picture_share_min":
+                self.assertEqual(story["grammar"][k], v, k)
+        self.assertIn("story-qa-criteria-v1", g.STANDARD_VERSIONS)
+
+    def test_story_render_needs_ai_share_and_source(self):
+        crit = (PROD / "qa_criteria_story_v1.json").read_bytes()
+        checks = sorted({c for spec in g.DIMENSIONS_STORY_V1.values() for c in spec["qa"]})
+        for c in ("footage_picture_share", "ai_video_picture_share", "ai_video_source_and_licence",
+                  "footage_licensed_vetted_and_credited"):
+            self.assertIn(c, checks)
+        qa, man, rev = good()
+        qa.update({"criteria_version": "story-qa-criteria-v1", "criteria_sha256": hashlib.sha256(crit).hexdigest(),
+                   "checks": {c: True for c in checks}})
+        r = run(qa, man, rev)
+        self.assertEqual(r["dimensions"]["binding"], "PASS")
+        too_much_ai = copy.deepcopy(qa); too_much_ai["checks"]["ai_video_picture_share"] = False
+        self.assertEqual(run(too_much_ai, man, rev)["dimensions"]["image"], "FAIL")
+        wrong = copy.deepcopy(qa); wrong["checks"]["ai_video_source_and_licence"] = False
+        self.assertEqual(run(wrong, man, rev)["dimensions"]["rights"], "FAIL")
+
+
 if __name__ == "__main__":
     unittest.main()
