@@ -25,15 +25,20 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   voice. Never the Keeper, never narration first.
 - spoken lines: a scene shot may carry `speaker` and `line` (and `reference` when the line is Scripture). A character
   speaker is APPROVED in characters.json, has a `voice`, is in the shot's `characters` (its look word for word), and
-  the prompt says it speaks; its line (2-12 s, Pavo input audio) goes in with its references and lipsync_check judges
+  the prompt says it speaks; its line (2-11.05 s, Pavo input audio) goes in with its references and lipsync_check judges
   the clip; the clip's length comes from the line (no `seconds`). `speaker: "god"`: Scripture only (a `reference`),
   the shot shows no person (no characters, no figures, no face: light, storm, wind or fire), its `seconds` are the
   Pavo clip's, and the line is mixed as a voice-over (deep voice, no lipsync check). The Keeper never speaks in a
   scene.
 - narration shots in order, each carrying consecutive narration lines; every line is carried, in order; consecutive
   scene shots may share the same lines (the composer splits that time between them and cuts every 2-4 s).
-- the climax: at least one acted scene (not establishing) is flagged `climax: true`: the antagonist or spectacle
-  moment is shown, never told.
+- the climax: at least one acted scene is flagged `climax: true`: people on screen (approved characters or anonymous
+  figures), never the Keeper, a landscape or God's voice-over sky (E92): the antagonist or spectacle moment is shown,
+  never told.
+- a line with no `reference` that still quotes the KJV (8 consecutive words) is refused (KJV_UNREFERENCED) and counts
+  as Scripture, not our words; a `reference` that is not text is REFERENCE_NOT_TEXT.
+- a talking line (the Keeper's, a character's) is at most 11.05 s at the slowest pace: with the 0.35 s gap and the
+  0.6 s margin it fits one 12 s Pavo clip (the closing one, with the tail, 10.2 s).
 - keeper: only after the last climax shot, for the insight and the close (lines of kind insight or cta); he closes
   (the last shot) and takes at most 25 % of the Short. He speaks the lines he carries (Pavo input audio + his
   approved reference); each Keeper clip's audio is 2-12 s (estimated at the slowest measured Kokoro pace, measured
@@ -102,10 +107,19 @@ DIVINE_FIGURE = re.compile(r"(?i)\b(face|faces|figure|body|hands?|arms?|eyes|bea
 # God's voice-over shot: what carries Him on screen, and the words that would put a person in it
 GOD_SHOT_MEDIUM = re.compile(r"(?i)\b(light|storm|clouds?|lightning|thunder|wind|fire|flames?|glow|sunbeams?|rays?|"
                              r"rain|sky)\b")
-GOD_SHOT_PERSON = re.compile(r"(?i)\b(face|faces|eyes|lips|mouth|man|men|woman|women|person|people|figures?|crowd|"
-                             r"child|children|silhouettes?|hands?|body|bodies)\b")
+# (a word list can be written around, so episode_build also runs the face landmarker on the generated clip)
+GOD_SHOT_PERSON = re.compile(r"(?i)\b(face|faces|eyes|lips|mouth|man|men|woman|women|person|people|figures?|crowds?|"
+                             r"child|children|silhouettes?|hands?|body|bodies|elders?|shepherds?|angels?|kings?|"
+                             r"boys?|girls?|his|her|hers|him|robes?|staff|beard(?:ed)?|prophets?|priests?|"
+                             r"warriors?|travell?ers?|herders?|family|mother|father|son|daughter)\b")
 NO_PEOPLE_TAIL = re.compile(r"(?i)\bno (people|person|faces?|figures?)\b")
 SPEAKS = re.compile(r"(?i)\bspeak")
+# a line without a `reference` that quotes the KJV anyway: 8 consecutive words of the KJV (kjv_check's text)
+KJV_RUN = 8
+TALK_CLIP_MAX = 12.0                 # Pavo clip ceiling: a talking line + the gap or tail after it + the margin
+TALK_MARGIN = 0.6                    # episode_build.KEEPER_MARGIN
+TALK_MAX = TALK_CLIP_MAX - LINE_GAP - TALK_MARGIN   # 11.05 s: a talking line followed by another line
+_KJV_TEXT = []
 
 
 def words(text):
@@ -114,6 +128,37 @@ def words(text):
 
 def estimate_seconds(text, wps=WPS):
     return words(text) / wps
+
+
+def _plain(text):
+    return re.findall(r"[a-z]+", text.lower().replace("’", "'").replace("'", ""))
+
+
+def _kjv_problem(reference, text):
+    try:
+        return kjv_check.problem(reference, text)
+    except ValueError as exc:   # an unparsable reference ("REFERENCE_UNPARSED ...")
+        return str(exc)
+
+
+def kjv_quote(text, run=KJV_RUN):
+    """The KJV verse a line quotes without saying so: (reference, words) of the first verse holding `run` consecutive
+    words of the line, else None (case and punctuation ignored)."""
+    if not _KJV_TEXT:
+        verses = kjv_check.verses()
+        bible = [x for t in verses.values() for x in _plain(t)]
+        _KJV_TEXT.append(" " + " ".join(bible) + " ")
+        _KJV_TEXT.append(verses)
+        _KJV_TEXT.append({hash(" ".join(bible[k:k + KJV_RUN])) for k in range(len(bible) - KJV_RUN + 1)})
+    w = _plain(text)
+    for k in range(len(w) - run + 1):
+        gram = " " + " ".join(w[k:k + run]) + " "
+        if (run != KJV_RUN or hash(gram.strip()) in _KJV_TEXT[2]) and gram in _KJV_TEXT[0]:
+            for (book, c, v), t in _KJV_TEXT[1].items():
+                if gram in " " + " ".join(_plain(t)) + " ":
+                    return f"{book.title()} {c}:{v} (KJV)", gram.strip()
+            return "a passage across verses", gram.strip()
+    return None
 
 
 def speaking(shot):
@@ -200,8 +245,9 @@ def _speaker_problems(i, s, chars, span, span_slowest):
     out, sid, who = [], s["id"], s["speaker"]
     if not isinstance(s.get("line"), str) or not s["line"].strip():
         return [f"SPEAKER_LINE_MISSING shot {i} {sid}"]
-    if span_slowest > SPEAKER_AUDIO[1]:
-        out.append(f"SPEAKER_LINE_TOO_LONG shot {i} {sid} (~{span_slowest:.1f} s at the slowest pace; <= 12 s)")
+    if span_slowest > TALK_MAX:
+        out.append(f"SPEAKER_LINE_TOO_LONG shot {i} {sid} (~{span_slowest:.1f} s at the slowest pace; <= {TALK_MAX:.2f} s: "
+                   "the line, the gap after it and the margin fit one 12 s clip)")
     if span < SPEAKER_AUDIO[0]:
         out.append(f"SPEAKER_LINE_TOO_SHORT shot {i} {sid} (>= 2 s)")
     if who == ch.NARRATOR:
@@ -251,13 +297,21 @@ def check(plan, chars=None):
         if not isinstance(line, dict) or line.get("kind") not in KINDS or not str(line.get("text", "")).strip():
             problems.append(f"NARRATION_LINE {k} (kind {'/'.join(KINDS)} and text)")
             continue
+        if line.get("reference") is not None and not isinstance(line["reference"], str):
+            problems.append(f"REFERENCE_NOT_TEXT line {k} (a reference such as \"Genesis 6:5 (KJV)\")")
+            continue
         if line["kind"] == "scripture":
             if not line.get("reference"):
                 problems.append(f"SCRIPTURE_REFERENCE_MISSING line {k}")
             else:
-                bad = kjv_check.problem(line["reference"], line["text"])
+                bad = _kjv_problem(line["reference"], line["text"])
                 if bad:
                     problems.append(f"KJV line {k}: {bad}")
+        else:
+            quoted = kjv_quote(line["text"])
+            if quoted:
+                problems.append(f"KJV_UNREFERENCED line {k} (quotes {quoted[0]}: \"{quoted[1]}\"; make it kind "
+                                "scripture with its reference, KJV word for word)")
     if problems and any(p.startswith("NARRATION_LINE") for p in problems):
         return {"problems": problems, "pending": pending, "estimate": {}}
 
@@ -282,10 +336,19 @@ def check(plan, chars=None):
             elif not isinstance(s.get("line"), str) or not s["line"].strip():
                 problems.append(f"SPEAKER_LINE_MISSING shot {i} {s.get('id')}")
                 bad_lines = True
+            elif s.get("reference") is not None and not isinstance(s["reference"], str):
+                problems.append(f"REFERENCE_NOT_TEXT shot {i} {s.get('id')} (a reference such as \"Genesis 6:13 "
+                                "(KJV)\")")
+                bad_lines = True
             elif s.get("reference"):
-                bad = kjv_check.problem(s["reference"], s["line"])
+                bad = _kjv_problem(s["reference"], s["line"])
                 if bad:
                     problems.append(f"KJV shot {i} {s['id']}: {bad}")
+            else:
+                quoted = kjv_quote(s["line"])
+                if quoted:
+                    problems.append(f"KJV_UNREFERENCED shot {i} {s['id']} (the line quotes {quoted[0]}: "
+                                    f"\"{quoted[1]}\"; give it its `reference`, KJV word for word)")
             continue
         lp = _lines_problem(i, s, n)
         if lp:
@@ -310,9 +373,11 @@ def check(plan, chars=None):
     items, carried = sequence(plan)
     est = [estimate_seconds(x["text"]) for x in items]
     total = sum(est) + LINE_GAP * (len(items) - 1) + TAIL
+    # a line that quotes the KJV is Scripture for the >= 40 % share of our own words, whatever its kind says
     problems += [f"SHORT {p}" for p in publish_episode.short_problems(
         {"format": "short", "part": plan.get("part", 0), "seconds": round(total, 1),
-         "narration": [{"kind": x["kind"], "text": x["text"]} for x in items]})]
+         "narration": [{"kind": "scripture" if x["kind"] != "scripture" and kjv_quote(x["text"]) else x["kind"],
+                        "text": x["text"]} for x in items]})]
 
     # the open: a spoken line from 0 s, never the Keeper
     if shots[0]["kind"] == "keeper":
@@ -326,9 +391,12 @@ def check(plan, chars=None):
     if not climax:
         problems.append("CLIMAX_MISSING (flag the acted antagonist or spectacle moment `climax: true`)")
     for i in climax:
-        if shots[i]["kind"] != "scene" or shots[i].get("establishing"):
-            problems.append(f"CLIMAX_NOT_ACTED shot {i} {shots[i]['id']} (an acted scene, not the Keeper or a "
-                            "landscape)")
+        s = shots[i]
+        people = bool(s.get("characters")) or s.get("figures") == "anonymous"
+        god_voice = speaking(s) and s["speaker"] == ch.GOD
+        if s["kind"] != "scene" or s.get("establishing") or god_voice or not people:
+            problems.append(f"CLIMAX_NOT_ACTED shot {i} {s['id']} (the climax is acted: approved characters or "
+                            "anonymous figures on screen; not the Keeper, a landscape or God's voice-over sky; E92)")
     last_climax = max(climax) if climax else len(shots)
 
     keeper = chars.get(ch.NARRATOR)
@@ -349,7 +417,7 @@ def check(plan, chars=None):
             if any(items[k]["kind"] not in LESSON_KINDS for k in idx):
                 problems.append(f"KEEPER_LINE_KIND shot {i} {s['id']} (the Keeper speaks only the insight and the "
                                 "close)")
-            limit = KEEPER_LAST_MAX if i == len(shots) - 1 else KEEPER_AUDIO[1]
+            limit = KEEPER_LAST_MAX if i == len(shots) - 1 else TALK_MAX
             if slowest > limit:
                 problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {s['id']} (~{slowest:.1f} s at the slowest pace; "
                                 f"Pavo input audio <= {limit:.1f} s)")

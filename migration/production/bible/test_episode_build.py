@@ -289,36 +289,87 @@ class Compose(unittest.TestCase):
 
 
 class Gating(unittest.TestCase):
-    """generate_step with a stubbed Pavo, download, clip_check and lipsync_check: every talking clip is judged against
-    its own line's WAV; God's voice-over shot and the scenes are not lip-checked and lose Pavo's audio track."""
+    """generate_step with a stubbed Pavo, download, clip_check, lipsync_check and face check: every talking clip is
+    judged against its own line's WAV; God's voice-over shot is not lip-checked but must show no face; scenes and
+    God's shot lose Pavo's audio track."""
+    def setUp(self):
+        self.saved = (eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run)
+        self.work = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-gate-"))
+        self.plan = dialogue_plan()
+        (self.work / "layout.json").write_text(json.dumps(layout_for(self.plan, [2.4, 3.0, 2.5, 3.1])))
+        (self.work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "eve": ["eve.jpg"]}))
+        self.lip, self.faces, self.stripped = [], [], []
+        eb.clip_flags = lambda path: []
+        eb.lipsync_flags = lambda py, model, clip, wav: (self.lip.append((Path(clip).name, Path(wav).name)) or [],
+                                                         {"audio": {"corr": 0.9}, "mouth": {"corr": 0.5}})
+        eb.face_flags = lambda py, model, clip: (self.faces.append(Path(clip).name) or [],
+                                                 {"faces": {"frames_sampled": 40, "faces_found": 0}})
+        eb.run = lambda args, **kw: (self.stripped.append(Path(str(args[-1])).name),
+                                     Path(str(args[-1])).write_bytes(b"v"))
+
+    def tearDown(self):
+        eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run = self.saved
+        shutil.rmtree(self.work)
+
+    def generate(self, extra=0):
+        n = len(self.plan["shots"]) + extra
+        client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
+                            {str(i): [done(str(i))] for i in range(n)})
+        report = eb.generate_step(self.plan, self.work, "py", "model", client=client,
+                                  download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
+        return client, report
+
     def test_lipsync_runs_on_each_talking_clip_with_its_own_line(self):
-        p = dialogue_plan()
-        work = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-gate-"))
-        saved = (eb.clip_flags, eb.lipsync_flags, eb.run)
-        try:
-            layout = layout_for(p, [2.4, 3.0, 2.5, 3.1])
-            (work / "layout.json").write_text(json.dumps(layout))
-            (work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "eve": ["eve.jpg"]}))
-            lip, stripped = [], []
-            eb.clip_flags = lambda path: []
-            eb.lipsync_flags = lambda py, model, clip, wav: (lip.append((Path(clip).name, Path(wav).name)) or [],
-                                                             {"audio": {"corr": 0.9}, "mouth": {"corr": 0.5}})
-            eb.run = lambda args, **kw: (stripped.append(Path(str(args[-1])).name), Path(str(args[-1])).write_bytes(b"v"))
-            n = len(p["shots"])
-            client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
-                                {str(i): [done(str(i))] for i in range(n)})
-            report = eb.generate_step(p, work, "py", "model", client=client,
-                                      download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
-            self.assertEqual(lip, [("s-eve.mp4", "s-eve.wav"), ("k-close.mp4", "k-close.wav")])
-            self.assertEqual(sorted(stripped), ["s-a.mp4", "s-god.mp4"])
-            self.assertEqual(client.calls[0]["audios"], [".episode/x/speakers/s-eve.wav"])
-            self.assertIsNone(client.calls[2]["audios"])
-            self.assertEqual(report["shots"]["s-eve"]["speaker"], "eve")
-            self.assertIn("lipsync", report["shots"]["s-eve"]["attempts"][0])
-            self.assertNotIn("lipsync", report["shots"]["s-god"]["attempts"][0])
-        finally:
-            eb.clip_flags, eb.lipsync_flags, eb.run = saved
-            shutil.rmtree(work)
+        client, report = self.generate()
+        self.assertEqual(self.lip, [("s-eve.mp4", "s-eve.wav"), ("k-close.mp4", "k-close.wav")])
+        self.assertEqual(self.faces, ["s-god.mp4"])               # only God's voice-over shot is face-checked
+        self.assertEqual(sorted(self.stripped), ["s-a.mp4", "s-god.mp4"])
+        self.assertEqual(client.calls[0]["audios"], [".episode/x/speakers/s-eve.wav"])
+        self.assertIsNone(client.calls[2]["audios"])
+        self.assertEqual(report["shots"]["s-eve"]["speaker"], "eve")
+        self.assertIn("lipsync", report["shots"]["s-eve"]["attempts"][0])
+        self.assertNotIn("lipsync", report["shots"]["s-god"]["attempts"][0])
+        self.assertEqual(report["shots"]["s-god"]["attempts"][0]["faces"]["faces_found"], 0)
+
+    def test_a_face_in_gods_shot_is_regenerated_at_most_twice_then_the_run_stops(self):
+        """Review of #400: a prompt can be written around the word list; the generated clip itself is checked."""
+        found = {"n": 0}
+
+        def faces(py, model, clip):
+            found["n"] += 1
+            return ["GOD_SHOT_FACE"], {"faces": {"frames_sampled": 40, "faces_found": 3}}
+        eb.face_flags = faces
+        with self.assertRaises(SystemExit) as err:
+            self.generate(extra=2)
+        self.assertIn("SHOT_FAILED s-god after 3 generations: GOD_SHOT_FACE", str(err.exception))
+        self.assertEqual(found["n"], 3)
+        report = json.loads((self.work / "report.json").read_text())
+        self.assertIn("GOD_SHOT_FACE", report["shots"]["s-god"]["error"])
+
+    def test_a_broken_face_check_stops_the_run_with_its_error_and_spends_no_regeneration(self):
+        eb.face_flags = self.saved[2]
+        fake = self.work / "python"
+        fake.write_text("#!/bin/sh\necho 'ImportError: libGLESv2.so.2: cannot open shared object file' >&2\nexit 1\n")
+        fake.chmod(0o755)
+        with self.assertRaises(SystemExit) as caught:
+            eb.face_flags(fake, "model.task", "clip.mp4")
+        self.assertIn("FACE_TOOL_BROKEN exit 1", str(caught.exception))
+        self.assertIn("libGLESv2.so.2", str(caught.exception))
+        calls = []
+
+        def attempt(n):
+            calls.append(n)
+            return {"generation": n}, self.work / "clip.mp4"
+        with self.assertRaises(SystemExit):
+            eb.make_shot("s-god", attempt, lambda path: eb.face_flags(fake, "model.task", path))
+        self.assertEqual(calls, [1])
+
+    def test_the_workflow_proves_the_face_check_before_any_generation(self):
+        text = (eb.REPO / ".github" / "workflows" / "episode.yml").read_text()
+        proof = text.find("lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4")
+        self.assertGreater(proof, 0)
+        self.assertLess(proof, text.find("episode_build.py generate"))
+        self.assertIn("FACE_CHECK_BLIND", text)
 
 
 def tone_wav(path, seconds, rate=24000):
@@ -368,6 +419,20 @@ class Lines(unittest.TestCase):
             with self.assertRaises(SystemExit) as err:
                 eb.lines_step(plan, work)
             self.assertIn("KEEPER_SHARE", str(err.exception))
+            # a talking line of 11.5 s is inside 2-12 s, but with the 0.35 s gap and the 0.6 s margin it needs a
+            # 12.45 s clip: refused here, before any Pavo clip is spent (review of #400)
+            sentences[0].update(start=0.3, end=11.8)
+            sentences[1].update(start=11.98, end=60.0)
+            sentences[2].update(start=60.18, end=100.0)
+            sentences[3].update(start=100.18, end=106.18)
+            tone_wav(work / "voice.wav", 110.0)
+            (work / "timeline.json").write_text(json.dumps({"sentences": sentences}))
+            with self.assertRaises(SystemExit) as err:
+                eb.lines_step(plan, work)
+            self.assertIn("TALK_LINE_TOO_LONG k-open 11.50 s", str(err.exception))
+            self.assertNotIn("KEEPER_AUDIO k-open", str(err.exception))
+            self.assertEqual(eb.talk_need(11.0, False), 11.0 + eb.LINE_GAP + eb.KEEPER_MARGIN)
+            self.assertEqual(eb.talk_need(6.0, True), 6.0 + eb.TAIL + eb.KEEPER_MARGIN)
         finally:
             shutil.rmtree(work)
 

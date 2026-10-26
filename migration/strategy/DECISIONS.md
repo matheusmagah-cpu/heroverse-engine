@@ -400,7 +400,7 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   character bible as DRAFT (fixed look, wardrobe, voice, reference prompts in `characters/images.json`); Claude
   approves him after reviewing his sheet; until then he is only a faceless silhouette. (7) Genesis 7 rewritten on the
   beat map: God's Genesis 6:13 at 0 s over the darkening storm, three acted steps of the corruption with anonymous
-  figures, God's Genesis 6:7 at the climax (63 %), Noah's grace as payoff, the Keeper's insight, a comment question and
+  figures, God's Genesis 6:7 as voice-over and right after it the acted climax (the wicked crowd scattering, 66 %; E92), Noah's grace as payoff, the Keeper's insight, a comment question and
   "Part eight tomorrow: Noah builds the ark"; measured locally with Kokoro at 173.9 s, Keeper 11 %, lesson 11 %.
 - **Where.** `plan_check.py` (`bible-plan-v2`), `episode_build.py` (speaker WAVs, lipsync on every talking clip,
   measured length, Keeper and lesson shares), `short_engine.talk_problems`, `pilot_render.py voice` (a segment may name

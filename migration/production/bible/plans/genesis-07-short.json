@@ -5,8 +5,8 @@
  "passage": "Genesis 6:5-13 (KJV, public domain)",
  "aspect_ratio": "9:16",
  "story": "God sees the earth corrupt (SERIES.md episode 7; arc 2, Brothers and the walk with God)",
- "people": "No approved character lived in Genesis 6 and Noah is DRAFT (characters.json): the corruption is acted out by anonymous people seen only from behind or in silhouette, Noah only as a faceless silhouette on a hillside; two establishing shots (2 s each). God is never shown: His lines (Genesis 6:13 at the open, Genesis 6:7 at the climax) are a deep voice-over over the storm, the lightning and the rain. The Keeper only for the insight, the comment question and the close.",
- "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 6:13); stake and open loop (would anyone be left?); escalation in three steps, each ending on a hook (the heart, the hands, Heaven's grief); climax s-judgment (God speaks Genesis 6:7); payoff (Noah found grace); keeper_close (insight, comment question, part 8). No approved speaker lives in Genesis 6, so the escalation is acted without dialogue until Noah is APPROVED.",
+ "people": "No approved character lived in Genesis 6 and Noah is DRAFT (characters.json): the corruption is acted out by anonymous people seen only from behind or in silhouette, Noah only as a faceless silhouette on a hillside; two establishing shots (2 s each). God is never shown: His lines (Genesis 6:13 at the open, Genesis 6:7 just before the acted climax) are a deep voice-over over the storm, the lightning and the rain. The Keeper only for the insight, the comment question and the close.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 6:13); stake and open loop (would anyone be left?); escalation in three steps, each ending on a hook (the heart, the hands, Heaven's grief); God speaks Genesis 6:7 (s-judgment, voice-over), then the acted climax s-terror; payoff (Noah found grace); keeper_close (insight, comment question, part 8). No approved speaker lives in Genesis 6, so the escalation is acted without dialogue until Noah is APPROVED.",
  "narration": [
   {
    "kind": "story",
@@ -339,7 +339,18 @@
    "line": "I will destroy man whom I have created from the face of the earth;",
    "seconds": 8,
    "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the dark plain. Night, the first heavy rain sweeping across the plain in grey sheets. Terrible and grand. No people, no text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the dark plain. Night, the first heavy rain sweeping across the plain in grey sheets. Terrible and grand. No people, no text, no logos."
+  },
+  {
+   "id": "s-terror",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 6,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. Silhouettes of the crowd seen from behind scatter through the lanes in terror as lightning strikes the plain beside the tents, torches dropped and fires kicked over, no one at the center. Night, white lightning and orange fire lighting the rain. Panic and dread. No text, no logos.",
    "climax": true
   },
   {

@@ -114,11 +114,17 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   speaks, lips moving with every word; its line (2-12 s) goes to Pavo as input audio with its references and
   `lipsync_check.py` judges the clip like the Keeper's; the clip's length comes from the line (no `seconds`).
   `speaker: "god"`: Scripture only; the shot shows no person, no figure, no face (light, storm, wind, fire, rain), its
-  `seconds` are the clip's, and the line is a deep voice-over (`am_onyx`, speed 0.9; no lipsync check).
+  `seconds` are the clip's, and the line is a deep voice-over (`am_onyx`, speed 0.9; no lipsync check). Its
+  generated clip goes through the same face landmarker (`lipsync_check.py --faces`, sampled frames): any face is
+  `GOD_SHOT_FACE` and the shot is regenerated (at most 2 times), because a prompt can be written around a word list.
+- **Scripture is always referenced.** A line with no `reference` that quotes the KJV anyway (8 consecutive words) is
+  refused (`KJV_UNREFERENCED`) and counts as Scripture, not our words. A talking line leaves room in its 12 s clip for
+  the gap and the 0.6 s margin (<= 11.05 s; `TALK_LINE_TOO_LONG` after the voice, before any Pavo clip).
 - **Stake and open loop (3-10 %)**, then **escalation (10-60 %)**: three rising steps of the opposition, acted (in
   dialogue when an approved speaker lives in the story), each ending on a small hook; shots 2-6 s, cuts only.
-- **Climax (60-80 %)**: the hero or God speaks the key KJV line at the turn; at least one acted scene (not a
-  landscape, not the Keeper) is flagged `climax: true`.
+- **Climax (60-80 %)**: the hero or God speaks the key KJV line at the turn; at least one acted scene is flagged
+  `climax: true`, with people on screen (approved characters or anonymous figures): never a landscape, the Keeper or
+  God's voice-over sky (E92: when God speaks the turn, the climax is the acted shot right after His line).
 - **Payoff (80-85 %)**: the outcome shown, one beat.
 - **Keeper close (85-100 %)**: `keeper` shots only after the last climax shot and only for lines of kind insight or
   cta: one original insight from the text (>= 20 words, no sermon), a comment question, the CTA to the full story and

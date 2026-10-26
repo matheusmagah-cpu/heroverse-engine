@@ -196,6 +196,13 @@ def lines_step(plan, work):
         if not low <= seconds <= limit:
             problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.1f} s)")
             continue
+        if plan_check.talking(s):
+            # its clip holds the line, the gap or tail after it and the margin: refused here, before any Pavo clip
+            need = talk_need(seconds, i == len(shots) - 1)
+            if need > plan_check.TALK_CLIP_MAX:
+                problems.append(f"TALK_LINE_TOO_LONG {s['id']} {seconds:.2f} s (+ gap/tail + margin = {need:.2f} s > "
+                                f"the {plan_check.TALK_CLIP_MAX:.0f} s clip)")
+                continue
         record = {"start": start, "end": end, "seconds": round(seconds, 3)}
         if s["kind"] != "keeper":
             record["speaker"] = s["speaker"]
@@ -298,11 +305,16 @@ def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
 
 # ---------- generation ----------
 
+def talk_need(seconds, last):
+    """Seconds of clip a talking line needs: the line, then the tail (the closing shot) or the gap before the next
+    line, then the margin."""
+    return seconds + (TAIL if last else LINE_GAP) + KEEPER_MARGIN
+
+
 def shot_seconds(shot, index, plan, layout):
     if not plan_check.talking(shot):
         return shot["seconds"]
-    info = talk_record(layout, shot)
-    need = info["seconds"] + (TAIL if index == len(plan["shots"]) - 1 else 0.0) + KEEPER_MARGIN
+    need = talk_need(talk_record(layout, shot)["seconds"], index == len(plan["shots"]) - 1)
     return max(4, min(12, math.ceil(need)))
 
 
@@ -367,7 +379,10 @@ def make_shot(shot_id, attempt, check, attempts=ATTEMPTS):
         if path is not None:
             record["flags"], measures = check(path)
             if measures:
-                record["lipsync"] = measures
+                if "faces" in measures:
+                    record["faces"] = measures["faces"]
+                else:
+                    record["lipsync"] = measures
             if not record["flags"]:
                 records.append(record)
                 return path, records
@@ -393,6 +408,21 @@ def lipsync_flags(lip_python, face_model, clip, wav):
         tail = " | ".join(done.stderr.strip().splitlines()[-3:])
         raise SystemExit(f"LIPSYNC_TOOL_BROKEN exit {done.returncode}: {tail[-600:]}")
     return result["flags"], {"audio": result["audio"], "mouth": result["mouth"]}
+
+
+def face_flags(lip_python, face_model, clip):
+    """God's voice-over clip must show no person: the pinned face landmarker on sampled frames (lipsync_check
+    --faces). A face found flags GOD_SHOT_FACE (the shot is regenerated); a check that prints no JSON stops the run,
+    like LIPSYNC_TOOL_BROKEN (E89), so no regeneration is spent on a broken tool."""
+    done = subprocess.run([str(lip_python), "-I", "-B", str(HERE / "lipsync_check.py"), "--faces", str(clip),
+                           str(face_model)], capture_output=True, text=True)
+    try:
+        result = json.loads(done.stdout.strip().splitlines()[-1])
+        flags = list(result["flags"])
+    except (ValueError, IndexError, KeyError, TypeError):
+        tail = " | ".join(done.stderr.strip().splitlines()[-3:])
+        raise SystemExit(f"FACE_TOOL_BROKEN exit {done.returncode}: {tail[-600:]}")
+    return flags, {"faces": {k: result.get(k) for k in ("frames_sampled", "faces_found")}}
 
 
 def generate_step(plan, work, lip_python, face_model, client=None, download=None, sleep=time.sleep):
@@ -436,9 +466,14 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
                 shutil.copyfile(raw, final)
             return record, final
 
+        voice_over = plan_check.speaking(shot) and not talks
+
         def check(path):
             flags = clip_flags(path)
-            if not talks:   # scenes, and God's voice-over shot (no one speaks on screen): no lipsync check
+            if voice_over:  # God's voice-over shot: no lipsync, but no face may appear in it
+                more, measures = face_flags(lip_python, face_model, path)
+                return flags + more, measures
+            if not talks:   # scenes: no lipsync check
                 return flags, None
             more, measures = lipsync_flags(lip_python, face_model, path, REPO / talk_record(layout, shot)["wav"])
             return flags + more, measures

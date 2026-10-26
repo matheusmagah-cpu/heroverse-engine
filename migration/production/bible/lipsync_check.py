@@ -16,6 +16,8 @@ had lips at 208 ms (out of sync) and audio corr 0.14 against our line.
 A clip that fails is not composed; it is regenerated (PROMPT_GUIDE "Built for 9.5").
 
 usage: lipsync_check.py CLIP.mp4 LINE.wav FACE_LANDMARKER.task   prints one JSON line; exit 1 on any failure
+       lipsync_check.py --faces CLIP.mp4 FACE_LANDMARKER.task    God's voice-over shot: sampled frames, any face found
+                                                                  flags GOD_SHOT_FACE (exit 1)
 (model: https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task)
 """
 import json
@@ -30,6 +32,7 @@ MOUTH_CORR_MIN = 0.45
 SPEAK_TO_PAUSE_MIN = 1.5
 FACE_FRAMES_MIN = 0.8
 LAG_MAX_MS = 84            # two frames at 24 fps
+FACE_SAMPLE_EVERY = 4      # --faces: every 4th frame (6 a second at 24 fps)
 MODEL_SHA256 = "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
 
 
@@ -117,6 +120,50 @@ def mouth_sync(opening, fps, clip_env):
     return round(corr, 3), int(round(lag / fps * 1000)), round(float(ratio), 2)
 
 
+def landmarker(model, mode):
+    import hashlib
+    from mediapipe.tasks.python import BaseOptions, vision
+    if hashlib.sha256(open(model, "rb").read()).hexdigest() != MODEL_SHA256:
+        raise SystemExit("FACE_MODEL_HASH_MISMATCH")
+    options = vision.FaceLandmarkerOptions(base_options=BaseOptions(model_asset_path=model), running_mode=mode,
+                                           num_faces=1)
+    return vision.FaceLandmarker.create_from_options(options)
+
+
+def faces(clip, model, every=FACE_SAMPLE_EVERY):
+    """God's voice-over shot shows no person (owner, 2026-10-26): every `every`-th frame through the same pinned face
+    landmarker; any face found flags GOD_SHOT_FACE and the clip is regenerated. Calibration 2026-10-26 (mediapipe
+    0.10.35, this model): the Genesis 6 Pavo clips storm, sunbeams and tents 0 faces in 40-48 sampled frames; the
+    Keeper's clip 30/44 and the Adam-and-Eve clip 21/48."""
+    import cv2
+    import mediapipe as mp
+    from mediapipe.tasks.python import vision
+    lm = landmarker(model, vision.RunningMode.IMAGE)
+    cap = cv2.VideoCapture(clip)
+    sampled, found, at, i = 0, 0, [], 0
+    while True:
+        ok, frame = cap.read()
+        if not ok:
+            break
+        if i % every == 0:
+            sampled += 1
+            image = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+            if lm.detect(image).face_landmarks:
+                found += 1
+                at.append(i)
+        i += 1
+    cap.release()
+    lm.close()
+    return face_verdict(clip, sampled, found, at)
+
+
+def face_verdict(clip, sampled, found, at):
+    flags = ["GOD_SHOT_FACE"] if found else []
+    if not sampled:
+        flags.append("NO_FRAMES")
+    return {"clip": clip, "frames_sampled": sampled, "faces_found": found, "face_frames": at[:20], "flags": flags}
+
+
 def verdict(audio, mouth):
     flags = []
     if audio["corr"] < AUDIO_CORR_MIN:
@@ -141,6 +188,10 @@ def check(clip, line, model):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 4 and sys.argv[1] == "--faces":
+        result = faces(sys.argv[2], sys.argv[3])
+        print(json.dumps(result))
+        sys.exit(1 if result["flags"] else 0)
     if len(sys.argv) != 4:
         raise SystemExit(__doc__)
     result = check(sys.argv[1], sys.argv[2], sys.argv[3])

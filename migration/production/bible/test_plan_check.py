@@ -220,6 +220,77 @@ class Plan(unittest.TestCase):
                                    "Quiet. No people, no text, no logos.")
         self.assertIn("GOD_SHOT_NO_MEDIUM", codes(pc.check(p, CHARS)))
 
+    def test_a_person_written_around_the_word_list_is_still_refused_in_gods_shot(self):
+        """Review of #400: "an old bearded elder in a white robe lifts his staff" and "a winged angel of light"
+        passed, putting God's voice over a visible man (the clip is also face-checked in episode_build)."""
+        for person in ("An old bearded elder in a white robe lifts his staff against the storm",
+                       "A winged angel of light descends through the storm clouds",
+                       "A shepherd boy looks up at the lightning", "A king on a hill raises her hands to the sky"):
+            p = plan()
+            p["shots"][0]["prompt"] = STORM.replace("Black storm clouds roll over the plain", person)
+            self.assertIn("GOD_SHOT_WITH_A_PERSON", codes(pc.check(p, CHARS)), person)
+        self.assertEqual(pc.check(plan(), CHARS)["problems"], [])     # "No people" in the tail is not a person
+
+    def test_the_climax_is_acted_never_a_god_voice_over_sky(self):
+        """E92: genesis-07's only climax was s-judgment, God's voice over lightning on an empty plain, and the gate
+        let it through. The climax shows people: approved characters or anonymous figures."""
+        p = plan()
+        p["shots"][8].pop("climax")
+        p["shots"][0]["climax"] = True                         # God's voice-over storm
+        self.assertIn("CLIMAX_NOT_ACTED", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][8].pop("figures")
+        p["shots"][8]["establishing"] = False                  # a scene with no one in it
+        self.assertIn("CLIMAX_NOT_ACTED", " ".join(pc.check(p, CHARS)["problems"]))
+        p = plan()
+        p["shots"][8].pop("climax")
+        p["shots"][4]["climax"] = True                         # an approved character acting: accepted
+        self.assertNotIn("CLIMAX_NOT_ACTED", codes(pc.check(p, CHARS)))
+        g7 = json.loads(EXAMPLE.read_text())
+        climax = [s for s in g7["shots"] if s.get("climax")]
+        self.assertTrue(climax)
+        for s in climax:
+            self.assertNotEqual(s.get("speaker"), "god", s["id"])
+            self.assertTrue(s.get("characters") or s.get("figures") == "anonymous", s["id"])
+
+    def test_a_kjv_quote_without_a_reference_is_refused_and_is_not_our_words(self):
+        self.assertEqual(pc.kjv_quote("Hath God said, Ye shall not eat of every tree of the garden?")[0],
+                         "Genesis 3:1 (KJV)")
+        self.assertIsNone(pc.kjv_quote("Ten generations after Eden the earth is full of people and noise."))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line="Hath God said, Ye shall not eat of every tree of the garden?")
+        self.assertIn("KJV_UNREFERENCED", codes(pc.check(p, CHARS)))
+        verse = ("And God saw that the wickedness of man was great in the earth, and that every imagination of the "
+                 "thoughts of his heart was only evil continually.")
+        p = plan()
+        for k, n in ((0, 3), (2, 6), (3, 6)):                     # the "story" lines are the verse, unreferenced
+            p["narration"][k] = {"kind": "story", "text": " ".join([verse] * n)}
+        found = " ".join(pc.check(p, CHARS)["problems"])
+        self.assertIn("KJV_UNREFERENCED line 0", found)
+        self.assertIn("ORIGINAL_SHARE", found)                     # counted as Scripture, not our words
+        self.assertEqual([p for p in pc.check(json.loads(EXAMPLE.read_text()))["problems"]
+                          if p.startswith("KJV_UNREFERENCED")], [])
+
+    def test_a_reference_that_is_not_text_is_a_problem_not_a_crash(self):
+        p = plan()
+        p["narration"][1]["reference"] = 6
+        self.assertIn("REFERENCE_NOT_TEXT", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0]["reference"] = ["Genesis 6:13"]
+        self.assertIn("REFERENCE_NOT_TEXT", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0]["reference"] = "Hezekiah 99:1"
+        self.assertIn("KJV", codes(pc.check(p, CHARS)))
+
+    def test_a_talking_line_must_leave_room_for_the_gap_and_margin_in_one_12_s_clip(self):
+        self.assertAlmostEqual(pc.TALK_MAX, 12.0 - 0.35 - 0.6)
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 3) +
+                                " Answer me now, my son.")   # 26 words
+        self.assertGreater(26 / pc.WPS_SLOWEST, pc.TALK_MAX)
+        self.assertLess(26 / pc.WPS_SLOWEST, 12.0)                 # passed before: under 12 s, but no room left
+        self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+
     def test_the_voice_track_puts_each_spoken_line_where_its_shot_is(self):
         items, carried = pc.sequence(plan())
         self.assertEqual(items[0]["speaker"], "god")

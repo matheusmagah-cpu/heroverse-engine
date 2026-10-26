@@ -59,6 +59,9 @@ jobs:
           echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
           # the lips check must work before any Pavo generation is spent (E89): the calibration clip must pass
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task"
+          # and the face check of God's voice-over shots must see the Keeper's face in the same clip
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/faces.json" && { echo "FACE_CHECK_BLIND"; exit 1; } || true
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if r['faces_found']>0 else 'FACE_CHECK_BLIND')" "$RUNNER_TEMP/faces.json"
           mkdir -p "$WORK" "$OUT"
       - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
         run: |

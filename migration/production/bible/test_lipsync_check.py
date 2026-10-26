@@ -42,5 +42,21 @@ class Verdict(unittest.TestCase):
         self.assertIn("MOUTH_NOT_IN_SYNC", lc.verdict(self.GOOD_AUDIO, dict(self.GOOD_MOUTH, corr=0.3)))
 
 
+class GodShotFaces(unittest.TestCase):
+    """God's voice-over shot shows no person: one face in any sampled frame flags the clip (calibration 2026-10-26:
+    the Genesis 6 storm, sunbeams and tents clips 0 faces; the Keeper's clip 30/44)."""
+    def test_any_face_flags_the_clip_and_an_empty_clip_is_not_a_pass(self):
+        self.assertEqual(lc.face_verdict("storm.mp4", 40, 0, [])["flags"], [])
+        r = lc.face_verdict("keeper.mp4", 44, 1, [12])
+        self.assertEqual(r["flags"], ["GOD_SHOT_FACE"])
+        self.assertEqual(r["face_frames"], [12])
+        self.assertIn("NO_FRAMES", lc.face_verdict("empty.mp4", 0, 0, [])["flags"])
+
+    def test_the_cli_has_a_faces_mode(self):
+        text = Path(lc.__file__).read_text()
+        self.assertIn('sys.argv[1] == "--faces"', text)
+        self.assertGreaterEqual(lc.FACE_SAMPLE_EVERY, 1)
+
+
 if __name__ == "__main__":
     unittest.main()
