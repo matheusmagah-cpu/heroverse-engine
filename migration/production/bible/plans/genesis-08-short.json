@@ -1,0 +1,437 @@
+{
+ "version": "bible-plan-v2",
+ "episode": "genesis-08-short",
+ "part": 8,
+ "passage": "Genesis 6:14-22 (KJV, public domain)",
+ "aspect_ratio": "9:16",
+ "story": "Noah builds the ark (SERIES.md episode 8; arc 2, Brothers and the walk with God)",
+ "people": "No approved character speaks in Genesis 6:14-22 and Noah is DRAFT (characters.json): Noah is only a faceless old man seen from behind or in silhouette, his sons three young men in silhouette; the mockers are anonymous crowds seen from behind or in silhouette, and they never speak. Genesis records no word of theirs, so their mockery is shown, never quoted or invented as Scripture; the only verses that touch those years are Matthew 24:38 (eating and drinking until the day he entered the ark) and 1 Peter 3:20 (God waited while the ark was a preparing). God is never shown: His lines (Genesis 6:17 at the open, Genesis 6:18 at the turn) are a deep voice-over over storm and lightning. One establishing shot (2 s). The Keeper only for the insight, the comment question and the close.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 6:17, the flood announced over the bare hull); stake and open loop (one man builds on dry ground; how long can he keep building while the valley mocks him?); escalation in three rising steps of the mockers, acted, each ending on a hook (laughter at the size; scorn while the world feasts; stones and cut ropes at night, and God waited); God speaks Genesis 6:18 (s-covenant, voice-over), then the acted climax s-torches (the mob with torches, Noah keeps hammering) and Genesis 6:22; payoff (the finished ark, the valley goes quiet); keeper_close (insight: Noah never speaks, his sermon was the ark; comment question; part 9). No approved speaker lives in this passage, so the escalation is acted without dialogue until Noah is APPROVED.",
+ "narration": [
+  {
+   "kind": "story",
+   "text": "One man heard those words, and the next morning he picked up an axe. On dry ground. Far from any sea."
+  },
+  {
+   "kind": "story",
+   "text": "His neighbours came to watch. Then they came to laugh. How long can one family keep building while the whole valley mocks them?"
+  },
+  {
+   "kind": "scripture",
+   "text": "Make thee an ark of gopher wood; rooms shalt thou make in the ark, and shalt pitch it within and without with pitch.",
+   "reference": "Genesis 6:14 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Genesis does not record what the neighbours said. It does not have to. Picture a ship going up in a dry valley, days from any water."
+  },
+  {
+   "kind": "scripture",
+   "text": "And this is the fashion which thou shalt make it of: The length of the ark shall be three hundred cubits, the breadth of it fifty cubits, and the height of it thirty cubits.",
+   "reference": "Genesis 6:15 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Three hundred cubits. About four hundred and fifty feet, longer than a city street. Every beam cut by hand, and every beam a joke to the crowd."
+  },
+  {
+   "kind": "story",
+   "text": "Year after year the laughter grew louder. Men paced out the hull and shook their heads. Children threw clods of earth at the scaffolding."
+  },
+  {
+   "kind": "scripture",
+   "text": "For as in the days that were before the flood they were eating and drinking, marrying and giving in marriage, until the day that Noe entered into the ark,",
+   "reference": "Matthew 24:38 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Feasts and weddings below, music in every camp. And up on the hill, one strange family still hammering."
+  },
+  {
+   "kind": "story",
+   "text": "Then the laughter turned to anger. Stones struck the hull. Ropes were cut on the scaffold. Each year the crowd grew bolder, and the ark grew taller."
+  },
+  {
+   "kind": "scripture",
+   "text": "When once the longsuffering of God waited in the days of Noah, while the ark was a preparing,",
+   "reference": "1 Peter 3:20 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Waited. Every hammer blow was one more day of mercy, even for the people throwing stones."
+  },
+  {
+   "kind": "story",
+   "text": "One night the crowd came up the hill with torches, shouting at the hull. And the old man on the scaffold did not answer them with words."
+  },
+  {
+   "kind": "scripture",
+   "text": "Thus did Noah; according to all that God commanded him, so did he.",
+   "reference": "Genesis 6:22 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "No argument. No speech. Only obedience, one board at a time, until the last peg was driven."
+  },
+  {
+   "kind": "story",
+   "text": "At dawn it stood just as it was told: a window above, a door in the side, three decks within. And the valley that laughed went quiet."
+  },
+  {
+   "kind": "insight",
+   "text": "Until the flood is over, Noah never speaks a word. Peter calls him a preacher of righteousness. His sermon was the ark."
+  },
+  {
+   "kind": "cta",
+   "text": "Could you keep building while everyone you know laughs? Tell me in the comments."
+  },
+  {
+   "kind": "cta",
+   "text": "The full story is in the long video. Part nine tomorrow: The flood."
+  }
+ ],
+ "shots": [
+  {
+   "id": "s-voice",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 6:17 (KJV)",
+   "line": "And, behold, I, even I, do bring a flood of waters upon the earth, to destroy all flesh",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. Black storm clouds pile up over a dry valley where the bare wooden ribs of a vast unfinished hull rise out of the dust, lightning flickering deep inside the clouds. Dusk, a hot wind driving sand across the cracked ground. Ominous and vast. No people, no text, no logos."
+  },
+  {
+   "id": "s-axe",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind him. A strong old man seen from behind, his face never visible, swings an axe into the trunk of a tall cypress tree, chips flying. Early morning on a dry hillside, low golden sun and long shadows. Resolute and alone. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-valley",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide establishing shot, slow crane down. A dry valley of dust and thorn bushes stretches to bare hills, a few felled cypress logs lying in a clearing, no water anywhere in sight. Morning haze, a pale hot sky. Empty and strange. No text, no logos.",
+   "establishing": true
+  },
+  {
+   "id": "s-watchers",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. A crowd seen from behind gathers at the edge of a clearing and points at the first wooden ribs rising from the dust, heads thrown back in laughter. Midday, harsh sun and drifting dust. Curious and scornful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-laugh",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Men in silhouette, faces in shadow, nudge each other and laugh, one miming a boat rowing through the air. Hot afternoon, dust hanging in the sunlight behind them. Mocking and loud. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-timber",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, low tracking shot. Four men seen from behind, an old man and three young men, drag heavy cypress logs on ropes across the dust while onlookers in silhouette jeer from a ridge. Late afternoon, long shadows and dust in the air. Toiling and defiant. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-pitch",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. Hands seen from behind brush thick black pitch from a clay pot over a broad wooden plank, the pitch glistening. Inside a half-built hull, slanting light through the open ribs. Patient and careful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-ridge",
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. A line of onlookers in silhouette stands on a ridge, backs to the camera, looking down at a huge wooden frame in a dry valley far from any water. Dusk, the sky orange behind the hull. Absurd and uneasy. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-dust",
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A laughing man seen from behind scoops up a handful of dry dust and lets the wind blow it toward the distant hull. Hot evening light, dust glowing in the air. Scornful and dry. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-measure",
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow tracking shot. A man seen from behind paces along the endless wooden keel, counting his steps with raised fingers, while a crowd in silhouette laughs behind him. Afternoon, harsh light and long shadows across the timber. Mocking and immense. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-ribs",
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Workers in silhouette on high scaffolding raise giant curved ribs of the hull on ropes and pulleys. Late afternoon, the sun low behind the frame, sawdust drifting in the light. Vast and laborious. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-beam",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow tilt up. Three young men in silhouette haul a long beam up the side of the hull on ropes as onlookers below, seen from behind, shout and point. Golden hour, dust and sawdust in the air. Straining and defiant. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-jeer",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, handheld drift. A mocker seen from behind points up at the towering hull and laughs, two others behind him bowing in a mock salute. Evening, warm light on the timber above them. Cruel and cheerful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-clods",
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Children seen from behind throw clods of earth at the scaffolding while men in silhouette laugh and egg them on. Late afternoon, clods bursting into dust against the wood. Careless and mean. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-scorn",
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A larger crowd in silhouette shouts up at the scaffold, fists and staffs raised, faces hidden by the glare of the low sun. Dusk, dust thrown up by many feet. Rising and hostile. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-feast",
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot. Silhouettes feast around long low tables in a torch-lit camp of tents, wine cups raised and bread passed from hand to hand. Night, warm torchlight and smoke. Merry and heedless. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-wedding",
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pan. A wedding procession seen from behind dances through the camp with drums and torches, never looking up at the dark hull on the hill above them. Night, firelight below and a starless sky. Joyful and blind. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-hill",
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. From behind the dancing crowd, the vast dark hull stands alone on the hill, a few small figures in silhouette still working on it by lamplight. Night, music and torchlight in the foreground. Lonely and steadfast. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-stones",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Men in silhouette hurl stones that crack against the planks of the hull, their shadows long in the torchlight. Night, sparks and dust flying. Angry and violent. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-rope",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A hand seen from behind saws through a scaffold rope with a bronze knife, the fibres parting one by one. Night, a single torch on a pole throwing hard shadows. Cold and threatening. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-alone",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man in silhouette, his face never visible, works on alone inside the hull by one oil lamp, fitting a plank into place. Night, the lamp's small warm glow among the dark ribs. Patient and quiet. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-peg",
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, static camera. Hands seen from behind drive a wooden peg into a plank with a mallet as a thrown stone thuds onto the boards beside them. Night, lamplight flickering on the grain of the wood. Steady under fire. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-covenant",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 6:18 (KJV)",
+   "line": "But with thee will I establish my covenant; and thou shalt come into the ark,",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Low-angle wide shot, slow tilt up. A single fork of lightning splits the black clouds above the vast dark hull on the hill, and for a moment the whole sky flashes white over the timber. Night, a hot wind tearing dust off the slopes. Solemn and grand. No people, no text, no logos."
+  },
+  {
+   "id": "s-torches",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. A mob in silhouette surges up the hill with torches to the foot of the ark, shouting and hurling stones, while high above them an old man in silhouette on the scaffold, back to the camera, keeps hammering. Night, orange torchlight against the black hull. Menacing and tense. No text, no logos.",
+   "figures": "anonymous",
+   "climax": true
+  },
+  {
+   "id": "s-mob",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Torches and fists raised in silhouette, faces hidden by the glare, the crowd presses against the scaffold poles and shakes them. Night, sparks and smoke rising past the planks. Furious and chaotic. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-steady",
+   "kind": "scene",
+   "lines": [
+    13
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, low-angle, slow push-in. An old man seen from behind on the scaffold drives one last peg home with a mallet while the torches of the crowd glow below him. Night, firelight on the wet pitch. Calm against chaos. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-board",
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow crane up. Four men in silhouette lift the last board into place high on the side of the hull and step back. Grey dawn, the torches below burned out to smoke. Quiet and complete. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-finished",
+   "kind": "scene",
+   "lines": [
+    15
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow pull back. A small family seen from behind stands before the open door in the side of a vast finished ark on the hill, a long window under its roof. Dawn, pale gold light on the pitch-black hull. Majestic and still. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-silent",
+   "kind": "scene",
+   "lines": [
+    15
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow push-in. The crowd seen from behind stands silent at the foot of the hill, burnt-out torches hanging from their hands, looking up at the ark. Early morning, cold light and drifting smoke. Hushed and uneasy. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "k-insight",
+   "kind": "keeper",
+   "lines": [
+    16
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, leans toward the fire and speaks to the camera, his lips moving clearly with every word, his eyes bright with the thought. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
+  },
+  {
+   "id": "k-question",
+   "kind": "keeper",
+   "lines": [
+    17
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, raises his eyes to the lens and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
+  },
+  {
+   "id": "k-close",
+   "kind": "keeper",
+   "lines": [
+    18
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow pull back. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, rolls the scroll closed and speaks to the camera, his lips moving clearly with every word, then rests the scroll on his knee. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+  }
+ ]
+}
