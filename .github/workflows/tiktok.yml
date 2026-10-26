@@ -1,8 +1,10 @@
 name: HeroVerse TikTok mirror (Bible Shorts already on YouTube, through Buffer's free plan)
 on:
   schedule:
-    - cron: '41 13 * * *'   # after the 13:30 UTC Short slot
-    - cron: '41 23 * * *'   # after the 23:30 UTC Short slot
+    # owner, 2026-10-26: "published on YouTube, it must go to TikTok". Every 20 minutes: a Short goes out within ~20 min
+    # of its YouTube slot, and a dropped cron run (25/10 23:41 never ran) is covered by the next one. A run with
+    # nothing pending ends in seconds; one Short per run keeps TikTok posts apart while a backlog clears.
+    - cron: '7,27,47 * * * *'
   workflow_dispatch:
     inputs:
       mode:

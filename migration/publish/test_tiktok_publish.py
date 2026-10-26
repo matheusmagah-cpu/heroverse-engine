@@ -172,5 +172,20 @@ class Describe(unittest.TestCase):
         self.assertEqual(out["VideoAssetInput"]["url"], "NON_NULL / String")
 
 
+class Schedule(unittest.TestCase):
+    def test_mirror_runs_at_least_every_thirty_minutes(self):
+        """E86: the 25/10 23:41 cron run never started, so Genesis Shorts waited 8 h for TikTok. The mirror now runs
+        several times an hour, so a Short goes to TikTok soon after its YouTube slot and one dropped run is covered."""
+        import re
+        wf = (Path(__file__).resolve().parents[2] / ".github/workflows/tiktok.yml").read_text()
+        crons = re.findall(r"cron: '([^']+)'", wf)
+        self.assertEqual(len(crons), 1)
+        minutes, hours = crons[0].split()[:2]
+        self.assertEqual(hours, "*")
+        mins = sorted(int(m) for m in minutes.split(","))
+        gaps = [b - a for a, b in zip(mins, mins[1:])] + [60 - mins[-1] + mins[0]]
+        self.assertLessEqual(max(gaps), 30)
+
+
 if __name__ == "__main__":
     unittest.main()

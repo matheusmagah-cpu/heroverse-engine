@@ -683,6 +683,16 @@
     "file": "migration/ops/test_release_assets.py",
     "contains": "def test_full_release_upload_goes_to_the_newest_release_created_once"
    }
+  },
+  {
+   "id": "E86",
+   "date": "2026-10-26",
+   "error": "The TikTok mirror's 23:41 UTC cron run on 2026-10-25 never started (GitHub dropped the scheduled run), so no Short went to TikTok for 8 hours after their YouTube slots; the mirror only ran twice a day, so one dropped run meant half a day late.",
+   "fix": "tiktok.yml runs every 20 minutes (7,27,47 * * * *): a Short goes to TikTok within ~20 minutes of its YouTube slot and a dropped run is covered by the next; one Short per run keeps posts apart while a backlog clears. The hourly clock also dispatches tiktok.yml when a published Short is still not mirrored.",
+   "antidote": {
+    "file": "migration/publish/test_tiktok_publish.py",
+    "contains": "def test_mirror_runs_at_least_every_thirty_minutes"
+   }
   }
  ]
 }
