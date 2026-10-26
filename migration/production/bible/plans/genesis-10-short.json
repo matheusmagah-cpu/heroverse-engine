@@ -1,0 +1,508 @@
+{
+ "version": "bible-plan-v2",
+ "episode": "genesis-10-short",
+ "part": 10,
+ "passage": "Genesis 8:1-9:17 (KJV, public domain)",
+ "aspect_ratio": "9:16",
+ "story": "The dove and the rainbow (SERIES.md episodes 10 and 11 in one Short; arc 3, The Flood)",
+ "people": "The scoffer died in the flood, and Noah says nothing until Genesis 9:25 (a curse scene, left for later), so the opposing power is the flood itself and the only speaker is God: His lines (Genesis 9:11 at the open, Genesis 8:16 at the turn, Genesis 9:13 at the payoff) are a deep voice-over over the sea, the sunlight and the rainbow, with no person on screen. Noah (DRAFT) appears by reference in three shots (wardrobe 'ark' at the door, 'before-the-flood' on the hillside after it) and never speaks; his hands at the window and his family are anonymous, seen from behind or in silhouette. No establishing shot. The Keeper only for the insight, the comment question and the close. This plan passes plan_check only once Noah is APPROVED.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-open (the opposing power on screen: the ark alone on the flood, God's Genesis 9:11 voice-over, the promise He makes after the flood (Genesis 9:8-11), laid over a world still under water as a flash-forward); stake and open loop (eight people, no shore: how long can they hold on?); escalation in three rising steps of the waters against the family's hope, acted, each ending on a hook (God remembered Noah, the ark grounds on Ararat, but still only water; the raven never returns and the dove finds no rest; seven days more, the olive leaf, and the dove does not come back); God speaks Genesis 8:16 (s-go, voice-over: go forth of the ark), then the acted climax s-forth and s-family-out (Noah steps out onto dry ground) carrying Genesis 8:18; the altar (Genesis 8:20-21: man's heart is evil from his youth, yet no more curse); payoff (God's Genesis 9:13 over the rainbow, the family and Noah look up); keeper_close (insight: the flood did not change the human heart, and God promises mercy anyway; comment question; part 11).",
+ "narration": [
+  {
+   "kind": "story",
+   "text": "He would promise that later. For now, a world under water. Eight people in one ark, no shore anywhere. How long can they hold on?"
+  },
+  {
+   "kind": "scripture",
+   "text": "And God remembered Noah, and every living thing, and all the cattle that was with him in the ark:",
+   "reference": "Genesis 8:1 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Remembered. Not because God forgot, but because the next move was His. A wind began to blow across the water."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the ark rested in the seventh month, on the seventeenth day of the month, upon the mountains of Ararat.",
+   "reference": "Genesis 8:4 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The hull scraped rock and stopped. But outside, still nothing but water, stretching to every horizon."
+  },
+  {
+   "kind": "story",
+   "text": "Months later Noah opened the window. The raven flew out and never came back to him."
+  },
+  {
+   "kind": "scripture",
+   "text": "And he sent forth a raven, which went forth to and fro, until the waters were dried up from off the earth.",
+   "reference": "Genesis 8:7 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "But the dove found no rest for the sole of her foot, and she returned unto him into the ark,",
+   "reference": "Genesis 8:9 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "He reached out his hand and drew her back in. Still only water. Still no place to land."
+  },
+  {
+   "kind": "story",
+   "text": "Seven more days. Then he let her go again, and they watched the sky until evening."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the dove came in to him in the evening; and, lo, in her mouth was an olive leaf pluckt off: so Noah knew that the waters were abated from off the earth.",
+   "reference": "Genesis 8:11 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "A single green leaf. Somewhere out there, something was growing again. Seven days later, the dove did not come back at all."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Noah went forth, and his sons, and his wife, and his sons’ wives with him:",
+   "reference": "Genesis 8:18 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Over a year inside. Now his feet touched dry ground, and every creature followed him out."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Noah builded an altar unto the Lord; and took of every clean beast, and of every clean fowl, and offered burnt offerings on the altar.",
+   "reference": "Genesis 8:20 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "and the Lord said in his heart, I will not again curse the ground any more for man’s sake; for the imagination of man’s heart is evil from his youth;",
+   "reference": "Genesis 8:21 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The first rainbow, over a washed world. A promise hung in the sky."
+  },
+  {
+   "kind": "insight",
+   "text": "Most readers miss this. The flood did not change the human heart. God says it is still evil from youth, and promises mercy anyway."
+  },
+  {
+   "kind": "cta",
+   "text": "When you see a rainbow now, what will you remember? Tell me in the comments."
+  },
+  {
+   "kind": "cta",
+   "text": "The full story is in the long video. Part eleven tomorrow: The tower of Babel."
+  }
+ ],
+ "shots": [
+  {
+   "id": "s-open",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 9:11 (KJV)",
+   "line": "And I will establish my covenant with you; neither shall all flesh be cut off any more by the waters of a flood;",
+   "seconds": 10,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. A vast dark wooden ark drifts alone on an endless grey sea under low clouds, the rain thinning to a fine drizzle and a pale break of light far off on the horizon. Dawn, still water and a cold wind. Vast and silent. No people, no text, no logos."
+  },
+  {
+   "id": "s-hold",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Inside the ark, a family of eight in silhouette sits in the dim lamplight, listening to the water slap against the hull. Night, one oil lamp swinging gently. Weary and waiting. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-window-wait",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man seen from behind stands at a small high window of the ark and looks out at endless grey water. Grey morning, mist on the sea. Lonely and patient. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-stalls",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot. A young woman seen from behind walks between straw stalls with a lamp, oxen and sheep resting quietly on either side. Night, warm lamplight in the dark hold. Gentle and still. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-draught",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, static camera. The flame of an oil lamp bends in a sudden draught, and the family in silhouette behind it lift their heads. Night, warm light and moving shadows. Expectant and hushed. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-wind",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. An old man seen from behind at the open window feels the wind stir his grey hair as clouds race across the sky outside. Morning, cool light and moving clouds. Hopeful and alert. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-roof",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Two young men in silhouette on the roof of the ark watch a strong wind push the clouds apart over the grey water. Morning, the first sunlight on the waves. Awakening and vast. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-ground",
+   "kind": "scene",
+   "lines": [
+    3,
+    4
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. Inside the ark, a family in silhouette is thrown off balance as the hull grinds against rock, a lamp swinging wildly on its hook. Day, light through the cracks of the timber. Sudden and jolting. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-ararat",
+   "kind": "scene",
+   "lines": [
+    3,
+    4
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. The vast ark rests tilted on a rocky mountain slope with water all around it, a young man seen from behind on its roof looking out. Grey day, mist on the mountains. Still and uncertain. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-sea",
+   "kind": "scene",
+   "lines": [
+    3,
+    4
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow pan. A young man in silhouette on the roof of the ark shades his eyes and scans an endless sheet of grey water. Grey afternoon, a cold wind. Empty and searching. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-shutter",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. An old man seen from behind pushes open a heavy wooden window shutter of the ark, and pale daylight floods in. Morning, cool light on the timber. Hopeful and careful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-raven",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tilt up. Hands seen from behind lift a black raven out of the window, and it flaps away over the grey water. Morning, wind and pale sky. Uncertain and wild. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-raven-far",
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. The family in silhouette at the window of the ark watch a black raven circle to and fro over the water and never return. Grey day, low clouds. Restless and waiting. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-dove-out",
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. Weathered old hands seen from behind open at the window and release a white dove into the grey sky. Morning, soft light. Tender and hopeful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-dove-circle",
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. A white dove circles low over endless water with no land anywhere, while figures in silhouette watch from the window of the ark. Grey day, wind on the waves. Searching and lost. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-dove-back",
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, static camera. An old man's hand seen from behind reaches out of the window and gently takes the returning white dove, drawing her inside. Grey evening, soft light on her feathers. Gentle and patient. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-dusk-wait",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. The family in silhouette sits at the open window of the ark, watching the sky as the light fades. Dusk, warm gold on the clouds. Expectant and quiet. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-release",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt up. Hands seen from behind lift the white dove out of the window again and she flies off toward the mountains. Morning, clear light. Hopeful and free. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-leaf",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The white dove lands on the outstretched hand of an old man seen from behind at the window, a fresh green olive leaf in her beak. Evening, golden light. Joyful and astonished. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-leaf-close",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. Weathered fingers seen from behind take a single green olive leaf from the dove's beak and turn it in the light. Evening, warm golden light. Wondering and tender. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-gather",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. The family in silhouette crowds around the window, embracing, as the old man holds up the olive leaf. Evening, gold light through the window. Joyful and tearful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-gone",
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. The white dove flies away over green hills and drying valleys and does not turn back, watched by figures in silhouette at the window. Morning, clear sunlight. Free and final. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-covering",
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tilt up. Young men seen from behind pry back the covering of the ark's roof, and bright sunlight pours in over their shoulders. Morning, a clear blue sky. Bright and hopeful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-go",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 8:16 (KJV)",
+   "line": "Go forth of the ark, thou, and thy wife, and thy sons, and thy sons’ wives with thee.",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. Morning sunlight breaks through parting clouds and pours down onto the vast wooden ark resting on a green mountainside, a warm wind rippling the wet grass around its great shut door. Dawn, the washed earth shining. Solemn and warm. No people, no text, no logos."
+  },
+  {
+   "id": "s-forth",
+   "kind": "scene",
+   "lines": [
+    12,
+    13
+   ],
+   "seconds": 8,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing in the open doorway of a vast wooden ark under a grey sky, the clouds above breaking into sunlight, steps down from the threshold onto the wet green ground and stands still, the light on his face. Morning, sunlight and a soft wind. Overwhelmed and grateful. No text, no logos.",
+   "climax": true
+  },
+  {
+   "id": "s-family-out",
+   "kind": "scene",
+   "lines": [
+    12,
+    13
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. Three young men and their wives seen from behind follow an old couple down the ramp out of the ark onto the green mountainside. Morning, sunlight on wet grass. Joyful and free. No text, no logos.",
+   "figures": "anonymous",
+   "climax": true
+  },
+  {
+   "id": "s-animals-out",
+   "kind": "scene",
+   "lines": [
+    12,
+    13
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. Deer, sheep and oxen stream out of the ark and birds burst into the air past a young woman seen from behind who laughs as they run. Morning, bright sun on the valley. Abundant and alive. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-stones",
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Men seen from behind stack rough field stones into a low altar on the green hillside below the ark. Late afternoon, warm sun and long shadows. Devout and careful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-fire",
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. An old man seen from behind kneels and lights the wood on the stone altar, and a column of white smoke begins to rise. Evening, firelight and a clearing sky. Reverent and still. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-kneel",
+   "kind": "scene",
+   "lines": [
+    15
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane up. The family of eight in silhouette kneels before the stone altar as white smoke rises straight up into the evening sky. Dusk, gold light over the hills. Worshipful and quiet. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-noah-altar",
+   "kind": "scene",
+   "lines": [
+    15
+   ],
+   "seconds": 6,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, beside a stone altar where white smoke rises, lifts his eyes to the sky. Dusk, the last gold light on the hills. Humble and thankful. No text, no logos."
+  },
+  {
+   "id": "s-bow",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 9:13 (KJV)",
+   "line": "I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth.",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow crane up. A vivid rainbow arches across clearing grey clouds over a washed green valley, the wooden ark small on the mountainside below, sunlight on the wet grass. Late afternoon after rain. Radiant and quiet. No people, no text, no logos."
+  },
+  {
+   "id": "s-family-bow",
+   "kind": "scene",
+   "lines": [
+    16
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. The family of eight seen from behind stands on the green hillside and looks up at a great rainbow over the valley. Late afternoon, sunlight after rain. Awed and peaceful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-noah-bow",
+   "kind": "scene",
+   "lines": [
+    16
+   ],
+   "seconds": 6,
+   "characters": [
+    "noah"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, looks up at a rainbow across the sky, its colours reflected in his wet eyes. Dusk, low sunlight after rain. Moved and peaceful. No text, no logos."
+  },
+  {
+   "id": "k-insight",
+   "kind": "keeper",
+   "lines": [
+    17
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his eyes bright with the thought. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
+  },
+  {
+   "id": "k-question",
+   "kind": "keeper",
+   "lines": [
+    18
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
+  },
+  {
+   "id": "k-close",
+   "kind": "keeper",
+   "lines": [
+    19
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a warm closing smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+  }
+ ]
+}
