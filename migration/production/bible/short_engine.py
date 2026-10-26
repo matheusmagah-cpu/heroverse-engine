@@ -12,7 +12,8 @@ PLAN: {"voice": WAV, "timeline": timeline.json, "music": FLAC, "music_offset": s
        "shots": [{"clip": MP4, "start": s, "end": s, "src_start": s, "speed": f?}, ...]}   shots tile [0, voice end + tail]
        ("speed", optional: the planned slow-down factor 1-MAX_SLOW of a clip cut into several shots; else computed;
         "talk", optional: {"start", "end"} of the line a talking clip carries - the Keeper or a character speaking -
-        which must sit on that line of the voice track, from the clip's 0 s at normal speed: talk_problems)
+        which must sit on that line of the voice track, from the clip's 0 s at normal speed: talk_problems;
+        "hold", optional: seconds of the clip's last frame held after it, <= HOLD_MAX, E95)
 The voice WAV holds every line in order, the spoken lines in their speakers' own voices; clips are muted (-an), so
 a talking clip's lips meet its line in the mix only through that alignment.
 """
@@ -25,6 +26,7 @@ import tempfile
 
 W, H, FPS = 1080, 1920, 30
 MAX_SLOW = 1.3            # a clip may be slowed this much to fill its words, never looped
+HOLD_MAX = 1.3            # a talking clip's last frame held at most this long (plan_check.TALK_HOLD_MAX, E95)
 CAPTION_WORDS = 2         # words per caption card (large type fits two words on 1080 px)
 FONT = "DejaVu Sans"
 FONT_SIZE = 132           # line height about 7 % of 1920 (PROMPT_GUIDE: captions ~7 % of the frame height)
@@ -93,9 +95,17 @@ def explicit_speed(shot, clip_seconds):
     factor = shot["speed"]
     need = shot["end"] - shot["start"]
     have = clip_seconds - shot.get("src_start", 0.0)
-    if not 1.0 <= factor <= MAX_SLOW or have * factor + 0.02 < need:
+    hold = shot.get("hold", 0.0)
+    if not 1.0 <= factor <= MAX_SLOW or not 0.0 <= hold <= HOLD_MAX or have * factor + hold + 0.02 < need:
         return None
     return factor
+
+
+def hold_filter(shot):
+    """A talking clip's last frame held for `hold` seconds (E95: Pavo keeps our audio only in a clip about 0.45 s
+    longer than the speech, so the gap or the closing tail after it is a still frame)."""
+    hold = shot.get("hold", 0.0)
+    return f"tpad=stop_mode=clone:stop_duration={hold:.3f}," if hold > 0 else ""
 
 
 def chunks(sentence):
@@ -152,7 +162,8 @@ def main(plan_path, out):
             need = s["end"] - s["start"]
             part = tmp / f"p{i:02d}.mp4"
             run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-ss", str(s.get("src_start", 0.0)), "-i", s["clip"], "-an",
-                 "-vf", f"setpts={factor:.4f}*PTS,scale={W}:{H}:flags=lanczos:force_original_aspect_ratio=increase,"
+                 "-vf", f"setpts={factor:.4f}*PTS,{hold_filter(s)}scale={W}:{H}:flags=lanczos:"
+                        "force_original_aspect_ratio=increase,"
                         f"crop={W}:{H},fps={FPS},format=yuv420p",
                  "-t", f"{need:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "17", str(part)])
             parts.append(part)

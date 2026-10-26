@@ -25,7 +25,7 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   voice. Never the Keeper, never narration first.
 - spoken lines: a scene shot may carry `speaker` and `line` (and `reference` when the line is Scripture). A character
   speaker is APPROVED in characters.json, has a `voice`, is in the shot's `characters` (its look word for word), and
-  the prompt says it speaks; its line (2-11.05 s, Pavo input audio) goes in with its references and lipsync_check judges
+  the prompt says it speaks; its line (3.23-11.55 s, Pavo input audio) goes in with its references and lipsync_check judges
   the clip; the clip's length comes from the line (no `seconds`). `speaker: "god"`: Scripture only (a `reference`),
   the shot shows no person (no characters, no figures, no face: light, storm, wind or fire), its `seconds` are the
   Pavo clip's, and the line is mixed as a voice-over (deep voice, no lipsync check). The Keeper never speaks in a
@@ -37,12 +37,13 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   never told.
 - a line with no `reference` that still quotes the KJV (8 consecutive words) is refused (KJV_UNREFERENCED) and counts
   as Scripture, not our words; a `reference` that is not text is REFERENCE_NOT_TEXT.
-- a talking line (the Keeper's, a character's) is at most 11.05 s at the slowest pace: with the 0.35 s gap and the
-  0.6 s margin it fits one 12 s Pavo clip (the closing one, with the tail, 10.2 s).
+- a talking line (the Keeper's, a character's) is 3.23-11.55 s (E95): Pavo keeps our audio only in a 4-12 s clip
+  0.25-0.65 s longer than the speech, so episode_build retimes the line to N - 0.45 s (at most +-10 %) and holds the
+  clip's last frame for the gap or the tail.
 - keeper: only after the last climax shot, for the insight and the close (lines of kind insight or cta); he closes
   (the last shot) and takes at most 25 % of the Short. He speaks the lines he carries (Pavo input audio + his
-  approved reference); each Keeper clip's audio is 2-12 s (estimated at the slowest measured Kokoro pace, measured
-  again after the voice); the last one also holds the 1.2 s tail and a 0.6 s margin, so it is at most 10.2 s. His
+  speaking reference); each Keeper line is 3.23-11.55 s (estimated at the slowest measured Kokoro pace, measured and
+  retimed again after the voice, E95), the closing one too (its tail is a held frame). His
   prompt carries his look and one wardrobe variant word for word and says he speaks.
 - the lesson (insight + cta lines + every Keeper second) takes at most 25 % of the Short.
 - scene: 4-12 s of Pavo video, a prompt in PROMPT_GUIDE's five-part form; each character APPROVED with its look word
@@ -86,7 +87,7 @@ LINE_GAP = 0.35                      # silence between lines (episode_build.LINE
 TAIL = 1.2                           # short_engine tail after the last word
 KEEPER_AUDIO = (2.0, 12.0)           # Flash input audio, per request
 SPEAKER_AUDIO = KEEPER_AUDIO         # a character's line goes to Pavo the same way; God's line fills one clip
-KEEPER_LAST_MAX = 12.0 - TAIL - 0.6  # the closing clip also holds the tail and a margin (clips <= 12 s)
+KEEPER_LAST_MAX = 12.0 - 0.45       # the closing clip too: its tail is a held last frame (E95), not clip time
 KEEPER_SHARE_MAX = 0.25
 LESSON_SHARE_MAX = 0.25
 SCENE_SECONDS = (4, 12)
@@ -116,9 +117,18 @@ NO_PEOPLE_TAIL = re.compile(r"(?i)\bno (people|person|faces?|figures?)\b")
 SPEAKS = re.compile(r"(?i)\bspeak")
 # a line without a `reference` that quotes the KJV anyway: 8 consecutive words of the KJV (kjv_check's text)
 KJV_RUN = 8
-TALK_CLIP_MAX = 12.0                 # Pavo clip ceiling: a talking line + the gap or tail after it + the margin
-TALK_MARGIN = 0.6                    # episode_build.KEEPER_MARGIN
-TALK_MAX = TALK_CLIP_MAX - LINE_GAP - TALK_MARGIN   # 11.05 s: a talking line followed by another line
+# E95 (measured 2026-10-26, evidence/pavo/20261026/keeper-audio-binding.json): Pavo keeps our input audio only when
+# the clip it is asked for is at most ~0.65 s longer than the speech; at 1.6 s or more it makes its own track. A talking
+# clip is ceil(speech) seconds (4-12), the speech 0.25-0.65 s shorter than it: episode_build retimes a line that misses
+# that window to N - 0.45 s (atempo, pitch kept, at most +-10 %); the gap or tail after it is the clip's last frame held.
+TALK_CLIP = (4, 12)                  # Pavo clip seconds
+TALK_PAD = (0.25, 0.65)              # clip seconds - speech seconds that keep our audio
+TALK_PAD_TARGET = 0.45               # a retimed line is N - 0.45 s
+TALK_RETIME_MAX = 0.10
+TALK_HOLD_MAX = 1.3                  # a talking clip's last frame held at most this long (the gap or the tail)
+TALK_CLIP_MAX = float(TALK_CLIP[1])
+TALK_MAX = TALK_CLIP[1] - TALK_PAD_TARGET                                   # 11.55 s at the slowest pace
+TALK_MIN = (TALK_CLIP[0] - TALK_PAD_TARGET) / (1 + TALK_RETIME_MAX)         # 3.23 s: retimed into a 4 s clip
 _KJV_TEXT = []
 
 
@@ -247,9 +257,10 @@ def _speaker_problems(i, s, chars, span, span_slowest):
         return [f"SPEAKER_LINE_MISSING shot {i} {sid}"]
     if span_slowest > TALK_MAX:
         out.append(f"SPEAKER_LINE_TOO_LONG shot {i} {sid} (~{span_slowest:.1f} s at the slowest pace; <= {TALK_MAX:.2f} s: "
-                   "the line, the gap after it and the margin fit one 12 s clip)")
-    if span < SPEAKER_AUDIO[0]:
-        out.append(f"SPEAKER_LINE_TOO_SHORT shot {i} {sid} (>= 2 s)")
+                   "the line and Pavo's 0.45 s fit one 12 s clip, E95)")
+    low = SPEAKER_AUDIO[0] if who == ch.GOD else TALK_MIN
+    if span < low:
+        out.append(f"SPEAKER_LINE_TOO_SHORT shot {i} {sid} (>= {low:.2f} s{'' if who == ch.GOD else ': a talking line fills a 4 s clip, E95'})")
     if who == ch.NARRATOR:
         return out + [f"SPEAKER_KEEPER shot {i} {sid} (the Keeper speaks only in his own shots, at the close)"]
     if who == ch.GOD:
@@ -421,8 +432,9 @@ def check(plan, chars=None):
             if slowest > limit:
                 problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {s['id']} (~{slowest:.1f} s at the slowest pace; "
                                 f"Pavo input audio <= {limit:.1f} s)")
-            if span < KEEPER_AUDIO[0]:
-                problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (input audio >= 2 s)")
+            if span < TALK_MIN:
+                problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (input audio >= {TALK_MIN:.2f} s: it fills a "
+                                "4 s clip, E95)")
             if s.get("characters") not in (None, [ch.NARRATOR]) or s.get("seconds") is not None:
                 problems.append(f"KEEPER_SHOT_FIELDS shot {i} {s['id']} (characters and seconds come from the line)")
             if not keeper:
