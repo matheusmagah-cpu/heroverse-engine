@@ -130,6 +130,17 @@ Produce the master and package, retain provenance, and deliver the frozen techni
 - An engine PR is reviewed before merge, not after.
 - Actions minutes cost nothing: the engine repository is public, and standard GitHub-hosted runners are free for public repositories (owner, 2026-10-26: it stays public; E102). The daily report (`ops/minutes.py`) lists minutes per workflow as a speed and wall-clock measure only. A repeated build is still the first thing to cut, because it delays the work.
 
+### Token budget (owner, 2026-10-26: "never run out of tokens; manage them intelligently")
+
+The biggest cost is context re-read on every turn, not output. Rules for every session:
+- **One orchestrator, kept small.** When the main session's context passes ~400k tokens (get_session `context_usage.used_tokens`), it writes a handoff (`evidence/handoff/<date>-<n>.md`: in-flight PRs, agents, tasks, decisions) and a fresh orchestrator session continues from it. Triggers are re-pointed to the new session id.
+- **Model by task.** Mechanical checks (light clock, sweeps of small diffs, CI reading) on Haiku; reviews, fixes and plans on Sonnet when the work is routine; Opus only for design, diagnosis and the 9.5 review. Never more than 3 agents at once, and never two on the same subject.
+- **Briefs closed.** Every agent gets a bounded brief (files, limits, generation cap, stop rule) and reports once; follow-ups go to the same agent, never a new one.
+- **One review pass** (code-review low) per PR, plus a security sweep only when workflows, secrets or `migration/publish/` change. Fixes from review go back to the same author in one message.
+- **No polling.** Unsubscribe from a PR at merge; one self check-in per waiting item; the light clock pings the orchestrator only on failures.
+- **No rework** (section above): a probe or preflight before any build, so a failure costs one cheap call, not a build plus its review.
+- **Rate limit.** Before a fan-out, read `rate_limit_info`; when the five-hour window is close to its limit, defer non-urgent work to after `resetsAt`.
+
 ### Shorts are a production delivery, with their own review
 
 After the long video's prerequisite gate passes (`publish/shorts_prerequisite.py`), derive the Short from its own narration and pictures. Start and end on full sentences, apply the structure's Shorts rules and link back to the long video. Deliver each Short through stages 2 and 3 with its own hash, technical checks and audiovisual approval. The long video's approval does not approve a Short. An existing preserved Short resumes at its missing check rather than restarting production.
