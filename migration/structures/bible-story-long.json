@@ -220,6 +220,13 @@
    "keeper_share_max": 0.25,
    "keeper_in_cold_open": false,
    "burned_captions": false,
+   "aspect_ratio": "16:9",
+   "keeper_promise_max_s": 20,
+   "keeper_insight_max_s": 125,
+   "keeper_close_max_s": 30,
+   "slow_stretch_max_s": 20,
+   "rehook_gap_max_s": 240,
+   "plan_note": "production/bible/long_plan_check.py (bible-long-plan-v1) reads this same block for the long's shot plan: keeper_promise_max_s = the keeper_promise beat's at_s span, keeper_insight_max_s and keeper_close_max_s = those beats' max_s, slow_stretch_max_s = the retention rule's 20 s, rehook_gap_max_s = the 4 min after which a chapter needs a mid-chapter re-hook (test_long_plan_check keeps the gate and the beat map equal)",
    "segment_fields": {
     "conflict": "true on the cold-open line that names the conflict; it starts inside cold_open_s and is spoken by a character (speaker), never the Keeper",
     "speaker": "who speaks a line on screen (a character of production/characters, or god for God's voice)",

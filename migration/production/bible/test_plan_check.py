@@ -527,5 +527,8 @@ class Plan(unittest.TestCase):
             self.assertEqual(run(str(bad)), 1)
 
 
+# the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
+from test_long_plan_check import DraftArc1, Grammar as LongGrammar, NoRendererReadsTheNewQaYet, StoryQa  # noqa: E402,F401,E501
+
 if __name__ == "__main__":
     unittest.main()
