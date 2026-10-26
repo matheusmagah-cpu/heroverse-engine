@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import captions  # noqa: E402
 import publish_video as pv  # noqa: E402
 
 VIDEO_BYTES = b"0" * 10
@@ -38,6 +39,8 @@ class FakeSession:
             return R(200, {"items": [{"id": self.channel}]})
         if url.endswith("playlists"):
             return R(200, {"items": []})
+        if url.endswith("captions"):  # E107: our track, once inserted, is listed as serving
+            return R(200, {"items": getattr(self, "caption_items", [])})
         return R(200, {"items": [{"snippet": {"channelId": pv.CHANNEL, "title": "T"}, "status": {"privacyStatus": "private"}}]})
 
     def post(self, url, params=None, **kw):
@@ -47,6 +50,10 @@ class FakeSession:
             return R(200, {}, {"Location": "https://upload/session"})
         if url.endswith("playlists"):
             return R(200, {"id": "PL1"})
+        if url.endswith("captions"):
+            self.caption_items = [{"id": "CAP1", "snippet": {"language": "en", "name": "English", "trackKind": "standard",
+                                                             "isDraft": False, "status": "serving"}}]
+            return R(200, self.caption_items[0])
         return R(200, {})
 
     def put(self, url, data=None, headers=None):
@@ -77,7 +84,8 @@ class Publish(unittest.TestCase):
             self.assertEqual(receipt["video_id"], "VID123")
             self.assertEqual(first.upload_body["status"]["privacyStatus"], "public")  # validated before upload
             self.assertNotIn("publishAt", first.upload_body["status"])
-            self.assertEqual(set(receipt["steps"]), {"thumbnail", "captions", "playlist"})
+            self.assertEqual(set(receipt["steps"]), {"thumbnail", "captions", "captions_track", "captions_status", "playlist"})
+            self.assertEqual(receipt["steps"]["captions_status"], "serving")   # E107: the served track, not HTTP 200
             second = FakeSession()
             self.run_once(d, second)
             self.assertFalse(any(c[0] == "PUT" for c in second.calls))  # never uploads twice
@@ -89,7 +97,7 @@ class Publish(unittest.TestCase):
                 self.run_once(Path(t), FakeSession(channel="UCother"))
 
     def test_srt(self):
-        self.assertEqual(pv.srt([{"start": 61.5, "end": 62.25, "text": "x"}]), "1\n00:01:01,500 --> 00:01:02,250\nx\n")
+        self.assertEqual(captions.srt([{"start": 61.5, "end": 62.25, "text": "x"}]), "1\n00:01:01,500 --> 00:01:02,250\nx\n")
 
 
 class NewUploadOwnerFloor(unittest.TestCase):
