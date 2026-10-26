@@ -1,0 +1,429 @@
+#!/usr/bin/env python3
+"""long_plan_check.py: a Bible-story long's shot plan (`bible-long-plan-v1`) is refused before any voice or Pavo call
+when it misses the registered structure (structures/bible-story-long.json script.gate, the numbers script_check reads
+too) or a row of the frozen story QA it will be measured against (qa_criteria_story_v2.json). Also: story QA v2 is v1
+with only the caption rows replaced (owner, 2026-10-26: "Nova régua, sem legenda"), and v1 stays byte-identical.
+
+Runs in pr-checks through test_plan_check.py (which imports these cases), so no workflow changes."""
+import copy
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[2]
+sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(ROOT / "migration" / "production"))
+import long_plan_check as lc  # noqa: E402
+
+DRAFT_PLAN = HERE / "plans" / "arc-01-long.json"
+QA_V1 = ROOT / "migration" / "production" / "qa_criteria_story_v1.json"
+QA_V2 = ROOT / "migration" / "production" / "qa_criteria_story_v2.json"
+QA_V1_SHA256 = "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360"   # main, frozen 2026-10-25
+
+
+KEEPER_LOOK = "an elderly storyteller with a silver beard"
+EVE_LOOK = "a woman of about twenty-five with long black hair"
+NOAH_LOOK = "a strong elderly man with a grey beard"
+CHARS = {
+    "keeper": {"name": "The Keeper (series narrator)", "status": "APPROVED", "look": KEEPER_LOOK, "refs": ["front"],
+               "voice": "am_michael", "wardrobe": {"fire": "seated by a small campfire"}},
+    "eve": {"name": "Eve", "status": "APPROVED", "look": EVE_LOOK, "refs": ["full"], "voice": "af_heart"},
+    "noah": {"name": "Noah", "status": "DRAFT", "look": NOAH_LOOK, "refs": [], "voice": "bm_george"},
+}
+ARCS = {"arc-x": {"id": "arc-x", "shorts": ["x-01-short", "x-02-short", "x-03-short", "x-04-short"],
+                  "long": {"pilot": "pilot-099"}, "next": "arc-y"},
+        "arc-y": {"id": "arc-y", "shorts": ["y-01-short"], "long": {"pilot": None}, "next": None}}
+STYLE = "Painterly cinematic realism, cinema camera."
+# 20 words: 7.27 s at the normal pace; two of them (+ gaps) are a 15.2 s block over three 5.1 s cuts
+FILLER = "Ten generations after Eden the earth is full of people and noise, and nobody looks up at the sky."
+QUESTION = "How did a very good world come to this, and who would be left standing when it ended?"
+OPEN_LINE = "Why do you hide from the voice of the Lord in the garden?"       # 12 words, "you" at 0.7 s
+GOD_LINE = "The end of all flesh is come before me; for the earth is filled with violence through them."
+KEEPER_12 = "This story is older than any city, and it still asks about us."   # 12 words
+
+
+def keeper(sid, lines, beat):
+    return {"id": sid, "kind": "keeper", "beat": beat, "lines": lines,
+            "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
+                      "holds his head level, looks straight into the camera and speaks to the camera. Night in the "
+                      "desert, firelight. Warm and grave."}
+
+
+def scene(sid, lines, beat="chapter", chapter=None, chars=("eve",), seconds=6, **extra):
+    who = ", ".join({"eve": f"Eve, {EVE_LOOK}", "noah": f"Noah, {NOAH_LOOK}"}[c] for c in chars) \
+        or "a crowd seen from behind"
+    s = {"id": sid, "kind": "scene", "beat": beat, "lines": lines, "seconds": seconds, "characters": list(chars),
+         "prompt": f"{STYLE} Wide shot, slow tracking shot. {who} walks through the tall grass. Dusk, low gold light. "
+                   "Restless and alive."}
+    if chapter:
+        s["chapter"] = chapter
+    if not chars and "establishing" not in extra:
+        s["figures"] = "anonymous"
+    s.update(extra)
+    return s
+
+
+class Builder:
+    """A plan that passes at the real gate numbers: 4 chapters of 15.2 s blocks (two lines, three cuts)."""
+
+    def __init__(self, blocks_per_chapter=14):
+        self.narration, self.shots = [], []
+        self.blocks_per_chapter = blocks_per_chapter
+
+    def line(self, kind, text, **extra):
+        self.narration.append(dict({"kind": kind, "text": text}, **extra))
+        return len(self.narration) - 1
+
+    def block(self, prefix, beat, chapter=None, last=FILLER, rehook=False, cuts=3, **extra):
+        a = self.line("story", FILLER)
+        b = self.line("story", last, **({"rehook": True} if rehook else {}))
+        for k in range(cuts):
+            self.shots.append(scene(f"{prefix}-{k}", [a, b], beat, chapter, **(extra if k == 0 else {})))
+
+    def build(self):
+        self.shots.append({"id": "s-open", "kind": "scene", "beat": "cold_open", "speaker": "eve", "line": OPEN_LINE,
+                           "conflict": True, "characters": ["eve"],
+                           "prompt": f"{STYLE} Medium close-up, slow push-in. Eve, {EVE_LOOK}, turns and speaks to him, "
+                                     "her lips moving clearly with every word. A garden at dusk, low gold light. Tense."})
+        self.block("s-cold", "cold_open")
+        self.block("s-cold2", "cold_open", last=QUESTION, rehook=True)   # the Keeper from ~34 s (after 30 s)
+        self.shots.append(keeper("k-promise-1", [self.line("promise", KEEPER_12)], "keeper_promise"))
+        self.shots.append(keeper("k-promise-2", [self.line("promise", KEEPER_12)], "keeper_promise"))
+        for c, chap in enumerate(("c1", "c2", "c3", "c4")):
+            for k in range(self.blocks_per_chapter):
+                end = k == self.blocks_per_chapter - 1
+                mid = k == self.blocks_per_chapter // 2
+                if chap == "c4" and k == 3:
+                    self.shots.append({"id": "s-god", "kind": "scene", "beat": "chapter", "chapter": "c4",
+                                       "speaker": "god", "line": GOD_LINE, "reference": "Genesis 6:13 (KJV)",
+                                       "seconds": 8, "characters": [],
+                                       "prompt": f"{STYLE} Extreme wide shot, slow push-in. Black storm clouds roll "
+                                                 "over the plain, lightning inside them. Dusk, a hard wind. Ominous. "
+                                                 "No people, no text, no logos."})
+                    self.block(f"s-{chap}-{k}", "chapter", chap, climax=True)
+                    continue
+                beat = "payoff" if chap == "c4" and end else "chapter"
+                self.block(f"s-{chap}-{k}", beat, chap, last=QUESTION if (end and chap != "c4") or mid else FILLER,
+                           rehook=(end and chap != "c4") or mid)
+        insight = ("Notice the order. Grief comes before judgment, and grace before the flood.",   # 12 words
+                   "This story is older than any city, and it still asks about us.")
+        for k in range(6):
+            self.shots.append(keeper(f"k-insight-{k}", [self.line("insight", insight[k % 2] if k else KEEPER_12)],
+                                     "keeper_insight"))
+        self.shots.append(keeper("k-close-1", [self.line("cta", "Would you have walked against the crowd? Tell me "
+                                                         "in the comments.")], "keeper_close"))
+        self.shots.append(keeper("k-close-2", [self.line("cta", "Next on the channel, the full story of Noah and the "
+                                                         "flood.")], "keeper_close"))
+        return {"version": "bible-long-plan-v1", "long": "arc-x-long", "arc": "arc-x", "pilot": "pilot-099",
+                "aspect_ratio": "16:9", "burned_captions": False,
+                "chapters": [{"id": f"c{k + 1}", "short": s, "title": f"Chapter {k + 1}"}
+                             for k, s in enumerate(ARCS["arc-x"]["shorts"])],
+                "narration": self.narration, "shots": self.shots}
+
+
+def plan(**kw):
+    return Builder(**kw).build()
+
+
+def check(p, **kw):
+    kw.setdefault("chars", CHARS)
+    kw.setdefault("arcs", ARCS)
+    return lc.check(p, **kw)
+
+
+def codes(result, key="problems"):
+    return [x.split()[0] for x in result[key]]
+
+
+def qa_without_conflicts():
+    """The frozen v2 rows an acted all-Pavo long cannot meet, set aside so a test sees only the plan's own rows."""
+    q = copy.deepcopy(lc.qa())
+    q["grammar"].update({"figure_present_fraction_max": 1.0, "footage_picture_share_min": 0.0,
+                         "ai_video_picture_share_max": 1.0, "title_card_seconds": None})
+    return q
+
+
+def insert_line(p, at, line):
+    """Insert a narration line at index `at`, every shot's later line indices shifted: the new line's index."""
+    p["narration"].insert(at, line)
+    for s in p["shots"]:
+        if s.get("lines"):
+            s["lines"] = [k + 1 if k >= at else k for k in s["lines"]]
+    return at
+
+
+def shot(p, sid):
+    return next(s for s in p["shots"] if s["id"] == sid)
+
+
+class Grammar(unittest.TestCase):
+    def test_the_builder_plan_passes_at_the_real_gate(self):
+        r = check(plan(), qa=qa_without_conflicts())
+        self.assertEqual(r["problems"], [])
+        self.assertEqual(r["pending"], [])
+        e = r["estimate"]
+        self.assertTrue(14 <= e["minutes"] <= 18, e)
+        self.assertTrue(0.6 <= e["climax_at"] <= 0.85, e)
+        self.assertGreaterEqual(e["rehooks"], 6)
+        self.assertLessEqual(e["keeper_share"], 0.25)
+
+    def test_the_frozen_qa_rows_an_acted_long_cannot_meet_are_pending_owner_rows(self):
+        # story v2 = v1 apart from captions: no figure on screen, >= 40 % real licensed footage, <= 55 % Pavo, and a
+        # 4-7 s title card first; an acted long with the Keeper on screen meets none of them (owner decision)
+        r = check(plan())
+        self.assertEqual(r["problems"], [])
+        found = codes(r, "pending")
+        for row in ("QA_CONFLICT_FIGURES", "QA_CONFLICT_REAL_FOOTAGE", "QA_CONFLICT_AI_SHARE", "QA_CONFLICT_TITLE_CARD"):
+            self.assertIn(row, found)
+
+    def test_the_numbers_are_the_structure_gate_that_script_check_reads(self):
+        import script_check
+        self.assertEqual(lc.gate(), script_check.story_gate())
+        p = plan()
+        g = dict(lc.gate(), length_min=[20, 30])
+        self.assertIn("LONG_LENGTH", codes(check(p, gate=g, qa=qa_without_conflicts())))
+
+    def test_the_gate_and_the_beat_map_agree(self):
+        s = json.loads(lc.STRUCTURE.read_text())["script"]
+        beats = {b["beat"]: b for b in s["beats"]}
+        g = s["gate"]
+        self.assertEqual(g["length_min"], s["length_min"])
+        self.assertEqual(g["cold_open_s"], beats["cold_open"]["at_s"][1])
+        self.assertEqual(g["keeper_promise_max_s"], beats["keeper_promise"]["at_s"][1] - beats["keeper_promise"]["at_s"][0])
+        self.assertEqual(g["keeper_insight_max_s"], beats["keeper_insight"]["max_s"])
+        self.assertEqual(g["keeper_close_max_s"], beats["keeper_close"]["max_s"])
+        self.assertEqual(g["climax_at"], beats["climax"]["at"])
+        self.assertIn("longer than 20 s", " ".join(s["retention"]))
+        self.assertEqual(g["slow_stretch_max_s"], 20)
+
+    def test_a_long_is_16_9_with_no_burned_captions(self):
+        p = plan()
+        p["aspect_ratio"] = "9:16"
+        p["burned_captions"] = True
+        found = codes(check(p, qa=qa_without_conflicts()))
+        self.assertIn("ASPECT_RATIO", found)
+        self.assertIn("BURNED_CAPTIONS", found)
+
+    def test_the_cold_open_is_acted_and_spoken_never_the_keeper(self):
+        p = plan()
+        p["shots"][0]["conflict"] = False
+        self.assertIn("COLD_OPEN_CONFLICT", codes(check(p, qa=qa_without_conflicts())))
+        p = plan()
+        k = keeper("k-early", [p["shots"][1]["lines"][0]], "cold_open")
+        p["shots"][1] = k
+        found = codes(check(p, qa=qa_without_conflicts()))
+        self.assertIn("KEEPER_IN_COLD_OPEN", found)
+        # a cold open over 30 s: three more cuts of a 15.2 s block before the promise
+        p = plan()
+        i = next(k for k, s in enumerate(p["shots"]) if s["beat"] == "keeper_promise")
+        a = insert_line(p, p["shots"][i]["lines"][0], {"kind": "story", "text": FILLER})
+        insert_line(p, a + 1, {"kind": "story", "text": FILLER})
+        p["shots"][i:i] = [scene(f"s-late-{k}", [a, a + 1], "cold_open") for k in range(3)]
+        self.assertIn("COLD_OPEN_LENGTH", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_the_cold_open_ends_on_an_open_question(self):
+        p = plan()
+        last = [s for s in p["shots"] if s["beat"] == "cold_open"][-1]
+        p["narration"][last["lines"][-1]]["text"] = FILLER
+        self.assertIn("COLD_OPEN_NO_QUESTION", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_the_keeper_promise_is_on_screen_and_at_most_20_s(self):
+        p = plan()
+        i = next(k for k, s in enumerate(p["shots"]) if s["beat"] == "keeper_promise")
+        for k in range(3):
+            n = insert_line(p, p["shots"][i]["lines"][0], {"kind": "promise", "text": KEEPER_12})
+            p["shots"].insert(i, keeper(f"k-promise-x{k}", [n], "keeper_promise"))
+        found = codes(check(p, qa=qa_without_conflicts()))
+        self.assertIn("KEEPER_PROMISE_LENGTH", found)
+
+    def test_re_hooks_count_spacing_and_every_chapter_end(self):
+        p = plan()
+        for x in p["narration"]:
+            x.pop("rehook", None)
+        found = codes(check(p, qa=qa_without_conflicts()))
+        self.assertIn("REHOOKS", found)
+        self.assertIn("CHAPTER_END_NO_REHOOK", found)
+        self.assertIn("REHOOK_GAP", found)
+
+    def test_one_acted_climax_at_0_6_to_0_85_on_a_kjv_line(self):
+        p = plan()
+        shot(p, "s-c2-3-0")["climax"] = True
+        self.assertIn("CLIMAX_COUNT", codes(check(p, qa=qa_without_conflicts())))
+        p = plan()
+        shot(p, "s-c4-3-0").pop("climax")
+        shot(p, "s-c1-3-0")["climax"] = True
+        self.assertIn("CLIMAX_POSITION", codes(check(p, qa=qa_without_conflicts())))
+        p = plan()
+        p["shots"].remove(shot(p, "s-god"))
+        self.assertIn("CLIMAX_NO_KJV_LINE", codes(check(p, qa=qa_without_conflicts())))
+        p = plan()
+        shot(p, "s-c4-3-0").pop("climax")
+        shot(p, "s-god")["climax"] = True
+        self.assertIn("CLIMAX_NOT_ACTED", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_the_payoff_follows_the_climax(self):
+        p = plan()
+        for s in p["shots"]:
+            if s.get("beat") == "payoff":
+                s["beat"] = "chapter"
+        self.assertIn("PAYOFF_MISSING", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_the_keeper_insight_and_close_limits(self):
+        p = plan()
+        i = next(k for k, s in enumerate(p["shots"]) if s["beat"] == "keeper_close")
+        for k in range(23):
+            n = insert_line(p, p["shots"][i + k]["lines"][0], {"kind": "insight", "text": KEEPER_12})
+            p["shots"].insert(i + k, keeper(f"k-more-{k}", [n], "keeper_insight"))
+        found = codes(check(p, qa=qa_without_conflicts()))
+        self.assertIn("KEEPER_INSIGHT_LENGTH", found)
+        p = plan()
+        for k in range(6):
+            p["narration"].append({"kind": "cta", "text": KEEPER_12})
+            p["shots"].append(keeper(f"k-close-x{k}", [len(p["narration"]) - 1], "keeper_close"))
+        self.assertIn("KEEPER_CLOSE_LENGTH", codes(check(p, qa=qa_without_conflicts())))
+        p = plan()
+        p["narration"][shot(p, "k-close-1")["lines"][0]]["text"] = "Walk against the crowd, and tell me about it in the comments."
+        self.assertIn("CLOSE_NO_QUESTION", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_the_keeper_share_is_at_most_a_quarter(self):
+        g = dict(lc.gate(), keeper_share_max=0.05)
+        self.assertIn("KEEPER_SHARE", codes(check(plan(), gate=g, qa=qa_without_conflicts())))
+
+    def test_no_stretch_without_people_over_20_s(self):
+        p = plan()
+        for s in p["shots"]:
+            if s["id"].startswith(("s-c2-4-", "s-c2-5-")):
+                s.update(characters=[], establishing=True)
+                s.pop("figures", None)
+                s["prompt"] = (f"{STYLE} Extreme wide establishing shot, slow crane down. A dry plain under heavy "
+                               "clouds. Dusk. Vast and empty. No people, no text, no logos.")
+        self.assertIn("SLOW_STRETCH", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_every_cut_is_a_4_to_7_s_hold_of_the_frozen_qa(self):
+        p = plan()
+        s = shot(p, "s-c1-0-0")
+        p["shots"].insert(p["shots"].index(s), dict(copy.deepcopy(s), id="s-c1-0-x"))
+        self.assertIn("HOLD_UNDER_QA", codes(check(p, qa=qa_without_conflicts())))   # four cuts of 3.8 s
+        p = plan()
+        p["shots"].remove(shot(p, "s-c1-0-2"))
+        self.assertIn("HOLD_OVER_QA", codes(check(p, qa=qa_without_conflicts())))    # two cuts of 7.6 s
+
+    def test_draft_characters_are_pending_with_their_look_word_for_word(self):
+        p = plan()
+        s = shot(p, "s-c4-12-1")
+        s["characters"] = ["noah"]
+        s["prompt"] = s["prompt"].replace(f"Eve, {EVE_LOOK}", f"Noah, {NOAH_LOOK}")
+        r = check(p, qa=qa_without_conflicts())
+        self.assertEqual(r["problems"], [])
+        self.assertEqual(codes(r, "pending"), ["CHARACTER_PENDING"])
+        s["prompt"] = s["prompt"].replace(NOAH_LOOK, "an old man")
+        self.assertIn("CHARACTER_LOOK_CHANGED", codes(check(p, qa=qa_without_conflicts())))
+        s["characters"] = ["cain"]
+        self.assertIn("CHARACTER_UNKNOWN", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_a_named_character_is_listed_so_the_references_go_in(self):
+        p = plan()
+        s = shot(p, "s-c2-1-1")
+        s["prompt"] = s["prompt"].replace("walks through the tall grass", "walks toward Noah through the tall grass")
+        self.assertIn("CHARACTER_NOT_LISTED", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_a_window_reuses_a_clip_never_next_to_it(self):
+        p = plan()
+        base = shot(p, "s-c1-1-0")
+        w = shot(p, "s-c1-1-2")
+        for k in ("prompt", "seconds", "characters"):
+            w.pop(k)
+        w["window_of"] = base["id"]
+        base["seconds"] = 8                       # two ~5.1 s holds of one 8 s clip (slowed 1.3 at most)
+        r = check(p, qa=qa_without_conflicts())
+        self.assertEqual(r["problems"], [])
+        self.assertEqual(r["estimate"]["generations"]["windows"], 1)
+        w["window_of"] = "s-c1-1-1"
+        self.assertIn("WINDOW_ADJACENT", codes(check(p, qa=qa_without_conflicts())))
+        w["window_of"] = base["id"]
+        base["seconds"] = 4
+        self.assertIn("FOOTAGE_SHORT", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_the_second_person_hook_of_the_frozen_qa(self):
+        p = plan()
+        p["shots"][0]["line"] = "Why do they hide from the voice of the Lord in the garden?"
+        self.assertIn("HOOK_SECOND_PERSON", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_chapters_are_the_arcs_shorts_or_an_owner_row(self):
+        p = plan()
+        p["chapters"][3]["short"] = "z-09-short"
+        r = check(p, qa=qa_without_conflicts())
+        self.assertEqual(r["problems"], [])
+        self.assertIn("ARC_SHORTS", codes(r, "pending"))
+        p["arc"] = "arc-q"
+        self.assertIn("ARC_UNKNOWN", codes(check(p, qa=qa_without_conflicts())))
+
+    def test_strict_cli_fails_on_a_pending_row(self):
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d) / "p.json"
+            f.write_text(json.dumps(plan()))
+            cli = [sys.executable, str(HERE / "long_plan_check.py"), str(f)]
+            # the builder's cast is not the real character bible: CHARACTER_UNKNOWN etc. are problems (exit 1)
+            run = subprocess.run(cli, capture_output=True)
+            self.assertEqual(run.returncode, 1)
+            self.assertIn(b'"problems"', run.stdout)
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d) / "p.json"
+            f.write_text(DRAFT_PLAN.read_text())
+            # the arc-1 draft: no problem, so exit 0; --strict also fails on its pending owner rows
+            self.assertEqual(subprocess.run([sys.executable, str(HERE / "long_plan_check.py"), str(f)],
+                                            capture_output=True).returncode, 0)
+            self.assertEqual(subprocess.run([sys.executable, str(HERE / "long_plan_check.py"), str(f), "--strict"],
+                                            capture_output=True).returncode, 1)
+
+
+class DraftArc1(unittest.TestCase):
+    def test_the_arc_1_draft_passes_but_for_owner_rows(self):
+        r = lc.check(json.loads(DRAFT_PLAN.read_text()))
+        self.assertEqual(r["problems"], [])
+        allowed = ("CHARACTER_PENDING", "QA_CONFLICT_FIGURES", "QA_CONFLICT_REAL_FOOTAGE", "QA_CONFLICT_AI_SHARE",
+                   "QA_CONFLICT_TITLE_CARD", "ARC_SHORTS")
+        self.assertTrue(set(codes(r, "pending")) <= set(allowed), r["pending"])
+        self.assertTrue(14 <= r["estimate"]["minutes"] <= 18, r["estimate"])
+        cast = {c for s in json.loads(DRAFT_PLAN.read_text())["shots"] for c in s.get("characters", [])}
+        self.assertTrue({"adam", "eve", "serpent", "noah", "scoffer"} <= cast, cast)
+
+
+class StoryQaV2(unittest.TestCase):
+    def test_v1_stays_byte_identical_to_main(self):
+        self.assertEqual(hashlib.sha256(QA_V1.read_bytes()).hexdigest(), QA_V1_SHA256)
+
+    def test_v2_is_frozen_at_its_pinned_hash(self):
+        self.assertEqual(hashlib.sha256(QA_V2.read_bytes()).hexdigest(), lc.QA_SHA256)
+
+    def test_v2_differs_from_v1_only_in_the_caption_rows(self):
+        v1, v2 = json.loads(QA_V1.read_text()), json.loads(QA_V2.read_text())
+        meta = {"version", "frozen_at_utc", "basis"}
+        self.assertEqual(set(v1) - meta, set(v2) - meta)
+        for k in set(v1) - meta - {"grammar"}:
+            self.assertEqual(v1[k], v2[k], k)
+        old = {"caption_coverage_of_speech_min", "caption_hold_seconds_median", "caption_chars_max",
+               "caption_words_max", "caption_box"}
+        new = {"burned_captions", "caption_track", "srt_coverage_of_speech_min", "srt_cue_seconds_median",
+               "srt_cue_chars_max", "srt_cue_words_max"}
+        g1, g2 = v1["grammar"], v2["grammar"]
+        self.assertEqual(set(g1) - old, set(g2) - new)
+        for k in set(g1) - old:
+            self.assertEqual(g1[k], g2[k], k)
+        # the same numbers, now on the .srt track: nothing loosened
+        self.assertEqual(g2["srt_coverage_of_speech_min"], g1["caption_coverage_of_speech_min"])
+        self.assertEqual(g2["srt_cue_seconds_median"], g1["caption_hold_seconds_median"])
+        self.assertEqual(g2["srt_cue_chars_max"], g1["caption_chars_max"])
+        self.assertEqual(g2["srt_cue_words_max"], g1["caption_words_max"])
+        self.assertIs(g2["burned_captions"], False)
+        self.assertEqual((v1["version"], v2["version"]), ("story-qa-criteria-v1", "story-qa-criteria-v2"))
+        self.assertTrue(v2["frozen_before_first_story_render"])
+
+
+if __name__ == "__main__":
+    unittest.main()

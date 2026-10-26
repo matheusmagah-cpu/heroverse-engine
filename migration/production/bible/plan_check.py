@@ -377,9 +377,28 @@ def check(plan, chars=None):
     narration = plan.get("narration")
     if not isinstance(narration, list) or not narration:
         return {"problems": problems + ["NARRATION_MISSING"], "pending": pending, "estimate": {}}
+    problems += narration_problems(narration)
+    if problems and any(p.startswith("NARRATION_LINE") for p in problems):
+        return {"problems": problems, "pending": pending, "estimate": {}}
+
+    n = len(narration)
+    shots = plan.get("shots")
+    if not isinstance(shots, list) or not shots:
+        return {"problems": problems + ["SHOTS_MISSING"], "pending": pending, "estimate": {}}
+    shape, bad_lines = shot_shape_problems(shots, n)
+    problems += shape
+    if bad_lines:
+        return {"problems": problems, "pending": pending, "estimate": {}}
+    return _check_shots(plan, chars, narration, shots, problems, pending)
+
+
+def narration_problems(narration, kinds=KINDS):
+    """Each narration line: a known kind and text; Scripture with its reference, the KJV word for word; no unreferenced
+    KJV quotation (shared with long_plan_check, the long's plan)."""
+    problems = []
     for k, line in enumerate(narration):
-        if not isinstance(line, dict) or line.get("kind") not in KINDS or not str(line.get("text", "")).strip():
-            problems.append(f"NARRATION_LINE {k} (kind {'/'.join(KINDS)} and text)")
+        if not isinstance(line, dict) or line.get("kind") not in kinds or not str(line.get("text", "")).strip():
+            problems.append(f"NARRATION_LINE {k} (kind {'/'.join(kinds)} and text)")
             continue
         if line.get("reference") is not None and not isinstance(line["reference"], str):
             problems.append(f"REFERENCE_NOT_TEXT line {k} (a reference such as \"Genesis 6:5 (KJV)\")")
@@ -396,13 +415,14 @@ def check(plan, chars=None):
             if quoted:
                 problems.append(f"KJV_UNREFERENCED line {k} (quotes {quoted[0]}: \"{quoted[1]}\"; make it kind "
                                 "scripture with its reference, KJV word for word)")
-    if problems and any(p.startswith("NARRATION_LINE") for p in problems):
-        return {"problems": problems, "pending": pending, "estimate": {}}
+    return problems
 
-    n = len(narration)
-    shots = plan.get("shots")
-    if not isinstance(shots, list) or not shots:
-        return {"problems": problems + ["SHOTS_MISSING"], "pending": pending, "estimate": {}}
+
+def shot_shape_problems(shots, n):
+    """(problems, bad_lines): each shot a keeper or scene with a unique id; a speaking scene carries its own line (KJV
+    word for word when it has a reference), every other shot consecutive narration indices (shared with
+    long_plan_check). bad_lines: the voice track cannot be laid out, so nothing after this is checked."""
+    problems = []
     seen, bad_lines = set(), False
     for i, s in enumerate(shots):
         if not isinstance(s, dict) or s.get("kind") not in ("keeper", "scene"):
@@ -438,9 +458,42 @@ def check(plan, chars=None):
         if lp:
             problems.append(lp)
             bad_lines = True
-    if bad_lines:
-        return {"problems": problems, "pending": pending, "estimate": {}}
+    return problems, bad_lines
 
+
+def keeper_prompt_problems(i, s, keeper):
+    """A Keeper shot's prompt: his look and one wardrobe variant word for word, he speaks, and he faces the lens on a
+    static camera (E98) (shared with long_plan_check)."""
+    problems = []
+    if keeper["look"] not in s.get("prompt", ""):
+        problems.append(f"CHARACTER_LOOK_CHANGED shot {i}: keeper (the prompt must carry its look word for word)")
+    if not any(w in s.get("prompt", "") for w in keeper.get("wardrobe", {}).values()):
+        problems.append(f"KEEPER_WARDROBE shot {i} {s['id']} (one wardrobe variant word for word: same room)")
+    if not SPEAKS.search(s.get("prompt", "")):
+        problems.append(f"KEEPER_NOT_SPEAKING shot {i} {s['id']} (say that he speaks to the camera)")
+    prompt_lc = s.get("prompt", "").lower()
+    if not all(w in prompt_lc for w in KEEPER_POSE) or KEEPER_POSE_OFF.search(prompt_lc):
+        problems.append(f"KEEPER_POSE shot {i} {s['id']} (a talking Keeper faces the lens on a static camera: "
+                        f"{' and '.join(repr(w) for w in KEEPER_POSE)}, no push-in, pull-back, tracking, orbit, lean or bow; those "
+                        "lost the face or the lips, E98)")
+    return problems
+
+
+def talk_reach_problems(i, s, span, slowest, gaps):
+    """review of #408/#412: between a 4 s and a 5 s clip (one line: 3.94-4.14 s) the 10 % retime reaches neither, so
+    episode_build lines would refuse it (TALK_LINE_RETIME_OVER) after the plan had passed; judged at every pace from
+    the normal to the slowest, since the build retimes the measured length (shared with long_plan_check)."""
+    if talking(s) and talk_min(gaps) <= span and slowest <= TALK_LINE_MAX:
+        miss = talk_reach_gap(span - gaps, slowest - gaps, gaps)
+        if miss is not None:
+            return [f"TALK_LINE_UNREACHABLE shot {i} {s['id']} (~{span:.2f}-{slowest:.2f} s from the "
+                    f"normal to the slowest pace: at ~{miss + gaps:.2f} s no {TALK_CLIP[0]}-{TALK_CLIP[1]} s "
+                    f"clip is within +-{TALK_RETIME_MAX:.0%} of its words; a few words more or fewer)"]
+    return []
+
+
+def _check_shots(plan, chars, narration, shots, problems, pending):
+    n = len(narration)
     expect = 0
     for a, b, lines in groups(shots):
         if lines is None:
@@ -493,15 +546,7 @@ def check(plan, chars=None):
         gaps = LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
         slowest = words(span_words) / WPS_SLOWEST + gaps
-        if talking(s) and talk_min(gaps) <= span and slowest <= TALK_LINE_MAX:
-            # review of #408/#412: between a 4 s and a 5 s clip (one line: 3.94-4.14 s) the 10 % retime reaches
-            # neither, so episode_build lines would refuse it (TALK_LINE_RETIME_OVER) after this plan had passed;
-            # judged at every pace from the normal to the slowest, since the build retimes the measured length
-            miss = talk_reach_gap(span - gaps, slowest - gaps, gaps)
-            if miss is not None:
-                problems.append(f"TALK_LINE_UNREACHABLE shot {i} {s['id']} (~{span:.2f}-{slowest:.2f} s from the "
-                                f"normal to the slowest pace: at ~{miss + gaps:.2f} s no {TALK_CLIP[0]}-{TALK_CLIP[1]} s "
-                                f"clip is within +-{TALK_RETIME_MAX:.0%} of its words; a few words more or fewer)")
+        problems += talk_reach_problems(i, s, span, slowest, gaps)
         if s["kind"] == "keeper":
             keeper_used = True
             keeper_seconds += span
@@ -522,17 +567,7 @@ def check(plan, chars=None):
             if not keeper:
                 problems.append("CHARACTER_UNKNOWN keeper (characters.json)")
                 continue
-            if keeper["look"] not in s.get("prompt", ""):
-                problems.append(f"CHARACTER_LOOK_CHANGED shot {i}: keeper (the prompt must carry its look word for word)")
-            if not any(w in s.get("prompt", "") for w in keeper.get("wardrobe", {}).values()):
-                problems.append(f"KEEPER_WARDROBE shot {i} {s['id']} (one wardrobe variant word for word: same room)")
-            if not SPEAKS.search(s.get("prompt", "")):
-                problems.append(f"KEEPER_NOT_SPEAKING shot {i} {s['id']} (say that he speaks to the camera)")
-            prompt_lc = s.get("prompt", "").lower()
-            if not all(w in prompt_lc for w in KEEPER_POSE) or KEEPER_POSE_OFF.search(prompt_lc):
-                problems.append(f"KEEPER_POSE shot {i} {s['id']} (a talking Keeper faces the lens on a static camera: "
-                                f"{' and '.join(repr(w) for w in KEEPER_POSE)}, no push-in, pull-back, tracking, orbit, lean or bow; those "
-                                "lost the face or the lips, E98)")
+            problems += keeper_prompt_problems(i, s, keeper)
             continue
         lesson.update(k for k in idx if items[k]["kind"] in LESSON_KINDS)
         cids = s.get("characters", [])

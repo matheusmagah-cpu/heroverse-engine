@@ -447,3 +447,20 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   `channel/hold-plan.json` for `channel-privacy.yml` mode `unschedule` (private, publishAt cleared, nothing deleted,
   the receipt keeps the old publishAt for the undo; a video already public is skipped). It runs only when dispatched.
 - **Measured.** The daily report's long runway and the arc funnel; pilot-015 is the first long on this rule.
+
+## Owner decision: story QA v2, no burned captions on the long (2026-10-26)
+- **Owner.** "Nova régua, sem legenda." The Bible-story long carries no captions burned into the picture (the mined
+  structure: burned captions read anti, winners 1/7, weak 2/3; `script.gate.burned_captions` false), and the frozen
+  story QA v1 demanded burned-caption coverage >= 0.95, so only a new frozen version could change it.
+- **Done.** `production/qa_criteria_story_v2.json`, frozen before the first Bible-story long render: v1 unchanged
+  except the caption rows, replaced by an uploaded .srt track (YouTube closed captions) held to the same numbers
+  (coverage >= 0.95, cue median 1.5-5 s, <= 44 characters, <= 7 words). `qa_criteria_story_v1.json` stays frozen and
+  byte-identical (sha256 5dcf63f9...); `bible/test_long_plan_check.py` asserts both. Its sha256 is pinned in
+  `bible/long_plan_check.py`; `qa_pilot.py`, `render_queue.py` and `prepublish_gate.py` learn v2 with the long's
+  build (publishing code untouched here).
+- **Kind.** A rule decision, not a failure: no `ERRORS.json` entry.
+- **Still open for the owner** (`production/bible/LONG_DESIGN.md` section 4): v2 keeps v1's no figure on screen,
+  >= 40 % real licensed footage, <= 55 % AI video and a 4-7 s title card first; the acted long with the Keeper on
+  screen meets none of them, so its first render needs one more frozen version decided by the owner. Also: the arc-1
+  long's scope (Genesis 1-7, as asked, vs arcs.json arc-01 Genesis 1-3) and the 1440p upscaling cost (~1,300-1,600
+  runner-minutes a long).
