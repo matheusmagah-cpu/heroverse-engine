@@ -50,6 +50,14 @@ jobs:
       ID: ${{ matrix.id }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      # the cache key is this job's pip pin lines only: a new pin is a new cache, nothing older is reused
+      - id: pins
+        run: echo "hash=$(grep -E '/bin/pip\" install ' .github/workflows/pavo-footage.yml | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+      # E102: torch (CPU) and spandrel wheels were downloaded again by every clip job (~2 min, up to 11 min)
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684  # v4.2.3
+        with:
+          path: ~/.cache/pip
+          key: pip-upres-${{ runner.os }}-${{ steps.pins.outputs.hash }}
       - name: ffmpeg and Real-ESRGAN general x4v3 on CPU (same model, weights and hash as images-upres.yml)
         run: |
           [[ "$LIST" =~ ^migration/production/pilot-[0-9]{3}/pavo(-[0-9]+)?\.json$ ]] || exit 1
