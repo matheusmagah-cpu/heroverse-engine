@@ -188,6 +188,21 @@ class Generation(unittest.TestCase):
         self.assertEqual(path, "clip-2.mp4")
         self.assertEqual([r["flags"] for r in records], [["BLACK_START"], []])
 
+    def test_a_talking_shot_gets_six_generations_a_scene_three(self):
+        # E98: genesis-07 run 40297987571 refused k-insight 3 times on the lips check; measured, a talking clip passes
+        # it about 4 times in 10, so 3 generations failed half the runs with three Keeper shots
+        talk = {"id": "k-a", "kind": "keeper", "lines": [0]}
+        scene = {"id": "s-a", "kind": "scene", "lines": [1]}
+        self.assertEqual(eb.attempts_for(talk), eb.TALK_ATTEMPTS)
+        self.assertEqual(eb.attempts_for(scene), eb.ATTEMPTS)
+        self.assertGreaterEqual(eb.TALK_ATTEMPTS, 6)
+        n = []
+        with self.assertRaises(eb.ShotFailed):
+            eb.make_shot("k-a", lambda i: (n.append(i) or {"generation": i}, None), lambda p: ([], None),
+                         attempts=eb.attempts_for(talk))
+        self.assertEqual(len(n), eb.TALK_ATTEMPTS)
+        # generate_step itself giving a talking shot TALK_ATTEMPTS generations: the E94 failed-shot test (s-eve)
+
     def test_a_generation_with_no_video_counts_as_a_failed_attempt(self):
         with self.assertRaises(eb.ShotFailed):
             eb.make_shot("s-a", lambda n: ({"generation": n}, None), lambda p: ([], None))
@@ -430,10 +445,11 @@ class Gating(unittest.TestCase):
         # E94: run 40278642295 refused k-insight three times; only the flags reached the log, no clip, no measures
         eb.lipsync_flags = lambda py, model, clip, wav: (["AUDIO_NOT_OUR_LINE"], {"audio": {"corr": 0.2}, "mouth": {}})
         with self.assertRaises(SystemExit):
-            self.generate(extra=2)
+            self.generate(extra=eb.TALK_ATTEMPTS - 1)   # s-eve talks: every one of its generations is refused
         report = json.loads((self.work / "report.json").read_text())
         attempts = report["shots"]["s-eve"]["attempts"]
-        self.assertEqual([a["clip"] for a in attempts], ["s-eve-fail1.mp4", "s-eve-fail2.mp4", "s-eve-fail3.mp4"])
+        self.assertEqual([a["clip"] for a in attempts],
+                         [f"s-eve-fail{n}.mp4" for n in range(1, eb.TALK_ATTEMPTS + 1)])   # a talking shot (E98)
         self.assertEqual(attempts[0]["lipsync"]["audio"]["corr"], 0.2)
         for a in attempts:
             self.assertTrue((self.work / "clips" / a["clip"]).exists())

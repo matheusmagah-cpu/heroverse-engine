@@ -60,6 +60,9 @@ CUT_MAX = 4.0              # a scene cut every 2-4 s (DECISIONS 2026-10-26)
 ESTABLISHING_HOLD = plan_check.ESTABLISHING_HOLD
 MAX_SLOW = 1.3             # short_engine.MAX_SLOW
 ATTEMPTS = 3               # one generation and at most 2 regenerations
+# E98: a talking clip passes the lips check about 4 times in 10 (evidence/pavo/20261026/keeper-lipsync-rate.json):
+# 3 generations lost a three-Keeper-shot run about half the time; 6 keep a shot at ~95 % (Pavo at 0 credits)
+TALK_ATTEMPTS = 6
 POLL_S = 15
 JOB_TIMEOUT_S = 25 * 60
 INCOMPLETE_POLLS = 8       # history can be empty just after submission; then "incomplete" means failed
@@ -484,6 +487,11 @@ def wait_job(client, cid, sleep=time.sleep, clock=time.monotonic):
     return None
 
 
+def attempts_for(shot):
+    """E98: generations allowed for one shot; every caller of make_shot passes it, so a talking shot gets 6."""
+    return TALK_ATTEMPTS if plan_check.talking(shot) else ATTEMPTS
+
+
 def make_shot(shot_id, attempt, check, attempts=ATTEMPTS):
     """attempt(n) -> (record, clip path or None); check(path) -> (flags, measures or None). A failed shot gets a NEW
     generation, at most attempts - 1 times; then the run fails naming the shot. Returns (kept path, records)."""
@@ -608,7 +616,7 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
                 print(json.dumps({"shot": shot["id"], "resumed": True}))
                 continue
         try:
-            _, records = make_shot(shot["id"], attempt, check)
+            _, records = make_shot(shot["id"], attempt, check, attempts=attempts_for(shot))
         except (ShotFailed, SystemExit) as exc:
             entry["error"] = str(exc)
             if getattr(exc, "records", None):

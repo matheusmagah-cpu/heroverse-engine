@@ -803,6 +803,16 @@
     "file": "migration/production/bible/test_plan_check.py",
     "contains": "def test_a_talking_line_no_clip_reaches_within_the_retime_is_refused_at_plan_time"
    }
+  },
+  {
+   "id": "E98",
+   "date": "2026-10-26",
+   "error": "genesis-07 resume run 40297987571 refused k-insight 3 times on the lips check (mouth corr 0.441, 0.232, 0.429 against 0.45; the audio was kept, E95 worked). 11 direct Pavo calls on the same line (evidence/pavo/20261026/keeper-lipsync-rate.json): a talking clip passes the lips check about 4 times in 10 whatever the prompt or reference variant, the misses being a face lost in the fire's side shadow and the beard; 3 generations per talking shot lost a three-Keeper-shot run about half the time. The plan's push-in, pull-back and head bowed toward the fire did worst (0 of 4).",
+   "fix": "Talking shots (the Keeper, a speaking character) get TALK_ATTEMPTS = 6 generations (scenes keep 3; Pavo at 0 credits), about 95 % per shot; plan_check KEEPER_POSE requires a talking Keeper prompt to say 'static camera' and 'looks straight into the camera'; genesis-07's three Keeper shots rewritten so. The lips-check thresholds are unchanged. Residual risk stated, not closed: at ~0.4 a clip each talking shot passes ~95 %, so a run with three Keeper shots ~86 % and with five talking shots ~79 %; a failed run resumes (resume_run) keeping every clip made.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_a_talking_shot_gets_six_generations_a_scene_three"
+   }
   }
  ]
 }
