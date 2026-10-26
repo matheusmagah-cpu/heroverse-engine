@@ -23,8 +23,9 @@ script_check.structure_problems reads for the long's script) and the frozen stor
   on the estimate (LONG_LENGTH); one chapter per Short of the arc, in arcs.json order (else ARC_SHORTS, an owner row).
 - cold open (gate.cold_open_s 30, keeper_in_cold_open false): the first shot is a scene whose spoken line starts at
   0 s (OPEN_NOT_SPOKEN), a character or God speaks the conflict inside 30 s (`conflict: true`, COLD_OPEN_CONFLICT),
-  no Keeper shot starts inside it (KEEPER_IN_COLD_OPEN), it ends by 30 s (COLD_OPEN_LENGTH) on an open question
-  (COLD_OPEN_NO_QUESTION).
+  no Keeper shot starts inside it (KEEPER_IN_COLD_OPEN), its words end by 30 s whatever follows (COLD_OPEN_LENGTH)
+  on an open question (COLD_OPEN_NO_QUESTION); the build holds its last frame until the Keeper at exactly 30 s, at
+  most COLD_OPEN_HOLD_MAX (COLD_OPEN_SHORT).
 - keeper promise: Keeper shots only, <= gate.keeper_promise_max_s (KEEPER_PROMISE_LENGTH), right after the cold open.
 - re-hooks: >= gate.rehooks_min lines with `rehook: true` (REHOOKS); every chapter but the last ends on one
   (CHAPTER_END_NO_REHOOK); never more than gate.rehook_gap_max_s from the promise to a re-hook, between two, or from
@@ -53,7 +54,10 @@ script_check.structure_problems reads for the long's script) and the frozen stor
   (QA_CONFLICT_*), never decided by this check.
 - everything a Short's plan_check enforces on a shot: the KJV word for word, God only a voice over a shot with no
   person, a character speaker APPROVED with its own voice, talking lines 3.23-11.55 s and reachable (E95), the Keeper's
-  look, wardrobe and pose (E98), five-part prompts, <= 5 references, anonymous figures or establishing shots.
+  look, wardrobe and pose (E98), five-part prompts (the Keeper's shots too), <= 5 references, anonymous figures or
+  establishing shots, through plan_check's shared helpers; plus CHARACTER_NO_LOOK, CHARACTER_NO_REFS / KEEPER_NO_REFS
+  (APPROVED with no kept reference), TALKING_WITHOUT_A_FACE (any QA), REHOOK_ON_SILENT_SHOT, ESTABLISHING_ONLY and
+  LONG_ID (= f"{arc}-long").
 
 usage: long_plan_check.py PLAN.json [--strict]   prints JSON {problems, pending, estimate}; exit 1 on a problem
                                                  (--strict: also on a pending row)
@@ -76,10 +80,12 @@ ch = pc.ch
 VERSION = "bible-long-plan-v1"
 STRUCTURE = script_check.STRUCTURE
 QA = ROOT / "migration" / "production" / "qa_criteria_story_v3.json"
-QA_SHA256 = "646fa78b1e7eb044f9fcc579f09438e3831aabf818442911aff761acc184346c"   # frozen 2026-10-26 (owner)
+QA_SHA256 = "746e772d8024a93ef95cbf0f226568cf972e5611b59a430322312605f8e7badc"   # frozen 2026-10-26 (owner)
 FACELESS = ("its",)         # characters.json pronoun of a speaker with no human face (lipsync_check cannot judge it)
 ARCS = HERE / "arcs.json"
-LONG_ID = re.compile(r"^arc-[0-9]{2}-long$|^[a-z0-9]+(-[a-z0-9]+)*-long$")
+# the build holds the cold open's last frame (under the music) until the Keeper starts at gate.cold_open_s; more than
+# this of held frame is dead air: the cold open is too short (COLD_OPEN_SHORT)
+COLD_OPEN_HOLD_MAX = 3.0
 KINDS = pc.KINDS + ("promise",)
 BEATS = ("cold_open", "keeper_promise", "chapter", "payoff", "keeper_insight", "keeper_close")
 BEAT_KINDS = {"cold_open": ("story", "scripture"), "keeper_promise": ("promise",), "chapter": ("story", "scripture"),
@@ -137,19 +143,21 @@ def _people(s, shots_by_id):
     return bool(src.get("characters")) or src.get("figures") == "anonymous"
 
 
-def check(plan, chars=None, gate=None, qa=None, arcs=None):
-    """{"problems": [...], "pending": [...], "estimate": {...}} for a long plan."""
+def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
+    """{"problems": [...], "pending": [...], "estimate": {...}} for a long plan. gate_values: the structure's
+    script.gate (default gate()); criteria: the frozen story QA (default qa()); arc_table: arcs.json by id (default
+    arcs())."""
     chars = chars if chars is not None else ch.registry()
-    g = gate if gate is not None else globals()["gate"]()
-    q = qa if qa is not None else globals()["qa"]()
-    arc_map = arcs if arcs is not None else globals()["arcs"]()
+    g = gate_values if gate_values is not None else gate()
+    q = criteria if criteria is not None else qa()
+    arc_map = arc_table if arc_table is not None else arcs()
     problems, pending = [], []
 
     # the long as a whole
     if plan.get("version") != VERSION:
         problems.append(f"PLAN_VERSION (need {VERSION})")
-    if not isinstance(plan.get("long"), str) or not LONG_ID.fullmatch(plan["long"]):
-        problems.append("LONG_ID (<arc>-long)")
+    if plan.get("long") != f"{plan.get('arc')}-long":
+        problems.append(f"LONG_ID {plan.get('long')} (the arc's id + \"-long\": {plan.get('arc')}-long)")
     if plan.get("aspect_ratio") != g["aspect_ratio"]:
         problems.append(f"ASPECT_RATIO {plan.get('aspect_ratio')} (a long is {g['aspect_ratio']})")
     if plan.get("burned_captions") is not g["burned_captions"]:
@@ -185,17 +193,7 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
     problems += shape
     if bad:
         return {"problems": problems, "pending": pending, "estimate": {}}
-    expect = 0
-    for a, b, lines in pc.groups(shots):
-        if lines is None:
-            continue
-        if lines[0] != expect:
-            problems.append(f"LINES_OUT_OF_ORDER shot {a} {shots[a]['id']} (next line is {expect})")
-        expect = lines[-1] + 1
-        if any(shots[j]["kind"] == "keeper" for j in range(a, b + 1)) and b > a:
-            problems.append(f"KEEPER_LINES_SHARED shot {a} {shots[a]['id']} (a keeper shot speaks its own lines)")
-    if expect != len(narration):
-        problems.append(f"LINES_NOT_CARRIED from line {expect}")
+    problems += pc.lines_order_problems(shots, len(narration))
 
     # the voice track and its timeline (the Short's estimate: WPS, LINE_GAP between lines, TAIL after the last)
     items, carried = pc.sequence(plan)
@@ -208,6 +206,17 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
         start.append(t)
         t += e + LONG_LINE_GAP
     total = sum(est) + LONG_LINE_GAP * (len(items) - 1) + pc.TAIL
+    # the cold open ends where the first line after it starts; the Keeper never starts before cold_open_s, so the
+    # build holds the cold open's last frame (under the music) until then (COLD_OPEN_HOLD_MAX at most)
+    cold = g["cold_open_s"]
+    after = next((i for i, s in enumerate(shots) if s.get("beat") != "cold_open"), None)
+    cold_voice = start[carried[after][0]] if after is not None else total
+    cold_hold = 0.0
+    if after is not None and shots[0].get("beat") == "cold_open" and cold_voice < cold:
+        cold_hold = cold - cold_voice
+        k0 = carried[after][0]
+        start = start[:k0] + [x + cold_hold for x in start[k0:]]
+        total += cold_hold
     begin, hold = [0.0] * len(shots), [0.0] * len(shots)
     for a, b, idx in pc.groups(shots, carried):
         t0 = start[idx[0]]
@@ -219,6 +228,9 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
 
     # every shot
     by_id = {s["id"]: s for s in shots}
+    index = {s["id"]: i for i, s in enumerate(shots)}
+    named = {cid: re.compile(rf"(?i)\b{re.escape(tok)}\b") for cid, tok in
+             ((cid, _token(c.get("name"))) for cid, c in chars.items()) if tok and cid != ch.NARRATOR}
     lo, hi = q["grammar"]["scene_seconds"]
     keeper = chars.get(ch.NARRATOR)
     drafts, beat_at, chap_at = set(), 0, 0
@@ -231,6 +243,9 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
         if BEATS.index(beat) < beat_at:
             problems.append(f"BEAT_ORDER shot {i} {sid} ({beat} after {BEATS[beat_at]})")
         beat_at = max(beat_at, BEATS.index(beat))
+        if s.get("rehook") and not pc.speaking(s):
+            problems.append(f"REHOOK_ON_SILENT_SHOT shot {i} {sid} (a re-hook is a line: put rehook: true on the "
+                            "narration line, or on a speaking shot)")
         if beat in ("chapter", "payoff"):
             if s.get("chapter") not in chapter_index:
                 problems.append(f"SHOT_CHAPTER shot {i} {sid} (one of {list(chapter_index)})")
@@ -263,10 +278,17 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
                 problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {sid} (>= {pc.talk_min(gaps):.2f} s, E95)")
             if s.get("characters") not in (None, [ch.NARRATOR]) or s.get("seconds") is not None:
                 problems.append(f"KEEPER_SHOT_FIELDS shot {i} {sid} (characters and seconds come from the line)")
+            problems += pc.prompt_problems(i, s)
             if not keeper:
                 problems.append("CHARACTER_UNKNOWN keeper (characters.json)")
                 continue
-            if keeper.get("status") != "APPROVED" or not keeper.get("refs"):
+            if not isinstance(keeper.get("look"), str) or not keeper["look"].strip():
+                problems.append(f"CHARACTER_NO_LOOK shot {i}: keeper (characters.json `look`)")
+                continue
+            if keeper.get("status") == "APPROVED" and not keeper.get("refs"):
+                problems.append(f"KEEPER_NO_REFS shot {i} {sid} (APPROVED with no kept reference image: his face and "
+                                "his talking frame cannot go in; keep his reviewed refs)")
+            elif keeper.get("status") != "APPROVED":
                 drafts.add(ch.NARRATOR)
             problems += pc.keeper_prompt_problems(i, s, keeper)
             continue
@@ -274,7 +296,7 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
             problems.append(f"KEEPER_BEAT_SCENE shot {i} {sid} (the {beat} is the Keeper on screen)")
         if s.get("window_of") is not None:
             src = by_id.get(s["window_of"])
-            j = shots.index(src) if src else -1
+            j = index[src["id"]] if src else -1
             if not src or j >= i or src["kind"] != "scene" or src.get("window_of") or pc.speaking(src):
                 problems.append(f"WINDOW_OF shot {i} {sid} (an earlier scene that is not a window or a speaking shot)")
                 continue
@@ -294,28 +316,19 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
         if ch.NARRATOR in cids:
             problems.append(f"KEEPER_IN_SCENE shot {i} {sid} (the Keeper narrates; he never acts in the story)")
         if pc.speaking(s):
+            who = chars.get(s["speaker"]) or {}
             for p in pc._speaker_problems(i, s, chars, span, slowest):
-                who = chars.get(s["speaker"]) or {}
                 if p.startswith("SPEAKER_NOT_APPROVED") and who.get("status") == "DRAFT":
                     drafts.add(s["speaker"])
                 else:
                     problems.append(p)
+            if pc.talking(s) and who.get("pronoun") in FACELESS:
+                problems.append(f"TALKING_WITHOUT_A_FACE shot {i} {sid}: {s['speaker']} (every talking clip passes "
+                                "lipsync_check, which reads a human face and lips; let the Keeper narrate its words)")
         prompt = s.get("prompt", "")
-        for cid in cids:
-            c = chars.get(cid)
-            if cid == ch.NARRATOR:
-                continue
-            if not c:
-                problems.append(f"CHARACTER_UNKNOWN shot {i}: {cid} (add it to characters.json first)")
-            elif c.get("status") not in ("APPROVED", "DRAFT"):
-                problems.append(f"CHARACTER_NOT_APPROVED shot {i}: {cid} ({c.get('status')})")
-            elif c["look"] not in prompt:
-                problems.append(f"CHARACTER_LOOK_CHANGED shot {i}: {cid} (the prompt must carry its look word for word)")
-            elif c.get("status") == "DRAFT":
-                drafts.add(cid)
-        for cid, c in chars.items():
-            tok = _token(c.get("name"))
-            if cid != ch.NARRATOR and tok and cid not in cids and re.search(rf"(?i)\b{re.escape(tok)}\b", prompt):
+        problems += pc.character_problems(i, cids, prompt, chars, drafts)
+        for cid, name_re in named.items():
+            if cid not in cids and name_re.search(prompt):
                 problems.append(f"CHARACTER_NOT_LISTED shot {i} {sid}: {cid} (named in the prompt: list it in "
                                 "`characters`, its look and references go in)")
         refs = sum(len(chars.get(c, {}).get("refs") or []) for c in cids if c != ch.NARRATOR)
@@ -323,21 +336,10 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
             problems.append(f"REFERENCES_OVER_{ch.MAX_REFS} shot {i} {sid} ({refs} approved images)")
         if pc.talking(s):
             continue
-        if type(s.get("seconds")) is not int or not pc.SCENE_SECONDS[0] <= s["seconds"] <= pc.SCENE_SECONDS[1]:
-            problems.append(f"SCENE_SECONDS shot {i} {sid} (4-12)")
+        problems += pc.scene_seconds_problems(i, s)
         if pc.speaking(s):
             continue
-        if not cids:
-            if s.get("establishing") is True:
-                pass
-            elif s.get("figures") == "anonymous":
-                if not pc.ANONYMOUS.search(prompt):
-                    problems.append(f"FIGURES_NOT_ANONYMOUS shot {i} {sid} (seen from behind or in silhouette)")
-            else:
-                problems.append(f"SCENE_WITHOUT_CHARACTERS shot {i} {sid} (the cast, anonymous figures from behind, "
-                                "or an establishing shot)")
-        elif s.get("establishing"):
-            problems.append(f"ESTABLISHING_WITH_CHARACTERS shot {i} {sid}")
+        problems += pc.figures_problems(i, s, cids)
 
     # footage: a clip covers its holds and its windows' (distinct parts, slowed MAX_SLOW at most)
     for i, s in enumerate(shots):
@@ -347,6 +349,12 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
         if isinstance(s.get("seconds"), int) and s["seconds"] * pc.MAX_SLOW + 1e-6 < shown:
             problems.append(f"FOOTAGE_SHORT shot {i} {s['id']} ({s['seconds']} s of clip for ~{shown:.1f} s on screen)")
 
+    for x, y, idx in pc.groups(shots, carried):
+        members = [by_id.get(shots[j].get("window_of")) or shots[j] for j in range(x, y + 1)]
+        if not pc.talking(shots[x]) and not pc.speaking(shots[x]) and pc.establishing_only(members, end[y] - begin[x], 0):
+            problems.append(f"ESTABLISHING_ONLY shot {x} {shots[x]['id']} (~{end[y] - begin[x]:.1f} s of words over "
+                            "landscape alone: a person on screen in every voice run)")
+
     def beat_shots(name):
         return [i for i, s in enumerate(shots) if s.get("beat") == name]
 
@@ -354,7 +362,6 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
         return sum(hold[i] for i in beat_shots(name))
 
     # cold open
-    cold = g["cold_open_s"]
     if shots[0].get("beat") != "cold_open":
         problems.append("COLD_OPEN_MISSING (the long opens on its cold open)")
     if shots[0]["kind"] == "keeper" or (not g["keeper_in_cold_open"] and any(
@@ -368,10 +375,11 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
                         "speaker)")
     co = beat_shots("cold_open")
     kp = beat_shots("keeper_promise")
-    late = cold + g["keeper_promise_max_s"]          # the beat map: the promise at 30-50 s
-    if co and kp and end[kp[-1]] > late + 1e-6 and end[co[-1]] > cold + 1e-6:
-        problems.append(f"COLD_OPEN_LENGTH ~{end[co[-1]]:.1f} s (the Keeper from {cold} s, his promise over by "
-                        f"{late} s)")
+    if co and cold_voice > cold + 1e-6:
+        problems.append(f"COLD_OPEN_LENGTH ~{cold_voice:.1f} s > {cold} s (the structure's cold open)")
+    if co and cold_hold > COLD_OPEN_HOLD_MAX + 1e-6:
+        problems.append(f"COLD_OPEN_SHORT ~{cold_voice:.1f} s (its last frame would hold {cold_hold:.1f} s before "
+                        f"the Keeper at {cold} s; at most {COLD_OPEN_HOLD_MAX:g} s)")
     if co and "?" not in items[carried[co[-1]][-1]]["text"]:
         problems.append("COLD_OPEN_NO_QUESTION (the cold open ends on an open question)")
 
@@ -485,13 +493,6 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
     # the frozen QA's acted-long rows: v3 checks them; an older version's are the owner's (pending), never decided here
     gr = q["grammar"]
     figures = sum(hold[i] for i, s in enumerate(shots) if _people(s, by_id)) / total
-    if gr.get("ai_video_clip_checks"):
-        for i, s in enumerate(shots):
-            who = chars.get(s.get("speaker")) if pc.talking(s) and s["kind"] == "scene" else None
-            if who and who.get("pronoun") in FACELESS:
-                problems.append(f"TALKING_WITHOUT_A_FACE shot {i} {s['id']}: {s['speaker']} (story QA v3: every "
-                                "talking clip passes lipsync_check, which reads a human face and lips; let the Keeper "
-                                "narrate its words)")
     if gr.get("figure_present_fraction_max") is not None and figures > gr["figure_present_fraction_max"]:
         pending.append(f"QA_CONFLICT_FIGURES {figures:.2f} of the picture shows people > story QA "
                        f"figure_present_fraction_max {gr['figure_present_fraction_max']} (acted characters and the "
@@ -517,6 +518,7 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
     clip_seconds = sum(s.get("seconds") or 0 for s in scenes) + sum(
         pc.talk_need(sum(est[k] for k in carried[i]) + LONG_LINE_GAP * (len(carried[i]) - 1)) for i in talk)
     estimate = {"seconds": round(total, 1), "minutes": round(total / 60, 2), "keeper_share": round(share, 3),
+                "cold_open_voice_s": round(cold_voice, 1), "cold_open_hold_s": round(cold_hold, 1),
                 "climax_at": round(begin[climax[0]] / total, 3) if len(climax) == 1 else None,
                 "rehooks": len(rehooks), "rehook_gap_max_s": round(gap, 1), "words": n_words,
                 "words_per_minute": round(wpm, 1), "speech_presence": round(presence, 3),

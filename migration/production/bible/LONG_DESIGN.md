@@ -30,7 +30,7 @@ chapter's title is that Short's title.
 
 | Beat (structure) | Our format | Check (code) | Number from |
 |---|---|---|---|
-| cold_open 0-30 s, acted, never the Keeper | The first shot is a scene whose spoken line starts at 0 s. A character or God speaks the conflict (`conflict: true`). It ends on an open question. | OPEN_NOT_SPOKEN, COLD_OPEN_CONFLICT, KEEPER_IN_COLD_OPEN, COLD_OPEN_LENGTH, COLD_OPEN_NO_QUESTION | gate.cold_open_s, keeper_in_cold_open; QA v3 grammar.first_shot |
+| cold_open 0-30 s, acted, never the Keeper | The first shot is a scene whose spoken line starts at 0 s. A character or God speaks the conflict (`conflict: true`). It ends on an open question. Its words end by 30 s, and the build holds its last frame (under the music, at most 3 s) so the Keeper starts at exactly 30 s. | OPEN_NOT_SPOKEN, COLD_OPEN_CONFLICT, KEEPER_IN_COLD_OPEN, COLD_OPEN_LENGTH (> 30 s, on its own), COLD_OPEN_SHORT (more than 3 s of held frame), COLD_OPEN_NO_QUESTION | gate.cold_open_s, keeper_in_cold_open; QA v3 grammar.first_shot |
 | keeper_promise 30-50 s | Keeper shots only: lip-synced, facing the lens, static camera (E95, E98). Lines of kind `promise`. | KEEPER_PROMISE_LENGTH, KEEPER_BEAT_SCENE | gate.keeper_promise_max_s (= the beat's at_s span) |
 | chapters, one per Short | `chapters` lists arcs.json's Shorts in order. Acted scenes use the arc's approved cast. | ARC_SHORTS, CHAPTER_EMPTY, CHAPTER_ORDER | arcs.json |
 | re-hooks >= 6, one at every chapter end | A narration line or spoken line with `rehook: true` | REHOOKS, CHAPTER_END_NO_REHOOK, REHOOK_GAP (<= 240 s apart: the 4-min chapter rule) | gate.rehooks_min, rehook_gap_max_s |
@@ -52,13 +52,21 @@ chapter's title is that Short's title.
 
 **Characters stay the same.**
 - Every character in a long is a `characters.json` entry with its `look` word for word (CHARACTER_UNKNOWN,
-  CHARACTER_LOOK_CHANGED). That is the same entry, seed, references and voice as in the Shorts.
+  CHARACTER_LOOK_CHANGED). That is the same entry, seed, references and voice as in the Shorts. The rules are
+  `plan_check`'s own shared helpers (`character_problems`, `figures_problems`, `scene_seconds_problems`,
+  `lines_order_problems`, `establishing_only`), so the Short and the long cannot drift apart.
+- An entry with no `look` is CHARACTER_NO_LOOK. An APPROVED entry with no kept reference image is CHARACTER_NO_REFS,
+  or KEEPER_NO_REFS for the Keeper: the same face could not go in.
 - A character named in a prompt must be in that shot's `characters`, so its references go in (CHARACTER_NOT_LISTED).
 - A DRAFT character is one pending row (CHARACTER_PENDING). `--strict`, which the build runs, refuses to start while
   any pending row is open.
 - God speaks only as a voice-over over a shot with no person (GOD_SHOT_*).
-- The Keeper never acts in a scene.
-- A talking speaker needs a human face (TALKING_WITHOUT_A_FACE, below).
+- The Keeper never acts in a scene. His shots pass the same five-part prompt rules as every shot (PROMPT_*,
+  GOD_AS_A_FIGURE), plus his look, wardrobe and pose (KEEPER_POSE, E98).
+- A talking speaker needs a human face (TALKING_WITHOUT_A_FACE), under any QA version: lipsync_check reads a face.
+- `rehook: true` belongs to a line: on a shot that speaks no line it is REHOOK_ON_SILENT_SHOT.
+- Words are never carried by landscape alone (ESTABLISHING_ONLY: a voice run whose shots are all establishing). The
+  Short's 2 s establishing hold does not apply: a long's holds are 4-7 s.
 
 **The frozen QA, checked on the plan.** The check reads story QA v3, with its sha256 pinned:
 - Every cut is a 4-7 s hold (`grammar.scene_seconds`: HOLD_UNDER_QA, HOLD_OVER_QA). A talking line is checked at its
@@ -80,7 +88,7 @@ chapter's title is that Short's title.
 ## 2. Footage: how many clips, and how long they take
 
 **Cuts.** A 15-min long cut every 2-4 s (the Shorts' rhythm) would need ~300 holds. The frozen story QA allows 4-7 s
-holds, so a 15-min long has 129-225 holds, about 164 at 5.5 s each. The arc-1 draft has 176 holds over 14.6 min,
+holds, so a 15-min long has 129-225 holds, about 164 at 5.5 s each. The arc-1 draft has 175 holds over 14.5 min,
 about 5 s each.
 
 **Pavo time, measured.** The figures come from episode.yml runs on genesis-07-short on 2026-10-26: step times from
@@ -98,11 +106,11 @@ A scene generation takes about 4.8 min, and a talking one about 6.1 min includin
 submits one, polls every 15 s until Pavo finishes, then submits the next.
 
 **One long, as today's Shorts are built.**
-- Generation: the arc-1 draft has 137 scenes, 9 God voice-overs and 20 talking clips, plus 10 windows. In sequence
-  that is about 823 min of generation, and about 1,000 min with the measured regeneration rates. That is over the
+- Generation: the arc-1 draft has 136 scenes, 9 God voice-overs and 20 talking clips, plus 10 windows. In sequence
+  that is about 818 min of generation, and about 1,000 min with the measured regeneration rates. That is over the
   300-min job limit, so it would take 4 runs or more.
 - Upscaling: Pavo delivers 1280x720, and the QA wants 2560x1440 through Real-ESRGAN, never a plain resize. That is
-  543 s for a 6 s clip on one runner, so the draft's 1,014 clip-seconds take about 1,530 CPU-minutes.
+  543 s for a 6 s clip on one runner, so the draft's 1,008 clip-seconds take about 1,520 CPU-minutes.
 - With the repository public (owner), these minutes cost nothing. What matters is the wall-clock time: about 14 h of
   generation plus about 26 h of upscaling, if each runs in sequence.
 
@@ -136,7 +144,7 @@ outdoor prompts need a stated ancient setting.
 **Recommendation: submit and leave, new 16:9 clips, and a matrix upscale.**
 1. Generate new 16:9 clips, submitting each chapter at once (submit and leave).
 2. Use windows where the edit wants them.
-3. Upscale in a matrix of parallel jobs. GitHub runs up to 20 at once for a free plan: 1,530 CPU-minutes become about
+3. Upscale in a matrix of parallel jobs. GitHub runs up to 20 at once for a free plan: 1,520 CPU-minutes become about
    1.5 h of wall-clock, plus downloads.
 
 The long then needs about a working day of wall-clock time, not several days.
@@ -201,10 +209,23 @@ Everything else is v2's, unchanged: audio, loudness, pace, the 4-7 s holds, the 
 Claude review. v2 is v1 with the burned captions replaced by an .srt track. v1 and v2 stay frozen and byte-identical,
 and a test asserts all three.
 
-Not wired yet: `qa_pilot.py`, `render_queue.py` and `prepublish_gate.py` know only v1's hash and grammar. They learn
-v3 with the long's build (slice 3).
+**Build blocker: v3 cannot be measured yet.** v2 and v3 rename keys that the readers index directly:
+- `qa_pilot.py` reads `caption_coverage_of_speech_min`, `caption_hold_seconds_median`, `caption_chars_max`,
+  `caption_words_max` and `caption_box`; v2 replaced them with the `srt_*` rows.
+- It also reads `title_card_seconds`, `footage_picture_share_min` and `ai_video_picture_share_max` (0.55); v3
+  replaced them with `first_shot`, `figures_allowed`, `ai_video_picture_share_max` 1.0 and `ai_video_clip_checks`.
+- `prepublish_gate.py` knows only `story-qa-criteria-v1`: its hash, its file and its review dimensions.
+- `render_queue.py` pins only v1's hash.
+
+A render measured against v3 today would fail with a KeyError, or fall back to the wrong grammar. No long can be
+rendered, measured or approved until slice 3 teaches these readers v3's keys. A test (`test_long_plan_check.py`
+NoRendererReadsTheNewQaYet) fails any change that points a renderer, gate or workflow at v2 or v3 before
+`qa_pilot.py` reads `srt_coverage_of_speech_min`, `figures_allowed` and `first_shot`, and before `prepublish_gate.py`
+knows `story-qa-criteria-v3`. This PR does not wire them.
 
 ## 4. What is still open, or not resolved here (no gate loosened)
+
+0. **v3's readers** (the build blocker above). Slice 3 has to come first.
 
 1. **Cutting.** The QA's 4-7 s holds replace the Shorts' 2-4 s, so the long cuts slower and its talking lines are
    sized to fit them (section 3). Settled by the frozen QA; noted here because it differs from the Shorts.
@@ -223,17 +244,21 @@ v3 with the long's build (slice 3).
   voice only. The Keeper appears in his three beats.
 - **Check result.** It passes `long_plan_check.py --strict` with no problem and no pending row.
 - **Estimate.**
-  - 14.57 min (874.1 s), 2,322 words, 159 words a minute.
+  - 14.52 min (871.1 s), 2,313 words, 159 words a minute.
+  - The cold open's words end at 29.8 s, so the Keeper starts at 30 s.
   - The climax is at 0.78: God's Genesis 3:17 line ("cursed is the ground for thy sake"), then Adam on his knees in
     the storm.
   - 8 re-hooks, largest gap 105 s.
   - Keeper share 8.5 %: promise 16 s, insight 92 s with recap windows, close 11 s.
-  - 176 holds; 166 Pavo generations (137 scenes, 9 God voice-overs, 20 talking: 14 Keeper, 3 Eve, 3 Adam) plus 10
+  - 175 holds; 165 Pavo generations (136 scenes, 9 God voice-overs, 20 talking: 14 Keeper, 3 Eve, 3 Adam) plus 10
     windows.
 - **Measured voice.** Kokoro, voiced locally line by line in each speaker's voice, laid with the 0.6 s gap:
-  - **14.60 min (876.1 s)**, within 0.3 % of the estimate.
-  - 159.0 words a minute, climax at 0.78, Keeper 8.6 %.
+  - **14.59 min (875.4 s)**, within 0.5 % of the estimate.
+  - 158.5 words a minute, climax at 0.78, Keeper 8.6 %.
   - Every talking hold is inside 4-7 s.
+  - The cold open's words end at 27.1 s, so its last frame holds 2.9 s before the Keeper at 30 s (the limit is 3 s).
+    The estimate puts that end at 29.8 s, and the window is narrow, so the build must re-check it on the measured
+    voice (slice 3).
 
   The first voicing, before the talking lines were lengthened and with the 0.35 s gap, measured 13.97 min and 164.5
   words a minute.

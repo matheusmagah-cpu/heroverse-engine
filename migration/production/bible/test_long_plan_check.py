@@ -9,6 +9,7 @@ Runs in pr-checks through test_plan_check.py (which imports these cases), so no 
 import copy
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -45,6 +46,8 @@ STYLE = "Painterly cinematic realism, cinema camera."
 # 20 words: 7.27 s at the normal pace; two of them (+ gaps) are a 15.2 s block over three 5.1 s cuts
 FILLER = "Ten generations after Eden the earth is full of people and noise, and nobody looks up at the sky."
 QUESTION = "How did a very good world come to this, and who would be left standing when it ended?"
+QUESTION2 = ("How did a very good world come to this so quickly, and who would still be left standing when it finally "
+             "ended?")                                                  # 22 words
 OPEN_LINE = "Why do you hide from the voice of the Lord in the garden, where you once walked?"   # 16 words
 GOD_LINE = "The end of all flesh is come before me; for the earth is filled with violence"   # 15 words
 KEEPER_12 = "This story is older than any city, and it still asks about us."   # 12 words
@@ -93,8 +96,9 @@ class Builder:
                            "conflict": True, "characters": ["eve"],
                            "prompt": f"{STYLE} Medium close-up, slow push-in. Eve, {EVE_LOOK}, turns and speaks to him, "
                                      "her lips moving clearly with every word. A garden at dusk, low gold light. Tense."})
-        self.block("s-cold", "cold_open")
-        self.block("s-cold2", "cold_open", last=QUESTION, rehook=True)   # the Keeper from ~34 s (after 30 s)
+        self.block("s-cold", "cold_open")                                  # the cold open ends at ~28 s
+        q = self.line("story", QUESTION2, rehook=True)
+        self.shots += [scene(f"s-cold2-{k}", [q], "cold_open") for k in range(2)]
         self.shots.append(keeper("k-promise-1", [self.line("promise", KEEPER_12)], "keeper_promise"))
         self.shots.append(keeper("k-promise-2", [self.line("promise", KEEPER_12)], "keeper_promise"))
         for c, chap in enumerate(("c1", "c2", "c3", "c4")):
@@ -135,7 +139,7 @@ def plan(**kw):
 
 def check(p, **kw):
     kw.setdefault("chars", CHARS)
-    kw.setdefault("arcs", ARCS)
+    kw.setdefault("arc_table", ARCS)
     return lc.check(p, **kw)
 
 
@@ -150,6 +154,14 @@ def insert_line(p, at, line):
         if s.get("lines"):
             s["lines"] = [k + 1 if k >= at else k for k in s["lines"]]
     return at
+
+
+def remove_line(p, at):
+    """Remove narration line `at`, every shot's later line indices shifted down."""
+    del p["narration"][at]
+    for s in p["shots"]:
+        if s.get("lines"):
+            s["lines"] = [k - 1 if k > at else k for k in s["lines"]]
 
 
 def shot(p, sid):
@@ -170,7 +182,7 @@ class Grammar(unittest.TestCase):
     def test_against_v2_the_acted_long_rows_are_pending_owner_rows_and_v3_checks_them(self):
         # story v2 = v1 apart from captions: no figure on screen, >= 40 % real licensed footage, <= 55 % Pavo, and a
         # 4-7 s title card first; an acted long meets none of them, so they are the owner's (pending), never decided
-        r = check(plan(), qa=lc.qa(QA_V2))
+        r = check(plan(), criteria=lc.qa(QA_V2))
         self.assertEqual(r["problems"], [])
         found = codes(r, "pending")
         for row in ("QA_CONFLICT_FIGURES", "QA_CONFLICT_REAL_FOOTAGE", "QA_CONFLICT_AI_SHARE", "QA_CONFLICT_TITLE_CARD"):
@@ -201,12 +213,99 @@ class Grammar(unittest.TestCase):
                  prompt=s["prompt"].replace(f"Eve, {EVE_LOOK}", "The serpent, a slender green serpent"))
         self.assertIn("TALKING_WITHOUT_A_FACE", codes(check(p, chars=chars)))
 
+    # ---- review of #418 (2026-10-26)
+    def test_review_1_the_cold_open_is_at_most_30_s_on_its_own(self):
+        self.assertLessEqual(check(plan())["estimate"]["beats_s"]["cold_open"], 30.0)
+        # a ~43 s cold open with a short promise (over by 50 s), and one with no promise at all, are refused
+        p = plan()
+        k2 = shot(p, "k-promise-2")
+        remove_line(p, k2["lines"][0])
+        p["shots"].remove(k2)
+        i = next(k for k, s in enumerate(p["shots"]) if s["beat"] == "keeper_promise")
+        a = insert_line(p, p["shots"][i]["lines"][0], {"kind": "story", "text": FILLER})
+        insert_line(p, a + 1, {"kind": "story", "text": FILLER})
+        p["shots"][i:i] = [scene(f"s-late-{k}", [a, a + 1], "cold_open") for k in range(3)]
+        r = check(p)
+        self.assertLessEqual(r["estimate"]["beats_s"]["keeper_promise"] + 30, 50)
+        self.assertIn("COLD_OPEN_LENGTH", codes(r))
+        k1 = shot(p, "k-promise-1")
+        remove_line(p, k1["lines"][0])
+        p["shots"].remove(k1)
+        self.assertIn("COLD_OPEN_LENGTH", codes(check(p)))
+
+    def test_review_1_the_keeper_starts_at_30_s_after_a_shorter_cold_open(self):
+        # the build holds the cold open's last frame (under the music) until 30 s: the Keeper never starts before it
+        r = check(plan())
+        self.assertNotIn("KEEPER_IN_COLD_OPEN", codes(r))
+        self.assertLess(r["estimate"]["cold_open_voice_s"], 30.0)
+        self.assertGreaterEqual(r["estimate"]["beats_s"]["cold_open"], 30.0 - 1e-6)
+        # but a cold open that leaves more than COLD_OPEN_HOLD_MAX of held frame before the Keeper is too short
+        p = plan()
+        for k in shot(p, "s-cold-0")["lines"]:
+            p["narration"][k]["text"] = "It was quiet."
+        self.assertIn("COLD_OPEN_SHORT", codes(check(p)))
+
+    def test_review_2_keeper_prompts_pass_the_prompt_rules_too(self):
+        p = plan()
+        s = shot(p, "k-insight-1")
+        s["prompt"] = s["prompt"].replace("Medium close-up, static camera. ", "")
+        found = codes(check(p))
+        self.assertIn("PROMPT_NO_CINEMATOGRAPHY", found)
+        p = plan()
+        s = shot(p, "k-insight-1")
+        s["prompt"] += " Behind him God stands with open hands."
+        self.assertIn("GOD_AS_A_FIGURE", codes(check(p)))
+        p = plan()
+        shot(p, "k-insight-1")["prompt"] = "Static camera. The narrator speaks."
+        self.assertIn("PROMPT_LENGTH", codes(check(p)))
+
+    def test_review_5_a_faceless_speaker_is_refused_under_any_qa(self):
+        chars = dict(CHARS, serpent={"name": "The serpent", "status": "APPROVED", "look": "a slender green serpent",
+                                     "refs": ["full"], "voice": "bm_fable", "pronoun": "its"})
+        p = plan()
+        s = p["shots"][0]
+        s.update(speaker="serpent", characters=["serpent"],
+                 prompt=s["prompt"].replace(f"Eve, {EVE_LOOK}", "The serpent, a slender green serpent"))
+        self.assertIn("TALKING_WITHOUT_A_FACE", codes(check(p, chars=chars, criteria=lc.qa(QA_V2))))
+
+    def test_review_6_character_entries_without_refs_or_look_are_refused_not_crashed(self):
+        chars = dict(CHARS, keeper=dict(CHARS["keeper"], refs=[]))
+        r = check(plan(), chars=chars)
+        self.assertIn("KEEPER_NO_REFS", codes(r))
+        self.assertNotIn("CHARACTER_PENDING", codes(r, "pending"))
+        chars = dict(CHARS, eve={k: v for k, v in CHARS["eve"].items() if k != "look"})
+        self.assertIn("CHARACTER_NO_LOOK", codes(check(plan(), chars=chars)))
+        chars = dict(CHARS, keeper={k: v for k, v in CHARS["keeper"].items() if k != "look"})
+        self.assertIn("CHARACTER_NO_LOOK", codes(check(plan(), chars=chars)))
+        chars = dict(CHARS, eve=dict(CHARS["eve"], refs=[]))
+        self.assertIn("CHARACTER_NO_REFS", codes(check(plan(), chars=chars)))
+
+    def test_review_7_a_rehook_on_a_silent_shot_is_refused(self):
+        p = plan()
+        shot(p, "s-c1-2-1")["rehook"] = True
+        self.assertIn("REHOOK_ON_SILENT_SHOT", codes(check(p)))
+
+    def test_review_8_words_only_over_landscape_are_refused(self):
+        p = plan()
+        for s in p["shots"]:
+            if s["id"].startswith("s-c2-4-"):
+                s.update(characters=[], establishing=True)
+                s.pop("figures", None)
+                s["prompt"] = (f"{STYLE} Extreme wide establishing shot, slow crane down. A dry plain under heavy "
+                               "clouds. Dusk. Vast and empty. No people, no text, no logos.")
+        self.assertIn("ESTABLISHING_ONLY", codes(check(p)))
+
+    def test_review_9_the_long_id_is_its_arc(self):
+        p = plan()
+        p["long"] = "arc-y-long"
+        self.assertIn("LONG_ID", codes(check(p)))
+
     def test_the_numbers_are_the_structure_gate_that_script_check_reads(self):
         import script_check
         self.assertEqual(lc.gate(), script_check.story_gate())
         p = plan()
         g = dict(lc.gate(), length_min=[20, 30])
-        self.assertIn("LONG_LENGTH", codes(check(p, gate=g)))
+        self.assertIn("LONG_LENGTH", codes(check(p, gate_values=g)))
 
     def test_the_gate_and_the_beat_map_agree(self):
         s = json.loads(lc.STRUCTURE.read_text())["script"]
@@ -312,7 +411,7 @@ class Grammar(unittest.TestCase):
 
     def test_the_keeper_share_is_at_most_a_quarter(self):
         g = dict(lc.gate(), keeper_share_max=0.05)
-        self.assertIn("KEEPER_SHARE", codes(check(plan(), gate=g)))
+        self.assertIn("KEEPER_SHARE", codes(check(plan(), gate_values=g)))
 
     def test_no_stretch_without_people_over_20_s(self):
         p = plan()
@@ -434,6 +533,18 @@ class StoryQa(unittest.TestCase):
         self.assertEqual(lc.QA, QA_V3)
         self.assertIsNone(lc.frozen_qa_problem())
 
+    def test_v3_points_to_the_owners_decision_which_quotes_the_rows(self):
+        # review of #418, point 4: v3 relaxes three v2 rows by the owner's explicit decision of 2026-10-26
+        entry = "Owner decision: story QA v3 for the acted Bible long; the long follows arcs.json (2026-10-26)"
+        self.assertIn(entry, json.loads(QA_V3.read_text())["basis"])
+        decisions = (ROOT / "migration" / "strategy" / "DECISIONS.md").read_text()
+        section = decisions.split("## " + entry, 1)[1].split("\n## ", 1)[0]
+        self.assertIn('"Sim, régua nova"', section)
+        for row in ("title_card_seconds", "figure_present_fraction_max", "footage_picture_share_min",
+                    "footage_picture_share_counts", "ai_video_picture_share_max", "first_shot", "figures_allowed",
+                    "ai_video_clip_checks"):
+            self.assertIn(f"`{row}`", section, row)
+
     def test_v3_differs_from_v2_only_in_the_three_acted_long_rows(self):
         v2, v3 = json.loads(QA_V2.read_text()), json.loads(QA_V3.read_text())
         meta = {"version", "frozen_at_utc", "basis"}
@@ -478,6 +589,40 @@ class StoryQa(unittest.TestCase):
         self.assertIs(g2["burned_captions"], False)
         self.assertEqual((v1["version"], v2["version"]), ("story-qa-criteria-v1", "story-qa-criteria-v2"))
         self.assertTrue(v2["frozen_before_first_story_render"])
+
+
+class NoRendererReadsTheNewQaYet(unittest.TestCase):
+    """Review of #418, point 3: story QA v2/v3 rename keys that qa_pilot.py and prepublish_gate.py index directly
+    (caption_coverage_of_speech_min, figure_present_fraction_max, footage_picture_share_min, title_card_seconds), and
+    prepublish_gate knows only story-qa-criteria-v1. Until a reader handles the new keys (slice 3), nothing that
+    renders, measures or gates a video may point at v2 or v3: this fails the PR that wires one in too early."""
+    NEW = re.compile(r"story-qa-criteria-v[23]|qa_criteria_story_v[23]")
+    ALLOWED = {"migration/production/bible/long_plan_check.py", "migration/production/bible/test_long_plan_check.py"}
+
+    def readers(self):
+        for pattern in ("migration/**/*.py", "migration/**/*.sh", ".github/workflows/*.yml"):
+            for path in ROOT.glob(pattern):
+                rel = path.relative_to(ROOT).as_posix()
+                if "/evidence/" in rel or rel in self.ALLOWED:
+                    continue
+                yield rel, path.read_text(errors="replace")
+
+    def test_no_renderer_or_gate_points_at_story_qa_v2_or_v3_before_it_reads_their_keys(self):
+        qa_pilot = (ROOT / "migration" / "production" / "qa_pilot.py").read_text()
+        gate = (ROOT / "migration" / "publish" / "prepublish_gate.py").read_text()
+        ready = all(k in qa_pilot for k in ("srt_coverage_of_speech_min", "figures_allowed", "first_shot")) and \
+            "story-qa-criteria-v3" in gate
+        early = [rel for rel, text in self.readers() if self.NEW.search(text)]
+        if not ready:
+            self.assertEqual(early, [], "story QA v2/v3 referenced before qa_pilot/prepublish_gate can read them "
+                                        "(LONG_DESIGN.md, build blocker)")
+
+    def test_the_readers_still_index_the_v1_keys(self):
+        # the gap this guards: the keys v2/v3 removed are read directly today
+        qa_pilot = (ROOT / "migration" / "production" / "qa_pilot.py").read_text()
+        self.assertIn('g["caption_coverage_of_speech_min"]', qa_pilot)
+        self.assertIn('g["footage_picture_share_min"]', qa_pilot)
+        self.assertNotIn("story-qa-criteria-v3", (ROOT / "migration" / "publish" / "prepublish_gate.py").read_text())
 
 
 if __name__ == "__main__":
