@@ -32,11 +32,13 @@ SCAN = {"status": "PASS", "rows": {"black_picture": {"longest_s": 0, "pass": Tru
                                    "frozen_picture": {"longest_s": 9, "inside": False, "blocking": False}}}
 
 
-def run(qa, manifest, review, preflight=(), video_bytes=None, criteria=CRITERIA, scan=SCAN):
+def run(qa, manifest, review, preflight=(), video_bytes=None, criteria=CRITERIA, scan=SCAN, archetype="bible-story-long"):
     with tempfile.TemporaryDirectory() as t:
         d = Path(t) / "pilot-009"
         (d / "out").mkdir(parents=True)
         (d / "qa_criteria.json").write_bytes(criteria)
+        if archetype is not None:
+            (d / "script.json").write_text(json.dumps({"archetype": archetype}))
         for name, obj in (("qa", qa), ("manifest", manifest), ("review", review), ("scan", scan)):
             if obj is not None:
                 (d / "out" / f"{name}.json").write_text(json.dumps(obj))
@@ -54,6 +56,14 @@ class Gate(unittest.TestCase):
         self.assertTrue(r["eligible_for_automatic_publication"])
         self.assertIn("beats_per_minute", r["informative_not_deciding"])  # outside its band, still PASS
         self.assertIn("scan_frozen_picture", r["informative_not_deciding"])  # reported until calibrated
+
+    def test_a_prayer_long_never_passes(self):
+        # owner, 2026-10-26: "stop the prayer videos"; only a Bible-story long may be approved or published
+        for archetype in ("migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md", None):
+            r = run(*good(), archetype=archetype)
+            self.assertEqual((r["decision"], r["dimensions"]["format"]), ("FAIL", "FAIL"), archetype)
+            self.assertEqual(r["items"]["format"][0]["detail"], "NOT_STORY_LONG")
+        self.assertEqual(run(*good())["dimensions"]["format"], "PASS")
 
     def test_bad_cases_fail(self):
         qa, man, rev = good()

@@ -1,0 +1,31 @@
+{
+ "version": "channel-unschedule-receipt-v1",
+ "channel_id": "UCuMF6pJQkyMzaVoAxFL86yA",
+ "plan": "hold-plan.json",
+ "undo": "set each video back to its 'before'",
+ "already_public_not_changed": [
+  "53Xysf9x46c"
+ ],
+ "changes": [
+  {
+   "video_id": "8heTdP0LllM",
+   "before": {
+    "privacy": "private",
+    "publishAt": "2026-10-27T00:00:00Z"
+   },
+   "after": {
+    "privacy": "private",
+    "publishAt": null
+   },
+   "result": "UNSCHEDULED"
+  },
+  {
+   "video_id": "53Xysf9x46c",
+   "before": {
+    "privacy": "public",
+    "publishAt": null
+   },
+   "result": "SKIPPED_ALREADY_PUBLIC"
+  }
+ ]
+}

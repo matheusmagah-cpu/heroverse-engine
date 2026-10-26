@@ -4,7 +4,7 @@ on:
     branches: [main]
 permissions:
   contents: read
-# E100: a new push to the same PR replaces its running check (the newest commit is checked in full; the replaced
+# E102: a new push to the same PR replaces its running check (the newest commit is checked in full; the replaced
 # commit can no longer merge). Runs of different PRs never cancel each other.
 concurrency:
   group: heroverse-pr-checks-${{ github.event.pull_request.number }}
@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Unit tests (no network, no secrets), ffmpeg and OpenCV installing beside the tests that do not use them
-        # E100: the apt install (~65 s) runs while the tests that use no video tool run; the VIDEO tests start once it
+        # E102: the apt install (~65 s) runs while the tests that use no video tool run; the VIDEO tests start once it
         # has succeeded. Each test runs in its own process, one per CPU at a time; every result is printed in list order
         # and any failure, a test that never reported, or a failed install fails the step
         timeout-minutes: 9

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# E100: render_pilot.sh fetched ~150 release assets one after another (~1.5 s each, 4 min of a 20-minute smoke run).
+# E102: render_pilot.sh fetched ~150 release assets one after another (~1.5 s each, 4 min of a 20-minute smoke run).
 # fetch_assets.sh LIST REPO [JOBS]: every line of LIST is "asset<TAB>destination<TAB>sha256"; each asset is downloaded
 # with assets.sh and hash-checked, JOBS at a time (default 4). Any download or hash failure fails the whole call
 # (xargs exits non-zero), so nothing reaches the render unverified. ASSETS may point at another downloader (tests).

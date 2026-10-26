@@ -112,6 +112,20 @@ def item(source, name, state, detail=None):
     return {"source": source, "item": name, "state": state, **({"detail": detail} if detail is not None else {})}
 
 
+def story_long(pilot_dir):
+    """Owner, 2026-10-26: "stop the prayer videos; the channel is going in another direction." Only a Bible-story
+    long (render_queue.story_pilot) may be approved or published. Imported here, not at module level:
+    render_queue -> shorts_prerequisite -> publication_binding imports this module."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+    import render_queue
+    return render_queue.story_pilot(pilot_dir)
+
+
+def format_items(pilot_dir):
+    ok = story_long(pilot_dir)
+    return [item("format", "story_long", "PASS" if ok else "FAIL", "bible-story-long" if ok else "NOT_STORY_LONG")]
+
+
 def binding(d, qa, manifest, review, video):
     out = []
     sha = (manifest or {}).get("output_sha256")
@@ -180,7 +194,7 @@ def evaluate(pilot_dir, video=None, preflight_problems=None):
     qa, manifest = load(d / "out" / "qa.json"), load(d / "out" / "manifest.json")
     review = load(d / "out" / "review.json")
     sha = (manifest or {}).get("output_sha256")
-    dims = {"binding": binding(d, qa, manifest, review, video)}
+    dims = {"binding": binding(d, qa, manifest, review, video), "format": format_items(d)}
     spec_by_dim = DIMENSIONS_BY_VERSION.get((qa or {}).get("criteria_version"), DIMENSIONS)
     for name, spec in spec_by_dim.items():
         dims[name] = qa_items(qa, spec["qa"], sha) + review_items(review, spec["review"], sha)

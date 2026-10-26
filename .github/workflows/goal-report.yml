@@ -33,7 +33,7 @@ jobs:
           done
           gh run list --repo matheusmagah-cpu/heroverse-runner --workflow render.yml --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json" && add runner || true
           python3 -I -B migration/ops/health.py "$T/runs.json" migration/evidence/daily-report/latest.md
-      - name: Actions minutes (private engine; budget in OPERATIONS.md)
+      - name: Actions minutes per workflow (speed only; public repo, standard runners free)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

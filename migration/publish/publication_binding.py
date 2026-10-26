@@ -77,6 +77,10 @@ def main(pilot_dir):
         print(json.dumps({'status': 'FAIL', 'problems': ['EVIDENCE_UNREADABLE:' + type(exc).__name__]}))
         return 1
     problems = check(*docs, review=review)
+    # owner, 2026-10-26: prayer longs stopped. publish.yml runs this before any upload or resume, so a prayer pilot
+    # is refused here even when an older approval and a PASS gate exist for it
+    if not canonical_gate.story_long(d):
+        problems.append('NOT_STORY_LONG')
     print(json.dumps({'status': 'FAIL' if problems else 'PASS', 'problems': problems,
                       'output_sha256': docs[0].get('output_sha256') if isinstance(docs[0], dict) else None}))
     return 1 if problems else 0

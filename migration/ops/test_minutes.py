@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Offline checks of the Actions minutes report, the hourly pace guard and the minute savings of E100."""
-from datetime import datetime, timedelta, timezone
+"""Offline checks of the Actions minutes report (a speed measure: public repo, standard runners free; E102) and of
+the CI speedups found while measuring it."""
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -24,13 +25,6 @@ def run(name, created, started, updated, conclusion="success"):
             "status": "completed", "conclusion": conclusion}
 
 
-def at(age, minutes, name="x"):
-    """A run created `age` before NOW that lasted `minutes`."""
-    c = NOW - age
-    iso = lambda d: d.strftime("%Y-%m-%dT%H:%M:%SZ")  # noqa: E731
-    return run(name, iso(c), iso(c), iso(c + timedelta(minutes=minutes)))
-
-
 def step_script(workflow, step_name):
     """The `run: |` body of one step, unindented, as the runner executes it."""
     text = (WF / workflow).read_text()
@@ -43,60 +37,41 @@ def step_script(workflow, step_name):
 
 class Minutes(unittest.TestCase):
     def test_rounding_windows_and_alerts(self):
+        # E21's antidote, kept: each run rounds up to a whole minute and lands in its windows. E102: no alerts any more
         runs = [run("approve", "2026-10-20T08:00:00Z", "2026-10-20T08:00:00Z", "2026-10-20T08:14:10Z"),   # 15 min
                 run("heartbeat", "2026-10-20T09:00:00Z", "2026-10-20T09:00:00Z", "2026-10-20T09:00:20Z"),  # 1 min
                 run("old", "2026-09-01T00:00:00Z", "2026-09-01T00:00:00Z", "2026-09-01T02:00:00Z"),        # outside 30 d
                 {**run("q", "2026-10-20T10:00:00Z", None, "2026-10-20T10:00:00Z"), "run_started_at": None}]  # never ran
         s = m.summary(runs, NOW)
         self.assertEqual(s["windows"], {"24h": 16, "7d": 16, "30d": 16})
-        self.assertEqual(s["alerts"], [])
-        heavy = [run("x", "2026-10-20T0%d:00:00Z" % h, "2026-10-20T0%d:00:00Z" % h, "2026-10-20T0%d:59:00Z" % h) for h in range(1, 7)]
-        self.assertTrue(any(a.startswith("last 24 h") for a in m.summary(heavy, NOW)["alerts"]))   # 354 min > 1.5 x 233
+        self.assertEqual(s["top"][0], {"workflow": "approve", "minutes": 15, "runs": 1, "per_run": 15.0})
+        self.assertNotIn("alerts", s)
 
-    def test_pace_states_what_the_rolling_budget_still_allows(self):
-        # E100: 2,346 min in a day against 233/day; the report must say the pace, the headroom and the next day's cap
-        runs = [at(timedelta(days=d, hours=1), 900) for d in range(1, 7)]     # 6 days x 900 min, before the last 24 h
-        runs += [at(timedelta(hours=2), 600)]                                  # 600 min in the last 24 h
-        s = m.summary(runs, NOW)
-        p = s["pace"]
-        self.assertEqual(s["windows"], {"24h": 600, "7d": 6000, "30d": 6000})
-        self.assertEqual(p["daily_target"], 233)
-        self.assertEqual(p["daily_7d"], 857)
-        self.assertEqual(p["allowed_next_24h"], 7000 - 5400)                   # the 29 days that stay in the window
-        self.assertEqual(p["headroom_30d"], 1000)
-        self.assertEqual(p["days_left_at_7d_pace"], 1.2)
-        self.assertEqual(p["cut_pct"], 73)                                     # 857 -> 233 a day
-        self.assertTrue(any("the next 24 h may use at most 1600 min" in a for a in s["alerts"]))   # >= 80 % used
-        quiet = m.pace({"24h": 0, "7d": 0, "30d": 0}, 0)
-        self.assertEqual((quiet["days_left_at_7d_pace"], quiet["cut_pct"], quiet["allowed_next_24h"]), (None, 0, 7000))
+    def test_report_is_a_speed_metric_with_no_budget_alarm(self):
+        # E102: the engine is public and standard runners are free for public repos; the report said "private
+        # engine; budget 7000 min / 30 days" and raised a spending alarm that did not exist
+        heavy = [run("render", "2026-10-20T0%d:00:00Z" % h, "2026-10-20T0%d:00:00Z" % h, "2026-10-20T0%d:59:00Z" % h)
+                 for h in range(1, 7)]                                      # 354 min in a day: no alarm
         with tempfile.TemporaryDirectory() as d:
-            (Path(d) / "runs.json").write_text(json.dumps(runs))
+            (Path(d) / "runs.json").write_text(json.dumps(heavy))
             m.main(str(Path(d) / "runs.json"), str(Path(d) / "report.md"), NOW.isoformat())
             report = (Path(d) / "report.md").read_text()
-        self.assertIn("- pace: 857 min/day over the last 7 days against 233/day (cut 73 %); headroom 1000 min, "
-                      "gone in 1.2 days at this pace; the next 24 h may use at most 1600 min", report)
+        self.assertIn("## Actions minutes (speed only; public repo: standard runners free)", report)
+        self.assertIn("| render | 354 | 6 | 59.0 |", report)
+        for word in ("budget", "overage", "projection", "\u26a0", "target"):
+            self.assertNotIn(word, report.lower())
+        source = (ROOT / "migration/ops/minutes.py").read_text()
+        self.assertNotRegex(source, r"BUDGET\s*=|7000|overage alert")
+        self.assertNotIn("minutes.py check", (WF / "heartbeat.yml").read_text())
+        system = (ROOT / "migration/SYSTEM.md").read_text()
+        self.assertNotIn("7000 / 30 days", system)
+        self.assertIn("standard GitHub-hosted runners are free for public repositories", system)
+        self.assertIn("public repo, standard runners free", (WF / "goal-report.yml").read_text())
 
-    def test_hourly_guard_warns_and_never_fails_the_beat(self):
-        self.assertIsNone(m.check([at(timedelta(hours=3), 300)], NOW))         # 300 <= 1.5 x 233
-        line = m.check([at(timedelta(hours=3), 300), at(timedelta(hours=5), 100),
-                        at(timedelta(hours=30), 2000)], NOW)                   # the 30-hour-old run is outside
-        self.assertTrue(line.startswith("::warning::ACTIONS_MINUTES_OVER_PACE last 24 h used 400 min"), line)
-        with tempfile.TemporaryDirectory() as d:
-            bad = Path(d) / "runs.json"
-            bad.write_text("not json")
-            out = subprocess.run([sys.executable, "-I", "-B", str(ROOT / "migration/ops/minutes.py"), "check", str(bad)],
-                                 capture_output=True, text=True)
-            self.assertEqual(out.returncode, 0)
-            self.assertIn("::warning::ACTIONS_MINUTES_CHECK_FAILED", out.stdout)
-        beat = (WF / "heartbeat.yml").read_text()
-        step = beat[beat.index("- name: Actions minutes pace"):beat.index("  runner-wake:")]
-        for needle in ("if: always()", "continue-on-error: true", "set -o pipefail", "minutes.py check"):
-            self.assertIn(needle, step)
-
-    def test_minutes_are_not_spent_on_idle_setup_or_superseded_runs_e100(self):
-        # E100: 2,346 min in 24 h (budget 233/day). The render path spent ~1.5 min deleting SDKs it did not need,
-        # ~2 min installing four venvs one after another and ~4 min downloading ~150 assets one at a time on every
-        # smoke, preview and render; every push to a PR re-ran its check beside the superseded one
+    def test_ci_does_not_wait_on_idle_setup_or_superseded_runs(self):
+        # E102 (speed): the render path spent ~1.5 min deleting SDKs it did not need, ~2 min installing four venvs
+        # one after another and ~4 min downloading ~150 assets one at a time on every smoke, preview and render;
+        # every push to a PR re-ran its check beside the superseded one
         render = (ROOT / "migration/ci/render_pilot.sh").read_text()
         self.assertIn('if [ "${avail_gb:-0}" -lt "${FREE_DISK_BELOW_GB:-40}" ]; then', render)
         self.assertIn('wait "${job%%:*}" || { echo "SETUP_FAILED', render)
@@ -156,7 +131,7 @@ class Minutes(unittest.TestCase):
             self.assertIn("VIDEO_TOOLS_FAILED", broken.stdout)
 
     def test_tests_that_can_skip_without_the_video_tools_wait_for_them(self):
-        # E100: a test that skips when ffmpeg is missing would pass silently if it ran before the install
+        # a test that skips when ffmpeg is missing would pass silently if it ran before the install
         script = step_script("pr-checks.yml", "Unit tests (no network, no secrets), ffmpeg and OpenCV installing")
         video = set(re.search(r'VIDEO=" (.*?)"\n', script, re.S).group(1).replace("\\", " ").split())
         listing = re.search(r"for t in (.*?); do\n", script, re.S).group(1).replace("\\", " ").split()

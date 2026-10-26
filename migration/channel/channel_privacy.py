@@ -119,7 +119,10 @@ def apply(plan_path, out):
 def unschedule(plan_path, out):
     """Owner hold: each listed video becomes private with no pending publishAt (a scheduled upload already is
     private, so apply() would skip it and it would still go public at its time). Reversible: the receipt keeps
-    the old publishAt."""
+    the old publishAt.
+    A hold only stops what is not public yet (owner, 2026-10-26: the scheduled prayer longs): a video that is already
+    public is never changed here (SKIPPED_ALREADY_PUBLIC; hiding a public video is apply() with its own reviewed
+    plan), and one already private with no publishAt is left as it is (ALREADY_UNSCHEDULED, no write)."""
     plan_record = json.loads(Path(plan_path).read_text())
     if plan_record["channel_id"] != CHANNEL:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
@@ -132,6 +135,12 @@ def unschedule(plan_path, out):
             continue
         status = current[0]["status"]
         before = {"privacy": status["privacyStatus"], "publishAt": status.get("publishAt")}
+        if before["privacy"] == "public":
+            receipt.append({"video_id": vid, "before": before, "result": "SKIPPED_ALREADY_PUBLIC"})
+            continue
+        if before["privacy"] == "private" and not before["publishAt"]:
+            receipt.append({"video_id": vid, "before": before, "result": "ALREADY_UNSCHEDULED"})
+            continue
         body = {"id": vid, "status": {"privacyStatus": "private", "embeddable": status.get("embeddable", True),
                                       "license": status.get("license", "youtube"),
                                       "publicStatsViewable": status.get("publicStatsViewable", True),
@@ -140,12 +149,18 @@ def unschedule(plan_path, out):
         ok = after["privacyStatus"] == "private" and not after.get("publishAt")
         receipt.append({"video_id": vid, "before": before, "after": {"privacy": after["privacyStatus"],
                         "publishAt": after.get("publishAt")}, "result": "UNSCHEDULED" if ok else "UNEXPECTED"})
+    public = [r["video_id"] for r in receipt if r["result"] == "SKIPPED_ALREADY_PUBLIC"]
     Path(out).write_text(json.dumps({"version": "channel-unschedule-receipt-v1", "channel_id": CHANNEL,
                                      "plan": Path(plan_path).name, "undo": "set each video back to its 'before'",
+                                     "already_public_not_changed": public,
                                      "changes": receipt}, indent=1) + "\n")
+    for vid in public:   # a skip, never a hide: stated plainly in the log and as an Actions warning
+        print(f"HELD_VIDEO_ALREADY_PUBLIC {vid}: it was public before this run; left public, not changed "
+              f"(hiding it is channel_privacy.py apply with a reviewed plan)")
+        print(f"::warning::HELD_VIDEO_ALREADY_PUBLIC {vid} was already public; the hold did not change it")
     print(json.dumps({"unscheduled": sum(r["result"] == "UNSCHEDULED" for r in receipt), "total": len(receipt),
-                      "changes": receipt}))  # public ids and statuses only
-    if any(r["result"] != "UNSCHEDULED" for r in receipt):
+                      "already_public_not_changed": public, "changes": receipt}))  # public ids and statuses only
+    if any(r["result"] not in ("UNSCHEDULED", "ALREADY_UNSCHEDULED", "SKIPPED_ALREADY_PUBLIC") for r in receipt):
         raise SystemExit("UNSCHEDULE_INCOMPLETE")
 
 

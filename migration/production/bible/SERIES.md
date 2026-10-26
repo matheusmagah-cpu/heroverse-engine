@@ -43,10 +43,15 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
   `<Story>: <human angle> | Genesis N-M Bible Story (KJV)` (long); same narrator voice; same visual anchors
   (PROMPT_GUIDE.md); the long's chapters reuse the Shorts' hook lines.
 
-**Calendar (long slots at 10:00 UTC; prayer longs already made keep their slots).**
+**Calendar (long slots at 10:00 UTC, one Bible-story long every 2 days; prayer longs stopped, owner 2026-10-26:
+"stop the prayer videos; the channel is going in another direction").** The long stands on its own: it follows its own
+registered structure (`structures/bible-story-long.json`, gate in `script.gate`: 14-18 min, a character speaks the
+conflict in the first 30 s, >= 6 re-hooks, the climax at 0.6-0.85, the Keeper in every long, <= 25 % and never in the
+cold open, no burned captions); traffic from its Shorts is only a plus. `ops/runway.py` counts these slots (a
+script counts once the full `script_check` passes; a prayer long still scheduled alerts PRAYER_LONG_SCHEDULED).
 | Arc | Shorts (episodes) | Shorts dates | Long | Long slot |
 |---|---|---|---|---|
-| prayer (done) | - | - | 013 night, 014 morning, 008 night | 26/10 00:00, 26/10 10:00, 27/10 00:00 |
+| prayer (stopped 26/10) | - | - | 013 night (public); 014 morning (its slot passed before the stop: the hold leaves it if public); 008 night held by `channel-privacy.yml` unschedule (`channel/hold-plan.json`) | 26/10 00:00, 26/10 10:00; 27/10 00:00 withdrawn |
 | 1 In the beginning | 1-4 (Gen 1-3) | 24-25/10 | Creation, Eden and the Fall | 28/10 10:00 |
 | 2 Brothers and the walk with God | 5-8 (Gen 4-6) | 26-27/10 | Cain, Abel and the days before the Flood | 30/10 10:00 |
 | 3 The Flood | 9-12 (Gen 7-11) | 28-29/10 | Noah, the Flood and the rainbow | 01/11 10:00 |

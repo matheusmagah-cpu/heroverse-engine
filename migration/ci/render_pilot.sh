@@ -27,7 +27,7 @@ upload_log() { [ "${PUBLIC_LOGS:-0}" = 1 ] && bash "$ASSETS" upload "$LOG#$PILOT
 trap upload_log EXIT
 
 stage "Free runner disk only when short of space (unused preinstalled SDKs) and record space"
-# E100: deleting the SDKs took 60-100 s of every run while the runner had far more space than a render uses
+# E102: deleting the SDKs took 60-100 s of every run while the runner had far more space than a render uses
 # (a full render peaks ~10 GB over the image); they are deleted only when less than FREE_DISK_BELOW_GB is free
 avail_gb=$(df -BG --output=avail "$T" | tail -1 | tr -dc 0-9)
 if [ "${avail_gb:-0}" -lt "${FREE_DISK_BELOW_GB:-40}" ]; then
@@ -40,7 +40,7 @@ df -h / "$T" | tail -n +1
 end
 
 stage "Tools and pinned runtimes"
-# E100: the apt tools, the four venvs and the depth model do not depend on each other: they install side by side
+# E102: the apt tools, the four venvs and the depth model do not depend on each other: they install side by side
 # (same pins, each logged) and every one must succeed before the render starts
 SETUP=()
 setup() { local name=$1; shift; "$@" > "$T/setup-$name.log" 2>&1 & SETUP+=("$!:$name"); }
@@ -83,7 +83,7 @@ for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.arg
   printf '%s\t%s\t%s\n' "$asset" "$T/in/footage/$id.mp4" "$sha" >> "$FETCH"
   cp "$meta" "$T/in/footage/$id.json"
 done
-# E100: one asset at a time took ~4 min for ~150 assets; 4 at a time, each still sha256-checked, any failure stops here
+# E102: one asset at a time took ~4 min for ~150 assets; 4 at a time, each still sha256-checked, any failure stops here
 bash "$(dirname "$ASSETS")/fetch_assets.sh" "$FETCH" "$ENGINE_REPO" "${FETCH_JOBS:-4}"
 CRITERIA=migration/production/qa_criteria_v3.json
 if ls "$T"/in/footage/*.mp4 >/dev/null 2>&1; then

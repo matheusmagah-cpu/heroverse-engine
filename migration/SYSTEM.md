@@ -37,8 +37,9 @@ repeatable shape of a video:
 - calls to action;
 - title and thumbnail.
 
-The format may change whenever mining proves a better structure **in the same line** (English
-Christian prayer and devotion) that does not conflict with the channel. No format is frozen.
+The format may change whenever mining proves a better structure **in the same line** (the English KJV Bible
+series, story by story, `production/bible/SERIES.md`; prayer longs stopped by the owner on 2026-10-26) that does not
+conflict with the channel. No format is frozen.
 
 Every stage, **from the channel configuration to the pinned comment**, is held to the same bar:
 - **ultra-professional and measured;**
@@ -60,7 +61,7 @@ Nothing else is added unless a stage cannot meet its bar without it, and that is
 
 ## Channel configuration (setup, then maintained by live intelligence)
 
-The channel is configured as a top Christian prayer channel, and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
+The channel is configured as a top KJV Bible-story channel (SERIES.md; formerly prayer), and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
 - **the official YouTube Help pages**, with source and verification date;
 - **what the validated winners' channels do**, measured with vidIQ.
 
@@ -122,7 +123,7 @@ Produce the master and package, retain provenance, and deliver the frozen techni
 - `episode_build` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
 - A failed build is never dispatched again without new evidence and a fix merged. A resume (`resume_run`) keeps every clip already made.
 - An engine PR is reviewed before merge, not after.
-- Actions minutes stay within the budget (7000 / 30 days, 233 a day). A repeated build is the first thing to cut. The daily report states the pace (`ops/minutes.py`: 7-day min/day, headroom, the next 24 h's cap) and the heartbeat warns hourly when a day goes over 1.5 × 233 (E100).
+- Actions minutes cost nothing: the engine repository is public, and standard GitHub-hosted runners are free for public repositories (owner, 2026-10-26: it stays public; E102). The daily report (`ops/minutes.py`) lists minutes per workflow as a speed and wall-clock measure only. A repeated build is still the first thing to cut, because it delays the work.
 
 ### Shorts are a production delivery, with their own review
 

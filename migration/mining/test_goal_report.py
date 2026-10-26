@@ -45,6 +45,70 @@ class Funnel(unittest.TestCase):
         self.assertIsNone(gr.funnel([])["share_from_shorts"])
 
 
+class LongRunway(unittest.TestCase):
+    """Owner, 2026-10-26: prayer longs stopped. The runway and its alert count Bible-story long scripts on their
+    registered structure, never prayer pilots."""
+    def test_runway_counts_only_structured_bible_story_longs(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+        from test_script_check import structured_story
+        now = datetime(2026, 10, 26, 12, 0, tzinfo=timezone.utc)
+        prayer = {"archetype": "migration/strategy/FORMAT_ARCHETYPE_MORNING_PRAYER_DIRECT_ADDRESS.md", "working_title": "Night Prayer"}
+        with tempfile.TemporaryDirectory() as t:
+            def pilot(name, at, script):
+                d = Path(t) / name
+                d.mkdir()
+                (d / "schedule.json").write_text(json.dumps({"publish_at": at}))
+                (d / "script.json").write_text(json.dumps(script))
+            def structure_only(d, production=None):     # the script's other files are not in this fixture
+                return gr.long_runway.script_check.structure_problems(json.loads((Path(d) / "script.json").read_text())), {}
+            pilot("pilot-008", "2026-10-31T00:00:00Z", prayer)                        # 4.5 days ahead, prayer
+            with patch.object(gr.long_runway.script_check, "check", structure_only):
+                rows, runway = gr.pipeline(t, {}, now)
+                self.assertEqual((rows[0]["format"], rows[0]["stage"], runway), ("prayer (retired)", None, 0.0))
+                alerts = gr.pipeline_alerts(rows, runway)
+                self.assertTrue(alerts[0].startswith("LONG SCRIPT RUNWAY 0.0 days (< 2): write the next Bible-story long"), alerts)
+                self.assertFalse(any("next pilots" in a for a in alerts))
+                pilot("pilot-015", "2026-10-28T10:00:00Z", structured_story(burned_captions=True))   # off its structure
+                rows, runway = gr.pipeline(t, {}, now)
+                self.assertEqual(runway, 0.0)
+                self.assertIn("pilot-015 Bible-story long script FAIL: STORY_BURNED_CAPTIONS", " ".join(gr.pipeline_alerts(rows, runway)))
+                (Path(t) / "pilot-015" / "script.json").write_text(json.dumps(structured_story()))
+                rows, runway = gr.pipeline(t, {}, now)
+                self.assertEqual(runway, 1.9)                                          # 28/10 10:00 - 26/10 12:00
+                self.assertEqual([r["stage"] for r in rows if r["pilot"] == "pilot-015"], ["script"])
+                self.assertTrue(gr.pipeline_alerts(rows, runway)[0].startswith("LONG SCRIPT RUNWAY 1.9"))
+
+    def test_report_and_runway_share_one_stage_rule(self):
+        # review of #415: a rendered, approved or uploaded long stays counted whatever its later gate fields say
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+        from test_script_check import structured_story
+        now = datetime(2026, 10, 26, 12, 0, tzinfo=timezone.utc)
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t) / "pilot-015"
+            (d / "out").mkdir(parents=True)
+            (d / "schedule.json").write_text(json.dumps({"publish_at": "2026-10-28T10:00:00Z"}))
+            (d / "script.json").write_text(json.dumps(structured_story(burned_captions=True)))
+            (d / "out" / "manifest.json").write_text(json.dumps({"output_sha256": "a" * 64}))
+            rows, runway = gr.pipeline(t, {}, now)
+            self.assertEqual((rows[0]["stage"], runway), ("rendered", 1.9))
+            self.assertEqual(rows[0]["stage"], gr.long_runway.long_stage(d, {})[0])
+            self.assertEqual(gr.long_runway.check(t, {}, now)[0][0]["stage"], "rendered")
+
+    def test_a_malformed_file_does_not_crash_the_report(self):
+        # review of #415: a strict json.loads on one broken script.json or schedule.json stopped the whole report
+        now = datetime(2026, 10, 26, 12, 0, tzinfo=timezone.utc)
+        with tempfile.TemporaryDirectory() as t:
+            for name, sched, script in (("pilot-015", '{"publish_at": "2026-10-28T10:00:00Z"}', "{broken"),
+                                        ("pilot-016", "{broken", '{"archetype": "bible-story-long"}')):
+                d = Path(t) / name
+                d.mkdir()
+                (d / "schedule.json").write_text(sched)
+                (d / "script.json").write_text(script)
+            rows, runway = gr.pipeline(t, {}, now)
+            self.assertEqual([(r["pilot"], r["format"]) for r in rows], [("pilot-015", "script.json unreadable")])
+            self.assertIn("pilot-015 script.json unreadable", gr.pipeline_alerts(rows, runway))
+
+
 class Integration(unittest.TestCase):
     def test_existing_collection_to_learning_capture_no_added_requests(self):
         calls=[]
