@@ -113,6 +113,11 @@ BLOCK = [
     ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml -f plan={G7}x"}),
     ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && "
                          "gh api repos/o/r/actions/workflows/episode.yml/dispatches -f ref=main"}),
+    # regenerate only together with resume_run, after it, on the same allowed form
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml --ref main "
+                         f"-f plan={G7} -f regenerate=s-well"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml --ref main "
+                         f"-f plan={G7} -f resume_run=1 -f regenerate=s-well; gh workflow run episode.yml -f plan={G8}"}),
     # E96/E106: cf-images takes pilot-NNN or characters, never a path
     ("Bash", {"command": "gh workflow run cf-images.yml -f pilot=migration/production/characters -f engine=flux"}),
     ("Bash", {"command": "gh workflow run cf-images.yml -f engine=flux -f pilot='production/pilot-015'"}),
@@ -141,6 +146,8 @@ ALLOW = [
                          "-f plan=migration/production/bible/plans/genesis-08-short.json"}),
     ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml --ref main "
                          f"-f plan={G7} -f resume_run=40297987571"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml --ref main "
+                         f"-f plan={G7} -f resume_run=40357197063 -f regenerate=s-well,s-scroll"}),
     ("Bash", {"command": f"python3 {EB} verify-preflight '{G7}' && gh workflow run episode.yml -f 'plan={G7}'"}),
     ("Bash", {"command": 'gh workflow run cf-images.yml -f pilot="characters" -f engine=flux'}),
     ("Bash", {"command": "gh workflow run cf-images.yml -f pilot='pilot-015' -f engine=sdxl"}),
