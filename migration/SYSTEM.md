@@ -115,6 +115,15 @@ The direction specifies the viewer's need, the original idea and the intended pr
 
 Produce the master and package, retain provenance, and deliver the frozen technical QA and signal scan with the file identity. Stage 3 judges the actual result through the designated audiovisual review and comparison with the mined references; a production task cannot approve its own output by declaring it complete.
 
+### No rework (owner, 2026-10-26: "these repetitions are horrible for the project"; E99)
+
+- A plan is checked against its validated structure (`plan_check.py --strict`) before any build.
+- Any new talking setup (a new speaker, pose, reference or prompt binding) is first tested with direct 0-credit Pavo calls and `lipsync_check.py`, with the pass rate recorded in `evidence/pavo/`. Only then is a build dispatched.
+- `episode_build` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
+- A failed build is never dispatched again without new evidence and a fix merged. A resume (`resume_run`) keeps every clip already made.
+- An engine PR is reviewed before merge, not after.
+- Actions minutes stay within the budget (7000 / 30 days). A repeated build is the first thing to cut.
+
 ### Shorts are a production delivery, with their own review
 
 After the long video's prerequisite gate passes (`publish/shorts_prerequisite.py`), derive the Short from its own narration and pictures. Start and end on full sentences, apply the structure's Shorts rules and link back to the long video. Deliver each Short through stages 2 and 3 with its own hash, technical checks and audiovisual approval. The long video's approval does not approve a Short. An existing preserved Short resumes at its missing check rather than restarting production.

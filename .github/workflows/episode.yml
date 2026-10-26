@@ -91,7 +91,7 @@ jobs:
           cp "$RUNNER_TEMP/prev/report.json" "$WORK/report.json"
           find "$RUNNER_TEMP/prev/clips" -maxdepth 1 -name '*.mp4' ! -name '*-raw.mp4' -exec cp {} "$WORK/clips/" \;
           echo "RESUMED_FROM $RESUME"
-      - name: Pavo shots in order (0-credit quote each), clip_check and lipsync_check, at most 2 regenerations (5 for a talking clip, E98)
+      - name: Pavo shots, talking and God voice-over first (E99; 0-credit quote each), clip_check and lipsync_check, at most 2 regenerations (5 for a talking clip, E98)
         env:
           PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
         run: python3 -I -B migration/production/bible/episode_build.py generate "$PLAN" "$WORK" "$RUNNER_TEMP/lip/bin/python" "$RUNNER_TEMP/face_landmarker.task"
