@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-afraid-bush-environment-green-outdoors-shrub-pl",
+ "theme": "g13-c4-afraid",
+ "query": "dense bushes",
+ "source": "pixabay",
+ "title": "bush, environment, green, outdoors, shrub, plant, leaves, flora, branch, summer, costal, earth day, nature, landscape",
+ "page": "https://pixabay.com/videos/id-204285/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-204285/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5af2cf77f2c45040477b67b5c39cd69b511a723c7c708cf00dbe167bcb2a36d2",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  98.1,
+  98.5,
+  98.8,
+  98.2,
+  99.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-afraid-bush-environment-green-outdoors-shrub-pl-sha256-5af2cf77f2c45040477b67b5c39cd69b511a723c7c708cf00dbe167bcb2a36d2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

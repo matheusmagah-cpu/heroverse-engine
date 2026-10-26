@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-out-farm-countryside-agriculture-landscape-g",
+ "theme": "g13-c4-out",
+ "query": "barren land",
+ "source": "pixabay",
+ "title": "farm, countryside, agriculture, landscape, green, country, rural, grass, farmland, farming, farmhouse, land, field",
+ "page": "https://pixabay.com/videos/id-14333/",
+ "author": "paulmaunders",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 30.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: paulmaunders via Pixabay (https://pixabay.com/videos/id-14333/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f289d0b7175a64a6357218f13a000ad56785cba25d8196262da417e49ed28302",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  113.9,
+  107.5,
+  114.1,
+  105.6,
+  106.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-out-farm-countryside-agriculture-landscape-g-sha256-f289d0b7175a64a6357218f13a000ad56785cba25d8196262da417e49ed28302.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

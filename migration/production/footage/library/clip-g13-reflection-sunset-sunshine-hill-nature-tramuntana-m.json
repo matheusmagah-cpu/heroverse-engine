@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-reflection-sunset-sunshine-hill-nature-tramuntana-m",
+ "theme": "g13-reflection",
+ "query": "sunrise over hills",
+ "source": "pixabay",
+ "title": "sunset, sunshine, hill, nature, tramuntana mountains, nightfall, dusk, serra de tramuntana, landscape",
+ "page": "https://pixabay.com/videos/id-220121/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-220121/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ec24da63f8e3e3be6982c024477c4970b344bc7eae28c182090ca84e49334e76",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  138.4,
+  134.1,
+  130.8,
+  129.9,
+  127.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-reflection-sunset-sunshine-hill-nature-tramuntana-m-sha256-ec24da63f8e3e3be6982c024477c4970b344bc7eae28c182090ca84e49334e76.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-eyes-squirrel-eating-peanut-fall-leaves",
+ "theme": "g13-c3-eyes",
+ "query": "fig leaves",
+ "source": "pixabay",
+ "title": "squirrel, eating, peanut, fall, leaves",
+ "page": "https://pixabay.com/videos/id-186029/",
+ "author": "MountainDweller",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 79.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: MountainDweller via Pixabay (https://pixabay.com/videos/id-186029/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e8d42f9f652f01cf396454cabaf65ef6f0b09c4af2bd92982d593b9069282d3b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  102.4,
+  102.6,
+  102.7,
+  102.8,
+  102.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-eyes-squirrel-eating-peanut-fall-leaves-sha256-e8d42f9f652f01cf396454cabaf65ef6f0b09c4af2bd92982d593b9069282d3b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

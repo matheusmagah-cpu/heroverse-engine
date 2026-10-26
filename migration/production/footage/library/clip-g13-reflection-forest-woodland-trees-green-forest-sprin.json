@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-reflection-forest-woodland-trees-green-forest-sprin",
+ "theme": "g13-reflection",
+ "query": "sun rays forest",
+ "source": "pixabay",
+ "title": "forest, woodland, trees, green forest, spring forest, forest atmosphere, nature, natural background, sunlight, sun rays, leaves, oak leaves, wild plants, woodland plants, tranquil, peaceful, serene, lush greenery, summer forest, outdoors, scenic nature, fresh green",
+ "page": "https://pixabay.com/videos/id-340938/",
+ "author": "Nils_Vega",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Nils_Vega via Pixabay (https://pixabay.com/videos/id-340938/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7ed7c6f1e47d7ff9c74f5a3b8f340eb8779e08d0814cbbee4fbd7170442ebd58",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  60.5,
+  62.0,
+  62.0,
+  63.6,
+  60.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-reflection-forest-woodland-trees-green-forest-sprin-sha256-7ed7c6f1e47d7ff9c74f5a3b8f340eb8779e08d0814cbbee4fbd7170442ebd58.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

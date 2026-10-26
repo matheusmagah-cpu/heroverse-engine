@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-promise-gun-bullets-weapon-cartridges-shooting-l",
+ "theme": "g13-c4-promise",
+ "query": "snake dust",
+ "source": "pixabay",
+ "title": "gun, bullets, weapon, cartridges, shooting, lead, caliber, pirates, explosion, dust, shot, corsair, scene, battle, ship, table",
+ "page": "https://pixabay.com/videos/id-49898/",
+ "author": "x_OI",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: x_OI via Pixabay (https://pixabay.com/videos/id-49898/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ba916fd431a7ba58b1dd9199415766d73d79bdb4af6b7c52949f999247cc3f23",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  70.4,
+  71.9,
+  150.4,
+  69.3,
+  98.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-promise-gun-bullets-weapon-cartridges-shooting-l-sha256-ba916fd431a7ba58b1dd9199415766d73d79bdb4af6b7c52949f999247cc3f23.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

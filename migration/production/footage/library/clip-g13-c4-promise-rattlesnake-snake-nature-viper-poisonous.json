@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-promise-rattlesnake-snake-nature-viper-poisonous",
+ "theme": "g13-c4-promise",
+ "query": "viper",
+ "source": "pixabay",
+ "title": "rattlesnake, snake, nature, viper, poisonous, forrest, wood, reptile, wildlife",
+ "page": "https://pixabay.com/videos/id-379274/",
+ "author": "WVHalfpint",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 12.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 10.0,
+ "credit": "Footage: WVHalfpint via Pixabay (https://pixabay.com/videos/id-379274/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "36114406eae2740d57b07e8999f7dae06f8c726d169a6e1b9ce38fe72b716011",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  110.8,
+  112.9,
+  112.5,
+  110.5,
+  142.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-promise-rattlesnake-snake-nature-viper-poisonous-sha256-36114406eae2740d57b07e8999f7dae06f8c726d169a6e1b9ce38fe72b716011.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

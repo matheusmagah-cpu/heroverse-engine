@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-cost-farm-ridge-farm-land-windy-cloudy-bush-v",
+ "theme": "g13-c4-cost",
+ "query": "thorny bush",
+ "source": "pixabay",
+ "title": "farm, ridge, farm land, windy, cloudy, bush, victoria, australia, aerial",
+ "page": "https://pixabay.com/videos/id-71631/",
+ "author": "tetrakissphericon",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 45.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: tetrakissphericon via Pixabay (https://pixabay.com/videos/id-71631/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0bbcf97d4526a8fd066ee6230ebe625da015136897d9e44ccca1d3bdd5ce4bac",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  92.0,
+  90.4,
+  90.7,
+  92.3,
+  92.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-cost-farm-ridge-farm-land-windy-cloudy-bush-v-sha256-0bbcf97d4526a8fd066ee6230ebe625da015136897d9e44ccca1d3bdd5ce4bac.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

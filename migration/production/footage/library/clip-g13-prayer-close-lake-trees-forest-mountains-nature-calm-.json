@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-prayer-close-lake-trees-forest-mountains-nature-calm-",
+ "theme": "g13-prayer-close",
+ "query": "calm lake sunrise",
+ "source": "pixabay",
+ "title": "lake, trees, forest, mountains, nature, calm, alpine, sunrise, clouds, dawn, sunset, scenic, landscape",
+ "page": "https://pixabay.com/videos/id-81931/",
+ "author": "edcangri",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 61.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: edcangri via Pixabay (https://pixabay.com/videos/id-81931/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b84f220d603134a51e7d5a178ec12edbc518f0e5ee74ed2180ccf7bd2c7f1acc",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.3,
+  123.5,
+  123.2,
+  122.7,
+  122.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-prayer-close-lake-trees-forest-mountains-nature-calm--sha256-b84f220d603134a51e7d5a178ec12edbc518f0e5ee74ed2180ccf7bd2c7f1acc.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

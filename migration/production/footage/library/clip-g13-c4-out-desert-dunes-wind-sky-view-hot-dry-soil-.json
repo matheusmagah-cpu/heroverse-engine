@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-out-desert-dunes-wind-sky-view-hot-dry-soil-",
+ "theme": "g13-c4-out",
+ "query": "desert dunes wind",
+ "source": "pixabay",
+ "title": "desert, dunes, wind, sky, view, hot, dry, soil, wave, climate, summer, nature",
+ "page": "https://pixabay.com/videos/id-232932/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-232932/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "153266cf0065f46368db9fec88500681df65d53fbaf2c9ff1343dbaa160c9059",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  129.0,
+  129.3,
+  129.3,
+  130.9,
+  130.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-out-desert-dunes-wind-sky-view-hot-dry-soil--sha256-153266cf0065f46368db9fec88500681df65d53fbaf2c9ff1343dbaa160c9059.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

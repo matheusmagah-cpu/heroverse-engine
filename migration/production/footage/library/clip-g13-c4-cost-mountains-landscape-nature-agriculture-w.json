@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-cost-mountains-landscape-nature-agriculture-w",
+ "theme": "g13-c4-cost",
+ "query": "wheat harvest field",
+ "source": "pixabay",
+ "title": "mountains, landscape, nature, agriculture, wheat, field, harvest, green, hey, fall, mountain, austria, alps, farm, farmland, sky, rural, land, fpv, drone, dji, flight, air, village",
+ "page": "https://pixabay.com/videos/id-309503/",
+ "author": "Kaspar-Hauser",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kaspar-Hauser via Pixabay (https://pixabay.com/videos/id-309503/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a1e9387ac7f431a4787119e6460628ffc7bc26823001c567064df5e54858d9fd",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  134.3,
+  136.2,
+  105.1,
+  133.5,
+  131.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-cost-mountains-landscape-nature-agriculture-w-sha256-a1e9387ac7f431a4787119e6460628ffc7bc26823001c567064df5e54858d9fd.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

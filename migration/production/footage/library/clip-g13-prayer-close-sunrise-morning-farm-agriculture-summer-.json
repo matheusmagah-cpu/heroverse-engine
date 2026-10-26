@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-prayer-close-sunrise-morning-farm-agriculture-summer-",
+ "theme": "g13-prayer-close",
+ "query": "sunrise clouds",
+ "source": "pixabay",
+ "title": "sunrise, morning, farm, agriculture, summer, 4k, drone, aerial, nature, flight, green, forest, sun, glare, clouds",
+ "page": "https://pixabay.com/videos/id-128306/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 48.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-128306/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7b4aa42b816776ca399542a12cf2be441b64e71a993bb8870425b803d9ec94a2",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  102.7,
+  107.7,
+  108.9,
+  110.9,
+  113.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-prayer-close-sunrise-morning-farm-agriculture-summer--sha256-7b4aa42b816776ca399542a12cf2be441b64e71a993bb8870425b803d9ec94a2.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-cta-field-trees-sunrise-morning-drone-clouds",
+ "theme": "g13-cta",
+ "query": "wheat field",
+ "source": "pixabay",
+ "title": "field, trees, sunrise, morning, drone, clouds, sky, drenthe, countryside, grain, wheat, agriculture, netherlands, nature, landscape",
+ "page": "https://pixabay.com/videos/id-233605/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 31.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-233605/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e1d976875a02416da6a252027bf70274f51b1288cc31b78e7071bc719e9a682d",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  139.6,
+  139.6,
+  139.2,
+  139.1,
+  139.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-cta-field-trees-sunrise-morning-drone-clouds-sha256-e1d976875a02416da6a252027bf70274f51b1288cc31b78e7071bc719e9a682d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

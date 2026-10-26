@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-out-windmill-landscape-energy-sky-france-pow",
+ "theme": "g13-c4-out",
+ "query": "desert dunes wind",
+ "source": "pixabay",
+ "title": "windmill, landscape, energy, sky, france, power, green power, wind energy, farmer, green energy, live wallpaper",
+ "page": "https://pixabay.com/videos/id-47905/",
+ "author": "WestNL",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: WestNL via Pixabay (https://pixabay.com/videos/id-47905/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "841e3d15dbffff294b375c7697cf0d2108ae89e11a63443b41f4631f98dc5e45",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  149.4,
+  149.4,
+  148.8,
+  146.8,
+  145.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-out-windmill-landscape-energy-sky-france-pow-sha256-841e3d15dbffff294b375c7697cf0d2108ae89e11a63443b41f4631f98dc5e45.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

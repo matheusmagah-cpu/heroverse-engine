@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-chapter-4-leaves-rain-trees-green-forest-herb-gree",
+ "theme": "g13-chapter-4",
+ "query": "wind trees evening",
+ "source": "pixabay",
+ "title": "leaves, rain, trees, green, forest, herb, greens, environment, spring, season, wet, wind, twilight, evening, calm, nature",
+ "page": "https://pixabay.com/videos/id-203228/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-203228/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "63fad40cc09ab28419d08d8b15b7ee254658f7da5cc2e6bbc73dec950c3a3d43",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  26.1,
+  26.3,
+  26.3,
+  26.5,
+  26.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-chapter-4-leaves-rain-trees-green-forest-herb-gree-sha256-63fad40cc09ab28419d08d8b15b7ee254658f7da5cc2e6bbc73dec950c3a3d43.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

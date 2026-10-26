@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-prayer-close-sunrise-trees-deadwood-landscape-nature-",
+ "theme": "g13-prayer-close",
+ "query": "sunrise clouds",
+ "source": "pixabay",
+ "title": "sunrise, trees, deadwood, landscape, nature, clouds",
+ "page": "https://pixabay.com/videos/id-317873/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 43.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-317873/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "41ad39bf69a1956bfc75032502c5d2f4859ba28dcab8466adbde7d195f48101e",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  105.1,
+  116.1,
+  115.1,
+  110.8,
+  112.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-prayer-close-sunrise-trees-deadwood-landscape-nature--sha256-41ad39bf69a1956bfc75032502c5d2f4859ba28dcab8466adbde7d195f48101e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

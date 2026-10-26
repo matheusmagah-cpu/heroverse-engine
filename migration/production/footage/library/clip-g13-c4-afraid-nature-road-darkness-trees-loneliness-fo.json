@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-afraid-nature-road-darkness-trees-loneliness-fo",
+ "theme": "g13-c4-afraid",
+ "query": "dark forest",
+ "source": "pixabay",
+ "title": "nature, road, darkness, trees, loneliness, forest, dark, landscape, sky, weather, forest path, away, mysterious, gloomy, mood",
+ "page": "https://pixabay.com/videos/id-41071/",
+ "author": "MaxWdhs",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: MaxWdhs via Pixabay (https://pixabay.com/videos/id-41071/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9772cd013ddfe74c139e2326c24c0d712d4d86b20cf888894d1caef62760d7c9",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  43.6,
+  43.5,
+  43.5,
+  43.5,
+  43.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-afraid-nature-road-darkness-trees-loneliness-fo-sha256-9772cd013ddfe74c139e2326c24c0d712d4d86b20cf888894d1caef62760d7c9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

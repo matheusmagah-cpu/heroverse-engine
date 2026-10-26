@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-walk-herb-weed-tree-reeds-view-nature-pond-go",
+ "theme": "g13-c4-walk",
+ "query": "leaves wind sunset",
+ "source": "pixabay",
+ "title": "herb, weed, tree, reeds, view, nature, pond, goal, meadow, sun, plants, swamp, sky, leaf, wind, sunrise, peaceful, daytime, morning, rural, background",
+ "page": "https://pixabay.com/videos/id-323231/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-323231/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "259a3ecd8d6263e0b426b07534cfb80edb9af2e1b2407a3d866493a765752365",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  132.3,
+  132.2,
+  133.3,
+  132.5,
+  133.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-walk-herb-weed-tree-reeds-view-nature-pond-go-sha256-259a3ecd8d6263e0b426b07534cfb80edb9af2e1b2407a3d866493a765752365.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

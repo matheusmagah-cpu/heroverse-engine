@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-note-sunrise-horizon-sun-meadow-fog-atmospher",
+ "theme": "g13-c3-note",
+ "query": "snake eyes",
+ "source": "pixabay",
+ "title": "sunrise, horizon, sun, meadow, fog, atmosphere, landscape, bird's eye view",
+ "page": "https://pixabay.com/videos/id-246237/",
+ "author": "thedog777",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: thedog777 via Pixabay (https://pixabay.com/videos/id-246237/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d195338eb757fbed677e9345571b295467b672698fcb300cfcd4386f9f608f3e",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  111.3,
+  112.2,
+  113.4,
+  113.8,
+  113.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-note-sunrise-horizon-sun-meadow-fog-atmospher-sha256-d195338eb757fbed677e9345571b295467b672698fcb300cfcd4386f9f608f3e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

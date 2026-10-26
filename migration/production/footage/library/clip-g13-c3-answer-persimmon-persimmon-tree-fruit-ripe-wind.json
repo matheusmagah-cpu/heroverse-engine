@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-answer-persimmon-persimmon-tree-fruit-ripe-wind",
+ "theme": "g13-c3-answer",
+ "query": "fruit tree garden",
+ "source": "pixabay",
+ "title": "persimmon, persimmon tree, fruit, ripe, wind, autumn",
+ "page": "https://pixabay.com/videos/id-92377/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 52.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-92377/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "41100d23f4e5d91cf15f5d7b6f6e5e622e02ff7241511c75fe39790bbeac75bd",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  59.1,
+  59.2,
+  59.1,
+  59.1,
+  60.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-answer-persimmon-persimmon-tree-fruit-ripe-wind-sha256-41100d23f4e5d91cf15f5d7b6f6e5e622e02ff7241511c75fe39790bbeac75bd.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

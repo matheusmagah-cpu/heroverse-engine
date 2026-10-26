@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-blame-ocean-sea-water-waves-beach-seascape-coa",
+ "theme": "g13-c4-blame",
+ "query": "cracked dry earth",
+ "source": "pixabay",
+ "title": "ocean, sea, water, waves, beach, seascape, coast, splash, surf, earth day, nature",
+ "page": "https://pixabay.com/videos/id-204284/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-204284/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a25d340d264b8fde9f1f634cfdd4e693307c855c149b45c4ae4d60211610241c",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  118.4,
+  118.1,
+  119.0,
+  121.4,
+  122.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-blame-ocean-sea-water-waves-beach-seascape-coa-sha256-a25d340d264b8fde9f1f634cfdd4e693307c855c149b45c4ae4d60211610241c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

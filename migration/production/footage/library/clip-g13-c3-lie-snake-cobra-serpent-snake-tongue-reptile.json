@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-lie-snake-cobra-serpent-snake-tongue-reptile",
+ "theme": "g13-c3-lie",
+ "query": "snake tongue",
+ "source": "pixabay",
+ "title": "snake, cobra, serpent, snake tongue, reptile, animal",
+ "page": "https://pixabay.com/videos/id-173139/",
+ "author": "FestiMania",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: FestiMania via Pixabay (https://pixabay.com/videos/id-173139/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "a3f29a6466ca023761ee0adbc95574ca843ecbd516e65c1878ad7b94f543ae75",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  88.0,
+  92.0,
+  93.5,
+  93.7,
+  93.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-lie-snake-cobra-serpent-snake-tongue-reptile-sha256-a3f29a6466ca023761ee0adbc95574ca843ecbd516e65c1878ad7b94f543ae75.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

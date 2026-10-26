@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-chapter-4-forest-trees-woods-leaves-foliage-wind-s",
+ "theme": "g13-chapter-4",
+ "query": "wind trees evening",
+ "source": "pixabay",
+ "title": "forest, trees, woods, leaves, foliage, wind, spring, nature",
+ "page": "https://pixabay.com/videos/id-73563/",
+ "author": "Zerono1",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Zerono1 via Pixabay (https://pixabay.com/videos/id-73563/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e83efb37519cb0353c45285534ea283d9313d19335ca2cf04126070155a62b91",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  115.0,
+  116.5,
+  115.0,
+  112.7,
+  111.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-chapter-4-forest-trees-woods-leaves-foliage-wind-s-sha256-e83efb37519cb0353c45285534ea283d9313d19335ca2cf04126070155a62b91.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

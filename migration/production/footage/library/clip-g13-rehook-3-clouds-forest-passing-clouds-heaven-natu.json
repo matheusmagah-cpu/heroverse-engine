@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-rehook-3-clouds-forest-passing-clouds-heaven-natu",
+ "theme": "g13-rehook-3",
+ "query": "dark clouds timelapse",
+ "source": "pixabay",
+ "title": "clouds, forest, passing clouds, heaven, nature, rainy weather, rain, weather, landscape, timelapse",
+ "page": "https://pixabay.com/videos/id-211302/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-211302/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d0e5d83ad449d61e6dd463f09fd5db740572785af657786f28738f7adbcdde8b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  120.6,
+  100.9,
+  106.2,
+  108.2,
+  156.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-rehook-3-clouds-forest-passing-clouds-heaven-natu-sha256-d0e5d83ad449d61e6dd463f09fd5db740572785af657786f28738f7adbcdde8b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-lie-blossom-bloom-shrub-panicle-to-flourish-",
+ "theme": "g13-c3-lie",
+ "query": "snake close up",
+ "source": "pixabay",
+ "title": "blossom, bloom, shrub, panicle, to flourish, close up, sprout, white flowers, blossom close-up, petals, spring, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-15872/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-15872/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0086339d5a8528a2163fbb8ca81a4e5874869e698ce72c8e1e943dc601edeac1",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  75.6,
+  73.8,
+  70.7,
+  67.3,
+  64.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-lie-blossom-bloom-shrub-panicle-to-flourish--sha256-0086339d5a8528a2163fbb8ca81a4e5874869e698ce72c8e1e943dc601edeac1.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

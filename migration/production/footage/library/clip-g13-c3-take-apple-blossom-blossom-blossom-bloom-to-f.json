@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-take-apple-blossom-blossom-blossom-bloom-to-f",
+ "theme": "g13-c3-take",
+ "query": "apple falling",
+ "source": "pixabay",
+ "title": "apple blossom, blossom, blossom, bloom, to flourish, fruit tree blossoming, bloom, nature, time lapse",
+ "page": "https://pixabay.com/videos/id-211155/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-211155/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c6b796c6629b1c1a92ee6d6acd794e210a64f919ebcd23a3613e8acd1d69ab44",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  12.0,
+  12.9,
+  13.9,
+  14.4,
+  15.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-take-apple-blossom-blossom-blossom-bloom-to-f-sha256-c6b796c6629b1c1a92ee6d6acd794e210a64f919ebcd23a3613e8acd1d69ab44.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

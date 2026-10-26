@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-reflection-nightfall-dusk-blue-hour-evening-atmosph",
+ "theme": "g13-reflection",
+ "query": "light through clouds",
+ "source": "pixabay",
+ "title": "nightfall, dusk, blue hour, evening atmosphere, quitting time, quiet, melancholy, mystical, sihlsee, settle down, canton of schwyz, switzerland, lake, mountains, pier, hills, tree, clouded sky, passing clouds, light reflection, points of light, fading light, cloud cover",
+ "page": "https://pixabay.com/videos/id-383161/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-383161/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f434e6f673c7cc6cb8effd2b69b4387142f9c502d8c62a6e95e48aba0bebac6c",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  115.0,
+  106.5,
+  105.8,
+  100.9,
+  100.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-reflection-nightfall-dusk-blue-hour-evening-atmosph-sha256-f434e6f673c7cc6cb8effd2b69b4387142f9c502d8c62a6e95e48aba0bebac6c.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

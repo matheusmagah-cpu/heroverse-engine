@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-lie-dog-shiba-shibainu-puppy-pet-cute-smile-",
+ "theme": "g13-c3-lie",
+ "query": "snake tongue",
+ "source": "pixabay",
+ "title": "dog, shiba, shibainu, puppy, pet, cute, smile, tongue",
+ "page": "https://pixabay.com/videos/id-179190/",
+ "author": "Oliverstar",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Oliverstar via Pixabay (https://pixabay.com/videos/id-179190/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "75f168af1e370a90acf005fcf40eb183ed13da337a0ed3a625b900db80f15e6b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  153.9,
+  155.8,
+  154.1,
+  151.4,
+  149.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-lie-dog-shiba-shibainu-puppy-pet-cute-smile--sha256-75f168af1e370a90acf005fcf40eb183ed13da337a0ed3a625b900db80f15e6b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

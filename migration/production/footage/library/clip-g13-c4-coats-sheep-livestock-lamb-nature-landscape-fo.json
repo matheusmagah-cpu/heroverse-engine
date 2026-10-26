@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-coats-sheep-livestock-lamb-nature-landscape-fo",
+ "theme": "g13-c4-coats",
+ "query": "lamb sheep",
+ "source": "pixabay",
+ "title": "sheep, livestock, lamb, nature, landscape, forest, trees, grass, spring, wool, food, eating",
+ "page": "https://pixabay.com/videos/id-114757/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 75.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-114757/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "cf6099bf795ae9c6f48d112bf28c18ddfcd4b5bf0546317e3fe225c17c1322ea",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  129.8,
+  130.2,
+  130.0,
+  129.8,
+  130.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-coats-sheep-livestock-lamb-nature-landscape-fo-sha256-cf6099bf795ae9c6f48d112bf28c18ddfcd4b5bf0546317e3fe225c17c1322ea.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

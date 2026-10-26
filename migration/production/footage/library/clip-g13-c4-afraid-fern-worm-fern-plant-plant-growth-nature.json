@@ -1,0 +1,42 @@
+{
+ "id": "clip-g13-c4-afraid-fern-worm-fern-plant-plant-growth-nature",
+ "theme": "g13-c4-afraid",
+ "query": "ferns forest",
+ "source": "pixabay",
+ "title": "fern, worm fern, plant, plant growth, nature, flora, grow, growth",
+ "page": "https://pixabay.com/videos/id-276058/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 41.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-276058/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "870d5ce0c18052132803c1f549fda0f38bd2fcf16b1340d0b15d0f25ce905968",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  3.7,
+  4.1,
+  5.0,
+  5.7,
+  5.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

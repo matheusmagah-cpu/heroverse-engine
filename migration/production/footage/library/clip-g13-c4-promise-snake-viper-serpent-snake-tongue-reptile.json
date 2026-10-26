@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-promise-snake-viper-serpent-snake-tongue-reptile",
+ "theme": "g13-c4-promise",
+ "query": "viper",
+ "source": "pixabay",
+ "title": "snake, viper, serpent, snake tongue, reptile, animal, nature, wildlife",
+ "page": "https://pixabay.com/videos/id-173405/",
+ "author": "FestiMania",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 14.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 12.0,
+ "credit": "Footage: FestiMania via Pixabay (https://pixabay.com/videos/id-173405/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c0c1fc85221215dd4d3bb62e400e4f2d8f3b9eed7f66a32e2edeb04a5b675f6b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  106.2,
+  100.9,
+  104.0,
+  100.0,
+  101.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-promise-snake-viper-serpent-snake-tongue-reptile-sha256-c0c1fc85221215dd4d3bb62e400e4f2d8f3b9eed7f66a32e2edeb04a5b675f6b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

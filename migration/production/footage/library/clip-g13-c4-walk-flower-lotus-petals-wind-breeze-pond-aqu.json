@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-walk-flower-lotus-petals-wind-breeze-pond-aqu",
+ "theme": "g13-c4-walk",
+ "query": "garden evening breeze",
+ "source": "pixabay",
+ "title": "flower, lotus, petals, wind, breeze, pond, aquatic plants, flora, botany",
+ "page": "https://pixabay.com/videos/id-170593/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 34.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-170593/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "61a6e01f995983f8dc3b68ea929181110274977ca9847d2179361b3f1f4b958a",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  108.2,
+  109.6,
+  110.4,
+  109.3,
+  108.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-walk-flower-lotus-petals-wind-breeze-pond-aqu-sha256-61a6e01f995983f8dc3b68ea929181110274977ca9847d2179361b3f1f4b958a.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

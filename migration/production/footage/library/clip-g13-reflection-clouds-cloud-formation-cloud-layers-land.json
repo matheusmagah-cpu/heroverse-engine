@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-reflection-clouds-cloud-formation-cloud-layers-land",
+ "theme": "g13-reflection",
+ "query": "light through clouds",
+ "source": "pixabay",
+ "title": "clouds, cloud formation, cloud layers, landscape",
+ "page": "https://pixabay.com/videos/id-267470/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-267470/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "20aefcd3c142f55cf3a725d73242204c73ad3e5db69d4e0f0cc2a23a328ce32d",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  106.8,
+  109.7,
+  113.6,
+  114.5,
+  112.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-reflection-clouds-cloud-formation-cloud-layers-land-sha256-20aefcd3c142f55cf3a725d73242204c73ad3e5db69d4e0f0cc2a23a328ce32d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

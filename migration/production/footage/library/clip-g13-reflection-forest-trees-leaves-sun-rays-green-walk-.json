@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-reflection-forest-trees-leaves-sun-rays-green-walk-",
+ "theme": "g13-reflection",
+ "query": "sun rays forest",
+ "source": "pixabay",
+ "title": "forest, trees, leaves, sun, rays, green, walk, magical, romantic, meditation, up, look up, branches, cinematic, calm, peace, peaceful, dream, dreamy",
+ "page": "https://pixabay.com/videos/id-103195/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-103195/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "73afd6fa6e040f47cc61e4f3e032f8f63d82e05aaecc6770547ddc33e961be97",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  54.6,
+  54.0,
+  56.7,
+  56.4,
+  56.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-reflection-forest-trees-leaves-sun-rays-green-walk--sha256-73afd6fa6e040f47cc61e4f3e032f8f63d82e05aaecc6770547ddc33e961be97.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

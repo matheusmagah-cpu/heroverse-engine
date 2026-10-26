@@ -1,0 +1,42 @@
+{
+ "id": "clip-g13-c4-afraid-plant-houseleek-sempervivum-thick-leaf-p",
+ "theme": "g13-c4-afraid",
+ "query": "thick undergrowth",
+ "source": "pixabay",
+ "title": "plant, houseleek, sempervivum, thick-leaf plant, dachwurz",
+ "page": "https://pixabay.com/videos/id-128120/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 40.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-128120/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "3399634c44e73adbc8c53cb8cfb5c26a370e203e16a16eb867f97f3c61ee7ab1",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  7.9,
+  8.0,
+  8.0,
+  8.2,
+  8.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

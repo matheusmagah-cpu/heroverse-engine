@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-rehook-4-aerial-view-forest-morning-sun-landscape",
+ "theme": "g13-rehook-4",
+ "query": "forest shadows sunlight",
+ "source": "pixabay",
+ "title": "aerial view, forest, morning sun, landscape, sunrise, pinwheel, nature, scenic, sunlight, morning, sun, drone, trees",
+ "page": "https://pixabay.com/videos/id-18535/",
+ "author": "jamboo7809",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: jamboo7809 via Pixabay (https://pixabay.com/videos/id-18535/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "799c058f1c6cf6a8e2fb403278e9af614fad59df1c238081154956dbe7130c78",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  116.8,
+  116.0,
+  114.7,
+  114.1,
+  113.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-rehook-4-aerial-view-forest-morning-sun-landscape-sha256-799c058f1c6cf6a8e2fb403278e9af614fad59df1c238081154956dbe7130c78.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

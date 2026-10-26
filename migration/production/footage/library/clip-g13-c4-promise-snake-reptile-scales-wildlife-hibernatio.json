@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-promise-snake-reptile-scales-wildlife-hibernatio",
+ "theme": "g13-c4-promise",
+ "query": "snake dust",
+ "source": "pixabay",
+ "title": "snake, reptile, scales, wildlife, hibernation, awakening, cinematic, macro, nature, mysterious, desert, sunlight, reflection, movement, predator, wild animals, dust, power, realistic, atmosphere, wilderness, natural behavior, cinematic lighting, eerie",
+ "page": "https://pixabay.com/videos/id-310637/",
+ "author": "Solarselle77",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 23.0,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Solarselle77 via Pixabay (https://pixabay.com/videos/id-310637/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "bf513e2aba251b07270b40b4326bfd3d912531f09e477794c316f21ae3cab9e0",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  123.1,
+  125.2,
+  123.6,
+  123.7,
+  125.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-promise-snake-reptile-scales-wildlife-hibernatio-sha256-bf513e2aba251b07270b40b4326bfd3d912531f09e477794c316f21ae3cab9e0.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

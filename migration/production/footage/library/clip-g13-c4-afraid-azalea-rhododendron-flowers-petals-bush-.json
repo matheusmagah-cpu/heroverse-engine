@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-afraid-azalea-rhododendron-flowers-petals-bush-",
+ "theme": "g13-c4-afraid",
+ "query": "dense bushes",
+ "source": "pixabay",
+ "title": "azalea, rhododendron, flowers, petals, bush, garden",
+ "page": "https://pixabay.com/videos/id-145876/",
+ "author": "MariaKatarzyna72",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 50.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: MariaKatarzyna72 via Pixabay (https://pixabay.com/videos/id-145876/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "24199aff0dffcd91520c2f5c70831adfd9828393ad987d2fbfb6574a8f9c589a",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  68.7,
+  68.4,
+  68.3,
+  69.3,
+  68.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-afraid-azalea-rhododendron-flowers-petals-bush--sha256-24199aff0dffcd91520c2f5c70831adfd9828393ad987d2fbfb6574a8f9c589a.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

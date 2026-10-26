@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-question-pear-tree-blossom-bloom-pear-blossom-blo",
+ "theme": "g13-c3-question",
+ "query": "snake tree branch",
+ "source": "pixabay",
+ "title": "pear tree, blossom, bloom, pear blossom, bloom, to flourish, pear, fruit fruit tree, fruit tree blossoming, pear tree blossom, spring, flowering branch, blossom, petals, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-35735/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-35735/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eaee57e2f9b14bbe9b5d9e6a6f9db93defd6f7543f254d695cb91842f3c6ec1d",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  130.9,
+  131.7,
+  131.4,
+  130.9,
+  130.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-question-pear-tree-blossom-bloom-pear-blossom-blo-sha256-eaee57e2f9b14bbe9b5d9e6a6f9db93defd6f7543f254d695cb91842f3c6ec1d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

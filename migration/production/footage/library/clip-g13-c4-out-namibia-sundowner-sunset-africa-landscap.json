@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-out-namibia-sundowner-sunset-africa-landscap",
+ "theme": "g13-c4-out",
+ "query": "desert sunset",
+ "source": "pixabay",
+ "title": "namibia, sundowner, sunset, africa, landscape, sahara, sand, national park, desert, safari, sandy, drought, nature, dunes, sand dunes",
+ "page": "https://pixabay.com/videos/id-26085/",
+ "author": "TeeFarm",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 73.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TeeFarm via Pixabay (https://pixabay.com/videos/id-26085/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "1d1636d84fe637776698a788a4fd98bd79a51b84e33dd36f6f121f9acff37a01",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  90.6,
+  91.3,
+  91.1,
+  90.6,
+  90.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-out-namibia-sundowner-sunset-africa-landscap-sha256-1d1636d84fe637776698a788a4fd98bd79a51b84e33dd36f6f121f9acff37a01.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

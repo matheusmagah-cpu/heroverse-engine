@@ -1,0 +1,42 @@
+{
+ "id": "clip-g13-c3-take-apple-fruit-sweet-nutrition-nature-vitam",
+ "theme": "g13-c3-take",
+ "query": "red apple tree",
+ "source": "pixabay",
+ "title": "apple, fruit, sweet, nutrition, nature, vitamins, health, mature, organic, food, diet",
+ "page": "https://pixabay.com/videos/id-65426/",
+ "author": "Kmeel_com",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 57.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kmeel_com via Pixabay (https://pixabay.com/videos/id-65426/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e12de44111a58ca6694397437b8aea4c6653db09e878cb9ae865f7d13e1c516b",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES"
+ ],
+ "vetting_luma": [
+  12.1,
+  10.0,
+  10.7,
+  13.8,
+  15.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": null,
+ "release_tag": null
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-eyes-autumn-autumn-leaves-autumn-scenery-wind",
+ "theme": "g13-c3-eyes",
+ "query": "withered leaves",
+ "source": "pixabay",
+ "title": "autumn, autumn leaves, autumn scenery, wind, republic of korea, kim-po, leaves",
+ "page": "https://pixabay.com/videos/id-137879/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 52.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-137879/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "350eeffca579177edb612aa05781cbd1a603d0cf3f3440b10580c3c739136349",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  50.4,
+  50.9,
+  50.2,
+  50.7,
+  50.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-eyes-autumn-autumn-leaves-autumn-scenery-wind-sha256-350eeffca579177edb612aa05781cbd1a603d0cf3f3440b10580c3c739136349.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

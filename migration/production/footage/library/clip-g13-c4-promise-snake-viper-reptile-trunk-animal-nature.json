@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-promise-snake-viper-reptile-trunk-animal-nature",
+ "theme": "g13-c4-promise",
+ "query": "viper",
+ "source": "pixabay",
+ "title": "snake, viper, reptile, trunk, animal, nature",
+ "page": "https://pixabay.com/videos/id-201707/",
+ "author": "TRAPHITHO",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 20.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 18.0,
+ "credit": "Footage: TRAPHITHO via Pixabay (https://pixabay.com/videos/id-201707/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c40865687eced94201e34789acd44552dff66f69e7e75fc739eb860c65f10895",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  132.7,
+  133.8,
+  137.3,
+  135.6,
+  135.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-promise-snake-viper-reptile-trunk-animal-nature-sha256-c40865687eced94201e34789acd44552dff66f69e7e75fc739eb860c65f10895.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

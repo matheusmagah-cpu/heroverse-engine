@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-note-landscape-sea-port-osaka-port-evening-sh",
+ "theme": "g13-c3-note",
+ "query": "snake eyes",
+ "source": "pixabay",
+ "title": "landscape, sea, port, osaka port, evening, ship, sunset, light, bird's eye view, japan",
+ "page": "https://pixabay.com/videos/id-333041/",
+ "author": "Kanenori",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kanenori via Pixabay (https://pixabay.com/videos/id-333041/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5e355e27ae7927d493bf8646a590ff808ac391fdb659fab2a36bf251bbcfa379",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  104.9,
+  106.8,
+  109.0,
+  110.6,
+  112.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-note-landscape-sea-port-osaka-port-evening-sh-sha256-5e355e27ae7927d493bf8646a590ff808ac391fdb659fab2a36bf251bbcfa379.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c3-lie-wolf-tongue-licking-predator-canine-zoo-",
+ "theme": "g13-c3-lie",
+ "query": "snake tongue",
+ "source": "pixabay",
+ "title": "wolf, tongue, licking, predator, canine, zoo, outdoor, forest, wolves, pack, yellow eyes, staring, cautious",
+ "page": "https://pixabay.com/videos/id-62595/",
+ "author": "Zethian",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Zethian via Pixabay (https://pixabay.com/videos/id-62595/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c4f0d163186652a6b722ed8285074cd1cecc43f7960c00f267cf405c2b2cf7d9",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  106.5,
+  88.5,
+  100.0,
+  89.4,
+  82.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c3-lie-wolf-tongue-licking-predator-canine-zoo--sha256-c4f0d163186652a6b722ed8285074cd1cecc43f7960c00f267cf405c2b2cf7d9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

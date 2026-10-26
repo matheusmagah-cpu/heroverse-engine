@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-out-river-land-pasture-valley-water-nature",
+ "theme": "g13-c4-out",
+ "query": "barren land",
+ "source": "pixabay",
+ "title": "river, land, pasture, valley, water, nature",
+ "page": "https://pixabay.com/videos/id-72599/",
+ "author": "dlabiebrzy",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: dlabiebrzy via Pixabay (https://pixabay.com/videos/id-72599/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "085619dde2b8ecb74eb8f26c4157f2269a7ec7d3a3ed4975bd45edfe4bf1b90e",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  122.2,
+  118.0,
+  106.6,
+  103.0,
+  98.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-out-river-land-pasture-valley-water-nature-sha256-085619dde2b8ecb74eb8f26c4157f2269a7ec7d3a3ed4975bd45edfe4bf1b90e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

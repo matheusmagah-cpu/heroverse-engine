@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c4-afraid-flower-undergrowth-nature",
+ "theme": "g13-c4-afraid",
+ "query": "thick undergrowth",
+ "source": "pixabay",
+ "title": "flower, undergrowth, nature",
+ "page": "https://pixabay.com/videos/id-224586/",
+ "author": "u_fuw3rjugpf",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 56.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: u_fuw3rjugpf via Pixabay (https://pixabay.com/videos/id-224586/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "b4c9582e7728787b62255e97b6fa378a423cf2dcc31c0cda5142133bef65bfaa",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  65.4,
+  64.9,
+  65.2,
+  65.6,
+  64.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c4-afraid-flower-undergrowth-nature-sha256-b4c9582e7728787b62255e97b6fa378a423cf2dcc31c0cda5142133bef65bfaa.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
