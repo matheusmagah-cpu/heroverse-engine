@@ -3,12 +3,12 @@
  "long": "arc-01-long",
  "arc": "arc-01",
  "pilot": "pilot-015",
- "status": "DRAFT (2026-10-26): design slice 1; not built. Noah and the scoffer are DRAFT (reference sheets tonight); the owner's Genesis 1-7 scope differs from arcs.json arc-01 (Genesis 1-3)",
- "title": "Creation to Noah: How a Very Good World Came Apart | Genesis 1-6 Bible Story (KJV)",
- "passage": "Genesis 1:1-6:9 (KJV, public domain)",
+ "status": "DRAFT (2026-10-26): design slice 1, not built. Measure the voice locally before any build.",
+ "title": "Creation, Eden and the Fall: How a Very Good World Broke in One Afternoon | Genesis 1-3 Bible Story (KJV)",
+ "passage": "Genesis 1:1-3:24 (KJV, public domain)",
  "aspect_ratio": "16:9",
  "burned_captions": false,
- "people": "Adam, Eve and the serpent are APPROVED and appear with their look word for word, the same entries as the Shorts; Noah and the scoffer are DRAFT (pending rows until their sheets are reviewed); Cain, Abel and Enoch have no characters.json entry, so they are anonymous figures seen from behind or in silhouette. God speaks only as a voice-over over storm, light or wind. The serpent is silent on screen: its words are the Keeper's narration (lipsync_check reads a human face; a speaking snake has none).",
+ "people": "Adam, Eve and the serpent are APPROVED and appear with their look word for word, the same entries as the Shorts. God speaks only as a voice-over over storm, light, rain or wind. The serpent is silent on screen: its words are the Keeper's narration (story QA v3: every talking clip passes lipsync_check, which reads a human face). The Keeper narrates and is on screen only for the promise, the insight and the close.",
  "chapters": [
   {
    "id": "c1",
@@ -29,21 +29,6 @@
    "id": "c4",
    "short": "genesis-04-short",
    "title": "Where Art Thou?"
-  },
-  {
-   "id": "c5",
-   "short": "genesis-05-short",
-   "title": "Am I My Brother's Keeper?"
-  },
-  {
-   "id": "c6",
-   "short": "genesis-06-short",
-   "title": "The Man Who Never Died?"
-  },
-  {
-   "id": "c7",
-   "short": "genesis-07-short",
-   "title": "God Sees the Earth Corrupt"
   }
  ],
  "narration": [
@@ -53,15 +38,15 @@
   },
   {
    "kind": "story",
-   "text": "Ten generations later, the Maker of that garden would grieve that He had made man at all."
+   "text": "By the cool of that same evening, the two of them would be hiding from the voice that made them."
   },
   {
    "kind": "story",
-   "text": "The text calls that first world very good. Then, step by step, it shows us how it came apart."
+   "text": "The text calls that first world very good. Then, in a single afternoon, it shows us how it came apart."
   },
   {
    "kind": "story",
-   "text": "How does a very good world come to that? And who would still be standing when it did?",
+   "text": "How does a very good world break so fast? And is there any way back through that gate?",
    "rehook": true
   },
   {
@@ -70,11 +55,11 @@
   },
   {
    "kind": "promise",
-   "text": "Most readers see seven separate tales here. The text tells only one story."
+   "text": "Most readers see three chapters here. The text tells only one story."
   },
   {
    "kind": "promise",
-   "text": "Stay to the end, and you will see the small word that saves it."
+   "text": "Stay to the end, and you will see the promise hidden inside the curse."
   },
   {
    "kind": "scripture",
@@ -87,6 +72,15 @@
   },
   {
    "kind": "scripture",
+   "text": "And the earth was without form and void; and darkness was upon the face of the deep.",
+   "reference": "Genesis 1:2 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Formless and empty. In the days that follow He shapes what had no form and fills what was empty, one day at a time."
+  },
+  {
+   "kind": "scripture",
    "text": "And God said, Let there be light: and there was light.",
    "reference": "Genesis 1:3 (KJV)"
   },
@@ -95,8 +89,25 @@
    "text": "No struggle, no rival, no battle with the sea. He speaks, and it happens."
   },
   {
+   "kind": "scripture",
+   "text": "And God saw the light, that it was good: and God divided the light from the darkness.",
+   "reference": "Genesis 1:4 (KJV)"
+  },
+  {
    "kind": "story",
-   "text": "Day after day the world fills: sky, then sea and land, then the lights, then everything that swims and flies and walks."
+   "text": "Notice the rhythm. He speaks, it is, and He sees that it is good. The whole chapter moves like a song."
+  },
+  {
+   "kind": "story",
+   "text": "On the second day He sets a firmament between the waters. On the third, dry land, and every green and growing thing."
+  },
+  {
+   "kind": "story",
+   "text": "The sun and the moon that the nations around Israel worshipped as gods are here only lamps, hung in place and given a job."
+  },
+  {
+   "kind": "story",
+   "text": "Day after day the world fills: the seas with things that swim, the sky with things that fly, the land with everything that walks."
   },
   {
    "kind": "story",
@@ -104,12 +115,17 @@
   },
   {
    "kind": "scripture",
-   "text": "And the earth was without form and void; and darkness was upon the face of the deep.",
-   "reference": "Genesis 1:2 (KJV)"
+   "text": "And God said, Let the earth bring forth the living creature after his kind,",
+   "reference": "Genesis 1:24 (KJV)"
   },
   {
    "kind": "story",
-   "text": "Formless and empty. In the days that follow He shapes what had no form and fills what was empty, one day at a time."
+   "text": "Cattle, creeping things, beasts of the earth. The land fills with every kind of life before the last and best is made."
+  },
+  {
+   "kind": "story",
+   "text": "Then He does something He has done on no other day. He stops, and He speaks as if to Himself, as if what comes next matters more than everything before it.",
+   "rehook": true
   },
   {
    "kind": "scripture",
@@ -122,13 +138,21 @@
   },
   {
    "kind": "scripture",
+   "text": "And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth,",
+   "reference": "Genesis 1:28 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The first words God says to people are a blessing. Before any command, before any warning, a gift."
+  },
+  {
+   "kind": "scripture",
    "text": "And God saw every thing that he had made, and, behold, it was very good.",
    "reference": "Genesis 1:31 (KJV)"
   },
   {
    "kind": "story",
-   "text": "Very good. Remember those two words. The rest of this story is the long road away from them, and the question is whether anyone finds the way back.",
-   "rehook": true
+   "text": "Very good. Remember those two words. The rest of this story is the road away from them."
   },
   {
    "kind": "story",
@@ -145,6 +169,10 @@
    "text": "Dust and breath. The lowest thing on the ground, and the closest thing to God."
   },
   {
+   "kind": "story",
+   "text": "Chapter two tells the same creation again, closer in. Chapter one sees the universe. Chapter two kneels in the mud beside one man."
+  },
+  {
    "kind": "scripture",
    "text": "And the Lord God planted a garden eastward in Eden; and there he put the man whom he had formed.",
    "reference": "Genesis 2:8 (KJV)"
@@ -155,6 +183,24 @@
   },
   {
    "kind": "story",
+   "text": "In the middle of the garden stand two trees. One is the tree of life. The other is the tree of knowing good and evil."
+  },
+  {
+   "kind": "scripture",
+   "text": "And a river went out of Eden to water the garden; and from thence it was parted, and became into four heads.",
+   "reference": "Genesis 2:10 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Eden means delight. Its rivers carry that life out to the whole earth, and the land around it holds gold."
+  },
+  {
+   "kind": "story",
+   "text": "One tree. Every other tree was theirs. One command, with a reason given: in the day you eat it, you die. Remember that warning. Someone is about to question it.",
+   "rehook": true
+  },
+  {
+   "kind": "story",
    "text": "Notice what he is given first. Not a temple, not a throne, but work: to dress the garden and to keep it."
   },
   {
@@ -162,29 +208,53 @@
    "text": "And a name for every living creature. The animals come to him one by one, and he names them all."
   },
   {
-   "kind": "story",
-   "text": "Eden means delight. A river flows out of it and parts into four great heads, and the land around it holds gold."
+   "kind": "scripture",
+   "text": "but for Adam there was not found an help meet for him.",
+   "reference": "Genesis 2:20 (KJV)"
   },
   {
    "kind": "story",
-   "text": "One tree. Every other tree was theirs. One command, with a reason given: in the day you eat it, you die."
+   "text": "Every creature comes in pairs, and he watches them go. For the first time something in the very good world is not good."
   },
   {
    "kind": "scripture",
-   "text": "And the Lord God said, It is not good that the man should be alone; I will make him an help meet for him.",
-   "reference": "Genesis 2:18 (KJV)"
+   "text": "And the Lord God caused a deep sleep to fall upon Adam, and he slept:",
+   "reference": "Genesis 2:21 (KJV)"
   },
   {
    "kind": "story",
    "text": "God brings the woman to the man the way a father brings a bride. The first wedding is in a garden, with God as the witness."
   },
   {
-   "kind": "story",
-   "text": "The first words a man speaks in the Bible are a song about another person."
+   "kind": "scripture",
+   "text": "And the rib, which the Lord God had taken from man, made he a woman, and brought her unto the man.",
+   "reference": "Genesis 2:22 (KJV)"
   },
   {
    "kind": "story",
-   "text": "Two people, one garden, nothing hidden between them. And in the shade of one tree, something was listening.",
+   "text": "Not from his head to rule him, nor from his feet to serve him. From his side, to stand beside him."
+  },
+  {
+   "kind": "story",
+   "text": "The first words a man speaks in the Bible are not a complaint or a demand. They are a song about another person."
+  },
+  {
+   "kind": "scripture",
+   "text": "Therefore shall a man leave his father and his mother, and shall cleave unto his wife:",
+   "reference": "Genesis 2:24 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And they were both naked, the man and his wife, and were not ashamed.",
+   "reference": "Genesis 2:25 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Nothing to hide, from each other or from God. Hold on to that, because it is the first thing they lose."
+  },
+  {
+   "kind": "story",
+   "text": "Two people, one garden, nothing hidden between them, and not ashamed. But in the shade of one tree, something was listening to every word.",
    "rehook": true
   },
   {
@@ -204,6 +274,15 @@
   {
    "kind": "story",
    "text": "Every tree? No. One tree. But the question makes the gift sound small and the rule sound cruel."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the woman said unto the serpent, We may eat of the fruit of the trees of the garden:",
+   "reference": "Genesis 3:2 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "She knows the gift. Then she quotes the rule."
   },
   {
    "kind": "story",
@@ -237,6 +316,10 @@
    "text": "She is not foolish, and she is not weak. She is talked out of trusting the one who gave her everything she has."
   },
   {
+   "kind": "story",
+   "text": "Notice that the serpent speaks only to her, but the text says he was with her. Two people heard the lie. Neither one answered it."
+  },
+  {
    "kind": "scripture",
    "text": "she took of the fruit thereof, and did eat, and gave also unto her husband with her; and he did eat.",
    "reference": "Genesis 3:6 (KJV)"
@@ -252,12 +335,38 @@
   },
   {
    "kind": "story",
-   "text": "Their eyes were opened, just as promised. And the first thing they saw was shame. Then they heard Him coming.",
-   "rehook": true
+   "text": "Their eyes were opened, just as promised. And the first thing they saw was not wisdom. It was shame."
   },
   {
    "kind": "story",
-   "text": "Notice who comes looking. Not the guilty pair searching for God, but God Himself walking in the garden, calling out a question."
+   "text": "Notice what they do with their new knowledge. They make coverings, and they hide. Knowledge without God becomes only a place to hide."
+  },
+  {
+   "kind": "story",
+   "text": "Knowing good and evil, it turns out, does not mean becoming gods. It means knowing evil from the inside. Then they heard Him coming.",
+   "rehook": true
+  },
+  {
+   "kind": "scripture",
+   "text": "And they heard the voice of the Lord God walking in the garden in the cool of the day:",
+   "reference": "Genesis 3:8 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Notice who comes looking. Not the guilty pair searching for God, but God Himself, calling out a question."
+  },
+  {
+   "kind": "scripture",
+   "text": "And the Lord God called unto Adam, and said unto him, Where art thou?",
+   "reference": "Genesis 3:9 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "God knows where he is. The question is for Adam, not for God."
+  },
+  {
+   "kind": "story",
+   "text": "Where art thou is the first question God asks in the Bible, and He asks it of a man who is hiding. It is still being asked."
   },
   {
    "kind": "story",
@@ -265,7 +374,8 @@
   },
   {
    "kind": "story",
-   "text": "Three people, three excuses. The man blames the woman, the woman blames the serpent, and no one simply says, I did it."
+   "text": "Three people, three excuses. The man blames the woman, the woman blames the serpent, and no one simply says, I did it. Now the sentence comes, one by one.",
+   "rehook": true
   },
   {
    "kind": "story",
@@ -278,7 +388,37 @@
   },
   {
    "kind": "story",
-   "text": "Even here there is mercy. Before they go, He makes them coats of skins with His own hands."
+   "text": "Look at what is cursed. The serpent, and the ground. The man and the woman are not cursed. They are still the ones He came looking for."
+  },
+  {
+   "kind": "story",
+   "text": "To the woman, pain in the very gift of life. And between the two of them, a struggle where there was only love. Then He turns to the man."
+  },
+  {
+   "kind": "story",
+   "text": "This is the turn of the whole story. The ground that fed him now fights him. Thorns, sweat, and at the end of it, the dust."
+  },
+  {
+   "kind": "scripture",
+   "text": "And Adam called his wife’s name Eve; because she was the mother of all living.",
+   "reference": "Genesis 3:20 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Right after the sentence of death, he names her for life. He believed the promise."
+  },
+  {
+   "kind": "scripture",
+   "text": "Unto Adam also and to his wife did the Lord God make coats of skins, and clothed them.",
+   "reference": "Genesis 3:21 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Even here there is mercy. Their fig leaves are not enough, and He covers them Himself."
+  },
+  {
+   "kind": "story",
+   "text": "And if he ate from the tree of life now, he would live forever like this, broken. So the way back is closed, for now."
   },
   {
    "kind": "scripture",
@@ -287,236 +427,79 @@
   },
   {
    "kind": "story",
-   "text": "Then comes a strange line: the man has become like one of us, knowing good and evil, and he must not stay."
+   "text": "They walk out east, into thorns and sweat and a hard world that fights back."
   },
   {
    "kind": "story",
-   "text": "They walk out east, into thorns and sweat and a hard world that fights back. And outside the garden, Eve gives birth to two sons.",
-   "rehook": true
-  },
-  {
-   "kind": "scripture",
-   "text": "And Abel was a keeper of sheep, but Cain was a tiller of the ground.",
-   "reference": "Genesis 4:2 (KJV)"
+   "text": "For the first time the world has a road leading away from Eden. Every story after this one walks on that road."
   },
   {
    "kind": "story",
-   "text": "Two brothers, born outside the garden. One follows the flock across the hills. The other works the cursed ground with his hands."
-  },
-  {
-   "kind": "story",
-   "text": "In time, both bring an offering. Cain brings fruit of the ground. Abel brings the firstlings of his flock, the best he has."
-  },
-  {
-   "kind": "scripture",
-   "text": "And the Lord had respect unto Abel and to his offering:",
-   "reference": "Genesis 4:4 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "Why one and not the other? The text does not say the gift was wrong. It says the Lord looked at Abel first, and then at his gift."
-  },
-  {
-   "kind": "scripture",
-   "text": "But unto Cain and to his offering he had not respect. And Cain was very wroth, and his countenance fell.",
-   "reference": "Genesis 4:5 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "And then God does something remarkable. He comes to Cain before anything has happened, and warns him.",
-   "rehook": true
-  },
-  {
-   "kind": "story",
-   "text": "Sin is pictured like an animal crouching at a door, waiting to be let in. Cain can still rule over it. He does not."
-  },
-  {
-   "kind": "scripture",
-   "text": "and it came to pass, when they were in the field, that Cain rose up against Abel his brother, and slew him.",
-   "reference": "Genesis 4:8 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "No one tells us what they said out in that field. The text goes quiet, and the silence is the worst part."
-  },
-  {
-   "kind": "story",
-   "text": "The first death in the Bible is not old age. It is a brother's hand. Then the question comes."
-  },
-  {
-   "kind": "scripture",
-   "text": "And the Lord said unto Cain, Where is Abel thy brother? And he said, I know not: Am I my brother’s keeper?",
-   "reference": "Genesis 4:9 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "His answer is the first lie told to God's face, and the first time a man refuses to stand by his own brother."
-  },
-  {
-   "kind": "story",
-   "text": "Cain goes out from the presence of the Lord, east again, further from the garden than his parents ever went."
-  },
-  {
-   "kind": "story",
-   "text": "Adam and Eve have lost both sons in one day. The world outside Eden is getting darker. And yet, far down the family line, one man walks the other way.",
-   "rehook": true
-  },
-  {
-   "kind": "story",
-   "text": "Generations pass. Seth, Enos, Cainan, Mahalaleel, Jared. Names, ages, and then the same three words, over and over again: and he died."
-  },
-  {
-   "kind": "story",
-   "text": "Except once. One man in that long list breaks the pattern completely."
-  },
-  {
-   "kind": "scripture",
-   "text": "And Enoch walked with God: and he was not; for God took him.",
-   "reference": "Genesis 5:24 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "No death notice. Only a walk. He walked with God so long that one day he simply did not come home."
-  },
-  {
-   "kind": "story",
-   "text": "Enoch lived three hundred and sixty five years, a short life for those days. But the text measures him by one thing only: he walked."
-  },
-  {
-   "kind": "story",
-   "text": "Enoch's son is Methuselah, the oldest man who ever lived. His long years run out in the very year the flood comes."
-  },
-  {
-   "kind": "story",
-   "text": "It is possible, the text says, to walk with God in a dark age. Soon that will be tested, because the world is about to fill with violence.",
-   "rehook": true
-  },
-  {
-   "kind": "story",
-   "text": "Ten generations after Eden, the earth is full of people, and full of noise. Cities of tents cover the plains, and nobody looks up."
-  },
-  {
-   "kind": "scripture",
-   "text": "And God saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually.",
-   "reference": "Genesis 6:5 (KJV)"
-  },
-  {
-   "kind": "scripture",
-   "text": "The earth also was corrupt before God, and the earth was filled with violence.",
-   "reference": "Genesis 6:11 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "And then comes a line most readers rush past. The text does not say He was angry first."
-  },
-  {
-   "kind": "story",
-   "text": "The strong take what they want, and the weak learn to hide. Brothers turn on brothers, just as Cain did, only now it is everyone."
-  },
-  {
-   "kind": "scripture",
-   "text": "And it repented the Lord that he had made man on the earth, and it grieved him at his heart.",
-   "reference": "Genesis 6:6 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "Grieved. At His heart. The Maker of that very good world, hurting over what His people became. And then He spoke.",
-   "rehook": true
-  },
-  {
-   "kind": "story",
-   "text": "Not man alone. The beasts of the field, the creeping things, the birds of the air. Everything that breathes on the dry land."
-  },
-  {
-   "kind": "story",
-   "text": "It sounds like the end of the whole story. But in the middle of all that violence, one small word changes everything that follows."
-  },
-  {
-   "kind": "scripture",
-   "text": "But Noah found grace in the eyes of the Lord.",
-   "reference": "Genesis 6:8 (KJV)"
-  },
-  {
-   "kind": "scripture",
-   "text": "Noah was a just man and perfect in his generations, and Noah walked with God.",
-   "reference": "Genesis 6:9 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "Walked with God. The same words as Enoch. The thread survived."
-  },
-  {
-   "kind": "story",
-   "text": "Noah, a just man in a violent age. Not perfect in the sense of sinless, but whole, undivided, the same man in the dark as in the light."
-  },
-  {
-   "kind": "scripture",
-   "text": "And Noah begat three sons, Shem, Ham, and Japheth.",
-   "reference": "Genesis 6:10 (KJV)"
-  },
-  {
-   "kind": "story",
-   "text": "One man and his family, walking the other way while the whole world ran past them."
+   "text": "Behind them the flaming sword turns every way. Ahead of them, a world that has never known death is about to meet it."
   },
   {
    "kind": "insight",
-   "text": "Notice how the text counts the fall, one step at a time."
+   "text": "Notice how short the fall is. Seven verses, and the whole world turns."
   },
   {
    "kind": "insight",
-   "text": "A fruit taken. A brother killed. Then violence filling the whole earth."
+   "text": "It began with a voice that made God sound like He was holding back."
   },
   {
    "kind": "insight",
-   "text": "Each generation opened the door a little wider, until no one even remembered there had been a door."
+   "text": "But read who speaks first after the sin. Not the accuser, and not the serpent. God Himself, walking in the garden, asking where are you."
   },
   {
    "kind": "insight",
-   "text": "But read the order carefully. Before the judgment comes the grief, and before the flood comes grace."
+   "text": "Inside the curse He hides a promise: a son who will crush the serpent."
   },
   {
    "kind": "insight",
-   "text": "Look at how each sin grows. In the garden, a bite and a hidden face. In the field, a brother's blood. By Noah's day, the whole earth."
+   "text": "And notice the mercy at every step. A question instead of a sentence. A promise inside the curse. Coats of skin for the exiles."
   },
   {
    "kind": "insight",
-   "text": "And notice the mercy at every step. Coats of skin for the exiles. A mark of protection on Cain. A warning long before the flood."
+   "text": "The gate closed behind them. But the story is about who will open it."
   },
   {
    "kind": "insight",
-   "text": "Judgment is real in these chapters. But it never comes without a warning."
+   "text": "Chapter one says very good seven times. Chapter three shows one choice undo it. Read them together, and you see what was lost."
   },
   {
    "kind": "insight",
-   "text": "Every step down that slope began with a voice saying God holds back."
+   "text": "The serpent promised that their eyes would be opened. They were. But what they saw first was themselves, and they did not like it."
   },
   {
    "kind": "insight",
-   "text": "The flood is not the story of a cold God, but a wounded heart."
+   "text": "The serpent asked a question. God asked a better one: where art thou?"
   },
   {
    "kind": "insight",
-   "text": "And the word that saves the story is small. But. But Noah found grace."
+   "text": "That is why the story does not end at the gate. Every page after this is God walking toward people who are hiding."
   },
   {
    "kind": "insight",
-   "text": "Noah did not climb out of that world. He simply kept walking with God."
+   "text": "So look at your own life. Where are you hiding, and who is calling?"
   },
   {
    "kind": "insight",
-   "text": "Put the chapters side by side and they rhyme. A garden lost, a field of blood, a world of violence, and every time a voice asking where."
+   "text": "Grace was there before the gate. It walked in the garden, asking for them."
   },
   {
    "kind": "insight",
-   "text": "Grace was not a reward for Noah. Grace found him first, then he walked."
+   "text": "The way back would be opened, the text promises, by the woman's son."
+  },
+  {
+   "kind": "insight",
+   "text": "Outside that gate the world grows harder, and the first brothers are born."
   },
   {
    "kind": "cta",
-   "text": "Would you have walked against that crowd? Tell me in the comments below."
+   "text": "Would you have believed the serpent's question? Tell me in the comments."
   },
   {
    "kind": "cta",
-   "text": "Next on the channel, Noah builds the ark, and the whole valley laughs."
+   "text": "Next on the channel, Cain and Abel, and the first blood on the ground."
   }
  ],
  "shots": [
@@ -524,7 +507,7 @@
    "id": "s-open",
    "kind": "scene",
    "speaker": "eve",
-   "line": "He says you will not die. He says your eyes will be opened.",
+   "line": "He says you will not die. He says your eyes will be opened, and you will see.",
    "characters": [
     "eve"
    ],
@@ -561,12 +544,14 @@
    ]
   },
   {
-   "id": "s-co-storm",
+   "id": "s-co-hide",
    "kind": "scene",
    "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Black storm clouds roll together over a vast plain of dark tents and swallow the last band of golden sunlight. Dusk turning to night, a hard wind driving dust. Ominous and vast. No people, no text, no logos.",
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, crouch among dark leaves, holding their breath. The garden at dusk, blue shadows. Afraid. No text, no logos.",
    "beat": "cold_open",
    "lines": [
     0,
@@ -574,12 +559,12 @@
    ]
   },
   {
-   "id": "s-co-crowd",
+   "id": "s-co-gate",
    "kind": "scene",
    "seconds": 6,
    "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, low tracking shot. A dense crowd seen from behind, faces never visible, shoves through a narrow lane between tents, torches swinging. Night, torchlight and dust in the air. Loud and restless. No text, no logos.",
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A great flaming sword turns slowly in the air before the dark gate of a walled garden. Dawn, firelight on the wall. Final and holy. No people, no text, no logos.",
    "beat": "cold_open",
    "lines": [
     2,
@@ -587,12 +572,14 @@
    ]
   },
   {
-   "id": "s-co-noah",
+   "id": "s-co-exile",
    "kind": "scene",
    "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. One old man in silhouette, his face never visible, stands alone on a dry hillside with his back to the camera, his head lifted toward the storm. Dusk, the last light behind the black clouds outlining his shape. Lonely and steadfast. No text, no logos.",
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk away from the garden into a barren plain. Cold dawn, wind and dust. Exile. No text, no logos.",
    "beat": "cold_open",
    "lines": [
     2,
@@ -655,93 +642,6 @@
    "chapter": "c1"
   },
   {
-   "id": "s-c1-wind",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low tracking shot just above the water. A strong wind moves across a dark calm sea, drawing long ripples and thin veils of mist over the surface. Early twilight, soft grey-blue light. Mysterious and alive. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    7,
-    8
-   ],
-   "chapter": "c1"
-  },
-  {
-   "id": "s-c1-light",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Static wide shot. Over a dark sea the clouds slowly part and wide soft sunbeams pour down, spreading gentle light across the water. First light of morning, natural sunlight and soft mist. Calm and vast. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    9,
-    10
-   ],
-   "chapter": "c1"
-  },
-  {
-   "id": "s-c1-adam-light",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lifts his face into the warm morning light and closes his eyes. A green valley at sunrise, mist over a river. Wonder and peace. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    9,
-    10
-   ],
-   "chapter": "c1"
-  },
-  {
-   "id": "s-c1-birds",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pan. A great flock of white birds lifts from a reed-lined river and wheels across the morning sky. Clear dawn light over the water. Bright and abundant. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    11,
-    12
-   ],
-   "chapter": "c1"
-  },
-  {
-   "id": "s-c1-animals",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, walks slowly through tall grass as a herd of deer grazes calmly around him. A wide green valley in soft morning light. Peaceful and new. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    11,
-    12
-   ],
-   "chapter": "c1"
-  },
-  {
-   "id": "s-c1-stars",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lies on his back in the grass gazing up at a sky dense with stars. A clear night in the valley, starlight on the leaves. Awe and stillness. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    11,
-    12
-   ],
-   "chapter": "c1"
-  },
-  {
    "id": "s-c1-shore",
    "kind": "scene",
    "seconds": 6,
@@ -751,8 +651,22 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands at the edge of a dark sea at night, looking out over the water. Night, faint starlight on the waves. Small and awed. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    13,
-    14
+    7,
+    8
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-wind",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low tracking shot just above the water. A strong wind moves across a dark calm sea, drawing long ripples and thin veils of mist over the surface. Early twilight, soft grey-blue light. Mysterious and alive. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    9,
+    10
    ],
    "chapter": "c1"
   },
@@ -765,8 +679,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow drift. Green hills rise out of a calm sea as the water draws back from new land. Soft morning light and mist. Creation unfolding. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    13,
-    14
+    9,
+    10
    ],
    "chapter": "c1"
   },
@@ -780,8 +694,263 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, wades into a clear shallow river as silver fish dart around his legs. Bright morning light on the water. Joy. No text, no logos.",
    "beat": "chapter",
    "lines": [
+    9,
+    10
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-light",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Static wide shot. Over a dark sea the clouds slowly part and wide soft sunbeams pour down, spreading gentle light across the water. First light of morning, natural sunlight and soft mist. Calm and vast. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    11,
+    12
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-adam-light",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lifts his face into the warm morning light and closes his eyes. A green valley at sunrise, mist over a river. Wonder and peace. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    11,
+    12
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-dawn",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, sits on a rock as the night sky turns to dawn behind him. First light over the hills. Rhythm and calm. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
     13,
     14
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-divide",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow pan. A line of golden light moves across a dark valley as the sun rises. Sunrise. Order. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    13,
+    14
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-river",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, walks along a riverbank in the growing light. Early morning. Peace. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    13,
+    14
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-sky",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, looks up at a vast blue sky over the sea. Bright morning. Open and high. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    15
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-grass",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, runs his hand through tall green grass and flowers. Warm sunlight. Alive. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    15
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "g-c1-lights",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "Let there be lights in the firmament of the heaven to divide the day from the night",
+   "reference": "Genesis 1:14 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow tilt up. The sun sinks below the horizon as the moon rises and the first stars appear over a calm sea. Dusk turning to night. Vast and ordered. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-stars",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lies on his back in the grass gazing up at a sky dense with stars. A clear night in the valley, starlight on the leaves. Awe and stillness. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    16
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-moon",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A full moon rises over still water, its light laid across the surface. Night. Quiet. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    16
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-birds",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pan. A great flock of white birds lifts from a reed-lined river and wheels across the morning sky. Clear dawn light over the water. Bright and abundant. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    17,
+    18
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-animals",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, walks slowly through tall grass as a herd of deer grazes calmly around him. A wide green valley in soft morning light. Peaceful and new. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    17,
+    18
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-whale",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands on a cliff as a great whale breaks the surface of the sea below. Morning light on the water. Wonder. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    17,
+    18
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-herd",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, walks among cattle grazing on a green hillside. Morning light. Abundant. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    19,
+    20
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-fox",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A young fox steps out of tall grass and sniffs the morning air. Dew and soft light. New life. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    19,
+    20
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-meadow",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow crane down. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, kneels in a meadow as rabbits graze around her. Morning sun. Gentle. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    19,
+    20
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-pause",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, sits very still at the edge of a forest as the wind drops. Late morning light. Expectant. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    21
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-hush",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. The wind dies away and the whole valley falls still, every leaf motionless. Late morning. Hushed. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    21
    ],
    "chapter": "c1"
   },
@@ -807,8 +976,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, opens his hands and looks at them as if for the first time. Soft morning light through leaves. Quiet wonder. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    15,
-    16
+    22,
+    23
    ],
    "chapter": "c1"
   },
@@ -822,15 +991,15 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, turns toward the light and smiles. A garden glade in warm morning sun. Gentle and radiant. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    15,
-    16
+    22,
+    23
    ],
    "chapter": "c1"
   },
   {
    "id": "s-c1-both",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam",
     "eve"
@@ -838,8 +1007,54 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow crane down. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand together at the edge of a sunlit river. The valley in full morning light. Peace and promise. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    15,
-    16
+    22,
+    23
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-bless",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow crane up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand in a meadow as warm light breaks over them. Morning, sunbeams through the clouds. Blessed. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    24,
+    25
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-laugh",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, laughs as petals blow past her face. Warm morning light. Joy. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    24,
+    25
+   ],
+   "chapter": "c1"
+  },
+  {
+   "id": "s-c1-run",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, runs through tall grass beside a herd of horses. Bright morning. Freedom. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    24,
+    25
    ],
    "chapter": "c1"
   },
@@ -853,8 +1068,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow crane up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands on a hilltop above a lush valley of rivers, forests and meadows. Golden late afternoon, long soft shadows. Whole and good. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    17,
-    18
+    26,
+    27
    ],
    "chapter": "c1"
   },
@@ -869,37 +1084,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, sit together in the grass watching the sun go down. Warm dusk light over the valley. Content and unaware. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    17,
-    18
-   ],
-   "chapter": "c1"
-  },
-  {
-   "id": "s-c1-tree",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A single great fruit tree stands alone at the center of the garden, its dark branches heavy with fruit. Dusk, the light fading behind it. Beautiful and ominous. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    17,
-    18
-   ],
-   "chapter": "c1"
-  },
-  {
-   "id": "s-c1-eye",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "serpent"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides one coil silently along the branch. Deep shade among the leaves at dusk. Watching and waiting. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    17,
-    18
+    26,
+    27
    ],
    "chapter": "c1"
   },
@@ -914,20 +1100,21 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, rest in the shade of a great tree by the river. Warm still afternoon light. Rest and peace. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    19
+    28
    ],
    "chapter": "c1"
   },
   {
-   "id": "s-c1-sunset",
+   "id": "s-c1-eye",
    "kind": "scene",
    "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow pan. The sun sets in gold over a quiet valley of rivers and trees. Calm evening. Finished. No people, no text, no logos.",
+   "characters": [
+    "serpent"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides one coil silently along a branch. Deep shade among the leaves at dusk. Watching and waiting. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    19
+    28
    ],
    "chapter": "c1"
   },
@@ -940,8 +1127,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Macro shot, slow push-in. Fine red earth on a riverbank shifts and darkens as a warm wind passes over it. Early morning, soft side light. Humble and alive. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    20,
-    21
+    29,
+    30
    ],
    "chapter": "c2"
   },
@@ -955,8 +1142,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, takes his first deep breath, his chest rising, his eyes opening. Soft dawn light on his face, leaves around him. Sudden and tender. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    20,
-    21
+    29,
+    30
    ],
    "chapter": "c2"
   },
@@ -970,8 +1157,36 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, rises slowly to his feet and looks around the garden. A green garden glade at sunrise. Wonder. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    20,
-    21
+    29,
+    30
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-mud",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, looks down at the red earth on his own hands. Morning light. Intimate. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    31
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-look",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, turns slowly, taking in the trees around him. Dappled light. First sight. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    31
    ],
    "chapter": "c2"
   },
@@ -984,8 +1199,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow drift. A broad river winds through a green valley and parts into four bright streams. Clear morning light, mist over the water. Abundant and calm. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    22,
-    23
+    32,
+    33
    ],
    "chapter": "c2"
   },
@@ -999,8 +1214,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, low tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, walks beneath fruit trees, touching the leaves as he passes. Dappled sunlight in the orchard. Free and unhurried. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    22,
-    23
+    32,
+    33
    ],
    "chapter": "c2"
   },
@@ -1014,53 +1229,35 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, kneels to clear stones from a stream so the water runs freely. Midday light on the water. Content and purposeful. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    22,
-    23
+    32,
+    33
    ],
    "chapter": "c2"
   },
   {
-   "id": "s-c2-name",
+   "id": "s-c2-life",
    "kind": "scene",
    "seconds": 6,
    "characters": [
     "adam"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, kneels as a young deer steps close and sniffs his hand. Soft morning light in a meadow. Trust and wonder. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands between two great trees in a sunlit clearing. Noon light. Choice. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    24,
-    25
+    34
    ],
    "chapter": "c2"
   },
   {
-   "id": "s-c2-lion",
+   "id": "s-c2-two",
    "kind": "scene",
    "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, sits calmly as a lion lies down in the grass a few steps away. Golden afternoon light. Harmony. No text, no logos.",
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Two great trees stand side by side at the heart of the garden, one bright with blossom, one heavy with dark fruit. Noon. Charged. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    24,
-    25
-   ],
-   "chapter": "c2"
-  },
-  {
-   "id": "s-c2-eagle",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, raises his arm as an eagle lands on a branch above him. Bright midday sky. Dominion and delight. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    24,
-    25
+    34
    ],
    "chapter": "c2"
   },
@@ -1073,7 +1270,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Aerial wide shot, slow push-in. Four bright rivers branch out from one great river across a green land. Morning light, mist on the water. Abundance. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    26
+    35,
+    36
    ],
    "chapter": "c2"
   },
@@ -1087,7 +1285,23 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lifts a gleaming nugget of gold from a clear streambed. Sunlight on the water. Wealth without want. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    26
+    35,
+    36
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-swim",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, wades across a wide shallow river toward the orchard. Morning light. At home. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    35,
+    36
    ],
    "chapter": "c2"
   },
@@ -1107,13 +1321,72 @@
    "id": "s-c2-tree",
    "kind": "scene",
    "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Static wide shot. The great fruit tree stands alone in a clearing, its branches moving in a light wind. Noon light, a ring of shadow beneath it. Quiet and charged. No people, no text, no logos.",
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, looks up at the dark fruit of the great tree and steps back. Noon light, a ring of shadow beneath it. Quiet and charged. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    27,
-    28
+    37
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-orchard",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pan. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, turns toward hundreds of fruit trees in every direction. Bright noon. Freedom. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    37
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-name",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, kneels as a young deer steps close and sniffs his hand. Soft morning light in a meadow. Trust and wonder. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    38,
+    39
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-lion",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, sits calmly as a lion lies down in the grass a few steps away. Golden afternoon light. Harmony. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    38,
+    39
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-eagle",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, raises his arm as an eagle lands on a branch above him. Bright midday sky. Dominion and delight. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    38,
+    39
    ],
    "chapter": "c2"
   },
@@ -1127,8 +1400,23 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, sits alone on a rock by the river at dusk, watching pairs of birds settle together. Golden dusk light. Lonely and gentle. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    27,
-    28
+    40,
+    41
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-pairs",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, watches two deer walk side by side into the trees. Dusk. Longing. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    40,
+    41
    ],
    "chapter": "c2"
   },
@@ -1142,8 +1430,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow crane down. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lies asleep in soft grass beneath a spreading tree. Evening, the first stars appearing. Deep and peaceful. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    27,
-    28
+    42,
+    43
    ],
    "chapter": "c2"
   },
@@ -1157,7 +1445,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, steps out from between flowering trees, shy and smiling. Soft morning light. Tender. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    29
+    42,
+    43
    ],
    "chapter": "c2"
   },
@@ -1171,7 +1460,54 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, wakes and stares in wonder. Morning light through the leaves. Amazement. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    29
+    42,
+    43
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-side",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stands beside Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, both looking out at the garden. Morning light. Side by side. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    44,
+    45
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-face",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks at him for the first time. Soft morning light. Wonder. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    44,
+    45
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-step",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, steps toward her, smiling. Morning light through leaves. Joy. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    44,
+    45
    ],
    "chapter": "c2"
   },
@@ -1179,7 +1515,7 @@
    "id": "s-c2-adam",
    "kind": "scene",
    "speaker": "adam",
-   "line": "This is now bone of my bones, and flesh of my flesh",
+   "line": "This is now bone of my bones, and flesh of my flesh: she shall be called Woman,",
    "characters": [
     "adam",
     "eve"
@@ -1200,8 +1536,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, walk side by side along the river, laughing. Bright morning light through the trees. Light and unashamed. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    30,
-    31
+    46,
+    47
    ],
    "chapter": "c2"
   },
@@ -1215,8 +1551,70 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, trails her fingers through the clear water of the stream. Sunlight dancing on the water. Carefree. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    30,
-    31
+    46,
+    47
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-together",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, sit close together under a flowering tree. Warm afternoon. One flesh. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    46,
+    47
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-open",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, laugh together in the tall leaves. Warm afternoon light. Unashamed. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    48,
+    49
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-sun",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, closes her eyes in the warm sun. Afternoon. At peace. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    48,
+    49
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-rest2",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lies back in the grass, smiling at the sky. Afternoon. Content. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    48,
+    49
    ],
    "chapter": "c2"
   },
@@ -1230,8 +1628,21 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, unwinds slowly, its golden eyes turned toward the river. Deep shade of the fruit tree at noon. Silent menace. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    30,
-    31
+    50
+   ],
+   "chapter": "c2"
+  },
+  {
+   "id": "s-c2-watch",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, walks alone toward the center of the garden. Noon light. Unaware. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    50
    ],
    "chapter": "c2"
   },
@@ -1245,8 +1656,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow push-in. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, lifts its head from the branch, its forked tongue flicking. Dappled noon light in the fruit tree. Subtle and alert. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    32,
-    33
+    51,
+    52
    ],
    "chapter": "c3"
   },
@@ -1260,8 +1671,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tracking shot. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, walks toward the great tree, curious, brushing aside the leaves. Warm noon light in the garden. Innocent and drawn. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    32,
-    33
+    51,
+    52
    ],
    "chapter": "c3"
   },
@@ -1276,8 +1687,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Over-the-shoulder medium shot, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, coils close beside Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, who listens with her head tilted. Shade beneath the tree, gold light around them. Intimate and wrong. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    32,
-    33
+    51,
+    52
    ],
    "chapter": "c3"
   },
@@ -1291,8 +1702,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme close-up, slow push-in. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, its head close, golden eyes unblinking. Shade and warm specks of light. Cold and smooth. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    34,
-    35
+    53,
+    54
    ],
    "chapter": "c3"
   },
@@ -1306,8 +1717,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pan. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks out over hundreds of fruit trees heavy with fruit in every direction. Bright noon light. Abundant. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    34,
-    35
+    53,
+    54
    ],
    "chapter": "c3"
   },
@@ -1321,8 +1732,38 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, frowns slightly, glancing back at the orchard. Noon light through leaves. A first shadow of doubt. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    34,
-    35
+    53,
+    54
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-answer",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, lifts her chin and points toward the orchard. Noon light. Certain, for now. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    55,
+    56
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-wait",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "serpent"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, waits, perfectly still. Deep shade. Patient. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    55,
+    56
    ],
    "chapter": "c3"
   },
@@ -1330,7 +1771,7 @@
    "id": "s-c3-eve",
    "kind": "scene",
    "speaker": "eve",
-   "line": "Ye shall not eat of it, neither shall ye touch it, lest ye die.",
+   "line": "God hath said, Ye shall not eat of it, neither shall ye touch it, lest ye die.",
    "characters": [
     "eve",
     "serpent"
@@ -1350,8 +1791,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, slowly raises her hand toward a low red fruit and stops just short of it. Gold light filtering through the leaves. Suspended. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    36,
-    37
+    57,
+    58
    ],
    "chapter": "c3"
   },
@@ -1365,8 +1806,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, draws back its head, tongue flicking. Deep shade among the branches. Confident and sly. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    36,
-    37
+    57,
+    58
    ],
    "chapter": "c3"
   },
@@ -1381,8 +1822,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow crane down. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stands beneath the great tree as The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, hangs above her. The clearing at noon, everything else very still. Fateful. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    36,
-    37
+    57,
+    58
    ],
    "chapter": "c3"
   },
@@ -1395,8 +1836,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Macro shot, slow push-in. A single ripe red fruit hangs from a dark branch, a drop of dew sliding down its skin. Noon light behind it. Tempting and still. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    38,
-    39
+    59,
+    60
    ],
    "chapter": "c3"
   },
@@ -1410,8 +1851,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, her dark eyes fixed on the fruit. Warm light on her face. Longing. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    38,
-    39
+    59,
+    60
    ],
    "chapter": "c3"
   },
@@ -1425,8 +1866,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tracking shot. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, slides along the branch toward the fruit. Dappled light through leaves. Patient and sure. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    38,
-    39
+    59,
+    60
    ],
    "chapter": "c3"
   },
@@ -1440,8 +1881,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, studies the fruit, her lips parted. Noon light through the leaves. Desire. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    40,
-    41
+    61,
+    62
    ],
    "chapter": "c3"
   },
@@ -1455,8 +1896,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, reaches up toward the low branch. The clearing at noon. Drawn. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    40,
-    41
+    61,
+    62
    ],
    "chapter": "c3"
   },
@@ -1470,8 +1911,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, perfectly still, watching her. Deep shade in the branches. Cold patience. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    40,
-    41
+    61,
+    62
    ],
    "chapter": "c3"
   },
@@ -1485,7 +1926,7 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, glances back toward the garden, then at the fruit. Noon light. Torn. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    42
+    63
    ],
    "chapter": "c3"
   },
@@ -1499,7 +1940,37 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, lowers its head close beside the fruit. Deep shade. Persuasion. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    42
+    63
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-near",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands a few steps behind her under the tree, silent. Noon shade. Passive. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    64
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-both-tree",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve",
+    "serpent"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand beneath the branch where The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, waits. Noon light. Fateful. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    64
    ],
    "chapter": "c3"
   },
@@ -1513,8 +1984,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, pulls the fruit from the branch and bites into it. Noon light, a sudden stillness in the leaves. Decisive. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    43,
-    44
+    65,
+    66
    ],
    "chapter": "c3"
   },
@@ -1529,8 +2000,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, holds out the fruit to Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, who takes it without a word. The shade of the great tree. Silent and heavy. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    43,
-    44
+    65,
+    66
    ],
    "chapter": "c3"
   },
@@ -1544,15 +2015,15 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, bites the fruit and freezes. Shade, a cloud passing over the sun. Something breaks. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    43,
-    44
+    65,
+    66
    ],
    "chapter": "c3"
   },
   {
    "id": "s-c3-shame",
    "kind": "scene",
-   "seconds": 6,
+   "seconds": 8,
    "characters": [
     "adam",
     "eve"
@@ -1560,8 +2031,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, turn away from each other, covering themselves with their arms. The light in the garden suddenly grey and flat. Shame. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    45,
-    46
+    67,
+    68
    ],
    "chapter": "c3"
   },
@@ -1575,8 +2046,52 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, handheld. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, tears broad fig leaves from a branch with trembling hands. Grey afternoon light. Panic. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    45,
-    46
+    67,
+    68
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-sew",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, ties fig leaves together with shaking fingers. Grey light. Covering. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    67,
+    68
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-cover",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, hold fig leaf aprons against themselves, not looking at each other. Grey light. Covered and alone. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    69
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-back",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, backs slowly into the thick trees. Late afternoon shadows. Retreat. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    69
    ],
    "chapter": "c3"
   },
@@ -1589,8 +2104,22 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A cool wind rises and sweeps through the whole garden, bending every tree the same way. Late afternoon, long cool shadows. Something approaches. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    45,
-    46
+    70
+   ],
+   "chapter": "c3"
+  },
+  {
+   "id": "s-c3-listen2",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, freeze, listening. Evening light. Dread. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    70
    ],
    "chapter": "c3"
   },
@@ -1603,7 +2132,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Evening wind moves through the dark trees of the garden, leaves turning silver. The cool of the day. A presence. No people, no text, no logos.",
    "beat": "chapter",
    "lines": [
-    47
+    71,
+    72
    ],
    "chapter": "c4"
   },
@@ -1618,8 +2148,96 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, crouch among the leaves, holding their breath. Dusk shadows. Hiding. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    47
+    71,
+    72
    ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-hide",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, hide together behind a thick tree trunk. Dusk in the garden, blue shadows. Cornered. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    71,
+    72
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-trees",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, closes his eyes as the wind moves the leaves around him. Dusk. Exposed. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    73,
+    74
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-step",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, steps slowly out from behind the tree. Evening light. Caught. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    73,
+    74
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-face",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lifts his face toward the voice, trembling. Dusk. Seen. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    75
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-eve-hide",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, presses herself against a tree trunk. Dusk shadows. Afraid. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    75
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-adam",
+   "kind": "scene",
+   "speaker": "adam",
+   "line": "I heard thy voice in the garden, and I was afraid, because I was naked; and I hid myself.",
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, crouches among dark leaves, afraid, and speaks, his lips moving clearly with every word. Evening shadows among the trees. Fearful and ashamed. No text, no logos.",
+   "reference": "Genesis 3:10 (KJV)",
+   "beat": "chapter",
    "chapter": "c4"
   },
   {
@@ -1635,34 +2253,6 @@
    "chapter": "c4"
   },
   {
-   "id": "s-c4-adam",
-   "kind": "scene",
-   "speaker": "adam",
-   "line": "and I was afraid, because I was naked; and I hid myself.",
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, crouches among dark leaves, afraid, and speaks, his lips moving clearly with every word. Evening shadows among the trees. Fearful and ashamed. No text, no logos.",
-   "reference": "Genesis 3:10 (KJV)",
-   "beat": "chapter",
-   "chapter": "c4"
-  },
-  {
-   "id": "s-c4-hide",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam",
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, hide together behind a thick tree trunk. Dusk in the garden, blue shadows. Cornered. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    48
-   ],
-   "chapter": "c4"
-  },
-  {
    "id": "s-c4-point",
    "kind": "scene",
    "seconds": 6,
@@ -1672,7 +2262,21 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, lowers his eyes and turns his head toward the woman. Dim evening light. Guilty. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    48
+    76
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-eve-hurt",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks at him, stunned. Dusk. Betrayed. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    76
    ],
    "chapter": "c4"
   },
@@ -1680,7 +2284,7 @@
    "id": "s-c4-blame",
    "kind": "scene",
    "speaker": "adam",
-   "line": "The woman whom thou gavest to be with me, she gave me",
+   "line": "The woman whom thou gavest to be with me, she gave me of the tree, and I did eat.",
    "characters": [
     "adam",
     "eve"
@@ -1694,7 +2298,7 @@
    "id": "s-c4-eve",
    "kind": "scene",
    "speaker": "eve",
-   "line": "It was the serpent. The serpent beguiled me, and I did eat.",
+   "line": "It was the serpent. He twisted every word. The serpent beguiled me, and I did eat.",
    "characters": [
     "eve"
    ],
@@ -1714,7 +2318,7 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, stand apart from each other, eyes on the ground. Dusk in the garden. Broken trust. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    49
+    77
    ],
    "chapter": "c4"
   },
@@ -1728,8 +2332,20 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, coiled along a low branch of a fruit tree, coiled in deep shadow at the foot of the tree. Dusk. Exposed. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    49
+    77
    ],
+   "chapter": "c4"
+  },
+  {
+   "id": "g-c4-serpent",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "Because thou hast done this, thou art cursed above all cattle",
+   "reference": "Genesis 3:14 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow push-in. Dark clouds roll low over the garden and a hard wind drives dust across the ground. Night falling. Judgment. No people, no text, no logos.",
+   "beat": "chapter",
    "chapter": "c4"
   },
   {
@@ -1742,8 +2358,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle close-up, slow tracking shot. The serpent, a large slender serpent with glossy olive-green and bronze scales in a diamond pattern, golden eyes with vertical pupils, a pale cream underside and a dark forked tongue, moving low through dust and dry grass, its head low. Grey dusk light on the dust. Humbled. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    50,
-    51
+    78,
+    79
    ],
    "chapter": "c4"
   },
@@ -1757,8 +2373,8 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks down at the dust where the snake had passed. Evening light. A strange hope. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    50,
-    51
+    78,
+    79
    ],
    "chapter": "c4"
   },
@@ -1773,8 +2389,118 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tilt up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, look up as the first stars appear over the dark garden. Clear night falling. Quiet promise. No text, no logos.",
    "beat": "chapter",
    "lines": [
-    50,
-    51
+    78,
+    79
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-ground-c",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Cracks spread across dry earth as the grass withers. Night, lightning flicker. Cursed ground. No people, no text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    80
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-kept",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, kneel together in the dark garden, heads bowed. Night. Still loved. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    80
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "g-c4-woman",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "I will greatly multiply thy sorrow and thy conception; in sorrow thou shalt bring forth children",
+   "reference": "Genesis 3:16 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Rain begins to fall in grey sheets across the dark garden, the leaves bowing under it. Night. Sorrow. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-eve-rain",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, rain on her face, her eyes closed. Night rain. Grief. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    81
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-adam-wait",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, stands alone in the rain, waiting. Night. Dread. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    81
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "g-c4-ground",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "cursed is the ground for thy sake; in sorrow shalt thou eat of it",
+   "reference": "Genesis 3:17 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the garden. Night, heavy rain sweeping across the trees. Terrible and grand. No people, no text, no logos.",
+   "beat": "chapter",
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-kneel",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, falls to his knees in the mud as the ground splits open around him. Night, lightning and rain. Devastation. No text, no logos.",
+   "climax": true,
+   "beat": "chapter",
+   "lines": [
+    82
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-hold",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, cling to each other in the storm. Night, white lightning. Terror. No text, no logos.",
+   "beat": "chapter",
+   "lines": [
+    82
    ],
    "chapter": "c4"
   },
@@ -1791,6 +2517,37 @@
    "chapter": "c4"
   },
   {
+   "id": "s-c4-name",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, seen from the chest up among tall green leaves, takes Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, by the hands. Grey dawn after the storm. Hope. No text, no logos.",
+   "beat": "payoff",
+   "lines": [
+    83,
+    84
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-eve-look",
+   "kind": "scene",
+   "seconds": 6,
+   "characters": [
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, seen from the shoulders up among tall green leaves, her long hair over her shoulders, looks up at him, tears and a faint smile. Dawn light. Tender. No text, no logos.",
+   "beat": "payoff",
+   "lines": [
+    83,
+    84
+   ],
+   "chapter": "c4"
+  },
+  {
    "id": "s-c4-coats",
    "kind": "scene",
    "seconds": 8,
@@ -1799,41 +2556,52 @@
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, pull the rough hide garments close around them. Cold grey dawn. Humbled and covered. No text, no logos.",
-   "beat": "chapter",
+   "beat": "payoff",
    "lines": [
-    52,
-    53
+    85,
+    86
    ],
    "chapter": "c4"
   },
   {
-   "id": "s-c4-gate",
+   "id": "s-c4-leaves2",
    "kind": "scene",
    "seconds": 6,
    "characters": [],
    "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A great flaming sword turns slowly in the air before the dark gate of a walled garden. Dawn, fire light on the wall. Final and holy. No people, no text, no logos.",
-   "beat": "chapter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. Torn fig leaves lie scattered on the wet ground. Dawn. Not enough. No people, no text, no logos.",
+   "beat": "payoff",
    "lines": [
-    52,
-    53
+    85,
+    86
    ],
    "chapter": "c4"
   },
   {
-   "id": "s-c4-leave",
+   "id": "s-c4-warm",
    "kind": "scene",
    "seconds": 6,
    "characters": [
-    "adam",
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk away from the garden into a barren plain. Cold dawn, wind and dust. Exile. No text, no logos.",
-   "beat": "chapter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, wraps the garment around her shoulders. Dawn light. Covered. No text, no logos.",
+   "beat": "payoff",
    "lines": [
-    52,
-    53
+    85,
+    86
    ],
+   "chapter": "c4"
+  },
+  {
+   "id": "g-c4-one-of-us",
+   "kind": "scene",
+   "speaker": "god",
+   "line": "Behold, the man is become as one of us, to know good and evil",
+   "reference": "Genesis 3:22 (KJV)",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Mist drifts through the garden at dawn and soft light glows on a second great tree at its heart. Dawn. Solemn. No people, no text, no logos.",
+   "beat": "payoff",
    "chapter": "c4"
   },
   {
@@ -1842,10 +2610,10 @@
    "seconds": 6,
    "characters": [],
    "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A second great tree glows softly in the heart of the garden, its leaves catching the dawn light. Dawn mist. Lost forever. No people, no text, no logos.",
-   "beat": "chapter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A second great tree glows softly in the heart of the garden, its leaves catching the dawn light. Dawn mist. Lost for now. No people, no text, no logos.",
+   "beat": "payoff",
    "lines": [
-    54
+    87
    ],
    "chapter": "c4"
   },
@@ -1858,9 +2626,39 @@
     "eve"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, look back one last time toward the garden. Cold dawn light. Grief. No text, no logos.",
-   "beat": "chapter",
+   "beat": "payoff",
    "lines": [
-    54
+    87
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-gate",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [],
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A great flaming sword turns slowly in the air before the dark gate of a walled garden. Dawn, fire light on the wall. Final and holy. No people, no text, no logos.",
+   "beat": "payoff",
+   "lines": [
+    88,
+    89
+   ],
+   "chapter": "c4"
+  },
+  {
+   "id": "s-c4-leave",
+   "kind": "scene",
+   "seconds": 8,
+   "characters": [
+    "adam",
+    "eve"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk away from the garden into a barren plain. Cold dawn, wind and dust. Exile. No text, no logos.",
+   "beat": "payoff",
+   "lines": [
+    88,
+    89
    ],
    "chapter": "c4"
   },
@@ -1872,936 +2670,76 @@
     "adam"
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, drives a wooden digging stick into hard dry ground. Harsh midday sun over a stony field. Toil. No text, no logos.",
-   "beat": "chapter",
+   "beat": "payoff",
    "lines": [
-    55
+    88,
+    89
    ],
    "chapter": "c4"
   },
   {
-   "id": "s-c4-baby",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "eve"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, holds a newborn baby wrapped in wool, smiling through exhaustion. A dim tent lit by one oil lamp. Tender hope. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    55
-   ],
-   "chapter": "c4"
-  },
-  {
-   "id": "s-c5-shepherd",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. A young shepherd seen from behind, his face never visible, leads a flock of white sheep across a green hill. Soft morning light. Gentle. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    56,
-    57
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-farmer",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. A young man seen from behind, his face never visible, hacks at stony ground with a wooden hoe. Hot midday sun, dust rising. Hard and proud. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    56,
-    57
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-parents",
+   "id": "s-c4-road",
    "kind": "scene",
    "seconds": 6,
    "characters": [
     "adam",
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, watch their two sons from the door of a tent. Late afternoon light. Watchful. No text, no logos.",
-   "beat": "chapter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow crane up. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, are two small figures on a long road across a barren plain. Evening light. The long road. No text, no logos.",
+   "beat": "payoff",
    "lines": [
-    56,
-    57
+    90
    ],
-   "chapter": "c5"
+   "chapter": "c4"
   },
   {
-   "id": "s-c5-altars",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Two rough stone altars stand on a hilltop, smoke rising straight up from one and drifting low along the ground from the other. Evening light. Charged. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    58,
-    59
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-lamb",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. A shepherd seen from behind lays a lamb gently on a stone altar. Warm evening light. Reverent. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    58,
-    59
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-grain",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A man seen from behind drops a sheaf of grain and fruit onto a stone altar. Evening light. Careless. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    58,
-    59
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-kneel",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A shepherd seen from behind kneels beside his altar, head bowed. Evening light. Humble. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    60
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-stand",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. A man seen from behind stands stiffly beside his altar, arms folded. Evening light. Proud. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    60
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-smoke",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. Smoke from a grain offering curls back down and creeps low across the stones. Dusk light. Rejected. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    61,
-    62
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-fist",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A man in silhouette clenches his fist at his side, his face never visible. Dusk, red light behind him. Anger rising. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    61,
-    62
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-turn",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A man seen from behind turns away from the altar and walks off alone. Dusk light fading. Bitter. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    61,
-    62
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "g-c5-door",
-   "kind": "scene",
-   "speaker": "god",
-   "line": "if thou doest not well, sin lieth at the door. And unto thee shall be his desire",
-   "reference": "Genesis 4:7 (KJV)",
-   "seconds": 8,
-   "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A hot wind blows dust across a field at dusk and a dark storm front builds over the hills. Dusk, low red sun. Warning. No people, no text, no logos.",
-   "beat": "chapter",
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-field",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Two young men seen from behind walk together into an empty field. Late afternoon, long shadows. Uneasy. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    63,
-    64
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-strike",
-   "kind": "scene",
-   "seconds": 8,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. Two figures in silhouette struggle against a red sky, one falling. Sunset, harsh backlight. Violent and sudden. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    63,
-    64
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-staff",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A shepherd's wooden staff lies dropped in the grass, the sheep scattering beyond it. Dusk. Loss. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    63,
-    64
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-alone",
-   "kind": "scene",
-   "seconds": 8,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow pull-back. A man seen from behind stands alone in the field, his hands hanging at his sides. Fading red light. Horror. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    63,
-    64
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-quiet",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A figure in silhouette kneels beside a still shape in the grass. Dusk, the sky fading to grey. Silence. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    65
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-wind",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A man seen from behind walks quickly away across the field, not looking back. Dusk, wind in the grass. Guilt. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    65
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-hide",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A man in silhouette stands rigid at the edge of the field as the wind rises around him. Dusk turning to night. Defiant and afraid. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    66,
-    67
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-sky",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. A man seen from behind looks up at the darkening sky, his shoulders tense. Night falling, first stars. Lying. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    66,
-    67
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-mother",
+   "id": "s-c4-look-east",
    "kind": "scene",
    "seconds": 6,
    "characters": [
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, looks out from the tent door into the dark, waiting. Night, an oil lamp behind her. A mother's dread. No text, no logos.",
-   "beat": "chapter",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, looks back west toward the distant garden. Dusk. Memory. No text, no logos.",
+   "beat": "payoff",
    "lines": [
-    66,
-    67
+    90
    ],
-   "chapter": "c5"
+   "chapter": "c4"
   },
   {
-   "id": "g-c5-blood",
-   "kind": "scene",
-   "speaker": "god",
-   "line": "What hast thou done? the voice of thy brother’s blood crieth unto me from the ground.",
-   "reference": "Genesis 4:10 (KJV)",
-   "seconds": 8,
-   "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow push-in. A low red mist creeps across a dark field under a heavy storm sky. Night, faint red light on the horizon. Terrible and still. No people, no text, no logos.",
-   "beat": "chapter",
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-lie",
+   "id": "s-c4-sword2",
    "kind": "scene",
    "seconds": 6,
    "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A man in silhouette turns his head away, his jaw tight. Night, a cold wind. Defiance. No text, no logos.",
-   "beat": "chapter",
+   "establishing": true,
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow tilt up. The flaming sword turns before the shut gate, sparks drifting into the grey dawn sky. Dawn. Closed. No people, no text, no logos.",
+   "beat": "payoff",
    "lines": [
-    68
+    91
    ],
-   "chapter": "c5"
+   "chapter": "c4"
   },
   {
-   "id": "s-c5-sheep",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Sheep wander without a shepherd across a dark hill as a figure in silhouette watches. Night. Abandoned. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    68
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-exile",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow pull-back. A lone figure seen from behind walks into an empty desert. Grey dawn, wind and dust. Exile. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    69,
-    70
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-grief",
+   "id": "s-c4-horizon",
    "kind": "scene",
    "seconds": 6,
    "characters": [
     "adam",
     "eve"
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, holds Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, as she weeps. A dim tent at night, one oil lamp. Grief. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    69,
-    70
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-grave",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "adam"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, kneels beside a small mound of stones in the field. Cold dawn. Mourning. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    69,
-    70
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c5-road",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. A distant figure seen from behind walks a winding path up toward bright clouds. Morning light breaking through. A thread of hope. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    69,
-    70
-   ],
-   "chapter": "c5"
-  },
-  {
-   "id": "s-c6-scroll",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow pan. An old hand of someone seen only from behind unrolls a long scroll covered in rows of faded names. Lamplight in a dark tent. Weight of years. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    71,
-    72
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-graves",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. A long hillside of simple stone cairns stretches into the distance. Late afternoon, long shadows. Mortality. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    71,
-    72
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-walker",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. A man seen from behind, his face never visible, walks alone along a high ridge path. Early morning, mist below. Purpose. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    71,
-    72
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-clouds",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. A lone figure seen from behind walks up a path into bright luminous clouds and slowly disappears. Dawn, sunlight pouring through the clouds. Peace and mystery. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    73,
-    74
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-path",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, static camera. An empty mountain path ends in bright drifting cloud. Morning light. Quiet wonder. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    73,
-    74
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-family",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A family seen from behind stands at a tent door looking up the mountain path. Morning light. Wondering. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    73,
-    74
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-ridge",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. A man seen from behind walks steadily along a ridge above a valley of tents. Morning light. Steadfast. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    75
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-pray",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. A man in silhouette kneels on a rock at dawn, his head bowed. First light behind the hills. Devotion. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    75
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-old",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. A very old man in silhouette sits at a tent door, leaning on a staff. Dusk light. Time running out. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    76
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-clouds2",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tilt up. A family seen from behind looks up at heavy clouds gathering over the hills. Dusk. Foreboding. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    76
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-dark",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow crane down. Crowds seen from behind pour through the lanes of a vast city of dark tents. Dusk, cooking smoke hanging low. Busy and heedless. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    77
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c6-torch",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "scoffer"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, watching the crowd below with a thin smile. Night, torchlight. Menace. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    77
-   ],
-   "chapter": "c6"
-  },
-  {
-   "id": "s-c7-tents",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide establishing shot, slow crane down. A vast city of dark goat-hair tents fills a dry plain, smoke from hundreds of cooking fires drifting upward. Dusk, a low orange sun under heavy clouds. Grand and uneasy. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    78,
-    79
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-market",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium wide shot, low tracking shot. A dense crowd seen from behind, faces never visible, pushes through a narrow lane between tents, shouting and shoving. Evening, torchlight and dust. Loud and restless. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    78,
-    79
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-idol",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. A man seen from behind sets a crude carved clay idol on a stained altar stone and bows low before it. Inside a dark tent, one oil lamp. Dark and secret. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    78,
-    79
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-knife",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow tilt down. A man seen from behind tightens his grip on a bronze knife as a stranger walks past. A dusty lane at night, a single torch. Cold and threatening. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    78,
-    79
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-scoffer",
-   "kind": "scene",
-   "speaker": "scoffer",
-   "line": "Take what you want. Nobody up there is watching, and nobody ever was.",
-   "characters": [
-    "scoffer"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, grins at the crowd around him, and speaks, his lips moving clearly with every word. A crowded lane between tents at night, torches all around. Arrogant and cruel. No text, no logos.",
-   "beat": "chapter",
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-raid",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "scoffer"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, handheld. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, leads men seen from behind as they overturn a family's cooking pots. Night, firelight and smoke. Brutal. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    80,
-    81
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-mother",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A mother seen from behind pulls her children into the shadows of a tent. Night, torchlight beyond. Fear. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    80,
-    81
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-storm",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Extreme wide shot, slow push-in. Black storm clouds gather above the plain of tents, lightning flickering inside them. Night. Gathering judgment. No people, no text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    80,
-    81
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-take",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "scoffer"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, handheld. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, snatches a sack of grain from a man seen from behind. Night lane, torchlight. Cruel. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    82
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-hide",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. Children seen from behind hide behind a stack of clay jars. Night, firelight. Fear. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    82
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-lamp",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, slow push-in. An old woman seen from behind sits alone by a dying oil lamp. A dark tent at night. Sorrow. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    83,
-    84
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-ruins",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Figures in silhouette pick through a burned tent, smoke still rising. Grey dawn. Ruin. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    83,
-    84
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-crowd2",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "scoffer"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, laughs with men seen from behind around a fire. Night, a hard wind rising. Heedless. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    83,
-    84
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "g-c7-judgment",
-   "kind": "scene",
-   "speaker": "god",
-   "line": "I will destroy man whom I have created from the face of the earth",
-   "reference": "Genesis 6:7 (KJV)",
-   "seconds": 8,
-   "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the dark plain. Night, the first heavy rain sweeping across the plain. Terrible and grand. No people, no text, no logos.",
-   "beat": "chapter",
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-terror",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "scoffer"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, fast handheld tracking shot. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, freezes as the crowd seen from behind scatters in terror around him and lightning strikes the plain. Night, white lightning lighting the rain. Panic and dread. No text, no logos.",
-   "climax": true,
-   "beat": "chapter",
-   "lines": [
-    85
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-herds",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Herds of animals and figures seen from behind flee across the plain as rain sweeps in. Night storm. Dread. No text, no logos.",
-   "beat": "chapter",
-   "lines": [
-    85
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-hill",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, his face lifted toward the storm. Dusk, the last light behind the black clouds. Lonely and steadfast. No text, no logos.",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Adam, a man of about thirty with Middle Eastern features, warm olive-brown skin, dark brown eyes, thick dark brown wavy hair to the shoulders, a short full dark beard, a lean strong build, a rough tan animal-hide garment over one shoulder, tied with a leather cord, and Eve, a woman of about twenty-five with Middle Eastern features, warm olive-brown skin, dark brown almond-shaped eyes, long thick black wavy hair falling past the shoulders, a gentle oval face, a slender build, a rough tan animal-hide garment tied at the shoulder with a leather cord, walk toward a dark horizon under storm clouds. Dusk. Foreboding. No text, no logos.",
    "beat": "payoff",
    "lines": [
-    86,
-    87
+    91
    ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-noah",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, closes his eyes as the first drops of rain fall. Soft grey light. Peace in the storm. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    86,
-    87
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-light",
-   "kind": "scene",
-   "seconds": 8,
-   "characters": [],
-   "establishing": true,
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tilt up. A single shaft of sunlight breaks through the storm clouds onto one hillside. Dusk. Grace. No people, no text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    86,
-    87
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-walk",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, walks away from the city of tents up a hill path. Evening light breaking through cloud. Resolve. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    88,
-    89
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-family",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, rests his hand on the shoulder of a young man seen from behind. Lamplight at a tent door. Faithful. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    88,
-    89
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-lamp-noah",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, sits by a small lamp, his eyes calm. Night in a quiet tent. Integrity. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    90
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-dawn",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow push-in. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, as dawn breaks over the plain behind him. First light. Hope. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    90
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-sons",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Wide shot, slow tracking shot. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, walks ahead of three young men seen from behind on a hill path. Evening light. A family apart. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    91,
-    92
-   ],
-   "chapter": "c7"
-  },
-  {
-   "id": "s-c7-tent",
-   "kind": "scene",
-   "seconds": 6,
-   "characters": [
-    "noah"
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, static camera. Noah, a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope, standing alone on a dry hillside at dusk, his hands empty at his sides, stands at the door of a small tent as the noise of the city rises below. Dusk. Apart. No text, no logos.",
-   "beat": "payoff",
-   "lines": [
-    91,
-    92
-   ],
-   "chapter": "c7"
+   "chapter": "c4"
   },
   {
    "id": "k-insight-1",
    "kind": "keeper",
    "beat": "keeper_insight",
    "lines": [
-    93
+    92
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his eyes thoughtful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
@@ -2810,20 +2748,43 @@
    "kind": "keeper",
    "beat": "keeper_insight",
    "lines": [
-    94
+    93
    ],
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, grave. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
-   "id": "s-ki-door",
+   "id": "s-ki-trees",
    "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium shot, slow push-in. A figure seen from behind pushes open a heavy wooden door onto darkness. Night, a lamp behind. Dread. No text, no logos.",
+   "window_of": "s-c2-walk",
    "beat": "keeper_insight",
    "lines": [
-    95,
+    94
+   ]
+  },
+  {
+   "id": "s-ki-bite",
+   "kind": "scene",
+   "window_of": "s-c3-take",
+   "beat": "keeper_insight",
+   "lines": [
+    94
+   ]
+  },
+  {
+   "id": "k-insight-3",
+   "kind": "keeper",
+   "beat": "keeper_insight",
+   "lines": [
+    95
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his voice soft. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+  },
+  {
+   "id": "s-ki-coats",
+   "kind": "scene",
+   "window_of": "s-c4-coats",
+   "beat": "keeper_insight",
+   "lines": [
     96
    ]
   },
@@ -2833,57 +2794,52 @@
    "window_of": "s-c4-last",
    "beat": "keeper_insight",
    "lines": [
-    95,
     96
    ]
   },
   {
-   "id": "s-ki-noah",
-   "kind": "scene",
-   "window_of": "s-c7-light",
-   "beat": "keeper_insight",
-   "lines": [
-    95,
-    96
-   ]
-  },
-  {
-   "id": "s-ki-bite",
-   "kind": "scene",
-   "window_of": "s-c3-take",
+   "id": "k-insight-4",
+   "kind": "keeper",
    "beat": "keeper_insight",
    "lines": [
     97
-   ]
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a slow knowing nod. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
-   "id": "s-ki-field",
+   "id": "s-ki-valley",
    "kind": "scene",
-   "window_of": "s-c5-alone",
-   "beat": "keeper_insight",
-   "lines": [
-    97
-   ]
-  },
-  {
-   "id": "s-ki-coats",
-   "kind": "scene",
-   "window_of": "s-c4-coats",
+   "window_of": "s-c1-both",
    "beat": "keeper_insight",
    "lines": [
     98
    ]
   },
   {
-   "id": "s-ki-mark",
+   "id": "s-ki-gate",
    "kind": "scene",
-   "seconds": 6,
-   "characters": [],
-   "figures": "anonymous",
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Close-up, static camera. A man seen from behind walks into the desert, a faint mark on the back of his hand. Grey dawn. Protected. No text, no logos.",
+   "window_of": "s-c4-gate",
    "beat": "keeper_insight",
    "lines": [
     98
+   ]
+  },
+  {
+   "id": "s-ki-shame",
+   "kind": "scene",
+   "window_of": "s-c3-shame",
+   "beat": "keeper_insight",
+   "lines": [
+    99
+   ]
+  },
+  {
+   "id": "s-ki-face",
+   "kind": "scene",
+   "window_of": "s-c4-face",
+   "beat": "keeper_insight",
+   "lines": [
+    99
    ]
   },
   {
@@ -2891,36 +2847,36 @@
    "kind": "keeper",
    "beat": "keeper_insight",
    "lines": [
-    99
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, serious and kind. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
-  },
-  {
-   "id": "k-insight-5",
-   "kind": "keeper",
-   "beat": "keeper_insight",
-   "lines": [
     100
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, grave and searching. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, searching. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
-   "id": "k-insight-3",
-   "kind": "keeper",
+   "id": "s-ki-leave",
+   "kind": "scene",
+   "window_of": "s-c4-leave",
    "beat": "keeper_insight",
    "lines": [
     101
-   ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, his voice soft. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   ]
   },
   {
-   "id": "k-insight-4",
+   "id": "s-ki-light",
+   "kind": "scene",
+   "window_of": "s-c1-adam-light",
+   "beat": "keeper_insight",
+   "lines": [
+    101
+   ]
+  },
+  {
+   "id": "k-insight-8",
    "kind": "keeper",
    "beat": "keeper_insight",
    "lines": [
     102
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a slow knowing nod. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, gentle and direct. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-insight-6",
@@ -2932,31 +2888,22 @@
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a quiet warmth. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
-   "id": "s-ki-walk",
-   "kind": "scene",
-   "window_of": "s-c2-walk",
+   "id": "k-insight-9",
+   "kind": "keeper",
    "beat": "keeper_insight",
    "lines": [
     104
-   ]
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, hopeful. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
-   "id": "s-ki-strike",
-   "kind": "scene",
-   "window_of": "s-c5-strike",
-   "beat": "keeper_insight",
-   "lines": [
-    104
-   ]
-  },
-  {
-   "id": "k-insight-8",
+   "id": "k-insight-5",
    "kind": "keeper",
    "beat": "keeper_insight",
    "lines": [
     105
    ],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, a gentle smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain, a wide 16:9 frame. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and speaks to the camera, his lips moving clearly with every word, serious and kind. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and grave. No text, no logos."
   },
   {
    "id": "k-close-1",

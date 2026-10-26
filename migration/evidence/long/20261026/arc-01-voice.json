@@ -1,0 +1,30 @@
+{
+ "version": "long-voice-measure-v1",
+ "date": "2026-10-26",
+ "plan": "migration/production/bible/plans/arc-01-long.json (bible-long-plan-v1, arc-01, Genesis 1-3)",
+ "how": "Voiced locally in a Claude session, no Actions run: the voice script from episode_build.voice_script (each line in its speaker's Kokoro voice: narration am_michael, Adam am_fenrir, Eve af_heart, God am_onyx at 0.9), then pilot_render.py voice with the preserved hash-pinned Kokoro v1.0 model (the same runtime episode.yml installs). Each line's length is its sentences from the first word to the last word in timeline.json; the lines are laid end to end with the line gap and the 1.2 s tail, as the plan estimate does.",
+ "runs": [
+  {"name": "first draft text, Short line gap 0.35 s",
+   "measured_seconds": 838.4, "measured_minutes": 13.97, "words": 2299, "words_per_minute": 164.5,
+   "plan_estimate_then": "879.9 s at the Short's single 2.75 words/s and 0.35 s gap: 5 % long",
+   "talking_holds_under_4s": ["s-open 3.44 s", "s-c2-adam 2.86 s", "s-c3-eve 3.22 s", "s-c4-adam 3.29 s", "s-c4-blame 2.90 s"],
+   "reading": "the narrator ran 2.874 words/s, not 2.75, and Adam and Eve ~3.7-4.0 words/s: the draft was under 14 min, at the QA's 165 words a minute ceiling, and five talking lines too short for a 4 s clip (TALK_LINE_RETIME_OVER at the build)"},
+  {"name": "final draft text (longer talking lines), long line gap 0.6 s",
+   "measured_seconds": 876.1, "measured_minutes": 14.6, "words": 2322, "words_per_minute": 159.0,
+   "plan_estimate": "874.1 s with long_plan_check's measured pace by voice and 0.6 s gap: within 0.3 %",
+   "climax_at": 0.78, "keeper_share": 0.086,
+   "talking_holds_outside_4_7_s": []}
+ ],
+ "pace_by_voice_words_per_s": {
+  "first_run": {"keeper (am_michael)": {"lines": 108, "pace": 2.874, "line_min": 2.207, "line_max": 3.65},
+                "god (am_onyx 0.9)": {"lines": 9, "pace": 2.811, "line_min": 2.128, "line_max": 3.606},
+                "adam (am_fenrir)": {"lines": 3, "pace": 3.975, "line_min": 3.642, "line_max": 4.197},
+                "eve (af_heart)": {"lines": 3, "pace": 3.732, "line_min": 3.17, "line_max": 4.346}},
+  "second_run": {"keeper (am_michael)": {"lines": 108, "pace": 2.873},
+                 "god (am_onyx 0.9)": {"lines": 9, "pace": 2.776},
+                 "adam (am_fenrir)": {"lines": 3, "pace": 3.798},
+                 "eve (af_heart)": {"lines": 3, "pace": 3.566}}
+ },
+ "used_by": "long_plan_check.VOICE_PACE (first run) and LONG_LINE_GAP 0.6 s; the long's build must lay its lines with the same gap (LONG_DESIGN.md slice 3)",
+ "also_for_the_shorts": "plan_check (Shorts) times every line, a character's too, at 2.75 words/s: a character's talking line is ~35 % faster in fact, so a Short plan can pass with a talking line the build then refuses (TALK_LINE_RETIME_OVER). Not changed here (a Short gate); reported to the coordinator."
+}

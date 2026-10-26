@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """long_plan_check.py: a Bible-story long's shot plan (`bible-long-plan-v1`) is refused before any voice or Pavo call
 when it misses the registered structure (structures/bible-story-long.json script.gate, the numbers script_check reads
-too) or a row of the frozen story QA it will be measured against (qa_criteria_story_v2.json). Also: story QA v2 is v1
-with only the caption rows replaced (owner, 2026-10-26: "Nova régua, sem legenda"), and v1 stays byte-identical.
+too) or a row of the frozen story QA it will be measured against (qa_criteria_story_v3.json). Also: story QA v2 is v1
+with only the caption rows replaced (owner, 2026-10-26: "Nova régua, sem legenda"), v3 is v2 with only the three
+acted-long rows replaced ("Sim, régua nova"), and v1 and v2 stay byte-identical.
 
 Runs in pr-checks through test_plan_check.py (which imports these cases), so no workflow changes."""
 import copy
@@ -23,7 +24,9 @@ import long_plan_check as lc  # noqa: E402
 DRAFT_PLAN = HERE / "plans" / "arc-01-long.json"
 QA_V1 = ROOT / "migration" / "production" / "qa_criteria_story_v1.json"
 QA_V2 = ROOT / "migration" / "production" / "qa_criteria_story_v2.json"
+QA_V3 = ROOT / "migration" / "production" / "qa_criteria_story_v3.json"
 QA_V1_SHA256 = "5dcf63f92fc716852096cefa8fd48f7498f4733eb1d347f4212a6f31a6c95360"   # main, frozen 2026-10-25
+QA_V2_SHA256 = "72a12e231b9daa961f11709eae7004802b66c6cc1c99cf5927f07eb1051099c2"   # frozen 2026-10-26 (#418)
 
 
 KEEPER_LOOK = "an elderly storyteller with a silver beard"
@@ -42,8 +45,8 @@ STYLE = "Painterly cinematic realism, cinema camera."
 # 20 words: 7.27 s at the normal pace; two of them (+ gaps) are a 15.2 s block over three 5.1 s cuts
 FILLER = "Ten generations after Eden the earth is full of people and noise, and nobody looks up at the sky."
 QUESTION = "How did a very good world come to this, and who would be left standing when it ended?"
-OPEN_LINE = "Why do you hide from the voice of the Lord in the garden?"       # 12 words, "you" at 0.7 s
-GOD_LINE = "The end of all flesh is come before me; for the earth is filled with violence through them."
+OPEN_LINE = "Why do you hide from the voice of the Lord in the garden, where you once walked?"   # 16 words
+GOD_LINE = "The end of all flesh is come before me; for the earth is filled with violence"   # 15 words
 KEEPER_12 = "This story is older than any city, and it still asks about us."   # 12 words
 
 
@@ -140,14 +143,6 @@ def codes(result, key="problems"):
     return [x.split()[0] for x in result[key]]
 
 
-def qa_without_conflicts():
-    """The frozen v2 rows an acted all-Pavo long cannot meet, set aside so a test sees only the plan's own rows."""
-    q = copy.deepcopy(lc.qa())
-    q["grammar"].update({"figure_present_fraction_max": 1.0, "footage_picture_share_min": 0.0,
-                         "ai_video_picture_share_max": 1.0, "title_card_seconds": None})
-    return q
-
-
 def insert_line(p, at, line):
     """Insert a narration line at index `at`, every shot's later line indices shifted: the new line's index."""
     p["narration"].insert(at, line)
@@ -163,7 +158,7 @@ def shot(p, sid):
 
 class Grammar(unittest.TestCase):
     def test_the_builder_plan_passes_at_the_real_gate(self):
-        r = check(plan(), qa=qa_without_conflicts())
+        r = check(plan())
         self.assertEqual(r["problems"], [])
         self.assertEqual(r["pending"], [])
         e = r["estimate"]
@@ -172,21 +167,46 @@ class Grammar(unittest.TestCase):
         self.assertGreaterEqual(e["rehooks"], 6)
         self.assertLessEqual(e["keeper_share"], 0.25)
 
-    def test_the_frozen_qa_rows_an_acted_long_cannot_meet_are_pending_owner_rows(self):
+    def test_against_v2_the_acted_long_rows_are_pending_owner_rows_and_v3_checks_them(self):
         # story v2 = v1 apart from captions: no figure on screen, >= 40 % real licensed footage, <= 55 % Pavo, and a
-        # 4-7 s title card first; an acted long with the Keeper on screen meets none of them (owner decision)
-        r = check(plan())
+        # 4-7 s title card first; an acted long meets none of them, so they are the owner's (pending), never decided
+        r = check(plan(), qa=lc.qa(QA_V2))
         self.assertEqual(r["problems"], [])
         found = codes(r, "pending")
         for row in ("QA_CONFLICT_FIGURES", "QA_CONFLICT_REAL_FOOTAGE", "QA_CONFLICT_AI_SHARE", "QA_CONFLICT_TITLE_CARD"):
             self.assertIn(row, found)
+        # owner, 2026-10-26 "Sim, régua nova": v3 replaces those rows with the structure's, and checks them
+        r = check(plan())
+        self.assertEqual((r["problems"], r["pending"]), ([], []))
+
+    def test_each_line_is_timed_at_its_own_voices_measured_pace(self):
+        # measured 2026-10-26 (arc-1 voiced locally): Eve 3.73 words/s, Adam 3.98, the narrator 2.87; at the Short's
+        # single 2.75 a 12-word line of Eve's looked like 4.4 s, and it is 3.2 s: under the 4 s a talking clip fills
+        self.assertGreater(lc.VOICE_PACE["eve"], lc.VOICE_PACE["keeper"] * 1.25)
+        self.assertGreater(lc.VOICE_PACE["adam"], lc.VOICE_PACE["keeper"] * 1.25)
+        p = plan()
+        p["shots"][0]["line"] = "Why do you hide from the voice of the Lord in the garden?"   # 12 words
+        found = codes(check(p))
+        self.assertTrue({"TALK_LINE_UNREACHABLE", "HOLD_UNDER_QA", "SPEAKER_LINE_TOO_SHORT"} & set(found), found)
+        # and the long breathes 0.6 s between lines (the QA's 165 words a minute ceiling)
+        self.assertEqual(lc.LONG_LINE_GAP, 0.6)
+
+    def test_v3_every_talking_clip_is_judged_on_a_human_face(self):
+        # lipsync_check reads a human face and lips: a talking serpent fails every generation (FACE_NOT_FOUND)
+        chars = dict(CHARS, serpent={"name": "The serpent", "status": "APPROVED", "look": "a slender green serpent",
+                                     "refs": ["full"], "voice": "bm_fable", "pronoun": "its"})
+        p = plan()
+        s = p["shots"][0]
+        s.update(speaker="serpent", characters=["serpent"],
+                 prompt=s["prompt"].replace(f"Eve, {EVE_LOOK}", "The serpent, a slender green serpent"))
+        self.assertIn("TALKING_WITHOUT_A_FACE", codes(check(p, chars=chars)))
 
     def test_the_numbers_are_the_structure_gate_that_script_check_reads(self):
         import script_check
         self.assertEqual(lc.gate(), script_check.story_gate())
         p = plan()
         g = dict(lc.gate(), length_min=[20, 30])
-        self.assertIn("LONG_LENGTH", codes(check(p, gate=g, qa=qa_without_conflicts())))
+        self.assertIn("LONG_LENGTH", codes(check(p, gate=g)))
 
     def test_the_gate_and_the_beat_map_agree(self):
         s = json.loads(lc.STRUCTURE.read_text())["script"]
@@ -205,18 +225,18 @@ class Grammar(unittest.TestCase):
         p = plan()
         p["aspect_ratio"] = "9:16"
         p["burned_captions"] = True
-        found = codes(check(p, qa=qa_without_conflicts()))
+        found = codes(check(p))
         self.assertIn("ASPECT_RATIO", found)
         self.assertIn("BURNED_CAPTIONS", found)
 
     def test_the_cold_open_is_acted_and_spoken_never_the_keeper(self):
         p = plan()
         p["shots"][0]["conflict"] = False
-        self.assertIn("COLD_OPEN_CONFLICT", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("COLD_OPEN_CONFLICT", codes(check(p)))
         p = plan()
         k = keeper("k-early", [p["shots"][1]["lines"][0]], "cold_open")
         p["shots"][1] = k
-        found = codes(check(p, qa=qa_without_conflicts()))
+        found = codes(check(p))
         self.assertIn("KEEPER_IN_COLD_OPEN", found)
         # a cold open over 30 s: three more cuts of a 15.2 s block before the promise
         p = plan()
@@ -224,13 +244,13 @@ class Grammar(unittest.TestCase):
         a = insert_line(p, p["shots"][i]["lines"][0], {"kind": "story", "text": FILLER})
         insert_line(p, a + 1, {"kind": "story", "text": FILLER})
         p["shots"][i:i] = [scene(f"s-late-{k}", [a, a + 1], "cold_open") for k in range(3)]
-        self.assertIn("COLD_OPEN_LENGTH", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("COLD_OPEN_LENGTH", codes(check(p)))
 
     def test_the_cold_open_ends_on_an_open_question(self):
         p = plan()
         last = [s for s in p["shots"] if s["beat"] == "cold_open"][-1]
         p["narration"][last["lines"][-1]]["text"] = FILLER
-        self.assertIn("COLD_OPEN_NO_QUESTION", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("COLD_OPEN_NO_QUESTION", codes(check(p)))
 
     def test_the_keeper_promise_is_on_screen_and_at_most_20_s(self):
         p = plan()
@@ -238,14 +258,14 @@ class Grammar(unittest.TestCase):
         for k in range(3):
             n = insert_line(p, p["shots"][i]["lines"][0], {"kind": "promise", "text": KEEPER_12})
             p["shots"].insert(i, keeper(f"k-promise-x{k}", [n], "keeper_promise"))
-        found = codes(check(p, qa=qa_without_conflicts()))
+        found = codes(check(p))
         self.assertIn("KEEPER_PROMISE_LENGTH", found)
 
     def test_re_hooks_count_spacing_and_every_chapter_end(self):
         p = plan()
         for x in p["narration"]:
             x.pop("rehook", None)
-        found = codes(check(p, qa=qa_without_conflicts()))
+        found = codes(check(p))
         self.assertIn("REHOOKS", found)
         self.assertIn("CHAPTER_END_NO_REHOOK", found)
         self.assertIn("REHOOK_GAP", found)
@@ -253,25 +273,25 @@ class Grammar(unittest.TestCase):
     def test_one_acted_climax_at_0_6_to_0_85_on_a_kjv_line(self):
         p = plan()
         shot(p, "s-c2-3-0")["climax"] = True
-        self.assertIn("CLIMAX_COUNT", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CLIMAX_COUNT", codes(check(p)))
         p = plan()
         shot(p, "s-c4-3-0").pop("climax")
         shot(p, "s-c1-3-0")["climax"] = True
-        self.assertIn("CLIMAX_POSITION", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CLIMAX_POSITION", codes(check(p)))
         p = plan()
         p["shots"].remove(shot(p, "s-god"))
-        self.assertIn("CLIMAX_NO_KJV_LINE", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CLIMAX_NO_KJV_LINE", codes(check(p)))
         p = plan()
         shot(p, "s-c4-3-0").pop("climax")
         shot(p, "s-god")["climax"] = True
-        self.assertIn("CLIMAX_NOT_ACTED", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CLIMAX_NOT_ACTED", codes(check(p)))
 
     def test_the_payoff_follows_the_climax(self):
         p = plan()
         for s in p["shots"]:
             if s.get("beat") == "payoff":
                 s["beat"] = "chapter"
-        self.assertIn("PAYOFF_MISSING", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("PAYOFF_MISSING", codes(check(p)))
 
     def test_the_keeper_insight_and_close_limits(self):
         p = plan()
@@ -279,20 +299,20 @@ class Grammar(unittest.TestCase):
         for k in range(23):
             n = insert_line(p, p["shots"][i + k]["lines"][0], {"kind": "insight", "text": KEEPER_12})
             p["shots"].insert(i + k, keeper(f"k-more-{k}", [n], "keeper_insight"))
-        found = codes(check(p, qa=qa_without_conflicts()))
+        found = codes(check(p))
         self.assertIn("KEEPER_INSIGHT_LENGTH", found)
         p = plan()
         for k in range(6):
             p["narration"].append({"kind": "cta", "text": KEEPER_12})
             p["shots"].append(keeper(f"k-close-x{k}", [len(p["narration"]) - 1], "keeper_close"))
-        self.assertIn("KEEPER_CLOSE_LENGTH", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("KEEPER_CLOSE_LENGTH", codes(check(p)))
         p = plan()
         p["narration"][shot(p, "k-close-1")["lines"][0]]["text"] = "Walk against the crowd, and tell me about it in the comments."
-        self.assertIn("CLOSE_NO_QUESTION", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CLOSE_NO_QUESTION", codes(check(p)))
 
     def test_the_keeper_share_is_at_most_a_quarter(self):
         g = dict(lc.gate(), keeper_share_max=0.05)
-        self.assertIn("KEEPER_SHARE", codes(check(plan(), gate=g, qa=qa_without_conflicts())))
+        self.assertIn("KEEPER_SHARE", codes(check(plan(), gate=g)))
 
     def test_no_stretch_without_people_over_20_s(self):
         p = plan()
@@ -302,35 +322,35 @@ class Grammar(unittest.TestCase):
                 s.pop("figures", None)
                 s["prompt"] = (f"{STYLE} Extreme wide establishing shot, slow crane down. A dry plain under heavy "
                                "clouds. Dusk. Vast and empty. No people, no text, no logos.")
-        self.assertIn("SLOW_STRETCH", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("SLOW_STRETCH", codes(check(p)))
 
     def test_every_cut_is_a_4_to_7_s_hold_of_the_frozen_qa(self):
         p = plan()
         s = shot(p, "s-c1-0-0")
         p["shots"].insert(p["shots"].index(s), dict(copy.deepcopy(s), id="s-c1-0-x"))
-        self.assertIn("HOLD_UNDER_QA", codes(check(p, qa=qa_without_conflicts())))   # four cuts of 3.8 s
+        self.assertIn("HOLD_UNDER_QA", codes(check(p)))   # four cuts of 3.8 s
         p = plan()
         p["shots"].remove(shot(p, "s-c1-0-2"))
-        self.assertIn("HOLD_OVER_QA", codes(check(p, qa=qa_without_conflicts())))    # two cuts of 7.6 s
+        self.assertIn("HOLD_OVER_QA", codes(check(p)))    # two cuts of 7.6 s
 
     def test_draft_characters_are_pending_with_their_look_word_for_word(self):
         p = plan()
         s = shot(p, "s-c4-12-1")
         s["characters"] = ["noah"]
         s["prompt"] = s["prompt"].replace(f"Eve, {EVE_LOOK}", f"Noah, {NOAH_LOOK}")
-        r = check(p, qa=qa_without_conflicts())
+        r = check(p)
         self.assertEqual(r["problems"], [])
         self.assertEqual(codes(r, "pending"), ["CHARACTER_PENDING"])
         s["prompt"] = s["prompt"].replace(NOAH_LOOK, "an old man")
-        self.assertIn("CHARACTER_LOOK_CHANGED", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CHARACTER_LOOK_CHANGED", codes(check(p)))
         s["characters"] = ["cain"]
-        self.assertIn("CHARACTER_UNKNOWN", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CHARACTER_UNKNOWN", codes(check(p)))
 
     def test_a_named_character_is_listed_so_the_references_go_in(self):
         p = plan()
         s = shot(p, "s-c2-1-1")
         s["prompt"] = s["prompt"].replace("walks through the tall grass", "walks toward Noah through the tall grass")
-        self.assertIn("CHARACTER_NOT_LISTED", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("CHARACTER_NOT_LISTED", codes(check(p)))
 
     def test_a_window_reuses_a_clip_never_next_to_it(self):
         p = plan()
@@ -340,28 +360,28 @@ class Grammar(unittest.TestCase):
             w.pop(k)
         w["window_of"] = base["id"]
         base["seconds"] = 8                       # two ~5.1 s holds of one 8 s clip (slowed 1.3 at most)
-        r = check(p, qa=qa_without_conflicts())
+        r = check(p)
         self.assertEqual(r["problems"], [])
         self.assertEqual(r["estimate"]["generations"]["windows"], 1)
         w["window_of"] = "s-c1-1-1"
-        self.assertIn("WINDOW_ADJACENT", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("WINDOW_ADJACENT", codes(check(p)))
         w["window_of"] = base["id"]
         base["seconds"] = 4
-        self.assertIn("FOOTAGE_SHORT", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("FOOTAGE_SHORT", codes(check(p)))
 
     def test_the_second_person_hook_of_the_frozen_qa(self):
         p = plan()
         p["shots"][0]["line"] = "Why do they hide from the voice of the Lord in the garden?"
-        self.assertIn("HOOK_SECOND_PERSON", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("HOOK_SECOND_PERSON", codes(check(p)))
 
     def test_chapters_are_the_arcs_shorts_or_an_owner_row(self):
         p = plan()
         p["chapters"][3]["short"] = "z-09-short"
-        r = check(p, qa=qa_without_conflicts())
+        r = check(p)
         self.assertEqual(r["problems"], [])
         self.assertIn("ARC_SHORTS", codes(r, "pending"))
         p["arc"] = "arc-q"
-        self.assertIn("ARC_UNKNOWN", codes(check(p, qa=qa_without_conflicts())))
+        self.assertIn("ARC_UNKNOWN", codes(check(p)))
 
     def test_strict_cli_fails_on_a_pending_row(self):
         with tempfile.TemporaryDirectory() as d:
@@ -375,31 +395,66 @@ class Grammar(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             f = Path(d) / "p.json"
             f.write_text(DRAFT_PLAN.read_text())
-            # the arc-1 draft: no problem, so exit 0; --strict also fails on its pending owner rows
-            self.assertEqual(subprocess.run([sys.executable, str(HERE / "long_plan_check.py"), str(f)],
+            # the arc-1 draft: no problem and no pending row, so it passes even --strict (what the build runs)
+            self.assertEqual(subprocess.run([sys.executable, str(HERE / "long_plan_check.py"), str(f), "--strict"],
                                             capture_output=True).returncode, 0)
+            p = json.loads(DRAFT_PLAN.read_text())
+            p["shots"][1]["characters"] = ["noah"]          # a DRAFT character: a pending row, so --strict fails
+            f.write_text(json.dumps(p))
             self.assertEqual(subprocess.run([sys.executable, str(HERE / "long_plan_check.py"), str(f), "--strict"],
                                             capture_output=True).returncode, 1)
 
 
 class DraftArc1(unittest.TestCase):
-    def test_the_arc_1_draft_passes_but_for_owner_rows(self):
-        r = lc.check(json.loads(DRAFT_PLAN.read_text()))
-        self.assertEqual(r["problems"], [])
-        allowed = ("CHARACTER_PENDING", "QA_CONFLICT_FIGURES", "QA_CONFLICT_REAL_FOOTAGE", "QA_CONFLICT_AI_SHARE",
-                   "QA_CONFLICT_TITLE_CARD", "ARC_SHORTS")
-        self.assertTrue(set(codes(r, "pending")) <= set(allowed), r["pending"])
+    def test_the_arc_1_draft_is_arcs_json_arc_01_and_passes_strict(self):
+        # owner, 2026-10-26: the long follows arcs.json, arc-01 = Genesis 1-3 = Shorts 1-4, one complete story, with
+        # Adam, Eve, the serpent (silent: the Keeper narrates its lines) and God; no Cain or Abel
+        p = json.loads(DRAFT_PLAN.read_text())
+        r = lc.check(p)
+        self.assertEqual((r["problems"], r["pending"]), ([], []))
         self.assertTrue(14 <= r["estimate"]["minutes"] <= 18, r["estimate"])
-        cast = {c for s in json.loads(DRAFT_PLAN.read_text())["shots"] for c in s.get("characters", [])}
-        self.assertTrue({"adam", "eve", "serpent", "noah", "scoffer"} <= cast, cast)
+        arc = lc.arcs()["arc-01"]
+        self.assertEqual([c["short"] for c in p["chapters"]], arc["shorts"])
+        self.assertEqual((p["arc"], p["pilot"]), ("arc-01", arc["long"]["pilot"]))
+        cast = {c for s in p["shots"] for c in s.get("characters", [])}
+        self.assertEqual(cast, {"adam", "eve", "serpent"})
+        speakers = {s["speaker"] for s in p["shots"] if s.get("speaker")}
+        self.assertEqual(speakers, {"adam", "eve", "god"})
 
 
-class StoryQaV2(unittest.TestCase):
+class StoryQa(unittest.TestCase):
     def test_v1_stays_byte_identical_to_main(self):
         self.assertEqual(hashlib.sha256(QA_V1.read_bytes()).hexdigest(), QA_V1_SHA256)
 
-    def test_v2_is_frozen_at_its_pinned_hash(self):
-        self.assertEqual(hashlib.sha256(QA_V2.read_bytes()).hexdigest(), lc.QA_SHA256)
+    def test_v2_stays_byte_identical(self):
+        self.assertEqual(hashlib.sha256(QA_V2.read_bytes()).hexdigest(), QA_V2_SHA256)
+
+    def test_v3_is_the_file_the_long_is_checked_against(self):
+        self.assertEqual(hashlib.sha256(QA_V3.read_bytes()).hexdigest(), lc.QA_SHA256)
+        self.assertEqual(lc.QA, QA_V3)
+        self.assertIsNone(lc.frozen_qa_problem())
+
+    def test_v3_differs_from_v2_only_in_the_three_acted_long_rows(self):
+        v2, v3 = json.loads(QA_V2.read_text()), json.loads(QA_V3.read_text())
+        meta = {"version", "frozen_at_utc", "basis"}
+        self.assertEqual(set(v2) - meta, set(v3) - meta)
+        for k in set(v2) - meta - {"grammar"}:
+            self.assertEqual(v2[k], v3[k], k)        # audio, loudness, pace, rights, the review: unchanged
+        old = {"title_card_seconds", "figure_present_fraction_max", "footage_picture_share_min",
+               "footage_picture_share_counts", "ai_video_picture_share_max"}
+        new = {"first_shot", "figures_allowed", "ai_video_picture_share_max", "ai_video_clip_checks"}
+        g2, g3 = v2["grammar"], v3["grammar"]
+        self.assertEqual(set(g2) - old, set(g3) - new)
+        for k in set(g2) - old:
+            self.assertEqual(g2[k], g3[k], k)        # 4-7 s holds, the .srt track, ... unchanged
+        self.assertEqual(g3["ai_video_picture_share_max"], 1.0)
+        self.assertIn("lipsync_check", g3["ai_video_clip_checks"])
+        self.assertIn("clip_check", g3["ai_video_clip_checks"])
+        self.assertIn("APPROVED", g3["figures_allowed"])
+        self.assertIn("cold-open", g3["first_shot"])
+        self.assertEqual((v2["version"], v3["version"]), ("story-qa-criteria-v2", "story-qa-criteria-v3"))
+        self.assertEqual(v3["perceptual_review_required_before_approval"], v2["perceptual_review_required_before_approval"])
+        self.assertTrue(v3["frozen_before_first_story_render"])
 
     def test_v2_differs_from_v1_only_in_the_caption_rows(self):
         v1, v2 = json.loads(QA_V1.read_text()), json.loads(QA_V2.read_text())

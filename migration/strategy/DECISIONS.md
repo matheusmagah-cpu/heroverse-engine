@@ -463,4 +463,29 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   >= 40 % real licensed footage, <= 55 % AI video and a 4-7 s title card first; the acted long with the Keeper on
   screen meets none of them, so its first render needs one more frozen version decided by the owner. Also: the arc-1
   long's scope (Genesis 1-7, as asked, vs arcs.json arc-01 Genesis 1-3) and the 1440p upscaling cost (~1,300-1,600
-  runner-minutes a long).
+  runner-minutes a long). All three decided the same day (next two entries).
+
+## Owner decision: story QA v3 for the acted Bible long; the long follows arcs.json (2026-10-26)
+- **Owner.** "Sim, régua nova": a new frozen `production/qa_criteria_story_v3.json` for the acted Bible long. It is v2
+  with only the three conflicting rules replaced by the structure's own: (1) figures: approved characters on screen
+  are allowed (v2: none); (2) AI share: 100 % Pavo is allowed, provided each clip passes clip_check and every talking
+  clip passes lipsync_check (v2: >= 40 % real licensed footage, <= 55 % Pavo); (3) the first shot: the acted
+  cold-open conflict replaces the 4-7 s title card. Everything else is v2's, unchanged: audio, loudness, pace, the
+  4-7 s holds, the .srt track, the 9.5 floor and the Claude review. Frozen before any render; v1 and v2 stay
+  byte-identical (`bible/test_long_plan_check.py` asserts all three).
+- **Done.** `long_plan_check.py` checks the plan against v3 (sha256 pinned): the QA_CONFLICT_* owner rows of v2 became
+  checks (the cold open, approved characters only with DRAFT ones pending, every talking speaker a human face:
+  TALKING_WITHOUT_A_FACE, so the serpent stays silent and the Keeper narrates its words).
+- **Scope.** The coordinator's "Genesis 1 to 7" was a mistake: the long follows `bible/arcs.json`. arc-01 is Genesis
+  1-3, Shorts 1-4, one complete story; `bible/plans/arc-01-long.json` is rewritten for that scope (Adam, Eve, the
+  serpent silent, God as a voice, the Keeper), no Cain or Abel for now. It passes `long_plan_check.py --strict`.
+- **Kind.** Rule decisions, not failures: no `ERRORS.json` entry.
+
+## Owner decision: the repository stays public; optimise the long for wall-clock time (2026-10-26)
+- **Owner.** "Manter público." The repository is public, so GitHub's standard hosted runners cost nothing: Actions
+  minutes are not the constraint for the long. Parallel jobs (a matrix for the 1440p Real-ESRGAN upscale) and
+  submit-and-leave for Pavo are fine; the long is optimised for wall-clock time. (`ops/minutes.py` still reports
+  minutes against its 7,000-minute paid budget; it should be read as a usage report, not a bill.)
+- **Measured the same day** (`evidence/pavo/20261026/long-16x9-and-concurrency.json`, two direct 0-credit Pavo
+  requests from a Claude session, no Actions run): a 16:9 request returns 1280x720 at 24 fps, and two submissions in a
+  row ran at the same time (both done within 7 min of the first, the second first), so submit-and-leave works.

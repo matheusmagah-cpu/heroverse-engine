@@ -17,7 +17,8 @@ beat map, plus the long's own fields:
 
 Every number comes from one place: the structure's `script.gate` (structures/bible-story-long.json, the block
 script_check.structure_problems reads for the long's script) and the frozen story QA the long is measured against
-(qa_criteria_story_v2.json, sha256 pinned here). Rules, each mapped to its source:
+(qa_criteria_story_v3.json, sha256 pinned here). Rules, each mapped to its source:
+- the estimate: each line at its voice's measured Kokoro pace (VOICE_PACE), LONG_LINE_GAP 0.6 s between lines.
 - gate.aspect_ratio 16:9 (ASPECT_RATIO); gate.burned_captions false (BURNED_CAPTIONS); gate.length_min 14-18 min
   on the estimate (LONG_LENGTH); one chapter per Short of the arc, in arcs.json order (else ARC_SHORTS, an owner row).
 - cold open (gate.cold_open_s 30, keeper_in_cold_open false): the first shot is a scene whose spoken line starts at
@@ -42,11 +43,14 @@ script_check.structure_problems reads for the long's script) and the frozen stor
   CHARACTER_LOOK_CHANGED), the same entry as in the Shorts; a character named in a prompt is listed in that shot's
   `characters`, so its references go in (CHARACTER_NOT_LISTED); a DRAFT character is ONE pending row each
   (CHARACTER_PENDING) until Claude approves its sheet by PR.
-- the frozen QA (story v2): every cut a 4-7 s hold (grammar.scene_seconds: HOLD_UNDER_QA / HOLD_OVER_QA, a talking
-  line at its slowest pace), "you" within 8 s (HOOK_SECOND_PERSON), 115-165 words a minute (WORDS_PER_MINUTE_EST),
-  speech presence >= 0.85 (SPEECH_PRESENCE_EST); the rows an acted all-Pavo long cannot meet as v2 stands (no figure,
-  >= 40 % real licensed footage, <= 55 % AI video, a 4-7 s title card first) are pending owner rows (QA_CONFLICT_*):
-  this check never decides them.
+- the frozen QA (story v3, owner 2026-10-26 "Sim, régua nova"): every cut a 4-7 s hold (grammar.scene_seconds:
+  HOLD_UNDER_QA / HOLD_OVER_QA, a talking line at its slowest pace), "you" within 8 s (HOOK_SECOND_PERSON), 115-165
+  words a minute (WORDS_PER_MINUTE_EST), speech presence >= 0.85 (SPEECH_PRESENCE_EST); its three acted-long rows:
+  the first shot is the acted cold-open conflict (the cold-open checks), figures are approved characters only
+  (CHARACTER_* above; a DRAFT one stays pending), and 100 % Pavo with every talking clip judged by lipsync_check, so a
+  talking speaker needs a human face (TALKING_WITHOUT_A_FACE: the serpent is silent). Against an older version (v2:
+  no figure, >= 40 % real footage, <= 55 % AI, a title card first) those rows are pending owner rows
+  (QA_CONFLICT_*), never decided by this check.
 - everything a Short's plan_check enforces on a shot: the KJV word for word, God only a voice over a shot with no
   person, a character speaker APPROVED with its own voice, talking lines 3.23-11.55 s and reachable (E95), the Keeper's
   look, wardrobe and pose (E98), five-part prompts, <= 5 references, anonymous figures or establishing shots.
@@ -70,8 +74,9 @@ import script_check  # noqa: E402  (story_gate: the one reader of the structure'
 ch = pc.ch
 VERSION = "bible-long-plan-v1"
 STRUCTURE = script_check.STRUCTURE
-QA = ROOT / "migration" / "production" / "qa_criteria_story_v2.json"
-QA_SHA256 = "72a12e231b9daa961f11709eae7004802b66c6cc1c99cf5927f07eb1051099c2"   # frozen 2026-10-26 (owner)
+QA = ROOT / "migration" / "production" / "qa_criteria_story_v3.json"
+QA_SHA256 = "646fa78b1e7eb044f9fcc579f09438e3831aabf818442911aff761acc184346c"   # frozen 2026-10-26 (owner)
+FACELESS = ("its",)         # characters.json pronoun of a speaker with no human face (lipsync_check cannot judge it)
 ARCS = HERE / "arcs.json"
 LONG_ID = re.compile(r"^arc-[0-9]{2}-long$|^[a-z0-9]+(-[a-z0-9]+)*-long$")
 KINDS = pc.KINDS + ("promise",)
@@ -87,8 +92,23 @@ NEXT = re.compile(r"(?i)\bnext\b")
 # 40285879529 and 40297987571 3 talking each in 1,101 s and 1,096 s (366 s each, lipsync_check included).
 PAVO_SCENE_S = 288
 PAVO_TALK_S = 366
+# Kokoro pace by voice, measured on the arc-1 long voiced line by line with the preserved model (2026-10-26,
+# evidence/long/20261026/arc-01-voice.json): the narrator am_michael 2.874 words/s (lines 2.21-3.65), God am_onyx at 0.9
+# 2.811, Adam am_fenrir 3.975, Eve af_heart 3.732. A character speaks ~35 % faster than the narrator, so the Short's
+# single 2.75 (plan_check.WPS) makes a talking line look longer than it is. Another voice: plan_check.WPS until measured.
+VOICE_PACE = {"keeper": 2.874, "god": 2.811, "adam": 3.975, "eve": 3.732}
+SLOW_RATIO = pc.WPS_SLOWEST / pc.WPS          # the slowest pace, as a share of the normal one (2.25 / 2.75)
+# the long breathes between lines: at the Short's 0.35 s the measured arc-1 voice ran 164.5 words a minute, at the
+# QA's 165 ceiling; 0.6 s brings it to ~158 (pilot_render's v4 long widened its sentence gap for the same row). The
+# long's build lays its lines with this gap (LONG_DESIGN.md slice 3).
+LONG_LINE_GAP = 0.6
 # pavo_footage.py: Real-ESRGAN to 2560x1440 on a runner, 543 s for a 6 s clip (story QA: 1440p, never a plain resize)
 UPSCALE_S_PER_CLIP_S = 543 / 6
+
+
+def pace(item):
+    """Words a second of the voice that speaks this line (the narration is the Keeper's)."""
+    return VOICE_PACE.get(item.get("speaker") or ch.NARRATOR, pc.WPS)
 
 
 def gate():
@@ -135,7 +155,7 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
         problems.append(f"ASPECT_RATIO {plan.get('aspect_ratio')} (a long is {g['aspect_ratio']})")
     if plan.get("burned_captions") is not g["burned_captions"]:
         problems.append("BURNED_CAPTIONS (the long carries an uploaded .srt track, none burned in: burned_captions "
-                        "false, story QA v2)")
+                        "false, story QA v2/v3)")
     arc = arc_map.get(plan.get("arc"))
     chapters = plan.get("chapters")
     if not arc:
@@ -183,12 +203,12 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
     for i, s in enumerate(shots):
         if pc.speaking(s) and s.get("rehook"):
             items[carried[i][0]]["rehook"] = True
-    est = [pc.estimate_seconds(x["text"]) for x in items]
+    est = [pc.words(x["text"]) / pace(x) for x in items]
     start, t = [], 0.0
     for e in est:
         start.append(t)
-        t += e + pc.LINE_GAP
-    total = sum(est) + pc.LINE_GAP * (len(items) - 1) + pc.TAIL
+        t += e + LONG_LINE_GAP
+    total = sum(est) + LONG_LINE_GAP * (len(items) - 1) + pc.TAIL
     begin, hold = [0.0] * len(shots), [0.0] * len(shots)
     for a, b, idx in pc.groups(shots, carried):
         t0 = start[idx[0]]
@@ -224,10 +244,9 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
         idx = carried[i]
         if any(items[k]["kind"] not in BEAT_KINDS[beat] for k in idx):
             problems.append(f"LINE_KIND_BEAT shot {i} {sid} ({beat} carries {'/'.join(BEAT_KINDS[beat])} lines)")
-        span_words = " ".join(items[k]["text"] for k in idx)
-        gaps = pc.LINE_GAP * (len(idx) - 1)
+        gaps = LONG_LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
-        slowest = pc.words(span_words) / pc.WPS_SLOWEST + gaps
+        slowest = sum(pc.words(items[k]["text"]) / (pace(items[k]) * SLOW_RATIO) for k in idx) + gaps
         problems += pc.talk_reach_problems(i, s, span, slowest, gaps)
         # the frozen QA's hold band; a talking line is judged at its slowest pace too (its clip is retimed to it)
         h_max = hold[i] + (slowest - span if pc.talking(s) else 0.0)
@@ -448,7 +467,7 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
     first = []
     for k, x in enumerate(items):
         for n, w in enumerate(x["text"].split()):
-            if start[k] + n / pc.WPS <= sp["hook_second_person_within_seconds"]:
+            if start[k] + n / pace(x) <= sp["hook_second_person_within_seconds"]:
                 first.append(w.lower().strip(".,!?;:\"'"))
     if not any(w in SECOND_PERSON for w in first):
         problems.append(f"HOOK_SECOND_PERSON (you/your inside {sp['hook_second_person_within_seconds']} s, story QA)")
@@ -464,17 +483,24 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
     if not lo_m <= total / 60 <= hi_m:
         problems.append(f"LONG_LENGTH {total / 60:.1f} min outside {lo_m}-{hi_m} (bible-story-long gate)")
 
-    # the frozen QA rows an acted all-Pavo long cannot meet as they stand: the owner's, never this check's
+    # the frozen QA's acted-long rows: v3 checks them; an older version's are the owner's (pending), never decided here
     gr = q["grammar"]
     figures = sum(hold[i] for i, s in enumerate(shots) if _people(s, by_id)) / total
-    if figures > gr["figure_present_fraction_max"]:
+    if gr.get("ai_video_clip_checks"):
+        for i, s in enumerate(shots):
+            who = chars.get(s.get("speaker")) if pc.talking(s) and s["kind"] == "scene" else None
+            if who and who.get("pronoun") in FACELESS:
+                problems.append(f"TALKING_WITHOUT_A_FACE shot {i} {s['id']}: {s['speaker']} (story QA v3: every "
+                                "talking clip passes lipsync_check, which reads a human face and lips; let the Keeper "
+                                "narrate its words)")
+    if gr.get("figure_present_fraction_max") is not None and figures > gr["figure_present_fraction_max"]:
         pending.append(f"QA_CONFLICT_FIGURES {figures:.2f} of the picture shows people > story QA "
                        f"figure_present_fraction_max {gr['figure_present_fraction_max']} (acted characters and the "
                        "Keeper on screen: owner decision, a new frozen QA version)")
-    if gr["footage_picture_share_min"] > 0:
+    if gr.get("footage_picture_share_min", 0) > 0:
         pending.append(f"QA_CONFLICT_REAL_FOOTAGE 0.00 real licensed footage < story QA footage_picture_share_min "
                        f"{gr['footage_picture_share_min']} (every shot is Pavo: owner decision)")
-    if gr["ai_video_picture_share_max"] < 1.0:
+    if gr.get("ai_video_picture_share_max", 1.0) < 1.0:
         pending.append(f"QA_CONFLICT_AI_SHARE 1.00 AI video > story QA ai_video_picture_share_max "
                        f"{gr['ai_video_picture_share_max']} (owner decision)")
     if gr.get("title_card_seconds"):
@@ -490,7 +516,7 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
     god = [s for s in gens if pc.speaking(s) and s["speaker"] == ch.GOD]
     scenes = [s for s in gens if s["kind"] == "scene" and not pc.talking(s)]
     clip_seconds = sum(s.get("seconds") or 0 for s in scenes) + sum(
-        pc.talk_need(sum(est[k] for k in carried[i]) + pc.LINE_GAP * (len(carried[i]) - 1)) for i in talk)
+        pc.talk_need(sum(est[k] for k in carried[i]) + LONG_LINE_GAP * (len(carried[i]) - 1)) for i in talk)
     estimate = {"seconds": round(total, 1), "minutes": round(total / 60, 2), "keeper_share": round(share, 3),
                 "climax_at": round(begin[climax[0]] / total, 3) if len(climax) == 1 else None,
                 "rehooks": len(rehooks), "rehook_gap_max_s": round(gap, 1), "words": n_words,
@@ -509,7 +535,7 @@ def check(plan, chars=None, gate=None, qa=None, arcs=None):
 
 
 def frozen_qa_problem(path=QA):
-    """None when story QA v2 is the frozen file (its pinned sha256), else the reason."""
+    """None when story QA v3 is the frozen file (its pinned sha256), else the reason."""
     got = hashlib.sha256(Path(path).read_bytes()).hexdigest()
     return None if got == QA_SHA256 else f"QA_NOT_FROZEN {Path(path).name} sha256 {got}"
 
