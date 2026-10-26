@@ -26,20 +26,36 @@ q() { if [ "${PUBLIC_LOGS:-0}" = 1 ]; then "$@" >>"$LOG" 2>&1 || { for a in "$@"
 upload_log() { [ "${PUBLIC_LOGS:-0}" = 1 ] && bash "$ASSETS" upload "$LOG#$PILOT-render-log-${RUN_LABEL// /-}.txt" --repo "$ENGINE_REPO" --clobber >/dev/null 2>&1 || true; }
 trap upload_log EXIT
 
-stage "Free runner disk (unused preinstalled SDKs) and record space"
-sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL 2>/dev/null || true
+stage "Free runner disk only when short of space (unused preinstalled SDKs) and record space"
+# E100: deleting the SDKs took 60-100 s of every run while the runner had far more space than a render uses
+# (a full render peaks ~10 GB over the image); they are deleted only when less than FREE_DISK_BELOW_GB is free
+avail_gb=$(df -BG --output=avail "$T" | tail -1 | tr -dc 0-9)
+if [ "${avail_gb:-0}" -lt "${FREE_DISK_BELOW_GB:-40}" ]; then
+  echo "FREEING_DISK ${avail_gb:-0} GB free"
+  sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL 2>/dev/null || true
+else
+  echo "DISK_ENOUGH ${avail_gb} GB free"
+fi
 df -h / "$T" | tail -n +1
 end
 
 stage "Tools and pinned runtimes"
-sudo apt-get update -qq
-sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core >/dev/null
-python3 -m venv "$T/voice"; "$T/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
-python3 -m venv "$T/qa"; "$T/qa/bin/pip" install --disable-pip-version-check -q ai-edge-litert==2.3.0 faster-whisper==1.2.1
-python3 -m venv "$T/cut"; "$T/cut/bin/pip" install --disable-pip-version-check -q 'rembg==2.0.59' 'onnxruntime==1.20.1' 'pillow==11.0.0'
-python3 -m venv "$T/cine"; "$T/cine/bin/pip" install --disable-pip-version-check -q 'numpy==2.2.6' 'opencv-python-headless==4.10.0.84' 'onnxruntime==1.20.1'
+# E100: the apt tools, the four venvs and the depth model do not depend on each other: they install side by side
+# (same pins, each logged) and every one must succeed before the render starts
+SETUP=()
+setup() { local name=$1; shift; "$@" > "$T/setup-$name.log" 2>&1 & SETUP+=("$!:$name"); }
+venv() { python3 -m venv "$T/$1" && "$T/$1/bin/pip" install --disable-pip-version-check -q "${@:2}"; }
+apt_tools() { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core >/dev/null; }
 mkdir -p "$T/models"
-curl -fsSL --retry 3 -o "$T/models/depth-anything-v2-small.onnx" https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx
+setup apt apt_tools
+setup voice venv voice 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
+setup qa venv qa ai-edge-litert==2.3.0 faster-whisper==1.2.1
+setup cut venv cut 'rembg==2.0.59' 'onnxruntime==1.20.1' 'pillow==11.0.0'
+setup cine venv cine 'numpy==2.2.6' 'opencv-python-headless==4.10.0.84' 'onnxruntime==1.20.1'
+setup depth curl -fsSL --retry 3 -o "$T/models/depth-anything-v2-small.onnx" https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx
+for job in "${SETUP[@]}"; do
+  wait "${job%%:*}" || { echo "SETUP_FAILED ${job#*:}"; tail -20 "$T/setup-${job#*:}.log"; exit 1; }
+done
 sha256sum "$T/models/depth-anything-v2-small.onnx"
 export HERO_DEPTH_MODEL="$T/models/depth-anything-v2-small.onnx"
 end
@@ -51,13 +67,12 @@ end
 
 stage "Owned music and generated images from the private release"
 mkdir -p "$T/in/img"
-bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern original-rest-music.lossless.flac -O "$T/in/original-rest-music.lossless.flac" --clobber
-echo "1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c  $T/in/original-rest-music.lossless.flac" | sha256sum -c -
+FETCH="$T/fetch.tsv"
+printf 'original-rest-music.lossless.flac\t%s\t1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c\n' "$T/in/original-rest-music.lossless.flac" > "$FETCH"
 for meta in migration/production/$PILOT/images/*.json; do
   id=$(basename "$meta" .json)
   read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
-  bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/img/$id.png" --clobber
-  echo "$sha  $T/in/img/$id.png" | sha256sum -c -
+  printf '%s\t%s\t%s\n' "$asset" "$T/in/img/$id.png" "$sha" >> "$FETCH"
   cp "$meta" "$T/in/img/$id.json"
 done
 # v4 (owner, 2026-10-23): licensed real footage from the vetted library, verified by hash like the images
@@ -65,10 +80,11 @@ mkdir -p "$T/in/footage"
 for id in $(python3 -I -c "import json,sys;print(' '.join(json.load(open(sys.argv[1])).get('footage') or []))" "$SCRIPT"); do
   meta="migration/production/footage/library/$id.json"
   read -r asset sha < <(python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));print(m['release_asset'],m['sha256'])" "$meta")
-  bash "$ASSETS" download --repo "$ENGINE_REPO" --pattern "$asset" -O "$T/in/footage/$id.mp4" --clobber
-  echo "$sha  $T/in/footage/$id.mp4" | sha256sum -c -
+  printf '%s\t%s\t%s\n' "$asset" "$T/in/footage/$id.mp4" "$sha" >> "$FETCH"
   cp "$meta" "$T/in/footage/$id.json"
 done
+# E100: one asset at a time took ~4 min for ~150 assets; 4 at a time, each still sha256-checked, any failure stops here
+bash "$(dirname "$ASSETS")/fetch_assets.sh" "$FETCH" "$ENGINE_REPO" "${FETCH_JOBS:-4}"
 CRITERIA=migration/production/qa_criteria_v3.json
 if ls "$T"/in/footage/*.mp4 >/dev/null 2>&1; then
   CRITERIA=migration/production/qa_criteria_v4.json

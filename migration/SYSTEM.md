@@ -122,7 +122,7 @@ Produce the master and package, retain provenance, and deliver the frozen techni
 - `episode_build` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
 - A failed build is never dispatched again without new evidence and a fix merged. A resume (`resume_run`) keeps every clip already made.
 - An engine PR is reviewed before merge, not after.
-- Actions minutes stay within the budget (7000 / 30 days). A repeated build is the first thing to cut.
+- Actions minutes stay within the budget (7000 / 30 days, 233 a day). A repeated build is the first thing to cut. The daily report states the pace (`ops/minutes.py`: 7-day min/day, headroom, the next 24 h's cap) and the heartbeat warns hourly when a day goes over 1.5 × 233 (E100).
 
 ### Shorts are a production delivery, with their own review
 

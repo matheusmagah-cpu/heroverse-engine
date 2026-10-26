@@ -56,6 +56,14 @@ jobs:
             echo "DISPATCH $w"
             gh workflow run "$w" --repo "$GITHUB_REPOSITORY" --ref main
           done < "$T/due"
+      - name: Actions minutes pace (E100; a warning on the run, never stops the beat)
+        if: always()
+        continue-on-error: true
+        run: |
+          set -o pipefail   # an unreadable run list fails this step (shown on the run) instead of reading as 0 minutes
+          since=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs?per_page=100&created=%3E%3D$since" --paginate --jq '.workflow_runs' | jq -s 'add // []' > "$RUNNER_TEMP/runs24.json"
+          python3 -I -B migration/ops/minutes.py check "$RUNNER_TEMP/runs24.json"
 
   runner-wake:
     # Independent of the engine scheduler's NOTHING_DUE exit and failures.
