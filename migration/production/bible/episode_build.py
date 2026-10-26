@@ -398,11 +398,18 @@ def make_shot(shot_id, attempt, check, attempts=ATTEMPTS):
             if not record["flags"]:
                 records.append(record)
                 return path, records
+            # E94: a refused generation is kept beside the shot, so the failure-evidence job can show what failed
+            kept = Path(path).with_name(f"{Path(path).stem}-fail{n}{Path(path).suffix}")
+            if Path(path).is_file():
+                shutil.copyfile(path, kept)
+                record["clip"] = kept.name
         else:
             record.setdefault("flags", ["NO_VIDEO"])
         records.append(record)
-    raise ShotFailed(f"SHOT_FAILED {shot_id} after {attempts} generations: "
-                     + "; ".join(",".join(r["flags"]) for r in records))
+    failed = ShotFailed(f"SHOT_FAILED {shot_id} after {attempts} generations: "
+                        + "; ".join(",".join(r["flags"]) for r in records))
+    failed.records = records   # the measures of every attempt reach the report (E94)
+    raise failed
 
 
 def clip_flags(path):
@@ -502,6 +509,8 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
             _, records = make_shot(shot["id"], attempt, check)
         except (ShotFailed, SystemExit) as exc:
             entry["error"] = str(exc)
+            if getattr(exc, "records", None):
+                entry["attempts"] = exc.records
             report["shots"][shot["id"]] = entry
             save(report_path, report)
             raise SystemExit(str(exc))

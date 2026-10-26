@@ -349,6 +349,23 @@ class Gating(unittest.TestCase):
         client, _ = self.generate()
         self.assertEqual(len(client.calls), 1)
 
+    def test_a_failed_shot_keeps_each_refused_generation_and_its_measures_in_the_report(self):
+        # E94: run 40278642295 refused k-insight three times; only the flags reached the log, no clip, no measures
+        eb.lipsync_flags = lambda py, model, clip, wav: (["AUDIO_NOT_OUR_LINE"], {"audio": {"corr": 0.2}, "mouth": {}})
+        with self.assertRaises(SystemExit):
+            self.generate(extra=2)
+        report = json.loads((self.work / "report.json").read_text())
+        attempts = report["shots"]["s-eve"]["attempts"]
+        self.assertEqual([a["clip"] for a in attempts], ["s-eve-fail1.mp4", "s-eve-fail2.mp4", "s-eve-fail3.mp4"])
+        self.assertEqual(attempts[0]["lipsync"]["audio"]["corr"], 0.2)
+        for a in attempts:
+            self.assertTrue((self.work / "clips" / a["clip"]).exists())
+        wf = (eb.REPO / ".github/workflows/episode.yml").read_text()
+        job = wf.split("\n  failure-evidence:\n")[1]
+        self.assertIn("if: failure()", job)
+        self.assertNotIn("secrets.", job)
+        self.assertIn("-fail[0-9].mp4", job)
+
     def test_lipsync_runs_on_each_talking_clip_with_its_own_line(self):
         client, report = self.generate()
         self.assertEqual(self.lip, [("s-eve.mp4", "s-eve.wav"), ("k-close.mp4", "k-close.wav")])

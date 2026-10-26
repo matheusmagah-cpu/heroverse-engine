@@ -156,3 +156,42 @@ jobs:
           git push -q origin "HEAD:refs/heads/$branch"
           echo "BRANCH $branch"
           echo "ASSET $asset"
+
+  failure-evidence:
+    # E94: a failed build's artifact cannot be read from a Claude session (its blob host is not reachable), so the
+    # failed shot's measures go to the log and a frame sheet of each refused generation to a branch; no secret here
+    needs: build
+    if: failure() && needs.build.outputs.episode != ''
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      EP: ${{ needs.build.outputs.episode }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: episode-${{ needs.build.outputs.episode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/out
+      - name: Failed shot's measures in the log, its refused generations as frame sheets on claude/episode-<id>-<run>-failed
+        run: |
+          [[ "$EP" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { echo "EPISODE_ID_REFUSED"; exit 1; }
+          out="$RUNNER_TEMP/out"
+          [ -f "$out/report.json" ] || { echo "NO_REPORT"; exit 0; }
+          timeout 300s sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core >/dev/null
+          python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));[print('FAILED_SHOT',k,json.dumps(v,ensure_ascii=False)) for k,v in r.get('shots',{}).items() if v.get('error')]" "$out/report.json"
+          d="migration/evidence/episodes/$EP/failed-$GITHUB_RUN_ID"; mkdir -p "$d"
+          cp "$out/report.json" "$d/report.json"
+          for f in "$out"/clips/*-fail[0-9].mp4; do
+            [ -f "$f" ] || continue
+            python3 -I -B migration/production/bible/episode_build.py sheet "$f" "$d/$(basename "${f%.mp4}").jpg"
+          done
+          branch="claude/episode-$EP-$GITHUB_RUN_ID-failed"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d"
+          git commit -q -m "Episode $EP failed build (run $GITHUB_RUN_ID): measures and frame sheets of the refused generations"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"
