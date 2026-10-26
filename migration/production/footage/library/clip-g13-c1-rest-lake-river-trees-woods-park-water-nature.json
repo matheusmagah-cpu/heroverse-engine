@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-rest-lake-river-trees-woods-park-water-nature",
+ "theme": "g13-c1-rest",
+ "query": "calm lake sunset",
+ "source": "pixabay",
+ "title": "lake, river, trees, woods, park, water, nature, dawn, field, scenic, calm, summer, spring, germany, landscape",
+ "page": "https://pixabay.com/videos/id-80630/",
+ "author": "edcangri",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 61.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: edcangri via Pixabay (https://pixabay.com/videos/id-80630/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e1d0bcb45710eac7c5713a7035f79b12df5027f3e527d1f2adb3b877ee9d2849",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  113.9,
+  114.3,
+  115.2,
+  115.3,
+  116.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-rest-lake-river-trees-woods-park-water-nature-sha256-e1d0bcb45710eac7c5713a7035f79b12df5027f3e527d1f2adb3b877ee9d2849.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

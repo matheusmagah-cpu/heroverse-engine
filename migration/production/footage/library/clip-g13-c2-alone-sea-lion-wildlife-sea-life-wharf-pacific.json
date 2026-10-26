@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-alone-sea-lion-wildlife-sea-life-wharf-pacific",
+ "theme": "g13-c2-alone",
+ "query": "lion",
+ "source": "pixabay",
+ "title": "sea lion, wildlife, sea life, wharf, pacific grove, monterey, california, nature",
+ "page": "https://pixabay.com/videos/id-132664/",
+ "author": "jadeallencook",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: jadeallencook via Pixabay (https://pixabay.com/videos/id-132664/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "99553028752e6be5f872bc281e8814f7b1b58d29fb1273080ffd67a0fad2e757",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  107.3,
+  105.7,
+  105.9,
+  108.6,
+  109.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-alone-sea-lion-wildlife-sea-life-wharf-pacific-sha256-99553028752e6be5f872bc281e8814f7b1b58d29fb1273080ffd67a0fad2e757.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

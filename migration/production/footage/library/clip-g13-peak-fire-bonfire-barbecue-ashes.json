@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-peak-fire-bonfire-barbecue-ashes",
+ "theme": "g13-peak",
+ "query": "torch fire night",
+ "source": "pixabay",
+ "title": "fire, bonfire, barbecue, ashes",
+ "page": "https://pixabay.com/videos/id-198073/",
+ "author": "LaDoncella",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 80.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: LaDoncella via Pixabay (https://pixabay.com/videos/id-198073/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4566cb7abf9b8d6b23586099aa5984d261a30b96c7d863713c53d84f36aa0381",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  62.4,
+  58.4,
+  62.1,
+  60.0,
+  63.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-peak-fire-bonfire-barbecue-ashes-sha256-4566cb7abf9b8d6b23586099aa5984d261a30b96c7d863713c53d84f36aa0381.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

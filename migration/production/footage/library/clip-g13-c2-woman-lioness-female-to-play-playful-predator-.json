@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-woman-lioness-female-to-play-playful-predator-",
+ "theme": "g13-c2-woman",
+ "query": "sleeping lion",
+ "source": "pixabay",
+ "title": "lioness, female, to play, playful, predator, dangerous, zoo, zoo hague, wildlife, big cat, carnivores, lion",
+ "page": "https://pixabay.com/videos/id-88021/",
+ "author": "NickyPe",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NickyPe via Pixabay (https://pixabay.com/videos/id-88021/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f2b89650bc7fc7336f8a5cefb1b24d2817a122fa7ffa1e13c191affb014580eb",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  122.2,
+  121.1,
+  121.9,
+  124.9,
+  125.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-woman-lioness-female-to-play-playful-predator--sha256-f2b89650bc7fc7336f8a5cefb1b24d2817a122fa7ffa1e13c191affb014580eb.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

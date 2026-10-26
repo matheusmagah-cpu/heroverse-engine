@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-rest-trees-forest-sunset-countryside-nature-l",
+ "theme": "g13-c1-rest",
+ "query": "still water reflection",
+ "source": "pixabay",
+ "title": "trees, forest, sunset, countryside, nature, livestock, still, quiet, landscape",
+ "page": "https://pixabay.com/videos/id-122244/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 79.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-122244/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "224721ca5ad360b5d7bed2853188ec8ab07d53244173bcab830138f95988f176",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  65.9,
+  65.6,
+  66.7,
+  67.0,
+  67.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-rest-trees-forest-sunset-countryside-nature-l-sha256-224721ca5ad360b5d7bed2853188ec8ab07d53244173bcab830138f95988f176.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

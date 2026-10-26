@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-alone-deer-doe-forest-animals-nature",
+ "theme": "g13-c2-alone",
+ "query": "deer forest",
+ "source": "pixabay",
+ "title": "deer, doe, forest, animals, nature",
+ "page": "https://pixabay.com/videos/id-153300/",
+ "author": "messinamotion",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: messinamotion via Pixabay (https://pixabay.com/videos/id-153300/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "546167161920502d84768224090a4a479cbaaa28d8ef6d88ca323c36feb28ff5",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  136.7,
+  127.7,
+  128.8,
+  127.9,
+  126.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-alone-deer-doe-forest-animals-nature-sha256-546167161920502d84768224090a4a479cbaaa28d8ef6d88ca323c36feb28ff5.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-alone-eastern-wolf-timber-wolf-animal-coyote-d",
+ "theme": "g13-c2-alone",
+ "query": "deer forest",
+ "source": "pixabay",
+ "title": "eastern wolf, timber wolf, animal, coyote, deer, predator, gray wolf, feeding, nature, maine, new england, conservation, ecology, forest, environment, snow, vermont, woods, trees, eating, wildlife, fauna",
+ "page": "https://pixabay.com/videos/id-253678/",
+ "author": "CampOotOot",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: CampOotOot via Pixabay (https://pixabay.com/videos/id-253678/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e60981cf41fa93a784fee4e9e8d9081cc0748c54864910ba496b7f18ed164218",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  105.6,
+  108.9,
+  107.0,
+  105.8,
+  105.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-alone-eastern-wolf-timber-wolf-animal-coyote-d-sha256-e60981cf41fa93a784fee4e9e8d9081cc0748c54864910ba496b7f18ed164218.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

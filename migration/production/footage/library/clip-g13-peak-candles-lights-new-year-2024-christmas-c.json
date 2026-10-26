@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-peak-candles-lights-new-year-2024-christmas-c",
+ "theme": "g13-peak",
+ "query": "torch fire night",
+ "source": "pixabay",
+ "title": "candles, lights, new year, 2024, christmas, cake, prayer, calendar, happiness, night, beautiful wallpaper, celebration, traditional, macro, fire, number, fun, background",
+ "page": "https://pixabay.com/videos/id-181408/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 2160,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-181408/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "10e378b85da4961ad6c72d41deb21f4ffdc07a2bb88731b9a8a967aaa3a4a016",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  29.1,
+  33.1,
+  24.7,
+  25.5,
+  34.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-peak-candles-lights-new-year-2024-christmas-c-sha256-10e378b85da4961ad6c72d41deb21f4ffdc07a2bb88731b9a8a967aaa3a4a016.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-rehook-1b-sunrise-fog-sea-of-fog-fall-landscape-to",
+ "theme": "g13-rehook-1b",
+ "query": "sun rays clouds timelapse",
+ "source": "pixabay",
+ "title": "sunrise, fog, sea of fog, fall, landscape, tomorrow, dusk, silhouette, mood, clouds, sun, law, midland, fog blanket, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-28975/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-28975/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "829f89fe79e135f60cc370ff2374a9d65b4f0013cb1b65cf6ff6e82cdc629c04",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  166.7,
+  156.9,
+  154.9,
+  159.6,
+  161.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-rehook-1b-sunrise-fog-sea-of-fog-fall-landscape-to-sha256-829f89fe79e135f60cc370ff2374a9d65b4f0013cb1b65cf6ff6e82cdc629c04.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

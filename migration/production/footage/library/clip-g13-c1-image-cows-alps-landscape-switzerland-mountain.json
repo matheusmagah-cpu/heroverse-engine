@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-image-cows-alps-landscape-switzerland-mountain",
+ "theme": "g13-c1-image",
+ "query": "cattle grazing field",
+ "source": "pixabay",
+ "title": "cows, alps, landscape, switzerland, mountains, bovine, pasture, animals, graze, horns, cattle",
+ "page": "https://pixabay.com/videos/id-27284/",
+ "author": "RoyBuri",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 45.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: RoyBuri via Pixabay (https://pixabay.com/videos/id-27284/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "abf04a81b90166204f260e8341f19d6c99cde082a6318ccc2f6c53e6a90d5164",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  93.2,
+  85.4,
+  79.9,
+  75.7,
+  72.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-image-cows-alps-landscape-switzerland-mountain-sha256-abf04a81b90166204f260e8341f19d6c99cde082a6318ccc2f6c53e6a90d5164.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

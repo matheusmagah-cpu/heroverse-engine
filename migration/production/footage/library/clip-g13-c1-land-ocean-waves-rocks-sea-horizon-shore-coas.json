@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-land-ocean-waves-rocks-sea-horizon-shore-coas",
+ "theme": "g13-c1-land",
+ "query": "waves receding shore",
+ "source": "pixabay",
+ "title": "ocean, waves, rocks, sea, horizon, shore, coast",
+ "page": "https://pixabay.com/videos/id-75773/",
+ "author": "dinholele",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: dinholele via Pixabay (https://pixabay.com/videos/id-75773/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "63e0061e1c14a9e50b4a5cd9ddd175ad47c91b14007ba7c78e7e9a040a53e8e3",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  146.6,
+  143.9,
+  148.9,
+  148.6,
+  150.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-land-ocean-waves-rocks-sea-horizon-shore-coas-sha256-63e0061e1c14a9e50b4a5cd9ddd175ad47c91b14007ba7c78e7e9a040a53e8e3.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

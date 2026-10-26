@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-image-cow-herd-cattle-mountains-river-nature-m",
+ "theme": "g13-c1-image",
+ "query": "cattle grazing field",
+ "source": "pixabay",
+ "title": "cow, herd, cattle, mountains, river, nature, mammal, landscape",
+ "page": "https://pixabay.com/videos/id-72443/",
+ "author": "NilovSergey",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NilovSergey via Pixabay (https://pixabay.com/videos/id-72443/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "7e40d76b19a1e534b1284bdb2d2a7efae71b054fae7874703a2d44d2b4ddfdb6",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  147.2,
+  152.2,
+  157.9,
+  160.1,
+  159.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-image-cow-herd-cattle-mountains-river-nature-m-sha256-7e40d76b19a1e534b1284bdb2d2a7efae71b054fae7874703a2d44d2b4ddfdb6.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

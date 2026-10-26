@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-day-sunset-haze-sun-mood-light-sunlight-clou",
+ "theme": "g13-c1-day",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "sunset, haze, sun, mood, light, sunlight, clouds, horizon, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-34623/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-34623/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "af4235feb1b23540ff0afc4f11b36b8164abcc784a2294145d041025807b0f23",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  61.4,
+  60.9,
+  66.5,
+  71.0,
+  75.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-day-sunset-haze-sun-mood-light-sunlight-clou-sha256-af4235feb1b23540ff0afc4f11b36b8164abcc784a2294145d041025807b0f23.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-image-fish-aquarium-to-swim-underwater-calm-pe",
+ "theme": "g13-c1-image",
+ "query": "fish underwater school",
+ "source": "pixabay",
+ "title": "fish, aquarium, to swim, underwater, calm, peaceful, climate, beautiful wallpaper, ocean, sea, colors, tropical, animal, exotic, nature, background",
+ "page": "https://pixabay.com/videos/id-155553/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-155553/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f79ceb4766417a3da83dedf13e2ecb987c2b7f3533c8511e051d05a6780c5b82",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  49.4,
+  48.6,
+  49.5,
+  49.6,
+  50.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-image-fish-aquarium-to-swim-underwater-calm-pe-sha256-f79ceb4766417a3da83dedf13e2ecb987c2b7f3533c8511e051d05a6780c5b82.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

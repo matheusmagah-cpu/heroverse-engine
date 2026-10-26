@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-rehook-2b-waterfall-highlands-flow-nature-green-lo",
+ "theme": "g13-rehook-2b",
+ "query": "lone tree meadow",
+ "source": "pixabay",
+ "title": "waterfall, highlands, flow, nature, green, lonely, hike, green trees, meadow, idyll, landscape, idyllic, calm, scotland",
+ "page": "https://pixabay.com/videos/id-127361/",
+ "author": "NathanKoop",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NathanKoop via Pixabay (https://pixabay.com/videos/id-127361/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "48126afdb4699cadd81d63460d24af917e35564e517decec4092e37a1125c3ce",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  70.2,
+  72.0,
+  71.8,
+  73.0,
+  67.1
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-rehook-2b-waterfall-highlands-flow-nature-green-lo-sha256-48126afdb4699cadd81d63460d24af917e35564e517decec4092e37a1125c3ce.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

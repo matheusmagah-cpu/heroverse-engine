@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-breath-field-meadow-grass-silver-grass-wind-aut",
+ "theme": "g13-c2-breath",
+ "query": "wind blowing grass",
+ "source": "pixabay",
+ "title": "field, meadow, grass, silver grass, wind, autumn scenery, nature, scenery, landscape",
+ "page": "https://pixabay.com/videos/id-89182/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 38.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-89182/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "5a7822f93af16618fd05cd33bc238d763ef807762088b7fb308a6161c6500eaa",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  127.4,
+  128.3,
+  127.4,
+  128.5,
+  128.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-breath-field-meadow-grass-silver-grass-wind-aut-sha256-5a7822f93af16618fd05cd33bc238d763ef807762088b7fb308a6161c6500eaa.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

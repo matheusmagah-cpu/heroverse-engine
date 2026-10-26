@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-command-pear-trees-beeren-apple-pear-trees-beern",
+ "theme": "g13-c2-command",
+ "query": "apple tree fruit",
+ "source": "pixabay",
+ "title": "pear trees, beeren, apple, pear, trees, beerne, green tree, fruits tree, germany, europe, summer",
+ "page": "https://pixabay.com/videos/id-126037/",
+ "author": "MahmudMoni",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: MahmudMoni via Pixabay (https://pixabay.com/videos/id-126037/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8c363a67682d8b21b8a6a0a945d8da41ade19e345ea05a66fe6504b8a59f7533",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  94.3,
+  99.9,
+  90.2,
+  92.9,
+  114.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-command-pear-trees-beeren-apple-pear-trees-beern-sha256-8c363a67682d8b21b8a6a0a945d8da41ade19e345ea05a66fe6504b8a59f7533.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

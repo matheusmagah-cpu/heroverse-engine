@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-lights-plant-petals-blossom-bloom-anthers-wild-",
+ "theme": "g13-c1-lights",
+ "query": "starry sky timelapse",
+ "source": "pixabay",
+ "title": "plant, petals, blossom, bloom, anthers, wild flower, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-24105/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 29.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-24105/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eb1b8b1fd053f033cbddae5e15402e16e63aa7776d960ffba8be842869e0237b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  215.6,
+  215.6,
+  214.8,
+  213.7,
+  210.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-lights-plant-petals-blossom-bloom-anthers-wild--sha256-eb1b8b1fd053f033cbddae5e15402e16e63aa7776d960ffba8be842869e0237b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

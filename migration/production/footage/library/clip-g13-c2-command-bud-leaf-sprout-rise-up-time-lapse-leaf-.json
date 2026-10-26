@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-command-bud-leaf-sprout-rise-up-time-lapse-leaf-",
+ "theme": "g13-c2-command",
+ "query": "fruit hanging branch",
+ "source": "pixabay",
+ "title": "bud, leaf, sprout, rise up, time lapse, leaf bud, eye, set out, branch, spring awakening, drive out, summit bud",
+ "page": "https://pixabay.com/videos/id-22761/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 47.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-22761/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "aabcf2f9e75c412fde9c6560ca3f1ecbbfc876061b987d2c28a97aece278a652",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  62.6,
+  62.7,
+  63.0,
+  63.2,
+  63.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-command-bud-leaf-sprout-rise-up-time-lapse-leaf--sha256-aabcf2f9e75c412fde9c6560ca3f1ecbbfc876061b987d2c28a97aece278a652.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

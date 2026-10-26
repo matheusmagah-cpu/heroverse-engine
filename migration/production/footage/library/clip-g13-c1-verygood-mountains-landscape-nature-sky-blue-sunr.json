@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-verygood-mountains-landscape-nature-sky-blue-sunr",
+ "theme": "g13-c1-verygood",
+ "query": "valley aerial sunrise",
+ "source": "pixabay",
+ "title": "mountains, landscape, nature, sky, blue, sunrise, aerial, drone",
+ "page": "https://pixabay.com/videos/id-280484/",
+ "author": "NatureViewdaBeau",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 39.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: NatureViewdaBeau via Pixabay (https://pixabay.com/videos/id-280484/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "98d1e8cd7ab9f58cf549343dc793164eab1f9f2d8ff3e94697032bd68c725225",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  100.1,
+  98.8,
+  97.7,
+  96.8,
+  96.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-verygood-mountains-landscape-nature-sky-blue-sunr-sha256-98d1e8cd7ab9f58cf549343dc793164eab1f9f2d8ff3e94697032bd68c725225.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

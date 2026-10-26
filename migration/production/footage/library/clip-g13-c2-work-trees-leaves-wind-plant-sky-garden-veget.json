@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-work-trees-leaves-wind-plant-sky-garden-veget",
+ "theme": "g13-c2-work",
+ "query": "green leaves garden",
+ "source": "pixabay",
+ "title": "trees, leaves, wind, plant, sky, garden, vegetation, environmental, forest, flora, green, spring, summer, botanical, nature, landscape",
+ "page": "https://pixabay.com/videos/id-72927/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-72927/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "91a45785b683c0d3887191413876664c05784b9525a7cf12855543d488649ca8",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  137.4,
+  138.1,
+  139.7,
+  141.0,
+  143.5
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-work-trees-leaves-wind-plant-sky-garden-veget-sha256-91a45785b683c0d3887191413876664c05784b9525a7cf12855543d488649ca8.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

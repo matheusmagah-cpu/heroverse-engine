@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-verygood-mountain-canyon-forest-valley-sunset-aer",
+ "theme": "g13-c1-verygood",
+ "query": "valley aerial sunrise",
+ "source": "pixabay",
+ "title": "mountain, canyon, forest, valley, sunset, aerial, trees, stream, river",
+ "page": "https://pixabay.com/videos/id-79020/",
+ "author": "8618939",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: 8618939 via Pixabay (https://pixabay.com/videos/id-79020/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2d66afd3bbaa321036e97d0b68f7f4e7cd0abe3e45b6e24364988c0c7c950c50",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  50.6,
+  46.9,
+  49.6,
+  44.0,
+  41.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-verygood-mountain-canyon-forest-valley-sunset-aer-sha256-2d66afd3bbaa321036e97d0b68f7f4e7cd0abe3e45b6e24364988c0c7c950c50.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-river-river-forest-amazon-drone-aerial-view-cl",
+ "theme": "g13-c2-river",
+ "query": "river valley aerial",
+ "source": "pixabay",
+ "title": "river, forest, amazon, drone, aerial view, clouds, sky, landscape",
+ "page": "https://pixabay.com/videos/id-216402/",
+ "author": "Drone_Aventura",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Drone_Aventura via Pixabay (https://pixabay.com/videos/id-216402/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f2a64f0984dcc0176ae47b168d7abd8124127fddd90843b60fa50b4e880d134e",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  113.7,
+  116.1,
+  134.0,
+  139.4,
+  137.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-river-river-forest-amazon-drone-aerial-view-cl-sha256-f2a64f0984dcc0176ae47b168d7abd8124127fddd90843b60fa50b4e880d134e.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

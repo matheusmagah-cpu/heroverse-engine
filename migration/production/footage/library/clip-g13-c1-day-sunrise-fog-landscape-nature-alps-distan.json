@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-day-sunrise-fog-landscape-nature-alps-distan",
+ "theme": "g13-c1-day",
+ "query": "sunrise timelapse",
+ "source": "pixabay",
+ "title": "sunrise, fog, landscape, nature, alps, distant vision, dusk, mood, belchen, belchenflue, sea of fog, fogging, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-30850/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-30850/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "945eb2a6c48f715978c367f1831cd8ccb799b4da353bd69f32e8d62702e6c588",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  98.0,
+  100.2,
+  101.3,
+  101.2,
+  110.0
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-day-sunrise-fog-landscape-nature-alps-distan-sha256-945eb2a6c48f715978c367f1831cd8ccb799b4da353bd69f32e8d62702e6c588.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

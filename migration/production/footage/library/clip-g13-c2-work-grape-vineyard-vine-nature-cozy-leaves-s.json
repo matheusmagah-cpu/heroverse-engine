@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-work-grape-vineyard-vine-nature-cozy-leaves-s",
+ "theme": "g13-c2-work",
+ "query": "vineyard",
+ "source": "pixabay",
+ "title": "grape, vineyard, vine, nature, cozy, leaves, sunlight, summer",
+ "page": "https://pixabay.com/videos/id-374588/",
+ "author": "Li2s1",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Li2s1 via Pixabay (https://pixabay.com/videos/id-374588/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eb5cb6d9f34896e99c71504fc6a827df74d81643d92d7abceeef13d76862b9ca",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  93.5,
+  93.7,
+  95.1,
+  102.6,
+  111.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-work-grape-vineyard-vine-nature-cozy-leaves-s-sha256-eb5cb6d9f34896e99c71504fc6a827df74d81643d92d7abceeef13d76862b9ca.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

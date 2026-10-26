@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-rehook-2b-cosmos-flowers-meadow-wind-autumn-scener",
+ "theme": "g13-rehook-2b",
+ "query": "lone tree meadow",
+ "source": "pixabay",
+ "title": "cosmos, flowers, meadow, wind, autumn, scenery",
+ "page": "https://pixabay.com/videos/id-89183/",
+ "author": "KIMDAEJEUNG",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: KIMDAEJEUNG via Pixabay (https://pixabay.com/videos/id-89183/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4a05d3d3abdb96ef5812dd5933f21e46de5f74ebfeccd4ccc35fe2d0282b6b03",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  107.0,
+  106.9,
+  106.9,
+  106.7,
+  106.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-rehook-2b-cosmos-flowers-meadow-wind-autumn-scener-sha256-4a05d3d3abdb96ef5812dd5933f21e46de5f74ebfeccd4ccc35fe2d0282b6b03.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

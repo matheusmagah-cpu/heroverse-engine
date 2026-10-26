@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-chapter-2-ocean-sea-waves-soil-island-liquid-wind-",
+ "theme": "g13-chapter-2",
+ "query": "dry soil dust",
+ "source": "pixabay",
+ "title": "ocean, sea, waves, soil, island, liquid, wind, holiday, trip, coast, forest, trees, nature, environment, peace, calm",
+ "page": "https://pixabay.com/videos/id-86373/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-86373/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9eabd6e9cdc3f7fb34e4239fedb5d0e5ff6887ea0e5191aa2db3c45fd98e22e9",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  103.7,
+  107.0,
+  107.1,
+  107.0,
+  104.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-chapter-2-ocean-sea-waves-soil-island-liquid-wind--sha256-9eabd6e9cdc3f7fb34e4239fedb5d0e5ff6887ea0e5191aa2db3c45fd98e22e9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

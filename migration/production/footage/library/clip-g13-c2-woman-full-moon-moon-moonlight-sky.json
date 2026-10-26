@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-woman-full-moon-moon-moonlight-sky",
+ "theme": "g13-c2-woman",
+ "query": "moonlight trees night",
+ "source": "pixabay",
+ "title": "full moon, moon, moonlight, sky",
+ "page": "https://pixabay.com/videos/id-120168/",
+ "author": "Sarowar2222",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Sarowar2222 via Pixabay (https://pixabay.com/videos/id-120168/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "6cc6efcf39ed8a5387c51fcaf5c8828d1022efc4d82810c61c75d2591b58f823",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  61.9,
+  62.0,
+  60.4,
+  57.7,
+  57.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-woman-full-moon-moon-moonlight-sky-sha256-6cc6efcf39ed8a5387c51fcaf5c8828d1022efc4d82810c61c75d2591b58f823.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

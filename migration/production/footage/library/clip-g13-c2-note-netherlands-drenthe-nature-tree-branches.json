@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-note-netherlands-drenthe-nature-tree-branches",
+ "theme": "g13-c2-note",
+ "query": "tree in field",
+ "source": "pixabay",
+ "title": "netherlands, drenthe, nature, tree, branches, field, spring, sunset, sun",
+ "page": "https://pixabay.com/videos/id-267861/",
+ "author": "Matthias_Groeneveld",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Matthias_Groeneveld via Pixabay (https://pixabay.com/videos/id-267861/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0c590f3b72f0c729a64bbfbdbc032c037a4dc69e5f9d0dd684162cd0dc05f574",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  114.8,
+  119.0,
+  122.8,
+  126.1,
+  131.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-note-netherlands-drenthe-nature-tree-branches-sha256-0c590f3b72f0c729a64bbfbdbc032c037a4dc69e5f9d0dd684162cd0dc05f574.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

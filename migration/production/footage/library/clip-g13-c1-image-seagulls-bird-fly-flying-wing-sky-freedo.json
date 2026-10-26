@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-image-seagulls-bird-fly-flying-wing-sky-freedo",
+ "theme": "g13-c1-image",
+ "query": "birds flying sky",
+ "source": "pixabay",
+ "title": "seagulls, bird, fly, flying, wing, sky, freedom, animal, wind, beautiful, background, nature, white, sea, wild, feed, feather, that, view, wave",
+ "page": "https://pixabay.com/videos/id-95477/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-95477/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "35c888405b1f268a33f514a92e751a9b3d052dbd5a73d112d422da5e5a5375ff",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  94.6,
+  89.7,
+  88.0,
+  85.7,
+  94.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-image-seagulls-bird-fly-flying-wing-sky-freedo-sha256-35c888405b1f268a33f514a92e751a9b3d052dbd5a73d112d422da5e5a5375ff.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

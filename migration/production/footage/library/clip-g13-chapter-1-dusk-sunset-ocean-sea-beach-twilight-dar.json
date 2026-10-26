@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-chapter-1-dusk-sunset-ocean-sea-beach-twilight-dar",
+ "theme": "g13-chapter-1",
+ "query": "dark ocean waves night",
+ "source": "pixabay",
+ "title": "dusk, sunset, ocean, sea, beach, twilight, dark, night, sky, nature, water, romantic, waves, rocks, mystical, peaceful, holiday, meditation, spiritual, peace, gold, purple, yellow",
+ "page": "https://pixabay.com/videos/id-52866/",
+ "author": "ChristianBodhi",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: ChristianBodhi via Pixabay (https://pixabay.com/videos/id-52866/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "eb8ff4202e6a233ea2649fd3b4f6eabf186fbf2dca1674b5b10a4dd9f982647a",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  81.2,
+  80.7,
+  79.9,
+  79.2,
+  78.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-chapter-1-dusk-sunset-ocean-sea-beach-twilight-dar-sha256-eb8ff4202e6a233ea2649fd3b4f6eabf186fbf2dca1674b5b10a4dd9f982647a.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

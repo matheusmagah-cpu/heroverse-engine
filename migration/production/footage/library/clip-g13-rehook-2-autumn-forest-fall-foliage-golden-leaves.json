@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-rehook-2-autumn-forest-fall-foliage-golden-leaves",
+ "theme": "g13-rehook-2",
+ "query": "morning mist forest",
+ "source": "pixabay",
+ "title": "autumn forest, fall foliage, golden leaves, pine trees, moss, forest path, tranquil woods, soft light, nature ambience, 4k nature, peaceful forest, calm nature, quiet woodland, leaf litter, rustling leaves, serene landscape, meditative nature, fall colors, woodland trail, evergreen pines, morning mist",
+ "page": "https://pixabay.com/videos/id-310407/",
+ "author": "Nils_Vega",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Nils_Vega via Pixabay (https://pixabay.com/videos/id-310407/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "9336b7421c495e947cff901fc5416f1c87515bb45a412e54b903220533ebe54d",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  61.6,
+  68.2,
+  81.5,
+  89.9,
+  90.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-rehook-2-autumn-forest-fall-foliage-golden-leaves-sha256-9336b7421c495e947cff901fc5416f1c87515bb45a412e54b903220533ebe54d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

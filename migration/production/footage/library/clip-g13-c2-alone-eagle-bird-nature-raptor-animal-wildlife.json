@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-alone-eagle-bird-nature-raptor-animal-wildlife",
+ "theme": "g13-c2-alone",
+ "query": "eagle flying",
+ "source": "pixabay",
+ "title": "eagle, bird, nature, raptor, animal, wildlife, sea, hunter, plumage, ornithology, sea-eagle, white-bellied, prey, majestic, head, ocean, water, waves, seascape, horizon, sky, coast, spume, landscape, seashore",
+ "page": "https://pixabay.com/videos/id-290823/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-290823/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2d1507e63bfa604a147a8bc091ab677c3ee221a65f77c89ab7489cf0201a884d",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  117.0,
+  138.3,
+  114.5,
+  113.3,
+  120.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-alone-eagle-bird-nature-raptor-animal-wildlife-sha256-2d1507e63bfa604a147a8bc091ab677c3ee221a65f77c89ab7489cf0201a884d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

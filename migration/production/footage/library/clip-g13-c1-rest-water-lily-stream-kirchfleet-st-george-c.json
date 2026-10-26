@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-rest-water-lily-stream-kirchfleet-st-george-c",
+ "theme": "g13-c1-rest",
+ "query": "quiet meadow evening",
+ "source": "pixabay",
+ "title": "water lily, stream, kirchfleet, st george church, jürgen, swim, easter wood, water, flow, summer, meadow, lily steel, waters, quiet, water lilies, biotrophic, nature, landscape",
+ "page": "https://pixabay.com/videos/id-128204/",
+ "author": "joergip31",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 58.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: joergip31 via Pixabay (https://pixabay.com/videos/id-128204/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ef87746017f07c9e45c486da17b6388dd39932455fd3bbe5e1bd93c86a43878b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  81.5,
+  82.3,
+  82.9,
+  82.5,
+  81.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-rest-water-lily-stream-kirchfleet-st-george-c-sha256-ef87746017f07c9e45c486da17b6388dd39932455fd3bbe5e1bd93c86a43878b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-close-fish-moray-eel-beautiful-wallpaper-wild-",
+ "theme": "g13-c2-close",
+ "query": "snake grass",
+ "source": "pixabay",
+ "title": "fish, moray eel, beautiful wallpaper, wild, hunter, snake, to swim, animal, aquarium, nature, underwater, calm, peaceful, climate, ocean, sea, river, tropical, background",
+ "page": "https://pixabay.com/videos/id-156148/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 32.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-156148/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d11e7f8ad2cc2fbc361a32b0c4a9684359b34f4972b95896e10e387e222dd850",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  56.0,
+  55.7,
+  57.0,
+  58.7,
+  59.4
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-close-fish-moray-eel-beautiful-wallpaper-wild--sha256-d11e7f8ad2cc2fbc361a32b0c4a9684359b34f4972b95896e10e387e222dd850.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

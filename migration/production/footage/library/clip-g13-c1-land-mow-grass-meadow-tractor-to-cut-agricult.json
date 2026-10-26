@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-land-mow-grass-meadow-tractor-to-cut-agricult",
+ "theme": "g13-c1-land",
+ "query": "grass growing timelapse",
+ "source": "pixabay",
+ "title": "mow, grass, meadow, tractor, to cut, agriculture, field, hay, cut grass, time lapse, timelapse",
+ "page": "https://pixabay.com/videos/id-37899/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 35.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-37899/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "336a03f078ab2487cd9c95c2b0494a484acbed173bdeb3362dab2379b1a0773b",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  113.4,
+  113.3,
+  114.0,
+  113.9,
+  113.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-land-mow-grass-meadow-tractor-to-cut-agricult-sha256-336a03f078ab2487cd9c95c2b0494a484acbed173bdeb3362dab2379b1a0773b.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

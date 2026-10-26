@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-rest-istanbul-turkey-ships-marine-water-night",
+ "theme": "g13-c1-rest",
+ "query": "still water reflection",
+ "source": "pixabay",
+ "title": "istanbul, turkey, ships, marine, water, night, travel, culture, tourism, reflection, wave",
+ "page": "https://pixabay.com/videos/id-21640/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-21640/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4ed8f7ffce887fe6e096ab8f6e86bfe42a72305b84d62127559fe5f570bec78d",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  50.6,
+  47.5,
+  40.3,
+  42.0,
+  45.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-rest-istanbul-turkey-ships-marine-water-night-sha256-4ed8f7ffce887fe6e096ab8f6e86bfe42a72305b84d62127559fe5f570bec78d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

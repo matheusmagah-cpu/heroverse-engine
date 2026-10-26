@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-land-ocean-rocks-beach-waves-coast-shore",
+ "theme": "g13-c1-land",
+ "query": "waves receding shore",
+ "source": "pixabay",
+ "title": "ocean, rocks, beach, waves, coast, shore",
+ "page": "https://pixabay.com/videos/id-197448/",
+ "author": "tigerpaint3",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: tigerpaint3 via Pixabay (https://pixabay.com/videos/id-197448/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2fd23128adaf1e85444eba2e6bc1a31eec0951f5855452d11c837eceb0c4f341",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  115.6,
+  126.8,
+  119.2,
+  118.7,
+  122.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-land-ocean-rocks-beach-waves-coast-shore-sha256-2fd23128adaf1e85444eba2e6bc1a31eec0951f5855452d11c837eceb0c4f341.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

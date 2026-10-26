@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-garden-flower-grass-wind-herb-spring-summer-bea",
+ "theme": "g13-c2-garden",
+ "query": "garden paradise flowers",
+ "source": "pixabay",
+ "title": "flower, grass, wind, herb, spring, summer, beautiful wallpaper, nature, garden, park, botanical, sunny, daytime, background, weed, romantic, peaceful, paradise",
+ "page": "https://pixabay.com/videos/id-112208/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 59.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-112208/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "4ecdf180ca74bc5363da1e33783bb7b1067242e5c74041cfb7dc48d94ec3bf56",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  75.8,
+  77.7,
+  77.7,
+  68.0,
+  80.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-garden-flower-grass-wind-herb-spring-summer-bea-sha256-4ecdf180ca74bc5363da1e33783bb7b1067242e5c74041cfb7dc48d94ec3bf56.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

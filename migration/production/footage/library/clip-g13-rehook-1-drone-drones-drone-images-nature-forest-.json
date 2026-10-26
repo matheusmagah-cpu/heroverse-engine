@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-rehook-1-drone-drones-drone-images-nature-forest-",
+ "theme": "g13-rehook-1",
+ "query": "dark clouds night sky",
+ "source": "pixabay",
+ "title": "drone, drones, drone images, nature, forest, river, landscape, drone footage, aerial view, aerial image, amazon, aerial images, cloud, sky",
+ "page": "https://pixabay.com/videos/id-216058/",
+ "author": "Drone_Aventura",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 33.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Drone_Aventura via Pixabay (https://pixabay.com/videos/id-216058/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "c801e3641e0026e07f26146b7107b30278a40938b541f1fc46479f6f452a1cbd",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  125.2,
+  124.7,
+  124.9,
+  124.1,
+  124.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-rehook-1-drone-drones-drone-images-nature-forest--sha256-c801e3641e0026e07f26146b7107b30278a40938b541f1fc46479f6f452a1cbd.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

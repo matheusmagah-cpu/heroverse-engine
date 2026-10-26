@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-note-sunset-landscape-field-nature-trees-hill",
+ "theme": "g13-c2-note",
+ "query": "tree in field",
+ "source": "pixabay",
+ "title": "sunset, landscape, field, nature, trees, hills, drone",
+ "page": "https://pixabay.com/videos/id-120128/",
+ "author": "otohp_by_sakul",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 36.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: otohp_by_sakul via Pixabay (https://pixabay.com/videos/id-120128/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "0865d6ef4f84070c3f62d4ab0472cd8de5d32a5fb6cb68439a3dd4637ad932ed",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  70.8,
+  77.2,
+  91.5,
+  96.4,
+  103.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-note-sunset-landscape-field-nature-trees-hill-sha256-0865d6ef4f84070c3f62d4ab0472cd8de5d32a5fb6cb68439a3dd4637ad932ed.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

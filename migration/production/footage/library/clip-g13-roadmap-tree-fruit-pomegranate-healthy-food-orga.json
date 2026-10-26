@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-roadmap-tree-fruit-pomegranate-healthy-food-orga",
+ "theme": "g13-roadmap",
+ "query": "fruit tree branch",
+ "source": "pixabay",
+ "title": "tree, fruit, pomegranate, healthy, food, organic, fresh, vitamins, red, fruits, mature, nature, aqueous, nutrition, harvest, citrus, vegan, branch, agriculture, sky",
+ "page": "https://pixabay.com/videos/id-232357/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-232357/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "e7969ec98b8bfd0ef8c846132f52e265db9fc261ed35e66991d3060ba806f649",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  121.1,
+  121.6,
+  121.5,
+  122.5,
+  120.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-roadmap-tree-fruit-pomegranate-healthy-food-orga-sha256-e7969ec98b8bfd0ef8c846132f52e265db9fc261ed35e66991d3060ba806f649.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

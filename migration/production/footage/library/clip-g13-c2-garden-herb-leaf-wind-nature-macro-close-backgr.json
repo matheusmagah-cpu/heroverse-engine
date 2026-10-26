@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-garden-herb-leaf-wind-nature-macro-close-backgr",
+ "theme": "g13-c2-garden",
+ "query": "tropical garden",
+ "source": "pixabay",
+ "title": "herb, leaf, wind, nature, macro, close, background, colour, tissue, tropical, natural, environment, summer, garden, season, beautiful wallpaper, botanical, spring, pattern, plants, growth, autumn, seasons, flora, agriculture, rural",
+ "page": "https://pixabay.com/videos/id-26645/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-26645/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "f48977fe7084972bb2df061d360a51eb74ac043ca8f3e2a3ad63b9ed85b76832",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  118.6,
+  118.4,
+  118.7,
+  118.5,
+  118.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-garden-herb-leaf-wind-nature-macro-close-backgr-sha256-f48977fe7084972bb2df061d360a51eb74ac043ca8f3e2a3ad63b9ed85b76832.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

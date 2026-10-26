@@ -1,0 +1,43 @@
+{
+ "id": "clip-g13-rehook-1-night-sky-night-hotel-hotel-grounds-cape",
+ "theme": "g13-rehook-1",
+ "query": "dark clouds night sky",
+ "source": "pixabay",
+ "title": "night sky, night, hotel, hotel grounds, cape verde, stars, clouds, weather, tree, palm tree, holiday, vacation, night time, dark, light, sky, darkness, green",
+ "page": "https://pixabay.com/videos/id-378666/",
+ "author": "JonPauling",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 80.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: JonPauling via Pixabay (https://pixabay.com/videos/id-378666/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "2a2f761b7219cfedc86a976737be5e1553277dc76928394bab89b693e35c3edc",
+ "vetting": "REJECTED",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [
+  "BLACK_FRAMES",
+  "BLACK_RUN_AFTER_GRADE 5.33s"
+ ],
+ "vetting_luma": [
+  8.7,
+  9.2,
+  9.9,
+  9.9,
+  8.7
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 5.33,
+ "release_asset": null,
+ "release_tag": null
+}

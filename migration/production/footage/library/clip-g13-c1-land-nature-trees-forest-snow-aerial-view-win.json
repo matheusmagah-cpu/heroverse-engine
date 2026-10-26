@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-land-nature-trees-forest-snow-aerial-view-win",
+ "theme": "g13-c1-land",
+ "query": "green hills aerial",
+ "source": "pixabay",
+ "title": "nature, trees, forest, snow, aerial view, winter, hill, landscape, winter landscape, white",
+ "page": "https://pixabay.com/videos/id-192649/",
+ "author": "agentluca",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 28.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: agentluca via Pixabay (https://pixabay.com/videos/id-192649/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "8db07c14ed2828d0a1d1434f358f1e67812e53024ae05e55da17d9e655066bc9",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  132.7,
+  134.5,
+  134.0,
+  131.0,
+  129.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-land-nature-trees-forest-snow-aerial-view-win-sha256-8db07c14ed2828d0a1d1434f358f1e67812e53024ae05e55da17d9e655066bc9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

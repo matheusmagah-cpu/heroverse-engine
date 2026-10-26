@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-garden-cherry-blossom-harbinger-of-spring-sprin",
+ "theme": "g13-c2-garden",
+ "query": "orchard fruit trees",
+ "source": "pixabay",
+ "title": "cherry blossom, harbinger of spring, spring awakening, blossom, bloom, nature, stone fruit, fruit, fruit tree blossoming",
+ "page": "https://pixabay.com/videos/id-157022/",
+ "author": "adege",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 42.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: adege via Pixabay (https://pixabay.com/videos/id-157022/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "acd96e6b7ea8966bebd64256837757c494adb32aae77e19db3b986588fb5daf9",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  21.6,
+  24.1,
+  24.5,
+  26.2,
+  28.6
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-garden-cherry-blossom-harbinger-of-spring-sprin-sha256-acd96e6b7ea8966bebd64256837757c494adb32aae77e19db3b986588fb5daf9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

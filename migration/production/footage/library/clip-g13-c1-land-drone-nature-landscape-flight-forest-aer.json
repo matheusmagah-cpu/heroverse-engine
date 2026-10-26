@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-land-drone-nature-landscape-flight-forest-aer",
+ "theme": "g13-c1-land",
+ "query": "green hills aerial",
+ "source": "pixabay",
+ "title": "drone, nature, landscape, flight, forest, aerial, summer, travel, trees, pine, evergreen, woods, green",
+ "page": "https://pixabay.com/videos/id-335040/",
+ "author": "Kamen_A",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 27.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Kamen_A via Pixabay (https://pixabay.com/videos/id-335040/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "616b1cf3cdfb637714c983b88e1dd523da030e062590ea8eea07aaed21260293",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  80.5,
+  80.6,
+  80.1,
+  80.2,
+  81.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-land-drone-nature-landscape-flight-forest-aer-sha256-616b1cf3cdfb637714c983b88e1dd523da030e062590ea8eea07aaed21260293.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

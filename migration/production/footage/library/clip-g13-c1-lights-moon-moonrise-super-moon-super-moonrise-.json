@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-lights-moon-moonrise-super-moon-super-moonrise-",
+ "theme": "g13-c1-lights",
+ "query": "full moon clouds",
+ "source": "pixabay",
+ "title": "moon, moonrise, super moon, super moonrise, moonlight, mystical, blood moon",
+ "page": "https://pixabay.com/videos/id-35554/",
+ "author": "Hans",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 37.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Hans via Pixabay (https://pixabay.com/videos/id-35554/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "feccd70f363050be7de6b79a8e7aeea496a1e7f841a664bb578ffce3a108b296",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  11.9,
+  12.9,
+  14.5,
+  13.9,
+  12.3
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-lights-moon-moonrise-super-moon-super-moonrise--sha256-feccd70f363050be7de6b79a8e7aeea496a1e7f841a664bb578ffce3a108b296.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

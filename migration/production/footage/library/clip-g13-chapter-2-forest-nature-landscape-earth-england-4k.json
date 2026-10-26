@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-chapter-2-forest-nature-landscape-earth-england-4k",
+ "theme": "g13-chapter-2",
+ "query": "red clay earth",
+ "source": "pixabay",
+ "title": "forest, nature, landscape, earth, england, 4k footage, drone footage, dji mini, calm",
+ "page": "https://pixabay.com/videos/id-104679/",
+ "author": "D-GM",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 52.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: D-GM via Pixabay (https://pixabay.com/videos/id-104679/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d1ee54393373d766fb7a4a0f325abbd5585a9fff29c2190ef43cd43cf37d94f4",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  86.9,
+  88.5,
+  86.8,
+  88.9,
+  89.9
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-chapter-2-forest-nature-landscape-earth-england-4k-sha256-d1ee54393373d766fb7a4a0f325abbd5585a9fff29c2190ef43cd43cf37d94f4.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

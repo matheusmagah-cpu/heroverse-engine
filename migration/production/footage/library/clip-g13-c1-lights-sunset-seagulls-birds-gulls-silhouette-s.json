@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-lights-sunset-seagulls-birds-gulls-silhouette-s",
+ "theme": "g13-c1-lights",
+ "query": "sun rays sky",
+ "source": "pixabay",
+ "title": "sunset, seagulls, birds, gulls, silhouette, sky, sun, wildlife, seabirds, couple, nature, eearhday",
+ "page": "https://pixabay.com/videos/id-203196/",
+ "author": "TonyDias7",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 49.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: TonyDias7 via Pixabay (https://pixabay.com/videos/id-203196/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "429f50089e0bbbd1a766a1445ef48b0c13c6110a0d50f5bcb619e3ffa0c7dd08",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  98.1,
+  97.2,
+  97.0,
+  96.4,
+  95.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-lights-sunset-seagulls-birds-gulls-silhouette-s-sha256-429f50089e0bbbd1a766a1445ef48b0c13c6110a0d50f5bcb619e3ffa0c7dd08.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

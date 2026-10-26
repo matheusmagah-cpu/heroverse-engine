@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c1-image-drone-flying-camera-4k-drone-drone-foota",
+ "theme": "g13-c1-image",
+ "query": "birds flying sky",
+ "source": "pixabay",
+ "title": "drone, flying camera, 4k drone, drone footage, remote sensing, aerial view, sky view, nature from above, bird's eye view, abstract landscape, cinematic, aerial cinematography, scenic view, landscape photography",
+ "page": "https://pixabay.com/videos/id-276615/",
+ "author": "Drone4u",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 62.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Drone4u via Pixabay (https://pixabay.com/videos/id-276615/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "af54dbb0bdf4d7b045c6454bf78570460d467b9299e4657f9652e319c4c91ab9",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  92.0,
+  96.2,
+  92.0,
+  86.2,
+  82.8
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c1-image-drone-flying-camera-4k-drone-drone-foota-sha256-af54dbb0bdf4d7b045c6454bf78570460d467b9299e4657f9652e319c4c91ab9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

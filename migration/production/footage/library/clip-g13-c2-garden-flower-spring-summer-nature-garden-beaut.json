@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-c2-garden-flower-spring-summer-nature-garden-beaut",
+ "theme": "g13-c2-garden",
+ "query": "garden paradise flowers",
+ "source": "pixabay",
+ "title": "flower, spring, summer, nature, garden, beautiful wallpaper, park, botanical, sunny, daytime, background, grass, weed, wind, beautiful, romantic, peaceful, paradise, life, leaf, herb, flowers, yellow",
+ "page": "https://pixabay.com/videos/id-112207/",
+ "author": "Engin_Akyurt",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 60.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: Engin_Akyurt via Pixabay (https://pixabay.com/videos/id-112207/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "dd413864116b6d3603bc9e8f462040e5daab03c54ee2ba10a685634a9fdb3ac3",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  63.8,
+  65.1,
+  67.2,
+  69.7,
+  70.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-c2-garden-flower-spring-summer-nature-garden-beaut-sha256-dd413864116b6d3603bc9e8f462040e5daab03c54ee2ba10a685634a9fdb3ac3.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

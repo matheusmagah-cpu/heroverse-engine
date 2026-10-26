@@ -1,0 +1,40 @@
+{
+ "id": "clip-g13-chapter-1-wave-lighthouse-ocean-coast-blue-landsca",
+ "theme": "g13-chapter-1",
+ "query": "dark ocean waves night",
+ "source": "pixabay",
+ "title": "wave, lighthouse, ocean, coast, blue, landscape",
+ "page": "https://pixabay.com/videos/id-19368/",
+ "author": "bellergy",
+ "licence_url": "https://pixabay.com/service/license-summary/",
+ "licence": "Pixabay Content License",
+ "licence_as_published": "Pixabay Content License",
+ "source_seconds": 46.0,
+ "source_height": 1440,
+ "start": 1.0,
+ "seconds": 20.0,
+ "credit": "Footage: bellergy via Pixabay (https://pixabay.com/videos/id-19368/)",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "d682905cad5ee91b1d15f2d45bdf536ee2ac0003b220a7d46b0c1bdadfe4bcf4",
+ "vetting": "PENDING",
+ "vetting_note": "automatic (5 frames: luma, tesseract OCR, llava description)",
+ "vetting_reasons": [],
+ "vetting_luma": [
+  85.2,
+  94.9,
+  92.7,
+  93.1,
+  90.2
+ ],
+ "vetting_descriptions": [
+  null,
+  null
+ ],
+ "vetting_black_run_s": 0.0,
+ "release_asset": "footage-clip-g13-chapter-1-wave-lighthouse-ocean-coast-blue-landsca-sha256-d682905cad5ee91b1d15f2d45bdf536ee2ac0003b220a7d46b0c1bdadfe4bcf4.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
