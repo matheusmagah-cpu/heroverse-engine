@@ -45,13 +45,16 @@ jobs:
           (cd "$M" && find . -type f ! -path '*/.cache/*' -exec sha256sum {} \;) | tee "$RUNNER_TEMP/weights.sha256"
       - name: Re-sync each silent clip to its line, judge it, sheets
         run: |
+          set +e -o pipefail
           out="$RUNNER_TEMP/out"; mkdir -p "$out"
           PY="$RUNNER_TEMP/mt/bin/python"; FM="$RUNNER_TEMP/face_landmarker.task"
           V=migration/evidence/pavo/20261026/keeper-vo; W=migration/evidence/pavo/20261026/keeper
           while read -r name clip wav; do
             "$PY" -I -B migration/production/bible/lipsync_check.py "$V/$clip" "$W/$wav" "$FM" 2>/dev/null | tail -1 > "$out/$name.before.json" || true
             "$PY" -B migration/production/bible/musetalk_sync.py --musetalk "$RUNNER_TEMP/MuseTalk" --models "$RUNNER_TEMP/models" \
-              --face-model "$FM" "$V/$clip" "$W/$wav" "$out/$name.mp4" 2>"$out/$name.log" | tail -1 > "$out/$name.run.json" || { tail -30 "$out/$name.log"; continue; }
+              --face-model "$FM" "$V/$clip" "$W/$wav" "$out/$name.mp4" 2>"$out/$name.log" | tail -1 > "$out/$name.run.json"
+            rc=$?; echo "== $name musetalk rc=$rc"; grep -v -E "^(W0000|I0000|INFO)" "$out/$name.log" | tail -25
+            [ "$rc" = 0 ] && [ -s "$out/$name.mp4" ] || continue
             "$PY" -I -B migration/production/bible/lipsync_check.py "$out/$name.mp4" "$W/$wav" "$FM" 2>/dev/null | tail -1 > "$out/$name.check.json" || true
             ffmpeg -v error -y -i "$out/$name.mp4" -vf "fps=3,scale=240:-1,tile=6x3" -frames:v 1 "$out/$name-sheet.jpg"
             ffmpeg -v error -y -i "$out/$name.mp4" -vf "fps=6,crop=iw/2:ih/4:iw/4:ih/6,scale=200:-1,tile=8x4" -frames:v 1 "$out/$name-mouth.jpg"
@@ -64,8 +67,10 @@ jobs:
           PAIRS
           cp "$RUNNER_TEMP/weights.sha256" "$out/"
       - name: Results to claude/musetalk-probe-<run>
+        if: always()
         run: |
           d="migration/evidence/pavo/20261026/musetalk/run-$GITHUB_RUN_ID"; mkdir -p "$d"
+          cp "$RUNNER_TEMP"/out/*.log "$d"/ 2>/dev/null || true
           cp "$RUNNER_TEMP"/out/*.mp4 "$RUNNER_TEMP"/out/*.jpg "$RUNNER_TEMP"/out/*.json "$RUNNER_TEMP"/out/weights.sha256 "$d"/ 2>/dev/null || true
           branch="claude/musetalk-probe-$GITHUB_RUN_ID"
           git config user.name "github-actions[bot]"
