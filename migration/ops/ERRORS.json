@@ -783,6 +783,16 @@
     "file": "migration/production/bible/test_episode_build.py",
     "contains": "def test_a_talking_line_is_retimed_into_a_clip_pavo_keeps_its_audio_in"
    }
+  },
+  {
+   "id": "E96",
+   "date": "2026-10-26",
+   "error": "cf-images run 40296867138 (Noah's reference sheet) failed in 0 s with exit 1 and no message: it was dispatched with pilot=migration/production/characters, and the input check accepts only pilot-NNN or characters, refusing silently.",
+   "fix": "The pilot and engine checks print PILOT_INVALID / ENGINE_INVALID naming the accepted form before exiting; Noah's sheet was re-dispatched with pilot=characters.",
+   "antidote": {
+    "file": "migration/ops/test_release_assets.py",
+    "contains": "def test_cf_images_refuses_a_bad_input_by_name"
+   }
   }
  ]
 }

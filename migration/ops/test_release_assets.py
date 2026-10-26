@@ -129,6 +129,21 @@ class ReleaseAssets(unittest.TestCase):
         for wf in ("cf-images.yml", "footage.yml"):   # records say which release holds their asset
             self.assertIn("release_tag", (ROOT / ".github/workflows" / wf).read_text(), wf)
 
+    def test_cf_images_refuses_a_bad_input_by_name(self):
+        # E96: pilot=migration/production/characters exited 1 with no message; the refusal must say why
+        wf = (ROOT / ".github/workflows/cf-images.yml").read_text().splitlines()
+        checks = "\n".join(l.strip() for l in wf if l.strip().startswith(('case "$PILOT"', 'case "$ENGINE"')))
+        def run(pilot, engine="flux"):
+            return subprocess.run(["bash", "-ec", checks], env={"PILOT": pilot, "ENGINE": engine, "PATH": os.environ["PATH"]},
+                                  capture_output=True, text=True)
+        for pilot, engine, code in (("migration/production/characters", "flux", "PILOT_INVALID"),
+                                    ("characters", "dalle", "ENGINE_INVALID")):
+            r = run(pilot, engine)
+            self.assertEqual(r.returncode, 1)
+            self.assertIn(code, r.stdout)
+        for pilot in ("characters", "pilot-015"):
+            self.assertEqual(run(pilot).returncode, 0)
+
     def test_public_urls_name_the_release_that_holds_the_file(self):
         import importlib, json, sys
         for d in ("migration/publish", "migration/production/characters"):
