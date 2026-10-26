@@ -24,7 +24,8 @@ holds the owner's fixed rules.
 - Niche: the Bible series from the KJV (`SERIES.md`). Where an older prompt or document mentions the old
   prayer niche, follow `SERIES.md`.
 - Every change goes through a `claude/*` branch, a PR and a squash merge. Every failure gets its root cause, a fix,
-  an antidote test and an `ERRORS.json` entry.
+  an antidote test and an `ERRORS.json` entry, at once (owner, 2026-10-26: "an error must never repeat"). The antidote
+  is a test that runs on every PR (`test_errors_register.py` refuses one that does not), so the error cannot come back.
 - Ads stage and digital product are on hold.
 - Shorts in `vidiq_compose` use only `cut` between scenes; `dip_to_black` only where intended.
 

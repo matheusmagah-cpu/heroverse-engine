@@ -69,6 +69,25 @@ class Register(unittest.TestCase):
             self.assertTrue(f.exists(), f"{e['id']}: {f} missing")
             self.assertIn(e["antidote"]["contains"], f.read_text(), f"{e['id']}: antidote not found")
 
+    def test_preview_footage_sheets_hold_at_most_twelve_clips(self):
+        # E72: one sheet of every clip made modern objects too small to see; the preview splits them 12 a sheet
+        self.assertIn("PER_SHEET=12", (ROOT / "migration/ci/render_pilot.sh").read_text())
+
+    def test_every_antidote_is_a_test_that_runs_on_every_pr(self):
+        # owner, 2026-10-26: "an error must never repeat": its antidote is a test, and that test runs on every PR
+        # (pr-checks.yml, or pavo-mcp.yml for the Pavo integration), so a change that brings the error back fails CI
+        wf = (ROOT / ".github/workflows/pr-checks.yml").read_text() + (ROOT / ".github/workflows/pavo-mcp.yml").read_text()
+        listed = set(re.findall(r"migration/[\w/]+/test_[\w*]+\.py", wf))
+
+        def runs(rel):
+            return rel in listed or any(l.endswith("test_*.py") and rel.startswith(l[:-len("test_*.py")])
+                                        and "/" not in rel[len(l) - len("test_*.py"):] for l in listed)
+        reg = json.loads((ROOT / "migration/ops/ERRORS.json").read_text())
+        for e in reg["errors"]:
+            f = e["antidote"]["file"]
+            self.assertTrue(Path(f).name.startswith("test_"), f"{e['id']}: antidote {f} is not a test")
+            self.assertTrue(runs(f), f"{e['id']}: antidote {f} does not run on every PR")
+
     def test_every_active_test_runs_in_pr_checks(self):
         wf = (ROOT / ".github/workflows/pr-checks.yml").read_text()
         listed = set(re.findall(r"migration/[\w/]+/test_[\w*]+\.py", wf))
