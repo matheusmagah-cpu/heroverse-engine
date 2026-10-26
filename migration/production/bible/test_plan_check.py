@@ -527,6 +527,141 @@ class Plan(unittest.TestCase):
             self.assertEqual(run(str(bad)), 1)
 
 
+VO_PLAN = HERE / "plans" / "genesis-07-short-vo.json"
+
+
+def keeper_vo(sid, lines, action="looks down into the campfire"):
+    return {"id": sid, "kind": "keeper", "voiceover": True, "lines": lines,
+            "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
+                      f"{action}, his lips closed, silent, as the flames flicker. Night in the desert, firelight. Warm "
+                      "and grave."}
+
+
+def vo_plan(**kw):
+    p = plan(**kw)
+    p["shots"][-2:] = [keeper_vo("k-insight", [4]), keeper_vo("k-close", [5], "looks straight into the camera")]
+    return p
+
+
+class KeeperVoiceover(unittest.TestCase):
+    """Plan B (owner, 2026-10-26): an opt-in `"voiceover": true` Keeper shot shows him on screen with his mouth closed
+    while his line plays from the voice track; the default (a talking, lip-synced Keeper) is unchanged."""
+
+    def test_the_default_keeper_still_talks(self):
+        p = plan()
+        self.assertTrue(all(pc.talking(s) for s in p["shots"] if s["kind"] == "keeper"))
+        self.assertFalse(any(pc.voiceover(s) for s in p["shots"]))
+
+    def test_a_voiceover_keeper_is_not_a_talking_shot_and_passes(self):
+        p = vo_plan()
+        r = pc.check(p, CHARS)
+        self.assertEqual(r["problems"], [])
+        self.assertTrue(pc.voiceover(p["shots"][-1]))
+        self.assertFalse(pc.talking(p["shots"][-1]))
+        # his share and the lesson share count the voice-over shots exactly as the talking ones
+        self.assertEqual(r["estimate"]["keeper_share"], pc.check(plan(), CHARS)["estimate"]["keeper_share"])
+        self.assertEqual(r["estimate"]["lesson_share"], pc.check(plan(), CHARS)["estimate"]["lesson_share"])
+
+    def test_its_line_is_narration_in_the_keepers_voice(self):
+        items, carried = pc.sequence(vo_plan())
+        for k in carried[-2:]:
+            self.assertEqual(len(k), 1)
+            self.assertNotIn("speaker", items[k[0]])      # narration: am_michael, carried by the voice track
+
+    def test_the_prompt_must_say_his_lips_stay_closed_and_name_no_speech(self):
+        for old, new in (("his lips closed, silent", "calm"), ("his lips closed, silent", "his lips closed"),
+                         ("looks down into the campfire", "speaks to the camera"),
+                         ("looks down into the campfire", "says a few words"),
+                         ("looks down into the campfire", "is talking softly"),
+                         ("looks down into the campfire", "his lips moving gently")):
+            p = vo_plan()
+            p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(old, new)
+            self.assertIn("KEEPER_VO_PROMPT", codes(pc.check(p, CHARS)), new)
+        # the talking rules are not asked of him: no "speaks", no KEEPER_POSE
+        found = codes(pc.check(vo_plan(), CHARS))
+        self.assertNotIn("KEEPER_NOT_SPEAKING", found)
+        self.assertNotIn("KEEPER_POSE", found)
+
+    def test_his_look_and_wardrobe_stay_word_for_word(self):
+        p = vo_plan()
+        p["shots"][-1]["prompt"] = p["shots"][-1]["prompt"].replace("silver beard", "grey beard")
+        self.assertIn("CHARACTER_LOOK_CHANGED", codes(pc.check(p, CHARS)))
+        p = vo_plan()
+        p["shots"][-1]["prompt"] = p["shots"][-1]["prompt"].replace("seated by a small campfire", "standing")
+        self.assertIn("KEEPER_WARDROBE", codes(pc.check(p, CHARS)))
+
+    def test_the_keeper_and_lesson_shares_still_count_voiceover_shots(self):
+        narration = plan()["narration"]
+        narration[3] = {"kind": "insight", "text": " ".join(["Notice the order, grief comes before judgment."] * 3)}
+        narration.insert(4, {"kind": "insight", "text": " ".join(["Grief comes before the judgment of the flood."] * 3)})
+        narration.insert(5, {"kind": "insight", "text": " ".join(["The flood is the story of a wounded heart."] * 3)})
+        shots = plan()["shots"][:9] + [keeper_vo("k-a", [3]), keeper_vo("k-b", [4]), keeper_vo("k-c", [5]),
+                                       keeper_vo("k-insight", [6]), keeper_vo("k-close", [7])]
+        found = codes(pc.check(plan(shots, narration), CHARS))
+        self.assertIn("KEEPER_SHARE", found)
+        self.assertIn("LESSON_SHARE", found)
+
+    def test_a_voiceover_keeper_never_opens_and_closes_after_the_climax(self):
+        p = vo_plan()
+        p["shots"][0] = keeper_vo("k-open", [0])
+        p["shots"][1:3] = []
+        self.assertIn("KEEPER_OPENS", codes(pc.check(p, CHARS)))
+        p = vo_plan()
+        p["shots"].insert(5, keeper_vo("k-early", [2]))
+        p["shots"][6:9] = []
+        self.assertIn("KEEPER_BEFORE_CLIMAX", codes(pc.check(p, CHARS)))
+
+    def test_the_clip_length_comes_from_the_line_and_no_talk_rule_applies(self):
+        p = vo_plan()
+        p["shots"][-1]["seconds"] = 8
+        self.assertIn("KEEPER_SHOT_FIELDS", codes(pc.check(p, CHARS)))
+        # a 10-word close sits in the 3.94-4.14 s band no talking clip reaches (TALK_LINE_UNREACHABLE when he talks);
+        # as a voice-over there is no Pavo audio and no retime, so it is not refused
+        short = "The full story is in the long video, part eight tomorrow."
+        talking = plan()
+        talking["narration"][5]["text"] = short
+        self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(talking, CHARS)))
+        p = vo_plan()
+        p["narration"][5]["text"] = short
+        self.assertNotIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
+        self.assertEqual(pc.vo_clip_seconds(8.42, pc.TAIL), 10)        # ceil(line + tail), 4-12 s
+        self.assertEqual(pc.vo_clip_seconds(2.1, pc.LINE_GAP), 4)
+        self.assertEqual(pc.vo_clip_seconds(14.0, pc.TAIL), 12)        # the compose slows it at most 1.3
+
+    def test_a_voiceover_line_too_long_for_one_clip_is_refused(self):
+        p = vo_plan()
+        p["narration"][5]["text"] = " ".join(["The full story is in the long video, see you tomorrow."] * 4)
+        self.assertIn("KEEPER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+
+    def test_voiceover_is_only_a_keeper_flag_and_only_true_or_false(self):
+        p = vo_plan()
+        p["shots"][1]["voiceover"] = True
+        self.assertIn("VOICEOVER_FIELD", codes(pc.check(p, CHARS)))
+        p = vo_plan()
+        p["shots"][-1]["voiceover"] = "yes"
+        self.assertIn("VOICEOVER_FIELD", codes(pc.check(p, CHARS)))
+
+    def test_the_genesis_7_vo_variant_passes_and_keeps_every_scene_and_god_shot(self):
+        """The ready plan B for 27/10: the three Keeper shots switched to voice-over, their lines unchanged; every scene
+        and God shot byte-identical, so a resume from run 40307414749 keeps its 30 clips (E93)."""
+        base, vo = json.loads(EXAMPLE.read_text()), json.loads(VO_PLAN.read_text())
+        r = pc.check(vo)
+        self.assertEqual((r["problems"], r["pending"]), ([], []))
+        self.assertEqual(vo["narration"], base["narration"])
+        self.assertEqual({k: v for k, v in vo.items() if k != "shots"}, {k: v for k, v in base.items() if k != "shots"})
+        self.assertEqual(len(vo["shots"]), len(base["shots"]))
+        for a, b in zip(base["shots"], vo["shots"]):
+            if a["kind"] == "keeper":
+                self.assertEqual((b["id"], b["lines"], b.get("voiceover")), (a["id"], a["lines"], True))
+            else:
+                self.assertEqual(json.dumps(b, sort_keys=True), json.dumps(a, sort_keys=True))
+        self.assertEqual(sum(1 for s in vo["shots"] if s["kind"] == "scene"), 30)
+        text = VO_PLAN.read_text()
+        for a in base["shots"]:
+            if a["kind"] == "scene":    # byte for byte, as the file is written
+                self.assertIn(json.dumps(a, indent=1, ensure_ascii=False).replace("\n", "\n  "), text)
+
+
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
 from test_long_plan_check import DraftArc1, Grammar as LongGrammar, NoRendererReadsTheNewQaYet, StoryQa  # noqa: E402,F401,E501
 

@@ -1,0 +1,460 @@
+{
+ "version": "bible-plan-v2",
+ "episode": "genesis-07-short",
+ "part": 7,
+ "passage": "Genesis 6:5-13 (KJV, public domain)",
+ "aspect_ratio": "9:16",
+ "story": "God sees the earth corrupt (SERIES.md episode 7; arc 2, Brothers and the walk with God)",
+ "people": "No approved character lived in Genesis 6 and Noah is DRAFT (characters.json): the corruption is acted out by anonymous people seen only from behind or in silhouette, Noah only as a faceless silhouette on a hillside; two establishing shots (2 s each). God is never shown: His lines (Genesis 6:13 at the open, Genesis 6:7 just before the acted climax) are a deep voice-over over the storm, the lightning and the rain. The Keeper only for the insight, the comment question and the close.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 6:13); stake and open loop (would anyone be left?); escalation in three steps, each ending on a hook (the heart, the hands, Heaven's grief); God speaks Genesis 6:7 (s-judgment, voice-over), then the acted climax s-terror; payoff (Noah found grace); keeper_close (insight, comment question, part 8). No approved speaker lives in Genesis 6, so the escalation is acted without dialogue until Noah is APPROVED.",
+ "narration": [
+  {
+   "kind": "story",
+   "text": "Those words were spoken over the whole world. Every man, every woman, every child. How did it come to this, and would anyone be left?"
+  },
+  {
+   "kind": "story",
+   "text": "Ten generations after Eden, the earth is full of people, and full of noise. Cities of tents cover the plains, and nobody looks up."
+  },
+  {
+   "kind": "scripture",
+   "text": "And God saw that the wickedness of man was great in the earth, and that every imagination of the thoughts of his heart was only evil continually.",
+   "reference": "Genesis 6:5 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Not some thoughts. Every one. Only evil. Continually. And it did not stay inside their hearts for long."
+  },
+  {
+   "kind": "story",
+   "text": "Men bow down to what their own hands have carved. Brothers turn on brothers. The strong take what they want, and the weak learn to hide."
+  },
+  {
+   "kind": "scripture",
+   "text": "The earth also was corrupt before God, and the earth was filled with violence.",
+   "reference": "Genesis 6:11 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "Violence in every camp, and on every road. At the wells, in the markets, in the tents at night. And then comes a line most readers rush past."
+  },
+  {
+   "kind": "scripture",
+   "text": "And it repented the Lord that he had made man on the earth, and it grieved him at his heart.",
+   "reference": "Genesis 6:6 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The text does not say God was angry first. It says He was grieved, at His heart. The Maker of the world, hurting over what His people became."
+  },
+  {
+   "kind": "scripture",
+   "text": "And God looked upon the earth, and, behold, it was corrupt; for all flesh had corrupted his way upon the earth.",
+   "reference": "Genesis 6:12 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "The word corrupt comes three times in two verses. The writer wants you to feel the weight of it."
+  },
+  {
+   "kind": "story",
+   "text": "He looked, and all of it had turned. Not one city. Not one family. All flesh. And then He spoke."
+  },
+  {
+   "kind": "story",
+   "text": "Not man alone. The beasts of the field, the creeping things, the birds of the air. Everything that breathes on the land."
+  },
+  {
+   "kind": "story",
+   "text": "It sounds like the end of the story. But in the middle of all that violence, one small word changes everything."
+  },
+  {
+   "kind": "scripture",
+   "text": "But Noah found grace in the eyes of the Lord.",
+   "reference": "Genesis 6:8 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "Noah was a just man and perfect in his generations, and Noah walked with God.",
+   "reference": "Genesis 6:9 (KJV)"
+  },
+  {
+   "kind": "scripture",
+   "text": "And Noah begat three sons, Shem, Ham, and Japheth.",
+   "reference": "Genesis 6:10 (KJV)"
+  },
+  {
+   "kind": "story",
+   "text": "One man and his family, walking the other way, while the whole world ran past them."
+  },
+  {
+   "kind": "insight",
+   "text": "Notice the order. Grief comes before judgment. The flood is not the story of a cold God, but of a wounded heart."
+  },
+  {
+   "kind": "cta",
+   "text": "Would you have kept walking against the crowd? Tell me in the comments."
+  },
+  {
+   "kind": "cta",
+   "text": "The full story is in the long video. Part eight tomorrow: Noah builds the ark."
+  }
+ ],
+ "shots": [
+  {
+   "id": "s-voice",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 6:13 (KJV)",
+   "line": "The end of all flesh is come before me; for the earth is filled with violence through them.",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide shot, slow push-in. Black storm clouds roll together over a vast plain of dark tents and swallow the last band of golden sunlight, lightning flickering deep inside them. Dusk turning to night, a hard wind driving dust across the plain. Ominous and vast. No people, no text, no logos."
+  },
+  {
+   "id": "s-tents",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide establishing shot, slow crane down. A vast city of dark goat-hair tents fills a dry plain, smoke from hundreds of cooking fires drifting upward. Dusk, a low orange sun under heavy clouds, long shadows across the dust. Grand and uneasy. No text, no logos.",
+   "establishing": true
+  },
+  {
+   "id": "s-market",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, low tracking shot following them. A dense crowd seen from behind, faces never visible, pushes through a narrow lane between tents, people shouting and shoving past laden donkeys. Evening, torchlight and dust in the air between the tents. Loud and restless. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-children",
+   "kind": "scene",
+   "lines": [
+    0
+   ],
+   "seconds": 6,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot. Small children seen from behind play in the dust between the tents while men in silhouette argue loudly behind them. Late afternoon, low golden sun and drifting smoke. Innocent and uneasy. No text, no logos."
+  },
+  {
+   "id": "s-plain",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow crane down. Crowds seen from behind pour through the lanes of a vast city of dark tents, carts and donkeys pressing between them. Dusk, cooking smoke hanging low over the plain. Busy and heedless. No text, no logos."
+  },
+  {
+   "id": "s-well",
+   "kind": "scene",
+   "lines": [
+    1
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. A crowd seen from behind shoves and pulls at a stone well, clay jars knocked from hands and breaking on the stones. Harsh midday sun, dust in the air. Angry and desperate. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-idol",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A man seen from behind sets a crude carved clay idol on a stained altar stone and bows low before it. Inside a dark tent, one oil lamp throwing hard shadows on the goat-hair wall. Dark and secret. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-knife",
+   "kind": "scene",
+   "lines": [
+    2
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. A man seen from behind tightens his grip on a bronze knife at his side as a stranger walks past him. A dusty lane at night lit by a single torch on a pole. Cold and threatening. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-crowd",
+   "kind": "scene",
+   "lines": [
+    3
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. Silhouettes of a jostling crowd raise torches and fists between the tents, faces hidden by the glare. Night, dozens of torches lighting the smoke from below. Chaotic and loud. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-quarrel",
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Two men in silhouette, faces in shadow, shove each other beside a fire, their huge shadows fighting on a tent wall. Night, the fire the only light, sparks lifting into the dark. Tense and violent. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-theft",
+   "kind": "scene",
+   "lines": [
+    4
+   ],
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. A strong man seen from behind tears a sack of grain out of an old woman's hands, her face hidden by her shawl, as others walk past without stopping. A dusty lane at noon, harsh sun and hard shadows. Cruel and cold. No text, no logos."
+  },
+  {
+   "id": "s-raid",
+   "kind": "scene",
+   "lines": [
+    5
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Silhouettes of men with torches run between the tents and one tent wall catches fire behind them. Night, orange firelight and smoke against the dark. Violent and fearful. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-mother",
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. A mother seen from behind pulls her small child close against her as a rough crowd pushes past them, her shawl tugged by the wind. A crowded lane at dusk, dust lifting in the wind between the tents. Fragile and tender. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-scroll",
+   "kind": "scene",
+   "lines": [
+    6
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme close-up, slow push-in. A hand seen from behind slowly unrolls an old scroll across a wooden table, the ink lines catching the light. A quiet room at night, one clay oil lamp beside the scroll. Hushed and heavy. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-storm",
+   "kind": "scene",
+   "lines": [
+    7
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. Seen from behind, a crowd in the lanes below keeps moving and never looks up as dark storm clouds roll together and the last wide sunbeam narrows and fades over the city of tents. Late afternoon over a dry plain, the light dimming as the clouds close. Sorrowful and vast. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-jar",
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A woman seen from behind kneels beside a broken clay water jar in the dust, her head bowed over the pieces. An empty lane at dusk, wind moving her shawl and the loose sand. Quiet grief. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-wind",
+   "kind": "scene",
+   "lines": [
+    8
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. Seen from behind, a line of travellers bows into a hard wind on the road out of the city, their cloaks streaming back. Grey evening, low clouds racing over the plain. Mournful and heavy. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-gathering",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide establishing shot, slow push-in. Heavy storm clouds gather and churn over a vast city of tents, lightning flickering inside the clouds. Dusk, the plain in deep shadow under the darkening sky. Ominous and grand. No text, no logos.",
+   "establishing": true
+  },
+  {
+   "id": "s-flee",
+   "kind": "scene",
+   "lines": [
+    9
+   ],
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Silhouettes of a family seen from behind run from a burning tent, a father dragging two children through the smoke while men with torches rush past them. Night, orange fire and black smoke filling the lane. Terrifying and chaotic. No text, no logos."
+  },
+  {
+   "id": "s-ruins",
+   "kind": "scene",
+   "lines": [
+    10
+   ],
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. An old man seen from behind walks slowly through a burned-out camp, blackened tent poles and broken jars around him, thin smoke rising from the ashes. Grey dawn, cold light and drifting smoke. Desolate and heavy. No text, no logos."
+  },
+  {
+   "id": "s-still",
+   "kind": "scene",
+   "lines": [
+    11
+   ],
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. A crowd in silhouette freezes in the lanes between the tents and looks up as the wind suddenly drops and the dust hangs in the air. Dusk under a black, motionless sky. Hushed and dreadful. No text, no logos."
+  },
+  {
+   "id": "s-judgment",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 6:7 (KJV)",
+   "line": "I will destroy man whom I have created from the face of the earth;",
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Low-angle wide shot, slow tilt up. A single fork of lightning splits the churning black clouds and the whole sky flashes white over the dark plain. Night, the first heavy rain sweeping across the plain in grey sheets. Terrible and grand. No people, no text, no logos."
+  },
+  {
+   "id": "s-terror",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 6,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. Silhouettes of the crowd seen from behind scatter through the lanes in terror as lightning strikes the plain beside the tents, torches dropped and fires kicked over, no one at the center. Night, white lightning and orange fire lighting the rain. Panic and dread. No text, no logos.",
+   "climax": true
+  },
+  {
+   "id": "s-herds",
+   "kind": "scene",
+   "lines": [
+    12
+   ],
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, low tracking shot. Herders seen from behind drive flocks of sheep and goats through a rising dust storm while a great cloud of birds lifts off the plain. Late dusk, the wind tearing at their cloaks. Restless and ominous. No text, no logos."
+  },
+  {
+   "id": "s-rain",
+   "kind": "scene",
+   "speaker": "god",
+   "reference": "Genesis 6:7 (KJV)",
+   "line": "For it repenteth me that I have made them.",
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. Heavy rain begins to pound the cracked dry ground, the first streams of water running between the stones. Night, lightning flashing in the puddles. Grave and final. No people, no text, no logos."
+  },
+  {
+   "id": "s-walker",
+   "kind": "scene",
+   "lines": [
+    13
+   ],
+   "seconds": 8,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind him. One man seen from behind walks steadily against a running crowd, carrying a small oil lamp cupped in his hand. A torch-lit lane at night, smoke drifting past. Calm against chaos. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-lamp",
+   "kind": "scene",
+   "lines": [
+    14
+   ],
+   "seconds": 6,
+   "characters": [],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow push-in. A single oil lamp keeps burning in a tent doorway while a hand seen from behind shields its small flame from the wind. Night, the wind bending every other torch in the lane behind it. Hope in the dark. No text, no logos.",
+   "figures": "anonymous"
+  },
+  {
+   "id": "s-noah",
+   "kind": "scene",
+   "lines": [
+    15
+   ],
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. One old man in silhouette, his face never visible, stands alone on a dry hillside above the city of tents with his back to the camera, his head lifted toward the storm. Dusk, the last light behind the black clouds outlining his shape, wind pulling at his robe. Lonely and steadfast. No text, no logos."
+  },
+  {
+   "id": "s-sons",
+   "kind": "scene",
+   "lines": [
+    16
+   ],
+   "seconds": 6,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, slow orbit. Four men in silhouette seen from behind, an old man and three young men, stand together on the hillside facing the storm. Dusk, the wind bending the dry grass around them. Small and united. No text, no logos."
+  },
+  {
+   "id": "s-family",
+   "kind": "scene",
+   "lines": [
+    17
+   ],
+   "seconds": 8,
+   "characters": [],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind them. A small family seen from behind climbs a hillside path against a stream of people hurrying down past them toward the noise of the city. Evening, torchlight below and a grey sky above. Quiet and resolute. No text, no logos."
+  },
+  {
+   "id": "k-insight",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    18
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks down into the campfire, his lips closed, silent, his eyes sad and kind, breathing slowly as the flames flicker. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos."
+  },
+  {
+   "id": "k-question",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    19
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle thoughtful look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos."
+  },
+  {
+   "id": "k-close",
+   "kind": "keeper",
+   "voiceover": true,
+   "lines": [
+    20
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium close-up, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, slowly raises his eyes from the fire and looks straight into the camera, his lips closed, silent, a faint warm smile. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+  }
+ ]
+}

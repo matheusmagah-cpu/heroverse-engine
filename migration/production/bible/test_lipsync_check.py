@@ -58,5 +58,42 @@ class GodShotFaces(unittest.TestCase):
         self.assertGreaterEqual(lc.FACE_SAMPLE_EVERY, 1)
 
 
+class StillMouth(unittest.TestCase):
+    """Plan B (owner, 2026-10-26): a voice-over Keeper clip shows no talking mouth. The inner-lip opening over the
+    face height varies over a talking clip (p95 - p5: the 34 Keeper talking clips of 26/10 0.087-0.118, the genesis-06
+    narrator 0.056) and stays put with the lips closed (the direct closed-mouth Keeper clips 0.004-0.007)."""
+
+    def test_the_threshold_sits_between_the_closed_and_the_talking_clips(self):
+        self.assertGreater(lc.STILL_MOUTH_RANGE_MAX, 0.007 * 2)
+        self.assertLess(lc.STILL_MOUTH_RANGE_MAX, 0.056 / 2)
+
+    def test_a_talking_mouth_is_flagged_a_closed_one_passes(self):
+        talking = np.abs(np.sin(np.linspace(0, 30, 200))) * 0.11     # opens and closes like the Keeper's lips
+        closed = 0.003 + np.random.default_rng(1).normal(0, 0.0008, 200)
+        self.assertEqual(lc.still_mouth_verdict(closed, 0.95)["flags"], [])
+        self.assertEqual(lc.still_mouth_verdict(talking, 0.95)["flags"], ["MOUTH_TALKING"])
+        r = lc.still_mouth_verdict(closed, 0.95)
+        self.assertLess(r["opening_range"], lc.STILL_MOUTH_RANGE_MAX)
+        self.assertEqual((r["face_frames"], r["frames"]), (0.95, 200))
+
+    def test_the_face_must_be_found_in_80_percent_of_frames_as_for_the_lips(self):
+        closed = np.full(100, 0.003)
+        self.assertEqual(lc.still_mouth_verdict(closed, 0.79)["flags"], ["FACE_NOT_FOUND"])
+        self.assertEqual(lc.FACE_FRAMES_MIN, 0.8)
+        empty = lc.still_mouth_verdict(np.array([np.nan] * 10), 0.0)
+        self.assertIn("FACE_NOT_FOUND", empty["flags"])
+        self.assertIsNone(empty["opening_range"])
+        self.assertIn("NO_FRAMES", lc.still_mouth_verdict(np.array([]), 0.0)["flags"])
+
+    def test_nan_frames_are_left_out_not_counted_as_closed(self):
+        o = np.full(100, 0.003)
+        o[::2] = np.nan
+        o[1::4] = 0.12                                                # a talking mouth among missing frames
+        self.assertIn("MOUTH_TALKING", lc.still_mouth_verdict(o, 0.5)["flags"])
+
+    def test_the_cli_has_a_still_mouth_mode(self):
+        self.assertIn('sys.argv[1] == "--still-mouth"', Path(lc.__file__).read_text())
+
+
 if __name__ == "__main__":
     unittest.main()

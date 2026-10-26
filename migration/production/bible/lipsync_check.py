@@ -18,6 +18,10 @@ A clip that fails is not composed; it is regenerated (PROMPT_GUIDE "Built for 9.
 usage: lipsync_check.py CLIP.mp4 LINE.wav FACE_LANDMARKER.task   prints one JSON line; exit 1 on any failure
        lipsync_check.py --faces CLIP.mp4 FACE_LANDMARKER.task    God's voice-over shot: sampled frames, any face found
                                                                   flags GOD_SHOT_FACE (exit 1)
+       lipsync_check.py --still-mouth CLIP.mp4 FACE_LANDMARKER.task
+                                                 a voice-over Keeper clip (plan B): the same lip opening on every
+                                                 frame; MOUTH_TALKING when it varies over STILL_MOUTH_RANGE_MAX,
+                                                 FACE_NOT_FOUND under 80 % of frames (exit 1)
 (model: https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task)
 """
 import json
@@ -33,6 +37,13 @@ SPEAK_TO_PAUSE_MIN = 1.5
 FACE_FRAMES_MIN = 0.8
 LAG_MAX_MS = 84            # two frames at 24 fps
 FACE_SAMPLE_EVERY = 4      # --faces: every 4th frame (6 a second at 24 fps)
+# Plan B (owner, 2026-10-26): a voice-over Keeper clip shows no talking mouth. Measure: the spread (95th minus 5th
+# percentile) of the inner-lip opening over the face height on the frames where the face is found. Calibration
+# 2026-10-26 (mediapipe 0.10.35, this model, evidence/pavo/20261026/keeper-vo/calibration.json): 38 talking clips
+# (the Keeper's 34 of PR #419 and the build, passing and failing the lips alike) 0.087-0.118, the genesis-06 narrator
+# 0.056; the closed-mouth Keeper clips 0.004-0.007. The threshold sits near their geometric middle (0.02): 2.8x under
+# the lowest talking clip, 2.9x over the highest closed one.
+STILL_MOUTH_RANGE_MAX = 0.02
 MODEL_SHA256 = "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
 
 
@@ -164,6 +175,29 @@ def face_verdict(clip, sampled, found, at):
     return {"clip": clip, "frames_sampled": sampled, "faces_found": found, "face_frames": at[:20], "flags": flags}
 
 
+def still_mouth_verdict(opening, share):
+    """A voice-over Keeper clip's mouth (plan B): MOUTH_TALKING when the lip opening's p95 - p5 over the frames with a
+    face exceeds STILL_MOUTH_RANGE_MAX; FACE_NOT_FOUND under FACE_FRAMES_MIN of the frames (as for the lips check);
+    NO_FRAMES for an empty clip. Frames without a face are left out, never counted as a closed mouth."""
+    opening = np.asarray(opening, dtype=float)
+    seen = opening[~np.isnan(opening)] if len(opening) else opening
+    spread = float(np.percentile(seen, 95) - np.percentile(seen, 5)) if len(seen) else None
+    flags = []
+    if not len(opening):
+        flags.append("NO_FRAMES")
+    if share < FACE_FRAMES_MIN:
+        flags.append("FACE_NOT_FOUND")
+    if spread is not None and spread > STILL_MOUTH_RANGE_MAX:
+        flags.append("MOUTH_TALKING")
+    return {"opening_range": None if spread is None else round(spread, 4), "face_frames": round(float(share), 2),
+            "frames": int(len(opening)), "flags": flags}
+
+
+def still_mouth(clip, model):
+    opening, _, share = lip_opening(clip, model)
+    return dict({"clip": clip}, **still_mouth_verdict(opening, share))
+
+
 def verdict(audio, mouth):
     flags = []
     if audio["corr"] < AUDIO_CORR_MIN:
@@ -188,6 +222,10 @@ def check(clip, line, model):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 4 and sys.argv[1] == "--still-mouth":
+        result = still_mouth(sys.argv[2], sys.argv[3])
+        print(json.dumps(result))
+        sys.exit(1 if result["flags"] else 0)
     if len(sys.argv) == 4 and sys.argv[1] == "--faces":
         result = faces(sys.argv[2], sys.argv[3])
         print(json.dumps(result))
