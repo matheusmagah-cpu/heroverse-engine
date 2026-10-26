@@ -763,6 +763,16 @@
     "file": "migration/production/bible/test_episode_build.py",
     "contains": "def test_pavo_unreachable_before_any_job_is_waited_out_then_the_run_stops"
    }
+  },
+  {
+   "id": "E94",
+   "date": "2026-10-26",
+   "error": "episode.yml run 40278642295 (genesis-07-short, resumed) stopped on k-insight after 3 generations (AUDIO_NOT_OUR_LINE, FACE_NOT_FOUND, MOUTH_NOT_IN_SYNC...) and the cause could not be read: make_shot dropped the attempts' measures when it raised, each new attempt overwrote the clip, and the run's artifact sits on a blob host this Claude session cannot reach. A failure Claude cannot see cannot be root-caused.",
+   "fix": "make_shot keeps every refused generation as <shot>-failN.mp4 and its measures; the exception carries them into report.json; a secret-free failure-evidence job prints the failed shot's measures to the log and pushes frame sheets of the refused generations and the report to claude/episode-<id>-<run>-failed.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_a_failed_shot_keeps_each_refused_generation_and_its_measures_in_the_report"
+   }
   }
  ]
 }
