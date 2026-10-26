@@ -250,8 +250,8 @@
    "error": "Shorts passed technical QA but failed watched review for dependent openings, weak visual rhythm and unresolved endings; provider failure diagnostics were discarded.",
    "fix": "PARTIAL: phase 1 validates structural openings and complete endings against full source timelines, preserves whole Scripture segments, and records strictly sanitized failure evidence. Real editing, technical QA and watched review remain pending in phase 2.",
    "antidote": {
-    "file": "migration/production/shorts_select.py",
-    "contains": "def validate_candidate(sentences, refs, moment):"
+    "file": "migration/production/test_shorts_edit_plan.py",
+    "contains": "validate_candidate"
    }
   },
   {
@@ -550,8 +550,8 @@
    "error": "The first real preview (pilot-011, run 40116275815) worked, and its review found three library clips with modern content that the automatic vetting had approved (a village in the valley, domestic dogs, a railed bridge on a groomed trail); its footage sheet put all 63 clips in one 960x15120 image, unreadable when opened.",
    "fix": "The three clips are REJECTED in the library (reasons recorded) and pilot-011's footage was reassigned, so the new script is previewed again; render_pilot.sh writes the footage sheet in pages of 12 clips (footage-sheet-NN.jpg).",
    "antidote": {
-    "file": "migration/ci/render_pilot.sh",
-    "contains": "PER_SHEET=12"
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_preview_footage_sheets_hold_at_most_twelve_clips"
    }
   },
   {
@@ -686,6 +686,16 @@
   },
   {
    "id": "E86",
+   "date": "2026-10-26",
+   "error": "The TikTok mirror's 23:41 UTC cron run on 2026-10-25 never started (GitHub dropped the scheduled run), so no Short went to TikTok for 8 hours after their YouTube slots; the mirror only ran twice a day, so one dropped run meant half a day late.",
+   "fix": "tiktok.yml runs every 20 minutes (7,27,47 * * * *): a Short goes to TikTok within ~20 minutes of its YouTube slot and a dropped run is covered by the next; one Short per run keeps posts apart while a backlog clears. The hourly clock also dispatches tiktok.yml when a published Short is still not mirrored.",
+   "antidote": {
+    "file": "migration/publish/test_tiktok_publish.py",
+    "contains": "def test_mirror_runs_at_least_every_thirty_minutes"
+   }
+  },
+  {
+   "id": "E87",
    "date": "2026-10-26",
    "error": "episode_build.compose_shots refused the Genesis 7 example plan with KEEPER_NOT_ON_HIS_LINE k-close: two Keeper shots in a row (insight, then close) left the 0.35 s silence between their lines owned by no shot, so the second Keeper picture could not start on its first word. Found by the offline compose test before any run; no affected code was deployed.",
    "fix": "The silence after a line belongs to the next run of scenes or, when the next shot is the Keeper again, to the Keeper shot before it (he holds the gap; KEEPER_MARGIN 0.6 s covers it, and the closing Keeper's audio limit is 10.2 s so line + tail + margin fit a 12 s clip). Every Keeper picture still starts exactly on his first word, from the start of his clip at normal speed.",

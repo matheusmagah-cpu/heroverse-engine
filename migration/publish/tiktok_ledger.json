@@ -9,11 +9,18 @@
    "failures": 1
   },
   "bible:genesis-03-short:9b10e1a0bedc00577d43021e52ecfe0c568230110b9a92b2f3aad231f6cf40bf": {
-   "status": "QUEUED",
+   "status": "SENT",
    "buffer_post_id": "6ade3386e4be8a4d86b8bbc5",
-   "buffer_status": "sending",
+   "buffer_status": "sent",
    "youtube_video_id": "K_ZwsCt-Wg4",
    "at": "2026-10-25T16:51:17.678770+00:00"
+  },
+  "bible:genesis-01-short:de79d9a703f86754222c209d42b31ca2882bd6a49abee34b2e4d1d8e9d8666c8": {
+   "status": "QUEUED",
+   "buffer_post_id": "6adea92ce4be8a4d86d7e363",
+   "buffer_status": "sending",
+   "youtube_video_id": "ku2MTQKmXaU",
+   "at": "2026-10-26T01:13:15.777697+00:00"
   }
  },
  "buffer_channel_id": "6ade2e0f2f1f5ed648cab8f0"
