@@ -16,7 +16,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: heroverse-publish
+  group: heroverse-arc-links   # its own group: joining heroverse-publish could cancel a pending publish run
   cancel-in-progress: false
 jobs:
   links:
@@ -27,6 +27,12 @@ jobs:
       MODE: ${{ inputs.mode || 'apply' }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Publication hold, then the latest ledger
+        run: |
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
+          # a run queued behind another must read the ledger that run pushed, never the one of its own checkout
+          git pull -q --ff-only origin main
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
       - name: Offline tests before any write
         run: python3 -I -B migration/publish/test_arc_links.py
       - name: Dependencies already used by publication

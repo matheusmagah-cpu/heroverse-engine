@@ -37,6 +37,7 @@ ARCS = ROOT / "migration/production/bible/arcs.json"
 EPISODES = ROOT / "migration/production/bible/episodes"
 PUBLISH_LEDGER = HERE / "ledger.json"
 LINKS_LEDGER = HERE / "arc_links_ledger.json"
+HOLD = ROOT / "migration/ops/PUBLICATION_HOLD"   # owner pause: nothing is written, todo reports nothing
 
 LINK = "▶ The full story: https://youtu.be/{}"
 LINK_RE = re.compile(r"^▶ The full story: https://youtu\.be/[A-Za-z0-9_-]{11}\s*$")
@@ -45,6 +46,7 @@ BLOCK_HEAD = "▶ This story in Shorts:"
 NEXT = "Next story: {} https://youtu.be/{}"
 WRITABLE = ("title", "description", "tags", "categoryId", "defaultLanguage", "defaultAudioLanguage")
 TOKENINFO = "https://oauth2.googleapis.com/tokeninfo"
+TRANSIENT = re.compile(r"HTTP_(409|429|5\d\d)|NOT_ATTEMPTED|NO_ID_IN_RESPONSE|Error\b|Timeout|Connection")
 RECHECK = timedelta(hours=6)   # a video seen not public is looked at again after this (todo stays quiet meanwhile)
 # Data API v3 discovery document: videos.update accepts any of these; commentThreads.insert only youtube.force-ssl
 UPDATE_SCOPES = {"https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.force-ssl",
@@ -124,8 +126,11 @@ def todo(resolved, links, now):
         expected = [ep for ep, vid, slot in r["shorts"] if waiting(ep, vid, slot)]
         listed = state.get("long", {})
         nf = r["next_first"]
-        if (any(shorts.get(ep, {}).get("linked_to") != r["long"] or not pv.comment_done(shorts.get(ep, {}).get("comment"))
-                for ep in expected)
+        def open_work(ep):
+            st = shorts.get(ep, {})
+            return ((st.get("linked_to") != r["long"] and not st.get("terminal"))
+                    or not (pv.comment_done(st.get("comment")) or st.get("comment_terminal")))
+        if (any(open_work(ep) for ep in expected)
                 or listed.get("video_id") != r["long"] or not set(expected) <= set(listed.get("shorts") or [])
                 or (nf and waiting(*nf) and listed.get("next") != nf[0])):
             out.append(r["id"])
@@ -154,10 +159,17 @@ def make_block(shorts, nxt):
 
 def with_block(description, block):
     """The long's description with its Shorts block as the last paragraph (an older block is replaced)."""
-    paragraphs = [p for p in description.split("\n\n") if not p.startswith(BLOCK_HEAD)]
-    while paragraphs and not paragraphs[-1].strip():
-        paragraphs.pop()
-    return "\n\n".join(paragraphs + ([block] if block else []))
+    lines, out, i = description.split("\n"), [], 0
+    while i < len(lines):
+        if lines[i].strip() == BLOCK_HEAD:          # an older block: its heading and every line up to a blank one
+            i += 1
+            while i < len(lines) and lines[i].strip():
+                i += 1
+            continue
+        out.append(lines[i])
+        i += 1
+    base = "\n".join(out).rstrip()
+    return base + "\n\n" + block if block else base
 
 
 def check(response, what):
@@ -173,9 +185,12 @@ def videos(s, ids):
     return out
 
 
-def public(item):
-    return bool(item) and item.get("status", {}).get("privacyStatus") == "public" \
-        and item.get("snippet", {}).get("channelId") == pv.CHANNEL
+def public(item, processed=False):
+    """Public on our channel; for the long also fully processed (uploadStatus), so its link plays."""
+    status = (item or {}).get("status", {})
+    return bool(item) and status.get("privacyStatus") == "public" \
+        and item.get("snippet", {}).get("channelId") == pv.CHANNEL \
+        and (not processed or status.get("uploadStatus") == "processed")
 
 
 def plan(s, resolved, links):
@@ -186,7 +201,7 @@ def plan(s, resolved, links):
             actions.append({"kind": "skip", "arc": r["id"], "reason": "LONG_NOT_UPLOADED"})
             continue
         long_item = items.get(r["long"])
-        if not public(long_item):
+        if not public(long_item, processed=True):
             actions.append({"kind": "skip", "arc": r["id"], "episode": "long", "video_id": r["long"],
                             "reason": "LONG_NOT_PUBLIC"})
             continue
@@ -209,7 +224,7 @@ def plan(s, resolved, links):
             else:
                 actions.append({**base, "kind": "short_description" if after != before else "short_description_ok",
                                 "before": before, "after": after, "item": item})
-            if not pv.comment_done(state.get(ep, {}).get("comment")):
+            if not pv.comment_done(state.get(ep, {}).get("comment")) and not state.get(ep, {}).get("comment_terminal"):
                 actions.append({**base, "kind": "comment", "text": COMMENT.format(r["long"])})
         nf = r["next_first"]
         nxt = (nf[1], items[nf[1]]) if nf and nf[1] and public(items.get(nf[1])) else None
@@ -260,6 +275,9 @@ def apply(s, actions, resolved, links, links_path, scopes, now):
         raise SystemExit("SCOPE_MISSING videos.update needs youtube, youtube.force-ssl or youtubepartner")
     for a in actions:
         if a["kind"] == "skip":
+            if a["reason"].startswith("SHORT_DESCRIPTION"):   # terminal until the live description is fixed
+                arcs_state.setdefault(a["arc"], {}).setdefault("shorts", {}).setdefault(
+                    a["episode"], {"video_id": a["video_id"]})["terminal"] = a["reason"]
             if a["reason"].endswith("NOT_PUBLIC"):   # nothing written; todo waits RECHECK before asking again
                 arcs_state.setdefault(a["arc"], {}).setdefault("not_public", {})[a["episode"]] = when
             continue
@@ -272,6 +290,7 @@ def apply(s, actions, resolved, links, links_path, scopes, now):
         if a["kind"].startswith("short_description"):
             arc.get("not_public", {}).pop(a["episode"], None)
             arc.setdefault("shorts", {}).setdefault(a["episode"], {}).update(video_id=a["video_id"], linked_to=a["long"])
+            arc["shorts"][a["episode"]].pop("terminal", None)
         elif a["kind"].startswith("long_description"):
             arc["long"] = {"video_id": a["video_id"], "shorts": a["shorts"], "next": a["next"]}
             for ep in ["long"] + ([a["next"]] if a["next"] else []):
@@ -282,6 +301,8 @@ def apply(s, actions, resolved, links, links_path, scopes, now):
                 state["comment"] = pv.first_comment(s, a["video_id"], a["text"])
             else:
                 state["comment"] = "PENDING: SCOPE_MISSING youtube.force-ssl"
+            if not pv.comment_done(state["comment"]) and not TRANSIENT.search(state["comment"]):
+                state["comment_terminal"] = state["comment"]   # refused for good (scope, comments off): todo stops
             if pv.comment_done(state["comment"]):
                 changes.append({"at": when, **summary(a), "comment_id": state["comment"]})
         save()
@@ -291,21 +312,41 @@ def apply(s, actions, resolved, links, links_path, scopes, now):
 
 def session():
     """The same OAuth credential as publish_video.py (secret HERO_YT_AUTHORIZED_USER_JSON), plus its granted scopes."""
-    from google.oauth2.credentials import Credentials
-    from google.auth.transport.requests import AuthorizedSession, Request
-    creds = Credentials.from_authorized_user_info(json.loads(os.environ["HERO_YT_AUTHORIZED_USER_JSON"]))
-    creds.refresh(Request())
-    s = AuthorizedSession(creds)
+    try:
+        from google.oauth2.credentials import Credentials
+        from google.auth.transport.requests import AuthorizedSession, Request
+        creds = Credentials.from_authorized_user_info(json.loads(os.environ["HERO_YT_AUTHORIZED_USER_JSON"]))
+        creds.refresh(Request())
+        s = AuthorizedSession(creds)
+    except Exception as e:  # noqa: BLE001 - only the type reaches the log, never a token or the credential
+        raise SystemExit(f"AUTH_FAILED {type(e).__name__}") from None
     scopes = set(getattr(creds, "granted_scopes", None) or creds.scopes or [])
     if not scopes:
-        r = s.get(TOKENINFO, params={"access_token": creds.token})
-        if r.status_code < 300:
-            scopes = set((r.json().get("scope") or "").split())
+        scopes = token_scopes(creds.token)
     return s, scopes
 
 
+def token_scopes(token, post=None):
+    """Scopes of the access token from Google's tokeninfo: the token goes in the POST body (never a URL), and any
+    failure prints only its exception type."""
+    try:
+        if post is None:
+            import requests
+            post = requests.post
+        r = post(TOKENINFO, data={"access_token": token}, timeout=30)
+        return set((r.json().get("scope") or "").split()) if r.status_code < 300 else set()
+    except Exception as e:  # noqa: BLE001
+        print(f"TOKENINFO_FAILED {type(e).__name__}", file=sys.stderr)
+        return set()
+
+
 def run(mode, now=None, s=None, scopes=None, arcs_path=ARCS, episodes_dir=EPISODES, ledger_path=PUBLISH_LEDGER,
-        links_path=LINKS_LEDGER, out=print):
+        links_path=LINKS_LEDGER, out=print, hold=HOLD):
+    if Path(hold).exists():
+        if mode == "todo":
+            print("PUBLICATION_HOLD", file=sys.stderr)   # nothing waiting while the owner holds publication
+            return 0
+        raise SystemExit("PUBLICATION_HOLD")
     now = ts(now) if isinstance(now, str) else (now or datetime.now(timezone.utc))
     resolved = resolve(read_json(arcs_path), read_json(ledger_path), episodes_dir)
     links = read_json(links_path, None) or {"version": "arc-links-ledger-v1", "arcs": {}, "changes": []}

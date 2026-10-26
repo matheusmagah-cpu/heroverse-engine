@@ -38,7 +38,7 @@ def video(vid, title, description, privacy="public"):
     return {"id": vid, "etag": "e-" + vid,
             "snippet": {"channelId": pv.CHANNEL, "title": title, "description": description, "tags": ["Bible"],
                         "categoryId": "29", "defaultLanguage": "en", "defaultAudioLanguage": "en", "localized": {}},
-            "status": {"privacyStatus": privacy}}
+            "status": {"privacyStatus": privacy, "uploadStatus": "processed"}}
 
 
 class FakeYT:
@@ -66,9 +66,14 @@ class FakeYT:
         self.vids[json["id"]]["snippet"].update(json["snippet"])
         return R(200, self.vids[json["id"]])
 
+    comment_answer = None   # an R to return instead of posting (a refusal)
+
     def post(self, url, params=None, json=None, **kw):
         assert url.endswith("commentThreads"), url
         vid = json["snippet"]["videoId"]
+        if self.comment_answer is not None:
+            self.writes.append(("comment_refused", vid))
+            return self.comment_answer
         self.writes.append(("comment", vid))
         cid = f"Ugz-{vid}-{len(self.comments.get(vid, []))}"
         self.comments.setdefault(vid, []).append((cid, json["snippet"]["topLevelComment"]["snippet"]["textOriginal"]))
@@ -226,7 +231,105 @@ class ArcLinks(unittest.TestCase):
         self.assertFalse(self.f.yt.comments)
         state = json.loads(self.f.links.read_text())["arcs"]["arc-01"]["shorts"]
         self.assertTrue(all(state[ep]["comment"].startswith("PENDING: SCOPE_MISSING") for ep in SHORTS))
-        self.assertEqual(self.f.todo(), ["arc-01"])
+        self.assertTrue(all(state[ep]["comment_terminal"].startswith("PENDING: SCOPE_MISSING") for ep in SHORTS))
+        self.assertEqual(self.f.todo(), [])           # terminal, with its reason: no endless dispatch
+
+    # review of PR #404
+    def test_publication_hold_stops_everything(self):
+        hold = Path(self.tmp.name) / "PUBLICATION_HOLD"
+        hold.write_text("owner pause\n")
+        lines = []
+        al.run("todo", NOW, None, None, self.f.arcs, self.f.eps, self.f.ledger, self.f.links, out=lines.append, hold=hold)
+        self.assertEqual(lines, [])
+        for mode in ("apply", "plan"):
+            with self.assertRaises(SystemExit) as e:
+                al.run(mode, NOW, self.f.yt, FORCE_SSL, self.f.arcs, self.f.eps, self.f.ledger, self.f.links,
+                       out=lines.append, hold=hold)
+            self.assertEqual(str(e.exception.code), "PUBLICATION_HOLD")
+        self.assertEqual(self.f.yt.writes, [])
+        self.assertFalse(self.f.links.exists())
+
+    def test_block_is_not_duplicated_when_the_description_ends_in_a_newline(self):
+        b = al.BLOCK_HEAD + "\nPart 1 https://youtu.be/SHORTvid001"
+        once = al.with_block("Intro\nmore\n", b)
+        self.assertEqual(al.with_block(once, b), once)
+        self.assertEqual(al.with_block(once, b).count(al.BLOCK_HEAD), 1)
+        self.assertEqual(once, "Intro\nmore\n\n" + b)
+        for desc in ("Intro", "Intro\n\n\n", "Intro\n\n" + b + "\n", "Intro\n\n" + b + "\n\nTail"):
+            twice = al.with_block(al.with_block(desc, b), b)
+            self.assertEqual(twice, al.with_block(desc, b))
+            self.assertEqual(twice.count(al.BLOCK_HEAD), 1, desc)
+        self.f.yt.vids[LONG]["snippet"]["description"] += "\n"
+        self.f.run()
+        self.f.yt.writes.clear()
+        self.f.run()
+        self.assertEqual(self.f.yt.writes, [])
+        self.assertEqual(self.f.desc(LONG).count(al.BLOCK_HEAD), 1)
+
+    def test_token_goes_in_a_post_body_and_never_reaches_the_log(self):
+        import contextlib
+        import io
+        token = "ya29.SECRET-TOKEN-VALUE"
+        seen = {}
+
+        def post(url, data=None, timeout=None, **kw):
+            seen.update(url=url, data=data, kw=kw)
+            return R(200, {"scope": al.COMMENT_SCOPE})
+        self.assertEqual(al.token_scopes(token, post), {al.COMMENT_SCOPE})
+        self.assertEqual(seen["url"], al.TOKENINFO)
+        self.assertNotIn(token, seen["url"])
+        self.assertEqual(seen["data"], {"access_token": token})
+        self.assertNotIn("params", seen["kw"])
+
+        def broken(url, data=None, timeout=None, **kw):
+            raise ConnectionError(f"failed {url}?access_token={data['access_token']}")
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err), contextlib.redirect_stdout(err):
+            self.assertEqual(al.token_scopes(token, broken), set())
+        self.assertNotIn(token, err.getvalue())
+        self.assertIn("TOKENINFO_FAILED ConnectionError", err.getvalue())
+        source = (HERE / "arc_links.py").read_text()
+        self.assertNotIn('params={"access_token"', source)
+        self.assertIn('raise SystemExit(f"AUTH_FAILED {type(e).__name__}") from None', source)
+
+    def test_terminal_states_stop_todo(self):
+        # a Short whose live description lost its disclosure: skipped with its reason, todo stops asking
+        self.f.yt.vids[SHORTS["genesis-03-short"]]["snippet"]["description"] = "No source line."
+        self.f.run()
+        state = json.loads(self.f.links.read_text())["arcs"]["arc-01"]["shorts"]
+        self.assertIn("DISCLOSURE_MISSING", state["genesis-03-short"]["terminal"])
+        self.assertEqual(self.f.todo(), [])
+
+    def test_refused_comment_is_terminal_and_a_transient_one_is_retried(self):
+        from unittest import mock
+        self.f.yt.comment_answer = R(403, {"error": {"code": 403, "message": "comments disabled",
+                                                     "errors": [{"reason": "commentsDisabled"}]}})
+        self.f.run()
+        state = json.loads(self.f.links.read_text())["arcs"]["arc-01"]["shorts"]
+        self.assertTrue(all("commentsDisabled" in state[ep]["comment_terminal"] for ep in SHORTS))
+        self.assertEqual(self.f.todo(), [])
+        self.f.yt.writes.clear()
+        self.f.run()
+        self.assertFalse([w for w in self.f.yt.writes if w[0].startswith("comment")])   # not attempted again
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        f = Fixture(tmp.name)
+        f.yt.comment_answer = R(503, {"error": {"code": 503, "message": "backend", "errors": [{"reason": "backendError"}]}})
+        with mock.patch.object(pv.time, "sleep", lambda _: None):
+            f.run()
+        state = json.loads(f.links.read_text())["arcs"]["arc-01"]["shorts"]
+        self.assertFalse(any("comment_terminal" in state[ep] for ep in SHORTS))
+        self.assertEqual(f.todo("2026-10-28T13:41:00+00:00"), ["arc-01"])
+
+    def test_long_must_be_processed_as_well_as_public(self):
+        self.f.yt.vids[LONG]["status"]["uploadStatus"] = "uploaded"
+        lines = self.f.run()
+        self.assertEqual(self.f.yt.writes, [])
+        self.assertTrue(any("LONG_NOT_PUBLIC" in x for x in lines))
+        self.f.yt.vids[LONG]["status"]["uploadStatus"] = "processed"
+        self.f.run("apply", "2026-10-28T17:00:00+00:00")
+        self.assertIn(("update", LONG), self.f.yt.writes)
 
 
 class RepoFiles(unittest.TestCase):
@@ -265,6 +368,23 @@ class RepoFiles(unittest.TestCase):
         lines = []
         al.run("todo", "2026-10-26T12:00:00+00:00", out=lines.append)
         self.assertNotIn("arc-01", lines)          # long slot not reached yet
+
+    def test_workflows_hold_pull_concurrency_and_loud_crash(self):
+        wf = (ROOT / ".github/workflows/arc-links.yml").read_text()
+        hold = 'if [ -f migration/ops/PUBLICATION_HOLD ]; then'
+        pull = "git pull -q --ff-only origin main"
+        run = 'migration/publish/arc_links.py "$MODE"'
+        self.assertIn(hold, wf)
+        self.assertLess(wf.index("actions/checkout"), wf.index(pull))
+        self.assertLess(wf.index(hold), wf.index(run))
+        self.assertLess(wf.index(pull), wf.index(run))       # E-race: the ledger read is the latest on main
+        self.assertIn("group: heroverse-arc-links", wf)
+        self.assertNotIn("group: heroverse-publish", wf)
+        beat = (ROOT / ".github/workflows/heartbeat.yml").read_text()
+        self.assertIn('arc_links.py todo > "$T/arcs" || echo "TODO_CHECK_FAILED" > "$T/arcs"', beat)
+        self.assertNotIn('arc_links.py todo > "$T/arcs" || true', beat)
+        self.assertIn('if [ -f migration/ops/PUBLICATION_HOLD ]; then : > "$T/arcs"; fi', beat)
+        self.assertLess(beat.index('|| echo "TODO_CHECK_FAILED"'), beat.index(': > "$T/arcs"'))
 
     def test_arc_links_ledger_starts_valid(self):
         links = json.loads((HERE / "arc_links_ledger.json").read_text())
