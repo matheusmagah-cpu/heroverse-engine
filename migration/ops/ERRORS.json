@@ -733,6 +733,16 @@
     "file": "migration/ops/test_heartbeat.py",
     "contains": "def test_every_heartbeat_mirrors_a_short_waiting_for_tiktok"
    }
+  },
+  {
+   "id": "E91",
+   "date": "2026-10-26",
+   "error": "TikTok mirror run 40258853940 failed ASSET_NOT_FOUND for Genesis 4 although its file is in v0.0.0-cloud-assets-20261013 (the REST release object lists it among 1000 assets) and `assets.sh download` finds it: `assets.sh which` read names through `gh release view --json assets` with errors sent to /dev/null, which did not return that asset on the runner. The mirror stops at its oldest pending Short, so Genesis 2 waited behind it.",
+   "fix": "assets.sh reads asset names (which, names, the upload count) from the REST release object (`gh api repos/<repo>/releases/tags/<tag>`); a missing release lists nothing and any other API error stops with its message instead of reading as 'absent'. Checked against the real releases: Genesis 4 and 2 resolve to v0.0.0-cloud-assets-20261013.",
+   "antidote": {
+    "file": "migration/ops/test_release_assets.py",
+    "contains": "def test_which_finds_an_asset_past_the_first_hundred_of_a_full_release"
+   }
   }
  ]
 }
