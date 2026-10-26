@@ -14,9 +14,15 @@ one() {
   echo "$sha  $dest" | sha256sum -c - || { echo "FETCH_HASH_MISMATCH $asset"; return 1; }
 }
 export -f one
-n=$(grep -c . "$list" || true)
-[ "${n:-0}" -gt 0 ] || { echo "FETCH_LIST_EMPTY"; exit 0; }
 awk -F'\t' 'NF != 3 || $1 == "" || $2 == "" { bad = 1 } END { exit bad }' "$list" || { echo "FETCH_LIST_MALFORMED"; exit 1; }
+# Two workers must never write and check the same file at once: identical lines are fetched once, and one destination
+# named with two different assets or hashes is refused before any download (FETCH_DUPLICATE_DEST)
+uniq_list=$(mktemp); trap 'rm -f "$uniq_list"' EXIT
+awk '!seen[$0]++' "$list" > "$uniq_list"
+dup=$(awk -F'\t' 'n[$2]++ { print $2; exit }' "$uniq_list")
+[ -z "$dup" ] || { echo "FETCH_DUPLICATE_DEST $dup"; exit 1; }
+n=$(grep -c . "$uniq_list" || true)
+[ "${n:-0}" -gt 0 ] || { echo "FETCH_LIST_EMPTY"; exit 0; }
 # xargs exits 123 when any invocation failed; the line's three fields become the function's arguments
-tr '\t' '\n' < "$list" | xargs -d '\n' -n 3 -P "$jobs" bash -c 'one "$@"' _
+tr '\t' '\n' < "$uniq_list" | xargs -d '\n' -n 3 -P "$jobs" bash -c 'one "$@"' _
 echo "FETCHED $n"

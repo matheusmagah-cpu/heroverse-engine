@@ -28,31 +28,33 @@ trap upload_log EXIT
 
 stage "Free runner disk only when short of space (unused preinstalled SDKs) and record space"
 # E102: deleting the SDKs took 60-100 s of every run while the runner had far more space than a render uses
-# (a full render peaks ~10 GB over the image); they are deleted only when less than FREE_DISK_BELOW_GB is free
-avail_gb=$(df -BG --output=avail "$T" | tail -1 | tr -dc 0-9)
-if [ "${avail_gb:-0}" -lt "${FREE_DISK_BELOW_GB:-40}" ]; then
-  echo "FREEING_DISK ${avail_gb:-0} GB free"
+# (a full render peaks ~10 GB over the image). The SDKs live on /, the render writes to $T: they are deleted when
+# either has less than FREE_DISK_BELOW_GB free (an unreadable figure counts as 0)
+root_gb=$(df -BG --output=avail / | tail -1 | tr -dc 0-9)
+temp_gb=$(df -BG --output=avail "$T" | tail -1 | tr -dc 0-9)
+if [ "${root_gb:-0}" -lt "${FREE_DISK_BELOW_GB:-40}" ] || [ "${temp_gb:-0}" -lt "${FREE_DISK_BELOW_GB:-40}" ]; then
+  echo "FREEING_DISK / ${root_gb:-0} GB, \$T ${temp_gb:-0} GB free"
   sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL 2>/dev/null || true
 else
-  echo "DISK_ENOUGH ${avail_gb} GB free"
+  echo "DISK_ENOUGH / ${root_gb} GB, \$T ${temp_gb} GB free"
 fi
 df -h / "$T" | tail -n +1
 end
 
 stage "Tools and pinned runtimes"
 # E102: the apt tools, the four venvs and the depth model do not depend on each other: they install side by side
-# (same pins, each logged) and every one must succeed before the render starts
+# (same pins, each logged) and every one must succeed before the render starts. Every command is bounded (apt by
+# apt_install.sh, E55; pip and curl by their own timeouts), so the waits below always end
 SETUP=()
 setup() { local name=$1; shift; "$@" > "$T/setup-$name.log" 2>&1 & SETUP+=("$!:$name"); }
-venv() { python3 -m venv "$T/$1" && "$T/$1/bin/pip" install --disable-pip-version-check -q "${@:2}"; }
-apt_tools() { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core >/dev/null; }
+venv() { timeout 120s python3 -m venv "$T/$1" && timeout 900s "$T/$1/bin/pip" install --disable-pip-version-check --timeout 60 -q "${@:2}"; }
 mkdir -p "$T/models"
-setup apt apt_tools
+setup apt bash "$(dirname "$ASSETS")/apt_install.sh" ffmpeg espeak-ng fonts-dejavu-core
 setup voice venv voice 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
 setup qa venv qa ai-edge-litert==2.3.0 faster-whisper==1.2.1
 setup cut venv cut 'rembg==2.0.59' 'onnxruntime==1.20.1' 'pillow==11.0.0'
 setup cine venv cine 'numpy==2.2.6' 'opencv-python-headless==4.10.0.84' 'onnxruntime==1.20.1'
-setup depth curl -fsSL --retry 3 -o "$T/models/depth-anything-v2-small.onnx" https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx
+setup depth curl -fsSL --retry 3 --max-time 600 -o "$T/models/depth-anything-v2-small.onnx" https://huggingface.co/onnx-community/depth-anything-v2-small/resolve/main/onnx/model.onnx
 for job in "${SETUP[@]}"; do
   wait "${job%%:*}" || { echo "SETUP_FAILED ${job#*:}"; tail -20 "$T/setup-${job#*:}.log"; exit 1; }
 done
