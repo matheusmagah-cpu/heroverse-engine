@@ -139,6 +139,19 @@ class Check(unittest.TestCase):
         self.assertEqual(rows(self.run_check(footage("pavo", "Pavo generated (owner-owned)"))), ["FOOTAGE_RIGHTS"])
         self.assertNotIn("Pavo generated (owner-owned)", sc.FOOTAGE_LICENCES)
 
+    def test_story_long_takes_pavo_clips(self):
+        """story-qa-criteria-v1: a Bible-story long accepts the Pavo licence; any other archetype still refuses it."""
+        def story_pavo(s, d):
+            lib = d.parent / "footage" / "library"
+            lib.mkdir(parents=True, exist_ok=True)
+            s["archetype"] = sc.STORY
+            s["footage"] = [f"clip-p-{i}" for i in range(20)]
+            for c in s["footage"]:
+                (lib / f"{c}.json").write_text(json.dumps({"id": c, "source": "pavo", "vetting": "APPROVED",
+                                                           "licence": sc.PAVO_LICENCE, "release_asset": "a.mp4",
+                                                           "frame": [2560, 1440]}))
+        self.assertFalse([p for p in self.run_check(story_pavo) if p.startswith("FOOTAGE_RIGHTS")])
+
     def test_title_rules_r14(self):
         ok = "Before You Sleep, Thank God for Everything 🙏 | Night Prayer for Gratitude & Rest"
         self.assertEqual(sc.title_problems(ok), [])

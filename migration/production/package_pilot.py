@@ -166,7 +166,7 @@ def thumbnail_filter(th):
 
 
 DESCRIPTION_MAX = 4900  # YouTube's limit is 5,000 characters
-SOURCE_NAMES = {"pixabay": "Pixabay", "pexels": "Pexels", "commons": "Wikimedia Commons"}
+SOURCE_NAMES = {"pixabay": "Pixabay", "pexels": "Pexels", "commons": "Wikimedia Commons", "pavo": "Pavo (AI video)"}
 
 
 def footage_credits(clips, with_authors=True):
@@ -195,6 +195,7 @@ def main(work, script_path, out_dir, footage_dir=None):
     v2 = manifest.get("version") == "pilot-manifest-v2"
     credits = "\n".join("• " + c["attribution"] for c in manifest["clips"] if c.get("attribution"))
     ai_stills = v2 and bool(manifest.get("images"))  # a footage-only render (E68) has no AI still to credit or disclose
+    ai_video = v2 and any(c.get("source") == "pavo" for c in manifest.get("clips") or [])  # story-qa v1: Pavo clips
     visuals = ([script.get("visual_credit") or "Illustrations: original HeroVerse images made with open-licence AI image "
                 "models (FLUX.1 schnell, Apache-2.0; Stable Diffusion XL, CreativeML Open RAIL++-M)."] if ai_stills else
                [] if v2 else ["Footage credits (Creative Commons Attribution, picture only):", credits])
@@ -262,8 +263,10 @@ def main(work, script_path, out_dir, footage_dir=None):
                "title_length": len(title), "description": description, "tags": tags,
                "category_id": "29", "playlist": script.get("playlist"), "default_language": "en", "made_for_kids": False,
                "privacy_on_upload": "private", "thumbnail": thumb.name,
-               "ai_generated_visuals": ai_stills,
-               "altered_or_synthetic_disclosure": ("Stylized devotional illustrations, not realistic footage; review YouTube's "
+               "ai_generated_visuals": ai_stills or ai_video,
+               "altered_or_synthetic_disclosure": ("AI-generated realistic scenes (Pavo) with licensed real footage; altered or "
+                                                   "synthetic content: yes, set at upload") if ai_video else
+                                                  ("Stylized devotional illustrations, not realistic footage; review YouTube's "
                                                    "altered-content setting at upload") if ai_stills and not manifest["clips"] else
                                                   ("Licensed real nature footage plus AI-generated stylized stills; no realistic "
                                                    "people or events are depicted") if ai_stills else
