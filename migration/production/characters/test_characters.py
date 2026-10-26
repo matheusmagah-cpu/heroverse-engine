@@ -85,6 +85,23 @@ class Voices(unittest.TestCase):
         self.assertTrue(ch.problems([{"prompt": noah["look"], "characters": ["noah"]}])[0]
                         .startswith("CHARACTER_NOT_APPROVED"))
 
+    def test_scoffer_waits_as_a_draft_antagonist_with_his_own_face_voice_and_reference_prompts(self):
+        chars = ch.registry()
+        scoffer = chars["scoffer"]
+        self.assertEqual(scoffer["status"], "DRAFT")
+        self.assertEqual(scoffer["refs"], [])
+        self.assertIn("about forty-five", scoffer["look"])
+        self.assertGreaterEqual(len(scoffer["wardrobe"]), 2)
+        for other in ("noah", "keeper"):
+            self.assertNotIn(scoffer["look"], chars[other]["look"])
+        spec = json.loads((ch.HERE / "images.json").read_text())
+        mine = [i for i in spec["images"] if i["character"] == "scoffer"]
+        self.assertEqual(sorted(i["id"] for i in mine),
+                         ["ch-scoffer-front", "ch-scoffer-full", "ch-scoffer-three-quarter"])
+        self.assertTrue(all(scoffer["look"] in i["prompt"] and i["seed"] == scoffer["seed"] for i in mine))
+        self.assertTrue(ch.problems([{"prompt": scoffer["look"], "characters": ["scoffer"]}])[0]
+                        .startswith("CHARACTER_NOT_APPROVED"))
+
 
 class RepoReference(unittest.TestCase):
     def test_keeper_reference_is_the_reviewed_repo_frame(self):
