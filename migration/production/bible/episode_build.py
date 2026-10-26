@@ -62,6 +62,12 @@ POLL_S = 15
 JOB_TIMEOUT_S = 25 * 60
 INCOMPLETE_POLLS = 8       # history can be empty just after submission; then "incomplete" means failed
 RATE_LIMIT_WAITS = (60, 120, 240, 480)
+# E93: Pavo unreachable for minutes killed a 25-of-33-shot run. generate_video raises it only before a generation
+# starts (quote, upload, conversation create; a lost acknowledgement comes back as status unknown instead), so the
+# call is sent again after a wait: about 33 min in all before the run gives up
+OUTAGE_WAITS = (60, 120, 300, 600, 900)
+TRANSIENT = {"PAVO_RATE_LIMITED": RATE_LIMIT_WAITS, "PAVO_UNREACHABLE": OUTAGE_WAITS,
+             "PAVO_UPLOAD_HOST_UNREACHABLE": OUTAGE_WAITS}
 REF_SIDE = 1536
 LUFS = (-15.0, -13.0)
 FADE_OUT = 0.8             # short_engine.FADE_OUT
@@ -332,17 +338,23 @@ def request(shot, index, plan, layout, refs):
 
 
 def submit(client, req, sleep=time.sleep, log=print):
-    """One generation. PAVO_RATE_LIMITED is refused before any job exists, so that call is sent again later; every
-    other refusal stops the run. An uncertain submission is never resubmitted: its job is read with job()."""
+    """One generation. PAVO_RATE_LIMITED and PAVO_UNREACHABLE are raised before any job exists, so that call is sent
+    again after a wait (TRANSIENT); every other refusal stops the run. An uncertain submission is never resubmitted:
+    its job is read with job()."""
     from client import PavoError
-    for wait in RATE_LIMIT_WAITS + (None,):
+    used = {}
+    while True:
         try:
             return client.generate_video(**req)
         except PavoError as exc:
-            if str(exc) != "PAVO_RATE_LIMITED" or wait is None:
-                raise ShotFailed(f"PAVO_REFUSED {str(exc).split()[0]}") from None
-            log(f"PAVO_RATE_LIMITED: waiting {wait} s")
-            sleep(wait)
+            code = str(exc).split()[0]
+            waits = TRANSIENT.get(str(exc))
+            n = used.get(code, 0)
+            if waits is None or n >= len(waits):
+                raise ShotFailed(f"PAVO_REFUSED {code}") from None
+            used[code] = n + 1
+            log(f"{code}: waiting {waits[n]} s")
+            sleep(waits[n])
 
 
 def wait_job(client, cid, sleep=time.sleep, clock=time.monotonic):
@@ -478,6 +490,14 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
             more, measures = lipsync_flags(lip_python, face_model, path, REPO / talk_record(layout, shot)["wav"])
             return flags + more, measures
 
+        done = report["shots"].get(shot["id"], {})
+        if done.get("attempts") and done.get("request") == entry["request"] and final.exists():
+            # E93: a re-run restored from a failed run (episode.yml resume_run) keeps the clips already made, after
+            # the same checks again; a changed request (plan, voice, references) is generated anew
+            flags, _ = check(final)
+            if not flags:
+                print(json.dumps({"shot": shot["id"], "resumed": True}))
+                continue
         try:
             _, records = make_shot(shot["id"], attempt, check)
         except (ShotFailed, SystemExit) as exc:

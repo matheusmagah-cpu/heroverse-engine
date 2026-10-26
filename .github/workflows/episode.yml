@@ -12,6 +12,10 @@ on:
       plan:
         description: Plan path (migration/production/bible/plans/<episode-id>.json, bible-plan-v2, plan_check clean)
         required: true
+      resume_run:
+        description: Run id of a failed build of the same plan whose clips are kept (E93); empty = from the start
+        required: false
+        default: ""
 permissions:
   contents: read
 concurrency:
@@ -25,6 +29,7 @@ jobs:
     timeout-minutes: 300
     permissions:
       contents: read   # checkout and the release's reference images and music
+      actions: read    # resume_run: the failed run's artifact (E93)
     outputs:
       episode: ${{ steps.plan.outputs.episode }}
     env:
@@ -75,6 +80,17 @@ jobs:
           python3 -I -B migration/production/bible/episode_build.py lines "$PLAN" "$WORK"
       - name: Approved reference images (sha256 checked, <= 1536 px JPEG)
         run: python3 -I -B migration/production/bible/episode_build.py refs "$PLAN" "$WORK"
+      - name: Clips of a failed run of the same plan (resume_run; checked again, a changed request is regenerated)
+        if: inputs.resume_run != ''
+        env:
+          RESUME: ${{ inputs.resume_run }}
+        run: |
+          [[ "$RESUME" =~ ^[0-9]{6,20}$ ]] || { echo "RESUME_RUN_REFUSED"; exit 1; }
+          gh run download "$RESUME" --repo "$GITHUB_REPOSITORY" -n "episode-$EP-$RESUME" -D "$RUNNER_TEMP/prev"
+          mkdir -p "$WORK/clips"
+          cp "$RUNNER_TEMP/prev/report.json" "$WORK/report.json"
+          find "$RUNNER_TEMP/prev/clips" -maxdepth 1 -name '*.mp4' ! -name '*-raw.mp4' -exec cp {} "$WORK/clips/" \;
+          echo "RESUMED_FROM $RESUME"
       - name: Pavo shots in order (0-credit quote each), clip_check and lipsync_check, at most 2 regenerations
         env:
           PAVO_TOKEN: ${{ secrets.PAVO_TOKEN }}
