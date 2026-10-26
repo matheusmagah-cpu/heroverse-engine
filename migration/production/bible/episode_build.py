@@ -73,6 +73,7 @@ TRANSIENT = {"PAVO_RATE_LIMITED": RATE_LIMIT_WAITS, "PAVO_UNREACHABLE": OUTAGE_W
 REF_SIDE = 1536
 LUFS = (-15.0, -13.0)
 FADE_OUT = 0.8             # short_engine.FADE_OUT
+RETIME_TRIM_MAX = 0.02     # atempo's few-ms miss cut or padded after a retime, never more (review of #412)
 HOLD_MARGIN = 0.01         # a talking clip's held last frame is written this much longer than the time it covers
 
 
@@ -160,6 +161,8 @@ def lines_step(plan, work):
     items, carried = plan_check.sequence(plan)
     timeline = load(work / "timeline.json")
     params, frames = read_wav(work / "voice.wav")
+    if params.sampwidth != 2:   # retime() reads atempo's pcm_s16le back under these params (review of #412)
+        raise SystemExit(f"VOICE_SAMPLE_WIDTH {params.sampwidth * 8}-bit voice.wav (16-bit PCM only)")
     rate, width = params.framerate, params.sampwidth * params.nchannels
     n = len(items)
     by_line = {k: [s for s in timeline["sentences"] if s["segment"] == f"n{k:02d}"] for k in range(n)}
@@ -224,20 +227,20 @@ def lines_step(plan, work):
             continue
         start, end = keeper_span(carried[i], layout)
         seconds = end - start
+        talks = plan_check.talking(s)
         if s["kind"] == "keeper":
             keeper_seconds += seconds
             low, code, folder, into = plan_check.KEEPER_AUDIO[0], "KEEPER_AUDIO", "keeper", keeper
         else:
             low, code, folder = plan_check.SPEAKER_AUDIO[0], "SPEAKER_AUDIO", "speakers"
-            into = speakers if plan_check.talking(s) else voice_over
+            into = speakers if talks else voice_over
         # one talking ceiling (plan_check.TALK_LINE_MAX: the retime brings every talking line under it; 1 ms is the
         # layout's rounding); God's voice-over fills one scene clip
-        talks = plan_check.talking(s)
         limit = plan_check.TALK_LINE_MAX if talks else plan_check.SPEAKER_AUDIO[1]
         if not low <= seconds <= limit + (1e-3 if talks else 0.0):
             problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.2f} s)")
             continue
-        if plan_check.talking(s):
+        if talks:
             # its clip is ceil(speech) seconds with the speech 0.25-0.65 s shorter (E95): refused here, before any
             # Pavo clip, when no 4-12 s clip can carry it
             need = talk_need(seconds)
@@ -359,20 +362,11 @@ talk_need = plan_check.talk_need     # plan and build share the talking-clip rul
 talk_fits = plan_check.talk_fits
 
 
-def retime_target(speech, gaps=0.0):
-    """The length a talking shot of `speech` s (its `gaps` s of silence between lines included) is retimed to, None
-    when no clip reaches it (plan_check.talk_retime: the words alone are stretched, at most +-10 %)."""
-    found = plan_check.talk_retime(speech - gaps, gaps)
-    return found and found[0]
-
-
 def retime(piece, params, factor, stem):
     """One line's PCM through ffmpeg atempo (pitch kept): factor > 1 shortens it. The result is cut or padded with
     silence to round(frames / factor), since atempo misses by a few ms (11.7 s -> 11.553 s for 11.55 s) and a line
-    retimed to the ceiling would else be refused by it. 16-bit PCM only: the frames come back as pcm_s16le under the
-    line's own WAV params."""
-    if params.sampwidth != 2:
-        raise SystemExit(f"RETIME_SAMPLE_WIDTH {params.sampwidth * 8}-bit voice (16-bit PCM only)")
+    retimed to the ceiling would else be refused by it; a miss over RETIME_TRIM_MAX is refused (RETIME_TRIM_OVER).
+    16-bit PCM only (lines_step refuses any other voice.wav): the frames come back as pcm_s16le under its params."""
     src, dst = Path(f"{stem}-native.wav"), Path(f"{stem}-retimed.wav")
     write_wav(src, params, piece)
     run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", src, "-af", f"atempo={factor:.5f}", "-ar",
@@ -380,6 +374,10 @@ def retime(piece, params, factor, stem):
     frames = read_wav(dst)[1]
     width = params.sampwidth * params.nchannels
     want = int(round(len(piece) / width / factor)) * width
+    miss = abs(len(frames) - want) / width / params.framerate
+    if miss > RETIME_TRIM_MAX:
+        raise SystemExit(f"RETIME_TRIM_OVER {Path(stem).name} {miss * 1000:.0f} ms from its target "
+                         f"(atempo misses by a few ms; at most {RETIME_TRIM_MAX * 1000:.0f} ms is cut or padded)")
     return frames[:want] + b"\x00" * max(0, want - len(frames))
 
 

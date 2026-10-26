@@ -39,8 +39,10 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   as Scripture, not our words; a `reference` that is not text is REFERENCE_NOT_TEXT.
 - a talking line (the Keeper's, a character's) is 3.23-11.55 s (E95): Pavo keeps our audio only in a 4-12 s clip
   0.25-0.65 s longer than the speech, so episode_build retimes the line to N - 0.45 s (atempo on its words, at most
-  +-10 %) and holds the clip's last frame for the gap or the tail. One that neither a 4 s nor a 5 s clip reaches
-  within that (one line of ~3.94-4.14 s) is TALK_LINE_UNREACHABLE (talk_retime, the rule the build retimes by).
+  +-10 %) and holds the clip's last frame for the gap or the tail. A shot of several lines needs its gaps (never
+  stretched) + the shortest words a 4 s clip takes (talk_min). One that neither a 4 s nor a 5 s clip reaches within
+  that (one line of ~3.94-4.14 s) at any pace from the normal to the slowest is TALK_LINE_UNREACHABLE (talk_retime,
+  the rule the build retimes by): in practice a single talking line has at least 12 words.
 - keeper: only after the last climax shot, for the insight and the close (lines of kind insight or cta); he closes
   (the last shot) and takes at most 25 % of the Short. He speaks the lines he carries (Pavo input audio + his
   speaking reference); each Keeper line is 3.23-11.55 s (estimated at the slowest measured Kokoro pace, measured and
@@ -131,7 +133,8 @@ TALK_CLIP_MAX = float(TALK_CLIP[1])
 # the one talking ceiling, plan (at the slowest pace) and build (measured, retimed under it) alike, the closing Keeper
 # too: his tail is a held last frame (E95), not clip time
 TALK_LINE_MAX = TALK_CLIP[1] - TALK_PAD_TARGET                              # 11.55 s
-TALK_MIN = (TALK_CLIP[0] - TALK_PAD_TARGET) / (1 + TALK_RETIME_MAX)         # 3.23 s: retimed into a 4 s clip
+TALK_MIN = (TALK_CLIP[0] - TALK_PAD_TARGET) / (1 + TALK_RETIME_MAX)         # 3.23 s: one line retimed into a 4 s
+#                                                                             clip (a shot of several: talk_min)
 _KJV_TEXT = []
 
 
@@ -233,6 +236,41 @@ def talk_fits(seconds):
     """Pavo keeps our input audio: the clip is 0.25-0.65 s longer than the speech (TALK_PAD)."""
     pad = talk_need(seconds) - seconds
     return TALK_PAD[0] - 1e-6 <= pad <= TALK_PAD[1] + 1e-6
+
+
+def talk_min(gaps=0.0):
+    """The shortest talking shot a 4 s clip takes: its gaps (never stretched) + the shortest words atempo stretches
+    into N - 0.45 s within TALK_RETIME_MAX (TALK_MIN for one line)."""
+    return gaps + (TALK_CLIP[0] - TALK_PAD_TARGET - gaps) / (1 + TALK_RETIME_MAX)
+
+
+def _reach(gaps):
+    """The words lengths some clip reaches (talk_retime is not None), as intervals: each clip's +-TALK_RETIME_MAX
+    stretch of the words into N - 0.45 s, and the speech that fits it untouched under TALK_LINE_MAX."""
+    out = []
+    for n in range(TALK_CLIP[0], TALK_CLIP[1] + 1):
+        target = n - TALK_PAD_TARGET - gaps
+        if target > 0:
+            out.append((target / (1 + TALK_RETIME_MAX), target / (1 - TALK_RETIME_MAX)))
+        a, b = n - TALK_PAD[1] - gaps, min(n - TALK_PAD[0], TALK_LINE_MAX) - gaps
+        if b > max(a, 0):
+            out.append((max(a, 0), b))
+    return sorted(out)
+
+
+def talk_reach_gap(low, high, gaps=0.0):
+    """The first words length in [low, high] (s) that no clip reaches, else None. plan_check judges a talking shot's
+    words from the normal pace (WPS) to the slowest (WPS_SLOWEST), since the build retimes the measured length."""
+    x, covered = low, False
+    for a, b in _reach(gaps):
+        if b + 1e-9 < x:
+            continue
+        if a - 1e-9 > x:
+            break
+        x, covered = max(x, b), True
+        if x >= high:
+            return None
+    return x if covered else low
 
 
 def talk_retime(words, gaps=0.0):
@@ -449,14 +487,18 @@ def check(plan, chars=None):
         problems += prompt_problems(i, s)
         idx = carried[i]
         span_words = " ".join(items[k]["text"] for k in idx)
-        span = sum(est[k] for k in idx) + LINE_GAP * (len(idx) - 1)
-        slowest = words(span_words) / WPS_SLOWEST + LINE_GAP * (len(idx) - 1)
         gaps = LINE_GAP * (len(idx) - 1)
-        if talking(s) and TALK_MIN <= span and slowest <= TALK_LINE_MAX and talk_retime(span - gaps, gaps) is None:
-            # review of #408: between a 4 s and a 5 s clip (one line: 3.94-4.14 s) the 10 % retime reaches neither,
-            # so episode_build lines would refuse it (TALK_LINE_RETIME_OVER) after this plan had passed
-            problems.append(f"TALK_LINE_UNREACHABLE shot {i} {s['id']} (~{span:.2f} s: no {TALK_CLIP[0]}-{TALK_CLIP[1]} s "
-                            f"clip within +-{TALK_RETIME_MAX:.0%} of its words; a few words more or fewer)")
+        span = sum(est[k] for k in idx) + gaps
+        slowest = words(span_words) / WPS_SLOWEST + gaps
+        if talking(s) and talk_min(gaps) <= span and slowest <= TALK_LINE_MAX:
+            # review of #408/#412: between a 4 s and a 5 s clip (one line: 3.94-4.14 s) the 10 % retime reaches
+            # neither, so episode_build lines would refuse it (TALK_LINE_RETIME_OVER) after this plan had passed;
+            # judged at every pace from the normal to the slowest, since the build retimes the measured length
+            miss = talk_reach_gap(span - gaps, slowest - gaps, gaps)
+            if miss is not None:
+                problems.append(f"TALK_LINE_UNREACHABLE shot {i} {s['id']} (~{span:.2f}-{slowest:.2f} s from the "
+                                f"normal to the slowest pace: at ~{miss + gaps:.2f} s no {TALK_CLIP[0]}-{TALK_CLIP[1]} s "
+                                f"clip is within +-{TALK_RETIME_MAX:.0%} of its words; a few words more or fewer)")
         if s["kind"] == "keeper":
             keeper_used = True
             keeper_seconds += span
@@ -469,9 +511,9 @@ def check(plan, chars=None):
             if slowest > TALK_LINE_MAX:
                 problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {s['id']} (~{slowest:.1f} s at the slowest pace; "
                                 f"Pavo input audio <= {TALK_LINE_MAX:.2f} s)")
-            if span < TALK_MIN:
-                problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (input audio >= {TALK_MIN:.2f} s: it fills a "
-                                "4 s clip, E95)")
+            if span < talk_min(gaps):
+                problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (input audio >= {talk_min(gaps):.2f} s: it "
+                                "fills a 4 s clip, its gaps never stretched, E95)")
             if s.get("characters") not in (None, [ch.NARRATOR]) or s.get("seconds") is not None:
                 problems.append(f"KEEPER_SHOT_FIELDS shot {i} {s['id']} (characters and seconds come from the line)")
             if not keeper:

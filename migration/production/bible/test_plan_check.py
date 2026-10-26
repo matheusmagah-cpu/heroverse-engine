@@ -54,7 +54,12 @@ def god(sid, line=GOD_LINE, reference="Genesis 6:13 (KJV)", seconds=8, prompt=ST
     return s
 
 
-def speaker(sid, who="eve", line="Why do you hide from the voice in the garden?", look=EVE_LOOK, **extra):
+# 12 words: 4.36-5.33 s from the normal to the slowest pace, all of it reachable (a 10-word line crosses the
+# 3.94-4.14 s band no clip reaches within the retime: TALK_LINE_UNREACHABLE, review of #412)
+SPEAKER_LINE = "Why do you hide from the voice of the Lord in the garden?"
+
+
+def speaker(sid, who="eve", line=SPEAKER_LINE, look=EVE_LOOK, **extra):
     s = {"id": sid, "kind": "scene", "speaker": who, "line": line, "characters": [who],
          "prompt": f"{STYLE} Medium close-up, slow push-in. {who.title()}, {look}, turns and speaks to him, her lips "
                    "moving clearly with every word. A garden at dusk, low gold light. Tense."}
@@ -71,6 +76,8 @@ def plan(shots=None, narration=None):
         {"kind": "story", "text": " ".join([STORY] * 8)},                                         # 3
         {"kind": "insight", "text": "Notice the order. Grief comes before judgment. The flood is not the story of a "
          "cold God, but of a wounded heart."},                                                    # 4
+        # 12 words (4.36-5.33 s); the old "... Part eight tomorrow." was 11 words, 4.0 s at the normal pace: inside
+        # the band no clip reaches within the retime (TALK_LINE_UNREACHABLE, review of #408)
         {"kind": "cta", "text": "The full story is in the long video. Part eight is tomorrow."},     # 5
     ]
     shots = shots or [god("g-open"), scene("s-a", [0]), scene("s-b", [0]), speaker("s-eve"),
@@ -322,11 +329,44 @@ class Plan(unittest.TestCase):
         p = plan()
         p["shots"][3] = speaker("s-eve", line=line)
         self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
-        for line in ("Why do you hide from the voice of the Lord?",              # 10 words: 3.64 s, a 4 s clip
-                     "Why do you hide from the voice of the Lord this night?"):  # 12 words: 4.36 s, a 5 s clip
-            p = plan()
-            p["shots"][3] = speaker("s-eve", line=line)
-            self.assertNotIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)), line)
+        p = plan()      # the fixture's old CTA, 11 words: 4.0 s at the normal pace
+        p["narration"][5]["text"] = "The full story is in the long video. Part eight tomorrow."
+        self.assertIn("TALK_LINE_UNREACHABLE shot 14 k-close", " ".join(pc.check(p, CHARS)["problems"]))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line="Why do you hide from the voice of the Lord this night?")   # 12 words
+        self.assertNotIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
+
+    def test_the_band_is_judged_at_every_kokoro_pace_not_the_normal_one_only(self):
+        """Review of #412: the build retimes the measured Kokoro length, 2.18-3.63 words a second a line (WPS 2.75 is
+        the average, WPS_SLOWEST 2.25): a line estimated at 3.64 s can be measured in 3.94-4.14 s and die at build.
+        It is refused when any pace from WPS_SLOWEST to WPS puts it where no clip reaches."""
+        self.assertIsNone(pc.talk_reach_gap(3.3, 3.9))                 # all in a 4 s clip
+        self.assertIsNone(pc.talk_reach_gap(4.2, 11.5))                # 5-12 s clips overlap
+        self.assertAlmostEqual(pc.talk_reach_gap(3.6, 4.4), 3.55 / 0.9, places=3)   # slowest pace in the band
+        self.assertAlmostEqual(pc.talk_reach_gap(4.0, 4.6), 4.0, places=3)          # normal pace in the band
+        self.assertIsNotNone(pc.talk_reach_gap(3.9, 3.95))
+        for words, gaps in ((3.3, 0), (3.95, 0), (4.0, 0), (4.14, 0), (11.7, 0), (3.80, 0.35), (3.85, 0.35)):
+            self.assertEqual(pc.talk_reach_gap(words, words, gaps) is None, pc.talk_retime(words, gaps) is not None,
+                             (words, gaps))
+        line = "Why do you hide from the voice of the Lord?"         # 10 words: 3.64 s normal, 4.44 s slowest
+        self.assertLess(pc.words(line) / pc.WPS, 3.944)
+        self.assertGreater(pc.words(line) / pc.WPS_SLOWEST, 4.136)
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=line)
+        self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line="Why do you hide from me?")   # 6 words: too short, not unreachable
+        self.assertEqual([c for c in codes(pc.check(p, CHARS)) if c.startswith(("TALK_", "SPEAKER_LINE"))],
+                         ["SPEAKER_LINE_TOO_SHORT"])
+
+    def test_the_talking_floor_counts_the_gaps_atempo_does_not_stretch(self):
+        """Review of #412: TALK_MIN (3.23 s) is a single line's floor. A shot of 2.90 s of words + a 0.35 s gap passed
+        it and then read TALK_LINE_UNREACHABLE; the floor is the gaps + the shortest words a 4 s clip takes."""
+        self.assertAlmostEqual(pc.talk_min(0.0), pc.TALK_MIN)
+        self.assertAlmostEqual(pc.talk_min(0.35), 0.35 + 3.2 / 1.1)
+        self.assertGreater(pc.talk_min(0.35), 2.90 + 0.35)
+        self.assertIsNone(pc.talk_retime(2.90, 0.35))
+        self.assertIsNotNone(pc.talk_retime(3.2 / 1.1 + 1e-6, 0.35))
 
     def test_the_retime_cap_is_on_the_words_atempo_stretches_not_on_the_fixed_gaps(self):
         """Review of #408: atempo changes only the words; the 0.35 s gaps between a talking shot's lines stay. Words
@@ -344,7 +384,7 @@ class Plan(unittest.TestCase):
         self.assertEqual(items[0]["speaker"], "god")
         self.assertEqual(items[0]["kind"], "scripture")
         self.assertEqual([x.get("line") for x in items], [None, 0, None, 1, 2, 3, 4, 5])
-        self.assertEqual(items[2], {"kind": "story", "text": "Why do you hide from the voice in the garden?",
+        self.assertEqual(items[2], {"kind": "story", "text": SPEAKER_LINE,
                                     "speaker": "eve", "shot": "s-eve"})
         self.assertEqual(carried[:5], [[0], [1], [1], [2], [3]])
         runs = pc.groups(plan()["shots"], carried)

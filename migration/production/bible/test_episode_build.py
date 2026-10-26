@@ -562,12 +562,12 @@ class Lines(unittest.TestCase):
         misses it is retimed to N - 0.45 s, at most +-10 %, else refused before any Pavo clip."""
         for speech, target in ((8.47, 8.47), (4.34, 4.55), (6.33, 6.55), (6.385, 6.385), (3.3, 3.55), (12.5, 11.55),
                                (9.9, 9.55), (5.2, 5.55)):
-            got = eb.retime_target(speech)
+            got = eb.plan_check.talk_retime(speech)[0]
             self.assertAlmostEqual(got, target, places=3, msg=speech)
             self.assertTrue(eb.talk_fits(got), speech)
             self.assertLessEqual(abs(got / speech - 1), 0.10 + 1e-9, speech)
         for speech in (2.4, 3.0, 13.0, 15.0):
-            self.assertIsNone(eb.retime_target(speech), speech)
+            self.assertIsNone(eb.plan_check.talk_retime(speech), speech)
         self.assertEqual([eb.talk_need(s) for s in (3.55, 4.55, 6.385, 8.47, 11.55)], [4, 5, 7, 9, 12])
         for clip, speech in ((7, 6.385), (5, 4.55)):          # the measured pass: at most 0.65 s of clip past the words
             self.assertLessEqual(clip - speech, plan_check_pad()[1])
@@ -590,12 +590,38 @@ class Lines(unittest.TestCase):
         self.assertTrue(eb.talk_fits(k["seconds"]))
         self.assertEqual(list(result["retimed"]), ["k-close"])
 
-    def test_retime_refuses_a_sample_width_it_would_not_write(self):
-        """Review of #408: atempo wrote pcm_s16le frames that were then read back under the original WAV params."""
-        params = wave._wave_params(1, 3, 24000, 2400, "NONE", "not compressed")
+    def test_a_voice_that_is_not_16_bit_is_refused_up_front_even_with_no_line_to_retime(self):
+        """Review of #412: the width was checked only when a line needed a retime; lines_step checks every voice.wav
+        once, before anything is cut (the retimed frames come back as pcm_s16le under its params)."""
+        rate = 24000
+        with wave.open(str(self.work / "voice.wav"), "wb") as w:
+            w.setnchannels(1)
+            w.setsampwidth(3)
+            w.setframerate(rate)
+            w.writeframes(b"\x00\x10\x00" * int(70 * rate))
+        segs = ["n00", "n01", "n01", "n02"]
+        spans = [(0.3, 3.85), (4.03, 30.0), (30.18, 60.0), (60.18, 66.73)]     # 3.55 s and 6.55 s: no retime
+        (self.work / "timeline.json").write_text(json.dumps({"sentences": [
+            {"segment": g, "text": f"{g}.", "start": a, "end": b} for g, (a, b) in zip(segs, spans)]}))
         with self.assertRaises(SystemExit) as err:
-            eb.retime(b"\x00" * 3 * 2400, params, 1.05, self.work / "lines" / "n00")
-        self.assertIn("RETIME_SAMPLE_WIDTH", str(err.exception))
+            eb.lines_step(self.PLAN, self.work)
+        self.assertIn("VOICE_SAMPLE_WIDTH 24-bit", str(err.exception))
+
+    def test_a_retime_that_misses_its_target_by_more_than_20_ms_is_refused(self):
+        """Review of #412: the cut or pad to the target length is a few ms of atempo rounding, never more."""
+        tone_wav(self.work / "t.wav", 6.0)
+        params, frames = eb.read_wav(self.work / "t.wav")
+        saved = eb.run
+
+        def short_atempo(args, **kw):        # an atempo that lost 0.1 s
+            tone_wav(Path(str(args[-1])), 6.0 / 1.05 - 0.1)
+        eb.run = short_atempo
+        try:
+            with self.assertRaises(SystemExit) as err:
+                eb.retime(frames, params, 1.05, self.work / "lines" / "n00")
+        finally:
+            eb.run = saved
+        self.assertIn("RETIME_TRIM_OVER", str(err.exception))
 
     def test_a_retimed_line_is_exactly_its_target_length(self):
         """atempo overshoots by a few ms (11.7 s -> 11.553 s): the piece is cut or padded to the target frames, so a
@@ -607,14 +633,60 @@ class Lines(unittest.TestCase):
 
 
 class Retime(unittest.TestCase):
-    def test_build_and_plan_share_one_retime_rule(self):
-        """Review of #408: plan_check refuses the band no clip reaches (TALK_LINE_UNREACHABLE); the build uses the
-        same rule, with the cap on the words atempo stretches (the gaps between a shot's lines stay as they are)."""
-        for speech in (3.3, 3.95, 4.0, 4.13, 4.14, 6.385, 8.47, 11.6, 11.7, 12.5, 13.0):
-            ours = eb.plan_check.talk_retime(speech)
-            self.assertEqual(eb.retime_target(speech), ours and ours[0], speech)
-        self.assertIsNone(eb.retime_target(4.15, gaps=0.35))
-        self.assertAlmostEqual(eb.retime_target(4.20, gaps=0.35), 4.55, places=3)
+    """Review of #412: lines_step refuses exactly what plan_check.talk_retime refuses, through a real call."""
+
+    def setUp(self):
+        self.work = Path(tempfile.mkdtemp(dir=eb.REPO / ".episode" if (eb.REPO / ".episode").is_dir() else eb.REPO,
+                                          prefix="test-retime-"))
+
+    def tearDown(self):
+        shutil.rmtree(self.work)
+
+    def lines(self, plan, spans, seconds=80.0):
+        tone_wav(self.work / "voice.wav", seconds)
+        (self.work / "timeline.json").write_text(json.dumps({"sentences": [
+            {"segment": g, "text": f"{g}.", "start": a, "end": b} for g, (a, b) in spans]}))
+        try:
+            return eb.lines_step(plan, self.work), None
+        except SystemExit as exc:
+            return None, str(exc)
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_lines_step_refuses_what_plan_check_refuses(self):
+        for speech in (3.3, 3.95, 4.0, 4.13, 4.14, 6.385, 11.7):
+            spans = [("n00", (0.3, 0.3 + speech)), ("n01", (0.48 + speech, 30.0)), ("n01", (30.18, 70.0)),
+                     ("n02", (70.18, 76.73))]
+            result, err = self.lines(Lines.PLAN, spans, seconds=90.0)
+            refused = err is not None and f"TALK_LINE_RETIME_OVER k-open {speech:.2f} s" in err
+            self.assertEqual(refused, eb.plan_check.talk_retime(speech) is None, (speech, err))
+            if not refused:
+                self.assertIsNone(err, speech)
+
+    @unittest.skipUnless(HAS_FFMPEG, "ffmpeg")
+    def test_the_cap_is_on_the_words_of_a_shot_of_several_lines(self):
+        """3.80 s of words + one 0.35 s gap: the whole shot is +9.6 % from 4.55 s, the words +10.5 %: refused. 3.90 s
+        of words + the gap (4.25 s) are retimed into a 5 s clip, +7.7 % on the words."""
+        plan = {"shots": [{"id": "k-open", "kind": "keeper", "lines": [0]}, {"id": "s-a", "kind": "scene", "lines": [1]},
+                          {"id": "k-close", "kind": "keeper", "lines": [2, 3]}],
+                "narration": [{"text": "a"}, {"text": "b"}, {"text": "c"}, {"text": "d"}]}
+        for words, refused in ((3.80, True), (3.90, False)):
+            half = words / 2
+            spans = [("n00", (0.3, 3.85)), ("n01", (4.03, 66.0)), ("n02", (66.18, 66.18 + half)),
+                     ("n03", (66.36 + half, 66.36 + words))]
+            self.assertEqual(eb.plan_check.talk_retime(words, eb.LINE_GAP) is None, refused)
+            result, err = self.lines(plan, spans)
+            if refused:
+                self.assertIn("TALK_LINE_RETIME_OVER k-close", err or "")
+            else:
+                self.assertIsNone(err)
+                self.assertAlmostEqual(result["keeper"]["k-close"]["seconds"], 4.55, places=2)
+                self.assertAlmostEqual(result["retimed"]["k-close"]["atempo"], words / (4.55 - eb.LINE_GAP), places=3)
+
+    def test_the_build_has_no_second_retime_rule(self):
+        self.assertFalse(hasattr(eb, "retime_target"))
+
+    def test_the_hold_ceiling_is_the_same_in_compose_and_short_engine(self):
+        self.assertEqual(eb.plan_check.TALK_HOLD_MAX, short_engine.HOLD_MAX)
 
 
 def plan_check_pad():
