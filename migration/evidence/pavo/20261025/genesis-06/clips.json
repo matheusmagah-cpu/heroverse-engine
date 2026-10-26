@@ -83,6 +83,30 @@
    "conversation_id": "372882592317608192",
    "for_words": "narration 4 'for three hundred years, one ordinary day at a time'",
    "verdict": "APPROVED (small lens-flare dot in the first second; trim the head 1 s)"
+  },
+  {
+   "name": "lamp",
+   "file": "migration/evidence/pavo/20261025/genesis-06/lamp.mp4",
+   "sha256": "13e7f17d2af1889e1ec8c6cb0c13d26e40ace46b0e36d00b0af0ac9c968cee9c",
+   "conversation_id": "372891151797907520",
+   "for_words": "narration 4 'He did not leave his family ... one ordinary day at a time'",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "sunbeams",
+   "file": "migration/evidence/pavo/20261025/genesis-06/sunbeams.mp4",
+   "sha256": "ed5a0442b03b822b1cef5818f14bf596327c269dbbe389a4efadb55d134d6c8d",
+   "conversation_id": "372891220328658688",
+   "for_words": "narration 8 close and the prayer",
+   "verdict": "APPROVED"
+  },
+  {
+   "name": "hill-path",
+   "file": "migration/evidence/pavo/20261025/genesis-06/hill-path.mp4",
+   "sha256": "7b4cb1eae67bd0484affa9f0370a527ab357a6f1b838f166dea211db9a20b356",
+   "conversation_id": "372891197322824320",
+   "for_words": "narration 6 'keeping their pace and their direction'",
+   "verdict": "APPROVED"
   }
  ],
  "rejected": [

@@ -1,0 +1,198 @@
+{
+ "segments": [
+  {
+   "id": "n0",
+   "start": 0.3,
+   "end": 7.913
+  },
+  {
+   "id": "n1",
+   "start": 8.163,
+   "end": 14.155
+  },
+  {
+   "id": "n2",
+   "start": 14.405,
+   "end": 19.617
+  },
+  {
+   "id": "n3",
+   "start": 19.867,
+   "end": 31.235
+  },
+  {
+   "id": "n4",
+   "start": 31.485,
+   "end": 40.891
+  },
+  {
+   "id": "n5",
+   "start": 41.141,
+   "end": 46.587
+  },
+  {
+   "id": "n6",
+   "start": 46.837,
+   "end": 60.997
+  },
+  {
+   "id": "n7",
+   "start": 61.247,
+   "end": 70.29
+  },
+  {
+   "id": "n8",
+   "start": 70.54,
+   "end": 78.921
+  },
+  {
+   "id": "prayer",
+   "start": 79.171,
+   "end": 84.322
+  }
+ ],
+ "sentences": [
+  {
+   "segment": "n0",
+   "text": "Genesis five reads like a list of funerals.",
+   "start": 0.3,
+   "end": 3.521
+  },
+  {
+   "segment": "n0",
+   "text": "Name after name, the same three words close every life.",
+   "start": 3.701,
+   "end": 7.733
+  },
+  {
+   "segment": "n1",
+   "text": "And all the days that Adam lived were nine hundred and thirty years:",
+   "start": 8.163,
+   "end": 12.579
+  },
+  {
+   "segment": "n1",
+   "text": "and he died.",
+   "start": 12.759,
+   "end": 13.975
+  },
+  {
+   "segment": "n2",
+   "text": "And he died.",
+   "start": 14.405,
+   "end": 15.621
+  },
+  {
+   "segment": "n2",
+   "text": "And he died.",
+   "start": 15.801,
+   "end": 17.017
+  },
+  {
+   "segment": "n2",
+   "text": "Then one line breaks the pattern.",
+   "start": 17.197,
+   "end": 19.437
+  },
+  {
+   "segment": "n3",
+   "text": "And Enoch lived sixty and five years, and begat Methuselah:",
+   "start": 19.867,
+   "end": 24.134
+  },
+  {
+   "segment": "n3",
+   "text": "And Enoch walked with God after he begat Methuselah three hundred years, and begat sons and daughters:",
+   "start": 24.314,
+   "end": 31.055
+  },
+  {
+   "segment": "n4",
+   "text": "He did not leave his family to find God.",
+   "start": 31.485,
+   "end": 34.451
+  },
+  {
+   "segment": "n4",
+   "text": "He walked with God while raising one, for three hundred years, one ordinary day at a time.",
+   "start": 34.631,
+   "end": 40.711
+  },
+  {
+   "segment": "n5",
+   "text": "And Enoch walked with God:",
+   "start": 41.141,
+   "end": 43.103
+  },
+  {
+   "segment": "n5",
+   "text": "and he was not;",
+   "start": 43.283,
+   "end": 44.627
+  },
+  {
+   "segment": "n5",
+   "text": "for God took him.",
+   "start": 44.807,
+   "end": 46.407
+  },
+  {
+   "segment": "n6",
+   "text": "Notice what the text never gives Enoch:",
+   "start": 46.837,
+   "end": 49.483
+  },
+  {
+   "segment": "n6",
+   "text": "no miracle, no battle, no famous speech.",
+   "start": 49.663,
+   "end": 52.799
+  },
+  {
+   "segment": "n6",
+   "text": "Only a walk.",
+   "start": 52.979,
+   "end": 54.301
+  },
+  {
+   "segment": "n6",
+   "text": "Walking with someone means keeping their pace and their direction, every single day, and that was enough.",
+   "start": 54.481,
+   "end": 60.817
+  },
+  {
+   "segment": "n7",
+   "text": "Enoch is the first man in the Bible who never dies.",
+   "start": 61.247,
+   "end": 64.938
+  },
+  {
+   "segment": "n7",
+   "text": "His son Methuselah outlives everyone, and his great-grandson is Noah.",
+   "start": 65.118,
+   "end": 70.11
+  },
+  {
+   "segment": "n8",
+   "text": "This is part six.",
+   "start": 70.54,
+   "end": 72.033
+  },
+  {
+   "segment": "n8",
+   "text": "The full story, from Cain and Abel to the days before the flood, is in the long video on the channel.",
+   "start": 72.213,
+   "end": 78.741
+  },
+  {
+   "segment": "prayer",
+   "text": "Lord, teach me to walk with You today, at Your pace and in Your direction.",
+   "start": 79.171,
+   "end": 84.142
+  }
+ ],
+ "voice_seconds": 84.322,
+ "sample_rate": 24000,
+ "voice_id": "am_michael",
+ "speed": 1.0
+}

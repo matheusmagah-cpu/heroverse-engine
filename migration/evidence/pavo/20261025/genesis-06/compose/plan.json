@@ -1,0 +1,87 @@
+{
+ "voice": "(Kokoro am_michael, speed 1.0, pilot_render.py voice; not stored)",
+ "timeline": "migration/evidence/pavo/20261025/genesis-06/compose/timeline.json",
+ "music": "original-rest-music.lossless.flac (release, sha256 1a90714dce83ce5919230a420f56cd17d81d82437303b360244d0fe0f22bbd0c)",
+ "music_offset": 600.0,
+ "tail": 1.2,
+ "shots": [
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/cairns.mp4",
+   "start": 0,
+   "end": 8.16,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/staff.mp4",
+   "start": 8.16,
+   "end": 14.4,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/hook-path.mp4",
+   "start": 14.4,
+   "end": 19.87,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/tents.mp4",
+   "start": 19.87,
+   "end": 27.3,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/timelapse.mp4",
+   "start": 27.3,
+   "end": 31.49,
+   "src_start": 1.0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/lamp.mp4",
+   "start": 31.49,
+   "end": 41.14,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/footprints-stop.mp4",
+   "start": 41.14,
+   "end": 46.84,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/wheat-path.mp4",
+   "start": 46.84,
+   "end": 54.48,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/hill-path.mp4",
+   "start": 54.48,
+   "end": 61.25,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/olive.mp4",
+   "start": 61.25,
+   "end": 67.8,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/storm.mp4",
+   "start": 67.8,
+   "end": 70.54,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/river.mp4",
+   "start": 70.54,
+   "end": 76.5,
+   "src_start": 0
+  },
+  {
+   "clip": "migration/evidence/pavo/20261025/genesis-06/sunbeams.mp4",
+   "start": 76.5,
+   "end": 85.522,
+   "src_start": 0
+  }
+ ]
+}
