@@ -1,7 +1,8 @@
 name: HeroVerse heartbeat (the engine's scheduler)
 # GitHub delays and drops scheduled runs under load: on 2026-10-17/18 every daily cron of this repository was
 # dropped. This workflow fires at minute 41 (plus the hourly Claude clock at :14) and dispatches
-# what is due from the real run history (migration/ops/heartbeat.py); it is the only cron of the daily plan.
+# what is due from the real run history (migration/ops/heartbeat.py); it is the only cron of the daily plan
+# (tiktok.yml keeps its own cron only as a second chance, E90).
 on:
   schedule:
     - cron: '41 * * * *'
@@ -35,11 +36,14 @@ jobs:
           python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json images 72 > "$T/images"
           python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json reconcile 48 > "$T/reconcile"
           python3 -I -B migration/publish/pending_shorts.py migration/production migration/publish/ledger.json > "$T/shorts" || true
+          # a crash of the pending check must not read as "nothing waiting" (E90): tiktok.yml then runs and fails loudly
+          python3 -I -B migration/publish/tiktok_publish.py pending migration/publish/ledger.json migration/publish/tiktok_ledger.json migration/production/bible/episodes > "$T/tiktok" || echo "PENDING_CHECK_FAILED" > "$T/tiktok"
+          [ ! -f migration/ops/PUBLICATION_HOLD ] || : > "$T/tiktok"
           # a crash must not read as "nothing waiting": arc-links.yml then runs and fails loudly
           python3 -I -B migration/publish/arc_links.py todo > "$T/arcs" || echo "TODO_CHECK_FAILED" > "$T/arcs"
           if [ -f migration/ops/PUBLICATION_HOLD ]; then : > "$T/arcs"; fi   # owner pause: no arc links
-          python3 -I -c "import json,os,sys;s=lambda p:os.path.getsize(p)>0;busy=any(l.split()[0] in ('approve','shorts') for l in open(sys.argv[2]) if l.strip());json.dump({'images_missing':s(sys.argv[1]),'reconcile_todo':s(sys.argv[2]),'shorts_pending':s(sys.argv[3]),'production_idle':not busy,'arc_links_todo':s(sys.argv[5])},open(sys.argv[4],'w'))" \
-            "$T/images" "$T/reconcile" "$T/shorts" "$T/conditions.json" "$T/arcs"
+          python3 -I -c "import json,os,sys;s=lambda p:os.path.getsize(p)>0;busy=any(l.split()[0] in ('approve','shorts') for l in open(sys.argv[2]) if l.strip());json.dump({'images_missing':s(sys.argv[1]),'reconcile_todo':s(sys.argv[2]),'shorts_pending':s(sys.argv[3]),'tiktok_pending':s(sys.argv[4]),'arc_links_todo':s(sys.argv[5]),'production_idle':not busy},open(sys.argv[6],'w'))" \
+            "$T/images" "$T/reconcile" "$T/shorts" "$T/tiktok" "$T/arcs" "$T/conditions.json"
           echo '{}' > "$T/runs.json"
           for w in $(python3 -I -c "import sys;sys.path.insert(0,'migration/ops');import heartbeat as h;print(' '.join(t['workflow'] for t in h.TASKS))"); do
             gh run list --repo "$GITHUB_REPOSITORY" --workflow "$w" --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json"
