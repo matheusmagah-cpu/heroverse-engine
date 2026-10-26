@@ -813,6 +813,16 @@
     "file": "migration/production/bible/test_episode_build.py",
     "contains": "def test_a_talking_shot_gets_six_generations_a_scene_three"
    }
+  },
+  {
+   "id": "E99",
+   "date": "2026-10-26",
+   "error": "Rework: genesis-07 needed four episode builds on 26/10 (40263488773 Pavo outage E93, 40278642295 and 40285879529 k-insight audio E94/E95, 40297987571 k-insight lips E98). Each build generated the scene shots in plan order and met the Keeper's talking shots, the only new and failure-prone kind, last: every new failure surfaced after ~30 scene shots and 1-2 h of Actions minutes (2346 min in 24 h against a 233/day target), and each fix needed another run to learn the next failure.",
+   "fix": "generate_step walks the shots in risk_order: talking shots first (lipsync_check), then God's voice-over shots (face check), then scenes; each keeps its plan index, so requests, the resume and the composition are unchanged. A failure now costs minutes. The clock routine also requires a direct 0-credit Pavo test of any new talking setup before a build (rule 6), and never a repeated build without new evidence (rule 11).",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_the_shots_that_can_fail_are_generated_first"
+   }
   }
  ]
 }
