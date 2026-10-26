@@ -563,6 +563,14 @@ def risk_order(shots):
     return sorted(enumerate(shots), key=rank)
 
 
+def in_plan_order(report, plan):
+    """The report lists its shots in plan order whatever order they were generated in (risk_order, E99)."""
+    shots = report["shots"]
+    report["shots"] = {**{s["id"]: shots[s["id"]] for s in plan["shots"] if s["id"] in shots},
+                       **{k: v for k, v in shots.items() if k not in {s["id"] for s in plan["shots"]}}}
+    return report
+
+
 def generate_step(plan, work, lip_python, face_model, client=None, download=None, sleep=time.sleep):
     work = Path(work)
     rel(work)
@@ -631,11 +639,11 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
             if getattr(exc, "records", None):
                 entry["attempts"] = exc.records
             report["shots"][shot["id"]] = entry
-            save(report_path, report)
+            save(report_path, in_plan_order(report, plan))
             raise SystemExit(str(exc))
         entry["attempts"] = records
         report["shots"][shot["id"]] = entry
-        save(report_path, report)
+        save(report_path, in_plan_order(report, plan))
         print(json.dumps({"shot": shot["id"], "generations": len(records)}))
     return report
 
