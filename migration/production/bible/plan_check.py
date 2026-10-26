@@ -42,7 +42,9 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   +-10 %) and holds the clip's last frame for the gap or the tail. A shot of several lines needs its gaps (never
   stretched) + the shortest words a 4 s clip takes (talk_min). One that neither a 4 s nor a 5 s clip reaches within
   that (one line of ~3.94-4.14 s) at any pace from the normal to the slowest is TALK_LINE_UNREACHABLE (talk_retime,
-  the rule the build retimes by): in practice a single talking line has at least 12 words.
+  the rule the build retimes by). Each line is timed at its own voice's measured Kokoro pace (voice_pace, E104), from
+  that pace to its slowest: a single talking line of the Keeper or Noah has at least 12 words, the scoffer's 15, Eve's
+  16, Adam's 17. A character with no measured pace cannot speak yet (SPEAKER_PACE_UNMEASURED).
 - keeper: only after the last climax shot, for the insight and the close (lines of kind insight or cta); he closes
   (the last shot) and takes at most 25 % of the Short. He speaks the lines he carries (Pavo input audio + his
   speaking reference); each Keeper line is 3.23-11.55 s (estimated at the slowest measured Kokoro pace, measured and
@@ -74,6 +76,7 @@ sys.path.insert(0, str(ROOT / "migration" / "publish"))
 import characters as ch  # noqa: E402
 import kjv_check  # noqa: E402
 import publish_episode  # noqa: E402
+from voice_pace import VOICE_PACE, WPS, WPS_SLOWEST, pace, slowest as slowest_pace  # noqa: E402,F401  (E104)
 
 VERSION = "bible-plan-v2"
 KINDS = ("story", "scripture", "insight", "cta")
@@ -81,12 +84,9 @@ LESSON_KINDS = ("insight", "cta")
 EPISODE_ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 SHOT_ID = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
 RATIOS = ("9:16",)                   # Shorts only
-# Kokoro pace, words a second: am_michael on Genesis 6 (evidence/pavo/20261025/genesis-06/compose/timeline.json)
-# 2.30-2.98; on the Genesis 7 v2 plan (2026-10-26, measured locally with the preserved model) 2.18-3.63 a line, 2.75
-# over the whole track, God's am_onyx at speed 0.9 at the same pace as the narrator. Estimates use 2.75 (the 170-179 s
-# band is narrow: the measured length decides, episode_build lines); the talking-clip ceilings use the slowest.
-WPS = 2.75
-WPS_SLOWEST = 2.25
+# Kokoro pace, words a second, by voice: voice_pace (E104; WPS 2.75 is the Short narration's, WPS_SLOWEST / WPS the
+# spread every voice is judged over). Estimates use each voice's pace (the 170-179 s band is narrow: the measured
+# length decides, episode_build lines); the talking-clip ceilings use its slowest.
 LINE_GAP = 0.35                      # silence between lines (episode_build.LINE_GAP)
 TAIL = 1.2                           # short_engine tail after the last word
 KEEPER_AUDIO = (2.0, 12.0)           # Flash input audio, per request
@@ -147,6 +147,14 @@ def words(text):
 
 def estimate_seconds(text, wps=WPS):
     return words(text) / wps
+
+
+def line_pace(item):
+    """(normal, slowest) words a second of the voice that speaks a voice-track item (no speaker: the Keeper's Short
+    narration), from voice_pace (E104). A voice not measured yet is timed as the narration here and refused where it
+    speaks (SPEAKER_PACE_UNMEASURED)."""
+    p = pace(item.get("speaker"))
+    return (p, slowest_pace(item.get("speaker"))) if p else (WPS, WPS_SLOWEST)
 
 
 def _plain(text):
@@ -353,6 +361,9 @@ def _speaker_problems(i, s, chars, span, span_slowest):
         out.append(f"SPEAKER_NOT_APPROVED shot {i} {sid}: {who} ({c.get('status')})")
     if not ch.voice(who, chars):
         out.append(f"SPEAKER_NO_VOICE shot {i} {sid}: {who} (characters.json `voice`)")
+    elif pace(who) is None:
+        out.append(f"SPEAKER_PACE_UNMEASURED shot {i} {sid}: {who} (measure its Kokoro voice on representative lines "
+                   "with the pinned model and add it to voice_pace.VOICE_PACE first, E104)")
     if who not in (s.get("characters") or []):
         out.append(f"SPEAKER_NOT_IN_SHOT shot {i} {sid}: {who} (in `characters`, its look in the prompt)")
     if s.get("seconds") is not None:
@@ -455,7 +466,9 @@ def check(plan, chars=None):
         problems.append(f"LINES_NOT_CARRIED from line {expect}")
 
     items, carried = sequence(plan)
-    est = [estimate_seconds(x["text"]) for x in items]
+    # each line at its own voice's measured pace, and at that voice's slowest (E104)
+    est = [estimate_seconds(x["text"], line_pace(x)[0]) for x in items]
+    est_slowest = [estimate_seconds(x["text"], line_pace(x)[1]) for x in items]
     total = sum(est) + LINE_GAP * (len(items) - 1) + TAIL
     # a line that quotes the KJV is Scripture for the >= 40 % share of our own words, whatever its kind says
     problems += [f"SHORT {p}" for p in publish_episode.short_problems(
@@ -489,10 +502,9 @@ def check(plan, chars=None):
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
         idx = carried[i]
-        span_words = " ".join(items[k]["text"] for k in idx)
         gaps = LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
-        slowest = words(span_words) / WPS_SLOWEST + gaps
+        slowest = sum(est_slowest[k] for k in idx) + gaps
         if talking(s) and talk_min(gaps) <= span and slowest <= TALK_LINE_MAX:
             # review of #408/#412: between a 4 s and a 5 s clip (one line: 3.94-4.14 s) the 10 % retime reaches
             # neither, so episode_build lines would refuse it (TALK_LINE_RETIME_OVER) after this plan had passed;

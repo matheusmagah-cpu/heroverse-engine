@@ -853,6 +853,26 @@
     "file": "migration/ops/test_minutes.py",
     "contains": "def test_report_is_a_speed_metric_with_no_budget_alarm"
    }
+  },
+  {
+   "id": "E104",
+   "date": "2026-10-26",
+   "error": "A Short plan could pass plan_check and then be refused at the build: plan_check timed every line, a character's too, at the narrator's 2.75 words/s, but Kokoro speaks Adam at 3.975, Eve at 3.732 and the scoffer at 3.55 words/s (arc-01-voice.json in PR #418; evidence/voice/20261026/kokoro-pace.json). A 12-word Eve line read 4.36 s here and is ~3.2 s in fact, under the 3.23 s a 4 s clip takes, so episode_build lines refused it (TALK_LINE_RETIME_OVER) after the plan had passed, and TALK_LINE_UNREACHABLE, the Keeper's floor and the 170-179 s estimate were judged at the wrong pace. Found by the long-video design agent (PR #418), which had measured the paces for the long's check.",
+   "fix": "One per-voice pace table, migration/production/bible/voice_pace.py, that plan_check imports (and long_plan_check in #418 is to import instead of its own VOICE_PACE): keeper 2.874 on the long and 2.75 for a Short's narration (82 Short lines re-measured: 2.756), god 2.811, adam 3.975, eve 3.732, noah 2.868, scoffer 3.55, serpent 2.728, measured locally with the hash-pinned Kokoro model. plan_check times each line at its speaker's pace and judges a talking shot from that pace to its slowest (the pace * 2.25 / 2.75); a talking character with no measured pace is refused (SPEAKER_PACE_UNMEASURED) until it is measured and added. The genesis-07 to 10 plans re-checked: none fails, and each, voiced in full, measured 173.3-174.0 s with every talking line reachable.",
+   "antidote": {
+    "file": "migration/production/bible/test_plan_check.py",
+    "contains": "def test_a_characters_talking_line_is_timed_at_its_own_voices_measured_pace"
+   }
+  },
+  {
+   "id": "E105",
+   "date": "2026-10-26",
+   "error": "ops/project_map.py dropped every shell-file edge when the checkout path contained '.claude' (an agent worktree is .claude/worktrees/<name>): the shell exclusion tested the absolute path's parts against SKIP, so a script run only through render_pilot.sh lost its workflow and test_project_map failed in agent worktrees while passing on the runner.",
+   "fix": "The exclusion tests the parts of the path relative to the repository root, as the Python modules' already did; a test builds a small repository under a .claude folder and checks the edge is kept while archive/ and a .claude folder inside the repository stay skipped.",
+   "antidote": {
+    "file": "migration/ops/test_project_map.py",
+    "contains": "def test_a_checkout_under_a_dot_claude_folder_keeps_its_shell_edges"
+   }
   }
  ]
 }

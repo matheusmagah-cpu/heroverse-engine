@@ -126,7 +126,7 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   pitch kept, at most +-10 %, else `TALK_LINE_RETIME_OVER`) before anything is laid out, and the compose holds the
   clip's last frame (<= 1.3 s) for the gap or the closing tail. A talking line is 3.23-11.55 s (one ceiling,
   `TALK_LINE_MAX`, the closing Keeper too), never ~3.94-4.14 s at any pace from the normal to the slowest
-  (`TALK_LINE_UNREACHABLE`: no clip within 10 %), so a single talking line has at least 12 words. The request binds the reference and the audio: "Image 1 is the narrator" (or the character's name) and "speaks the words of the
+  (`TALK_LINE_UNREACHABLE`: no clip within 10 %), at its own voice's measured pace (`voice_pace.py`, E104), so a single talking line has at least 12 words for the Keeper or Noah, 15 for the scoffer, 16 for Eve, 17 for Adam; a character whose voice has no measured pace cannot speak until it is measured (`SPEAKER_PACE_UNMEASURED`). The request binds the reference and the audio: "Image 1 is the narrator" (or the character's name) and "speaks the words of the
   audio clip, his lips moving in sync with the voice" (`bind_prompt`, replacing "speaks to the camera, his lips
   moving clearly with every word"), and Image 1 is the speaker's `talk_refs` speaking frame when it has one, sent in
   place of its approved refs (the Keeper: his calibration clip's frame, alone as in the tests that passed; the
@@ -154,7 +154,7 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   face, hands, robe or throne (best: do not name Him in a prompt at all; show what He does).
 
 **Length: 170-179 s from part 7** (5/6 winners ran 170-179 s, 0/3 weak; measured with the tail, below YouTube's
-180 s Shorts limit). plan_check estimates at 2.75 words a second (Kokoro, measured on Genesis 7 v2); the band is
+180 s Shorts limit). plan_check estimates each line at its voice's measured Kokoro pace (`voice_pace.py`: the narration 2.75 words a second, characters 2.7-4.0, E104); the band is
 narrow, so the measured length in `episode_build lines` decides; measure a new plan locally (`pilot_render.py voice`)
 before dispatching. Genesis 7 v2: 466 words, 24 lines, estimate 174.3 s, measured 173.9 s.
 

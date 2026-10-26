@@ -1,0 +1,369 @@
+{
+ "version": "voice-pace-measure-v1",
+ "date": "2026-10-26",
+ "how": "Voiced locally in a Claude session, no Actions run: pilot_render.py voice with the preserved source archive and the hash-pinned Kokoro v1.0 fp16 model and voices (verify_public_voice_asset.ASSETS sha256 f3a290d3... and bca610b8...), kokoro-onnx 0.4.9, onnxruntime 1.20.1 (episode.yml's pins). Each line's length is its first word to its last word in timeline.json, as episode_build lines cuts it; the plans' measured length lays the lines end to end with the 0.35 s gap and the 1.2 s tail, as the build does.",
+ "probe_lines": [
+  "Blessed be the Lord God of Shem; and Canaan shall be his servant.",
+  "Come into the ark, all of you. The door is open today, but it will not stay open.",
+  "Cursed be Canaan; a servant of servants shall he be unto his brethren.",
+  "Look at him, building a boat on dry ground! Tell us, old man, where is your flood?",
+  "Noah! Open the door! The water is coming up, and we were wrong. Open it, old man!",
+  "Seven days, he says. Seven days of rain, and the whole world drowned. You are mad.",
+  "The Lord told me to build it, and I will build it, whether you laugh or not.",
+  "We have warned you for a hundred years. Why will you not listen while there is still time?"
+ ],
+ "probe_by_voice": {
+  "noah": {
+   "lines": 8,
+   "words": 129,
+   "seconds": 44.98,
+   "pace": 2.868,
+   "line_min": 2.45,
+   "line_max": 3.526,
+   "voice": "bm_george"
+  },
+  "scoffer": {
+   "lines": 8,
+   "words": 129,
+   "seconds": 36.04,
+   "pace": 3.579,
+   "line_min": 3.05,
+   "line_max": 4.172,
+   "voice": "am_puck"
+  },
+  "serpent": {
+   "lines": 8,
+   "words": 129,
+   "seconds": 47.28,
+   "pace": 2.728,
+   "line_min": 2.23,
+   "line_max": 3.85,
+   "voice": "bm_fable"
+  },
+  "keeper": {
+   "lines": 8,
+   "words": 129,
+   "seconds": 45.85,
+   "pace": 2.813,
+   "line_min": 2.391,
+   "line_max": 3.526,
+   "voice": "am_michael"
+  },
+  "adam": {
+   "lines": 8,
+   "words": 129,
+   "seconds": 34.31,
+   "pace": 3.76,
+   "line_min": 3.277,
+   "line_max": 4.172,
+   "voice": "am_fenrir"
+  },
+  "eve": {
+   "lines": 8,
+   "words": 129,
+   "seconds": 37.73,
+   "pace": 3.419,
+   "line_min": 2.853,
+   "line_max": 4.355,
+   "voice": "af_heart"
+  }
+ },
+ "short_plans_voiced": {
+  "genesis-07-short": {
+   "measured_seconds": 173.8,
+   "estimate_single_2_75": 174.3,
+   "estimate_by_voice": 174.0,
+   "problems_other_than_draft_characters": [],
+   "pace_by_speaker": {
+    "god": {
+     "lines": 3,
+     "words": 41,
+     "seconds": 14.15,
+     "pace": 2.897,
+     "line_min": 2.692,
+     "line_max": 3.186
+    },
+    "keeper": {
+     "lines": 21,
+     "words": 413,
+     "seconds": 150.4,
+     "pace": 2.746,
+     "line_min": 1.991,
+     "line_max": 3.634
+    }
+   },
+   "talking_lines": [
+    {
+     "shot": "k-insight",
+     "speaker": "keeper",
+     "words": 22,
+     "measured_s": 8.42,
+     "build_retime": {
+      "target_s": 8.424,
+      "stretch": 1.0
+     }
+    },
+    {
+     "shot": "k-question",
+     "speaker": "keeper",
+     "words": 13,
+     "measured_s": 4.34,
+     "build_retime": {
+      "target_s": 4.55,
+      "stretch": 1.0484
+     }
+    },
+    {
+     "shot": "k-close",
+     "speaker": "keeper",
+     "words": 15,
+     "measured_s": 6.33,
+     "build_retime": {
+      "target_s": 6.55,
+      "stretch": 1.0343
+     }
+    }
+   ]
+  },
+  "genesis-08-short": {
+   "measured_seconds": 173.3,
+   "estimate_single_2_75": 173.3,
+   "estimate_by_voice": 171.6,
+   "problems_other_than_draft_characters": [],
+   "pace_by_speaker": {
+    "scoffer": {
+     "lines": 1,
+     "words": 17,
+     "seconds": 4.45,
+     "pace": 3.823,
+     "line_min": 3.823,
+     "line_max": 3.823
+    },
+    "god": {
+     "lines": 2,
+     "words": 33,
+     "seconds": 11.7,
+     "pace": 2.821,
+     "line_min": 2.553,
+     "line_max": 3.091
+    },
+    "keeper": {
+     "lines": 19,
+     "words": 403,
+     "seconds": 148.62,
+     "pace": 2.712,
+     "line_min": 2.055,
+     "line_max": 3.178
+    }
+   },
+   "talking_lines": [
+    {
+     "shot": "s-taunt",
+     "speaker": "scoffer",
+     "words": 17,
+     "measured_s": 4.45,
+     "build_retime": {
+      "target_s": 4.447,
+      "stretch": 1.0
+     }
+    },
+    {
+     "shot": "k-insight",
+     "speaker": "keeper",
+     "words": 22,
+     "measured_s": 8.66,
+     "build_retime": {
+      "target_s": 8.658,
+      "stretch": 1.0
+     }
+    },
+    {
+     "shot": "k-question",
+     "speaker": "keeper",
+     "words": 14,
+     "measured_s": 4.83,
+     "build_retime": {
+      "target_s": 4.55,
+      "stretch": 0.9418
+     }
+    },
+    {
+     "shot": "k-close",
+     "speaker": "keeper",
+     "words": 13,
+     "measured_s": 5.74,
+     "build_retime": {
+      "target_s": 5.736,
+      "stretch": 1.0
+     }
+    }
+   ]
+  },
+  "genesis-09-short": {
+   "measured_seconds": 174.0,
+   "estimate_single_2_75": 178.3,
+   "estimate_by_voice": 176.8,
+   "problems_other_than_draft_characters": [],
+   "pace_by_speaker": {
+    "scoffer": {
+     "lines": 1,
+     "words": 17,
+     "seconds": 5.42,
+     "pace": 3.134,
+     "line_min": 3.134,
+     "line_max": 3.134
+    },
+    "god": {
+     "lines": 1,
+     "words": 19,
+     "seconds": 5.63,
+     "pace": 3.374,
+     "line_min": 3.374,
+     "line_max": 3.374
+    },
+    "keeper": {
+     "lines": 22,
+     "words": 429,
+     "seconds": 153.73,
+     "pace": 2.791,
+     "line_min": 2.058,
+     "line_max": 3.472
+    }
+   },
+   "talking_lines": [
+    {
+     "shot": "s-door",
+     "speaker": "scoffer",
+     "words": 17,
+     "measured_s": 5.42,
+     "build_retime": {
+      "target_s": 5.425,
+      "stretch": 1.0
+     }
+    },
+    {
+     "shot": "k-insight",
+     "speaker": "keeper",
+     "words": 25,
+     "measured_s": 10.1,
+     "build_retime": {
+      "target_s": 10.55,
+      "stretch": 1.0449
+     }
+    },
+    {
+     "shot": "k-question",
+     "speaker": "keeper",
+     "words": 16,
+     "measured_s": 5.64,
+     "build_retime": {
+      "target_s": 5.641,
+      "stretch": 1.0
+     }
+    },
+    {
+     "shot": "k-close",
+     "speaker": "keeper",
+     "words": 16,
+     "measured_s": 6.55,
+     "build_retime": {
+      "target_s": 6.547,
+      "stretch": 1.0
+     }
+    }
+   ]
+  },
+  "genesis-10-short": {
+   "measured_seconds": 173.4,
+   "estimate_single_2_75": 178.4,
+   "estimate_by_voice": 177.8,
+   "problems_other_than_draft_characters": [],
+   "pace_by_speaker": {
+    "god": {
+     "lines": 3,
+     "words": 64,
+     "seconds": 19.61,
+     "pace": 3.263,
+     "line_min": 2.926,
+     "line_max": 3.77
+    },
+    "keeper": {
+     "lines": 20,
+     "words": 402,
+     "seconds": 144.88,
+     "pace": 2.775,
+     "line_min": 2.298,
+     "line_max": 3.538
+    }
+   },
+   "talking_lines": [
+    {
+     "shot": "k-insight",
+     "speaker": "keeper",
+     "words": 24,
+     "measured_s": 9.43,
+     "build_retime": {
+      "target_s": 9.427,
+      "stretch": 1.0
+     }
+    },
+    {
+     "shot": "k-question",
+     "speaker": "keeper",
+     "words": 15,
+     "measured_s": 5.07,
+     "build_retime": {
+      "target_s": 5.55,
+      "stretch": 1.0958
+     }
+    },
+    {
+     "shot": "k-close",
+     "speaker": "keeper",
+     "words": 15,
+     "measured_s": 6.53,
+     "build_retime": {
+      "target_s": 6.526,
+      "stretch": 1.0
+     }
+    }
+   ]
+  }
+ },
+ "short_narration_keeper": {
+  "lines": 82,
+  "words": 1647,
+  "seconds": 597.63,
+  "pace": 2.756,
+  "line_min": 1.991,
+  "line_max": 3.634
+ },
+ "short_god": {
+  "lines": 9,
+  "words": 157,
+  "seconds": 51.1,
+  "pace": 3.072,
+  "line_min": 2.553,
+  "line_max": 3.77
+ },
+ "table": {
+  "VOICE_PACE": {
+   "keeper": 2.874,
+   "god": 2.811,
+   "adam": 3.975,
+   "eve": 3.732,
+   "noah": 2.868,
+   "scoffer": 3.55,
+   "serpent": 2.728
+  },
+  "SHORT_NARRATION_PACE": 2.75,
+  "SLOW_RATIO": 0.8182,
+  "sources": {
+   "keeper (long narration), god, adam, eve": "evidence/long/20261026/arc-01-voice.json (PR #418), first run",
+   "noah, serpent": "probe_by_voice here",
+   "scoffer": "probe_by_voice + its 2 lines in the genesis-08/09 plans (10 lines, 163 words)",
+   "SHORT_NARRATION_PACE": "short_narration_keeper here (2.756) and genesis-07 before (2.75)"
+  }
+ },
+ "reading": "The Keeper's Short narration runs 2.756 words/s over 82 lines (the long's 2.874 is longer prose with fewer sentence pauses), so a Short keeps 2.75 for it. Characters are faster: the scoffer 3.55, Adam 3.76-3.98, Eve 3.42-3.73; Noah (2.868) and the serpent (2.728) speak at the narrator's pace. God's Short lines ran 3.07 (2.811 on the long): the estimate stays ~4 s long on a God-heavy plan (genesis-10), on the safe side of 179 s. No talking line in genesis-07 to 10 misses a clip at its measured length."
+}
