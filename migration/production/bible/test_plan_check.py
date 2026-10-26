@@ -357,14 +357,50 @@ class Plan(unittest.TestCase):
     def test_each_measured_pace_is_of_the_voice_the_speaker_still_has(self):
         """A pace belongs to a Kokoro voice: when characters.json gives a speaker another voice, measure it again."""
         import voice_pace
-        reg = pc.ch.registry()
-        god = json.loads((pc.ch.HERE / "characters.json").read_text())["god"]
-        for who, voice in voice_pace.MEASURED_WITH.items():
-            have = (god["voice"], god["speed"]) if who == pc.ch.GOD else (reg[who]["voice"], 1.0)
-            self.assertEqual(have, voice, who)
+        for who, (voice, speed) in voice_pace.MEASURED_WITH.items():
+            self.assertEqual(pc.ch.voice(who), {"voice_id": voice, "speed": speed}, who)
         self.assertEqual(set(voice_pace.MEASURED_WITH), set(voice_pace.VOICE_PACE))
+        self.assertEqual(set(voice_pace.VOICE_SLOWEST), set(voice_pace.VOICE_PACE) - {pc.ch.NARRATOR})
         for who in ("noah", "scoffer", "serpent"):
             self.assertIn(who, voice_pace.VOICE_PACE)
+
+    def test_a_speakers_bounds_are_never_looser_than_the_measurements(self):
+        """E104, review of #421: keeping the fastest run and slowing it by SLOW_RATIO gave Eve a slowest pace of 3.05
+        words a second, but her measured runs reach 3.42 and her lines 2.85: a 35-word line passed SPEAKER_LINE_TOO_LONG
+        at ~11.5 s and measures ~12.3 s, over TALK_LINE_MAX. The fast bound is the fastest run (too short), the slow
+        bound the slower of the slowest run x SLOW_RATIO and the slowest line (too long, unreachable)."""
+        import voice_pace
+        ev = HERE.parents[1] / "evidence"
+        arc = json.loads((ev / "long/20261026/arc-01-voice.json").read_text())["pace_by_voice_words_per_s"]
+        ns = json.loads((ev / "long/20261026/noah-scoffer-voice.json").read_text())["pace_by_voice_words_per_s"]
+        kp = json.loads((ev / "voice/20261026/kokoro-pace.json").read_text())
+        runs, lines = {}, {}
+        for run in arc.values():
+            for key, v in run.items():
+                runs.setdefault(key.split()[0], []).append(v["pace"])
+                if "line_min" in v:
+                    lines.setdefault(key.split()[0], []).append(v["line_min"])
+        for src in (ns, kp["probe_by_voice"]):
+            for who, v in src.items():
+                runs.setdefault(who, []).append(v["pace"])
+                lines.setdefault(who, []).append(v["line_min"])
+        for e in kp["short_plans_voiced"].values():
+            for who, v in e["pace_by_speaker"].items():
+                lines.setdefault(who, []).append(v["line_min"])
+        short_god = kp["short_god"]["pace"]
+        runs["god"].append(short_god)
+        for who, slow in voice_pace.VOICE_SLOWEST.items():
+            self.assertLessEqual(slow, min(runs[who]) * pc.SLOW_RATIO + 1e-3, who)
+            self.assertLessEqual(slow, min(lines[who]) + 1e-3, who)
+            self.assertGreaterEqual(pc.pace({"text": "x", "speaker": who}), max(runs[who]) - 1e-3, who)
+        # God in a Short at the Short-measured pace; the long keeps the long's
+        self.assertAlmostEqual(pc.pace({"text": "x", "speaker": "god"}), short_god, places=3)
+        line = " ".join(["Why do you hide from the voice?"] * 5)                           # 35 words
+        self.assertLessEqual(35 / (voice_pace.VOICE_PACE["eve"] * pc.SLOW_RATIO), pc.TALK_LINE_MAX)
+        self.assertGreater(35 / min(runs["eve"]) / pc.SLOW_RATIO, pc.TALK_LINE_MAX)
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=line)
+        self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
 
     def test_a_talking_line_no_clip_reaches_within_the_retime_is_refused_at_plan_time(self):
         """Review of #408: 3.944-4.136 s needs -11.25 % into a 4 s clip or +13.75 % into a 5 s one, over the 10 %

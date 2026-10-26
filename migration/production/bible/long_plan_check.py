@@ -73,7 +73,7 @@ ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "migration" / "production"))
 import plan_check as pc  # noqa: E402
-from voice_pace import VOICE_PACE  # noqa: E402  (shared with plan_check)
+from voice_pace import VOICE_PACE, VOICE_SLOWEST  # noqa: E402  (shared with plan_check)
 import script_check  # noqa: E402  (story_gate: the one reader of the structure's gate)
 
 ch = pc.ch
@@ -114,6 +114,13 @@ UPSCALE_S_PER_CLIP_S = 543 / 6
 def pace(item):
     """Words a second of the voice that speaks this line (the narration is the Keeper's)."""
     return VOICE_PACE.get(item.get("speaker") or ch.NARRATOR, pc.WPS)
+
+
+def slowest_pace(item):
+    """The same voice at its slowest: a speaker's VOICE_SLOWEST (its measured slow bound, E104), the narration's pace
+    slowed by SLOW_RATIO."""
+    who = item.get("speaker") or ch.NARRATOR
+    return VOICE_SLOWEST[who] if who in VOICE_SLOWEST else pace(item) * SLOW_RATIO
 
 
 def gate():
@@ -260,7 +267,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             problems.append(f"LINE_KIND_BEAT shot {i} {sid} ({beat} carries {'/'.join(BEAT_KINDS[beat])} lines)")
         gaps = LONG_LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
-        slowest = sum(pc.words(items[k]["text"]) / (pace(items[k]) * SLOW_RATIO) for k in idx) + gaps
+        slowest = sum(pc.words(items[k]["text"]) / slowest_pace(items[k]) for k in idx) + gaps
         problems += pc.talk_reach_problems(i, s, span, slowest, gaps)
         # the frozen QA's hold band; a talking line is judged at its slowest pace too (its clip is retimed to it)
         h_max = hold[i] + (slowest - span if pc.talking(s) else 0.0)
