@@ -593,5 +593,154 @@
   "with the talking reference (storyteller-ref.jpg, his `talk_refs` frame) facing the lens: face 100 %, the mouth starts as in the reference (opening 0.061) and settles closed within 2.5 s, then stays closed (0.002) to the end: passes (spread 0.041, motion 0.0006)",
   "with the talking reference looking down into the fire: face 17 %, FACE_NOT_FOUND",
   "so a voice-over Keeper uses his talking frame and faces the lens on a static camera (plan_check KEEPER_VO_POSE); the owner's 'into the fire' and 'closing the scroll' become the fire beside him and the scroll rolled closed while he faces the camera"
- ]
+ ],
+ "build_probes": {
+  "why": "coordinator, 2026-10-26 (no rework): genesis-07's three voice-over Keeper prompts probed as the build sends them before the resume build: 2 generations each, a prompt at 0 of 2 adjusted toward clip 5's wording and probed again (at most 4 more)",
+  "request": "as episode_build.request sends a voice-over Keeper shot: the plan's prompt unchanged, the talking frame alone (storyteller-ref.jpg, the source of ch-keeper-talk), no audio, sound false, seconds = vo_clip_seconds of the measured line (k-insight 9, k-question 5, k-close 8); a fresh exact 0-credit quote before each",
+  "generations": [
+   {
+    "shot": "k-insight",
+    "seconds": 9,
+    "conversation_id": "373107010075637504",
+    "clip": "probe-k-insight-1-373107010075637504.mp4",
+    "prompt": "the first k-insight prompt: ... looks straight into the camera, his lips closed, silent, his eyes sad and kind, breathing slowly as the flames flicker beside him. ... Tender and grave.",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0545,
+     "opening_motion": 0.00086,
+     "face_frames": 0.68,
+     "frames": 226,
+     "flags": [
+      "FACE_NOT_FOUND"
+     ]
+    },
+    "pass": false
+   },
+   {
+    "shot": "k-insight",
+    "seconds": 9,
+    "conversation_id": "373107104304894208",
+    "clip": "probe-k-insight-2-373107104304894208.mp4",
+    "prompt": "the first k-insight prompt: ... looks straight into the camera, his lips closed, silent, his eyes sad and kind, breathing slowly as the flames flicker beside him. ... Tender and grave.",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0604,
+     "opening_motion": 0.00129,
+     "face_frames": 0.6,
+     "frames": 226,
+     "flags": [
+      "FACE_NOT_FOUND"
+     ]
+    },
+    "pass": false
+   },
+   {
+    "shot": "k-question",
+    "seconds": 5,
+    "conversation_id": "373107181912649792",
+    "clip": "probe-k-question-1-373107181912649792.mp4",
+    "prompt": "the plan's",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0423,
+     "opening_motion": 0.00115,
+     "face_frames": 0.81,
+     "frames": 124,
+     "flags": []
+    },
+    "pass": true
+   },
+   {
+    "shot": "k-question",
+    "seconds": 5,
+    "conversation_id": "373107257543825984",
+    "clip": "probe-k-question-2-373107257543825984.mp4",
+    "prompt": "the plan's",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0505,
+     "opening_motion": 0.00119,
+     "face_frames": 0.88,
+     "frames": 124,
+     "flags": []
+    },
+    "pass": true
+   },
+   {
+    "shot": "k-close",
+    "seconds": 8,
+    "conversation_id": "373107379233670656",
+    "clip": "probe-k-close-1-373107379233670656.mp4",
+    "prompt": "the plan's",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0397,
+     "opening_motion": 0.00051,
+     "face_frames": 1.0,
+     "frames": 192,
+     "flags": []
+    },
+    "pass": true
+   },
+   {
+    "shot": "k-close",
+    "seconds": 8,
+    "conversation_id": "373107458262174784",
+    "clip": "probe-k-close-2-373107458262174784.mp4",
+    "prompt": "the plan's",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0479,
+     "opening_motion": 0.00061,
+     "face_frames": 1.0,
+     "frames": 192,
+     "flags": []
+    },
+    "pass": true
+   },
+   {
+    "shot": "k-insight",
+    "seconds": 9,
+    "conversation_id": "373109868900930176",
+    "clip": "probe-k-insight-b1-373109868900930176.mp4",
+    "prompt": "the plan's (revised toward clip 5)",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0486,
+     "opening_motion": 0.00076,
+     "face_frames": 0.85,
+     "frames": 226,
+     "flags": []
+    },
+    "pass": true
+   },
+   {
+    "shot": "k-insight",
+    "seconds": 9,
+    "conversation_id": "373109960089614080",
+    "clip": "probe-k-insight-b2-373109960089614080.mp4",
+    "prompt": "the plan's (revised toward clip 5)",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.042,
+     "opening_motion": 0.00047,
+     "face_frames": 0.99,
+     "frames": 226,
+     "flags": []
+    },
+    "pass": true
+   }
+  ],
+  "plan_prompts": {
+   "k-insight": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos.",
+   "k-question": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos.",
+   "k-close": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+  },
+  "pass_rate": {
+   "k-insight (first prompt)": "0/2 (face 0.68, 0.60: FACE_NOT_FOUND)",
+   "k-insight (revised: 'a calm kind look, breathing slowly', as clip 5)": "2/2 (face 0.85, 0.99)",
+   "k-question": "2/2 (face 0.81, 0.88)",
+   "k-close": "2/2 (face 1.00, 1.00)"
+  }
+ }
 }

@@ -193,8 +193,9 @@ An explicit, opt-in plan mode; a Keeper shot without the flag still talks, lip-s
 - **The build:** the request sends his `talk_refs` frame alone (else his approved refs), no audio, no speech clause;
   Pavo's audio is stripped. `lipsync_check.py --still-mouth` (the same pinned landmarker and inner-lip opening as the
   lips check) flags `MOUTH_TALKING` when the opening is both wide (p95 - p5 > 0.016 of the face height) and fast
-  (mean frame-to-frame change > 0.0032), and `FACE_NOT_FOUND` under 80 % of the frames, as for the lips; at most 2
-  regenerations, generated right after the talking shots (E99). The compose plays his clip unbroken from its 0 s over
+  (mean frame-to-frame change > 0.0032), and `FACE_NOT_FOUND` under 80 % of the frames, as for the lips; 6
+  generations like a talking shot (`attempts_for`: Pavo is free and 1 in 6 passed before the prompts were settled),
+  generated right after the talking shots (E99). The compose plays his clip unbroken from its 0 s over
   his line (slowed at most 1.3, never cut or held); his words and captions come from the voice track.
 - **Why these rules** (`evidence/pavo/20261026/keeper-vo/calibration.json`, 6 direct 0-credit Pavo clips + 42 talking
   clips): 42 talking clips (the Keeper's, passing and failing the lips alike, and the genesis-06 narrator) spread
@@ -203,9 +204,11 @@ An explicit, opt-in plan mode; a Keeper shot without the flag still talks, lip-s
   100 %, the mouth settling closed within 2.5 s from the reference's open mouth and staying closed (spread 0.041,
   motion 0.0006: passes); looking down into the fire, 17 % (`FACE_NOT_FOUND`). So the owner's "into the fire" and
   "closing the scroll" are the fire beside him and the scroll rolled closed while he faces the camera.
-- **Ready variant:** `plans/genesis-07-short-vo.json` is genesis-07-short.json with the three Keeper shots switched to
-  voice-over (prompts rewritten; k-close word for word the clip that passed; lines unchanged); every scene and God shot
-  byte-identical, so a resume of run 40307414749 keeps its 30 clips (E93: the same request). Measured locally with
-  Kokoro: 173.8 s (the Keeper's lines no longer retimed), Keeper 11.0 %, lesson 11.4 %. Its `episode` stays
-  `genesis-07-short`: episode.yml requires the plan file to be named after it, so it is dispatched by putting it in
-  place of genesis-07-short.json (by PR), not under its own name.
+- **genesis-07 is built this way:** `plans/genesis-07-short.json` now has its three Keeper shots as voice-over (prompts
+  rewritten, lines unchanged); every scene and God shot is byte-identical to the plan run 40307414749 built from
+  (commit 1c1ed79, tested), so its resume keeps the 30 clips (E93: the same request). Each Keeper prompt was probed as
+  the build sends it before the build (2 direct 0-credit clips each, `calibration.json` "build_probes"): k-question 2/2,
+  k-close 2/2 (word for word the clip that first passed); k-insight 0/2 with "his eyes sad and kind, breathing slowly
+  as the flames flicker beside him" (face 0.68, 0.60), 2/2 once rewritten as clip 5 ("a calm kind look, breathing
+  slowly"). Rule from it: a voice-over Keeper prompt stays close to the passing wording; a new one is probed first.
+  Measured locally with Kokoro: 173.8 s (the Keeper's lines no longer retimed), Keeper 11.0 %, lesson 11.4 %.
