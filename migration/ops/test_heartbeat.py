@@ -50,6 +50,18 @@ class Heartbeat(unittest.TestCase):
         got = hb.decide({}, idle, t(9, 41))
         self.assertFalse({"nightly-images.yml", "reconcile.yml", "publish-shorts.yml"} & set(got))
 
+    def test_every_heartbeat_mirrors_a_short_waiting_for_tiktok(self):
+        # E90: tiktok.yml's own cron never fired; the heartbeat dispatches it every hour while a Short public on
+        # YouTube is not on TikTok yet, and never when nothing waits
+        waiting = {**ALL, "tiktok_pending": True}
+        for hour in (0, 13, 23):
+            self.assertIn("tiktok.yml", hb.decide({}, waiting, t(hour, 41)))
+        self.assertNotIn("tiktok.yml", hb.decide({"tiktok.yml": [run(13, 45)]}, waiting, t(13, 50)))
+        self.assertNotIn("tiktok.yml", hb.decide({}, {**ALL, "tiktok_pending": False}, t(13, 41)))
+        wf = (Path(__file__).resolve().parents[2] / ".github/workflows/heartbeat.yml").read_text()
+        self.assertIn("tiktok_publish.py pending", wf)
+        self.assertIn("'tiktok_pending':", wf)
+
     def test_retired_gemini_minings_are_never_dispatched(self):
         # SYSTEM.md (2026-10-19): structure mining is done with vidIQ; the Gemini/RapidAPI chain failed its holdout
         retired = {"structure-mining.yml", "packaging-mining.yml", "mining-accuracy.yml"}
