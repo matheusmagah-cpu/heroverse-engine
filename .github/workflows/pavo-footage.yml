@@ -1,0 +1,123 @@
+name: HeroVerse Pavo clips to 1440p library footage (Real-ESRGAN on CPU, no paid call)
+# Owner, 2026-10-25 (DECISIONS.md "Pavo is the first source of AI video"): the long mixes ~50 % Pavo clips with
+# licensed footage. Each listed 720p Pavo clip is downloaded from the public Pavo CDN (no secret), stripped of its
+# audio, super-resolved frame by frame to 2560x1440 and recorded in the footage library with vetting PENDING; Claude
+# reviews library/sheets/pavo-<run>.jpg and approves in a later PR. One clip per job, ~10 in parallel.
+on:
+  workflow_dispatch:
+    inputs:
+      list:
+        description: Pavo clip list (migration/production/pilot-NNN/pavo.json or pavo-N.json)
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: heroverse-pavo-footage
+  cancel-in-progress: false
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      ids: ${{ steps.plan.outputs.ids }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - id: plan
+        name: Validate the list (Pavo CDN only) and keep the clips not yet in the library
+        env:
+          LIST: ${{ inputs.list }}
+        run: |
+          [[ "$LIST" =~ ^migration/production/pilot-[0-9]{3}/pavo(-[0-9]+)?\.json$ ]] || { echo "LIST_PATH_REFUSED"; exit 1; }
+          ids=$(python3 -I -B migration/production/footage/pavo_footage.py plan "$LIST")
+          echo "$ids"
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+
+  clip:
+    needs: plan
+    if: needs.plan.outputs.ids != '[]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    permissions:
+      contents: write   # release asset upload (assets.sh)
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        id: ${{ fromJSON(needs.plan.outputs.ids) }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      LIST: ${{ inputs.list }}
+      ID: ${{ matrix.id }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: ffmpeg and Real-ESRGAN general x4v3 on CPU (same model, weights and hash as images-upres.yml)
+        run: |
+          [[ "$LIST" =~ ^migration/production/pilot-[0-9]{3}/pavo(-[0-9]+)?\.json$ ]] || exit 1
+          [[ "$ID" =~ ^pavo-[a-z0-9][a-z0-9-]{1,70}$ ]] || exit 1
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg fonts-dejavu-core >/dev/null
+          python3 -m venv "$RUNNER_TEMP/up"
+          # torchvision pinned with torch so spandrel's dependency never pulls a newer CUDA torch from PyPI
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch==2.5.1 torchvision==0.20.1
+          "$RUNNER_TEMP/up/bin/pip" install -q --disable-pip-version-check spandrel==0.4.1 pillow==11.0.0 numpy==2.2.6
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/realesr-general-x4v3.pth" https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth
+          echo "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292  $RUNNER_TEMP/realesr-general-x4v3.pth" | sha256sum -c -
+      - name: Download, drop audio, upscale every native frame, 30 fps H.264 (timed)
+        run: |
+          start=$(date +%s)
+          "$RUNNER_TEMP/up/bin/python" -I -B migration/production/footage/pavo_footage.py make "$LIST" "$ID" "$RUNNER_TEMP/clip" "$RUNNER_TEMP/realesr-general-x4v3.pth"
+          echo "UPSCALE_SECONDS $(( $(date +%s) - start ))"
+      - name: Release asset, record and three review frames
+        run: |
+          mp4="$RUNNER_TEMP/clip/$ID.mp4"; sha=$(sha256sum "$mp4" | cut -d' ' -f1)
+          asset="footage-$ID-sha256-$sha.mp4"; cp "$mp4" "$RUNNER_TEMP/$asset"
+          bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" upload "$RUNNER_TEMP/$asset" --repo "$GITHUB_REPOSITORY" --clobber
+          tag=$(bash "$GITHUB_WORKSPACE/migration/ci/assets.sh" which "$asset" --repo "$GITHUB_REPOSITORY")
+          mkdir -p "$RUNNER_TEMP/rec"
+          python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));assert m['sha256']==sys.argv[3];m['release_asset']=sys.argv[2];m['release_tag']=sys.argv[4];open(sys.argv[5],'w').write(json.dumps(m,indent=1,ensure_ascii=False)+'\n')" \
+            "$RUNNER_TEMP/clip/$ID.json" "$asset" "$sha" "$tag" "$RUNNER_TEMP/rec/$ID.json"
+          d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$mp4")
+          # start, middle, end of the clip, id burned in (= footage.yml); "+" sorts below every id character, so each
+          # clip's three frames stay together on one row of the sheet
+          for k in 1 2 3; do
+            ffmpeg -v error -y -ss "$(python3 -c "print($d*($k*2-1)/6)")" -i "$mp4" -frames:v 1 \
+              -vf "scale=480:270,drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:text='$ID':x=6:y=6:fontsize=12:fontcolor=yellow:box=1:boxcolor=black@0.6" \
+              "$RUNNER_TEMP/rec/$ID+$k.jpg"
+          done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pavo-rec-${{ matrix.id }}
+          path: ${{ runner.temp }}/rec/
+          retention-days: 7
+
+  library:
+    needs: [plan, clip]
+    if: ${{ !cancelled() && needs.plan.outputs.ids != '[]' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write   # commit the records and the frame sheet to main
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: pavo-rec-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/rec
+      - name: Records into the library, frame sheet for vetting, commit to main
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg >/dev/null
+          lib=migration/production/footage/library; mkdir -p "$lib/sheets"
+          shopt -s nullglob; n=0
+          for rec in "$RUNNER_TEMP"/rec/pavo-*.json; do
+            id=$(basename "$rec" .json)
+            [[ "$id" =~ ^pavo-[a-z0-9][a-z0-9-]{1,70}$ ]] || { echo "BAD_RECORD_NAME"; exit 1; }
+            python3 -I -c "import json,sys;m=json.load(open(sys.argv[1]));assert m['id']==sys.argv[2] and m['source']=='pavo' and m['frame']==[2560,1440] and m['vetting']=='PENDING' and m['release_asset']" "$rec" "$id"
+            cp "$rec" "$lib/$id.json"; n=$((n+1))
+          done
+          [ "$n" -gt 0 ] || { echo "NO_NEW_CLIPS"; exit 1; }
+          LC_ALL=C ffmpeg -v error -y -pattern_type glob -i "$RUNNER_TEMP/rec/*.jpg" -vf "tile=3x$n" -frames:v 1 -q:v 4 "$lib/sheets/pavo-$GITHUB_RUN_ID.jpg"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$lib"
+          git commit -q -m "Footage library: $n Pavo clips at 1440p (Real-ESRGAN), vetting PENDING (run $GITHUB_RUN_ID)"
+          git pull --rebase -q origin main && git push -q origin HEAD:main
