@@ -133,8 +133,20 @@ class Builder:
                 "narration": self.narration, "shots": self.shots}
 
 
+# E108 (review of #426): the long's scene prompts state their period too (plan_check.plan_period_problems)
+PERIOD = f"{lc.pc.PERIODS['eden']['setting']} {lc.pc.PERIODS['eden']['exclude']}"
+
+
+def with_period(p):
+    p["period"] = "eden"
+    for s in p["shots"]:
+        if s.get("kind") == "scene" and isinstance(s.get("prompt"), str) and PERIOD not in s["prompt"]:
+            s["prompt"] = f"{s['prompt'].rstrip()} {PERIOD}"
+    return p
+
+
 def plan(**kw):
-    return Builder(**kw).build()
+    return with_period(Builder(**kw).build())
 
 
 def check(p, **kw):

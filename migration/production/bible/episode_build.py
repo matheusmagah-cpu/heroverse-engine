@@ -36,6 +36,8 @@ the episode record and dispatches publish-episode.yml.
                                                  predicted with its own functions, local Kokoro, refs and requests,
                                                  the talking setups that need a direct Pavo probe (episode_preflight.py)
   episode_build.py verify-preflight PLAN         episode.yml's first step: the committed report is PASS for this plan
+  episode_build.py check-regenerate PLAN         episode.yml's first step: the `regenerate` input (env REGENERATE, a
+                                                 comma list of shot ids, only with RESUME_RUN) names shots of this plan
   episode_build.py check-record EPISODE_JSON [VIDEO]
                                                  what publish-episode.yml would refuse in the record (title,
                                                  description, disclosure, the words), before it is dispatched
@@ -615,13 +617,41 @@ def bind_prompt(prompt, who, chars=None):
     return prompt
 
 
+SHOT_ID_INPUT = re.compile(r"^[a-z0-9-]+$")
+
+
+def regenerate_ids(plan, text, resume_run=""):
+    """Review of #426: episode.yml's `regenerate` input, a comma list of shot ids that a resume generates again even
+    though their request is unchanged (a clip Claude's frame review rejected), so only those shots are redone and no
+    prompt is edited to force it. Each id is ^[a-z0-9-]+$ and a shot of this plan; only with a resume_run (a build
+    from the start generates every shot anyway). [] when empty."""
+    text = (text or "").strip()
+    if not text:
+        return []
+    ids = [x.strip() for x in text.split(",")]
+    bad = [x for x in ids if not SHOT_ID_INPUT.fullmatch(x)]
+    if bad:
+        raise SystemExit("REGENERATE_REFUSED " + " ".join(repr(x) for x in bad) + " (shot ids: ^[a-z0-9-]+$, comma "
+                         "separated)")
+    known = {s.get("id") for s in plan["shots"]}
+    unknown = [x for x in ids if x not in known]
+    if unknown:
+        raise SystemExit("REGENERATE_UNKNOWN_SHOT " + " ".join(unknown) + f" (not a shot of {plan.get('episode')})")
+    if not (resume_run or "").strip():
+        raise SystemExit("REGENERATE_WITHOUT_RESUME (regenerate names shots of a resume_run; a build from the start "
+                         "generates every shot)")
+    return sorted(set(ids))
+
+
 def period_refusal(plan, shot):
     """E108: a scene's request is refused when its prompt does not state the story's period word for word or names
     what the period excludes (plan_check.period_problems, the same function plan_check and the preflight run): None
     or the refusal."""
     if shot.get("kind") != "scene":
         return None
-    per = plan_check.period(plan)
+    per, problem = plan_check.resolve_period(plan)
+    if problem:   # PERIOD_INVALID, PERIOD_AMBIGUOUS or plan_check.missing_period, word for word
+        return f"{problem} (shot {shot['id']})"
     found = plan_check.period_problems(0, shot, per)
     if not found:
         return None
@@ -810,9 +840,13 @@ def in_plan_order(report, plan):
     return report
 
 
-def generate_step(plan, work, lip_python, face_model, client=None, download=None, sleep=time.sleep, validate=None):
+def generate_step(plan, work, lip_python, face_model, client=None, download=None, sleep=time.sleep, validate=None,
+                  regenerate=None):
     work = Path(work)
     rel(work)
+    if regenerate is None:   # episode.yml passes the input through the env, never inline in the step
+        regenerate = regenerate_ids(plan, os.environ.get("REGENERATE", ""), os.environ.get("RESUME_RUN", ""))
+    forced = set(regenerate)
     layout, refs = load(work / "layout.json"), load(work / "refs.json")
     if validate is None:
         validate = client is None   # the real run; tests with a fake client pass validate=True to check it
@@ -831,6 +865,10 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
     report_path = work / "report.json"
     report = load(report_path) if report_path.exists() else {}
     report.update(episode=plan["episode"], shots=report.get("shots", {}))
+    if forced:
+        report["regenerated"] = sorted(forced)   # the shots this resume generated again on Claude's review
+    else:
+        report.pop("regenerated", None)
     for index, shot in risk_order(plan["shots"]):
         req = request(shot, index, plan, layout, refs)
         entry = {"kind": shot["kind"], "lines": shot.get("lines"), "request": {k: v for k, v in req.items()}}
@@ -875,8 +913,11 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
             more, measures = lipsync_flags(lip_python, face_model, path, REPO / talk_record(layout, shot)["wav"])
             return flags + more, measures
 
+        if shot["id"] in forced:
+            entry["regenerated"] = True       # its kept clip is not reused (episode.yml `regenerate`)
         done = report["shots"].get(shot["id"], {})
-        if done.get("attempts") and done.get("request") == entry["request"] and final.exists():
+        if (shot["id"] not in forced and done.get("attempts") and done.get("request") == entry["request"]
+                and final.exists()):
             # E93: a re-run restored from a failed run (episode.yml resume_run) keeps the clips already made, after
             # the same checks again; a changed request (plan, voice, references) is generated anew
             flags, _ = check(final)
@@ -1079,6 +1120,10 @@ def main(argv):
     cmd = argv[1]
     if cmd == "sheet" and len(argv) == 4:
         return sheet_step(argv[2], argv[3])
+    if cmd == "check-regenerate" and len(argv) == 3:
+        ids = regenerate_ids(load(argv[2]), os.environ.get("REGENERATE", ""), os.environ.get("RESUME_RUN", ""))
+        print(json.dumps({"regenerate": ids}))
+        return 0
     if cmd in ("preflight", "verify-preflight", "check-record"):   # E106: before any dispatch (episode_preflight.py)
         import episode_preflight
         return episode_preflight.main(argv)

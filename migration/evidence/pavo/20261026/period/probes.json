@@ -1,20 +1,23 @@
 {
  "version": "pavo-test-v1",
  "date": "2026-10-26",
- "purpose": "E108, before genesis-07's resume build: each rewritten scene prompt (the eight shots whose clips in run 40341856955 showed an anachronism, review.json) probed as the build sends it, with the period sentences, and its frame sheet looked at for anachronisms",
- "how": "direct calls through the heroverse-pavo MCP tools from a Claude session (no Actions run): pavo_quote_video first (9:16, 6 s and 8 s, text only: required_credits 0.0, zero_cost_confirmed true, is_estimate false), then pavo_generate_video, each at its own fresh exact zero-credit quote, text only, sound false, seconds as the plan's; every submission answered 'submitted' (none uncertain, none retried; one call answered PAVO_RATE_LIMITED before any job existed and was sent again after the running jobs finished); at most 2 generations per shot. Clips downloaded from the Pavo CDN into the session scratchpad only (not committed); 6 frames each (probe-<shot>-<n>.jpg), looked at by Claude",
+ "purpose": "E108, before genesis-07's resume build: each rewritten scene prompt (the eight shots whose clips in run 40341856955 showed an anachronism, review.json; then, after the review of #426, the reworded 'city of tents', 'lane' and 'room' prompts) probed as the build sends it, with the period sentences, and its frame sheet looked at for anachronisms",
+ "how": "direct calls through the heroverse-pavo MCP tools from a Claude session (no Actions run): pavo_quote_video first (9:16, 6 s and 8 s, text only: required_credits 0.0, zero_cost_confirmed true, is_estimate false), then pavo_generate_video, each at its own fresh exact zero-credit quote, text only, sound false, seconds as the plan's; every submission answered 'submitted' (none uncertain, none retried; three calls answered PAVO_RATE_LIMITED before any job existed and were sent again after running jobs finished); at most 2 generations per shot. Clips downloaded from the Pavo CDN into the session scratchpad only (not committed); 6 frames each (probe-<shot>-<n>.jpg), looked at by Claude",
  "wordings": {
   "v1": {
    "setting": "The ancient Near East before the flood: tents, mud-brick and the open plain.",
-   "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads.",
-   "note": "the coordinator's example wording; s-family said 'above the tent city'"
+   "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
   },
   "v2": {
    "setting": "The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain.",
-   "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads.",
-   "note": "the plan's (plan_check.PERIOD_SETTING / PERIOD_EXCLUDE)"
+   "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+  },
+  "v3": {
+   "setting": "The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain.",
+   "exclude": "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
   }
  },
+ "plan_wording": "v3 (plan_check.PERIOD_SETTING / PERIOD_EXCLUDE); the owner's exclusions word for word",
  "generations": [
   {
    "shot": "s-walker",
@@ -27,7 +30,6 @@
    "sheet": "probe-s-walker-1.jpg",
    "period_true": false,
    "seen": "robed man, small clay oil lamp, goat-hair tents, torches on poles; behind the camp a crenellated mud-brick wall with a tower; faces of passers-by visible",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind him. One man in a long wool robe, seen from behind, walks steadily between the goat-hair tents of the camp against a running crowd, carrying a small clay oil lamp cupped in his hand. Night in the ancient camp, torches on wooden poles and smoke drifting past. Calm against chaos. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -41,7 +43,6 @@
    "sheet": "probe-s-family-1.jpg",
    "period_true": false,
    "seen": "robed family on a dry hillside, dark tents and fires below; on the plain a mud-brick complex with a tall square tower and a dome (reads as a mosque)",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind them. A small family in long wool robes and shawls, seen from behind, climbs a dry hillside path above the tent city against a stream of people hurrying down past them toward the noise of the camp. Evening, the dark goat-hair tents and cooking fires spread across the plain below, a grey sky above. Quiet and resolute. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -55,7 +56,6 @@
    "sheet": "probe-s-wind-1.jpg",
    "period_true": true,
    "seen": "robed travellers on a dusty track, dark tents and low mud-brick ruins behind; two tiny lanterns by the track (barely visible); green-gold grass",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. Seen from behind, a line of travellers in long robes bows into a hard wind on a dusty track across the open plain, the dark tents of the camp behind them, their cloaks streaming back. Grey evening, low clouds racing over the plain. Mournful and heavy. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -69,7 +69,6 @@
    "sheet": "probe-s-theft-1.jpg",
    "period_true": false,
    "seen": "goat-hair tents and mud-brick houses, tunics and robes; iron cage lanterns on tripods along the lane",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. A strong man in a rough wool tunic, seen from behind, tears a sack of grain out of an old woman's hands, her face hidden by her shawl, as others walk past without stopping. A dusty lane between goat-hair tents at noon, harsh sun and hard shadows. Cruel and cold. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -83,7 +82,6 @@
    "sheet": "probe-s-quarrel-1.jpg",
    "period_true": false,
    "seen": "two robed bareheaded men by the fire before a tent wall; crenellated mud-brick towers behind the tent",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Two bareheaded men in long robes, in silhouette, faces in shadow, shove each other beside a fire, their huge shadows fighting on a goat-hair tent wall. Night, the fire the only light, sparks lifting into the dark. Tense and violent. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -97,7 +95,6 @@
    "sheet": "probe-s-ruins-1.jpg",
    "period_true": true,
    "seen": "old man in a robe among burned goat-hair tents, clay jars, embers; nothing of a later age",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. An old man in a long robe, seen from behind, walks slowly through a burned-out tent camp, blackened tent poles and broken clay jars around him, thin smoke rising from the ashes. Grey dawn, cold light and drifting smoke. Desolate and heavy. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -111,7 +108,6 @@
    "sheet": "probe-s-children-1.jpg",
    "period_true": false,
    "seen": "children in tunics among dark goat-hair tents, robed men; a mud-brick tower ruin behind; children's faces in profile",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot. Small children in simple wool tunics, seen from behind, play in the dust between dark goat-hair tents while robed men in silhouette argue loudly behind them. Late afternoon, low golden sun and drifting smoke. Innocent and uneasy. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -125,7 +121,6 @@
    "sheet": "probe-s-knife-1.jpg",
    "period_true": true,
    "seen": "robed man, knife, goat-hair tents, fire baskets on tripods; nothing of a later age (the blade reads like a modern bowie knife)",
-   "prompt_is_the_plans": false,
    "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. A man in a wool robe, seen from behind, tightens his grip on a bronze knife at his side as a stranger walks past him. A dusty lane between goat-hair tents at night, lit by a single torch on a wooden pole. Cold and threatening. The ancient Near East before the flood: tents, mud-brick and the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
@@ -139,7 +134,7 @@
    "sheet": "probe-s-walker-2.jpg",
    "period_true": true,
    "seen": "robed man with a clay oil lamp walking between goat-hair tents, torches on poles, robed crowd; no building",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind him. One man in a long wool robe, seen from behind, walks steadily between the goat-hair tents of the camp against a running crowd, carrying a small clay oil lamp cupped in his hand. Night in the ancient camp, torches on wooden poles and smoke drifting past. Calm against chaos. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "shot": "s-family",
@@ -152,7 +147,7 @@
    "sheet": "probe-s-family-2.jpg",
    "period_true": true,
    "seen": "robed family on a hillside path above a camp of dark tents and fires, a stream of robed people; no town, no building (the family walks down with the stream, not against it)",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot behind them. A small family in long wool robes and shawls, seen from behind, climbs a dry hillside path above the camp of tents against a stream of people hurrying down past them toward the noise of the camp. Evening, the dark goat-hair tents and cooking fires spread across the plain below, a grey sky above. Quiet and resolute. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "shot": "s-wind",
@@ -165,7 +160,7 @@
    "sheet": "probe-s-wind-2.jpg",
    "period_true": true,
    "seen": "line of robed travellers bowing into the wind past dark goat-hair tents, clay jars, fires; no building",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. Seen from behind, a line of travellers in long robes bows into a hard wind on a dusty track across the open plain, the dark tents of the camp behind them, their cloaks streaming back. Grey evening, low clouds racing over the plain. Mournful and heavy. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "shot": "s-theft",
@@ -178,7 +173,7 @@
    "sheet": "probe-s-theft-2.jpg",
    "period_true": true,
    "seen": "the man tears the sack from the old woman among goat-hair tents, fire bowls, robes and tunics; no building",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, handheld drift. A strong man in a rough wool tunic, seen from behind, tears a sack of grain out of an old woman's hands, her face hidden by her shawl, as others walk past without stopping. A dusty lane between goat-hair tents at noon, harsh sun and hard shadows. Cruel and cold. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "shot": "s-knife",
@@ -191,7 +186,7 @@
    "sheet": "probe-s-knife-2.jpg",
    "period_true": false,
    "seen": "robed man, knife, goat-hair tents, torch on a pole, clay jars; small metal-and-glass candle lanterns on the ground by the tents (a later age)",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Close-up, slow tilt down. A man in a wool robe, seen from behind, tightens his grip on a bronze knife at his side as a stranger walks past him. A dusty lane between goat-hair tents at night, lit by a single torch on a wooden pole. Cold and threatening. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "shot": "s-quarrel",
@@ -204,7 +199,7 @@
    "sheet": "probe-s-quarrel-2.jpg",
    "period_true": false,
    "seen": "two robed men shoving by the fire before a tent; a small metal-and-glass candle lantern on the ground in the foreground (a later age)",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. Two bareheaded men in long robes, in silhouette, faces in shadow, shove each other beside a fire, their huge shadows fighting on a goat-hair tent wall. Night, the fire the only light, sparks lifting into the dark. Tense and violent. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "shot": "s-ruins",
@@ -217,7 +212,7 @@
    "sheet": "probe-s-ruins-2.jpg",
    "period_true": true,
    "seen": "old man in a robe through a burned camp of tents, clay jars, embers, tripods; nothing of a later age",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow tracking shot. An old man in a long robe, seen from behind, walks slowly through a burned-out tent camp, blackened tent poles and broken clay jars around him, thin smoke rising from the ashes. Grey dawn, cold light and drifting smoke. Desolate and heavy. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   },
   {
    "shot": "s-children",
@@ -230,13 +225,104 @@
    "sheet": "probe-s-children-2.jpg",
    "period_true": true,
    "seen": "children in plain tunics play with a ball before a dark goat-hair tent, robed figures inside, clay jars and small fires; no building, nothing of a later age",
-   "prompt_is_the_plans": true
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow tracking shot. Small children in simple wool tunics, seen from behind, play in the dust between dark goat-hair tents while robed men in silhouette argue loudly behind them. Late afternoon, low golden sun and drifting smoke. Innocent and uneasy. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "shot": "s-noah",
+   "generation": 1,
+   "wording": "v2",
+   "conversation_id": "373136842524801728",
+   "seconds": 8,
+   "quoted_credits": 0,
+   "submission": "submitted",
+   "sheet": "probe-s-noah-1.jpg",
+   "period_true": false,
+   "seen": "robed old man on a hillside above a camp of goat-hair tents and fires; no town, no tower; but four metal-and-glass candle lanterns on the ground in the foreground (a later age)",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. One old man in silhouette, his face never visible, stands alone on a dry hillside above the camp of dark goat-hair tents with his back to the camera, his head lifted toward the storm. Dusk, the last light behind the black clouds outlining his shape, wind pulling at his robe. Lonely and steadfast. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "shot": "s-tents",
+   "generation": 1,
+   "wording": "v2",
+   "conversation_id": "373136867891933248",
+   "seconds": 6,
+   "quoted_credits": 0,
+   "submission": "submitted",
+   "sheet": "probe-s-tents-1.jpg",
+   "period_true": true,
+   "seen": "a vast camp of dark goat-hair tents, cooking fires and smoke at dusk, robed people; no building, no town",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme wide establishing shot, slow crane down. A vast camp of dark goat-hair tents fills a dry plain, smoke from hundreds of cooking fires drifting upward. Dusk, a low orange sun under heavy clouds, long shadows across the dust. Grand and uneasy. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "shot": "s-scroll",
+   "generation": 1,
+   "wording": "v2",
+   "conversation_id": "373137513227033152",
+   "seconds": 6,
+   "quoted_credits": 0,
+   "submission": "submitted",
+   "sheet": "probe-s-scroll-1.jpg",
+   "period_true": true,
+   "seen": "a hand unrolls a scroll on a woven mat, a clay oil lamp and a clay bowl inside a tent; no room, no table (the scroll's script looks like a later, Arabic-like hand)",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Extreme close-up, slow push-in. A hand seen from behind slowly unrolls an old scroll across a woven mat on the ground, the ink lines catching the light. Inside a quiet goat-hair tent at night, one clay oil lamp beside the scroll. Hushed and heavy. The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "shot": "s-noah",
+   "generation": 2,
+   "wording": "v3",
+   "conversation_id": "373138944672139904",
+   "seconds": 8,
+   "quoted_credits": 0,
+   "submission": "submitted",
+   "sheet": "probe-s-noah-2.jpg",
+   "period_true": true,
+   "seen": "robed old man on a hillside above dark goat-hair tents, open fires and torches; no lantern, no building",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow push-in. One old man in silhouette, his face never visible, stands alone on a dry hillside above the camp of dark goat-hair tents with his back to the camera, his head lifted toward the storm. Dusk, the last light behind the black clouds outlining his shape, wind pulling at his robe. Lonely and steadfast. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "shot": "s-raid",
+   "generation": 1,
+   "wording": "v3",
+   "conversation_id": "373138967643819072",
+   "seconds": 8,
+   "quoted_credits": 0,
+   "submission": "submitted",
+   "sheet": "probe-s-raid-1.jpg",
+   "period_true": true,
+   "seen": "robed men with torches run between goat-hair tents, a tent wall catches fire; nothing of a later age (one frame has a purple glowing ring artifact in the flames)",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Silhouettes of men with torches run between the tents and one tent wall catches fire behind them. Night, orange firelight and smoke against the dark. Violent and fearful. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "shot": "s-flee",
+   "generation": 1,
+   "wording": "v3",
+   "conversation_id": "373138994348986624",
+   "seconds": 8,
+   "quoted_credits": 0,
+   "submission": "submitted",
+   "sheet": "probe-s-flee-1.jpg",
+   "period_true": true,
+   "seen": "a father and two children in tunics run past burning goat-hair tents, robed men with torches; nothing of a later age (they run toward the fire, not from it)",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium wide shot, fast handheld tracking shot. Silhouettes of a family seen from behind run from a burning tent, a father dragging two children through the smoke while men with torches rush past them. Night, orange fire and black smoke filling the path between the tents. Terrifying and chaotic. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
+  },
+  {
+   "shot": "s-crowd",
+   "generation": 1,
+   "wording": "v3",
+   "conversation_id": "373139094463377472",
+   "seconds": 8,
+   "quoted_credits": 0,
+   "submission": "submitted",
+   "sheet": "probe-s-crowd-1.jpg",
+   "period_true": true,
+   "seen": "a robed crowd raises torches and fists among goat-hair tents and fires at night; no lantern, no building",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, slow pull back. Silhouettes of a jostling crowd raise torches and fists between the tents, faces hidden by the glare. Night, dozens of torches lighting the smoke from below. Chaotic and loud. The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain. No stone buildings, towers, churches, glass lanterns, modern clothing or roads. No text, no logos."
   }
  ],
  "result": {
   "v1": "3 of 8 period-true: 'mud-brick' put a mud-brick tower or crenellated wall behind 4 (s-walker, s-family with a dome, s-quarrel, s-children) and iron cage lanterns in s-theft",
-  "v2": "6 of 8 period-true: no building, tower, town or road in any; small metal-and-glass candle lanterns in s-knife and s-quarrel (named only in the exclusion sentence; 'clay lamps' in the setting may draw a lamp-like prop)",
-  "kept": "v2 in the plan; the owner's exclusions word for word",
-  "residual": "a small lantern prop can still appear in a night shot (2 of 8 v2 probes); no gate measures it, so the per-shot frame sheet of the build is where it is seen and that shot is regenerated by a resume with its own new prompt"
+  "v2": "8 of 11 period-true: no building, tower, town or road in any; a small metal-and-glass candle lantern in 3 night shots (s-knife, s-quarrel, s-noah); 'clay lamps' in the setting drew a lamp prop",
+  "v3": "4 of 4 period-true: no lantern, no building in any, s-noah among them",
+  "residual": "a stray prop or an AI artifact can still appear (the s-raid flame ring); no gate measures it, so the per-shot frame sheet of the build is where it is seen, and episode.yml `regenerate` redoes only that shot"
  }
 }

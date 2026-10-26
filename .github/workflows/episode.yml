@@ -16,6 +16,10 @@ on:
         description: Run id of a failed build of the same plan whose clips are kept (E93); empty = from the start
         required: false
         default: ""
+      regenerate:
+        description: With resume_run, a comma list of shot ids generated again although their request is unchanged (clips Claude's review rejected); empty = none
+        required: false
+        default: ""
 permissions:
   contents: read
 concurrency:
@@ -35,6 +39,9 @@ jobs:
     env:
       PLAN: ${{ inputs.plan }}
       GH_TOKEN: ${{ github.token }}
+      # review of #426: the inputs reach the steps through the env only, never inline in a run script
+      RESUME_RUN: ${{ inputs.resume_run }}
+      REGENERATE: ${{ inputs.regenerate }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -50,6 +57,8 @@ jobs:
           # E106: the committed preflight (local Kokoro, refs, requests, every talking setup probed) is PASS for this
           # plan and character bible; else the build stops here, before any secret, voice or Pavo call
           python3 -I -B migration/production/bible/episode_build.py verify-preflight "$PLAN"
+          # review of #426: the shots to generate again (ids of this plan, only with resume_run), before any secret
+          python3 -I -B migration/production/bible/episode_build.py check-regenerate "$PLAN"
           echo "episode=$ep" >> "$GITHUB_OUTPUT"
           echo "EP=$ep" >> "$GITHUB_ENV"
           echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout: Pavo reads repo paths only

@@ -1122,6 +1122,30 @@
    ],
    "note": "E106: the kept records and repository images checked at plan time; a release asset's sha256 by preflight --refs (it downloads, free)"
   },
+  "REGENERATE_REFUSED": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py check-regenerate",
+    "migration/production/bible/episode_build.py::def regenerate_ids("
+   ],
+   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
+  },
+  "REGENERATE_UNKNOWN_SHOT": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py check-regenerate",
+    "migration/production/bible/episode_build.py::def regenerate_ids("
+   ],
+   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
+  },
+  "REGENERATE_WITHOUT_RESUME": {
+   "class": "A",
+   "early": [
+    ".github/workflows/episode.yml::episode_build.py check-regenerate",
+    "migration/production/bible/episode_build.py::def regenerate_ids("
+   ],
+   "note": "review of #426: episode.yml's `regenerate` input (shot ids a resume generates again, their request unchanged) is checked by the same function, regenerate_ids, in the plan step before any secret (episode_build.py check-regenerate) and again in generate_step"
+  },
   "RENDER_HOLD": {
    "class": "D",
    "resume": "an owner hold: the queue and the publishers wait; nothing is redone when it lifts"
@@ -1151,6 +1175,10 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "RESUME_RUN": {
+   "class": "N",
+   "why": "an environment variable: episode.yml passes its resume_run input through the env (review of #426), read by regenerate_ids"
+  },
   "RESUME_RUN_REFUSED": {
    "class": "A",
    "early": ".github/workflows/episode.yml::RESUME_RUN_REFUSED",
@@ -1175,12 +1203,12 @@
   "SCENE_PERIOD_CONFLICT": {
    "class": "A",
    "early": "migration/production/bible/plan_check.py::def period_problems(",
-   "note": "E108 (review of genesis-07 run 40341856955: a modern coat and a glass lantern on a cobbled European street, a town with church towers): every scene prompt states its story's period word for word, setting and exclusions; plan_check refuses a prompt that, outside the exclusion sentence, names what the period excludes (PERIOD_AVOID: road, street, lantern, glass, tower, church, town, coat, cap...); episode_build.request refuses the same by period_refusal"
+   "note": "E108: with the setting and exclusion sentences taken out, a scene prompt names nothing the period excludes (PERIOD_AVOID: city, lane, room, street, road, building, brick, wall, house, dome, tower, church, town, village, lantern, glass lantern or jar, coat, hat, peaked cap...); plan_check, long_plan_check and episode_build.request (period_refusal) by the same function"
   },
   "SCENE_PERIOD_MISSING": {
    "class": "A",
-   "early": "migration/production/bible/plan_check.py::def period_problems(",
-   "note": "E108 (review of genesis-07 run 40341856955: a modern coat and a glass lantern on a cobbled European street, a town with church towers): every scene prompt states its story's period word for word, setting and exclusions; plan_check refuses a scene prompt without them, or a story with no period (the plan's `period`, else its passage); episode_build.request refuses the same by period_refusal, which calls plan_check.period_problems"
+   "early": "migration/production/bible/plan_check.py::def plan_period_problems(",
+   "note": "E108: every scene prompt states its story's period word for word, setting and exclusions; plan_check and long_plan_check refuse a prompt without them (plan_period_problems), and a story with no period once (missing_period, the one message; a malformed `period` is PERIOD_INVALID, a passage across the flood PERIOD_AMBIGUOUS); episode_build.request refuses the same by period_refusal, which calls resolve_period and period_problems"
   },
   "SCOPE_MISSING": {
    "class": "D",
@@ -1512,8 +1540,7 @@
       "migration/production/bible/episode_build.py::def face_flags",
       "migration/production/bible/episode_build.py::def still_mouth_flags",
       "migration/production/bible/episode_build.py::def lipsync_flags",
-      "migration/production/bible/episode_preflight.py::def probe_rows",
-      "migration/production/bible/plan_check.py::SCENE_PERIOD_MISSING"
+      "migration/production/bible/episode_preflight.py::def probe_rows"
      ],
      "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
     },
@@ -1531,11 +1558,15 @@
      "checks": [
       "migration/production/bible/plan_check.py::PERIOD_SETTING",
       "migration/production/bible/plan_check.py::PERIOD_EXCLUDE",
+      "migration/production/bible/plan_check.py::PERIOD_AVOID",
       "migration/production/bible/plan_check.py::SCENE_PERIOD_MISSING",
       "migration/production/bible/plan_check.py::SCENE_PERIOD_CONFLICT",
+      "migration/production/bible/plan_check.py::PERIOD_INVALID",
+      "migration/production/bible/plan_check.py::PERIOD_AMBIGUOUS",
+      "migration/production/bible/long_plan_check.py::pc.plan_period_problems",
       "migration/production/bible/episode_build.py::def period_refusal"
      ],
-     "residual": "E108: period accuracy of the Short's backgrounds, clothing and objects. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age object no word asked for, so the per-shot frame sheet is where it is seen. The long's plan (long_plan_check) has no period rule yet."
+     "residual": "E108: period accuracy of the backgrounds, clothing and objects, for the Short and the long. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age prop no word asked for (a small candle lantern in 2 of 8 probes), so the per-shot frame sheet is where it is seen, and episode.yml `regenerate` redoes only that shot"
     }
    },
    "captions_readable_and_synced": {

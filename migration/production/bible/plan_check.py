@@ -57,8 +57,10 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   voice, and never with a body, face, hands, robe or throne.
 - the period (E108): every scene prompt states its story's period word for word, the setting and the exclusions
   (PERIOD_SETTING / PERIOD_EXCLUDE for Genesis before the flood), and names nothing the period excludes outside the
-  exclusion sentence (SCENE_PERIOD_CONFLICT); a story with no period (the plan's `period`, else its passage) is
-  SCENE_PERIOD_MISSING. episode_build.request refuses the same by period_refusal.
+  setting and exclusion sentences (SCENE_PERIOD_CONFLICT: city, lane, room, street, tower, lantern...); the period
+  is the plan's `period` (a malformed or unknown one is PERIOD_INVALID) or its passage's (a passage across the
+  flood is PERIOD_AMBIGUOUS); none is SCENE_PERIOD_MISSING. episode_build.request refuses the same by period_refusal,
+  long_plan_check by plan_period_problems.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
 A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
@@ -147,17 +149,49 @@ KJV_RUN = 8
 # (evidence/pavo/20261026/period/) are the measure. A story's period comes from the plan (`period`: a preset name or
 # its own {"setting", "exclude", "avoid"?}) or, when the plan names none, from its passage (STORY_PERIODS); a story with
 # neither is SCENE_PERIOD_MISSING, so a later story cannot slip through without one.
-PERIOD_SETTING = ("The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the "
-                  "open plain.")
+PERIOD_SETTING = "The ancient Near East before the flood: only goat-hair tents, open fires and torches on the open plain."
 PERIOD_EXCLUDE = "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
-# what the rest of the prompt may not ask for (outside the exclusion sentence): words that put a later age on screen
-PERIOD_AVOID = (r"streets?", r"roads?", r"cobbl\w*", r"pavements?", r"lanterns?", r"glass", r"towers?", r"church\w*",
-                r"steeples?", r"spires?", r"chimneys?", r"castles?", r"towns?", r"villages?", r"coats?", r"hats?",
-                r"caps?", r"stone (?:buildings?|houses?)", r"brick houses?")
-PERIODS = {"before-the-flood": {"setting": PERIOD_SETTING, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)}}
-# (book, first chapter, last chapter, period) for a plan with no `period`: Cain's city to the eve of the flood
-STORY_PERIODS = (("Genesis", 4, 6, "before-the-flood"),)
-PASSAGE = re.compile(r"^\s*((?:[1-3] )?[A-Z][a-z]+(?: of [A-Z][a-z]+)?)\s+(\d+)")
+# what the rest of the prompt (the setting and exclusion sentences taken out) may not ask for: words that put a later
+# age or a built town on screen. Review of #426: "city of tents", "lane" and "room" are the words that drew the
+# street, the town and the house in run 40341856955, so they are refused too; a tent's or goat-hair wall is not a
+# built wall; "glass" and "cap" only as the object ("still as glass" and "snow caps" are not refused)
+PERIOD_AVOID = (r"streets?", r"roads?", r"cobbl\w*", r"pavements?", r"lanterns?", r"kerosene",
+                r"glass (?:lanterns?|lamps?|jars?|bottles?|windows?|panes?|cups?)", r"windows?",
+                r"towers?", r"church\w*", r"steeples?", r"spires?", r"chimneys?", r"castles?", r"domes?",
+                r"towns?", r"villages?", r"cit(?:y|ies)", r"lanes?", r"buildings?", r"(?:mud-)?bricks?",
+                r"(?<!tent )(?<!goat-hair )walls?", r"houses?", r"rooms?", r"tables?",
+                r"coats?", r"hats?", r"(?:peaked|flat|baseball|cloth) caps?")
+# the flood and the new earth (genesis-08 to 10: the ark, the waters, Ararat): the same exclusions
+PERIOD_SETTING_FLOOD = ("The ancient Near East in the days of the flood: the great wooden ark, the open water, the "
+                        "mountains of Ararat and the empty new earth.")
+# the making of the world and Eden (the arc-01 long, Genesis 1-3): no human work at all
+PERIOD_SETTING_EDEN = ("The world at its making and the garden of Eden: untouched wild land, rivers, trees and open "
+                       "sky.")
+PERIODS = {"eden": {"setting": PERIOD_SETTING_EDEN, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)},
+           "before-the-flood": {"setting": PERIOD_SETTING, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)},
+           "the-flood": {"setting": PERIOD_SETTING_FLOOD, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)}}
+# (book, first chapter, last chapter, period) for a plan with no `period`: Cain's city to the eve of the flood (Genesis
+# 6:14-22, the ark commanded, is still before it), then the flood to the covenant of the rainbow (7-9)
+STORY_PERIODS = (("Genesis", 1, 3, "eden"), ("Genesis", 4, 6, "before-the-flood"), ("Genesis", 7, 9, "the-flood"))
+# "Genesis 6:5-13" (chapter 6), "Genesis 6:14-7:5" (6 to 7), "Genesis 6-8", "Genesis 7"; the end chapter matters (a
+# passage may cross the flood)
+PASSAGE = re.compile(r"^\s*((?:[1-3] )?[A-Z][a-z]+(?: of [A-Z][a-z]+)?)\s+(\d+)(:\d+)?"
+                     r"(?:\s*[-\u2013]\s*(\d+)(:\d+)?)?")
+
+
+def passage_chapters(passage):
+    """(book, first chapter, last chapter) of a passage, or None."""
+    m = PASSAGE.match(passage or "")
+    if not m:
+        return None
+    first = int(m.group(2))
+    if m.group(4) is None:
+        last = first
+    elif m.group(3) and not m.group(5):   # 6:5-13: a verse range inside chapter 6
+        last = first
+    else:                                  # 6:14-7:5 or 6-8
+        last = int(m.group(4))
+    return m.group(1), first, max(first, last)
 # E95 (measured 2026-10-26, evidence/pavo/20261026/keeper-audio-binding.json): Pavo keeps our input audio only when
 # the clip it is asked for is at most ~0.65 s longer than the speech; at 1.6 s or more it makes its own track. A talking
 # clip is ceil(speech) seconds (4-12), the speech 0.25-0.65 s shorter than it: episode_build retimes a line that misses
@@ -423,48 +457,90 @@ def prompt_problems(i, shot):
     return out
 
 
+def _given_period(given):
+    """The plan's own `period`: (period, None) or (None, the reason it is refused)."""
+    if isinstance(given, str):
+        if given in PERIODS:
+            return PERIODS[given], None
+        return None, f"unknown preset {given!r}; one of {sorted(PERIODS)} or its own setting and exclusions"
+    if not isinstance(given, dict):
+        return None, f"a preset name or {{setting, exclude, avoid?}}, not {type(given).__name__}"
+    for k in ("setting", "exclude"):
+        if not isinstance(given.get(k), str) or not given[k].strip():
+            return None, f"`{k}` is missing or empty"
+    avoid = given.get("avoid", list(PERIOD_AVOID))   # no `avoid`: the shared list, never none
+    if not isinstance(avoid, list) or not avoid or not all(isinstance(a, str) and a for a in avoid):
+        return None, "`avoid` is a non-empty list of regular expressions"
+    for a in avoid:
+        try:
+            re.compile(rf"(?i)\b(?:{a})\b")
+        except re.error as exc:
+            return None, f"`avoid` {a!r} is not a regular expression ({exc})"
+    return {"setting": given["setting"].strip(), "exclude": given["exclude"].strip(), "avoid": avoid}, None
+
+
+def resolve_period(plan):
+    """E108: (period, problem). The period {"setting", "exclude", "avoid"} comes from the plan's `period` (a PERIODS
+    name or its own wording; a malformed or unknown one is PERIOD_INVALID, never passed over for the passage) or,
+    when the plan names none, from every chapter of its passage (STORY_PERIODS): chapters in two periods, or partly
+    in none, are PERIOD_AMBIGUOUS until the plan sets `period`; none is SCENE_PERIOD_MISSING (missing_period, the
+    one message)."""
+    if "period" in plan:
+        per, why = _given_period(plan["period"])
+        return (per, None) if per else (None, f"PERIOD_INVALID (the plan's `period`: {why}; E108)")
+    passage = plan.get("passage") or ""
+    found = passage_chapters(passage)
+    if found:
+        book, first, last = found
+        names = {next((n for b, lo, hi, n in STORY_PERIODS if b == book and lo <= c <= hi), None)
+                 for c in range(first, last + 1)}
+        if len(names) > 1:
+            return None, (f"PERIOD_AMBIGUOUS ({passage} spans {sorted(str(n) for n in names)}: set the plan's "
+                          "`period`; E108)")
+        if names != {None}:
+            return PERIODS[names.pop()], None
+    return None, missing_period(plan)
+
+
+def missing_period(plan):
+    """The one SCENE_PERIOD_MISSING message for a story with no period (plan_check, long_plan_check, the build)."""
+    return (f"SCENE_PERIOD_MISSING (no period for {plan.get('passage') or 'this story'}: the plan's `period` names one "
+            f"of {sorted(PERIODS)} or gives its own setting and exclusions; E108)")
+
+
 def period(plan):
-    """E108: the story's period {"setting", "exclude", "avoid"} from the plan's `period` (a PERIODS name or its own
-    wording) or, when it names none, from its passage (STORY_PERIODS); None when there is none or it is malformed."""
-    given = plan.get("period")
-    if given is not None:
-        if isinstance(given, str):
-            return PERIODS.get(given)
-        if not isinstance(given, dict):
-            return None
-        if not all(isinstance(given.get(k), str) and given[k].strip() for k in ("setting", "exclude")):
-            return None
-        avoid = given.get("avoid", [])
-        if not isinstance(avoid, list) or not all(isinstance(a, str) and a for a in avoid):
-            return None
-        return {"setting": given["setting"].strip(), "exclude": given["exclude"].strip(), "avoid": avoid}
-    m = PASSAGE.match(plan.get("passage") or "")
-    if m:
-        for book, first, last, name in STORY_PERIODS:
-            if m.group(1) == book and first <= int(m.group(2)) <= last:
-                return PERIODS[name]
-    return None
+    """The story's period, or None (resolve_period says why)."""
+    return resolve_period(plan)[0]
 
 
 def period_problems(i, shot, per):
-    """E108: a scene prompt states its period word for word (setting and exclusions) and, outside the exclusion
-    sentence, names nothing the period excludes. [] for a Keeper shot (his own campfire, his own look)."""
-    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str):
+    """E108: a scene prompt states its period word for word (setting and exclusions) and, with both sentences taken
+    out, names nothing the period excludes. [] for a Keeper shot (his own campfire, his own look) and a window."""
+    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str) or per is None:
         return []
     sid, p = shot.get("id"), shot["prompt"]
-    if per is None:
-        return [f"SCENE_PERIOD_MISSING shot {i} {sid} (the story has no period: set the plan's `period`)"]
     out = []
     missing = [w for w in (per["setting"], per["exclude"]) if w not in p]
     if missing:
         out.append(f"SCENE_PERIOD_MISSING shot {i} {sid} (the prompt states, word for word: "
                    + " ".join(f"'{w}'" for w in missing) + ")")
-    rest = p.replace(per["exclude"], " ")
-    hits = sorted({m.group(0).lower() for a in per.get("avoid", [])
+    rest = p.replace(per["exclude"], " ").replace(per["setting"], " ")
+    hits = sorted({m.group(0).lower() for a in per.get("avoid") or PERIOD_AVOID
                    for m in re.finditer(rf"(?i)\b(?:{a})\b", rest)})
     if hits:
         out.append(f"SCENE_PERIOD_CONFLICT shot {i} {sid} (names what the period excludes: {', '.join(hits)})")
     return out
+
+
+def plan_period_problems(plan, shots):
+    """E108, shared by plan_check and long_plan_check: the plan-level period refusal (once) when any shot is a
+    scene, else every scene prompt's own."""
+    if not any(isinstance(s, dict) and s.get("kind") == "scene" for s in shots):
+        return []
+    per, problem = resolve_period(plan)
+    if problem:
+        return [problem]
+    return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in period_problems(i, s, per)]
 
 
 def _speaker_problems(i, s, chars, span, span_slowest):
@@ -771,14 +847,9 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     keeper_seconds, establishing_seconds, keeper_used = 0.0, 0.0, False
     lesson = set()
     first_prompt = {}
-    per = period(plan)
-    if per is None and any(s.get("kind") == "scene" for s in shots):
-        problems.append(f"SCENE_PERIOD_MISSING (no period for {plan.get('passage') or 'this story'}: the plan's "
-                        f"`period` names one of {sorted(PERIODS)} or gives its own setting and exclusions; E108)")
+    problems += plan_period_problems(plan, shots)
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
-        if per is not None:
-            problems += period_problems(i, s, per)
         # E106 (owner: "production has to come out at 9.5 already"): the review's pacing_and_visual_variety item,
         # made a plan rule: one prompt is one picture, so the same prompt twice shows the same shot twice
         if isinstance(s.get("prompt"), str):

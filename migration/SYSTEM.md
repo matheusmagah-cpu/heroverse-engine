@@ -125,12 +125,14 @@ Produce the master and package, retain provenance, and deliver the frozen techni
 - A voice-over Keeper shot (plan B, #423) needs no talking probe; its exact prompt and talking frame need still-mouth probes in `evidence/pavo/setups.json` (`lipsync_check --still-mouth`, at least 2 generations, read by the rule of succession), and `episode.yml` checks the still-mouth tool on a passing and a talking clip before any generation.
 - **Production comes out at 9.5; the review only confirms** (owner, 2026-10-26: "never produce loosely and fix it later"). `ops/refusal_registry.json` `review` maps every rubric item of `ops/CLAUDE_REVIEW.md` (Short and long), every "Built for 9.5" item of PROMPT_GUIDE and every row of story QA v3 to the earlier check that guarantees it (plan, preflight, build gate, render QA), or states it `open` or `review_only` with its reason and the `residual` the review still has to see; `ops/test_refusal_parity.py` fails when one has no mapping. A rubric item that can become a plan rule becomes one (visual variety: `PROMPT_REPEATED`).
 - Every scene prompt states its story's period word for word, the setting and the exclusions (`plan_check`
-  PERIOD_SETTING / PERIOD_EXCLUDE, SCENE_PERIOD_MISSING, SCENE_PERIOD_CONFLICT; the plan's `period` or its passage),
+  PERIOD_SETTING / PERIOD_EXCLUDE, SCENE_PERIOD_MISSING, SCENE_PERIOD_CONFLICT, PERIOD_INVALID, PERIOD_AMBIGUOUS; the
+  plan's `period` or its passage; the Short and the long, `plan_period_problems`),
   and a rewritten scene prompt is probed with direct 0-credit Pavo clips and a frame sheet before the build (E108:
   genesis-07 run 40341856955 showed a European street, a glass lantern and church towers in 8 of 30 scene shots).
 - An episode record is checked with `episode_build.py check-record <episodes/<id>.json>` (publish_episode's own rules) before `publish-episode.yml` is dispatched.
 - `episode_build` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
 - A failed build is never dispatched again without new evidence and a fix merged. A resume (`resume_run`) keeps every clip already made.
+- A clip Claude's frame review rejects is redone alone: `episode.yml` `regenerate` (a comma list of shot ids, only with `resume_run`, checked against the plan by `episode_build.py check-regenerate` before any secret) generates those shots again with their request unchanged and keeps every other clip; `report.json` records them (`regenerated`). No prompt is edited only to force a new clip.
 - An engine PR is reviewed before merge, not after.
 - Actions minutes cost nothing: the engine repository is public, and standard GitHub-hosted runners are free for public repositories (owner, 2026-10-26: it stays public; E102). The daily report (`ops/minutes.py`) lists minutes per workflow as a speed and wall-clock measure only. A repeated build is still the first thing to cut, because it delays the work.
 
