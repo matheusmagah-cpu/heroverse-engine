@@ -56,5 +56,15 @@ class Characters(unittest.TestCase):
                     self.assertTrue((ch.HERE / "images" / f"ch-{cid}-{shot}.json").exists(), (cid, shot))
 
 
+class RepoReference(unittest.TestCase):
+    def test_keeper_reference_is_the_reviewed_repo_frame(self):
+        import hashlib
+        urls = ch.reference_urls(["keeper"])
+        self.assertEqual(urls, [ch.RAW + "migration/production/characters/refs/ch-keeper-front.jpg"])
+        rec = json.loads((ch.HERE / "images" / "ch-keeper-front.json").read_text())
+        img = ch.HERE.parents[2] / rec["repo_path"]
+        self.assertEqual(hashlib.sha256(img.read_bytes()).hexdigest(), rec["sha256"])
+
+
 if __name__ == "__main__":
     unittest.main()
