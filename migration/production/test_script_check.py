@@ -120,6 +120,25 @@ class Check(unittest.TestCase):
         self.assertTrue(any(p.startswith("FOOTAGE_NOT_VETTED") for p in self.run_check(footage(20, vetting="PENDING"))))
         self.assertTrue(any(p.startswith("FOOTAGE_RIGHTS") for p in self.run_check(footage(20, licence="CC BY-SA 4.0"))))
 
+    def test_pavo_clip_differs_from_pixabay_only_in_the_v4_licence_list(self):
+        """A Pavo library record (footage/pavo_footage.py) at 2560x1440, APPROVED and released passes every footage
+        check a Pixabay clip passes except the licence: frozen QA v4 lists only stock/Commons licences, and DECISIONS
+        "Pavo is the first source of AI video" lets the long take Pavo only under the story format's own frozen QA."""
+        def footage(source, licence):
+            def mutate(s, d):
+                lib = d.parent / "footage" / "library"
+                lib.mkdir(parents=True, exist_ok=True)
+                s["footage"] = [f"clip-x-{i}" for i in range(20)]
+                for c in s["footage"]:
+                    (lib / f"{c}.json").write_text(json.dumps({"id": c, "source": source, "vetting": "APPROVED",
+                                                               "licence": licence, "release_asset": "a.mp4",
+                                                               "frame": [2560, 1440]}))
+            return mutate
+        rows = lambda problems: sorted({p.split(" ")[0] for p in problems if "FOOTAGE" in p})
+        self.assertEqual(rows(self.run_check(footage("pixabay", "Pixabay Content License"))), [])
+        self.assertEqual(rows(self.run_check(footage("pavo", "Pavo generated (owner-owned)"))), ["FOOTAGE_RIGHTS"])
+        self.assertNotIn("Pavo generated (owner-owned)", sc.FOOTAGE_LICENCES)
+
     def test_title_rules_r14(self):
         ok = "Before You Sleep, Thank God for Everything 🙏 | Night Prayer for Gratitude & Rest"
         self.assertEqual(sc.title_problems(ok), [])

@@ -20,6 +20,30 @@ TILE, PAD = 256, 12
 TARGET = int(os.environ.get("UPSCALE_TARGET", "4"))
 
 
+WEIGHTS_URL = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+WEIGHTS_SHA256 = "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292"   # = images-upres.yml
+
+
+def sr(model, img, scale, tile=TILE, pad=PAD):
+    """The model over an HxWx3 float32 image in overlapping tiles; returns the (h*scale)x(w*scale)x3 float32 result.
+    Shared with footage/pavo_footage.py (every frame of a Pavo clip)."""
+    import numpy as np
+    import torch
+    h, w, _ = img.shape
+    out = np.zeros((h * scale, w * scale, 3), dtype=np.float32)
+    with torch.inference_mode():
+        for y in range(0, h, tile):
+            for x in range(0, w, tile):
+                y0, x0 = max(0, y - pad), max(0, x - pad)
+                y1, x1 = min(h, y + tile + pad), min(w, x + tile + pad)
+                t = torch.from_numpy(np.ascontiguousarray(img[y0:y1, x0:x1].transpose(2, 0, 1))).unsqueeze(0)
+                r = model(t).squeeze(0).clamp(0, 1).numpy().transpose(1, 2, 0)
+                oy, ox = (y - y0) * scale, (x - x0) * scale
+                th, tw = min(tile, h - y) * scale, min(tile, w - x) * scale
+                out[y * scale:y * scale + th, x * scale:x * scale + tw] = r[oy:oy + th, ox:ox + tw]
+    return out
+
+
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -36,17 +60,7 @@ def main(weights, images):
     for path in images:
         img = np.asarray(Image.open(path).convert("RGB"), dtype=np.float32) / 255
         h, w, _ = img.shape
-        out = np.zeros((h * scale, w * scale, 3), dtype=np.float32)
-        with torch.inference_mode():
-            for y in range(0, h, TILE):
-                for x in range(0, w, TILE):
-                    y0, x0 = max(0, y - PAD), max(0, x - PAD)
-                    y1, x1 = min(h, y + TILE + PAD), min(w, x + TILE + PAD)
-                    t = torch.from_numpy(img[y0:y1, x0:x1].transpose(2, 0, 1)).unsqueeze(0)
-                    r = model(t).squeeze(0).clamp(0, 1).numpy().transpose(1, 2, 0)
-                    oy, ox = (y - y0) * scale, (x - x0) * scale
-                    th, tw = min(TILE, h - y) * scale, min(TILE, w - x) * scale
-                    out[y * scale:y * scale + th, x * scale:x * scale + tw] = r[oy:oy + th, ox:ox + tw]
+        out = sr(model, img, scale)
         result = Image.fromarray((out * 255 + 0.5).astype(np.uint8))
         if scale != TARGET:
             result = result.resize((w * TARGET, h * TARGET), Image.LANCZOS)
@@ -57,7 +71,7 @@ def main(weights, images):
             m["size"] = [w * TARGET, h * TARGET]
             m["upscaler"] = {"model": f"Real-ESRGAN general x4v3 (output {TARGET}x of a {w} px input)", "licence": "bsd-3-clause",
                              "weights_sha256": wsha,
-                             "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"}
+                             "source": WEIGHTS_URL}
             meta.write_text(json.dumps(m, indent=1) + "\n")
         print(Path(path).name, (w, h), "->", (w * TARGET, h * TARGET), flush=True)
 
