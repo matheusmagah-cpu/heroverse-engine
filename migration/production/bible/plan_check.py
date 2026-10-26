@@ -57,8 +57,13 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   voice, and never with a body, face, hands, robe or throne.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
+A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
+records, shares, length, the compose's cuts and holds on the planned clip lengths) and reference_problems (kept
+reference records and images, counted as the request sends them); their refusals come back as "BUILD <code> ...".
+
 usage: plan_check.py PLAN.json [--strict]   prints JSON {problems, pending, estimate}; exit 1 on a problem
-                                            (--strict: also on a pending row; episode_build runs it strict)
+                                            (--strict: also on a pending row and on a path episode.yml would refuse,
+                                            PLAN_PATH / PLAN_EPISODE_MISMATCH; episode_build runs it strict)
 """
 import json
 import math
@@ -81,6 +86,8 @@ KINDS = ("story", "scripture", "insight", "cta")
 LESSON_KINDS = ("insight", "cta")
 EPISODE_ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 SHOT_ID = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
+# episode.yml's plan input, character for character (test_refusal_parity checks the workflow holds this pattern)
+PLAN_PATH = re.compile(r"^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$")
 RATIOS = ("9:16",)                   # Shorts only
 # Kokoro pace of the narration (the Keeper, am_michael), words a second: 2.30-2.98 on Genesis 6
 # (evidence/pavo/20261025/genesis-06/compose/timeline.json), 2.756 over the 82 lines of genesis-07 to 10, 1.99-3.63 a
@@ -695,8 +702,16 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     keeper = chars.get(ch.NARRATOR)
     keeper_seconds, establishing_seconds, keeper_used = 0.0, 0.0, False
     lesson = set()
+    first_prompt = {}
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
+        # E106 (owner: "production has to come out at 9.5 already"): the review's pacing_and_visual_variety item,
+        # made a plan rule: one prompt is one picture, so the same prompt twice shows the same shot twice
+        if isinstance(s.get("prompt"), str):
+            if s["prompt"] in first_prompt:
+                problems.append(f"PROMPT_REPEATED shot {i} {s['id']} (the same prompt as {first_prompt[s['prompt']]}: "
+                                "the same picture twice; change the shot size, the action or the angle)")
+            first_prompt.setdefault(s["prompt"], s["id"])
         idx = carried[i]
         gaps = LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
@@ -778,6 +793,14 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     est_share = establishing_seconds / total if total else 0
     if est_share > ESTABLISHING_SHARE_MAX:
         problems.append(f"ESTABLISHING_SHARE {est_share:.2f} > {ESTABLISHING_SHARE_MAX}")
+    if all(p.split()[0] in ("SPEAKER_NOT_APPROVED", "CHARACTER_NOT_APPROVED") for p in problems):
+        # E106: the build's own refusals, predicted here (also while a character awaits approval) with the build's
+        # own functions: episode_build.predict (retime, talking records, shares, length, compose cuts and holds) on
+        # this estimate, and reference_problems (the kept reference records and images, counted as the request
+        # sends them). A plan that passes is not refused later by lines, refs or compose for a reason it holds.
+        import episode_build
+        problems += [f"BUILD {p}" for p in episode_build.predict(plan, est)[0]]
+        problems += [f"BUILD {p}" for p in episode_build.reference_problems(plan, chars)]
     if keeper_used and keeper and (keeper.get("status") != "APPROVED" or not keeper.get("refs")):
         pending.append(f"CHARACTER_PENDING keeper ({keeper.get('status')}): Claude reviews his reference sheet and "
                        "sets APPROVED with kept refs, by PR, before episode.yml can generate")
@@ -788,11 +811,29 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     return {"problems": problems, "pending": pending, "estimate": estimate}
 
 
+def path_problems(path, plan):
+    """E106: episode.yml takes a plan only at plans/<episode>.json with that same `episode` (PLAN_PATH_REFUSED,
+    PLAN_EPISODE_MISMATCH in its first step); checked here so a plan is never dispatched to be refused there."""
+    try:
+        name = Path(path).resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        name = str(path)
+    m = PLAN_PATH.fullmatch(name)
+    if not m:
+        return [f"PLAN_PATH {name} (episode.yml takes migration/production/bible/plans/<episode-id>.json)"]
+    if plan.get("episode") != m.group(1):
+        return [f"PLAN_EPISODE_MISMATCH {name} (`episode` must be {m.group(1)})"]
+    return []
+
+
 def main(argv):
     args = [a for a in argv[1:] if a != "--strict"]
     if len(args) != 1:
         raise SystemExit(__doc__)
-    result = check(json.loads(Path(args[0]).read_text()))
+    plan = json.loads(Path(args[0]).read_text())
+    result = check(plan)
+    if "--strict" in argv:   # strict = ready to dispatch: the path episode.yml will take (a draft may live anywhere)
+        result["problems"] = path_problems(args[0], plan) + result["problems"]
     print(json.dumps(dict(plan=args[0], **result), indent=1))
     if result["problems"] or ("--strict" in argv and result["pending"]):
         return 1

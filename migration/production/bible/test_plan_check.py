@@ -35,13 +35,14 @@ def keeper(sid, lines):
     return {"id": sid, "kind": "keeper", "lines": lines,
             "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
                       "holds his head level, looks straight into the camera and speaks to the camera. Night in the "
-                      "desert, firelight. Warm and grave."}
+                      f"desert, firelight ({sid}). Warm and grave."}   # one picture per shot (PROMPT_REPEATED)
 
 
 def scene(sid, lines, chars=(), seconds=12, look=None, **extra):
     who = look if look is not None else ", ".join({"eve": EVE_LOOK}.get(c, c) for c in chars) or "a crowd seen from behind"
     s = {"id": sid, "kind": "scene", "lines": lines, "seconds": seconds, "characters": list(chars),
-         "prompt": f"{STYLE} Wide shot, slow tracking shot. {who} walks through the tents. Dusk, torchlight. Restless."}
+         "prompt": f"{STYLE} Wide shot, slow tracking shot. {who} walks through the tents. Dusk, torchlight ({sid}). "
+                   "Restless."}
     if not chars and "establishing" not in extra:
         s["figures"] = "anonymous"
     s.update(extra)
@@ -585,6 +586,44 @@ class Plan(unittest.TestCase):
         self.assertEqual(len(r["pending"]), 1)
         self.assertTrue(r["pending"][0].startswith("CHARACTER_PENDING keeper (DRAFT)"))
 
+    def test_a_compose_refusal_is_found_at_plan_time(self):
+        # E106: three scenes sharing a 5-word line passed every plan rule, then short_engine would refuse each
+        # cut under 1 s (SHOT_TOO_SHORT) only at the compose, after every Pavo clip was made
+        p = plan()
+        p["narration"].insert(1, {"kind": "story", "text": "Nobody listens to him now."})
+        for s in p["shots"]:
+            if s.get("lines"):
+                s["lines"] = [k + 1 if k >= 1 else k for k in s["lines"]]
+        at = [s["id"] for s in p["shots"]].index("s-c")
+        p["shots"][at:at] = [scene("s-x1", [1]), scene("s-x2", [1]), scene("s-x3", [1])]
+        found = pc.check(p, CHARS)["problems"]
+        self.assertTrue(found and all(x.startswith("BUILD SHOT_TOO_SHORT") for x in found), found)
+
+    def test_the_same_prompt_twice_is_refused(self):
+        # E106 (owner: production comes out at 9.5, the review only confirms): the review's visual variety as a plan
+        # rule: one prompt is one picture, so a repeated prompt shows the same shot twice
+        p = plan()
+        p["shots"][2]["prompt"] = p["shots"][1]["prompt"]
+        self.assertEqual(codes(pc.check(p, CHARS)), ["PROMPT_REPEATED"])
+
+    def test_a_missing_reference_record_is_found_at_plan_time(self):
+        # E106: an APPROVED character whose kept reference has no record passed the plan, then refs_step refused
+        # it (REFERENCE_RECORD_MISSING) in the build, after the voice
+        chars = copy.deepcopy(CHARS)
+        p = plan()
+        p["shots"][4] = scene("s-c", [1], ["mute"], look="a quiet shepherd boy")
+        found = pc.check(p, chars)["problems"]
+        self.assertEqual([x.split()[:3] for x in found], [["BUILD", "REFERENCE_RECORD_MISSING", "ch-mute-front"]])
+
+    def test_strict_refuses_a_path_or_episode_episode_yml_refuses(self):
+        # E106: episode.yml refuses PLAN_PATH_REFUSED / PLAN_EPISODE_MISMATCH in its first step; strict says so first
+        self.assertEqual(pc.path_problems(EXAMPLE, json.loads(EXAMPLE.read_text())), [])
+        self.assertTrue(pc.path_problems(EXAMPLE, {"episode": "genesis-07"})[0].startswith("PLAN_EPISODE_MISMATCH"))
+        self.assertTrue(pc.path_problems("/tmp/genesis-07-short.json", {"episode": "genesis-07-short"})[0]
+                        .startswith("PLAN_PATH"))
+        workflow = (pc.ROOT / ".github" / "workflows" / "episode.yml").read_text()
+        self.assertIn(pc.PLAN_PATH.pattern, workflow)   # the same pattern, character for character
+
     def test_cli_exit_codes(self):
         with tempfile.TemporaryDirectory() as d:
             ok = Path(d, "ok.json")
@@ -613,8 +652,8 @@ def talking_genesis_07():
 def keeper_vo(sid, lines, action="holds his head level and looks straight into the camera"):
     return {"id": sid, "kind": "keeper", "voiceover": True, "lines": lines,
             "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
-                      f"{action}, his lips closed, silent, as the flames flicker. Night in the desert, firelight. Warm "
-                      "and grave."}
+                      f"{action}, his lips closed, silent, as the flames flicker. Night in the desert, firelight "
+                      f"({sid}). Warm and grave."}
 
 
 def vo_plan(**kw):

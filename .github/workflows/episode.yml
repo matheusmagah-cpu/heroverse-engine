@@ -40,13 +40,16 @@ jobs:
         with:
           persist-credentials: false
       - id: plan
-        name: The plan (path checked, plan_check strict)
+        name: The plan (path checked, plan_check strict, a PASS preflight of this exact plan, E106)
         run: |
           [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
           ep="${BASH_REMATCH[1]}"
           test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
           python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
           python3 -I -B migration/production/bible/plan_check.py "$PLAN" --strict
+          # E106: the committed preflight (local Kokoro, refs, requests, every talking setup probed) is PASS for this
+          # plan and character bible; else the build stops here, before any secret, voice or Pavo call
+          python3 -I -B migration/production/bible/episode_build.py verify-preflight "$PLAN"
           echo "episode=$ep" >> "$GITHUB_OUTPUT"
           echo "EP=$ep" >> "$GITHUB_ENV"
           echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout: Pavo reads repo paths only
@@ -67,6 +70,20 @@ jobs:
           # and the face check of God's voice-over shots must see the Keeper's face in the same clip
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/faces.json" && { echo "FACE_CHECK_BLIND"; exit 1; } || true
           python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if r['faces_found']>0 else 'FACE_CHECK_BLIND')" "$RUNNER_TEMP/faces.json"
+          # E106: the still-mouth check of a voice-over Keeper must work before any generation too: a probe clip that
+          # passed it (keeper-vo/calibration.json) passes again, and the talking calibration clip is flagged
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper-vo/probe-k-close-1-373107379233670656.mp4 "$RUNNER_TEMP/face_landmarker.task"
+          # review of #422: the talking clip must be flagged MOUTH_TALKING itself, not merely fail in some way
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/still.json" || true
+          python3 -I - "$RUNNER_TEMP/still.json" <<'PY'
+          import json, sys
+          lines = open(sys.argv[1]).read().strip().splitlines()
+          try:
+              flags = json.loads(lines[-1]).get("flags", [])
+          except (IndexError, ValueError, AttributeError):
+              flags = []
+          sys.exit(0 if "MOUTH_TALKING" in flags else "STILL_MOUTH_CHECK_BLIND")
+          PY
           mkdir -p "$WORK" "$OUT"
       - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
         run: |

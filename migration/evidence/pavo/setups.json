@@ -1,0 +1,93 @@
+{
+ "about": "E106: direct 0-credit Pavo probes of talking clips, one entry per LINE (PR #419, evidence/pavo/20261026/keeper-line-length.json: the lips pass rate depends on the line itself, line-01 7 of 14 against genesis-07's Keeper lines 1 of 39 under the same speaker, reference, pose and binding; it is not one rate per setup). An entry is the speaker, the reference images the request sends for the speaker (record id -> sha256), the prompt binding (episode_build.BOUND_AUDIO) and the line's words; generations / passed are lipsync_check passes (thresholds unchanged) over direct calls on exactly that. episode_preflight.probe_rows matches a talking shot on all four: a line with no entry is PROBE_REQUIRED even when its speaker's setup passed on another line, and a recorded rate whose chance at TALK_ATTEMPTS is under MIN_SHOT_CHANCE is PROBE_RATE_LOW. New entries come by PR with their evidence file. A voice-over Keeper shot (plan B, #423) speaks nothing on screen: it is matched as kind still_mouth on speaker, his talking frame (the only reference it sends) and its exact prompt (the gaze and the light decide whether the landmarker finds the face, keeper-vo/calibration.json), and judged by lipsync_check --still-mouth.",
+ "probes": [
+  {
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "Genesis five reads like a list of funerals. But one name breaks the pattern.",
+   "generations": 14,
+   "passed": 7,
+   "evidence": "migration/evidence/pavo/20261026/keeper-line-length.json",
+   "note": "line-01 (genesis-06's Keeper line, the calibration WAV): h4_offline 7 of 14 (E95/E98 tests, today's control and h)",
+   "kind": "talk"
+  },
+  {
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "Notice the order. Grief comes before judgment. The flood is not the story of a cold God, but of a wounded heart.",
+   "generations": 15,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261026/keeper-line-length.json",
+   "note": "genesis-07 k-insight: h4_offline 0 of 15 (builds 40297987571 and 40307414749 and every direct arm); its halves 0 of 6 more",
+   "kind": "talk"
+  },
+  {
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "Would you have kept walking against the crowd? Tell me in the comments.",
+   "generations": 15,
+   "passed": 0,
+   "evidence": "migration/evidence/pavo/20261026/keeper-line-length.json",
+   "note": "genesis-07 k-question: h4_offline 0 of 15",
+   "kind": "talk"
+  },
+  {
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "line": "The full story is in the long video. Part eight tomorrow: Noah builds the ark.",
+   "generations": 3,
+   "passed": 1,
+   "evidence": "migration/evidence/pavo/20261026/keeper-line-length.json",
+   "note": "genesis-07 k-close: h4_offline 1 of 3",
+   "kind": "talk"
+  },
+  {
+   "kind": "still_mouth",
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a calm kind look, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Tender and grave. No text, no logos.",
+   "generations": 2,
+   "passed": 2,
+   "evidence": "migration/evidence/pavo/20261026/keeper-vo/calibration.json",
+   "note": "genesis-07 k-insight voice-over: build_probes, the plan's prompt as episode_build.request sends it"
+  },
+  {
+   "kind": "still_mouth",
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level, looks straight into the camera and slowly rolls the old scroll closed in his hands, his lips closed, silent, a gentle questioning look. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and searching. No text, no logos.",
+   "generations": 2,
+   "passed": 2,
+   "evidence": "migration/evidence/pavo/20261026/keeper-vo/calibration.json",
+   "note": "genesis-07 k-question voice-over: build_probes, the plan's prompt as episode_build.request sends it"
+  },
+  {
+   "kind": "still_mouth",
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos.",
+   "generations": 2,
+   "passed": 2,
+   "evidence": "migration/evidence/pavo/20261026/keeper-vo/calibration.json",
+   "note": "genesis-07 k-close voice-over: build_probes, the plan's prompt as episode_build.request sends it"
+  }
+ ]
+}

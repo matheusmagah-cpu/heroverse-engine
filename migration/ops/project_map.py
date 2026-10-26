@@ -67,8 +67,9 @@ def workflows(root):
 def build(root):
     root = Path(root)
     mods, wfs = modules(root), workflows(root)
+    # E105: the parts relative to the repository, never the absolute path (an agent worktree is under .claude/)
     shell = {str(p.relative_to(root)): sorted(set(CALL.findall(p.read_text())))
-             for p in (root / "migration").rglob("*.sh") if not any(s in p.parts for s in SKIP)}
+             for p in (root / "migration").rglob("*.sh") if not any(s in p.relative_to(root).parts for s in SKIP)}
     called_by = {}
     for wf, w in wfs.items():
         for c in w["calls"]:

@@ -604,7 +604,10 @@ class NoRendererReadsTheNewQaYet(unittest.TestCase):
     prepublish_gate knows only story-qa-criteria-v1. Until a reader handles the new keys (slice 3), nothing that
     renders, measures or gates a video may point at v2 or v3: this fails the PR that wires one in too early."""
     NEW = re.compile(r"story-qa-criteria-v[23]|qa_criteria_story_v[23]")
-    ALLOWED = {"migration/production/bible/long_plan_check.py", "migration/production/bible/test_long_plan_check.py"}
+    # test_refusal_parity reads v3's row names only to require each one mapped to its earlier check (E106); it
+    # measures and gates nothing
+    ALLOWED = {"migration/production/bible/long_plan_check.py", "migration/production/bible/test_long_plan_check.py",
+               "migration/ops/test_refusal_parity.py"}
 
     def readers(self):
         for pattern in ("migration/**/*.py", "migration/**/*.sh", ".github/workflows/*.yml"):

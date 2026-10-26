@@ -73,6 +73,8 @@ def compose(fmt, *kinds, overlay=None):
 
 
 APPROVAL = "migration/production/pilot-011/" + "APPROVAL.json"
+EB = "migration/production/bible/episode_build.py"
+G7, G8 = "migration/production/bible/plans/genesis-07-short.json", "migration/production/bible/plans/genesis-08-short.json"
 BLOCK = [
     ("Write", {"file_path": "/home/user/heroverse-engine/" + APPROVAL, "content": "{}"}),
     ("Edit", {"file_path": APPROVAL, "old_string": "a", "new_string": "b"}),
@@ -95,6 +97,27 @@ BLOCK = [
     ("Bash", {"command": "sed -i 's/0.4/0.2/' migration/production/qa_criteria_story_v1.json"}),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", None, "fade")),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", "wipe")),
+    # E106: no episode build without a PASS preflight of that plan, chained in the same command
+    ("Bash", {"command": "gh workflow run episode.yml -f plan=migration/production/bible/plans/genesis-08-short.json"}),
+    ("Bash", {"command": "gh workflow run .github/workflows/episode.yml --ref main -f plan=x -f resume_run=123456"}),
+    ("Bash", {"command": "gh api repos/o/r/actions/workflows/episode.yml/dispatches -f ref=main -f inputs[plan]=x"}),
+    ("Bash", {"command": "python3 migration/production/bible/plan_check.py p.json --strict && gh workflow run episode -f plan=p"}),
+    ("mcp__github__actions_run_trigger", {"method": "run_workflow", "owner": "o", "repo": "r", "workflow_id": "episode.yml",
+                                          "ref": "main", "inputs": {"plan": "x"}}),
+    # review of #422: only `verify-preflight P && gh workflow run episode.yml -f plan=P`, the same P, nothing else
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7}; gh workflow run episode.yml -f plan={G7}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} || gh workflow run episode.yml -f plan={G7}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml -f plan={G8}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml -f plan={G7}; "
+                         f"gh workflow run episode.yml -f plan={G8}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml -f plan={G7}x"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && "
+                         "gh api repos/o/r/actions/workflows/episode.yml/dispatches -f ref=main"}),
+    # E96/E106: cf-images takes pilot-NNN or characters, never a path
+    ("Bash", {"command": "gh workflow run cf-images.yml -f pilot=migration/production/characters -f engine=flux"}),
+    ("Bash", {"command": "gh workflow run cf-images.yml -f engine=flux -f pilot='production/pilot-015'"}),
+    ("mcp__github__actions_run_trigger", {"method": "run_workflow", "owner": "o", "repo": "r", "workflow_id": "cf-images.yml",
+                                          "ref": "main", "inputs": {"pilot": "migration/production/characters"}}),
 ]
 ALLOW = [
     ("Edit", {"file_path": "migration/production/pilot-008/inspection/claude_review.json", "old_string": "a", "new_string": "b"}),
@@ -113,6 +136,23 @@ ALLOW = [
     ("Bash", {"command": "sha256sum migration/production/qa_criteria_story_v1.json"}),
     ("mcp__vidIQ__vidiq_compose", compose("vertical", "cut", "dip_to_black", overlay={"kind": "text", "text": "fade"})),
     ("mcp__vidIQ__vidiq_compose", compose("landscape", "fade")),
+    ("Bash", {"command": "python3 -I -B migration/production/bible/episode_build.py verify-preflight "
+                         "migration/production/bible/plans/genesis-08-short.json && gh workflow run episode.yml "
+                         "-f plan=migration/production/bible/plans/genesis-08-short.json"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml --ref main "
+                         f"-f plan={G7} -f resume_run=40297987571"}),
+    ("Bash", {"command": f"python3 {EB} verify-preflight '{G7}' && gh workflow run episode.yml -f 'plan={G7}'"}),
+    ("Bash", {"command": 'gh workflow run cf-images.yml -f pilot="characters" -f engine=flux'}),
+    ("Bash", {"command": "gh workflow run cf-images.yml -f pilot='pilot-015' -f engine=sdxl"}),
+    ("Bash", {"command": 'gh workflow run cf-images.yml -f "pilot=characters" -f engine=flux'}),
+    ("Bash", {"command": "gh workflow run publish-episode.yml -f episode=genesis-07-short"}),
+    ("Bash", {"command": "gh run list --workflow episode.yml --limit 3"}),
+    ("Bash", {"command": "gh workflow run cf-images.yml -f pilot=characters -f engine=flux -f only=ch-noah-front"}),
+    ("Bash", {"command": "gh workflow run cf-images.yml -f pilot=pilot-015 -f engine=sdxl"}),
+    ("mcp__github__actions_run_trigger", {"method": "run_workflow", "owner": "o", "repo": "r", "workflow_id": "cf-images.yml",
+                                          "ref": "main", "inputs": {"pilot": "characters", "engine": "flux"}}),
+    ("mcp__github__actions_run_trigger", {"method": "run_workflow", "owner": "o", "repo": "r", "workflow_id": "heartbeat.yml",
+                                          "ref": "main"}),
 ]
 
 
@@ -127,7 +167,8 @@ class HookifyRules(unittest.TestCase):
     def test_the_three_owner_rules_exist_and_block(self):
         names = {parse(p)["name"] for p in RULES if parse(p).get("action") == "block"}
         for n in ("block-approval-json-by-hand", "block-approval-json-by-shell", "block-frozen-qa-criteria",
-                  "block-frozen-qa-criteria-by-shell", "block-shorts-fade-wipe"):
+                  "block-frozen-qa-criteria-by-shell", "block-shorts-fade-wipe", "require-episode-preflight",
+                  "require-episode-preflight-mcp", "block-cf-images-bad-pilot", "block-cf-images-bad-pilot-mcp"):
             self.assertIn(n, names)
 
     def test_forbidden_actions_are_blocked(self):
