@@ -9,7 +9,8 @@ second. Captions are burned large (about 7 % of the frame height) from the voice
 
 usage: short_engine.py PLAN.json OUT.mp4
 PLAN: {"voice": WAV, "timeline": timeline.json, "music": FLAC, "music_offset": s, "tail": s,
-       "shots": [{"clip": MP4, "start": s, "end": s, "src_start": s}, ...]}   shots tile [0, voice end + tail]
+       "shots": [{"clip": MP4, "start": s, "end": s, "src_start": s, "speed": f?}, ...]}   shots tile [0, voice end + tail]
+       ("speed", optional: the planned slow-down factor 1-MAX_SLOW of a clip cut into several shots; else computed)
 """
 import json
 from pathlib import Path
@@ -64,6 +65,17 @@ def speed(shot, clip_seconds):
     return factor if factor is not None and factor <= MAX_SLOW else None
 
 
+def explicit_speed(shot, clip_seconds):
+    """A planned factor (episode_build cuts one clip into several shots): 1 <= factor <= MAX_SLOW and enough clip
+    after src_start; None when it cannot."""
+    factor = shot["speed"]
+    need = shot["end"] - shot["start"]
+    have = clip_seconds - shot.get("src_start", 0.0)
+    if not 1.0 <= factor <= MAX_SLOW or have * factor + 0.02 < need:
+        return None
+    return factor
+
+
 def chunks(sentence):
     """Caption cards of up to CAPTION_WORDS words, timed by their share of the sentence's characters."""
     words = sentence["text"].split()
@@ -111,7 +123,8 @@ def main(plan_path, out):
         tmp = Path(tmp)
         parts = []
         for i, s in enumerate(shots):
-            factor = speed(s, duration(s["clip"]))
+            clip_seconds = duration(s["clip"])
+            factor = explicit_speed(s, clip_seconds) if "speed" in s else speed(s, clip_seconds)
             if factor is None:
                 raise SystemExit(f"CLIP_TOO_SHORT shot {i} {s['clip']}")
             need = s["end"] - s["start"]

@@ -693,6 +693,16 @@
     "file": "migration/publish/test_tiktok_publish.py",
     "contains": "def test_mirror_runs_at_least_every_thirty_minutes"
    }
+  },
+  {
+   "id": "E87",
+   "date": "2026-10-26",
+   "error": "episode_build.compose_shots refused the Genesis 7 example plan with KEEPER_NOT_ON_HIS_LINE k-close: two Keeper shots in a row (insight, then close) left the 0.35 s silence between their lines owned by no shot, so the second Keeper picture could not start on its first word. Found by the offline compose test before any run; no affected code was deployed.",
+   "fix": "The silence after a line belongs to the next run of scenes or, when the next shot is the Keeper again, to the Keeper shot before it (he holds the gap; KEEPER_MARGIN 0.6 s covers it, and the closing Keeper's audio limit is 10.2 s so line + tail + margin fit a 12 s clip). Every Keeper picture still starts exactly on his first word, from the start of his clip at normal speed.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_keeper_picture_spans_equal_their_line_audio_and_scenes_cut_every_2_to_4_s"
+   }
   }
  ]
 }
