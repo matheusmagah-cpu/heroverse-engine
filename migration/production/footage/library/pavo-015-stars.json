@@ -1,0 +1,38 @@
+{
+ "id": "pavo-015-stars",
+ "theme": "pavo",
+ "query": "segment c1-lights",
+ "source": "pavo",
+ "title": "Photorealistic nature documentary, cinema camera. Static wide time-lapse. The Milky Way and countless stars wheel slowly",
+ "page": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-675889dbbb1e-0-e413c66d10ae.mp4",
+ "author": "Pavo (Agnes Video Flash)",
+ "licence_url": "https://app.pavo-ai.work/terms",
+ "licence": "Pavo generated (owner-owned)",
+ "licence_as_published": "Pavo Terms of Service: the user keeps ownership of generated content (§42)",
+ "source_seconds": 6.592,
+ "source_height": 720,
+ "source_width": 1280,
+ "source_fps": 24.0,
+ "start": 0.0,
+ "seconds": 6.6,
+ "credit": "AI video: Pavo (Agnes Video Flash), owner-owned output",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "ff8d449a5ce6e61bbb86bc3701d3a86422695d9aabc8523fb7f7cb646169c48d",
+ "conversation_id": "372887984775367296",
+ "prompt": "Photorealistic nature documentary, cinema camera. Static wide time-lapse. The Milky Way and countless stars wheel slowly across a clear night sky above dark desert hills. Moonless night. Infinite, still. No people, no text, no logos.",
+ "words": "segment c1-lights",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (4x of every native frame area-downscaled to 640x360, then 30 fps)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "vetting": "PENDING",
+ "vetting_note": "Claude reviews the frame sheet (library/sheets/pavo-<run>.jpg) and sets APPROVED in a later PR",
+ "release_asset": "footage-pavo-015-stars-sha256-ff8d449a5ce6e61bbb86bc3701d3a86422695d9aabc8523fb7f7cb646169c48d.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "pavo-015-fruit-trees",
+ "theme": "pavo",
+ "query": "segment c1-land",
+ "source": "pavo",
+ "title": "(regenerated: wild fig tree on a rocky hillside)",
+ "page": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-94d0e8e2f256-0-2d7be4ab8787.mp4",
+ "author": "Pavo (Agnes Video Flash)",
+ "licence_url": "https://app.pavo-ai.work/terms",
+ "licence": "Pavo generated (owner-owned)",
+ "licence_as_published": "Pavo Terms of Service: the user keeps ownership of generated content (§42)",
+ "source_seconds": 6.592,
+ "source_height": 720,
+ "source_width": 1280,
+ "source_fps": 24.0,
+ "start": 0.0,
+ "seconds": 6.6,
+ "credit": "AI video: Pavo (Agnes Video Flash), owner-owned output",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "00c1f6ad50c7d6d08d9a131fd22ab5ffc1ec8dfd8e9a5fe37553c859905732eb",
+ "conversation_id": "372891940259648128",
+ "prompt": "(regenerated: wild fig tree on a rocky hillside)",
+ "words": "segment c1-land",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (4x of every native frame area-downscaled to 640x360, then 30 fps)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "vetting": "PENDING",
+ "vetting_note": "Claude reviews the frame sheet (library/sheets/pavo-<run>.jpg) and sets APPROVED in a later PR",
+ "release_asset": "footage-pavo-015-fruit-trees-sha256-00c1f6ad50c7d6d08d9a131fd22ab5ffc1ec8dfd8e9a5fe37553c859905732eb.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}

@@ -1,0 +1,38 @@
+{
+ "id": "pavo-015-cool-of-day",
+ "theme": "pavo",
+ "query": "segment c4-walk",
+ "source": "pavo",
+ "title": "(regenerated: earth footpath through a wild garden)",
+ "page": "https://cos-aigc-default.agnes-ai.space/pavo/cos_video_transcode/self-v03_videos/pavo-4f0be752d360-0-d570576034f5.mp4",
+ "author": "Pavo (Agnes Video Flash)",
+ "licence_url": "https://app.pavo-ai.work/terms",
+ "licence": "Pavo generated (owner-owned)",
+ "licence_as_published": "Pavo Terms of Service: the user keeps ownership of generated content (§42)",
+ "source_seconds": 6.592,
+ "source_height": 720,
+ "source_width": 1280,
+ "source_fps": 24.0,
+ "start": 0.0,
+ "seconds": 6.6,
+ "credit": "AI video: Pavo (Agnes Video Flash), owner-owned output",
+ "picture": "2560x1440 30 fps H.264 crf 18, no audio",
+ "frame": [
+  2560,
+  1440
+ ],
+ "sha256": "02f8f09af8424089b5629d0fc0ddd9b96a8f31948ace5fdae3e9e9ba6394e4c9",
+ "conversation_id": "372897449176205952",
+ "prompt": "(regenerated: earth footpath through a wild garden)",
+ "words": "segment c4-walk",
+ "upscaler": {
+  "model": "Real-ESRGAN general x4v3 (4x of every native frame area-downscaled to 640x360, then 30 fps)",
+  "licence": "bsd-3-clause",
+  "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+  "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
+ },
+ "vetting": "PENDING",
+ "vetting_note": "Claude reviews the frame sheet (library/sheets/pavo-<run>.jpg) and sets APPROVED in a later PR",
+ "release_asset": "footage-pavo-015-cool-of-day-sha256-02f8f09af8424089b5629d0fc0ddd9b96a8f31948ace5fdae3e9e9ba6394e4c9.mp4",
+ "release_tag": "v0.0.0-cloud-assets-20261025"
+}
