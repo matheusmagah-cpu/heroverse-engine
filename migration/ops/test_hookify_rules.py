@@ -73,6 +73,8 @@ def compose(fmt, *kinds, overlay=None):
 
 
 APPROVAL = "migration/production/pilot-011/" + "APPROVAL.json"
+EB = "migration/production/bible/episode_build.py"
+G7, G8 = "migration/production/bible/plans/genesis-07-short.json", "migration/production/bible/plans/genesis-08-short.json"
 BLOCK = [
     ("Write", {"file_path": "/home/user/heroverse-engine/" + APPROVAL, "content": "{}"}),
     ("Edit", {"file_path": APPROVAL, "old_string": "a", "new_string": "b"}),
@@ -102,6 +104,15 @@ BLOCK = [
     ("Bash", {"command": "python3 migration/production/bible/plan_check.py p.json --strict && gh workflow run episode -f plan=p"}),
     ("mcp__github__actions_run_trigger", {"method": "run_workflow", "owner": "o", "repo": "r", "workflow_id": "episode.yml",
                                           "ref": "main", "inputs": {"plan": "x"}}),
+    # review of #422: only `verify-preflight P && gh workflow run episode.yml -f plan=P`, the same P, nothing else
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7}; gh workflow run episode.yml -f plan={G7}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} || gh workflow run episode.yml -f plan={G7}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml -f plan={G8}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml -f plan={G7}; "
+                         f"gh workflow run episode.yml -f plan={G8}"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml -f plan={G7}x"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && "
+                         "gh api repos/o/r/actions/workflows/episode.yml/dispatches -f ref=main"}),
     # E96/E106: cf-images takes pilot-NNN or characters, never a path
     ("Bash", {"command": "gh workflow run cf-images.yml -f pilot=migration/production/characters -f engine=flux"}),
     ("Bash", {"command": "gh workflow run cf-images.yml -f engine=flux -f pilot='production/pilot-015'"}),
@@ -128,6 +139,12 @@ ALLOW = [
     ("Bash", {"command": "python3 -I -B migration/production/bible/episode_build.py verify-preflight "
                          "migration/production/bible/plans/genesis-08-short.json && gh workflow run episode.yml "
                          "-f plan=migration/production/bible/plans/genesis-08-short.json"}),
+    ("Bash", {"command": f"python3 -I -B {EB} verify-preflight {G7} && gh workflow run episode.yml --ref main "
+                         f"-f plan={G7} -f resume_run=40297987571"}),
+    ("Bash", {"command": f"python3 {EB} verify-preflight '{G7}' && gh workflow run episode.yml -f 'plan={G7}'"}),
+    ("Bash", {"command": 'gh workflow run cf-images.yml -f pilot="characters" -f engine=flux'}),
+    ("Bash", {"command": "gh workflow run cf-images.yml -f pilot='pilot-015' -f engine=sdxl"}),
+    ("Bash", {"command": 'gh workflow run cf-images.yml -f "pilot=characters" -f engine=flux'}),
     ("Bash", {"command": "gh workflow run publish-episode.yml -f episode=genesis-07-short"}),
     ("Bash", {"command": "gh run list --workflow episode.yml --limit 3"}),
     ("Bash", {"command": "gh workflow run cf-images.yml -f pilot=characters -f engine=flux -f only=ch-noah-front"}),

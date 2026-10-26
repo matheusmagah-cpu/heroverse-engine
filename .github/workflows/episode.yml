@@ -73,7 +73,17 @@ jobs:
           # E106: the still-mouth check of a voice-over Keeper must work before any generation too: a probe clip that
           # passed it (keeper-vo/calibration.json) passes again, and the talking calibration clip is flagged
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper-vo/probe-k-close-1-373107379233670656.mp4 "$RUNNER_TEMP/face_landmarker.task"
-          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" && { echo "STILL_MOUTH_CHECK_BLIND"; exit 1; } || true
+          # review of #422: the talking clip must be flagged MOUTH_TALKING itself, not merely fail in some way
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/still.json" || true
+          python3 -I - "$RUNNER_TEMP/still.json" <<'PY'
+          import json, sys
+          lines = open(sys.argv[1]).read().strip().splitlines()
+          try:
+              flags = json.loads(lines[-1]).get("flags", [])
+          except (IndexError, ValueError, AttributeError):
+              flags = []
+          sys.exit(0 if "MOUTH_TALKING" in flags else "STILL_MOUTH_CHECK_BLIND")
+          PY
           mkdir -p "$WORK" "$OUT"
       - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
         run: |

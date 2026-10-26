@@ -135,6 +135,10 @@
    "class": "D",
    "resume": "the made images are kept and the rest wait for the next nightly slot (E62); episode_preflight reports today's images against the ~44 a day before a sheet is dispatched"
   },
+  "CF_HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
+  },
   "CF_NO_IMAGE": {
    "class": "C",
    "probe": "one image (ONLY=<id>) before a batch"
@@ -421,6 +425,10 @@
   "HERO_YT_AUTHORIZED_USER_JSON": {
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
+  },
+  "HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
   },
   "IMAGE_BELOW_FRAME": {
    "class": "B",
@@ -1073,6 +1081,11 @@
    "class": "I",
    "guard": "migration/integrations/pavo/test_video.py::def test_"
   },
+  "REFERENCES_OVER_{}": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+   "note": "REFERENCES_OVER_5: reference_problems counts the images as request() sends them"
+  },
   "REFERENCE_ASSET_NAME_REFUSED": {
    "class": "A",
    "was": "B",
@@ -1151,6 +1164,10 @@
    "class": "C",
    "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
   },
+  "RMTREE_REFUSED": {
+   "class": "I",
+   "guard": "migration/production/bible/test_episode_preflight.py::def test_a_crafted_episode_id_is_refused_before_any_path"
+  },
   "ROUTE_NOT_ALLOWED": {
    "class": "I",
    "guard": "migration/integrations/pavo/test_video.py::def test_"
@@ -1176,6 +1193,11 @@
   "SHORT_NOT_PUBLIC": {
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "SHOTS_END_{}_NOT_{}": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
   },
   "SHOT_FAILED": {
    "class": "C",
@@ -1228,6 +1250,46 @@
    "class": "A",
    "early": "migration/publish/preflight.py::captions.problems(",
    "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_ARROW_IN_TEXT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_BLANK_LINE_INSIDE": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_EMPTY_OR_SHORT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_NOT_POSITIVE": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_NUMBER": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_OVERLAPS_PREVIOUS": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_PAST_VIDEO_END": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
+  },
+  "SRT_CUE_{}_TIMING_FORMAT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "captions.problems runs in publish/preflight.py before any upload"
   },
   "SRT_EMPTY": {
    "class": "A",
@@ -1312,6 +1374,10 @@
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
   },
+  "UPLOAD_INIT_HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
+  },
   "UPLOAD_NOT_COMPLETED": {
    "class": "D",
    "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
@@ -1363,6 +1429,20 @@
   "WORK_OUTSIDE_REPOSITORY": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::inside the checkout: Pavo reads repo paths only"
+  },
+  "{}_CLIP_SHORT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
+  },
+  "{}_HTTP_{}": {
+   "class": "D",
+   "resume": "an HTTP refusal of Cloudflare or YouTube: cf-images keeps the made images (E62); the publish ledger keeps every finished step and the next run resumes at the missing one"
+  },
+  "{}_NOT_ON_HIS_LINE": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "KEEPER_/SPEAKER_CLIP_SHORT, KEEPER_/SPEAKER_NOT_ON_HIS_LINE (compose_shots) and short_engine.check_shots' end, all run by compose_prediction at plan time and on the measured voice"
   }
  },
  "review": {

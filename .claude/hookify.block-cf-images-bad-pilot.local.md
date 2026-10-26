@@ -3,7 +3,7 @@ name: block-cf-images-bad-pilot
 enabled: true
 event: bash
 action: block
-pattern: \bgh\s+workflow\s+run\s+['"]?(\.github/workflows/)?cf-images(\.yml)?\b[^\n;&|]*(-f|-F|--field|--raw-field)\s*['"]?pilot=(?!(pilot-[0-9]{3}|characters)['"]?(\s|$))
+pattern: \bgh\s+workflow\s+run\s+['"]?(\.github/workflows/)?cf-images(\.yml)?\b[^\n;&|]*(-f|-F|--field|--raw-field)\s*['"]?pilot=(?!['"]?(pilot-[0-9]{3}|characters)['"]?(\s|$))
 ---
 
 **Bloqueado: o `pilot` do cf-images é só `pilot-NNN` ou `characters`** (E96, E106).

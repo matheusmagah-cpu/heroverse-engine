@@ -27,13 +27,13 @@ evidence/preflight/<episode>.json (bound to the plan's and characters.json's sha
 verify-preflight on main before any secret is used, so a build without a PASS preflight of that exact plan stops in
 its first step.
 """
+import argparse
 import contextlib
 from datetime import datetime, timezone
 import hashlib
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import sys
 
@@ -51,12 +51,33 @@ CF_DAILY_IMAGES = 44          # Workers AI free allocation in FLUX images a day 
 SHEET_IMAGES = len(ch.REF_ORDER)   # a character's reference sheet: front, three-quarter, full
 
 
+WORK_ROOT = REPO / ".episode"   # the only place preflight creates or removes a work directory
+# the code a report vouches for: a change to any of them can change what the build refuses
+CODE = [HERE / "episode_build.py", HERE / "plan_check.py", HERE / "voice_pace.py", HERE / "lipsync_check.py",
+        HERE / "episode_preflight.py"]
+
+
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def report_path(plan):
-    return REPORTS / f"{plan['episode']}.json"
+def digest(value):
+    """sha256 of a canonical JSON form (sorted keys, no spaces): the same data always gives the same digest."""
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+                          .encode()).hexdigest()
+
+
+def episode_id(plan_path, plan):
+    """Review of #422: the episode id names the work directory and the report, so it is checked first, before any
+    path is built: episode.yml's pattern (plan_check.EPISODE_ID) and the plan file's own name."""
+    ep = plan.get("episode") if isinstance(plan, dict) else None
+    if not isinstance(ep, str) or not plan_check.EPISODE_ID.fullmatch(ep) or Path(plan_path).stem != ep:
+        raise SystemExit(f"EPISODE_ID_REFUSED {ep!r} (a-z 0-9 and single hyphens, the plan file named <episode>.json)")
+    return ep
+
+
+def report_path(plan, plan_path):
+    return REPORTS / f"{episode_id(plan_path, plan)}.json"
 
 
 def characters_used(plan):
@@ -167,8 +188,9 @@ def probe_rows(plan, chars, probes=None):
                 row.pop("prompt")
                 minimum = MIN_VO_PROBE_GENERATIONS
             generations = sum(x.get("generations") or 0 for x in found)
+            row["matched"] = found   # the probe entries this shot relies on (binding; dropped from the report rows)
             if generations < minimum:   # none, or too few to be a rate (1 of 3 is not evidence)
-                row.update(probe="PROBE_REQUIRED", generations=generations)
+                row.update(probe="PROBE_REQUIRED", generations=generations, minimum=minimum)
                 missing.append(s["id"])
             else:
                 passed = sum(x.get("passed") or 0 for x in found)
@@ -187,8 +209,38 @@ def probe_rows(plan, chars, probes=None):
     return rows, missing, low, (round(run_chance, 3) if not missing else None)
 
 
+def binding(plan_path, plan, chars_raw=None, probes=None):
+    """Review of #422: what a report vouches for, part by part, so a STALE refusal names what changed and a change
+    the plan does not use (another character approved) leaves it valid: the plan's bytes; the characters.json
+    entries it uses (God's voice included when He speaks); their image records; the setups.json probes its talking
+    and voice-over shots match; the preflight and build code."""
+    data = json.loads(CHARACTERS.read_text()) if chars_raw is None else chars_raw
+    used = characters_used(plan)
+    entries = {cid: data["characters"].get(cid) for cid in used}
+    if any(plan_check.speaking(s) and s["speaker"] == ch.GOD for s in plan["shots"]):
+        entries[ch.GOD] = data.get("god")
+    records = {p.name: sha256(p) for cid in used for p in sorted((ch.HERE / "images").glob(f"ch-{cid}-*.json"))}
+    rows = probe_rows(plan, data["characters"], probes)[0]
+    matched = sorted((digest(x) for r in rows for x in r.get("matched", [])))
+    return {"plan": sha256(plan_path), "characters": digest(entries), "image_records": records,
+            "setups": digest(matched), "code": {p.name: sha256(p) for p in CODE}}
+
+
+def stale_parts(old, new):
+    """The parts of a binding that changed: top-level names, and the file names inside image_records and code."""
+    out = []
+    for part in sorted(set(old or {}) | set(new)):
+        a, b = (old or {}).get(part), new.get(part)
+        if isinstance(b, dict) and isinstance(a, dict):
+            out += [f"{part}:{k}" for k in sorted(set(a) | set(b)) if a.get(k) != b.get(k)]
+        elif a != b:
+            out.append(part)
+    return out
+
+
 def measured_pace(plan, work):
-    """Words a second of each voice-track line as Kokoro spoke it (before the retime), by speaker."""
+    """Words a second of each voice-track line as Kokoro spoke it (before the retime), by speaker; a line measured
+    at no length is listed as None, never divided by."""
     items, _ = plan_check.sequence(plan)
     timeline = json.loads((Path(work) / "timeline.json").read_text())
     by = {}
@@ -196,15 +248,16 @@ def measured_pace(plan, work):
         sentences = [s for s in timeline["sentences"] if s["segment"] == f"n{k:02d}"]
         if sentences:
             seconds = sentences[-1]["end"] - sentences[0]["start"]
-            by.setdefault(x.get("speaker") or "narration", []).append(round(plan_check.words(x["text"]) / seconds, 2))
+            pace = round(plan_check.words(x["text"]) / seconds, 2) if seconds > 0 else None
+            by.setdefault(x.get("speaker") or "narration", []).append(pace)
     return by
 
 
 def voice_step(plan, voice_python, prepared, work):
     """Kokoro locally (the pinned model in a prepared work directory), then the build's lines step."""
     work = Path(work)
-    if work.exists():
-        shutil.rmtree(work)
+    if work.exists() or work.is_symlink():
+        eb.safe_rmtree(work, WORK_ROOT)   # review of #422: never anything outside .episode/
     work.mkdir(parents=True)
     for name in ("source", "models"):
         src = Path(prepared) / name
@@ -249,11 +302,11 @@ def refs_and_requests(plan, work):
 def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_images=None):
     plan_path = Path(plan_path)
     plan = json.loads(plan_path.read_text())
+    ep = episode_id(plan_path, plan)   # before any path is built or any step runs (review of #422)
     chars = chars if chars is not None else ch.registry()
     result = plan_check.check(plan, chars)
     report = {"plan": str(plan_path.resolve().relative_to(REPO.resolve())) if REPO.resolve() in plan_path.resolve().parents
-              else str(plan_path), "episode": plan.get("episode"), "plan_sha256": sha256(plan_path),
-              "characters_sha256": sha256(CHARACTERS),
+              else str(plan_path), "episode": ep,
               "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
               "plan_check": {"problems": plan_check.path_problems(plan_path, plan) + result["problems"],
                              "pending": result["pending"], "estimate": result["estimate"]}}
@@ -267,7 +320,7 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
     # the voice and the setups are measured whenever the plan's structure holds (a character still DRAFT is no
     # reason to learn its pace or its missing probe later)
     sound = result["estimate"] != {}
-    work = REPO / ".episode" / f"preflight-{plan.get('episode')}"
+    work = WORK_ROOT / f"preflight-{ep}"
     if voice and sound:
         try:
             report["voice"] = voice_step(plan, voice[0], voice[1], work)
@@ -288,66 +341,91 @@ def preflight(plan_path, voice=None, refs=False, chars=None, setups=None, today_
         blockers.append("REQUESTS_NOT_CHECKED (run with --refs once the plan and the voice are clean)")
     if sound:
         rows, missing, low, chance = probe_rows(plan, chars, setups)
+        for r in rows:
+            r.pop("matched", None)
         report["setups"] = {"shots": rows, "probes_required": missing, "rate_low": low,
                             "talk_attempts": eb.TALK_ATTEMPTS, "min_shot_chance": MIN_SHOT_CHANCE,
                             "run_chance_all_talking_shots": chance}
-        blockers += [f"PROBE_REQUIRED {r['shot']} ({r['generations']} of the >= {MIN_PROBE_GENERATIONS} direct 0-credit "
-                     "Pavo generations of this line with its speaker, reference and binding, lipsync_check, recorded in "
-                     "evidence/pavo/setups.json)" for r in rows if r.get("shot") in missing]
-        blockers += [f"PROBE_RATE_LOW {r['shot']} (lips passed {r['passed']}: {r['shot_chance']} within "
-                     f"{eb.TALK_ATTEMPTS} attempts < {MIN_SHOT_CHANCE})" for r in rows if r.get("shot") in low]
+        blockers += [probe_required(r) for r in rows if r.get("shot") in missing]
+        blockers += [f"PROBE_RATE_LOW {r['shot']} ({'still mouth' if r.get('kind') == 'still_mouth' else 'lips'} passed "
+                     f"{r['passed']}: {r['shot_chance']} within {eb.TALK_ATTEMPTS} attempts < {MIN_SHOT_CHANCE})"
+                     for r in rows if r.get("shot") in low]
+    report["binding"] = binding(plan_path, plan, probes=setups)
     report["blockers"] = blockers
     report["status"] = "PASS" if not blockers else "BLOCKED"
     return report
 
 
+def probe_required(row):
+    """PROBE_REQUIRED, in the words of the shot's own kind: a talking line or a voice-over Keeper prompt."""
+    if row.get("kind") == "still_mouth":
+        return (f"PROBE_REQUIRED {row['shot']} ({row['generations']} of the >= {MIN_VO_PROBE_GENERATIONS} direct "
+                "0-credit Pavo generations of this voice-over Keeper shot, matched on its exact prompt and its talking "
+                "reference frame, judged by lipsync_check --still-mouth, recorded in evidence/pavo/setups.json)")
+    return (f"PROBE_REQUIRED {row['shot']} ({row['generations']} of the >= {MIN_PROBE_GENERATIONS} direct 0-credit "
+            "Pavo generations of this line with its speaker, reference and binding, judged by lipsync_check, "
+            "recorded in evidence/pavo/setups.json)")
+
+
 def verify(plan_path):
-    """episode.yml's first step: the committed preflight report is PASS for this exact plan and character bible."""
+    """episode.yml's first step: the committed preflight report is PASS and bound to what this plan uses now (the
+    plan, its characters and their image records, its probes, the preflight and build code)."""
     plan_path = Path(plan_path)
     plan = json.loads(plan_path.read_text())
-    path = report_path(plan)
+    path = report_path(plan, plan_path)
     if not path.exists():
-        return f"PREFLIGHT_MISSING {path.name} in {REPORTS.name}/ (episode_build.py preflight PLAN --voice ... --refs --write, by PR)"
+        return (f"PREFLIGHT_MISSING {path.name} in {REPORTS.name}/ (episode_build.py preflight PLAN --voice ... "
+                "--refs --write, by PR)")
     report = json.loads(path.read_text())
-    if report.get("plan_sha256") != sha256(plan_path) or report.get("characters_sha256") != sha256(CHARACTERS):
-        return "PREFLIGHT_STALE (the plan or characters.json changed after the preflight; run it again)"
+    changed = stale_parts(report.get("binding"), binding(plan_path, plan))
+    if changed:
+        return f"PREFLIGHT_STALE {', '.join(changed)} changed after the preflight; run it again"
     if report.get("status") != "PASS":
         return "PREFLIGHT_NOT_PASS " + "; ".join(report.get("blockers", []))[:600]
     return None
 
 
 def record_problems(episode, video=None):
-    """E106: what publish-episode.yml's publish_episode.problems would refuse (EPISODE_REFUSED: TITLE_LENGTH,
-    DESCRIPTION_LENGTH, DISCLOSURE_MISSING, the Short's words, OUTPUT_SHA256_MISMATCH with the video), with its own
-    functions, before that workflow is dispatched."""
-    pe = plan_check.publish_episode
-    out = pe.short_problems(episode)
-    if not 0 < len(episode.get("title") or "") <= pe.TITLE_MAX:
-        out.append("TITLE_LENGTH")
-    out += pe.description_problems(episode.get("description") or "")
-    if video is not None and pe.sha256_file(video) != episode.get("output_sha256"):
-        out.append("OUTPUT_SHA256_MISMATCH")
-    return out
+    """E106: what publish-episode.yml refuses in the record (EPISODE_REFUSED), by publish_episode.problems itself,
+    before that workflow is dispatched; the file's sha256 only when the video is given."""
+    try:
+        return plan_check.publish_episode.problems(episode, video)
+    except KeyError as exc:   # a record missing a field publish_episode reads: named, never a crash
+        return [f"RECORD_FIELD_MISSING {exc.args[0]}"]
+
+
+def parser():
+    p = argparse.ArgumentParser(prog="episode_build.py", description="E106: the preflight of a Short's plan, its "
+                                "verification by episode.yml, and the check of an episode record before publishing.")
+    sub = p.add_subparsers(dest="cmd", required=True)
+    pre = sub.add_parser("preflight", help="run every check the build can know before its first Pavo generation")
+    pre.add_argument("plan")
+    pre.add_argument("--voice", nargs=2, metavar=("VOICE_PYTHON", "PREPARED_WORK"),
+                     help="the Kokoro venv's python and a work directory prepared by pilot_render.py prepare")
+    pre.add_argument("--refs", action="store_true", help="fetch the reference images and validate every request")
+    pre.add_argument("--write", action="store_true", help="save the report to evidence/preflight/<episode>.json")
+    ver = sub.add_parser("verify-preflight", help="exit 0 only when the committed report is PASS for this plan")
+    ver.add_argument("plan")
+    rec = sub.add_parser("check-record", help="publish_episode's rules on an episode record")
+    rec.add_argument("record")
+    rec.add_argument("video", nargs="?")
+    return p
 
 
 def main(argv):
-    if len(argv) >= 3 and argv[1] == "check-record":
-        bad = record_problems(json.loads(Path(argv[2]).read_text()), argv[3] if len(argv) > 3 else None)
-        print(json.dumps({"record": argv[2], "problems": bad}))
+    args = parser().parse_args(argv[1:])
+    if args.cmd == "check-record":
+        bad = record_problems(json.loads(Path(args.record).read_text()), args.video)
+        print(json.dumps({"record": args.record, "problems": bad}))
         return 1 if bad else 0
-    if len(argv) >= 3 and argv[1] == "verify-preflight":
-        bad = verify(argv[2])
+    if args.cmd == "verify-preflight":
+        bad = verify(args.plan)
         print(bad or "PREFLIGHT_PASS")
         return 1 if bad else 0
-    args = argv[2:]
-    voice, refs, write = None, "--refs" in args, "--write" in args
-    if "--voice" in args:
-        i = args.index("--voice")
-        voice = (args[i + 1], args[i + 2])
-    report = preflight(args[0], voice=voice, refs=refs)
+    report = preflight(args.plan, voice=tuple(args.voice) if args.voice else None, refs=args.refs)
     print(json.dumps(report, indent=1, ensure_ascii=False))
-    if write:
-        eb.save(report_path(json.loads(Path(args[0]).read_text())), report)
+    if args.write:
+        eb.save(report_path(json.loads(Path(args.plan).read_text()), args.plan), report)
     return 0 if report["status"] == "PASS" else 1
 
 

@@ -186,6 +186,18 @@ class Prediction(unittest.TestCase):
         short[carried[close][0]] = 4.0
         self.assertEqual([p.split()[0] for p in eb.predict(EXAMPLE, short)[0]], ["TALK_LINE_RETIME_OVER"])
 
+    def test_the_prediction_and_the_compose_share_one_establishing_share(self):
+        # review of #422: compose_prediction had its own copy of compose_step's establishing share
+        layout = eb.predict(EXAMPLE, DURATIONS)[1]
+        saved = eb.establishing_share
+        try:
+            eb.establishing_share = lambda plan, shots, total: 0.5
+            self.assertIn("ESTABLISHING_SHARE 0.500 (composed)", eb.compose_prediction(EXAMPLE, layout))
+        finally:
+            eb.establishing_share = saved
+        import inspect
+        self.assertIn("establishing_share(plan, shots, layout[\"total\"])", inspect.getsource(eb.compose_step))
+
 
 class FakeClient:
     def __init__(self, submissions, jobs=None):

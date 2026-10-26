@@ -59,13 +59,35 @@ def later_files():
     return files
 
 
+DYNAMIC = re.compile(r"^((?:\{\}|[A-Z0-9])+(?:_(?:\{\}|[A-Z0-9])+)+)(?![a-z])")
+
+
+def fstring_codes(text):
+    """Review of #422: codes built at run time (f"{kind.upper()}_CLIP_SHORT", f"REFERENCES_OVER_{n}") are found
+    in the AST: each f-string is rendered with {} for every value, and an UPPER_SNAKE head holding a {} is recorded
+    as that pattern ("{}_CLIP_SHORT", "REFERENCES_OVER_{}")."""
+    import ast
+    found = set()
+    for node in ast.walk(ast.parse(text)):
+        if isinstance(node, ast.JoinedStr):
+            rendered = "".join(v.value if isinstance(v, ast.Constant) and isinstance(v.value, str) else "{}"
+                               for v in node.values)
+            m = DYNAMIC.match(rendered)
+            if m and "{}" in m.group(1) and re.search(r"[A-Z]", m.group(1)):
+                found.add(m.group(1))
+    return found
+
+
 def codes_in(path):
-    """Refusal-shaped codes in a later stage: string literals that start with an UPPER_SNAKE word, and bare
-    `echo CODE` in workflow steps."""
-    text = Path(path).read_text()
+    """Refusal-shaped codes in a later stage: string literals that start with an UPPER_SNAKE word, the f-string
+    codes whose name is built at run time (as patterns with {}), and bare `echo CODE` in workflow steps."""
+    path = Path(path)
+    text = path.read_text()
     found = set(QUOTED.findall(text))
     if path.suffix == ".yml":
         found |= set(ECHOED.findall(text))
+    if path.suffix == ".py":
+        found |= fstring_codes(text)
     return found
 
 
@@ -179,8 +201,11 @@ class RefusalParity(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             p = Path(d, "x.py")
-            p.write_text('raise SystemExit(f"NEW_BUILD_REFUSAL {shot}")\nproblems.append("OTHER_ONE x")\n')
-            self.assertEqual(codes_in(p), {"NEW_BUILD_REFUSAL", "OTHER_ONE"})
+            p.write_text('raise SystemExit(f"NEW_BUILD_REFUSAL {shot}")\nproblems.append("OTHER_ONE x")\n'
+                         'raise SystemExit(f"{kind.upper()}_CLIP_SHORT {s}")\nout.append(f"LIMIT_OVER_{n} shot {i}")\n'
+                         'x = f"{STYLE} Wide shot"\ny = f"ch-{cid}-{shot}"\nz = f"{code} {sid}"\n')
+            # review of #422: the codes named at run time are found too, as patterns
+            self.assertEqual(codes_in(p), {"NEW_BUILD_REFUSAL", "OTHER_ONE", "{}_CLIP_SHORT", "LIMIT_OVER_{}"})
             y = Path(d, "x.yml")
             y.write_text('run: |\n  test -n "$X" || { echo X_MISSING; exit 1; }\n  echo "Y_REFUSED"\n')
             self.assertEqual(codes_in(y), {"X_MISSING", "Y_REFUSED"})

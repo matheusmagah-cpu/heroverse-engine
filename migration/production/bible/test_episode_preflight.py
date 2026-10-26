@@ -5,12 +5,14 @@ import copy
 import json
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parents[1] / "integrations" / "pavo"))
 import episode_preflight as pf  # noqa: E402
 
 EXAMPLE = HERE / "plans" / "genesis-07-short.json"
@@ -95,22 +97,82 @@ class Report(unittest.TestCase):
         saved = pf.REPORTS
         d = Path(tempfile.mkdtemp())
         try:
-            pf.REPORTS = d
-            plan = d / "p.json"
+            pf.REPORTS = d / "reports"
+            pf.REPORTS.mkdir()
+            plan = d / EXAMPLE.name
             shutil.copyfile(EXAMPLE, plan)
             episode = json.loads(plan.read_text())["episode"]
             self.assertTrue(pf.verify(plan).startswith("PREFLIGHT_MISSING"))
-            report = {"plan_sha256": pf.sha256(plan), "characters_sha256": pf.sha256(pf.CHARACTERS), "status": "BLOCKED",
+            report = {"binding": pf.binding(plan, json.loads(plan.read_text())), "status": "BLOCKED",
                       "blockers": ["PROBE_REQUIRED s-x"]}
-            (d / f"{episode}.json").write_text(json.dumps(report))
+            (pf.REPORTS / f"{episode}.json").write_text(json.dumps(report))
             self.assertTrue(pf.verify(plan).startswith("PREFLIGHT_NOT_PASS PROBE_REQUIRED"))
-            (d / f"{episode}.json").write_text(json.dumps(dict(report, status="PASS", blockers=[])))
+            (pf.REPORTS / f"{episode}.json").write_text(json.dumps(dict(report, status="PASS", blockers=[])))
             self.assertIsNone(pf.verify(plan))
             plan.write_text(plan.read_text().replace("Genesis", "Genesis "))   # the plan changed after its preflight
-            self.assertTrue(pf.verify(plan).startswith("PREFLIGHT_STALE"))
+            self.assertEqual(pf.verify(plan), "PREFLIGHT_STALE plan changed after the preflight; run it again")
         finally:
             pf.REPORTS = saved
             shutil.rmtree(d)
+
+    def test_the_binding_holds_what_the_plan_uses_and_names_what_changed(self):
+        # review of #422: approving another character leaves the report valid; a used character, its image
+        # records, its probes or the build code each make it stale, by name
+        plan = json.loads(EXAMPLE.read_text())
+        raw = json.loads(pf.CHARACTERS.read_text())
+        base = pf.binding(EXAMPLE, plan, raw)
+        other = copy.deepcopy(raw)
+        other["characters"]["noah"]["status"] = "APPROVED"            # not in genesis-07
+        self.assertEqual(pf.stale_parts(base, pf.binding(EXAMPLE, plan, other)), [])
+        used = copy.deepcopy(raw)
+        used["characters"]["keeper"]["voice"] = "am_adam"
+        self.assertEqual(pf.stale_parts(base, pf.binding(EXAMPLE, plan, used)), ["characters"])
+        probes = [dict(p, passed=1) if p.get("kind") == "still_mouth" else p for p in pf.load_probes()]
+        self.assertEqual(pf.stale_parts(base, pf.binding(EXAMPLE, plan, raw, probes)), ["setups"])
+        old = dict(base, code=dict(base["code"], **{"episode_build.py": "0" * 64}),
+                   image_records=dict(base["image_records"], **{"ch-keeper-talk.json": "0" * 64}))
+        self.assertEqual(pf.stale_parts(old, base), ["code:episode_build.py", "image_records:ch-keeper-talk.json"])
+        self.assertEqual(sorted(base["code"]), sorted(p.name for p in pf.CODE))
+
+    def test_a_crafted_episode_id_is_refused_before_any_path(self):
+        # review of #422: preflight built .episode/preflight-<episode> and evidence/preflight/<episode>.json from the
+        # plan's own field, and voice_step removed that directory: "x/../../migration" would delete the repository
+        d = Path(tempfile.mkdtemp())
+        try:
+            for bad in ("x/../../migration", "../x", "", "Genesis-07", "a--b"):
+                plan = dict(json.loads(EXAMPLE.read_text()), episode=bad)
+                path = d / "plan.json"
+                path.write_text(json.dumps(plan))
+                for call in (lambda: pf.preflight(path, voice=("py", str(d)), today_images=0),
+                             lambda: pf.verify(path), lambda: pf.report_path(plan, path)):
+                    with self.assertRaises(SystemExit) as err:
+                        call()
+                    self.assertTrue(str(err.exception).startswith("EPISODE_ID_REFUSED"), bad)
+            # a valid id that is not the file's name is refused too
+            path = d / "other.json"
+            path.write_text(EXAMPLE.read_text())
+            with self.assertRaises(SystemExit):
+                pf.verify(path)
+        finally:
+            shutil.rmtree(d)
+        # every removal stays inside its root: never the root, never outside it, never through a link
+        root = Path(tempfile.mkdtemp(dir=pf.REPO, prefix=".test-rm-"))
+        try:
+            inside = root / "w"
+            inside.mkdir()
+            for bad in (root, root / ".." / "migration", pf.REPO):
+                with self.assertRaises(SystemExit) as err:
+                    pf.eb.safe_rmtree(bad, root)
+                self.assertTrue(str(err.exception).startswith("RMTREE_REFUSED"))
+            link = root / "link"
+            link.symlink_to(pf.REPO / "migration")
+            with self.assertRaises(SystemExit):
+                pf.eb.safe_rmtree(link, root)
+            self.assertTrue((pf.REPO / "migration").is_dir())
+            pf.eb.safe_rmtree(inside, root)
+            self.assertFalse(inside.exists())
+        finally:
+            shutil.rmtree(root)
 
     def test_the_workflow_runs_verify_before_any_secret(self):
         wf = (pf.REPO / ".github" / "workflows" / "episode.yml").read_text()
@@ -118,11 +180,82 @@ class Report(unittest.TestCase):
         self.assertLess(verify, wf.index("secrets.PAVO_TOKEN"))
         self.assertLess(verify, wf.index("pilot_render.py voice"))
 
+    def test_the_still_mouth_negative_control_requires_mouth_talking(self):
+        # review of #422: any nonzero exit counted as "flagged"; only MOUTH_TALKING proves the check sees a mouth
+        wf = (pf.REPO / ".github" / "workflows" / "episode.yml").read_text()
+        start = wf.index("python3 -I - \"$RUNNER_TEMP/still.json\" <<'PY'")
+        end = wf.index("\n", wf.index("          PY", start))
+        snippet = "\n".join(line[10:] for line in wf[start - 10:end].splitlines()) + "\n"
+        d = Path(tempfile.mkdtemp())
+        try:
+            (d / "s.sh").write_text(snippet)
+            for out, ok in (('{"flags": ["MOUTH_TALKING", "MOUTH_NOT_CLOSED"]}', True),
+                            ('{"flags": ["FACE_NOT_FOUND"]}', False), ("Traceback ...", False), ("", False)):
+                (d / "still.json").write_text(out + "\n")
+                done = subprocess.run(["bash", str(d / "s.sh")], env={"RUNNER_TEMP": str(d), "PATH": "/usr/bin:/bin"},
+                                      capture_output=True, text=True)
+                self.assertEqual(done.returncode == 0, ok, out)
+                if not ok:
+                    self.assertIn("STILL_MOUTH_CHECK_BLIND", done.stderr)
+        finally:
+            shutil.rmtree(d)
+
     def test_a_committed_report_says_pass_only_with_no_blocker(self):
         for path in sorted(pf.REPORTS.glob("*.json")):
             report = json.loads(path.read_text())
             self.assertIn(report["status"], ("PASS", "BLOCKED"), path.name)
             self.assertEqual(report["status"] == "PASS", report["blockers"] == [], path.name)
+
+    def test_the_command_line_has_a_usage_and_the_pace_never_divides_by_zero(self):
+        with self.assertRaises(SystemExit):
+            pf.main(["episode_build.py", "preflight"])            # argparse: usage, not an IndexError
+        with self.assertRaises(SystemExit):
+            pf.main(["episode_build.py", "preflight", str(EXAMPLE), "--voice", "py"])
+        d = Path(tempfile.mkdtemp())
+        try:
+            plan = json.loads(EXAMPLE.read_text())
+            items, _ = pf.plan_check.sequence(plan)
+            (d / "timeline.json").write_text(json.dumps({"sentences": [
+                {"segment": f"n{k:02d}", "start": 1.0, "end": 1.0 if k == 0 else 3.0} for k in range(len(items))]}))
+            pace = pf.measured_pace(plan, d)
+            self.assertIn(None, [p for v in pace.values() for p in v])
+        finally:
+            shutil.rmtree(d)
+
+
+class Messages(unittest.TestCase):
+    def test_a_voice_over_probe_required_names_its_own_minimum_and_match(self):
+        plan = json.loads(EXAMPLE.read_text())
+        rows = pf.probe_rows(plan, pf.ch.registry(), probes=[])[0]
+        vo = [r for r in rows if r.get("kind") == "still_mouth"][0]
+        message = pf.probe_required(vo)
+        self.assertIn(f">= {pf.MIN_VO_PROBE_GENERATIONS} ", message)
+        self.assertIn("exact prompt", message)
+        self.assertIn("talking reference frame", message)
+        self.assertIn("--still-mouth", message)
+
+    def test_a_failing_request_is_a_named_refusal_never_a_crash(self):
+        plan = json.loads(EXAMPLE.read_text())
+
+        class Broken:
+            def prepare_video(self, *a):
+                raise RuntimeError("adapter blew up")
+
+            def _plan(self, *a):
+                raise AssertionError("never reached")
+
+        from client import PavoError
+
+        class Empty:
+            def prepare_video(self, *a):
+                raise PavoError("")
+
+        layout = {"keeper": {}, "speakers": {}}
+        for client, word in ((Broken(), "RuntimeError"), (Empty(), "PavoError")):
+            out = pf.eb.request_problems({"shots": plan["shots"][:1], "aspect_ratio": "9:16"}, layout,
+                                         {"keeper:talk": ["x.jpg"]}, client)
+            self.assertEqual(len(out), 1)
+            self.assertTrue(out[0].startswith("PAVO_REQUEST_INVALID") and word in out[0], out)
 
 
 class Allocation(unittest.TestCase):
@@ -141,6 +274,14 @@ class Record(unittest.TestCase):
         self.assertEqual(pf.record_problems(rec), [])
         bad = dict(rec, title="x" * 101, description=rec["description"].replace("(public domain)", ""))
         self.assertEqual(pf.record_problems(bad), ["TITLE_LENGTH", "DISCLOSURE_MISSING"])
+        # review of #422: it is publish_episode.problems itself, not a copy of its rules
+        pe, saved = pf.plan_check.publish_episode, pf.plan_check.publish_episode.problems
+        try:
+            pe.problems = lambda episode, video=None: ["FROM_PUBLISH_EPISODE", video]
+            self.assertEqual(pf.record_problems(rec, "v.mp4"), ["FROM_PUBLISH_EPISODE", "v.mp4"])
+        finally:
+            pe.problems = saved
+        self.assertEqual(pf.record_problems({"narration": rec.get("narration", [])}), ["RECORD_FIELD_MISSING title"])
 
 
 if __name__ == "__main__":

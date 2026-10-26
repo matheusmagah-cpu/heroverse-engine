@@ -110,6 +110,15 @@ def run(args, **kw):
     return done.stdout
 
 
+def safe_rmtree(path, root):
+    """Review of #422: a work directory is removed only strictly inside its intended root, never the root itself,
+    never through a symlink (shutil.rmtree does not follow the links inside it)."""
+    path, root = Path(path), Path(root).resolve()
+    if path.is_symlink() or root not in path.resolve().parents:
+        raise SystemExit(f"RMTREE_REFUSED {path} (only a directory inside {root})")
+    shutil.rmtree(path.resolve())
+
+
 def rel(path):
     """Repository-relative path (the Pavo adapter takes only those)."""
     target = Path(path).resolve()
@@ -267,11 +276,18 @@ def compose_prediction(plan, layout, clip_seconds=None):
         factor = short_engine.explicit_speed(c, have) if "speed" in c else short_engine.speed(c, have)
         if factor is None:
             problems.append(f"CLIP_TOO_SHORT shot {i} {c['shot']}")
+    share = establishing_share(plan, shots, layout["total"])
+    if share > plan_check.ESTABLISHING_SHARE_MAX:
+        problems.append(f"ESTABLISHING_SHARE {share:.3f} (composed)")
+    return problems
+
+
+def establishing_share(plan, shots, total):
+    """The composed time on establishing shots over the Short, rounded as the report keeps it: one helper for
+    compose_step and compose_prediction (review of #422)."""
     establishing = sum(c["end"] - c["start"] for c in shots
                        if any(s["id"] == c["shot"] and s.get("establishing") for s in plan["shots"]))
-    if layout["total"] and establishing / layout["total"] > plan_check.ESTABLISHING_SHARE_MAX:
-        problems.append(f"ESTABLISHING_SHARE {establishing / layout['total']:.3f} (composed)")
-    return problems
+    return round(establishing / total, 3) if total else 0.0
 
 
 def predict(plan, durations):
@@ -366,9 +382,9 @@ def request_problems(plan, layout, refs, client=None, chars=None):
             client.prepare_video(req["prompt"], req["seconds"], req["aspect_ratio"])
             client._plan("", "", req["references"], req["audios"], req["sound"])
         except PavoError as exc:
-            out.append(f"PAVO_REQUEST_INVALID {shot['id']} {str(exc).split()[0]}")
-        except (SystemExit, KeyError) as exc:
-            out.append(f"PAVO_REQUEST_INVALID {shot['id']} {exc}")
+            out.append(f"PAVO_REQUEST_INVALID {shot['id']} {(str(exc).split() or ['PavoError'])[0]}")
+        except (Exception, SystemExit) as exc:   # review of #422: any failure is a refusal by name, never a crash
+            out.append(f"PAVO_REQUEST_INVALID {shot['id']} {type(exc).__name__}: {str(exc)[:200]}")
     return out
 
 
@@ -999,9 +1015,6 @@ def compose_step(plan, work, music, out):
     dip = round(layout["total"] - FADE_OUT, 2)
     unexpected = clip_check.unexpected(runs, [dip], length)
     lufs = measure_lufs(out)
-    total = layout["total"]
-    establishing = sum(c["end"] - c["start"] for c in shots
-                       if any(s["id"] == c["shot"] and s.get("establishing") for s in plan["shots"]))
     report_path = work / "report.json"
     report = load(report_path) if report_path.exists() else {"episode": plan["episode"], "shots": {}}
     report["composed"] = {
@@ -1009,7 +1022,7 @@ def compose_step(plan, work, music, out):
         "black_check": {"black_starts": runs, "unexpected": unexpected, "intended_dips": [dip]},
         "lufs": lufs, "keeper_share": layout["keeper_share"], "lesson_share": layout.get("lesson_share"),
         "spoken": {**layout.get("speakers", {}), **layout.get("voice_over", {})},
-        "establishing_share": round(establishing / total, 3),
+        "establishing_share": establishing_share(plan, shots, layout["total"]),
         "cuts": len(shots), "timeline": [{k: c[k] for k in ("shot", "kind", "start", "end", "src_start", "speed")}
                                          for c in shots]}
     save(report_path, report)
@@ -1038,7 +1051,7 @@ def sheet_step(video, sheet, frames=20):
              "x=6:y=6:fontsize=16:fontcolor=yellow:box=1:boxcolor=black@0.6", tmp / f"f{k:02d}.jpg"])
     run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", tmp / "f%02d.jpg", "-vf", "tile=5x4", "-frames:v", "1",
          "-q:v", "3", sheet])
-    shutil.rmtree(tmp)
+    safe_rmtree(tmp, Path(sheet).parent)
 
 
 def main(argv):
