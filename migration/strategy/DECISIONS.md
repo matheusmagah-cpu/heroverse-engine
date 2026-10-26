@@ -408,3 +408,22 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
 - **Measured** (live intelligence): Genesis 7 v2 against parts 5-6 on viewed vs swiped, average % viewed, subscribers
   per 1,000 views and Short-to-long clicks. KEPT if better.
 
+
+## 2026-10-26 (day 9) — daily analysis: the YPP goal by day 14 is out of reach; the Bible arc and its long carry the plan
+
+- **Measured** (goal report 08:53 UTC; [official] Data API, [own] Analytics rows): subscribers 285 (+4 since 25/10 12:17,
+  needed 119/day to day 14); public long-form watch hours 21.6 [own] (+8.2 h, needed 663/day); public Shorts views
+  90 d 538 [own] (the Shorts path needs 10 M). Distance factor: subscribers ~30x short, watch hours ~80x short. The
+  Bible Shorts get 112-242 views each in the first day (parts 1-4), the prayer longs 0-78 views; no long has any
+  traffic from Shorts yet (funnel section: NO_SHORTS_TRAFFIC on all 10, the prayer longs have no linked Shorts).
+- **Reading.** Monetisation by 31/10 (day 14) is not reachable at any realistic rate; 16/11 (day 30) needs the long
+  series to earn its own browse/suggested traffic. Nothing in the data supports more prayer longs: the old niche's
+  longs (pilot-008 on 27/10 00:00, already scheduled) are the last.
+- **Decision of the day.** (1) Keep 2 Bible Shorts a day (13:30 and 23:30 UTC): Genesis 5 today 13:30, Genesis 6
+  today 23:30 (the reviewed landscape version unless the new format is ready by 19:30), Genesis 7 tomorrow 13:30
+  (new format; build resuming after E93-E95), Genesis 8 tomorrow 23:30 (plan in writing). (2) The first Bible long
+  (arc 1, pilot-015) stays on 28/10 10:00 with the long beat map (structures/bible-story-long.json script) and the
+  arc links (#404). (3) Noah's reference sheet generated today (cf-images) so he can speak from part 8. (4) The
+  daily vidIQ mining moves to the long's package (title, thumbnail) with more weak contrasts.
+- **Execution today.** E93 (Pavo outage waited out, resume), E94 (failure evidence), E95 (talking-clip binding: clip
+  length ~ speech, prompt binding, speaking reference) in progress; heartbeat driven by the hourly clock.

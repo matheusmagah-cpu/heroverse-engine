@@ -1,0 +1,109 @@
+{
+ "date": "2026-10-26",
+ "error": "E98",
+ "line": {
+  "wav": "migration/evidence/pavo/20261026/keeper/line-01.wav",
+  "seconds": 6.385,
+  "clip_s": 7
+ },
+ "method": "direct Pavo calls (0 credits) on the same Keeper line, reference storyteller-ref.jpg unless noted, each clip checked with lipsync_check.py (thresholds unchanged: audio >= 0.85, mouth >= 0.45, speak/pause >= 1.5, face >= 0.8)",
+ "failed_run": {
+  "run_id": 40297987571,
+  "shot": "k-insight",
+  "clip_s": 9,
+  "evidence_branch": "claude/episode-genesis-07-short-40297987571-failed",
+  "generations": [
+   {
+    "audio": 0.852,
+    "mouth": 0.441,
+    "face": 0.83
+   },
+   {
+    "audio": 0.946,
+    "mouth": 0.232,
+    "face": 0.85,
+    "flags": [
+     "MOUTH_OPEN_IN_PAUSES"
+    ]
+   },
+   {
+    "audio": 0.724,
+    "mouth": 0.429,
+    "face": 0.84
+   }
+  ]
+ },
+ "measurements": [
+  {
+   "variant": "run prompt (close-up, slow push-in, leans toward the fire)",
+   "conversation_id": "373044695728917568",
+   "audio": 0.851,
+   "mouth": 0.496,
+   "face": 0.77,
+   "pass": false
+  },
+  {
+   "variant": "camera-facing, static camera, head level",
+   "conversation_id": "373044605862360832",
+   "audio": 0.908,
+   "mouth": 0.45,
+   "face": 0.89,
+   "pass": true
+  },
+  {
+   "variant": "camera-facing, static camera, head level",
+   "conversation_id": "373046839102671488",
+   "audio": 0.897,
+   "mouth": 0.584,
+   "face": 0.81,
+   "pass": true
+  },
+  {
+   "variant": "camera-facing, static camera, head level",
+   "conversation_id": "373046928076198528",
+   "audio": 0.991,
+   "mouth": 0.592,
+   "face": 0.75,
+   "pass": false
+  },
+  {
+   "variant": "camera-facing, static camera, head level",
+   "conversation_id": "373046989128809152",
+   "audio": 0.986,
+   "mouth": 0.32,
+   "face": 0.7,
+   "pass": false
+  },
+  {
+   "variant": "camera-facing + reference cropped to head and shoulders",
+   "conversation_id": "373048538416626368",
+   "audio": 0.908,
+   "mouth": 0.212,
+   "face": 0.69,
+   "pass": false
+  },
+  {
+   "variant": "camera-facing + reference cropped to head and shoulders",
+   "conversation_id": "373048604434649728",
+   "audio": 0.913,
+   "mouth": 0.403,
+   "face": 0.86,
+   "pass": false
+  },
+  {
+   "variant": "camera-facing + reference cropped to head and shoulders",
+   "conversation_id": "373048696939813440",
+   "audio": 0.886,
+   "mouth": 0.504,
+   "face": 0.92,
+   "pass": true
+  }
+ ],
+ "conclusions": [
+  "with the E95 binding the audio is kept every time (0.72-0.99, 10 of 11 >= 0.85)",
+  "the lips check passes about 4 times in 10 per generation whatever the variant (run prompt 0 of 4, camera-facing 2 of 4, cropped reference 1 of 3); the misses are a face lost in the fire's deep side shadow and the beard, not a drifting mouth",
+  "Pavo copies the reference's framing (medium shot with the scroll) whatever the prompt says, so a close-up word does not enlarge the face; a cropped reference did not help",
+  "3 generations per talking shot pass a shot ~78 % of the time and a three-Keeper-shot run ~48 %; 6 generations ~95 % and ~86 %"
+ ],
+ "rules": "episode_build TALK_ATTEMPTS = 6 for talking shots (scenes keep 3); plan_check KEEPER_POSE: a talking Keeper prompt says 'static camera' and 'looks straight into the camera'; thresholds unchanged"
+}

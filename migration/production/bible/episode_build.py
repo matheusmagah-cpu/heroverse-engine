@@ -8,13 +8,16 @@ the episode record and dispatches publish-episode.yml.
 
   episode_build.py voice-script PLAN WORK        WORK/voice-script.json for pilot_render.py voice (one segment a line
                                                  of plan_check.sequence; a spoken line in its speaker's own voice)
-  episode_build.py lines PLAN WORK               per-line WAVs, the voice track rebuilt from them in order, each
-                                                 talking clip's input audio (the Keeper's lines, a character's line;
-                                                 mono 44.1 kHz), WORK/layout.json; refuses a measured talking line
-                                                 outside 2-12 s, a Keeper share or a lesson share > 25 % and a length
-                                                 outside the part's range (170-179 s from part 7)
+  episode_build.py lines PLAN WORK               per-line WAVs, each talking line retimed (atempo, <= +-10 %) to fit
+                                                 a 4-12 s clip 0.25-0.65 s longer than its speech (E95), the voice
+                                                 track rebuilt from them in order, each talking clip's input audio
+                                                 (the Keeper's lines, a character's line; mono 44.1 kHz),
+                                                 WORK/layout.json; refuses TALK_LINE_RETIME_OVER, a Keeper share or a
+                                                 lesson share > 25 % and a length outside the part's range (170-179 s
+                                                 from part 7)
   episode_build.py refs PLAN WORK                approved reference images (release asset or repository file, sha256
-                                                 checked), as JPEG <= 1536 px in WORK/refs
+                                                 checked), as JPEG <= 1536 px in WORK/refs; a talking speaker's
+                                                 `talk_refs` speaking frame as "<id>:talk" (E95)
   episode_build.py generate PLAN WORK LIP_PYTHON FACE_MODEL
                                                  one Pavo generation per shot, in order (PAVO_TOKEN from the env):
                                                  fresh exact 0-credit quote (the adapter refuses any other price),
@@ -56,8 +59,10 @@ TAIL = plan_check.TAIL
 CUT_MAX = 4.0              # a scene cut every 2-4 s (DECISIONS 2026-10-26)
 ESTABLISHING_HOLD = plan_check.ESTABLISHING_HOLD
 MAX_SLOW = 1.3             # short_engine.MAX_SLOW
-KEEPER_MARGIN = 0.6        # the Keeper's clip runs past his last word (covers the 0.35 s gap before his next line)
 ATTEMPTS = 3               # one generation and at most 2 regenerations
+# E98: a talking clip passes the lips check about 4 times in 10 (evidence/pavo/20261026/keeper-lipsync-rate.json):
+# 3 generations lost a three-Keeper-shot run about half the time; 6 keep a shot at ~95 % (Pavo at 0 credits)
+TALK_ATTEMPTS = 6
 POLL_S = 15
 JOB_TIMEOUT_S = 25 * 60
 INCOMPLETE_POLLS = 8       # history can be empty just after submission; then "incomplete" means failed
@@ -71,6 +76,8 @@ TRANSIENT = {"PAVO_RATE_LIMITED": RATE_LIMIT_WAITS, "PAVO_UNREACHABLE": OUTAGE_W
 REF_SIDE = 1536
 LUFS = (-15.0, -13.0)
 FADE_OUT = 0.8             # short_engine.FADE_OUT
+RETIME_TRIM_MAX = 0.02     # atempo's few-ms miss cut or padded after a retime, never more (review of #412)
+HOLD_MARGIN = 0.01         # a talking clip's held last frame is written this much longer than the time it covers
 
 
 class ShotFailed(Exception):
@@ -157,6 +164,8 @@ def lines_step(plan, work):
     items, carried = plan_check.sequence(plan)
     timeline = load(work / "timeline.json")
     params, frames = read_wav(work / "voice.wav")
+    if params.sampwidth != 2:   # retime() reads atempo's pcm_s16le back under these params (review of #412)
+        raise SystemExit(f"VOICE_SAMPLE_WIDTH {params.sampwidth * 8}-bit voice.wav (16-bit PCM only)")
     rate, width = params.framerate, params.sampwidth * params.nchannels
     n = len(items)
     by_line = {k: [s for s in timeline["sentences"] if s["segment"] == f"n{k:02d}"] for k in range(n)}
@@ -166,10 +175,37 @@ def lines_step(plan, work):
     for k in range(n):
         a = int(round(by_line[k][0]["start"] * rate)) * width
         b = int(round(by_line[k][-1]["end"] * rate)) * width
-        piece = frames[a:b]
-        write_wav(work / "lines" / f"n{k:02d}.wav", params, piece)
-        pieces.append(piece)
-        durations.append(len(piece) / width / rate)
+        pieces.append(frames[a:b])
+        durations.append(len(frames[a:b]) / width / rate)
+    # E95: a talking clip keeps our audio only when it is 0.25-0.65 s longer than the speech; a talking line that
+    # misses that window is retimed (atempo, pitch kept, at most +-10 %) before anything is laid out, so the track,
+    # the captions, the input audio and the lips check all use the same retimed words
+    retimes, problems = {}, []
+    scale = [1.0] * n
+    for i, s in enumerate(plan["shots"]):
+        if not plan_check.talking(s):
+            continue
+        idx = carried[i]
+        gaps = LINE_GAP * (len(idx) - 1)
+        words = sum(durations[k] for k in idx)
+        speech = words + gaps
+        found = plan_check.talk_retime(words, gaps)   # the cap is on the words atempo stretches, not on the gaps
+        if found is None:
+            problems.append(f"TALK_LINE_RETIME_OVER {s['id']} {speech:.2f} s (no {plan_check.TALK_CLIP[0]}-"
+                            f"{plan_check.TALK_CLIP[1]} s clip within +-{plan_check.TALK_RETIME_MAX:.0%} of its words)")
+            continue
+        target, stretch = found
+        if stretch == 1.0:
+            continue
+        factor = 1 / stretch                                       # atempo > 1 speeds the words up
+        for k in idx:
+            piece = retime(pieces[k], params, factor, work / "lines" / f"n{k:02d}")
+            scale[k] = (len(piece) / width / rate) / durations[k]
+            pieces[k], durations[k] = piece, len(piece) / width / rate
+        retimes[s["id"]] = {"speech": round(speech, 3), "retimed": round(sum(durations[k] for k in idx) + gaps, 3),
+                            "atempo": round(factor, 4)}
+    for k in range(n):
+        write_wav(work / "lines" / f"n{k:02d}.wav", params, pieces[k])
     layout = line_layout(durations)
     silence = b"\x00" * (int(round(LINE_GAP * rate)) * width)
     track = silence.join(pieces)
@@ -177,37 +213,44 @@ def lines_step(plan, work):
     voice_seconds = round(len(track) / width / rate, 3)
     sentences = []
     for k in range(n):
-        shift = layout[k][0] - by_line[k][0]["start"]
+        first = by_line[k][0]["start"]
         who = {"speaker": items[k]["speaker"]} if items[k].get("speaker") else {}
-        sentences += [dict({"segment": f"n{k:02d}", "text": s["text"], "start": round(s["start"] + shift, 3),
-                            "end": round(s["end"] + shift, 3)}, **who) for s in by_line[k]]
+        sentences += [dict({"segment": f"n{k:02d}", "text": s["text"],
+                            "start": round(layout[k][0] + (s["start"] - first) * scale[k], 3),
+                            "end": round(layout[k][0] + (s["end"] - first) * scale[k], 3)}, **who) for s in by_line[k]]
+        sentences[-1]["end"] = round(layout[k][1], 3)
     save(work / "compose-timeline.json", {"voice_seconds": voice_seconds, "sentences": sentences,
                                           "voice_id": VOICE["voice_id"], "speed": VOICE["speed"], "sample_rate": rate})
     total = round(voice_seconds + TAIL, 3)
-    keeper, speakers, voice_over, problems, keeper_seconds = {}, {}, {}, [], 0.0
+    keeper, speakers, voice_over, keeper_seconds = {}, {}, {}, 0.0
     shots = plan["shots"]
+    refused = {p.split()[1] for p in problems}
     for i, s in enumerate(shots):
-        if s["kind"] != "keeper" and not plan_check.speaking(s):
+        if (s["kind"] != "keeper" and not plan_check.speaking(s)) or s["id"] in refused:
             continue
         start, end = keeper_span(carried[i], layout)
         seconds = end - start
+        talks = plan_check.talking(s)
         if s["kind"] == "keeper":
             keeper_seconds += seconds
-            limit = plan_check.KEEPER_LAST_MAX if i == len(shots) - 1 else plan_check.KEEPER_AUDIO[1]
             low, code, folder, into = plan_check.KEEPER_AUDIO[0], "KEEPER_AUDIO", "keeper", keeper
         else:
-            limit = plan_check.SPEAKER_AUDIO[1]
             low, code, folder = plan_check.SPEAKER_AUDIO[0], "SPEAKER_AUDIO", "speakers"
-            into = speakers if plan_check.talking(s) else voice_over
-        if not low <= seconds <= limit:
-            problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.1f} s)")
+            into = speakers if talks else voice_over
+        # one talking ceiling (plan_check.TALK_LINE_MAX: the retime brings every talking line under it; 1 ms is the
+        # layout's rounding); God's voice-over fills one scene clip
+        limit = plan_check.TALK_LINE_MAX if talks else plan_check.SPEAKER_AUDIO[1]
+        if not low <= seconds <= limit + (1e-3 if talks else 0.0):
+            problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.2f} s)")
             continue
-        if plan_check.talking(s):
-            # its clip holds the line, the gap or tail after it and the margin: refused here, before any Pavo clip
-            need = talk_need(seconds, i == len(shots) - 1)
-            if need > plan_check.TALK_CLIP_MAX:
-                problems.append(f"TALK_LINE_TOO_LONG {s['id']} {seconds:.2f} s (+ gap/tail + margin = {need:.2f} s > "
-                                f"the {plan_check.TALK_CLIP_MAX:.0f} s clip)")
+        if talks:
+            # its clip is ceil(speech) seconds with the speech 0.25-0.65 s shorter (E95): refused here, before any
+            # Pavo clip, when no 4-12 s clip can carry it
+            need = talk_need(seconds)
+            if need > plan_check.TALK_CLIP_MAX or not talk_fits(seconds):
+                problems.append(f"TALK_LINE_TOO_LONG {s['id']} {seconds:.2f} s (needs a {need} s clip; Pavo keeps our "
+                                f"audio in a {plan_check.TALK_CLIP[0]}-{plan_check.TALK_CLIP[1]} s clip 0.25-0.65 s "
+                                "longer than the speech)")
                 continue
         record = {"start": start, "end": end, "seconds": round(seconds, 3)}
         if s["kind"] != "keeper":
@@ -236,7 +279,7 @@ def lines_step(plan, work):
         problems.append(f"SHORT_LENGTH {total} s ({low:.0f}-{high:.0f}, measured)")
     result = {"lines": [{"start": a, "end": b} for a, b in layout], "voice_seconds": voice_seconds, "total": total,
               "keeper": keeper, "speakers": speakers, "voice_over": voice_over, "keeper_share": round(share, 3),
-              "lesson_share": round(lesson_share, 3), "problems": problems}
+              "lesson_share": round(lesson_share, 3), "retimed": retimes, "problems": problems}
     save(work / "layout.json", result)
     print(json.dumps({k: result[k] for k in ("voice_seconds", "total", "keeper_share", "lesson_share", "problems")}))
     if problems:
@@ -254,14 +297,15 @@ def sha256(path):
     return digest.hexdigest()
 
 
-def reference_records(cid, chars=None, images_dir=ch.HERE / "images"):
-    """The kept reference images of one APPROVED character, in characters.json order: [(record id, record)]."""
+def reference_records(cid, chars=None, images_dir=ch.HERE / "images", field="refs"):
+    """The kept reference images of one APPROVED character, in characters.json order: [(record id, record)].
+    field "talk_refs": its speaking frames (E95: a mouth-closed front view broke the lip tracking), [] when none."""
     chars = chars if chars is not None else ch.registry()
     c = chars.get(cid)
     if not c or c.get("status") != "APPROVED" or not c.get("refs"):
         raise SystemExit(f"CHARACTER_NOT_APPROVED {cid}")
     out = []
-    for shot in c["refs"]:
+    for shot in c.get(field) or []:
         rec = Path(images_dir) / f"ch-{cid}-{shot}.json"
         m = load(rec) if rec.exists() else {}
         if not m.get("sha256") or not (m.get("release_asset") or m.get("repo_path")):
@@ -277,15 +321,21 @@ def fetch_release_asset(name, dst):
 def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
     """Every reference a shot needs, verified by sha256 and resized to <= 1536 px JPEG (Flash takes up to 15 MiB)."""
     work = Path(work)
-    needed = []
+    needed, talkers = [], []
     for s in plan["shots"]:
         for cid in (["keeper"] if s["kind"] == "keeper" else s.get("characters", [])):
             if cid not in needed:
                 needed.append(cid)
+        if plan_check.talking(s) and speaker_of(s) not in talkers:
+            talkers.append(speaker_of(s))
     out = {}
-    for cid in needed:
-        out[cid] = []
-        for rid, m in reference_records(cid, chars):
+    wanted = [(cid, cid, "refs") for cid in needed] + [(f"{cid}:talk", cid, "talk_refs") for cid in talkers]
+    for key, cid, field in wanted:
+        records = reference_records(cid, chars, field=field)
+        if not records:
+            continue
+        out[key] = []
+        for rid, m in records:
             raw = work / "refs" / "raw" / rid
             raw.parent.mkdir(parents=True, exist_ok=True)
             if m.get("repo_path"):
@@ -303,7 +353,7 @@ def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
             run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", raw, "-vf",
                  f"scale='min({REF_SIDE},iw)':'min({REF_SIDE},ih)':force_original_aspect_ratio=decrease",
                  "-q:v", "2", "-frames:v", "1", jpg])
-            out[cid].append(rel(jpg))
+            out[key].append(rel(jpg))
     save(work / "refs.json", out)
     print(json.dumps({c: len(v) for c, v in out.items()}))
     return out
@@ -311,28 +361,83 @@ def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
 
 # ---------- generation ----------
 
-def talk_need(seconds, last):
-    """Seconds of clip a talking line needs: the line, then the tail (the closing shot) or the gap before the next
-    line, then the margin."""
-    return seconds + (TAIL if last else LINE_GAP) + KEEPER_MARGIN
+talk_need = plan_check.talk_need     # plan and build share the talking-clip rules (E95)
+talk_fits = plan_check.talk_fits
+
+
+def retime(piece, params, factor, stem):
+    """One line's PCM through ffmpeg atempo (pitch kept): factor > 1 shortens it. The result is cut or padded with
+    silence to round(frames / factor), since atempo misses by a few ms (11.7 s -> 11.553 s for 11.55 s) and a line
+    retimed to the ceiling would else be refused by it; a miss over RETIME_TRIM_MAX is refused (RETIME_TRIM_OVER).
+    16-bit PCM only (lines_step refuses any other voice.wav): the frames come back as pcm_s16le under its params."""
+    src, dst = Path(f"{stem}-native.wav"), Path(f"{stem}-retimed.wav")
+    write_wav(src, params, piece)
+    run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", src, "-af", f"atempo={factor:.5f}", "-ar",
+         str(params.framerate), "-ac", str(params.nchannels), "-c:a", "pcm_s16le", dst])
+    frames = read_wav(dst)[1]
+    width = params.sampwidth * params.nchannels
+    want = int(round(len(piece) / width / factor)) * width
+    miss = abs(len(frames) - want) / width / params.framerate
+    if miss > RETIME_TRIM_MAX:
+        raise SystemExit(f"RETIME_TRIM_OVER {Path(stem).name} {miss * 1000:.0f} ms from its target "
+                         f"(atempo misses by a few ms; at most {RETIME_TRIM_MAX * 1000:.0f} ms is cut or padded)")
+    return frames[:want] + b"\x00" * max(0, want - len(frames))
 
 
 def shot_seconds(shot, index, plan, layout):
     if not plan_check.talking(shot):
         return shot["seconds"]
-    need = talk_need(talk_record(layout, shot)["seconds"], index == len(plan["shots"]) - 1)
-    return max(4, min(12, math.ceil(need)))
+    return min(plan_check.TALK_CLIP[1], talk_need(talk_record(layout, shot)["seconds"]))
 
 
-def request(shot, index, plan, layout, refs):
+BOUND_AUDIO = "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice"
+UNBOUND_SPEECH = re.compile(r"speaks to the camera, (his|her|its) lips moving clearly with every word")
+
+
+def speaker_of(shot):
+    return ch.NARRATOR if shot["kind"] == "keeper" else shot["speaker"]
+
+
+def bind_prompt(prompt, who, chars=None):
+    """E95: Pavo kept our line in the Keeper's lips only when the prompt named the reference as the speaker ("Image 1
+    is the narrator") and tied the speech to the audio clip ("speaks the words of the audio clip, his lips moving in
+    sync with the voice"). The plan's "speaks to the camera, his lips moving clearly with every word" is replaced by
+    that clause, else the clause is added."""
+    chars = chars if chars is not None else ch.registry()
+    c = chars.get(who) or {}
+    pronoun = c.get("pronoun", "his")
+    label = "the narrator" if who == ch.NARRATOR else c.get("name", who)
+    clause = BOUND_AUDIO.format(pronoun=pronoun)
+    if "Image 1" not in prompt:
+        prompt = f"Image 1 is {label}. {prompt}"
+    if clause not in prompt:
+        if UNBOUND_SPEECH.search(prompt):
+            prompt = UNBOUND_SPEECH.sub(clause, prompt, count=1)
+        else:
+            subject = {"his": "He", "her": "She", "its": "It"}.get(pronoun, "He")
+            prompt = f"{prompt.rstrip()} {subject} {clause}."
+    return prompt
+
+
+def request(shot, index, plan, layout, refs, chars=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
     speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen."""
     ids = ["keeper"] if shot["kind"] == "keeper" else shot.get("characters", [])
-    references = [p for cid in ids for p in refs[cid]]
+    talks = plan_check.talking(shot)
+    prompt = shot["prompt"]
+    if talks:   # E95: the speaker is Image 1 and the prompt binds it to the audio clip. Its `talk_refs` speaking frame
+        # is sent in place of its approved refs, not before them: the direct Pavo tests that passed (lips 0.578, face
+        # 0.98) sent storyteller-ref.jpg alone, and no test sent it beside the mouth-closed front view that failed
+        who = speaker_of(shot)
+        ids = [who] + [c for c in ids if c != who]
+        references = list(refs.get(f"{who}:talk") or refs[who]) + [p for cid in ids[1:] for p in refs[cid]]
+        prompt = bind_prompt(prompt, who, chars)
+    else:
+        references = [p for cid in ids for p in refs[cid]]
     if len(references) > ch.MAX_REFS:
         raise SystemExit(f"REFERENCES_OVER_{ch.MAX_REFS} {shot['id']}")
-    audios = [talk_record(layout, shot)["wav"]] if plan_check.talking(shot) else []
-    return {"prompt": shot["prompt"], "seconds": shot_seconds(shot, index, plan, layout),
+    audios = [talk_record(layout, shot)["wav"]] if talks else []
+    return {"prompt": prompt, "seconds": shot_seconds(shot, index, plan, layout),
             "aspect_ratio": plan.get("aspect_ratio", "9:16"), "references": references or None,
             "audios": audios or None, "sound": False}
 
@@ -380,6 +485,11 @@ def wait_job(client, cid, sleep=time.sleep, clock=time.monotonic):
                 return None
         sleep(POLL_S)
     return None
+
+
+def attempts_for(shot):
+    """E98: generations allowed for one shot; every caller of make_shot passes it, so a talking shot gets 6."""
+    return TALK_ATTEMPTS if plan_check.talking(shot) else ATTEMPTS
 
 
 def make_shot(shot_id, attempt, check, attempts=ATTEMPTS):
@@ -506,7 +616,7 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
                 print(json.dumps({"shot": shot["id"], "resumed": True}))
                 continue
         try:
-            _, records = make_shot(shot["id"], attempt, check)
+            _, records = make_shot(shot["id"], attempt, check, attempts=attempts_for(shot))
         except (ShotFailed, SystemExit) as exc:
             entry["error"] = str(exc)
             if getattr(exc, "records", None):
@@ -561,9 +671,10 @@ def cuts(clip, start, end, clip_len):
 def compose_shots(plan, layout, clips, clip_seconds):
     """short_engine shots tiling [0, total]. A talking shot (the Keeper, a character speaking) spans exactly its
     line's audio (from its first word to its last), from the start of its clip at normal speed, so the lips meet the
-    voice (`talk`: the line's span, checked again by short_engine); it holds the silent gap only when the next shot
-    talks too, and the closing one holds the tail. Scene runs (God's voice-over shots among them) fill the time
-    between, cut every 2-4 s."""
+    voice (`talk`: the line's span, checked again by short_engine); it covers the silent gap only when the next shot
+    talks too, and the closing one covers the tail; beyond its clip (~0.45 s past the speech, E95) its last frame is
+    held (`hold`, <= TALK_HOLD_MAX). Scene runs (God's voice-over shots among them) fill the time between, cut every
+    2-4 s."""
     shots, total, lines = plan["shots"], layout["total"], layout["lines"]
     _, carried = plan_check.sequence(plan)
     runs = plan_check.groups(shots, carried)
@@ -580,12 +691,21 @@ def compose_shots(plan, layout, clips, clip_seconds):
             if last:
                 end = total
             elif plan_check.talking(shots[runs[r + 1][0]]):
-                end = lines[runs[r + 1][2][0]]["start"]   # holds the silent gap before the next talking line
-            if clip_seconds[s["id"]] + 1e-3 < end - start:
+                end = lines[runs[r + 1][2][0]]["start"]   # covers the silent gap before the next talking line
+            # E95: the clip is only ~0.45 s longer than the speech; the gap or the closing tail beyond it is its last
+            # frame held (at most TALK_HOLD_MAX; the closing fade-out covers the tail)
+            hold = max(0.0, (end - start) - clip_seconds[s["id"]])
+            # the hold is written HOLD_MARGIN longer than the time it covers, and short_engine checks that written
+            # value against HOLD_MAX, so it is the one checked here (review of #408: else CLIP_TOO_SHORT later)
+            held = round(hold + HOLD_MARGIN, 3) if hold > 1e-3 else 0.0
+            if held > plan_check.TALK_HOLD_MAX or clip_seconds[s["id"]] + 1e-3 < talk["end"] - talk["start"]:
                 raise SystemExit(f"{kind.upper()}_CLIP_SHORT {s['id']} ({clip_seconds[s['id']]:.2f} s for "
-                                 f"{end - start:.2f} s)")
-            out.append({"clip": clips[s["id"]], "start": round(start, 3), "end": round(end, 3), "src_start": 0.0,
-                        "speed": 1.0, "shot": s["id"], "kind": kind, "talk": talk})
+                                 f"{end - start:.2f} s, a hold of at most {plan_check.TALK_HOLD_MAX} s)")
+            shot_out = {"clip": clips[s["id"]], "start": round(start, 3), "end": round(end, 3), "src_start": 0.0,
+                        "speed": 1.0, "shot": s["id"], "kind": kind, "talk": talk}
+            if held:
+                shot_out["hold"] = held
+            out.append(shot_out)
             cursor = end
             continue
         end = total if last else lines[runs[r + 1][2][0]]["start"]

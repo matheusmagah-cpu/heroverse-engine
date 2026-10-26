@@ -1,0 +1,9 @@
+{
+ "id": "ch-keeper-talk",
+ "character": "keeper",
+ "repo_path": "migration/evidence/pavo/20261026/keeper/storyteller-ref.jpg",
+ "sha256": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a",
+ "source": "the speaking frame of the Keeper's own reviewed calibration clip (evidence/pavo/20261026/keeper, lipsync_check calibration 2026-10-26)",
+ "use": "the only reference of every talking Keeper clip, sent in place of his approved refs (episode_build.request: the direct Pavo tests that passed, lips 0.578 and face 0.98, sent it alone); scenes and FLUX keep ch-keeper-front",
+ "review": "Claude 2026-10-26 (E95): the same face as ch-keeper-front, mouth open mid-word, the framing of the calibration clip that passed lipsync_check"
+}

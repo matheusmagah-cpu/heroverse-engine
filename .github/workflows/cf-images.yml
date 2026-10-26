@@ -31,8 +31,8 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Generate
         run: |
-          case "$PILOT" in pilot-[0-9][0-9][0-9]|characters) ;; *) exit 1;; esac   # characters: the reference sheets
-          case "$ENGINE" in flux|sdxl) ;; *) exit 1;; esac
+          case "$PILOT" in pilot-[0-9][0-9][0-9]|characters) ;; *) echo "PILOT_INVALID: pass pilot-NNN or characters (no migration/production/ prefix)"; exit 1;; esac   # E96
+          case "$ENGINE" in flux|sdxl) ;; *) echo "ENGINE_INVALID: pass flux or sdxl"; exit 1;; esac
           test -n "$CLOUDFLARE_API_TOKEN" || { echo CLOUDFLARE_API_TOKEN_MISSING; exit 1; }  # account id: secret, else resolved from the token
           python3 -m venv "$RUNNER_TEMP/v" && "$RUNNER_TEMP/v/bin/pip" install -q --disable-pip-version-check pillow==11.0.0
           set -o pipefail   # E54: a crashed generator must fail the step, not hide behind tee

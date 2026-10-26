@@ -118,8 +118,19 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   generated clip goes through the same face landmarker (`lipsync_check.py --faces`, sampled frames): any face is
   `GOD_SHOT_FACE` and the shot is regenerated (at most 2 times), because a prompt can be written around a word list.
 - **Scripture is always referenced.** A line with no `reference` that quotes the KJV anyway (8 consecutive words) is
-  refused (`KJV_UNREFERENCED`) and counts as Scripture, not our words. A talking line leaves room in its 12 s clip for
-  the gap and the 0.6 s margin (<= 11.05 s; `TALK_LINE_TOO_LONG` after the voice, before any Pavo clip).
+  refused (`KJV_UNREFERENCED`) and counts as Scripture, not our words.
+- **Talking clips keep our audio (E95, `evidence/pavo/20261026/keeper-audio-binding.json`).** Pavo keeps the input
+  audio only when the clip it is asked for is at most ~0.65 s longer than the speech (6.385 s line: 7 s clip audio
+  0.80, 8 s 0.36, 10 s 0.03); at 1.6 s or more it makes its own track. So a talking clip is ceil(speech) seconds
+  (4-12), the speech 0.25-0.65 s shorter: `episode_build lines` retimes a line that misses it to N - 0.45 s (atempo,
+  pitch kept, at most +-10 %, else `TALK_LINE_RETIME_OVER`) before anything is laid out, and the compose holds the
+  clip's last frame (<= 1.3 s) for the gap or the closing tail. A talking line is 3.23-11.55 s (one ceiling,
+  `TALK_LINE_MAX`, the closing Keeper too), never ~3.94-4.14 s at any pace from the normal to the slowest
+  (`TALK_LINE_UNREACHABLE`: no clip within 10 %), so a single talking line has at least 12 words. The request binds the reference and the audio: "Image 1 is the narrator" (or the character's name) and "speaks the words of the
+  audio clip, his lips moving in sync with the voice" (`bind_prompt`, replacing "speaks to the camera, his lips
+  moving clearly with every word"), and Image 1 is the speaker's `talk_refs` speaking frame when it has one, sent in
+  place of its approved refs (the Keeper: his calibration clip's frame, alone as in the tests that passed; the
+  mouth-closed front view failed the lips, -0.043).
 - **Stake and open loop (3-10 %)**, then **escalation (10-60 %)**: three rising steps of the opposition, acted (in
   dialogue when an approved speaker lives in the story), each ending on a small hook; shots 2-6 s, cuts only.
 - **Climax (60-80 %)**: the hero or God speaks the key KJV line at the turn; at least one acted scene is flagged
@@ -129,7 +140,9 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
 - **Keeper close (85-100 %)**: `keeper` shots only after the last climax shot and only for lines of kind insight or
   cta: one original insight from the text (>= 20 words, no sermon), a comment question, the CTA to the full story and
   "Part N+1 tomorrow: ...". He closes (the last shot); his prompt carries his `look` and one `wardrobe` variant word
-  for word and says he speaks; each Keeper clip's audio 2-12 s (the closing one <= 10.2 s, it also holds the tail).
+  for word and says he speaks; each Keeper line 3.23-11.55 s, retimed to its clip (E95; the tail is a held frame).
+  He faces the lens on a still frame: "static camera" and "holds his head level, looks straight into the camera"; no
+  push-in, pull-back, tracking, orbit, lean or bow (`KEEPER_POSE`, E98: those lost the face or the lips).
   Keeper <= 25 % of the Short; the lesson (insight + cta lines + every Keeper second) <= 25 % (gate), aim <= 15 %
   (the winners: 0-28 %, the weak Noah Short 41 %).
 - **Scenes**: `seconds` 4-12 of Pavo video, the five-part prompt above, `characters` APPROVED with their look word for
@@ -147,10 +160,10 @@ before dispatching. Genesis 7 v2: 466 words, 24 lines, estimate 174.3 s, measure
 
 **The checks, in order** (each stops the run): `plan_check.py --strict` (KJV word for word, the Short rules on the
 estimated length, every rule above; the Keeper while DRAFT is one pending row) → Kokoro line by line, each line in its
-speaker's voice; the measured Short 170-179 s, Keeper <= 25 %, lesson <= 25 %, each talking line 2-12 s → references
+speaker's voice; the measured Short 170-179 s, Keeper <= 25 %, lesson <= 25 %, each talking line retimed into its clip (E95) → references
 sha256-checked → every shot one Pavo generation at a fresh exact 0-credit quote; `clip_check.py` on every clip,
 `lipsync_check.py` (our line in the clip's audio, lips in sync) on every talking clip (the Keeper, a character
-speaking); a failed shot is a NEW generation at most 2 times, then the run fails naming the shot → compose (a talking
-clip's picture spans exactly its line's audio, from the start of its clip at normal speed; `short_engine.talk_problems`
-refuses it off its line) → `clip_check.py --composed`, loudness -14 +-1 LUFS → 20-frame sheet and per-shot report for
+speaking); a failed shot is a NEW generation at most 2 times (5 for a talking clip, E98), then the run fails naming the shot → compose (a talking
+clip's picture spans exactly its line's audio, from the start of its clip at normal speed, its last frame held for the
+gap or tail; `short_engine.talk_problems` refuses it off its line) → `clip_check.py --composed`, loudness -14 +-1 LUFS → 20-frame sheet and per-shot report for
 Claude's review at 9.5.
