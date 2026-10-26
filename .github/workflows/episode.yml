@@ -1,6 +1,7 @@
 name: HeroVerse episode build (plan -> Keeper + Pavo scenes -> composed Short, checked; nothing published)
 # Owner, 2026-10-26 (DECISIONS.md "The Keeper narrates every video"): a Short is built from its plan with no chat
-# session. The Keeper speaks our Kokoro narration (Pavo input audio, lips checked by lipsync_check), the story is acted
+# session (Shorts v2, DECISIONS.md 2026-10-26): the conflict opens spoken, characters speak their own Kokoro lines and the
+# Keeper closes (Pavo input audio, lips checked by lipsync_check; God only as a voice-over), the story is acted
 # out in Pavo scenes (reference mode, approved characters only), every clip at a fresh exact 0-credit quote. The build
 # job holds PAVO_TOKEN with read-only repository access; the record job (no secret) uploads the composed file to the
 # release and pushes the frame sheet and report to a claude/episode-* branch. Claude reviews the sheet (>= 9.5), writes
@@ -9,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       plan:
-        description: Plan path (migration/production/bible/plans/<episode-id>.json, bible-plan-v1, plan_check clean)
+        description: Plan path (migration/production/bible/plans/<episode-id>.json, bible-plan-v2, plan_check clean)
         required: true
 permissions:
   contents: read
@@ -57,7 +58,7 @@ jobs:
           sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
           echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
           mkdir -p "$WORK" "$OUT"
-      - name: Narration (Kokoro am_michael, line by line) and the Keeper's input audio
+      - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
         run: |
           python3 -I -B migration/production/bible/episode_build.py voice-script "$PLAN" "$WORK"
           python3 -I -B migration/production/pilot_render.py prepare "$WORK" HeroVerse_Linux_Source_Ready_20261013_v2.zip
@@ -88,6 +89,7 @@ jobs:
           done
           cp "$WORK"/clips/*.mp4 "$OUT/clips/" 2>/dev/null || true
           cp "$WORK"/keeper/*.wav "$OUT/clips/" 2>/dev/null || true
+          cp "$WORK"/speakers/*.wav "$OUT/clips/" 2>/dev/null || true
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always() && steps.plan.outputs.episode != ''
         with:

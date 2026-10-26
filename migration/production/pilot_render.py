@@ -135,8 +135,10 @@ def voice(work, script_path):
             path = work / "voice" / f"{segment['id']}-{index:02d}.wav"
             for attempt in range(3):  # the adapter occasionally returns empty audio; the same sentence then succeeds
                 try:
+                    # a segment may name its own speaker's voice (Bible Shorts: a character's spoken line)
                     receipt = synthesize_voice_sample(engine, text=speech_text(sentence), output_path=path,
-                                                      voice_id=cfg["voice_id"], speed=cfg["speed"])
+                                                      voice_id=segment.get("voice_id", cfg["voice_id"]),
+                                                      speed=segment.get("speed", cfg["speed"]))
                     break
                 except RuntimeError as e:
                     if "empty audio" not in str(e) or attempt == 2:

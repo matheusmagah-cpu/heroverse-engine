@@ -63,6 +63,22 @@ class ShortRules(unittest.TestCase):
     def test_published_parts_keep_their_rules(self):
         self.assertEqual(pe.short_problems(short(part=5, seconds=46.6, narration=[])), [])
 
+    def test_from_part_7_a_short_runs_170_to_179_s_and_part_6_keeps_62_to_90(self):
+        """Owner, 2026-10-26 (structure bible-story-short: 5/6 winners ran 170-179 s, 0/3 weak); under YouTube's
+        180 s Shorts limit, the tail included."""
+        self.assertEqual(pe.short_length(6), (62.0, 90.0))
+        self.assertEqual(pe.short_length(5), (62.0, 90.0))
+        self.assertEqual(pe.short_length(7), (170.0, 179.0))
+        self.assertEqual(pe.short_length(40), (170.0, 179.0))
+        self.assertLess(pe.SHORT_MAX_S, pe.SHORTS_LIMIT_S)
+        self.assertEqual(pe.short_problems(short(part=6, seconds=85.5)), [])
+        for seconds in (85.5, 124.0, 169.9, 179.1, 180.0):
+            self.assertTrue(pe.short_problems(short(part=7, seconds=seconds))[0].startswith("SHORT_LENGTH"), seconds)
+        for seconds in (170.0, 174.5, 179.0):
+            self.assertEqual(pe.short_problems(short(part=7, seconds=seconds)), [], seconds)
+        ep6 = json.loads((ROOT / "production/bible/episodes/genesis-06-short.json").read_text())
+        self.assertFalse([p for p in pe.short_problems(ep6) if p.startswith("SHORT_LENGTH")])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
-"""Build a Short from its plan with no chat session (owner, 2026-10-26): the Keeper speaks our narration on screen,
-the story is acted out by the character bible's people, everything generated free on Pavo, composed by the engine
-and checked. episode.yml runs the steps in order; Claude only writes the plan and reviews the result. Nothing here
+"""Build a Short from its plan with no chat session (owner, 2026-10-26): it opens on the conflict spoken by a
+character or God's voice, the characters speak their own lines lip-synced, the story is acted out by the character
+bible's people, the Keeper closes with our insight; everything generated free on Pavo, composed by the engine and
+checked. episode.yml runs the steps in order; Claude only writes the plan and reviews the result. Nothing here
 publishes: the composed file, a 20-frame sheet and a per-shot report go to Claude's review (>= 9.5), who then writes
 the episode record and dispatches publish-episode.yml.
 
-  episode_build.py voice-script PLAN WORK        WORK/voice-script.json for pilot_render.py voice (one segment a line)
-  episode_build.py lines PLAN WORK               per-line WAVs, the narration track rebuilt from them in order, the
-                                                 Keeper's input audio (mono 44.1 kHz), WORK/layout.json; refuses a
-                                                 measured Keeper line outside 2-12 s, a Keeper share > 25 % and a
-                                                 length outside 62-90 s
+  episode_build.py voice-script PLAN WORK        WORK/voice-script.json for pilot_render.py voice (one segment a line
+                                                 of plan_check.sequence; a spoken line in its speaker's own voice)
+  episode_build.py lines PLAN WORK               per-line WAVs, the voice track rebuilt from them in order, each
+                                                 talking clip's input audio (the Keeper's lines, a character's line;
+                                                 mono 44.1 kHz), WORK/layout.json; refuses a measured talking line
+                                                 outside 2-12 s, a Keeper share or a lesson share > 25 % and a length
+                                                 outside the part's range (170-179 s from part 7)
   episode_build.py refs PLAN WORK                approved reference images (release asset or repository file, sha256
                                                  checked), as JPEG <= 1536 px in WORK/refs
   episode_build.py generate PLAN WORK LIP_PYTHON FACE_MODEL
                                                  one Pavo generation per shot, in order (PAVO_TOKEN from the env):
                                                  fresh exact 0-credit quote (the adapter refuses any other price),
                                                  poll job() until completed/failed, download from the Pavo CDN only,
-                                                 clip_check on every clip, lipsync_check on every Keeper clip; a failed
+                                                 clip_check on every clip, lipsync_check on every talking clip (the
+                                                 Keeper, a character speaking; not God's voice-over shot); a failed
                                                  shot is regenerated as a NEW generation at most 2 times, then the run
                                                  fails naming the shot
   episode_build.py compose PLAN WORK MUSIC OUT   short_engine.py (cuts only, captions, owned music, -14 LUFS), then
@@ -49,7 +53,6 @@ import characters as ch  # noqa: E402
 VOICE = {"voice_id": "am_michael", "speed": 1.0}   # the pinned engine voice (qa_pilot.voice_model_pinned)
 LINE_GAP = plan_check.LINE_GAP
 TAIL = plan_check.TAIL
-SHORT_S = (62.0, 90.0)
 CUT_MAX = 4.0              # a scene cut every 2-4 s (DECISIONS 2026-10-26)
 ESTABLISHING_HOLD = plan_check.ESTABLISHING_HOLD
 MAX_SLOW = 1.3             # short_engine.MAX_SLOW
@@ -94,9 +97,25 @@ def rel(path):
 
 # ---------- voice ----------
 
-def voice_script(plan):
-    return {"voice": dict(VOICE), "segments": [{"id": f"n{k:02d}", "text": x["text"], "pause_after": 0.0}
-                                               for k, x in enumerate(plan["narration"])]}
+def voice_script(plan, chars=None):
+    """One segment a line of the voice track (plan_check.sequence): the narration in the Keeper's voice, each spoken
+    line in its speaker's own voice (characters.voice; God's is the deep voice-over)."""
+    items, _ = plan_check.sequence(plan)
+    segments = []
+    for k, x in enumerate(items):
+        seg = {"id": f"n{k:02d}", "text": x["text"], "pause_after": 0.0}
+        if x.get("speaker"):
+            v = ch.voice(x["speaker"], chars)
+            if not v:
+                raise SystemExit(f"SPEAKER_NO_VOICE {x['speaker']}")
+            seg.update(v, speaker=x["speaker"])
+        segments.append(seg)
+    return {"voice": dict(VOICE), "segments": segments}
+
+
+def talk_record(layout, shot):
+    """The line a talking shot's clip carries (input audio, lipsync_check): the Keeper's or a character's."""
+    return layout["keeper"][shot["id"]] if shot["kind"] == "keeper" else layout["speakers"][shot["id"]]
 
 
 def line_layout(durations, gap=LINE_GAP):
@@ -125,13 +144,15 @@ def write_wav(path, params, frames):
 
 
 def lines_step(plan, work):
-    """Cut each narration line out of pilot_render's voice.wav, rebuild the narration track from the line WAVs in
-    order, write the Keeper's input audio and the compose timeline."""
+    """Cut each line of the voice track out of pilot_render's voice.wav, rebuild the track from the line WAVs in
+    order, write each talking clip's input audio (the Keeper's lines, a character's spoken line) and the compose
+    timeline; measure the Short against the plan's rules again."""
     work = Path(work)
+    items, carried = plan_check.sequence(plan)
     timeline = load(work / "timeline.json")
     params, frames = read_wav(work / "voice.wav")
     rate, width = params.framerate, params.sampwidth * params.nchannels
-    n = len(plan["narration"])
+    n = len(items)
     by_line = {k: [s for s in timeline["sentences"] if s["segment"] == f"n{k:02d}"] for k in range(n)}
     if any(not v for v in by_line.values()):
         raise SystemExit("VOICE_LINE_MISSING " + " ".join(f"n{k:02d}" for k, v in by_line.items() if not v))
@@ -151,39 +172,60 @@ def lines_step(plan, work):
     sentences = []
     for k in range(n):
         shift = layout[k][0] - by_line[k][0]["start"]
-        sentences += [{"segment": f"n{k:02d}", "text": s["text"], "start": round(s["start"] + shift, 3),
-                       "end": round(s["end"] + shift, 3)} for s in by_line[k]]
+        who = {"speaker": items[k]["speaker"]} if items[k].get("speaker") else {}
+        sentences += [dict({"segment": f"n{k:02d}", "text": s["text"], "start": round(s["start"] + shift, 3),
+                            "end": round(s["end"] + shift, 3)}, **who) for s in by_line[k]]
     save(work / "compose-timeline.json", {"voice_seconds": voice_seconds, "sentences": sentences,
                                           "voice_id": VOICE["voice_id"], "speed": VOICE["speed"], "sample_rate": rate})
     total = round(voice_seconds + TAIL, 3)
-    keeper, problems, keeper_seconds = {}, [], 0.0
+    keeper, speakers, voice_over, problems, keeper_seconds = {}, {}, {}, [], 0.0
     shots = plan["shots"]
     for i, s in enumerate(shots):
-        if s["kind"] != "keeper":
+        if s["kind"] != "keeper" and not plan_check.speaking(s):
             continue
-        start, end = keeper_span(s["lines"], layout)
+        start, end = keeper_span(carried[i], layout)
         seconds = end - start
-        keeper_seconds += seconds
-        limit = plan_check.KEEPER_LAST_MAX if i == len(shots) - 1 else plan_check.KEEPER_AUDIO[1]
-        if not plan_check.KEEPER_AUDIO[0] <= seconds <= limit:
-            problems.append(f"KEEPER_AUDIO {s['id']} {seconds:.2f} s (2-{limit:.1f} s)")
+        if s["kind"] == "keeper":
+            keeper_seconds += seconds
+            limit = plan_check.KEEPER_LAST_MAX if i == len(shots) - 1 else plan_check.KEEPER_AUDIO[1]
+            low, code, folder, into = plan_check.KEEPER_AUDIO[0], "KEEPER_AUDIO", "keeper", keeper
+        else:
+            limit = plan_check.SPEAKER_AUDIO[1]
+            low, code, folder = plan_check.SPEAKER_AUDIO[0], "SPEAKER_AUDIO", "speakers"
+            into = speakers if plan_check.talking(s) else voice_over
+        if not low <= seconds <= limit:
+            problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.1f} s)")
             continue
-        native = work / "keeper" / f"{s['id']}-native.wav"
+        record = {"start": start, "end": end, "seconds": round(seconds, 3)}
+        if s["kind"] != "keeper":
+            record["speaker"] = s["speaker"]
+        if into is voice_over:          # God: mixed as a voice-over in the track; no clip audio, no lipsync check
+            voice_over[s["id"]] = record
+            continue
+        native = work / folder / f"{s['id']}-native.wav"
         a, b = int(round(start * rate)) * width, int(round(end * rate)) * width
         write_wav(native, params, track[a:b])
-        out = work / "keeper" / f"{s['id']}.wav"
+        out = work / folder / f"{s['id']}.wav"
         run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", native, "-ac", "1", "-ar", "44100", "-c:a", "pcm_s16le",
              out])
-        keeper[s["id"]] = {"wav": rel(out), "start": start, "end": end, "seconds": round(seconds, 3)}
+        into[s["id"]] = dict(record, wav=rel(out))
     share = keeper_seconds / total
     if share > plan_check.KEEPER_SHARE_MAX:
         problems.append(f"KEEPER_SHARE {share:.3f} > {plan_check.KEEPER_SHARE_MAX} (measured)")
-    if not SHORT_S[0] <= total <= SHORT_S[1]:
-        problems.append(f"SHORT_LENGTH {total} s (62-90, measured)")
+    lesson = sorted({k for i, s in enumerate(shots) for k in carried[i]
+                     if s["kind"] == "keeper" or items[k].get("kind") in plan_check.LESSON_KINDS})
+    lesson_seconds = sum(layout[k][1] - layout[k][0] for k in lesson) + LINE_GAP * max(len(lesson) - 1, 0)
+    lesson_share = lesson_seconds / total
+    if lesson_share > plan_check.LESSON_SHARE_MAX:
+        problems.append(f"LESSON_SHARE {lesson_share:.3f} > {plan_check.LESSON_SHARE_MAX} (measured)")
+    low, high = plan_check.publish_episode.short_length(plan.get("part", 0))
+    if not low <= total <= high:
+        problems.append(f"SHORT_LENGTH {total} s ({low:.0f}-{high:.0f}, measured)")
     result = {"lines": [{"start": a, "end": b} for a, b in layout], "voice_seconds": voice_seconds, "total": total,
-              "keeper": keeper, "keeper_share": round(share, 3), "problems": problems}
+              "keeper": keeper, "speakers": speakers, "voice_over": voice_over, "keeper_share": round(share, 3),
+              "lesson_share": round(lesson_share, 3), "problems": problems}
     save(work / "layout.json", result)
-    print(json.dumps({k: result[k] for k in ("voice_seconds", "total", "keeper_share", "problems")}))
+    print(json.dumps({k: result[k] for k in ("voice_seconds", "total", "keeper_share", "lesson_share", "problems")}))
     if problems:
         raise SystemExit("LINES_REFUSED " + "; ".join(problems))
     return result
@@ -257,20 +299,21 @@ def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
 # ---------- generation ----------
 
 def shot_seconds(shot, index, plan, layout):
-    if shot["kind"] == "scene":
+    if not plan_check.talking(shot):
         return shot["seconds"]
-    info = layout["keeper"][shot["id"]]
+    info = talk_record(layout, shot)
     need = info["seconds"] + (TAIL if index == len(plan["shots"]) - 1 else 0.0) + KEEPER_MARGIN
     return max(4, min(12, math.ceil(need)))
 
 
 def request(shot, index, plan, layout, refs):
-    """The Pavo call for one shot: references from the approved images (<= 5), the Keeper's line as input audio."""
+    """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
+    speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen."""
     ids = ["keeper"] if shot["kind"] == "keeper" else shot.get("characters", [])
     references = [p for cid in ids for p in refs[cid]]
     if len(references) > ch.MAX_REFS:
         raise SystemExit(f"REFERENCES_OVER_{ch.MAX_REFS} {shot['id']}")
-    audios = [layout["keeper"][shot["id"]]["wav"]] if shot["kind"] == "keeper" else []
+    audios = [talk_record(layout, shot)["wav"]] if plan_check.talking(shot) else []
     return {"prompt": shot["prompt"], "seconds": shot_seconds(shot, index, plan, layout),
             "aspect_ratio": plan.get("aspect_ratio", "9:16"), "references": references or None,
             "audios": audios or None, "sound": False}
@@ -365,7 +408,10 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
     report.update(episode=plan["episode"], shots=report.get("shots", {}))
     for index, shot in enumerate(plan["shots"]):
         req = request(shot, index, plan, layout, refs)
-        entry = {"kind": shot["kind"], "lines": shot["lines"], "request": {k: v for k, v in req.items()}}
+        entry = {"kind": shot["kind"], "lines": shot.get("lines"), "request": {k: v for k, v in req.items()}}
+        if plan_check.speaking(shot):
+            entry.update(speaker=shot["speaker"], line=shot["line"])
+        talks = plan_check.talking(shot)
         raw = work / "clips" / f"{shot['id']}-raw.mp4"
         final = work / "clips" / f"{shot['id']}.mp4"
         raw.parent.mkdir(parents=True, exist_ok=True)
@@ -382,17 +428,17 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
             download(video["url"], raw)
             record["source"] = {"width": video.get("width"), "height": video.get("height"),
                                 "seconds": video.get("seconds")}
-            if shot["kind"] == "scene":   # Pavo adds an AAC track even with sound false: strip it
+            if not talks:   # Pavo adds an AAC track even with sound false: strip it
                 run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", raw, "-an", "-c:v", "copy", final])
-            else:                         # the Keeper keeps our line as his track for lipsync_check
+            else:           # a talking clip keeps our line as its track for lipsync_check
                 shutil.copyfile(raw, final)
             return record, final
 
         def check(path):
             flags = clip_flags(path)
-            if shot["kind"] != "keeper":
+            if not talks:   # scenes, and God's voice-over shot (no one speaks on screen): no lipsync check
                 return flags, None
-            more, measures = lipsync_flags(lip_python, face_model, path, REPO / layout["keeper"][shot["id"]]["wav"])
+            more, measures = lipsync_flags(lip_python, face_model, path, REPO / talk_record(layout, shot)["wav"])
             return flags + more, measures
 
         try:
@@ -447,28 +493,33 @@ def cuts(clip, start, end, clip_len):
 
 
 def compose_shots(plan, layout, clips, clip_seconds):
-    """short_engine shots tiling [0, total]. A Keeper shot spans exactly its lines' audio (from its first word to
-    its last), from the start of his clip at normal speed, so his lips meet our voice; it holds the silent gap only
-    when the next shot is the Keeper again, and the closing one holds the tail. Scene runs fill the time between,
-    cut every 2-4 s."""
+    """short_engine shots tiling [0, total]. A talking shot (the Keeper, a character speaking) spans exactly its
+    line's audio (from its first word to its last), from the start of its clip at normal speed, so the lips meet the
+    voice (`talk`: the line's span, checked again by short_engine); it holds the silent gap only when the next shot
+    talks too, and the closing one holds the tail. Scene runs (God's voice-over shots among them) fill the time
+    between, cut every 2-4 s."""
     shots, total, lines = plan["shots"], layout["total"], layout["lines"]
-    runs = plan_check.groups(shots)
+    _, carried = plan_check.sequence(plan)
+    runs = plan_check.groups(shots, carried)
     out, cursor = [], 0.0
     for r, (a, b, ln) in enumerate(runs):
         last = r == len(runs) - 1
-        if shots[a]["kind"] == "keeper":
+        if plan_check.talking(shots[a]):
             s = shots[a]
+            kind = "keeper" if s["kind"] == "keeper" else "speaker"
             start, end = lines[ln[0]]["start"], lines[ln[-1]]["end"]
+            talk = {"start": round(start, 3), "end": round(end, 3)}
             if abs(start - cursor) > 1e-3:
-                raise SystemExit(f"KEEPER_NOT_ON_HIS_LINE {s['id']}")
+                raise SystemExit(f"{kind.upper()}_NOT_ON_HIS_LINE {s['id']}")
             if last:
                 end = total
-            elif shots[runs[r + 1][0]]["kind"] == "keeper":
-                end = lines[runs[r + 1][2][0]]["start"]   # he holds the silent gap before his next line
+            elif plan_check.talking(shots[runs[r + 1][0]]):
+                end = lines[runs[r + 1][2][0]]["start"]   # holds the silent gap before the next talking line
             if clip_seconds[s["id"]] + 1e-3 < end - start:
-                raise SystemExit(f"KEEPER_CLIP_SHORT {s['id']} ({clip_seconds[s['id']]:.2f} s for {end - start:.2f} s)")
+                raise SystemExit(f"{kind.upper()}_CLIP_SHORT {s['id']} ({clip_seconds[s['id']]:.2f} s for "
+                                 f"{end - start:.2f} s)")
             out.append({"clip": clips[s["id"]], "start": round(start, 3), "end": round(end, 3), "src_start": 0.0,
-                        "speed": 1.0, "shot": s["id"], "kind": "keeper"})
+                        "speed": 1.0, "shot": s["id"], "kind": kind, "talk": talk})
             cursor = end
             continue
         end = total if last else lines[runs[r + 1][2][0]]["start"]
@@ -516,7 +567,9 @@ def compose_step(plan, work, music, out):
     report["composed"] = {
         "output_sha256": sha256(out), "seconds": round(length, 2), "frame": [short_engine.W, short_engine.H],
         "black_check": {"black_starts": runs, "unexpected": unexpected, "intended_dips": [dip]},
-        "lufs": lufs, "keeper_share": layout["keeper_share"], "establishing_share": round(establishing / total, 3),
+        "lufs": lufs, "keeper_share": layout["keeper_share"], "lesson_share": layout.get("lesson_share"),
+        "spoken": {**layout.get("speakers", {}), **layout.get("voice_over", {})},
+        "establishing_share": round(establishing / total, 3),
         "cuts": len(shots), "timeline": [{k: c[k] for k in ("shot", "kind", "start", "end", "src_start", "speed")}
                                          for c in shots]}
     save(report_path, report)

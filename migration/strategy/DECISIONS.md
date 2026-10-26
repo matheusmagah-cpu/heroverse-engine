@@ -378,3 +378,33 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   story.
 - **Measured** (live intelligence, one hypothesis): `host` on the next 4 Shorts against the last 4 without: viewed vs
   swiped, average % viewed, subscribers per 1,000 views, Short-to-long clicks. KEPT if not worse.
+
+## Shorts v2: the conflict spoken first, characters speak, the Keeper at the close, 170-179 s (owner, 2026-10-26)
+- **Evidence** (`structures/bible-story-short.json`, validated 2026-10-26: 6 winners from 6 channels, breakout >= 50,
+  3 weak contrasts; `evidence/vidiq/20261026/bible_story_shorts.json`): drivers counted on winners vs weak: an
+  antagonist or opposing power on screen from the first shots (6/6 vs 0/3) and a runtime of 170-179 s (5/6 vs 0/3);
+  the conflict hook in the first 2 s (a character's challenge, never atmosphere) in every winner; acted, lip-synced
+  dialogue is hygiene (winners and weak alike); no winner has a narrator on screen (the Keeper stays our hypothesis);
+  the lesson takes 0-28 % in winners, 41 % in the weak Noah Short. Limits: 6 winners is the minimum, presence from
+  one vidIQ audit prompt, the beat positions measured in 2 winners only.
+- **Owner decisions.** (1) Shorts from part 7 run 170-179 s, measured with the tail, under YouTube's 180 s limit
+  (first set at 100-150 s the same day, replaced by the measured driver); parts 1-6 keep 62-90 s
+  (`publish_episode.short_length`). (2) The first shot is a scene whose first words are the conflict, spoken by a
+  character or God's voice (God never shown as a person: a voice over light, storm or fire); the Keeper never opens.
+  (3) Characters speak their own lines, lip-synced: a scene shot's `speaker` + `line` (KJV exact when Scripture),
+  synthesised in the speaker's own Kokoro voice, sent to Pavo as input audio with its references and judged by
+  `lipsync_check` (same thresholds); God's lines are Scripture only, a deep voice-over, no lipsync. Voices (preserved
+  model voices-v1.0.bin): the Keeper am_michael (unchanged), Adam am_fenrir, Eve af_heart, the serpent bm_fable,
+  Noah bm_george, God am_onyx at 0.9. (4) The Keeper only after the climax, for the insight and the close, <= 25 %.
+  (5) The lesson (insight + cta + Keeper) <= 25 %, aim <= 15 %; the climax acted (`climax: true`). (6) Noah joins the
+  character bible as DRAFT (fixed look, wardrobe, voice, reference prompts in `characters/images.json`); Claude
+  approves him after reviewing his sheet; until then he is only a faceless silhouette. (7) Genesis 7 rewritten on the
+  beat map: God's Genesis 6:13 at 0 s over the darkening storm, three acted steps of the corruption with anonymous
+  figures, God's Genesis 6:7 at the climax (63 %), Noah's grace as payoff, the Keeper's insight, a comment question and
+  "Part eight tomorrow: Noah builds the ark"; measured locally with Kokoro at 173.9 s, Keeper 11 %, lesson 11 %.
+- **Where.** `plan_check.py` (`bible-plan-v2`), `episode_build.py` (speaker WAVs, lipsync on every talking clip,
+  measured length, Keeper and lesson shares), `short_engine.talk_problems`, `pilot_render.py voice` (a segment may name
+  its voice), `characters.json` (`voice`, `god`, Noah), PROMPT_GUIDE "Keeper + acted scenes", SERIES.md.
+- **Measured** (live intelligence): Genesis 7 v2 against parts 5-6 on viewed vs swiped, average % viewed, subscribers
+  per 1,000 views and Short-to-long clicks. KEPT if better.
+

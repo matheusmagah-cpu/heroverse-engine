@@ -56,6 +56,36 @@ class Characters(unittest.TestCase):
                     self.assertTrue((ch.HERE / "images" / f"ch-{cid}-{shot}.json").exists(), (cid, shot))
 
 
+class Voices(unittest.TestCase):
+    """Owner, 2026-10-26: every character speaks its lines in its own Kokoro voice; the Keeper keeps am_michael."""
+    def test_every_character_has_its_own_voice_from_the_preserved_model(self):
+        chars = ch.registry()
+        voices = {cid: c.get("voice") for cid, c in chars.items()}
+        self.assertEqual(voices["keeper"], "am_michael")
+        for cid, v in voices.items():
+            self.assertIn(v, ch.KOKORO_VOICES, cid)
+        god = ch.voice(ch.GOD)
+        self.assertIn(god["voice_id"], ch.KOKORO_VOICES)
+        every = list(voices.values()) + [god["voice_id"]]
+        self.assertEqual(len(every), len(set(every)), "one distinct voice per speaker")
+        self.assertEqual(ch.voice("eve"), {"voice_id": voices["eve"], "speed": 1.0})
+        self.assertIsNone(ch.voice("moses"))
+
+    def test_noah_waits_as_a_draft_with_a_fixed_look_and_his_reference_prompts(self):
+        noah = ch.registry()["noah"]
+        self.assertEqual(noah["status"], "DRAFT")
+        self.assertEqual(noah["refs"], [])
+        self.assertIn("about seventy", noah["look"])
+        self.assertIn("long grey beard", noah["look"])
+        self.assertGreaterEqual(len(noah["wardrobe"]), 2)
+        self.assertNotIn(noah["look"], ch.registry()["keeper"]["look"])
+        spec = json.loads((ch.HERE / "images.json").read_text())
+        self.assertEqual(sorted(i["id"] for i in spec["images"] if i["character"] == "noah"),
+                         ["ch-noah-front", "ch-noah-full", "ch-noah-three-quarter"])
+        self.assertTrue(ch.problems([{"prompt": noah["look"], "characters": ["noah"]}])[0]
+                        .startswith("CHARACTER_NOT_APPROVED"))
+
+
 class RepoReference(unittest.TestCase):
     def test_keeper_reference_is_the_reviewed_repo_frame(self):
         import hashlib
