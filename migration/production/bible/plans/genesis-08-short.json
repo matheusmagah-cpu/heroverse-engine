@@ -5,16 +5,16 @@
  "passage": "Genesis 6:14-22 (KJV, public domain)",
  "aspect_ratio": "9:16",
  "story": "Noah builds the ark (SERIES.md episode 8; arc 2, Brothers and the walk with God)",
- "people": "No approved character speaks in Genesis 6:14-22 and Noah is DRAFT (characters.json): Noah is only a faceless old man seen from behind or in silhouette, his sons three young men in silhouette; the mockers are anonymous crowds seen from behind or in silhouette, and they never speak. Genesis records no word of theirs, so their mockery is shown, never quoted or invented as Scripture; the only verses that touch those years are Matthew 24:38 (eating and drinking until the day he entered the ark) and 1 Peter 3:20 (God waited while the ark was a preparing). God is never shown: His lines (Genesis 6:17 at the open, Genesis 6:18 at the turn) are a deep voice-over over storm and lightning. One establishing shot (2 s). The Keeper only for the insight, the comment question and the close.",
- "beats": "structure bible-story-short (script.beats): cold_open s-voice (God's Genesis 6:17, the flood announced over the bare hull); stake and open loop (one man builds on dry ground; how long can he keep building while the valley mocks him?); escalation in three rising steps of the mockers, acted, each ending on a hook (laughter at the size; scorn while the world feasts; stones and cut ropes at night, and God waited); God speaks Genesis 6:18 (s-covenant, voice-over), then the acted climax s-torches (the mob with torches, Noah keeps hammering) and Genesis 6:22; payoff (the finished ark, the valley goes quiet); keeper_close (insight: Noah never speaks, his sermon was the ark; comment question; part 9). No approved speaker lives in this passage, so the escalation is acted without dialogue until Noah is APPROVED.",
+ "people": "The scoffer (characters.json, an invented antagonist, DRAFT until his reference sheet is reviewed; this plan is built only after he is APPROVED) is the valley's ringleader: he opens on screen speaking a taunt in our own words (kind story, no reference: Genesis records no word of the mockers, and none is presented as Scripture) and leads the torch mob at the climax. Noah is DRAFT: only a faceless old man seen from behind or in silhouette, his sons three young men in silhouette; the rest of the mockers are anonymous crowds seen from behind or in silhouette and never speak. The only verses that touch those years are Matthew 24:38 (eating and drinking until the day he entered the ark) and 1 Peter 3:20 (God waited while the ark was a preparing). God is never shown: His lines (Genesis 6:17 right after the taunt, Genesis 6:18 at the turn) are a deep voice-over over storm and lightning. One establishing shot (2 s). The Keeper only for the insight, the comment question and the close.",
+ "beats": "structure bible-story-short (script.beats): cold_open s-taunt (the scoffer on screen mocks the hull on dry ground, Noah working behind him), then God's Genesis 6:17 (s-voice, voice-over: the flood is real); stake and open loop (years before, one man picked up an axe; how long can he keep building while everyone mocks him?); escalation in three rising steps of the mockers, acted, each ending on a hook (laughter at the size; scorn while the world feasts; stones and cut ropes at night, and God waited); God speaks Genesis 6:18 (s-covenant, voice-over), then the acted climax s-torches (the scoffer leads the mob with torches, Noah keeps hammering) and Genesis 6:22; payoff (the finished ark, the valley goes quiet); keeper_close (insight: Noah never speaks, his sermon was the ark; comment question; part 9).",
  "narration": [
   {
    "kind": "story",
-   "text": "One man heard those words, and the next morning he picked up an axe. On dry ground. Far from any sea."
+   "text": "Years before that laugh, one man heard those words, and picked up an axe. On dry ground. Far from any sea."
   },
   {
    "kind": "story",
-   "text": "His neighbours came to watch. Then they came to laugh. How long can one family keep building while the whole valley mocks them?"
+   "text": "The whole valley came to laugh. How long can one family keep building while everyone they know mocks them?"
   },
   {
    "kind": "scripture",
@@ -32,7 +32,7 @@
   },
   {
    "kind": "story",
-   "text": "Three hundred cubits. About four hundred and fifty feet, longer than a city street. Every beam cut by hand, and every beam a joke to the crowd."
+   "text": "Three hundred cubits. About four hundred and fifty feet. Every beam cut by hand, and every beam a joke to the crowd."
   },
   {
    "kind": "story",
@@ -49,7 +49,7 @@
   },
   {
    "kind": "story",
-   "text": "Then the laughter turned to anger. Stones struck the hull. Ropes were cut on the scaffold. Each year the crowd grew bolder, and the ark grew taller."
+   "text": "Then the laughter turned to anger. Stones struck the hull. Ropes were cut on the scaffold. And still the ark grew taller."
   },
   {
    "kind": "scripture",
@@ -75,7 +75,7 @@
   },
   {
    "kind": "story",
-   "text": "At dawn it stood just as it was told: a window above, a door in the side, three decks within. And the valley that laughed went quiet."
+   "text": "At dawn it stood as it was told: a window above, a door in the side, three decks within. The valley that laughed went quiet."
   },
   {
    "kind": "insight",
@@ -91,6 +91,17 @@
   }
  ],
  "shots": [
+  {
+   "id": "s-taunt",
+   "kind": "scene",
+   "speaker": "scoffer",
+   "line": "Look at him, building a boat on dry ground! Tell us, old man, where is your flood?",
+   "characters": [
+    "scoffer"
+   ],
+   "figures": "anonymous",
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, slow push-in. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, standing at the front of a jeering crowd in a dry valley, one arm flung toward a vast wooden hull, turns to the camera and speaks a mocking taunt, his lips moving clearly with every word, while behind him the crowd seen from behind laughs and an old man seen from behind, his face never visible, keeps working high on the bare ribs of the hull. Hot afternoon in the dry valley, harsh sun and drifting dust. Scornful and loud. No text, no logos."
+  },
   {
    "id": "s-voice",
    "kind": "scene",
@@ -349,8 +360,10 @@
     12
    ],
    "seconds": 6,
-   "characters": [],
-   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. A mob in silhouette surges up the hill with torches to the foot of the ark, shouting and hurling stones, while high above them an old man in silhouette on the scaffold, back to the camera, keeps hammering. Night, orange torchlight against the black hull. Menacing and tense. No text, no logos.",
+   "characters": [
+    "scoffer"
+   ],
+   "prompt": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Wide shot, fast handheld tracking shot. The scoffer, a lean hawk-faced man of about forty-five with Middle Eastern features, sun-darkened olive skin, a sharp hooked nose, narrow dark eyes under thin arched brows, a black beard trimmed short to a point, black hair oiled back under a red-and-black striped headcloth, a long crimson tunic with a broad embroidered sash and bronze armbands, holding a burning torch high at night, the firelight on his face, leads a mob in silhouette up the hill to the foot of the ark, shouting and hurling stones, while high above them an old man in silhouette on the scaffold, back to the camera, keeps hammering. Night, orange torchlight against the black hull. Menacing and tense. No text, no logos.",
    "figures": "anonymous",
    "climax": true
   },
