@@ -51,30 +51,41 @@ def language(video):
     return "unknown"
 
 
-def plan(out):
-    tok = token()
-    me = call(tok, "GET", "channels", {"part": "contentDetails", "mine": "true"})["items"]
+def channel_uploads(get, parts):
+    """Every upload of the exact channel, as videos.list items with `parts`; shared by plan() and
+    captions_audit.py (review of #424). `get(endpoint, params)` returns the decoded answer. Returns (videos, calls),
+    each call 1 Data API unit. Refuses any other channel (CHANNEL_IDENTITY_MISMATCH)."""
+    me = get("channels", {"part": "id,contentDetails", "mine": "true"})["items"]
     if [c["id"] for c in me] != [CHANNEL]:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
     playlist = me[0]["contentDetails"]["relatedPlaylists"]["uploads"]
-    ids, page = [], None
+    ids, page, calls = [], None, 1
     while True:
         params = {"part": "contentDetails", "playlistId": playlist, "maxResults": 50}
         if page:
             params["pageToken"] = page
-        res = call(tok, "GET", "playlistItems", params)
+        res = get("playlistItems", params)
+        calls += 1
         ids += [i["contentDetails"]["videoId"] for i in res.get("items", [])]
         page = res.get("nextPageToken")
         if not page:
             break
     videos = []
     for start in range(0, len(ids), 50):
-        res = call(tok, "GET", "videos", {"part": "snippet,status,statistics,contentDetails", "id": ",".join(ids[start:start + 50])})
-        for v in res.get("items", []):
-            videos.append({"video_id": v["id"], "title": v["snippet"]["title"], "published_at": v["snippet"]["publishedAt"],
-                           "privacy": v["status"]["privacyStatus"], "language": language(v),
-                           "declared_language": v["snippet"].get("defaultAudioLanguage") or v["snippet"].get("defaultLanguage"),
-                           "views": int(v.get("statistics", {}).get("viewCount", 0)), "duration": v["contentDetails"].get("duration")})
+        videos += get("videos", {"part": parts, "id": ",".join(ids[start:start + 50])}).get("items", [])
+        calls += 1
+    return videos, calls
+
+
+def plan(out):
+    tok = token()
+    raw, _ = channel_uploads(lambda endpoint, params: call(tok, "GET", endpoint, params),
+                             "snippet,status,statistics,contentDetails")
+    videos = [{"video_id": v["id"], "title": v["snippet"]["title"], "published_at": v["snippet"]["publishedAt"],
+               "privacy": v["status"]["privacyStatus"], "language": language(v),
+               "declared_language": v["snippet"].get("defaultAudioLanguage") or v["snippet"].get("defaultLanguage"),
+               "views": int(v.get("statistics", {}).get("viewCount", 0)), "duration": v["contentDetails"].get("duration")}
+              for v in raw]
     to_hide = [v["video_id"] for v in videos if v["language"] == "pt" and v["privacy"] != "private"]
     record = {"version": "channel-privacy-plan-v1", "channel_id": CHANNEL, "uploads": len(videos),
               "by_language": {k: sum(v["language"] == k for v in videos) for k in ("pt", "en", "unknown")},

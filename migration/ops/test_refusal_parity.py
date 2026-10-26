@@ -36,6 +36,7 @@ LATER = [
     "migration/production/characters/characters.py",
     "migration/publish/prepublish_gate.py", "migration/publish/publication_binding.py",
     "migration/publish/tiktok_publish.py", "migration/publish/arc_links.py", "migration/publish/publish_episode.py",
+    "migration/publish/publish_video.py", "migration/publish/captions.py",
     "migration/integrations/pavo/client.py", "migration/integrations/pavo/video.py",
     "migration/integrations/pavo/images.py", "migration/integrations/pavo/audio.py",
     ".github/workflows/episode.yml", ".github/workflows/cf-images.yml", ".github/workflows/publish-episode.yml",

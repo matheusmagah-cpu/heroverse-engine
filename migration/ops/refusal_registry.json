@@ -101,6 +101,28 @@
    "class": "D",
    "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
   },
+  "CAPTIONS_BOUNDARY_IN_CONTENT": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "CAPTIONS_DELETE": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "CAPTIONS_FAILED": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "CAPTIONS_LIST": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "CAPTIONS_SRT_INVALID": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
   "CF_ACCOUNT_ID_UNRESOLVED": {
    "class": "D",
    "resume": "a secret's configuration: set it, dispatch again (nothing was generated)"
@@ -685,6 +707,10 @@
    "class": "C",
    "probe": "one clip of a new model or resolution (Agnes Flash 720p 24 fps passes, measured 2026-10-25)"
   },
+  "MANIFEST_NOT_FOR_THIS_FILE": {
+   "class": "I",
+   "guard": "migration/publish/test_publish_video.py::def test_"
+  },
   "MEDIA_RESOLUTION_LOW": {
    "class": "N",
    "why": "environment variables, a format word, a log line and an API enum value"
@@ -713,6 +739,22 @@
    "class": "C",
    "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
   },
+  "MULTIPART_MEDIA_PART_DIFFERS_FROM_SRT": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
+  "MULTIPART_NO_CLOSE_DELIMITER": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
+  "MULTIPART_NO_OPENING_DELIMITER": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
+  "MULTIPART_PART_MALFORMED": {
+   "class": "I",
+   "guard": "migration/publish/test_captions.py::def test_"
+  },
   "NARRATION_MISSING": {
    "class": "A",
    "early": "migration/production/bible/plan_check.py::publish_episode.short_problems(",
@@ -737,6 +779,10 @@
   "NOT_APPROVED": {
    "class": "C",
    "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "NOT_ATTEMPTED": {
+   "class": "N",
+   "why": "a ledger state word"
   },
   "NOT_IN_ARCS_TABLE": {
    "class": "I",
@@ -786,6 +832,10 @@
    "class": "D",
    "resume": "a state not reached yet or a write not confirmed: the ledger keeps what was done and the next run resumes at the missing step"
   },
+  "NO_UPLOADED_TRACK": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
   "NO_VIDEO": {
    "class": "C",
    "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
@@ -802,6 +852,10 @@
   "OWNER_FLOOR": {
    "class": "C",
    "probe": "the frozen QA and the review judge the render itself; their cheap probes are script_check's estimates (SPEECH_PRESENCE_EST, STORY_STILL_SHARE_EST) and the preview review at >= 9.5 before any render"
+  },
+  "OWNER_QUALITY_POLICY_BLOCKED": {
+   "class": "C",
+   "probe": "the review score of the render; its cheap probe is the preview review at >= 9.5 before the render (preview_gate)"
   },
   "PAVO_ACCESS_REFUSED": {
    "class": "D",
@@ -942,6 +996,18 @@
    "class": "A",
    "early": "migration/production/bible/plan_check.py::def check(plan, chars=None)",
    "note": "episode_build runs plan_check itself; short_engine's PLAN_REFUSED is check_shots/talk_problems, predicted by compose_prediction"
+  },
+  "PLAYLIST_ADD": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "PLAYLIST_CREATE": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
+  },
+  "PLAYLIST_ITEMS": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
   },
   "PREFLIGHT_ERROR": {
    "class": "A",
@@ -1148,6 +1214,41 @@
    "early": "migration/production/bible/plan_check.py::SPEAKER_NO_VOICE",
    "note": "characters.voice, the same function"
   },
+  "SRT_BOM": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_CONTROL_CHARACTERS": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_CR": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_EMPTY": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_NOT_UTF8": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_NO_FINAL_NEWLINE": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
+  "SRT_STRAY_BLANK_LINES": {
+   "class": "A",
+   "early": "migration/publish/preflight.py::captions.problems(",
+   "note": "the same validator (captions.problems) runs in publish/preflight.py before any upload"
+  },
   "STILL_MOUTH_CHECK_BLIND": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
@@ -1195,6 +1296,14 @@
    "early": "migration/production/script_check.py::TOO_FEW_BACKGROUNDS",
    "note": "BACKGROUNDS_MIN 18 keeps REPEAT_GAP (E46)"
   },
+  "TOP_LEVEL_REVIEW_NOT_FOR_THIS_FILE": {
+   "class": "I",
+   "guard": "migration/publish/test_publish_video.py::def test_"
+  },
+  "TOP_LEVEL_REVIEW_NOT_PASS": {
+   "class": "C",
+   "probe": "the review score of the render; its cheap probe is the preview review at >= 9.5 before the render (preview_gate)"
+  },
   "UNSAFE_SOURCE_MEMBER": {
    "class": "I",
    "guard": "migration/production/pilot_render.py::SOURCE_SHA256"
@@ -1202,6 +1311,10 @@
   "UPDATE_DESCRIPTION": {
    "class": "D",
    "resume": "the heartbeat re-runs arc_links at its slots; only the missing writes are made (arc_links_ledger.json)"
+  },
+  "UPLOAD_NOT_COMPLETED": {
+   "class": "D",
+   "resume": "YouTube's processing or API: the ledger and receipt keep what was done; the next run, or channel-privacy.yml captions-repair, does only the missing step"
   },
   "UPLOAD_NOT_CONFIRMED": {
    "class": "D",
