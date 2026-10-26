@@ -337,5 +337,160 @@ class Inputs(unittest.TestCase):
             self.assertEqual(len(json.loads(fake.calls[0][0].data)["inputs"]), 3)
 
 
+def wav(seconds=5.0, rate=8000, extra=b""):
+    import struct
+    frames = int(seconds * rate)
+    fmt = struct.pack("<HHIIHH", 1, 1, rate, rate * 2, 2, 16)
+    data = b"\x00\x00" * frames
+    body = b"WAVE" + b"fmt " + struct.pack("<I", 16) + fmt + extra + b"data" + struct.pack("<I", len(data)) + data
+    return b"RIFF" + struct.pack("<I", len(body)) + body
+
+
+def presigned_audio(n=1):
+    return envelope({"public_url": f"https://files.example.test/a/{n}.wav", "upload_url": f"https://store.example.test/put/a{n}?sig=x",
+                     "required_headers": {"Content-Type": "audio/wav"}})
+
+
+class Audio(unittest.TestCase):
+    """Input audio (narration) and the sound flag (v0.4, web client of 2026-10-26); no network or real secrets."""
+    token = "synthetic-offline-pavo-credential"
+
+    def setUp(self):
+        import tempfile
+        self.repo = Path(tempfile.mkdtemp())
+        (self.repo / "img").mkdir()
+        (self.repo / "img" / "narrator.png").write_bytes(png())
+        (self.repo / "img" / "frame.png").write_bytes(png())
+        voice = self.repo / "voice"
+        voice.mkdir()
+        (voice / "line.wav").write_bytes(wav(5.0))
+        (voice / "seven.wav").write_bytes(wav(7.0))
+        (voice / "short.wav").write_bytes(wav(1.5))
+        (voice / "long.wav").write_bytes(wav(12.5))
+        (voice / "list.wav").write_bytes(wav(3.0, extra=b"LIST" + (3).to_bytes(4, "little") + b"abc\x00"))
+        (voice / "broken.wav").write_bytes(b"RIFF\x00\x00\x00\x00WAVEjunk")
+        (voice / "line.mp3").write_bytes(b"ID3\x04\x00\x00\x00\x00\x00\x00" + b"\xff\xfb" * 100)
+        (voice / "fake.mp3").write_bytes(b"not an mp3")
+        (voice / "line.ogg").write_bytes(b"OggS")
+        self.patch = patch("images.REPO", self.repo)
+        self.patch.start()
+        self.addCleanup(self.patch.stop)
+
+    def test_wav_header_duration_including_odd_chunks(self):
+        import audio
+        self.assertEqual(audio.audio("voice/line.wav")["seconds"], 5.0)
+        self.assertEqual(audio.audio("voice/list.wav")["seconds"], 3.0)
+        self.assertEqual(audio.audio("voice/line.wav")["mime"], "audio/wav")
+
+    def test_narration_with_reference_is_priced_uploaded_and_sent_like_the_web_client(self):
+        fake = Responses(quote(), presigned(1), b"", envelope({}), presigned_audio(1), b"", envelope({}),
+                         envelope({"conversation_id": "901"}), started())
+        result = PavoVideoClient(self.token, fake).generate_video(
+            "The narrator speaks to camera.", 6, "9:16", references=["img/narrator.png"], audios=["voice/line.wav"])
+        self.assertEqual((result["status"], result["mode"], result["input_images"], result["input_audios"]),
+                         ("submitted", "omni_to_video", 1, 1))
+        requests = [r for r, _ in fake.calls]
+        pricing = json.loads(requests[0].data)
+        self.assertEqual(pricing["inputs"], [{"count": 1, "media_type": "image"},
+                                             {"count": 1, "media_type": "audio", "duration_seconds": 5.0}])
+        self.assertIs(pricing["outputs"][0]["gen_audio"], False)
+        presign = json.loads(requests[4].data)
+        self.assertEqual((presign["purpose"], presign["content_type"], presign["filename"]),
+                         ("chat_attachment", "audio/wav", "line.wav"))
+        put = requests[5]
+        self.assertEqual(put.get_method(), "PUT")
+        self.assertIsNone(put.get_header("Authorization"))
+        self.assertEqual(put.data, wav(5.0))
+        self.assertEqual(json.loads(requests[6].data), {"content_type": "audio/wav", "url": "https://files.example.test/a/1.wav"})
+        body = json.loads(requests[8].data)
+        self.assertEqual(body["mode"], "omni_to_video")
+        self.assertIs(body["sound"], False)
+        self.assertEqual(body["audios"], [{"url": "https://files.example.test/a/1.wav"}])
+        self.assertEqual([i["url"] for i in body["images"]], ["https://files.example.test/u/1.png"])
+        blocks = json.loads(body["creative_prompt_json"])
+        self.assertEqual(blocks[-1], {"type": "audio", "url": "https://files.example.test/a/1.wav"})
+        for request in requests:
+            self.assertNotIn(self.token.encode(), request.data or b"")
+
+    def test_sound_flag_reaches_quote_and_stream_together(self):
+        fake = Responses(quote(), envelope({"conversation_id": "902"}), started())
+        result = PavoVideoClient(self.token, fake).generate_video("Wind over the hills.", 5, "16:9", sound=True)
+        self.assertTrue(result["sound"])
+        pricing, body = json.loads(fake.calls[0][0].data), json.loads(fake.calls[2][0].data)
+        self.assertIs(pricing["outputs"][0]["gen_audio"], True)
+        self.assertIs(body["sound"], True)
+        self.assertNotIn("audios", body)
+        q = PavoVideoClient(self.token, Responses(quote())).quote_video(5, "9:16", sound=True)
+        self.assertEqual((q["sound"], q["audio"], q["input_audios"]), (True, True, 0))
+
+    def test_nonzero_quote_with_audio_or_sound_refuses_reports_the_price_and_uploads_nothing(self):
+        for kwargs, credits in ((dict(references=["img/narrator.png"], audios=["voice/line.wav"]), 4),
+                                (dict(sound=True), "2.5")):
+            fake = Responses(quote(credits))
+            with self.assertRaisesRegex(PavoError, r"PAVO_ZERO_CREDIT_QUOTE_REQUIRED required_credits=%s " % credits):
+                PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", **kwargs)
+            self.assertEqual(len(fake.calls), 1)
+        fake = Responses(quote(0, True))
+        with self.assertRaisesRegex(PavoError, "is_estimate=true"):
+            PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", references=["img/narrator.png"],
+                                                             audios=["voice/line.wav"])
+        self.assertEqual(len(fake.calls), 1)
+
+    def test_quote_prices_three_audios_within_the_total(self):
+        fake = Responses(quote())
+        with patch("audio._mp3_seconds", return_value=3.25):
+            q = PavoVideoClient(self.token, fake).quote_video(
+                8, "9:16", references=["img/narrator.png"], audios=["voice/line.mp3", "voice/list.wav", "voice/line.mp3"])
+        self.assertEqual((q["input_audios"], q["input_audio_seconds"], q["zero_cost_confirmed"]), (3, 9.5, True))
+        inputs = json.loads(fake.calls[0][0].data)["inputs"]
+        self.assertEqual([i.get("duration_seconds") for i in inputs if i["media_type"] == "audio"], [3.25, 3.0, 3.25])
+
+    def test_bad_audio_inputs_never_touch_network(self):
+        ref = ["img/narrator.png"]
+        cases = [dict(audios=["voice/line.wav"]),                                   # audio alone
+                 dict(first_frame="img/frame.png", audios=["voice/line.wav"]),       # frames mode has no audio
+                 dict(references=ref, audios=["voice/line.wav"] * 4),               # > 3
+                 dict(references=ref, audios=["voice/seven.wav", "voice/seven.wav"]),  # total 14 s
+                 dict(references=ref, audios=["voice/short.wav"]),                  # < 2 s
+                 dict(references=ref, audios=["voice/long.wav"]),                   # > 12 s
+                 dict(references=ref, audios=["voice/line.ogg"]),
+                 dict(references=ref, audios=["voice/broken.wav"]),
+                 dict(references=ref, audios=["voice/fake.mp3"]),
+                 dict(references=ref, audios=["../../etc/passwd.wav"]),
+                 dict(references=ref, audios=["/etc/hosts"]),
+                 dict(references=ref, audios=["voice/missing.wav"]),
+                 dict(references=ref, audios="voice/line.wav"),
+                 dict(references=ref, audios=[5]),
+                 dict(sound="yes"), dict(sound=1)]
+        for kwargs in cases:
+            fake = Responses()
+            with self.assertRaises(PavoError, msg=kwargs):
+                PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", **kwargs)
+            with self.assertRaises(PavoError, msg=kwargs):
+                PavoVideoClient(self.token, fake).quote_video(5, "9:16", **kwargs)
+            self.assertEqual(fake.calls, [], kwargs)
+
+    def test_mp3_without_measurable_duration_or_oversized_audio_is_refused(self):
+        ref = ["img/narrator.png"]
+        for probe in (None, float("nan"), 0.0):
+            with patch("audio._mp3_seconds", return_value=probe):
+                with self.assertRaisesRegex(PavoError, "INPUT_AUDIO_DURATION_UNMEASURABLE"):
+                    PavoVideoClient(self.token, Responses()).quote_video(5, "9:16", references=ref,
+                                                                         audios=["voice/line.mp3"])
+        with patch("audio.shutil.which", return_value=None):
+            with self.assertRaisesRegex(PavoError, "INPUT_AUDIO_DURATION_UNMEASURABLE"):
+                PavoVideoClient(self.token, Responses()).quote_video(5, "9:16", references=ref, audios=["voice/line.mp3"])
+        with patch("audio.MAX_AUDIO_BYTES", 100):
+            with self.assertRaisesRegex(PavoError, "INPUT_AUDIO_SIZE_REFUSED"):
+                PavoVideoClient(self.token, Responses()).quote_video(5, "9:16", references=ref, audios=["voice/line.wav"])
+
+    def test_failed_audio_upload_creates_no_conversation(self):
+        fake = Responses(quote(), presigned(1), b"", envelope({}), presigned_audio(1), URLError("down"))
+        with self.assertRaises(PavoError):
+            PavoVideoClient(self.token, fake).generate_video("x", 5, "9:16", references=["img/narrator.png"],
+                                                             audios=["voice/line.wav"])
+        self.assertEqual(len(fake.calls), 6)     # quote, image upload (3), audio presign, PUT: no create, no stream
+
+
 if __name__ == "__main__":
     unittest.main()

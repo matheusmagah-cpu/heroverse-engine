@@ -10,7 +10,7 @@ from mcp.types import ToolAnnotations
 from client import PavoError
 from video import PavoVideoClient
 
-mcp = MCPServer("heroverse-pavo", version="0.3.0", log_level="CRITICAL",
+mcp = MCPServer("heroverse-pavo", version="0.4.0", log_level="CRITICAL",
                 instructions="Unofficial Pavo connection. Generate only with a fresh exact zero-credit quote. "
                              "Never retry an uncertain submission; check its conversation_id with pavo_job.")
 client = PavoVideoClient()
@@ -54,20 +54,26 @@ def pavo_prepare_video(prompt: str, seconds: int = 5, aspect_ratio: str = "9:16"
 
 @mcp.tool(annotations=read)
 def pavo_quote_video(seconds: int = 5, aspect_ratio: str = "9:16", first_frame: str = "", last_frame: str = "",
-                     references: list[str] | None = None) -> dict:
-    """Quote one Flash video, 720p, no audio, with its input images counted. Never generate or treat the quote
-    as permanent pricing. Images are repository paths (PNG/JPEG): first_frame (+ optional last_frame), or up to
-    5 references (same characters every time); frames and references are exclusive."""
-    return safe_call(client.quote_video, seconds, aspect_ratio, first_frame, last_frame, references)
+                     references: list[str] | None = None, audios: list[str] | None = None,
+                     sound: bool = False) -> dict:
+    """Quote one Flash video, 720p, with its input images and audios and the sound flag counted. Never generate
+    or treat the quote as permanent pricing. Images are repository paths (PNG/JPEG): first_frame (+ optional
+    last_frame), or up to 5 references (same characters every time); frames and references are exclusive.
+    audios: up to 3 repository .mp3/.wav paths (our narration, each and in total 2-12 s), only with references.
+    sound: ask for generated sound (default false)."""
+    return safe_call(client.quote_video, seconds, aspect_ratio, first_frame, last_frame, references, audios, sound)
 
 
 @mcp.tool(annotations=write)
 def pavo_generate_video(prompt: str, seconds: int = 5, aspect_ratio: str = "9:16", first_frame: str = "",
-                        last_frame: str = "", references: list[str] | None = None) -> dict:
-    """Start one private Flash video only at a fresh exact zero-credit quote (input images counted). Text only,
-    first_frame (+ optional last_frame) or up to 5 references, as repository image paths. Never retry
-    automatically."""
-    return safe_call(client.generate_video, prompt, seconds, aspect_ratio, first_frame, last_frame, references)
+                        last_frame: str = "", references: list[str] | None = None, audios: list[str] | None = None,
+                        sound: bool = False) -> dict:
+    """Start one private Flash video only at a fresh exact zero-credit quote (input images, audios and sound
+    counted). Text only, first_frame (+ optional last_frame) or up to 5 references, as repository image paths;
+    audios (up to 3 .mp3/.wav, 2-12 s in total) only with references. A nonzero quote refuses and reports the
+    quoted number. Never retry automatically."""
+    return safe_call(client.generate_video, prompt, seconds, aspect_ratio, first_frame, last_frame, references,
+                     audios, sound)
 
 
 @mcp.tool(annotations=read)

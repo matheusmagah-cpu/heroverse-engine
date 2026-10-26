@@ -14,14 +14,15 @@ The private stdio server uses the official Python MCP SDK, pinned to 2.3.0 via `
 | `pavo_account` | Authenticated plan and credit balance read. |
 | `pavo_models` | Public video catalog; a Free label is not a price quote. |
 | `pavo_prepare_video` | Local brief only, `submitted: false`. |
-| `pavo_quote_video` | Authenticated, read-only price calculation for one Flash video, input images counted. |
-| `pavo_generate_video` | One private Flash video, only after a fresh, exact zero-credit quote: text only, first frame (+ optional last frame), or up to 5 reference images. |
+| `pavo_quote_video` | Authenticated, read-only price calculation for one Flash video, input images, input audios (with their durations) and the `sound` flag counted. |
+| `pavo_generate_video` | One private Flash video, only after a fresh, exact zero-credit quote: text only, first frame (+ optional last frame), or up to 5 reference images; with references, up to 3 input audios (`audios`, our narration); `sound` (default false). A nonzero quote refuses and reports the quoted number. |
 | `pavo_job` | Read the original job and its completed media; never resubmit it. |
 
-Generation is limited to `agnes-video-new-flash`, one output, 720p, no audio, 4–12 seconds, and the
+Generation is limited to `agnes-video-new-flash`, one output, 720p, 4–12 seconds, and the
 ratios of its public capability spec (9:16, 3:4, 1:1, 4:3, 16:9, 21:9). Each call obtains a new quote and refuses
-nonzero, estimated, missing or malformed prices before creating a conversation. It sends the same
-model, duration, resolution, audio and count to the quote and generation endpoints. There is no
+nonzero, estimated, missing or malformed prices before creating a conversation (or uploading anything); the refusal
+names the quoted `required_credits`, `final_points` and `is_estimate`. It sends the same model, duration,
+resolution, sound flag, input images, input audios and count to the quote and generation endpoints. There is no
 purchase, upgrade, scheduler or publishing endpoint. The quote is not a guarantee of permanent
 free access, nor an atomic provider-side price lock.
 
@@ -38,7 +39,7 @@ The adapter does not fetch or validate the media content.
 
 What Flash accepts (`model-capability-spec`, checked 2026-10-25): modes text_to_video, first_frame,
 first_last_frame and reference_image; up to 5 images (JPEG/PNG/WebP, 15 MiB, side 256–5760 px, aspect 0.4–2.5);
-up to 3 input audios (MP3/WAV, 2–12 s in total; not used here). The adapter takes repository-relative PNG/JPEG
+up to 3 input audios (MP3/WAV, 2–12 s in total; used since v0.4, below). The adapter takes repository-relative PNG/JPEG
 paths only (our approved stills and character sheets), validates them locally against that spec before any
 request, and refuses paths outside the repository.
 
@@ -53,11 +54,42 @@ request, and refuses paths outside the repository.
 - The storage host of the presigned PUT is not yet observed live; if the network policy denies it, the call fails
   with `PAVO_UPLOAD_HOST_UNREACHABLE` before any job exists.
 
-### Audio
+### Audio track of the output
 
-The request sends `sound: false` / `gen_audio: false`, as the web client does for "no audio", but the first live
-Flash clip (2026-10-25) came with an audible AAC track (mean −15.7 dB). Strip it (`ffmpeg -an`) before using a clip.
+By default the request sends `sound: false` / `gen_audio: false`, but the first live Flash clip (2026-10-25) came
+with an audible AAC track (mean −15.7 dB). Without input audio, strip it (`ffmpeg -an`) before using a clip. With
+our narration as input audio (v0.4), check that the output track is our narration before keeping it.
 MCP account/media responses are private; do not copy them into public logs or receipts.
+
+### Input audio and sound (v0.4, 2026-10-26)
+
+Goal: a narrator character who speaks **our** narration on screen. Flash's spec (`input_audio`): up to 3 files,
+`audio/mpeg` or `audio/wav`, 15 MiB each, each 2–12 s and 2–12 s in total. The adapter takes repository-relative
+`.mp3`/`.wav` paths and checks them locally before any request: size, type, per-file and total duration. WAV duration
+comes from its header (`data` size / byte rate); MP3 duration from `ffprobe`; an MP3 whose duration cannot be measured
+(no ffprobe, unreadable) is refused (`INPUT_AUDIO_DURATION_UNMEASURABLE`), never estimated.
+
+What the web client allows (chunks of 2026-10-26, see Protocol sources):
+- Audio upload exists only in `omni_to_video` (references), and only when the model's `input_audio.max_count > 0`
+  (Flash: 3). `frames_to_video` (first/last frame) has no audio upload, and audio without any image is refused
+  (`audioOnlyUploadNotSupported`). The adapter mirrors that: `audios` needs `references` (1–5 images);
+  `AUDIO_NEEDS_REFERENCES` / `AUDIO_AND_FRAMES_EXCLUSIVE` otherwise. (For the older `agnes-video` model the client
+  strips audio before sending; Flash keeps it.)
+- Upload: the same presigned flow as images (`purpose: "chat_attachment"`, `content_type` = the file's MIME,
+  `filename`; PUT without the Pavo credential; `/v1/file/inspect`).
+- Quote: each audio is one `inputs` entry `{"count": 1, "media_type": "audio", "duration_seconds": <measured>}`
+  (images stay `{"count": 1, "media_type": "image"}`); the output's `gen_audio` carries the sound flag.
+- Stream: `audios: [{"url", "meta_data"?}]` beside `images`, and `sound: <bool>`. In `creative_prompt_json` the client
+  names a mentioned audio as `{"type": "audio", "url"}` (no `source_index`, unlike images); the adapter adds one such
+  block per audio after the image blocks, as if each were mentioned in the prompt.
+- Sound: the client shows its "Generate audio" switch only when the spec's `output_video.audio_modes` contains
+  `with_audio` (e.g. `seedance-2-0`); Flash's spec has no `audio_modes` and no `supports_generated_audio`, so the
+  client never sends `sound: true` for Flash. With the switch hidden it sends `sound: "auto"` and omits `gen_audio`
+  from the quote. The adapter keeps `sound: false` by default (as in v0.3) and sends `sound: true` /
+  `gen_audio: true` only when asked; whether Flash honours it, and its price, is for the live quote to show.
+- Lip sync: neither the spec nor the client mentions lip sync; whether Flash makes the referenced character speak the
+  input audio (rather than laying it as a soundtrack) is not documented. Prompt it explicitly ("the narrator speaks
+  to camera") and check the first clip.
 
 ## Authorization
 
@@ -98,6 +130,9 @@ The stdlib `client.py --probe` and `client.py --models` commands remain read-onl
 - Initial submissions omitted official platform/time metadata and returned error 009999 without a
   generation turn or credit-balance change. Adding the verified headers succeeded. The regression is
   guarded by `test_video.py` and recorded as E82 in `migration/ops/ERRORS.json`.
+- The v0.4 audio request shape (`audios`, audio `inputs` with `duration_seconds`, `sound`/`gen_audio` true) comes
+  from the public web client of 2026-10-26 (chunks 9821, 4321, 5334, 8736, 9570); it is covered offline by
+  `test_video.py` and not yet verified live.
 - Commercial rights, watermark behavior and normal media QA/publication gates have not been waived.
 - 2026-10-25, through this MCP: one 6-second 9:16 Flash clip after a fresh exact zero-credit quote completed
   (720×1280, 24 fps, 6.59 s, no visible watermark, clip_check clean, audible audio despite `sound: false`):
@@ -111,9 +146,21 @@ The stdlib `client.py --probe` and `client.py --models` commands remain read-onl
 
 The request and result contracts were checked against Pavo's public frontend and the live test:
 
-- https://app.pavo-ai.work/_next/static/chunks/9570-bf5e24bf57211f96.js — account, quote and history routes.
+- https://app.pavo-ai.work/_next/static/chunks/9570-bf5e24bf57211f96.js — account, quote and history routes;
+  `getCreativePromptBlocks` (image blocks with `source_index`, audio blocks `{type: "audio", url}`).
+- https://app.pavo-ai.work/_next/static/chunks/9821-634c397c0baec9f9.js — module 1426 `function A` (send params:
+  `images` = image materials, `audios` = audio materials `{url, meta_data?}`, `sound: settings.generateAudio ?? "auto"`,
+  `creative_prompt_json` outside frames mode); `L` = `audioOnlyUploadNotSupported`; capability mapping (`audio_modes`
+  from `output_video.audio_modes`, `supports_audio_generation` from `supports_generated_audio`,
+  `supports_custom_audio_upload` from `input_audio.max_count`); upload check `c()`: audio only in `omni_to_video`.
+- https://app.pavo-ai.work/_next/static/chunks/5334-7f25cc63607fde64.js — quote hook (`inputs` built from materials:
+  audio/video carry `duration_seconds`; `gen_audio` only when `generateAudio` is set); the "Generate audio" switch is
+  shown only for `audio_modes` containing `with_audio`.
+- https://app.pavo-ai.work/_next/static/chunks/8736-8c5d1d01f45dc336.js — upload: audio duration read from browser
+  metadata, then `presigned-url` (`purpose: "chat_attachment"`), PUT, `inspect`.
 - https://app.pavo-ai.work/_next/static/chunks/5334-7f25cc63607fde64.js — exact quote output schema.
-- https://app.pavo-ai.work/_next/static/chunks/4321.a585e914ad1fa6c5.js — stream body, metadata headers and SSE.
+- https://app.pavo-ai.work/_next/static/chunks/4321.a585e914ad1fa6c5.js — stream body, metadata headers and SSE
+  (`audios` passed through when nonempty, `sound` when defined).
 - https://api.pixa-ai.work/api/v1/aigc/model-capability-spec?model_code=agnes-video-new-flash — public capabilities.
 - https://github.com/maoshuhua/pavo-cli/tree/1dbd922ff03447601715fb542d9afcea687345d3 — inspected, not installed;
   its regional test endpoints and on-disk credential store are not adopted.

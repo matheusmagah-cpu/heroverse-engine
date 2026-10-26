@@ -23,6 +23,10 @@ class Stdio(unittest.TestCase):
                     self.assertEqual(tool.annotations.read_only_hint, tool.name != "pavo_generate_video")
                 generator = next(t for t in listed.tools if t.name == "pavo_generate_video")
                 self.assertFalse(generator.annotations.idempotent_hint)
+                for name in ("pavo_quote_video", "pavo_generate_video"):
+                    schema = next(t for t in listed.tools if t.name == name).input_schema["properties"]
+                    self.assertTrue({"references", "audios", "sound"} <= set(schema), name)
+                    self.assertIs(schema["sound"]["default"], False)
                 status = await session.call_tool("pavo_status", {})
                 self.assertFalse(status.is_error)
                 status_data = json.loads(status.content[0].text)
