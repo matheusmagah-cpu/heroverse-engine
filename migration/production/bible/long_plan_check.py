@@ -277,6 +277,11 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             problems.append(f"HOLD_OVER_QA shot {i} {sid} (~{hold[i]:.1f}-{h_max:.1f} s on screen; story QA holds "
                             f"{lo:g}-{hi:g} s: split it into more cuts or shorter lines)")
         if s["kind"] == "keeper":
+            if s.get("voiceover") is True:
+                # the voice-over Keeper (plan B, PR #423) is built and checked for the Short only (episode_build,
+                # lipsync_check --still-mouth); the long has no such path yet
+                problems.append(f"LONG_VOICEOVER_UNSUPPORTED shot {i} {sid} (a voice-over Keeper exists for the Short "
+                                "only; the long's Keeper talks until a long voice-over path is built and tested)")
             if beat not in ("keeper_promise", "keeper_insight", "keeper_close"):
                 problems.append(f"KEEPER_OUT_OF_BEAT shot {i} {sid} (the Keeper: promise, insight and close only)")
             if slowest > pc.TALK_LINE_MAX:

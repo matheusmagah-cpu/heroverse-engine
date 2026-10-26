@@ -142,6 +142,31 @@ TALK_CLIP_MAX = float(TALK_CLIP[1])
 TALK_LINE_MAX = TALK_CLIP[1] - TALK_PAD_TARGET                              # 11.55 s
 TALK_MIN = (TALK_CLIP[0] - TALK_PAD_TARGET) / (1 + TALK_RETIME_MAX)         # 3.23 s: one line retimed into a 4 s
 #                                                                             clip (a shot of several: talk_min)
+# Plan B (owner, 2026-10-26, PROMPT_GUIDE "Keeper voice-over"): an opt-in `"voiceover": true` Keeper shot shows him on
+# screen with his mouth closed while his line plays from the voice track, so no one appears to speak with a still mouth
+# and there is no lip sync to miss. Its prompt says his lips stay closed and names no speech; lipsync_check
+# --still-mouth confirms the clip (MOUTH_TALKING). The default Keeper shot still talks, lip-synced.
+VO_SILENT = (re.compile(r"(?i)\blips (?:stay |remain |kept |pressed )?closed\b"), re.compile(r"(?i)\bsilent\b"))
+VO_SPEECH = re.compile(r"(?i)\b(speak\w*|spoke|talk\w*|says|saying|said|tells?|telling|whisper\w*|sings?|singing|"
+                       r"chant\w*|recit\w*|narrates|narrating|words|audio|lip[- ]?sync\w*|"
+                       r"lips (?:moving|move|moves|part|parts|parting|open\w*)|mouth (?:moving|moves|move|open\w*)|"
+                       r"opens? his mouth|open mouth)\b")
+# the still-mouth check needs his face in 80 % of the frames, as the lips check does: in the direct closed-mouth clips
+# (evidence/pavo/20261026/keeper-vo/calibration.json) the face was found only when he faced the lens; looking down
+# into the fire (2 % and 17 % of frames), "raises his eyes from the fire" (18 %) and "his eyes sad and kind ... the
+# flames flicker beside him" (0.68, 0.60) lost it, so a voice-over Keeper holds the talking pose too (KEEPER_POSE words)
+# and no phrasing that turns his eyes or head off the lens (review of #423)
+_LOOK = r"(?:looks?|looking|gazes?|gazing|glances?|glancing|stares?|staring|peers?|peering)"
+_OFF_LENS = r"(?:the |his )?(?:camp)?(?:fire|flames?|embers?|coals?|scroll|ground|hands?|sky|stars|sand|side)"
+VO_GAZE_OFF = re.compile(
+    rf"(?i)\b{_LOOK} (?:down|away|aside|up|off|sideways)\b|\b{_LOOK} (?:in)?to {_OFF_LENS}\b|\b{_LOOK} at {_OFF_LENS}\b|"
+    rf"\beyes (?:on|to|toward|towards) {_OFF_LENS}\b|\beyes (?:\w+ )?from {_OFF_LENS}\b|"
+    r"\blower(?:s|ing|ed)? his (?:eyes|gaze|head)\b|\b(?:eyes|gaze|head) (?:lowered|downcast|cast down|bowed|down)\b|"
+    r"\bhead (?:tilted|turned|bent)\b|\bturns? (?:his head|away|aside)\b|\bdowncast\b|\bprofile\b|"
+    r"\bfrom the side\b|\bthree-quarter\b|\breads?(?:ing)? (?:the |his )?scroll\b|\beyes (?:closed|shut)\b|"
+    r"\bcloses his eyes\b")
+VO_LINE_MAX = TALK_CLIP[1] * MAX_SLOW   # gap before + line + gap or tail after on one 12 s clip, slowed at most MAX_SLOW
+VO_LINE_MIN = KEEPER_AUDIO[0]           # the floor lines_step holds a Keeper line to (2.0 s), voice-over or not
 _KJV_TEXT = []
 
 
@@ -307,10 +332,40 @@ def talk_retime(words, gaps=0.0):
     return (round(best, 3), stretch) if abs(stretch - 1) <= TALK_RETIME_MAX + 1e-9 else None
 
 
+def voiceover(shot):
+    """Plan B (owner, 2026-10-26): a Keeper shot flagged `"voiceover": true` shows him silent, mouth closed, while his
+    line plays from the voice track (no input audio, no retime, no lipsync; lipsync_check --still-mouth instead)."""
+    return isinstance(shot, dict) and shot.get("kind") == "keeper" and shot.get("voiceover") is True
+
+
+def vo_cover(shots, i):
+    """(before, after): the seconds a voice-over Keeper clip covers around its line, by episode_build.compose_shots'
+    own run logic (review of #423: plan_check, lines_step, shot_seconds and the compose share this one helper). A
+    talking shot before it ends on its last word (it covers the gap only when the next shot talks too), so the clip
+    covers that gap; after scenes or a voice-over shot it starts on its first word. It ends where the next line starts
+    (the gap), or with the closing tail when it is the last shot."""
+    before = LINE_GAP if i > 0 and talking(shots[i - 1]) else 0.0
+    after = TAIL if i == len(shots) - 1 else LINE_GAP
+    return before, after
+
+
+def vo_covered(seconds, shots, i):
+    """The time a voice-over Keeper clip covers: the gap before, his line's `seconds` and the gap or tail after."""
+    before, after = vo_cover(shots, i)
+    return before + seconds + after
+
+
+def vo_clip_seconds(covered):
+    """Clip seconds of a voice-over Keeper shot for the time it covers (vo_covered): ceil, 4-12 s; the compose slows
+    a clip at most MAX_SLOW to cover more (VO_LINE_MAX)."""
+    return int(min(TALK_CLIP[1], max(TALK_CLIP[0], math.ceil(covered - 1e-6))))
+
+
 def talking(shot):
     """A shot whose clip carries its own words with the speaker's lips on them (Pavo input audio, lipsync_check):
-    the Keeper, or a scene where a character speaks. God's line is a voice-over: not a talking clip."""
-    return shot["kind"] == "keeper" or (speaking(shot) and shot["speaker"] != ch.GOD)
+    the Keeper (unless his shot is a voice-over, plan B), or a scene where a character speaks. God's line is a
+    voice-over: not a talking clip."""
+    return (shot["kind"] == "keeper" and not voiceover(shot)) or (speaking(shot) and shot["speaker"] != ch.GOD)
 
 
 def god_problem(prompt):
@@ -449,6 +504,9 @@ def shot_shape_problems(shots, n):
         if not isinstance(s.get("id"), str) or not SHOT_ID.fullmatch(s["id"]) or s["id"] in seen:
             problems.append(f"SHOT_ID shot {i} (unique, a-z 0-9 -)")
         seen.add(s.get("id"))
+        if "voiceover" in s and (s["kind"] != "keeper" or type(s["voiceover"]) is not bool):
+            problems.append(f"VOICEOVER_FIELD shot {i} {s.get('id')} (`voiceover`: true or false, on a keeper shot "
+                            "only)")
         if speaking(s):
             if s["kind"] != "scene" or s.get("lines") not in (None, []):
                 problems.append(f"SPEAKER_SHOT_KIND shot {i} {s.get('id')} (a scene that carries its own `line`, "
@@ -486,6 +544,8 @@ def keeper_prompt_problems(i, s, keeper):
         problems.append(f"CHARACTER_LOOK_CHANGED shot {i}: keeper (the prompt must carry its look word for word)")
     if not any(w in s.get("prompt", "") for w in keeper.get("wardrobe", {}).values()):
         problems.append(f"KEEPER_WARDROBE shot {i} {s['id']} (one wardrobe variant word for word: same room)")
+    if voiceover(s):
+        return problems + vo_prompt_problems(i, s)
     if not SPEAKS.search(s.get("prompt", "")):
         problems.append(f"KEEPER_NOT_SPEAKING shot {i} {s['id']} (say that he speaks to the camera)")
     prompt_lc = s.get("prompt", "").lower()
@@ -494,6 +554,24 @@ def keeper_prompt_problems(i, s, keeper):
                         f"{' and '.join(repr(w) for w in KEEPER_POSE)}, no push-in, pull-back, tracking, orbit, lean or bow; those "
                         "lost the face or the lips, E98)")
     return problems
+
+
+def vo_prompt_problems(i, s):
+    """Plan B: a voice-over Keeper's prompt says his lips stay closed ("his lips closed, silent") and names no speech
+    (speaks, talking, says, lips moving...), so Pavo makes no talking mouth under a line he does not lip-sync; and he
+    faces the lens on a static camera (KEEPER_POSE words, no look down into the fire), so the still-mouth check finds
+    his face."""
+    p = s.get("prompt", "")
+    out, speech = [], VO_SPEECH.search(p)
+    if not all(r.search(p) for r in VO_SILENT) or speech:
+        why = f"names speech: {speech.group(0)!r}" if speech else "say \"his lips closed, silent\""
+        out.append(f"KEEPER_VO_PROMPT shot {i} {s['id']} (a voice-over Keeper is silent on screen, mouth closed; {why})")
+    low, off = p.lower(), VO_GAZE_OFF.search(p) or KEEPER_POSE_OFF.search(p.lower())
+    if not all(w in low for w in KEEPER_POSE) or off:
+        why = f"not {off.group(0)!r}" if off else " and ".join(repr(w) for w in KEEPER_POSE)
+        out.append(f"KEEPER_VO_POSE shot {i} {s['id']} (he faces the lens on a static camera so the still-mouth check "
+                   f"finds his face; {why})")
+    return out
 
 
 def talk_reach_problems(i, s, span, slowest, gaps):
@@ -633,10 +711,22 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
             if any(items[k]["kind"] not in LESSON_KINDS for k in idx):
                 problems.append(f"KEEPER_LINE_KIND shot {i} {s['id']} (the Keeper speaks only the insight and the "
                                 "close)")
-            if slowest > TALK_LINE_MAX:
+            if voiceover(s):
+                covered = vo_covered(slowest, shots, i)
+                if covered > VO_LINE_MAX + 1e-9:
+                    problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {s['id']} (~{covered:.1f} s with the gap before and "
+                                    f"the gap or tail after, at the slowest pace; one {TALK_CLIP[1]} s clip slowed at "
+                                    f"most {MAX_SLOW} covers {VO_LINE_MAX:.1f} s)")
+                if span < VO_LINE_MIN:
+                    problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (~{span:.1f} s; a Keeper line is at least "
+                                    f"{VO_LINE_MIN:.1f} s, as episode_build lines holds it)")
+                if keeper and not keeper.get("talk_refs"):
+                    problems.append(f"KEEPER_VO_NO_TALK_REF shot {i} {s['id']} (a voice-over Keeper is generated from his "
+                                    "`talk_refs` frame; the front view lost his face 4 of 4, keeper-vo/calibration.json)")
+            elif slowest > TALK_LINE_MAX:
                 problems.append(f"KEEPER_LINE_TOO_LONG shot {i} {s['id']} (~{slowest:.1f} s at the slowest pace; "
                                 f"Pavo input audio <= {TALK_LINE_MAX:.2f} s)")
-            if span < talk_min(gaps):
+            if not voiceover(s) and span < talk_min(gaps):
                 problems.append(f"KEEPER_LINE_TOO_SHORT shot {i} {s['id']} (input audio >= {talk_min(gaps):.2f} s: it "
                                 "fills a 4 s clip, its gaps never stretched, E95)")
             if s.get("characters") not in (None, [ch.NARRATOR]) or s.get("seconds") is not None:
@@ -670,8 +760,8 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
 
     # Enough footage for every run of scenes (establishing shots hold 2 s; a clip may be slowed MAX_SLOW at most)
     for a, b, idx in groups(shots, carried):
-        if talking(shots[a]):
-            continue
+        if talking(shots[a]) or voiceover(shots[a]):
+            continue   # a voice-over Keeper's clip length comes from his line (vo_clip_seconds)
         span = sum(est[k] for k in idx) + LINE_GAP * len(idx)
         members = [shots[j] for j in range(a, b + 1)]
         if establishing_only(members, span):

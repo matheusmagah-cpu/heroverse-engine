@@ -23,9 +23,11 @@ the episode record and dispatches publish-episode.yml.
                                                  fresh exact 0-credit quote (the adapter refuses any other price),
                                                  poll job() until completed/failed, download from the Pavo CDN only,
                                                  clip_check on every clip, lipsync_check on every talking clip (the
-                                                 Keeper, a character speaking; not God's voice-over shot); a failed
-                                                 shot is regenerated as a NEW generation at most 2 times, then the run
-                                                 fails naming the shot
+                                                 Keeper, a character speaking; not God's voice-over shot), the
+                                                 still-mouth check on a voice-over Keeper clip (plan B, `"voiceover":
+                                                 true`: his line plays from the voice track); a failed shot is
+                                                 regenerated as a NEW generation at most 2 times, then the run fails
+                                                 naming the shot
   episode_build.py compose PLAN WORK MUSIC OUT   short_engine.py (cuts only, captions, owned music, -14 LUFS), then
                                                  clip_check --composed; WORK/report.json gets the timeline and checks
   episode_build.py sheet VIDEO SHEET.jpg         20 frames of the composed Short on one sheet (5 x 4)
@@ -240,7 +242,16 @@ def lines_step(plan, work):
         # one talking ceiling (plan_check.TALK_LINE_MAX: the retime brings every talking line under it; 1 ms is the
         # layout's rounding); God's voice-over fills one scene clip
         limit = plan_check.TALK_LINE_MAX if talks else plan_check.SPEAKER_AUDIO[1]
-        if not low <= seconds <= limit + (1e-3 if talks else 0.0):
+        if plan_check.voiceover(s):
+            # review of #423: his clip covers the gap before (after a talking shot), the line and the gap or tail
+            # after (plan_check.vo_cover, the compose's own run logic): that whole time is capped, the line floored
+            covered = plan_check.vo_covered(seconds, shots, i)
+            if not plan_check.VO_LINE_MIN <= seconds or covered > plan_check.VO_LINE_MAX + 1e-9:
+                problems.append(f"{code} {s['id']} {seconds:.2f} s, {covered:.2f} s with the gap before and the gap or "
+                                f"tail after (line >= {plan_check.VO_LINE_MIN:.1f} s, all <= "
+                                f"{plan_check.VO_LINE_MAX:.1f} s)")
+                continue
+        elif not low <= seconds <= limit + (1e-3 if talks else 0.0):
             problems.append(f"{code} {s['id']} {seconds:.2f} s ({low:.0f}-{limit:.2f} s)")
             continue
         if talks:
@@ -253,6 +264,9 @@ def lines_step(plan, work):
                                 "longer than the speech)")
                 continue
         record = {"start": start, "end": end, "seconds": round(seconds, 3)}
+        if plan_check.voiceover(s):     # plan B: no input audio, no lipsync; his line is narration in the track
+            keeper[s["id"]] = dict(record, voiceover=True)
+            continue
         if s["kind"] != "keeper":
             record["speaker"] = s["speaker"]
         if into is voice_over:          # God: mixed as a voice-over in the track; no clip audio, no lipsync check
@@ -326,12 +340,16 @@ def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
         for cid in (["keeper"] if s["kind"] == "keeper" else s.get("characters", [])):
             if cid not in needed:
                 needed.append(cid)
-        if plan_check.talking(s) and speaker_of(s) not in talkers:
+        if (plan_check.talking(s) or plan_check.voiceover(s)) and speaker_of(s) not in talkers:
             talkers.append(speaker_of(s))
     out = {}
     wanted = [(cid, cid, "refs") for cid in needed] + [(f"{cid}:talk", cid, "talk_refs") for cid in talkers]
+    silent = {speaker_of(s) for s in plan["shots"] if plan_check.voiceover(s)}
     for key, cid, field in wanted:
         records = reference_records(cid, chars, field=field)
+        if not records and field == "talk_refs" and cid in silent:
+            # review of #423: the front view lost his face 4 of 4 (keeper-vo/calibration.json); never in its place
+            raise SystemExit(f"KEEPER_VO_NO_TALK_REF {cid} (a voice-over Keeper is generated from his `talk_refs` frame)")
         if not records:
             continue
         out[key] = []
@@ -385,6 +403,9 @@ def retime(piece, params, factor, stem):
 
 
 def shot_seconds(shot, index, plan, layout):
+    if plan_check.voiceover(shot):   # the gap before, his line, the gap or tail after (plan_check.vo_cover)
+        covered = plan_check.vo_covered(layout["keeper"][shot["id"]]["seconds"], plan["shots"], index)
+        return plan_check.vo_clip_seconds(covered)
     if not plan_check.talking(shot):
         return shot["seconds"]
     return min(plan_check.TALK_CLIP[1], talk_need(talk_record(layout, shot)["seconds"]))
@@ -421,7 +442,10 @@ def bind_prompt(prompt, who, chars=None):
 
 def request(shot, index, plan, layout, refs, chars=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
-    speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen."""
+    speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen. A
+    voice-over Keeper shot (plan B) sends his `talk_refs` frame alone (keeper-vo/calibration.json: with the
+    mouth-closed front view the landmarker found his face in 2-27 % of the frames, FACE_NOT_FOUND in 4 of 4; with
+    the talking frame, facing the lens, 100 %), no audio and no speech clause."""
     ids = ["keeper"] if shot["kind"] == "keeper" else shot.get("characters", [])
     talks = plan_check.talking(shot)
     prompt = shot["prompt"]
@@ -432,6 +456,11 @@ def request(shot, index, plan, layout, refs, chars=None):
         ids = [who] + [c for c in ids if c != who]
         references = list(refs.get(f"{who}:talk") or refs[who]) + [p for cid in ids[1:] for p in refs[cid]]
         prompt = bind_prompt(prompt, who, chars)
+    elif plan_check.voiceover(shot):
+        if not refs.get(f"{ch.NARRATOR}:talk"):
+            raise SystemExit(f"KEEPER_VO_NO_TALK_REF {shot['id']} (no talking frame in refs.json; the front view lost "
+                             "his face 4 of 4)")
+        references = list(refs[f"{ch.NARRATOR}:talk"])
     else:
         references = [p for cid in ids for p in refs[cid]]
     if len(references) > ch.MAX_REFS:
@@ -488,8 +517,9 @@ def wait_job(client, cid, sleep=time.sleep, clock=time.monotonic):
 
 
 def attempts_for(shot):
-    """E98: generations allowed for one shot; every caller of make_shot passes it, so a talking shot gets 6."""
-    return TALK_ATTEMPTS if plan_check.talking(shot) else ATTEMPTS
+    """E98: generations allowed for one shot; every caller of make_shot passes it, so a talking shot gets 6, and so
+    does a voice-over Keeper shot (plan B: 1 pass in 6 direct closed-mouth clips before the probes; Pavo is free)."""
+    return TALK_ATTEMPTS if plan_check.talking(shot) or plan_check.voiceover(shot) else ATTEMPTS
 
 
 def make_shot(shot_id, attempt, check, attempts=ATTEMPTS):
@@ -503,6 +533,8 @@ def make_shot(shot_id, attempt, check, attempts=ATTEMPTS):
             if measures:
                 if "faces" in measures:
                     record["faces"] = measures["faces"]
+                elif "still_mouth" in measures:
+                    record["still_mouth"] = measures["still_mouth"]
                 else:
                     record["lipsync"] = measures
             if not record["flags"]:
@@ -554,12 +586,29 @@ def face_flags(lip_python, face_model, clip):
     return flags, {"faces": {k: result.get(k) for k in ("frames_sampled", "faces_found")}}
 
 
+def still_mouth_flags(lip_python, face_model, clip):
+    """Plan B: a voice-over Keeper clip shows no talking mouth (lipsync_check --still-mouth: the same landmarker and
+    lip opening; MOUTH_TALKING over the calibrated range, FACE_NOT_FOUND under 80 % of frames). A check that prints
+    no JSON stops the run (E89): no regeneration is spent on a broken tool."""
+    done = subprocess.run([str(lip_python), "-I", "-B", str(HERE / "lipsync_check.py"), "--still-mouth", str(clip),
+                           str(face_model)], capture_output=True, text=True)
+    try:
+        result = json.loads(done.stdout.strip().splitlines()[-1])
+        flags = list(result["flags"])
+    except (ValueError, IndexError, KeyError, TypeError):
+        tail = " | ".join(done.stderr.strip().splitlines()[-3:])
+        raise SystemExit(f"STILL_MOUTH_TOOL_BROKEN exit {done.returncode}: {tail[-600:]}")
+    return flags, {"still_mouth": {k: result.get(k) for k in ("opening_range", "opening_motion", "window_motion",
+                                                               "closed_opening", "face_frames", "frames")}}
+
+
 def risk_order(shots):
     """E99: (plan index, shot) with the shots that can fail first: the talking shots (lipsync_check), then God's
-    voice-over shots (no face may appear), then the scenes. A failure costs minutes, not a whole build."""
+    voice-over shots (no face may appear) and the voice-over Keeper shots (no talking mouth), then the scenes. A
+    failure costs minutes, not a whole build."""
     def rank(item):
         shot = item[1]
-        return 0 if plan_check.talking(shot) else 1 if plan_check.speaking(shot) else 2
+        return 0 if plan_check.talking(shot) else 1 if plan_check.speaking(shot) or plan_check.voiceover(shot) else 2
     return sorted(enumerate(shots), key=rank)
 
 
@@ -613,9 +662,13 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
             return record, final
 
         voice_over = plan_check.speaking(shot) and not talks
+        still = plan_check.voiceover(shot)
 
         def check(path):
             flags = clip_flags(path)
+            if still:       # plan B: the Keeper on screen, silent; his line plays from the voice track
+                more, measures = still_mouth_flags(lip_python, face_model, path)
+                return flags + more, measures
             if voice_over:  # God's voice-over shot: no lipsync, but no face may appear in it
                 more, measures = face_flags(lip_python, face_model, path)
                 return flags + more, measures
@@ -698,6 +751,27 @@ def compose_shots(plan, layout, clips, clip_seconds):
     out, cursor = [], 0.0
     for r, (a, b, ln) in enumerate(runs):
         last = r == len(runs) - 1
+        if plan_check.voiceover(shots[a]):
+            # plan B: one unbroken clip of the silent Keeper over his line, from where the shot before ended (his
+            # first word, or the gap after a talking shot) to the next line (or the end), from its 0 s; his line is
+            # narration in the voice track (captions from the timeline). A clip shorter than that is slowed at most
+            # MAX_SLOW, never cut or held
+            s = shots[a]
+            before, after = plan_check.vo_cover(shots, a)   # the one rule plan_check and lines_step cap by
+            start = lines[ln[0]]["start"] - before
+            end = total if last else lines[ln[-1]]["end"] + after
+            if abs(start - cursor) > 1e-3 or (not last and abs(end - lines[runs[r + 1][2][0]]["start"]) > 1e-3):
+                raise SystemExit(f"KEEPER_VO_NOT_ON_HIS_LINE {s['id']} (cover {before}/{after} s off the run's "
+                                 f"{cursor:.3f} s start or the next line)")
+            span = end - cursor
+            factor = max(1.0, span / clip_seconds[s["id"]])
+            if factor > MAX_SLOW + 1e-9:
+                raise SystemExit(f"KEEPER_CLIP_SHORT {s['id']} ({clip_seconds[s['id']]:.2f} s for {span:.2f} s, slowed "
+                                 f"at most {MAX_SLOW})")
+            out.append({"clip": clips[s["id"]], "start": round(cursor, 3), "end": round(end, 3), "src_start": 0.0,
+                        "speed": round(factor, 4) if factor > 1.0 else 1.0, "shot": s["id"], "kind": "keeper-vo"})
+            cursor = end
+            continue
         if plan_check.talking(shots[a]):
             s = shots[a]
             kind = "keeper" if s["kind"] == "keeper" else "speaker"
