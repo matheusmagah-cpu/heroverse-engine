@@ -65,7 +65,7 @@ class PavoClient:
     def _get(self, route):
         if route not in ROUTES:
             raise PavoError("ROUTE_NOT_ALLOWED")
-        headers = {"Accept": "application/json", "User-Agent": "HeroVerse-Pavo-MCP/0.1"}
+        headers = {"Accept": "application/json", "User-Agent": "HeroVerse-Pavo-MCP/0.4"}
         if route == "credits":
             if not self._valid_token():
                 raise PavoError("PAVO_CREDENTIAL_REQUIRED")
