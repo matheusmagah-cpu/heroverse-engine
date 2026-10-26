@@ -59,8 +59,12 @@ class Heartbeat(unittest.TestCase):
         self.assertNotIn("tiktok.yml", hb.decide({"tiktok.yml": [run(13, 45)]}, waiting, t(13, 50)))
         self.assertNotIn("tiktok.yml", hb.decide({}, {**ALL, "tiktok_pending": False}, t(13, 41)))
         wf = (Path(__file__).resolve().parents[2] / ".github/workflows/heartbeat.yml").read_text()
-        self.assertIn("tiktok_publish.py pending", wf)
-        self.assertIn("'tiktok_pending':", wf)
+        self.assertIn('migration/production/bible/episodes > "$T/tiktok" || echo "PENDING_CHECK_FAILED" > "$T/tiktok"', wf)
+        self.assertIn("'tiktok_pending':s(sys.argv[4])", wf)
+        self.assertIn('"$T/images" "$T/reconcile" "$T/shorts" "$T/tiktok" "$T/conditions.json"', wf)
+        self.assertIn("open(sys.argv[5],'w')", wf)
+        tiktok = (Path(__file__).resolve().parents[2] / ".github/workflows/tiktok.yml").read_text()
+        self.assertLess(tiktok.index("git pull -q --ff-only origin main"), tiktok.index("tiktok_publish.py pending"))
 
     def test_retired_gemini_minings_are_never_dispatched(self):
         # SYSTEM.md (2026-10-19): structure mining is done with vidIQ; the Gemini/RapidAPI chain failed its holdout

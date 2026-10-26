@@ -728,7 +728,7 @@
    "id": "E90",
    "date": "2026-10-26",
    "error": "The TikTok mirror never ran by itself: tiktok.yml has 0 scheduled runs since it was added (2026-10-25), only manual ones. E86 made its cron every 20 min, but this repository's crons are dropped under load (heartbeat.py: on 2026-10-17/18 every daily cron was dropped), which is why heartbeat.yml is the engine's only scheduler; the mirror was left on a cron of its own. Genesis 2 and 4 waited, unmirrored.",
-   "fix": "heartbeat.py dispatches tiktok.yml in an hourly slot (:40, 2 attempts) whenever tiktok_publish.py pending lists a Short public on YouTube and not on TikTok; heartbeat.yml computes tiktok_pending. tiktok.yml's own cron stays as a second chance.",
+   "fix": "heartbeat.py dispatches tiktok.yml in an hourly slot (:40) whenever tiktok_publish.py pending lists a Short public on YouTube and not on TikTok (heartbeat.yml computes tiktok_pending; a crash of that check counts as pending so tiktok.yml fails loudly; PUBLICATION_HOLD keeps it quiet). tiktok.yml pulls the latest main before reading its ledger, so a run queued behind another never re-posts what that run sent. Its own cron stays only as a second chance.",
    "antidote": {
     "file": "migration/ops/test_heartbeat.py",
     "contains": "def test_every_heartbeat_mirrors_a_short_waiting_for_tiktok"

@@ -31,7 +31,7 @@ TASKS = [
     {"workflow": "channel-privacy.yml", "slots": ["08:05"], "attempts": 1},
     # E90: tiktok.yml's own cron never fired (0 scheduled runs since 2026-10-25); every heartbeat mirrors the next
     # Short already public on YouTube (owner, 2026-10-26: "published on YouTube, it must go to TikTok")
-    {"workflow": "tiktok.yml", "slots": [f"{h:02d}:40" for h in range(24)], "attempts": 2, "when": "tiktok_pending"},
+    {"workflow": "tiktok.yml", "slots": [f"{h:02d}:40" for h in range(24)], "attempts": 1, "when": "tiktok_pending"},
 ]
 
 
