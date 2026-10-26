@@ -48,7 +48,7 @@ jobs:
       - name: Tools, pinned voice runtime, MediaPipe face model (sha256 = lipsync_check.MODEL_SHA256)
         run: |
           timeout 300s sudo apt-get update -qq
-          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core >/dev/null
+          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg espeak-ng fonts-dejavu-core libegl1 libgles2 >/dev/null   # mediapipe links libEGL/libGLESv2 (E89)
           python3 -m venv "$RUNNER_TEMP/voice"
           "$RUNNER_TEMP/voice/bin/pip" install --disable-pip-version-check -q 'kokoro-onnx==0.4.9' 'onnxruntime==1.20.1' 'numpy==2.2.6' 'espeakng-loader==0.2.4' 'soundfile==0.13.1'
           python3 -m venv "$RUNNER_TEMP/lip"
@@ -56,6 +56,8 @@ jobs:
           curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
           sha=$(python3 -I -c "import re,sys;print(re.search(r'MODEL_SHA256 = \"([0-9a-f]{64})\"',open(sys.argv[1]).read()).group(1))" migration/production/bible/lipsync_check.py)
           echo "$sha  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
+          # the lips check must work before any Pavo generation is spent (E89): the calibration clip must pass
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 migration/evidence/pavo/20261026/keeper/line-01.wav "$RUNNER_TEMP/face_landmarker.task"
           mkdir -p "$WORK" "$OUT"
       - name: Narration (Kokoro am_michael, line by line) and the Keeper's input audio
         run: |
