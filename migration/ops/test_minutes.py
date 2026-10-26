@@ -115,28 +115,59 @@ class Minutes(unittest.TestCase):
         self.assertIn("actions/cache/restore@", (WF / "render-smoke.yml").read_text())   # a PR never saves a cache
 
     def test_parallel_unit_tests_report_every_result_and_fail_on_any_failure(self):
-        script = step_script("pr-checks.yml", "Unit tests (no network, no secrets)")
+        script = step_script("pr-checks.yml", "Unit tests (no network, no secrets), ffmpeg and OpenCV installing")
         self.assertIn("migration/ops/test_minutes.py", script)
+
+        def fake(d, tests, video, tools_rc=0):
+            """The real step with its test list, its VIDEO list and the apt install replaced (the install writes a
+            marker; a VIDEO test fails when it starts before the marker exists)."""
+            s = re.sub(r"for t in .*?; do\n", f"for t in {' '.join(str(d / t) for t in tests)}; do\n", script,
+                       count=1, flags=re.S)
+            s = re.sub(r'VIDEO=" .*?"\n', f'VIDEO=" {" ".join(str(d / t) for t in video)} "\n', s, count=1, flags=re.S)
+            s = re.sub(r"video_tools\(\) \{\n.*?\n          \}\n".replace("          ", ""),
+                       f"video_tools() {{ sleep 0.5; touch {d}/tools-ready; return {tools_rc}; }}\n", s, count=1, flags=re.S)
+            self.assertIn(f"touch {d}/tools-ready", s)
+            tmp = Path(tempfile.mkdtemp(dir=d))
+            return subprocess.run(["bash", "-e", "-c", s], capture_output=True, text=True,
+                                  env={"PATH": "/usr/bin:/bin", "RUNNER_TEMP": str(tmp)})
         with tempfile.TemporaryDirectory() as d:
             d = Path(d)
             (d / "a_pass.py").write_text("print('ok')\n")
             (d / "b_fail.py").write_text("import sys; print('boom'); sys.exit(3)\n")
             (d / "c_pass.py").write_text("import time; time.sleep(0.3)\n")
             (d / "d_crash.py").write_text("raise RuntimeError('crash')\n")
-            fake = re.sub(r"for t in .*?; do\n", f"for t in {d}/a_pass.py {d}/b_fail.py {d}/c_pass.py {d}/d_crash.py; do\n",
-                          script, count=1, flags=re.S)
-            (d / "tmp").mkdir()
-            out = subprocess.run(["bash", "-e", "-c", fake], capture_output=True, text=True,
-                                 env={"PATH": "/usr/bin:/bin", "RUNNER_TEMP": str(d / "tmp")})
+            (d / "v_video.py").write_text(f"import os, sys; sys.exit(0 if os.path.exists({str(d / 'tools-ready')!r}) "
+                                          "else 'STARTED_BEFORE_TOOLS')\n")
+            out = fake(d, ["a_pass.py", "b_fail.py", "v_video.py", "c_pass.py", "d_crash.py"], ["v_video.py"])
             self.assertEqual(out.returncode, 1, out.stdout + out.stderr)
             lines = [l for l in out.stdout.splitlines() if l.startswith(("PASS ", "FAIL "))]
-            self.assertEqual(lines, [f"PASS {d}/a_pass.py", f"FAIL {d}/b_fail.py", f"PASS {d}/c_pass.py",
-                                     f"FAIL {d}/d_crash.py"])
+            self.assertEqual(lines, [f"PASS {d}/a_pass.py", f"FAIL {d}/b_fail.py", f"PASS {d}/v_video.py",
+                                     f"PASS {d}/c_pass.py", f"FAIL {d}/d_crash.py"])
             self.assertIn("boom", out.stdout)
             self.assertIn("RuntimeError: crash", out.stdout)
-            ok = re.sub(r"for t in .*?; do\n", f"for t in {d}/a_pass.py {d}/c_pass.py; do\n", script, count=1, flags=re.S)
-            self.assertEqual(subprocess.run(["bash", "-e", "-c", ok], capture_output=True, text=True,
-                                            env={"PATH": "/usr/bin:/bin", "RUNNER_TEMP": str(d / "tmp2")}).returncode, 0)
+            ok = fake(d, ["a_pass.py", "v_video.py", "c_pass.py"], ["v_video.py"])
+            self.assertEqual(ok.returncode, 0, ok.stdout + ok.stderr)
+            (d / "tools-ready").unlink()
+            early = fake(d, ["a_pass.py", "v_video.py"], [])          # a video test left out of VIDEO fails loudly
+            self.assertEqual(early.returncode, 1)
+            self.assertIn("STARTED_BEFORE_TOOLS", early.stdout)
+            broken = fake(d, ["a_pass.py", "v_video.py"], ["v_video.py"], tools_rc=1)
+            self.assertEqual(broken.returncode, 1)
+            self.assertIn("VIDEO_TOOLS_FAILED", broken.stdout)
+
+    def test_tests_that_can_skip_without_the_video_tools_wait_for_them(self):
+        # E100: a test that skips when ffmpeg is missing would pass silently if it ran before the install
+        script = step_script("pr-checks.yml", "Unit tests (no network, no secrets), ffmpeg and OpenCV installing")
+        video = set(re.search(r'VIDEO=" (.*?)"\n', script, re.S).group(1).replace("\\", " ").split())
+        listing = re.search(r"for t in (.*?); do\n", script, re.S).group(1).replace("\\", " ").split()
+        tests = {str(p.relative_to(ROOT)) for pat in listing for p in ROOT.glob(pat)}
+        self.assertLessEqual(video, tests)
+        uses = re.compile(r"@unittest\.skip|\bSkipTest\b|\.skipTest\(|^\s*(?:import (?:cv2|numpy|PIL)|from (?:cv2|numpy|PIL)\b)",
+                          re.M)
+        for rel in sorted(tests - video):
+            hit = uses.search((ROOT / rel).read_text())
+            self.assertIsNone(hit, f"{rel} uses {hit and hit.group(0)!r}: list it in VIDEO")
+        self.assertIn("timeout 90s sudo apt-get", script)                                  # E55 kept inside the step
 
     def test_parallel_fetch_checks_every_hash_and_fails_on_any_miss(self):
         with tempfile.TemporaryDirectory() as d:

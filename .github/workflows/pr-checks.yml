@@ -17,31 +17,45 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           fetch-depth: 0
-      - name: ffmpeg and OpenCV for the video tests
-        timeout-minutes: 6
+      - name: Unit tests (no network, no secrets), ffmpeg and OpenCV installing beside the tests that do not use them
+        # E100: the apt install (~65 s) runs while the tests that use no video tool run; the VIDEO tests start once it
+        # has succeeded. Each test runs in its own process, one per CPU at a time; every result is printed in list order
+        # and any failure, a test that never reported, or a failed install fails the step
+        timeout-minutes: 9
         run: |
-          # Refresh Ubuntu only. Run 39823760082 timed out fetching from the
-          # hosted mirror list; use the official origins with the same signed source.
-          if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2, PIL' 2>/dev/null; then
-            test -f /etc/apt/sources.list.d/ubuntu.sources
-            heroverse_ci_sources="$RUNNER_TEMP/heroverse-ubuntu.sources"
-            sed -e 's#mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu/#g' \
-                -e 's#mirror+file:/etc/apt/apt-mirrors-security.txt#https://security.ubuntu.com/ubuntu/#g' \
-                /etc/apt/sources.list.d/ubuntu.sources > "$heroverse_ci_sources"
-            apt_ci_opts=(-o "Dir::Etc::sourcelist=$heroverse_ci_sources" -o Dir::Etc::sourceparts=- \
-              -o APT::Get::List-Cleanup=0 -o Acquire::Retries=1 \
-              -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20)
-            timeout 90s sudo apt-get "${apt_ci_opts[@]}" update
-            timeout 180s sudo apt-get "${apt_ci_opts[@]}" install -y --no-install-recommends \
-              ffmpeg python3-numpy python3-opencv python3-pil
-          fi
-          command -v ffmpeg
-          python3 -c 'import numpy, cv2, PIL; print("Video test dependencies available")'
-      - name: Unit tests (no network, no secrets)
-        # E100: the same tests, one per CPU at a time (each in its own process, as before); every result is printed in
-        # list order and any failure (or a test that never reported) fails the step
-        run: |
-          fail=0; i=0; R="$RUNNER_TEMP/tests"; mkdir -p "$R"
+          video_tools() {
+            # Refresh Ubuntu only. Run 39823760082 timed out fetching from the
+            # hosted mirror list; use the official origins with the same signed source.
+            if ! command -v ffmpeg >/dev/null || ! python3 -c 'import numpy, cv2, PIL' 2>/dev/null; then
+              test -f /etc/apt/sources.list.d/ubuntu.sources
+              heroverse_ci_sources="$RUNNER_TEMP/heroverse-ubuntu.sources"
+              sed -e 's#mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu/#g' \
+                  -e 's#mirror+file:/etc/apt/apt-mirrors-security.txt#https://security.ubuntu.com/ubuntu/#g' \
+                  /etc/apt/sources.list.d/ubuntu.sources > "$heroverse_ci_sources"
+              apt_ci_opts=(-o "Dir::Etc::sourcelist=$heroverse_ci_sources" -o Dir::Etc::sourceparts=- \
+                -o APT::Get::List-Cleanup=0 -o Acquire::Retries=1 \
+                -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20)
+              timeout 90s sudo apt-get "${apt_ci_opts[@]}" update
+              timeout 180s sudo apt-get "${apt_ci_opts[@]}" install -y --no-install-recommends \
+                ffmpeg python3-numpy python3-opencv python3-pil
+            fi
+            command -v ffmpeg
+            python3 -c 'import numpy, cv2, PIL; print("Video test dependencies available")'
+          }
+          video_tools > "$RUNNER_TEMP/video-tools.log" 2>&1 & tools=$!
+          # the tests that need ffmpeg, NumPy, Pillow or OpenCV (found by running the list without them; test_minutes
+          # keeps every test that can skip on a missing tool in here)
+          VIDEO=" migration/production/bible/test_clip_check.py migration/production/bible/test_episode_build.py migration/production/bible/test_lipsync_check.py migration/production/test_still_render.py \
+                  migration/production/test_shorts_produce.py migration/production/test_shorts_edit_plan.py migration/production/test_shorts_006_plan.py migration/production/test_shorts_006_motion.py \
+                  migration/production/test_signal_scan.py migration/production/test_cinematic.py migration/production/footage/test_footage.py migration/production/footage/test_pavo_footage.py \
+                  migration/mining/test_thumb_study.py migration/production/test_thumb_check.py migration/production/imagegen/test_cf_images.py "
+          VIDEO=" $(echo $VIDEO) "
+          fail=0; i=0; R="$RUNNER_TEMP/tests"; mkdir -p "$R"; pids=(); later=()
+          start() {
+            local n=$1 t; t=$(cat "$R/$n.name")
+            ( rc=0; python3 -I -B "$t" > "$R/$n.out" 2>&1 || rc=$?; echo "$rc" > "$R/$n.rc" ) & pids+=("$!")
+            while [ "$(for p in "${pids[@]}"; do kill -0 "$p" 2>/dev/null && echo; done | wc -l)" -ge "$(nproc)" ]; do sleep 0.2; done
+          }
           for t in migration/production/test_script_check.py migration/production/test_render_queue.py migration/production/test_preview_gate.py migration/production/bible/test_clip_check.py migration/production/bible/test_short_engine.py migration/production/bible/test_plan_check.py migration/production/bible/test_episode_build.py migration/production/bible/test_lipsync_check.py \
                    migration/production/test_still_render.py migration/production/test_long_review.py migration/production/test_agnes_clip.py migration/production/characters/test_characters.py \
                    migration/production/test_shorts_produce.py migration/production/test_shorts_review.py migration/production/test_shorts_edit_plan.py migration/production/test_shorts_006_plan.py migration/production/test_shorts_006_material.py migration/production/test_shorts_006_motion.py migration/production/test_no_live_pilot_data.py migration/production/test_signal_scan.py migration/production/test_cinematic.py migration/production/footage/test_footage.py migration/production/footage/test_assign.py migration/production/footage/test_pavo_footage.py migration/publish/test_*.py migration/ops/test_heartbeat.py migration/ops/test_runner_dispatch.py migration/ops/test_engine_fallback.py migration/ops/test_release_video.py migration/ops/test_release_assets.py migration/ops/test_errors_register.py migration/ops/test_runway.py migration/ops/test_minutes.py migration/ops/test_project_map.py migration/ops/test_hookify_rules.py \
@@ -49,9 +63,11 @@ jobs:
                    migration/mining/test_accuracy_check.py migration/mining/test_native_metrics.py migration/mining/test_native_plan.py migration/mining/test_goal_report.py migration/mining/test_market_panel.py migration/mining/test_daily_intel.py migration/strategy/test_ads_model.py \
                    migration/mining/test_opportunity.py migration/mining/test_packaging_mining.py migration/mining/test_thumb_study.py migration/production/test_thumb_check.py migration/production/test_reviewer_calibration.py migration/production/imagegen/test_cf_images.py migration/ci/test_smoke.py; do
             i=$((i+1)); n=$(printf %03d "$i"); echo "$t" > "$R/$n.name"
-            ( rc=0; python3 -I -B "$t" > "$R/$n.out" 2>&1 || rc=$?; echo "$rc" > "$R/$n.rc" ) &
-            while [ "$(jobs -rp | wc -l)" -ge "$(nproc)" ]; do wait -n || true; done
+            if [[ "$VIDEO" == *" $t "* ]]; then later+=("$n"); else start "$n"; fi
           done
+          if ! wait "$tools"; then echo "VIDEO_TOOLS_FAILED"; tail -40 "$RUNNER_TEMP/video-tools.log"; exit 1; fi
+          tail -2 "$RUNNER_TEMP/video-tools.log"
+          for n in "${later[@]}"; do start "$n"; done
           wait
           for f in "$R"/*.name; do
             n=${f%.name}; t=$(cat "$f")
