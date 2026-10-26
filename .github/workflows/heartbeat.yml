@@ -35,8 +35,9 @@ jobs:
           python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json images 72 > "$T/images"
           python3 -I -B migration/production/render_queue.py migration/production migration/publish/ledger.json reconcile 48 > "$T/reconcile"
           python3 -I -B migration/publish/pending_shorts.py migration/production migration/publish/ledger.json > "$T/shorts" || true
-          python3 -I -c "import json,os,sys;s=lambda p:os.path.getsize(p)>0;busy=any(l.split()[0] in ('approve','shorts') for l in open(sys.argv[2]) if l.strip());json.dump({'images_missing':s(sys.argv[1]),'reconcile_todo':s(sys.argv[2]),'shorts_pending':s(sys.argv[3]),'production_idle':not busy},open(sys.argv[4],'w'))" \
-            "$T/images" "$T/reconcile" "$T/shorts" "$T/conditions.json"
+          python3 -I -B migration/publish/arc_links.py todo > "$T/arcs" || true
+          python3 -I -c "import json,os,sys;s=lambda p:os.path.getsize(p)>0;busy=any(l.split()[0] in ('approve','shorts') for l in open(sys.argv[2]) if l.strip());json.dump({'images_missing':s(sys.argv[1]),'reconcile_todo':s(sys.argv[2]),'shorts_pending':s(sys.argv[3]),'production_idle':not busy,'arc_links_todo':s(sys.argv[5])},open(sys.argv[4],'w'))" \
+            "$T/images" "$T/reconcile" "$T/shorts" "$T/conditions.json" "$T/arcs"
           echo '{}' > "$T/runs.json"
           for w in $(python3 -I -c "import sys;sys.path.insert(0,'migration/ops');import heartbeat as h;print(' '.join(t['workflow'] for t in h.TASKS))"); do
             gh run list --repo "$GITHUB_REPOSITORY" --workflow "$w" --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json"

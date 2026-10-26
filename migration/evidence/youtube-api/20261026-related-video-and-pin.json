@@ -1,0 +1,20 @@
+{
+ "version": "api-check-v1",
+ "checked_at": "2026-10-26",
+ "question": "Can the YouTube Data API v3 set a Short's Studio 'related video', or pin a comment? Which scopes do videos.update and commentThreads.insert need?",
+ "source": "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest (the machine-readable definition the reference pages at developers.google.com/youtube/v3/docs are generated from; developers.google.com itself is refused by this session's proxy)",
+ "discovery_revision": "20261022",
+ "findings": {
+  "videoSnippet_properties": ["categoryId", "channelId", "channelTitle", "defaultAudioLanguage", "defaultLanguage", "description", "liveBroadcastContent", "localized", "publishedAt", "tags", "thumbnails", "title"],
+  "videoStatus_properties": ["containsSyntheticMedia", "embeddable", "failureReason", "license", "madeForKids", "privacyStatus", "publicStatsViewable", "publishAt", "rejectionReason", "selfDeclaredMadeForKids", "uploadStatus"],
+  "video_parts": ["ageGating", "brandPartner", "contentDetails", "etag", "fileDetails", "id", "kind", "liveStreamingDetails", "localizations", "monetizationDetails", "paidProductPlacementDetails", "player", "processingDetails", "projectDetails", "recordingDetails", "snippet", "statistics", "status", "suggestions", "topicDetails"],
+  "related_video_field": "NONE: no property named related/linked video anywhere in the document (searched 'relatedVideo', 'linkedVideo', 'related': only relatedEntities of abuse reports, relatedPlaylists of channels, showRelatedChannels)",
+  "comment_pin": "NONE: comments methods delete, insert, list, markAsSpam, setModerationStatus, update; commentThreads methods insert, list; no pinned property in CommentSnippet or CommentThreadSnippet",
+  "scopes": {
+   "videos.update": ["https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.force-ssl", "https://www.googleapis.com/auth/youtubepartner"],
+   "commentThreads.insert": ["https://www.googleapis.com/auth/youtube.force-ssl"]
+  },
+  "our_credential": "HERO_YT_AUTHORIZED_USER_JSON has already posted commentThreads.insert comments (publish/ledger.json first_comment ids, e.g. pilot-012, genesis-01..03), which only youtube.force-ssl allows, and that scope also allows videos.update. arc_links.py checks the granted scopes again at every run before writing."
+ },
+ "consequence": "arc_links.py links Shorts and long by description and comment; the Studio 'related video' of each Short and pinning its comment stay the one manual step (OPERATIONS.md)."
+}
