@@ -69,6 +69,24 @@ class Register(unittest.TestCase):
             self.assertTrue(f.exists(), f"{e['id']}: {f} missing")
             self.assertIn(e["antidote"]["contains"], f.read_text(), f"{e['id']}: antidote not found")
 
+    def test_validated_structures_count_only_winners_above_the_breakout_bar(self):
+        # E88: Steelshort (breakout 6.2) and two prayer Shorts (46.41, 13.34) were counted as winners; SYSTEM.md 1.1
+        # sets the bar at 50, so a validated structure needs >= 6 counted winners from its evidence, each >= 50
+        for f in sorted((ROOT / "migration/structures").glob("*.json")):
+            s = json.loads(f.read_text())
+            if s.get("status") not in ("validated", "active"):
+                continue
+            ev = s.get("validation", {}).get("evidence", [])
+            winners = []
+            for rel in [ev] if isinstance(ev, str) else ev:
+                path = ROOT / "migration" / rel
+                if path.suffix == ".json":
+                    winners += [w for w in json.loads(path.read_text()).get("winners", []) if "breakout" in w]
+            below = [w.get("videoId") or w.get("video") for w in winners if (w["breakout"] or 0) < 50]
+            self.assertEqual(below, [], f"{f.name}: winners below breakout 50")
+            if winners:
+                self.assertGreaterEqual(len(winners), 6, f"{f.name}: fewer than 6 counted winners")
+
     def test_preview_footage_sheets_hold_at_most_twelve_clips(self):
         # E72: one sheet of every clip made modern objects too small to see; the preview splits them 12 a sheet
         self.assertIn("PER_SHEET=12", (ROOT / "migration/ci/render_pilot.sh").read_text())

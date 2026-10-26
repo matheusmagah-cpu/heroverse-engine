@@ -703,6 +703,16 @@
     "file": "migration/production/bible/test_episode_build.py",
     "contains": "def test_keeper_picture_spans_equal_their_line_audio_and_scenes_cut_every_2_to_4_s"
    }
+  },
+  {
+   "id": "E88",
+   "date": "2026-10-26",
+   "error": "Structure mining counted videos below the winner bar as winners: Steelshort (breakout 6.2) in the bible-story-short candidate, and 3acset3y_Aw (46.41) and DKBkPbJ73xU (13.34) in the validated spoken-prayer-short. The 1.1 bar (breakout >= 50) was applied by eye when picking audits, never checked on the record, so a high view count passed for a breakout.",
+   "fix": "Steelshort moved to below_bar; two more Bible winners above the bar audited (Daniel tvSiYmlGVNM 53, Bartimaeus 7qAPgGyzeH8 79), so bible-story-short is validated on 6 counted winners; spoken-prayer-short (retired line) downgraded to candidate.",
+   "antidote": {
+    "file": "migration/ops/test_errors_register.py",
+    "contains": "def test_validated_structures_count_only_winners_above_the_breakout_bar"
+   }
   }
  ]
 }

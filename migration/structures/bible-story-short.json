@@ -2,84 +2,91 @@
  "version": "structure-v1",
  "id": "bible-story-short",
  "line": "Bible stories (KJV), Shorts",
- "status": "candidate",
+ "status": "validated",
  "validation": {
-  "rule": "SYSTEM.md 1.5: >=6 winners from >=4 channels, no channel > 1/3, >=3 weak contrasts, drivers counted",
-  "winners": 5,
-  "channels": 5,
-  "max_channel_share": "1/5",
-  "weak_contrasts": 2,
+  "rule": "SYSTEM.md 1.5: >=6 winners (breakout >= 50) from >=4 channels, no channel > 1/3, >=3 weak contrasts, drivers counted",
+  "winners": 6,
+  "channels": 6,
+  "max_channel_share": "1/6",
+  "weak_contrasts": 3,
+  "drivers": [
+   "antagonist",
+   "long_170s"
+  ],
   "evidence": "evidence/vidiq/20261026/bible_story_shorts.json",
-  "missing": [
-   "1 more winner (>= 6)",
-   "1 more weak contrast (>= 3)"
-  ]
+  "validated_on": "2026-10-26",
+  "limits": "6 winners is the minimum; presence counted from vidIQ audits (one prompt), durations from metadata; climax position and escalation steps measured in 2 winners only (unconfirmed)"
  },
  "attributes": {
   "conflict_hook": {
-   "label": "driver",
-   "winners": "5/5",
-   "weak": "0/2",
-   "target": "the first 2 s are a character's challenge or a shock statement of the story's conflict (Goliath's 'Who will fight me?!', Satan's 'Look at you...'), never atmosphere or narration"
+   "label": "free (winners 6/6, weak 1/3)",
+   "target": "the conflict is stated in the first 5 s; ours is spoken by a character (owner's rule, 2026-10-26), a production choice, measured in 2/6 winners"
   },
   "antagonist_or_spectacle": {
    "label": "driver",
-   "winners": "5/5",
-   "weak": "0/2",
-   "target": "the story is told through its conflict: a giant, a tempter, a judgment, a flood; the moment with the most at stake is the one shown"
+   "winners": "6/6",
+   "weak": "0/3",
+   "target": "a person or power opposes the hero from the first shots (a giant, a tempter, rivals, a crowd); the story is told as that opposition"
   },
   "acted_dialogue": {
-   "label": "hygiene",
-   "winners": "4/5",
-   "weak": "2/2",
-   "target": "characters act and speak their lines, lip-synced, faces visible"
+   "label": "free",
+   "winners": "4/6",
+   "weak": "2/3",
+   "target": "characters act and speak their lines, lip-synced (our quality bar, lipsync_check.py)"
   },
   "full_motion": {
-   "label": "free (winners 5/5, weak 1/2)",
-   "target": "cinematic motion in every shot; no 2.5D animated stills"
+   "label": "free (winners 5/6, weak 2/3)",
+   "target": "cinematic motion in every shot"
   },
   "host_on_screen": {
    "label": "absent",
-   "winners": "0/5",
-   "weak": "0/2",
-   "note": "no winner has a narrator on screen: the Keeper is our own hypothesis, not a measured driver"
+   "winners": "0/6",
+   "weak": "0/3",
+   "note": "the Keeper is our own authenticity layer, at the close only (<= 25 %), not a measured driver"
   },
   "length_s": {
+   "label": "driver",
    "winners": [
-    97,
-    100,
     170,
+    178,
     172,
-    178
+    97,
+    179,
+    171
    ],
    "weak": [
     139,
-    147
+    147,
+    107
    ],
-   "note": "every measured Short is longer than our 62-90 s rule"
+   "note": "5/6 winners run 170-179 s; all weak <= 147 s, including the two from winners' own channels. Owner's rule: 100-150 s from part 7; the measured target is 170-179 s (the owner decides)"
   },
   "lesson_share": {
    "winners": [
-    0,
-    0,
-    0.06,
+    0.28,
     0.11,
-    0.28
+    0.0,
+    0.06,
+    0.02,
+    0.15
    ],
    "weak": [
     0.03,
-    0.41
+    0.41,
+    0.06
    ],
-   "note": "a lesson of at most about a quarter; the weak Noah Short spent 41 % preaching"
+   "target": "<= 0.15 (the Noah weak spent 41 %)"
   },
   "shot_seconds": {
    "winners": [
-    2.0,
-    3.4,
     5.2,
+    2.0,
     6.1,
-    7.5
-   ]
+    7.5,
+    3.7,
+    24.4
+   ],
+   "target": "2-6 s"
   },
   "sound": {
    "label": "hygiene",
@@ -87,12 +94,81 @@
   },
   "burned_captions": {
    "label": "free",
-   "winners": "2/5"
+   "winners": "2/6"
+  },
+  "cta": {
+   "label": "free (winners 5/6, weak 1/3)",
+   "target": "one comment question at the end"
+  },
+  "escalation": {
+   "label": "unconfirmed",
+   "note": "3-4 rising steps in every audited winner (2/6 counted) and in the Sodom weak: hygiene at most"
   }
  },
  "conflict_check": {
   "language": "en",
   "faith_line": "same (Bible stories)",
   "policy": "AI label normal in the niche; no fabricated prophecy; Scripture paraphrased by winners, KJV exact here"
+ },
+ "script": {
+  "note": "beat map for our Short, from the winners' order of beats; times are shares of the runtime. Our own words; Scripture only KJV, exact (kjv_check.py)",
+  "beats": [
+   {
+    "beat": "cold_open",
+    "at": [
+     0,
+     0.03
+    ],
+    "rule": "the antagonist or opposing power on screen and speaking the conflict (KJV line where the text has one); no atmosphere, no title card"
+   },
+   {
+    "beat": "stake_and_open_loop",
+    "at": [
+     0.03,
+     0.1
+    ],
+    "rule": "who, what is at stake, one question left open (what will God do / will he survive)"
+   },
+   {
+    "beat": "escalation",
+    "at": [
+     0.1,
+     0.6
+    ],
+    "rule": "three rising steps of the opposition, each acted in dialogue and ending on a small hook; shots 2-6 s, cuts only"
+   },
+   {
+    "beat": "climax",
+    "at": [
+     0.6,
+     0.8
+    ],
+    "rule": "the hero (or God) speaks the key KJV line at the turn"
+   },
+   {
+    "beat": "payoff",
+    "at": [
+     0.8,
+     0.85
+    ],
+    "rule": "the outcome shown, one beat, a twist where the text gives one"
+   },
+   {
+    "beat": "keeper_close",
+    "at": [
+     0.85,
+     1.0
+    ],
+    "rule": "the Keeper (<= 25 %): one original insight from the KJV text (a detail most miss, why it matters, the link to the next story), no sermon; a comment question; tease the next part"
+   }
+  ],
+  "ypp_layer": [
+   "our own script and direction (Keeper commentary is original analysis, not a retelling)",
+   "KJV exact, public domain",
+   "our recurring cast (characters.json)",
+   "owned music",
+   "AI disclosure",
+   "no third-party footage or text"
+  ]
  }
 }

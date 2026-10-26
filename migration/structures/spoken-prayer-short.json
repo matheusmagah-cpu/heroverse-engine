@@ -2,7 +2,7 @@
  "version": "structure-v1",
  "id": "spoken-prayer-short",
  "line": "English Christian spoken prayer, Shorts",
- "status": "validated",
+ "status": "candidate",
  "validation": {
   "rule": "SYSTEM.md 1.5",
   "winners": 6,
@@ -20,7 +20,8 @@
   "missing": [
    "weak contrasts from a second channel",
    "transcript counts for more than one Short"
-  ]
+  ],
+  "downgraded": "2026-10-26 (E88): winners 3acset3y_Aw (breakout 46.41) and one at 13.34 are below the >= 50 bar, so 4 winners count; the prayer line is retired (SERIES.md), so it is not re-mined"
  },
  "attributes": {
   "length_seconds": {
