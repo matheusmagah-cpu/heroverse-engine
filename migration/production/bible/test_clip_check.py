@@ -75,6 +75,21 @@ class ClipCheck(unittest.TestCase):
             self.assertEqual(cc.check(str(LAMP))["flags"], [])
             self.assertEqual(cc.main([boxed]), 1)
 
+    def test_a_dark_sky_over_dark_ground_is_not_a_letterbox(self):
+        # E111: genesis-07 s-still (run 40389124871), a dusk camp under a black sky (rows 14-24) over dark ground,
+        # was refused as LETTERBOX_BARS three times with BAR_LUMA 24. Bars read luma 1; a night sky is not a bar.
+        # (geq writes video-range Y: 28 reads as grey 14 in the check, the measured sky.)
+        with tempfile.TemporaryDirectory() as t:
+            night = str(Path(t, "night.mp4"))
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=720x300:r=30:d=3",
+                            "-i", str(LAMP), "-f", "lavfi", "-i", "color=c=black:s=720x260:r=30:d=3", "-filter_complex",
+                            "[0:v]format=yuv444p,geq=lum='28+Y/300*40':cb=128:cr=128[s];"
+                            "[1:v]trim=0:3,setpts=PTS-STARTPTS,crop=720:720:0:560,format=yuv444p[g];"
+                            "[2:v]format=yuv444p,geq=lum='max(1,10-Y/12)':cb=128:cr=128[d];[s][g][d]vstack=3",
+                            "-an", "-pix_fmt", "yuv420p", night], check=True)
+            r = cc.check(night)
+            self.assertNotIn("LETTERBOX_BARS", r["flags"], r.get("bars"))
+
 
 if __name__ == "__main__":
     unittest.main()
