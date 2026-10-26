@@ -201,7 +201,7 @@ class Generation(unittest.TestCase):
             eb.make_shot("k-a", lambda i: (n.append(i) or {"generation": i}, None), lambda p: ([], None),
                          attempts=eb.attempts_for(talk))
         self.assertEqual(len(n), eb.TALK_ATTEMPTS)
-        self.assertIn("attempts=attempts_for(shot)", Path(eb.__file__).read_text())
+        # generate_step itself giving a talking shot TALK_ATTEMPTS generations: the E94 failed-shot test (s-eve)
 
     def test_a_generation_with_no_video_counts_as_a_failed_attempt(self):
         with self.assertRaises(eb.ShotFailed):
@@ -445,7 +445,7 @@ class Gating(unittest.TestCase):
         # E94: run 40278642295 refused k-insight three times; only the flags reached the log, no clip, no measures
         eb.lipsync_flags = lambda py, model, clip, wav: (["AUDIO_NOT_OUR_LINE"], {"audio": {"corr": 0.2}, "mouth": {}})
         with self.assertRaises(SystemExit):
-            self.generate(extra=2)
+            self.generate(extra=eb.TALK_ATTEMPTS - 1)   # s-eve talks: every one of its generations is refused
         report = json.loads((self.work / "report.json").read_text())
         attempts = report["shots"]["s-eve"]["attempts"]
         self.assertEqual([a["clip"] for a in attempts],

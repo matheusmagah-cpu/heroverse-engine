@@ -488,6 +488,7 @@ def wait_job(client, cid, sleep=time.sleep, clock=time.monotonic):
 
 
 def attempts_for(shot):
+    """E98: generations allowed for one shot; every caller of make_shot passes it, so a talking shot gets 6."""
     return TALK_ATTEMPTS if plan_check.talking(shot) else ATTEMPTS
 
 

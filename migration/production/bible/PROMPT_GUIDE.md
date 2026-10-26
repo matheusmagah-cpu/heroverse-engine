@@ -141,6 +141,8 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   cta: one original insight from the text (>= 20 words, no sermon), a comment question, the CTA to the full story and
   "Part N+1 tomorrow: ...". He closes (the last shot); his prompt carries his `look` and one `wardrobe` variant word
   for word and says he speaks; each Keeper line 3.23-11.55 s, retimed to its clip (E95; the tail is a held frame).
+  He faces the lens on a still frame: "static camera" and "holds his head level, looks straight into the camera"; no
+  push-in, pull-back, tracking, orbit, lean or bow (`KEEPER_POSE`, E98: those lost the face or the lips).
   Keeper <= 25 % of the Short; the lesson (insight + cta lines + every Keeper second) <= 25 % (gate), aim <= 15 %
   (the winners: 0-28 %, the weak Noah Short 41 %).
 - **Scenes**: `seconds` 4-12 of Pavo video, the five-part prompt above, `characters` APPROVED with their look word for
@@ -161,7 +163,7 @@ estimated length, every rule above; the Keeper while DRAFT is one pending row) �
 speaker's voice; the measured Short 170-179 s, Keeper <= 25 %, lesson <= 25 %, each talking line retimed into its clip (E95) → references
 sha256-checked → every shot one Pavo generation at a fresh exact 0-credit quote; `clip_check.py` on every clip,
 `lipsync_check.py` (our line in the clip's audio, lips in sync) on every talking clip (the Keeper, a character
-speaking); a failed shot is a NEW generation at most 2 times, then the run fails naming the shot → compose (a talking
+speaking); a failed shot is a NEW generation at most 2 times (5 for a talking clip, E98), then the run fails naming the shot → compose (a talking
 clip's picture spans exactly its line's audio, from the start of its clip at normal speed, its last frame held for the
 gap or tail; `short_engine.talk_problems` refuses it off its line) → `clip_check.py --composed`, loudness -14 +-1 LUFS → 20-frame sheet and per-shot report for
 Claude's review at 9.5.

@@ -117,10 +117,15 @@ class Plan(unittest.TestCase):
 
     def test_a_talking_keeper_faces_the_lens_on_a_static_camera(self):
         # E98: a push-in, a pull-back or a head bowed toward the fire lost the face or the lips in the lips check
-        for old, new in (("static camera", "slow push-in"), ("looks straight into the camera", "leans toward the fire")):
+        for old, new in (("static camera", "slow push-in"), ("looks straight into the camera", "leans toward the fire"),
+                         ("static camera", "static camera, then a slow push-in"),
+                         ("holds his head level", "bows his head")):
             p = plan()
             p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(old, new)
             self.assertIn("KEEPER_POSE", codes(pc.check(p, CHARS)), new)
+        p = plan()
+        p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace("static camera", "Static camera")
+        self.assertNotIn("KEEPER_POSE", codes(pc.check(p, CHARS)))
 
     def test_the_old_grammar_is_refused(self):
         p = plan()
