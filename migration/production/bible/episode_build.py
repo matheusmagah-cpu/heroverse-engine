@@ -346,7 +346,9 @@ def lipsync_flags(lip_python, face_model, clip, wav):
     try:
         result = json.loads(done.stdout.strip().splitlines()[-1])
     except (ValueError, IndexError):
-        return ["LIPSYNC_CHECK_FAILED"], None
+        # the check itself broke (E89: a missing library): not the clip's fault, so no regeneration is spent on it
+        tail = " | ".join(done.stderr.strip().splitlines()[-3:])
+        raise SystemExit(f"LIPSYNC_TOOL_BROKEN exit {done.returncode}: {tail[-600:]}")
     return result["flags"], {"audio": result["audio"], "mouth": result["mouth"]}
 
 
@@ -397,7 +399,7 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
 
         try:
             _, records = make_shot(shot["id"], attempt, check)
-        except ShotFailed as exc:
+        except (ShotFailed, SystemExit) as exc:
             entry["error"] = str(exc)
             report["shots"][shot["id"]] = entry
             save(report_path, report)

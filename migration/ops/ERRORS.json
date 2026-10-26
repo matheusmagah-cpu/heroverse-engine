@@ -713,6 +713,16 @@
     "file": "migration/ops/test_errors_register.py",
     "contains": "def test_validated_structures_count_only_winners_above_the_breakout_bar"
    }
+  },
+  {
+   "id": "E89",
+   "date": "2026-10-26",
+   "error": "First episode.yml run (genesis-07-short, run 40255188655) failed after 18 min: SHOT_FAILED k-open after 3 generations: LIPSYNC_CHECK_FAILED x3. lipsync_check printed no JSON: mediapipe 0.10.35 links libEGL.so.1 and libGLESv2.so.2 (ldd), the workflow installed neither (the same crash was fixed locally on 2026-10-26 with libegl1/libgles2), and lipsync_flags dropped the stderr, so a broken tool looked like a bad clip and three Pavo generations (0 credits) were spent on it.",
+   "fix": "episode.yml installs libegl1 libgles2 and runs lipsync_check on the repository calibration clip (keeper-lipsync.mp4 + line-01.wav) before any generation; a check that prints no JSON stops the run with LIPSYNC_TOOL_BROKEN and its stderr, with no regeneration.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_a_broken_check_stops_the_run_with_its_error_and_spends_no_regeneration"
+   }
   }
  ]
 }

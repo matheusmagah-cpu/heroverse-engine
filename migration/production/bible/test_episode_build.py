@@ -282,6 +282,42 @@ class Refs(unittest.TestCase):
         self.assertTrue(all(m.get("repo_path") or m.get("release_asset") for _, m in recs))
 
 
+class LipsyncTool(unittest.TestCase):
+    """E89: on the runner mediapipe could not load libEGL, the check printed no JSON, and three Keeper generations
+    were spent on a broken tool, recorded only as LIPSYNC_CHECK_FAILED."""
+    def test_a_broken_check_stops_the_run_with_its_error_and_spends_no_regeneration(self):
+        with tempfile.TemporaryDirectory() as t:
+            fake = Path(t) / "python"
+            fake.write_text("#!/bin/sh\necho 'ImportError: libEGL.so.1: cannot open shared object file' >&2\nexit 1\n")
+            fake.chmod(0o755)
+            with self.assertRaises(SystemExit) as caught:
+                eb.lipsync_flags(fake, "model.task", "clip.mp4", "line.wav")
+            self.assertIn("LIPSYNC_TOOL_BROKEN exit 1", str(caught.exception))
+            self.assertIn("libEGL.so.1", str(caught.exception))
+            calls = []
+
+            def attempt(n):
+                calls.append(n)
+                return {"generation": n}, Path(t) / "clip.mp4"
+
+            def check(path):
+                return eb.lipsync_flags(fake, "model.task", path, "line.wav")
+            with self.assertRaises(SystemExit):
+                eb.make_shot("k-close", attempt, check)
+            self.assertEqual(calls, [1])
+
+    def test_the_workflow_installs_the_check_libraries_and_proves_the_check_before_any_generation(self):
+        text = (eb.REPO / ".github" / "workflows" / "episode.yml").read_text()
+        apt = [l for l in text.splitlines() if "apt-get install" in l][0]
+        for lib in ("libegl1", "libgles2"):
+            self.assertIn(lib, apt)
+        proof = text.find("lipsync_check.py migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4")
+        self.assertGreater(proof, 0)
+        self.assertLess(proof, text.find("episode_build.py generate"))
+        for f in ("keeper-lipsync.mp4", "line-01.wav"):
+            self.assertTrue((eb.REPO / "migration/evidence/pavo/20261026/keeper" / f).exists())
+
+
 class Workflow(unittest.TestCase):
     """episode.yml holds PAVO_TOKEN: manual runs of main only, the secret in one step, inputs only through env."""
     def test_the_secret_stays_in_one_step_of_a_main_only_manual_run(self):
