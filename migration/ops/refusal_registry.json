@@ -677,6 +677,10 @@
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
   },
+  "LETTERBOX_BARS": {
+   "class": "C",
+   "probe": "one clip: clip_check on each generation (bars: black rows or columns at both opposite edges over BAR_SHARE in every sampled frame), regenerated within the shot's attempts; E109: Pavo letterboxed a wide picture inside the 9:16 frame for genesis-07 s-well with no prompt asking for it, so only the clip shows it"
+  },
   "LINES_REFUSED": {
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
@@ -1210,6 +1214,11 @@
    "early": "migration/production/bible/plan_check.py::def plan_period_problems(",
    "note": "E108: every scene prompt states its story's period word for word, setting and exclusions; plan_check and long_plan_check refuse a prompt without them (plan_period_problems), and a story with no period once (missing_period, the one message; a malformed `period` is PERIOD_INVALID, a passage across the flood PERIOD_AMBIGUOUS); episode_build.request refuses the same by period_refusal, which calls resolve_period and period_problems"
   },
+  "SCENE_WRITING": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def writing_problems(",
+   "note": "E110: a scene prompt asks for nothing written (WRITING: scroll, ink, letters, inscription, writing, script, text, tablet, parchment, book, page, glyphs, runes, symbols...) outside a negation (\"No text\"); plan_check and long_plan_check (plan_writing_problems) and episode_build.request (writing_refusal) by the same function; the Keeper's scroll is his look, not a scene"
+  },
   "SCOPE_MISSING": {
    "class": "D",
    "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
@@ -1515,7 +1524,8 @@
       "migration/production/bible/clip_check.py::BLACK_LUMA",
       "migration/production/bible/plan_check.py::PROMPT_NOT_FIVE_PARTS",
       "migration/production/bible/plan_check.py::PROMPT_NO_CINEMATOGRAPHY",
-      "migration/production/bible/episode_build.py::BLACK_FRAMES"
+      "migration/production/bible/episode_build.py::BLACK_FRAMES",
+      "migration/production/bible/clip_check.py::LETTERBOX_BARS"
      ],
      "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
     },
@@ -1564,9 +1574,12 @@
       "migration/production/bible/plan_check.py::PERIOD_INVALID",
       "migration/production/bible/plan_check.py::PERIOD_AMBIGUOUS",
       "migration/production/bible/long_plan_check.py::pc.plan_period_problems",
-      "migration/production/bible/episode_build.py::def period_refusal"
+      "migration/production/bible/episode_build.py::def period_refusal",
+      "migration/production/bible/plan_check.py::SCENE_WRITING",
+      "migration/production/bible/long_plan_check.py::pc.plan_writing_problems",
+      "migration/production/bible/episode_build.py::def writing_refusal"
      ],
-     "residual": "E108: period accuracy of the backgrounds, clothing and objects, for the Short and the long. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age prop no word asked for (a small candle lantern in 2 of 8 probes), so the per-shot frame sheet is where it is seen, and episode.yml `regenerate` redoes only that shot"
+     "residual": "E108: period accuracy of the backgrounds, clothing and objects, for the Short and the long. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age prop no word asked for (a small candle lantern in 2 of 8 probes), so the per-shot frame sheet is where it is seen, and episode.yml `regenerate` redoes only that shot; E110: no scene prompt asks for writing (SCENE_WRITING), since Pavo draws any asked-for writing as AI text"
     }
    },
    "captions_readable_and_synced": {

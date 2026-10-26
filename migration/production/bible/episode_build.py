@@ -661,6 +661,13 @@ def period_refusal(plan, shot):
     return f"SCENE_PERIOD_CONFLICT {shot['id']} {detail}"
 
 
+def writing_refusal(shot):
+    """E110: a scene's request is refused when its prompt asks for writing (plan_check.writing_problems, the same
+    function plan_check, long_plan_check and the preflight run): None or the refusal."""
+    found = plan_check.writing_problems(0, shot)
+    return f"SCENE_WRITING {shot['id']} {found[0].split(' ', 4)[-1]}" if found else None
+
+
 def request(shot, index, plan, layout, refs, chars=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
     speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen. A
@@ -669,7 +676,7 @@ def request(shot, index, plan, layout, refs, chars=None):
     the talking frame, facing the lens, 100 %), no audio and no speech clause."""
     talks = plan_check.talking(shot)
     prompt = shot["prompt"]
-    refused = period_refusal(plan, shot)
+    refused = period_refusal(plan, shot) or writing_refusal(shot)
     if refused:
         raise SystemExit(refused)
     if plan_check.voiceover(shot) and not refs.get(f"{ch.NARRATOR}:talk"):

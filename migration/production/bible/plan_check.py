@@ -61,6 +61,10 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   is the plan's `period` (a malformed or unknown one is PERIOD_INVALID) or its passage's (a passage across the
   flood is PERIOD_AMBIGUOUS); none is SCENE_PERIOD_MISSING. episode_build.request refuses the same by period_refusal,
   long_plan_check by plan_period_problems.
+- no writing (E110): a scene prompt asks for nothing written (scroll, ink, letters, inscription, writing, script,
+  text, tablet, parchment, book, page, glyphs, runes, symbols...) outside a negation ("No text", "without
+  letters"): SCENE_WRITING. The Keeper's own scroll is his look, not a scene. plan_check, long_plan_check
+  (plan_writing_problems) and episode_build.request (writing_refusal) by the same function.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
 A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
@@ -532,6 +536,39 @@ def period_problems(i, shot, per):
     return out
 
 
+# E110 (review of genesis-07 run 40357197063): s-scroll asked for "an old scroll ... the ink lines catching the light"
+# beside "No text", and Pavo drew lines of legible Arabic-looking script: AI text on screen and a later age's writing in
+# the days before the flood. A prompt that asks for writing gets writing, whatever its exclusions say, so a scene prompt
+# may not ask for it. Negated mentions ("No text, no logos.", "without letters") are what the prompt keeps out. The
+# Keeper's rolled scroll is his approved look (CHARACTER_LOOK_CHANGED keeps it word for word), not a scene; a carved
+# idol is not writing.
+WRITING = (r"scrolls?", r"ink", r"inked", r"letters?", r"lettering", r"inscri\w+", r"(?:hand)?writing", r"written",
+           r"writes?", r"wrote", r"scripts?", r"texts?", r"tablets?", r"parchments?", r"papyr\w+", r"manuscripts?",
+           r"books?", r"pages?", r"calligraph\w*", r"glyphs?", r"hieroglyph\w*", r"runes?", r"alphabets?",
+           r"symbols?", r"signs? (?:board|post)s?", r"signboards?", r"notes?")
+WRITING_RE = re.compile(rf"(?i)\b(?:{'|'.join(WRITING)})\b")
+# a negation keeps the next words out: "No people, no text", "without any letters", "never a written word"
+WRITING_NEGATED = re.compile(rf"(?i)\b(?:no|without|never)\s+(?:(?:any|a|an|legible|visible|written|carved|"
+                             rf"painted)\s+)*(?:{'|'.join(WRITING)})\b")
+
+
+def writing_problems(i, shot):
+    """E110: a scene prompt that asks for writing (outside a negation) is SCENE_WRITING. [] for a Keeper shot."""
+    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str):
+        return []
+    rest = WRITING_NEGATED.sub(" ", shot["prompt"])
+    hits = sorted({m.group(0).lower() for m in WRITING_RE.finditer(rest)})
+    if not hits:
+        return []
+    return [f"SCENE_WRITING shot {i} {shot.get('id')} (asks for writing, which Pavo draws as AI text: "
+            f"{', '.join(hits)}; show the line without anything written)"]
+
+
+def plan_writing_problems(shots):
+    """E110, shared by plan_check and long_plan_check: every scene prompt's own SCENE_WRITING."""
+    return [p for i, s in enumerate(shots) if isinstance(s, dict) for p in writing_problems(i, s)]
+
+
 def plan_period_problems(plan, shots):
     """E108, shared by plan_check and long_plan_check: the plan-level period refusal (once) when any shot is a
     scene, else every scene prompt's own."""
@@ -848,6 +885,7 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     lesson = set()
     first_prompt = {}
     problems += plan_period_problems(plan, shots)
+    problems += plan_writing_problems(shots)
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
         # E106 (owner: "production has to come out at 9.5 already"): the review's pacing_and_visual_variety item,

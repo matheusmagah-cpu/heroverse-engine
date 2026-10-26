@@ -903,6 +903,26 @@
     "file": "migration/production/bible/test_plan_check.py",
     "contains": "def test_a_scene_without_the_setting_or_the_exclusions_is_refused"
    }
+  },
+  {
+   "id": "E109",
+   "date": "2026-10-26",
+   "error": "genesis-07 Short build run 40357197063 (episode.yml) passed every gate, but Claude's visual review rejected s-well: the Pavo clip was a wide picture letterboxed inside the 9:16 frame, black bars above and below (ffmpeg cropdetect on the composed 1080x1920 file at t=22.5 s: crop=1080:1062:0:428, about 22 % black at each edge). Root cause: clip_check, the per-clip check every Pavo shot passes before the compose, measured only black at the clip's start and end, resolution and frame rate; nothing looked for black bands inside the frame, so a letterboxed generation was kept as clean.",
+   "fix": "clip_check.check measures bars: BAR_FRAMES (5) frames sampled across the clip, scaled to a 90-pixel short side, each row and column's peak luma; a bar is a run of rows (columns) from an edge whose every pixel is at or under BAR_LUMA (24). A clip whose smallest bar over the sampled frames is over BAR_SHARE (4 %) at BOTH opposite edges (top and bottom, or left and right) is flagged LETTERBOX_BARS, so episode_build's attempt loop (make_shot) generates the shot anew like BLACK_START; an all-black frame is left to BLACK_START/BLACK_END. Both edges and every frame keep dark night shots clean: measured over all 32 Pavo clips in migration/evidence/pavo (the darkest, the Keeper probes at mean luma 48, and genesis-06's oil-lamp night shot), the lamp shot darkened to near black (eq brightness -0.35), and a black sky over a lit camp: no flag; the lamp shot padded to s-well's shape (22 % each side) and a pillarboxed one: flagged. Registered class C (refusal_registry.json) and in the review mapping of picture_quality. genesis-07's s-well is redone by the resume with regenerate=s-well.",
+   "antidote": {
+    "file": "migration/production/bible/test_clip_check.py",
+    "contains": "def test_a_letterboxed_clip_is_refused_and_a_dark_night_clip_is_not"
+   }
+  },
+  {
+   "id": "E110",
+   "date": "2026-10-26",
+   "error": "genesis-07 Short build run 40357197063 passed every gate, but Claude's visual review rejected s-scroll: the prompt asked for 'an old scroll ... the ink lines catching the light' while its tail said 'No text', and Pavo rendered lines of legible Arabic-looking script: AI text on screen and an anachronism in the days before the flood. Root cause: the plan's prompt asked for writing; a model that is asked for ink lines on a scroll draws writing whatever the exclusions say, and no plan rule refused a scene prompt that asks for writing.",
+   "fix": "plan_check.writing_problems: a scene prompt (God's voice-over and a speaking character's shot too; not the Keeper, whose rolled scroll is his approved look) that names writing (WRITING: scroll, ink, letters, lettering, inscription, writing, written, script, text, tablet, parchment, papyrus, manuscript, book, page, calligraphy, glyphs, hieroglyphs, runes, alphabet, symbols, signboard, note) outside a negation ('No text, no logos.', 'without any letters') is SCENE_WRITING. One helper, plan_writing_problems, runs in plan_check and long_plan_check; episode_build.request refuses the same by writing_refusal, beside period_refusal. Every plan in plans/ (genesis-07-short, arc-01-long), drafts/ and episodes/, and the open genesis-08/09/10 plans have no hit besides s-scroll; a carved idol and the Keeper's scroll are not hits. Registered class A; the review mapping's period_accuracy lists it. genesis-07's s-scroll (line 6) rewritten without writing: a hand seen from behind draws the goat-hair door flap closed against the night, one clay oil lamp glowing beside it, inside a quiet goat-hair tent at night; style prefix, period setting, exclusions and 'No text, no logos.' as every other scene. The preflight report was refreshed (PASS); the resume regenerates s-scroll.",
+   "antidote": {
+    "file": "migration/production/bible/test_plan_check.py",
+    "contains": "def test_a_scene_prompt_that_asks_for_writing_is_refused"
+   }
   }
  ]
 }
