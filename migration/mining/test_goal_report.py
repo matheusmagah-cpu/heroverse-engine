@@ -28,6 +28,23 @@ class Eligible(unittest.TestCase):
         self.assertEqual((e["public_long_form_watch_hours_365d"], e["public_shorts_views_90d"]), (2.0, 5))
 
 
+class Funnel(unittest.TestCase):
+    """Short -> long funnel of a long video, from its Analytics rows by traffic source (owner, 2026-10-26: measured)."""
+    def test_share_and_watch_time_of_viewers_who_came_from_shorts(self):
+        rows = [["SHORTS", 300, 1500, 300], ["SUBSCRIBER", 100, 800, 480], ["RELATED_VIDEO", 100, 400, 240]]
+        f = gr.funnel(rows)
+        self.assertEqual((f["views"], f["views_from_shorts"], f["share_from_shorts"]), (500, 300, 0.6))
+        self.assertEqual((f["avg_view_s_from_shorts"], f["avg_view_s_other"]), (300.0, 360.0))
+        self.assertEqual(f["verdict"], "SHORTS_VIEWERS_LEAVE_EARLIER")
+        self.assertEqual(list(f["sources"]), ["SHORTS", "SUBSCRIBER", "RELATED_VIDEO"])
+
+    def test_viewers_from_shorts_who_watch_as_long_and_no_shorts_traffic(self):
+        self.assertEqual(gr.funnel([["SHORTS", 50, 500, 600], ["YT_SEARCH", 50, 400, 480]])["verdict"], "SHORTS_VIEWERS_STAY")
+        f = gr.funnel([["YT_SEARCH", 10, 20, 120]])
+        self.assertEqual((f["verdict"], f["share_from_shorts"]), ("NO_SHORTS_TRAFFIC", 0.0))
+        self.assertIsNone(gr.funnel([])["share_from_shorts"])
+
+
 class Integration(unittest.TestCase):
     def test_existing_collection_to_learning_capture_no_added_requests(self):
         calls=[]
@@ -46,7 +63,7 @@ class Integration(unittest.TestCase):
             root=Path(temp);prod=root/'production';prod.mkdir();ledger=root/'ledger.json';ledger.write_text('{}');out=root/'out'
             with patch.object(gr.mp,'access_token',return_value='fixture'),patch.object(gr.mp,'Client',Client),patch.object(gr,'analytics',return_value={'rows':[[2,3,1,4]]}) as query,patch.object(gr,'per_video',side_effect=per) as per_query,contextlib.redirect_stdout(io.StringIO()):
                 gr.main(prod,ledger,out)
-            self.assertEqual(calls,['channels','playlistItems','videos']);self.assertEqual(query.call_count,1);self.assertEqual(per_query.call_count,2)
+            self.assertEqual(calls,['channels','playlistItems','videos']);self.assertEqual(query.call_count,2);self.assertEqual(per_query.call_count,2)  # totals + the funnel of the one public long
             pointer=json.loads((out/'learning/latest-capture.json').read_bytes());snap=json.loads(Path(pointer['path']).read_bytes())
             self.assertEqual(snap['data_api_units'],3);self.assertEqual(snap['additional_api_calls'],0)
             self.assertEqual(snap['owned_videos'][0]['snippet']['publishedAt'],'2026-10-19T00:00:00Z')

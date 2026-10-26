@@ -69,6 +69,31 @@ def eligible(videos, per365, per90):
             "all_content_watch_hours_365d_top200": round(all_hours, 1)}
 
 
+def funnel(rows):
+    """Short -> long funnel of ONE long video from its Analytics rows by traffic source
+    ([insightTrafficSourceType, views, estimatedMinutesWatched, averageViewDuration]). The market shows no such funnel
+    (evidence/vidiq/20261026/bible_story_long.json#funnel), so ours is measured, never assumed (owner, 2026-10-26):
+    how many of the long's views come from Shorts, and whether those viewers watch as long as the rest."""
+    views = sum(r[1] for r in rows)
+    shorts = [r for r in rows if r[0] == "SHORTS"]
+    other = [r for r in rows if r[0] != "SHORTS"]
+
+    def avg(rs):
+        v = sum(r[1] for r in rs)
+        return round(sum(r[1] * r[3] for r in rs) / v, 1) if v else None
+    out = {"views": views, "views_from_shorts": sum(r[1] for r in shorts),
+           "share_from_shorts": round(sum(r[1] for r in shorts) / views, 3) if views else None,
+           "avg_view_s_from_shorts": avg(shorts), "avg_view_s_other": avg(other),
+           "sources": {r[0]: r[1] for r in sorted(rows, key=lambda r: -r[1])}}
+    if not out["views_from_shorts"]:
+        out["verdict"] = "NO_SHORTS_TRAFFIC"
+    elif out["avg_view_s_other"] and out["avg_view_s_from_shorts"] >= out["avg_view_s_other"]:
+        out["verdict"] = "SHORTS_VIEWERS_STAY"     # they watch at least as long as the long's other viewers
+    else:
+        out["verdict"] = "SHORTS_VIEWERS_LEAVE_EARLIER"
+    return out
+
+
 def pipeline(production, ledger, now, observed_privacy=None):
     observed_privacy = observed_privacy or {}
     rows = []
@@ -129,6 +154,12 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
                               "subscribers_gained": r[4], "content_type": r[0]} for k, r in per.items()}
         per90, _ = per_video(token, (now.date() - timedelta(days=90)).isoformat(), end, "views")
         a["eligible_estimate"] = {**eligible(videos, per, per90), "classification": method}
+        a["funnel"] = {}
+        for v in [v for v in videos if not v["short"]][:10]:
+            rows = analytics(token, (now.date() - timedelta(days=90)).isoformat(), end,
+                             "views,estimatedMinutesWatched,averageViewDuration", dimensions="insightTrafficSourceType",
+                             extra={"filters": f"video=={v['id']}"}).get("rows", [])
+            a["funnel"][v["id"]] = {"title": v["title"], **funnel(rows)}
     except Exception as e:
         if captured_status != 'OBSERVED': captured_status = 'ERROR'
         a["error"] = type(e).__name__
@@ -181,6 +212,11 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
           f"lifetime views of public Shorts [official] {shorts_views:,}",
           f"- Classification of long vs Shorts: {est['classification'] if est else '-'}",
           f"- Public videos [official]: {len(videos)}; total channel views {int(st.get('viewCount', 0)):,}", "",
+          "## Short -> long funnel (each public long, last 90 d, by traffic source)",
+          "| long | views | from Shorts | share | avg view s (Shorts / other) | verdict |", "|---|---|---|---|---|---|",
+          *((f"| {f['title'][:50]} | {f['views']} | {f['views_from_shorts']} | {f['share_from_shorts']} | "
+            f"{f['avg_view_s_from_shorts']} / {f['avg_view_s_other']} | {f['verdict']} |"
+            for f in a["funnel"].values()) if a.get("funnel") else ["- no public long yet, or Analytics unavailable"]), "",
           "## Alerts", *(f"- ⚠ {x}" for x in alerts or ["none"]), "",
           f"## Pipeline (script runway {runway} days)",
           "| pilot | publishes | rendered | QA | review | uploaded | public observed | title |", "|---|---|---|---|---|---|---|---|",
