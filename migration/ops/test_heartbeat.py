@@ -61,10 +61,36 @@ class Heartbeat(unittest.TestCase):
         wf = (Path(__file__).resolve().parents[2] / ".github/workflows/heartbeat.yml").read_text()
         self.assertIn('migration/production/bible/episodes > "$T/tiktok" || echo "PENDING_CHECK_FAILED" > "$T/tiktok"', wf)
         self.assertIn("'tiktok_pending':s(sys.argv[4])", wf)
-        self.assertIn('"$T/images" "$T/reconcile" "$T/shorts" "$T/tiktok" "$T/conditions.json"', wf)
-        self.assertIn("open(sys.argv[5],'w')", wf)
+        self.assertIn('"$T/images" "$T/reconcile" "$T/shorts" "$T/tiktok" "$T/arcs" "$T/conditions.json"', wf)
+        self.assertIn("'arc_links_todo':s(sys.argv[5])", wf)
+        self.assertIn("open(sys.argv[6],'w')", wf)
         tiktok = (Path(__file__).resolve().parents[2] / ".github/workflows/tiktok.yml").read_text()
         self.assertLess(tiktok.index("git pull -q --ff-only origin main"), tiktok.index("tiktok_publish.py pending"))
+
+    def test_condition_builder_reads_every_input_at_its_own_index(self):
+        # tiktok (#402) and arc links (#404) share the builder: run it on real files and check each flag
+        import re
+        import subprocess
+        import tempfile
+        wf = (Path(__file__).resolve().parents[2] / ".github/workflows/heartbeat.yml").read_text()
+        code = re.search(r'python3 -I -c "(import json,os,sys;s=lambda p.*?)" \\', wf).group(1)
+        names = ["images", "reconcile", "shorts", "tiktok", "arcs"]
+        flags = {"images": "images_missing", "reconcile": "reconcile_todo", "shorts": "shorts_pending",
+                 "tiktok": "tiktok_pending", "arcs": "arc_links_todo"}
+        with tempfile.TemporaryDirectory() as d:
+            for only in names:
+                paths = []
+                for n in names:
+                    p = Path(d) / n
+                    p.write_text("publish pilot-x\n" if n == only else "")
+                    paths.append(str(p))
+                out = Path(d) / "conditions.json"
+                subprocess.run([sys.executable, "-I", "-c", code, *paths, str(out)], check=True)
+                got = __import__("json").loads(out.read_text())
+                self.assertEqual({k for k, v in got.items() if v is True and k != "production_idle"}, {flags[only]}, only)
+        self.assertEqual({t["when"] for t in hb.TASKS if t.get("when")} - set(flags.values()), set())
+        self.assertIn("tiktok.yml", {t["workflow"] for t in hb.TASKS})
+        self.assertIn("arc-links.yml", {t["workflow"] for t in hb.TASKS})
 
     def test_retired_gemini_minings_are_never_dispatched(self):
         # SYSTEM.md (2026-10-19): structure mining is done with vidIQ; the Gemini/RapidAPI chain failed its holdout

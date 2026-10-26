@@ -39,8 +39,11 @@ jobs:
           # a crash of the pending check must not read as "nothing waiting" (E90): tiktok.yml then runs and fails loudly
           python3 -I -B migration/publish/tiktok_publish.py pending migration/publish/ledger.json migration/publish/tiktok_ledger.json migration/production/bible/episodes > "$T/tiktok" || echo "PENDING_CHECK_FAILED" > "$T/tiktok"
           [ ! -f migration/ops/PUBLICATION_HOLD ] || : > "$T/tiktok"
-          python3 -I -c "import json,os,sys;s=lambda p:os.path.getsize(p)>0;busy=any(l.split()[0] in ('approve','shorts') for l in open(sys.argv[2]) if l.strip());json.dump({'images_missing':s(sys.argv[1]),'reconcile_todo':s(sys.argv[2]),'shorts_pending':s(sys.argv[3]),'tiktok_pending':s(sys.argv[4]),'production_idle':not busy},open(sys.argv[5],'w'))" \
-            "$T/images" "$T/reconcile" "$T/shorts" "$T/tiktok" "$T/conditions.json"
+          # a crash must not read as "nothing waiting": arc-links.yml then runs and fails loudly
+          python3 -I -B migration/publish/arc_links.py todo > "$T/arcs" || echo "TODO_CHECK_FAILED" > "$T/arcs"
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then : > "$T/arcs"; fi   # owner pause: no arc links
+          python3 -I -c "import json,os,sys;s=lambda p:os.path.getsize(p)>0;busy=any(l.split()[0] in ('approve','shorts') for l in open(sys.argv[2]) if l.strip());json.dump({'images_missing':s(sys.argv[1]),'reconcile_todo':s(sys.argv[2]),'shorts_pending':s(sys.argv[3]),'tiktok_pending':s(sys.argv[4]),'arc_links_todo':s(sys.argv[5]),'production_idle':not busy},open(sys.argv[6],'w'))" \
+            "$T/images" "$T/reconcile" "$T/shorts" "$T/tiktok" "$T/arcs" "$T/conditions.json"
           echo '{}' > "$T/runs.json"
           for w in $(python3 -I -c "import sys;sys.path.insert(0,'migration/ops');import heartbeat as h;print(' '.join(t['workflow'] for t in h.TASKS))"); do
             gh run list --repo "$GITHUB_REPOSITORY" --workflow "$w" --limit 20 --json createdAt,updatedAt,status,conclusion > "$T/r.json"

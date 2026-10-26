@@ -1,0 +1,59 @@
+name: HeroVerse arc links (each Short points to its arc's long; the long lists its Shorts and the next arc)
+# SERIES.md "One format, two lengths" (owner, 2026-10-26). No cron of its own: this repository's crons are dropped,
+# heartbeat.yml dispatches it when migration/publish/arc_links.py todo finds an arc with link work waiting.
+# Writes only the videos named in migration/production/bible/arcs.json; every change goes to
+# migration/publish/arc_links_ledger.json. The Studio "related video" and pinning stay manual (OPERATIONS.md).
+on:
+  # scheduled by heartbeat.yml (migration/ops/heartbeat.py), the engine's only scheduler
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: plan prints the changes and writes nothing; apply writes them
+        type: choice
+        default: apply
+        options: [apply, plan]
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: heroverse-arc-links   # its own group: joining heroverse-publish could cancel a pending publish run
+  cancel-in-progress: false
+jobs:
+  links:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      MODE: ${{ inputs.mode || 'apply' }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Publication hold, then the latest ledger
+        run: |
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
+          # a run queued behind another must read the ledger that run pushed, never the one of its own checkout
+          git pull -q --ff-only origin main
+          if [ -f migration/ops/PUBLICATION_HOLD ]; then cat migration/ops/PUBLICATION_HOLD; echo "PUBLICATION_HOLD"; exit 1; fi
+      - name: Offline tests before any write
+        run: python3 -I -B migration/publish/test_arc_links.py
+      - name: Dependencies already used by publication
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check -q google-auth==2.40.3 requests==2.32.4
+      - name: Link the arcs
+        env:
+          HERO_YT_AUTHORIZED_USER_JSON: ${{ secrets.HERO_YT_AUTHORIZED_USER_JSON }}
+        run: |
+          case "$MODE" in apply|plan) ;; *) exit 1;; esac
+          "$RUNNER_TEMP/venv/bin/python" -I -B migration/publish/arc_links.py "$MODE"
+      - name: Record the ledger
+        if: always() && env.MODE == 'apply'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add migration/publish/arc_links_ledger.json
+          git commit -q -m "Arc links (run $GITHUB_RUN_ID)" || exit 0
+          for i in 1 2 3 4; do
+            git pull --no-rebase -q origin main && git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

@@ -62,17 +62,23 @@ def short_problems(episode):
     return out
 
 
+def description_problems(description):
+    """The rules every episode description keeps, at upload and after any later edit (arc_links.py)."""
+    out = []
+    if len(description) > DESCRIPTION_MAX:
+        out.append("DESCRIPTION_LENGTH")
+    if "(public domain)" not in description or "AI" not in description:
+        out.append("DISCLOSURE_MISSING")   # KJV source and AI disclosure are always stated
+    return out
+
+
 def problems(episode, video):
     out = short_problems(episode)
     if sha256_file(video) != episode["output_sha256"]:
         out.append("OUTPUT_SHA256_MISMATCH")
     if not 0 < len(episode["title"]) <= TITLE_MAX:
         out.append("TITLE_LENGTH")
-    if len(episode["description"]) > DESCRIPTION_MAX:
-        out.append("DESCRIPTION_LENGTH")
-    if "(public domain)" not in episode["description"] or "AI" not in episode["description"]:
-        out.append("DISCLOSURE_MISSING")   # KJV source and AI disclosure are always stated
-    return out
+    return out + description_problems(episode["description"])
 
 
 def main(episode_path, video, ledger_path, receipt_path, publish_at=None):

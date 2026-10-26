@@ -30,6 +30,14 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
   KJV with plain connecting narration, one chapter per Short episode (chapters = the Short titles), a re-hook
   before each chapter, a short reflection, a closing prayer, and "next story: ..." (the next arc's first Short).
 - **Back link:** the long's description lists its Shorts and the next arc; the next arc's Shorts link back to it.
+  Automatic (owner, 2026-10-26): `arcs.json` lists each arc's 4 Short episodes, its long's pilot and the next arc;
+  `publish/arc_links.py` (`arc-links.yml`, dispatched by the heartbeat when `arc_links.py todo` finds work) waits
+  until the long is public, then makes each public Short's first description line "▶ The full story:
+  https://youtu.be/<long>" (rest and disclosure lines kept), posts one comment linking the long on each Short,
+  and ends the long's description with "▶ This story in Shorts:" (titles and links) and "Next story:" once the next
+  arc's first Short is public; every change in `publish/arc_links_ledger.json`. The Studio "related video" and
+  pinning that comment are not in the Data API: the one manual step (OPERATIONS.md). Set `long.pilot` in
+  `arcs.json` when each arc's long pilot is created.
 - **Same pattern both ways:** title formula `<story or question> <emoji> | <Story>, Bible Story (KJV)` (Short) and
   `<Story>: <human angle> | Genesis N-M Bible Story (KJV)` (long); same narrator voice; same visual anchors
   (PROMPT_GUIDE.md); the long's chapters reuse the Shorts' hook lines.

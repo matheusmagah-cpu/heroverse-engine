@@ -11,7 +11,7 @@ files of the day), so a duplicate dispatch is harmless; this table only decides 
 usage: heartbeat.py RUNS_JSON CONDITIONS_JSON [NOW_ISO]   (prints one workflow file per line to dispatch)
   RUNS_JSON: {"workflow.yml": [{"createdAt": ISO, "status": "...", "conclusion": "...", "updatedAt": ISO}, ...]}
   CONDITIONS_JSON: {"images_missing": bool, "reconcile_todo": bool, "shorts_pending": bool, "production_idle": bool,
-                    "tiktok_pending": bool}
+                    "tiktok_pending": bool, "arc_links_todo": bool}
 """
 from datetime import datetime, timedelta, timezone
 import json
@@ -32,6 +32,9 @@ TASKS = [
     # E90: tiktok.yml's own cron never fired (0 scheduled runs since 2026-10-25); every heartbeat mirrors the next
     # Short already public on YouTube (owner, 2026-10-26: "published on YouTube, it must go to TikTok")
     {"workflow": "tiktok.yml", "slots": [f"{h:02d}:40" for h in range(24)], "attempts": 1, "when": "tiktok_pending"},
+    # Shorts <-> long links of an arc (publish/arc_links.py), after the long's 10:00 slot and each Short slot
+    # (13:30, 23:30); arc_links_todo comes from the repo files (arcs.json and the ledgers), no secret
+    {"workflow": "arc-links.yml", "slots": ["10:20", "13:50", "23:35"], "attempts": 2, "when": "arc_links_todo"},
 ]
 
 
