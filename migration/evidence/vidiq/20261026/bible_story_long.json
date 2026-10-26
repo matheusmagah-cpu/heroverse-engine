@@ -1,0 +1,344 @@
+{
+ "date": "2026-10-26",
+ "source": "vidIQ: vidiq_outliers long (sixMonths, breakout >= 50); vidiq_video_watch x10 with one structure prompt (7 winners, 3 weak); vidiq_channel_videos x12 (3 long lists for weak contrasts, 6 Shorts lists of long-winner channels, 3 long lists of Short-winner channels)",
+ "winner_rule": "breakout >= 50; weak = same shape and channel, at or below the channel norm",
+ "winners": [
+  {
+   "videoId": "Xm3Y9Fns0T8",
+   "channel": "Bible Stories",
+   "views": 86867,
+   "breakout": 600.65,
+   "seconds": 857,
+   "conflict_30s": true,
+   "conflict_voice": "narration (teaser + question)",
+   "dialogue_share": 0.05,
+   "full_motion": "mixed",
+   "rehooks": 4,
+   "climax_at": 0.67,
+   "hero_scripture_at_climax": true,
+   "reflection_s": 30,
+   "next_story": true,
+   "cta": true,
+   "burned_captions": false,
+   "complete_story": true,
+   "slow_stretches": 3
+  },
+  {
+   "videoId": "FaYEXkK6RsA",
+   "channel": "Bible Stories TV 247",
+   "views": 286568,
+   "breakout": 211.56,
+   "seconds": 1674,
+   "conflict_30s": true,
+   "conflict_voice": "narration",
+   "dialogue_share": 0.6,
+   "full_motion": true,
+   "rehooks": 6,
+   "climax_at": 0.86,
+   "hero_scripture_at_climax": false,
+   "reflection_s": 25,
+   "next_story": false,
+   "cta": true,
+   "burned_captions": false,
+   "complete_story": true,
+   "slow_stretches": 2
+  },
+  {
+   "videoId": "E7yN2c5AWNw",
+   "channel": "Echoes of Faith",
+   "views": 784153,
+   "breakout": 576.43,
+   "seconds": 2796,
+   "conflict_30s": true,
+   "conflict_voice": "narration",
+   "dialogue_share": 0.0,
+   "full_motion": true,
+   "rehooks": 6,
+   "climax_at": 0.73,
+   "hero_scripture_at_climax": true,
+   "reflection_s": 125,
+   "next_story": false,
+   "cta": false,
+   "burned_captions": false,
+   "complete_story": true,
+   "slow_stretches": 3
+  },
+  {
+   "videoId": "wFn6ZQWsVpY",
+   "channel": "HolyBibleVerse tv",
+   "views": 529200,
+   "breakout": 67,
+   "seconds": 911,
+   "conflict_30s": true,
+   "conflict_voice": "character (Goliath, 0:14)",
+   "dialogue_share": 0.35,
+   "full_motion": true,
+   "rehooks": 5,
+   "climax_at": 0.83,
+   "hero_scripture_at_climax": true,
+   "reflection_s": 104,
+   "next_story": false,
+   "cta": true,
+   "burned_captions": false,
+   "complete_story": true,
+   "slow_stretches": 3
+  },
+  {
+   "videoId": "SKX8Tm8k-48",
+   "channel": "Bible Chronicles",
+   "views": 28000,
+   "breakout": 117,
+   "seconds": 1513,
+   "conflict_30s": true,
+   "conflict_voice": "narration ('Imagine...')",
+   "dialogue_share": 0.0,
+   "full_motion": true,
+   "rehooks": 9,
+   "climax_at": 0.59,
+   "hero_scripture_at_climax": false,
+   "reflection_s": 71,
+   "next_story": false,
+   "cta": false,
+   "burned_captions": false,
+   "complete_story": true,
+   "slow_stretches": 3
+  },
+  {
+   "videoId": "q5FW9qWzPSc",
+   "channel": "Forgotten Reality",
+   "views": 257100,
+   "breakout": 1224,
+   "seconds": 1210,
+   "conflict_30s": true,
+   "conflict_voice": "character (in media res, 0:04)",
+   "dialogue_share": 0.65,
+   "full_motion": true,
+   "rehooks": 5,
+   "climax_at": 0.82,
+   "hero_scripture_at_climax": false,
+   "reflection_s": 94,
+   "next_story": true,
+   "cta": true,
+   "burned_captions": false,
+   "complete_story": true,
+   "slow_stretches": 3
+  },
+  {
+   "videoId": "D1sGnAlAD5Q",
+   "channel": "Bible Wonders",
+   "views": 73300,
+   "breakout": 332,
+   "seconds": 2265,
+   "conflict_30s": true,
+   "conflict_voice": "narration (0:18)",
+   "dialogue_share": 0.05,
+   "full_motion": "mixed",
+   "rehooks": 6,
+   "climax_at": 0.72,
+   "hero_scripture_at_climax": true,
+   "reflection_s": 0,
+   "next_story": false,
+   "cta": false,
+   "burned_captions": true,
+   "complete_story": true,
+   "slow_stretches": 2
+  }
+ ],
+ "weak_contrasts": [
+  {
+   "videoId": "Aj6rj6OsDyc",
+   "channel": "Bible Stories",
+   "views": 392,
+   "breakout": null,
+   "seconds": 674,
+   "conflict_30s": true,
+   "conflict_voice": "narration (trailer)",
+   "dialogue_share": 0.4,
+   "full_motion": true,
+   "rehooks": 5,
+   "climax_at": 0.68,
+   "hero_scripture_at_climax": false,
+   "reflection_s": 0,
+   "next_story": true,
+   "cta": true,
+   "burned_captions": true,
+   "complete_story": false,
+   "slow_stretches": 3,
+   "note": "'Jacob Story Part 1', ends 'to be continued'; same channel as the 600x winner"
+  },
+  {
+   "videoId": "wvMhh2jeFX8",
+   "channel": "Bible Stories TV 247",
+   "views": 5327,
+   "breakout": null,
+   "seconds": 913,
+   "conflict_30s": true,
+   "conflict_voice": "narration",
+   "dialogue_share": 0.15,
+   "full_motion": true,
+   "rehooks": 7,
+   "climax_at": 0.86,
+   "hero_scripture_at_climax": true,
+   "reflection_s": 60,
+   "next_story": false,
+   "cta": true,
+   "burned_captions": false,
+   "complete_story": true,
+   "slow_stretches": 3
+  },
+  {
+   "videoId": "mYbYQhNqHlI",
+   "channel": "Echoes of Faith",
+   "views": 295,
+   "breakout": null,
+   "seconds": 2976,
+   "conflict_30s": true,
+   "conflict_voice": "narration (landscape legend)",
+   "dialogue_share": 0.02,
+   "full_motion": true,
+   "rehooks": 7,
+   "climax_at": 0.68,
+   "hero_scripture_at_climax": false,
+   "reflection_s": 373,
+   "next_story": false,
+   "cta": false,
+   "burned_captions": true,
+   "complete_story": false,
+   "slow_stretches": 3,
+   "note": "sprawls Abram's call to Hagar (several stories); 6 min epilogue"
+  }
+ ],
+ "attribute_labels": {
+  "conflict_in_first_30s": {
+   "winners": 1.0,
+   "weak": 1.0,
+   "label": "hygiene"
+  },
+  "conflict_spoken_by_character": {
+   "winners": 0.29,
+   "weak": 0.0,
+   "label": "free"
+  },
+  "acted_dialogue_25pct": {
+   "winners": 0.43,
+   "weak": 0.33,
+   "label": "free"
+  },
+  "four_plus_rehooks": {
+   "winners": 1.0,
+   "weak": 1.0,
+   "label": "hygiene"
+  },
+  "climax_after_55pct": {
+   "winners": 1.0,
+   "weak": 1.0,
+   "label": "hygiene"
+  },
+  "hero_scripture_at_climax": {
+   "winners": 0.57,
+   "weak": 0.33,
+   "label": "free"
+  },
+  "reflection_at_most_125s": {
+   "winners": 1.0,
+   "weak": 0.67,
+   "label": "free"
+  },
+  "one_complete_story": {
+   "winners": 1.0,
+   "weak": 0.33,
+   "label": "free",
+   "note": "winners 7/7; weak 1/3 is a Part 1 and 1/3 sprawls several stories: 33 % weak, just over the 30 % driver bar"
+  },
+  "next_story_tease": {
+   "winners": 0.29,
+   "weak": 0.33,
+   "label": "free"
+  },
+  "cta": {
+   "winners": 0.57,
+   "weak": 0.67,
+   "label": "free"
+  },
+  "burned_captions": {
+   "winners": 0.14,
+   "weak": 0.67,
+   "label": "anti"
+  },
+  "seconds": {
+   "winners": [
+    857,
+    1674,
+    2796,
+    911,
+    1513,
+    1210,
+    2265
+   ],
+   "weak": [
+    674,
+    913,
+    2976
+   ]
+  },
+  "climax_at": {
+   "winners": [
+    0.67,
+    0.86,
+    0.73,
+    0.83,
+    0.59,
+    0.82,
+    0.72
+   ],
+   "weak": [
+    0.68,
+    0.86,
+    0.68
+   ]
+  },
+  "reflection_s": {
+   "winners": [
+    30,
+    25,
+    125,
+    104,
+    71,
+    94,
+    0
+   ],
+   "weak": [
+    0,
+    60,
+    373
+   ]
+  },
+  "slow_stretches": {
+   "note": "every audited video (10/10) has 2-3 drop-off stretches, all of the same kind: landscape/montage/process shots or repeated footage with no new stake (20-80 s)"
+  }
+ },
+ "funnel": {
+  "question": "do Shorts carry viewers to the long videos in this line? (owner, 2026-10-26)",
+  "long_winner_channels_shorts": {
+   "Bible Stories": "Shorts 9-202 views (11 s clips); long winner 86.9K",
+   "Bible Stories TV 247": "10 Shorts, max 1,634 views; long winners 286.6K and 593.6K",
+   "Echoes of Faith": "0 Shorts; long winner 784.2K",
+   "Forgotten Reality": "Shorts max 1,206 (one 'Watch the FULL episode now' Short: 324); long winner 257.1K",
+   "Bible Wonders": "0 Shorts; long winners 73.3K and 89.7K",
+   "HolyBibleVerse tv": "Shorts 28-1,349 ('Part 1-3' series); long winner 529.2K",
+   "Bible Chronicles": "1 Short, 87 views; long winner 28K"
+  },
+  "short_winner_channels_longs": {
+   "Passover Connect": "Short winner 2.6M; its last 6 longs 137-3,195 views",
+   "Apostles And Prophet Tv": "Short winner 428K; its longs 29-6,766 views (its own 'Jacob and Esau | The Complete Story' 308, Sodom 27 min 204)",
+   "Lusi Achampong": "Short winner 690K; its longs 8-244 views"
+  },
+  "counts": {
+   "long_winner_channels_with_a_short_over_2k_views": "0/7",
+   "short_winner_channels_with_a_long_over_10k_views": "0/3"
+  },
+  "reading": "in this line the two formats win with different audiences: no long winner got there through Shorts, and no Short winner turned its Shorts audience into long views. A Short-to-long funnel is not shown by the market; it has to be proven on our own channel (YouTube Analytics: the long's views by traffic source SHORTS, and their watch time) before it is relied on.",
+  "limits": "public view counts only; another channel's traffic sources cannot be seen"
+ },
+ "note": "Only counts and short descriptions are stored, never third-party text. lkILbdmOqS8 (46.3) and kKriMIcCbGY (8.4) from the 2026-10-25 list are below the 50 bar and not counted."
+}

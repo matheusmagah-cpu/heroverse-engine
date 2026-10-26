@@ -8,30 +8,42 @@
   "winners": 7,
   "channels": 7,
   "max_channel_share": "1/7",
-  "weak_contrasts": 0,
-  "evidence": "evidence/vidiq/20261025/bible_story_long.json",
+  "weak_contrasts": 3,
+  "evidence": [
+   "evidence/vidiq/20261025/bible_story_long.json",
+   "evidence/vidiq/20261026/bible_story_long.json"
+  ],
+  "audited": "10/10 with vidiq_video_watch, one prompt (2026-10-26)",
+  "drivers": [],
   "missing": [
-   "3 weak contrasts of the same shape",
-   "video_watch audits with AUDIT_PROMPT (drivers counted, not inferred)",
-   "a separating driver between winners and weak"
-  ]
+   "a separating driver: none of 11 structure attributes separates winners from weak (the weak share the winners' structure); next test is the package (title, thumbnail) and the story chosen",
+   "more weak contrasts (3 is the minimum; one attribute, burned captions, reads anti on 2/3)"
+  ],
+  "reading": "the structure is consistent (hygiene measured 7/7 and 3/3) but not what makes a long win; it stays candidate and is piloted with the hygiene targets below"
  },
  "attributes": {
   "one_story_per_video": {
-   "values": "7/7 tell one story or one chapter range",
-   "label": "shape"
+   "label": "free (winners 7/7, weak 1/3)",
+   "values": "every winner tells one complete story; one weak is a 'Part 1', one sprawls several stories",
+   "target": "one complete arc per long, never 'Part N' (SERIES.md)"
   },
   "length_min": {
+   "label": "shape",
    "values": [
     14.3,
     27.9,
-    14.8,
-    10.7,
-    16.2,
     46.6,
-    22.5
+    15.2,
+    25.2,
+    20.2,
+    37.8
    ],
-   "label": "shape (7/7 >= 10.7 min; SERIES.md plans 10-15 min compilations of 6 Shorts: a hypothesis to test, not a match)"
+   "weak": [
+    11.2,
+    15.2,
+    49.6
+   ],
+   "note": "14-47 min winners, 11-50 min weak: length does not separate"
   },
   "title": {
    "values": "story name first + human angle + 'Genesis N Bible Story'",
@@ -46,13 +58,90 @@
    "label": "hygiene (YouTube altered-content disclosure)"
   },
   "dialogue_vs_narration": {
-   "values": "1 counted transcript is dramatized dialogue; others not counted",
-   "label": "free until counted"
+   "label": "free",
+   "values": [
+    0.05,
+    0.6,
+    0.0,
+    0.35,
+    0.0,
+    0.65,
+    0.05
+   ],
+   "note": "0-65 % acted dialogue among winners"
+  },
+  "cold_open_conflict": {
+   "label": "hygiene",
+   "winners": "7/7",
+   "weak": "3/3",
+   "target": "the conflict (judgment, giant, jealousy) shown and named in the first 30 s; by a character in 2/7 winners (Goliath, the Sodom scoffer)"
+  },
+  "rehooks": {
+   "label": "hygiene",
+   "winners": "7/7 with >= 4",
+   "weak": "3/3",
+   "values": [
+    4,
+    6,
+    6,
+    5,
+    9,
+    5,
+    6
+   ],
+   "target": "a re-hook at every chapter end (a question or a cliffhanger line)"
+  },
+  "climax_position": {
+   "label": "hygiene",
+   "values": [
+    0.67,
+    0.86,
+    0.73,
+    0.83,
+    0.59,
+    0.82,
+    0.72
+   ],
+   "target": "climax at 0.6-0.85 of the runtime"
+  },
+  "reflection_s": {
+   "label": "free",
+   "values": [
+    30,
+    25,
+    125,
+    104,
+    71,
+    94,
+    0
+   ],
+   "weak": [
+    0,
+    60,
+    373
+   ],
+   "target": "<= 125 s (the weak Sodom spent 6 min on an epilogue)"
+  },
+  "burned_captions": {
+   "label": "anti (winners 1/7, weak 2/3; 3 weak only)",
+   "target": "no burned captions on the long; YouTube captions instead (re-check with more weak contrasts)"
+  },
+  "slow_stretches": {
+   "label": "retention risk in 10/10",
+   "target": "no landscape, montage, process or repeated shot run longer than 20 s without a new stake (the 2-3 drop-off stretches of every audited video)"
   }
  },
  "conflict_check": {
   "language_and_line": "same (English, KJV, Bible stories)",
   "policy": "KJV public domain; our narration and footage original or licensed; AI visuals disclosed",
   "coherence": "is the series of SERIES.md; the long video becomes one story, not only a compilation, if validated"
+ },
+ "funnel": {
+  "evidence": "evidence/vidiq/20261026/bible_story_long.json#funnel",
+  "counts": {
+   "long_winner_channels_with_a_short_over_2k_views": "0/7",
+   "short_winner_channels_with_a_long_over_10k_views": "0/3"
+  },
+  "reading": "in this line the two formats win with different audiences: no long winner got there through Shorts, and no Short winner turned its Shorts audience into long views. A Short-to-long funnel is not shown by the market; it has to be proven on our own channel (YouTube Analytics: the long's views by traffic source SHORTS, and their watch time) before it is relied on."
  }
 }
