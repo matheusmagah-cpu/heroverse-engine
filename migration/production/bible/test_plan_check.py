@@ -33,8 +33,9 @@ STORY = "Ten generations after Eden the earth is full of people and noise, and n
 
 def keeper(sid, lines):
     return {"id": sid, "kind": "keeper", "lines": lines,
-            "prompt": f"{STYLE} Medium close-up, slow push-in. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
-                      "speaks to the camera. Night in the desert, firelight. Warm and grave."}
+            "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
+                      "holds his head level, looks straight into the camera and speaks to the camera. Night in the "
+                      "desert, firelight. Warm and grave."}
 
 
 def scene(sid, lines, chars=(), seconds=12, look=None, **extra):
@@ -113,6 +114,13 @@ class Plan(unittest.TestCase):
         self.assertNotIn("noah", {c for s in p["shots"] for c in s.get("characters", [])})
         self.assertIn("Part eight tomorrow: Noah builds the ark", p["narration"][-1]["text"])
         self.assertLessEqual(r["estimate"]["lesson_share"], 0.15)
+
+    def test_a_talking_keeper_faces_the_lens_on_a_static_camera(self):
+        # E98: a push-in, a pull-back or a head bowed toward the fire lost the face or the lips in the lips check
+        for old, new in (("static camera", "slow push-in"), ("looks straight into the camera", "leans toward the fire")):
+            p = plan()
+            p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(old, new)
+            self.assertIn("KEEPER_POSE", codes(pc.check(p, CHARS)), new)
 
     def test_the_old_grammar_is_refused(self):
         p = plan()

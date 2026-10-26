@@ -118,6 +118,8 @@ GOD_SHOT_PERSON = re.compile(r"(?i)\b(face|faces|eyes|lips|mouth|man|men|woman|w
                              r"warriors?|travell?ers?|herders?|family|mother|father|son|daughter)\b")
 NO_PEOPLE_TAIL = re.compile(r"(?i)\bno (people|person|faces?|figures?)\b")
 SPEAKS = re.compile(r"(?i)\bspeak")
+# E98: the lips check found the face and the lips only when the Keeper faced the lens on a still frame
+KEEPER_POSE = ("static camera", "looks straight into the camera")
 # a line without a `reference` that quotes the KJV anyway: 8 consecutive words of the KJV (kjv_check's text)
 KJV_RUN = 8
 # E95 (measured 2026-10-26, evidence/pavo/20261026/keeper-audio-binding.json): Pavo keeps our input audio only when
@@ -525,6 +527,10 @@ def check(plan, chars=None):
                 problems.append(f"KEEPER_WARDROBE shot {i} {s['id']} (one wardrobe variant word for word: same room)")
             if not SPEAKS.search(s.get("prompt", "")):
                 problems.append(f"KEEPER_NOT_SPEAKING shot {i} {s['id']} (say that he speaks to the camera)")
+            if not all(w in s.get("prompt", "") for w in KEEPER_POSE):
+                problems.append(f"KEEPER_POSE shot {i} {s['id']} (a talking Keeper faces the lens on a static camera: "
+                                f"{' and '.join(repr(w) for w in KEEPER_POSE)}; a push-in, a pull-back or a bowed head "
+                                "lost the lips, E98)")
             continue
         lesson.update(k for k in idx if items[k]["kind"] in LESSON_KINDS)
         cids = s.get("characters", [])
