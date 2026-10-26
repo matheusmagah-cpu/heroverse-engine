@@ -147,6 +147,27 @@ class Requests(unittest.TestCase):
                                 "his lips moving in sync with the voice.")
 
 
+class Prediction(unittest.TestCase):
+    def test_the_prediction_is_the_build_on_the_same_lengths(self):
+        # E106: plan_check and preflight predict with the build's own functions: on the measured Genesis 7 lengths
+        # the predicted layout is the one lines_step lays out and the compose takes it with no refusal
+        problems, layout = eb.predict(EXAMPLE, DURATIONS)
+        self.assertEqual(problems, [])
+        stretches, _ = eb.retime_plan(EXAMPLE, DURATIONS)
+        retimed = list(DURATIONS)
+        for idx, _, stretch in stretches.values():
+            for k in idx:
+                retimed[k] *= stretch
+        self.assertEqual(layout["lines"], [{"start": a, "end": b} for a, b in eb.line_layout(retimed)])
+        self.assertTrue(170 <= layout["total"] <= 179)
+        # a Keeper line no clip reaches is the build's TALK_LINE_RETIME_OVER, predicted before any voice
+        short = list(DURATIONS)
+        _, carried = eb.plan_check.sequence(EXAMPLE)
+        close = [i for i, s in enumerate(EXAMPLE["shots"]) if s["id"] == "k-close"][0]
+        short[carried[close][0]] = 4.0
+        self.assertEqual([p.split()[0] for p in eb.predict(EXAMPLE, short)[0]], ["TALK_LINE_RETIME_OVER"])
+
+
 class FakeClient:
     def __init__(self, submissions, jobs=None):
         self.submissions, self.jobs, self.calls, self.reads = list(submissions), dict(jobs or {}), [], []
@@ -424,6 +445,17 @@ class Gating(unittest.TestCase):
         report = eb.generate_step(self.plan, self.work, "py", "model", client=client,
                                   download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
         return client, report
+
+    def test_an_invalid_request_is_refused_before_any_generation(self):
+        # E106: the adapter's own checks (images, audio, prompt, seconds) ran only when a shot's turn came, after
+        # the shots generated before it; now every request is validated offline first
+        client = FakeClient([{"conversation_id": "0", "status": "submitted"}], {"0": [done("0")]})
+        with self.assertRaises(SystemExit) as err:
+            eb.generate_step(self.plan, self.work, "py", "model", client=client, validate=True,
+                             download=lambda url, dst: None, sleep=lambda s: None)
+        self.assertTrue(str(err.exception).startswith("REQUESTS_REFUSED"), err.exception)
+        self.assertIn("INPUT_IMAGE_PATH_REFUSED", str(err.exception))
+        self.assertEqual(client.calls, [])
 
     def test_a_rerun_keeps_the_clips_already_made_and_regenerates_only_the_rest(self):
         # E93: run 40263488773 lost 25 good clips when Pavo went unreachable at shot 26; a resumed run starts there

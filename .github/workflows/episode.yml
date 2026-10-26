@@ -40,13 +40,16 @@ jobs:
         with:
           persist-credentials: false
       - id: plan
-        name: The plan (path checked, plan_check strict)
+        name: The plan (path checked, plan_check strict, a PASS preflight of this exact plan, E106)
         run: |
           [[ "$PLAN" =~ ^migration/production/bible/plans/([a-z0-9]+(-[a-z0-9]+)*)\.json$ ]] || { echo "PLAN_PATH_REFUSED"; exit 1; }
           ep="${BASH_REMATCH[1]}"
           test -f "$PLAN" || { echo "PLAN_MISSING"; exit 1; }
           python3 -I -c "import json,sys;sys.exit(0 if json.load(open(sys.argv[1])).get('episode')==sys.argv[2] else 'PLAN_EPISODE_MISMATCH')" "$PLAN" "$ep"
           python3 -I -B migration/production/bible/plan_check.py "$PLAN" --strict
+          # E106: the committed preflight (local Kokoro, refs, requests, every talking setup probed) is PASS for this
+          # plan and character bible; else the build stops here, before any secret, voice or Pavo call
+          python3 -I -B migration/production/bible/episode_build.py verify-preflight "$PLAN"
           echo "episode=$ep" >> "$GITHUB_OUTPUT"
           echo "EP=$ep" >> "$GITHUB_ENV"
           echo "WORK=$GITHUB_WORKSPACE/.episode/$ep" >> "$GITHUB_ENV"   # inside the checkout: Pavo reads repo paths only

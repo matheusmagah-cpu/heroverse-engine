@@ -1,0 +1,18 @@
+{
+ "about": "E106: every talking setup a build may use, with its direct 0-credit Pavo probe (SYSTEM.md 'No rework'). A setup is the speaker, the reference images its request sends for the speaker (record id -> sha256) and the prompt binding (episode_build.BOUND_AUDIO); preflight.setup_key builds it from the plan and refuses a talking shot whose setup is not here (PROBE_REQUIRED). generations / passed: lipsync_check passes over direct Pavo calls on that setup with the plan's pose (thresholds unchanged). A new speaker, a new speaking frame or a new binding is a new entry, added by PR with its evidence file.",
+ "setups": [
+  {
+   "kind": "talk",
+   "speaker": "keeper",
+   "references": {
+    "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+   },
+   "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+   "pose": "static camera, looks straight into the camera (plan_check.KEEPER_POSE)",
+   "generations": 8,
+   "passed": 3,
+   "evidence": "migration/evidence/pavo/20261026/keeper-lipsync-rate.json",
+   "note": "the 8 direct calls on storyteller-ref.jpg with the E95 binding (camera-facing static 2 of 4, cropped reference 1 of 3, run prompt 0 of 1); E98 plans on about 4 in 10. The lips check still fails often (genesis-07 k-insight): PR #419 measures more."
+  }
+ ]
+}

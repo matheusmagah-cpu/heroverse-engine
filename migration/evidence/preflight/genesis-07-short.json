@@ -1,0 +1,159 @@
+{
+ "plan": "migration/production/bible/plans/genesis-07-short.json",
+ "episode": "genesis-07-short",
+ "plan_sha256": "bd1e8eb04906577ac1aa4d2b5cea34d0c3f1c4c4a889316118b113feb631bbf3",
+ "characters_sha256": "b0d289bea4c9404d4ed25496bd496298a91e60f678f3ec0c8667162d9fc91b17",
+ "checked_at": "2026-10-26T13:22:56Z",
+ "plan_check": {
+  "problems": [],
+  "pending": [],
+  "estimate": {
+   "seconds": 174.3,
+   "keeper_share": 0.104,
+   "lesson_share": 0.108,
+   "establishing_share": 0.023,
+   "lines": 24,
+   "shots": 33,
+   "spoken_lines": 3,
+   "words": 454
+  }
+ },
+ "characters": [
+  {
+   "id": "keeper",
+   "status": "APPROVED",
+   "refs": [
+    "front"
+   ],
+   "talk_refs": [
+    "talk"
+   ],
+   "voice": "am_michael",
+   "image_records": [
+    "ch-keeper-front",
+    "ch-keeper-talk"
+   ]
+  }
+ ],
+ "cf_images": {
+  "recorded_today": 0,
+  "daily_allocation": 44,
+  "sheets_needed": {},
+  "fits_today": true
+ },
+ "voice": {
+  "ran": true,
+  "problems": [],
+  "pace": {
+   "god": [
+    2.69,
+    3.19,
+    2.93
+   ],
+   "narration": [
+    2.63,
+    2.67,
+    2.85,
+    1.99,
+    2.79,
+    2.85,
+    2.83,
+    3.63,
+    2.94,
+    2.86,
+    3.1,
+    2.38,
+    2.63,
+    2.75,
+    3.13,
+    2.87,
+    2.44,
+    3.06,
+    2.6,
+    3.0,
+    2.37
+   ]
+  },
+  "measured": {
+   "total": 174.354,
+   "keeper_share": 0.112,
+   "lesson_share": 0.116,
+   "retimed": {
+    "k-question": {
+     "speech": 4.34,
+     "retimed": 4.55,
+     "atempo": 0.9538
+    },
+    "k-close": {
+     "speech": 6.333,
+     "retimed": 6.55,
+     "atempo": 0.9669
+    }
+   }
+  }
+ },
+ "requests": {
+  "ran": true,
+  "problems": []
+ },
+ "setups": {
+  "shots": [
+   {
+    "kind": "god_voice_over",
+    "shot": "s-voice",
+    "probe": "none needed: generated right after the talking shots (risk_order), face check"
+   },
+   {
+    "kind": "god_voice_over",
+    "shot": "s-judgment",
+    "probe": "none needed: generated right after the talking shots (risk_order), face check"
+   },
+   {
+    "kind": "god_voice_over",
+    "shot": "s-rain",
+    "probe": "none needed: generated right after the talking shots (risk_order), face check"
+   },
+   {
+    "kind": "talk",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+    "shot": "k-insight",
+    "probe": "migration/evidence/pavo/20261026/keeper-lipsync-rate.json",
+    "pass_rate": 0.375,
+    "shot_chance": 0.94
+   },
+   {
+    "kind": "talk",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+    "shot": "k-question",
+    "probe": "migration/evidence/pavo/20261026/keeper-lipsync-rate.json",
+    "pass_rate": 0.375,
+    "shot_chance": 0.94
+   },
+   {
+    "kind": "talk",
+    "speaker": "keeper",
+    "references": {
+     "ch-keeper-talk": "575e726ffb4cb43faaad15bfa2aa7c6e022cb0d03678ace6da7e4c81b0c29c4a"
+    },
+    "binding": "speaks the words of the audio clip, {pronoun} lips moving in sync with the voice",
+    "shot": "k-close",
+    "probe": "migration/evidence/pavo/20261026/keeper-lipsync-rate.json",
+    "pass_rate": 0.375,
+    "shot_chance": 0.94
+   }
+  ],
+  "probes_required": [],
+  "talk_attempts": 6,
+  "run_chance_all_talking_shots": 0.832
+ },
+ "blockers": [],
+ "status": "PASS"
+}
