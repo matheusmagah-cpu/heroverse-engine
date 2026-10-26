@@ -124,11 +124,13 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   0.80, 8 s 0.36, 10 s 0.03); at 1.6 s or more it makes its own track. So a talking clip is ceil(speech) seconds
   (4-12), the speech 0.25-0.65 s shorter: `episode_build lines` retimes a line that misses it to N - 0.45 s (atempo,
   pitch kept, at most +-10 %, else `TALK_LINE_RETIME_OVER`) before anything is laid out, and the compose holds the
-  clip's last frame (<= 1.3 s) for the gap or the closing tail. A talking line is 3.23-11.55 s. The request binds
-  the reference and the audio: "Image 1 is the narrator" (or the character's name) and "speaks the words of the
+  clip's last frame (<= 1.3 s) for the gap or the closing tail. A talking line is 3.23-11.55 s (one ceiling,
+  `TALK_LINE_MAX`, the closing Keeper too), never ~3.94-4.14 s (`TALK_LINE_UNREACHABLE`: no clip within 10 %). The
+  request binds the reference and the audio: "Image 1 is the narrator" (or the character's name) and "speaks the words of the
   audio clip, his lips moving in sync with the voice" (`bind_prompt`, replacing "speaks to the camera, his lips
-  moving clearly with every word"), and Image 1 is the speaker's `talk_refs` speaking frame when it has one (the
-  Keeper: his calibration clip's frame; the mouth-closed front view failed the lips, -0.043).
+  moving clearly with every word"), and Image 1 is the speaker's `talk_refs` speaking frame when it has one, sent in
+  place of its approved refs (the Keeper: his calibration clip's frame, alone as in the tests that passed; the
+  mouth-closed front view failed the lips, -0.043).
 - **Stake and open loop (3-10 %)**, then **escalation (10-60 %)**: three rising steps of the opposition, acted (in
   dialogue when an approved speaker lives in the story), each ending on a small hook; shots 2-6 s, cuts only.
 - **Climax (60-80 %)**: the hero or God speaks the key KJV line at the turn; at least one acted scene is flagged
