@@ -14,8 +14,9 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 
 **The funnel.**
 - The Bible is told in **arcs**: one arc = one complete story = 4 Short episodes = 1 long video.
-- **Shorts (the door, 2 a day, 13:30 and 23:30 UTC):** one moment of the arc each, in order, 62-90 s (owner,
-  2026-10-25: TikTok Creator Rewards counts only videos of 1 minute or more), almost all AI video from Pavo (owner,
+- **Shorts (the door, 2 a day, 13:30 and 23:30 UTC):** one moment of the arc each, in order, 170-179 s from
+  part 7 (owner, 2026-10-26: the measured driver of `structures/bible-story-short.json`, 5/6 winners vs 0/3 weak; under
+  YouTube's 180 s limit, the tail included; parts 1-6 stay at their 62-90 s, TikTok Creator Rewards counting 1 minute or more), almost all AI video from Pavo (owner,
   2026-10-25; each scene matches its words). Built in four
   beats, recorded line by line in the episode's `narration` (kind scripture / story / insight / cta): the hook; the
   moment told in the KJV with our own retelling around it; one **insight** of our own (what most readers miss, a
@@ -57,8 +58,8 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
   then Agnes direct, and vidIQ's generator only when both fail. Shorts are almost all AI (owner, 2026-10-25), each scene
   still matching its words; this replaces "AI video only at the hook and the peak".
 - Shorts (from part 7, owner 2026-10-26): produced by `episode.yml` from a plan (`plans/<episode-id>.json`, PROMPT_GUIDE
-  "Keeper + acted scenes"): the Keeper on screen speaking our Kokoro narration in sync, the story acted out in Pavo
-  scenes, composed by the engine, no vidIQ credits; Claude writes the plan and reviews the sheet before
+  "Keeper + acted scenes", Shorts v2): the conflict opens spoken by a character or God's voice, the characters speak
+  their own lines lip-synced, the story acted out in Pavo scenes, the Keeper only for the insight and the close, composed by the engine, no vidIQ credits; Claude writes the plan and reviews the sheet before
   `publish-episode.yml`. (Parts 1-5 used vidIQ voice, stock search and compose, about 45 credits each.)
 - Credit budget: 3,811 credits on 25/10 must last to the renewal on 18/11 (about 159 a day). Two Shorts a day at
   about 100 each run over that, so each Short is held to about 75 (no wasted previews; music theme reused), and the
@@ -80,7 +81,7 @@ of this line (7 channels, 8x-589x their channel) tell ONE Bible story per video 
 - Measured each day by the live intelligence: views of each long from Shorts, long retention, subscribers per arc.
 
 ## Credits (vidIQ: ~4,200 on 2026-10-24; renewal of 6,000 on 2026-11-18)
-- Per Short: AI clips from Pavo (0) + voice (~14 a minute, ~20 for 62-90 s) + stock search (~8) + compose (~16) ≈ 45;
+- Per Short: AI clips from Pavo (0) + voice (~14 a minute: ~20 for the 62-90 s of parts 1-6; from part 7 the voice is free Kokoro) + stock search (~8) + compose (~16) ≈ 45;
   a vidIQ AI clip (veo-3.1-lite 4 s, 60) only when Pavo and Agnes both fail.
 - Ceiling 200 credits a day; the ledger records every call (owner authorization 2026-10-24: "libero tudo").
 

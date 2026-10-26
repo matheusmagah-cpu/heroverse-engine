@@ -30,10 +30,18 @@ def sha256_file(path):
 
 
 SHORT_RULES_FROM_PART = 6      # owner, 2026-10-25: from Genesis 6 on (what is published stays as it is)
-SHORT_MIN_S, SHORT_MAX_S = 62.0, 90.0   # TikTok Creator Rewards counts videos of 1 min or more; 2 s of margin
+SHORT_LENGTH_FROM_PART = 7     # owner, 2026-10-26 (structure bible-story-short: 5/6 winners ran 170-179 s, 0/3 weak)
+SHORT_MIN_S, SHORT_MAX_S = 170.0, 179.0   # measured with the tail; YouTube Shorts end at 180 s
+SHORTS_LIMIT_S = 180.0
+SHORT_PART6_S = (62.0, 90.0)   # part 6 as published (TikTok Creator Rewards counts 1 min or more; 2 s of margin)
 ORIGINAL_MIN = 0.40            # share of narration words that are ours (not the KJV quotation)
 INSIGHT_MIN_WORDS = 20
 CTA_TO_LONG = re.compile(r"(?i)\b(full|whole|complete) (story|video)\b|\blong video\b")
+
+
+def short_length(part):
+    """(min, max) seconds of a Short of this part: 170-179 s from part 7, 62-90 s for part 6 (kept as published)."""
+    return (SHORT_MIN_S, SHORT_MAX_S) if part >= SHORT_LENGTH_FROM_PART else SHORT_PART6_S
 
 
 def short_problems(episode):
@@ -44,8 +52,9 @@ def short_problems(episode):
     if episode.get("format") != "short" or episode.get("part", 0) < SHORT_RULES_FROM_PART:
         return []
     out = []
-    if not SHORT_MIN_S <= episode.get("seconds", 0) <= SHORT_MAX_S:
-        out.append(f"SHORT_LENGTH {episode.get('seconds')} s (need {SHORT_MIN_S:.0f}-{SHORT_MAX_S:.0f})")
+    low, high = short_length(episode.get("part", 0))
+    if not low <= episode.get("seconds", 0) <= high:
+        out.append(f"SHORT_LENGTH {episode.get('seconds')} s (need {low:.0f}-{high:.0f})")
     lines = episode.get("narration") or []
     if not lines:
         return out + ["NARRATION_MISSING (kind scripture/story/insight/cta, line by line)"]

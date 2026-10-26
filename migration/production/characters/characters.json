@@ -15,7 +15,8 @@
    "refs": [
     "front"
    ],
-   "reviewed": "2026-10-25 (run 40218516955): front kept as the one face of Adam; three-quarter and full rejected (a different face, a strap with a metal buckle, not a full figure)"
+   "reviewed": "2026-10-25 (run 40218516955): front kept as the one face of Adam; three-quarter and full rejected (a different face, a strap with a metal buckle, not a full figure)",
+   "voice": "am_fenrir"
   },
   "eve": {
    "name": "Eve",
@@ -30,7 +31,8 @@
    "refs": [
     "full"
    ],
-   "reviewed": "2026-10-25 (run 40218516955): the 'full' portrait kept as the one face of Eve (olive skin, natural); front rejected (jewellery, earring, glamour make-up), three-quarter rejected (lighter skin, a second face)"
+   "reviewed": "2026-10-25 (run 40218516955): the 'full' portrait kept as the one face of Eve (olive skin, natural); front rejected (jewellery, earring, glamour make-up), three-quarter rejected (lighter skin, a second face)",
+   "voice": "af_heart"
   },
   "serpent": {
    "name": "The serpent",
@@ -46,7 +48,8 @@
     "three-quarter",
     "full"
    ],
-   "reviewed": "2026-10-25 (run 40218516955): three-quarter and full kept (same scales and head); front rejected (a split, doubled tongue)"
+   "reviewed": "2026-10-25 (run 40218516955): three-quarter and full kept (same scales and head); front rejected (a split, doubled tongue)",
+   "voice": "bm_fable"
   },
   "keeper": {
    "name": "The Keeper (series narrator)",
@@ -62,7 +65,35 @@
     "front"
    ],
    "role": "narrator only: an invented storyteller, never a biblical person, prophet, priest or angel; no staff; he says 'the Scripture says'",
-   "reviewed": "2026-10-26: the FLUX sheet could not be made (Cloudflare free allocation used up); the Keeper's face is the one of his first two Pavo clips (fire variant), consistent in every frame; the front reference is that frame (refs/ch-keeper-front.jpg). Lip-sync with our narration verified (lipsync_check: audio 0.89 at 0 ms, lips 0.52 at 0 ms)."
+   "reviewed": "2026-10-26: the FLUX sheet could not be made (Cloudflare free allocation used up); the Keeper's face is the one of his first two Pavo clips (fire variant), consistent in every frame; the front reference is that frame (refs/ch-keeper-front.jpg). Lip-sync with our narration verified (lipsync_check: audio 0.89 at 0 ms, lips 0.52 at 0 ms).",
+   "voice": "am_michael"
+  },
+  "noah": {
+   "name": "Noah",
+   "first_story": "Genesis 6",
+   "status": "DRAFT",
+   "seed": 7501,
+   "look": "a strong broad-shouldered elderly man of about seventy with Middle Eastern features, weathered olive skin, a long grey beard, short grey hair on a bare head, deep-set dark eyes under heavy brows, a plain brown wool robe belted with a rope",
+   "wardrobe": {
+    "before-the-flood": "standing alone on a dry hillside at dusk, his hands empty at his sides",
+    "builder": "his sleeves rolled to the elbow, sawdust on his robe, a wooden mallet in one hand",
+    "ark": "standing in the open doorway of a vast wooden ark under a grey sky"
+   },
+   "refs": [],
+   "voice": "bm_george",
+   "note": "Genesis 7:6 makes him six hundred years old at the flood; shown as a strong elderly man of about seventy (owner, 2026-10-26). A bare head, a grey (not silver-white) beard and a belted plain robe keep him apart from the Keeper's hood and silver beard.",
+   "reviewed": "DRAFT (2026-10-26): reference sheet ch-noah-front / three-quarter / full to be made by cf-images.yml (ONLY=ch-noah-front,ch-noah-three-quarter,ch-noah-full) and reviewed by Claude before APPROVED"
   }
+ },
+ "god": {
+  "shown": "never as a person: a voice over light, storm, wind or fire (plan_check speaker \"god\")",
+  "voice": "am_onyx",
+  "speed": 0.9,
+  "lines": "Scripture only (KJV word for word, kjv_check)"
+ },
+ "voices": {
+  "model": "Kokoro v1.0 voices-v1.0.bin (sha256 bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d, verify_public_voice_asset.ASSETS)",
+  "narrator": "am_michael (the Keeper; the voice pinned for the long)",
+  "chosen": "2026-10-26 (owner: characters speak their lines in their own voice): one distinct English voice per speaker, the better-graded Kokoro voices first: Adam am_fenrir (younger American male), Eve af_heart (warm female, the model's best-graded voice), the serpent bm_fable (smooth British male), Noah bm_george (grave older British male), God am_onyx at 0.9 speed (the deepest male voice; voice-over only)"
  }
 }

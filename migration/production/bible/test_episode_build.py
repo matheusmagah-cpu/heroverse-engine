@@ -24,37 +24,78 @@ HAS_FFMPEG = shutil.which("ffmpeg") is not None
 
 
 def layout_for(plan, durations):
+    """layout.json as lines_step writes it, from measured line durations (stub: no voice, no ffmpeg)."""
     lines = [{"start": a, "end": b} for a, b in eb.line_layout(durations)]
     total = round(lines[-1]["end"] + eb.TAIL, 3)
-    keeper = {}
-    for s in plan["shots"]:
+    _, carried = eb.plan_check.sequence(plan)
+    keeper, speakers, voice_over = {}, {}, {}
+    for i, s in enumerate(plan["shots"]):
+        if s["kind"] != "keeper" and not eb.plan_check.speaking(s):
+            continue
+        a, b = lines[carried[i][0]]["start"], lines[carried[i][-1]]["end"]
+        rec = {"start": a, "end": b, "seconds": round(b - a, 3)}
         if s["kind"] == "keeper":
-            a, b = lines[s["lines"][0]]["start"], lines[s["lines"][-1]]["end"]
-            keeper[s["id"]] = {"wav": f".episode/x/keeper/{s['id']}.wav", "start": a, "end": b,
-                               "seconds": round(b - a, 3)}
-    return {"lines": lines, "total": total, "keeper": keeper}
+            keeper[s["id"]] = dict(rec, wav=f".episode/x/keeper/{s['id']}.wav")
+        elif eb.plan_check.talking(s):
+            speakers[s["id"]] = dict(rec, wav=f".episode/x/speakers/{s['id']}.wav", speaker=s["speaker"])
+        else:
+            voice_over[s["id"]] = dict(rec, speaker=s["speaker"])
+    return {"lines": lines, "total": total, "keeper": keeper, "speakers": speakers, "voice_over": voice_over}
 
 
-DURATIONS = [2.6, 6.79, 9.47, 9.08, 5.55, 5.58, 4.91, 6.22, 3.2, 8.47, 6.33]   # Kokoro, measured 2026-10-26
+# Kokoro, measured locally 2026-10-26 on the Genesis 7 v2 plan (pilot_render voice, preserved model): 173.885 s
+DURATIONS = [6.69, 9.49, 8.99, 9.47, 9.04, 9.34, 4.91, 9.85, 5.5, 9.55, 7.37, 6.13, 8.4, 4.4, 8.34, 3.07, 7.65, 3.2,
+             5.23, 3.67, 5.21, 8.47, 4.34, 6.33]
+EVE = "a woman of about twenty-five with long black hair"
+STUB_CHARS = {"eve": {"status": "APPROVED", "look": EVE, "refs": ["full"], "voice": "af_heart"},
+              "keeper": {"status": "APPROVED", "look": "x", "refs": ["front"], "voice": "am_michael"}}
+
+
+def dialogue_plan():
+    """Eve challenges at 0 s (her own voice, lip-synced), narration over a scene, God's voice-over, the Keeper closes."""
+    style = "Painterly cinematic realism, cinema camera."
+    return {"episode": "t", "part": 0, "narration": [{"kind": "story", "text": "a b c"},
+                                                     {"kind": "cta", "text": "the full story"}],
+            "shots": [{"id": "s-eve", "kind": "scene", "speaker": "eve", "line": "Why do you hide?",
+                       "characters": ["eve"], "prompt": f"{style} Close-up, static. Eve, {EVE}, speaks."},
+                      {"id": "s-a", "kind": "scene", "lines": [0], "seconds": 6, "characters": [],
+                       "figures": "anonymous", "prompt": "p"},
+                      {"id": "s-god", "kind": "scene", "speaker": "god", "line": "I will destroy man.",
+                       "reference": "Genesis 6:7 (KJV)", "seconds": 8, "characters": [], "prompt": "storm"},
+                      {"id": "k-close", "kind": "keeper", "lines": [1], "prompt": "k"}]}
 
 
 class Requests(unittest.TestCase):
-    def test_voice_is_the_pinned_engine_voice_one_segment_a_line(self):
+    def test_voice_is_one_segment_a_line_each_spoken_line_in_its_speakers_own_voice(self):
         v = eb.voice_script(EXAMPLE)
         self.assertEqual(v["voice"], {"voice_id": "am_michael", "speed": 1.0})
-        self.assertEqual([s["id"] for s in v["segments"]], [f"n{k:02d}" for k in range(len(EXAMPLE["narration"]))])
-        self.assertEqual(v["segments"][2]["text"], EXAMPLE["narration"][2]["text"])
+        items, _ = eb.plan_check.sequence(EXAMPLE)
+        self.assertEqual([s["id"] for s in v["segments"]], [f"n{k:02d}" for k in range(len(items))])
+        self.assertEqual(len(items), len(EXAMPLE["narration"]) + 3)          # three lines of God's voice
+        god = v["segments"][0]
+        self.assertEqual((god["voice_id"], god["speed"], god["speaker"]), ("am_onyx", 0.9, "god"))
+        self.assertEqual(god["text"], EXAMPLE["shots"][0]["line"])
+        self.assertEqual(v["segments"][1]["text"], EXAMPLE["narration"][0]["text"])
+        self.assertNotIn("voice_id", v["segments"][1])                     # the narration: the Keeper's voice
+        d = eb.voice_script(dialogue_plan(), STUB_CHARS)["segments"]
+        self.assertEqual([(s.get("speaker"), s.get("voice_id")) for s in d],
+                         [("eve", "af_heart"), (None, None), ("god", "am_onyx"), (None, None)])
+        with self.assertRaises(SystemExit):
+            eb.voice_script(dialogue_plan(), {"eve": dict(STUB_CHARS["eve"], voice=None)})
 
     def test_shot_to_generation_request(self):
         layout = layout_for(EXAMPLE, DURATIONS)
         refs = {"keeper": [".episode/x/refs/ch-keeper-front.jpg"], "eve": [".episode/x/refs/ch-eve-full.jpg"]}
         shots = EXAMPLE["shots"]
-        k = eb.request(shots[0], 0, EXAMPLE, layout, refs)
+        g = eb.request(shots[0], 0, EXAMPLE, layout, refs)         # God's voice-over: a scene, no audio, no one shown
+        self.assertEqual((g["seconds"], g["references"], g["audios"]), (8, None, None))
+        ki = [i for i, s in enumerate(shots) if s["id"] == "k-insight"][0]
+        k = eb.request(shots[ki], ki, EXAMPLE, layout, refs)
         self.assertEqual(k["references"], refs["keeper"])
-        self.assertEqual(k["audios"], [".episode/x/keeper/k-open.wav"])
-        self.assertEqual(k["seconds"], 4)                      # 2.6 s line: Flash's minimum of 4 s
+        self.assertEqual(k["audios"], [".episode/x/keeper/k-insight.wav"])
+        self.assertEqual(k["seconds"], 10)                     # 8.47 s line + 0.6 s margin
         self.assertFalse(k["sound"])
-        self.assertEqual(k["prompt"], shots[0]["prompt"])
+        self.assertEqual(k["prompt"], shots[ki]["prompt"])
         last = eb.request(shots[-1], len(shots) - 1, EXAMPLE, layout, refs)
         self.assertEqual(last["seconds"], 9)                   # 6.33 s line + 1.2 s tail + 0.6 s margin
         s = eb.request(shots[1], 1, EXAMPLE, layout, refs)
@@ -64,6 +105,18 @@ class Requests(unittest.TestCase):
         for i, shot in enumerate(shots):
             r = eb.request(shot, i, EXAMPLE, layout, refs)
             self.assertTrue(4 <= r["seconds"] <= 12 and type(r["seconds"]) is int, shot["id"])
+
+    def test_a_speaking_character_sends_its_own_line_and_references_and_is_lipsync_checked(self):
+        p = dialogue_plan()
+        layout = layout_for(p, [2.4, 3.0, 2.5, 3.1])
+        refs = {"keeper": ["k.jpg"], "eve": ["eve.jpg"]}
+        r = eb.request(p["shots"][0], 0, p, layout, refs)
+        self.assertEqual((r["references"], r["audios"], r["seconds"]), (["eve.jpg"], [".episode/x/speakers/s-eve.wav"],
+                                                                        4))   # 2.4 s + 0.6 s: Flash's 4 s minimum
+        self.assertIsNone(eb.request(p["shots"][2], 2, p, layout, refs)["audios"])
+        self.assertEqual(eb.talk_record(layout, p["shots"][0])["speaker"], "eve")
+        # which clips go through lipsync_check: the talking ones (Eve, the Keeper), never God's voice-over or a scene
+        self.assertEqual([eb.plan_check.talking(s) for s in p["shots"]], [True, False, False, True])
 
 
 class FakeClient:
@@ -150,15 +203,20 @@ class Compose(unittest.TestCase):
         shots = eb.compose_shots(EXAMPLE, layout, clips, seconds)
         self.assertEqual(short_engine.check_shots(shots, layout["total"]), [])
         keepers = [c for c in shots if c["kind"] == "keeper"]
-        self.assertEqual([c["shot"] for c in keepers], ["k-open", "k-insight", "k-close"])
+        self.assertEqual([c["shot"] for c in keepers], ["k-insight", "k-question", "k-close"])
         for c in keepers:
             line = layout["keeper"][c["shot"]]
             self.assertAlmostEqual(c["start"], line["start"], places=3)
-            # k-insight is followed by the Keeper again: he holds the 0.35 s gap before his next line
-            end = {"k-close": layout["total"], "k-insight": layout["keeper"]["k-close"]["start"]}.get(c["shot"], line["end"])
+            # followed by the Keeper again: he holds the 0.35 s gap before his next line
+            end = {"k-close": layout["total"], "k-insight": layout["keeper"]["k-question"]["start"],
+                   "k-question": layout["keeper"]["k-close"]["start"]}[c["shot"]]
             self.assertAlmostEqual(c["end"], end, places=3)
             self.assertEqual((c["src_start"], c["speed"]), (0.0, 1.0))   # never slowed: lips stay on the voice
+            self.assertEqual(c["talk"], {"start": line["start"], "end": line["end"]})
         self.assertEqual(shots[0]["start"], 0.0)
+        self.assertEqual(shots[0]["shot"], "s-voice")            # God's voice over the storm opens, cut as a scene
+        sentences = [{"start": x["start"], "end": x["end"]} for x in layout["lines"]]
+        self.assertEqual(short_engine.talk_problems(shots, sentences), [])
         for c in shots:
             if c["kind"] == "scene":
                 self.assertLessEqual(c["end"] - c["start"], eb.CUT_MAX + 1e-3, c)
@@ -167,6 +225,42 @@ class Compose(unittest.TestCase):
         est = {s["id"] for s in EXAMPLE["shots"] if s.get("establishing")}
         for sid in est:
             self.assertLessEqual(sum(c["end"] - c["start"] for c in shots if c["shot"] == sid), 2.0 + 1e-3)
+
+    def test_a_dialogue_clip_keeps_its_own_line_aligned(self):
+        p = dialogue_plan()
+        layout = layout_for(p, [2.4, 3.0, 2.5, 3.1])
+        clips = {s["id"]: f"{s['id']}.mp4" for s in p["shots"]}
+        seconds = {"s-eve": 4.59, "s-a": 6.59, "s-god": 8.59, "k-close": 5.59}
+        shots = eb.compose_shots(p, layout, clips, seconds)
+        self.assertEqual(short_engine.check_shots(shots, layout["total"]), [])
+        eve = shots[0]
+        self.assertEqual((eve["shot"], eve["kind"], eve["start"], eve["src_start"], eve["speed"]),
+                         ("s-eve", "speaker", 0.0, 0.0, 1.0))
+        self.assertEqual(eve["talk"], {"start": 0.0, "end": 2.4})
+        self.assertEqual(eve["end"], 2.4)                 # her last word; the next scene covers the 0.35 s gap
+        self.assertEqual(shots[1]["start"], 2.4)
+        self.assertEqual([c["kind"] for c in shots if c["shot"] == "s-god"], ["scene"] * 1)   # voice-over: a scene
+        self.assertNotIn("talk", [k for c in shots if c["shot"] == "s-god" for k in c])
+        sentences = [{"start": x["start"], "end": x["end"]} for x in layout["lines"]]
+        self.assertEqual(short_engine.talk_problems(shots, sentences), [])
+        # the composer refuses a talking clip moved off its line, slowed, started later in the clip or off the voice
+        for change, code in (({"start": 0.2}, "TALK_NOT_ALIGNED"), ({"speed": 1.1}, "TALK_NOT_ALIGNED"),
+                             ({"src_start": 0.5}, "TALK_NOT_ALIGNED"), ({"end": 2.0}, "TALK_NOT_ALIGNED"),
+                             ({"talk": {"start": 0.0, "end": 1.7}}, "TALK_NOT_ON_THE_VOICE")):
+            moved = [dict(shots[0], **change)] + shots[1:]
+            self.assertIn(f"{code} 0", short_engine.talk_problems(moved, sentences), change)
+        # a speaker's clip shorter than its line is refused, like the Keeper's
+        with self.assertRaises(SystemExit) as err:
+            eb.compose_shots(p, layout, clips, dict(seconds, **{"s-eve": 2.0}))
+        self.assertIn("SPEAKER_CLIP_SHORT s-eve", str(err.exception))
+        # a scene before a talking shot: the talking shot must start on its line
+        q = dialogue_plan()
+        q["shots"][0], q["shots"][1] = q["shots"][1], q["shots"][0]
+        q["narration"][0]["text"] = "a b c"
+        lay = layout_for(q, [3.0, 2.4, 2.5, 3.1])
+        out = eb.compose_shots(q, lay, clips, seconds)
+        talk = [c for c in out if c["shot"] == "s-eve"][0]
+        self.assertAlmostEqual(talk["start"], lay["lines"][1]["start"], places=3)
 
     def test_a_long_clip_is_cut_into_windows_a_short_one_slowed_at_most_1_3(self):
         spread = eb.cuts("a.mp4", 10.0, 17.0, 8.59)
@@ -192,6 +286,90 @@ class Compose(unittest.TestCase):
         with self.assertRaises(SystemExit) as err:
             eb.compose_shots(EXAMPLE, layout, clips, seconds)
         self.assertIn("KEEPER_CLIP_SHORT k-insight", str(err.exception))
+
+
+class Gating(unittest.TestCase):
+    """generate_step with a stubbed Pavo, download, clip_check, lipsync_check and face check: every talking clip is
+    judged against its own line's WAV; God's voice-over shot is not lip-checked but must show no face; scenes and
+    God's shot lose Pavo's audio track."""
+    def setUp(self):
+        self.saved = (eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run)
+        self.work = Path(tempfile.mkdtemp(dir=eb.REPO, prefix=".test-gate-"))
+        self.plan = dialogue_plan()
+        (self.work / "layout.json").write_text(json.dumps(layout_for(self.plan, [2.4, 3.0, 2.5, 3.1])))
+        (self.work / "refs.json").write_text(json.dumps({"keeper": ["k.jpg"], "eve": ["eve.jpg"]}))
+        self.lip, self.faces, self.stripped = [], [], []
+        eb.clip_flags = lambda path: []
+        eb.lipsync_flags = lambda py, model, clip, wav: (self.lip.append((Path(clip).name, Path(wav).name)) or [],
+                                                         {"audio": {"corr": 0.9}, "mouth": {"corr": 0.5}})
+        eb.face_flags = lambda py, model, clip: (self.faces.append(Path(clip).name) or [],
+                                                 {"faces": {"frames_sampled": 40, "faces_found": 0}})
+        eb.run = lambda args, **kw: (self.stripped.append(Path(str(args[-1])).name),
+                                     Path(str(args[-1])).write_bytes(b"v"))
+
+    def tearDown(self):
+        eb.clip_flags, eb.lipsync_flags, eb.face_flags, eb.run = self.saved
+        shutil.rmtree(self.work)
+
+    def generate(self, extra=0):
+        n = len(self.plan["shots"]) + extra
+        client = FakeClient([{"conversation_id": str(i), "status": "submitted"} for i in range(n)],
+                            {str(i): [done(str(i))] for i in range(n)})
+        report = eb.generate_step(self.plan, self.work, "py", "model", client=client,
+                                  download=lambda url, dst: Path(dst).write_bytes(b"raw"), sleep=lambda s: None)
+        return client, report
+
+    def test_lipsync_runs_on_each_talking_clip_with_its_own_line(self):
+        client, report = self.generate()
+        self.assertEqual(self.lip, [("s-eve.mp4", "s-eve.wav"), ("k-close.mp4", "k-close.wav")])
+        self.assertEqual(self.faces, ["s-god.mp4"])               # only God's voice-over shot is face-checked
+        self.assertEqual(sorted(self.stripped), ["s-a.mp4", "s-god.mp4"])
+        self.assertEqual(client.calls[0]["audios"], [".episode/x/speakers/s-eve.wav"])
+        self.assertIsNone(client.calls[2]["audios"])
+        self.assertEqual(report["shots"]["s-eve"]["speaker"], "eve")
+        self.assertIn("lipsync", report["shots"]["s-eve"]["attempts"][0])
+        self.assertNotIn("lipsync", report["shots"]["s-god"]["attempts"][0])
+        self.assertEqual(report["shots"]["s-god"]["attempts"][0]["faces"]["faces_found"], 0)
+
+    def test_a_face_in_gods_shot_is_regenerated_at_most_twice_then_the_run_stops(self):
+        """Review of #400: a prompt can be written around the word list; the generated clip itself is checked."""
+        found = {"n": 0}
+
+        def faces(py, model, clip):
+            found["n"] += 1
+            return ["GOD_SHOT_FACE"], {"faces": {"frames_sampled": 40, "faces_found": 3}}
+        eb.face_flags = faces
+        with self.assertRaises(SystemExit) as err:
+            self.generate(extra=2)
+        self.assertIn("SHOT_FAILED s-god after 3 generations: GOD_SHOT_FACE", str(err.exception))
+        self.assertEqual(found["n"], 3)
+        report = json.loads((self.work / "report.json").read_text())
+        self.assertIn("GOD_SHOT_FACE", report["shots"]["s-god"]["error"])
+
+    def test_a_broken_face_check_stops_the_run_with_its_error_and_spends_no_regeneration(self):
+        eb.face_flags = self.saved[2]
+        fake = self.work / "python"
+        fake.write_text("#!/bin/sh\necho 'ImportError: libGLESv2.so.2: cannot open shared object file' >&2\nexit 1\n")
+        fake.chmod(0o755)
+        with self.assertRaises(SystemExit) as caught:
+            eb.face_flags(fake, "model.task", "clip.mp4")
+        self.assertIn("FACE_TOOL_BROKEN exit 1", str(caught.exception))
+        self.assertIn("libGLESv2.so.2", str(caught.exception))
+        calls = []
+
+        def attempt(n):
+            calls.append(n)
+            return {"generation": n}, self.work / "clip.mp4"
+        with self.assertRaises(SystemExit):
+            eb.make_shot("s-god", attempt, lambda path: eb.face_flags(fake, "model.task", path))
+        self.assertEqual(calls, [1])
+
+    def test_the_workflow_proves_the_face_check_before_any_generation(self):
+        text = (eb.REPO / ".github" / "workflows" / "episode.yml").read_text()
+        proof = text.find("lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4")
+        self.assertGreater(proof, 0)
+        self.assertLess(proof, text.find("episode_build.py generate"))
+        self.assertIn("FACE_CHECK_BLIND", text)
 
 
 def tone_wav(path, seconds, rate=24000):
@@ -241,6 +419,20 @@ class Lines(unittest.TestCase):
             with self.assertRaises(SystemExit) as err:
                 eb.lines_step(plan, work)
             self.assertIn("KEEPER_SHARE", str(err.exception))
+            # a talking line of 11.5 s is inside 2-12 s, but with the 0.35 s gap and the 0.6 s margin it needs a
+            # 12.45 s clip: refused here, before any Pavo clip is spent (review of #400)
+            sentences[0].update(start=0.3, end=11.8)
+            sentences[1].update(start=11.98, end=60.0)
+            sentences[2].update(start=60.18, end=100.0)
+            sentences[3].update(start=100.18, end=106.18)
+            tone_wav(work / "voice.wav", 110.0)
+            (work / "timeline.json").write_text(json.dumps({"sentences": sentences}))
+            with self.assertRaises(SystemExit) as err:
+                eb.lines_step(plan, work)
+            self.assertIn("TALK_LINE_TOO_LONG k-open 11.50 s", str(err.exception))
+            self.assertNotIn("KEEPER_AUDIO k-open", str(err.exception))
+            self.assertEqual(eb.talk_need(11.0, False), 11.0 + eb.LINE_GAP + eb.KEEPER_MARGIN)
+            self.assertEqual(eb.talk_need(6.0, True), 6.0 + eb.TAIL + eb.KEEPER_MARGIN)
         finally:
             shutil.rmtree(work)
 

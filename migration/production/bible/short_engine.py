@@ -10,7 +10,11 @@ second. Captions are burned large (about 7 % of the frame height) from the voice
 usage: short_engine.py PLAN.json OUT.mp4
 PLAN: {"voice": WAV, "timeline": timeline.json, "music": FLAC, "music_offset": s, "tail": s,
        "shots": [{"clip": MP4, "start": s, "end": s, "src_start": s, "speed": f?}, ...]}   shots tile [0, voice end + tail]
-       ("speed", optional: the planned slow-down factor 1-MAX_SLOW of a clip cut into several shots; else computed)
+       ("speed", optional: the planned slow-down factor 1-MAX_SLOW of a clip cut into several shots; else computed;
+        "talk", optional: {"start", "end"} of the line a talking clip carries - the Keeper or a character speaking -
+        which must sit on that line of the voice track, from the clip's 0 s at normal speed: talk_problems)
+The voice WAV holds every line in order, the spoken lines in their speakers' own voices; clips are muted (-an), so
+a talking clip's lips meet its line in the mix only through that alignment.
 """
 import json
 from pathlib import Path
@@ -52,6 +56,24 @@ def check_shots(shots, total):
         cursor = s["end"]
     if abs(cursor - total) > 0.05:
         problems.append(f"SHOTS_END_{round(cursor, 2)}_NOT_{round(total, 2)}")
+    return problems
+
+
+def talk_problems(shots, sentences):
+    """A talking shot (the Keeper, a character speaking its line; `talk` = its line's span in the voice track) plays
+    its clip from 0 s at normal speed starting exactly on its line's first word and runs past its last, and that span
+    is a line of the voice track, so the lips on screen meet the same words in the mix."""
+    problems = []
+    for i, s in enumerate(shots):
+        t = s.get("talk")
+        if not t:
+            continue
+        if (abs(s["start"] - t["start"]) > 1e-3 or s.get("src_start", 0.0) != 0.0 or s.get("speed", 1.0) != 1.0
+                or s["end"] + 1e-3 < t["end"]):
+            problems.append(f"TALK_NOT_ALIGNED {i}")
+        if (not any(abs(x["start"] - t["start"]) <= 0.05 for x in sentences)
+                or not any(abs(x["end"] - t["end"]) <= 0.05 for x in sentences)):
+            problems.append(f"TALK_NOT_ON_THE_VOICE {i}")
     return problems
 
 
@@ -116,7 +138,7 @@ def main(plan_path, out):
     timeline = json.loads(Path(plan["timeline"]).read_text())
     total = round(timeline["voice_seconds"] + plan.get("tail", 1.2), 3)
     shots = plan["shots"]
-    problems = check_shots(shots, total)
+    problems = check_shots(shots, total) + talk_problems(shots, timeline["sentences"])
     if problems:
         raise SystemExit("PLAN_REFUSED " + "; ".join(problems))
     with tempfile.TemporaryDirectory() as tmp:

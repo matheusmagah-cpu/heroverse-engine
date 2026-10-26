@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""plan_check.py: a Short's plan is refused before any voice or Pavo call when it breaks the Keeper + acted-scenes
-rules (DECISIONS.md 2026-10-26) or the part-6 Short rules."""
+"""plan_check.py: a Short's plan is refused before any voice or Pavo call when it breaks the Shorts v2 grammar
+(owner, 2026-10-26 after the mining: open on the conflict spoken, characters speak lip-synced, the Keeper only at the
+close, 170-179 s, the lesson at most a quarter) or the part-6 Short rules."""
 import copy
 import json
 from pathlib import Path
@@ -17,12 +18,17 @@ EXAMPLE = HERE / "plans" / "genesis-07-short.json"
 KEEPER_LOOK = "an elderly storyteller with a silver beard"
 EVE_LOOK = "a woman of about twenty-five with long black hair"
 CHARS = {
-    "keeper": {"status": "APPROVED", "look": KEEPER_LOOK, "refs": ["front"],
+    "keeper": {"status": "APPROVED", "look": KEEPER_LOOK, "refs": ["front"], "voice": "am_michael",
                "wardrobe": {"fire": "seated by a small campfire"}},
-    "eve": {"status": "APPROVED", "look": EVE_LOOK, "refs": ["full"]},
-    "adam": {"status": "DRAFT", "look": "a man of about thirty", "refs": []},
+    "eve": {"status": "APPROVED", "look": EVE_LOOK, "refs": ["full"], "voice": "af_heart"},
+    "adam": {"status": "DRAFT", "look": "a man of about thirty", "refs": [], "voice": "am_fenrir"},
+    "mute": {"status": "APPROVED", "look": "a quiet shepherd boy", "refs": ["front"]},
 }
 STYLE = "Painterly cinematic realism, cinema camera."
+STORM = (f"{STYLE} Extreme wide shot, slow push-in. Black storm clouds roll over the plain, lightning inside them. "
+         "Dusk, a hard wind. Ominous. No people, no text, no logos.")
+GOD_LINE = "The end of all flesh is come before me; for the earth is filled with violence through them."
+STORY = "Ten generations after Eden the earth is full of people and noise, and nobody looks up at the sky."   # 20
 
 
 def keeper(sid, lines):
@@ -31,7 +37,7 @@ def keeper(sid, lines):
                       "speaks to the camera. Night in the desert, firelight. Warm and grave."}
 
 
-def scene(sid, lines, chars=(), seconds=8, look=None, **extra):
+def scene(sid, lines, chars=(), seconds=12, look=None, **extra):
     who = look if look is not None else ", ".join({"eve": EVE_LOOK}.get(c, c) for c in chars) or "a crowd seen from behind"
     s = {"id": sid, "kind": "scene", "lines": lines, "seconds": seconds, "characters": list(chars),
          "prompt": f"{STYLE} Wide shot, slow tracking shot. {who} walks through the tents. Dusk, torchlight. Restless."}
@@ -41,21 +47,38 @@ def scene(sid, lines, chars=(), seconds=8, look=None, **extra):
     return s
 
 
+def god(sid, line=GOD_LINE, reference="Genesis 6:13 (KJV)", seconds=8, prompt=STORM, **extra):
+    s = {"id": sid, "kind": "scene", "speaker": "god", "line": line, "reference": reference, "seconds": seconds,
+         "characters": [], "prompt": prompt}
+    s.update(extra)
+    return s
+
+
+def speaker(sid, who="eve", line="Why do you hide from the voice in the garden?", look=EVE_LOOK, **extra):
+    s = {"id": sid, "kind": "scene", "speaker": who, "line": line, "characters": [who],
+         "prompt": f"{STYLE} Medium close-up, slow push-in. {who.title()}, {look}, turns and speaks to him, her lips "
+                   "moving clearly with every word. A garden at dusk, low gold light. Tense."}
+    s.update(extra)
+    return s
+
+
 def plan(shots=None, narration=None):
     narration = narration or [
-        {"kind": "story", "text": "There is a verse where God's heart breaks, and it is about us."},
-        {"kind": "story", "text": " ".join(["Ten generations after Eden the earth is full of people and noise."] * 3)},
+        {"kind": "story", "text": " ".join([STORY] * 4)},                                         # 0
         {"kind": "scripture", "reference": "Genesis 6:5 (KJV)", "text": "And God saw that the wickedness of man was "
          "great in the earth, and that every imagination of the thoughts of his heart was only evil continually."},
-        {"kind": "story", "text": " ".join(["Not some thoughts, every one, only evil, all the time, every day."] * 6)},
+        {"kind": "story", "text": " ".join([STORY] * 8)},                                         # 2
+        {"kind": "story", "text": " ".join([STORY] * 8)},                                         # 3
         {"kind": "insight", "text": "Notice the order. Grief comes before judgment. The flood is not the story of a "
-         "cold God, but of a wounded heart."},
-        {"kind": "cta", "text": "The full story is in the long video. Part eight tomorrow."},
+         "cold God, but of a wounded heart."},                                                    # 4
+        {"kind": "cta", "text": "The full story is in the long video. Part eight tomorrow."},     # 5
     ]
-    shots = shots or [keeper("k-open", [0]), scene("s-a", [1]), scene("s-b", [1]), scene("s-c", [2]),
-                      scene("s-d", [2], ["eve"]), scene("s-e", [3], seconds=10), scene("s-f", [3], seconds=10), scene("s-g", [3], seconds=10),
+    shots = shots or [god("g-open"), scene("s-a", [0]), scene("s-b", [0]), speaker("s-eve"),
+                      scene("s-c", [1], ["eve"]),
+                      scene("s-d", [2]), scene("s-e", [2]), scene("s-f", [2]), scene("s-g", [2], climax=True),
+                      scene("s-h", [3]), scene("s-i", [3]), scene("s-j", [3]), scene("s-k", [3]),
                       keeper("k-insight", [4]), keeper("k-close", [5])]
-    return {"version": "bible-plan-v1", "episode": "genesis-07-short", "part": 7, "aspect_ratio": "9:16",
+    return {"version": "bible-plan-v2", "episode": "genesis-07-short", "part": 7, "aspect_ratio": "9:16",
             "narration": narration, "shots": shots}
 
 
@@ -68,25 +91,237 @@ class Plan(unittest.TestCase):
         r = pc.check(plan(), CHARS)
         self.assertEqual(r["problems"], [])
         self.assertEqual(r["pending"], [])
-        self.assertTrue(62 <= r["estimate"]["seconds"] <= 90, r["estimate"])
+        self.assertTrue(170 <= r["estimate"]["seconds"] <= 179, r["estimate"])
+        self.assertEqual(r["estimate"]["spoken_lines"], 2)
 
     def test_the_genesis_7_example_passes_against_the_real_character_bible(self):
-        r = pc.check(json.loads(EXAMPLE.read_text()))
+        p = json.loads(EXAMPLE.read_text())
+        r = pc.check(p)
         self.assertEqual(r["problems"], [])
         keeper_status = pc.ch.registry()["keeper"]["status"]
         self.assertEqual(r["pending"], [] if keeper_status == "APPROVED" else r["pending"][:1])
+        # the owner's Genesis 7 rules: God's Genesis 6:13 line opens, the Keeper only for the insight and the close
+        self.assertEqual((p["shots"][0]["speaker"], p["shots"][0]["reference"]), ("god", "Genesis 6:13 (KJV)"))
+        self.assertTrue(p["shots"][0]["line"].startswith("The end of all flesh is come before me"))
+        self.assertNotIn("noah", {c for s in p["shots"] for c in s.get("characters", [])})
+        self.assertIn("Part eight tomorrow: Noah builds the ark", p["narration"][-1]["text"])
+        self.assertLessEqual(r["estimate"]["lesson_share"], 0.15)
+
+    def test_the_old_grammar_is_refused(self):
+        p = plan()
+        p["version"] = "bible-plan-v1"
+        self.assertIn("PLAN_VERSION", codes(pc.check(p, CHARS)))
+
+    def test_the_keeper_never_opens(self):
+        p = plan()
+        p["shots"][0] = keeper("k-open", [0])
+        p["shots"][1:3] = []
+        found = codes(pc.check(p, CHARS))
+        self.assertIn("KEEPER_OPENS", found)
+        self.assertIn("KEEPER_BEFORE_CLIMAX", found)
+
+    def test_the_first_shot_carries_a_spoken_line(self):
+        p = plan()
+        del p["shots"][0]
+        self.assertIn("OPEN_NOT_SPOKEN", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0:4] = [speaker("s-eve"), scene("s-a", [0]), scene("s-b", [0]), god("g-mid")]   # a character opens
+        self.assertEqual(pc.check(p, CHARS)["problems"], [])
+
+    def test_the_keeper_only_after_the_climax_and_only_for_the_lesson(self):
+        p = plan()
+        p["shots"][8].pop("climax")
+        p["shots"][-3]["climax"] = True                     # the climax after the Keeper's first shot is refused
+        p["shots"][-2], p["shots"][-3] = p["shots"][-3], p["shots"][-2]
+        self.assertIn("LINES_OUT_OF_ORDER", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][9:13] = [keeper("k-story", [3])]
+        found = codes(pc.check(p, CHARS))
+        self.assertIn("KEEPER_LINE_KIND", found)
+
+    def test_the_keeper_share_over_25_percent_is_refused(self):
+        narration = plan()["narration"]
+        narration[3] = {"kind": "insight", "text": " ".join(["Notice the order, grief comes before judgment."] * 3)}
+        narration.insert(4, {"kind": "insight", "text": " ".join(["Grief comes before the judgment of the flood."] * 3)})
+        narration.insert(5, {"kind": "insight", "text": " ".join(["The flood is the story of a wounded heart."] * 3)})
+        shots = plan()["shots"][:9] + [keeper("k-a", [3]), keeper("k-b", [4]), keeper("k-c", [5]),
+                                       keeper("k-insight", [6]), keeper("k-close", [7])]
+        found = codes(pc.check(plan(shots, narration), CHARS))
+        self.assertIn("KEEPER_SHARE", found)
+        self.assertIn("LESSON_SHARE", found)
+
+    def test_the_lesson_share_counts_insight_and_cta_lines_outside_the_keeper_too(self):
+        p = plan()
+        p["narration"][3] = {"kind": "insight", "text": p["narration"][3]["text"]}   # ~45 s of preaching over scenes
+        r = pc.check(p, CHARS)
+        self.assertIn("LESSON_SHARE", codes(r))
+        self.assertNotIn("KEEPER_SHARE", codes(r))
+
+    def test_a_missing_climax_or_a_landscape_climax_is_refused(self):
+        p = plan()
+        p["shots"][8].pop("climax")
+        self.assertIn("CLIMAX_MISSING", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][1] = scene("s-a", [0], establishing=True, climax=True, look="a vast city of tents")
+        self.assertIn("CLIMAX_NOT_ACTED", codes(pc.check(p, CHARS)))
+
+    def test_an_unknown_or_unapproved_speaker_is_refused(self):
+        for who, look, code in (("moses", "a man", "SPEAKER_UNKNOWN"), ("adam", "a man of about thirty",
+                                                                           "SPEAKER_NOT_APPROVED"),
+                                ("mute", "a quiet shepherd boy", "SPEAKER_NO_VOICE"),
+                                ("keeper", KEEPER_LOOK, "SPEAKER_KEEPER")):
+            p = plan()
+            p["shots"][3] = speaker("s-eve", who=who, look=look)
+            self.assertIn(code, codes(pc.check(p, CHARS)), who)
+
+    def test_a_speaker_must_be_in_the_shot_speak_and_take_its_length_from_the_line(self):
+        p = plan()
+        p["shots"][3] = speaker("s-eve", characters=[])
+        self.assertIn("SPEAKER_NOT_IN_SHOT", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", seconds=6)
+        self.assertIn("SPEAKER_SHOT_FIELDS", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3]["prompt"] = p["shots"][3]["prompt"].replace("speaks to", "looks at")
+        self.assertIn("SPEAKER_NOT_SPEAKING", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 5))   # 35 words
+        self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line="Why?")
+        self.assertIn("SPEAKER_LINE_TOO_SHORT", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3] = dict(speaker("s-eve"), lines=[0])
+        self.assertIn("SPEAKER_SHOT_KIND", codes(pc.check(p, CHARS)))
+
+    def test_a_misquoted_spoken_line_is_refused(self):
+        p = plan()
+        p["shots"][0]["line"] = GOD_LINE.replace("violence", "wickedness")
+        self.assertIn("KJV", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line="Hath God said, Ye shall not eat of every tree of the orchard?",
+                                reference="Genesis 3:1 (KJV)")
+        self.assertIn("KJV", codes(pc.check(p, CHARS)))
+        p["shots"][3]["line"] = "Hath God said, Ye shall not eat of every tree of the garden?"
+        self.assertNotIn("KJV", codes(pc.check(p, CHARS)))
+
+    def test_god_speaks_only_scripture_over_a_scene_with_no_one_in_it(self):
+        p = plan()
+        p["shots"][0].pop("reference")
+        self.assertIn("GOD_LINE_NOT_SCRIPTURE", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0]["prompt"] = STORM.replace("Black storm clouds roll over the plain", "An old man raises his face")
+        self.assertIn("GOD_SHOT_WITH_A_PERSON", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0]["figures"] = "anonymous"
+        self.assertIn("GOD_SHOT_WITH_A_PERSON", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0]["prompt"] = (f"{STYLE} Wide shot, slow push-in. A dry valley of stones. Dusk over the hills. "
+                                   "Quiet. No people, no text, no logos.")
+        self.assertIn("GOD_SHOT_NO_MEDIUM", codes(pc.check(p, CHARS)))
+
+    def test_a_person_written_around_the_word_list_is_still_refused_in_gods_shot(self):
+        """Review of #400: "an old bearded elder in a white robe lifts his staff" and "a winged angel of light"
+        passed, putting God's voice over a visible man (the clip is also face-checked in episode_build)."""
+        for person in ("An old bearded elder in a white robe lifts his staff against the storm",
+                       "A winged angel of light descends through the storm clouds",
+                       "A shepherd boy looks up at the lightning", "A king on a hill raises her hands to the sky"):
+            p = plan()
+            p["shots"][0]["prompt"] = STORM.replace("Black storm clouds roll over the plain", person)
+            self.assertIn("GOD_SHOT_WITH_A_PERSON", codes(pc.check(p, CHARS)), person)
+        self.assertEqual(pc.check(plan(), CHARS)["problems"], [])     # "No people" in the tail is not a person
+
+    def test_the_climax_is_acted_never_a_god_voice_over_sky(self):
+        """E92: genesis-07's only climax was s-judgment, God's voice over lightning on an empty plain, and the gate
+        let it through. The climax shows people: approved characters or anonymous figures."""
+        p = plan()
+        p["shots"][8].pop("climax")
+        p["shots"][0]["climax"] = True                         # God's voice-over storm
+        self.assertIn("CLIMAX_NOT_ACTED", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][8].pop("figures")
+        p["shots"][8]["establishing"] = False                  # a scene with no one in it
+        self.assertIn("CLIMAX_NOT_ACTED", " ".join(pc.check(p, CHARS)["problems"]))
+        p = plan()
+        p["shots"][8].pop("climax")
+        p["shots"][4]["climax"] = True                         # an approved character acting: accepted
+        self.assertNotIn("CLIMAX_NOT_ACTED", codes(pc.check(p, CHARS)))
+        g7 = json.loads(EXAMPLE.read_text())
+        climax = [s for s in g7["shots"] if s.get("climax")]
+        self.assertTrue(climax)
+        for s in climax:
+            self.assertNotEqual(s.get("speaker"), "god", s["id"])
+            self.assertTrue(s.get("characters") or s.get("figures") == "anonymous", s["id"])
+
+    def test_a_kjv_quote_without_a_reference_is_refused_and_is_not_our_words(self):
+        self.assertEqual(pc.kjv_quote("Hath God said, Ye shall not eat of every tree of the garden?")[0],
+                         "Genesis 3:1 (KJV)")
+        self.assertIsNone(pc.kjv_quote("Ten generations after Eden the earth is full of people and noise."))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line="Hath God said, Ye shall not eat of every tree of the garden?")
+        self.assertIn("KJV_UNREFERENCED", codes(pc.check(p, CHARS)))
+        verse = ("And God saw that the wickedness of man was great in the earth, and that every imagination of the "
+                 "thoughts of his heart was only evil continually.")
+        p = plan()
+        for k, n in ((0, 3), (2, 6), (3, 6)):                     # the "story" lines are the verse, unreferenced
+            p["narration"][k] = {"kind": "story", "text": " ".join([verse] * n)}
+        found = " ".join(pc.check(p, CHARS)["problems"])
+        self.assertIn("KJV_UNREFERENCED line 0", found)
+        self.assertIn("ORIGINAL_SHARE", found)                     # counted as Scripture, not our words
+        self.assertEqual([p for p in pc.check(json.loads(EXAMPLE.read_text()))["problems"]
+                          if p.startswith("KJV_UNREFERENCED")], [])
+
+    def test_a_reference_that_is_not_text_is_a_problem_not_a_crash(self):
+        p = plan()
+        p["narration"][1]["reference"] = 6
+        self.assertIn("REFERENCE_NOT_TEXT", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0]["reference"] = ["Genesis 6:13"]
+        self.assertIn("REFERENCE_NOT_TEXT", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][0]["reference"] = "Hezekiah 99:1"
+        self.assertIn("KJV", codes(pc.check(p, CHARS)))
+
+    def test_a_talking_line_must_leave_room_for_the_gap_and_margin_in_one_12_s_clip(self):
+        self.assertAlmostEqual(pc.TALK_MAX, 12.0 - 0.35 - 0.6)
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 3) +
+                                " Answer me now, my son.")   # 26 words
+        self.assertGreater(26 / pc.WPS_SLOWEST, pc.TALK_MAX)
+        self.assertLess(26 / pc.WPS_SLOWEST, 12.0)                 # passed before: under 12 s, but no room left
+        self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+
+    def test_the_voice_track_puts_each_spoken_line_where_its_shot_is(self):
+        items, carried = pc.sequence(plan())
+        self.assertEqual(items[0]["speaker"], "god")
+        self.assertEqual(items[0]["kind"], "scripture")
+        self.assertEqual([x.get("line") for x in items], [None, 0, None, 1, 2, 3, 4, 5])
+        self.assertEqual(items[2], {"kind": "story", "text": "Why do you hide from the voice in the garden?",
+                                    "speaker": "eve", "shot": "s-eve"})
+        self.assertEqual(carried[:5], [[0], [1], [1], [2], [3]])
+        runs = pc.groups(plan()["shots"], carried)
+        self.assertEqual([(a, b) for a, b, _ in runs][:4], [(0, 0), (1, 2), (3, 3), (4, 4)])
+
+    def test_the_length_from_part_7_is_170_to_179_s(self):
+        p = plan()
+        p["narration"][3]["text"] = " ".join([STORY] * 3)          # ~22 s shorter
+        self.assertIn("SHORT_LENGTH", " ".join(pc.check(p, CHARS)["problems"]))
+        p = plan()
+        p["narration"][3]["text"] = " ".join([STORY] * 10)         # ~15 s longer
+        p["shots"][9:13] += [scene("s-l", [3])]
+        self.assertIn("SHORT_LENGTH", " ".join(pc.check(p, CHARS)["problems"]))
 
     def test_an_unapproved_character_is_refused(self):
         p = plan()
-        p["shots"][4] = scene("s-d", [2], ["adam"], look="a man of about thirty")
+        p["shots"][4] = scene("s-c", [1], ["adam"], look="a man of about thirty")
         self.assertIn("CHARACTER_NOT_APPROVED", codes(pc.check(p, CHARS)))
 
     def test_a_look_that_is_not_word_for_word_is_refused(self):
         p = plan()
-        p["shots"][4] = scene("s-d", [2], ["eve"], look="a woman with long dark hair")
+        p["shots"][4] = scene("s-c", [1], ["eve"], look="a woman with long dark hair")
         self.assertIn("CHARACTER_LOOK_CHANGED", codes(pc.check(p, CHARS)))
         p = plan()
-        p["shots"][0]["prompt"] = p["shots"][0]["prompt"].replace("silver beard", "white beard")
+        p["shots"][-1]["prompt"] = p["shots"][-1]["prompt"].replace("silver beard", "white beard")
         self.assertIn("CHARACTER_LOOK_CHANGED", codes(pc.check(p, CHARS)))
 
     def test_a_keeper_line_over_12_seconds_is_refused(self):
@@ -100,28 +335,23 @@ class Plan(unittest.TestCase):
         self.assertLess(26 / pc.WPS_SLOWEST, pc.KEEPER_AUDIO[1])
         self.assertIn("KEEPER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
 
-    def test_the_keeper_share_over_25_percent_is_refused(self):
-        p = plan()
-        p["shots"][1:3] = [keeper("k-more", [1])]
-        self.assertIn("KEEPER_SHARE", codes(pc.check(p, CHARS)))
-
     def test_establishing_shots_are_held_short_and_at_most_15_percent(self):
         p = plan()
         for i in (1, 2):
             p["shots"][i] = scene(p["shots"][i]["id"], p["shots"][i]["lines"], establishing=True,
                                   look="a vast city of tents")
-        p["shots"][8:8] = [scene(f"s-x{k}", [3], establishing=True, look="a vast city of tents") for k in range(4)]
+        p["shots"][9:9] = [scene(f"s-x{k}", [2], establishing=True, look="a vast city of tents") for k in range(12)]
         found = codes(pc.check(p, CHARS))
         self.assertIn("ESTABLISHING_SHARE", found)
-        self.assertIn("ESTABLISHING_ONLY", found)   # line 1 over landscape alone
+        self.assertIn("ESTABLISHING_ONLY", found)   # line 0 over landscape alone
 
     def test_a_scene_without_people_must_be_marked(self):
         p = plan()
-        p["shots"][1] = scene("s-a", [1], look="a vast city of tents", figures=None)
+        p["shots"][1] = scene("s-a", [0], look="a vast city of tents", figures=None)
         del p["shots"][1]["figures"]
         self.assertIn("SCENE_WITHOUT_CHARACTERS", codes(pc.check(p, CHARS)))
         p = plan()
-        p["shots"][1] = scene("s-a", [1], look="a crowd of men")
+        p["shots"][1] = scene("s-a", [0], look="a crowd of men")
         self.assertIn("FIGURES_NOT_ANONYMOUS", codes(pc.check(p, CHARS)))
 
     def test_god_is_never_a_visible_figure(self):
@@ -132,30 +362,27 @@ class Plan(unittest.TestCase):
                        "the voice of the Lord carried by a strong wind over the plain", "a crowd of men walking"):
             self.assertIsNone(pc.god_problem(prompt), prompt)
         p = plan()
-        p["shots"][3]["prompt"] += " God stands above the city."
+        p["shots"][5]["prompt"] += " God stands above the city."
         self.assertIn("GOD_AS_A_FIGURE", codes(pc.check(p, CHARS)))
 
-    def test_the_keeper_opens_and_closes_and_never_acts(self):
-        p = plan()
-        p["shots"] = p["shots"][1:2] + [keeper("k-open", [0])] + p["shots"][2:]
-        self.assertIn("LINES_OUT_OF_ORDER", codes(pc.check(p, CHARS)))
-        p = plan()
-        p["shots"][0] = scene("s-open", [0])
-        self.assertIn("KEEPER_MUST_OPEN", codes(pc.check(p, CHARS)))
+    def test_the_keeper_closes_and_never_acts(self):
         p = plan()
         p["shots"][-1] = scene("s-close", [5])
         self.assertIn("KEEPER_MUST_CLOSE", codes(pc.check(p, CHARS)))
         p = plan()
-        p["shots"][3] = scene("s-c", [2], ["keeper"], look=KEEPER_LOOK)
+        p["shots"][5] = scene("s-d", [2], ["keeper"], look=KEEPER_LOOK)
         self.assertIn("KEEPER_IN_SCENE", codes(pc.check(p, CHARS)))
 
     def test_every_line_is_carried_in_order(self):
         p = plan()
-        del p["shots"][5:8]
+        del p["shots"][9:13]
         self.assertIn("LINES_OUT_OF_ORDER", codes(pc.check(p, CHARS)))
         p = plan()
-        p["shots"][1]["lines"] = [1, 3]
+        p["shots"][1]["lines"] = [0, 2]
         self.assertIn("SHOT_LINES", codes(pc.check(p, CHARS)))
+        p = plan()   # a spoken line between two shots of the same narration line would cut that line in two
+        p["shots"][2:2] = [speaker("s-eve2")]
+        self.assertIn("LINES_OUT_OF_ORDER", codes(pc.check(p, CHARS)))
 
     def test_scene_seconds_and_prompt_form(self):
         p = plan()
@@ -168,10 +395,10 @@ class Plan(unittest.TestCase):
 
     def test_a_misquoted_verse_and_the_short_rules(self):
         p = plan()
-        p["narration"][2]["text"] = p["narration"][2]["text"].replace("continually", "always")
+        p["narration"][1]["text"] = p["narration"][1]["text"].replace("continually", "always")
         p["narration"][5]["text"] = "Part eight tomorrow, see you there."
         found = " ".join(pc.check(p, CHARS)["problems"])
-        self.assertIn("KJV line 2", found)
+        self.assertIn("KJV line 1", found)
         self.assertIn("CTA_NOT_TO_THE_LONG", found)
 
     def test_a_draft_keeper_is_one_pending_row_not_a_crash(self):
@@ -188,7 +415,7 @@ class Plan(unittest.TestCase):
             ok.write_text(EXAMPLE.read_text())
             bad = Path(d, "bad.json")
             p = json.loads(EXAMPLE.read_text())
-            p["shots"][0]["kind"] = "scene"
+            p["shots"][-1]["kind"] = "scene"
             bad.write_text(json.dumps(p))
             run = lambda *a: subprocess.run([sys.executable, "-I", "-B", str(HERE / "plan_check.py"), *a],
                                             capture_output=True, text=True).returncode

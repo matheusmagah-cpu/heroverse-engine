@@ -743,6 +743,16 @@
     "file": "migration/ops/test_release_assets.py",
     "contains": "def test_which_finds_an_asset_past_the_first_hundred_of_a_full_release"
    }
+  },
+  {
+   "id": "E92",
+   "date": "2026-10-26",
+   "error": "The submitted genesis-07 v2 plan (PR #400) flagged as its only climax s-judgment: God's voice-over over lightning on an empty plain (speaker god, no characters, no figures). plan_check's CLIMAX_NOT_ACTED refused only the Keeper and establishing shots, so a landscape with a voice passed as the acted climax, against PROMPT_GUIDE and DECISIONS ('an acted scene, not a landscape'). Found by the independent review of #400.",
+   "fix": "CLIMAX_NOT_ACTED now requires people on screen (approved characters or anonymous figures) and refuses God's voice-over shot; genesis-07 keeps God's Genesis 6:7 as voice-over and makes the acted shot right after it (s-terror: the wicked crowd scattering, no central figure) the climax; the measured length stays inside 170-179 s.",
+   "antidote": {
+    "file": "migration/production/bible/test_plan_check.py",
+    "contains": "def test_the_climax_is_acted_never_a_god_voice_over_sky"
+   }
   }
  ]
 }

@@ -7,7 +7,8 @@ images/<id>.json with its public release asset; Claude reviews the sheet and onl
 
 problems(shots) refuses a shot that names a character which is not APPROVED, or whose prompt does not carry the
 character's look word for word. reference_urls(ids) gives the approved reference images an Agnes clip passes in
-reference mode (at most 5), so the model sees the same face every time.
+reference mode (at most 5), so the model sees the same face every time. voice(id) is the Kokoro voice a speaker's lines
+are synthesised with (owner, 2026-10-26: characters speak their own lines, lip-synced; God only as a voice).
 usage: characters.py check SHOTS_JSON      ([{"prompt": "...", "characters": ["eve"]}, ...]); exit 1 on a problem
 """
 import json
@@ -22,8 +23,28 @@ MAX_REFS = 5                      # Agnes Video 2.5 Flash reference mode
 REF_ORDER = ("front", "three-quarter", "full")
 
 
+GOD = "god"                       # a speaker, never a character: a voice over light, storm, wind or fire
+NARRATOR = "keeper"               # the Keeper speaks the narration (am_michael)
+# the English voices of the preserved Kokoro model (voices-v1.0.bin, sha256 bca610b8..., verify_public_voice_asset)
+KOKORO_VOICES = frozenset(
+    "af_alloy af_aoede af_bella af_heart af_jessica af_kore af_nicole af_nova af_river af_sarah af_sky am_adam am_echo "
+    "am_eric am_fenrir am_liam am_michael am_onyx am_puck am_santa bf_alice bf_emma bf_isabella bf_lily bm_daniel "
+    "bm_fable bm_george bm_lewis".split())
+
+
 def registry(path=HERE / "characters.json"):
     return json.loads(Path(path).read_text())["characters"]
+
+
+def voice(cid, chars=None, path=HERE / "characters.json"):
+    """The Kokoro voice a speaker's lines are synthesised with: {"voice_id", "speed"}, or None when it has none.
+    God's voice is the file's `god` entry (He is never a character); everyone else speaks at speed 1.0."""
+    if cid == GOD:
+        g = json.loads(Path(path).read_text())["god"]
+        return {"voice_id": g["voice"], "speed": g["speed"]}
+    chars = chars if chars is not None else registry(path)
+    v = (chars.get(cid) or {}).get("voice")
+    return {"voice_id": v, "speed": 1.0} if v else None
 
 
 def problems(shots, chars=None):
