@@ -19,8 +19,24 @@ import episode_build as eb  # noqa: E402
 import short_engine  # noqa: E402
 from client import PavoError  # noqa: E402
 
-EXAMPLE = json.loads((HERE / "plans" / "genesis-07-short.json").read_text())
 HAS_FFMPEG = shutil.which("ffmpeg") is not None
+
+
+# genesis-07-short.json as main had it before plan B (#413, commit 1c1ed79): the lip-synced Keeper. Run 40307414749
+# built its 30 scene and God clips from exactly these requests (its report.json: 30 of 30 prompts and seconds equal)
+TALKING_COMMIT = "1c1ed79"
+
+
+def talking_genesis_07():
+    out = subprocess.run(["git", "-C", str(HERE), "show",
+                          f"{TALKING_COMMIT}:migration/production/bible/plans/genesis-07-short.json"],
+                         capture_output=True, text=True, check=True).stdout
+    return json.loads(out)
+
+
+# the default mode (a talking, lip-synced Keeper) is tested on the plan main had before plan B; genesis-07 itself is
+# now the voice-over plan (VO_EXAMPLE)
+EXAMPLE = talking_genesis_07()
 
 
 def layout_for(plan, durations):
@@ -830,7 +846,7 @@ class LipsyncTool(unittest.TestCase):
             self.assertTrue((eb.REPO / "migration/evidence/pavo/20261026/keeper" / f).exists())
 
 
-VO_EXAMPLE = json.loads((HERE / "plans" / "genesis-07-short-vo.json").read_text())
+VO_EXAMPLE = json.loads((HERE / "plans" / "genesis-07-short.json").read_text())
 
 
 def vo_dialogue_plan():
@@ -880,7 +896,10 @@ class KeeperVoiceover(unittest.TestCase):
         p = vo_dialogue_plan()
         order = [s["id"] for _, s in eb.risk_order(p["shots"])]
         self.assertEqual(order, ["s-eve", "s-god", "k-close", "s-a"])      # a check that can fail: before the scenes
-        self.assertEqual(eb.attempts_for(p["shots"][-1]), eb.ATTEMPTS)
+        # 1 pass in 6 direct closed-mouth clips: 3 generations would lose the run; Pavo is free, so 6 like a talking shot
+        self.assertEqual(eb.attempts_for(p["shots"][-1]), eb.TALK_ATTEMPTS)
+        self.assertEqual(eb.attempts_for(p["shots"][1]), eb.ATTEMPTS)
+        self.assertTrue(all(eb.attempts_for(s) == eb.TALK_ATTEMPTS for s in VO_EXAMPLE["shots"] if s["kind"] == "keeper"))
 
     def test_the_layout_counts_his_share_and_writes_no_input_audio(self):
         p = vo_dialogue_plan()
@@ -998,11 +1017,14 @@ class StillMouthGate(unittest.TestCase):
         self.assertEqual((k["references"], k["audios"]), (["k-talk.jpg"], None))
         self.assertEqual(report["shots"]["k-close"]["attempts"][0]["still_mouth"]["opening_range"], 0.01)
 
-    def test_a_talking_mouth_is_regenerated_at_most_twice_then_the_run_stops(self):
-        eb.still_mouth_flags = lambda py, model, clip: (["MOUTH_TALKING"], {"still_mouth": {"opening_range": 0.09}})
+    def test_a_talking_mouth_is_regenerated_at_most_five_times_then_the_run_stops(self):
+        seen = []
+        eb.still_mouth_flags = lambda py, model, clip: (seen.append(clip) or ["MOUTH_TALKING"],
+                                                        {"still_mouth": {"opening_range": 0.09}})
         with self.assertRaises(SystemExit) as err:
-            self.generate(extra=2)
-        self.assertIn("SHOT_FAILED k-close after 3 generations: MOUTH_TALKING", str(err.exception))
+            self.generate(extra=eb.TALK_ATTEMPTS - 1)
+        self.assertIn(f"SHOT_FAILED k-close after {eb.TALK_ATTEMPTS} generations: MOUTH_TALKING", str(err.exception))
+        self.assertEqual(len(seen), eb.TALK_ATTEMPTS)
 
     def test_a_broken_still_mouth_check_stops_the_run_and_spends_no_regeneration(self):
         fake = self.work / "python"

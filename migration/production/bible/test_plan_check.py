@@ -527,7 +527,15 @@ class Plan(unittest.TestCase):
             self.assertEqual(run(str(bad)), 1)
 
 
-VO_PLAN = HERE / "plans" / "genesis-07-short-vo.json"
+# genesis-07-short.json as main had it before plan B (#413, commit 1c1ed79): the lip-synced Keeper. Run 40307414749
+# built its 30 scene and God clips from exactly these requests (its report.json: 30 of 30 prompts and seconds equal)
+TALKING_COMMIT = "1c1ed79"
+
+
+def talking_genesis_07():
+    return subprocess.run(["git", "-C", str(HERE), "show",
+                           f"{TALKING_COMMIT}:migration/production/bible/plans/genesis-07-short.json"],
+                          capture_output=True, text=True, check=True).stdout
 
 
 def keeper_vo(sid, lines, action="holds his head level and looks straight into the camera"):
@@ -656,10 +664,13 @@ class KeeperVoiceover(unittest.TestCase):
         p["shots"][-1]["voiceover"] = "yes"
         self.assertIn("VOICEOVER_FIELD", codes(pc.check(p, CHARS)))
 
-    def test_the_genesis_7_vo_variant_passes_and_keeps_every_scene_and_god_shot(self):
-        """The ready plan B for 27/10: the three Keeper shots switched to voice-over, their lines unchanged; every scene
-        and God shot byte-identical, so a resume from run 40307414749 keeps its 30 clips (E93)."""
-        base, vo = json.loads(EXAMPLE.read_text()), json.loads(VO_PLAN.read_text())
+    def test_genesis_7_is_the_voiceover_plan_and_keeps_every_scene_and_god_shot(self):
+        """Plan B for 27/10 (the lip-synced Keeper passed 1 in 45, #419): genesis-07's three Keeper shots switched to
+        voice-over, their lines unchanged; every scene and God shot byte-identical to the plan run 40307414749 built
+        from, so its resume keeps the 30 clips (E93)."""
+        old_text = talking_genesis_07()
+        base, vo = json.loads(old_text), json.loads(EXAMPLE.read_text())
+        self.assertFalse(any(s.get("voiceover") for s in base["shots"]))
         r = pc.check(vo)
         self.assertEqual((r["problems"], r["pending"]), ([], []))
         self.assertEqual(vo["narration"], base["narration"])
@@ -671,7 +682,8 @@ class KeeperVoiceover(unittest.TestCase):
             else:
                 self.assertEqual(json.dumps(b, sort_keys=True), json.dumps(a, sort_keys=True))
         self.assertEqual(sum(1 for s in vo["shots"] if s["kind"] == "scene"), 30)
-        text = VO_PLAN.read_text()
+        text = EXAMPLE.read_text()
+        self.assertFalse((HERE / "plans" / "genesis-07-short-vo.json").exists())   # one genesis-07 plan, dispatchable
         for a in base["shots"]:
             if a["kind"] == "scene":    # byte for byte, as the file is written
                 self.assertIn(json.dumps(a, indent=1, ensure_ascii=False).replace("\n", "\n  "), text)
