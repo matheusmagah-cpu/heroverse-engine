@@ -1,0 +1,1247 @@
+{
+ "date": "2026-10-26",
+ "question": "does Pavo's audio binding and lip sync degrade with line or clip length (~>= 8-9 s)? (failed build run 40307414749, k-insight 8.42 s line in a 9 s clip, 0 of 6)",
+ "method": "direct Pavo calls (0 credits, fresh exact quote each) with episode_build.request()'s exact prompt for each shot, reference storyteller-ref.jpg (ch-keeper-talk, the build's talking reference), seconds = ceil(line); the WAVs rebuilt locally with pilot_render.py voice + episode_build.py lines on plans/genesis-07-short.json (Kokoro v1.0 fp16, pinned sha256); halves cut at the sentence boundary from the same voice.wav and retimed by plan_check.talk_retime/episode_build.retime; every clip judged by lipsync_check.py (thresholds unchanged: audio >= 0.85, mouth >= 0.45, speak/pause >= 1.5, face >= 0.8; face_landmarker sha pinned). 34 generations (16 for length, 12 for H2, 6 for H3).",
+ "lines": {
+  "a-insight": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight.wav",
+   "text": "Notice the order. Grief comes before judgment. The flood is not the story of a cold God, but of a wounded heart.",
+   "wav_s": 8.445,
+   "atempo": 1.0,
+   "clip_s": 9,
+   "lead_s": 0.1,
+   "tail_s": 0.21,
+   "prompt": "k-insight"
+  },
+  "b-insight-a": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight-a.wav",
+   "text": "Notice the order. Grief comes before judgment.",
+   "words": 7,
+   "speech_s": 3.849,
+   "wav_s": 3.55,
+   "atempo": 1.0842,
+   "clip_s": 4,
+   "lead_s": 0.09,
+   "tail_s": 0.36,
+   "prompt": "k-insight",
+   "plan_check": "KEEPER_LINE_TOO_SHORT (7 words, under the 12-word rule; ~2.5-3.1 s estimated) and, as a narration line, SHORT INSIGHT_MISSING (no insight line of >= 20 words is left)"
+  },
+  "b-insight-b": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight-b.wav",
+   "text": "The flood is not the story of a cold God, but of a wounded heart.",
+   "words": 15,
+   "wav_s": 4.416,
+   "atempo": 1.0,
+   "clip_s": 5,
+   "lead_s": 0.1,
+   "tail_s": 0.21,
+   "prompt": "k-insight"
+  },
+  "c-question": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-question.wav",
+   "speech_s": 4.34,
+   "wav_s": 4.55,
+   "atempo": 0.9538,
+   "clip_s": 5,
+   "lead_s": 0.14,
+   "tail_s": 0.33,
+   "prompt": "k-question"
+  },
+  "c-close": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-close.wav",
+   "speech_s": 6.334,
+   "wav_s": 6.55,
+   "atempo": 0.967,
+   "clip_s": 7,
+   "lead_s": 0.12,
+   "tail_s": 0.32,
+   "prompt": "k-close"
+  },
+  "ctl-line01": {
+   "wav": "migration/evidence/pavo/20261026/keeper/line-01.wav",
+   "wav_s": 6.385,
+   "atempo": 1.0,
+   "clip_s": 7,
+   "lead_s": 0.4,
+   "tail_s": 0.75,
+   "prompt": "k-insight (control: the E95/E98 tests' WAV under genesis-07's k-insight prompt)"
+  },
+  "d-question": {
+   "lead_s": 0.4,
+   "tail_s": 0.86,
+   "words_native_s": 3.9,
+   "atempo": 0.9091,
+   "wav_s": 5.55,
+   "clip_s": 6,
+   "pad_s": 0.45,
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-question-d.wav",
+   "arm": "k-question, 0.40 s lead + 0.75 s tail (raised to 0.86 s out of the 4/5 s gap band), words retimed x1.10 to 5.55 s, 6 s clip",
+   "prompt": "k-question"
+  },
+  "e-question": {
+   "lead_s": 0.4,
+   "tail_s": 0.3,
+   "words_native_s": 3.9,
+   "atempo": 1.0,
+   "wav_s": 4.6,
+   "clip_s": 5,
+   "pad_s": 0.4,
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-question-e.wav",
+   "arm": "k-question, 0.40 s lead only (its own 0.30 s tail), 4.60 s in a 5 s clip",
+   "prompt": "k-question"
+  },
+  "f-question": {
+   "lead_s": 0.14,
+   "tail_s": 0.75,
+   "words_native_s": 3.9,
+   "atempo": 1.0656,
+   "wav_s": 4.55,
+   "clip_s": 5,
+   "pad_s": 0.45,
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-question-f.wav",
+   "arm": "k-question, its own 0.14 s lead + 0.75 s tail, words retimed x0.94 to 4.55 s, 5 s clip",
+   "prompt": "k-question"
+  },
+  "d-insight": {
+   "lead_s": 0.4,
+   "tail_s": 0.75,
+   "words_native_s": 8.13,
+   "atempo": 0.9679,
+   "wav_s": 9.55,
+   "clip_s": 10,
+   "pad_s": 0.45,
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-insight-d.wav",
+   "arm": "k-insight, 0.40 s lead + 0.75 s tail, words retimed x1.03 to 9.55 s, 10 s clip",
+   "prompt": "k-insight"
+  },
+  "g-question": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/h3-g.wav",
+   "arm": "k-question voiced again by pilot_render at Kokoro speed 0.95 with line-01's layout (LEAD_IN 0.3 s, sentence gap, pause_after 0.2 s), tail extended to line-01's 0.615 s pad; k-question prompt",
+   "wav_s": 5.385,
+   "clip_s": 6,
+   "pad_s": 0.615
+  },
+  "h-line01-speed1": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/h3-h.wav",
+   "arm": "line-01's own text (genesis-06's Keeper line) voiced again by today's pilot_render at speed 1.0 with the same layout, tail extended to the 0.615 s pad; k-insight prompt (as the control)",
+   "wav_s": 6.385,
+   "clip_s": 7,
+   "pad_s": 0.615
+  },
+  "r1-question": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-question.wav",
+   "clip_s": 5,
+   "reference": "migration/evidence/pavo/20261026/keeper/talk-ref-r1.jpg",
+   "arm": "k-question as built (4.55 s, 5 s clip, its prompt) with R1 as the only reference"
+  },
+  "r2-question": {
+   "wav": "migration/evidence/pavo/20261026/keeper/genesis07/k-question.wav",
+   "clip_s": 5,
+   "reference": "migration/evidence/pavo/20261026/keeper/talk-ref-r2.jpg",
+   "arm": "k-question as built with R2 as the only reference"
+  }
+ },
+ "generations": [
+  {
+   "arm": "a-insight",
+   "conversation_id": "373070160690678848",
+   "quoted_credits": 0,
+   "audio": 0.591,
+   "audio_lag_ms": 0,
+   "mouth": 0.238,
+   "mouth_lag_ms": 250,
+   "speak_to_pause": 1.28,
+   "face": 0.92,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "b-insight-a",
+   "conversation_id": "373070275183195904",
+   "quoted_credits": 0,
+   "audio": 0.246,
+   "audio_lag_ms": -160,
+   "mouth": 0.564,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.57,
+   "face": 0.96,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "AUDIO_OFFSET"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "b-insight-b",
+   "conversation_id": "373070465100960384",
+   "quoted_credits": 0,
+   "audio": 0.823,
+   "audio_lag_ms": 0,
+   "mouth": 0.099,
+   "mouth_lag_ms": 42,
+   "speak_to_pause": 1.06,
+   "face": 0.92,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "c-question",
+   "conversation_id": "373070517257422336",
+   "quoted_credits": 0,
+   "audio": 0.606,
+   "audio_lag_ms": 0,
+   "mouth": 0.334,
+   "mouth_lag_ms": -83,
+   "speak_to_pause": 1.56,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "c-close",
+   "conversation_id": "373070576904116800",
+   "quoted_credits": 0,
+   "audio": 0.321,
+   "audio_lag_ms": 0,
+   "mouth": 0.383,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.52,
+   "face": 0.9,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "a-insight",
+   "conversation_id": "373073532260977728",
+   "quoted_credits": 0,
+   "audio": 0.867,
+   "audio_lag_ms": 0,
+   "mouth": 0.335,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.44,
+   "face": 0.89,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.96
+  },
+  {
+   "arm": "b-insight-a",
+   "conversation_id": "373073590847016000",
+   "quoted_credits": 0,
+   "audio": 0.656,
+   "audio_lag_ms": 0,
+   "mouth": 0.437,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.48,
+   "face": 0.92,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "b-insight-b",
+   "conversation_id": "373073653086327040",
+   "quoted_credits": 0,
+   "audio": 0.845,
+   "audio_lag_ms": 0,
+   "mouth": 0.287,
+   "mouth_lag_ms": 250,
+   "speak_to_pause": 1.31,
+   "face": 0.94,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "c-question",
+   "conversation_id": "373073709282178816",
+   "quoted_credits": 0,
+   "audio": 0.777,
+   "audio_lag_ms": 0,
+   "mouth": 0.359,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.62,
+   "face": 0.98,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.64
+  },
+  {
+   "arm": "c-close",
+   "conversation_id": "373073787320832256",
+   "quoted_credits": 0,
+   "audio": 0.953,
+   "audio_lag_ms": 0,
+   "mouth": 0.468,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.85,
+   "face": 0.98,
+   "flags": [],
+   "pass": true,
+   "pavo_sound_after_our_line_s": 0.52
+  },
+  {
+   "arm": "a-insight",
+   "conversation_id": "373076337466542720",
+   "quoted_credits": 0,
+   "audio": 0.275,
+   "audio_lag_ms": 0,
+   "mouth": 0.331,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.58,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.92
+  },
+  {
+   "arm": "b-insight-a",
+   "conversation_id": "373076404273493760",
+   "quoted_credits": 0,
+   "audio": 0.068,
+   "audio_lag_ms": -40,
+   "mouth": 0.337,
+   "mouth_lag_ms": -83,
+   "speak_to_pause": 1.18,
+   "face": 0.94,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "b-insight-b",
+   "conversation_id": "373076495855554816",
+   "quoted_credits": 0,
+   "audio": 0.55,
+   "audio_lag_ms": 0,
+   "mouth": 0.152,
+   "mouth_lag_ms": 250,
+   "speak_to_pause": 0.93,
+   "face": 0.98,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.8
+  },
+  {
+   "arm": "c-question",
+   "conversation_id": "373076549463521024",
+   "quoted_credits": 0,
+   "audio": 0.984,
+   "audio_lag_ms": 0,
+   "mouth": 0.246,
+   "mouth_lag_ms": 208,
+   "speak_to_pause": 1.23,
+   "face": 0.95,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.88
+  },
+  {
+   "arm": "c-close",
+   "conversation_id": "373076616940893952",
+   "quoted_credits": 0,
+   "audio": 0.369,
+   "audio_lag_ms": 0,
+   "mouth": 0.329,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.52,
+   "face": 0.96,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false,
+   "pavo_sound_after_our_line_s": 0.6
+  },
+  {
+   "arm": "ctl-line01",
+   "conversation_id": "373076751750579712",
+   "quoted_credits": 0,
+   "audio": 0.992,
+   "audio_lag_ms": 0,
+   "mouth": 0.685,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 3.24,
+   "face": 0.95,
+   "flags": [],
+   "pass": true,
+   "pavo_sound_after_our_line_s": 0.04
+  },
+  {
+   "arm": "d-question",
+   "conversation_id": "373080917365569280",
+   "quoted_credits": 0,
+   "audio": 0.818,
+   "audio_lag_ms": 0,
+   "mouth": 0.508,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.97,
+   "face": 0.9,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "e-question",
+   "conversation_id": "373081024962049792",
+   "quoted_credits": 0,
+   "audio": 0.845,
+   "audio_lag_ms": 0,
+   "mouth": 0.324,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.4,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "f-question",
+   "conversation_id": "373081128011904768",
+   "quoted_credits": 0,
+   "audio": 0.545,
+   "audio_lag_ms": 0,
+   "mouth": 0.312,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.37,
+   "face": 0.99,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "d-insight",
+   "conversation_id": "373081196097720960",
+   "quoted_credits": 0,
+   "audio": 0.992,
+   "audio_lag_ms": 0,
+   "mouth": 0.387,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.62,
+   "face": 0.91,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "d-question",
+   "conversation_id": "373081384639828224",
+   "quoted_credits": 0,
+   "audio": 0.724,
+   "audio_lag_ms": 0,
+   "mouth": 0.352,
+   "mouth_lag_ms": -83,
+   "speak_to_pause": 1.43,
+   "face": 0.92,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "e-question",
+   "conversation_id": "373081450138628160",
+   "quoted_credits": 0,
+   "audio": 0.931,
+   "audio_lag_ms": 0,
+   "mouth": 0.325,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.33,
+   "face": 0.98,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "f-question",
+   "conversation_id": "373081505461497920",
+   "quoted_credits": 0,
+   "audio": 0.792,
+   "audio_lag_ms": 0,
+   "mouth": 0.462,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.63,
+   "face": 1.0,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "d-insight",
+   "conversation_id": "373081567361054464",
+   "quoted_credits": 0,
+   "audio": 0.989,
+   "audio_lag_ms": 0,
+   "mouth": 0.392,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.73,
+   "face": 0.94,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "d-question",
+   "conversation_id": "373084604548826624",
+   "quoted_credits": 0,
+   "audio": 0.535,
+   "audio_lag_ms": 0,
+   "mouth": 0.288,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.33,
+   "face": 0.93,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "e-question",
+   "conversation_id": "373084677227755264",
+   "quoted_credits": 0,
+   "audio": 0.836,
+   "audio_lag_ms": 0,
+   "mouth": 0.427,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.58,
+   "face": 0.99,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "f-question",
+   "conversation_id": "373084738435204608",
+   "quoted_credits": 0,
+   "audio": 0.698,
+   "audio_lag_ms": 0,
+   "mouth": 0.417,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.74,
+   "face": 0.96,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "d-insight",
+   "conversation_id": "373084801999892544",
+   "quoted_credits": 0,
+   "audio": 0.991,
+   "audio_lag_ms": 0,
+   "mouth": 0.386,
+   "mouth_lag_ms": 250,
+   "speak_to_pause": 1.6,
+   "face": 0.87,
+   "flags": [
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "g-question",
+   "conversation_id": "373088576818664064",
+   "quoted_credits": 0,
+   "audio": 0.771,
+   "audio_lag_ms": 0,
+   "mouth": 0.355,
+   "mouth_lag_ms": 208,
+   "speak_to_pause": 1.36,
+   "face": 0.96,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "g-question",
+   "conversation_id": "373088634494859008",
+   "quoted_credits": 0,
+   "audio": 0.728,
+   "audio_lag_ms": 0,
+   "mouth": 0.341,
+   "mouth_lag_ms": 208,
+   "speak_to_pause": 1.49,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "g-question",
+   "conversation_id": "373088699250719424",
+   "quoted_credits": 0,
+   "audio": 0.777,
+   "audio_lag_ms": 0,
+   "mouth": 0.351,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.36,
+   "face": 0.88,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "h-line01-speed1",
+   "conversation_id": "373088760189160512",
+   "quoted_credits": 0,
+   "audio": 0.851,
+   "audio_lag_ms": 0,
+   "mouth": 0.488,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 2.12,
+   "face": 0.97,
+   "flags": [],
+   "pass": true
+  },
+  {
+   "arm": "h-line01-speed1",
+   "conversation_id": "373088817366495296",
+   "quoted_credits": 0,
+   "audio": 0.82,
+   "audio_lag_ms": 0,
+   "mouth": 0.413,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.75,
+   "face": 0.95,
+   "flags": [
+    "AUDIO_NOT_OUR_LINE",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "h-line01-speed1",
+   "conversation_id": "373088880058746368",
+   "quoted_credits": 0,
+   "audio": 0.909,
+   "audio_lag_ms": 0,
+   "mouth": 0.524,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.91,
+   "face": 0.91,
+   "flags": [],
+   "pass": true
+  },
+  {
+   "arm": "r1-question",
+   "conversation_id": "373093862497585792",
+   "quoted_credits": 0,
+   "audio": 0.892,
+   "audio_lag_ms": 0,
+   "mouth": 0.265,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.28,
+   "face": 0.45,
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "r1-question",
+   "conversation_id": "373093922048361984",
+   "quoted_credits": 0,
+   "audio": 0.977,
+   "audio_lag_ms": 0,
+   "mouth": 0.278,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.33,
+   "face": 0.43,
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "r1-question",
+   "conversation_id": "373093995402573568",
+   "quoted_credits": 0,
+   "audio": 0.86,
+   "audio_lag_ms": 0,
+   "mouth": 0.285,
+   "mouth_lag_ms": -42,
+   "speak_to_pause": 1.14,
+   "face": 0.59,
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "r2-question",
+   "conversation_id": "373096447199754944",
+   "quoted_credits": 0,
+   "audio": 0.888,
+   "audio_lag_ms": 0,
+   "mouth": 0.34,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.53,
+   "face": 0.49,
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "r2-question",
+   "conversation_id": "373096510865017472",
+   "quoted_credits": 0,
+   "audio": 0.922,
+   "audio_lag_ms": 0,
+   "mouth": 0.397,
+   "mouth_lag_ms": 0,
+   "speak_to_pause": 1.44,
+   "face": 0.69,
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  },
+  {
+   "arm": "r2-question",
+   "conversation_id": "373096585455995968",
+   "quoted_credits": 0,
+   "audio": 0.909,
+   "audio_lag_ms": 0,
+   "mouth": 0.266,
+   "mouth_lag_ms": 208,
+   "speak_to_pause": 1.1,
+   "face": 0.57,
+   "flags": [
+    "FACE_NOT_FOUND",
+    "MOUTH_NOT_IN_SYNC",
+    "MOUTH_OPEN_IN_PAUSES"
+   ],
+   "pass": false
+  }
+ ],
+ "summary": {
+  "a-insight": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.591,
+    0.867,
+    0.275
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.238,
+    0.335,
+    0.331
+   ]
+  },
+  "b-insight-a": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.246,
+    0.656,
+    0.068
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.564,
+    0.437,
+    0.337
+   ]
+  },
+  "b-insight-b": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.823,
+    0.845,
+    0.55
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.099,
+    0.287,
+    0.152
+   ]
+  },
+  "c-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.606,
+    0.777,
+    0.984
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.334,
+    0.359,
+    0.246
+   ]
+  },
+  "c-close": {
+   "generations": 3,
+   "passed": 1,
+   "audio": [
+    0.321,
+    0.953,
+    0.369
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.383,
+    0.468,
+    0.329
+   ]
+  },
+  "ctl-line01": {
+   "generations": 1,
+   "passed": 1,
+   "audio": [
+    0.992
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.685
+   ]
+  },
+  "d-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.818,
+    0.724,
+    0.535
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.508,
+    0.352,
+    0.288
+   ]
+  },
+  "e-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.845,
+    0.931,
+    0.836
+   ],
+   "audio_ok": 1,
+   "mouth": [
+    0.324,
+    0.325,
+    0.427
+   ]
+  },
+  "f-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.545,
+    0.792,
+    0.698
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.312,
+    0.462,
+    0.417
+   ]
+  },
+  "d-insight": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.992,
+    0.989,
+    0.991
+   ],
+   "audio_ok": 3,
+   "mouth": [
+    0.387,
+    0.392,
+    0.386
+   ]
+  },
+  "g-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.771,
+    0.728,
+    0.777
+   ],
+   "audio_ok": 0,
+   "mouth": [
+    0.355,
+    0.341,
+    0.351
+   ]
+  },
+  "h-line01-speed1": {
+   "generations": 3,
+   "passed": 2,
+   "audio": [
+    0.851,
+    0.82,
+    0.909
+   ],
+   "audio_ok": 2,
+   "mouth": [
+    0.488,
+    0.413,
+    0.524
+   ]
+  },
+  "r1-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.892,
+    0.977,
+    0.86
+   ],
+   "audio_ok": 3,
+   "mouth": [
+    0.265,
+    0.278,
+    0.285
+   ],
+   "face": [
+    0.45,
+    0.43,
+    0.59
+   ]
+  },
+  "r2-question": {
+   "generations": 3,
+   "passed": 0,
+   "audio": [
+    0.888,
+    0.922,
+    0.909
+   ],
+   "audio_ok": 3,
+   "mouth": [
+    0.34,
+    0.397,
+    0.266
+   ],
+   "face": [
+    0.49,
+    0.69,
+    0.57
+   ]
+  }
+ },
+ "failed_build_40307414749": {
+  "line_s": 8.42,
+  "clip_s": 9,
+  "audio": [
+   0.731,
+   0.486,
+   0.813,
+   0.884,
+   0.68,
+   0.458
+  ],
+  "mouth": [
+   0.417,
+   0.377,
+   0.272,
+   0.271,
+   0.306,
+   0.359
+  ],
+  "passed": 0
+ },
+ "conclusions": [
+  "length is NOT the cause: the built genesis-07 lines failed at every length, 1 pass in 15 (k-close 6.55 s once); 3.55 s, 4.42 s and 4.55 s lines did no better than the 8.45 s one (audio 0.07-0.98, mouth 0.10-0.47); the halves of the split were the worst (0 of 6)",
+  "the same prompt, reference and a 7 s clip with line-01.wav passed at once with the best measures yet (audio 0.992, mouth 0.685, speak/pause 3.24): the service, the prompt (E98 pose) and the reference are fine today; what differs is the input WAV",
+  "line-01.wav (the WAV of every passing direct test, E95/E98) has 0.40 s of silence before the first word and 0.75 s after the last (5.24 s of speech in 6.385 s); every WAV episode_build lines writes is cut at the first and last word of its sentences, 0.09-0.14 s of lead and 0.21-0.36 s of tail",
+  "in every failing clip Pavo's soundtrack goes on 0.5-1.0 s after our last word up to the end of the clip (the control 0.04 s, but the passing calibration clip keeper-lipsync.mp4 0.96 s too, so that alone does not separate pass from fail); in several failing clips the line is also shifted or stretched (best fit x0.81-0.94 or 0.8-1.0 s off), which never happened with line-01.wav",
+  "retiming is not the cause either: the unretimed k-insight and k-insight-b failed like the retimed k-question, k-close and k-insight-a",
+  "E95's pad window (0.25-0.65 s from the end of the WAV to the end of the clip) was measured only on line-01.wav, whose own 0.75 s tail and 0.40 s lead were part of what passed: the rule holds on the WAV length, but the words inside it need their silence too (hypothesis H2: tested below, it fails)"
+ ],
+ "next_test": "for the owner: every lever tried today (length, split, silences, voice speed, words, reference) leaves genesis-07's Keeper lines at 1 of 45 against line-01 at 7 of 14. Options: (a) publish genesis-07 with the Keeper close as a voice-over over a non-talking Keeper shot (no lipsync check, like God's voice-over shots: a plan_check / episode_build change and an owner decision); (b) a talking reference with a larger face (a true close-up generated for it) since both new references lost the face in a third to a half of the frames; (c) a learned sync measure (SyncNet-style), an owner gate decision",
+ "changed": "nothing in the engine or the plan: length refuted (16), H2 fails (12), H3 speed not the cause (6), H4 no word property separates (0), H5 no reference passes (6); 40 generations, 0 credits",
+ "h2": {
+  "question": "do the words need silence around them, as in line-01.wav (0.40 s before, 0.75 s after)? Built from the native line trimmed to its words (-35 dB), silence added, the words retimed by talk_retime(words, gaps=lead+tail) so the WAV is N - 0.45 s (the E95 pad); rule set beforehand: the fix only if (d) passes at least 2 of 3 on each line",
+  "verdict": "H2 FAILS: 0 of 12 passed; (d) 0 of 3 on k-question and 0 of 3 on k-insight. Nothing changed in the engine or the plan",
+  "findings": [
+   "(d) on k-insight kept our audio every time (0.992, 0.989, 0.991; unpadded 0.275-0.867 here and 0.458-0.884 in the build), but the lips stayed at 0.39 in all three (>= 0.45 needed): the silence fixed the binding of the long line and not the lips",
+   "on k-question no arm kept the audio reliably: (d) 0.818, 0.724, 0.535; (e) 0.845, 0.931, 0.836; (f) 0.545, 0.792, 0.698; lips 0.29-0.51",
+   "together with the control (line-01.wav: audio 0.992, lips 0.685 under the same prompt and reference, and 10 of 11 audio >= 0.85 in the E95/E98 tests), something else in line-01.wav makes the lips follow: probably the line itself (genesis-06's Keeper line voiced at Kokoro speed 0.95, where the build voices at 1.0) or its words"
+  ],
+  "next_test": "H3, line-01.wav against the genesis-07 lines with everything else equal: (g) k-question voiced at speed 0.95 with line-01's silences; (h) line-01's own text voiced again by today's pilot_render path at speed 1.0 with its silences; 3 generations each, against the control's 2 of 2. If (g) passes, the fix is the Keeper voice speed (characters.json voice / VOICE) with the silences; if (h) fails, the voice path itself changed since #393"
+ },
+ "h3": {
+  "question": "is it the Keeper's voice speed (line-01 was voiced at 0.95, the build voices at 1.0) or the line itself? Rule set beforehand: the speed fix only if (g) passes at least 2 of 3",
+  "rebuild_check": "pilot_render voice on line-01's text at 0.95 rebuilds line-01.wav (6.385 s, sample correlation 0.989): it is genesis-06's Keeper line \"Genesis five reads like a list of funerals. But one name breaks the pattern.\"",
+  "verdict": "the speed is not the cause: (g) 0 of 3 (audio 0.73-0.78, lips 0.34-0.36). The voice path is fine: (h), line-01's text at speed 1.0, passed 2 of 3. What separates pass from fail is the line itself (its words), not its length, its silences, its retime or its voice speed. Nothing changed",
+  "next_test": "H4 (proposal): find the property of the words. First offline, no generation: syllable rate, the share of open vowels, and the lip-closing consonants (b, m, p) per second of each line, against each line's pass rate so far (line-01 4 of 5 today and 4 of 10 on E98; genesis-07's Keeper lines 1 of 27). Then 3 generations each on 2 rewrites of k-question chosen by that property, against line-01 as the control"
+ },
+ "measurement": {
+  "question": "k-insight with the silences (d): audio 0.99 three times, mouth 0.39 three times. Lips really out of sync (a generation problem) or a landmark misreading of a bearded, hooded face (a measurement problem)?",
+  "method": "lipsync_check's own functions (audio_match, lip_opening, mouth_sync), unchanged: the per-frame lip opening plotted against the clip's speech envelope; mouth crops every 4th frame with the measured inner-lip points 13/14 drawn on them; full frames at 4 fps; the control and calibration clips for comparison",
+  "numbers": {
+   "d-insight 373081196097720960": {
+    "mouth": 0.387,
+    "inside_speech": 0.283,
+    "smoothed_3_frames": 0.394,
+    "speak_to_pause": 1.62,
+    "face": 0.91
+   },
+   "d-insight 373081567361054464": {
+    "mouth": 0.392,
+    "inside_speech": 0.256,
+    "smoothed_3_frames": 0.394,
+    "speak_to_pause": 1.73,
+    "face": 0.94
+   },
+   "d-insight 373084801999892544": {
+    "mouth": 0.386,
+    "inside_speech": 0.224,
+    "smoothed_3_frames": 0.376,
+    "speak_to_pause": 1.6,
+    "face": 0.87
+   },
+   "control line-01 373076751750579712": {
+    "mouth": 0.685,
+    "inside_speech": 0.625,
+    "smoothed_3_frames": 0.694,
+    "speak_to_pause": 3.24,
+    "face": 0.95
+   },
+   "calibration keeper-lipsync.mp4": {
+    "mouth": 0.541,
+    "inside_speech": 0.522,
+    "smoothed_3_frames": 0.551,
+    "speak_to_pause": 2.06,
+    "face": 0.93
+   }
+  },
+  "verdict": "a generation problem, not a measurement one. The landmarks sit on the inner lips in every crop where a face is found (the beard and hood do not move them), and smoothing changes nothing (0.376-0.394). The lips really move off the words: open, teeth showing, through the 0.4 s of silence before the first word; the widest openings of the clip (~6.8 s and ~8.4 s) fall where the voice is quiet; inside the speech the lips correlate 0.22-0.28 with it, against 0.63 for the control, whose mouth closes in every pause and opens on the syllables. Same medium shot in all of them, no cut",
+  "measurement_part": "small: frames with no face found (3-13 %, filled with the mean opening) and a smile baseline with the teeth showing; neither explains 0.39 against 0.69",
+  "if_the_owner_wants_a_measurement_change_anyway": "each option is a gate change for the owner, not proposed here as the fix: (1) judge the mouth only inside the speech and interpolate frames with no face instead of the mean; (2) a learned audio-visual sync score (SyncNet-style confidence and offset, open source, CPU, no spending) beside the landmark correlation, calibrated on the clips already judged here; (3) per-word windows, the lips opening within +-2 frames of each word onset. On these three clips (1) gives 0.22-0.28, lower than today's 0.39, so it would not pass them; (2) and (3) are untested. None of them justifies lowering MOUTH_CORR_MIN without new calibration evidence",
+  "files": "migration/evidence/pavo/20261026/keeper/genesis07/mouth/ (plots, mouth sheets, full-frame sheets of the d-insight clips and the control)"
+ },
+ "h4_offline": {
+  "sample": "every talking line with a lipsync record since the E95 binding (storyteller-ref reference, bound prompt): line-01 (genesis-06's Keeper line: calibration, E95, E98 tests and today's control + (h)) and genesis-07's Keeper lines (runs 40297987571 and 40307414749 and every direct test here). Genesis-01 to 06 were built before lip-synced talking clips existed, so they have no record; run 40285879529 predates the binding and is left out. Properties from espeak IPA (the voice venv's phonemizer) and the WAV as sent (speech span and pauses >= 150 ms at -35 dB)",
+  "lines": [
+   {
+    "line": "line-01 (genesis-06 Keeper)",
+    "pass": 7,
+    "of": 14,
+    "rate": 0.5,
+    "words": 14,
+    "syllables": 19,
+    "speech_s": 5.23,
+    "syll_per_s": 3.63,
+    "open_vowel_share": 0.37,
+    "bmp_per_s": 0.76,
+    "bmp": 4,
+    "pauses": 1,
+    "sentences": 2,
+    "first_onset_s": 0.4,
+    "question": false,
+    "ipa": "dʒɛnᵻsɪs faɪv ɹiːdz laɪk ɐ lɪst ʌv fjuːnɚɹəlz bʌt wʌn neɪm bɹeɪks ðə pætɚn"
+   },
+   {
+    "line": "g07 k-insight",
+    "pass": 0,
+    "of": 15,
+    "rate": 0.0,
+    "words": 22,
+    "syllables": 28,
+    "speech_s": 8.13,
+    "syll_per_s": 3.44,
+    "open_vowel_share": 0.36,
+    "bmp_per_s": 0.49,
+    "bmp": 4,
+    "pauses": 3,
+    "sentences": 3,
+    "first_onset_s": 0.1,
+    "question": false,
+    "ipa": "noʊɾɪs ðɪ ɔːɹdɚ ɡɹiːf kʌmz bᵻfɔːɹ dʒʌdʒmənt ðə flʌd ɪz nɑːt ðə stɔːɹi əvə koʊld ɡɑːd bʌt əvə wuːndᵻd hɑːɹt"
+   },
+   {
+    "line": "g07 k-question",
+    "pass": 0,
+    "of": 15,
+    "rate": 0.0,
+    "words": 13,
+    "syllables": 16,
+    "speech_s": 4.08,
+    "syll_per_s": 3.92,
+    "open_vowel_share": 0.31,
+    "bmp_per_s": 0.74,
+    "bmp": 3,
+    "pauses": 1,
+    "sentences": 2,
+    "first_onset_s": 0.14,
+    "question": true,
+    "ipa": "wʊd juː hæv kɛpt wɔːkɪŋ ɐɡɛnst ðə kɹaʊd tɛl miː ɪnðə kɑːmɛnts"
+   },
+   {
+    "line": "g07 k-close",
+    "pass": 1,
+    "of": 3,
+    "rate": 0.33,
+    "words": 15,
+    "syllables": 19,
+    "speech_s": 6.11,
+    "syll_per_s": 3.11,
+    "open_vowel_share": 0.26,
+    "bmp_per_s": 0.49,
+    "bmp": 3,
+    "pauses": 3,
+    "sentences": 3,
+    "first_onset_s": 0.12,
+    "question": false,
+    "ipa": "ðə fʊl stɔːɹi ɪz ɪnðə lɔŋ vɪdɪoʊ pɑːɹt eɪt təmɑːɹoʊ noʊʌ bɪldz ðɪ ɑːɹk"
+   },
+   {
+    "line": "g07 k-insight half 1",
+    "pass": 0,
+    "of": 3,
+    "rate": 0.0,
+    "words": 7,
+    "syllables": 11,
+    "speech_s": 3.1,
+    "syll_per_s": 3.55,
+    "open_vowel_share": 0.36,
+    "bmp_per_s": 0.97,
+    "bmp": 3,
+    "pauses": 1,
+    "sentences": 2,
+    "first_onset_s": 0.09,
+    "question": false,
+    "ipa": "noʊɾɪs ðɪ ɔːɹdɚ ɡɹiːf kʌmz bᵻfɔːɹ dʒʌdʒmənt"
+   },
+   {
+    "line": "g07 k-insight half 2",
+    "pass": 0,
+    "of": 3,
+    "rate": 0.0,
+    "words": 15,
+    "syllables": 17,
+    "speech_s": 4.1,
+    "syll_per_s": 4.15,
+    "open_vowel_share": 0.35,
+    "bmp_per_s": 0.24,
+    "bmp": 1,
+    "pauses": 1,
+    "sentences": 1,
+    "first_onset_s": 0.1,
+    "question": false,
+    "ipa": "ðə flʌd ɪz nɑːt ðə stɔːɹi əvə koʊld ɡɑːd bʌt əvə wuːndᵻd hɑːɹt"
+   }
+  ],
+  "verdict": "NOTHING SEPARATES THE LINES. With one passing text (line-01, 7 of 14) against five failing ones (1 of 39), every property of line-01 falls inside the failing lines' range: syllables/s 3.63 (failing 3.11-4.15), open-vowel share 0.37 (0.26-0.36), b/m/p per s 0.76 (0.24-0.97), pauses 1 (1-3), sentences 2 (1-3). Only the first word's onset separates (0.40 s against 0.09-0.14 s), and it was already tested causally and refuted: lead silence alone 0 of 3 (H2 e), with the tail 0 of 6 (H2 d), with the whole line-01 layout at speed 0.95 0 of 3 (H3 g). No rewrite can be chosen from these properties, so no generation was made and nothing changed",
+  "confound": "the one passing text is also where the talking reference came from: storyteller-ref.jpg is a speaking frame of the calibration clip that line-01 itself drove (characters.json ch-keeper-talk, E95). The gap between line-01 (50 %) and every genesis-07 line (3 %) may come from that pairing rather than from the words. Not tested here",
+  "next_test": "H5 (proposal, not run): the reference, not the line. 3 generations of k-question with a Keeper talking reference taken from a frame of a passing clip of ANOTHER line (none exists yet), or a neutral mouth-slightly-open frame of the approved Keeper, against line-01 with the same reference as the control. If k-question then passes like line-01, the fix is a reference not tied to one line"
+ },
+ "h5": {
+  "question": "is the talking reference (storyteller-ref.jpg, a speaking frame of line-01's own clip) what ties the passes to line-01?",
+  "references": {
+   "R1": {
+    "path": "migration/evidence/pavo/20261026/keeper/talk-ref-r1.jpg",
+    "sha256": "484bc2a0d9df90bfb8db7737bdd2eee9854618da918bdcdea29989428440a10d",
+    "source": "frame 32 (1.333 s) of e-question clip 373081024962049792 (driven by k-question, not line-01), chosen among 425 landmarked frames of today's k-question/k-insight clips as the sharpest frontal one with the mouth slightly open: face found, opening 0.032, yaw 0.024, roll 0.052"
+   },
+   "R2": {
+    "path": "migration/evidence/pavo/20261026/keeper/talk-ref-r2.jpg",
+    "sha256": "a5080a42ef81ef3e227a9ac04f83b504380a63a78274ca42dd50e597af18ea72",
+    "source": "the approved ch-keeper-front re-framed to a medium close-up (crop 568x1011 at 100,8, scaled to 720x1280): face found (379 px high against 275 px), yaw 0.085, mouth closed (opening 0.005); the only other approved Keeper image"
+   }
+  },
+  "verdict": "neither reference passes: R1 0 of 3, R2 0 of 3, so nothing is implemented and ch-keeper-talk stays storyteller-ref.jpg. Both bound the audio every time (R1 0.892, 0.977, 0.860; R2 0.888, 0.922, 0.909: 6 of 6 >= 0.85, against 1 of 3 for k-question with storyteller-ref), but the face was found in only 43-69 % of the frames (>= 80 % needed) and the lips stayed at 0.27-0.40. The reference changes the binding of the audio; it does not by itself make the lips follow a genesis-07 line",
+  "not_run": "the line-01 control with R1 (the rule ran it only if R1 passed 2 of 3)",
+  "budget": "6 generations (H5 limit); 40 in all today, 0 credits"
+ }
+}
