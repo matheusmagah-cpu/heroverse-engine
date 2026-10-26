@@ -282,14 +282,22 @@ class Plan(unittest.TestCase):
         p["shots"][0]["reference"] = "Hezekiah 99:1"
         self.assertIn("KJV", codes(pc.check(p, CHARS)))
 
-    def test_a_talking_line_must_leave_room_for_the_gap_and_margin_in_one_12_s_clip(self):
-        self.assertAlmostEqual(pc.TALK_MAX, 12.0 - 0.35 - 0.6)
+    def test_a_talking_line_fits_one_clip_pavo_keeps_its_audio_in(self):
+        """E95: a talking clip is ceil(speech) s (4-12) with the speech 0.25-0.65 s shorter; the gap or the tail is a
+        held frame, so the ceiling is 12 - 0.45 s and the floor a 4 s clip within the 10 % retime."""
+        self.assertAlmostEqual(pc.TALK_MAX, 12.0 - 0.45)
+        self.assertAlmostEqual(pc.KEEPER_LAST_MAX, pc.TALK_MAX)
+        self.assertAlmostEqual(pc.TALK_MIN, 3.55 / 1.1)
+        self.assertEqual((pc.TALK_CLIP, pc.TALK_PAD, pc.TALK_RETIME_MAX, pc.TALK_HOLD_MAX),
+                         ((4, 12), (0.25, 0.65), 0.10, 1.3))
         p = plan()
         p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 3) +
-                                " Answer me now, my son.")   # 26 words
+                                " Answer me now, my son.")   # 26 words: 11.56 s at the slowest pace
         self.assertGreater(26 / pc.WPS_SLOWEST, pc.TALK_MAX)
-        self.assertLess(26 / pc.WPS_SLOWEST, 12.0)                 # passed before: under 12 s, but no room left
         self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line="Why do you hide?")   # 4 words: 1.5 s, no 4 s clip within 10 %
+        self.assertIn("SPEAKER_LINE_TOO_SHORT", codes(pc.check(p, CHARS)))
 
     def test_the_voice_track_puts_each_spoken_line_where_its_shot_is(self):
         items, carried = pc.sequence(plan())
@@ -328,12 +336,15 @@ class Plan(unittest.TestCase):
         p = plan()
         p["narration"][4]["text"] = " ".join(["Notice the order, grief comes before judgment."] * 4)   # 28 words
         self.assertIn("KEEPER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
-        # the closing clip also holds the tail: 10.2 s at most
+        # the closing clip: its tail is a held frame (E95), so the same 11.55 s ceiling
         p = plan()
         p["narration"][5]["text"] = ("The full story is in the long video on the channel, and part eight comes tomorrow. "
-                                     "Noah builds the ark, so come and see it there.")   # 26 words: ~11.6 s
+                                     "Noah builds the ark, so come and see it there.")   # 26 words: ~11.56 s
         self.assertLess(26 / pc.WPS_SLOWEST, pc.KEEPER_AUDIO[1])
         self.assertIn("KEEPER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+        p["narration"][5]["text"] = ("The full story is in the long video on the channel, and part eight comes tomorrow. "
+                                     "Noah builds the ark, come and see it.")   # 24 words: 10.7 s, refused at 10.2 before
+        self.assertNotIn("KEEPER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
 
     def test_establishing_shots_are_held_short_and_at_most_15_percent(self):
         p = plan()

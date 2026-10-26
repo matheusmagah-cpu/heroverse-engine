@@ -773,6 +773,16 @@
     "file": "migration/production/bible/test_episode_build.py",
     "contains": "def test_a_failed_shot_keeps_each_refused_generation_and_its_measures_in_the_report"
    }
+  },
+  {
+   "id": "E95",
+   "date": "2026-10-26",
+   "error": "genesis-07 run 40285879529 refused k-insight three times (AUDIO_NOT_OUR_LINE, FACE_NOT_FOUND, MOUTH_NOT_IN_SYNC). Measured with direct Pavo calls on the Keeper's line-01.wav (6.385 s, evidence/pavo/20261026/keeper-audio-binding.json): Pavo keeps our input audio only when the clip asked for is at most ~0.65 s longer than the speech (7 s: 0.80-0.90; 8 s: 0.36; 10 s: 0.03; padding the WAV with silence to 10 s: 0.33), and episode_build asked for line + gap/tail + 0.6 s margin (10 s for 8.47 s); the plan prompt did not bind the reference and the audio (\"speaks to the camera\": audio 0.105 even at 7 s); and the approved mouth-closed, tightly framed front reference broke the lip tracking (lips -0.043, face 0.57) where the speaking frame of his own calibration clip passed (0.578, 0.98).",
+   "fix": "A talking clip is ceil(speech) seconds (4-12) with the speech 0.25-0.65 s shorter: lines_step retimes a line that misses it to N - 0.45 s with atempo (pitch kept, <= +-10 %, else TALK_LINE_RETIME_OVER) before the layout, so the track, captions, input audio and lips check share the retimed words; the compose holds the clip's last frame (<= 1.3 s, tpad clone) for the gap or tail; request() binds the prompt (\"Image 1 is the narrator\", \"speaks the words of the audio clip, his lips moving in sync with the voice\") and sends the speaker's `talk_refs` speaking frame first (the Keeper: storyteller-ref.jpg); plan_check's talking line is 3.23-11.55 s.",
+   "antidote": {
+    "file": "migration/production/bible/test_episode_build.py",
+    "contains": "def test_a_talking_line_is_retimed_into_a_clip_pavo_keeps_its_audio_in"
+   }
   }
  ]
 }
