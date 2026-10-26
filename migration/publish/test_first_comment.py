@@ -44,6 +44,8 @@ class FakeSession:
             return R(200, {"items": [{"id": pv.CHANNEL}]})
         if url.endswith("playlists"):
             return R(200, {"items": []})
+        if url.endswith("captions"):  # E107: our track, once inserted, is listed as serving
+            return R(200, {"items": getattr(self, "caption_items", [])})
         if url.endswith("commentThreads"):
             return R(200, {"items": self.existing})
         return R(200, {"items": [{"snippet": {"channelId": pv.CHANNEL, "title": "T"},
@@ -55,6 +57,10 @@ class FakeSession:
             return R(200, {}, {"Location": "https://upload/session"})
         if url.endswith("playlists"):
             return R(200, {"id": "PL1"})
+        if url.endswith("captions"):
+            self.caption_items = [{"id": "CAP1", "snippet": {"language": "en", "name": "English", "trackKind": "standard",
+                                                             "isDraft": False, "status": "serving"}}]
+            return R(200, self.caption_items[0])
         if url.endswith("commentThreads"):
             self.comment_bodies.append((params, kw.get("json")))
             return self.comment_answer or R(200, {"id": "Ugz-comment-1"})

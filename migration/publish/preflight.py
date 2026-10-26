@@ -12,9 +12,21 @@ from pathlib import Path
 import struct
 import sys
 
-LONG_UNITS = 2100   # videos.insert 1600 + captions.insert 400 + thumbnail, playlist, verify
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import captions  # noqa: E402
+
+# videos.insert 1600 + captions.insert 400 + thumbnail, playlist, verify, and the caption check after the insert
+# (E107: captions.list at 50 units, at most 1 + captions.WAIT_CALLS times)
+LONG_UNITS = 2100 + 50 * (1 + captions.WAIT_CALLS)
 SHORT_UNITS = 1650
 DAY_UNITS = 10000
+
+
+def caption_problems(pilot_dir):
+    """E107: the exact SRT publish_video will upload, validated strictly against the video's length."""
+    man = json.loads((Path(pilot_dir) / "out" / "manifest.json").read_text())
+    text = captions.srt(man.get("sentences") or [])
+    return [f"CAPTIONS_SRT {p}" for p in captions.problems(text.encode("utf-8"), man.get("output_seconds"))]
 
 
 def when(s):
@@ -89,6 +101,8 @@ def check(pilot_dir, thumbnail, publish_at=None, now=None):
     sentences = man.get("sentences") or []
     if not sentences or any(not s.get("text") or s["end"] <= s["start"] for s in sentences):
         problems.append("CAPTIONS_TIMELINE (missing or invalid sentences)")
+    else:
+        problems += caption_problems(d)
     sched_path = d / "schedule.json"
     sched = json.loads(sched_path.read_text()) if sched_path.exists() else {}
     if publish_at is None:  # not given: the schedule's time; "" means publish now (a late approval)
