@@ -123,7 +123,7 @@ Produce the master and package, retain provenance, and deliver the frozen techni
 - `episode_build` generates the shots that can fail first: talking, then God's voice-over, then scenes (`risk_order`).
 - A failed build is never dispatched again without new evidence and a fix merged. A resume (`resume_run`) keeps every clip already made.
 - An engine PR is reviewed before merge, not after.
-- Actions minutes stay within the budget (7000 / 30 days). A repeated build is the first thing to cut.
+- Actions minutes cost nothing: the engine repository is public, and standard GitHub-hosted runners are free for public repositories (owner, 2026-10-26: it stays public; E102). The daily report (`ops/minutes.py`) lists minutes per workflow as a speed and wall-clock measure only. A repeated build is still the first thing to cut, because it delays the work.
 
 ### Shorts are a production delivery, with their own review
 

@@ -41,10 +41,15 @@ class Register(unittest.TestCase):
 
     def test_apt_installs_cannot_hang(self):
         # E55: voice-sample.yml hung 30 min on the hosted apt mirror; these workflows bound apt with timeouts
-        for name in ('pr-checks.yml', 'voice-sample.yml'):
-            text = (ROOT / '.github/workflows' / name).read_text()
-            for line in re.findall(r'.*apt-get .*(?:update|install).*', text):
-                self.assertIn('timeout ', line, f'{name}: {line.strip()}')
+        # E102: they and render_pilot.sh install through migration/ci/apt_install.sh, which bounds every command
+        shared = (ROOT / 'migration/ci/apt_install.sh').read_text()
+        self.assertIn('mirror+file:/etc/apt/apt-mirrors.txt#https://archive.ubuntu.com/ubuntu/', shared)
+        self.assertEqual(len(re.findall(r'.*apt-get .*(?:update|install).*', shared)), 2)
+        for path in ('.github/workflows/pr-checks.yml', '.github/workflows/voice-sample.yml', 'migration/ci/render_pilot.sh'):
+            text = (ROOT / path).read_text()
+            self.assertIn('apt_install.sh', text, path)
+            for line in re.findall(r'.*apt-get .*(?:update|install).*', text) + re.findall(r'.*apt-get .*(?:update|install).*', shared):
+                self.assertIn('timeout ', line, f'{path}: {line.strip()}')
 
     def test_approval_checks_the_owner_floor(self):
         # E65: a 9.0 review would be approved and then refused at publication, again and again
