@@ -74,6 +74,7 @@ sys.path.insert(0, str(ROOT / "migration" / "publish"))
 import characters as ch  # noqa: E402
 import kjv_check  # noqa: E402
 import publish_episode  # noqa: E402
+from voice_pace import VOICE_PACE  # noqa: E402  (one measured table for the Short and the long)
 
 VERSION = "bible-plan-v2"
 KINDS = ("story", "scripture", "insight", "cta")
@@ -85,8 +86,11 @@ RATIOS = ("9:16",)                   # Shorts only
 # 2.30-2.98; on the Genesis 7 v2 plan (2026-10-26, measured locally with the preserved model) 2.18-3.63 a line, 2.75
 # over the whole track, God's am_onyx at speed 0.9 at the same pace as the narrator. Estimates use 2.75 (the 170-179 s
 # band is narrow: the measured length decides, episode_build lines); the talking-clip ceilings use the slowest.
+# Every other voice (a character's line, God's) at its own measured pace, VOICE_PACE, slowed by the same SLOW_RATIO:
+# Eve speaks 3.73 words a second, so at 2.75 a 12-word line of hers passed here and died at the build.
 WPS = 2.75
 WPS_SLOWEST = 2.25
+SLOW_RATIO = WPS_SLOWEST / WPS       # the slowest pace, as a share of the normal one
 LINE_GAP = 0.35                      # silence between lines (episode_build.LINE_GAP)
 TAIL = 1.2                           # short_engine tail after the last word
 KEEPER_AUDIO = (2.0, 12.0)           # Flash input audio, per request
@@ -147,6 +151,13 @@ def words(text):
 
 def estimate_seconds(text, wps=WPS):
     return words(text) / wps
+
+
+def pace(item):
+    """Words a second of the voice that speaks this line: the narration (the Keeper's) at WPS, a speaker's line at
+    its voice's measured pace (VOICE_PACE; WPS until measured, and a talking line is then VOICE_PACE_UNMEASURED)."""
+    who = item.get("speaker")
+    return WPS if who in (None, ch.NARRATOR) else VOICE_PACE.get(who, WPS)
 
 
 def _plain(text):
@@ -353,6 +364,9 @@ def _speaker_problems(i, s, chars, span, span_slowest):
         out.append(f"SPEAKER_NOT_APPROVED shot {i} {sid}: {who} ({c.get('status')})")
     if not ch.voice(who, chars):
         out.append(f"SPEAKER_NO_VOICE shot {i} {sid}: {who} (characters.json `voice`)")
+    elif who not in VOICE_PACE:
+        out.append(f"VOICE_PACE_UNMEASURED shot {i} {sid}: {who} (measure its Kokoro voice into voice_pace.py before "
+                   "its first talking line)")
     if who not in (s.get("characters") or []):
         out.append(f"SPEAKER_NOT_IN_SHOT shot {i} {sid}: {who} (in `characters`, its look in the prompt)")
     if s.get("seconds") is not None:
@@ -508,7 +522,7 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
         problems.append(f"LINES_NOT_CARRIED from line {expect}")
 
     items, carried = sequence(plan)
-    est = [estimate_seconds(x["text"]) for x in items]
+    est = [words(x["text"]) / pace(x) for x in items]
     total = sum(est) + LINE_GAP * (len(items) - 1) + TAIL
     # a line that quotes the KJV is Scripture for the >= 40 % share of our own words, whatever its kind says
     problems += [f"SHORT {p}" for p in publish_episode.short_problems(
@@ -542,10 +556,9 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
         idx = carried[i]
-        span_words = " ".join(items[k]["text"] for k in idx)
         gaps = LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
-        slowest = words(span_words) / WPS_SLOWEST + gaps
+        slowest = sum(est[k] for k in idx) / SLOW_RATIO + gaps
         problems += talk_reach_problems(i, s, span, slowest, gaps)
         if s["kind"] == "keeper":
             keeper_used = True

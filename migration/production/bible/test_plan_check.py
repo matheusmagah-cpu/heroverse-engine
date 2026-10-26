@@ -55,9 +55,11 @@ def god(sid, line=GOD_LINE, reference="Genesis 6:13 (KJV)", seconds=8, prompt=ST
     return s
 
 
-# 12 words: 4.36-5.33 s from the normal to the slowest pace, all of it reachable (a 10-word line crosses the
-# 3.94-4.14 s band no clip reaches within the retime: TALK_LINE_UNREACHABLE, review of #412)
-SPEAKER_LINE = "Why do you hide from the voice of the Lord in the garden?"
+# 17 words at Eve's measured 3.73 words a second: 4.56-5.57 s from the normal to the slowest pace, all of it
+# reachable (15 words cross the 3.94-4.14 s band no clip reaches within the retime: TALK_LINE_UNREACHABLE, review of
+# #412; 12 words are under TALK_MIN)
+SPEAKER_LINE = "Why do you hide from the voice of the Lord in the garden this night, my son?"
+EVE_SLOWEST = pc.VOICE_PACE["eve"] * pc.SLOW_RATIO
 
 
 def speaker(sid, who="eve", line=SPEAKER_LINE, look=EVE_LOOK, **extra):
@@ -205,7 +207,7 @@ class Plan(unittest.TestCase):
         p["shots"][3]["prompt"] = p["shots"][3]["prompt"].replace("speaks to", "looks at")
         self.assertIn("SPEAKER_NOT_SPEAKING", codes(pc.check(p, CHARS)))
         p = plan()
-        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 5))   # 35 words
+        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 6))   # 42 words
         self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
         p = plan()
         p["shots"][3] = speaker("s-eve", line="Why?")
@@ -311,9 +313,9 @@ class Plan(unittest.TestCase):
         self.assertEqual((pc.TALK_CLIP, pc.TALK_PAD, pc.TALK_RETIME_MAX, pc.TALK_HOLD_MAX),
                          ((4, 12), (0.25, 0.65), 0.10, 1.3))
         p = plan()
-        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 3) +
-                                " Answer me now, my son.")   # 26 words: 11.56 s at the slowest pace
-        self.assertGreater(26 / pc.WPS_SLOWEST, pc.TALK_LINE_MAX)
+        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 5) +
+                                " Answer me.")   # 37 words: 12.1 s at Eve's slowest pace
+        self.assertGreater(37 / EVE_SLOWEST, pc.TALK_LINE_MAX)
         self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
         p = plan()
         p["shots"][3] = speaker("s-eve", line="Why do you hide?")   # 4 words: 1.5 s, no 4 s clip within 10 %
@@ -330,6 +332,40 @@ class Plan(unittest.TestCase):
         self.assertAlmostEqual(stretch, 11.55 / 11.7, places=4)
         self.assertEqual(pc.talk_retime(11.55)[0], 11.55)
 
+    def test_a_characters_line_is_timed_at_its_own_voices_measured_pace(self):
+        """Review of #418 (arc-1 voice measurement): every line was estimated at WPS 2.75, a character's too; Kokoro speaks Eve at 3.73 words a second, so a
+        12-word line of hers estimated 4.36 s, measured ~3.2 s (under TALK_MIN) and died at the build after the Pavo
+        generations were spent. One measured table (voice_pace.py) times both the Short and the long."""
+        import long_plan_check as lc
+        import voice_pace
+        self.assertIs(pc.VOICE_PACE, voice_pace.VOICE_PACE)
+        self.assertIs(lc.VOICE_PACE, voice_pace.VOICE_PACE)
+        self.assertEqual(pc.pace({"kind": "story", "text": "x"}), pc.WPS)          # the narrator keeps WPS
+        self.assertEqual(pc.pace({"kind": "story", "text": "x", "speaker": "eve"}), voice_pace.VOICE_PACE["eve"])
+        old = "Why do you hide from the voice of the Lord this night?"               # 12 words: 4.36 s at WPS
+        self.assertGreater(pc.words(old) / pc.WPS, pc.TALK_MIN)
+        self.assertLess(pc.words(old) / voice_pace.VOICE_PACE["eve"], pc.TALK_MIN)
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=old)
+        self.assertIn("SPEAKER_LINE_TOO_SHORT", codes(pc.check(p, CHARS)))
+        # a talking voice nobody measured is refused before its first line is voiced
+        chars = dict(CHARS, serpent={"status": "APPROVED", "look": "a serpent", "refs": ["full"], "voice": "bm_fable"})
+        p = plan()
+        p["shots"][3] = speaker("s-eve", who="serpent", look="a serpent")
+        self.assertIn("VOICE_PACE_UNMEASURED", codes(pc.check(p, chars)))
+
+    def test_each_measured_pace_is_of_the_voice_the_speaker_still_has(self):
+        """A pace belongs to a Kokoro voice: when characters.json gives a speaker another voice, measure it again."""
+        import voice_pace
+        reg = pc.ch.registry()
+        god = json.loads((pc.ch.HERE / "characters.json").read_text())["god"]
+        for who, voice in voice_pace.MEASURED_WITH.items():
+            have = (god["voice"], god["speed"]) if who == pc.ch.GOD else (reg[who]["voice"], 1.0)
+            self.assertEqual(have, voice, who)
+        self.assertEqual(set(voice_pace.MEASURED_WITH), set(voice_pace.VOICE_PACE))
+        for who in ("noah", "scoffer"):
+            self.assertIn(who, voice_pace.VOICE_PACE)
+
     def test_a_talking_line_no_clip_reaches_within_the_retime_is_refused_at_plan_time(self):
         """Review of #408: 3.944-4.136 s needs -11.25 % into a 4 s clip or +13.75 % into a 5 s one, over the 10 %
         retime, so the build refused it (TALK_LINE_RETIME_OVER) after plan_check had passed it."""
@@ -337,8 +373,8 @@ class Plan(unittest.TestCase):
             self.assertIsNone(pc.talk_retime(speech), speech)
         for speech, target in ((3.94, 3.55), (4.14, 4.55), (3.3, 3.55), (5.2, 5.55)):
             self.assertAlmostEqual(pc.talk_retime(speech)[0], target, places=3, msg=speech)
-        line = "Why do you hide from the voice of the Lord tonight?"        # 11 words: 4.0 s at 2.75 words a second
-        self.assertTrue(3.944 < pc.words(line) / pc.WPS < 4.136)
+        line = "Why do you hide from the voice of the Lord in the garden, my son?"   # 15 words: 4.02 s at Eve's pace
+        self.assertTrue(3.944 < pc.words(line) / pc.VOICE_PACE["eve"] < 4.136)
         p = plan()
         p["shots"][3] = speaker("s-eve", line=line)
         self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
@@ -346,7 +382,7 @@ class Plan(unittest.TestCase):
         p["narration"][5]["text"] = "The full story is in the long video. Part eight tomorrow."
         self.assertIn("TALK_LINE_UNREACHABLE shot 14 k-close", " ".join(pc.check(p, CHARS)["problems"]))
         p = plan()
-        p["shots"][3] = speaker("s-eve", line="Why do you hide from the voice of the Lord this night?")   # 12 words
+        p["shots"][3] = speaker("s-eve", line=SPEAKER_LINE)   # 17 words
         self.assertNotIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
 
     def test_the_band_is_judged_at_every_kokoro_pace_not_the_normal_one_only(self):
@@ -361,9 +397,9 @@ class Plan(unittest.TestCase):
         for words, gaps in ((3.3, 0), (3.95, 0), (4.0, 0), (4.14, 0), (11.7, 0), (3.80, 0.35), (3.85, 0.35)):
             self.assertEqual(pc.talk_reach_gap(words, words, gaps) is None, pc.talk_retime(words, gaps) is not None,
                              (words, gaps))
-        line = "Why do you hide from the voice of the Lord?"         # 10 words: 3.64 s normal, 4.44 s slowest
-        self.assertLess(pc.words(line) / pc.WPS, 3.944)
-        self.assertGreater(pc.words(line) / pc.WPS_SLOWEST, 4.136)
+        line = "Why do you hide from the voice of the Lord in the garden?"   # 13 words: 3.48 s normal, 4.26 s slowest
+        self.assertLess(pc.words(line) / pc.VOICE_PACE["eve"], 3.944)
+        self.assertGreater(pc.words(line) / EVE_SLOWEST, 4.136)
         p = plan()
         p["shots"][3] = speaker("s-eve", line=line)
         self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))

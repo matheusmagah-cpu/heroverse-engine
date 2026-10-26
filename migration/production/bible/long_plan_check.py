@@ -69,6 +69,7 @@ ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "migration" / "production"))
 import plan_check as pc  # noqa: E402
+from voice_pace import VOICE_PACE  # noqa: E402  (shared with plan_check)
 import script_check  # noqa: E402  (story_gate: the one reader of the structure's gate)
 
 ch = pc.ch
@@ -92,12 +93,10 @@ NEXT = re.compile(r"(?i)\bnext\b")
 # 40285879529 and 40297987571 3 talking each in 1,101 s and 1,096 s (366 s each, lipsync_check included).
 PAVO_SCENE_S = 288
 PAVO_TALK_S = 366
-# Kokoro pace by voice, measured on the arc-1 long voiced line by line with the preserved model (2026-10-26,
-# evidence/long/20261026/arc-01-voice.json): the narrator am_michael 2.874 words/s (lines 2.21-3.65), God am_onyx at 0.9
-# 2.811, Adam am_fenrir 3.975, Eve af_heart 3.732. A character speaks ~35 % faster than the narrator, so the Short's
-# single 2.75 (plan_check.WPS) makes a talking line look longer than it is. Another voice: plan_check.WPS until measured.
-VOICE_PACE = {"keeper": 2.874, "god": 2.811, "adam": 3.975, "eve": 3.732}
-SLOW_RATIO = pc.WPS_SLOWEST / pc.WPS          # the slowest pace, as a share of the normal one (2.25 / 2.75)
+# Kokoro pace by voice (voice_pace.VOICE_PACE, the table plan_check uses too): every line, the narrator's included, at
+# its voice's measured pace (the narrator am_michael 2.874 words/s over the arc-1 long). A character speaks ~35 % faster
+# than the narrator. Another voice: plan_check.WPS until measured (a talking line is then VOICE_PACE_UNMEASURED).
+SLOW_RATIO = pc.SLOW_RATIO                    # the slowest pace, as a share of the normal one (2.25 / 2.75)
 # the long breathes between lines: at the Short's 0.35 s the measured arc-1 voice ran 164.5 words a minute, at the
 # QA's 165 ceiling; 0.6 s brings it to ~158 (pilot_render's v4 long widened its sentence gap for the same row). The
 # long's build lays its lines with this gap (LONG_DESIGN.md slice 3).

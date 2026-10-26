@@ -154,8 +154,11 @@ speaking shot's own `line` where that shot is, in its speaker's own voice.
   face, hands, robe or throne (best: do not name Him in a prompt at all; show what He does).
 
 **Length: 170-179 s from part 7** (5/6 winners ran 170-179 s, 0/3 weak; measured with the tail, below YouTube's
-180 s Shorts limit). plan_check estimates at 2.75 words a second (Kokoro, measured on Genesis 7 v2); the band is
-narrow, so the measured length in `episode_build lines` decides; measure a new plan locally (`pilot_render.py voice`)
+180 s Shorts limit). plan_check estimates the narration at 2.75 words a second (Kokoro, measured on Genesis 7 v2) and
+each speaker's line at its own voice's measured pace (`voice_pace.py`: God 2.811, Adam 3.975, Eve 3.732, Noah 2.970,
+the scoffer 3.425; a talking voice not in it is VOICE_PACE_UNMEASURED). One talking line that reaches a clip at every
+pace from the normal to the slowest: the Keeper 12-25 words, Noah 13-28, the scoffer 15-32, Eve 16-35, Adam 17-37
+(a character's 12 words would be ~3.2 s, under the 4 s clip). The band is narrow, so the measured length in `episode_build lines` decides; measure a new plan locally (`pilot_render.py voice`)
 before dispatching. Genesis 7 v2: 466 words, 24 lines, estimate 174.3 s, measured 173.9 s.
 
 **The checks, in order** (each stops the run): `plan_check.py --strict` (KJV word for word, the Short rules on the
