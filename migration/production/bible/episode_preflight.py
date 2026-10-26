@@ -102,6 +102,10 @@ def cf_images_today(today=None, run=subprocess.run):
 
 MIN_SHOT_CHANCE = 0.9         # a talking shot must pass its lips check within TALK_ATTEMPTS at least this often
 MIN_PROBE_GENERATIONS = 6     # a line's rate is read from at least this many direct generations (TALK_ATTEMPTS)
+# a voice-over Keeper prompt: 2 direct generations, the owner-approved plan B protocol (keeper-vo/calibration.json
+# build_probes), all passing; the still-mouth result was decided by the reference and the gaze, which plan_check
+# fixes (KEEPER_VO_POSE, the talking frame alone), not by a line. Read by the rule of succession below, 2 of 2 is 0.75
+MIN_VO_PROBE_GENERATIONS = 2
 
 
 def line_words(text):
@@ -124,30 +128,53 @@ def setup_key(shot, chars, line, images_dir=ch.HERE / "images"):
             "line": line_words(line)}
 
 
+def vo_key(shot, chars, images_dir=ch.HERE / "images"):
+    """A voice-over Keeper shot's probe key (plan B, #423): no line is spoken on screen, so what decides the
+    still-mouth check is the one reference it sends (his talking frame) and the exact prompt (gaze, light, the mouth
+    words: keeper-vo/calibration.json, the front view or a look down into the fire lost the face)."""
+    try:
+        records = eb.reference_records(ch.NARRATOR, chars, images_dir, "talk_refs")
+    except SystemExit:
+        records = []
+    return {"kind": "still_mouth", "speaker": ch.NARRATOR,
+            "references": {rid: m.get("sha256") for rid, m in records}, "prompt": shot.get("prompt")}
+
+
 def load_probes():
     return json.loads(SETUPS.read_text())["probes"] if SETUPS.exists() else []
 
 
 def probe_rows(plan, chars, probes=None):
-    """Each talking shot with the recorded probes of its own line (speaker, references and binding equal), or
-    PROBE_REQUIRED; a recorded rate whose chance within TALK_ATTEMPTS is under MIN_SHOT_CHANCE is PROBE_RATE_LOW.
-    Returns (rows, required, low, run chance or None while a line is unprobed)."""
+    """Each talking shot with the recorded probes of its own line (speaker, references and binding equal), and each
+    voice-over Keeper shot with the still-mouth probes of its own prompt and reference; none, or fewer than the
+    minimum, is PROBE_REQUIRED, and a recorded rate whose chance within the shot's attempts is under MIN_SHOT_CHANCE
+    is PROBE_RATE_LOW. Returns (rows, required, low, run chance or None while a shot is unprobed)."""
     probes = load_probes() if probes is None else probes
     items, carried = plan_check.sequence(plan)
     rows, missing, low, run_chance = [], [], [], 1.0
     for i, s in enumerate(plan["shots"]):
-        if plan_check.talking(s):
-            key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]))
-            found = [x for x in probes if all(
-                (line_words(x.get("line", "")) if k == "line" else x.get(k)) == v for k, v in key.items())]
+        talks, silent = plan_check.talking(s), plan_check.voiceover(s)
+        if talks or silent:
+            if talks:
+                key = setup_key(s, chars, " ".join(items[k]["text"] for k in carried[i]))
+                found = [x for x in probes if x.get("kind", "talk") == "talk" and all(
+                    (line_words(x.get("line", "")) if k == "line" else x.get(k)) == v for k, v in key.items())]
+                row, minimum = dict(key, shot=s["id"], kind="talk"), MIN_PROBE_GENERATIONS
+            else:
+                key = vo_key(s, chars)
+                found = [x for x in probes if all(x.get(k) == v for k, v in key.items())]
+                row = dict(key, shot=s["id"], check="lipsync_check --still-mouth")
+                row.pop("prompt")
+                minimum = MIN_VO_PROBE_GENERATIONS
             generations = sum(x.get("generations") or 0 for x in found)
-            row = dict(key, shot=s["id"], kind="talk")
-            if generations < MIN_PROBE_GENERATIONS:   # none, or too few to be a rate (1 of 3 is not evidence)
+            if generations < minimum:   # none, or too few to be a rate (1 of 3 is not evidence)
                 row.update(probe="PROBE_REQUIRED", generations=generations)
                 missing.append(s["id"])
             else:
                 passed = sum(x.get("passed") or 0 for x in found)
-                shot_chance = 1 - (1 - passed / generations) ** eb.TALK_ATTEMPTS
+                # the rule of succession: never a certainty from a few clips (2 of 2 reads 0.75, 7 of 14 0.5)
+                rate = (passed + 1) / (generations + 2)
+                shot_chance = 1 - (1 - rate) ** eb.attempts_for(s)
                 run_chance *= shot_chance
                 row.update(probe=sorted({x.get("evidence") for x in found}), passed=f"{passed} of {generations}",
                            shot_chance=round(shot_chance, 3))

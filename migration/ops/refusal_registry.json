@@ -615,9 +615,24 @@
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
   },
+  "KEEPER_CLIP_SHORT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "plan B (#423): the voice-over Keeper's run in compose_shots, predicted by compose_prediction at plan time and on the measured voice"
+  },
   "KEEPER_SHARE": {
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
+  },
+  "KEEPER_VO_NOT_ON_HIS_LINE": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.predict(plan, est)",
+   "note": "plan B (#423): the voice-over Keeper's run in compose_shots, predicted by compose_prediction at plan time and on the measured voice"
+  },
+  "KEEPER_VO_NO_TALK_REF": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::episode_build.reference_problems(plan, chars)",
+   "note": "reference_keys sends a voice-over Keeper his talk_refs frame only; reference_problems refuses its absence at plan time"
   },
   "LAST_FRAME_NEEDS_FIRST_FRAME": {
    "class": "A",
@@ -678,6 +693,10 @@
    "class": "N",
    "why": "state words, log lines, environment variable names and a GraphQL type word; none stops work that was accepted"
   },
+  "MOUTH_NOT_CLOSED": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
+  },
   "MOUTH_NOT_IN_SYNC": {
    "class": "C",
    "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
@@ -685,6 +704,14 @@
   "MOUTH_OPEN_IN_PAUSES": {
    "class": "C",
    "probe": "evidence/pavo/setups.json via episode_preflight: at least 6 direct 0-credit Pavo generations of each talking LINE with its speaker, reference and binding, judged by lipsync_check (else PROBE_REQUIRED), and a chance within TALK_ATTEMPTS of at least 0.9 (else PROBE_RATE_LOW), before any build: the rate belongs to the line (#419); risk_order generates talking shots first (E99)"
+  },
+  "MOUTH_TALKING": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
+  },
+  "MOUTH_UNMEASURED": {
+   "class": "C",
+   "probe": "evidence/pavo/setups.json still_mouth probes of the shot's exact prompt and talking frame (episode_preflight: PROBE_REQUIRED / PROBE_RATE_LOW), keeper-vo/calibration.json; risk_order generates them before the scenes"
   },
   "NARRATION_MISSING": {
    "class": "A",
@@ -1121,6 +1148,14 @@
    "early": "migration/production/bible/plan_check.py::SPEAKER_NO_VOICE",
    "note": "characters.voice, the same function"
   },
+  "STILL_MOUTH_CHECK_BLIND": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
+  },
+  "STILL_MOUTH_TOOL_BROKEN": {
+   "class": "I",
+   "guard": ".github/workflows/episode.yml::STILL_MOUTH_CHECK_BLIND"
+  },
   "TALK_LINE_RETIME_OVER": {
    "class": "C",
    "probe": "episode_preflight --voice: the pinned Kokoro voiced locally and episode_build lines run on it (0 Actions, 0 credits); the same rule is predicted on the estimate by plan_check (episode_build.predict)"
@@ -1215,6 +1250,524 @@
   "WORK_OUTSIDE_REPOSITORY": {
    "class": "I",
    "guard": ".github/workflows/episode.yml::inside the checkout: Pavo reads repo paths only"
+  }
+ },
+ "review": {
+  "about": "E106 (owner, 2026-10-26: \"Production has to come out at 9.5 already; the review only confirms. Never produce loosely and fix it later.\"): every item the review scores and every row it relies on, mapped to the earlier check that guarantees it. class plan (plan_check / long_plan_check / script_check), preflight, build_gate (episode_build, short_engine, clip_check, lipsync_check, still-mouth, LUFS), render_qa (the frozen QA on the render; earlier only by estimate), open (no earlier check yet: `reason`), review_only (no tool can measure it: `reason`). `checks` are path::needle, each held by its file (test_refusal_parity). `residual`: what the review still has to see.",
+  "rubric": {
+   "opening_and_promise": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::OPEN_NOT_SPOKEN",
+      "migration/production/bible/plan_check.py::KEEPER_OPENS",
+      "migration/production/bible/plan_check.py::CLIMAX_MISSING"
+     ],
+     "residual": "whether the first spoken line lands as a conflict is a judgement on the words; plan_check fixes its form (a character's or God's line from 0 s, never the Keeper or narration first)"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::COLD_OPEN_CONFLICT",
+      "migration/production/bible/long_plan_check.py::HOOK_SECOND_PERSON",
+      "migration/production/bible/long_plan_check.py::KEEPER_PROMISE_MISSING",
+      "migration/production/preview_gate.py::def approved"
+     ],
+     "residual": "the preview review of the real opening (preview_gate) before the 2.5 h render"
+    }
+   },
+   "picture_quality": {
+    "short": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/bible/clip_check.py::MIN_SHORT_SIDE = 720",
+      "migration/production/bible/clip_check.py::BLACK_LUMA",
+      "migration/production/bible/plan_check.py::PROMPT_NOT_FIVE_PARTS",
+      "migration/production/bible/plan_check.py::PROMPT_NO_CINEMATOGRAPHY",
+      "migration/production/bible/episode_build.py::BLACK_FRAMES"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    },
+    "long": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/qa_pilot.py::frame",
+      "migration/production/bible/long_plan_check.py::TALKING_WITHOUT_A_FACE",
+      "migration/production/preview_gate.py::def approved"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    }
+   },
+   "figure_and_background_integrity": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::def character_problems",
+      "migration/production/bible/plan_check.py::GOD_AS_A_FIGURE",
+      "migration/production/bible/plan_check.py::GOD_SHOT_WITH_A_PERSON",
+      "migration/production/bible/plan_check.py::FIGURES_NOT_ANONYMOUS",
+      "migration/production/bible/episode_build.py::def face_flags",
+      "migration/production/bible/episode_build.py::def still_mouth_flags",
+      "migration/production/bible/episode_build.py::def lipsync_flags",
+      "migration/production/bible/episode_preflight.py::def probe_rows"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::CHARACTER_NOT_LISTED",
+      "migration/production/bible/long_plan_check.py::QA_CONFLICT_FIGURES",
+      "migration/production/bible/plan_check.py::def character_problems"
+     ],
+     "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    }
+   },
+   "captions_readable_and_synced": {
+    "short": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/bible/short_engine.py::FONT_SIZE = 132",
+      "migration/production/bible/short_engine.py::CAPTION_WORDS = 2",
+      "migration/production/bible/short_engine.py::def build_ass",
+      "migration/production/bible/episode_build.py::compose-timeline.json"
+     ],
+     "residual": "none: the cards are drawn from the voice timeline the lines step measured"
+    },
+    "long": {
+     "class": "open",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::BURNED_CAPTIONS"
+     ],
+     "reason": "the .srt rows of story v3 (coverage, cue length, chars, words) have no writer or check yet: the acted long has no build; the build that writes the .srt must check them before the render (left open, stated)"
+    }
+   },
+   "audio_clarity_and_mix": {
+    "short": {
+     "class": "build_gate",
+     "checks": [
+      "migration/production/bible/episode_build.py::LUFS = (-15.0, -13.0)",
+      "migration/production/bible/short_engine.py::loudnorm=I=-14",
+      "migration/production/bible/short_engine.py::sidechaincompress",
+      "migration/production/bible/lipsync_check.py::AUDIO_CORR_MIN"
+     ],
+     "residual": "none: the mix is measured (LUFS) and a talking clip's audio is our line (lipsync_check audio)"
+    },
+    "long": {
+     "class": "open",
+     "checks": [
+      "migration/production/qa_pilot.py::integrated_lufs",
+      "migration/production/qa_pilot.py::true_peak_dbtp_max",
+      "migration/production/qa_pilot.py::speech_presence_min",
+      "migration/production/bible/long_plan_check.py::SPEECH_PRESENCE_EST"
+     ],
+     "residual": "measured by the frozen QA on the render; estimated at plan time (SPEECH_PRESENCE_EST)",
+     "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+    }
+   },
+   "pacing_and_visual_variety": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/episode_build.py::CUT_MAX = 4.0",
+      "migration/production/bible/plan_check.py::PROMPT_REPEATED",
+      "migration/production/bible/plan_check.py::ESTABLISHING_SHARE",
+      "migration/production/bible/plan_check.py::KEEPER_SHARE",
+      "migration/production/bible/plan_check.py::LESSON_SHARE",
+      "migration/production/bible/episode_build.py::def compose_prediction"
+     ],
+     "residual": "two different prompts can still look alike; seen on the frame sheet"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/long_plan_check.py::REHOOK_GAP",
+      "migration/production/bible/long_plan_check.py::HOLD_OVER_QA",
+      "migration/production/bible/long_plan_check.py::HOLD_UNDER_QA",
+      "migration/production/bible/long_plan_check.py::WORDS_PER_MINUTE_EST"
+     ]
+    }
+   },
+   "scripture_on_screen": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::KJV_UNREFERENCED",
+      "migration/production/bible/plan_check.py::SCRIPTURE_REFERENCE_MISSING",
+      "migration/production/bible/kjv_check.py::def problem"
+     ],
+     "residual": "none: every scripture line is the KJV word for word and the captions are its words"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/script_check.py::REFERENCE_NOT_KJV",
+      "migration/production/qa_pilot.py::scripture_card_only_while_read"
+     ]
+    }
+   },
+   "policy_safe": {
+    "short": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::GOD_AS_A_FIGURE",
+      "migration/publish/publish_episode.py::DISCLOSURE_MISSING",
+      "migration/production/bible/kjv_check.py::def problem"
+     ],
+     "residual": "fear-bait, prophecy and health/wealth wording (SERIES.md) has no word list for the Short yet; the long has script_check POLICY_WORDING"
+    },
+    "long": {
+     "class": "plan",
+     "checks": [
+      "migration/production/script_check.py::POLICY_WORDING",
+      "migration/production/script_check.py::NOT_ORIGINAL",
+      "migration/production/script_check.py::FOOTAGE_RIGHTS"
+     ]
+    }
+   },
+   "overall": {
+    "short": {
+     "class": "review_only",
+     "checks": [],
+     "reason": "the overall score is the reviewer's judgement over the items above; the gates make every measurable item pass, the residuals are what remains to see"
+    },
+    "long": {
+     "class": "review_only",
+     "checks": [],
+     "reason": "as for the Short: a judgement over the items, never a measure"
+    }
+   }
+  },
+  "short_built_for_9_5": {
+   "1": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::def character_problems",
+     "migration/production/bible/plan_check.py::PROMPT_NOT_FIVE_PARTS"
+    ],
+    "residual": "stock clips are no longer used in a Bible Short (every shot is Pavo); a modern object in a generated frame is seen on the sheet"
+   },
+   "2": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::SHOT_LINES",
+     "migration/production/bible/episode_build.py::def compose_prediction"
+    ],
+    "residual": "whether a picture shows what its words say is a judgement (no tool matches picture to words)"
+   },
+   "3": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/short_engine.py::FONT_SIZE = 132",
+     "migration/production/bible/episode_build.py::LUFS = (-15.0, -13.0)"
+    ]
+   },
+   "4": {
+    "class": "review_only",
+    "checks": [],
+    "reason": "the frame sheet review is the confirmation itself"
+   },
+   "5": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::def clip_flags",
+     "migration/production/bible/clip_check.py::MIN_FPS = 24"
+    ]
+   },
+   "6": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/short_engine.py::Every scene change is a cut"
+    ]
+   },
+   "7": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::clip_check.unexpected(runs, [dip], length)"
+    ]
+   },
+   "8": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::_kjv_problem(",
+     "migration/production/bible/kjv_check.py::def problem"
+    ]
+   },
+   "9": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/plan_check.py::publish_episode.short_problems("
+    ]
+   }
+  },
+  "story_qa_v3": {
+   "technical.full_decode_without_errors": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::full_decode_without_errors"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.video": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::frame"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.duration_seconds_min": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::LONG_LENGTH"
+    ]
+   },
+   "technical.integrated_lufs": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::integrated_lufs"
+    ],
+    "residual": "the mix normalises to it (loudnorm)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.true_peak_dbtp_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::true_peak_dbtp_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "technical.frame": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::frame"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "speech.speech_presence_min": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::SPEECH_PRESENCE_EST"
+    ]
+   },
+   "speech.singing_presence_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::singing_presence_max"
+    ],
+    "residual": "no singing voice is ever made (Kokoro speech only)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "speech.wer_vs_script_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::wer_vs_script_max"
+    ],
+    "residual": "the voice is the script's own words (pilot_render voice)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "speech.accepted_words_per_minute": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::WORDS_PER_MINUTE_EST"
+    ]
+   },
+   "speech.first_word_onset_seconds_max": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::COLD_OPEN_CONFLICT"
+    ]
+   },
+   "speech.hook_second_person_within_seconds": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::HOOK_SECOND_PERSON"
+    ]
+   },
+   "rights.every_image_generated_by_allowed_open_licence_model_with_revision": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::allowed_model_licences"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "rights.allowed_model_licences": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::allowed_model_licences"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "rights.music_owned_generator_with_hash": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::music_owned"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "rights.voice_model_hash_pinned": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/pilot_render.py::VOICE_ASSET_IDENTITY_MISMATCH"
+    ]
+   },
+   "rights.script_original_with_public_domain_scripture_only": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::NOT_ORIGINAL",
+     "migration/production/script_check.py::REFERENCE_NOT_KJV"
+    ]
+   },
+   "rights.footage_licensed_vetted_and_credited": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::FOOTAGE_NOT_VETTED",
+     "migration/production/script_check.py::FOOTAGE_RIGHTS"
+    ]
+   },
+   "rights.allowed_footage_licences": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::FOOTAGE_RIGHTS"
+    ]
+   },
+   "rights.footage_vetting_required": {
+    "class": "plan",
+    "checks": [
+     "migration/production/script_check.py::FOOTAGE_NOT_VETTED"
+    ]
+   },
+   "rights.ai_video": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_AI_SHARE",
+     "migration/production/qa_pilot.py::ai_video"
+    ]
+   },
+   "grammar.first_shot": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::COLD_OPEN_CONFLICT",
+     "migration/production/bible/long_plan_check.py::KEEPER_IN_COLD_OPEN",
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_TITLE_CARD"
+    ]
+   },
+   "grammar.figures_allowed": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_FIGURES",
+     "migration/production/bible/plan_check.py::def character_problems"
+    ]
+   },
+   "grammar.every_scene_in_motion": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::every_scene_in_motion"
+    ],
+    "residual": "every shot is a Pavo clip (motion by construction)",
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.scene_seconds": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::HOLD_UNDER_QA",
+     "migration/production/bible/long_plan_check.py::HOLD_OVER_QA"
+    ]
+   },
+   "grammar.crossfade_seconds_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::crossfade_seconds_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.image_repeat_gap_seconds_min": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::image_repeat_gap_seconds_min"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.burned_captions": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::BURNED_CAPTIONS"
+    ]
+   },
+   "grammar.caption_track": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_coverage_of_speech_min": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_cue_seconds_median": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_cue_chars_max": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.srt_cue_words_max": {
+    "class": "open",
+    "checks": [],
+    "reason": "the acted long has no build yet (PR #418 froze the plan grammar and v3); its build must hold this row before the render, as episode_build does for the Short (left open, stated)"
+   },
+   "grammar.scripture_card_only_while_read": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::scripture_card_only_while_read"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.cta_mid_video_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::cta_mid_video_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.cta_seconds_max": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::cta_seconds_max"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.cta_first_start_seconds_min": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::cta_first_start_seconds_min"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.persistent_overlays_allowed": {
+    "class": "open",
+    "checks": [
+     "migration/production/qa_pilot.py::persistent_overlays_allowed"
+    ],
+    "reason": "qa_pilot.py and prepublish_gate.py do not read story QA v3 yet (they index v1's keys; test_long_plan_check NoRendererReadsTheNewQaYet, LONG_DESIGN slice 3): until that reader lands this row is measured by nothing after the plan; `checks` name where it will be read"
+   },
+   "grammar.ai_video_picture_share_max": {
+    "class": "plan",
+    "checks": [
+     "migration/production/bible/long_plan_check.py::QA_CONFLICT_AI_SHARE"
+    ]
+   },
+   "grammar.ai_video_clip_checks": {
+    "class": "build_gate",
+    "checks": [
+     "migration/production/bible/episode_build.py::def clip_flags",
+     "migration/production/bible/episode_build.py::def lipsync_flags",
+     "migration/production/bible/episode_build.py::def face_flags"
+    ],
+    "residual": "the Short's build runs them; the long's build must call the same functions"
+   }
   }
  }
 }

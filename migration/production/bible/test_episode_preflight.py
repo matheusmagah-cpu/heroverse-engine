@@ -17,15 +17,24 @@ EXAMPLE = HERE / "plans" / "genesis-07-short.json"
 
 
 class Probes(unittest.TestCase):
-    def test_the_lips_rate_is_the_lines_own_and_genesis_07_is_blocked(self):
+    def talking_plan(self):
+        """genesis-07 as it was before plan B: its three Keeper shots talking, lip-synced, on the same lines."""
+        plan = json.loads(EXAMPLE.read_text())
+        for s in plan["shots"]:
+            if s["kind"] == "keeper":
+                s["voiceover"] = False
+        return plan
+
+    def test_the_lips_rate_is_the_lines_own_and_genesis_07_talking_is_blocked(self):
         # PR #419: line-01 passed 7 of 14, genesis-07's own Keeper lines 1 of 33 with the same speaker, reference,
         # pose and binding. A probe on one line never vouches for another, and genesis-07 reads its real rates
-        plan = json.loads(EXAMPLE.read_text())
+        plan = self.talking_plan()
         chars = pf.ch.registry()
         probes = pf.load_probes()
         talking = [s["id"] for s in plan["shots"] if pf.plan_check.talking(s)]
+        self.assertEqual(talking, ["k-insight", "k-question", "k-close"])
         self.assertEqual(pf.probe_rows(plan, chars, probes=[])[1], talking)
-        only_line01 = [p for p in probes if pf.line_words(p["line"]).startswith("genesis five")]
+        only_line01 = [p for p in probes if pf.line_words(p.get("line", "")).startswith("genesis five")]
         self.assertEqual(pf.probe_rows(plan, chars, probes=only_line01)[1], talking)   # same setup, other line
         rows, missing, low, chance = pf.probe_rows(plan, chars, probes=probes)
         self.assertEqual(low, ["k-insight", "k-question"])                             # 0 of 15 each
@@ -38,18 +47,40 @@ class Probes(unittest.TestCase):
         for p in changed:
             p["references"] = {"ch-keeper-talk": "0" * 64}
         self.assertEqual(pf.probe_rows(plan, chars, probes=changed)[1], talking)
-        # a line that passes like line-01 is not blocked
+        # lines that pass like line-01 are not blocked
         good = [dict(p, passed=7, generations=14) for p in probes]
         _, missing, low, chance = pf.probe_rows(plan, chars, probes=good)
         self.assertEqual((missing, low), ([], []))
         self.assertGreater(chance, 0.9)
 
-    def test_the_committed_genesis_07_report_is_blocked_by_its_lines(self):
+    def test_a_voice_over_keeper_needs_its_still_mouth_probe_not_a_talking_one(self):
+        # plan B (#423): no talking probe, but the still-mouth probes of its own prompt and talking frame
+        plan = json.loads(EXAMPLE.read_text())
+        chars = pf.ch.registry()
+        probes = pf.load_probes()
+        vo = [s["id"] for s in plan["shots"] if pf.plan_check.voiceover(s)]
+        self.assertEqual(vo, ["k-insight", "k-question", "k-close"])
+        talk_only = [p for p in probes if p.get("kind", "talk") == "talk"]
+        self.assertEqual(pf.probe_rows(plan, chars, probes=talk_only)[1], vo)   # a talking probe never covers it
+        rows, missing, low, chance = pf.probe_rows(plan, chars, probes=probes)
+        self.assertEqual((missing, low), ([], []))
+        self.assertEqual({r["shot"]: r["check"] for r in rows if r.get("kind") == "still_mouth"},
+                         {k: "lipsync_check --still-mouth" for k in vo})
+        self.assertGreater(chance, 0.99)
+        # the prompt decides the face (keeper-vo/calibration.json): a changed prompt has no probe yet
+        changed = copy.deepcopy(plan)
+        changed["shots"][-1]["prompt"] = changed["shots"][-1]["prompt"].replace("faint warm smile", "warm smile")
+        self.assertEqual(pf.probe_rows(changed, chars, probes=probes)[1], ["k-close"])
+        # a prompt that failed its probes is PROBE_RATE_LOW
+        failed = [dict(p, passed=0) if p.get("kind") == "still_mouth" else p for p in probes]
+        self.assertEqual(pf.probe_rows(plan, chars, probes=failed)[2], vo)
+
+    def test_the_committed_genesis_07_report_passes_on_its_voice_over_probes(self):
         report = json.loads((pf.REPORTS / "genesis-07-short.json").read_text())
-        self.assertEqual(report["status"], "BLOCKED")
-        self.assertEqual(report["setups"]["rate_low"], ["k-insight", "k-question"])
-        self.assertEqual(report["setups"]["probes_required"], ["k-close"])
-        self.assertTrue(pf.verify(EXAMPLE).startswith("PREFLIGHT_NOT_PASS"))
+        self.assertEqual((report["status"], report["blockers"]), ("PASS", []))
+        self.assertEqual(report["setups"]["probes_required"], [])
+        self.assertTrue({r["kind"] for r in report["setups"]["shots"]} <= {"still_mouth", "god_voice_over"})
+        self.assertIsNone(pf.verify(EXAMPLE))
 
 
 class Report(unittest.TestCase):

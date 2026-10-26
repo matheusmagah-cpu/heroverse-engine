@@ -80,6 +80,34 @@ def registry():
     return json.loads(REGISTRY.read_text())["codes"]
 
 
+REVIEW_CLASSES = ("plan", "preflight", "build_gate", "render_qa", "open", "review_only")
+
+
+def review():
+    return json.loads(REGISTRY.read_text())["review"]
+
+
+def rubric_items():
+    """The items of ops/CLAUDE_REVIEW.md's rubric (the line after '## Rubric'), plus overall."""
+    text = (ROOT / "migration" / "ops" / "CLAUDE_REVIEW.md").read_text()
+    body = text.split("## Rubric", 1)[1].split("\n", 1)[1].strip()
+    line = body.split(";")[0]
+    return [x.strip() for x in line.split(",") if x.strip()] + ["overall"]
+
+
+def built_items():
+    """The numbered items of PROMPT_GUIDE.md's "Built for 9.5" section (the Bible Short's own standard)."""
+    text = (ROOT / "migration" / "production" / "bible" / "PROMPT_GUIDE.md").read_text()
+    section = text.split("## Built for 9.5", 1)[1].split("\n## ", 1)[0]
+    return [m for m in re.findall(r"^(\d+)\. ", section, re.M)]
+
+
+def story_v3_rows():
+    """Every row of the acted long's frozen QA: section.key for technical, speech, rights and grammar."""
+    qa = json.loads((ROOT / "migration" / "production" / "qa_criteria_story_v3.json").read_text())
+    return sorted(f"{s}.{k}" for s in ("technical", "speech", "rights", "grammar") for k in qa[s])
+
+
 def needle_holds(ref):
     """`path::needle`: the file exists and holds the needle (the early check or guard is real, not a wish)."""
     if "::" not in ref:
@@ -115,6 +143,35 @@ class RefusalParity(unittest.TestCase):
     def test_the_registry_holds_no_code_that_is_gone(self):
         found = inventory()
         self.assertEqual(sorted(c for c in registry() if c not in found), [])
+
+    # ---- the review (owner, 2026-10-26: "Production has to come out at 9.5 already; the review only confirms") ----
+    def test_every_rubric_item_has_its_earlier_check_for_the_short_and_the_long(self):
+        mapped = review()["rubric"]
+        self.assertEqual(len(rubric_items()), 9)   # the eight scored items and overall: the parser reads them all
+        for item in rubric_items():
+            self.assertIn(item, mapped, f"rubric item {item} (ops/CLAUDE_REVIEW.md) has no mapping")
+            for fmt in ("short", "long"):
+                self.assertIn(fmt, mapped[item], f"rubric item {item}: no {fmt} mapping")
+        self.assertEqual(sorted(set(mapped) - set(rubric_items())), [], "a mapped item the rubric no longer has")
+
+    def test_every_built_for_9_5_item_and_story_v3_row_is_mapped(self):
+        r = review()
+        self.assertEqual(sorted(r["short_built_for_9_5"], key=int), built_items())
+        self.assertEqual(sorted(r["story_qa_v3"]), story_v3_rows())
+
+    def test_each_review_mapping_names_a_real_check_or_its_reason(self):
+        r = review()
+        entries = [(f"rubric {k}/{f}", e) for k, v in r["rubric"].items() for f, e in v.items()]
+        entries += [(f"built {k}", e) for k, e in r["short_built_for_9_5"].items()]
+        entries += [(f"v3 {k}", e) for k, e in r["story_qa_v3"].items()]
+        for name, e in entries:
+            self.assertIn(e["class"], REVIEW_CLASSES, name)
+            if e["class"] in ("review_only", "open"):
+                self.assertTrue(e.get("reason"), f"{name}: {e['class']} needs its reason")
+            else:
+                self.assertTrue(e["checks"], f"{name}: {e['class']} needs its checks")
+            for ref in e["checks"]:
+                self.assertTrue(needle_holds(ref), f"{name}: check {ref!r} is not in that file")
 
     def test_the_parser_sees_a_new_build_refusal(self):
         # the antidote of E106: a refusal added to a later stage is found here, so it cannot skip the registry

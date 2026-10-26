@@ -73,6 +73,7 @@ ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "migration" / "production"))
 import plan_check as pc  # noqa: E402
+from voice_pace import VOICE_PACE, VOICE_SLOWEST  # noqa: E402  (shared with plan_check)
 import script_check  # noqa: E402  (story_gate: the one reader of the structure's gate)
 
 ch = pc.ch
@@ -98,12 +99,10 @@ NEXT = re.compile(r"(?i)\bnext\b")
 # 40285879529 and 40297987571 3 talking each in 1,101 s and 1,096 s (366 s each, lipsync_check included).
 PAVO_SCENE_S = 288
 PAVO_TALK_S = 366
-# Kokoro pace by voice, measured on the arc-1 long voiced line by line with the preserved model (2026-10-26,
-# evidence/long/20261026/arc-01-voice.json): the narrator am_michael 2.874 words/s (lines 2.21-3.65), God am_onyx at 0.9
-# 2.811, Adam am_fenrir 3.975, Eve af_heart 3.732. A character speaks ~35 % faster than the narrator, so the Short's
-# single 2.75 (plan_check.WPS) makes a talking line look longer than it is. Another voice: plan_check.WPS until measured.
-VOICE_PACE = {"keeper": 2.874, "god": 2.811, "adam": 3.975, "eve": 3.732}
-SLOW_RATIO = pc.WPS_SLOWEST / pc.WPS          # the slowest pace, as a share of the normal one (2.25 / 2.75)
+# Kokoro pace by voice (voice_pace.VOICE_PACE, the table plan_check uses too): every line, the narrator's included, at
+# its voice's measured pace (the narrator am_michael 2.874 words/s over the arc-1 long). A character speaks ~35 % faster
+# than the narrator. Another voice: plan_check.WPS until measured (a talking line is then VOICE_PACE_UNMEASURED).
+SLOW_RATIO = pc.SLOW_RATIO                    # the slowest pace, as a share of the normal one (2.25 / 2.75)
 # the long breathes between lines: at the Short's 0.35 s the measured arc-1 voice ran 164.5 words a minute, at the
 # QA's 165 ceiling; 0.6 s brings it to ~158 (pilot_render's v4 long widened its sentence gap for the same row). The
 # long's build lays its lines with this gap (LONG_DESIGN.md slice 3).
@@ -115,6 +114,13 @@ UPSCALE_S_PER_CLIP_S = 543 / 6
 def pace(item):
     """Words a second of the voice that speaks this line (the narration is the Keeper's)."""
     return VOICE_PACE.get(item.get("speaker") or ch.NARRATOR, pc.WPS)
+
+
+def slowest_pace(item):
+    """The same voice at its slowest: a speaker's VOICE_SLOWEST (its measured slow bound, E104), the narration's pace
+    slowed by SLOW_RATIO."""
+    who = item.get("speaker") or ch.NARRATOR
+    return VOICE_SLOWEST[who] if who in VOICE_SLOWEST else pace(item) * SLOW_RATIO
 
 
 def gate():
@@ -261,7 +267,7 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             problems.append(f"LINE_KIND_BEAT shot {i} {sid} ({beat} carries {'/'.join(BEAT_KINDS[beat])} lines)")
         gaps = LONG_LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
-        slowest = sum(pc.words(items[k]["text"]) / (pace(items[k]) * SLOW_RATIO) for k in idx) + gaps
+        slowest = sum(pc.words(items[k]["text"]) / slowest_pace(items[k]) for k in idx) + gaps
         problems += pc.talk_reach_problems(i, s, span, slowest, gaps)
         # the frozen QA's hold band; a talking line is judged at its slowest pace too (its clip is retimed to it)
         h_max = hold[i] + (slowest - span if pc.talking(s) else 0.0)
@@ -271,6 +277,11 @@ def check(plan, chars=None, gate_values=None, criteria=None, arc_table=None):
             problems.append(f"HOLD_OVER_QA shot {i} {sid} (~{hold[i]:.1f}-{h_max:.1f} s on screen; story QA holds "
                             f"{lo:g}-{hi:g} s: split it into more cuts or shorter lines)")
         if s["kind"] == "keeper":
+            if s.get("voiceover") is True:
+                # the voice-over Keeper (plan B, PR #423) is built and checked for the Short only (episode_build,
+                # lipsync_check --still-mouth); the long has no such path yet
+                problems.append(f"LONG_VOICEOVER_UNSUPPORTED shot {i} {sid} (a voice-over Keeper exists for the Short "
+                                "only; the long's Keeper talks until a long voice-over path is built and tested)")
             if beat not in ("keeper_promise", "keeper_insight", "keeper_close"):
                 problems.append(f"KEEPER_OUT_OF_BEAT shot {i} {sid} (the Keeper: promise, insight and close only)")
             if slowest > pc.TALK_LINE_MAX:

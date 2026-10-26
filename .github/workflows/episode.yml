@@ -70,6 +70,10 @@ jobs:
           # and the face check of God's voice-over shots must see the Keeper's face in the same clip
           "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --faces migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" > "$RUNNER_TEMP/faces.json" && { echo "FACE_CHECK_BLIND"; exit 1; } || true
           python3 -I -c "import json,sys;r=json.load(open(sys.argv[1]));sys.exit(0 if r['faces_found']>0 else 'FACE_CHECK_BLIND')" "$RUNNER_TEMP/faces.json"
+          # E106: the still-mouth check of a voice-over Keeper must work before any generation too: a probe clip that
+          # passed it (keeper-vo/calibration.json) passes again, and the talking calibration clip is flagged
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper-vo/probe-k-close-1-373107379233670656.mp4 "$RUNNER_TEMP/face_landmarker.task"
+          "$RUNNER_TEMP/lip/bin/python" -I -B migration/production/bible/lipsync_check.py --still-mouth migration/evidence/pavo/20261026/keeper/keeper-lipsync.mp4 "$RUNNER_TEMP/face_landmarker.task" && { echo "STILL_MOUTH_CHECK_BLIND"; exit 1; } || true
           mkdir -p "$WORK" "$OUT"
       - name: Voice track (Kokoro line by line; narration am_michael, each spoken line in its speaker voice) and the talking clips input audio
         run: |

@@ -19,7 +19,7 @@ KEEPER_LOOK = "an elderly storyteller with a silver beard"
 EVE_LOOK = "a woman of about twenty-five with long black hair"
 CHARS = {
     "keeper": {"status": "APPROVED", "look": KEEPER_LOOK, "refs": ["front"], "voice": "am_michael",
-               "wardrobe": {"fire": "seated by a small campfire"}},
+               "wardrobe": {"fire": "seated by a small campfire"}, "talk_refs": ["talk"]},
     "eve": {"status": "APPROVED", "look": EVE_LOOK, "refs": ["full"], "voice": "af_heart"},
     "adam": {"status": "DRAFT", "look": "a man of about thirty", "refs": [], "voice": "am_fenrir"},
     "mute": {"status": "APPROVED", "look": "a quiet shepherd boy", "refs": ["front"]},
@@ -35,13 +35,14 @@ def keeper(sid, lines):
     return {"id": sid, "kind": "keeper", "lines": lines,
             "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
                       "holds his head level, looks straight into the camera and speaks to the camera. Night in the "
-                      "desert, firelight. Warm and grave."}
+                      f"desert, firelight ({sid}). Warm and grave."}   # one picture per shot (PROMPT_REPEATED)
 
 
 def scene(sid, lines, chars=(), seconds=12, look=None, **extra):
     who = look if look is not None else ", ".join({"eve": EVE_LOOK}.get(c, c) for c in chars) or "a crowd seen from behind"
     s = {"id": sid, "kind": "scene", "lines": lines, "seconds": seconds, "characters": list(chars),
-         "prompt": f"{STYLE} Wide shot, slow tracking shot. {who} walks through the tents. Dusk, torchlight. Restless."}
+         "prompt": f"{STYLE} Wide shot, slow tracking shot. {who} walks through the tents. Dusk, torchlight ({sid}). "
+                   "Restless."}
     if not chars and "establishing" not in extra:
         s["figures"] = "anonymous"
     s.update(extra)
@@ -55,9 +56,11 @@ def god(sid, line=GOD_LINE, reference="Genesis 6:13 (KJV)", seconds=8, prompt=ST
     return s
 
 
-# 12 words: 4.36-5.33 s from the normal to the slowest pace, all of it reachable (a 10-word line crosses the
-# 3.94-4.14 s band no clip reaches within the retime: TALK_LINE_UNREACHABLE, review of #412)
-SPEAKER_LINE = "Why do you hide from the voice of the Lord in the garden?"
+# 17 words at Eve's measured 3.73 words a second: 4.56-5.57 s from the normal to the slowest pace, all of it
+# reachable (15 words cross the 3.94-4.14 s band no clip reaches within the retime: TALK_LINE_UNREACHABLE, review of
+# #412; 12 words are under TALK_MIN)
+SPEAKER_LINE = "Why do you hide from the voice of the Lord in the garden this night, my son?"
+EVE_SLOWEST = pc.VOICE_PACE["eve"] * pc.SLOW_RATIO
 
 
 def speaker(sid, who="eve", line=SPEAKER_LINE, look=EVE_LOOK, **extra):
@@ -205,7 +208,7 @@ class Plan(unittest.TestCase):
         p["shots"][3]["prompt"] = p["shots"][3]["prompt"].replace("speaks to", "looks at")
         self.assertIn("SPEAKER_NOT_SPEAKING", codes(pc.check(p, CHARS)))
         p = plan()
-        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 5))   # 35 words
+        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 6))   # 42 words
         self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
         p = plan()
         p["shots"][3] = speaker("s-eve", line="Why?")
@@ -311,9 +314,9 @@ class Plan(unittest.TestCase):
         self.assertEqual((pc.TALK_CLIP, pc.TALK_PAD, pc.TALK_RETIME_MAX, pc.TALK_HOLD_MAX),
                          ((4, 12), (0.25, 0.65), 0.10, 1.3))
         p = plan()
-        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 3) +
-                                " Answer me now, my son.")   # 26 words: 11.56 s at the slowest pace
-        self.assertGreater(26 / pc.WPS_SLOWEST, pc.TALK_LINE_MAX)
+        p["shots"][3] = speaker("s-eve", line=" ".join(["Why do you hide from the voice?"] * 5) +
+                                " Answer me.")   # 37 words: 12.1 s at Eve's slowest pace
+        self.assertGreater(37 / EVE_SLOWEST, pc.TALK_LINE_MAX)
         self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
         p = plan()
         p["shots"][3] = speaker("s-eve", line="Why do you hide?")   # 4 words: 1.5 s, no 4 s clip within 10 %
@@ -330,6 +333,76 @@ class Plan(unittest.TestCase):
         self.assertAlmostEqual(stretch, 11.55 / 11.7, places=4)
         self.assertEqual(pc.talk_retime(11.55)[0], 11.55)
 
+    def test_a_characters_line_is_timed_at_its_own_voices_measured_pace(self):
+        """Review of #418 (arc-1 voice measurement): every line was estimated at WPS 2.75, a character's too; Kokoro speaks Eve at 3.73 words a second, so a
+        12-word line of hers estimated 4.36 s, measured ~3.2 s (under TALK_MIN) and died at the build after the Pavo
+        generations were spent. One measured table (voice_pace.py) times both the Short and the long."""
+        import long_plan_check as lc
+        import voice_pace
+        self.assertIs(pc.VOICE_PACE, voice_pace.VOICE_PACE)
+        self.assertIs(lc.VOICE_PACE, voice_pace.VOICE_PACE)
+        self.assertEqual(pc.pace({"kind": "story", "text": "x"}), pc.WPS)          # the narrator keeps WPS
+        self.assertEqual(pc.pace({"kind": "story", "text": "x", "speaker": "eve"}), voice_pace.VOICE_PACE["eve"])
+        old = "Why do you hide from the voice of the Lord this night?"               # 12 words: 4.36 s at WPS
+        self.assertGreater(pc.words(old) / pc.WPS, pc.TALK_MIN)
+        self.assertLess(pc.words(old) / voice_pace.VOICE_PACE["eve"], pc.TALK_MIN)
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=old)
+        self.assertIn("SPEAKER_LINE_TOO_SHORT", codes(pc.check(p, CHARS)))
+        # a talking voice nobody measured is refused before its first line is voiced
+        chars = dict(CHARS, raven={"status": "APPROVED", "look": "a black raven", "refs": ["full"], "voice": "bm_lewis"})
+        p = plan()
+        p["shots"][3] = speaker("s-eve", who="raven", look="a black raven")
+        self.assertIn("VOICE_PACE_UNMEASURED", codes(pc.check(p, chars)))
+
+    def test_each_measured_pace_is_of_the_voice_the_speaker_still_has(self):
+        """A pace belongs to a Kokoro voice: when characters.json gives a speaker another voice, measure it again."""
+        import voice_pace
+        for who, (voice, speed) in voice_pace.MEASURED_WITH.items():
+            self.assertEqual(pc.ch.voice(who), {"voice_id": voice, "speed": speed}, who)
+        self.assertEqual(set(voice_pace.MEASURED_WITH), set(voice_pace.VOICE_PACE))
+        self.assertEqual(set(voice_pace.VOICE_SLOWEST), set(voice_pace.VOICE_PACE) - {pc.ch.NARRATOR})
+        for who in ("noah", "scoffer", "serpent"):
+            self.assertIn(who, voice_pace.VOICE_PACE)
+
+    def test_a_speakers_bounds_are_never_looser_than_the_measurements(self):
+        """E104, review of #421: keeping the fastest run and slowing it by SLOW_RATIO gave Eve a slowest pace of 3.05
+        words a second, but her measured runs reach 3.42 and her lines 2.85: a 35-word line passed SPEAKER_LINE_TOO_LONG
+        at ~11.5 s and measures ~12.3 s, over TALK_LINE_MAX. The fast bound is the fastest run (too short), the slow
+        bound the slower of the slowest run x SLOW_RATIO and the slowest line (too long, unreachable)."""
+        import voice_pace
+        ev = HERE.parents[1] / "evidence"
+        arc = json.loads((ev / "long/20261026/arc-01-voice.json").read_text())["pace_by_voice_words_per_s"]
+        ns = json.loads((ev / "long/20261026/noah-scoffer-voice.json").read_text())["pace_by_voice_words_per_s"]
+        kp = json.loads((ev / "voice/20261026/kokoro-pace.json").read_text())
+        runs, lines = {}, {}
+        for run in arc.values():
+            for key, v in run.items():
+                runs.setdefault(key.split()[0], []).append(v["pace"])
+                if "line_min" in v:
+                    lines.setdefault(key.split()[0], []).append(v["line_min"])
+        for src in (ns, kp["probe_by_voice"]):
+            for who, v in src.items():
+                runs.setdefault(who, []).append(v["pace"])
+                lines.setdefault(who, []).append(v["line_min"])
+        for e in kp["short_plans_voiced"].values():
+            for who, v in e["pace_by_speaker"].items():
+                lines.setdefault(who, []).append(v["line_min"])
+        short_god = kp["short_god"]["pace"]
+        runs["god"].append(short_god)
+        for who, slow in voice_pace.VOICE_SLOWEST.items():
+            self.assertLessEqual(slow, min(runs[who]) * pc.SLOW_RATIO + 1e-3, who)
+            self.assertLessEqual(slow, min(lines[who]) + 1e-3, who)
+            self.assertGreaterEqual(pc.pace({"text": "x", "speaker": who}), max(runs[who]) - 1e-3, who)
+        # God in a Short at the Short-measured pace; the long keeps the long's
+        self.assertAlmostEqual(pc.pace({"text": "x", "speaker": "god"}), short_god, places=3)
+        line = " ".join(["Why do you hide from the voice?"] * 5)                           # 35 words
+        self.assertLessEqual(35 / (voice_pace.VOICE_PACE["eve"] * pc.SLOW_RATIO), pc.TALK_LINE_MAX)
+        self.assertGreater(35 / min(runs["eve"]) / pc.SLOW_RATIO, pc.TALK_LINE_MAX)
+        p = plan()
+        p["shots"][3] = speaker("s-eve", line=line)
+        self.assertIn("SPEAKER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+
     def test_a_talking_line_no_clip_reaches_within_the_retime_is_refused_at_plan_time(self):
         """Review of #408: 3.944-4.136 s needs -11.25 % into a 4 s clip or +13.75 % into a 5 s one, over the 10 %
         retime, so the build refused it (TALK_LINE_RETIME_OVER) after plan_check had passed it."""
@@ -337,8 +410,8 @@ class Plan(unittest.TestCase):
             self.assertIsNone(pc.talk_retime(speech), speech)
         for speech, target in ((3.94, 3.55), (4.14, 4.55), (3.3, 3.55), (5.2, 5.55)):
             self.assertAlmostEqual(pc.talk_retime(speech)[0], target, places=3, msg=speech)
-        line = "Why do you hide from the voice of the Lord tonight?"        # 11 words: 4.0 s at 2.75 words a second
-        self.assertTrue(3.944 < pc.words(line) / pc.WPS < 4.136)
+        line = "Why do you hide from the voice of the Lord in the garden, my son?"   # 15 words: 4.02 s at Eve's pace
+        self.assertTrue(3.944 < pc.words(line) / pc.VOICE_PACE["eve"] < 4.136)
         p = plan()
         p["shots"][3] = speaker("s-eve", line=line)
         self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
@@ -346,7 +419,7 @@ class Plan(unittest.TestCase):
         p["narration"][5]["text"] = "The full story is in the long video. Part eight tomorrow."
         self.assertIn("TALK_LINE_UNREACHABLE shot 14 k-close", " ".join(pc.check(p, CHARS)["problems"]))
         p = plan()
-        p["shots"][3] = speaker("s-eve", line="Why do you hide from the voice of the Lord this night?")   # 12 words
+        p["shots"][3] = speaker("s-eve", line=SPEAKER_LINE)   # 17 words
         self.assertNotIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
 
     def test_the_band_is_judged_at_every_kokoro_pace_not_the_normal_one_only(self):
@@ -361,9 +434,9 @@ class Plan(unittest.TestCase):
         for words, gaps in ((3.3, 0), (3.95, 0), (4.0, 0), (4.14, 0), (11.7, 0), (3.80, 0.35), (3.85, 0.35)):
             self.assertEqual(pc.talk_reach_gap(words, words, gaps) is None, pc.talk_retime(words, gaps) is not None,
                              (words, gaps))
-        line = "Why do you hide from the voice of the Lord?"         # 10 words: 3.64 s normal, 4.44 s slowest
-        self.assertLess(pc.words(line) / pc.WPS, 3.944)
-        self.assertGreater(pc.words(line) / pc.WPS_SLOWEST, 4.136)
+        line = "Why do you hide from the voice of the Lord in the garden?"   # 13 words: 3.48 s normal, 4.26 s slowest
+        self.assertLess(pc.words(line) / pc.VOICE_PACE["eve"], 3.944)
+        self.assertGreater(pc.words(line) / EVE_SLOWEST, 4.136)
         p = plan()
         p["shots"][3] = speaker("s-eve", line=line)
         self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
@@ -526,6 +599,13 @@ class Plan(unittest.TestCase):
         found = pc.check(p, CHARS)["problems"]
         self.assertTrue(found and all(x.startswith("BUILD SHOT_TOO_SHORT") for x in found), found)
 
+    def test_the_same_prompt_twice_is_refused(self):
+        # E106 (owner: production comes out at 9.5, the review only confirms): the review's visual variety as a plan
+        # rule: one prompt is one picture, so a repeated prompt shows the same shot twice
+        p = plan()
+        p["shots"][2]["prompt"] = p["shots"][1]["prompt"]
+        self.assertEqual(codes(pc.check(p, CHARS)), ["PROMPT_REPEATED"])
+
     def test_a_missing_reference_record_is_found_at_plan_time(self):
         # E106: an APPROVED character whose kept reference has no record passed the plan, then refs_step refused
         # it (REFERENCE_RECORD_MISSING) in the build, after the voice
@@ -556,6 +636,226 @@ class Plan(unittest.TestCase):
                                             capture_output=True, text=True).returncode
             self.assertEqual(run(str(ok)), 0)
             self.assertEqual(run(str(bad)), 1)
+
+
+# genesis-07-short.json as main had it before plan B (#413, commit 1c1ed79): the lip-synced Keeper. Run 40307414749
+# built its 30 scene and God clips from exactly these requests (its report.json: 30 of 30 prompts and seconds equal)
+TALKING_COMMIT = "1c1ed79"
+
+
+def talking_genesis_07():
+    return subprocess.run(["git", "-C", str(HERE), "show",
+                           f"{TALKING_COMMIT}:migration/production/bible/plans/genesis-07-short.json"],
+                          capture_output=True, text=True, check=True).stdout
+
+
+def keeper_vo(sid, lines, action="holds his head level and looks straight into the camera"):
+    return {"id": sid, "kind": "keeper", "voiceover": True, "lines": lines,
+            "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
+                      f"{action}, his lips closed, silent, as the flames flicker. Night in the desert, firelight "
+                      f"({sid}). Warm and grave."}
+
+
+def vo_plan(**kw):
+    p = plan(**kw)
+    p["shots"][-2:] = [keeper_vo("k-insight", [4]),
+                       keeper_vo("k-close", [5], "holds his head level, looks straight into the camera and rolls the "
+                                                 "scroll closed")]
+    return p
+
+
+class KeeperVoiceover(unittest.TestCase):
+    """Plan B (owner, 2026-10-26): an opt-in `"voiceover": true` Keeper shot shows him on screen with his mouth closed
+    while his line plays from the voice track; the default (a talking, lip-synced Keeper) is unchanged."""
+
+    def test_the_default_keeper_still_talks(self):
+        p = plan()
+        self.assertTrue(all(pc.talking(s) for s in p["shots"] if s["kind"] == "keeper"))
+        self.assertFalse(any(pc.voiceover(s) for s in p["shots"]))
+
+    def test_a_voiceover_keeper_is_not_a_talking_shot_and_passes(self):
+        p = vo_plan()
+        r = pc.check(p, CHARS)
+        self.assertEqual(r["problems"], [])
+        self.assertTrue(pc.voiceover(p["shots"][-1]))
+        self.assertFalse(pc.talking(p["shots"][-1]))
+        # his share and the lesson share count the voice-over shots exactly as the talking ones
+        self.assertEqual(r["estimate"]["keeper_share"], pc.check(plan(), CHARS)["estimate"]["keeper_share"])
+        self.assertEqual(r["estimate"]["lesson_share"], pc.check(plan(), CHARS)["estimate"]["lesson_share"])
+
+    def test_its_line_is_narration_in_the_keepers_voice(self):
+        items, carried = pc.sequence(vo_plan())
+        for k in carried[-2:]:
+            self.assertEqual(len(k), 1)
+            self.assertNotIn("speaker", items[k[0]])      # narration: am_michael, carried by the voice track
+
+    def test_the_prompt_must_say_his_lips_stay_closed_and_name_no_speech(self):
+        for old, new in (("his lips closed, silent", "calm"), ("his lips closed, silent", "his lips closed"),
+                         ("looks straight into the camera", "looks straight into the camera and speaks"),
+                         ("looks straight into the camera", "looks straight into the camera and says a few words"),
+                         ("looks straight into the camera", "looks straight into the camera, talking softly"),
+                         ("looks straight into the camera", "looks straight into the camera, his lips moving")):
+            p = vo_plan()
+            p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(old, new)
+            self.assertIn("KEEPER_VO_PROMPT", codes(pc.check(p, CHARS)), new)
+        # the talking rules are not asked of him: no "speaks", no KEEPER_POSE
+        found = codes(pc.check(vo_plan(), CHARS))
+        self.assertNotIn("KEEPER_NOT_SPEAKING", found)
+        self.assertNotIn("KEEPER_POSE", found)
+
+    def test_every_phrasing_that_lost_his_face_is_refused(self):
+        # review of #423: the calibration prompts that lost the face, and the usual ways of saying the same
+        for phrase in ("looking down at the scroll", "gazing into the flames", "glances down", "his eyes on the flames",
+                       "eyes on the fire", "raises his eyes from the fire", "his head bowed", "his eyes lowered",
+                       "stares into the embers", "looks at the scroll", "reads the scroll", "turns his head away",
+                       "in profile", "seen from the side", "glancing at the fire", "lowering his gaze"):
+            p = vo_plan()
+            p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(
+                "his lips closed, silent", f"{phrase}, his lips closed, silent")
+            self.assertIn("KEEPER_VO_POSE", codes(pc.check(p, CHARS)), phrase)
+        # what passed stays allowed: rolling the scroll closed while facing the lens, the fire beside him
+        p = vo_plan()
+        p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(
+            "his lips closed, silent", "slowly rolls the old scroll closed in his hands, the fire beside him, his lips "
+            "closed, silent")
+        self.assertNotIn("KEEPER_VO_POSE", codes(pc.check(p, CHARS)))
+
+    def test_a_voiceover_keeper_needs_his_talking_reference(self):
+        # the front view failed the face 4 of 4 (keeper-vo/calibration.json): no silent fallback to it
+        chars = copy.deepcopy(CHARS)
+        del chars["keeper"]["talk_refs"]
+        self.assertIn("KEEPER_VO_NO_TALK_REF", codes(pc.check(vo_plan(), chars)))
+        self.assertNotIn("KEEPER_VO_NO_TALK_REF", codes(pc.check(plan(), chars)))   # a talking plan does not need it
+
+    def test_the_cover_before_and_after_his_line_is_compose_s_own(self):
+        p = vo_plan()
+        n = len(p["shots"])
+        self.assertEqual(pc.vo_cover(p["shots"], n - 1), (0.0, pc.TAIL))        # the closing tail, after a VO shot
+        self.assertEqual(pc.vo_cover(p["shots"], n - 2), (0.0, pc.LINE_GAP))    # after scenes: the gap after it
+        p["shots"][-2] = keeper("k-insight", [4])                                # a talking Keeper before it
+        self.assertEqual(pc.vo_cover(p["shots"], n - 1), (pc.LINE_GAP, pc.TAIL))
+        self.assertEqual(pc.vo_covered(6.0, p["shots"], n - 1), 6.0 + pc.LINE_GAP + pc.TAIL)
+
+    def test_the_line_cap_counts_the_gap_before_and_the_tail_after(self):
+        """Review of #423: the cap was the line + after only; a talking Keeper before a voice-over one leaves the gap
+        before it on the voice-over clip too."""
+        found = None
+        for n in range(10, 60):
+            text = " ".join(["the full story is in the long video"] * 8).split()[:n]
+            text = " ".join(text) + " part eight tomorrow."
+            vo = vo_plan()
+            vo["narration"][5]["text"] = text
+            mixed = copy.deepcopy(vo)
+            mixed["shots"][-2] = keeper("k-insight", [4])
+            a = [x for x in pc.check(vo, CHARS)["problems"] if x.startswith("KEEPER_LINE_TOO_LONG shot 14")]
+            b = [x for x in pc.check(mixed, CHARS)["problems"] if x.startswith("KEEPER_LINE_TOO_LONG shot 14")]
+            if not a and b:
+                found = n
+                break
+        self.assertIsNotNone(found)   # some line fits after a voice-over shot but not after a talking one
+
+    def test_a_voiceover_line_under_the_input_floor_is_refused_as_in_the_build(self):
+        # lines_step refuses a Keeper line under KEEPER_AUDIO[0] (2.0 s); the plan refuses it first
+        p = vo_plan()
+        p["narration"][5]["text"] = "Part eight tomorrow."
+        self.assertIn("KEEPER_LINE_TOO_SHORT", codes(pc.check(p, CHARS)))
+        self.assertEqual(pc.VO_LINE_MIN, pc.KEEPER_AUDIO[0])
+
+    def test_he_faces_the_lens_so_the_still_mouth_check_finds_his_face(self):
+        # direct closed-mouth clips, 26/10: looking down into the fire the landmarker found his face in 2 % and 17 % of
+        # the frames (FACE_NOT_FOUND); facing the lens with the talking reference, 100 %
+        for old, new in (("looks straight into the camera", "looks down into the campfire"),
+                         ("looks straight into the camera", "gazes into the fire"),
+                         ("holds his head level and looks straight into the camera", "lowers his eyes"),
+                         ("static camera", "slow push-in")):
+            p = vo_plan()
+            p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(old, new)
+            found = codes(pc.check(p, CHARS))
+            self.assertIn("KEEPER_VO_POSE", found, new)
+            self.assertNotIn("KEEPER_POSE", found, new)
+
+    def test_his_look_and_wardrobe_stay_word_for_word(self):
+        p = vo_plan()
+        p["shots"][-1]["prompt"] = p["shots"][-1]["prompt"].replace("silver beard", "grey beard")
+        self.assertIn("CHARACTER_LOOK_CHANGED", codes(pc.check(p, CHARS)))
+        p = vo_plan()
+        p["shots"][-1]["prompt"] = p["shots"][-1]["prompt"].replace("seated by a small campfire", "standing")
+        self.assertIn("KEEPER_WARDROBE", codes(pc.check(p, CHARS)))
+
+    def test_the_keeper_and_lesson_shares_still_count_voiceover_shots(self):
+        narration = plan()["narration"]
+        narration[3] = {"kind": "insight", "text": " ".join(["Notice the order, grief comes before judgment."] * 3)}
+        narration.insert(4, {"kind": "insight", "text": " ".join(["Grief comes before the judgment of the flood."] * 3)})
+        narration.insert(5, {"kind": "insight", "text": " ".join(["The flood is the story of a wounded heart."] * 3)})
+        shots = plan()["shots"][:9] + [keeper_vo("k-a", [3]), keeper_vo("k-b", [4]), keeper_vo("k-c", [5]),
+                                       keeper_vo("k-insight", [6]), keeper_vo("k-close", [7])]
+        found = codes(pc.check(plan(shots, narration), CHARS))
+        self.assertIn("KEEPER_SHARE", found)
+        self.assertIn("LESSON_SHARE", found)
+
+    def test_a_voiceover_keeper_never_opens_and_closes_after_the_climax(self):
+        p = vo_plan()
+        p["shots"][0] = keeper_vo("k-open", [0])
+        p["shots"][1:3] = []
+        self.assertIn("KEEPER_OPENS", codes(pc.check(p, CHARS)))
+        p = vo_plan()
+        p["shots"].insert(5, keeper_vo("k-early", [2]))
+        p["shots"][6:9] = []
+        self.assertIn("KEEPER_BEFORE_CLIMAX", codes(pc.check(p, CHARS)))
+
+    def test_the_clip_length_comes_from_the_line_and_no_talk_rule_applies(self):
+        p = vo_plan()
+        p["shots"][-1]["seconds"] = 8
+        self.assertIn("KEEPER_SHOT_FIELDS", codes(pc.check(p, CHARS)))
+        # a 10-word close sits in the 3.94-4.14 s band no talking clip reaches (TALK_LINE_UNREACHABLE when he talks);
+        # as a voice-over there is no Pavo audio and no retime, so it is not refused
+        short = "The full story is in the long video, part eight tomorrow."
+        talking = plan()
+        talking["narration"][5]["text"] = short
+        self.assertIn("TALK_LINE_UNREACHABLE", codes(pc.check(talking, CHARS)))
+        p = vo_plan()
+        p["narration"][5]["text"] = short
+        self.assertNotIn("TALK_LINE_UNREACHABLE", codes(pc.check(p, CHARS)))
+        self.assertEqual(pc.vo_clip_seconds(8.42 + pc.TAIL), 10)       # ceil(line + tail), 4-12 s
+        self.assertEqual(pc.vo_clip_seconds(2.1 + pc.LINE_GAP), 4)
+        self.assertEqual(pc.vo_clip_seconds(14.0 + pc.TAIL), 12)       # the compose slows it at most 1.3
+
+    def test_a_voiceover_line_too_long_for_one_clip_is_refused(self):
+        p = vo_plan()
+        p["narration"][5]["text"] = " ".join(["The full story is in the long video, see you tomorrow."] * 4)
+        self.assertIn("KEEPER_LINE_TOO_LONG", codes(pc.check(p, CHARS)))
+
+    def test_voiceover_is_only_a_keeper_flag_and_only_true_or_false(self):
+        p = vo_plan()
+        p["shots"][1]["voiceover"] = True
+        self.assertIn("VOICEOVER_FIELD", codes(pc.check(p, CHARS)))
+        p = vo_plan()
+        p["shots"][-1]["voiceover"] = "yes"
+        self.assertIn("VOICEOVER_FIELD", codes(pc.check(p, CHARS)))
+
+    def test_genesis_7_is_the_voiceover_plan_and_keeps_every_scene_and_god_shot(self):
+        """Plan B for 27/10 (the lip-synced Keeper passed 1 in 45, #419): genesis-07's three Keeper shots switched to
+        voice-over, their lines unchanged; every scene and God shot byte-identical to the plan run 40307414749 built
+        from, so its resume keeps the 30 clips (E93)."""
+        old_text = talking_genesis_07()
+        base, vo = json.loads(old_text), json.loads(EXAMPLE.read_text())
+        self.assertFalse(any(s.get("voiceover") for s in base["shots"]))
+        r = pc.check(vo)
+        self.assertEqual((r["problems"], r["pending"]), ([], []))
+        self.assertEqual(vo["narration"], base["narration"])
+        self.assertEqual({k: v for k, v in vo.items() if k != "shots"}, {k: v for k, v in base.items() if k != "shots"})
+        self.assertEqual(len(vo["shots"]), len(base["shots"]))
+        for a, b in zip(base["shots"], vo["shots"]):
+            if a["kind"] == "keeper":
+                self.assertEqual((b["id"], b["lines"], b.get("voiceover")), (a["id"], a["lines"], True))
+            else:
+                self.assertEqual(json.dumps(b, sort_keys=True), json.dumps(a, sort_keys=True))
+        self.assertEqual(sum(1 for s in vo["shots"] if s["kind"] == "scene"), 30)
+        text = EXAMPLE.read_text()
+        self.assertFalse((HERE / "plans" / "genesis-07-short-vo.json").exists())   # one genesis-07 plan, dispatchable
+        for a in base["shots"]:
+            if a["kind"] == "scene":    # byte for byte, as the file is written
+                self.assertIn(json.dumps(a, indent=1, ensure_ascii=False).replace("\n", "\n  "), text)
 
 
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
