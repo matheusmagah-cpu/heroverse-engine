@@ -31,8 +31,8 @@
   "weights_sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
   "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
  },
- "vetting": "PENDING",
- "vetting_note": "Claude reviews the frame sheet (library/sheets/pavo-<run>.jpg) and sets APPROVED in a later PR",
+ "vetting": "APPROVED",
+ "vetting_note": "Claude 2026-10-26: 1440p frame sheet library/sheets/pavo-40250361689.jpg reviewed; no people, no modern objects, clean upscale",
  "release_asset": "footage-pavo-015-sun-moon-sha256-dcb9f5a03cde4e3f157bd39502891fa788d4a1153715cb4a5bfe45e01fc5270f.mp4",
  "release_tag": "v0.0.0-cloud-assets-20261025"
 }

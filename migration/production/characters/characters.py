@@ -16,6 +16,7 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 RELEASE = "https://github.com/matheusmagah-cpu/heroverse-engine/releases/download/"
+RAW = "https://raw.githubusercontent.com/matheusmagah-cpu/heroverse-engine/main/"   # refs kept in the repository
 LEGACY_TAG = "v0.0.0-cloud-assets-20261013"   # records made before E85 name no release_tag
 MAX_REFS = 5                      # Agnes Video 2.5 Flash reference mode
 REF_ORDER = ("front", "three-quarter", "full")
@@ -50,6 +51,8 @@ def reference_urls(ids, images_dir=HERE / "images", chars=None):
             m = json.loads(rec.read_text()) if rec.exists() else {}
             if m.get("release_asset"):
                 urls.append(f'{RELEASE}{m.get("release_tag") or LEGACY_TAG}/{m["release_asset"]}')
+            elif m.get("repo_path"):   # the Keeper: a reviewed frame of his first Pavo test (2026-10-26)
+                urls.append(RAW + m["repo_path"])
     if len(urls) > MAX_REFS:   # one face per character first: front views of every character, then the rest
         fronts = [u for u in urls if "-front-" in u]
         urls = (fronts + [u for u in urls if u not in fronts])[:MAX_REFS]
