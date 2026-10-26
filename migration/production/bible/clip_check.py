@@ -9,6 +9,10 @@ every sampled frame that is not all black, the rows (or columns) at both opposit
 BAR_LUMA) over more than BAR_SHARE of the side, each. Both edges, every frame: a night sky over a lit camp darkens one
 edge only, and grain or a flame breaks a band; a padded picture's bars are flat on both sides from the first frame.
 
+E111 (genesis-07 run 40389124871, s-still): with BAR_LUMA 24 a dusk camp under a black sky (top rows 14-24) over dark
+ground read as bars at both edges, and all three new generations were refused. Measured: s-well's bars read luma 1 and
+the night sky 14-24, so a bar is now a row at or under luma 8.
+
 usage: clip_check.py CLIP.mp4 [CLIP.mp4 ...]       prints one JSON line per clip; exit 1 when any clip is flagged
        clip_check.py --composed FILE.mp4 [DIP_S ...]  the composed Short: exit 1 on a black frame that is not at an
                                                      intended dip_to_black (seconds, +-0.5 s)
@@ -25,7 +29,8 @@ BLACK_LUMA = 16      # mean luma (0-255) of a frame that reads as black
 EDGE_SECONDS = 0.6   # the part of a clip a cut or a fade can show
 MIN_SHORT_SIDE = 720
 MIN_FPS = 24
-BAR_LUMA = 24        # a letterbox bar: every pixel of the row (column) at or under this luma (black 16, +codec noise)
+BAR_LUMA = 8         # a letterbox bar: every pixel of the row (column) at or under this luma (pad black reads 1;
+                     # a night sky reads 14-24, E111)
 BAR_SHARE = 0.04     # more than 4 % of the side, at BOTH opposite edges, in every sampled frame: LETTERBOX_BARS
 BAR_FRAMES = 5       # frames sampled evenly across the clip
 BAR_GRID = 90        # the short side of the sampled frame (the long side keeps the clip's ratio)

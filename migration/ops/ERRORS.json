@@ -923,6 +923,16 @@
     "file": "migration/production/bible/test_plan_check.py",
     "contains": "def test_a_scene_prompt_that_asks_for_writing_is_refused"
    }
+  },
+  {
+   "id": "E111",
+   "date": "2026-10-26",
+   "error": "genesis-07 regenerate run 40389124871 (s-well and s-scroll redone, the rest resumed) failed on s-still: the E109 check re-measured the kept clip and all three new generations of a dusk camp under a black sky over dark ground and flagged each LETTERBOX_BARS. Root cause: BAR_LUMA 24 was set without measuring a real bar against a real night: s-well's bars read grey luma 1 (flat), while s-still's night sky reads 14-24 and its ground fades to 1-8, so both edges counted as bars. E109's own test only covered a black sky with a lit lower half.",
+   "fix": "clip_check.BAR_LUMA 8: a bar is a row (column) whose every pixel reads at or under grey luma 8. Measured on the composed genesis-07: s-well still flagged (bars 0.22 each side), s-still and s-tents clean. A night sky over dark ground darkens the bottom edge only and no longer reads as a letterbox.",
+   "antidote": {
+    "file": "migration/production/bible/test_clip_check.py",
+    "contains": "def test_a_dark_sky_over_dark_ground_is_not_a_letterbox"
+   }
   }
  ]
 }
