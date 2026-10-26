@@ -554,6 +554,15 @@ def face_flags(lip_python, face_model, clip):
     return flags, {"faces": {k: result.get(k) for k in ("frames_sampled", "faces_found")}}
 
 
+def risk_order(shots):
+    """E99: (plan index, shot) with the shots that can fail first: the talking shots (lipsync_check), then God's
+    voice-over shots (no face may appear), then the scenes. A failure costs minutes, not a whole build."""
+    def rank(item):
+        shot = item[1]
+        return 0 if plan_check.talking(shot) else 1 if plan_check.speaking(shot) else 2
+    return sorted(enumerate(shots), key=rank)
+
+
 def generate_step(plan, work, lip_python, face_model, client=None, download=None, sleep=time.sleep):
     work = Path(work)
     rel(work)
@@ -567,7 +576,7 @@ def generate_step(plan, work, lip_python, face_model, client=None, download=None
     report_path = work / "report.json"
     report = load(report_path) if report_path.exists() else {}
     report.update(episode=plan["episode"], shots=report.get("shots", {}))
-    for index, shot in enumerate(plan["shots"]):
+    for index, shot in risk_order(plan["shots"]):
         req = request(shot, index, plan, layout, refs)
         entry = {"kind": shot["kind"], "lines": shot.get("lines"), "request": {k: v for k, v in req.items()}}
         if plan_check.speaking(shot):
