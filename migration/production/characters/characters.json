@@ -51,16 +51,18 @@
   "keeper": {
    "name": "The Keeper (series narrator)",
    "first_story": "every episode from part 7 (owner, 2026-10-26)",
-   "status": "DRAFT",
+   "status": "APPROVED",
    "seed": 7401,
-   "look": "an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep laugh lines, kind deep-set brown eyes, a long silver-white beard and silver hair under a hooded undyed brown wool mantle over a cream linen tunic",
+   "look": "an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe",
    "wardrobe": {
-    "study": "seated at a heavy wooden table in a lamp-lit stone room, an old leather-bound Bible open before him, a clay oil lamp beside it",
-    "fire": "seated by a small campfire at night under a starry desert sky, the old leather-bound Bible on his knee"
+    "fire": "seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands",
+    "study": "seated at a heavy wooden table in a lamp-lit stone room, an old rolled scroll open before him"
    },
-   "refs": [],
+   "refs": [
+    "front"
+   ],
    "role": "narrator only: an invented storyteller, never a biblical person, prophet, priest or angel; no staff; he says 'the Scripture says'",
-   "reviewed": "pending (reference sheet not generated yet)"
+   "reviewed": "2026-10-26: the FLUX sheet could not be made (Cloudflare free allocation used up); the Keeper's face is the one of his first two Pavo clips (fire variant), consistent in every frame; the front reference is that frame (refs/ch-keeper-front.jpg). Lip-sync with our narration verified (lipsync_check: audio 0.89 at 0 ms, lips 0.52 at 0 ms)."
   }
  }
 }
