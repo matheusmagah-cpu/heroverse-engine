@@ -147,6 +147,11 @@ VO_SPEECH = re.compile(r"(?i)\b(speak\w*|spoke|talk\w*|says|saying|said|tells?|t
                        r"chant\w*|recit\w*|narrates|narrating|words|audio|lip[- ]?sync\w*|"
                        r"lips (?:moving|move|moves|part|parts|parting|open\w*)|mouth (?:moving|moves|move|open\w*)|"
                        r"opens? his mouth|open mouth)\b")
+# the still-mouth check needs his face in 80 % of the frames, as the lips check does: in the direct closed-mouth clips
+# (evidence/pavo/20261026/keeper-vo/calibration.json) the face was found only when he faced the lens; looking down
+# into the fire lost it (2 % and 17 % of frames), so a voice-over Keeper holds the talking pose too (KEEPER_POSE words)
+VO_GAZE_OFF = re.compile(r"(?i)\blooks? (?:down|away|aside)\b|\b(?:gazes?|stares?|looks?) (?:in)?to the (?:camp)?fire\b|"
+                         r"\blowers? his (?:eyes|gaze|head)\b|\bdowncast\b|\bprofile\b")
 VO_LINE_MAX = TALK_CLIP[1] * MAX_SLOW   # line + gap or tail on one 12 s clip, slowed at most MAX_SLOW in the compose
 _KJV_TEXT = []
 
@@ -509,13 +514,20 @@ def keeper_prompt_problems(i, s, keeper):
 
 def vo_prompt_problems(i, s):
     """Plan B: a voice-over Keeper's prompt says his lips stay closed ("his lips closed, silent") and names no speech
-    (speaks, talking, says, lips moving...), so Pavo makes no talking mouth under a line he does not lip-sync."""
+    (speaks, talking, says, lips moving...), so Pavo makes no talking mouth under a line he does not lip-sync; and he
+    faces the lens on a static camera (KEEPER_POSE words, no look down into the fire), so the still-mouth check finds
+    his face."""
     p = s.get("prompt", "")
-    speech = VO_SPEECH.search(p)
-    if all(r.search(p) for r in VO_SILENT) and not speech:
-        return []
-    why = f"names speech: {speech.group(0)!r}" if speech else "say \"his lips closed, silent\""
-    return [f"KEEPER_VO_PROMPT shot {i} {s['id']} (a voice-over Keeper is silent on screen, mouth closed; {why})"]
+    out, speech = [], VO_SPEECH.search(p)
+    if not all(r.search(p) for r in VO_SILENT) or speech:
+        why = f"names speech: {speech.group(0)!r}" if speech else "say \"his lips closed, silent\""
+        out.append(f"KEEPER_VO_PROMPT shot {i} {s['id']} (a voice-over Keeper is silent on screen, mouth closed; {why})")
+    low, off = p.lower(), VO_GAZE_OFF.search(p) or KEEPER_POSE_OFF.search(p.lower())
+    if not all(w in low for w in KEEPER_POSE) or off:
+        why = f"not {off.group(0)!r}" if off else " and ".join(repr(w) for w in KEEPER_POSE)
+        out.append(f"KEEPER_VO_POSE shot {i} {s['id']} (he faces the lens on a static camera so the still-mouth check "
+                   f"finds his face; {why})")
+    return out
 
 
 def talk_reach_problems(i, s, span, slowest, gaps):

@@ -1,0 +1,597 @@
+{
+ "date": "2026-10-26",
+ "purpose": "plan B (owner, 2026-10-26): calibrate lipsync_check --still-mouth, which confirms no mouth talks in a voice-over Keeper clip",
+ "measure": "the inner-lip opening over the face height (lipsync_check.lip_opening: MediaPipe Face Landmarker pinned by sha256, VIDEO mode, every frame) on the frames where the face is found; spread = 95th minus 5th percentile; motion = mean change between consecutive frames that both have the face",
+ "tool": "mediapipe 0.10.35, model sha256 64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+ "talking_clips": {
+  "source": "evidence/pavo/20261026/keeper/keeper-lipsync.mp4 and narrator.mp4 (in the repository) and the 40 direct Keeper talking clips of PR #419 (keeper-line-length.json; conversation ids in the names), passing and failing the lips check alike. serpent.mp4 (no human face) and adam-eve-ref.mp4 (two people, face 0.52) are listed but not counted",
+  "clips": [
+   {
+    "clip": "keeper-lipsync.mp4",
+    "opening_range": 0.1041,
+    "opening_motion": 0.01078,
+    "face_frames": 0.93,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "narrator.mp4",
+    "opening_range": 0.0559,
+    "opening_motion": 0.0041,
+    "face_frames": 0.99,
+    "frames": 158,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "serpent.mp4",
+    "opening_range": null,
+    "opening_motion": null,
+    "face_frames": 0.0,
+    "frames": 192,
+    "flags": [
+     "FACE_NOT_FOUND"
+    ]
+   },
+   {
+    "clip": "adam-eve-ref.mp4",
+    "opening_range": 0.0123,
+    "opening_motion": 0.00081,
+    "face_frames": 0.52,
+    "frames": 192,
+    "flags": [
+     "FACE_NOT_FOUND"
+    ]
+   },
+   {
+    "clip": "a-insight-373070160690678848.mp4",
+    "opening_range": 0.1026,
+    "opening_motion": 0.0101,
+    "face_frames": 0.92,
+    "frames": 226,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "a-insight-373073532260977728.mp4",
+    "opening_range": 0.0936,
+    "opening_motion": 0.00977,
+    "face_frames": 0.89,
+    "frames": 226,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "a-insight-373076337466542720.mp4",
+    "opening_range": 0.0985,
+    "opening_motion": 0.01094,
+    "face_frames": 0.95,
+    "frames": 226,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "b-insight-a-373070275183195904.mp4",
+    "opening_range": 0.0867,
+    "opening_motion": 0.01068,
+    "face_frames": 0.96,
+    "frames": 107,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "b-insight-a-373073590847016000.mp4",
+    "opening_range": 0.0941,
+    "opening_motion": 0.01091,
+    "face_frames": 0.92,
+    "frames": 107,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "b-insight-a-373076404273493760.mp4",
+    "opening_range": 0.0912,
+    "opening_motion": 0.01017,
+    "face_frames": 0.94,
+    "frames": 107,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "b-insight-b-373070465100960384.mp4",
+    "opening_range": 0.1078,
+    "opening_motion": 0.01137,
+    "face_frames": 0.92,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "b-insight-b-373073653086327040.mp4",
+    "opening_range": 0.114,
+    "opening_motion": 0.01075,
+    "face_frames": 0.94,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "b-insight-b-373076495855554816.mp4",
+    "opening_range": 0.1159,
+    "opening_motion": 0.00931,
+    "face_frames": 0.98,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "c-close-373070576904116800.mp4",
+    "opening_range": 0.1081,
+    "opening_motion": 0.00886,
+    "face_frames": 0.9,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "c-close-373073787320832256.mp4",
+    "opening_range": 0.1142,
+    "opening_motion": 0.01078,
+    "face_frames": 0.98,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "c-close-373076616940893952.mp4",
+    "opening_range": 0.1091,
+    "opening_motion": 0.00939,
+    "face_frames": 0.96,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "c-question-373070517257422336.mp4",
+    "opening_range": 0.1017,
+    "opening_motion": 0.01182,
+    "face_frames": 0.95,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "c-question-373073709282178816.mp4",
+    "opening_range": 0.1177,
+    "opening_motion": 0.01126,
+    "face_frames": 0.98,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "c-question-373076549463521024.mp4",
+    "opening_range": 0.1028,
+    "opening_motion": 0.01083,
+    "face_frames": 0.95,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "ctl-line01-373076751750579712.mp4",
+    "opening_range": 0.1017,
+    "opening_motion": 0.0089,
+    "face_frames": 0.95,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "d-insight-373081196097720960.mp4",
+    "opening_range": 0.1077,
+    "opening_motion": 0.0088,
+    "face_frames": 0.91,
+    "frames": 243,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "d-insight-373081567361054464.mp4",
+    "opening_range": 0.1087,
+    "opening_motion": 0.00987,
+    "face_frames": 0.94,
+    "frames": 243,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "d-insight-373084801999892544.mp4",
+    "opening_range": 0.1093,
+    "opening_motion": 0.00927,
+    "face_frames": 0.87,
+    "frames": 243,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "d-question-373080917365569280.mp4",
+    "opening_range": 0.1004,
+    "opening_motion": 0.00867,
+    "face_frames": 0.9,
+    "frames": 158,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "d-question-373081384639828224.mp4",
+    "opening_range": 0.1076,
+    "opening_motion": 0.00993,
+    "face_frames": 0.92,
+    "frames": 158,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "d-question-373084604548826624.mp4",
+    "opening_range": 0.0982,
+    "opening_motion": 0.01134,
+    "face_frames": 0.93,
+    "frames": 158,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "e-question-373081024962049792.mp4",
+    "opening_range": 0.0951,
+    "opening_motion": 0.01248,
+    "face_frames": 0.95,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "e-question-373081450138628160.mp4",
+    "opening_range": 0.0913,
+    "opening_motion": 0.01207,
+    "face_frames": 0.98,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "e-question-373084677227755264.mp4",
+    "opening_range": 0.1037,
+    "opening_motion": 0.0117,
+    "face_frames": 0.99,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "f-question-373081128011904768.mp4",
+    "opening_range": 0.1099,
+    "opening_motion": 0.01326,
+    "face_frames": 0.99,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "f-question-373081505461497920.mp4",
+    "opening_range": 0.1014,
+    "opening_motion": 0.01199,
+    "face_frames": 1.0,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "f-question-373084738435204608.mp4",
+    "opening_range": 0.1005,
+    "opening_motion": 0.01212,
+    "face_frames": 0.96,
+    "frames": 124,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "g-question-373088576818664064.mp4",
+    "opening_range": 0.1028,
+    "opening_motion": 0.01135,
+    "face_frames": 0.96,
+    "frames": 158,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "g-question-373088634494859008.mp4",
+    "opening_range": 0.1124,
+    "opening_motion": 0.01047,
+    "face_frames": 0.95,
+    "frames": 158,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "g-question-373088699250719424.mp4",
+    "opening_range": 0.1008,
+    "opening_motion": 0.01121,
+    "face_frames": 0.88,
+    "frames": 158,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "h-line01-speed1-373088760189160512.mp4",
+    "opening_range": 0.1114,
+    "opening_motion": 0.01031,
+    "face_frames": 0.97,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "h-line01-speed1-373088817366495296.mp4",
+    "opening_range": 0.1043,
+    "opening_motion": 0.01054,
+    "face_frames": 0.95,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "h-line01-speed1-373088880058746368.mp4",
+    "opening_range": 0.106,
+    "opening_motion": 0.00976,
+    "face_frames": 0.91,
+    "frames": 175,
+    "flags": [
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "r1-question-373093862497585792.mp4",
+    "opening_range": 0.1253,
+    "opening_motion": 0.0129,
+    "face_frames": 0.45,
+    "frames": 124,
+    "flags": [
+     "FACE_NOT_FOUND",
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "r1-question-373093922048361984.mp4",
+    "opening_range": 0.1019,
+    "opening_motion": 0.01102,
+    "face_frames": 0.43,
+    "frames": 124,
+    "flags": [
+     "FACE_NOT_FOUND",
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "r1-question-373093995402573568.mp4",
+    "opening_range": 0.1232,
+    "opening_motion": 0.01831,
+    "face_frames": 0.59,
+    "frames": 124,
+    "flags": [
+     "FACE_NOT_FOUND",
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "r2-question-373096447199754944.mp4",
+    "opening_range": 0.0718,
+    "opening_motion": 0.01126,
+    "face_frames": 0.49,
+    "frames": 124,
+    "flags": [
+     "FACE_NOT_FOUND",
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "r2-question-373096510865017472.mp4",
+    "opening_range": 0.0957,
+    "opening_motion": 0.01142,
+    "face_frames": 0.69,
+    "frames": 124,
+    "flags": [
+     "FACE_NOT_FOUND",
+     "MOUTH_TALKING"
+    ]
+   },
+   {
+    "clip": "r2-question-373096585455995968.mp4",
+    "opening_range": 0.061,
+    "opening_motion": 0.00919,
+    "face_frames": 0.57,
+    "frames": 124,
+    "flags": [
+     "FACE_NOT_FOUND",
+     "MOUTH_TALKING"
+    ]
+   }
+  ],
+  "counted": 42,
+  "spread": [
+   0.0559,
+   0.1253
+  ],
+  "motion": [
+   0.0041,
+   0.01831
+  ],
+  "every_one_flagged_MOUTH_TALKING": true
+ },
+ "closed_mouth_clips": {
+  "source": "direct Pavo calls (heroverse-pavo MCP), agnes-video-new-flash 720p 9:16, a fresh exact 0-credit quote before each, one reference alone, no audio, sound false; Pavo's audio track stripped (-an); the clips are in this folder. 6 generations, the cap",
+  "generations": [
+   {
+    "n": 1,
+    "conversation_id": "373095612252221504",
+    "clip": "vo-insight-373095612252221504.mp4",
+    "seconds": 9,
+    "reference": "migration/production/characters/refs/ch-keeper-front.jpg",
+    "prompt": "plan B k-insight, first draft: medium close-up, looks down into the campfire, his lips closed, silent",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0037,
+     "opening_motion": null,
+     "face_frames": 0.02,
+     "frames": 226,
+     "flags": [
+      "FACE_NOT_FOUND"
+     ]
+    },
+    "pass": false
+   },
+   {
+    "n": 2,
+    "conversation_id": "373095704325601984",
+    "clip": "vo-question-373095704325601984.mp4",
+    "seconds": 6,
+    "reference": "migration/production/characters/refs/ch-keeper-front.jpg",
+    "prompt": "plan B k-question, first draft: slowly rolls the old scroll closed, his lips closed, silent",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0044,
+     "opening_motion": 0.00079,
+     "face_frames": 0.27,
+     "frames": 158,
+     "flags": [
+      "FACE_NOT_FOUND"
+     ]
+    },
+    "pass": false
+   },
+   {
+    "n": 3,
+    "conversation_id": "373095804094978624",
+    "clip": "vo-close-373095804094978624.mp4",
+    "seconds": 8,
+    "reference": "migration/production/characters/refs/ch-keeper-front.jpg",
+    "prompt": "plan B k-close, first draft: raises his eyes from the fire and looks straight into the camera, his lips closed, silent, a faint warm smile",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0045,
+     "opening_motion": 0.00123,
+     "face_frames": 0.18,
+     "frames": 192,
+     "flags": [
+      "FACE_NOT_FOUND"
+     ]
+    },
+    "pass": false
+   },
+   {
+    "n": 4,
+    "conversation_id": "373097892611438336",
+    "clip": "vo-close-lit-373097892611438336.mp4",
+    "seconds": 8,
+    "reference": "migration/production/characters/refs/ch-keeper-front.jpg",
+    "prompt": "k-close, medium shot, looks straight into the camera, his whole face lit evenly from the front, his lips closed, silent",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0025,
+     "opening_motion": 0.00076,
+     "face_frames": 0.12,
+     "frames": 192,
+     "flags": [
+      "FACE_NOT_FOUND"
+     ]
+    },
+    "pass": false
+   },
+   {
+    "n": 5,
+    "conversation_id": "373100393016087168",
+    "clip": "vo-close-talkref-373100393016087168.mp4",
+    "seconds": 8,
+    "reference": "migration/evidence/pavo/20261026/keeper/storyteller-ref.jpg",
+    "prompt": "word for word the k-close prompt of plans/genesis-07-short-vo.json",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0408,
+     "opening_motion": 0.00063,
+     "face_frames": 1.0,
+     "frames": 192,
+     "flags": []
+    },
+    "pass": true,
+    "prompt_text": "Painterly cinematic realism with Old-Master light, one warm grade, cinema camera, fine film grain. Medium shot, static camera. The narrator, an original elderly storyteller of about seventy with Middle Eastern features, weathered warm olive skin with deep lines on the forehead, kind deep-set brown eyes, a very long silver-white beard and long silver hair under a hooded brown wool robe, seated cross-legged by a small campfire at night under a starry desert sky, holding an old rolled scroll in both hands, holds his head level and looks straight into the camera, his lips closed, silent, a faint warm smile, breathing slowly. Night in the open desert, the campfire's warm flicker on his face, deep blue darkness and stars behind him. Warm and expectant. No text, no logos."
+   },
+   {
+    "n": 6,
+    "conversation_id": "373102497449398912",
+    "clip": "vo-insight-talkref-373102497449398912.mp4",
+    "seconds": 9,
+    "reference": "migration/evidence/pavo/20261026/keeper/storyteller-ref.jpg",
+    "prompt": "the first-draft k-insight prompt (looks down into the campfire)",
+    "quoted_credits": 0,
+    "still_mouth": {
+     "opening_range": 0.0657,
+     "opening_motion": 0.00252,
+     "face_frames": 0.17,
+     "frames": 226,
+     "flags": [
+      "FACE_NOT_FOUND"
+     ]
+    },
+    "pass": false
+   }
+  ]
+ },
+ "thresholds": {
+  "STILL_MOUTH_RANGE_MAX": 0.016,
+  "STILL_MOUTH_MOTION_MAX": 0.0032,
+  "rule": "MOUTH_TALKING when spread > 0.016 AND motion > 0.0032; FACE_NOT_FOUND when the face is in < 80 % of the frames (unchanged from the lips check)",
+  "why": "spread: closed 0.0025-0.0045 vs talking >= 0.056 (geometric middle 0.016); motion: closed <= 0.0025 vs talking >= 0.0041 (the Keeper's >= 0.0087; middle 0.0032). The spread alone would flag a mouth that settles once from the open talking reference (0.041-0.066, motion 0.0006-0.0025): talking is wide and fast"
+ },
+ "findings": [
+  "with the approved mouth-closed front reference the face landmarker found his face in 2-27 % of the frames: 4 of 4 FACE_NOT_FOUND, whatever the gaze or the light (dark hood, side firelight, the beard over a closed mouth); a voice-over shot built that way would fail the run",
+  "with the talking reference (storyteller-ref.jpg, his `talk_refs` frame) facing the lens: face 100 %, the mouth starts as in the reference (opening 0.061) and settles closed within 2.5 s, then stays closed (0.002) to the end: passes (spread 0.041, motion 0.0006)",
+  "with the talking reference looking down into the fire: face 17 %, FACE_NOT_FOUND",
+  "so a voice-over Keeper uses his talking frame and faces the lens on a static camera (plan_check KEEPER_VO_POSE); the owner's 'into the fire' and 'closing the scroll' become the fire beside him and the scroll rolled closed while he faces the camera"
+ ]
+}

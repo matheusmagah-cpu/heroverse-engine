@@ -787,6 +787,9 @@ class Refs(unittest.TestCase):
             out = eb.refs_step(plan, work)
             self.assertEqual(sorted(out), ["keeper", "keeper:talk"])
             self.assertTrue(out["keeper:talk"][0].endswith("ch-keeper-talk.jpg"))
+            # plan B: a voice-over Keeper shot also gets his talking frame (the still-mouth check needs his face)
+            vo = eb.refs_step({"shots": [{"id": "k", "kind": "keeper", "voiceover": True, "lines": [0]}]}, work)
+            self.assertEqual(sorted(vo), ["keeper", "keeper:talk"])
         finally:
             shutil.rmtree(work)
 
@@ -838,10 +841,16 @@ def vo_dialogue_plan():
 
 
 class KeeperVoiceover(unittest.TestCase):
-    """Plan B (owner, 2026-10-26): a `"voiceover": true` Keeper shot sends his approved references and no audio, binds
-    no speech, is checked for a still mouth (lipsync_check --still-mouth) and plays his line from the voice track."""
+    """Plan B (owner, 2026-10-26): a `"voiceover": true` Keeper shot sends his talking-frame reference and no audio,
+    binds no speech, is checked for a still mouth (lipsync_check --still-mouth) and plays his line from the voice
+    track."""
 
-    def test_the_request_sends_the_front_reference_no_audio_and_no_speech_clause(self):
+    def test_the_request_sends_the_reference_whose_clips_show_his_face_and_no_audio_or_speech(self):
+        # keeper-vo/calibration.json: with the mouth-closed front view the face was found in 2-27 % of the frames (4 of
+        # 4 FACE_NOT_FOUND); with the talking frame, facing the lens, in 100 %. No talking frame: his approved refs
+        lone = eb.request(VO_EXAMPLE["shots"][-1], len(VO_EXAMPLE["shots"]) - 1, VO_EXAMPLE,
+                          layout_for(VO_EXAMPLE, DURATIONS), {"keeper": ["front.jpg"]})
+        self.assertEqual(lone["references"], ["front.jpg"])
         layout = layout_for(VO_EXAMPLE, DURATIONS)
         refs = {"keeper": [".episode/x/refs/ch-keeper-front.jpg"], "keeper:talk": [".episode/x/refs/ch-keeper-talk.jpg"]}
         shots = VO_EXAMPLE["shots"]
@@ -849,7 +858,7 @@ class KeeperVoiceover(unittest.TestCase):
             if s["kind"] != "keeper":
                 continue
             r = eb.request(s, i, VO_EXAMPLE, layout, refs)
-            self.assertEqual(r["references"], refs["keeper"], s["id"])      # the front view, never the talking frame
+            self.assertEqual(r["references"], refs["keeper:talk"], s["id"])   # the frame whose clips show his face
             self.assertIsNone(r["audios"], s["id"])
             self.assertEqual(r["prompt"], s["prompt"], s["id"])             # no "Image 1 is", no "speaks the words"
             self.assertFalse(r["sound"])
@@ -986,7 +995,7 @@ class StillMouthGate(unittest.TestCase):
         self.assertEqual(self.still, ["k-close.mp4"])
         self.assertIn("k-close.mp4", self.stripped)
         k = [c for c in client.calls if c["prompt"] == self.plan["shots"][-1]["prompt"]][0]
-        self.assertEqual((k["references"], k["audios"]), (["k.jpg"], None))
+        self.assertEqual((k["references"], k["audios"]), (["k-talk.jpg"], None))
         self.assertEqual(report["shots"]["k-close"]["attempts"][0]["still_mouth"]["opening_range"], 0.01)
 
     def test_a_talking_mouth_is_regenerated_at_most_twice_then_the_run_stops(self):

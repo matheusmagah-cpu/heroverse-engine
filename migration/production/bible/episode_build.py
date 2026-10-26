@@ -332,7 +332,7 @@ def refs_step(plan, work, fetch=fetch_release_asset, chars=None):
         for cid in (["keeper"] if s["kind"] == "keeper" else s.get("characters", [])):
             if cid not in needed:
                 needed.append(cid)
-        if plan_check.talking(s) and speaker_of(s) not in talkers:
+        if (plan_check.talking(s) or plan_check.voiceover(s)) and speaker_of(s) not in talkers:
             talkers.append(speaker_of(s))
     out = {}
     wanted = [(cid, cid, "refs") for cid in needed] + [(f"{cid}:talk", cid, "talk_refs") for cid in talkers]
@@ -435,7 +435,9 @@ def bind_prompt(prompt, who, chars=None):
 def request(shot, index, plan, layout, refs, chars=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
     speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen. A
-    voice-over Keeper shot (plan B) sends his approved front reference, no audio and no speech clause."""
+    voice-over Keeper shot (plan B) sends his `talk_refs` frame alone (keeper-vo/calibration.json: with the
+    mouth-closed front view the landmarker found his face in 2-27 % of the frames, FACE_NOT_FOUND in 4 of 4; with
+    the talking frame, facing the lens, 100 %), no audio and no speech clause."""
     ids = ["keeper"] if shot["kind"] == "keeper" else shot.get("characters", [])
     talks = plan_check.talking(shot)
     prompt = shot["prompt"]
@@ -446,6 +448,8 @@ def request(shot, index, plan, layout, refs, chars=None):
         ids = [who] + [c for c in ids if c != who]
         references = list(refs.get(f"{who}:talk") or refs[who]) + [p for cid in ids[1:] for p in refs[cid]]
         prompt = bind_prompt(prompt, who, chars)
+    elif plan_check.voiceover(shot):
+        references = list(refs.get(f"{ch.NARRATOR}:talk") or refs[ch.NARRATOR])
     else:
         references = [p for cid in ids for p in refs[cid]]
     if len(references) > ch.MAX_REFS:

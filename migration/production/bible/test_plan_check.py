@@ -530,7 +530,7 @@ class Plan(unittest.TestCase):
 VO_PLAN = HERE / "plans" / "genesis-07-short-vo.json"
 
 
-def keeper_vo(sid, lines, action="looks down into the campfire"):
+def keeper_vo(sid, lines, action="holds his head level and looks straight into the camera"):
     return {"id": sid, "kind": "keeper", "voiceover": True, "lines": lines,
             "prompt": f"{STYLE} Medium close-up, static camera. The narrator, {KEEPER_LOOK}, seated by a small campfire, "
                       f"{action}, his lips closed, silent, as the flames flicker. Night in the desert, firelight. Warm "
@@ -539,7 +539,9 @@ def keeper_vo(sid, lines, action="looks down into the campfire"):
 
 def vo_plan(**kw):
     p = plan(**kw)
-    p["shots"][-2:] = [keeper_vo("k-insight", [4]), keeper_vo("k-close", [5], "looks straight into the camera")]
+    p["shots"][-2:] = [keeper_vo("k-insight", [4]),
+                       keeper_vo("k-close", [5], "holds his head level, looks straight into the camera and rolls the "
+                                                 "scroll closed")]
     return p
 
 
@@ -570,10 +572,10 @@ class KeeperVoiceover(unittest.TestCase):
 
     def test_the_prompt_must_say_his_lips_stay_closed_and_name_no_speech(self):
         for old, new in (("his lips closed, silent", "calm"), ("his lips closed, silent", "his lips closed"),
-                         ("looks down into the campfire", "speaks to the camera"),
-                         ("looks down into the campfire", "says a few words"),
-                         ("looks down into the campfire", "is talking softly"),
-                         ("looks down into the campfire", "his lips moving gently")):
+                         ("looks straight into the camera", "looks straight into the camera and speaks"),
+                         ("looks straight into the camera", "looks straight into the camera and says a few words"),
+                         ("looks straight into the camera", "looks straight into the camera, talking softly"),
+                         ("looks straight into the camera", "looks straight into the camera, his lips moving")):
             p = vo_plan()
             p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(old, new)
             self.assertIn("KEEPER_VO_PROMPT", codes(pc.check(p, CHARS)), new)
@@ -581,6 +583,19 @@ class KeeperVoiceover(unittest.TestCase):
         found = codes(pc.check(vo_plan(), CHARS))
         self.assertNotIn("KEEPER_NOT_SPEAKING", found)
         self.assertNotIn("KEEPER_POSE", found)
+
+    def test_he_faces_the_lens_so_the_still_mouth_check_finds_his_face(self):
+        # direct closed-mouth clips, 26/10: looking down into the fire the landmarker found his face in 2 % and 17 % of
+        # the frames (FACE_NOT_FOUND); facing the lens with the talking reference, 100 %
+        for old, new in (("looks straight into the camera", "looks down into the campfire"),
+                         ("looks straight into the camera", "gazes into the fire"),
+                         ("holds his head level and looks straight into the camera", "lowers his eyes"),
+                         ("static camera", "slow push-in")):
+            p = vo_plan()
+            p["shots"][-2]["prompt"] = p["shots"][-2]["prompt"].replace(old, new)
+            found = codes(pc.check(p, CHARS))
+            self.assertIn("KEEPER_VO_POSE", found, new)
+            self.assertNotIn("KEEPER_POSE", found, new)
 
     def test_his_look_and_wardrobe_stay_word_for_word(self):
         p = vo_plan()

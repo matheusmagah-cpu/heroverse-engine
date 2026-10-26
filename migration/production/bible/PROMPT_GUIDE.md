@@ -167,3 +167,39 @@ speaking); a failed shot is a NEW generation at most 2 times (5 for a talking cl
 clip's picture spans exactly its line's audio, from the start of its clip at normal speed, its last frame held for the
 gap or tail; `short_engine.talk_problems` refuses it off its line) → `clip_check.py --composed`, loudness -14 +-1 LUFS → 20-frame sheet and per-shot report for
 Claude's review at 9.5.
+
+## Keeper voice-over: the owner-approved fallback (plan B, owner 2026-10-26)
+The owner's decision for genesis-07 (26/10, as relayed): "If the last test fails, genesis-07 publishes 27/10 13:30 UTC
+with the Keeper ON SCREEN at the close in calm, mouth-closed shots: looking into the fire, closing the scroll, looking
+at the camera at the very end. His narration plays as a voice-over, so nobody appears to speak with a still mouth and
+there is no wrong lip sync. The check must confirm that no mouth is talking in those shots." The test failed: his
+lip-synced lines passed 1 time in 45 (PR #419, `evidence/pavo/20261026/keeper-line-length.json`).
+
+An explicit, opt-in plan mode; a Keeper shot without the flag still talks, lip-synced, as above.
+- **The plan:** a `keeper` shot may carry `"voiceover": true` (a keeper shot only, true or false, else
+  `VOICEOVER_FIELD`). It is not a talking shot: no input audio, no `TALK_*` retime, no `KEEPER_POSE`. Its prompt says
+  his mouth stays closed ("his lips closed, silent") and names no speech (speaks, talking, says, lips moving, words,
+  audio...), else `KEEPER_VO_PROMPT`; he faces the lens on a static camera ("static camera", "looks straight into the
+  camera"; no looking down into the fire, lowered eyes, push-in or lean), else `KEEPER_VO_POSE`. His `look` and one
+  `wardrobe` variant stay word for word; Keeper <= 25 %, lesson <= 25 %, only after the climax, never opens, closes:
+  all count these shots. His line is narration in am_michael carried by the voice track; the clip is ceil(line + the
+  0.35 s gap, or the 1.2 s closing tail) seconds, 4-12 (`plan_check.vo_clip_seconds`), the line + gap/tail <= 15.6 s.
+- **The build:** the request sends his `talk_refs` frame alone (else his approved refs), no audio, no speech clause;
+  Pavo's audio is stripped. `lipsync_check.py --still-mouth` (the same pinned landmarker and inner-lip opening as the
+  lips check) flags `MOUTH_TALKING` when the opening is both wide (p95 - p5 > 0.016 of the face height) and fast
+  (mean frame-to-frame change > 0.0032), and `FACE_NOT_FOUND` under 80 % of the frames, as for the lips; at most 2
+  regenerations, generated right after the talking shots (E99). The compose plays his clip unbroken from its 0 s over
+  his line (slowed at most 1.3, never cut or held); his words and captions come from the voice track.
+- **Why these rules** (`evidence/pavo/20261026/keeper-vo/calibration.json`, 6 direct 0-credit Pavo clips + 42 talking
+  clips): 42 talking clips (the Keeper's, passing and failing the lips alike, and the genesis-06 narrator) spread
+  0.056-0.125, motion 0.0041-0.018, all `MOUTH_TALKING`. With the mouth-closed front reference his face was found in
+  2-27 % of the frames (4 of 4 `FACE_NOT_FOUND`, whatever the gaze or light); with his talking frame facing the lens,
+  100 %, the mouth settling closed within 2.5 s from the reference's open mouth and staying closed (spread 0.041,
+  motion 0.0006: passes); looking down into the fire, 17 % (`FACE_NOT_FOUND`). So the owner's "into the fire" and
+  "closing the scroll" are the fire beside him and the scroll rolled closed while he faces the camera.
+- **Ready variant:** `plans/genesis-07-short-vo.json` is genesis-07-short.json with the three Keeper shots switched to
+  voice-over (prompts rewritten; k-close word for word the clip that passed; lines unchanged); every scene and God shot
+  byte-identical, so a resume of run 40307414749 keeps its 30 clips (E93: the same request). Measured locally with
+  Kokoro: 173.8 s (the Keeper's lines no longer retimed), Keeper 11.0 %, lesson 11.4 %. Its `episode` stays
+  `genesis-07-short`: episode.yml requires the plan file to be named after it, so it is dispatched by putting it in
+  place of genesis-07-short.json (by PR), not under its own name.

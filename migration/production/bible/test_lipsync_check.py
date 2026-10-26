@@ -60,21 +60,35 @@ class GodShotFaces(unittest.TestCase):
 
 class StillMouth(unittest.TestCase):
     """Plan B (owner, 2026-10-26): a voice-over Keeper clip shows no talking mouth. The inner-lip opening over the
-    face height varies over a talking clip (p95 - p5: the 34 Keeper talking clips of 26/10 0.087-0.118, the genesis-06
-    narrator 0.056) and stays put with the lips closed (the direct closed-mouth Keeper clips 0.004-0.007)."""
+    face height is wide and fast over a talking clip (42 clips of 26/10: spread 0.056-0.125, motion 0.0041-0.0183 a
+    frame) and slow with the lips closed (the direct closed-mouth Keeper clips: motion <= 0.0025; spread <= 0.0045, or
+    0.041-0.066 when the clip settles once from the open talking reference): MOUTH_TALKING needs both."""
+    TALKING = {"spread": 0.056, "motion": 0.0041}          # the lowest of the 42 talking clips (genesis-06 narrator)
+    STILL = {"spread": 0.0045, "motion": 0.00252}          # the highest closed ones (settling: spread 0.041-0.066)
 
-    def test_the_threshold_sits_between_the_closed_and_the_talking_clips(self):
-        self.assertGreater(lc.STILL_MOUTH_RANGE_MAX, 0.007 * 2)
-        self.assertLess(lc.STILL_MOUTH_RANGE_MAX, 0.056 / 2)
+    def test_the_thresholds_sit_between_the_closed_and_the_talking_clips(self):
+        self.assertTrue(self.STILL["spread"] * 2 < lc.STILL_MOUTH_RANGE_MAX < self.TALKING["spread"] / 2)
+        self.assertTrue(self.STILL["motion"] * 1.2 < lc.STILL_MOUTH_MOTION_MAX < self.TALKING["motion"] / 1.2)
 
     def test_a_talking_mouth_is_flagged_a_closed_one_passes(self):
         talking = np.abs(np.sin(np.linspace(0, 30, 200))) * 0.11     # opens and closes like the Keeper's lips
-        closed = 0.003 + np.random.default_rng(1).normal(0, 0.0008, 200)
+        closed = 0.003 + np.random.default_rng(1).normal(0, 0.0005, 200)
         self.assertEqual(lc.still_mouth_verdict(closed, 0.95)["flags"], [])
         self.assertEqual(lc.still_mouth_verdict(talking, 0.95)["flags"], ["MOUTH_TALKING"])
         r = lc.still_mouth_verdict(closed, 0.95)
         self.assertLess(r["opening_range"], lc.STILL_MOUTH_RANGE_MAX)
+        self.assertLess(r["opening_motion"], lc.STILL_MOUTH_MOTION_MAX)
         self.assertEqual((r["face_frames"], r["frames"]), (0.95, 200))
+
+    def test_a_mouth_that_settles_once_is_not_talking(self):
+        # vo-close-talkref (conversation 373100393016087168): the open reference's mouth closes over 2.5 s, then stays
+        settle = np.concatenate([np.linspace(0.061, 0.002, 60), np.full(132, 0.002)])
+        r = lc.still_mouth_verdict(settle, 1.0)
+        self.assertGreater(r["opening_range"], lc.STILL_MOUTH_RANGE_MAX)
+        self.assertEqual(r["flags"], [])
+        # a slow mouth that keeps opening and closing like speech is flagged
+        chatter = np.abs(np.sin(np.linspace(0, 60, 192))) * 0.06
+        self.assertEqual(lc.still_mouth_verdict(chatter, 1.0)["flags"], ["MOUTH_TALKING"])
 
     def test_the_face_must_be_found_in_80_percent_of_frames_as_for_the_lips(self):
         closed = np.full(100, 0.003)
@@ -85,11 +99,12 @@ class StillMouth(unittest.TestCase):
         self.assertIsNone(empty["opening_range"])
         self.assertIn("NO_FRAMES", lc.still_mouth_verdict(np.array([]), 0.0)["flags"])
 
-    def test_nan_frames_are_left_out_not_counted_as_closed(self):
-        o = np.full(100, 0.003)
-        o[::2] = np.nan
-        o[1::4] = 0.12                                                # a talking mouth among missing frames
-        self.assertIn("MOUTH_TALKING", lc.still_mouth_verdict(o, 0.5)["flags"])
+    def test_frames_without_a_face_are_left_out_not_counted_as_closed(self):
+        o = np.abs(np.sin(np.linspace(0, 30, 200))) * 0.11
+        o[40:80] = np.nan                                            # the face lost for a while: still talking
+        r = lc.still_mouth_verdict(o, 0.8)
+        self.assertIn("MOUTH_TALKING", r["flags"])
+        self.assertEqual(r["frames"], 200)
 
     def test_the_cli_has_a_still_mouth_mode(self):
         self.assertIn('sys.argv[1] == "--still-mouth"', Path(lc.__file__).read_text())
