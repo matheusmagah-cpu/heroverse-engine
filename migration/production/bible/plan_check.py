@@ -74,6 +74,7 @@ sys.path.insert(0, str(ROOT / "migration" / "publish"))
 import characters as ch  # noqa: E402
 import kjv_check  # noqa: E402
 import publish_episode  # noqa: E402
+from voice_pace import SHORT_PACE, VOICE_PACE, VOICE_SLOWEST  # noqa: E402  (one measured table, Short and long)
 
 VERSION = "bible-plan-v2"
 KINDS = ("story", "scripture", "insight", "cta")
@@ -81,12 +82,15 @@ LESSON_KINDS = ("insight", "cta")
 EPISODE_ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 SHOT_ID = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
 RATIOS = ("9:16",)                   # Shorts only
-# Kokoro pace, words a second: am_michael on Genesis 6 (evidence/pavo/20261025/genesis-06/compose/timeline.json)
-# 2.30-2.98; on the Genesis 7 v2 plan (2026-10-26, measured locally with the preserved model) 2.18-3.63 a line, 2.75
-# over the whole track, God's am_onyx at speed 0.9 at the same pace as the narrator. Estimates use 2.75 (the 170-179 s
-# band is narrow: the measured length decides, episode_build lines); the talking-clip ceilings use the slowest.
+# Kokoro pace of the narration (the Keeper, am_michael), words a second: 2.30-2.98 on Genesis 6
+# (evidence/pavo/20261025/genesis-06/compose/timeline.json), 2.756 over the 82 lines of genesis-07 to 10, 1.99-3.63 a
+# line (evidence/voice/20261026/kokoro-pace.json). Estimates use 2.75 (the 170-179 s band is narrow: the measured length
+# decides, episode_build lines); the talking-clip ceilings use the slowest. Every other voice (a character's, God's)
+# has its own two measured bounds in voice_pace.py (E104): at 2.75 a 12-word line of Eve's passed here and died at
+# the build.
 WPS = 2.75
 WPS_SLOWEST = 2.25
+SLOW_RATIO = WPS_SLOWEST / WPS       # the slowest pace, as a share of the normal one
 LINE_GAP = 0.35                      # silence between lines (episode_build.LINE_GAP)
 TAIL = 1.2                           # short_engine tail after the last word
 KEEPER_AUDIO = (2.0, 12.0)           # Flash input audio, per request
@@ -160,8 +164,18 @@ def words(text):
     return len(text.split())
 
 
-def estimate_seconds(text, wps=WPS):
-    return words(text) / wps
+def pace(item):
+    """Words a second of the voice that speaks this line, at its fastest: the narration (the Keeper's) at WPS, a
+    speaker's line at its voice's fastest measured run in a Short (SHORT_PACE, else VOICE_PACE; WPS until measured,
+    and a talking line is then VOICE_PACE_UNMEASURED)."""
+    who = item.get("speaker")
+    return WPS if who in (None, ch.NARRATOR) else SHORT_PACE.get(who, VOICE_PACE.get(who, WPS))
+
+
+def slowest_pace(item):
+    """The same voice at its slowest: WPS_SLOWEST for the narration, VOICE_SLOWEST for a speaker (E104)."""
+    who = item.get("speaker")
+    return WPS_SLOWEST if who in (None, ch.NARRATOR) else VOICE_SLOWEST.get(who, WPS_SLOWEST)
 
 
 def _plain(text):
@@ -381,6 +395,9 @@ def _speaker_problems(i, s, chars, span, span_slowest):
         out.append(f"SPEAKER_NOT_APPROVED shot {i} {sid}: {who} ({c.get('status')})")
     if not ch.voice(who, chars):
         out.append(f"SPEAKER_NO_VOICE shot {i} {sid}: {who} (characters.json `voice`)")
+    elif who not in VOICE_PACE:
+        out.append(f"VOICE_PACE_UNMEASURED shot {i} {sid}: {who} (measure its Kokoro voice into voice_pace.py before "
+                   "its first talking line)")
     if who not in (s.get("characters") or []):
         out.append(f"SPEAKER_NOT_IN_SHOT shot {i} {sid}: {who} (in `characters`, its look in the prompt)")
     if s.get("seconds") is not None:
@@ -620,7 +637,7 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     problems += lines_order_problems(shots, len(narration))
 
     items, carried = sequence(plan)
-    est = [estimate_seconds(x["text"]) for x in items]
+    est = [words(x["text"]) / pace(x) for x in items]
     total = sum(est) + LINE_GAP * (len(items) - 1) + TAIL
     # a line that quotes the KJV is Scripture for the >= 40 % share of our own words, whatever its kind says
     problems += [f"SHORT {p}" for p in publish_episode.short_problems(
@@ -654,10 +671,9 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
         idx = carried[i]
-        span_words = " ".join(items[k]["text"] for k in idx)
         gaps = LINE_GAP * (len(idx) - 1)
         span = sum(est[k] for k in idx) + gaps
-        slowest = words(span_words) / WPS_SLOWEST + gaps
+        slowest = sum(words(items[k]["text"]) / slowest_pace(items[k]) for k in idx) + gaps
         problems += talk_reach_problems(i, s, span, slowest, gaps)
         if s["kind"] == "keeper":
             keeper_used = True

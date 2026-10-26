@@ -163,10 +163,15 @@ The long then needs about a working day of wall-clock time, not several days.
   | God (am_onyx at 0.9) | 2.811 |
   | Adam (am_fenrir) | 3.975 |
   | Eve (af_heart) | 3.732 |
+  | Noah (bm_george) | 2.970 (evidence/long/20261026/noah-scoffer-voice.json) |
+  | The scoffer (am_puck) | 3.579 (evidence/voice/20261026/kokoro-pace.json; 3.425 in the six lines above) |
+  | The serpent (bm_fable) | 2.728 (kokoro-pace.json) |
 
-  The Shorts' plan_check times every line at 2.75 words/s, the characters' too. At that rate the first arc-1 voicing
-  had five talking lines under the 4 s a talking clip fills. The long's check uses each voice's measured pace, slowed
-  by 2.25/2.75 for the slowest case.
+  The table is `voice_pace.py`, shared with the Shorts' plan_check. At a single 2.75 words/s the first arc-1 voicing
+  had five talking lines under the 4 s a talking clip fills. Both checks give each speaker two measured bounds: the
+  table's (fastest run) for a line too short, and `VOICE_SLOWEST` (the slower of the slowest run x 2.25/2.75 and the
+  slowest line measured, E104) for a line too long or unreachable. The narration is its pace x 2.25/2.75 (the Shorts
+  keep 2.75 / 2.25). A talking voice not in the table is refused (VOICE_PACE_UNMEASURED).
 - **Talking lines.** A QA hold is 4-7 s: the line at its voice's slowest pace plus the 0.6 s gap must fit 7 s
   (HOLD_OVER_QA), and at the normal pace it must fill 4 s.
   - The Keeper: 11-14 words.
