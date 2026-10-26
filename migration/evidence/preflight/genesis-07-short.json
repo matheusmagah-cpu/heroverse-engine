@@ -1,7 +1,7 @@
 {
  "plan": "migration/production/bible/plans/genesis-07-short.json",
  "episode": "genesis-07-short",
- "checked_at": "2026-10-26T16:10:30Z",
+ "checked_at": "2026-10-26T19:35:14Z",
  "plan_check": {
   "problems": [],
   "pending": [],
@@ -49,7 +49,7 @@
     2.93
    ],
    "narration": [
-    2.63,
+    2.64,
     2.67,
     2.85,
     1.99,
@@ -57,23 +57,23 @@
     2.85,
     2.84,
     3.63,
-    2.94,
+    2.92,
     2.86,
     3.1,
     2.38,
-    2.64,
-    2.75,
+    2.63,
+    2.74,
     3.13,
-    2.86,
+    2.87,
     2.44,
-    3.07,
+    3.09,
     2.61,
     3.0,
     2.37
    ]
   },
   "measured": {
-   "total": 173.821,
+   "total": 173.842,
    "keeper_share": 0.11,
    "lesson_share": 0.114,
    "retimed": {}
@@ -150,7 +150,7 @@
   "run_chance_all_talking_shots": 0.999
  },
  "binding": {
-  "plan": "b3eb20f65b40678be69920dcc62d208e2741b3c1b6b84a0fafaa1389ca5ba48b",
+  "plan": "b183c4686ae0b0ddb918bb7c9b8cceac77348fe7f02f0605a9bb3b7433dc3f93",
   "characters": "4fa2cce1dc2029a424336c09a7f2b0272aaa0681023b7010d55a44847ca4d047",
   "image_records": {
    "ch-keeper-front.json": "666eb65f6fc26529aa71af95bba873ac4bdb123c599b30d7e2fe7e1986399932",
@@ -158,8 +158,8 @@
   },
   "setups": "386110cf6909cea8ed1edcfe0f6476ea1b4ae528e6a3399e1861a7396d808a95",
   "code": {
-   "episode_build.py": "c9087f255022445958874a05fb4d83ac6e8098596bfe66045b8f6fd37ec9aaf4",
-   "plan_check.py": "88de8ce5d45ca5ac1e09a1fe6ea1ff182277e257d31ebe92491ad817fde9f379",
+   "episode_build.py": "9177a6a37e85ff550944543d83686fefbdfa247a4761941724d2cf077f809e3e",
+   "plan_check.py": "2ad651a45682b354e8ac7cabba8db6d3963e796cc0fe276b24e7c5a56b27e916",
    "voice_pace.py": "53ca18e54b2b7472b296f9a9dddba8e1df98f95bf9de924dd5be80bcddff01e5",
    "lipsync_check.py": "a8bf2c564253bd4021bbf9f67bef305ae327fc5f4114c96cacf34ac191de7835",
    "episode_preflight.py": "d486f36f092df36fc615abeb6a021ef00783f1d6bde83dff19ed21a0d71328da"

@@ -1035,6 +1035,70 @@ class ScenePeriod(unittest.TestCase):
                 self.assertNotRegex(prompt.replace(EXCLUDE, ""), rf"\b{word}s?\b", sid)
 
 
+
+class SceneWriting(unittest.TestCase):
+    """E110 (review of genesis-07 run 40357197063): s-scroll asked for "an old scroll ... the ink lines catching the
+    light" beside "No text", and Pavo drew legible Arabic-looking script. A scene prompt that asks for writing is
+    refused; the negated "No text" and the Keeper's own scroll are not."""
+
+    def test_a_scene_prompt_that_asks_for_writing_is_refused(self):
+        for words in ("unrolls an old scroll, the ink lines catching the light", "reads the letters on a stone",
+                      "traces an inscription on the altar", "holds a clay tablet", "writes on parchment",
+                      "turns the pages of a book", "points at carved symbols", "studies a written list",
+                      "looks at the script on the wall of the tent", "touches the runes"):
+            p = plan()
+            p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("walks through the tents", words)
+            self.assertIn("SCENE_WRITING", codes(pc.check(p, CHARS)), words)
+        # God's voice-over and a speaking character's shot are scenes too
+        p = plan()
+        p["shots"][0]["prompt"] = p["shots"][0]["prompt"].replace("lightning inside them", "letters of fire inside them")
+        self.assertEqual([x.split()[:4] for x in pc.check(p, CHARS)["problems"]],
+                         [["SCENE_WRITING", "shot", "0", "g-open"]])
+
+    def test_negations_a_carved_idol_and_the_keepers_scroll_stay_allowed(self):
+        for words in ("walks past a carved clay idol", "walks on, no letters anywhere",
+                      "walks through the tents without any visible writing"):
+            p = plan()
+            p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("walks through the tents", words)
+            self.assertNotIn("SCENE_WRITING", codes(pc.check(p, CHARS)), words)
+        p = plan()
+        self.assertIn("no text", p["shots"][0]["prompt"])          # every standard tail says "No text"
+        k = p["shots"][-1]
+        k["prompt"] = k["prompt"].replace("seated by a small campfire", "seated by a small campfire, holding an old "
+                                          "rolled scroll in both hands")
+        self.assertEqual(pc.writing_problems(len(p["shots"]) - 1, k), [])
+        self.assertEqual(pc.check(p, CHARS)["problems"], [])
+
+    def test_the_build_and_the_long_refuse_it_by_the_same_function(self):
+        import episode_build as eb
+        import long_plan_check as lc
+        p = plan()
+        self.assertIsNone(eb.writing_refusal(p["shots"][1]))
+        p["shots"][1]["prompt"] = p["shots"][1]["prompt"].replace("walks through the tents", "unrolls an old scroll")
+        self.assertTrue(eb.writing_refusal(p["shots"][1]).startswith("SCENE_WRITING s-a"))
+        with self.assertRaises(SystemExit) as e:
+            eb.request(p["shots"][1], 1, p, None, {})
+        self.assertTrue(str(e.exception).startswith("SCENE_WRITING s-a"))
+        self.assertIs(lc.pc.plan_writing_problems, pc.plan_writing_problems)
+        self.assertIn("pc.plan_writing_problems(plan[\"shots\"])", (HERE / "long_plan_check.py").read_text())
+        arc = json.loads((HERE / "plans" / "arc-01-long.json").read_text())
+        self.assertEqual(pc.plan_writing_problems(arc["shots"]), [])   # its Keeper holds his scroll: not a scene
+        i = next(n for n, s in enumerate(arc["shots"]) if s["kind"] == "scene")
+        arc["shots"][i]["prompt"] = arc["shots"][i]["prompt"].replace(". ", ". An old scroll lies open. ", 1)
+        self.assertIn("SCENE_WRITING", [x.split()[0] for x in lc.check(arc)["problems"]])
+
+    def test_every_plan_is_free_of_writing_and_genesis_7_s_scroll_shows_none(self):
+        for f in sorted((HERE / "plans").glob("*.json")):
+            self.assertEqual(pc.plan_writing_problems(json.loads(f.read_text())["shots"]), [], f.name)
+        shots = {s["id"]: s for s in json.loads(EXAMPLE.read_text())["shots"]}
+        scroll = shots["s-scroll"]
+        self.assertEqual(scroll["lines"], [6])
+        self.assertIn("goat-hair door flap", scroll["prompt"])
+        self.assertIn("clay oil lamp", scroll["prompt"])
+        self.assertIn(PERIOD, scroll["prompt"])
+        self.assertTrue(scroll["prompt"].startswith(shots["s-well"]["prompt"].split(" Medium shot")[0]))
+        self.assertTrue(scroll["prompt"].endswith(f"{PERIOD} No text, no logos."))
+
 # the long's plan (bible-long-plan-v1) and story QA v2/v3 run here too, so pr-checks.yml runs them unchanged
 from test_long_plan_check import DraftArc1, Grammar as LongGrammar, NoRendererReadsTheNewQaYet, StoryQa  # noqa: E402,F401,E501
 
