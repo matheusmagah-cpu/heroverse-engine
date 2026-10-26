@@ -1,0 +1,139 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-06-short",
+ "series": "The Bible, story by story (KJV)",
+ "part": 6,
+ "passage": "Genesis 5:21-24 (KJV, public domain)",
+ "format": "short",
+ "output_sha256": "e9e6aacaab5564ddf691e09e63909ddfa57df810b36b5c239c0dd63eed43b609",
+ "seconds": 85.5,
+ "frame": [
+  1080,
+  1920
+ ],
+ "slot": "2026-10-26T23:30:00Z",
+ "narration": [
+  {
+   "kind": "story",
+   "text": "Genesis five reads like a list of funerals. Name after name, the same three words close every life."
+  },
+  {
+   "kind": "scripture",
+   "reference": "Genesis 5:5 (KJV)",
+   "text": "And all the days that Adam lived were nine hundred and thirty years: and he died."
+  },
+  {
+   "kind": "story",
+   "text": "And he died. And he died. Then one line breaks the pattern."
+  },
+  {
+   "kind": "scripture",
+   "reference": "Genesis 5:21-22 (KJV)",
+   "text": "And Enoch lived sixty and five years, and begat Methuselah: And Enoch walked with God after he begat Methuselah three hundred years, and begat sons and daughters:"
+  },
+  {
+   "kind": "story",
+   "text": "He did not leave his family to find God. He walked with God while raising one, for three hundred years, one ordinary day at a time."
+  },
+  {
+   "kind": "scripture",
+   "reference": "Genesis 5:24 (KJV)",
+   "text": "And Enoch walked with God: and he was not; for God took him."
+  },
+  {
+   "kind": "insight",
+   "text": "Notice what the text never gives Enoch: no miracle, no battle, no famous speech. Only a walk. Walking with someone means keeping their pace and their direction, every single day, and that was enough."
+  },
+  {
+   "kind": "story",
+   "text": "Enoch is the first man in the Bible who never dies. His son Methuselah outlives everyone, and his great-grandson is Noah."
+  },
+  {
+   "kind": "cta",
+   "text": "This is part six. The full story, from Cain and Abel to the days before the flood, is in the long video on the channel."
+  }
+ ],
+ "scripture": [
+  {
+   "reference": "Genesis 5:5 (KJV)",
+   "text": "And all the days that Adam lived were nine hundred and thirty years: and he died."
+  },
+  {
+   "reference": "Genesis 5:21-22 (KJV)",
+   "text": "And Enoch lived sixty and five years, and begat Methuselah: And Enoch walked with God after he begat Methuselah three hundred years, and begat sons and daughters:"
+  },
+  {
+   "reference": "Genesis 5:24 (KJV)",
+   "text": "And Enoch walked with God: and he was not; for God took him."
+  }
+ ],
+ "review": {
+  "overall": 9.5,
+  "reviewer": "claude-session-reviewer",
+  "process": "narration passed kjv_check.py and short_problems before the voice; every clip a Pavo generation at an exact zero-credit quote, audio stripped, clip_check clean and reviewed on a 6-frame sheet (3 rejected and replaced or dropped: modern tents, footprints read as animal tracks twice); composed by the engine (short_engine.py: cuts only, fade-out on the last 0.8 s, captions two words at a time); test compose reviewed and redone (captions too small, three words per card); final -14.6 LUFS, peak -1.3 dBFS; frame sheet of 20 frames reviewed",
+  "black_check": {
+   "black_starts": [],
+   "unexpected": [],
+   "intended_dips": [
+    84.7
+   ]
+  },
+  "issues": [
+   "voice is the engine's Kokoro am_michael (owner, 2026-10-25: engine compose at no credit) where parts 1-5 used vidIQ's George",
+   "ASR word-error check not run in this session (huggingface.co blocked); the voice is the same pinned Kokoro adapter the long videos pass WER with",
+   "57.0-61.2 s hill path: overexposed white sky"
+  ]
+ },
+ "title": "The Man Who Never Died? ☁️ | Enoch Walked With God, Bible Story (KJV) #shorts",
+ "description": "Genesis 5, Enoch walked with God, read from the King James Version. Part 6 of a journey through the whole Bible, one story at a time.\n\nLord, teach me to walk with You today, at Your pace and in Your direction. Type Amen if you prayed this with me 🙏\n\nPart 5: Cain and Abel. Next: Part 7, God sees the earth corrupt.\n\nScripture: King James Version (public domain).\nVisuals: AI-generated scenes (Pavo). Narration: AI voice. Music: original, owned.\n\n#bible #genesis #biblestory",
+ "tags": [
+  "enoch",
+  "enoch walked with god",
+  "genesis 5",
+  "methuselah",
+  "bible story",
+  "kjv bible",
+  "genesis",
+  "christian shorts",
+  "bible stories"
+ ],
+ "category_id": "29",
+ "first_comment": "Part 6 of the whole Bible, one story at a time. Part 7 tomorrow: the earth before the flood ⛈️",
+ "sources": {
+  "voice": "engine Kokoro v1.0 am_michael (pilot_render.py voice, hash-pinned)",
+  "music": "original-rest-music.lossless.flac (owned)",
+  "ai_video": [
+   "hook-path (Pavo see ../result.json (live test))",
+   "cairns (Pavo 372878510769328768)",
+   "staff (Pavo 372878613898606336)",
+   "tents (Pavo 372878635516038208)",
+   "wheat-path (Pavo 372878681637128832)",
+   "storm (Pavo 372878704303195648)",
+   "footprints-stop (Pavo 372879162216286848)",
+   "olive (Pavo 372879207061261376)",
+   "river (Pavo 372879243392923392)",
+   "timelapse (Pavo 372882592317608192)",
+   "lamp (Pavo 372891151797907520)",
+   "sunbeams (Pavo 372891220328658688)",
+   "hill-path (Pavo 372891197322824320)"
+  ],
+  "stock": "none",
+  "compose": "migration/production/bible/short_engine.py"
+ },
+ "credits": {
+  "vidiq": 0,
+  "pavo": 0
+ },
+ "attributes": {
+  "hook_type": "pattern_break",
+  "hook_line": "Genesis five reads like a list of funerals.",
+  "title_pattern": "question_emoji_pipe_story_kjv",
+  "first_visual": "ai_burial_cairns",
+  "ai_scenes": 13,
+  "slot_utc": "23:30",
+  "transition": "cut",
+  "seconds": 85.5,
+  "voice": "kokoro_am_michael",
+  "compose": "engine"
+ }
+}

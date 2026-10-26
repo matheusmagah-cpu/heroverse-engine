@@ -1,0 +1,32 @@
+{
+ "version": "bible-episode-v1",
+ "id": "genesis-06-short",
+ "status": "DRAFT (script only; no voice, no compose yet)",
+ "series": "The Bible, story by story (KJV)",
+ "part": 6,
+ "passage": "Genesis 5:21-24 (KJV, public domain)",
+ "format": "short",
+ "slot": "2026-10-26T23:30:00Z",
+ "seconds": 74.0,
+ "seconds_note": "estimate (about 2.6 narrated words a second); replaced by the composed file's duration",
+ "narration": [
+  {"kind": "story", "text": "Genesis five reads like a list of funerals. Name after name, the same three words close every life."},
+  {"kind": "scripture", "reference": "Genesis 5:5 (KJV)", "text": "And all the days that Adam lived were nine hundred and thirty years: and he died."},
+  {"kind": "story", "text": "And he died. And he died. Then one line breaks the pattern."},
+  {"kind": "scripture", "reference": "Genesis 5:21-22 (KJV)", "text": "And Enoch lived sixty and five years, and begat Methuselah: And Enoch walked with God after he begat Methuselah three hundred years, and begat sons and daughters:"},
+  {"kind": "story", "text": "He did not leave his family to find God. He walked with God while raising one, for three hundred years, one ordinary day at a time."},
+  {"kind": "scripture", "reference": "Genesis 5:24 (KJV)", "text": "And Enoch walked with God: and he was not; for God took him."},
+  {"kind": "insight", "text": "Notice what the text never gives Enoch: no miracle, no battle, no famous speech. Only a walk. Walking with someone means keeping their pace and their direction, every single day, and that was enough."},
+  {"kind": "story", "text": "Enoch is the first man in the Bible who never dies. His son Methuselah outlives everyone, and his great-grandson is Noah."},
+  {"kind": "cta", "text": "This is part six. The full story, from Cain and Abel to the days before the flood, is in the long video on the channel."}
+ ],
+ "scripture": [
+  {"reference": "Genesis 5:5 (KJV)", "text": "And all the days that Adam lived were nine hundred and thirty years: and he died."},
+  {"reference": "Genesis 5:21-22 (KJV)", "text": "And Enoch lived sixty and five years, and begat Methuselah: And Enoch walked with God after he begat Methuselah three hundred years, and begat sons and daughters:"},
+  {"reference": "Genesis 5:24 (KJV)", "text": "And Enoch walked with God: and he was not; for God took him."}
+ ],
+ "title": "The Man Who Never Died? ☁️ | Enoch Walked With God, Bible Story (KJV) #shorts",
+ "hook": {"line": "Genesis five reads like a list of funerals.", "visual": "Pavo Flash clip: a stone path up a green hill into glowing clouds at dawn (migration/evidence/pavo/20261025/genesis-06-hook.mp4, audio stripped)"},
+ "prayer": "Lord, teach me to walk with You today, at Your pace and in Your direction. Type Amen if you prayed this with me 🙏",
+ "attributes": {"hook_type": "pattern_break", "hook_line": "Genesis five reads like a list of funerals.", "title_pattern": "question_emoji_pipe_story_kjv", "first_visual": "ai_path_into_clouds", "ai_scenes": 1, "slot_utc": "23:30", "transition": "cut"}
+}
