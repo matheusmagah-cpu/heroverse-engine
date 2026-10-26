@@ -4,6 +4,7 @@ twice, an uncertain submission only read back, and the compose timeline keeps th
 import copy
 import hashlib
 import json
+import re
 from pathlib import Path
 import shutil
 import struct
@@ -35,9 +36,30 @@ def talking_genesis_07():
     return json.loads(out)
 
 
+# E108: every scene prompt states its period word for word (plan_check.period_problems; request() refuses one that
+# does not). The older plans and the stubs here get it the way genesis-07's unchanged scenes got it: the period
+# inserted before the standard tail
+PERIOD = f"{eb.plan_check.PERIOD_SETTING} {eb.plan_check.PERIOD_EXCLUDE}"
+TAIL = re.compile(r"\s*(No people, no text, no logos\.|No text, no logos\.)$")
+
+
+def with_period(plan):
+    plan.setdefault("period", "before-the-flood")
+    for s in plan["shots"]:
+        if s["kind"] == "scene" and PERIOD not in s["prompt"]:
+            m = TAIL.search(s["prompt"])
+            s["prompt"] = f"{s['prompt'][:m.start()]} {PERIOD} {m.group(1)}" if m else f"{s['prompt']} {PERIOD}"
+    return plan
+
+
 # the default mode (a talking, lip-synced Keeper) is tested on the plan main had before plan B; genesis-07 itself is
 # now the voice-over plan (VO_EXAMPLE)
-EXAMPLE = talking_genesis_07()
+EXAMPLE = with_period(talking_genesis_07())
+# its s-wind asked for "the road out of the city" (a European town on the horizon in run 40341856955):
+# SCENE_PERIOD_CONFLICT, so it takes genesis-07's rewritten s-wind
+EXAMPLE["shots"] = [dict(s, prompt=next(v["prompt"] for v in json.loads((HERE / "plans" / "genesis-07-short.json")
+                                                                        .read_text())["shots"] if v["id"] == s["id"]))
+                    if s["id"] == "s-wind" else s for s in EXAMPLE["shots"]]
 
 
 def layout_for(plan, durations):
@@ -70,7 +92,7 @@ STUB_CHARS = {"eve": {"status": "APPROVED", "look": EVE, "refs": ["full"], "voic
               "keeper": {"status": "APPROVED", "look": "x", "refs": ["front"], "voice": "am_michael"}}
 
 
-def dialogue_plan():
+def _dialogue_plan():
     """Eve challenges at 0 s (her own voice, lip-synced), narration over a scene, God's voice-over, the Keeper closes."""
     style = "Painterly cinematic realism, cinema camera."
     return {"episode": "t", "part": 0, "narration": [{"kind": "story", "text": "a b c"},
@@ -82,6 +104,10 @@ def dialogue_plan():
                       {"id": "s-god", "kind": "scene", "speaker": "god", "line": "I will destroy man.",
                        "reference": "Genesis 6:7 (KJV)", "seconds": 8, "characters": [], "prompt": "storm"},
                       {"id": "k-close", "kind": "keeper", "lines": [1], "prompt": "k"}]}
+
+
+def dialogue_plan():
+    return with_period(_dialogue_plan())
 
 
 class Requests(unittest.TestCase):
@@ -521,7 +547,7 @@ class Gating(unittest.TestCase):
         # E99: s-eve and k-close (talking, with our line as input audio), then s-god (voice-over), then s-a
         client, report = self.generate()
         self.assertEqual([bool(c.get("audios")) for c in client.calls], [True, True, False, False])
-        self.assertEqual(client.calls[2]["prompt"], "storm")
+        self.assertEqual(client.calls[2]["prompt"], f"storm {PERIOD}")
         self.assertEqual(list(report["shots"]), ["s-eve", "s-a", "s-god", "k-close"])   # the report keeps plan order
 
     def test_a_failed_shot_keeps_each_refused_generation_and_its_measures_in_the_report(self):
@@ -959,15 +985,22 @@ class KeeperVoiceover(unittest.TestCase):
         self.assertAlmostEqual(vo["end"], lay["total"], places=3)
         self.assertEqual(vo["speed"], 1.0)
 
-    def test_every_scene_and_god_request_is_the_same_as_the_talking_plans_so_a_resume_keeps_them(self):
+    def test_every_scene_and_god_request_is_the_talking_plans_with_its_period_but_the_rewritten_shots(self):
+        # E108: the talking plan's scene with the period inserted is genesis-07's request, byte for byte, except the
+        # eight shots whose clips showed an anachronism (rewritten); seconds, references and audio stay the same
+        rewritten = {"s-walker", "s-family", "s-wind", "s-theft", "s-quarrel", "s-ruins", "s-children", "s-knife"}
         refs = {"keeper": ["k.jpg"], "keeper:talk": ["k-talk.jpg"]}
         base, vo = layout_for(EXAMPLE, DURATIONS), layout_for(VO_EXAMPLE, DURATIONS)
         same = 0
         for i, (a, b) in enumerate(zip(EXAMPLE["shots"], VO_EXAMPLE["shots"])):
             if a["kind"] == "scene":
-                self.assertEqual(eb.request(a, i, EXAMPLE, base, refs), eb.request(b, i, VO_EXAMPLE, vo, refs), a["id"])
-                same += 1
-        self.assertEqual(same, 30)
+                rb = eb.request(b, i, VO_EXAMPLE, vo, refs)
+                if a["id"] in rewritten:   # a new prompt (so a new clip); its seconds and references unchanged
+                    a = dict(a, prompt=b["prompt"])
+                else:
+                    same += 1
+                self.assertEqual(eb.request(a, i, EXAMPLE, base, refs), rb, a["id"])
+        self.assertEqual(same, 22)
 
     def test_the_still_mouth_check_runs_on_voiceover_keeper_clips_only(self):
         p = vo_dialogue_plan()

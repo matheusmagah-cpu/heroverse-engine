@@ -615,6 +615,22 @@ def bind_prompt(prompt, who, chars=None):
     return prompt
 
 
+def period_refusal(plan, shot):
+    """E108: a scene's request is refused when its prompt does not state the story's period word for word or names
+    what the period excludes (plan_check.period_problems, the same function plan_check and the preflight run): None
+    or the refusal."""
+    if shot.get("kind") != "scene":
+        return None
+    per = plan_check.period(plan)
+    found = plan_check.period_problems(0, shot, per)
+    if not found:
+        return None
+    detail = found[0].split(" ", 4)[-1]
+    if any(p.startswith("SCENE_PERIOD_MISSING") for p in found):
+        return f"SCENE_PERIOD_MISSING {shot['id']} {detail}"
+    return f"SCENE_PERIOD_CONFLICT {shot['id']} {detail}"
+
+
 def request(shot, index, plan, layout, refs, chars=None):
     """The Pavo call for one shot: references from the approved images (<= 5); a talking shot (the Keeper, a character
     speaking) sends its own line as input audio. God's voice-over shot sends none: no one speaks on screen. A
@@ -623,6 +639,9 @@ def request(shot, index, plan, layout, refs, chars=None):
     the talking frame, facing the lens, 100 %), no audio and no speech clause."""
     talks = plan_check.talking(shot)
     prompt = shot["prompt"]
+    refused = period_refusal(plan, shot)
+    if refused:
+        raise SystemExit(refused)
     if plan_check.voiceover(shot) and not refs.get(f"{ch.NARRATOR}:talk"):
         raise SystemExit(f"KEEPER_VO_NO_TALK_REF {shot['id']} (no talking frame in refs.json; the front view lost "
                          "his face 4 of 4)")

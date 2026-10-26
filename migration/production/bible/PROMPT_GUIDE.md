@@ -29,6 +29,20 @@ Then: duration and aspect come from the tool fields, not the text.
   clouds parting).
 - **Real-world phenomena look real.** Sunbeams through clouds, mist on water, an eagle in flight read as footage;
   invented spectacle (beams of power, glowing portals) reads as cheap CGI.
+- **State the period in every scene (E108).** genesis-07 run 40341856955 asked for "a torch-lit lane", "the road out
+  of the city", "a dusty lane" with no age named, and got a cobbled European street with a man in a long coat and a
+  glass kerosene lantern, a town with church towers, a stone village with chimneys, a peaked cap, glass jars (8 of 30
+  scene shots). Every scene prompt (God's voice-over and a speaking character's shot too; not the Keeper) now carries
+  its story's period word for word before the standard tail: for Genesis before the flood `plan_check.PERIOD_SETTING`
+  "The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the open plain." and
+  `PERIOD_EXCLUDE` "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+  (SCENE_PERIOD_MISSING), and names nothing the period excludes elsewhere (road, street, town, lantern, tower,
+  coat, cap...: SCENE_PERIOD_CONFLICT; say "a dusty track across the open plain", "a lane between goat-hair tents",
+  "a clay oil lamp"). A plan states its `period` (a preset or its own setting and exclusions) or its passage gives
+  one; a later story with neither is refused. Probed before genesis-07's rebuild
+  (`evidence/pavo/20261026/period/`): with "tents, mud-brick and the open plain" 4 of 8 probes put mud-brick towers or
+  a domed tower behind the tents; with the setting above none did (6 of 8 period-true), but a small metal-and-glass
+  candle lantern still came into 2 night shots: look for it on the frame sheet.
 - **People and God.** No face of God. Biblical people only when the story needs them, then from a fixed reference
   image (character sheet) so the same face returns in every episode.
 

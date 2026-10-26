@@ -1,0 +1,29 @@
+{
+ "version": "period-review-v1",
+ "date": "2026-10-26",
+ "episode": "genesis-07-short",
+ "run": 40341856955,
+ "composed": {
+  "release_asset": "bible-genesis-07-short-sha256-ab9d3e189249371f182d11c4f58a7e3372288fd573b8d31c6a4a33a1569ac09c.mp4",
+  "sha256": "ab9d3e189249371f182d11c4f58a7e3372288fd573b8d31c6a4a33a1569ac09c",
+  "how": "downloaded by the release's REST asset endpoint (assets.sh download goes through gh release download, which uses GraphQL, refused from this session: 403), sha256 checked against the report; every scene shot of the timeline (report-40341856955.json composed.timeline) sampled at 15 % and 85 % of each of its segments (run-40341856955-shots-a..d.jpg), the suspects again at full resolution (run-40341856955-zoom-*.jpg); looked at by Claude"
+ },
+ "why": "owner's review of the run: s-walker and s-family anachronistic, the Short below 9.5; the coordinator asked to check s-wind and s-rain too. Every scene shot was checked, since the cause (no period in any prompt) is common to all of them",
+ "anachronistic": {
+  "s-walker": {"at": "126.1-134.1 s", "seen": "a man in a modern long coat with a glass kerosene lantern, on a cobbled street between tall European stone buildings, men in top hats and frock coats around him", "prompt_cause": "'a torch-lit lane at night', 'a small oil lamp': no period, no tents"},
+  "s-family": {"at": "147.2-152.8 s", "seen": "a European town with church towers and a cathedral on the horizon, a woman in a European dirndl and apron, a man in a jacket", "prompt_cause": "'toward the noise of the city': a city with no period"},
+  "s-wind": {"at": "81.4-86.3 s", "seen": "a European town with Gothic spires on the horizon across green fields", "prompt_cause": "'on the road out of the city'"},
+  "s-theft": {"at": "49.8-55.1 s", "seen": "a Mediterranean stone village: plastered stone houses with a chimney, cypress trees, women in aprons", "prompt_cause": "'a dusty lane at noon': no tents, no period"},
+  "s-quarrel": {"at": "45.4-49.8 s", "seen": "one of the two silhouettes wears a modern peaked cap", "prompt_cause": "'two men in silhouette': no clothing named"},
+  "s-ruins": {"at": "94.0-100.5 s", "seen": "glass mason jars with metal lids among the ashes", "prompt_cause": "'broken jars': no material named"},
+  "s-children": {"at": "12.9-16.9 s", "seen": "white canvas bell tents with guy ropes and stakes, men in brimmed hats behind the children", "prompt_cause": "'between the tents': no tent named, no clothing"},
+  "s-knife": {"at": "31.1-36.0 s", "seen": "a lane between plastered walls of built houses, the torch in an iron wall sconce", "prompt_cause": "'a dusty lane at night lit by a single torch on a pole': no tents, no period"}
+ },
+ "period_true": {
+  "s-rain": "122.7-126.1 s: cracked dry earth with stones, rain beginning; nothing of a later age",
+  "s-voice, s-tents, s-plain, s-storm, s-gathering, s-still, s-judgment, s-terror, s-herds, s-lamp, s-noah, s-sons, s-mother, s-crowd, s-idol, s-scroll, s-flee": "tents, plain, sky, robed figures; nothing of a later age seen",
+  "s-well": "a stone well-house with an arch beside mud-brick and thatch: plausible for the ancient Near East, not flagged",
+  "s-jar": "a lane of mud-brick houses: plausible, not flagged"
+ },
+ "count": "8 of 30 scene shots anachronistic (the owner's 2 and 6 more); s-rain period-true"
+}

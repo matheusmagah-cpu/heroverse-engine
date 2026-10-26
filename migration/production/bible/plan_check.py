@@ -55,6 +55,10 @@ Rules (DECISIONS.md 2026-10-26 "Shorts v2", PROMPT_GUIDE.md "Keeper + acted scen
   establishing shot (`establishing: true`), held at most 2 s on screen, all of them together at most 15 %.
 - God the Father is never a visible figure: a prompt that names Him must show Him only as light, wind, fire or a
   voice, and never with a body, face, hands, robe or throne.
+- the period (E108): every scene prompt states its story's period word for word, the setting and the exclusions
+  (PERIOD_SETTING / PERIOD_EXCLUDE for Genesis before the flood), and names nothing the period excludes outside the
+  exclusion sentence (SCENE_PERIOD_CONFLICT); a story with no period (the plan's `period`, else its passage) is
+  SCENE_PERIOD_MISSING. episode_build.request refuses the same by period_refusal.
 A character used but not yet APPROVED is a problem; the Keeper while DRAFT is ONE pending row.
 
 A plan that passes is also run through the build's own functions (E106): episode_build.predict (retime, talking
@@ -134,6 +138,26 @@ KEEPER_POSE = ("static camera", "looks straight into the camera")
 KEEPER_POSE_OFF = re.compile(r"(?i)push-in|pull(?:s|ing)?[ -]back|\bleans?\b|\bbow(?:s|ing)?\b|tracking shot|\borbit")
 # a line without a `reference` that quotes the KJV anyway: 8 consecutive words of the KJV (kjv_check's text)
 KJV_RUN = 8
+# E108 (review of genesis-07 run 40341856955): no scene prompt stated its period, so Pavo filled a lane or a horizon
+# with whatever it knows best: a cobbled European street with a man in a long coat and a glass kerosene lantern
+# (s-walker), a town of stone with church towers (s-family, s-wind), a stone village with chimneys (s-theft), a
+# peaked cap, glass jars. Every scene prompt (God's voice-over and a speaking character's shot are scenes too; the
+# Keeper's own campfire is not) states its story's period word for word: the setting and the exclusions. The owner
+# asked for both, although PROMPT_GUIDE warns that naming a thing can prime it; the probes of the rewritten shots
+# (evidence/pavo/20261026/period/) are the measure. A story's period comes from the plan (`period`: a preset name or
+# its own {"setting", "exclude", "avoid"?}) or, when the plan names none, from its passage (STORY_PERIODS); a story with
+# neither is SCENE_PERIOD_MISSING, so a later story cannot slip through without one.
+PERIOD_SETTING = ("The ancient Near East before the flood: only goat-hair tents, clay lamps, fires and torches on the "
+                  "open plain.")
+PERIOD_EXCLUDE = "No stone buildings, towers, churches, glass lanterns, modern clothing or roads."
+# what the rest of the prompt may not ask for (outside the exclusion sentence): words that put a later age on screen
+PERIOD_AVOID = (r"streets?", r"roads?", r"cobbl\w*", r"pavements?", r"lanterns?", r"glass", r"towers?", r"church\w*",
+                r"steeples?", r"spires?", r"chimneys?", r"castles?", r"towns?", r"villages?", r"coats?", r"hats?",
+                r"caps?", r"stone (?:buildings?|houses?)", r"brick houses?")
+PERIODS = {"before-the-flood": {"setting": PERIOD_SETTING, "exclude": PERIOD_EXCLUDE, "avoid": list(PERIOD_AVOID)}}
+# (book, first chapter, last chapter, period) for a plan with no `period`: Cain's city to the eve of the flood
+STORY_PERIODS = (("Genesis", 4, 6, "before-the-flood"),)
+PASSAGE = re.compile(r"^\s*((?:[1-3] )?[A-Z][a-z]+(?: of [A-Z][a-z]+)?)\s+(\d+)")
 # E95 (measured 2026-10-26, evidence/pavo/20261026/keeper-audio-binding.json): Pavo keeps our input audio only when
 # the clip it is asked for is at most ~0.65 s longer than the speech; at 1.6 s or more it makes its own track. A talking
 # clip is ceil(speech) seconds (4-12), the speech 0.25-0.65 s shorter than it: episode_build retimes a line that misses
@@ -396,6 +420,50 @@ def prompt_problems(i, shot):
     god = god_problem(p)
     if god:
         out.append(f"{god} shot {i} {shot['id']}")
+    return out
+
+
+def period(plan):
+    """E108: the story's period {"setting", "exclude", "avoid"} from the plan's `period` (a PERIODS name or its own
+    wording) or, when it names none, from its passage (STORY_PERIODS); None when there is none or it is malformed."""
+    given = plan.get("period")
+    if given is not None:
+        if isinstance(given, str):
+            return PERIODS.get(given)
+        if not isinstance(given, dict):
+            return None
+        if not all(isinstance(given.get(k), str) and given[k].strip() for k in ("setting", "exclude")):
+            return None
+        avoid = given.get("avoid", [])
+        if not isinstance(avoid, list) or not all(isinstance(a, str) and a for a in avoid):
+            return None
+        return {"setting": given["setting"].strip(), "exclude": given["exclude"].strip(), "avoid": avoid}
+    m = PASSAGE.match(plan.get("passage") or "")
+    if m:
+        for book, first, last, name in STORY_PERIODS:
+            if m.group(1) == book and first <= int(m.group(2)) <= last:
+                return PERIODS[name]
+    return None
+
+
+def period_problems(i, shot, per):
+    """E108: a scene prompt states its period word for word (setting and exclusions) and, outside the exclusion
+    sentence, names nothing the period excludes. [] for a Keeper shot (his own campfire, his own look)."""
+    if shot.get("kind") != "scene" or not isinstance(shot.get("prompt"), str):
+        return []
+    sid, p = shot.get("id"), shot["prompt"]
+    if per is None:
+        return [f"SCENE_PERIOD_MISSING shot {i} {sid} (the story has no period: set the plan's `period`)"]
+    out = []
+    missing = [w for w in (per["setting"], per["exclude"]) if w not in p]
+    if missing:
+        out.append(f"SCENE_PERIOD_MISSING shot {i} {sid} (the prompt states, word for word: "
+                   + " ".join(f"'{w}'" for w in missing) + ")")
+    rest = p.replace(per["exclude"], " ")
+    hits = sorted({m.group(0).lower() for a in per.get("avoid", [])
+                   for m in re.finditer(rf"(?i)\b(?:{a})\b", rest)})
+    if hits:
+        out.append(f"SCENE_PERIOD_CONFLICT shot {i} {sid} (names what the period excludes: {', '.join(hits)})")
     return out
 
 
@@ -703,8 +771,14 @@ def _check_shots(plan, chars, narration, shots, problems, pending):
     keeper_seconds, establishing_seconds, keeper_used = 0.0, 0.0, False
     lesson = set()
     first_prompt = {}
+    per = period(plan)
+    if per is None and any(s.get("kind") == "scene" for s in shots):
+        problems.append(f"SCENE_PERIOD_MISSING (no period for {plan.get('passage') or 'this story'}: the plan's "
+                        f"`period` names one of {sorted(PERIODS)} or gives its own setting and exclusions; E108)")
     for i, s in enumerate(shots):
         problems += prompt_problems(i, s)
+        if per is not None:
+            problems += period_problems(i, s, per)
         # E106 (owner: "production has to come out at 9.5 already"): the review's pacing_and_visual_variety item,
         # made a plan rule: one prompt is one picture, so the same prompt twice shows the same shot twice
         if isinstance(s.get("prompt"), str):

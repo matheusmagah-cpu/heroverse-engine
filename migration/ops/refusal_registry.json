@@ -1172,6 +1172,16 @@
    "class": "I",
    "guard": "migration/integrations/pavo/test_video.py::def test_"
   },
+  "SCENE_PERIOD_CONFLICT": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def period_problems(",
+   "note": "E108 (review of genesis-07 run 40341856955: a modern coat and a glass lantern on a cobbled European street, a town with church towers): every scene prompt states its story's period word for word, setting and exclusions; plan_check refuses a prompt that, outside the exclusion sentence, names what the period excludes (PERIOD_AVOID: road, street, lantern, glass, tower, church, town, coat, cap...); episode_build.request refuses the same by period_refusal"
+  },
+  "SCENE_PERIOD_MISSING": {
+   "class": "A",
+   "early": "migration/production/bible/plan_check.py::def period_problems(",
+   "note": "E108 (review of genesis-07 run 40341856955: a modern coat and a glass lantern on a cobbled European street, a town with church towers): every scene prompt states its story's period word for word, setting and exclusions; plan_check refuses a scene prompt without them, or a story with no period (the plan's `period`, else its passage); episode_build.request refuses the same by period_refusal, which calls plan_check.period_problems"
+  },
   "SCOPE_MISSING": {
    "class": "D",
    "resume": "a credential or account: fix the secret; the ledgers keep what was done, the next run resumes"
@@ -1502,7 +1512,8 @@
       "migration/production/bible/episode_build.py::def face_flags",
       "migration/production/bible/episode_build.py::def still_mouth_flags",
       "migration/production/bible/episode_build.py::def lipsync_flags",
-      "migration/production/bible/episode_preflight.py::def probe_rows"
+      "migration/production/bible/episode_preflight.py::def probe_rows",
+      "migration/production/bible/plan_check.py::SCENE_PERIOD_MISSING"
      ],
      "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
     },
@@ -1514,6 +1525,17 @@
       "migration/production/bible/plan_check.py::def character_problems"
      ],
      "residual": "AI artifacts in a generated frame (a hand, a face, a stray mark) and the painterly finish: no tool measures them; the 20-frame sheet of the composed file is where they are seen"
+    },
+    "period_accuracy": {
+     "class": "plan",
+     "checks": [
+      "migration/production/bible/plan_check.py::PERIOD_SETTING",
+      "migration/production/bible/plan_check.py::PERIOD_EXCLUDE",
+      "migration/production/bible/plan_check.py::SCENE_PERIOD_MISSING",
+      "migration/production/bible/plan_check.py::SCENE_PERIOD_CONFLICT",
+      "migration/production/bible/episode_build.py::def period_refusal"
+     ],
+     "residual": "E108: period accuracy of the Short's backgrounds, clothing and objects. The plan fixes the words (the period stated in every scene prompt, nothing it excludes asked for) and each rewritten prompt is probed with direct 0-credit Pavo clips (evidence/pavo/20261026/period/); a generated frame can still add a later-age object no word asked for, so the per-shot frame sheet is where it is seen. The long's plan (long_plan_check) has no period rule yet."
     }
    },
    "captions_readable_and_synced": {
