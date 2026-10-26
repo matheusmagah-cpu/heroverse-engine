@@ -355,3 +355,26 @@ The same 4-segment opening of pilot-010 was narrated by Kokoro (am_michael 0.85)
   render: v4's technical, speech and grammar rows unchanged, real licensed footage >= 40 % of the picture, Pavo <= 55 %,
   Pavo clips only as library records (source pavo, Real-ESRGAN to 2560x1440, vetting APPROVED). `render_pilot.sh` uses it
   for `archetype: bible-story-long`; the gate, the queue and hookify know its hash.
+
+## The Keeper narrates every video; scenes show the story, not landscapes (owner, 2026-10-26)
+- **Owner.** A narrator character in every Short and long, on screen, moving and talking to the viewer, for originality
+  and monetization; "every scene gourmet"; "you still prioritise landscapes, it makes no sense: with Pavo make
+  cinematic scenes with modern effects"; voice quality must not drop; use Pavo's audio features.
+- **Evidence** (`evidence/research/20261026-format-study.md`, quotes from search excerpts, channel numbers are
+  estimates): generic photoreal AI Bible channels are saturating (The AI Bible +4K subs in 30 d at 413K); character-led
+  Bible content leads (Superbook ~12M); YouTube's inauthentic-content targets are "nearly identical narrated
+  slideshows" and "minimally altered story variations", so a recurring original host plus scenes that act out the story
+  is the strongest originality signal we can add. No controlled study proves a host lifts views: it is a hypothesis.
+- **Decision.** The Keeper (`characters.json`, DRAFT until its sheet is reviewed): an invented elderly storyteller in a
+  lamp-lit stone room with an old Bible, never a biblical person, prophet, priest or angel. He opens each Short (0-2 s
+  hook), hands to the story and returns for the insight and the close (at most ~25 % of a Short); in the long he opens
+  the cold open's roadmap and every chapter re-hook. Story scenes are acted out with the character bible's people in
+  reference mode, a cut every 2-4 s and one VFX moment every 15-20 s; landscapes only as a 1-2 s establishing shot.
+  Style: painterly-cinematic realism (Old-Master light, one grade, film grain). God the Father only as light, wind,
+  fire or voice.
+- **Voice.** The narration keeps a quality at least equal to the published Shorts: a free voice (Kokoro or
+  Chatterbox) replaces vidIQ's George only after `voice/voice_judge.py` and Claude's listening review find it not worse;
+  the Keeper's lip-sync takes our narration as Pavo input audio (v0.4), so the voice never changes between host and
+  story.
+- **Measured** (live intelligence, one hypothesis): `host` on the next 4 Shorts against the last 4 without: viewed vs
+  swiped, average % viewed, subscribers per 1,000 views, Short-to-long clicks. KEPT if not worse.
