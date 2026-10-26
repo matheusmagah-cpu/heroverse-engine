@@ -1,0 +1,77 @@
+name: Keeper lip sync probe (MuseTalk 1.5 on CPU over silent Keeper clips, our Kokoro lines; nothing published)
+# Owner, 2026-10-26: "sincronize a fala do guardião com a narração" and authorized testing MuseTalk (MIT, open source,
+# CPU, 0 credits). Probe only: the silent plan-B Keeper clips already in evidence get their mouth repainted from our
+# genesis-07 / genesis-06 Keeper WAVs by production/bible/musetalk_sync.py, every output is judged by lipsync_check.py
+# (thresholds unchanged), and the clips, frame sheets and measures go to a claude/musetalk-probe-* branch for review.
+# No secret, no Pavo call, no publication.
+on:
+  push:
+    branches: [claude/keeper-musetalk-probe]
+    paths: ['.github/workflows/musetalk-probe.yml', 'migration/production/bible/musetalk_sync.py']
+permissions:
+  contents: read
+concurrency:
+  group: musetalk-probe
+  cancel-in-progress: true
+jobs:
+  probe:
+    if: github.repository == 'matheusmagah-cpu/heroverse-engine'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: write   # the results branch only; no secret in this job
+    env:
+      MUSETALK_SHA: 0a89dec45a0192b824e3cf4daf96c239440c5ed8
+      FACE_SHA: 64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Tools (ffmpeg, EGL for mediapipe, CPU torch, MuseTalk at a pinned commit, weights with their sha256)
+        run: |
+          timeout 600s sudo apt-get update -qq
+          timeout 600s sudo apt-get install -y -qq --no-install-recommends ffmpeg libegl1 libgles2 >/dev/null
+          python3 -m venv "$RUNNER_TEMP/mt"
+          P="$RUNNER_TEMP/mt/bin/pip"
+          "$P" install -q --disable-pip-version-check torch==2.4.1 --index-url https://download.pytorch.org/whl/cpu
+          "$P" install -q --disable-pip-version-check diffusers==0.30.2 transformers==4.39.2 accelerate==0.28.0 \
+            librosa==0.11.0 einops==0.8.1 soundfile==0.12.1 mediapipe==0.10.35 'huggingface_hub[cli]==0.25.2' torchvision==0.19.1 --extra-index-url https://download.pytorch.org/whl/cpu
+          git clone -q https://github.com/TMElyralab/MuseTalk "$RUNNER_TEMP/MuseTalk"
+          git -C "$RUNNER_TEMP/MuseTalk" checkout -q "$MUSETALK_SHA"
+          M="$RUNNER_TEMP/models"; H="$RUNNER_TEMP/mt/bin/huggingface-cli"
+          "$H" download TMElyralab/MuseTalk --local-dir "$M" --include musetalkV15/musetalk.json musetalkV15/unet.pth >/dev/null
+          "$H" download stabilityai/sd-vae-ft-mse --local-dir "$M/sd-vae" --include config.json diffusion_pytorch_model.bin >/dev/null
+          "$H" download openai/whisper-tiny --local-dir "$M/whisper" --include config.json pytorch_model.bin preprocessor_config.json >/dev/null
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/face_landmarker.task" https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+          echo "$FACE_SHA  $RUNNER_TEMP/face_landmarker.task" | sha256sum -c -
+          (cd "$M" && find . -type f ! -path '*/.cache/*' -exec sha256sum {} \;) | tee "$RUNNER_TEMP/weights.sha256"
+      - name: Re-sync each silent clip to its line, judge it, sheets
+        run: |
+          out="$RUNNER_TEMP/out"; mkdir -p "$out"
+          PY="$RUNNER_TEMP/mt/bin/python"; FM="$RUNNER_TEMP/face_landmarker.task"
+          V=migration/evidence/pavo/20261026/keeper-vo; W=migration/evidence/pavo/20261026/keeper
+          while read -r name clip wav; do
+            "$PY" -I -B migration/production/bible/lipsync_check.py "$V/$clip" "$W/$wav" "$FM" 2>/dev/null | tail -1 > "$out/$name.before.json" || true
+            "$PY" -B migration/production/bible/musetalk_sync.py --musetalk "$RUNNER_TEMP/MuseTalk" --models "$RUNNER_TEMP/models" \
+              --face-model "$FM" "$V/$clip" "$W/$wav" "$out/$name.mp4" 2>"$out/$name.log" | tail -1 > "$out/$name.run.json" || { tail -30 "$out/$name.log"; continue; }
+            "$PY" -I -B migration/production/bible/lipsync_check.py "$out/$name.mp4" "$W/$wav" "$FM" 2>/dev/null | tail -1 > "$out/$name.check.json" || true
+            ffmpeg -v error -y -i "$out/$name.mp4" -vf "fps=3,scale=240:-1,tile=6x3" -frames:v 1 "$out/$name-sheet.jpg"
+            ffmpeg -v error -y -i "$out/$name.mp4" -vf "fps=6,crop=iw/2:ih/4:iw/4:ih/6,scale=200:-1,tile=8x4" -frames:v 1 "$out/$name-mouth.jpg"
+            echo "== $name"; cat "$out/$name.run.json" "$out/$name.before.json" "$out/$name.check.json"
+          done <<'PAIRS'
+          k-insight probe-k-insight-1-373107010075637504.mp4 genesis07/k-insight.wav
+          k-question probe-k-question-1-373107181912649792.mp4 genesis07/k-question.wav
+          k-close probe-k-close-1-373107379233670656.mp4 genesis07/k-close.wav
+          line-01 probe-k-insight-2-373107104304894208.mp4 line-01.wav
+          PAIRS
+          cp "$RUNNER_TEMP/weights.sha256" "$out/"
+      - name: Results to claude/musetalk-probe-<run>
+        run: |
+          d="migration/evidence/pavo/20261026/musetalk/run-$GITHUB_RUN_ID"; mkdir -p "$d"
+          cp "$RUNNER_TEMP"/out/*.mp4 "$RUNNER_TEMP"/out/*.jpg "$RUNNER_TEMP"/out/*.json "$RUNNER_TEMP"/out/weights.sha256 "$d"/ 2>/dev/null || true
+          branch="claude/musetalk-probe-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -b "$branch"
+          git add "$d"
+          git commit -q -m "MuseTalk lip sync probe (run $GITHUB_RUN_ID): clips, sheets and lipsync_check measures"
+          git push -q origin "HEAD:refs/heads/$branch"
+          echo "BRANCH $branch"
