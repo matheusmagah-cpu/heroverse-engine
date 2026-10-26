@@ -225,6 +225,71 @@ def story_problems(script, starts, minutes):
     return problems
 
 
+STRUCTURE = Path(__file__).resolve().parents[1] / "structures" / "bible-story-long.json"
+
+
+def story_gate():
+    """The registered structure's machine-readable targets (structures/bible-story-long.json script.gate)."""
+    return json.loads(STRUCTURE.read_text())["script"]["gate"]
+
+
+def timeline(script):
+    """Estimated start (s) of every segment and the total length (s), the same estimate check() uses for the length:
+    words at WPM plus pauses, plus the v4 sentence breath when the script carries footage."""
+    starts, t = {}, 0.0
+    extra = (SENTENCE_GAP_V4 - SENTENCE_GAP) if script.get("footage") else 0.0
+    for x in script.get("segments", []):
+        starts.setdefault(x.get("id", ""), t)
+        text = x.get("text", "")
+        sentences = len([s for s in re.split(r"(?<=[.!?:;])\s+", text) if s.strip()])
+        t += len(words(text)) / WPM * 60 + float(x.get("pause_after", 0)) + extra * sentences
+    return starts, t
+
+
+def structure_problems(script, gate=None):
+    """Owner, 2026-10-26: the Bible-story long stands on its own and follows its registered structure
+    (structures/bible-story-long.json): 14-18 min, the conflict spoken by a character in the cold open, at least 6
+    re-hooks, one climax at 0.6-0.85 of the runtime, the Keeper in every long but never in the cold open and at most
+    25 % of it, and no captions burned into the picture. Prayer longs are stopped; this is the only long format."""
+    g = gate or story_gate()
+    segs = script.get("segments", [])
+    starts, total = timeline(script)
+    order = sorted((starts[x["id"]], x["id"]) for x in segs if x.get("id") in starts)
+    ends = {i: b for (_, i), (b, _) in zip(order, order[1:] + [(total, None)])}
+    dur = {i: ends[i] - starts[i] for i in ends}
+    problems = []
+    lo, hi = g["length_min"]
+    if not lo <= total / 60 <= hi:
+        problems.append(f"STORY_LENGTH {total / 60:.1f} min outside {lo}-{hi} (bible-story-long)")
+    cold = g["cold_open_s"]
+    conflict = [x for x in segs if x.get("conflict") and starts.get(x.get("id"), 1e9) < cold]
+    if not conflict or not all(x.get("speaker") and x.get("speaker") != "keeper" and not x.get("keeper") for x in conflict):
+        problems.append(f"STORY_COLD_OPEN_CONFLICT (a character speaks the conflict within {cold} s: conflict + speaker)")
+    keeper = [x for x in segs if x.get("keeper") or x.get("speaker") == "keeper"]
+    if not keeper:
+        problems.append("STORY_KEEPER_MISSING (the Keeper appears in every long)")
+    early = [x["id"] for x in keeper if starts.get(x.get("id"), 0.0) < cold]
+    if early and not g.get("keeper_in_cold_open"):
+        problems.append(f"STORY_KEEPER_IN_COLD_OPEN {early} (the cold open is the first {cold} s)")
+    share = sum(dur.get(x.get("id"), 0.0) for x in keeper) / max(total, 1e-6)
+    if share > g["keeper_share_max"]:
+        problems.append(f"STORY_KEEPER_SHARE {share:.2f} > {g['keeper_share_max']}")
+    rehooks = [x["id"] for x in segs if x.get("id", "").startswith("rehook")]
+    if len(rehooks) < g["rehooks_min"]:
+        problems.append(f"STORY_REHOOKS {len(rehooks)} < {g['rehooks_min']} (a re-hook at every chapter end)")
+    climax = [x for x in segs if x.get("climax")]
+    a, b = g["climax_at"]
+    if len(climax) != 1:
+        problems.append(f"STORY_CLIMAX_COUNT {len(climax)} (exactly one segment with climax: true)")
+    elif not a <= starts.get(climax[0].get("id"), 0.0) / max(total, 1e-6) <= b:
+        problems.append(f"STORY_CLIMAX_POSITION {starts.get(climax[0].get('id'), 0.0) / max(total, 1e-6):.2f} "
+                        f"outside {a}-{b} of the runtime")
+    if script.get("burned_captions") is not g["burned_captions"]:
+        problems.append("STORY_BURNED_CAPTIONS (the long carries YouTube captions, none burned into the picture: "
+                        "burned_captions false)")
+    return problems
+
+
 FOOTAGE_SCENE_EST = 5.5   # s; v4 cuts every 4-7 s (still_render.FOOTAGE_CADENCE)
 SCENE_MIN_EST = 4.5       # s; the shortest cut of still_render.FOOTAGE_CADENCE, so the count never runs short
 SHOTS_PER_CLIP = 3        # still_render.FOOTAGE_SEGMENTS: distinct 6.5 s parts of one 20 s clip
@@ -300,7 +365,7 @@ def check(pilot_dir, production=None):
     title = s.get("working_title", "")
     fmt = "night" if re.search(r"(?i)night|sleep", title) else "morning"
     lo, hi = BANDS_V4 if s.get("footage") else BANDS[fmt]
-    if not lo <= minutes <= hi:
+    if s.get("archetype") != STORY and not lo <= minutes <= hi:   # a story long: STORY_LENGTH (structure_problems)
         problems.append(f"LENGTH {minutes:.1f} min outside {fmt} band {lo}-{hi}")
     if speech < SPEECH_MIN:
         problems.append(f"SPEECH_PRESENCE_EST {speech:.3f} < {SPEECH_MIN}")
@@ -313,6 +378,7 @@ def check(pilot_dir, production=None):
             starts.setdefault(x.get("id", ""), t)
             t += len(words(x.get("text", ""))) / WPM * 60 + float(x.get("pause_after", 0))
         problems += story_problems(s, starts, minutes)
+        problems += structure_problems(s)
         problems += description_problems(s.get("description_intro", ""))
         problems += thumbnail_problems(s)
         problems += [f"GATE_ROW_{name.upper()} {detail} (E64)" for name, ok, detail in three_stage.script_hygiene(s) if not ok]

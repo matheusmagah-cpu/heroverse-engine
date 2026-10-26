@@ -119,7 +119,10 @@ def apply(plan_path, out):
 def unschedule(plan_path, out):
     """Owner hold: each listed video becomes private with no pending publishAt (a scheduled upload already is
     private, so apply() would skip it and it would still go public at its time). Reversible: the receipt keeps
-    the old publishAt."""
+    the old publishAt.
+    A hold only stops what is not public yet (owner, 2026-10-26: the scheduled prayer longs): a video that is already
+    public is never changed here (SKIPPED_ALREADY_PUBLIC; hiding a public video is apply() with its own reviewed
+    plan), and one already private with no publishAt is left as it is (ALREADY_UNSCHEDULED, no write)."""
     plan_record = json.loads(Path(plan_path).read_text())
     if plan_record["channel_id"] != CHANNEL:
         raise SystemExit("CHANNEL_IDENTITY_MISMATCH")
@@ -132,6 +135,12 @@ def unschedule(plan_path, out):
             continue
         status = current[0]["status"]
         before = {"privacy": status["privacyStatus"], "publishAt": status.get("publishAt")}
+        if before["privacy"] == "public":
+            receipt.append({"video_id": vid, "before": before, "result": "SKIPPED_ALREADY_PUBLIC"})
+            continue
+        if before["privacy"] == "private" and not before["publishAt"]:
+            receipt.append({"video_id": vid, "before": before, "result": "ALREADY_UNSCHEDULED"})
+            continue
         body = {"id": vid, "status": {"privacyStatus": "private", "embeddable": status.get("embeddable", True),
                                       "license": status.get("license", "youtube"),
                                       "publicStatsViewable": status.get("publicStatsViewable", True),
@@ -145,7 +154,7 @@ def unschedule(plan_path, out):
                                      "changes": receipt}, indent=1) + "\n")
     print(json.dumps({"unscheduled": sum(r["result"] == "UNSCHEDULED" for r in receipt), "total": len(receipt),
                       "changes": receipt}))  # public ids and statuses only
-    if any(r["result"] != "UNSCHEDULED" for r in receipt):
+    if any(r["result"] not in ("UNSCHEDULED", "ALREADY_UNSCHEDULED", "SKIPPED_ALREADY_PUBLIC") for r in receipt):
         raise SystemExit("UNSCHEDULE_INCOMPLETE")
 
 

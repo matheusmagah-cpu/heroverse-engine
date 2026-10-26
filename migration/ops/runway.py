@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
-"""Content runway: the engine must never run out of videos. For every publication slot of the next DAYS days
-(night 00:00 UTC, morning 10:00 UTC) report the stage of its pilot and alert when a stage is late:
-  no script while the slot is < SCRIPT_LEAD away (Dot needs a card cycle + images + render + gate);
-  no render while < RENDER_LEAD away; no APPROVAL.json (gate PASS) while < APPROVAL_LEAD away.
-FIRST_NIGHT: the two-a-day format starts with pilot-004 (night of 2026-10-20 00:00); earlier night slots are not alerts.
+"""Content runway of the long videos: the engine must never run out of Bible-story longs.
+
+The long cadence (owner, 2026-10-26: "stop the prayer videos; the channel is going in another direction"; SERIES.md
+calendar): one Bible-story long every LONG_EVERY days at 10:00 UTC from FIRST_STORY_LONG (28/10 10:00), so never more
+than LONG_EVERY days between two longs. Only a Bible-story long counts (script archetype bible-story-long,
+render_queue.story_pilot); a prayer pilot never fills a slot, and its retired slots (00:00 and 10:00 every day) are not
+slots any more. A story script counts as written only when it follows its registered structure
+(structures/bible-story-long.json, script_check.structure_problems: 14-18 min, the conflict spoken in the cold open,
+>= 6 re-hooks, the climax at 0.6-0.85, the Keeper <= 25 % and never in the cold open, no burned captions).
+
+For every long slot of the next DAYS days, report the stage of its pilot and alert when a stage is late:
+  no structured script while the slot is < SCRIPT_LEAD away; no render while < RENDER_LEAD away;
+  no APPROVAL.json (gate PASS) while < APPROVAL_LEAD away.
 usage: runway.py PRODUCTION_DIR LEDGER REPORT_MD [NOW_ISO]   (appends to REPORT_MD, prints alerts as JSON)
 """
 from datetime import datetime, timedelta, timezone
@@ -11,8 +19,13 @@ import json
 from pathlib import Path
 import sys
 
-DAYS = 4
-FIRST_NIGHT = datetime(2026, 10, 20, 0, 0, tzinfo=timezone.utc)
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "production"))
+import render_queue  # noqa: E402  (story_pilot: the one test of "this is a Bible-story long")
+import script_check  # noqa: E402  (structure_problems: the registered beat map)
+
+DAYS = 6
+LONG_EVERY = timedelta(days=2)                                    # SERIES.md: the long every other day
+FIRST_STORY_LONG = datetime(2026, 10, 28, 10, 0, tzinfo=timezone.utc)   # arc 1, pilot-015
 # owner 2026-10-19: approval (gate PASS) one full day ahead, so a provider hiccup or a FAIL has a day to be fixed
 # without missing the slot; the render comes 12 h before that (E24)
 SCRIPT_LEAD, RENDER_LEAD, APPROVAL_LEAD = timedelta(hours=72), timedelta(hours=36), timedelta(hours=24)
@@ -23,13 +36,15 @@ def ts(s):
 
 
 def slots(now, days=DAYS):
-    day = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    """The Bible-story long slots in (now, now + days]."""
+    t = FIRST_STORY_LONG
+    if now > t:
+        t += LONG_EVERY * ((now - t) // LONG_EVERY)
     out = []
-    for i in range(days + 1):
-        for h in (0, 10):
-            t = day + timedelta(days=i, hours=h)
-            if now < t <= now + timedelta(days=days) and (h == 10 or t >= FIRST_NIGHT):
-                out.append(t)
+    while t <= now + timedelta(days=days):
+        if t > now:
+            out.append(t)
+        t += LONG_EVERY
     return out
 
 
@@ -40,6 +55,8 @@ def stage(d, ledger):
         return "approved"
     if (d / "out" / "manifest.json").exists():
         return "rendered"
+    if script_check.structure_problems(json.loads((d / "script.json").read_text())):
+        return "off-structure"
     return "script"
 
 
@@ -47,18 +64,19 @@ def check(production, ledger, now):
     by_slot = {}
     for f in Path(production).glob("pilot-[0-9][0-9][0-9]/schedule.json"):
         at = json.loads(f.read_text()).get("publish_at")
-        if at:
+        if at and render_queue.story_pilot(f.parent):
             by_slot[ts(at)] = f.parent
     rows, alerts = [], []
     for t in slots(now):
         d = by_slot.get(t)
         st = stage(d, ledger) if d else "missing"
         left = t - now
-        late = ((st == "missing" and left < SCRIPT_LEAD) or (st == "script" and left < RENDER_LEAD)
+        late = ((st in ("missing", "off-structure") and left < SCRIPT_LEAD) or (st == "script" and left < RENDER_LEAD)
                 or (st == "rendered" and left < APPROVAL_LEAD))
         rows.append({"slot": t.strftime("%Y-%m-%dT%H:%MZ"), "pilot": d.name if d else None, "stage": st, "late": late})
         if late:
-            alerts.append(f"{t:%Y-%m-%d %H:%M} UTC ({str(left).split('.')[0]} left): {d.name if d else 'NO PILOT'} is at '{st}'")
+            alerts.append(f"{t:%Y-%m-%d %H:%M} UTC ({str(left).split('.')[0]} left): "
+                          f"{d.name if d else 'NO BIBLE-STORY LONG'} is at '{st}'")
     return rows, alerts
 
 
@@ -66,8 +84,9 @@ def main(production, ledger_path, report_md, now=None):
     now = ts(now) if now else datetime.now(timezone.utc)
     ledger = json.loads(Path(ledger_path).read_text()) if Path(ledger_path).exists() else {}
     rows, alerts = check(production, ledger, now)
-    md = ["", f"## Content runway (next {DAYS} days; the engine must never run out of videos)",
-          *([f"- ⚠ {a}" for a in alerts] or ["- every slot is on time"]),
+    md = ["", f"## Long runway (Bible-story longs, one every {LONG_EVERY.days} days at 10:00 UTC; next {DAYS} days; "
+              "prayer longs stopped 2026-10-26)",
+          *([f"- ⚠ {a}" for a in alerts] or ["- every long slot is on time"]),
           "| slot (UTC) | pilot | stage |", "|---|---|---|",
           *(f"| {r['slot']} | {r['pilot'] or '—'} | {r['stage']}{' ⚠' if r['late'] else ''} |" for r in rows)]
     with open(report_md, "a") as f:

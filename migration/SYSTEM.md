@@ -37,8 +37,9 @@ repeatable shape of a video:
 - calls to action;
 - title and thumbnail.
 
-The format may change whenever mining proves a better structure **in the same line** (English
-Christian prayer and devotion) that does not conflict with the channel. No format is frozen.
+The format may change whenever mining proves a better structure **in the same line** (the English KJV Bible
+series, story by story, `production/bible/SERIES.md`; prayer longs stopped by the owner on 2026-10-26) that does not
+conflict with the channel. No format is frozen.
 
 Every stage, **from the channel configuration to the pinned comment**, is held to the same bar:
 - **ultra-professional and measured;**
@@ -60,7 +61,7 @@ Nothing else is added unless a stage cannot meet its bar without it, and that is
 
 ## Channel configuration (setup, then maintained by live intelligence)
 
-The channel is configured as a top Christian prayer channel, and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
+The channel is configured as a top KJV Bible-story channel (SERIES.md; formerly prayer), and **every setting that can influence reach or trust is decided from evidence**, never left at its default. Evidence comes from two sources:
 - **the official YouTube Help pages**, with source and verification date;
 - **what the validated winners' channels do**, measured with vidIQ.
 

@@ -7,7 +7,8 @@ Our channel (the owner's credential): subscribers and public views from the
 Data API; watch hours, subscribers gained and average view percentage from the
 YouTube Analytics API when the credential carries its scope (otherwise marked
 UNAVAILABLE, never guessed). Pipeline: scheduled pilots, render, approval and
-review status, and the script runway (days of videos written ahead).
+review status, and the long script runway: days of Bible-story long scripts written ahead on their registered
+structure (structures/bible-story-long.json). Prayer pilots are retired (owner, 2026-10-26) and never count.
 Writes daily-report/latest.md (read by every check-in) and daily-report/<day>.json.
 usage: goal_report.py PRODUCTION_DIR LEDGER OUT_DIR [START_DATE]
 """
@@ -24,6 +25,9 @@ sys.path.insert(0, str(HERE))
 import market_panel as mp  # noqa: E402
 from learning_loop import capture_existing, save_capture
 from packaging_mining import seconds  # noqa: E402
+sys.path.insert(0, str(HERE.parent / "production"))
+import render_queue  # noqa: E402  (story_pilot: only a Bible-story long counts)
+import script_check  # noqa: E402  (structure_problems: the long's registered beat map)
 
 ANALYTICS = "https://youtubeanalytics.googleapis.com/v2/reports"
 # titles that read as fear-bait or fabricated prophecy (owner policy; YouTube misleading-metadata risk at YPP review)
@@ -108,17 +112,37 @@ def pipeline(production, ledger, now, observed_privacy=None):
         rev = json.loads((d / "out" / "review.json").read_text()) if (d / "out" / "review.json").exists() else {}
         sha = man.get("output_sha256")
         current = rev.get("output_sha256") == sha
+        story = render_queue.story_pilot(d)
+        script = json.loads((d / "script.json").read_text()) if (d / "script.json").exists() else {}
         rows.append({"pilot": d.name, "publish_at": t.strftime("%Y-%m-%d %H:%M UTC"),
+                     "format": "bible-story-long" if story else "prayer (retired)",
+                     "structure": (script_check.structure_problems(script) or "PASS") if story else None,
                      "rendered": bool(man), "qa": qa.get("status") if qa.get("output_sha256") == sha else None,
                      "review": rev.get("status") if current else None,
                      "uploaded": "video_id" in ledger.get("entries", {}).get(f"{d.name}:{sha}", {}),
                      "published": (observed_privacy[ledger['entries'][f'{d.name}:{sha}']['video_id']]=='public')
                          if ledger.get('entries',{}).get(f'{d.name}:{sha}',{}).get('video_id') in observed_privacy else None,
                      "title": json.loads((d / "script.json").read_text()).get("working_title") if (d / "script.json").exists() else None})
-    ahead = [r for r in rows if datetime.strptime(r["publish_at"], "%Y-%m-%d %H:%M UTC").replace(tzinfo=timezone.utc) > now]
+    # owner, 2026-10-26: the runway counts only Bible-story longs on their registered structure, never prayer pilots
+    ahead = [r for r in rows if datetime.strptime(r["publish_at"], "%Y-%m-%d %H:%M UTC").replace(tzinfo=timezone.utc) > now
+             and r["format"] == "bible-story-long" and r["structure"] == "PASS"]
     last = max((datetime.strptime(r["publish_at"], "%Y-%m-%d %H:%M UTC") for r in ahead), default=None)
     runway = round((last.replace(tzinfo=timezone.utc) - now).total_seconds() / 86400, 1) if last else 0.0
     return rows, runway
+
+
+def pipeline_alerts(rows, runway):
+    """The pipeline's alerts. The runway alert asks for Bible-story long scripts on their structure (owner,
+    2026-10-26: prayer longs stopped); a story script off its structure is named with what it misses."""
+    alerts = []
+    if runway < 2:
+        alerts.append(f"LONG SCRIPT RUNWAY {runway} days (< 2): write the next Bible-story long script "
+                      "(structures/bible-story-long.json); prayer longs are stopped")
+    alerts += [f"{r['pilot']} Bible-story long off its structure: {'; '.join(r['structure'])}"
+               for r in rows if r.get("format") == "bible-story-long" and isinstance(r.get("structure"), list)]
+    alerts += [f"{r['pilot']} review FAIL: read out/review.json" for r in rows if r["review"] == "FAIL"]
+    alerts += [f"{r['pilot']} QA FAIL" for r in rows if r["qa"] == "FAIL"]
+    return alerts
 
 
 def main(production, ledger_path, out_dir, start="2026-10-18"):
@@ -178,11 +202,7 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
         v["policy_risk_title"] = bool(RISK.search(v["title"]))
     risky = [v for v in videos if v["policy_risk_title"]]
     risk_hours = round(sum(v.get("watch_hours", 0) for v in risky), 1)
-    alerts = []
-    if runway < 2:
-        alerts.append(f"SCRIPT RUNWAY {runway} days (< 2): write the next pilots now")
-    alerts += [f"{r['pilot']} review FAIL: read out/review.json" for r in rows if r["review"] == "FAIL"]
-    alerts += [f"{r['pilot']} QA FAIL" for r in rows if r["qa"] == "FAIL"]
+    alerts = pipeline_alerts(rows, runway)
     report = {"version": "goal-report-v2", "at": now.isoformat(), "day": day, "target_day": TARGET_DAYS, "max_day": MAX_DAYS,
               "subscribers": subs, "views_total": int(st.get("viewCount", 0)), "public_videos": len(videos),
               "shorts_views_public_lifetime": shorts_views, "analytics": a, "needed_from_today": need, "ypp": YPP,
@@ -218,9 +238,9 @@ def main(production, ledger_path, out_dir, start="2026-10-18"):
             f"{f['avg_view_s_from_shorts']} / {f['avg_view_s_other']} | {f['verdict']} |"
             for f in a["funnel"].values()) if a.get("funnel") else ["- no public long yet, or Analytics unavailable"]), "",
           "## Alerts", *(f"- ⚠ {x}" for x in alerts or ["none"]), "",
-          f"## Pipeline (script runway {runway} days)",
-          "| pilot | publishes | rendered | QA | review | uploaded | public observed | title |", "|---|---|---|---|---|---|---|---|",
-          *(f"| {r['pilot']} | {r['publish_at']} | {'yes' if r['rendered'] else 'no'} | {r['qa'] or '-'} | {r['review'] or '-'} | "
+          f"## Pipeline (long script runway {runway} days: Bible-story longs on their structure; prayer longs stopped)",
+          "| pilot | format | publishes | rendered | QA | review | uploaded | public observed | title |", "|---|---|---|---|---|---|---|---|---|",
+          *(f"| {r['pilot']} | {r['format']} | {r['publish_at']} | {'yes' if r['rendered'] else 'no'} | {r['qa'] or '-'} | {r['review'] or '-'} | "
             f"{'yes' if r['uploaded'] else 'no'} | {'UNKNOWN' if r['published'] is None else ('yes' if r['published'] else 'no')} | {r['title'] or ''} |" for r in rows), "",
           "## Latest public videos", "| published | views | watch h | avg view % | subs gained | title |", "|---|---|---|---|---|---|",
           *(f"| {v['published']} | {v['views']} | {v.get('watch_hours', '-')} | {v.get('average_view_percentage', '-')} | "
