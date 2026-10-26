@@ -853,6 +853,16 @@
     "file": "migration/ops/test_minutes.py",
     "contains": "def test_report_is_a_speed_metric_with_no_budget_alarm"
    }
+  },
+  {
+   "id": "E104",
+   "date": "2026-10-26",
+   "error": "plan_check (Shorts) timed every line at the narrator's 2.75 words a second, a character's too. Kokoro speaks Eve at 3.73 and Adam at 3.98, so a 12-word line of Eve's estimated 4.36 s, measured ~3.2 s (under TALK_MIN) and would fail episode_build lines (TALK_LINE_RETIME_OVER) after the Pavo generations were spent. The first fix kept each voice's fastest run and slowed it by SLOW_RATIO, which loosened the slow bound (Eve 3.05 against measured lines of 2.85: a 35-word line passed and would measure ~12.3 s, over TALK_LINE_MAX; review of #421).",
+   "fix": "voice_pace.py, one table plan_check and long_plan_check import: each speaker's fastest measured run (VOICE_PACE, SHORT_PACE for God in a Short) for the too-short checks and VOICE_SLOWEST (the slower of the slowest run x SLOW_RATIO and the slowest line measured) for the too-long and unreachable checks; a talking voice with no measured pace is VOICE_PACE_UNMEASURED; each pace is tied to its characters.json voice. Noah, the scoffer and the serpent measured locally before their first talking lines.",
+   "antidote": {
+    "file": "migration/production/bible/test_plan_check.py",
+    "contains": "def test_a_speakers_bounds_are_never_looser_than_the_measurements"
+   }
   }
  ]
 }
